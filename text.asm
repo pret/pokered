@@ -3209,3 +3209,4 @@ SECTION "Move Names", ROMX, BANK[MOVE_NAMES]
 
 INCLUDE "text/move_names.asm"
 
+

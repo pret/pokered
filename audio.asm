@@ -666,3 +666,4 @@ INCLUDE "music/jigglypuffsong.asm"
 INCLUDE "music/halloffame.asm"
 INCLUDE "music/credits.asm"
 
+

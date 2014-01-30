@@ -10732,41 +10732,7 @@ MewPicFront: ; 4112 (1:4112)
 MewPicBack: ; 4205 (1:4205)
 	INCBIN "pic/monback/mewb.pic"
 
-MewBaseStats: ; 425b (1:425b)
-	db DEX_MEW ; pokedex id
-	db 100 ; base hp
-	db 100 ; base attack
-	db 100 ; base defense
-	db 100 ; base speed
-	db 100 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 45 ; catch rate
-	db 64 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MewPicFront
-	dw MewPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; include learnset directly
-	db %11111111
-	db %11111111
-	db %11111111
-	db %11111111
-	db %11111111
-	db %11111111
-	db %11111111
-	db %11111111 ; usually spacing
+INCLUDE "baseStats/Mew.asm"
 
 Func_4277: ; 4277 (1:4277)
 	ld hl, $cce9
@@ -11517,25 +11483,25 @@ ItemNames: ; 472b (1:472b)
 	db "B4F@"
 
 UnusedNames: ; 4a92 (1:4a92)
-	db "かみなりバッヂ@"
-	db "かいがらバッヂ@"
-	db "おじぞうバッヂ@"
-	db "はやぶさバッヂ@"
-	db "ひんやりバッヂ@"
-	db "なかよしバッヂ@"
-	db "バラバッヂ@"
-	db "ひのたまバッヂ@"
-	db "ゴールドバッヂ@"
-	db "たまご@"
-	db "ひよこ@"
-	db "ブロンズ@"
-	db "シルバー@"
-	db "ゴールド@"
-	db "プチキャプテン@"
-	db "キャプテン@"
-	db "プチマスター@"
-	db "マスター@"
-	db "エクセレント"
+	db "かみなりバッヂ@" ;Thunder Badge
+	db "かいがらバッヂ@" ;Shell Badge
+	db "おじぞうバッヂ@" ;Jizo? Badge
+	db "はやぶさバッヂ@" ;Falcon Badge
+	db "ひんやりバッヂ@" ;Chilly Badge
+	db "なかよしバッヂ@" ;Good Friend Badge
+	db "バラバッヂ@" ;Flower Badge
+	db "ひのたまバッヂ@" ;Fireball Badge
+	db "ゴールドバッヂ@" ;Gold Badge
+	db "たまご@" ;Eggs
+	db "ひよこ@" ;Chick
+	db "ブロンズ@" ;Bronze
+	db "シルバー@" ;Silver
+	db "ゴールド@" ;Gold
+	db "プチキャプテン@" ;Petit Captain
+	db "キャプテン@"  ;Captain
+	db "プチマスター@" ;Petit Master
+	db "マスター@" ;Master
+	db "エクセレント" ;Excellent
 
 ; calculates the OAM data for all currently visible sprites and writes it to wOAMBuffer
 PrepareOAMData: ; 4b0f (1:4b0f)
@@ -17310,22 +17276,22 @@ UseTossText: ; 7422 (1:7422)
 	next "TOSS@"
 
 JapaneseSaveMessageText: ; 742b (1:742b)
-	db   "きろく"
-	next "メッセージ@"
+	db   "きろく" ;Record
+	next "メッセージ@" ;Message
 
 JapaneseSpeedOptionsText: ; 7435 (1:7435)
-	db   "はやい"
-	next "おそい@"
+	db   "はやい" ;Fast
+	next "おそい@" ;Slow
 
 MoneyText: ; 743d (1:743d)
 	db "MONEY@"
 
 JapaneseMochimonoText: ; 7443 (1:7443)
-	db "もちもの@"
+	db "もちもの@";Belongings
 
 JapaneseMainMenuText: ; 7448 (1:7448)
-	db   "つづきから"
-	next "さいしょから@"
+	db   "つづきから";Continue
+	next "さいしょから@";From
 
 BattleMenuText: ; 7455 (1:7455)
 	db   "FIGHT ",$E1,$E2
@@ -17341,13 +17307,13 @@ SwitchStatsCancelText: ; 7489 (1:7489)
 	next "CANCEL@"
 
 JapaneseAhText: ; 749d (1:749d)
-	db "アッ!@"
+	db "アッ!@";Ah!
 
 JapanesePokedexMenu: ; 74a1 (1:74a1)
-	db   "データをみる"
-	next "なきごえ"
-	next "ぶんぷをみる"
-	next "キャンセル@"
+	db   "データをみる";Data
+	next "なきごえ";Cry
+	next "ぶんぷをみる";Area
+	next "キャンセル@";Cancel
 
 Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
@@ -20519,3817 +20485,8 @@ LoadWildData: ; ceb8 (3:4eb8)
 	ld de,W_WATERMONS  ; otherwise, load surfing data
 	ld bc,$0014
 	jp CopyData
-
-WildDataPointers: ; ceeb (3:4eeb)
-	dw NoMons      ; PALLET_TOWN
-	dw NoMons      ; VIRIDIAN_CITY
-	dw NoMons      ; PEWTER_CITY
-	dw NoMons      ; CERULEAN_CITY
-	dw NoMons      ; LAVENDER_TOWN
-	dw NoMons      ; VERMILION_CITY
-	dw NoMons      ; CELADON_CITY
-	dw NoMons      ; FUCHSIA_CITY
-	dw NoMons      ; CINNABAR_ISLAND
-	dw NoMons      ; INDIGO_PLATEAU
-	dw NoMons      ; SAFFRON_CITY
-	dw NoMons      ; unused
-	dw Route1Mons  ; ROUTE_1
-	dw Route2Mons  ; ROUTE_2
-	dw Route3Mons  ; ROUTE_3
-	dw Route4Mons  ; ROUTE_4
-	dw Route5Mons  ; ROUTE_5
-	dw Route6Mons  ; ROUTE_6
-	dw Route7Mons  ; ROUTE_7
-	dw Route8Mons  ; ROUTE_8
-	dw Route9Mons  ; ROUTE_9
-	dw Route10Mons ; ROUTE_10
-	dw Route11Mons ; ROUTE_11
-	dw Route12Mons ; ROUTE_12
-	dw Route13Mons ; ROUTE_13
-	dw Route14Mons ; ROUTE_14
-	dw Route15Mons ; ROUTE_15
-	dw Route16Mons ; ROUTE_16
-	dw Route17Mons ; ROUTE_17
-	dw Route18Mons ; ROUTE_18
-	dw WaterMons   ; ROUTE_19
-	dw WaterMons   ; ROUTE_20
-	dw Route21Mons ; ROUTE_21
-	dw Route22Mons ; ROUTE_22
-	dw Route23Mons ; ROUTE_23
-	dw Route24Mons ; ROUTE_24
-	dw Route25Mons ; ROUTE_25
-	dw NoMons      ; REDS_HOUSE_1F
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw ForestMons ; ViridianForest
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw MoonMons1
-	dw MoonMonsB1
-	dw MoonMonsB2
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw TunnelMonsB1
-	dw PowerPlantMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw PlateauMons1
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw TowerMons1
-	dw TowerMons2
-	dw TowerMons3
-	dw TowerMons4
-	dw TowerMons5
-	dw TowerMons6
-	dw TowerMons7
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw IslandMonsB1
-	dw IslandMonsB2
-	dw IslandMonsB3
-	dw IslandMonsB4
-	dw NoMons
-	dw NoMons
-	dw MansionMons1
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw IslandMons1
-	dw NoMons
-	dw PlateauMons2
-	dw NoMons
-	dw NoMons
-	dw CaveMons
-	dw PlateauMons3
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw MansionMons2
-	dw MansionMons3
-	dw MansionMonsB1
-	dw ZoneMons1
-	dw ZoneMons2
-	dw ZoneMons3
-	dw ZoneMonsCenter
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw DungeonMons2
-	dw DungeonMonsB1
-	dw DungeonMons1
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw TunnelMonsB2
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw NoMons
-	dw $FFFF
-
-; wild pokemon data is divided into two parts.
-; first part:  pokemon found in grass
-; second part: pokemon found while surfing
-; each part goes as follows:
-	; if first byte == 00, then
-		; no wild pokemon on this map
-	; if first byte != 00, then
-		; first byte is encounter rate
-		; followed by 20 bytes:
-		; level, species (ten times)
-
-IF _RED
-NoMons: ; d0dd (3:50dd)
-	db $00
-
-	db $00
-
-Route1Mons: ; d0df (3:50df)
-	db $19
-	db 3,PIDGEY
-	db 3,RATTATA
-	db 3,RATTATA
-	db 2,RATTATA
-	db 2,PIDGEY
-	db 3,PIDGEY
-	db 3,PIDGEY
-	db 4,RATTATA
-	db 4,PIDGEY
-	db 5,PIDGEY
-
-	db $00
-
-Route2Mons: ; d0f5 (3:50f5)
-	db $19
-	db 3,RATTATA
-	db 3,PIDGEY
-	db 4,PIDGEY
-	db 4,RATTATA
-	db 5,PIDGEY
-	db 3,WEEDLE
-	db 2,RATTATA
-	db 5,RATTATA
-	db 4,WEEDLE
-	db 5,WEEDLE
-
-	db $00
-
-Route22Mons: ; d10b (3:510b)
-	db $19
-	db 3,RATTATA
-	db 3,NIDORAN_M
-	db 4,RATTATA
-	db 4,NIDORAN_M
-	db 2,RATTATA
-	db 2,NIDORAN_M
-	db 3,SPEAROW
-	db 5,SPEAROW
-	db 3,NIDORAN_F
-	db 4,NIDORAN_F
-
-	db $00
-
-ForestMons: ; d121 (3:5121)
-	db $08
-	db 4,WEEDLE
-	db 5,KAKUNA
-	db 3,WEEDLE
-	db 5,WEEDLE
-	db 4,KAKUNA
-	db 6,KAKUNA
-	db 4,METAPOD
-	db 3,CATERPIE
-	db 3,PIKACHU
-	db 5,PIKACHU
-
-	db $00
-
-Route3Mons: ; d137 (3:5137)
-	db $14
-	db 6,PIDGEY
-	db 5,SPEAROW
-	db 7,PIDGEY
-	db 6,SPEAROW
-	db 7,SPEAROW
-	db 8,PIDGEY
-	db 8,SPEAROW
-	db 3,JIGGLYPUFF
-	db 5,JIGGLYPUFF
-	db 7,JIGGLYPUFF
-
-	db $00
-
-MoonMons1: ; d14d (3:514d)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 9,ZUBAT
-	db 8,GEODUDE
-	db 6,ZUBAT
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 8,PARAS
-	db 11,ZUBAT
-	db 8,CLEFAIRY
-
-	db $00
-
-MoonMonsB1: ; d163 (3:5163)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 7,GEODUDE
-	db 8,GEODUDE
-	db 9,ZUBAT
-	db 10,PARAS
-	db 10,ZUBAT
-	db 11,ZUBAT
-	db 9,CLEFAIRY
-	db 9,GEODUDE
-
-	db $00
-
-MoonMonsB2: ; d179 (3:5179)
-	db $0A
-	db 9,ZUBAT
-	db 9,GEODUDE
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 11,ZUBAT
-	db 10,PARAS
-	db 12,PARAS
-	db 10,CLEFAIRY
-	db 12,ZUBAT
-	db 12,CLEFAIRY
-
-	db $00
-
-Route4Mons: ; d18f (3:518f)
-	db $14
-	db 10,RATTATA
-	db 10,SPEAROW
-	db 8,RATTATA
-	db 6,EKANS
-	db 8,SPEAROW
-	db 10,EKANS
-	db 12,RATTATA
-	db 12,SPEAROW
-	db 8,EKANS
-	db 12,EKANS
-
-	db $00
-
-Route24Mons: ; d1a5 (3:51a5)
-	db $19
-	db 7,WEEDLE
-	db 8,KAKUNA
-	db 12,PIDGEY
-	db 12,ODDISH
-	db 13,ODDISH
-	db 10,ABRA
-	db 14,ODDISH
-	db 13,PIDGEY
-	db 8,ABRA
-	db 12,ABRA
-
-	db $00
-
-Route25Mons: ; d1bb (3:51bb)
-	db $0F
-	db 8,WEEDLE
-	db 9,KAKUNA
-	db 13,PIDGEY
-	db 12,ODDISH
-	db 13,ODDISH
-	db 12,ABRA
-	db 14,ODDISH
-	db 10,ABRA
-	db 7,METAPOD
-	db 8,CATERPIE
-
-	db $00
-
-Route9Mons: ; d1d1 (3:51d1)
-	db $0F
-	db 16,RATTATA
-	db 16,SPEAROW
-	db 14,RATTATA
-	db 11,EKANS
-	db 13,SPEAROW
-	db 15,EKANS
-	db 17,RATTATA
-	db 17,SPEAROW
-	db 13,EKANS
-	db 17,EKANS
-
-	db $00
-
-Route5Mons: ; d1e7 (3:51e7)
-	db $0F
-	db 13,ODDISH
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MANKEY
-	db 12,MANKEY
-	db 15,ODDISH
-	db 16,ODDISH
-	db 16,PIDGEY
-	db 14,MANKEY
-	db 16,MANKEY
-
-	db $00
-
-Route6Mons: ; d1fd (3:51fd)
-	db $0F
-	db 13,ODDISH
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MANKEY
-	db 12,MANKEY
-	db 15,ODDISH
-	db 16,ODDISH
-	db 16,PIDGEY
-	db 14,MANKEY
-	db 16,MANKEY
-
-	db $00
-
-Route11Mons: ; d213 (3:5213)
-	db $0F
-	db 14,EKANS
-	db 15,SPEAROW
-	db 12,EKANS
-	db 9,DROWZEE
-	db 13,SPEAROW
-	db 13,DROWZEE
-	db 15,EKANS
-	db 17,SPEAROW
-	db 11,DROWZEE
-	db 15,DROWZEE
-
-	db $00
-
-TunnelMonsB1: ; d229 (3:5229)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,ZUBAT
-	db 15,ZUBAT
-	db 17,MACHOP
-	db 13,ONIX
-	db 15,ONIX
-
-	db $00
-
-TunnelMonsB2: ; d23f (3:523f)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,ZUBAT
-	db 17,MACHOP
-	db 17,ONIX
-	db 13,ONIX
-	db 18,GEODUDE
-
-	db $00
-
-Route10Mons: ; d255 (3:5255)
-	db $0F
-	db 16,VOLTORB
-	db 16,SPEAROW
-	db 14,VOLTORB
-	db 11,EKANS
-	db 13,SPEAROW
-	db 15,EKANS
-	db 17,VOLTORB
-	db 17,SPEAROW
-	db 13,EKANS
-	db 17,EKANS
-
-	db $00
-
-Route12Mons: ; d26b (3:526b)
-	db $0F
-	db 24,ODDISH
-	db 25,PIDGEY
-	db 23,PIDGEY
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 27,PIDGEY
-	db 28,GLOOM
-	db 30,GLOOM
-
-	db $00
-
-Route8Mons: ; d281 (3:5281)
-	db $0F
-	db 18,PIDGEY
-	db 18,MANKEY
-	db 17,EKANS
-	db 16,GROWLITHE
-	db 20,PIDGEY
-	db 20,MANKEY
-	db 19,EKANS
-	db 17,GROWLITHE
-	db 15,GROWLITHE
-	db 18,GROWLITHE
-
-	db $00
-
-Route7Mons: ; d297 (3:5297)
-	db $0F
-	db 19,PIDGEY
-	db 19,ODDISH
-	db 17,MANKEY
-	db 22,ODDISH
-	db 22,PIDGEY
-	db 18,MANKEY
-	db 18,GROWLITHE
-	db 20,GROWLITHE
-	db 19,MANKEY
-	db 20,MANKEY
-
-	db $00
-
-TowerMons1: ; d2ad (3:52ad)
-	db $00
-
-	db $00
-
-TowerMons2: ; d2af (3:52af)
-	db $00
-
-	db $00
-
-TowerMons3: ; d2b1 (3:52b1)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 24,GASTLY
-	db 20,CUBONE
-	db 22,CUBONE
-	db 25,HAUNTER
-
-	db $00
-
-TowerMons4: ; d2c7 (3:52c7)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons5: ; d2dd (3:52dd)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons6: ; d2f3 (3:52f3)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 19,GASTLY
-	db 26,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-
-	db $00
-
-TowerMons7: ; d309 (3:5309)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 28,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-	db 30,HAUNTER
-
-	db $00
-
-Route13Mons: ; d31f (3:531f)
-	db $14
-	db 24,ODDISH
-	db 25,PIDGEY
-	db 27,PIDGEY
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 25,DITTO
-	db 28,GLOOM
-	db 30,GLOOM
-
-	db $00
-
-Route14Mons: ; d335 (3:5335)
-	db $0F
-	db 24,ODDISH
-	db 26,PIDGEY
-	db 23,DITTO
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 30,GLOOM
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route15Mons: ; d34b (3:534b)
-	db $0F
-	db 24,ODDISH
-	db 26,DITTO
-	db 23,PIDGEY
-	db 26,VENONAT
-	db 22,ODDISH
-	db 28,VENONAT
-	db 26,ODDISH
-	db 30,GLOOM
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route16Mons: ; d361 (3:5361)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 18,RATTATA
-	db 20,DODUO
-	db 20,RATTATA
-	db 18,DODUO
-	db 22,DODUO
-	db 22,RATTATA
-	db 23,RATICATE
-	db 25,RATICATE
-
-	db $00
-
-Route17Mons: ; d377 (3:5377)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 27,RATICATE
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 25,FEAROW
-	db 27,FEAROW
-
-	db $00
-
-Route18Mons: ; d38d (3:538d)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 25,FEAROW
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 27,FEAROW
-	db 29,FEAROW
-
-	db $00
-
-ZoneMonsCenter: ; d3a3 (3:53a3)
-	db $1E
-	db 22,NIDORAN_M
-	db 25,RHYHORN
-	db 22,VENONAT
-	db 24,EXEGGCUTE
-	db 31,NIDORINO
-	db 25,EXEGGCUTE
-	db 31,NIDORINA
-	db 30,PARASECT
-	db 23,SCYTHER
-	db 23,CHANSEY
-
-	db $00
-
-ZoneMons1: ; d3b9 (3:53b9)
-	db $1E
-	db 24,NIDORAN_M
-	db 26,DODUO
-	db 22,PARAS
-	db 25,EXEGGCUTE
-	db 33,NIDORINO
-	db 23,EXEGGCUTE
-	db 24,NIDORAN_F
-	db 25,PARASECT
-	db 25,KANGASKHAN
-	db 28,SCYTHER
-
-	db $00
-
-ZoneMons2: ; d3cf (3:53cf)
-	db $1E
-	db 22,NIDORAN_M
-	db 26,RHYHORN
-	db 23,PARAS
-	db 25,EXEGGCUTE
-	db 30,NIDORINO
-	db 27,EXEGGCUTE
-	db 30,NIDORINA
-	db 32,VENOMOTH
-	db 26,CHANSEY
-	db 28,TAUROS
-
-	db $00
-
-ZoneMons3: ; d3e5 (3:53e5)
-	db $1E
-	db 25,NIDORAN_M
-	db 26,DODUO
-	db 23,VENONAT
-	db 24,EXEGGCUTE
-	db 33,NIDORINO
-	db 26,EXEGGCUTE
-	db 25,NIDORAN_F
-	db 31,VENOMOTH
-	db 26,TAUROS
-	db 28,KANGASKHAN
-
-	db $00
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-IslandMons1: ; d411 (3:5411)
-	db $0F
-	db 30,SEEL
-	db 30,SLOWPOKE
-	db 30,SHELLDER
-	db 30,HORSEA
-	db 28,HORSEA
-	db 21,ZUBAT
-	db 29,GOLBAT
-	db 28,PSYDUCK
-	db 28,SHELLDER
-	db 38,GOLDUCK
-
-	db $00
-
-IslandMonsB1: ; d427 (3:5427)
-	db $0A
-	db 30,STARYU
-	db 30,HORSEA
-	db 32,SHELLDER
-	db 32,HORSEA
-	db 28,SLOWPOKE
-	db 30,SEEL
-	db 30,SLOWPOKE
-	db 28,SEEL
-	db 38,DEWGONG
-	db 37,SEADRA
-
-	db $00
-
-IslandMonsB2: ; d43d (3:543d)
-	db $0A
-	db 30,SEEL
-	db 30,SLOWPOKE
-	db 32,SEEL
-	db 32,SLOWPOKE
-	db 28,HORSEA
-	db 30,STARYU
-	db 30,HORSEA
-	db 28,SHELLDER
-	db 30,GOLBAT
-	db 37,SLOWBRO
-
-	db $00
-
-IslandMonsB3: ; d453 (3:5453)
-	db $0A
-	db 31,SLOWPOKE
-	db 31,SEEL
-	db 33,SLOWPOKE
-	db 33,SEEL
-	db 29,HORSEA
-	db 31,SHELLDER
-	db 31,HORSEA
-	db 29,SHELLDER
-	db 39,SEADRA
-	db 37,DEWGONG
-
-	db $00
-
-IslandMonsB4: ; d469 (3:5469)
-	db $0A
-	db 31,HORSEA
-	db 31,SHELLDER
-	db 33,HORSEA
-	db 33,SHELLDER
-	db 29,SLOWPOKE
-	db 31,SEEL
-	db 31,SLOWPOKE
-	db 29,SEEL
-	db 39,SLOWBRO
-	db 32,GOLBAT
-
-	db $00
-
-MansionMons1: ; d47f (3:547f)
-	db $0A
-	db 32,KOFFING
-	db 30,KOFFING
-	db 34,PONYTA
-	db 30,PONYTA
-	db 34,GROWLITHE
-	db 32,PONYTA
-	db 30,GRIMER
-	db 28,PONYTA
-	db 37,WEEZING
-	db 39,MUK
-
-	db $00
-
-MansionMons2: ; d495 (3:5495)
-	db $0A
-	db 32,GROWLITHE
-	db 34,KOFFING
-	db 34,KOFFING
-	db 30,PONYTA
-	db 30,KOFFING
-	db 32,PONYTA
-	db 30,GRIMER
-	db 28,PONYTA
-	db 39,WEEZING
-	db 37,MUK
-
-	db $00
-
-MansionMons3: ; d4ab (3:54ab)
-	db $0A
-	db 31,KOFFING
-	db 33,GROWLITHE
-	db 35,KOFFING
-	db 32,PONYTA
-	db 34,PONYTA
-	db 40,WEEZING
-	db 34,GRIMER
-	db 38,WEEZING
-	db 36,PONYTA
-	db 42,MUK
-
-	db $00
-
-MansionMonsB1: ; d4c1 (3:54c1)
-	db $0A
-	db 33,KOFFING
-	db 31,KOFFING
-	db 35,GROWLITHE
-	db 32,PONYTA
-	db 31,KOFFING
-	db 40,WEEZING
-	db 34,PONYTA
-	db 35,GRIMER
-	db 42,WEEZING
-	db 42,MUK
-
-	db $00
-
-Route21Mons: ; d4d7 (3:54d7)
-	db $19
-	db 21,RATTATA
-	db 23,PIDGEY
-	db 30,RATICATE
-	db 23,RATTATA
-	db 21,PIDGEY
-	db 30,PIDGEOTTO
-	db 32,PIDGEOTTO
-	db 28,TANGELA
-	db 30,TANGELA
-	db 32,TANGELA
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-DungeonMons1: ; d501 (3:5501)
-	db $0A
-	db 46,GOLBAT
-	db 46,HYPNO
-	db 46,MAGNETON
-	db 49,DODRIO
-	db 49,VENOMOTH
-	db 52,ARBOK
-	db 49,KADABRA
-	db 52,PARASECT
-	db 53,RAICHU
-	db 53,DITTO
-
-	db $00
-
-DungeonMons2: ; d517 (3:5517)
-	db $0F
-	db 51,DODRIO
-	db 51,VENOMOTH
-	db 51,KADABRA
-	db 52,RHYDON
-	db 52,MAROWAK
-	db 52,ELECTRODE
-	db 56,CHANSEY
-	db 54,WIGGLYTUFF
-	db 55,DITTO
-	db 60,DITTO
-
-	db $00
-
-DungeonMonsB1: ; d52d (3:552d)
-	db $19
-	db 55,RHYDON
-	db 55,MAROWAK
-	db 55,ELECTRODE
-	db 64,CHANSEY
-	db 64,PARASECT
-	db 64,RAICHU
-	db 57,ARBOK
-	db 65,DITTO
-	db 63,DITTO
-	db 67,DITTO
-
-	db $00
-
-PowerPlantMons: ; d543 (3:5543)
-	db $0A
-	db 21,VOLTORB
-	db 21,MAGNEMITE
-	db 20,PIKACHU
-	db 24,PIKACHU
-	db 23,MAGNEMITE
-	db 23,VOLTORB
-	db 32,MAGNETON
-	db 35,MAGNETON
-	db 33,ELECTABUZZ
-	db 36,ELECTABUZZ
-
-	db $00
-
-Route23Mons: ; d559 (3:5559)
-	db $0A
-	db 26,EKANS
-	db 33,DITTO
-	db 26,SPEAROW
-	db 38,FEAROW
-	db 38,DITTO
-	db 38,FEAROW
-	db 41,ARBOK
-	db 43,DITTO
-	db 41,FEAROW
-	db 43,FEAROW
-
-	db $00
-
-PlateauMons2: ; d56f (3:556f)
-	db $0A
-	db 22,MACHOP
-	db 24,GEODUDE
-	db 26,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,MACHOKE
-	db 40,GOLBAT
-	db 40,MAROWAK
-	db 43,GRAVELER
-
-	db $00
-
-PlateauMons3: ; d585 (3:5585)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 42,ONIX
-	db 40,VENOMOTH
-	db 45,ONIX
-	db 43,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 45,MACHOKE
-
-	db $00
-
-PlateauMons1: ; d59b (3:559b)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 43,MAROWAK
-
-	db $00
-
-CaveMons: ; d5b1 (3:55b1)
-	db $14
-	db 18,DIGLETT
-	db 19,DIGLETT
-	db 17,DIGLETT
-	db 20,DIGLETT
-	db 16,DIGLETT
-	db 15,DIGLETT
-	db 21,DIGLETT
-	db 22,DIGLETT
-	db 29,DUGTRIO
-	db 31,DUGTRIO
-
-	db $00
-
-ENDC
-IF _GREEN || !_JAPAN && _BLUE
-NoMons: ; d0dd (3:50dd)
-	db $00
-
-	db $00
-
-Route1Mons: ; d0df (3:50df)
-	db $19
-	db 3,PIDGEY
-	db 3,RATTATA
-	db 3,RATTATA
-	db 2,RATTATA
-	db 2,PIDGEY
-	db 3,PIDGEY
-	db 3,PIDGEY
-	db 4,RATTATA
-	db 4,PIDGEY
-	db 5,PIDGEY
-
-	db $00
-
-Route2Mons: ; d0f5 (3:50f5)
-	db $19
-	db 3,RATTATA
-	db 3,PIDGEY
-	db 4,PIDGEY
-	db 4,RATTATA
-	db 5,PIDGEY
-	db 3,CATERPIE
-	db 2,RATTATA
-	db 5,RATTATA
-	db 4,CATERPIE
-	db 5,CATERPIE
-
-	db $00
-
-Route22Mons: ; d10b (3:510b)
-	db $19
-	db 3,RATTATA
-	db 3,NIDORAN_F
-	db 4,RATTATA
-	db 4,NIDORAN_F
-	db 2,RATTATA
-	db 2,NIDORAN_F
-	db 3,SPEAROW
-	db 5,SPEAROW
-	db 3,NIDORAN_M
-	db 4,NIDORAN_M
-
-	db $00
-
-ForestMons: ; d121 (3:5121)
-	db $08
-	db 4,CATERPIE
-	db 5,METAPOD
-	db 3,CATERPIE
-	db 5,CATERPIE
-	db 4,METAPOD
-	db 6,METAPOD
-	db 4,KAKUNA
-	db 3,WEEDLE
-	db 3,PIKACHU
-	db 5,PIKACHU
-
-	db $00
-
-Route3Mons: ; d137 (3:5137)
-	db $14
-	db 6,PIDGEY
-	db 5,SPEAROW
-	db 7,PIDGEY
-	db 6,SPEAROW
-	db 7,SPEAROW
-	db 8,PIDGEY
-	db 8,SPEAROW
-	db 3,JIGGLYPUFF
-	db 5,JIGGLYPUFF
-	db 7,JIGGLYPUFF
-
-	db $00
-
-MoonMons1: ; d14d (3:514d)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 9,ZUBAT
-	db 8,GEODUDE
-	db 6,ZUBAT
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 8,PARAS
-	db 11,ZUBAT
-	db 8,CLEFAIRY
-
-	db $00
-
-MoonMonsB1: ; d163 (3:5163)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 7,GEODUDE
-	db 8,GEODUDE
-	db 9,ZUBAT
-	db 10,PARAS
-	db 10,ZUBAT
-	db 11,ZUBAT
-	db 9,CLEFAIRY
-	db 9,GEODUDE
-
-	db $00
-
-MoonMonsB2: ; d179 (3:5179)
-	db $0A
-	db 9,ZUBAT
-	db 9,GEODUDE
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 11,ZUBAT
-	db 10,PARAS
-	db 12,PARAS
-	db 10,CLEFAIRY
-	db 12,ZUBAT
-	db 12,CLEFAIRY
-
-	db $00
-
-Route4Mons: ; d18f (3:518f)
-	db $14
-	db 10,RATTATA
-	db 10,SPEAROW
-	db 8,RATTATA
-	db 6,SANDSHREW
-	db 8,SPEAROW
-	db 10,SANDSHREW
-	db 12,RATTATA
-	db 12,SPEAROW
-	db 8,SANDSHREW
-	db 12,SANDSHREW
-
-	db $00
-
-Route24Mons: ; d1a5 (3:51a5)
-	db $19
-	db 7,CATERPIE
-	db 8,METAPOD
-	db 12,PIDGEY
-	db 12,BELLSPROUT
-	db 13,BELLSPROUT
-	db 10,ABRA
-	db 14,BELLSPROUT
-	db 13,PIDGEY
-	db 8,ABRA
-	db 12,ABRA
-
-	db $00
-
-Route25Mons: ; d1bb (3:51bb)
-	db $0F
-	db 8,CATERPIE
-	db 9,METAPOD
-	db 13,PIDGEY
-	db 12,BELLSPROUT
-	db 13,BELLSPROUT
-	db 12,ABRA
-	db 14,BELLSPROUT
-	db 10,ABRA
-	db 7,KAKUNA
-	db 8,WEEDLE
-
-	db $00
-
-Route9Mons: ; d1d1 (3:51d1)
-	db $0F
-	db 16,RATTATA
-	db 16,SPEAROW
-	db 14,RATTATA
-	db 11,SANDSHREW
-	db 13,SPEAROW
-	db 15,SANDSHREW
-	db 17,RATTATA
-	db 17,SPEAROW
-	db 13,SANDSHREW
-	db 17,SANDSHREW
-
-	db $00
-
-Route5Mons: ; d1e7 (3:51e7)
-	db $0F
-	db 13,BELLSPROUT
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MEOWTH
-	db 12,MEOWTH
-	db 15,BELLSPROUT
-	db 16,BELLSPROUT
-	db 16,PIDGEY
-	db 14,MEOWTH
-	db 16,MEOWTH
-
-	db $00
-
-Route6Mons: ; d1fd (3:51fd)
-	db $0F
-	db 13,BELLSPROUT
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MEOWTH
-	db 12,MEOWTH
-	db 15,BELLSPROUT
-	db 16,BELLSPROUT
-	db 16,PIDGEY
-	db 14,MEOWTH
-	db 16,MEOWTH
-
-	db $00
-
-Route11Mons: ; d213 (3:5213)
-	db $0F
-	db 14,SANDSHREW
-	db 15,SPEAROW
-	db 12,SANDSHREW
-	db 9,DROWZEE
-	db 13,SPEAROW
-	db 13,DROWZEE
-	db 15,SANDSHREW
-	db 17,SPEAROW
-	db 11,DROWZEE
-	db 15,DROWZEE
-
-	db $00
-
-TunnelMonsB1: ; d229 (3:5229)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,ZUBAT
-	db 15,ZUBAT
-	db 17,MACHOP
-	db 13,ONIX
-	db 15,ONIX
-
-	db $00
-
-TunnelMonsB2: ; d23f (3:523f)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,ZUBAT
-	db 17,MACHOP
-	db 17,ONIX
-	db 13,ONIX
-	db 18,GEODUDE
-
-	db $00
-
-Route10Mons: ; d255 (3:5255)
-	db $0F
-	db 16,VOLTORB
-	db 16,SPEAROW
-	db 14,VOLTORB
-	db 11,SANDSHREW
-	db 13,SPEAROW
-	db 15,SANDSHREW
-	db 17,VOLTORB
-	db 17,SPEAROW
-	db 13,SANDSHREW
-	db 17,SANDSHREW
-
-	db $00
-
-Route12Mons: ; d26b (3:526b)
-	db $0F
-	db 24,BELLSPROUT
-	db 25,PIDGEY
-	db 23,PIDGEY
-	db 24,VENONAT
-	db 22,BELLSPROUT
-	db 26,VENONAT
-	db 26,BELLSPROUT
-	db 27,PIDGEY
-	db 28,WEEPINBELL
-	db 30,WEEPINBELL
-
-	db $00
-
-Route8Mons: ; d281 (3:5281)
-	db $0F
-	db 18,PIDGEY
-	db 18,MEOWTH
-	db 17,SANDSHREW
-	db 16,VULPIX
-	db 20,PIDGEY
-	db 20,MEOWTH
-	db 19,SANDSHREW
-	db 17,VULPIX
-	db 15,VULPIX
-	db 18,VULPIX
-
-	db $00
-
-Route7Mons: ; d297 (3:5297)
-	db $0F
-	db 19,PIDGEY
-	db 19,BELLSPROUT
-	db 17,MEOWTH
-	db 22,BELLSPROUT
-	db 22,PIDGEY
-	db 18,MEOWTH
-	db 18,VULPIX
-	db 20,VULPIX
-	db 19,MEOWTH
-	db 20,MEOWTH
-
-	db $00
-
-TowerMons1: ; d2ad (3:52ad)
-	db $00
-
-	db $00
-
-TowerMons2: ; d2af (3:52af)
-	db $00
-
-	db $00
-
-TowerMons3: ; d2b1 (3:52b1)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 24,GASTLY
-	db 20,CUBONE
-	db 22,CUBONE
-	db 25,HAUNTER
-
-	db $00
-
-TowerMons4: ; d2c7 (3:52c7)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons5: ; d2dd (3:52dd)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons6: ; d2f3 (3:52f3)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 19,GASTLY
-	db 26,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-
-	db $00
-
-TowerMons7: ; d309 (3:5309)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 28,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-	db 30,HAUNTER
-
-	db $00
-
-Route13Mons: ; d31f (3:531f)
-	db $14
-	db 24,BELLSPROUT
-	db 25,PIDGEY
-	db 27,PIDGEY
-	db 24,VENONAT
-	db 22,BELLSPROUT
-	db 26,VENONAT
-	db 26,BELLSPROUT
-	db 25,DITTO
-	db 28,WEEPINBELL
-	db 30,WEEPINBELL
-
-	db $00
-
-Route14Mons: ; d335 (3:5335)
-	db $0F
-	db 24,BELLSPROUT
-	db 26,PIDGEY
-	db 23,DITTO
-	db 24,VENONAT
-	db 22,BELLSPROUT
-	db 26,VENONAT
-	db 26,BELLSPROUT
-	db 30,WEEPINBELL
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route15Mons: ; d34b (3:534b)
-	db $0F
-	db 24,BELLSPROUT
-	db 26,DITTO
-	db 23,PIDGEY
-	db 26,VENONAT
-	db 22,BELLSPROUT
-	db 28,VENONAT
-	db 26,BELLSPROUT
-	db 30,WEEPINBELL
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route16Mons: ; d361 (3:5361)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 18,RATTATA
-	db 20,DODUO
-	db 20,RATTATA
-	db 18,DODUO
-	db 22,DODUO
-	db 22,RATTATA
-	db 23,RATICATE
-	db 25,RATICATE
-
-	db $00
-
-Route17Mons: ; d377 (3:5377)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 27,RATICATE
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 25,FEAROW
-	db 27,FEAROW
-
-	db $00
-
-Route18Mons: ; d38d (3:538d)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 25,FEAROW
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 27,FEAROW
-	db 29,FEAROW
-
-	db $00
-
-ZoneMonsCenter: ; d3a3 (3:53a3)
-	db $1E
-	db 22,NIDORAN_F
-	db 25,RHYHORN
-	db 22,VENONAT
-	db 24,EXEGGCUTE
-	db 31,NIDORINA
-	db 25,EXEGGCUTE
-	db 31,NIDORINO
-	db 30,PARASECT
-	db 23,PINSIR
-	db 23,CHANSEY
-
-	db $00
-
-ZoneMons1: ; d3b9 (3:53b9)
-	db $1E
-	db 24,NIDORAN_F
-	db 26,DODUO
-	db 22,PARAS
-	db 25,EXEGGCUTE
-	db 33,NIDORINA
-	db 23,EXEGGCUTE
-	db 24,NIDORAN_M
-	db 25,PARASECT
-	db 25,KANGASKHAN
-	db 28,PINSIR
-
-	db $00
-
-ZoneMons2: ; d3cf (3:53cf)
-	db $1E
-	db 22,NIDORAN_F
-	db 26,RHYHORN
-	db 23,PARAS
-	db 25,EXEGGCUTE
-	db 30,NIDORINA
-	db 27,EXEGGCUTE
-	db 30,NIDORINO
-	db 32,VENOMOTH
-	db 26,CHANSEY
-	db 28,TAUROS
-
-	db $00
-
-ZoneMons3: ; d3e5 (3:53e5)
-	db $1E
-	db 25,NIDORAN_F
-	db 26,DODUO
-	db 23,VENONAT
-	db 24,EXEGGCUTE
-	db 33,NIDORINA
-	db 26,EXEGGCUTE
-	db 25,NIDORAN_M
-	db 31,VENOMOTH
-	db 26,TAUROS
-	db 28,KANGASKHAN
-
-	db $00
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-IslandMons1: ; d411 (3:5411)
-	db $0F
-	db 30,SEEL
-	db 30,PSYDUCK
-	db 30,STARYU
-	db 30,KRABBY
-	db 28,KRABBY
-	db 21,ZUBAT
-	db 29,GOLBAT
-	db 28,SLOWPOKE
-	db 28,STARYU
-	db 38,SLOWBRO
-
-	db $00
-
-IslandMonsB1: ; d427 (3:5427)
-	db $0A
-	db 30,SHELLDER
-	db 30,KRABBY
-	db 32,STARYU
-	db 32,KRABBY
-	db 28,PSYDUCK
-	db 30,SEEL
-	db 30,PSYDUCK
-	db 28,SEEL
-	db 38,DEWGONG
-	db 37,KINGLER
-
-	db $00
-
-IslandMonsB2: ; d43d (3:543d)
-	db $0A
-	db 30,SEEL
-	db 30,PSYDUCK
-	db 32,SEEL
-	db 32,PSYDUCK
-	db 28,KRABBY
-	db 30,SHELLDER
-	db 30,KRABBY
-	db 28,STARYU
-	db 30,GOLBAT
-	db 37,GOLDUCK
-
-	db $00
-
-IslandMonsB3: ; d453 (3:5453)
-	db $0A
-	db 31,PSYDUCK
-	db 31,SEEL
-	db 33,PSYDUCK
-	db 33,SEEL
-	db 29,KRABBY
-	db 31,STARYU
-	db 31,KRABBY
-	db 29,STARYU
-	db 39,KINGLER
-	db 37,DEWGONG
-
-	db $00
-
-IslandMonsB4: ; d469 (3:5469)
-	db $0A
-	db 31,KRABBY
-	db 31,STARYU
-	db 33,KRABBY
-	db 33,STARYU
-	db 29,PSYDUCK
-	db 31,SEEL
-	db 31,PSYDUCK
-	db 29,SEEL
-	db 39,GOLDUCK
-	db 32,GOLBAT
-
-	db $00
-
-MansionMons1: ; d47f (3:547f)
-	db $0A
-	db 32,GRIMER
-	db 30,GRIMER
-	db 34,PONYTA
-	db 30,PONYTA
-	db 34,VULPIX
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
-	db 37,MUK
-	db 39,WEEZING
-
-	db $00
-
-MansionMons2: ; d495 (3:5495)
-	db $0A
-	db 32,VULPIX
-	db 34,GRIMER
-	db 34,GRIMER
-	db 30,PONYTA
-	db 30,GRIMER
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
-	db 39,MUK
-	db 37,WEEZING
-
-	db $00
-
-MansionMons3: ; d4ab (3:54ab)
-	db $0A
-	db 31,GRIMER
-	db 33,VULPIX
-	db 35,GRIMER
-	db 32,PONYTA
-	db 34,MAGMAR
-	db 40,MUK
-	db 34,KOFFING
-	db 38,MUK
-	db 36,PONYTA
-	db 42,WEEZING
-
-	db $00
-
-MansionMonsB1: ; d4c1 (3:54c1)
-	db $0A
-	db 33,GRIMER
-	db 31,GRIMER
-	db 35,VULPIX
-	db 32,PONYTA
-	db 31,GRIMER
-	db 40,MUK
-	db 34,PONYTA
-	db 35,KOFFING
-	db 38,MAGMAR
-	db 42,WEEZING
-
-	db $00
-
-Route21Mons: ; d4d7 (3:54d7)
-	db $19
-	db 21,RATTATA
-	db 23,PIDGEY
-	db 30,RATICATE
-	db 23,RATTATA
-	db 21,PIDGEY
-	db 30,PIDGEOTTO
-	db 32,PIDGEOTTO
-	db 28,TANGELA
-	db 30,TANGELA
-	db 32,TANGELA
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-DungeonMons1: ; d501 (3:5501)
-	db $0A
-	db 46,GOLBAT
-	db 46,HYPNO
-	db 46,MAGNETON
-	db 49,DODRIO
-	db 49,VENOMOTH
-	db 52,SANDSLASH
-	db 49,KADABRA
-	db 52,PARASECT
-	db 53,RAICHU
-	db 53,DITTO
-
-	db $00
-
-DungeonMons2: ; d517 (3:5517)
-	db $0F
-	db 51,DODRIO
-	db 51,VENOMOTH
-	db 51,KADABRA
-	db 52,RHYDON
-	db 52,MAROWAK
-	db 52,ELECTRODE
-	db 56,CHANSEY
-	db 54,WIGGLYTUFF
-	db 55,DITTO
-	db 60,DITTO
-
-	db $00
-
-DungeonMonsB1: ; d52d (3:552d)
-	db $19
-	db 55,RHYDON
-	db 55,MAROWAK
-	db 55,ELECTRODE
-	db 64,CHANSEY
-	db 64,PARASECT
-	db 64,RAICHU
-	db 57,SANDSLASH
-	db 65,DITTO
-	db 63,DITTO
-	db 67,DITTO
-
-	db $00
-
-PowerPlantMons: ; d543 (3:5543)
-	db $0A
-	db 21,VOLTORB
-	db 21,MAGNEMITE
-	db 20,PIKACHU
-	db 24,PIKACHU
-	db 23,MAGNEMITE
-	db 23,VOLTORB
-	db 32,MAGNETON
-	db 35,MAGNETON
-	db 33,RAICHU
-	db 36,RAICHU
-
-	db $00
-
-Route23Mons: ; d559 (3:5559)
-	db $0A
-	db 26,SANDSHREW
-	db 33,DITTO
-	db 26,SPEAROW
-	db 38,FEAROW
-	db 38,DITTO
-	db 38,FEAROW
-	db 41,SANDSLASH
-	db 43,DITTO
-	db 41,FEAROW
-	db 43,FEAROW
-
-	db $00
-
-PlateauMons2: ; d56f (3:556f)
-	db $0A
-	db 22,MACHOP
-	db 24,GEODUDE
-	db 26,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,MACHOKE
-	db 40,GOLBAT
-	db 40,MAROWAK
-	db 43,GRAVELER
-
-	db $00
-
-PlateauMons3: ; d585 (3:5585)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 42,ONIX
-	db 40,VENOMOTH
-	db 45,ONIX
-	db 43,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 45,MACHOKE
-
-	db $00
-
-PlateauMons1: ; d59b (3:559b)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 43,MAROWAK
-
-	db $00
-
-CaveMons: ; d5b1 (3:55b1)
-	db $14
-	db 18,DIGLETT
-	db 19,DIGLETT
-	db 17,DIGLETT
-	db 20,DIGLETT
-	db 16,DIGLETT
-	db 15,DIGLETT
-	db 21,DIGLETT
-	db 22,DIGLETT
-	db 29,DUGTRIO
-	db 31,DUGTRIO
-
-	db $00
-
-ENDC
-IF _JAPAN && _BLUE
-NoMons: ; d0dd (3:50dd)
-	db $00
-
-	db $00
-
-Route1Mons: ; d0df (3:50df)
-	db $19
-	db 3,PIDGEY
-	db 3,RATTATA
-	db 3,RATTATA
-	db 2,RATTATA
-	db 2,PIDGEY
-	db 3,PIDGEY
-	db 3,PIDGEY
-	db 4,RATTATA
-	db 4,PIDGEY
-	db 5,PIDGEY
-
-	db $00
-
-Route2Mons: ; d0f5 (3:50f5)
-	db $19
-	db 3,RATTATA
-	db 3,PIDGEY
-	db 4,PIDGEY
-	db 4,RATTATA
-	db 5,PIDGEY
-	db 3,CATERPIE
-	db 2,RATTATA
-	db 5,RATTATA
-	db 4,CATERPIE
-	db 5,CATERPIE
-
-	db $00
-
-Route22Mons: ; d10b (3:510b)
-	db $19
-	db 3,RATTATA
-	db 3,NIDORAN_M
-	db 4,RATTATA
-	db 4,NIDORAN_M
-	db 2,RATTATA
-	db 2,NIDORAN_M
-	db 3,SPEAROW
-	db 5,SPEAROW
-	db 3,NIDORAN_F
-	db 4,NIDORAN_F
-
-	db $00
-
-ForestMons: ; d121 (3:5121)
-	db $08
-	db 4,CATERPIE
-	db 5,METAPOD
-	db 3,CATERPIE
-	db 5,CATERPIE
-	db 4,METAPOD
-	db 6,METAPOD
-	db 4,KAKUNA
-	db 3,WEEDLE
-	db 3,PIKACHU
-	db 5,PIKACHU
-
-	db $00
-
-Route3Mons: ; d137 (3:5137)
-	db $14
-	db 6,PIDGEY
-	db 5,SPEAROW
-	db 7,PIDGEY
-	db 6,SPEAROW
-	db 7,SPEAROW
-	db 8,PIDGEY
-	db 8,SPEAROW
-	db 3,JIGGLYPUFF
-	db 5,JIGGLYPUFF
-	db 7,JIGGLYPUFF
-
-	db $00
-
-MoonMons1: ; d14d (3:514d)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 9,ZUBAT
-	db 8,GEODUDE
-	db 6,ZUBAT
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 8,PARAS
-	db 11,ZUBAT
-	db 8,CLEFAIRY
-
-	db $00
-
-MoonMonsB1: ; d163 (3:5163)
-	db $0A
-	db 8,ZUBAT
-	db 7,ZUBAT
-	db 7,GEODUDE
-	db 8,GEODUDE
-	db 9,ZUBAT
-	db 10,PARAS
-	db 10,ZUBAT
-	db 11,ZUBAT
-	db 9,CLEFAIRY
-	db 9,GEODUDE
-
-	db $00
-
-MoonMonsB2: ; d179 (3:5179)
-	db $0A
-	db 9,ZUBAT
-	db 9,GEODUDE
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 11,ZUBAT
-	db 10,PARAS
-	db 12,PARAS
-	db 10,CLEFAIRY
-	db 12,ZUBAT
-	db 12,CLEFAIRY
-
-	db $00
-
-Route4Mons: ; d18f (3:518f)
-	db $14
-	db 10,RATTATA
-	db 10,SPEAROW
-	db 8,RATTATA
-	db 6,SANDSHREW
-	db 8,SPEAROW
-	db 10,SANDSHREW
-	db 12,RATTATA
-	db 12,SPEAROW
-	db 8,SANDSHREW
-	db 12,SANDSHREW
-
-	db $00
-
-Route24Mons: ; d1a5 (3:51a5)
-	db $19
-	db 7,CATERPIE
-	db 8,METAPOD
-	db 12,PIDGEY
-	db 12,ODDISH
-	db 13,ODDISH
-	db 10,ABRA
-	db 14,ODDISH
-	db 13,PIDGEY
-	db 8,ABRA
-	db 12,ABRA
-
-	db $00
-
-Route25Mons: ; d1bb (3:51bb)
-	db $0F
-	db 8,CATERPIE
-	db 9,METAPOD
-	db 13,PIDGEY
-	db 12,ODDISH
-	db 13,ODDISH
-	db 12,ABRA
-	db 14,ODDISH
-	db 10,ABRA
-	db 7,KAKUNA
-	db 8,WEEDLE
-
-	db $00
-
-Route9Mons: ; d1d1 (3:51d1)
-	db $0F
-	db 16,RATTATA
-	db 16,SPEAROW
-	db 14,RATTATA
-	db 11,SANDSHREW
-	db 13,SPEAROW
-	db 15,SANDSHREW
-	db 17,RATTATA
-	db 17,SPEAROW
-	db 13,SANDSHREW
-	db 17,SANDSHREW
-
-	db $00
-
-Route5Mons: ; d1e7 (3:51e7)
-	db $0F
-	db 13,ODDISH
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MEOWTH
-	db 12,MEOWTH
-	db 15,ODDISH
-	db 16,ODDISH
-	db 16,PIDGEY
-	db 14,MEOWTH
-	db 16,MEOWTH
-
-	db $00
-
-Route6Mons: ; d1fd (3:51fd)
-	db $0F
-	db 13,ODDISH
-	db 13,PIDGEY
-	db 15,PIDGEY
-	db 10,MEOWTH
-	db 12,MEOWTH
-	db 15,ODDISH
-	db 16,ODDISH
-	db 16,PIDGEY
-	db 14,MEOWTH
-	db 16,MEOWTH
-
-	db $00
-
-Route11Mons: ; d213 (3:5213)
-	db $0F
-	db 14,SANDSHREW
-	db 15,SPEAROW
-	db 12,SANDSHREW
-	db 9,DROWZEE
-	db 13,SPEAROW
-	db 13,DROWZEE
-	db 15,SANDSHREW
-	db 17,SPEAROW
-	db 11,DROWZEE
-	db 15,DROWZEE
-
-	db $00
-
-TunnelMonsB1: ; d229 (3:5229)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,DITTO
-	db 15,ZUBAT
-	db 17,MACHOP
-	db 13,ONIX
-	db 15,ONIX
-
-	db $00
-
-TunnelMonsB2: ; d23f (3:523f)
-	db $0F
-	db 16,ZUBAT
-	db 17,ZUBAT
-	db 17,GEODUDE
-	db 15,MACHOP
-	db 16,GEODUDE
-	db 18,DITTO
-	db 17,MACHOP
-	db 17,ONIX
-	db 13,ONIX
-	db 18,GEODUDE
-
-	db $00
-
-Route10Mons: ; d255 (3:5255)
-	db $0F
-	db 16,VOLTORB
-	db 16,SPEAROW
-	db 14,VOLTORB
-	db 11,SANDSHREW
-	db 13,SPEAROW
-	db 15,SANDSHREW
-	db 17,VOLTORB
-	db 17,SPEAROW
-	db 13,SANDSHREW
-	db 17,SANDSHREW
-
-	db $00
-
-Route12Mons: ; d26b (3:526b)
-	db $0F
-	db 24,ODDISH
-	db 25,PIDGEY
-	db 23,PIDGEY
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 27,PIDGEY
-	db 28,GLOOM
-	db 30,GLOOM
-
-	db $00
-
-Route8Mons: ; d281 (3:5281)
-	db $0F
-	db 18,PIDGEY
-	db 18,MEOWTH
-	db 17,SANDSHREW
-	db 16,GROWLITHE
-	db 20,PIDGEY
-	db 20,MEOWTH
-	db 19,SANDSHREW
-	db 17,GROWLITHE
-	db 15,GROWLITHE
-	db 18,GROWLITHE
-
-	db $00
-
-Route7Mons: ; d297 (3:5297)
-	db $0F
-	db 19,PIDGEY
-	db 19,ODDISH
-	db 17,MEOWTH
-	db 22,ODDISH
-	db 22,PIDGEY
-	db 18,MEOWTH
-	db 18,GROWLITHE
-	db 20,GROWLITHE
-	db 19,MEOWTH
-	db 20,MEOWTH
-
-	db $00
-
-TowerMons1: ; d2ad (3:52ad)
-	db $00
-
-	db $00
-
-TowerMons2: ; d2af (3:52af)
-	db $00
-
-	db $00
-
-TowerMons3: ; d2b1 (3:52b1)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 24,GASTLY
-	db 20,CUBONE
-	db 22,CUBONE
-	db 25,HAUNTER
-
-	db $00
-
-TowerMons4: ; d2c7 (3:52c7)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons5: ; d2dd (3:52dd)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,HAUNTER
-	db 20,CUBONE
-	db 22,CUBONE
-	db 24,GASTLY
-
-	db $00
-
-TowerMons6: ; d2f3 (3:52f3)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 19,GASTLY
-	db 26,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-
-	db $00
-
-TowerMons7: ; d309 (3:5309)
-	db $0F
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 20,GASTLY
-	db 28,HAUNTER
-	db 22,CUBONE
-	db 24,CUBONE
-	db 28,HAUNTER
-	db 30,HAUNTER
-
-	db $00
-
-Route13Mons: ; d31f (3:531f)
-	db $14
-	db 24,ODDISH
-	db 25,PIDGEY
-	db 27,PIDGEY
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 25,DITTO
-	db 28,GLOOM
-	db 30,GLOOM
-
-	db $00
-
-Route14Mons: ; d335 (3:5335)
-	db $0F
-	db 24,ODDISH
-	db 26,PIDGEY
-	db 23,DITTO
-	db 24,VENONAT
-	db 22,ODDISH
-	db 26,VENONAT
-	db 26,ODDISH
-	db 30,GLOOM
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route15Mons: ; d34b (3:534b)
-	db $0F
-	db 24,ODDISH
-	db 26,DITTO
-	db 23,PIDGEY
-	db 26,VENONAT
-	db 22,ODDISH
-	db 28,VENONAT
-	db 26,ODDISH
-	db 30,GLOOM
-	db 28,PIDGEOTTO
-	db 30,PIDGEOTTO
-
-	db $00
-
-Route16Mons: ; d361 (3:5361)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 18,RATTATA
-	db 20,DODUO
-	db 20,RATTATA
-	db 18,DODUO
-	db 22,DODUO
-	db 22,RATTATA
-	db 23,RATICATE
-	db 25,RATICATE
-
-	db $00
-
-Route17Mons: ; d377 (3:5377)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 27,RATICATE
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 25,FEAROW
-	db 27,FEAROW
-
-	db $00
-
-Route18Mons: ; d38d (3:538d)
-	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
-	db 24,DODUO
-	db 25,FEAROW
-	db 26,DODUO
-	db 28,DODUO
-	db 29,RATICATE
-	db 27,FEAROW
-	db 29,FEAROW
-
-	db $00
-
-ZoneMonsCenter: ; d3a3 (3:53a3)
-	db $1E
-	db 22,NIDORAN_M
-	db 25,RHYHORN
-	db 22,VENONAT
-	db 24,EXEGGCUTE
-	db 31,NIDORINO
-	db 25,EXEGGCUTE
-	db 31,NIDORINA
-	db 30,PARASECT
-	db 23,SCYTHER
-	db 23,CHANSEY
-
-	db $00
-
-ZoneMons1: ; d3b9 (3:53b9)
-	db $1E
-	db 24,NIDORAN_M
-	db 26,DODUO
-	db 22,PARAS
-	db 25,EXEGGCUTE
-	db 33,NIDORINO
-	db 23,EXEGGCUTE
-	db 24,NIDORAN_F
-	db 25,PARASECT
-	db 25,LICKITUNG
-	db 28,SCYTHER
-
-	db $00
-
-ZoneMons2: ; d3cf (3:53cf)
-	db $1E
-	db 22,NIDORAN_M
-	db 26,RHYHORN
-	db 23,PARAS
-	db 25,EXEGGCUTE
-	db 30,NIDORINO
-	db 27,EXEGGCUTE
-	db 30,NIDORINA
-	db 32,VENOMOTH
-	db 26,CHANSEY
-	db 28,PINSIR
-
-	db $00
-
-ZoneMons3: ; d3e5 (3:53e5)
-	db $1E
-	db 25,NIDORAN_M
-	db 26,DODUO
-	db 23,VENONAT
-	db 24,EXEGGCUTE
-	db 33,NIDORINO
-	db 26,EXEGGCUTE
-	db 25,NIDORAN_F
-	db 31,VENOMOTH
-	db 26,PINSIR
-	db 28,LICKITUNG
-
-	db $00
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-IslandMons1: ; d411 (3:5411)
-	db $0F
-	db 30,SEEL
-	db 30,HORSEA
-	db 30,STARYU
-	db 30,KRABBY
-	db 28,KRABBY
-	db 21,ZUBAT
-	db 29,GOLBAT
-	db 28,SLOWPOKE
-	db 28,STARYU
-	db 38,SLOWBRO
-
-	db $00
-
-IslandMonsB1: ; d427 (3:5427)
-	db $0A
-	db 30,SHELLDER
-	db 30,KRABBY
-	db 32,STARYU
-	db 32,KRABBY
-	db 28,HORSEA
-	db 30,SEEL
-	db 30,HORSEA
-	db 28,SEEL
-	db 38,DEWGONG
-	db 37,KINGLER
-
-	db $00
-
-IslandMonsB2: ; d43d (3:543d)
-	db $0A
-	db 30,SEEL
-	db 30,HORSEA
-	db 32,SEEL
-	db 32,HORSEA
-	db 28,KRABBY
-	db 30,SHELLDER
-	db 30,KRABBY
-	db 28,STARYU
-	db 30,GOLBAT
-	db 37,JYNX
-
-	db $00
-
-IslandMonsB3: ; d453 (3:5453)
-	db $0A
-	db 31,HORSEA
-	db 31,SEEL
-	db 33,HORSEA
-	db 33,SEEL
-	db 29,KRABBY
-	db 31,STARYU
-	db 31,KRABBY
-	db 29,STARYU
-	db 39,KINGLER
-	db 37,DEWGONG
-
-	db $00
-
-IslandMonsB4: ; d469 (3:5469)
-	db $0A
-	db 31,KRABBY
-	db 31,STARYU
-	db 33,KRABBY
-	db 33,STARYU
-	db 29,HORSEA
-	db 31,SEEL
-	db 31,HORSEA
-	db 29,SEEL
-	db 39,JYNX
-	db 32,GOLBAT
-
-	db $00
-
-MansionMons1: ; d47f (3:547f)
-	db $0A
-	db 32,GRIMER
-	db 30,GRIMER
-	db 34,PONYTA
-	db 30,PONYTA
-	db 34,GROWLITHE
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
-	db 37,MUK
-	db 39,WEEZING
-
-	db $00
-
-MansionMons2: ; d495 (3:5495)
-	db $0A
-	db 32,GROWLITHE
-	db 34,GRIMER
-	db 34,GRIMER
-	db 30,PONYTA
-	db 30,GRIMER
-	db 32,PONYTA
-	db 30,KOFFING
-	db 28,PONYTA
-	db 39,MUK
-	db 37,WEEZING
-
-	db $00
-
-MansionMons3: ; d4ab (3:54ab)
-	db $0A
-	db 31,GRIMER
-	db 33,GROWLITHE
-	db 35,GRIMER
-	db 32,PONYTA
-	db 34,PONYTA
-	db 40,MUK
-	db 34,KOFFING
-	db 38,MUK
-	db 36,PONYTA
-	db 42,WEEZING
-
-	db $00
-
-MansionMonsB1: ; d4c1 (3:54c1)
-	db $0A
-	db 33,GRIMER
-	db 31,GRIMER
-	db 35,GROWLITHE
-	db 32,PONYTA
-	db 31,GRIMER
-	db 40,MUK
-	db 34,PONYTA
-	db 35,KOFFING
-	db 38,MUK
-	db 42,WEEZING
-
-	db $00
-
-Route21Mons: ; d4d7 (3:54d7)
-	db $19
-	db 21,RATTATA
-	db 23,PIDGEY
-	db 30,RATICATE
-	db 23,RATTATA
-	db 21,PIDGEY
-	db 30,PIDGEOTTO
-	db 32,PIDGEOTTO
-	db 28,TANGELA
-	db 30,TANGELA
-	db 32,TANGELA
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-DungeonMons1: ; d501 (3:5501)
-	db $0A
-	db 46,GOLBAT
-	db 46,HYPNO
-	db 46,MAGNETON
-	db 49,RAPIDASH
-	db 49,VENOMOTH
-	db 52,SANDSLASH
-	db 49,KADABRA
-	db 52,PARASECT
-	db 53,RAICHU
-	db 53,DITTO
-
-	db $00
-
-DungeonMons2: ; d517 (3:5517)
-	db $0F
-	db 51,DODRIO
-	db 51,VENOMOTH
-	db 51,KADABRA
-	db 52,RHYDON
-	db 52,RATICATE
-	db 52,ELECTRODE
-	db 56,CHANSEY
-	db 54,WIGGLYTUFF
-	db 55,DITTO
-	db 60,DITTO
-
-	db $00
-
-DungeonMonsB1: ; d52d (3:552d)
-	db $19
-	db 55,RHYDON
-	db 55,MAROWAK
-	db 55,ELECTRODE
-	db 64,CLEFAIRY
-	db 64,PARASECT
-	db 64,RAICHU
-	db 57,SANDSLASH
-	db 65,DITTO
-	db 63,DITTO
-	db 67,DITTO
-
-	db $00
-
-PowerPlantMons: ; d543 (3:5543)
-	db $0A
-	db 21,VOLTORB
-	db 21,MAGNEMITE
-	db 20,PIKACHU
-	db 24,PIKACHU
-	db 23,MAGNEMITE
-	db 23,VOLTORB
-	db 32,MAGNETON
-	db 35,MAGNETON
-	db 33,RAICHU
-	db 36,RAICHU
-
-	db $00
-
-Route23Mons: ; d559 (3:5559)
-	db $0A
-	db 26,SANDSHREW
-	db 33,DITTO
-	db 26,SPEAROW
-	db 38,FEAROW
-	db 38,DITTO
-	db 38,FEAROW
-	db 41,SANDSLASH
-	db 43,DITTO
-	db 41,FEAROW
-	db 43,FEAROW
-
-	db $00
-
-PlateauMons2: ; d56f (3:556f)
-	db $0A
-	db 22,MACHOP
-	db 24,GEODUDE
-	db 26,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,MACHOKE
-	db 40,GOLBAT
-	db 40,MAROWAK
-	db 43,GRAVELER
-
-	db $00
-
-PlateauMons3: ; d585 (3:5585)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 42,ONIX
-	db 40,VENOMOTH
-	db 45,ONIX
-	db 43,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 45,MACHOKE
-
-	db $00
-
-PlateauMons1: ; d59b (3:559b)
-	db $0F
-	db 24,MACHOP
-	db 26,GEODUDE
-	db 22,ZUBAT
-	db 36,ONIX
-	db 39,ONIX
-	db 42,ONIX
-	db 41,GRAVELER
-	db 41,GOLBAT
-	db 42,MACHOKE
-	db 43,MAROWAK
-
-	db $00
-
-CaveMons: ; d5b1 (3:55b1)
-	db $14
-	db 18,DIGLETT
-	db 19,DIGLETT
-	db 17,DIGLETT
-	db 20,DIGLETT
-	db 16,DIGLETT
-	db 15,DIGLETT
-	db 21,DIGLETT
-	db 22,DIGLETT
-	db 29,DUGTRIO
-	db 31,DUGTRIO
-
-	db $00
-
-ENDC
-IF _YELLOW
-NoMons: ; d0dd (3:50dd)
-	db $00
-
-	db $00
-
-Route1Mons: ; d0df (3:50df)
-	db $19
-	db 3,PIDGEY
-	db 4,PIDGEY
-	db 2,RATTATA
-	db 3,RATTATA
-	db 2,PIDGEY
-	db 3,PIDGEY
-	db 5,PIDGEY
-	db 4,RATTATA
-	db 6,PIDGEY
-	db 7,PIDGEY
-
-	db $00
-
-Route2Mons: ; d0f5 (3:50f5)
-	db $19
-	db 3,RATTATA
-	db 3,PIDGEY
-	db 4,RATTATA
-	db 4,NIDORAN_M
-	db 4,NIDORAN_F
-	db 5,PIDGEY
-	db 6,NIDORAN_M
-	db 6,NIDORAN_F
-	db 7,PIDGEY
-	db 7,PIDGEY
-
-	db $00
-
-Route22Mons: ; d10b (3:510b)
-	db $19
-	db 2,NIDORAN_M
-	db 2,NIDORAN_F
-	db 3,MANKEY
-	db 3,RATTATA
-	db 4,NIDORAN_M
-	db 4,NIDORAN_F
-	db 5,MANKEY
-	db 2,SPEAROW
-	db 4,SPEAROW
-	db 6,SPEAROW
-
-	db $00
-
-ForestMons: ; d121 (3:5121)
-	db $19
-	db 3,CATERPIE
-	db 4,METAPOD
-	db 4,CATERPIE
-	db 5,CATERPIE
-	db 4,PIDGEY
-	db 6,PIDGEY
-	db 6,CATERPIE
-	db 6,METAPOD
-	db 8,PIDGEY
-	db 9,PIDGEOTTO
-
-	db $00
-
-Route3Mons: ; d137 (3:5137)
-	db $14
-	db 8,SPEAROW
-	db 9,SPEAROW
-	db 9,MANKEY
-	db 10,SPEAROW
-	db 8,SANDSHREW
-	db 10,RATTATA
-	db 10,SANDSHREW
-	db 12,RATTATA
-	db 11,SPEAROW
-	db 12,SPEAROW
-
-	db $00
-
-MoonMons1: ; d14d (3:514d)
-	db $0A
-	db 8,ZUBAT
-	db 9,ZUBAT
-	db 10,GEODUDE
-	db 6,ZUBAT
-	db 7,ZUBAT
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 11,ZUBAT
-	db 12,SANDSHREW
-	db 11,CLEFAIRY
-
-	db $00
-
-MoonMonsB1: ; d163 (3:5163)
-	db $0A
-	db 8,ZUBAT
-	db 9,ZUBAT
-	db 10,ZUBAT
-	db 10,GEODUDE
-	db 11,GEODUDE
-	db 11,ZUBAT
-	db 9,PARAS
-	db 11,PARAS
-	db 10,CLEFAIRY
-	db 12,CLEFAIRY
-
-	db $00
-
-MoonMonsB2: ; d179 (3:5179)
-	db $0A
-	db 10,ZUBAT
-	db 11,GEODUDE
-	db 13,PARAS
-	db 11,ZUBAT
-	db 11,ZUBAT
-	db 12,ZUBAT
-	db 13,ZUBAT
-	db 9,CLEFAIRY
-	db 11,CLEFAIRY
-	db 13,CLEFAIRY
-
-	db $00
-
-Route4Mons: ; d18f (3:518f)
-	db $14
-	db 8,SPEAROW
-	db 9,SPEAROW
-	db 9,MANKEY
-	db 10,SPEAROW
-	db 8,SANDSHREW
-	db 10,RATTATA
-	db 10,SANDSHREW
-	db 12,RATTATA
-	db 11,SPEAROW
-	db 12,SPEAROW
-
-	db $00
-
-Route24Mons: ; d1a5 (3:51a5)
-	db $19
-	db 12,ODDISH
-	db 12,BELLSPROUT
-	db 13,PIDGEY
-	db 14,ODDISH
-	db 14,BELLSPROUT
-	db 15,PIDGEY
-	db 13,VENONAT
-	db 16,VENONAT
-	db 17,PIDGEY
-	db 17,PIDGEOTTO
-
-	db $00
-
-Route25Mons: ; d1bb (3:51bb)
-	db $0F
-	db 12,ODDISH
-	db 12,BELLSPROUT
-	db 13,PIDGEY
-	db 14,ODDISH
-	db 14,BELLSPROUT
-	db 15,PIDGEY
-	db 13,VENONAT
-	db 16,VENONAT
-	db 17,PIDGEY
-	db 17,PIDGEOTTO
-
-	db $00
-
-Route9Mons: ; d1d1 (3:51d1)
-	db $0F
-	db 16,NIDORAN_M
-	db 16,NIDORAN_F
-	db 18,RATTATA
-	db 18,NIDORAN_M
-	db 18,NIDORAN_F
-	db 17,SPEAROW
-	db 18,NIDORINO
-	db 18,NIDORINA
-	db 20,RATICATE
-	db 19,FEAROW
-
-	db $00
-
-Route5Mons: ; d1e7 (3:51e7)
-	db $0F
-	db 15,PIDGEY
-	db 14,RATTATA
-	db 7,ABRA
-	db 16,PIDGEY
-	db 16,RATTATA
-	db 17,PIDGEY
-	db 17,PIDGEOTTO
-	db 3,JIGGLYPUFF
-	db 5,JIGGLYPUFF
-	db 7,JIGGLYPUFF
-
-	db $00
-
-Route6Mons: ; d1fd (3:51fd)
-	db $0F
-	db 15,PIDGEY
-	db 14,RATTATA
-	db 7,ABRA
-	db 16,PIDGEY
-	db 16,RATTATA
-	db 17,PIDGEY
-	db 17,PIDGEOTTO
-	db 3,JIGGLYPUFF
-	db 5,JIGGLYPUFF
-	db 7,JIGGLYPUFF
-
-	db $03
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,PSYDUCK
-	db 15,GOLDUCK
-	db 20,GOLDUCK
-
-Route11Mons: ; d213 (3:5213)
-	db $0F
-	db 16,PIDGEY
-	db 15,RATTATA
-	db 18,PIDGEY
-	db 15,DROWZEE
-	db 17,RATTATA
-	db 17,DROWZEE
-	db 18,PIDGEOTTO
-	db 20,PIDGEOTTO
-	db 19,DROWZEE
-	db 17,RATICATE
-
-	db $00
-
-TunnelMonsB1: ; d229 (3:5229)
-	db $0F
-	db 15,ZUBAT
-	db 16,GEODUDE
-	db 17,ZUBAT
-	db 19,ZUBAT
-	db 18,GEODUDE
-	db 20,GEODUDE
-	db 21,ZUBAT
-	db 17,MACHOP
-	db 19,MACHOP
-	db 21,MACHOP
-
-	db $00
-
-TunnelMonsB2: ; d23f (3:523f)
-	db $0F
-	db 20,ZUBAT
-	db 17,GEODUDE
-	db 18,MACHOP
-	db 21,ZUBAT
-	db 22,ZUBAT
-	db 21,GEODUDE
-	db 20,MACHOP
-	db 14,ONIX
-	db 18,ONIX
-	db 22,ONIX
-
-	db $00
-
-Route10Mons: ; d255 (3:5255)
-	db $0F
-	db 16,MAGNEMITE
-	db 18,RATTATA
-	db 18,MAGNEMITE
-	db 20,MAGNEMITE
-	db 17,NIDORAN_M
-	db 17,NIDORAN_F
-	db 22,MAGNEMITE
-	db 20,RATICATE
-	db 16,MACHOP
-	db 18,MACHOP
-
-	db $00
-
-Route12Mons: ; d26b (3:526b)
-	db $0F
-	db 25,ODDISH
-	db 25,BELLSPROUT
-	db 28,PIDGEY
-	db 28,PIDGEOTTO
-	db 27,ODDISH
-	db 27,BELLSPROUT
-	db 29,GLOOM
-	db 29,WEEPINBELL
-	db 26,FARFETCH_D
-	db 31,FARFETCH_D
-
-	db $03
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWBRO
-	db 20,SLOWBRO
-
-Route8Mons: ; d281 (3:5281)
-	db $0F
-	db 20,PIDGEY
-	db 22,PIDGEY
-	db 20,RATTATA
-	db 15,ABRA
-	db 19,ABRA
-	db 24,PIDGEOTTO
-	db 19,JIGGLYPUFF
-	db 24,JIGGLYPUFF
-	db 20,KADABRA
-	db 27,KADABRA
-
-	db $00
-
-Route7Mons: ; d297 (3:5297)
-	db $0F
-	db 20,PIDGEY
-	db 22,PIDGEY
-	db 20,RATTATA
-	db 15,ABRA
-	db 19,ABRA
-	db 24,PIDGEOTTO
-	db 26,ABRA
-	db 19,JIGGLYPUFF
-	db 24,JIGGLYPUFF
-	db 24,JIGGLYPUFF
-
-	db $00
-
-TowerMons1: ; d2ad (3:52ad)
-	db $00
-
-	db $00
-
-TowerMons2: ; d2af (3:52af)
-	db $00
-
-	db $00
-
-TowerMons3: ; d2b1 (3:52b1)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,GASTLY
-	db 20,HAUNTER
-	db 25,HAUNTER
-
-	db $00
-
-TowerMons4: ; d2c7 (3:52c7)
-	db $0A
-	db 20,GASTLY
-	db 21,GASTLY
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 19,GASTLY
-	db 18,GASTLY
-	db 25,GASTLY
-	db 20,HAUNTER
-	db 25,HAUNTER
-
-	db $00
-
-TowerMons5: ; d2dd (3:52dd)
-	db $0F
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 25,GASTLY
-	db 26,GASTLY
-	db 21,GASTLY
-	db 20,CUBONE
-	db 27,GASTLY
-	db 22,HAUNTER
-	db 27,HAUNTER
-
-	db $00
-
-TowerMons6: ; d2f3 (3:52f3)
-	db $0F
-	db 22,GASTLY
-	db 23,GASTLY
-	db 24,GASTLY
-	db 25,GASTLY
-	db 26,GASTLY
-	db 21,GASTLY
-	db 22,CUBONE
-	db 27,GASTLY
-	db 22,HAUNTER
-	db 27,HAUNTER
-
-	db $00
-
-TowerMons7: ; d309 (3:5309)
-	db $14
-	db 24,GASTLY
-	db 25,GASTLY
-	db 26,GASTLY
-	db 27,GASTLY
-	db 28,GASTLY
-	db 23,GASTLY
-	db 24,CUBONE
-	db 29,GASTLY
-	db 24,HAUNTER
-	db 29,HAUNTER
-
-	db $00
-
-Route13Mons: ; d31f (3:531f)
-	db $0F
-	db 25,ODDISH
-	db 25,BELLSPROUT
-	db 28,PIDGEOTTO
-	db 28,PIDGEY
-	db 27,ODDISH
-	db 27,BELLSPROUT
-	db 29,GLOOM
-	db 29,WEEPINBELL
-	db 26,FARFETCH_D
-	db 31,FARFETCH_D
-
-	db $03
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWPOKE
-	db 15,SLOWBRO
-	db 20,SLOWBRO
-
-Route14Mons: ; d335 (3:5335)
-	db $0F
-	db 26,ODDISH
-	db 26,BELLSPROUT
-	db 24,VENONAT
-	db 30,PIDGEOTTO
-	db 28,ODDISH
-	db 28,BELLSPROUT
-	db 30,GLOOM
-	db 30,WEEPINBELL
-	db 27,VENONAT
-	db 30,VENOMOTH
-
-	db $00
-
-Route15Mons: ; d34b (3:534b)
-	db $0F
-	db 26,ODDISH
-	db 26,BELLSPROUT
-	db 24,VENONAT
-	db 32,PIDGEOTTO
-	db 28,ODDISH
-	db 28,BELLSPROUT
-	db 30,GLOOM
-	db 30,WEEPINBELL
-	db 27,VENONAT
-	db 30,VENOMOTH
-
-	db $00
-
-Route16Mons: ; d361 (3:5361)
-	db $19
-	db 22,SPEAROW
-	db 22,DODUO
-	db 23,RATTATA
-	db 24,DODUO
-	db 24,RATTATA
-	db 26,DODUO
-	db 23,SPEAROW
-	db 24,FEAROW
-	db 25,RATICATE
-	db 26,RATICATE
-
-	db $00
-
-Route17Mons: ; d377 (3:5377)
-	db $19
-	db 26,DODUO
-	db 27,FEAROW
-	db 27,DODUO
-	db 28,DODUO
-	db 28,PONYTA
-	db 30,PONYTA
-	db 29,FEAROW
-	db 28,DODUO
-	db 32,PONYTA
-	db 29,DODRIO
-
-	db $00
-
-Route18Mons: ; d38d (3:538d)
-	db $19
-	db 22,SPEAROW
-	db 22,DODUO
-	db 23,RATTATA
-	db 24,DODUO
-	db 24,RATTATA
-	db 26,DODUO
-	db 23,SPEAROW
-	db 24,FEAROW
-	db 25,RATICATE
-	db 26,RATICATE
-
-	db $00
-
-ZoneMonsCenter: ; d3a3 (3:53a3)
-	db $1E
-	db 14,NIDORAN_M
-	db 36,NIDORAN_F
-	db 24,EXEGGCUTE
-	db 20,RHYHORN
-	db 23,NIDORINO
-	db 27,PARASECT
-	db 27,PARAS
-	db 32,PARASECT
-	db 22,TANGELA
-	db 7,CHANSEY
-
-	db $00
-
-ZoneMons1: ; d3b9 (3:53b9)
-	db $1E
-	db 21,NIDORAN_M
-	db 29,NIDORAN_F
-	db 22,EXEGGCUTE
-	db 21,TAUROS
-	db 32,NIDORINA
-	db 19,CUBONE
-	db 26,EXEGGCUTE
-	db 24,MAROWAK
-	db 21,CHANSEY
-	db 15,SCYTHER
-
-	db $00
-
-ZoneMons2: ; d3cf (3:53cf)
-	db $1E
-	db 36,NIDORAN_M
-	db 14,NIDORAN_F
-	db 20,EXEGGCUTE
-	db 25,RHYHORN
-	db 23,NIDORINA
-	db 28,KANGASKHAN
-	db 16,CUBONE
-	db 33,KANGASKHAN
-	db 25,SCYTHER
-	db 15,PINSIR
-
-	db $00
-
-ZoneMons3: ; d3e5 (3:53e5)
-	db $1E
-	db 29,NIDORAN_M
-	db 21,NIDORAN_F
-	db 22,EXEGGCUTE
-	db 21,TAUROS
-	db 32,NIDORINO
-	db 19,CUBONE
-	db 26,EXEGGCUTE
-	db 24,MAROWAK
-	db 25,PINSIR
-	db 27,TANGELA
-
-	db $00
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-WaterMons: ; d3fb (3:53fb)
-	db $00
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-IslandMons1: ; d411 (3:5411)
-	db $0F
-	db 18,ZUBAT
-	db 25,KRABBY
-	db 27,KRABBY
-	db 27,ZUBAT
-	db 36,ZUBAT
-	db 28,SLOWPOKE
-	db 30,SLOWPOKE
-	db 9,ZUBAT
-	db 27,GOLBAT
-	db 36,GOLBAT
-
-	db $00
-
-IslandMonsB1: ; d427 (3:5427)
-	db $0A
-	db 27,ZUBAT
-	db 26,KRABBY
-	db 36,ZUBAT
-	db 28,KRABBY
-	db 27,GOLBAT
-	db 29,SLOWPOKE
-	db 18,ZUBAT
-	db 28,KINGLER
-	db 22,SEEL
-	db 26,SEEL
-
-	db $00
-
-IslandMonsB2: ; d43d (3:543d)
-	db $0A
-	db 27,ZUBAT
-	db 27,KRABBY
-	db 36,ZUBAT
-	db 27,GOLBAT
-	db 28,KINGLER
-	db 24,SEEL
-	db 29,KRABBY
-	db 36,GOLBAT
-	db 31,SLOWPOKE
-	db 31,SLOWBRO
-
-	db $00
-
-IslandMonsB3: ; d453 (3:5453)
-	db $0A
-	db 27,GOLBAT
-	db 36,ZUBAT
-	db 29,KRABBY
-	db 27,ZUBAT
-	db 30,KINGLER
-	db 26,SEEL
-	db 31,KRABBY
-	db 30,SEEL
-	db 28,DEWGONG
-	db 32,DEWGONG
-
-	db $05
-	db 25,TENTACOOL
-	db 30,TENTACOOL
-	db 20,TENTACOOL
-	db 30,STARYU
-	db 35,TENTACOOL
-	db 30,STARYU
-	db 40,TENTACOOL
-	db 30,STARYU
-	db 30,STARYU
-	db 30,STARYU
-
-IslandMonsB4: ; d469 (3:5469)
-	db $0A
-	db 36,GOLBAT
-	db 36,ZUBAT
-	db 30,KRABBY
-	db 32,KINGLER
-	db 28,SEEL
-	db 32,SEEL
-	db 27,GOLBAT
-	db 45,ZUBAT
-	db 30,DEWGONG
-	db 34,DEWGONG
-
-	db $05
-	db 25,TENTACOOL
-	db 30,TENTACOOL
-	db 20,TENTACOOL
-	db 30,STARYU
-	db 35,TENTACOOL
-	db 30,STARYU
-	db 40,TENTACOOL
-	db 30,STARYU
-	db 30,STARYU
-	db 30,STARYU
-
-MansionMons1: ; d47f (3:547f)
-	db $0A
-	db 34,RATTATA
-	db 34,RATICATE
-	db 23,GRIMER
-	db 26,GROWLITHE
-	db 37,RATTATA
-	db 37,RATICATE
-	db 30,GROWLITHE
-	db 26,GRIMER
-	db 34,GROWLITHE
-	db 38,GROWLITHE
-
-	db $00
-
-MansionMons2: ; d495 (3:5495)
-	db $0A
-	db 37,RATTATA
-	db 37,RATICATE
-	db 26,GRIMER
-	db 29,GRIMER
-	db 40,RATTATA
-	db 40,RATICATE
-	db 32,GRIMER
-	db 35,GRIMER
-	db 35,MUK
-	db 38,MUK
-
-	db $00
-
-MansionMons3: ; d4ab (3:54ab)
-	db $0A
-	db 40,RATTATA
-	db 40,RATICATE
-	db 32,GRIMER
-	db 35,GRIMER
-	db 43,RATTATA
-	db 43,RATICATE
-	db 38,GRIMER
-	db 38,GRIMER
-	db 38,MUK
-	db 41,MUK
-
-	db $00
-
-MansionMonsB1: ; d4c1 (3:54c1)
-	db $0A
-	db 35,GRIMER
-	db 38,GRIMER
-	db 37,RATICATE
-	db 40,RATICATE
-	db 41,MUK
-	db 43,RATICATE
-	db 24,DITTO
-	db 46,RATICATE
-	db 18,DITTO
-	db 12,DITTO
-
-	db $00
-
-Route21Mons: ; d4d7 (3:54d7)
-	db $19
-	db 15,PIDGEY
-	db 13,RATTATA
-	db 13,PIDGEY
-	db 11,PIDGEY
-	db 17,PIDGEY
-	db 15,RATTATA
-	db 15,RATICATE
-	db 17,PIDGEOTTO
-	db 19,PIDGEOTTO
-	db 15,PIDGEOTTO
-
-	db $05
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 5,TENTACOOL
-	db 10,TENTACOOL
-	db 15,TENTACOOL
-	db 20,TENTACOOL
-	db 30,TENTACOOL
-	db 35,TENTACOOL
-	db 40,TENTACOOL
-
-DungeonMons1: ; d501 (3:5501)
-	db $0A
-	db 50,GOLBAT
-	db 55,GOLBAT
-	db 45,GRAVELER
-	db 55,GLOOM
-	db 55,WEEPINBELL
-	db 52,SANDSLASH
-	db 54,VENOMOTH
-	db 54,PARASECT
-	db 55,DITTO
-	db 60,DITTO
-
-	db $00
-
-DungeonMons2: ; d517 (3:5517)
-	db $0F
-	db 52,GOLBAT
-	db 57,GOLBAT
-	db 50,GRAVELER
-	db 56,SANDSLASH
-	db 50,RHYHORN
-	db 60,DITTO
-	db 58,GLOOM
-	db 58,WEEPINBELL
-	db 60,RHYDON
-	db 58,RHYDON
-
-	db $00
-
-DungeonMonsB1: ; d52d (3:552d)
-	db $19
-	db 54,GOLBAT
-	db 59,GOLBAT
-	db 55,GRAVELER
-	db 52,RHYHORN
-	db 62,RHYDON
-	db 60,DITTO
-	db 56,CHANSEY
-	db 65,DITTO
-	db 55,LICKITUNG
-	db 50,LICKITUNG
-
-	db $00
-
-PowerPlantMons: ; d543 (3:5543)
-	db $0A
-	db 30,MAGNEMITE
-	db 35,MAGNEMITE
-	db 33,MAGNETON
-	db 33,VOLTORB
-	db 37,VOLTORB
-	db 33,GRIMER
-	db 37,GRIMER
-	db 38,MAGNETON
-	db 33,MUK
-	db 37,MUK
-
-	db $00
-
-Route23Mons: ; d559 (3:5559)
-	db $0A
-	db 41,NIDORINO
-	db 41,NIDORINA
-	db 36,MANKEY
-	db 44,NIDORINO
-	db 44,NIDORINA
-	db 40,FEAROW
-	db 41,MANKEY
-	db 45,FEAROW
-	db 41,PRIMEAPE
-	db 46,PRIMEAPE
-
-	db $00
-
-PlateauMons2: ; d56f (3:556f)
-	db $0A
-	db 31,GEODUDE
-	db 36,GEODUDE
-	db 41,GEODUDE
-	db 44,ZUBAT
-	db 39,GOLBAT
-	db 44,GRAVELER
-	db 45,ONIX
-	db 47,ONIX
-	db 39,MACHOKE
-	db 42,MACHOKE
-
-	db $00
-
-PlateauMons3: ; d585 (3:5585)
-	db $0F
-	db 36,GEODUDE
-	db 44,GOLBAT
-	db 41,GEODUDE
-	db 49,ONIX
-	db 46,GEODUDE
-	db 41,GRAVELER
-	db 42,MACHOKE
-	db 45,MACHOKE
-	db 47,GRAVELER
-	db 47,GRAVELER
-
-	db $00
-
-PlateauMons1: ; d59b (3:559b)
-	db $0F
-	db 26,GEODUDE
-	db 31,GEODUDE
-	db 36,GEODUDE
-	db 39,ZUBAT
-	db 44,ZUBAT
-	db 41,GEODUDE
-	db 43,ONIX
-	db 45,ONIX
-	db 41,GRAVELER
-	db 47,GRAVELER
-
-	db $00
-
-CaveMons: ; d5b1 (3:55b1)
-	db $14
-	db 18,DIGLETT
-	db 19,DIGLETT
-	db 17,DIGLETT
-	db 20,DIGLETT
-	db 16,DIGLETT
-	db 15,DIGLETT
-	db 21,DIGLETT
-	db 22,DIGLETT
-	db 29,DUGTRIO
-	db 31,DUGTRIO
-
-	db $00
-
-ENDC
+	
+INCLUDE "wildPokemon.asm"
 
 UseItem_: ; d5c7 (3:55c7)
 	ld a,1
@@ -27244,68 +23401,7 @@ SuperRodData: ; e919 (3:6919)
 	dbw $E4, FishingGroup9 ; UNKNOWN_DUNGEON_1
 	db $FF
 
-; fishing groups
-; number of monsters, followed by level/monster pairs
-FishingGroup1: ; e97d (3:697d)
-	db 2
-	db 15,TENTACOOL
-	db 15,POLIWAG
-
-FishingGroup2: ; e982 (3:6982)
-	db 2
-	db 15,GOLDEEN
-	db 15,POLIWAG
-
-FishingGroup3: ; e987 (3:6987)
-	db 3
-	db 15,PSYDUCK
-	db 15,GOLDEEN
-	db 15,KRABBY
-
-FishingGroup4: ; e98e (3:698e)
-	db 2
-	db 15,KRABBY
-	db 15,SHELLDER
-
-FishingGroup5: ; e993 (3:6993)
-	db 2
-	db 23,POLIWHIRL
-	db 15,SLOWPOKE
-
-FishingGroup6: ; e998 (3:6998)
-	db 4
-	db 15,DRATINI
-	db 15,KRABBY
-	db 15,PSYDUCK
-	db 15,SLOWPOKE
-
-FishingGroup7: ; e9a1 (3:69a1)
-	db 4
-	db 5,TENTACOOL
-	db 15,KRABBY
-	db 15,GOLDEEN
-	db 15,MAGIKARP
-
-FishingGroup8: ; e9aa (3:69aa)
-	db 4
-	db 15,STARYU
-	db 15,HORSEA
-	db 15,SHELLDER
-	db 15,GOLDEEN
-
-FishingGroup9: ; e9b3 (3:69b3)
-	db 4
-	db 23,SLOWBRO
-	db 23,SEAKING
-	db 23,KINGLER
-	db 23,SEADRA
-
-FishingGroup10: ; e9bc (3:69bc)
-	db 4
-	db 23,SEAKING
-	db 15,KRABBY
-	db 15,GOLDEEN
-	db 15,MAGIKARP
+INCLUDE "fishingGroups.asm"
 
 ; reloads map view and processes sprite data
 ; for items that cause the overworld to be displayed
@@ -33521,385 +29617,45 @@ RemoveItemByID: ; 17f37 (5:7f37)
 
 SECTION "bank6",ROMX,BANK[$6]
 
-CeladonCity_h: ; 18000 (6:4000)
-	db $00 ; tileset
-	db CELADON_CITY_HEIGHT, CELADON_CITY_WIDTH ; dimensions (y, x)
-	dw CeladonCityBlocks, CeladonCityTextPointers, CeladonCityScript ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION ROUTE_16, ROUTE_16_WIDTH, 4, 0, ROUTE_16_HEIGHT, Route16Blocks, CELADON_CITY_WIDTH
-	EAST_MAP_CONNECTION ROUTE_7, ROUTE_7_WIDTH, 4, 0, ROUTE_7_HEIGHT, Route7Blocks, CELADON_CITY_WIDTH
-	dw CeladonCityObject ; objects
-
-CeladonCityObject: ; 0x18022 (size=189)
-	db $f ; border tile
-
-	db $d ; warps
-	db $d, $8, $0, CELADON_MART_1
-	db $d, $a, $2, CELADON_MART_1
-	db $9, $18, $0, CELADON_MANSION_1
-	db $3, $18, $2, CELADON_MANSION_1
-	db $3, $19, $2, CELADON_MANSION_1
-	db $9, $29, $0, CELADON_POKECENTER
-	db $1b, $c, $0, CELADON_GYM
-	db $13, $1c, $0, GAME_CORNER
-	db $13, $27, $0, CELADON_MART_5 ; beta warp! no longer used
-	db $13, $21, $0, CELADONPRIZE_ROOM
-	db $1b, $1f, $0, CELADON_DINER
-	db $1b, $23, $0, CELADON_HOUSE
-	db $1b, $2b, $0, CELADON_HOTEL
-
-	db $9 ; signs
-	db $f, $1b, $a ; CeladonCityText10
-	db $f, $13, $b ; CeladonCityText11
-	db $9, $2a, $c ; PokeCenterSignText
-	db $1d, $d, $d ; CeladonCityText13
-	db $9, $15, $e ; CeladonCityText14
-	db $d, $c, $f ; CeladonCityText15
-	db $15, $27, $10 ; CeladonCityText16
-	db $15, $21, $11 ; CeladonCityText17
-	db $15, $1b, $12 ; CeladonCityText18
-
-	db $9 ; people
-	db SPRITE_LITTLE_GIRL, $11 + 4, $8 + 4, $fe, $0, $1 ; person
-	db SPRITE_OLD_PERSON, $1c + 4, $b + 4, $ff, $d1, $2 ; person
-	db SPRITE_GIRL, $13 + 4, $e + 4, $fe, $1, $3 ; person
-	db SPRITE_OLD_PERSON, $16 + 4, $19 + 4, $ff, $d0, $4 ; person
-	db SPRITE_OLD_PERSON, $10 + 4, $16 + 4, $ff, $d0, $5 ; person
-	db SPRITE_FISHER2, $c + 4, $20 + 4, $ff, $d2, $6 ; person
-	db SPRITE_SLOWBRO, $c + 4, $1e + 4, $ff, $d3, $7 ; person
-	db SPRITE_ROCKET, $1d + 4, $20 + 4, $fe, $2, $8 ; person
-	db SPRITE_ROCKET, $e + 4, $2a + 4, $fe, $2, $9 ; person
-
-	; warp-to
-	EVENT_DISP $19, $d, $8 ; CELADON_MART_1
-	EVENT_DISP $19, $d, $a ; CELADON_MART_1
-	EVENT_DISP $19, $9, $18 ; CELADON_MANSION_1
-	EVENT_DISP $19, $3, $18 ; CELADON_MANSION_1
-	EVENT_DISP $19, $3, $19 ; CELADON_MANSION_1
-	EVENT_DISP $19, $9, $29 ; CELADON_POKECENTER
-	EVENT_DISP $19, $1b, $c ; CELADON_GYM
-	EVENT_DISP $19, $13, $1c ; GAME_CORNER
-	EVENT_DISP $19, $13, $27 ; CELADON_MART_5
-	EVENT_DISP $19, $13, $21 ; CELADONPRIZE_ROOM
-	EVENT_DISP $19, $1b, $1f ; CELADON_DINER
-	EVENT_DISP $19, $1b, $23 ; CELADON_HOUSE
-	EVENT_DISP $19, $1b, $2b ; CELADON_HOTEL
+INCLUDE "mapHeaders/CeladonCity.asm"
+INCLUDE "mapObjects/CeladonCity.asm"
 
 CeladonCityBlocks: ; 180df (6:40df)
 	INCBIN "maps/celadoncity.blk"
 
-PalletTown_h: ; 182a1 (6:42a1)
-	db $00 ; tileset
-	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
-	dw PalletTownBlocks, PalletTownTextPointers, PalletTownScript
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION ROUTE_1, ROUTE_1_WIDTH, ROUTE_1_HEIGHT, 0, 0, ROUTE_1_WIDTH, Route1Blocks
-	SOUTH_MAP_CONNECTION ROUTE_21, ROUTE_21_WIDTH, 0, 0, ROUTE_21_WIDTH, Route21Blocks, PALLET_TOWN_WIDTH, PALLET_TOWN_HEIGHT
-	dw PalletTownObject
-
-PalletTownObject: ; 0x182c3 (size=58)
-	db $b ; border tile
-
-	db $3 ; warps
-	db $5, $5, $0, REDS_HOUSE_1F
-	db $5, $d, $0, BLUES_HOUSE
-	db $b, $c, $1, OAKS_LAB
-
-	db $4 ; signs
-	db $d, $d, $4 ; PalletTownText4
-	db $9, $7, $5 ; PalletTownText5
-	db $5, $3, $6 ; PalletTownText6
-	db $5, $b, $7 ; PalletTownText7
-
-	db $3 ; people
-	db SPRITE_OAK, $5 + 4, $8 + 4, $ff, $ff, $1 ; person
-	db SPRITE_GIRL, $8 + 4, $3 + 4, $fe, $0, $2 ; person
-	db SPRITE_FISHER2, $e + 4, $b + 4, $fe, $0, $3 ; person
-
-	; warp-to
-	EVENT_DISP $a, $5, $5 ; REDS_HOUSE_1F
-	EVENT_DISP $a, $5, $d ; BLUES_HOUSE
-	EVENT_DISP $a, $b, $c ; OAKS_LAB
+INCLUDE "mapHeaders/PalletTown.asm"
+INCLUDE "mapObjects/PalletTown.asm"
 
 PalletTownBlocks: ; 182fd (6:42fd)
 	INCBIN "maps/pallettown.blk"
 
-ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
-	db $00 ; tileset
-	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
-	dw ViridianCityBlocks, ViridianCityTextPointers, ViridianCityScript ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST ; connections
-	NORTH_MAP_CONNECTION ROUTE_2, ROUTE_2_WIDTH, ROUTE_2_HEIGHT, 5, 0, ROUTE_2_WIDTH, Route2Blocks
-	SOUTH_MAP_CONNECTION ROUTE_1, ROUTE_1_WIDTH, 5, 0, ROUTE_1_WIDTH, Route1Blocks, VIRIDIAN_CITY_WIDTH, VIRIDIAN_CITY_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_22, ROUTE_22_WIDTH, 4, 0, ROUTE_22_HEIGHT, Route22Blocks, VIRIDIAN_CITY_WIDTH
-	dw ViridianCityObject ; objects
-
-ViridianCityObject: ; 0x18384 (size=104)
-	db $f ; border tile
-
-	db $5 ; warps
-	db $19, $17, $0, VIRIDIAN_POKECENTER
-	db $13, $1d, $0, VIRIDIAN_MART
-	db $f, $15, $0, VIRIDIAN_SCHOOL
-	db $9, $15, $0, VIRIDIAN_HOUSE
-	db $7, $20, $0, VIRIDIAN_GYM
-
-	db $6 ; signs
-	db $11, $11, $8 ; ViridianCityText8
-	db $1, $13, $9 ; ViridianCityText9
-	db $1d, $15, $a ; ViridianCityText10
-	db $13, $1e, $b ; MartSignText
-	db $19, $18, $c ; PokeCenterSignText
-	db $7, $1b, $d ; ViridianCityText13
-
-	db $7 ; people
-	db SPRITE_BUG_CATCHER, $14 + 4, $d + 4, $fe, $0, $1 ; person
-	db SPRITE_GAMBLER, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
-	db SPRITE_BUG_CATCHER, $19 + 4, $1e + 4, $fe, $0, $3 ; person
-	db SPRITE_GIRL, $9 + 4, $11 + 4, $ff, $d3, $4 ; person
-	db SPRITE_LYING_OLD_MAN, $9 + 4, $12 + 4, $ff, $ff, $5 ; person
-	db SPRITE_FISHER2, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
-	db SPRITE_GAMBLER, $5 + 4, $11 + 4, $fe, $2, $7 ; person
-
-	; warp-to
-	EVENT_DISP $14, $19, $17 ; VIRIDIAN_POKECENTER
-	EVENT_DISP $14, $13, $1d ; VIRIDIAN_MART
-	EVENT_DISP $14, $f, $15 ; VIRIDIAN_SCHOOL
-	EVENT_DISP $14, $9, $15 ; VIRIDIAN_HOUSE
-	EVENT_DISP $14, $7, $20 ; VIRIDIAN_GYM
+INCLUDE "mapHeaders/ViridianCity.asm"
+INCLUDE "mapObjects/ViridianCity.asm"
 
 ViridianCityBlocks: ; 183ec (6:43ec)
 	INCBIN "maps/viridiancity.blk"
 
-PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
-	db $00 ; tileset
-	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
-	dw PewterCityBlocks, PewterCityTextPointers, PewterCityScript ; blocks, texts, scripts
-	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_2, ROUTE_2_WIDTH, 5, 0, ROUTE_2_WIDTH, Route2Blocks, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT
-	EAST_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, 4, 0, ROUTE_3_HEIGHT, Route3Blocks, PEWTER_CITY_WIDTH
-	dw PewterCityObject ; objects
-
-	db $0
-
-PewterCityObject: ; 0x18577 (size=111)
-	db $a ; border tile
-
-	db $7 ; warps
-	db $7, $e, $0, MUSEUM_1F
-	db $5, $13, $2, MUSEUM_1F
-	db $11, $10, $0, PEWTER_GYM
-	db $d, $1d, $0, PEWTER_HOUSE_1
-	db $11, $17, $0, PEWTER_MART
-	db $1d, $7, $0, PEWTER_HOUSE_2
-	db $19, $d, $0, PEWTER_POKECENTER
-
-	db $7 ; signs
-	db $1d, $13, $6 ; PewterCityText6
-	db $13, $21, $7 ; PewterCityText7
-	db $11, $18, $8 ; MartSignText
-	db $19, $e, $9 ; PokeCenterSignText
-	db $9, $f, $a ; PewterCityText10
-	db $11, $b, $b ; PewterCityText11
-	db $17, $19, $c ; PewterCityText12
-
-	db $5 ; people
-	db SPRITE_LASS, $f + 4, $8 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $19 + 4, $11 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $1b + 4, $ff, $ff, $3 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $19 + 4, $1a + 4, $fe, $2, $4 ; person
-	db SPRITE_BUG_CATCHER, $10 + 4, $23 + 4, $ff, $d0, $5 ; person
-
-	; warp-to
-	EVENT_DISP $14, $7, $e ; MUSEUM_1F
-	EVENT_DISP $14, $5, $13 ; MUSEUM_1F
-	EVENT_DISP $14, $11, $10 ; PEWTER_GYM
-	EVENT_DISP $14, $d, $1d ; PEWTER_HOUSE_1
-	EVENT_DISP $14, $11, $17 ; PEWTER_MART
-	EVENT_DISP $14, $1d, $7 ; PEWTER_HOUSE_2
-	EVENT_DISP $14, $19, $d ; PEWTER_POKECENTER
+INCLUDE "mapHeaders/PewterCity.asm"
+	db $0	
+INCLUDE "mapObjects/PewterCity.asm"
 
 PewterCityBlocks: ; 185e6 (6:45e6)
 	INCBIN "maps/pewtercity.blk"
 
-CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
-	db $00 ; tileset
-	db CERULEAN_CITY_HEIGHT, CERULEAN_CITY_WIDTH ; dimensions (y, x)
-	dw CeruleanCityBlocks, CeruleanCityTextPointers, CeruleanCityScript ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_24, ROUTE_24_WIDTH, ROUTE_24_HEIGHT, 5, 0, ROUTE_24_WIDTH, Route24Blocks
-	SOUTH_MAP_CONNECTION ROUTE_5, ROUTE_5_WIDTH, 5, 0, ROUTE_5_WIDTH, Route5Blocks, CERULEAN_CITY_WIDTH, CERULEAN_CITY_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, 4, 0, ROUTE_4_HEIGHT, Route4Blocks, CERULEAN_CITY_WIDTH
-	EAST_MAP_CONNECTION ROUTE_9, ROUTE_9_WIDTH, 4, 0, ROUTE_9_HEIGHT, Route9Blocks, CERULEAN_CITY_WIDTH
-	dw CeruleanCityObject ; objects
-
-CeruleanCityObject: ; 0x18786 (size=170)
-	db $f ; border tile
-
-	db $a ; warps
-	db $b, $1b, $0, TRASHED_HOUSE
-	db $f, $d, $0, CERULEAN_HOUSE
-	db $11, $13, $0, CERULEAN_POKECENTER
-	db $13, $1e, $0, CERULEAN_GYM
-	db $19, $d, $0, BIKE_SHOP
-	db $19, $19, $0, CERULEAN_MART
-	db $b, $4, $0, UNKNOWN_DUNGEON_1
-	db $9, $1b, $2, TRASHED_HOUSE
-	db $b, $9, $1, CERULEAN_HOUSE_3
-	db $9, $9, $0, CERULEAN_HOUSE_3
-
-	db $6 ; signs
-	db $13, $17, $c ; CeruleanCityText12
-	db $1d, $11, $d ; CeruleanCityText13
-	db $19, $1a, $e ; MartSignText
-	db $11, $14, $f ; PokeCenterSignText
-	db $19, $b, $10 ; CeruleanCityText16
-	db $15, $1b, $11 ; CeruleanCityText17
-
-	db $b ; people
-	db SPRITE_BLUE, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $8 + 4, $1e + 4, $ff, $ff, $42, ROCKET + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1f + 4, $ff, $d0, $3 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $12 + 4, $f + 4, $fe, $1, $4 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $9 + 4, $fe, $2, $5 ; person
-	db SPRITE_GUARD, $c + 4, $1c + 4, $ff, $d0, $6 ; person
-	db SPRITE_LASS, $1a + 4, $1d + 4, $ff, $d2, $7 ; person
-	db SPRITE_SLOWBRO, $1a + 4, $1c + 4, $ff, $d0, $8 ; person
-	db SPRITE_LASS, $1b + 4, $9 + 4, $fe, $2, $9 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $c + 4, $4 + 4, $ff, $d0, $a ; person
-	db SPRITE_GUARD, $c + 4, $1b + 4, $ff, $d0, $b ; person
-
-	; warp-to
-	EVENT_DISP $14, $b, $1b ; TRASHED_HOUSE
-	EVENT_DISP $14, $f, $d ; CERULEAN_HOUSE
-	EVENT_DISP $14, $11, $13 ; CERULEAN_POKECENTER
-	EVENT_DISP $14, $13, $1e ; CERULEAN_GYM
-	EVENT_DISP $14, $19, $d ; BIKE_SHOP
-	EVENT_DISP $14, $19, $19 ; CERULEAN_MART
-	EVENT_DISP $14, $b, $4 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $14, $9, $1b ; TRASHED_HOUSE
-	EVENT_DISP $14, $b, $9 ; CERULEAN_HOUSE_3
-	EVENT_DISP $14, $9, $9 ; CERULEAN_HOUSE_3
+INCLUDE "mapHeaders/CeruleanCity.asm"
+INCLUDE "mapObjects/CeruleanCity.asm"
 
 CeruleanCityBlocks: ; 18830 (6:4830)
 	INCBIN "maps/ceruleancity.blk"
 
-VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
-	db $00 ; tileset
-	db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
-	dw VermilionCityBlocks, VermilionCityTextPointers, VermilionCityScript ; blocks, texts, scripts
-	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_6, ROUTE_6_WIDTH, ROUTE_6_HEIGHT, 5, 0, ROUTE_6_WIDTH, Route6Blocks
-	EAST_MAP_CONNECTION ROUTE_11, ROUTE_11_WIDTH, 4, 0, ROUTE_11_HEIGHT, Route11Blocks, VERMILION_CITY_WIDTH
-	dw VermilionCityObject ; objects
-
-VermilionCityObject: ; 0x189ba (size=133)
-	db $43 ; border tile
-
-	db $9 ; warps
-	db $3, $b, $0, VERMILION_POKECENTER
-	db $d, $9, $0, POKEMON_FAN_CLUB
-	db $d, $17, $0, VERMILION_MART
-	db $13, $c, $0, VERMILION_GYM
-	db $13, $17, $0, VERMILION_HOUSE_1
-	db $1f, $12, $0, VERMILION_DOCK
-	db $1f, $13, $0, VERMILION_DOCK
-	db $d, $f, $0, VERMILION_HOUSE_3
-	db $3, $7, $0, VERMILION_HOUSE_2
-
-	db $7 ; signs
-	db $3, $1b, $7 ; VermilionCityText7
-	db $d, $25, $8 ; VermilionCityText8
-	db $d, $18, $9 ; MartSignText
-	db $3, $c, $a ; PokeCenterSignText
-	db $d, $7, $b ; VermilionCityText11
-	db $13, $7, $c ; VermilionCityText12
-	db $f, $1d, $d ; VermilionCityText13
-
-	db $6 ; people
-	db SPRITE_FOULARD_WOMAN, $7 + 4, $13 + 4, $fe, $2, $1 ; person
-	db SPRITE_GAMBLER, $6 + 4, $e + 4, $ff, $ff, $2 ; person
-	db SPRITE_SAILOR, $1e + 4, $13 + 4, $ff, $d1, $3 ; person
-	db SPRITE_GAMBLER, $7 + 4, $1e + 4, $ff, $ff, $4 ; person
-	db SPRITE_SLOWBRO, $9 + 4, $1d + 4, $fe, $1, $5 ; person
-	db SPRITE_SAILOR, $1b + 4, $19 + 4, $fe, $2, $6 ; person
-
-	; warp-to
-	EVENT_DISP $14, $3, $b ; VERMILION_POKECENTER
-	EVENT_DISP $14, $d, $9 ; POKEMON_FAN_CLUB
-	EVENT_DISP $14, $d, $17 ; VERMILION_MART
-	EVENT_DISP $14, $13, $c ; VERMILION_GYM
-	EVENT_DISP $14, $13, $17 ; VERMILION_HOUSE_1
-	EVENT_DISP $14, $1f, $12 ; VERMILION_DOCK
-	EVENT_DISP $14, $1f, $13 ; VERMILION_DOCK
-	EVENT_DISP $14, $d, $f ; VERMILION_HOUSE_3
-	EVENT_DISP $14, $3, $7 ; VERMILION_HOUSE_2
+INCLUDE "mapHeaders/VermilionCity.asm"
+INCLUDE "mapObjects/VermilionCity.asm"
 
 VermilionCityBlocks: ; 18a3f (6:4a3f)
 	INCBIN "maps/vermilioncity.blk"
 
-FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
-	db $00 ; tileset
-	db FUCHSIA_CITY_HEIGHT, FUCHSIA_CITY_WIDTH ; dimensions (y, x)
-	dw FuchsiaCityBlocks, FuchsiaCityTextPointers, FuchsiaCityScript ; blocks, texts, scripts
-	db SOUTH | WEST | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_19, ROUTE_19_WIDTH, 5, 0, ROUTE_19_WIDTH, Route19Blocks, FUCHSIA_CITY_WIDTH, FUCHSIA_CITY_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_18, ROUTE_18_WIDTH, 4, 0, ROUTE_18_HEIGHT, Route18Blocks, FUCHSIA_CITY_WIDTH
-	EAST_MAP_CONNECTION ROUTE_15, ROUTE_15_WIDTH, 4, 0, ROUTE_15_HEIGHT, Route15Blocks, FUCHSIA_CITY_WIDTH
-	dw FuchsiaCityObject ; objects
-
-FuchsiaCityObject: ; 0x18bd4 (size=178)
-	db $f ; border tile
-
-	db $9 ; warps
-	db $d, $5, $0, FUCHSIA_MART
-	db $1b, $b, $0, FUCHSIA_HOUSE_1
-	db $1b, $13, $0, FUCHSIA_POKECENTER
-	db $1b, $1b, $0, FUCHSIA_HOUSE_2
-	db $3, $12, $0, SAFARIZONEENTRANCE
-	db $1b, $5, $0, FUCHSIA_GYM
-	db $d, $16, $0, FUCHSIAMEETINGROOM
-	db $1b, $1f, $1, FUCHSIA_HOUSE_3
-	db $18, $1f, $0, FUCHSIA_HOUSE_3
-
-	db $e ; signs
-	db $17, $f, $b ; FuchsiaCityText11
-	db $f, $19, $c ; FuchsiaCityText12
-	db $5, $11, $d ; FuchsiaCityText13
-	db $d, $6, $e ; MartSignText
-	db $1b, $14, $f ; PokeCenterSignText
-	db $1d, $1b, $10 ; FuchsiaCityText16
-	db $f, $15, $11 ; FuchsiaCityText17
-	db $1d, $5, $12 ; FuchsiaCityText18
-	db $7, $21, $13 ; FuchsiaCityText19
-	db $7, $1b, $14 ; FuchsiaCityText20
-	db $7, $d, $15 ; FuchsiaCityText21
-	db $d, $1f, $16 ; FuchsiaCityText22
-	db $f, $d, $17 ; FuchsiaCityText23
-	db $7, $7, $18 ; FuchsiaCityText24
-
-	db $a ; people
-	db SPRITE_BUG_CATCHER, $c + 4, $a + 4, $fe, $2, $1 ; person
-	db SPRITE_GAMBLER, $11 + 4, $1c + 4, $fe, $2, $2 ; person
-	db SPRITE_FISHER2, $e + 4, $1e + 4, $ff, $d0, $3 ; person
-	db SPRITE_BUG_CATCHER, $8 + 4, $18 + 4, $ff, $d1, $4 ; person
-	db SPRITE_CLEFAIRY, $5 + 4, $1f + 4, $fe, $0, $5 ; person
-	db SPRITE_BALL, $6 + 4, $19 + 4, $ff, $ff, $6 ; person
-	db SPRITE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
-	db SPRITE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
-	db SPRITE_SEEL, $11 + 4, $8 + 4, $fe, $0, $9 ; person
-	db SPRITE_OMANYTE, $5 + 4, $6 + 4, $ff, $ff, $a ; person
-
-	; warp-to
-	EVENT_DISP $14, $d, $5 ; FUCHSIA_MART
-	EVENT_DISP $14, $1b, $b ; FUCHSIA_HOUSE_1
-	EVENT_DISP $14, $1b, $13 ; FUCHSIA_POKECENTER
-	EVENT_DISP $14, $1b, $1b ; FUCHSIA_HOUSE_2
-	EVENT_DISP $14, $3, $12 ; SAFARIZONEENTRANCE
-	EVENT_DISP $14, $1b, $5 ; FUCHSIA_GYM
-	EVENT_DISP $14, $d, $16 ; FUCHSIAMEETINGROOM
-	EVENT_DISP $14, $1b, $1f ; FUCHSIA_HOUSE_3
-	EVENT_DISP $14, $18, $1f ; FUCHSIA_HOUSE_3
+INCLUDE "mapHeaders/FuchsiaCity.asm"
+INCLUDE "mapObjects/FuchsiaCity.asm"
 
 FuchsiaCityBlocks: ; 18c86 (6:4c86)
 	INCBIN "maps/fuchsiacity.blk"
@@ -35871,13 +31627,8 @@ FuchsiaCityKabutoText: ; 19b25 (6:5b25)
 UnnamedText_19b2a: ; 19b2a (6:5b2a)
 	TX_FAR _UnnamedText_19b2a
 	db "@"
-
-BluesHouse_h: ; 0x19b2f id=39
-	db $08 ; tileset
-	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions
-	dw BluesHouseBlocks, BluesHouseTextPointers, BluesHouseScript
-	db 0
-	dw BluesHouseObject
+	
+INCLUDE "mapHeaders/BluesHouse.asm"
 
 BluesHouseScript: ; 19b3b (6:5b3b)
 	call EnableAutoTextBoxDrawing
@@ -35969,34 +31720,13 @@ BluesHouseText2: ; 0x19bc4 Daisy, walking around
 BluesHouseText3: ; 0x19bc9 map on table
 	TX_FAR _BluesHouseText3
 	db "@"
-
-BluesHouseObject: ; 19bce (6:5bce)
-	db $0A ; border tile
-
-	db 2 ; warps
-	db 7,2,1,$FF
-	db 7,3,1,$FF
-
-	db 0 ; signs
-
-	db 3 ; people
-	db $11,4+3,4+2,$FF,$D3,1 ; Daisy, sitting by map
-	db $11,4+4,4+6,$FE,1,ITEM|2,0 ; map on table
-	db $41,4+3,4+3,$FF,$FF,ITEM|3,0 ; Daisy, walking around
-
-	; warp-to
-	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 2
-	EVENT_DISP BLUES_HOUSE_WIDTH, 7, 3
+	
+INCLUDE "mapObjects/BluesHouse.asm"
 
 BluesHouseBlocks: ; 19bf6 (6:5bf6)
 	INCBIN "maps/blueshouse.blk"
-
-VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
-	db $08 ; tileset
-	db VERMILION_HOUSE_3_HEIGHT, VERMILION_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw VermilionHouse3Blocks, VermilionHouse3TextPointers, VermilionHouse3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionHouse3Object ; objects
+	
+INCLUDE "mapHeaders/VermilionHouse3.asm"
 
 VermilionHouse3Script: ; 19c12 (6:5c12)
 	jp EnableAutoTextBoxDrawing
@@ -36012,31 +31742,12 @@ VermilionHouse3Text1: ; 19c17 (6:5c17)
 	call Predef
 	jp TextScriptEnd
 
-VermilionHouse3Object: ; 0x19c25 (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $7, $ff
-	db $7, $3, $7, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_LITTLE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
-
-	; warp-to
-	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
-	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $3
+INCLUDE "mapObjects/VermilionHouse3.asm"
 
 VermilionHouse3Blocks: ; 19c3f (6:5c3f)
 	INCBIN "maps/vermilionhouse3.blk"
-
-IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
-	db $02 ; tileset
-	db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
-	dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTextPointers, IndigoPlateauLobbyScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw IndigoPlateauLobbyObject ; objects
+	
+INCLUDE "mapHeaders/IndigoLobby.asm"
 
 IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	call Func_22fa
@@ -36079,38 +31790,13 @@ IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
 
 IndigoPlateauLobbyText5: ; 19c94 (6:5c94)
 	db $f6
-
-IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
-	db $0 ; border tile
-
-	db $3 ; warps
-	db $b, $7, $0, $ff
-	db $b, $8, $1, $ff
-	db $0, $8, $0, LORELEIS_ROOM
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_NURSE, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GYM_HELPER, $9 + 4, $4 + 4, $ff, $d3, $2 ; person
-	db SPRITE_LASS, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $4 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $6 + 4, $d + 4, $ff, $d0, $5 ; person
-
-	; warp-to
-	EVENT_DISP $8, $b, $7
-	EVENT_DISP $8, $b, $8
-	EVENT_DISP $8, $0, $8 ; LORELEIS_ROOM
+	
+INCLUDE "mapObjects/IndigoLobby.asm"
 
 IndigoPlateauLobbyBlocks: ; 19ccf (6:5ccf)
 	INCBIN "maps/indigoplateaulobby.blk"
-
-SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
-	db $16 ; tileset
-	db SILPH_CO_4F_HEIGHT, SILPH_CO_4F_WIDTH ; dimensions (y, x)
-	dw SilphCo4Blocks, SilphCo4TextPointers, SilphCo4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo4Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo4.asm"
 
 SilphCo4Script: ; 19d0b (6:5d0b)
 	call SilphCo4Script_19d21
@@ -36314,47 +32000,12 @@ SilphCo4AfterBattleText4: ; 19e30 (6:5e30)
 	TX_FAR _SilphCo4AfterBattleText4
 	db "@"
 
-SilphCo4Object: ; 0x19e35 (size=111)
-	db $2e ; border tile
-
-	db $7 ; warps
-	db $0, $18, $1, SILPH_CO_3F
-	db $0, $1a, $1, SILPH_CO_5F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $7, $b, $3, SILPH_CO_10F
-	db $3, $11, $3, SILPH_CO_6F
-	db $f, $3, $4, SILPH_CO_10F
-	db $b, $11, $5, SILPH_CO_10F
-
-	db $0 ; signs
-
-	db $7 ; people
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $e + 4, $9 + 4, $ff, $d3, $42, ROCKET + $C8, $1a ; trainer
-	db SPRITE_OAK_AIDE, $6 + 4, $e + 4, $ff, $d2, $43, SCIENTIST + $C8, $5 ; trainer
-	db SPRITE_ROCKET, $a + 4, $1a + 4, $ff, $d1, $44, ROCKET + $C8, $1b ; trainer
-	db SPRITE_BALL, $9 + 4, $3 + 4, $ff, $ff, $85, FULL_HEAL ; item
-	db SPRITE_BALL, $7 + 4, $4 + 4, $ff, $ff, $86, MAX_REVIVE ; item
-	db SPRITE_BALL, $8 + 4, $5 + 4, $ff, $ff, $87, ESCAPE_ROPE ; item
-
-	; warp-to
-	EVENT_DISP $f, $0, $18 ; SILPH_CO_3F
-	EVENT_DISP $f, $0, $1a ; SILPH_CO_5F
-	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $f, $7, $b ; SILPH_CO_10F
-	EVENT_DISP $f, $3, $11 ; SILPH_CO_6F
-	EVENT_DISP $f, $f, $3 ; SILPH_CO_10F
-	EVENT_DISP $f, $b, $11 ; SILPH_CO_10F
+INCLUDE "mapObjects/SilphCo4.asm"	
 
 SilphCo4Blocks: ; 19ea4 (6:5ea4)
 	INCBIN "maps/silphco4.blk"
-
-SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
-	db $16 ; tileset
-	db SILPH_CO_5F_HEIGHT, SILPH_CO_5F_WIDTH ; dimensions (y, x)
-	dw SilphCo5Blocks, SilphCo5TextPointers, SilphCo5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo5Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo5.asm"
 
 SilphCo5Script: ; 19f37 (6:5f37)
 	call SilphCo5Script_19f4d
@@ -36579,52 +32230,13 @@ SilphCo5Text10: ; 1a083 (6:6083)
 SilphCo5Text11: ; 1a088 (6:6088)
 	TX_FAR _SilphCo5Text11
 	db "@"
-
-SilphCo5Object: ; 0x1a08d (size=137)
-	db $2e ; border tile
-
-	db $7 ; warps
-	db $0, $18, $1, SILPH_CO_6F
-	db $0, $1a, $1, SILPH_CO_4F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $3, $1b, $5, SILPH_CO_7F
-	db $f, $9, $4, SILPH_CO_9F
-	db $5, $b, $4, SILPH_CO_3F
-	db $f, $3, $5, SILPH_CO_3F
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_LAPRAS_GIVER, $9 + 4, $d + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $10 + 4, $8 + 4, $ff, $d3, $42, ROCKET + $C8, $1c ; trainer
-	db SPRITE_OAK_AIDE, $3 + 4, $8 + 4, $ff, $d3, $43, SCIENTIST + $C8, $6 ; trainer
-	db SPRITE_ROCKER, $a + 4, $12 + 4, $ff, $d1, $44, JUGGLER + $C8, $1 ; trainer
-	db SPRITE_ROCKET, $4 + 4, $1c + 4, $ff, $d1, $45, ROCKET + $C8, $1d ; trainer
-	db SPRITE_BALL, $d + 4, $2 + 4, $ff, $ff, $86, TM_09 ; item
-	db SPRITE_BALL, $6 + 4, $4 + 4, $ff, $ff, $87, PROTEIN ; item
-	db SPRITE_BALL, $10 + 4, $15 + 4, $ff, $ff, $88, CARD_KEY ; item
-	db SPRITE_CLIPBOARD, $c + 4, $16 + 4, $ff, $ff, $9 ; person
-	db SPRITE_CLIPBOARD, $a + 4, $19 + 4, $ff, $ff, $a ; person
-	db SPRITE_CLIPBOARD, $6 + 4, $18 + 4, $ff, $ff, $b ; person
-
-	; warp-to
-	EVENT_DISP $f, $0, $18 ; SILPH_CO_6F
-	EVENT_DISP $f, $0, $1a ; SILPH_CO_4F
-	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $f, $3, $1b ; SILPH_CO_7F
-	EVENT_DISP $f, $f, $9 ; SILPH_CO_9F
-	EVENT_DISP $f, $5, $b ; SILPH_CO_3F
-	EVENT_DISP $f, $f, $3 ; SILPH_CO_3F
+	
+INCLUDE "mapObjects/SilphCo5.asm"	
 
 SilphCo5Blocks: ; 1a116 (6:6116)
 	INCBIN "maps/silphco5.blk"
-
-SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
-	db $16 ; tileset
-	db SILPH_CO_6F_HEIGHT, SILPH_CO_6F_WIDTH ; dimensions (y, x)
-	dw SilphCo6Blocks, SilphCo6TextPointers, SilphCo6Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo6Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo6.asm"
 
 SilphCo6Script: ; 1a1a9 (6:61a9)
 	call SilphCo6Script_1a1bf
@@ -36851,37 +32463,8 @@ SilphCo6EndBattleText4: ; 1a2f1 (6:62f1)
 SilphCo6AfterBattleText4: ; 1a2f6 (6:62f6)
 	TX_FAR _SilphCo6AfterBattleText4
 	db "@"
-
-SilphCo6Object: ; 0x1a2fb (size=112)
-	db $2e ; border tile
-
-	db $5 ; warps
-	db $0, $10, $1, SILPH_CO_7F
-	db $0, $e, $0, SILPH_CO_5F
-	db $0, $12, $0, SILPH_CO_ELEVATOR
-	db $3, $3, $4, SILPH_CO_4F
-	db $3, $17, $6, SILPH_CO_2F
-
-	db $0 ; signs
-
-	db $a ; people
-	db SPRITE_LAPRAS_GIVER, $6 + 4, $a + 4, $ff, $ff, $1 ; person
-	db SPRITE_LAPRAS_GIVER, $6 + 4, $14 + 4, $ff, $ff, $2 ; person
-	db SPRITE_ERIKA, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
-	db SPRITE_ERIKA, $a + 4, $b + 4, $ff, $d3, $4 ; person
-	db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
-	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, $46, ROCKET + $C8, $1e ; trainer
-	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, $47, SCIENTIST + $C8, $7 ; trainer
-	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, $48, ROCKET + $C8, $1f ; trainer
-	db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, $89, HP_UP ; item
-	db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, $8a, X_ACCURACY ; item
-
-	; warp-to
-	EVENT_DISP $d, $0, $10 ; SILPH_CO_7F
-	EVENT_DISP $d, $0, $e ; SILPH_CO_5F
-	EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $d, $3, $3 ; SILPH_CO_4F
-	EVENT_DISP $d, $3, $17 ; SILPH_CO_2F
+	
+INCLUDE "mapObjects/SilphCo6.asm"	
 
 SilphCo6Blocks: ; 1a36b (6:636b)
 	INCBIN "maps/silphco6.blk"
@@ -37356,69 +32939,14 @@ LedgeHoppingShadowOAM: ; 1a710 (6:6710)
 
 SECTION "bank7",ROMX,BANK[$7]
 
-CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
-	db $00 ; tileset
-	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
-	dw CinnabarIslandBlocks, CinnabarIslandTextPointers, CinnabarIslandScript ; blocks, texts, scripts
-	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_21, ROUTE_21_WIDTH, ROUTE_21_HEIGHT, 0, 0, ROUTE_21_WIDTH, Route21Blocks
-	EAST_MAP_CONNECTION ROUTE_20, ROUTE_20_WIDTH, 0, 0, ROUTE_20_HEIGHT, Route20Blocks, CINNABAR_ISLAND_WIDTH
-	dw CinnabarIslandObject ; objects
-
-CinnabarIslandObject: ; 0x1c022 (size=71)
-	db $43 ; border tile
-
-	db $5 ; warps
-	db $3, $6, $1, MANSION_1
-	db $3, $12, $0, CINNABAR_GYM
-	db $9, $6, $0, CINNABAR_LAB_1
-	db $b, $b, $0, CINNABAR_POKECENTER
-	db $b, $f, $0, CINNABAR_MART
-
-	db $5 ; signs
-	db $5, $9, $3 ; CinnabarIslandText3
-	db $b, $10, $4 ; MartSignText
-	db $b, $c, $5 ; PokeCenterSignText
-	db $b, $9, $6 ; CinnabarIslandText6
-	db $3, $d, $7 ; CinnabarIslandText7
-
-	db $2 ; people
-	db SPRITE_GIRL, $5 + 4, $c + 4, $fe, $2, $1 ; person
-	db SPRITE_GAMBLER, $6 + 4, $e + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $a, $3, $6 ; MANSION_1
-	EVENT_DISP $a, $3, $12 ; CINNABAR_GYM
-	EVENT_DISP $a, $9, $6 ; CINNABAR_LAB_1
-	EVENT_DISP $a, $b, $b ; CINNABAR_POKECENTER
-	EVENT_DISP $a, $b, $f ; CINNABAR_MART
+INCLUDE "mapHeaders/CinnibarIsland.asm"
+INCLUDE "mapObjects/CinnibarIsland.asm"	
 
 CinnabarIslandBlocks: ; 1c069 (7:4069)
 	INCBIN "maps/cinnabarisland.blk"
-
-Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
-	db $00 ; tileset
-	db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; dimensions (y, x)
-	dw Route1Blocks, Route1TextPointers, Route1Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, VIRIDIAN_CITY_HEIGHT, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks
-	SOUTH_MAP_CONNECTION PALLET_TOWN, PALLET_TOWN_WIDTH, 0, 0, PALLET_TOWN_WIDTH, PalletTownBlocks, ROUTE_1_WIDTH, ROUTE_1_HEIGHT
-	dw Route1Object ; objects
-
-Route1Object: ; 0x1c0e5 (size=19)
-	db $b ; border tile
-
-	db $0 ; warps
-
-	db $1 ; signs
-	db $1b, $9, $3 ; Route1Text3
-
-	db $2 ; people
-	db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
-	db SPRITE_BUG_CATCHER, $d + 4, $f + 4, $fe, $2, $2 ; person
-
-	; warp-to (unused)
-	EVENT_DISP $4, $7, $2
+	
+INCLUDE "mapHeaders/Route1.asm"
+INCLUDE "mapObjects/Route1.asm"	
 
 Route1Blocks: ; 1c0fc (7:40fc)
 	INCBIN "maps/route1.blk"
@@ -37863,13 +33391,8 @@ Route1Text2: ; 1caf8 (7:4af8)
 Route1Text3: ; 1cafd (7:4afd)
 	TX_FAR _Route1Text3
 	db "@"
-
-OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
-	db $05 ; tileset
-	db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
-	dw OaksLabBlocks, OaksLabTextPointers, OaksLabScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw OaksLabObject ; objects
+	
+INCLUDE "mapHeaders/OaksLab.asm"
 
 OaksLabScript: ; 1cb0e (7:4b0e)
 	ld a, [$d74b]
@@ -39115,39 +34638,10 @@ OaksLabText10: ; 1d3fb (7:53fb)
 UnnamedText_1d405: ; 1d405 (7:5405)
 	TX_FAR _UnnamedText_1d405
 	db "@"
+	
+INCLUDE "mapObjects/OaksLab.asm"	
 
-OaksLabObject: ; 0x1d40a (size=88)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $b, $4, $2, $ff
-	db $b, $5, $2, $ff
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_BLUE, $3 + 4, $4 + 4, $ff, $ff, $41, SONY1 + $C8, $1 ; trainer
-	db SPRITE_BALL, $3 + 4, $6 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BALL, $3 + 4, $7 + 4, $ff, $ff, $3 ; person
-	db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $4 ; person
-	db SPRITE_OAK, $2 + 4, $5 + 4, $ff, $d0, $5 ; person
-	db SPRITE_BOOK_MAP_DEX, $1 + 4, $2 + 4, $ff, $ff, $6 ; person
-	db SPRITE_BOOK_MAP_DEX, $1 + 4, $3 + 4, $ff, $ff, $7 ; person
-	db SPRITE_OAK, $a + 4, $5 + 4, $ff, $d1, $8 ; person
-	db SPRITE_GIRL, $9 + 4, $1 + 4, $fe, $1, $9 ; person
-	db SPRITE_OAK_AIDE, $a + 4, $2 + 4, $ff, $ff, $a ; person
-	db SPRITE_OAK_AIDE, $a + 4, $8 + 4, $ff, $ff, $b ; person
-
-	; warp-to
-	EVENT_DISP $5, $b, $4
-	EVENT_DISP $5, $b, $5
-
-ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
-	db $02 ; tileset
-	db VIRIDIAN_MART_HEIGHT, VIRIDIAN_MART_WIDTH ; dimensions (y, x)
-	dw ViridianMartBlocks, ViridianMartTextPointers, ViridianMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianMartObject ; objects
+INCLUDE "mapHeaders/ViridianMart.asm"
 
 ViridianMartScript: ; 1d46e (7:546e)
 	call ViridianMartScript_1d47d
@@ -39244,34 +34738,13 @@ ViridianMartText2: ; 1d500 (7:5500)
 ViridianMartText3: ; 1d505 (7:5505)
 	TX_FAR _ViridianMartText3
 	db "@"
-
-ViridianMartObject: ; 0x1d50a (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $1, $ff
-	db $7, $4, $1, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BUG_CATCHER, $5 + 4, $5 + 4, $fe, $1, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $3 + 4, $3 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
+	
+INCLUDE "mapObjects/ViridianMart.asm"
 
 ViridianMartBlocks: ; 1d530 (7:5530)
 	INCBIN "maps/viridianmart.blk"
 
-School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
-	db $08 ; tileset
-	db VIRIDIAN_SCHOOL_HEIGHT, VIRIDIAN_SCHOOL_WIDTH ; dimensions (y, x)
-	dw SchoolBlocks, SchoolTextPointers, SchoolScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SchoolObject ; objects
+INCLUDE "mapHeaders/ViridianSchool.asm"
 
 SchoolScript: ; 1d54c (7:554c)
 	jp EnableAutoTextBoxDrawing
@@ -39287,31 +34760,10 @@ SchoolText1: ; 1d553 (7:5553)
 SchoolText2: ; 1d558 (7:5558)
 	TX_FAR _SchoolText2
 	db "@"
+	
+INCLUDE "mapObjects/ViridianSchool.asm"
 
-SchoolObject: ; 0x1d55d (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BRUNETTE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
-	db SPRITE_LASS, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
-	db $08 ; tileset
-	db VIRIDIAN_HOUSE_HEIGHT, VIRIDIAN_HOUSE_WIDTH ; dimensions (y, x)
-	dw ViridianHouseBlocks, ViridianHouseTextPointers, ViridianHouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianHouseObject ; objects
-
+INCLUDE "mapHeaders/ViridianHouse.asm"
 	db $0
 
 ViridianHouseScript: ; 1d58a (7:558a)
@@ -39347,32 +34799,10 @@ UnnamedText_1d5b1: ; 1d5b1 (7:55b1)
 ViridianHouseText4: ; 1d5b6 (7:55b6)
 	TX_FAR _ViridianHouseText4
 	db "@"
+	
+INCLUDE "mapObjects/ViridianHouse.asm"
 
-ViridianHouseObject: ; 0x1d5bb (size=44)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $3, $ff
-	db $7, $3, $3, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_BALDING_GUY, $3 + 4, $5 + 4, $ff, $ff, $1 ; person
-	db SPRITE_LITTLE_GIRL, $4 + 4, $1 + 4, $fe, $1, $2 ; person
-	db SPRITE_BIRD, $5 + 4, $5 + 4, $fe, $2, $3 ; person
-	db SPRITE_CLIPBOARD, $0 + 4, $4 + 4, $ff, $ff, $4 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
-	db $08 ; tileset
-	db PEWTER_HOUSE_1_HEIGHT, PEWTER_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw PewterHouse1Blocks, PewterHouse1TextPointers, PewterHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PewterHouse1Object ; objects
+INCLUDE "mapHeaders/PewterHouse1.asm"
 
 PewterHouse1Script: ; 1d5f3 (7:55f3)
 	jp EnableAutoTextBoxDrawing
@@ -39397,31 +34827,10 @@ PewterHouse1Text2: ; 1d60c (7:560c)
 PewterHouse1Text3: ; 1d611 (7:5611)
 	TX_FAR _PewterHouse1Text3
 	db "@"
+	
+INCLUDE "mapObjects/PewterHouse1.asm"
 
-PewterHouse1Object: ; 0x1d616 (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $3, $ff
-	db $7, $3, $3, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_SLOWBRO, $5 + 4, $4 + 4, $ff, $d2, $1 ; person
-	db SPRITE_YOUNG_BOY, $5 + 4, $3 + 4, $ff, $d3, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $2 + 4, $1 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
-	db $08 ; tileset
-	db PEWTER_HOUSE_2_HEIGHT, PEWTER_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw PewterHouse2Blocks, PewterHouse2TextPointers, PewterHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PewterHouse2Object ; objects
+INCLUDE "mapHeaders/PewterHouse2.asm"
 
 PewterHouse2Script: ; 1d648 (7:5648)
 	jp EnableAutoTextBoxDrawing
@@ -39437,30 +34846,10 @@ PewterHouse2Text1: ; 1d64f (7:564f)
 PewterHouse2Text2: ; 1d654 (7:5654)
 	TX_FAR _PewterHouse2Text2
 	db "@"
+	
+INCLUDE "mapObjects/PewterHouse2.asm"
 
-PewterHouse2Object: ; 0x1d659 (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $5, $ff
-	db $7, $3, $5, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_GAMBLER, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BUG_CATCHER, $5 + 4, $4 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
-	db $08 ; tileset
-	db TRASHED_HOUSE_HEIGHT, TRASHED_HOUSE_WIDTH ; dimensions (y, x)
-	dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTextPointers, CeruleanHouseTrashedScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanHouseTrashedObject ; objects
+INCLUDE "mapHeaders/CeruleanHouseTrashed.asm"
 
 CeruleanHouseTrashedScript: ; 1d685 (7:5685)
 	call EnableAutoTextBoxDrawing
@@ -39502,33 +34891,10 @@ CeruleanHouseTrashedText2: ; 1d6b5 (7:56b5)
 CeruleanHouseTrashedText3: ; 1d6ba (7:56ba)
 	TX_FAR _CeruleanHouseTrashedText3
 	db "@"
+	
+INCLUDE "mapObjects/CeruleanHouseTrashed.asm"
 
-CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-	db $0, $3, $7, $ff
-
-	db $1 ; signs
-	db $0, $3, $3 ; CeruleanHouseTrashedText3
-
-	db $2 ; people
-	db SPRITE_FISHER, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GIRL, $6 + 4, $5 + 4, $fe, $2, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $0, $3
-
-CeruleanHouse_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
-	db $08 ; tileset
-	db CERULEAN_HOUSE_HEIGHT, CERULEAN_HOUSE_WIDTH ; dimensions (y, x)
-	dw CeruleanHouseBlocks, CeruleanHouseTextPointers, CeruleanHouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanHouseObject ; objects
+INCLUDE "mapHeaders/CeruleanHouse.asm"
 
 CeruleanHouseScript: ; 1d6f6 (7:56f6)
 	jp EnableAutoTextBoxDrawing
@@ -39548,30 +34914,10 @@ CeruleanHouseText2: ; 1d702 (7:5702)
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
+	
+INCLUDE "mapObjects/CeruleanHouse.asm"
 
-CeruleanHouseObject: ; 0x1d710 (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_OLD_MEDIUM_WOMAN, $4 + 4, $5 + 4, $ff, $d2, $1 ; person
-	db SPRITE_GAMBLER, $2 + 4, $1 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
-	db $15 ; tileset
-	db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
-	dw BikeShopBlocks, BikeShopTextPointers, BikeShopScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw BikeShopObject ; objects
+INCLUDE "mapHeaders/BikeShop.asm"
 
 BikeShopScript: ; 1d73c (7:573c)
 	jp EnableAutoTextBoxDrawing
@@ -39726,34 +35072,13 @@ UnnamedText_1d85c: ; 1d85c (7:585c)
 UnnamedText_1d861: ; 1d861 (7:5861)
 	TX_FAR _UnnamedText_1d861
 	db "@"
-
-BikeShopObject: ; 0x1d866 (size=38)
-	db $e ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BIKE_SHOP_GUY, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
-	db SPRITE_MOM_GEISHA, $6 + 4, $5 + 4, $fe, $1, $2 ; person
-	db SPRITE_BUG_CATCHER, $3 + 4, $1 + 4, $ff, $d1, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	
+INCLUDE "mapObjects/BikeShop.asm"
 
 BikeShopBlocks: ; 1d88c (7:588c)
 	INCBIN "maps/bikeshop.blk"
 
-LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
-	db $08 ; tileset
-	db LAVENDER_HOUSE_1_HEIGHT, LAVENDER_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw LavenderHouse1Blocks, LavenderHouse1TextPointers, LavenderHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw LavenderHouse1Object ; objects
+INCLUDE "mapHeaders/LavenderHouse1.asm"
 
 LavenderHouse1Script: ; 1d8a8 (7:58a8)
 	call EnableAutoTextBoxDrawing
@@ -39871,34 +35196,10 @@ MrFujiAfterFluteText: ; 1d960 (7:5960)
 LavenderHouse1Text6: ; 1d965 (7:5965)
 	TX_FAR _LavenderHouse1Text6
 	db "@"
+	
+INCLUDE "mapObjects/LavenderHouse1.asm"
 
-LavenderHouse1Object: ; 0x1d96a (size=56)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $ff, $1 ; person
-	db SPRITE_LITTLE_GIRL, $3 + 4, $6 + 4, $ff, $d0, $2 ; person
-	db SPRITE_SLOWBRO, $4 + 4, $6 + 4, $ff, $d1, $3 ; person
-	db SPRITE_SLOWBRO, $3 + 4, $1 + 4, $ff, $ff, $4 ; person
-	db SPRITE_MR_FUJI, $1 + 4, $3 + 4, $ff, $ff, $5 ; person
-	db SPRITE_BOOK_MAP_DEX, $3 + 4, $3 + 4, $ff, $ff, $6 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
-	db $08 ; tileset
-	db LAVENDER_HOUSE_2_HEIGHT, LAVENDER_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw LavenderHouse2Blocks, LavenderHouse2TextPointers, LavenderHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw LavenderHouse2Object ; objects
+INCLUDE "mapHeaders/LavenderHouse2.asm"
 
 LavenderHouse2Script: ; 1d9ae (7:59ae)
 	call EnableAutoTextBoxDrawing
@@ -39936,30 +35237,10 @@ UnnamedText_1d9dc: ; 1d9dc (7:59dc)
 UnnamedText_1d9e1: ; 1d9e1 (7:59e1)
 	TX_FAR _UnnamedText_1d9e1
 	db "@"
-
-LavenderHouse2Object: ; 0x1d9e6 (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_SLOWBRO, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
-	db SPRITE_BRUNETTE_GIRL, $4 + 4, $2 + 4, $ff, $d3, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
-	db $08 ; tileset
-	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
-	dw NameRaterBlocks, NameRaterTextPointers, NameRaterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw NameRaterObject ; objects
+	
+INCLUDE "mapObjects/LavenderHouse2.asm"
+	
+INCLUDE "mapHeaders/NameRater.asm"
 
 NameRaterScript: ; 1da12 (7:5a12)
 	jp EnableAutoTextBoxDrawing
@@ -40070,29 +35351,10 @@ UnnamedText_1dacc: ; 1dacc (7:5acc)
 UnnamedText_1dad1: ; 1dad1 (7:5ad1)
 	TX_FAR _UnnamedText_1dad1
 	db "@"
+	
+INCLUDE "mapObjects/NameRater.asm"
 
-NameRaterObject: ; 0x1dad6 (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $5, $ff
-	db $7, $3, $5, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_MR_MASTERBALL, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
-	db $08 ; tileset
-	db VERMILION_HOUSE_1_HEIGHT, VERMILION_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw VermilionHouse1Blocks, VermilionHouse1TextPointers, VermilionHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionHouse1Object ; objects
+INCLUDE "mapHeaders/VermilionHouse1.asm"	
 
 VermilionHouse1Script: ; 1dafc (7:5afc)
 	call EnableAutoTextBoxDrawing
@@ -40118,31 +35380,10 @@ VermilionHouse1Text2: ; 1db0b (7:5b0b)
 VermilionHouse1Text3: ; 1db1b (7:5b1b)
 	TX_FAR _VermilionHouse1Text3
 	db "@"
-
-VermilionHouse1Object: ; 0x1db20 (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BUG_CATCHER, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
-	db SPRITE_BIRD, $5 + 4, $3 + 4, $fe, $2, $2 ; person
-	db SPRITE_PAPER_SHEET, $3 + 4, $4 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
-	db $0e ; tileset
-	db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
-	dw VermilionDockBlocks, VermilionDockTextPointers, VermilionDockScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionDockObject ; objects
+	
+INCLUDE "mapObjects/VermilionHouse1.asm"
+	
+INCLUDE "mapHeaders/VermilionDock.asm"	
 
 VermilionDockScript: ; 1db52 (7:5b52)
 	call EnableAutoTextBoxDrawing
@@ -40354,31 +35595,13 @@ VermilionDockTextPointers: ; 1dcbf (7:5cbf)
 VermilionDockText1: ; 1dcc1 (7:5cc1)
 	TX_FAR _VermilionDockText1
 	db "@"
-
-VermilionDockObject: ; 0x1dcc6 (size=20)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $0, $e, $5, $ff
-	db $2, $e, $1, SS_ANNE_1
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $e, $0, $e
-	EVENT_DISP $e, $2, $e ; SS_ANNE_1
+	
+INCLUDE "mapObjects/VermilionDock.asm"
 
 VermilionDockBlocks: ; 1dcda (7:5cda)
 	INCBIN "maps/vermiliondock.blk"
-
-CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
-	db $08 ; tileset
-	db CELADON_MANSION_5_HEIGHT, CELADON_MANSION_5_WIDTH ; dimensions (y, x)
-	dw CeladonMansion5Blocks, CeladonMansion5TextPointers, CeladonMansion5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMansion5Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMansion5.asm"	
 
 CeladonMansion5Script: ; 1dd3a (7:5d3a)
 	jp EnableAutoTextBoxDrawing
@@ -40403,29 +35626,9 @@ CeladonMansion5Text2: ; 1dd46 (7:5d46)
 .asm_24365 ; 0x1dd59
 	jp TextScriptEnd
 
-CeladonMansion5Object: ; 0x1dd5c (size=32)
-	db $a ; border tile
+INCLUDE "mapObjects/CeladonMansion5.asm"	
 
-	db $2 ; warps
-	db $7, $2, $2, CELADON_MANSION_4
-	db $7, $3, $2, CELADON_MANSION_4
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_HIKER, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_BALL, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; CELADON_MANSION_4
-	EVENT_DISP $4, $7, $3 ; CELADON_MANSION_4
-
-FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
-	db $02 ; tileset
-	db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
-	dw FuchsiaMartBlocks, FuchsiaMartTextPointers, FuchsiaMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaMartObject ; objects
+INCLUDE "mapHeaders/FuchsiaMart.asm"	
 
 FuchsiaMartScript: ; 1dd88 (7:5d88)
 	jp EnableAutoTextBoxDrawing
@@ -40442,34 +35645,13 @@ FuchsiaMartText2: ; 1dd91 (7:5d91)
 FuchsiaMartText3: ; 1dd96 (7:5d96)
 	TX_FAR _FuchsiaMartText3
 	db "@"
-
-FuchsiaMartObject: ; 0x1dd9b (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_FAT_BALD_GUY, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $1, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
+	
+INCLUDE "mapObjects/FuchsiaMart.asm"	
 
 FuchsiaMartBlocks: ; 1ddc1 (7:5dc1)
 	INCBIN "maps/fuchsiamart.blk"
-
-SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
-	db $08 ; tileset
-	db SAFFRON_HOUSE_1_HEIGHT, SAFFRON_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw SaffronHouse1Blocks, SaffronHouse1TextPointers, SaffronHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SaffronHouse1Object ; objects
+	
+INCLUDE "mapHeaders/SaffronHouse1.asm"	
 
 SaffronHouse1Script: ; 1dddd (7:5ddd)
 	jp EnableAutoTextBoxDrawing
@@ -40498,32 +35680,10 @@ SaffronHouse1Text3: ; 1ddfa (7:5dfa)
 SaffronHouse1Text4: ; 1ddff (7:5dff)
 	TX_FAR _SaffronHouse1Text4
 	db "@"
+	
+INCLUDE "mapObjects/SaffronHouse1.asm"	
 
-SaffronHouse1Object: ; 0x1de04 (size=44)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $3, $ff
-	db $7, $3, $3, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BIRD, $4 + 4, $0 + 4, $fe, $1, $2 ; person
-	db SPRITE_BUG_CATCHER, $1 + 4, $4 + 4, $ff, $d0, $3 ; person
-	db SPRITE_PAPER_SHEET, $3 + 4, $3 + 4, $ff, $ff, $4 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
-	db $08 ; tileset
-	db SAFFRON_HOUSE_2_HEIGHT, SAFFRON_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw SaffronHouse2Blocks, SaffronHouse2TextPointers, SaffronHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SaffronHouse2Object ; objects
+INCLUDE "mapHeaders/SaffronHouse2.asm"	
 
 SaffronHouse2Script: ; 1de3c (7:5e3c)
 	jp EnableAutoTextBoxDrawing
@@ -40571,29 +35731,10 @@ TM29ExplanationText: ; 1de80 (7:5e80)
 TM29NoRoomText: ; 1de85 (7:5e85)
 	TX_FAR _TM29NoRoomText
 	db "@"
+	
+INCLUDE "mapObjects/SaffronHouse2.asm"	
 
-SaffronHouse2Object: ; 0x1de8a (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $7, $ff
-	db $7, $3, $7, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
-	db $11 ; tileset
-	db DIGLETTS_CAVE_EXIT_HEIGHT, DIGLETTS_CAVE_EXIT_WIDTH ; dimensions (y, x)
-	dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2TextPointers, DiglettsCaveRoute2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw DiglettsCaveRoute2Object ; objects
+INCLUDE "mapHeaders/DiglettsCaveRoute2.asm"	
 
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
 	ld a, $d
@@ -40606,31 +35747,10 @@ DiglettsCaveRoute2TextPointers: ; 1deb8 (7:5eb8)
 DiglettsCaveRoute2Text1: ; 1deba (7:5eba)
 	TX_FAR _DiglettsCaveRoute2Text1
 	db "@"
+	
+INCLUDE "mapObjects/DiglettsCaveRoute2.asm"	
 
-DiglettsCaveRoute2Object: ; 0x1debf (size=34)
-	db $7d ; border tile
-
-	db $3 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-	db $4, $4, $0, DIGLETTS_CAVE
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $3 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $4, $4 ; DIGLETTS_CAVE
-
-Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
-	db $08 ; tileset
-	db ROUTE_2_HOUSE_HEIGHT, ROUTE_2_HOUSE_WIDTH ; dimensions (y, x)
-	dw Route2HouseBlocks, Route2HouseTextPointers, Route2HouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route2HouseObject ; objects
+INCLUDE "mapHeaders/Route2House.asm"	
 
 Route2HouseScript: ; 1deed (7:5eed)
 	jp EnableAutoTextBoxDrawing
@@ -40650,30 +35770,10 @@ Route2HouseText2: ; 1def9 (7:5ef9)
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
-
-Route2HouseObject: ; 0x1df07 (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_GAMEBOY_KID_COPY, $1 + 4, $4 + 4, $ff, $d0, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
-	db $0c ; tileset
-	db ROUTE_5_GATE_HEIGHT, ROUTE_5_GATE_WIDTH ; dimensions (y, x)
-	dw Route5GateBlocks, Route5GateTextPointers, Route5GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route5GateObject ; objects
+	
+INCLUDE "mapObjects/Route2House.asm"	
+	
+INCLUDE "mapHeaders/Route5Gate.asm"	
 
 Route5GateScript: ; 1df33 (7:5f33)
 	call EnableAutoTextBoxDrawing
@@ -40796,36 +35896,13 @@ UnnamedText_1dfec: ; 1dfec (7:5fec)
 UnnamedText_1dff6: ; 1dff6 (7:5ff6)
 	TX_FAR _UnnamedText_1dff6
 	db "@"
-
-Route5GateObject: ; 0x1dffb (size=42)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $5, $3, $2, $ff
-	db $5, $4, $2, $ff
-	db $0, $3, $1, $ff
-	db $0, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $3 + 4, $1 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $5, $3
-	EVENT_DISP $4, $5, $4
-	EVENT_DISP $4, $0, $3
-	EVENT_DISP $4, $0, $4
+	
+INCLUDE "mapObjects/Route5Gate.asm"	
 
 Route5GateBlocks: ; 1e025 (7:6025)
 	INCBIN "maps/route5gate.blk"
-
-Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
-	db $0c ; tileset
-	db ROUTE_6_GATE_HEIGHT, ROUTE_6_GATE_WIDTH ; dimensions (y, x)
-	dw Route6GateBlocks, Route6GateTextPointers, Route6GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route6GateObject ; objects
+	
+INCLUDE "mapHeaders/Route6Gate.asm"	
 
 Route6GateScript: ; 1e03d (7:603d)
 	call EnableAutoTextBoxDrawing
@@ -40899,36 +35976,13 @@ Route6GateTextPointers: ; 1e0b8 (7:60b8)
 	dw Route6GateText1
 	dw Route6GateText2
 	dw Route6GateText3
-
-Route6GateObject: ; 0x1e0be (size=42)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $5, $3, $2, $ff
-	db $5, $4, $2, $ff
-	db $0, $3, $1, $ff
-	db $0, $4, $1, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $5, $3
-	EVENT_DISP $4, $5, $4
-	EVENT_DISP $4, $0, $3
-	EVENT_DISP $4, $0, $4
+	
+INCLUDE "mapObjects/Route6Gate.asm"	
 
 Route6GateBlocks: ; 1e0e8 (7:60e8)
 	INCBIN "maps/route6gate.blk"
-
-Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
-	db $0c ; tileset
-	db ROUTE_7_GATE_HEIGHT, ROUTE_7_GATE_WIDTH ; dimensions (y, x)
-	dw Route7GateBlocks, Route7GateTextPointers, Route7GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route7GateObject ; objects
+	
+INCLUDE "mapHeaders/Route7Gate.asm"	
 
 Route7GateScript: ; 1e100 (7:6100)
 	call EnableAutoTextBoxDrawing
@@ -41005,36 +36059,13 @@ Route7GateTextPointers: ; 1e17f (7:617f)
 	dw Route7GateText1
 	dw Route7GateText2
 	dw Route7GateText3
-
-Route7GateObject: ; 0x1e185 (size=42)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $3, $0, $3, $ff
-	db $4, $0, $3, $ff
-	db $3, $5, $0, $ff
-	db $4, $5, $1, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $3, $3, $0
-	EVENT_DISP $3, $4, $0
-	EVENT_DISP $3, $3, $5
-	EVENT_DISP $3, $4, $5
+	
+INCLUDE "mapObjects/Route7Gate.asm"	
 
 Route7GateBlocks: ; 1e1af (7:61af)
 	INCBIN "maps/route7gate.blk"
 
-Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
-	db $0c ; tileset
-	db ROUTE_8_GATE_HEIGHT, ROUTE_8_GATE_WIDTH ; dimensions (y, x)
-	dw Route8GateBlocks, Route8GateTextPointers, Route8GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route8GateObject ; objects
+INCLUDE "mapHeaders/Route8Gate.asm"	
 
 Route8GateScript: ; 1e1c7 (7:61c7)
 	call EnableAutoTextBoxDrawing
@@ -41108,36 +36139,13 @@ Route8GateTextPointers: ; 1e241 (7:6241)
 	dw Route8GateText1
 	dw Route8GateText2
 	dw Route8GateText3
-
-Route8GateObject: ; 0x1e247 (size=42)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $3, $0, $0, $ff
-	db $4, $0, $1, $ff
-	db $3, $5, $2, $ff
-	db $4, $5, $3, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $1 + 4, $2 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $3, $3, $0
-	EVENT_DISP $3, $4, $0
-	EVENT_DISP $3, $3, $5
-	EVENT_DISP $3, $4, $5
+	
+INCLUDE "mapObjects/Route8Gate.asm"	
 
 Route8GateBlocks: ; 1e271 (7:6271)
 	INCBIN "maps/route8gate.blk"
-
-UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
-	db $0c ; tileset
-	db PATH_ENTRANCE_ROUTE_8_HEIGHT, PATH_ENTRANCE_ROUTE_8_WIDTH ; dimensions (y, x)
-	dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8TextPointers, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundPathEntranceRoute8Object ; objects
+	
+INCLUDE "mapHeaders/UndergroundPathRoute8.asm"	
 
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
 	ld a, $13
@@ -41150,31 +36158,10 @@ UndergroundPathEntranceRoute8TextPointers: ; 1e291 (7:6291)
 UndergroundPathEntranceRoute8Text1: ; 1e293 (7:6293)
 	TX_FAR _UndergroundPathEntRoute8Text1
 	db "@"
-
-UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-	db $4, $4, $1, UNDERGROUND_PATH_WE
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GIRL, $4 + 4, $3 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
-
-PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
-	db $16 ; tileset
-	db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
-	dw PowerPlantBlocks, PowerPlantTextPointers, PowerPlantScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw PowerPlantObject ; objects
+	
+INCLUDE "mapObjects/UndergroundPathRoute8.asm"	
+	
+INCLUDE "mapHeaders/PowerPlant.asm"	
 
 PowerPlantScript: ; 1e2c6 (7:62c6)
 	call EnableAutoTextBoxDrawing
@@ -41352,47 +36339,13 @@ ZapdosBattleText: ; 1e3af (7:63af)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-
-PowerPlantObject: ; 0x1e3bf (size=135)
-	db $2e ; border tile
-
-	db $3 ; warps
-	db $23, $4, $3, $ff
-	db $23, $5, $3, $ff
-	db $b, $0, $3, $ff
-
-	db $0 ; signs
-
-	db $e ; people
-	db SPRITE_BALL, $14 + 4, $9 + 4, $ff, $ff, $41, VOLTORB, 40 ; trainer
-	db SPRITE_BALL, $12 + 4, $20 + 4, $ff, $ff, $42, VOLTORB, 40 ; trainer
-	db SPRITE_BALL, $19 + 4, $15 + 4, $ff, $ff, $43, VOLTORB, 40 ; trainer
-	db SPRITE_BALL, $12 + 4, $19 + 4, $ff, $ff, $44, ELECTRODE, 43 ; trainer
-	db SPRITE_BALL, $22 + 4, $17 + 4, $ff, $ff, $45, VOLTORB, 40 ; trainer
-	db SPRITE_BALL, $1c + 4, $1a + 4, $ff, $ff, $46, VOLTORB, 40 ; trainer
-	db SPRITE_BALL, $e + 4, $15 + 4, $ff, $ff, $47, ELECTRODE, 43 ; trainer
-	db SPRITE_BALL, $20 + 4, $25 + 4, $ff, $ff, $48, VOLTORB, 40 ; trainer
-	db SPRITE_BIRD, $9 + 4, $4 + 4, $ff, $d1, $49, ZAPDOS, 50 ; trainer
-	db SPRITE_BALL, $19 + 4, $7 + 4, $ff, $ff, $8a, CARBOS ; item
-	db SPRITE_BALL, $3 + 4, $1c + 4, $ff, $ff, $8b, HP_UP ; item
-	db SPRITE_BALL, $3 + 4, $22 + 4, $ff, $ff, $8c, RARE_CANDY ; item
-	db SPRITE_BALL, $20 + 4, $1a + 4, $ff, $ff, $8d, TM_25 ; item
-	db SPRITE_BALL, $20 + 4, $14 + 4, $ff, $ff, $8e, TM_33 ; item
-
-	; warp-to
-	EVENT_DISP $14, $23, $4
-	EVENT_DISP $14, $23, $5
-	EVENT_DISP $14, $b, $0
+	
+INCLUDE "mapObjects/PowerPlant.asm"	
 
 PowerPlantBlocks: ; 1e446 (7:6446)
 	INCBIN "maps/powerplant.blk"
-
-DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
-	db $11 ; tileset
-	db DIGLETTS_CAVE_ENTRANCE_HEIGHT, DIGLETTS_CAVE_ENTRANCE_WIDTH ; dimensions (y, x)
-	dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11TextPointers, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw DiglettsCaveEntranceRoute11Object ; objects
+	
+INCLUDE "mapHeaders/DiglettsCaveRoute11.asm"
 
 DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 	call EnableAutoTextBoxDrawing
@@ -41406,31 +36359,10 @@ DiglettsCaveEntranceRoute11TextPointers: ; 1e5c3 (7:65c3)
 DiglettsCaveEntranceRoute11Text1: ; 1e5c5 (7:65c5)
 	TX_FAR _DiglettsCaveEntRoute11Text1
 	db "@"
-
-DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
-	db $7d ; border tile
-
-	db $3 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
-	db $4, $4, $1, DIGLETTS_CAVE
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GAMBLER, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $4, $4 ; DIGLETTS_CAVE
-
-Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
-	db $08 ; tileset
-	db ROUTE_16_HOUSE_HEIGHT, ROUTE_16_HOUSE_WIDTH ; dimensions (y, x)
-	dw Route16HouseBlocks, Route16HouseTextPointers, Route16HouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route16HouseObject ; objects
+	
+INCLUDE "mapObjects/DiglettsCaveRoute11.asm"
+	
+INCLUDE "mapHeaders/Route16House.asm"
 
 Route16HouseScript: ; 1e5f8 (7:65f8)
 	jp EnableAutoTextBoxDrawing
@@ -41488,30 +36420,10 @@ Route16HouseText2: ; 1e640 (7:6640)
 UnnamedText_1e652: ; 1e652 (7:6652)
 	TX_FAR _UnnamedText_1e652
 	db "@"
+	
+INCLUDE "mapObjects/Route16House.asm"
 
-Route16HouseObject: ; 0x1e657 (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $8, $ff
-	db $7, $3, $8, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BIRD, $4 + 4, $6 + 4, $fe, $0, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
-	db $0c ; tileset
-	db ROUTE_22_GATE_HEIGHT, ROUTE_22_GATE_WIDTH ; dimensions (y, x)
-	dw Route22GateBlocks, Route22GateTextPointers, Route22GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route22GateObject ; objects
+INCLUDE "mapHeaders/Route22Gate.asm"
 
 Route22GateScript: ; 1e683 (7:6683)
 	call EnableAutoTextBoxDrawing
@@ -41605,36 +36517,13 @@ UnnamedText_1e715: ; 1e715 (7:6715)
 UnnamedText_1e71a: ; 1e71a (7:671a)
 	TX_FAR _UnnamedText_1e71a ; 0x8d03e
 	db $0B, "@"
-
-Route22GateObject: ; 0x1e720 (size=42)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $7, $4, $0, $ff
-	db $7, $5, $0, $ff
-	db $0, $4, $0, $ff
-	db $0, $5, $1, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
-	EVENT_DISP $5, $0, $4
-	EVENT_DISP $5, $0, $5
+	
+INCLUDE "mapObjects/Route22Gate.asm"
 
 Route22GateBlocks: ; 1e74a (7:674a)
 	INCBIN "maps/route22gate.blk"
-
-BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
-	db $10 ; tileset
-	db BILLS_HOUSE_HEIGHT, BILLS_HOUSE_WIDTH ; dimensions (y, x)
-	dw BillsHouseBlocks, BillsHouseTextPointers, BillsHouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw BillsHouseObject ; objects
+	
+INCLUDE "mapHeaders/BillsHouse.asm"
 
 BillsHouseScript: ; 1e76a (7:676a)
 	call EnableAutoTextBoxDrawing
@@ -41844,24 +36733,8 @@ BillsHouseText3: ; 1e8d0 (7:68d0)
 UnnamedText_1e8da: ; 1e8da (7:68da)
 	TX_FAR _UnnamedText_1e8da
 	db "@"
-
-BillsHouseObject: ; 0x1e8df (size=38)
-	db $d ; border tile
-
-	db $2 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_SLOWBRO, $5 + 4, $6 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $6 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	
+INCLUDE "mapObjects/BillsHouse.asm"
 
 BillsHouseBlocks: ; 1e905 (7:6905)
 	INCBIN "maps/billshouse.blk"
@@ -45112,5556 +39985,8 @@ Moves: ; 38000 (e:4000)
 	db SLASH       ,NO_ADDITIONAL_EFFECT      ,$46,NORMAL,  $FF,20
 	db SUBSTITUTE  ,SUBSTITUTE_EFFECT         ,$00,NORMAL,  $FF,10
 	db STRUGGLE    ,RECOIL_EFFECT             ,$32,NORMAL,  $FF,10
-
-BulbasaurBaseStats: ; 383de (e:43de)
-	db DEX_BULBASAUR ; pokedex id
-	db 45 ; base hp
-	db 49 ; base attack
-	db 49 ; base defense
-	db 45 ; base speed
-	db 65 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 64 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw BulbasaurPicFront
-	dw BulbasaurPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db GROWL
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-IvysaurBaseStats: ; 383fa (e:43fa)
-	db DEX_IVYSAUR ; pokedex id
-	db 60 ; base hp
-	db 62 ; base attack
-	db 63 ; base defense
-	db 60 ; base speed
-	db 80 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 141 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw IvysaurPicFront
-	dw IvysaurPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db GROWL
-	db LEECH_SEED
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-VenusaurBaseStats: ; 38416 (e:4416)
-	db DEX_VENUSAUR ; pokedex id
-	db 80 ; base hp
-	db 82 ; base attack
-	db 83 ; base defense
-	db 80 ; base speed
-	db 100 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 208 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw VenusaurPicFront
-	dw VenusaurPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db GROWL
-	db LEECH_SEED
-	db VINE_WHIP
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-CharmanderBaseStats: ; 38432 (e:4432)
-	db DEX_CHARMANDER ; pokedex id
-	db 39 ; base hp
-	db 52 ; base attack
-	db 43 ; base defense
-	db 65 ; base speed
-	db 50 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 45 ; catch rate
-	db 65 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw CharmanderPicFront
-	dw CharmanderPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110101
-	db %00000011
-	db %01001111
-	db %11001000
-	db %11100011
-	db %00001000
-	db %00100110
-
-	db 0 ; padding
-
-CharmeleonBaseStats: ; 3844e (e:444e)
-	db DEX_CHARMELEON ; pokedex id
-	db 58 ; base hp
-	db 64 ; base attack
-	db 58 ; base defense
-	db 80 ; base speed
-	db 65 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 45 ; catch rate
-	db 142 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw CharmeleonPicFront
-	dw CharmeleonPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db EMBER
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110101
-	db %00000011
-	db %01001111
-	db %11001000
-	db %11100011
-	db %00001000
-	db %00100110
-
-	db 0 ; padding
-
-CharizardBaseStats: ; 3846a (e:446a)
-	db DEX_CHARIZARD ; pokedex id
-	db 78 ; base hp
-	db 84 ; base attack
-	db 78 ; base defense
-	db 100 ; base speed
-	db 85 ; base special
-
-	db FIRE ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 209 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw CharizardPicFront
-	dw CharizardPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db EMBER
-	db LEER
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110101
-	db %01000011
-	db %01001111
-	db %11001110
-	db %11100011
-	db %00001000
-	db %00100110
-
-	db 0 ; padding
-
-SquirtleBaseStats: ; 38486 (e:4486)
-	db DEX_SQUIRTLE ; pokedex id
-	db 44 ; base hp
-	db 48 ; base attack
-	db 65 ; base defense
-	db 43 ; base speed
-	db 50 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 66 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw SquirtlePicFront
-	dw SquirtlePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db TAIL_WHIP
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %00001111
-	db %11001000
-	db %10000011
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-WartortleBaseStats: ; 384a2 (e:44a2)
-	db DEX_WARTORTLE ; pokedex id
-	db 59 ; base hp
-	db 63 ; base attack
-	db 80 ; base defense
-	db 58 ; base speed
-	db 65 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 143 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw WartortlePicFront
-	dw WartortlePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db TAIL_WHIP
-	db BUBBLE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %00001111
-	db %11001000
-	db %10000011
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-BlastoiseBaseStats: ; 384be (e:44be)
-	db DEX_BLASTOISE ; pokedex id
-	db 79 ; base hp
-	db 83 ; base attack
-	db 100 ; base defense
-	db 78 ; base speed
-	db 85 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 210 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw BlastoisePicFront
-	dw BlastoisePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db TAIL_WHIP
-	db BUBBLE
-	db WATER_GUN
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %00001111
-	db %11001110
-	db %10000011
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-CaterpieBaseStats: ; 384da (e:44da)
-	db DEX_CATERPIE ; pokedex id
-	db 45 ; base hp
-	db 30 ; base attack
-	db 35 ; base defense
-	db 45 ; base speed
-	db 20 ; base special
-
-	db BUG ; species type 1
-	db BUG ; species type 2
-
-	db 255 ; catch rate
-	db 53 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw CaterpiePicFront
-	dw CaterpiePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db STRING_SHOT
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-MetapodBaseStats: ; 384f6 (e:44f6)
-	db DEX_METAPOD ; pokedex id
-	db 50 ; base hp
-	db 20 ; base attack
-	db 55 ; base defense
-	db 30 ; base speed
-	db 25 ; base special
-
-	db BUG ; species type 1
-	db BUG ; species type 2
-
-	db 120 ; catch rate
-	db 72 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MetapodPicFront
-	dw MetapodPicBack
-
-	; attacks known at lvl 0
-	db HARDEN
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-ButterfreeBaseStats: ; 38512 (e:4512)
-	db DEX_BUTTERFREE ; pokedex id
-	db 60 ; base hp
-	db 45 ; base attack
-	db 50 ; base defense
-	db 70 ; base speed
-	db 80 ; base special
-
-	db BUG ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 160 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ButterfreePicFront
-	dw ButterfreePicBack
-
-	; attacks known at lvl 0
-	db CONFUSION
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00111000
-	db %11110000
-	db %01000011
-	db %00101000
-	db %00000010
-
-	db 0 ; padding
-
-WeedleBaseStats: ; 3852e (e:452e)
-	db DEX_WEEDLE ; pokedex id
-	db 40 ; base hp
-	db 35 ; base attack
-	db 30 ; base defense
-	db 50 ; base speed
-	db 20 ; base special
-
-	db BUG ; species type 1
-	db POISON ; species type 2
-
-	db 255 ; catch rate
-	db 52 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw WeedlePicFront
-	dw WeedlePicBack
-
-	; attacks known at lvl 0
-	db POISON_STING
-	db STRING_SHOT
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-KakunaBaseStats: ; 3854a (e:454a)
-	db DEX_KAKUNA ; pokedex id
-	db 45 ; base hp
-	db 25 ; base attack
-	db 50 ; base defense
-	db 35 ; base speed
-	db 25 ; base special
-
-	db BUG ; species type 1
-	db POISON ; species type 2
-
-	db 120 ; catch rate
-	db 71 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw KakunaPicFront
-	dw KakunaPicBack
-
-	; attacks known at lvl 0
-	db HARDEN
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-BeedrillBaseStats: ; 38566 (e:4566)
-	db DEX_BEEDRILL ; pokedex id
-	db 65 ; base hp
-	db 80 ; base attack
-	db 40 ; base defense
-	db 75 ; base speed
-	db 45 ; base special
-
-	db BUG ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 159 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw BeedrillPicFront
-	dw BeedrillPicBack
-
-	; attacks known at lvl 0
-	db FURY_ATTACK
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100100
-	db %01000011
-	db %00011000
-	db %11000000
-	db %11000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-PidgeyBaseStats: ; 38582 (e:4582)
-	db DEX_PIDGEY ; pokedex id
-	db 40 ; base hp
-	db 45 ; base attack
-	db 40 ; base defense
-	db 56 ; base speed
-	db 35 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 255 ; catch rate
-	db 55 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw PidgeyPicFront
-	dw PidgeyPicBack
-
-	; attacks known at lvl 0
-	db GUST
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00101010
-	db %00000011
-	db %00001000
-	db %11000000
-	db %01000011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-PidgeottoBaseStats: ; 3859e (e:459e)
-	db DEX_PIDGEOTTO ; pokedex id
-	db 63 ; base hp
-	db 60 ; base attack
-	db 55 ; base defense
-	db 71 ; base speed
-	db 50 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 120 ; catch rate
-	db 113 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw PidgeottoPicFront
-	dw PidgeottoPicBack
-
-	; attacks known at lvl 0
-	db GUST
-	db SAND_ATTACK
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00101010
-	db %00000011
-	db %00001000
-	db %11000000
-	db %01000011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-PidgeotBaseStats: ; 385ba (e:45ba)
-	db DEX_PIDGEOT ; pokedex id
-	db 83 ; base hp
-	db 80 ; base attack
-	db 75 ; base defense
-	db 91 ; base speed
-	db 70 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 172 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw PidgeotPicFront
-	dw PidgeotPicBack
-
-	; attacks known at lvl 0
-	db GUST
-	db SAND_ATTACK
-	db QUICK_ATTACK
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00001000
-	db %11000000
-	db %01000011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-RattataBaseStats: ; 385d6 (e:45d6)
-	db DEX_RATTATA ; pokedex id
-	db 30 ; base hp
-	db 56 ; base attack
-	db 35 ; base defense
-	db 72 ; base speed
-	db 25 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 255 ; catch rate
-	db 57 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw RattataPicFront
-	dw RattataPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db TAIL_WHIP
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00101111
-	db %10001000
-	db %11001001
-	db %11000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-RaticateBaseStats: ; 385f2 (e:45f2)
-	db DEX_RATICATE ; pokedex id
-	db 55 ; base hp
-	db 81 ; base attack
-	db 60 ; base defense
-	db 97 ; base speed
-	db 50 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 90 ; catch rate
-	db 116 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw RaticatePicFront
-	dw RaticatePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db TAIL_WHIP
-	db QUICK_ATTACK
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01111111
-	db %10001000
-	db %11001001
-	db %11000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-SpearowBaseStats: ; 3860e (e:460e)
-	db DEX_SPEAROW ; pokedex id
-	db 40 ; base hp
-	db 60 ; base attack
-	db 30 ; base defense
-	db 70 ; base speed
-	db 31 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 255 ; catch rate
-	db 58 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw SpearowPicFront
-	dw SpearowPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db GROWL
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %00000011
-	db %00001000
-	db %11000000
-	db %01000010
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-FearowBaseStats: ; 3862a (e:462a)
-	db DEX_FEAROW ; pokedex id
-	db 65 ; base hp
-	db 90 ; base attack
-	db 65 ; base defense
-	db 100 ; base speed
-	db 61 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 90 ; catch rate
-	db 162 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw FearowPicFront
-	dw FearowPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db GROWL
-	db LEER
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00001000
-	db %11000000
-	db %01000010
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-EkansBaseStats: ; 38646 (e:4646)
-	db DEX_EKANS ; pokedex id
-	db 35 ; base hp
-	db 60 ; base attack
-	db 44 ; base defense
-	db 55 ; base speed
-	db 40 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 255 ; catch rate
-	db 62 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw EkansPicFront
-	dw EkansPicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db LEER
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %00011000
-	db %11001110
-	db %10000010
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-ArbokBaseStats: ; 38662 (e:4662)
-	db DEX_ARBOK ; pokedex id
-	db 60 ; base hp
-	db 85 ; base attack
-	db 69 ; base defense
-	db 80 ; base speed
-	db 65 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 90 ; catch rate
-	db 147 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ArbokPicFront
-	dw ArbokPicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db LEER
-	db POISON_STING
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %00011000
-	db %11001110
-	db %10000010
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-PikachuBaseStats: ; 3867e (e:467e)
-	db DEX_PIKACHU ; pokedex id
-	db 35 ; base hp
-	db 55 ; base attack
-	db 30 ; base defense
-	db 90 ; base speed
-	db 50 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 190 ; catch rate
-	db 82 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw PikachuPicFront
-	dw PikachuPicBack
-
-	; attacks known at lvl 0
-	db THUNDERSHOCK
-	db GROWL
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %10000011
-	db %10001101
-	db %11000001
-	db %11000011
-	db %00011000
-	db %01000010
-
-	db 0 ; padding
-
-RaichuBaseStats: ; 3869a (e:469a)
-	db DEX_RAICHU ; pokedex id
-	db 60 ; base hp
-	db 90 ; base attack
-	db 55 ; base defense
-	db 100 ; base speed
-	db 90 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 75 ; catch rate
-	db 122 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw RaichuPicFront
-	dw RaichuPicBack
-
-	; attacks known at lvl 0
-	db THUNDERSHOCK
-	db GROWL
-	db THUNDER_WAVE
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11000011
-	db %10001101
-	db %11000001
-	db %11000011
-	db %00011000
-	db %01000010
-
-	db 0 ; padding
-
-SandshrewBaseStats: ; 386b6 (e:46b6)
-	db DEX_SANDSHREW ; pokedex id
-	db 50 ; base hp
-	db 75 ; base attack
-	db 85 ; base defense
-	db 40 ; base speed
-	db 30 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 255 ; catch rate
-	db 93 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw SandshrewPicFront
-	dw SandshrewPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %00000011
-	db %00001101
-	db %11001110
-	db %11000010
-	db %10001000
-	db %00100110
-
-	db 0 ; padding
-
-SandslashBaseStats: ; 386d2 (e:46d2)
-	db DEX_SANDSLASH ; pokedex id
-	db 75 ; base hp
-	db 100 ; base attack
-	db 110 ; base defense
-	db 65 ; base speed
-	db 55 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 90 ; catch rate
-	db 163 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw SandslashPicFront
-	dw SandslashPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db SAND_ATTACK
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00001101
-	db %11001110
-	db %11000010
-	db %10001000
-	db %00100110
-
-	db 0 ; padding
-
-NidoranFBaseStats: ; 386ee (e:46ee)
-	db DEX_NIDORAN_F ; pokedex id
-	db 55 ; base hp
-	db 47 ; base attack
-	db 52 ; base defense
-	db 41 ; base speed
-	db 40 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 235 ; catch rate
-	db 59 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw NidoranFPicFront
-	dw NidoranFPicBack
-
-	; attacks known at lvl 0
-	db GROWL
-	db TACKLE
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00100011
-	db %10001000
-	db %11000001
-	db %10000011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-NidorinaBaseStats: ; 3870a (e:470a)
-	db DEX_NIDORINA ; pokedex id
-	db 70 ; base hp
-	db 62 ; base attack
-	db 67 ; base defense
-	db 56 ; base speed
-	db 55 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 120 ; catch rate
-	db 117 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw NidorinaPicFront
-	dw NidorinaPicBack
-
-	; attacks known at lvl 0
-	db GROWL
-	db TACKLE
-	db SCRATCH
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00111111
-	db %10001000
-	db %11000001
-	db %10000011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-NidoqueenBaseStats: ; 38726 (e:4726)
-	db DEX_NIDOQUEEN ; pokedex id
-	db 90 ; base hp
-	db 82 ; base attack
-	db 87 ; base defense
-	db 76 ; base speed
-	db 75 ; base special
-
-	db POISON ; species type 1
-	db GROUND ; species type 2
-
-	db 45 ; catch rate
-	db 194 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw NidoqueenPicFront
-	dw NidoqueenPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SCRATCH
-	db TAIL_WHIP
-	db BODY_SLAM
-
-	db 3 ; growth rate
-
-	; learnset
-	db %11110001
-	db %11111111
-	db %10001111
-	db %11000111
-	db %10100011
-	db %10001000
-	db %00110010
-
-	db 0 ; padding
-
-NidoranMBaseStats: ; 38742 (e:4742)
-	db DEX_NIDORAN_M ; pokedex id
-	db 46 ; base hp
-	db 57 ; base attack
-	db 40 ; base defense
-	db 50 ; base speed
-	db 40 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 235 ; catch rate
-	db 60 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw NidoranMPicFront
-	dw NidoranMPicBack
-
-	; attacks known at lvl 0
-	db LEER
-	db TACKLE
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00100011
-	db %10001000
-	db %11000001
-	db %10000011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-NidorinoBaseStats: ; 3875e (e:475e)
-	db DEX_NIDORINO ; pokedex id
-	db 61 ; base hp
-	db 72 ; base attack
-	db 57 ; base defense
-	db 65 ; base speed
-	db 55 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 120 ; catch rate
-	db 118 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw NidorinoPicFront
-	dw NidorinoPicBack
-
-	; attacks known at lvl 0
-	db LEER
-	db TACKLE
-	db HORN_ATTACK
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00111111
-	db %10001000
-	db %11000001
-	db %10000011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-NidokingBaseStats: ; 3877a (e:477a)
-	db DEX_NIDOKING ; pokedex id
-	db 81 ; base hp
-	db 92 ; base attack
-	db 77 ; base defense
-	db 85 ; base speed
-	db 75 ; base special
-
-	db POISON ; species type 1
-	db GROUND ; species type 2
-
-	db 45 ; catch rate
-	db 195 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw NidokingPicFront
-	dw NidokingPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db HORN_ATTACK
-	db POISON_STING
-	db THRASH
-
-	db 3 ; growth rate
-
-	; learnset
-	db %11110001
-	db %11111111
-	db %10001111
-	db %11000111
-	db %10100011
-	db %10001000
-	db %00110010
-
-	db 0 ; padding
-
-ClefairyBaseStats: ; 38796 (e:4796)
-	db DEX_CLEFAIRY ; pokedex id
-	db 70 ; base hp
-	db 45 ; base attack
-	db 48 ; base defense
-	db 35 ; base speed
-	db 60 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 150 ; catch rate
-	db 68 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw ClefairyPicFront
-	dw ClefairyPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db GROWL
-	db 0
-	db 0
-
-	db 4 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %10101111
-	db %11110001
-	db %10100111
-	db %00111000
-	db %01100011
-
-	db 0 ; padding
-
-ClefableBaseStats: ; 387b2 (e:47b2)
-	db DEX_CLEFABLE ; pokedex id
-	db 95 ; base hp
-	db 70 ; base attack
-	db 73 ; base defense
-	db 60 ; base speed
-	db 85 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 25 ; catch rate
-	db 129 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw ClefablePicFront
-	dw ClefablePicBack
-
-	; attacks known at lvl 0
-	db SING
-	db DOUBLESLAP
-	db MINIMIZE
-	db METRONOME
-
-	db 4 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %10101111
-	db %11110001
-	db %10100111
-	db %00111000
-	db %01100011
-
-	db 0 ; padding
-
-VulpixBaseStats: ; 387ce (e:47ce)
-	db DEX_VULPIX ; pokedex id
-	db 38 ; base hp
-	db 41 ; base attack
-	db 40 ; base defense
-	db 65 ; base speed
-	db 65 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 190 ; catch rate
-	db 63 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw VulpixPicFront
-	dw VulpixPicBack
-
-	; attacks known at lvl 0
-	db EMBER
-	db TAIL_WHIP
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %00001000
-	db %11001000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-NinetalesBaseStats: ; 387ea (e:47ea)
-	db DEX_NINETALES ; pokedex id
-	db 73 ; base hp
-	db 76 ; base attack
-	db 75 ; base defense
-	db 100 ; base speed
-	db 100 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 75 ; catch rate
-	db 178 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw NinetalesPicFront
-	dw NinetalesPicBack
-
-	; attacks known at lvl 0
-	db EMBER
-	db TAIL_WHIP
-	db QUICK_ATTACK
-	db ROAR
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %00001000
-	db %11001000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-JigglypuffBaseStats: ; 38806 (e:4806)
-	db DEX_JIGGLYPUFF ; pokedex id
-	db 115 ; base hp
-	db 45 ; base attack
-	db 20 ; base defense
-	db 20 ; base speed
-	db 25 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 170 ; catch rate
-	db 76 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw JigglypuffPicFront
-	dw JigglypuffPicBack
-
-	; attacks known at lvl 0
-	db SING
-	db 0
-	db 0
-	db 0
-
-	db 4 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %10101111
-	db %11110001
-	db %10100011
-	db %00111000
-	db %01100011
-
-	db 0 ; padding
-
-WigglytuffBaseStats: ; 38822 (e:4822)
-	db DEX_WIGGLYTUFF ; pokedex id
-	db 140 ; base hp
-	db 70 ; base attack
-	db 45 ; base defense
-	db 45 ; base speed
-	db 50 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 50 ; catch rate
-	db 109 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw WigglytuffPicFront
-	dw WigglytuffPicBack
-
-	; attacks known at lvl 0
-	db SING
-	db DISABLE
-	db DEFENSE_CURL
-	db DOUBLESLAP
-
-	db 4 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %10101111
-	db %11110001
-	db %10100011
-	db %00111000
-	db %01100011
-
-	db 0 ; padding
-
-ZubatBaseStats: ; 3883e (e:483e)
-	db DEX_ZUBAT ; pokedex id
-	db 40 ; base hp
-	db 45 ; base attack
-	db 35 ; base defense
-	db 55 ; base speed
-	db 40 ; base special
-
-	db POISON ; species type 1
-	db FLYING ; species type 2
-
-	db 255 ; catch rate
-	db 54 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw ZubatPicFront
-	dw ZubatPicBack
-
-	; attacks known at lvl 0
-	db LEECH_LIFE
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %00000011
-	db %00011000
-	db %11000000
-	db %01000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-GolbatBaseStats: ; 3885a (e:485a)
-	db DEX_GOLBAT ; pokedex id
-	db 75 ; base hp
-	db 80 ; base attack
-	db 70 ; base defense
-	db 90 ; base speed
-	db 75 ; base special
-
-	db POISON ; species type 1
-	db FLYING ; species type 2
-
-	db 90 ; catch rate
-	db 171 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw GolbatPicFront
-	dw GolbatPicBack
-
-	; attacks known at lvl 0
-	db LEECH_LIFE
-	db SCREECH
-	db BITE
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00011000
-	db %11000000
-	db %01000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-OddishBaseStats: ; 38876 (e:4876)
-	db DEX_ODDISH ; pokedex id
-	db 45 ; base hp
-	db 50 ; base attack
-	db 55 ; base defense
-	db 30 ; base speed
-	db 75 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 255 ; catch rate
-	db 78 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw OddishPicFront
-	dw OddishPicBack
-
-	; attacks known at lvl 0
-	db ABSORB
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-GloomBaseStats: ; 38892 (e:4892)
-	db DEX_GLOOM ; pokedex id
-	db 60 ; base hp
-	db 65 ; base attack
-	db 70 ; base defense
-	db 40 ; base speed
-	db 85 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 120 ; catch rate
-	db 132 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw GloomPicFront
-	dw GloomPicBack
-
-	; attacks known at lvl 0
-	db ABSORB
-	db POISONPOWDER
-	db STUN_SPORE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-VileplumeBaseStats: ; 388ae (e:48ae)
-	db DEX_VILEPLUME ; pokedex id
-	db 75 ; base hp
-	db 80 ; base attack
-	db 85 ; base defense
-	db 50 ; base speed
-	db 100 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 184 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw VileplumePicFront
-	dw VileplumePicBack
-
-	; attacks known at lvl 0
-	db STUN_SPORE
-	db SLEEP_POWDER
-	db ACID
-	db PETAL_DANCE
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-ParasBaseStats: ; 388ca (e:48ca)
-	db DEX_PARAS ; pokedex id
-	db 35 ; base hp
-	db 70 ; base attack
-	db 55 ; base defense
-	db 25 ; base speed
-	db 55 ; base special
-
-	db BUG ; species type 1
-	db GRASS ; species type 2
-
-	db 190 ; catch rate
-	db 70 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw ParasPicFront
-	dw ParasPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %00000011
-	db %00111000
-	db %11001000
-	db %10000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-ParasectBaseStats: ; 388e6 (e:48e6)
-	db DEX_PARASECT ; pokedex id
-	db 60 ; base hp
-	db 95 ; base attack
-	db 80 ; base defense
-	db 30 ; base speed
-	db 80 ; base special
-
-	db BUG ; species type 1
-	db GRASS ; species type 2
-
-	db 75 ; catch rate
-	db 128 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ParasectPicFront
-	dw ParasectPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db STUN_SPORE
-	db LEECH_LIFE
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00111000
-	db %11001000
-	db %10000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-VenonatBaseStats: ; 38902 (e:4902)
-	db DEX_VENONAT ; pokedex id
-	db 60 ; base hp
-	db 55 ; base attack
-	db 50 ; base defense
-	db 45 ; base speed
-	db 40 ; base special
-
-	db BUG ; species type 1
-	db POISON ; species type 2
-
-	db 190 ; catch rate
-	db 75 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw VenonatPicFront
-	dw VenonatPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db DISABLE
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000011
-	db %00111000
-	db %11010000
-	db %00000011
-	db %00101000
-	db %00000010
-
-	db 0 ; padding
-
-VenomothBaseStats: ; 3891e (e:491e)
-	db DEX_VENOMOTH ; pokedex id
-	db 70 ; base hp
-	db 65 ; base attack
-	db 60 ; base defense
-	db 90 ; base speed
-	db 90 ; base special
-
-	db BUG ; species type 1
-	db POISON ; species type 2
-
-	db 75 ; catch rate
-	db 138 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw VenomothPicFront
-	dw VenomothPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db DISABLE
-	db POISONPOWDER
-	db LEECH_LIFE
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00111000
-	db %11110000
-	db %01000011
-	db %00101000
-	db %00000010
-
-	db 0 ; padding
-
-DiglettBaseStats: ; 3893a (e:493a)
-	db DEX_DIGLETT ; pokedex id
-	db 10 ; base hp
-	db 55 ; base attack
-	db 25 ; base defense
-	db 95 ; base speed
-	db 45 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 255 ; catch rate
-	db 81 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw DiglettPicFront
-	dw DiglettPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %00001000
-	db %11001110
-	db %00000010
-	db %10001000
-	db %00000010
-
-	db 0 ; padding
-
-DugtrioBaseStats: ; 38956 (e:4956)
-	db DEX_DUGTRIO ; pokedex id
-	db 35 ; base hp
-	db 80 ; base attack
-	db 50 ; base defense
-	db 120 ; base speed
-	db 70 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 50 ; catch rate
-	db 153 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw DugtrioPicFront
-	dw DugtrioPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db DIG
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %00001000
-	db %11001110
-	db %00000010
-	db %10001000
-	db %00000010
-
-	db 0 ; padding
-
-MeowthBaseStats: ; 38972 (e:4972)
-	db DEX_MEOWTH ; pokedex id
-	db 40 ; base hp
-	db 45 ; base attack
-	db 35 ; base defense
-	db 90 ; base speed
-	db 40 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 255 ; catch rate
-	db 69 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MeowthPicFront
-	dw MeowthPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %10001111
-	db %10001000
-	db %11000001
-	db %11000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-PersianBaseStats: ; 3898e (e:498e)
-	db DEX_PERSIAN ; pokedex id
-	db 65 ; base hp
-	db 70 ; base attack
-	db 60 ; base defense
-	db 115 ; base speed
-	db 65 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 90 ; catch rate
-	db 148 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw PersianPicFront
-	dw PersianPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db GROWL
-	db BITE
-	db SCREECH
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %11001111
-	db %10001000
-	db %11000001
-	db %11000010
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-PsyduckBaseStats: ; 389aa (e:49aa)
-	db DEX_PSYDUCK ; pokedex id
-	db 50 ; base hp
-	db 52 ; base attack
-	db 48 ; base defense
-	db 55 ; base speed
-	db 50 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 190 ; catch rate
-	db 80 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw PsyduckPicFront
-	dw PsyduckPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %10111111
-	db %00001111
-	db %11001000
-	db %11000010
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-GolduckBaseStats: ; 389c6 (e:49c6)
-	db DEX_GOLDUCK ; pokedex id
-	db 80 ; base hp
-	db 82 ; base attack
-	db 78 ; base defense
-	db 85 ; base speed
-	db 80 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 75 ; catch rate
-	db 174 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw GolduckPicFront
-	dw GolduckPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db TAIL_WHIP
-	db DISABLE
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11111111
-	db %00001111
-	db %11001000
-	db %11000010
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-MankeyBaseStats: ; 389e2 (e:49e2)
-	db DEX_MANKEY ; pokedex id
-	db 40 ; base hp
-	db 80 ; base attack
-	db 35 ; base defense
-	db 70 ; base speed
-	db 35 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 190 ; catch rate
-	db 74 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MankeyPicFront
-	dw MankeyPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db LEER
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %10000011
-	db %10001111
-	db %11001001
-	db %11000110
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-PrimeapeBaseStats: ; 389fe (e:49fe)
-	db DEX_PRIMEAPE ; pokedex id
-	db 65 ; base hp
-	db 105 ; base attack
-	db 60 ; base defense
-	db 95 ; base speed
-	db 60 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 75 ; catch rate
-	db 149 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw PrimeapePicFront
-	dw PrimeapePicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db LEER
-	db KARATE_CHOP
-	db FURY_SWIPES
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11000011
-	db %10001111
-	db %11001001
-	db %11000110
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-GrowlitheBaseStats: ; 38a1a (e:4a1a)
-	db DEX_GROWLITHE ; pokedex id
-	db 55 ; base hp
-	db 70 ; base attack
-	db 45 ; base defense
-	db 60 ; base speed
-	db 50 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 190 ; catch rate
-	db 91 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw GrowlithePicFront
-	dw GrowlithePicBack
-
-	; attacks known at lvl 0
-	db BITE
-	db ROAR
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %01001000
-	db %11001000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-ArcanineBaseStats: ; 38a36 (e:4a36)
-	db DEX_ARCANINE ; pokedex id
-	db 90 ; base hp
-	db 110 ; base attack
-	db 80 ; base defense
-	db 95 ; base speed
-	db 80 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 75 ; catch rate
-	db 213 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ArcaninePicFront
-	dw ArcaninePicBack
-
-	; attacks known at lvl 0
-	db ROAR
-	db EMBER
-	db LEER
-	db TAKE_DOWN
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %01001000
-	db %11101000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-PoliwagBaseStats: ; 38a52 (e:4a52)
-	db DEX_POLIWAG ; pokedex id
-	db 40 ; base hp
-	db 50 ; base attack
-	db 40 ; base defense
-	db 90 ; base speed
-	db 40 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 255 ; catch rate
-	db 77 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw PoliwagPicFront
-	dw PoliwagPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00111111
-	db %00001000
-	db %11010000
-	db %10000010
-	db %00101000
-	db %00010010
-
-	db 0 ; padding
-
-PoliwhirlBaseStats: ; 38a6e (e:4a6e)
-	db DEX_POLIWHIRL ; pokedex id
-	db 65 ; base hp
-	db 65 ; base attack
-	db 65 ; base defense
-	db 90 ; base speed
-	db 50 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 120 ; catch rate
-	db 131 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw PoliwhirlPicFront
-	dw PoliwhirlPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db HYPNOSIS
-	db WATER_GUN
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %00001111
-	db %11010110
-	db %10000110
-	db %00101000
-	db %00110010
-
-	db 0 ; padding
-
-PoliwrathBaseStats: ; 38a8a (e:4a8a)
-	db DEX_POLIWRATH ; pokedex id
-	db 90 ; base hp
-	db 85 ; base attack
-	db 95 ; base defense
-	db 70 ; base speed
-	db 70 ; base special
-
-	db WATER ; species type 1
-	db FIGHTING ; species type 2
-
-	db 45 ; catch rate
-	db 185 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw PoliwrathPicFront
-	dw PoliwrathPicBack
-
-	; attacks known at lvl 0
-	db HYPNOSIS
-	db WATER_GUN
-	db DOUBLESLAP
-	db BODY_SLAM
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %00001111
-	db %11010110
-	db %10000110
-	db %00101000
-	db %00110010
-
-	db 0 ; padding
-
-AbraBaseStats: ; 38aa6 (e:4aa6)
-	db DEX_ABRA ; pokedex id
-	db 25 ; base hp
-	db 20 ; base attack
-	db 15 ; base defense
-	db 90 ; base speed
-	db 105 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 200 ; catch rate
-	db 73 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw AbraPicFront
-	dw AbraPicBack
-
-	; attacks known at lvl 0
-	db TELEPORT
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11110000
-	db %10000111
-	db %00111000
-	db %01000011
-
-	db 0 ; padding
-
-KadabraBaseStats: ; 38ac2 (e:4ac2)
-	db DEX_KADABRA ; pokedex id
-	db 40 ; base hp
-	db 35 ; base attack
-	db 30 ; base defense
-	db 105 ; base speed
-	db 120 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 100 ; catch rate
-	db 145 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw KadabraPicFront
-	dw KadabraPicBack
-
-	; attacks known at lvl 0
-	db TELEPORT
-	db CONFUSION
-	db DISABLE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11111000
-	db %10000111
-	db %00111000
-	db %01000011
-
-	db 0 ; padding
-
-AlakazamBaseStats: ; 38ade (e:4ade)
-	db DEX_ALAKAZAM ; pokedex id
-	db 55 ; base hp
-	db 50 ; base attack
-	db 45 ; base defense
-	db 120 ; base speed
-	db 135 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 50 ; catch rate
-	db 186 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw AlakazamPicFront
-	dw AlakazamPicBack
-
-	; attacks known at lvl 0
-	db TELEPORT
-	db CONFUSION
-	db DISABLE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %00001111
-	db %11111000
-	db %10000111
-	db %00111000
-	db %01000011
-
-	db 0 ; padding
-
-MachopBaseStats: ; 38afa (e:4afa)
-	db DEX_MACHOP ; pokedex id
-	db 70 ; base hp
-	db 80 ; base attack
-	db 50 ; base defense
-	db 35 ; base speed
-	db 35 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 180 ; catch rate
-	db 88 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MachopPicFront
-	dw MachopPicBack
-
-	; attacks known at lvl 0
-	db KARATE_CHOP
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11001110
-	db %10100110
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-MachokeBaseStats: ; 38b16 (e:4b16)
-	db DEX_MACHOKE ; pokedex id
-	db 80 ; base hp
-	db 100 ; base attack
-	db 70 ; base defense
-	db 45 ; base speed
-	db 50 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 90 ; catch rate
-	db 146 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw MachokePicFront
-	dw MachokePicBack
-
-	; attacks known at lvl 0
-	db KARATE_CHOP
-	db LOW_KICK
-	db LEER
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11001110
-	db %10100110
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-MachampBaseStats: ; 38b32 (e:4b32)
-	db DEX_MACHAMP ; pokedex id
-	db 90 ; base hp
-	db 130 ; base attack
-	db 80 ; base defense
-	db 55 ; base speed
-	db 65 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 45 ; catch rate
-	db 193 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw MachampPicFront
-	dw MachampPicBack
-
-	; attacks known at lvl 0
-	db KARATE_CHOP
-	db LOW_KICK
-	db LEER
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %00001111
-	db %11001110
-	db %10100110
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-BellsproutBaseStats: ; 38b4e (e:4b4e)
-	db DEX_BELLSPROUT ; pokedex id
-	db 50 ; base hp
-	db 75 ; base attack
-	db 35 ; base defense
-	db 40 ; base speed
-	db 70 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 255 ; catch rate
-	db 84 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw BellsproutPicFront
-	dw BellsproutPicBack
-
-	; attacks known at lvl 0
-	db VINE_WHIP
-	db GROWTH
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-WeepinbellBaseStats: ; 38b6a (e:4b6a)
-	db DEX_WEEPINBELL ; pokedex id
-	db 65 ; base hp
-	db 90 ; base attack
-	db 50 ; base defense
-	db 55 ; base speed
-	db 85 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 120 ; catch rate
-	db 151 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw WeepinbellPicFront
-	dw WeepinbellPicBack
-
-	; attacks known at lvl 0
-	db VINE_WHIP
-	db GROWTH
-	db WRAP
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100100
-	db %00000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-VictreebelBaseStats: ; 38b86 (e:4b86)
-	db DEX_VICTREEBEL ; pokedex id
-	db 80 ; base hp
-	db 105 ; base attack
-	db 65 ; base defense
-	db 70 ; base speed
-	db 100 ; base special
-
-	db GRASS ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 191 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw VictreebelPicFront
-	dw VictreebelPicBack
-
-	; attacks known at lvl 0
-	db SLEEP_POWDER
-	db STUN_SPORE
-	db ACID
-	db RAZOR_LEAF
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00111000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-TentacoolBaseStats: ; 38ba2 (e:4ba2)
-	db DEX_TENTACOOL ; pokedex id
-	db 40 ; base hp
-	db 40 ; base attack
-	db 35 ; base defense
-	db 70 ; base speed
-	db 100 ; base special
-
-	db WATER ; species type 1
-	db POISON ; species type 2
-
-	db 190 ; catch rate
-	db 105 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw TentacoolPicFront
-	dw TentacoolPicBack
-
-	; attacks known at lvl 0
-	db ACID
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100100
-	db %00111111
-	db %00011000
-	db %11000000
-	db %10000011
-	db %00001000
-	db %00010110
-
-	db 0 ; padding
-
-TentacruelBaseStats: ; 38bbe (e:4bbe)
-	db DEX_TENTACRUEL ; pokedex id
-	db 80 ; base hp
-	db 70 ; base attack
-	db 65 ; base defense
-	db 100 ; base speed
-	db 120 ; base special
-
-	db WATER ; species type 1
-	db POISON ; species type 2
-
-	db 60 ; catch rate
-	db 205 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw TentacruelPicFront
-	dw TentacruelPicBack
-
-	; attacks known at lvl 0
-	db ACID
-	db SUPERSONIC
-	db WRAP
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100100
-	db %01111111
-	db %00011000
-	db %11000000
-	db %10000011
-	db %00001000
-	db %00010110
-
-	db 0 ; padding
-
-GeodudeBaseStats: ; 38bda (e:4bda)
-	db DEX_GEODUDE ; pokedex id
-	db 40 ; base hp
-	db 80 ; base attack
-	db 100 ; base defense
-	db 20 ; base speed
-	db 30 ; base special
-
-	db ROCK ; species type 1
-	db GROUND ; species type 2
-
-	db 255 ; catch rate
-	db 86 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw GeodudePicFront
-	dw GeodudePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db 0
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100001
-	db %00000011
-	db %00001111
-	db %11001110
-	db %00101110
-	db %11001000
-	db %00100010
-
-	db 0 ; padding
-
-GravelerBaseStats: ; 38bf6 (e:4bf6)
-	db DEX_GRAVELER ; pokedex id
-	db 55 ; base hp
-	db 95 ; base attack
-	db 115 ; base defense
-	db 35 ; base speed
-	db 45 ; base special
-
-	db ROCK ; species type 1
-	db GROUND ; species type 2
-
-	db 120 ; catch rate
-	db 134 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw GravelerPicFront
-	dw GravelerPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db DEFENSE_CURL
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10100001
-	db %00000011
-	db %00001111
-	db %11001110
-	db %00101110
-	db %11001000
-	db %00100010
-
-	db 0 ; padding
-
-GolemBaseStats: ; 38c12 (e:4c12)
-	db DEX_GOLEM ; pokedex id
-	db 80 ; base hp
-	db 110 ; base attack
-	db 130 ; base defense
-	db 45 ; base speed
-	db 55 ; base special
-
-	db ROCK ; species type 1
-	db GROUND ; species type 2
-
-	db 45 ; catch rate
-	db 177 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw GolemPicFront
-	dw GolemPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db DEFENSE_CURL
-	db 0
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %00001111
-	db %11001110
-	db %00101110
-	db %11001000
-	db %00100010
-
-	db 0 ; padding
-
-PonytaBaseStats: ; 38c2e (e:4c2e)
-	db DEX_PONYTA ; pokedex id
-	db 50 ; base hp
-	db 85 ; base attack
-	db 55 ; base defense
-	db 90 ; base speed
-	db 65 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 190 ; catch rate
-	db 152 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw PonytaPicFront
-	dw PonytaPicBack
-
-	; attacks known at lvl 0
-	db EMBER
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00000011
-	db %00001000
-	db %11000000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-RapidashBaseStats: ; 38c4a (e:4c4a)
-	db DEX_RAPIDASH ; pokedex id
-	db 65 ; base hp
-	db 100 ; base attack
-	db 70 ; base defense
-	db 105 ; base speed
-	db 80 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 60 ; catch rate
-	db 192 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw RapidashPicFront
-	dw RapidashPicBack
-
-	; attacks known at lvl 0
-	db EMBER
-	db TAIL_WHIP
-	db STOMP
-	db GROWL
-
-	db 0 ; growth rate
-
-	; learnset
-	db %11100000
-	db %01000011
-	db %00001000
-	db %11000000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-SlowpokeBaseStats: ; 38c66 (e:4c66)
-	db DEX_SLOWPOKE ; pokedex id
-	db 90 ; base hp
-	db 65 ; base attack
-	db 65 ; base defense
-	db 15 ; base speed
-	db 40 ; base special
-
-	db WATER ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 190 ; catch rate
-	db 99 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw SlowpokePicFront
-	dw SlowpokePicBack
-
-	; attacks known at lvl 0
-	db CONFUSION
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %10111111
-	db %00001000
-	db %11111110
-	db %11100011
-	db %00111000
-	db %01110011
-
-	db 0 ; padding
-
-SlowbroBaseStats: ; 38c82 (e:4c82)
-	db DEX_SLOWBRO ; pokedex id
-	db 95 ; base hp
-	db 75 ; base attack
-	db 110 ; base defense
-	db 30 ; base speed
-	db 80 ; base special
-
-	db WATER ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 75 ; catch rate
-	db 164 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw SlowbroPicFront
-	dw SlowbroPicBack
-
-	; attacks known at lvl 0
-	db CONFUSION
-	db DISABLE
-	db HEADBUTT
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11111111
-	db %00001111
-	db %11111110
-	db %11100011
-	db %00111000
-	db %01110011
-
-	db 0 ; padding
-
-MagnemiteBaseStats: ; 38c9e (e:4c9e)
-	db DEX_MAGNEMITE ; pokedex id
-	db 25 ; base hp
-	db 35 ; base attack
-	db 70 ; base defense
-	db 45 ; base speed
-	db 95 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 190 ; catch rate
-	db 89 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw MagnemitePicFront
-	dw MagnemitePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000011
-	db %10001000
-	db %11100001
-	db %01000011
-	db %00011000
-	db %01000010
-
-	db 0 ; padding
-
-MagnetonBaseStats: ; 38cba (e:4cba)
-	db DEX_MAGNETON ; pokedex id
-	db 50 ; base hp
-	db 60 ; base attack
-	db 95 ; base defense
-	db 70 ; base speed
-	db 120 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 60 ; catch rate
-	db 161 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw MagnetonPicFront
-	dw MagnetonPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SONICBOOM
-	db THUNDERSHOCK
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01000011
-	db %10001000
-	db %11100001
-	db %01000011
-	db %00011000
-	db %01000010
-
-	db 0 ; padding
-
-FarfetchdBaseStats: ; 38cd6 (e:4cd6)
-	db DEX_FARFETCH_D ; pokedex id
-	db 52 ; base hp
-	db 65 ; base attack
-	db 55 ; base defense
-	db 60 ; base speed
-	db 58 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 94 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw FarfetchdPicFront
-	dw FarfetchdPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db SAND_ATTACK
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10101110
-	db %00000011
-	db %00001000
-	db %11000000
-	db %11000011
-	db %00001000
-	db %00001110
-
-	db 0 ; padding
-
-DoduoBaseStats: ; 38cf2 (e:4cf2)
-	db DEX_DODUO ; pokedex id
-	db 35 ; base hp
-	db 85 ; base attack
-	db 45 ; base defense
-	db 75 ; base speed
-	db 35 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 190 ; catch rate
-	db 96 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw DoduoPicFront
-	dw DoduoPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10101000
-	db %00000011
-	db %00001000
-	db %11000000
-	db %10000011
-	db %00001100
-	db %00001011
-
-	db 0 ; padding
-
-DodrioBaseStats: ; 38d0e (e:4d0e)
-	db DEX_DODRIO ; pokedex id
-	db 60 ; base hp
-	db 110 ; base attack
-	db 70 ; base defense
-	db 100 ; base speed
-	db 60 ; base special
-
-	db NORMAL ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 158 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw DodrioPicFront
-	dw DodrioPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db GROWL
-	db FURY_ATTACK
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10101000
-	db %01000011
-	db %00001000
-	db %11000000
-	db %10000011
-	db %00001100
-	db %00001011
-
-	db 0 ; padding
-
-SeelBaseStats: ; 38d2a (e:4d2a)
-	db DEX_SEEL ; pokedex id
-	db 65 ; base hp
-	db 45 ; base attack
-	db 55 ; base defense
-	db 45 ; base speed
-	db 70 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 190 ; catch rate
-	db 100 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw SeelPicFront
-	dw SeelPicBack
-
-	; attacks known at lvl 0
-	db HEADBUTT
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %11100000
-	db %10111111
-	db %00001000
-	db %11000000
-	db %10000010
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-DewgongBaseStats: ; 38d46 (e:4d46)
-	db DEX_DEWGONG ; pokedex id
-	db 90 ; base hp
-	db 70 ; base attack
-	db 80 ; base defense
-	db 70 ; base speed
-	db 95 ; base special
-
-	db WATER ; species type 1
-	db ICE ; species type 2
-
-	db 75 ; catch rate
-	db 176 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw DewgongPicFront
-	dw DewgongPicBack
-
-	; attacks known at lvl 0
-	db HEADBUTT
-	db GROWL
-	db AURORA_BEAM
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %11100000
-	db %11111111
-	db %00001000
-	db %11000000
-	db %10000010
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-GrimerBaseStats: ; 38d62 (e:4d62)
-	db DEX_GRIMER ; pokedex id
-	db 80 ; base hp
-	db 80 ; base attack
-	db 50 ; base defense
-	db 25 ; base speed
-	db 40 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 190 ; catch rate
-	db 90 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw GrimerPicFront
-	dw GrimerPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db DISABLE
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000000
-	db %10011000
-	db %11000001
-	db %00101010
-	db %01001000
-	db %00000010
-
-	db 0 ; padding
-
-MukBaseStats: ; 38d7e (e:4d7e)
-	db DEX_MUK ; pokedex id
-	db 105 ; base hp
-	db 105 ; base attack
-	db 75 ; base defense
-	db 50 ; base speed
-	db 65 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 75 ; catch rate
-	db 157 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw MukPicFront
-	dw MukPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db DISABLE
-	db POISON_GAS
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000000
-	db %10011000
-	db %11000001
-	db %00101010
-	db %01001000
-	db %00000010
-
-	db 0 ; padding
-
-ShellderBaseStats: ; 38d9a (e:4d9a)
-	db DEX_SHELLDER ; pokedex id
-	db 30 ; base hp
-	db 65 ; base attack
-	db 100 ; base defense
-	db 40 ; base speed
-	db 45 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 190 ; catch rate
-	db 97 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw ShellderPicFront
-	dw ShellderPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db WITHDRAW
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00111111
-	db %00001000
-	db %11100000
-	db %01001011
-	db %01001000
-	db %00010011
-
-	db 0 ; padding
-
-CloysterBaseStats: ; 38db6 (e:4db6)
-	db DEX_CLOYSTER ; pokedex id
-	db 50 ; base hp
-	db 95 ; base attack
-	db 180 ; base defense
-	db 70 ; base speed
-	db 85 ; base special
-
-	db WATER ; species type 1
-	db ICE ; species type 2
-
-	db 60 ; catch rate
-	db 203 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw CloysterPicFront
-	dw CloysterPicBack
-
-	; attacks known at lvl 0
-	db WITHDRAW
-	db SUPERSONIC
-	db CLAMP
-	db AURORA_BEAM
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01111111
-	db %00001000
-	db %11100000
-	db %01001011
-	db %01001000
-	db %00010011
-
-	db 0 ; padding
-
-GastlyBaseStats: ; 38dd2 (e:4dd2)
-	db DEX_GASTLY ; pokedex id
-	db 30 ; base hp
-	db 35 ; base attack
-	db 30 ; base defense
-	db 80 ; base speed
-	db 100 ; base special
-
-	db GHOST ; species type 1
-	db POISON ; species type 2
-
-	db 190 ; catch rate
-	db 95 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw GastlyPicFront
-	dw GastlyPicBack
-
-	; attacks known at lvl 0
-	db LICK
-	db CONFUSE_RAY
-	db NIGHT_SHADE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000000
-	db %10011000
-	db %11010001
-	db %00001010
-	db %01101010
-	db %00000010
-
-	db 0 ; padding
-
-HaunterBaseStats: ; 38dee (e:4dee)
-	db DEX_HAUNTER ; pokedex id
-	db 45 ; base hp
-	db 50 ; base attack
-	db 45 ; base defense
-	db 95 ; base speed
-	db 115 ; base special
-
-	db GHOST ; species type 1
-	db POISON ; species type 2
-
-	db 90 ; catch rate
-	db 126 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw HaunterPicFront
-	dw HaunterPicBack
-
-	; attacks known at lvl 0
-	db LICK
-	db CONFUSE_RAY
-	db NIGHT_SHADE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000000
-	db %10011000
-	db %11010001
-	db %00001010
-	db %01101010
-	db %00000010
-
-	db 0 ; padding
-
-GengarBaseStats: ; 38e0a (e:4e0a)
-	db DEX_GENGAR ; pokedex id
-	db 60 ; base hp
-	db 65 ; base attack
-	db 60 ; base defense
-	db 110 ; base speed
-	db 130 ; base special
-
-	db GHOST ; species type 1
-	db POISON ; species type 2
-
-	db 45 ; catch rate
-	db 190 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw GengarPicFront
-	dw GengarPicBack
-
-	; attacks known at lvl 0
-	db LICK
-	db CONFUSE_RAY
-	db NIGHT_SHADE
-	db 0
-
-	db 3 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %10011111
-	db %11010001
-	db %10001110
-	db %01101010
-	db %00100010
-
-	db 0 ; padding
-
-OnixBaseStats: ; 38e26 (e:4e26)
-	db DEX_ONIX ; pokedex id
-	db 35 ; base hp
-	db 45 ; base attack
-	db 160 ; base defense
-	db 70 ; base speed
-	db 30 ; base special
-
-	db ROCK ; species type 1
-	db GROUND ; species type 2
-
-	db 45 ; catch rate
-	db 108 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw OnixPicFront
-	dw OnixPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SCREECH
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %00001000
-	db %11001110
-	db %10001010
-	db %11001000
-	db %00100010
-
-	db 0 ; padding
-
-DrowzeeBaseStats: ; 38e42 (e:4e42)
-	db DEX_DROWZEE ; pokedex id
-	db 60 ; base hp
-	db 48 ; base attack
-	db 45 ; base defense
-	db 42 ; base speed
-	db 90 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 190 ; catch rate
-	db 102 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw DrowzeePicFront
-	dw DrowzeePicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db HYPNOSIS
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11110000
-	db %10000111
-	db %00111010
-	db %01000011
-
-	db 0 ; padding
-
-HypnoBaseStats: ; 38e5e (e:4e5e)
-	db DEX_HYPNO ; pokedex id
-	db 85 ; base hp
-	db 73 ; base attack
-	db 70 ; base defense
-	db 67 ; base speed
-	db 115 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 75 ; catch rate
-	db 165 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw HypnoPicFront
-	dw HypnoPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db HYPNOSIS
-	db DISABLE
-	db CONFUSION
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %00001111
-	db %11110000
-	db %10000111
-	db %00111010
-	db %01000011
-
-	db 0 ; padding
-
-KrabbyBaseStats: ; 38e7a (e:4e7a)
-	db DEX_KRABBY ; pokedex id
-	db 30 ; base hp
-	db 105 ; base attack
-	db 90 ; base defense
-	db 50 ; base speed
-	db 25 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 225 ; catch rate
-	db 115 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw KrabbyPicFront
-	dw KrabbyPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db LEER
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %00111111
-	db %00001000
-	db %11000000
-	db %00000010
-	db %00001000
-	db %00110110
-
-	db 0 ; padding
-
-KinglerBaseStats: ; 38e96 (e:4e96)
-	db DEX_KINGLER ; pokedex id
-	db 55 ; base hp
-	db 130 ; base attack
-	db 115 ; base defense
-	db 75 ; base speed
-	db 50 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 60 ; catch rate
-	db 206 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw KinglerPicFront
-	dw KinglerPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db LEER
-	db VICEGRIP
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01111111
-	db %00001000
-	db %11000000
-	db %00000010
-	db %00001000
-	db %00110110
-
-	db 0 ; padding
-
-VoltorbBaseStats: ; 38eb2 (e:4eb2)
-	db DEX_VOLTORB ; pokedex id
-	db 40 ; base hp
-	db 30 ; base attack
-	db 50 ; base defense
-	db 100 ; base speed
-	db 55 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 190 ; catch rate
-	db 103 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw VoltorbPicFront
-	dw VoltorbPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SCREECH
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000001
-	db %10001000
-	db %11100001
-	db %01001011
-	db %01011000
-	db %01000010
-
-	db 0 ; padding
-
-ElectrodeBaseStats: ; 38ece (e:4ece)
-	db DEX_ELECTRODE ; pokedex id
-	db 60 ; base hp
-	db 50 ; base attack
-	db 70 ; base defense
-	db 140 ; base speed
-	db 80 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 60 ; catch rate
-	db 150 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw ElectrodePicFront
-	dw ElectrodePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SCREECH
-	db SONICBOOM
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01000001
-	db %10001000
-	db %11100001
-	db %11001011
-	db %01011000
-	db %01000010
-
-	db 0 ; padding
-
-ExeggcuteBaseStats: ; 38eea (e:4eea)
-	db DEX_EXEGGCUTE ; pokedex id
-	db 60 ; base hp
-	db 40 ; base attack
-	db 80 ; base defense
-	db 40 ; base speed
-	db 60 ; base special
-
-	db GRASS ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 90 ; catch rate
-	db 98 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ExeggcutePicFront
-	dw ExeggcutePicBack
-
-	; attacks known at lvl 0
-	db BARRAGE
-	db HYPNOSIS
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000011
-	db %00001000
-	db %11110000
-	db %00011011
-	db %01101000
-	db %00000010
-
-	db 0 ; padding
-
-ExeggutorBaseStats: ; 38f06 (e:4f06)
-	db DEX_EXEGGUTOR ; pokedex id
-	db 95 ; base hp
-	db 95 ; base attack
-	db 85 ; base defense
-	db 55 ; base speed
-	db 125 ; base special
-
-	db GRASS ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 45 ; catch rate
-	db 212 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ExeggutorPicFront
-	dw ExeggutorPicBack
-
-	; attacks known at lvl 0
-	db BARRAGE
-	db HYPNOSIS
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01000011
-	db %00111000
-	db %11110000
-	db %00011011
-	db %01101000
-	db %00100010
-
-	db 0 ; padding
-
-CuboneBaseStats: ; 38f22 (e:4f22)
-	db DEX_CUBONE ; pokedex id
-	db 50 ; base hp
-	db 50 ; base attack
-	db 95 ; base defense
-	db 35 ; base speed
-	db 40 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 190 ; catch rate
-	db 87 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw CubonePicFront
-	dw CubonePicBack
-
-	; attacks known at lvl 0
-	db BONE_CLUB
-	db GROWL
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00111111
-	db %00001111
-	db %11001110
-	db %10100010
-	db %00001000
-	db %00100010
-
-	db 0 ; padding
-
-MarowakBaseStats: ; 38f3e (e:4f3e)
-	db DEX_MAROWAK ; pokedex id
-	db 60 ; base hp
-	db 80 ; base attack
-	db 110 ; base defense
-	db 45 ; base speed
-	db 50 ; base special
-
-	db GROUND ; species type 1
-	db GROUND ; species type 2
-
-	db 75 ; catch rate
-	db 124 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw MarowakPicFront
-	dw MarowakPicBack
-
-	; attacks known at lvl 0
-	db BONE_CLUB
-	db GROWL
-	db LEER
-	db FOCUS_ENERGY
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %00001111
-	db %11001110
-	db %10100010
-	db %00001000
-	db %00100010
-
-	db 0 ; padding
-
-HitmonleeBaseStats: ; 38f5a (e:4f5a)
-	db DEX_HITMONLEE ; pokedex id
-	db 50 ; base hp
-	db 120 ; base attack
-	db 53 ; base defense
-	db 87 ; base speed
-	db 35 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 45 ; catch rate
-	db 139 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw HitmonleePicFront
-	dw HitmonleePicBack
-
-	; attacks known at lvl 0
-	db DOUBLE_KICK
-	db MEDITATE
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11000000
-	db %11000110
-	db %00001000
-	db %00100010
-
-	db 0 ; padding
-
-HitmonchanBaseStats: ; 38f76 (e:4f76)
-	db DEX_HITMONCHAN ; pokedex id
-	db 50 ; base hp
-	db 105 ; base attack
-	db 79 ; base defense
-	db 76 ; base speed
-	db 35 ; base special
-
-	db FIGHTING ; species type 1
-	db FIGHTING ; species type 2
-
-	db 45 ; catch rate
-	db 140 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw HitmonchanPicFront
-	dw HitmonchanPicBack
-
-	; attacks known at lvl 0
-	db COMET_PUNCH
-	db AGILITY
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %00000011
-	db %00001111
-	db %11000000
-	db %11000110
-	db %00001000
-	db %00100010
-
-	db 0 ; padding
-
-LickitungBaseStats: ; 38f92 (e:4f92)
-	db DEX_LICKITUNG ; pokedex id
-	db 90 ; base hp
-	db 55 ; base attack
-	db 75 ; base defense
-	db 30 ; base speed
-	db 60 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 45 ; catch rate
-	db 127 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw LickitungPicFront
-	dw LickitungPicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db SUPERSONIC
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110101
-	db %01111111
-	db %10001111
-	db %11000111
-	db %10100010
-	db %00001000
-	db %00110110
-
-	db 0 ; padding
-
-KoffingBaseStats: ; 38fae (e:4fae)
-	db DEX_KOFFING ; pokedex id
-	db 40 ; base hp
-	db 65 ; base attack
-	db 95 ; base defense
-	db 35 ; base speed
-	db 60 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 190 ; catch rate
-	db 114 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw KoffingPicFront
-	dw KoffingPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SMOG
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00000000
-	db %10001000
-	db %11000001
-	db %00101010
-	db %01001000
-	db %00000010
-
-	db 0 ; padding
-
-WeezingBaseStats: ; 38fca (e:4fca)
-	db DEX_WEEZING ; pokedex id
-	db 65 ; base hp
-	db 90 ; base attack
-	db 120 ; base defense
-	db 60 ; base speed
-	db 85 ; base special
-
-	db POISON ; species type 1
-	db POISON ; species type 2
-
-	db 60 ; catch rate
-	db 173 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw WeezingPicFront
-	dw WeezingPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SMOG
-	db SLUDGE
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01000000
-	db %10001000
-	db %11000001
-	db %00101010
-	db %01001000
-	db %00000010
-
-	db 0 ; padding
-
-RhyhornBaseStats: ; 38fe6 (e:4fe6)
-	db DEX_RHYHORN ; pokedex id
-	db 80 ; base hp
-	db 85 ; base attack
-	db 95 ; base defense
-	db 25 ; base speed
-	db 30 ; base special
-
-	db GROUND ; species type 1
-	db ROCK ; species type 2
-
-	db 120 ; catch rate
-	db 135 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw RhyhornPicFront
-	dw RhyhornPicBack
-
-	; attacks known at lvl 0
-	db HORN_ATTACK
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00000011
-	db %10001000
-	db %11001111
-	db %10100010
-	db %10001000
-	db %00100010
-
-	db 0 ; padding
-
-RhydonBaseStats: ; 39002 (e:5002)
-	db DEX_RHYDON ; pokedex id
-	db 105 ; base hp
-	db 130 ; base attack
-	db 120 ; base defense
-	db 40 ; base speed
-	db 45 ; base special
-
-	db GROUND ; species type 1
-	db ROCK ; species type 2
-
-	db 60 ; catch rate
-	db 204 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw RhydonPicFront
-	dw RhydonPicBack
-
-	; attacks known at lvl 0
-	db HORN_ATTACK
-	db STOMP
-	db TAIL_WHIP
-	db FURY_ATTACK
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11110001
-	db %11111111
-	db %10001111
-	db %11001111
-	db %10100010
-	db %10001000
-	db %00110010
-
-	db 0 ; padding
-
-ChanseyBaseStats: ; 3901e (e:501e)
-	db DEX_CHANSEY ; pokedex id
-	db 250 ; base hp
-	db 5 ; base attack
-	db 5 ; base defense
-	db 50 ; base speed
-	db 105 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 30 ; catch rate
-	db 255 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw ChanseyPicFront
-	dw ChanseyPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db DOUBLESLAP
-	db 0
-	db 0
-
-	db 4 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %10101111
-	db %11110001
-	db %10110111
-	db %00111001
-	db %01100011
-
-	db 0 ; padding
-
-TangelaBaseStats: ; 3903a (e:503a)
-	db DEX_TANGELA ; pokedex id
-	db 65 ; base hp
-	db 55 ; base attack
-	db 115 ; base defense
-	db 60 ; base speed
-	db 100 ; base special
-
-	db GRASS ; species type 1
-	db GRASS ; species type 2
-
-	db 45 ; catch rate
-	db 166 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw TangelaPicFront
-	dw TangelaPicBack
-
-	; attacks known at lvl 0
-	db CONSTRICT
-	db BIND
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00111000
-	db %11000000
-	db %10000010
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-KangaskhanBaseStats: ; 39056 (e:5056)
-	db DEX_KANGASKHAN ; pokedex id
-	db 105 ; base hp
-	db 95 ; base attack
-	db 80 ; base defense
-	db 90 ; base speed
-	db 40 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 45 ; catch rate
-	db 175 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw KangaskhanPicFront
-	dw KangaskhanPicBack
-
-	; attacks known at lvl 0
-	db COMET_PUNCH
-	db RAGE
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %10001111
-	db %11000111
-	db %10100010
-	db %10001000
-	db %00110010
-
-	db 0 ; padding
-
-HorseaBaseStats: ; 39072 (e:5072)
-	db DEX_HORSEA ; pokedex id
-	db 30 ; base hp
-	db 40 ; base attack
-	db 70 ; base defense
-	db 60 ; base speed
-	db 70 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 225 ; catch rate
-	db 83 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw HorseaPicFront
-	dw HorseaPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00111111
-	db %00001000
-	db %11000000
-	db %11000010
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-SeadraBaseStats: ; 3908e (e:508e)
-	db DEX_SEADRA ; pokedex id
-	db 55 ; base hp
-	db 65 ; base attack
-	db 95 ; base defense
-	db 85 ; base speed
-	db 95 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 75 ; catch rate
-	db 155 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw SeadraPicFront
-	dw SeadraPicBack
-
-	; attacks known at lvl 0
-	db BUBBLE
-	db SMOKESCREEN
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01111111
-	db %00001000
-	db %11000000
-	db %11000010
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-GoldeenBaseStats: ; 390aa (e:50aa)
-	db DEX_GOLDEEN ; pokedex id
-	db 45 ; base hp
-	db 67 ; base attack
-	db 60 ; base defense
-	db 63 ; base speed
-	db 50 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 225 ; catch rate
-	db 111 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw GoldeenPicFront
-	dw GoldeenPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db TAIL_WHIP
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %01100000
-	db %00111111
-	db %00001000
-	db %11000000
-	db %11000010
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-SeakingBaseStats: ; 390c6 (e:50c6)
-	db DEX_SEAKING ; pokedex id
-	db 80 ; base hp
-	db 92 ; base attack
-	db 65 ; base defense
-	db 68 ; base speed
-	db 80 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 60 ; catch rate
-	db 170 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw SeakingPicFront
-	dw SeakingPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db TAIL_WHIP
-	db SUPERSONIC
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %01100000
-	db %01111111
-	db %00001000
-	db %11000000
-	db %11000010
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-StaryuBaseStats: ; 390e2 (e:50e2)
-	db DEX_STARYU ; pokedex id
-	db 30 ; base hp
-	db 45 ; base attack
-	db 55 ; base defense
-	db 85 ; base speed
-	db 70 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 225 ; catch rate
-	db 106 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw StaryuPicFront
-	dw StaryuPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %00111111
-	db %10001000
-	db %11110001
-	db %11000011
-	db %00111000
-	db %01010011
-
-	db 0 ; padding
-
-StarmieBaseStats: ; 390fe (e:50fe)
-	db DEX_STARMIE ; pokedex id
-	db 60 ; base hp
-	db 75 ; base attack
-	db 85 ; base defense
-	db 115 ; base speed
-	db 100 ; base special
-
-	db WATER ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 60 ; catch rate
-	db 207 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw StarmiePicFront
-	dw StarmiePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db WATER_GUN
-	db HARDEN
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01111111
-	db %10001000
-	db %11110001
-	db %11000011
-	db %00111000
-	db %01010011
-
-	db 0 ; padding
-
-MrMimeBaseStats: ; 3911a (e:511a)
-	db DEX_MR_MIME ; pokedex id
-	db 40 ; base hp
-	db 45 ; base attack
-	db 65 ; base defense
-	db 90 ; base speed
-	db 100 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 45 ; catch rate
-	db 136 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw MrMimePicFront
-	dw MrMimePicBack
-
-	; attacks known at lvl 0
-	db CONFUSION
-	db BARRIER
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %10101111
-	db %11110001
-	db %10000111
-	db %00111000
-	db %01000010
-
-	db 0 ; padding
-
-ScytherBaseStats: ; 39136 (e:5136)
-	db DEX_SCYTHER ; pokedex id
-	db 70 ; base hp
-	db 110 ; base attack
-	db 80 ; base defense
-	db 105 ; base speed
-	db 55 ; base special
-
-	db BUG ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 187 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ScytherPicFront
-	dw ScytherPicBack
-
-	; attacks known at lvl 0
-	db QUICK_ATTACK
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100100
-	db %01000011
-	db %00001000
-	db %11000000
-	db %11000010
-	db %00001000
-	db %00000110
-
-	db 0 ; padding
-
-JynxBaseStats: ; 39152 (e:5152)
-	db DEX_JYNX ; pokedex id
-	db 65 ; base hp
-	db 50 ; base attack
-	db 35 ; base defense
-	db 95 ; base speed
-	db 95 ; base special
-
-	db ICE ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 45 ; catch rate
-	db 137 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw JynxPicFront
-	dw JynxPicBack
-
-	; attacks known at lvl 0
-	db POUND
-	db LOVELY_KISS
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01111111
-	db %00001111
-	db %11110000
-	db %10000111
-	db %00101000
-	db %00000010
-
-	db 0 ; padding
-
-ElectabuzzBaseStats: ; 3916e (e:516e)
-	db DEX_ELECTABUZZ ; pokedex id
-	db 65 ; base hp
-	db 83 ; base attack
-	db 57 ; base defense
-	db 105 ; base speed
-	db 85 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 45 ; catch rate
-	db 156 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw ElectabuzzPicFront
-	dw ElectabuzzPicBack
-
-	; attacks known at lvl 0
-	db QUICK_ATTACK
-	db LEER
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %10001111
-	db %11110001
-	db %11000111
-	db %00111000
-	db %01100010
-
-	db 0 ; padding
-
-MagmarBaseStats: ; 3918a (e:518a)
-	db DEX_MAGMAR ; pokedex id
-	db 65 ; base hp
-	db 95 ; base attack
-	db 57 ; base defense
-	db 93 ; base speed
-	db 85 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 45 ; catch rate
-	db 167 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw MagmarPicFront
-	dw MagmarPicBack
-
-	; attacks known at lvl 0
-	db EMBER
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110001
-	db %01000011
-	db %00001111
-	db %11110000
-	db %10100110
-	db %00101000
-	db %00100010
-
-	db 0 ; padding
-
-PinsirBaseStats: ; 391a6 (e:51a6)
-	db DEX_PINSIR ; pokedex id
-	db 65 ; base hp
-	db 125 ; base attack
-	db 100 ; base defense
-	db 85 ; base speed
-	db 55 ; base special
-
-	db BUG ; species type 1
-	db BUG ; species type 2
-
-	db 45 ; catch rate
-	db 200 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw PinsirPicFront
-	dw PinsirPicBack
-
-	; attacks known at lvl 0
-	db VICEGRIP
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10100100
-	db %01000011
-	db %00001101
-	db %11000000
-	db %00000010
-	db %00001000
-	db %00100110
-
-	db 0 ; padding
-
-TaurosBaseStats: ; 391c2 (e:51c2)
-	db DEX_TAUROS ; pokedex id
-	db 75 ; base hp
-	db 100 ; base attack
-	db 95 ; base defense
-	db 110 ; base speed
-	db 70 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 45 ; catch rate
-	db 211 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw TaurosPicFront
-	dw TaurosPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11100000
-	db %01110011
-	db %10001000
-	db %11000111
-	db %10100010
-	db %00001000
-	db %00100010
-
-	db 0 ; padding
-
-MagikarpBaseStats: ; 391de (e:51de)
-	db DEX_MAGIKARP ; pokedex id
-	db 20 ; base hp
-	db 10 ; base attack
-	db 55 ; base defense
-	db 80 ; base speed
-	db 20 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 255 ; catch rate
-	db 20 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw MagikarpPicFront
-	dw MagikarpPicBack
-
-	; attacks known at lvl 0
-	db SPLASH
-	db 0
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-GyaradosBaseStats: ; 391fa (e:51fa)
-	db DEX_GYARADOS ; pokedex id
-	db 95 ; base hp
-	db 125 ; base attack
-	db 79 ; base defense
-	db 81 ; base speed
-	db 100 ; base special
-
-	db WATER ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 214 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw GyaradosPicFront
-	dw GyaradosPicBack
-
-	; attacks known at lvl 0
-	db BITE
-	db DRAGON_RAGE
-	db LEER
-	db HYDRO_PUMP
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01111111
-	db %11001000
-	db %11000001
-	db %10100011
-	db %00001000
-	db %00110010
-
-	db 0 ; padding
-
-LaprasBaseStats: ; 39216 (e:5216)
-	db DEX_LAPRAS ; pokedex id
-	db 130 ; base hp
-	db 85 ; base attack
-	db 80 ; base defense
-	db 60 ; base speed
-	db 95 ; base special
-
-	db WATER ; species type 1
-	db ICE ; species type 2
-
-	db 45 ; catch rate
-	db 219 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw LaprasPicFront
-	dw LaprasPicBack
-
-	; attacks known at lvl 0
-	db WATER_GUN
-	db GROWL
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11100000
-	db %01111111
-	db %11101000
-	db %11010001
-	db %10000011
-	db %00101000
-	db %00110010
-
-	db 0 ; padding
-
-DittoBaseStats: ; 39232 (e:5232)
-	db DEX_DITTO ; pokedex id
-	db 48 ; base hp
-	db 48 ; base attack
-	db 48 ; base defense
-	db 48 ; base speed
-	db 48 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 35 ; catch rate
-	db 61 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw DittoPicFront
-	dw DittoPicBack
-
-	; attacks known at lvl 0
-	db TRANSFORM
-	db 0
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-	db %00000000
-
-	db 0 ; padding
-
-EeveeBaseStats: ; 3924e (e:524e)
-	db DEX_EEVEE ; pokedex id
-	db 55 ; base hp
-	db 55 ; base attack
-	db 50 ; base defense
-	db 55 ; base speed
-	db 65 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 45 ; catch rate
-	db 92 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw EeveePicFront
-	dw EeveePicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SAND_ATTACK
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00000011
-	db %00001000
-	db %11000000
-	db %11000011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-VaporeonBaseStats: ; 3926a (e:526a)
-	db DEX_VAPOREON ; pokedex id
-	db 130 ; base hp
-	db 65 ; base attack
-	db 60 ; base defense
-	db 65 ; base speed
-	db 110 ; base special
-
-	db WATER ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 196 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw VaporeonPicFront
-	dw VaporeonPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SAND_ATTACK
-	db QUICK_ATTACK
-	db WATER_GUN
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01111111
-	db %00001000
-	db %11000000
-	db %11000011
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-JolteonBaseStats: ; 39286 (e:5286)
-	db DEX_JOLTEON ; pokedex id
-	db 65 ; base hp
-	db 65 ; base attack
-	db 60 ; base defense
-	db 130 ; base speed
-	db 110 ; base special
-
-	db ELECTRIC ; species type 1
-	db ELECTRIC ; species type 2
-
-	db 45 ; catch rate
-	db 197 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw JolteonPicFront
-	dw JolteonPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SAND_ATTACK
-	db QUICK_ATTACK
-	db THUNDERSHOCK
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %10001000
-	db %11000001
-	db %11000011
-	db %00011000
-	db %01000010
-
-	db 0 ; padding
-
-FlareonBaseStats: ; 392a2 (e:52a2)
-	db DEX_FLAREON ; pokedex id
-	db 65 ; base hp
-	db 130 ; base attack
-	db 60 ; base defense
-	db 65 ; base speed
-	db 110 ; base special
-
-	db FIRE ; species type 1
-	db FIRE ; species type 2
-
-	db 45 ; catch rate
-	db 198 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw FlareonPicFront
-	dw FlareonPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SAND_ATTACK
-	db QUICK_ATTACK
-	db EMBER
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %01000011
-	db %00001000
-	db %11000000
-	db %11100011
-	db %00001000
-	db %00000010
-
-	db 0 ; padding
-
-PorygonBaseStats: ; 392be (e:52be)
-	db DEX_PORYGON ; pokedex id
-	db 65 ; base hp
-	db 60 ; base attack
-	db 70 ; base defense
-	db 40 ; base speed
-	db 75 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 45 ; catch rate
-	db 130 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw PorygonPicFront
-	dw PorygonPicBack
-
-	; attacks known at lvl 0
-	db TACKLE
-	db SHARPEN
-	db CONVERSION
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %00100000
-	db %01110011
-	db %10001000
-	db %11110001
-	db %11000011
-	db %00111000
-	db %01000011
-
-	db 0 ; padding
-
-OmanyteBaseStats: ; 392da (e:52da)
-	db DEX_OMANYTE ; pokedex id
-	db 35 ; base hp
-	db 40 ; base attack
-	db 100 ; base defense
-	db 35 ; base speed
-	db 90 ; base special
-
-	db ROCK ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 120 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw OmanytePicFront
-	dw OmanytePicBack
-
-	; attacks known at lvl 0
-	db WATER_GUN
-	db WITHDRAW
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00111111
-	db %00001000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-OmastarBaseStats: ; 392f6 (e:52f6)
-	db DEX_OMASTAR ; pokedex id
-	db 70 ; base hp
-	db 60 ; base attack
-	db 125 ; base defense
-	db 55 ; base speed
-	db 115 ; base special
-
-	db ROCK ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 199 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw OmastarPicFront
-	dw OmastarPicBack
-
-	; attacks known at lvl 0
-	db WATER_GUN
-	db WITHDRAW
-	db HORN_ATTACK
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %11100000
-	db %01111111
-	db %00001101
-	db %11000000
-	db %10000011
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-KabutoBaseStats: ; 39312 (e:5312)
-	db DEX_KABUTO ; pokedex id
-	db 30 ; base hp
-	db 80 ; base attack
-	db 90 ; base defense
-	db 55 ; base speed
-	db 45 ; base special
-
-	db ROCK ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 119 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw KabutoPicFront
-	dw KabutoPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db HARDEN
-	db 0
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00111111
-	db %00001000
-	db %11000000
-	db %00000011
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-KabutopsBaseStats: ; 3932e (e:532e)
-	db DEX_KABUTOPS ; pokedex id
-	db 60 ; base hp
-	db 115 ; base attack
-	db 105 ; base defense
-	db 80 ; base speed
-	db 70 ; base special
-
-	db ROCK ; species type 1
-	db WATER ; species type 2
-
-	db 45 ; catch rate
-	db 201 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw KabutopsPicFront
-	dw KabutopsPicBack
-
-	; attacks known at lvl 0
-	db SCRATCH
-	db HARDEN
-	db ABSORB
-	db 0
-
-	db 0 ; growth rate
-
-	; learnset
-	db %10110110
-	db %01111111
-	db %00001101
-	db %11000000
-	db %10000011
-	db %00001000
-	db %00010010
-
-	db 0 ; padding
-
-AerodactylBaseStats: ; 3934a (e:534a)
-	db DEX_AERODACTYL ; pokedex id
-	db 80 ; base hp
-	db 105 ; base attack
-	db 65 ; base defense
-	db 130 ; base speed
-	db 60 ; base special
-
-	db ROCK ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 202 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw AerodactylPicFront
-	dw AerodactylPicBack
-
-	; attacks known at lvl 0
-	db WING_ATTACK
-	db AGILITY
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %01001000
-	db %11000000
-	db %01100011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-SnorlaxBaseStats: ; 39366 (e:5366)
-	db DEX_SNORLAX ; pokedex id
-	db 160 ; base hp
-	db 110 ; base attack
-	db 65 ; base defense
-	db 30 ; base speed
-	db 65 ; base special
-
-	db NORMAL ; species type 1
-	db NORMAL ; species type 2
-
-	db 25 ; catch rate
-	db 154 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw SnorlaxPicFront
-	dw SnorlaxPicBack
-
-	; attacks known at lvl 0
-	db HEADBUTT
-	db AMNESIA
-	db REST
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11111111
-	db %10101111
-	db %11010111
-	db %10101111
-	db %10101000
-	db %00110010
-
-	db 0 ; padding
-
-ArticunoBaseStats: ; 39382 (e:5382)
-	db DEX_ARTICUNO ; pokedex id
-	db 90 ; base hp
-	db 85 ; base attack
-	db 100 ; base defense
-	db 85 ; base speed
-	db 125 ; base special
-
-	db ICE ; species type 1
-	db FLYING ; species type 2
-
-	db 3 ; catch rate
-	db 215 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ArticunoPicFront
-	dw ArticunoPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db ICE_BEAM
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01111111
-	db %00001000
-	db %11000000
-	db %01000011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-ZapdosBaseStats: ; 3939e (e:539e)
-	db DEX_ZAPDOS ; pokedex id
-	db 90 ; base hp
-	db 90 ; base attack
-	db 85 ; base defense
-	db 100 ; base speed
-	db 125 ; base special
-
-	db ELECTRIC ; species type 1
-	db FLYING ; species type 2
-
-	db 3 ; catch rate
-	db 216 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw ZapdosPicFront
-	dw ZapdosPicBack
-
-	; attacks known at lvl 0
-	db THUNDERSHOCK
-	db DRILL_PECK
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %10001000
-	db %11000001
-	db %01000011
-	db %00011100
-	db %01001010
-
-	db 0 ; padding
-
-MoltresBaseStats: ; 393ba (e:53ba)
-	db DEX_MOLTRES ; pokedex id
-	db 90 ; base hp
-	db 100 ; base attack
-	db 90 ; base defense
-	db 90 ; base speed
-	db 125 ; base special
-
-	db FIRE ; species type 1
-	db FLYING ; species type 2
-
-	db 3 ; catch rate
-	db 217 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw MoltresPicFront
-	dw MoltresPicBack
-
-	; attacks known at lvl 0
-	db PECK
-	db FIRE_SPIN
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %00101010
-	db %01000011
-	db %00001000
-	db %11000000
-	db %01100011
-	db %00001100
-	db %00001010
-
-	db 0 ; padding
-
-DratiniBaseStats: ; 393d6 (e:53d6)
-	db DEX_DRATINI ; pokedex id
-	db 41 ; base hp
-	db 64 ; base attack
-	db 45 ; base defense
-	db 50 ; base speed
-	db 50 ; base special
-
-	db DRAGON ; species type 1
-	db DRAGON ; species type 2
-
-	db 45 ; catch rate
-	db 67 ; base exp yield
-	db $55 ; sprite dimensions
-
-	dw DratiniPicFront
-	dw DratiniPicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db LEER
-	db 0
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10100000
-	db %00111111
-	db %11001000
-	db %11000001
-	db %11100011
-	db %00011000
-	db %00010010
-
-	db 0 ; padding
-
-DragonairBaseStats: ; 393f2 (e:53f2)
-	db DEX_DRAGONAIR ; pokedex id
-	db 61 ; base hp
-	db 84 ; base attack
-	db 65 ; base defense
-	db 70 ; base speed
-	db 70 ; base special
-
-	db DRAGON ; species type 1
-	db DRAGON ; species type 2
-
-	db 45 ; catch rate
-	db 144 ; base exp yield
-	db $66 ; sprite dimensions
-
-	dw DragonairPicFront
-	dw DragonairPicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db LEER
-	db THUNDER_WAVE
-	db 0
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11100000
-	db %00111111
-	db %11001000
-	db %11000001
-	db %11100011
-	db %00011000
-	db %00010010
-
-	db 0 ; padding
-
-DragoniteBaseStats: ; 3940e (e:540e)
-	db DEX_DRAGONITE ; pokedex id
-	db 91 ; base hp
-	db 134 ; base attack
-	db 95 ; base defense
-	db 80 ; base speed
-	db 100 ; base special
-
-	db DRAGON ; species type 1
-	db FLYING ; species type 2
-
-	db 45 ; catch rate
-	db 218 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw DragonitePicFront
-	dw DragonitePicBack
-
-	; attacks known at lvl 0
-	db WRAP
-	db LEER
-	db THUNDER_WAVE
-	db AGILITY
-
-	db 5 ; growth rate
-
-	; learnset
-	db %11100010
-	db %01111111
-	db %11001000
-	db %11000001
-	db %11100011
-	db %00011000
-	db %00110010
-
-	db 0 ; padding
-
-MewtwoBaseStats: ; 3942a (e:542a)
-	db DEX_MEWTWO ; pokedex id
-	db 106 ; base hp
-	db 110 ; base attack
-	db 90 ; base defense
-	db 130 ; base speed
-	db 154 ; base special
-
-	db PSYCHIC ; species type 1
-	db PSYCHIC ; species type 2
-
-	db 3 ; catch rate
-	db 220 ; base exp yield
-	db $77 ; sprite dimensions
-
-	dw MewtwoPicFront
-	dw MewtwoPicBack
-
-	; attacks known at lvl 0
-	db CONFUSION
-	db DISABLE
-	db SWIFT
-	db PSYCHIC_M
-
-	db 5 ; growth rate
-
-	; learnset
-	db %10110001
-	db %11111111
-	db %10101111
-	db %11110001
-	db %10101111
-	db %00111000
-	db %01100011
-
-	db 0 ; padding
+	
+INCLUDE "baseStats.asm"
 
 CryData: ; 39446 (e:5446)
 	;$BaseCry, $Pitch, $Length
@@ -68262,47 +57587,8 @@ OTString67E5: ; 427e5 (10:67e5)
 
 SECTION "bank11",ROMX,BANK[$11]
 
-LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
-	db $00 ; tileset
-	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
-	dw LavenderTownBlocks, LavenderTownTextPointers, LavenderTownScript ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST ; connections
-	NORTH_MAP_CONNECTION ROUTE_10, ROUTE_10_WIDTH, ROUTE_10_HEIGHT, 0, 0, ROUTE_10_WIDTH, Route10Blocks
-	SOUTH_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, 0, 0, ROUTE_12_WIDTH, Route12Blocks, LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_8, ROUTE_8_WIDTH, 0, 0, ROUTE_8_HEIGHT, Route8Blocks, LAVENDER_TOWN_WIDTH
-	dw LavenderTownObject ; objects
-
-LavenderTownObject: ; 0x4402d (size=88)
-	db $2c ; border tile
-
-	db $6 ; warps
-	db $5, $3, $0, LAVENDER_POKECENTER
-	db $5, $e, $0, POKEMONTOWER_1
-	db $9, $7, $0, LAVENDER_HOUSE_1
-	db $d, $f, $0, LAVENDER_MART
-	db $d, $3, $0, LAVENDER_HOUSE_2
-	db $d, $7, $0, NAME_RATERS_HOUSE
-
-	db $6 ; signs
-	db $9, $b, $4 ; LavenderTownText4
-	db $3, $9, $5 ; LavenderTownText5
-	db $d, $10, $6 ; MartSignText
-	db $5, $4, $7 ; PokeCenterSignText
-	db $9, $5, $8 ; LavenderTownText8
-	db $7, $11, $9 ; LavenderTownText9
-
-	db $3 ; people
-	db SPRITE_LITTLE_GIRL, $9 + 4, $f + 4, $fe, $0, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $9 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $7 + 4, $8 + 4, $fe, $2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $a, $5, $3 ; LAVENDER_POKECENTER
-	EVENT_DISP $a, $5, $e ; POKEMONTOWER_1
-	EVENT_DISP $a, $9, $7 ; LAVENDER_HOUSE_1
-	EVENT_DISP $a, $d, $f ; LAVENDER_MART
-	EVENT_DISP $a, $d, $3 ; LAVENDER_HOUSE_2
-	EVENT_DISP $a, $d, $7 ; NAME_RATERS_HOUSE
+INCLUDE "mapHeaders/LavenderTown.asm"	
+INCLUDE "mapObjects/LavenderTown.asm"
 
 LavenderTownBlocks: ; 44085 (11:4085)
 	INCBIN "maps/lavendertown.blk"
@@ -68539,13 +57825,8 @@ UnnamedText_44247: ; 44247 (11:4247)
 UnnamedText_4424c: ; 4424c (11:424c)
 	TX_FAR _UnnamedText_4424c
 	db "@"
-
-ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
-	db $06 ; tileset
-	db VIRIDIAN_POKECENTER_HEIGHT, VIRIDIAN_POKECENTER_WIDTH ; dimensions (y, x)
-	dw ViridianPokecenterBlocks, ViridianPokecenterTextPointers, ViridianPokeCenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/ViridianPokecenter.asm"
 
 ViridianPokeCenterScript: ; 4425d (11:425d)
 	call Func_22fa
@@ -68570,32 +57851,10 @@ ViridianPokeCenterText3: ; 44271 (11:4271)
 
 ViridianPokeCenterText4: ; 44276 (11:4276)
 	db $f6
+	
+INCLUDE "mapObjects/ViridianPokecenter.asm"
 
-ViridianPokecenterObject: ; 0x44277 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GENTLEMAN, $5 + 4, $a + 4, $fe, $1, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $3 + 4, $4 + 4, $ff, $ff, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
-	db $16 ; tileset
-	db MANSION_1_HEIGHT, MANSION_1_WIDTH ; dimensions (y, x)
-	dw Mansion1Blocks, Mansion1TextPointers, Mansion1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Mansion1Object ; objects
+INCLUDE "mapHeaders/Mansion1.asm"
 
 Mansion1Script: ; 442af (11:42af)
 	call Mansion1Subscript1
@@ -68736,46 +57995,13 @@ MansionSwitchPressedText: ; 4439a (11:439a)
 MansionSwitchNotPressedText: ; 4439f (11:439f)
 	TX_FAR _MansionSwitchNotPressedText
 	db "@"
-
-Mansion1Object: ; 0x443a4 (size=90)
-	db $2e ; border tile
-
-	db $8 ; warps
-	db $1b, $4, $0, $ff
-	db $1b, $5, $0, $ff
-	db $1b, $6, $0, $ff
-	db $1b, $7, $0, $ff
-	db $a, $5, $0, MANSION_2
-	db $17, $15, $0, MANSION_4
-	db $1b, $1a, $0, $ff
-	db $1b, $1b, $0, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OAK_AIDE, $11 + 4, $11 + 4, $ff, $d2, $41, SCIENTIST + $C8, $4 ; trainer
-	db SPRITE_BALL, $3 + 4, $e + 4, $ff, $ff, $82, ESCAPE_ROPE ; item
-	db SPRITE_BALL, $15 + 4, $12 + 4, $ff, $ff, $83, CARBOS ; item
-
-	; warp-to
-	EVENT_DISP $f, $1b, $4
-	EVENT_DISP $f, $1b, $5
-	EVENT_DISP $f, $1b, $6
-	EVENT_DISP $f, $1b, $7
-	EVENT_DISP $f, $a, $5 ; MANSION_2
-	EVENT_DISP $f, $17, $15 ; MANSION_4
-	EVENT_DISP $f, $1b, $1a
-	EVENT_DISP $f, $1b, $1b
+	
+INCLUDE "mapObjects/Mansion1.asm"
 
 Mansion1Blocks: ; 443fe (11:43fe)
 	INCBIN "maps/mansion1.blk"
 
-RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
-	db $11 ; tileset
-	db ROCK_TUNNEL_1_HEIGHT, ROCK_TUNNEL_1_WIDTH ; dimensions (y, x)
-	dw RockTunnel1Blocks, RockTunnel1TextPointers, RockTunnel1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RockTunnel1Object ; objects
+INCLUDE "mapHeaders/RockTunnel1.asm"
 
 RockTunnel1Script: ; 444dc (11:44dc)
 	call EnableAutoTextBoxDrawing
@@ -68991,51 +58217,13 @@ RockTunnel1AfterBattleText7: ; 445ec (11:45ec)
 RockTunnel1Text8: ; 445f1 (11:45f1)
 	TX_FAR _RockTunnel1Text8
 	db "@"
-
-RockTunnel1Object: ; 0x445f6 (size=127)
-	db $3 ; border tile
-
-	db $8 ; warps
-	db $3, $f, $1, $ff
-	db $0, $f, $1, $ff
-	db $21, $f, $2, $ff
-	db $23, $f, $2, $ff
-	db $3, $25, $0, ROCK_TUNNEL_2
-	db $3, $5, $1, ROCK_TUNNEL_2
-	db $b, $11, $2, ROCK_TUNNEL_2
-	db $11, $25, $3, ROCK_TUNNEL_2
-
-	db $1 ; signs
-	db $1d, $b, $8 ; RockTunnel1Text8
-
-	db $7 ; people
-	db SPRITE_HIKER, $5 + 4, $7 + 4, $ff, $d0, $41, HIKER + $C8, $c ; trainer
-	db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, $42, HIKER + $C8, $d ; trainer
-	db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, $43, HIKER + $C8, $e ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, $44, POKEMANIAC + $C8, $7 ; trainer
-	db SPRITE_LASS, $15 + 4, $25 + 4, $ff, $d2, $45, JR__TRAINER_F + $C8, $11 ; trainer
-	db SPRITE_LASS, $18 + 4, $16 + 4, $ff, $d0, $46, JR__TRAINER_F + $C8, $12 ; trainer
-	db SPRITE_LASS, $18 + 4, $20 + 4, $ff, $d3, $47, JR__TRAINER_F + $C8, $13 ; trainer
-
-	; warp-to
-	EVENT_DISP $14, $3, $f
-	EVENT_DISP $14, $0, $f
-	EVENT_DISP $14, $21, $f
-	EVENT_DISP $14, $23, $f
-	EVENT_DISP $14, $3, $25 ; ROCK_TUNNEL_2
-	EVENT_DISP $14, $3, $5 ; ROCK_TUNNEL_2
-	EVENT_DISP $14, $b, $11 ; ROCK_TUNNEL_2
-	EVENT_DISP $14, $11, $25 ; ROCK_TUNNEL_2
+	
+INCLUDE "mapObjects/RockTunnel1.asm"
 
 RockTunnel1Blocks: ; 44675 (11:4675)
 	INCBIN "maps/rocktunnel1.blk"
-
-SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
-	db $11 ; tileset
-	db SEAFOAM_ISLANDS_1_HEIGHT, SEAFOAM_ISLANDS_1_WIDTH ; dimensions (y, x)
-	dw SeafoamIslands1Blocks, SeafoamIslands1TextPointers, SeafoamIslands1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SeafoamIslands1Object ; objects
+	
+INCLUDE "mapHeaders/SeafoamIslands1.asm"
 
 SeafoamIslands1Script: ; 447e9 (11:47e9)
 	call EnableAutoTextBoxDrawing
@@ -69088,46 +58276,12 @@ SeafoamIslands1TextPointers: ; 4484b (11:484b)
 	dw BoulderText
 	dw BoulderText
 
-SeafoamIslands1Object: ; 0x4484f (size=72)
-	db $7d ; border tile
-
-	db $7 ; warps
-	db $11, $4, $0, $ff
-	db $11, $5, $0, $ff
-	db $11, $1a, $1, $ff
-	db $11, $1b, $1, $ff
-	db $5, $7, $1, SEAFOAM_ISLANDS_2
-	db $3, $19, $6, SEAFOAM_ISLANDS_2
-	db $f, $17, $4, SEAFOAM_ISLANDS_2
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BOULDER, $a + 4, $12 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $7 + 4, $1a + 4, $ff, $10, $2 ; person
-
-	; warp-to
-	EVENT_DISP $f, $11, $4
-	EVENT_DISP $f, $11, $5
-	EVENT_DISP $f, $11, $1a
-	EVENT_DISP $f, $11, $1b
-	EVENT_DISP $f, $5, $7 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $f, $17 ; SEAFOAM_ISLANDS_2
-
-	; holes
-	EVENT_DISP $f, $6, $11
-	EVENT_DISP $f, $6, $18
+INCLUDE "mapObjects/SeafoamIslands.asm"	
 
 SeafoamIslands1Blocks: ; 4489f (11:489f)
 	INCBIN "maps/seafoamislands1.blk"
-
-SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
-	db $0d ; tileset
-	db SS_ANNE_3_HEIGHT, SS_ANNE_3_WIDTH ; dimensions (y, x)
-	dw SSAnne3Blocks, SSAnne3TextPointers, SSAnne3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne3Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne3.asm"
 
 SSAnne3Script: ; 44932 (11:4932)
 	jp EnableAutoTextBoxDrawing
@@ -69138,32 +58292,13 @@ SSAnne3TextPointers: ; 44935 (11:4935)
 SSAnne3Text1: ; 44937 (11:4937)
 	TX_FAR _SSAnne3Text1
 	db "@"
-
-SSAnne3Object: ; 0x4493c (size=26)
-	db $c ; border tile
-
-	db $2 ; warps
-	db $3, $0, $0, SS_ANNE_5
-	db $3, $13, $7, SS_ANNE_2
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_SAILOR, $3 + 4, $9 + 4, $fe, $2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $a, $3, $0 ; SS_ANNE_5
-	EVENT_DISP $a, $3, $13 ; SS_ANNE_2
+	
+INCLUDE "mapObjects/SSAnne3.asm"	
 
 SSAnne3Blocks: ; 44956 (11:4956)
 	INCBIN "maps/ssanne3.blk"
-
-VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
-	db $11 ; tileset
-	db VICTORY_ROAD_3_HEIGHT, VICTORY_ROAD_3_WIDTH ; dimensions (y, x)
-	dw VictoryRoad3Blocks, VictoryRoad3TextPointers, VictoryRoad3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VictoryRoad3Object ; objects
+	
+INCLUDE "mapHeaders/VictoryRoad3.asm"
 
 VictoryRoad3Script: ; 44980 (11:4980)
 	call VictoryRoad3Script_44996
@@ -69370,45 +58505,13 @@ VictoryRoad3EndBattleText5: ; 44ac3 (11:4ac3)
 VictoryRoad3AfterBattleText5: ; 44ac8 (11:4ac8)
 	TX_FAR _VictoryRoad3AfterBattleText5
 	db "@"
-
-VictoryRoad3Object: ; 0x44acd (size=106)
-	db $7d ; border tile
-
-	db $4 ; warps
-	db $7, $17, $3, VICTORY_ROAD_2
-	db $8, $1a, $5, VICTORY_ROAD_2
-	db $f, $1b, $4, VICTORY_ROAD_2
-	db $0, $2, $6, VICTORY_ROAD_2
-
-	db $0 ; signs
-
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $1c + 4, $ff, $d2, $41, COOLTRAINER_M + $C8, $2 ; trainer
-	db SPRITE_LASS, $d + 4, $7 + 4, $ff, $d3, $42, COOLTRAINER_F + $C8, $2 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $6 + 4, $ff, $d2, $43, COOLTRAINER_M + $C8, $3 ; trainer
-	db SPRITE_LASS, $3 + 4, $d + 4, $ff, $d3, $44, COOLTRAINER_F + $C8, $3 ; trainer
-	db SPRITE_BALL, $5 + 4, $1a + 4, $ff, $ff, $85, MAX_REVIVE ; item
-	db SPRITE_BALL, $7 + 4, $7 + 4, $ff, $ff, $86, TM_47 ; item
-	db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, $10, $7 ; person
-	db SPRITE_BOULDER, $c + 4, $d + 4, $ff, $10, $8 ; person
-	db SPRITE_BOULDER, $a + 4, $18 + 4, $ff, $10, $9 ; person
-	db SPRITE_BOULDER, $f + 4, $16 + 4, $ff, $10, $a ; person
-
-	; warp-to
-	EVENT_DISP $f, $7, $17 ; VICTORY_ROAD_2
-	EVENT_DISP $f, $8, $1a ; VICTORY_ROAD_2
-	EVENT_DISP $f, $f, $1b ; VICTORY_ROAD_2
-	EVENT_DISP $f, $0, $2 ; VICTORY_ROAD_2
+	
+INCLUDE "mapObjects/VictoryRoad3.asm"	
 
 VictoryRoad3Blocks: ; 44b37 (11:4b37)
 	INCBIN "maps/victoryroad3.blk"
-
-RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
-	db $16 ; tileset
-	db ROCKET_HIDEOUT_1_HEIGHT, ROCKET_HIDEOUT_1_WIDTH ; dimensions (y, x)
-	dw RocketHideout1Blocks, RocketHideout1TextPointers, RocketHideout1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RocketHideout1Object ; objects
+	
+INCLUDE "mapHeaders/RocketHideout1.asm"
 
 RocketHideout1Script: ; 44bca (11:4bca)
 	call Func_44be0
@@ -69603,44 +58706,13 @@ RocketHideout1BattleText6: ; 44cdd (11:4cdd)
 RocketHideout1AfterBattleTxt6: ; 44ce2 (11:4ce2)
 	TX_FAR _RocketHideout1AfterBattleTxt6
 	db "@"
-
-RocketHideout1Object: ; 0x44ce7 (size=98)
-	db $2e ; border tile
-
-	db $5 ; warps
-	db $2, $17, $0, ROCKET_HIDEOUT_2
-	db $2, $15, $2, GAME_CORNER
-	db $13, $18, $0, ROCKET_HIDEOUT_ELEVATOR
-	db $18, $15, $3, ROCKET_HIDEOUT_2
-	db $13, $19, $1, ROCKET_HIDEOUT_ELEVATOR
-
-	db $0 ; signs
-
-	db $7 ; people
-	db SPRITE_ROCKET, $8 + 4, $1a + 4, $ff, $d2, $41, ROCKET + $C8, $8 ; trainer
-	db SPRITE_ROCKET, $6 + 4, $c + 4, $ff, $d3, $42, ROCKET + $C8, $9 ; trainer
-	db SPRITE_ROCKET, $11 + 4, $12 + 4, $ff, $d0, $43, ROCKET + $C8, $a ; trainer
-	db SPRITE_ROCKET, $19 + 4, $f + 4, $ff, $d3, $44, ROCKET + $C8, $b ; trainer
-	db SPRITE_ROCKET, $12 + 4, $1c + 4, $ff, $d2, $45, ROCKET + $C8, $c ; trainer
-	db SPRITE_BALL, $e + 4, $b + 4, $ff, $ff, $86, ESCAPE_ROPE ; item
-	db SPRITE_BALL, $11 + 4, $9 + 4, $ff, $ff, $87, HYPER_POTION ; item
-
-	; warp-to
-	EVENT_DISP $f, $2, $17 ; ROCKET_HIDEOUT_2
-	EVENT_DISP $f, $2, $15 ; GAME_CORNER
-	EVENT_DISP $f, $13, $18 ; ROCKET_HIDEOUT_ELEVATOR
-	EVENT_DISP $f, $18, $15 ; ROCKET_HIDEOUT_2
-	EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
+	
+INCLUDE "mapObjects/RocketHideout1.asm"	
 
 RocketHideout1Blocks: ; 44d49 (11:4d49)
 	INCBIN "maps/rockethideout1.blk"
-
-RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
-	db $16 ; tileset
-	db ROCKET_HIDEOUT_2_HEIGHT, ROCKET_HIDEOUT_2_WIDTH ; dimensions (y, x)
-	dw RocketHideout2Blocks, RocketHideout2TextPointers, RocketHideout2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RocketHideout2Object ; objects
+	
+INCLUDE "mapHeaders/RocketHideout2.asm"
 
 RocketHideout2Script: ; 44e27 (11:4e27)
 	call EnableAutoTextBoxDrawing
@@ -70143,42 +59215,13 @@ RocketHideout2EndBattleText2: ; 450ed (11:50ed)
 RocketHideout2AfterBattleTxt2: ; 450f2 (11:50f2)
 	TX_FAR _RocketHideout2AfterBattleTxt2
 	db "@"
-
-RocketHideout2Object: ; 0x450f7 (size=80)
-	db $2e ; border tile
-
-	db $5 ; warps
-	db $8, $1b, $0, ROCKET_HIDEOUT_1
-	db $8, $15, $0, ROCKET_HIDEOUT_3
-	db $13, $18, $0, ROCKET_HIDEOUT_ELEVATOR
-	db $16, $15, $3, ROCKET_HIDEOUT_1
-	db $13, $19, $1, ROCKET_HIDEOUT_ELEVATOR
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_ROCKET, $c + 4, $14 + 4, $ff, $d0, $41, ROCKET + $C8, $d ; trainer
-	db SPRITE_BALL, $b + 4, $1 + 4, $ff, $ff, $82, MOON_STONE ; item
-	db SPRITE_BALL, $8 + 4, $10 + 4, $ff, $ff, $83, NUGGET ; item
-	db SPRITE_BALL, $c + 4, $6 + 4, $ff, $ff, $84, TM_07 ; item
-	db SPRITE_BALL, $15 + 4, $3 + 4, $ff, $ff, $85, SUPER_POTION ; item
-
-	; warp-to
-	EVENT_DISP $f, $8, $1b ; ROCKET_HIDEOUT_1
-	EVENT_DISP $f, $8, $15 ; ROCKET_HIDEOUT_3
-	EVENT_DISP $f, $13, $18 ; ROCKET_HIDEOUT_ELEVATOR
-	EVENT_DISP $f, $16, $15 ; ROCKET_HIDEOUT_1
-	EVENT_DISP $f, $13, $19 ; ROCKET_HIDEOUT_ELEVATOR
+	
+INCLUDE "mapObjects/RocketHideout2.asm"	
 
 RocketHideout2Blocks: ; 45147 (11:5147)
 	INCBIN "maps/rockethideout2.blk"
-
-RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
-	db $16 ; tileset
-	db ROCKET_HIDEOUT_3_HEIGHT, ROCKET_HIDEOUT_3_WIDTH ; dimensions (y, x)
-	dw RocketHideout3Blocks, RocketHideout3TextPointers, RocketHideout3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RocketHideout3Object ; objects
+	
+INCLUDE "mapHeaders/RocketHideout3.asm"
 
 RocketHideout3Script: ; 45225 (11:5225)
 	call EnableAutoTextBoxDrawing
@@ -70391,35 +59434,13 @@ RocketHideout3EndBattleText3: ; 45343 (11:5343)
 RocketHideout3AfterBattleText3: ; 45348 (11:5348)
 	TX_FAR _RocketHide3AfterBattleText3
 	db "@"
-
-RocketHideout3Object: ; 0x4534d (size=50)
-	db $2e ; border tile
-
-	db $2 ; warps
-	db $6, $19, $1, ROCKET_HIDEOUT_2
-	db $12, $13, $0, ROCKET_HIDEOUT_4
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_ROCKET, $16 + 4, $a + 4, $ff, $d3, $41, ROCKET + $C8, $e ; trainer
-	db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d1, $42, ROCKET + $C8, $f ; trainer
-	db SPRITE_BALL, $11 + 4, $1a + 4, $ff, $ff, $83, TM_10 ; item
-	db SPRITE_BALL, $e + 4, $14 + 4, $ff, $ff, $84, RARE_CANDY ; item
-
-	; warp-to
-	EVENT_DISP $f, $6, $19 ; ROCKET_HIDEOUT_2
-	EVENT_DISP $f, $12, $13 ; ROCKET_HIDEOUT_4
+	
+INCLUDE "mapObjects/RocketHideout3.asm"	
 
 RocketHideout3Blocks: ; 4537f (11:537f)
 	INCBIN "maps/rockethideout3.blk"
 
-RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
-	db $16 ; tileset
-	db ROCKET_HIDEOUT_4_HEIGHT, ROCKET_HIDEOUT_4_WIDTH ; dimensions (y, x)
-	dw RocketHideout4Blocks, RocketHideout4TextPointers, RocketHideout4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RocketHideout4Object ; objects
+INCLUDE "mapHeaders/RocketHideout4.asm"
 
 RocketHideout4Script: ; 4545d (11:545d)
 	call Func_45473
@@ -70653,42 +59674,13 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 UnnamedText_455ec: ; 455ec (11:55ec)
 	TX_FAR _UnnamedText_455ec
 	db "@"
-
-RocketHideout4Object: ; 0x455f1 (size=95)
-	db $2e ; border tile
-
-	db $3 ; warps
-	db $a, $13, $1, ROCKET_HIDEOUT_3
-	db $f, $18, $0, ROCKET_HIDEOUT_ELEVATOR
-	db $f, $19, $1, ROCKET_HIDEOUT_ELEVATOR
-
-	db $0 ; signs
-
-	db $9 ; people
-	db SPRITE_GIOVANNI, $3 + 4, $19 + 4, $ff, $d0, $41, GIOVANNI + $C8, $1 ; trainer
-	db SPRITE_ROCKET, $c + 4, $17 + 4, $ff, $d0, $42, ROCKET + $C8, $10 ; trainer
-	db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d0, $43, ROCKET + $C8, $11 ; trainer
-	db SPRITE_ROCKET, $2 + 4, $b + 4, $ff, $d0, $44, ROCKET + $C8, $12 ; trainer
-	db SPRITE_BALL, $c + 4, $a + 4, $ff, $ff, $85, HP_UP ; item
-	db SPRITE_BALL, $4 + 4, $9 + 4, $ff, $ff, $86, TM_02 ; item
-	db SPRITE_BALL, $14 + 4, $c + 4, $ff, $ff, $87, IRON ; item
-	db SPRITE_BALL, $2 + 4, $19 + 4, $ff, $ff, $88, SILPH_SCOPE ; item
-	db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $89, LIFT_KEY ; item
-
-	; warp-to
-	EVENT_DISP $f, $a, $13 ; ROCKET_HIDEOUT_3
-	EVENT_DISP $f, $f, $18 ; ROCKET_HIDEOUT_ELEVATOR
-	EVENT_DISP $f, $f, $19 ; ROCKET_HIDEOUT_ELEVATOR
+	
+INCLUDE "mapObjects/RocketHideout4.asm"	
 
 RocketHideout4Blocks: ; 45650 (11:5650)
 	INCBIN "maps/rockethideout4.blk"
 
-RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
-	db $12 ; tileset
-	db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
-	dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTextPointers, RocketHideoutElevatorScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw RocketHideoutElevatorObject ; objects
+INCLUDE "mapHeaders/RocketHideoutElevator.asm"
 
 RocketHideoutElevatorScript: ; 45710 (11:5710)
 	ld hl, $d126
@@ -70774,32 +59766,13 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 UnnamedText_4578b: ; 4578b (11:578b)
 	TX_FAR _UnnamedText_4578b ; 0x82438
 	db $d, "@"
-
-RocketHideoutElevatorObject: ; 0x45791 (size=23)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $1, $2, $2, ROCKET_HIDEOUT_1
-	db $1, $3, $4, ROCKET_HIDEOUT_1
-
-	db $1 ; signs
-	db $1, $1, $1 ; RocketHideoutElevatorText1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $3, $1, $2 ; ROCKET_HIDEOUT_1
-	EVENT_DISP $3, $1, $3 ; ROCKET_HIDEOUT_1
+	
+INCLUDE "mapObjects/RocketHideoutElevator.asm"	
 
 RocketHideoutElevatorBlocks: ; 457a8 (11:57a8)
 	INCBIN "maps/rockethideoutelevator.blk"
-
-SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
-	db $12 ; tileset
-	db SILPH_CO_ELEVATOR_HEIGHT, SILPH_CO_ELEVATOR_WIDTH ; dimensions (y, x)
-	dw SilphCoElevatorBlocks, SilphCoElevatorTextPointers, SilphCoElevatorScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCoElevatorObject ; objects
+	
+INCLUDE "mapHeaders/SilphCoElevator.asm"
 
 SilphCoElevatorScript: ; 457c0 (11:57c0)
 	ld hl, $d126
@@ -70881,32 +59854,13 @@ SilphCoElevatorText1: ; 45835 (11:5835)
 	ld a, $61
 	call Predef
 	jp TextScriptEnd
-
-SilphCoElevatorObject: ; 0x45844 (size=23)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $3, $1, $0, $ed
-	db $3, $2, $0, $ed
-
-	db $1 ; signs
-	db $0, $3, $1 ; SilphCoElevatorText1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $2, $3, $1
-	EVENT_DISP $2, $3, $2
+	
+INCLUDE "mapObjects/SilphCoElevator.asm"	
 
 SilphCoElevatorBlocks: ; 4585b (11:585b)
 	INCBIN "maps/silphcoelevator.blk"
-
-SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
-	db $03 ; tileset
-	db SAFARI_ZONE_EAST_HEIGHT, SAFARI_ZONE_EAST_WIDTH ; dimensions (y, x)
-	dw SafariZoneEastBlocks, SafariZoneEastTextPointers, SafariZoneEastScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneEastObject ; objects
+	
+INCLUDE "mapHeaders/SafariZoneEast.asm"
 
 SafariZoneEastScript: ; 4586b (11:586b)
 	jp EnableAutoTextBoxDrawing
@@ -70931,44 +59885,13 @@ SafariZoneEastText6: ; 45881 (11:5881)
 SafariZoneEastText7: ; 45886 (11:5886)
 	TX_FAR _SafariZoneEastText7
 	db "@"
-
-SafariZoneEastObject: ; 0x4588b (size=81)
-	db $0 ; border tile
-
-	db $5 ; warps
-	db $4, $0, $6, SAFARI_ZONE_NORTH
-	db $5, $0, $7, SAFARI_ZONE_NORTH
-	db $16, $0, $6, SAFARI_ZONE_CENTER
-	db $17, $0, $6, SAFARI_ZONE_CENTER
-	db $9, $19, $0, SAFARI_ZONE_REST_HOUSE_3
-
-	db $3 ; signs
-	db $a, $1a, $5 ; SafariZoneEastText5
-	db $4, $6, $6 ; SafariZoneEastText6
-	db $17, $5, $7 ; SafariZoneEastText7
-
-	db $4 ; people
-	db SPRITE_BALL, $a + 4, $15 + 4, $ff, $ff, $81, FULL_RESTORE ; item
-	db SPRITE_BALL, $7 + 4, $3 + 4, $ff, $ff, $82, MAX_POTION ; item
-	db SPRITE_BALL, $d + 4, $14 + 4, $ff, $ff, $83, CARBOS ; item
-	db SPRITE_BALL, $c + 4, $f + 4, $ff, $ff, $84, TM_37 ; item
-
-	; warp-to
-	EVENT_DISP $f, $4, $0 ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $5, $0 ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $16, $0 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $f, $17, $0 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $f, $9, $19 ; SAFARI_ZONE_REST_HOUSE_3
+	
+INCLUDE "mapObjects/SafariZoneEast.asm"	
 
 SafariZoneEastBlocks: ; 458dc (11:58dc)
 	INCBIN "maps/safarizoneeast.blk"
-
-SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
-	db $03 ; tileset
-	db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
-	dw SafariZoneNorthBlocks, SafariZoneNorthTextPointers, SafariZoneNorthScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneNorthObject ; objects
+	
+INCLUDE "mapHeaders/SafariZoneNorth.asm"
 
 SafariZoneNorthScript: ; 459ab (11:59ab)
 	jp EnableAutoTextBoxDrawing
@@ -71001,52 +59924,13 @@ SafariZoneNorthText6: ; 459cb (11:59cb)
 SafariZoneNorthText7: ; 459d0 (11:59d0)
 	TX_FAR _SafariZoneNorthText7
 	db "@"
-
-SafariZoneNorthObject: ; 0x459d5 (size=105)
-	db $0 ; border tile
-
-	db $9 ; warps
-	db $23, $2, $0, SAFARI_ZONE_WEST
-	db $23, $3, $1, SAFARI_ZONE_WEST
-	db $23, $8, $2, SAFARI_ZONE_WEST
-	db $23, $9, $3, SAFARI_ZONE_WEST
-	db $23, $14, $4, SAFARI_ZONE_CENTER
-	db $23, $15, $5, SAFARI_ZONE_CENTER
-	db $1e, $27, $0, SAFARI_ZONE_EAST
-	db $1f, $27, $1, SAFARI_ZONE_EAST
-	db $3, $23, $0, SAFARI_ZONE_REST_HOUSE_4
-
-	db $5 ; signs
-	db $4, $24, $3 ; SafariZoneNorthText3
-	db $19, $4, $4 ; SafariZoneNorthText4
-	db $1f, $d, $5 ; SafariZoneNorthText5
-	db $21, $13, $6 ; SafariZoneNorthText6
-	db $1c, $1a, $7 ; SafariZoneNorthText7
-
-	db $2 ; people
-	db SPRITE_BALL, $1 + 4, $19 + 4, $ff, $ff, $81, PROTEIN ; item
-	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $82, TM_40 ; item
-
-	; warp-to
-	EVENT_DISP $14, $23, $2 ; SAFARI_ZONE_WEST
-	EVENT_DISP $14, $23, $3 ; SAFARI_ZONE_WEST
-	EVENT_DISP $14, $23, $8 ; SAFARI_ZONE_WEST
-	EVENT_DISP $14, $23, $9 ; SAFARI_ZONE_WEST
-	EVENT_DISP $14, $23, $14 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $14, $23, $15 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $14, $1e, $27 ; SAFARI_ZONE_EAST
-	EVENT_DISP $14, $1f, $27 ; SAFARI_ZONE_EAST
-	EVENT_DISP $14, $3, $23 ; SAFARI_ZONE_REST_HOUSE_4
+	
+INCLUDE "mapObjects/SafariZoneNorth.asm"	
 
 SafariZoneNorthBlocks: ; 45a3e (11:5a3e)
 	INCBIN "maps/safarizonenorth.blk"
 
-SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
-	db $03 ; tileset
-	db SAFARI_ZONE_CENTER_HEIGHT, SAFARI_ZONE_CENTER_WIDTH ; dimensions (y, x)
-	dw SafariZoneCenterBlocks, SafariZoneCenterTextPointers, SafariZoneCenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneCenterObject ; objects
+INCLUDE "mapHeaders/SafariZoneCenter.asm"
 
 SafariZoneCenterScript: ; 45bb2 (11:5bb2)
 	jp EnableAutoTextBoxDrawing
@@ -71063,48 +59947,13 @@ SafariZoneCenterText2: ; 45bbb (11:5bbb)
 SafariZoneCenterText3: ; 45bc0 (11:5bc0)
 	TX_FAR _SafariZoneCenterText3
 	db "@"
-
-SafariZoneCenterObject: ; 0x45bc5 (size=89)
-	db $0 ; border tile
-
-	db $9 ; warps
-	db $19, $e, $2, SAFARIZONEENTRANCE
-	db $19, $f, $3, SAFARIZONEENTRANCE
-	db $a, $0, $4, SAFARI_ZONE_WEST
-	db $b, $0, $5, SAFARI_ZONE_WEST
-	db $0, $e, $4, SAFARI_ZONE_NORTH
-	db $0, $f, $5, SAFARI_ZONE_NORTH
-	db $a, $1d, $2, SAFARI_ZONE_EAST
-	db $b, $1d, $3, SAFARI_ZONE_EAST
-	db $13, $11, $0, SAFARI_ZONE_REST_HOUSE_1
-
-	db $2 ; signs
-	db $14, $12, $2 ; SafariZoneCenterText2
-	db $16, $e, $3 ; SafariZoneCenterText3
-
-	db $1 ; people
-	db SPRITE_BALL, $a + 4, $e + 4, $ff, $ff, $81, NUGGET ; item
-
-	; warp-to
-	EVENT_DISP $f, $19, $e ; SAFARIZONEENTRANCE
-	EVENT_DISP $f, $19, $f ; SAFARIZONEENTRANCE
-	EVENT_DISP $f, $a, $0 ; SAFARI_ZONE_WEST
-	EVENT_DISP $f, $b, $0 ; SAFARI_ZONE_WEST
-	EVENT_DISP $f, $0, $e ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $0, $f ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $a, $1d ; SAFARI_ZONE_EAST
-	EVENT_DISP $f, $b, $1d ; SAFARI_ZONE_EAST
-	EVENT_DISP $f, $13, $11 ; SAFARI_ZONE_REST_HOUSE_1
+	
+INCLUDE "mapObjects/SafariZoneCenter.asm"	
 
 SafariZoneCenterBlocks: ; 45c1e (11:5c1e)
 	INCBIN "maps/safarizonecenter.blk"
-
-SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
-	db $0c ; tileset
-	db SAFARI_ZONE_REST_HOUSE_1_HEIGHT, SAFARI_ZONE_REST_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1TextPointers, SafariZoneRestHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneRestHouse1Object ; objects
+	
+INCLUDE "mapHeaders/SafariZoneRestHouse1.asm"
 
 SafariZoneRestHouse1Script: ; 45ced (11:5ced)
 	jp EnableAutoTextBoxDrawing
@@ -71120,30 +59969,10 @@ SafariZoneRestHouse1Text1: ; 45cf4 (11:5cf4)
 SafariZoneRestHouse1Text2: ; 45cf9 (11:5cf9)
 	TX_FAR _SafariZoneRestHouse1Text2
 	db "@"
+	
+INCLUDE "mapObjects/SafariZoneRestHouse1.asm"	
 
-SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $8, SAFARI_ZONE_CENTER
-	db $7, $3, $8, SAFARI_ZONE_CENTER
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_GIRL, $2 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $fe, $1, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_CENTER
-
-SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
-	db $0c ; tileset
-	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw SafariZoneRestHouse2Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneRestHouse2Object ; objects
+INCLUDE "mapHeaders/SafariZoneRestHouse2.asm"
 
 SafariZoneRestHouse2Script: ; 45d2a (11:5d2a)
 	call EnableAutoTextBoxDrawing
@@ -71165,31 +59994,10 @@ SafariZoneRestHouse2Text2: ; 45d39 (11:5d39)
 SafariZoneRestHouse2Text3: ; 45d3e (11:5d3e)
 	TX_FAR _SafariZoneRestHouse2Text3
 	db "@"
+	
+INCLUDE "mapObjects/SafariZoneRestHouse2.asm"	
 
-SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $7, SAFARI_ZONE_WEST
-	db $7, $3, $7, SAFARI_ZONE_WEST
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OAK_AIDE, $4 + 4, $4 + 4, $fe, $0, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $0 + 4, $ff, $d3, $2 ; person
-	db SPRITE_ERIKA, $2 + 4, $6 + 4, $ff, $d0, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_WEST
-	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_WEST
-
-SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
-	db $0c ; tileset
-	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw SafariZoneRestHouse3Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneRestHouse3Object ; objects
+INCLUDE "mapHeaders/SafariZoneRestHouse3.asm"	
 
 SafariZoneRestHouse3Script: ; 45d75 (11:5d75)
 	call EnableAutoTextBoxDrawing
@@ -71211,31 +60019,10 @@ SafariZoneRestHouse3Text2: ; 45d84 (11:5d84)
 SafariZoneRestHouse3Text3: ; 45d89 (11:5d89)
 	TX_FAR _SafariZoneRestHouse3Text3
 	db "@"
-
-SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, SAFARI_ZONE_EAST
-	db $7, $3, $4, SAFARI_ZONE_EAST
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OAK_AIDE, $3 + 4, $1 + 4, $fe, $1, $1 ; person
-	db SPRITE_ROCKER, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $5 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_EAST
-	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_EAST
-
-SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
-	db $0c ; tileset
-	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
-	dw SafariZoneRestHouse4Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneRestHouse4Object ; objects
+	
+INCLUDE "mapObjects/SafariZoneRestHouse3.asm"	
+	
+INCLUDE "mapHeaders/SafariZoneRestHouse4.asm"	
 
 SafariZoneRestHouse4Script: ; 45dc0 (11:5dc0)
 	call EnableAutoTextBoxDrawing
@@ -71257,31 +60044,10 @@ SafariZoneRestHouse4Text2: ; 45dcf (11:5dcf)
 SafariZoneRestHouse4Text3: ; 45dd4 (11:5dd4)
 	TX_FAR _SafariZoneRestHouse4Text3
 	db "@"
-
-SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $8, SAFARI_ZONE_NORTH
-	db $7, $3, $8, SAFARI_ZONE_NORTH
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OAK_AIDE, $3 + 4, $6 + 4, $fe, $2, $1 ; person
-	db SPRITE_WHITE_PLAYER, $4 + 4, $3 + 4, $ff, $ff, $2 ; person
-	db SPRITE_GENTLEMAN, $5 + 4, $1 + 4, $fe, $1, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_NORTH
-	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_NORTH
-
-UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
-	db $11 ; tileset
-	db UNKNOWN_DUNGEON_2_HEIGHT, UNKNOWN_DUNGEON_2_WIDTH ; dimensions (y, x)
-	dw UnknownDungeon2Blocks, UnknownDungeon2TextPointers, UnknownDungeon2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UnknownDungeon2Object ; objects
+	
+INCLUDE "mapObjects/SafariZoneRestHouse4.asm"	
+	
+INCLUDE "mapHeaders/UnknownDungeon2.asm"	
 
 UnknownDungeon2Script: ; 45e0b (11:5e0b)
 	jp EnableAutoTextBoxDrawing
@@ -71290,42 +60056,13 @@ UnknownDungeon2TextPointers: ; 45e0e (11:5e0e)
 	dw Predef5CText
 	dw Predef5CText
 	dw Predef5CText
-
-UnknownDungeon2Object: ; 0x45e14 (size=73)
-	db $7d ; border tile
-
-	db $6 ; warps
-	db $1, $1d, $2, UNKNOWN_DUNGEON_1
-	db $6, $16, $3, UNKNOWN_DUNGEON_1
-	db $7, $13, $4, UNKNOWN_DUNGEON_1
-	db $1, $9, $5, UNKNOWN_DUNGEON_1
-	db $3, $1, $6, UNKNOWN_DUNGEON_1
-	db $b, $3, $7, UNKNOWN_DUNGEON_1
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BALL, $9 + 4, $1d + 4, $ff, $ff, $81, PP_UP ; item
-	db SPRITE_BALL, $f + 4, $4 + 4, $ff, $ff, $82, ULTRA_BALL ; item
-	db SPRITE_BALL, $6 + 4, $d + 4, $ff, $ff, $83, FULL_RESTORE ; item
-
-	; warp-to
-	EVENT_DISP $f, $1, $1d ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $f, $6, $16 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $f, $7, $13 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $f, $1, $9 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_1
+	
+INCLUDE "mapObjects/UnknownDungeon2.asm"	
 
 UnknownDungeon2Blocks: ; 45e5d (11:5e5d)
 	INCBIN "maps/unknowndungeon2.blk"
-
-UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
-	db $11 ; tileset
-	db UNKNOWN_DUNGEON_3_HEIGHT, UNKNOWN_DUNGEON_3_WIDTH ; dimensions (y, x)
-	dw UnknownDungeon3Blocks, UnknownDungeon3TextPointers, UnknownDungeon3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UnknownDungeon3Object ; objects
+	
+INCLUDE "mapHeaders/UnknownDungeon3.asm"	
 
 UnknownDungeon3Script: ; 45ef0 (11:5ef0)
 	call EnableAutoTextBoxDrawing
@@ -71371,32 +60108,13 @@ UnknownDungeon3MewtwoText: ; 45f26 (11:5f26)
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-
-UnknownDungeon3Object: ; 0x45f36 (size=34)
-	db $7d ; border tile
-
-	db $1 ; warps
-	db $6, $3, $8, UNKNOWN_DUNGEON_1
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_SLOWBRO, $d + 4, $1b + 4, $ff, $d0, $41, MEWTWO, 70 ; trainer
-	db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $82, ULTRA_BALL ; item
-	db SPRITE_BALL, $1 + 4, $12 + 4, $ff, $ff, $83, MAX_REVIVE ; item
-
-	; warp-to
-	EVENT_DISP $f, $6, $3 ; UNKNOWN_DUNGEON_1
+	
+INCLUDE "mapObjects/UnknownDungeon3.asm"	
 
 UnknownDungeon3Blocks: ; 45f58 (11:5f58)
 	INCBIN "maps/unknowndungeon3.blk"
 
-RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
-	db $11 ; tileset
-	db ROCK_TUNNEL_2_HEIGHT, ROCK_TUNNEL_2_WIDTH ; dimensions (y, x)
-	dw RockTunnel2Blocks, RockTunnel2TextPointers, RockTunnel2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw RockTunnel2Object ; objects
+INCLUDE "mapHeaders/RockTunnel2.asm"	
 
 RockTunnel2Script: ; 45feb (11:5feb)
 	call EnableAutoTextBoxDrawing
@@ -71640,43 +60358,13 @@ RockTunnel2EndBattleText9: ; 46133 (11:6133)
 RockTunnel2AfterBattleText9: ; 46138 (11:6138)
 	TX_FAR _RockTunnel2AfterBattleText9
 	db "@"
-
-RockTunnel2Object: ; 0x4613d (size=100)
-	db $3 ; border tile
-
-	db $4 ; warps
-	db $19, $21, $4, ROCK_TUNNEL_1
-	db $3, $1b, $5, ROCK_TUNNEL_1
-	db $b, $17, $6, ROCK_TUNNEL_1
-	db $3, $3, $7, ROCK_TUNNEL_1
-
-	db $0 ; signs
-
-	db $8 ; people
-	db SPRITE_LASS, $d + 4, $b + 4, $ff, $d0, $41, JR__TRAINER_F + $C8, $9 ; trainer
-	db SPRITE_HIKER, $a + 4, $6 + 4, $ff, $d0, $42, HIKER + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $d0, $43, POKEMANIAC + $C8, $3 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $14 + 4, $ff, $d3, $44, POKEMANIAC + $C8, $4 ; trainer
-	db SPRITE_HIKER, $a + 4, $1e + 4, $ff, $d0, $45, HIKER + $C8, $a ; trainer
-	db SPRITE_LASS, $1c + 4, $e + 4, $ff, $d3, $46, JR__TRAINER_F + $C8, $a ; trainer
-	db SPRITE_HIKER, $5 + 4, $21 + 4, $ff, $d3, $47, HIKER + $C8, $b ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $1e + 4, $1a + 4, $ff, $d0, $48, POKEMANIAC + $C8, $5 ; trainer
-
-	; warp-to
-	EVENT_DISP $14, $19, $21 ; ROCK_TUNNEL_1
-	EVENT_DISP $14, $3, $1b ; ROCK_TUNNEL_1
-	EVENT_DISP $14, $b, $17 ; ROCK_TUNNEL_1
-	EVENT_DISP $14, $3, $3 ; ROCK_TUNNEL_1
+	
+INCLUDE "mapObjects/RockTunnel2.asm"	
 
 RockTunnel2Blocks: ; 461a1 (11:61a1)
 	INCBIN "maps/rocktunnel2.blk"
-
-SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
-	db $11 ; tileset
-	db SEAFOAM_ISLANDS_2_HEIGHT, SEAFOAM_ISLANDS_2_WIDTH ; dimensions (y, x)
-	dw SeafoamIslands2Blocks, SeafoamIslands2TextPointers, SeafoamIslands2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SeafoamIslands2Object ; objects
+	
+INCLUDE "mapHeaders/SeafoamIslands2.asm"	
 
 SeafoamIslands2Script: ; 46315 (11:6315)
 	call EnableAutoTextBoxDrawing
@@ -71726,43 +60414,13 @@ Seafoam2HolesCoords: ; 4636d (11:636d)
 SeafoamIslands2TextPointers: ; 46372 (11:6372)
 	dw BoulderText
 	dw BoulderText
-
-SeafoamIslands2Object: ; 0x46376 (size=72)
-	db $7d ; border tile
-
-	db $7 ; warps
-	db $2, $4, $0, SEAFOAM_ISLANDS_3
-	db $5, $7, $4, SEAFOAM_ISLANDS_1
-	db $7, $d, $2, SEAFOAM_ISLANDS_3
-	db $f, $13, $3, SEAFOAM_ISLANDS_3
-	db $f, $17, $6, SEAFOAM_ISLANDS_1
-	db $b, $19, $5, SEAFOAM_ISLANDS_3
-	db $3, $19, $5, SEAFOAM_ISLANDS_1
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BOULDER, $6 + 4, $11 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $6 + 4, $16 + 4, $ff, $10, $2 ; person
-
-	; warp-to
-	EVENT_DISP $f, $2, $4 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $5, $7 ; SEAFOAM_ISLANDS_1
-	EVENT_DISP $f, $7, $d ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $f, $13 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $f, $17 ; SEAFOAM_ISLANDS_1
-	EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_1
+	
+INCLUDE "mapObjects/SeafoamIslands2.asm"	
 
 SeafoamIslands2Blocks: ; 463be (11:63be)
 	INCBIN "maps/seafoamislands2.blk"
-
-SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
-	db $11 ; tileset
-	db SEAFOAM_ISLANDS_3_HEIGHT, SEAFOAM_ISLANDS_3_WIDTH ; dimensions (y, x)
-	dw SeafoamIslands3Blocks, SeafoamIslands3TextPointers, SeafoamIslands3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SeafoamIslands3Object ; objects
+	
+INCLUDE "mapHeaders/SeafoamIslands3.asm"	
 
 SeafoamIslands3Script: ; 46451 (11:6451)
 	call EnableAutoTextBoxDrawing
@@ -71812,43 +60470,13 @@ Seafoam3HolesCoords: ; 464a9 (11:64a9)
 SeafoamIslands3TextPointers: ; 464ae (11:64ae)
 	dw BoulderText
 	dw BoulderText
-
-SeafoamIslands3Object: ; 0x464b2 (size=72)
-	db $7d ; border tile
-
-	db $7 ; warps
-	db $3, $5, $0, SEAFOAM_ISLANDS_2
-	db $d, $5, $0, SEAFOAM_ISLANDS_4
-	db $7, $d, $2, SEAFOAM_ISLANDS_2
-	db $f, $13, $3, SEAFOAM_ISLANDS_2
-	db $3, $19, $3, SEAFOAM_ISLANDS_4
-	db $b, $19, $5, SEAFOAM_ISLANDS_2
-	db $e, $19, $4, SEAFOAM_ISLANDS_4
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $6 + 4, $17 + 4, $ff, $10, $2 ; person
-
-	; warp-to
-	EVENT_DISP $f, $3, $5 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $d, $5 ; SEAFOAM_ISLANDS_4
-	EVENT_DISP $f, $7, $d ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $f, $13 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_4
-	EVENT_DISP $f, $b, $19 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_4
+	
+INCLUDE "mapObjects/SeafoamIslands3.asm"	
 
 SeafoamIslands3Blocks: ; 464fa (11:64fa)
 	INCBIN "maps/seafoamislands3.blk"
-
-SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
-	db $11 ; tileset
-	db SEAFOAM_ISLANDS_4_HEIGHT, SEAFOAM_ISLANDS_4_WIDTH ; dimensions (y, x)
-	dw SeafoamIslands4Blocks, SeafoamIslands4TextPointers, SeafoamIslands4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SeafoamIslands4Object ; objects
+	
+INCLUDE "mapHeaders/SeafoamIslands4.asm"
 
 SeafoamIslands4Script: ; 4658d (11:658d)
 	call EnableAutoTextBoxDrawing
@@ -71998,47 +60626,13 @@ SeafoamIslands4TextPointers: ; 4669a (11:669a)
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText
-
-SeafoamIslands4Object: ; 0x466a6 (size=96)
-	db $7d ; border tile
-
-	db $7 ; warps
-	db $c, $5, $1, SEAFOAM_ISLANDS_3
-	db $6, $8, $2, SEAFOAM_ISLANDS_5
-	db $4, $19, $3, SEAFOAM_ISLANDS_5
-	db $3, $19, $4, SEAFOAM_ISLANDS_3
-	db $e, $19, $6, SEAFOAM_ISLANDS_3
-	db $11, $14, $0, SEAFOAM_ISLANDS_5
-	db $11, $15, $1, SEAFOAM_ISLANDS_5
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_BOULDER, $e + 4, $5 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $f + 4, $3 + 4, $ff, $10, $2 ; person
-	db SPRITE_BOULDER, $e + 4, $8 + 4, $ff, $10, $3 ; person
-	db SPRITE_BOULDER, $e + 4, $9 + 4, $ff, $10, $4 ; person
-	db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $ff, $5 ; person
-	db SPRITE_BOULDER, $6 + 4, $13 + 4, $ff, $ff, $6 ; person
-
-	; warp-to
-	EVENT_DISP $f, $c, $5 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $6, $8 ; SEAFOAM_ISLANDS_5
-	EVENT_DISP $f, $4, $19 ; SEAFOAM_ISLANDS_5
-	EVENT_DISP $f, $3, $19 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $e, $19 ; SEAFOAM_ISLANDS_3
-	EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_5
-	EVENT_DISP $f, $11, $15 ; SEAFOAM_ISLANDS_5
+	
+INCLUDE "mapObjects/SeafoamIslands4.asm"	
 
 SeafoamIslands4Blocks: ; 46706 (11:6706)
 	INCBIN "maps/seafoamislands4.blk"
-
-SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
-	db $11 ; tileset
-	db SEAFOAM_ISLANDS_5_HEIGHT, SEAFOAM_ISLANDS_5_WIDTH ; dimensions (y, x)
-	dw SeafoamIslands5Blocks, SeafoamIslands5TextPointers, SeafoamIslands5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SeafoamIslands5Object ; objects
+	
+INCLUDE "mapHeaders/SeafoamIslands5.asm"
 
 SeafoamIslands5Script: ; 46799 (11:6799)
 	call EnableAutoTextBoxDrawing
@@ -72218,30 +60812,8 @@ SeafoamIslands5Text4: ; 468b2 (11:68b2)
 SeafoamIslands5Text5: ; 468b7 (11:68b7)
 	TX_FAR _SeafoamIslands5Text5
 	db "@"
-
-SeafoamIslands5Object: ; 0x468bc (size=62)
-	db $7d ; border tile
-
-	db $4 ; warps
-	db $11, $14, $5, SEAFOAM_ISLANDS_4
-	db $11, $15, $6, SEAFOAM_ISLANDS_4
-	db $7, $b, $1, SEAFOAM_ISLANDS_4
-	db $4, $19, $2, SEAFOAM_ISLANDS_4
-
-	db $2 ; signs
-	db $f, $9, $4 ; SeafoamIslands5Text4
-	db $1, $17, $5 ; SeafoamIslands5Text5
-
-	db $3 ; people
-	db SPRITE_BOULDER, $f + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, $43, ARTICUNO, 50 ; trainer
-
-	; warp-to
-	EVENT_DISP $f, $11, $14 ; SEAFOAM_ISLANDS_4
-	EVENT_DISP $f, $11, $15 ; SEAFOAM_ISLANDS_4
-	EVENT_DISP $f, $7, $b ; SEAFOAM_ISLANDS_4
-	EVENT_DISP $f, $4, $19 ; SEAFOAM_ISLANDS_4
+	
+INCLUDE "mapObjects/SeafoamIslands5.asm"
 
 SeafoamIslands5Blocks: ; 468fa (11:68fa)
 	INCBIN "maps/seafoamislands5.blk"
@@ -73156,37 +61728,9 @@ Route4HiddenObjects: ; 470a4 (11:70a4)
 	db $FF
 
 SECTION "bank12",ROMX,BANK[$12]
+INCLUDE "mapHeaders/Route7.asm"
 
-Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
-	db $00 ; tileset
-	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
-	dw Route7Blocks, Route7TextPointers, Route7Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, CELADON_CITY_HEIGHT - 3, CeladonCityBlocks, ROUTE_7_WIDTH
-	EAST_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 1, SAFFRON_CITY_HEIGHT - 3, SaffronCityBlocks, ROUTE_7_WIDTH
-	dw Route7Object ; objects
-
-Route7Object: ; 0x48022 (size=47)
-	db $f ; border tile
-
-	db $5 ; warps
-	db $9, $12, $2, ROUTE_7_GATE
-	db $a, $12, $3, ROUTE_7_GATE
-	db $9, $b, $0, ROUTE_7_GATE
-	db $a, $b, $1, ROUTE_7_GATE
-	db $d, $5, $0, PATH_ENTRANCE_ROUTE_7
-
-	db $1 ; signs
-	db $d, $3, $1 ; Route7Text1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $a, $9, $12 ; ROUTE_7_GATE
-	EVENT_DISP $a, $a, $12 ; ROUTE_7_GATE
-	EVENT_DISP $a, $9, $b ; ROUTE_7_GATE
-	EVENT_DISP $a, $a, $b ; ROUTE_7_GATE
-	EVENT_DISP $a, $d, $5 ; PATH_ENTRANCE_ROUTE_7
+INCLUDE "mapObjects/Route7.asm"
 
 Route7Blocks: ; 48051 (12:4051)
 	INCBIN "maps/route7.blk"
@@ -73282,13 +61826,8 @@ Route7TextPointers: ; 48155 (12:4155)
 Route7Text1: ; 48157 (12:4157)
 	TX_FAR _Route7Text1
 	db "@"
-
-RedsHouse1F_h: ; 4815c (12:415c)
-	db $01 ; tileset
-	db REDS_HOUSE_1F_HEIGHT, REDS_HOUSE_1F_WIDTH ; dimensions
-	dw RedsHouse1FBlocks, RedsHouse1FTextPointers, RedsHouse1FScript
-	db 0 ; no connections
-	dw RedsHouse1FObject
+	
+INCLUDE "mapHeaders/RedsHouse1F.asm"
 
 RedsHouse1FScript: ; 48168 (12:4168)
 	jp EnableAutoTextBoxDrawing
@@ -73359,35 +61898,13 @@ StandByMeText: ; 481da (12:41da)
 TVWrongSideText: ; 481df (12:41df)
 	TX_FAR _TVWrongSideText
 	db "@"
-
-RedsHouse1FObject: ; 481e4 (12:41e4)
-	db $0A ; border tile
-
-	db 3 ; warps
-	db 7,2,0,$FF ; exit1
-	db 7,3,0,$FF ; exit2
-	db 1,7,0,$26 ; staircase
-
-	db 1 ; signs
-	db 1,3,2 ; TV
-
-	db 1 ; people
-	db $33,4+4,5+4,$FF,$D2,1 ; Mom
-
-	; warp-to
-	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 2
-	EVENT_DISP REDS_HOUSE_1F_WIDTH, 7, 3
-	EVENT_DISP REDS_HOUSE_1F_WIDTH, 1, 7
+	
+INCLUDE "mapObjects/RedsHouse1F.asm"
 
 RedsHouse1FBlocks: ; 48209 (12:4209)
 	INCBIN "maps/redshouse1f.blk"
-
-CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
-	db $12 ; tileset
-	db CELADON_MART_3_HEIGHT, CELADON_MART_3_WIDTH ; dimensions (y, x)
-	dw CeladonMart3Blocks, CeladonMart3TextPointers, CeladonMart3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMart3Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMart3.asm"
 
 CeladonMart3Script: ; 48225 (12:4225)
 	jp EnableAutoTextBoxDrawing
@@ -73498,50 +62015,13 @@ CeladonMart3Text16: ; 482bf (12:42bf)
 CeladonMart3Text15: ; 482bf (12:42bf)
 	TX_FAR _CeladonMart3Text15
 	db "@"
-
-CeladonMart3Object: ; 0x482c4 (size=94)
-	db $f ; border tile
-
-	db $3 ; warps
-	db $1, $c, $0, CELADON_MART_4
-	db $1, $10, $1, CELADON_MART_2
-	db $1, $1, $0, CELADON_MART_ELEVATOR
-
-	db $c ; signs
-	db $4, $2, $6 ; CeladonMart3Text6
-	db $4, $3, $7 ; CeladonMart3Text7
-	db $4, $5, $8 ; CeladonMart3Text8
-	db $4, $6, $9 ; CeladonMart3Text9
-	db $6, $2, $a ; CeladonMart3Text10
-	db $6, $3, $b ; CeladonMart3Text11
-	db $6, $5, $c ; CeladonMart3Text12
-	db $6, $6, $d ; CeladonMart3Text13
-	db $1, $e, $e ; CeladonMart3Text14
-	db $1, $4, $f ; CeladonMart3Text15
-	db $1, $6, $10 ; CeladonMart3Text16
-	db $1, $a, $11 ; CeladonMart3Text17
-
-	db $5 ; people
-	db SPRITE_MART_GUY, $5 + 4, $10 + 4, $ff, $ff, $1 ; person
-	db SPRITE_GAMEBOY_KID_COPY, $6 + 4, $b + 4, $ff, $d3, $2 ; person
-	db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $7 + 4, $ff, $d0, $3 ; person
-	db SPRITE_GAMEBOY_KID_COPY, $2 + 4, $8 + 4, $ff, $d0, $4 ; person
-	db SPRITE_YOUNG_BOY, $5 + 4, $2 + 4, $ff, $d1, $5 ; person
-
-	; warp-to
-	EVENT_DISP $a, $1, $c ; CELADON_MART_4
-	EVENT_DISP $a, $1, $10 ; CELADON_MART_2
-	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
+	
+INCLUDE "mapObjects/CeladonMart3.asm"
 
 CeladonMart3Blocks: ; 48322 (12:4322)
 	INCBIN "maps/celadonmart3.blk"
-
-CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
-	db $12 ; tileset
-	db CELADON_MART_4_HEIGHT, CELADON_MART_4_WIDTH ; dimensions (y, x)
-	dw CeladonMart4Blocks, CeladonMart4TextPointers, CeladonMart4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMart4Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMart4.asm"
 
 CeladonMart4Script: ; 48356 (12:4356)
 	jp EnableAutoTextBoxDrawing
@@ -73564,36 +62044,12 @@ CeladonMart4Text4: ; 4836b (12:436b)
 	TX_FAR _CeladonMart4Text4
 	db "@"
 
-CeladonMart4Object: ; 0x48370 (size=49)
-	db $f ; border tile
-
-	db $3 ; warps
-	db $1, $c, $0, CELADON_MART_3
-	db $1, $10, $1, CELADON_MART_5
-	db $1, $1, $0, CELADON_MART_ELEVATOR
-
-	db $1 ; signs
-	db $1, $e, $4 ; CeladonMart4Text4
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $7 + 4, $5 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $f + 4, $fe, $2, $2 ; person
-	db SPRITE_BUG_CATCHER, $2 + 4, $5 + 4, $fe, $2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $a, $1, $c ; CELADON_MART_3
-	EVENT_DISP $a, $1, $10 ; CELADON_MART_5
-	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
+INCLUDE "mapObjects/CeladonMart4.asm"	
 
 CeladonMart4Blocks: ; 483a1 (12:43a1)
 	INCBIN "maps/celadonmart4.blk"
-
-CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
-	db $12 ; tileset
-	db CELADON_MART_ROOF_HEIGHT, CELADON_MART_ROOF_WIDTH ; dimensions (y, x)
-	dw CeladonMartRoofBlocks, CeladonMartRoofTextPointers, CeladonMartRoofScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMartRoofObject ; objects
+	
+INCLUDE "mapHeaders/CeladonMartRoof.asm"
 
 CeladonMartRoofScript: ; 483d5 (12:43d5)
 	jp EnableAutoTextBoxDrawing
@@ -73858,35 +62314,13 @@ CeladonMartRoofText5: ; 485a2 (12:45a2)
 CeladonMartRoofText6: ; 485a3 (12:45a3)
 	TX_FAR _CeladonMartRoofText6
 	db "@"
-
-CeladonMartRoofObject: ; 0x485a8 (size=36)
-	db $42 ; border tile
-
-	db $1 ; warps
-	db $2, $f, $0, CELADON_MART_5
-
-	db $4 ; signs
-	db $1, $a, $3 ; CeladonMartRoofText3
-	db $1, $b, $4 ; CeladonMartRoofText4
-	db $2, $c, $5 ; CeladonMartRoofText5
-	db $2, $d, $6 ; CeladonMartRoofText6
-
-	db $2 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $a + 4, $ff, $d2, $1 ; person
-	db SPRITE_LITTLE_GIRL, $5 + 4, $5 + 4, $fe, $0, $2 ; person
-
-	; warp-to
-	EVENT_DISP $a, $2, $f ; CELADON_MART_5
+	
+INCLUDE "mapObjects/CeladonMartRoof.asm"	
 
 CeladonMartRoofBlocks: ; 485cc (12:45cc)
 	INCBIN "maps/celadonmartroof.blk"
-
-CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
-	db $12 ; tileset
-	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
-	dw CeladonMartElevatorBlocks, CeladonMartElevatorTextPointers, CeladonMartElevatorScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMartElevatorObject ; objects
+	
+INCLUDE "mapHeaders/CeladonMartElevator.asm"
 
 CeladonMartElevatorScript: ; 48600 (12:4600)
 	ld hl, $d126
@@ -73959,32 +62393,13 @@ CeladonMartElevatorText1: ; 4865e (12:465e)
 	ld a, $61
 	call Predef
 	jp TextScriptEnd
-
-CeladonMartElevatorObject: ; 0x4866d (size=23)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $3, $1, $5, CELADON_MART_1
-	db $3, $2, $5, CELADON_MART_1
-
-	db $1 ; signs
-	db $0, $3, $1 ; CeladonMartElevatorText1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $2, $3, $1 ; CELADON_MART_1
-	EVENT_DISP $2, $3, $2 ; CELADON_MART_1
+	
+INCLUDE "mapObjects/CeladonMartElevator.asm"	
 
 CeladonMartElevatorBlocks: ; 48684 (12:4684)
 	INCBIN "maps/celadonmartelevator.blk"
-
-CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
-	db $13 ; tileset
-	db CELADON_MANSION_1_HEIGHT, CELADON_MANSION_1_WIDTH ; dimensions (y, x)
-	dw CeladonMansion1Blocks, CeladonMansion1TextPointers, CeladonMansion1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMansion1Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMansion1.asm"
 
 CeladonMansion1Script: ; 48694 (12:4694)
 	jp EnableAutoTextBoxDrawing
@@ -74025,42 +62440,13 @@ CeladonMansion1Text4: ; 486c0 (12:46c0)
 CeladonMansion1Text5: ; 486ca (12:46ca)
 	TX_FAR _CeladonMansion1Text5
 	db "@"
-
-CeladonMansion1Object: ; 0x486cf (size=71)
-	db $f ; border tile
-
-	db $5 ; warps
-	db $b, $4, $2, $ff
-	db $b, $5, $2, $ff
-	db $0, $4, $4, $ff
-	db $1, $7, $1, CELADON_MANSION_2
-	db $1, $2, $2, CELADON_MANSION_2
-
-	db $1 ; signs
-	db $9, $4, $5 ; CeladonMansion1Text5
-
-	db $4 ; people
-	db SPRITE_SLOWBRO, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_OLD_MEDIUM_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $2 ; person
-	db SPRITE_CLEFAIRY, $8 + 4, $1 + 4, $fe, $2, $3 ; person
-	db SPRITE_SLOWBRO, $4 + 4, $4 + 4, $fe, $1, $4 ; person
-
-	; warp-to
-	EVENT_DISP $4, $b, $4
-	EVENT_DISP $4, $b, $5
-	EVENT_DISP $4, $0, $4
-	EVENT_DISP $4, $1, $7 ; CELADON_MANSION_2
-	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_2
+	
+INCLUDE "mapObjects/CeladonMansion1.asm"	
 
 CeladonMansion1Blocks: ; 48716 (12:4716)
 	INCBIN "maps/celadonmansion1.blk"
 
-CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
-	db $13 ; tileset
-	db CELADON_MANSION_2_HEIGHT, CELADON_MANSION_2_WIDTH ; dimensions (y, x)
-	dw CeladonMansion2Blocks, CeladonMansion2TextPointers, CeladonMansion2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMansion2Object ; objects
+INCLUDE "mapHeaders/CeladonMansion2.asm"
 
 CeladonMansion2Script: ; 4873a (12:473a)
 	call EnableAutoTextBoxDrawing
@@ -74072,36 +62458,13 @@ CeladonMansion2TextPointers: ; 4873e (12:473e)
 CeladonMansion2Text1: ; 48740 (12:4740)
 	TX_FAR _CeladonMansion2Text1
 	db "@"
-
-CeladonMansion2Object: ; 0x48745 (size=39)
-	db $f ; border tile
-
-	db $4 ; warps
-	db $1, $6, $0, CELADON_MANSION_3
-	db $1, $7, $3, CELADON_MANSION_1
-	db $1, $2, $4, CELADON_MANSION_1
-	db $1, $4, $3, CELADON_MANSION_3
-
-	db $1 ; signs
-	db $9, $4, $1 ; CeladonMansion2Text1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $4, $1, $6 ; CELADON_MANSION_3
-	EVENT_DISP $4, $1, $7 ; CELADON_MANSION_1
-	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_1
-	EVENT_DISP $4, $1, $4 ; CELADON_MANSION_3
+	
+INCLUDE "mapObjects/CeladonMansion2.asm"	
 
 CeladonMansion2Blocks: ; 4876c (12:476c)
 	INCBIN "maps/celadonmansion2.blk"
-
-CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
-	db $13 ; tileset
-	db CELADON_MANSION_3_HEIGHT, CELADON_MANSION_3_WIDTH ; dimensions (y, x)
-	dw CeladonMansion3Blocks, CeladonMansion3TextPointers, CeladonMansion3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMansion3Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMansion3.asm"
 
 CeladonMansion3Script: ; 48790 (12:4790)
 	jp EnableAutoTextBoxDrawing
@@ -74176,43 +62539,13 @@ GameFreakPCText3: ; 487f5 (12:47f5)
 GameFreakSignText: ; 487fa (12:47fa)
 	TX_FAR _CeladonMansion3Text8
 	db "@"
-
-CeladonMansion3Object: ; 0x487ff (size=72)
-	db $f ; border tile
-
-	db $4 ; warps
-	db $1, $6, $0, CELADON_MANSION_2
-	db $1, $7, $0, CELADON_MANSION_4
-	db $1, $2, $1, CELADON_MANSION_4
-	db $1, $4, $3, CELADON_MANSION_2
-
-	db $4 ; signs
-	db $3, $1, $5 ; CeladonMansion3Text5
-	db $3, $4, $6 ; CeladonMansion3Text6
-	db $6, $1, $7 ; CeladonMansion3Text7
-	db $9, $4, $8 ; CeladonMansion3Text8
-
-	db $4 ; people
-	db SPRITE_BIKE_SHOP_GUY, $4 + 4, $0 + 4, $ff, $d1, $1 ; person
-	db SPRITE_MART_GUY, $4 + 4, $3 + 4, $ff, $d1, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $7 + 4, $0 + 4, $ff, $d1, $3 ; person
-	db SPRITE_LAPRAS_GIVER, $3 + 4, $2 + 4, $ff, $ff, $4 ; person
-
-	; warp-to
-	EVENT_DISP $4, $1, $6 ; CELADON_MANSION_2
-	EVENT_DISP $4, $1, $7 ; CELADON_MANSION_4
-	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_4
-	EVENT_DISP $4, $1, $4 ; CELADON_MANSION_2
+	
+INCLUDE "mapObjects/CeladonMansion3.asm"	
 
 CeladonMansion3Blocks: ; 48847 (12:4847)
 	INCBIN "maps/celadonmansion3.blk"
 
-CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
-	db $13 ; tileset
-	db CELADON_MANSION_4_HEIGHT, CELADON_MANSION_4_WIDTH ; dimensions (y, x)
-	dw CeladonMansion4Blocks, CeladonMansion4TextPointers, CeladonMansion4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMansion4Object ; objects
+INCLUDE "mapHeaders/CeladonMansion4.asm"
 
 CeladonMansion4Script: ; 4886b (12:486b)
 	jp EnableAutoTextBoxDrawing
@@ -74223,34 +62556,13 @@ CeladonMansion4TextPointers: ; 4886e (12:486e)
 CeladonMansion4Text1: ; 48870 (12:4870)
 	TX_FAR _CeladonMansion4Text1
 	db "@"
-
-CeladonMansion4Object: ; 0x48875 (size=31)
-	db $9 ; border tile
-
-	db $3 ; warps
-	db $1, $6, $1, CELADON_MANSION_3
-	db $1, $2, $2, CELADON_MANSION_3
-	db $7, $2, $0, CELADON_MANSION_5
-
-	db $1 ; signs
-	db $7, $3, $1 ; CeladonMansion4Text1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $4, $1, $6 ; CELADON_MANSION_3
-	EVENT_DISP $4, $1, $2 ; CELADON_MANSION_3
-	EVENT_DISP $4, $7, $2 ; CELADON_MANSION_5
+	
+INCLUDE "mapObjects/CeladonMansion4.asm"	
 
 CeladonMansion4Blocks: ; 48894 (12:4894)
 	INCBIN "maps/celadonmansion4.blk"
-
-CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
-	db $06 ; tileset
-	db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
-	dw CeladonPokecenterBlocks, CeladonPokecenterTextPointers, CeladonPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/CeladonPokecenter.asm"
 
 CeladonPokecenterScript: ; 488b8 (12:48b8)
 	call Func_22fa
@@ -74275,32 +62587,10 @@ CeladonPokecenterText2: ; 488c8 (12:48c8)
 CeladonPokecenterText3: ; 488cd (12:48cd)
 	TX_FAR _CeladonPokecenterText3
 	db "@"
-
-CeladonPokecenterObject: ; 0x488d2 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $5, $ff
-	db $7, $4, $5, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $fe, $2, $2 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $a + 4, $fe, $0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
-	db $07 ; tileset
-	db CELADON_GYM_HEIGHT, CELADON_GYM_WIDTH ; dimensions (y, x)
-	dw CeladonGymBlocks, CeladonGymTextPointers, CeladonGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonGymObject ; objects
+	
+INCLUDE "mapObjects/CeladonPokecenter.asm"
+	
+INCLUDE "mapHeaders/CeladonGym.asm"
 
 CeladonGymScript: ; 4890a (12:490a)
 	ld hl, $d126
@@ -74643,39 +62933,13 @@ CeladonGymEndBattleText8: ; 48b26 (12:4b26)
 CeladonGymAfterBattleText8: ; 48b2b (12:4b2b)
 	TX_FAR _CeladonGymAfterBattleText8
 	db "@"
-
-CeladonGymObject: ; 0x48b30 (size=84)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $11, $4, $6, $ff
-	db $11, $5, $6, $ff
-
-	db $0 ; signs
-
-	db $8 ; people
-	db SPRITE_ERIKA, $3 + 4, $4 + 4, $ff, $d0, $41, ERIKA + $C8, $1 ; trainer
-	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d3, $42, LASS + $C8, $11 ; trainer
-	db SPRITE_FOULARD_WOMAN, $a + 4, $7 + 4, $ff, $d2, $43, BEAUTY + $C8, $1 ; trainer
-	db SPRITE_LASS, $5 + 4, $9 + 4, $ff, $d0, $44, JR__TRAINER_F + $C8, $b ; trainer
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $45, BEAUTY + $C8, $2 ; trainer
-	db SPRITE_LASS, $3 + 4, $6 + 4, $ff, $d0, $46, LASS + $C8, $12 ; trainer
-	db SPRITE_FOULARD_WOMAN, $3 + 4, $3 + 4, $ff, $d0, $47, BEAUTY + $C8, $3 ; trainer
-	db SPRITE_LASS, $3 + 4, $5 + 4, $ff, $d0, $48, COOLTRAINER_F + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $5, $11, $4
-	EVENT_DISP $5, $11, $5
+	
+INCLUDE "mapObjects/CeladonGym.asm"
 
 CeladonGymBlocks: ; 48b84 (12:4b84)
 	INCBIN "maps/celadongym.blk"
-
-CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
-	db $12 ; tileset
-	db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
-	dw CeladonGameCornerBlocks, CeladonGameCornerTextPointers, CeladonGameCornerScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonGameCornerObject ; objects
+	
+INCLUDE "mapHeaders/CeladonGameCorner.asm"
 
 CeladonGameCornerScript: ; 48bbd (12:4bbd)
 	call CeladonGameCornerScript_48bcf
@@ -75213,45 +63477,13 @@ Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $90
 	ld [$ff00+$a1], a
 	jp HasEnoughCoins
-
-CeladonGameCornerObject: ; 0x48fa0 (size=99)
-	db $f ; border tile
-
-	db $3 ; warps
-	db $11, $f, $7, $ff
-	db $11, $10, $7, $ff
-	db $4, $11, $1, ROCKET_HIDEOUT_1
-
-	db $1 ; signs
-	db $4, $9, $c ; CeladonGameCornerText12
-
-	db $b ; people
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_MART_GUY, $6 + 4, $5 + 4, $ff, $d0, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $a + 4, $2 + 4, $ff, $d2, $3 ; person
-	db SPRITE_FOULARD_WOMAN, $d + 4, $2 + 4, $ff, $d2, $4 ; person
-	db SPRITE_FISHER, $b + 4, $5 + 4, $ff, $d3, $5 ; person
-	db SPRITE_MOM_GEISHA, $b + 4, $8 + 4, $ff, $d2, $6 ; person
-	db SPRITE_GYM_HELPER, $e + 4, $8 + 4, $ff, $d2, $7 ; person
-	db SPRITE_GAMBLER, $f + 4, $b + 4, $ff, $d3, $8 ; person
-	db SPRITE_MART_GUY, $b + 4, $e + 4, $ff, $d2, $9 ; person
-	db SPRITE_GENTLEMAN, $d + 4, $11 + 4, $ff, $d3, $a ; person
-	db SPRITE_ROCKET, $5 + 4, $9 + 4, $ff, $d1, $4b, ROCKET + $C8, $7 ; trainer
-
-	; warp-to
-	EVENT_DISP $a, $11, $f
-	EVENT_DISP $a, $11, $10
-	EVENT_DISP $a, $4, $11 ; ROCKET_HIDEOUT_1
+	
+INCLUDE "mapObjects/CeladonGameCorner.asm"
 
 CeladonGameCornerBlocks: ; 49003 (12:5003)
 	INCBIN "maps/celadongamecorner.blk"
 
-CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
-	db $12 ; tileset
-	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
-	dw CeladonMart5Blocks, CeladonMart5TextPointers, CeladonMart5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMart5Object ; objects
+INCLUDE "mapHeaders/CeladonMart5.asm";
 
 CeladonMart5Script: ; 49069 (12:5069)
 	jp EnableAutoTextBoxDrawing
@@ -75275,37 +63507,12 @@ CeladonMart5Text5: ; 49080 (12:5080)
 	TX_FAR _CeladonMart5Text5
 	db "@"
 
-CeladonMart5Object: ; 0x49085 (size=55)
-	db $f ; border tile
-
-	db $3 ; warps
-	db $1, $c, $0, CELADON_MART_ROOF
-	db $1, $10, $1, CELADON_MART_4
-	db $1, $1, $0, CELADON_MART_ELEVATOR
-
-	db $1 ; signs
-	db $1, $e, $5 ; CeladonMart5Text5
-
-	db $4 ; people
-	db SPRITE_GENTLEMAN, $5 + 4, $e + 4, $fe, $1, $1 ; person
-	db SPRITE_SAILOR, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
-	db SPRITE_MART_GUY, $3 + 4, $5 + 4, $ff, $d0, $3 ; person
-	db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $a, $1, $c ; CELADON_MART_ROOF
-	EVENT_DISP $a, $1, $10 ; CELADON_MART_4
-	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
+INCLUDE "mapObjects/CeladonMart5.asm"
 
 CeladonMart5Blocks: ; 490bc (12:50bc)
-	INCBIN "maps/celadonmart5.blk"
+	INCBIN "maps/celadonMart5.blk"
 
-CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
-	db $12 ; tileset
-	db CELADONPRIZE_ROOM_HEIGHT, CELADONPRIZE_ROOM_WIDTH ; dimensions (y, x)
-	dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTextPointers, CeladonPrizeRoomScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonPrizeRoomObject ; objects
+INCLUDE "mapHeaders/CeladonPrizeRoom.asm"	
 
 CeladonPrizeRoomScript: ; 490f0 (12:50f0)
 	jp EnableAutoTextBoxDrawing
@@ -75327,36 +63534,13 @@ CeladonPrizeRoomText2: ; 49102 (12:5102)
 
 CeladonPrizeRoomText3: ; 49107 (12:5107)
 	db $f7
-
-CeladonPrizeRoomObject: ; 0x49108 (size=41)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $7, $4, $9, $ff
-	db $7, $5, $9, $ff
-
-	db $3 ; signs
-	db $2, $2, $3 ; CeladonPrizeRoomText3
-	db $2, $4, $4 ; CeladonPrizeRoomText4
-	db $2, $6, $5 ; CeladonPrizeRoomText5
-
-	db $2 ; people
-	db SPRITE_BALDING_GUY, $4 + 4, $1 + 4, $ff, $ff, $1 ; person
-	db SPRITE_GAMBLER, $3 + 4, $7 + 4, $fe, $2, $2 ; person
-
-	; warp-to
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
+	
+INCLUDE "mapObjects/CeladonPrizeRoom.asm"
 
 CeladonPrizeRoomBlocks: ; 49131 (12:5131)
 	INCBIN "maps/celadonprizeroom.blk"
-
-CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
-	db $12 ; tileset
-	db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
-	dw CeladonDinerBlocks, CeladonDinerTextPointers, CeladonDinerScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonDinerObject ; objects
+	
+INCLUDE "mapHeaders/CeladonDiner.asm"	
 
 CeladonDinerScript: ; 49151 (12:5151)
 	call EnableAutoTextBoxDrawing
@@ -75425,36 +63609,13 @@ CoinCaseNoRoomText: ; 491b2 (12:51b2)
 UnnamedText_491b7: ; 491b7 (12:51b7)
 	TX_FAR _UnnamedText_491b7
 	db "@"
-
-CeladonDinerObject: ; 0x491bc (size=50)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $7, $3, $a, $ff
-	db $7, $4, $a, $ff
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_COOK, $5 + 4, $8 + 4, $fe, $2, $1 ; person
-	db SPRITE_MOM_GEISHA, $2 + 4, $7 + 4, $ff, $ff, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $1 + 4, $ff, $d0, $3 ; person
-	db SPRITE_FISHER2, $3 + 4, $5 + 4, $ff, $d3, $4 ; person
-	db SPRITE_GYM_HELPER, $1 + 4, $0 + 4, $ff, $d0, $5 ; person
-
-	; warp-to
-	EVENT_DISP $5, $7, $3
-	EVENT_DISP $5, $7, $4
+	
+INCLUDE "mapObjects/CeladonDiner.asm"
 
 CeladonDinerBlocks: ; 491ee (12:51ee)
 	INCBIN "maps/celadondiner.blk"
-
-CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
-	db $13 ; tileset
-	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
-	dw CeladonHouseBlocks, CeladonHouseTextPointers, CeladonHouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonHouseObject ; objects
+	
+INCLUDE "mapHeaders/CeladonHouse.asm"	
 
 CeladonHouseScript: ; 4920e (12:520e)
 	call EnableAutoTextBoxDrawing
@@ -75476,34 +63637,13 @@ CeladonHouseText2: ; 4921d (12:521d)
 CeladonHouseText3: ; 49222 (12:5222)
 	TX_FAR _CeladonHouseText3
 	db "@"
-
-CeladonHouseObject: ; 0x49227 (size=38)
-	db $f ; border tile
-
-	db $2 ; warps
-	db $7, $2, $b, $ff
-	db $7, $3, $b, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OLD_PERSON, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $4 + 4, $1 + 4, $fe, $0, $2 ; person
-	db SPRITE_SAILOR, $6 + 4, $5 + 4, $ff, $d2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	
+INCLUDE "mapObjects/CeladonHouse.asm"
 
 CeladonHouseBlocks: ; 4924d (12:524d)
 	INCBIN "maps/celadonhouse.blk"
-
-CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
-	db $06 ; tileset
-	db CELADONHOTEL_HEIGHT, CELADONHOTEL_WIDTH ; dimensions (y, x)
-	dw CeladonHotelBlocks, CeladonHotelTextPointers, CeladonHotelScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonHotelObject ; objects
+	
+INCLUDE "mapHeaders/CeladonHotel.asm"	
 
 CeladonHotelScript: ; 49269 (12:5269)
 	jp EnableAutoTextBoxDrawing
@@ -75524,34 +63664,13 @@ CeladonHotelText2: ; 49277 (12:5277)
 CeladonHotelText3: ; 4927c (12:527c)
 	TX_FAR _CeladonHotelText3
 	db "@"
-
-CeladonHotelObject: ; 0x49281 (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $c, $ff
-	db $7, $4, $c, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_OLD_MEDIUM_WOMAN, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FOULARD_WOMAN, $4 + 4, $2 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $8 + 4, $fe, $2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
+	
+INCLUDE "mapObjects/CeladonHotel.asm"
 
 CeladonHotelBlocks: ; 492a7 (12:52a7)
 	INCBIN "maps/celadonhotel.blk"
-
-MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
-	db $06 ; tileset
-	db MT_MOON_POKECENTER_HEIGHT, MT_MOON_POKECENTER_WIDTH ; dimensions (y, x)
-	dw MtMoonPokecenterBlocks, MtMoonPokecenterTextPointers, MtMoonPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw MtMoonPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/MtMoonPokecenter.asm"	
 
 MtMoonPokecenterScript: ; 492cf (12:52cf)
 	call Func_22fa
@@ -75650,34 +63769,10 @@ MtMoonPokecenterText5: ; 49370 (12:5370)
 
 MtMoonPokecenterText6: ; 49375 (12:5375)
 	db $f6
-
-MtMoonPokecenterObject: ; 0x49376 (size=56)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_BUG_CATCHER, $3 + 4, $4 + 4, $ff, $d1, $2 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $ff, $d1, $3 ; person
-	db SPRITE_FAT_BALD_GUY, $6 + 4, $a + 4, $fe, $2, $4 ; person
-	db SPRITE_CLIPBOARD, $2 + 4, $7 + 4, $ff, $ff, $5 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $6 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
-	db $06 ; tileset
-	db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
-	dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTextPointers, RockTunnelPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw RockTunnelPokecenterObject ; objects
+	
+INCLUDE "mapObjects/MtMoonPokecenter.asm"
+	
+INCLUDE "mapHeaders/RockTunnelPokecenter.asm"	
 
 RockTunnelPokecenterScript: ; 493ba (12:53ba)
 	call Func_22fa
@@ -75702,32 +63797,10 @@ RockTunnelPokecenterText3: ; 493ce (12:53ce)
 
 RockTunnelPokecenterText4: ; 493d3 (12:53d3)
 	db $f6
-
-RockTunnelPokecenterObject: ; 0x493d4 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $7 + 4, $fe, $2, $2 ; person
-	db SPRITE_FISHER2, $5 + 4, $2 + 4, $ff, $ff, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
-	db $0c ; tileset
-	db ROUTE_11_GATE_1F_HEIGHT, ROUTE_11_GATE_1F_WIDTH ; dimensions (y, x)
-	dw Route11GateBlocks, Route11GateTextPointers, Route11GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route11GateObject ; objects
+	
+INCLUDE "mapObjects/RockTunnelPokecenter.asm"
+	
+INCLUDE "mapHeaders/Route11Gate.asm"	
 
 Route11GateScript: ; 4940c (12:540c)
 	jp EnableAutoTextBoxDrawing
@@ -75738,35 +63811,10 @@ Route11GateTextPointers: ; 4940f (12:540f)
 Route11GateText1: ; 49411 (12:5411)
 	TX_FAR _Route11GateText1
 	db "@"
-
-Route11GateObject: ; 0x49416 (size=50)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $4, $0, $0, $ff
-	db $5, $0, $1, $ff
-	db $4, $7, $2, $ff
-	db $5, $7, $3, $ff
-	db $8, $6, $0, ROUTE_11_GATE_2F
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $4, $0
-	EVENT_DISP $4, $5, $0
-	EVENT_DISP $4, $4, $7
-	EVENT_DISP $4, $5, $7
-	EVENT_DISP $4, $8, $6 ; ROUTE_11_GATE_2F
-
-Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
-	db $0c ; tileset
-	db ROUTE_11_GATE_2F_HEIGHT, ROUTE_11_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route11GateUpstairsBlocks, Route11GateUpstairsTextPointers, Route11GateUpstairsScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route11GateUpstairsObject ; objects
+	
+INCLUDE "mapObjects/Route11Gate.asm"
+	
+INCLUDE "mapHeaders/Route11GateUpstairs.asm"	
 
 Route11GateUpstairsScript: ; 49454 (12:5454)
 	jp DisableAutoTextBoxDrawing
@@ -75849,30 +63897,10 @@ Route11GateUpstairsText4: ; 494ce (12:54ce)
 UnnamedText_494d5: ; 494d5 (12:54d5)
 	TX_FAR _UnnamedText_494d5
 	db "@"
-
-Route11GateUpstairsObject: ; 0x494da (size=30)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $7, $7, $4, ROUTE_11_GATE_1F
-
-	db $2 ; signs
-	db $2, $1, $3 ; Route11GateUpstairsText3
-	db $2, $6, $4 ; Route11GateUpstairsText4
-
-	db $2 ; people
-	db SPRITE_BUG_CATCHER, $2 + 4, $4 + 4, $fe, $2, $1 ; person
-	db SPRITE_OAK_AIDE, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $7 ; ROUTE_11_GATE_1F
-
-Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
-	db $0c ; tileset
-	db ROUTE_12_GATE_HEIGHT, ROUTE_12_GATE_WIDTH ; dimensions (y, x)
-	dw Route12GateBlocks, Route12GateTextPointers, Route12GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route12GateObject ; objects
+	
+INCLUDE "mapObjects/Route11GateUpstairs.asm"
+	
+INCLUDE "mapHeaders/Route12Gate.asm"	
 
 Route12GateScript: ; 49504 (12:5504)
 	jp EnableAutoTextBoxDrawing
@@ -75883,38 +63911,13 @@ Route12GateTextPointers: ; 49507 (12:5507)
 Route12GateText1: ; 49509 (12:5509)
 	TX_FAR _Route12GateText1
 	db "@"
-
-Route12GateObject: ; 0x4950e (size=50)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $0, $4, $0, $ff
-	db $0, $5, $1, $ff
-	db $7, $4, $2, $ff
-	db $7, $5, $2, $ff
-	db $6, $8, $0, ROUTE_12_GATE_2F
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $5, $0, $4
-	EVENT_DISP $5, $0, $5
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
-	EVENT_DISP $5, $6, $8 ; ROUTE_12_GATE_2F
+	
+INCLUDE "mapObjects/Route12Gate.asm"
 
 Route12GateBlocks: ; 49540 (12:5540)
 	INCBIN "maps/route12gate.blk"
-
-Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
-	db $0c ; tileset
-	db ROUTE_12_GATE_2F_HEIGHT, ROUTE_12_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route12GateUpstairsBlocks, Route12GateUpstairsTextPointers, Route12GateUpstairsScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route12GateUpstairsObject ; objects
+	
+INCLUDE "mapHeaders/Route12GateUpstairs.asm"	
 
 Route12GateUpstairsScript: ; 49560 (12:5560)
 	jp DisableAutoTextBoxDrawing
@@ -75995,29 +63998,10 @@ Func_55c9: ; 495c9 (12:55c9)
 .asm_495d8
 	ld [$cc3c], a
 	jp TextScriptEnd
+	
+INCLUDE "mapObjects/Route12GateUpstairs.asm"
 
-Route12GateUpstairsObject: ; 0x495de (size=24)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $7, $7, $4, ROUTE_12_GATE
-
-	db $2 ; signs
-	db $2, $1, $2 ; Route12GateUpstairsText2
-	db $2, $6, $3 ; Route12GateUpstairsText3
-
-	db $1 ; people
-	db SPRITE_BRUNETTE_GIRL, $4 + 4, $3 + 4, $fe, $1, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $7 ; ROUTE_12_GATE
-
-Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
-	db $0c ; tileset
-	db ROUTE_15_GATE_1F_HEIGHT, ROUTE_15_GATE_1F_WIDTH ; dimensions (y, x)
-	dw Route15GateBlocks, Route15GateTextPointers, Route15GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route15GateObject ; objects
+INCLUDE "mapHeaders/Route15Gate.asm"	
 
 Route15GateScript: ; 49602 (12:5602)
 	jp EnableAutoTextBoxDrawing
@@ -76028,35 +64012,10 @@ Route15GateTextPointers: ; 49605 (12:5605)
 Route15GateText1: ; 49607 (12:5607)
 	TX_FAR _Route15GateText1
 	db "@"
-
-Route15GateObject: ; 0x4960c (size=50)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $4, $0, $0, $ff
-	db $5, $0, $1, $ff
-	db $4, $7, $2, $ff
-	db $5, $7, $3, $ff
-	db $8, $6, $0, ROUTE_15_GATE_2F
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $4, $0
-	EVENT_DISP $4, $5, $0
-	EVENT_DISP $4, $4, $7
-	EVENT_DISP $4, $5, $7
-	EVENT_DISP $4, $8, $6
-
-Route15GateUpstairs_h: ; 4963e (12:563e)
-	db $0c ; tileset
-	db ROUTE_15_GATE_2F_HEIGHT, ROUTE_15_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route15GateUpstairsBlocks, Route15GateUpstairsTextPointers, Route15GateUpstairsScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route15GateUpstairsObject ; objects
+	
+INCLUDE "mapObjects/Route15Gate.asm"
+	
+INCLUDE "mapHeaders/Route15GateUpstairs.asm";
 
 Route15GateUpstairsScript: ; 4964a (12:564a)
 	jp DisableAutoTextBoxDrawing
@@ -76106,27 +64065,9 @@ UnnamedText_49698: ; 49698 (12:5698)
 	TX_FAR _UnnamedText_49698
 	db "@"
 
-Route15GateUpstairsObject: ; 4969d (12:569d)
-	db $a ; border tile
+INCLUDE "mapObjects/Route15GateUpstairs.asm"
 
-	db $1 ; warps
-	db $7, $7, $4, ROUTE_15_GATE_1F
-
-	db $1 ; signs
-	db $2, $6, $2 ; Route15GateUpstairsText2
-
-	db $1 ; people
-	db SPRITE_OAK_AIDE, $2 + 4, $4 + 4, $ff, $d0, $1
-
-	; warp-to
-	EVENT_DISP $4, $7, $7 ; ROUTE_15_GATE_1F
-
-Route16GateMap_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
-	db $0c ; tileset
-	db ROUTE_16_GATE_1F_HEIGHT, ROUTE_16_GATE_1F_WIDTH ; dimensions (y, x)
-	dw Route16GateMapBlocks, Route16GateMapTextPointers, Route16GateMapScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route16GateMapObject ; objects
+INCLUDE "mapHeaders/Route16Gate.asm"	
 
 Route16GateMapScript: ; 496be (12:56be)
 	ld hl, $d732
@@ -76249,47 +64190,13 @@ Route16GateMapText3: ; 49781 (12:5781)
 Route16GateMapText2: ; 49786 (12:5786)
 	TX_FAR _Route16GateMapText2
 	db "@"
-
-Route16GateMapObject: ; 0x4978b (size=88)
-	db $a ; border tile
-
-	db $9 ; warps
-	db $8, $0, $0, $ff
-	db $9, $0, $1, $ff
-	db $8, $7, $2, $ff
-	db $9, $7, $2, $ff
-	db $2, $0, $4, $ff
-	db $3, $0, $5, $ff
-	db $2, $7, $6, $ff
-	db $3, $7, $7, $ff
-	db $c, $6, $0, ROUTE_16_GATE_2F
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_GUARD, $5 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GAMBLER, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $8, $0
-	EVENT_DISP $4, $9, $0
-	EVENT_DISP $4, $8, $7
-	EVENT_DISP $4, $9, $7
-	EVENT_DISP $4, $2, $0
-	EVENT_DISP $4, $3, $0
-	EVENT_DISP $4, $2, $7
-	EVENT_DISP $4, $3, $7
-	EVENT_DISP $4, $c, $6 ; ROUTE_16_GATE_2F
+	
+INCLUDE "mapObjects/Route16Gate.asm"
 
 Route16GateMapBlocks: ; 497e3 (12:57e3)
 	INCBIN "maps/route16gatemap.blk"
-
-Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
-	db $0c ; tileset
-	db ROUTE_16_GATE_2F_HEIGHT, ROUTE_16_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route16GateUpstairsBlocks, Route16GateUpstairsTextPointers, Route16GateUpstairsScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route16GateUpstairsObject ; objects
+	
+INCLUDE "mapHeaders/Route16GateUpstairs.asm"	
 
 Route16GateUpstairsScript: ; 4980b (12:580b)
 	jp DisableAutoTextBoxDrawing
@@ -76337,30 +64244,10 @@ Route16GateUpstairsText4: ; 49840 (12:5840)
 UnnamedText_49847: ; 49847 (12:5847)
 	TX_FAR _UnnamedText_49847
 	db "@"
-
-Route16GateUpstairsObject: ; 0x4984c (size=30)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $7, $7, $8, ROUTE_16_GATE_1F
-
-	db $2 ; signs
-	db $2, $1, $3 ; Route16GateUpstairsText3
-	db $2, $6, $4 ; Route16GateUpstairsText4
-
-	db $2 ; people
-	db SPRITE_YOUNG_BOY, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_LITTLE_GIRL, $5 + 4, $2 + 4, $fe, $2, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $7 ; ROUTE_16_GATE_1F
-
-Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
-	db $0c ; tileset
-	db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
-	dw Route18GateBlocks, Route18GateTextPointers, Route18GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route18GateObject ; objects
+	
+INCLUDE "mapObjects/Route16GateUpstairs.asm"
+	
+INCLUDE "mapHeaders/Route18Gate.asm"	
 
 Route18GateScript: ; 49876 (12:5876)
 	ld hl, $d732
@@ -76474,35 +64361,10 @@ UnnamedText_4992d: ; 4992d (12:592d)
 Route18GateText2: ; 49932 (12:5932)
 	TX_FAR _UnnamedText_49932
 	db "@"
-
-Route18GateObject: ; 0x49937 (size=50)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $4, $0, $0, $ff
-	db $5, $0, $1, $ff
-	db $4, $7, $2, $ff
-	db $5, $7, $3, $ff
-	db $8, $6, $0, ROUTE_18_GATE_2F
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GUARD, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $4, $0
-	EVENT_DISP $4, $5, $0
-	EVENT_DISP $4, $4, $7
-	EVENT_DISP $4, $5, $7
-	EVENT_DISP $4, $8, $6 ; ROUTE_18_GATE_2F
-
-Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
-	db $0c ; tileset
-	db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
-	dw Route18GateUpstairsBlocks, Route18GateUpstairsTextPointers, Route18GateUpstairsScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route18GateUpstairsObject ; objects
+	
+INCLUDE "mapObjects/Route18Gate.asm"
+	
+INCLUDE "mapHeaders/Route18GateUpstairs.asm"	
 
 Route18GateUpstairsScript: ; 49975 (12:5975)
 	jp DisableAutoTextBoxDrawing
@@ -76537,29 +64399,10 @@ Route18GateUpstairsText3: ; 49998 (12:5998)
 UnnamedText_4999f: ; 4999f (12:599f)
 	TX_FAR _UnnamedText_4999f
 	db "@"
-
-Route18GateUpstairsObject: ; 0x499a4 (size=24)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $7, $7, $4, ROUTE_18_GATE_1F
-
-	db $2 ; signs
-	db $2, $1, $2 ; Route18GateUpstairsText2
-	db $2, $6, $3 ; Route18GateUpstairsText3
-
-	db $1 ; people
-	db SPRITE_BUG_CATCHER, $2 + 4, $4 + 4, $fe, $2, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $7 ; ROUTE_18_GATE_1F
-
-MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
-	db $11 ; tileset
-	db MT_MOON_1_HEIGHT, MT_MOON_1_WIDTH ; dimensions (y, x)
-	dw MtMoon1Blocks, MtMoon1TextPointers, MtMoon1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw MtMoon1Object ; objects
+	
+INCLUDE "mapObjects/Route18GateUpstairs.asm"
+	
+INCLUDE "mapHeaders/MtMoon1.asm"	
 
 MtMoon1Script: ; 499c8 (12:59c8)
 	call EnableAutoTextBoxDrawing
@@ -76786,51 +64629,13 @@ MtMoon1AfterBattleText8: ; 49afc (12:5afc)
 MtMoon1Text14: ; 49b01 (12:5b01)
 	TX_FAR _MtMoon1Text14
 	db "@"
-
-MtMoon1Object: ; 0x49b06 (size=145)
-	db $3 ; border tile
-
-	db $5 ; warps
-	db $23, $e, $1, $ff
-	db $23, $f, $1, $ff
-	db $5, $5, $0, MT_MOON_2
-	db $b, $11, $2, MT_MOON_2
-	db $f, $19, $3, MT_MOON_2
-
-	db $1 ; signs
-	db $17, $f, $e ; MtMoon1Text14
-
-	db $d ; people
-	db SPRITE_HIKER, $6 + 4, $5 + 4, $ff, $d0, $41, HIKER + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $10 + 4, $c + 4, $ff, $d3, $42, YOUNGSTER + $C8, $3 ; trainer
-	db SPRITE_LASS, $4 + 4, $1e + 4, $ff, $d0, $43, LASS + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $1f + 4, $18 + 4, $ff, $d1, $44, SUPER_NERD + $C8, $1 ; trainer
-	db SPRITE_LASS, $17 + 4, $10 + 4, $ff, $d0, $45, LASS + $C8, $6 ; trainer
-	db SPRITE_BUG_CATCHER, $16 + 4, $7 + 4, $ff, $d0, $46, BUG_CATCHER + $C8, $7 ; trainer
-	db SPRITE_BUG_CATCHER, $1b + 4, $1e + 4, $ff, $d3, $47, BUG_CATCHER + $C8, $8 ; trainer
-	db SPRITE_BALL, $14 + 4, $2 + 4, $ff, $ff, $88, POTION ; item
-	db SPRITE_BALL, $2 + 4, $2 + 4, $ff, $ff, $89, MOON_STONE ; item
-	db SPRITE_BALL, $1f + 4, $23 + 4, $ff, $ff, $8a, RARE_CANDY ; item
-	db SPRITE_BALL, $17 + 4, $24 + 4, $ff, $ff, $8b, ESCAPE_ROPE ; item
-	db SPRITE_BALL, $21 + 4, $14 + 4, $ff, $ff, $8c, POTION ; item
-	db SPRITE_BALL, $20 + 4, $5 + 4, $ff, $ff, $8d, TM_12 ; item
-
-	; warp-to
-	EVENT_DISP $14, $23, $e
-	EVENT_DISP $14, $23, $f
-	EVENT_DISP $14, $5, $5 ; MT_MOON_2
-	EVENT_DISP $14, $b, $11 ; MT_MOON_2
-	EVENT_DISP $14, $f, $19 ; MT_MOON_2
+	
+INCLUDE "mapObjects/MtMoon1.asm"
 
 MtMoon1Blocks: ; 49b97 (12:5b97)
 	INCBIN "maps/mtmoon1.blk"
-
-MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
-	db $11 ; tileset
-	db MT_MOON_3_HEIGHT, MT_MOON_3_WIDTH ; dimensions (y, x)
-	dw MtMoon3Blocks, MtMoon3TextPointers, MtMoon3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw MtMoon3Object ; objects
+	
+INCLUDE "mapHeaders/MtMoon3.asm"
 
 MtMoon3Script: ; 49d0b (12:5d0b)
 	call EnableAutoTextBoxDrawing
@@ -77246,44 +65051,13 @@ MtMoon3EndBattleText5: ; 49fd1 (12:5fd1)
 MtMoon3AfterBattleText5: ; 49fd6 (12:5fd6)
 	TX_FAR _MtMoon3AfterBattleText5
 	db "@"
-
-MtMoon3Object: ; 0x49fdb (size=102)
-	db $3 ; border tile
-
-	db $4 ; warps
-	db $9, $19, $1, MT_MOON_2
-	db $11, $15, $4, MT_MOON_2
-	db $1b, $f, $5, MT_MOON_2
-	db $7, $5, $6, MT_MOON_2
-
-	db $0 ; signs
-
-	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, $41, SUPER_NERD + $C8, $2 ; trainer
-	db SPRITE_ROCKET, $10 + 4, $b + 4, $ff, $d0, $42, ROCKET + $C8, $1 ; trainer
-	db SPRITE_ROCKET, $16 + 4, $f + 4, $ff, $d0, $43, ROCKET + $C8, $2 ; trainer
-	db SPRITE_ROCKET, $b + 4, $1d + 4, $ff, $d1, $44, ROCKET + $C8, $3 ; trainer
-	db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, $45, ROCKET + $C8, $4 ; trainer
-	db SPRITE_OMANYTE, $6 + 4, $c + 4, $ff, $ff, $6 ; person
-	db SPRITE_OMANYTE, $6 + 4, $d + 4, $ff, $ff, $7 ; person
-	db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, $88, HP_UP ; item
-	db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, $89, TM_01 ; item
-
-	; warp-to
-	EVENT_DISP $14, $9, $19 ; MT_MOON_2
-	EVENT_DISP $14, $11, $15 ; MT_MOON_2
-	EVENT_DISP $14, $1b, $f ; MT_MOON_2
-	EVENT_DISP $14, $7, $5 ; MT_MOON_2
+	
+INCLUDE "mapObjects/MtMoon3.asm"
 
 MtMoon3Blocks: ; 4a041 (12:6041)
 	INCBIN "maps/mtmoon3.blk"
-
-SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
-	db $03 ; tileset
-	db SAFARI_ZONE_WEST_HEIGHT, SAFARI_ZONE_WEST_WIDTH ; dimensions (y, x)
-	dw SafariZoneWestBlocks, SafariZoneWestTextPointers, SafariZoneWestScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneWestObject ; objects
+	
+INCLUDE "mapHeaders/SafariZoneWest.asm"
 
 SafariZoneWestScript: ; 4a1b5 (12:61b5)
 	jp EnableAutoTextBoxDrawing
@@ -77313,51 +65087,13 @@ SafariZoneWestText7: ; 4a1d2 (12:61d2)
 SafariZoneWestText8: ; 4a1d7 (12:61d7)
 	TX_FAR _SafariZoneWestText8
 	db "@"
-
-SafariZoneWestObject: ; 0x4a1dc (size=108)
-	db $0 ; border tile
-
-	db $8 ; warps
-	db $0, $14, $0, SAFARI_ZONE_NORTH
-	db $0, $15, $1, SAFARI_ZONE_NORTH
-	db $0, $1a, $2, SAFARI_ZONE_NORTH
-	db $0, $1b, $3, SAFARI_ZONE_NORTH
-	db $16, $1d, $2, SAFARI_ZONE_CENTER
-	db $17, $1d, $3, SAFARI_ZONE_CENTER
-	db $3, $3, $0, SAFARI_ZONE_SECRET_HOUSE
-	db $b, $b, $0, SAFARI_ZONE_REST_HOUSE_2
-
-	db $4 ; signs
-	db $c, $c, $5 ; SafariZoneWestText5
-	db $3, $11, $6 ; SafariZoneWestText6
-	db $4, $1a, $7 ; SafariZoneWestText7
-	db $16, $18, $8 ; SafariZoneWestText8
-
-	db $4 ; people
-	db SPRITE_BALL, $14 + 4, $8 + 4, $ff, $ff, $81, MAX_POTION ; item
-	db SPRITE_BALL, $7 + 4, $9 + 4, $ff, $ff, $82, TM_32 ; item
-	db SPRITE_BALL, $12 + 4, $12 + 4, $ff, $ff, $83, MAX_REVIVE ; item
-	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $84, GOLD_TEETH ; item
-
-	; warp-to
-	EVENT_DISP $f, $0, $14 ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $0, $15 ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $0, $1a ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $0, $1b ; SAFARI_ZONE_NORTH
-	EVENT_DISP $f, $16, $1d ; SAFARI_ZONE_CENTER
-	EVENT_DISP $f, $17, $1d ; SAFARI_ZONE_CENTER
-	EVENT_DISP $f, $3, $3 ; SAFARI_ZONE_SECRET_HOUSE
-	EVENT_DISP $f, $b, $b ; SAFARI_ZONE_REST_HOUSE_2
+	
+INCLUDE "mapObjects/SafariZoneWest.asm"
 
 SafariZoneWestBlocks: ; 4a248 (12:6248)
 	INCBIN "maps/safarizonewest.blk"
-
-SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
-	db $14 ; tileset
-	db SAFARI_ZONE_SECRET_HOUSE_HEIGHT, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; dimensions (y, x)
-	dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTextPointers, SafariZoneSecretHouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneSecretHouseObject ; objects
+	
+INCLUDE "mapHeaders/SafariZoneSecretHouse.asm"
 
 SafariZoneSecretHouseScript: ; 4a317 (12:6317)
 	jp EnableAutoTextBoxDrawing
@@ -77405,22 +65141,8 @@ HM03ExplanationText: ; 4a35b (12:635b)
 HM03NoRoomText: ; 4a360 (12:6360)
 	TX_FAR _HM03NoRoomText
 	db "@"
-
-SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $2, $6, SAFARI_ZONE_WEST
-	db $7, $3, $6, SAFARI_ZONE_WEST
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $3 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; SAFARI_ZONE_WEST
-	EVENT_DISP $4, $7, $3 ; SAFARI_ZONE_WEST
+	
+INCLUDE "mapObjects/SafariZoneSecretHouse.asm"
 
 SafariZoneSecretHouseBlocks: ; 4a37f (12:637f)
 	INCBIN "maps/safarizonesecrethouse.blk"
@@ -77518,13 +65240,8 @@ AgathaPic: ; 4fa71 (13:7a71)
 	INCBIN "pic/trainer/agatha.pic"
 LancePic: ; 4fba2 (13:7ba2)
 	INCBIN "pic/trainer/lance.pic"
-
-BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
-	db $15 ; tileset
-	db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
-	dw BattleCenterMBlocks, BattleCenterMTextPointers, BattleCenterMScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw BattleCenterMObject ; objects
+	
+INCLUDE "mapHeaders/BattleCenter.asm";
 
 BattleCenterMScript: ; 4fd10 (13:7d10)
 	call EnableAutoTextBoxDrawing
@@ -77564,26 +65281,13 @@ BattleCenterMTextPointers: ; 4fd4c (13:7d4c)
 BattleCenterMText1: ; 4fd4e (13:7d4e)
 	TX_FAR _BattleCenterMText1
 	db "@"
-
-BattleCenterMObject: ; 0x4fd53 (size=10)
-	db $e ; border tile
-
-	db $0 ; warps
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+	
+INCLUDE "mapObjects/BattleCenter.asm"
 
 BattleCenterMBlocks: ; 4fd5d (13:7d5d)
 	INCBIN "maps/battlecenterm.blk"
-
-TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
-	db $15 ; tileset
-	db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
-	dw TradeCenterMBlocks, TradeCenterMTextPointers, TradeCenterMScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw TradeCenterMObject ; objects
+	
+INCLUDE "mapHeaders/TradeCenter.asm";
 
 TradeCenterMScript: ; 4fd7d (13:7d7d)
 	jp BattleCenterMScript
@@ -77594,16 +65298,8 @@ TradeCenterMTextPointers: ; 4fd80 (13:7d80)
 TradeCenterMText1: ; 4fd82 (13:7d82)
 	TX_FAR _TradeCenterMText1
 	db "@"
-
-TradeCenterMObject: ; 0x4fd87 (size=10)
-	db $e ; border tile
-
-	db $0 ; warps
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+	
+INCLUDE "mapObjects/TradeCenter.asm"
 
 TradeCenterMBlocks: ; 4fd91 (13:7d91)
 	INCBIN "maps/tradecenterm.blk"
@@ -77874,268 +65570,50 @@ DrawHPBarPredef: ; 4ff96 (13:7f96)
 
 SECTION "bank14",ROMX,BANK[$14]
 
-Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
-	db $00 ; tileset
-	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; dimensions (y, x)
-	dw Route22Blocks, Route22TextPointers, Route22Script ; blocks, texts, scripts
-	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_23, ROUTE_23_WIDTH, ROUTE_23_HEIGHT, 0, 0, ROUTE_23_WIDTH, Route23Blocks
-	EAST_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, -3, 1, VIRIDIAN_CITY_HEIGHT - 3, ViridianCityBlocks, ROUTE_22_WIDTH
-	dw Route22Object ; objects
-
-Route22Object: ; 0x50022 (size=27)
-	db $2c ; border tile
-
-	db $1 ; warps
-	db $5, $8, $0, ROUTE_22_GATE
-
-	db $1 ; signs
-	db $b, $7, $3 ; Route22Text3
-
-	db $2 ; people
-	db SPRITE_BLUE, $5 + 4, $19 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BLUE, $5 + 4, $19 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $14, $5, $8 ; ROUTE_22_GATE
+INCLUDE "mapHeaders/Route22.asm";
+INCLUDE "mapObjects/Route22.asm"
 
 Route22Blocks: ; 5003d (14:403d)
 	INCBIN "maps/route22.blk"
-
-Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
-	db $00 ; tileset
-	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; dimensions (y, x)
-	dw Route20Blocks, Route20TextPointers, Route20Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION CINNABAR_ISLAND, CINNABAR_ISLAND_WIDTH, 0, 0, CINNABAR_ISLAND_HEIGHT, CinnabarIslandBlocks, ROUTE_20_WIDTH
-	EAST_MAP_CONNECTION ROUTE_19, ROUTE_19_WIDTH, -3, 15, ROUTE_19_HEIGHT - 15, Route19Blocks, ROUTE_20_WIDTH
-	dw Route20Object ; objects
-
-Route20Object: ; 0x50113 (size=106)
-	db $43 ; border tile
-
-	db $2 ; warps
-	db $5, $30, $0, SEAFOAM_ISLANDS_1
-	db $9, $3a, $2, SEAFOAM_ISLANDS_1
-
-	db $2 ; signs
-	db $7, $33, $b ; Route20Text11
-	db $b, $39, $c ; Route20Text12
-
-	db $a ; people
-	db SPRITE_SWIMMER, $8 + 4, $57 + 4, $ff, $d1, $41, SWIMMER + $C8, $9 ; trainer
-	db SPRITE_SWIMMER, $b + 4, $44 + 4, $ff, $d1, $42, BEAUTY + $C8, $f ; trainer
-	db SPRITE_SWIMMER, $a + 4, $2d + 4, $ff, $d0, $43, BEAUTY + $C8, $6 ; trainer
-	db SPRITE_SWIMMER, $e + 4, $37 + 4, $ff, $d3, $44, JR__TRAINER_F + $C8, $18 ; trainer
-	db SPRITE_SWIMMER, $d + 4, $26 + 4, $ff, $d0, $45, SWIMMER + $C8, $a ; trainer
-	db SPRITE_SWIMMER, $d + 4, $57 + 4, $ff, $d1, $46, SWIMMER + $C8, $b ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $9 + 4, $22 + 4, $ff, $d1, $47, BIRD_KEEPER + $C8, $b ; trainer
-	db SPRITE_SWIMMER, $7 + 4, $19 + 4, $ff, $d1, $48, BEAUTY + $C8, $7 ; trainer
-	db SPRITE_SWIMMER, $c + 4, $18 + 4, $ff, $d0, $49, JR__TRAINER_F + $C8, $10 ; trainer
-	db SPRITE_SWIMMER, $8 + 4, $f + 4, $ff, $d1, $4a, BEAUTY + $C8, $8 ; trainer
-
-	; warp-to
-	EVENT_DISP $32, $5, $30 ; SEAFOAM_ISLANDS_1
-	EVENT_DISP $32, $9, $3a ; SEAFOAM_ISLANDS_1
+	
+INCLUDE "mapHeaders/Route20.asm";
+INCLUDE "mapObjects/Route20.asm"
 
 Route20Blocks: ; 5017d (14:417d)
 	INCBIN "maps/route20.blk"
-
-Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
-	db $17 ; tileset
-	db ROUTE_23_HEIGHT, ROUTE_23_WIDTH ; dimensions (y, x)
-	dw Route23Blocks, Route23TextPointers, Route23Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION INDIGO_PLATEAU, INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_HEIGHT, 0, 0, INDIGO_PLATEAU_WIDTH, IndigoPlateauBlocks
-	SOUTH_MAP_CONNECTION ROUTE_22, ROUTE_22_WIDTH, 0, 0, ROUTE_22_WIDTH - 7, Route22Blocks, ROUTE_23_WIDTH, ROUTE_23_HEIGHT
-	dw Route23Object ; objects
-
-Route23Object: ; 0x50361 (size=81)
-	db $f ; border tile
-
-	db $4 ; warps
-	db $8b, $7, $2, ROUTE_22_GATE
-	db $8b, $8, $3, ROUTE_22_GATE
-	db $1f, $4, $0, VICTORY_ROAD_1
-	db $1f, $e, $1, VICTORY_ROAD_2
-
-	db $1 ; signs
-	db $21, $3, $8 ; Route23Text8
-
-	db $7 ; people
-	db SPRITE_GUARD, $23 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GUARD, $38 + 4, $a + 4, $ff, $d0, $2 ; person
-	db SPRITE_SWIMMER, $55 + 4, $8 + 4, $ff, $d0, $3 ; person
-	db SPRITE_SWIMMER, $60 + 4, $b + 4, $ff, $d0, $4 ; person
-	db SPRITE_GUARD, $69 + 4, $c + 4, $ff, $d0, $5 ; person
-	db SPRITE_GUARD, $77 + 4, $8 + 4, $ff, $d0, $6 ; person
-	db SPRITE_GUARD, $88 + 4, $8 + 4, $ff, $d0, $7 ; person
-
-	; warp-to
-	EVENT_DISP $a, $8b, $7 ; ROUTE_22_GATE
-	EVENT_DISP $a, $8b, $8 ; ROUTE_22_GATE
-	EVENT_DISP $a, $1f, $4 ; VICTORY_ROAD_1
-	EVENT_DISP $a, $1f, $e ; VICTORY_ROAD_2
+	
+INCLUDE "mapHeaders/Route23.asm";
+INCLUDE "mapObjects/Route23.asm"
 
 Route23Blocks: ; 503b2 (14:43b2)
 	INCBIN "maps/route23.blk"
-
-Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
-	db $00 ; tileset
-	db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
-	dw Route24Blocks, Route24TextPointers, Route24Script ; blocks, texts, scripts
-	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 2, CERULEAN_CITY_WIDTH - 4, CeruleanCityBlocks, ROUTE_24_WIDTH, ROUTE_24_HEIGHT
-	EAST_MAP_CONNECTION ROUTE_25, ROUTE_25_WIDTH, 0, 0, ROUTE_25_HEIGHT, Route25Blocks, ROUTE_24_WIDTH
-	dw Route24Object ; objects
-
-Route24Object: ; 0x506a4 (size=67)
-	db $2c ; border tile
-
-	db $0 ; warps
-
-	db $0 ; signs
-
-	db $8 ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $b + 4, $ff, $d2, $41, ROCKET + $C8, $6 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $5 + 4, $ff, $d1, $42, JR__TRAINER_M + $C8, $2 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $13 + 4, $b + 4, $ff, $d2, $43, JR__TRAINER_M + $C8, $3 ; trainer
-	db SPRITE_LASS, $16 + 4, $a + 4, $ff, $d3, $44, LASS + $C8, $7 ; trainer
-	db SPRITE_BUG_CATCHER, $19 + 4, $b + 4, $ff, $d2, $45, YOUNGSTER + $C8, $4 ; trainer
-	db SPRITE_LASS, $1c + 4, $a + 4, $ff, $d3, $46, LASS + $C8, $8 ; trainer
-	db SPRITE_BUG_CATCHER, $1f + 4, $b + 4, $ff, $d2, $47, BUG_CATCHER + $C8, $9 ; trainer
-	db SPRITE_BALL, $5 + 4, $a + 4, $ff, $ff, $88, TM_45 ; item
+	
+INCLUDE "mapHeaders/Route24.asm";
+INCLUDE "mapObjects/Route24.asm"
 
 Route24Blocks: ; 506e7 (14:46e7)
 	INCBIN "maps/route24.blk"
-
-Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
-	db $00 ; tileset
-	db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; dimensions (y, x)
-	dw Route25Blocks, Route25TextPointers, Route25Script ; blocks, texts, scripts
-	db WEST ; connections
-	WEST_MAP_CONNECTION ROUTE_24, ROUTE_24_WIDTH, 0, 0, ROUTE_24_HEIGHT - 6, Route24Blocks, ROUTE_25_WIDTH
-	dw Route25Object ; objects
-
-Route25Object: ; 0x507b2 (size=94)
-	db $2c ; border tile
-
-	db $1 ; warps
-	db $3, $2d, $0, BILLS_HOUSE
-
-	db $1 ; signs
-	db $3, $2b, $b ; Route25Text11
-
-	db $a ; people
-	db SPRITE_BUG_CATCHER, $2 + 4, $e + 4, $ff, $d0, $41, YOUNGSTER + $C8, $5 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $12 + 4, $ff, $d1, $42, YOUNGSTER + $C8, $6 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $18 + 4, $ff, $d0, $43, JR__TRAINER_M + $C8, $2 ; trainer
-	db SPRITE_LASS, $8 + 4, $12 + 4, $ff, $d3, $44, LASS + $C8, $9 ; trainer
-	db SPRITE_BUG_CATCHER, $3 + 4, $20 + 4, $ff, $d2, $45, YOUNGSTER + $C8, $7 ; trainer
-	db SPRITE_LASS, $4 + 4, $25 + 4, $ff, $d0, $46, LASS + $C8, $a ; trainer
-	db SPRITE_HIKER, $4 + 4, $8 + 4, $ff, $d3, $47, HIKER + $C8, $2 ; trainer
-	db SPRITE_HIKER, $9 + 4, $17 + 4, $ff, $d1, $48, HIKER + $C8, $3 ; trainer
-	db SPRITE_HIKER, $7 + 4, $d + 4, $ff, $d3, $49, HIKER + $C8, $4 ; trainer
-	db SPRITE_BALL, $2 + 4, $16 + 4, $ff, $ff, $8a, TM_19 ; item
-
-	; warp-to
-	EVENT_DISP $1e, $3, $2d ; BILLS_HOUSE
+	
+INCLUDE "mapHeaders/Route25.asm";
+INCLUDE "mapObjects/Route25.asm"
 
 Route25Blocks: ; 50810 (14:4810)
 	INCBIN "maps/route25.blk"
-
-IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
-	db $17 ; tileset
-	db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
-	dw IndigoPlateauBlocks, IndigoPlateauTextPointers, IndigoPlateauScript ; blocks, texts, scripts
-	db SOUTH ; connections
-	SOUTH_MAP_CONNECTION ROUTE_23, ROUTE_23_WIDTH, 0, 0, ROUTE_23_WIDTH, Route23Blocks, INDIGO_PLATEAU_WIDTH, INDIGO_PLATEAU_HEIGHT
-	dw IndigoPlateauObject ; objects
+	
+INCLUDE "mapHeaders/IndigoPlateau.asm";
 
 IndigoPlateauScript: ; 50935 (14:4935)
 	ret
 
 IndigoPlateauTextPointers: ; 50936 (14:4936)
-IndigoPlateauObject: ; 0x50936 (size=20)
-	db $e ; border tile
 
-	db $2 ; warps
-	db $5, $9, $0, INDIGO_PLATEAU_LOBBY
-	db $5, $a, $0, INDIGO_PLATEAU_LOBBY
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $a, $5, $9 ; INDIGO_PLATEAU_LOBBY
-	EVENT_DISP $a, $5, $a ; INDIGO_PLATEAU_LOBBY
+INCLUDE "mapObjects/IndigoPlateau.asm"
 
 IndigoPlateauBlocks: ; 5094a (14:494a)
 	INCBIN "maps/indigoplateau.blk"
-
-SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
-	db $00 ; tileset
-	db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
-	dw SaffronCityBlocks, SaffronCityTextPointers, SaffronCityScript ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_5, ROUTE_5_WIDTH, ROUTE_5_HEIGHT, 5, 0, ROUTE_5_WIDTH, Route5Blocks
-	SOUTH_MAP_CONNECTION ROUTE_6, ROUTE_6_WIDTH, 5, 0, ROUTE_6_WIDTH, Route6Blocks, SAFFRON_CITY_WIDTH, SAFFRON_CITY_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_7, ROUTE_7_WIDTH, 4, 0, ROUTE_7_HEIGHT, Route7Blocks, SAFFRON_CITY_WIDTH
-	EAST_MAP_CONNECTION ROUTE_8, ROUTE_8_WIDTH, 4, 0, ROUTE_8_HEIGHT, Route8Blocks, SAFFRON_CITY_WIDTH
-	dw SaffronCityObject ; objects
-
-SaffronCityObject: ; 0x509dc (size=188)
-	db $f ; border tile
-
-	db $8 ; warps
-	db $5, $7, $0, COPYCATS_HOUSE_1F
-	db $3, $1a, $0, FIGHTINGDOJO
-	db $3, $22, $0, SAFFRON_GYM
-	db $b, $d, $0, SAFFRON_HOUSE_1
-	db $b, $19, $0, SAFFRON_MART
-	db $15, $12, $0, SILPH_CO_1F
-	db $1d, $9, $0, SAFFRON_POKECENTER
-	db $1d, $1d, $0, SAFFRON_HOUSE_2
-
-	db $a ; signs
-	db $5, $11, $10 ; SaffronCityText16
-	db $5, $1b, $11 ; SaffronCityText17
-	db $5, $23, $12 ; SaffronCityText18
-	db $b, $1a, $13 ; MartSignText
-	db $13, $27, $14 ; SaffronCityText20
-	db $15, $5, $15 ; SaffronCityText21
-	db $15, $f, $16 ; SaffronCityText22
-	db $1d, $a, $17 ; PokeCenterSignText
-	db $1d, $1b, $18 ; SaffronCityText24
-	db $13, $1, $19 ; SaffronCityText25
-
-	db $f ; people
-	db SPRITE_ROCKET, $6 + 4, $7 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $8 + 4, $14 + 4, $fe, $2, $2 ; person
-	db SPRITE_ROCKET, $4 + 4, $22 + 4, $ff, $ff, $3 ; person
-	db SPRITE_ROCKET, $c + 4, $d + 4, $ff, $ff, $4 ; person
-	db SPRITE_ROCKET, $19 + 4, $b + 4, $fe, $2, $5 ; person
-	db SPRITE_ROCKET, $d + 4, $20 + 4, $fe, $2, $6 ; person
-	db SPRITE_ROCKET, $1e + 4, $12 + 4, $fe, $2, $7 ; person
-	db SPRITE_OAK_AIDE, $e + 4, $8 + 4, $fe, $0, $8 ; person
-	db SPRITE_LAPRAS_GIVER, $17 + 4, $17 + 4, $ff, $ff, $9 ; person
-	db SPRITE_ERIKA, $1e + 4, $11 + 4, $fe, $2, $a ; person
-	db SPRITE_GENTLEMAN, $c + 4, $1e + 4, $ff, $d0, $b ; person
-	db SPRITE_BIRD, $c + 4, $1f + 4, $ff, $d0, $c ; person
-	db SPRITE_ROCKER, $8 + 4, $12 + 4, $ff, $d1, $d ; person
-	db SPRITE_ROCKET, $16 + 4, $12 + 4, $ff, $d0, $e ; person
-	db SPRITE_ROCKET, $16 + 4, $13 + 4, $ff, $d0, $f ; person
-
-	; warp-to
-	EVENT_DISP $14, $5, $7 ; COPYCATS_HOUSE_1F
-	EVENT_DISP $14, $3, $1a ; FIGHTINGDOJO
-	EVENT_DISP $14, $3, $22 ; SAFFRON_GYM
-	EVENT_DISP $14, $b, $d ; SAFFRON_HOUSE_1
-	EVENT_DISP $14, $b, $19 ; SAFFRON_MART
-	EVENT_DISP $14, $15, $12 ; SILPH_CO_1F
-	EVENT_DISP $14, $1d, $9 ; SAFFRON_POKECENTER
-	EVENT_DISP $14, $1d, $1d ; SAFFRON_HOUSE_2
+	
+INCLUDE "mapHeaders/SaffronCity.asm";
+INCLUDE "mapObjects/SaffronCity.asm"
 
 SaffronCityBlocks: ; 50a98 (14:4a98)
 	INCBIN "maps/saffroncity.blk"
@@ -79942,13 +67420,8 @@ Route25AfterBattleText9: ; 51787 (14:5787)
 Route25Text11: ; 5178c (14:578c)
 	TX_FAR _Route25Text11
 	db "@"
-
-VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
-	db $11 ; tileset
-	db VICTORY_ROAD_2_HEIGHT, VICTORY_ROAD_2_WIDTH ; dimensions (y, x)
-	dw VictoryRoad2Blocks, VictoryRoad2TextPointers, VictoryRoad2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VictoryRoad2Object ; objects
+	
+INCLUDE "mapHeaders/VictoryRoad2.asm";
 
 VictoryRoad2Script: ; 5179d (14:579d)
 	ld hl, $d126
@@ -80198,54 +67671,13 @@ VictoryRoad2EndBattleText5: ; 5190b (14:590b)
 VictoryRoad2AfterBattleText5: ; 51910 (14:5910)
 	TX_FAR _VictoryRoad2AfterBattleText5
 	db "@"
-
-VictoryRoad2Object: ; 0x51915 (size=154)
-	db $7d ; border tile
-
-	db $7 ; warps
-	db $8, $0, $2, VICTORY_ROAD_1
-	db $7, $1d, $3, $ff
-	db $8, $1d, $3, $ff
-	db $7, $17, $0, VICTORY_ROAD_3
-	db $e, $19, $2, VICTORY_ROAD_3
-	db $7, $1b, $1, VICTORY_ROAD_3
-	db $1, $1, $3, VICTORY_ROAD_3
-
-	db $0 ; signs
-
-	db $d ; people
-	db SPRITE_HIKER, $9 + 4, $c + 4, $ff, $d2, $41, BLACKBELT + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $15 + 4, $ff, $d2, $42, JUGGLER + $C8, $2 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, $43, TAMER + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, $44, POKEMANIAC + $C8, $6 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, $45, JUGGLER + $C8, $5 ; trainer
-	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, $46, MOLTRES, 50 ; trainer
-	db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, $87, TM_17 ; item
-	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, $88, FULL_HEAL ; item
-	db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, $89, TM_05 ; item
-	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, $8a, GUARD_SPEC_ ; item
-	db SPRITE_BOULDER, $e + 4, $4 + 4, $ff, $10, $b ; person
-	db SPRITE_BOULDER, $5 + 4, $5 + 4, $ff, $10, $c ; person
-	db SPRITE_BOULDER, $10 + 4, $17 + 4, $ff, $10, $d ; person
-
-	; warp-to
-	EVENT_DISP $f, $8, $0 ; VICTORY_ROAD_1
-	EVENT_DISP $f, $7, $1d
-	EVENT_DISP $f, $8, $1d
-	EVENT_DISP $f, $7, $17 ; VICTORY_ROAD_3
-	EVENT_DISP $f, $e, $19 ; VICTORY_ROAD_3
-	EVENT_DISP $f, $7, $1b ; VICTORY_ROAD_3
-	EVENT_DISP $f, $1, $1 ; VICTORY_ROAD_3
+	
+INCLUDE "mapObjects/VictoryRoad2.asm"
 
 VictoryRoad2Blocks: ; 519af (14:59af)
 	INCBIN "maps/victoryroad2.blk"
-
-MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
-	db $11 ; tileset
-	db MT_MOON_2_HEIGHT, MT_MOON_2_WIDTH ; dimensions (y, x)
-	dw MtMoon2Blocks, MtMoon2TextPointers, MtMoon2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw MtMoon2Object ; objects
+	
+INCLUDE "mapHeaders/MtMoon2.asm";
 
 MtMoon2Script: ; 51a42 (14:5a42)
 	call EnableAutoTextBoxDrawing
@@ -80257,43 +67689,13 @@ MtMoon2TextPointers: ; 51a46 (14:5a46)
 MtMoonText1: ; 51a48 (14:5a48)
 	TX_FAR _UnnamedText_51a48
 	db "@"
-
-MtMoon2Object: ; 0x51a4d (size=68)
-	db $3 ; border tile
-
-	db $8 ; warps
-	db $5, $5, $2, MT_MOON_1
-	db $b, $11, $0, MT_MOON_3
-	db $9, $19, $3, MT_MOON_1
-	db $f, $19, $4, MT_MOON_1
-	db $11, $15, $1, MT_MOON_3
-	db $1b, $d, $2, MT_MOON_3
-	db $3, $17, $3, MT_MOON_3
-	db $3, $1b, $2, $ff
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $e, $5, $5 ; MT_MOON_1
-	EVENT_DISP $e, $b, $11 ; MT_MOON_3
-	EVENT_DISP $e, $9, $19 ; MT_MOON_1
-	EVENT_DISP $e, $f, $19 ; MT_MOON_1
-	EVENT_DISP $e, $11, $15 ; MT_MOON_3
-	EVENT_DISP $e, $1b, $d ; MT_MOON_3
-	EVENT_DISP $e, $3, $17 ; MT_MOON_3
-	EVENT_DISP $e, $3, $1b
+	
+INCLUDE "mapObjects/MtMoon2.asm"
 
 MtMoon2Blocks: ; 51a91 (14:5a91)
 	INCBIN "maps/mtmoon2.blk"
-
-SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
-	db $16 ; tileset
-	db SILPH_CO_7F_HEIGHT, SILPH_CO_7F_WIDTH ; dimensions (y, x)
-	dw SilphCo7Blocks, SilphCo7TextPointers, SilphCo7Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo7Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo7.asm";
 
 SilphCo7Script: ; 51b61 (14:5b61)
 	call SilphCo7Script_51b77
@@ -80819,50 +68221,13 @@ UnnamedText_51ecd: ; 51ecd (14:5ecd)
 SilphCo7Text15: ; 51ed2 (14:5ed2)
 	TX_FAR _UnnamedText_51ed2
 	db "@"
-
-SilphCo7Object: ; 0x51ed7 (size=128)
-	db $2e ; border tile
-
-	db $6 ; warps
-	db $0, $10, $1, SILPH_CO_8F
-	db $0, $16, $0, SILPH_CO_6F
-	db $0, $12, $0, SILPH_CO_ELEVATOR
-	db $7, $5, $3, SILPH_CO_11F
-	db $3, $5, $8, SILPH_CO_3F
-	db $f, $15, $3, SILPH_CO_5F
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_LAPRAS_GIVER, $5 + 4, $1 + 4, $ff, $ff, $1 ; person
-	db SPRITE_LAPRAS_GIVER, $d + 4, $d + 4, $ff, $d1, $2 ; person
-	db SPRITE_LAPRAS_GIVER, $a + 4, $7 + 4, $ff, $ff, $3 ; person
-	db SPRITE_ERIKA, $8 + 4, $a + 4, $ff, $ff, $4 ; person
-	db SPRITE_ROCKET, $1 + 4, $d + 4, $ff, $d0, $45, ROCKET + $C8, $20 ; trainer
-	db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, $46, SCIENTIST + $C8, $8 ; trainer
-	db SPRITE_ROCKET, $2 + 4, $14 + 4, $ff, $d2, $47, ROCKET + $C8, $21 ; trainer
-	db SPRITE_ROCKET, $e + 4, $13 + 4, $ff, $d3, $48, ROCKET + $C8, $22 ; trainer
-	db SPRITE_BLUE, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
-	db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, $8a, CALCIUM ; item
-	db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, $8b, TM_03 ; item
-
-	; warp-to
-	EVENT_DISP $d, $0, $10 ; SILPH_CO_8F
-	EVENT_DISP $d, $0, $16 ; SILPH_CO_6F
-	EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $d, $7, $5 ; SILPH_CO_11F
-	EVENT_DISP $d, $3, $5 ; SILPH_CO_3F
-	EVENT_DISP $d, $f, $15 ; SILPH_CO_5F
+	
+INCLUDE "mapObjects/SilphCo7.asm"
 
 SilphCo7Blocks: ; 51f57 (14:5f57)
 	INCBIN "maps/silphco7.blk"
-
-Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
-	db $16 ; tileset
-	db MANSION_2_HEIGHT, MANSION_2_WIDTH ; dimensions (y, x)
-	dw Mansion2Blocks, Mansion2TextPointers, Mansion2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Mansion2Object ; objects
+	
+INCLUDE "mapHeaders/Mansion2.asm";
 
 Mansion2Script: ; 51fd8 (14:5fd8)
 	call Mansion2Script_51fee
@@ -81009,39 +68374,13 @@ UnnamedText_520c7: ; 520c7 (14:60c7)
 UnnamedText_520cc: ; 520cc (14:60cc)
 	TX_FAR _UnnamedText_520cc
 	db "@"
-
-Mansion2Object: ; 0x520d1 (size=63)
-	db $1 ; border tile
-
-	db $4 ; warps
-	db $a, $5, $4, MANSION_1
-	db $a, $7, $0, MANSION_3
-	db $e, $19, $2, MANSION_3
-	db $1, $6, $1, MANSION_3
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $3 + 4, $fe, $2, $41, BURGLAR + $C8, $7 ; trainer
-	db SPRITE_BALL, $7 + 4, $1c + 4, $ff, $ff, $82, CALCIUM ; item
-	db SPRITE_BOOK_MAP_DEX, $2 + 4, $12 + 4, $ff, $ff, $3 ; person
-	db SPRITE_BOOK_MAP_DEX, $16 + 4, $3 + 4, $ff, $ff, $4 ; person
-
-	; warp-to
-	EVENT_DISP $f, $a, $5 ; MANSION_1
-	EVENT_DISP $f, $a, $7 ; MANSION_3
-	EVENT_DISP $f, $e, $19 ; MANSION_3
-	EVENT_DISP $f, $1, $6 ; MANSION_3
+	
+INCLUDE "mapObjects/Mansion2.asm"
 
 Mansion2Blocks: ; 52110 (14:6110)
 	INCBIN "maps/mansion2.blk"
 
-Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
-	db $16 ; tileset
-	db MANSION_3_HEIGHT, MANSION_3_WIDTH ; dimensions (y, x)
-	dw Mansion3Blocks, Mansion3TextPointers, Mansion3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Mansion3Object ; objects
+INCLUDE "mapHeaders/Mansion3.asm";	
 
 Mansion3Script: ; 521ee (14:61ee)
 	call Mansion3Script_52204
@@ -81196,38 +68535,13 @@ Mansion3AfterBattleText2: ; 522dc (14:62dc)
 Mansion3Text5: ; 522e1 (14:62e1)
 	TX_FAR _Mansion3Text5
 	db "@"
-
-Mansion3Object: ; 0x522e6 (size=64)
-	db $1 ; border tile
-
-	db $3 ; warps
-	db $a, $7, $1, MANSION_2
-	db $1, $6, $3, MANSION_2
-	db $e, $19, $2, MANSION_2
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $5 + 4, $fe, $2, $41, BURGLAR + $C8, $8 ; trainer
-	db SPRITE_OAK_AIDE, $b + 4, $14 + 4, $ff, $d2, $42, SCIENTIST + $C8, $c ; trainer
-	db SPRITE_BALL, $10 + 4, $1 + 4, $ff, $ff, $83, MAX_POTION ; item
-	db SPRITE_BALL, $5 + 4, $19 + 4, $ff, $ff, $84, IRON ; item
-	db SPRITE_BOOK_MAP_DEX, $c + 4, $6 + 4, $ff, $ff, $5 ; person
-
-	; warp-to
-	EVENT_DISP $f, $a, $7 ; MANSION_2
-	EVENT_DISP $f, $1, $6 ; MANSION_2
-	EVENT_DISP $f, $e, $19 ; MANSION_2
+	
+INCLUDE "mapObjects/Mansion3.asm"
 
 Mansion3Blocks: ; 52326 (14:6326)
 	INCBIN "maps/mansion3.blk"
-
-Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
-	db $16 ; tileset
-	db MANSION_4_HEIGHT, MANSION_4_WIDTH ; dimensions (y, x)
-	dw Mansion4Blocks, Mansion4TextPointers, Mansion4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Mansion4Object ; objects
+	
+INCLUDE "mapHeaders/Mansion4.asm";	
 
 Mansion4Script: ; 523b9 (14:63b9)
 	call Mansion4Script_523cf
@@ -81361,27 +68675,8 @@ Mansion4AfterBattleText2: ; 5248e (14:648e)
 Mansion4Text7: ; 52493 (14:6493)
 	TX_FAR _Mansion4Text7
 	db "@"
-
-Mansion4Object: ; 0x52498 (size=69)
-	db $1 ; border tile
-
-	db $1 ; warps
-	db $16, $17, $5, MANSION_1
-
-	db $0 ; signs
-
-	db $8 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $17 + 4, $10 + 4, $ff, $ff, $41, BURGLAR + $C8, $9 ; trainer
-	db SPRITE_OAK_AIDE, $b + 4, $1b + 4, $ff, $d0, $42, SCIENTIST + $C8, $d ; trainer
-	db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $83, RARE_CANDY ; item
-	db SPRITE_BALL, $16 + 4, $1 + 4, $ff, $ff, $84, FULL_RESTORE ; item
-	db SPRITE_BALL, $19 + 4, $13 + 4, $ff, $ff, $85, TM_14 ; item
-	db SPRITE_BALL, $4 + 4, $5 + 4, $ff, $ff, $86, TM_22 ; item
-	db SPRITE_BOOK_MAP_DEX, $14 + 4, $10 + 4, $ff, $ff, $7 ; person
-	db SPRITE_BALL, $d + 4, $5 + 4, $ff, $ff, $88, SECRET_KEY ; item
-
-	; warp-to
-	EVENT_DISP $f, $16, $17 ; MANSION_1
+	
+INCLUDE "mapObjects/Mansion4.asm"
 
 Mansion4Blocks: ; 524dd (14:64dd)
 	INCBIN "maps/mansion4.blk"
@@ -82106,345 +69401,62 @@ IndigoPlateauHQText: ; 52a3d (14:6a3d)
 
 SECTION "bank15",ROMX,BANK[$15]
 
-Route2_h: ; 54000 (15:4000)
-	db 00 ; Tileset
-	db ROUTE_2_HEIGHT,ROUTE_2_WIDTH ;Height,Width blocks (1 block = 4x4 tiles)
-	dw Route2Blocks, Route2TextPointers, Route2Script
-	db NORTH | SOUTH ;Connection Byte
-	NORTH_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, PEWTER_CITY_HEIGHT, -3, 2, PEWTER_CITY_WIDTH - 4, PewterCityBlocks
-	SOUTH_MAP_CONNECTION VIRIDIAN_CITY, VIRIDIAN_CITY_WIDTH, -3, 2, VIRIDIAN_CITY_WIDTH - 4, ViridianCityBlocks, ROUTE_2_WIDTH, ROUTE_2_HEIGHT
-	dw Route2Object ;Object Data Pointer
-
-Route2Object: ; 0x54022 (size=72)
-	db $f ; border tile
-
-	db $6 ; warps
-	db $9, $c, $0, DIGLETTS_CAVE_EXIT
-	db $b, $3, $1, VIRIDIAN_FOREST_EXIT
-	db $13, $f, $0, ROUTE_2_HOUSE
-	db $23, $10, $1, ROUTE_2_GATE
-	db $27, $f, $2, ROUTE_2_GATE
-	db $2b, $3, $2, VIRIDIAN_FOREST_ENTRANCE
-
-	db $2 ; signs
-	db $41, $5, $3 ; Route2Text3
-	db $b, $b, $4 ; Route2Text4
-
-	db $2 ; people
-	db SPRITE_BALL, $36 + 4, $d + 4, $ff, $ff, $81, MOON_STONE ; item
-	db SPRITE_BALL, $2d + 4, $d + 4, $ff, $ff, $82, HP_UP ; item
-
-	; warp-to
-	EVENT_DISP $a, $9, $c ; DIGLETTS_CAVE_EXIT
-	EVENT_DISP $a, $b, $3 ; VIRIDIAN_FOREST_EXIT
-	EVENT_DISP $a, $13, $f ; ROUTE_2_HOUSE
-	EVENT_DISP $a, $23, $10 ; ROUTE_2_GATE
-	EVENT_DISP $a, $27, $f ; ROUTE_2_GATE
-	EVENT_DISP $a, $2b, $3 ; VIRIDIAN_FOREST_ENTRANCE
-
-	; unused
-	EVENT_DISP $4, $7, $2
-	db   $12, $c7, $9, $7
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $2
+INCLUDE "mapHeaders/Route2.asm";
+INCLUDE "mapObjects/Route2.asm"
 
 Route2Blocks: ; 5407e (15:407e)
 	INCBIN "maps/route2.blk"
-
-Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
-	db $00 ; tileset
-	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
-	dw Route3Blocks, Route3TextPointers, Route3Script ; blocks, texts, scripts
-	db NORTH | WEST ; connections
-	NORTH_MAP_CONNECTION ROUTE_4, ROUTE_4_WIDTH, ROUTE_4_HEIGHT, 25, 0, ROUTE_4_WIDTH - 32, Route4Blocks
-	WEST_MAP_CONNECTION PEWTER_CITY, PEWTER_CITY_WIDTH, -3, 1, PEWTER_CITY_HEIGHT - 3, PewterCityBlocks, ROUTE_3_WIDTH
-	dw Route3Object ; objects
-
-Route3Object: ; 0x54208 (size=77)
-	db $2c ; border tile
-
-	db $0 ; warps
-
-	db $1 ; signs
-	db $9, $3b, $a ; Route3Text10
-
-	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $39 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $6 + 4, $a + 4, $ff, $d3, $42, BUG_CATCHER + $C8, $4 ; trainer
-	db SPRITE_BUG_CATCHER, $4 + 4, $e + 4, $ff, $d0, $43, YOUNGSTER + $C8, $1 ; trainer
-	db SPRITE_LASS, $9 + 4, $10 + 4, $ff, $d2, $44, LASS + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $13 + 4, $ff, $d0, $45, BUG_CATCHER + $C8, $5 ; trainer
-	db SPRITE_LASS, $4 + 4, $17 + 4, $ff, $d2, $46, LASS + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $9 + 4, $16 + 4, $ff, $d2, $47, YOUNGSTER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $6 + 4, $18 + 4, $ff, $d3, $48, BUG_CATCHER + $C8, $6 ; trainer
-	db SPRITE_LASS, $a + 4, $21 + 4, $ff, $d1, $49, LASS + $C8, $3 ; trainer
+	
+INCLUDE "mapHeaders/Route3.asm";
+INCLUDE "mapObjects/Route3.asm"
 
 Route3Blocks: ; 54255 (15:4255)
 	INCBIN "maps/route3.blk"
-
-Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
-	db $00 ; tileset
-	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
-	dw Route4Blocks, Route4TextPointers, Route4Script; blocks, texts, scripts
-	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_3, ROUTE_3_WIDTH, -3, 22, ROUTE_3_WIDTH - 22, Route3Blocks, ROUTE_4_WIDTH, ROUTE_4_HEIGHT
-	EAST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, CERULEAN_CITY_HEIGHT - 3, CeruleanCityBlocks, ROUTE_4_WIDTH
-	dw Route4Object ; objects
-
-Route4Object: ; 0x543b2 (size=58)
-	db $2c ; border tile
-
-	db $3 ; warps
-	db $5, $b, $0, MT_MOON_POKECENTER
-	db $5, $12, $0, MT_MOON_1
-	db $5, $18, $7, MT_MOON_2
-
-	db $3 ; signs
-	db $5, $c, $4 ; PokeCenterSignText
-	db $7, $11, $5 ; Route4Text5
-	db $7, $1b, $6 ; Route4Text6
-
-	db $3 ; people
-	db SPRITE_LASS, $8 + 4, $9 + 4, $fe, $0, $1 ; person
-	db SPRITE_LASS, $3 + 4, $3f + 4, $ff, $d3, $42, LASS + $C8, $4 ; trainer
-	db SPRITE_BALL, $3 + 4, $39 + 4, $ff, $ff, $83, TM_04 ; item
-
-	; warp-to
-	EVENT_DISP $2d, $5, $b ; MT_MOON_POKECENTER
-	EVENT_DISP $2d, $5, $12 ; MT_MOON_1
-	EVENT_DISP $2d, $5, $18 ; MT_MOON_2
+	
+INCLUDE "mapHeaders/Route4.asm";
+INCLUDE "mapObjects/Route4.asm"
 
 Route4Blocks: ; 543ec (15:43ec)
 	INCBIN "maps/route4.blk"
-
-Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
-	db $00 ; tileset
-	db ROUTE_5_HEIGHT, ROUTE_5_WIDTH ; dimensions (y, x)
-	dw Route5Blocks, Route5TextPointers, Route5Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, CERULEAN_CITY_HEIGHT, -3, 2, CERULEAN_CITY_WIDTH - 4, CeruleanCityBlocks
-	SOUTH_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 2, SAFFRON_CITY_WIDTH - 4, SaffronCityBlocks, ROUTE_5_WIDTH, ROUTE_5_HEIGHT
-	dw Route5Object ; objects
-
-Route5Object: ; 0x545a3 (size=47)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $1d, $a, $3, ROUTE_5_GATE
-	db $1d, $9, $2, ROUTE_5_GATE
-	db $21, $a, $0, ROUTE_5_GATE
-	db $1b, $11, $0, PATH_ENTRANCE_ROUTE_5
-	db $15, $a, $0, DAYCAREM
-
-	db $1 ; signs
-	db $1d, $11, $1 ; Route5Text1
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $a, $1d, $a ; ROUTE_5_GATE
-	EVENT_DISP $a, $1d, $9 ; ROUTE_5_GATE
-	EVENT_DISP $a, $21, $a ; ROUTE_5_GATE
-	EVENT_DISP $a, $1b, $11 ; PATH_ENTRANCE_ROUTE_5
-	EVENT_DISP $a, $15, $a ; DAYCAREM
+	
+INCLUDE "mapHeaders/Route5.asm";
+INCLUDE "mapObjects/Route5.asm"
 
 Route5Blocks: ; 545d2 (15:45d2)
 	INCBIN "maps/route5.blk"
-
-Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
-	db $00 ; tileset
-	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; dimensions (y, x)
-	dw Route9Blocks, Route9TextPointers, Route9Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, CERULEAN_CITY_HEIGHT - 3, CeruleanCityBlocks, ROUTE_9_WIDTH
-	EAST_MAP_CONNECTION ROUTE_10, ROUTE_10_WIDTH, 0, 0, ROUTE_10_HEIGHT - 24, Route10Blocks, ROUTE_9_WIDTH
-	dw Route9Object ; objects
-
-Route9Object: ; 0x546a8 (size=86)
-	db $2c ; border tile
-
-	db $0 ; warps
-
-	db $1 ; signs
-	db $7, $19, $b ; Route9Text11
-
-	db $a ; people
-	db SPRITE_LASS, $a + 4, $d + 4, $ff, $d2, $41, JR__TRAINER_F + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $18 + 4, $ff, $d2, $42, JR__TRAINER_M + $C8, $7 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $1f + 4, $ff, $d3, $43, JR__TRAINER_M + $C8, $8 ; trainer
-	db SPRITE_LASS, $8 + 4, $30 + 4, $ff, $d3, $44, JR__TRAINER_F + $C8, $6 ; trainer
-	db SPRITE_HIKER, $f + 4, $10 + 4, $ff, $d2, $45, HIKER + $C8, $b ; trainer
-	db SPRITE_HIKER, $3 + 4, $2b + 4, $ff, $d2, $46, HIKER + $C8, $6 ; trainer
-	db SPRITE_BUG_CATCHER, $2 + 4, $16 + 4, $ff, $d0, $47, BUG_CATCHER + $C8, $d ; trainer
-	db SPRITE_HIKER, $f + 4, $2d + 4, $ff, $d3, $48, HIKER + $C8, $5 ; trainer
-	db SPRITE_BUG_CATCHER, $8 + 4, $28 + 4, $ff, $d3, $49, BUG_CATCHER + $C8, $e ; trainer
-	db SPRITE_BALL, $f + 4, $a + 4, $ff, $ff, $8a, TM_30 ; item
+	
+INCLUDE "mapHeaders/Route9.asm";
+INCLUDE "mapObjects/Route9.asm"
 
 Route9Blocks: ; 546fe (15:46fe)
 	INCBIN "maps/route9.blk"
-
-Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
-	db $00 ; tileset
-	db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; dimensions (y, x)
-	dw Route13Blocks, Route13TextPointers, Route13Script ; blocks, texts, scripts
-	db NORTH | WEST ; connections
-	NORTH_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, ROUTE_12_HEIGHT, 20, 0, ROUTE_12_WIDTH, Route12Blocks
-	WEST_MAP_CONNECTION ROUTE_14, ROUTE_14_WIDTH, 0, 0, ROUTE_14_HEIGHT - 15, Route14Blocks, ROUTE_13_WIDTH
-	dw Route13Object ; objects
-
-Route13Object: ; 0x5482e (size=93)
-	db $43 ; border tile
-
-	db $0 ; warps
-
-	db $3 ; signs
-	db $d, $f, $b ; Route13Text11
-	db $5, $21, $c ; Route13Text12
-	db $b, $1f, $d ; Route13Text13
-
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $31 + 4, $ff, $d3, $41, BIRD_KEEPER + $C8, $1 ; trainer
-	db SPRITE_LASS, $a + 4, $30 + 4, $ff, $d0, $42, JR__TRAINER_F + $C8, $c ; trainer
-	db SPRITE_LASS, $9 + 4, $1b + 4, $ff, $d0, $43, JR__TRAINER_F + $C8, $d ; trainer
-	db SPRITE_LASS, $a + 4, $17 + 4, $ff, $d2, $44, JR__TRAINER_F + $C8, $e ; trainer
-	db SPRITE_LASS, $5 + 4, $32 + 4, $ff, $d0, $45, JR__TRAINER_F + $C8, $f ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $c + 4, $ff, $d3, $46, BIRD_KEEPER + $C8, $2 ; trainer
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $21 + 4, $ff, $d0, $47, BEAUTY + $C8, $4 ; trainer
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $20 + 4, $ff, $d0, $48, BEAUTY + $C8, $5 ; trainer
-	db SPRITE_BIKER, $7 + 4, $a + 4, $ff, $d1, $49, BIKER + $C8, $1 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $7 + 4, $ff, $d1, $4a, BIRD_KEEPER + $C8, $3 ; trainer
+	
+INCLUDE "mapHeaders/Route13.asm";
+INCLUDE "mapObjects/Route13.asm"
 
 Route13Blocks: ; 5488b (15:488b)
 	INCBIN "maps/route13.blk"
-
-Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
-	db $00 ; tileset
-	db ROUTE_14_HEIGHT, ROUTE_14_WIDTH ; dimensions (y, x)
-	dw Route14Blocks, Route14TextPointers, Route14Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION ROUTE_15, ROUTE_15_WIDTH, 18, 0, ROUTE_15_HEIGHT, Route15Blocks, ROUTE_14_WIDTH
-	EAST_MAP_CONNECTION ROUTE_13, ROUTE_13_WIDTH, 0, 0, ROUTE_13_HEIGHT, Route13Blocks, ROUTE_14_WIDTH
-	dw Route14Object ; objects
-
-Route14Object: ; 0x549bb (size=87)
-	db $43 ; border tile
-
-	db $0 ; warps
-
-	db $1 ; signs
-	db $d, $11, $b ; Route14Text11
-
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $4 + 4, $ff, $d0, $41, BIRD_KEEPER + $C8, $e ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $f + 4, $ff, $d0, $42, BIRD_KEEPER + $C8, $f ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $c + 4, $ff, $d0, $43, BIRD_KEEPER + $C8, $10 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $e + 4, $ff, $d1, $44, BIRD_KEEPER + $C8, $11 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $f + 4, $ff, $d2, $45, BIRD_KEEPER + $C8, $4 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $31 + 4, $6 + 4, $ff, $d1, $46, BIRD_KEEPER + $C8, $5 ; trainer
-	db SPRITE_BIKER, $27 + 4, $5 + 4, $ff, $d0, $47, BIKER + $C8, $d ; trainer
-	db SPRITE_BIKER, $1e + 4, $4 + 4, $ff, $d3, $48, BIKER + $C8, $e ; trainer
-	db SPRITE_BIKER, $1e + 4, $f + 4, $ff, $d2, $49, BIKER + $C8, $f ; trainer
-	db SPRITE_BIKER, $1f + 4, $4 + 4, $ff, $d3, $4a, BIKER + $C8, $2 ; trainer
+	
+INCLUDE "mapHeaders/Route14.asm";
+INCLUDE "mapObjects/Route14.asm"
 
 Route14Blocks: ; 54a12 (15:4a12)
 	INCBIN "maps/route14.blk"
-
-Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
-	db $00 ; tileset
-	db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
-	dw Route17Blocks, Route17TextPointers, Route17Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION ROUTE_16, ROUTE_16_WIDTH, ROUTE_16_HEIGHT, 0, 0, ROUTE_16_WIDTH - 7, Route16Blocks
-	SOUTH_MAP_CONNECTION ROUTE_18, ROUTE_18_WIDTH, 0, 0, ROUTE_18_WIDTH - 12, Route18Blocks, ROUTE_17_WIDTH, ROUTE_17_HEIGHT
-	dw Route17Object ; objects
-
-Route17Object: ; 0x54b42 (size=102)
-	db $43 ; border tile
-
-	db $0 ; warps
-
-	db $6 ; signs
-	db $33, $9, $b ; Route17Text11
-	db $3f, $9, $c ; Route17Text12
-	db $4b, $9, $d ; Route17Text13
-	db $57, $9, $e ; Route17Text14
-	db $6f, $9, $f ; Route17Text15
-	db $8d, $9, $10 ; Route17Text16
-
-	db $a ; people
-	db SPRITE_BIKER, $13 + 4, $c + 4, $ff, $d2, $41, CUE_BALL + $C8, $4 ; trainer
-	db SPRITE_BIKER, $10 + 4, $b + 4, $ff, $d3, $42, CUE_BALL + $C8, $5 ; trainer
-	db SPRITE_BIKER, $12 + 4, $4 + 4, $ff, $d1, $43, BIKER + $C8, $8 ; trainer
-	db SPRITE_BIKER, $20 + 4, $7 + 4, $ff, $d2, $44, BIKER + $C8, $9 ; trainer
-	db SPRITE_BIKER, $22 + 4, $e + 4, $ff, $d3, $45, BIKER + $C8, $a ; trainer
-	db SPRITE_BIKER, $3a + 4, $11 + 4, $ff, $d2, $46, CUE_BALL + $C8, $6 ; trainer
-	db SPRITE_BIKER, $44 + 4, $2 + 4, $ff, $d3, $47, CUE_BALL + $C8, $7 ; trainer
-	db SPRITE_BIKER, $62 + 4, $e + 4, $ff, $d3, $48, CUE_BALL + $C8, $8 ; trainer
-	db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, $49, BIKER + $C8, $b ; trainer
-	db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, $4a, BIKER + $C8, $c ; trainer
+	
+INCLUDE "mapHeaders/Route17.asm";
+INCLUDE "mapObjects/Route17.asm"
 
 Route17Blocks: ; 54ba8 (15:4ba8)
 	INCBIN "maps/route17.blk"
-
-Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
-	db $00 ; tileset
-	db ROUTE_19_HEIGHT, ROUTE_19_WIDTH ; dimensions (y, x)
-	dw Route19Blocks, Route19TextPointers, Route19Script ; blocks, texts, scripts
-	db NORTH | WEST ; connections
-	NORTH_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, FUCHSIA_CITY_HEIGHT, -3, 2, FUCHSIA_CITY_WIDTH - 4, FuchsiaCityBlocks
-	WEST_MAP_CONNECTION ROUTE_20, ROUTE_20_WIDTH, 18, 0, ROUTE_20_HEIGHT, Route20Blocks, ROUTE_19_WIDTH
-	dw Route19Object ; objects
-
-Route19Object: ; 0x54e9a (size=87)
-	db $43 ; border tile
-
-	db $0 ; warps
-
-	db $1 ; signs
-	db $9, $b, $b ; Route19Text11
-
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $8 + 4, $ff, $d2, $41, SWIMMER + $C8, $2 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $d + 4, $ff, $d2, $42, SWIMMER + $C8, $3 ; trainer
-	db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, $43, SWIMMER + $C8, $4 ; trainer
-	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, $44, SWIMMER + $C8, $5 ; trainer
-	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, $45, SWIMMER + $C8, $6 ; trainer
-	db SPRITE_SWIMMER, $b + 4, $9 + 4, $ff, $d0, $46, SWIMMER + $C8, $7 ; trainer
-	db SPRITE_SWIMMER, $2b + 4, $8 + 4, $ff, $d2, $47, BEAUTY + $C8, $c ; trainer
-	db SPRITE_SWIMMER, $2b + 4, $b + 4, $ff, $d3, $48, BEAUTY + $C8, $d ; trainer
-	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, $49, SWIMMER + $C8, $8 ; trainer
-	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, $4a, BEAUTY + $C8, $e ; trainer
+	
+INCLUDE "mapHeaders/Route19.asm";
+INCLUDE "mapObjects/Route19.asm"
 
 Route19Blocks: ; 54ef1 (15:4ef1)
 	INCBIN "maps/route19.blk"
-
-Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
-	db $00 ; tileset
-	db ROUTE_21_HEIGHT, ROUTE_21_WIDTH ; dimensions (y, x)
-	dw Route21Blocks, Route21TextPointers, Route21Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION PALLET_TOWN, PALLET_TOWN_WIDTH, PALLET_TOWN_HEIGHT, 0, 0, PALLET_TOWN_WIDTH, PalletTownBlocks
-	SOUTH_MAP_CONNECTION CINNABAR_ISLAND, CINNABAR_ISLAND_WIDTH, 0, 0, CINNABAR_ISLAND_WIDTH, CinnabarIslandBlocks, ROUTE_21_WIDTH, ROUTE_21_HEIGHT
-	dw Route21Object ; objects
-
-Route21Object: ; 0x55021 (size=76)
-	db $43 ; border tile
-
-	db $0 ; warps
-
-	db $0 ; signs
-
-	db $9 ; people
-	db SPRITE_FISHER2, $18 + 4, $4 + 4, $ff, $d2, $41, FISHER + $C8, $7 ; trainer
-	db SPRITE_FISHER2, $19 + 4, $6 + 4, $ff, $d0, $42, FISHER + $C8, $9 ; trainer
-	db SPRITE_SWIMMER, $1f + 4, $a + 4, $ff, $d1, $43, SWIMMER + $C8, $c ; trainer
-	db SPRITE_SWIMMER, $1e + 4, $c + 4, $ff, $d3, $44, CUE_BALL + $C8, $9 ; trainer
-	db SPRITE_SWIMMER, $3f + 4, $10 + 4, $ff, $d0, $45, SWIMMER + $C8, $d ; trainer
-	db SPRITE_SWIMMER, $47 + 4, $5 + 4, $ff, $d3, $46, SWIMMER + $C8, $e ; trainer
-	db SPRITE_SWIMMER, $47 + 4, $f + 4, $ff, $d2, $47, SWIMMER + $C8, $f ; trainer
-	db SPRITE_FISHER2, $38 + 4, $e + 4, $ff, $d2, $48, FISHER + $C8, $8 ; trainer
-	db SPRITE_FISHER2, $39 + 4, $11 + 4, $ff, $d3, $49, FISHER + $C8, $a ; trainer
+	
+INCLUDE "mapHeaders/Route21.asm";
+INCLUDE "mapObjects/Route21.asm"
 
 Route21Blocks: ; 5506d (15:506d)
 	INCBIN "maps/route21.blk"
@@ -84975,13 +71987,8 @@ Route21EndBattleText9: ; 5605a (15:605a)
 Route21AfterBattleText9: ; 5605f (15:605f)
 	TX_FAR _Route21AfterBattleText9
 	db "@"
-
-VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
-	db $08 ; tileset
-	db VERMILION_HOUSE_2_HEIGHT, VERMILION_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw VermilionHouse2Blocks, VermilionHouse2TextPointers, VermilionHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionHouse2Object ; objects
+	
+INCLUDE "mapHeaders/VermilionHouse2.asm";
 
 VermilionHouse2Script: ; 56070 (15:6070)
 	jp EnableAutoTextBoxDrawing
@@ -85040,29 +72047,10 @@ UnnamedText_560c5: ; 560c5 (15:60c5)
 UnnamedText_560ca: ; 560ca (15:60ca)
 	TX_FAR _UnnamedText_560ca
 	db "@"
-
-VermilionHouse2Object: ; 0x560cf (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $8, $ff
-	db $7, $3, $8, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
-	db $12 ; tileset
-	db CELADON_MART_2_HEIGHT, CELADON_MART_2_WIDTH ; dimensions (y, x)
-	dw CeladonMart2Blocks, CeladonMart2TextPointers, CeladonMart2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMart2Object ; objects
+	
+INCLUDE "mapObjects/VermilionHouse2.asm"
+	
+INCLUDE "mapHeaders/CeladonMart2.asm";
 
 CeladonMart2Script: ; 560f5 (15:60f5)
 	jp EnableAutoTextBoxDrawing
@@ -85085,38 +72073,13 @@ CeladonMart2Text4: ; 56107 (15:6107)
 CeladonMart2Text5: ; 5610c (15:610c)
 	TX_FAR _CeladonMart2Text5
 	db "@"
-
-CeladonMart2Object: ; 0x56111 (size=55)
-	db $f ; border tile
-
-	db $3 ; warps
-	db $1, $c, $4, CELADON_MART_1
-	db $1, $10, $1, CELADON_MART_3
-	db $1, $1, $0, CELADON_MART_ELEVATOR
-
-	db $1 ; signs
-	db $1, $e, $5 ; CeladonMart2Text5
-
-	db $4 ; people
-	db SPRITE_MART_GUY, $3 + 4, $5 + 4, $ff, $d0, $1 ; person
-	db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $5 + 4, $13 + 4, $ff, $ff, $3 ; person
-	db SPRITE_GIRL, $4 + 4, $e + 4, $fe, $1, $4 ; person
-
-	; warp-to
-	EVENT_DISP $a, $1, $c ; CELADON_MART_1
-	EVENT_DISP $a, $1, $10 ; CELADON_MART_3
-	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
+	
+INCLUDE "mapObjects/CeladonMart2.asm"
 
 CeladonMart2Blocks: ; 56148 (15:6148)
 	INCBIN "maps/celadonmart2.blk"
-
-FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
-	db $0d ; tileset
-	db FUCHSIA_HOUSE_3_HEIGHT, FUCHSIA_HOUSE_3_WIDTH ; dimensions (y, x)
-	dw FuchsiaHouse3Blocks, FuchsiaHouse3TextPointers, FuchsiaHouse3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaHouse3Object ; objects
+	
+INCLUDE "mapHeaders/FuchsiaHouse3.asm";
 
 FuchsiaHouse3Script: ; 5617c (15:617c)
 	jp EnableAutoTextBoxDrawing
@@ -85173,13 +72136,13 @@ UnnamedText_561c2: ; 561c2 (15:61c2)
 	db "@"
 
 UnnamedText_561c8: ; 561c8
-	para "つり こそ"
-	line "おとこの ロマン だ!"
+	para "つり こそ";Only Fishing
+	line "おとこの ロマン だ!" ;It is a romance of a man!
 
-	para "へぼいつりざおは"
-	line "コイキングしか つれ なんだが"
-	line "この いいつりざおなら"
-	line "もっと いいもんが つれるんじゃ!"
+	para "へぼいつりざおは" ;I have an old rod
+	line "コイキングしか つれ なんだが" ;although I can only catch Magikarp
+	line "この いいつりざおなら" ;If you get a good rod
+	line "もっと いいもんが つれるんじゃ!" ;you can catch better Pokemon!
 	done
 
 UnnamedText_56212: ; 56212 (15:6212)
@@ -85193,31 +72156,10 @@ UnnamedText_56217: ; 56217 (15:6217)
 UnnamedText_5621c: ; 5621c (15:621c)
 	TX_FAR _UnnamedText_5621c
 	db "@"
-
-FuchsiaHouse3Object: ; 0x56221 (size=34)
-	db $c ; border tile
-
-	db $3 ; warps
-	db $0, $2, $8, $ff
-	db $7, $2, $7, $ff
-	db $7, $3, $7, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $0, $2
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
-	db $08 ; tileset
-	db DAYCAREM_HEIGHT, DAYCAREM_WIDTH ; dimensions (y, x)
-	dw DayCareMBlocks, DayCareMTextPointers, DayCareMScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw DayCareMObject ; objects
+	
+INCLUDE "mapObjects/FuchsiaHouse3.asm"
+	
+INCLUDE "mapHeaders/DayCare.asm";
 
 DayCareMScript: ; 5624f (15:624f)
 	jp EnableAutoTextBoxDrawing
@@ -85493,29 +72435,10 @@ UnnamedText_5644f: ; 5644f (15:644f)
 UnnamedText_56454: ; 56454 (15:6454)
 	TX_FAR _UnnamedText_56454
 	db "@"
-
-DayCareMObject: ; 0x56459 (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
-	db $08 ; tileset
-	db ROUTE_12_HOUSE_HEIGHT, ROUTE_12_HOUSE_WIDTH ; dimensions (y, x)
-	dw Route12HouseBlocks, Route12HouseTextPointers, Route12HouseScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route12HouseObject ; objects
+	
+INCLUDE "mapObjects/DayCare.asm"
+	
+INCLUDE "mapHeaders/Route12House.asm";
 
 Route12HouseScript: ; 5647f (15:647f)
 	jp EnableAutoTextBoxDrawing
@@ -85574,29 +72497,10 @@ UnnamedText_564d4: ; 564d4 (15:64d4)
 UnnamedText_564d9: ; 564d9 (15:64d9)
 	TX_FAR _UnnamedText_564d9
 	db "@"
-
-Route12HouseObject: ; 0x564de (size=26)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $3, $ff
-	db $7, $3, $3, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
-	db $16 ; tileset
-	db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
-	dw SilphCo8Blocks, SilphCo8TextPointers, SilphCo8Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo8Object ; objects
+	
+INCLUDE "mapObjects/Route12House.asm"
+	
+INCLUDE "mapHeaders/SilphCo8.asm";
 
 SilphCo8Script: ; 56504 (15:6504)
 	call SilphCo8Script_5651a
@@ -85785,35 +72689,8 @@ SilphCo8EndBattleText3: ; 56609 (15:6609)
 SilphCo8AfterBattleText3: ; 5660e (15:660e)
 	TX_FAR _SilphCo8AfterBattleText3
 	db "@"
-
-SilphCo8Object: ; 0x56613 (size=90)
-	db $2e ; border tile
-
-	db $7 ; warps
-	db $0, $10, $1, SILPH_CO_9F
-	db $0, $e, $0, SILPH_CO_7F
-	db $0, $12, $0, SILPH_CO_ELEVATOR
-	db $b, $3, $6, SILPH_CO_8F
-	db $f, $3, $4, SILPH_CO_2F
-	db $5, $b, $5, SILPH_CO_2F
-	db $9, $b, $3, SILPH_CO_8F
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $2 + 4, $13 + 4, $ff, $d2, $42, ROCKET + $C8, $23 ; trainer
-	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, $43, SCIENTIST + $C8, $9 ; trainer
-	db SPRITE_ROCKET, $f + 4, $c + 4, $ff, $d3, $44, ROCKET + $C8, $24 ; trainer
-
-	; warp-to
-	EVENT_DISP $d, $0, $10 ; SILPH_CO_9F
-	EVENT_DISP $d, $0, $e ; SILPH_CO_7F
-	EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $d, $b, $3 ; SILPH_CO_8F
-	EVENT_DISP $d, $f, $3 ; SILPH_CO_2F
-	EVENT_DISP $d, $5, $b ; SILPH_CO_2F
-	EVENT_DISP $d, $9, $b ; SILPH_CO_8F
+	
+INCLUDE "mapObjects/SilphCo8.asm"
 
 SilphCo8Blocks: ; 5666d (15:666d)
 	INCBIN "maps/silphco8.blk"
@@ -86282,341 +73159,50 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 
 SECTION "bank16",ROMX,BANK[$16]
 
-Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
-	db $00 ; tileset
-	db ROUTE_6_HEIGHT, ROUTE_6_WIDTH ; dimensions (y, x)
-	dw Route6Blocks, Route6TextPointers, Route6Script ; blocks, texts, scripts
-	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, SAFFRON_CITY_HEIGHT, -3, 2, SAFFRON_CITY_WIDTH - 4, SaffronCityBlocks
-	SOUTH_MAP_CONNECTION VERMILION_CITY, VERMILION_CITY_WIDTH, -3, 2, VERMILION_CITY_WIDTH - 4, VermilionCityBlocks, ROUTE_6_WIDTH, ROUTE_6_HEIGHT
-	dw Route6Object ; objects
-
-Route6Object: ; 0x58022 (size=87)
-	db $f ; border tile
-
-	db $4 ; warps
-	db $1, $9, $2, ROUTE_6_GATE
-	db $1, $a, $2, ROUTE_6_GATE
-	db $7, $a, $0, ROUTE_6_GATE
-	db $d, $11, $0, PATH_ENTRANCE_ROUTE_6
-
-	db $1 ; signs
-	db $f, $13, $7 ; Route6Text7
-
-	db $6 ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $a + 4, $ff, $d3, $41, JR__TRAINER_M + $C8, $4 ; trainer
-	db SPRITE_LASS, $15 + 4, $b + 4, $ff, $d2, $42, JR__TRAINER_F + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $f + 4, $0 + 4, $ff, $d3, $43, BUG_CATCHER + $C8, $a ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, $44, JR__TRAINER_M + $C8, $5 ; trainer
-	db SPRITE_LASS, $1e + 4, $b + 4, $ff, $d2, $45, JR__TRAINER_F + $C8, $3 ; trainer
-	db SPRITE_BUG_CATCHER, $1a + 4, $13 + 4, $ff, $d2, $46, BUG_CATCHER + $C8, $b ; trainer
-
-	; warp-to
-	EVENT_DISP $a, $1, $9 ; ROUTE_6_GATE
-	EVENT_DISP $a, $1, $a ; ROUTE_6_GATE
-	EVENT_DISP $a, $7, $a ; ROUTE_6_GATE
-	EVENT_DISP $a, $d, $11 ; PATH_ENTRANCE_ROUTE_6
+INCLUDE "mapHeaders/Route6.asm";
+INCLUDE "mapObjects/Route6.asm"
 
 Route6Blocks: ; 58079 (16:4079)
 	INCBIN "maps/route6.blk"
-
-Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
-	db $00 ; tileset
-	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; dimensions (y, x)
-	dw Route8Blocks, Route8TextPointers, Route8Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 1, SAFFRON_CITY_HEIGHT - 3, SaffronCityBlocks, ROUTE_8_WIDTH
-	EAST_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, 0, 0, LAVENDER_TOWN_HEIGHT, LavenderTownBlocks, ROUTE_8_WIDTH
-	dw Route8Object ; objects
-
-Route8Object: ; 0x5814f (size=119)
-	db $2c ; border tile
-
-	db $5 ; warps
-	db $9, $1, $0, ROUTE_8_GATE
-	db $a, $1, $1, ROUTE_8_GATE
-	db $9, $8, $2, ROUTE_8_GATE
-	db $a, $8, $3, ROUTE_8_GATE
-	db $3, $d, $0, PATH_ENTRANCE_ROUTE_8
-
-	db $1 ; signs
-	db $3, $11, $a ; Route8Text10
-
-	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $8 + 4, $ff, $d3, $41, SUPER_NERD + $C8, $3 ; trainer
-	db SPRITE_GAMBLER, $9 + 4, $d + 4, $ff, $d1, $42, GAMBLER + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $6 + 4, $2a + 4, $ff, $d1, $43, SUPER_NERD + $C8, $4 ; trainer
-	db SPRITE_LASS, $3 + 4, $1a + 4, $ff, $d2, $44, LASS + $C8, $d ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $1a + 4, $ff, $d3, $45, SUPER_NERD + $C8, $5 ; trainer
-	db SPRITE_LASS, $5 + 4, $1a + 4, $ff, $d2, $46, LASS + $C8, $e ; trainer
-	db SPRITE_LASS, $6 + 4, $1a + 4, $ff, $d3, $47, LASS + $C8, $f ; trainer
-	db SPRITE_GAMBLER, $d + 4, $2e + 4, $ff, $d0, $48, GAMBLER + $C8, $7 ; trainer
-	db SPRITE_LASS, $c + 4, $33 + 4, $ff, $d2, $49, LASS + $C8, $10 ; trainer
-
-	; warp-to
-	EVENT_DISP $1e, $9, $1 ; ROUTE_8_GATE
-	EVENT_DISP $1e, $a, $1 ; ROUTE_8_GATE
-	EVENT_DISP $1e, $9, $8 ; ROUTE_8_GATE
-	EVENT_DISP $1e, $a, $8 ; ROUTE_8_GATE
-	EVENT_DISP $1e, $3, $d ; PATH_ENTRANCE_ROUTE_8
+	
+INCLUDE "mapHeaders/Route8.asm";
+INCLUDE "mapObjects/Route8.asm"
 
 Route8Blocks: ; 581c6 (16:41c6)
 	INCBIN "maps/route8.blk"
-
-Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
-	db $00 ; tileset
-	db ROUTE_10_HEIGHT, ROUTE_10_WIDTH ; dimensions (y, x)
-	dw Route10Blocks, Route10TextPointers, Route10Script ; blocks, texts, scripts
-	db SOUTH | WEST ; connections
-	SOUTH_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, 0, 0, LAVENDER_TOWN_WIDTH, LavenderTownBlocks, ROUTE_10_WIDTH, ROUTE_10_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_9, ROUTE_9_WIDTH, 0, 0, ROUTE_9_HEIGHT, Route9Blocks, ROUTE_10_WIDTH
-	dw Route10Object ; objects
-
-Route10Object: ; 0x582f6 (size=96)
-	db $2c ; border tile
-
-	db $4 ; warps
-	db $13, $b, $0, ROCK_TUNNEL_POKECENTER
-	db $11, $8, $0, ROCK_TUNNEL_1
-	db $35, $8, $2, ROCK_TUNNEL_1
-	db $27, $6, $0, POWER_PLANT
-
-	db $4 ; signs
-	db $13, $7, $7 ; Route10Text7
-	db $13, $c, $8 ; PokeCenterSignText
-	db $37, $9, $9 ; Route10Text9
-	db $29, $5, $a ; Route10Text10
-
-	db $6 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $2c + 4, $a + 4, $ff, $d2, $41, POKEMANIAC + $C8, $1 ; trainer
-	db SPRITE_HIKER, $39 + 4, $3 + 4, $ff, $d1, $42, HIKER + $C8, $7 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $40 + 4, $e + 4, $ff, $d2, $43, POKEMANIAC + $C8, $2 ; trainer
-	db SPRITE_LASS, $19 + 4, $7 + 4, $ff, $d2, $44, JR__TRAINER_F + $C8, $7 ; trainer
-	db SPRITE_HIKER, $3d + 4, $3 + 4, $ff, $d0, $45, HIKER + $C8, $8 ; trainer
-	db SPRITE_LASS, $36 + 4, $7 + 4, $ff, $d0, $46, JR__TRAINER_F + $C8, $8 ; trainer
-
-	; warp-to
-	EVENT_DISP $a, $13, $b ; ROCK_TUNNEL_POKECENTER
-	EVENT_DISP $a, $11, $8 ; ROCK_TUNNEL_1
-	EVENT_DISP $a, $35, $8 ; ROCK_TUNNEL_1
-	EVENT_DISP $a, $27, $6 ; POWER_PLANT
+	
+INCLUDE "mapHeaders/Route10.asm";
+INCLUDE "mapObjects/Route10.asm"
 
 Route10Blocks: ; 58356 (16:4356)
 	INCBIN "maps/route10.blk"
-
-Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
-	db $00 ; tileset
-	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; dimensions (y, x)
-	dw Route11Blocks, Route11TextPointers, Route11Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION VERMILION_CITY, VERMILION_CITY_WIDTH, -3, 1, VERMILION_CITY_HEIGHT - 3, VermilionCityBlocks, ROUTE_11_WIDTH
-	EAST_MAP_CONNECTION ROUTE_12, ROUTE_12_WIDTH, -3, 24, ROUTE_12_HEIGHT - 39, Route12Blocks, ROUTE_11_WIDTH
-	dw Route11Object ; objects
-
-Route11Object: ; 0x584e0 (size=127)
-	db $f ; border tile
-
-	db $5 ; warps
-	db $8, $31, $0, ROUTE_11_GATE_1F
-	db $9, $31, $1, ROUTE_11_GATE_1F
-	db $8, $3a, $2, ROUTE_11_GATE_1F
-	db $9, $3a, $3, ROUTE_11_GATE_1F
-	db $5, $4, $0, DIGLETTS_CAVE_ENTRANCE
-
-	db $1 ; signs
-	db $5, $1, $b ; Route11Text11
-
-	db $a ; people
-	db SPRITE_GAMBLER, $e + 4, $a + 4, $ff, $d0, $41, GAMBLER + $C8, $1 ; trainer
-	db SPRITE_GAMBLER, $9 + 4, $1a + 4, $ff, $d0, $42, GAMBLER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $d + 4, $ff, $d2, $43, YOUNGSTER + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $b + 4, $24 + 4, $ff, $d0, $44, ENGINEER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $4 + 4, $16 + 4, $ff, $d1, $45, YOUNGSTER + $C8, $a ; trainer
-	db SPRITE_GAMBLER, $7 + 4, $2d + 4, $ff, $d0, $46, GAMBLER + $C8, $3 ; trainer
-	db SPRITE_GAMBLER, $3 + 4, $21 + 4, $ff, $d1, $47, GAMBLER + $C8, $4 ; trainer
-	db SPRITE_BUG_CATCHER, $5 + 4, $2b + 4, $ff, $d3, $48, YOUNGSTER + $C8, $b ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $2d + 4, $ff, $d2, $49, ENGINEER + $C8, $3 ; trainer
-	db SPRITE_BUG_CATCHER, $c + 4, $16 + 4, $ff, $d1, $4a, YOUNGSTER + $C8, $c ; trainer
-
-	; warp-to
-	EVENT_DISP $1e, $8, $31 ; ROUTE_11_GATE_1F
-	EVENT_DISP $1e, $9, $31 ; ROUTE_11_GATE_1F
-	EVENT_DISP $1e, $8, $3a ; ROUTE_11_GATE_1F
-	EVENT_DISP $1e, $9, $3a ; ROUTE_11_GATE_1F
-	EVENT_DISP $1e, $5, $4 ; DIGLETTS_CAVE_ENTRANCE
+	
+INCLUDE "mapHeaders/Route11.asm"
+INCLUDE "mapObjects/Route11.asm"
 
 Route11Blocks: ; 5855f (16:455f)
 	INCBIN "maps/route11.blk"
-
-Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
-	db $00 ; tileset
-	db ROUTE_12_HEIGHT, ROUTE_12_WIDTH ; dimensions (y, x)
-	dw Route12Blocks, Route12TextPointers, Route12Script ; blocks, texts, scripts
-	db NORTH | SOUTH | WEST ; connections
-	NORTH_MAP_CONNECTION LAVENDER_TOWN, LAVENDER_TOWN_WIDTH, LAVENDER_TOWN_HEIGHT, 0, 0, LAVENDER_TOWN_WIDTH, LavenderTownBlocks
-	SOUTH_MAP_CONNECTION ROUTE_13, ROUTE_13_WIDTH, -3, 17, ROUTE_13_WIDTH - 17, Route13Blocks, ROUTE_12_WIDTH, ROUTE_12_HEIGHT
-	WEST_MAP_CONNECTION ROUTE_11, ROUTE_11_WIDTH, 27, 0, ROUTE_11_HEIGHT, Route11Blocks, ROUTE_12_WIDTH
-	dw Route12Object ; objects
-
-Route12Object: ; 0x5869a (size=118)
-	db $43 ; border tile
-
-	db $4 ; warps
-	db $f, $a, $0, ROUTE_12_GATE
-	db $f, $b, $1, ROUTE_12_GATE
-	db $15, $a, $2, ROUTE_12_GATE
-	db $4d, $b, $0, ROUTE_12_HOUSE
-
-	db $2 ; signs
-	db $d, $d, $b ; Route12Text11
-	db $3f, $b, $c ; Route12Text12
-
-	db $a ; people
-	db SPRITE_SNORLAX, $3e + 4, $a + 4, $ff, $d0, $1 ; person
-	db SPRITE_FISHER2, $1f + 4, $e + 4, $ff, $d2, $42, FISHER + $C8, $3 ; trainer
-	db SPRITE_FISHER2, $27 + 4, $5 + 4, $ff, $d1, $43, FISHER + $C8, $4 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $5c + 4, $b + 4, $ff, $d2, $44, JR__TRAINER_M + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $4c + 4, $e + 4, $ff, $d1, $45, ROCKER + $C8, $2 ; trainer
-	db SPRITE_FISHER2, $28 + 4, $c + 4, $ff, $d2, $46, FISHER + $C8, $5 ; trainer
-	db SPRITE_FISHER2, $34 + 4, $9 + 4, $ff, $d3, $47, FISHER + $C8, $6 ; trainer
-	db SPRITE_FISHER2, $57 + 4, $6 + 4, $ff, $d0, $48, FISHER + $C8, $b ; trainer
-	db SPRITE_BALL, $23 + 4, $e + 4, $ff, $ff, $89, TM_16 ; item
-	db SPRITE_BALL, $59 + 4, $5 + 4, $ff, $ff, $8a, IRON ; item
-
-	; warp-to
-	EVENT_DISP $a, $f, $a ; ROUTE_12_GATE
-	EVENT_DISP $a, $f, $b ; ROUTE_12_GATE
-	EVENT_DISP $a, $15, $a ; ROUTE_12_GATE
-	EVENT_DISP $a, $4d, $b ; ROUTE_12_HOUSE
+	
+INCLUDE "mapHeaders/Route12.asm"
+INCLUDE "mapObjects/Route12.asm"
 
 Route12Blocks: ; 58710 (16:4710)
 	INCBIN "maps/route12.blk"
-
-Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
-	db $00 ; tileset
-	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; dimensions (y, x)
-	dw Route15Blocks, Route15TextPointers, Route15Script ; blocks, texts, scripts
-	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, -3, 1, FUCHSIA_CITY_HEIGHT - 3, FuchsiaCityBlocks, ROUTE_15_WIDTH
-	EAST_MAP_CONNECTION ROUTE_14, ROUTE_14_WIDTH, -3, 15, ROUTE_14_HEIGHT - 15, Route14Blocks, ROUTE_15_WIDTH
-	dw Route15Object ; objects
-
-Route15Object: ; 0x5894e (size=126)
-	db $43 ; border tile
-
-	db $4 ; warps
-	db $8, $7, $0, ROUTE_15_GATE_1F
-	db $9, $7, $1, ROUTE_15_GATE_1F
-	db $8, $e, $2, ROUTE_15_GATE_1F
-	db $9, $e, $3, ROUTE_15_GATE_1F
-
-	db $1 ; signs
-	db $9, $27, $c ; Route15Text12
-
-	db $b ; people
-	db SPRITE_LASS, $b + 4, $29 + 4, $ff, $d0, $41, JR__TRAINER_F + $C8, $14 ; trainer
-	db SPRITE_LASS, $a + 4, $35 + 4, $ff, $d2, $42, JR__TRAINER_F + $C8, $15 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $1f + 4, $ff, $d1, $43, BIRD_KEEPER + $C8, $6 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $23 + 4, $ff, $d1, $44, BIRD_KEEPER + $C8, $7 ; trainer
-	db SPRITE_FOULARD_WOMAN, $b + 4, $35 + 4, $ff, $d0, $45, BEAUTY + $C8, $9 ; trainer
-	db SPRITE_FOULARD_WOMAN, $a + 4, $29 + 4, $ff, $d3, $46, BEAUTY + $C8, $a ; trainer
-	db SPRITE_BIKER, $a + 4, $30 + 4, $ff, $d0, $47, BIKER + $C8, $3 ; trainer
-	db SPRITE_BIKER, $a + 4, $2e + 4, $ff, $d0, $48, BIKER + $C8, $4 ; trainer
-	db SPRITE_LASS, $5 + 4, $25 + 4, $ff, $d3, $49, JR__TRAINER_F + $C8, $16 ; trainer
-	db SPRITE_LASS, $d + 4, $12 + 4, $ff, $d1, $4a, JR__TRAINER_F + $C8, $17 ; trainer
-	db SPRITE_BALL, $5 + 4, $12 + 4, $ff, $ff, $8b, TM_20 ; item
-
-	; warp-to
-	EVENT_DISP $1e, $8, $7 ; ROUTE_15_GATE_1F
-	EVENT_DISP $1e, $9, $7 ; ROUTE_15_GATE_1F
-	EVENT_DISP $1e, $8, $e ; ROUTE_15_GATE_1F
-	EVENT_DISP $1e, $9, $e ; ROUTE_15_GATE_1F
+	
+INCLUDE "mapHeaders/Route15.asm"
+INCLUDE "mapObjects/Route15.asm"
 
 Route15Blocks: ; 589cc (16:49cc)
 	INCBIN "maps/route15.blk"
-
-Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
-	db $00 ; tileset
-	db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
-	dw Route16Blocks, Route16TextPointers, Route16Script ; blocks, texts, scripts
-	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_17, ROUTE_17_WIDTH, 0, 0, ROUTE_17_WIDTH, Route17Blocks, ROUTE_16_WIDTH, ROUTE_16_HEIGHT
-	EAST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, CELADON_CITY_HEIGHT - 3, CeladonCityBlocks, ROUTE_16_WIDTH
-	dw Route16Object ; objects
-
-Route16Object: ; 0x58afc (size=136)
-	db $f ; border tile
-
-	db $9 ; warps
-	db $a, $11, $0, ROUTE_16_GATE_1F
-	db $b, $11, $1, ROUTE_16_GATE_1F
-	db $a, $18, $2, ROUTE_16_GATE_1F
-	db $b, $18, $3, ROUTE_16_GATE_1F
-	db $4, $11, $4, ROUTE_16_GATE_1F
-	db $5, $11, $5, ROUTE_16_GATE_1F
-	db $4, $18, $6, ROUTE_16_GATE_1F
-	db $5, $18, $7, ROUTE_16_GATE_1F
-	db $5, $7, $0, ROUTE_16_HOUSE
-
-	db $2 ; signs
-	db $b, $1b, $8 ; Route16Text8
-	db $11, $5, $9 ; Route16Text9
-
-	db $7 ; people
-	db SPRITE_BIKER, $c + 4, $11 + 4, $ff, $d2, $41, BIKER + $C8, $5 ; trainer
-	db SPRITE_BIKER, $d + 4, $e + 4, $ff, $d3, $42, CUE_BALL + $C8, $1 ; trainer
-	db SPRITE_BIKER, $c + 4, $b + 4, $ff, $d1, $43, CUE_BALL + $C8, $2 ; trainer
-	db SPRITE_BIKER, $b + 4, $9 + 4, $ff, $d2, $44, BIKER + $C8, $6 ; trainer
-	db SPRITE_BIKER, $a + 4, $6 + 4, $ff, $d3, $45, CUE_BALL + $C8, $3 ; trainer
-	db SPRITE_BIKER, $c + 4, $3 + 4, $ff, $d3, $46, BIKER + $C8, $7 ; trainer
-	db SPRITE_SNORLAX, $a + 4, $1a + 4, $ff, $d0, $7 ; person
-
-	; warp-to
-	EVENT_DISP $14, $a, $11 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $b, $11 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $a, $18 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $b, $18 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $4, $11 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $5, $11 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $4, $18 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $5, $18 ; ROUTE_16_GATE_1F
-	EVENT_DISP $14, $5, $7 ; ROUTE_16_HOUSE
+	
+INCLUDE "mapHeaders/Route16.asm"
+INCLUDE "mapObjects/Route16.asm"
 
 Route16Blocks: ; 58b84 (16:4b84)
 	INCBIN "maps/route16.blk"
-
-Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
-	db $00 ; tileset
-	db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; dimensions (y, x)
-	dw Route18Blocks, Route18TextPointers, Route18Script ; blocks, texts, scripts
-	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION ROUTE_17, ROUTE_17_WIDTH, ROUTE_17_HEIGHT, 0, 0, ROUTE_17_WIDTH, Route17Blocks
-	EAST_MAP_CONNECTION FUCHSIA_CITY, FUCHSIA_CITY_WIDTH, -3, 1, FUCHSIA_CITY_HEIGHT - 3, FuchsiaCityBlocks, ROUTE_18_WIDTH
-	dw Route18Object ; objects
-
-Route18Object: ; 0x58c5a (size=66)
-	db $43 ; border tile
-
-	db $4 ; warps
-	db $8, $21, $0, ROUTE_18_GATE_1F
-	db $9, $21, $1, ROUTE_18_GATE_1F
-	db $8, $28, $2, ROUTE_18_GATE_1F
-	db $9, $28, $3, ROUTE_18_GATE_1F
-
-	db $2 ; signs
-	db $7, $2b, $4 ; Route18Text4
-	db $5, $21, $5 ; Route18Text5
-
-	db $3 ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $24 + 4, $ff, $d3, $41, BIRD_KEEPER + $C8, $8 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $f + 4, $28 + 4, $ff, $d2, $42, BIRD_KEEPER + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $2a + 4, $ff, $d2, $43, BIRD_KEEPER + $C8, $a ; trainer
-
-	; warp-to
-	EVENT_DISP $19, $8, $21 ; ROUTE_18_GATE_1F
-	EVENT_DISP $19, $9, $21 ; ROUTE_18_GATE_1F
-	EVENT_DISP $19, $8, $28 ; ROUTE_18_GATE_1F
-	EVENT_DISP $19, $9, $28 ; ROUTE_18_GATE_1F
+	
+INCLUDE "mapHeaders/Route18.asm"
+INCLUDE "mapObjects/Route18.asm"
 
 Route18Blocks: ; 58c9c (16:4c9c)
 	INCBIN "maps/route18.blk"
@@ -89033,13 +75619,8 @@ Route18Text4: ; 59b5a (16:5b5a)
 Route18Text5: ; 59b5f (16:5b5f)
 	TX_FAR _Route18Text5
 	db "@"
-
-FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
-	db $10 ; tileset
-	db POKEMON_FAN_CLUB_HEIGHT, POKEMON_FAN_CLUB_WIDTH ; dimensions (y, x)
-	dw FanClubBlocks, FanClubTextPointers, FanClubScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FanClubObject ; objects
+	
+INCLUDE "mapHeaders/FanClub.asm"
 
 FanClubScript: ; 59b70 (16:5b70)
 	jp EnableAutoTextBoxDrawing
@@ -89213,39 +75794,13 @@ FanClubText7: ; 59c8d (16:5c8d)
 FanClubText8: ; 59c92 (16:5c92)
 	TX_FAR _FanClubText8
 	db "@"
-
-FanClubObject: ; 0x59c97 (size=62)
-	db $d ; border tile
-
-	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
-
-	db $2 ; signs
-	db $0, $1, $7 ; FanClubText7
-	db $0, $6, $8 ; FanClubText8
-
-	db $6 ; people
-	db SPRITE_FISHER2, $3 + 4, $6 + 4, $ff, $d2, $1 ; person
-	db SPRITE_GIRL, $3 + 4, $1 + 4, $ff, $d3, $2 ; person
-	db SPRITE_CLEFAIRY, $4 + 4, $6 + 4, $ff, $d2, $3 ; person
-	db SPRITE_SEEL, $4 + 4, $1 + 4, $ff, $d3, $4 ; person
-	db SPRITE_GENTLEMAN, $1 + 4, $3 + 4, $ff, $d0, $5 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $1 + 4, $5 + 4, $ff, $d0, $6 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	
+INCLUDE "mapObjects/FanClub.asm"
 
 FanClubBlocks: ; 59cd5 (16:5cd5)
 	INCBIN "maps/fanclub.blk"
-
-SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
-	db $16 ; tileset
-	db SILPH_CO_2F_HEIGHT, SILPH_CO_2F_WIDTH ; dimensions (y, x)
-	dw SilphCo2Blocks, SilphCo2TextPointers, SilphCo2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo2Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo2.asm"
 
 SilphCo2Script: ; 59cf1 (16:5cf1)
 	call SilphCo2Script_59d07
@@ -89495,46 +76050,13 @@ SilphCo2EndBattleText4: ; 59e5c (16:5e5c)
 SilphCo2AfterBattleText4: ; 59e61 (16:5e61)
 	TX_FAR _SilphCo2AfterBattleText4
 	db "@"
-
-SilphCo2Object: ; 0x59e66 (size=98)
-	db $2e ; border tile
-
-	db $7 ; warps
-	db $0, $18, $2, SILPH_CO_1F
-	db $0, $1a, $0, SILPH_CO_3F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $3, $3, $6, SILPH_CO_3F
-	db $3, $d, $4, SILPH_CO_8F
-	db $f, $1b, $5, SILPH_CO_8F
-	db $f, $9, $4, SILPH_CO_6F
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_ERIKA, $1 + 4, $a + 4, $ff, $d1, $1 ; person
-	db SPRITE_OAK_AIDE, $c + 4, $5 + 4, $ff, $d0, $42, SCIENTIST + $C8, $2 ; trainer
-	db SPRITE_OAK_AIDE, $d + 4, $18 + 4, $ff, $d2, $43, SCIENTIST + $C8, $3 ; trainer
-	db SPRITE_ROCKET, $b + 4, $10 + 4, $ff, $d1, $44, ROCKET + $C8, $17 ; trainer
-	db SPRITE_ROCKET, $7 + 4, $18 + 4, $ff, $d1, $45, ROCKET + $C8, $18 ; trainer
-
-	; warp-to
-	EVENT_DISP $f, $0, $18 ; SILPH_CO_1F
-	EVENT_DISP $f, $0, $1a ; SILPH_CO_3F
-	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $f, $3, $3 ; SILPH_CO_3F
-	EVENT_DISP $f, $3, $d ; SILPH_CO_8F
-	EVENT_DISP $f, $f, $1b ; SILPH_CO_8F
-	EVENT_DISP $f, $f, $9 ; SILPH_CO_6F
+	
+INCLUDE "mapObjects/SilphCo2.asm"
 
 SilphCo2Blocks: ; 59ec8 (16:5ec8)
 	INCBIN "maps/silphco2.blk"
-
-SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
-	db $16 ; tileset
-	db SILPH_CO_3F_HEIGHT, SILPH_CO_3F_WIDTH ; dimensions (y, x)
-	dw SilphCo3Blocks, SilphCo3TextPointers, SilphCo3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo3Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo3.asm"
 
 SilphCo3Script: ; 59f5b (16:5f5b)
 	call SilphCo3Script_59f71
@@ -89675,51 +76197,13 @@ SilphCo3EndBattleText2: ; 5a02b (16:602b)
 SilphCo3AfterBattleText2: ; 5a030 (16:6030)
 	TX_FAR _SilphCo3AfterBattleText2
 	db "@"
-
-SilphCo3Object: ; 0x5a035 (size=113)
-	db $2e ; border tile
-
-	db $a ; warps
-	db $0, $1a, $1, SILPH_CO_2F
-	db $0, $18, $0, SILPH_CO_4F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $b, $17, $9, SILPH_CO_3F
-	db $3, $3, $5, SILPH_CO_5F
-	db $f, $3, $6, SILPH_CO_5F
-	db $3, $1b, $3, SILPH_CO_2F
-	db $b, $3, $3, SILPH_CO_9F
-	db $b, $b, $4, SILPH_CO_7F
-	db $f, $1b, $3, SILPH_CO_3F
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_LAPRAS_GIVER, $8 + 4, $18 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $7 + 4, $14 + 4, $ff, $d2, $42, ROCKET + $C8, $19 ; trainer
-	db SPRITE_OAK_AIDE, $9 + 4, $7 + 4, $ff, $d0, $43, SCIENTIST + $C8, $4 ; trainer
-	db SPRITE_BALL, $5 + 4, $8 + 4, $ff, $ff, $84, HYPER_POTION ; item
-
-	; warp-to
-	EVENT_DISP $f, $0, $1a ; SILPH_CO_2F
-	EVENT_DISP $f, $0, $18 ; SILPH_CO_4F
-	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $f, $b, $17 ; SILPH_CO_3F
-	EVENT_DISP $f, $3, $3 ; SILPH_CO_5F
-	EVENT_DISP $f, $f, $3 ; SILPH_CO_5F
-	EVENT_DISP $f, $3, $1b ; SILPH_CO_2F
-	EVENT_DISP $f, $b, $3 ; SILPH_CO_9F
-	EVENT_DISP $f, $b, $b ; SILPH_CO_7F
-	EVENT_DISP $f, $f, $1b ; SILPH_CO_3F
+	
+INCLUDE "mapObjects/SilphCo3.asm"
 
 SilphCo3Blocks: ; 5a0a6 (16:60a6)
 	INCBIN "maps/silphco3.blk"
-
-SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
-	db $16 ; tileset
-	db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
-	dw SilphCo10Blocks, SilphCo10TextPointers, SilphCo10Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo10Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo10.asm"
 
 SilphCo10Script: ; 5a139 (16:6139)
 	call SilphCo10Script_5a14f
@@ -89847,45 +76331,13 @@ SilphCo10EndBattleText2: ; 5a1f1 (16:61f1)
 SilphCo10AfterBattleText2: ; 5a1f6 (16:61f6)
 	TX_FAR _SilphCo10AfterBattleText2
 	db "@"
-
-SilphCo10Object: ; 0x5a1fb (size=95)
-	db $2e ; border tile
-
-	db $6 ; warps
-	db $0, $8, $0, SILPH_CO_9F
-	db $0, $a, $0, SILPH_CO_11F
-	db $0, $c, $0, SILPH_CO_ELEVATOR
-	db $b, $9, $3, SILPH_CO_4F
-	db $f, $d, $5, SILPH_CO_4F
-	db $7, $d, $6, SILPH_CO_4F
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_ROCKET, $9 + 4, $1 + 4, $ff, $d3, $41, ROCKET + $C8, $27 ; trainer
-	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d2, $42, SCIENTIST + $C8, $b ; trainer
-	db SPRITE_ERIKA, $f + 4, $9 + 4, $fe, $0, $3 ; person
-	db SPRITE_BALL, $c + 4, $2 + 4, $ff, $ff, $84, TM_26 ; item
-	db SPRITE_BALL, $e + 4, $4 + 4, $ff, $ff, $85, RARE_CANDY ; item
-	db SPRITE_BALL, $b + 4, $5 + 4, $ff, $ff, $86, CARBOS ; item
-
-	; warp-to
-	EVENT_DISP $8, $0, $8 ; SILPH_CO_9F
-	EVENT_DISP $8, $0, $a ; SILPH_CO_11F
-	EVENT_DISP $8, $0, $c ; SILPH_CO_ELEVATOR
-	EVENT_DISP $8, $b, $9 ; SILPH_CO_4F
-	EVENT_DISP $8, $f, $d ; SILPH_CO_4F
-	EVENT_DISP $8, $7, $d ; SILPH_CO_4F
+	
+INCLUDE "mapObjects/SilphCo10.asm"
 
 SilphCo10Blocks: ; 5a25a (16:625a)
 	INCBIN "maps/silphco10.blk"
-
-Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
-	db $05 ; tileset
-	db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
-	dw LanceBlocks, LanceTextPointers, LanceScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw LanceObject ; objects
+	
+INCLUDE "mapHeaders/Lance.asm"
 
 LanceScript: ; 5a2ae (16:62ae)
 	call LanceScript_5a2c4
@@ -90053,34 +76505,13 @@ LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	ld hl, $d866
 	set 6, [hl]
 	jp TextScriptEnd
-
-LanceObject: ; 0x5a3c5 (size=36)
-	db $3 ; border tile
-
-	db $3 ; warps
-	db $10, $18, $2, AGATHAS_ROOM
-	db $0, $5, $0, CHAMPIONS_ROOM
-	db $0, $6, $0, CHAMPIONS_ROOM
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_LANCE, $1 + 4, $6 + 4, $ff, $d0, $41, LANCE + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $d, $10, $18 ; AGATHAS_ROOM
-	EVENT_DISP $d, $0, $5 ; CHAMPIONS_ROOM
-	EVENT_DISP $d, $0, $6 ; CHAMPIONS_ROOM
+	
+INCLUDE "mapObjects/Lance.asm"
 
 LanceBlocks: ; 5a3e9 (16:63e9)
 	INCBIN "maps/lance.blk"
-
-HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
-	db $07 ; tileset
-	db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
-	dw HallofFameRoomBlocks, HallofFameRoomTextPointers, HallofFameRoomScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw HallofFameRoomObject ; objects
+	
+INCLUDE "mapHeaders/HallofFameRoom.asm"
 
 HallofFameRoomScript: ; 5a49e (16:649e)
 	call EnableAutoTextBoxDrawing
@@ -90199,22 +76630,8 @@ HallofFameRoomTextPointers: ; 5a56a (16:656a)
 HallofFameRoomText1: ; 5a56c (16:656c)
 	TX_FAR _HallofFameRoomText1
 	db "@"
-
-HallofFameRoomObject: ; 0x5a571 (size=26)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $7, $4, $2, CHAMPIONS_ROOM
-	db $7, $5, $3, CHAMPIONS_ROOM
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_OAK, $2 + 4, $5 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $5, $7, $4 ; CHAMPIONS_ROOM
-	EVENT_DISP $5, $7, $5 ; CHAMPIONS_ROOM
+	
+INCLUDE "mapObjects/HallOfFame.asm"
 
 HallofFameRoomBlocks: ; 5a58b (16:658b)
 	INCBIN "maps/halloffameroom.blk"
@@ -90272,13 +76689,8 @@ Route2GateBlocks: ; 5c090 (17:4090)
 ViridianForestEntranceBlocks: ; 5c090 (17:4090)
 ViridianForestexitBlocks: ; 5c090 (17:4090)
 	INCBIN "maps/viridianforestexit.blk"
-
-RedsHouse2F_h: ; 5c0a4 (17:40a4)
-	db $04 ; tileset
-	db REDS_HOUSE_2F_HEIGHT, REDS_HOUSE_2F_WIDTH ; dimensions
-	dw RedsHouse2FBlocks, RedsHouse2FTextPointers, RedsHouse2FScript
-	db $00 ; no connections
-	dw RedsHouse2FObject
+	
+INCLUDE "mapHeaders/RedsHouse2F.asm"
 
 RedsHouse2FScript: ; 5c0b0 (17:40b0)
 	call EnableAutoTextBoxDrawing
@@ -90304,19 +76716,8 @@ RedsHouse2FScript1: ; 5c0ce (17:40ce)
 
 RedsHouse2FTextPointers: ; 5c0cf (17:40cf)
 	db "@"
-
-RedsHouse2FObject: ; 0x5c0d0 ?
-	db $0A ; border tile
-
-	db 1 ; warps
-	db 1, 7, 2, REDS_HOUSE_1F
-
-	db 0 ; signs
-
-	db 0 ; people
-
-	; warp-to
-	EVENT_DISP REDS_HOUSE_2F_WIDTH, 1, 7
+	
+INCLUDE "mapObjects/RedsHouse2F.asm"
 
 Func_5c0dc: ; 5c0dc (17:40dc)
 	ld a, $4b
@@ -90326,13 +76727,8 @@ Func_5c0dc: ; 5c0dc (17:40dc)
 	xor a
 	ld [wPokedexOwned], a ; $d2f7
 	ret
-
-MuseumF1_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
-	db $0a ; tileset
-	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
-	dw MuseumF1Blocks, MuseumF1TextPointers, MuseumF1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw MuseumF1Object ; objects
+	
+INCLUDE "mapHeaders/MuseumF1.asm"
 
 MuseumF1Script: ; 5c0f7 (17:40f7)
 	ld a, $1
@@ -90587,39 +76983,10 @@ MuseumF1Text5: ; 5c2b2 (17:42b2)
 UnnamedText_5c2bc: ; 5c2bc (17:42bc)
 	TX_FAR _UnnamedText_5c2bc
 	db "@"
-
-MuseumF1Object: ; 0x5c2c1 (size=74)
-	db $a ; border tile
-
-	db $5 ; warps
-	db $7, $a, $0, $ff
-	db $7, $b, $0, $ff
-	db $7, $10, $1, $ff
-	db $7, $11, $1, $ff
-	db $7, $7, $0, MUSEUM_2F
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_OAK_AIDE, $4 + 4, $c + 4, $ff, $d2, $1 ; person
-	db SPRITE_GAMBLER, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
-	db SPRITE_OAK_AIDE, $2 + 4, $f + 4, $ff, $d0, $3 ; person
-	db SPRITE_OAK_AIDE, $4 + 4, $11 + 4, $ff, $ff, $4 ; person
-	db SPRITE_OLD_AMBER, $2 + 4, $10 + 4, $ff, $ff, $5 ; person
-
-	; warp-to
-	EVENT_DISP $a, $7, $a
-	EVENT_DISP $a, $7, $b
-	EVENT_DISP $a, $7, $10
-	EVENT_DISP $a, $7, $11
-	EVENT_DISP $a, $7, $7 ; MUSEUM_2F
-
-MuseumF2_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
-	db $0a ; tileset
-	db MUSEUM_2F_HEIGHT, MUSEUM_2F_WIDTH ; dimensions (y, x)
-	dw MuseumF2Blocks, MuseumF2TextPointers, MuseumF2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw MuseumF2Object ; objects
+	
+INCLUDE "mapObjects/MuseumF1.asm"
+	
+INCLUDE "mapHeaders/MuseumF2.asm"
 
 MuseumF2Script: ; 5c317 (17:4317)
 	jp EnableAutoTextBoxDrawing
@@ -90660,33 +77027,10 @@ MuseumF2Text6: ; 5c341 (17:4341)
 MuseumF2Text7: ; 5c346 (17:4346)
 	TX_FAR _MuseumF2Text7
 	db "@"
-
-MuseumF2Object: ; 0x5c34b (size=48)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $7, $7, $4, MUSEUM_1F
-
-	db $2 ; signs
-	db $2, $b, $6 ; MuseumF2Text6
-	db $5, $2, $7 ; MuseumF2Text7
-
-	db $5 ; people
-	db SPRITE_BUG_CATCHER, $7 + 4, $1 + 4, $fe, $2, $1 ; person
-	db SPRITE_OLD_PERSON, $5 + 4, $0 + 4, $ff, $d0, $2 ; person
-	db SPRITE_OAK_AIDE, $5 + 4, $7 + 4, $ff, $d0, $3 ; person
-	db SPRITE_BRUNETTE_GIRL, $5 + 4, $b + 4, $ff, $ff, $4 ; person
-	db SPRITE_HIKER, $5 + 4, $c + 4, $ff, $d0, $5 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $7 ; MUSEUM_1F
-
-PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
-	db $07 ; tileset
-	db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
-	dw PewterGymBlocks, PewterGymTextPointers, PewterGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw PewterGymObject ; objects
+	
+INCLUDE "mapObjects/MuseumF2.asm"
+	
+INCLUDE "mapHeaders/PewterGym.asm"
 
 PewterGymScript: ; 5c387 (17:4387)
 	ld hl, $d126
@@ -90920,34 +77264,13 @@ UnnamedText_5c524: ; 5c524 (17:4524)
 UnnamedText_5c529: ; 5c529 (17:4529)
 	TX_FAR _UnnamedText_5c529
 	db "@"
-
-PewterGymObject: ; 0x5c52e (size=42)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $d, $4, $2, $ff
-	db $d, $5, $2, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $1 + 4, $4 + 4, $ff, $d0, $41, BROCK + $C8, $1 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $3 + 4, $ff, $d3, $42, JR__TRAINER_M + $C8, $1 ; trainer
-	db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $3 ; person
-
-	; warp-to
-	EVENT_DISP $5, $d, $4
-	EVENT_DISP $5, $d, $5
+	
+INCLUDE "mapObjects/PewterGym.asm"
 
 PewterGymBlocks: ; 5c558 (17:4558)
 	INCBIN "maps/pewtergym.blk"
-
-PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
-	db $06 ; tileset
-	db PEWTER_POKECENTER_HEIGHT, PEWTER_POKECENTER_WIDTH ; dimensions (y, x)
-	dw PewterPokecenterBlocks, PewterPokecenterTextPointers, PewterPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw PewterPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/PewterPokecenter.asm"
 
 PewterPokecenterScript: ; 5c587 (17:4587)
 	call Func_22fa
@@ -91024,32 +77347,10 @@ Unknown_5c608: ; 5c608 (17:4608)
 
 PewterPokecenterText4: ; 5c60c (17:460c)
 	db $f6
-
-PewterPokecenterObject: ; 0x5c60d (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $6, $ff
-	db $7, $4, $6, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GENTLEMAN, $7 + 4, $b + 4, $ff, $d2, $2 ; person
-	db SPRITE_CLEFAIRY, $3 + 4, $1 + 4, $ff, $d0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
-	db $06 ; tileset
-	db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
-	dw CeruleanPokecenterBlocks, CeruleanPokecenterTextPointers, CeruleanPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanPokecenterObject ; objects
+	
+INCLUDE "mapObjects/PewterPokecenter.asm"
+	
+INCLUDE "mapHeaders/CeruleanPokecenter.asm"
 
 CeruleanPokecenterScript: ; 5c645 (17:4645)
 	call Func_22fa
@@ -91074,35 +77375,13 @@ CeruleanPokecenterText2: ; 5c655 (17:4655)
 CeruleanPokecenterText3: ; 5c65a (17:465a)
 	TX_FAR _CeruleanPokecenterText3
 	db "@"
-
-CeruleanPokecenterObject: ; 0x5c65f (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $2, $ff
-	db $7, $4, $2, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $a + 4, $fe, $0, $2 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $4 + 4, $ff, $d0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
+	
+INCLUDE "mapObjects/CeruleanPokecenter.asm"
 
 CeruleanPokecenterBlocks: ; 5c68b (17:468b)
 	INCBIN "maps/ceruleanpokecenter.blk"
-
-CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
-	db $07 ; tileset
-	db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
-	dw CeruleanGymBlocks, CeruleanGymTextPointers, CeruleanGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanGymObject ; objects
+	
+INCLUDE "mapHeaders/CeruleanGym.asm"
 
 CeruleanGymScript: ; 5c6b3 (17:46b3)
 	ld hl, $d126
@@ -91325,35 +77604,13 @@ UnnamedText_5c82a: ; 5c82a (17:482a)
 UnnamedText_5c82f: ; 5c82f (17:482f)
 	TX_FAR _UnnamedText_5c82f
 	db "@"
-
-CeruleanGymObject: ; 0x5c834 (size=50)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $d, $4, $3, $ff
-	db $d, $5, $3, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_BRUNETTE_GIRL, $2 + 4, $4 + 4, $ff, $d0, $41, MISTY + $C8, $1 ; trainer
-	db SPRITE_LASS, $3 + 4, $2 + 4, $ff, $d3, $42, JR__TRAINER_F + $C8, $1 ; trainer
-	db SPRITE_SWIMMER, $7 + 4, $8 + 4, $ff, $d2, $43, SWIMMER + $C8, $1 ; trainer
-	db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $5, $d, $4
-	EVENT_DISP $5, $d, $5
+	
+INCLUDE "mapObjects/CeruleanGym.asm"
 
 CeruleanGymBlocks: ; 5c866 (17:4866)
 	INCBIN "maps/ceruleangym.blk"
-
-CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
-	db $02 ; tileset
-	db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
-	dw CeruleanMartBlocks, CeruleanMartTextPointers, CeruleanMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanMartObject ; objects
+	
+INCLUDE "mapHeaders/CeruleanMart.asm"
 
 CeruleanMartScript: ; 5c895 (17:4895)
 	jp EnableAutoTextBoxDrawing
@@ -91370,31 +77627,10 @@ CeruleanMartText2: ; 5c89e (17:489e)
 CeruleanMartText3: ; 5c8a3 (17:48a3)
 	TX_FAR _CeruleanMartText3
 	db "@"
-
-CeruleanMartObject: ; 0x5c8a8 (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $5, $ff
-	db $7, $4, $5, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $3 + 4, $fe, $1, $2 ; person
-	db SPRITE_LASS, $2 + 4, $6 + 4, $fe, $2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
-	db $06 ; tileset
-	db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
-	dw LavenderPokecenterBlocks, LavenderPokecenterTextPointers, LavenderPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw LavenderPokecenterObject ; objects
+	
+INCLUDE "mapObjects/CeruleanMart.asm"
+	
+INCLUDE "mapHeaders/LavenderPokecenter.asm"
 
 LavenderPokecenterScript: ; 5c8da (17:48da)
 	call Func_22fa
@@ -91419,32 +77655,10 @@ LavenderPokecenterText2: ; 5c8ea (17:48ea)
 LavenderPokecenterText3: ; 5c8ef (17:48ef)
 	TX_FAR _LavenderPokecenterText3
 	db "@"
-
-LavenderPokecenterObject: ; 0x5c8f4 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LITTLE_GIRL, $6 + 4, $2 + 4, $fe, $1, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
-	db $02 ; tileset
-	db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
-	dw LavenderMartBlocks, LavenderMartTextPointers, LavenderMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw LavenderMartObject ; objects
+	
+INCLUDE "mapObjects/LavenderPokecenter.asm"
+	
+INCLUDE "mapHeaders/LavenderMart.asm"
 
 LavenderMartScript: ; 5c92c (17:492c)
 	jp EnableAutoTextBoxDrawing
@@ -91479,31 +77693,10 @@ UnnamedText_5c953: ; 5c953 (17:4953)
 UnnamedText_5c958: ; 5c958 (17:4958)
 	TX_FAR _UnnamedText_5c958
 	db "@"
-
-LavenderMartObject: ; 0x5c95d (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BALDING_GUY, $4 + 4, $3 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $7 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
-	db $06 ; tileset
-	db VERMILION_POKECENTER_HEIGHT, VERMILION_POKECENTER_WIDTH ; dimensions (y, x)
-	dw VermilionPokecenterBlocks, VermilionPokecenterTextPointers, VermilionPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionPokecenterObject ; objects
+	
+INCLUDE "mapObjects/LavenderMart.asm"
+	
+INCLUDE "mapHeaders/VermilionPokecenter.asm"
 
 VermilionPokecenterScript: ; 5c98f (17:498f)
 	call Func_22fa
@@ -91528,32 +77721,10 @@ VermilionPokecenterText3: ; 5c9a3 (17:49a3)
 
 VermilionPokecenterText4: ; 5c9a8 (17:49a8)
 	db $f6
-
-VermilionPokecenterObject: ; 0x5c9a9 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $0, $ff
-	db $7, $4, $0, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FISHER, $5 + 4, $a + 4, $ff, $ff, $2 ; person
-	db SPRITE_SAILOR, $4 + 4, $5 + 4, $ff, $ff, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
-	db $02 ; tileset
-	db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
-	dw VermilionMartBlocks, VermilionMartTextPointers, VermilionMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionMartObject ; objects
+	
+INCLUDE "mapObjects/VermilionPokecenter.asm"
+	
+INCLUDE "mapHeaders/VermilionMart.asm"
 
 VermilionMartScript: ; 5c9e1 (17:49e1)
 	jp EnableAutoTextBoxDrawing
@@ -91570,31 +77741,10 @@ VermilionMartText2: ; 5c9ea (17:49ea)
 VermilionMartText3: ; 5c9ef (17:49ef)
 	TX_FAR _VermilionMartText3
 	db "@"
-
-VermilionMartObject: ; 0x5c9f4 (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $2, $ff
-	db $7, $4, $2, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LASS, $3 + 4, $3 + 4, $fe, $2, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
-	db $07 ; tileset
-	db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
-	dw VermilionGymBlocks, VermilionGymTextPointers, VermilionGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw VermilionGymObject ; objects
+	
+INCLUDE "mapObjects/VermilionMart.asm"
+	
+INCLUDE "mapHeaders/VermilionGym.asm"
 
 VermilionGymScript: ; 5ca26 (17:4a26)
 	ld hl, $d126
@@ -91868,36 +78018,13 @@ UnnamedText_5cbf4: ; 5cbf4 (17:4bf4)
 UnnamedText_5cbf9: ; 5cbf9 (17:4bf9)
 	TX_FAR _UnnamedText_5cbf9
 	db "@"
-
-VermilionGymObject: ; 0x5cbfe (size=58)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $11, $4, $3, $ff
-	db $11, $5, $3, $ff
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_ROCKER, $1 + 4, $5 + 4, $ff, $d0, $41, LT__SURGE + $C8, $1 ; trainer
-	db SPRITE_GENTLEMAN, $6 + 4, $9 + 4, $ff, $d2, $42, GENTLEMAN + $C8, $3 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $3 + 4, $ff, $d2, $43, ROCKER + $C8, $1 ; trainer
-	db SPRITE_SAILOR, $a + 4, $0 + 4, $ff, $d3, $44, SAILOR + $C8, $8 ; trainer
-	db SPRITE_GYM_HELPER, $e + 4, $4 + 4, $ff, $d0, $5 ; person
-
-	; warp-to
-	EVENT_DISP $5, $11, $4
-	EVENT_DISP $5, $11, $5
+	
+INCLUDE "mapObjects/VermilionGym.asm"
 
 VermilionGymBlocks: ; 5cc38 (17:4c38)
 	INCBIN "maps/vermiliongym.blk"
-
-CopycatsHouseF2_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
-	db $04 ; tileset
-	db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
-	dw CopycatsHouseF2Blocks, CopycatsHouseF2TextPointers, CopycatsHouseF2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CopycatsHouseF2Object ; objects
+	
+INCLUDE "mapHeaders/CopycatsHouseF2.asm"
 
 CopycatsHouseF2Script: ; 5cc71 (17:4c71)
 	jp EnableAutoTextBoxDrawing
@@ -92003,33 +78130,10 @@ UnnamedText_5cd17: ; 5cd17 (17:4d17)
 UnnamedText_5cd1c: ; 5cd1c (17:4d1c)
 	TX_FAR _UnnamedText_5cd1c
 	db "@"
-
-CopycatsHouseF2Object: ; 0x5cd21 (size=48)
-	db $a ; border tile
-
-	db $1 ; warps
-	db $1, $7, $2, COPYCATS_HOUSE_1F
-
-	db $2 ; signs
-	db $5, $3, $6 ; CopycatsHouseF2Text6
-	db $1, $0, $7 ; CopycatsHouseF2Text7
-
-	db $5 ; people
-	db SPRITE_BRUNETTE_GIRL, $3 + 4, $4 + 4, $fe, $0, $1 ; person
-	db SPRITE_BIRD, $6 + 4, $4 + 4, $fe, $2, $2 ; person
-	db SPRITE_SLOWBRO, $1 + 4, $5 + 4, $ff, $d0, $3 ; person
-	db SPRITE_BIRD, $0 + 4, $2 + 4, $ff, $d0, $4 ; person
-	db SPRITE_CLEFAIRY, $6 + 4, $1 + 4, $ff, $d3, $5 ; person
-
-	; warp-to
-	EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_1F
-
-FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
-	db $05 ; tileset
-	db FIGHTINGDOJO_HEIGHT, FIGHTINGDOJO_WIDTH ; dimensions (y, x)
-	dw FightingDojoBlocks, FightingDojoTextPointers, FightingDojoScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FightingDojoObject ; objects
+	
+INCLUDE "mapObjects/CopycatsHouseF2.asm"
+	
+INCLUDE "mapHeaders/FightingDojo.asm"
 
 FightingDojoScript: ; 5cd5d (17:4d5d)
 	call EnableAutoTextBoxDrawing
@@ -92368,38 +78472,13 @@ WantHitmonchanText: ; 5cf91 (17:4f91)
 OtherHitmonText: ; 5cf96 (17:4f96)
 	TX_FAR _OtherHitmonText
 	db "@"
-
-FightingDojoObject: ; 0x5cf9b (size=72)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $b, $4, $1, $ff
-	db $b, $5, $1, $ff
-
-	db $0 ; signs
-
-	db $7 ; people
-	db SPRITE_HIKER, $3 + 4, $5 + 4, $ff, $d0, $41, BLACKBELT + $C8, $1 ; trainer
-	db SPRITE_HIKER, $4 + 4, $3 + 4, $ff, $d3, $42, BLACKBELT + $C8, $2 ; trainer
-	db SPRITE_HIKER, $6 + 4, $3 + 4, $ff, $d3, $43, BLACKBELT + $C8, $3 ; trainer
-	db SPRITE_HIKER, $5 + 4, $5 + 4, $ff, $d2, $44, BLACKBELT + $C8, $4 ; trainer
-	db SPRITE_HIKER, $7 + 4, $5 + 4, $ff, $d2, $45, BLACKBELT + $C8, $5 ; trainer
-	db SPRITE_BALL, $1 + 4, $4 + 4, $ff, $ff, $6 ; person
-	db SPRITE_BALL, $1 + 4, $5 + 4, $ff, $ff, $7 ; person
-
-	; warp-to
-	EVENT_DISP $5, $b, $4
-	EVENT_DISP $5, $b, $5
+	
+INCLUDE "mapObjects/FightingDojo.asm"
 
 FightingDojoBlocks: ; 5cfe3 (17:4fe3)
 	INCBIN "maps/fightingdojo.blk"
-
-SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
-	db $16 ; tileset
-	db SAFFRON_GYM_HEIGHT, SAFFRON_GYM_WIDTH ; dimensions (y, x)
-	dw SaffronGymBlocks, SaffronGymTextPointers, SaffronGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SaffronGymObject ; objects
+	
+INCLUDE "mapHeaders/SaffronGym.asm"
 
 SaffronGymScript: ; 5d00d (17:500d)
 	ld hl, $d126
@@ -92765,100 +78844,13 @@ SaffronGymEndBattleText7: ; 5d24f (17:524f)
 SaffronGymAfterBattleText7: ; 5d254 (17:5254)
 	TX_FAR _SaffronGymAfterBattleText7
 	db "@"
-
-SaffronGymObject: ; 0x5d259 (size=330)
-	db $2e ; border tile
-
-	db $20 ; warps
-	db $11, $8, $2, $ff
-	db $11, $9, $2, $ff
-	db $3, $1, $16, SAFFRON_GYM
-	db $3, $5, $f, SAFFRON_GYM
-	db $5, $1, $12, SAFFRON_GYM
-	db $5, $5, $8, SAFFRON_GYM
-	db $9, $1, $1b, SAFFRON_GYM
-	db $9, $5, $10, SAFFRON_GYM
-	db $b, $1, $5, SAFFRON_GYM
-	db $b, $5, $d, SAFFRON_GYM
-	db $f, $1, $17, SAFFRON_GYM
-	db $f, $5, $1e, SAFFRON_GYM
-	db $11, $1, $11, SAFFRON_GYM
-	db $11, $5, $9, SAFFRON_GYM
-	db $3, $9, $1a, SAFFRON_GYM
-	db $3, $b, $3, SAFFRON_GYM
-	db $5, $9, $7, SAFFRON_GYM
-	db $5, $b, $c, SAFFRON_GYM
-	db $b, $b, $4, SAFFRON_GYM
-	db $f, $b, $1f, SAFFRON_GYM
-	db $3, $f, $18, SAFFRON_GYM
-	db $3, $13, $1c, SAFFRON_GYM
-	db $5, $f, $2, SAFFRON_GYM
-	db $5, $13, $a, SAFFRON_GYM
-	db $9, $f, $14, SAFFRON_GYM
-	db $9, $13, $1d, SAFFRON_GYM
-	db $b, $f, $e, SAFFRON_GYM
-	db $b, $13, $6, SAFFRON_GYM
-	db $f, $f, $15, SAFFRON_GYM
-	db $f, $13, $19, SAFFRON_GYM
-	db $11, $f, $b, SAFFRON_GYM
-	db $11, $13, $13, SAFFRON_GYM
-
-	db $0 ; signs
-
-	db $9 ; people
-	db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, $41, SABRINA + $C8, $1 ; trainer
-	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, $42, CHANNELER + $C8, $16 ; trainer
-	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, $43, PSYCHIC_TR + $C8, $1 ; trainer
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, $44, CHANNELER + $C8, $17 ; trainer
-	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, $45, PSYCHIC_TR + $C8, $2 ; trainer
-	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, $46, CHANNELER + $C8, $18 ; trainer
-	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, $47, PSYCHIC_TR + $C8, $3 ; trainer
-	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, $48, PSYCHIC_TR + $C8, $4 ; trainer
-	db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
-
-	; warp-to
-	EVENT_DISP $a, $11, $8
-	EVENT_DISP $a, $11, $9
-	EVENT_DISP $a, $3, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $3, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $9, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $9, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $b, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $b, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $f, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $f, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $11, $1 ; SAFFRON_GYM
-	EVENT_DISP $a, $11, $5 ; SAFFRON_GYM
-	EVENT_DISP $a, $3, $9 ; SAFFRON_GYM
-	EVENT_DISP $a, $3, $b ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $9 ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $b ; SAFFRON_GYM
-	EVENT_DISP $a, $b, $b ; SAFFRON_GYM
-	EVENT_DISP $a, $f, $b ; SAFFRON_GYM
-	EVENT_DISP $a, $3, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $3, $13 ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $5, $13 ; SAFFRON_GYM
-	EVENT_DISP $a, $9, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $9, $13 ; SAFFRON_GYM
-	EVENT_DISP $a, $b, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $b, $13 ; SAFFRON_GYM
-	EVENT_DISP $a, $f, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $f, $13 ; SAFFRON_GYM
-	EVENT_DISP $a, $11, $f ; SAFFRON_GYM
-	EVENT_DISP $a, $11, $13 ; SAFFRON_GYM
+	
+INCLUDE "mapObjects/SaffronGym.asm"
 
 SaffronGymBlocks: ; 5d3a3 (17:53a3)
 	INCBIN "maps/saffrongym.blk"
-
-SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
-	db $02 ; tileset
-	db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
-	dw SaffronMartBlocks, SaffronMartTextPointers, SaffronMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SaffronMartObject ; objects
+	
+INCLUDE "mapHeaders/SaffronMart.asm"
 
 SaffronMartScript: ; 5d409 (17:5409)
 	jp EnableAutoTextBoxDrawing
@@ -92875,31 +78867,10 @@ SaffronMartText2: ; 5d412 (17:5412)
 SaffronMartText3: ; 5d417 (17:5417)
 	TX_FAR _SaffronMartText3
 	db "@"
-
-SaffronMartObject: ; 0x5d41c (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $0, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
-	db $16 ; tileset
-	db SILPH_CO_1F_HEIGHT, SILPH_CO_1F_WIDTH ; dimensions (y, x)
-	dw SilphCo1Blocks, SilphCo1TextPointers, SilphCo1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo1Object ; objects
+	
+INCLUDE "mapObjects/SaffronMart.asm"
+	
+INCLUDE "mapHeaders/SilphCo1.asm"
 
 SilphCo1Script: ; 5d44e (17:544e)
 	call EnableAutoTextBoxDrawing
@@ -92921,38 +78892,13 @@ SilphCo1TextPointers: ; 5d469 (17:5469)
 SilphCo1Text1: ; 5d46b (17:546b)
 	TX_FAR _SilphCo1Text1
 	db "@"
-
-SilphCo1Object: ; 0x5d470 (size=50)
-	db $2e ; border tile
-
-	db $5 ; warps
-	db $11, $a, $5, $ff
-	db $11, $b, $5, $ff
-	db $0, $1a, $0, SILPH_CO_2F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $a, $10, $6, SILPH_CO_3F
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $f, $11, $a
-	EVENT_DISP $f, $11, $b
-	EVENT_DISP $f, $0, $1a ; SILPH_CO_2F
-	EVENT_DISP $f, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $f, $a, $10 ; SILPH_CO_3F
+	
+INCLUDE "mapObjects/SilphCo1.asm"
 
 SilphCo1Blocks: ; 5d4a2 (17:54a2)
 	INCBIN "maps/silphco1.blk"
-
-SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
-	db $06 ; tileset
-	db SAFFRON_POKECENTER_HEIGHT, SAFFRON_POKECENTER_WIDTH ; dimensions (y, x)
-	dw SaffronPokecenterBlocks, SaffronPokecenterTextPointers, SaffronPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SaffronPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/SaffronPokecenter.asm"
 
 SaffronPokecenterScript: ; 5d535 (17:5535)
 	call Func_22fa
@@ -92977,32 +78923,10 @@ SaffronPokecenterText3: ; 5d549 (17:5549)
 
 SaffronPokecenterText4: ; 5d54e (17:554e)
 	db $f6
-
-SaffronPokecenterObject: ; 0x5d54f (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $6, $ff
-	db $7, $4, $6, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $8 + 4, $ff, $d0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-ViridianForestexit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
-	db $09 ; tileset
-	db VIRIDIAN_FOREST_EXIT_HEIGHT, VIRIDIAN_FOREST_EXIT_WIDTH ; dimensions (y, x)
-	dw ViridianForestexitBlocks, ViridianForestexitTextPointers, ViridianForestexitScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianForestexitObject ; objects
+	
+INCLUDE "mapObjects/SaffronPokecenter.asm"
+	
+INCLUDE "mapHeaders/ViridianForestExit.asm"
 
 ViridianForestexitScript: ; 5d587 (17:5587)
 	jp EnableAutoTextBoxDrawing
@@ -93018,34 +78942,10 @@ ViridianForestexitText1: ; 5d58e (17:558e)
 ViridianForestexitText2: ; 5d593 (17:5593)
 	TX_FAR _ViridianForestexitText2
 	db "@"
-
-ViridianForestexitObject: ; 0x5d598 (size=48)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $0, $4, $1, $ff
-	db $0, $5, $1, $ff
-	db $7, $4, $0, VIRIDIAN_FOREST
-	db $7, $5, $0, VIRIDIAN_FOREST
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
-	db SPRITE_OLD_PERSON, $5 + 4, $2 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $5, $0, $4
-	EVENT_DISP $5, $0, $5
-	EVENT_DISP $5, $7, $4 ; VIRIDIAN_FOREST
-	EVENT_DISP $5, $7, $5 ; VIRIDIAN_FOREST
-
-Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
-	db $0c ; tileset
-	db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
-	dw Route2GateBlocks, Route2GateTextPointers, Route2GateScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw Route2GateObject ; objects
+	
+INCLUDE "mapObjects/ViridianForestExit.asm"
+	
+INCLUDE "mapHeaders/Route2Gate.asm"
 
 Route2GateScript: ; 5d5d4 (17:55d4)
 	jp EnableAutoTextBoxDrawing
@@ -93089,34 +78989,10 @@ UnnamedText_5d616: ; 5d616 (17:5616)
 Route2GateText2: ; 5d61b (17:561b)
 	TX_FAR _Route2GateText2
 	db "@"
-
-Route2GateObject: ; 0x5d620 (size=48)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $0, $4, $3, $ff
-	db $0, $5, $3, $ff
-	db $7, $4, $4, $ff
-	db $7, $5, $4, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $ff, $d2, $1 ; person
-	db SPRITE_BUG_CATCHER, $4 + 4, $5 + 4, $fe, $2, $2 ; person
-
-	; warp-to
-	EVENT_DISP $5, $0, $4
-	EVENT_DISP $5, $0, $5
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
-
-ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
-	db $09 ; tileset
-	db VIRIDIAN_FOREST_ENTRANCE_HEIGHT, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; dimensions (y, x)
-	dw ViridianForestEntranceBlocks, ViridianForestEntranceTextPointers, ViridianForestEntranceScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianForestEntranceObject ; objects
+	
+INCLUDE "mapObjects/Route2Gate.asm"
+	
+INCLUDE "mapHeaders/ViridianForestEntrance.asm"
 
 ViridianForestEntranceScript: ; 5d65c (17:565c)
 	jp EnableAutoTextBoxDrawing
@@ -93132,34 +79008,10 @@ ViridianForestEntranceText1: ; 5d663 (17:5663)
 ViridianForestEntranceText2: ; 5d668 (17:5668)
 	TX_FAR _ViridianForestEntranceText2
 	db "@"
-
-ViridianForestEntranceObject: ; 0x5d66d (size=48)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $0, $4, $3, VIRIDIAN_FOREST
-	db $0, $5, $4, VIRIDIAN_FOREST
-	db $7, $4, $5, $ff
-	db $7, $5, $5, $ff
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_GIRL, $4 + 4, $8 + 4, $ff, $d2, $1 ; person
-	db SPRITE_LITTLE_GIRL, $4 + 4, $2 + 4, $fe, $1, $2 ; person
-
-	; warp-to
-	EVENT_DISP $5, $0, $4 ; VIRIDIAN_FOREST
-	EVENT_DISP $5, $0, $5 ; VIRIDIAN_FOREST
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
-
-UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
-	db $0c ; tileset
-	db PATH_ENTRANCE_ROUTE_5_HEIGHT, PATH_ENTRANCE_ROUTE_5_WIDTH ; dimensions (y, x)
-	dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5TextPointers, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundTunnelEntranceRoute5Object ; objects
+	
+INCLUDE "mapObjects/ViridianForestEntrance.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathRoute5.asm"
 
 UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
 	ld a, $10
@@ -93180,31 +79032,10 @@ UndergroundTunnelEntranceRoute5Text1: ; 5d6b2 (17:56b2)
 	call Predef
 	ld hl, UndergroundTunnelEntranceRoute5_5d6af
 	ret
-
-UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
-	db $4, $4, $0, UNDERGROUND_PATH_NS
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_LITTLE_GIRL, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_NS
-
-UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
-	db $0c ; tileset
-	db PATH_ENTRANCE_ROUTE_6_HEIGHT, PATH_ENTRANCE_ROUTE_6_WIDTH ; dimensions (y, x)
-	dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6TextPointers, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundTunnelEntranceRoute6Object ; objects
+	
+INCLUDE "mapObjects/UndergroundPathRoute5.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathRoute6.asm"
 
 UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
 	ld a, $11
@@ -93217,31 +79048,10 @@ UndergroundTunnelEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)
 UndergroundTunnelEntranceRoute6Text1: ; 5d6f9 (17:56f9)
 	TX_FAR _UndergrdTunnelEntRoute6Text1
 	db "@"
-
-UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
-	db $4, $4, $1, UNDERGROUND_PATH_NS
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_GIRL, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_NS
-
-UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
-	db $0c ; tileset
-	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
-	dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7TextPointers, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundPathEntranceRoute7Object ; objects
+	
+INCLUDE "mapObjects/UndergroundPathRoute6.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathRoute7.asm"
 
 UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
 	ld a, $12
@@ -93254,31 +79064,10 @@ UndergroundPathEntranceRoute7TextPointers: ; 5d734 (17:5734)
 UndergroundPathEntranceRoute7Text1: ; 5d736 (17:5736)
 	TX_FAR _UndergroundPathEntRoute7Text1
 	db "@"
-
-UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-	db $4, $4, $0, UNDERGROUND_PATH_WE
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $2 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
-
-UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
-	db $0c ; tileset
-	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
-	dw UndergroundTunnelEntranceRoute7CopyBlocks, UndergroundPathEntranceRoute7CopyTextPointers, UndergroundPathEntranceRoute7CopyScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundPathEntranceRoute7CopyObject ; objects
+	
+INCLUDE "mapObjects/UndergroundPathRoute7.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathRoute7Clone.asm"
 
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
 	ld a, $12
@@ -93304,32 +79093,10 @@ UnnamedText_5d77d: ; 5d77d (17:577d)
 UnnamedText_5d782: ; 5d782 (17:5782)
 	TX_FAR _UnnamedText_5d782
 	db "@"
-
-UndergroundPathEntranceRoute7CopyObject: ; 5d787 (17:5787)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $3, $5, $ff
-	db $7, $4, $5, $ff
-	db $4, $4, $0, UNDERGROUND_PATH_WE
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_GIRL, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $2 + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-	EVENT_DISP $4, $4, $4 ; UNDERGROUND_PATH_WE
-
-SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
-	db $16 ; tileset
-	db SILPH_CO_9F_HEIGHT, SILPH_CO_9F_WIDTH ; dimensions (y, x)
-	dw SilphCo9Blocks, SilphCo9TextPointers, SilphCo9Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo9Object ; objects
+	
+INCLUDE "mapObjects/UndergroundPathRoute7Clone.asm"
+	
+INCLUDE "mapHeaders/SilphCo9.asm"
 
 SilphCo9Script: ; 5d7bb (17:57bb)
 	call SilphCo9Script_5d7d1
@@ -93579,41 +79346,13 @@ SilphCo9EndBattleText3: ; 5d935 (17:5935)
 SilphCo9AfterBattleText3: ; 5d93a (17:593a)
 	TX_FAR _SilphCo9AfterBattleText3
 	db "@"
-
-SilphCo9Object: ; 0x5d93f (size=74)
-	db $2e ; border tile
-
-	db $5 ; warps
-	db $0, $e, $0, SILPH_CO_10F
-	db $0, $10, $0, SILPH_CO_8F
-	db $0, $12, $0, SILPH_CO_ELEVATOR
-	db $3, $9, $7, SILPH_CO_3F
-	db $f, $11, $4, SILPH_CO_5F
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $e + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $4 + 4, $2 + 4, $ff, $d1, $42, ROCKET + $C8, $25 ; trainer
-	db SPRITE_OAK_AIDE, $d + 4, $15 + 4, $ff, $d0, $43, SCIENTIST + $C8, $a ; trainer
-	db SPRITE_ROCKET, $10 + 4, $d + 4, $ff, $d1, $44, ROCKET + $C8, $26 ; trainer
-
-	; warp-to
-	EVENT_DISP $d, $0, $e ; SILPH_CO_10F
-	EVENT_DISP $d, $0, $10 ; SILPH_CO_8F
-	EVENT_DISP $d, $0, $12 ; SILPH_CO_ELEVATOR
-	EVENT_DISP $d, $3, $9 ; SILPH_CO_3F
-	EVENT_DISP $d, $f, $11 ; SILPH_CO_5F
+	
+INCLUDE "mapObjects/SilphCo9.asm"
 
 SilphCo9Blocks: ; 5d989 (17:5989)
 	INCBIN "maps/silphco9.blk"
-
-VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
-	db $11 ; tileset
-	db VICTORY_ROAD_1_HEIGHT, VICTORY_ROAD_1_WIDTH ; dimensions (y, x)
-	dw VictoryRoad1Blocks, VictoryRoad1TextPointers, VictoryRoad1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw VictoryRoad1Object ; objects
+	
+INCLUDE "mapHeaders/VictoryRoad1.asm"
 
 VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld hl, $d126
@@ -93723,30 +79462,8 @@ VictoryRoad1EndBattleText2: ; 5daae (17:5aae)
 VictoryRoad1AfterBattleText2: ; 5dab3 (17:5ab3)
 	TX_FAR _VictoryRoad1AfterBattleText2
 	db "@"
-
-VictoryRoad1Object: ; 0x5dab8 (size=76)
-	db $7d ; border tile
-
-	db $3 ; warps
-	db $11, $8, $2, $ff
-	db $11, $9, $2, $ff
-	db $1, $1, $0, VICTORY_ROAD_2
-
-	db $0 ; signs
-
-	db $7 ; people
-	db SPRITE_LASS, $5 + 4, $7 + 4, $ff, $d3, $41, COOLTRAINER_F + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $3 + 4, $ff, $d0, $42, COOLTRAINER_M + $C8, $5 ; trainer
-	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, $83, TM_43 ; item
-	db SPRITE_BALL, $2 + 4, $9 + 4, $ff, $ff, $84, RARE_CANDY ; item
-	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $10, $5 ; person
-	db SPRITE_BOULDER, $2 + 4, $e + 4, $ff, $10, $6 ; person
-	db SPRITE_BOULDER, $a + 4, $2 + 4, $ff, $10, $7 ; person
-
-	; warp-to
-	EVENT_DISP $a, $11, $8
-	EVENT_DISP $a, $11, $9
-	EVENT_DISP $a, $1, $1 ; VICTORY_ROAD_2
+	
+INCLUDE "mapObjects/VictoryRoad1.asm"
 
 VictoryRoad1Blocks: ; 5db04 (17:5b04)
 	INCBIN "maps/victoryroad1.blk"
@@ -94251,13 +79968,8 @@ UndergroundPathWEBlocks: ; 601f4 (18:41f4)
 SSAnne10Blocks: ; 603c0 (18:43c0)
 SSAnne9Blocks: ; 603c0 (18:43c0)
 	INCBIN "maps/ssanne9.blk"
-
-PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
-	db $0f ; tileset
-	db POKEMONTOWER_1_HEIGHT, POKEMONTOWER_1_WIDTH ; dimensions (y, x)
-	dw PokemonTower1Blocks, PokemonTower1TextPointers, PokemonTower1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower1Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower1.asm"
 
 PokemonTower1Script: ; 6042c (18:442c)
 	jp EnableAutoTextBoxDrawing
@@ -94288,38 +80000,13 @@ PokemonTower1Text4: ; 60448 (18:4448)
 PokemonTower1Text5: ; 6044d (18:444d)
 	TX_FAR _PokemonTower1Text5
 	db "@"
-
-PokemonTower1Object: ; 0x60452 (size=58)
-	db $1 ; border tile
-
-	db $3 ; warps
-	db $11, $a, $1, $ff
-	db $11, $b, $1, $ff
-	db $9, $12, $1, POKEMONTOWER_2
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $d + 4, $f + 4, $ff, $d1, $1 ; person
-	db SPRITE_MOM_GEISHA, $8 + 4, $6 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BALDING_GUY, $c + 4, $8 + 4, $ff, $ff, $3 ; person
-	db SPRITE_GIRL, $7 + 4, $d + 4, $ff, $ff, $4 ; person
-	db SPRITE_MEDIUM, $7 + 4, $11 + 4, $ff, $d2, $5 ; person
-
-	; warp-to
-	EVENT_DISP $a, $11, $a
-	EVENT_DISP $a, $11, $b
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_2
+	
+INCLUDE "mapObjects/PokemonTower1.asm"
 
 PokemonTower1Blocks: ; 6048c (18:448c)
 	INCBIN "maps/pokemontower1.blk"
-
-PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
-	db $0f ; tileset
-	db POKEMONTOWER_2_HEIGHT, POKEMONTOWER_2_WIDTH ; dimensions (y, x)
-	dw PokemonTower2Blocks, PokemonTower2TextPointers, PokemonTower2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower2Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower2.asm"
 
 PokemonTower2Script: ; 604f2 (18:44f2)
 	call EnableAutoTextBoxDrawing
@@ -94501,33 +80188,13 @@ UnnamedText_6063c: ; 6063c (18:463c)
 PokemonTower2Text2: ; 60641 (18:4641)
 	TX_FAR _PokemonTower2Text2
 	db "@"
-
-PokemonTower2Object: ; 0x60646 (size=32)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $9, $3, $0, POKEMONTOWER_3
-	db $9, $12, $2, POKEMONTOWER_1
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BLUE, $5 + 4, $e + 4, $ff, $ff, $1 ; person
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d3, $2 ; person
-
-	; warp-to
-	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_3
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_1
+	
+INCLUDE "mapObjects/PokemonTower2.asm"
 
 PokemonTower2Blocks: ; 60666 (18:4666)
 	INCBIN "maps/pokemontower2.blk"
-
-PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
-	db $0f ; tileset
-	db POKEMONTOWER_3_HEIGHT, POKEMONTOWER_3_WIDTH ; dimensions (y, x)
-	dw PokemonTower3Blocks, PokemonTower3TextPointers, PokemonTower3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower3Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower3.asm"
 
 PokemonTower3Script: ; 606cc (18:46cc)
 	call EnableAutoTextBoxDrawing
@@ -94631,35 +80298,13 @@ PokemonTower3EndBattleText3: ; 60753 (18:4753)
 PokemonTower3AfterBattleText3: ; 60758 (18:4758)
 	TX_FAR _PokemonTower3AfterBattleText3
 	db "@"
-
-PokemonTower3Object: ; 0x6075d (size=51)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $9, $3, $0, POKEMONTOWER_2
-	db $9, $12, $1, POKEMONTOWER_4
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_MEDIUM, $3 + 4, $c + 4, $ff, $d2, $41, CHANNELER + $C8, $5 ; trainer
-	db SPRITE_MEDIUM, $8 + 4, $9 + 4, $ff, $d0, $42, CHANNELER + $C8, $6 ; trainer
-	db SPRITE_MEDIUM, $d + 4, $a + 4, $ff, $d0, $43, CHANNELER + $C8, $8 ; trainer
-	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $84, ESCAPE_ROPE ; item
-
-	; warp-to
-	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_2
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_4
+	
+INCLUDE "mapObjects/PokemonTower3.asm"
 
 PokemonTower3Blocks: ; 60790 (18:4790)
 	INCBIN "maps/pokemontower3.blk"
-
-PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
-	db $0f ; tileset
-	db POKEMONTOWER_4_HEIGHT, POKEMONTOWER_4_WIDTH ; dimensions (y, x)
-	dw PokemonTower4Blocks, PokemonTower4TextPointers, PokemonTower4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower4Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower4.asm"
 
 PokemonTower4Script: ; 607f6 (18:47f6)
 	call EnableAutoTextBoxDrawing
@@ -94767,36 +80412,12 @@ PokemonTower4AfterBattleText3: ; 60886 (18:4886)
 	TX_FAR _PokemonTower4AfterBattleText3
 	db "@"
 
-PokemonTower4Object: ; 0x6088b (size=65)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $9, $3, $0, POKEMONTOWER_5
-	db $9, $12, $1, POKEMONTOWER_3
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_MEDIUM, $a + 4, $5 + 4, $ff, $d3, $41, CHANNELER + $C8, $9 ; trainer
-	db SPRITE_MEDIUM, $7 + 4, $f + 4, $ff, $d0, $42, CHANNELER + $C8, $a ; trainer
-	db SPRITE_MEDIUM, $c + 4, $e + 4, $ff, $d2, $43, CHANNELER + $C8, $c ; trainer
-	db SPRITE_BALL, $a + 4, $c + 4, $ff, $ff, $84, ELIXER ; item
-	db SPRITE_BALL, $a + 4, $9 + 4, $ff, $ff, $85, AWAKENING ; item
-	db SPRITE_BALL, $10 + 4, $c + 4, $ff, $ff, $86, HP_UP ; item
-
-	; warp-to
-	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_5
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_3
+INCLUDE "mapObjects/PokemonTower4.asm"	
 
 PokemonTower4Blocks: ; 608cc (18:48cc)
 	INCBIN "maps/pokemontower4.blk"
-
-PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
-	db $0f ; tileset
-	db POKEMONTOWER_5_HEIGHT, POKEMONTOWER_5_WIDTH ; dimensions (y, x)
-	dw PokemonTower5Blocks, PokemonTower5TextPointers, PokemonTower5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower5Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower5.asm"
 
 PokemonTower5Script: ; 60932 (18:4932)
 	call EnableAutoTextBoxDrawing
@@ -94979,37 +80600,13 @@ PokemonTower5AfterBattleText4: ; 60a3e (18:4a3e)
 PokemonTower5Text7: ; 60a43 (18:4a43)
 	TX_FAR _UnnamedText_60a43
 	db "@"
-
-PokemonTower5Object: ; 0x60a48 (size=65)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $9, $3, $0, POKEMONTOWER_4
-	db $9, $12, $0, POKEMONTOWER_6
-
-	db $0 ; signs
-
-	db $6 ; people
-	db SPRITE_MEDIUM, $8 + 4, $c + 4, $ff, $ff, $1 ; person
-	db SPRITE_MEDIUM, $7 + 4, $11 + 4, $ff, $d2, $42, CHANNELER + $C8, $e ; trainer
-	db SPRITE_MEDIUM, $3 + 4, $e + 4, $ff, $d2, $43, CHANNELER + $C8, $10 ; trainer
-	db SPRITE_MEDIUM, $a + 4, $6 + 4, $ff, $d3, $44, CHANNELER + $C8, $11 ; trainer
-	db SPRITE_MEDIUM, $10 + 4, $9 + 4, $ff, $d3, $45, CHANNELER + $C8, $12 ; trainer
-	db SPRITE_BALL, $e + 4, $6 + 4, $ff, $ff, $86, NUGGET ; item
-
-	; warp-to
-	EVENT_DISP $a, $9, $3 ; POKEMONTOWER_4
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_6
+	
+INCLUDE "mapObjects/PokemonTower5.asm"	
 
 PokemonTower5Blocks: ; 60a89 (18:4a89)
 	INCBIN "maps/pokemontower5.blk"
-
-PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
-	db $0f ; tileset
-	db POKEMONTOWER_6_HEIGHT, POKEMONTOWER_6_WIDTH ; dimensions (y, x)
-	dw PokemonTower6Blocks, PokemonTower6TextPointers, PokemonTower6Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower6Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower6.asm"
 
 PokemonTower6Script: ; 60aef (18:4aef)
 	call EnableAutoTextBoxDrawing
@@ -95226,38 +80823,15 @@ PokemonTower6AfterBattleText3: ; 60c51 (18:4c51)
 PokemonTower6Text6: ; 60c56 (18:4c56)
 	TX_FAR _UnnamedText_60c56
 	db "@"
-
-PokemonTower6Object: ; 0x60c5b (size=58)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $9, $12, $1, POKEMONTOWER_5
-	db $10, $9, $0, POKEMONTOWER_7
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_MEDIUM, $a + 4, $c + 4, $ff, $d3, $41, CHANNELER + $C8, $13 ; trainer
-	db SPRITE_MEDIUM, $5 + 4, $9 + 4, $ff, $d0, $42, CHANNELER + $C8, $14 ; trainer
-	db SPRITE_MEDIUM, $5 + 4, $10 + 4, $ff, $d2, $43, CHANNELER + $C8, $15 ; trainer
-	db SPRITE_BALL, $8 + 4, $6 + 4, $ff, $ff, $84, RARE_CANDY ; item
-	db SPRITE_BALL, $e + 4, $e + 4, $ff, $ff, $85, X_ACCURACY ; item
-
-	; warp-to
-	EVENT_DISP $a, $9, $12 ; POKEMONTOWER_5
-	EVENT_DISP $a, $10, $9 ; POKEMONTOWER_7
+	
+INCLUDE "mapObjects/PokemonTower6.asm"
 
 PokemonTower6Blocks: ; 60c95 (18:4c95)
 	INCBIN "maps/pokemontower6.blk"
 
 	INCBIN "maps/unusedblocks60cef.blk"
-
-PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
-	db $0f ; tileset
-	db POKEMONTOWER_7_HEIGHT, POKEMONTOWER_7_WIDTH ; dimensions (y, x)
-	dw PokemonTower7Blocks, PokemonTower7TextPointers, PokemonTower7Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw PokemonTower7Object ; objects
+	
+INCLUDE "mapHeaders/PokemonTower7.asm"
 
 PokemonTower7Script: ; 60d05 (18:4d05)
 	call EnableAutoTextBoxDrawing
@@ -95541,33 +81115,13 @@ PokemonTower7EndBattleText3: ; 60eec (18:4eec)
 PokemonTower7AfterBattleText3: ; 60ef1 (18:4ef1)
 	TX_FAR _PokemonTower7AfterBattleText3
 	db "@"
-
-PokemonTower7Object: ; 0x60ef6 (size=42)
-	db $1 ; border tile
-
-	db $1 ; warps
-	db $10, $9, $1, POKEMONTOWER_6
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_ROCKET, $b + 4, $9 + 4, $ff, $d3, $41, ROCKET + $C8, $13 ; trainer
-	db SPRITE_ROCKET, $9 + 4, $c + 4, $ff, $d2, $42, ROCKET + $C8, $14 ; trainer
-	db SPRITE_ROCKET, $7 + 4, $9 + 4, $ff, $d3, $43, ROCKET + $C8, $15 ; trainer
-	db SPRITE_MR_FUJI, $3 + 4, $a + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $a, $10, $9 ; POKEMONTOWER_6
+	
+INCLUDE "mapObjects/PokemonTower7.asm"
 
 PokemonTower7Blocks: ; 60f20 (18:4f20)
 	INCBIN "maps/pokemontower7.blk"
-
-CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
-	db $12 ; tileset
-	db CELADON_MART_1_HEIGHT, CELADON_MART_1_WIDTH ; dimensions (y, x)
-	dw CeladonMart1Blocks, CeladonMart1TextPointers, CeladonMart1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeladonMart1Object ; objects
+	
+INCLUDE "mapHeaders/CeladonMart1.asm"
 
 CeladonMart1Script: ; 60f86 (18:4f86)
 	jp EnableAutoTextBoxDrawing
@@ -95588,32 +81142,8 @@ CeladonMart1Text2: ; 60f94 (18:4f94)
 CeladonMart1Text3: ; 60f99 (18:4f99)
 	TX_FAR _CeladonMart1Text3
 	db "@"
-
-CeladonMart1Object: ; 0x60f9e (size=64)
-	db $f ; border tile
-
-	db $6 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-	db $7, $10, $1, $ff
-	db $7, $11, $1, $ff
-	db $1, $c, $0, CELADON_MART_2
-	db $1, $1, $0, CELADON_MART_ELEVATOR
-
-	db $2 ; signs
-	db $4, $b, $2 ; CeladonMart1Text2
-	db $1, $e, $3 ; CeladonMart1Text3
-
-	db $1 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $3 + 4, $8 + 4, $ff, $d0, $1 ; person
-
-	; warp-to
-	EVENT_DISP $a, $7, $2
-	EVENT_DISP $a, $7, $3
-	EVENT_DISP $a, $7, $10
-	EVENT_DISP $a, $7, $11
-	EVENT_DISP $a, $1, $c ; CELADON_MART_2
-	EVENT_DISP $a, $1, $1 ; CELADON_MART_ELEVATOR
+	
+INCLUDE "mapObjects/CeladonMart1.asm"
 
 CeladonMart1Blocks: ; 60fde (18:4fde)
 	INCBIN "maps/celadonmart1.blk"
@@ -95745,13 +81275,8 @@ LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ld [$d11e], a
 	call GetItemName
 	ret
-
-ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
-	db $03 ; tileset
-	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
-	dw ViridianForestBlocks, ViridianForestTextPointers, ViridianForestScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianForestObject ; objects
+	
+INCLUDE "mapHeaders/ViridianForest.asm"
 
 ViridianForestScript: ; 6110d (18:510d)
 	call EnableAutoTextBoxDrawing
@@ -95898,50 +81423,10 @@ ViridianForestText13: ; 611d0 (18:51d0)
 ViridianForestText14: ; 611d5 (18:51d5)
 	TX_FAR _ViridianForestText14
 	db "@"
-
-ViridianForestObject: ; 0x611da (size=127)
-	db $3 ; border tile
-
-	db $6 ; warps
-	db $0, $1, $2, VIRIDIAN_FOREST_EXIT
-	db $0, $2, $3, VIRIDIAN_FOREST_EXIT
-	db $2f, $f, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $10, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $11, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $12, $1, VIRIDIAN_FOREST_ENTRANCE
-
-	db $6 ; signs
-	db $28, $18, $9 ; ViridianForestText9
-	db $20, $10, $a ; ViridianForestText10
-	db $11, $1a, $b ; ViridianForestText11
-	db $18, $4, $c ; ViridianForestText12
-	db $2d, $12, $d ; ViridianForestText13
-	db $1, $2, $e ; ViridianForestText14
-
-	db $8 ; people
-	db SPRITE_BUG_CATCHER, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, $42, BUG_CATCHER + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, $43, BUG_CATCHER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, $44, BUG_CATCHER + $C8, $3 ; trainer
-	db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, $85, ANTIDOTE ; item
-	db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, $86, POTION ; item
-	db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, $87, POKE_BALL ; item
-	db SPRITE_BUG_CATCHER, $28 + 4, $1b + 4, $ff, $ff, $8 ; person
-
-	; warp-to
-	EVENT_DISP $11, $0, $1 ; VIRIDIAN_FOREST_EXIT
-	EVENT_DISP $11, $0, $2 ; VIRIDIAN_FOREST_EXIT
-	EVENT_DISP $11, $2f, $f ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP $11, $2f, $10 ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP $11, $2f, $11 ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP $11, $2f, $12 ; VIRIDIAN_FOREST_ENTRANCE
-
-SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
-	db $0d ; tileset
-	db SS_ANNE_1_HEIGHT, SS_ANNE_1_WIDTH ; dimensions (y, x)
-	dw SSAnne1Blocks, SSAnne1TextPointers, SSAnne1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne1Object ; objects
+	
+INCLUDE "mapObjects/ViridianForest.asm"
+	
+INCLUDE "mapHeaders/SSAnne1.asm"
 
 SSAnne1Script: ; 61265 (18:5265)
 	call EnableAutoTextBoxDrawing
@@ -95958,51 +81443,13 @@ SSAnne1Text1: ; 6126d (18:526d)
 SSAnne1Text2: ; 61272 (18:5272)
 	TX_FAR _SSAnne1Text2
 	db "@"
-
-SSAnne1Object: ; 0x61277 (size=104)
-	db $c ; border tile
-
-	db $b ; warps
-	db $0, $1a, $1, VERMILION_DOCK
-	db $0, $1b, $1, VERMILION_DOCK
-	db $8, $1f, $0, SS_ANNE_8
-	db $8, $17, $1, SS_ANNE_8
-	db $8, $13, $2, SS_ANNE_8
-	db $8, $f, $3, SS_ANNE_8
-	db $8, $b, $4, SS_ANNE_8
-	db $8, $7, $5, SS_ANNE_8
-	db $6, $2, $6, SS_ANNE_2
-	db $f, $25, $5, SS_ANNE_4
-	db $10, $3, $0, SS_ANNE_6
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_WAITER, $6 + 4, $c + 4, $fe, $2, $1 ; person
-	db SPRITE_SAILOR, $5 + 4, $1b + 4, $ff, $ff, $2 ; person
-
-	; warp-to
-	EVENT_DISP $14, $0, $1a ; VERMILION_DOCK
-	EVENT_DISP $14, $0, $1b ; VERMILION_DOCK
-	EVENT_DISP $14, $8, $1f ; SS_ANNE_8
-	EVENT_DISP $14, $8, $17 ; SS_ANNE_8
-	EVENT_DISP $14, $8, $13 ; SS_ANNE_8
-	EVENT_DISP $14, $8, $f ; SS_ANNE_8
-	EVENT_DISP $14, $8, $b ; SS_ANNE_8
-	EVENT_DISP $14, $8, $7 ; SS_ANNE_8
-	EVENT_DISP $14, $6, $2 ; SS_ANNE_2
-	EVENT_DISP $14, $f, $25 ; SS_ANNE_4
-	EVENT_DISP $14, $10, $3 ; SS_ANNE_6
+	
+INCLUDE "mapObjects/SSAnne1.asm"
 
 SSAnne1Blocks: ; 612df (18:52df)
 	INCBIN "maps/ssanne1.blk"
-
-SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
-	db $0d ; tileset
-	db SS_ANNE_2_HEIGHT, SS_ANNE_2_WIDTH ; dimensions (y, x)
-	dw SSAnne2Blocks, SSAnne2TextPointers, SSAnne2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne2Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne2.asm"
 
 SSAnne2Script: ; 6139f (18:539f)
 	call EnableAutoTextBoxDrawing
@@ -96214,86 +81661,26 @@ SSAnneRivalWonText: ; 6150a (18:550a)
 SSAnne2Text3: ; 6150f (18:550f)
 	TX_FAR _SSAnneRivalCaptainText
 	db "@"
-
-SSAnne2Object: ; 0x61514 (size=90)
-	db $c ; border tile
-
-	db $9 ; warps
-	db $b, $9, $0, SS_ANNE_9
-	db $b, $d, $2, SS_ANNE_9
-	db $b, $11, $4, SS_ANNE_9
-	db $b, $15, $6, SS_ANNE_9
-	db $b, $19, $8, SS_ANNE_9
-	db $b, $1d, $a, SS_ANNE_9
-	db $4, $2, $8, SS_ANNE_1
-	db $c, $2, $1, SS_ANNE_3
-	db $4, $24, $0, SS_ANNE_7
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_WAITER, $7 + 4, $3 + 4, $fe, $1, $1 ; person
-	db SPRITE_BLUE, $4 + 4, $24 + 4, $ff, $d0, $42, SONY1 + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $14, $b, $9 ; SS_ANNE_9
-	EVENT_DISP $14, $b, $d ; SS_ANNE_9
-	EVENT_DISP $14, $b, $11 ; SS_ANNE_9
-	EVENT_DISP $14, $b, $15 ; SS_ANNE_9
-	EVENT_DISP $14, $b, $19 ; SS_ANNE_9
-	EVENT_DISP $14, $b, $1d ; SS_ANNE_9
-	EVENT_DISP $14, $4, $2 ; SS_ANNE_1
-	EVENT_DISP $14, $c, $2 ; SS_ANNE_3
-	EVENT_DISP $14, $4, $24 ; SS_ANNE_7
+	
+INCLUDE "mapObjects/SSAnne2.asm"
 
 SSAnne2Blocks: ; 6156e (18:556e)
 	INCBIN "maps/ssanne2.blk"
-
-SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
-	db $0d ; tileset
-	db SS_ANNE_4_HEIGHT, SS_ANNE_4_WIDTH ; dimensions (y, x)
-	dw SSAnne4Blocks, SSAnne4TextPointers, SSAnne4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne4Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne4.asm"
 
 SSAnne4Script: ; 6162e (18:562e)
 	jp EnableAutoTextBoxDrawing
 
 SSAnne4TextPointers: ; 61631 (18:5631)
 	db "@"
-
-SSAnne4Object: ; 0x61632 (size=52)
-	db $c ; border tile
-
-	db $6 ; warps
-	db $3, $17, $8, SS_ANNE_10
-	db $3, $13, $6, SS_ANNE_10
-	db $3, $f, $4, SS_ANNE_10
-	db $3, $b, $2, SS_ANNE_10
-	db $3, $7, $0, SS_ANNE_10
-	db $5, $1b, $9, SS_ANNE_1
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $f, $3, $17 ; SS_ANNE_10
-	EVENT_DISP $f, $3, $13 ; SS_ANNE_10
-	EVENT_DISP $f, $3, $f ; SS_ANNE_10
-	EVENT_DISP $f, $3, $b ; SS_ANNE_10
-	EVENT_DISP $f, $3, $7 ; SS_ANNE_10
-	EVENT_DISP $f, $5, $1b ; SS_ANNE_1
+	
+INCLUDE "mapObjects/SSAnne4.asm"
 
 SSAnne4Blocks: ; 61666 (18:5666)
 	INCBIN "maps/ssanne4.blk"
-
-SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
-	db $0d ; tileset
-	db SS_ANNE_5_HEIGHT, SS_ANNE_5_WIDTH ; dimensions (y, x)
-	dw SSAnne5Blocks, SSAnne5TextPointers, SSAnne5Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne5Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne5.asm"
 
 SSAnne5Script: ; 616ae (18:56ae)
 	call EnableAutoTextBoxDrawing
@@ -96384,36 +81771,13 @@ SSAnneEndBattleText2: ; 61721 (18:5721)
 SSAnneAfterBattleText2: ; 61726 (18:5726)
 	TX_FAR _SSAnneAfterBattleText2
 	db "@"
-
-SSAnne5Object: ; 0x6172b (size=54)
-	db $23 ; border tile
-
-	db $2 ; warps
-	db $6, $d, $0, SS_ANNE_3
-	db $7, $d, $0, SS_ANNE_3
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $5 + 4, $ff, $d1, $1 ; person
-	db SPRITE_SAILOR, $9 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $b + 4, $7 + 4, $ff, $ff, $3 ; person
-	db SPRITE_SAILOR, $4 + 4, $4 + 4, $ff, $d0, $44, SAILOR + $C8, $1 ; trainer
-	db SPRITE_SAILOR, $8 + 4, $a + 4, $ff, $d1, $45, SAILOR + $C8, $2 ; trainer
-
-	; warp-to
-	EVENT_DISP $a, $6, $d ; SS_ANNE_3
-	EVENT_DISP $a, $7, $d ; SS_ANNE_3
+	
+INCLUDE "mapObjects/SSAnne5.asm"
 
 SSAnne5Blocks: ; 61761 (18:5761)
 	INCBIN "maps/ssanne5.blk"
-
-SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
-	db $0d ; tileset
-	db SS_ANNE_6_HEIGHT, SS_ANNE_6_WIDTH ; dimensions (y, x)
-	dw SSAnne6Blocks, SSAnne6TextPointers, SSAnne6Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne6Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne6.asm"
 
 SSAnne6Script: ; 617b3 (18:57b3)
 	call EnableAutoTextBoxDrawing
@@ -96487,36 +81851,13 @@ UnnamedText_61811: ; 61811 (18:5811)
 UnnamedText_61816: ; 61816 (18:5816)
 	TX_FAR _UnnamedText_61816
 	db "@"
-
-SSAnne6Object: ; 0x6181b (size=54)
-	db $c ; border tile
-
-	db $1 ; warps
-	db $0, $6, $a, SS_ANNE_1
-
-	db $0 ; signs
-
-	db $7 ; people
-	db SPRITE_COOK, $8 + 4, $1 + 4, $fe, $1, $1 ; person
-	db SPRITE_COOK, $8 + 4, $5 + 4, $fe, $1, $2 ; person
-	db SPRITE_COOK, $7 + 4, $9 + 4, $fe, $1, $3 ; person
-	db SPRITE_COOK, $6 + 4, $d + 4, $ff, $ff, $4 ; person
-	db SPRITE_COOK, $8 + 4, $d + 4, $ff, $ff, $5 ; person
-	db SPRITE_COOK, $a + 4, $d + 4, $ff, $ff, $6 ; person
-	db SPRITE_COOK, $d + 4, $b + 4, $ff, $d1, $7 ; person
-
-	; warp-to
-	EVENT_DISP $7, $0, $6 ; SS_ANNE_1
+	
+INCLUDE "mapObjects/SSAnne6.asm"
 
 SSAnne6Blocks: ; 61851 (18:5851)
 	INCBIN "maps/ssanne6.blk"
-
-SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
-	db $0d ; tileset
-	db SS_ANNE_7_HEIGHT, SS_ANNE_7_WIDTH ; dimensions (y, x)
-	dw SSAnne7Blocks, SSAnne7TextPointers, SSAnne7Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne7Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne7.asm"
 
 SSAnne7Script: ; 61895 (18:5895)
 	call SSAnne7Script_6189b
@@ -96614,32 +81955,13 @@ SSAnne7Text2: ; 6193c (18:593c)
 SSAnne7Text3: ; 61941 (18:5941)
 	TX_FAR _SSAnne7Text3
 	db "@"
-
-SSAnne7Object: ; 0x61946 (size=24)
-	db $c ; border tile
-
-	db $1 ; warps
-	db $7, $0, $8, SS_ANNE_2
-
-	db $2 ; signs
-	db $1, $4, $2 ; SSAnne7Text2
-	db $2, $1, $3 ; SSAnne7Text3
-
-	db $1 ; people
-	db SPRITE_SS_CAPTAIN, $2 + 4, $4 + 4, $ff, $d1, $1 ; person
-
-	; warp-to
-	EVENT_DISP $3, $7, $0 ; SS_ANNE_2
+	
+INCLUDE "mapObjects/SSAnne7.asm"
 
 SSAnne7Blocks: ; 6195e (18:595e)
 	INCBIN "maps/ssanne7.blk"
-
-SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
-	db $0d ; tileset
-	db SS_ANNE_8_HEIGHT, SS_ANNE_8_WIDTH ; dimensions (y, x)
-	dw SSAnne8Blocks, SSAnne8TextPointers, SSAnne8Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne8Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne8.asm"
 
 SSAnne8Script: ; 61976 (18:5976)
 	call EnableAutoTextBoxDrawing
@@ -96805,50 +82127,13 @@ SSAnne8Text9: ; 61a56 (18:5a56)
 SSAnne8Text11: ; 61a5b (18:5a5b)
 	TX_FAR _SSAnne8Text11
 	db "@"
-
-SSAnne8Object: ; 0x61a60 (size=127)
-	db $c ; border tile
-
-	db $6 ; warps
-	db $0, $0, $2, SS_ANNE_1
-	db $0, $a, $3, SS_ANNE_1
-	db $0, $14, $4, SS_ANNE_1
-	db $a, $0, $5, SS_ANNE_1
-	db $a, $a, $6, SS_ANNE_1
-	db $a, $14, $7, SS_ANNE_1
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d2, $41, GENTLEMAN + $C8, $1 ; trainer
-	db SPRITE_GENTLEMAN, $4 + 4, $b + 4, $ff, $d1, $42, GENTLEMAN + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $e + 4, $b + 4, $ff, $d1, $43, YOUNGSTER + $C8, $8 ; trainer
-	db SPRITE_LASS, $b + 4, $d + 4, $ff, $d2, $44, LASS + $C8, $b ; trainer
-	db SPRITE_GIRL, $3 + 4, $16 + 4, $fe, $1, $5 ; person
-	db SPRITE_FAT_BALD_GUY, $e + 4, $0 + 4, $ff, $ff, $6 ; person
-	db SPRITE_LITTLE_GIRL, $b + 4, $2 + 4, $ff, $d0, $7 ; person
-	db SPRITE_CLEFAIRY, $b + 4, $3 + 4, $ff, $d0, $8 ; person
-	db SPRITE_GIRL, $d + 4, $a + 4, $ff, $d3, $9 ; person
-	db SPRITE_BALL, $f + 4, $c + 4, $ff, $ff, $8a, TM_08 ; item
-	db SPRITE_GENTLEMAN, $d + 4, $15 + 4, $fe, $2, $b ; person
-
-	; warp-to
-	EVENT_DISP $c, $0, $0 ; SS_ANNE_1
-	EVENT_DISP $c, $0, $a ; SS_ANNE_1
-	EVENT_DISP $c, $0, $14 ; SS_ANNE_1
-	EVENT_DISP $c, $a, $0 ; SS_ANNE_1
-	EVENT_DISP $c, $a, $a ; SS_ANNE_1
-	EVENT_DISP $c, $a, $14 ; SS_ANNE_1
+	
+INCLUDE "mapObjects/SSAnne8.asm"
 
 SSAnne8Blocks: ; 61adf (18:5adf)
 	INCBIN "maps/ssanne8.blk"
-
-SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
-	db $0d ; tileset
-	db SS_ANNE_9_HEIGHT, SS_ANNE_9_WIDTH ; dimensions (y, x)
-	dw SSAnne9Blocks, SSAnne9TextPointers, SSAnne9Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne9Object ; objects
+	
+INCLUDE "mapHeaders/SSAnne9.asm"
 
 SSAnne9Script: ; 61b4b (18:5b4b)
 	ld a, $1
@@ -97066,61 +82351,10 @@ SSAnne9EndBattleText4: ; 61c83 (18:5c83)
 SSAnne9AfterBattleText4: ; 61c88 (18:5c88)
 	TX_FAR _SSAnne9AfterBattleText4
 	db "@"
-
-SSAnne9Object: ; 0x61c8d (size=188)
-	db $c ; border tile
-
-	db $c ; warps
-	db $5, $2, $0, SS_ANNE_2
-	db $5, $3, $0, SS_ANNE_2
-	db $5, $c, $1, SS_ANNE_2
-	db $5, $d, $1, SS_ANNE_2
-	db $5, $16, $2, SS_ANNE_2
-	db $5, $17, $2, SS_ANNE_2
-	db $f, $2, $3, SS_ANNE_2
-	db $f, $3, $3, SS_ANNE_2
-	db $f, $c, $4, SS_ANNE_2
-	db $f, $d, $4, SS_ANNE_2
-	db $f, $16, $5, SS_ANNE_2
-	db $f, $17, $5, SS_ANNE_2
-
-	db $0 ; signs
-
-	db $d ; people
-	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, $41, GENTLEMAN + $C8, $3 ; trainer
-	db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, $42, FISHER + $C8, $1 ; trainer
-	db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, $43, GENTLEMAN + $C8, $5 ; trainer
-	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, $44, LASS + $C8, $c ; trainer
-	db SPRITE_GENTLEMAN, $2 + 4, $1 + 4, $ff, $d0, $5 ; person
-	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $86, MAX_ETHER ; item
-	db SPRITE_GENTLEMAN, $2 + 4, $15 + 4, $ff, $d0, $7 ; person
-	db SPRITE_OLD_PERSON, $1 + 4, $16 + 4, $ff, $d0, $8 ; person
-	db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, $89, RARE_CANDY ; item
-	db SPRITE_GENTLEMAN, $c + 4, $c + 4, $ff, $d0, $a ; person
-	db SPRITE_YOUNG_BOY, $e + 4, $b + 4, $ff, $ff, $b ; person
-	db SPRITE_BRUNETTE_GIRL, $c + 4, $16 + 4, $ff, $d2, $c ; person
-	db SPRITE_FOULARD_WOMAN, $c + 4, $14 + 4, $ff, $d3, $d ; person
-
-	; warp-to
-	EVENT_DISP $c, $5, $2 ; SS_ANNE_2
-	EVENT_DISP $c, $5, $3 ; SS_ANNE_2
-	EVENT_DISP $c, $5, $c ; SS_ANNE_2
-	EVENT_DISP $c, $5, $d ; SS_ANNE_2
-	EVENT_DISP $c, $5, $16 ; SS_ANNE_2
-	EVENT_DISP $c, $5, $17 ; SS_ANNE_2
-	EVENT_DISP $c, $f, $2 ; SS_ANNE_2
-	EVENT_DISP $c, $f, $3 ; SS_ANNE_2
-	EVENT_DISP $c, $f, $c ; SS_ANNE_2
-	EVENT_DISP $c, $f, $d ; SS_ANNE_2
-	EVENT_DISP $c, $f, $16 ; SS_ANNE_2
-	EVENT_DISP $c, $f, $17 ; SS_ANNE_2
-
-SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
-	db $0d ; tileset
-	db SS_ANNE_10_HEIGHT, SS_ANNE_10_WIDTH ; dimensions (y, x)
-	dw SSAnne10Blocks, SSAnne10TextPointers, SSAnne10Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SSAnne10Object ; objects
+	
+INCLUDE "mapObjects/SSAnne9.asm"
+	
+INCLUDE "mapHeaders/SSAnne10.asm"
 
 SSAnne10Script: ; 61d55 (18:5d55)
 	call EnableAutoTextBoxDrawing
@@ -97324,142 +82558,43 @@ SSAnne10AfterBattleText6: ; 61e6b (18:5e6b)
 SSAnne10Text7: ; 61e70 (18:5e70)
 	TX_FAR _SSAnne10Text7
 	db "@"
-
-SSAnne10Object: ; 0x61e75 (size=165)
-	db $c ; border tile
-
-	db $a ; warps
-	db $5, $2, $4, SS_ANNE_4
-	db $5, $3, $4, SS_ANNE_4
-	db $5, $c, $3, SS_ANNE_4
-	db $5, $d, $3, SS_ANNE_4
-	db $5, $16, $2, SS_ANNE_4
-	db $5, $17, $2, SS_ANNE_4
-	db $f, $2, $1, SS_ANNE_4
-	db $f, $3, $1, SS_ANNE_4
-	db $f, $c, $0, SS_ANNE_4
-	db $f, $d, $0, SS_ANNE_4
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_SAILOR, $d + 4, $0 + 4, $ff, $d0, $41, SAILOR + $C8, $3 ; trainer
-	db SPRITE_SAILOR, $b + 4, $2 + 4, $ff, $d0, $42, SAILOR + $C8, $4 ; trainer
-	db SPRITE_SAILOR, $3 + 4, $c + 4, $ff, $d2, $43, SAILOR + $C8, $5 ; trainer
-	db SPRITE_SAILOR, $2 + 4, $16 + 4, $ff, $d0, $44, SAILOR + $C8, $6 ; trainer
-	db SPRITE_SAILOR, $2 + 4, $0 + 4, $ff, $d3, $45, SAILOR + $C8, $7 ; trainer
-	db SPRITE_FISHER2, $4 + 4, $0 + 4, $ff, $d3, $46, FISHER + $C8, $2 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $a + 4, $ff, $d3, $7 ; person
-	db SPRITE_SLOWBRO, $c + 4, $b + 4, $ff, $ff, $8 ; person
-	db SPRITE_BALL, $2 + 4, $14 + 4, $ff, $ff, $89, ETHER ; item
-	db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, $8a, TM_44 ; item
-	db SPRITE_BALL, $b + 4, $c + 4, $ff, $ff, $8b, MAX_POTION ; item
-
-	; warp-to
-	EVENT_DISP $c, $5, $2 ; SS_ANNE_4
-	EVENT_DISP $c, $5, $3 ; SS_ANNE_4
-	EVENT_DISP $c, $5, $c ; SS_ANNE_4
-	EVENT_DISP $c, $5, $d ; SS_ANNE_4
-	EVENT_DISP $c, $5, $16 ; SS_ANNE_4
-	EVENT_DISP $c, $5, $17 ; SS_ANNE_4
-	EVENT_DISP $c, $f, $2 ; SS_ANNE_4
-	EVENT_DISP $c, $f, $3 ; SS_ANNE_4
-	EVENT_DISP $c, $f, $c ; SS_ANNE_4
-	EVENT_DISP $c, $f, $d ; SS_ANNE_4
-
-UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
-	db $0b ; tileset
-	db UNDERGROUND_PATH_NS_HEIGHT, UNDERGROUND_PATH_NS_WIDTH ; dimensions (y, x)
-	dw UndergroundPathNSBlocks, UndergroundPathNSTextPointers, UndergroundPathNSScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundPathNSObject ; objects
+	
+INCLUDE "mapObjects/SSAnne10.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathNS.asm"
 
 UndergroundPathNSScript: ; 61f26 (18:5f26)
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathNSTextPointers: ; 61f29 (18:5f29)
 	db "@"
-
-UndergroundPathNSObject: ; 0x61f2a (size=20)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $4, $5, $2, PATH_ENTRANCE_ROUTE_5
-	db $29, $2, $2, PATH_ENTRANCE_ROUTE_6
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $4, $4, $5 ; PATH_ENTRANCE_ROUTE_5
-	EVENT_DISP $4, $29, $2 ; PATH_ENTRANCE_ROUTE_6
-
-UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
-	db $0b ; tileset
-	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
-	dw UndergroundPathWEBlocks, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw UndergroundPathWEObject ; objects
+	
+INCLUDE "mapObjects/UndergroundPathNS.asm"
+	
+INCLUDE "mapHeaders/UndergroundPathWE.asm"
 
 UndergroundPathWEScript: ; 61f4a (18:5f4a)
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathWETextPointers: ; 61f4d (18:5f4d)
 	db "@"
-
-UndergroundPathWEObject: ; 0x61f4e (size=20)
-	db $1 ; border tile
-
-	db $2 ; warps
-	db $5, $2, $2, PATH_ENTRANCE_ROUTE_7
-	db $2, $2f, $2, PATH_ENTRANCE_ROUTE_8
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $19, $5, $2 ; PATH_ENTRANCE_ROUTE_7
-	EVENT_DISP $19, $2, $2f ; PATH_ENTRANCE_ROUTE_8
-
-DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
-	db $11 ; tileset
-	db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
-	dw DiglettsCaveBlocks, DiglettsCaveTextPointers, DiglettsCaveScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw DiglettsCaveObject ; objects
+	
+INCLUDE "mapObjects/UndergroundPathWE.asm"
+	
+INCLUDE "mapHeaders/DiglettsCave.asm"
 
 DiglettsCaveScript: ; 61f6e (18:5f6e)
 	jp EnableAutoTextBoxDrawing
 
 DiglettsCaveTextPointers: ; 61f71 (18:5f71)
 	db "@"
-
-DiglettsCaveObject: ; 0x61f72 (size=20)
-	db $19 ; border tile
-
-	db $2 ; warps
-	db $5, $5, $2, DIGLETTS_CAVE_EXIT
-	db $1f, $25, $2, DIGLETTS_CAVE_ENTRANCE
-
-	db $0 ; signs
-
-	db $0 ; people
-
-	; warp-to
-	EVENT_DISP $14, $5, $5 ; DIGLETTS_CAVE_EXIT
-	EVENT_DISP $14, $1f, $25 ; DIGLETTS_CAVE_ENTRANCE
+	
+INCLUDE "mapObjects/DiglettsCave.asm"
 
 DiglettsCaveBlocks: ; 61f86 (18:5f86)
 	INCBIN "maps/diglettscave.blk"
-
-SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
-	db $10 ; tileset
-	db SILPH_CO_11F_HEIGHT, SILPH_CO_11F_WIDTH ; dimensions (y, x)
-	dw SilphCo11Blocks, SilphCo11TextPointers, SilphCo11Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw SilphCo11Object ; objects
+	
+INCLUDE "mapHeaders/SilphCo11.asm"
 
 SilphCo11Script: ; 620fa (18:60fa)
 	call SilphCo11Script_62110
@@ -97830,30 +82965,8 @@ UnnamedText_6236c: ; 6236c (18:636c)
 UnnamedText_6237b: ; 6237b (18:637b)
 	TX_FAR _UnnamedText_6237b
 	db "@"
-
-SilphCo11Object: ; 0x62380 (size=72)
-	db $d ; border tile
-
-	db $4 ; warps
-	db $0, $9, $1, SILPH_CO_10F
-	db $0, $d, $0, SILPH_CO_ELEVATOR
-	db $5, $5, $9, $ff
-	db $2, $3, $3, SILPH_CO_7F
-
-	db $0 ; signs
-
-	db $5 ; people
-	db SPRITE_MR_MASTERBALL, $5 + 4, $7 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $a + 4, $ff, $d0, $2 ; person
-	db SPRITE_GIOVANNI, $9 + 4, $6 + 4, $ff, $d0, $43, GIOVANNI + $C8, $2 ; trainer
-	db SPRITE_ROCKET, $10 + 4, $3 + 4, $ff, $d1, $44, ROCKET + $C8, $29 ; trainer
-	db SPRITE_ROCKET, $9 + 4, $f + 4, $ff, $d1, $45, ROCKET + $C8, $28 ; trainer
-
-	; warp-to
-	EVENT_DISP $9, $0, $9 ; SILPH_CO_10F
-	EVENT_DISP $9, $0, $d ; SILPH_CO_ELEVATOR
-	EVENT_DISP $9, $5, $5
-	EVENT_DISP $9, $2, $3 ; SILPH_CO_7F
+	
+INCLUDE "mapObjects/SilphCo11.asm"
 
 SilphCo11Blocks: ; 623c8 (18:63c8)
 	INCBIN "maps/silphco11.blk"
@@ -102895,15 +88008,14 @@ SuperPalettes: ; 72660 (1c:6660)
 	RGB 20,26,31
 	RGB 17,23,10
 	RGB 3,2,2
-IF _RED
+
 	RGB 31,29,31 ; PAL_LOGO1
 	RGB 30,30,17
+IF _RED
 	RGB 17,23,10
 	RGB 21,0,4
 ENDC
 IF _BLUE
-	RGB 31,29,31 ; PAL_LOGO1
-	RGB 30,30,17
 	RGB 21,0,4
 	RGB 14,19,29
 ENDC
@@ -103059,14 +88171,13 @@ ENDC
 
 	ds $18
 
-IF _RED
 	RGB 30,29,29 ; PAL_SGB3
+IF _RED
 	RGB 31,31,17
 	RGB 18,21,29
 	RGB 15,15,15
 ENDC
 IF _BLUE
-	RGB 30,29,29 ; PAL_SGB3
 	RGB 12,15,11
 	RGB 5,9,20
 	RGB 14,22,17
@@ -104440,13 +89551,8 @@ Func_74872: ; 74872 (1d:4872)
 	call Predef
 	call GBFadeOut1
 	ret
-
-ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
-	db $07 ; tileset
-	db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
-	dw ViridianGymBlocks, ViridianGymTextPointers, ViridianGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw ViridianGymObject ; objects
+	
+INCLUDE "mapHeaders/ViridianGym.asm"
 
 ViridianGymScript: ; 748a3 (1d:48a3)
 	ld hl, Gym8CityName
@@ -104959,42 +90065,13 @@ UnnamedText_74bd4: ; 74bd4 (1d:4bd4)
 UnnamedText_74bd9: ; 74bd9 (1d:4bd9)
 	TX_FAR _UnnamedText_74bd9
 	db "@"
-
-ViridianGymObject: ; 0x74bde (size=105)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $11, $10, $4, $ff
-	db $11, $11, $4, $ff
-
-	db $0 ; signs
-
-	db $b ; people
-	db SPRITE_GIOVANNI, $1 + 4, $2 + 4, $ff, $d0, $41, GIOVANNI + $C8, $3 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $c + 4, $ff, $d0, $42, COOLTRAINER_M + $C8, $9 ; trainer
-	db SPRITE_HIKER, $b + 4, $b + 4, $ff, $d1, $43, BLACKBELT + $C8, $6 ; trainer
-	db SPRITE_ROCKER, $7 + 4, $a + 4, $ff, $d0, $44, TAMER + $C8, $3 ; trainer
-	db SPRITE_HIKER, $7 + 4, $3 + 4, $ff, $d2, $45, BLACKBELT + $C8, $7 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $d + 4, $ff, $d3, $46, COOLTRAINER_M + $C8, $a ; trainer
-	db SPRITE_HIKER, $1 + 4, $a + 4, $ff, $d0, $47, BLACKBELT + $C8, $8 ; trainer
-	db SPRITE_ROCKER, $10 + 4, $2 + 4, $ff, $d3, $48, TAMER + $C8, $4 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $6 + 4, $ff, $d0, $49, COOLTRAINER_M + $C8, $1 ; trainer
-	db SPRITE_GYM_HELPER, $f + 4, $10 + 4, $ff, $d0, $a ; person
-	db SPRITE_BALL, $9 + 4, $10 + 4, $ff, $ff, $8b, REVIVE ; item
-
-	; warp-to
-	EVENT_DISP $a, $11, $10
-	EVENT_DISP $a, $11, $11
+	
+INCLUDE "mapObjects/ViridianGym.asm"
 
 ViridianGymBlocks: ; 74c47 (1d:4c47)
 	INCBIN "maps/viridiangym.blk"
-
-PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
-	db $02 ; tileset
-	db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
-	dw PewterMartBlocks, PewterMartTextPointers, PewterMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw PewterMartObject ; objects
+	
+INCLUDE "mapHeaders/PewterMart.asm"
 
 PewterMartScript: ; 74cad (1d:4cad)
 	call EnableAutoTextBoxDrawing
@@ -105026,31 +90103,10 @@ PewterMartText3: ; 74ccb (1d:4ccb)
 UnnamedText_74cd5: ; 74cd5 (1d:4cd5)
 	TX_FAR _UnnamedText_74cd5
 	db "@"
-
-PewterMartObject: ; 0x74cda (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BUG_CATCHER, $3 + 4, $3 + 4, $fe, $1, $2 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
-	db $11 ; tileset
-	db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
-	dw UnknownDungeon1Blocks, UnknownDungeon1TextPointers, UnknownDungeon1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw UnknownDungeon1Object ; objects
+	
+INCLUDE "mapObjects/PewterMart.asm"
+	
+INCLUDE "mapHeaders/UnknownDungeon1.asm"
 
 UnknownDungeon1Script: ; 74d0c (1d:4d0c)
 	jp EnableAutoTextBoxDrawing
@@ -105059,48 +90115,13 @@ UnknownDungeon1TextPointers: ; 74d0f (1d:4d0f)
 	dw Predef5CText
 	dw Predef5CText
 	dw Predef5CText
-
-UnknownDungeon1Object: ; 0x74d15 (size=97)
-	db $7d ; border tile
-
-	db $9 ; warps
-	db $11, $18, $6, $ff
-	db $11, $19, $6, $ff
-	db $1, $1b, $0, UNKNOWN_DUNGEON_2
-	db $7, $17, $1, UNKNOWN_DUNGEON_2
-	db $9, $12, $2, UNKNOWN_DUNGEON_2
-	db $1, $7, $3, UNKNOWN_DUNGEON_2
-	db $3, $1, $4, UNKNOWN_DUNGEON_2
-	db $b, $3, $5, UNKNOWN_DUNGEON_2
-	db $6, $0, $0, UNKNOWN_DUNGEON_3
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BALL, $d + 4, $7 + 4, $ff, $ff, $81, FULL_RESTORE ; item
-	db SPRITE_BALL, $3 + 4, $13 + 4, $ff, $ff, $82, MAX_ELIXER ; item
-	db SPRITE_BALL, $0 + 4, $5 + 4, $ff, $ff, $83, NUGGET ; item
-
-	; warp-to
-	EVENT_DISP $f, $11, $18
-	EVENT_DISP $f, $11, $19
-	EVENT_DISP $f, $1, $1b ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $7, $17 ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $9, $12 ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $1, $7 ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $3, $1 ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $b, $3 ; UNKNOWN_DUNGEON_2
-	EVENT_DISP $f, $6, $0 ; UNKNOWN_DUNGEON_3
+	
+INCLUDE "mapObjects/UnknownDungeon1.asm"
 
 UnknownDungeon1Blocks: ; 74d76 (1d:4d76)
 	INCBIN "maps/unknowndungeon1.blk"
-
-CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
-	db $0d ; tileset
-	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw CeruleanHouse2Blocks, CeruleanHouse2TextPointers, CeruleanHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CeruleanHouse2Object ; objects
+	
+INCLUDE "mapHeaders/CeruleanHouse2.asm"
 
 CeruleanHouse2Script: ; 74e09 (1d:4e09)
 	ld a, $1
@@ -105211,24 +90232,8 @@ UnnamedText_74eb4: ; 74eb4 (1d:4eb4)
 UnnamedText_74eb9: ; 74eb9 (1d:4eb9)
 	TX_FAR _UnnamedText_74eb9
 	db "@"
-
-CeruleanHouse2Object: ; 0x74ebe (size=34)
-	db $c ; border tile
-
-	db $3 ; warps
-	db $0, $2, $9, $ff
-	db $7, $2, $8, $ff
-	db $7, $3, $8, $ff
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_FAT_BALD_GUY, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
-
-	; warp-to
-	EVENT_DISP $4, $0, $2
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
+	
+INCLUDE "mapObjects/CeruleanHouse2.asm"
 
 VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText1
@@ -105368,13 +90373,8 @@ VendingPrices: ; 75000 (1d:5000)
 	db FRESH_WATER,$00,$02,$00
 	db SODA_POP,   $00,$03,$00
 	db LEMONADE,   $00,$03,$50
-
-FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
-	db $08 ; tileset
-	db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
-	dw FuchsiaHouse1Blocks, FuchsiaHouse1TextPointers, FuchsiaHouse1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaHouse1Object ; objects
+	
+INCLUDE "mapHeaders/FuchsiaHouse1.asm"
 
 FuchsiaHouse1Script: ; 75018 (1d:5018)
 	call EnableAutoTextBoxDrawing
@@ -105396,31 +90396,10 @@ FuchsiaHouse1Text2: ; 75027 (1d:5027)
 FuchsiaHouse1Text3: ; 7502c (1d:502c)
 	TX_FAR _FuchsiaHouse1Text3
 	db "@"
-
-FuchsiaHouse1Object: ; 0x75031 (size=38)
-	db $a ; border tile
-
-	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MOM_GEISHA, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_GAMBLER, $2 + 4, $7 + 4, $ff, $d1, $2 ; person
-	db SPRITE_BUG_CATCHER, $5 + 4, $5 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-
-FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
-	db $06 ; tileset
-	db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
-	dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTextPointers, FuchsiaPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaPokecenterObject ; objects
+	
+INCLUDE "mapObjects/FuchsiaHouse1.asm"
+	
+INCLUDE "mapHeaders/FuchsiaPokecenter.asm"
 
 FuchsiaPokecenterScript: ; 75063 (1d:5063)
 	call Func_22fa
@@ -105445,32 +90424,10 @@ FuchsiaPokecenterText3: ; 75077 (1d:5077)
 
 FuchsiaPokecenterText4: ; 7507c (1d:507c)
 	db $f6
-
-FuchsiaPokecenterObject: ; 0x7507d (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $2, $ff
-	db $7, $4, $2, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKER, $3 + 4, $2 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LASS, $5 + 4, $6 + 4, $fe, $2, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
-	db $14 ; tileset
-	db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
-	dw FuchsiaHouse2Blocks, FuchsiaHouse2TextPointers, FuchsiaHouse2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaHouse2Object ; objects
+	
+INCLUDE "mapObjects/FuchsiaPokecenter.asm"
+	
+INCLUDE "mapHeaders/FuchsiaHouse2.asm"
 
 FuchsiaHouse2Script: ; 750b5 (1d:50b5)
 	jp EnableAutoTextBoxDrawing
@@ -105590,36 +90547,13 @@ UnnamedText_75176: ; 75176 (1d:5176)
 UnnamedText_7517b: ; 7517b (1d:517b)
 	TX_FAR _UnnamedText_7517b
 	db "@"
-
-FuchsiaHouse2Object: ; 0x75180 (size=45)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $4, $3, $ff
-	db $7, $5, $3, $ff
-
-	db $2 ; signs
-	db $3, $4, $4 ; FuchsiaHouse2Text4
-	db $3, $5, $5 ; FuchsiaHouse2Text5
-
-	db $3 ; people
-	db SPRITE_WARDEN, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $82, RARE_CANDY ; item
-	db SPRITE_BOULDER, $4 + 4, $8 + 4, $ff, $10, $3 ; person
-
-	; warp-to
-	EVENT_DISP $5, $7, $4
-	EVENT_DISP $5, $7, $5
+	
+INCLUDE "mapObjects/FuchsiaHouse2.asm"
 
 FuchsiaHouse2Blocks: ; 751ad (1d:51ad)
 	INCBIN "maps/fuchsiahouse2.blk"
-
-SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
-	db $0c ; tileset
-	db SAFARIZONEENTRANCE_HEIGHT, SAFARIZONEENTRANCE_WIDTH ; dimensions (y, x)
-	dw SafariZoneEntranceBlocks, SafariZoneEntranceTextPointers, SafariZoneEntranceScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw SafariZoneEntranceObject ; objects
+	
+INCLUDE "mapHeaders/SafariZoneEntrance.asm"
 
 SafariZoneEntranceScript: ; 751cd (1d:51cd)
 	call EnableAutoTextBoxDrawing
@@ -105921,37 +90855,13 @@ UnnamedText_753eb: ; 753eb (1d:53eb)
 UnnamedText_753f0: ; 753f0 (1d:53f0)
 	TX_FAR _UnnamedText_753f0
 	db "@"
-
-SafariZoneEntranceObject: ; 0x753f5 (size=48)
-	db $a ; border tile
-
-	db $4 ; warps
-	db $5, $3, $4, $ff
-	db $5, $4, $4, $ff
-	db $0, $3, $0, SAFARI_ZONE_CENTER
-	db $0, $4, $1, SAFARI_ZONE_CENTER
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_WHITE_PLAYER, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
-	db SPRITE_WHITE_PLAYER, $4 + 4, $1 + 4, $ff, $d3, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $5, $3
-	EVENT_DISP $4, $5, $4
-	EVENT_DISP $4, $0, $3 ; SAFARI_ZONE_CENTER
-	EVENT_DISP $4, $0, $4 ; SAFARI_ZONE_CENTER
+	
+INCLUDE "mapObjects/SafariZoneEntrance.asm"
 
 SafariZoneEntranceBlocks: ; 75425 (1d:5425)
 	INCBIN "maps/safarizoneentrance.blk"
-
-FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
-	db $07 ; tileset
-	db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
-	dw FuchsiaGymBlocks, FuchsiaGymTextPointers, FuchsiaGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaGymObject ; objects
+	
+INCLUDE "mapHeaders/FuchsiaGym.asm"
 
 FuchsiaGymScript: ; 7543d (1d:543d)
 	call FuchsiaGymScript_75453
@@ -106286,39 +91196,13 @@ UnnamedText_7564e: ; 7564e (1d:564e)
 UnnamedText_75653: ; 75653 (1d:5653)
 	TX_FAR _UnnamedText_75653
 	db "@"
-
-FuchsiaGymObject: ; 0x75658 (size=82)
-	db $3 ; border tile
-
-	db $2 ; warps
-	db $11, $4, $5, $ff
-	db $11, $5, $5, $ff
-
-	db $0 ; signs
-
-	db $8 ; people
-	db SPRITE_BLACKBELT, $a + 4, $4 + 4, $ff, $d0, $41, KOGA + $C8, $1 ; trainer
-	db SPRITE_ROCKER, $d + 4, $8 + 4, $ff, $d0, $42, JUGGLER + $C8, $7 ; trainer
-	db SPRITE_ROCKER, $8 + 4, $7 + 4, $ff, $d3, $43, JUGGLER + $C8, $3 ; trainer
-	db SPRITE_ROCKER, $c + 4, $1 + 4, $ff, $d0, $44, JUGGLER + $C8, $8 ; trainer
-	db SPRITE_ROCKER, $5 + 4, $3 + 4, $ff, $d1, $45, TAMER + $C8, $1 ; trainer
-	db SPRITE_ROCKER, $2 + 4, $8 + 4, $ff, $d0, $46, TAMER + $C8, $2 ; trainer
-	db SPRITE_ROCKER, $7 + 4, $2 + 4, $ff, $d2, $47, JUGGLER + $C8, $4 ; trainer
-	db SPRITE_GYM_HELPER, $f + 4, $7 + 4, $ff, $d0, $8 ; person
-
-	; warp-to
-	EVENT_DISP $5, $11, $4
-	EVENT_DISP $5, $11, $5
+	
+INCLUDE "mapObjects/FuchsiaGym.asm"
 
 FuchsiaGymBlocks: ; 756aa (1d:56aa)
 	INCBIN "maps/fuchsiagym.blk"
-
-FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
-	db $14 ; tileset
-	db FUCHSIAMEETINGROOM_HEIGHT, FUCHSIAMEETINGROOM_WIDTH ; dimensions (y, x)
-	dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTextPointers, FuchsiaMeetingRoomScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw FuchsiaMeetingRoomObject ; objects
+	
+INCLUDE "mapHeaders/FuchsiaMeetingRoom.asm"
 
 FuchsiaMeetingRoomScript: ; 756e3 (1d:56e3)
 	call EnableAutoTextBoxDrawing
@@ -106340,34 +91224,13 @@ FuchsiaMeetingRoomText2: ; 756f2 (1d:56f2)
 FuchsiaMeetingRoomText3: ; 756f7 (1d:56f7)
 	TX_FAR _FuchsiaMeetingRoomText3
 	db "@"
-
-FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $4, $6, $ff
-	db $7, $5, $6, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_WHITE_PLAYER, $1 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_WHITE_PLAYER, $2 + 4, $0 + 4, $ff, $d1, $2 ; person
-	db SPRITE_WHITE_PLAYER, $1 + 4, $a + 4, $ff, $d0, $3 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $4
-	EVENT_DISP $7, $7, $5
+	
+INCLUDE "mapObjects/FuchsiaMeetingRoom.asm"
 
 FuchsiaMeetingRoomBlocks: ; 75722 (1d:5722)
 	INCBIN "maps/fuchsiameetingroom.blk"
-
-CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
-	db $16 ; tileset
-	db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
-	dw CinnabarGymBlocks, CinnabarGymTextPointers, CinnabarGymScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CinnabarGymObject ; objects
+	
+INCLUDE "mapHeaders/CinnibarGym.asm"
 
 CinnabarGymScript: ; 7574a (1d:574a)
 	call CinnabarGymScript_75759
@@ -106848,40 +91711,13 @@ UnnamedText_75ac2: ; 75ac2 (1d:5ac2)
 UnnamedText_75ac7: ; 75ac7 (1d:5ac7)
 	TX_FAR _UnnamedText_75ac7
 	db "@"
-
-CinnabarGymObject: ; 0x75acc (size=90)
-	db $2e ; border tile
-
-	db $2 ; warps
-	db $11, $10, $1, $ff
-	db $11, $11, $1, $ff
-
-	db $0 ; signs
-
-	db $9 ; people
-	db SPRITE_FAT_BALD_GUY, $3 + 4, $3 + 4, $ff, $d0, $41, BLAINE + $C8, $1 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $11 + 4, $ff, $d0, $42, SUPER_NERD + $C8, $9 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $11 + 4, $ff, $d0, $43, BURGLAR + $C8, $4 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $b + 4, $ff, $d0, $44, SUPER_NERD + $C8, $a ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $b + 4, $ff, $d0, $45, BURGLAR + $C8, $5 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $e + 4, $b + 4, $ff, $d0, $46, SUPER_NERD + $C8, $b ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $e + 4, $3 + 4, $ff, $d0, $47, BURGLAR + $C8, $6 ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $3 + 4, $ff, $d0, $48, SUPER_NERD + $C8, $c ; trainer
-	db SPRITE_GYM_HELPER, $d + 4, $10 + 4, $ff, $d0, $9 ; person
-
-	; warp-to
-	EVENT_DISP $a, $11, $10
-	EVENT_DISP $a, $11, $11
+	
+INCLUDE "mapObjects/CinnibarGym.asm"
 
 CinnabarGymBlocks: ; 75b26 (1d:5b26)
 	INCBIN "maps/cinnabargym.blk"
-
-Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
-	db $14 ; tileset
-	db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
-	dw Lab1Blocks, Lab1TextPointers, Lab1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Lab1Object ; objects
+	
+INCLUDE "mapHeaders/Lab1.asm"
 
 Lab1Script: ; 75b8c (1d:5b8c)
 	call EnableAutoTextBoxDrawing
@@ -106913,42 +91749,13 @@ Lab1Text4: ; 75ba9 (1d:5ba9)
 Lab1Text5: ; 75bae (1d:5bae)
 	TX_FAR _Lab1Text5
 	db "@"
-
-Lab1Object: ; 0x75bb3 (size=62)
-	db $17 ; border tile
-
-	db $5 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
-	db $4, $8, $0, CINNABAR_LAB_2
-	db $4, $c, $0, CINNABAR_LAB_3
-	db $4, $10, $0, CINNABAR_LAB_4
-
-	db $4 ; signs
-	db $2, $3, $2 ; Lab1Text2
-	db $4, $9, $3 ; Lab1Text3
-	db $4, $d, $4 ; Lab1Text4
-	db $4, $11, $5 ; Lab1Text5
-
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $1 + 4, $ff, $ff, $1 ; person
-
-	; warp-to
-	EVENT_DISP $9, $7, $2
-	EVENT_DISP $9, $7, $3
-	EVENT_DISP $9, $4, $8 ; CINNABAR_LAB_2
-	EVENT_DISP $9, $4, $c ; CINNABAR_LAB_3
-	EVENT_DISP $9, $4, $10 ; CINNABAR_LAB_4
+	
+INCLUDE "mapObjects/Lab1.asm"
 
 Lab1Blocks: ; 75bf1 (1d:5bf1)
 	INCBIN "maps/lab1.blk"
-
-Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
-	db $14 ; tileset
-	db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
-	dw Lab2Blocks, Lab2TextPointers, Lab2Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Lab2Object ; objects
+	
+INCLUDE "mapHeaders/Lab2.asm"
 
 Lab2Script: ; 75c21 (1d:5c21)
 	jp EnableAutoTextBoxDrawing
@@ -106976,34 +91783,13 @@ asm_78552: ; 75c3d (1d:5c3d)
 	ld a, $54
 	call Predef
 	jp TextScriptEnd
-
-Lab2Object: ; 0x75c45 (size=38)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $2, $2, CINNABAR_LAB_1
-	db $7, $3, $2, CINNABAR_LAB_1
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OLD_PERSON, $4 + 4, $1 + 4, $ff, $ff, $2 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $5 + 4, $ff, $d1, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
-	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+	
+INCLUDE "mapObjects/Lab2.asm"
 
 Lab2Blocks: ; 75c6b (1d:5c6b)
 	INCBIN "maps/lab2.blk"
-
-Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
-	db $14 ; tileset
-	db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
-	dw Lab3Blocks, Lab3TextPointers, Lab3Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Lab3Object ; objects
+	
+INCLUDE "mapHeaders/Lab3.asm"
 
 Lab3Script: ; 75c87 (1d:5c87)
 	jp EnableAutoTextBoxDrawing
@@ -107068,36 +91854,13 @@ Lab3Text3: ; 75ce2 (1d:5ce2)
 Lab3Text5: ; 75ce7 (1d:5ce7)
 	TX_FAR _Lab3Text5
 	db "@"
-
-Lab3Object: ; 0x75cec (size=41)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $2, $3, CINNABAR_LAB_1
-	db $7, $3, $3, CINNABAR_LAB_1
-
-	db $3 ; signs
-	db $4, $0, $3 ; Lab3Text3
-	db $4, $1, $4 ; Lab3Text4
-	db $1, $2, $5 ; Lab3Text5
-
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $2 + 4, $7 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OAK_AIDE, $3 + 4, $2 + 4, $fe, $2, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
-	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+	
+INCLUDE "mapObjects/Lab3.asm"
 
 Lab3Blocks: ; 75d15 (1d:5d15)
 	INCBIN "maps/lab3.blk"
-
-Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
-	db $14 ; tileset
-	db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
-	dw Lab4Blocks, Lab4TextPointers, Lab4Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw Lab4Object ; objects
+	
+INCLUDE "mapHeaders/Lab4.asm"
 
 Lab4Script: ; 75d31 (1d:5d31)
 	jp EnableAutoTextBoxDrawing
@@ -107216,33 +91979,13 @@ LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
 	ld b, BANK(LoadFossilItemAndMonName)
 	ld hl, LoadFossilItemAndMonName
 	jp Bankswitch
-
-Lab4Object: ; 0x75df0 (size=32)
-	db $17 ; border tile
-
-	db $2 ; warps
-	db $7, $2, $4, CINNABAR_LAB_1
-	db $7, $3, $4, CINNABAR_LAB_1
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $2 + 4, $5 + 4, $fe, $2, $1 ; person
-	db SPRITE_OAK_AIDE, $6 + 4, $7 + 4, $ff, $d1, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2 ; CINNABAR_LAB_1
-	EVENT_DISP $4, $7, $3 ; CINNABAR_LAB_1
+	
+INCLUDE "mapObjects/Lab4.asm"
 
 Lab4Blocks: ; 75e10 (1d:5e10)
 	INCBIN "maps/lab4.blk"
-
-CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
-	db $06 ; tileset
-	db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
-	dw CinnabarPokecenterBlocks, CinnabarPokecenterTextPointers, CinnabarPokecenterScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CinnabarPokecenterObject ; objects
+	
+INCLUDE "mapHeaders/CinnibarPokecenter.asm"
 
 CinnabarPokecenterScript: ; 75e2c (1d:5e2c)
 	call Func_22fa
@@ -107267,32 +92010,10 @@ CinnabarPokecenterText3: ; 75e40 (1d:5e40)
 
 CinnabarPokecenterText4: ; 75e45 (1d:5e45)
 	db $f6
-
-CinnabarPokecenterObject: ; 0x75e46 (size=44)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
-
-	db $0 ; signs
-
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_LASS, $4 + 4, $9 + 4, $fe, $0, $2 ; person
-	db SPRITE_GENTLEMAN, $6 + 4, $2 + 4, $ff, $ff, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
-
-	; warp-to
-	EVENT_DISP $7, $7, $3
-	EVENT_DISP $7, $7, $4
-
-CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
-	db $02 ; tileset
-	db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
-	dw CinnabarMartBlocks, CinnabarMartTextPointers, CinnabarMartScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw CinnabarMartObject ; objects
+	
+INCLUDE "mapObjects/CinnibarPokecenter.asm"
+	
+INCLUDE "mapHeaders/CinnibarMart.asm"
 
 CinnabarMartScript: ; 75e7e (1d:5e7e)
 	jp EnableAutoTextBoxDrawing
@@ -107309,31 +92030,10 @@ CinnabarMartText2: ; 75e87 (1d:5e87)
 CinnabarMartText3: ; 75e8c (1d:5e8c)
 	TX_FAR _CinnabarMartText3
 	db "@"
-
-CinnabarMartObject: ; 0x75e91 (size=38)
-	db $0 ; border tile
-
-	db $2 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_ERIKA, $2 + 4, $6 + 4, $ff, $ff, $2 ; person
-	db SPRITE_OAK_AIDE, $4 + 4, $3 + 4, $ff, $ff, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $7, $4
-
-CopycatsHouseF1_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
-	db $01 ; tileset
-	db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
-	dw CopycatsHouseF1Blocks, CopycatsHouseF1TextPointers, CopycatsHouseF1Script ; blocks, texts, scripts
-	db $00 ; connections
-	dw CopycatsHouseF1Object ; objects
+	
+INCLUDE "mapObjects/CinnibarMart.asm"
+	
+INCLUDE "mapHeaders/CopycatsHouseF1.asm"
 
 CopycatsHouseF1Script: ; 75ec3 (1d:5ec3)
 	jp EnableAutoTextBoxDrawing
@@ -107357,33 +92057,10 @@ CopycatsHouseF1Text3: ; 75ed6 (1d:5ed6)
 	ld a, CHANSEY
 	call PlayCry
 	jp TextScriptEnd
-
-CopycatsHouseF1Object: ; 0x75ee3 (size=46)
-	db $a ; border tile
-
-	db $3 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-	db $1, $7, $0, COPYCATS_HOUSE_2F
-
-	db $0 ; signs
-
-	db $3 ; people
-	db SPRITE_MOM_GEISHA, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $5 + 4, $ff, $d2, $2 ; person
-	db SPRITE_CLEFAIRY, $4 + 4, $1 + 4, $fe, $1, $3 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $2
-	EVENT_DISP $4, $7, $3
-	EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
-
-Gary_h: ; 75f11 (1d:5f11)
-	db $7 ;tileset
-	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; Height, Width
-	dw GaryBlocks, GaryTextPointers, GaryScript
-	db $0 ;No Connections
-	dw GaryObject
+	
+INCLUDE "mapObjects/CopycatsHouseF1.asm"
+	
+INCLUDE "mapHeaders/Gary.asm"
 
 GaryScript: ; 75f1d (1d:5f1d)
 	call EnableAutoTextBoxDrawing
@@ -107682,37 +92359,13 @@ GaryText4: ; 76125 (1d:6125)
 GaryText5: ; 7612a (1d:612a)
 	TX_FAR _UnnamedText_7612a
 	db "@"
-
-GaryObject: ; 0x7612f (size=48)
-	db $3 ; border tile
-
-	db $4 ; warps
-	db $7, $3, $1, LANCES_ROOM
-	db $7, $4, $2, LANCES_ROOM
-	db $0, $3, $0, HALL_OF_FAME
-	db $0, $4, $0, HALL_OF_FAME
-
-	db $0 ; signs
-
-	db $2 ; people
-	db SPRITE_BLUE, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OAK, $7 + 4, $3 + 4, $ff, $d1, $2 ; person
-
-	; warp-to
-	EVENT_DISP $4, $7, $3 ; LANCES_ROOM
-	EVENT_DISP $4, $7, $4 ; LANCES_ROOM
-	EVENT_DISP $4, $0, $3 ; HALL_OF_FAME
-	EVENT_DISP $4, $0, $4 ; HALL_OF_FAME
+	
+INCLUDE "mapObjects/Gary.asm"
 
 GaryBlocks: ; 7615f (1d:615f)
 	INCBIN "maps/gary.blk"
-
-Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
-	db $07 ; tileset
-	db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
-	dw LoreleiBlocks, LoreleiTextPointers, LoreleiScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw LoreleiObject ; objects
+	
+INCLUDE "mapHeaders/Lorelei.asm"
 
 LoreleiScript: ; 7617b (1d:617b)
 	call LoreleiScript_76191
@@ -107867,36 +92520,13 @@ LoreleiAfterBattleText: ; 76276 (1d:6276)
 LoreleiText2: ; 7627b (1d:627b)
 	TX_FAR _UnnamedText_7627b
 	db "@"
-
-LoreleiObject: ; 0x76280 (size=44)
-	db $3 ; border tile
-
-	db $4 ; warps
-	db $b, $4, $2, INDIGO_PLATEAU_LOBBY
-	db $b, $5, $2, INDIGO_PLATEAU_LOBBY
-	db $0, $4, $0, BRUNOS_ROOM
-	db $0, $5, $1, BRUNOS_ROOM
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_LORELEI, $2 + 4, $5 + 4, $ff, $d0, $41, LORELEI + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $5, $b, $4 ; INDIGO_PLATEAU_LOBBY
-	EVENT_DISP $5, $b, $5 ; INDIGO_PLATEAU_LOBBY
-	EVENT_DISP $5, $0, $4 ; BRUNOS_ROOM
-	EVENT_DISP $5, $0, $5 ; BRUNOS_ROOM
+	
+INCLUDE "mapObjects/Lorelei.asm"
 
 LoreleiBlocks: ; 762ac (1d:62ac)
 	INCBIN "maps/lorelei.blk"
-
-Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
-	db $07 ; tileset
-	db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
-	dw BrunoBlocks, BrunoTextPointers, BrunoScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw BrunoObject ; objects
+	
+INCLUDE "mapHeaders/Bruno.asm"
 
 BrunoScript: ; 762d6 (1d:62d6)
 	call BrunoScript_762ec
@@ -108052,36 +92682,13 @@ BrunoAfterBattleText: ; 763cd (1d:63cd)
 BrunoText2: ; 763d2 (1d:63d2)
 	TX_FAR _UnnamedText_763d2
 	db "@"
-
-BrunoObject: ; 0x763d7 (size=44)
-	db $3 ; border tile
-
-	db $4 ; warps
-	db $b, $4, $2, LORELEIS_ROOM
-	db $b, $5, $3, LORELEIS_ROOM
-	db $0, $4, $0, AGATHAS_ROOM
-	db $0, $5, $1, AGATHAS_ROOM
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_BRUNO, $2 + 4, $5 + 4, $ff, $d0, $41, BRUNO + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $5, $b, $4 ; LORELEIS_ROOM
-	EVENT_DISP $5, $b, $5 ; LORELEIS_ROOM
-	EVENT_DISP $5, $0, $4 ; AGATHAS_ROOM
-	EVENT_DISP $5, $0, $5 ; AGATHAS_ROOM
+	
+INCLUDE "mapObjects/Bruno.asm"
 
 BrunoBlocks: ; 76403 (1d:6403)
 	INCBIN "maps/bruno.blk"
-
-Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
-	db $0f ; tileset
-	db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
-	dw AgathaBlocks, AgathaTextPointers, AgathaScript ; blocks, texts, scripts
-	db $00 ; connections
-	dw AgathaObject ; objects
+	
+INCLUDE "mapHeaders/Agatha.asm"
 
 AgathaScript: ; 7642d (1d:642d)
 	call AgathaScript_76443
@@ -108240,26 +92847,8 @@ AgathaAfterBattleText: ; 7652a (1d:652a)
 AgathaText2: ; 7652f (1d:652f)
 	TX_FAR _AgathaText2
 	db "@"
-
-AgathaObject: ; 0x76534 (size=44)
-	db $0 ; border tile
-
-	db $4 ; warps
-	db $b, $4, $2, BRUNOS_ROOM
-	db $b, $5, $3, BRUNOS_ROOM
-	db $0, $4, $0, LANCES_ROOM
-	db $0, $5, $0, LANCES_ROOM
-
-	db $0 ; signs
-
-	db $1 ; people
-	db SPRITE_AGATHA, $2 + 4, $5 + 4, $ff, $d0, $41, AGATHA + $C8, $1 ; trainer
-
-	; warp-to
-	EVENT_DISP $5, $b, $4 ; BRUNOS_ROOM
-	EVENT_DISP $5, $b, $5 ; BRUNOS_ROOM
-	EVENT_DISP $5, $0, $4 ; LANCES_ROOM
-	EVENT_DISP $5, $0, $5 ; LANCES_ROOM
+	
+INCLUDE "mapObjects/Agatha.asm"
 
 AgathaBlocks: ; 76560 (1d:6560)
 	INCBIN "maps/agatha.blk"
@@ -115620,5 +100209,3 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 	db $55, $52, $54, $52, $41
 	db $21, $12, $42, $25, $24
 	db $22, $52, $24, $34, $42
-
-
