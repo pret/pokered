@@ -13,10 +13,18 @@ db $77 ; sprite dimensions
 dw GyaradosPicFront
 dw GyaradosPicBack
 ; attacks known at lvl 0
+IF !_YELLOW
 db BITE
 db DRAGON_RAGE
 db LEER
 db HYDRO_PUMP
+ENDC
+IF _YELLOW
+db TACKLE
+db 0
+db 0
+db 0
+ENDC
 db 5 ; growth rate
 ; learnset
 db %10100000

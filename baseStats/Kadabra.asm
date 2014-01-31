@@ -14,8 +14,14 @@ dw KadabraPicFront
 dw KadabraPicBack
 ; attacks known at lvl 0
 db TELEPORT
-db CONFUSION
-db DISABLE
+IF !_YELLOW
+	db CONFUSION
+	db DISABLE
+ENDC
+IF _YELLOW
+	DB KINESIS
+	db 0
+ENDC
 db 0
 db 3 ; growth rate
 ; learnset

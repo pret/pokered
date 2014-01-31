@@ -14,7 +14,12 @@ dw ChanseyPicFront
 dw ChanseyPicBack
 ; attacks known at lvl 0
 db POUND
-db DOUBLESLAP
+IF !_YELLOW
+	db DOUBLESLAP
+ENDC
+IF _YELLOW
+	db TAIL_WHIP
+ENDC
 db 0
 db 0
 db 4 ; growth rate
