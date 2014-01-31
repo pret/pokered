@@ -1,7 +1,13 @@
 Route19Object: ; 0x54e9a (size=87)
 	db $43 ; border tile
 
-	db $0 ; warps
+	IF _YELLOW
+		db $1 ; warps
+		db $9, $5, $0, $f8
+	ENDC
+	IF !_YELLOW
+		db $0 ; warps
+	ENDC
 
 	db $1 ; signs
 	db $9, $b, $b ; Route19Text11
@@ -17,3 +23,8 @@ Route19Object: ; 0x54e9a (size=87)
 	db SPRITE_SWIMMER, $2b + 4, $b + 4, $ff, $d3, $48, BEAUTY + $C8, $d ; trainer
 	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, $49, SWIMMER + $C8, $8 ; trainer
 	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, $4a, BEAUTY + $C8, $e ; trainer
+
+	; warp-to
+	IF _YELLOW
+		db $3b, $c7, $9, $5 ; SURF_HOUSE
+	ENDC

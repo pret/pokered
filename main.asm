@@ -431,6 +431,9 @@ MapHeaderPointers: ; 01ae (0:01ae)
 	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h ;247
+	IF _YELLOW
+		dw SurfHouse_h ;248
+	ENDC
 
 ; this function calls a function that takes necessary actions
 ; at the beginning of each overworld loop iteration as the player jumps
@@ -3697,6 +3700,10 @@ Tset16_Coll: ; 17dd (0:17dd)
 	INCBIN "gfx/tilesets/16.tilecoll"
 Tset17_Coll: ; 17f0 (0:17f0)
 	INCBIN "gfx/tilesets/17.tilecoll"
+IF _YELLOW
+	Tset18_Coll: ; 17f0 (0:17f0)
+		INCBIN "gfx/tilesets/18.tilecoll"
+ENDC
 ;Tile Collision ends 0x17f7
 
 ; does the same thing as FarCopyData at 009D
@@ -18614,6 +18621,9 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_GYM, BANK(Music_Gym) ; Lorelei
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; Bruno
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; Agatha
+	IF _YELLOW
+		db MUSIC_ROUTES3, BANK(Music_Routes3) ; Surf House
+	ENDC
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; c23d (3:423d)
@@ -18865,6 +18875,9 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Lorelei_h)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
+	IF _YELLOW
+		db BANK(SurfHouse_h)
+	ENDC
 
 Func_c335: ; c335 (3:4335)
 	ld a, $90
@@ -19646,6 +19659,9 @@ TilesetsHeadPtr: ; c7be (3:47be)
 	TSETHEAD Tset15_Block,Tset15_GFX,Tset15_Coll,$07,$17,$FF,$FF,0
 	TSETHEAD Tset16_Block,Tset16_GFX,Tset16_Coll,$12,$FF,$FF,$FF,1
 	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
+	IF _YELLOW
+		TSETHEAD Tset18_Block,Tset18_GFX,Tset18_Coll,$FF,$FF,$FF,$FF,1
+	ENDC
 
 Func_c8de: ; c8de (3:48de)
 	ld a, [W_DAYCARE_IN_USE]
@@ -53505,7 +53521,12 @@ INCLUDE "mapHeaders/Route19.asm";
 INCLUDE "mapObjects/Route19.asm"
 
 Route19Blocks: ; 54ef1 (15:4ef1)
-	INCBIN "maps/route19.blk"
+	IF !_YELLOW
+		INCBIN "maps/route19.blk"
+	ENDC
+	IF _YELLOW
+		INCBIN "maps/route19yellow.blk"
+	ENDC
 	
 INCLUDE "mapHeaders/Route21.asm";
 INCLUDE "mapObjects/Route21.asm"
@@ -59043,6 +59064,9 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP $E9,$E,$3,RockTunnelName
 	IMAP $ED,$A,$5,SilphCoName
 	IMAP $F8,$0,$2,PokemonLeagueName
+	IF _YELLOW
+		IMAP $F9,$6,$F,Route19Name
+	ENDC
 	db $FF
 
 MapNames: ; 71473 (1c:5473)
@@ -70116,3 +70140,16 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 	db $55, $52, $54, $52, $41
 	db $21, $12, $42, $25, $24
 	db $22, $52, $24, $34, $42
+
+SECTION "bank3c",ROMX,BANK[$3C]	
+IF _YELLOW
+	Tset18_GFX: ; 676f0 (19:76f0)
+		INCBIN "gfx/tilesets/18.2bpp"
+	Tset18_Block: ; 67b50 (19:7b50)
+		INCBIN "gfx/blocksets/18.bst"
+	INCLUDE "mapHeaders/SurfHouse.asm"	
+	INCLUDE "scripts/SurfHouse.asm"	
+	INCLUDE "mapObjects/SurfHouse.asm"	
+	SurfHouseBlocks: ; f2388 (3c:6388)
+		INCBIN "maps/surfhouse.blk"
+ENDC
