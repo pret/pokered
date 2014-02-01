@@ -9,6 +9,8 @@ INCLUDE "hram.asm"
 INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/oam_constants.asm"
 
+INCLUDE "constants/wram_constants.asm"
+
 INCLUDE "constants/pokemon_constants.asm"
 INCLUDE "constants/pokedex_constants.asm"
 INCLUDE "constants/trainer_constants.asm"
@@ -26,3 +28,4 @@ INCLUDE "constants/map_constants.asm"
 INCLUDE "constants/map_dimensions.asm"
 INCLUDE "constants/connection_constants.asm"
 INCLUDE "constants/credits_constants.asm"
+INCLUDE "constants/music_constants.asm"

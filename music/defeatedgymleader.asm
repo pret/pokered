@@ -1,4 +1,4 @@
-Music_DefeatedGymLeader_Ch1: ; 23cad (8:7cad)
+Music_DefeatedGymLeader_Ch1:: ; 23cad (8:7cad)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
@@ -20,7 +20,7 @@ Music_DefeatedGymLeader_Ch1: ; 23cad (8:7cad)
 	notetype 12, 10, 7
 	note A_, 8
 
-Music_DefeatedGymLeader_branch_23ccc:
+Music_DefeatedGymLeader_branch_23ccc::
 	notetype 12, 11, 2
 	octave 3
 	note A_, 2
@@ -162,7 +162,7 @@ Music_DefeatedGymLeader_branch_23ccc:
 	loopchannel 0, Music_DefeatedGymLeader_branch_23ccc
 
 
-Music_DefeatedGymLeader_Ch2: ; 23d6d (8:7d6d)
+Music_DefeatedGymLeader_Ch2:: ; 23d6d (8:7d6d)
 	duty 2
 	vibrato 24, 2, 4
 	notetype 12, 12, 4
@@ -181,7 +181,7 @@ Music_DefeatedGymLeader_Ch2: ; 23d6d (8:7d6d)
 	notetype 12, 11, 7
 	note F#, 8
 
-Music_DefeatedGymLeader_branch_23d84:
+Music_DefeatedGymLeader_branch_23d84::
 	notetype 12, 12, 2
 	octave 4
 	note D_, 2
@@ -352,7 +352,7 @@ Music_DefeatedGymLeader_branch_23d84:
 	loopchannel 0, Music_DefeatedGymLeader_branch_23d84
 
 
-Music_DefeatedGymLeader_Ch3: ; 23e52 (8:7e52)
+Music_DefeatedGymLeader_Ch3:: ; 23e52 (8:7e52)
 	notetype 12, 1, 0
 	vibrato 16, 1, 2
 	octave 4
@@ -370,7 +370,7 @@ Music_DefeatedGymLeader_Ch3: ; 23e52 (8:7e52)
 	note D_, 1
 	note F#, 8
 
-Music_DefeatedGymLeader_branch_23e65:
+Music_DefeatedGymLeader_branch_23e65::
 	octave 4
 	note F#, 1
 	rest 1

@@ -1,11 +1,11 @@
-Music_Dungeon2_Ch1: ; 7e887 (1f:6887)
+Music_Dungeon2_Ch1:: ; 7e887 (1f:6887)
 	tempo 0, 144
 	stereopanning 119
 	duty 3
 	togglecall
 	vibrato 10, 1, 4
 
-Music_Dungeon2_branch_7e892:
+Music_Dungeon2_branch_7e892::
 	notetype 12, 11, 2
 	octave 4
 	note E_, 4
@@ -70,10 +70,10 @@ Music_Dungeon2_branch_7e892:
 	loopchannel 0, Music_Dungeon2_branch_7e892
 
 
-Music_Dungeon2_Ch2: ; 7e8d8 (1f:68d8)
+Music_Dungeon2_Ch2:: ; 7e8d8 (1f:68d8)
 	vibrato 11, 1, 5
 
-Music_Dungeon2_branch_7e8db:
+Music_Dungeon2_branch_7e8db::
 	duty 3
 	notetype 12, 12, 2
 	octave 3
@@ -162,11 +162,11 @@ Music_Dungeon2_branch_7e8db:
 	loopchannel 0, Music_Dungeon2_branch_7e8db
 
 
-Music_Dungeon2_Ch3: ; 7e93b (1f:693b)
+Music_Dungeon2_Ch3:: ; 7e93b (1f:693b)
 	notetype 12, 1, 3
 	vibrato 8, 2, 6
 
-Music_Dungeon2_branch_7e940:
+Music_Dungeon2_branch_7e940::
 	callchannel Music_Dungeon2_branch_7e9d1
 	loopchannel 16, Music_Dungeon2_branch_7e940
 	note E_, 4
@@ -187,7 +187,7 @@ Music_Dungeon2_branch_7e940:
 	rest 4
 	note A#, 4
 
-Music_Dungeon2_branch_7e958:
+Music_Dungeon2_branch_7e958::
 	octave 5
 	note E_, 2
 	rest 2
@@ -288,7 +288,7 @@ Music_Dungeon2_branch_7e958:
 	rest 2
 	endchannel
 
-Music_Dungeon2_branch_7e9d1:
+Music_Dungeon2_branch_7e9d1::
 	octave 4
 	note E_, 2
 	rest 4
@@ -302,10 +302,10 @@ Music_Dungeon2_branch_7e9d1:
 	endchannel
 
 
-Music_Dungeon2_Ch4: ; 7e9dc (1f:69dc)
+Music_Dungeon2_Ch4:: ; 7e9dc (1f:69dc)
 	dspeed 12
 
-Music_Dungeon2_branch_7e9dd:
+Music_Dungeon2_branch_7e9dd::
 	dnote 4, cymbal1
 	dnote 4, cymbal2
 	dnote 4, cymbal1

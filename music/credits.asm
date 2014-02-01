@@ -1,4 +1,4 @@
-Music_Credits_Ch1: ; 7fc1f (1f:7c1f)
+Music_Credits_Ch1:: ; 7fc1f (1f:7c1f)
 	tempo 0, 140
 	stereopanning 119
 	duty 3
@@ -284,7 +284,7 @@ Music_Credits_Ch1: ; 7fc1f (1f:7c1f)
 	endchannel
 
 
-Music_Credits_Ch2: ; 7fd5f (1f:7d5f)
+Music_Credits_Ch2:: ; 7fd5f (1f:7d5f)
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 5
@@ -574,7 +574,7 @@ Music_Credits_Ch2: ; 7fd5f (1f:7d5f)
 	endchannel
 
 
-Music_Credits_Ch3: ; 7fec2 (1f:7ec2)
+Music_Credits_Ch3:: ; 7fec2 (1f:7ec2)
 	notetype 12, 1, 0
 	octave 5
 	note C#, 6
@@ -717,7 +717,7 @@ Music_Credits_Ch3: ; 7fec2 (1f:7ec2)
 	rest 7
 	endchannel
 
-Music_Credits_branch_7ffa4:
+Music_Credits_branch_7ffa4::
 	octave 4
 	note E_, 2
 	note A_, 2
@@ -729,7 +729,7 @@ Music_Credits_branch_7ffa4:
 	note A_, 2
 	endchannel
 
-Music_Credits_branch_7ffae:
+Music_Credits_branch_7ffae::
 	octave 4
 	note D_, 2
 	note G_, 2
@@ -741,7 +741,7 @@ Music_Credits_branch_7ffae:
 	note G_, 2
 	endchannel
 
-Music_Credits_branch_7ffb8:
+Music_Credits_branch_7ffb8::
 	note G_, 2
 	note B_, 2
 	note G_, 2
@@ -752,11 +752,7 @@ Music_Credits_branch_7ffb8:
 	note B_, 2
 	endchannel
 
-Music_Credits_branch_7ffc1:
-	octave 4
-	note A_, 2
-	octave 5
-	note C#, 2
+Music_Credits_branch_7ffc1::
 	octave 4
 	note A_, 2
 	octave 5
@@ -769,9 +765,13 @@ Music_Credits_branch_7ffc1:
 	note A_, 2
 	octave 5
 	note C#, 2
+	octave 4
+	note A_, 2
+	octave 5
+	note C#, 2
 	endchannel
 
-Music_Credits_branch_7ffd2:
+Music_Credits_branch_7ffd2::
 	note D_, 2
 	note A_, 2
 	note D_, 2
@@ -782,7 +782,7 @@ Music_Credits_branch_7ffd2:
 	note A_, 2
 	endchannel
 
-Music_Credits_branch_7ffdb:
+Music_Credits_branch_7ffdb::
 	note E_, 2
 	note G#, 2
 	note E_, 2
@@ -793,7 +793,7 @@ Music_Credits_branch_7ffdb:
 	note G#, 2
 	endchannel
 
-Music_Credits_branch_7ffe4:
+Music_Credits_branch_7ffe4::
 	note E_, 2
 	note B_, 2
 	note E_, 2
@@ -804,7 +804,7 @@ Music_Credits_branch_7ffe4:
 	note B_, 2
 	endchannel
 
-Music_Credits_branch_7ffed:
+Music_Credits_branch_7ffed::
 	note A_, 1
 	rest 1
 	note A_, 1

@@ -165,7 +165,9 @@ SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
 ; these do double duty as animation identifiers
 SHOWPIC_ANIM EQU $A6 ; redraw monster pic
+STATUS_AFFECTED_ANIM EQU $A7 ; effect when monster receives a status aliment
 XSTATITEM_ANIM EQU $AE ; use X Attack/Defense/Speed/Special
+BURN_PSN_ANIM EQU $BA ; Plays when a monster is burned or poisoned
 SLP_ANIM     EQU $BD ; sleeping monster
 CONF_ANIM    EQU $BF ; confused monster
 TOSS_ANIM    EQU $C1 ; toss Poké Ball

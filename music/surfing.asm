@@ -1,4 +1,4 @@
-Music_Surfing_Ch1: ; 7fa19 (1f:7a19)
+Music_Surfing_Ch1:: ; 7fa19 (1f:7a19)
 	tempo 0, 160
 	stereopanning 119
 	duty 3
@@ -16,7 +16,7 @@ Music_Surfing_Ch1: ; 7fa19 (1f:7a19)
 	note F#, 2
 	note G#, 4
 
-Music_Surfing_branch_7fa30:
+Music_Surfing_branch_7fa30::
 	notetype 12, 11, 2
 	note E_, 2
 	note E_, 4
@@ -116,7 +116,7 @@ Music_Surfing_branch_7fa30:
 	loopchannel 0, Music_Surfing_branch_7fa30
 
 
-Music_Surfing_Ch2: ; 7fa9c (1f:7a9c)
+Music_Surfing_Ch2:: ; 7fa9c (1f:7a9c)
 	duty 3
 	vibrato 16, 2, 5
 	notetype 12, 12, 6
@@ -132,7 +132,7 @@ Music_Surfing_Ch2: ; 7fa9c (1f:7a9c)
 	octave 3
 	note B_, 2
 
-Music_Surfing_branch_7faae:
+Music_Surfing_branch_7faae::
 	notetype 12, 12, 6
 	octave 4
 	note E_, 6
@@ -203,7 +203,7 @@ Music_Surfing_branch_7faae:
 	loopchannel 0, Music_Surfing_branch_7faae
 
 
-Music_Surfing_Ch3: ; 7fafa (1f:7afa)
+Music_Surfing_Ch3:: ; 7fafa (1f:7afa)
 	notetype 12, 1, 0
 	rest 12
 	octave 5
@@ -213,7 +213,7 @@ Music_Surfing_Ch3: ; 7fafa (1f:7afa)
 	note F#, 2
 	note G#, 2
 
-Music_Surfing_branch_7fb03:
+Music_Surfing_branch_7fb03::
 	octave 3
 	note A_, 2
 	octave 4

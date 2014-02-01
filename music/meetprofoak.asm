@@ -1,4 +1,4 @@
-Music_MeetProfOak_Ch1: ; af59 (2:6f59)
+Music_MeetProfOak_Ch1:: ; af59 (2:6f59)
 	tempo 0, 112
 	stereopanning 119
 	duty 3
@@ -38,7 +38,7 @@ Music_MeetProfOak_Ch1: ; af59 (2:6f59)
 	note F#, 2
 	note F#, 4
 
-Music_MeetProfOak_branch_af85:
+Music_MeetProfOak_branch_af85::
 	note F#, 6
 	note E_, 4
 	note A_, 2
@@ -74,7 +74,7 @@ Music_MeetProfOak_branch_af85:
 	loopchannel 0, Music_MeetProfOak_branch_af85
 
 
-Music_MeetProfOak_Ch2: ; afa9 (2:6fa9)
+Music_MeetProfOak_Ch2:: ; afa9 (2:6fa9)
 	vibrato 8, 1, 1
 	duty 2
 	notetype 12, 12, 4
@@ -155,7 +155,7 @@ Music_MeetProfOak_Ch2: ; afa9 (2:6fa9)
 	note B_, 4
 	notetype 12, 11, 5
 
-Music_MeetProfOak_branch_b005:
+Music_MeetProfOak_branch_b005::
 	octave 4
 	note C#, 6
 	octave 3
@@ -208,7 +208,7 @@ Music_MeetProfOak_branch_b005:
 	loopchannel 0, Music_MeetProfOak_branch_b005
 
 
-Music_MeetProfOak_Ch3: ; b03d (2:703d)
+Music_MeetProfOak_Ch3:: ; b03d (2:703d)
 	notetype 12, 1, 2
 	rest 10
 	octave 4
@@ -336,7 +336,7 @@ Music_MeetProfOak_Ch3: ; b03d (2:703d)
 	note G#, 1
 	rest 1
 
-Music_MeetProfOak_branch_b0bc:
+Music_MeetProfOak_branch_b0bc::
 	octave 4
 	note A_, 1
 	rest 1
@@ -363,7 +363,7 @@ Music_MeetProfOak_branch_b0bc:
 	rest 1
 	loopchannel 2, Music_MeetProfOak_branch_b0bc
 
-Music_MeetProfOak_branch_b0d8:
+Music_MeetProfOak_branch_b0d8::
 	octave 4
 	note G#, 1
 	rest 1
@@ -383,7 +383,7 @@ Music_MeetProfOak_branch_b0d8:
 	rest 1
 	loopchannel 2, Music_MeetProfOak_branch_b0d8
 
-Music_MeetProfOak_branch_b0ed:
+Music_MeetProfOak_branch_b0ed::
 	note F#, 1
 	rest 1
 	note A_, 1
@@ -402,7 +402,7 @@ Music_MeetProfOak_branch_b0ed:
 	rest 1
 	loopchannel 2, Music_MeetProfOak_branch_b0ed
 
-Music_MeetProfOak_branch_b101:
+Music_MeetProfOak_branch_b101::
 	note G#, 1
 	rest 1
 	note B_, 1

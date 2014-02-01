@@ -1,10 +1,10 @@
-Music_Routes2_Ch1: ; 9db9 (2:5db9)
+Music_Routes2_Ch1:: ; 9db9 (2:5db9)
 	tempo 0, 152
 	stereopanning 119
 	vibrato 9, 2, 5
 	duty 1
 
-Music_Routes2_branch_9dc3:
+Music_Routes2_branch_9dc3::
 	notetype 12, 11, 2
 	octave 2
 	note B_, 4
@@ -142,11 +142,11 @@ Music_Routes2_branch_9dc3:
 	endchannel
 
 
-Music_Routes2_Ch2: ; 9e4f (2:5e4f)
+Music_Routes2_Ch2:: ; 9e4f (2:5e4f)
 	vibrato 8, 2, 6
 	duty 3
 
-Music_Routes2_branch_9e54:
+Music_Routes2_branch_9e54::
 	notetype 12, 13, 4
 	octave 4
 	note E_, 6
@@ -216,10 +216,10 @@ Music_Routes2_branch_9e54:
 	endchannel
 
 
-Music_Routes2_Ch3: ; 9e9b (2:5e9b)
+Music_Routes2_Ch3:: ; 9e9b (2:5e9b)
 	vibrato 9, 2, 8
 
-Music_Routes2_branch_9e9e:
+Music_Routes2_branch_9e9e::
 	notetype 12, 1, 1
 	octave 3
 	note E_, 2
@@ -324,7 +324,7 @@ Music_Routes2_branch_9e9e:
 	endchannel
 
 
-Music_Routes2_Ch4: ; 9f08 (2:5f08)
+Music_Routes2_Ch4:: ; 9f08 (2:5f08)
 	dspeed 12
 	dnote 2, snare3
 	rest 2

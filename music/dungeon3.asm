@@ -1,14 +1,14 @@
-Music_Dungeon3_Ch1: ; 7e9f1 (1f:69f1)
+Music_Dungeon3_Ch1:: ; 7e9f1 (1f:69f1)
 	tempo 0, 160
 	stereopanning 119
 	duty 3
 	togglecall
 	vibrato 8, 1, 4
 
-Music_Dungeon3_branch_7e9fc:
+Music_Dungeon3_branch_7e9fc::
 	notetype 12, 12, 3
 
-Music_Dungeon3_branch_7e9fe:
+Music_Dungeon3_branch_7e9fe::
 	callchannel Music_Dungeon3_branch_7eab2
 	loopchannel 3, Music_Dungeon3_branch_7e9fe
 	octave 2
@@ -24,11 +24,11 @@ Music_Dungeon3_branch_7e9fe:
 	note D#, 2
 	note E_, 2
 
-Music_Dungeon3_branch_7ea11:
+Music_Dungeon3_branch_7ea11::
 	callchannel Music_Dungeon3_branch_7eac1
 	loopchannel 4, Music_Dungeon3_branch_7ea11
 
-Music_Dungeon3_branch_7ea18:
+Music_Dungeon3_branch_7ea18::
 	callchannel Music_Dungeon3_branch_7eab2
 	loopchannel 4, Music_Dungeon3_branch_7ea18
 	octave 4
@@ -59,11 +59,11 @@ Music_Dungeon3_branch_7ea18:
 	note F_, 2
 	note F_, 2
 
-Music_Dungeon3_branch_7ea3c:
+Music_Dungeon3_branch_7ea3c::
 	callchannel Music_Dungeon3_branch_7eace
 	loopchannel 4, Music_Dungeon3_branch_7ea3c
 
-Music_Dungeon3_branch_7ea43:
+Music_Dungeon3_branch_7ea43::
 	callchannel Music_Dungeon3_branch_7eadd
 	loopchannel 3, Music_Dungeon3_branch_7ea43
 	octave 3
@@ -156,7 +156,7 @@ Music_Dungeon3_branch_7ea43:
 	rest 16
 	loopchannel 0, Music_Dungeon3_branch_7e9fc
 
-Music_Dungeon3_branch_7eab2:
+Music_Dungeon3_branch_7eab2::
 	octave 2
 	note B_, 2
 	octave 3
@@ -173,7 +173,7 @@ Music_Dungeon3_branch_7eab2:
 	note D#, 2
 	endchannel
 
-Music_Dungeon3_branch_7eac1:
+Music_Dungeon3_branch_7eac1::
 	note E_, 2
 	note G#, 2
 	octave 4
@@ -188,7 +188,7 @@ Music_Dungeon3_branch_7eac1:
 	note G#, 2
 	endchannel
 
-Music_Dungeon3_branch_7eace:
+Music_Dungeon3_branch_7eace::
 	octave 3
 	note D#, 2
 	octave 2
@@ -205,7 +205,7 @@ Music_Dungeon3_branch_7eace:
 	note B_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eadd:
+Music_Dungeon3_branch_7eadd::
 	note A_, 2
 	note F_, 2
 	octave 3
@@ -220,7 +220,7 @@ Music_Dungeon3_branch_7eadd:
 	note F_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eaea:
+Music_Dungeon3_branch_7eaea::
 	octave 3
 	note G#, 2
 	note E_, 2
@@ -235,14 +235,14 @@ Music_Dungeon3_branch_7eaea:
 	note C_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eaf7:
+Music_Dungeon3_branch_7eaf7::
 	note D#, 2
 	note G_, 2
 	note D#, 2
 	note C#, 6
 	endchannel
 
-Music_Dungeon3_branch_7eafc:
+Music_Dungeon3_branch_7eafc::
 	tempo 0, 168
 	octave 1
 	note A#, 1
@@ -335,11 +335,11 @@ Music_Dungeon3_branch_7eafc:
 	endchannel
 
 
-Music_Dungeon3_Ch2: ; 7eb68 (1f:6b68)
+Music_Dungeon3_Ch2:: ; 7eb68 (1f:6b68)
 	vibrato 11, 1, 5
 	duty 3
 
-Music_Dungeon3_branch_7eb6d:
+Music_Dungeon3_branch_7eb6d::
 	notetype 12, 13, 3
 	octave 4
 	note D#, 6
@@ -607,7 +607,7 @@ Music_Dungeon3_branch_7eb6d:
 	loopchannel 0, Music_Dungeon3_branch_7eb6d
 
 
-Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
+Music_Dungeon3_Ch3:: ; 7ec7a (1f:6c7a)
 	notetype 12, 1, 2
 	rest 16
 	rest 16
@@ -710,7 +710,7 @@ Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
 	loopchannel 0, Music_Dungeon3_Ch3
 
 
-Music_Dungeon3_Ch4: ; 7ece4 (1f:6ce4)
+Music_Dungeon3_Ch4:: ; 7ece4 (1f:6ce4)
 	dspeed 12
 	rest 16
 	rest 16

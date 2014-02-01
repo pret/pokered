@@ -1,4 +1,4 @@
-Music_GameCorner_Ch1: ; 7e20b (1f:620b)
+Music_GameCorner_Ch1:: ; 7e20b (1f:620b)
 	tempo 0, 120
 	stereopanning 119
 	duty 3
@@ -15,7 +15,7 @@ Music_GameCorner_Ch1: ; 7e20b (1f:620b)
 	note C#, 2
 	note D#, 16
 
-Music_GameCorner_branch_7e222:
+Music_GameCorner_branch_7e222::
 	notetype 12, 11, 5
 	octave 3
 	note C#, 4
@@ -183,7 +183,7 @@ Music_GameCorner_branch_7e222:
 	loopchannel 0, Music_GameCorner_branch_7e222
 
 
-Music_GameCorner_Ch2: ; 7e2df (1f:62df)
+Music_GameCorner_Ch2:: ; 7e2df (1f:62df)
 	duty 2
 	vibrato 10, 2, 3
 	notetype 12, 12, 6
@@ -206,7 +206,7 @@ Music_GameCorner_Ch2: ; 7e2df (1f:62df)
 	note A#, 1
 	note B_, 8
 
-Music_GameCorner_branch_7e2fa:
+Music_GameCorner_branch_7e2fa::
 	duty 2
 	notetype 12, 12, 7
 	octave 3
@@ -343,7 +343,7 @@ Music_GameCorner_branch_7e2fa:
 	loopchannel 0, Music_GameCorner_branch_7e2fa
 
 
-Music_GameCorner_Ch3: ; 7e38b (1f:638b)
+Music_GameCorner_Ch3:: ; 7e38b (1f:638b)
 	notetype 12, 1, 3
 	octave 5
 	note C#, 1
@@ -370,7 +370,7 @@ Music_GameCorner_Ch3: ; 7e38b (1f:638b)
 	note D#, 1
 	rest 1
 
-Music_GameCorner_branch_7e3a5:
+Music_GameCorner_branch_7e3a5::
 	callchannel Music_GameCorner_branch_7e418
 	callchannel Music_GameCorner_branch_7e42d
 	callchannel Music_GameCorner_branch_7e442
@@ -442,7 +442,7 @@ Music_GameCorner_branch_7e3a5:
 	callchannel Music_GameCorner_branch_7e42d
 	loopchannel 0, Music_GameCorner_branch_7e3a5
 
-Music_GameCorner_branch_7e418:
+Music_GameCorner_branch_7e418::
 	note E_, 1
 	rest 1
 	note G#, 1
@@ -465,7 +465,7 @@ Music_GameCorner_branch_7e418:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e42d:
+Music_GameCorner_branch_7e42d::
 	note E_, 1
 	rest 1
 	note G#, 1
@@ -488,7 +488,7 @@ Music_GameCorner_branch_7e42d:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e442:
+Music_GameCorner_branch_7e442::
 	note E_, 1
 	rest 1
 	note B_, 1
@@ -511,7 +511,7 @@ Music_GameCorner_branch_7e442:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e457:
+Music_GameCorner_branch_7e457::
 	note D#, 1
 	rest 1
 	note A_, 1
@@ -534,7 +534,7 @@ Music_GameCorner_branch_7e457:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e46c:
+Music_GameCorner_branch_7e46c::
 	note D#, 1
 	rest 1
 	note F#, 1
@@ -557,7 +557,7 @@ Music_GameCorner_branch_7e46c:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e481:
+Music_GameCorner_branch_7e481::
 	note D#, 1
 	rest 1
 	note F#, 1
@@ -580,7 +580,7 @@ Music_GameCorner_branch_7e481:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e496:
+Music_GameCorner_branch_7e496::
 	note F#, 1
 	rest 1
 	note B_, 1
@@ -603,7 +603,7 @@ Music_GameCorner_branch_7e496:
 	rest 1
 	endchannel
 
-Music_GameCorner_branch_7e4ab:
+Music_GameCorner_branch_7e4ab::
 	note F#, 1
 	rest 1
 	note A_, 1

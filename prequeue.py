@@ -23,8 +23,6 @@ def preprocess_queue(filenames=sys.argv[1:]):
         sys.stdout = open(dest, 'w')
         processor.preprocess()
 
-    processor.update_globals()
-
     sys.stdin  = stdin
     sys.stdout = stdout
 

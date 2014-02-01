@@ -1,11 +1,11 @@
-Music_Vermilion_Ch1: ; b9eb (2:79eb)
+Music_Vermilion_Ch1:: ; b9eb (2:79eb)
 	tempo 0, 156
 	stereopanning 119
 	duty 3
 	vibrato 12, 3, 4
 	togglecall
 
-Music_Vermilion_branch_b9f6:
+Music_Vermilion_branch_b9f6::
 	notetype 12, 11, 5
 	octave 3
 	note E_, 4
@@ -111,11 +111,11 @@ Music_Vermilion_branch_b9f6:
 	loopchannel 0, Music_Vermilion_branch_b9f6
 
 
-Music_Vermilion_Ch2: ; ba61 (2:7a61)
+Music_Vermilion_Ch2:: ; ba61 (2:7a61)
 	duty 3
 	vibrato 10, 2, 3
 
-Music_Vermilion_branch_ba66:
+Music_Vermilion_branch_ba66::
 	notetype 12, 12, 7
 	octave 3
 	note A_, 8
@@ -178,10 +178,10 @@ Music_Vermilion_branch_ba66:
 	loopchannel 0, Music_Vermilion_branch_ba66
 
 
-Music_Vermilion_Ch3: ; baa6 (2:7aa6)
+Music_Vermilion_Ch3:: ; baa6 (2:7aa6)
 	notetype 12, 1, 0
 
-Music_Vermilion_branch_baa8:
+Music_Vermilion_branch_baa8::
 	octave 4
 	note A_, 2
 	note E_, 2
@@ -282,10 +282,10 @@ Music_Vermilion_branch_baa8:
 	loopchannel 0, Music_Vermilion_branch_baa8
 
 
-Music_Vermilion_Ch4: ; bb0d (2:7b0d)
+Music_Vermilion_Ch4:: ; bb0d (2:7b0d)
 	dspeed 12
 
-Music_Vermilion_branch_bb0e:
+Music_Vermilion_branch_bb0e::
 	callchannel Music_Vermilion_branch_bb3f
 	dnote 2, triangle1
 	dnote 1, triangle1
@@ -307,7 +307,7 @@ Music_Vermilion_branch_bb0e:
 	callchannel Music_Vermilion_branch_bb3f
 	loopchannel 0, Music_Vermilion_branch_bb0e
 
-Music_Vermilion_branch_bb3f:
+Music_Vermilion_branch_bb3f::
 	dnote 2, triangle1
 	dnote 1, triangle1
 	dnote 1, triangle1

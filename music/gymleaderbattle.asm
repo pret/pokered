@@ -1,4 +1,4 @@
-Music_GymLeaderBattle_Ch1: ; 22370 (8:6370)
+Music_GymLeaderBattle_Ch1:: ; 22370 (8:6370)
 	tempo 0, 104
 	stereopanning 119
 	duty 3
@@ -57,7 +57,7 @@ Music_GymLeaderBattle_Ch1: ; 22370 (8:6370)
 	rest 9
 	note A_, 6
 
-Music_GymLeaderBattle_branch_223b0:
+Music_GymLeaderBattle_branch_223b0::
 	note F#, 1
 	octave 3
 	note C#, 1
@@ -547,7 +547,7 @@ Music_GymLeaderBattle_branch_223b0:
 	loopchannel 0, Music_GymLeaderBattle_branch_223b0
 
 
-Music_GymLeaderBattle_Ch2: ; 225a1 (8:65a1)
+Music_GymLeaderBattle_Ch2:: ; 225a1 (8:65a1)
 	duty 3
 	vibrato 8, 2, 5
 	notetype 12, 12, 3
@@ -608,7 +608,7 @@ Music_GymLeaderBattle_Ch2: ; 225a1 (8:65a1)
 	octave 4
 	note C#, 6
 
-Music_GymLeaderBattle_branch_225e0:
+Music_GymLeaderBattle_branch_225e0::
 	notetype 12, 12, 5
 	note D#, 4
 	note C#, 4
@@ -848,7 +848,7 @@ Music_GymLeaderBattle_branch_225e0:
 	loopchannel 0, Music_GymLeaderBattle_branch_225e0
 
 
-Music_GymLeaderBattle_Ch3: ; 226ef (8:66ef)
+Music_GymLeaderBattle_Ch3:: ; 226ef (8:66ef)
 	vibrato 0, 2, 0
 	notetype 12, 1, 3
 	rest 12
@@ -1040,7 +1040,7 @@ Music_GymLeaderBattle_Ch3: ; 226ef (8:66ef)
 	note C#, 6
 	notetype 12, 1, 4
 
-Music_GymLeaderBattle_branch_227b1:
+Music_GymLeaderBattle_branch_227b1::
 	octave 3
 	note B_, 2
 	octave 4

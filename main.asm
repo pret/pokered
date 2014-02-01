@@ -32,7 +32,7 @@ SECTION "joypad",ROM0[$60]
 
 SECTION "bank0",ROM0[$61]
 
-DisableLCD: ; 0061 (0:0061)
+DisableLCD:: ; 0061 (0:0061)
 	xor a
 	ld [$ff0f],a
 	ld a,[$ffff]
@@ -50,13 +50,13 @@ DisableLCD: ; 0061 (0:0061)
 	ld [$ffff],a
 	ret
 
-EnableLCD: ; 007b (0:007b)
+EnableLCD:: ; 007b (0:007b)
 	ld a,[$ff40]
 	set 7,a
 	ld [$ff40],a
 	ret
 
-CleanLCD_OAM: ; 0082 (0:0082)
+CleanLCD_OAM:: ; 0082 (0:0082)
 	xor a
 	ld hl,wOAMBuffer
 	ld b,$a0
@@ -66,7 +66,7 @@ CleanLCD_OAM: ; 0082 (0:0082)
 	jr nz,.loop
 	ret
 
-ResetLCD_OAM: ; 008d (0:008d)
+ResetLCD_OAM:: ; 008d (0:008d)
 	ld a,$a0
 	ld hl,wOAMBuffer
 	ld de,$0004
@@ -78,7 +78,7 @@ ResetLCD_OAM: ; 008d (0:008d)
 	jr nz,.loop
 	ret
 
-FarCopyData: ; 009d (0:009d)
+FarCopyData:: ; 009d (0:009d)
 ; copy bc bytes of data from a:hl to de
 	ld [$CEE9],a ; save future bank # for later
 	ld a,[H_LOADEDROMBANK] ; get current bank #
@@ -91,7 +91,7 @@ FarCopyData: ; 009d (0:009d)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
-CopyData: ; 00b5 (0:00b5)
+CopyData:: ; 00b5 (0:00b5)
 ; copy bc bytes of data from hl to de
 	ld a,[hli]
 	ld [de],a
@@ -107,7 +107,7 @@ nop
 jp Start
 
 SECTION "start",ROM0[$150]
-Start: ; 0150 (0:0150)
+Start:: ; 0150 (0:0150)
 	cp $11 ; value that indicates Gameboy Color
 	jr z,.gbcDetected
 	xor a
@@ -130,7 +130,7 @@ Start: ; 0150 (0:0150)
 ; bit 5 - Left
 ; bit 6 - Up
 ; bit 7 - Down
-ReadJoypadRegister: ; 015f (0:015f)
+ReadJoypadRegister:: ; 015f (0:015f)
 	ld a,%00100000 ; select direction keys
 	ld c,$00
 	ld [rJOYP],a
@@ -169,7 +169,7 @@ ReadJoypadRegister: ; 015f (0:015f)
 ; [H_NEWLYRELEASEDBUTTONS] = keys released since last time
 ; [H_NEWLYPRESSEDBUTTONS] = keys pressed since last time
 ; [H_CURRENTPRESSEDBUTTONS] = currently pressed keys
-GetJoypadState: ; 019a (0:019a)
+GetJoypadState:: ; 019a (0:019a)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a,Bank(_GetJoypadState)
@@ -182,7 +182,7 @@ GetJoypadState: ; 019a (0:019a)
 	ret
 
 ; see also MapHeaderBanks
-MapHeaderPointers: ; 01ae (0:01ae)
+MapHeaderPointers:: ; 01ae (0:01ae)
 	dw PalletTown_h
 	dw ViridianCity_h
 	dw PewterCity_h
@@ -436,13 +436,13 @@ MapHeaderPointers: ; 01ae (0:01ae)
 ; at the beginning of each overworld loop iteration as the player jumps
 ; down a ledge
 ; it also ends the jump when it's completed
-HandleMidJump: ; 039e (0:039e)
+HandleMidJump:: ; 039e (0:039e)
 	ld b, BANK(_HandleMidJump)
 	ld hl, _HandleMidJump
 	jp Bankswitch
 
 ; this is jumped to immediately after loading a save / starting a new game / loading a new map
-EnterMap: ; 03a6 (0:03a6)
+EnterMap:: ; 03a6 (0:03a6)
 	ld a,$ff
 	ld [wJoypadForbiddenButtonsMask],a
 	call LoadMapData ; load map data
@@ -482,9 +482,9 @@ EnterMap: ; 03a6 (0:03a6)
 	xor a
 	ld [wJoypadForbiddenButtonsMask],a
 
-OverworldLoop: ; 03ff (0:03ff)
+OverworldLoop:: ; 03ff (0:03ff)
 	call DelayFrame
-OverworldLoopLessDelay: ; 0402 (0:0402)
+OverworldLoopLessDelay:: ; 0402 (0:0402)
 	call DelayFrame
 	call LoadGBPal
 	ld a,[$d736]
@@ -798,7 +798,7 @@ OverworldLoopLessDelay: ; 0402 (0:0402)
 
 ; function to determine if there will be a battle and execute it (either a trainer battle or wild battle)
 ; sets carry if a battle occurred and unsets carry if not
-NewBattle: ; 0683 (0:0683)
+NewBattle:: ; 0683 (0:0683)
 	ld a,[$d72d]
 	bit 4,a
 	jr nz,.noBattle
@@ -815,7 +815,7 @@ NewBattle: ; 0683 (0:0683)
 	ret
 
 ; function to make bikes twice as fast as walking
-BikeSpeedup: ; 06a0 (0:06a0)
+BikeSpeedup:: ; 06a0 (0:06a0)
 	ld a,[$cc57]
 	and a
 	ret nz
@@ -829,7 +829,7 @@ BikeSpeedup: ; 06a0 (0:06a0)
 	jp AdvancePlayerSprite
 
 ; check if the player has stepped onto a warp after having not collided
-CheckWarpsNoCollision: ; 06b4 (0:06b4)
+CheckWarpsNoCollision:: ; 06b4 (0:06b4)
 	ld a,[$d3ae] ; number of warps
 	and a
 	jp z,CheckMapConnections
@@ -841,7 +841,7 @@ CheckWarpsNoCollision: ; 06b4 (0:06b4)
 	ld a,[W_XCOORD]
 	ld e,a
 	ld hl,$d3af ; start of warp entries
-CheckWarpsNoCollisionLoop: ; 06cc (0:06cc)
+CheckWarpsNoCollisionLoop:: ; 06cc (0:06cc)
 	ld a,[hli] ; check if the warp's Y position matches
 	cp d
 	jr nz,CheckWarpsNoCollisionRetry1
@@ -880,7 +880,7 @@ CheckWarpsNoCollisionLoop: ; 06cc (0:06cc)
 	jr WarpFound1
 
 ; check if the player has stepped onto a warp after having collided
-CheckWarpsCollision: ; 0706 (0:0706)
+CheckWarpsCollision:: ; 0706 (0:0706)
 	ld a,[$d3ae] ; number of warps
 	ld c,a
 	ld hl,$d3af ; start of warp entries
@@ -909,20 +909,20 @@ CheckWarpsCollision: ; 0706 (0:0706)
 	jr nz,.loop
 	jp OverworldLoop
 
-CheckWarpsNoCollisionRetry1: ; 072f (0:072f)
+CheckWarpsNoCollisionRetry1:: ; 072f (0:072f)
 	inc hl
-CheckWarpsNoCollisionRetry2: ; 0730 (0:0730)
+CheckWarpsNoCollisionRetry2:: ; 0730 (0:0730)
 	inc hl
 	inc hl
 	jp ContinueCheckWarpsNoCollisionLoop
 
-WarpFound1: ; 0735 (0:0735)
+WarpFound1:: ; 0735 (0:0735)
 	ld a,[hli]
 	ld [$d42f],a ; save target warp ID
 	ld a,[hli]
 	ld [$ff8b],a ; save target map
 
-WarpFound2: ; 073c (0:073c)
+WarpFound2:: ; 073c (0:073c)
 	ld a,[$d3ae] ; number of warps
 	sub c
 	ld [$d73b],a ; save ID of used warp
@@ -982,13 +982,13 @@ WarpFound2: ; 073c (0:073c)
 	call Func_12da
 	jp EnterMap
 
-ContinueCheckWarpsNoCollisionLoop: ; 07b5 (0:07b5)
+ContinueCheckWarpsNoCollisionLoop:: ; 07b5 (0:07b5)
 	inc b ; increment warp number
 	dec c ; decrement number of warps
 	jp nz,CheckWarpsNoCollisionLoop
 
 ; if no matching warp was found
-CheckMapConnections: ; 07ba (0:07ba)
+CheckMapConnections:: ; 07ba (0:07ba)
 .checkWestMap
 	ld a,[W_XCOORD]
 	cp a,$ff
@@ -1128,7 +1128,7 @@ CheckMapConnections: ; 07ba (0:07ba)
 	jp OverworldLoop
 
 ; function to play a sound when changing maps
-PlayMapChangeSound: ; 08c9 (0:08c9)
+PlayMapChangeSound:: ; 08c9 (0:08c9)
 	FuncCoord 8, 8 ; $c448
 	ld a,[Coord] ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
@@ -1144,7 +1144,7 @@ PlayMapChangeSound: ; 08c9 (0:08c9)
 	ret nz
 	jp GBFadeIn1
 
-CheckIfInOutsideMap: ; 08e1 (0:08e1)
+CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; If the player is in an outside map (a town or route), set the z flag
 	ld a,[W_CURMAPTILESET]
 	and a ; most towns/routes have tileset 0
@@ -1158,7 +1158,7 @@ CheckIfInOutsideMap: ; 08e1 (0:08e1)
 ; "function 1" passes when the player is at the edge of the map and is facing towards the outside of the map
 ; "function 2" passes when the the tile in front of the player is among a certain set
 ; sets carry if the check passes, otherwise clears carry
-ExtraWarpCheck: ; 08e9 (0:08e9)
+ExtraWarpCheck:: ; 08e9 (0:08e9)
 	ld a,[W_CURMAP]
 	cp a,SS_ANNE_3
 	jr z,.useFunction1
@@ -1188,7 +1188,7 @@ ExtraWarpCheck: ; 08e9 (0:08e9)
 	ld b, BANK(Func_c44e)
 	jp Bankswitch
 
-MapEntryAfterBattle: ; 091f (0:091f)
+MapEntryAfterBattle:: ; 091f (0:091f)
 	ld b, BANK(Func_c35f)
 	ld hl, Func_c35f
 	call Bankswitch ; function that appears to disable warp testing after collisions if the player is standing on a warp
@@ -1199,7 +1199,7 @@ MapEntryAfterBattle: ; 091f (0:091f)
 
 ; for when all the player's pokemon faint
 ; other code prints the "you blacked out" message before this is called
-HandleBlackOut: ; 0931 (0:0931)
+HandleBlackOut:: ; 0931 (0:0931)
 	call GBFadeIn1
 	ld a,$08
 	call StopMusic
@@ -1213,7 +1213,7 @@ HandleBlackOut: ; 0931 (0:0931)
 	call Func_2312
 	jp Func_5d5f
 
-StopMusic: ; 0951 (0:0951)
+StopMusic:: ; 0951 (0:0951)
 	ld [wMusicHeaderPointer],a
 	ld a,$ff
 	ld [$c0ee],a
@@ -1224,7 +1224,7 @@ StopMusic: ; 0951 (0:0951)
 	jr nz,.waitLoop
 	jp StopAllSounds
 
-HandleFlyOrTeleportAway: ; 0965 (0:0965)
+HandleFlyOrTeleportAway:: ; 0965 (0:0965)
 	call UpdateSprites ; move sprites
 	call Delay3
 	xor a
@@ -1243,13 +1243,13 @@ HandleFlyOrTeleportAway: ; 0965 (0:0965)
 	jp Func_5d5f
 
 ; function that calls a function to do fly away or teleport away graphics
-DoFlyOrTeleportAwayGraphics: ; 098f (0:098f)
+DoFlyOrTeleportAwayGraphics:: ; 098f (0:098f)
 	ld b, BANK(_DoFlyOrTeleportAwayGraphics)
 	ld hl, _DoFlyOrTeleportAwayGraphics
 	jp Bankswitch
 
 ; load sprite graphics based on whether the player is standing, biking, or surfing
-LoadPlayerSpriteGraphics: ; 0997 (0:0997)
+LoadPlayerSpriteGraphics:: ; 0997 (0:0997)
 	ld a,[$d700]
 	dec a
 	jr z,.ridingBike
@@ -1277,7 +1277,7 @@ LoadPlayerSpriteGraphics: ; 0997 (0:0997)
 
 ; function to check if bike riding is allowed on the current map
 ; sets carry if bike is allowed, clears carry otherwise
-IsBikeRidingAllowed: ; 09c5 (0:09c5)
+IsBikeRidingAllowed:: ; 09c5 (0:09c5)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_23
 	jr z,.allowed
@@ -1298,11 +1298,11 @@ IsBikeRidingAllowed: ; 09c5 (0:09c5)
 	scf
 	ret
 
-BikeRidingTilesets: ; 09e2 (0:09e2)
+BikeRidingTilesets:: ; 09e2 (0:09e2)
 	db $00, $03, $0B, $0E, $11, $FF
 
 ; load the tile pattern data of the current tileset into VRAM
-LoadTilesetTilePatternData: ; 09e8 (0:09e8)
+LoadTilesetTilePatternData:: ; 09e8 (0:09e8)
 	ld a,[$d52e]
 	ld l,a
 	ld a,[$d52f]
@@ -1314,7 +1314,7 @@ LoadTilesetTilePatternData: ; 09e8 (0:09e8)
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
 ; it can also load partial tile maps of connected maps into a border of length 3 around the current map
-LoadTileBlockMap: ; 09fc (0:09fc)
+LoadTileBlockMap:: ; 09fc (0:09fc)
 ; fill C6E8-CBFB with the background tile
 	ld hl,$c6e8
 	ld a,[$d3ad] ; background tile number
@@ -1443,7 +1443,7 @@ LoadTileBlockMap: ; 09fc (0:09fc)
 .done
 	ret
 
-LoadNorthSouthConnectionsTileMap: ; 0ade (0:0ade)
+LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 	ld c,$03
 .loop
 	push de
@@ -1475,7 +1475,7 @@ LoadNorthSouthConnectionsTileMap: ; 0ade (0:0ade)
 	jr nz,.loop
 	ret
 
-LoadEastWestConnectionsTileMap: ; 0b02 (0:0b02)
+LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	push hl
 	push de
 	ld c,$03
@@ -1507,7 +1507,7 @@ LoadEastWestConnectionsTileMap: ; 0b02 (0:0b02)
 ; function to check if there is a sign or sprite in front of the player
 ; if so, it is stored in [$FF8C]
 ; if not, [$FF8C] is set to 0
-IsSpriteOrSignInFrontOfPlayer: ; 0b23 (0:0b23)
+IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	xor a
 	ld [$ff8c],a
 	ld a,[$d4b0] ; number of signs in the map
@@ -1563,9 +1563,9 @@ IsSpriteOrSignInFrontOfPlayer: ; 0b23 (0:0b23)
 
 ; part of the above function, but sometimes its called on its own, when signs are irrelevant
 ; the caller must zero [$FF8C]
-IsSpriteInFrontOfPlayer: ; 0b6b (0:0b6b)
+IsSpriteInFrontOfPlayer:: ; 0b6b (0:0b6b)
 	ld d,$10 ; talking range in pixels (normal range)
-IsSpriteInFrontOfPlayer2: ; 0b6d (0:0b6d)
+IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld bc,$3c40 ; Y and X position of player sprite
 	ld a,[$c109] ; direction the player is facing
 .checkIfPlayerFacingUp
@@ -1649,7 +1649,7 @@ IsSpriteInFrontOfPlayer2: ; 0b6d (0:0b6d)
 
 ; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
 ; sets the carry flag if there is a collision, and unsets it if there isn't a collision
-CollisionCheckOnLand: ; 0bd1 (0:0bd1)
+CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	ld a,[$d736]
 	bit 6,a ; is the player jumping?
 	jr nz,.noCollision
@@ -1689,7 +1689,7 @@ CollisionCheckOnLand: ; 0bd1 (0:0bd1)
 
 ; function that checks if the tile in front of the player is passable
 ; clears carry if it is, sets carry if not
-CheckTilePassable: ; 0c10 (0:0c10)
+CheckTilePassable:: ; 0c10 (0:0c10)
 	ld a,$35
 	call Predef ; get tile in front of player
 	ld a,[$cfc6] ; tile in front of player
@@ -1713,7 +1713,7 @@ CheckTilePassable: ; 0c10 (0:0c10)
 ; and check for collisions that only occur between certain pairs of tiles
 ; Input: hl - address of directional collision data
 ; sets carry if there is a collision and unsets carry if not
-CheckForJumpingAndTilePairCollisions: ; 0c2a (0:0c2a)
+CheckForJumpingAndTilePairCollisions:: ; 0c2a (0:0c2a)
 	push hl
 	ld a,$35
 	call Predef ; get the tile in front of the player
@@ -1731,12 +1731,12 @@ CheckForJumpingAndTilePairCollisions: ; 0c2a (0:0c2a)
 	ret nz
 ; if not jumping
 
-Func_c44: ; 0c44 (0:0c44)
+Func_c44:: ; 0c44 (0:0c44)
 	FuncCoord 8, 9 ; $c45c
 	ld a,[Coord] ; tile the player is on
 	ld [$cf0e],a
 
-CheckForTilePairCollisions: ; 0c4a (0:0c4a)
+CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
 	ld a,[$cfc6] ; tile in front of the player
 	ld c,a
 .tilePairCollisionLoop
@@ -1786,7 +1786,7 @@ CheckForTilePairCollisions: ; 0c4a (0:0c4a)
 ; these entries indicate that the player may not cross between tile 1 and tile 2
 ; it's mainly used to simulate differences in elevation
 
-TilePairCollisionsLand: ; 0c7e (0:0c7e)
+TilePairCollisionsLand:: ; 0c7e (0:0c7e)
 	db $11, $20, $05;
 	db $11, $41, $05;
 	db $03, $30, $2E;
@@ -1800,14 +1800,14 @@ TilePairCollisionsLand: ; 0c7e (0:0c7e)
 	db $03, $5F, $2E;
 	db $FF;
 
-TilePairCollisionsWater: ; 0ca0 (0:0ca0)
+TilePairCollisionsWater:: ; 0ca0 (0:0ca0)
 	db $03, $14, $2E;
 	db $03, $48, $2E;
 	db $11, $14, $05;
 	db $FF;
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
-LoadCurrentMapView: ; 0caa (0:0caa)
+LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$d52b] ; tile data ROM bank
@@ -1897,7 +1897,7 @@ LoadCurrentMapView: ; 0caa (0:0caa)
 	ld [$2000],a ; restore previous ROM bank
 	ret
 
-AdvancePlayerSprite: ; 0d27 (0:0d27)
+AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	ld a,[$c103] ; delta Y
 	ld b,a
 	ld a,[$c105] ; delta X
@@ -2095,7 +2095,7 @@ AdvancePlayerSprite: ; 0d27 (0:0d27)
 ; the following four functions are used to move the pointer to the upper left
 ; corner of the tile block map in the direction of motion
 
-MoveTileBlockMapPointerEast: ; 0e65 (0:0e65)
+MoveTileBlockMapPointerEast:: ; 0e65 (0:0e65)
 	ld a,[de]
 	add a,$01
 	ld [de],a
@@ -2106,7 +2106,7 @@ MoveTileBlockMapPointerEast: ; 0e65 (0:0e65)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerWest: ; 0e6f (0:0e6f)
+MoveTileBlockMapPointerWest:: ; 0e6f (0:0e6f)
 	ld a,[de]
 	sub a,$01
 	ld [de],a
@@ -2117,7 +2117,7 @@ MoveTileBlockMapPointerWest: ; 0e6f (0:0e6f)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerSouth: ; 0e79 (0:0e79)
+MoveTileBlockMapPointerSouth:: ; 0e79 (0:0e79)
 	add a,$06
 	ld b,a
 	ld a,[de]
@@ -2130,7 +2130,7 @@ MoveTileBlockMapPointerSouth: ; 0e79 (0:0e79)
 	ld [de],a
 	ret
 
-MoveTileBlockMapPointerNorth: ; 0e85 (0:0e85)
+MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 	add a,$06
 	ld b,a
 	ld a,[de]
@@ -2146,7 +2146,7 @@ MoveTileBlockMapPointerNorth: ; 0e85 (0:0e85)
 ; the following 6 functions are used to tell the V-blank handler to redraw
 ; the portion of the map that was newly exposed due to the player's movement
 
-ScheduleNorthRowRedraw: ; 0e91 (0:0e91)
+ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 	FuncCoord 0, 0
 	ld hl,Coord
 	call ScheduleRowRedrawHelper
@@ -2158,7 +2158,7 @@ ScheduleNorthRowRedraw: ; 0e91 (0:0e91)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleRowRedrawHelper: ; 0ea6 (0:0ea6)
+ScheduleRowRedrawHelper:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
 	ld c,$28
 .loop
@@ -2169,7 +2169,7 @@ ScheduleRowRedrawHelper: ; 0ea6 (0:0ea6)
 	jr nz,.loop
 	ret
 
-ScheduleSouthRowRedraw: ; 0eb2 (0:0eb2)
+ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	FuncCoord 0,16
 	ld hl,Coord
 	call ScheduleRowRedrawHelper
@@ -2189,7 +2189,7 @@ ScheduleSouthRowRedraw: ; 0eb2 (0:0eb2)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleEastColumnRedraw: ; 0ed3 (0:0ed3)
+ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 	FuncCoord 18,0
 	ld hl,Coord
 	call ScheduleColumnRedrawHelper
@@ -2208,7 +2208,7 @@ ScheduleEastColumnRedraw: ; 0ed3 (0:0ed3)
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleColumnRedrawHelper: ; 0ef2 (0:0ef2)
+ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ld de,wScreenEdgeTiles
 	ld c,$12
 .loop
@@ -2228,7 +2228,7 @@ ScheduleColumnRedrawHelper: ; 0ef2 (0:0ef2)
 	jr nz,.loop
 	ret
 
-ScheduleWestColumnRedraw: ; 0f08 (0:0f08)
+ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
 	FuncCoord 0,0
 	ld hl,Coord
 	call ScheduleColumnRedrawHelper
@@ -2242,7 +2242,7 @@ ScheduleWestColumnRedraw: ; 0f08 (0:0f08)
 
 ; function to write the tiles that make up a tile block to memory
 ; Input: c = tile block ID, hl = destination address
-DrawTileBlock: ; 0f1d (0:0f1d)
+DrawTileBlock:: ; 0f1d (0:0f1d)
 	push hl
 	ld a,[$d52c] ; pointer to tiles
 	ld l,a
@@ -2283,7 +2283,7 @@ DrawTileBlock: ; 0f1d (0:0f1d)
 	ret
 
 ; function to update joypad state and simulate button presses
-GetJoypadStateOverworld: ; 0f4d (0:0f4d)
+GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
 	xor a
 	ld [$c103],a
 	ld [$c105],a
@@ -2354,7 +2354,7 @@ GetJoypadStateOverworld: ; 0f4d (0:0f4d)
 ; so the old value of c is used. 2429 is always called before this function,
 ; and 2429 always sets c to 0xF0. There is no 0xF0 background tile, so it
 ; is considered impassable and it is detected as a collision.
-CollisionCheckOnWater: ; 0fb7 (0:0fb7)
+CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	ld a,[$d730]
 	bit 7,a
 	jp nz,.noCollision ; return and clear carry if button presses are being simulated
@@ -2414,7 +2414,7 @@ CollisionCheckOnWater: ; 0fb7 (0:0fb7)
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
 
 ; function to run the current map's script
-RunMapScript: ; 101b (0:101b)
+RunMapScript:: ; 101b (0:101b)
 	push hl
 	push de
 	push bc
@@ -2444,21 +2444,21 @@ RunMapScript: ; 101b (0:101b)
 .return
 	ret
 
-LoadWalkingPlayerSpriteGraphics: ; 104d (0:104d)
+LoadWalkingPlayerSpriteGraphics:: ; 104d (0:104d)
 	ld de,RedSprite ; $4180
 	ld hl,$8000
 	jr LoadPlayerSpriteGraphicsCommon
 
-LoadSurfingPlayerSpriteGraphics: ; 1055 (0:1055)
+LoadSurfingPlayerSpriteGraphics:: ; 1055 (0:1055)
 	ld de,SeelSprite
 	ld hl,$8000
 	jr LoadPlayerSpriteGraphicsCommon
 
-LoadBikePlayerSpriteGraphics: ; 105d (0:105d)
+LoadBikePlayerSpriteGraphics:: ; 105d (0:105d)
 	ld de,RedCyclingSprite
 	ld hl,$8000
 
-LoadPlayerSpriteGraphicsCommon: ; 1063 (0:1063)
+LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 	push de
 	push hl
 	ld bc,(BANK(RedSprite) << 8) + $0c
@@ -2476,7 +2476,7 @@ LoadPlayerSpriteGraphicsCommon: ; 1063 (0:1063)
 	jp CopyVideoData
 
 ; function to load data from the map header
-LoadMapHeader: ; 107c (0:107c)
+LoadMapHeader:: ; 107c (0:107c)
 	ld b, BANK(Func_f113)
 	ld hl, Func_f113
 	call Bankswitch
@@ -2760,7 +2760,7 @@ LoadMapHeader: ; 107c (0:107c)
 
 ; function to copy map connection data from ROM to WRAM
 ; Input: hl = source, de = destination
-CopyMapConnectionHeader: ; 1238 (0:1238)
+CopyMapConnectionHeader:: ; 1238 (0:1238)
 	ld c,$0b
 .loop
 	ld a,[hli]
@@ -2771,7 +2771,7 @@ CopyMapConnectionHeader: ; 1238 (0:1238)
 	ret
 
 ; function to load map data
-LoadMapData: ; 1241 (0:1241)
+LoadMapData:: ; 1241 (0:1241)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	call DisableLCD
@@ -2835,7 +2835,7 @@ LoadMapData: ; 1241 (0:1241)
 
 ; function to switch to the ROM bank that a map is stored in
 ; Input: a = map number
-SwitchToMapRomBank: ; 12bc (0:12bc)
+SwitchToMapRomBank:: ; 12bc (0:12bc)
 	push hl
 	push bc
 	ld c,a
@@ -2854,7 +2854,7 @@ SwitchToMapRomBank: ; 12bc (0:12bc)
 	pop hl
 	ret
 
-Func_12da: ; 12da (0:12da)
+Func_12da:: ; 12da (0:12da)
 	ld a, $1e
 	ld [$d13a], a
 	ld hl, $d730
@@ -2863,7 +2863,7 @@ Func_12da: ; 12da (0:12da)
 	ld [hl], a
 	ret
 
-Func_12e7: ; 12e7 (0:12e7)
+Func_12e7:: ; 12e7 (0:12e7)
 	ld hl, $d728
 	res 0, [hl]
 	ret
@@ -2871,7 +2871,7 @@ Func_12e7: ; 12e7 (0:12e7)
 ;appears to be called twice inside function $C38B
 ;if $d700,$d11a == $1 then biking
 ;if $d700,$d11a == $2 then surfing
-ForceBikeOrSurf: ; 12ed (0:12ed)
+ForceBikeOrSurf:: ; 12ed (0:12ed)
 	ld b,5 ;graphics bank 5
 	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
 	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
@@ -2883,7 +2883,7 @@ ForceBikeOrSurf: ; 12ed (0:12ed)
 ; c = number of frames to wait
 ; sets carry if Up+Select+B, Start, or A is pressed within c frames
 ; unsets carry otherwise
-CheckForUserInterruption: ; 12f8 (0:12f8)
+CheckForUserInterruption:: ; 12f8 (0:12f8)
 	call DelayFrame
 	push bc
 	call GetJoypadStateLowSensitivity
@@ -2906,7 +2906,7 @@ CheckForUserInterruption: ; 12f8 (0:12f8)
 ; function to load position data for destination warp when switching maps
 ; INPUT:
 ; a = ID of destination warp within destination map
-LoadDestinationWarpPosition: ; 1313 (0:1313)
+LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld b,a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -2931,7 +2931,7 @@ LoadDestinationWarpPosition: ; 1313 (0:1313)
 ; c: if nonzero, show at least a sliver of health
 ; d = number of HP bar sections (normally 6)
 ; e = health (in eighths of bar sections) (normally out of 48)
-DrawHPBar: ; 1336 (0:1336)
+DrawHPBar:: ; 1336 (0:1336)
 	push hl
 	push de
 	push bc
@@ -2997,13 +2997,13 @@ DrawHPBar: ; 1336 (0:1336)
 ; [$cf91] = pokemon ID
 ; $cf98 = base address of pokemon data
 ; $d0b8 = base address of base stats
-LoadMonData: ; 1372 (0:1372)
+LoadMonData:: ; 1372 (0:1372)
 	ld hl,LoadMonData_
 	ld b,BANK(LoadMonData_)
 	jp Bankswitch
 
 ; writes c to $d0dc+b
-Func_137a: ; 137a (0:137a)
+Func_137a:: ; 137a (0:137a)
 	ld hl, $d0dc
 	ld e, b
 	ld d, $0
@@ -3012,11 +3012,11 @@ Func_137a: ; 137a (0:137a)
 	ld [hl], a
 	ret
 
-LoadFlippedFrontSpriteByMonIndex: ; 1384 (0:1384)
+LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
 	ld a, $1
 	ld [W_SPRITEFLIPPED], a
 
-LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
+LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	push hl
 	ld a, [$d11e]
 	push af
@@ -3060,7 +3060,7 @@ LoadFrontSpriteByMonIndex: ; 1389 (0:1389)
 ; plays the cry of a pokemon
 ; INPUT:
 ; a = pokemon ID
-PlayCry: ; 13d0 (0:13d0)
+PlayCry:: ; 13d0 (0:13d0)
 	call GetCryData
 	call PlaySound ; play cry
 	jp WaitForSoundToFinish ; wait for sound to be done playing
@@ -3068,7 +3068,7 @@ PlayCry: ; 13d0 (0:13d0)
 ; gets a pokemon's cry data
 ; INPUT:
 ; a = pokemon ID
-GetCryData: ; 13d9 (0:13d9)
+GetCryData:: ; 13d9 (0:13d9)
 	dec a
 	ld c,a
 	ld b,0
@@ -3092,7 +3092,7 @@ GetCryData: ; 13d9 (0:13d9)
 	add c ; a = $14 + cryID * 3
 	ret
 
-DisplayPartyMenu: ; 13fc (0:13fc)
+DisplayPartyMenu:: ; 13fc (0:13fc)
 	ld a,[$ffd7]
 	push af
 	xor a
@@ -3103,7 +3103,7 @@ DisplayPartyMenu: ; 13fc (0:13fc)
 	call DrawPartyMenu
 	jp HandlePartyMenuInput
 
-GoBackToPartyMenu: ; 1411 (0:1411)
+GoBackToPartyMenu:: ; 1411 (0:1411)
 	ld a,[$ffd7]
 	push af
 	xor a
@@ -3112,7 +3112,7 @@ GoBackToPartyMenu: ; 1411 (0:1411)
 	call RedrawPartyMenu
 	jp HandlePartyMenuInput
 
-PartyMenuInit: ; 1420 (0:1420)
+PartyMenuInit:: ; 1420 (0:1420)
 	ld a,$01
 	call BankswitchHome
 	call LoadHpBarAndStatusTilePatterns
@@ -3151,7 +3151,7 @@ PartyMenuInit: ; 1420 (0:1420)
 	ld [hl],a ; old menu item ID
 	ret
 
-HandlePartyMenuInput: ; 145a (0:145a)
+HandlePartyMenuInput:: ; 145a (0:145a)
 	ld a,1
 	ld [$cc4a],a
 	ld a,$40
@@ -3211,14 +3211,14 @@ HandlePartyMenuInput: ; 145a (0:145a)
 	call Bankswitch
 	jr HandlePartyMenuInput
 
-DrawPartyMenu: ; 14d4 (0:14d4)
+DrawPartyMenu:: ; 14d4 (0:14d4)
 	ld hl, DrawPartyMenu_
 	jr DrawPartyMenuCommon
 
-RedrawPartyMenu: ; 14d9 (0:14d9)
+RedrawPartyMenu:: ; 14d9 (0:14d9)
 	ld hl, RedrawPartyMenu_
 
-DrawPartyMenuCommon: ; 14dc (0:14dc)
+DrawPartyMenuCommon:: ; 14dc (0:14dc)
 	ld b, BANK(RedrawPartyMenu_)
 	jp Bankswitch
 
@@ -3226,7 +3226,7 @@ DrawPartyMenuCommon: ; 14dc (0:14dc)
 ; INPUT:
 ; de = address of status condition
 ; hl = destination address
-PrintStatusCondition: ; 14e1 (0:14e1)
+PrintStatusCondition:: ; 14e1 (0:14e1)
 	push de
 	dec de
 	dec de ; de = address of current HP
@@ -3262,7 +3262,7 @@ PrintStatusConditionNotFainted ; 14f6
 ; INPUT:
 ; hl = destination address
 ; [$cfb9] = level
-PrintLevel: ; 150b (0:150b)
+PrintLevel:: ; 150b (0:150b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,2 ; number of digits
@@ -3278,19 +3278,19 @@ PrintLevel: ; 150b (0:150b)
 ; INPUT:
 ; hl = destination address
 ; [$cfb9] = level
-PrintLevelFull: ; 151b (0:151b)
+PrintLevelFull:: ; 151b (0:151b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,3 ; number of digits
 	ld a,[$cfb9] ; level
 
-PrintLevelCommon: ; 1523 (0:1523)
+PrintLevelCommon:: ; 1523 (0:1523)
 	ld [$d11e],a
 	ld de,$d11e
 	ld b,$41 ; no leading zeroes, left-aligned, one byte
 	jp PrintNumber
 
-Func_152e: ; 152e (0:152e)
+Func_152e:: ; 152e (0:152e)
 	ld hl,$d0dc
 	ld c,a
 	ld b,0
@@ -3301,7 +3301,7 @@ Func_152e: ; 152e (0:152e)
 ; copies the base stat data of a pokemon to $D0B8 (W_MONHEADER)
 ; INPUT:
 ; [$D0B5] = pokemon ID
-GetMonHeader: ; 1537 (0:1537)
+GetMonHeader:: ; 1537 (0:1537)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(BulbasaurBaseStats)
@@ -3366,12 +3366,12 @@ GetMonHeader: ; 1537 (0:1537)
 	ret
 
 ; copy party pokemon's name to $CD6D
-GetPartyMonName2: ; 15b4 (0:15b4)
+GetPartyMonName2:: ; 15b4 (0:15b4)
 	ld a,[wWhichPokemon] ; index within party
 	ld hl,W_PARTYMON1NAME
 
 ; this is called more often
-GetPartyMonName: ; 15ba (0:15ba)
+GetPartyMonName:: ; 15ba (0:15ba)
 	push hl
 	push bc
 	call SkipFixedLengthTextEntries ; add 11 to hl, a times
@@ -3397,7 +3397,7 @@ GetPartyMonName: ; 15ba (0:15ba)
 ; bits 0-4: length of BCD number in bytes
 ; Note that bits 5 and 7 are modified during execution. The above reflects
 ; their meaning at the beginning of the functions's execution.
-PrintBCDNumber: ; 15cd (0:15cd)
+PrintBCDNumber:: ; 15cd (0:15cd)
 	ld b,c ; save flags in b
 	res 7,c
 	res 6,c
@@ -3435,7 +3435,7 @@ PrintBCDNumber: ; 15cd (0:15cd)
 .done
 	ret
 
-PrintBCDDigit: ; 1604 (0:1604)
+PrintBCDDigit:: ; 1604 (0:1604)
 	and a,%00001111
 	and a
 	jr z,.zeroDigit
@@ -3465,7 +3465,7 @@ PrintBCDDigit: ; 1604 (0:1604)
 ; uncompresses the front or back sprite of the specified mon
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
-UncompressMonSprite: ; 1627 (0:1627)
+UncompressMonSprite:: ; 1627 (0:1627)
 	ld bc,W_MONHEADER
 	add hl,bc
 	ld a,[hli]
@@ -3510,7 +3510,7 @@ UncompressMonSprite: ; 1627 (0:1627)
 	jp UncompressSpriteData
 
 ; de: destination location
-LoadMonFrontSprite: ; 1665 (0:1665)
+LoadMonFrontSprite:: ; 1665 (0:1665)
 	push de
 	ld hl, W_MONHFRONTSPRITE - W_MONHEADER
 	call UncompressMonSprite
@@ -3524,7 +3524,7 @@ LoadMonFrontSprite: ; 1665 (0:1665)
 ; calculates alignment parameters to place both sprite chunks in the center of the 7*7 tile sprite buffers
 ; de: destination location
 ; a,c:  sprite dimensions (in tiles of 8x8 each)
-LoadUncompressedSpriteData: ; 1672 (0:1672)
+LoadUncompressedSpriteData:: ; 1672 (0:1672)
 	push de
 	and $f
 	ld [H_SPRITEWIDTH], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
@@ -3573,7 +3573,7 @@ LoadUncompressedSpriteData: ; 1672 (0:1672)
 
 ; copies and aligns the sprite data properly inside the sprite buffer
 ; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
-AlignSpriteDataCentered: ; 16c2 (0:16c2)
+AlignSpriteDataCentered:: ; 16c2 (0:16c2)
 	ld a, [H_SPRITEOFFSET]
 	ld b, $0
 	ld c, a
@@ -3599,7 +3599,7 @@ AlignSpriteDataCentered: ; 16c2 (0:16c2)
 	ret
 
 ; fills the sprite buffer (pointed to in hl) with zeros
-ZeroSpriteBuffer: ; 16df (0:16df)
+ZeroSpriteBuffer:: ; 16df (0:16df)
 	ld bc, SPRITEBUFFERSIZE
 .nextByteLoop
 	xor a
@@ -3613,7 +3613,7 @@ ZeroSpriteBuffer: ; 16df (0:16df)
 ; combines the (7*7 tiles, 1bpp) sprite chunks in buffer 0 and 1 into a 2bpp sprite located in buffer 1 through 2
 ; in the resulting sprite, the rows of the two source sprites are interlaced
 ; de: output address
-InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
+InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	xor a
 	ld [$4000], a
 	push de
@@ -3659,50 +3659,50 @@ InterlaceMergeSpriteBuffers: ; 16ea (0:16ea)
 	ld b, a
 	jp CopyVideoData
 
-Tset0B_Coll: ; 172f (0:172f)
+Tset0B_Coll:: ; 172f (0:172f)
 	INCBIN "gfx/tilesets/0b.tilecoll"
-Tset00_Coll: ; 1735 (0:1735)
+Tset00_Coll:: ; 1735 (0:1735)
 	INCBIN "gfx/tilesets/00.tilecoll"
-Tset01_Coll: ; 1749 (0:1749)
+Tset01_Coll:: ; 1749 (0:1749)
 	INCBIN "gfx/tilesets/01.tilecoll"
-Tset02_Coll: ; 1753 (0:1753)
+Tset02_Coll:: ; 1753 (0:1753)
 	INCBIN "gfx/tilesets/02.tilecoll"
-Tset05_Coll: ; 1759 (0:1759)
+Tset05_Coll:: ; 1759 (0:1759)
 	INCBIN "gfx/tilesets/05.tilecoll"
-Tset03_Coll: ; 1765 (0:1765)
+Tset03_Coll:: ; 1765 (0:1765)
 	INCBIN "gfx/tilesets/03.tilecoll"
-Tset08_Coll: ; 1775 (0:1775)
+Tset08_Coll:: ; 1775 (0:1775)
 	INCBIN "gfx/tilesets/08.tilecoll"
-Tset09_Coll: ; 177f (0:177f)
+Tset09_Coll:: ; 177f (0:177f)
 	INCBIN "gfx/tilesets/09.tilecoll"
-Tset0D_Coll: ; 178a (0:178a)
+Tset0D_Coll:: ; 178a (0:178a)
 	INCBIN "gfx/tilesets/0d.tilecoll"
-Tset0E_Coll: ; 1795 (0:1795)
+Tset0E_Coll:: ; 1795 (0:1795)
 	INCBIN "gfx/tilesets/0e.tilecoll"
-Tset0F_Coll: ; 179a (0:179a)
+Tset0F_Coll:: ; 179a (0:179a)
 	INCBIN "gfx/tilesets/0f.tilecoll"
-Tset10_Coll: ; 17a2 (0:17a2)
+Tset10_Coll:: ; 17a2 (0:17a2)
 	INCBIN "gfx/tilesets/10.tilecoll"
-Tset11_Coll: ; 17ac (0:17ac)
+Tset11_Coll:: ; 17ac (0:17ac)
 	INCBIN "gfx/tilesets/11.tilecoll"
-Tset12_Coll: ; 17b8 (0:17b8)
+Tset12_Coll:: ; 17b8 (0:17b8)
 	INCBIN "gfx/tilesets/12.tilecoll"
-Tset13_Coll: ; 17c0 (0:17c0)
+Tset13_Coll:: ; 17c0 (0:17c0)
 	INCBIN "gfx/tilesets/13.tilecoll"
-Tset14_Coll: ; 17ca (0:17ca)
+Tset14_Coll:: ; 17ca (0:17ca)
 	INCBIN "gfx/tilesets/14.tilecoll"
-Tset15_Coll: ; 17d1 (0:17d1)
+Tset15_Coll:: ; 17d1 (0:17d1)
 	INCBIN "gfx/tilesets/15.tilecoll"
-Tset16_Coll: ; 17dd (0:17dd)
+Tset16_Coll:: ; 17dd (0:17dd)
 	INCBIN "gfx/tilesets/16.tilecoll"
-Tset17_Coll: ; 17f0 (0:17f0)
+Tset17_Coll:: ; 17f0 (0:17f0)
 	INCBIN "gfx/tilesets/17.tilecoll"
 ;Tile Collision ends 0x17f7
 
 ; does the same thing as FarCopyData at 009D
 ; only difference is that it uses [$ff8b] instead of [$cee9] for a temp value
 ; copy bc bytes of data from a:hl to de
-FarCopyData2: ; 17f7 (0:17f7)
+FarCopyData2:: ; 17f7 (0:17f7)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3717,7 +3717,7 @@ FarCopyData2: ; 17f7 (0:17f7)
 
 ; does a far copy but the source is de and the destination is hl
 ; copy bc bytes of data from a:de to hl
-FarCopyData3: ; 180d (0:180d)
+FarCopyData3:: ; 180d (0:180d)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3740,7 +3740,7 @@ FarCopyData3: ; 180d (0:180d)
 
 ; copies each source byte to the destination twice (next to each other)
 ; copy bc source bytes from a:hl to de
-FarCopyDataDouble: ; 182b (0:182b)
+FarCopyDataDouble:: ; 182b (0:182b)
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3764,7 +3764,7 @@ FarCopyDataDouble: ; 182b (0:182b)
 
 ; copy (c * 16) bytes from b:de to hl during V-blank
 ; transfers up to 128 bytes per V-blank
-CopyVideoData: ; 1848 (0:1848)
+CopyVideoData:: ; 1848 (0:1848)
 	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
 	push af
 	xor a
@@ -3807,7 +3807,7 @@ CopyVideoData: ; 1848 (0:1848)
 ; copy (c * 8) source bytes from b:de to hl during V-blank
 ; copies each source byte to the destination twice (next to each other)
 ; transfers up to 64 source bytes per V-blank
-CopyVideoDataDouble: ; 1886 (0:1886)
+CopyVideoDataDouble:: ; 1886 (0:1886)
 	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
 	push af
 	xor a
@@ -3852,7 +3852,7 @@ CopyVideoDataDouble: ; 1886 (0:1886)
 ; hl = address of upper left corner of the area
 ; b = height
 ; c = width
-ClearScreenArea: ; 18c4 (0:18c4)
+ClearScreenArea:: ; 18c4 (0:18c4)
 	ld   a,$7F ; blank tile
 	ld   de,20 ; screen width
 .loop
@@ -3872,7 +3872,7 @@ ClearScreenArea: ; 18c4 (0:18c4)
 ; copies the screen tile buffer from WRAM to VRAM
 ; copying is done in 3 chunks of 6 rows each
 ; b: high byte of VRAM destination address ($98 or $9c for window tile map 0 or 1 resp.)
-CopyScreenTileBufferToVRAM: ; 18d6 (0:18d6)
+CopyScreenTileBufferToVRAM:: ; 18d6 (0:18d6)
 	ld c, $6
 	ld hl, $0000
 	ld de, wTileMap
@@ -3887,7 +3887,7 @@ CopyScreenTileBufferToVRAM: ; 18d6 (0:18d6)
 	call InitScreenTileBufferTransferParameters
 	jp DelayFrame
 
-InitScreenTileBufferTransferParameters: ; 18fc (0:18fc)
+InitScreenTileBufferTransferParameters:: ; 18fc (0:18fc)
 	ld a, d
 	ld [H_VBCOPYBGSRC+1], a
 	call GetRowColAddressBgMap
@@ -3901,7 +3901,7 @@ InitScreenTileBufferTransferParameters: ; 18fc (0:18fc)
 	ld [H_VBCOPYBGSRC], a ; $FF00+$c1
 	ret
 
-ClearScreen: ; 190f (0:190f)
+ClearScreen:: ; 190f (0:190f)
 ; clears all tiles in the tilemap,
 ; then wait three frames
 	ld bc,$0168 ; tilemap size
@@ -3916,7 +3916,7 @@ ClearScreen: ; 190f (0:190f)
 	jr nz,.loop
 	jp Delay3
 
-TextBoxBorder: ; 1922 (0:1922)
+TextBoxBorder:: ; 1922 (0:1922)
 ; draw a text box
 ; upper-left corner at coordinates hl
 ; height b
@@ -3958,7 +3958,7 @@ TextBoxBorder: ; 1922 (0:1922)
 	ld [hl],"┘"
 	ret
 ;
-NPlaceChar: ; 194f (0:194f)
+NPlaceChar:: ; 194f (0:194f)
 ; place a row of width c of identical characters
 	ld d,c
 .loop
@@ -3967,9 +3967,9 @@ NPlaceChar: ; 194f (0:194f)
 	jr nz,.loop
 	ret
 
-PlaceString: ; 1955 (0:1955)
+PlaceString:: ; 1955 (0:1955)
 	push hl
-PlaceNextChar: ; 1956 (0:1956)
+PlaceNextChar:: ; 1956 (0:1956)
 	ld a,[de]
 
 	cp "@"
@@ -4045,11 +4045,11 @@ PlaceNextChar: ; 1956 (0:1956)
 	jp z,Char5A
 	ld [hli],a
 	call PrintLetterDelay
-Next19E8: ; 19e8 (0:19e8)
+Next19E8:: ; 19e8 (0:19e8)
 	inc de
 	jp PlaceNextChar
 
-Char00: ; 19ec (0:19ec)
+Char00:: ; 19ec (0:19ec)
 	ld b,h
 	ld c,l
 	pop hl
@@ -4057,56 +4057,56 @@ Char00: ; 19ec (0:19ec)
 	dec de
 	ret
 
-Char00Text: ; 0x19f4 “%d ERROR.”
+Char00Text:: ; 0x19f4 “%d ERROR.”
 	TX_FAR _Char00Text
 	db "@"
 
-Char52: ; 0x19f9 player’s name
+Char52:: ; 0x19f9 player’s name
 	push de
 	ld de,W_PLAYERNAME
 	jr FinishDTE
 
-Char53: ; 19ff (0:19ff) ; rival’s name
+Char53:: ; 19ff (0:19ff) ; rival’s name
 	push de
 	ld de,W_RIVALNAME
 	jr FinishDTE
 
-Char5D: ; 1a05 (0:1a05) ; TRAINER
+Char5D:: ; 1a05 (0:1a05) ; TRAINER
 	push de
 	ld de,Char5DText
 	jr FinishDTE
 
-Char5C: ; 1a0b (0:1a0b) ; TM
+Char5C:: ; 1a0b (0:1a0b) ; TM
 	push de
 	ld de,Char5CText
 	jr FinishDTE
 
-Char5B: ; 1a11 (0:1a11) ; PC
+Char5B:: ; 1a11 (0:1a11) ; PC
 	push de
 	ld de,Char5BText
 	jr FinishDTE
 
-Char5E: ; 1a17 (0:1a17) ; ROCKET
+Char5E:: ; 1a17 (0:1a17) ; ROCKET
 	push de
 	ld de,Char5EText
 	jr FinishDTE
 
-Char54: ; 1a1d (0:1a1d) ; POKé
+Char54:: ; 1a1d (0:1a1d) ; POKé
 	push de
 	ld de,Char54Text
 	jr FinishDTE
 
-Char56: ; 1a23 (0:1a23) ; ……
+Char56:: ; 1a23 (0:1a23) ; ……
 	push de
 	ld de,Char56Text
 	jr FinishDTE
 
-Char4A: ; 1a29 (0:1a29) ; PKMN
+Char4A:: ; 1a29 (0:1a29) ; PKMN
 	push de
 	ld de,Char4AText
 	jr FinishDTE
 
-Char59: ; 1a2f (0:1a2f)
+Char59:: ; 1a2f (0:1a2f)
 ; depending on whose turn it is, print
 ; enemy active monster’s name, prefixed with “Enemy ”
 ; or
@@ -4116,13 +4116,13 @@ Char59: ; 1a2f (0:1a2f)
 	xor 1
 	jr MonsterNameCharsCommon
 
-Char5A: ; 1a35 (0:1a35)
+Char5A:: ; 1a35 (0:1a35)
 ; depending on whose turn it is, print
 ; player active monster’s name
 ; or
 ; enemy active monster’s name, prefixed with “Enemy ”
 	ld a,[H_WHOSETURN]
-MonsterNameCharsCommon: ; 1a37 (0:1a37)
+MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 	push de
 	and a
 	jr nz,.Enemy
@@ -4138,7 +4138,7 @@ MonsterNameCharsCommon: ; 1a37 (0:1a37)
 	ld l,c
 	ld de,W_ENEMYMONNAME ; enemy active monster name
 
-FinishDTE: ; 1a4b (0:1a4b)
+FinishDTE:: ; 1a4b (0:1a4b)
 	call PlaceString
 	ld h,b
 	ld l,c
@@ -4146,24 +4146,24 @@ FinishDTE: ; 1a4b (0:1a4b)
 	inc de
 	jp PlaceNextChar
 
-Char5CText: ; 1a55 (0:1a55)
+Char5CText:: ; 1a55 (0:1a55)
 	db "TM@"
-Char5DText: ; 1a58 (0:1a58)
+Char5DText:: ; 1a58 (0:1a58)
 	db "TRAINER@"
-Char5BText: ; 1a60 (0:1a60)
+Char5BText:: ; 1a60 (0:1a60)
 	db "PC@"
-Char5EText: ; 1a63 (0:1a63)
+Char5EText:: ; 1a63 (0:1a63)
 	db "ROCKET@"
-Char54Text: ; 1a6a (0:1a6a)
+Char54Text:: ; 1a6a (0:1a6a)
 	db "POKé@"
-Char56Text: ; 1a6f (0:1a6f)
+Char56Text:: ; 1a6f (0:1a6f)
 	db "……@"
-Char5AText: ; 1a72 (0:1a72)
+Char5AText:: ; 1a72 (0:1a72)
 	db "Enemy @"
-Char4AText: ; 1a79 (0:1a79)
+Char4AText:: ; 1a79 (0:1a79)
 	db $E1,$E2,"@" ; PKMN
 
-Char55: ; 1a7c (0:1a7c)
+Char55:: ; 1a7c (0:1a7c)
 	push de
 	ld b,h
 	ld c,l
@@ -4175,40 +4175,40 @@ Char55: ; 1a7c (0:1a7c)
 	inc de
 	jp PlaceNextChar
 
-Char55Text: ; 1a8c (0:1a8c)
+Char55Text:: ; 1a8c (0:1a8c)
 ; equivalent to Char4B
 	TX_FAR _Char55Text
 	db "@"
 
-Char5F: ; 1a91 (0:1a91)
+Char5F:: ; 1a91 (0:1a91)
 ; ends a Pokédex entry
 	ld [hl],"."
 	pop hl
 	ret
 
-Char58: ; 1a95 (0:1a95)
+Char58:: ; 1a95 (0:1a95)
 	ld a,[$D12B]
 	cp 4
 	jp z,Next1AA2
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
-Next1AA2: ; 1aa2 (0:1aa2)
+Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
 	ld a,$7F
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
-Char57: ; 1aad (0:1aad)
+Char57:: ; 1aad (0:1aad)
 	pop hl
 	ld de,Char58Text
 	dec de
 	ret
 
-Char58Text: ; 1ab3 (0:1ab3)
+Char58Text:: ; 1ab3 (0:1ab3)
 	db "@"
 
-Char51: ; 1ab4 (0:1ab4)
+Char51:: ; 1ab4 (0:1ab4)
 	push de
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
@@ -4226,7 +4226,7 @@ Char51: ; 1ab4 (0:1ab4)
 	ld hl,Coord
 	jp Next19E8
 
-Char49: ; 1ad5 (0:1ad5)
+Char49:: ; 1ad5 (0:1ad5)
 	push de
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
@@ -4246,7 +4246,7 @@ Char49: ; 1ad5 (0:1ad5)
 	push hl
 	jp Next19E8
 
-Char4B: ; 1af8 (0:1af8)
+Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
@@ -4258,7 +4258,7 @@ Char4B: ; 1af8 (0:1af8)
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a
 	;fall through
-Char4C: ; 1b0a (0:1b0a)
+Char4C:: ; 1b0a (0:1b0a)
 	push de
 	call Next1B18
 	call Next1B18
@@ -4267,7 +4267,7 @@ Char4C: ; 1b0a (0:1b0a)
 	pop de
 	jp Next19E8
 
-Next1B18: ; 1b18 (0:1b18)
+Next1B18:: ; 1b18 (0:1b18)
 	FuncCoord 0, 14 ; $c4b8
 	ld hl,Coord
 	FuncCoord 0, 13 ; $c4a4
@@ -4297,13 +4297,13 @@ Next1B18: ; 1b18 (0:1b18)
 
 	ret
 
-ProtectedDelay3: ; 1b3a (0:1b3a)
+ProtectedDelay3:: ; 1b3a (0:1b3a)
 	push bc
 	call Delay3
 	pop bc
 	ret
 
-TextCommandProcessor: ; 1b40 (0:1b40)
+TextCommandProcessor:: ; 1b40 (0:1b40)
 	ld a,[$d358]
 	push af
 	set 1,a
@@ -4316,7 +4316,7 @@ TextCommandProcessor: ; 1b40 (0:1b40)
 	ld a,b
 	ld [$cc3b],a
 
-NextTextCommand: ; 1b55 (0:1b55)
+NextTextCommand:: ; 1b55 (0:1b55)
 	ld a,[hli]
 	cp a, "@" ; terminator
 	jr nz,.doTextCommand
@@ -4347,7 +4347,7 @@ NextTextCommand: ; 1b55 (0:1b55)
 ; AAAA = address of upper left corner
 ; BB = height
 ; CC = width
-TextCommand04: ; 1b78 (0:1b78)
+TextCommand04:: ; 1b78 (0:1b78)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4366,7 +4366,7 @@ TextCommand04: ; 1b78 (0:1b78)
 
 ; place string inline
 ; 00{string}
-TextCommand00: ; 1b8a (0:1b8a)
+TextCommand00:: ; 1b8a (0:1b8a)
 	pop hl
 	ld d,h
 	ld e,l
@@ -4381,7 +4381,7 @@ TextCommand00: ; 1b8a (0:1b8a)
 ; place string from RAM
 ; 01AAAA
 ; AAAA = address of string
-TextCommand01: ; 1b97 (0:1b97)
+TextCommand01:: ; 1b97 (0:1b97)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4400,7 +4400,7 @@ TextCommand01: ; 1b97 (0:1b97)
 ; BB
 ; bits 0-4 = length in bytes
 ; bits 5-7 = unknown flags
-TextCommand02: ; 1ba5 (0:1ba5)
+TextCommand02:: ; 1ba5 (0:1ba5)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4420,7 +4420,7 @@ TextCommand02: ; 1ba5 (0:1ba5)
 ; repoint destination address
 ; 03AAAA
 ; AAAA = new destination address
-TextCommand03: ; 1bb7 (0:1bb7)
+TextCommand03:: ; 1bb7 (0:1bb7)
 	pop hl
 	ld a,[hli]
 	ld [$cc3a],a
@@ -4433,7 +4433,7 @@ TextCommand03: ; 1bb7 (0:1bb7)
 ; repoint destination to second line of dialogue text box
 ; 05
 ; (no arguments)
-TextCommand05: ; 1bc5 (0:1bc5)
+TextCommand05:: ; 1bc5 (0:1bc5)
 	pop hl
 	FuncCoord 1, 16 ; $c4e1
 	ld bc,Coord ; address of second line of dialogue text box
@@ -4442,7 +4442,7 @@ TextCommand05: ; 1bc5 (0:1bc5)
 ; blink arrow and wait for A or B to be pressed
 ; 06
 ; (no arguments)
-TextCommand06: ; 1bcc (0:1bcc)
+TextCommand06:: ; 1bcc (0:1bcc)
 	ld a,[W_ISLINKBATTLE]
 	cp a,$04
 	jp z,TextCommand0D
@@ -4461,7 +4461,7 @@ TextCommand06: ; 1bcc (0:1bcc)
 ; scroll text up one line
 ; 07
 ; (no arguments)
-TextCommand07: ; 1be7 (0:1be7)
+TextCommand07:: ; 1be7 (0:1be7)
 	ld a," "
 	FuncCoord 18, 16 ; $c4f2
 	ld [Coord],a ; place blank space in lower right corner of dialogue text box
@@ -4474,7 +4474,7 @@ TextCommand07: ; 1be7 (0:1be7)
 
 ; execute asm inline
 ; 08{code}
-TextCommand08: ; 1bf9 (0:1bf9)
+TextCommand08:: ; 1bf9 (0:1bf9)
 	pop hl
 	ld de,NextTextCommand
 	push de ; return address
@@ -4486,7 +4486,7 @@ TextCommand08: ; 1bf9 (0:1bf9)
 ; BB
 ; bits 0-3 = how many digits to display
 ; bits 4-7 = how long the number is in bytes
-TextCommand09: ; 1bff (0:1bff)
+TextCommand09:: ; 1bff (0:1bff)
 	pop hl
 	ld a,[hli]
 	ld e,a
@@ -4513,7 +4513,7 @@ TextCommand09: ; 1bff (0:1bff)
 ; wait half a second if the user doesn't hold A or B
 ; 0A
 ; (no arguments)
-TextCommand0A: ; 1c1d (0:1c1d)
+TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
 	call GetJoypadState
 	ld a,[H_CURRENTPRESSEDBUTTONS]
@@ -4529,7 +4529,7 @@ TextCommand0A: ; 1c1d (0:1c1d)
 ; plays sounds
 ; this actually handles various command ID's, not just 0B
 ; (no arguments)
-TextCommand0B: ; 1c31 (0:1c31)
+TextCommand0B:: ; 1c31 (0:1c31)
 	pop hl
 	push bc
 	dec hl
@@ -4566,7 +4566,7 @@ TextCommand0B: ; 1c31 (0:1c31)
 	jp NextTextCommand
 
 ; format: text command ID, sound ID or cry ID
-TextCommandSounds: ; 1c64 (0:1c64)
+TextCommandSounds:: ; 1c64 (0:1c64)
 	db $0B,$86
 	db $12,$9A
 	db $0E,$91
@@ -4581,7 +4581,7 @@ TextCommandSounds: ; 1c64 (0:1c64)
 ; draw ellipses
 ; 0CAA
 ; AA = number of ellipses to draw
-TextCommand0C: ; 1c78 (0:1c78)
+TextCommand0C:: ; 1c78 (0:1c78)
 	pop hl
 	ld a,[hli]
 	ld d,a
@@ -4610,7 +4610,7 @@ TextCommand0C: ; 1c78 (0:1c78)
 ; wait for A or B to be pressed
 ; 0D
 ; (no arguments)
-TextCommand0D: ; 1c9a (0:1c9a)
+TextCommand0D:: ; 1c9a (0:1c9a)
 	push bc
 	call ManualTextScroll ; wait for A or B to be pressed
 	pop bc
@@ -4621,7 +4621,7 @@ TextCommand0D: ; 1c9a (0:1c9a)
 ; 17AAAABB
 ; AAAA = address of text commands
 ; BB = bank
-TextCommand17: ; 1ca3 (0:1ca3)
+TextCommand17:: ; 1ca3 (0:1ca3)
 	pop hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -4642,7 +4642,7 @@ TextCommand17: ; 1ca3 (0:1ca3)
 	ld [$2000],a
 	jp NextTextCommand
 
-TextCommandJumpTable: ; 1cc1 (0:1cc1)
+TextCommandJumpTable:: ; 1cc1 (0:1cc1)
 	dw TextCommand00
 	dw TextCommand01
 	dw TextCommand02
@@ -4661,7 +4661,7 @@ TextCommandJumpTable: ; 1cc1 (0:1cc1)
 ; this function seems to be used only once
 ; it store the address of a row and column of the VRAM background map in hl
 ; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
-GetRowColAddressBgMap: ; 1cdd (0:1cdd)
+GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
 	xor a
 	srl h
 	rr a
@@ -4678,7 +4678,7 @@ GetRowColAddressBgMap: ; 1cdd (0:1cdd)
 
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
-ClearBgMap: ; 1cf0 (0:1cf0)
+ClearBgMap:: ; 1cf0 (0:1cf0)
 	ld a," "
 	jr .next
 	ld a,l
@@ -4696,7 +4696,7 @@ ClearBgMap: ; 1cf0 (0:1cf0)
 ; When the player takes a step, a row or column of 2x2 tile blocks at the edge
 ; of the screen toward which they moved is exposed and has to be redrawn.
 ; This function does the redrawing.
-RedrawExposedScreenEdge: ; 1d01 (0:1d01)
+RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
 	ld a,[H_SCREENEDGEREDRAW]
 	and a
 	ret z
@@ -4775,7 +4775,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawExposedScreenEdge, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer: ; 1d57 (0:1d57)
+AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a
 	ret z
@@ -4827,7 +4827,7 @@ AutoBgMapTransfer: ; 1d57 (0:1d57)
 	ld b,6
 
 ; unrolled loop and using pop for speed
-TransferBgRows: ; 1d9e (0:1d9e)
+TransferBgRows:: ; 1d9e (0:1d9e)
 	pop de
 	ld [hl],e
 	inc l
@@ -4894,7 +4894,7 @@ TransferBgRows: ; 1d9e (0:1d9e)
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
-VBlankCopyBgMap: ; 1de1 (0:1de1)
+VBlankCopyBgMap:: ; 1de1 (0:1de1)
 	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
 	and a
 	ret z
@@ -4923,7 +4923,7 @@ VBlankCopyBgMap: ; 1de1 (0:1de1)
 ; It copies each source byte to the destination twice (next to each other).
 ; The function updates the source and destination addresses, so the transfer
 ; can be continued easily by repeatingly calling this function.
-VBlankCopyDouble: ; 1e02 (0:1e02)
+VBlankCopyDouble:: ; 1e02 (0:1e02)
 	ld a,[H_VBCOPYDOUBLESIZE]
 	and a ; are there any bytes to copy?
 	ret z
@@ -5003,7 +5003,7 @@ VBlankCopyDouble: ; 1e02 (0:1e02)
 ; Copies ([H_VBCOPYSIZE] * 16) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
 ; The function updates the source and destination addresses, so the transfer
 ; can be continued easily by repeatingly calling this function.
-VBlankCopy: ; 1e5e (0:1e5e)
+VBlankCopy:: ; 1e5e (0:1e5e)
 	ld a,[H_VBCOPYSIZE]
 	and a ; are there any bytes to copy?
 	ret z
@@ -5085,7 +5085,7 @@ VBlankCopy: ; 1e5e (0:1e5e)
 	ret
 
 ; This function updates the moving water and flower background tiles.
-UpdateMovingBgTiles: ; 1ebe (0:1ebe)
+UpdateMovingBgTiles:: ; 1ebe (0:1ebe)
 	ld a,[$ffd7]
 	and a
 	ret z
@@ -5146,16 +5146,16 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	jr nz,.flowerTileLoop
 	ret
 
-FlowerTilePattern1: ; 1f19 (0:1f19)
+FlowerTilePattern1:: ; 1f19 (0:1f19)
 	INCBIN "gfx/tilesets/flower/flower1.2bpp"
 
-FlowerTilePattern2: ; 1f29 (0:1f29)
+FlowerTilePattern2:: ; 1f29 (0:1f29)
 	INCBIN "gfx/tilesets/flower/flower2.2bpp"
 
-FlowerTilePattern3: ; 1f39 (0:1f39)
+FlowerTilePattern3:: ; 1f39 (0:1f39)
 	INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
-SoftReset: ; 1f49 (0:1f49)
+SoftReset:: ; 1f49 (0:1f49)
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, $20
@@ -5172,7 +5172,7 @@ SoftReset: ; 1f49 (0:1f49)
 ; * 8x8 OBJ size
 ; * OBJ display enabled
 ; * BG display enabled
-InitGame: ; 1f54 (0:1f54)
+InitGame:: ; 1f54 (0:1f54)
 	di
 ; zero I/O registers
 	xor a
@@ -5258,14 +5258,14 @@ InitGame: ; 1f54 (0:1f54)
 	jp Func_42b7
 
 ; zeroes all VRAM
-ZeroVram: ; 2004 (0:2004)
+ZeroVram:: ; 2004 (0:2004)
 	ld hl,$8000
 	ld bc,$2000
 	xor a
 	jp FillMemory
 
 ; immediately stops all sounds
-StopAllSounds: ; 200e (0:200e)
+StopAllSounds:: ; 200e (0:200e)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
@@ -5276,7 +5276,7 @@ StopAllSounds: ; 200e (0:200e)
 	dec a
 	jp PlaySound
 
-VBlankHandler: ; 2024 (0:2024)
+VBlankHandler:: ; 2024 (0:2024)
 	push af
 	push bc
 	push de
@@ -5351,7 +5351,7 @@ VBlankHandler: ; 2024 (0:2024)
 	pop af
 	reti
 
-DelayFrame: ; 20af (0:20af)
+DelayFrame:: ; 20af (0:20af)
 ; delay for one frame
 	ld a,1
 	ld [H_VBLANKOCCURRED],a
@@ -5366,7 +5366,7 @@ DelayFrame: ; 20af (0:20af)
 
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
-LoadGBPal: ; 20ba (0:20ba)
+LoadGBPal:: ; 20ba (0:20ba)
 	ld a,[$d35d] ;tells if cur.map is dark (requires HM5_FLASH?)
 	ld b,a
 	ld hl,GBPalTable_00	;16
@@ -5384,16 +5384,16 @@ LoadGBPal: ; 20ba (0:20ba)
 	ld [rOBP1],a
 	ret
 
-GBFadeOut1: ; 20d1 (0:20d1)
+GBFadeOut1:: ; 20d1 (0:20d1)
 	ld hl,IncGradGBPalTable_01	;0d
 	ld b,$04
 	jr GBFadeOutCommon
 
-GBFadeOut2: ; 20d8 (0:20d8)
+GBFadeOut2:: ; 20d8 (0:20d8)
 	ld hl,IncGradGBPalTable_02	;1c
 	ld b,$03
 
-GBFadeOutCommon: ; 20dd (0:20dd)
+GBFadeOutCommon:: ; 20dd (0:20dd)
 	ld a,[hli]
 	ld [rBGP],a
 	ld a,[hli]
@@ -5406,16 +5406,16 @@ GBFadeOutCommon: ; 20dd (0:20dd)
 	jr nz,GBFadeOutCommon
 	ret
 
-GBFadeIn1: ; 20ef (0:20ef)
+GBFadeIn1:: ; 20ef (0:20ef)
 	ld hl,DecGradGBPalTable_01	;18
 	ld b,$04
 	jr GBFadeInCommon
 
-GBFadeIn2: ; 20f6 (0:20f6)
+GBFadeIn2:: ; 20f6 (0:20f6)
 	ld hl,DecGradGBPalTable_02	;21
 	ld b,$03
 
-GBFadeInCommon: ; 20fb (0:20fb)
+GBFadeInCommon:: ; 20fb (0:20fb)
 	ld a,[hld]
 	ld [rOBP1],a
 	ld a,[hld]
@@ -5428,7 +5428,7 @@ GBFadeInCommon: ; 20fb (0:20fb)
 	jr nz,GBFadeInCommon
 	ret
 
-IncGradGBPalTable_01: ; 210d (0:210d)
+IncGradGBPalTable_01:: ; 210d (0:210d)
 	db %11111111 ;BG Pal
 	db %11111111 ;OBJ Pal 1
 	db %11111111 ;OBJ Pal 2
@@ -5440,30 +5440,30 @@ IncGradGBPalTable_01: ; 210d (0:210d)
 	db %11111001
 	db %11100100
 	db %11100100
-GBPalTable_00: ; 2116 (0:2116)
+GBPalTable_00:: ; 2116 (0:2116)
 	db %11100100
 	db %11010000
-DecGradGBPalTable_01: ; 2118 (0:2118)
+DecGradGBPalTable_01:: ; 2118 (0:2118)
 	db %11100000
 	;19
 	db %11100100
 	db %11010000
 	db %11100000
-IncGradGBPalTable_02: ; 211c (0:211c)
+IncGradGBPalTable_02:: ; 211c (0:211c)
 	db %10010000
 	db %10000000
 	db %10010000
 
 	db %01000000
 	db %01000000
-DecGradGBPalTable_02: ; 2121 (0:2121)
+DecGradGBPalTable_02:: ; 2121 (0:2121)
 	db %01000000
 
 	db %00000000
 	db %00000000
 	db %00000000
 
-SerialInterruptHandler: ; 2125 (0:2125)
+SerialInterruptHandler:: ; 2125 (0:2125)
 	push af
 	push bc
 	push de
@@ -5512,7 +5512,7 @@ SerialInterruptHandler: ; 2125 (0:2125)
 	pop af
 	reti
 
-Func_216f: ; 216f (0:216f)
+Func_216f:: ; 216f (0:216f)
 	ld a, $1
 	ld [$FF00+$ab], a
 .asm_2173
@@ -5546,7 +5546,7 @@ Func_216f: ; 216f (0:216f)
 	jr nz, .asm_2173
 	ret
 
-Func_219a: ; 219a (0:219a)
+Func_219a:: ; 219a (0:219a)
 	xor a
 	ld [$FF00+$a9], a
 	ld a, [$FF00+$aa]
@@ -5634,14 +5634,14 @@ Func_219a: ; 219a (0:219a)
 	call DelayFrame
 	jp Func_219a
 
-Func_2231: ; 2231 (0:2231)
+Func_2231:: ; 2231 (0:2231)
 	ld a, $f
 .asm_2233
 	dec a
 	jr nz, .asm_2233
 	ret
 
-Func_2237: ; 2237 (0:2237)
+Func_2237:: ; 2237 (0:2237)
 	push hl
 	ld hl, $cc47
 	ld a, [hli]
@@ -5649,13 +5649,13 @@ Func_2237: ; 2237 (0:2237)
 	pop hl
 	ret
 
-Func_223f: ; 223f (0:223f)
+Func_223f:: ; 223f (0:223f)
 	dec a
 	ld [$cc47], a
 	ld [$cc48], a
 	ret
 
-Func_2247: ; 2247 (0:2247)
+Func_2247:: ; 2247 (0:2247)
 	ld hl, $cc42
 	ld de, $cc3d
 	ld c, $2
@@ -5680,7 +5680,7 @@ Func_2247: ; 2247 (0:2247)
 	jr nz, .asm_2253
 	ret
 
-Func_226e: ; 226e (0:226e)
+Func_226e:: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
 	ld hl, Func_4c05
 	ld b, BANK(Func_4c05)
@@ -5688,7 +5688,7 @@ Func_226e: ; 226e (0:226e)
 	call Func_227f
 	jp LoadScreenTilesFromBuffer1
 
-Func_227f: ; 227f (0:227f)
+Func_227f:: ; 227f (0:227f)
 	ld a, $ff
 	ld [$cc3e], a
 .asm_2284
@@ -5728,7 +5728,7 @@ Func_227f: ; 227f (0:227f)
 	ld [$cc3d], a
 	ret
 
-Func_22c3: ; 22c3 (0:22c3)
+Func_22c3:: ; 22c3 (0:22c3)
 	call asm_22d7
 	ld a, [$cc42]
 	add $60
@@ -5738,7 +5738,7 @@ Func_22c3: ; 22c3 (0:22c3)
 	jr nz, asm_22d7
 	ld a, $81
 	ld [$FF00+$2], a
-asm_22d7: ; 22d7 (0:22d7)
+asm_22d7:: ; 22d7 (0:22d7)
 	ld a, [$FF00+$ad]
 	ld [$cc3d], a
 	and $f0
@@ -5751,7 +5751,7 @@ asm_22d7: ; 22d7 (0:22d7)
 	ld [$cc3e], a
 	ret
 
-Func_22ed: ; 22ed (0:22ed)
+Func_22ed:: ; 22ed (0:22ed)
 	xor a
 	ld [$FF00+$ac], a
 	ld a, [$FF00+$aa]
@@ -5761,7 +5761,7 @@ Func_22ed: ; 22ed (0:22ed)
 	ld [$FF00+$2], a
 	ret
 
-Func_22fa: ; 22fa (0:22fa)
+Func_22fa:: ; 22fa (0:22fa)
 	ld a, $2
 	ld [$FF00+$1], a
 	xor a
@@ -5771,10 +5771,10 @@ Func_22fa: ; 22fa (0:22fa)
 	ret
 
 ; timer interrupt is apparently not invoked anyway
-TimerHandler: ; 2306 (0:2306)
+TimerHandler:: ; 2306 (0:2306)
 	reti
 
-Func_2307: ; 2307 (0:2307)
+Func_2307:: ; 2307 (0:2307)
 	call WaitForSoundToFinish
 	xor a
 	ld c, a
@@ -5782,7 +5782,7 @@ Func_2307: ; 2307 (0:2307)
 	ld [$cfca], a
 	jr asm_2324
 
-Func_2312: ; 2312 (0:2312)
+Func_2312:: ; 2312 (0:2312)
 	ld c, $a
 	ld d, $0
 	ld a, [$d72e]
@@ -5792,16 +5792,16 @@ Func_2312: ; 2312 (0:2312)
 	ld [$cfca], a
 	ld c, $8
 	ld d, c
-asm_2324: ; 2324 (0:2324)
+asm_2324:: ; 2324 (0:2324)
 	ld a, [$d700]
 	and a
 	jr z, .asm_2343
 	cp $2
 	jr z, .asm_2332
-	ld a, (Music_BikeRiding - $4000) / 3
+	ld a, MUSIC_BIKE_RIDING
 	jr .asm_2334
 .asm_2332
-	ld a, (Music_Surfing - $4000) / 3
+	ld a, MUSIC_SURFING
 .asm_2334
 	ld b, a
 	ld a, d
@@ -5829,7 +5829,7 @@ asm_2324: ; 2324 (0:2324)
 	ld [$c0ee], a
 	jp PlaySound
 
-Func_235f: ; 235f (0:235f)
+Func_235f:: ; 235f (0:235f)
 	ld a, [$c0ef]
 	ld b, a
 	cp $2
@@ -5857,7 +5857,7 @@ Func_235f: ; 235f (0:235f)
 	jr nz, .asm_237a
 	ret
 
-Func_2385: ; 2385 (0:2385)
+Func_2385:: ; 2385 (0:2385)
 	ld a, [$d35c]
 	ld e, a
 	ld a, [$c0ef]
@@ -5877,7 +5877,7 @@ Func_2385: ; 2385 (0:2385)
 	scf
 	ret
 
-PlayMusic: ; 23a1 (0:23a1)
+PlayMusic:: ; 23a1 (0:23a1)
 	ld b, a
 	ld [$c0ee], a
 	xor a
@@ -5888,7 +5888,7 @@ PlayMusic: ; 23a1 (0:23a1)
 	ld a, b
 
 ; plays music specified by a. If value is $ff, music is stopped
-PlaySound: ; 23b1 (0:23b1)
+PlaySound:: ; 23b1 (0:23b1)
 	push hl
 	push de
 	push bc
@@ -5958,7 +5958,7 @@ PlaySound: ; 23b1 (0:23b1)
 	pop hl
 	ret
 
-UpdateSprites: ; 2429 (0:2429)
+UpdateSprites:: ; 2429 (0:2429)
 	ld a, [$cfcb]
 	dec a
 	ret nz
@@ -5978,16 +5978,16 @@ UpdateSprites: ; 2429 (0:2429)
 ; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText6: ; 2442 (0:2442)
+ViridianMartText6:: ; 2442 (0:2442)
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
-PewterMartText1: ; 2449 (0:2449)
+PewterMartText1:: ; 2449 (0:2449)
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
 ; Cerulean
-CeruleanMartText1: ; 2453 (0:2453)
+CeruleanMartText1:: ; 2453 (0:2453)
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
@@ -5995,39 +5995,39 @@ CeruleanMartText1: ; 2453 (0:2453)
 	db $FE,1,BICYCLE,$FF
 
 ; Vermilion
-VermilionMartText1: ; 2461 (0:2461)
+VermilionMartText1:: ; 2461 (0:2461)
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
 
 ; Lavender
-LavenderMartText1: ; 246a (0:246a)
+LavenderMartText1:: ; 246a (0:246a)
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (1)
-CeladonMart2Text1: ; 2476 (0:2476)
+CeladonMart2Text1:: ; 2476 (0:2476)
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (2)
-CeladonMart2Text2: ; 2482 (0:2482)
+CeladonMart2Text2:: ; 2482 (0:2482)
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
 
 ; Celadon Dept. Store 4F
-CeladonMart4Text1: ; 248e (0:248e)
+CeladonMart4Text1:: ; 248e (0:248e)
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
 
 ; Celadon Dept. Store 5F (1)
-CeladonMart5Text3: ; 2496 (0:2496)
+CeladonMart5Text3:: ; 2496 (0:2496)
 	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
 
 ; Celadon Dept. Store 5F (2)
-CeladonMart5Text4: ; 24a0 (0:24a0)
+CeladonMart5Text4:: ; 24a0 (0:24a0)
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
 
 ; Fuchsia
-FuchsiaMartText1: ; 24a8 (0:24a8)
+FuchsiaMartText1:: ; 24a8 (0:24a8)
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
 
@@ -6035,47 +6035,47 @@ FuchsiaMartText1: ; 24a8 (0:24a8)
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
 
 ; Cinnabar
-CinnabarMartText1: ; 24b9 (0:24b9)
+CinnabarMartText1:: ; 24b9 (0:24b9)
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
 
 ; Saffron
-SaffronMartText1: ; 24c3 (0:24c3)
+SaffronMartText1:: ; 24c3 (0:24c3)
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
 
 ; Indigo
-IndigoPlateauLobbyText4: ; 24cc (0:24cc)
+IndigoPlateauLobbyText4:: ; 24cc (0:24cc)
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF
 
-TextScriptEndingChar: ; 24d6 (0:24d6)
+TextScriptEndingChar:: ; 24d6 (0:24d6)
 	db "@"
-TextScriptEnd: ; 24d7 (0:24d7)
+TextScriptEnd:: ; 24d7 (0:24d7)
 	ld hl,TextScriptEndingChar
 	ret
 
-UnnamedText_24db: ; 24db (0:24db)
+UnnamedText_24db:: ; 24db (0:24db)
 	TX_FAR _UnnamedText_24db
 	db "@"
 
-UnnamedText_24e0: ; 24e0 (0:24e0)
+UnnamedText_24e0:: ; 24e0 (0:24e0)
 	TX_FAR _UnnamedText_24e0
 	db "@"
 
-BoulderText: ; 24e5 (0:24e5)
+BoulderText:: ; 24e5 (0:24e5)
 	TX_FAR _BoulderText
 	db "@"
 
-MartSignText: ; 24ea (0:24ea)
+MartSignText:: ; 24ea (0:24ea)
 	TX_FAR _MartSignText
 	db "@"
 
-PokeCenterSignText: ; 24ef (0:24ef)
+PokeCenterSignText:: ; 24ef (0:24ef)
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Predef5CText: ; 24f4 (0:24f4)
+Predef5CText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
 	db $08 ; asm
 	ld a, $5c
@@ -6084,7 +6084,7 @@ Predef5CText: ; 24f4 (0:24f4)
 
 ; bankswitches and runs _UncompressSpriteData
 ; bank is given in a, sprite input stream is pointed to in W_SPRITEINPUTPTR
-UncompressSpriteData: ; 24fd (0:24fd)
+UncompressSpriteData:: ; 24fd (0:24fd)
 	ld b, a
 	ld a, [H_LOADEDROMBANK]
 	push af
@@ -6102,7 +6102,7 @@ UncompressSpriteData: ; 24fd (0:24fd)
 	ret
 
 ; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop
-_UncompressSpriteData: ; 251a (0:251a)
+_UncompressSpriteData:: ; 251a (0:251a)
 	ld hl, S_SPRITEBUFFER1
 	ld c, (2*SPRITEBUFFERSIZE) % $100
 	ld b, (2*SPRITEBUFFERSIZE) / $100
@@ -6139,7 +6139,7 @@ _UncompressSpriteData: ; 251a (0:251a)
 ; uncompresses a chunk from the sprite input data stream (pointed to at $d0da) into S_SPRITEBUFFER1 or S_SPRITEBUFFER2
 ; each chunk is a 1bpp sprite. A 2bpp sprite consist of two chunks which are merged afterwards
 ; note that this is an endless loop which is terminated during a call to MoveToNextBufferPosition by manipulating the stack
-UncompressSpriteDataLoop: ; 2556 (0:2556)
+UncompressSpriteDataLoop:: ; 2556 (0:2556)
 	ld hl, S_SPRITEBUFFER1
 	ld a, [W_SPRITELOADFLAGS]  ; $d0a8
 	bit 0, a
@@ -6229,7 +6229,7 @@ UncompressSpriteDataLoop: ; 2556 (0:2556)
 ; moves output pointer to next position
 ; also cancels the calling function if the all output is done (by removing the return pointer from stack)
 ; and calls postprocessing functions according to the unpack mode
-MoveToNextBufferPosition: ; 25d8 (0:25d8)
+MoveToNextBufferPosition:: ; 25d8 (0:25d8)
 	ld a, [W_SPRITEHEIGHT]
 	ld b, a
 	ld a, [W_SPRITECURPOSY]
@@ -6290,7 +6290,7 @@ MoveToNextBufferPosition: ; 25d8 (0:25d8)
 	jp UnpackSprite
 
 ; writes 2 bits (from a) to the output buffer (pointed to from W_SPRITEOUTPUTPTR)
-WriteSpriteBitsToBuffer: ; 2649 (0:2649)
+WriteSpriteBitsToBuffer:: ; 2649 (0:2649)
 	ld e, a
 	ld a, [W_SPRITEOUTPUTBITOFFSET]
 	and a
@@ -6318,7 +6318,7 @@ WriteSpriteBitsToBuffer: ; 2649 (0:2649)
 	ret
 
 ; reads next bit from input stream and returns it in a
-ReadNextInputBit: ; 2670 (0:2670)
+ReadNextInputBit:: ; 2670 (0:2670)
 	ld a, [W_SPRITEINPUTBITCOUNTER]
 	dec a
 	jr nz, .curByteHasMoreBitsToRead
@@ -6334,7 +6334,7 @@ ReadNextInputBit: ; 2670 (0:2670)
 	ret
 
 ; reads next byte from input stream and returns it in a
-ReadNextInputByte: ; 268b (0:268b)
+ReadNextInputByte:: ; 268b (0:268b)
 	ld a, [W_SPRITEINPUTPTR]
 	ld l, a
 	ld a, [W_SPRITEINPUTPTR+1]
@@ -6349,7 +6349,7 @@ ReadNextInputByte: ; 268b (0:268b)
 	ret
 
 ; the nth item is 2^n - 1
-LengthEncodingOffsetList: ; 269f (0:269f)
+LengthEncodingOffsetList:: ; 269f (0:269f)
 	dw %0000000000000001
 	dw %0000000000000011
 	dw %0000000000000111
@@ -6368,7 +6368,7 @@ LengthEncodingOffsetList: ; 269f (0:269f)
 	dw %1111111111111111
 
 ; unpacks the sprite data depending on the unpack mode
-UnpackSprite: ; 26bf (0:26bf)
+UnpackSprite:: ; 26bf (0:26bf)
 	ld a, [W_SPRITEUNPACKMODE]
 	cp $2
 	jp z, UnpackSpriteMode2
@@ -6381,7 +6381,7 @@ UnpackSprite: ; 26bf (0:26bf)
 
 ; decodes differential encoded sprite data
 ; input bit value 0 preserves the current bit value and input bit value 1 toggles it (starting from initial value 0).
-SpriteDifferentialDecode: ; 26d4 (0:26d4)
+SpriteDifferentialDecode:: ; 26d4 (0:26d4)
 	xor a
 	ld [W_SPRITECURPOSX], a
 	ld [W_SPRITECURPOSY], a
@@ -6466,7 +6466,7 @@ SpriteDifferentialDecode: ; 26d4 (0:26d4)
 	ret
 
 ; decodes the nybble stored in a. Last decoded data is assumed to be in e (needed to determine if initial value is 0 or 1)
-DifferentialDecodeNybble: ; 276d (0:276d)
+DifferentialDecodeNybble:: ; 276d (0:276d)
 	srl a               ; c=a%2, a/=2
 	ld c, $0
 	jr nc, .evenNumber
@@ -6508,7 +6508,7 @@ DifferentialDecodeNybble: ; 276d (0:276d)
 	ld e, a ; update last decoded data
 	ret
 
-DecodeNybble0Table: ; 27a7 (0:27a7)
+DecodeNybble0Table:: ; 27a7 (0:27a7)
 	dn $0, $1
 	dn $3, $2
 	dn $7, $6
@@ -6517,7 +6517,7 @@ DecodeNybble0Table: ; 27a7 (0:27a7)
 	dn $c, $d
 	dn $8, $9
 	dn $b, $a
-DecodeNybble1Table: ; 27af (0:27af)
+DecodeNybble1Table:: ; 27af (0:27af)
 	dn $f, $e
 	dn $c, $d
 	dn $8, $9
@@ -6526,7 +6526,7 @@ DecodeNybble1Table: ; 27af (0:27af)
 	dn $3, $2
 	dn $7, $6
 	dn $4, $5
-DecodeNybble0TableFlipped: ; 27b7 (0:27b7)
+DecodeNybble0TableFlipped:: ; 27b7 (0:27b7)
 	dn $0, $8
 	dn $c, $4
 	dn $e, $6
@@ -6535,7 +6535,7 @@ DecodeNybble0TableFlipped: ; 27b7 (0:27b7)
 	dn $3, $b
 	dn $1, $9
 	dn $d, $5
-DecodeNybble1TableFlipped: ; 27bf (0:27bf)
+DecodeNybble1TableFlipped:: ; 27bf (0:27bf)
 	dn $f, $7
 	dn $3, $b
 	dn $1, $9
@@ -6546,7 +6546,7 @@ DecodeNybble1TableFlipped: ; 27bf (0:27bf)
 	dn $2, $a
 
 ; combines the two loaded chunks with xor (the chunk loaded second is the destination). The source chunk is differeintial decoded beforehand.
-XorSpriteChunks: ; 27c7 (0:27c7)
+XorSpriteChunks:: ; 27c7 (0:27c7)
 	xor a
 	ld [W_SPRITECURPOSX], a
 	ld [W_SPRITECURPOSY], a
@@ -6611,7 +6611,7 @@ XorSpriteChunks: ; 27c7 (0:27c7)
 	ret
 
 ; reverses the bits in the nybble given in register a
-ReverseNybble: ; 2837 (0:2837)
+ReverseNybble:: ; 2837 (0:2837)
 	ld de, NybbleReverseTable
 	add e
 	ld e, a
@@ -6622,7 +6622,7 @@ ReverseNybble: ; 2837 (0:2837)
 	ret
 
 ; resets sprite buffer pointers to buffer 1 and 2, depending on W_SPRITELOADFLAGS
-ResetSpriteBufferPointers: ; 2841 (0:2841)
+ResetSpriteBufferPointers:: ; 2841 (0:2841)
 	ld a, [W_SPRITELOADFLAGS] ; $d0a8
 	bit 0, a
 	jr nz, .buffer2Selected
@@ -6644,11 +6644,11 @@ ResetSpriteBufferPointers: ; 2841 (0:2841)
 	ret
 
 ; maps each nybble to its reverse
-NybbleReverseTable: ; 2867 (0:2867)
+NybbleReverseTable:: ; 2867 (0:2867)
 	db $0, $8, $4, $c, $2, $a, $6 ,$e, $1, $9, $5, $d, $3, $b, $7 ,$f
 
 ; combines the two loaded chunks with xor (the chunk loaded second is the destination). Both chunks are differeintial decoded beforehand.
-UnpackSpriteMode2: ; 2877 (0:2877)
+UnpackSpriteMode2:: ; 2877 (0:2877)
 	call ResetSpriteBufferPointers
 	ld a, [W_SPRITEFLIPPED]
 	push af
@@ -6665,7 +6665,7 @@ UnpackSpriteMode2: ; 2877 (0:2877)
 	jp XorSpriteChunks
 
 ; stores hl into the output pointers
-StoreSpriteOutputPointer: ; 2897 (0:2897)
+StoreSpriteOutputPointer:: ; 2897 (0:2897)
 	ld a, l
 	ld [W_SPRITEOUTPUTPTR], a
 	ld [W_SPRITEOUTPUTPTRCACHED], a
@@ -6674,7 +6674,7 @@ StoreSpriteOutputPointer: ; 2897 (0:2897)
 	ld [W_SPRITEOUTPUTPTRCACHED+1], a
 	ret
 
-ResetPlayerSpriteData: ; 28a6 (0:28a6)
+ResetPlayerSpriteData:: ; 28a6 (0:28a6)
 	ld hl, wSpriteStateData1
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld hl, wSpriteStateData2
@@ -6690,12 +6690,12 @@ ResetPlayerSpriteData: ; 28a6 (0:28a6)
 	ret
 
 ; overwrites sprite data with zeroes
-ResetPlayerSpriteData_ClearSpriteData: ; 28c4 (0:28c4)
+ResetPlayerSpriteData_ClearSpriteData:: ; 28c4 (0:28c4)
 	ld bc, $10
 	xor a
 	jp FillMemory
 
-Func_28cb: ; 28cb (0:28cb)
+Func_28cb:: ; 28cb (0:28cb)
 	ld a, [wMusicHeaderPointer]
 	and a
 	jr nz, .asm_28dc
@@ -6746,7 +6746,7 @@ Func_28cb: ; 28cb (0:28cb)
 
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [$ff8c] = sprite ID or text ID
-DisplayTextID: ; 2920 (0:2920)
+DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld b,BANK(DisplayTextIDInit)
@@ -6848,20 +6848,20 @@ DisplayTextID: ; 2920 (0:2920)
 	and a
 	jr nz,HoldTextDisplayOpen
 
-AfterDisplayingTextID: ; 29d6 (0:29d6)
+AfterDisplayingTextID:: ; 29d6 (0:29d6)
 	ld a,[$cc47]
 	and a
 	jr nz,HoldTextDisplayOpen
 	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
-HoldTextDisplayOpen: ; 29df (0:29df)
+HoldTextDisplayOpen:: ; 29df (0:29df)
 	call GetJoypadState
 	ld a,[H_CURRENTPRESSEDBUTTONS]
 	bit 0,a ; is the A button being pressed?
 	jr nz,HoldTextDisplayOpen
 
-CloseTextDisplay: ; 29e8 (0:29e8)
+CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
@@ -6897,7 +6897,7 @@ CloseTextDisplay: ; 29e8 (0:29e8)
 	ld [$2000],a
 	jp UpdateSprites ; move sprites
 
-DisplayPokemartDialogue: ; 2a2e (0:2a2e)
+DisplayPokemartDialogue:: ; 2a2e (0:2a2e)
 	push hl
 	ld hl,PokemartGreetingText
 	call PrintText
@@ -6917,11 +6917,11 @@ DisplayPokemartDialogue: ; 2a2e (0:2a2e)
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
-PokemartGreetingText: ; 2a55 (0:2a55)
+PokemartGreetingText:: ; 2a55 (0:2a55)
 	TX_FAR _PokemartGreetingText
 	db "@"
 
-LoadItemList: ; 2a5a (0:2a5a)
+LoadItemList:: ; 2a5a (0:2a5a)
 	ld a,$01
 	ld [$cfcb],a
 	ld a,h
@@ -6937,7 +6937,7 @@ LoadItemList: ; 2a5a (0:2a5a)
 	jr nz,.loop
 	ret
 
-DisplayPokemonCenterDialogue: ; 2a72 (0:2a72)
+DisplayPokemonCenterDialogue:: ; 2a72 (0:2a72)
 	xor a
 	ld [$ff8b],a
 	ld [$ff8c],a
@@ -6954,22 +6954,22 @@ DisplayPokemonCenterDialogue: ; 2a72 (0:2a72)
 	ld [$2000],a
 	jp AfterDisplayingTextID
 
-DisplaySafariGameOverText: ; 2a90 (0:2a90)
+DisplaySafariGameOverText:: ; 2a90 (0:2a90)
 	ld hl, Func_1e9ed
 	ld b, BANK(Func_1e9ed)
 	call Bankswitch
 	jp AfterDisplayingTextID
 
-DisplayPokemonFaintedText: ; 2a9b (0:2a9b)
+DisplayPokemonFaintedText:: ; 2a9b (0:2a9b)
 	ld hl,PokemonFaintedText
 	call PrintText
 	jp AfterDisplayingTextID
 
-PokemonFaintedText: ; 2aa4 (0:2aa4)
+PokemonFaintedText:: ; 2aa4 (0:2aa4)
 	TX_FAR _PokemonFaintedText
 	db "@"
 
-DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
+DisplayPlayerBlackedOutText:: ; 2aa9 (0:2aa9)
 	ld hl,PlayerBlackedOutText
 	call PrintText
 	ld a,[$d732]
@@ -6977,20 +6977,20 @@ DisplayPlayerBlackedOutText: ; 2aa9 (0:2aa9)
 	ld [$d732],a
 	jp HoldTextDisplayOpen
 
-PlayerBlackedOutText: ; 2aba (0:2aba)
+PlayerBlackedOutText:: ; 2aba (0:2aba)
 	TX_FAR _PlayerBlackedOutText
 	db "@"
 
-DisplayRepelWoreOffText: ; 2abf (0:2abf)
+DisplayRepelWoreOffText:: ; 2abf (0:2abf)
 	ld hl,RepelWoreOffText
 	call PrintText
 	jp AfterDisplayingTextID
 
-RepelWoreOffText: ; 2ac8 (0:2ac8)
+RepelWoreOffText:: ; 2ac8 (0:2ac8)
 	TX_FAR _RepelWoreOffText
 	db "@"
 
-DisplayStartMenu: ; 2acd (0:2acd)
+DisplayStartMenu:: ; 2acd (0:2acd)
 	ld a,$04 ; hardcoded Bank, not sure what's it refers to
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
@@ -6999,7 +6999,7 @@ DisplayStartMenu: ; 2acd (0:2acd)
 	ld a, (SFX_02_3f - $4000) / 3 ; Start menu sound
 	call PlaySound
 
-RedisplayStartMenu: ; 2adf (0:2adf)
+RedisplayStartMenu:: ; 2adf (0:2adf)
 	ld b,BANK(DrawStartMenu)
 	ld hl,DrawStartMenu
 	call Bankswitch
@@ -7075,7 +7075,7 @@ RedisplayStartMenu: ; 2adf (0:2adf)
 	jp z,StartMenu_Option
 
 ; EXIT falls through to here
-CloseStartMenu: ; 2b70 (0:2b70)
+CloseStartMenu:: ; 2b70 (0:2b70)
 	call GetJoypadState
 	ld a,[H_NEWLYPRESSEDBUTTONS]
 	bit 0,a ; was A button newly pressed?
@@ -7089,7 +7089,7 @@ CloseStartMenu: ; 2b70 (0:2b70)
 ; b = length of string of bytes
 ; OUTPUT:
 ; [$D11E] = number of set bits
-CountSetBits: ; 2b7f (0:2b7f)
+CountSetBits:: ; 2b7f (0:2b7f)
 	ld c,0
 .loop
 	ld a,[hli]
@@ -7110,13 +7110,13 @@ CountSetBits: ; 2b7f (0:2b7f)
 
 ; subtracts the amount the player paid from their money
 ; sets carry flag if there is enough money and unsets carry flag if not
-SubtractAmountPaidFromMoney: ; 2b96 (0:2b96)
+SubtractAmountPaidFromMoney:: ; 2b96 (0:2b96)
 	ld b,BANK(SubtractAmountPaidFromMoney_)
 	ld hl,SubtractAmountPaidFromMoney_
 	jp Bankswitch
 
 ; adds the amount the player sold to their money
-AddAmountSoldToMoney: ; 2b9e (0:2b9e)
+AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
@@ -7134,7 +7134,7 @@ AddAmountSoldToMoney: ; 2b9e (0:2b9e)
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [$CF92] = index (within the inventory) of the item to remove
 ; [$CF96] = quantity to remove
-RemoveItemFromInventory: ; 2bbb (0:2bbb)
+RemoveItemFromInventory:: ; 2bbb (0:2bbb)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(RemoveItemFromInventory_)
@@ -7152,7 +7152,7 @@ RemoveItemFromInventory: ; 2bbb (0:2bbb)
 ; [$CF91] = item ID
 ; [$CF96] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory: ; 2bcf (0:2bcf)
+AddItemToInventory:: ; 2bcf (0:2bcf)
 	push bc
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -7170,7 +7170,7 @@ AddItemToInventory: ; 2bcf (0:2bcf)
 ; INPUT:
 ; [wListMenuID] = list menu ID
 ; [$cf8b] = address of the list (2 bytes)
-DisplayListMenuID: ; 2be6 (0:2be6)
+DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
 	ld a,1
@@ -7224,7 +7224,7 @@ DisplayListMenuID: ; 2be6 (0:2be6)
 	ld c,10
 	call DelayFrames
 
-DisplayListMenuIDLoop: ; 2c53 (0:2c53)
+DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable transfer
 	call PrintListMenuEntries
@@ -7359,7 +7359,7 @@ DisplayListMenuIDLoop: ; 2c53 (0:2c53)
 	dec [hl]
 	jp DisplayListMenuIDLoop
 
-DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
+DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 ; text box dimensions/coordinates for just quantity
 	FuncCoord 15,9
 	ld hl,Coord
@@ -7487,13 +7487,13 @@ DisplayChooseQuantityMenu: ; 2d57 (0:2d57)
 	ld a,$ff
 	ret
 
-InitialQuantityText: ; 2e30 (0:2e30)
+InitialQuantityText:: ; 2e30 (0:2e30)
 	db "×01@"
 
-SpacesBetweenQuantityAndPriceText: ; 2e34 (0:2e34)
+SpacesBetweenQuantityAndPriceText:: ; 2e34 (0:2e34)
 	db "      @"
 
-ExitListMenu: ; 2e3b (0:2e3b)
+ExitListMenu:: ; 2e3b (0:2e3b)
 	ld a,[wCurrentMenuItem]
 	ld [$d12d],a
 	ld a,$02
@@ -7509,7 +7509,7 @@ ExitListMenu: ; 2e3b (0:2e3b)
 	scf
 	ret
 
-PrintListMenuEntries: ; 2e5a (0:2e5a)
+PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	FuncCoord 5, 3 ; $c3e1
 	ld hl,Coord
 	ld b,$09
@@ -7700,10 +7700,10 @@ PrintListMenuEntries: ; 2e5a (0:2e5a)
 	ld de,ListMenuCancelText
 	jp PlaceString
 
-ListMenuCancelText: ; 2f97 (0:2f97)
+ListMenuCancelText:: ; 2f97 (0:2f97)
 	db "CANCEL@"
 
-GetMonName: ; 2f9e (0:2f9e)
+GetMonName:: ; 2f9e (0:2f9e)
 	push hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -7729,7 +7729,7 @@ GetMonName: ; 2f9e (0:2f9e)
 	pop hl
 	ret
 
-GetItemName: ; 2fcf (0:2fcf)
+GetItemName:: ; 2fcf (0:2fcf)
 ; given an item ID at [$D11E], store the name of the item into a string
 ;     starting at $CD6D
 	push hl
@@ -7754,7 +7754,7 @@ GetItemName: ; 2fcf (0:2fcf)
 	pop hl
 	ret
 
-GetMachineName: ; 2ff3 (0:2ff3)
+GetMachineName:: ; 2ff3 (0:2ff3)
 ; copies the name of the TM/HM in [$D11E] to $CD6D
 	push hl
 	push de
@@ -7807,14 +7807,14 @@ GetMachineName: ; 2ff3 (0:2ff3)
 	pop hl
 	ret
 
-TechnicalPrefix: ; 303c (0:303c)
+TechnicalPrefix:: ; 303c (0:303c)
 	db "TM"
-HiddenPrefix: ; 303e (0:303e)
+HiddenPrefix:: ; 303e (0:303e)
 	db "HM"
 
 ; sets carry if item is HM, clears carry if item is not HM
 ; Input: a = item ID
-IsItemHM: ; 3040 (0:3040)
+IsItemHM:: ; 3040 (0:3040)
 	cp a,HM_01
 	jr c,.notHM
 	cp a,TM_01
@@ -7825,16 +7825,16 @@ IsItemHM: ; 3040 (0:3040)
 
 ; sets carry if move is an HM, clears carry if move is not an HM
 ; Input: a = move ID
-IsMoveHM: ; 3049 (0:3049)
+IsMoveHM:: ; 3049 (0:3049)
 	ld hl,HMMoves
 	ld de,1
 	jp IsInArray
 
-HMMoves: ; 3052 (0:3052)
+HMMoves:: ; 3052 (0:3052)
 	db CUT,FLY,SURF,STRENGTH,FLASH
 	db $ff ; terminator
 
-GetMoveName: ; 3058 (0:3058)
+GetMoveName:: ; 3058 (0:3058)
 	push hl
 	ld a,MOVE_NAME
 	ld [W_LISTTYPE],a
@@ -7848,7 +7848,7 @@ GetMoveName: ; 3058 (0:3058)
 	ret
 
 ; reloads text box tile patterns, current map view, and tileset tile patterns
-ReloadMapData: ; 3071 (0:3071)
+ReloadMapData:: ; 3071 (0:3071)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
@@ -7864,7 +7864,7 @@ ReloadMapData: ; 3071 (0:3071)
 	ret
 
 ; reloads tileset tile patterns
-ReloadTilesetTilePatterns: ; 3090 (0:3090)
+ReloadTilesetTilePatterns:: ; 3090 (0:3090)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[W_CURMAP]
@@ -7878,7 +7878,7 @@ ReloadTilesetTilePatterns: ; 3090 (0:3090)
 	ret
 
 ; shows the town map and lets the player choose a destination to fly to
-ChooseFlyDestination: ; 30a9 (0:30a9)
+ChooseFlyDestination:: ; 30a9 (0:30a9)
 	ld hl,$d72e
 	res 4,[hl]
 	ld b, BANK(Func_70f90)
@@ -7886,7 +7886,7 @@ ChooseFlyDestination: ; 30a9 (0:30a9)
 	jp Bankswitch
 
 ; causes the text box to close waithout waiting for a button press after displaying text
-DisableWaitingAfterTextDisplay: ; 30b6 (0:30b6)
+DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 	ld a,$01
 	ld [$cc3c],a
 	ret
@@ -7900,7 +7900,7 @@ DisableWaitingAfterTextDisplay: ; 30b6 (0:30b6)
 ; 00: unsucessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
-UseItem: ; 30bc (0:30bc)
+UseItem:: ; 30bc (0:30bc)
 	ld b,BANK(UseItem_)
 	ld hl,UseItem_
 	jp Bankswitch
@@ -7913,7 +7913,7 @@ UseItem: ; 30bc (0:30bc)
 ; [$cf96] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
-TossItem: ; 30c4 (0:30c4)
+TossItem:: ; 30c4 (0:30c4)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(TossItem_)
@@ -7933,7 +7933,7 @@ TossItem: ; 30c4 (0:30c4)
 ; [$d124] = result
 ; 00: item is not key item
 ; 01: item is key item
-IsKeyItem: ; 30d9 (0:30d9)
+IsKeyItem:: ; 30d9 (0:30d9)
 	push hl
 	push de
 	push bc
@@ -7948,7 +7948,7 @@ IsKeyItem: ; 30d9 (0:30d9)
 ; function to draw various text boxes
 ; INPUT:
 ; [$D125] = text box ID
-DisplayTextBoxID: ; 30e8 (0:30e8)
+DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(DisplayTextBoxID_)
@@ -7961,7 +7961,7 @@ DisplayTextBoxID: ; 30e8 (0:30e8)
 	ld [$2000],a
 	ret
 
-Func_30fd: ; 30fd (0:30fd)
+Func_30fd:: ; 30fd (0:30fd)
 	ld a, [$cc57]
 	and a
 	ret nz
@@ -7972,7 +7972,7 @@ Func_30fd: ; 30fd (0:30fd)
 	and $80
 	ret
 
-Func_310e: ; 310e (0:310e)
+Func_310e:: ; 310e (0:310e)
 	ld hl, $d736
 	bit 0, [hl]
 	res 0, [hl]
@@ -8009,16 +8009,16 @@ Func_310e: ; 310e (0:310e)
 	ld hl, Func_1a3e0
 	jp Bankswitch
 
-Func_314e: ; 314e (0:314e)
+Func_314e:: ; 314e (0:314e)
 	ld b, BANK(Func_1a41d)
 	ld hl, Func_1a41d
 	jp Bankswitch
 
-Func_3156: ; 3156 (0:3156)
+Func_3156:: ; 3156 (0:3156)
 	ret
 
 ; stores hl in [W_TRAINERHEADERPTR]
-StoreTrainerHeaderPointer: ; 3157 (0:3157)
+StoreTrainerHeaderPointer:: ; 3157 (0:3157)
 	ld a, h
 	ld [W_TRAINERHEADERPTR], a
 	ld a, l
@@ -8027,7 +8027,7 @@ StoreTrainerHeaderPointer: ; 3157 (0:3157)
 
 ; executes the current map script from the function pointer array provided in hl.
 ; a: map script index to execute (unless overridden by [$d733] bit 4)
-ExecuteCurMapScriptInTable: ; 3160 (0:3160)
+ExecuteCurMapScriptInTable:: ; 3160 (0:3160)
 	push af
 	push de
 	call StoreTrainerHeaderPointer
@@ -8046,7 +8046,7 @@ ExecuteCurMapScriptInTable: ; 3160 (0:3160)
 	ld a, [W_CURMAPSCRIPT]
 	ret
 
-LoadGymLeaderAndCityName: ; 317f (0:317f)
+LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	push de
 	ld de, wGymCityName
 	ld bc, $11
@@ -8063,7 +8063,7 @@ LoadGymLeaderAndCityName: ; 317f (0:317f)
 ;    4 -> before battle text (into hl)
 ;    6 -> after battle text (into hl)
 ;    8 -> end battle text (into hl)
-ReadTrainerHeaderInfo: ; 3193 (0:3193)
+ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	push de
 	push af
 	ld d, $0
@@ -8103,12 +8103,12 @@ ReadTrainerHeaderInfo: ; 3193 (0:3193)
 	ret
 
 ; calls HandleBitArray
-HandleBitArray_Bank0: ; 31c7 (0:31c7)
+HandleBitArray_Bank0:: ; 31c7 (0:31c7)
 	ld a, $10
 	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 
 ; direct talking to a trainer (rather than getting seen by one)
-TalkToTrainer: ; 31cc (0:31cc)
+TalkToTrainer:: ; 31cc (0:31cc)
 	call StoreTrainerHeaderPointer
 	xor a
 	call ReadTrainerHeaderInfo     ; read flag's bit
@@ -8146,7 +8146,7 @@ TalkToTrainer: ; 31cc (0:31cc)
 	jp Func_325d
 
 ; checks if any trainers are seeing the player and wanting to fight
-CheckFightingMapTrainers: ; 3219 (0:3219)
+CheckFightingMapTrainers:: ; 3219 (0:3219)
 	call CheckForEngagingTrainers
 	ld a, [$cf13]
 	cp $ff
@@ -8172,7 +8172,7 @@ CheckFightingMapTrainers: ; 3219 (0:3219)
 	inc [hl]      ; progress to battle phase 1 (engaging)
 	ret
 
-Func_324c: ; 324c (0:324c)
+Func_324c:: ; 324c (0:324c)
 	ld a, [$d730]
 	and $1
 	ret nz
@@ -8181,7 +8181,7 @@ Func_324c: ; 324c (0:324c)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call DisplayTextID
 
-Func_325d: ; 325d (0:325d)
+Func_325d:: ; 325d (0:325d)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	call InitBattleEnemyParameters
@@ -8194,7 +8194,7 @@ Func_325d: ; 325d (0:325d)
 	inc [hl]        ; progress to battle phase 2 (battling)
 	ret
 
-EndTrainerBattle: ; 3275 (0:3275)
+EndTrainerBattle:: ; 3275 (0:3275)
 	ld hl, $d126
 	set 5, [hl]
 	set 6, [hl]
@@ -8229,7 +8229,7 @@ EndTrainerBattle: ; 3275 (0:3275)
 	res 4, [hl]
 	ret nz
 
-ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
+ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -8239,13 +8239,13 @@ ResetButtonPressedAndMapScript: ; 32c1 (0:32c1)
 	ret
 
 ; calls TrainerWalkUpToPlayer
-TrainerWalkUpToPlayer_Bank0: ; 32cf (0:32cf)
+TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 	ld b, BANK(TrainerWalkUpToPlayer)
 	ld hl, TrainerWalkUpToPlayer
 	jp Bankswitch
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
-InitBattleEnemyParameters: ; 32d7 (0:32d7)
+InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; $d059
 	ld [W_ENEMYMONORTRAINERCLASS], a
@@ -8258,25 +8258,25 @@ InitBattleEnemyParameters: ; 32d7 (0:32d7)
 	ld [W_CURENEMYLVL], a ; $d127
 	ret
 
-Func_32ef: ; 32ef (0:32ef)
+Func_32ef:: ; 32ef (0:32ef)
 	ld hl, Func_567f9
 	jr asm_3301
 
-Func_32f4: ; 32f4 (0:32f4)
+Func_32f4:: ; 32f4 (0:32f4)
 	ld hl, Func_56819
 	jr asm_3301 ; 0x32f7 $8
 
-Func_32f9: ; 32f9 (0:32f9)
+Func_32f9:: ; 32f9 (0:32f9)
 	ld hl, Func_5683d
 	jr asm_3301
 
-Func_32fe: ; 32fe (0:32fe)
+Func_32fe:: ; 32fe (0:32fe)
 	ld hl, Func_5685d
-asm_3301: ; 3301 (0:3301)
+asm_3301:: ; 3301 (0:3301)
 	ld b, $15
 	jp Bankswitch ; indirect jump to one of the four functions
 
-CheckForEngagingTrainers: ; 3306 (0:3306)
+CheckForEngagingTrainers:: ; 3306 (0:3306)
 	xor a
 	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
 	ld d, h                          ; store trainer header address in de
@@ -8324,7 +8324,7 @@ CheckForEngagingTrainers: ; 3306 (0:3306)
 	jr .trainerLoop
 
 ; saves loaded rom bank and hl as well as de registers
-PreBattleSaveRegisters: ; 3354 (0:3354)
+PreBattleSaveRegisters:: ; 3354 (0:3354)
 	ld a, [H_LOADEDROMBANK]
 	ld [W_PBSTOREDROMBANK], a
 	ld a, h
@@ -8339,7 +8339,7 @@ PreBattleSaveRegisters: ; 3354 (0:3354)
 
 ; loads data of some trainer on the current map and plays pre-battle music
 ; [$cf13]: sprite ID of trainer who is engaged
-EngageMapTrainer: ; 336a (0:336a)
+EngageMapTrainer:: ; 336a (0:336a)
 	ld hl, W_MAPSPRITEEXTRADATA
 	ld d, $0
 	ld a, [$cf13]
@@ -8353,7 +8353,7 @@ EngageMapTrainer: ; 336a (0:336a)
 	ld [wEnemyMonAttackMod], a ; $cd2e
 	jp PlayTrainerMusic
 
-Func_3381: ; 3381 (0:3381)
+Func_3381:: ; 3381 (0:3381)
 	push hl
 	ld hl, $d72d
 	bit 7, [hl]
@@ -8380,7 +8380,7 @@ Func_3381: ; 3381 (0:3381)
 	call Bankswitch
 	jp WaitForSoundToFinish
 
-Func_33b7: ; 33b7 (0:33b7)
+Func_33b7:: ; 33b7 (0:33b7)
 	ld a, [$cf0b]
 	and a
 	jr nz, .asm_33c6
@@ -8396,16 +8396,16 @@ Func_33b7: ; 33b7 (0:33b7)
 	ld l, a
 	ret
 
-UnnamedText_33cf: ; 33cf (0:33cf)
+UnnamedText_33cf:: ; 33cf (0:33cf)
 	TX_FAR _UnnamedText_33cf
 	db $08
 
-Func_33d4: ; 33d4 (0:33d4)
+Func_33d4:: ; 33d4 (0:33d4)
 	call Func_33b7
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-Func_33dd: ; 33dd (0:33dd)
+Func_33dd:: ; 33dd (0:33dd)
 	ld a, [wFlags_0xcd60]
 	bit 0, a
 	ret nz
@@ -8413,7 +8413,7 @@ Func_33dd: ; 33dd (0:33dd)
 	xor a
 	ret
 
-PlayTrainerMusic: ; 33e8 (0:33e8)
+PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
 	cp $c8 + SONY1
 	ret z
@@ -8440,7 +8440,7 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	jr z, .noEvilTrainer
 	cp b
 	jr nz, .evilTrainerListLoop
-	ld a, (Music_MeetEvilTrainer - $4000) / 3
+	ld a, MUSIC_MEET_EVIL_TRAINER
 	jr .PlaySound
 .noEvilTrainer
 	ld hl, FemaleTrainerList
@@ -8450,22 +8450,22 @@ PlayTrainerMusic: ; 33e8 (0:33e8)
 	jr z, .maleTrainer
 	cp b
 	jr nz, .femaleTrainerListLoop
-	ld a, (Music_MeetFemaleTrainer - $4000) / 3
+	ld a, MUSIC_MEET_FEMALE_TRAINER
 	jr .PlaySound
 .maleTrainer
-	ld a, (Music_MeetMaleTrainer - $4000) / 3
+	ld a, MUSIC_MEET_MALE_TRAINER
 .PlaySound
 	ld [$c0ee], a
 	jp PlaySound
 
-FemaleTrainerList: ; 3434 (0:3434)
+FemaleTrainerList:: ; 3434 (0:3434)
 	db $c8+LASS
 	db $c8+JR__TRAINER_F
 	db $c8+BEAUTY
 	db $c8+COOLTRAINER_F
 	db $FF
 
-EvilTrainerList: ; 3439 (0:3439)
+EvilTrainerList:: ; 3439 (0:3439)
 	db $c8+JUGGLER_X
 	db $c8+GAMBLER
 	db $c8+ROCKER
@@ -8476,7 +8476,7 @@ EvilTrainerList: ; 3439 (0:3439)
 	db $c8+ROCKET
 	db $FF
 
-Func_3442: ; 3442 (0:3442)
+Func_3442:: ; 3442 (0:3442)
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -8500,33 +8500,33 @@ Func_3442: ; 3442 (0:3442)
 	inc hl
 	jr Func_3442
 
-FuncTX_ItemStoragePC: ; 3460 (0:3460)
+FuncTX_ItemStoragePC:: ; 3460 (0:3460)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_78e6)
 	ld hl, Func_78e6
 	jr bankswitchAndContinue
 
-FuncTX_BillsPC: ; 346a (0:346a)
+FuncTX_BillsPC:: ; 346a (0:346a)
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(Func_214c2)
 	ld hl, Func_214c2
 	jr bankswitchAndContinue
 
-FuncTX_SlotMachine: ; 3474 (0:3474)
+FuncTX_SlotMachine:: ; 3474 (0:3474)
 ; XXX find a better name for this function
 ; special_F7
 	ld b,BANK(CeladonPrizeMenu)
 	ld hl,CeladonPrizeMenu
-bankswitchAndContinue: ; 3479 (0:3479)
+bankswitchAndContinue:: ; 3479 (0:3479)
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-FuncTX_PokemonCenterPC: ; 347f (0:347f)
+FuncTX_PokemonCenterPC:: ; 347f (0:347f)
 	ld b, BANK(ActivatePC)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
-Func_3486: ; 3486 (0:3486)
+Func_3486:: ; 3486 (0:3486)
 	xor a
 	ld [$cd3b], a
 	ld [$c206], a
@@ -8534,7 +8534,7 @@ Func_3486: ; 3486 (0:3486)
 	set 7, [hl]
 	ret
 
-IsItemInBag: ; 3493 (0:3493)
+IsItemInBag:: ; 3493 (0:3493)
 ; given an item_id in b
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
@@ -8545,18 +8545,18 @@ IsItemInBag: ; 3493 (0:3493)
 	and a
 	ret
 
-DisplayPokedex: ; 349b (0:349b)
+DisplayPokedex:: ; 349b (0:349b)
 	ld [$d11e], a
 	ld b, BANK(Func_7c18)
 	ld hl, Func_7c18
 	jp Bankswitch
 
-Func_34a6: ; 34a6 (0:34a6)
+Func_34a6:: ; 34a6 (0:34a6)
 	call Func_34ae
 	ld c, $6
 	jp DelayFrames
 
-Func_34ae: ; 34ae (0:34ae)
+Func_34ae:: ; 34ae (0:34ae)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
 	call Func_34fc
@@ -8564,7 +8564,7 @@ Func_34ae: ; 34ae (0:34ae)
 	ld [hl], a
 	ret
 
-Func_34b9: ; 34b9 (0:34b9)
+Func_34b9:: ; 34b9 (0:34b9)
 	ld de, $fff9
 	add hl, de
 	ld [hl], a
@@ -8576,14 +8576,14 @@ Func_34b9: ; 34b9 (0:34b9)
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-ArePlayerCoordsInArray: ; 34bf (0:34bf)
+ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 	ld a,[W_YCOORD]
 	ld b,a
 	ld a,[W_XCOORD]
 	ld c,a
 	; fallthrough
 
-CheckCoords: ; 34c7 (0:34c7)
+CheckCoords:: ; 34c7 (0:34c7)
 	xor a
 	ld [$cd3d],a
 .loop
@@ -8617,7 +8617,7 @@ CheckCoords: ; 34c7 (0:34c7)
 ; OUTPUT:
 ; [$cd3d] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
-CheckBoulderCoords: ; 34e4 (0:34e4)
+CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
 	ld hl, $c204
 	ld a, [$ff00+$8c]
@@ -8634,13 +8634,13 @@ CheckBoulderCoords: ; 34e4 (0:34e4)
 	pop hl
 	jp CheckCoords
 
-Func_34fc: ; 34fc (0:34fc)
+Func_34fc:: ; 34fc (0:34fc)
 	ld h, $c1
 	jr asm_3502
 
-Func_3500: ; 3500 (0:3500)
+Func_3500:: ; 3500 (0:3500)
 	ld h, $c2
-asm_3502: ; 3502 (0:3502)
+asm_3502:: ; 3502 (0:3502)
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
 	ld b, a
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -8654,7 +8654,7 @@ asm_3502: ; 3502 (0:3502)
 ; the final $ff will be replicated in the output list and a contains the number of bytes written
 ; de: input list
 ; hl: output list
-DecodeRLEList: ; 350c (0:350c)
+DecodeRLEList:: ; 350c (0:350c)
 	xor a
 	ld [wRLEByteCount], a     ; count written bytes here
 .listLoop
@@ -8681,7 +8681,7 @@ DecodeRLEList: ; 350c (0:350c)
 	ret
 
 ; sets movement byte 1 for sprite [$FF8C] to $FE and byte 2 to [$FF8D]
-SetSpriteMovementBytesToFE: ; 3533 (0:3533)
+SetSpriteMovementBytesToFE:: ; 3533 (0:3533)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
@@ -8692,7 +8692,7 @@ SetSpriteMovementBytesToFE: ; 3533 (0:3533)
 	ret
 
 ; sets both movement bytes for sprite [$FF8C] to $FF
-SetSpriteMovementBytesToFF: ; 3541 (0:3541)
+SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl],$FF
@@ -8702,7 +8702,7 @@ SetSpriteMovementBytesToFF: ; 3541 (0:3541)
 	ret
 
 ; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
-GetSpriteMovementByte1Pointer: ; 354e (0:354e)
+GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
 	ld a,[$FF8C] ; the sprite to move
 	swap a
@@ -8711,7 +8711,7 @@ GetSpriteMovementByte1Pointer: ; 354e (0:354e)
 	ret
 
 ; returns the sprite movement byte 2 pointer for sprite [$FF8C] in hl
-GetSpriteMovementByte2Pointer: ; 3558 (0:3558)
+GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 	push de
 	ld hl,W_MAPSPRITEDATA
 	ld a,[$FF8C] ; the sprite to move
@@ -8723,7 +8723,7 @@ GetSpriteMovementByte2Pointer: ; 3558 (0:3558)
 	pop de
 	ret
 
-Func_3566: ; 3566 (0:3566)
+Func_3566:: ; 3566 (0:3566)
 	call Func_359e
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	and a
@@ -8756,7 +8756,7 @@ Func_3566: ; 3566 (0:3566)
 	ld [hl], d
 	ret
 
-Func_359e: ; 359e (0:359e)
+Func_359e:: ; 359e (0:359e)
 	ld b, BANK(Func_13a58)
 	ld hl, Func_13a58
 	jp Bankswitch
@@ -8764,7 +8764,7 @@ Func_359e: ; 359e (0:359e)
 ; tests if player's money are at least as much as [$ff9f]
 ; sets carry flag if not enough money
 ; sets zero flag if amounts match exactly
-HasEnoughMoney: ; 35a6 (0:35a6)
+HasEnoughMoney:: ; 35a6 (0:35a6)
 	ld de, wPlayerMoney ; $d347
 	ld hl, $ff9f
 	ld c, $3
@@ -8773,13 +8773,13 @@ HasEnoughMoney: ; 35a6 (0:35a6)
 ; tests if player's game corner coins are at least as many as [$ffa0]
 ; sets carry flag if not enough coins
 ; sets zero flag if amounts match exactly
-HasEnoughCoins: ; 35b1 (0:35b1)
+HasEnoughCoins:: ; 35b1 (0:35b1)
 	ld de, wPlayerCoins
 	ld hl, $ffa0
 	ld c, $2
 	jp StringCmp
 
-BankswitchHome: ; 35bc (0:35bc)
+BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a
 ; Only use this when in the home bank!
 	ld [$CF09],a
@@ -8790,14 +8790,14 @@ BankswitchHome: ; 35bc (0:35bc)
 	ld [$2000],a
 	ret
 
-BankswitchBack: ; 35cd (0:35cd)
+BankswitchBack:: ; 35cd (0:35cd)
 ; returns from BankswitchHome
 	ld a,[$CF08]
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ret
 
-Bankswitch: ; 35d6 (0:35d6)
+Bankswitch:: ; 35d6 (0:35d6)
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
 	ld a,[H_LOADEDROMBANK]
@@ -8817,18 +8817,18 @@ Bankswitch: ; 35d6 (0:35d6)
 
 ; displays yes/no choice
 ; yes -> set carry
-YesNoChoice: ; 35ec (0:35ec)
+YesNoChoice:: ; 35ec (0:35ec)
 	call SaveScreenTilesToBuffer1
 	call InitYesNoTextBoxParameters
 	jr DisplayYesNoChoice
 
-Func_35f4: ; 35f4 (0:35f4)
+Func_35f4:: ; 35f4 (0:35f4)
 	ld a, $14
 	ld [$d125], a
 	call InitYesNoTextBoxParameters
 	jp DisplayTextBoxID
 
-InitYesNoTextBoxParameters: ; 35ff (0:35ff)
+InitYesNoTextBoxParameters:: ; 35ff (0:35ff)
 	xor a
 	ld [$d12c], a
 	FuncCoord 14, 7 ; $c43a
@@ -8836,7 +8836,7 @@ InitYesNoTextBoxParameters: ; 35ff (0:35ff)
 	ld bc, $80f
 	ret
 
-YesNoChoicePokeCenter: ; 360a (0:360a)
+YesNoChoicePokeCenter:: ; 360a (0:360a)
 	call SaveScreenTilesToBuffer1
 	ld a, $6
 	ld [$d12c], a
@@ -8845,21 +8845,21 @@ YesNoChoicePokeCenter: ; 360a (0:360a)
 	ld bc, $80c
 	jr DisplayYesNoChoice
 
-Func_361a: ; 361a (0:361a)
+Func_361a:: ; 361a (0:361a)
 	call SaveScreenTilesToBuffer1
 	ld a, $3
 	ld [$d12c], a
 	FuncCoord 12, 7 ; $c438
 	ld hl, Coord
 	ld bc, $080d
-DisplayYesNoChoice: ; 3628 (0:3628)
+DisplayYesNoChoice:: ; 3628 (0:3628)
 	ld a, $14
 	ld [$d125], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
 
 ; calculates the difference |a-b|, setting carry flag if a<b
-CalcDifference: ; 3633 (0:3633)
+CalcDifference:: ; 3633 (0:3633)
 	sub b
 	ret nc
 	cpl
@@ -8867,11 +8867,11 @@ CalcDifference: ; 3633 (0:3633)
 	scf
 	ret
 
-MoveSprite: ; 363a (0:363a)
+MoveSprite:: ; 363a (0:363a)
 ; move the sprite [$FF8C] with the movement pointed to by de
 ; actually only copies the movement data to $CC5B for later
 	call SetSpriteMovementBytesToFF
-MoveSprite_: ; 363d (0:363d)
+MoveSprite_:: ; 363d (0:363d)
 	push hl
 	push bc
 	call GetSpriteMovementByte1Pointer
@@ -8903,7 +8903,7 @@ MoveSprite_: ; 363d (0:363d)
 	ld [$CD3A],a
 	ret
 
-Func_366b: ; 366b (0:366b)
+Func_366b:: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
 	xor a
@@ -8924,7 +8924,7 @@ Func_366b: ; 366b (0:366b)
 	ret
 
 ; copies the tile patterns for letters and numbers into VRAM
-LoadFontTilePatterns: ; 3680 (0:3680)
+LoadFontTilePatterns:: ; 3680 (0:3680)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8941,7 +8941,7 @@ LoadFontTilePatterns: ; 3680 (0:3680)
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
 ; copies the text box tile patterns into VRAM
-LoadTextBoxTilePatterns: ; 36a0 (0:36a0)
+LoadTextBoxTilePatterns:: ; 36a0 (0:36a0)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8958,7 +8958,7 @@ LoadTextBoxTilePatterns: ; 36a0 (0:36a0)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 ; copies HP bar and status display tile patterns into VRAM
-LoadHpBarAndStatusTilePatterns: ; 36c0 (0:36c0)
+LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -8976,7 +8976,7 @@ LoadHpBarAndStatusTilePatterns: ; 36c0 (0:36c0)
 
 ;Fills memory range with the specified byte.
 ;input registers a = fill_byte, bc = length, hl = address
-FillMemory: ; 36e0 (0:36e0)
+FillMemory:: ; 36e0 (0:36e0)
 	push de
 	ld d, a
 .loop
@@ -8991,28 +8991,28 @@ FillMemory: ; 36e0 (0:36e0)
 
 ; loads sprite that de points to
 ; bank of sprite is given in a
-UncompressSpriteFromDE: ; 36eb (0:36eb)
+UncompressSpriteFromDE:: ; 36eb (0:36eb)
 	ld hl, W_SPRITEINPUTPTR
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	jp UncompressSpriteData
 
-SaveScreenTilesToBuffer2: ; 36f4 (0:36f4)
+SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
 	ld hl, wTileMap
 	ld de, wTileMapBackup2
 	ld bc, $168
 	call CopyData
 	ret
 
-LoadScreenTilesFromBuffer2: ; 3701 (0:3701)
+LoadScreenTilesFromBuffer2:: ; 3701 (0:3701)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
 ; loads screen tiles stored in wTileMapBackup2 but leaves H_AUTOBGTRANSFERENABLED disabled
-LoadScreenTilesFromBuffer2DisableBGTransfer: ; 3709 (0:3709)
+LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, wTileMapBackup2
@@ -9021,13 +9021,13 @@ LoadScreenTilesFromBuffer2DisableBGTransfer: ; 3709 (0:3709)
 	call CopyData
 	ret
 
-SaveScreenTilesToBuffer1: ; 3719 (0:3719)
+SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
 	ld hl, wTileMap
 	ld de, wTileMapBackup
 	ld bc, $168
 	jp CopyData
 
-LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
+LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, wTileMapBackup
@@ -9038,21 +9038,21 @@ LoadScreenTilesFromBuffer1: ; 3725 (0:3725)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ret
 
-DelayFrames: ; 3739 (0:3739)
+DelayFrames:: ; 3739 (0:3739)
 ; wait n frames, where n is the value in c
 	call DelayFrame
 	dec c
 	jr nz,DelayFrames
 	ret
 
-PlaySoundWaitForCurrent: ; 3740 (0:3740)
+PlaySoundWaitForCurrent:: ; 3740 (0:3740)
 	push af
 	call WaitForSoundToFinish
 	pop af
 	jp PlaySound
 
 ; Wait for sound to finish playing
-WaitForSoundToFinish: ; 3748 (0:3748)
+WaitForSoundToFinish:: ; 3748 (0:3748)
 	ld a, [$d083]
 	and $80
 	ret nz
@@ -9070,7 +9070,7 @@ WaitForSoundToFinish: ; 3748 (0:3748)
 	pop hl
 	ret
 
-NamePointers: ; 375d (0:375d)
+NamePointers:: ; 375d (0:375d)
 	dw MonsterNames
 	dw MoveNames
 	dw UnusedNames
@@ -9079,7 +9079,7 @@ NamePointers: ; 375d (0:375d)
 	dw W_ENEMYMON1OT ; enemy's OT names list
 	dw TrainerNames
 
-GetName: ; 376b (0:376b)
+GetName:: ; 376b (0:376b)
 ; arguments:
 ; [$D0B5] = which name
 ; [$D0B6] = which list (W_LISTTYPE)
@@ -9160,7 +9160,7 @@ GetName: ; 376b (0:376b)
 	ld [$2000],a
 	ret
 
-GetItemPrice: ; 37df (0:37df)
+GetItemPrice:: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [wListMenuID] ; $cf94
@@ -9204,12 +9204,12 @@ GetItemPrice: ; 37df (0:37df)
 	ret
 
 ; copies a string from [de] to [$cf4b]
-CopyStringToCF4B: ; 3826 (0:3826)
+CopyStringToCF4B:: ; 3826 (0:3826)
 	ld hl, $cf4b
 	; fall through
 
 ; copies a string from [de] to [hl]
-CopyString: ; 3829 (0:3829)
+CopyString:: ; 3829 (0:3829)
 	ld a, [de]
 	inc de
 	ld [hli], a
@@ -9232,7 +9232,7 @@ CopyString: ; 3829 (0:3829)
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
 ;    ([$ffb7] == 1, [$ffb6] == 0)
-GetJoypadStateLowSensitivity: ; 3831 (0:3831)
+GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
 	call GetJoypadState
 	ld a,[$ffb7] ; flag
 	and a ; get all currently pressed buttons or only newly pressed buttons?
@@ -9271,7 +9271,7 @@ GetJoypadStateLowSensitivity: ; 3831 (0:3831)
 	ld [H_FRAMECOUNTER],a
 	ret
 
-WaitForTextScrollButtonPress: ; 3865 (0:3865)
+WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
 	push af
 	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
@@ -9304,7 +9304,7 @@ WaitForTextScrollButtonPress: ; 3865 (0:3865)
 	ret
 
 ; (unlass in link battle) waits for A or B being pressed and outputs the scrolling sound effect
-ManualTextScroll: ; 3898 (0:3898)
+ManualTextScroll:: ; 3898 (0:3898)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr z, .inLinkBattle
@@ -9322,7 +9322,7 @@ ManualTextScroll: ; 3898 (0:3898)
 ; FF99 = multiplier
 ; OUTPUT
 ; FF95-FF98 = product
-Multiply: ; 38ac (0:38ac)
+Multiply:: ; 38ac (0:38ac)
 	push hl
 	push bc
 	ld hl, _Multiply
@@ -9341,7 +9341,7 @@ Multiply: ; 38ac (0:38ac)
 ; OUTPUT
 ; FF95-FF98 = quotient
 ; FF99 = remainder
-Divide: ; 38b9 (0:38b9)
+Divide:: ; 38b9 (0:38b9)
 	push hl
 	push de
 	push bc
@@ -9362,7 +9362,7 @@ Divide: ; 38b9 (0:38b9)
 ; This function is used to wait a short period after printing a letter to the
 ; screen unless the player presses the A/B button or the delay is turned off
 ; through the [$d730] or [$d358] flags.
-PrintLetterDelay: ; 38d3 (0:38d3)
+PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[$d730]
 	bit 6,a
 	ret nz
@@ -9408,7 +9408,7 @@ PrintLetterDelay: ; 38d3 (0:38d3)
 ; Copies [hl, bc) to [de, bc - hl).
 ; In other words, the source data is from hl up to but not including bc,
 ; and the destination is de.
-CopyDataUntil: ; 3913 (0:3913)
+CopyDataUntil:: ; 3913 (0:3913)
 	ld a,[hli]
 	ld [de],a
 	inc de
@@ -9424,12 +9424,12 @@ CopyDataUntil: ; 3913 (0:3913)
 ; wWhichPokemon determines the pokemon.
 ; [$cf95] == 0 specifies the party.
 ; [$cf95] != 0 specifies the current box.
-RemovePokemon: ; 391f (0:391f)
+RemovePokemon:: ; 391f (0:391f)
 	ld hl, _RemovePokemon
 	ld b, BANK(_RemovePokemon)
 	jp Bankswitch
 
-AddPokemonToParty: ; 3927 (0:3927)
+AddPokemonToParty:: ; 3927 (0:3927)
 	push hl
 	push de
 	push bc
@@ -9442,7 +9442,7 @@ AddPokemonToParty: ; 3927 (0:3927)
 	ret
 
 ; calculates all 5 stats of current mon and writes them to [de]
-CalcStats: ; 3936 (0:3936)
+CalcStats:: ; 3936 (0:3936)
 	ld c, $0
 .statsLoop
 	inc c
@@ -9462,7 +9462,7 @@ CalcStats: ; 3936 (0:3936)
 ; c: stat to calc (HP=1,Atk=2,Def=3,Spd=4,Spc=5)
 ; b: consider stat exp?
 ; hl: base ptr to stat exp values ([hl + 2*c - 1] and [hl + 2*c])
-CalcStat: ; 394a (0:394a)
+CalcStat:: ; 394a (0:394a)
 	push hl
 	push de
 	push bc
@@ -9641,7 +9641,7 @@ CalcStat: ; 394a (0:394a)
 	pop hl
 	ret
 
-AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
+AddEnemyMonToPlayerParty:: ; 3a53 (0:3a53)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(_AddEnemyMonToPlayerParty)
@@ -9654,7 +9654,7 @@ AddEnemyMonToPlayerParty: ; 3a53 (0:3a53)
 	ld [$2000], a
 	ret
 
-Func_3a68: ; 3a68 (0:3a68)
+Func_3a68:: ; 3a68 (0:3a68)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(Func_f51e)
@@ -9669,7 +9669,7 @@ Func_3a68: ; 3a68 (0:3a68)
 
 ; skips a text entries, each of size $b (like trainer name, OT name, rival name, ...)
 ; hl: base pointer, will be incremented by $b * a
-SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
+SkipFixedLengthTextEntries:: ; 3a7d (0:3a7d)
 	and a
 	ret z
 	ld bc, $b
@@ -9679,7 +9679,7 @@ SkipFixedLengthTextEntries: ; 3a7d (0:3a7d)
 	jr nz, .skipLoop
 	ret
 
-AddNTimes: ; 3a87 (0:3a87)
+AddNTimes:: ; 3a87 (0:3a87)
 ; add bc to hl a times
 	and a
 	ret z
@@ -9691,7 +9691,7 @@ AddNTimes: ; 3a87 (0:3a87)
 
 ; Compare strings, c bytes in length, at de and hl.
 ; Often used to compare big endian numbers in battle calculations.
-StringCmp: ; 3a8e (0:3a8e)
+StringCmp:: ; 3a8e (0:3a8e)
 	ld a,[de]
 	cp [hl]
 	ret nz
@@ -9706,7 +9706,7 @@ StringCmp: ; 3a8e (0:3a8e)
 ; b = Y coordinate of upper left corner of sprite
 ; c = X coordinate of upper left corner of sprite
 ; de = base address of 4 tile number and attribute pairs
-WriteOAMBlock: ; 3a97 (0:3a97)
+WriteOAMBlock:: ; 3a97 (0:3a97)
 	ld h,$c3
 	swap a ; multiply by 16
 	ld l,a
@@ -9738,11 +9738,11 @@ WriteOAMBlock: ; 3a97 (0:3a97)
 	ld [hli],a
 	ret
 
-HandleMenuInput: ; 3abe (0:3abe)
+HandleMenuInput:: ; 3abe (0:3abe)
 	xor a
 	ld [$d09b],a
 
-HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
+HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld a,[H_DOWNARROWBLINKCNT1]
 	push af
 	ld a,[H_DOWNARROWBLINKCNT2]
@@ -9859,7 +9859,7 @@ HandleMenuInputPokemonSelection: ; 3ac2 (0:3ac2)
 	jr z,.checkOtherKeys
 	jr .checkIfAButtonOrBButtonPressed
 
-PlaceMenuCursor: ; 3b7c (0:3b7c)
+PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	ld a,[wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
@@ -9938,7 +9938,7 @@ PlaceMenuCursor: ; 3b7c (0:3b7c)
 ; manipulated. In the case of submenus, this is used to show the location of
 ; the menu cursor in the parent menu. In the case of swapping items in list,
 ; this is used to mark the item that was first chosen to be swapped.
-PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
+PlaceUnfilledArrowMenuCursor:: ; 3bec (0:3bec)
 	ld b,a
 	ld a,[wMenuCursorLocation]
 	ld l,a
@@ -9949,7 +9949,7 @@ PlaceUnfilledArrowMenuCursor: ; 3bec (0:3bec)
 	ret
 
 ; Replaces the menu cursor with a blank space.
-EraseMenuCursor: ; 3bf9 (0:3bf9)
+EraseMenuCursor:: ; 3bf9 (0:3bf9)
 	ld a,[wMenuCursorLocation]
 	ld l,a
 	ld a,[wMenuCursorLocation + 1]
@@ -9965,7 +9965,7 @@ EraseMenuCursor: ; 3bf9 (0:3bf9)
 ; initliazed with a down arrow, this function does nothing.
 ; That allows this to be called without worrying about if a down arrow should
 ; be blinking.
-HandleDownArrowBlinkTiming: ; 3c04 (0:3c04)
+HandleDownArrowBlinkTiming:: ; 3c04 (0:3c04)
 	ld a,[hl]
 	ld b,a
 	ld a,$ee ; down arrow
@@ -10010,20 +10010,20 @@ HandleDownArrowBlinkTiming: ; 3c04 (0:3c04)
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
 ; for a button press after displaying text (unless [$cc47] is set).
 
-EnableAutoTextBoxDrawing: ; 3c3c (0:3c3c)
+EnableAutoTextBoxDrawing:: ; 3c3c (0:3c3c)
 	xor a
 	jr AutoTextBoxDrawingCommon
 
-DisableAutoTextBoxDrawing: ; 3c3f (0:3c3f)
+DisableAutoTextBoxDrawing:: ; 3c3f (0:3c3f)
 	ld a,$01
 
-AutoTextBoxDrawingCommon: ; 3c41 (0:3c41)
+AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
 	ld [$cf0c],a ; control text box drawing
 	xor a
 	ld [$cc3c],a ; make DisplayTextID wait for button press
 	ret
 
-PrintText: ; 3c49 (0:3c49)
+PrintText:: ; 3c49 (0:3c49)
 ; given a pointer in hl, print the text there
 	push hl
 	ld a,1
@@ -10032,7 +10032,7 @@ PrintText: ; 3c49 (0:3c49)
 	call UpdateSprites
 	call Delay3
 	pop hl
-Func_3c59: ; 3c59 (0:3c59)
+Func_3c59:: ; 3c59 (0:3c59)
 	FuncCoord 1,14
 	ld bc,Coord ;$C4B9
 	jp TextCommandProcessor
@@ -10048,7 +10048,7 @@ Func_3c59: ; 3c59 (0:3c59)
 ; bits 0-3: number of bytes (only 1 - 3 bytes supported)
 ; c = number of decimal digits
 ; de = address of the number (big-endian)
-PrintNumber: ; 3c5f (0:3c5f)
+PrintNumber:: ; 3c5f (0:3c5f)
 	push bc
 	xor a
 	ld [H_PASTLEADINGZEROES],a
@@ -10181,7 +10181,7 @@ PrintNumber: ; 3c5f (0:3c5f)
 ; The last value that the number had before becoming negative is kept as the new value of the number.
 ; A more succinct description is that the number is divided by a power of ten
 ; and the quotient becomes the digit while the remainder is stored as the new value of the number.
-PrintNumber_PrintDigit: ; 3d25 (0:3d25)
+PrintNumber_PrintDigit:: ; 3d25 (0:3d25)
 	ld c,0 ; counts number of loop iterations to determine the decimal digit
 .loop
 	ld a,[H_POWEROFTEN]
@@ -10251,7 +10251,7 @@ PrintNumber_PrintDigit: ; 3d25 (0:3d25)
 	ret
 
 ; prints a leading zero unless they are turned off in the flags
-PrintNumber_PrintLeadingZero: ; 3d83 (0:3d83)
+PrintNumber_PrintLeadingZero:: ; 3d83 (0:3d83)
 	bit 7,d ; print leading zeroes?
 	ret z
 	ld [hl],"0"
@@ -10259,7 +10259,7 @@ PrintNumber_PrintLeadingZero: ; 3d83 (0:3d83)
 
 ; increments the pointer unless leading zeroes are not being printed,
 ; the number is left-aligned, and no nonzero digits have been printed yet
-PrintNumber_AdvancePointer: ; 3d89 (0:3d89)
+PrintNumber_AdvancePointer:: ; 3d89 (0:3d89)
 	bit 7,d ; print leading zeroes?
 	jr nz,.incrementPointer
 	bit 6,d ; left alignment or right alignment?
@@ -10275,7 +10275,7 @@ PrintNumber_AdvancePointer: ; 3d89 (0:3d89)
 ; INPUT:
 ; a = index within table
 ; hl = address of function pointer table
-CallFunctionInTable: ; 3d97 (0:3d97)
+CallFunctionInTable:: ; 3d97 (0:3d97)
 	push hl
 	push de
 	push bc
@@ -10298,11 +10298,11 @@ CallFunctionInTable: ; 3d97 (0:3d97)
 ; searches an array at hl for the value in a.
 ; skips (de − 1) bytes between reads, so to check every byte, de should be 1.
 ; if found, returns count in b and sets carry.
-IsInArray: ; 3dab (0:3dab)
+IsInArray:: ; 3dab (0:3dab)
 	ld b,0
 	; fall through
 
-IsInArrayCummulativeCount: ; 3dad (0:3dad)
+IsInArrayCummulativeCount:: ; 3dad (0:3dad)
 	ld c,a
 .loop
 	ld a,[hl]
@@ -10320,7 +10320,7 @@ IsInArrayCummulativeCount: ; 3dad (0:3dad)
 	scf
 	ret
 
-Func_3dbe: ; 3dbe (0:3dbe)
+Func_3dbe:: ; 3dbe (0:3dbe)
 	call CleanLCD_OAM
 	ld a, $1
 	ld [$cfcb], a
@@ -10331,16 +10331,16 @@ Func_3dbe: ; 3dbe (0:3dbe)
 	jr Delay3
 
 ; calls GBPalWhiteOut and then Delay3
-GBPalWhiteOutWithDelay3: ; 3dd4 (0:3dd4)
+GBPalWhiteOutWithDelay3:: ; 3dd4 (0:3dd4)
 	call GBPalWhiteOut
 
-Delay3: ; 3dd7 (0:3dd7)
+Delay3:: ; 3dd7 (0:3dd7)
 ; call Delay with a parameter of 3
 	ld c,3
 	jp DelayFrames
 
 ; resets BGP and OBP0 to their usual colors
-GBPalNormal: ; 3ddc (0:3ddc)
+GBPalNormal:: ; 3ddc (0:3ddc)
 	ld a,%11100100
 	ld [rBGP],a
 	ld a,%11010000
@@ -10348,23 +10348,23 @@ GBPalNormal: ; 3ddc (0:3ddc)
 	ret
 
 ; makes all palette colors white
-GBPalWhiteOut: ; 3de5 (0:3de5)
+GBPalWhiteOut:: ; 3de5 (0:3de5)
 	xor a
 	ld [rBGP],a
 	ld [rOBP0],a
 	ld [rOBP1],a
 	ret
 
-GoPAL_SET_CF1C: ; 3ded (0:3ded)
+GoPAL_SET_CF1C:: ; 3ded (0:3ded)
 	ld b,$ff
-GoPAL_SET: ; 3def (0:3def)
+GoPAL_SET:: ; 3def (0:3def)
 	ld a,[$cf1b]
 	and a
 	ret z
 	ld a,$45
 	jp Predef
 
-Func_3df9: ; 3df9 (0:3df9)
+Func_3df9:: ; 3df9 (0:3df9)
 	ld a, e
 	cp $1b
 	ld d, $0
@@ -10377,7 +10377,7 @@ Func_3df9: ; 3df9 (0:3df9)
 	ld [hl], d
 	ret
 
-Func_3e08: ; 3e08 (0:3e08)
+Func_3e08:: ; 3e08 (0:3e08)
 	ld hl, $cfc4
 	ld a, [hl]
 	push af
@@ -10397,7 +10397,7 @@ Func_3e08: ; 3e08 (0:3e08)
 	call LoadFontTilePatterns
 	jp UpdateSprites
 
-GiveItem: ; 3e2e (0:3e2e)
+GiveItem:: ; 3e2e (0:3e2e)
 ; Give player quantity c of item b, and copy item name to $cf4b.
 ; Set carry on success. If no room in bag, reset carry.
 	ld a, b
@@ -10413,7 +10413,7 @@ GiveItem: ; 3e2e (0:3e2e)
 	scf
 	ret
 
-GivePokemon: ; 3e48 (0:3e48)
+GivePokemon:: ; 3e48 (0:3e48)
 	ld a, b
 	ld [$cf91], a
 	ld a, c
@@ -10424,7 +10424,7 @@ GivePokemon: ; 3e48 (0:3e48)
 	ld hl, Func_4fda5
 	jp Bankswitch
 
-GenRandom: ; 3e5c (0:3e5c)
+GenRandom:: ; 3e5c (0:3e5c)
 ; store a random 8-bit value in a
 	push hl
 	push de
@@ -10438,7 +10438,7 @@ GenRandom: ; 3e5c (0:3e5c)
 	pop hl
 	ret
 
-Predef: ; 3e6d (0:3e6d)
+Predef:: ; 3e6d (0:3e6d)
 ; runs a predefined ASM command, where the command ID is read from $D0B7
 ; $3E6D grabs the ath pointer from PredefPointers and executes it
 
@@ -10471,7 +10471,7 @@ Predef: ; 3e6d (0:3e6d)
 
 ;loads hl from cc4f, de from cc51, and bc from cc53
 
-Load16BitRegisters: ; 3e94 (0:3e94)
+Load16BitRegisters:: ; 3e94 (0:3e94)
 	ld a, [$cc4f]
 	ld h, a
 	ld a, [$cc50]
@@ -10486,12 +10486,12 @@ Load16BitRegisters: ; 3e94 (0:3e94)
 	ld c, a
 	ret
 
-Func_3ead: ; 3ead (0:3ead)
+Func_3ead:: ; 3ead (0:3ead)
 	ld b, BANK(Func_1eb0a)
 	ld hl, Func_1eb0a
 	jp Bankswitch
 
-Func_3eb5: ; 3eb5 (0:3eb5)
+Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [H_CURRENTPRESSEDBUTTONS]
@@ -10528,7 +10528,7 @@ Func_3eb5: ; 3eb5 (0:3eb5)
 	ld [H_LOADEDROMBANK], a
 	ret
 
-Func_3ef5: ; 3ef5 (0:3ef5)
+Func_3ef5:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	ld hl, PointerTable_3f22
 	call Func_3f0f
@@ -10536,7 +10536,7 @@ Func_3ef5: ; 3ef5 (0:3ef5)
 	set 0, [hl]
 	call DisplayTextID
 
-Func_3f05: ; 3f05 (0:3f05)
+Func_3f05:: ; 3f05 (0:3f05)
 	ld hl, W_MAPTEXTPTR ; $d36c
 	ld a, [$FF00+$ec]
 	ld [hli], a
@@ -10544,7 +10544,7 @@ Func_3f05: ; 3f05 (0:3f05)
 	ld [hl], a
 	ret
 
-Func_3f0f: ; 3f0f (0:3f0f)
+Func_3f0f:: ; 3f0f (0:3f0f)
 	ld a, [W_MAPTEXTPTR] ; $d36c
 	ld [$FF00+$ec], a
 	ld a, [$d36d]
@@ -10555,7 +10555,7 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	ld [$d36d], a
 	ret
 
-PointerTable_3f22: ; 3f22 (0:3f22)
+PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw CardKeySuccessText                   ; id = 01
 	dw CardKeyFailText                      ; id = 02
 	dw Route15UpstairsLeftBinoculars        ; id = 03
@@ -10623,7 +10623,7 @@ PointerTable_3f22: ; 3f22 (0:3f22)
 	dw ElevatorText                         ; id = 41
 	dw PokemonStuffText                     ; id = 42
 
-SECTION "bank1",ROMX,Bank[$1]
+SECTION "bank1",ROMX,BANK[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
@@ -11012,7 +11012,7 @@ ENDC
 	call PrintGameVersionOnTitleScreen
 	call Delay3
 	call WaitForSoundToFinish
-	ld a, (Music_TitleScreen - $4000) / 3
+	ld a, MUSIC_TITLE_SCREEN
 	ld [$c0ee], a
 	call PlaySound
 	xor a
@@ -11185,9 +11185,10 @@ Func_4541: ; 4541 (1:4541)
 	jp PlaceString
 
 CopyrightTextString: ; 4556 (1:4556)
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A,$4E             ; ©'95.'96.'98 Nintendo
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72,$4E     ; ©'95.'96.'98 Creatures inc.
-	db $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B,"@" ; ©'95.'96.'98 GAME FREAK inc.
+	db   $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A             ; ©'95.'96.'98 Nintendo
+	next $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72     ; ©'95.'96.'98 Creatures inc.
+	next $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; ©'95.'96.'98 GAME FREAK inc.
+	db   "@"
 
 TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
@@ -13211,7 +13212,7 @@ Func_5345: ; 5345
 	jp Func_577d
 .asm_5506
 	ld c, BANK(Music_GameCorner)
-	ld a, (Music_GameCorner - $4000) / 3
+	ld a, MUSIC_GAME_CORNER
 	call PlayMusic
 	jr Func_551c
 
@@ -13811,7 +13812,8 @@ TradeCompleted:
 	db "Trade completed!@"
 
 TradeCanceled:
-	db "Too bad! The trade",$4E,"was canceled!@"
+	db   "Too bad! The trade"
+	next "was canceled!@"
 
 PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
@@ -13851,7 +13853,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)
 	ld [$c0f0], a
-	ld a, (Music_Celadon - $4000) / 3
+	ld a, MUSIC_CELADON
 	ld [$c0ee], a
 	jp PlaySound
 
@@ -14237,13 +14239,16 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	jp EnterMap
 
 ContinueText: ; 5d7e (1:5d7e)
-	db "CONTINUE",$4e
+	db "CONTINUE", $4e
 
 NewGameText: ; 5d87 (1:5d87)
-	db "NEW GAME",$4e,"OPTION@"
+	db "NEW GAME", $4e
+	db "OPTION@"
 
 TradeCenterText: ; 5d97 (1:5d97)
-	db "TRADE CENTER",$4e,"COLOSSEUM",$4e,"CANCEL@"
+	db "TRADE CENTER", $4e
+	db "COLOSSEUM",    $4e
+	db "CANCEL@"
 
 Func_5db5: ; 5db5 (1:5db5)
 	xor a
@@ -14332,10 +14337,10 @@ Func_5e55: ; 5e55 (1:5e55)
 	jp PrintNumber
 
 SaveScreenInfoText: ; 5e6a (1:5e6a)
-	db "PLAYER",$4e
-	db "BADGES    ",$4e
-	db "#DEX    ",$4e
-	db "TIME@"
+	db   "PLAYER"
+	next "BADGES    "
+	next "#DEX    "
+	next "TIME@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
 	FuncCoord 0,0
@@ -14497,16 +14502,16 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText: ; 5fc0 (1:5fc0)
-	db "TEXT SPEED",$4E
-	db " FAST  MEDIUM SLOW@"
+	db   "TEXT SPEED"
+	next " FAST  MEDIUM SLOW@"
 
 BattleAnimationOptionText: ; 5fde (1:5fde)
-	db "BATTLE ANIMATION",$4E
-	db " ON       OFF@"
+	db   "BATTLE ANIMATION"
+	next " ON       OFF@"
 
 BattleStyleOptionText: ; 5ffd (1:5ffd)
-	db "BATTLE STYLE",$4E
-	db " SHIFT    SET@"
+	db   "BATTLE STYLE"
+	next " SHIFT    SET@"
 
 OptionMenuCancelText: ; 6018 (1:6018)
 	db "CANCEL@"
@@ -14665,9 +14670,9 @@ Func_60ca: ; 60ca (1:60ca)
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a, BANK(Func_9876)
+	ld a, BANK(Music_Routes2) ; bank of song
 	ld c,a
-	ld a, (Music_Routes2 - $4000) / 3 ; song #
+	ld a, MUSIC_ROUTES2 ; song #
 	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
@@ -15913,15 +15918,34 @@ Func_6a6c: ; 6a6c (1:6a6c)
 
 IF _RED
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+	db   "NEW NAME"
+	next "RED"
+	next "ASH"
+	next "JACK"
+	db   "@"
+
 DefaultNamesRival: ; 6abe (1:6abe)
-	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+	db   "NEW NAME"
+	next "BLUE"
+	next "GARY"
+	next "JOHN"
+	db   "@"
 ENDC
+
 IF _BLUE
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db "NEW NAME",$4E,"BLUE",$4E,"GARY",$4E,"JOHN@"
+	db   "NEW NAME"
+	next "BLUE"
+	next "GARY"
+	next "JOHN"
+	db   "@"
+
 DefaultNamesRival: ; 6abe (1:6abe)
-	db "NEW NAME",$4E,"RED",$4E,"ASH",$4E,"JACK@"
+	db   "NEW NAME"
+	next "RED"
+	next "ASH"
+	next "JACK"
+	db   "@"
 ENDC
 
 Func_6ad6: ; 6ad6 (1:6ad6)
@@ -17277,21 +17301,21 @@ TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
 ; note that there is no terminator
 
 BuySellQuitText: ; 7413 (1:7413)
-	db "BUY",$4E
-	db "SELL",$4E
-	db "QUIT@@"
+	db   "BUY"
+	next "SELL"
+	next "QUIT@@"
 
 UseTossText: ; 7422 (1:7422)
-	db "USE",$4E
-	db "TOSS@"
+	db   "USE"
+	next "TOSS@"
 
 JapaneseSaveMessageText: ; 742b (1:742b)
-	db "きろく",$4E
-	db "メッセージ@"
+	db   "きろく"
+	next "メッセージ@"
 
 JapaneseSpeedOptionsText: ; 7435 (1:7435)
-	db "はやい",$4E
-	db "おそい@"
+	db   "はやい"
+	next "おそい@"
 
 MoneyText: ; 743d (1:743d)
 	db "MONEY@"
@@ -17300,30 +17324,30 @@ JapaneseMochimonoText: ; 7443 (1:7443)
 	db "もちもの@"
 
 JapaneseMainMenuText: ; 7448 (1:7448)
-	db "つづきから",$4E
-	db "さいしょから@"
+	db   "つづきから"
+	next "さいしょから@"
 
 BattleMenuText: ; 7455 (1:7455)
-	db "FIGHT ",$E1,$E2,$4E
-	db "ITEM  RUN@"
+	db   "FIGHT ",$E1,$E2
+	next "ITEM  RUN@"
 
 SafariZoneBattleMenuText: ; 7468 (1:7468)
-	db "BALL×       BAIT",$4E
-	db "THROW ROCK  RUN@"
+	db   "BALL×       BAIT"
+	next "THROW ROCK  RUN@"
 
 SwitchStatsCancelText: ; 7489 (1:7489)
-	db "SWITCH",$4E
-	db "STATS",$4E
-	db "CANCEL@"
+	db   "SWITCH"
+	next "STATS"
+	next "CANCEL@"
 
 JapaneseAhText: ; 749d (1:749d)
 	db "アッ!@"
 
 JapanesePokedexMenu: ; 74a1 (1:74a1)
-	db "データをみる",$4E
-	db "なきごえ",$4E
-	db "ぶんぷをみる",$4E
-	db "キャンセル@"
+	db   "データをみる"
+	next "なきごえ"
+	next "ぶんぷをみる"
+	next "キャンセル@"
 
 Func_74ba: ; 74ba (1:74ba)
 	ld hl, $d730
@@ -17716,9 +17740,9 @@ FieldMoveNames: ; 778d (1:778d)
 	db "SOFTBOILED@"
 
 PokemonMenuEntries: ; 77c2 (1:77c2)
-	db "STATS",$4E
-	db "SWITCH",$4E
-	db "CANCEL@"
+	db   "STATS"
+	next "SWITCH"
+	next "CANCEL@"
 
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon] ; $cf92
@@ -18141,10 +18165,10 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	jp Func_7aa5
 
 PlayersPCMenuEntries: ; 7af5 (1:7af5)
-	db "WITHDRAW ITEM",$4E
-	db "DEPOSIT ITEM",$4E
-	db "TOSS ITEM",$4E
-	db "LOG OFF@"
+	db   "WITHDRAW ITEM"
+	next "DEPOSIT ITEM"
+	next "TOSS ITEM"
+	next "LOG OFF@"
 
 UnnamedText_7b22: ; 7b22 (1:7b22)
 	TX_FAR _UnnamedText_7b22
@@ -18321,1927 +18345,6 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld [$cc3c], a
 	ret
 
-SECTION "bank2",ROMX,Bank[$2]
-
-INCLUDE "music/headers/sfxheaders02.asm"
-INCLUDE "music/headers/musicheaders02.asm"
-
-INCLUDE "music/sfx/sfx_02_01.asm"
-INCLUDE "music/sfx/sfx_02_02.asm"
-INCLUDE "music/sfx/sfx_02_03.asm"
-INCLUDE "music/sfx/sfx_02_04.asm"
-INCLUDE "music/sfx/sfx_02_05.asm"
-INCLUDE "music/sfx/sfx_02_06.asm"
-INCLUDE "music/sfx/sfx_02_07.asm"
-INCLUDE "music/sfx/sfx_02_08.asm"
-INCLUDE "music/sfx/sfx_02_09.asm"
-INCLUDE "music/sfx/sfx_02_0a.asm"
-INCLUDE "music/sfx/sfx_02_0b.asm"
-INCLUDE "music/sfx/sfx_02_0c.asm"
-INCLUDE "music/sfx/sfx_02_0d.asm"
-INCLUDE "music/sfx/sfx_02_0e.asm"
-INCLUDE "music/sfx/sfx_02_0f.asm"
-INCLUDE "music/sfx/sfx_02_10.asm"
-INCLUDE "music/sfx/sfx_02_11.asm"
-INCLUDE "music/sfx/sfx_02_12.asm"
-INCLUDE "music/sfx/sfx_02_13.asm"
-
-Music2_Channel3DutyPointers: ; 0x8361
-	dw Music2_Channel3Duty0
-	dw Music2_Channel3Duty1
-	dw Music2_Channel3Duty2
-	dw Music2_Channel3Duty3
-	dw Music2_Channel3Duty4
-	dw Music2_Channel3Duty5 ; used in the Lavender Town theme
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-	dw SFX_02_3f_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music2_Channel3Duty0: ; 0x8373
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music2_Channel3Duty1: ; 0x8383
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music2_Channel3Duty2: ; 0x8393
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music2_Channel3Duty3: ; 0x83a3
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music2_Channel3Duty4: ; 0x83b3
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
-; duty 5 reads from sfx data
-Music2_Channel3Duty5: ; 0x83c3
-INCLUDE "music/sfx/sfx_02_3f.asm"
-INCLUDE "music/sfx/sfx_02_5e.asm"
-INCLUDE "music/sfx/sfx_02_56.asm"
-INCLUDE "music/sfx/sfx_02_57.asm"
-INCLUDE "music/sfx/sfx_02_58.asm"
-INCLUDE "music/sfx/sfx_02_3c.asm"
-INCLUDE "music/sfx/sfx_02_59.asm"
-INCLUDE "music/sfx/sfx_02_5a.asm"
-INCLUDE "music/sfx/sfx_02_5b.asm"
-INCLUDE "music/sfx/sfx_02_5c.asm"
-INCLUDE "music/sfx/sfx_02_40.asm"
-INCLUDE "music/sfx/sfx_02_5d.asm"
-INCLUDE "music/sfx/sfx_02_3d.asm"
-INCLUDE "music/sfx/sfx_02_43.asm"
-INCLUDE "music/sfx/sfx_02_3e.asm"
-INCLUDE "music/sfx/sfx_02_44.asm"
-INCLUDE "music/sfx/sfx_02_45.asm"
-INCLUDE "music/sfx/sfx_02_46.asm"
-INCLUDE "music/sfx/sfx_02_47.asm"
-INCLUDE "music/sfx/sfx_02_48.asm"
-INCLUDE "music/sfx/sfx_02_49.asm"
-INCLUDE "music/sfx/sfx_02_4a.asm"
-INCLUDE "music/sfx/sfx_02_4b.asm"
-INCLUDE "music/sfx/sfx_02_4c.asm"
-INCLUDE "music/sfx/sfx_02_4d.asm"
-INCLUDE "music/sfx/sfx_02_4e.asm"
-INCLUDE "music/sfx/sfx_02_4f.asm"
-INCLUDE "music/sfx/sfx_02_50.asm"
-INCLUDE "music/sfx/sfx_02_51.asm"
-INCLUDE "music/sfx/sfx_02_52.asm"
-INCLUDE "music/sfx/sfx_02_53.asm"
-INCLUDE "music/sfx/sfx_02_54.asm"
-INCLUDE "music/sfx/sfx_02_55.asm"
-INCLUDE "music/sfx/sfx_02_5f.asm"
-INCLUDE "music/sfx/sfx_02_unused.asm"
-INCLUDE "music/sfx/sfx_02_1d.asm"
-INCLUDE "music/sfx/sfx_02_37.asm"
-INCLUDE "music/sfx/sfx_02_38.asm"
-INCLUDE "music/sfx/sfx_02_25.asm"
-INCLUDE "music/sfx/sfx_02_39.asm"
-INCLUDE "music/sfx/sfx_02_17.asm"
-INCLUDE "music/sfx/sfx_02_23.asm"
-INCLUDE "music/sfx/sfx_02_24.asm"
-INCLUDE "music/sfx/sfx_02_14.asm"
-INCLUDE "music/sfx/sfx_02_22.asm"
-INCLUDE "music/sfx/sfx_02_1a.asm"
-INCLUDE "music/sfx/sfx_02_1b.asm"
-INCLUDE "music/sfx/sfx_02_19.asm"
-INCLUDE "music/sfx/sfx_02_1f.asm"
-INCLUDE "music/sfx/sfx_02_20.asm"
-INCLUDE "music/sfx/sfx_02_16.asm"
-INCLUDE "music/sfx/sfx_02_21.asm"
-INCLUDE "music/sfx/sfx_02_15.asm"
-INCLUDE "music/sfx/sfx_02_1e.asm"
-INCLUDE "music/sfx/sfx_02_1c.asm"
-INCLUDE "music/sfx/sfx_02_18.asm"
-INCLUDE "music/sfx/sfx_02_2d.asm"
-INCLUDE "music/sfx/sfx_02_2a.asm"
-INCLUDE "music/sfx/sfx_02_2f.asm"
-INCLUDE "music/sfx/sfx_02_26.asm"
-INCLUDE "music/sfx/sfx_02_27.asm"
-INCLUDE "music/sfx/sfx_02_28.asm"
-INCLUDE "music/sfx/sfx_02_32.asm"
-INCLUDE "music/sfx/sfx_02_29.asm"
-INCLUDE "music/sfx/sfx_02_2b.asm"
-INCLUDE "music/sfx/sfx_02_30.asm"
-INCLUDE "music/sfx/sfx_02_2e.asm"
-INCLUDE "music/sfx/sfx_02_31.asm"
-INCLUDE "music/sfx/sfx_02_2c.asm"
-INCLUDE "music/sfx/sfx_02_33.asm"
-INCLUDE "music/sfx/sfx_02_34.asm"
-INCLUDE "music/sfx/sfx_02_35.asm"
-INCLUDE "music/sfx/sfx_02_36.asm"
-
-PlayBattleMusic: ; 0x90c6
-	xor a
-	ld [wMusicHeaderPointer], a
-	ld [$d083], a
-	dec a
-	ld [$c0ee], a
-	call PlaySound ; stop music
-	call DelayFrame
-	ld c, BANK(Music_GymLeaderBattle)
-	ld a, [W_GYMLEADERNO]
-	and a
-	jr z, .notGymLeaderBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3
-	jr .playSong
-.notGymLeaderBattle
-	ld a, [W_CUROPPONENT]
-	cp $c8
-	jr c, .wildBattle
-	cp SONY3 + $c8
-	jr z, .finalBattle
-	cp LANCE + $c8
-	jr nz, .normalTrainerBattle
-	ld a, (Music_GymLeaderBattle - $4000) / 3 ; lance also plays gym leader theme
-	jr .playSong
-.normalTrainerBattle
-	ld a, (Music_TrainerBattle - $4000) / 3
-	jr .playSong
-.finalBattle
-	ld a, (Music_FinalBattle - $4000) / 3
-	jr .playSong
-.wildBattle
-	ld a, (Music_WildBattle - $4000) / 3
-.playSong
-	jp PlayMusic
-
-Func_9103: ; 0x9103
-	ld c, CH0
-.loop
-	ld b, $0
-	ld hl, $c026
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .nextChannel
-	ld a, c
-	cp CH4
-	jr nc, .asm_912e ; if sfx channel
-	ld a, [$c002]
-	and a
-	jr z, .asm_912e
-	bit 7, a
-	jr nz, .nextChannel
-	set 7, a
-	ld [$c002], a
-	xor a
-	ld [$ff00+$25], a
-	ld [$ff00+$1a], a
-	ld a, $80
-	ld [$ff00+$1a], a
-	jr .nextChannel
-.asm_912e
-	call Music2_ApplyMusicAffects
-.nextChannel
-	ld a, c
-	inc c ; inc channel number
-	cp CH7
-	jr nz, .loop 
-	ret
-
-; this routine checks flags for music effects currently applied
-; to the channel and calls certain functions based on flags.
-; known flags for $c02e:
-;	1: call has been used
-;	3: a toggle used only by this routine for vibrato
-;	4: pitchbend flag
-;	6: dutycycle flag
-Music2_ApplyMusicAffects: ; 0x9138
-	ld b, $0
-	ld hl, $c0b6 ; delay unitl next note
-	add hl, bc
-	ld a, [hl]
-	cp $1 ; if the delay is 1, play next note
-	jp z, Music2_PlayNextNote
-	dec a ; otherwise, decrease the delay timer
-	ld [hl], a
-	ld a, c
-	cp CH4
-	jr nc, .startChecks ; if a sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .startChecks
-	ret
-.startChecks
-	ld hl, $c02e
-	add hl, bc
-	bit 6, [hl] ; dutycycle
-	jr z, .checkForExecuteMusic
-	call Music2_ApplyDutyCycle
-.checkForExecuteMusic
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, .checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr nz, .disablePitchBendVibrato
-.checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl] ; pitchbend
-	jr z, .checkVibratoDelay
-	jp Music2_ApplyPitchBend
-.checkVibratoDelay
-	ld hl, $c04e ; vibrato delay
-	add hl, bc
-	ld a, [hl]
-	and a ; check if delay is over
-	jr z, .checkForVibrato
-	dec [hl] ; otherwise, dec delay
-.disablePitchBendVibrato
-	ret
-.checkForVibrato
-	ld hl, $c056 ; vibrato rate
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .vibrato
-	ret ; no vibrato
-.vibrato
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	ld a, [hl]
-	and $f
-	and a
-	jr z, .vibratoAlreadyDone
-	dec [hl] ; apply vibrato pitch change
-	ret
-.vibratoAlreadyDone
-	ld a, [hl]
-	swap [hl]
-	or [hl]
-	ld [hl], a ; reset the vibrato value and start again
-	ld hl, $c066
-	add hl, bc
-	ld e, [hl] ; get note pitch
-	ld hl, $c02e
-	add hl, bc
-	bit 3, [hl] ; this is the only code that sets/resets bit three so
-	jr z, .unset ; it continuously alternates which path it takes
-	res 3, [hl]
-	ld a, d
-	and $f
-	ld d, a
-	ld a, e
-	sub d
-	jr nc, .noCarry
-	ld a, $0
-.noCarry
-	jr .done
-.unset
-	set 3, [hl]
-	ld a, d
-	and $f0
-	swap a
-	add e
-	jr nc, .done
-	ld a, $ff
-.done
-	ld d, a
-	ld b, $3
-	call Func_9838
-	ld [hl], d
-	ret
-
-; this routine executes all music commands that take up no time,
-; like tempo changes, duty changes etc. and doesn't return
-; until the first note is reached
-Music2_PlayNextNote ; 0x91d0
-	ld hl, $c06e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	call Music2_endchannel
-	ret
-
-Music2_endchannel: ; 0x91e6
-	call Music2_GetNextMusicByte
-	ld d, a
-	cp $ff ; is this command an endchannel?
-	jp nz, Music2_callchannel ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	bit 1, [hl]
-	jr nz, .returnFromCall
-	ld a, c
-	cp CH3
-	jr nc, .noiseOrSfxChannel
-	jr .asm_923f
-.noiseOrSfxChannel
-	res 2, [hl]
-	ld hl, $c036
-	add hl, bc
-	res 0, [hl]
-	cp CH6
-	jr nz, .notSfxChannel3
-	ld a, $0
-	ld [$ff00+$1a], a
-	ld a, $80
-	ld [$ff00+$1a], a
-.notSfxChannel3
-	jr nz, .asm_9222
-	ld a, [$c003]
-	and a
-	jr z, .asm_9222
-	xor a
-	ld [$c003], a
-	jr .asm_923f
-.asm_9222
-	jr .asm_9248
-.returnFromCall
-	res 1, [hl]
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl ; store current channel address
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hl], a ; loads channel address to return to
-	jp Music2_endchannel
-.asm_923f
-	ld hl, Unknown_9b1f
-	add hl, bc
-	ld a, [$ff00+$25]
-	and [hl]
-	ld [$ff00+$25], a
-.asm_9248
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_9251
-	jr .asm_926e
-.asm_9251
-	ld a, [$c02a]
-	cp $86
-	jr z, .asm_926e
-	jr c, .asm_925c
-	jr .asm_926e
-.asm_925c
-	ld a, c
-	cp CH4
-	jr z, .asm_9265
-	call Func_96c7
-	ret c
-.asm_9265
-	ld a, [$c005]
-	ld [$ff00+$24], a
-	xor a
-	ld [$c005], a
-.asm_926e
-	ld hl, $c026
-	add hl, bc
-	ld [hl], b
-	ret
-
-Music2_callchannel: ; 0x9274
-	cp $fd ; is this command a callchannel?
-	jp nz, Music2_loopchannel ; no
-	call Music2_GetNextMusicByte ; yes
-	push af
-	call Music2_GetNextMusicByte
-	ld d, a
-	pop af
-	ld e, a
-	push de ; store pointer
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hld]
-	ld [de], a ; copy current channel address
-	pop de
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite current address with pointer
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 1, [hl] ; set the call flag
-	jp Music2_endchannel
-
-Music2_loopchannel: ; 0x92a9
-	cp $fe ; is this command a loopchannel?
-	jp nz, Music2_notetype ; no
-	call Music2_GetNextMusicByte ; yes
-	ld e, a
-	and a
-	jr z, .infiniteLoop
-	ld b, $0
-	ld hl, $c0be
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .loopAgain
-	ld a, $1 ; if no more loops to make,
-	ld [hl], a
-	call Music2_GetNextMusicByte ; skip pointer
-	call Music2_GetNextMusicByte
-	jp Music2_endchannel
-.loopAgain ; inc loop count
-	inc a
-	ld [hl], a
-	; fall through
-.infiniteLoop ; overwrite current address with pointer
-	call Music2_GetNextMusicByte
-	push af
-	call Music2_GetNextMusicByte
-	ld b, a
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	pop af
-	ld [hli], a
-	ld [hl], b
-	jp Music2_endchannel
-
-Music2_notetype: ; 0x92e4
-	and $f0
-	cp $d0 ; is this command a notetype?
-	jp nz, Music2_togglecall ; no
-	ld a, d ; yes
-	and $f
-	ld b, $0
-	ld hl, $c0c6
-	add hl, bc
-	ld [hl], a ; store low nibble as speed
-	ld a, c
-	cp CH3
-	jr z, .noiseChannel ; noise channel has 0 params
-	call Music2_GetNextMusicByte
-	ld d, a
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notChannel3
-	ld hl, $c0e7
-	jr .sfxChannel3
-.musicChannel3
-	ld hl, $c0e6
-.sfxChannel3
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble of param as duty
-	ld a, d
-	and $30
-	sla a
-	ld d, a
-	; fall through
-
-	; if channel 3, store high nibble as volume
-	; else, store volume (high nibble) and fade (low nibble)
-.notChannel3
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld [hl], d
-.noiseChannel
-	jp Music2_endchannel
-
-Music2_togglecall: ; 0x9323
-	ld a, d
-	cp $e8 ; is this command an togglecall?
-	jr nz, Music2_vibrato ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	ld a, [hl]
-	xor $1
-	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
-	jp Music2_endchannel
-
-Music2_vibrato: ; 0x9335
-	cp $ea ; is this command a vibrato?
-	jr nz, Music2_pitchbend ; no
-	call Music2_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a ; store delay 
-	ld hl, $c06e
-	add hl, bc
-	ld [hl], a ; store delay
-	call Music2_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, $0
-	ld hl, $c056
-	add hl, bc
-	srl a
-	ld e, a
-	adc b
-	swap a
-	or e
-	ld [hl], a ; store rate as both high and low nibbles
-	ld a, d
-	and $f
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	swap a
-	or d
-	ld [hl], a ; store depth as both high and low nibbles
-	jp Music2_endchannel
-
-Music2_pitchbend: ; 0x936d
-	cp $eb ; is this command a pitchbend?
-	jr nz, Music2_duty ; no
-	call Music2_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c076
-	add hl, bc
-	ld [hl], a ; store first param
-	call Music2_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	call Func_9858
-	ld b, $0
-	ld hl, $c0a6
-	add hl, bc
-	ld [hl], d ; store unknown part of second param
-	ld hl, $c0ae
-	add hl, bc
-	ld [hl], e ; store unknown part of second param
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 4, [hl] ; set pitchbend flag
-	call Music2_GetNextMusicByte
-	ld d, a
-	jp Music2_notelength
-
-Music2_duty: ; 0x93a5
-	cp $ec ; is this command a duty?
-	jr nz, Music2_tempo ; no
-	call Music2_GetNextMusicByte ; yes
-	rrca
-	rrca
-	and $c0
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store duty
-	jp Music2_endchannel
-
-Music2_tempo: ; 0x93ba
-	cp $ed ; is this command a tempo?
-	jr nz, Music2_unknownmusic0xee ; no
-	ld a, c ; yes
-	cp CH4
-	jr nc, .sfxChannel
-	call Music2_GetNextMusicByte
-	ld [$c0e8], a ; store first param
-	call Music2_GetNextMusicByte
-	ld [$c0e9], a ; store second param
-	xor a
-	ld [$c0ce], a ; clear RAM
-	ld [$c0cf], a
-	ld [$c0d0], a
-	ld [$c0d1], a
-	jr .musicChannelDone
-.sfxChannel
-	call Music2_GetNextMusicByte
-	ld [$c0ea], a ; store first param
-	call Music2_GetNextMusicByte
-	ld [$c0eb], a ; store second param
-	xor a
-	ld [$c0d2], a ; clear RAM
-	ld [$c0d3], a
-	ld [$c0d4], a
-	ld [$c0d5], a
-.musicChannelDone
-	jp Music2_endchannel
-
-Music2_unknownmusic0xee: ; 0x93fa
-	cp $ee ; is this command an unknownmusic0xee?
-	jr nz, Music2_unknownmusic0xef ; no
-	call Music2_GetNextMusicByte ; yes
-	ld [$c004], a ; store first param
-	jp Music2_endchannel
-
-; this appears to never be used
-Music2_unknownmusic0xef ; 0x9407
-	cp $ef ; is this command an unknownmusic0xef?
-	jr nz, Music2_dutycycle ; no
-	call Music2_GetNextMusicByte ; yes
-	push bc
-	call Func_9876
-	pop bc
-	ld a, [$c003]
-	and a
-	jr nz, .skip
-	ld a, [$c02d]
-	ld [$c003], a
-	xor a
-	ld [$c02d], a
-.skip
-	jp Music2_endchannel
-
-Music2_dutycycle: ; 0x9426
-	cp $fc ; is this command a dutycycle?
-	jr nz, Music2_stereopanning ; no
-	call Music2_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld [hl], a ; store full cycle
-	and $c0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store first duty
-	ld hl, $c02e
-	add hl, bc
-	set 6, [hl] ; set dutycycle flag
-	jp Music2_endchannel
-
-Music2_stereopanning: ; 0x9444
-	cp $f0 ; is this command a stereopanning?
-	jr nz, Music2_executemusic ; no
-	call Music2_GetNextMusicByte ; yes
-	ld [$ff00+$24], a ; store stereopanning
-	jp Music2_endchannel
-
-Music2_executemusic: ; 0x9450
-	cp $f8 ; is this command an executemusic?
-	jr nz, Music2_octave ; no
-	ld b, $0 ; yes
-	ld hl, $c036
-	add hl, bc
-	set 0, [hl]
-	jp Music2_endchannel
-
-Music2_octave: ; 0x945f
-	and $f0
-	cp $e0 ; is this command an octave?
-	jr nz, Music2_unknownsfx0x20 ; no
-	ld hl, $c0d6 ; yes
-	ld b, $0
-	add hl, bc
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble as octave
-	jp Music2_endchannel
-
-Music2_unknownsfx0x20: ; 0x9472
-	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, Music2_unknownsfx0x10 ; no
-	ld a, c
-	cp CH3 ; is this a noise or sfx channel?
-	jr c, Music2_unknownsfx0x10 ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music2_unknownsfx0x10 ; no
-	call Music2_notelength ; yes
-	ld d, a
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-	ld b, $1
-	call Func_9838
-	ld [hl], d
-	call Music2_GetNextMusicByte
-	ld d, a
-	ld b, $2
-	call Func_9838
-	ld [hl], d
-	call Music2_GetNextMusicByte
-	ld e, a
-	ld a, c
-	cp CH7
-	ld a, $0
-	jr z, .sfxNoiseChannel ; only two params for noise channel
-	push de
-	call Music2_GetNextMusicByte
-	pop de
-.sfxNoiseChannel
-	ld d, a
-	push de
-	call Func_9629
-	call Func_95f8
-	pop de
-	call Func_964b
-	ret
-
-Music2_unknownsfx0x10:
-	ld a, c
-	cp CH4
-	jr c, Music2_note ; if not a sfx
-	ld a, d
-	cp $10 ; is this command a unknownsfx0x10?
-	jr nz, Music2_note ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music2_note ; no
-	call Music2_GetNextMusicByte ; yes
-	ld [$ff00+$10], a
-	jp Music2_endchannel
-
-Music2_note:
-	ld a, c
-	cp CH3
-	jr nz, Music2_notelength ; if not noise channel
-	ld a, d
-	and $f0
-	cp $b0 ; is this command a dnote?
-	jr z, Music2_dnote ; yes
-	jr nc, Music2_notelength ; no
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	ld d, a
-	ld a, b
-	push de
-	push bc
-	jr asm_94fd
-
-Music2_dnote:
-	ld a, d
-	and $f
-	push af
-	push bc
-	call Music2_GetNextMusicByte ; get dnote instrument
-asm_94fd
-	ld d, a
-	ld a, [$c003]
-	and a
-	jr nz, .asm_9508
-	ld a, d
-	call Func_9876
-.asm_9508
-	pop bc
-	pop de
-
-Music2_notelength: ; 0x950a
-	ld a, d
-	push af
-	and $f
-	inc a
-	ld b, $0
-	ld e, a  ; store note length (in 16ths)
-	ld d, b
-	ld hl, $c0c6
-	add hl, bc
-	ld a, [hl]
-	ld l, b
-	call Func_9847
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld a, [$c0e8]
-	ld d, a
-	ld a, [$c0e9]
-	ld e, a
-	jr .skip
-.sfxChannel
-	ld d, $1
-	ld e, $0
-	cp CH7
-	jr z, .skip ; if noise channel
-	call Func_9693
-	ld a, [$c0ea]
-	ld d, a
-	ld a, [$c0eb]
-	ld e, a
-.skip
-	ld a, l
-	ld b, $0
-	ld hl, $c0ce
-	add hl, bc
-	ld l, [hl]
-	call Func_9847
-	ld e, l
-	ld d, h
-	ld hl, $c0ce
-	add hl, bc
-	ld [hl], e
-	ld a, d
-	ld hl, $c0b6
-	add hl, bc
-	ld [hl], a
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music2_notepitch
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr z, Music2_notepitch
-	pop hl
-	ret
-
-Music2_notepitch: ; 0x9568
-	pop af
-	and $f0
-	cp $c0 ; compare to rest
-	jr nz, .notRest
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .done
-	; fall through
-.sfxChannel
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notSfxChannel3
-.musicChannel3
-	ld b, $0
-	ld hl, Unknown_9b1f
-	add hl, bc
-	ld a, [$ff00+$25]
-	and [hl]
-	ld [$ff00+$25], a
-	jr .done
-.notSfxChannel3
-	ld b, $2
-	call Func_9838
-	ld a, $8
-	ld [hli], a
-	inc hl
-	ld a, $80
-	ld [hl], a
-.done
-	ret
-.notRest
-	swap a
-	ld b, $0
-	ld hl, $c0d6
-	add hl, bc
-	ld b, [hl]
-	call Func_9858
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl]
-	jr z, .asm_95b8
-	call Func_978f
-.asm_95b8
-	push de
-	ld a, c
-	cp CH4
-	jr nc, .skip ; if sfx channel
-	ld hl, $c02a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	and a
-	jr nz, .asm_95cb
-	jr .skip
-.asm_95cb
-	pop de
-	ret
-.skip
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld d, [hl]
-	ld b, $2
-	call Func_9838
-	ld [hl], d
-	call Func_9629
-	call Func_95f8
-	pop de
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_95ef
-	inc e
-	jr nc, .asm_95ef
-	inc d
-.asm_95ef
-	ld hl, $c066
-	add hl, bc
-	ld [hl], e
-	call Func_964b
-	ret
-
-Func_95f8: ; 0x95f8
-	ld b, $0
-	ld hl, Unknown_9b27
-	add hl, bc
-	ld a, [$ff00+$25]
-	or [hl]
-	ld d, a
-	ld a, c
-	cp CH7
-	jr z, .sfxNoiseChannel
-	cp CH4
-	jr nc, .skip ; if sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .skip
-.sfxNoiseChannel
-	ld a, [$c004]
-	ld hl, Unknown_9b27
-	add hl, bc
-	and [hl]
-	ld d, a
-	ld a, [$ff00+$25]
-	ld hl, Unknown_9b1f
-	add hl, bc
-	and [hl]
-	or d
-	ld d, a
-.skip
-	ld a, d
-	ld [$ff00+$25], a
-	ret
-
-Func_9629: ; 0x9629
-	ld b, $0
-	ld hl, $c0b6
-	add hl, bc
-	ld d, [hl]
-	ld a, c
-	cp CH2
-	jr z, .channel3 ; if music channel 3
-	cp CH6
-	jr z, .channel3 ; if sfx channel 3
-	ld a, d
-	and $3f
-	ld d, a
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-.channel3
-	ld b, $1
-	call Func_9838
-	ld [hl], d
-	ret
-
-Func_964b: ; 0x964b
-	ld a, c
-	cp CH2
-	jr z, .channel3
-	cp CH6
-	jr nz, .notSfxChannel3
-	; fall through
-.channel3
-	push de
-	ld de, $c0e6
-	cp CH2
-	jr z, .musicChannel3
-	ld de, $c0e7
-.musicChannel3
-	ld a, [de]
-	add a
-	ld d, $0
-	ld e, a
-	ld hl, Music2_Channel3DutyPointers
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld hl, $ff30
-	ld b, $f
-	ld a, $0
-	ld [$ff00+$1a], a
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, b
-	dec b
-	and a
-	jr nz, .loop
-	ld a, $80
-	ld [$ff00+$1a], a
-	pop de
-.notSfxChannel3
-	ld a, d
-	or $80
-	and $c7
-	ld d, a
-	ld b, $3
-	call Func_9838
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	call Func_96b5
-	ret
-
-Func_9693: ; 0x9693
-	call Func_96e5
-	jr nc, .asm_96ab
-	ld d, $0
-	ld a, [$c0f2]
-	add $80
-	jr nc, .asm_96a2
-	inc d
-.asm_96a2
-	ld [$c0eb], a
-	ld a, d
-	ld [$c0ea], a
-	jr .asm_96b4
-.asm_96ab
-	xor a
-	ld [$c0eb], a
-	ld a, $1
-	ld [$c0ea], a
-.asm_96b4
-	ret
-
-Func_96b5: ; 0x96b5
-	call Func_96e5
-	jr nc, .asm_96c6
-	ld a, [$c0f1]
-	add e
-	jr nc, .asm_96c1
-	inc d
-.asm_96c1
-	dec hl
-	ld e, a
-	ld [hl], e
-	inc hl
-	ld [hl], d
-.asm_96c6
-	ret
-
-Func_96c7: ; 0x96c7
-	call Func_96e5
-	jr nc, .asm_96e2
-	ld hl, $c006
-	ld e, c
-	ld d, $0
-	sla e
-	rl d
-	add hl, de
-	ld a, [hl]
-	sub $1
-	ld [hl], a
-	inc hl
-	ld a, [hl]
-	sbc $0
-	ld [hl], a
-	scf
-	ret
-.asm_96e2
-	scf
-	ccf
-	ret
-
-Func_96e5: ; 0x96e5
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_96ee
-	jr .asm_96f4
-.asm_96ee
-	cp $86
-	jr z, .asm_96f4
-	jr c, .asm_96f7
-.asm_96f4
-	scf
-	ccf
-	ret
-.asm_96f7
-	scf
-	ret
-
-Music2_ApplyPitchBend: ; 0x96f9
-	ld hl, $c02e
-	add hl, bc
-	bit 5, [hl]
-	jp nz, .asm_9740
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld l, [hl]
-	ld h, b
-	add hl, de
-	ld d, h
-	ld e, l
-	ld hl, $c08e
-	add hl, bc
-	push hl
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	add [hl]
-	ld [hl], a
-	ld a, $0
-	adc e
-	ld e, a
-	ld a, $0
-	adc d
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jp c, .asm_9786
-	jr nz, .asm_9773
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jp c, .asm_9786
-	jr .asm_9773
-.asm_9740
-	ld hl, $c09e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld e, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	add a
-	ld [hl], a
-	ld a, e
-	sbc b
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, d
-	cp [hl]
-	jr c, .asm_9786
-	jr nz, .asm_9773
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	cp [hl]
-	jr c, .asm_9786
-.asm_9773
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld b, $3
-	call Func_9838
-	ld a, e
-	ld [hli], a
-	ld [hl], d
-	ret
-.asm_9786
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	ret
-
-Func_978f: ; 0x978f
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c0b6
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c076
-	add hl, bc
-	sub [hl]
-	jr nc, .asm_97a7
-	ld a, $1
-.asm_97a7
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	sub [hl]
-	ld e, a
-	ld a, d
-	sbc b
-	ld hl, $c0a6
-	add hl, bc
-	sub [hl]
-	jr c, .asm_97c3
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 5, [hl]
-	jr .asm_97e6
-.asm_97c3
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	sub d
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	res 5, [hl]
-.asm_97e6
-	ld hl, $c076
-	add hl, bc
-.asm_97ea
-	inc b
-	ld a, e
-	sub [hl]
-	ld e, a
-	jr nc, .asm_97ea
-	ld a, d
-	and a
-	jr z, .asm_97f8
-	dec a
-	ld d, a
-	jr .asm_97ea
-.asm_97f8
-	ld a, e
-	add [hl]
-	ld d, b
-	ld b, $0
-	ld hl, $c07e
-	add hl, bc
-	ld [hl], d
-	ld hl, $c086
-	add hl, bc
-	ld [hl], a
-	ld hl, $c08e
-	add hl, bc
-	ld [hl], a
-	ret
-
-Music2_ApplyDutyCycle: ; 0x980d
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld a, [hl]
-	rlca
-	rlca
-	ld [hl], a
-	and $c0
-	ld d, a
-	ld b, $1
-	call Func_9838
-	ld a, [hl]
-	and $3f
-	or d
-	ld [hl], a
-	ret
-
-Music2_GetNextMusicByte: ; 0x9825
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld a, [hld]
-	ld d, a
-	ld a, [de] ; get next music command
-	inc de
-	ld [hl], e ; store address of next command
-	inc hl
-	ld [hl], d
-	ret
-
-Func_9838: ; 0x9838
-	ld a, c
-	ld hl, Unknown_9b17
-	add l
-	jr nc, .noCarry
-	inc h
-.noCarry
-	ld l, a
-	ld a, [hl]
-	add b
-	ld l, a
-	ld h, $ff
-	ret
-
-Func_9847: ; 0x9847
-	ld h, $0
-.loop
-	srl a
-	jr nc, .noCarry
-	add hl, de
-.noCarry
-	sla e
-	rl d
-	and a
-	jr z, .done
-	jr .loop
-.done
-	ret
-
-Func_9858: ; 0x9858
-	ld h, $0
-	ld l, a
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, Unknown_9b2f
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld a, b
-.loop
-	cp $7
-	jr z, .done
-	sra d
-	rr e
-	inc a
-	jr .loop
-.done
-	ld a, $8
-	add d
-	ld d, a
-	ret
-
-Func_9876: ; 0x9876
-	ld [$c001], a
-	cp $ff
-	jp z, Func_9a34
-	cp $b9
-	jp z, Func_994e
-	jp c, Func_994e
-	cp $fe
-	jr z, .asm_988d
-	jp nc, Func_994e
-.asm_988d
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c0e9], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $8
-	ld hl, $c016
-	call FillMusicRAM2
-	ld hl, $c006
-	call FillMusicRAM2
-	ld d, $4
-	ld hl, $c026
-	call FillMusicRAM2
-	ld hl, $c02e
-	call FillMusicRAM2
-	ld hl, $c03e
-	call FillMusicRAM2
-	ld hl, $c046
-	call FillMusicRAM2
-	ld hl, $c04e
-	call FillMusicRAM2
-	ld hl, $c056
-	call FillMusicRAM2
-	ld hl, $c05e
-	call FillMusicRAM2
-	ld hl, $c066
-	call FillMusicRAM2
-	ld hl, $c06e
-	call FillMusicRAM2
-	ld hl, $c036
-	call FillMusicRAM2
-	ld hl, $c076
-	call FillMusicRAM2
-	ld hl, $c07e
-	call FillMusicRAM2
-	ld hl, $c086
-	call FillMusicRAM2
-	ld hl, $c08e
-	call FillMusicRAM2
-	ld hl, $c096
-	call FillMusicRAM2
-	ld hl, $c09e
-	call FillMusicRAM2
-	ld hl, $c0a6
-	call FillMusicRAM2
-	ld hl, $c0ae
-	call FillMusicRAM2
-	ld a, $1
-	ld hl, $c0be
-	call FillMusicRAM2
-	ld hl, $c0b6
-	call FillMusicRAM2
-	ld hl, $c0c6
-	call FillMusicRAM2
-	ld [$c0e8], a
-	ld a, $ff
-	ld [$c004], a
-	xor a
-	ld [$ff00+$24], a
-	ld a, $8
-	ld [$ff00+$10], a
-	ld a, $0
-	ld [$ff00+$25], a
-	xor a
-	ld [$ff00+$1a], a
-	ld a, $80
-	ld [$ff00+$1a], a
-	ld a, $77
-	ld [$ff00+$24], a
-	jp Func_9a8f
-
-Func_994e: ; 0x994e
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_02
-	add hl, de
-	ld a, h
-	ld [$c0ec], a
-	ld a, l
-	ld [$c0ed], a
-	ld a, [hl]
-	and $c0
-	rlca
-	rlca
-	ld c, a
-.asm_9967
-	ld d, c
-	ld a, c
-	add a
-	add c
-	ld c, a
-	ld b, $0
-	ld a, [$c0ec]
-	ld h, a
-	ld a, [$c0ed]
-	ld l, a
-	add hl, bc
-	ld c, d
-	ld a, [hl]
-	and $f
-	ld e, a
-	ld d, $0
-	ld hl, $c026
-	add hl, de
-	ld a, [hl]
-	and a
-	jr z, .asm_99a3
-	ld a, e
-	cp $7
-	jr nz, .asm_999a
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_9993
-	ret
-.asm_9993
-	ld a, [hl]
-	cp $14
-	jr z, .asm_99a3
-	jr c, .asm_99a3
-.asm_999a
-	ld a, [$c001]
-	cp [hl]
-	jr z, .asm_99a3
-	jr c, .asm_99a3
-	ret
-.asm_99a3
-	xor a
-	push de
-	ld h, d
-	ld l, e
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, $c016
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c006
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	pop de
-	ld hl, $c026
-	add hl, de
-	ld [hl], a
-	ld hl, $c02e
-	add hl, de
-	ld [hl], a
-	ld hl, $c03e
-	add hl, de
-	ld [hl], a
-	ld hl, $c046
-	add hl, de
-	ld [hl], a
-	ld hl, $c04e
-	add hl, de
-	ld [hl], a
-	ld hl, $c056
-	add hl, de
-	ld [hl], a
-	ld hl, $c05e
-	add hl, de
-	ld [hl], a
-	ld hl, $c066
-	add hl, de
-	ld [hl], a
-	ld hl, $c06e
-	add hl, de
-	ld [hl], a
-	ld hl, $c076
-	add hl, de
-	ld [hl], a
-	ld hl, $c07e
-	add hl, de
-	ld [hl], a
-	ld hl, $c086
-	add hl, de
-	ld [hl], a
-	ld hl, $c08e
-	add hl, de
-	ld [hl], a
-	ld hl, $c096
-	add hl, de
-	ld [hl], a
-	ld hl, $c09e
-	add hl, de
-	ld [hl], a
-	ld hl, $c0a6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, de
-	ld [hl], a
-	ld hl, $c036
-	add hl, de
-	ld [hl], a
-	ld a, $1
-	ld hl, $c0be
-	add hl, de
-	ld [hl], a
-	ld hl, $c0b6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0c6
-	add hl, de
-	ld [hl], a
-	ld a, e
-	cp $4
-	jr nz, .asm_9a2b
-	ld a, $8
-	ld [$ff00+$10], a
-.asm_9a2b
-	ld a, c
-	and a
-	jp z, Func_9a8f
-	dec c
-	jp .asm_9967
-
-Func_9a34: ; 0x9a34
-	ld a, $80
-	ld [$ff00+$26], a
-	ld [$ff00+$1a], a
-	xor a
-	ld [$ff00+$25], a
-	ld [$ff00+$1c], a
-	ld a, $8
-	ld [$ff00+$10], a
-	ld [$ff00+$12], a
-	ld [$ff00+$17], a
-	ld [$ff00+$21], a
-	ld a, $40
-	ld [$ff00+$14], a
-	ld [$ff00+$19], a
-	ld [$ff00+$23], a
-	ld a, $77
-	ld [$ff00+$24], a
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c002], a
-	ld [$c0e9], a
-	ld [$c0eb], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $a0
-	ld hl, $c006
-	call FillMusicRAM2
-	ld a, $1
-	ld d, $18
-	ld hl, $c0b6
-	call FillMusicRAM2
-	ld [$c0e8], a
-	ld [$c0ea], a
-	ld a, $ff
-	ld [$c004], a
-	ret
-
-; fills d bytes at hl with a
-FillMusicRAM2: ; 0x9a89
-	ld b, d
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
-
-Func_9a8f: ; 0x9a8f
-	ld a, [$c001]
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_02
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, $c006
-	ld a, [de] ; get channel number
-	ld b, a
-	rlca
-	rlca
-	and $3
-	ld c, a
-	ld a, b
-	and $f
-	ld b, c
-	inc b
-	inc de
-	ld c, $0
-.asm_9ab1
-	cp c
-	jr z, .asm_9ab9
-	inc c
-	inc hl
-	inc hl
-	jr .asm_9ab1
-.asm_9ab9
-	push hl
-	push bc
-	push af
-	ld b, $0
-	ld c, a
-	ld hl, $c026
-	add hl, bc
-	ld a, [$c001]
-	ld [hl], a
-	pop af
-	cp $3
-	jr c, .asm_9ad2
-	ld hl, $c02e
-	add hl, bc
-	set 2, [hl]
-.asm_9ad2
-	pop bc
-	pop hl
-	ld a, [de] ; get channel pointer
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	inc c
-	dec b
-	ld a, b
-	and a
-	ld a, [de]
-	inc de
-	jr nz, .asm_9ab1
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_9aeb
-	jr .asm_9b15
-.asm_9aeb
-	ld a, [$c001]
-	cp $86
-	jr z, .asm_9b15
-	jr c, .asm_9af6
-	jr .asm_9b15
-.asm_9af6
-	ld hl, $c02a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c012 ; sfx noise channel pointer
-	ld de, Noise2_endchannel
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite pointer to point to endchannel
-	ld a, [$c005]
-	and a
-	jr nz, .asm_9b15
-	ld a, [$ff00+$24]
-	ld [$c005], a
-	ld a, $77
-	ld [$ff00+$24], a
-.asm_9b15
-	ret
-
-Noise2_endchannel: ; 0x9b16
-	endchannel
-
-Unknown_9b17: ; 0x9b17
-	db $10, $15, $1A, $1F ; channels 0-3
-	db $10, $15, $1A, $1F ; channels 4-7
-
-Unknown_9b1f: ; 0x9b1f
-	db $EE, $DD, $BB, $77 ; channels 0-3
-	db $EE, $DD, $BB, $77 ; channels 4-7
-
-Unknown_9b27: ; 0x9b27
-	db $11, $22, $44, $88 ; channels 0-3
-	db $11, $22, $44, $88 ; channels 4-7
-
-Unknown_9b2f: ; 0x9b2f
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
-
-; an alternate start for MeetRival which has a different first measure
-Music_RivalAlternateStart: ; 0x9b47
-	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b1a2
-	call Music2_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b21d
-	call Music2_OverwriteChannelPointer
-	ld de, Music_MeetRival_branch_b2b5
-
-Music2_OverwriteChannelPointer: ; 0x9b60
-	ld a, e
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	ret
-
-; an alternate tempo for MeetRival which is slightly slower
-Music_RivalAlternateTempo: ; 0x9b65
-	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b119
-	jp Music2_OverwriteChannelPointer
-
-; applies both the alternate start and alternate tempo
-Music_RivalAlternateStartAndTempo: ; 0x9b75
-	call Music_RivalAlternateStart
-	ld hl, $c006
-	ld de, Music_MeetRival_branch_b19b
-	jp Music2_OverwriteChannelPointer
-
-; an alternate tempo for Cities1 which is used for the Hall of Fame room
-Music_Cities1AlternateTempo: ; 0x9b81
-	ld a, $a
-	ld [$cfc8], a
-	ld [$cfc9], a
-	ld a, $ff
-	ld [wMusicHeaderPointer], a
-	ld c, $64
-	call DelayFrames
-	ld c, BANK(Music_Cities1)
-	ld a, (Music_Cities1 - $4000) / 3
-	call PlayMusic
-	ld hl, $c006
-	ld de, Music_Cities1_branch_aa6f
-	jp Music2_OverwriteChannelPointer
-
-INCLUDE "music/pkmnhealed.asm"
-INCLUDE "music/routes1.asm"
-INCLUDE "music/routes2.asm"
-INCLUDE "music/routes3.asm"
-INCLUDE "music/routes4.asm"
-INCLUDE "music/indigoplateau.asm"
-INCLUDE "music/pallettown.asm"
-INCLUDE "music/unusedsong.asm"
-INCLUDE "music/cities1.asm"
-INCLUDE "music/sfx/sfx_02_3a.asm"
-INCLUDE "music/museumguy.asm"
-INCLUDE "music/meetprofoak.asm"
-INCLUDE "music/meetrival.asm"
-INCLUDE "music/sfx/sfx_02_41.asm"
-INCLUDE "music/sfx/sfx_02_3b.asm"
-INCLUDE "music/sfx/sfx_02_42.asm"
-INCLUDE "music/ssanne.asm"
-INCLUDE "music/cities2.asm"
-INCLUDE "music/celadon.asm"
-INCLUDE "music/cinnabar.asm"
-INCLUDE "music/vermilion.asm"
-INCLUDE "music/lavender.asm"
-INCLUDE "music/safarizone.asm"
-INCLUDE "music/gym.asm"
-INCLUDE "music/pokecenter.asm"
 
 SECTION "bank3",ROMX,BANK[$3]
 
@@ -20297,502 +18400,254 @@ HandleJoypadResetButtons: ; c03c (3:403c)
 	jp GetJoypadState
 
 MapSongBanks: ; c04d (3:404d)
-	db (Music_PalletTown - $4000) / 3
-	db BANK(Music_PalletTown) ;PALLET_TOWN
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; VIRIDIAN_CITY
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; PEWTER_CITY
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; CERULEAN_CITY
-	db (Music_Lavender - $4000) / 3
-	db BANK(Music_Lavender) ; LAVENDER_TOWN
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; VERMILION_CITY
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CELADON_CITY
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; FUCHSIA_CITY
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar) ; CINNABAR_ISLAND
-	db (Music_IndigoPlateau - $4000) / 3
-	db BANK(Music_IndigoPlateau) ; INDIGO_PLATEAU
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; SAFFRON_CITY
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; unused
-	db (Music_Routes1 - $4000) / 3
-	db BANK(Music_Routes1) ; ROUTE_1
-	db (Music_Routes1 - $4000) / 3
-	db BANK(Music_Routes1) ; ROUTE_2
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_3
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_4
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_5
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_6
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_7
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_8
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_9
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_10
-	db (Music_Routes4 - $4000) / 3
-	db BANK(Music_Routes4) ; ROUTE_11
-	db (Music_Routes4 - $4000) / 3
-	db BANK(Music_Routes4) ; ROUTE_12
-	db (Music_Routes4 - $4000) / 3
-	db BANK(Music_Routes4) ; ROUTE_13
-	db (Music_Routes4 - $4000) / 3
-	db BANK(Music_Routes4) ; ROUTE_14
-	db (Music_Routes4 - $4000) / 3
-	db BANK(Music_Routes4) ; ROUTE_15
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_16
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_17
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_18
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_19
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_20
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_21
-	db (Music_Routes3 - $4000) / 3
-	db BANK(Music_Routes3) ; ROUTE_22
-	db (Music_IndigoPlateau - $4000) / 3
-	db BANK(Music_IndigoPlateau) ; ROUTE_23
-	db (Music_Routes2 - $4000) / 3
-	db BANK(Music_Routes2) ; ROUTE_24
-	db (Music_Routes2 - $4000) / 3
-	db BANK(Music_Routes2) ; ROUTE_25
-	db (Music_PalletTown - $4000) / 3
-	db BANK(Music_PalletTown) ; RedsHouse1F
-	db (Music_PalletTown - $4000) / 3
-	db BANK(Music_PalletTown) ; RedsHouse2F
-	db (Music_PalletTown - $4000) / 3
-	db BANK(Music_PalletTown) ; BluesHouse
-	db (Music_OaksLab - $4000) / 3
-	db BANK(Music_OaksLab) ; OaksLab
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; ViridianPokecenter
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; ViridianMart
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; School
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; ViridianHouse
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; ViridianGym
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; DiglettsCaveRoute2
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; ViridianForestexit
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route2House
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route2Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; ViridianForestEntrance
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; ViridianForest
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; MuseumF1
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; MuseumF2
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; PewterGym
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; PewterHouse1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; PewterMart
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; PewterHouse2
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; PewterPokecenter
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; MtMoon1
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; MtMoon2
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; MtMoon3
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; CeruleanHouseTrashed
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; CeruleanHouse
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeruleanPokecenter
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; CeruleanGym
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; BikeShop
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeruleanMart
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; MtMoonPokecenter
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; CeruleanHouseTrashed
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route5Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute5
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; DayCareM
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route6Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute6
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; FREEZE
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route7Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; UndergroundPathEntranceRoute7
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ;FREEZE
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route8Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; UndergroundPathEntranceRoute8
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; RockTunnelPokecenter
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; RockTunnel1
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; PowerPlant
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; Route11Gate
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; DiglettsCaveEntranceRoute11
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; Route11GateUpstairs
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route12Gate
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; BillsHouse
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; VermilionPokecenter
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; FanClub
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; VermilionMart
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; VermilionGym
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; VermilionHouse1
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; VermilionDock
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne1
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne2
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne3
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne4
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne5
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne6
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne7
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne8
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne9
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ; SSAnne10
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ;unused
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ;unused
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ;unused
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; VictoryRoad1
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ;unused
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ;unused
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ;unused
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ;unused
-	db (Music_IndigoPlateau - $4000) / 3
-	db BANK(Music_IndigoPlateau) ; Lance
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ;unused
-	db (Music_SSAnne - $4000) / 3
-	db BANK(Music_SSAnne) ;unused
-	db (Music_PalletTown - $4000) / 3
-	db BANK(Music_PalletTown) ; HallofFameRoom
-	db (Music_Routes1 - $4000) / 3
-	db BANK(Music_Routes1) ; UndergroundPathNS
-	db (Music_IndigoPlateau - $4000) / 3
-	db BANK(Music_IndigoPlateau) ; Gary
-	db (Music_Routes1 - $4000) / 3
-	db BANK(Music_Routes1) ; UndergroundPathWE
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMart1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMart2
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMart3
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMart4
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMartRoof
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMartElevator
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonMansion1
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonMansion2
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonMansion3
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonMansion4
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonMansion5
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonPokecenter
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; CeladonGym
-	db (Music_GameCorner - $4000) / 3
-	db BANK(Music_GameCorner) ; CeladonGameCorner
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CeladonMart5
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonPrizeRoom
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonDiner
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonHouse
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; CeladonHotel
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; LavenderPokecenter
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower1
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower2
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower3
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower4
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower5
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower6
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; PokemonTower7
-	db (Music_Lavender - $4000) / 3
-	db BANK(Music_Lavender) ; LavenderHouse1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; LavenderMart
-	db (Music_Lavender - $4000) / 3
-	db BANK(Music_Lavender) ; LavenderHouse2
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; FuchsiaMart
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; FuchsiaHouse1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; FuchsiaPokecenter
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; FuchsiaHouse2
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; SafariZoneEntrance
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; FuchsiaGym
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; FuchsiaMeetingRoom
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; SeafoamIslands2
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; SeafoamIslands3
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; SeafoamIslands4
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; SeafoamIslands5
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; VermilionHouse2
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; FuchsiaHouse3
-	db (Music_CinnabarMansion - $4000) / 3
-	db BANK(Music_CinnabarMansion) ; Mansion1
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; CinnabarGym
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar) ; Lab1
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar) ; Lab2
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar) ; Lab3
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar) ; Lab4
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CinnabarPokecenter
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; CinnabarMart
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar)
-	db (Music_IndigoPlateau - $4000) / 3
-	db BANK(Music_IndigoPlateau) ; IndigoPlateauLobby
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; CopycatsHouseF1
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; CopycatsHouseF2
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; FightingDojo
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; SaffronGym
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; SaffronHouse1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; SaffronMart
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo1
-	db (Music_Pokecenter - $4000) / 3
-	db BANK(Music_Pokecenter) ; SaffronPokecenter
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; SaffronHouse2
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route15Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route15GateUpstairs
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route16GateMap
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route16GateUpstairs
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; Route16House
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; Route12House
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route18Gate
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route18GateUpstairs
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; SeafoamIslands1
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; Route22Gate
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; VictoryRoad2
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; Route12GateUpstairs
-	db (Music_Vermilion - $4000) / 3
-	db BANK(Music_Vermilion) ; VermilionHouse3
-	db (Music_Dungeon2 - $4000) / 3
-	db BANK(Music_Dungeon2) ; DiglettsCave
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; VictoryRoad3
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; RocketHideout1
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; RocketHideout2
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; RocketHideout3
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; RocketHideout4
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; RocketHideoutElevator
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1)
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1)
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1)
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo2
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo3
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo4
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo5
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo6
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo7
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo8
-	db (Music_CinnabarMansion - $4000) / 3
-	db BANK(Music_CinnabarMansion) ; Mansion2
-	db (Music_CinnabarMansion - $4000) / 3
-	db BANK(Music_CinnabarMansion) ; Mansion3
-	db (Music_CinnabarMansion - $4000) / 3
-	db BANK(Music_CinnabarMansion) ; Mansion4
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneEast
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneNorth
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneWest
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneCenter
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneRestHouse1
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneSecretHouse
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneRestHouse2
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneRestHouse3
-	db (Music_SafariZone - $4000) / 3
-	db BANK(Music_SafariZone) ; SafariZoneRestHouse4
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; UnknownDungeon2
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; UnknownDungeon3
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; UnknownDungeon1
-	db (Music_Cities2 - $4000) / 3
-	db BANK(Music_Cities2) ; NameRater
-	db (Music_Cities1 - $4000) / 3
-	db BANK(Music_Cities1) ; CeruleanHouse2
-	db (Music_Cinnabar - $4000) / 3
-	db BANK(Music_Cinnabar)
-	db (Music_Dungeon3 - $4000) / 3
-	db BANK(Music_Dungeon3) ; RockTunnel2
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo9
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo10
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCo11
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo) ; SilphCoElevator
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; BattleCenterM
-	db (Music_Celadon - $4000) / 3
-	db BANK(Music_Celadon) ; TradeCenterM
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_SilphCo - $4000) / 3
-	db BANK(Music_SilphCo)
-	db (Music_Gym - $4000) / 3
-	db BANK(Music_Gym) ; Lorelei
-	db (Music_Dungeon1 - $4000) / 3
-	db BANK(Music_Dungeon1) ; Bruno
-	db (Music_PokemonTower - $4000) / 3
-	db BANK(Music_PokemonTower) ; Agatha
+	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ;PALLET_TOWN
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; CERULEAN_CITY
+	db MUSIC_LAVENDER, BANK(Music_Lavender) ; LAVENDER_TOWN
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; VERMILION_CITY
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CELADON_CITY
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; FUCHSIA_CITY
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; CINNABAR_ISLAND
+	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; INDIGO_PLATEAU
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; SAFFRON_CITY
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; unused
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_1
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; ROUTE_2
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_3
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_4
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_5
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_6
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_7
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_8
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_9
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_10
+	db MUSIC_ROUTES4, BANK(Music_Routes4) ; ROUTE_11
+	db MUSIC_ROUTES4, BANK(Music_Routes4) ; ROUTE_12
+	db MUSIC_ROUTES4, BANK(Music_Routes4) ; ROUTE_13
+	db MUSIC_ROUTES4, BANK(Music_Routes4) ; ROUTE_14
+	db MUSIC_ROUTES4, BANK(Music_Routes4) ; ROUTE_15
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_16
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_17
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_18
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_19
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_20
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_21
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_22
+	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; ROUTE_23
+	db MUSIC_ROUTES2, BANK(Music_Routes2) ; ROUTE_24
+	db MUSIC_ROUTES2, BANK(Music_Routes2) ; ROUTE_25
+	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; RedsHouse1F
+	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; RedsHouse2F
+	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; BluesHouse
+	db MUSIC_OAKS_LAB, BANK(Music_OaksLab) ; OaksLab
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; ViridianPokecenter
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; ViridianMart
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; School
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; ViridianHouse
+	db MUSIC_GYM, BANK(Music_Gym) ; ViridianGym
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; DiglettsCaveRoute2
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; ViridianForestexit
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route2House
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route2Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; ViridianForestEntrance
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; ViridianForest
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; MuseumF1
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; MuseumF2
+	db MUSIC_GYM, BANK(Music_Gym) ; PewterGym
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; PewterHouse1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; PewterMart
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; PewterHouse2
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; PewterPokecenter
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon1
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon2
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; MtMoon3
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; CeruleanHouseTrashed
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; CeruleanHouse
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeruleanPokecenter
+	db MUSIC_GYM, BANK(Music_Gym) ; CeruleanGym
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; BikeShop
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeruleanMart
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; MtMoonPokecenter
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; CeruleanHouseTrashed
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route5Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute5
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; DayCareM
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route6Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; UndergroundTunnelEntranceRoute6
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; FREEZE
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route7Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; UndergroundPathEntranceRoute7
+	db MUSIC_CELADON, BANK(Music_Celadon) ;FREEZE
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route8Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; UndergroundPathEntranceRoute8
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; RockTunnelPokecenter
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; RockTunnel1
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; PowerPlant
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; Route11Gate
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; DiglettsCaveEntranceRoute11
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; Route11GateUpstairs
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route12Gate
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; BillsHouse
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; VermilionPokecenter
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; FanClub
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; VermilionMart
+	db MUSIC_GYM, BANK(Music_Gym) ; VermilionGym
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; VermilionHouse1
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; VermilionDock
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne1
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne2
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne3
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne4
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne5
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne6
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne7
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne8
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne9
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne10
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ;unused
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ;unused
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad1
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ;unused
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ;unused
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
+	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Lance
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; HallofFameRoom
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; UndergroundPathNS
+	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Gary
+	db MUSIC_ROUTES1, BANK(Music_Routes1) ; UndergroundPathWE
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMart1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMart2
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMart3
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMart4
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMartRoof
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMartElevator
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonMansion1
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonMansion2
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonMansion3
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonMansion4
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonMansion5
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonPokecenter
+	db MUSIC_GYM, BANK(Music_Gym) ; CeladonGym
+	db MUSIC_GAME_CORNER, BANK(Music_GameCorner) ; CeladonGameCorner
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CeladonMart5
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonPrizeRoom
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonDiner
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonHouse
+	db MUSIC_CELADON, BANK(Music_Celadon) ; CeladonHotel
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; LavenderPokecenter
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower1
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower2
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower3
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower4
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower5
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower6
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; PokemonTower7
+	db MUSIC_LAVENDER, BANK(Music_Lavender) ; LavenderHouse1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; LavenderMart
+	db MUSIC_LAVENDER, BANK(Music_Lavender) ; LavenderHouse2
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; FuchsiaMart
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; FuchsiaHouse1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; FuchsiaPokecenter
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; FuchsiaHouse2
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; SafariZoneEntrance
+	db MUSIC_GYM, BANK(Music_Gym) ; FuchsiaGym
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; FuchsiaMeetingRoom
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SeafoamIslands2
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SeafoamIslands3
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SeafoamIslands4
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SeafoamIslands5
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; VermilionHouse2
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; FuchsiaHouse3
+	db MUSIC_CINNABAR_MANSION, BANK(Music_CinnabarMansion) ; Mansion1
+	db MUSIC_GYM, BANK(Music_Gym) ; CinnabarGym
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; Lab1
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; Lab2
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; Lab3
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar) ; Lab4
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CinnabarPokecenter
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; CinnabarMart
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar)
+	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; IndigoPlateauLobby
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CopycatsHouseF1
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CopycatsHouseF2
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; FightingDojo
+	db MUSIC_GYM, BANK(Music_Gym) ; SaffronGym
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; SaffronHouse1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; SaffronMart
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo1
+	db MUSIC_POKECENTER, BANK(Music_Pokecenter) ; SaffronPokecenter
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; SaffronHouse2
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route15Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route15GateUpstairs
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route16GateMap
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route16GateUpstairs
+	db MUSIC_CELADON, BANK(Music_Celadon) ; Route16House
+	db MUSIC_CELADON, BANK(Music_Celadon) ; Route12House
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route18Gate
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route18GateUpstairs
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; SeafoamIslands1
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; Route22Gate
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad2
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; Route12GateUpstairs
+	db MUSIC_VERMILION, BANK(Music_Vermilion) ; VermilionHouse3
+	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ; DiglettsCave
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad3
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout1
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout2
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout3
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout4
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideoutElevator
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo2
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo3
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo4
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo5
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo6
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo7
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo8
+	db MUSIC_CINNABAR_MANSION, BANK(Music_CinnabarMansion) ; Mansion2
+	db MUSIC_CINNABAR_MANSION, BANK(Music_CinnabarMansion) ; Mansion3
+	db MUSIC_CINNABAR_MANSION, BANK(Music_CinnabarMansion) ; Mansion4
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneEast
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneNorth
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneWest
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneCenter
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneRestHouse1
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneSecretHouse
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneRestHouse2
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneRestHouse3
+	db MUSIC_SAFARI_ZONE, BANK(Music_SafariZone) ; SafariZoneRestHouse4
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; UnknownDungeon2
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; UnknownDungeon3
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; UnknownDungeon1
+	db MUSIC_CITIES2, BANK(Music_Cities2) ; NameRater
+	db MUSIC_CITIES1, BANK(Music_Cities1) ; CeruleanHouse2
+	db MUSIC_CINNABAR, BANK(Music_Cinnabar)
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; RockTunnel2
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo9
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo10
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo11
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCoElevator
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_CELADON, BANK(Music_Celadon) ; BattleCenterM
+	db MUSIC_CELADON, BANK(Music_Celadon) ; TradeCenterM
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
+	db MUSIC_GYM, BANK(Music_Gym) ; Lorelei
+	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; Bruno
+	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; Agatha
 
 ; see also MapHeaderPointers
 MapHeaderBanks: ; c23d (3:423d)
@@ -27184,8 +25039,9 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$cd6a],a ; item use failed
 	jp PrintText
 .emptyPartyText
-	db $0,"You don't have",$4F
-	db "any #MON!",$58
+	text "You don't have"
+	line "any #MON!"
+	prompt
 .notUsingSoftboiled
 	call DisplayPartyMenu
 .getPartyMonDataAddress
@@ -32271,10 +30127,10 @@ PrintStat
 	ret
 
 StatsText: ; 12b3a (4:6b3a)
-	db "ATTACK", $4e
-	db "DEFENSE", $4e
-	db "SPEED", $4e
-	db "SPECIAL@"
+	db   "ATTACK"
+	next "DEFENSE"
+	next "SPEED"
+	next "SPECIAL@"
 
 StatusScreen2: ; 12b57 (4:6b57)
 	ld a, [$ff00+$d7]
@@ -33491,9 +31347,9 @@ TrainerInfo_FarCopyData: ; 1357f (4:757f)
 	jp FarCopyData2
 
 TrainerInfo_NameMoneyTimeText: ; 13584 (4:7584)
-	db "NAME/",$4E
-	db "MONEY/",$4E
-	db "TIME/@"
+	db   "NAME/"
+	next "MONEY/"
+	next "TIME/@"
 
 ; $76 is a circle tile
 TrainerInfo_BadgesText: ; 13597 (4:7597)
@@ -36146,7 +34002,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	call PlaySound ; stop music
 	ld a, BANK(Music_MeetProfOak)
 	ld c,a ; song bank
-	ld a, (Music_MeetProfOak - $4000) / 3 ; “oak appears” music
+	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
 	call PlayMusic ; plays music
 	ld a,$FC
 	ld [wJoypadForbiddenButtonsMask],a
@@ -37070,7 +34926,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	call PlaySound
 .asm_19512
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -40348,7 +38204,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $8
 	ld [$d528], a
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic ; play music
 	ld a, $f
 	ld [$ff00+$8c], a
@@ -41804,8 +39660,8 @@ BikeShopText1: ; 1d745 (7:5745)
 	jp TextScriptEnd
 
 BikeShopMenuText: ; 1d7f8 (7:57f8)
-	db "BICYCLE", $4e
-	db "CANCEL@"
+	db   "BICYCLE"
+	next "CANCEL@"
 
 BikeShopMenuPrice: ; 1d807 (7:5807)
 	db "¥1000000@"
@@ -42334,7 +40190,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)
-	ld a, (Music_Surfing - $4000) / 3
+	ld a, MUSIC_SURFING
 	call PlayMusic
 	ld b, BANK(Func_79fc0)
 	ld hl, Func_79fc0
@@ -44491,7 +42347,11 @@ BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
 	db "@"
 
 BillsMonListText: ; 1ec84 (7:6c84)
-	db "EEVEE",$4e,"FLAREON",$4e,"JOLTEON",$4e,"VAPOREON",$4e,"CANCEL@"
+	db   "EEVEE"
+	next "FLAREON"
+	next "JOLTEON"
+	next "VAPOREON"
+	next "CANCEL@"
 
 BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 	TX_FAR _BillsHousePokemonListText2
@@ -44509,2566 +42369,7 @@ OakLabEmailText: ; 1ecbd (7:6cbd)
 	TX_FAR _OakLabEmailText
 	db "@"
 
-SECTION "bank8",ROMX,BANK[$8]
 
-INCLUDE "music/headers/sfxheaders08.asm"
-INCLUDE "music/headers/musicheaders08.asm"
-
-INCLUDE "music/sfx/sfx_08_01.asm"
-INCLUDE "music/sfx/sfx_08_02.asm"
-INCLUDE "music/sfx/sfx_08_03.asm"
-INCLUDE "music/sfx/sfx_08_04.asm"
-INCLUDE "music/sfx/sfx_08_05.asm"
-INCLUDE "music/sfx/sfx_08_06.asm"
-INCLUDE "music/sfx/sfx_08_07.asm"
-INCLUDE "music/sfx/sfx_08_08.asm"
-INCLUDE "music/sfx/sfx_08_09.asm"
-INCLUDE "music/sfx/sfx_08_0a.asm"
-INCLUDE "music/sfx/sfx_08_0b.asm"
-INCLUDE "music/sfx/sfx_08_0c.asm"
-INCLUDE "music/sfx/sfx_08_0d.asm"
-INCLUDE "music/sfx/sfx_08_0e.asm"
-INCLUDE "music/sfx/sfx_08_0f.asm"
-INCLUDE "music/sfx/sfx_08_10.asm"
-INCLUDE "music/sfx/sfx_08_11.asm"
-INCLUDE "music/sfx/sfx_08_12.asm"
-INCLUDE "music/sfx/sfx_08_13.asm"
-
-Music8_Channel3DutyPointers: ; 20361 (8:4361)
-	dw Music8_Channel3Duty0
-	dw Music8_Channel3Duty1
-	dw Music8_Channel3Duty2
-	dw Music8_Channel3Duty3
-	dw Music8_Channel3Duty4
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-	dw SFX_08_40_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music8_Channel3Duty0: ; 20373 (8:4373)
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music8_Channel3Duty1: ; 20383 (8:4383)
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music8_Channel3Duty2: ; 20393 (8:4393)
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music8_Channel3Duty3: ; 203a3 (8:43a3)
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music8_Channel3Duty4: ; 203b3 (8:43b3)
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
-INCLUDE "music/sfx/sfx_08_40.asm"
-INCLUDE "music/sfx/sfx_08_3f.asm"
-INCLUDE "music/sfx/sfx_08_3c.asm"
-INCLUDE "music/sfx/sfx_08_3d.asm"
-INCLUDE "music/sfx/sfx_08_3e.asm"
-INCLUDE "music/sfx/sfx_08_77.asm"
-INCLUDE "music/sfx/sfx_08_41.asm"
-INCLUDE "music/sfx/sfx_08_42.asm"
-INCLUDE "music/sfx/sfx_08_43.asm"
-INCLUDE "music/sfx/sfx_08_44.asm"
-INCLUDE "music/sfx/sfx_08_45.asm"
-INCLUDE "music/sfx/sfx_08_pokeflute_ch3.asm"
-INCLUDE "music/sfx/sfx_08_47.asm"
-INCLUDE "music/sfx/sfx_08_48.asm"
-INCLUDE "music/sfx/sfx_08_49.asm"
-INCLUDE "music/sfx/sfx_08_4a.asm"
-INCLUDE "music/sfx/sfx_08_4b.asm"
-INCLUDE "music/sfx/sfx_08_4c.asm"
-INCLUDE "music/sfx/sfx_08_4d.asm"
-INCLUDE "music/sfx/sfx_08_4e.asm"
-INCLUDE "music/sfx/sfx_08_4f.asm"
-INCLUDE "music/sfx/sfx_08_50.asm"
-INCLUDE "music/sfx/sfx_08_51.asm"
-INCLUDE "music/sfx/sfx_08_52.asm"
-INCLUDE "music/sfx/sfx_08_53.asm"
-INCLUDE "music/sfx/sfx_08_54.asm"
-INCLUDE "music/sfx/sfx_08_55.asm"
-INCLUDE "music/sfx/sfx_08_56.asm"
-INCLUDE "music/sfx/sfx_08_57.asm"
-INCLUDE "music/sfx/sfx_08_58.asm"
-INCLUDE "music/sfx/sfx_08_59.asm"
-INCLUDE "music/sfx/sfx_08_5a.asm"
-INCLUDE "music/sfx/sfx_08_5b.asm"
-INCLUDE "music/sfx/sfx_08_5c.asm"
-INCLUDE "music/sfx/sfx_08_5d.asm"
-INCLUDE "music/sfx/sfx_08_5e.asm"
-INCLUDE "music/sfx/sfx_08_5f.asm"
-INCLUDE "music/sfx/sfx_08_60.asm"
-INCLUDE "music/sfx/sfx_08_61.asm"
-INCLUDE "music/sfx/sfx_08_62.asm"
-INCLUDE "music/sfx/sfx_08_63.asm"
-INCLUDE "music/sfx/sfx_08_64.asm"
-INCLUDE "music/sfx/sfx_08_65.asm"
-INCLUDE "music/sfx/sfx_08_66.asm"
-INCLUDE "music/sfx/sfx_08_67.asm"
-INCLUDE "music/sfx/sfx_08_68.asm"
-INCLUDE "music/sfx/sfx_08_69.asm"
-INCLUDE "music/sfx/sfx_08_6a.asm"
-INCLUDE "music/sfx/sfx_08_6b.asm"
-INCLUDE "music/sfx/sfx_08_6c.asm"
-INCLUDE "music/sfx/sfx_08_6d.asm"
-INCLUDE "music/sfx/sfx_08_6e.asm"
-INCLUDE "music/sfx/sfx_08_6f.asm"
-INCLUDE "music/sfx/sfx_08_70.asm"
-INCLUDE "music/sfx/sfx_08_71.asm"
-INCLUDE "music/sfx/sfx_08_72.asm"
-INCLUDE "music/sfx/sfx_08_73.asm"
-INCLUDE "music/sfx/sfx_08_74.asm"
-INCLUDE "music/sfx/sfx_08_75.asm"
-INCLUDE "music/sfx/sfx_08_76.asm"
-INCLUDE "music/sfx/sfx_08_unused.asm"
-INCLUDE "music/sfx/sfx_08_1d.asm"
-INCLUDE "music/sfx/sfx_08_37.asm"
-INCLUDE "music/sfx/sfx_08_38.asm"
-INCLUDE "music/sfx/sfx_08_25.asm"
-INCLUDE "music/sfx/sfx_08_39.asm"
-INCLUDE "music/sfx/sfx_08_17.asm"
-INCLUDE "music/sfx/sfx_08_23.asm"
-INCLUDE "music/sfx/sfx_08_24.asm"
-INCLUDE "music/sfx/sfx_08_14.asm"
-INCLUDE "music/sfx/sfx_08_22.asm"
-INCLUDE "music/sfx/sfx_08_1a.asm"
-INCLUDE "music/sfx/sfx_08_1b.asm"
-INCLUDE "music/sfx/sfx_08_19.asm"
-INCLUDE "music/sfx/sfx_08_1f.asm"
-INCLUDE "music/sfx/sfx_08_20.asm"
-INCLUDE "music/sfx/sfx_08_16.asm"
-INCLUDE "music/sfx/sfx_08_21.asm"
-INCLUDE "music/sfx/sfx_08_15.asm"
-INCLUDE "music/sfx/sfx_08_1e.asm"
-INCLUDE "music/sfx/sfx_08_1c.asm"
-INCLUDE "music/sfx/sfx_08_18.asm"
-INCLUDE "music/sfx/sfx_08_2d.asm"
-INCLUDE "music/sfx/sfx_08_2a.asm"
-INCLUDE "music/sfx/sfx_08_2f.asm"
-INCLUDE "music/sfx/sfx_08_26.asm"
-INCLUDE "music/sfx/sfx_08_27.asm"
-INCLUDE "music/sfx/sfx_08_28.asm"
-INCLUDE "music/sfx/sfx_08_32.asm"
-INCLUDE "music/sfx/sfx_08_29.asm"
-INCLUDE "music/sfx/sfx_08_2b.asm"
-INCLUDE "music/sfx/sfx_08_30.asm"
-INCLUDE "music/sfx/sfx_08_2e.asm"
-INCLUDE "music/sfx/sfx_08_31.asm"
-INCLUDE "music/sfx/sfx_08_2c.asm"
-INCLUDE "music/sfx/sfx_08_33.asm"
-INCLUDE "music/sfx/sfx_08_34.asm"
-INCLUDE "music/sfx/sfx_08_35.asm"
-INCLUDE "music/sfx/sfx_08_36.asm"
-
-Func_2136e: ; 2136e (8:536e)
-	ld a, [$d083]
-	cp $ff
-	jr z, .asm_2139b
-	bit 7, a
-	ret z
-	and $7f
-	jr nz, .asm_21383
-	call Func_213a7
-	ld a, $1e
-	jr .asm_21395
-.asm_21383
-	cp $14
-	jr nz, .asm_2138a
-	call Func_213ac
-.asm_2138a
-	ld a, $86
-	ld [$c02a], a
-	ld a, [$d083]
-	and $7f
-	dec a
-.asm_21395
-	set 7, a
-	ld [$d083], a
-	ret
-.asm_2139b
-	xor a
-	ld [$d083], a
-	ld [$c02a], a
-	ld de, Unknown_213c4 ; $53c4
-	jr asm_213af
-
-Func_213a7: ; 213a7 (8:53a7)
-	ld de, Unknown_213bc ; $53bc
-	jr asm_213af
-
-Func_213ac: ; 213ac (8:53ac)
-	ld de, Unknown_213c0 ; $53c0
-asm_213af: ; 213af (8:53af)
-	ld hl, $ff10
-	ld c, $5
-	xor a
-.asm_213b5
-	ld [hli], a
-	ld a, [de]
-	inc de
-	dec c
-	jr nz, .asm_213b5
-	ret
-
-Unknown_213bc: ; 213bc (8:53bc)
-	db $A0,$E2,$50,$87
-
-Unknown_213c0: ; 213c0 (8:53c0)
-	db $B0,$E2,$EE,$86
-
-Unknown_213c4: ; 213c4 (8:53c4)
-	db $00,$00,$00,$80
-
-Func_213c8: ; 213c8 (8:53c8)
-	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	call SaveScreenTilesToBuffer2
-	ld a, [$d5a2]
-	and a
-	jr nz, .asm_213f3
-	ld a, [$d74b]
-	bit 5, a
-	jr z, .asm_213ea
-	ld a, [$d5a2]
-	and a
-	jr nz, .asm_213f3
-	ld hl, wTileMap
-	ld b, $8
-	ld c, $e
-	jr .asm_213fa
-.asm_213ea
-	ld hl, wTileMap
-	ld b, $6
-	ld c, $e
-	jr .asm_213fa
-.asm_213f3
-	ld hl, wTileMap
-	ld b, $a
-	ld c, $e
-.asm_213fa
-	call TextBoxBorder
-	call UpdateSprites
-	ld a, $3
-	ld [wMaxMenuItem], a ; $cc28
-	ld a, [$d7f1]
-	bit 0, a
-	jr nz, .asm_21414
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
-	ld de, SomeonesPCText ; $548b
-	jr .asm_2141a
-.asm_21414
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
-	ld de, BillsPCText ; $5497
-.asm_2141a
-	call PlaceString
-	FuncCoord 2, 4 ; $c3f2
-	ld hl, Coord
-	ld de, W_PLAYERNAME ; $d158
-	call PlaceString
-	ld l, c
-	ld h, b
-	ld de, PlayersPCText ; $54a0
-	call PlaceString
-	ld a, [$d74b]
-	bit 5, a
-	jr z, .asm_21462
-	FuncCoord 2, 6 ; $c41a
-	ld hl, Coord
-	ld de, OaksPCText ; $54a5
-	call PlaceString
-	ld a, [$d5a2]
-	and a
-	jr z, .asm_2145a
-	ld a, $4
-	ld [wMaxMenuItem], a ; $cc28
-	FuncCoord 2, 8 ; $c442
-	ld hl, Coord
-	ld de, PKMNLeaguePCText ; $54b2
-	call PlaceString
-	FuncCoord 2, 10 ; $c46a
-	ld hl, Coord
-	ld de, LogOffPCText ; $54ba
-	jr .asm_2146d
-.asm_2145a
-	FuncCoord 2, 8 ; $c442
-	ld hl, Coord
-	ld de, LogOffPCText ; $54ba
-	jr .asm_2146d
-.asm_21462
-	ld a, $2
-	ld [wMaxMenuItem], a ; $cc28
-	FuncCoord 2, 6 ; $c41a
-	ld hl, Coord
-	ld de, LogOffPCText ; $54ba
-.asm_2146d
-	call PlaceString
-	ld a, $3
-	ld [wMenuWatchedKeys], a ; $cc29
-	ld a, $2
-	ld [wTopMenuItemY], a ; $cc24
-	ld a, $1
-	ld [wTopMenuItemX], a ; $cc25
-	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
-	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ret
-
-SomeonesPCText: ; 2148b (8:548b)
-	db "SOMEONE's PC@"
-
-BillsPCText: ; 21497 (8:5497)
-	db "BILL's PC@"
-
-PlayersPCText: ; 214a0 (8:54a0)
-	db "'s PC@"
-
-OaksPCText: ; 214a5 (8:54a5)
-	db "PROF.OAK's PC@"
-
-PKMNLeaguePCText: ; 214b2 (8:54b2)
-	db $4a,"LEAGUE@"
-
-LogOffPCText: ; 214ba (8:54ba)
-	db "LOG OFF@"
-
-Func_214c2: ; 214c2 (8:54c2)
-BillsPC_: ; 0x214c2
-	ld hl, $d730
-	set 6, [hl]
-	xor a
-	ld [$ccd3], a
-	inc a               ; MONSTER_NAME
-	ld [W_LISTTYPE], a
-	call LoadHpBarAndStatusTilePatterns
-	ld a, [wListScrollOffset] ; $cc36
-	push af
-	ld a, [wFlags_0xcd60]
-	bit 3, a
-	jr nz, BillsPCMenu
-	ld a, $99
-	call PlaySound
-	ld hl, SwitchOnText
-	call PrintText
-
-Func_214e8: ; 214e8 (8:54e8)
-BillsPCMenu:
-	ld a, [$ccd3]
-	ld [wCurrentMenuItem], a ; $cc26
-	ld hl, $9780
-	ld de, PokeballTileGraphics ; $697e
-	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
-	call CopyVideoData
-	call LoadScreenTilesFromBuffer2DisableBGTransfer
-	ld hl, wTileMap
-	ld b, $a
-	ld c, $c
-	call TextBoxBorder
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
-	ld de, BillsPCMenuText ; $56e1
-	call PlaceString
-	ld hl, wTopMenuItemY ; $cc24
-	ld a, $2
-	ld [hli], a
-	dec a
-	ld [hli], a
-	inc hl
-	inc hl
-	ld a, $4
-	ld [hli], a
-	ld a, $3
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld hl, wListScrollOffset ; $cc36
-	ld [hli], a
-	ld [hl], a
-	ld [wPlayerMonNumber], a ; $cc2f
-	ld hl, WhatText
-	call PrintText
-	FuncCoord 9, 14 ; $c4c1
-	ld hl, Coord
-	ld b, $2
-	ld c, $9
-	call TextBoxBorder
-	ld a, [$d5a0]
-	and $7f
-	cp $9
-	jr c, .asm_2154f
-	sub $9
-	FuncCoord 17, 16 ; $c4f1
-	ld hl, Coord
-	ld [hl], $f7
-	add $f6
-	jr .asm_21551
-.asm_2154f
-	add $f7
-.asm_21551
-	FuncCoord 18, 16 ; $c4f2
-	ld [Coord], a
-	FuncCoord 10, 16 ; $c4ea
-	ld hl, Coord
-	ld de, BoxNoPCText ; $5713
-	call PlaceString
-	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	call Delay3
-	call HandleMenuInput
-	bit 1, a
-	jp nz, Func_21588 ; b button
-	call PlaceUnfilledArrowMenuCursor
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$ccd3], a
-	and a
-	jp z, Func_21618 ; withdraw
-	cp $1
-	jp z, Func_215ac ; deposit
-	cp $2
-	jp z, Func_21673 ; release
-	cp $3
-	jp z, Func_216b3 ; change box
-
-Func_21588: ; 21588 (8:5588)
-	ld a, [wFlags_0xcd60]
-	bit 3, a
-	jr nz, .asm_2159a
-	call LoadTextBoxTilePatterns
-	ld a, $9a
-	call PlaySound
-	call WaitForSoundToFinish
-.asm_2159a
-	ld hl, wFlags_0xcd60
-	res 5, [hl]
-	call LoadScreenTilesFromBuffer2
-	pop af
-	ld [wListScrollOffset], a ; $cc36
-	ld hl, $d730
-	res 6, [hl]
-	ret
-
-Func_215ac: ; 215ac (8:55ac)
-BillsPCDeposit:
-	ld a, [W_NUMINPARTY] ; $d163
-	dec a
-	jr nz, .asm_215bb
-	ld hl, CantDepositLastMonText
-	call PrintText
-	jp BillsPCMenu
-.asm_215bb
-	ld a, [W_NUMINBOX] ; $da80
-	cp $14
-	jr nz, .asm_215cb
-	ld hl, BoxFullText ; $5802
-	call PrintText
-	jp BillsPCMenu
-.asm_215cb
-	ld hl, W_NUMINPARTY ; $d163
-	call Func_216be
-	jp c, BillsPCMenu
-	call Func_2174b
-	jp nc, BillsPCMenu
-	ld a, [$cf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
-	ld a, $1
-	ld [$cf95], a
-	call Func_3a68
-	xor a
-	ld [$cf95], a
-	call RemovePokemon
-	call WaitForSoundToFinish
-	ld hl, wWhichTrade ; $cd3d
-	ld a, [$d5a0]
-	and $7f
-	cp $9
-	jr c, .asm_2160a
-	sub $9
-	ld [hl], $f7
-	inc hl
-	add $f6
-	jr .asm_2160c
-.asm_2160a
-	add $f7
-.asm_2160c
-	ld [hli], a
-	ld [hl], $50
-	ld hl, MonWasStoredText ; $57f8
-	call PrintText
-	jp BillsPCMenu
-
-Func_21618: ; 21618 (8:5618)
-	ld a, [W_NUMINBOX] ; $da80
-	and a
-	jr nz, .asm_21627
-	ld hl, NoMonText ; $580c
-	call PrintText
-	jp Func_214e8
-.asm_21627
-	ld a, [W_NUMINPARTY] ; $d163
-	cp $6
-	jr nz, .asm_21637
-	ld hl, CantTakeMonText ; $5811
-	call PrintText
-	jp Func_214e8
-.asm_21637
-	ld hl, W_NUMINBOX ; $da80
-	call Func_216be
-	jp c, Func_214e8
-	call Func_2174b
-	jp nc, Func_214e8
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_BOXMON1NAME
-	call GetPartyMonName
-	ld a, [$cf91]
-	call GetCryData
-	call PlaySoundWaitForCurrent
-	xor a
-	ld [$cf95], a
-	call Func_3a68
-	ld a, $1
-	ld [$cf95], a
-	call RemovePokemon
-	call WaitForSoundToFinish
-	ld hl, MonIsTakenOutText ; $5807
-	call PrintText
-	jp Func_214e8
-
-Func_21673: ; 21673 (8:5673)
-	ld a, [W_NUMINBOX] ; $da80
-	and a
-	jr nz, .asm_21682
-	ld hl, NoMonText ; $580c
-	call PrintText
-	jp Func_214e8
-.asm_21682
-	ld hl, W_NUMINBOX ; $da80
-	call Func_216be
-	jp c, Func_214e8
-	ld hl, OnceReleasedText ; $581b
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; $cc26
-	and a
-	jr nz, .asm_21682
-	inc a
-	ld [$cf95], a
-	call RemovePokemon
-	call WaitForSoundToFinish
-	ld a, [$cf91]
-	call PlayCry
-	ld hl, MonWasReleasedText ; $5820
-	call PrintText
-	jp Func_214e8
-
-Func_216b3: ; 216b3 (8:56b3)
-	ld b, BANK(Func_738a1)
-	ld hl, Func_738a1
-	call Bankswitch
-	jp Func_214e8
-
-Func_216be: ; 216be (8:56be)
-	ld a, l
-	ld [$cf8b], a
-	ld a, h
-	ld [$cf8c], a
-	xor a
-	ld [$cf93], a
-	ld [wListMenuID], a ; $cf94
-	inc a                ; MONSTER_NAME
-	ld [W_LISTTYPE], a
-	ld a, [$cc2b]
-	ld [wCurrentMenuItem], a ; $cc26
-	call DisplayListMenuID
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$cc2b], a
-	ret
-
-BillsPCMenuText: ; 216e1 (8:56e1)
-	db "WITHDRAW ",$4a,$4e,"DEPOSIT ",$4a,$4e,"RELEASE ",$4a,$4e,"CHANGE BOX",$4e,"SEE YA!@"
-
-BoxNoPCText: ; 21713 (8:5713)
-	db "BOX No.@"
-
-Func_2171b: ; 2171b (8:571b)
-	ld hl, $d173
-	ld bc, $002c
-	jr .asm_21729 ; 0x21721 $6
-	ld hl, $da9e
-	ld bc, $0021
-.asm_21729
-	ld a, [wWhichPokemon]
-	call AddNTimes
-	ld b, $4
-.asm_21731
-	ld a, [hli]
-	push hl
-	push bc
-	ld hl, HMMoveArray ; $5745
-	ld de, $0001
-	call IsInArray
-	pop bc
-	pop hl
-	ret c
-	dec b
-	jr nz, .asm_21731 ; 0x21741 $ee
-	and a
-	ret
-
-HMMoveArray: ; 21745 (8:5745)
-	db CUT
-	db FLY
-	db SURF
-	db STRENGTH
-	db FLASH
-	db $ff
-
-Func_2174b: ; 2174b (8:574b)
-	FuncCoord 9, 10 ; $c471
-	ld hl, Coord
-	ld b, $6
-	ld c, $9
-	call TextBoxBorder
-	ld a, [$ccd3]
-	and a
-	ld de, DepositPCText ; $57cb
-	jr nz, .asm_21761
-	ld de, WithdrawPCText ; $57d3
-.asm_21761
-	FuncCoord 11, 12 ; $c49b
-	ld hl, Coord
-	call PlaceString
-	FuncCoord 11, 14 ; $c4c3
-	ld hl, Coord
-	ld de, StatsCancelPCText ; $57dc
-	call PlaceString
-	ld hl, wTopMenuItemY ; $cc24
-	ld a, $c
-	ld [hli], a
-	ld a, $a
-	ld [hli], a
-	xor a
-	ld [hli], a
-	inc hl
-	ld a, $2
-	ld [hli], a
-	ld a, $3
-	ld [hli], a
-	xor a
-	ld [hl], a
-	ld hl, wListScrollOffset ; $cc36
-	ld [hli], a
-	ld [hl], a
-	ld [wPlayerMonNumber], a ; $cc2f
-	ld [$cc2b], a
-.asm_2178f
-	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_2179f
-	ld a, [wCurrentMenuItem] ; $cc26
-	and a
-	jr z, .asm_217a1
-	dec a
-	jr z, .asm_217a3
-.asm_2179f
-	and a
-	ret
-.asm_217a1
-	scf
-	ret
-.asm_217a3
-	call SaveScreenTilesToBuffer1
-	ld a, [$ccd3]
-	and a
-	ld a, $0
-	jr nz, .asm_217b0
-	ld a, $2
-.asm_217b0
-	ld [$cc49], a
-	ld a, $36
-	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
-	ld a, $37
-	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
-	call LoadScreenTilesFromBuffer1
-	call ReloadTilesetTilePatterns
-	call GoPAL_SET_CF1C
-	call LoadGBPal
-	jr .asm_2178f
-
-DepositPCText: ; 217cb (8:57cb)
-	db "DEPOSIT@"
-
-WithdrawPCText: ; 217d3 (8:57d3)
-	db "WITHDRAW@"
-
-StatsCancelPCText: ; 217dc (8:57dc)
-	db "STATS",$4e,"CANCEL@"
-
-SwitchOnText: ; 0x217e9
-	TX_FAR _SwitchOnText
-	db "@"
-
-WhatText: ; 0x217ee
-	TX_FAR _WhatText
-	db "@"
-
-DepositWhichMonText: ; 0x217f3
-	TX_FAR _DepositWhichMonText
-	db "@"
-
-MonWasStoredText: ; 0x217f8
-	TX_FAR _MonWasStoredText
-	db "@"
-
-CantDepositLastMonText: ; 0x217fd
-	TX_FAR _CantDepositLastMonText
-	db "@"
-
-BoxFullText: ; 0x21802
-	TX_FAR _BoxFullText
-	db "@"
-
-MonIsTakenOutText: ; 0x21807
-	TX_FAR _MonIsTakenOutText
-	db "@"
-
-NoMonText: ; 0x2180c
-	TX_FAR _NoMonText
-	db "@"
-
-CantTakeMonText: ; 0x21811
-	TX_FAR _CantTakeMonText
-	db "@"
-
-ReleaseWhichMonText: ; 0x21816
-	TX_FAR _ReleaseWhichMonText
-	db "@"
-
-OnceReleasedText: ; 0x2181b
-	TX_FAR _OnceReleasedText
-	db "@"
-
-MonWasReleasedText: ; 0x21820
-	TX_FAR _MonWasReleasedText
-	db "@"
-
-Func_21825: ; 5824 (8:5825)
-	ld a, [$ff00+$aa]
-	cp $1
-	ret z
-	ld a, [$c109]
-	cp $c
-	ret nz
-	ld a, [W_CURMAP]
-	cp $ef
-	ld a, $2
-	jr z, .asm_2183a
-	inc a
-.asm_2183a
-	ld [$d12b], a
-	call EnableAutoTextBoxDrawing
-	ld a, $22
-	jp Func_3ef5
-
-Func_21845: ; 5845 (8:5845)
-	ld a, [$ff00+$aa]
-	cp $2
-	ret z
-	ld a, [$c109]
-	cp $8
-	ret nz
-	ld a, [W_CURMAP]
-	cp $ef
-	ld a, $2
-	jr z, .asm_2185a
-	inc a
-.asm_2185a
-	ld [$d12b], a
-	call EnableAutoTextBoxDrawing
-	ld a, $22
-	jp Func_3ef5
-
-UnnamedText_21865: ; 21865 (8:5865)
-	TX_FAR _UnnamedText_21865
-	db "@"
-
-	ld a, [$c109]
-	cp $4
-	ret nz
-	call EnableAutoTextBoxDrawing
-	ld a, $23
-	jp Func_3ef5
-
-Unknown_21878: ; 21878 (8:5878)
-	db $FD
-
-Func_21879: ; 21879 (8:5879)
-	ld c, CH0
-.loop
-	ld b, $0
-	ld hl, $c026
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .nextChannel
-	ld a, c
-	cp CH4
-	jr nc, .applyAffects ; if sfx channel
-	ld a, [$c002]
-	and a
-	jr z, .applyAffects
-	bit 7, a
-	jr nz, .nextChannel
-	set 7, a
-	ld [$c002], a
-	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-	jr .nextChannel
-.applyAffects
-	call Music8_ApplyMusicAffects
-.nextChannel
-	ld a, c
-	inc c
-	cp CH7
-	jr nz, .loop
-	ret
-
-; this routine checks flags for music effects currently applied
-; to the channel and calls certain functions based on flags.
-; known flags for $c02e:
-;	1: call has been used
-;	3: a toggle used only by this routine for vibrato
-;	4: pitchbend flag
-;	6: dutycycle flag
-Music8_ApplyMusicAffects: ; 218ae (8:58ae)
-	ld b, $0
-	ld hl, $c0b6 ; delay unitl next note
-	add hl, bc
-	ld a, [hl]
-	cp $1 ; if the delay is 1, play next note
-	jp z, Music8_PlayNextNote
-	dec a ; otherwise, decrease the delay timer
-	ld [hl], a
-	ld a, c
-	cp CH4
-	jr nc, .startChecks ; if a sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .startChecks
-	ret
-.startChecks
-	ld hl, $c02e
-	add hl, bc
-	bit 6, [hl] ; dutycycle
-	jr z, .checkForExecuteMusic
-	call Music8_ApplyDutyCycle
-.checkForExecuteMusic
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, .checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr nz, .disablePitchBendVibrato
-.checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl] ; pitchbend
-	jr z, .checkVibratoDelay
-	jp Music8_ApplyPitchBend
-.checkVibratoDelay
-	ld hl, $c04e ; vibrato delay
-	add hl, bc
-	ld a, [hl]
-	and a ; check if delay is over
-	jr z, .checkForVibrato
-	dec [hl] ; otherwise, dec delay
-.disablePitchBendVibrato
-	ret
-.checkForVibrato
-	ld hl, $c056 ; vibrato rate
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .vibrato
-	ret ; no vibrato
-.vibrato
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	ld a, [hl]
-	and $f
-	and a
-	jr z, .vibratoAlreadyDone
-	dec [hl] ; apply vibrato pitch change
-	ret
-.vibratoAlreadyDone
-	ld a, [hl]
-	swap [hl]
-	or [hl]
-	ld [hl], a ; reset the vibrato value and start again
-	ld hl, $c066
-	add hl, bc
-	ld e, [hl] ; get note pitch
-	ld hl, $c02e
-	add hl, bc
-	bit 3, [hl] ; this is the only code that sets/resets bit three so
-	jr z, .unset ; it continuously alternates which path it takes
-	res 3, [hl]
-	ld a, d
-	and $f
-	ld d, a
-	ld a, e
-	sub d
-	jr nc, .noCarry
-	ld a, $0
-.noCarry
-	jr .done
-.unset
-	set 3, [hl]
-	ld a, d
-	and $f0
-	swap a
-	add e
-	jr nc, .done
-	ld a, $ff
-.done
-	ld d, a
-	ld b, $3
-	call Func_21ff7
-	ld [hl], d
-	ret
-
-; this routine executes all music commands that take up no time,
-; like tempo changes, duty changes etc. and doesn't return
-; until the first note is reached
-Music8_PlayNextNote: ; 21946 (8:5946)
-	ld hl, $c06e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	ld a, c
-	cp CH4
-	jr nz, .beginChecks
-	ld a, [$d083]
-	bit 7, a
-	ret nz
-.beginChecks
-	call Music8_endchannel
-	ret
-
-Music8_endchannel: ; 21967 (8:5967)
-	call Music8_GetNextMusicByte
-	ld d, a
-	cp $ff ; is this command an endchannel?
-	jp nz, Music8_callchannel ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	bit 1, [hl]
-	jr nz, .returnFromCall
-	ld a, c
-	cp CH3
-	jr nc, .noiseOrSfxChannel
-	jr .asm_219c0
-.noiseOrSfxChannel
-	res 2, [hl]
-	ld hl, $c036
-	add hl, bc
-	res 0, [hl]
-	cp CH6
-	jr nz, .notSfxChannel3
-	ld a, $0
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-.notSfxChannel3
-	jr nz, .asm_219a3
-	ld a, [$c003]
-	and a
-	jr z, .asm_219a3
-	xor a
-	ld [$c003], a
-	jr .asm_219c0
-.asm_219a3
-	jr .asm_219c9
-.returnFromCall
-	res 1, [hl]
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl ; store current channel address
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hl], a ; loads channel address to return to
-	jp Music8_endchannel
-.asm_219c0
-	ld hl, Unknown_222de
-	add hl, bc
-	ld a, [$FF00+$25]
-	and [hl]
-	ld [$FF00+$25], a
-.asm_219c9
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_219d2
-	jr .asm_219ef
-.asm_219d2
-	ld a, [$c02a]
-	cp $86
-	jr z, .asm_219ef
-	jr c, .asm_219dd
-	jr .asm_219ef
-.asm_219dd
-	ld a, c
-	cp CH4
-	jr z, .asm_219e6
-	call Func_21e6d
-	ret c
-.asm_219e6
-	ld a, [$c005]
-	ld [$FF00+$24], a
-	xor a
-	ld [$c005], a
-.asm_219ef
-	ld hl, $c026
-	add hl, bc
-	ld [hl], b
-	ret
-
-Music8_callchannel: ; 219f5 (8:59f5)
-	cp $fd ; is this command a callchannel?
-	jp nz, Music8_loopchannel ; no
-	call Music8_GetNextMusicByte ; yes
-	push af
-	call Music8_GetNextMusicByte
-	ld d, a
-	pop af
-	ld e, a
-	push de ; store pointer
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hld]
-	ld [de], a ; copy current channel address
-	pop de
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite current address with pointer
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 1, [hl] ; set the call flag
-	jp Music8_endchannel
-
-Music8_loopchannel: ; 21a2a (8:5a2a)
-	cp $fe ; is this command a loopchannel?
-	jp nz, Music8_notetype ; no
-	call Music8_GetNextMusicByte ; yes
-	ld e, a
-	and a
-	jr z, .infiniteLoop
-	ld b, $0
-	ld hl, $c0be
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .loopAgain
-	ld a, $1 ; if no more loops to make,
-	ld [hl], a
-	call Music8_GetNextMusicByte ; skip pointer
-	call Music8_GetNextMusicByte
-	jp Music8_endchannel
-.loopAgain ; inc loop count
-	inc a
-	ld [hl], a
-	; fall through
-.infiniteLoop ; overwrite current address with pointer
-	call Music8_GetNextMusicByte
-	push af
-	call Music8_GetNextMusicByte
-	ld b, a
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	pop af
-	ld [hli], a
-	ld [hl], b
-	jp Music8_endchannel
-
-Music8_notetype: ; 21a65 (8:5a65)
-	and $f0
-	cp $d0 ; is this command a notetype?
-	jp nz, Music8_togglecall ; no
-	ld a, d ; yes
-	and $f
-	ld b, $0
-	ld hl, $c0c6
-	add hl, bc
-	ld [hl], a ; store low nibble as speed
-	ld a, c
-	cp CH3
-	jr z, .noiseChannel ; noise channel has 0 params
-	call Music8_GetNextMusicByte
-	ld d, a
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notChannel3
-	ld hl, $c0e7
-	jr .sfxChannel3
-.musicChannel3
-	ld hl, $c0e6
-.sfxChannel3
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble of param as duty
-	ld a, d
-	and $30
-	sla a
-	ld d, a
-	; fall through
-
-	; if channel 3, store high nibble as volume
-	; else, store volume (high nibble) and fade (low nibble)
-.notChannel3
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld [hl], d
-.noiseChannel
-	jp Music8_endchannel
-
-Music8_togglecall: ; 21aa4 (8:5aa4)
-	ld a, d
-	cp $e8 ; is this command an togglecall?
-	jr nz, Music8_vibrato ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	ld a, [hl]
-	xor $1
-	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
-	jp Music8_endchannel
-
-Music8_vibrato: ; 21ab6 (8:5ab6)
-	cp $ea ; is this command a vibrato?
-	jr nz, Music8_pitchbend ; no
-	call Music8_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a ; store delay 
-	ld hl, $c06e
-	add hl, bc
-	ld [hl], a ; store delay 
-	call Music8_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, $0
-	ld hl, $c056
-	add hl, bc
-	srl a
-	ld e, a
-	adc b
-	swap a
-	or e
-	ld [hl], a ; store rate as both high and low nibbles
-	ld a, d
-	and $f
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	swap a
-	or d
-	ld [hl], a ; store depth as both high and low nibbles
-	jp Music8_endchannel
-
-Music8_pitchbend: ; 21aee (8:5aee)
-	cp $eb ; is this command a pitchbend?
-	jr nz, Music8_duty ; no
-	call Music8_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c076
-	add hl, bc
-	ld [hl], a ; store first param
-	call Music8_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	call Func_22017
-	ld b, $0
-	ld hl, $c0a6
-	add hl, bc
-	ld [hl], d ; store unknown part of second param
-	ld hl, $c0ae
-	add hl, bc
-	ld [hl], e ; store unknown part of second param
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 4, [hl] ; set pitchbend flag
-	call Music8_GetNextMusicByte
-	ld d, a
-	jp Music8_notelength
-
-Music8_duty: ; 21b26 (8:5b26)
-	cp $ec ; is this command a duty?
-	jr nz, Music8_tempo ; no
-	call Music8_GetNextMusicByte ; yes
-	rrca
-	rrca
-	and $c0
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store duty
-	jp Music8_endchannel
-
-Music8_tempo: ; 21b3b (8:5b3b)
-	cp $ed ; is this command a tempo?
-	jr nz, Music8_unknownmusic0xee ; no
-	ld a, c ; yes
-	cp CH4
-	jr nc, .sfxChannel
-	call Music8_GetNextMusicByte
-	ld [$c0e8], a ; store first param
-	call Music8_GetNextMusicByte
-	ld [$c0e9], a ; store second param
-	xor a
-	ld [$c0ce], a ; clear RAM
-	ld [$c0cf], a
-	ld [$c0d0], a
-	ld [$c0d1], a
-	jr .musicChannelDone
-.sfxChannel
-	call Music8_GetNextMusicByte
-	ld [$c0ea], a ; store first param
-	call Music8_GetNextMusicByte
-	ld [$c0eb], a ; store second param
-	xor a
-	ld [$c0d2], a ; clear RAM
-	ld [$c0d3], a
-	ld [$c0d4], a
-	ld [$c0d5], a
-.musicChannelDone
-	jp Music8_endchannel
-
-Music8_unknownmusic0xee: ; 21b7b (8:5b7b)
-	cp $ee ; is this command an unknownmusic0xee?
-	jr nz, Music8_unknownmusic0xef ; no
-	call Music8_GetNextMusicByte ; yes
-	ld [$c004], a ; store first param
-	jp Music8_endchannel
-
-; this appears to never be used
-Music8_unknownmusic0xef: ; 21b88 (8:5b88)
-	cp $ef ; is this command an unknownmusic0xef?
-	jr nz, Music8_dutycycle ; no
-	call Music8_GetNextMusicByte ; yes
-	push bc
-	call Func_22035
-	pop bc
-	ld a, [$c003]
-	and a
-	jr nz, .skip
-	ld a, [$c02d]
-	ld [$c003], a
-	xor a
-	ld [$c02d], a
-.skip
-	jp Music8_endchannel
-
-Music8_dutycycle: ; 21ba7 (8:5ba7)
-	cp $fc ; is this command a dutycycle?
-	jr nz, Music8_stereopanning ; no
-	call Music8_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld [hl], a ; store full cycle
-	and $c0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store first duty
-	ld hl, $c02e
-	add hl, bc
-	set 6, [hl] ; set dutycycle flag
-	jp Music8_endchannel
-
-Music8_stereopanning: ; 21bc5 (8:5bc5)
-	cp $f0 ; is this command a stereopanning?
-	jr nz, Music8_executemusic ; no
-	call Music8_GetNextMusicByte ; yes
-	ld [$FF00+$24], a
-	jp Music8_endchannel
-
-Music8_executemusic: ; 21bd1 (8:5bd1)
-	cp $f8 ; is this command an executemusic?
-	jr nz, Music8_octave ; no
-	ld b, $0 ; yes
-	ld hl, $c036
-	add hl, bc
-	set 0, [hl]
-	jp Music8_endchannel
-
-Music8_octave: ; 21be0 (8:5be0)
-	and $f0
-	cp $e0 ; is this command an octave?
-	jr nz, Music8_unknownsfx0x20 ; no
-	ld hl, $c0d6 ; yes
-	ld b, $0
-	add hl, bc
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble as octave
-	jp Music8_endchannel
-
-Music8_unknownsfx0x20: ; 21bf3
-	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, Music8_unknownsfx0x10 ; no
-	ld a, c
-	cp CH3 ; is this a noise or sfx channel?
-	jr c, Music8_unknownsfx0x10 ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music8_unknownsfx0x10 ; no
-	call Music8_notelength
-	ld d, a
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-	ld b, $1
-	call Func_21ff7
-	ld [hl], d
-	call Music8_GetNextMusicByte
-	ld d, a
-	ld b, $2
-	call Func_21ff7
-	ld [hl], d
-	call Music8_GetNextMusicByte
-	ld e, a
-	ld a, c
-	cp CH7
-	ld a, $0
-	jr z, .sfxNoiseChannel ; only two params for noise channel
-	push de
-	call Music8_GetNextMusicByte
-	pop de
-.sfxNoiseChannel
-	ld d, a
-	push de
-	call Func_21daa
-	call Func_21d79
-	pop de
-	call Func_21dcc
-	ret
-
-Music8_unknownsfx0x10: ; 21c40 (8:5c40)
-	ld a, c
-	cp CH4
-	jr c, Music8_note ; if not a sfx
-	ld a, d
-	cp $10 ; is this command a unknownsfx0x10?
-	jr nz, Music8_note ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music8_note ; no
-	call Music8_GetNextMusicByte ; yes
-	ld [$FF00+$10], a
-	jp Music8_endchannel
-
-Music8_note: ; 21c5c (8:5c5c)
-	ld a, c
-	cp CH3
-	jr nz, Music8_notelength ; if not noise channel
-	ld a, d
-	and $f0
-	cp $b0 ; is this command a dnote?
-	jr z, Music8_dnote ; yes
-	jr nc, Music8_notelength ; no
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	ld d, a
-	ld a, b
-	push de
-	push bc
-	jr asm_21c7e
-
-Music8_dnote: ; 21c76 (8:5c76)
-	ld a, d
-	and $f
-	push af
-	push bc
-	call Music8_GetNextMusicByte ; get dnote instrument
-asm_21c7e
-	ld d, a
-	ld a, [$c003]
-	and a
-	jr nz, .asm_21c89
-	ld a, d
-	call Func_22035
-.asm_21c89
-	pop bc
-	pop de
-
-Music8_notelength: ; 21c8b (8:5c8b)
-	ld a, d
-	push af
-	and $f
-	inc a
-	ld b, $0
-	ld e, a ; store note length (in 16ths)
-	ld d, b
-	ld hl, $c0c6
-	add hl, bc
-	ld a, [hl]
-	ld l, b
-	call Func_22006
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld a, [$c0e8]
-	ld d, a
-	ld a, [$c0e9]
-	ld e, a
-	jr .skip
-.sfxChannel
-	ld d, $1
-	ld e, $0
-	cp CH7
-	jr z, .skip ; if noise channel
-	call Func_21e2f
-	ld a, [$c0ea]
-	ld d, a
-	ld a, [$c0eb]
-	ld e, a
-.skip
-	ld a, l
-	ld b, $0
-	ld hl, $c0ce
-	add hl, bc
-	ld l, [hl]
-	call Func_22006
-	ld e, l
-	ld d, h
-	ld hl, $c0ce
-	add hl, bc
-	ld [hl], e
-	ld a, d
-	ld hl, $c0b6
-	add hl, bc
-	ld [hl], a
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music8_notepitch
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr z, Music8_notepitch
-	pop hl
-	ret
-
-Music8_notepitch: ; 21ce9 (8:5ce9)
-	pop af
-	and $f0
-	cp $c0 ; compare to rest
-	jr nz, .notRest
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .done
-	; fall through
-.sfxChannel
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notSfxChannel3
-.musicChannel3
-	ld b, $0
-	ld hl, Unknown_222de
-	add hl, bc
-	ld a, [$FF00+$25]
-	and [hl]
-	ld [$FF00+$25], a
-	jr .done
-.notSfxChannel3
-	ld b, $2
-	call Func_21ff7
-	ld a, $8
-	ld [hli], a
-	inc hl
-	ld a, $80
-	ld [hl], a
-.done
-	ret
-.notRest
-	swap a
-	ld b, $0
-	ld hl, $c0d6
-	add hl, bc
-	ld b, [hl]
-	call Func_22017
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl]
-	jr z, .asm_21d39
-	call Func_21f4e
-.asm_21d39
-	push de
-	ld a, c
-	cp CH4
-	jr nc, .skip ; if sfx channel
-	ld hl, $c02a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	and a
-	jr nz, .asm_21d4c
-	jr .skip
-.asm_21d4c
-	pop de
-	ret
-.skip
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld d, [hl]
-	ld b, $2
-	call Func_21ff7
-	ld [hl], d
-	call Func_21daa
-	call Func_21d79
-	pop de
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_21d70
-	inc e
-	jr nc, .asm_21d70
-	inc d
-.asm_21d70
-	ld hl, $c066
-	add hl, bc
-	ld [hl], e
-	call Func_21dcc
-	ret
-
-Func_21d79: ; 21d79 (8:5d79)
-	ld b, $0
-	ld hl, Unknown_222e6
-	add hl, bc
-	ld a, [$FF00+$25]
-	or [hl]
-	ld d, a
-	ld a, c
-	cp CH7
-	jr z, .sfxNoiseChannel
-	cp CH4
-	jr nc, .skip ; if sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .skip
-.sfxNoiseChannel
-	ld a, [$c004]
-	ld hl, Unknown_222e6
-	add hl, bc
-	and [hl]
-	ld d, a
-	ld a, [$FF00+$25]
-	ld hl, Unknown_222de
-	add hl, bc
-	and [hl]
-	or d
-	ld d, a
-.skip
-	ld a, d
-	ld [$FF00+$25], a
-	ret
-
-Func_21daa: ; 21daa (8:5daa)
-	ld b, $0
-	ld hl, $c0b6
-	add hl, bc
-	ld d, [hl]
-	ld a, c
-	cp CH2
-	jr z, .channel3 ; if music channel 3
-	cp CH6
-	jr z, .channel3 ; if sfx channel 3
-	ld a, d
-	and $3f
-	ld d, a
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-.channel3
-	ld b, $1
-	call Func_21ff7
-	ld [hl], d
-	ret
-
-Func_21dcc: ; 21dcc (8:5dcc)
-	ld a, c
-	cp CH2
-	jr z, .channel3
-	cp CH6
-	jr nz, .notSfxChannel3
-	; fall through
-.channel3
-	push de
-	ld de, $c0e6
-	cp CH2
-	jr z, .musicChannel3
-	ld de, $c0e7
-.musicChannel3
-	ld a, [de]
-	add a
-	ld d, $0
-	ld e, a
-	ld hl, Music8_Channel3DutyPointers
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld hl, $ff30
-	ld b, $f
-	ld a, $0
-	ld [$FF00+$1a], a
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, b
-	dec b
-	and a
-	jr nz, .loop
-	ld a, $80
-	ld [$FF00+$1a], a
-	pop de
-.notSfxChannel3
-	ld a, d
-	or $80
-	and $c7
-	ld d, a
-	ld b, $3
-	call Func_21ff7
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ld a, c
-	cp CH4
-	jr c, .musicChannel
-	call Func_21e56
-.musicChannel
-	ret
-
-Func_21e19: ; 21e19 (8:5e19)
-	ld a, c
-	cp CH4
-	jr nz, .asm_21e2e
-	ld a, [$d083]
-	bit 7, a
-	jr z, .asm_21e2e
-	xor a
-	ld [$c0f1], a
-	ld a, $80
-	ld [$c0f2], a
-.asm_21e2e
-	ret
-
-Func_21e2f: ; 21e2f (8:5e2f)
-	call Func_21e8b
-	jr c, .asm_21e39
-	call Func_21e9f
-	jr nc, .asm_21e4c
-.asm_21e39
-	ld d, $0
-	ld a, [$c0f2]
-	add $80
-	jr nc, .asm_21e43
-	inc d
-.asm_21e43
-	ld [$c0eb], a
-	ld a, d
-	ld [$c0ea], a
-	jr .asm_21e55
-.asm_21e4c
-	xor a
-	ld [$c0eb], a
-	ld a, $1
-	ld [$c0ea], a
-.asm_21e55
-	ret
-
-Func_21e56: ; 21e56 (8:5e56)
-	call Func_21e8b
-	jr c, .asm_21e60
-	call Func_21e9f
-	jr nc, .asm_21e6c
-.asm_21e60
-	ld a, [$c0f1]
-	add e
-	jr nc, .asm_21e67
-	inc d
-.asm_21e67
-	dec hl
-	ld e, a
-	ld [hl], e
-	inc hl
-	ld [hl], d
-.asm_21e6c
-	ret
-
-Func_21e6d: ; 21e6d (8:5e6d)
-	call Func_21e8b
-	jr nc, .asm_21e88
-	ld hl, $c006
-	ld e, c
-	ld d, $0
-	sla e
-	rl d
-	add hl, de
-	ld a, [hl]
-	sub $1
-	ld [hl], a
-	inc hl
-	ld a, [hl]
-	sbc $0
-	ld [hl], a
-	scf
-	ret
-.asm_21e88
-	scf
-	ccf
-	ret
-
-Func_21e8b: ; 21e8b (8:5e8b)
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_21e94
-	jr .asm_21e9a
-.asm_21e94
-	cp $86
-	jr z, .asm_21e9a
-	jr c, .asm_21e9d
-.asm_21e9a
-	scf
-	ccf
-	ret
-.asm_21e9d
-	scf
-	ret
-
-Func_21e9f: ; 21e9f (8:5e9f)
-	ld a, [$c02d]
-	ld b, a
-	ld a, [$c02a]
-	or b
-	cp $9d
-	jr nc, .asm_21ead
-	jr .asm_21eb3
-.asm_21ead
-	cp $ea
-	jr z, .asm_21eb3
-	jr c, .asm_21eb6
-.asm_21eb3
-	scf
-	ccf
-	ret
-.asm_21eb6
-	scf
-	ret
-
-Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
-	ld hl, $c02e
-	add hl, bc
-	bit 5, [hl]
-	jp nz, .asm_21eff
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld l, [hl]
-	ld h, b
-	add hl, de
-	ld d, h
-	ld e, l
-	ld hl, $c08e
-	add hl, bc
-	push hl
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	add [hl]
-	ld [hl], a
-	ld a, $0
-	adc e
-	ld e, a
-	ld a, $0
-	adc d
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jp c, .asm_21f45
-	jr nz, .asm_21f32
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jp c, .asm_21f45
-	jr .asm_21f32
-.asm_21eff
-	ld hl, $c09e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld e, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	add a
-	ld [hl], a
-	ld a, e
-	sbc b
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, d
-	cp [hl]
-	jr c, .asm_21f45
-	jr nz, .asm_21f32
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	cp [hl]
-	jr c, .asm_21f45
-.asm_21f32
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld b, $3
-	call Func_21ff7
-	ld a, e
-	ld [hli], a
-	ld [hl], d
-	ret
-.asm_21f45
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	ret
-
-Func_21f4e: ; 21f4e (8:5f4e)
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c0b6
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c076
-	add hl, bc
-	sub [hl]
-	jr nc, .asm_21f66
-	ld a, $1
-.asm_21f66
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	sub [hl]
-	ld e, a
-	ld a, d
-	sbc b
-	ld hl, $c0a6
-	add hl, bc
-	sub [hl]
-	jr c, .asm_21f82
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 5, [hl]
-	jr .asm_21fa5
-.asm_21f82
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	sub d
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	res 5, [hl]
-.asm_21fa5
-	ld hl, $c076
-	add hl, bc
-.asm_21fa9
-	inc b
-	ld a, e
-	sub [hl]
-	ld e, a
-	jr nc, .asm_21fa9
-	ld a, d
-	and a
-	jr z, .asm_21fb7
-	dec a
-	ld d, a
-	jr .asm_21fa9
-.asm_21fb7
-	ld a, e
-	add [hl]
-	ld d, b
-	ld b, $0
-	ld hl, $c07e
-	add hl, bc
-	ld [hl], d
-	ld hl, $c086
-	add hl, bc
-	ld [hl], a
-	ld hl, $c08e
-	add hl, bc
-	ld [hl], a
-	ret
-
-Music8_ApplyDutyCycle: ; 21fcc (8:5fcc)
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld a, [hl]
-	rlca
-	rlca
-	ld [hl], a
-	and $c0
-	ld d, a
-	ld b, $1
-	call Func_21ff7
-	ld a, [hl]
-	and $3f
-	or d
-	ld [hl], a
-	ret
-
-Music8_GetNextMusicByte: ; 21fe4 (8:5fe4)
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld a, [hld]
-	ld d, a
-	ld a, [de] ; get next music command
-	inc de
-	ld [hl], e ; store address of next command
-	inc hl
-	ld [hl], d
-	ret
-
-Func_21ff7: ; 21ff7 (8:5ff7)
-	ld a, c
-	ld hl, Unknown_222d6
-	add l
-	jr nc, .noCarry
-	inc h
-.noCarry
-	ld l, a
-	ld a, [hl]
-	add b
-	ld l, a
-	ld h, $ff
-	ret
-
-Func_22006: ; 22006 (8:6006)
-	ld h, $0
-.loop
-	srl a
-	jr nc, .noCarry
-	add hl, de
-.noCarry
-	sla e
-	rl d
-	and a
-	jr z, .done
-	jr .loop
-.done
-	ret
-
-Func_22017: ; 22017 (8:6017)
-	ld h, $0
-	ld l, a
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, Unknown_222ee
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld a, b
-.loop
-	cp CH7
-	jr z, .done
-	sra d
-	rr e
-	inc a
-	jr .loop
-.done
-	ld a, $8
-	add d
-	ld d, a
-	ret
-
-Func_22035: ; 22035 (8:6035)
-	ld [$c001], a
-	cp $ff
-	jp z, Func_221f3
-	cp $e9
-	jp z, Func_2210d
-	jp c, Func_2210d
-	cp $fe
-	jr z, .asm_2204c
-	jp nc, Func_2210d
-.asm_2204c
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c0e9], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $8
-	ld hl, $c016
-	call FillMusicRAM8
-	ld hl, $c006
-	call FillMusicRAM8
-	ld d, $4
-	ld hl, $c026
-	call FillMusicRAM8
-	ld hl, $c02e
-	call FillMusicRAM8
-	ld hl, $c03e
-	call FillMusicRAM8
-	ld hl, $c046
-	call FillMusicRAM8
-	ld hl, $c04e
-	call FillMusicRAM8
-	ld hl, $c056
-	call FillMusicRAM8
-	ld hl, $c05e
-	call FillMusicRAM8
-	ld hl, $c066
-	call FillMusicRAM8
-	ld hl, $c06e
-	call FillMusicRAM8
-	ld hl, $c036
-	call FillMusicRAM8
-	ld hl, $c076
-	call FillMusicRAM8
-	ld hl, $c07e
-	call FillMusicRAM8
-	ld hl, $c086
-	call FillMusicRAM8
-	ld hl, $c08e
-	call FillMusicRAM8
-	ld hl, $c096
-	call FillMusicRAM8
-	ld hl, $c09e
-	call FillMusicRAM8
-	ld hl, $c0a6
-	call FillMusicRAM8
-	ld hl, $c0ae
-	call FillMusicRAM8
-	ld a, $1
-	ld hl, $c0be
-	call FillMusicRAM8
-	ld hl, $c0b6
-	call FillMusicRAM8
-	ld hl, $c0c6
-	call FillMusicRAM8
-	ld [$c0e8], a
-	ld a, $ff
-	ld [$c004], a
-	xor a
-	ld [$FF00+$24], a
-	ld a, $8
-	ld [$FF00+$10], a
-	ld a, $0
-	ld [$FF00+$25], a
-	xor a
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-	ld a, $77
-	ld [$FF00+$24], a
-	jp Func_2224e
-
-Func_2210d: ; 2210d (8:610d)
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_08
-	add hl, de
-	ld a, h
-	ld [$c0ec], a
-	ld a, l
-	ld [$c0ed], a
-	ld a, [hl]
-	and $c0
-	rlca
-	rlca
-	ld c, a
-.asm_22126
-	ld d, c
-	ld a, c
-	add a
-	add c
-	ld c, a
-	ld b, $0
-	ld a, [$c0ec]
-	ld h, a
-	ld a, [$c0ed]
-	ld l, a
-	add hl, bc
-	ld c, d
-	ld a, [hl]
-	and $f
-	ld e, a
-	ld d, $0
-	ld hl, $c026
-	add hl, de
-	ld a, [hl]
-	and a
-	jr z, .asm_22162
-	ld a, e
-	cp $7
-	jr nz, .asm_22159
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_22152
-	ret
-.asm_22152
-	ld a, [hl]
-	cp $14
-	jr z, .asm_22162
-	jr c, .asm_22162
-.asm_22159
-	ld a, [$c001]
-	cp [hl]
-	jr z, .asm_22162
-	jr c, .asm_22162
-	ret
-.asm_22162
-	xor a
-	push de
-	ld h, d
-	ld l, e
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, $c016
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c006
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	pop de
-	ld hl, $c026
-	add hl, de
-	ld [hl], a
-	ld hl, $c02e
-	add hl, de
-	ld [hl], a
-	ld hl, $c03e
-	add hl, de
-	ld [hl], a
-	ld hl, $c046
-	add hl, de
-	ld [hl], a
-	ld hl, $c04e
-	add hl, de
-	ld [hl], a
-	ld hl, $c056
-	add hl, de
-	ld [hl], a
-	ld hl, $c05e
-	add hl, de
-	ld [hl], a
-	ld hl, $c066
-	add hl, de
-	ld [hl], a
-	ld hl, $c06e
-	add hl, de
-	ld [hl], a
-	ld hl, $c076
-	add hl, de
-	ld [hl], a
-	ld hl, $c07e
-	add hl, de
-	ld [hl], a
-	ld hl, $c086
-	add hl, de
-	ld [hl], a
-	ld hl, $c08e
-	add hl, de
-	ld [hl], a
-	ld hl, $c096
-	add hl, de
-	ld [hl], a
-	ld hl, $c09e
-	add hl, de
-	ld [hl], a
-	ld hl, $c0a6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, de
-	ld [hl], a
-	ld hl, $c036
-	add hl, de
-	ld [hl], a
-	ld a, $1
-	ld hl, $c0be
-	add hl, de
-	ld [hl], a
-	ld hl, $c0b6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0c6
-	add hl, de
-	ld [hl], a
-	ld a, e
-	cp $4
-	jr nz, .asm_221ea
-	ld a, $8
-	ld [$FF00+$10], a
-.asm_221ea
-	ld a, c
-	and a
-	jp z, Func_2224e
-	dec c
-	jp .asm_22126
-
-Func_221f3: ; 221f3 (8:61f3)
-	ld a, $80
-	ld [$FF00+$26], a
-	ld [$FF00+$1a], a
-	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1c], a
-	ld a, $8
-	ld [$FF00+$10], a
-	ld [$FF00+$12], a
-	ld [$FF00+$17], a
-	ld [$FF00+$21], a
-	ld a, $40
-	ld [$FF00+$14], a
-	ld [$FF00+$19], a
-	ld [$FF00+$23], a
-	ld a, $77
-	ld [$FF00+$24], a
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c002], a
-	ld [$c0e9], a
-	ld [$c0eb], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $a0
-	ld hl, $c006
-	call FillMusicRAM8
-	ld a, $1
-	ld d, $18
-	ld hl, $c0b6
-	call FillMusicRAM8
-	ld [$c0e8], a
-	ld [$c0ea], a
-	ld a, $ff
-	ld [$c004], a
-	ret
-
-; fills d bytes at hl with a
-FillMusicRAM8: ; 22248 (8:6248)
-	ld b, d
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
-
-Func_2224e: ; 2224e (8:624e)
-	ld a, [$c001]
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_08
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, $c006
-	ld a, [de] ; get channel number
-	ld b, a
-	rlca
-	rlca
-	and $3
-	ld c, a
-	ld a, b
-	and $f
-	ld b, c
-	inc b
-	inc de
-	ld c, $0
-.asm_22270
-	cp c
-	jr z, .asm_22278
-	inc c
-	inc hl
-	inc hl
-	jr .asm_22270
-.asm_22278
-	push hl
-	push bc
-	push af
-	ld b, $0
-	ld c, a
-	ld hl, $c026
-	add hl, bc
-	ld a, [$c001]
-	ld [hl], a
-	pop af
-	cp $3
-	jr c, .asm_22291
-	ld hl, $c02e
-	add hl, bc
-	set 2, [hl]
-.asm_22291
-	pop bc
-	pop hl
-	ld a, [de] ; get channel pointer
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	inc c
-	dec b
-	ld a, b
-	and a
-	ld a, [de]
-	inc de
-	jr nz, .asm_22270
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_222aa
-	jr .asm_222d4
-.asm_222aa
-	ld a, [$c001]
-	cp $86
-	jr z, .asm_222d4
-	jr c, .asm_222b5
-	jr .asm_222d4
-.asm_222b5
-	ld hl, $c02a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c012 ; sfx noise channel pointer
-	ld de, Noise8_endchannel
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite pointer to point to endchannel
-	ld a, [$c005]
-	and a
-	jr nz, .asm_222d4
-	ld a, [$FF00+$24]
-	ld [$c005], a
-	ld a, $77
-	ld [$FF00+$24], a
-.asm_222d4
-	ret
-
-Noise8_endchannel: ; 222d5 (8:62d5)
-	endchannel
-
-Unknown_222d6: ; 222d6 (8:62d6)
-	db $10, $15, $1A, $1F ; channels 0-3
-	db $10, $15, $1A, $1F ; channels 4-7
-
-Unknown_222de: ; 222de (8:62de)
-	db $EE, $DD, $BB, $77 ; channels 0-3
-	db $EE, $DD, $BB, $77 ; channels 4-7
-
-Unknown_222e6: ; 222e6 (8:62e6)
-	db $11, $22, $44, $88 ; channels 0-3
-	db $11, $22, $44, $88 ; channels 4-7
-
-Unknown_222ee: ; 222ee (8:62ee)
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
-
-Music_PokeFluteInBattle: ; 22306 (8:6306)
-	ld a, (SFX_08_46 - $4000) / 3 ; PokeFlute outside of battle
-	call PlaySoundWaitForCurrent
-	ld hl, $c00e
-	ld de, SFX_08_PokeFlute_Ch1
-	call Music8_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch2
-	call Music8_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch3
-
-Music8_OverwriteChannelPointer: ; 2231d (8:631d)
-	ld a, e
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	ret
-
-INCLUDE "music/sfx/sfx_08_pokeflute.asm"
-INCLUDE "music/sfx/sfx_08_unused2.asm"
-INCLUDE "music/gymleaderbattle.asm"
-INCLUDE "music/trainerbattle.asm"
-INCLUDE "music/wildbattle.asm"
-INCLUDE "music/finalbattle.asm"
-INCLUDE "music/sfx/sfx_08_3a.asm"
-INCLUDE "music/sfx/sfx_08_3b.asm"
-INCLUDE "music/sfx/sfx_08_46.asm"
-INCLUDE "music/defeatedtrainer.asm"
-INCLUDE "music/defeatedwildmon.asm"
-INCLUDE "music/defeatedgymleader.asm"
 
 SECTION "bank9",ROMX,BANK[$9]
 
@@ -48562,9 +43863,9 @@ Func_37395: ; 37395 (d:7395)
 	jp Func_37395
 
 CoinMultiplierSlotMachineText: ; 3745e (d:745e)
-	db "×3",$4e
-	db "×2",$4e
-	db "×1@"
+	db   "×3"
+	next "×2"
+	next "×1@"
 
 OutOfCoinsSlotMachineText: ; 37467 (d:7467)
 	TX_FAR _OutOfCoinsSlotMachineText
@@ -57960,7 +53261,7 @@ Func_3a948: ; 3a948 (e:6948)
 	jp Func_3a8e1
 
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
-PokeballTileGraphics: ; 3a97e (e:697e)
+PokeballTileGraphics:: ; 3a97e (e:697e)
 	INCBIN "gfx/pokeball.2bpp"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
@@ -61446,7 +56747,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $ba
+	ld a,BURN_PSN_ANIM
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
@@ -61467,7 +56768,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	xor a
 	ld [$cc5b], a
-	ld a, $47
+	ld a,ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
 	ld [H_WHOSETURN], a ; $FF00+$f3
@@ -61741,7 +57042,7 @@ FaintEnemyPokemon ; 0x3c567
 	jr .sfxplayed
 .wild_win
 	call Func_3c643
-	ld a, (Music_DefeatedWildMon - $4000) / 3
+	ld a, MUSIC_DEFEATED_WILD_MON
 	call Func_3c6ee
 .sfxplayed
 	ld hl, W_PLAYERMONCURHP ; $d015
@@ -61852,16 +57153,16 @@ Func_3c664: ; 3c664 (f:4664)
 
 TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
-	ld b, (Music_DefeatedGymLeader - $4000) / 3
+	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld a, [W_GYMLEADERNO] ; $d05c
 	and a
 	jr nz, .gymleader
-	ld b, (Music_DefeatedTrainer - $4000) / 3
+	ld b, MUSIC_DEFEATED_TRAINER
 .gymleader
 	ld a, [W_TRAINERCLASS] ; $d031
 	cp SONY3 ; final battle against rival
 	jr nz, .notrival
-	ld b, (Music_DefeatedGymLeader - $4000) / 3
+	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 .notrival
@@ -62676,7 +57977,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	res 5, [hl]
 	ld a, $1
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld a, $c3
+	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	FuncCoord 4, 11 ; $c480
 	ld hl, Coord
@@ -64094,7 +59395,7 @@ asm_3d74b
 .next5
 	xor a
 	ld [$CC5B],a
-	ld a,$A7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3d766
 	ld a,[W_PLAYERMOVEEFFECT]
@@ -64362,7 +59663,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 .next8
 	xor a
 	ld [$CC5B],a
-	ld a,$A7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .next9
 	ld hl,Func_3d80a ; $580a
@@ -66643,7 +61944,7 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 .asm_3e7e6
 	xor a
 	ld [$cc5b], a
-	ld a, $a7
+	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3e7ef: ; 3e7ef (f:67ef)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
@@ -66735,7 +62036,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $bd
+	ld a,SLP_ANIM
 	call PlayMoveAnimation
 	jr .asm_3e8b5
 .asm_3e8af
@@ -66813,7 +62114,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	call PrintText
 	xor a
 	ld [$cc5b], a
-	ld a, $bf
+	ld a,CONF_ANIM
 	call PlayMoveAnimation
 	call GenRandomInBattle
 	cp $80
@@ -66857,7 +62158,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	xor a
 	ld [$cc5b], a
 	ld [H_WHOSETURN], a ; $FF00+$f3
-	ld a, $1
+	ld a, POUND
 	call PlayMoveAnimation
 	ld a, $1
 	ld [H_WHOSETURN], a ; $FF00+$f3
@@ -66897,7 +62198,7 @@ asm_3e9d3: ; 3e9d3 (f:69d3)
 .asm_3e9e7
 	xor a
 	ld [$cc5b], a
-	ld a, $a7
+	ld a, STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .asm_3e9f0
 	ld hl, Func_3e88c ; $688c
@@ -69937,10 +65238,10 @@ PokedexContentsText: ; 402a6 (10:42a6)
 	db "CONTENTS@"
 
 PokedexMenuItemsText: ; 402af (10:42af)
-	db "DATA",$4E
-	db "CRY",$4E
-	db "AREA",$4E
-	db "QUIT@"
+	db   "DATA"
+	next "CRY"
+	next "AREA"
+	next "QUIT@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
@@ -83418,7 +78719,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	call PlaySound
 .asm_50f4e
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $1
 	ld [$ff00+$8c], a
@@ -85138,7 +80439,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
@@ -89874,16 +85175,18 @@ UnnamedText_561bd: ; 561bd (15:61bd)
 
 UnnamedText_561c2: ; 561c2 (15:61c2)
 	TX_FAR _UnnamedText_561c2 ; 0xa06e8
-	db $0B, "@"
+	db $0B
+	db "@"
 
 UnnamedText_561c8: ; 561c8
-	db $51
-	db "つり こそ", $4f
-	db "おとこの ロマン だ!", $51
-	db "へぼいつりざおは", $4f
-	db "コイキングしか つれ なんだが", $4f
-	db "この いいつりざおなら", $4f
-	db "もっと いいもんが つれるんじゃ!", $57
+	para "つり こそ"
+	line "おとこの ロマン だ!"
+
+	para "へぼいつりざおは"
+	line "コイキングしか つれ なんだが"
+	line "この いいつりざおなら"
+	line "もっと いいもんが つれるんじゃ!"
+	done
 
 UnnamedText_56212: ; 56212 (15:6212)
 	TX_FAR _UnnamedText_56212
@@ -90626,7 +85929,11 @@ DiplomaEmptyText:
 	db "@"
 
 DiplomaCongrats:
-	db "Congrats! This",$4e,"diploma certifies",$4e,"that you have",$4e,"completed your",$4e,"#DEX.@"
+	db   "Congrats! This"
+	next "diploma certifies"
+	next "that you have"
+	next "completed your"
+	next "#DEX.@"
 
 DiplomaGameFreak:
 	db "GAME FREAK@"
@@ -95688,7 +90995,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	dec hl
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
-	ld a, (Music_JigglypuffSong - $4000) / 3
+	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
 .asm_5c5d1
@@ -98625,7 +93932,10 @@ LinkCableHelpText2: ; 5dca3 (17:5ca3)
 	db "@"
 
 HowToLinkText: ; 5dca8 (17:5ca8)
-	db "HOW TO LINK",$4e,"COLOSSEUM",$4e,"TRADE CENTER",$4e,"STOP READING@"
+	db   "HOW TO LINK"
+	next "COLOSSEUM"
+	next "TRADE CENTER"
+	next "STOP READING@"
 
 LinkCableInfoTexts: ; 5dcd8 (17:5cd8)
 	dw LinkCableInfoText1
@@ -98735,14 +94045,14 @@ ViridianSchoolBlackboardText2: ; 5dda7 (17:5da7)
 	db "@"
 
 StatusAilmentText1: ; 5ddac (17:5dac)
-	db " SLP",$4e
-	db " PSN",$4e
-	db " PAR@"
+	db   " SLP"
+	next " PSN"
+	next " PAR@"
 
 StatusAilmentText2: ; 5ddbb (17:5dbb)
-	db " BRN",$4e
-	db " FRZ",$4e
-	db " QUIT@@"
+	db   " BRN"
+	next " FRZ"
+	next " QUIT@@"
 
 ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
 	dw ViridianBlackboardSleepText
@@ -99046,7 +94356,7 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld hl, $d764
 	res 6, [hl]
@@ -100730,7 +96040,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
-	ld a, (Music_MeetRival - $4000) / 3
+	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, [$cd3d]
 	ld [$ff00+$db], a
@@ -103139,7 +98449,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	ld a, $90
 	ld [$FF00+$b0], a
 	ld c, BANK(Music_HallOfFame)
-	ld a, (Music_HallOfFame - $4000) / 3
+	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
 	ld hl, W_PARTYMON1 ; $d164
 	ld c, $ff
@@ -103290,7 +98600,9 @@ Func_702f0: ; 702f0 (1c:42f0)
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)
-	db "LEVEL/",$4e,"TYPE1/",$4e,"TYPE2/@"
+	db   "LEVEL/"
+	next "TYPE1/"
+	next "TYPE2/@"
 
 Func_7033e: ; 7033e (1c:433e)
 	ld de, Unknown_72ede ; $6ede
@@ -108117,7 +103429,7 @@ PointerTable_73895: ; 73895 (1c:7895)
 	dw $B188
 	dw $B5EA
 
-Func_738a1: ; 738a1 (1c:78a1)
+Func_738a1:: ; 738a1 (1c:78a1)
 	ld hl, UnnamedText_73909 ; $7909
 	call PrintText
 	call YesNoChoice
@@ -108274,18 +103586,18 @@ UnnamedText_739d4: ; 739d4 (1c:79d4)
 	db "@"
 
 BoxNames: ; 739d9 (1c:79d9)
-	db "BOX 1",$4e
-	db "BOX 2",$4e
-	db "BOX 3",$4e
-	db "BOX 4",$4e
-	db "BOX 5",$4e
-	db "BOX 6",$4e
-	db "BOX 7",$4e
-	db "BOX 8",$4e
-	db "BOX 9",$4e
-	db "BOX10",$4e
-	db "BOX11",$4e
-	db "BOX12@"
+	db   "BOX 1"
+	next "BOX 2"
+	next "BOX 3"
+	next "BOX 4"
+	next "BOX 5"
+	next "BOX 6"
+	next "BOX 7"
+	next "BOX 8"
+	next "BOX 9"
+	next "BOX10"
+	next "BOX11"
+	next "BOX12@"
 
 BoxNoText: ; 73a21 (1c:7a21)
 	db "BOX No.@"
@@ -108525,7 +103837,7 @@ Func_7405c: ; 7405c (1d:405c)
 	ld a, $ff
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_Credits)
-	ld a, (Music_Credits - $4000) / 3
+	ld a, MUSIC_CREDITS
 	call PlayMusic
 	ld c, $80
 	call DelayFrames
@@ -110014,15 +105326,15 @@ VendingMachineText1: ; 74f99 (1d:4f99)
 	db "@"
 
 DrinkText: ; 74f9e (1d:4f9e)
-	db "FRESH WATER",$4E
-	db "SODA POP",$4E
-	db "LEMONADE",$4E
-	db "CANCEL@"
+	db   "FRESH WATER"
+	next "SODA POP"
+	next "LEMONADE"
+	next "CANCEL@"
 
 DrinkPriceText: ; 74fc3 (1d:4fc3)
-	db "¥200",$4E
-	db "¥300",$4E
-	db "¥350",$4E,"@"
+	db   "¥200"
+	next "¥300"
+	next "¥350",$4E,"@"
 
 VendingMachineText4: ; 74fd3 (1d:4fd3)
 	TX_FAR _VendingMachineText4
@@ -120100,7 +115412,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
-	ld a, (Music_SafariZone - $4000) / 3
+	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld c, $50
 	call DelayFrames
@@ -120315,15305 +115627,4 @@ TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
 	db $21, $12, $42, $25, $24
 	db $22, $52, $24, $34, $42
 
-SECTION "bank1F",ROMX,BANK[$1F]
 
-INCLUDE "music/headers/sfxheaders1f.asm"
-INCLUDE "music/headers/musicheaders1f.asm"
-
-INCLUDE "music/sfx/sfx_1f_01.asm"
-INCLUDE "music/sfx/sfx_1f_02.asm"
-INCLUDE "music/sfx/sfx_1f_03.asm"
-INCLUDE "music/sfx/sfx_1f_04.asm"
-INCLUDE "music/sfx/sfx_1f_05.asm"
-INCLUDE "music/sfx/sfx_1f_06.asm"
-INCLUDE "music/sfx/sfx_1f_07.asm"
-INCLUDE "music/sfx/sfx_1f_08.asm"
-INCLUDE "music/sfx/sfx_1f_09.asm"
-INCLUDE "music/sfx/sfx_1f_0a.asm"
-INCLUDE "music/sfx/sfx_1f_0b.asm"
-INCLUDE "music/sfx/sfx_1f_0c.asm"
-INCLUDE "music/sfx/sfx_1f_0d.asm"
-INCLUDE "music/sfx/sfx_1f_0e.asm"
-INCLUDE "music/sfx/sfx_1f_0f.asm"
-INCLUDE "music/sfx/sfx_1f_10.asm"
-INCLUDE "music/sfx/sfx_1f_11.asm"
-INCLUDE "music/sfx/sfx_1f_12.asm"
-INCLUDE "music/sfx/sfx_1f_13.asm"
-
-Music1f_Channel3DutyPointers: ; 7c361 (1f:4361)
-	dw Music1f_Channel3Duty0
-	dw Music1f_Channel3Duty1
-	dw Music1f_Channel3Duty2
-	dw Music1f_Channel3Duty3
-	dw Music1f_Channel3Duty4
-	dw Music1f_Channel3Duty5 ; used in the Pokemon Tower theme
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-	dw SFX_1f_3f_Ch1 ; unused
-
-; these are the definitions for the channel 3 instruments
-; each instrument definition is made up of 32 points (nibbles) that form
-; the graph of the wave
-; the current instrument is copied to $FF30
-Music1f_Channel3Duty0: ; 7c373 (1f:4373)
-	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
-
-Music1f_Channel3Duty1: ; 7c383 (1f:4383)
-	db $02,$46,$8A,$CE,$EF,$FF,$FE,$EE,$DD,$CB,$A9,$87,$65,$43,$22,$11
-
-Music1f_Channel3Duty2: ; 7c393 (1f:4393)
-	db $13,$69,$BD,$EE,$EE,$FF,$FF,$ED,$DE,$FF,$FF,$EE,$EE,$DB,$96,$31
-
-Music1f_Channel3Duty3: ; 7c3a3 (1f:43a3)
-	db $02,$46,$8A,$CD,$EF,$FE,$DE,$FF,$EE,$DC,$BA,$98,$76,$54,$32,$10
-
-Music1f_Channel3Duty4: ; 7c3b3 (1f:43b3)
-	db $01,$23,$45,$67,$8A,$CD,$EE,$F7,$7F,$EE,$DC,$A8,$76,$54,$32,$10
-
-; duty 5 reads from sfx data
-Music1f_Channel3Duty5: ; 7c3c3 (1f:43c3)
-INCLUDE "music/sfx/sfx_1f_3f.asm"
-INCLUDE "music/sfx/sfx_1f_56.asm"
-INCLUDE "music/sfx/sfx_1f_57.asm"
-INCLUDE "music/sfx/sfx_1f_58.asm"
-INCLUDE "music/sfx/sfx_1f_3c.asm"
-INCLUDE "music/sfx/sfx_1f_59.asm"
-INCLUDE "music/sfx/sfx_1f_5a.asm"
-INCLUDE "music/sfx/sfx_1f_5b.asm"
-INCLUDE "music/sfx/sfx_1f_5c.asm"
-INCLUDE "music/sfx/sfx_1f_40.asm"
-IF _RED
-	INCLUDE "music/sfx/sfx_1f_5d.asm"
-ENDC
-IF _BLUE
-	INCLUDE "music/blue/sfx_1f_5d.asm"
-ENDC
-INCLUDE "music/sfx/sfx_1f_3d.asm"
-INCLUDE "music/sfx/sfx_1f_43.asm"
-INCLUDE "music/sfx/sfx_1f_3e.asm"
-INCLUDE "music/sfx/sfx_1f_44.asm"
-INCLUDE "music/sfx/sfx_1f_45.asm"
-INCLUDE "music/sfx/sfx_1f_46.asm"
-INCLUDE "music/sfx/sfx_1f_47.asm"
-INCLUDE "music/sfx/sfx_1f_48.asm"
-INCLUDE "music/sfx/sfx_1f_49.asm"
-INCLUDE "music/sfx/sfx_1f_4a.asm"
-INCLUDE "music/sfx/sfx_1f_4b.asm"
-INCLUDE "music/sfx/sfx_1f_4c.asm"
-INCLUDE "music/sfx/sfx_1f_4d.asm"
-INCLUDE "music/sfx/sfx_1f_4e.asm"
-INCLUDE "music/sfx/sfx_1f_4f.asm"
-INCLUDE "music/sfx/sfx_1f_50.asm"
-INCLUDE "music/sfx/sfx_1f_51.asm"
-INCLUDE "music/sfx/sfx_1f_52.asm"
-INCLUDE "music/sfx/sfx_1f_53.asm"
-INCLUDE "music/sfx/sfx_1f_54.asm"
-INCLUDE "music/sfx/sfx_1f_55.asm"
-INCLUDE "music/sfx/sfx_1f_5e.asm"
-INCLUDE "music/sfx/sfx_1f_5f.asm"
-INCLUDE "music/sfx/sfx_1f_60.asm"
-INCLUDE "music/sfx/sfx_1f_61.asm"
-INCLUDE "music/sfx/sfx_1f_62.asm"
-INCLUDE "music/sfx/sfx_1f_63.asm"
-INCLUDE "music/sfx/sfx_1f_64.asm"
-INCLUDE "music/sfx/sfx_1f_65.asm"
-INCLUDE "music/sfx/sfx_1f_66.asm"
-INCLUDE "music/sfx/sfx_1f_67.asm"
-INCLUDE "music/sfx/sfx_1f_unused.asm"
-INCLUDE "music/sfx/sfx_1f_1d.asm"
-INCLUDE "music/sfx/sfx_1f_37.asm"
-INCLUDE "music/sfx/sfx_1f_38.asm"
-INCLUDE "music/sfx/sfx_1f_25.asm"
-INCLUDE "music/sfx/sfx_1f_39.asm"
-INCLUDE "music/sfx/sfx_1f_17.asm"
-INCLUDE "music/sfx/sfx_1f_23.asm"
-INCLUDE "music/sfx/sfx_1f_24.asm"
-INCLUDE "music/sfx/sfx_1f_14.asm"
-INCLUDE "music/sfx/sfx_1f_22.asm"
-INCLUDE "music/sfx/sfx_1f_1a.asm"
-INCLUDE "music/sfx/sfx_1f_1b.asm"
-INCLUDE "music/sfx/sfx_1f_19.asm"
-INCLUDE "music/sfx/sfx_1f_1f.asm"
-INCLUDE "music/sfx/sfx_1f_20.asm"
-INCLUDE "music/sfx/sfx_1f_16.asm"
-INCLUDE "music/sfx/sfx_1f_21.asm"
-INCLUDE "music/sfx/sfx_1f_15.asm"
-INCLUDE "music/sfx/sfx_1f_1e.asm"
-INCLUDE "music/sfx/sfx_1f_1c.asm"
-INCLUDE "music/sfx/sfx_1f_18.asm"
-INCLUDE "music/sfx/sfx_1f_2d.asm"
-INCLUDE "music/sfx/sfx_1f_2a.asm"
-INCLUDE "music/sfx/sfx_1f_2f.asm"
-INCLUDE "music/sfx/sfx_1f_26.asm"
-INCLUDE "music/sfx/sfx_1f_27.asm"
-INCLUDE "music/sfx/sfx_1f_28.asm"
-INCLUDE "music/sfx/sfx_1f_32.asm"
-INCLUDE "music/sfx/sfx_1f_29.asm"
-INCLUDE "music/sfx/sfx_1f_2b.asm"
-INCLUDE "music/sfx/sfx_1f_30.asm"
-INCLUDE "music/sfx/sfx_1f_2e.asm"
-INCLUDE "music/sfx/sfx_1f_31.asm"
-INCLUDE "music/sfx/sfx_1f_2c.asm"
-INCLUDE "music/sfx/sfx_1f_33.asm"
-INCLUDE "music/sfx/sfx_1f_34.asm"
-INCLUDE "music/sfx/sfx_1f_35.asm"
-INCLUDE "music/sfx/sfx_1f_36.asm"
-
-Func_7d13b: ; 7d13b (1f:513b)
-	ld a, [$FF00+$dc]
-	ld c, $0
-	ld hl, OwnedMonValues
-.getSfxPointer
-	cp [hl]
-	jr c, .gotSfxPointer
-	inc c
-	inc hl
-	jr .getSfxPointer
-.gotSfxPointer
-	push bc
-	ld a, $ff
-	ld [$c0ee], a
-	call PlaySoundWaitForCurrent
-	pop bc
-	ld b, $0
-	ld hl, PokedexRatingSfxPointers
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld c, [hl]
-	call PlayMusic
-	jp Func_2307
-
-PokedexRatingSfxPointers: ; 7d162 (1f:5162)
-	db (SFX_1f_51 - $4000) / 3
-	db BANK(SFX_1f_51)
-	db (SFX_02_41 - $4000) / 3
-	db BANK(SFX_02_41)
-	db (SFX_02_3a - $4000) / 3
-	db BANK(SFX_02_3a)
-	db (SFX_08_46 - $4000) / 3
-	db BANK(SFX_08_46)
-	db (SFX_08_3a - $4000) / 3
-	db BANK(SFX_08_3a)
-	db (SFX_02_42 - $4000) / 3
-	db BANK(SFX_02_42)
-	db (SFX_02_3b - $4000) / 3
-	db BANK(SFX_02_3b)
-
-OwnedMonValues: ; 7d170 (1f:5170)
-	db 10, 40, 60, 90, 120, 150, $ff
-
-Func_7d177: ; 7d177 (1f:5177)
-	ld c, CH0
-.loop
-	ld b, $0
-	ld hl, $c026
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .nextChannel
-	ld a, c
-	cp CH4
-	jr nc, .applyAffects ; if sfx channel
-	ld a, [$c002]
-	and a
-	jr z, .applyAffects
-	bit 7, a
-	jr nz, .nextChannel
-	set 7, a
-	ld [$c002], a
-	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-	jr .nextChannel
-.applyAffects
-	call Music1f_Music2_ApplyMusicAffects
-.nextChannel
-	ld a, c
-	inc c ; inc channel number
-	cp CH7
-	jr nz, .loop
-	ret
-
-; this routine checks flags for music effects currently applied
-; to the channel and calls certain functions based on flags.
-; known flags for $c02e:
-;	1: call has been used
-;	3: a toggle used only by this routine for vibrato
-;	4: pitchbend flag
-;	6: dutycycle flag
-Music1f_Music2_ApplyMusicAffects: ; 7d1ac (1f:51ac)
-	ld b, $0
-	ld hl, $c0b6 ; delay until next note
-	add hl, bc
-	ld a, [hl]
-	cp $1 ; if delay is 1, play next note
-	jp z, Music1f_Music2_PlayNextNote
-	dec a ; otherwise, decrease the delay timer
-	ld [hl], a
-	ld a, c
-	cp CH4
-	jr nc, .startChecks ; if a sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr z, .startChecks
-	ret
-.startChecks
-	ld hl, $c02e
-	add hl, bc
-	bit 6, [hl] ; dutycycle
-	jr z, .checkForExecuteMusic
-	call Music1f_ApplyDutyCycle
-.checkForExecuteMusic
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, .checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr nz, .disablePitchBendVibrato
-.checkForPitchBend
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl] ; pitchbend
-	jr z, .checkVibratoDelay
-	jp Music1f_ApplyPitchBend
-.checkVibratoDelay
-	ld hl, $c04e ; vibrato delay
-	add hl, bc
-	ld a, [hl]
-	and a ; check if delay is over
-	jr z, .checkForVibrato
-	dec [hl] ; otherwise, dec delay
-.disablePitchBendVibrato
-	ret
-.checkForVibrato
-	ld hl, $c056 ; vibrato rate
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .vibrato
-	ret ; no vibrato
-.vibrato
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	ld a, [hl]
-	and $f
-	and a
-	jr z, .vibratoAlreadyDone
-	dec [hl] ; apply vibrato pitch change
-	ret
-.vibratoAlreadyDone
-	ld a, [hl]
-	swap [hl]
-	or [hl]
-	ld [hl], a ; reset the vibrato value and start again
-	ld hl, $c066
-	add hl, bc
-	ld e, [hl] ; get note pitch
-	ld hl, $c02e
-	add hl, bc
-	bit 3, [hl] ; this is the only code that sets/resets bit three so
-	jr z, .unset ; it continuously alternates which path it takes
-	res 3, [hl]
-	ld a, d
-	and $f
-	ld d, a
-	ld a, e
-	sub d
-	jr nc, .noCarry
-	ld a, $0
-.noCarry
-	jr .done
-.unset
-	set 3, [hl]
-	ld a, d
-	and $f0
-	swap a
-	add e
-	jr nc, .done
-	ld a, $ff
-.done
-	ld d, a
-	ld b, $3
-	call Func_7d8ac
-	ld [hl], d
-	ret
-
-; this routine executes all music commands that take up no time,
-; like tempo changes, duty changes etc. and doesn't return
-; until the first note is reached
-Music1f_Music2_PlayNextNote: ; 7d244 (1f:5244)
-	ld hl, $c06e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	call Music1f_endchannel
-	ret
-
-Music1f_endchannel: ; 7d25a (1f:525a)
-	call Music1f_GetNextMusicByte
-	ld d, a
-	cp $ff ; is this command an endchannel?
-	jp nz, Music1f_callchannel ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	bit 1, [hl]
-	jr nz, .returnFromCall
-	ld a, c
-	cp CH3
-	jr nc, .noiseOrSfxChannel
-	jr .asm_7d2b3
-.noiseOrSfxChannel
-	res 2, [hl]
-	ld hl, $c036
-	add hl, bc
-	res 0, [hl]
-	cp CH6
-	jr nz, .notSfxChannel3
-	ld a, $0
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-.notSfxChannel3
-	jr nz, .asm_7d296
-	ld a, [$c003]
-	and a
-	jr z, .asm_7d296
-	xor a
-	ld [$c003], a
-	jr .asm_7d2b3
-.asm_7d296
-	jr .asm_7d2bc
-.returnFromCall
-	res 1, [hl]
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl ; store current channel address
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hl], a ; loads channel address to return to
-	jp Music1f_endchannel
-.asm_7d2b3
-	ld hl, Unknown_7db93
-	add hl, bc
-	ld a, [$FF00+$25]
-	and [hl]
-	ld [$FF00+$25], a
-.asm_7d2bc
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_7d2c5
-	jr .asm_7d2e2
-.asm_7d2c5
-	ld a, [$c02a]
-	cp $86
-	jr z, .asm_7d2e2
-	jr c, .asm_7d2d0
-	jr .asm_7d2e2
-.asm_7d2d0
-	ld a, c
-	cp CH4
-	jr z, .asm_7d2d9
-	call Func_7d73b
-	ret c
-.asm_7d2d9
-	ld a, [$c005]
-	ld [$FF00+$24], a
-	xor a
-	ld [$c005], a
-.asm_7d2e2
-	ld hl, $c026
-	add hl, bc
-	ld [hl], b
-	ret
-
-Music1f_callchannel: ; 7d2e8 (1f:52e8)
-	cp $fd ; is this command a callchannel?
-	jp nz, Music1f_loopchannel ; no
-	call Music1f_GetNextMusicByte ; yes
-	push af
-	call Music1f_GetNextMusicByte
-	ld d, a
-	pop af
-	ld e, a
-	push de ; store pointer
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	push hl
-	ld hl, $c016
-	add hl, de
-	ld e, l
-	ld d, h
-	pop hl
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hld]
-	ld [de], a ; copy current channel address
-	pop de
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite current address with pointer
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 1, [hl] ; set the call flag
-	jp Music1f_endchannel
-
-Music1f_loopchannel: ; 7d31d (1f:531d)
-	cp $fe ; is this command a loopchannel?
-	jp nz, Music1f_notetype ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld e, a
-	and a
-	jr z, .infiniteLoop
-	ld b, $0
-	ld hl, $c0be
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .loopAgain
-	ld a, $1 ; if no more loops to make
-	ld [hl], a
-	call Music1f_GetNextMusicByte ; skip pointer
-	call Music1f_GetNextMusicByte
-	jp Music1f_endchannel
-.loopAgain ; inc loop count
-	inc a
-	ld [hl], a
-	; fall through
-.infiniteLoop ; overwrite current address with pointer
-	call Music1f_GetNextMusicByte
-	push af
-	call Music1f_GetNextMusicByte
-	ld b, a
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	pop af
-	ld [hli], a
-	ld [hl], b
-	jp Music1f_endchannel
-
-Music1f_notetype: ; 7d358 (1f:5358)
-	and $f0
-	cp $d0 ; is this command a notetype?
-	jp nz, Music1f_togglecall ; no
-	ld a, d ; yes
-	and $f
-	ld b, $0
-	ld hl, $c0c6
-	add hl, bc
-	ld [hl], a ; store low nibble as speed
-	ld a, c
-	cp CH3
-	jr z, .noiseChannel ; noise channel has 0 params
-	call Music1f_GetNextMusicByte
-	ld d, a
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notChannel3
-	ld hl, $c0e7
-	jr .sfxChannel3
-.musicChannel3
-	ld hl, $c0e6
-.sfxChannel3
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble of param as duty
-	ld a, d
-	and $30
-	sla a
-	ld d, a
-	; fall through
-
-	; if channel 3, store high nibble as volume
-	; else, store volume (high nibble) and fade (low nibble)
-.notChannel3
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld [hl], d
-.noiseChannel
-	jp Music1f_endchannel
-
-Music1f_togglecall: ; 7d397 (1f:5397)
-	ld a, d
-	cp $e8 ; is this command an togglecall?
-	jr nz, Music1f_vibrato ; no
-	ld b, $0 ; yes
-	ld hl, $c02e
-	add hl, bc
-	ld a, [hl]
-	xor $1
-	ld [hl], a ; flip bit 0 of $c02e (toggle returning from call)
-	jp Music1f_endchannel
-
-Music1f_vibrato: ; 7d3a9 (1f:53a9)
-	cp $ea ; is this command a vibrato?
-	jr nz, Music1f_pitchbend ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c04e
-	add hl, bc
-	ld [hl], a ; store delay
-	ld hl, $c06e
-	add hl, bc
-	ld [hl], a ; store delay
-	call Music1f_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, $0
-	ld hl, $c056
-	add hl, bc
-	srl a
-	ld e, a
-	adc b
-	swap a
-	or e
-	ld [hl], a ; store rate as both high and low nibbles
-	ld a, d
-	and $f
-	ld d, a
-	ld hl, $c05e
-	add hl, bc
-	swap a
-	or d
-	ld [hl], a ; store depth as both high and low nibbles
-	jp Music1f_endchannel
-
-Music1f_pitchbend: ; 7d3e1 (1f:53e1)
-	cp $eb ; is this command a pitchbend?
-	jr nz, Music1f_duty ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c076
-	add hl, bc
-	ld [hl], a ; store first param
-	call Music1f_GetNextMusicByte
-	ld d, a
-	and $f0
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	call Func_7d8cc
-	ld b, $0
-	ld hl, $c0a6
-	add hl, bc
-	ld [hl], d ; store unknown part of second param
-	ld hl, $c0ae
-	add hl, bc
-	ld [hl], e ; store unknown part of second param
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 4, [hl] ; set pitchbend flag
-	call Music1f_GetNextMusicByte
-	ld d, a
-	jp Music1f_notelength
-
-Music1f_duty: ; 7d419 (1f:5419)
-	cp $ec ; is this command a duty?
-	jr nz, Music1f_tempo ; no
-	call Music1f_GetNextMusicByte ; yes
-	rrca
-	rrca
-	and $c0
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store duty
-	jp Music1f_endchannel
-
-Music1f_tempo: ; 7d42e (1f:542e)
-	cp $ed ; is this command a tempo?
-	jr nz, Music1f_unknownmusic0xee ; no
-	ld a, c ; yes
-	cp CH4
-	jr nc, .sfxChannel
-	call Music1f_GetNextMusicByte
-	ld [$c0e8], a ; store first param
-	call Music1f_GetNextMusicByte
-	ld [$c0e9], a ; store second param
-	xor a
-	ld [$c0ce], a ; clear RAM
-	ld [$c0cf], a
-	ld [$c0d0], a
-	ld [$c0d1], a
-	jr .musicChannelDone
-.sfxChannel
-	call Music1f_GetNextMusicByte
-	ld [$c0ea], a ; store first param
-	call Music1f_GetNextMusicByte
-	ld [$c0eb], a ; store second param
-	xor a
-	ld [$c0d2], a ; clear RAM
-	ld [$c0d3], a
-	ld [$c0d4], a
-	ld [$c0d5], a
-.musicChannelDone
-	jp Music1f_endchannel
-
-Music1f_unknownmusic0xee: ; 7d46e (1f:546e)
-	cp $ee ; is this command an unknownmusic0xee?
-	jr nz, Music1f_unknownmusic0xef ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld [$c004], a ; store first param
-	jp Music1f_endchannel
-
-; this appears to never be used
-Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
-	cp $ef ; is this command an unknownmusic0xef?
-	jr nz, Music1f_dutycycle ; no
-	call Music1f_GetNextMusicByte ; yes
-	push bc
-	call Func_7d8ea
-	pop bc
-	ld a, [$c003]
-	and a
-	jr nz, .skip
-	ld a, [$c02d]
-	ld [$c003], a
-	xor a
-	ld [$c02d], a
-.skip
-	jp Music1f_endchannel
-
-Music1f_dutycycle: ; 7d49a (1f:549a)
-	cp $fc ; is this command a dutycycle?
-	jr nz, Music1f_stereopanning ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld [hl], a ; store full cycle
-	and $c0
-	ld hl, $c03e
-	add hl, bc
-	ld [hl], a ; store first duty
-	ld hl, $c02e
-	add hl, bc
-	set 6, [hl] ; set duty flag
-	jp Music1f_endchannel
-
-Music1f_stereopanning: ; 7d4b8 (1f:54b8)
-	cp $f0 ; is this command a stereopanning?
-	jr nz, Music1f_executemusic ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld [$FF00+$24], a ; store stereopanning
-	jp Music1f_endchannel
-
-Music1f_executemusic: ; 7d4c4 (1f:54c4)
-	cp $f8 ; is this command an executemusic?
-	jr nz, Music1f_octave ; no
-	ld b, $0 ; yes
-	ld hl, $c036
-	add hl, bc
-	set 0, [hl]
-	jp Music1f_endchannel
-
-Music1f_octave: ; 7d4d3 (1f:54d3)
-	and $f0
-	cp $e0 ; is this command an octave?
-	jr nz, Music1f_unknownsfx0x20 ; no
-	ld hl, $c0d6 ; yes
-	ld b, $0
-	add hl, bc
-	ld a, d
-	and $f
-	ld [hl], a ; store low nibble as octave
-	jp Music1f_endchannel
-
-Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
-	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, Music1f_unknownsfx0x10 ; no
-	ld a, c
-	cp CH3 ; is this a noise or sfx channel?
-	jr c, Music1f_unknownsfx0x10 ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music1f_unknownsfx0x10 ; no
-	call Music1f_notelength ; yes
-	ld d, a
-	ld b, $0
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-	ld b, $1
-	call Func_7d8ac
-	ld [hl], d
-	call Music1f_GetNextMusicByte
-	ld d, a
-	ld b, $2
-	call Func_7d8ac
-	ld [hl], d
-	call Music1f_GetNextMusicByte
-	ld e, a
-	ld a, c
-	cp CH7
-	ld a, $0
-	jr z, .sfxNoiseChannel ; only two params for noise channel
-	push de
-	call Music1f_GetNextMusicByte
-	pop de
-.sfxNoiseChannel
-	ld d, a
-	push de
-	call Func_7d69d
-	call Func_7d66c
-	pop de
-	call Func_7d6bf
-	ret
-
-Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
-	ld a, c
-	cp CH4
-	jr c, Music1f_note ; if not a sfx
-	ld a, d
-	cp $10 ; is this command an unknownsfx0x10?
-	jr nz, Music1f_note ; no
-	ld b, $0
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music1f_note ; no
-	call Music1f_GetNextMusicByte ; yes
-	ld [$FF00+$10], a
-	jp Music1f_endchannel
-
-Music1f_note: ; 7d54f (1f:554f)
-	ld a, c
-	cp CH3
-	jr nz, Music1f_notelength ; if not noise channel
-	ld a, d
-	and $f0
-	cp $b0 ; is this command a dnote?
-	jr z, Music1f_dnote ; yes
-	jr nc, Music1f_notelength ; no
-	swap a
-	ld b, a
-	ld a, d
-	and $f
-	ld d, a
-	ld a, b
-	push de
-	push bc
-	jr asm_7d571
-
-Music1f_dnote: ; 7d569 (1f:5569)
-	ld a, d
-	and $f
-	push af
-	push bc
-	call Music1f_GetNextMusicByte ; get dnote instrument
-asm_7d571
-	ld d, a
-	ld a, [$c003]
-	and a
-	jr nz, .asm_7d57c
-	ld a, d
-	call Func_7d8ea
-.asm_7d57c
-	pop bc
-	pop de
-
-Music1f_notelength: ; 7d57e (1f:557e)
-	ld a, d
-	push af
-	and $f
-	inc a
-	ld b, $0
-	ld e, a  ; store note length (in 16ths)
-	ld d, b
-	ld hl, $c0c6
-	add hl, bc
-	ld a, [hl]
-	ld l, b
-	call Func_7d8bb
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld a, [$c0e8]
-	ld d, a
-	ld a, [$c0e9]
-	ld e, a
-	jr .skip
-.sfxChannel
-	ld d, $1
-	ld e, $0
-	cp CH7
-	jr z, .skip ; if noise channel
-	call Func_7d707
-	ld a, [$c0ea]
-	ld d, a
-	ld a, [$c0eb]
-	ld e, a
-.skip
-	ld a, l
-	ld b, $0
-	ld hl, $c0ce
-	add hl, bc
-	ld l, [hl]
-	call Func_7d8bb
-	ld e, l
-	ld d, h
-	ld hl, $c0ce
-	add hl, bc
-	ld [hl], e
-	ld a, d
-	ld hl, $c0b6
-	add hl, bc
-	ld [hl], a
-	ld hl, $c036
-	add hl, bc
-	bit 0, [hl]
-	jr nz, Music1f_notepitch
-	ld hl, $c02e
-	add hl, bc
-	bit 2, [hl]
-	jr z, Music1f_notepitch
-	pop hl
-	ret
-
-Music1f_notepitch: ; 7d5dc (1f:55dc)
-	pop af
-	and $f0
-	cp $c0 ; compare to rest
-	jr nz, .notRest
-	ld a, c
-	cp CH4
-	jr nc, .sfxChannel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .quit
-	; fall through
-.sfxChannel
-	ld a, c
-	cp CH2
-	jr z, .musicChannel3
-	cp CH6
-	jr nz, .notSfxChannel3
-.musicChannel3
-	ld b, $0
-	ld hl, Unknown_7db93
-	add hl, bc
-	ld a, [$FF00+$25]
-	and [hl]
-	ld [$FF00+$25], a
-	jr .quit
-.notSfxChannel3
-	ld b, $2
-	call Func_7d8ac
-	ld a, $8
-	ld [hli], a
-	inc hl
-	ld a, $80
-	ld [hl], a
-.quit
-	ret
-.notRest
-	swap a
-	ld b, $0
-	ld hl, $c0d6
-	add hl, bc
-	ld b, [hl]
-	call Func_7d8cc
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 4, [hl]
-	jr z, .asm_7d62c
-	call Func_7d803
-.asm_7d62c
-	push de
-	ld a, c
-	cp CH4
-	jr nc, .skip ; if sfx Channel
-	ld hl, $c02a
-	ld d, $0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	and a
-	jr nz, .done
-	jr .skip
-.done
-	pop de
-	ret
-.skip
-	ld b, $0
-	ld hl, $c0de
-	add hl, bc
-	ld d, [hl]
-	ld b, $2
-	call Func_7d8ac
-	ld [hl], d
-	call Func_7d69d
-	call Func_7d66c
-	pop de
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_7d663
-	inc e
-	jr nc, .asm_7d663
-	inc d
-.asm_7d663
-	ld hl, $c066
-	add hl, bc
-	ld [hl], e
-	call Func_7d6bf
-	ret
-
-Func_7d66c: ; 7d66c (1f:566c)
-	ld b, $0
-	ld hl, Unknown_7db9b
-	add hl, bc
-	ld a, [$FF00+$25]
-	or [hl]
-	ld d, a
-	ld a, c
-	cp CH7
-	jr z, .sfxNoiseChannel
-	cp CH4
-	jr nc, .skip ; if sfx channel
-	ld hl, $c02a
-	add hl, bc
-	ld a, [hl]
-	and a
-	jr nz, .skip
-.sfxNoiseChannel
-	ld a, [$c004]
-	ld hl, Unknown_7db9b
-	add hl, bc
-	and [hl]
-	ld d, a
-	ld a, [$FF00+$25]
-	ld hl, Unknown_7db93
-	add hl, bc
-	and [hl]
-	or d
-	ld d, a
-.skip
-	ld a, d
-	ld [$FF00+$25], a
-	ret
-
-Func_7d69d: ; 7d69d (1f:569d)
-	ld b, $0
-	ld hl, $c0b6
-	add hl, bc
-	ld d, [hl]
-	ld a, c
-	cp CH2
-	jr z, .channel3 ; if music channel 3
-	cp CH6
-	jr z, .channel3 ; if sfx channel 3
-	ld a, d
-	and $3f
-	ld d, a
-	ld hl, $c03e
-	add hl, bc
-	ld a, [hl]
-	or d
-	ld d, a
-.channel3
-	ld b, $1
-	call Func_7d8ac
-	ld [hl], d
-	ret
-
-Func_7d6bf: ; 7d6bf (1f:56bf)
-	ld a, c
-	cp CH2
-	jr z, .channel3
-	cp CH6
-	jr nz, .notSfxChannel3
-	; fall through
-.channel3
-	push de
-	ld de, $c0e6
-	cp CH2
-	jr z, .musicChannel3
-	ld de, $c0e7
-.musicChannel3
-	ld a, [de]
-	add a
-	ld d, $0
-	ld e, a
-	ld hl, Music1f_Channel3DutyPointers
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld hl, $ff30
-	ld b, $f
-	ld a, $0
-	ld [$FF00+$1a], a
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, b
-	dec b
-	and a
-	jr nz, .loop
-	ld a, $80
-	ld [$FF00+$1a], a
-	pop de
-.notSfxChannel3
-	ld a, d
-	or $80
-	and $c7
-	ld d, a
-	ld b, $3
-	call Func_7d8ac
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	call Func_7d729
-	ret
-
-Func_7d707: ; 7d707 (1f:5707)
-	call Func_7d759
-	jr nc, .asm_7d71f
-	ld d, $0
-	ld a, [$c0f2]
-	add $80
-	jr nc, .asm_7d716
-	inc d
-.asm_7d716
-	ld [$c0eb], a
-	ld a, d
-	ld [$c0ea], a
-	jr .asm_7d728
-.asm_7d71f
-	xor a
-	ld [$c0eb], a
-	ld a, $1
-	ld [$c0ea], a
-.asm_7d728
-	ret
-
-Func_7d729: ; 7d729 (1f:5729)
-	call Func_7d759
-	jr nc, .asm_7d73a
-	ld a, [$c0f1]
-	add e
-	jr nc, .asm_7d735
-	inc d
-.asm_7d735
-	dec hl
-	ld e, a
-	ld [hl], e
-	inc hl
-	ld [hl], d
-.asm_7d73a
-	ret
-
-Func_7d73b: ; 7d73b (1f:573b)
-	call Func_7d759
-	jr nc, .asm_7d756
-	ld hl, $c006
-	ld e, c
-	ld d, $0
-	sla e
-	rl d
-	add hl, de
-	ld a, [hl]
-	sub $1
-	ld [hl], a
-	inc hl
-	ld a, [hl]
-	sbc $0
-	ld [hl], a
-	scf
-	ret
-.asm_7d756
-	scf
-	ccf
-	ret
-
-Func_7d759: ; 7d759 (1f:5759)
-	ld a, [$c02a]
-	cp $14
-	jr nc, .asm_7d762
-	jr .asm_7d768
-.asm_7d762
-	cp $86
-	jr z, .asm_7d768
-	jr c, .asm_7d76b
-.asm_7d768
-	scf
-	ccf
-	ret
-.asm_7d76b
-	scf
-	ret
-
-Music1f_ApplyPitchBend: ; 7d76d (1f:576d)
-	ld hl, $c02e
-	add hl, bc
-	bit 5, [hl]
-	jp nz, .asm_7d7b4
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld l, [hl]
-	ld h, b
-	add hl, de
-	ld d, h
-	ld e, l
-	ld hl, $c08e
-	add hl, bc
-	push hl
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	add [hl]
-	ld [hl], a
-	ld a, $0
-	adc e
-	ld e, a
-	ld a, $0
-	adc d
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jp c, .asm_7d7fa
-	jr nz, .asm_7d7e7
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jp c, .asm_7d7fa
-	jr .asm_7d7e7
-.asm_7d7b4
-	ld hl, $c09e
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c07e
-	add hl, bc
-	ld e, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c086
-	add hl, bc
-	ld a, [hl]
-	add a
-	ld [hl], a
-	ld a, e
-	sbc b
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, d
-	cp [hl]
-	jr c, .asm_7d7fa
-	jr nz, .asm_7d7e7
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	cp [hl]
-	jr c, .asm_7d7fa
-.asm_7d7e7
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld b, $3
-	call Func_7d8ac
-	ld a, e
-	ld [hli], a
-	ld [hl], d
-	ret
-.asm_7d7fa
-	ld hl, $c02e
-	add hl, bc
-	res 4, [hl]
-	res 5, [hl]
-	ret
-
-Func_7d803: ; 7d803 (1f:5803)
-	ld hl, $c096
-	add hl, bc
-	ld [hl], d
-	ld hl, $c09e
-	add hl, bc
-	ld [hl], e
-	ld hl, $c0b6
-	add hl, bc
-	ld a, [hl]
-	ld hl, $c076
-	add hl, bc
-	sub [hl]
-	jr nc, .asm_7d81b
-	ld a, $1
-.asm_7d81b
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, bc
-	ld a, e
-	sub [hl]
-	ld e, a
-	ld a, d
-	sbc b
-	ld hl, $c0a6
-	add hl, bc
-	sub [hl]
-	jr c, .asm_7d837
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	set 5, [hl]
-	jr .asm_7d85a
-.asm_7d837
-	ld hl, $c096
-	add hl, bc
-	ld d, [hl]
-	ld hl, $c09e
-	add hl, bc
-	ld e, [hl]
-	ld hl, $c0ae
-	add hl, bc
-	ld a, [hl]
-	sub e
-	ld e, a
-	ld a, d
-	sbc b
-	ld d, a
-	ld hl, $c0a6
-	add hl, bc
-	ld a, [hl]
-	sub d
-	ld d, a
-	ld b, $0
-	ld hl, $c02e
-	add hl, bc
-	res 5, [hl]
-.asm_7d85a
-	ld hl, $c076
-	add hl, bc
-.asm_7d85e
-	inc b
-	ld a, e
-	sub [hl]
-	ld e, a
-	jr nc, .asm_7d85e
-	ld a, d
-	and a
-	jr z, .asm_7d86c
-	dec a
-	ld d, a
-	jr .asm_7d85e
-.asm_7d86c
-	ld a, e
-	add [hl]
-	ld d, b
-	ld b, $0
-	ld hl, $c07e
-	add hl, bc
-	ld [hl], d
-	ld hl, $c086
-	add hl, bc
-	ld [hl], a
-	ld hl, $c08e
-	add hl, bc
-	ld [hl], a
-	ret
-
-Music1f_ApplyDutyCycle: ; 7d881 (1f:5881)
-	ld b, $0
-	ld hl, $c046
-	add hl, bc
-	ld a, [hl]
-	rlca
-	rlca
-	ld [hl], a
-	and $c0
-	ld d, a
-	ld b, $1
-	call Func_7d8ac
-	ld a, [hl]
-	and $3f
-	or d
-	ld [hl], a
-	ret
-
-Music1f_GetNextMusicByte: ; 7d899 (1f:5899)
-	ld d, $0
-	ld a, c
-	add a
-	ld e, a
-	ld hl, $c006
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld a, [hld]
-	ld d, a
-	ld a, [de] ; get next music command
-	inc de
-	ld [hl], e ; store address of next command
-	inc hl
-	ld [hl], d
-	ret
-
-Func_7d8ac: ; 7d8ac (1f:58ac)
-	ld a, c
-	ld hl, Unknown_7db8b
-	add l
-	jr nc, .noCarry
-	inc h
-.noCarry
-	ld l, a
-	ld a, [hl]
-	add b
-	ld l, a
-	ld h, $ff
-	ret
-
-Func_7d8bb: ; 7d8bb (1f:58bb)
-	ld h, $0
-.loop
-	srl a
-	jr nc, .noCarry
-	add hl, de
-.noCarry
-	sla e
-	rl d
-	and a
-	jr z, .done
-	jr .loop
-.done
-	ret
-
-Func_7d8cc: ; 7d8cc (1f:58cc)
-	ld h, $0
-	ld l, a
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, Unknown_7dba3
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld a, b
-.loop
-	cp $7
-	jr z, .done
-	sra d
-	rr e
-	inc a
-	jr .loop
-.done
-	ld a, $8
-	add d
-	ld d, a
-	ret
-
-Func_7d8ea: ; 7d8ea (1f:58ea)
-	ld [$c001], a
-	cp $ff
-	jp z, Func_7daa8
-	cp $c2
-	jp z, Func_7d9c2
-	jp c, Func_7d9c2
-	cp $fe
-	jr z, .asm_7d901
-	jp nc, Func_7d9c2
-.asm_7d901
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c0e9], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $8
-	ld hl, $c016
-	call FillMusicRAM1f
-	ld hl, $c006
-	call FillMusicRAM1f
-	ld d, $4
-	ld hl, $c026
-	call FillMusicRAM1f
-	ld hl, $c02e
-	call FillMusicRAM1f
-	ld hl, $c03e
-	call FillMusicRAM1f
-	ld hl, $c046
-	call FillMusicRAM1f
-	ld hl, $c04e
-	call FillMusicRAM1f
-	ld hl, $c056
-	call FillMusicRAM1f
-	ld hl, $c05e
-	call FillMusicRAM1f
-	ld hl, $c066
-	call FillMusicRAM1f
-	ld hl, $c06e
-	call FillMusicRAM1f
-	ld hl, $c036
-	call FillMusicRAM1f
-	ld hl, $c076
-	call FillMusicRAM1f
-	ld hl, $c07e
-	call FillMusicRAM1f
-	ld hl, $c086
-	call FillMusicRAM1f
-	ld hl, $c08e
-	call FillMusicRAM1f
-	ld hl, $c096
-	call FillMusicRAM1f
-	ld hl, $c09e
-	call FillMusicRAM1f
-	ld hl, $c0a6
-	call FillMusicRAM1f
-	ld hl, $c0ae
-	call FillMusicRAM1f
-	ld a, $1
-	ld hl, $c0be
-	call FillMusicRAM1f
-	ld hl, $c0b6
-	call FillMusicRAM1f
-	ld hl, $c0c6
-	call FillMusicRAM1f
-	ld [$c0e8], a
-	ld a, $ff
-	ld [$c004], a
-	xor a
-	ld [$FF00+$24], a
-	ld a, $8
-	ld [$FF00+$10], a
-	ld a, $0
-	ld [$FF00+$25], a
-	xor a
-	ld [$FF00+$1a], a
-	ld a, $80
-	ld [$FF00+$1a], a
-	ld a, $77
-	ld [$FF00+$24], a
-	jp Func_7db03
-
-Func_7d9c2: ; 7d9c2 (1f:59c2)
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_1f
-	add hl, de
-	ld a, h
-	ld [$c0ec], a
-	ld a, l
-	ld [$c0ed], a
-	ld a, [hl]
-	and $c0
-	rlca
-	rlca
-	ld c, a
-.asm_7d9db
-	ld d, c
-	ld a, c
-	add a
-	add c
-	ld c, a
-	ld b, $0
-	ld a, [$c0ec]
-	ld h, a
-	ld a, [$c0ed]
-	ld l, a
-	add hl, bc
-	ld c, d
-	ld a, [hl]
-	and $f
-	ld e, a
-	ld d, $0
-	ld hl, $c026
-	add hl, de
-	ld a, [hl]
-	and a
-	jr z, .asm_7da17
-	ld a, e
-	cp $7
-	jr nz, .asm_7da0e
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_7da07
-	ret
-.asm_7da07
-	ld a, [hl]
-	cp $14
-	jr z, .asm_7da17
-	jr c, .asm_7da17
-.asm_7da0e
-	ld a, [$c001]
-	cp [hl]
-	jr z, .asm_7da17
-	jr c, .asm_7da17
-	ret
-.asm_7da17
-	xor a
-	push de
-	ld h, d
-	ld l, e
-	add hl, hl
-	ld d, h
-	ld e, l
-	ld hl, $c016
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c006
-	add hl, de
-	ld [hli], a
-	ld [hl], a
-	pop de
-	ld hl, $c026
-	add hl, de
-	ld [hl], a
-	ld hl, $c02e
-	add hl, de
-	ld [hl], a
-	ld hl, $c03e
-	add hl, de
-	ld [hl], a
-	ld hl, $c046
-	add hl, de
-	ld [hl], a
-	ld hl, $c04e
-	add hl, de
-	ld [hl], a
-	ld hl, $c056
-	add hl, de
-	ld [hl], a
-	ld hl, $c05e
-	add hl, de
-	ld [hl], a
-	ld hl, $c066
-	add hl, de
-	ld [hl], a
-	ld hl, $c06e
-	add hl, de
-	ld [hl], a
-	ld hl, $c076
-	add hl, de
-	ld [hl], a
-	ld hl, $c07e
-	add hl, de
-	ld [hl], a
-	ld hl, $c086
-	add hl, de
-	ld [hl], a
-	ld hl, $c08e
-	add hl, de
-	ld [hl], a
-	ld hl, $c096
-	add hl, de
-	ld [hl], a
-	ld hl, $c09e
-	add hl, de
-	ld [hl], a
-	ld hl, $c0a6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0ae
-	add hl, de
-	ld [hl], a
-	ld hl, $c036
-	add hl, de
-	ld [hl], a
-	ld a, $1
-	ld hl, $c0be
-	add hl, de
-	ld [hl], a
-	ld hl, $c0b6
-	add hl, de
-	ld [hl], a
-	ld hl, $c0c6
-	add hl, de
-	ld [hl], a
-	ld a, e
-	cp $4
-	jr nz, .asm_7da9f
-	ld a, $8
-	ld [$FF00+$10], a
-.asm_7da9f
-	ld a, c
-	and a
-	jp z, Func_7db03
-	dec c
-	jp .asm_7d9db
-
-Func_7daa8: ; 7daa8 (1f:5aa8)
-	ld a, $80
-	ld [$FF00+$26], a
-	ld [$FF00+$1a], a
-	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1c], a
-	ld a, $8
-	ld [$FF00+$10], a
-	ld [$FF00+$12], a
-	ld [$FF00+$17], a
-	ld [$FF00+$21], a
-	ld a, $40
-	ld [$FF00+$14], a
-	ld [$FF00+$19], a
-	ld [$FF00+$23], a
-	ld a, $77
-	ld [$FF00+$24], a
-	xor a
-	ld [$c000], a
-	ld [$c003], a
-	ld [$c002], a
-	ld [$c0e9], a
-	ld [$c0eb], a
-	ld [$c0e6], a
-	ld [$c0e7], a
-	ld d, $a0
-	ld hl, $c006
-	call FillMusicRAM1f
-	ld a, $1
-	ld d, $18
-	ld hl, $c0b6
-	call FillMusicRAM1f
-	ld [$c0e8], a
-	ld [$c0ea], a
-	ld a, $ff
-	ld [$c004], a
-	ret
-
-; fills d bytes at hl with a
-FillMusicRAM1f: ; 7dafd (1f:5afd)
-	ld b, d
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
-
-Func_7db03: ; 7db03 (1f:5b03)
-	ld a, [$c001]
-	ld l, a
-	ld e, a
-	ld h, $0
-	ld d, h
-	add hl, hl
-	add hl, de
-	ld de, SFX_Headers_1f
-	add hl, de
-	ld e, l
-	ld d, h
-	ld hl, $c006
-	ld a, [de] ; get channel number
-	ld b, a
-	rlca
-	rlca
-	and $3
-	ld c, a
-	ld a, b
-	and $f
-	ld b, c
-	inc b
-	inc de
-	ld c, $0
-.asm_7db25
-	cp c
-	jr z, .asm_7db2d
-	inc c
-	inc hl
-	inc hl
-	jr .asm_7db25
-.asm_7db2d
-	push hl
-	push bc
-	push af
-	ld b, $0
-	ld c, a
-	ld hl, $c026
-	add hl, bc
-	ld a, [$c001]
-	ld [hl], a
-	pop af
-	cp $3
-	jr c, .asm_7db46
-	ld hl, $c02e
-	add hl, bc
-	set 2, [hl]
-.asm_7db46
-	pop bc
-	pop hl
-	ld a, [de] ; get channel pointer
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hli], a
-	inc de
-	inc c
-	dec b
-	ld a, b
-	and a
-	ld a, [de]
-	inc de
-	jr nz, .asm_7db25
-	ld a, [$c001]
-	cp $14
-	jr nc, .asm_7db5f
-	jr .asm_7db89
-.asm_7db5f
-	ld a, [$c001]
-	cp $86
-	jr z, .asm_7db89
-	jr c, .asm_7db6a
-	jr .asm_7db89
-.asm_7db6a
-	ld hl, $c02a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, $c012 ; sfx noise channel pointer
-	ld de, Noise1f_endchannel
-	ld [hl], e
-	inc hl
-	ld [hl], d ; overwrite pointer to point to endchannel
-	ld a, [$c005]
-	and a
-	jr nz, .asm_7db89
-	ld a, [$FF00+$24]
-	ld [$c005], a
-	ld a, $77
-	ld [$FF00+$24], a
-.asm_7db89
-	ret
-
-Noise1f_endchannel: ; 7db8a (1f:5b8a)
-	endchannel
-
-Unknown_7db8b: ; 7db8b (1f:5b8b)
-	db $10, $15, $1A, $1F ; channels 0-3
-	db $10, $15, $1A, $1F ; channels 4-7
-
-Unknown_7db93: ; 7db93 (1f:5b93)
-	db $EE, $DD, $BB, $77 ; channels 0-3
-	db $EE, $DD, $BB, $77 ; channels 4-7
-
-Unknown_7db9b: ; 7db9b (1f:5b9b)
-	db $11, $22, $44, $88 ; channels 0-3
-	db $11, $22, $44, $88 ; channels 4-7
-
-Unknown_7dba3: ; 7dba3 (1f:5ba3)
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
-
-INCLUDE "music/bikeriding.asm"
-INCLUDE "music/dungeon1.asm"
-INCLUDE "music/gamecorner.asm"
-INCLUDE "music/titlescreen.asm"
-INCLUDE "music/sfx/sfx_1f_3a.asm"
-INCLUDE "music/dungeon2.asm"
-INCLUDE "music/dungeon3.asm"
-INCLUDE "music/cinnabarmansion.asm"
-INCLUDE "music/sfx/sfx_1f_41.asm"
-INCLUDE "music/sfx/sfx_1f_3b.asm"
-INCLUDE "music/sfx/sfx_1f_42.asm"
-INCLUDE "music/oakslab.asm"
-INCLUDE "music/pokemontower.asm"
-INCLUDE "music/silphco.asm"
-INCLUDE "music/meeteviltrainer.asm"
-INCLUDE "music/meetfemaletrainer.asm"
-INCLUDE "music/meetmaletrainer.asm"
-INCLUDE "music/introbattle.asm"
-INCLUDE "music/surfing.asm"
-INCLUDE "music/jigglypuffsong.asm"
-INCLUDE "music/halloffame.asm"
-INCLUDE "music/credits.asm"
-
-SECTION "bank20",ROMX,BANK[$20]
-
-_CardKeySuccessText1: ; 80000 (20:4000)
-	db $0, "Bingo!@@"
-
-_CardKeySuccessText2: ; 80009 (20:4009)
-	db $0, $4f
-	db "The CARD KEY", $55
-	db "opened the door!", $57
-
-_CardKeyFailText: ; 80029 (20:4029)
-	db $0, "Darn! It needs a", $4f
-	db "CARD KEY!", $57
-
-_UnnamedText_33cf: ; 80045 (20:4045)
-	TX_RAM $cd6d
-	db $0, ": @@"
-
-_UnnamedText_70847: ; 8004d (20:404d)
-	db $0, "Not even a nibble!", $58
-
-_UnnamedText_7084c: ; 80061 (20:4061)
-	db $0, "Looks like there's", $4f
-	db "nothing here.", $58
-
-_UnnamedText_70851: ; 80082 (20:4082)
-	db $0, "Oh!", $4f
-	db "It's a bite!", $58
-
-_UnnamedText_24db: ; 80093 (20:4093)
-	db $0, "!", $57
-
-_UnnamedText_24e0: ; 80096 (20:4096)
-	db $0, "Ground rose up", $4f
-	db "somewhere!", $57
-
-_BoulderText: ; 800b1 (20:40b1)
-	db $0, "This requires", $4f
-	db "STRENGTH to move!", $57
-
-_MartSignText: ; 800d2 (20:40d2)
-	db $0, "All your item", $4f
-	db "needs fulfilled!", $55
-	db "#MON MART", $57
-
-_PokeCenterSignText: ; 800fc (20:40fc)
-	db $0, "Heal Your #MON!", $4f
-	db "#MON CENTER", $57
-
-_FoundItemText: ; 80119 (20:4119)
-	db $0, $52, " found", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_NoMoreRoomForItemText: ; 8012a (20:412a)
-	db $0, "No more room for", $4f
-	db "items!", $57
-
-_UnnamedText_59091: ; 80143 (20:4143)
-	db $0, "Hi! Remember me?", $4f
-	db "I'm PROF.OAK's", $55
-	db "AIDE!", $51
-	db "If you caught @"
-
-UnnamedText_80177: ; 80177 (20:4177)
-	TX_NUM $ffdb, 1, 3
-	db $0, $4f
-	db "kinds of #MON,", $55
-	db "I'm supposed to", $55
-	db "give you an", $55
-	db "@"
-	TX_RAM $cc5b
-	db $0, "!", $51
-	db "So, ", $52, "! Have", $4f
-	db "you caught at", $55
-	db "least @"
-	TX_NUM $ffdb, 1, 3
-	db $0, " kinds of", $55
-	db "#MON?", $57
-
-_UnnamedText_59096: ; 801e4 (20:41e4)
-	db $0, "Let's see...", $4f
-	db "Uh-oh! You have", $55
-	db "caught only @"
-
-UnnamedText_8020e: ; 8020e (20:420e)
-	TX_NUM $ffdd, 1, 3
-	db $0, $55
-	db "kinds of #MON!", $51
-	db "You need @"
-	TX_NUM $ffdb, 1, 3
-	db $0, " kinds", $4f
-	db "if you want the", $55
-	db "@"
-	TX_RAM $cc5b
-	db $0, ".", $57
-
-_UnnamedText_5909b: ; 80250 (20:4250)
-	db $0, "Oh. I see.", $51
-	db "When you get @"
-	TX_NUM $ffdb, 1, 3
-	db $0, $4f
-	db "kinds, come back", $55
-	db "for @"
-	TX_RAM $cc5b
-	db $0, ".", $57
-
-_UnnamedText_590a0: ; 8028c (20:428c)
-	db $0, "Great! You have", $4f
-	db "caught @"
-
-UnnamedText_802a5: ; 802a5 (20:42a5)
-	TX_NUM $ffdd, 1, 3
-	db $0, " kinds ", $55
-	db "of #MON!", $55
-	db "Congratulations!", $51
-	db "Here you go!", $58
-
-_UnnamedText_590a5: ; 802d9 (20:42d9)
-	db $0, $52, " got the", $4f
-	db "@"
-	TX_RAM $cc5b
-	db $0, "!@@"
-
-_UnnamedText_590ab: ; 802ec (20:42ec)
-	db $0, "Oh! I see you", $4f
-	db "don't have any", $55
-	db "room for the", $55
-	db "@"
-
-UnnamedText_80317: ; 80317 (20:4317)
-	TX_RAM $cc5b
-	db $0, ".", $57
-
-_ViridianForestText1: ; 8031d (20:431d)
-	db $0, "I came here with", $4f
-	db "some friends!", $51
-	db "They're out for", $4f
-	db "#MON fights!", $57
-
-_ViridianForestBattleText1: ; 80359 (20:4359)
-	db $0, "Hey! You have", $4f
-	db "#MON! Come on!", $55
-	db "Let's battle'em!", $57
-
-_ViridianForestEndBattleText1: ; 80387 (20:4387)
-	db $0, "No!", $4f
-	db "CATERPIE can't", $55
-	db "cut it!", $58
-
-_ViridianFrstAfterBattleText1: ; 803a2 (20:43a2)
-	db $0, "Ssh! You'll scare", $4f
-	db "the bugs away!", $57
-
-_ViridianForestBattleText2: ; 803c3 (20:43c3)
-	db $0, "Yo! You can't jam", $4f
-	db "out if you're a", $55
-	db "#MON trainer!", $57
-
-_ViridianForestEndBattleText2: ; 803f2 (20:43f2)
-	db $0, "Huh?", $4f
-	db "I ran out of", $55
-	db "#MON!", $58
-
-_ViridianFrstAfterBattleText2: ; 8040b (20:440b)
-	db $0, "Darn! I'm going", $4f
-	db "to catch some", $55
-	db "stronger ones!", $57
-
-_ViridianForestBattleText3: ; 80438 (20:4438)
-	db $0, "Hey, wait up!", $4f
-	db "What's the hurry?", $57
-
-_ViridianForestEndBattleText3: ; 80458 (20:4458)
-	db $0, "I", $4f
-	db "give! You're good", $55
-	db "at this!", $58
-
-_ViridianFrstAfterBattleText3: ; 80475 (20:4475)
-	db $0, "Sometimes, you", $4f
-	db "can find stuff on", $55
-	db "the ground!", $51
-	db "I'm looking for", $4f
-	db "the stuff I", $55
-	db "dropped!", $57
-
-_ViridianForestText8: ; 804c7 (20:44c7)
-	db $0, "I ran out of #", $4f
-	db "BALLs to catch", $55
-	db "#MON with!", $51
-	db "You should carry", $4f
-	db "extras!", $57
-
-_ViridianForestText9: ; 8050a (20:450a)
-	db $0, "TRAINER TIPS", $51
-	db "If you want to", $4f
-	db "avoid battles,", $55
-	db "stay away from", $55
-	db "grassy areas!", $57
-
-_ViridianForestText10: ; 80553 (20:4553)
-	db $0, "For poison, use", $4f
-	db "ANTIDOTE! Get it", $55
-	db "at #MON MARTs!", $57
-
-_ViridianForestText11: ; 80584 (20:4584)
-	db $0, "TRAINER TIPS", $51
-	db "Contact PROF.OAK", $4f
-	db "via PC to get", $55
-	db "your #DEX", $55
-	db "evaluated!", $57
-
-_ViridianForestText12: ; 805c6 (20:45c6)
-	db $0, "TRAINER TIPS", $51
-	db "No stealing of", $4f
-	db "#MON from", $55
-	db "other trainers!", $55
-	db "Catch only wild", $55
-	db "#MON!", $57
-
-_ViridianForestText13: ; 80613 (20:4613)
-	db $0, "TRAINER TIPS", $51
-	db "Weaken #MON", $4f
-	db "before attempting", $55
-	db "capture!", $51
-	db "When healthy,", $4f
-	db "they may escape!", $57
-
-_ViridianForestText14: ; 80667 (20:4667)
-	db $0, "LEAVING", $4f
-	db "VIRIDIAN FOREST", $55
-	db "PEWTER CITY AHEAD", $57
-
-_MtMoon1BattleText2: ; 80692 (20:4692)
-	db $0, "WHOA! You shocked", $4f
-	db "me! Oh, you're", $55
-	db "just a kid!", $57
-
-_MtMoon1EndBattleText2: ; 806bf (20:46bf)
-	db $0, "Wow!", $4f
-	db "Shocked again!", $58
-
-_MtMoon1AfterBattleText2: ; 806d4 (20:46d4)
-	db $0, "Kids like you", $4f
-	db "shouldn't be", $55
-	db "here!", $57
-
-_MtMoon1BattleText3: ; 806f5 (20:46f5)
-	db $0, "Did you come to", $4f
-	db "explore too?", $57
-
-_MtMoon1EndBattleText3: ; 80713 (20:4713)
-	db $0, "Losing", $4f
-	db "stinks!", $58
-
-_MtMoon1AfterBattleText3: ; 80723 (20:4723)
-	db $0, "I came down here", $4f
-	db "to show off to", $55
-	db "girls.", $57
-
-_MtMoon1BattleText4: ; 8074b (20:474b)
-	db $0, "Wow! It's way", $4f
-	db "bigger in here", $55
-	db "than I thought!", $57
-
-_MtMoon1EndBattleText4: ; 80778 (20:4778)
-	db $0, "Oh!", $4f
-	db "I lost it!", $58
-
-_MtMoon1AfterBattleText4: ; 80788 (20:4788)
-	db $0, "How do you get", $4f
-	db "out of here?", $57
-
-_MtMoon1BattleText5: ; 807a5 (20:47a5)
-	db $0, "What! Don't sneak", $4f
-	db "up on me!", $57
-
-_MtMoon1EndBattleText5: ; 807c1 (20:47c1)
-	db $0, "My", $4f
-	db "#MON won't do!", $58
-
-_MtMoon1AfterBattleText5: ; 807d3 (20:47d3)
-	db $0, "I have to find", $4f
-	db "stronger #MON.", $57
-
-_MtMoon1BattleText6: ; 807f2 (20:47f2)
-	db $0, "What? I'm waiting", $4f
-	db "for my friends to", $55
-	db "find me here.", $57
-
-_MtMoon1EndBattleText6: ; 80824 (20:4824)
-	db $0, "I lost?", $58
-
-_MtMoon1AfterBattleText6: ; 8082d (20:482d)
-	db $0, "I heard there are", $4f
-	db "some very rare", $55
-	db "fossils here.", $57
-
-_MtMoon1BattleText7: ; 8085d (20:485d)
-	db $0, "Suspicious men", $4f
-	db "are in the cave.", $55
-	db "What about you?", $57
-
-_MtMoon1EndBattleText7: ; 8088e (20:488e)
-	db $0, "You", $4f
-	db "got me!", $58
-
-_MtMoon1AfterBattleText7: ; 8089b (20:489b)
-	db $0, "I saw them! I'm", $4f
-	db "sure they're from", $55
-	db "TEAM ROCKET!", $57
-
-_MtMoon1BattleText8: ; 808c9 (20:48c9)
-	db $0, "Go through this", $4f
-	db "cave to get to", $55
-	db "CERULEAN CITY!", $57
-
-_MtMoon1EndBattleText8: ; 808f8 (20:48f8)
-	db $0, "I", $4f
-	db "lost.", $58
-
-_MtMoon1AfterBattleText8: ; 80901 (20:4901)
-	db $0, "ZUBAT is tough!", $4f
-	db "But, it can be", $55
-	db "useful if you", $55
-	db "catch one.", $57
-
-_MtMoon1Text14: ; 8093a (20:493a)
-	db $0, "Beware! ZUBAT is", $4f
-	db "a blood sucker!", $57
-
-_UnnamedText_51a48: ; 8095c (20:495c)
-	db $0, $57
-
-_UnnamedText_49f24: ; 8095e (20:495e)
-	db $0, "You want the", $4f
-	db "DOME FOSSIL?", $57
-
-_UnnamedText_49f64: ; 80979 (20:4979)
-	db $0, "You want the", $4f
-	db "HELIX FOSSIL?", $57
-
-_UnnamedText_49f6f: ; 80995 (20:4995)
-	db $0, $52, " got the", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_49f7f: ; 809a8 (20:49a8)
-	db $0, "Look, you've got", $4f
-	db "no room for this.@@"
-
-_UnnamedText_49f85: ; 809cc (20:49cc)
-	db $0, "Hey, stop!", $51
-	db "I found these", $4f
-	db "fossils! They're", $55
-	db "both mine!", $57
-
-_UnnamedText_49f8a: ; 80a01 (20:4a01)
-	db $0, "OK!", $4f
-	db "I'll share!", $58
-
-_UnnamedText_49f8f: ; 80a11 (20:4a11)
-	db $0, "We'll each take", $4f
-	db "one!", $55
-	db "No being greedy!", $57
-
-_UnnamedText_49f94: ; 80a37 (20:4a37)
-	db $0, "Far away, on", $4f
-	db "CINNABAR ISLAND,", $55
-	db "there's a #MON", $55
-	db "LAB.", $51
-	db "They do research", $4f
-	db "on regenerating", $55
-	db "fossils.", $57
-
-_UnnamedText_49f99: ; 80a93 (20:4a93)
-	db $0, "All right. Then", $4f
-	db "this is mine!@@"
-
-_MtMoon3BattleText2: ; 80ab3 (20:4ab3)
-	db $0, "TEAM ROCKET will", $4f
-	db "find the fossils,", $55
-	db "revive and sell", $55
-	db "them for cash!", $57
-
-_MtMoon3EndBattleText2: ; 80af6 (20:4af6)
-	db $0, "Urgh!", $4f
-	db "Now I'm mad!", $58
-
-_MtMoon3AfterBattleText2: ; 80b09 (20:4b09)
-	db $0, "You made me mad!", $4f
-	db "TEAM ROCKET will", $55
-	db "blacklist you!", $57
-
-_MtMoon3BattleText3: ; 80b3b (20:4b3b)
-	db $0, "We, TEAM ROCKET,", $4f
-	db "are #MON", $55
-	db "gangsters!", $57
-
-_MtMoon3EndBattleText3: ; 80b61 (20:4b61)
-	db $0, "I blew", $4f
-	db "it!", $58
-
-_MtMoon3AfterBattleText3: ; 80b6d (20:4b6d)
-	db $0, "Darn it all! My", $4f
-	db "associates won't", $55
-	db "stand for this!", $57
-
-_MtMoon3BattleText4: ; 80b9e (20:4b9e)
-	db $0, "We're pulling a", $4f
-	db "big job here!", $55
-	db "Get lost, kid!", $57
-
-_MtMoon3EndBattleText4: ; 80bcb (20:4bcb)
-	db $0, "So, you", $4f
-	db "are good.", $58
-
-_MtMoon3AfterBattleText4: ; 80bde (20:4bde)
-	db $0, "If you find a", $4f
-	db "fossil, give it", $55
-	db "to me and scram!", $57
-
-_MtMoon3BattleText5: ; 80c0e (20:4c0e)
-	db $0, "Little kids", $4f
-	db "should leave", $55
-	db "grown-ups alone!", $57
-
-_MtMoon3EndBattleText5: ; 80c39 (20:4c39)
-	db $0, "I'm", $4f
-	db "steamed!", $58
-
-_MtMoon3AfterBattleText5: ; 80c46 (20:4c46)
-	db $0, "#MON lived", $4f
-	db "here long before", $55
-	db "people came.", $57
-
-_SSAnne1Text1: ; 80c70 (20:4c70)
-	db $0, "Bonjour!", $4f
-	db "I am le waiter on", $55
-	db "this ship!", $51
-	db "I will be happy", $4f
-	db "to serve you any-", $55
-	db "thing you please!", $51
-	db "Ah! Le strong", $4f
-	db "silent type!", $57
-
-_SSAnne1Text2: ; 80ce6 (20:4ce6)
-	db $0, "The passengers", $4f
-	db "are restless!", $51
-	db "You might be", $4f
-	db "challenged by the", $55
-	db "more bored ones!", $57
-
-_SSAnne2Text1: ; 80d34 (20:4d34)
-	db $0, "This ship, she is", $4f
-	db "a luxury liner", $55
-	db "for trainers!", $51
-	db "At every port, we", $4f
-	db "hold parties with", $55
-	db "invited trainers!", $57
-
-_SSAnneRivalBeforeBattleText: ; 80d9a (20:4d9a)
-	db $0, $53, ": Bonjour!", $4f
-	db $52, "!", $51
-	db "Imagine seeing", $4f
-	db "you here!", $51
-	db $52, ", were you", $4f
-	db "really invited?", $51
-	db "So how's your", $4f
-	db "#DEX coming?", $51
-	db "I already caught", $4f
-	db "40 kinds, pal!", $51
-	db "Different kinds", $4f
-	db "are everywhere!", $51
-	db "Crawl around in", $4f
-	db "grassy areas!", $57
-
-_SSAnneRivalDefeatedText: ; 80e57 (20:4e57)
-	db $0, "Humph!", $51
-	db "At least you're", $4f
-	db "raising your", $55
-	db "#MON!", $58
-
-_SSAnneRivalWonText: ; 80e81 (20:4e81)
-	db $0, $52, "! What are", $4f
-	db "you, seasick?", $51
-	db "You should shape", $4f
-	db "up, pal!", $58
-
-_SSAnneRivalCaptainText: ; 80eb6 (20:4eb6)
-	db $0, $53, ": I heard", $4f
-	db "there was a CUT", $55
-	db "master on board.", $51
-	db "But, he was just a", $4f
-	db "seasick, old man!", $51
-	db "But, CUT itself is", $4f
-	db "really useful!", $51
-	db "You should go see", $4f
-	db "him! Smell ya!", $57
-
-_SSAnne3Text1: ; 80f4b (20:4f4b)
-	db $0, "Our CAPTAIN is a", $4f
-	db "sword master!", $51
-	db "He even teaches", $4f
-	db "CUT to #MON!", $57
-
-_SSAnne5Text1: ; 80f88 (20:4f88)
-	db $0, "The party's over.", $4f
-	db "The ship will be", $55
-	db "departing soon.", $57
-
-_SSAnne5Text2: ; 80fbb (20:4fbb)
-	db $0, "Scrubbing decks", $4f
-	db "is hard work!", $57
-
-_SSAnne5Text3: ; 80fda (20:4fda)
-	db $0, "Urf. I feel ill.", $51
-	db "I stepped out to", $4f
-	db "get some air.", $57
-
-_SSAnneBattleText1: ; 8100b (20:500b)
-	db $0, "Hey matey!", $51
-	db "Let's do a little", $4f
-	db "jig!", $57
-
-_SSAnneEndBattleText1: ; 8102d (20:502d)
-	db $0, "You're", $4f
-	db "impressive!", $58
-
-_SSAnneAfterBattleText1: ; 81040 (20:5040)
-	db $0, "How many kinds of", $4f
-	db "#MON do you", $55
-	db "think there are?", $57
-
-_SSAnneBattleText2: ; 81070 (20:5070)
-	db $0, "Ahoy there!", $4f
-	db "Are you seasick?", $57
-
-_SSAnneEndBattleText2: ; 8108e (20:508e)
-	db $0, "I was", $4f
-	db "just careless!", $58
-
-_SSAnneAfterBattleText2: ; 810a4 (20:50a4)
-	db $0, "My Pa said there", $4f
-	db "are 100 kinds of", $55
-	db "#MON. I think", $55
-	db "there are more.", $57
-
-_SSAnne6Text1: ; 810e5 (20:50e5)
-	db $0, "You, mon petit!", $4f
-	db "We're busy here!", $55
-	db "Out of the way!", $57
-
-_SSAnne6Text2: ; 81116 (20:5116)
-	db $0, "I saw an odd ball", $4f
-	db "in the trash.", $57
-
-_SSAnne6Text3: ; 81137 (20:5137)
-	db $0, "I'm so busy I'm", $4f
-	db "getting dizzy!", $57
-
-_SSAnne6Text4: ; 81155 (20:5155)
-	db $0, "Hum-de-hum-de-", $4f
-	db "ho...", $51
-	db "I peel spuds", $4f
-	db "every day!", $55
-	db "Hum-hum...", $57
-
-_SSAnne6Text5: ; 8118e (20:518e)
-	db $0, "Did you hear about", $4f
-	db "SNORLAX?", $51
-	db "All it does is", $4f
-	db "eat and sleep!", $57
-
-_SSAnne6Text6: ; 811c9 (20:51c9)
-	db $0, "Snivel...Sniff...", $51
-	db "I only get to", $4f
-	db "peel onions...", $55
-	db "Snivel...", $57
-
-_UnnamedText_61807: ; 81203 (20:5203)
-	db $0, "Er-hem! Indeed I", $4f
-	db "am le CHEF!", $51
-	db "Le main course is", $58
-
-_UnnamedText_6180c: ; 81233 (20:5233)
-	db $0, "Salmon du Salad!", $51
-	db "Les guests may", $4f
-	db "gripe it's fish", $55
-	db "again, however!", $57
-
-_UnnamedText_61811: ; 81273 (20:5273)
-	db $0, "Eels au Barbecue!", $51
-	db "Les guests will", $4f
-	db "mutiny, I fear.", $57
-
-_UnnamedText_61816: ; 812a6 (20:52a6)
-	db $0, "Prime Beef Steak!", $51
-	db "But, have I enough", $4f
-	db "fillets du beef?", $57
-
-_SSAnne7RubText: ; 812dd (20:52dd)
-	db $0, "CAPTAIN: Ooargh...", $4f
-	db "I feel hideous...", $55
-	db "Urrp! Seasick...", $51
-	db $52, " rubbed", $4f
-	db "the CAPTAIN's", $55
-	db "back!", $51
-	db "Rub-rub...", $4f
-	db "Rub-rub...@@"
-
-_ReceivingHM01Text: ; 81347 (20:5347)
-	db $0, "CAPTAIN: Whew!", $4f
-	db "Thank you! I", $55
-	db "feel much better!", $51
-	db "You want to see", $4f
-	db "my CUT technique?", $51
-	db "I could show you", $4f
-	db "if I wasn't ill...", $51
-	db "I know! You can", $4f
-	db "have this!", $51
-	db "Teach it to your", $4f
-	db "#MON and you", $55
-	db "can see it CUT", $55
-	db "any time!", $58
-
-_ReceivedHM01Text: ; 8140d (20:540d)
-	db $0, $52, " got", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_61932: ; 8141c (20:541c)
-	db $0, "CAPTAIN: Whew!", $51
-	db "Now that I'm not", $4f
-	db "sick any more, I", $55
-	db "guess it's time.", $57
-
-_HM01NoRoomText: ; 8145d (20:545d)
-	db $0, "Oh no! You have", $4f
-	db "no room for this!", $57
-
-_SSAnne7Text2: ; 81480 (20:5480)
-	db $0, "Yuck! Shouldn't", $4f
-	db "have looked!", $57
-
-_SSAnne7Text3: ; 8149d (20:549d)
-	db $0, "How to Conquer", $4f
-	db "Seasickness...", $55
-	db "The CAPTAIN's", $55
-	db "reading this!", $57
-
-_SSAnne8Text8: ; 814d7 (20:54d7)
-	db $0, "WIGGLYTUFF: Puup", $4f
-	db "pupuu!@@"
-
-_SSAnne8BattleText1: ; 814f1 (20:54f1)
-	db $0, "I travel alone", $4f
-	db "on my journeys!", $51
-	db "My #MON are my", $4f
-	db "only friends!", $57
-
-_SSAnne8EndBattleText1: ; 8152e (20:552e)
-	db $0, "My, my", $4f
-	db "friends...", $58
-
-_SSAnne8AfterBattleText1: ; 81541 (20:5541)
-	db $0, "You should be", $4f
-	db "nice to friends!", $57
-
-_SSAnne8BattleText2: ; 81561 (20:5561)
-	db $0, "You pup! How dare", $4f
-	db "you barge in!", $57
-
-_SSAnne8EndBattleText2: ; 81582 (20:5582)
-	db $0, "Humph!", $4f
-	db "You rude child!", $58
-
-_UnnamedText_61a24: ; 8159a (20:559a)
-	db $0, "I wish to be left", $4f
-	db "alone! Get out!", $57
-
-_SSAnne8BattleText3: ; 815bd (20:55bd)
-	db $0, "I love #MON!", $4f
-	db "Do you?", $57
-
-_SSAnne8EndBattleText3: ; 815d3 (20:55d3)
-	db $0, "Wow! ", $4f
-	db "You're great!", $58
-
-_SSAnne8AfterBattleText3: ; 815e7 (20:55e7)
-	db $0, "Let me be your", $4f
-	db "friend, OK?", $51
-	db "Then we can trade", $4f
-	db "#MON!", $57
-
-_SSAnne8BattleText4: ; 8161b (20:561b)
-	db $0, "I collected these", $4f
-	db "#MON from all", $55
-	db "around the world!", $57
-
-_SSAnne8EndBattleText4: ; 8164e (20:564e)
-	db $0, "Oh no!", $4f
-	db "I went around the", $55
-	db "world for these!", $58
-
-_SSAnne8AfterBattleText4: ; 81679 (20:5679)
-	db $0, "You hurt my poor", $4f
-	db "worldly #MON!", $51
-	db "I demand that you", $4f
-	db "heal them at a", $55
-	db "#MON CENTER!", $57
-
-_SSAnne8Text5: ; 816c7 (20:56c7)
-	db $0, "Waiter, I would", $4f
-	db "like a cherry pie", $55
-	db "please!", $57
-
-_SSAnne8Text6: ; 816f2 (20:56f2)
-	db $0, "A cruise is so", $4f
-	db "elegant yet cozy!", $57
-
-_SSAnne8Text7: ; 81714 (20:5714)
-	db $0, "I always travel", $4f
-	db "with WIGGLYTUFF!", $57
-
-_SSAnne8Text9: ; 81736 (20:5736)
-	db $0, "We are cruising", $4f
-	db "around the world.", $57
-
-_SSAnne8Text11: ; 81759 (20:5759)
-	db $0, "Ssh! I'm a GLOBAL", $4f
-	db "POLICE agent!", $51
-	db "I'm on the trail", $4f
-	db "of TEAM ROCKET!", $57
-
-_UnnamedText_61bf2: ; 81799 (20:5799)
-	db $0, "In all my travels", $4f
-	db "I've never seen", $55
-	db "any #MON sleep", $55
-	db "like this one!", $51
-	db "It was something", $4f
-	db "like this!", $58
-
-_UnnamedText_61c01: ; 817f5 (20:57f5)
-	db $0, "Ah yes, I have", $4f
-	db "seen some #MON", $55
-	db "ferry people", $55
-	db "across the water!", $57
-
-_UnnamedText_61c10: ; 81833 (20:5833)
-	db $0, "#MON can CUT", $4f
-	db "down small bushes.", $57
-
-_UnnamedText_61c1f: ; 81854 (20:5854)
-	db $0, "Have you gone to", $4f
-	db "the SAFARI ZONE", $55
-	db "in FUCHSIA CITY?", $51
-	db "It had many rare", $4f
-	db "kinds of #MON!!", $57
-
-_UnnamedText_61c2e: ; 818a8 (20:58a8)
-	db $0, "Me and my Daddy", $4f
-	db "think the SAFARI", $55
-	db "ZONE is awesome!", $57
-
-_UnnamedText_61c3d: ; 818db (20:58db)
-	db $0, "The CAPTAIN looked", $4f
-	db "really sick and", $55
-	db "pale!", $57
-
-_UnnamedText_61c4c: ; 81905 (20:5905)
-	db $0, "I hear many people", $4f
-	db "get seasick!", $57
-
-_SSAnne9BattleText1: ; 81926 (20:5926)
-	db $0, "Competing against", $4f
-	db "the young keeps", $55
-	db "me youthful.", $57
-
-_SSAnne9EndBattleText1: ; 81956 (20:5956)
-	db $0, "Good", $4f
-	db "fight! Ah, I feel", $55
-	db "young again!", $58
-
-_SSAnne9AfterBattleText1: ; 8197b (20:597b)
-	db $0, "15 years ago, I", $4f
-	db "would have won!", $57
-
-_SSAnne9BattleText2: ; 8199c (20:599c)
-	db $0, "Check out what I", $4f
-	db "fished up!", $57
-
-_SSAnne9EndBattleText2: ; 819b9 (20:59b9)
-	db $0, "I'm", $4f
-	db "all out!", $58
-
-_SSAnne9AfterBattleText2: ; 819c6 (20:59c6)
-	db $0, "Party?", $51
-	db "The cruise ship's", $4f
-	db "party should be", $55
-	db "over by now.", $57
-
-_SSAnne9BattleText3: ; 819fc (20:59fc)
-	db $0, "Which do you like,", $4f
-	db "a strong or a", $55
-	db "rare #MON?", $57
-
-_SSAnne9EndBattleText3: ; 81a29 (20:5a29)
-	db $0, "I must", $4f
-	db "salute you!", $58
-
-_SSAnne9AfterBattleText3: ; 81a3d (20:5a3d)
-	db $0, "I prefer strong", $4f
-	db "and rare #MON.", $57
-
-_SSAnne9BattleText4: ; 81a5d (20:5a5d)
-	db $0, "I never saw you", $4f
-	db "at the party.", $57
-
-_SSAnne9EndBattleText4: ; 81a7c (20:5a7c)
-	db $0, "Take", $4f
-	db "it easy!", $58
-
-_SSAnne9AfterBattleText4: ; 81a8b (20:5a8b)
-	db $0, "Oh, I adore your", $4f
-	db "strong #MON!", $57
-
-_SSAnne10Text8: ; 81aaa (20:5aaa)
-	db $0, "MACHOKE: Gwoh!", $4f
-	db "Goggoh!@@"
-
-_SSAnne10BattleText1: ; 81ac3 (20:5ac3)
-	db $0, "You know what they", $4f
-	db "say about sailors", $55
-	db "and fighting!", $57
-
-_SSAnne10EndBattleText1: ; 81af7 (20:5af7)
-	db $0, "Right!", $4f
-	db "Good fight, mate!", $58
-
-_SSAnne10AfterBattleText1: ; 81b11 (20:5b11)
-	db $0, "Haha! Want to be", $4f
-	db "a sailor, mate?", $57
-
-_SSAnne10BattleText2: ; 81b33 (20:5b33)
-	db $0, "My sailor's pride", $4f
-	db "is at stake!", $57
-
-_SSAnne10EndBattleText2: ; 81b52 (20:5b52)
-	db $0, "Your", $4f
-	db "spirit sank me!", $58
-
-_SSAnne10AfterBattleText2: ; 81b68 (20:5b68)
-	db $0, "Did you see the", $4f
-	db "FISHING GURU in", $55
-	db "VERMILION CITY?", $57
-
-_SSAnne10BattleText3: ; 81b99 (20:5b99)
-	db $0, "Us sailors have", $4f
-	db "#MON too!", $57
-
-_SSAnne10EndBattleText3: ; 81bb4 (20:5bb4)
-	db $0, "OK, ", $4f
-	db "you're not bad.", $58
-
-_SSAnne10AfterBattleText3: ; 81bc9 (20:5bc9)
-	db $0, "We caught all our", $4f
-	db "#MON while", $55
-	db "out at sea!", $57
-
-_SSAnne10BattleText4: ; 81bf3 (20:5bf3)
-	db $0, "I like feisty", $4f
-	db "kids like you!@@"
-
-_SSAnne10EndBattleText4: ; 81c12 (20:5c12)
-	db $0, "Argh!", $4f
-	db "Lost it!", $58
-
-_SSAnne10AfterBattleText4: ; 81c22 (20:5c22)
-	db $0, "Sea #MON live", $4f
-	db "in deep water.", $55
-	db "You'll need a ROD!", $57
-
-_SSAnne10BattleText5: ; 81c52 (20:5c52)
-	db $0, "Matey, you're", $4f
-	db "walking the plank", $55
-	db "if you lose!", $57
-
-_SSAnne10EndBattleText5: ; 81c7f (20:5c7f)
-	db $0, "Argh!", $4f
-	db "Beaten by a kid!", $58
-
-_SSAnne10AfterBattleText5: ; 81c97 (20:5c97)
-	db $0, "Jellyfish some-", $4f
-	db "times drift into", $55
-	db "the ship.", $57
-
-_SSAnne10BattleText6: ; 81cc3 (20:5cc3)
-	db $0, "Hello stranger!", $4f
-	db "Stop and chat!", $51
-	db "All my #MON", $4f
-	db "are from the sea!", $57
-
-_SSAnne10EndBattleText6: ; 81d01 (20:5d01)
-	db $0, "Darn!", $4f
-	db "I let that one", $55
-	db "get away!", $58
-
-_SSAnne10AfterBattleText6: ; 81d21 (20:5d21)
-	db $0, "I was going to", $4f
-	db "make you my", $55
-	db "assistant too!", $57
-
-_SSAnne10Text7: ; 81d4c (20:5d4c)
-	db $0, "My buddy, MACHOKE,", $4f
-	db "is super strong!", $51
-	db "He has enough", $4f
-	db "STRENGTH to move", $55
-	db "big rocks!", $57
-
-_VictoryRoad3BattleText2: ; 81d9b (20:5d9b)
-	db $0, "I heard rumors of", $4f
-	db "a child prodigy!", $57
-
-_VictoryRoad3EndBattleText2: ; 81dbf (20:5dbf)
-	db $0, "The", $4f
-	db "rumors were true!", $58
-
-_VictoryRoad3AfterBattleText2: ; 81dd6 (20:5dd6)
-	db $0, "You beat GIOVANNI", $4f
-	db "of TEAM ROCKET?", $57
-
-_VictoryRoad3BattleText3: ; 81df9 (20:5df9)
-	db $0, "I'll show you just", $4f
-	db "how good you are!", $57
-
-_VictoryRoad3EndBattleText3: ; 81e1e (20:5e1e)
-	db $0, "I'm", $4f
-	db "furious!", $58
-
-_VictoryRoad3AfterBattleText3: ; 81e2b (20:5e2b)
-	db $0, "You showed me just", $4f
-	db "how good I was!", $57
-
-_VictoryRoad3BattleText4: ; 81e4f (20:5e4f)
-	db $0, "Only the chosen", $4f
-	db "can pass here!", $57
-
-_VictoryRoad3EndBattleText4: ; 81e6f (20:5e6f)
-	db $0, "I", $4f
-	db "don't believe it!", $58
-
-_VictoryRoad3AfterBattleText4: ; 81e83 (20:5e83)
-	db $0, "All trainers here", $4f
-	db "are headed to the", $55
-	db "#MON LEAGUE!", $55
-	db "Be careful!", $57
-
-_VictoryRoad3BattleText5: ; 81ec1 (20:5ec1)
-	db $0, "Trainers live to", $4f
-	db "seek stronger", $55
-	db "opponents!", $57
-
-_VictoryRoad3EndBattleText5: ; 81eec (20:5eec)
-	db $0, "Oh!", $4f
-	db "So strong!", $58
-
-_VictoryRoad3AfterBattleText5: ; 81efc (20:5efc)
-	db $0, "By fighting tough", $4f
-	db "battles, you get", $55
-	db "stronger!", $57
-
-_RocketHideout1EndBattleText6: ; 81f2a (20:5f2a)
-	db $0, "Why...?@@"
-
-_RocketHideout1BattleText2: ; 81f34 (20:5f34)
-	db $0, "Who are you? How", $4f
-	db "did you get here?", $57
-
-_RocketHideout1EndBattleText2: ; 81f58 (20:5f58)
-	db $0, "Oww!", $4f
-	db "Beaten!", $58
-
-_RocketHideout1AfterBattleTxt2: ; 81f66 (20:5f66)
-	db $0, "Are you dissing", $4f
-	db "TEAM ROCKET?", $57
-
-_RocketHideout1BattleText3: ; 81f84 (20:5f84)
-	db $0, "You broke into", $4f
-	db "our operation?", $57
-
-_RocketHideout1EndBattleText3: ; 81fa3 (20:5fa3)
-	db $0, "Burnt!", $58
-
-_RocketHideout1AfterBattleTxt3: ; 81fab (20:5fab)
-	db $0, "You're not going", $4f
-	db "to get away with", $55
-	db "this, brat!", $57
-
-_RocketHideout1BattleText4: ; 81fd9 (20:5fd9)
-	db $0, "Intruder alert!", $57
-
-_RocketHideout1EndBattleText4: ; 81fea (20:5fea)
-	db $0, "I", $4f
-	db "can't do it!", $58
-
-_RocketHideout1AfterBattleTxt4: ; 81ff9 (20:5ff9)
-	db $0, "SILPH SCOPE?", $4f
-	db "I don't know", $55
-	db "where it is!", $57
-
-_RocketHideout1BattleText5: ; 82020 (20:6020)
-	db $0, "Why did you come", $4f
-	db "here?", $57
-
-_RocketHideout1EndBattleText5: ; 82038 (20:6038)
-	db $0, "This", $4f
-	db "won't do!", $58
-
-_RocketHideout1AfterBattleTxt5: ; 82047 (20:6047)
-	db $0, "OK, I'll talk!", $4f
-	db "Take the elevator", $55
-	db "to see my BOSS!", $57
-
-_RocketHideout1BattleText6: ; 82078 (20:6078)
-	db $0, "Are you lost, you", $4f
-	db "little rat?", $57
-
-_RocketHideout1AfterBattleTxt6: ; 82097 (20:6097)
-	db $0, "Uh-oh, that fight", $4f
-	db "opened the door!", $57
-
-_RocketHideout2BattleText2: ; 820bb (20:60bb)
-	db $0, "BOSS said you can", $4f
-	db "see GHOSTs with", $55
-	db "the SILPH SCOPE!", $57
-
-_RocketHideout2EndBattleText2: ; 820ef (20:60ef)
-	db $0, "I", $4f
-	db "surrender!", $58
-
-_RocketHideout2AfterBattleTxt2: ; 820fd (20:60fd)
-	db $0, "The TEAM ROCKET", $4f
-	db "HQ has 4 basement", $55
-	db "floors. Can you", $55
-	db "reach the BOSS?", $57
-
-_RocketHideout3BattleText2: ; 82140 (20:6140)
-	db $0, "Stop meddling in", $4f
-	db "TEAM ROCKET's", $55
-	db "affairs!", $57
-
-_RocketHideout3EndBattleText2: ; 82168 (20:6168)
-	db $0, "Oof!", $4f
-	db "Taken down!", $58
-
-_RocketHideout3AfterBattleTxt2: ; 8217a (20:617a)
-	db $0, "SILPH SCOPE?", $4f
-	db "The machine the", $55
-	db "BOSS stole. It's", $55
-	db "here somewhere.", $57
-
-_RocketHideout3BattleTxt: ; 821b8 (20:61b8)
-	db $0, "We got word from", $4f
-	db "upstairs that you", $55
-	db "were coming!", $57
-
-_RocketHideout3EndBattleText3: ; 821e9 (20:61e9)
-	db $0, "What?", $4f
-	db "I lost? No!", $58
-
-_RocketHide3AfterBattleText3: ; 821fc (20:61fc)
-	db $0, "Go ahead and go!", $4f
-	db "But, you need the", $55
-	db "LIFT KEY to run", $55
-	db "the elevator!", $57
-
-_UnnamedText_4557a: ; 8223e (20:623e)
-	db $0, "So! I must say, I", $4f
-	db "am impressed you", $55
-	db "got here!", $57
-
-_UnnamedText_4557f: ; 8226c (20:626c)
-	db $0, "WHAT!", $4f
-	db "This cannot be!", $58
-
-_UnnamedText_45584: ; 82283 (20:6283)
-	db $0, "I see that you", $4f
-	db "raise #MON", $55
-	db "with utmost care.", $51
-	db "A child like you", $4f
-	db "would never", $55
-	db "understand what I", $55
-	db "hope to achieve.", $51
-	db "I shall step", $4f
-	db "aside this time!", $51
-	db "I hope we meet", $4f
-	db "again...", $57
-
-_RocketHideout4BattleText2: ; 82326 (20:6326)
-	db $0, "I know you! You", $4f
-	db "ruined our plans", $55
-	db "at MT.MOON!", $57
-
-_RocketHideout4EndBattleText2: ; 82354 (20:6354)
-	db $0, "Burned", $4f
-	db "again!", $58
-
-_RocketHide4AfterBattleText2: ; 82363 (20:6363)
-	db $0, "Do you have", $4f
-	db "something against", $55
-	db "TEAM ROCKET?", $57
-
-_RocketHideout4BattleText3: ; 8238f (20:638f)
-	db $0, "How can you not", $4f
-	db "see the beauty of", $55
-	db "our evil?", $57
-
-_RocketHideout4EndBattleText3: ; 823bc (20:63bc)
-	db $0, "Ayaya!", $58
-
-_RocketHide4AfterBattleText3: ; 823c4 (20:63c4)
-	db $0, "BOSS! I'm sorry I", $4f
-	db "failed you!", $57
-
-_RocketHideout4BattleText4: ; 823e2 (20:63e2)
-	db $0, "The elevator", $4f
-	db "doesn't work? Who", $55
-	db "has the LIFT KEY?", $57
-
-_RocketHideout4EndBattleText4: ; 82413 (20:6413)
-	db $0, "No!", $58
-
-_UnnamedText_455ec: ; 82418 (20:6418)
-	db $0, "Oh no! I dropped", $4f
-	db "the LIFT KEY!", $57
-
-_UnnamedText_4578b: ; 82438 (20:6438)
-	db $0, "It appears to", $4f
-	db "need a key.@@"
-
-_UnnamedText_59ded: ; 82454 (20:6454)
-	db $0, "Eeek!", $4f
-	db "No! Stop! Help!", $51
-	db "Oh, you're not", $4f
-	db "with TEAM ROCKET.", $55
-	db "I thought...", $55
-	db "I'm sorry. Here,", $55
-	db "please take this!", $58
-
-_ReceivedTM36Text: ; 824ba (20:64ba)
-	db $0, $52, " got", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM36ExplanationText: ; 824c9 (20:64c9)
-	db $0, "TM36 is", $4f
-	db "SELFDESTRUCT!", $51
-	db "It's powerful, but", $4f
-	db "the #MON that", $55
-	db "uses it faints!", $55
-	db "Be careful.", $57
-
-_TM36NoRoomText: ; 8251c (20:651c)
-	db $0, "You don't have any", $4f
-	db "room for this.", $57
-
-_SilphCo2BattleText1: ; 8253e (20:653e)
-	db $0, "Help! I'm a SILPH", $4f
-	db "employee.", $57
-
-_SilphCo2EndBattleText1: ; 8255a (20:655a)
-	db $0, "How", $4f
-	db "did you know I", $55
-	db "was a ROCKET?", $58
-
-_SilphCo2AfterBattleText1: ; 8257c (20:657c)
-	db $0, "I work for both", $4f
-	db "SILPH and TEAM", $55
-	db "ROCKET!", $57
-
-_SilphCo2BattleText2: ; 825a4 (20:65a4)
-	db $0, "It's off limits", $4f
-	db "here! Go home!", $57
-
-_SilphCo2EndBattleText2: ; 825c3 (20:65c3)
-	db $0, "You're", $4f
-	db "good.", $58
-
-_SilphCo2AfterBattleText2: ; 825d0 (20:65d0)
-	db $0, "Can you solve the", $4f
-	db "maze in here?", $57
-
-_SilphCo2BattleText3: ; 825f1 (20:65f1)
-	db $0, "No kids are", $4f
-	db "allowed in here!", $57
-
-_SilphCo2EndBattleText3: ; 8260f (20:660f)
-	db $0, "Tough!", $58
-
-_SilphCo2AfterBattleText3: ; 82617 (20:6617)
-	db $0, "Diamond shaped", $4f
-	db "tiles are", $55
-	db "teleport blocks!", $51
-	db "They're hi-tech", $4f
-	db "transporters!", $57
-
-_SilphCo2BattleText4: ; 8265f (20:665f)
-	db $0, "Hey kid! What are", $4f
-	db "you doing here?", $57
-
-_SilphCo2EndBattleText4: ; 82682 (20:6682)
-	db $0, "I goofed!", $58
-
-_SilphCo2AfterBattleText4: ; 8268d (20:668d)
-	db $0, "SILPH CO. will", $4f
-	db "be merged with", $55
-	db "TEAM ROCKET!", $57
-
-_UnnamedText_59ff9: ; 826b9 (20:66b9)
-	db $0, "I work for SILPH.", $4f
-	db "What should I do?", $57
-
-_UnnamedText_59ffe: ; 826de (20:66de)
-	db $0, $52, "! You and", $4f
-	db "your #MON", $55
-	db "saved us!", $57
-
-_SilphCo3BattleText1: ; 826fe (20:66fe)
-	db $0, "Quit messing with", $4f
-	db "us, kid!", $57
-
-_SilphCo3EndBattleText1: ; 8271a (20:671a)
-	db $0, "I give", $4f
-	db "up!", $58
-
-_SilphCo3AfterBattleText1: ; 82726 (20:6726)
-	db $0, "A hint? You can", $4f
-	db "open doors with a", $55
-	db "CARD KEY!", $57
-
-_SilphCo3BattleText2: ; 82753 (20:6753)
-	db $0, "I support TEAM", $4f
-	db "ROCKET more than", $55
-	db "I support SILPH!", $57
-
-_SilphCo3EndBattleText2: ; 82785 (20:6785)
-	db $0, "You", $4f
-	db "really got me!", $58
-
-_SilphCo3AfterBattleText2: ; 82799 (20:6799)
-	db $0, "Humph...", $51
-	db "TEAM ROCKET said", $4f
-	db "that if I helped", $55
-	db "them, they'd let", $55
-	db "me study #MON!", $57
-
-_UnnamedText_19de0: ; 827e4 (20:67e4)
-	db $0, "Sssh! Can't you", $4f
-	db "see I'm hiding?", $57
-
-_UnnamedText_19de5: ; 82803 (20:6803)
-	db $0, "Huh? TEAM ROCKET", $4f
-	db "is gone?", $57
-
-_SilphCo4BattleText2: ; 8281e (20:681e)
-	db $0, "TEAM ROCKET has", $4f
-	db "taken command of", $55
-	db "SILPH CO.!", $57
-
-_SilphCo4EndBattleText2: ; 8284b (20:684b)
-	db $0, "Arrgh!", $58
-
-_SilphCo4AfterBattleText2: ; 82853 (20:6853)
-	db $0, "Fwahahaha!", $4f
-	db "My BOSS has been", $55
-	db "after this place!", $57
-
-_SilphCo4BattleText3: ; 82882 (20:6882)
-	db $0, "My #MON are my", $4f
-	db "loyal soldiers!", $57
-
-_SilphCo4EndBattleText3: ; 828a2 (20:68a2)
-	db $0, "Darn!", $4f
-	db "You weak #MON!", $58
-
-_SilphCo4AfterBattleText3: ; 828b8 (20:68b8)
-	db $0, "The doors are", $4f
-	db "electronically", $55
-	db "locked! A CARD", $55
-	db "KEY opens them!", $57
-
-_SilphCo4BattleText4: ; 828f5 (20:68f5)
-	db $0, "Intruder spotted!", $57
-
-_SilphCo4EndBattleText4: ; 82908 (20:6908)
-	db $0, "Who", $4f
-	db "are you?", $58
-
-_SilphCo4AfterBattleText4: ; 82916 (20:6916)
-	db $0, "I better tell the", $4f
-	db "BOSS on 11F!", $57
-
-_UnnamedText_1a010: ; 82936 (20:6936)
-	db $0, "TEAM ROCKET is", $4f
-	db "in an uproar over", $55
-	db "some intruder.", $55
-	db "That's you right?", $57
-
-_UnnamedText_1a015: ; 82978 (20:6978)
-	db $0, "TEAM ROCKET took", $4f
-	db "off! You're our", $55
-	db "hero! Thank you!", $57
-
-_SilphCo5BattleText2: ; 829aa (20:69aa)
-	db $0, "I heard a kid was", $4f
-	db "wandering around.", $57
-
-_SilphCo5EndBattleText2: ; 829cf (20:69cf)
-	db $0, "Boom!", $58
-
-_SilphCo5AfterBattleText2: ; 829d6 (20:69d6)
-	db $0, "It's not smart", $4f
-	db "to pick a fight", $55
-	db "with TEAM ROCKET!", $57
-
-_SilphCo5BattleText3: ; 82a07 (20:6a07)
-	db $0, "We study #", $4f
-	db "BALL technology", $55
-	db "on this floor!", $57
-
-_SilphCo5EndBattleText3: ; 82a32 (20:6a32)
-	db $0, "Dang!", $4f
-	db "Blast it!", $58
-
-_SilphCo5AfterBattleText3: ; 82a43 (20:6a43)
-	db $0, "We worked on the", $4f
-	db "ultimate #", $55
-	db "BALL which would", $55
-	db "catch anything!", $57
-
-_SilphCo5BattleText4: ; 82a81 (20:6a81)
-	db $0, "Whaaat? There", $4f
-	db "shouldn't be any", $55
-	db "children here?", $57
-
-SECTION "bank21",ROMX,BANK[$21]
-
-_SilphCo5EndBattleText4: ; 84000 (21:4000)
-	db $0, "Oh", $4f
-	db "goodness!", $58
-
-_SilphCo5AfterBattleText4: ; 8400e (21:400e)
-	db $0, "You're only on 5F.", $4f
-	db "It's a long way", $55
-	db "to my BOSS!", $57
-
-_SilphCo5BattleText5: ; 8403c (21:403c)
-	db $0, "Show TEAM ROCKET", $4f
-	db "a little respect!", $57
-
-_SilphCo5EndBattleText5: ; 84060 (21:4060)
-	db $0, "Cough...", $4f
-	db "Cough...", $58
-
-_SilphCo5AfterBattleText5: ; 84073 (21:4073)
-	db $0, "Which reminds me.", $51
-	db "KOFFING evolves", $4f
-	db "into WEEZING!", $57
-
-_SilphCo5Text9: ; 840a4 (21:40a4)
-	db $0, "It's a #MON", $4f
-	db "REPORT!", $51
-	db "#MON LAB", $4f
-	db "created PORYGON,", $55
-	db "the first virtual", $55
-	db "reality #MON.", $57
-
-_SilphCo5Text10: ; 840f2 (21:40f2)
-	db $0, "It's a #MON", $4f
-	db "REPORT!", $51
-	db "Over 160 #MON", $4f
-	db "techniques have", $55
-	db "been confirmed.", $57
-
-_SilphCo5Text11: ; 84134 (21:4134)
-	db $0, "It's a #MON", $4f
-	db "REPORT!", $51
-	db "4 #MON evolve", $4f
-	db "only when traded", $55
-	db "by link-cable.", $57
-
-_UnnamedText_1a24a: ; 84176 (21:4176)
-	db $0, "The ROCKETs came", $4f
-	db "and took over the", $55
-	db "building!", $57
-
-_UnnamedText_1a24f: ; 841a4 (21:41a4)
-	db $0, "Well, better get", $4f
-	db "back to work!", $57
-
-_UnnamedText_1a261: ; 841c4 (21:41c4)
-	db $0, "Oh dear, oh dear.", $4f
-	db "Help me please!", $57
-
-_UnnamedText_1a266: ; 841e7 (21:41e7)
-	db $0, "We got engaged!", $4f
-	db "Heheh!", $57
-
-_UnnamedText_1a278: ; 841ff (21:41ff)
-	db $0, "Look at him! He's", $4f
-	db "such a coward!", $57
-
-_UnnamedText_1a27d: ; 84220 (21:4220)
-	db $0, "I feel so sorry", $4f
-	db "for him, I have", $55
-	db "to marry him!", $57
-
-_UnnamedText_1a28f: ; 8424f (21:424f)
-	db $0, "TEAM ROCKET is", $4f
-	db "trying to conquer", $55
-	db "the world with", $55
-	db "#MON!", $57
-
-_UnnamedText_1a294: ; 84286 (21:4286)
-	db $0, "TEAM ROCKET ran", $4f
-	db "because of you!", $57
-
-_UnnamedText_1a2a6: ; 842a7 (21:42a7)
-	db $0, "They must have", $4f
-	db "targeted SILPH", $55
-	db "for our #MON", $55
-	db "products.", $57
-
-_UnnamedText_1a2ab: ; 842dd (21:42dd)
-	db $0, "Come work for", $4f
-	db "SILPH when you", $55
-	db "get older!", $57
-
-_SilphCo6BattleText2: ; 84306 (21:4306)
-	db $0, "I am one of the 4", $4f
-	db "ROCKET BROTHERS!", $57
-
-_SilphCo6EndBattleText2: ; 8432a (21:432a)
-	db $0, "Flame", $4f
-	db "out!", $58
-
-_SilphCo6AfterBattleText2: ; 84336 (21:4336)
-	db $0, "No matter!", $4f
-	db "My brothers will", $55
-	db "avenge me!", $57
-
-_SilphCo6BattleText3: ; 8435e (21:435e)
-	db $0, "That rotten", $4f
-	db "PRESIDENT!", $51
-	db "He shouldn't have", $4f
-	db "sent me to the", $55
-	db "TIKSI BRANCH!", $57
-
-_SilphCo6EndBattleText3: ; 843a4 (21:43a4)
-	db $0, "Shoot!", $58
-
-_SilphCo6AfterBattleText3: ; 843ac (21:43ac)
-	db $0, "TIKSI BRANCH?", $4f
-	db "It's in Russian", $55
-	db "no man's land!", $57
-
-_SilphCo6BattleText4: ; 843d8 (21:43d8)
-	db $0, "You dare betray", $4f
-	db "TEAM ROCKET?", $57
-
-_SilphCo6EndBattleText4: ; 843f6 (21:43f6)
-	db $0, "You", $4f
-	db "traitor!", $58
-
-_SilphCo6AfterBattleText4: ; 84404 (21:4404)
-	db $0, "If you stand for", $4f
-	db "justice, you", $55
-	db "betray evil!", $57
-
-_UnnamedText_51dd3: ; 84430 (21:4430)
-	db $0, "Oh! Hi! You're", $4f
-	db "not a ROCKET! You", $55
-	db "came to save us?", $55
-	db "Why, thank you!", $51
-	db "I want you to", $4f
-	db "have this #MON", $55
-	db "for saving us.", $58
-
-_UnnamedText_51dd8: ; 8449e (21:449e)
-	db $0, "It's LAPRAS. It's", $4f
-	db "very intelligent.", $51
-	db "We kept it in our", $4f
-	db "lab, but it will", $55
-	db "be much better", $55
-	db "off with you!", $51
-	db "I think you will", $4f
-	db "be a good trainer", $55
-	db "for LAPRAS!", $51
-	db "It's a good", $4f
-	db "swimmer. It'll", $55
-	db "give you a lift!", $57
-
-_UnnamedText_51ddd: ; 8455a (21:455a)
-	db $0, "TEAM ROCKET's", $4f
-	db "BOSS went to the", $55
-	db "boardroom! Is our", $55
-	db "PRESIDENT OK?", $57
-
-_UnnamedText_51de2: ; 84599 (21:4599)
-	db $0, "Saved at last!", $4f
-	db "Thank you!", $57
-
-_UnnamedText_51e00: ; 845b4 (21:45b4)
-	db $0, "TEAM ROCKET was", $4f
-	db "after the MASTER", $55
-	db "BALL which will", $55
-	db "catch any #MON!", $57
-
-_UnnamedText_51e05: ; 845f6 (21:45f6)
-	db $0, "We canceled the", $4f
-	db "MASTER BALL", $55
-	db "project because", $55
-	db "of TEAM ROCKET.", $57
-
-_UnnamedText_51e23: ; 84633 (21:4633)
-	db $0, "It would be bad", $4f
-	db "if TEAM ROCKET", $55
-	db "took over SILPH", $55
-	db "or our #MON!", $57
-
-_UnnamedText_51e28: ; 84670 (21:4670)
-	db $0, "Wow! You chased", $4f
-	db "off TEAM ROCKET", $55
-	db "all by yourself?", $57
-
-_UnnamedText_51e46: ; 846a2 (21:46a2)
-	db $0, "You! It's really", $4f
-	db "dangerous here!", $55
-	db "You came to save", $55
-	db "me? You can't!", $57
-
-_UnnamedText_51e4b: ; 846e2 (21:46e2)
-	db $0, "Safe at last!", $4f
-	db "Oh thank you!", $57
-
-_SilphCo7BattleText1: ; 846ff (21:46ff)
-	db $0, "Oh ho! I smell a", $4f
-	db "little rat!", $57
-
-_SilphCo7EndBattleText1: ; 8471d (21:471d)
-	db $0, "Lights", $4f
-	db "out!", $58
-
-_SilphCo7AfterBattleText1: ; 8472a (21:472a)
-	db $0, "You won't find my", $4f
-	db "BOSS by just", $55
-	db "scurrying around!", $57
-
-_SilphCo7BattleText2: ; 8475b (21:475b)
-	db $0, "Heheh!", $51
-	db "You mistook me for", $4f
-	db "a SILPH worker?", $57
-
-_SilphCo7EndBattleText2: ; 84786 (21:4786)
-	db $0, "I'm", $4f
-	db "done!", $58
-
-_SilphCo7AfterBattleText2: ; 84790 (21:4790)
-	db $0, "Despite your age,", $4f
-	db "you are a skilled", $55
-	db "trainer!", $57
-
-_SilphCo7BattleText3: ; 847be (21:47be)
-	db $0, "I am one of the 4", $4f
-	db "ROCKET BROTHERS!", $57
-
-_SilphCo7EndBattleText3: ; 847e2 (21:47e2)
-	db $0, "Aack!", $4f
-	db "Brothers, I lost!", $58
-
-_SilphCo7AfterBattleText3: ; 847fb (21:47fb)
-	db $0, "Doesn't matter.", $4f
-	db "My brothers will", $55
-	db "repay the favor!", $57
-
-_SilphCo7BattleText4: ; 8482d (21:482d)
-	db $0, "A child intruder?", $4f
-	db "That must be you!", $57
-
-_SilphCo7EndBattleText4: ; 84852 (21:4852)
-	db $0, "Fine!", $4f
-	db "I lost!", $58
-
-_SilphCo7AfterBattleText4: ; 84861 (21:4861)
-	db $0, "Go on home", $4f
-	db "before my BOSS", $55
-	db "gets ticked off!", $57
-
-_UnnamedText_51ebe: ; 8488d (21:488d)
-	db $0, $53, ": What", $4f
-	db "kept you ", $52, "?", $57
-
-_UnnamedText_51ec3: ; 848a2 (21:48a2)
-	db $0, $53, ": Hahaha!", $4f
-	db "I thought you'd", $55
-	db "turn up if I", $55
-	db "waited here!", $51
-	db "I guess TEAM", $4f
-	db "ROCKET slowed you", $55
-	db "down! Not that I", $55
-	db "care!", $51
-	db "I saw you in", $4f
-	db "SAFFRON, so I", $55
-	db "decided to see if", $55
-	db "you got better!", $57
-
-_UnnamedText_51ec8: ; 8494a (21:494a)
-	db $0, "Oh ho!", $4f
-	db "So, you are ready", $55
-	db "for BOSS ROCKET!", $58
-
-_UnnamedText_51ecd: ; 84975 (21:4975)
-	db $0, $53, ": How can", $4f
-	db "I put this?", $51
-	db "You're not good", $4f
-	db "enough to play", $55
-	db "with us big boys!", $58
-
-_UnnamedText_51ed2: ; 849bd (21:49bd)
-	db $0, "Well, ", $52, "!", $51
-	db "I'm moving on up", $4f
-	db "and ahead!", $51
-	db "By checking my", $4f
-	db "#DEX, I'm", $55
-	db "starting to see", $55
-	db "what's strong and", $55
-	db "how they evolve!", $51
-	db "I'm going to the", $4f
-	db "#MON LEAGUE", $55
-	db "to boot out the", $55
-	db "ELITE FOUR!", $51
-	db "I'll become the", $4f
-	db "world's most", $55
-	db "powerful trainer!", $51
-	db $52, ", well", $4f
-	db "good luck to you!", $55
-	db "Don't sweat it!", $55
-	db "Smell ya!", $57
-
-_UnnamedText_565be: ; 84ac4 (21:4ac4)
-	db $0, "I wonder if SILPH", $4f
-	db "is finished...", $57
-
-_UnnamedText_565c3: ; 84ae6 (21:4ae6)
-	db $0, "Thanks for saving", $4f
-	db "us!", $57
-
-_SilphCo8BattleText1: ; 84afd (21:4afd)
-	db $0, "That's as far as", $4f
-	db "you'll go!", $57
-
-_SilphCo8EndBattleText1: ; 84b18 (21:4b18)
-	db $0, "Not", $4f
-	db "enough grit!", $58
-
-_SilphCo8AfterBattleText1: ; 84b2a (21:4b2a)
-	db $0, "If you don't turn", $4f
-	db "back, I'll call", $55
-	db "for backup!", $57
-
-_SilphCo8BattleText2: ; 84b57 (21:4b57)
-	db $0, "You're causing us", $4f
-	db "problems!", $57
-
-_SilphCo8EndBattleText2: ; 84b73 (21:4b73)
-	db $0, "Huh?", $4f
-	db "I lost?", $58
-
-_SilphCo8AfterBattleText2: ; 84b81 (21:4b81)
-	db $0, "So, what do you", $4f
-	db "think of SILPH", $55
-	db "BUILDING's maze?", $57
-
-_SilphCo8BattleText3: ; 84bb1 (21:4bb1)
-	db $0, "I am one of the 4", $4f
-	db "ROCKET BROTHERS!", $57
-
-_SilphCo8EndBattleText3: ; 84bd5 (21:4bd5)
-	db $0, "Whoo!", $4f
-	db "Oh brothers!", $58
-
-_SilphCo8AfterBattleText3: ; 84be9 (21:4be9)
-	db $0, "I'll leave you up", $4f
-	db "to my brothers!", $57
-
-_UnnamedText_5d8e5: ; 84c0b (21:4c0b)
-	db $0, "You look tired!", $4f
-	db "You should take a", $55
-	db "quick nap!", $58
-
-_UnnamedText_5d8ea: ; 84c39 (21:4c39)
-	db $0, "Don't give up!", $57
-
-_UnnamedText_5d8ef: ; 84c48 (21:4c48)
-	db $0, "Thank you so", $4f
-	db "much!", $57
-
-_SilphCo9BattleText1: ; 84c5c (21:4c5c)
-	db $0, "Your #MON seem", $4f
-	db "to adore you, kid!", $57
-
-_SilphCo9EndBattleText1: ; 84c7f (21:4c7f)
-	db $0, "Ghaaah!", $58
-
-_SilphCo9AfterBattleText1: ; 84c88 (21:4c88)
-	db $0, "If I had started", $4f
-	db "as a trainer at", $55
-	db "your age...", $57
-
-_SilphCo9BattleText2: ; 84cb6 (21:4cb6)
-	db $0, "Your #MON have", $4f
-	db "weak points! I", $55
-	db "can nail them!", $57
-
-_SilphCo9EndBattleText2: ; 84ce4 (21:4ce4)
-	db $0, "You", $4f
-	db "hammered me!", $58
-
-_SilphCo9AfterBattleText2: ; 84cf6 (21:4cf6)
-	db $0, "Exploiting weak", $4f
-	db "spots does work!", $55
-	db "Think about", $55
-	db "element types!", $57
-
-_SilphCo9BattleText3: ; 84d33 (21:4d33)
-	db $0, "I am one of the 4", $4f
-	db "ROCKET BROTHERS!", $57
-
-_SilphCo9EndBattleText3: ; 84d57 (21:4d57)
-	db $0, "Warg!", $4f
-	db "Brothers, I lost!", $58
-
-_SilphCo9AfterBattleText3: ; 84d70 (21:4d70)
-	db $0, "My brothers will", $4f
-	db "avenge me!", $57
-
-_UnnamedText_5a1d3: ; 84d8d (21:4d8d)
-	db $0, "Waaaaa!", $55
-	db "I'm scared!", $57
-
-_UnnamedText_5a1d8: ; 84da1 (21:4da1)
-	db $0, "Please keep quiet", $4f
-	db "about my crying!", $57
-
-_SilphCo10BattleText1: ; 84dc5 (21:4dc5)
-	db $0, "Welcome to the", $4f
-	db "10F! So good of", $55
-	db "you to join me!", $57
-
-_SilphCo10EndBattleText1: ; 84df5 (21:4df5)
-	db $0, "I'm", $4f
-	db "stunned!", $58
-
-_SilphCo10AfterBattleText1: ; 84e02 (21:4e02)
-	db $0, "Nice try, but the", $4f
-	db "boardroom is up", $55
-	db "one more floor!", $57
-
-_SilphCo10BattleText2: ; 84e35 (21:4e35)
-	db $0, "Enough of your", $4f
-	db "silly games!", $57
-
-_SilphCo10EndBattleText2: ; 84e52 (21:4e52)
-	db $0, "No", $4f
-	db "continues left!", $58
-
-_SilphCo10AfterBattleText2: ; 84e66 (21:4e66)
-	db $0, "Are you satisfied", $4f
-	db "with beating me?", $55
-	db "Then go on home!", $57
-
-_SilphCoPresidentText: ; 84e9b (21:4e9b)
-	db $0, "PRESIDENT: Thank", $4f
-	db "you for saving", $55
-	db "SILPH!", $51
-	db "I will never", $4f
-	db "forget you saved", $55
-	db "us in our moment", $55
-	db "of peril!", $51
-	db "I have to thank", $4f
-	db "you in some way!", $51
-	db "Because I am rich,", $4f
-	db "I can give you", $55
-	db "anything!", $51
-	db "Here, maybe this", $4f
-	db "will do!", $58
-
-_ReceivedSilphCoMasterBallText: ; 84f63 (21:4f63)
-	db $0, $52, " got a", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_6231c: ; 84f74 (21:4f74)
-	db $0, "PRESIDENT: You", $4f
-	db "can't buy that", $55
-	db "anywhere!", $51
-	db "It's our secret", $4f
-	db "prototype MASTER", $55
-	db "BALL!", $51
-	db "It will catch any", $4f
-	db "#MON without", $55
-	db "fail!", $51
-	db "You should be", $4f
-	db "quiet about using", $55
-	db "it, though.", $57
-
-_SilphCoMasterBallNoRoomText: ; 85013 (21:5013)
-	db $0, "You have no", $4f
-	db "room for this.", $57
-
-_SilphCo11Text2: ; 8502f (21:502f)
-	db $0, "SECRETARY: Thank", $4f
-	db "you for rescuing", $55
-	db "all of us!", $51
-	db "We admire your", $4f
-	db "courage.", $57
-
-_SilphCo11Text3: ; 85075 (21:5075)
-	db $0, "Ah ", $52, "!", $4f
-	db "So we meet again!", $51
-	db "The PRESIDENT and", $4f
-	db "I are discussing", $55
-	db "a vital business", $55
-	db "proposition.", $51
-	db "Keep your nose", $4f
-	db "out of grown-up", $55
-	db "matters...", $51
-	db "Or, experience a", $4f
-	db "world of pain!", $57
-
-_UnnamedText_62330: ; 85119 (21:5119)
-	db $0, "Arrgh!!", $4f
-	db "I lost again!?", $58
-
-_UnnamedText_62335: ; 85131 (21:5131)
-	db $0, "Blast it all!", $4f
-	db "You ruined our", $55
-	db "plans for SILPH!", $51
-	db "But, TEAM ROCKET", $4f
-	db "will never fall!", $51
-	db $52, "! Never", $4f
-	db "forget that all", $55
-	db "#MON exist", $55
-	db "for TEAM ROCKET!", $51
-	db "I must go, but I", $4f
-	db "shall return!", $57
-
-_SilphCo11BattleText1: ; 851d6 (21:51d6)
-	db $0, "Stop right there!", $4f
-	db "Don't you move!", $57
-
-_SilphCo11EndBattleText1: ; 851f8 (21:51f8)
-	db $0, "Don't...", $4f
-	db "Please!", $58
-
-_SilphCo11AfterBattleText1: ; 85209 (21:5209)
-	db $0, "So, you want to", $4f
-	db "see my BOSS?", $57
-
-_SilphCo11BattleText2: ; 85227 (21:5227)
-	db $0, "Halt! Do you have", $4f
-	db "an appointment", $55
-	db "with my BOSS?", $57
-
-_SilphCo11EndBattleText2: ; 85257 (21:5257)
-	db $0, "Gaah!", $4f
-	db "Demolished!", $58
-
-_SilphCo11AfterBattleText2: ; 8526a (21:526a)
-	db $0, "Watch your step,", $4f
-	db "my BOSS likes his", $55
-	db "#MON tough!", $57
-
-_UnnamedText_6237b: ; 8529a (21:529a)
-	db $0, "The monitor has", $4f
-	db "#MON on it!", $57
-
-_Mansion2BattleText1: ; 852b7 (21:52b7)
-	db $0, "I can't get out!", $4f
-	db "This old place is", $55
-	db "one big puzzle!", $57
-
-_Mansion2EndBattleText1: ; 852ea (21:52ea)
-	db $0, "Oh no!", $4f
-	db "My bag of loot!", $58
-
-_Mansion2AfterBattleText1: ; 85302 (21:5302)
-	db $0, "Switches open and", $4f
-	db "close alternating", $55
-	db "sets of doors!", $57
-
-_Mansion2Text3: ; 85336 (21:5336)
-	db $0, "Diary: July 5", $4f
-	db "Guyana,", $55
-	db "South America", $51
-	db "A new #MON was", $4f
-	db "discovered deep", $55
-	db "in the jungle.", $57
-
-_Mansion2Text4: ; 85389 (21:5389)
-	db $0, "Diary: July 10", $4f
-	db "We christened the", $55
-	db "newly discovered", $55
-	db "#MON, MEW.", $57
-
-_UnnamedText_520c2: ; 853c7 (21:53c7)
-	db $0, "A secret switch!", $51
-	db "Press it?", $57
-
-_UnnamedText_520c7: ; 853e3 (21:53e3)
-	db $0, "Who wouldn't?", $58
-
-_UnnamedText_520cc: ; 853f1 (21:53f1)
-	db $0, "Not quite yet!", $57
-
-_Mansion3BattleText1: ; 85401 (21:5401)
-	db $0, "This place is", $4f
-	db "like, huge!", $57
-
-_Mansion3EndBattleText1: ; 8541c (21:541c)
-	db $0, "Ayah!", $58
-
-_Mansion3AfterBattleText1: ; 85423 (21:5423)
-	db $0, "I wonder where", $4f
-	db "my partner went.", $57
-
-_Mansion3BattleText2: ; 85444 (21:5444)
-	db $0, "My mentor once", $4f
-	db "lived here.", $57
-
-_Mansion3EndBattleText2: ; 85460 (21:5460)
-	db $0, "Whew!", $4f
-	db "Overwhelming!", $58
-
-_Mansion3AfterBattleText2: ; 85475 (21:5475)
-	db $0, "So, you're stuck?", $4f
-	db "Try jumping off", $55
-	db "over there!", $57
-
-_Mansion3Text5: ; 854a3 (21:54a3)
-	db $0, "Diary: Feb. 6", $4f
-	db "MEW gave birth.", $51
-	db "We named the", $4f
-	db "newborn MEWTWO.", $57
-
-_Mansion4BattleText1: ; 854df (21:54df)
-	db $0, "Uh-oh. Where am", $4f
-	db "I now?", $57
-
-_Mansion4EndBattleText1: ; 854f7 (21:54f7)
-	db $0, "Awooh!", $58
-
-_Mansion4AfterBattleText1: ; 854ff (21:54ff)
-	db $0, "You can find stuff", $4f
-	db "lying around.", $57
-
-_Mansion4BattleText2: ; 85521 (21:5521)
-	db $0, "This place is", $4f
-	db "ideal for a lab.", $57
-
-_Mansion4EndBattleText2: ; 85541 (21:5541)
-	db $0, "What", $4f
-	db "was that for?", $58
-
-_Mansion4AfterBattleText2: ; 85555 (21:5555)
-	db $0, "I like it here!", $4f
-	db "It's conducive to", $55
-	db "my studies!", $57
-
-_Mansion4Text7: ; 85583 (21:5583)
-	db $0, "Diary; Sept. 1", $4f
-	db "MEWTWO is far too", $55
-	db "powerful.", $51
-	db "We have failed to", $4f
-	db "curb its vicious", $55
-	db "tendencies...", $57
-
-_SafariZoneEastText5: ; 855e0 (21:55e0)
-	db $0, "REST HOUSE", $57
-
-_SafariZoneEastText6: ; 855ec (21:55ec)
-	db $0, "TRAINER TIPS", $51
-	db "The remaining time", $4f
-	db "declines only", $55
-	db "while you walk!", $57
-
-_SafariZoneEastText7: ; 8562b (21:562b)
-	db $0, "CENTER AREA", $4f
-	db "NORTH: AREA 2", $57
-
-_SafariZoneNorthText3: ; 85646 (21:5646)
-	db $0, "REST HOUSE", $57
-
-_SafariZoneNorthText4: ; 85652 (21:5652)
-	db $0, "TRAINER TIPS", $51
-	db "The SECRET HOUSE", $4f
-	db "is still ahead!", $57
-
-_SafariZoneNorthText5: ; 85681 (21:5681)
-	db $0, "AREA 2", $57
-
-_SafariZoneNorthText6: ; 85689 (21:5689)
-	db $0, "TRAINER TIPS", $51
-	db "#MON hide in", $4f
-	db "tall grass!", $51
-	db "Zigzag through", $4f
-	db "grassy areas to", $55
-	db "flush them out.", $57
-
-_SafariZoneNorthText7: ; 856df (21:56df)
-	db $0, "TRAINER TIPS", $51
-	db "Win a free HM for", $4f
-	db "finding the", $55
-	db "SECRET HOUSE!", $57
-
-_SafariZoneWestText5: ; 85719 (21:5719)
-	db $0, "REST HOUSE", $57
-
-_SafariZoneWestText6: ; 85725 (21:5725)
-	db $0, "REQUEST NOTICE", $51
-	db "Please find the", $4f
-	db "SAFARI WARDEN's", $55
-	db "lost GOLD TEETH.", $55
-	db "They're around", $55
-	db "here somewhere.", $51
-	db "Reward offered!", $4f
-	db "Contact: WARDEN", $57
-
-_SafariZoneWestText7: ; 857a3 (21:57a3)
-	db $0, "TRAINER TIPS", $51
-	db "Zone Exploration", $4f
-	db "Campaign!", $51
-	db "The Search for", $4f
-	db "the SECRET HOUSE!", $57
-
-_SafariZoneWestText8: ; 857ed (21:57ed)
-	db $0, "AREA 3", $4f
-	db "EAST: CENTER AREA", $57
-
-_SafariZoneCenterText2: ; 85807 (21:5807)
-	db $0, "REST HOUSE", $57
-
-_SafariZoneCenterText3: ; 85813 (21:5813)
-	db $0, "TRAINER TIPS", $51
-	db "Press the START", $4f
-	db "Button to check", $55
-	db "remaining time!", $57
-
-_SafariZoneRestHouse1Text1: ; 85851 (21:5851)
-	db $0, "SARA: Where did", $4f
-	db "my boy friend,", $55
-	db "ERIK, go?", $57
-
-_SafariZoneRestHouse1Text2: ; 8587b (21:587b)
-	db $0, "I'm catching", $4f
-	db "#MON to take", $55
-	db "home as gifts!", $57
-
-_UnnamedText_4a350: ; 858a4 (21:58a4)
-	db $0, "Ah! Finally!", $51
-	db "You're the first", $4f
-	db "person to reach", $55
-	db "the SECRET HOUSE!", $51
-	db "I was getting", $4f
-	db "worried that no", $55
-	db "one would win our", $55
-	db "campaign prize.", $51
-	db "Congratulations!", $4f
-	db "You have won!", $58
-
-_ReceivedHM03Text: ; 85943 (21:5943)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_HM03ExplanationText: ; 85957 (21:5957)
-	db $0, "HM03 is SURF!", $51
-	db "#MON will be", $4f
-	db "able to ferry you", $55
-	db "across water!", $51
-	db "And, this HM isn't", $4f
-	db "disposable! You", $55
-	db "can use it over", $55
-	db "and over!", $51
-	db "You're super lucky", $4f
-	db "for winning this", $55
-	db "fabulous prize!", $57
-
-_HM03NoRoomText: ; 85a02 (21:5a02)
-	db $0, "You don't have", $4f
-	db "room for this", $55
-	db "fabulous prize!", $57
-
-_SafariZoneRestHouse2Text1: ; 85a2f (21:5a2f)
-	db $0, "Tossing ROCKs at", $4f
-	db "#MON might", $55
-	db "make them run,", $55
-	db "but they'll be", $55
-	db "easier to catch.", $57
-
-_SafariZoneRestHouse2Text2: ; 85a7a (21:5a7a)
-	db $0, "Using BAIT will", $4f
-	db "make #MON", $55
-	db "easier to catch.", $57
-
-_SafariZoneRestHouse2Text3: ; 85aa6 (21:5aa6)
-	db $0, "I hiked a lot, but", $4f
-	db "I didn't see any", $55
-	db "#MON I wanted.", $57
-
-_SafariZoneRestHouse3Text1: ; 85ad9 (21:5ad9)
-	db $0, "How many did you", $4f
-	db "catch? I'm bushed", $55
-	db "from the work!", $57
-
-_SafariZoneRestHouse3Text2: ; 85b0b (21:5b0b)
-	db $0, "I caught a", $4f
-	db "CHANSEY!", $51
-	db "That makes this", $4f
-	db "all worthwhile!", $57
-
-_SafariZoneRestHouse3Text3: ; 85b40 (21:5b40)
-	db $0, "Whew! I'm tired", $4f
-	db "from all the fun!", $57
-
-_SafariZoneRestHouse4Text1: ; 85b62 (21:5b62)
-	db $0, "You can keep any", $4f
-	db "item you find on", $55
-	db "the ground here.", $51
-	db "But, you'll run", $4f
-	db "out of time if", $55
-	db "you try for all", $55
-	db "of them at once!", $57
-
-_SafariZoneRestHouse4Text2: ; 85bd5 (21:5bd5)
-	db $0, "Go to the deepest", $4f
-	db "part of the", $55
-	db "SAFARI ZONE. You", $55
-	db "will win a prize!", $57
-
-_SafariZoneRestHouse4Text3: ; 85c17 (21:5c17)
-	db $0, "My EEVEE evolved", $4f
-	db "into FLAREON!", $51
-	db "But, a friend's", $4f
-	db "EEVEE turned into", $55
-	db "a VAPOREON!", $55
-	db "I wonder why?", $57
-
-_UnknownDungeon3MewtwoText: ; 85c72 (21:5c72)
-	db $0, "Mew!@@"
-
-_VictoryRoad1BattleText1: ; 85c79 (21:5c79)
-	db $0, "I wonder if you", $4f
-	db "are good enough", $55
-	db "for me!", $57
-
-_VictoryRoad1EndBattleText1: ; 85ca2 (21:5ca2)
-	db $0, "I", $4f
-	db "lost out!", $58
-
-_VictoryRoad1AfterBattleText1: ; 85caf (21:5caf)
-	db $0, "I never wanted to", $4f
-	db "lose to anybody!", $57
-
-_VictoryRoad1BattleText2: ; 85cd3 (21:5cd3)
-	db $0, "I can see you're", $4f
-	db "good! Let me see", $55
-	db "exactly how good!", $57
-
-_VictoryRoad1EndBattleText2: ; 85d07 (21:5d07)
-	db $0, "I", $4f
-	db "had a chance...", $58
-
-_VictoryRoad1AfterBattleText2: ; 85d1a (21:5d1a)
-	db $0, "I concede, you're", $4f
-	db "better than me!", $57
-
-_LanceBeforeBattleText: ; 85d3c (21:5d3c)
-	db $0, "Ah! I heard about", $4f
-	db "you ", $52, "!", $51
-	db "I lead the ELITE", $4f
-	db "FOUR! You can", $55
-	db "call me LANCE the", $55
-	db "dragon trainer!", $51
-	db "You know that", $4f
-	db "dragons are", $55
-	db "mythical #MON!", $51
-	db "They're hard to", $4f
-	db "catch and raise,", $55
-	db "but their powers", $55
-	db "are superior!", $51
-	db "They're virtually", $4f
-	db "indestructible!", $51
-	db "Well, are you", $4f
-	db "ready to lose?", $51
-	db "Your LEAGUE", $4f
-	db "challenge ends", $55
-	db "with me, ", $52, "!", $57
-
-_LanceEndBattleText: ; 85e64 (21:5e64)
-	db $0, "That's it!", $51
-	db "I hate to admit", $4f
-	db "it, but you are a", $55
-	db "#MON master!", $58
-
-_LanceAfterBattleText: ; 85e9e (21:5e9e)
-	db $0, "I still can't", $4f
-	db "believe my", $55
-	db "dragons lost to", $55
-	db "you, ", $52, "!", $51
-	db "You are now the", $4f
-	db "#MON LEAGUE", $55
-	db "champion!", $51
-	db "...Or, you would", $4f
-	db "have been, but", $55
-	db "you have one more", $55
-	db "challenge ahead.", $51
-	db "You have to face", $4f
-	db "another trainer!", $55
-	db "His name is...", $51
-	db $53, "!", $4f
-	db "He beat the ELITE", $55
-	db "FOUR before you!", $51
-	db "He is the real", $4f
-	db "#MON LEAGUE", $55
-	db "champion!@@"
-
-_HallofFameRoomText1: ; 85fb5 (21:5fb5)
-	db $0, "OAK: Er-hem!", $4f
-	db "Congratulations", $55
-	db $52, "!", $51
-	db "This floor is the", $4f
-	db "#MON HALL OF", $55
-	db "FAME!", $51
-	db "#MON LEAGUE", $4f
-	db "champions are", $55
-	db "honored for their", $55
-	db "exploits here!", $51
-	db "Their #MON are", $4f
-	db "also recorded in", $55
-	db "the HALL OF FAME!", $51
-	db $52, "! You have", $4f
-	db "endeavored hard", $55
-	db "to become the new", $55
-	db "LEAGUE champion!", $51
-	db "Congratulations,", $4f
-	db $52, ", you and", $55
-	db "your #MON are", $55
-	db "HALL OF FAMERs!", $57
-
-_UnnamedText_760f4: ; 860e1 (21:60e1)
-	db $0, $53, ": Hey!", $51
-	db "I was looking", $4f
-	db "forward to seeing", $55
-	db "you, ", $52, "!", $51
-	db "My rival should", $4f
-	db "be strong to keep", $55
-	db "me sharp!", $51
-	db "While working on", $4f
-	db "#DEX, I looked", $55
-	db "all over for", $55
-	db "powerful #MON!", $51
-	db "Not only that, I", $4f
-	db "assembled teams", $55
-	db "that would beat", $55
-	db "any #MON type!", $51
-	db "And now!", $51
-	db "I'm the #MON", $4f
-	db "LEAGUE champion!", $51
-	db $52, "! Do you", $4f
-	db "know what that", $55
-	db "means?", $51
-	db "I'll tell you!", $51
-	db "I am the most", $4f
-	db "powerful trainer", $55
-	db "in the world!", $57
-
-_UnnamedText_760f9: ; 8623b (21:623b)
-	db $0, "NO!", $4f
-	db "That can't be!", $55
-	db "You beat my best!", $51
-	db "After all that", $4f
-	db "work to become", $55
-	db "LEAGUE champ?", $51
-	db "My reign is over", $4f
-	db "already?", $55
-	db "It's not fair!", $58
-
-_UnnamedText_760fe: ; 862b4 (21:62b4)
-	db $0, "Hahaha!", $4f
-	db "I won, I won!", $51
-	db "I'm too good for", $4f
-	db "you, ", $52, "!", $51
-	db "You did well to", $4f
-	db "even reach me,", $55
-	db $53, ", the", $55
-	db "#MON genius!", $51
-	db "Nice try, loser!", $4f
-	db "Hahaha!", $58
-
-_UnnamedText_76103: ; 8632f (21:632f)
-	db $0, "Why?", $4f
-	db "Why did I lose?", $51
-	db "I never made any", $4f
-	db "mistakes raising", $55
-	db "my #MON...", $51
-	db "Darn it! You're", $4f
-	db "the new #MON", $55
-	db "LEAGUE champion!", $51
-	db "Although I don't", $4f
-	db "like to admit it.", $57
-
-_GaryText2: ; 863c1 (21:63c1)
-	db $0, "OAK: ", $52, "!", $57
-
-_UnnamedText_76120: ; 863ca (21:63ca)
-	db $0, "OAK: So, you won!", $4f
-	db "Congratulations!", $55
-	db "You're the new", $55
-	db "#MON LEAGUE", $55
-	db "champion!", $51
-	db "You've grown up so", $4f
-	db "much since you", $55
-	db "first left with", $55
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!", $51
-	db $52, ", you have", $4f
-	db "come of age!", $57
-
-_UnnamedText_76125: ; 86463 (21:6463)
-	db $0, "OAK: ", $53, "! I'm", $4f
-	db "disappointed!", $51
-	db "I came when I", $4f
-	db "heard you beat", $55
-	db "the ELITE FOUR!", $51
-	db "But, when I got", $4f
-	db "here, you had", $55
-	db "already lost!", $51
-	db $53, "! Do you", $4f
-	db "understand why", $55
-	db "you lost?", $51
-	db "You have forgotten", $4f
-	db "to treat your", $55
-	db "#MON with", $55
-	db "trust and love!", $51
-	db "Without them, you", $4f
-	db "will never become", $55
-	db "a champ again!", $57
-
-_UnnamedText_7612a: ; 86567 (21:6567)
-	db $0, "OAK: ", $52, "!", $51
-	db "You understand", $4f
-	db "that your victory", $55
-	db "was not just your", $55
-	db "own doing!", $51
-	db "The bond you share", $4f
-	db "with your #MON", $55
-	db "is marvelous!", $51
-	db $52, "!", $4f
-	db "Come with me!", $57
-
-_LoreleiBeforeBattleText: ; 865ef (21:65ef)
-	db $0, "Welcome to", $4f
-	db "#MON LEAGUE!", $51
-	db "I am LORELEI of", $4f
-	db "the ELITE FOUR!", $51
-	db "No one can best", $4f
-	db "me when it comes", $55
-	db "to icy #MON!", $51
-	db "Freezing moves", $4f
-	db "are powerful!", $51
-	db "Your #MON will", $4f
-	db "be at my mercy", $55
-	db "when they are", $55
-	db "frozen solid!", $51
-	db "Hahaha!", $4f
-	db "Are you ready?", $57
-
-_LoreleiEndBattleText: ; 866c4 (21:66c4)
-	db $0, "How", $4f
-	db "dare you!", $58
-
-_LoreleiAfterBattleText: ; 866d3 (21:66d3)
-	db $0, "You're better", $4f
-	db "than I thought!", $55
-	db "Go on ahead!", $51
-	db "You only got a", $4f
-	db "taste of #MON", $55
-	db "LEAGUE power!", $57
-
-_UnnamedText_7627b: ; 86729 (21:6729)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
-
-_BrunoBeforeBattleText: ; 86749 (21:6749)
-	db $0, "I am BRUNO of", $4f
-	db "the ELITE FOUR!", $51
-	db "Through rigorous", $4f
-	db "training, people", $55
-	db "and #MON can", $55
-	db "become stronger!", $51
-	db "I've weight", $4f
-	db "trained with", $55
-	db "my #MON!", $51
-	db $52, "!", $51
-	db "We will grind you", $4f
-	db "down with our", $55
-	db "superior power!", $51
-	db "Hoo hah!", $57
-
-_BrunoEndBattleText: ; 86805 (21:6805)
-	db $0, "Why?", $4f
-	db "How could I lose?", $58
-
-_BrunoAfterBattleText: ; 8681d (21:681d)
-	db $0, "My job is done!", $4f
-	db "Go face your next", $55
-	db "challenge!", $57
-
-_UnnamedText_763d2: ; 8684b (21:684b)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
-
-_AgathaBeforeBattleText: ; 8686b (21:686b)
-	db $0, "I am AGATHA of", $4f
-	db "the ELITE FOUR!", $51
-	db "OAK's taken a lot", $4f
-	db "of interest in", $55
-	db "you, child!", $51
-	db "That old duff was", $4f
-	db "once tough and", $55
-	db "handsome! That", $55
-	db "was decades ago!", $51
-	db "Now he just wants", $4f
-	db "to fiddle with", $55
-	db "his #DEX! He's", $55
-	db "wrong! #MON", $55
-	db "are for fighting!", $51
-	db $52, "! I'll show", $4f
-	db "you how a real", $55
-	db "trainer fights!", $57
-
-_AgathaEndBattleText: ; 86970 (21:6970)
-	db $0, "Oh ho!", $4f
-	db "You're something", $55
-	db "special, child!", $58
-
-_AgathaAfterBattleText: ; 86998 (21:6998)
-	db $0, "You win! I see", $4f
-	db "what the old duff", $55
-	db "sees in you now!", $51
-	db "I have nothing", $4f
-	db "else to say! Run", $55
-	db "along now, child!", $57
-
-_AgathaText2: ; 869fd (21:69fd)
-	db $0, "Someone's voice:", $4f
-	db "Don't run away!", $57
-
-_RockTunnel2BattleText2: ; 86a1d (21:6a1d)
-	db $0, "Hikers leave twigs", $4f
-	db "as trail markers.", $57
-
-_RockTunnel2EndBattleText2: ; 86a43 (21:6a43)
-	db $0, "Ohhh!", $4f
-	db "I did my best!", $58
-
-_RockTunnel2AfterBattleText2: ; 86a59 (21:6a59)
-	db $0, "I want to go ", $4f
-	db "home!", $57
-
-_RockTunnel2BattleText3: ; 86a6e (21:6a6e)
-	db $0, "Hahaha! Can you", $4f
-	db "beat my power?", $57
-
-_RockTunnel2EndBattleText3: ; 86a8e (21:6a8e)
-	db $0, "Oops!", $4f
-	db "Out-muscled!", $58
-
-_RockTunnel2AfterBattleText3: ; 86aa2 (21:6aa2)
-	db $0, "I go for power", $4f
-	db "because I hate", $55
-	db "thinking!", $57
-
-_RockTunnel2BattleText4: ; 86acb (21:6acb)
-	db $0, "You have a", $4f
-	db "#DEX?", $55
-	db "I want one too!", $57
-
-_RockTunnel2EndBattleText4: ; 86aed (21:6aed)
-	db $0, "Shoot!", $4f
-	db "I'm so jealous!", $58
-
-_RockTunnel2AfterBattleText4: ; 86b04 (21:6b04)
-	db $0, "When you finish", $4f
-	db "your #DEX, can", $55
-	db "I have it?", $57
-
-_RockTunnel2BattleText5: ; 86b2f (21:6b2f)
-	db $0, "Do you know about", $4f
-	db "costume players?", $57
-
-_RockTunnel2EndBattleText5: ; 86b53 (21:6b53)
-	db $0, "Well,", $4f
-	db "that's that.", $58
-
-_RockTunnel2AfterBattleText5: ; 86b66 (21:6b66)
-	db $0, "Costume players", $4f
-	db "dress up as", $55
-	db "#MON for fun.", $57
-
-_RockTunnel2BattleText6: ; 86b91 (21:6b91)
-	db $0, "My #MON", $4f
-	db "techniques will", $55
-	db "leave you crying!", $57
-
-_RockTunnel2EndBattleText6: ; 86bbc (21:6bbc)
-	db $0, "I give!", $4f
-	db "You're a better", $55
-	db "technician!", $58
-
-_RockTunnel2AfterBattleText6: ; 86be0 (21:6be0)
-	db $0, "In mountains,", $4f
-	db "you'll often find", $55
-	db "rock-type #MON.", $57
-
-_RockTunnel2BattleText7: ; 86c10 (21:6c10)
-	db $0, "I don't often", $4f
-	db "come here, but I", $55
-	db "will fight you.", $57
-
-_RockTunnel2EndBattleText7: ; 86c3f (21:6c3f)
-	db $0, "Oh!", $4f
-	db "I lost!", $58
-
-_RockTunnel2AfterBattleText7: ; 86c4c (21:6c4c)
-	db $0, "I like tiny", $4f
-	db "#MON, big ones", $55
-	db "are too scary!", $57
-
-_RockTunnel2BattleText8: ; 86c77 (21:6c77)
-	db $0, "Hit me with your", $4f
-	db "best shot!", $57
-
-_RockTunnel2EndBattleText8: ; 86c94 (21:6c94)
-	db $0, "Fired", $4f
-	db "away!", $58
-
-SECTION "bank22",ROMX,BANK[$22]
-
-_RockTunnel2AfterBattleText8: ; 88000 (22:4000)
-	db $0, "I'll raise my", $4f
-	db "#MON to beat", $55
-	db "yours, kid!", $57
-
-_RockTunnel2BattleText9: ; 88027 (22:4027)
-	db $0, "I draw #MON", $4f
-	db "when I'm home.", $57
-
-_RockTunnel2EndBattleText9: ; 88042 (22:4042)
-	db $0, "Whew!", $4f
-	db "I'm exhausted!", $58
-
-_RockTunnel2AfterBattleText9: ; 88057 (22:4057)
-	db $0, "I'm an artist,", $4f
-	db "not a fighter.", $57
-
-_SeafoamIslands5BattleText2: ; 88075 (22:4075)
-	db $0, "Gyaoo!@@"
-
-_SeafoamIslands5Text4: ; 8807e (22:407e)
-	db $0, "Boulders might", $4f
-	db "change the flow", $55
-	db "of water!", $57
-
-_SeafoamIslands5Text5: ; 880a8 (22:40a8)
-	db $0, "DANGER", $4f
-	db "Fast current!", $57
-
-_AIBattleWithdrawText: ; 880be (22:40be)
-	db 1
-	dw W_TRAINERNAME
-	db 0," with-",$4F,"drew @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$58
-_AIBattleUseItemText: ; 880d5 (22:40d5)
-	db 1
-	dw W_TRAINERNAME
-	db 0,$4F,"used @",1
-	dw $CD6D
-	db 0,$55,"on @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$58
-
-_UnnamedText_4160c: ; 880ef (22:40ef)
-	TX_RAM $cf4b
-	db $0, " went", $4f
-	db "to @"
-	TX_RAM $d887
-	db $0, ".", $57
-
-_UnnamedText_41623: ; 88103 (22:4103)
-	db $0, "For ", $52, "'s", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, ",", $57
-
-_UnnamedText_41628: ; 88112 (22:4112)
-	TX_RAM $d887
-	db $0, " sends", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, ".", $57
-
-_UnnamedText_41642: ; 88124 (22:4124)
-	TX_RAM $d887
-	db $0, " waves", $4f
-	db "farewell as", $57
-
-_UnnamedText_41647: ; 8813b (22:413b)
-	TX_RAM $cd6d
-	db $0, " is", $4f
-	db "transferred.", $57
-
-_UnnamedText_41655: ; 88150 (22:4150)
-	db $0, "Take good care of", $4f
-	db "@"
-
-UnnamedText_88164: ; 88164 (22:4164)
-	TX_RAM $cd6d
-	db $0, ".", $57
-
-_UnnamedText_4166c: ; 8816a (22:416a)
-	TX_RAM $d887
-	db $0, " will", $4f
-	db "trade @"
-
-UnnamedText_8817b: ; 8817b (22:417b)
-	TX_RAM $cd6d
-	db $0, $57
-
-_UnnamedText_41671: ; 88180 (22:4180)
-	db $0, "for ", $52, "'s", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, ".", $57
-
-_PlaySlotMachineText: ; 8818f (22:418f)
-	db $0, "A slot machine!", $4f
-	db "Want to play?", $57
-
-_OutOfCoinsSlotMachineText: ; 881ae (22:41ae)
-	db $0, "Darn!", $4f
-	db "Ran out of coins!", $57
-
-_BetHowManySlotMachineText: ; 881c7 (22:41c7)
-	db $0, "Bet how many", $4f
-	db "coins?", $57
-
-_StartSlotMachineText: ; 881dc (22:41dc)
-	db $0, "Start!", $57
-
-_NotEnoughCoinsSlotMachineText: ; 881e4 (22:41e4)
-	db $0, "Not enough", $4f
-	db "coins!", $58
-
-_OneMoreGoSlotMachineText: ; 881f7 (22:41f7)
-	db $0, "One more ", $4f
-	db "go?", $57
-
-_UnnamedText_37673: ; 88206 (22:4206)
-	db $0, " lined up!", $4f
-	db "Scored @"
-
-UnnamedText_8821a: ; 8821a (22:421a)
-	TX_RAM $cf4b
-	db $0, " coins!", $57
-
-_UnnamedText_3769d: ; 88226 (22:4226)
-	db $0, "Not this time!", $58
-
-_UnnamedText_37722: ; 88236 (22:4236)
-	db $0, "Yeah!@@"
-
-_UnnamedText_703fa: ; 8823e (22:423e)
-	db $0, "#DEX   Seen:@"
-
-UnnamedText_8824c: ; 8824c (22:424c)
-	TX_NUM $cc5b, 1, 3
-	db $0, $4f
-	db "         Owned:@"
-	TX_NUM $cc5c, 1, 3
-	db "@"
-
-_UnnamedText_703ff: ; 88267 (22:4267)
-	db $0, "#DEX Rating", $6d, $57
-
-_GymStatueText1: ; 88275 (22:4275)
-	TX_RAM wGymCityName
-	db $0, $4f
-	db "#MON GYM", $55
-	db "LEADER: @"
-	TX_RAM wGymLeaderName
-	db $0, $51
-	db "WINNING TRAINERS:", $4f
-	db $53, $57
-
-_GymStatueText2: ; 882a5 (22:42a5)
-	TX_RAM wGymCityName
-	db $0, $4f
-	db "#MON GYM", $55
-	db "LEADER: @"
-	TX_RAM wGymLeaderName
-	db $0, $51
-	db "WINNING TRAINERS:", $4f
-	db $53, $55
-	db $52, $57
-
-_ViridianCityPokecenterGuyText: ; 882d7 (22:42d7)
-	db $0, "#MON CENTERs", $4f
-	db "heal your tired,", $55
-	db "hurt or fainted", $55
-	db "#MON!", $57
-
-_PewterCityPokecenterGuyText: ; 8830c (22:430c)
-	db $0, "Yawn!", $51
-	db "When JIGGLYPUFF", $4f
-	db "sings, #MON", $55
-	db "get drowsy...", $51
-	db "...Me too...", $4f
-	db "Snore...", $57
-
-_CeruleanPokecenterGuyText: ; 88353 (22:4353)
-	db $0, "BILL has lots of", $4f
-	db "#MON!", $51
-	db "He collects rare", $4f
-	db "ones too!", $57
-
-_LavenderPokecenterGuyText: ; 88386 (22:4386)
-	db $0, "CUBONEs wear", $4f
-	db "skulls, right?", $51
-	db "People will pay a", $4f
-	db "lot for one!", $57
-
-_MtMoonPokecenterBenchGuyText: ; 883c2 (22:43c2)
-	db $0, "If you have too", $4f
-	db "many #MON, you", $55
-	db "should store them", $55
-	db "via PC!", $57
-
-_RockTunnelPokecenterGuyText: ; 883fc (22:43fc)
-	db $0, "I heard that", $4f
-	db "GHOSTs haunt", $55
-	db "LAVENDER TOWN!", $57
-
-_UnnamedText_624c1: ; 88426 (22:4426)
-	db $0, "I wish I could", $4f
-	db "catch #MON.", $57
-
-_UnnamedText_624c6: ; 88442 (22:4442)
-	db $0, "I'm tired from", $4f
-	db "all the fun...", $57
-
-_UnnamedText_624cb: ; 88460 (22:4460)
-	db $0, "SILPH's manager", $4f
-	db "is hiding in the", $55
-	db "SAFARI ZONE.", $57
-
-_VermilionPokecenterGuyText: ; 8848e (22:448e)
-	db $0, "It is true that a", $4f
-	db "higher level", $55
-	db "#MON will be", $55
-	db "more powerful...", $51
-	db "But, all #MON", $4f
-	db "will have weak", $55
-	db "points against", $55
-	db "specific types.", $51
-	db "So, there is no", $4f
-	db "universally", $55
-	db "strong #MON.", $57
-
-_CeladonCityPokecenterGuyText: ; 88531 (22:4531)
-	db $0, "If I had a BIKE,", $4f
-	db "I would go to", $55
-	db "CYCLING ROAD!", $57
-
-_FuchsiaCityPokecenterGuyText: ; 8855f (22:455f)
-	db $0, "If you're studying ", $4f
-	db "#MON, visit", $55
-	db "the SAFARI ZONE.", $51
-	db "It has all sorts", $4f
-	db "of rare #MON.", $57
-
-_CinnabarPokecenterGuyText: ; 885af (22:45af)
-	db $0, "#MON can still", $4f
-	db "learn techniques", $55
-	db "after canceling", $55
-	db "evolution.", $51
-	db "Evolution can wait", $4f
-	db "until new moves", $55
-	db "have been learned.", $57
-
-_SaffronCityPokecenterGuyText1: ; 88621 (22:4621)
-	db $0, "It would be great", $4f
-	db "if the ELITE FOUR", $55
-	db "came and stomped", $55
-	db "TEAM ROCKET!", $57
-
-_SaffronCityPokecenterGuyText2: ; 88664 (22:4664)
-	db $0, "TEAM ROCKET took", $4f
-	db "off! We can go", $55
-	db "out safely again!", $55
-	db "That's great!", $57
-
-_CeladonCityHotelText: ; 886a4 (22:46a4)
-	db $0, "My sis brought me", $4f
-	db "on this vacation!", $57
-
-_BookcaseText: ; 886c9 (22:46c9)
-	db $0, "Crammed full of", $4f
-	db "#MON books!", $57
-
-_NewBicycleText: ; 886e6 (22:46e6)
-	db $0, "A shiny new", $4f
-	db "BICYCLE!", $57
-
-_UnnamedText_1e960: ; 886fc (22:46fc)
-	db $0, "Push START to", $4f
-	db "open the MENU!", $57
-
-_UnnamedText_1e97e: ; 8871a (22:471a)
-	db $0, "The SAVE option is", $4f
-	db "on the MENU", $55
-	db "screen.", $57
-
-_UnnamedText_1e983: ; 88742 (22:4742)
-	db $0, "All #MON types", $4f
-	db "have strong and", $55
-	db "weak points", $55
-	db "against others.", $57
-
-_UnnamedText_1ea0d: ; 8877e (22:477e)
-	db $0, "PA: Ding-dong!", $51
-	db "Time's up!", $58
-
-_UnnamedText_1ea12: ; 88798 (22:4798)
-	db $0, "PA: Your SAFARI", $4f
-	db "GAME is over!", $57
-
-_CinnabarGymQuizIntroText: ; 887b7 (22:47b7)
-	db $0, "#MON Quiz!", $51
-	db "Get it right and", $4f
-	db "the door opens to", $55
-	db "the next room!", $51
-	db "Get it wrong and", $4f
-	db "face a trainer!", $51
-	db "If you want to", $4f
-	db "conserve your", $55
-	db "#MON for the", $55
-	db "GYM LEADER...", $51
-	db "Then get it right!", $4f
-	db "Here we go!", $58
-
-_CinnabarQuizQuestionsText1: ; 8886d (22:486d)
-	db $0, "CATERPIE evolves", $4f
-	db "into BUTTERFREE?", $57
-
-_CinnabarQuizQuestionsText2: ; 88890 (22:4890)
-	db $0, "There are 9", $4f
-	db "certified #MON", $55
-	db "LEAGUE BADGEs?", $57
-
-_CinnabarQuizQuestionsText3: ; 888bb (22:48bb)
-	db $0, "POLIWAG evolves 3", $4f
-	db "times?", $57
-
-_CinnabarQuizQuestionsText4: ; 888d5 (22:48d5)
-	db $0, "Are thunder moves", $4f
-	db "effective against", $55
-	db "ground element-", $55
-	db "type #MON?", $57
-
-_CinnabarQuizQuestionsText5: ; 88915 (22:4915)
-	db $0, "#MON of the", $4f
-	db "same kind and", $55
-	db "level are not", $55
-	db "identical?", $57
-
-_CinnabarQuizQuestionsText6: ; 88949 (22:4949)
-	db $0, "TM28 contains", $4f
-	db "TOMBSTONER?", $57
-
-_CinnabarGymQuizCorrectText: ; 88964 (22:4964)
-	db $0, "You're absolutely", $4f
-	db "correct!", $51
-	db "Go on through!@@"
-
-_CinnabarGymQuizIncorrectText: ; 8898f (22:498f)
-	db $0, "Sorry! Bad call!", $58
-
-_UnnamedText_1eb69: ; 889a1 (22:49a1)
-	db $0, "#MON magazines!", $51
-	db "#MON notebooks!", $51
-	db "#MON graphs!", $57
-
-_BillsHouseMonitorText: ; 889cf (22:49cf)
-	db $0, "TELEPORTER is", $4f
-	db "displayed on the", $55
-	db "PC monitor.", $57
-
-_BillsHouseInitiatedText: ; 889fb (22:49fb)
-	db $0, $52, " initiated", $4f
-	db "TELEPORTER's Cell", $55
-	db "Separator!@@"
-
-_BillsHousePokemonListText1: ; 88a25 (22:4a25)
-	db $0, "BILL's favorite", $4f
-	db "#MON list!", $58
-
-_BillsHousePokemonListText2: ; 88a40 (22:4a40)
-	db $0, "Which #MON do", $4f
-	db "you want to see?", $57
-
-_OakLabEmailText: ; 88a60 (22:4a60)
-	db $0, "There's an e-mail", $4f
-	db "message here!", $51
-	db "...", $51
-	db "Calling all", $4f
-	db "#MON trainers!", $51
-	db "The elite trainers", $4f
-	db "of #MON LEAGUE", $55
-	db "are ready to take", $55
-	db "on all comers!", $51
-	db "Bring your best", $4f
-	db "#MON and see", $55
-	db "how you rate as a", $55
-	db "trainer!", $51
-	db "#MON LEAGUE HQ", $4f
-	db "INDIGO PLATEAU", $51
-	db "PS: PROF.OAK,", $4f
-	db "please visit us!", $55
-	db "...", $57
-
-_GameCornerCoinCaseText: ; 88b5b (22:4b5b)
-	db $0, "A COIN CASE is", $4f
-	db "required!", $57
-
-_GameCornerNoCoinsText: ; 88b75 (22:4b75)
-	db $0, "You don't have", $4f
-	db "any coins!", $57
-
-_GameCornerOutOfOrderText: ; 88b8f (22:4b8f)
-	db $0, "OUT OF ORDER", $4f
-	db "This is broken.", $57
-
-_GameCornerOutToLunchText: ; 88bad (22:4bad)
-	db $0, "OUT TO LUNCH", $4f
-	db "This is reserved.", $57
-
-_GameCornerSomeonesKeysText: ; 88bcd (22:4bcd)
-	db $0, "Someone's keys!", $4f
-	db "They'll be back.", $57
-
-_UnnamedText_21865: ; 88bed (22:4bed)
-	db $0, "Just a moment.", $57
-
-TMNotebookText: ; 88bfd (22:4bfd)
-	db $0, "It's a pamphlet", $4f
-	db "on TMs.", $51
-	db "...", $51
-	db "There are 50 TMs", $4f
-	db "in all.", $51
-	db "There are also 5", $4f
-	db "HMs that can be", $55
-	db "used repeatedly.", $51
-	db "SILPH CO.@@"
-
-_TurnPageText: ; 88c6f (22:4c6f)
-	db $0, "Turn the page?", $57
-
-_ViridianSchoolNotebookText5: ; 88c7f (22:4c7f)
-	db $0, "GIRL: Hey! Don't", $4f
-	db "look at my notes!@@"
-
-_ViridianSchoolNotebookText1: ; 88ca3 (22:4ca3)
-	db $0, "Looked at the", $4f
-	db "notebook!", $51
-	db "First page...", $51
-	db "# BALLs are", $4f
-	db "used to catch", $55
-	db "#MON.", $51
-	db "Up to 6 #MON", $4f
-	db "can be carried.", $51
-	db "People who raise", $4f
-	db "and make #MON", $55
-	db "fight are called", $55
-	db "#MON trainers.", $58
-
-_ViridianSchoolNotebookText2: ; 88d46 (22:4d46)
-	db $0, "Second page...", $51
-	db "A healthy #MON", $4f
-	db "may be hard to", $55
-	db "catch, so weaken", $55
-	db "it first!", $51
-	db "Poison, burns and", $4f
-	db "other damage are", $55
-	db "effective!", $58
-
-_ViridianSchoolNotebookText3: ; 88dbd (22:4dbd)
-	db $0, "Third page...", $51
-	db "#MON trainers", $4f
-	db "seek others to", $55
-	db "engage in #MON", $55
-	db "fights.", $51
-	db "Battles are", $4f
-	db "constantly fought", $55
-	db "at #MON GYMs.", $58
-
-_ViridianSchoolNotebookText4: ; 88e2c (22:4e2c)
-	db $0, "Fourth page...", $51
-	db "The goal for", $4f
-	db "#MON trainers", $55
-	db "is to beat the ", $55
-	db "top 8 #MON", $55
-	db "GYM LEADERs.", $51
-	db "Do so to earn the", $4f
-	db "right to face...", $51
-	db "The ELITE FOUR of", $4f
-	db "#MON LEAGUE!", $58
-
-_UnnamedText_52a10: ; 88ec1 (22:4ec1)
-	db $0, "Enemies on every", $4f
-	db "side!", $57
-
-_UnnamedText_52a1d: ; 88ed9 (22:4ed9)
-	db $0, "What goes around", $4f
-	db "comes around!", $57
-
-_FightingDojoText: ; 88ef9 (22:4ef9)
-	db $0, "FIGHTING DOJO", $57
-
-_IndigoPlateauHQText: ; 88f08 (22:4f08)
-	db $0, "INDIGO PLATEAU", $4f
-	db "#MON LEAGUE HQ", $57
-
-_RedBedroomSNESText: ; 88f27 (22:4f27)
-	db $0, $52, " is", $4f
-	db "playing the SNES!", $55
-	db "...Okay!", $55
-	db "It's time to go!", $57
-
-_Route15UpstairsBinocularsText: ; 88f58 (22:4f58)
-	db $0, "Looked into the", $4f
-	db "binoculars...", $51
-	db "A large, shining", $4f
-	db "bird is flying", $55
-	db "toward the sea.", $57
-
-_AerodactylFossilText: ; 88fa7 (22:4fa7)
-	db $0, "AERODACTYL Fossil", $4f
-	db "A primitive and", $55
-	db "rare #MON.", $57
-
-_KabutopsFossilText: ; 88fd5 (22:4fd5)
-	db $0, "KABUTOPS Fossil", $4f
-	db "A primitive and", $55
-	db "rare #MON.", $57
-
-_LinkCableHelpText1: ; 89001 (22:5001)
-	db $0, "TRAINER TIPS", $51
-	db "Using a Game Link", $4f
-	db "Cable", $58
-
-_LinkCableHelpText2: ; 89027 (22:5027)
-	db $0, "Which heading do", $4f
-	db "you want to read?", $57
-
-_LinkCableInfoText1: ; 8904b (22:504b)
-	db $0, "When you have", $4f
-	db "linked your GAME", $55
-	db "BOY with another", $55
-	db "GAME BOY, talk to", $55
-	db "the attendant on", $55
-	db "the right in any", $55
-	db "#MON CENTER.", $58
-
-_LinkCableInfoText2: ; 890bd (22:50bd)
-	db $0, "COLOSSEUM lets", $4f
-	db "you play against", $55
-	db "a friend.", $58
-
-_LinkCableInfoText3: ; 890e8 (22:50e8)
-	db $0, "TRADE CENTER is", $4f
-	db "used for trading", $55
-	db "#MON.", $58
-
-_ViridianSchoolBlackboardText1: ; 89110 (22:5110)
-	db $0, "The blackboard", $4f
-	db "describes #MON", $55
-	db "STATUS changes", $55
-	db "during battles.", $58
-
-_ViridianSchoolBlackboardText2: ; 8914e (22:514e)
-	db $0, "Which heading do", $4f
-	db "you want to read?", $57
-
-_ViridianBlackboardSleepText: ; 89172 (22:5172)
-	db $0, "A #MON can't", $4f
-	db "attack if it's", $55
-	db "asleep!", $51
-	db "#MON will stay", $4f
-	db "asleep even after", $55
-	db "battles.", $51
-	db "Use AWAKENING to", $4f
-	db "wake them up!", $58
-
-_ViridianBlackboardPoisonText: ; 891de (22:51de)
-	db $0, "When poisoned, a", $4f
-	db "#MON's health", $55
-	db "steadily drops.", $51
-	db "Poison lingers", $4f
-	db "after battles.", $51
-	db "Use an ANTIDOTE", $4f
-	db "to cure poison!", $58
-
-_ViridianBlackbaordPrlzText: ; 8924b (22:524b)
-	db $0, "Paralysis could", $4f
-	db "make #MON", $55
-	db "moves misfire!", $51
-	db "Paralysis remains", $4f
-	db "after battles.", $51
-	db "Use PARLYZ HEAL", $4f
-	db "for treatment!", $58
-
-_ViridianBlackboardBurnText: ; 892b5 (22:52b5)
-	db $0, "A burn reduces", $4f
-	db "power and speed.", $55
-	db "It also causes", $55
-	db "ongoing damage.", $51
-	db "Burns remain", $4f
-	db "after battles.", $51
-	db "Use BURN HEAL to", $4f
-	db "cure a burn!", $58
-
-_ViridianBlackboardFrozenText: ; 8932f (22:532f)
-	db $0, "If frozen, a", $4f
-	db "#MON becomes", $55
-	db "totally immobile!", $51
-	db "It stays frozen", $4f
-	db "even after the", $55
-	db "battle ends.", $51
-	db "Use ICE HEAL to", $4f
-	db "thaw out #MON!", $58
-
-_VermilionGymTrashText: ; 893a7 (22:53a7)
-	db $0, "Nope, there's", $4f
-	db "only trash here.", $57
-
-_VermilionGymTrashSuccesText1: ; 893c6 (22:53c6)
-	db $0, "Hey! There's a", $4f
-	db "switch under the", $55
-	db "trash!", $55
-	db "Turn it on!", $51
-	db "The 1st electric", $4f
-	db "lock opened!@@"
-
-_VermilionGymTrashSuccesText2: ; 89418 (22:5418)
-	db $0, "Hey! There's", $4f
-	db "another switch", $55
-	db "under the trash!", $55
-	db "Turn it on!", $58
-
-_VermilionGymTrashSuccesText3: ; 89451 (22:5451)
-	db $0, "The 2nd electric", $4f
-	db "lock opened!", $51
-	db "The motorized door", $4f
-	db "opened!@@"
-
-_VermilionGymTrashFailText: ; 8948c (22:548c)
-	db $0, "Nope! There's", $4f
-	db "only trash here.", $55
-	db "Hey! The electric", $55
-	db "locks were reset!@@"
-
-UnnamedText_894d0: ; 894d0 (22:54d0)
-	db $0, $52, " found", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!@@"
-
-_UnnamedText_76794: ; 894e1 (22:54e1)
-	db $0, "But, ", $52, " has", $4f
-	db "no more room for", $55
-	db "other items!", $57
-
-_FoundHiddenCoinsText: ; 8950b (22:550b)
-	db $0, $52, " found", $4f
-	db "@"
-	db $2, $a0, $ff, $c2 ; XXX $2
-	db $0, " coins!@@"
-
-_FoundHiddenCoins2Text: ; 89523 (22:5523)
-	db $0, $52, " found", $4f
-	db "@"
-	db $2, $a0, $ff, $c2 ; XXX $2 probably coins
-	db $0, " coins!@@"
-
-_DroppedHiddenCoinsText: ; 8953b (22:553b)
-	db $0, $51
-	db "Oops! Dropped", $4f
-	db "some coins!", $57
-
-_IndigoPlateauStatuesText1: ; 89557 (22:5557)
-	db $0, "INDIGO PLATEAU", $58
-
-_IndigoPlateauStatuesText2: ; 89567 (22:5567)
-	db $0, "The ultimate goal", $4f
-	db "of trainers!", $55
-	db "#MON LEAGUE HQ", $57
-
-_IndigoPlateauStatuesText3: ; 89596 (22:5596)
-	db $0, "The highest", $4f
-	db "#MON authority", $55
-	db "#MON LEAGUE HQ", $57
-
-_PokemonBooksText: ; 895c1 (22:55c1)
-	db $0, "Crammed full of", $4f
-	db "#MON books!", $57
-
-_DiglettSculptureText: ; 895de (22:55de)
-	db $0, "It's a sculpture", $4f
-	db "of DIGLETT.", $57
-
-_ElevatorText: ; 895fb (22:55fb)
-	db $0, "This is an", $4f
-	db "elevator.", $57
-
-_TownMapText: ; 89611 (22:5611)
-	db $0, "A TOWN MAP.@@"
-
-_PokemonStuffText: ; 8961f (22:561f)
-	db $0, "Wow! Tons of", $4f
-	db "#MON stuff!", $57
-
-_UnnamedText_3c1a8: ; 89639 (22:5639)
-	db $0, "PA: Ding-dong!", $51
-	db "You are out of", $4f
-	db "SAFARI BALLs!", $58
-
-_UnnamedText_3c229: ; 89666 (22:5666)
-	db $0, "Wild @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "ran!", $58
-
-_UnnamedText_3c22e: ; 89677 (22:5677)
-	db $0, "Enemy @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "ran!", $58
-
-_HurtByPoisonText: ; 89689 (22:5689)
-	db $0, $5a, "'s", $4f
-	db "hurt by poison!", $58
-
-_HurtByBurnText: ; 8969d (22:569d)
-	db $0, $5a, "'s", $4f
-	db "hurt by the burn!", $58
-
-_HurtByLeechSeedText: ; 896b3 (22:56b3)
-	db $0, "LEECH SEED saps", $4f
-	db $5a, "!", $58
-
-_EnemyMonFainted: ; 0x896c7
-	db $0, "Enemy @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "fainted!", $58
-
-_MoneyForWinningText: ; 896dd (22:56dd)
-	db $0, $52, " got ¥@"
-	;XXX $2
-	db $2, $79, $d0, $c3
-	db $0, $4f
-	db "for winning!", $58
-
-_TrainerDefeatedText: ; 896f9 (22:56f9)
-	db $0, $52, " defeated", $4f
-	db "@"
-	TX_RAM W_TRAINERNAME ; 0x89706
-	db $0, "!", $58
-
-_PlayerMonFaintedText: ; 8970c (22:570c)
-	TX_RAM W_PLAYERMONNAME
-	db $0, $4f
-	db "fainted!", $58
-
-_UnnamedText_3c7d3: ; 8971a (22:571a)
-	db $0, "Use next #MON?", $57
-
-_Sony1WinText: ; 8972a (22:572a)
-	db $0, $53, ": Yeah! Am", $4f
-	db "I great or what?", $58
-
-_PlayerBlackedOutText2: ; 89748 (22:5748)
-	db $0, $52, " is out of", $4f
-	db "useable #MON!", $51
-	db $52, " blacked", $4f
-	db "out!", $58
-
-_LinkBattleLostText: ; 89772 (22:5772)
-	db $0, $52, " lost to", $4f
-	db "@"
-	TX_RAM W_TRAINERNAME ; 0x8977e
-	db $0, "!", $58
-
-_TrainerAboutToUseText: ; 89784 (22:5784)
-	db 1
-	dw W_TRAINERNAME
-	db 0," is",$4F
-	db "about to use",$55,"@",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$51
-	db "Will ",$52,$4F
-	db "change #MON?",$57
-
-_TrainerSentOutText: ; 897b4 (22:57b4)
-	db 1
-	dw W_TRAINERNAME
-	db 0," sent",$4F
-	db "out @",1
-	dw W_ENEMYMONNAME
-	db 0,"!",$57
-
-_UnnamedText_3cab4: ; 897c9 (22:57c9)
-	db $0, "There's no will", $4f
-	db "to fight!", $58
-
-_UnnamedText_3cb97: ; 897e3 (22:57e3)
-	db $0, "Can't escape!", $58
-
-_UnnamedText_3cb9c: ; 897f1 (22:57f1)
-	db $0, "No! There's no", $4f
-	db "running from a", $55
-	db "trainer battle!", $58
-
-_UnnamedText_3cba1: ; 8981f (22:581f)
-	db $0, "Got away safely!", $58
-
-ItemsCantBeUsedHere_: ; 89831 (22:5831)
-	db $0, "Items can't be", $4f
-	db "used here.", $58
-
-_UnnamedText_3d1f5: ; 8984b (22:584b)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " is", $4f
-	db "already out!", $58
-
-_MoveNoPPText: ; 89860 (22:5860)
-	db $0, "No PP left for", $4f
-	db "this move!", $58
-
-_MoveDisabledText: ; 8987b (22:587b)
-	db $0, "The move is", $4f
-	db "disabled!", $58
-
-_UnnamedText_3d430: ; 89892 (22:5892)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " has no", $4f
-	db "moves left!", $57
-
-_MultiHitText: ; 898aa (22:58aa)
-	db 0,"Hit the enemy",$4F,"@"
-	TX_NUM W_NUMHITS,1,1
-	db 0," times!",$58
-
-_ScaredText: ; 898c7 (22:58c7)
-	db 1
-	dw W_PLAYERMONNAME
-	db 0," is too",$4F
-	db "scared to move!",$58
-
-_GetOutText: ; 898e3 (22:58e3)
-	db 0,"GHOST: Get out...",$4F
-	db "Get out...",$58
-
-_FastAsleepText: ; 89901 (22:5901)
-	db 0,$5A,$4F
-	db "is fast asleep!",$58
-
-_WokeUpText: ; 89914 (22:5914)
-	db 0,$5A,$4F
-	db "woke up!",$58
-
-_FrozenText: ; 89920 (22:5920)
-	db 0,$5A,$4F
-	db "is frozen solid!",$58
-
-_FullyParalyzedText: ; 89934 (22:5934)
-	db 0,$5A,"'s",$4F
-	db "fully paralyzed!",$58
-
-_FlinchedText: ; 89949 (22:5949)
-	db 0,$5A,$4F
-	db "flinched!",$58
-
-_MustRechargeText: ; 89956 (22:5956)
-	db 0,$5A,$4F
-	db "must recharge!",$58
-
-_DisabledNoMoreText: ; 89968 (22:5968)
-	db 0,$5A,"'s",$4F
-	db "disabled no more!",$58
-
-_IsConfusedText: ; 8997e (22:597e)
-	db 0,$5A,$4F
-	db "is confused!",$58
-
-_HurtItselfText: ; 8998e (22:598e)
-	db 0,"It hurt itself in",$4F
-	db "its confusion!",$58
-
-_ConfusedNoMoreText: ; 899b0 (22:59b0)
-	db 0,$5A,"'s",$4F
-	db "confused no more!",$58
-
-_SavingEnergyText: ; 899c6 (22:59c6)
-	db 0,$5A,$4F
-	db "is saving energy!",$58
-
-_UnleashedEnergyText: ; 899db (22:59db)
-	db 0,$5A,$4F
-	db "unleashed energy!",$58
-
-_ThrashingAboutText: ; 899f0 (22:59f0)
-	db 0,$5A,"'s",$4F
-	db "thrashing about!",$57
-
-_AttackContinuesText: ; 89a05 (22:5a05)
-	db 0,$5A,"'s",$4F
-	db "attack continues!",$57
-
-_CantMoveText: ; 89a1b (22:5a1b)
-	db 0,$5A,$4F
-	db "can't move!",$58
-
-_UnnamedText_3daa8: ; 89a29 (22:5a29)
-	db $0, $5a, "'s", $4f
-	db "@"
-
-UnnamedText_89a2e: ; 89a2e (22:5a2e)
-	TX_RAM $cd6d
-	db $0, " is", $55
-	db "disabled!", $58
-
-_UnnamedText_3dafb: ; 89a40 (22:5a40)
-	db $0, $5a, "@@"
-
-_UnnamedText_3db2d: ; 89a44 (22:5a44)
-	db $0, $4f
-	db "used @@"
-
-_UnnamedText_3db34: ; 89a4d (22:5a4d)
-	db $0, $4f
-	db "used @@"
-
-_UnnamedText_3db43: ; 89a56 (22:5a56)
-	db $0, "instead,", $55
-	db "@@"
-
-_UnnamedText_3db4c: ; 89a62 (22:5a62)
-	TX_RAM $cf4b
-	db $0, "@"
-
-_UnnamedText_3db6c: ; 89a67 (22:5a67)
-	db $0, "!", $57
-
-_UnnamedText_3db71: ; 89a6a (22:5a6a)
-	db $0, "!", $57
-
-_UnnamedText_3db76: ; 89a6d (22:5a6d)
-	db $0, "!", $57
-
-_UnnamedText_3db7b: ; 89a70 (22:5a70)
-	db $0, "!", $57
-
-_UnnamedText_3db80: ; 89a73 (22:5a73)
-	db $0, "!", $57
-
-_UnnamedText_3dc42: ; 89a76 (22:5a76)
-	db $0, $5a, "'s", $4f
-	db "attack missed!", $58
-
-_UnnamedText_3dc47: ; 89a89 (22:5a89)
-	db $0, $5a, $4f
-	db "kept going and", $55
-	db "crashed!", $58
-
-_UnnamedText_3dc4c: ; 89aa4 (22:5aa4)
-	db $0, $59, "'s", $4f
-	db "unaffected!", $58
-
-_UnnamedText_3dc57: ; 89ab4 (22:5ab4)
-	db $0, "It doesn't affect", $4f
-	db $59, "!", $58
-
-_UnnamedText_3dc7e: ; 89ac9 (22:5ac9)
-	db $0, "Critical hit!", $58
-
-_UnnamedText_3dc83: ; 89ad8 (22:5ad8)
-	db $0, "One-hit KO!", $58
-
-_UnnamedText_3ddb6: ; 89ae5 (22:5ae5)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " is", $4f
-	db "loafing around.", $58
-
-_UnnamedText_3ddbb: ; 89afd (22:5afd)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " began", $4f
-	db "to nap!", $58
-
-_UnnamedText_3ddc0: ; 89b10 (22:5b10)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " won't", $4f
-	db "obey!", $58
-
-_UnnamedText_3ddc5: ; 89b20 (22:5b20)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " turned", $4f
-	db "away!", $58
-
-_UnnamedText_3ddca: ; 89b32 (22:5b32)
-	TX_RAM W_PLAYERMONNAME
-	db $0, $4f
-	db "ignored orders!", $58
-
-_SubstituteTookDamageText: ; 89b47 (22:5b47)
-	db $0, "The SUBSTITUTE", $4f
-	db "took damage for", $55
-	db $59, "!", $58
-
-_SubstituteBrokeText: ; 89b6a (22:5b6a)
-	db $0, $59, "'s", $4f
-	db "SUBSTITUTE broke!", $58
-
-_BuildingRageText: ; 89b80 (22:5b80)
-	db $0, $5a, "'s", $4f
-	db "RAGE is building!", $58
-
-_MirrorMoveFailedText: ; 89b96 (22:5b96)
-	db $0, "The MIRROR MOVE", $4e, "failed!", $58
-
-_UnnamedText_3e887: ; 89baf (22:5baf)
-	db $0, "Hit @"
-
-UnnamedText_89bb5: ; 89bb5 (22:5bb5)
-	TX_NUM $cd05, 1, 1
-	db $0, " times!", $58
-
-_UnnamedText_554b2: ; 89bc2 (22:5bc2)
-	TX_RAM $cd6d
-	db $0, " gained", $4f
-	db "@@"
-
-_UnnamedText_554cb: ; 89bd0 (22:5bd0)
-	db $0, "with EXP.ALL,", $55
-	db "@@"
-
-_UnnamedText_554d4: ; 89be1 (22:5be1)
-	db $0, "a boosted", $55
-	db "@@"
-_UnnamedText_554d8: ; 89bee (22:5bee)
-	TX_NUM $cf4b, 2, 4
-	db $0, " EXP. Points!", $58
-
-UnnamedText_89c01: ; 89c01 (22:5c01)
-	TX_RAM $cd6d
-	db $0, " grew", $4f
-	db "to level @"
-	TX_NUM $d127, 1, 3
-	db $0, "!@@"
-
-_UnnamedText_58e3b: ; 89c1d (22:5c1d)
-	db $0, "Wild @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "appeared!", $58
-
-_UnnamedText_58e40: ; 89c33 (22:5c33)
-	db $0, "The hooked", $4f
-	db "@"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $55
-	db "attacked!", $58
-
-_UnnamedText_58e45: ; 89c4f (22:5c4f)
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "appeared!", $58
-
-_UnnamedText_58e4a: ; 89c5e (22:5c5e)
-	TX_RAM W_TRAINERNAME
-	db $0, " wants", $4f
-	db "to fight!", $58
-
-_UnnamedText_58e4f: ; 89c73 (22:5c73)
-	db $0, "SILPH SCOPE", $4f
-	db "unveiled the", $55
-	db "GHOST's identity!", $58
-
-_UnnamedText_58e54: ; 89c9e (22:5c9e)
-	db $0, "Darn! The GHOST", $4f
-	db "can't be ID'd!", $58
-
-_UnnamedText_58eae: ; 89cbc (22:5cbc)
-	db $0, "Go! @@"
-
-_UnnamedText_58eb5: ; 89cc3 (22:5cc3)
-	db $0, "Do it! @@"
-
-_UnnamedText_58ebc: ; 89ccd (22:5ccd)
-	db $0, "Get'm! @@"
-
-_UnnamedText_58ec3: ; 89cd6 (22:5cd6)
-	db $0, "The enemy's weak!", $4f
-	db "Get'm! @@"
-
-_UnnamedText_58ecc: ; 89cf0 (22:5cf0)
-	TX_RAM W_PLAYERMONNAME
-	db $0, "!", $57
-
-_UnnamedText_58ed7: ; 89cf6 (22:5cf6)
-	TX_RAM W_PLAYERMONNAME
-	db $0, " @@"
-
-_UnnamedText_58f25: ; 89cfd (22:5cfd)
-	db $0, "enough!@@"
-
-_UnnamedText_58f2c: ; 89d07 (22:5d07)
-	db $0, "OK!@@"
-
-_UnnamedText_58f33: ; 89d0d (22:5d0d)
-	db $0, "good!@@"
-
-_UnnamedText_58f3e: ; 89d15 (22:5d15)
-	db $0, $4f
-	db "Come back!", $57
-
-_UnnamedText_2fb8e: ; 89d22 (22:5d22)
-	db $0, "It's super", $4f
-	db "effective!", $58
-
-_UnnamedText_2fb93: ; 89d38 (22:5d38)
-	db $0, "It's not very", $4f
-	db "effective...", $58
-
-SafariZoneEatingText: ; 89d53 (22:5d53)
-	db $0, "Wild @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "is eating!", $58
-
-SafariZoneAngryText: ; 89d6a (22:5d6a)
-	db $0, "Wild @"
-	TX_RAM W_ENEMYMONNAME
-	db $0, $4f
-	db "is angry!", $58
-
-; money related
-; XXX $2 BCD macro
-; $2, pointer, byte
-_UnnamedText_1386b: ; 89d80 (22:5d80)
-	db $0, $52, " picked up", $4f
-	db "¥@"
-	db $2, $e5, $cc, $c3
-	db $0, "!", $58
-
-_UnnamedText_1c9c1: ; 89d96 (22:5d96)
-	db $0, "Clear all saved", $4f
-	db "data?", $57
-
-_UnnamedText_1ca14: ; 89dad (22:5dad)
-	db $0, "Which floor do", $4f
-	db "you want? ", $57
-
-_PartyMenuNormalText: ; 89dc8 (22:5dc8)
-	db $0, "Choose a #MON.", $57
-
-_PartyMenuItemUseText: ; 89dd8 (22:5dd8)
-	db $0, "Use item on which", $4f
-	db "#MON?", $57
-
-_PartyMenuBattleText: ; 89df1 (22:5df1)
-	db $0, "Bring out which", $4f
-	db "#MON?", $57
-
-_PartyMenuUseTMText: ; 89e08 (22:5e08)
-	db $0, "Use TM on which", $4f
-	db "#MON?", $57
-
-_PartyMenuSwapMonText: ; 89e1f (22:5e1f)
-	db $0, "Move #MON", $4f
-	db "where?", $57
-
-_PotionText: ; 89e31 (22:5e31)
-	TX_RAM $cd6d
-	db $0, $4f
-	db "recovered by @"
-	TX_NUM wHPBarHPDifference, 2, 3
-	db $0, "!", $57
-
-_AntidoteText: ; 89e4b (22:5e4b)
-	TX_RAM $cd6d
-	db $0, " was", $4f
-	db "cured of poison!", $57
-
-_ParlyzHealText: ; 89e65 (22:5e65)
-	TX_RAM $cd6d
-	db $0, "'s", $4f
-	db "rid of paralysis!", $57
-
-_BurnHealText: ; 89e7d (22:5e7d)
-	TX_RAM $cd6d
-	db $0, "'s", $4f
-	db "burn was healed!", $57
-
-_IceHealText: ; 89e94 (22:5e94)
-	TX_RAM $cd6d
-	db $0, " was", $4f
-	db "defrosted!", $57
-
-_AwakeningText: ; 89ea8 (22:5ea8)
-	TX_RAM $cd6d
-	db $0, $4f
-	db "woke up!", $57
-
-_FullHealText: ; 89eb6 (22:5eb6)
-	TX_RAM $cd6d
-	db $0, "'s", $4f
-	db "health returned!", $57
-
-_ReviveText: ; 89ecd (22:5ecd)
-	TX_RAM $cd6d
-	db $0, $4f
-	db "is revitalized!", $57
-
-_RareCandyText: ; 89ee2 (22:5ee2)
-	TX_RAM $cd6d
-	db $0, " grew", $4f
-	db "to level @"
-	TX_NUM $d127, $1,$3
-	db $0, "!@@"
-
-_UnnamedText_17f23: ; 89efe (22:5efe)
-	db $0, $52, " turned on", $4f
-	db "the PC.", $58
-
-_UnnamedText_17f28: ; 89f13 (22:5f13)
-	db $0, "Accessed BILL's", $4f
-	db "PC.", $51
-	db "Accessed #MON", $4f
-	db "Storage System.", $58
-
-_UnnamedText_17f2d: ; 89f45 (22:5f45)
-	db $0, "Accessed someone's", $4f
-	db "PC.", $51
-	db "Accessed #MON", $4f
-	db "Storage System.", $58
-
-_UnnamedText_17f32: ; 89f7a (22:5f7a)
-	db $0, "Accessed my PC.", $51
-	db "Accessed Item", $4f
-	db "Storage System.", $58
-
-_UnnamedText_7b22: ; 89fa9 (22:5fa9)
-	db $0, $52, " turned on", $4f
-	db "the PC.", $58
-
-_UnnamedText_7b27: ; 89fbe (22:5fbe)
-	db $0, "What do you want", $4f
-	db "to do?", $57
-
-_UnnamedText_7b2c: ; 89fd7 (22:5fd7)
-	db $0, "What do you want", $4f
-	db "to deposit?", $57
-
-_UnnamedText_7b31: ; 89ff5 (22:5ff5)
-	db $0, "How many?", $57
-
-_UnnamedText_7b36: ; 8a000 (22:6000)
-	TX_RAM $cd6d
-	db $0, " was", $4f
-	db "stored via PC.", $58
-
-_UnnamedText_7b3b: ; 8a018 (22:6018)
-	db $0, "You have nothing", $4f
-	db "to deposit.", $58
-
-_UnnamedText_7b40: ; 8a036 (22:6036)
-	db $0, "No room left to", $4f
-	db "store items.", $58
-
-_UnnamedText_7b45: ; 8a054 (22:6054)
-	db $0, "What do you want", $4f
-	db "to withdraw?", $57
-
-_UnnamedText_7b4a: ; 8a073 (22:6073)
-	db $0, "How many?", $57
-
-_UnnamedText_7b4f: ; 8a07e (22:607e)
-	db $0, "Withdrew", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, ".", $58
-
-_UnnamedText_7b54: ; 8a08f (22:608f)
-	db $0, "There is nothing", $4f
-	db "stored.", $58
-
-_UnnamedText_7b59: ; 8a0a9 (22:60a9)
-	db $0, "You can't carry", $4f
-	db "any more items.", $58
-
-_UnnamedText_7b5e: ; 8a0c9 (22:60c9)
-	db $0, "What do you want", $4f
-	db "to toss away?", $57
-
-_UnnamedText_7b63: ; 8a0e9 (22:60e9)
-	db $0, "How many?", $57
-
-_UnnamedText_76683: ; 8a0f4 (22:60f4)
-	db $0, "Accessed #MON", $4f
-	db "LEAGUE's site.", $51
-	db "Accessed the HALL", $4f
-	db "OF FAME List.", $58
-
-_SwitchOnText: ; 0x8a131
-	db $0, "Switch on!", $58
-
-_WhatText: ; 0x8a13d
-	db $0, "What?", $57
-
-_DepositWhichMonText: ; 0x8a144
-	db $0, "Deposit which", $4f
-	db "#MON?", $57
-
-_MonWasStoredText: ; 0x8a159
-	TX_RAM $cf4b
-	db $0, " was", $4f
-	db "stored in Box @"
-	TX_RAM $cd3d
-	db $0, ".", $58
-
-_CantDepositLastMonText: ; 0x8a177
-	db $0, "You can't deposit", $4f
-	db "the last #MON!", $58
-
-_BoxFullText: ; 0x8a198
-	db $0, "Oops! This Box is", $4f
-	db "full of #MON.", $58
-
-_MonIsTakenOutText: ; 0x8a1b9
-	TX_RAM $cf4b
-	db $0, " is", $4f
-	db "taken out.", $55
-	db "Got @"
-UnnamedText_8a1d1: ; 8a1d1 (22:61d1)
-	TX_RAM $cf4b
-	db $0, ".", $58
-
-_NoMonText: ; 0x8a1d7
-	db $0, "What? There are", $4f
-	db "no #MON here!", $58
-
-_CantTakeMonText: ; 0x8a1f6
-	db $0, "You can't take", $4f
-	db "any more #MON.", $51
-	db "Deposit #MON", $4f
-	db "first.", $58
-
-_ReleaseWhichMonText: ; 0x8a228
-	db $0, "Release which", $4f
-	db "#MON?", $57
-
-_OnceReleasedText: ; 0x8a23d
-	db $0, "Once released,", $4f
-	db "@"
-
-MonIsGoneForeverText: ; 0x8a24e
-	TX_RAM $cf4b
-	db $0, " is", $55
-	db "gone forever. OK?", $57
-
-_MonWasReleasedText: ; 0x8a268
-	TX_RAM $cf4b
-	db $0, " was", $4f
-	db "released outside.", $55
-	db "Bye @"
-
-_UnnamedText_8a288: ; 8a288 (22:6288)
-	TX_RAM $cf4b
-	db $0, "!", $58
-
-_RequireCoinCaseText: ; 8a28e (22:628e)
-	db 0,"A COIN CASE is",$4F
-	db "required!@@"
-
-_ExchangeCoinsForPrizesText: ; 8a2a9 (22:62a9)
-	db 0,"We exchange your",$4F
-	db "coins for prizes.",$58
-
-_WhichPrizeText: ; 8a2cd (22:62cd)
-	db 0,"Which prize do",$4F
-	db "you want?",$57
-
-_HereYouGoText: ; 8a2e7 (22:62e7)
-	db 0,"Here you go!@@"
-
-_SoYouWantPrizeText: ; 8a2f6 (22:62f6)
-	db 0,"So, you want",$4F
-	db "@"
-	db 1
-	dw $CD6D
-	db 0,"?",$57
-
-_SorryNeedMoreCoins: ; 8a30b (22:630b)
-	db 0,"Sorry, you need",$4F
-	db "more coins.@@"
-
-_OopsYouDontHaveEnoughRoomText: ; 8a329 (22:6329)
-	db 0,"Oops! You don't",$4F
-	db "have enough room.@@"
-
-_OhFineThenText: ; 8a34c (22:634c)
-	db 0,"Oh, fine then.@@"
-
-_UnnamedText_1e93b: ; 8a35d (22:635d)
-	db $0, "Want to get your", $4f
-	db "#DEX rated?", $57
-
-_UnnamedText_1e940: ; 8a37b (22:637b)
-	db $0, "Closed link to", $4f
-	db "PROF.OAK's PC.@@"
-
-_UnnamedText_1e946: ; 8a39a (22:639a)
-	db $0, "Accessed PROF.", $4f
-	db "OAK's PC.", $51
-	db "Accessed #DEX", $4f
-	db "Rating System.", $58
-
-_UnnamedText_5d43: ; 8a3d0 (22:63d0)
-	db $0, "Where would you", $4f
-	db "like to go?", $57
-
-_UnnamedText_5d48: ; 8a3ed (22:63ed)
-	db $0, "OK, please wait", $4f
-	db "just a moment.", $57
-
-_UnnamedText_5d4d: ; 8a40d (22:640d)
-	db $0, "The link was", $4f
-	db "canceled.", $57
-
-INCLUDE "text/oakspeech.asm"
-
-_DoYouWantToNicknameText: ; 0x8a605
-	db $0, "Do you want to", $4f
-	db "give a nickname", $55
-	db "to @"
-
-UnnamedText_8a629: ; 8a629 (22:6629)
-	TX_RAM $cd6d
-	db $0, "?", $57
-
-_UnnamedText_699f: ; 8a62f (22:662f)
-	db $0, "Right! So your", $4f
-	db "name is ", $52, "!", $58
-
-_UnnamedText_69e7: ; 8a64a (22:664a)
-	db $0, "That's right! I", $4f
-	db "remember now! His", $55
-	db "name is ", $53, "!", $58
-
-_SSAnne8AfterBattleText2: ; 8a677 (22:6677)
-	TX_RAM $cd3f
-	db $0, " and", $4f
-	db "@"
-
-UnnamedText_8a681: ; 8a681 (22:6681)
-	TX_RAM $cd6d
-	db $0, " will", $55
-	db "be traded.", $57
-
-_Char00Text: ; 8a696 (22:6696)
-	TX_NUM $FF8C,1,2
-	db 0," ERROR.",$57
-
-_Char55Text: ; 8a6a3 (22:66a3)
-	db 0,$4B,"@@"
-
-_DiglettsCaveRoute2Text1: ; 8a6a7 (22:66a7)
-	db $0, "I went to ROCK", $4f
-	db "TUNNEL, but it's", $55
-	db "dark and scary.", $51
-	db "If a #MON's", $4f
-	db "FLASH could light", $55
-	db "it up...", $57
-
-_ViridianForestexitText1: ; 8a6fd (22:66fd)
-	db $0, "Many #MON live", $4f
-	db "only in forests ", $55
-	db "and caves.", $51
-	db "You need to look", $4f
-	db "everywhere to get", $55
-	db "different kinds!", $57
-
-_ViridianForestexitText2: ; 8a75d (22:675d)
-	db $0, "Have you noticed", $4f
-	db "the bushes on the", $55
-	db "roadside?", $51
-	db "They can be cut", $4f
-	db "down by a special", $55
-	db "#MON move.", $57
-
-_Route2HouseText1: ; 8a7b8 (22:67b8)
-	db $0, "A fainted #MON", $4f
-	db "can't fight. But, ", $55
-	db "it can still use ", $55
-	db "moves like CUT!", $57
-
-_UnnamedText_5d616: ; 8a7fc (22:67fc)
-	db $0, "The HM FLASH", $4f
-	db "lights even the", $55
-	db "darkest dungeons.", $57
-
-_Route2GateText2: ; 8a82c (22:682c)
-	db $0, "Once a #MON", $4f
-	db "learns FLASH, you", $55
-	db "can get through", $55
-	db "ROCK TUNNEL.", $57
-
-_ViridianForestEntranceText1: ; 8a868 (22:6868)
-	db $0, "Are you going to", $4f
-	db "VIRIDIAN FOREST?", $55
-	db "Be careful, it's", $55
-	db "a natural maze!", $57
-
-_ViridianForestEntranceText2: ; 8a8ab (22:68ab)
-	db $0, "RATTATA may be", $4f
-	db "small, but its", $55
-	db "bite is wicked!", $55
-	db "Did you get one?", $57
-
-_MtMoonPokecenterText1: ; 8a8eb (22:68eb)
-	db $0, "I've 6 # BALLs", $4f
-	db "set in my belt.", $51
-	db "At most, you can", $4f
-	db "carry 6 #MON.", $57
-
-_MtMoonPokecenterText3: ; 8a929 (22:6929)
-	db $0, "TEAM ROCKET", $4f
-	db "attacks CERULEAN", $55
-	db "citizens...", $51
-	db "TEAM ROCKET is", $4f
-	db "always in the", $55
-	db "news!", $57
-
-_UnnamedText_4935c: ; 8a976 (22:6976)
-	db $0, "MAN: Hello, there!", $4f
-	db "Have I got a deal", $55
-	db "just for you!", $51
-	db "I'll let you have", $4f
-	db "a swell MAGIKARP", $55
-	db "for just ¥500!", $55
-	db "What do you say?", $57
-
-_UnnamedText_49361: ; 8a9ec (22:69ec)
-	db $0, "No? I'm only", $4f
-	db "doing this as a", $55
-	db "favor to you!", $57
-
-_UnnamedText_49366: ; 8aa17 (22:6a17)
-	db $0, "You'll need more", $4f
-	db "money than that!", $57
-
-_UnnamedText_4936b: ; 8aa39 (22:6a39)
-	db $0, "MAN: Well, I don't", $4f
-	db "give refunds!", $57
-
-_MtMoonPokecenterText5: ; 8aa5a (22:6a5a)
-	db $0, $57
-
-_UnnamedText_1dfe7: ; 8aa5c (22:6a5c)
-	db $0, "I'm on guard duty.", $4f
-	db "Gee, I'm thirsty,", $55
-	db "though!", $51
-	db "Oh wait there,", $4f
-	db "the road's closed.", $57
-
-_UnnamedText_8aaa9: ; 8aaa9 (22:6aa9)
-	db $0, "Whoa, boy!", $4f
-	db "I'm parched!", $55
-	db "...", $55
-	db "Huh? I can have", $55
-	db "this drink?", $55
-	db "Gee, thanks!@@"
-
-_UnnamedText_1dff1: ; 8aaef (22:6aef)
-	db $0, $51
-	db "...", $4f
-	db "Glug glug...", $55
-	db "...", $55
-	db "Gulp...", $55
-	db "If you want to go", $55
-	db "to SAFFRON CITY...", $55
-	db "...", $55
-	db "You can go on", $55
-	db "through. I'll", $55
-	db "share this with", $55
-	db "the other guards!", $57
-
-_UnnamedText_1dff6: ; 8ab74 (22:6b74)
-	db $0, "Hi, thanks for", $4f
-	db "the cool drinks!", $57
-
-_UnnamedText_5640f: ; 8ab95 (22:6b95)
-	db $0, "I run a DAYCARE.", $4f
-	db "Would you like me", $55
-	db "to raise one of", $55
-	db "your #MON?", $57
-
-_UnnamedText_56414: ; 8abd4 (22:6bd4)
-	db $0, "Which #MON", $4f
-	db "should I raise?", $58
-
-_UnnamedText_56419: ; 8abf0 (22:6bf0)
-	db $0, "Fine, I'll look", $4f
-	db "after @"
-
-UnnamedText_8ac07: ; 8ac07 (22:6c07)
-	TX_RAM $cd6d
-	db $0, $55
-	db "for a while.", $58
-
-_UnnamedText_5641e: ; 8ac19 (22:6c19)
-	db $0, "Come see me in", $4f
-	db "a while.", $57
-
-_UnnamedText_56423: ; 8ac32 (22:6c32)
-	db $0, "Your @"
-
-UnnamedText_8ac39: ; 8ac39 (22:6c39)
-	TX_RAM $cd6d
-	db $0, $4f
-	db "has grown a lot!", $51
-	db "By level, it's", $4f
-	db "grown by @"
-
-UnnamedText_8ac67: ; 8ac67 (22:6c67)
-	TX_NUM $cd3e,$1,$3
-	db $0, "!", $51
-	db "Aren't I great?", $58
-
-_UnnamedText_56428: ; 8ac7d (22:6c7d)
-	db $0, "You owe me ¥@"
-
-;XXX
-	db $2, $3f, $cd, $c2
-
-UnnamedText_8ac8f: ; 8ac8f (22:6c8f)
-	db $0, $4f
-	db "for the return", $55
-	db "of this #MON.", $57
-
-_UnnamedText_5642d: ; 8acae (22:6cae)
-	db $0, $52, " got", $4f
-	db "@"
-
-UnnamedText_8acb6: ; 8acb6 (22:6cb6)
-	TX_RAM W_DAYCAREMONNAME
-	db $0, " back!", $57
-
-_UnnamedText_56432: ; 8acc1 (22:6cc1)
-	db $0, "Back already?", $4f
-	db "Your @"
-
-UnnamedText_8acd6: ; 8acd6 (22:6cd6)
-	TX_RAM $cd6d
-	db $0, $55
-	db "needs some more", $55
-	db "time with me.", $58
-
-SECTION "bank23",ROMX,BANK[$23]
-
-_UnnamedText_56437: ; 8c000 (23:4000)
-	db $0, "All right then,", $4f
-	db "@@"
-
-_UnnamedText_5643b: ; 8c013 (23:4013)
-	db $0, "come again.", $57
-
-_UnnamedText_56440: ; 8c020 (23:4020)
-	db $0, "You have no room", $4f
-	db "for this #MON!", $57
-
-_UnnamedText_56445: ; 8c041 (23:4041)
-	db $0, "You only have one", $4f
-	db "#MON with you.", $57
-
-_UnnamedText_5644a: ; 8c063 (23:4063)
-	db $0, "I can't accept a", $4f
-	db "#MON that", $55
-	db "knows an HM move.", $57
-
-_UnnamedText_5644f: ; 8c090 (23:4090)
-	db $0, "Thank you! Here's", $4f
-	db "your #MON!", $58
-
-_UnnamedText_56454: ; 8c0ad (23:40ad)
-	db $0, "Hey, you don't", $4f
-	db "have enough ¥!", $57
-
-_UndergrdTunnelEntRoute6Text1: ; 8c0cb (23:40cb)
-	db $0, "People often lose", $4f
-	db "things in that", $55
-	db "UNDERGROUND PATH.", $57
-
-_UndergroundPathEntRoute7Text1: ; 8c0ff (23:40ff)
-	db $0, "I heard a sleepy", $4f
-	db "#MON appeared", $55
-	db "near CELADON CITY.", $57
-
-_UnnamedText_5d773: ; 8c132 (23:4132)
-	db $0, "I want to shop at", $4f
-	db "the dept. store", $55
-	db "in CELADON but...", $51
-	db "There are so many", $4f
-	db "rough looking", $55
-	db "people there.", $57
-
-_UnnamedText_5d778: ; 8c195 (23:4195)
-	db $0, "TEAM ROCKET had a", $4f
-	db "secret hideout in", $55
-	db "CELADON CITY?", $57
-
-_UnnamedText_5d77d: ; 8c1c8 (23:41c8)
-	db $0, "You're here to", $4f
-	db "shop in CELADON?", $51
-	db "Just step outside", $4f
-	db "and head west!", $57
-
-_UnnamedText_5d782: ; 8c209 (23:4209)
-	db $0, "The UNDERGROUND", $4f
-	db "PATH goes beneath", $55
-	db "SAFFRON and leads", $55
-	db "to LAVENDER.", $51
-	db "If you're heading", $4f
-	db "to CERULEAN, go", $55
-	db "to the building", $55
-	db "across the road.", $57
-
-_UndergroundPathEntRoute8Text1: ; 8c28d (23:428d)
-	db $0, "The dept. store", $4f
-	db "in CELADON has a", $55
-	db "great selection!", $57
-
-_RockTunnelPokecenterText1: ; 8c2c0 (23:42c0)
-	db $0, "The element types", $4f
-	db "of #MON make", $55
-	db "them stronger", $55
-	db "than some types", $55
-	db "and weaker than", $55
-	db "others!", $57
-
-_RockTunnelPokecenterText3: ; 8c316 (23:4316)
-	db $0, "I sold a useless", $4f
-	db "NUGGET for ¥5000!", $57
-
-_RockTunnel1BattleText1: ; 8c33a (23:433a)
-	db $0, "This tunnel goes", $4f
-	db "a long way, kid!", $57
-
-_RockTunnel1EndBattleText1: ; 8c35d (23:435d)
-	db $0, "Doh!", $4f
-	db "You win!", $58
-
-_RockTunnel1AfterBattleText1: ; 8c36c (23:436c)
-	db $0, "Watch for ONIX!", $4f
-	db "It can put the", $55
-	db "squeeze on you!", $57
-
-_RockTunnel1BattleText2: ; 8c39c (23:439c)
-	db $0, "Hmm. Maybe I'm", $4f
-	db "lost in here...", $57
-
-_RockTunnel1EndBattleText2: ; 8c3bb (23:43bb)
-	db $0, "Ease up!", $4f
-	db "What am I doing?", $55
-	db "Which way is out?", $58
-
-_RockTunnel1AfterBattleText2: ; 8c3e8 (23:43e8)
-	db $0, "That sleeping", $4f
-	db "#MON on ROUTE", $55
-	db "12 forced me to", $55
-	db "take this detour.", $57
-
-_RockTunnel1BattleText3: ; 8c427 (23:4427)
-	db $0, "Outsiders like", $4f
-	db "you need to show", $55
-	db "me some respect!", $57
-
-_RockTunnel1EndBattleText3: ; 8c459 (23:4459)
-	db $0, "I give!", $58
-
-_RockTunnel1AfterBattleText3: ; 8c462 (23:4462)
-	db $0, "You're talented", $4f
-	db "enough to hike!", $57
-
-_RockTunnel1BattleText4: ; 8c482 (23:4482)
-	db $0, "#MON fight!", $4f
-	db "Ready, go!", $57
-
-_RockTunnel1EndBattleText4: ; 8c49a (23:449a)
-	db $0, "Game", $4f
-	db "over!", $58
-
-_RockTunnel1AfterBattleText4: ; 8c4a6 (23:44a6)
-	db $0, "Oh well, I'll get", $4f
-	db "a ZUBAT as I go!", $57
-
-_RockTunnel1BattleText5: ; 8c4c9 (23:44c9)
-	db $0, "Eek! Don't try", $4f
-	db "anything funny in", $55
-	db "the dark!", $57
-
-_RockTunnel1EndBattleText5: ; 8c4f4 (23:44f4)
-	db $0, "It", $4f
-	db "was too dark!", $58
-
-_RockTunnel1AfterBattleText5: ; 8c506 (23:4506)
-	db $0, "I saw a MACHOP", $4f
-	db "in this tunnel!", $57
-
-_RockTunnel1BattleText6: ; 8c526 (23:4526)
-	db $0, "I came this far", $4f
-	db "for #MON!", $57
-
-_RockTunnel1EndBattleText6: ; 8c541 (23:4541)
-	db $0, "I'm", $4f
-	db "out of #MON!", $58
-
-_RockTunnel1AfterBattleText6: ; 8c552 (23:4552)
-	db $0, "You looked cute", $4f
-	db "and harmless!", $57
-
-_RockTunnel1BattleText7: ; 8c571 (23:4571)
-	db $0, "You have #MON!", $4f
-	db "Let's start!", $57
-
-_RockTunnel1EndBattleText7: ; 8c58d (23:458d)
-	db $0, "You", $4f
-	db "play hard!", $58
-
-_RockTunnel1AfterBattleText7: ; 8c59d (23:459d)
-	db $0, "Whew! I'm all", $4f
-	db "sweaty now!", $57
-
-_RockTunnel1Text8: ; 8c5b7 (23:45b7)
-	db $0, "ROCK TUNNEL", $4f
-	db "CERULEAN CITY -", $55
-	db "LAVENDER TOWN", $57
-
-_VoltorbBattleText: ; 8c5e2 (23:45e2)
-	db $0, "Bzzzt!", $57
-
-_ZapdosBattleText: ; 8c5ea (23:45ea)
-	db $0, "Gyaoo!@@"
-
-_Route11GateText1: ; 8c5f3 (23:45f3)
-	db $0, "When you catch", $4f
-	db "lots of #MON,", $55
-	db "isn't it hard to", $55
-	db "think up names?", $51
-	db "In LAVENDER TOWN,", $4f
-	db "there's a man who", $55
-	db "rates #MON", $55
-	db "nicknames.", $51
-	db "He'll help you", $4f
-	db "rename them too!", $57
-
-_UnnamedText_494a3: ; 8c689 (23:4689)
-	db $0, "There are items on", $4f
-	db "the ground that", $55
-	db "can't be seen.", $51
-	db "ITEMFINDER will", $4f
-	db "detect an item", $55
-	db "close to you.", $51
-	db "It can't pinpoint", $4f
-	db "it, so you have", $55
-	db "to look yourself!", $57
-
-_UnnamedText_494c4: ; 8c71b (23:471b)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "A big #MON is", $4f
-	db "asleep on a road!", $57
-
-_UnnamedText_494c9: ; 8c758 (23:4758)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "It's a beautiful", $4f
-	db "view!", $57
-
-_UnnamedText_494d5: ; 8c78b (23:478b)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "The only way to", $4f
-	db "get from CERULEAN", $55
-	db "CITY to LAVENDER", $55
-	db "is by way of the", $55
-	db "ROCK TUNNEL.", $57
-
-_DiglettsCaveEntRoute11Text1: ; 8c7f9 (23:47f9)
-	db $0, "What a surprise!", $4f
-	db "DIGLETTs dug this", $55
-	db "long tunnel!", $51
-	db "It goes right to", $4f
-	db "VIRIDIAN CITY!", $57
-
-_Route12GateText1: ; 8c84a (23:484a)
-	db $0, "There's a lookout", $4f
-	db "spot upstairs.", $57
-
-_TM39PreReceiveText: ; 8c86b (23:486b)
-	db $0, "My #MON's", $4f
-	db "ashes are stored", $55
-	db "in #MON TOWER.", $51
-	db "You can have this", $4f
-	db "TM. I don't need", $55
-	db "it any more...", $58
-
-_ReceivedTM39Text: ; 8c8c6 (23:48c6)
-	db $0, $52, " received", $4f
-	db "TM39!@@"
-
-_TM39ExplanationText: ; 8c8d9 (23:48d9)
-	db $0, "TM39 is a move", $4f
-	db "called SWIFT.", $51
-	db "It's very accurate,", $4f
-	db "so use it during", $55
-	db "battles you can't", $55
-	db "afford to lose.", $57
-
-_TM39NoRoomText: ; 8c93c (23:493c)
-	db $0, "You don't have", $4f
-	db "room for this.", $57
-
-_UnnamedText_495b8: ; 8c95a (23:495a)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "A man fishing!", $57
-
-_UnnamedText_495c4: ; 8c986 (23:4986)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "It's #MON TOWER!", $57
-
-_UnnamedText_564c0: ; 8c9b3 (23:49b3)
-	db $0, "I'm the FISHING", $4f
-	db "GURU's brother!", $51
-	db "I simply Looove", $4f
-	db "fishing!", $51
-	db "Do you like to", $4f
-	db "fish?", $57
-
-_UnnamedText_564c5: ; 8ca00 (23:4a00)
-	db $0, "Grand! I like", $4f
-	db "your style!", $51
-	db "Take this and", $4f
-	db "fish, young one!", $51
-	db $52, " received", $4f
-	db "a @"
-
-UnnamedText_8ca48: ; 8ca48 (23:4a48)
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_564ca: ; 8ca4f (23:4a4f)
-	db $0, $51
-	db "Fishing is a way", $4f
-	db "of life!", $51
-	db "From the seas to", $4f
-	db "rivers, go out", $55
-	db "and land the big", $55
-	db "one!", $57
-
-_UnnamedText_564cf: ; 8caa1 (23:4aa1)
-	db $0, "Oh... That's so", $4f
-	db "disappointing...", $57
-
-_UnnamedText_564d4: ; 8cac2 (23:4ac2)
-	db $0, "Hello there,", $4f
-	db $52, "!", $51
-	db "Use the SUPER ROD", $4f
-	db "in any water!", $55
-	db "You can catch", $55
-	db "different kinds", $55
-	db "of #MON.", $51
-	db "Try fishing", $4f
-	db "wherever you can!", $57
-
-_UnnamedText_564d9: ; 8cb38 (23:4b38)
-	db $0, "Oh no!", $51
-	db "I had a gift for", $4f
-	db "you, but you have", $55
-	db "no room for it!", $57
-
-_Route15GateText1: ; 8cb73 (23:4b73)
-	db $0, "Are you working", $4f
-	db "on a #DEX?", $51
-	db "PROF.OAK's AIDE", $4f
-	db "came by here.", $57
-
-_UnnamedText_4968c: ; 8cbac (23:4bac)
-	db $0, "EXP.ALL gives", $4f
-	db "EXP points to all", $55
-	db "the #MON with", $55
-	db "you, even if they", $55
-	db "don't fight.", $51
-	db "It does, however,", $4f
-	db "reduce the amount", $55
-	db "of EXP for each", $55
-	db "#MON.", $51
-	db "If you don't need", $4f
-	db "it, you should ", $55
-	db "store it via PC.", $57
-
-_UnnamedText_49698: ; 8cc65 (23:4c65)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "It looks like a", $4f
-	db "small island!", $57
-
-_UnnamedText_49777: ; 8cca0 (23:4ca0)
-	db $0, "No pedestrians", $4f
-	db "are allowed on", $55
-	db "CYCLING ROAD!", $57
-
-_UnnamedText_4977c: ; 8cccd (23:4ccd)
-	db $0, "CYCLING ROAD is a", $4f
-	db "downhill course", $55
-	db "by the sea. It's", $55
-	db "a great ride.", $57
-
-_UnnamedText_49781: ; 8cd0e (23:4d0e)
-	db $0, "Excuse me! Wait", $4f
-	db "up please!", $57
-
-_Route16GateMapText2: ; 8cd2a (23:4d2a)
-	db $0, "How'd you get in?", $4f
-	db "Good effort!", $57
-
-_UnnamedText_49820: ; 8cd49 (23:4d49)
-	db $0, "I'm going for a", $4f
-	db "ride with my girl", $55
-	db "friend!", $57
-
-_UnnamedText_4982f: ; 8cd73 (23:4d73)
-	db $0, "We're going", $4f
-	db "riding together!", $57
-
-_UnnamedText_4983b: ; 8cd90 (23:4d90)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "It's CELADON DEPT.", $4f
-	db "STORE!", $57
-
-_UnnamedText_49847: ; 8cdc6 (23:4dc6)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "There's a long", $4f
-	db "path over water!", $57
-
-_Route16HouseText3: ; 8ce02 (23:4e02)
-	db $0, "Oh, you found my", $4f
-	db "secret retreat!", $51
-	db "Please don't tell", $4f
-	db "anyone I'm here.", $55
-	db "I'll make it up", $55
-	db "to you with this!", $58
-
-_ReceivedHM02Text: ; 8ce66 (23:4e66)
-	db $0, $52, " received", $4f
-	db "HM02!@@"
-
-_HM02ExplanationText: ; 8ce79 (23:4e79)
-	db $0, "HM02 is FLY.", $4f
-	db "It will take you", $55
-	db "back to any town.", $51
-	db "Put it to good", $4f
-	db "use!", $57
-
-_HM02NoRoomText: ; 8cebe (23:4ebe)
-	db $0, "You don't have any", $4f
-	db "room for this.", $57
-
-_UnnamedText_1e652: ; 8cee0 (23:4ee0)
-	db $0, "FEAROW: Kyueen!", $57
-
-_UnnamedText_49928: ; 8cef1 (23:4ef1)
-	db $0, "You need a BICYCLE", $4f
-	db "for CYCLING ROAD!", $57
-
-_UnnamedText_4992d: ; 8cf17 (23:4f17)
-	db $0, "CYCLING ROAD is", $4f
-	db "all uphill from", $55
-	db "here.", $57
-
-_UnnamedText_49932: ; 8cf3e (23:4f3e)
-	db $0, "Excuse me!", $57
-
-_UnnamedText_49993: ; 8cf4a (23:4f4a)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "PALLET TOWN is in", $4f
-	db "the west!", $57
-
-_UnnamedText_4999f: ; 8cf83 (23:4f83)
-	db $0, "Looked into the", $4f
-	db "binoculars.", $51
-	db "There are people", $4f
-	db "swimming!", $57
-
-_UnnamedText_1e704: ; 8cfbb (23:4fbb)
-	db $0, "Only truly skilled", $4f
-	db "trainers are", $55
-	db "allowed through.", $51
-	db "You don't have the", $4f
-	db "BOULDERBADGE yet!@@"
-
-_UnnamedText_1e715: ; 8d012 (23:5012)
-	db $0, $51
-	db "The rules are", $4f
-	db "rules. I can't", $55
-	db "let you pass.", $57
-
-_UnnamedText_1e71a: ; 8d03e (23:503e)
-	db $0, "Oh! That is the", $4f
-	db "BOULDERBADGE!", $55
-	db "Go right ahead!@@"
-
-_VictoryRoad2BattleText6: ; 8d06e (23:506e)
-	db $0, "Gyaoo!@@"
-
-_VictoryRoad2BattleText1: ; 8d077 (23:5077)
-	db $0, "VICTORY ROAD is", $4f
-	db "the final test", $55
-	db "for trainers!", $57
-
-_VictoryRoad2EndBattleText1: ; 8d0a5 (23:50a5)
-	db $0, "Aiyah!", $58
-
-_VictoryRoad2AfterBattleText1: ; 8d0ad (23:50ad)
-	db $0, "If you get stuck,", $4f
-	db "try moving some", $55
-	db "boulders around!", $57
-
-_VictoryRoad2BattleText2: ; 8d0e1 (23:50e1)
-	db $0, "Ah, so you wish", $4f
-	db "to challenge the", $55
-	db "ELITE FOUR?", $57
-
-_VictoryRoad2EndBattleText2: ; 8d10f (23:510f)
-	db $0, "You", $4f
-	db "got me!", $58
-
-_VictoryRoad2AfterBattleText2: ; 8d11c (23:511c)
-	db $0, $53, " also came", $4f
-	db "through here!", $57
-
-_VictoryRoad2BattleText3: ; 8d137 (23:5137)
-	db $0, "Come on!", $4f
-	db "I'll whip you!", $57
-
-_VictoryRoad2EndBattleText3: ; 8d14f (23:514f)
-	db $0, "I got", $4f
-	db "whipped!", $58
-
-_VictoryRoad2AfterBattleText3: ; 8d15f (23:515f)
-	db $0, "You earned the", $4f
-	db "right to be on", $55
-	db "VICTORY ROAD!", $57
-
-_VictoryRoad2BattleText4: ; 8d18c (23:518c)
-	db $0, "If you can get", $4f
-	db "through here, you", $55
-	db "can go meet the", $55
-	db "ELITE FOUR!", $57
-
-_VictoryRoad2EndBattleText4: ; 8d1ca (23:51ca)
-	db $0, "No!", $4f
-	db "Unbelievable!", $58
-
-_VictoryRoad2AfterBattleText4: ; 8d1dd (23:51dd)
-	db $0, "I can beat you", $4f
-	db "when it comes to", $55
-	db "knowledge about", $55
-	db "#MON!", $57
-
-_VictoryRoad2BattleText5: ; 8d214 (23:5214)
-	db $0, "Is VICTORY ROAD", $4f
-	db "too tough?", $57
-
-_VictoryRoad2EndBattleText5: ; 8d230 (23:5230)
-	db $0, "Well", $4f
-	db "done!", $58
-
-_VictoryRoad2AfterBattleText5: ; 8d23c (23:523c)
-	db $0, "Many trainers give", $4f
-	db "up the challenge", $55
-	db "here.", $57
-
-_UnnamedText_1e865: ; 8d267 (23:5267)
-	db $0, "Hiya! I'm a", $4f
-	db "#MON...", $55
-	db "...No I'm not!", $51
-	db "Call me BILL!", $4f
-	db "I'm a true blue", $55
-	db "#MANIAC! Hey!", $55
-	db "What's with that", $55
-	db "skeptical look?", $51
-	db "I'm not joshing", $4f
-	db "you, I screwed up", $55
-	db "an experiment and", $55
-	db "got combined with", $55
-	db "a #MON!", $51
-	db "So, how about it?", $4f
-	db "Help me out here!", $57
-
-_UnnamedText_1e86a: ; 8d345 (23:5345)
-	db $0, "When I'm in the", $4f
-	db "TELEPORTER, go to", $55
-	db "my PC and run the", $55
-	db "Cell Separation", $55
-	db "System!", $57
-
-_UnnamedText_1e86f: ; 8d391 (23:5391)
-	db $0, "No!? Come on, you", $4f
-	db "gotta help a guy", $55
-	db "in deep trouble!", $51
-	db "What do you say,", $4f
-	db "chief? Please?", $55
-	db "OK? All right!", $58
-
-_BillThankYouText: ; 8d3f5 (23:53f5)
-	db $0, "BILL: Yeehah!", $4f
-	db "Thanks, bud! I", $55
-	db "owe you one!", $51
-	db "So, did you come", $4f
-	db "to see my #MON", $55
-	db "collection?", $55
-	db "You didn't?", $55
-	db "That's a bummer.", $51
-	db "I've got to thank", $4f
-	db "you... Oh here,", $55
-	db "maybe this'll do.", $58
-
-_SSTicketReceivedText: ; 8d499 (23:5499)
-	db $0, $52, " received", $4f
-	db "an @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_SSTicketNoRoomText: ; 8d4b0 (23:54b0)
-	db $0, "You've got too", $4f
-	db "much stuff, bud!", $57
-
-_UnnamedText_1e8cb: ; 8d4d0 (23:54d0)
-	db $0, "That cruise ship,", $4f
-	db "S.S.ANNE, is in", $55
-	db "VERMILION CITY.", $55
-	db "Its passengers", $55
-	db "are all trainers!", $51
-	db "They invited me", $4f
-	db "to their party,", $55
-	db "but I can't stand", $55
-	db "fancy do's. Why", $55
-	db "don't you go", $55
-	db "instead of me?", $57
-
-_UnnamedText_1e8da: ; 8d57f (23:557f)
-	db $0, "BILL: Look, bud,", $4f
-	db "just check out", $55
-	db "some of my rare", $55
-	db "#MON on my PC!", $57
-
-_Route1ViridianMartSampleText: ; 8d5bf (23:55bf)
-	db $0, "Hi! I work at a", $4f
-	db "#MON MART.", $51
-	db "It's a convenient", $4f
-	db "shop, so please", $55
-	db "visit us in", $55
-	db "VIRIDIAN CITY.", $51
-	db "I know, I'll give", $4f
-	db "you a sample!", $55
-	db "Here you go!", $58
-
-_UnnamedText_1cae8: ; 8d643 (23:5643)
-	db $0, $52, " got", $4f
-	db "@"
-
-UnnamedText_8d64b: ; 8d64b (23:564b)
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_1caee: ; 8d652 (23:5652)
-	db $0, "We also carry", $4f
-	db "# BALLs for", $55
-	db "catching #MON!", $57
-
-_UnnamedText_1caf3: ; 8d67c (23:567c)
-	db $0, "You have too much", $4f
-	db "stuff with you!", $57
-
-_Route1Text2: ; 8d69f (23:569f)
-	db $0, "See those ledges", $4f
-	db "along the road?", $51
-	db "It's a bit scary,", $4f
-	db "but you can jump", $55
-	db "from them.", $51
-	db "You can get back", $4f
-	db "to PALLET TOWN", $55
-	db "quicker that way.", $57
-
-_Route1Text3: ; 8d720 (23:5720)
-	db $0, "ROUTE 1", $4f
-	db "PALLET TOWN -", $55
-	db "VIRIDIAN CITY", $57
-
-_Route2Text3: ; 8d745 (23:5745)
-	db $0, "ROUTE 2", $4f
-	db "VIRIDIAN CITY -", $55
-	db "PEWTER CITY", $57
-
-_Route2Text4: ; 8d76a (23:576a)
-	db $0, "DIGLETT's CAVE", $57
-
-_Route3Text1: ; 8d779 (23:5779)
-	db $0, "Whew... I better", $4f
-	db "take a rest...", $55
-	db "Groan...", $51
-	db "That tunnel from", $4f
-	db "CERULEAN takes a", $55
-	db "lot out of you!", $57
-
-_Route3BattleText1: ; 8d7d5 (23:57d5)
-	db $0, "Hey! I met you in", $4f
-	db "VIRIDIAN FOREST!", $57
-
-_Route3EndBattleText1: ; 8d7f9 (23:57f9)
-	db $0, "You", $4f
-	db "beat me again!", $58
-
-_Route3AfterBattleText1: ; 8d80d (23:580d)
-	db $0, "There are other", $4f
-	db "kinds of #MON", $55
-	db "than those found", $55
-	db "in the forest!", $57
-
-_Route3BattleText2: ; 8d84c (23:584c)
-	db $0, "Hi! I like shorts!", $4f
-	db "They're comfy and", $55
-	db "easy to wear!", $57
-
-_Route3EndBattleText2: ; 8d87f (23:587f)
-	db $0, "I don't", $4f
-	db "believe it!", $58
-
-_Route3AfterBattleText2: ; 8d893 (23:5893)
-	db $0, "Are you storing", $4f
-	db "your #MON on", $55
-	db "PC? Each BOX can", $55
-	db "hold 20 #MON!", $57
-
-_Route3BattleText3: ; 8d8d0 (23:58d0)
-	db $0, "You looked at me,", $4f
-	db "didn't you?", $57
-
-_Route3EndBattleText3: ; 8d8ee (23:58ee)
-	db $0, "You're", $4f
-	db "mean!", $58
-
-_Route3AfterBattleText3: ; 8d8fb (23:58fb)
-	db $0, "Quit staring if", $4f
-	db "you don't want to", $55
-	db "fight!", $57
-
-_Route3BattleText4: ; 8d924 (23:5924)
-	db $0, "Are you a trainer?", $4f
-	db "Let's fight!", $57
-
-_Route3EndBattleText4: ; 8d944 (23:5944)
-	db $0, "If I", $4f
-	db "had new #MON I", $55
-	db "would've won!", $58
-
-_Route3AfterBattleText4: ; 8d966 (23:5966)
-	db $0, "If a #MON BOX", $4f
-	db "on the PC gets", $55
-	db "full, just switch", $55
-	db "to another BOX!", $57
-
-_Route3BattleText5: ; 8d9a6 (23:59a6)
-	db $0, "That look you", $4f
-	db "gave me, it's so", $55
-	db "intriguing!", $57
-
-_Route3EndBattleText5: ; 8d9d1 (23:59d1)
-	db $0, "Be nice!", $58
-
-_Route3AfterBattleText5: ; 8d9db (23:59db)
-	db $0, "Avoid fights by", $4f
-	db "not letting", $55
-	db "people see you!", $57
-
-_Route3BattleText6: ; 8da08 (23:5a08)
-	db $0, "Hey! You're not", $4f
-	db "wearing shorts!", $57
-
-_Route3EndBattleText6: ; 8da28 (23:5a28)
-	db $0, "Lost!", $4f
-	db "Lost! Lost!", $58
-
-_Route3AfterBattleText6: ; 8da3b (23:5a3b)
-	db $0, "I always wear", $4f
-	db "shorts, even in", $55
-	db "winter!", $57
-
-_Route3BattleText7: ; 8da62 (23:5a62)
-	db $0, "You can fight my", $4f
-	db "new #MON!", $57
-
-_Route3EndBattleText7: ; 8da7e (23:5a7e)
-	db $0, "Done", $4f
-	db "like dinner!", $58
-
-_Route3AfterBattleText7: ; 8da91 (23:5a91)
-	db $0, "Trained #MON", $4f
-	db "are stronger than", $55
-	db "the wild ones!", $57
-
-_Route3BattleText8: ; 8dac0 (23:5ac0)
-	db $0, "Eek! Did you", $4f
-	db "touch me?", $57
-
-_Route3EndBattleText8: ; 8dad8 (23:5ad8)
-	db $0, "That's it?", $58
-
-_Route3AfterBattleText8: ; 8dae3 (23:5ae3)
-	db $0, "ROUTE 4 is at the", $4f
-	db "foot of MT.MOON.", $57
-
-_Route3Text10: ; 8db07 (23:5b07)
-	db $0, "ROUTE 3", $4f
-	db "MT.MOON AHEAD", $57
-
-_Route4Text1: ; 8db1e (23:5b1e)
-	db $0, "Ouch! I tripped", $4f
-	db "over a rocky", $55
-	db "#MON, GEODUDE!", $57
-
-_Route4BattleText1: ; 8db4b (23:5b4b)
-	db $0, "I came to get my", $4f
-	db "mushroom #MON!", $57
-
-_Route4EndBattleText1: ; 8db6c (23:5b6c)
-	db $0, "Oh! My cute", $4f
-	db "mushroom #MON!", $58
-
-_Route4AfterBattleText1: ; 8db88 (23:5b88)
-	db $0, "There might not", $4f
-	db "be any more", $55
-	db "mushrooms here.", $51
-	db "I think I got", $4f
-	db "them all.", $57
-
-_Route4Text5: ; 8dbcd (23:5bcd)
-	db $0, "MT.MOON", $4f
-	db "Tunnel Entrance", $57
-
-_Route4Text6: ; 8dbe6 (23:5be6)
-	db $0, "ROUTE 4", $4f
-	db "MT.MOON -", $55
-	db "CERULEAN CITY", $57
-
-_Route5Text1: ; 8dc07 (23:5c07)
-	db $0, "UNDERGROUND PATH", $4f
-	db "CERULEAN CITY -", $55
-	db "VERMILION CITY", $57
-
-_Route6BattleText1: ; 8dc38 (23:5c38)
-	db $0, "Who's there?", $4f
-	db "Quit listening in", $55
-	db "on us!", $57
-
-_Route6EndBattleText1: ; 8dc5e (23:5c5e)
-	db $0, "I", $4f
-	db "just can't win!", $58
-
-_Route6AfterBattleText1: ; 8dc70 (23:5c70)
-	db $0, "Whisper...", $4f
-	db "whisper...", $57
-
-_Route6BattleText2: ; 8dc87 (23:5c87)
-	db $0, "Excuse me! This", $4f
-	db "is a private", $55
-	db "conversation!", $57
-
-_Route6EndBattleText2: ; 8dcb3 (23:5cb3)
-	db $0, "Ugh!", $4f
-	db "I hate losing!", $58
-
-_Route6BattleText3: ; 8dcc8 (23:5cc8)
-	db $0, "There aren't many", $4f
-	db "bugs out here.", $57
-
-_Route6EndBattleText3: ; 8dce9 (23:5ce9)
-	db $0, "No!", $4f
-	db "You're kidding!", $58
-
-_Route6AfterBattleText3: ; 8dcfd (23:5cfd)
-	db $0, "I like bugs, so", $4f
-	db "I'm going back to", $55
-	db "VIRIDIAN FOREST.", $57
-
-_Route6BattleText4: ; 8dd30 (23:5d30)
-	db $0, "Huh? You want", $4f
-	db "to talk to me?", $57
-
-_Route6EndBattleText4: ; 8dd4e (23:5d4e)
-	db $0, "I", $4f
-	db "didn't start it!", $58
-
-_Route6AfterBattleText4: ; 8dd61 (23:5d61)
-	db $0, "I should carry", $4f
-	db "more #MON with", $55
-	db "me for safety.", $57
-
-_Route6BattleText5: ; 8dd8f (23:5d8f)
-	db $0, "Me? Well, OK.", $4f
-	db "I'll play!", $57
-
-_Route6EndBattleText5: ; 8dda8 (23:5da8)
-	db $0, "Just", $4f
-	db "didn't work!", $58
-
-_Route6AfterBattleText5: ; 8ddba (23:5dba)
-	db $0, "I want to get", $4f
-	db "stronger! What's", $55
-	db "your secret?", $57
-
-_Route6BattleText6: ; 8dde6 (23:5de6)
-	db $0, "I've never seen", $4f
-	db "you around!", $55
-	db "Are you good?", $57
-
-_Route6EndBattleText6: ; 8de10 (23:5e10)
-	db $0, "You", $4f
-	db "are too good!", $58
-
-_Route6AfterBattleText6: ; 8de23 (23:5e23)
-	db $0, "Are my #MON", $4f
-	db "weak? Or, am I", $55
-	db "just bad?", $57
-
-_Route6Text7: ; 8de49 (23:5e49)
-	db $0, "UNDERGROUND PATH", $4f
-	db "CERULEAN CITY -", $55
-	db "VERMILION CITY", $57
-
-_Route7Text1: ; 8de7a (23:5e7a)
-	db $0, "UNDERGROUND PATH", $4f
-	db "CELADON CITY -", $55
-	db "LAVENDER TOWN", $57
-
-_Route8BattleText1: ; 8dea9 (23:5ea9)
-	db $0, "You look good at", $4f
-	db "#MON, but", $55
-	db "how's your chem?", $57
-
-_Route8EndBattleText1: ; 8ded5 (23:5ed5)
-	db $0, "Ow!", $4f
-	db "Meltdown!", $58
-
-_Route8AfterBattleText1: ; 8dee4 (23:5ee4)
-	db $0, "I am better at", $4f
-	db "school than this!", $57
-
-_Route8BattleText2: ; 8df06 (23:5f06)
-	db $0, "All right! Let's", $4f
-	db "roll the dice!", $57
-
-_Route8EndBattleText2: ; 8df26 (23:5f26)
-	db $0, "Drat!", $4f
-	db "Came up short!", $58
-
-_Route8AfterBattleText2: ; 8df3c (23:5f3c)
-	db $0, "Lady Luck's not", $4f
-	db "with me today!", $57
-
-_Route8BattleText3: ; 8df5b (23:5f5b)
-	db $0, "You need strategy", $4f
-	db "to win at this!", $57
-
-_Route8EndBattleText3: ; 8df7e (23:5f7e)
-	db $0, "It's", $4f
-	db "not logical!", $58
-
-_Route8AfterBattleText3: ; 8df90 (23:5f90)
-	db $0, "Go with GRIMER", $4f
-	db "first...and...", $55
-	db "...and...then...", $57
-
-_Route8BattleText4: ; 8dfc0 (23:5fc0)
-	db $0, "I like NIDORAN, so", $4f
-	db "I collect them!", $57
-
-_Route8EndBattleText4: ; 8dfe4 (23:5fe4)
-	db $0, "Why? Why??", $58
-
-_Route8AfterBattleText4: ; 8dff0 (23:5ff0)
-	db $0, "When #MON grow", $4f
-	db "up they get ugly!", $55
-	db "They shouldn't", $55
-	db "evolve!", $57
-
-_Route8BattleText5: ; 8e028 (23:6028)
-	db $0, "School is fun, but", $4f
-	db "so are #MON.", $57
-
-_Route8EndBattleText5: ; 8e049 (23:6049)
-	db $0, "I'll", $4f
-	db "stay with school.", $58
-
-_Route8AfterBattleText5: ; 8e060 (23:6060)
-	db $0, "We're stuck here", $4f
-	db "because of the", $55
-	db "gates at SAFFRON.", $57
-
-_Route8BattleText6: ; 8e092 (23:6092)
-	db $0, "MEOWTH is so cute,", $4f
-	db "meow, meow, meow!", $57
-
-_Route8EndBattleText6: ; 8e0b8 (23:60b8)
-	db $0, "Meow!", $58
-
-_Route8AfterBattleText6: ; 8e0bf (23:60bf)
-	db $0, "I think PIDGEY", $4f
-	db "and RATTATA", $55
-	db "are cute too!", $57
-
-_Route8BattleText7: ; 8e0e9 (23:60e9)
-	db $0, "We must look", $4f
-	db "silly standing", $55
-	db "here like this!", $57
-
-_Route8EndBattleText7: ; 8e116 (23:6116)
-	db $0, "Look what", $4f
-	db "you did!", $58
-
-_Route8AfterBattleText7: ; 8e12a (23:612a)
-	db $0, "SAFFRON's gate", $4f
-	db "keeper won't let", $55
-	db "us through.", $55
-	db "He's so mean!", $57
-
-_Route8BattleText8: ; 8e162 (23:6162)
-	db $0, "I'm a rambling,", $4f
-	db "gambling dude!", $57
-
-_Route8EndBattleText8: ; 8e181 (23:6181)
-	db $0, "Missed", $4f
-	db "the big score!", $58
-
-_Route8AfterBattleText8: ; 8e198 (23:6198)
-	db $0, "Gambling and", $4f
-	db "#MON are like", $55
-	db "eating peanuts!", $55
-	db "Just can't stop!", $57
-
-_Route8BattleText9: ; 8e1d4 (23:61d4)
-	db $0, "What's a cute,", $4f
-	db "round and fluffy", $55
-	db "#MON?", $57
-
-_Route8EndBattleText9: ; 8e1fa (23:61fa)
-	db $0, "Stop!", $51
-	db "Don't be so mean", $4f
-	db "to my CLEFAIRY!", $58
-
-_Route8AfterBattleText9: ; 8e221 (23:6221)
-	db $0, "I heard that", $4f
-	db "CLEFAIRY evolves", $55
-	db "when it's exposed", $55
-	db "to a MOON STONE.", $57
-
-_Route8Text10: ; 8e262 (23:6262)
-	db $0, "UNDERGROUND PATH", $4f
-	db "CELADON CITY -", $55
-	db "LAVENDER TOWN", $57
-
-_Route9BattleText1: ; 8e291 (23:6291)
-	db $0, "You have #MON", $4f
-	db "with you!", $55
-	db "You're mine!", $57
-
-_Route9EndBattleText1: ; 8e2b6 (23:62b6)
-	db $0, "You", $4f
-	db "deceived me!", $58
-
-_Route9AfterBattleText1: ; 8e2c8 (23:62c8)
-	db $0, "You need light to", $4f
-	db "get through that", $55
-	db "dark tunnel ahead.", $57
-
-_Route9BattleText2: ; 8e2ff (23:62ff)
-	db $0, "Who's that walking", $4f
-	db "with those good", $55
-	db "looking #MON?", $57
-
-_Route9EndBattleText2: ; 8e330 (23:6330)
-	db $0, "Out", $4f
-	db "like a light!", $58
-
-_Route9AfterBattleText2: ; 8e343 (23:6343)
-	db $0, "Keep walking!", $57
-
-_Route9BattleText3: ; 8e352 (23:6352)
-	db $0, "I'm taking ROCK", $4f
-	db "TUNNEL to go to", $55
-	db "LAVENDER...", $57
-
-_Route9EndBattleText3: ; 8e37e (23:637e)
-	db $0, "Can't", $4f
-	db "measure up!", $58
-
-_Route9AfterBattleText3: ; 8e390 (23:6390)
-	db $0, "Are you off to", $4f
-	db "ROCK TUNNEL too?", $57
-
-_Route9BattleText4: ; 8e3b1 (23:63b1)
-	db $0, "Don't you dare", $4f
-	db "condescend me!", $57
-
-_Route9EndBattleText4: ; 8e3cf (23:63cf)
-	db $0, "No!", $4f
-	db "You're too much!", $58
-
-_Route9AfterBattleText4: ; 8e3e4 (23:63e4)
-	db $0, "You're obviously", $4f
-	db "talented! Good", $55
-	db "luck to you!", $57
-
-_Route9BattleText5: ; 8e411 (23:6411)
-	db $0, "Bwahaha!", $4f
-	db "Great! I was", $55
-	db "bored, eh!", $57
-
-_Route9EndBattleText5: ; 8e433 (23:6433)
-	db $0, "Keep it", $4f
-	db "coming, eh!", $51
-	db "Oh wait. I'm out", $4f
-	db "of #MON!", $58
-
-_Route9AfterBattleText5: ; 8e461 (23:6461)
-	db $0, "You sure had guts", $4f
-	db "standing up to me", $55
-	db "there, eh?", $57
-
-_Route9BattleText6: ; 8e491 (23:6491)
-	db $0, "Hahaha!", $4f
-	db "Aren't you a", $55
-	db "little toughie!", $57
-
-_Route9EndBattleText6: ; 8e4b6 (23:64b6)
-	db $0, "What's", $4f
-	db "that?", $58
-
-_Route9AfterBattleText6: ; 8e4c3 (23:64c3)
-	db $0, "Hahaha! Kids", $4f
-	db "should be tough!", $57
-
-_Route9BattleText7: ; 8e4e2 (23:64e2)
-	db $0, "I got up early", $4f
-	db "every day to", $55
-	db "raise my #MON", $55
-	db "from cocoons!", $57
-
-_Route9EndBattleText7: ; 8e51b (23:651b)
-	db $0, "WHAT?", $51
-	db "What a total", $4f
-	db "waste of time!", $58
-
-_Route9AfterBattleText7: ; 8e53e (23:653e)
-	db $0, "I have to collect", $4f
-	db "more than bugs to", $55
-	db "get stronger...", $57
-
-_Route9BattleText8: ; 8e573 (23:6573)
-	db $0, "Hahahaha!", $4f
-	db "Come on, dude!", $57
-
-_Route9EndBattleText8: ; 8e58d (23:658d)
-	db $0, "Hahahaha!", $4f
-	db "You beat me fair!", $58
-
-_Route9AfterBattleText8: ; 8e5aa (23:65aa)
-	db $0, "Hahahaha!", $4f
-	db "Us hearty guys", $55
-	db "always laugh!", $57
-
-_Route9BattleText9: ; 8e5d2 (23:65d2)
-	db $0, "Go, my super bug", $4f
-	db "#MON!", $57
-
-_Route9EndBattleText9: ; 8e5ea (23:65ea)
-	db $0, "My", $4f
-	db "bugs...", $58
-
-_Route9AfterBattleText9: ; 8e5f6 (23:65f6)
-	db $0, "If you don't like", $4f
-	db "bug #MON, you", $55
-	db "bug me!", $57
-
-_Route9Text11: ; 8e61e (23:661e)
-	db $0, "ROUTE 9", $4f
-	db "CERULEAN CITY-", $55
-	db "ROCK TUNNEL", $57
-
-_Route10BattleText1: ; 8e642 (23:6642)
-	db $0, "Wow, are you a", $4f
-	db "#MANIAC too?", $55
-	db "Want to see my", $55
-	db "collection?", $57
-
-_Route10EndBattleText1: ; 8e67a (23:667a)
-	db $0, "Humph.", $4f
-	db "I'm not angry!", $58
-
-_Route10AfterBattleText1: ; 8e690 (23:6690)
-	db $0, "I have more rare", $4f
-	db "#MON at home!", $57
-
-_Route10BattleText2: ; 8e6b0 (23:66b0)
-	db $0, "Ha-hahah-ah-ha!", $57
-
-_Route10EndBattleText2: ; 8e6c1 (23:66c1)
-	db $0, "Ha-haha!", $4f
-	db "Not laughing!", $55
-	db "Ha-hay fever!", $55
-	db "Haha-ha-choo!", $58
-
-_Route10AfterBattleText2: ; 8e6f5 (23:66f5)
-	db $0, "Haha-ha-choo!", $4f
-	db "Ha-choo!", $55
-	db "Snort! Snivel!", $57
-
-_Route10BattleText3: ; 8e71c (23:671c)
-	db $0, "Hi kid, want to", $4f
-	db "see my #MON?", $57
-
-_Route10EndBattleText3: ; 8e73a (23:673a)
-	db $0, "Oh no!", $4f
-	db "My #MON!", $58
-
-_Route10AfterBattleText3: ; 8e74b (23:674b)
-	db $0, "I don't like you", $4f
-	db "for beating me!", $57
-
-_Route10BattleText4: ; 8e76c (23:676c)
-	db $0, "I've been to a", $4f
-	db "#MON GYM a few", $55
-	db "times. But, I", $55
-	db "lost each time.", $57
-
-_Route10EndBattleText4: ; 8e7a8 (23:67a8)
-	db $0, "Ohh!", $4f
-	db "Blew it again!", $58
-
-_Route10AfterBattleText4: ; 8e7bd (23:67bd)
-	db $0, "I noticed some", $4f
-	db "#MANIACs", $55
-	db "prowling around.", $57
-
-_Route10BattleText5: ; 8e7e7 (23:67e7)
-	db $0, "Ah! This mountain", $4f
-	db "air is delicious!", $57
-
-_Route10EndBattleText5: ; 8e80c (23:680c)
-	db $0, "That", $4f
-	db "cleared my head!", $58
-
-_Route10AfterBattleText5: ; 8e823 (23:6823)
-	db $0, "I feel bloated on", $4f
-	db "mountain air!", $57
-
-_Route10BattleText6: ; 8e844 (23:6844)
-	db $0, "I'm feeling a bit", $4f
-	db "faint from this", $55
-	db "tough hike.", $57
-
-_Route10EndBattleText6: ; 8e872 (23:6872)
-	db $0, "I'm", $4f
-	db "not up to it!", $58
-
-_Route10AfterBattleText6: ; 8e884 (23:6884)
-	db $0, "The #MON here", $4f
-	db "are so chunky!", $55
-	db "There should be a", $55
-	db "pink one with a", $55
-	db "floral pattern!", $57
-
-_Route10Text9: ; 8e8d4 (23:68d4)
-_Route10Text7: ; 8e8d4 (23:68d4)
-	db $0, "ROCK TUNNEL", $57
-
-_Route10Text10: ; 8e8e1 (23:68e1)
-	db $0, "POWER PLANT", $57
-
-_Route11BattleText1: ; 8e8ee (23:68ee)
-	db $0, "Win, lose or draw!", $57
-
-_Route11EndBattleText1: ; 8e902 (23:6902)
-	db $0, "Atcha!", $4f
-	db "Didn't go my way!", $58
-
-_Route11AfterBattleText1: ; 8e91b (23:691b)
-	db $0, "#MON is life!", $4f
-	db "And to live is to", $55
-	db "gamble!", $57
-
-_Route11BattleText2: ; 8e944 (23:6944)
-	db $0, "Competition! I", $4f
-	db "can't get enough!", $57
-
-_Route11EndBattleText2: ; 8e965 (23:6965)
-	db $0, "I had", $4f
-	db "a chance!", $58
-
-_Route11AfterBattleText2: ; 8e976 (23:6976)
-	db $0, "You can't be a", $4f
-	db "coward in the", $55
-	db "world of #MON!", $57
-
-_Route11BattleText3: ; 8e9a2 (23:69a2)
-	db $0, "Let's go, but", $4f
-	db "don't cheat!", $57
-
-_Route11EndBattleText3: ; 8e9bc (23:69bc)
-	db $0, "Huh?", $4f
-	db "That's not right!", $58
-
-_Route11AfterBattleText3: ; 8e9d3 (23:69d3)
-	db $0, "I did my best! I", $4f
-	db "have no regrets!", $57
-
-_Route11BattleText4: ; 8e9f6 (23:69f6)
-	db $0, "Careful!", $4f
-	db "I'm laying down", $55
-	db "some cables!", $57
-
-_Route11EndBattleText4: ; 8ea1c (23:6a1c)
-	db $0, "That", $4f
-	db "was electric!", $58
-
-_Route11AfterBattleText4: ; 8ea30 (23:6a30)
-	db $0, "Spread the word", $4f
-	db "to save energy!", $57
-
-_Route11BattleText5: ; 8ea51 (23:6a51)
-	db $0, "I just became a", $4f
-	db "trainer! But, I", $55
-	db "think I can win!", $57
-
-_Route11EndBattleText5: ; 8ea83 (23:6a83)
-	db $0, "My", $4f
-	db "#MON couldn't!", $58
-
-_Route11AfterBattleText5: ; 8ea95 (23:6a95)
-	db $0, "What do you want?", $4f
-	db "Leave me alone!", $57
-
-_Route11BattleText6: ; 8eab8 (23:6ab8)
-	db $0, "Fwahaha! I have", $4f
-	db "never lost!", $57
-
-_Route11EndBattleText6: ; 8ead5 (23:6ad5)
-	db $0, "My", $4f
-	db "first loss!", $58
-
-_Route11AfterBattleText6: ; 8eae5 (23:6ae5)
-	db $0, "Luck of the draw!", $4f
-	db "Just luck!", $57
-
-_Route11BattleText7: ; 8eb03 (23:6b03)
-	db $0, "I have never won", $4f
-	db "before...", $57
-
-_Route11EndBattleText7: ; 8eb1f (23:6b1f)
-	db $0, "I saw", $4f
-	db "this coming...", $58
-
-_Route11AfterBattleText7: ; 8eb35 (23:6b35)
-	db $0, "It's just luck.", $4f
-	db "Luck of the draw.", $57
-
-_Route11BattleText8: ; 8eb57 (23:6b57)
-	db $0, "I'm the best in", $4f
-	db "my class!", $57
-
-_Route11EndBattleText8: ; 8eb71 (23:6b71)
-	db $0, "Darn!", $4f
-	db "I need to make my", $55
-	db "#MON stronger!", $58
-
-_Route11AfterBattleText8: ; 8eb99 (23:6b99)
-	db $0, "There's a fat", $4f
-	db "#MON that", $55
-	db "comes down from", $55
-	db "the mountains.", $51
-	db "It's strong if", $4f
-	db "you can get it.", $57
-
-_Route11BattleText9: ; 8ebee (23:6bee)
-	db $0, "Watch out for", $4f
-	db "live wires!", $57
-
-SECTION "bank24",ROMX,BANK[$24]
-
-_Route11EndBattleText9: ; 90000 (24:4000)
-	db $0, "Whoa!", $4f
-	db "You spark plug!", $58
-
-_Route11AfterBattleText9: ; 90017 (24:4017)
-	db $0, "Well, better get", $4f
-	db "back to work.", $57
-
-_Route11BattleText10: ; 90037 (24:4037)
-	db $0, "My #MON should", $4f
-	db "be ready by now!", $57
-
-_Route11EndBattleText10: ; 90058 (24:4058)
-	db $0, "Too", $4f
-	db "much, too young!", $58
-
-_Route11AfterBattleText10: ; 9006e (24:406e)
-	db $0, "I better go find", $4f
-	db "stronger ones!", $57
-
-_Route11Text11: ; 9008f (24:408f)
-	db $0, "DIGLETT's CAVE", $57
-
-_Route12Text1: ; 9009e (24:409e)
-	db $0, "A sleeping #MON", $4f
-	db "blocks the way!", $57
-
-_UnnamedText_596eb: ; 900bf (24:40bf)
-	db $0, "SNORLAX woke up!", $51
-	db "It attacked in a", $4f
-	db "grumpy rage!", $57
-
-_UnnamedText_596f0: ; 900ef (24:40ef)
-	db $0, "SNORLAX calmed", $4f
-	db "down! With a big", $55
-	db "yawn, it returned", $55
-	db "to the mountains!", $57
-
-_Route12BattleText1: ; 90134 (24:4134)
-	db $0, "Yeah! I got a", $4f
-	db "bite, here!", $57
-
-_Route12EndBattleText1: ; 9014f (24:414f)
-	db $0, "Tch!", $4f
-	db "Just a small fry!", $58
-
-_Route12AfterBattleText1: ; 90167 (24:4167)
-	db $0, "Hang on! My line's", $4f
-	db "snagged!", $57
-
-_Route12BattleText2: ; 90183 (24:4183)
-	db $0, "Be patient!", $4f
-	db "Fishing is a", $55
-	db "waiting game!", $57
-
-_Route12EndBattleText2: ; 901ab (24:41ab)
-	db $0, "That", $4f
-	db "one got away!", $58
-
-_Route12AfterBattleText2: ; 901bf (24:41bf)
-	db $0, "With a better ROD,", $4f
-	db "I could catch", $55
-	db "better #MON!", $57
-
-_Route12BattleText3: ; 901ee (24:41ee)
-	db $0, "Have you found a", $4f
-	db "MOON STONE?", $57
-
-_Route12EndBattleText3: ; 9020c (24:420c)
-	db $0, "Oww!", $58
-
-_Route12AfterBattleText3: ; 90212 (24:4212)
-	db $0, "I could have made", $4f
-	db "my #MON evolve", $55
-	db "with MOON STONE!", $57
-
-_Route12BattleText4: ; 90245 (24:4245)
-	db $0, "Electricity is my", $4f
-	db "specialty!", $57
-
-_Route12EndBattleText4: ; 90263 (24:4263)
-	db $0, "Unplugged!", $58
-
-_Route12AfterBattleText4: ; 9026f (24:426f)
-	db $0, "Water conducts", $4f
-	db "electricity, so", $55
-	db "you should zap", $55
-	db "sea #MON!", $57
-
-_Route12BattleText5: ; 902a8 (24:42a8)
-	db $0, "The FISHING FOOL", $4f
-	db "vs. #MON KID!", $57
-
-_Route12EndBattleText5: ; 902c8 (24:42c8)
-	db $0, "Too", $4f
-	db "much!", $58
-
-_Route12AfterBattleText5: ; 902d3 (24:42d3)
-	db $0, "You beat me at", $4f
-	db "#MON, but I'm", $55
-	db "good at fishing!", $57
-
-_Route12BattleText6: ; 90301 (24:4301)
-	db $0, "I'd rather be", $4f
-	db "working!", $57
-
-_Route12EndBattleText6: ; 90318 (24:4318)
-	db $0, "It's", $4f
-	db "not easy...", $58
-
-_Route12AfterBattleText6: ; 90329 (24:4329)
-	db $0, "It's all right.", $4f
-	db "Losing doesn't", $55
-	db "bug me any more.", $57
-
-_Route12BattleText7: ; 90358 (24:4358)
-	db $0, "You never know", $4f
-	db "what you could", $55
-	db "catch!", $57
-
-_Route12EndBattleText7: ; 9037e (24:437e)
-	db $0, "Lost", $4f
-	db "it!", $58
-
-_Route12AfterBattleText7: ; 90388 (24:4388)
-	db $0, "I catch MAGIKARP", $4f
-	db "all the time, but", $55
-	db "they're so weak!", $57
-
-_Route12Text11: ; 903bc (24:43bc)
-	db $0, "ROUTE 12 ", $4f
-	db "North to LAVENDER", $57
-
-_Route12Text12: ; 903d9 (24:43d9)
-	db $0, "SPORT FISHING AREA", $57
-
-_Route13BattleText2: ; 903ed (24:43ed)
-	db $0, "My bird #MON", $4f
-	db "want to scrap!", $57
-
-_Route13EndBattleText2: ; 9040a (24:440a)
-	db $0, "My", $4f
-	db "bird combo lost?", $58
-
-_Route13AfterBattleText2: ; 9041f (24:441f)
-	db $0, "My #MON look", $4f
-	db "happy even though", $55
-	db "they lost.", $57
-
-_Route13BattleText3: ; 9044a (24:444a)
-	db $0, "I'm told I'm good", $4f
-	db "for a kid!", $57
-
-_Route13EndBattleText3: ; 90466 (24:4466)
-	db $0, "Ohh!", $4f
-	db "I lost!", $58
-
-_Route13AfterBattleText3: ; 90474 (24:4474)
-	db $0, "I want to become", $4f
-	db "a good trainer.", $55
-	db "I'll train hard.", $57
-
-_Route13BattleText4: ; 904a6 (24:44a6)
-	db $0, "Wow! Your BADGEs", $4f
-	db "are too cool!", $57
-
-_Route13EndBattleText4: ; 904c6 (24:44c6)
-	db $0, "Not", $4f
-	db "enough!", $58
-
-_Route13AfterBattleText4: ; 904d3 (24:44d3)
-	db $0, "You got those", $4f
-	db "BADGEs from GYM", $55
-	db "LEADERs. I know!", $57
-
-_Route13BattleText5: ; 90503 (24:4503)
-	db $0, "My cute #MON", $4f
-	db "wish to make your", $55
-	db "acquaintance.", $57
-
-_Route13EndBattleText5: ; 90531 (24:4531)
-	db $0, "Wow!", $4f
-	db "You totally won!", $58
-
-_Route13AfterBattleText5: ; 90548 (24:4548)
-	db $0, "You have to make", $4f
-	db "#MON fight to", $55
-	db "toughen them up!", $57
-
-_Route13BattleText6: ; 90579 (24:4579)
-	db $0, "I found CARBOS in", $4f
-	db "a cave once.", $57
-
-_Route13EndBattleText6: ; 90599 (24:4599)
-	db $0, "Just", $4f
-	db "messed up!", $58
-
-_Route13AfterBattleText6: ; 905aa (24:45aa)
-	db $0, "CARBOS boosted", $4f
-	db "the SPEED of my", $55
-	db "#MON.", $57
-
-_Route13BattleText7: ; 905d0 (24:45d0)
-	db $0, "The wind's blowing", $4f
-	db "my way!", $57
-
-_Route13EndBattleText7: ; 905eb (24:45eb)
-	db $0, "The", $4f
-	db "wind turned!", $58
-
-_Route13AfterBattleText7: ; 905fd (24:45fd)
-	db $0, "I'm beat. I guess", $4f
-	db "I'll FLY home.", $57
-
-_Route13BattleText8: ; 9061d (24:461d)
-	db $0, "Sure, I'll play", $4f
-	db "with you!", $57
-
-_Route13EndBattleText8: ; 90637 (24:4637)
-	db $0, "Oh!", $4f
-	db "You little brute!", $58
-
-_Route13AfterBattleText8: ; 9064e (24:464e)
-	db $0, "I wonder which is", $4f
-	db "stronger, male or", $55
-	db "female #MON?", $57
-
-_Route13BattleText9: ; 90680 (24:4680)
-	db $0, "Do you want to", $4f
-	db "#MON with me?", $57
-
-_Route13EndBattleText9: ; 9069e (24:469e)
-	db $0, "It's over", $4f
-	db "already?", $58
-
-_Route13AfterBattleText9: ; 906b1 (24:46b1)
-	db $0, "I don't know", $4f
-	db "anything about", $55
-	db "#MON. I just", $55
-	db "like cool ones!", $57
-
-_Route13BattleText10: ; 906ea (24:46ea)
-	db $0, "What're you", $4f
-	db "lookin' at?", $57
-
-_Route13EndBattleText10: ; 90702 (24:4702)
-	db $0, "Dang!", $4f
-	db "Stripped gears!", $58
-
-_Route13AfterBattleText10: ; 90719 (24:4719)
-	db $0, "Get lost!", $57
-
-_Route13BattleText11: ; 90724 (24:4724)
-	db $0, "I always go with", $4f
-	db "bird #MON!", $57
-
-_Route13EndBattleText11: ; 90741 (24:4741)
-	db $0, "Out", $4f
-	db "of power!", $58
-
-_Route13AfterBattleText11: ; 90750 (24:4750)
-	db $0, "I wish I could", $4f
-	db "fly like PIDGEY", $55
-	db "and PIDGEOTTO...", $57
-
-_Route13Text11: ; 90781 (24:4781)
-	db $0, "TRAINER TIPS", $51
-	db "Look to the left", $4f
-	db "of that post!", $57
-
-_Route13Text12: ; 907ae (24:47ae)
-	db $0, "TRAINER TIPS", $51
-	db "Use SELECT to", $4f
-	db "switch items in", $55
-	db "the ITEM window!", $57
-
-_Route13Text13: ; 907eb (24:47eb)
-	db $0, "ROUTE 13", $4f
-	db "North to SILENCE", $55
-	db "BRIDGE", $57
-
-_Route14BattleText1: ; 9080d (24:480d)
-	db $0, "You need to use", $4f
-	db "TMs to teach good", $55
-	db "moves to #MON!", $57
-
-_Route14EndBattleText1: ; 9083f (24:483f)
-	db $0, "Not", $4f
-	db "good enough!", $58
-
-_Route14AfterBattleText1: ; 90851 (24:4851)
-	db $0, "You have some HMs", $4f
-	db "right? #MON", $55
-	db "can't ever forget", $55
-	db "those moves.", $57
-
-_Route14BattleText2: ; 9088e (24:488e)
-	db $0, "My bird #MON", $4f
-	db "should be ready", $55
-	db "for battle.", $57
-
-_Route14EndBattleText2: ; 908b8 (24:48b8)
-	db $0, "Not", $4f
-	db "ready yet!", $58
-
-_Route14AfterBattleText2: ; 908c8 (24:48c8)
-	db $0, "They need to learn", $4f
-	db "better moves.", $57
-
-_Route14BattleText3: ; 908ea (24:48ea)
-	db $0, "TMs are on sale", $4f
-	db "in CELADON!", $55
-	db "But, only a few", $55
-	db "people have HMs!", $57
-
-_Route14EndBattleText3: ; 90928 (24:4928)
-	db $0, "Aww,", $4f
-	db "bummer!", $58
-
-_Route14AfterBattleText3: ; 90936 (24:4936)
-	db $0, "Teach #MON", $4f
-	db "moves of the same", $55
-	db "element type for", $55
-	db "more power.", $57
-
-_Route14BattleText4: ; 90971 (24:4971)
-	db $0, "Have you taught", $4f
-	db "your bird #MON", $55
-	db "how to FLY?", $57
-
-_Route14EndBattleText4: ; 9099d (24:499d)
-	db $0, "Shot", $4f
-	db "down in flames!", $58
-
-_Route14AfterBattleText4: ; 909b3 (24:49b3)
-	db $0, "Bird #MON are", $4f
-	db "my true love!", $57
-
-_Route14BattleText5: ; 909d0 (24:49d0)
-	db $0, "Have you heard of", $4f
-	db "the legendary", $55
-	db "#MON?", $57
-
-_Route14EndBattleText5: ; 909f7 (24:49f7)
-	db $0, "Why?", $4f
-	db "Why'd I lose?", $58
-
-_Route14AfterBattleText5: ; 90a0a (24:4a0a)
-	db $0, "The 3 legendary", $4f
-	db "#MON are all", $55
-	db "birds of prey.", $57
-
-_Route14BattleText6: ; 90a37 (24:4a37)
-	db $0, "I'm not into it,", $4f
-	db "but OK! Let's go!", $57
-
-_Route14EndBattleText6: ; 90a59 (24:4a59)
-	db $0, "I", $4f
-	db "knew it!", $58
-
-_Route14AfterBattleText6: ; 90a65 (24:4a65)
-	db $0, "Winning, losing,", $4f
-	db "it doesn't matter", $55
-	db "in the long run!", $57
-
-_Route14BattleText7: ; 90a99 (24:4a99)
-	db $0, "C'mon, c'mon.", $4f
-	db "Let's go, let's", $55
-	db "go, let's go!", $57
-
-_Route14EndBattleText7: ; 90ac1 (24:4ac1)
-	db $0, "Arrg!", $4f
-	db "Lost! Get lost!", $58
-
-_Route14AfterBattleText7: ; 90ad8 (24:4ad8)
-	db $0, "What, what, what?", $4f
-	db "What do you want?", $57
-
-_Route14BattleText8: ; 90afd (24:4afd)
-	db $0, "Perfect! I need to", $4f
-	db "burn some time!", $57
-
-_Route14EndBattleText8: ; 90b21 (24:4b21)
-	db $0, "What?", $4f
-	db "You!?", $58
-
-_Route14AfterBattleText8: ; 90b2e (24:4b2e)
-	db $0, "Raising #MON", $4f
-	db "is a drag, man.", $57
-
-_Route14BattleText9: ; 90b4c (24:4b4c)
-	db $0, "We ride out here", $4f
-	db "because there's", $55
-	db "more room!", $57
-
-_Route14EndBattleText9: ; 90b78 (24:4b78)
-	db $0, "Wipe out!", $58
-
-_Route14AfterBattleText9: ; 90b83 (24:4b83)
-	db $0, "It's cool you", $4f
-	db "made your #MON", $55
-	db "so strong!", $51
-	db "Might is right!", $4f
-	db "And you know it!", $57
-
-_Route14BattleText10: ; 90bcc (24:4bcc)
-	db $0, "#MON fight?", $4f
-	db "Cool! Rumble!", $57
-
-_Route14EndBattleText10: ; 90be7 (24:4be7)
-	db $0, "Blown", $4f
-	db "away!", $58
-
-_Route14AfterBattleText10: ; 90bf4 (24:4bf4)
-	db $0, "You know who'd", $4f
-	db "win, you and me", $55
-	db "one on one!", $57
-
-_Route14Text11: ; 90c1f (24:4c1f)
-	db $0, "ROUTE 14", $4f
-	db "West to FUCHSIA", $55
-	db "CITY", $57
-
-_Route15BattleText1: ; 90c3e (24:4c3e)
-	db $0, "Let me try out the", $4f
-	db "#MON I just", $55
-	db "got in a trade!", $57
-
-_Route15EndBattleText1: ; 90c6e (24:4c6e)
-	db $0, "Not", $4f
-	db "good enough!", $58
-
-_Route15AfterBattleText1: ; 90c80 (24:4c80)
-	db $0, "You can't change", $4f
-	db "the nickname of", $55
-	db "any #MON you", $55
-	db "get in a trade.", $51
-	db "Only the Original", $4f
-	db "Trainer can.", $57
-
-_Route15BattleText2: ; 90cdd (24:4cdd)
-	db $0, "You look gentle,", $4f
-	db "so I think I can", $55
-	db "beat you!", $57
-
-_Route15EndBattleText2: ; 90d0a (24:4d0a)
-	db $0, "No,", $4f
-	db "wrong!", $58
-
-_Route15AfterBattleText2: ; 90d16 (24:4d16)
-	db $0, "I'm afraid of", $4f
-	db "BIKERs, they look", $55
-	db "so ugly and mean!", $57
-
-_Route15BattleText3: ; 90d48 (24:4d48)
-	db $0, "When I whistle, I", $4f
-	db "can summon bird", $55
-	db "#MON!", $57
-
-_Route15EndBattleText3: ; 90d71 (24:4d71)
-	db $0, "Ow!", $4f
-	db "That's tragic!", $58
-
-_Route15AfterBattleText3: ; 90d84 (24:4d84)
-	db $0, "Maybe I'm not cut", $4f
-	db "out for battles.", $57
-
-_Route15BattleText4: ; 90da7 (24:4da7)
-	db $0, "Hmm? My birds are", $4f
-	db "shivering! You're", $55
-	db "good, aren't you?", $57
-
-_Route15EndBattleText4: ; 90ddc (24:4ddc)
-	db $0, "Just", $4f
-	db "as I thought!", $58
-
-_Route15AfterBattleText4: ; 90df0 (24:4df0)
-	db $0, "Did you know moves", $4f
-	db "like EARTHQUAKE", $55
-	db "don't have any", $55
-	db "effect on birds?", $57
-
-_Route15BattleText5: ; 90e33 (24:4e33)
-	db $0, "Oh, you're a", $4f
-	db "little cutie!", $57
-
-_Route15EndBattleText5: ; 90e4e (24:4e4e)
-	db $0, "You looked", $4f
-	db "so cute too!", $58
-
-_Route15AfterBattleText5: ; 90e67 (24:4e67)
-	db $0, "I forgive you!", $4f
-	db "I can take it!", $57
-
-_Route15BattleText6: ; 90e86 (24:4e86)
-	db $0, "I raise #MON", $4f
-	db "because I live", $55
-	db "alone!", $57
-
-_Route15EndBattleText6: ; 90eaa (24:4eaa)
-	db $0, "I didn't", $4f
-	db "ask for this!", $58
-
-_Route15AfterBattleText6: ; 90ec1 (24:4ec1)
-	db $0, "I just like going", $4f
-	db "home to be with", $55
-	db "my #MON!", $57
-
-_Route15BattleText7: ; 90eed (24:4eed)
-	db $0, "Hey kid! C'mon!", $4f
-	db "I just got these!", $57
-
-_Route15EndBattleText7: ; 90f0f (24:4f0f)
-	db $0, "Why", $4f
-	db "not?", $58
-
-_Route15AfterBattleText7: ; 90f19 (24:4f19)
-	db $0, "You only live", $4f
-	db "once, so I live", $55
-	db "as an outlaw!", $55
-	db "TEAM ROCKET RULES!", $57
-
-_Route15BattleText8: ; 90f59 (24:4f59)
-	db $0, "Fork over all your", $4f
-	db "cash when you", $55
-	db "lose to me, kid!", $57
-
-_Route15EndBattleText8: ; 90f8c (24:4f8c)
-	db $0, "That", $4f
-	db "can't be true!", $58
-
-_Route15AfterBattleText8: ; 90fa0 (24:4fa0)
-	db $0, "I was just joking", $4f
-	db "about the money!", $57
-
-_Route15BattleText9: ; 90fc4 (24:4fc4)
-	db $0, "What's cool?", $4f
-	db "Trading #MON!", $57
-
-_Route15EndBattleText9: ; 90fdf (24:4fdf)
-	db $0, "I", $4f
-	db "said trade!", $58
-
-_Route15AfterBattleText9: ; 90fee (24:4fee)
-	db $0, "I trade #MON", $4f
-	db "with my friends!", $57
-
-_Route15BattleText10: ; 9100d (24:500d)
-	db $0, "Want to play with", $4f
-	db "my #MON?", $57
-
-_Route15EndBattleText10: ; 91029 (24:5029)
-	db $0, "I was", $4f
-	db "too impatient!", $58
-
-_Route15AfterBattleText10: ; 9103f (24:503f)
-	db $0, "I'll go train with", $4f
-	db "weaker people.@@"
-
-_Route15Text12: ; 91062 (24:5062)
-	db $0, "ROUTE 15", $4f
-	db "West to FUCHSIA", $55
-	db "CITY", $57
-
-_Route16BattleText1: ; 91081 (24:5081)
-	db $0, "What do you want?", $57
-
-_Route16EndBattleText1: ; 91094 (24:5094)
-	db $0, "Don't you", $4f
-	db "dare laugh!", $58
-
-_Route16AfterBattleText1: ; 910aa (24:50aa)
-	db $0, "We like just", $4f
-	db "hanging here,", $55
-	db "what's it to you?", $57
-
-_Route16BattleText2: ; 910d7 (24:50d7)
-	db $0, "Nice BIKE!", $4f
-	db "Hand it over!", $57
-
-_Route16EndBattleText2: ; 910f1 (24:50f1)
-	db $0, "Knock", $4f
-	db "out!", $58
-
-_Route16AfterBattleText2: ; 910fd (24:50fd)
-	db $0, "Forget it, who", $4f
-	db "needs your BIKE!", $57
-
-_Route16BattleText3: ; 9111e (24:511e)
-	db $0, "Come out and play,", $4f
-	db "little mouse!", $57
-
-_Route16EndBattleText3: ; 91140 (24:5140)
-	db $0, "You", $4f
-	db "little rat!", $58
-
-_Route16AfterBattleText3: ; 91151 (24:5151)
-	db $0, "I hate losing!", $4f
-	db "Get away from me!", $57
-
-_Route16BattleText4: ; 91173 (24:5173)
-	db $0, "Hey, you just", $4f
-	db "bumped me!", $57
-
-_Route16EndBattleText4: ; 9118d (24:518d)
-	db $0, "Kaboom!", $58
-
-_Route16AfterBattleText4: ; 91196 (24:5196)
-	db $0, "You can also get", $4f
-	db "to FUCHSIA from", $55
-	db "VERMILION using a", $55
-	db "coastal road.", $57
-
-_Route16BattleText5: ; 911d8 (24:51d8)
-	db $0, "I'm feeling", $4f
-	db "hungry and mean!", $57
-
-_Route16EndBattleText5: ; 911f5 (24:51f5)
-	db $0, "Bad,", $4f
-	db "bad, bad!", $58
-
-_Route16AfterBattleText5: ; 91205 (24:5205)
-	db $0, "I like my #MON", $4f
-	db "ferocious! They", $55
-	db "tear up enemies!", $57
-
-_Route16BattleText6: ; 91236 (24:5236)
-	db $0, "Sure, I'll go!", $57
-
-_Route16EndBattleText6: ; 91245 (24:5245)
-	db $0, "Don't make", $4f
-	db "me mad!", $58
-
-_Route16AfterBattleText6: ; 91258 (24:5258)
-	db $0, "I like harassing", $4f
-	db "people with my", $55
-	db "vicious #MON!", $57
-
-_Route16Text7: ; 91287 (24:5287)
-	db $0, "A sleeping #MON", $4f
-	db "blocks the way!", $57
-
-_UnnamedText_59ab3: ; 912a8 (24:52a8)
-	db $0, "SNORLAX woke up!", $51
-	db "It attacked in a", $4f
-	db "grumpy rage!", $57
-
-_UnnamedText_59ab8: ; 912d8 (24:52d8)
-	db $0, "With a big yawn,", $4f
-	db "SNORLAX returned", $55
-	db "to the mountains!", $57
-
-_Route16Text8: ; 9130d (24:530d)
-	db $0, "Enjoy the slope!", $4f
-	db "CYCLING ROAD", $57
-
-_Route16Text9: ; 9132c (24:532c)
-	db $0, "ROUTE 16", $4f
-	db "CELADON CITY -", $55
-	db "FUCHSIA CITY", $57
-
-_Route17BattleText1: ; 91352 (24:5352)
-	db $0, "There's no money", $4f
-	db "in fighting kids!", $57
-
-_Route17EndBattleText1: ; 91375 (24:5375)
-	db $0, "Burned", $4f
-	db "out!", $58
-
-_Route17AfterBattleText1: ; 91382 (24:5382)
-	db $0, "Good stuff is", $4f
-	db "lying around on", $55
-	db "CYCLING ROAD!", $57
-
-_Route17BattleText2: ; 913af (24:53af)
-	db $0, "What do you want,", $4f
-	db "kiddo?", $57
-
-_Route17EndBattleText2: ; 913c9 (24:53c9)
-	db $0, "Whoo!", $58
-
-_Route17AfterBattleText2: ; 913d0 (24:53d0)
-	db $0, "I could belly-", $4f
-	db "bump you outta", $55
-	db "here!", $57
-
-_Route17BattleText3: ; 913f5 (24:53f5)
-	db $0, "You heading to", $4f
-	db "FUCHSIA?", $57
-
-_Route17EndBattleText3: ; 9140e (24:540e)
-	db $0, "Crash and", $4f
-	db "burn!", $58
-
-_Route17AfterBattleText3: ; 9141f (24:541f)
-	db $0, "I love racing", $4f
-	db "downhill!", $57
-
-_Route17BattleText4: ; 91438 (24:5438)
-	db $0, "We're BIKERs!", $4f
-	db "Highway stars!", $57
-
-_Route17EndBattleText4: ; 91455 (24:5455)
-	db $0, "Smoked!", $58
-
-_Route17AfterBattleText4: ; 9145e (24:545e)
-	db $0, "Are you looking", $4f
-	db "for adventure?", $57
-
-_Route17BattleText5: ; 9147e (24:547e)
-	db $0, "Let VOLTORB", $4f
-	db "electrify you!", $57
-
-_Route17EndBattleText5: ; 9149a (24:549a)
-	db $0, "Grounded", $4f
-	db "out!", $58
-
-_Route17AfterBattleText5: ; 914a9 (24:54a9)
-	db $0, "I got my VOLTORB", $4f
-	db "at the abandoned", $55
-	db "POWER PLANT.", $57
-
-_Route17BattleText6: ; 914d9 (24:54d9)
-	db $0, "My #MON won't", $4f
-	db "evolve! Why?", $57
-
-_Route17EndBattleText6: ; 914f4 (24:54f4)
-	db $0, "Why,", $4f
-	db "you!", $58
-
-_Route17AfterBattleText6: ; 914ff (24:54ff)
-	db $0, "Maybe some #MON", $4f
-	db "need element", $55
-	db "STONEs to evolve.", $57
-
-_Route17BattleText7: ; 9152f (24:552f)
-	db $0, "I need a little", $4f
-	db "exercise!", $57
-
-_Route17EndBattleText7: ; 9154a (24:554a)
-	db $0, "Whew!", $4f
-	db "Good workout!", $58
-
-_Route17AfterBattleText7: ; 9155f (24:555f)
-	db $0, "I'm sure I lost", $4f
-	db "weight there!", $57
-
-_Route17BattleText8: ; 9157d (24:557d)
-	db $0, "Be a rebel!", $57
-
-_Route17EndBattleText8: ; 9158a (24:558a)
-	db $0, "Aaaargh!", $58
-
-_Route17AfterBattleText8: ; 91594 (24:5594)
-	db $0, "Be ready to fight", $4f
-	db "for your beliefs!", $57
-
-_Route17BattleText9: ; 915b9 (24:55b9)
-	db $0, "Nice BIKE!", $4f
-	db "How's it handle?", $57
-
-_Route17EndBattleText9: ; 915d5 (24:55d5)
-	db $0, "Shoot!", $58
-
-_Route17AfterBattleText9: ; 915dd (24:55dd)
-	db $0, "The slope makes", $4f
-	db "it hard to steer!", $57
-
-_Route17BattleText10: ; 91600 (24:5600)
-	db $0, "Get lost kid!", $4f
-	db "I'm bushed!", $57
-
-_Route17EndBattleText10: ; 9161a (24:561a)
-	db $0, "Are you", $4f
-	db "satisfied?", $58
-
-_Route17AfterBattleText10: ; 9162e (24:562e)
-	db $0, "I need to catch", $4f
-	db "a few Zs!", $57
-
-_Route17Text11: ; 91649 (24:5649)
-	db $0, "It's a notice!", $51
-	db "Watch out for", $4f
-	db "discarded items!", $57
-
-_Route17Text12: ; 91677 (24:5677)
-	db $0, "TRAINER TIPS", $51
-	db "All #MON are", $4f
-	db "unique.", $51
-	db "Even #MON of", $4f
-	db "the same type and", $55
-	db "level grow at", $55
-	db "different rates.", $57
-
-_Route17Text13: ; 916d8 (24:56d8)
-	db $0, "TRAINER TIPS", $51
-	db "Press the A or B", $4f
-	db "Button to stay in", $55
-	db "place while on a", $55
-	db "slope.", $57
-
-_Route17Text14: ; 91721 (24:5721)
-	db $0, "ROUTE 17", $4f
-	db "CELADON CITY -", $55
-	db "FUCHSIA CITY", $57
-
-_Route17Text15: ; 91747 (24:5747)
-	db $0, "It's a notice!", $51
-	db "Don't throw the", $4f
-	db "game, throw #", $55
-	db "BALLs instead!", $57
-
-_Route17Text16: ; 91782 (24:5782)
-	db $0, "CYCLING ROAD", $4f
-	db "Slope ends here!", $57
-
-_Route18BattleText1: ; 917a1 (24:57a1)
-	db $0, "I always check", $4f
-	db "every grassy area", $55
-	db "for new #MON.", $57
-
-_Route18EndBattleText1: ; 917d1 (24:57d1)
-	db $0, "Tch!", $58
-
-_Route18AfterBattleText1: ; 917d7 (24:57d7)
-	db $0, "I wish I had a", $4f
-	db "BIKE!", $57
-
-_Route18BattleText2: ; 917ed (24:57ed)
-	db $0, "Kurukkoo!", $4f
-	db "How do you like", $55
-	db "my bird call?", $57
-
-_Route18EndBattleText2: ; 91816 (24:5816)
-	db $0, "I", $4f
-	db "had to bug you!", $58
-
-_Route18AfterBattleText2: ; 91829 (24:5829)
-	db $0, "I also collect sea", $4f
-	db "#MON on", $55
-	db "weekends!", $57
-
-_Route18BattleText3: ; 9184f (24:584f)
-	db $0, "This is my turf!", $4f
-	db "Get out of here!", $57
-
-_Route18EndBattleText3: ; 91872 (24:5872)
-	db $0, "Darn!", $58
-
-_Route18AfterBattleText3: ; 91879 (24:5879)
-	db $0, "This is my fave", $4f
-	db "#MON hunting", $55
-	db "area!", $57
-
-_Route18Text4: ; 9189d (24:589d)
-	db $0, "ROUTE 18", $4f
-	db "CELADON CITY -", $55
-	db "FUCHSIA CITY", $57
-
-_Route18Text5: ; 918c3 (24:58c3)
-	db $0, "CYCLING ROAD", $4f
-	db "No pedestrians", $55
-	db "permitted!", $57
-
-_Route19BattleText1: ; 918eb (24:58eb)
-	db $0, "Have to warm up", $4f
-	db "before my swim!", $57
-
-_Route19EndBattleText1: ; 9190c (24:590c)
-	db $0, "All", $4f
-	db "warmed up!", $58
-
-_Route19AfterBattleText1: ; 9191c (24:591c)
-	db $0, "Thanks, kid! I'm", $4f
-	db "ready for a swim!", $57
-
-_Route19BattleText2: ; 9193f (24:593f)
-	db $0, "Wait! You'll have", $4f
-	db "a heart attack!", $57
-
-_Route19EndBattleText2: ; 91961 (24:5961)
-	db $0, "Ooh!", $4f
-	db "That's chilly!", $58
-
-_Route19AfterBattleText2: ; 91975 (24:5975)
-	db $0, "Watch out for", $4f
-	db "TENTACOOL!", $57
-
-_Route19BattleText3: ; 9198f (24:598f)
-	db $0, "I love swimming!", $4f
-	db "What about you?", $57
-
-_Route19EndBattleText3: ; 919b1 (24:59b1)
-	db $0, "Belly", $4f
-	db "flop!", $58
-
-_Route19AfterBattleText3: ; 919be (24:59be)
-	db $0, "I can beat #MON", $4f
-	db "at swimming!", $57
-
-_Route19BattleText4: ; 919dc (24:59dc)
-	db $0, "What's beyond the", $4f
-	db "horizon?", $57
-
-_Route19EndBattleText4: ; 919f7 (24:59f7)
-	db $0, "Glub!", $58
-
-_Route19AfterBattleText4: ; 919fe (24:59fe)
-	db $0, "I see a couple of", $4f
-	db "islands!", $57
-
-_Route19BattleText5: ; 91a1a (24:5a1a)
-	db $0, "I tried diving", $4f
-	db "for #MON, but", $55
-	db "it was a no go!", $57
-
-_Route19EndBattleText5: ; 91a48 (24:5a48)
-	db $0, "Help!", $58
-
-_Route19AfterBattleText5: ; 91a4f (24:5a4f)
-	db $0, "You have to fish", $4f
-	db "for sea #MON!", $57
-
-_Route19BattleText6: ; 91a6f (24:5a6f)
-	db $0, "I look at the", $4f
-	db "sea to forget!", $57
-
-_Route19EndBattleText6: ; 91a8d (24:5a8d)
-	db $0, "Ooh!", $4f
-	db "Traumatic!", $58
-
-_Route19AfterBattleText6: ; 91a9e (24:5a9e)
-	db $0, "I'm looking at the", $4f
-	db "sea to forget!", $57
-
-_Route19BattleText7: ; 91ac0 (24:5ac0)
-	db $0, "Oh, I just love", $4f
-	db "your ride! Can I", $55
-	db "have it if I win?", $57
-
-_Route19EndBattleText7: ; 91af4 (24:5af4)
-	db $0, "Oh!", $4f
-	db "I lost!", $58
-
-_Route19AfterBattleText7: ; 91b01 (24:5b01)
-	db $0, "It's still a long", $4f
-	db "way to go to", $55
-	db "SEAFOAM ISLANDS.", $57
-
-_Route19BattleText8: ; 91b31 (24:5b31)
-	db $0, "Swimming's great!", $4f
-	db "Sunburns aren't!", $57
-
-_Route19EndBattleText8: ; 91b53 (24:5b53)
-	db $0, "Shocker!", $58
-
-_Route19AfterBattleText8: ; 91b5d (24:5b5d)
-	db $0, "My boy friend", $4f
-	db "wanted to swim to", $55
-	db "SEAFOAM ISLANDS.", $57
-
-_Route19BattleText9: ; 91b8f (24:5b8f)
-	db $0, "These waters are", $4f
-	db "treacherous!", $57
-
-_Route19EndBattleText9: ; 91bae (24:5bae)
-	db $0, "Ooh!", $4f
-	db "Dangerous!", $58
-
-_Route19AfterBattleText9: ; 91bbf (24:5bbf)
-	db $0, "I got a cramp!", $4f
-	db "Glub, glub...", $57
-
-_Route19BattleText10: ; 91bdd (24:5bdd)
-	db $0, "I swam here, but", $4f
-	db "I'm tired.", $57
-
-_Route19EndBattleText10: ; 91bf9 (24:5bf9)
-	db $0, "I'm", $4f
-	db "exhausted...", $58
-
-_Route19AfterBattleText10: ; 91c0a (24:5c0a)
-	db $0, "LAPRAS is so big,", $4f
-	db "it must keep you", $55
-	db "dry on water.", $57
-
-_Route19Text11: ; 91c3c (24:5c3c)
-	db $0, "SEA ROUTE 19", $4f
-	db "FUCHSIA CITY -", $55
-	db "SEAFOAM ISLANDS", $57
-
-_Route20BattleText1: ; 91c69 (24:5c69)
-	db $0, "The water is", $4f
-	db "shallow here.", $57
-
-_Route20EndBattleText1: ; 91c85 (24:5c85)
-	db $0, "Splash!", $58
-
-_Route20AfterBattleText1: ; 91c8e (24:5c8e)
-	db $0, "I wish I could", $4f
-	db "ride my #MON.", $57
-
-_Route20BattleText2: ; 91cac (24:5cac)
-	db $0, "SEAFOAM is a", $4f
-	db "quiet getaway!", $57
-
-_Route20EndBattleText2: ; 91cc9 (24:5cc9)
-	db $0, "Quit it!", $58
-
-_Route20AfterBattleText2: ; 91cd3 (24:5cd3)
-	db $0, "There's a huge", $4f
-	db "cavern underneath", $55
-	db "this island.", $57
-
-_Route20BattleText3: ; 91d01 (24:5d01)
-	db $0, "I love floating", $4f
-	db "with the fishes!", $57
-
-_Route20EndBattleText3: ; 91d23 (24:5d23)
-	db $0, "Yowch!", $58
-
-_Route20AfterBattleText3: ; 91d2b (24:5d2b)
-	db $0, "Want to float", $4f
-	db "with me?", $57
-
-_Route20BattleText4: ; 91d43 (24:5d43)
-	db $0, "Are you on", $4f
-	db "vacation too?", $57
-
-_Route20EndBattleText4: ; 91d5d (24:5d5d)
-	db $0, "No", $4f
-	db "mercy at all!", $58
-
-_Route20AfterBattleText4: ; 91d6f (24:5d6f)
-	db $0, "SEAFOAM used to", $4f
-	db "be one island!", $57
-
-_Route20BattleText5: ; 91d8f (24:5d8f)
-	db $0, "Check out my buff", $4f
-	db "physique!", $57
-
-_Route20EndBattleText5: ; 91dac (24:5dac)
-	db $0, "Wimpy!", $58
-
-_Route20AfterBattleText5: ; 91db4 (24:5db4)
-	db $0, "I should've been", $4f
-	db "buffing up my", $55
-	db "#MON, not me!", $57
-
-_Route20BattleText6: ; 91de1 (24:5de1)
-	db $0, "Why are you", $4f
-	db "riding a #MON?", $55
-	db "Can't you swim?", $57
-
-_Route20EndBattleText6: ; 91e0c (24:5e0c)
-	db $0, "Ouch!", $4f
-	db "Torpedoed!", $58
-
-_Route20AfterBattleText6: ; 91e1e (24:5e1e)
-	db $0, "Riding a #MON", $4f
-	db "sure looks fun!", $57
-
-_Route20BattleText7: ; 91e3d (24:5e3d)
-	db $0, "I rode my bird", $4f
-	db "#MON here!", $57
-
-_Route20EndBattleText7: ; 91e58 (24:5e58)
-	db $0, "Oh", $4f
-	db "no!", $58
-
-_Route20AfterBattleText7: ; 91e60 (24:5e60)
-	db $0, "My birds can't", $4f
-	db "FLY me back!", $57
-
-_Route20BattleText8: ; 91e7c (24:5e7c)
-	db $0, "My boy friend gave", $4f
-	db "me big pearls!", $57
-
-_Route20EndBattleText8: ; 91e9f (24:5e9f)
-	db $0, "Don't", $4f
-	db "touch my pearls!", $58
-
-_Route20AfterBattleText8: ; 91eb6 (24:5eb6)
-	db $0, "Will my pearls", $4f
-	db "grow bigger", $55
-	db "inside CLOYSTER?", $57
-
-_Route20BattleText9: ; 91ee3 (24:5ee3)
-	db $0, "I swam here from", $4f
-	db "CINNABAR ISLAND!", $57
-
-_Route20EndBattleText9: ; 91f06 (24:5f06)
-	db $0, "I'm", $4f
-	db "so disappointed!", $58
-
-_Route20AfterBattleText9: ; 91f1b (24:5f1b)
-	db $0, "#MON have", $4f
-	db "taken over an", $55
-	db "abandoned mansion", $55
-	db "on CINNABAR!", $57
-
-_Route20BattleText10: ; 91f53 (24:5f53)
-	db $0, "CINNABAR, in the", $4f
-	db "west, has a LAB", $55
-	db "for #MON.", $57
-
-_Route20EndBattleText10: ; 91f7f (24:5f7f)
-	db $0, "Wait!", $58
-
-_Route20AfterBattleText10: ; 91f86 (24:5f86)
-	db $0, "CINNABAR is a ", $4f
-	db "volcanic island!", $57
-
-_Route20Text12: ; 91fa7 (24:5fa7)
-_Route20Text11: ; 91fa7 (24:5fa7)
-	db $0, "SEAFOAM ISLANDS", $57
-
-_Route21BattleText1: ; 91fb8 (24:5fb8)
-	db $0, "You want to know", $4f
-	db "if the fish are", $55
-	db "biting?", $57
-
-_Route21EndBattleText1: ; 91fe2 (24:5fe2)
-	db $0, "Dang!", $58
-
-_Route21AfterBattleText1: ; 91fe9 (24:5fe9)
-	db $0, "I can't catch", $4f
-	db "anything good!", $57
-
-_Route21BattleText2: ; 92006 (24:6006)
-	db $0, "I got a big haul!", $4f
-	db "Wanna go for it?", $57
-
-_Route21EndBattleText2: ; 9202a (24:602a)
-	db $0, "Darn", $4f
-	db "MAGIKARP!", $58
-
-_Route21AfterBattleText2: ; 9203a (24:603a)
-	db $0, "I seem to only", $4f
-	db "catch MAGIKARP!", $57
-
-_Route21BattleText3: ; 9205a (24:605a)
-	db $0, "The sea cleanses", $4f
-	db "my body and soul!", $57
-
-_Route21EndBattleText3: ; 9207e (24:607e)
-	db $0, "Ayah!", $58
-
-_Route21AfterBattleText3: ; 92085 (24:6085)
-	db $0, "I like the", $4f
-	db "mountains too!", $57
-
-_Route21BattleText4: ; 920a0 (24:60a0)
-	db $0, "What's wrong with", $4f
-	db "me swimming?", $57
-
-_Route21EndBattleText4: ; 920bf (24:60bf)
-	db $0, "Cheap", $4f
-	db "shot!", $58
-
-_Route21AfterBattleText4: ; 920cc (24:60cc)
-	db $0, "I look like what?", $4f
-	db "A studded inner", $55
-	db "tube? Get lost!", $57
-
-_Route21BattleText5: ; 920ff (24:60ff)
-	db $0, "I caught all my", $4f
-	db "#MON at sea!", $57
-
-_Route21EndBattleText5: ; 9211d (24:611d)
-	db $0, "Diver!!", $4f
-	db "Down!!", $58
-
-_Route21AfterBattleText5: ; 9212d (24:612d)
-	db $0, "Where'd you catch", $4f
-	db "your #MON?", $57
-
-_Route21BattleText6: ; 9214a (24:614a)
-	db $0, "Right now, I'm in", $4f
-	db "a triathlon meet!", $57
-
-_Route21EndBattleText6: ; 9216e (24:616e)
-	db $0, "Pant...", $4f
-	db "pant...pant...", $58
-
-_Route21AfterBattleText6: ; 92186 (24:6186)
-	db $0, "I'm beat!", $4f
-	db "But, I still have", $55
-	db "the bike race and", $55
-	db "marathon left!", $57
-
-_Route21BattleText7: ; 921c3 (24:61c3)
-	db $0, "Ahh! Feel the sun", $4f
-	db "and the wind!", $57
-
-_Route21EndBattleText7: ; 921e4 (24:61e4)
-	db $0, "Yow!", $4f
-	db "I lost!", $58
-
-_Route21AfterBattleText7: ; 921f2 (24:61f2)
-	db $0, "I'm sunburnt to a", $4f
-	db "crisp!", $57
-
-_Route21BattleText8: ; 9220b (24:620b)
-	db $0, "Hey, don't scare", $4f
-	db "away the fish!", $57
-
-_Route21EndBattleText8: ; 9222b (24:622b)
-	db $0, "Sorry!", $4f
-	db "I didn't mean it!", $58
-
-_Route21AfterBattleText8: ; 92244 (24:6244)
-	db $0, "I was just angry", $4f
-	db "that I couldn't", $55
-	db "catch anything.", $57
-
-_Route21BattleText9: ; 92275 (24:6275)
-	db $0, "Keep me company", $4f
-	db "'til I get a hit!", $57
-
-_Route21EndBattleText9: ; 92297 (24:6297)
-	db $0, "That", $4f
-	db "burned some time.", $58
-
-_Route21AfterBattleText9: ; 922af (24:62af)
-	db $0, "Oh wait! I got a", $4f
-	db "bite! Yeah!", $57
-
-_UnnamedText_511ad: ; 922cd (24:62cd)
-	db $0, $53, ": Hey!", $4f
-	db $52, "!", $51
-	db "You're going to", $4f
-	db "#MON LEAGUE?", $51
-	db "Forget it! You", $4f
-	db "probably don't", $55
-	db "have any BADGEs!", $51
-	db "The guard won't", $4f
-	db "let you through!", $51
-	db "By the way, did", $4f
-	db "your #MON", $55
-	db "get any stronger?", $57
-
-_UnnamedText_511b2: ; 9236f (24:636f)
-	db $0, "I heard #MON", $4f
-	db "LEAGUE has many", $55
-	db "tough trainers!", $51
-	db "I have to figure", $4f
-	db "out how to get", $55
-	db "past them!", $51
-	db "You should quit", $4f
-	db "dawdling and get", $55
-	db "a move on!", $57
-
-_UnnamedText_511b7: ; 923f4 (24:63f4)
-	db $0, "Awww!", $4f
-	db "You just lucked", $55
-	db "out!", $58
-
-_UnnamedText_511bc: ; 92410 (24:6410)
-	db $0, $53, ": What?", $4f
-	db "Why do I have 2", $55
-	db "#MON?", $51
-	db "You should catch", $55
-	db "some more too!", $58
-
-_UnnamedText_511c1: ; 92450 (24:6450)
-	db $0, $53, ": What?", $4f
-	db $52, "! What a", $55
-	db "surprise to see", $55
-	db "you here!", $51
-	db "So you're going to", $4f
-	db "#MON LEAGUE?", $51
-	db "You collected all", $4f
-	db "the BADGEs too?", $55
-	db "That's cool!", $51
-	db "Then I'll whip you", $4f
-	db $52, " as a", $55
-	db "warm up for", $55
-	db "#MON LEAGUE!", $51
-	db "Come on!", $57
-
-_UnnamedText_511c6: ; 92506 (24:6506)
-	db $0, "That loosened me", $4f
-	db "up! I'm ready for", $55
-	db "#MON LEAGUE!", $51
-	db $52, ", you need", $4f
-	db "more practice!", $51
-	db "But hey, you know", $4f
-	db "that! I'm out of", $55
-	db "here. Smell ya!", $57
-
-_UnnamedText_511cb: ; 92583 (24:6583)
-	db $0, "What!?", $51
-	db "I was just", $4f
-	db "careless!", $58
-
-_UnnamedText_511d0: ; 925a0 (24:65a0)
-	db $0, $53, ": Hahaha!", $4f
-	db $52, "! That's", $55
-	db "your best? You're", $55
-	db "nowhere near as", $55
-	db "good as me, pal!", $51
-	db "Go train some", $4f
-	db "more! You loser!", $58
-
-_Route22Text3: ; 92606 (24:6606)
-	db $0, "#MON LEAGUE", $4f
-	db "Front Gate", $57
-
-_VictoryRoadGuardText1: ; 9261e (24:661e)
-	db $0, "You can pass here", $4f
-	db "only if you have", $55
-	db "the @"
-
-UnnamedText_92647: ; 92647 (24:6647)
-	TX_RAM $cd6d
-	db $0, "!", $51
-	db "You don't have the", $4f
-	db "@"
-
-UnnamedText_92660: ; 92660 (24:6660)
-	TX_RAM $cd6d
-	db $0, " yet!", $51
-	db "You have to have", $4f
-	db "it to get to", $55
-	db "#MON LEAGUE!@@"
-
-_VictoryRoadGuardText2: ; 92696 (24:6696)
-	db $0, "You can pass here", $4f
-	db "only if you have", $55
-	db "the @"
-
-UnnamedText_926bf: ; 926bf (24:66bf)
-	TX_RAM $cd6d
-	db $0, "!", $51
-	db "Oh! That is the", $4f
-	db "@"
-
-UnnamedText_926d6: ; 926d6 (24:66d6)
-	TX_RAM $cd6d
-	db $0, "!@@"
-
-_UnnamedText_513a3: ; 926dd (24:66dd)
-	db $0, $51
-	db "OK then! Please,", $4f
-	db "go right ahead!", $57
-
-_Route23Text8: ; 92700 (24:6700)
-	db $0, "VICTORY ROAD GATE", $4f
-	db "- #MON LEAGUE", $57
-
-_UnnamedText_51510: ; 92721 (24:6721)
-	db $0, "Congratulations!", $4f
-	db "You beat our 5", $55
-	db "contest trainers!@@"
-
-_UnnamedText_51515: ; 92755 (24:6755)
-	db $0, $51
-	db "You just earned a", $4f
-	db "fabulous prize!", $58
-
-_UnnamedText_5151a: ; 92779 (24:6779)
-	db $0, $52, " received", $4f
-	db "a @"
-
-UnnamedText_92788: ; 92788 (24:6788)
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_51521: ; 9278f (24:678f)
-	db $0, "You don't have", $4f
-	db "any room!", $57
-
-_UnnamedText_51526: ; 927a8 (24:67a8)
-	db $0, "By the way, would", $4f
-	db "you like to join", $55
-	db "TEAM ROCKET?", $51
-	db "We're a group", $4f
-	db "dedicated to evil", $55
-	db "using #MON!", $51
-	db "Want to join?", $51
-	db "Are you sure?", $51
-	db "Come on, join us!", $51
-	db "I'm telling you", $4f
-	db "to join!", $51
-	db "OK, you need", $4f
-	db "convincing!", $51
-	db "I'll make you an", $4f
-	db "offer you can't", $55
-	db "refuse!", $57
-
-_UnnamedText_5152b: ; 9288a (24:688a)
-	db $0, "Arrgh!", $4f
-	db "You are good!", $58
-
-_UnnamedText_51530: ; 928a0 (24:68a0)
-	db $0, "With your ability,", $4f
-	db "you could become", $55
-	db "a top leader in", $55
-	db "TEAM ROCKET!", $57
-
-_Route24BattleText1: ; 928e2 (24:68e2)
-	db $0, "I saw your feat", $4f
-	db "from the grass!", $57
-
-SECTION "bank25",ROMX,BANK[$25]
-
-_Route24EndBattleText1: ; 94000 (25:4000)
-	db $0, "I", $4f
-	db "thought not!", $58
-
-_Route24AfterBattleText1: ; 94010 (25:4010)
-	db $0, "I hid because the", $4f
-	db "people on the", $55
-	db "bridge scared me!", $57
-
-_Route24BattleText2: ; 94043 (25:4043)
-	db $0, "OK! I'm No. 5!", $4f
-	db "I'll stomp you!", $57
-
-_Route24EndBattleText2: ; 94061 (25:4061)
-	db $0, "Whoa!", $4f
-	db "Too much!", $58
-
-_Route24AfterBattleText2: ; 94072 (25:4072)
-	db $0, "I did my best, I", $4f
-	db "have no regrets!", $57
-
-_Route24BattleText3: ; 94095 (25:4095)
-	db $0, "I'm No. 4!", $4f
-	db "Getting tired?", $57
-
-_Route24EndBattleText3: ; 940af (25:40af)
-	db $0, "I lost", $4f
-	db "too!", $58
-
-_Route24AfterBattleText3: ; 940bc (25:40bc)
-	db $0, "I did my best, so", $4f
-	db "I've no regrets!", $57
-
-_Route24BattleText4: ; 940df (25:40df)
-	db $0, "Here's No. 3!", $4f
-	db "I won't be easy!", $57
-
-_Route24EndBattleText4: ; 940fd (25:40fd)
-	db $0, "Ow!", $4f
-	db "Stomped flat!", $58
-
-_Route24AfterBattleText4: ; 94110 (25:4110)
-	db $0, "I did my best, I", $4f
-	db "have no regrets!", $57
-
-_Route24BattleText5: ; 94133 (25:4133)
-	db $0, "I'm second!", $4f
-	db "Now it's serious!", $57
-
-_Route24EndBattleText5: ; 94150 (25:4150)
-	db $0, "How could I", $4f
-	db "lose?", $58
-
-_Route24AfterBattleText5: ; 94163 (25:4163)
-	db $0, "I did my best, I", $4f
-	db "have no regrets!", $57
-
-_Route24BattleText6: ; 94186 (25:4186)
-	db $0, "This is NUGGET", $4f
-	db "BRIDGE! Beat us 5", $55
-	db "trainers and win", $55
-	db "a fabulous prize!", $51
-	db "Think you got", $4f
-	db "what it takes?", $57
-
-_Route24EndBattleText6: ; 941e8 (25:41e8)
-	db $0, "Whoo!", $4f
-	db "Good stuff!", $58
-
-_Route24AfterBattleText6: ; 941fb (25:41fb)
-	db $0, "I did my best, I", $4f
-	db "have no regrets!", $57
-
-_Route25BattleText1: ; 9421e (25:421e)
-	db $0, "Local trainers", $4f
-	db "come here to", $55
-	db "practice!", $57
-
-_Route25EndBattleText1: ; 94245 (25:4245)
-	db $0, "You're", $4f
-	db "decent.", $58
-
-_Route25AfterBattleText1: ; 94254 (25:4254)
-	db $0, "All #MON have", $4f
-	db "weaknesses. It's", $55
-	db "best to raise", $55
-	db "different kinds.", $57
-
-_Route25BattleText2: ; 94292 (25:4292)
-	db $0, "Dad took me to a", $4f
-	db "great party on", $55
-	db "S.S.ANNE at", $55
-	db "VERMILION CITY!", $57
-
-_Route25EndBattleText2: ; 942cf (25:42cf)
-	db $0, "I'm", $4f
-	db "not mad!", $58
-
-_Route25AfterBattleText2: ; 942dc (25:42dc)
-	db $0, "On S.S.ANNE, I", $4f
-	db "saw trainers from", $55
-	db "around the world.", $57
-
-_Route25BattleText3: ; 94310 (25:4310)
-	db $0, "I'm a cool guy.", $4f
-	db "I've got a girl", $55
-	db "friend!", $57
-
-_Route25EndBattleText3: ; 94337 (25:4337)
-	db $0, "Aww,", $4f
-	db "darn...", $58
-
-_Route25AfterBattleText3: ; 94345 (25:4345)
-	db $0, "Oh well. My girl", $4f
-	db "will cheer me up.", $57
-
-_Route25BattleText4: ; 94369 (25:4369)
-	db $0, "Hi! My boy", $4f
-	db "friend is cool!", $57
-
-_Route25EndBattleText4: ; 94385 (25:4385)
-	db $0, "I was in", $4f
-	db "bad condition!", $58
-
-_Route25AfterBattleText4: ; 9439e (25:439e)
-	db $0, "I wish my guy was", $4f
-	db "as good as you!", $57
-
-_Route25BattleText5: ; 943c1 (25:43c1)
-	db $0, "I knew I had to", $4f
-	db "fight you!", $57
-
-_Route25EndBattleText5: ; 943dd (25:43dd)
-	db $0, "I knew", $4f
-	db "I'd lose too!", $58
-
-_Route25AfterBattleText5: ; 943f2 (25:43f2)
-	db $0, "If your #MON", $4f
-	db "gets confused or", $55
-	db "falls asleep,", $55
-	db "switch it!", $57
-
-_Route25BattleText6: ; 9442a (25:442a)
-	db $0, "My friend has a", $4f
-	db "cute #MON.", $55
-	db "I'm so jealous!", $57
-
-_Route25EndBattleText6: ; 94455 (25:4455)
-	db $0, "I'm", $4f
-	db "not so jealous!", $58
-
-_Route25AfterBattleText6: ; 94469 (25:4469)
-	db $0, "You came from MT.", $4f
-	db "MOON? May I have", $55
-	db "a CLEFAIRY?", $57
-
-_Route25BattleText7: ; 94499 (25:4499)
-	db $0, "I just got down", $4f
-	db "from MT.MOON,", $55
-	db "but I'm ready!", $57
-
-_Route25EndBattleText7: ; 944c6 (25:44c6)
-	db $0, "You", $4f
-	db "worked hard!", $58
-
-_Route25AfterBattleText7: ; 944d8 (25:44d8)
-	db $0, "Drat!", $4f
-	db "A ZUBAT bit me", $55
-	db "back in there.", $57
-
-_Route25BattleText8: ; 944fd (25:44fd)
-	db $0, "I'm off to see a", $4f
-	db "#MON collector", $55
-	db "at the cape!", $57
-
-_Route25EndBattleText8: ; 9452a (25:452a)
-	db $0, "You", $4f
-	db "got me.", $58
-
-_Route25AfterBattleText8: ; 94537 (25:4537)
-	db $0, "The collector has", $4f
-	db "many rare kinds", $55
-	db "of #MON.", $57
-
-_Route25BattleText9: ; 94563 (25:4563)
-	db $0, "You're going to", $4f
-	db "see BILL? First,", $55
-	db "let's fight!", $57
-
-_Route25EndBattleText9: ; 94590 (25:4590)
-	db $0, "You're", $4f
-	db "something.", $58
-
-_Route25AfterBattleText9: ; 945a2 (25:45a2)
-	db $0, "The trail below", $4f
-	db "is a shortcut to", $55
-	db "CERULEAN CITY.", $57
-
-_Route25Text11: ; 945d3 (25:45d3)
-	db $0, "SEA COTTAGE", $4f
-	db "BILL lives here!", $57
-
-_FileDataDestroyedText: ; 945f1 (25:45f1)
-	db $0, "The file data is", $4f
-	db "destroyed!", $58
-
-_WouldYouLikeToSaveText: ; 9460e (25:460e)
-	db $0, "Would you like to", $4f
-	db "SAVE the game?", $57
-
-_GameSavedText: ; 94630 (25:4630)
-	db $0, $52, " saved", $4f
-	db "the game!", $57
-
-_OlderFileWillBeErasedText: ; 94643 (25:4643)
-	db $0, "The older file", $4f
-	db "will be erased to", $55
-	db "save. Okay?", $57
-
-_UnnamedText_73909: ; 94671 (25:4671)
-	db $0, "When you change a", $4f
-	db "#MON BOX, data", $55
-	db "will be saved.", $51
-	db "Is that okay?", $57
-
-_UnnamedText_739d4: ; 946b0 (25:46b0)
-	db $0, "Choose a", $4f
-	db $4a, " BOX.@@"
-
-_UnnamedText_3af3e: ; 946c2 (25:46c2)
-	TX_RAM $cf4b
-	db $0, " evolved", $57
-
-_UnnamedText_3af43: ; 946cf (25:46cf)
-	db $0, $4f
-	db "into @"
-
-UnnamedText_946d7: ; 946d7 (25:46d7)
-	TX_RAM $cd6d
-	db $0, "!", $57
-
-_UnnamedText_3af48: ; 946dd (25:46dd)
-	db $0, "Huh? @"
-
-UnnamedText_946e4: ; 946e4 (25:46e4)
-	TX_RAM $cf4b
-	db $0, $4f
-	db "stopped evolving!", $58
-
-_UnnamedText_3af4d: ; 946fb (25:46fb)
-	db $0, "What? @"
-
-UnnamedText_94703: ; 94703 (25:4703)
-	TX_RAM $cf4b
-	db $0, $4f
-	db "is evolving!", $57
-
-_UnnamedText_3f245: ; 94715 (25:4715)
-	db $0, $59, $4f
-	db "fell asleep!", $58
-
-_UnnamedText_3f24a: ; 94725 (25:4725)
-	db $0, $59, "'s", $4f
-	db "already asleep!", $58
-
-_UnnamedText_3f2df: ; 94739 (25:4739)
-	db $0, $59, $4f
-	db "was poisoned!", $58
-
-_UnnamedText_3f2e4: ; 9474a (25:474a)
-	db $0, $59, "'s", $4f
-	db "badly poisoned!", $58
-
-_UnnamedText_3f3d8: ; 9475e (25:475e)
-	db $0, $59, $4f
-	db "was burned!", $58
-
-_UnnamedText_3f3dd: ; 9476d (25:476d)
-	db $0, $59, $4f
-	db "was frozen solid!", $58
-
-_UnnamedText_3f423: ; 94782 (25:4782)
-	db $0, "Fire defrosted", $4f
-	db $59, "!", $58
-
-_UnnamedText_3f528: ; 94795 (25:4795)
-	db $0, $5a, "'s", $4f
-	db "@"
-
-UnnamedText_9479a: ; 9479a (25:479a)
-	TX_RAM $cf4b
-	db $0, "@@"
-
-_UnnamedText_3f542: ; 947a0 (25:47a0)
-	db $0, $4c, "greatly@@"
-
-_UnnamedText_3f547: ; 947ab (25:47ab)
-	db $0, " rose!", $58
-
-_UnnamedText_3f661: ; 947b3 (25:47b3)
-	db $0, $59, "'s", $4f
-	db "@"
-
-UnnamedText_947b8: ; 947b8 (25:47b8)
-	TX_RAM $cf4b
-	db $0, "@@"
-
-_UnnamedText_3f67e: ; 947be (25:47be)
-	db $0, $4c, "greatly@@"
-
-_UnnamedText_3f683: ; 947c9 (25:47c9)
-	db $0, " fell!", $58
-
-_UnnamedText_3f802: ; 947d1 (25:47d1)
-	db $0, $5a, $4f
-	db "ran from battle!", $58
-
-_UnnamedText_3f807: ; 947e5 (25:47e5)
-	db $0, $59, $4f
-	db "ran away scared!", $58
-
-_UnnamedText_3f80c: ; 947f9 (25:47f9)
-	db $0, $59, $4f
-	db "was blown away!", $58
-
-_UnnamedText_3f8c8: ; 9480c (25:480c)
-	db $0, $5a, "@@"
-
-_UnnamedText_3f8f9: ; 94810 (25:4810)
-	db $0, $4f
-	db "made a whirlwind!", $58
-
-_UnnamedText_3f8fe: ; 94824 (25:4824)
-	db $0, $4f
-	db "took in sunlight!", $58
-
-_UnnamedText_3f903: ; 94838 (25:4838)
-	db $0, $4f
-	db "lowered its head!", $58
-
-_UnnamedText_3f908: ; 9484c (25:484c)
-	db $0, $4f
-	db "is glowing!", $58
-
-_UnnamedText_3f90d: ; 9485a (25:485a)
-	db $0, $4f
-	db "flew up high!", $58
-
-_UnnamedText_3f912: ; 9486a (25:486a)
-	db $0, $4f
-	db "dug a hole!", $58
-
-_UnnamedText_3f9a1: ; 94878 (25:4878)
-	db $0, $59, $4f
-	db "became confused!", $58
-
-_UnnamedText_3fa77: ; 9488c (25:488c)
-	db $0, $5a, $4f
-	db "learned", $55
-	db "@"
-
-UnnamedText_94898: ; 94898 (25:4898)
-	TX_RAM $cd6d
-	db $0, "!", $58
-
-_UnnamedText_3fb09: ; 9489e (25:489e)
-	db $0, $59, "'s", $4f
-	db "@"
-
-UnnamedText_948a3: ; 948a3 (25:48a3)
-	TX_RAM $cd6d
-	db $0, " was", $55
-	db "disabled!", $58
-
-_UnnamedText_3fb3e: ; 948b6 (25:48b6)
-	db $0, "Nothing happened!", $58
-
-_UnnamedText_3fb49: ; 948c9 (25:48c9)
-	db $0, "No effect!", $58
-
-_UnnamedText_3fb59: ; 948d5 (25:48d5)
-	db $0, "But, it failed! ", $58
-
-_UnnamedText_3fb64: ; 948e7 (25:48e7)
-	db $0, "It didn't affect", $4f
-	db $59, "!", $58
-
-_UnnamedText_3fb69: ; 948fb (25:48fb)
-	db $0, $59, $4f
-	db "is unaffected!", $58
-
-_UnnamedText_3fb74: ; 9490d (25:490d)
-	db $0, $59, "'s", $4f
-	db "paralyzed! It may", $55
-	db "not attack!", $58
-
-_UnnamedText_17e1d: ; 9492f (25:492f)
-	db $0, "It created a", $4f
-	db "SUBSTITUTE!", $58
-
-_UnnamedText_17e22: ; 94949 (25:4949)
-	db $0, $5a, $4f
-	db "has a SUBSTITUTE!", $58
-
-_UnnamedText_17e27: ; 9495e (25:495e)
-	db $0, "Too weak to make", $4f
-	db "a SUBSTITUTE!", $58
-
-_UnnamedText_2ff04: ; 9497e (25:497e)
-	db $0, "Coins scattered", $4f
-	db "everywhere!", $58
-
-_UnnamedText_27fb3: ; 9499b (25:499b)
-	db $0, $5a, "'s", $4f
-	db "getting pumped!", $58
-
-_UnnamedText_2bef2: ; 949af (25:49af)
-	db $0, $59, $4f
-	db "was seeded!", $58
-
-_UnnamedText_2bef7: ; 949be (25:49be)
-	db $0, $59, $4f
-	db "evaded attack!", $58
-
-_UnnamedText_1399e: ; 949d0 (25:49d0)
-	db $0, $5a, "'s", $4f
-	db "hit with recoil!", $58
-
-_UnnamedText_139cd: ; 949e5 (25:49e5)
-	db $0, "Converted type to", $4f
-	db $59, "'s!", $58
-
-_UnnamedText_13a53: ; 949fc (25:49fc)
-	db $0, "All STATUS changes", $4f
-	db "are eliminated!", $58
-
-_UnnamedText_3baa2: ; 94a20 (25:4a20)
-	db $0, $5a, $4f
-	db "started sleeping!", $57
-
-_UnnamedText_3baa7: ; 94a35 (25:4a35)
-	db $0, $5a, $4f
-	db "fell asleep and", $55
-	db "became healthy!", $57
-
-_UnnamedText_3baac: ; 94a58 (25:4a58)
-	db $0, $5a, $4f
-	db "regained health!", $58
-
-_UnnamedText_3bb92: ; 94a6c (25:4a6c)
-	db $0, $5a, $4f
-	db "transformed into", $55
-	db "@"
-
-UnnamedText_94a81: ; 94a81 (25:4a81)
-	TX_RAM $cd6d
-	db $0, "!", $58
-
-_UnnamedText_3bbd7: ; 94a87 (25:4a87)
-	db $0, $5a, "'s", $4f
-	db "protected against", $55
-	db "special attacks!", $58
-
-_UnnamedText_3bbdc: ; 94aae (25:4aae)
-	db $0, $5a, $4f
-	db "gained armor!", $58
-
-_UnnamedText_33f52: ; 94abf (25:4abf)
-	db $0, $5a, "'s", $4f
-	db "shrouded in mist!", $58
-
-_UnnamedText_78dc: ; 94ad5 (25:4ad5)
-	db $0, "Sucked health from", $4f
-	db $59, "!", $58
-
-_UnnamedText_78e1: ; 94aec (25:4aec)
-	db $0, $59, "'s", $4f
-	db "dream was eaten!", $58
-
-_BattleCenterMText1: ; 94b01 (25:4b01)
-	db $0, "!", $57
-
-_TradeCenterMText1: ; 94b04 (25:4b04)
-	db $0, "!", $57
-
-INCLUDE "text/mapRedsHouse1F.asm"
-INCLUDE "text/mapBluesHouse.asm"
-
-_OaksLabGaryText1: ; 94d5b (25:4d5b)
-	db $0, $53, ": Yo", $4f
-	db $52, "! Gramps", $55
-	db "isn't around!", $57
-
-_OaksLabText40: ; 94d79 (25:4d79)
-	db $0, $53, ": Heh, I", $4f
-	db "don't need to be", $55
-	db "greedy like you!", $51
-	db "Go ahead and", $4f
-	db "choose, ", $52, "!", $57
-
-_OaksLabText41: ; 94dbd (25:4dbd)
-	db $0, $53, ": My", $4f
-	db "#MON looks a", $55
-	db "lot stronger.", $57
-
-_OaksLabText39: ; 94ddf (25:4ddf)
-	db $0
-	db "Those are #", $4f
-	db "BALLs. They", $55
-	db "contain #MON!", $57
-
-_OaksLabCharmanderText: ; 94e06 (25:4e06)
-	db $0, "So! You want the", $4f
-	db "fire #MON,", $55
-	db "CHARMANDER?", $57
-
-_OaksLabSquirtleText: ; 94e2f (25:4e2f)
-	db $0, "So! You want the", $4f
-	db "water #MON,", $55
-	db "SQUIRTLE?", $57
-
-_OaksLabBulbasaurText: ; 94e57 (25:4e57)
-	db $0, "So! You want the", $4f
-	db "plant #MON,", $55
-	db "BULBASAUR?", $57
-
-_OaksLabMonEnergeticText: ; 94e80 (25:4e80)
-	db $0, "This #MON is", $4f
-	db "really energetic!", $58
-
-_OaksLabReceivedMonText: ; 94ea0 (25:4ea0)
-	db $0, $52, " received", $4f
-	db "a @"
-	TX_RAM $cd6d
-	db $0, "!@@"
-
-_OaksLabLastMonText: ; 94eb6 (25:4eb6)
-	db $0, "That's PROF.OAK's", $4f
-	db "last #MON!", $57
-
-_UnnamedText_1d2f0: ; 94ed2 (25:4ed2)
-	db $0, "OAK: Now, ", $52, ",", $4f
-	db "which #MON do", $55
-	db "you want?", $57
-
-_UnnamedText_1d2f5: ; 94ef8 (25:4ef8)
-	db $0, "OAK: If a wild", $4f
-	db "#MON appears,", $55
-	db "your #MON can", $55
-	db "fight against it!", $57
-
-_UnnamedText_1d2fa: ; 94f36 (25:4f36)
-	db $0, "OAK: ", $52, ",", $4f
-	db "raise your young", $55
-	db "#MON by making", $55
-	db "it fight!", $57
-
-_OaksLabDeliverParcelText1: ; 94f69 (25:4f69)
-	db $0, "OAK: Oh, ", $52, "!", $51
-	db "How is my old", $4f
-	db "#MON?", $51
-	db "Well, it seems to", $4f
-	db "like you a lot.", $51
-	db "You must be", $4f
-	db "talented as a", $55
-	db "#MON trainer!", $51
-	db "What? You have", $4f
-	db "something for me?", $51
-	db $52, " delivered", $4f
-	db "OAK's PARCEL.@@"
-
-_OaksLabDeliverParcelText2: ; 9500f (25:500f)
-	db $0, $51
-	db "Ah! This is the", $4f
-	db "custom # BALL", $55
-	db "I ordered!", $55
-	db "Thank you!", $57
-
-_OaksLabAroundWorldText: ; 95045 (25:5045)
-	db $0, "#MON around the", $4f
-	db "world wait for", $55
-	db "you, ", $52, "!", $57
-
-_OaksLabGivePokeballsText1: ; 9506d (25:506d)
-	db $0, "OAK: You can't get", $4f
-	db "detailed data on", $55
-	db "#MON by just", $55
-	db "seeing them.", $51
-	db "You must catch", $4f
-	db "them! Use these", $55
-	db "to capture wild", $55
-	db "#MON.", $51
-	db $52, " got 5", $4f
-	db "# BALLs!@@"
-
-_OaksLabGivePokeballsText2: ; 950f2 (25:50f2)
-	db $0, $51
-	db "When a wild", $4f
-	db "#MON appears,", $55
-	db "it's fair game.", $51
-	db "Just throw a #", $4f
-	db "BALL at it and try", $4f
-	db "to catch it!", $51
-	db "This won't always", $4f
-	db "work, though.", $51
-	db "A healthy #MON", $4f
-	db "could escape. You", $55
-	db "have to be lucky!", $57
-
-_OaksLabPleaseVisitText: ; 9519e (25:519e)
-	db $0, "OAK: Come see me", $4f
-	db "sometimes.", $51
-	db "I want to know how", $4f
-	db "your #DEX is", $55
-	db "coming along.", $57
-
-_UnnamedText_1d31d: ; 951e9 (25:51e9)
-	db $0, "OAK: Good to see ", $4f
-	db "you! How is your ", $55
-	db "#DEX coming? ", $55
-	db "Here, let me take", $55
-	db "a look!", $58
-
-_UnnamedText_1d32c: ; 95236 (25:5236)
-	db $0, "It's encyclopedia-", $4f
-	db "like, but the", $55
-	db "pages are blank!", $57
-
-_OaksLabText8: ; 95268 (25:5268)
-	db $0, "?", $57
-
-_UnnamedText_1d340: ; 9526b (25:526b)
-	db $0, "PROF.OAK is the", $4f
-	db "authority on", $55
-	db "#MON!", $51
-	db "Many #MON", $4f
-	db "trainers hold him", $55
-	db "in high regard!", $57
-
-_OaksLabRivalWaitingText: ; 952bb (25:52bb)
-	db $0, $53, ": Gramps!", $4f
-	db "I'm fed up with", $55
-	db "waiting!", $57
-
-_OaksLabChooseMonText: ; 952df (25:52df)
-	db $0, "OAK: ", $53, "?", $4f
-	db "Let me think...", $51
-	db "Oh, that's right,", $4f
-	db "I told you to", $55
-	db "come! Just wait!", $51
-	db "Here, ", $52, "!", $51
-	db "There are 3", $4f
-	db "#MON here!", $51
-	db "Haha!", $51
-	db "They are inside", $4f
-	db "the # BALLs.", $51
-	db "When I was young,", $4f
-	db "I was a serious", $55
-	db "#MON trainer!", $51
-	db "In my old age, I", $4f
-	db "have only 3 left,", $55
-	db "but you can have", $55
-	db "one! Choose!", $57
-
-_OaksLabRivalInterjectionText: ; 953dc (25:53dc)
-	db $0, $53, ": Hey!", $4f
-	db "Gramps! What", $55
-	db "about me?", $57
-
-_OaksLabBePatientText: ; 953fc (25:53fc)
-	db $0, "OAK: Be patient!", $4f
-	db $53, ", you can", $55
-	db "have one too!", $57
-
-_OaksLabLeavingText: ; 95427 (25:5427)
-	db $0, "OAK: Hey! Don't go", $4f
-	db "away yet!", $57
-
-_OaksLabRivalPickingMonText: ; 95444 (25:5444)
-	db $0, $53, ": I'll take", $4f
-	db "this one, then!", $57
-
-_OaksLabRivalReceivedMonText: ; 95461 (25:5461)
-	db $0, $53, " received", $4f
-	db "a @"
-
-UnnamedText_95470: ; 95470 (25:5470)
-	TX_RAM $cd6d
-	db $0, "!@@"
-
-_OaksLabRivalChallengeText: ; 95477 (25:5477)
-	db $0, $53, ": Wait", $4f
-	db $52, "!", $55
-	db "Let's check out", $55
-	db "our #MON!", $51
-	db "Come on, I'll take", $4f
-	db "you on!", $57
-
-_UnnamedText_1d3be: ; 954b6 (25:54b6)
-	db $0, "WHAT?", $4f
-	db "Unbelievable!", $55
-	db "I picked the", $55
-	db "wrong #MON!", $58
-
-_UnnamedText_1d3c3: ; 954e4 (25:54e4)
-	db $0, $53, ": Yeah! Am", $4f
-	db "I great or what?", $58
-
-_OaksLabRivalToughenUpText: ; 95502 (25:5502)
-	db $0, $53, ": Okay!", $4f
-	db "I'll make my", $55
-	db "#MON fight to", $55
-	db "toughen it up!", $51
-	db $52, "! Gramps!", $4f
-	db "Smell you later!", $57
-
-_OaksLabText21: ; 95551 (25:5551)
-	db $0, $53, ": Gramps!", $57
-
-_OaksLabText22: ; 9555d (25:555d)
-	db $0, $53, ": What did", $4f
-	db "you call me for?", $57
-
-_OaksLabText23: ; 9557b (25:557b)
-	db $0, "OAK: Oh right! I", $4f
-	db "have a request", $55
-	db "of you two.", $57
-
-_OaksLabText24: ; 955a8 (25:55a8)
-	db $0, "On the desk there", $4f
-	db "is my invention,", $55
-	db "#DEX!", $51
-	db "It automatically", $4f
-	db "records data on", $55
-	db "#MON you've", $55
-	db "seen or caught!", $51
-	db "It's a hi-tech", $4f
-	db "encyclopedia!", $57
-
-_OaksLabText25: ; 9562a (25:562a)
-	db $0, "OAK: ", $52, " and", $4f
-	db $53, "! Take", $55
-	db "these with you!", $51
-	db $52, " got", $4f
-	db "#DEX from OAK!@@"
-
-_OaksLabText26: ; 95664 (25:5664)
-	db $0, "To make a complete", $4f
-	db "guide on all the", $55
-	db "#MON in the", $55
-	db "world...", $51
-	db "That was my dream!", $51
-	db "But, I'm too old!", $4f
-	db "I can't do it!", $51
-	db "So, I want you two", $4f
-	db "to fulfill my", $55
-	db "dream for me!", $51
-	db "Get moving, you", $4f
-	db "two!", $51
-	db "This is a great", $4f
-	db "undertaking in", $55
-	db "#MON history!", $57
-
-_OaksLabText27: ; 95741 (25:5741)
-	db $0, $53, ": Alright", $4f
-	db "Gramps! Leave it", $55
-	db "all to me!", $51
-	db $52, ", I hate to", $4f
-	db "say it, but I", $55
-	db "don't need you!", $51
-	db "I know! I'll", $4f
-	db "borrow a TOWN MAP", $55
-	db "from my sis!", $51
-	db "I'll tell her not", $4f
-	db "to lend you one,", $55
-	db $52, "! Hahaha!", $57
-
-_UnnamedText_1d405: ; 957eb (25:57eb)
-	db $0, "I study #MON as", $4f
-	db "PROF.OAK's AIDE.", $57
-
-_UnnamedText_441cc: ; 9580c (25:580c)
-	db $0, "#DEX comp-", $4f
-	db "letion is:", $51
-	db "@"
-
-UnnamedText_95824: ; 95824 (25:5824)
-	TX_NUM $ffdb, 1, 3
-	db $0, " #MON seen", $4f
-	db "@"
-
-UnnamedText_95835: ; 95835 (25:5835)
-	TX_NUM $ffdc, 1, 3
-	db $0, " #MON owned", $51
-	db "PROF.OAK's", $4f
-	db "Rating:", $58
-
-_UnnamedText_44201: ; 95858 (25:5858)
-	db $0, "You still have", $4f
-	db "lots to do.", $55
-	db "Look for #MON", $55
-	db "in grassy areas!", $57
-
-_UnnamedText_44206: ; 95893 (25:5893)
-	db $0, "You're on the", $4f
-	db "right track! ", $55
-	db "Get a FLASH HM", $55
-	db "from my AIDE!", $57
-
-_UnnamedText_4420b: ; 958cc (25:58cc)
-	db $0, "You still need", $4f
-	db "more #MON!", $55
-	db "Try to catch", $55
-	db "other species!", $57
-
-_UnnamedText_44210: ; 95903 (25:5903)
-	db $0, "Good, you're", $4f
-	db "trying hard!", $55
-	db "Get an ITEMFINDER", $55
-	db "from my AIDE!", $57
-
-_UnnamedText_44215: ; 9593d (25:593d)
-	db $0, "Looking good!", $4f
-	db "Go find my AIDE", $55
-	db "when you get 50!", $57
-
-_UnnamedText_4421a: ; 9596d (25:596d)
-	db $0, "You finally got at", $4f
-	db "least 50 species!", $55
-	db "Be sure to get", $55
-	db "EXP.ALL from my", $55
-	db "AIDE!", $57
-
-_UnnamedText_4421f: ; 959b8 (25:59b8)
-	db $0, "Ho! This is geting", $4f
-	db "even better!", $57
-
-_UnnamedText_44224: ; 959d9 (25:59d9)
-	db $0, "Very good!", $4f
-	db "Go fish for some", $55
-	db "marine #MON!", $57
-
-_UnnamedText_44229: ; 95a03 (25:5a03)
-	db $0, "Wonderful!", $4f
-	db "Do you like to", $55
-	db "collect things?", $57
-
-_UnnamedText_4422e: ; 95a2e (25:5a2e)
-	db $0, "I'm impressed!", $4f
-	db "It must have been", $55
-	db "difficult to do!", $57
-
-_UnnamedText_44233: ; 95a60 (25:5a60)
-	db $0, "You finally got at", $4f
-	db "least 100 species!", $55
-	db "I can't believe", $55
-	db "how good you are!", $57
-
-_UnnamedText_44238: ; 95aa8 (25:5aa8)
-	db $0, "You even have the", $4f
-	db "evolved forms of", $55
-	db "#MON! Super!", $57
-
-_UnnamedText_4423d: ; 95ad9 (25:5ad9)
-	db $0, "Excellent! Trade", $4f
-	db "with friends to", $55
-	db "get some more!", $57
-
-_UnnamedText_44242: ; 95b0a (25:5b0a)
-	db $0, "Outstanding!", $4f
-	db "You've become a", $55
-	db "real pro at this!", $57
-
-_UnnamedText_44247: ; 95b39 (25:5b39)
-	db $0, "I have nothing", $4f
-	db "left to say!", $55
-	db "You're the", $55
-	db "authority now!", $57
-
-_UnnamedText_4424c: ; 95b6f (25:5b6f)
-	db $0, "Your #DEX is", $4f
-	db "entirely complete!", $55
-	db "Congratulations!", $57
-
-_ViridianPokeCenterText2: ; 95ba1 (25:5ba1)
-_ViridianPokeCenterText1: ; 95ba1 (25:5ba1)
-	db $0, "You can use that", $4f
-	db "PC in the corner.", $51
-	db "The receptionist", $4f
-	db "told me. So kind!", $57
-
-_ViridianPokeCenterText3: ; 95be8 (25:5be8)
-	db $0, "There's a #MON", $4f
-	db "CENTER in every", $55
-	db "town ahead.", $51
-	db "They don't charge", $4f
-	db "any money either!", $57
-
-_ViridianMartText1: ; 95c36 (25:5c36)
-	db $0, "Okay! Say hi to", $4f
-	db "PROF.OAK for me!", $57
-
-_ViridianMartText4: ; 95c58 (25:5c58)
-	db $0, "Hey! You came from", $4f
-	db "PALLET TOWN?", $57
-
-ViridianMartParcelQuestText: ; 95c79 (25:5c79)
-	db $0, "You know PROF.", $4f
-	db "OAK, right?", $51
-	db "His order came in.", $4f
-	db "Will you take it", $55
-	db "to him?", $51
-	db $52, " got", $4f
-	db "OAK's PARCEL!@@"
-
-_ViridianMartText2: ; 95cd5 (25:5cd5)
-	db $0, "This shop sells", $4f
-	db "many ANTIDOTEs.", $57
-
-_ViridianMartText3: ; 95cf6 (25:5cf6)
-	db $0, "No! POTIONs are", $4f
-	db "all sold out.", $57
-
-_SchoolText1: ; 95d15 (25:5d15)
-	db $0, "Whew! I'm trying", $4f
-	db "to memorize all", $55
-	db "my notes.", $57
-
-_SchoolText2: ; 95d40 (25:5d40)
-	db $0, "Okay!", $51
-	db "Be sure to read", $4f
-	db "the blackboard", $55
-	db "carefully!", $57
-
-_ViridianHouseText1: ; 95d71 (25:5d71)
-	db $0, "Coming up with", $4f
-	db "nicknames is fun,", $55
-	db "but hard.", $51
-	db "Simple names are", $4f
-	db "the easiest to", $55
-	db "remember.", $57
-
-_ViridianHouseText2: ; 95dc7 (25:5dc7)
-	db $0, "My Daddy loves", $4f
-	db "#MON too.", $57
-
-_UnnamedText_1d5b1: ; 95de1 (25:5de1)
-	db $0, "SPEARY: Tetweet!", $57
-
-_ViridianHouseText4: ; 95df3 (25:5df3)
-	db $0, "SPEAROW", $4f
-	db "Name: SPEARY", $57
-
-_UnnamedText_74ace: ; 95e09 (25:5e09)
-	db $0, "Fwahahaha! This is", $4f
-	db "my hideout!", $51
-	db "I planned to", $4f
-	db "resurrect TEAM", $55
-	db "ROCKET here!", $51
-	db "But, you have", $4f
-	db "caught me again!", $55
-	db "So be it! This", $55
-	db "time, I'm not", $55
-	db "holding back!", $51
-	db "Once more, you", $4f
-	db "shall face", $55
-	db "GIOVANNI, the", $55
-	db "greatest trainer!", $57
-
-_UnnamedText_74ad3: ; 95ed5 (25:5ed5)
-	db $0, "Ha!", $4f
-	db "That was a truly", $55
-	db "intense fight!", $55
-	db "You have won!", $55
-	db "As proof, here is", $55
-	db "the EARTHBADGE!@@"
-
-_UnnamedText_74ad9: ; 95f2b (25:5f2b)
-	db $0, "Having lost, I", $4f
-	db "cannot face my", $55
-	db "underlings!", $55
-	db "TEAM ROCKET is", $55
-	db "finished forever!", $51
-	db "I will dedicate my", $4f
-	db "life to the study", $55
-	db "of #MON!", $51
-	db "Let us meet again", $4f
-	db "some day!", $55
-	db "Farewell!@@"
-
-_ViridianGymText12: ; 95fcc (25:5fcc)
-	db $0, "The EARTHBADGE", $4f
-	db "makes #MON of", $55
-	db "any level obey!", $51
-	db "It is evidence of", $4f
-	db "your mastery as a", $55
-	db "#MON trainer!", $51
-	db "With it, you can", $4f
-	db "enter the #MON", $55
-	db "LEAGUE!", $51
-	db "It is my gift for", $4f
-	db "your #MON", $55
-	db "LEAGUE challenge!", $57
-
-_ReceivedTM27Text: ; 96082 (25:6082)
-	db $0, $52, " received", $4f
-	db "TM27!@@"
-
-_TM27ExplanationText: ; 96095 (25:6095)
-	db $0, $51
-	db "TM27 is FISSURE!", $4f
-	db "It will take out", $55
-	db "#MON with just", $55
-	db "one hit!", $51
-	db "I made it when I", $4f
-	db "ran the GYM here,", $55
-	db "too long ago...", $57
-
-_TM27NoRoomText: ; 96104 (25:6104)
-	db $0, "You do not have", $4f
-	db "space for this!", $57
-
-_ViridianGymBattleText1: ; 96125 (25:6125)
-	db $0, "Heh! You must be", $4f
-	db "running out of", $55
-	db "steam by now!", $57
-
-_ViridianGymEndBattleText1: ; 96154 (25:6154)
-	db $0, "I", $4f
-	db "ran out of gas!", $58
-
-_ViridianGymAfterBattleText1: ; 96167 (25:6167)
-	db $0, "You need power to", $4f
-	db "keep up with our", $55
-	db "GYM LEADER!", $57
-
-_ViridianGymBattleText2: ; 96197 (25:6197)
-	db $0, "Rrrroar! I'm", $4f
-	db "working myself", $55
-	db "into a rage!", $57
-
-_ViridianGymEndBattleText2: ; 961c0 (25:61c0)
-	db $0, "Wargh!", $58
-
-_ViridianGymAfterBattleText2: ; 961c8 (25:61c8)
-	db $0, "I'm still not", $4f
-	db "worthy!", $57
-
-_ViridianGymBattleText3: ; 961de (25:61de)
-	db $0, "#MON and I, we", $4f
-	db "make wonderful", $55
-	db "music together!", $57
-
-_ViridianGymEndBattleText3: ; 9620d (25:620d)
-	db $0, "You are in", $4f
-	db "perfect harmony!", $58
-
-_ViridianGymAfterBattleText3: ; 9622a (25:622a)
-	db $0, "Do you know the", $4f
-	db "identity of our", $55
-	db "GYM LEADER?", $57
-
-_ViridianGymBattleText4: ; 96257 (25:6257)
-	db $0, "Karate is the", $4f
-	db "ultimate form of", $55
-	db "martial arts!", $57
-
-_ViridianGymEndBattleText4: ; 96285 (25:6285)
-	db $0, "Atcho!", $58
-
-_ViridianGymAfterBattleText4: ; 9628d (25:628d)
-	db $0, "If my #MON", $4f
-	db "were as good at", $55
-	db "Karate as I...", $57
-
-_ViridianGymBattleText5: ; 962b8 (25:62b8)
-	db $0, "The truly talented", $4f
-	db "win with style!", $57
-
-_ViridianGymEndBattleText5: ; 962dc (25:62dc)
-	db $0, "I", $4f
-	db "lost my grip!", $58
-
-_ViridianGymAfterBattleText5: ; 962ed (25:62ed)
-	db $0, "The LEADER will", $4f
-	db "scold me!", $57
-
-_ViridianGymBattleText6: ; 96308 (25:6308)
-	db $0, "I'm the KARATE", $4f
-	db "KING! Your fate", $55
-	db "rests with me!", $57
-
-_ViridianGymEndBattleText6: ; 96336 (25:6336)
-	db $0, "Ayah!", $58
-
-_ViridianGymAfterBattleText6: ; 9633d (25:633d)
-	db $0, "#MON LEAGUE?", $4f
-	db "You? Don't get", $55
-	db "cocky!", $57
-
-_ViridianGymBattleText7: ; 96360 (25:6360)
-	db $0, "Your #MON will", $4f
-	db "cower at the", $55
-	db "crack of my whip!", $57
-
-_ViridianGymEndBattleText7: ; 9638f (25:638f)
-	db $0, "Yowch!", $4f
-	db "Whiplash!", $58
-
-_ViridianGymAfterBattleText7: ; 963a1 (25:63a1)
-	db $0, "Wait! I was just", $4f
-	db "careless!", $57
-
-_ViridianGymBattleText8: ; 963bd (25:63bd)
-	db $0, "VIRIDIAN GYM was", $4f
-	db "closed for a long", $55
-	db "time, but now our", $55
-	db "LEADER is back!", $57
-
-_ViridianGymEndBattleText8: ; 96403 (25:6403)
-	db $0, "I", $4f
-	db "was beaten?", $58
-
-_ViridianGymAfterBattleText8: ; 96412 (25:6412)
-	db $0, "You can go onto", $4f
-	db "#MON LEAGUE", $55
-	db "only by defeating", $55
-	db "our GYM LEADER!", $57
-
-_UnnamedText_74bd4: ; 96451 (25:6451)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "Even I don't know", $4f
-	db "VIRIDIAN LEADER's", $55
-	db "identity!", $51
-	db "This will be the", $4f
-	db "toughest of all", $55
-	db "the GYM LEADERs!", $51
-	db "I heard that the", $4f
-	db "trainers here", $55
-	db "like ground-type", $55
-	db "#MON!", $57
-
-_UnnamedText_74bd9: ; 964fb (25:64fb)
-	db $0, "Blow me away!", $4f
-	db "GIOVANNI was the", $55
-	db "GYM LEADER here?", $57
-
-_UnnamedText_5c21a: ; 9652c (25:652c)
-	db $0, "Come again!", $57
-
-_UnnamedText_5c21f: ; 96539 (25:6539)
-	db $0, "It's ¥50 for a", $4f
-	db "child's ticket.", $51
-	db "Would you like to", $4f
-	db "come in?", $57
-
-_UnnamedText_5c224: ; 96572 (25:6572)
-	db $0, "Right, ¥50!", $4f
-	db "Thank you!", $57
-
-_UnnamedText_5c229: ; 9658a (25:658a)
-	db $0, "You don't have", $4f
-	db "enough money.", $58
-
-_UnnamedText_5c22e: ; 965a7 (25:65a7)
-	db $0, "You can't sneak", $4f
-	db "in the back way!", $51
-	db "Oh, whatever!", $4f
-	db "Do you know what", $55
-	db "AMBER is?", $57
-
-_UnnamedText_5c233: ; 965f1 (25:65f1)
-	db $0, "There's a lab", $4f
-	db "somewhere trying", $55
-	db "to resurrect", $55
-	db "ancient #MON", $55
-	db "from AMBER.", $57
-
-_UnnamedText_5c238: ; 96636 (25:6636)
-	db $0, "AMBER is fossil-", $4f
-	db "ized tree sap.", $57
-
-_UnnamedText_5c23d: ; 96657 (25:6657)
-	db $0, "Please go to the", $4f
-	db "other side!", $57
-
-_UnnamedText_5c242: ; 96675 (25:6675)
-	db $0, "Take plenty of", $4f
-	db "time to look!", $57
-
-_UnnamedText_5c251: ; 96693 (25:6693)
-	db $0, "That is one", $4f
-	db "magnificent", $55
-	db "fossil!", $57
-
-_UnnamedText_5c28e: ; 966b4 (25:66b4)
-	db $0, "Ssh! I think that", $4f
-	db "this chunk of", $55
-	db "AMBER contains", $55
-	db "#MON DNA!", $51
-	db "It would be great", $4f
-	db "if #MON could", $55
-	db "be resurrected", $55
-	db "from it!", $51
-	db "But, my colleagues", $4f
-	db "just ignore me!", $51
-	db "So I have a favor", $4f
-	db "to ask!", $51
-	db "Take this to a", $4f
-	db "#MON LAB and", $55
-	db "get it examined!", $58
-
-_ReceivedOldAmberText: ; 96790 (25:6790)
-	db $0, $52, " received", $4f
-	db "OLD AMBER!@@"
-
-_UnnamedText_5c299: ; 967a8 (25:67a8)
-	db $0, "Ssh! Get the OLD", $4f
-	db "AMBER checked!", $57
-
-_UnnamedText_5c29e: ; 967c9 (25:67c9)
-	db $0, "You don't have", $4f
-	db "space for this!", $57
-
-_UnnamedText_5c2ad: ; 967e8 (25:67e8)
-	db $0, "We are proud of 2", $4f
-	db "fossils of very", $55
-	db "rare, prehistoric", $55
-	db "#MON!", $57
-
-_UnnamedText_5c2bc: ; 96823 (25:6823)
-	db $0, "The AMBER is", $4f
-	db "clear and gold!", $57
-
-_MuseumF2Text1: ; 96841 (25:6841)
-	db $0, "MOON STONE?", $51
-	db "What's so special", $4f
-	db "about it?", $57
-
-_MuseumF2Text2: ; 96869 (25:6869)
-	db $0, "July 20, 1969!", $51
-	db "The 1st lunar", $4f
-	db "landing!", $51
-	db "I bought a color", $4f
-	db "TV to watch it!", $57
-
-_MuseumF2Text3: ; 968b1 (25:68b1)
-	db $0, "We have a space", $4f
-	db "exhibit now.", $57
-
-_MuseumF2Text4: ; 968cf (25:68cf)
-	db $0, "I want a PIKACHU!", $4f
-	db "It's so cute!", $51
-	db "I asked my Daddy", $4f
-	db "to catch me one!", $57
-
-_MuseumF2Text5: ; 96911 (25:6911)
-	db $0, "Yeah, a PIKACHU", $4f
-	db "soon, I promise!", $57
-
-_MuseumF2Text6: ; 96933 (25:6933)
-	db $0, "SPACE SHUTTLE", $4f
-	db "COLUMBIA", $57
-
-_MuseumF2Text7: ; 9694b (25:694b)
-	db $0, "Meteorite that", $4f
-	db "fell on MT.MOON.", $55
-	db "(MOON STONE?)", $57
-
-_UnnamedText_5c49e: ; 9697a (25:697a)
-	db $0, "I'm BROCK!", $4f
-	db "I'm PEWTER's GYM", $55
-	db "LEADER!", $51
-	db "I believe in rock", $4f
-	db "hard defense and", $55
-	db "determination!", $51
-	db "That's why my", $4f
-	db "#MON are all", $55
-	db "the rock-type!", $51
-	db "Do you still want", $4f
-	db "to challenge me?", $55
-	db "Fine then! Show", $55
-	db "me your best!", $57
-
-SECTION "bank26",ROMX,BANK[$26]
-
-_UnnamedText_5c4a3: ; 98000 (26:4000)
-	db $0, "There are all", $4f
-	db "kinds of trainers", $55
-	db "in the world!", $51
-	db "You appear to be", $4f
-	db "very gifted as a", $55
-	db "#MON trainer!", $51
-	db "Go to the GYM in", $4f
-	db "CERULEAN and test", $55
-	db "your abilities!", $57
-
-_TM34PreReceiveText: ; 98092 (26:4092)
-	db $0, "Wait! Take this", $4f
-	db "with you!", $57
-
-_ReceivedTM34Text: ; 980ad (26:40ad)
-	db $0, $52, " received", $4f
-	db "TM34!@@"
-
-_TM34ExplanationText: ; 980c0 (26:40c0)
-	db $0, $51
-	db "A TM contains a", $4f
-	db "technique that", $55
-	db "can be taught to", $55
-	db "#MON!", $51
-	db "A TM is good only", $4f
-	db "once! So when you", $55
-	db "use one to teach", $55
-	db "a new technique,", $55
-	db "pick the #MON", $55
-	db "carefully!", $51
-	db "TM34 contains", $4f
-	db "BIDE!", $51
-	db "Your #MON will", $4f
-	db "absorb damage in", $55
-	db "battle then pay", $55
-	db "it back double!", $57
-
-_TM34NoRoomText: ; 981ab (26:41ab)
-	db $0, "You don't have", $4f
-	db "room for this!", $57
-
-_UnnamedText_5c4bc: ; 981c9 (26:41c9)
-	db $0, "I took", $4f
-	db "you for granted.", $51
-	db "As proof of your", $4f
-	db "victory, here's", $55
-	db "the BOULDERBADGE!", $51
-	db $52, " received", $4f
-	db "the BOULDERBADGE!@@"
-
-_UnnamedText_5c4c1: ; 98232 (26:4232)
-	db $0, $51
-	db "That's an official", $4f
-	db "#MON LEAGUE", $55
-	db "BADGE!", $51
-	db "Its bearer's", $4f
-	db "#MON become", $55
-	db "more powerful!", $51
-	db "The technique", $4f
-	db "FLASH can now be", $55
-	db "used any time!", $58
-
-_PewterGymBattleText1: ; 982ae (26:42ae)
-	db $0, "Stop right there,", $4f
-	db "kid!", $51
-	db "You're still light", $4f
-	db "years from facing", $55
-	db "BROCK!", $57
-
-_PewterGymEndBattleText1: ; 982f1 (26:42f1)
-	db $0, "Darn!", $51
-	db "Light years isn't", $4f
-	db "time! It measures", $55
-	db "distance!", $58
-
-_PewterGymAfterBattleText1: ; 98325 (26:4325)
-	db $0, "You're pretty hot,", $4f
-	db "but not as hot", $55
-	db "as BROCK!", $57
-
-_UnnamedText_5c515: ; 98351 (26:4351)
-	db $0, "Hiya! I can tell", $4f
-	db "you have what it", $55
-	db "takes to become a", $55
-	db "#MON champ!", $51
-	db "I'm no trainer,", $4f
-	db "but I can tell", $55
-	db "you how to win!", $51
-	db "Let me take you", $4f
-	db "to the top!", $57
-
-_UnnamedText_5c51a: ; 983dc (26:43dc)
-	db $0, "All right! Let's", $4f
-	db "get happening!", $58
-
-_UnnamedText_5c51f: ; 983fc (26:43fc)
-	db $0, "The 1st #MON", $4f
-	db "out in a match is", $55
-	db "at the top of the", $55
-	db "#MON LIST!", $51
-	db "By changing the", $4f
-	db "order of #MON,", $55
-	db "matches could be", $55
-	db "made easier!", $57
-
-_UnnamedText_5c524: ; 98476 (26:4476)
-	db $0, "It's a free", $4f
-	db "service! Let's", $55
-	db "get happening!", $58
-
-_UnnamedText_5c529: ; 9849f (26:449f)
-	db $0, "Just as I thought!", $4f
-	db "You're #MON", $55
-	db "champ material!", $57
-
-_PewterHouse1Text1: ; 984ce (26:44ce)
-	db $0, "NIDORAN: Bowbow!@@"
-
-_PewterHouse1Text2: ; 984e1 (26:44e1)
-	db $0, "NIDORAN sit!", $57
-
-_PewterHouse1Text3: ; 984ef (26:44ef)
-	db $0, "Our #MON's an", $4f
-	db "outsider, so it's", $55
-	db "hard to handle.", $51
-	db "An outsider is a", $4f
-	db "#MON that you", $55
-	db "get in a trade.", $51
-	db "It grows fast, but", $4f
-	db "it may ignore an", $55
-	db "unskilled trainer", $55
-	db "in battle!", $51
-	db "If only we had", $4f
-	db "some BADGEs...", $57
-
-_UnnamedText_74cc6: ; 985ac (26:45ac)
-	db $0, "A shady, old man", $4f
-	db "got me to buy", $55
-	db "this really weird", $55
-	db "fish #MON!", $51
-	db "It's totally weak", $4f
-	db "and it cost ¥500!", $57
-
-_UnnamedText_74cd5: ; 9860c (26:460c)
-	db $0, "Good things can", $4f
-	db "happen if you", $55
-	db "raise #MON", $55
-	db "diligently, even", $55
-	db "the weak ones!", $57
-
-_PewterHouse2Text1: ; 98656 (26:4656)
-	db $0, "#MON learn new", $4f
-	db "techniques as", $55
-	db "they grow!", $51
-	db "But, some moves", $4f
-	db "must be taught by", $55
-	db "the trainer!", $57
-
-_PewterHouse2Text2: ; 986ae (26:46ae)
-	db $0, "#MON become", $4f
-	db "easier to catch", $55
-	db "when they are", $55
-	db "hurt or asleep!", $51
-	db "But, it's not a", $4f
-	db "sure thing!", $57
-
-_PewterPokecenterText1: ; 98704 (26:4704)
-	db $0, "What!?", $51
-	db "TEAM ROCKET is", $4f
-	db "at MT.MOON? Huh?", $55
-	db "I'm on the phone!", $51
-	db "Scram!", $57
-
-_PewterPokecenterText5: ; 98744 (26:4744)
-	db $0, "JIGGLYPUFF: Puu", $4f
-	db "pupuu!", $57
-
-_UnnamedText_1d6ab: ; 9875c (26:475c)
-	db $0, "Those miserable", $4f
-	db "ROCKETs!", $51
-	db "Look what they", $4f
-	db "did here!", $51
-	db "They stole a TM", $4f
-	db "for teaching", $55
-	db "#MON how to", $55
-	db "DIG holes!", $51
-	db "That cost me a", $4f
-	db "bundle, it did!", $57
-
-_UnnamedText_1d6b0: ; 987e2 (26:47e2)
-	db $0, "I figure what's", $4f
-	db "lost is lost!", $51
-	db "I decided to teach", $4f
-	db "DIGLETT how to", $55
-	db "DIG without a TM!", $57
-
-_CeruleanHouseTrashedText2: ; 98834 (26:4834)
-	db $0, "TEAM ROCKET must", $4f
-	db "be trying to DIG", $55
-	db "their way into no", $55
-	db "good!", $57
-
-_CeruleanHouseTrashedText3: ; 9886f (26:486f)
-	db $0, "TEAM ROCKET left", $4f
-	db "a way out!", $57
-
-_CeruleanHouseText1: ; 9888c (26:488c)
-	db $0, "My husband likes", $4f
-	db "trading #MON.", $51
-	db "If you are a", $4f
-	db "collector, would", $55
-	db "you please trade", $55
-	db "with him?", $57
-
-_CeruleanPokecenterText1: ; 988e5 (26:48e5)
-	db $0, "That BILL!", $51
-	db "I heard that", $4f
-	db "he'll do whatever", $55
-	db "it takes to get", $55
-	db "rare #MON!", $57
-
-_CeruleanPokecenterText3: ; 9892a (26:492a)
-	db $0, "Have you heard", $4f
-	db "about BILL?", $51
-	db "Everyone calls", $4f
-	db "him a #MANIAC!", $51
-	db "I think people", $4f
-	db "are just jealous", $55
-	db "of BILL, though.", $51
-	db "Who wouldn't want", $4f
-	db "to boast about", $55
-	db "their #MON?", $57
-
-_UnnamedText_5c7be: ; 989c1 (26:49c1)
-	db $0, "Hi, you're a new", $4f
-	db "face!", $51
-	db "Trainers who want", $4f
-	db "to turn pro have", $55
-	db "to have a policy", $55
-	db "about #MON!", $51
-	db "What is your", $4f
-	db "approach when you", $55
-	db "catch #MON?", $51
-	db "My policy is an", $4f
-	db "all-out offensive", $55
-	db "with water-type", $55
-	db "#MON!", $57
-
-_UnnamedText_5c7c3: ; 98a7b (26:4a7b)
-	db $0, "TM11 teaches", $4f
-	db "BUBBLEBEAM!", $51
-	db "Use it on an", $4f
-	db "aquatic #MON!", $57
-
-_UnnamedText_5c7c8: ; 98ab0 (26:4ab0)
-	db $0, "The CASCADEBADGE", $4f
-	db "makes all #MON", $55
-	db "up to L30 obey!", $51
-	db "That includes", $4f
-	db "even outsiders!", $51
-	db "There's more, you", $4f
-	db "can now use CUT", $55
-	db "any time!", $51
-	db "You can CUT down", $4f
-	db "small bushes to", $55
-	db "open new paths!", $51
-	db "You can also have", $4f
-	db "my favorite TM!", $57
-
-_ReceivedTM11Text: ; 98b7d (26:4b7d)
-	db $0, $52, " received", $4f
-	db "TM11!@@"
-
-_UnnamedText_5c7d3: ; 98b90 (26:4b90)
-	db $0, "You better make", $4f
-	db "room for this!", $57
-
-_UnnamedText_5c7d8: ; 98bb0 (26:4bb0)
-	db $0, "Wow!", $4f
-	db "You're too much!", $51
-	db "All right!", $51
-	db "You can have the", $4f
-	db "CASCADEBADGE to", $55
-	db "show you beat me!@@"
-
-_CeruleanGymBattleText1: ; 98c05 (26:4c05)
-	db $0, "I'm more than good", $4f
-	db "enough for you!", $51
-	db "MISTY can wait!", $57
-
-_CeruleanGymEndBattleText1: ; 98c38 (26:4c38)
-	db $0, "You", $4f
-	db "overwhelmed me!", $58
-
-_CeruleanGymAfterBattleText1: ; 98c4d (26:4c4d)
-	db $0, "You have to face", $4f
-	db "other trainers to", $55
-	db "find out how good", $55
-	db "you really are.", $57
-
-_CeruleanGymBattleText2: ; 98c93 (26:4c93)
-	db $0, "Splash!", $51
-	db "I'm first up!", $4f
-	db "Let's do it!", $57
-
-_CeruleanGymEndBattleText2: ; 98cb5 (26:4cb5)
-	db $0, "That", $4f
-	db "can't be!", $58
-
-_CeruleanGymAfterBattleText2: ; 98cc4 (26:4cc4)
-	db $0, "MISTY is going to", $4f
-	db "keep improving!", $51
-	db "She won't lose to", $4f
-	db "someone like you!", $57
-
-_UnnamedText_5c82a: ; 98d0a (26:4d0a)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "Here's my advice!", $51
-	db "The LEADER, MISTY,", $4f
-	db "is a pro who uses", $55
-	db "water #MON!", $51
-	db "You can drain all", $4f
-	db "their water with", $55
-	db "plant #MON!", $51
-	db "Or, zap them with", $4f
-	db "electricity!", $57
-
-_UnnamedText_5c82f: ; 98db0 (26:4db0)
-	db $0, "You beat MISTY!", $4f
-	db "What'd I tell ya?", $51
-	db "You and me kid,", $4f
-	db "we make a pretty", $55
-	db "darn good team!", $57
-
-_UnnamedText_1d810: ; 98e03 (26:4e03)
-	db $0, "Hi! Welcome to", $4f
-	db "our BIKE SHOP.", $51
-	db "Have we got just", $4f
-	db "the BIKE for you!", $58
-
-_UnnamedText_1d815: ; 98e45 (26:4e45)
-	db $0, "It's a cool BIKE!", $4f
-	db "Do you want it?", $57
-
-_UnnamedText_1d81a: ; 98e67 (26:4e67)
-	db $0, "Sorry! You can't", $4f
-	db "afford it!", $58
-
-_UnnamedText_1d81f: ; 98e83 (26:4e83)
-	db $0, "Oh, that's...", $51
-	db "A BIKE VOUCHER!", $51
-	db "OK! Here you go!", $58
-
-_UnnamedText_1d824: ; 98eb2 (26:4eb2)
-	db $0, $52, " exchanged", $4f
-	db "the BIKE VOUCHER", $55
-	db "for a BICYCLE.@@"
-
-_UnnamedText_1d82a: ; 98ee0 (26:4ee0)
-	db $0, "Come back again", $4f
-	db "some time!", $57
-
-_UnnamedText_1d82f: ; 98efc (26:4efc)
-	db $0, "How do you like", $4f
-	db "your new BICYCLE?", $51
-	db "You can take it", $4f
-	db "on CYCLING ROAD", $55
-	db "and in caves!", $57
-
-_UnnamedText_1d834: ; 98f4d (26:4f4d)
-	db $0, "You better make", $4f
-	db "room for this!", $57
-
-_UnnamedText_1d843: ; 98f6d (26:4f6d)
-	db $0, "A plain city BIKE", $4f
-	db "is good enough", $55
-	db "for me!", $51
-	db "You can't put a", $4f
-	db "shopping basket", $55
-	db "on an MTB!", $57
-
-_UnnamedText_1d85c: ; 98fc1 (26:4fc1)
-	db $0, "These BIKEs are", $4f
-	db "cool, but they're", $55
-	db "way expensive!", $57
-
-_UnnamedText_1d861: ; 98ff2 (26:4ff2)
-	db $0, "Wow. Your BIKE is", $4f
-	db "really cool!", $57
-
-_CeruleanMartText2: ; 99012 (26:5012)
-	db $0, "Use REPEL to keep", $4f
-	db "bugs and weak", $55
-	db "#MON away.", $51
-	db "Put your strongest", $4f
-	db "#MON at the", $55
-	db "top of the list", $55
-	db "for best results!", $57
-
-_CeruleanMartText3: ; 9907f (26:507f)
-	db $0, "Have you seen any", $4f
-	db "RARE CANDY?", $51
-	db "It's supposed to", $4f
-	db "make #MON go", $55
-	db "up one level!", $57
-
-_UnnamedText_74e77: ; 990c9 (26:50c9)
-	db $0, "#MON BADGEs", $4f
-	db "are owned only by", $55
-	db "skilled trainers.", $51
-	db "I see you have", $4f
-	db "at least one.", $51
-	db "Those BADGEs have", $4f
-	db "amazing secrets!", $58
-
-_UnnamedText_74e7c: ; 9913a (26:513a)
-	db $0, "Now then...", $51
-	db "Which of the 8", $4f
-	db "BADGEs should I", $55
-	db "describe?", $57
-
-_UnnamedText_74e81: ; 99170 (26:5170)
-	db $0, "Come visit me any", $4f
-	db "time you wish.", $57
-
-_UnnamedText_74e96: ; 99192 (26:5192)
-	db $0, "The ATTACK of all", $4f
-	db "#MON increases", $55
-	db "a little bit.", $51
-	db "It also lets you", $4f
-	db "use FLASH any", $55
-	db "time you desire.", $58
-
-_UnnamedText_74e9b: ; 991f2 (26:51f2)
-	db $0, "#MON up to L30", $4f
-	db "will obey you.", $51
-	db "Any higher, they", $4f
-	db "become unruly!", $51
-	db "It also lets you", $4f
-	db "use CUT outside", $55
-	db "of battle.", $58
-
-_UnnamedText_74ea0: ; 9925d (26:525d)
-	db $0, "The SPEED of all", $4f
-	db "#MON increases", $55
-	db "a little bit.", $51
-	db "It also lets you", $4f
-	db "use FLY outside", $55
-	db "of battle.", $58
-
-_UnnamedText_74ea5: ; 992b8 (26:52b8)
-	db $0, "#MON up to L50", $4f
-	db "will obey you.", $51
-	db "Any higher, they", $4f
-	db "become unruly!", $51
-	db "It also lets you", $4f
-	db "use STRENGTH out-", $55
-	db "side of battle.", $58
-
-_UnnamedText_74eaa: ; 9932a (26:532a)
-	db $0, "The DEFENSE of all", $4f
-	db "#MON increases", $55
-	db "a little bit.", $51
-	db "It also lets you", $4f
-	db "use SURF outside", $55
-	db "of battle.", $58
-
-_UnnamedText_74eaf: ; 99388 (26:5388)
-	db $0, "#MON up to L70", $4f
-	db "will obey you.", $51
-	db "Any higher, they", $4f
-	db "become unruly!", $58
-
-_UnnamedText_74eb4: ; 993c7 (26:53c7)
-	db $0, "Your #MON's", $4f
-	db "SPECIAL abilities", $55
-	db "increase a bit.", $58
-
-_UnnamedText_74eb9: ; 993f5 (26:53f5)
-	db $0, "All #MON will", $4f
-	db "obey you!", $58
-
-_LavenderPokecenterText4: ; 9940e (26:540e)
-_LavenderPokecenterText2: ; 9940e (26:540e)
-_LavenderPokecenterText1: ; 9940e (26:540e)
-	db $0, "TEAM ROCKET will", $4f
-	db "do anything for", $55
-	db "the sake of gold!", $57
-
-_LavenderPokecenterText3: ; 99442 (26:5442)
-	db $0, "I saw CUBONE's", $4f
-	db "mother die trying", $55
-	db "to escape from", $55
-	db "TEAM ROCKET!", $57
-
-_PokemonTower1Text1: ; 9947f (26:547f)
-	db $0, "#MON TOWER was", $4f
-	db "erected in the", $55
-	db "memory of #MON", $55
-	db "that had died.", $57
-
-_PokemonTower1Text2: ; 994bc (26:54bc)
-	db $0, "Did you come to", $4f
-	db "pay respects?", $55
-	db "Bless you!", $57
-
-_PokemonTower1Text3: ; 994e6 (26:54e6)
-	db $0, "I came to pray", $4f
-	db "for my CLEFAIRY.", $51
-	db "Sniff! I can't", $4f
-	db "stop crying...", $57
-
-_PokemonTower1Text4: ; 99524 (26:5524)
-	db $0, "My GROWLITHE...", $4f
-	db "Why did you die?", $57
-
-_PokemonTower1Text5: ; 99546 (26:5546)
-	db $0, "I am a CHANNELER!", $4f
-	db "There are spirits", $55
-	db "up to mischief!", $57
-
-_UnnamedText_6062d: ; 9957b (26:557b)
-	db $0, $53, ": Hey,", $4f
-	db $52, "! What", $55
-	db "brings you here?", $55
-	db "Your #MON", $55
-	db "don't look dead!", $51
-	db "I can at least", $4f
-	db "make them faint!", $55
-	db "Let's go, pal!", $57
-
-_UnnamedText_60632: ; 995e5 (26:55e5)
-	db $0, "What?", $4f
-	db "You stinker!", $51
-	db "I took it easy on", $4f
-	db "you too!", $58
-
-_UnnamedText_60637: ; 99614 (26:5614)
-	db $0, $53, ": Well,", $4f
-	db "look at all your", $55
-	db "wimpy #MON!", $51
-	db "Toughen them up a", $4f
-	db "bit more!", $58
-
-_UnnamedText_6063c: ; 99657 (26:5657)
-	db $0, "How's your #DEX", $4f
-	db "coming, pal?", $55
-	db "I just caught a", $55
-	db "CUBONE!", $51
-	db "I can't find the", $4f
-	db "grown-up MAROWAK", $55
-	db "yet!", $51
-	db "I doubt there are", $4f
-	db "any left! Well, I", $55
-	db "better get going!", $55
-	db "I've got a lot to", $55
-	db "accomplish, pal!", $51
-	db "Smell ya later!", $57
-
-_PokemonTower2Text2: ; 9971a (26:571a)
-	db $0, "Even we could not", $4f
-	db "identify the", $55
-	db "wayward GHOSTs!", $51
-	db "A SILPH SCOPE", $4f
-	db "might be able to", $55
-	db "unmask them.", $57
-
-_PokemonTower3BattleText1: ; 99776 (26:5776)
-	db $0, "Urrg...Awaa...", $4f
-	db "Huhu...graa..", $57
-
-_PokemonTower3EndBattleText1: ; 99794 (26:5794)
-	db $0, "Hwa!", $4f
-	db "I'm saved!", $58
-
-_PokemonTower3AfterBattleText1: ; 997a4 (26:57a4)
-	db $0, "The GHOSTs can be", $4f
-	db "identified by the", $55
-	db "SILPH SCOPE.", $57
-
-_PokemonTower3BattleText2: ; 997d6 (26:57d6)
-	db $0, "Kekeke....", $4f
-	db "Kwaaah!", $57
-
-_PokemonTower3EndBattleText2: ; 997ea (26:57ea)
-	db $0, "Hmm?", $4f
-	db "What am I doing?", $58
-
-_PokemonTower3AfterBattleText2: ; 99801 (26:5801)
-	db $0, "Sorry! I was", $4f
-	db "possessed!", $57
-
-_PokemonTower3BattleText3: ; 9981a (26:581a)
-	db $0, "Be gone!", $4f
-	db "Evil spirit!", $57
-
-_PokemonTower3EndBattleText3: ; 99831 (26:5831)
-	db $0, "Whew!", $4f
-	db "The spirit left!", $58
-
-_PokemonTower3AfterBattleText3: ; 99849 (26:5849)
-	db $0, "My friends were", $4f
-	db "possessed too!", $57
-
-_PokemonTower4BattleText1: ; 99869 (26:5869)
-	db $0, "GHOST! No!", $4f
-	db "Kwaaah!", $57
-
-_PokemonTower4EndBattleText1: ; 9987d (26:587d)
-	db $0, "Where", $4f
-	db "is the GHOST?", $58
-
-_PokemonTower4AfterBattleText1: ; 99892 (26:5892)
-	db $0, "I must have been", $4f
-	db "dreaming...", $57
-
-_PokemonTower4BattleText2: ; 998b0 (26:58b0)
-	db $0, "Be cursed with", $4f
-	db "me! Kwaaah!", $57
-
-_PokemonTower4EndBattleText2: ; 998cc (26:58cc)
-	db $0, "What!", $58
-
-_PokemonTower4AfterBattleText2: ; 998d3 (26:58d3)
-	db $0, "We can't crack", $4f
-	db "the identity of", $55
-	db "the GHOSTs.", $57
-
-_PokemonTower4BattleText3: ; 998fe (26:58fe)
-	db $0, "Huhuhu...", $4f
-	db "Beat me not!", $57
-
-_PokemonTower4EndBattleText3: ; 99916 (26:5916)
-	db $0, "Huh?", $4f
-	db "Who? What?", $58
-
-_PokemonTower4AfterBattleText3: ; 99927 (26:5927)
-	db $0, "May the departed", $4f
-	db "souls of #MON", $55
-	db "rest in peace...", $57
-
-_PokemonTower5Text1: ; 99958 (26:5958)
-	db $0, "Come, child! I", $4f
-	db "sealed this space", $55
-	db "with white magic!", $51
-	db "You can rest here!", $57
-
-_PokemonTower5BattleText1: ; 9999f (26:599f)
-	db $0, "Give...me...", $4f
-	db "your...soul...", $57
-
-_PokemonTower5EndBattleText1: ; 999bc (26:59bc)
-	db $0, "Gasp!", $58
-
-_PokemonTower5AfterBattleText1: ; 999c3 (26:59c3)
-	db $0, "I was under", $4f
-	db "possession!", $57
-
-_PokemonTower5BattleText2: ; 999dc (26:59dc)
-	db $0, "You...shall...", $4f
-	db "join...us...", $57
-
-_PokemonTower5EndBattleText2: ; 999f9 (26:59f9)
-	db $0, "What", $4f
-	db "a nightmare!", $58
-
-_PokemonTower5AfterBattleText2: ; 99a0c (26:5a0c)
-	db $0, "I was possessed!", $57
-
-_PokemonTower5BattleText3: ; 99a1e (26:5a1e)
-	db $0, "Zombies!", $57
-
-_PokemonTower5EndBattleText3: ; 99a28 (26:5a28)
-	db $0, "Ha?", $58
-
-_PokemonTower5AfterBattleText3: ; 99a2d (26:5a2d)
-	db $0, "I regained my", $4f
-	db "senses!", $57
-
-_PokemonTower5BattleText4: ; 99a44 (26:5a44)
-	db $0, "Urgah...", $4f
-	db "Urff....", $57
-
-_PokemonTower5EndBattleText4: ; 99a57 (26:5a57)
-	db $0, "Whoo!", $58
-
-_PokemonTower5AfterBattleText4: ; 99a5e (26:5a5e)
-	db $0, "I fell to evil", $4f
-	db "spirits despite", $55
-	db "my training!", $57
-
-_UnnamedText_60a43: ; 99a8b (26:5a8b)
-	db $0, "Entered purified,", $4f
-	db "protected zone!", $51
-	db $52, "'s #MON", $4f
-	db "are fully healed!", $57
-
-_UnnamedText_60c1f: ; 99ac8 (26:5ac8)
-	db $0, "The GHOST was the", $4f
-	db "restless soul of", $55
-	db "CUBONE's mother!", $57
-
-_UnnamedText_60c24: ; 99afc (26:5afc)
-	db $0, "The mother's soul", $4f
-	db "was calmed.", $51
-	db "It departed to", $4f
-	db "the afterlife!", $57
-
-_PokemonTower6BattleText1: ; 99b38 (26:5b38)
-	db $0, "Give...me...", $4f
-	db "blood...", $57
-
-_PokemonTower6EndBattleText1: ; 99b4f (26:5b4f)
-	db $0, "Groan!", $58
-
-_PokemonTower6AfterBattleText1: ; 99b57 (26:5b57)
-	db $0, "I feel anemic and", $4f
-	db "weak...", $57
-
-_PokemonTower6BattleText2: ; 99b72 (26:5b72)
-	db $0, "Urff... Kwaah!", $57
-
-_PokemonTower6EndBattleText2: ; 99b82 (26:5b82)
-	db $0, "Some-", $4f
-	db "thing fell out!", $58
-
-_PokemonTower6AfterBattleText2: ; 99b99 (26:5b99)
-	db $0, "Hair didn't fall", $4f
-	db "out! It was an", $55
-	db "evil spirit!", $57
-
-_PokemonTower6BattleText3: ; 99bc6 (26:5bc6)
-	db $0, "Ke..ke...ke...", $4f
-	db "ke..ke...ke!!", $57
-
-_PokemonTower6EndBattleText3: ; 99be4 (26:5be4)
-	db $0, "Keee!", $58
-
-_PokemonTower6AfterBattleText3: ; 99beb (26:5beb)
-	db $0, "What's going on", $4f
-	db "here?", $57
-
-_UnnamedText_60c56: ; 99c01 (26:5c01)
-	db $0, "Be gone...", $4f
-	db "Intruders...", $57
-
-_UnnamedText_60ec4: ; 99c1a (26:5c1a)
-	db $0, "MR.FUJI: Heh? You", $4f
-	db "came to save me?", $51
-	db "Thank you. But, I", $4f
-	db "came here of my", $55
-	db "own free will.", $51
-	db "I came to calm", $4f
-	db "the soul of", $55
-	db "CUBONE's mother.", $51
-	db "I think MAROWAK's", $4f
-	db "spirit has gone", $55
-	db "to the afterlife.", $51
-	db "I must thank you", $4f
-	db "for your kind", $55
-	db "concern!", $51
-	db "Follow me to my", $4f
-	db "home, #MON", $55
-	db "HOUSE at the foot", $55
-	db "of this tower.", $57
-
-_PokemonTower7BattleText1: ; 99d31 (26:5d31)
-	db $0, "What do you want?", $4f
-	db "Why are you here?", $57
-
-_PokemonTower7EndBattleText1: ; 99d56 (26:5d56)
-	db $0, "I give up!", $58
-
-_PokemonTower7AfterBattleText1: ; 99d62 (26:5d62)
-	db $0, "I'm not going to", $4f
-	db "forget this!", $57
-
-_PokemonTower7BattleText2: ; 99d80 (26:5d80)
-	db $0, "This old guy came", $4f
-	db "and complained", $55
-	db "about us harming", $55
-	db "useless #MON!", $51
-	db "We're talking it", $4f
-	db "over as adults!", $57
-
-_PokemonTower7EndBattleText2: ; 99de1 (26:5de1)
-	db $0, "Please!", $4f
-	db "No more!", $58
-
-_PokemonTower7AfterBattleText2: ; 99df3 (26:5df3)
-	db $0, "#MON are only", $4f
-	db "good for making", $55
-	db "money!", $51
-	db "Stay out of our", $4f
-	db "business!", $57
-
-_PokemonTower7BattleText3: ; 99e33 (26:5e33)
-	db $0, "You're not saving", $4f
-	db "anyone, kid!", $57
-
-_PokemonTower7EndBattleText3: ; 99e52 (26:5e52)
-	db $0, "Don't", $4f
-	db "fight us ROCKETs!", $58
-
-_PokemonTower7AfterBattleText3: ; 99e6a (26:5e6a)
-	db $0, "You're not getting", $4f
-	db "away with this!", $57
-
-_UnnamedText_1d8d1: ; 99e8d (26:5e8d)
-	db $0, "That's odd, MR.FUJI", $4f
-	db "isn't here.", $55
-	db "Where'd he go?", $57
-
-_UnnamedText_1d8d6: ; 99eba (26:5eba)
-	db $0, "MR.FUJI had been", $4f
-	db "praying alone for", $55
-	db "CUBONE's mother.", $57
-
-_UnnamedText_1d8f4: ; 99eee (26:5eee)
-	db $0, "This is really", $4f
-	db "MR.FUJI's house.", $51
-	db "He's really kind!", $51
-	db "He looks after", $4f
-	db "abandoned and", $55
-	db "orphaned #MON!", $57
-
-_UnnamedText_1d8f9: ; 99f4b (26:5f4b)
-	db $0, "It's so warm!", $4f
-	db "#MON are so", $55
-	db "nice to hug!", $57
-
-_LavenderHouse1Text3: ; 99f72 (26:5f72)
-	db $0, "PSYDUCK: Gwappa!@@"
-
-_LavenderHouse1Text4: ; 99f85 (26:5f85)
-	db $0, "NIDORINO: Gaoo!@@"
-
-_UnnamedText_1d94c: ; 99f97 (26:5f97)
-	db $0, "MR.FUJI: ", $52, ".", $51
-	db "Your #DEX quest", $4f
-	db "may fail without", $55
-	db "love for your", $55
-	db "#MON.", $51
-	db "I think this may", $4f
-	db "help your quest.", $58
-
-_ReceivedFluteText: ; 99ffb (26:5ffb)
-	db $0, $52, " received", $4f
-	db "a @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_FluteExplanationText: ; 9a011 (26:6011)
-	db $0, $51
-	db "Upon hearing #", $4f
-	db "FLUTE, sleeping", $55
-	db "#MON will", $55
-	db "spring awake.", $51
-	db "It works on all", $4f
-	db "sleeping #MON.", $57
-
-_FluteNoRoomText: ; 9a069 (26:6069)
-	db $0, "You must make", $4f
-	db "room for this!", $57
-
-_MrFujiAfterFluteText: ; 9a087 (26:6087)
-	db $0, "MR.FUJI: Has my", $4f
-	db "FLUTE helped you?", $57
-
-_LavenderHouse1Text6: ; 9a0aa (26:60aa)
-	db $0, "#MON Monthly", $4f
-	db "Grand Prize", $55
-	db "Drawing!", $51
-	db "The application", $4f
-	db "form is...", $51
-	db "Gone! It's been", $4f
-	db "clipped out!", $57
-
-_LavenderMartText2: ; 9a104 (26:6104)
-	db $0, "I'm searching for", $4f
-	db "items that raise", $55
-	db "the abilities of", $55
-	db "#MON during a", $55
-	db "single battle.", $51
-	db "X ATTACK, X", $4f
-	db "DEFEND, X SPEED", $55
-	db "and X SPECIAL are", $55
-	db "what I'm after.", $51
-	db "Do you know where", $4f
-	db "I can get them?", $57
-
-_UnnamedText_5c953: ; 9a1b4 (26:61b4)
-	db $0, "You know REVIVE?", $4f
-	db "It revives any", $55
-	db "fainted #MON!", $57
-
-_UnnamedText_5c958: ; 9a1e3 (26:61e3)
-	db $0, "I found a NUGGET", $4f
-	db "in the mountains.", $51
-	db "I thought it was", $4f
-	db "useless, but it", $55
-	db "sold for ¥5000!", $57
-
-_LavenderHouse2Text1: ; 9a238 (26:6238)
-	db $0, "CUBONE: Kyarugoo!@@"
-
-_UnnamedText_1d9dc: ; 9a24c (26:624c)
-	db $0, "I hate those", $4f
-	db "horrible ROCKETs!", $51
-	db "That poor CUBONE's", $4f
-	db "mother...", $51
-	db "It was killed", $4f
-	db "trying to escape", $55
-	db "from TEAM ROCKET!", $57
-
-_UnnamedText_1d9e1: ; 9a2b9 (26:62b9)
-	db $0, "The GHOST of", $4f
-	db "#MON TOWER is", $55
-	db "gone!", $51
-	db "Someone must have", $4f
-	db "soothed its", $55
-	db "restless soul!", $57
-
-_UnnamedText_1dab3: ; 9a308 (26:6308)
-	db $0, "Hello, hello!", $4f
-	db "I am the official", $55
-	db "NAME RATER!", $51
-	db "Want me to rate", $4f
-	db "the nicknames of", $55
-	db "your #MON?", $57
-
-_UnnamedText_1dab8: ; 9a361 (26:6361)
-	db $0, "Which #MON", $4f
-	db "should I look at?", $58
-
-_UnnamedText_1dabd: ; 9a37f (26:637f)
-	TX_RAM $cd6d
-	db $0, ", is it?", $4f
-	db "That is a decent", $55
-	db "nickname!", $51
-	db "But, would you", $4f
-	db "like me to give", $55
-	db "it a nicer name?", $51
-	db "How about it?", $57
-
-_UnnamedText_1dac2: ; 9a3e5 (26:63e5)
-	db $0, "Fine! What should", $4f
-	db "we name it?", $58
-
-_UnnamedText_1dac7: ; 9a404 (26:6404)
-	db $0, "OK! This #MON", $4f
-	db "has been renamed", $55
-	db "@"
-
-UnnamedText_9a425: ; 9a425 (26:6425)
-	TX_RAM $cee9
-	db $0, "!", $51
-	db "That's a better", $4f
-	db "name than before!", $57
-
-_UnnamedText_1dacc: ; 9a44c (26:644c)
-	db $0, "Fine! Come any", $4f
-	db "time you like!", $57
-
-_UnnamedText_1dad1: ; 9a46b (26:646b)
-	TX_RAM $cd6d
-	db $0, ", is it?", $4f
-	db "That is a truly", $55
-	db "impeccable name!", $51
-	db "Take good care of", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!", $57
-
-_VermilionPokecenterText2: ; 9a4b2 (26:64b2)
-_VermilionPokecenterText1: ; 9a4b2 (26:64b2)
-	db $0, "Even if they are", $4f
-	db "the same level,", $55
-	db "#MON can have", $55
-	db "very different", $55
-	db "abilities.", $51
-	db "A #MON raised", $4f
-	db "by a trainer is", $55
-	db "stronger than one", $55
-	db "in the wild.", $57
-
-_VermilionPokecenterText3: ; 9a539 (26:6539)
-	db $0, "My #MON was", $4f
-	db "poisoned! It", $55
-	db "fainted while we", $55
-	db "were walking!", $57
-
-_UnnamedText_59bb7: ; 9a572 (26:6572)
-	db $0, "Won't you admire", $4f
-	db "my PIKACHU's", $55
-	db "adorable tail?", $57
-
-_UnnamedText_59bbc: ; 9a59e (26:659e)
-	db $0, "Humph! My PIKACHU", $4f
-	db "is twice as cute", $55
-	db "as that one!", $57
-
-_UnnamedText_59be4: ; 9a5cf (26:65cf)
-	db $0, "I just love my", $4f
-	db "SEEL!", $51
-	db "It squeals when I", $4f
-	db "hug it!", $57
-
-_UnnamedText_59be9: ; 9a5ff (26:65ff)
-	db $0, "Oh dear!", $51
-	db "My SEEL is far", $4f
-	db "more attractive!", $57
-
-_UnnamedText_59c00: ; 9a629 (26:6629)
-	db $0, "PIKACHU: Chu!", $4f
-	db "Pikachu!", $57
-
-_UnnamedText_59c17: ; 9a641 (26:6641)
-	db $0, "SEEL: Kyuoo!", $57
-
-_UnnamedText_59c65: ; 9a64f (26:664f)
-	db $0, "I chair the", $4f
-	db "#MON Fan Club!", $51
-	db "I have collected", $4f
-	db "over 100 #MON!", $51
-	db "I'm very fussy", $4f
-	db "when it comes to", $55
-	db "#MON!", $51
-	db "So...", $51
-	db "Did you come", $4f
-	db "visit to hear", $55
-	db "about my #MON?", $57
-
-_UnnamedText_59c6a: ; 9a6e0 (26:66e0)
-	db $0, "Good!", $4f
-	db "Then listen up!", $51
-	db "My favorite", $4f
-	db "RAPIDASH...", $51
-	db "It...cute...", $4f
-	db "lovely...smart...", $55
-	db "plus...amazing...", $55
-	db "you think so?...", $55
-	db "oh yes...it...", $55
-	db "stunning...", $55
-	db "kindly...", $55
-	db "love it!", $51
-	db "Hug it...when...", $55
-	db "sleeping...warm", $55
-	db "and cuddly...", $55
-	db "spectacular...", $55
-	db "ravishing...", $55
-	db "...Oops! Look at", $55
-	db "the time! I kept", $55
-	db "you too long!", $51
-	db "Thanks for hearing", $4f
-	db "me out! I want", $55
-	db "you to have this!", $58
-
-_ReceivedBikeVoucherText: ; 9a82e (26:682e)
-	db $0, $52, " received", $4f
-	db "a @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_59c74: ; 9a844 (26:6844)
-	db $0, $51
-	db "Exchange that for", $4f
-	db "a BICYCLE!", $51
-	db "Don't worry, my", $4f
-	db "FEAROW will FLY", $55
-	db "me anywhere!", $51
-	db "So, I don't need a", $4f
-	db "BICYCLE!", $51
-	db "I hope you like", $4f
-	db "cycling!", $57
-
-_UnnamedText_59c79: ; 9a8c3 (26:68c3)
-	db $0, "Oh. Come back", $4f
-	db "when you want to", $55
-	db "hear my story!", $57
-
-_UnnamedText_59c7e: ; 9a8f2 (26:68f2)
-	db $0, "Hello, ", $52, "!", $51
-	db "Did you come see", $4f
-	db "me about my", $55
-	db "#MON again?", $51
-	db "No? Too bad!", $57
-
-_UnnamedText_59c83: ; 9a933 (26:6933)
-	db $0, "Make room for", $4f
-	db "this!", $57
-
-_FanClubText6: ; 9a948 (26:6948)
-	db $0, "Our Chairman is", $4f
-	db "very vocal about", $55
-	db "#MON.", $57
-
-_FanClubText7: ; 9a970 (26:6970)
-	db $0, "Let's all listen", $4f
-	db "politely to other", $55
-	db "trainers!", $57
-
-_FanClubText8: ; 9a99d (26:699d)
-	db $0, "If someone brags,", $4f
-	db "brag right back!", $57
-
-_VermilionMartText2: ; 9a9c1 (26:69c1)
-	db $0, "There are evil", $4f
-	db "people who will", $55
-	db "use #MON for", $55
-	db "criminal acts.", $51
-	db "TEAM ROCKET", $4f
-	db "traffics in rare", $55
-	db "#MON.", $51
-	db "They also abandon", $4f
-	db "#MON that they", $55
-	db "consider not to", $55
-	db "be popular or", $55
-	db "useful.", $57
-
-_VermilionMartText3: ; 9aa67 (26:6a67)
-	db $0, "I think #MON", $4f
-	db "can be good or", $55
-	db "evil. It depends", $55
-	db "on the trainer.", $57
-
-_UnnamedText_5cb6d: ; 9aaa5 (26:6aa5)
-	db $0, "Hey, kid! What do", $4f
-	db "you think you're", $55
-	db "doing here?", $51
-	db "You won't live", $4f
-	db "long in combat!", $55
-	db "That's for sure!", $51
-	db "I tell you kid,", $4f
-	db "electric #MON", $55
-	db "saved me during", $55
-	db "the war!", $51
-	db "They zapped my", $4f
-	db "enemies into", $55
-	db "paralysis!", $51
-	db "The same as I'll", $4f
-	db "do to you!", $57
-
-SECTION "bank27",ROMX,BANK[$27]
-
-_UnnamedText_5cb72: ; 9c000 (27:4000)
-	db $0, "A little word of", $4f
-	db "advice, kid!", $51
-	db "Electricity is", $4f
-	db "sure powerful!", $51
-	db "But, it's useless", $4f
-	db "against ground-", $55
-	db "type #MON!", $57
-
-_UnnamedText_5cb77: ; 9c069 (27:4069)
-	db $0, "The THUNDERBADGE", $4f
-	db "cranks up your", $55
-	db "#MON's SPEED!", $51
-	db "It also lets your", $4f
-	db "#MON FLY any", $55
-	db "time, kid!", $51
-	db "You're special,", $4f
-	db "kid! Take this!", $57
-
-_ReceivedTM24Text: ; 9c0e0 (27:40e0)
-	db $0, $52, " received ", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM24ExplanationText: ; 9c0f5 (27:40f5)
-	db $0, $51
-	db "TM24 contains", $4f
-	db "THUNDERBOLT!", $51
-	db "Teach it to an", $4f
-	db "electric #MON!", $57
-
-_TM24NoRoomText: ; 9c130 (27:4130)
-	db $0, "Yo kid, make room", $4f
-	db "in your pack!", $57
-
-_ReceivedThunderbadgeText: ; 9c151 (27:4151)
-	db $0, "Whoa!", $51
-	db "You're the real", $4f
-	db "deal, kid!", $51
-	db "Fine then, take", $4f
-	db "the THUNDERBADGE!", $58
-
-_VermilionGymBattleText1: ; 9c194 (27:4194)
-	db $0, "When I was in the", $4f
-	db "Army, LT.SURGE", $55
-	db "was my strict CO!", $57
-
-_VermilionGymEndBattleText1: ; 9c1c8 (27:41c8)
-	db $0, "Stop!", $4f
-	db "You're very good!", $58
-
-_VermilionGymAfterBattleText1: ; 9c1e0 (27:41e0)
-	db $0, "The door won't", $4f
-	db "open?", $51
-	db "LT.SURGE always", $4f
-	db "was cautious!", $57
-
-_VermilionGymBattleText2: ; 9c213 (27:4213)
-	db $0, "I'm a lightweight,", $4f
-	db "but I'm good with", $55
-	db "electricity!", $57
-
-_VermilionGymEndBattleText2: ; 9c244 (27:4244)
-	db $0, "Fried!", $58
-
-_VermilionGymAfterBattleText2: ; 9c24c (27:424c)
-	db $0, "OK, I'll talk!", $51
-	db "LT.SURGE said he", $4f
-	db "hid door switches", $55
-	db "inside something!", $57
-
-_VermilionGymBattleText3: ; 9c290 (27:4290)
-	db $0, "This is no place", $4f
-	db "for kids!", $57
-
-_VermilionGymEndBattleText3: ; 9c2ac (27:42ac)
-	db $0, "Wow!", $4f
-	db "Surprised me!", $58
-
-_VermilionGymAfterBattleText3: ; 9c2c0 (27:42c0)
-	db $0, "LT.SURGE set up", $4f
-	db "double locks!", $55
-	db "Here's a hint!", $51
-	db "When you open the", $4f
-	db "1st lock, the 2nd", $55
-	db "lock is right", $55
-	db "next to it!", $57
-
-_UnnamedText_5cbf4: ; 9c32b (27:432b)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "LT.SURGE has a", $4f
-	db "nickname. People", $55
-	db "refer to him as", $55
-	db "the Lightning", $55
-	db "American!", $51
-	db "He's an expert on", $4f
-	db "electric #MON!", $51
-	db "Birds and water", $4f
-	db "#MON are at", $55
-	db "risk! Beware of", $55
-	db "paralysis too!", $51
-	db "LT.SURGE is very", $4f
-	db "cautious!", $51
-	db "You'll have to", $4f
-	db "break a code to", $55
-	db "get to him!", $57
-
-_UnnamedText_5cbf9: ; 9c429 (27:4429)
-	db $0, "Whew! That match", $4f
-	db "was electric!", $57
-
-_VermilionHouse1Text1: ; 9c449 (27:4449)
-	db $0, "I'm getting my", $4f
-	db "PIDGEY to fly a", $55
-	db "letter to SAFFRON", $55
-	db "in the north!", $57
-
-_VermilionHouse1Text2: ; 9c488 (27:4488)
-	db $0, "PIDGEY: Kurukkoo!@@"
-
-_VermilionHouse1Text3: ; 9c49c (27:449c)
-	db $0, "Dear PIPPI, I hope", $4f
-	db "to see you soon.", $51
-	db "I heard SAFFRON", $4f
-	db "has problems with", $55
-	db "TEAM ROCKET.", $51
-	db "VERMILION appears", $4f
-	db "to be safe.", $57
-
-_VermilionDockText1: ; 9c50e (27:450e)
-	db $0, $57
-
-_UnnamedText_560b1: ; 9c510 (27:4510)
-	db $0, "I'm the FISHING", $4f
-	db "GURU!", $51
-	db "I simply Looove", $4f
-	db "fishing!", $51
-	db "Do you like to", $4f
-	db "fish?", $57
-
-_UnnamedText_560b6: ; 9c554 (27:4554)
-	db $0, "Grand! I like", $4f
-	db "your style!", $51
-	db "Take this and", $4f
-	db "fish, young one!", $51
-	db $52, " received", $4f
-	db "an @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_560bb: ; 9c5a4 (27:45a4)
-	db $0, $51
-	db "Fishing is a way", $4f
-	db "of life!", $51
-	db "From the seas to", $4f
-	db "rivers, go out", $55
-	db "and land the big", $55
-	db "one, young one!", $57
-
-_UnnamedText_560c0: ; 9c601 (27:4601)
-	db $0, "Oh... That's so", $4f
-	db "disappointing...", $57
-
-_UnnamedText_560c5: ; 9c622 (27:4622)
-	db $0, "Hello there,", $4f
-	db $52, "!", $51
-	db "How are the fish", $4f
-	db "biting?", $57
-
-_UnnamedText_560ca: ; 9c64c (27:464c)
-	db $0, "Oh no!", $51
-	db "You have no room", $4f
-	db "for my gift!", $57
-
-_CeladonMart1Text1: ; 9c672 (27:4672)
-	db $0, "Hello! Welcome to", $4f
-	db "CELADON DEPT.", $55
-	db "STORE.", $51
-	db "The board on the", $4f
-	db "right describes", $55
-	db "the store layout.", $57
-
-_CeladonMart1Text2: ; 9c6cd (27:46cd)
-	db $0, "1F: SERVICE", $4f
-	db "    COUNTER", $51
-	db "2F: TRAINER'S", $4f
-	db "    MARKET", $51
-	db "3F: TV GAME SHOP", $51
-	db "4F: WISEMAN GIFTS", $51
-	db "5F: DRUG STORE", $51
-	db "ROOFTOP SQUARE:", $4f
-	db "VENDING MACHINES", $57
-
-_CeladonMart1Text3: ; 9c752 (27:4752)
-	db $0, "1F: SERVICE", $4f
-	db "    COUNTER", $57
-
-_CeladonMart2Text3: ; 9c76b (27:476b)
-	db $0, "SUPER REPEL keeps", $4f
-	db "weak #MON at", $55
-	db "bay...", $51
-	db "Hmm, it's a more", $4f
-	db "powerful REPEL!", $57
-
-_CeladonMart2Text4: ; 9c7b2 (27:47b2)
-	db $0, "For long outings,", $4f
-	db "you should buy", $55
-	db "REVIVE.", $57
-
-_CeladonMart2Text5: ; 9c7dc (27:47dc)
-	db $0, "Top Grade Items", $4f
-	db "for Trainers!", $51
-	db "2F: TRAINER'S", $4f
-	db "    MARKET", $57
-
-_TM18PreReceiveText: ; 9c814 (27:4814)
-	db $0, "Oh, hi! I finally", $4f
-	db "finished #MON!", $51
-	db "Not done yet?", $4f
-	db "This might be", $55
-	db "useful!", $58
-
-_ReceivedTM18Text: ; 9c85a (27:485a)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM18ExplanationText: ; 9c86e (27:486e)
-	db $0, "TM18 is COUNTER!", $4f
-	db "Not like the one", $55
-	db "I'm leaning on,", $55
-	db "mind you!", $57
-
-_TM18NoRoomText: ; 9c8aa (27:48aa)
-	db $0, "Your pack is full", $4f
-	db "of items!", $57
-
-_CeladonMart3Text2: ; 9c8c7 (27:48c7)
-	db $0, "Captured #MON", $4f
-	db "are registered", $55
-	db "with an ID No.", $55
-	db "and OT, the name", $55
-	db "of the Original", $55
-	db "Trainer that", $55
-	db "caught it!", $57
-
-_CeladonMart3Text3: ; 9c92d (27:492d)
-	db $0, "All right!", $51
-	db "My buddy's going", $4f
-	db "to trade me his", $55
-	db "KANGASKHAN for my", $55
-	db "GRAVELER!", $57
-
-_CeladonMart3Text4: ; 9c975 (27:4975)
-	db $0, "Come on GRAVELER!", $51
-	db "I love GRAVELER!", $4f
-	db "I collect them!", $51
-	db "Huh?", $51
-	db "GRAVELER turned", $4f
-	db "into a different", $55
-	db "#MON!", $57
-
-_CeladonMart3Text5: ; 9c9d5 (27:49d5)
-	db $0, "You can identify", $4f
-	db "#MON you got", $55
-	db "in trades by", $55
-	db "their ID Numbers!", $57
-
-_CeladonMart3Text6: ; 9ca13 (27:4a13)
-	db $0, "It's an SNES!", $57
-
-_CeladonMart3Text7: ; 9ca21 (27:4a21)
-	db $0, "An RPG! There's", $4f
-	db "no time for that!", $57
-
-_CeladonMart3Text9: ; 9ca43 (27:4a43)
-	db $0, "A sports game!", $4f
-	db "Dad'll like that!", $57
-
-_CeladonMart3Text11: ; 9ca64 (27:4a64)
-	db $0, "A puzzle game!", $4f
-	db "Looks addictive!", $57
-
-_CeladonMart3Text13: ; 9ca85 (27:4a85)
-	db $0, "A fighting game!", $4f
-	db "Looks tough!", $57
-
-_CeladonMart3Text14: ; 9caa4 (27:4aa4)
-	db $0, "3F: TV GAME SHOP", $57
-
-_CeladonMart3Text15: ; 9cab6 (27:4ab6)
-	db $0, "Red and Blue!", $4f
-	db "Both are #MON!", $57
-
-_CeladonMart4Text2: ; 9cad4 (27:4ad4)
-	db $0, "I'm getting a", $4f
-	db "# DOLL for my", $55
-	db "girl friend!", $57
-
-_CeladonMart4Text3: ; 9cafd (27:4afd)
-	db $0, "I heard something", $4f
-	db "useful.", $51
-	db "You can run from", $4f
-	db "wild #MON by", $55
-	db "distracting them", $55
-	db "with a # DOLL!", $57
-
-_CeladonMart4Text4: ; 9cb56 (27:4b56)
-	db $0, "Express yourself", $4f
-	db "with gifts!", $51
-	db "4F: WISEMAN GIFTS", $51
-	db "Evolution Special!", $4f
-	db "Element STONEs on", $55
-	db "sale now!", $57
-
-_UnnamedText_484ee: ; 9cbb5 (27:4bb5)
-	db $0, "Give her which", $4f
-	db "drink?", $57
-
-_UnnamedText_484f3: ; 9cbcc (27:4bcc)
-	db $0, "Yay!", $51
-	db "FRESH WATER!", $51
-	db "Thank you!", $51
-	db "You can have this", $4f
-	db "from me!@@"
-
-_UnnamedText_484f9: ; 9cc06 (27:4c06)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_484fe: ; 9cc1a (27:4c1a)
-	db $0, $51
-	db "@"
-	TX_RAM $cf4b
-	db $0, " contains", $4f
-	db "ICE BEAM!", $51
-	db "It can freeze the", $4f
-	db "target sometimes!@@"
-
-_UnnamedText_48504: ; 9cc5a (27:4c5a)
-	db $0, "Yay!", $51
-	db "SODA POP!", $51
-	db "Thank you!", $51
-	db "You can have this", $4f
-	db "from me!@@"
-
-_UnnamedText_4850a: ; 9cc91 (27:4c91)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_4850f: ; 9cca5 (27:4ca5)
-	db $0, $51
-	db "@"
-	TX_RAM $cf4b
-	db $0, " contains", $4f
-	db "ROCK SLIDE!", $51
-	db "It can spook the", $4f
-	db "target sometimes!@@"
-
-_UnnamedText_48515: ; 9cce6 (27:4ce6)
-	db $0, "Yay!", $51
-	db "LEMONADE!", $51
-	db "Thank you!", $51
-	db "You can have this", $4f
-	db "from me!@@"
-
-_ReceivedTM49Text: ; 9cd1d (27:4d1d)
-	db $0, $52, " received", $4f
-	db "TM49!@@"
-
-_UnnamedText_48520: ; 9cd30 (27:4d30)
-	db $0, $51
-	db "TM49 contains", $4f
-	db "TRI ATTACK!@@"
-
-_UnnamedText_48526: ; 9cd4d (27:4d4d)
-	db $0, "You don't have", $4f
-	db "space for this!@@"
-
-_UnnamedText_4852c: ; 9cd6d (27:4d6d)
-	db $0, "No thank you!", $4f
-	db "I'm not thirsty", $55
-	db "after all!@@"
-
-_CeladonMartRoofText1: ; 9cd97 (27:4d97)
-	db $0, "My sister is a", $4f
-	db "trainer, believe", $55
-	db "it or not.", $51
-	db "But, she's so", $4f
-	db "immature, she", $55
-	db "drives me nuts!", $57
-
-_UnnamedText_48598: ; 9cdee (27:4dee)
-	db $0, "I'm thirsty!", $4f
-	db "I want something", $55
-	db "to drink!", $57
-
-_CeladonMartRoofText4: ; 9ce16 (27:4e16)
-	db $0, "I'm thirsty!", $4f
-	db "I want something", $55
-	db "to drink!", $51
-	db "Give her a drink?", $57
-
-_CeladonMartRoofText6: ; 9ce50 (27:4e50)
-	db $0, "ROOFTOP SQUARE:", $4f
-	db "VENDING MACHINES", $57
-
-_VendingMachineText1: ; 9ce72 (27:4e72)
-	db $0, "A vending machine!", $4f
-	db "Here's the menu!", $58
-
-_VendingMachineText4: ; 9ce96 (27:4e96)
-	db $0, "Oops, not enough", $4f
-	db "money!", $57
-
-_VendingMachineText5: ; 9ceaf (27:4eaf)
-	TX_RAM $cf4b
-	db $0, $4f
-	db "popped out!", $57
-
-_VendingMachineText6: ; 9cec0 (27:4ec0)
-	db $0, "There's no more", $4f
-	db "room for stuff!", $57
-
-_VendingMachineText7: ; 9cee0 (27:4ee0)
-	db $0, "Not thirsty!", $57
-
-_CeladonMansion1Text1: ; 9ceee (27:4eee)
-	db $0, "MEOWTH: Meow!@@"
-
-_CeladonMansion1Text2: ; 9cefe (27:4efe)
-	db $0, "My dear #MON", $4f
-	db "keep me company.", $51
-	db "MEOWTH even brings", $4f
-	db "money home!", $57
-
-_CeladonMansion1Text3: ; 9cf3c (27:4f3c)
-	db $0, "CLEFAIRY: Pi", $4f
-	db "pippippi!@@"
-
-_CeladonMansion1Text4: ; 9cf55 (27:4f55)
-	db $0, "NIDORAN: Kya", $4f
-	db "kyaoo!@@"
-
-_CeladonMansion1Text5: ; 9cf6b (27:4f6b)
-	db $0, "CELADON MANSION", $4f
-	db "Manager's Suite", $57
-
-_CeladonMansion2Text1: ; 9cf8b (27:4f8b)
-	db $0, "GAME FREAK", $4f
-	db "Meeting Room", $57
-
-_ProgrammerText: ; 9cfa4 (27:4fa4)
-	db $0, "Me? I'm the", $4f
-	db "programmer!", $57
-
-_GraphicArtistText: ; 9cfbc (27:4fbc)
-	db $0, "I'm the graphic", $4f
-	db "artist!", $55
-	db "I drew you!", $57
-
-_WriterText: ; 9cfe0 (27:4fe0)
-	db $0, "I wrote the story!", $4f
-	db "Isn't ERIKA cute?", $51
-	db "I like MISTY a", $4f
-	db "lot too!", $51
-	db "Oh, and SABRINA,", $4f
-	db "I like her!", $57
-
-_GameDesignerText: ; 9d03a (27:503a)
-	db $0, "Is that right?", $51
-	db "I'm the game", $4f
-	db "designer!", $51
-	db "Filling up your", $4f
-	db "#DEX is tough,", $55
-	db "but don't quit!", $51
-	db "When you finish,", $4f
-	db "come tell me!", $57
-
-_CompletedDexText: ; 9d0ad (27:50ad)
-	db $0, "Wow! Excellent!", $4f
-	db "You completed", $55
-	db "your #DEX!", $55
-	db "Congratulations!", $55
-	db "...@@"
-
-_CeladonMansion3Text5: ; 9d0ed (27:50ed)
-	db $0, "It's the game", $4f
-	db "program! Messing", $55
-	db "with it could bug", $55
-	db "out the game!", $57
-
-_CeladonMansion3Text6: ; 9d12c (27:512c)
-	db $0, "Someone's playing", $4f
-	db "a game instead of", $55
-	db "working!", $57
-
-_CeladonMansion3Text7: ; 9d159 (27:5159)
-	db $0, "It's the script!", $4f
-	db "Better not look", $55
-	db "at the ending!", $57
-
-_CeladonMansion3Text8: ; 9d189 (27:5189)
-	db $0, "GAME FREAK", $4f
-	db "Development Room", $57
-
-_CeladonMansion4Text1: ; 9d1a6 (27:51a6)
-	db $0, "I KNOW EVERYTHING!", $57
-
-_CeladonMansion5Text1: ; 9d1ba (27:51ba)
-	db $0, "I know everything", $4f
-	db "about the world", $55
-	db "of #MON in", $55
-	db "your GAME BOY!", $51
-	db "Get together with", $4f
-	db "your friends and", $55
-	db "trade #MON!", $57
-
-_CeladonPokecenterText2: ; 9d226 (27:5226)
-	db $0, "# FLUTE awakens", $4f
-	db "#MON with a", $55
-	db "sound that only", $55
-	db "they can hear!", $57
-
-_CeladonPokecenterText3: ; 9d262 (27:5262)
-	db $0, "I rode uphill on", $4f
-	db "CYCLING ROAD from", $55
-	db "FUCHSIA!", $57
-
-_UnnamedText_48a5e: ; 9d28f (27:528f)
-	db $0, "Hello. Lovely", $4f
-	db "weather isn't it?", $55
-	db "It's so pleasant.", $51
-	db "...Oh dear...", $4f
-	db "I must have dozed", $55
-	db "off. Welcome.", $51
-	db "My name is ERIKA.", $4f
-	db "I am the LEADER", $55
-	db "of CELADON GYM.", $51
-	db "I teach the art of", $4f
-	db "flower arranging.", $55
-	db "My #MON are of", $55
-	db "the grass-type.", $51
-	db "Oh, I'm sorry, I", $4f
-	db "had no idea that", $55
-	db "you wished to", $55
-	db "challenge me.", $51
-	db "Very well, but I", $4f
-	db "shall not lose.", $57
-
-_UnnamedText_48a63: ; 9d3c2 (27:53c2)
-	db $0, "Oh!", $4f
-	db "I concede defeat.", $51
-	db "You are remarkably", $4f
-	db "strong.", $51
-	db "I must confer you", $4f
-	db "the RAINBOWBADGE.", $58
-
-_UnnamedText_48a68: ; 9d418 (27:5418)
-	db $0, "You are cataloging", $4f
-	db "#MON? I must", $55
-	db "say I'm impressed.", $51
-	db "I would never", $4f
-	db "collect #MON", $55
-	db "if they were", $55
-	db "unattractive.", $57
-
-_UnnamedText_48a6d: ; 9d481 (27:5481)
-	db $0, "The RAINBOWBADGE", $4f
-	db "will make #MON", $55
-	db "up to L50 obey.", $51
-	db "It also allows", $4f
-	db "#MON to use", $55
-	db "STRENGTH in and", $55
-	db "out of battle.", $51
-	db "Please also take", $4f
-	db "this with you.", $57
-
-_ReceivedTM21Text: ; 9d50c (27:550c)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM21ExplanationText: ; 9d520 (27:5520)
-	db $0, $51
-	db "TM21 contains", $4f
-	db "MEGA DRAIN.", $51
-	db "Half the damage", $4f
-	db "it inflicts is", $55
-	db "drained to heal", $55
-	db "your #MON!", $57
-
-_TM21NoRoomText: ; 9d576 (27:5576)
-	db $0, "You should make", $4f
-	db "room for this.", $57
-
-_CeladonGymBattleText2: ; 9d596 (27:5596)
-	db $0, "Hey!", $51
-	db "You are not", $4f
-	db "allowed in here!", $57
-
-_CeladonGymEndBattleText2: ; 9d5b9 (27:55b9)
-	db $0, "You're", $4f
-	db "too rough!", $58
-
-_CeladonGymAfterBattleText2: ; 9d5cb (27:55cb)
-	db $0, "Bleaah!", $4f
-	db "I hope ERIKA", $55
-	db "wipes you out!", $57
-
-_CeladonGymBattleText3: ; 9d5f0 (27:55f0)
-	db $0, "I was getting", $4f
-	db "bored.", $57
-
-_CeladonGymEndBattleText3: ; 9d606 (27:5606)
-	db $0, "My", $4f
-	db "makeup!", $58
-
-_CeladonGymAfterBattleText3: ; 9d612 (27:5612)
-	db $0, "Grass-type #MON", $4f
-	db "are tough against", $55
-	db "the water-type!", $51
-	db "They also have an", $4f
-	db "edge on rock and", $55
-	db "ground #MON!", $57
-
-_CeladonGymBattleText4: ; 9d675 (27:5675)
-	db $0, "Aren't you the", $4f
-	db "peeping Tom?", $57
-
-_CeladonGymEndBattleText4: ; 9d691 (27:5691)
-	db $0, "I'm", $4f
-	db "in shock!", $58
-
-_CeladonGymAfterBattleText4: ; 9d69f (27:569f)
-	db $0, "Oh, you weren't", $4f
-	db "peeping? We get a", $55
-	db "lot of gawkers!", $57
-
-_CeladonGymBattleText5: ; 9d6d1 (27:56d1)
-	db $0, "Look at my grass", $4f
-	db "#MON!", $51
-	db "They're so easy", $4f
-	db "to raise!", $57
-
-_CeladonGymEndBattleText5: ; 9d702 (27:5702)
-	db $0, "No!", $58
-
-_CeladonGymAfterBattleText5: ; 9d707 (27:5707)
-	db $0, "We only use grass-", $4f
-	db "type #MON at", $55
-	db "our GYM!", $51
-	db "We also use them", $4f
-	db "for making flower", $55
-	db "arrangements!", $57
-
-_CeladonGymBattleText6: ; 9d762 (27:5762)
-	db $0, "Don't bring any", $4f
-	db "bugs or fire", $55
-	db "#MON in here!", $57
-
-_CeladonGymEndBattleText6: ; 9d78d (27:578d)
-	db $0, "Oh!", $4f
-	db "You!", $58
-
-_CeladonGymAfterBattleText6: ; 9d797 (27:5797)
-	db $0, "Our LEADER, ERIKA,", $4f
-	db "might be quiet,", $55
-	db "but she's also", $55
-	db "very skilled!", $57
-
-_CeladonGymBattleText7: ; 9d7d7 (27:57d7)
-	db $0, "Pleased to meet", $4f
-	db "you. My hobby is", $55
-	db "#MON training.", $57
-
-_CeladonGymEndBattleText7: ; 9d808 (27:5808)
-	db $0, "Oh!", $4f
-	db "Splendid!", $58
-
-_CeladonGymAfterBattleText7: ; 9d817 (27:5817)
-	db $0, "I have a blind", $4f
-	db "date coming up.", $55
-	db "I have to learn", $55
-	db "to be polite.", $57
-
-_CeladonGymBattleText8: ; 9d855 (27:5855)
-	db $0, "Welcome to", $4f
-	db "CELADON GYM!", $51
-	db "You better not", $4f
-	db "underestimate", $55
-	db "girl power!", $57
-
-_CeladonGymEndBattleText8: ; 9d897 (27:5897)
-	db $0, "Oh!", $4f
-	db "Beaten!", $58
-
-_CeladonGymAfterBattleText8: ; 9d8a4 (27:58a4)
-	db $0, "I didn't bring my", $4f
-	db "best #MON!", $51
-	db "Wait 'til next", $4f
-	db "time!", $57
-
-_CeladonGameCornerText1: ; 9d8d5 (27:58d5)
-	db $0, "Welcome!", $51
-	db "You can exchange", $4f
-	db "your coins for", $55
-	db "fabulous prizes", $55
-	db "next door.", $57
-
-_UnnamedText_48d22: ; 9d91a (27:591a)
-	db $0, "Welcome to ROCKET", $4f
-	db "GAME CORNER!", $51
-	db "Do you need some", $4f
-	db "game coins?", $51
-	db "It's ¥1000 for 50", $4f
-	db "coins. Would you", $55
-	db "like some?", $57
-
-_UnnamedText_48d27: ; 9d984 (27:5984)
-	db $0, "Thanks! Here are", $4f
-	db "your 50 coins!", $57
-
-_UnnamedText_48d2c: ; 9d9a5 (27:59a5)
-	db $0, "No? Please come", $4f
-	db "play sometime!", $57
-
-_UnnamedText_48d31: ; 9d9c5 (27:59c5)
-	db $0, "You can't afford", $4f
-	db "the coins!", $57
-
-_UnnamedText_48d36: ; 9d9e1 (27:59e1)
-	db $0, "Oops! Your COIN", $4f
-	db "CASE is full.", $57
-
-_UnnamedText_48d3b: ; 9da00 (27:5a00)
-	db $0, "You don't have a", $4f
-	db "COIN CASE!", $57
-
-_CeladonGameCornerText3: ; 9da1c (27:5a1c)
-	db $0, "Keep this quiet.", $51
-	db "It's rumored that", $4f
-	db "this place is run", $55
-	db "by TEAM ROCKET.", $57
-
-_CeladonGameCornerText4: ; 9da61 (27:5a61)
-	db $0, "I think these", $4f
-	db "machines have", $55
-	db "different odds.", $57
-
-_UnnamedText_48d9c: ; 9da8e (27:5a8e)
-	db $0, "Kid, do you want", $4f
-	db "to play?", $58
-
-_Received10CoinsText: ; 9daa9 (27:5aa9)
-	db $0, $52, " received", $4f
-	db "10 coins!@@"
-
-_UnnamedText_48da7: ; 9dac0 (27:5ac0)
-	db $0, "You don't need my", $4f
-	db "coins!", $57
-
-_UnnamedText_48dac: ; 9dad9 (27:5ad9)
-	db $0, "Wins seem to come", $4f
-	db "and go.", $57
-
-_CeladonGameCornerText6: ; 9daf4 (27:5af4)
-	db $0, "I'm having a", $4f
-	db "wonderful time!", $57
-
-_UnnamedText_48dca: ; 9db11 (27:5b11)
-	db $0, "Hey!", $51
-	db "You have better", $4f
-	db "things to do,", $55
-	db "champ in making!", $51
-	db "CELADON GYM's", $4f
-	db "LEADER is ERIKA!", $55
-	db "She uses grass-", $55
-	db "type #MON!", $51
-	db "She might appear", $4f
-	db "docile, but don't", $55
-	db "be fooled!", $57
-
-_UnnamedText_48dcf: ; 9dbac (27:5bac)
-	db $0, "They offer rare", $4f
-	db "#MON that can", $55
-	db "be exchanged for", $55
-	db "your coins.", $51
-	db "But, I just can't", $4f
-	db "seem to win!", $57
-
-_CeladonGameCornerText8: ; 9dc06 (27:5c06)
-	db $0, "Games are scary!", $4f
-	db "It's so easy to", $55
-	db "get hooked!", $57
-
-_UnnamedText_48e26: ; 9dc33 (27:5c33)
-	db $0, "What's up? Want", $4f
-	db "some coins?", $58
-
-_Received20CoinsText: ; 9dc4f (27:5c4f)
-	db $0, $52, " received", $4f
-	db "20 coins!@@"
-
-_UnnamedText_48e31: ; 9dc66 (27:5c66)
-	db $0, "You have lots of", $4f
-	db "coins!", $57
-
-_UnnamedText_48e36: ; 9dc7f (27:5c7f)
-	db $0, "Darn! I need more", $4f
-	db "coins for the", $55
-	db "#MON I want!", $57
-
-_UnnamedText_48e88: ; 9dcad (27:5cad)
-	db $0, "Hey, what? You're", $4f
-	db "throwing me off!", $55
-	db "Here are some", $55
-	db "coins, shoo!", $58
-
-_UnnamedText_48e8d: ; 9dceb (27:5ceb)
-	db $0, $52, " received", $4f
-	db "20 coins!@@"
-
-_UnnamedText_48e93: ; 9dd02 (27:5d02)
-	db $0, "You've got your", $4f
-	db "own coins!", $57
-
-_UnnamedText_48e98: ; 9dd1d (27:5d1d)
-	db $0, "The trick is to", $4f
-	db "watch the reels", $55
-	db "closely!", $57
-
-_UnnamedText_48ece: ; 9dd47 (27:5d47)
-	db $0, "I'm guarding this", $4f
-	db "poster!", $55
-	db "Go away, or else!", $57
-
-_UnnamedText_48ed3: ; 9dd73 (27:5d73)
-	db $0, "Dang!", $58
-
-_UnnamedText_48ed8: ; 9dd7a (27:5d7a)
-	db $0, "Our hideout might", $4f
-	db "be discovered! I", $55
-	db "better tell BOSS!", $57
-
-_UnnamedText_48f09: ; 9ddb0 (27:5db0)
-	db $0, "Hey!", $51
-	db "A switch behind", $4f
-	db "the poster!?", $55
-	db "Let's push it!@@"
-
-_UnnamedText_48f19: ; 9dde2 (27:5de2)
-	db $0, "Oops! Forgot the", $4f
-	db "COIN CASE!", $57
-
-_CeladonMart5Text1: ; 9ddff (27:5dff)
-	db $0, "#MON ability", $4f
-	db "enhancers can be", $55
-	db "bought only here.", $51
-	db "Use CALCIUM to", $4f
-	db "increase SPECIAL", $55
-	db "abilities.", $51
-	db "Use CARBOS to", $4f
-	db "increase SPEED.", $57
-
-_CeladonMart5Text2: ; 9de79 (27:5e79)
-	db $0, "I'm here for", $4f
-	db "#MON ability", $55
-	db "enhancers.", $51
-	db "PROTEIN increases", $4f
-	db "ATTACK power.", $51
-	db "IRON increases", $4f
-	db "DEFENSE!", $57
-
-_CeladonMart5Text5: ; 9ded6 (27:5ed6)
-	db $0, "5F: DRUG STORE", $57
-
-_CeladonPrizeRoomText1: ; 9dee6 (27:5ee6)
-	db $0, "I sure do fancy", $4f
-	db "that PORYGON!", $51
-	db "But, it's hard to", $4f
-	db "win at slots!", $57
-
-_CeladonPrizeRoomText2: ; 9df24 (27:5f24)
-	db $0, "I had a major", $4f
-	db "haul today!", $57
-
-_CeladonDinerText1: ; 9df3f (27:5f3f)
-	db $0, "Hi!", $51
-	db "We're taking a", $4f
-	db "break now.", $57
-
-_CeladonDinerText2: ; 9df5d (27:5f5d)
-	db $0, "My #MON are", $4f
-	db "weak, so I often", $55
-	db "have to go to the", $55
-	db "DRUG STORE.", $57
-
-_CeladonDinerText3: ; 9df99 (27:5f99)
-	db $0, "Psst! There's a", $4f
-	db "basement under", $55
-	db "the GAME CORNER.", $57
-
-_CeladonDinerText4: ; 9dfc9 (27:5fc9)
-	db $0, "Munch...", $51
-	db "The man at that", $4f
-	db "table lost it all", $55
-	db "at the slots.", $57
-
-_UnnamedText_491a7: ; 9e003 (27:6003)
-	db $0, "Go ahead! Laugh!", $51
-	db "I'm flat out", $4f
-	db "busted!", $51
-	db "No more slots for", $4f
-	db "me! I'm going", $55
-	db "straight!", $51
-	db "Here! I won't be", $4f
-	db "needing this any-", $55
-	db "more!", $58
-
-_ReceivedCoinCaseText: ; 9e07a (27:607a)
-	db $0, $52, " received", $4f
-	db "a @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_CoinCaseNoRoomText: ; 9e090 (27:6090)
-	db $0, "Make room for", $4f
-	db "this!", $57
-
-_UnnamedText_491b7: ; 9e0a5 (27:60a5)
-	db $0, "I always thought", $4f
-	db "I was going to", $55
-	db "win it back...", $57
-
-_CeladonHouseText1: ; 9e0d5 (27:60d5)
-	db $0, "Hehehe! The slots", $4f
-	db "just reel in the", $55
-	db "dough, big time!", $57
-
-_CeladonHouseText2: ; 9e10a (27:610a)
-	db $0, "CHIEF!", $51
-	db "We just shipped", $4f
-	db "2000 #MON as", $55
-	db "slot prizes!", $57
-
-_CeladonHouseText3: ; 9e13c (27:613c)
-	db $0, "Don't touch the", $4f
-	db "poster at the", $55
-	db "GAME CORNER!", $51
-	db "There's no secret", $4f
-	db "switch behind it!", $57
-
-_CeladonHotelText1: ; 9e18a (27:618a)
-	db $0, "#MON? No, this", $4f
-	db "is a hotel for", $55
-	db "people.", $51
-	db "We're full up.", $57
-
-_CeladonHotelText2: ; 9e1bf (27:61bf)
-	db $0, "I'm on vacation", $4f
-	db "with my brother", $55
-	db "and boy friend.", $51
-	db "CELADON is such a", $4f
-	db "pretty city!", $57
-
-_CeladonHotelText3: ; 9e20e (27:620e)
-	db $0, "Why did she bring", $4f
-	db "her brother?", $57
-
-_FuchsiaMartText2: ; 9e22e (27:622e)
-	db $0, "Do you have a", $4f
-	db "SAFARI ZONE flag?", $51
-	db "What about cards", $4f
-	db "or calendars?", $57
-
-_FuchsiaMartText3: ; 9e26e (27:626e)
-	db $0, "Did you try X", $4f
-	db "SPEED? It speeds", $55
-	db "up a #MON in", $55
-	db "battle!", $57
-
-_FuchsiaHouse1Text1: ; 9e2a3 (27:62a3)
-	db $0, "SAFARI ZONE's", $4f
-	db "WARDEN is old,", $55
-	db "but still active!", $51
-	db "All his teeth are", $4f
-	db "false, though.", $57
-
-_FuchsiaHouse1Text2: ; 9e2f3 (27:62f3)
-	db $0, "Hmm? You've met", $4f
-	db "BILL?", $51
-	db "He's my grandson!", $51
-	db "He always liked", $4f
-	db "collecting things", $55
-	db "even as a child!", $57
-
-_FuchsiaHouse1Text3: ; 9e34d (27:634d)
-	db $0, "BILL files his", $4f
-	db "own #MON data", $55
-	db "on his PC!", $51
-	db "Did he show you?", $57
-
-_FuchsiaPokecenterText1: ; 9e387 (27:6387)
-	db $0, "You can't win", $4f
-	db "with just one", $55
-	db "strong #MON.", $51
-	db "It's tough, but", $4f
-	db "you have to raise", $55
-	db "them evenly.", $57
-
-_FuchsiaPokecenterText3: ; 9e3de (27:63de)
-	db $0, "There's a narrow", $4f
-	db "trail west of", $55
-	db "VIRIDIAN CITY.", $51
-	db "It goes to #MON", $4f
-	db "LEAGUE HQ.", $55
-	db "The HQ governs", $55
-	db "all trainers.", $57
-
-_WardenGibberishText1: ; 9e444 (27:6444)
-	db $0, "WARDEN: Hif fuff", $4f
-	db "hefifoo!", $51
-	db "Ha lof ha feef ee", $4f
-	db "hafahi ho. Heff", $55
-	db "hee fwee!", $57
-
-_WardenGibberishText2: ; 9e48b (27:648b)
-	db $0, "Ah howhee ho hoo!", $4f
-	db "Eef ee hafahi ho!", $57
-
-_WardenGibberishText3: ; 9e4b0 (27:64b0)
-	db $0, "Ha? He ohay heh", $4f
-	db "ha hoo ee haheh!", $57
-
-_WardenTeethText1: ; 9e4d2 (27:64d2)
-	db $0, $52, " gave the", $4f
-	db "GOLD TEETH to the", $55
-	db "WARDEN!@@"
-
-_WardenTeethText2: ; 9e4f9 (27:64f9)
-	db $0, $51
-	db "The WARDEN popped", $4f
-	db "in his teeth!", $58
-
-_WardenThankYouText: ; 9e51b (27:651b)
-	db $0, "WARDEN: Thanks,", $4f
-	db "kid! No one could", $55
-	db "understand a word", $55
-	db "that I said.", $51
-	db "I couldn't work", $4f
-	db "that way.", $55
-	db "Let me give you", $55
-	db "something for", $55
-	db "your trouble.", $58
-
-_ReceivedHM04Text: ; 9e5a2 (27:65a2)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_HM04ExplanationText: ; 9e5b6 (27:65b6)
-	db $0, "WARDEN: HM04", $4f
-	db "teaches STRENGTH!", $51
-	db "It lets #MON", $4f
-	db "move boulders", $55
-	db "when you're out-", $55
-	db "side of battle.", $51
-	db "Oh yes, did you", $4f
-	db "find SECRET HOUSE", $55
-	db "in SAFARI ZONE?", $51
-	db "If you do, you", $4f
-	db "win an HM!", $51
-	db "I hear it's the", $4f
-	db "rare SURF HM.", $57
-
-_HM04NoRoomText: ; 9e67a (27:667a)
-	db $0, "Your pack is", $4f
-	db "stuffed full!", $57
-
-_UnnamedText_75176: ; 9e696 (27:6696)
-	db $0, "#MON photos", $4f
-	db "and fossils.", $57
-
-_UnnamedText_7517b: ; 9e6b0 (27:66b0)
-	db $0, "Old #MON", $4f
-	db "merchandise.", $57
-
-_SafariZoneEntranceText1: ; 9e6c7 (27:66c7)
-	db $0, "Welcome to the", $4f
-	db "SAFARI ZONE!", $57
-
-UnnamedText_9e6e4: ; 9e6e4 (27:66e4)
-	db $0, "For just ¥500,", $4f
-	db "you can catch all", $55
-	db "the #MON you", $55
-	db "want in the park!", $51
-	db "Would you like to", $4f
-	db "join the hunt?@@"
-
-UnnamedText_9e747: ; 9e747 (27:6747)
-	db $0, "That'll be ¥500", $4f
-	db "please!", $51
-	db "We only use a", $4f
-	db "special # BALL", $55
-	db "here.", $51
-	db $52, " received", $4f
-	db "30 SAFARI BALLs!@@"
-
-_UnnamedText_75360: ; 9e79f (27:679f)
-	db $0, $51
-	db "We'll call you on", $4f
-	db "the PA when you", $55
-	db "run out of time", $55
-	db "or SAFARI BALLs!", $57
-
-_UnnamedText_75365: ; 9e7e3 (27:67e3)
-	db $0, "OK! Please come", $4f
-	db "again!", $57
-
-_UnnamedText_7536a: ; 9e7fb (27:67fb)
-	db $0, "Oops! Not enough", $4f
-	db "money!", $57
-
-UnnamedText_9e814: ; 9e814 (27:6814)
-	db $0, "Leaving early?@@"
-
-_UnnamedText_753bb: ; 9e825 (27:6825)
-	db $0, "Please return any", $4f
-	db "SAFARI BALLs you", $55
-	db "have left.", $57
-
-_UnnamedText_753c0: ; 9e854 (27:6854)
-	db $0, "Good Luck!", $57
-
-_UnnamedText_753c5: ; 9e860 (27:6860)
-	db $0, "Did you get a", $4f
-	db "good haul?", $55
-	db "Come again!", $57
-
-_UnnamedText_753e6: ; 9e886 (27:6886)
-	db $0, "Hi! Is it your", $4f
-	db "first time here?", $57
-
-_UnnamedText_753eb: ; 9e8a7 (27:68a7)
-	db $0, "SAFARI ZONE has 4", $4f
-	db "zones in it.", $51
-	db "Each zone has", $4f
-	db "different kinds", $55
-	db "of #MON. Use", $55
-	db "SAFARI BALLs to", $55
-	db "catch them!", $51
-	db "When you run out", $4f
-	db "of time or SAFARI", $55
-	db "BALLs, it's game", $55
-	db "over for you!", $51
-	db "Before you go,", $4f
-	db "open an unused", $55
-	db "#MON BOX so", $55
-	db "there's room for", $55
-	db "new #MON!", $57
-
-_UnnamedText_753f0: ; 9e993 (27:6993)
-	db $0, "Sorry, you're a", $4f
-	db "regular here!", $57
-
-_UnnamedText_75581: ; 9e9b1 (27:69b1)
-	db $0, "KOGA: Fwahahaha!", $51
-	db "A mere child like", $4f
-	db "you dares to", $55
-	db "challenge me?", $51
-	db "Very well, I", $4f
-	db "shall show you", $55
-	db "true terror as a", $55
-	db "ninja master!", $51
-	db "You shall feel", $4f
-	db "the despair of", $55
-	db "poison and sleep", $55
-	db "techniques!", $57
-
-_UnnamedText_75586: ; 9ea66 (27:6a66)
-	db $0, "Humph!", $4f
-	db "You have proven", $55
-	db "your worth!", $51
-	db "Here! Take the", $4f
-	db "SOULBADGE!", $58
-
-SECTION "bank28",ROMX,BANK[$28]
-
-_UnnamedText_7558b: ; a0000 (28:4000)
-	db $0, "When afflicted by", $4f
-	db "TOXIC, #MON", $55
-	db "suffer more and", $55
-	db "more as battle", $55
-	db "progresses!", $51
-	db "It will surely", $4f
-	db "terrorize foes!", $57
-
-_UnnamedText_75590: ; a0069 (28:4069)
-	db $0, "Now that you have", $4f
-	db "the SOULBADGE,", $55
-	db "the DEFENSE of", $55
-	db "your #MON", $55
-	db "increases!", $51
-	db "It also lets you", $4f
-	db "SURF outside of", $55
-	db "battle!", $51
-	db "Ah! Take this", $4f
-	db "too!", $57
-
-_ReceivedTM06Text: ; a00eb (28:40eb)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM06ExplanationText: ; a00ff (28:40ff)
-	db $0, $51
-	db "TM06 contains", $4f
-	db "TOXIC!", $51
-	db "It is a secret", $4f
-	db "technique over", $55
-	db "400 years old!", $57
-
-_TM06NoRoomText: ; a0143 (28:4143)
-	db $0, "Make space for", $4f
-	db "this, child!", $57
-
-_FuchsiaGymBattleText1: ; a0160 (28:4160)
-	db $0, "Strength isn't", $4f
-	db "the key for", $55
-	db "#MON!", $51
-	db "It's strategy!", $51
-	db "I'll show you how", $4f
-	db "strategy can beat", $55
-	db "brute strength!", $57
-
-_FuchsiaGymEndBattleText1: ; a01c2 (28:41c2)
-	db $0, "What?", $4f
-	db "Extraordinary!", $58
-
-_FuchsiaGymAfterBattleText1: ; a01d8 (28:41d8)
-	db $0, "So, you mix brawn", $4f
-	db "with brains?", $55
-	db "Good strategy!", $57
-
-_FuchsiaGymBattleText2: ; a0207 (28:4207)
-	db $0, "I wanted to become", $4f
-	db "a ninja, so I", $55
-	db "joined this GYM!", $57
-
-_FuchsiaGymEndBattleText2: ; a023a (28:423a)
-	db $0, "I'm done", $4f
-	db "for!", $58
-
-_FuchsiaGymAfterBattleText2: ; a0248 (28:4248)
-	db $0, "I will keep on", $4f
-	db "training under", $55
-	db "KOGA, my ninja", $55
-	db "master!", $57
-
-_FuchsiaGymBattleText3: ; a027e (28:427e)
-	db $0, "Let's see you", $4f
-	db "beat my special", $55
-	db "techniques!", $57
-
-_FuchsiaGymEndBattleText3: ; a02a8 (28:42a8)
-	db $0, "You", $4f
-	db "had me fooled!", $58
-
-_FuchsiaGymAfterBattleText3: ; a02bc (28:42bc)
-	db $0, "I like poison and", $4f
-	db "sleep techniques,", $55
-	db "as they linger", $55
-	db "after battle!", $57
-
-_FuchsiaGymBattleText4: ; a02fe (28:42fe)
-	db $0, "Stop right there!", $51
-	db "Our invisible", $4f
-	db "walls have you", $55
-	db "frustrated?", $57
-
-_FuchsiaGymEndBattleText4: ; a033a (28:433a)
-	db $0, "Whoa!", $4f
-	db "He's got it!", $58
-
-_FuchsiaGymAfterBattleText4: ; a034d (28:434d)
-	db $0, "You impressed me!", $4f
-	db "Here's a hint!", $51
-	db "Look very closely", $4f
-	db "for gaps in the", $55
-	db "invisible walls!", $57
-
-_FuchsiaGymBattleText5: ; a03a1 (28:43a1)
-	db $0, "I also study the", $4f
-	db "way of the ninja", $55
-	db "with master KOGA!", $51
-	db "Ninja have a long", $4f
-	db "history of using", $55
-	db "animals!", $57
-
-_FuchsiaGymEndBattleText5: ; a0402 (28:4402)
-	db $0, "Awoo!", $58
-
-_FuchsiaGymAfterBattleText5: ; a0409 (28:4409)
-	db $0, "I still have much", $4f
-	db "to learn!", $57
-
-_FuchsiaGymBattleText6: ; a0426 (28:4426)
-	db $0, "Master KOGA comes", $4f
-	db "from a long line", $55
-	db "of ninjas!", $51
-	db "What did you", $4f
-	db "descend from?", $57
-
-_FuchsiaGymEndBattleText6: ; a0470 (28:4470)
-	db $0, "Dropped", $4f
-	db "my balls!", $58
-
-_FuchsiaGymAfterBattleText6: ; a0483 (28:4483)
-	db $0, "Where there is", $4f
-	db "light, there is", $55
-	db "shadow!", $51
-	db "Light and shadow!", $4f
-	db "Which do you", $55
-	db "choose?", $57
-
-_UnnamedText_7564e: ; a04d2 (28:44d2)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "FUCHSIA GYM is", $4f
-	db "riddled with", $55
-	db "invisible walls!", $51
-	db "KOGA might appear", $4f
-	db "close, but he's", $55
-	db "blocked off!", $51
-	db "You have to find", $4f
-	db "gaps in the walls", $55
-	db "to reach him!", $57
-
-_UnnamedText_75653: ; a0574 (28:4574)
-	db $0, "It's amazing how", $4f
-	db "ninja can terrify", $55
-	db "even now!", $57
-
-_FuchsiaMeetingRoomText1: ; a05a1 (28:45a1)
-	db $0, "We nicknamed the", $4f
-	db "WARDEN SLOWPOKE.", $51
-	db "He and SLOWPOKE", $4f
-	db "both look vacant!", $57
-
-_FuchsiaMeetingRoomText2: ; a05e6 (28:45e6)
-	db $0, "SLOWPOKE is very", $4f
-	db "knowledgeable", $55
-	db "about #MON!", $51
-	db "He even has some", $4f
-	db "fossils of rare,", $55
-	db "extinct #MON!", $57
-
-_FuchsiaMeetingRoomText3: ; a0642 (28:4642)
-	db $0, "SLOWPOKE came in,", $4f
-	db "but I couldn't", $55
-	db "understand him.", $51
-	db "I think he's got", $4f
-	db "a speech problem!", $57
-
-_UnnamedText_561bd: ; a0695 (28:4695)
-	db $0, "I'm the FISHING", $4f
-	db "GURU's older", $55
-	db "brother!", $51
-	db "I simply Looove", $4f
-	db "fishing!", $51
-	db "Do you like to", $4f
-	db "fish?", $57
-
-_UnnamedText_561c2: ; a06e8 (28:46e8)
-	db $0, "Grand! I like", $4f
-	db "your style!", $51
-	db "Take this and", $4f
-	db "fish, young one!", $51
-	db $52, " received", $4f
-	db "a @"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_56212: ; a0737 (28:4737)
-	db $0, "Oh... That's so", $4f
-	db "disappointing...", $57
-
-_UnnamedText_56217: ; a0758 (28:4758)
-	db $0, "Hello there,", $4f
-	db $52, "!", $51
-	db "How are the fish", $4f
-	db "biting?", $57
-
-_UnnamedText_5621c: ; a0782 (28:4782)
-	db $0, "Oh no!", $51
-	db "You have no room", $4f
-	db "for my gift!", $57
-
-_Mansion1BattleText2: ; a07a8 (28:47a8)
-	db $0, "Who are you? There", $4f
-	db "shouldn't be", $55
-	db "anyone here.", $57
-
-_Mansion1EndBattleText2: ; a07d5 (28:47d5)
-	db $0, "Ouch!", $58
-
-_Mansion1AfterBattleText2: ; a07dc (28:47dc)
-	db $0, "A key? I don't", $4f
-	db "know what you're", $55
-	db "talking about.", $57
-
-_MansionSwitchText: ; a080a (28:480a)
-	db $0, "A secret switch!", $51
-	db "Press it?", $57
-
-_MansionSwitchPressedText: ; a0826 (28:4826)
-	db $0, "Who wouldn't?", $58
-
-_MansionSwitchNotPressedText: ; a0834 (28:4834)
-	db $0, "Not quite yet!", $57
-
-_BlaineBattleText: ; a0844 (28:4844)
-	db $0, "Hah!", $51
-	db "I am BLAINE! I", $4f
-	db "am the LEADER of", $55
-	db "CINNABAR GYM!", $51
-	db "My fiery #MON", $4f
-	db "will incinerate", $55
-	db "all challengers!", $51
-	db "Hah! You better", $4f
-	db "have BURN HEAL!", $57
-
-_BlaineEndBattleText: ; a08c7 (28:48c7)
-	db $0, "I have", $4f
-	db "burnt out!", $51
-	db "You have earned", $4f
-	db "the VOLCANOBADGE!@@"
-
-_BlaineFireBlastText: ; a08fd (28:48fd)
-	db $0, "FIRE BLAST is the", $4f
-	db "ultimate fire", $55
-	db "technique!", $51
-	db "Don't waste it on", $4f
-	db "water #MON!", $57
-
-_BlaineBadgeText: ; a0946 (28:4946)
-	db $0, "Hah!", $51
-	db "The VOLCANOBADGE", $4f
-	db "heightens the", $55
-	db "SPECIAL abilities", $55
-	db "of your #MON!", $51
-	db "Here, you can", $4f
-	db "have this too!", $57
-
-_ReceivedTM38Text: ; a09a8 (28:49a8)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM38ExplanationText: ; a09bc (28:49bc)
-	db $0, $51
-	db "TM38 contains", $4f
-	db "FIRE BLAST!", $51
-	db "Teach it to fire-", $4f
-	db "type #MON!", $51
-	db "CHARMELEON or", $4f
-	db "PONYTA would be", $55
-	db "good bets!", $57
-
-_TM38NoRoomText: ; a0a1e (28:4a1e)
-	db $0, "Make room for my", $4f
-	db "gift!", $57
-
-_UnnamedText_7595f: ; a0a36 (28:4a36)
-	db $0, "Do you know how", $4f
-	db "hot #MON fire", $55
-	db "breath can get?", $57
-
-_UnnamedText_75964: ; a0a65 (28:4a65)
-	db $0, "Yow!", $4f
-	db "Hot, hot, hot!", $58
-
-_UnnamedText_75969: ; a0a7a (28:4a7a)
-	db $0, "Fire, or to be", $4f
-	db "more precise,", $55
-	db "combustion...", $51
-	db "Blah, blah, blah,", $4f
-	db "blah...", $57
-
-_UnnamedText_75994: ; a0ac0 (28:4ac0)
-	db $0, "I was a thief, but", $4f
-	db "I became straight", $55
-	db "as a trainer!", $57
-
-_UnnamedText_75999: ; a0af4 (28:4af4)
-	db $0, "I", $4f
-	db "surrender!", $58
-
-_UnnamedText_7599e: ; a0b02 (28:4b02)
-	db $0, "I can't help", $4f
-	db "stealing other", $55
-	db "people's #MON!", $57
-
-_UnnamedText_759c9: ; a0b2c (28:4b2c)
-	db $0, "You can't win!", $4f
-	db "I have studied", $55
-	db "#MON totally!", $57
-
-_UnnamedText_759ce: ; a0b58 (28:4b58)
-	db $0, "Waah!", $4f
-	db "My studies!", $58
-
-_UnnamedText_759d3: ; a0b6b (28:4b6b)
-	db $0, "My theories are", $4f
-	db "too complicated", $55
-	db "for you!", $57
-
-_UnnamedText_759fe: ; a0b95 (28:4b95)
-	db $0, "I just like using", $4f
-	db "fire #MON!", $57
-
-_UnnamedText_75a03: ; a0bb3 (28:4bb3)
-	db $0, "Too hot", $4f
-	db "to handle!", $58
-
-_UnnamedText_75a08: ; a0bc7 (28:4bc7)
-	db $0, "I wish there was", $4f
-	db "a thief #MON!", $55
-	db "I'd use that!", $57
-
-_UnnamedText_75a33: ; a0bf4 (28:4bf4)
-	db $0, "I know why BLAINE", $4f
-	db "became a trainer!", $57
-
-_UnnamedText_75a38: ; a0c19 (28:4c19)
-	db $0, "Ow!", $58
-
-_UnnamedText_75a3d: ; a0c1e (28:4c1e)
-	db $0, "BLAINE was lost", $4f
-	db "in the mountains", $55
-	db "when a fiery bird", $55
-	db "#MON appeared.", $51
-	db "Its light enabled", $4f
-	db "BLAINE to find", $55
-	db "his way down!", $57
-
-_UnnamedText_75a68: ; a0c90 (28:4c90)
-	db $0, "I've been to many", $4f
-	db "GYMs, but this is", $55
-	db "my favorite!", $57
-
-_UnnamedText_75a6d: ; a0cc1 (28:4cc1)
-	db $0, "Yowza!", $4f
-	db "Too hot!", $58
-
-_UnnamedText_75a72: ; a0cd2 (28:4cd2)
-	db $0, "Us fire #MON", $4f
-	db "fans like PONYTA", $55
-	db "and NINETALES!", $57
-
-_UnnamedText_75a9d: ; a0d00 (28:4d00)
-	db $0, "Fire is weak", $4f
-	db "against H2O!", $57
-
-_UnnamedText_75aa2: ; a0d1b (28:4d1b)
-	db $0, "Oh!", $4f
-	db "Snuffed out!", $58
-
-_UnnamedText_75aa7: ; a0d2d (28:4d2d)
-	db $0, "Water beats fire!", $4f
-	db "But, fire melts", $55
-	db "ice #MON!", $57
-
-_UnnamedText_75ac2: ; a0d5a (28:4d5a)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "The hot-headed", $4f
-	db "BLAINE is a fire", $55
-	db "#MON pro!", $51
-	db "Douse his spirits", $4f
-	db "with water!", $51
-	db "You better take", $4f
-	db "some BURN HEALs!", $57
-
-_UnnamedText_75ac7: ; a0dd9 (28:4dd9)
-	db $0, $52, "! You beat", $4f
-	db "that fire brand!", $57
-
-_Lab1Text1: ; a0df7 (28:4df7)
-	db $0, "We study #MON", $4f
-	db "extensively here.", $51
-	db "People often bring", $4f
-	db "us rare #MON", $55
-	db "for examination.", $57
-
-_Lab1Text2: ; a0e49 (28:4e49)
-	db $0, "A photo of the", $4f
-	db "LAB's founder,", $55
-	db "DR.FUJI!", $57
-
-_Lab1Text3: ; a0e70 (28:4e70)
-	db $0, "#MON LAB", $4f
-	db "Meeting Room", $57
-
-_Lab1Text4: ; a0e87 (28:4e87)
-	db $0, "#MON LAB", $4f
-	db "R-and-D Room", $57
-
-_Lab1Text5: ; a0e9e (28:4e9e)
-	db $0, "#MON LAB", $4f
-	db "Testing Room", $57
-
-_Lab2Text1: ; a0eb5 (28:4eb5)
-	db $0, "I found this very", $4f
-	db "strange fossil in", $55
-	db "MT.MOON!", $51
-	db "I think it's a", $4f
-	db "rare, prehistoric", $55
-	db "#MON!", $57
-
-_TM35PreReceiveText: ; a0f09 (28:4f09)
-	db $0, "Tch-tch-tch!", $4f
-	db "I made a cool TM!", $51
-	db "It can cause all", $4f
-	db "kinds of fun!", $58
-
-_ReceivedTM35Text: ; a0f48 (28:4f48)
-	db $0, $52, " received ", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM35ExplanationText: ; a0f5d (28:4f5d)
-	db $0, "Tch-tch-tch!", $4f
-	db "That's the sound", $55
-	db "of a METRONOME!", $51
-	db "It tweaks your", $4f
-	db "#MON's brain", $55
-	db "into using moves", $55
-	db "it doesn't know!", $57
-
-_TM35NoRoomText: ; a0fc7 (28:4fc7)
-	db $0, "Your pack is", $4f
-	db "crammed full!", $57
-
-_Lab3Text2: ; a0fe3 (28:4fe3)
-	db $0, "EEVEE can evolve", $4f
-	db "into 1 of 3 kinds", $55
-	db "of #MON.", $57
-
-_Lab3Text3: ; a1010 (28:5010)
-	db $0, "There's an e-mail", $4f
-	db "message!", $51
-	db "...", $51
-	db "The 3 legendary", $4f
-	db "bird #MON are", $55
-	db "ARTICUNO, ZAPDOS", $55
-	db "and MOLTRES.", $51
-	db "Their whereabouts", $4f
-	db "are unknown.", $51
-	db "We plan to explore", $4f
-	db "the cavern close", $55
-	db "to CERULEAN.", $51
-	db "From: #MON", $4f
-	db "RESEARCH TEAM", $51
-	db "...", $57
-
-_Lab3Text5: ; a10d8 (28:50d8)
-	db $0, "An amber pipe!", $57
-
-_UnnamedText_75dc6: ; a10e8 (28:50e8)
-	db $0, "Hiya!", $51
-	db "I am important", $4f
-	db "doctor!", $51
-	db "I study here rare", $4f
-	db "#MON fossils!", $51
-	db "You! Have you a", $4f
-	db "fossil for me?", $58
-
-_UnnamedText_75dcb: ; a1145 (28:5145)
-	db $0, "No! Is too bad!", $57
-
-_UnnamedText_75dd0: ; a1156 (28:5156)
-	db $0, "I take a little", $4f
-	db "time!", $51
-	db "You go for walk a", $4f
-	db "little while!", $57
-
-_UnnamedText_75dd5: ; a118d (28:518d)
-	db $0, "Where were you?", $51
-	db "Your fossil is", $4f
-	db "back to life!", $51
-	db "It was @"
-
-UnnamedText_a11c3: ; a11c3 (28:51c3)
-	TX_RAM $cf4b
-	db $0, $4f
-	db "like I think!", $58
-
-_UnnamedText_610ae: ; a11d6 (28:51d6)
-	db $0, "Oh! That is", $4f
-	db "@"
-
-UnnamedText_a11e4: ; a11e4 (28:51e4)
-	TX_RAM $cd6d
-	db $0, "!", $51
-	db "It is fossil of", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, ", a", $55
-	db "#MON that is", $55
-	db "already extinct!", $51
-	db "My Resurrection", $4f
-	db "Machine will make", $55
-	db "that #MON live", $55
-	db "again!", $57
-
-_UnnamedText_610b3: ; a1259 (28:5259)
-	db $0, "So! You hurry and", $4f
-	db "give me that!", $51
-	db $52, " handed", $4f
-	db "over @"
-	TX_RAM $cd6d
-	db $0, "!", $58
-
-_UnnamedText_610b8: ; a128f (28:528f)
-	db $0, "I take a little", $4f
-	db "time!", $51
-	db "You go for walk a", $4f
-	db "little while!", $57
-
-_UnnamedText_610bd: ; a12c6 (28:52c6)
-	db $0, "Aiyah! You come", $4f
-	db "again!", $57
-
-_CinnabarPokecenterText2: ; a12de (28:52de)
-_CinnabarPokecenterText1: ; a12de (28:52de)
-	db $0, "You can cancel", $4f
-	db "evolution.", $51
-	db "When a #MON is", $4f
-	db "evolving, you can", $55
-	db "stop it and leave", $55
-	db "it the way it is.", $57
-
-_CinnabarPokecenterText3: ; a133e (28:533e)
-	db $0, "Do you have any", $4f
-	db "friends?", $51
-	db "#MON you get", $4f
-	db "in trades grow", $55
-	db "very quickly.", $51
-	db "I think it's", $4f
-	db "worth a try!", $57
-
-_CinnabarMartText2: ; a139b (28:539b)
-	db $0, "Don't they have X", $4f
-	db "ATTACK? It's good", $55
-	db "for battles!", $57
-
-_CinnabarMartText3: ; a13cb (28:53cb)
-	db $0, "It never hurts to", $4f
-	db "have extra items!", $57
-
-_IndigoPlateauLobbyText1: ; a13f0 (28:53f0)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "At #MON LEAGUE,", $4f
-	db "you have to face", $55
-	db "the ELITE FOUR in", $55
-	db "succession.", $51
-	db "If you lose, you", $4f
-	db "have to start all", $55
-	db "over again! This", $55
-	db "is it! Go for it!", $57
-
-_IndigoPlateauLobbyText3: ; a148b (28:548b)
-	db $0, "From here on, you", $4f
-	db "face the ELITE", $55
-	db "FOUR one by one!", $51
-	db "If you win, a", $4f
-	db "door opens to the", $55
-	db "next trainer!", $55
-	db "Good luck!", $57
-
-_CopycatsHouseF1Text1: ; a14f7 (28:54f7)
-	db $0, "My daughter is so", $4f
-	db "self-centered.", $55
-	db "She only has a", $55
-	db "few friends.", $57
-
-_CopycatsHouseF1Text2: ; a1535 (28:5535)
-	db $0, "My daughter likes", $4f
-	db "to mimic people.", $51
-	db "Her mimicry has", $4f
-	db "earned her the", $55
-	db "nickname COPYCAT", $55
-	db "around here!", $57
-
-_CopycatsHouseF1Text3: ; a1596 (28:5596)
-	db $0, "CHANSEY: Chaan!", $4f
-	db "Sii!@@"
-
-_UnnamedText_5ccd4: ; a15ad (28:55ad)
-	db $0, $52, ": Hi! Do", $4f
-	db "you like #MON?", $51
-	db $52, ": Uh no, I", $4f
-	db "just asked you.", $51
-	db $52, ": Huh?", $4f
-	db "You're strange!", $51
-	db "COPYCAT: Hmm?", $4f
-	db "Quit mimicking?", $51
-	db "But, that's my", $4f
-	db "favorite hobby!", $58
-
-_TM31PreReceiveText: ; a1636 (28:5636)
-	db $0, "Oh wow!", $4f
-	db "A # DOLL!", $51
-	db "For me?", $4f
-	db "Thank you!", $51
-	db "You can have", $4f
-	db "this, then!", $58
-
-_ReceivedTM31Text: ; a1675 (28:5675)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM31ExplanationText1: ; a1689 (28:5689)
-	db $0, $51
-	db "TM31 contains my", $4f
-	db "favorite, MIMIC!", $51
-	db "Use it on a good", $4f
-	db "#MON!@@"
-
-_TM31ExplanationText2: ; a16c5 (28:56c5)
-	db $0, $52, ": Hi!", $4f
-	db "Thanks for TM31!", $51
-	db $52, ": Pardon?", $51
-	db $52, ": Is it", $4f
-	db "that fun to mimic", $55
-	db "my every move?", $51
-	db "COPYCAT: You bet!", $4f
-	db "It's a scream!", $57
-
-_TM31NoRoomText: ; a1733 (28:5733)
-	db $0, "Don't you want", $4f
-	db "this?@@"
-
-_CopycatsHouseF2Text2: ; a1749 (28:5749)
-	db $0, "DODUO: Giiih!", $51
-	db "MIRROR MIRROR ON", $4f
-	db "THE WALL, WHO IS", $55
-	db "THE FAIREST ONE", $55
-	db "OF ALL?", $57
-
-_CopycatsHouseF2Text3: ; a1792 (28:5792)
-	db $0, "This is a rare", $4f
-	db "#MON! Huh?", $55
-	db "It's only a doll!", $57
-
-_CopycatsHouseF2Text6: ; a17be (28:57be)
-	db $0, "A game with MARIO", $4f
-	db "wearing a bucket", $55
-	db "on his head!", $57
-
-_UnnamedText_5cd17: ; a17ef (28:57ef)
-	db $0, "...", $51
-	db "My Secrets!", $51
-	db "Skill: Mimicry!", $4f
-	db "Hobby: Collecting", $55
-	db "dolls!", $55
-	db "Favorite #MON:", $55
-	db "CLEFAIRY!", $57
-
-_UnnamedText_5cd1c: ; a1842 (28:5842)
-	db $0, "Huh? Can't see!", $57
-
-_UnnamedText_5ce8e: ; a1852 (28:5852)
-	db $0, "Grunt!", $51
-	db "I am the KARATE", $4f
-	db "MASTER! I am the", $55
-	db "LEADER here!", $51
-	db "You wish to", $4f
-	db "challenge us?", $55
-	db "Expect no mercy!", $51
-	db "Fwaaa!", $57
-
-_UnnamedText_5ce93: ; a18ba (28:58ba)
-	db $0, "Hwa!", $4f
-	db "Arrgh! Beaten!", $58
-
-_UnnamedText_5ce98: ; a18cf (28:58cf)
-	db $0, "Indeed, I have", $4f
-	db "lost!", $51
-	db "But, I beseech", $4f
-	db "you, do not take", $55
-	db "our emblem as", $55
-	db "your trophy!", $51
-	db "In return, I will", $4f
-	db "give you a prized", $55
-	db "fighting #MON!", $51
-	db "Choose whichever", $4f
-	db "one you like!", $57
-
-_UnnamedText_5ce9d: ; a1972 (28:5972)
-	db $0, "Ho!", $51
-	db "Stay and train at", $4f
-	db "Karate with us!", $57
-
-_FightingDojoBattleText1: ; a1999 (28:5999)
-	db $0, "Hoargh! Take your", $4f
-	db "shoes off!", $57
-
-_FightingDojoEndBattleText1: ; a19b7 (28:59b7)
-	db $0, "I give", $4f
-	db "up!", $58
-
-_FightingDojoAfterBattleText1: ; a19c3 (28:59c3)
-	db $0, "You wait 'til you", $4f
-	db "see our Master!", $51
-	db "I'm a small fry", $4f
-	db "compared to him!", $57
-
-_FightingDojoBattleText2: ; a1a05 (28:5a05)
-	db $0, "I hear you're", $4f
-	db "good! Show me!", $57
-
-_FightingDojoEndBattleText2: ; a1a22 (28:5a22)
-	db $0, "Judge!", $4f
-	db "1 point!", $58
-
-_FightingDojoAfterBattleText2: ; a1a33 (28:5a33)
-	db $0, "Our Master is a", $4f
-	db "pro fighter!", $57
-
-_FightingDojoBattleText3: ; a1a51 (28:5a51)
-	db $0, "Nothing tough", $4f
-	db "frightens me!", $51
-	db "I break boulders", $4f
-	db "for training!", $57
-
-_FightingDojoEndBattleText3: ; a1a8d (28:5a8d)
-	db $0, "Yow!", $4f
-	db "Stubbed fingers!", $58
-
-_FightingDojoAfterBattleText3: ; a1aa4 (28:5aa4)
-	db $0, "The only thing", $4f
-	db "that frightens us", $55
-	db "is psychic power!", $57
-
-_FightingDojoBattleText4: ; a1ad8 (28:5ad8)
-	db $0, "Hoohah!", $51
-	db "You're trespassing", $4f
-	db "in our FIGHTING", $55
-	db "DOJO!", $57
-
-_FightingDojoEndBattleText4: ; a1b09 (28:5b09)
-	db $0, "Oof!", $4f
-	db "I give up!", $58
-
-_FightingDojoAfterBattleText4: ; a1b1a (28:5b1a)
-	db $0, "The prime fighters", $4f
-	db "across the land", $55
-	db "train here.", $57
-
-_WantHitmonleeText: ; a1b4a (28:5b4a)
-	db $0, "You want the", $4f
-	db "hard kicking", $55
-	db "HITMONLEE?", $57
-
-_WantHitmonchanText: ; a1b70 (28:5b70)
-	db $0, "You want the", $4f
-	db "piston punching", $55
-	db "HITMONCHAN?", $57
-
-_OtherHitmonText: ; a1b9a (28:5b9a)
-	db $0, "Better not get", $4f
-	db "greedy...", $57
-
-_UnnamedText_5d162: ; a1bb4 (28:5bb4)
-	db $0, "I had a vision of", $4f
-	db "your arrival!", $51
-	db "I have had psychic", $4f
-	db "powers since I", $55
-	db "was a child.", $51
-	db "I first learned", $4f
-	db "to bend spoons", $55
-	db "with my mind.", $51
-	db "I dislike fight-", $4f
-	db "ing, but if you", $55
-	db "wish, I will show", $55
-	db "you my powers!", $57
-
-_UnnamedText_5d167: ; a1c73 (28:5c73)
-	db $0, "I'm", $4f
-	db "shocked!", $55
-	db "But, a loss is a", $55
-	db "loss.", $51
-	db "I admit I didn't", $4f
-	db "work hard enough", $55
-	db "to win!", $51
-	db "You earned the", $4f
-	db "MARSHBADGE!@@"
-
-_UnnamedText_5d16e: ; a1cdc (28:5cdc)
-	db $0, "Everyone has", $4f
-	db "psychic power!", $55
-	db "People just don't", $55
-	db "realize it!", $57
-
-_UnnamedText_5d173: ; a1d16 (28:5d16)
-	db $0, "The MARSHBADGE", $4f
-	db "makes #MON up", $55
-	db "to L70 obey you!", $51
-	db "Stronger #MON", $4f
-	db "will become wild,", $55
-	db "ignoring your", $55
-	db "orders in battle!", $51
-	db "Just don't raise", $4f
-	db "your #MON too", $55
-	db "much!", $51
-	db "Wait, please take", $4f
-	db "this TM with you!", $57
-
-ReceivedTM46Text: ; a1dcd (28:5dcd)
-	db $0, $52, " received", $4f
-	db "TM46!@@"
-
-_TM46ExplanationText: ; a1de0 (28:5de0)
-	db $0, $51
-	db "TM46 is PSYWAVE!", $4f
-	db "It uses powerful", $55
-	db "psychic waves to", $55
-	db "inflict damage!", $57
-
-_TM46NoRoomText: ; a1e25 (28:5e25)
-	db $0, "Your pack is full", $4f
-	db "of other items!", $57
-
-_UnnamedText_5d1e6: ; a1e48 (28:5e48)
-	db $0, "Yo! Champ in", $4f
-	db "making!", $51
-	db "SABRINA's #MON", $4f
-	db "use psychic power", $55
-	db "instead of force!", $51
-	db "Fighting #MON", $4f
-	db "are weak against", $55
-	db "psychic #MON!", $51
-	db "They get creamed", $4f
-	db "before they can", $55
-	db "even aim a punch!", $57
-
-_UnnamedText_5d1eb: ; a1ef0 (28:5ef0)
-	db $0, "Psychic power,", $4f
-	db "huh?", $51
-	db "If I had that,", $4f
-	db "I'd make a bundle", $55
-	db "at the slots!", $57
-
-_SaffronGymBattleText1: ; a1f33 (28:5f33)
-	db $0, "SABRINA is younger", $4f
-	db "than I, but I", $55
-	db "respect her!", $57
-
-_SaffronGymEndBattleText1: ; a1f62 (28:5f62)
-	db $0, "Not", $4f
-	db "good enough!", $58
-
-_SaffronGymAfterBattleText1: ; a1f74 (28:5f74)
-	db $0, "In a battle of", $4f
-	db "equals, the one", $55
-	db "with the stronger", $55
-	db "will wins!", $51
-	db "If you wish", $4f
-	db "to beat SABRINA,", $55
-	db "focus on winning!", $57
-
-_SaffronGymBattleText2: ; a1fe0 (28:5fe0)
-	db $0, "Does our unseen", $4f
-	db "power scare you?", $57
-
-_SaffronGymEndBattleText2: ; a2002 (28:6002)
-	db $0, "I never", $4f
-	db "foresaw this!", $58
-
-_SaffronGymAfterBattleText2: ; a2019 (28:6019)
-	db $0, "Psychic #MON", $4f
-	db "fear only ghosts", $55
-	db "and bugs!", $57
-
-_SaffronGymBattleText3: ; a2042 (28:6042)
-	db $0, "#MON take on", $4f
-	db "the appearance of", $55
-	db "their trainers.", $51
-	db "Your #MON must", $4f
-	db "be tough, then!", $57
-
-_SaffronGymEndBattleText3: ; a2091 (28:6091)
-	db $0, "I knew", $4f
-	db "it!", $58
-
-_SaffronGymAfterBattleText3: ; a209d (28:609d)
-	db $0, "I must teach", $4f
-	db "better techniques", $55
-	db "to my #MON!", $57
-
-_SaffronGymBattleText4: ; a20c9 (28:60c9)
-	db $0, "You know that", $4f
-	db "power alone isn't", $55
-	db "enough!", $57
-
-_SaffronGymEndBattleText4: ; a20f1 (28:60f1)
-	db $0, "I don't", $4f
-	db "believe this!", $58
-
-_SaffronGymAfterBattleText4: ; a2107 (28:6107)
-	db $0, "SABRINA just wiped", $4f
-	db "out the KARATE", $55
-	db "MASTER next door!", $57
-
-_SaffronGymBattleText5: ; a213c (28:613c)
-	db $0, "You and I, our", $4f
-	db "#MON shall", $55
-	db "fight!", $57
-
-_SaffronGymEndBattleText5: ; a215e (28:615e)
-	db $0, "I lost", $4f
-	db "after all!", $58
-
-_SaffronGymAfterBattleText5: ; a2171 (28:6171)
-	db $0, "I knew that this", $4f
-	db "was going to take", $55
-	db "place.", $57
-
-_SaffronGymBattleText6: ; a219c (28:619c)
-	db $0, "SABRINA is young,", $4f
-	db "but she's also", $55
-	db "our LEADER!", $51
-	db "You won't reach", $4f
-	db "her easily!", $57
-
-_SaffronGymEndBattleText6: ; a21e4 (28:61e4)
-	db $0, "I lost", $4f
-	db "my concentration!", $58
-
-_SaffronGymAfterBattleText6: ; a21fe (28:61fe)
-	db $0, "There used to be", $4f
-	db "2 #MON GYMs in", $55
-	db "SAFFRON.", $51
-	db "The FIGHTING DOJO", $4f
-	db "next door lost", $55
-	db "its GYM status", $55
-	db "when we went and", $55
-	db "creamed them!", $57
-
-_SaffronGymBattleText7: ; a2277 (28:6277)
-	db $0, "SAFFRON #MON", $4f
-	db "GYM is famous for", $55
-	db "its psychics!", $51
-	db "You want to see", $4f
-	db "SABRINA!", $55
-	db "I can tell!", $57
-
-_SaffronGymEndBattleText7: ; a22ca (28:62ca)
-	db $0, "Arrrgh!", $58
-
-_SaffronGymAfterBattleText7: ; a22d3 (28:62d3)
-	db $0, "That's right! I", $4f
-	db "used telepathy to", $55
-	db "read your mind!", $57
-
-_SaffronHouse1Text1: ; a2305 (28:6305)
-	db $0, "Thank you for", $4f
-	db "writing. I hope", $55
-	db "to see you soon!", $51
-	db "Hey! Don't look", $4f
-	db "at my letter!", $57
-
-_SaffronHouse1Text2: ; a2352 (28:6352)
-	db $0, "PIDGEY: Kurukkoo!@@"
-
-_SaffronHouse1Text3: ; a2366 (28:6366)
-	db $0, "The COPYCAT is", $4f
-	db "cute! I'm getting", $55
-	db "her a # DOLL!", $57
-
-_SaffronHouse1Text4: ; a2395 (28:6395)
-	db $0, "I was given a PP", $4f
-	db "UP as a gift.", $51
-	db "It's used for", $4f
-	db "increasing the PP", $55
-	db "of techniques!", $57
-
-_SaffronMartText2: ; a23e3 (28:63e3)
-	db $0, "MAX REPEL lasts", $4f
-	db "longer than SUPER", $55
-	db "REPEL for keeping", $55
-	db "weaker #MON", $55
-	db "away!", $57
-
-_SaffronMartText3: ; a242a (28:642a)
-	db $0, "REVIVE is costly,", $4f
-	db "but it revives", $55
-	db "fainted #MON!", $57
-
-_SilphCo1Text1: ; a245a (28:645a)
-	db $0, "Welcome!", $51
-	db "The PRESIDENT is", $4f
-	db "in the boardroom", $55
-	db "on 11F!", $57
-
-_SaffronPokecenterText1: ; a248e (28:648e)
-	db $0, "#MON growth", $4f
-	db "rates differ from", $55
-	db "specie to specie.", $57
-
-_SaffronPokecenterText3: ; a24bf (28:64bf)
-	db $0, "SILPH CO. is very", $4f
-	db "famous. That's", $55
-	db "why it attracted", $55
-	db "TEAM ROCKET!", $57
-
-_TM29PreReceiveText: ; a24fe (28:64fe)
-	db $0, "...Wait! Don't", $4f
-	db "say a word!", $51
-	db "You wanted this!", $58
-
-_ReceivedTM29Text: ; a252a (28:652a)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM29ExplanationText: ; a253e (28:653e)
-	db $0, "TM29 is PSYCHIC!", $51
-	db "It can lower the", $4f
-	db "target's SPECIAL", $55
-	db "abilities.", $57
-
-_TM29NoRoomText: ; a257c (28:657c)
-	db $0, "Where do you plan", $4f
-	db "to put this?", $57
-
-_PokemartGreetingText: ; a259c (28:659c)
-	db $0, "Hi there!", $4e, "May I help you?", $57
-
-_PokemonFaintedText: ; a25b7 (28:65b7)
-	TX_RAM $cd6d
-	db $0, $4f
-	db "fainted!", $57
-
-_PlayerBlackedOutText: ; a25c5 (28:65c5)
-	db $0, $52, " is out of", $4f
-	db "useable #MON!", $51
-	db $52, " blacked", $4f
-	db "out!", $58
-
-_RepelWoreOffText: ; a25ef (28:65ef)
-	db $0, "REPEL's effect", $4f
-	db "wore off.", $57
-
-_PokemartBuyingGreetingText: ; a2608 (28:6608)
-	db $0, "Take your time.", $57
-
-_PokemartTellBuyPrice: ; a2619 (28:6619)
-	TX_RAM $cf4b
-	db $0, "?", $4f
-	db "That will be", $55
-	db "¥@"
-	db $2, $9f, $ff, $c3
-	db $0, ". OK?", $57
-
-_PokemartBoughtItemText: ; a2639 (28:6639)
-	db $0, "Here you are!", $4f
-	db "Thank you!", $58
-
-_PokemartNotEnoughMoneyText: ; a2653 (28:6653)
-	db $0, "You don't have", $4f
-	db "enough money.", $58
-
-_PokemartItemBagFullText: ; a2670 (28:6670)
-	db $0, "You can't carry", $4f
-	db "any more items.", $58
-
-_PokemonSellingGreetingText: ; a2690 (28:6690)
-	db $0, "What would you", $4f
-	db "like to sell?", $57
-
-_PokemartTellSellPrice: ; a26ae (28:66ae)
-	db $0, "I can pay you", $4f
-	db "¥@"
-	db $2, $9f, $ff, $c3 ; XXX
-	db $0, " for that.", $57
-
-_PokemartItemBagEmptyText: ; a26cf (28:66cf)
-	db $0, "You don't have", $4f
-	db "anything to sell.", $58
-
-_PokemartUnsellableItemText: ; a26f0 (28:66f0)
-	db $0, "I can't put a", $4f
-	db "price on that.", $58
-
-_PokemartThankYouText: ; a270d (28:670d)
-	db $0, "Thank you!", $57
-
-_PokemartAnythingElseText: ; a2719 (28:6719)
-	db $0, "Is there anything", $4f
-	db "else I can do?", $57
-
-UnnamedText_a273b: ; a273b (28:673b)
-	TX_RAM $d036
-	db $0, " learned", $4f
-	db "@"
-
-UnnamedText_a2749: ; a2749 (28:6749)
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_UnnamedText_6fb4: ; a2750 (28:6750)
-	db $0, "Which move should", $4e, "be forgotten?", $57
-
-_UnnamedText_6fb9: ; a2771 (28:6771)
-	db $0, "Abandon learning", $4f
-	db "@"
-
-UnnamedText_a2784: ; a2784 (28:6784)
-	TX_RAM $cf4b
-	db $0, "?", $57
-
-_UnnamedText_6fbe: ; a278a (28:678a)
-	TX_RAM $d036
-	db $0, $4f
-	db "did not learn", $55
-	db "@"
-
-UnnamedText_a279e: ; a279e (28:679e)
-	TX_RAM $cf4b
-	db $0, "!", $58
-
-_UnnamedText_6fc3: ; a27a4 (28:67a4)
-	TX_RAM $d036
-	db $0, " is", $4f
-	db "trying to learn", $55
-	db "@"
-
-UnnamedText_a27bd: ; a27bd (28:67bd)
-	TX_RAM $cf4b
-	db $0, "!", $51
-	db "But, @"
-	TX_RAM $d036
-	db $0, $4f
-	db "can't learn more", $55
-	db "than 4 moves!", $51
-	db "Delete an older", $4f
-	db "move to make room", $55
-	db "for @"
-
-UnnamedText_a2813: ; a2813 (28:6813)
-	TX_RAM $cf4b
-	db $0, "?", $57
-
-_UnnamedText_6fc8: ; a2819 (28:6819)
-	db $0, "1, 2 and...@@"
-
-_UnnamedText_6fd7: ; a2827 (28:6827)
-	db $0, " Poof!@@"
-
-_UnnamedText_6fdc: ; a2830 (28:6830)
-	db $0, $51
-	db "@"
-
-UnnamedText_a2833: ; a2833 (28:6833)
-	TX_RAM $d036
-	db $0, " forgot", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!", $51
-	db "And...", $58
-
-_UnnamedText_6fe1: ; a284d (28:684d)
-	db $0, "HM techniques", $4f
-	db "can't be deleted!", $58
-
-_PokemonCenterWelcomeText: ; a286d (28:686d)
-	db $0, "Welcome to our", $4f
-	db "#MON CENTER!", $51
-	db "We heal your", $4f
-	db "#MON back to", $55
-	db "perfect health!", $58
-
-_ShallWeHealYourPokemonText: ; a28b4 (28:68b4)
-	db $0, "Shall we heal your", $4f
-	db "#MON?", $57
-
-_NeedYourPokemonText: ; a28ce (28:68ce)
-	db $0, "OK. We'll need", $4f
-	db "your #MON.", $57
-
-_PokemonFightingFitText: ; a28e8 (28:68e8)
-	db $0, "Thank you!", $4f
-	db "Your #MON are", $55
-	db "fighting fit!", $58
-
-_PokemonCenterFarewellText: ; a2910 (28:6910)
-	db $0, "We hope to see", $4f
-	db "you again!", $57
-
-_CableClubNPCText7: ; a292b (28:692b)
-	db $0, "This area is", $4f
-	db "reserved for 2", $55
-	db "friends who are", $55
-	db "linked by cable.", $57
-
-_CableClubNPCText1: ; a2969 (28:6969)
-	db $0, "Welcome to the", $4f
-	db "Cable Club!", $57
-
-_CableClubNPCText2: ; a2985 (28:6985)
-	db $0, "Please apply here.", $51
-	db "Before opening", $4f
-	db "the link, we have", $55
-	db "to save the game.", $57
-
-_CableClubNPCText3: ; a29cc (28:69cc)
-	db $0, "Please wait.@@"
-
-_CableClubNPCText4: ; a29db (28:69db)
-	db $0, "The link has been", $4f
-	db "closed because of", $55
-	db "inactivity.", $51
-	db "Please contact", $4f
-	db "your friend and", $55
-	db "come again!", $57
-
-SECTION "bank29",ROMX,BANK[$29]
-
-_CableClubNPCText5: ; a4000 (29:4000)
-	db $0, "Please come again!", $57
-
-_CableClubNPCText6: ; a4014 (29:4014)
-	db $0, "We're making", $4f
-	db "preparations.", $55
-	db "Please wait.", $57
-
-_UsedStrengthText: ; a403c (29:403c)
-	TX_RAM $cd6d
-	db $0, " used", $4f
-	db "STRENGTH.@@"
-
-_UnnamedText_cdbb: ; a4051 (29:4051)
-	TX_RAM $cd6d
-	db $0, " can", $4f
-	db "move boulders.", $58
-
-_UnnamedText_cdfa: ; a4069 (29:4069)
-	db $0, "The current is", $4f
-	db "much too fast!", $58
-
-_UnnamedText_cdff: ; a4088 (29:4088)
-	db $0, "Cycling is fun!", $4f
-	db "Forget SURFing!", $58
-
-_FlashLightsAreaText: ; a40a9 (29:40a9)
-	db $0, "A blinding FLASH", $4f
-	db "lights the area!", $58
-
-_WarpToLastPokemonCenterText: ; a40cc (29:40cc)
-	db $0, "Warp to the last", $4f
-	db "#MON CENTER.", $57
-
-_CannotUseTeleportNowText: ; a40eb (29:40eb)
-	TX_RAM $cd6d
-	db $0, " can't", $4f
-	db "use TELEPORT now.", $58
-
-_CannotFlyHereText: ; a4107 (29:4107)
-	TX_RAM $cd6d
-	db $0, " can't", $4f
-	db "FLY here.", $58
-
-_NotHealthyEnoughText: ; a411b (29:411b)
-	db $0, "Not healthy", $4f
-	db "enough.", $58
-
-_NewBadgeRequiredText: ; a4130 (29:4130)
-	db $0, "No! A new BADGE", $4f
-	db "is required.", $58
-
-_CannotUseItemsHereText: ; a414e (29:414e)
-	db $0, "You can't use items", $4f
-	db "here.", $58
-
-_CannotGetOffHereText: ; a4168 (29:4168)
-	db $0, "You can't get off", $4f
-	db "here.", $58
-
-_UnnamedText_4fe39: ; a4180 (29:4180)
-	db $0, $52, " got", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!@@"
-
-_UnnamedText_4fe3f: ; a418f (29:418f)
-	db $0, "There's no more", $4f
-	db "room for #MON!", $55
-	db "@"
-	TX_RAM W_BOXMON1NAME
-	db $0, " was", $55
-	db "sent to #MON", $55
-	db "BOX @"
-	TX_RAM $cf4b
-	db $0, " on PC!", $57
-
-_UnnamedText_4fe44: ; a41d6 (29:41d6)
-	db $0, "There's no more", $4f
-	db "room for #MON!", $51
-	db "The #MON BOX", $4f
-	db "is full and can't", $55
-	db "accept any more!", $51
-	db "Change the BOX at", $4f
-	db "a #MON CENTER!", $57
-
-INCLUDE "text/mapPalletTown.asm"
-
-_ViridianCityText1: ; a43cc (29:43cc)
-	db $0, "Those # BALLs", $4f
-	db "at your waist!", $55
-	db "You have #MON!", $51
-	db "It's great that", $4f
-	db "you can carry and", $55
-	db "use #MON any", $55
-	db "time, anywhere!", $57
-
-_UnnamedText_19122: ; a4437 (29:4437)
-	db $0, "This #MON GYM", $4f
-	db "is always closed.", $51
-	db "I wonder who the", $4f
-	db "LEADER is?", $57
-
-_UnnamedText_19127: ; a4474 (29:4474)
-	db $0, "VIRIDIAN GYM's", $4f
-	db "LEADER returned!", $57
-
-_UnnamedText_1914d: ; a4494 (29:4494)
-	db $0, "You want to know", $4f
-	db "about the 2 kinds", $55
-	db "of caterpillar", $55
-	db "#MON?", $57
-
-_UnnamedText_19152: ; a44cd (29:44cd)
-	db $0, "Oh, OK then!", $57
-
-_UnnamedText_19157: ; a44db (29:44db)
-	db $0, "CATERPIE has no", $4f
-	db "poison, but", $55
-	db "WEEDLE does.", $51
-	db "Watch out for its", $4f
-	db "POISON STING!", $57
-
-_UnnamedText_19175: ; a4525 (29:4525)
-	db $0, "Oh Grandpa! Don't", $4f
-	db "be so mean!", $55
-	db "He hasn't had his", $55
-	db "coffee yet.", $57
-
-_UnnamedText_1917a: ; a4560 (29:4560)
-	db $0, "When I go shop in", $4f
-	db "PEWTER CITY, I", $55
-	db "have to take the", $55
-	db "winding trail in", $55
-	db "VIRIDIAN FOREST.", $57
-
-_UnnamedText_19191: ; a45b5 (29:45b5)
-	db $0, "You can't go", $4f
-	db "through here!", $51
-	db "This is private", $4f
-	db "property!", $57
-
-_UnnamedText_191ca: ; a45ea (29:45ea)
-	db $0, "Yawn!", $4f
-	db "I must have dozed", $55
-	db "off in the sun.", $51
-	db "I had this dream", $4f
-	db "about a DROWZEE", $55
-	db "eating my dream.", $55
-	db "What's this?", $55
-	db "Where did this TM", $55
-	db "come from?", $51
-	db "This is spooky!", $4f
-	db "Here, you can", $55
-	db "have this TM.", $58
-
-_ReceivedTM42Text: ; a469a (29:469a)
-	db $0, $52, " received", $4f
-	db "TM42!@@"
-
-_TM42Explanation: ; a46ad (29:46ad)
-	db $0, "TM42 contains", $4f
-	db "DREAM EATER...", $55
-	db "...Snore...", $57
-
-_TM42NoRoomText: ; a46d7 (29:46d7)
-	db $0, "You have too much", $4f
-	db "stuff already.", $57
-
-_UnnamedText_1920a: ; a46f9 (29:46f9)
-	db $0, "Ahh, I've had my", $4f
-	db "coffee now and I", $55
-	db "feel great!", $51
-	db "Sure you can go", $4f
-	db "through!", $51
-	db "Are you in a", $4f
-	db "hurry?", $57
-
-_UnnamedText_1920f: ; a4754 (29:4754)
-	db $0, "I see you're using", $4f
-	db "a #DEX.", $51
-	db "When you catch a", $4f
-	db "#MON, #DEX", $55
-	db "is automatically", $55
-	db "updated.", $51
-	db "What? Don't you", $4f
-	db "know how to catch", $55
-	db "#MON?", $51
-	db "I'll show you", $4f
-	db "how to then.", $57
-
-_UnnamedText_19214: ; a47e6 (29:47e6)
-	db $0, "Time is money...", $4f
-	db "Go along then.", $57
-
-_UnnamedText_19219: ; a4807 (29:4807)
-	db $0, "First, you need", $4f
-	db "to weaken the", $55
-	db "target #MON.", $57
-
-_ViridianCityText8: ; a4833 (29:4833)
-	db $0, "VIRIDIAN CITY ", $4f
-	db "The Eternally", $55
-	db "Green Paradise", $57
-
-_ViridianCityText9: ; a4860 (29:4860)
-	db $0, "TRAINER TIPS", $51
-	db "Catch #MON", $4f
-	db "and expand your", $55
-	db "collection!", $51
-	db "The more you have,", $4f
-	db "the easier it is", $55
-	db "to fight!", $57
-
-_ViridianCityText10: ; a48c3 (29:48c3)
-	db $0, "TRAINER TIPS", $51
-	db "The battle moves", $4f
-	db "of #MON are", $55
-	db "limited by their", $55
-	db "POWER POINTs, PP.", $51
-	db "To replenish PP,", $4f
-	db "rest your tired", $55
-	db "#MON at a", $55
-	db "#MON CENTER!", $57
-
-_ViridianCityText13: ; a4949 (29:4949)
-	db $0, "VIRIDIAN CITY", $4f
-	db "#MON GYM", $57
-
-_ViridianCityText14: ; a4961 (29:4961)
-	db $0, "The GYM's doors", $4f
-	db "are locked...", $57
-
-_PewterCityText1: ; a497f (29:497f)
-	db $0, "It's rumored that", $4f
-	db "CLEFAIRYs came", $55
-	db "from the moon!", $51
-	db "They appeared ", $4f
-	db "after MOON STONE", $55
-	db "fell on MT.MOON.", $57
-
-_PewterCityText2: ; a49e0 (29:49e0)
-	db $0, "There aren't many", $4f
-	db "serious #MON", $55
-	db "trainers here!", $51
-	db "They're all like", $4f
-	db "BUG CATCHERs,", $55
-	db "but PEWTER GYM's", $55
-	db "BROCK is totally", $55
-	db "into it!", $57
-
-_UnnamedText_193f1: ; a4a56 (29:4a56)
-	db $0, "Did you check out", $4f
-	db "the MUSEUM?", $57
-
-_UnnamedText_193f6: ; a4a75 (29:4a75)
-	db $0, "Weren't those", $4f
-	db "fossils from MT.", $55
-	db "MOON amazing?", $57
-
-_UnnamedText_193fb: ; a4aa2 (29:4aa2)
-	db $0, "Really?", $4f
-	db "You absolutely", $55
-	db "have to go!", $57
-
-_PewterCityText13: ; a4ac6 (29:4ac6)
-	db $0, "It's right here!", $4f
-	db "You have to pay", $55
-	db "to get in, but", $55
-	db "it's worth it!", $55
-	db "See you around!", $57
-
-_UnnamedText_19427: ; a4b14 (29:4b14)
-	db $0, "Psssst!", $4f
-	db "Do you know what", $55
-	db "I'm doing?", $57
-
-_UnnamedText_1942c: ; a4b38 (29:4b38)
-	db $0, "That's right!", $4f
-	db "It's hard work!", $57
-
-_UnnamedText_19431: ; a4b55 (29:4b55)
-	db $0, "I'm spraying REPEL", $4f
-	db "to keep #MON", $55
-	db "out of my garden!", $57
-
-_UnnamedText_1945d: ; a4b87 (29:4b87)
-	db $0, "You're a trainer", $4f
-	db "right? BROCK's", $55
-	db "looking for new", $55
-	db "challengers!", $55
-	db "Follow me!", $57
-
-_UnnamedText_19462: ; a4bce (29:4bce)
-	db $0, "If you have the", $4f
-	db "right stuff, go", $55
-	db "take on BROCK!", $57
-
-_PewterCityText6: ; a4bfe (29:4bfe)
-	db $0, "TRAINER TIPS", $51
-	db "Any #MON that", $4f
-	db "takes part in", $55
-	db "battle, however", $55
-	db "short, earns EXP!", $57
-
-_PewterCityText7: ; a4c4a (29:4c4a)
-	db $0, "NOTICE!", $51
-	db "Thieves have been", $4f
-	db "stealing #MON", $55
-	db "fossils at MT.", $55
-	db "MOON! Please call", $55
-	db "PEWTER POLICE", $55
-	db "with any info!", $57
-
-_PewterCityText10: ; a4cb1 (29:4cb1)
-	db $0, "PEWTER MUSEUM", $4f
-	db "OF SCIENCE", $57
-
-_PewterCityText11: ; a4ccb (29:4ccb)
-	db $0, "PEWTER CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: BROCK", $51
-	db "The Rock Solid", $4f
-	db "#MON Trainer!", $57
-
-_PewterCityText12: ; a4d0c (29:4d0c)
-	db $0, "PEWTER CITY", $4f
-	db "A Stone Gray", $55
-	db "City", $57
-
-_UnnamedText_19668: ; a4d2b (29:4d2b)
-	db $0, $53, ": Yo!", $4f
-	db $52, "!", $51
-	db "You're still", $4f
-	db "struggling along", $55
-	db "back here?", $51
-	db "I'm doing great!", $4f
-	db "I caught a bunch", $55
-	db "of strong and", $55
-	db "smart #MON!", $51
-	db "Here, let me see", $4f
-	db "what you caught,", $55
-	db $52, "!", $57
-
-_UnnamedText_1966d: ; a4dbe (29:4dbe)
-	db $0, "Hey!", $4f
-	db "Take it easy!", $55
-	db "You won already!", $58
-
-_UnnamedText_19672: ; a4de3 (29:4de3)
-	db $0, "Heh!", $4f
-	db "You're no match", $55
-	db "for my genius!", $58
-
-_UnnamedText_19677: ; a4e07 (29:4e07)
-	db $0, $53, ": Hey,", $4f
-	db "guess what?", $51
-	db "I went to BILL's", $4f
-	db "and got him to", $55
-	db "show me his rare", $55
-	db "#MON!", $51
-	db "That added a lot", $4f
-	db "of pages to my", $55
-	db "#DEX!", $51
-	db "After all, BILL's", $4f
-	db "world famous as a", $55
-	db "#MANIAC!", $51
-	db "He invented the", $4f
-	db "#MON Storage", $55
-	db "System on PC!", $51
-	db "Since you're using", $4f
-	db "his system, go", $55
-	db "thank him!", $51
-	db "Well, I better", $4f
-	db "get rolling!", $55
-	db "Smell ya later!", $57
-
-_UnnamedText_196d9: ; a4f27 (29:4f27)
-	db $0, "Hey! Stay out!", $4f
-	db "It's not your", $55
-	db "yard! Huh? Me?", $51
-	db "I'm an innocent", $4f
-	db "bystander! Don't", $55
-	db "you believe me?", $57
-
-_ReceivedTM28Text: ; a4f82 (29:4f82)
-	db $0, $52, " recovered", $4f
-	db "TM28!@@"
-
-_ReceivedTM28Text2: ; a4f96 (29:4f96)
-	db $0, $51
-	db "I better get", $4f
-	db "moving! Bye!@@"
-
-_TM28NoRoomText: ; a4fb3 (29:4fb3)
-	db $0, "Make room for", $4f
-	db "this!", $51
-	db "I can't run until", $4f
-	db "I give it to you!", $57
-
-_UnnamedText_196ee: ; a4feb (29:4feb)
-	db $0, "Stop!", $4f
-	db "I give up! I'll", $55
-	db "leave quietly!", $58
-
-_UnnamedText_196f3: ; a5010 (29:5010)
-	db $0, "OK! I'll return", $4f
-	db "the TM I stole!", $58
-
-_CeruleanCityText3: ; a5030 (29:5030)
-	db $0, "You're a trainer", $4f
-	db "too? Collecting,", $55
-	db "fighting, it's a", $55
-	db "tough life.", $57
-
-_CeruleanCityText4: ; a506e (29:506e)
-	db $0, "That bush in", $4f
-	db "front of the shop", $55
-	db "is in the way.", $51
-	db "There might be a", $4f
-	db "way around.", $57
-
-_CeruleanCityText5: ; a50ba (29:50ba)
-	db $0, "You're making an", $4f
-	db "encyclopedia on", $55
-	db "#MON? That", $55
-	db "sounds amusing.", $57
-
-_CeruleanCityText6: ; a50f6 (29:50f6)
-	db $0, "The people here", $4f
-	db "were robbed.", $51
-	db "It's obvious that", $4f
-	db "TEAM ROCKET is", $55
-	db "behind this most", $55
-	db "heinous crime!", $51
-	db "Even our POLICE", $4f
-	db "force has trouble", $55
-	db "with the ROCKETs!", $57
-
-_UnnamedText_19730: ; a5188 (29:5188)
-	db $0, "OK! SLOWBRO!", $4f
-	db "Use SONICBOOM!", $55
-	db "Come on, SLOWBRO", $55
-	db "pay attention!", $57
-
-_UnnamedText_19735: ; a51c5 (29:51c5)
-	db $0, "SLOWBRO punch!", $4f
-	db "No! You blew it", $55
-	db "again!", $57
-
-_UnnamedText_1973a: ; a51ec (29:51ec)
-	db $0, "SLOWBRO, WITHDRAW!", $4f
-	db "No! That's wrong!", $51
-	db "It's so hard to", $4f
-	db "control #MON!", $51
-	db "Your #MON's", $4f
-	db "obedience depends", $55
-	db "on your abilities", $55
-	db "as a trainer!", $57
-
-_UnnamedText_1976f: ; a526b (29:526b)
-	db $0, "SLOWBRO took a", $4f
-	db "snooze...", $57
-
-_UnnamedText_19774: ; a5285 (29:5285)
-	db $0, "SLOWBRO is", $4f
-	db "loafing around...", $57
-
-_UnnamedText_19779: ; a52a3 (29:52a3)
-	db $0, "SLOWBRO turned", $4f
-	db "away...", $57
-
-_UnnamedText_1977e: ; a52bb (29:52bb)
-	db $0, "SLOWBRO", $4f
-	db "ignored orders...", $57
-
-_CeruleanCityText9: ; a52d6 (29:52d6)
-	db $0, "I want a bright", $4f
-	db "red BICYCLE!", $51
-	db "I'll keep it at", $4f
-	db "home, so it won't", $55
-	db "get dirty!", $57
-
-_CeruleanCityText10: ; a531f (29:531f)
-	db $0, "This is CERULEAN", $4f
-	db "CAVE! Horribly", $55
-	db "strong #MON", $55
-	db "live in there!", $51
-	db "The #MON LEAGUE", $4f
-	db "champion is the", $55
-	db "only person who", $55
-	db "is allowed in!", $57
-
-_CeruleanCityText12: ; a539a (29:539a)
-	db $0, "CERULEAN CITY", $4f
-	db "A Mysterious,", $55
-	db "Blue Aura", $55
-	db "Surrounds It", $57
-
-_CeruleanCityText13: ; a53ce (29:53ce)
-	db $0, "TRAINER TIPS", $51
-	db "Pressing B Button", $4f
-	db "during evolution", $55
-	db "cancels the whole", $55
-	db "process.", $57
-
-_CeruleanCityText16: ; a541a (29:541a)
-	db $0, "Grass and caves", $4f
-	db "handled easily!", $55
-	db "BIKE SHOP", $57
-
-_CeruleanCityText17: ; a5445 (29:5445)
-	db $0, "CERULEAN CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: MISTY", $51
-	db "The Tomboyish", $4f
-	db "Mermaid!", $57
-
-_UnnamedText_4413c: ; a5482 (29:5482)
-	db $0, "Do you believe in", $4f
-	db "GHOSTs?", $57
-
-_UnnamedText_44141: ; a549d (29:549d)
-	db $0, "Really? So there", $4f
-	db "are believers...", $57
-
-_UnnamedText_44146: ; a54c0 (29:54c0)
-	db $0, "Hahaha, I guess", $4f
-	db "not.", $51
-	db "That white hand", $4f
-	db "on your shoulder,", $55
-	db "it's not real.", $57
-
-_LavenderTownText2: ; a5506 (29:5506)
-	db $0, "This town is known", $4f
-	db "as the grave site", $55
-	db "of #MON.", $51
-	db "Memorial services", $4f
-	db "are held in", $55
-	db "#MON TOWER.", $57
-
-_LavenderTownText3: ; a555f (29:555f)
-	db $0, "GHOSTs appeared", $4f
-	db "in #MON TOWER.", $51
-	db "I think they're", $4f
-	db "the spirits of", $55
-	db "#MON that the", $55
-	db "ROCKETs killed.", $57
-
-_LavenderTownText4: ; a55bb (29:55bb)
-	db $0, "LAVENDER TOWN", $4f
-	db "The Noble Purple", $55
-	db "Town", $57
-
-_LavenderTownText5: ; a55e0 (29:55e0)
-	db $0, "New SILPH SCOPE!", $51
-	db "Make the Invisible", $4f
-	db "Plain to See!", $51
-	db "SILPH CO.", $57
-
-_LavenderTownText8: ; a561d (29:561d)
-	db $0, "LAVENDER VOLUNTEER", $4f
-	db "#MON HOUSE", $57
-
-_LavenderTownText9: ; a563c (29:563c)
-	db $0, "May the Souls of", $4f
-	db "#MON Rest Easy", $55
-	db "#MON TOWER", $57
-
-_VermilionCityText1: ; a5668 (29:5668)
-	db $0, "We're careful", $4f
-	db "about pollution!", $51
-	db "We've heard GRIMER", $4f
-	db "multiplies in", $55
-	db "toxic sludge!", $57
-
-_UnnamedText_198a7: ; a56b5 (29:56b5)
-	db $0, "Did you see S.S.", $4f
-	db "ANNE moored in", $55
-	db "the harbor?", $57
-
-_UnnamedText_198ac: ; a56e2 (29:56e2)
-	db $0, "So, S.S.ANNE has", $4f
-	db "departed!", $51
-	db "She'll be back in", $4f
-	db "about a year.", $57
-
-_SSAnneWelcomeText4: ; a571d (29:571d)
-	db $0, "Welcome to S.S.", $4f
-	db "ANNE!", $57
-
-_SSAnneWelcomeText9: ; a5734 (29:5734)
-	db $0, "Welcome to S.S.", $4f
-	db "ANNE!", $51
-	db "Excuse me, do you", $4f
-	db "have a ticket?", $58
-
-_SSAnneFlashedTicketText: ; a576c (29:576c)
-	db $0, $52, " flashed", $4f
-	db "the S.S.TICKET!", $51
-	db "Great! Welcome to", $4f
-	db "S.S.ANNE!", $57
-
-_SSAnneNoTicketText: ; a57a3 (29:57a3)
-	db $0, $52, " doesn't", $4f
-	db "have the needed", $55
-	db "S.S.TICKET.", $51
-	db "Sorry!", $51
-	db "You need a ticket", $4f
-	db "to get aboard.", $57
-
-_SSAnneNotHereText: ; a57f1 (29:57f1)
-	db $0, "The ship set sail.", $57
-
-_VermilionCityText4: ; a5805 (29:5805)
-	db $0, "I'm putting up a", $4f
-	db "building on this", $55
-	db "plot of land.", $51
-	db "My #MON is", $4f
-	db "tamping the land.", $57
-
-_VermilionCityText5: ; a5852 (29:5852)
-	db $0, "MACHOP: Guoh!", $4f
-	db "Gogogoh!@@"
-
-_VermilionCityText14: ; a586b (29:586b)
-	db $0, $51
-	db "A MACHOP is", $4f
-	db "stomping the land", $55
-	db "flat.", $57
-
-_VermilionCityText6: ; a5891 (29:5891)
-	db $0, "S.S.ANNE is a", $4f
-	db "famous luxury", $55
-	db "cruise ship.", $51
-	db "We visit VERMILION", $4f
-	db "once a year.", $57
-
-_VermilionCityText7: ; a58db (29:58db)
-	db $0, "VERMILION CITY", $4f
-	db "The Port of", $55
-	db "Exquisite Sunsets", $57
-
-_VermilionCityText8: ; a5909 (29:5909)
-	db $0, "NOTICE!", $51
-	db "ROUTE 12 may be", $4f
-	db "blocked off by a", $55
-	db "sleeping #MON.", $51
-	db "Detour through", $4f
-	db "ROCK TUNNEL to", $55
-	db "LAVENDER TOWN.", $51
-	db "VERMILION POLICE", $57
-
-_VermilionCityText11: ; a5980 (29:5980)
-	db $0, "#MON FAN CLUB", $4f
-	db "All #MON fans", $55
-	db "welcome!", $57
-
-_VermilionCityText12: ; a59a6 (29:59a6)
-	db $0, "VERMILION CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: LT.SURGE", $51
-	db "The Lightning ", $4f
-	db "American!", $57
-
-_VermilionCityText13: ; a59e9 (29:59e9)
-	db $0, "VERMILION HARBOR", $57
-
-_CeladonCityText1: ; a59fb (29:59fb)
-	db $0, "I got my KOFFING", $4f
-	db "in CINNABAR!", $51
-	db "It's nice, but it", $4f
-	db "breathes poison", $55
-	db "when it's angry!", $57
-
-_CeladonCityText2: ; a5a4b (29:5a4b)
-	db $0, "Heheh! This GYM", $4f
-	db "is great! It's", $55
-	db "full of women!", $57
-
-_CeladonCityText3: ; a5a79 (29:5a79)
-	db $0, "The GAME CORNER", $4f
-	db "is bad for our", $55
-	db "city's image!", $57
-
-_CeladonCityText4: ; a5aa6 (29:5aa6)
-	db $0, "Moan! I blew it", $4f
-	db "all at the slots!", $51
-	db "I knew I should", $4f
-	db "have cashed in my", $55
-	db "coins for prizes!", $57
-
-_TM41PreText: ; a5afd (29:5afd)
-	db $0, "Hello, there!", $51
-	db "I've seen you,", $4f
-	db "but I never had a", $55
-	db "chance to talk!", $51
-	db "Here's a gift for", $4f
-	db "dropping by!", $58
-
-_ReceivedTM41Text: ; a5b5a (29:5b5a)
-	db $0, $52, " received", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!@@"
-
-_TM41ExplanationText: ; a5b6e (29:5b6e)
-	db $0, "TM41 teaches", $4f
-	db "SOFTBOILED!", $51
-	db "Only one #MON", $4f
-	db "can use it!", $51
-	db "That #MON is", $4f
-	db "CHANSEY!", $57
-
-_TM41NoRoomText: ; a5bb8 (29:5bb8)
-	db $0, "Oh, your pack is", $4f
-	db "full of items!", $57
-
-_CeladonCityText6: ; a5bd9 (29:5bd9)
-	db $0, "This is my trusted", $4f
-	db "pal, POLIWRATH!", $51
-	db "It evolved from", $4f
-	db "POLIWHIRL when I", $55
-	db "used WATER STONE!", $57
-
-_CeladonCityText7: ; a5c30 (29:5c30)
-	db $0, "POLIWRATH: Ribi", $4f
-	db "ribit!@@"
-
-_CeladonCityText8: ; a5c49 (29:5c49)
-	db $0, "What are you", $4f
-	db "staring at?", $57
-
-_CeladonCityText9: ; a5c63 (29:5c63)
-	db $0, "Keep out of TEAM", $4f
-	db "ROCKET's way!", $57
-
-_CeladonCityText10: ; a5c82 (29:5c82)
-	db $0, "TRAINER TIPS", $51
-	db "X ACCURACY boosts", $4f
-	db "the accuracy of", $55
-	db "techniques!", $51
-	db "DIRE HIT jacks up", $4f
-	db "the likelihood of", $55
-	db "critical hits!", $51
-	db "Get your items at", $4f
-	db "CELADON DEPT.", $55
-	db "STORE!", $57
-
-_CeladonCityText11: ; a5d18 (29:5d18)
-	db $0, "CELADON CITY", $4f
-	db "The City of", $55
-	db "Rainbow Dreams", $57
-
-_CeladonCityText13: ; a5d41 (29:5d41)
-	db $0, "CELADON CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: ERIKA", $51
-	db "The Nature Loving", $4f
-	db "Princess!", $57
-
-_CeladonCityText14: ; a5d82 (29:5d82)
-	db $0, "CELADON MANSION", $57
-
-_CeladonCityText15: ; a5d93 (29:5d93)
-	db $0, "Find what you", $4f
-	db "need at CELADON", $55
-	db "DEPT. STORE!", $57
-
-_CeladonCityText16: ; a5dbf (29:5dbf)
-	db $0, "TRAINER TIPS", $51
-	db "GUARD SPEC.", $4f
-	db "protects #MON", $55
-	db "against SPECIAL", $55
-	db "attacks such as", $55
-	db "fire and water!", $51
-	db "Get your items at", $4f
-	db "CELADON DEPT.", $55
-	db "STORE!", $57
-
-_CeladonCityText17: ; a5e3e (29:5e3e)
-	db $0, "Coins exchanged", $4f
-	db "for prizes!", $55
-	db "PRIZE EXCHANGE", $57
-
-_CeladonCityText18: ; a5e6a (29:5e6a)
-	db $0, "ROCKET GAME CORNER", $4f
-	db "The playground", $55
-	db "for grown-ups!", $57
-
-_FuchsiaCityText1: ; a5e9c (29:5e9c)
-	db $0, "Did you try the", $4f
-	db "SAFARI GAME? Some", $55
-	db "#MON can only", $55
-	db "be caught there.", $57
-
-_FuchsiaCityText2: ; a5ede (29:5ede)
-	db $0, "SAFARI ZONE has a", $4f
-	db "zoo in front of", $55
-	db "the entrance.", $51
-	db "Out back is the", $4f
-	db "SAFARI GAME for", $55
-	db "catching #MON.", $57
-
-_FuchsiaCityText3: ; a5f3e (29:5f3e)
-	db $0, "ERIK: Where's", $4f
-	db "SARA? I said I'd", $55
-	db "meet her here.", $57
-
-_FuchsiaCityText4: ; a5f6b (29:5f6b)
-	db $0, "That item ball in", $4f
-	db "there is really a", $55
-	db "#MON.", $57
-
-_FuchsiaCityText5: ; a5f96 (29:5f96)
-	db $0, "!", $57
-
-_FuchsiaCityText11: ; a5f99 (29:5f99)
-	db $0, "FUCHSIA CITY", $4f
-	db "Behold! It's", $55
-	db "Passion Pink!", $57
-
-_FuchsiaCityText13: ; a5fc1 (29:5fc1)
-	db $0, "SAFARI GAME", $4f
-	db "#MON-U-CATCH!", $57
-
-_FuchsiaCityText16: ; a5fdc (29:5fdc)
-	db $0, "SAFARI ZONE", $4f
-	db "WARDEN's HOME", $57
-
-_FuchsiaCityText17: ; a5ff6 (29:5ff6)
-	db $0, "#MON PARADISE", $4f
-	db "SAFARI ZONE", $57
-
-_FuchsiaCityText18: ; a6011 (29:6011)
-	db $0, "FUCHSIA CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: KOGA", $51
-	db "The Poisonous", $4f
-	db "Ninja Master", $57
-
-_FuchsiaCityChanseyText: ; a6050 (29:6050)
-	db $0, "Name: CHANSEY", $51
-	db "Catching one is", $4f
-	db "all up to chance.", $58
-
-_FuchsiaCityVoltorbText: ; a6081 (29:6081)
-	db $0, "Name: VOLTORB", $51
-	db "The very image of", $4f
-	db "a # BALL.", $58
-
-_FuchsiaCityKangaskhanText: ; a60ac (29:60ac)
-	db $0, "Name: KANGASKHAN", $51
-	db "A maternal #MON", $4f
-	db "that raises its", $55
-	db "young in a pouch", $55
-	db "on its belly.", $58
-
-_FuchsiaCitySlowpokeText: ; a60fd (29:60fd)
-	db $0, "Name: SLOWPOKE", $51
-	db "Friendly and very", $4f
-	db "slow moving.", $58
-
-_FuchsiaCityLaprasText: ; a612c (29:612c)
-	db $0, "Name: LAPRAS", $51
-	db "A.K.A. the king", $4f
-	db "of the seas.", $58
-
-_FuchsiaCityOmanyteText: ; a6157 (29:6157)
-	db $0, "Name: OMANYTE", $51
-	db "A #MON that", $4f
-	db "was resurrected", $55
-	db "from a fossil.", $58
-
-_FuchsiaCityKabutoText: ; a6191 (29:6191)
-	db $0, "Name: KABUTO", $51
-	db "A #MON that", $4f
-	db "was resurrected", $55
-	db "from a fossil.", $58
-
-_UnnamedText_19b2a: ; a61ca (29:61ca)
-	db $0, "...", $57
-
-_CinnabarIslandText8: ; a61cf (29:61cf)
-	db $0, "The door is", $4f
-	db "locked...", $57
-
-_CinnabarIslandText1: ; a61e6 (29:61e6)
-	db $0, "CINNABAR GYM's", $4f
-	db "BLAINE is an odd", $55
-	db "man who has lived", $55
-	db "here for decades.", $57
-
-_CinnabarIslandText2: ; a622a (29:622a)
-	db $0, "Scientists conduct", $4f
-	db "experiments in", $55
-	db "the burned out", $55
-	db "building.", $57
-
-_CinnabarIslandText3: ; a6266 (29:6266)
-	db $0, "CINNABAR ISLAND", $4f
-	db "The Fiery Town of", $55
-	db "Burning Desire", $57
-
-_CinnabarIslandText6: ; a6298 (29:6298)
-	db $0, "#MON LAB", $57
-
-_CinnabarIslandText7: ; a62a2 (29:62a2)
-	db $0, "CINNABAR ISLAND", $4f
-	db "#MON GYM", $55
-	db "LEADER: BLAINE", $51
-	db "The Hot-Headed", $4f
-	db "Quiz Master!", $57
-
-_SaffronCityText1: ; a62e7 (29:62e7)
-	db $0, "What do you want?", $4f
-	db "Get lost!", $57
-
-_SaffronCityText2: ; a6304 (29:6304)
-	db $0, "BOSS said he'll", $4f
-	db "take this town!", $57
-
-_SaffronCityText3: ; a6324 (29:6324)
-	db $0, "Get out of the", $4f
-	db "way!", $57
-
-_SaffronCityText4: ; a6339 (29:6339)
-	db $0, "SAFFRON belongs", $4f
-	db "to TEAM ROCKET!", $57
-
-_SaffronCityText5: ; a635a (29:635a)
-	db $0, "Being evil makes", $4f
-	db "me feel so alive!", $57
-
-_SaffronCityText6: ; a637e (29:637e)
-	db $0, "Ow! Watch where", $4f
-	db "you're walking!", $57
-
-_SaffronCityText7: ; a639e (29:639e)
-	db $0, "With SILPH under", $4f
-	db "control, we can", $55
-	db "exploit #MON", $55
-	db "around the world!", $57
-
-_SaffronCityText8: ; a63df (29:63df)
-	db $0, "You beat TEAM", $4f
-	db "ROCKET all alone?", $55
-	db "That's amazing!", $57
-
-_SaffronCityText9: ; a640f (29:640f)
-	db $0, "Yeah! TEAM ROCKET", $4f
-	db "is gone!", $55
-	db "It's safe to go", $55
-	db "out again!", $57
-
-_SaffronCityText10: ; a6445 (29:6445)
-	db $0, "People should be", $4f
-	db "flocking back to", $55
-	db "SAFFRON now.", $57
-
-_SaffronCityText11: ; a6475 (29:6475)
-	db $0, "I flew here on my", $4f
-	db "PIDGEOT when I", $55
-	db "read about SILPH.", $51
-	db "It's already over?", $4f
-	db "I missed the", $55
-	db "media action.", $57
-
-_SaffronCityText12: ; a64d6 (29:64d6)
-	db $0, "PIDGEOT: Bi bibii!@@"
-
-_SaffronCityText13: ; a64eb (29:64eb)
-	db $0, "I saw ROCKET", $4f
-	db "BOSS escaping", $55
-	db "SILPH's building.", $57
-
-_SaffronCityText14: ; a6518 (29:6518)
-	db $0, "I'm a security", $4f
-	db "guard.", $51
-	db "Suspicious kids I", $4f
-	db "don't allow in!", $57
-
-_SaffronCityText15: ; a654f (29:654f)
-	db $0, "...", $4f
-	db "Snore...", $51
-	db "Hah! He's taking", $4f
-	db "a snooze!", $57
-
-_SaffronCityText16: ; a6577 (29:6577)
-	db $0, "SAFFRON CITY", $4f
-	db "Shining, Golden", $55
-	db "Land of Commerce", $57
-
-_SaffronCityText17: ; a65a6 (29:65a6)
-	db $0, "FIGHTING DOJO", $57
-
-_SaffronCityText18: ; a65b5 (29:65b5)
-	db $0, "SAFFRON CITY", $4f
-	db "#MON GYM", $55
-	db "LEADER: SABRINA", $51
-	db "The Master of", $4f
-	db "Psychic #MON!", $57
-
-_SaffronCityText20: ; a65f8 (29:65f8)
-	db $0, "TRAINER TIPS", $51
-	db "FULL HEAL cures", $4f
-	db "all ailments like", $55
-	db "sleep and burns.", $51
-	db "It costs a bit", $4f
-	db "more, but it's", $55
-	db "more convenient.", $57
-
-_SaffronCityText21: ; a6667 (29:6667)
-	db $0, "TRAINER TIPS", $51
-	db "New GREAT BALL", $4f
-	db "offers improved", $55
-	db "capture rates.", $51
-	db "Try it on those", $4f
-	db "hard-to-catch", $55
-	db "#MON.", $57
-
-_SaffronCityText22: ; a66c7 (29:66c7)
-	db $0, "SILPH CO.", $4f
-	db "OFFICE BUILDING", $57
-
-_SaffronCityText24: ; a66e2 (29:66e2)
-	db $0, "MR.PSYCHIC's", $4f
-	db "HOUSE", $57
-
-_SaffronCityText25: ; a66f5 (29:66f5)
-	db $0, "SILPH's latest", $4f
-	db "product!", $51
-	db "Release to be", $4f
-	db "determined...", $57
-
-_ItemUseBallText00: ; a6729 (29:6729)
-	db 0,"It dodged the",$4F
-	db "thrown BALL!",$51
-	db "This #MON",$4F
-	db "can't be caught!",$58
-
-_ItemUseBallText01: ; a675f (29:675f)
-	db 0,"You missed the",$4F
-	db "#MON!",$58
-
-_ItemUseBallText02: ; a6775 (29:6775)
-	db 0,"Darn! The #MON",$4F
-	db "broke free!",$58
-
-_ItemUseBallText03: ; a6791 (29:6791)
-	db 0,"Aww! It appeared",$4F
-	db "to be caught! ",$58
-
-_ItemUseBallText04: ; a67b2 (29:67b2)
-	db 0,"Shoot! It was so",$4F
-	db "close too!",$58
-
-_ItemUseBallText05: ; a67cf (29:67cf)
-	db 0,"All right!",$4F,"@",1
-	dw W_ENEMYMONNAME
-	db 0," was",$55
-	db "caught!@@"
-
-_ItemUseBallText07: ; a67ee (29:67ee)
-	db 1
-	dw W_BOXMON1NAME
-	db 0," was",$4F
-	db "transferred to",$55
-	db "BILL's PC!",$58
-
-_ItemUseBallText08: ; a6810 (29:6810)
-	db 1
-	dw W_BOXMON1NAME
-	db 0," was",$4F
-	db "transferred to",$55
-	db "someone's PC!",$58
-
-_ItemUseBallText06: ; a6835 (29:6835)
-	db 0,"New #DEX data",$4F
-	db "will be added for",$55,"@"
-	TX_RAM W_ENEMYMONNAME
-	db 0,"!@@"
-
-_SurfingGotOnText: ; a685e (29:685e)
-	db $0, $52, " got on", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, "!", $58
-
-_SurfingNoPlaceToGetOffText: ; a686f (29:686f)
-	db $0, "There's no place", $4f
-	db "to get off!", $58
-
-_VitaminStatRoseText: ; a688c (29:688c)
-	TX_RAM $cd6d
-	db $0, "'s", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, " rose.", $58
-
-_VitaminNoEffectText: ; a689e (29:689e)
-	db $0, "It won't have any", $4f
-	db "effect.", $58
-
-_ThrewBaitText: ; a68b8 (29:68b8)
-	db $0, $52, " threw", $4f
-	db "some BAIT.", $57
-
-_ThrewRockText: ; a68cc (29:68cc)
-	db $0, $52, " threw a", $4f
-	db "ROCK.", $57
-
-_PlayedFluteNoEffectText: ; a68dd (29:68dd)
-	db $0, "Played the #", $4f
-	db "FLUTE.", $51
-	db "Now, that's a", $4f
-	db "catchy tune!", $58
-
-_FluteWokeUpText: ; a690c (29:690c)
-	db $0, "All sleeping", $4f
-	db "#MON woke up.", $58
-
-_PlayedFluteHadEffectText: ; a6928 (29:6928)
-	db $0, $52, " played the", $4f
-	db "# FLUTE.@@"
-
-_CoinCaseNumCoinsText: ; a6940 (29:6940)
-	db $0, "Coins", $4f
-	db "@"
-	db $2, $a4, $d5, $c2 ; print BCD number
-	db $0, " ", $58
-
-_ItemfinderFoundItemText: ; a694f (29:694f)
-	db $0, "Yes! ITEMFINDER", $4f
-	db "indicates there's", $55
-	db "an item nearby.", $58
-
-_ItemfinderFoundNothingText: ; a6981 (29:6981)
-	db $0, "Nope! ITEMFINDER", $4f
-	db "isn't responding.", $58
-
-_RaisePPWhichTechniqueText: ; a69a4 (29:69a4)
-	db $0, "Raise PP of which", $4f
-	db "technique?", $57
-
-_RestorePPWhichTechniqueText: ; a69c2 (29:69c2)
-	db $0, "Restore PP of", $4f
-	db "which technique?", $57
-
-_PPMaxedOutText: ; a69e2 (29:69e2)
-	TX_RAM $cf4b
-	db $0, "'s PP", $4f
-	db "is maxed out.", $58
-
-_PPIncreasedText: ; a69f9 (29:69f9)
-	TX_RAM $cf4b
-	db $0, "'s PP", $4f
-	db "increased.", $58
-
-_PPRestoredText: ; a6a0d (29:6a0d)
-	db $0, "PP was restored.", $58
-
-_BootedUpTMText: ; a6a1f (29:6a1f)
-	db $0, "Booted up a TM!", $58
-
-_BootedUpHMText: ; a6a30 (29:6a30)
-	db $0, "Booted up an HM!", $58
-
-_TeachMachineMoveText: ; a6a42 (29:6a42)
-	db $0, "It contained", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!", $51
-	db "Teach @"
-	TX_RAM $cf4b
-	db $0, $4f
-	db "to a #MON?", $57
-
-_MonCannotLearnMachineMoveText: ; a6a6e (29:6a6e)
-	TX_RAM $cd6d
-	db $0, " is not", $4f
-	db "compatible with", $55
-	db "@"
-	TX_RAM $cf4b
-	db $0, ".", $51
-	db "It can't learn", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, ".", $58
-
-_ItemUseNotTimeText: ; a6aa6 (29:6aa6)
-	db $0, "OAK: ", $52, "!", $4f
-	db "This isn't the", $55
-	db "time to use that! ", $58
-
-_ItemUseNotYoursToUseText: ; a6ad0 (29:6ad0)
-	db $0, "This isn't yours", $4f
-	db "to use!", $58
-
-_ItemUseNoEffectText: ; a6ae9 (29:6ae9)
-	db $0, "It won't have any", $4f
-	db "effect.", $58
-
-_ThrowBallAtTrainerMonText1: ; a6b03 (29:6b03)
-	db $0, "The trainer", $4f
-	db "blocked the BALL!", $58
-
-_ThrowBallAtTrainerMonText2: ; a6b22 (29:6b22)
-	db $0, "Don't be a thief!", $58
-
-_NoCyclingAllowedHereText: ; a6b34 (29:6b34)
-	db $0, "No cycling", $4e, "allowed here.", $58
-
-_NoSurfingHereText: ; a6b4e (29:6b4e)
-	db $0, "No SURFing on", $4f
-	db "@"
-	TX_RAM $cd6d
-	db $0, " here!", $58
-
-_BoxFullCannotThrowBallText: ; a6b69 (29:6b69)
-	db $0, "The #MON BOX", $4f
-	db "is full! Can't", $55
-	db "use that item!", $58
-
-SECTION "bank2A",ROMX,BANK[$2A]
-
-_ItemUseText001: ; a8000 (2a:4000)
-	db 0,$52," used@@"
-
-_ItemUseText002: ; a8009 (2a:4009)
-	TX_RAM $cf4b
-	db $0, "!", $57
-
-_GotOnBicycleText1: ; a800f (2a:400f)
-	db $0, $52, " got on the@@"
-
-_GotOnBicycleText2: ; a801e (2a:401e)
-	TX_RAM $cf4b
-	db $0, "!", $58
-
-_GotOffBicycleText1: ; a8024 (2a:4024)
-	db $0, $52, " got off@@"
-
-_GotOffBicycleText2: ; a8030 (2a:4030)
-	db $0, "the @"
-	TX_RAM $cf4b
-	db $0, ".", $58
-
-_ThrewAwayItemText: ; a803c (2a:403c)
-	db $0, "Threw away", $4f
-	db "@"
-
-UnnamedText_a8049: ; a8049 (2a:4049)
-	TX_RAM $cd6d
-	db $0, ".", $58
-
-_IsItOKToTossItemText: ; a804f (2a:404f)
-	db $0, "Is it OK to toss", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "?", $58
-
-_TooImportantToTossText: ; a8068 (2a:4068)
-	db $0, "That's too impor-", $4f
-	db "tant to toss!", $58
-
-_UnnamedText_2fe3b: ; a8088 (2a:4088)
-	TX_RAM $cd6d
-	db $0, " knows", $4f
-	db "@"
-	TX_RAM $cf4b
-	db $0, "!", $58
-
-_UnnamedText_71d88: ; a809a (2a:409a)
-	db $0, "Okay, connect the", $4f
-	db "cable like so!", $58
-
-_UnnamedText_71d8d: ; a80bc (2a:40bc)
-	db $0, $52, " traded", $4f
-	db "@"
-	TX_RAM $cd13
-	db $0, " for", $55
-	db "@"
-	TX_RAM $cd1e
-	db $0, "!@@"
-
-_UnnamedText_71d94: ; a80d8 (2a:40d8)
-	db $0, "I'm looking for", $4f
-	db "@"
-	TX_RAM $cd13
-	db $0, "! Wanna", $51
-	db "trade one for", $4f
-	db "@"
-	TX_RAM $cd1e
-	db $0, "? ", $57
-
-_UnnamedText_71d99: ; a810b (2a:410b)
-	db $0, "Awww!", $4f
-	db "Oh well...", $57
-
-_UnnamedText_71d9e: ; a811d (2a:411d)
-	db $0, "What? That's not", $4f
-	db "@"
-
-UnnamedText_a812f: ; a812f (2a:412f)
-	TX_RAM $cd13
-	db $0, "!", $51
-	db "If you get one,", $4f
-	db "come back here!", $57
-
-_UnnamedText_71da3: ; a8155 (2a:4155)
-	db $0, "Hey thanks!", $57
-
-_UnnamedText_71da8: ; a8162 (2a:4162)
-	db $0, "Isn't my old", $4f
-	db "@"
-	TX_RAM $cd1e
-	db $0, " great?", $57
-
-_UnnamedText_71dad: ; a817c (2a:417c)
-	db $0, "Hello there! Do", $4f
-	db "you want to trade", $51
-	db "your @"
-	TX_RAM $cd13
-	db $0, $4f
-	db "for @"
-	TX_RAM $cd1e
-	db $0, "?", $57
-
-_UnnamedText_71db2: ; a81b5 (2a:41b5)
-	db $0, "Well, if you", $4f
-	db "don't want to...", $57
-
-_UnnamedText_71db7: ; a81d3 (2a:41d3)
-	db $0, "Hmmm? This isn't", $4f
-	db "@"
-	TX_RAM $cd13
-	db $0, ".", $51
-	db "Think of me when", $4f
-	db "you get one.", $57
-
-_UnnamedText_71dbc: ; a8209 (2a:4209)
-	db $0, "Thanks!", $57
-
-_UnnamedText_71dc1: ; a8212 (2a:4212)
-	db $0, "The @"
-	TX_RAM $cd13
-	db $0, " you", $4f
-	db "traded to me", $51
-	db "went and evolved!", $57
-
-_UnnamedText_71dc6: ; a8240 (2a:4240)
-	db $0, "Hi! Do you have", $4f
-	db "@"
-	TX_RAM $cd13
-	db $0, "?", $51
-	db "Want to trade it", $4f
-	db "for @"
-	TX_RAM $cd1e
-	db $0, "?", $57
-
-_UnnamedText_71dcb: ; a8274 (2a:4274)
-	db $0, "That's too bad.", $57
-
-_UnnamedText_71dd0: ; a8284 (2a:4284)
-	db $0, "...This is no", $4f
-	db "@"
-	TX_RAM $cd13
-	db $0, ".", $51
-	db "If you get one,", $4f
-	db "trade it with me!", $57
-
-_UnnamedText_71dd5: ; a82bc (2a:42bc)
-	db $0, "Thanks pal!", $57
-
-_UnnamedText_71dda: ; a82c9 (2a:42c9)
-	db $0, "How is my old", $4f
-	db "@"
-	TX_RAM $cd1e
-	db $0, "?", $51
-	db "My @"
-	TX_RAM $cd13
-	db $0, " is", $4f
-	db "doing great!", $57
-
-_UnnamedText_ef7d ; a82f8 (2a:42f8)
-	db $0, "There isn't", $4f
-	db "anything to CUT!", $58
-
-_UsedCutText: ; a8315 (2a:4315)
-	TX_RAM $cd6d
-	db $0, " hacked", $4f
-	db "away with CUT!", $58
-
-SECTION "bank2B",ROMX,BANK[$2B]
-
-INCLUDE "text/pokedex.asm"
-
-SECTION "bank2C",ROMX,BANK[$2C]
-
-MoveNames: ; b0000 (2c:4000)
-	db "POUND@"
-	db "KARATE CHOP@"
-	db "DOUBLESLAP@"
-	db "COMET PUNCH@"
-	db "MEGA PUNCH@"
-	db "PAY DAY@"
-	db "FIRE PUNCH@"
-	db "ICE PUNCH@"
-	db "THUNDERPUNCH@"
-	db "SCRATCH@"
-	db "VICEGRIP@"
-	db "GUILLOTINE@"
-	db "RAZOR WIND@"
-	db "SWORDS DANCE@"
-	db "CUT@"
-	db "GUST@"
-	db "WING ATTACK@"
-	db "WHIRLWIND@"
-	db "FLY@"
-	db "BIND@"
-	db "SLAM@"
-	db "VINE WHIP@"
-	db "STOMP@"
-	db "DOUBLE KICK@"
-	db "MEGA KICK@"
-	db "JUMP KICK@"
-	db "ROLLING KICK@"
-	db "SAND-ATTACK@"
-	db "HEADBUTT@"
-	db "HORN ATTACK@"
-	db "FURY ATTACK@"
-	db "HORN DRILL@"
-	db "TACKLE@"
-	db "BODY SLAM@"
-	db "WRAP@"
-	db "TAKE DOWN@"
-	db "THRASH@"
-	db "DOUBLE-EDGE@"
-	db "TAIL WHIP@"
-	db "POISON STING@"
-	db "TWINEEDLE@"
-	db "PIN MISSILE@"
-	db "LEER@"
-	db "BITE@"
-	db "GROWL@"
-	db "ROAR@"
-	db "SING@"
-	db "SUPERSONIC@"
-	db "SONICBOOM@"
-	db "DISABLE@"
-	db "ACID@"
-	db "EMBER@"
-	db "FLAMETHROWER@"
-	db "MIST@"
-	db "WATER GUN@"
-	db "HYDRO PUMP@"
-	db "SURF@"
-	db "ICE BEAM@"
-	db "BLIZZARD@"
-	db "PSYBEAM@"
-	db "BUBBLEBEAM@"
-	db "AURORA BEAM@"
-	db "HYPER BEAM@"
-	db "PECK@"
-	db "DRILL PECK@"
-	db "SUBMISSION@"
-	db "LOW KICK@"
-	db "COUNTER@"
-	db "SEISMIC TOSS@"
-	db "STRENGTH@"
-	db "ABSORB@"
-	db "MEGA DRAIN@"
-	db "LEECH SEED@"
-	db "GROWTH@"
-	db "RAZOR LEAF@"
-	db "SOLARBEAM@"
-	db "POISONPOWDER@"
-	db "STUN SPORE@"
-	db "SLEEP POWDER@"
-	db "PETAL DANCE@"
-	db "STRING SHOT@"
-	db "DRAGON RAGE@"
-	db "FIRE SPIN@"
-	db "THUNDERSHOCK@"
-	db "THUNDERBOLT@"
-	db "THUNDER WAVE@"
-	db "THUNDER@"
-	db "ROCK THROW@"
-	db "EARTHQUAKE@"
-	db "FISSURE@"
-	db "DIG@"
-	db "TOXIC@"
-	db "CONFUSION@"
-	db "PSYCHIC@"
-	db "HYPNOSIS@"
-	db "MEDITATE@"
-	db "AGILITY@"
-	db "QUICK ATTACK@"
-	db "RAGE@"
-	db "TELEPORT@"
-	db "NIGHT SHADE@"
-	db "MIMIC@"
-	db "SCREECH@"
-	db "DOUBLE TEAM@"
-	db "RECOVER@"
-	db "HARDEN@"
-	db "MINIMIZE@"
-	db "SMOKESCREEN@"
-	db "CONFUSE RAY@"
-	db "WITHDRAW@"
-	db "DEFENSE CURL@"
-	db "BARRIER@"
-	db "LIGHT SCREEN@"
-	db "HAZE@"
-	db "REFLECT@"
-	db "FOCUS ENERGY@"
-	db "BIDE@"
-	db "METRONOME@"
-	db "MIRROR MOVE@"
-	db "SELFDESTRUCT@"
-	db "EGG BOMB@"
-	db "LICK@"
-	db "SMOG@"
-	db "SLUDGE@"
-	db "BONE CLUB@"
-	db "FIRE BLAST@"
-	db "WATERFALL@"
-	db "CLAMP@"
-	db "SWIFT@"
-	db "SKULL BASH@"
-	db "SPIKE CANNON@"
-	db "CONSTRICT@"
-	db "AMNESIA@"
-	db "KINESIS@"
-	db "SOFTBOILED@"
-	db "HI JUMP KICK@"
-	db "GLARE@"
-	db "DREAM EATER@"
-	db "POISON GAS@"
-	db "BARRAGE@"
-	db "LEECH LIFE@"
-	db "LOVELY KISS@"
-	db "SKY ATTACK@"
-	db "TRANSFORM@"
-	db "BUBBLE@"
-	db "DIZZY PUNCH@"
-	db "SPORE@"
-	db "FLASH@"
-	db "PSYWAVE@"
-	db "SPLASH@"
-	db "ACID ARMOR@"
-	db "CRABHAMMER@"
-	db "EXPLOSION@"
-	db "FURY SWIPES@"
-	db "BONEMERANG@"
-	db "REST@"
-	db "ROCK SLIDE@"
-	db "HYPER FANG@"
-	db "SHARPEN@"
-	db "CONVERSION@"
-	db "TRI ATTACK@"
-	db "SUPER FANG@"
-	db "SLASH@"
-	db "SUBSTITUTE@"
-	db "STRUGGLE@"

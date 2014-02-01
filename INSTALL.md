@@ -10,7 +10,7 @@ Set up the **pokered** repository:
 	git clone git://github.com/iimarckus/pokered.git
 	cd pokered
 
-	./init.sh
+	sudo ./init.sh
 
 
 Now **pokered.gbc** can be built from source.

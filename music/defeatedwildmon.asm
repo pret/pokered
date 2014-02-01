@@ -1,4 +1,4 @@
-Music_DefeatedWildMon_Ch1: ; 23b74 (8:7b74)
+Music_DefeatedWildMon_Ch1:: ; 23b74 (8:7b74)
 	tempo 0, 112
 	stereopanning 119
 	executemusic
@@ -14,7 +14,7 @@ Music_DefeatedWildMon_Ch1: ; 23b74 (8:7b74)
 	note F#, 1
 	note E_, 12
 
-Music_DefeatedWildMon_branch_23b8b:
+Music_DefeatedWildMon_branch_23b8b::
 	notetype 12, 6, 2
 	note E_, 2
 	note F#, 2
@@ -67,7 +67,7 @@ Music_DefeatedWildMon_branch_23b8b:
 	loopchannel 0, Music_DefeatedWildMon_branch_23b8b
 
 
-Music_DefeatedWildMon_Ch2: ; 23bc1 (8:7bc1)
+Music_DefeatedWildMon_Ch2:: ; 23bc1 (8:7bc1)
 	executemusic
 	duty 2
 	notetype 12, 12, 3
@@ -79,7 +79,7 @@ Music_DefeatedWildMon_Ch2: ; 23bc1 (8:7bc1)
 	notetype 12, 12, 7
 	note B_, 12
 
-Music_DefeatedWildMon_branch_23bce:
+Music_DefeatedWildMon_branch_23bce::
 	notetype 12, 8, 2
 	octave 3
 	note B_, 2
@@ -142,7 +142,7 @@ Music_DefeatedWildMon_branch_23bce:
 	loopchannel 0, Music_DefeatedWildMon_branch_23bce
 
 
-Music_DefeatedWildMon_Ch3: ; 23c0e (8:7c0e)
+Music_DefeatedWildMon_Ch3:: ; 23c0e (8:7c0e)
 	executemusic
 	notetype 12, 2, 0
 	octave 5
@@ -162,7 +162,7 @@ Music_DefeatedWildMon_Ch3: ; 23c0e (8:7c0e)
 	note E_, 1
 	rest 3
 
-Music_DefeatedWildMon_branch_23c21:
+Music_DefeatedWildMon_branch_23c21::
 	octave 4
 	note E_, 1
 	rest 1

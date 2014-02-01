@@ -1,4 +1,4 @@
-Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
+Music_DefeatedTrainer_Ch1:: ; 23a53 (8:7a53)
 	tempo 0, 224
 	stereopanning 119
 	duty 2
@@ -21,7 +21,7 @@ Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
 	duty 1
 	tempo 0, 224
 
-Music_DefeatedTrainer_branch_23a76:
+Music_DefeatedTrainer_branch_23a76::
 	notetype 4, 6, 3
 	octave 3
 	note A_, 6
@@ -95,7 +95,7 @@ Music_DefeatedTrainer_branch_23a76:
 	loopchannel 0, Music_DefeatedTrainer_branch_23a76
 
 
-Music_DefeatedTrainer_Ch2: ; 23ac1 (8:7ac1)
+Music_DefeatedTrainer_Ch2:: ; 23ac1 (8:7ac1)
 	duty 2
 	notetype 4, 12, 3
 	octave 4
@@ -110,7 +110,7 @@ Music_DefeatedTrainer_Ch2: ; 23ac1 (8:7ac1)
 	notetype 4, 12, 4
 	note D_, 12
 
-Music_DefeatedTrainer_branch_23ad2:
+Music_DefeatedTrainer_branch_23ad2::
 	notetype 4, 8, 5
 	octave 4
 	note D_, 6
@@ -172,7 +172,7 @@ Music_DefeatedTrainer_branch_23ad2:
 	loopchannel 0, Music_DefeatedTrainer_branch_23ad2
 
 
-Music_DefeatedTrainer_Ch3: ; 23b15 (8:7b15)
+Music_DefeatedTrainer_Ch3:: ; 23b15 (8:7b15)
 	notetype 4, 1, 0
 	octave 5
 	note D_, 2
@@ -186,7 +186,7 @@ Music_DefeatedTrainer_Ch3: ; 23b15 (8:7b15)
 	note A_, 12
 	notetype 4, 2, 1
 
-Music_DefeatedTrainer_branch_23b24:
+Music_DefeatedTrainer_branch_23b24::
 	note F#, 3
 	rest 3
 	note F#, 3

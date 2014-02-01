@@ -1,4 +1,4 @@
-Music_SilphCo_Ch1: ; 7f243 (1f:7243)
+Music_SilphCo_Ch1:: ; 7f243 (1f:7243)
 	tempo 0, 160
 	stereopanning 119
 	duty 3
@@ -33,7 +33,7 @@ Music_SilphCo_Ch1: ; 7f243 (1f:7243)
 	note B_, 2
 	rest 2
 
-Music_SilphCo_branch_7f26d:
+Music_SilphCo_branch_7f26d::
 	note G_, 2
 	rest 2
 	note B_, 2
@@ -367,7 +367,7 @@ Music_SilphCo_branch_7f26d:
 	rest 2
 	loopchannel 0, Music_SilphCo_branch_7f26d
 
-Music_SilphCo_branch_7f3f0:
+Music_SilphCo_branch_7f3f0::
 	octave 2
 	note B_, 2
 	note A#, 2
@@ -395,7 +395,7 @@ Music_SilphCo_branch_7f3f0:
 	endchannel
 
 
-Music_SilphCo_Ch2: ; 7f409 (1f:7409)
+Music_SilphCo_Ch2:: ; 7f409 (1f:7409)
 	vibrato 10, 3, 2
 	duty 3
 	notetype 6, 12, 3
@@ -428,7 +428,7 @@ Music_SilphCo_Ch2: ; 7f409 (1f:7409)
 	note G#, 2
 	rest 2
 
-Music_SilphCo_branch_7f42e:
+Music_SilphCo_branch_7f42e::
 	note E_, 2
 	rest 2
 	note G_, 2
@@ -780,7 +780,7 @@ Music_SilphCo_branch_7f42e:
 	loopchannel 0, Music_SilphCo_branch_7f42e
 
 
-Music_SilphCo_Ch3: ; 7f5be (1f:75be)
+Music_SilphCo_Ch3:: ; 7f5be (1f:75be)
 	vibrato 8, 1, 1
 	notetype 12, 1, 1
 	rest 12
@@ -790,7 +790,7 @@ Music_SilphCo_Ch3: ; 7f5be (1f:75be)
 	note E_, 4
 	note F_, 4
 
-Music_SilphCo_branch_7f5c9:
+Music_SilphCo_branch_7f5c9::
 	note E_, 4
 	note D#, 4
 	note D_, 4
