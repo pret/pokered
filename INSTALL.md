@@ -20,7 +20,7 @@ Now **pokered.gbc** can be built from source.
 This should take about 10-15 seconds. Subsequent builds are faster.
 
 
-To build Pokémon Blue:
+To build **pokeblue.gbc**:
 
 	make blue
 
