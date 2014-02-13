@@ -1,18 +1,20 @@
-# Pokémon Red
+# Pokémon Red and Blue
 
-This is a disassembly of Pokémon Red.
+This is a disassembly of Pokémon Red and Blue.
 
-It uses the following ROM as a base:
+It builds the following roms:
 
-	Pokemon Red (UE) [S][!].gb
-	(MD5: 3d45c1ee9abd5738df46d2bdda8b57dc)
+* Pokemon Red (UE) [S][!].gb  `md5: 3d45c1ee9abd5738df46d2bdda8b57dc`
+* Pokemon Blue (UE) [S][!].gb `md5: 50927e843568814f7ed45ec4f944bd8b`
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
 
 ## See also
 
-* Disassembly of [**Pokémon Crystal**](https://github.com/kanzure/pokecrystal)
+* Disassembly of [**Pokémon Crystal**][pokecrystal]
+* irc: **nucleus.kafuka.org** [**#skeetendo**][irc]
 
-* irc: **nucleus.kafuka.org** [**#skeetendo**](https://kiwiirc.com/client/irc.nolimitzone.com/?#skeetendo)
+[pokecrystal]: https://github.com/kanzure/pokecrystal
+[irc]: https://kiwiirc.com/client/irc.nolimitzone.com/?#skeetendo
 
