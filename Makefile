@@ -33,15 +33,15 @@ red:  pokered.gbc
 blue: pokeblue.gbc
 compare:
 	@md5sum -c --quiet roms.md5
-
-redrle: extras/redtools/redrle.c
-	${CC} -o $@ $<
-
 clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
 	find . -iname '*.tx' -exec rm {} +
 	rm -f redrle
+
+
+redrle: extras/redtools/redrle.c
+	${CC} -o $@ $<
 
 
 %.asm: ;
