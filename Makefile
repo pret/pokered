@@ -58,11 +58,14 @@ $(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
 	@$(eval TEXTQUEUE :=)
 	rgbasm -o $@ $*.tx
 
+
+OPTIONS = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
+
 pokered.gbc: $(RED_OBJS)
 	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
+	rgbfix $(OPTIONS) -t "POKEMON RED" $@
 
 pokeblue.gbc: $(BLUE_OBJS)
 	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
+	rgbfix $(OPTIONS) -t "POKEMON BLUE" $@
 
