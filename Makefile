@@ -26,7 +26,6 @@ ROMS := pokered.gbc pokeblue.gbc
 # generate dependencies for each object
 $(shell $(foreach obj, $(OBJS), \
 	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm))) \
-	$(eval ALL_DEPENDENCIES += $($(obj:.o=)_DEPENDENCIES)) \
 ))
 
 all: $(ROMS)
