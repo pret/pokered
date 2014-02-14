@@ -31,8 +31,8 @@ $(shell $(foreach obj, $(OBJS), \
 all: $(ROMS)
 red:  pokered.gbc
 blue: pokeblue.gbc
-compare: baserom.gbc pokered.gbc
-	cmp $^
+compare:
+	@md5sum -c --quiet roms.md5
 
 redrle: extras/redtools/redrle.c
 	${CC} -o $@ $<
@@ -43,9 +43,6 @@ clean:
 	find . -iname '*.tx' -exec rm {} +
 	rm -f redrle
 
-
-baserom.gbc: ;
-	@echo "Wait! Need baserom.gbc first. Check README for details." && false
 
 %.asm: ;
 .asm.tx:
