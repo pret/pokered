@@ -36,7 +36,7 @@ compare: baserom.gbc pokered.gbc
 	cmp $^
 
 redrle: extras/redtools/redrle.c
-	${CC} -o $@ $>
+	${CC} -o $@ $<
 
 clean:
 	rm -f $(ROMS)
