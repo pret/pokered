@@ -36,7 +36,8 @@ To build them individually:
 
 # OS X
 
-Download and install **Xcode**. Then open a terminal and follow the Linux instructions.
+Download and install **Command Line Tools for Xcode**.
+Then open a terminal and follow the Linux instructions.
 
 
 # Windows
@@ -52,7 +53,9 @@ Select the following packages:
 * python
 * python-setuptools
 
-To install rgbds, extract the contents of **http://iimarck.us/etc/rgbds.zip** and put them in `C:\cygwin\usr\local\bin`.
+To install rgbds, extract the contents of
+**http://iimarck.us/etc/rgbds.zip**
+and put them in `C:\cygwin\usr\local\bin`.
 
 Then set up the repository. In the **Cygwin terminal**:
 
