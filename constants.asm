@@ -1,6 +1,4 @@
-_JAPAN EQU 0
-_GREEN EQU 0
-_YELLOW EQU 0
+INCLUDE "version.asm"
 
 INCLUDE "macros.asm"
 
