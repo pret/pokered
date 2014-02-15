@@ -3,14 +3,7 @@ AUDIO_1 EQU $2
 AUDIO_2 EQU $8
 AUDIO_3 EQU $1f
 
-INCLUDE "macros.asm"
-INCLUDE "constants/music_constants.asm"
-INCLUDE "constants/trainer_constants.asm"
-
-; PC
-INCLUDE "hram.asm"
-INCLUDE "constants/move_constants.asm"
-
+INCLUDE "constants.asm"
 
 
 SECTION "Sound Effect Headers 1", ROMX, BANK[AUDIO_1]
