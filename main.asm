@@ -10507,9 +10507,10 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld a, [$cd3e]
 	ld [$2000], a
 	ld [H_LOADEDROMBANK], a
-	ld de, $3eda
+	ld de, .asm_3eda
 	push de
 	jp [hl]
+.asm_3eda
 	xor a
 	jr .asm_3eec
 .asm_3edd
@@ -50917,14 +50918,16 @@ Func_396c6: ; 396c6 (e:56c6)
 	dec hl
 	ret
 
-Func_396d3: ; 396d3 (e:56d3)
+_ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
+; Load the enemy trainer's pic and scrolls it into
+; the screen from the right.
 	xor a
 	ld [W_ENEMYMONID], a
 	ld b, $1
 	call GoPAL_SET
-	ld hl, Func_3f04b
-	ld b, BANK(Func_3f04b)
-	call Bankswitch ; indirect jump to Func_3f04b (3f04b (f:704b))
+	ld hl, _LoadTrainerPic
+	ld b, BANK(_LoadTrainerPic)
+	call Bankswitch ; indirect jump to _LoadTrainerPic (3f04b (f:704b))
 	FuncCoord 19, 0 ; $c3b3
 	ld hl, Coord
 	ld c, $0
@@ -57169,7 +57172,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	ret z
-	call Func_3ed12
+	call ScrollTrainerPicAfterBattle
 	ld c, $28
 	call DelayFrames
 	call Func_3381
@@ -57365,7 +57368,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld hl, wTileMap  ; sony 1 battle
 	ld bc, $815
 	call ClearScreenArea
-	call Func_3ed12
+	call ScrollTrainerPicAfterBattle
 	ld c, $28
 	call DelayFrames
 	ld hl, Sony1WinText
@@ -62610,10 +62613,10 @@ Func_3ed02: ; 3ed02 (f:6d02)
 	ld b, BANK(Func_396a7)
 	jp Bankswitch ; indirect jump to Func_396a7 (396a7 (e:56a7))
 
-Func_3ed12: ; 3ed12 (f:6d12)
-	ld hl, Func_396d3
-	ld b, BANK(Func_396d3)
-	jp Bankswitch ; indirect jump to Func_396d3 (396d3 (e:56d3))
+ScrollTrainerPicAfterBattle: ; 3ed12 (f:6d12)
+	ld hl, _ScrollTrainerPicAfterBattle
+	ld b, BANK(_ScrollTrainerPicAfterBattle)
+	jp Bankswitch ; indirect jump to _ScrollTrainerPicAfterBattle (396d3 (e:56d3))
 
 Func_3ed1a: ; 3ed1a (f:6d1a)
 	ld a, $1
@@ -62995,7 +62998,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld b, BANK(ReadTrainer)
 	call Bankswitch ; indirect jump to ReadTrainer (39c53 (e:5c53))
 	call Func_3ec32
-	call Func_3f04b
+	call _LoadTrainerPic
 	xor a
 	ld [W_ENEMYMONID], a
 	ld [$FF00+$e1], a
@@ -63108,17 +63111,18 @@ Func_3efeb: ; 3efeb (f:6feb)
 TerminatorText_3f04a: ; 3f04a (f:704a)
 	db "@"
 
-Func_3f04b: ; 3f04b (f:704b)
+_LoadTrainerPic: ; 3f04b (f:704b)
+; $d033-$d034 contain pointer to pic
 	ld a, [$d033]
 	ld e, a
 	ld a, [$d034]
-	ld d, a
+	ld d, a ; de contains pointer to trainer pic
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	and a
-	ld a, $13
-	jr z, .asm_3f05d
-	ld a, $4
-.asm_3f05d
+	ld a, Bank(YoungsterPic) ; this is where all the trainer pics are (not counting Red's)
+	jr z, .loadSprite
+	ld a, Bank(RedPicFront)
+.loadSprite
 	call UncompressSpriteFromDE
 	ld de, $9000
 	ld a, $77
