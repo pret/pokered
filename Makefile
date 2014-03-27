@@ -26,18 +26,13 @@ ROMS := pokered.gbc pokeblue.gbc
 # generate dependencies for each object
 $(shell $(foreach obj, $(OBJS), \
 	$(eval $(obj:.o=)_DEPENDENCIES := $(shell $(PYTHON) extras/pokemontools/scan_includes.py $(obj:.o=.asm))) \
-	$(eval ALL_DEPENDENCIES += $($(obj:.o=)_DEPENDENCIES)) \
 ))
 
 all: $(ROMS)
 red:  pokered.gbc
 blue: pokeblue.gbc
-compare: baserom.gbc pokered.gbc
-	cmp $^
-
-redrle: extras/redtools/redrle.c
-	${CC} -o $@ $>
-
+compare:
+	@md5sum -c --quiet roms.md5
 clean:
 	rm -f $(ROMS)
 	rm -f $(OBJS)
@@ -45,8 +40,9 @@ clean:
 	rm -f redrle
 
 
-baserom.gbc: ;
-	@echo "Wait! Need baserom.gbc first. Check README for details." && false
+redrle: extras/redtools/redrle.c
+	${CC} -o $@ $<
+
 
 %.asm: ;
 .asm.tx:
@@ -58,11 +54,14 @@ $(OBJS): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_DEPENDENCIES))
 	@$(eval TEXTQUEUE :=)
 	rgbasm -o $@ $*.tx
 
+
+OPTIONS = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
+
 pokered.gbc: $(RED_OBJS)
 	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED" $@
+	rgbfix $(OPTIONS) -t "POKEMON RED" $@
 
 pokeblue.gbc: $(BLUE_OBJS)
 	rgblink -n $*.sym -m $*.map -o $@ $^
-	rgbfix -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE" $@
+	rgbfix $(OPTIONS) -t "POKEMON BLUE" $@
 
