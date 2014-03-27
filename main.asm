@@ -37283,7 +37283,7 @@ Func_1a672: ; 1a672 (6:6672)
 	ld c, a
 	ld a, [$cfc6]
 	ld d, a
-	ld hl, DataTable_1a6cf ; $66cf
+	ld hl, LedgeTiles ; $66cf
 .asm_1a691
 	ld a, [hli]
 	cp $ff
@@ -37325,7 +37325,8 @@ Func_1a672: ; 1a672 (6:6672)
 	call PlaySound
 	ret
 
-DataTable_1a6cf: ; 1a6cf (6:66cf)
+	; (player direction) (tile player standing on) (ledge tile) (input required)
+LedgeTiles: ; 1a6cf (6:66cf)
 	db $00,$2C,$37,$80
 	db $00,$39,$36,$80
 	db $00,$39,$37,$80
