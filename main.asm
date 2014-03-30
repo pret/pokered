@@ -3048,7 +3048,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	xor a
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	call asm_3f0d0
 	xor a
 	ld [W_SPRITEFLIPPED], a
@@ -3546,7 +3546,7 @@ LoadUncompressedSpriteData:: ; 1672 (0:1672)
 	add a
 	add a
 	add a     ; 8*tiles is height in bytes
-	ld [H_SPRITEHEIGHT], a ; $FF00+$8c
+	ld [H_SPRITEHEIGHT], a ; $ff8c
 	ld a, $7
 	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
@@ -3578,11 +3578,11 @@ AlignSpriteDataCentered:: ; 16c2 (0:16c2)
 	ld b, $0
 	ld c, a
 	add hl, bc
-	ld a, [H_SPRITEWIDTH] ; $FF00+$8b
+	ld a, [H_SPRITEWIDTH] ; $ff8b
 .columnLoop
 	push af
 	push hl
-	ld a, [H_SPRITEHEIGHT] ; $FF00+$8c
+	ld a, [H_SPRITEHEIGHT] ; $ff8c
 	ld c, a
 .columnInnerLoop
 	ld a, [de]
@@ -3621,7 +3621,7 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	ld de, S_SPRITEBUFFER1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
 	ld bc, S_SPRITEBUFFER0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
 	ld a, SPRITEBUFFERSIZE/2 ; $c4
-	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	ld [H_SPRITEINTERLACECOUNTER], a ; $ff8b
 .interlaceLoop
 	ld a, [de]
 	dec de
@@ -3635,9 +3635,9 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	ld a, [bc]
 	dec bc
 	ld [hld], a   ; write byte of source 1
-	ld a, [H_SPRITEINTERLACECOUNTER] ; $FF00+$8b
+	ld a, [H_SPRITEINTERLACECOUNTER] ; $ff8b
 	dec a
-	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	ld [H_SPRITEINTERLACECOUNTER], a ; $ff8b
 	jr nz, .interlaceLoop
 	ld a, [W_SPRITEFLIPPED]
 	and a
@@ -3892,13 +3892,13 @@ InitScreenTileBufferTransferParameters:: ; 18fc (0:18fc)
 	ld [H_VBCOPYBGSRC+1], a
 	call GetRowColAddressBgMap
 	ld a, l
-	ld [H_VBCOPYBGDEST], a ; $FF00+$c3
+	ld [H_VBCOPYBGDEST], a ; $ffc3
 	ld a, h
 	ld [H_VBCOPYBGDEST+1], a
 	ld a, c
-	ld [H_VBCOPYBGNUMROWS], a ; $FF00+$c5
+	ld [H_VBCOPYBGNUMROWS], a ; $ffc5
 	ld a, e
-	ld [H_VBCOPYBGSRC], a ; $FF00+$c1
+	ld [H_VBCOPYBGSRC], a ; $ffc1
 	ret
 
 ClearScreen:: ; 190f (0:190f)
@@ -5468,44 +5468,44 @@ SerialInterruptHandler:: ; 2125 (0:2125)
 	push bc
 	push de
 	push hl
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	inc a
 	jr z, .asm_2142
-	ld a, [$FF00+$1]
-	ld [$FF00+$ad], a
-	ld a, [$FF00+$ac]
-	ld [$FF00+$1], a
-	ld a, [$FF00+$aa]
+	ld a, [$ff01]
+	ld [$ffad], a
+	ld a, [$ffac]
+	ld [$ff01], a
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_2162
 	ld a, $80
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	jr .asm_2162
 .asm_2142
-	ld a, [$FF00+$1]
-	ld [$FF00+$ad], a
-	ld [$FF00+$aa], a
+	ld a, [$ff01]
+	ld [$ffad], a
+	ld [$ffaa], a
 	cp $2
 	jr z, .asm_215f
 	xor a
-	ld [$FF00+$1], a
+	ld [$ff01], a
 	ld a, $3
-	ld [rDIV], a ; $FF00+$4
+	ld [rDIV], a ; $ff04
 .asm_2153
-	ld a, [rDIV] ; $FF00+$4
+	ld a, [rDIV] ; $ff04
 	bit 7, a
 	jr nz, .asm_2153
 	ld a, $80
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	jr .asm_2162
 .asm_215f
 	xor a
-	ld [$FF00+$1], a
+	ld [$ff01], a
 .asm_2162
 	ld a, $1
-	ld [$FF00+$a9], a
+	ld [$ffa9], a
 	ld a, $fe
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	pop hl
 	pop de
 	pop bc
@@ -5514,10 +5514,10 @@ SerialInterruptHandler:: ; 2125 (0:2125)
 
 Func_216f:: ; 216f (0:216f)
 	ld a, $1
-	ld [$FF00+$ab], a
+	ld [$ffab], a
 .asm_2173
 	ld a, [hl]
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	call Func_219a
 	push bc
 	ld b, a
@@ -5526,7 +5526,7 @@ Func_216f:: ; 216f (0:216f)
 .asm_217e
 	dec a
 	jr nz, .asm_217e
-	ld a, [$FF00+$ab]
+	ld a, [$ffab]
 	and a
 	ld a, b
 	pop bc
@@ -5535,7 +5535,7 @@ Func_216f:: ; 216f (0:216f)
 	cp $fd
 	jr nz, .asm_2173
 	xor a
-	ld [$FF00+$ab], a
+	ld [$ffab], a
 	jr .asm_2173
 .asm_2192
 	ld [de], a
@@ -5548,17 +5548,17 @@ Func_216f:: ; 216f (0:216f)
 
 Func_219a:: ; 219a (0:219a)
 	xor a
-	ld [$FF00+$a9], a
-	ld a, [$FF00+$aa]
+	ld [$ffa9], a
+	ld a, [$ffaa]
 	cp $2
 	jr nz, .asm_21a7
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 .asm_21a7
-	ld a, [$FF00+$a9]
+	ld a, [$ffa9]
 	and a
 	jr nz, .asm_21f1
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $1
 	jr nz, .asm_21cc
 	call Func_2237
@@ -5576,7 +5576,7 @@ Func_219a:: ; 219a (0:219a)
 	jr nz, .asm_21a7
 	jp Func_223f
 .asm_21cc
-	ld a, [rIE] ; $FF00+$ff
+	ld a, [rIE] ; $ffff
 	and $f
 	cp $8
 	jr nz, .asm_21a7
@@ -5588,7 +5588,7 @@ Func_219a:: ; 219a (0:219a)
 	dec a
 	ld [$d075], a
 	jr nz, .asm_21a7
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $1
 	jr z, .asm_21f1
 	ld a, $ff
@@ -5597,8 +5597,8 @@ Func_219a:: ; 219a (0:219a)
 	jr nz, .asm_21ee
 .asm_21f1
 	xor a
-	ld [$FF00+$a9], a
-	ld a, [rIE] ; $FF00+$ff
+	ld [$ffa9], a
+	ld a, [rIE] ; $ffff
 	and $f
 	sub $8
 	jr nz, .asm_2204
@@ -5606,7 +5606,7 @@ Func_219a:: ; 219a (0:219a)
 	ld a, $50
 	ld [$d075], a
 .asm_2204
-	ld a, [$FF00+$ad]
+	ld a, [$ffad]
 	cp $fe
 	ret nz
 	call Func_2237
@@ -5624,13 +5624,13 @@ Func_219a:: ; 219a (0:219a)
 	call Func_2237
 	jr z, Func_223f
 .asm_221f
-	ld a, [rIE] ; $FF00+$ff
+	ld a, [rIE] ; $ffff
 	and $f
 	cp $8
 	ld a, $fe
 	ret z
 	ld a, [hl]
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	call DelayFrame
 	jp Func_219a
 
@@ -5660,18 +5660,18 @@ Func_2247:: ; 2247 (0:2247)
 	ld de, $cc3d
 	ld c, $2
 	ld a, $1
-	ld [$FF00+$ab], a
+	ld [$ffab], a
 .asm_2253
 	call DelayFrame
 	ld a, [hl]
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	call Func_219a
 	ld b, a
 	inc hl
-	ld a, [$FF00+$ab]
+	ld a, [$ffab]
 	and a
 	ld a, $0
-	ld [$FF00+$ab], a
+	ld [$ffab], a
 	jr nz, .asm_2253
 	ld a, b
 	ld [de], a
@@ -5732,20 +5732,20 @@ Func_22c3:: ; 22c3 (0:22c3)
 	call asm_22d7
 	ld a, [$cc42]
 	add $60
-	ld [$FF00+$ac], a
-	ld a, [$FF00+$aa]
+	ld [$ffac], a
+	ld a, [$ffaa]
 	cp $2
 	jr nz, asm_22d7
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 asm_22d7:: ; 22d7 (0:22d7)
-	ld a, [$FF00+$ad]
+	ld a, [$ffad]
 	ld [$cc3d], a
 	and $f0
 	cp $60
 	ret nz
 	xor a
-	ld [$FF00+$ad], a
+	ld [$ffad], a
 	ld a, [$cc3d]
 	and $f
 	ld [$cc3e], a
@@ -5753,21 +5753,21 @@ asm_22d7:: ; 22d7 (0:22d7)
 
 Func_22ed:: ; 22ed (0:22ed)
 	xor a
-	ld [$FF00+$ac], a
-	ld a, [$FF00+$aa]
+	ld [$ffac], a
+	ld a, [$ffaa]
 	cp $2
 	ret nz
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	ret
 
 Func_22fa:: ; 22fa (0:22fa)
 	ld a, $2
-	ld [$FF00+$1], a
+	ld [$ff01], a
 	xor a
-	ld [$FF00+$ad], a
+	ld [$ffad], a
 	ld a, $80
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	ret
 
 ; timer interrupt is apparently not invoked anyway
@@ -5919,7 +5919,7 @@ PlaySound:: ; 23b1 (0:23b1)
 	xor a
 	ld [$c0ee], a
 	ld a, [H_LOADEDROMBANK]
-	ld [$FF00+$b9], a
+	ld [$ffb9], a
 	ld a, [$c0ef]
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
@@ -5940,7 +5940,7 @@ PlaySound:: ; 23b1 (0:23b1)
 	ld a, b
 	call Func_7d8ea
 .asm_240b
-	ld a, [$FF00+$b9]
+	ld a, [$ffb9]
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	jr .asm_2425
@@ -6703,7 +6703,7 @@ Func_28cb:: ; 28cb (0:28cb)
 	bit 1, a
 	ret nz
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	ret
 .asm_28dc
 	ld a, [$cfc9]
@@ -6715,7 +6715,7 @@ Func_28cb:: ; 28cb (0:28cb)
 .asm_28e7
 	ld a, [$cfc8]
 	ld [$cfc9], a
-	ld a, [$FF00+$24]
+	ld a, [$ff24]
 	and a
 	jr z, .asm_2903
 	ld b, a
@@ -6728,7 +6728,7 @@ Func_28cb:: ; 28cb (0:28cb)
 	dec a
 	swap a
 	or c
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	ret
 .asm_2903
 	ld a, [wMusicHeaderPointer]
@@ -8178,7 +8178,7 @@ Func_324c:: ; 324c (0:324c)
 	ret nz
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 
 Func_325d:: ; 325d (0:325d)
@@ -8558,9 +8558,9 @@ Func_34a6:: ; 34a6 (0:34a6)
 
 Func_34ae:: ; 34ae (0:34ae)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	call Func_34fc
-	ld a, [$FF00+$8d]
+	ld a, [$ff8d]
 	ld [hl], a
 	ret
 
@@ -8620,7 +8620,7 @@ CheckCoords:: ; 34c7 (0:34c7)
 CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
 	ld hl, $c204
-	ld a, [$ff00+$8c]
+	ld a, [$ff8c]
 	swap a
 	ld d, $0
 	ld e, a
@@ -8641,9 +8641,9 @@ Func_34fc:: ; 34fc (0:34fc)
 Func_3500:: ; 3500 (0:3500)
 	ld h, $c2
 asm_3502:: ; 3502 (0:3502)
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	ld b, a
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	swap a
 	add b
 	ld l, a
@@ -8669,7 +8669,7 @@ DecodeRLEList:: ; 350c (0:350c)
 	ld a, [wRLEByteCount]
 	add c
 	ld [wRLEByteCount], a     ; update total number of written bytes
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	call FillMemory              ; write a c-times to output
 	inc de
 	jr .listLoop
@@ -8686,7 +8686,7 @@ SetSpriteMovementBytesToFE:: ; 3533 (0:3533)
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
 	call GetSpriteMovementByte2Pointer
-	ld a, [$ff00+$8d]
+	ld a, [$ff8d]
 	ld [hl], a
 	pop hl
 	ret
@@ -9008,13 +9008,13 @@ SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
 LoadScreenTilesFromBuffer2:: ; 3701 (0:3701)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 ; loads screen tiles stored in wTileMapBackup2 but leaves H_AUTOBGTRANSFERENABLED disabled
 LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wTileMapBackup2
 	ld de, wTileMap
 	ld bc, $168
@@ -9029,13 +9029,13 @@ SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
 
 LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wTileMapBackup
 	ld de, wTileMap
 	ld bc, $168
 	call CopyData
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 DelayFrames:: ; 3739 (0:3739)
@@ -9185,11 +9185,11 @@ GetItemPrice:: ; 37df (0:37df)
 	jr nz, .asm_3802
 	dec hl
 	ld a, [hld]
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	ld a, [hld]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [hl]
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	jr .asm_381c
 .asm_3812
 	ld a, Bank(GetMachinePrice)
@@ -9272,14 +9272,14 @@ GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
 	ret
 
 WaitForTextScrollButtonPress:: ; 3865 (0:3865)
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	push af
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	push af
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 .asm_3872
 	push hl
 	ld a, [$d09b]
@@ -9294,13 +9294,13 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	call GetJoypadStateLowSensitivity
 	ld a, $2d
 	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
-	ld a, [$FF00+$b5]
+	ld a, [$ffb5]
 	and BTN_A | BTN_B ; $3
 	jr z, .asm_3872
 	pop af
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	pop af
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ret
 
 ; (unlass in link battle) waits for A or B being pressed and outputs the scrolling sound effect
@@ -9494,11 +9494,11 @@ CalcStat:: ; 394a (0:394a)
 	call Multiply
 	ld a, [hld]
 	ld d, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	sub d
 	ld a, [hli]
 	ld d, a
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	sbc d               ; test if (current stat exp bonus)^2 < stat exp
 	jr c, .statExpLoop
 .statExpDone
@@ -10501,7 +10501,7 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld [$2000], a
 	ld [H_LOADEDROMBANK], a
 	call Func_469a0
-	ld a, [$FF00+$ee]
+	ld a, [$ffee]
 	and a
 	jr nz, .asm_3edd
 	ld a, [$cd3e]
@@ -10517,20 +10517,20 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld b, BANK(Func_fb50)
 	ld hl, Func_fb50
 	call Bankswitch
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	and a
 	jr z, .asm_3eec
 .asm_3eea
 	ld a, $ff
 .asm_3eec
-	ld [$FF00+$eb], a
+	ld [$ffeb], a
 	pop af
 	ld [$2000], a
 	ld [H_LOADEDROMBANK], a
 	ret
 
 Func_3ef5:: ; 3ef5 (0:3ef5)
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld hl, PointerTable_3f22
 	call Func_3f0f
 	ld hl, $cf11
@@ -10539,17 +10539,17 @@ Func_3ef5:: ; 3ef5 (0:3ef5)
 
 Func_3f05:: ; 3f05 (0:3f05)
 	ld hl, W_MAPTEXTPTR ; $d36c
-	ld a, [$FF00+$ec]
+	ld a, [$ffec]
 	ld [hli], a
-	ld a, [$FF00+$ed]
+	ld a, [$ffed]
 	ld [hl], a
 	ret
 
 Func_3f0f:: ; 3f0f (0:3f0f)
 	ld a, [W_MAPTEXTPTR] ; $d36c
-	ld [$FF00+$ec], a
+	ld [$ffec], a
 	ld a, [$d36d]
-	ld [$FF00+$ed], a
+	ld [$ffed], a
 	ld a, l
 	ld [W_MAPTEXTPTR], a ; $d36c
 	ld a, h
@@ -10694,29 +10694,29 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$cc57], a
 	ld [wFlags_0xcd60], a
-	ld [$FF00+$9f], a
-	ld [$FF00+$a0], a
-	ld [$FF00+$a1], a
+	ld [$ff9f], a
+	ld [$ffa0], a
+	ld [$ffa1], a
 	call HasEnoughMoney
 	jr c, .asm_40ff
 	ld a, [wPlayerMoney] ; $d347
-	ld [$FF00+$9f], a
+	ld [$ff9f], a
 	ld a, [wPlayerMoney + 1] ; $d348
-	ld [$FF00+$a0], a
+	ld [$ffa0], a
 	ld a, [wPlayerMoney + 2] ; $d349
-	ld [$FF00+$a1], a
+	ld [$ffa1], a
 	xor a
-	ld [$FF00+$a2], a
-	ld [$FF00+$a3], a
+	ld [$ffa2], a
+	ld [$ffa3], a
 	ld a, $2
-	ld [$FF00+$a4], a
+	ld [$ffa4], a
 	ld a, $d
 	call Predef ; indirect jump to Func_f71e (f71e (3:771e))
-	ld a, [$FF00+$a2]
+	ld a, [$ffa2]
 	ld [wPlayerMoney], a ; $d347
-	ld a, [$FF00+$a3]
+	ld a, [$ffa3]
 	ld [wPlayerMoney + 1], a ; $d348
-	ld a, [$FF00+$a4]
+	ld a, [$ffa4]
 	ld [wPlayerMoney + 2], a ; $d349
 .asm_40ff
 	ld hl, $d732
@@ -10819,7 +10819,7 @@ Func_42b7: ; 42b7 (1:42b7)
 	ld de, W_RIVALNAME ; $d34a
 	call CopyFixedLengthText
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld [$d358], a
 	ld hl, $d732
 	ld [hli], a
@@ -10832,14 +10832,14 @@ Func_42b7: ; 42b7 (1:42b7)
 Func_42dd: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	xor a
-	ld [$FF00+$d7], a
-	ld [$FF00+$ae], a
+	ld [$ffd7], a
+	ld [$ffae], a
 	ld a, $40
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -10938,7 +10938,7 @@ ENDC
 	call Func_4533
 	call SaveScreenTilesToBuffer1
 	ld a, $40
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call LoadScreenTilesFromBuffer2
 	ld a, $98
 	call Func_4533
@@ -10946,7 +10946,7 @@ ENDC
 	call GoPAL_SET
 	call GBPalNormal
 	ld a, $e4
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	ld bc, $ffaf ; background scroll Y
 	ld hl, .TitleScreenPokemonLogoYScrolls ; $43db
 .asm_43c6
@@ -10993,7 +10993,7 @@ ENDC
 	call PlaySound
 	call PrintGameVersionOnTitleScreen
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld d, $90
 .asm_440a
 	ld h, d
@@ -11038,9 +11038,9 @@ ENDC
 	call GBPalWhiteOutWithDelay3
 	call CleanLCD_OAM
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
 	ld a, $98
 	call Func_4533
@@ -11083,7 +11083,7 @@ Func_4496: ; 4496 (1:4496)
 	call Func_4524
 
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld d, 1 ; scroll out
 	ld b, BANK(TitleScroll)
 	ld hl, TitleScroll
@@ -11096,20 +11096,20 @@ Func_44c1: ; 44c1 (1:44c1)
 	ld hl, TitleScroll
 	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ret
 
 Func_44cf: ; 44cf (1:44cf)
 .wait
-	ld a, [$FF00+$44] ; rLY
+	ld a, [$ff44] ; rLY
 	cp l
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a ; $FF00+$43
+	ld [rSCX], a ; $ff43
 
 .wait2
-	ld a, [$FF00+$44] ; rLY
+	ld a, [$ff44] ; rLY
 	cp h
 	jr z, .wait2
 	ret
@@ -11166,12 +11166,12 @@ Func_4524: ; 4524 (1:4524)
 	jp LoadFrontSpriteByMonIndex
 
 Func_4533: ; 4533 (1:4533)
-	ld [$FF00+$bd], a
+	ld [$ffbd], a
 	jp Delay3
 
 Func_4538: ; 4538 (1:4538)
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
@@ -11549,11 +11549,11 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	jp ResetLCD_OAM
 .asm_4b1e
 	xor a
-	ld [$FF00+$90], a
+	ld [$ff90], a
 .asm_4b21
-	ld [$FF00+$8f], a
+	ld [$ff8f], a
 	ld d, $c1
-	ld a, [$FF00+$8f]
+	ld a, [$ff8f]
 	ld e, a
 	ld a, [de]         ; c1x0
 	and a
@@ -11583,7 +11583,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld e, a
 	ld a, [de]         ; c2x7
 	and $80
-	ld [$FF00+$94], a          ; temp store bit 7 for later use in OAM flags (draws sprite behind background (used for grass))
+	ld [$ff94], a          ; temp store bit 7 for later use in OAM flags (draws sprite behind background (used for grass))
 	pop de
 	ld h, $0
 	ld bc, SpriteFacingAndAnimationTable
@@ -11598,16 +11598,16 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld h, [hl]
 	ld l, a
 	call Func_4bd1
-	ld a, [$FF00+$90]
+	ld a, [$ff90]
 	ld e, a
 	ld d, $c3                ; wOAMBuffer+x is buffer for OAM data
 .spriteTilesLoop             ; loops 4 times for the 4 tiles a sprite consists of
-	ld a, [$FF00+$92]        ; temp for sprite Y position
+	ld a, [$ff92]        ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
 	add [hl]                 ; add Y offset from table
 	ld [de], a               ; write new sprite OAM Y position
 	inc hl
-	ld a, [$FF00+$91]        ; temp for sprite X position
+	ld a, [$ff91]        ; temp for sprite X position
 	add $8                   ; X=8 is left of screen (X=0 is invisible)
 	add [hl]                 ; add X offset from table
 	inc e
@@ -11639,7 +11639,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [hl]
 	bit 1, a                 ; bit 1 is ignored for OAM, it's used here as an "always in foregroud" flag.
 	jr z, .alwaysInForeground
-	ld a, [$FF00+$94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
+	ld a, [$ff94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
 	or [hl]
 .alwaysInForeground
 	inc hl
@@ -11648,13 +11648,13 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
 	jr z, .spriteTilesLoop
 	ld a, e
-	ld [$FF00+$90], a
+	ld [$ff90], a
 .asm_4bad
-	ld a, [$FF00+$8f]
+	ld a, [$ff8f]
 	add $10
 	cp $0
 	jp nz, .asm_4b21
-	ld a, [$FF00+$90]
+	ld a, [$ff90]
 	ld l, a
 	ld h, $c3
 	ld de, $4
@@ -11675,20 +11675,20 @@ Func_4bd1: ; 4bd1 (1:4bd1)
 	inc e
 	inc e
 	ld a, [de]            ; c1x4
-	ld [$FF00+$92], a
+	ld [$ff92], a
 	inc e
 	inc e
 	ld a, [de]            ; c1x6
-	ld [$FF00+$91], a
+	ld [$ff91], a
 	ld a, $4
 	add e
 	ld e, a
-	ld a, [$FF00+$92]
+	ld a, [$ff92]
 	add $4
 	and $f0
 	ld [de], a            ; c1xa (sprite Y pos (snapped to whole steps (?))
 	inc e
-	ld a, [$FF00+$91]
+	ld a, [$ff91]
 	and $f0
 	ld [de], a            ; c1xb (sprite X pos (snapped to whole steps (?))
 	ret
@@ -11709,7 +11709,7 @@ WriteDMACodeToHRAM: ; 4bed (1:4bed)
 ; this routine is copied to HRAM and executed there on every VBlank
 DMARoutine: ; 4bfb (1:4bfb)
 	ld a, $c3
-	ld [$ff00+$46], a   ; start DMA
+	ld [$ff46], a   ; start DMA
 	ld a, $28
 .waitLoop               ; wait for DMA to finish
 	dec a
@@ -11772,7 +11772,7 @@ _UpdateSprites: ; 4c34 (1:4c34)
 UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
 	dec a
 	swap a
-	ld [$FF00+$93], a  ; $10 * sprite#
+	ld [$ff93], a  ; $10 * sprite#
 	ld a, [$cf17] ; some sprite offset?
 	ld b, a
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -11801,28 +11801,28 @@ Func_4c70: ; 4c70 (1:4c70)
 	add b
 	and $f0
 	or c
-	ld [$FF00+$90], a
+	ld [$ff90], a
 	ld a, [hli]
 	call Func_4d72
 	ld a, [hl]
 	add b
 	and $f0
 	or c
-	ld [$FF00+$91], a
+	ld [$ff91], a
 	ld a, l
 	add $7
 	ld l, a
 	xor a
 	ld [hld], a
 	ld [hld], a
-	ld a, [$FF00+$91]
+	ld a, [$ff91]
 	ld [hld], a
-	ld a, [$FF00+$90]
+	ld a, [$ff90]
 	ld [hl], a
 	xor a
 
 Func_4ca5: ; 4ca5 (1:4ca5)
-	ld [$FF00+$8f], a
+	ld [$ff8f], a
 	swap a
 	ld e, a
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -11854,7 +11854,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	cpl
 	inc a
 .asm_4cd4
-	ld [$FF00+$90], a
+	ld [$ff90], a
 	push af
 	rl c
 	pop af
@@ -11866,11 +11866,11 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	jr z, .asm_4ce6
 	ld b, $9
 .asm_4ce6
-	ld a, [$FF00+$90]
+	ld a, [$ff90]
 	sub b
-	ld [$FF00+$92], a
+	ld [$ff92], a
 	ld a, b
-	ld [$FF00+$90], a
+	ld [$ff90], a
 	jr c, .asm_4d01
 	ld b, $7
 	dec e
@@ -11880,7 +11880,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	jr z, .asm_4cfa
 	ld b, $9
 .asm_4cfa
-	ld a, [$FF00+$92]
+	ld a, [$ff92]
 	sub b
 	jr z, .asm_4d01
 	jr nc, .asm_4d69
@@ -11901,7 +11901,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	cpl
 	inc a
 .asm_4d14
-	ld [$FF00+$91], a
+	ld [$ff91], a
 	push af
 	rl c
 	pop af
@@ -11913,11 +11913,11 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	jr z, .asm_4d26
 	ld b, $9
 .asm_4d26
-	ld a, [$FF00+$91]
+	ld a, [$ff91]
 	sub b
-	ld [$FF00+$92], a
+	ld [$ff92], a
 	ld a, b
-	ld [$FF00+$91], a
+	ld [$ff91], a
 	jr c, .asm_4d41
 	ld b, $7
 	dec e
@@ -11927,14 +11927,14 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	jr z, .asm_4d3a
 	ld b, $9
 .asm_4d3a
-	ld a, [$FF00+$92]
+	ld a, [$ff92]
 	sub b
 	jr z, .asm_4d41
 	jr nc, .asm_4d69
 .asm_4d41
-	ld a, [$FF00+$91]
+	ld a, [$ff91]
 	ld b, a
-	ld a, [$FF00+$90]
+	ld a, [$ff90]
 	inc l
 	cp b
 	jr c, .asm_4d4e
@@ -11950,7 +11950,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld a, c
 	inc l
 	inc l
-	ld a, [$FF00+$8f]
+	ld a, [$ff8f]
 	ld de, DiagonalLines ; $4d85
 	add a
 	add e
@@ -11966,7 +11966,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	or [hl]
 	ld [hl], a
 .asm_4d69
-	ld a, [$FF00+$8f]
+	ld a, [$ff8f]
 	inc a
 	cp $10
 	jp nz, Func_4ca5
@@ -12023,7 +12023,7 @@ Func_4da6: ; 4da6 (1:4da6)
 
 PickupItem: ; 4de1 (1:4de1)
 	call EnableAutoTextBoxDrawing
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld b, a
 	ld hl, W_MISSABLEOBJECTLIST
 .missableObjectsListLoop
@@ -12036,9 +12036,9 @@ PickupItem: ; 4de1 (1:4de1)
 	jr .missableObjectsListLoop
 .isMissable
 	ld a, [hl]
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	ld hl, W_MAPSPRITEEXTRADATA
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	dec a
 	add a
 	ld d, $0
@@ -12049,7 +12049,7 @@ PickupItem: ; 4de1 (1:4de1)
 	ld c, 1          ; quantity is 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	ld [$cc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
@@ -12084,7 +12084,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 .asm_4e41
 	FuncCoord 8, 9 ; $c45c
 	ld a, [Coord]
-	ld [$FF00+$93], a
+	ld [$ff93], a
 	cp $60
 	jr c, .asm_4e50
 .asm_4e4a
@@ -12153,7 +12153,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	add b
 	ld [$c102], a
 .asm_4eb6
-	ld a, [$FF00+$93]
+	ld a, [$ff93]
 	ld c, a
 	ld a, [W_GRASSTILE]
 	cp c
@@ -12416,7 +12416,7 @@ UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
-	ld a, [H_RAND1] ; $FF00+$d3
+	ld a, [H_RAND1] ; $ffd3
 	and $7f
 	ld [hl], a                       ; c2x8: set next movement delay to a random value in [0,$7f]
 	dec h                            ;       note that value 0 actually makes the delay $100 (bug?)
@@ -12534,7 +12534,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 CheckSpriteAvailability: ; 50dc (1:50dc)
 	ld a, $12
 	call Predef ; indirect jump to IsMissableObjectHidden (f1a6 (3:71a6))
-	ld a, [$FF00+$e5]
+	ld a, [$ffe5]
 	and a
 	jp nz, .spriteInvisible
 	ld h, $c2
@@ -12621,7 +12621,7 @@ UpdateSpriteImage: ; 5157 (1:5157)
 	ld a, [hl]         ; c1x9: facing direction
 	add b
 	ld b, a
-	ld a, [$FF00+$93]  ; current sprite offset
+	ld a, [$ff93]  ; current sprite offset
 	add b
 	ld b, a
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -12737,7 +12737,7 @@ CanWalkOntoTile: ; 516e (1:516e)
 	add $8
 	ld l, a
 	call GenRandom
-	ld a, [H_RAND1] ; $FF00+$d3
+	ld a, [H_RAND1] ; $ffd3
 	and $7f
 	ld [hl], a         ; c2x8: set next movement delay to a random value in [0,$7f] (again with delay $100 if value is 0)
 	scf                ; set carry (marking failure to walk)
@@ -12899,15 +12899,15 @@ Func_52c3: ; 52c3 (1:52c3)
 .asm_52ea
 	add b
 	ld b, a
-	ld [$FF00+$e9], a
+	ld [$ffe9], a
 	call Func_5301
 	ld hl, wSpriteStateData1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
-	ld a, [$FF00+$e9]
+	ld a, [$ffe9]
 	ld b, a
-	ld a, [$FF00+$ea]
+	ld a, [$ffea]
 	add b
 	ld [hl], a
 	ret
@@ -12928,7 +12928,7 @@ Func_5301: ; 5301 (1:5301)
 	inc a
 	and $3
 	ld [hl], a
-	ld [$FF00+$ea], a
+	ld [$ffea], a
 	ret
 
 Func_5317: ; 5317 (1:5317)
@@ -13030,23 +13030,23 @@ Func_5345: ; 5345
 	ld a, $ff
 	ld [de], a
 	call Func_227f
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr nz, .asm_53d2
 	call Delay3
 	xor a
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	call DelayFrame
 	xor a
-	ld [$FF00+$ac], a
+	ld [$ffac], a
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 .asm_53d2
 	call Delay3
 	ld a, $8
-	ld [rIE], a ; $FF00+$ff
+	ld [rIE], a ; $ffff
 	ld hl, $d141
 	ld de, wTileMapBackup2
 	ld bc, $11
@@ -13064,10 +13064,10 @@ Func_5345: ; 5345
 	ld bc, $c8
 	call Func_216f
 	ld a, $d
-	ld [rIE], a ; $FF00+$ff
+	ld [rIE], a ; $ffff
 	ld a, $ff
 	call PlaySound
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_5431
 	ld hl, wTileMapBackup2
@@ -13189,7 +13189,7 @@ Func_5345: ; 5345
 	ld [$cc38], a
 	ld a, $ff
 	call PlaySound
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	ld c, $42
 	call z, DelayFrames
@@ -13480,7 +13480,7 @@ Func_5530
 	ld [$c4e1], a
 .asm_574a
 	call GetJoypadStateLowSensitivity
-	ld a, [$ff00+$b5]
+	ld a, [$ffb5]
 	and a
 	jr z, .asm_574a ; 0x5750 $f8
 	bit 0, a
@@ -13593,7 +13593,7 @@ Func_5827:
 	push de
 	push hl
 	ld a, c
-	ld [$ff00+$95], a
+	ld [$ff95], a
 	call GetMonName
 	pop hl
 	call PlaceString
@@ -13765,7 +13765,7 @@ Func_5849:
 	call LoadHpBarAndStatusTilePatterns
 	xor a
 	ld [$cc5b], a
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $1
 	jr z, .asm_59d9 ; 0x59d0 $7
 	ld a, $38
@@ -13849,7 +13849,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [W_GRASSRATE], a ; $d887
 	inc a
 	ld [W_ISLINKBATTLE], a ; $d12b
-	ld [$FF00+$b5], a
+	ld [$ffb5], a
 	ld a, $a
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)
@@ -14115,7 +14115,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, [$cc42]
 	and $c
 	jr z, .asm_5c98
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_5ca1
 .asm_5c98
@@ -14124,13 +14124,13 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	and $3
 	ld [wCurrentMenuItem], a ; $cc26
 .asm_5ca1
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr nz, .asm_5cb1
 	call DelayFrame
 	call DelayFrame
 	ld a, $81
-	ld [$FF00+$2], a
+	ld [$ff02], a
 .asm_5cb1
 	ld b, $7f
 	ld c, $7f
@@ -14227,7 +14227,7 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	xor a
 	ld [H_NEWLYPRESSEDBUTTONS], a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [$FF00+$b5], a
+	ld [$ffb5], a
 	ld [$d72d], a
 	ld hl, $d732
 	set 0, [hl]
@@ -14253,7 +14253,7 @@ TradeCenterText: ; 5d97 (1:5d97)
 
 Func_5db5: ; 5db5 (1:5db5)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 4, 7 ; $c430
 	ld hl, Coord
 	ld b, $8
@@ -14277,7 +14277,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	ld hl, Coord
 	call Func_5e55
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld c, $1e
 	jp DelayFrames
 
@@ -14907,7 +14907,7 @@ Func_62ff: ; 62ff (1:62ff)
 	cp BATTLE_CENTER
 	jr nz, .asm_6314
 	ld hl, BattleCenterSpec1 ; $6428
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_6334
 	ld hl, BattleCenterSpec2 ; $6430
@@ -14916,7 +14916,7 @@ Func_62ff: ; 62ff (1:62ff)
 	cp TRADE_CENTER
 	jr nz, .asm_6326
 	ld hl, TradeCenterSpec1 ; $6438
-	ld a, [$FF00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_6334
 	ld hl, TradeCenterSpec2 ; $6440
@@ -15509,7 +15509,7 @@ ED_Tile: ; 6767 (1:6767)
 
 Func_676f: ; 676f (1:676f)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [$ceeb]
 	and a
 	ld de, LowerCaseAlphabet ; $679e
@@ -15535,7 +15535,7 @@ Func_676f: ; 676f (1:676f)
 	jr nz, .asm_6784
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	jp Delay3
 
 LowerCaseAlphabet: ; 679e (1:679e)
@@ -15823,13 +15823,13 @@ asm_6a19: ; 6a19 (1:6a19)
 	push hl
 	push de
 	push bc
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	ld a, d
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, e
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld c, a
-	ld a, [$FF00+$8d]
+	ld a, [$ff8d]
 	and a
 	jr nz, .asm_6a2d
 	ld d, $0
@@ -15839,8 +15839,8 @@ asm_6a19: ; 6a19 (1:6a19)
 	ld e, l
 .asm_6a2f
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld a, [$FF00+$8d]
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld a, [$ff8d]
 	and a
 	jr nz, .asm_6a3c
 	ld a, [hli]
@@ -15854,7 +15854,7 @@ asm_6a19: ; 6a19 (1:6a19)
 .asm_6a3f
 	dec c
 	jr nz, .asm_6a2f
-	ld a, [$FF00+$8d]
+	ld a, [$ff8d]
 	and a
 	jr z, .asm_6a4a
 	xor a
@@ -15862,13 +15862,13 @@ asm_6a19: ; 6a19 (1:6a19)
 	ld [hl], a
 .asm_6a4a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld c, a
 	ld h, d
 	ld l, e
-	ld a, [$FF00+$8d]
+	ld a, [$ff8d]
 	and a
 	jr nz, .asm_6a5e
 	inc hl
@@ -15878,9 +15878,9 @@ asm_6a19: ; 6a19 (1:6a19)
 .asm_6a5f
 	ld d, h
 	ld e, l
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	jr nz, .asm_6a2f
 	pop bc
 	pop de
@@ -16550,13 +16550,13 @@ Func_6f07: ; 6f07 (1:6f07)
 	FuncCoord 6, 8 ; $c446
 	ld hl, Coord
 	ld de, $d0e1
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	set 2, a
-	ld [$FF00+$f6], a
+	ld [$fff6], a
 	call PlaceString
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	res 2, a
-	ld [$FF00+$f6], a
+	ld [$fff6], a
 	ld hl, wTopMenuItemY ; $cc24
 	ld a, $8
 	ld [hli], a
@@ -16939,27 +16939,27 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld a, $5a
 	ld [$cc47], a
 .asm_71eb
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_721a ; 0x71ef $29
 	cp $1
 	jr z, .asm_721a ; 0x71f3 $25
 	ld a, $ff
-	ld [$ff00+$aa], a
+	ld [$ffaa], a
 	ld a, $2
-	ld [$ff00+$1], a
+	ld [$ff01], a
 	xor a
-	ld [$ff00+$ad], a
+	ld [$ffad], a
 	ld a, $80
-	ld [$ff00+$2], a
+	ld [$ff02], a
 	ld a, [$cc47]
 	dec a
 	ld [$cc47], a
 	jr z, .asm_7287 ; 0x720b $7a
 	ld a, $1
-	ld [$ff00+$1], a
+	ld [$ff01], a
 	ld a, $81
-	ld [$ff00+$2], a
+	ld [$ff02], a
 	call DelayFrame
 	jr .asm_71eb ; 0x7218 $d1
 .asm_721a
@@ -16991,7 +16991,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld [$ff00+$a9], a
+	ld [$ffa9], a
 	ld [$cc42], a
 	call Func_227f
 	ld hl, $cc47
@@ -17071,13 +17071,13 @@ CableClubNPCText6: ; 72d2 (1:72d2)
 Func_72d7: ; 72d7 (1:72d7)
 	call Delay3
 	ld a, $ff
-	ld [$FF00+$aa], a
+	ld [$ffaa], a
 	ld a, $2
-	ld [$FF00+$1], a
+	ld [$ff01], a
 	xor a
-	ld [$FF00+$ad], a
+	ld [$ffad], a
 	ld a, $80
-	ld [$FF00+$2], a
+	ld [$ff02], a
 	ret
 
 ; function to draw various text boxes
@@ -17640,7 +17640,7 @@ Func_76e1: ; 76e1 (1:36e1)
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, $c
-	ld [$FF00+$f7], a
+	ld [$fff7], a
 	FuncCoord 13, 12 ; $c49d
 	ld hl, Coord
 	ld de, PokemonMenuEntries ; $77c2
@@ -17718,7 +17718,7 @@ Func_76e1: ; 76e1 (1:36e1)
 .asm_7776
 	pop hl
 	ld a, [$cd42]
-	ld [$FF00+$f7], a
+	ld [$fff7], a
 	FuncCoord 0, 12 ; $c490
 	ld hl, Coord
 	ld a, [$cd42]
@@ -17831,7 +17831,7 @@ Func_783f: ; 783f (1:783f)
 .asm_784f
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld de, W_PLAYERMONMAXHP ; $d023
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_7861
 	ld hl, W_ENEMYMONCURHP ; $cfe6
@@ -17883,7 +17883,7 @@ Func_7861: ; 7861 (1:7861)
 	ld [wHPBarNewHP+1], a
 	inc de
 .asm_789c
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	FuncCoord 10, 9 ; $c45e
 	ld hl, Coord
@@ -17904,7 +17904,7 @@ Func_7861: ; 7861 (1:7861)
 	ld b, BANK(ReadPlayerMonCurHPAndStatus)
 	call Bankswitch
 	ld hl, UnnamedText_78dc ; $78dc
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
 	jr z, .asm_78d2
@@ -18903,10 +18903,10 @@ MapHeaderBanks: ; c23d (3:423d)
 
 Func_c335: ; c335 (3:4335)
 	ld a, $90
-	ld [$FF00+$b0], a
-	ld [rWY], a ; $FF00+$4a
+	ld [$ffb0], a
+	ld [rWY], a ; $ff4a
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld [$d13b], a
 	ld [W_LONEATTACKNO], a ; $d05c
 	ld [H_NEWLYPRESSEDBUTTONS], a
@@ -18940,7 +18940,7 @@ Func_c35f: ; c35f (3:435f)
 	ld a, [hli]
 	ld [$d42f], a
 	ld a, [hl]
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld hl, $d736
 	set 2, [hl]
 	ret
@@ -19338,7 +19338,7 @@ Func_c589: ; c589 (3:4589)
 
 Func_c5be: ; c5be (3:45be)
 	xor a
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	ld hl, W_YCOORD ; $d361
 	ld a, [hli]
 	ld d, a
@@ -19418,32 +19418,32 @@ Func_c636: ; c636 (3:4636)
 	ld hl, $c214
 	add hl, de
 	ld a, [hli]
-	ld [$FF00+$dc], a
+	ld [$ffdc], a
 	ld a, [hl]
-	ld [$FF00+$dd], a
+	ld [$ffdd], a
 	ld a, [W_NUMSPRITES] ; $d4e1
 	ld c, a
 	ld de, $f
 	ld hl, $c214
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	and $3
 	jr z, .asm_c678
 .asm_c659
 	inc hl
-	ld a, [$FF00+$dd]
+	ld a, [$ffdd]
 	cp [hl]
 	jr nz, .asm_c672
 	dec hl
 	ld a, [hli]
 	ld b, a
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	rrca
 	jr c, .asm_c66c
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	dec a
 	jr .asm_c66f
 .asm_c66c
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	inc a
 .asm_c66f
 	cp b
@@ -19456,18 +19456,18 @@ Func_c636: ; c636 (3:4636)
 .asm_c678
 	ld a, [hli]
 	ld b, a
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	cp b
 	jr nz, .asm_c691
 	ld b, [hl]
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	bit 2, a
 	jr nz, .asm_c68b
-	ld a, [$FF00+$dd]
+	ld a, [$ffdd]
 	inc a
 	jr .asm_c68e
 .asm_c68b
-	ld a, [$FF00+$dd]
+	ld a, [$ffdd]
 	dec a
 .asm_c68e
 	cp b
@@ -19535,7 +19535,7 @@ Func_c69c: ; c69c (3:469c)
 	ld [wJoypadForbiddenButtonsMask], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	pop de
 	pop hl
@@ -19584,7 +19584,7 @@ Func_c69c: ; c69c (3:469c)
 	jr nz, .asm_c74f
 	call EnableAutoTextBoxDrawing
 	ld a, $d1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d72e
 	set 5, [hl]
@@ -19621,9 +19621,9 @@ Func_c754: ; c754 (3:4754)
 	dec c
 	jr nz, .asm_c76f
 	ld a, [hl]
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	xor a
-	ld [$FF00+$d8], a
+	ld [$ffd8], a
 	pop hl
 	ld a, [W_CURMAPTILESET] ; $d367
 	push hl
@@ -19636,7 +19636,7 @@ Func_c754: ; c754 (3:4754)
 	jr c, .asm_c797
 	ld a, [W_CURMAPTILESET] ; $d367
 	ld b, a
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	cp b
 	jr z, .asm_c7b1
 .asm_c797
@@ -27097,13 +27097,13 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld b, BANK(CalcExperience)
 	call Bankswitch
 	pop de
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	ld [de], a
 	inc de
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld [de], a
 	inc de
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [de], a
 	inc de
 	xor a
@@ -27531,13 +27531,13 @@ Func_eedc: ; eedc (3:6edc)
 	ld a, [W_ISINBATTLE] ; $d057
 	inc a
 	ret z
-	ld a, [H_AUTOBGTRANSFERENABLED] ; $FF00+$ba
+	ld a, [H_AUTOBGTRANSFERENABLED] ; $ffba
 	push af
-	ld a, [$FF00+$d7]
+	ld a, [$ffd7]
 	push af
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld [$FF00+$d7], a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [$ffd7], a
 	call LoadCurrentMapView
 	call GoPAL_SET_CF1C
 	ld hl, $d526
@@ -27554,7 +27554,7 @@ Func_eedc: ; eedc (3:6edc)
 	ld a, h
 	ld [$ceea], a
 	ld a, $2
-	ld [$FF00+$be], a
+	ld [$ffbe], a
 	ld c, $9
 .asm_ef0f
 	push bc
@@ -27562,7 +27562,7 @@ Func_eedc: ; eedc (3:6edc)
 	push hl
 	ld hl, $c378
 	ld de, $14
-	ld a, [$FF00+$be]
+	ld a, [$ffbe]
 .asm_ef1a
 	add hl, de
 	dec a
@@ -27570,7 +27570,7 @@ Func_eedc: ; eedc (3:6edc)
 	call ScheduleRowRedrawHelper
 	pop hl
 	ld de, $20
-	ld a, [$FF00+$be]
+	ld a, [$ffbe]
 	ld c, a
 .asm_ef28
 	add hl, de
@@ -27579,11 +27579,11 @@ Func_eedc: ; eedc (3:6edc)
 	or $98
 	dec c
 	jr nz, .asm_ef28
-	ld [$FF00+$d2], a
+	ld [$ffd2], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a ; $FF00+$d1
+	ld [H_SCREENEDGEREDRAWADDR], a ; $ffd1
 	ld a, $2
-	ld [H_SCREENEDGEREDRAW], a ; $FF00+$d0
+	ld [H_SCREENEDGEREDRAW], a ; $ffd0
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]
@@ -27593,9 +27593,9 @@ Func_eedc: ; eedc (3:6edc)
 	dec c
 	jr nz, .asm_ef0f
 	pop af
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 Func_ef4e: ; ef4e (3:6f4e)
@@ -27646,14 +27646,14 @@ asm_ef82: ; ef82 (3:6f82)
 	call CleanLCD_OAM
 	call Func_3dbe
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld hl, UsedCutText ; $6ff2
 	call PrintText
 	call LoadScreenTilesFromBuffer2
@@ -27673,7 +27673,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $ac
 	call PlaySound
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call UpdateSprites
 	jp Func_eedc
 
@@ -27685,7 +27685,7 @@ Func_eff7: ; eff7 (3:6ff7)
 	xor a
 	ld [$cd50], a
 	ld a, $e4
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld a, [$cd4d]
 	cp $52
 	jr z, .asm_f020
@@ -27989,7 +27989,7 @@ IsMissableObjectHidden: ; f1a6 (3:71a6)
 .notHidden
 	xor a
 .hidden
-	ld [$FF00+$e5], a
+	ld [$ffe5], a
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map
@@ -28083,15 +28083,15 @@ Func_f225: ; f225 (3:7225)
 	bit 1, a
 	ret nz
 	xor a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call IsSpriteInFrontOfPlayer
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld [$d718], a
 	and a
 	jp z, Func_f2dd
 	ld hl, $c101
 	ld d, $0
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	swap a
 	ld e, a
 	add hl, de
@@ -28171,7 +28171,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	call Func_f2dd
 	set 7, [hl]
 	ld a, [$d718]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
 	ld a, $ac
@@ -28196,7 +28196,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ret nc
 	ld [de], a
 	ld a, [de]
-	ld [$FF00+$e4], a
+	ld [$ffe4], a
 	add e
 	ld e, a
 	jr nc, .asm_f300
@@ -28213,7 +28213,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	jr z, .asm_f315
 	ld hl, W_ENEMYMON1OT
 .asm_f315
-	ld a, [$FF00+$e4]
+	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
@@ -28225,7 +28225,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	and a
 	jr nz, .asm_f33f
 	ld hl, W_PARTYMON1NAME ; $d2b5
-	ld a, [$FF00+$e4]
+	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld a, $2
@@ -28239,7 +28239,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	jr z, .asm_f34c
 	ld hl, wEnemyMons ; $d8a4
 .asm_f34c
-	ld a, [$FF00+$e4]
+	ld a, [$ffe4]
 	dec a
 	ld bc, $2c
 	call AddNTimes
@@ -28846,37 +28846,37 @@ HealParty: ; f6a5 (3:76a5)
 Func_f71e: ; f71e (3:771e)
 	call Load16BitRegisters
 	xor a
-	ld [$FF00+$a5], a
-	ld [$FF00+$a6], a
-	ld [$FF00+$a7], a
+	ld [$ffa5], a
+	ld [$ffa6], a
+	ld [$ffa7], a
 	ld d, $1
 .asm_f72a
-	ld a, [$FF00+$a2]
+	ld a, [$ffa2]
 	and $f0
 	jr nz, .asm_f75b
 	inc d
-	ld a, [$FF00+$a2]
+	ld a, [$ffa2]
 	swap a
 	and $f0
 	ld b, a
-	ld a, [$FF00+$a3]
+	ld a, [$ffa3]
 	swap a
-	ld [$FF00+$a3], a
+	ld [$ffa3], a
 	and $f
 	or b
-	ld [$FF00+$a2], a
-	ld a, [$FF00+$a3]
+	ld [$ffa2], a
+	ld a, [$ffa3]
 	and $f0
 	ld b, a
-	ld a, [$FF00+$a4]
+	ld a, [$ffa4]
 	swap a
-	ld [$FF00+$a4], a
+	ld [$ffa4], a
 	and $f
 	or b
-	ld [$FF00+$a3], a
-	ld a, [$FF00+$a4]
+	ld [$ffa3], a
+	ld a, [$ffa4]
 	and $f0
-	ld [$FF00+$a4], a
+	ld [$ffa4], a
 	jr .asm_f72a
 .asm_f75b
 	push de
@@ -28886,16 +28886,16 @@ Func_f71e: ; f71e (3:771e)
 	ld a, b
 	swap a
 	and $f0
-	ld [$FF00+$a5], a
+	ld [$ffa5], a
 	dec d
 	jr z, .asm_f7bc
 	push de
 	call Func_f7d7
 	call Func_f800
 	pop de
-	ld a, [$FF00+$a5]
+	ld a, [$ffa5]
 	or b
-	ld [$FF00+$a5], a
+	ld [$ffa5], a
 	dec d
 	jr z, .asm_f7bc
 	push de
@@ -28905,16 +28905,16 @@ Func_f71e: ; f71e (3:771e)
 	ld a, b
 	swap a
 	and $f0
-	ld [$FF00+$a6], a
+	ld [$ffa6], a
 	dec d
 	jr z, .asm_f7bc
 	push de
 	call Func_f7d7
 	call Func_f800
 	pop de
-	ld a, [$FF00+$a6]
+	ld a, [$ffa6]
 	or b
-	ld [$FF00+$a6], a
+	ld [$ffa6], a
 	dec d
 	jr z, .asm_f7bc
 	push de
@@ -28924,23 +28924,23 @@ Func_f71e: ; f71e (3:771e)
 	ld a, b
 	swap a
 	and $f0
-	ld [$FF00+$a7], a
+	ld [$ffa7], a
 	dec d
 	jr z, .asm_f7bc
 	push de
 	call Func_f7d7
 	call Func_f800
 	pop de
-	ld a, [$FF00+$a7]
+	ld a, [$ffa7]
 	or b
-	ld [$FF00+$a7], a
+	ld [$ffa7], a
 .asm_f7bc
-	ld a, [$FF00+$a5]
-	ld [$FF00+$a2], a
-	ld a, [$FF00+$a6]
-	ld [$FF00+$a3], a
-	ld a, [$FF00+$a7]
-	ld [$FF00+$a4], a
+	ld a, [$ffa5]
+	ld [$ffa2], a
+	ld a, [$ffa6]
+	ld [$ffa3], a
+	ld a, [$ffa7]
+	ld [$ffa4], a
 	pop de
 	ld a, $6
 	sub d
@@ -28955,28 +28955,28 @@ Func_f71e: ; f71e (3:771e)
 	ret
 
 Func_f7d7: ; f7d7 (3:77d7)
-	ld a, [$FF00+$a4]
+	ld a, [$ffa4]
 	swap a
 	and $f
 	ld b, a
-	ld a, [$FF00+$a3]
+	ld a, [$ffa3]
 	swap a
-	ld [$FF00+$a3], a
+	ld [$ffa3], a
 	and $f0
 	or b
-	ld [$FF00+$a4], a
-	ld a, [$FF00+$a3]
+	ld [$ffa4], a
+	ld a, [$ffa3]
 	and $f
 	ld b, a
-	ld a, [$FF00+$a2]
+	ld a, [$ffa2]
 	swap a
-	ld [$FF00+$a2], a
+	ld [$ffa2], a
 	and $f0
 	or b
-	ld [$FF00+$a3], a
-	ld a, [$FF00+$a2]
+	ld [$ffa3], a
+	ld a, [$ffa2]
 	and $f
-	ld [$FF00+$a2], a
+	ld [$ffa2], a
 	ret
 
 Func_f800: ; f800 (3:7800)
@@ -29119,35 +29119,35 @@ Func_f8ba: ; f8ba (3:78ba)
 	ld de, $0
 
 Func_f8c8: ; f8c8 (3:78c8)
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, a
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	call CalcDifference
 	ld d, a
 	and a
 	jr nz, .asm_f8da
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	set 0, a
-	ld [$FF00+$98], a
+	ld [$ff98], a
 .asm_f8da
-	ld a, [$FF00+$9a]
+	ld a, [$ff9a]
 	ld b, a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	call CalcDifference
 	ld e, a
 	and a
 	jr nz, .asm_f8ec
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	set 1, a
-	ld [$FF00+$98], a
+	ld [$ff98], a
 .asm_f8ec
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	cp $3
 	jr z, .asm_f926
 	ld a, e
 	cp d
 	jr c, .asm_f90a
-	ld a, [$FF00+$9d]
+	ld a, [$ff9d]
 	bit 1, a
 	jr nz, .asm_f900
 	ld d, $c0
@@ -29155,12 +29155,12 @@ Func_f8c8: ; f8c8 (3:78c8)
 .asm_f900
 	ld d, $80
 .asm_f902
-	ld a, [$FF00+$9a]
+	ld a, [$ff9a]
 	add $1
-	ld [$FF00+$9a], a
+	ld [$ff9a], a
 	jr .asm_f91c
 .asm_f90a
-	ld a, [$FF00+$9d]
+	ld a, [$ff9d]
 	bit 0, a
 	jr nz, .asm_f914
 	ld d, $0
@@ -29168,15 +29168,15 @@ Func_f8c8: ; f8c8 (3:78c8)
 .asm_f914
 	ld d, $40
 .asm_f916
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	add $1
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 .asm_f91c
 	ld a, d
 	ld [hli], a
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	inc a
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	jp Func_f8c8
 .asm_f926
 	ld [hl], $ff
@@ -29184,13 +29184,13 @@ Func_f8c8: ; f8c8 (3:78c8)
 
 Func_f929: ; f929 (3:7929)
 	xor a
-	ld [$FF00+$9d], a
+	ld [$ff9d], a
 	ld a, [$c104]
 	ld d, a
 	ld a, [$c106]
 	ld e, a
 	ld hl, wSpriteStateData1
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	add l
 	add $4
 	ld l, a
@@ -29222,7 +29222,7 @@ Func_f929: ; f929 (3:7929)
 	ld [hli], a
 	call Func_366b
 	ld a, [hl]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	pop hl
 	inc hl
 	ld b, e
@@ -29242,19 +29242,19 @@ Func_f929: ; f929 (3:7929)
 	res 1, [hl]
 	pop hl
 .asm_f987
-	ld [$FF00+$e5], a
+	ld [$ffe5], a
 	ld a, $10
-	ld [$FF00+$e6], a
+	ld [$ffe6], a
 	call Func_366b
-	ld a, [$FF00+$e7]
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$9b]
+	ld a, [$ffe7]
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff9b]
 	and a
 	ret z
-	ld a, [$FF00+$9d]
+	ld a, [$ff9d]
 	cpl
 	and $3
-	ld [$FF00+$9d], a
+	ld [$ff9d], a
 	ret
 
 Func_f9a0: ; f9a0 (3:79a0)
@@ -29514,7 +29514,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	ld a, [wHPBarOldHP+1]
 	ld [$cef0], a
 	push hl
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	bit 0, a
 	jr z, .asm_fb15
 	ld de, $9
@@ -29596,7 +29596,7 @@ Func_fb50: ; fb50 (3:7b50)
 	pop af
 	call Func_3ef5
 	xor a
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	ret
 .asm_fb7b
 	inc hl
@@ -29605,7 +29605,7 @@ Func_fb50: ; fb50 (3:7b50)
 	jr .asm_fb62
 .asm_fb7f
 	ld a, $ff
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	ld b, BANK(Func_52673)
 	ld hl, Func_52673
 	jp Bankswitch
@@ -29864,7 +29864,7 @@ Func_12924: ; 12924 (4:6924)
 	push hl
 	call DrawHPBar
 	pop hl
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	bit 0, a
 	jr z, .asm_12937
 	ld bc, $9
@@ -29902,7 +29902,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld hl, $d72c
 	set 1, [hl]
 	ld a, $33
-	ld [$ff00+$24], a ; Reduce the volume
+	ld [$ff24], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites ; move sprites (?)
@@ -29923,10 +29923,10 @@ StatusScreen: ; 12953 (4:6953)
 	ld hl, $9720
 	ld bc,(BANK(PTile) << 8 | $01)
 	call CopyVideoDataDouble ; P (for PP), inline
-	ld a, [$ff00+$d7]
+	ld a, [$ffd7]
 	push af
 	xor a
-	ld [$ff00+$d7], a
+	ld [$ffd7], a
 	FuncCoord 19,1
 	ld hl, Coord
 	ld bc, $060a
@@ -30012,7 +30012,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlayCry ; play Pokémon cry
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [$ff00+$d7], a
+	ld [$ffd7], a
 	ret
 .unk_12a7e ; 0x12a7e ; I don't know what this does, iterates over pointers?
 	ld a, [$cc49]
@@ -30134,11 +30134,11 @@ StatsText: ; 12b3a (4:6b3a)
 	next "SPECIAL@"
 
 StatusScreen2: ; 12b57 (4:6b57)
-	ld a, [$ff00+$d7]
+	ld a, [$ffd7]
 	push af
 	xor a
-	ld [$ff00+$d7], a
-	ld [$ff00+$ba], a
+	ld [$ffd7], a
+	ld [$ffba], a
 	ld bc, $0005
 	ld hl, $d0dc
 	call FillMemory
@@ -30280,15 +30280,15 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld hl, Coord
 	call PlaceString
 	ld a, $1
-	ld [$ff00+$ba], a
+	ld [$ffba], a
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [$ff00+$d7], a
+	ld [$ffd7], a
 	ld hl, $d72c
 	res 1, [hl]
 	ld a, $77
-	ld [$ff00+$24], a
+	ld [$ff24], a
 	call GBPalWhiteOut
 	jp ClearScreen
 .asm_12c86 ; This does some magic with lvl/exp?
@@ -30301,13 +30301,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld b, BANK(CalcExperience)
 	call Bankswitch
 	ld hl, $cfa8
-	ld a, [$ff00+$98]
+	ld a, [$ff98]
 	sub [hl]
 	ld [hld], a
-	ld a, [$ff00+$97]
+	ld a, [$ff97]
 	sbc [hl]
 	ld [hld], a
-	ld a, [$ff00+$96]
+	ld a, [$ff96]
 	sbc [hl]
 	ld [hld], a
 	ret
@@ -31516,10 +31516,10 @@ Func_13653: ; 13653 (4:7653)
 	inc d
 .asm_13696
 	ld a, [hl]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld a, [de]
 	ld [hl], a
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld [de], a
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
 	ld bc, $2c
@@ -31819,10 +31819,10 @@ Func_13870: ; 13870 (4:7870)
 	ld a, [W_GRASSRATE] ; $d887
 .asm_138c4
 	ld b, a
-	ld a, [H_RAND1] ; $FF00+$d3
+	ld a, [H_RAND1] ; $ffd3
 	cp b
 	jr nc, .asm_13912
-	ld a, [H_RAND2] ; $FF00+$d4
+	ld a, [H_RAND2] ; $ffd4
 	ld b, a
 	ld hl, WildMonEncounterSlotChances ; $7918
 .asm_138d0
@@ -31859,7 +31859,7 @@ Func_13870: ; 13870 (4:7870)
 .asm_13905
 	ld [$d0db], a
 	ld a, $d2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
 .asm_13912
@@ -31887,7 +31887,7 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
 Func_1392c: ; 1392c (4:792c)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	ld hl, W_PLAYERMONMAXHP ; $d023
@@ -31941,7 +31941,7 @@ Func_1392c: ; 1392c (4:792c)
 .asm_13982
 	FuncCoord 10, 9 ; $c45e
 	ld hl, Coord
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $1
 	jr z, .asm_13990
@@ -33295,7 +33295,7 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld hl, W_PLAYERMONMAXHP
 	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
-	ld a, [$ff00+$f3]  ;whose turn?
+	ld a, [$fff3]  ;whose turn?
 	and a
 	jr z, .notEnemy
 	ld hl, W_ENEMYMONMAXHP
@@ -33497,10 +33497,10 @@ UnnamedText_17f32: ; 17f32 (5:7f32)
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
 	ld hl, wBagItems ; $d31e
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	ld b, a
 	xor a
-	ld [$FF00+$dc], a
+	ld [$ffdc], a
 .asm_17f40
 	ld a, [hli]
 	cp $ff
@@ -33508,14 +33508,14 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	cp b
 	jr z, .asm_17f4f
 	inc hl
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	inc a
-	ld [$FF00+$dc], a
+	ld [$ffdc], a
 	jr .asm_17f40
 .asm_17f4f
 	ld a, $1
 	ld [$cf96], a
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	ld [wWhichPokemon], a ; $cf92
 	ld hl, wNumBagItems ; $d31d
 	jp RemoveItemFromInventory
@@ -34230,7 +34230,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	cp $20
 	ret nz
 	ld a, $e
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -34250,7 +34250,7 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 	cp $13
 	ret nz
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -34261,13 +34261,13 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 
 ViridianCityScript1: ; 19062 (6:5062)
 	ld a, [$c134]
-	ld [$ff00+$eb], a
+	ld [$ffeb], a
 	ld a, [$c136]
-	ld [$ff00+$ec], a
+	ld [$ffec], a
 	ld a, [$c234]
-	ld [$ff00+$ed], a
+	ld [$ffed], a
 	ld a, [$c235]
-	ld [$ff00+$ee], a
+	ld [$ffee], a
 	xor a
 	ld [wListScrollOffset], a
 
@@ -34283,20 +34283,20 @@ ViridianCityScript1: ; 19062 (6:5062)
 	ret
 
 ViridianCityScript2: ; 1908f (6:508f)
-	ld a, [$ff00+$eb]
+	ld a, [$ffeb]
 	ld [$c134], a
-	ld a, [$ff00+$ec]
+	ld a, [$ffec]
 	ld [$c136], a
-	ld a, [$ff00+$ed]
+	ld a, [$ffed]
 	ld [$c234], a
-	ld a, [$ff00+$ee]
+	ld a, [$ffee]
 	ld [$c235], a
 	call UpdateSprites
 	call Delay3
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $f
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [W_BATTLETYPE], a
@@ -34563,7 +34563,7 @@ PewterCityScript_1925e: ; 1925e (6:525e)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 CoordsData_19277: ; 19277 (6:5277)
@@ -34578,32 +34578,32 @@ PewterCityScript1: ; 19280 (6:5280)
 	and a
 	ret nz
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $34
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34b9
 	call Func_2307
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ff00+$eb], a
+	ld [$ffeb], a
 	ld a, $30
-	ld [$ff00+$ec], a
+	ld [$ffec], a
 	ld a, $c
-	ld [$ff00+$ed], a
+	ld [$ffed], a
 	ld a, $11
-	ld [$ff00+$ee], a
+	ld [$ffee], a
 	ld a, $3
 	ld [$cf13], a
 	call Func_32f9
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, MovementData_PewterMuseumGuyExit ; $52ce
 	call MoveSprite
 	ld a, $2
@@ -34644,32 +34644,32 @@ PewterCityScript4: ; 19305 (6:5305)
 	and a
 	ret nz
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $8
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $18
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34b9
 	call Func_2307
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ff00+$eb], a
+	ld [$ffeb], a
 	ld a, $40
-	ld [$ff00+$ec], a
+	ld [$ffec], a
 	ld a, $16
-	ld [$ff00+$ed], a
+	ld [$ffed], a
 	ld a, $10
-	ld [$ff00+$ee], a
+	ld [$ffee], a
 	ld a, $5
 	ld [$cf13], a
 	call Func_32f9
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
@@ -34883,7 +34883,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ld hl, $d75b
 	set 7, [hl]
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
@@ -34910,7 +34910,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [$c129], a
 	call Delay3
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 .asm_194f7
 	ld a, [$d75a]
@@ -34937,9 +34937,9 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	cp $14
 	jr z, .asm_19535 ; 0x19526 $d
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $5
-	ld [$ff00+$8b], a
+	ld [$ff8b], a
 	call Func_3500
 	ld [hl], $19
 .asm_19535
@@ -34949,7 +34949,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	call Predef
 	ld de, CeruleanCityMovement1
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $1
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -34982,7 +34982,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d72d
 	set 6, [hl]
@@ -35026,7 +35026,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld hl, $d75a
 	set 0, [hl]
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
@@ -35035,7 +35035,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld a, [$d362]
 	cp $14
@@ -35046,7 +35046,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $3
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -35137,7 +35137,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	ld hl, UnnamedText_196ee
 	ld de, UnnamedText_196ee
 	call PreBattleSaveRegisters
-	ld a, [$ff00+$8c]
+	ld a, [$ff8c]
 	ld [$cf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -35318,7 +35318,7 @@ VermilionCityScript: ; 197a1 (6:57a1)
 
 VermilionCityScript_197c0: ; 197c0 (6:57c0)
 	call GenRandom
-	ld a, [$ff00+$d4]
+	ld a, [$ffd4]
 	and $e
 	ld [$d743], a
 	ret
@@ -35352,7 +35352,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld [$cf0d], a
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, [$d803]
 	bit 2, a
@@ -36161,7 +36161,7 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$ff00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_19d69
 	ld a, [hli]
@@ -36186,12 +36186,12 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ret
 .asm_19d85
 	xor a
-	ld [$ff00+$e0], a
+	ld [$ffe0], a
 	ret
 
 SilphCo4Script_19d89: ; 19d89 (6:5d89)
 	ld hl, $d82a
-	ld a, [$ff00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
@@ -36409,7 +36409,7 @@ SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 
 SilphCo5Script_19f9e: ; 19f9e (6:5f9e)
 	ld hl, $d82c
-	ld a, [$ff00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
@@ -36659,7 +36659,7 @@ SilphCo6Coords1: ; 1a1e3 (6:61e3)
 	db $ff
 
 SilphCo6Script_1a1e6: ; 1a1e6 (6:61e6)
-	ld a, [$ff00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	ld hl, $d82e
@@ -36952,7 +36952,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	call FillMemory
 	ld [hl], $ff
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld de, $cc97
 	call MoveSprite
 	ld a, $1
@@ -36974,7 +36974,7 @@ Func_1a485: ; 1a485 (6:6485)
 	ret nz
 	ld a, [$cca1]
 	ld [$cd38], a
-	ld [$ff00+$95], a
+	ld [$ff95], a
 	ld a, $23
 	call Predef
 	call Func_3486
@@ -37170,7 +37170,7 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 	jr .loop
 .notRival
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs: ; 1a605 (6:6605)
@@ -37753,7 +37753,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld a, $8
 	ld [$d528], a
 	ld a, $8
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -37926,7 +37926,7 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 
 OaksLabScript1: ; 1cb6e (7:4b6e)
 	ld a, $8
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, OakEntryMovement
 	call MoveSprite
 
@@ -37963,14 +37963,14 @@ OaksLabScript3: ; 1cba2 (7:4ba2)
 	ld [$cd38], a
 	call Func_3486
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 
 	ld a, $4
@@ -37989,9 +37989,9 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld hl, $d74b
 	set 0, [hl]
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	call UpdateSprites
 	ld hl, W_FLAGS_D733
@@ -38006,19 +38006,19 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $fc
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $11
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld a, $12
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld a, $13
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld a, $14
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d74b
 	set 1, [hl]
@@ -38034,18 +38034,18 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	cp $6
 	ret nz
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	call UpdateSprites
 	ld a, $c
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
 	ld [$cd38], a
@@ -38109,9 +38109,9 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	jr nz, .asm_1ccf3 ; 0x1cccd $24
 	push hl
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8b], a
+	ld [$ff8b], a
 	call Func_34fc
 	push hl
 	ld [hl], $4c
@@ -38134,7 +38134,7 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 
 .asm_1ccf3
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 
 	ld a, $9
@@ -38148,12 +38148,12 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $fc
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $d
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, [$cd3e]
 	cp $2
@@ -38178,12 +38178,12 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld [$d11e], a
 	call GetMonName
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $e
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d74b
 	set 2, [hl]
@@ -38199,9 +38199,9 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	cp $6
 	ret nz
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $8
 	ld [$d528], a
@@ -38209,23 +38209,23 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic ; play music
 	ld a, $f
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$ff00+$9b], a
+	ld [$ff9b], a
 	ld a, $1
 	swap a
-	ld [$ff00+$95], a
+	ld [$ff95], a
 	ld a, $22
 	call Predef
-	ld a, [$ff00+$95]
+	ld a, [$ff95]
 	dec a
-	ld [$ff00+$95], a
+	ld [$ff95], a
 	ld a, $20
 	call Predef
 	ld de, $cc97
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 
 	ld a, $b
@@ -38281,9 +38281,9 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [$cf13], a
 	call Func_32f9
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $7
 	call Predef
@@ -38298,13 +38298,13 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld c, $14
 	call DelayFrames
 	ld a, $10
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld b, BANK(Music_RivalAlternateStart)
 	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, .RivalExitMovement
 	call MoveSprite
 	ld a, [W_XCOORD]
@@ -38372,7 +38372,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $15
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call OaksLabScript_1d02b
 	ld a, $2a
@@ -38388,7 +38388,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	call FillMemory
 	ld [hl], $ff
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, $cc97
 	call MoveSprite
 
@@ -38398,14 +38398,14 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 
 OaksLabScript_1cefd ; 1cefd (7:4efd)
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $4
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $8
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	jp Func_34a6 ; face object
 
 OaksLabScript16: ; 1cf12 (7:4f12)
@@ -38418,21 +38418,21 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld [wJoypadForbiddenButtonsMask], a
 	call OaksLabScript_1cefd
 	ld a, $16
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call DelayFrame
 	call OaksLabScript_1cefd
 	ld a, $17
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call DelayFrame
 	call OaksLabScript_1cefd
 	ld a, $18
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call DelayFrame
 	ld a, $19
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld a, $2f
@@ -38445,16 +38445,16 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call Predef
 	call OaksLabScript_1cefd
 	ld a, $1a
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $c
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	call Delay3
 	ld a, $1b
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d74b
 	set 5, [hl]
@@ -38482,7 +38482,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld hl, Music_RivalAlternateStart
 	call Bankswitch
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, $cc97
 	call MoveSprite
 
@@ -38541,9 +38541,9 @@ OaksLabScript_1d00a: ; 1d00a (7:500a)
 
 OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld a, $7c
-	ld [$ff00+$eb], a
+	ld [$ffeb], a
 	ld a, $8
-	ld [$ff00+$ee], a
+	ld [$ffee], a
 	ld a, [$d361]
 	cp $3
 	jr nz, .asm_1d045 ; 0x1d038 $b
@@ -38572,9 +38572,9 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 .asm_1d066
 	ld a, $20
 .asm_1d068
-	ld [$ff00+$ec], a
+	ld [$ffec], a
 	ld a, b
-	ld [$ff00+$ed], a
+	ld [$ffed], a
 	ld a, $1
 	ld [$cf13], a
 	call Func_32f9
@@ -38713,16 +38713,16 @@ OaksLabText39: ; 1d152 (7:5152)
 
 OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $9
-	ld [$ff00+$8b], a
+	ld [$ff8b], a
 	call Func_34fc
 	ld [hl], $0
 	; manually fixed some disassembler issues around here
 	ld a, $1
 	ld [$FF8c], a
 	ld a, $9
-	ld [$ff00+$8b], a
+	ld [$ff8b], a
 	call Func_34fc
 	ld [hl], $c
 	ld hl, $d730
@@ -38822,9 +38822,9 @@ OaksLabReceivedMonText: ; 1d227 (7:5227)
 
 OaksLabScript_1d22d: ; 1d22d (7:522d)
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $9
-	ld [$ff00+$8b], a
+	ld [$ff8b], a
 	call Func_34fc
 	ld [hl], $0
 	ld hl, OaksLabLastMonText ; $5243
@@ -39181,7 +39181,7 @@ ViridianMartScriptPointers: ; 1d495 (7:5495)
 ViridianMartScript0: ; 1d49b (7:549b)
 	call UpdateSprites
 	ld a, $4
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $ccd3
 	ld de, RLEMovement1d4bb
@@ -39204,7 +39204,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	ret nz
 	call Delay3
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld bc, (OAKS_PARCEL << 8) + 1
 	call GiveItem
@@ -40209,12 +40209,12 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, $14
 	call FillMemory
 	ld a, $1
-	ld [$ff00+$ba], a
+	ld [$ffba], a
 	call Delay3
 	xor a
-	ld [$ff00+$ba], a
+	ld [$ffba], a
 	ld [$cd3d], a
-	ld [$ff00+$49], a
+	ld [$ff49], a
 	ld a, $58
 	ld [$cd3e], a
 	ld hl, $d526
@@ -40256,11 +40256,11 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	dec e
 	jr nz, .asm_1dbfa ; 0x1dc22 $d6
 	xor a
-	ld [$ff00+$4a], a
-	ld [$ff00+$b0], a
+	ld [$ff4a], a
+	ld [$ffb0], a
 	call VermilionDock_1dc94
 	ld a, $90
-	ld [$ff00+$b0], a
+	ld [$ffb0], a
 	ld a, $1
 	ld [$cfcb], a
 	pop hl
@@ -40318,13 +40318,13 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 	ld h, $0
 	ld l, $80
 .asm_1dc86
-	ld a, [$ff00+$44]
+	ld a, [$ff44]
 	cp l
 	jr nz, .asm_1dc86 ; 0x1dc89 $fb
 	ld a, h
-	ld [$ff00+$43], a
+	ld [$ff43], a
 .asm_1dc8e
-	ld a, [$ff00+$44]
+	ld a, [$ff44]
 	cp h
 	jr z, .asm_1dc8e ; 0x1dc91 $fb
 	ret
@@ -40708,11 +40708,11 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ld b, BANK(RemoveGuardDrink)
 	ld hl, RemoveGuardDrink
 	call Bankswitch
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1df82 ; 0x1df70 $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Route5GateScript_1df43
 	ld a, $1
@@ -40720,7 +40720,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ret
 .asm_1df82
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d728
 	set 6, [hl]
@@ -40757,7 +40757,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	ld b, BANK(RemoveGuardDrink)
 	ld hl, RemoveGuardDrink
 	call Bankswitch
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
 	ld hl, UnnamedText_1dfe7
@@ -40854,11 +40854,11 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld b, BANK(RemoveGuardDrink)
 	ld hl, RemoveGuardDrink
 	call Bankswitch
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1e080 ; 0x1e06e $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Func_1e0a1
 	ld a, $1
@@ -40868,7 +40868,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld hl, $d728
 	set 6, [hl]
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 CoordsData_1e08c: ; 1e08c (7:608c)
@@ -40969,11 +40969,11 @@ Route7GateScript0: ; 1e128 (7:6128)
 	ld b, BANK(RemoveGuardDrink)
 	ld hl, RemoveGuardDrink
 	call Bankswitch
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1e15a ; 0x1e148 $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Route7GateScript_1e111
 	ld a, $1
@@ -40981,7 +40981,7 @@ Route7GateScript0: ; 1e128 (7:6128)
 	ret
 .asm_1e15a
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d728
 	set 6, [hl]
@@ -41074,11 +41074,11 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld b, BANK(RemoveGuardDrink)
 	ld hl, RemoveGuardDrink
 	call Bankswitch
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1e220 ; 0x1e20e $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Route8GateScript_1e1d7
 	ld a, $1
@@ -41088,7 +41088,7 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld hl, $d728
 	set 6, [hl]
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 CoordsData_1e22c: ; 1e22c (7:622c)
@@ -41541,7 +41541,7 @@ Route22GateScript0: ; 1e6a4 (7:66a4)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 Route22GateScriptCoords: ; 1e6b5 (7:66b5)
@@ -41663,7 +41663,7 @@ BillsHouseScript1: ; 1e783 (7:6783)
 	ld de, MovementData_1e7a0
 .asm_1e78f
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $2
 	ld [W_BILLSHOUSECURSCRIPT], a
@@ -41700,13 +41700,13 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld a, $2
 	ld [$cf13], a
 	ld a, $c
-	ld [$ff00+$eb], a
+	ld [$ffeb], a
 	ld a, $40
-	ld [$ff00+$ec], a
+	ld [$ffec], a
 	ld a, $6
-	ld [$ff00+$ed], a
+	ld [$ffed], a
 	ld a, $5
-	ld [$ff00+$ee], a
+	ld [$ffee], a
 	call Func_32f9
 	ld a, $62
 	ld [$cc4d], a
@@ -41715,7 +41715,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld c, $8
 	call DelayFrames
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld de, MovementData_1e807
 	call MoveSprite
 	ld a, $4
@@ -41741,7 +41741,7 @@ BillsHouseScript4: ; 1e80d (7:680d)
 
 BillsHouseScript5: ; 1e827 (7:6827)
 	ld a, $4
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $0
 	ld [W_BILLSHOUSECURSCRIPT], a
@@ -41975,12 +41975,12 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	cp $b9
 	jr nz, .asm_1e9c2
 	ld a, $d3
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
 	ld [$d528], a
 	ld a, $9c
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $3
 	ld [$d42f], a
 	ld a, $5
@@ -42032,14 +42032,14 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld a, [wWhichTrade] ; $cd3d
 	push af
 	and $f
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	pop af
 	and $f0
 	swap a
-	ld [$FF00+$dc], a
+	ld [$ffdc], a
 	ld hl, CinnabarGymQuizIntroText ; $6a5b
 	call PrintText
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	dec a
 	add a
 	ld d, $0
@@ -42098,18 +42098,18 @@ Func_1ea8a: ; 1ea8a (7:6a8a)
 
 Func_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	ld c, a
 	ld a, [wCurrentMenuItem] ; $cc26
 	cp c
 	jr nz, .asm_1eab8
 	ld hl, $d126
 	set 5, [hl]
-	ld a, [$FF00+$db]
-	ld [$FF00+$e0], a
+	ld a, [$ffdb]
+	ld [$ffe0], a
 	ld hl, CinnabarGymQuizCorrectText ; $6ae3
 	call PrintText
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	ld c, a
 	ld b, $1
 	call Func_1ea8a
@@ -42121,7 +42121,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText ; $6b05
 	call PrintText
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	add $2
 	ld c, a
 	ld b, $2
@@ -42131,7 +42131,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld a, c
 	and a
 	ret nz
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	add $2
 	ld [$da38], a
 	ret
@@ -42141,7 +42141,7 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	TX_FAR _CinnabarGymQuizCorrectText
 	db $06,$08
 
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	ld c, a
 	ld b, $2
 	call Func_1ea8a
@@ -42160,9 +42160,9 @@ CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
 
 Func_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, $6
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 .asm_1eb0e
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	dec a
 	add a
 	add a
@@ -42177,8 +42177,8 @@ Func_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, [hl]
 	ld [$d12f], a
 	push bc
-	ld a, [$FF00+$db]
-	ld [$FF00+$e0], a
+	ld a, [$ffdb]
+	ld [$ffe0], a
 	ld c, a
 	ld b, $2
 	call Func_1ea8a
@@ -42712,7 +42712,7 @@ CooltrainerFName: ; 27f79 (9:7f79)
 
 Func_27f86: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_27f91
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
@@ -42876,7 +42876,7 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 	jr nz, .asm_2bee7
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
 	ld de, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_2bec8
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
@@ -43151,16 +43151,16 @@ ScaleFirstThreeSpriteColumnsByTwo: ; 2fe55 (b:7e55)
 
 ScaleLastSpriteColumnByTwo: ; 2fe7d (b:7e7d)
 	ld a, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
-	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	ld [H_SPRITEINTERLACECOUNTER], a ; $ff8b
 	ld bc, -1 ; $ffff
 .columnInnerLoop
 	ld a, [de]
 	dec de
 	swap a                    ; only high nybble contains information
 	call ScalePixelsByTwo
-	ld a, [H_SPRITEINTERLACECOUNTER] ; $FF00+$8b
+	ld a, [H_SPRITEINTERLACECOUNTER] ; $ff8b
 	dec a
-	ld [H_SPRITEINTERLACECOUNTER], a ; $FF00+$8b
+	ld [H_SPRITEINTERLACECOUNTER], a ; $ff8b
 	jr nz, .columnInnerLoop
 	dec de                    ; skip last 4 rows of new column
 	dec de
@@ -43198,34 +43198,34 @@ Func_2feb8 ; 2feb8 (b:7eb8)
 	xor a
 	ld hl, $cd6d
 	ld [hli], a
-	ld a, [$ff00+$f3]
+	ld a, [$fff3]
 	and a
 	ld a, [$d022]
 	jr z, .asm_2fec8 ; 0x2fec3 $3
 	ld a, [$cff3]
 .asm_2fec8
 	add a
-	ld [$ff00+$98], a
+	ld [$ff98], a
 	xor a
-	ld [$ff00+$95], a
-	ld [$ff00+$96], a
-	ld [$ff00+$97], a
+	ld [$ff95], a
+	ld [$ff96], a
+	ld [$ff97], a
 	ld a, $64
-	ld [$ff00+$99], a
+	ld [$ff99], a
 	ld b, $4
 	call Divide
-	ld a, [$ff00+$98]
+	ld a, [$ff98]
 	ld [hli], a
-	ld a, [$ff00+$99]
-	ld [$ff00+$98], a
+	ld a, [$ff99]
+	ld [$ff98], a
 	ld a, $a
-	ld [$ff00+$99], a
+	ld [$ff99], a
 	ld b, $4
 	call Divide
-	ld a, [$ff00+$98]
+	ld a, [$ff98]
 	swap a
 	ld b, a
-	ld a, [$ff00+$99]
+	ld a, [$ff99]
 	add b
 	ld [hl], a
 	ld de, $cce7
@@ -43396,7 +43396,7 @@ OldManPic: ; 33e9a (c:7e9a)
 
 Func_33f2b: ; 33f2b (c:7f2b)
 	ld hl, $d063
-	ld a, [$ff00+$f3]
+	ld a, [$fff3]
 	and a
 	jr z, .asm_33f36
 	ld hl, $d068
@@ -43427,7 +43427,7 @@ Func_33f57: ; 33f57 (c:7f57)
 	ld [$d05e], a
 	ld hl, $d02a
 	ld de, $cffb
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_33f72
 	ld hl, $cffb
@@ -43637,15 +43637,15 @@ _TitleScroll: ; 3726a (d:726a)
 
 .ScrollBetween ; 37292 (d:7292)
 .wait
-	ld a, [$FF00+$44] ; rLY
+	ld a, [$ff44] ; rLY
 	cp l
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a ; $FF00+$43
+	ld [rSCX], a ; $ff43
 
 .wait2
-	ld a, [$FF00+$44] ; rLY
+	ld a, [$ff44] ; rLY
 	cp h
 	jr z, .wait2
 	ret
@@ -44753,144 +44753,144 @@ _Multiply: ; 37d41 (d:7d41)
 	ld a, $8
 	ld b, a
 	xor a
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
-	ld [$FF00+$9b], a
-	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
-	ld [$FF00+$9d], a
-	ld [$FF00+$9e], a
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [$ff9b], a
+	ld [H_SAVEDNUMTOPRINT], a ; $ff9c
+	ld [$ff9d], a
+	ld [$ff9e], a
 .asm_37d4f
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	srl a
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	jr nc, .asm_37d77
-	ld a, [$FF00+$9e]
+	ld a, [$ff9e]
 	ld c, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	add c
-	ld [$FF00+$9e], a
-	ld a, [$FF00+$9d]
+	ld [$ff9e], a
+	ld a, [$ff9d]
 	ld c, a
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	adc c
-	ld [$FF00+$9d], a
-	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	ld [$ff9d], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $ff9c
 	ld c, a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	adc c
-	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
-	ld a, [$FF00+$9b]
+	ld [H_SAVEDNUMTOPRINT], a ; $ff9c
+	ld a, [$ff9b]
 	ld c, a
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	adc c
-	ld [$FF00+$9b], a
+	ld [$ff9b], a
 .asm_37d77
 	dec b
 	jr z, .asm_37d94
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	sla a
-	ld [$FF00+$98], a
-	ld a, [$FF00+$97]
+	ld [$ff98], a
+	ld a, [$ff97]
 	rl a
-	ld [$FF00+$97], a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [$ff97], a
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	rl a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	rl a
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	jr .asm_37d4f
 .asm_37d94
-	ld a, [$FF00+$9e]
-	ld [$FF00+$98], a
-	ld a, [$FF00+$9d]
-	ld [$FF00+$97], a
-	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$9b]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff9e]
+	ld [$ff98], a
+	ld a, [$ff9d]
+	ld [$ff97], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $ff9c
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff9b]
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ret
 
 _Divide: ; 37da5 (d:7da5)
 	xor a
-	ld [$FF00+$9a], a
-	ld [$FF00+$9b], a
-	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
-	ld [$FF00+$9d], a
-	ld [$FF00+$9e], a
+	ld [$ff9a], a
+	ld [$ff9b], a
+	ld [H_SAVEDNUMTOPRINT], a ; $ff9c
+	ld [$ff9d], a
+	ld [$ff9e], a
 	ld a, $9
 	ld e, a
 .asm_37db3
-	ld a, [$FF00+$9a]
+	ld a, [$ff9a]
 	ld c, a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	sub c
 	ld d, a
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld c, a
-	ld a, [H_DIVIDEND] ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	sbc c
 	jr c, .asm_37dce
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld a, d
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$9e]
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff9e]
 	inc a
-	ld [$FF00+$9e], a
+	ld [$ff9e], a
 	jr .asm_37db3
 .asm_37dce
 	ld a, b
 	cp $1
 	jr z, .asm_37e18
-	ld a, [$FF00+$9e]
+	ld a, [$ff9e]
 	sla a
-	ld [$FF00+$9e], a
-	ld a, [$FF00+$9d]
+	ld [$ff9e], a
+	ld a, [$ff9d]
 	rl a
-	ld [$FF00+$9d], a
-	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
+	ld [$ff9d], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $ff9c
 	rl a
-	ld [H_SAVEDNUMTOPRINT], a ; $FF00+$9c
-	ld a, [$FF00+$9b]
+	ld [H_SAVEDNUMTOPRINT], a ; $ff9c
+	ld a, [$ff9b]
 	rl a
-	ld [$FF00+$9b], a
+	ld [$ff9b], a
 	dec e
 	jr nz, .asm_37e04
 	ld a, $8
 	ld e, a
-	ld a, [$FF00+$9a]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$ff9a]
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	xor a
-	ld [$FF00+$9a], a
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
-	ld a, [$FF00+$97]
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$98]
-	ld [$FF00+$97], a
+	ld [$ff9a], a
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff97]
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff98]
+	ld [$ff97], a
 .asm_37e04
 	ld a, e
 	cp $1
 	jr nz, .asm_37e0a
 	dec b
 .asm_37e0a
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	srl a
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld a, [$FF00+$9a]
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$ff9a]
 	rr a
-	ld [$FF00+$9a], a
+	ld [$ff9a], a
 	jr .asm_37db3
 .asm_37e18
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld a, [$FF00+$9e]
-	ld [$FF00+$98], a
-	ld a, [$FF00+$9d]
-	ld [$FF00+$97], a
-	ld a, [H_SAVEDNUMTOPRINT] ; $FF00+$9c
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$9b]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$ff9e]
+	ld [$ff98], a
+	ld a, [$ff9d]
+	ld [$ff97], a
+	ld a, [H_SAVEDNUMTOPRINT] ; $ff9c
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff9b]
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ret
 
 Func_37e2d: ; 37e2d (d:7e2d)
@@ -50865,7 +50865,7 @@ CryData: ; 39446 (e:5446)
 	db $25, $66, $CC; Victreebel
 
 Func_39680: ; 39680 (e:5680)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [$d060]
 	ld hl, $d026
@@ -50894,7 +50894,7 @@ Func_3969f: ; 3969f (e:569f)
 	ret
 
 Func_396a7: ; 396a7 (e:56a7)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [$d061]
 	ld hl, W_PLAYERMONATK
@@ -53286,7 +53286,7 @@ Func_3ad0e: ; 3ad0e (e:6d0e)
 	call Func_3b057
 
 Func_3ad1c: ; 3ad1c (e:6d1c)
-	ld a, [$FF00+$d7]
+	ld a, [$ffd7]
 	push af
 	xor a
 	ld [$d121], a
@@ -53393,12 +53393,12 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld c, $32
 	call DelayFrames
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wTileMap
 	ld bc, $c14
 	call ClearScreenArea
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
 	ld [$cfcb], a
 	call CleanLCD_OAM
@@ -53523,7 +53523,7 @@ Func_3aede: ; 3aede (e:6ede)
 	pop bc
 	pop hl
 	pop af
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $32
 	ret z
@@ -55945,7 +55945,7 @@ Mon071_EvosMoves: ; 3b9e4 (e:79e4)
 	db 0
 
 Func_3b9ec: ; 3b9ec (e:79ec)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld de, W_PLAYERMONCURHP ; $d015
 	ld hl, W_PLAYERMONMAXHP ; $d023
@@ -55972,7 +55972,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld c, $32
 	call DelayFrames
 	ld hl, W_PLAYERMONSTATUS ; $d018
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ba25
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
@@ -56029,7 +56029,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 .asm_3ba6f
 	ld hl, Func_3fba8 ; $7ba8
 	call BankswitchEtoF
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	FuncCoord 10, 9 ; $c45e
 	ld hl, Coord
@@ -56070,7 +56070,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld de, $cfe5
 	ld bc, W_ENEMYBATTSTATUS3 ; $d069
 	ld a, [W_ENEMYBATTSTATUS1] ; $d067
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3bad1
 	ld hl, $cfe5
@@ -56085,7 +56085,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	push de
 	push bc
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bae4
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
@@ -56127,7 +56127,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	inc bc
 	inc bc
 	call CopyData
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bb32
 	ld a, [de]
@@ -56185,7 +56185,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	jp PrintText
 
 Func_3bb7d: ; 3bb7d (e:7b7d)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bb86
 	push hl
@@ -56207,7 +56207,7 @@ UnnamedText_3bb92: ; 3bb92 (e:7b92)
 Func_3bb97: ; 3bb97 (e:7b97)
 	ld hl, W_PLAYERBATTSTATUS3 ; $d064
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bba8
 	ld hl, W_ENEMYBATTSTATUS3 ; $d069
@@ -56313,25 +56313,25 @@ Func_3c04c: ; 3c04c (f:404c)
 	jr nz, .asm_3c07f
 	call EnableLCD
 	ld a, $90
-	ld [$FF00+$b0], a
-	ld [rWY], a ; $FF00+$4a
+	ld [$ffb0], a
+	ld [rWY], a ; $ff4a
 	xor a
-	ld [$FF00+$d7], a
-	ld [$FF00+$af], a
+	ld [$ffd7], a
+	ld [$ffaf], a
 	dec a
 	ld [$cfcb], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld b, $70
 	ld c, $90
 	ld a, c
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	call DelayFrame
 	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
-	ld [rOBP0], a ; $FF00+$48
-	ld [rOBP1], a ; $FF00+$49
+	ld [rBGP], a ; $ff47
+	ld [rOBP0], a ; $ff48
+	ld [rOBP1], a ; $ff49
 .asm_3c0bb
 	ld h, b
 	ld l, $40
@@ -56343,23 +56343,23 @@ Func_3c04c: ; 3c04c (f:404c)
 	call Func_3c110
 	call Func_3c0ff
 	ld a, c
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	dec c
 	dec c
 	jr nz, .asm_3c0bb
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $31
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	FuncCoord 1, 5 ; $c405
 	ld hl, Coord
 	ld a, $1
 	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
 	xor a
-	ld [$FF00+$b0], a
-	ld [rWY], a ; $FF00+$4a
+	ld [$ffb0], a
+	ld [rWY], a ; $ff4a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	ld b, $1
 	call GoPAL_SET
@@ -56383,13 +56383,13 @@ Func_3c0ff: ; 3c0ff (f:40ff)
 	ret
 
 Func_3c110: ; 3c110 (f:4110)
-	ld a, [$FF00+$44]
+	ld a, [$ff44]
 	cp l
 	jr nz, Func_3c110
 	ld a, h
-	ld [rSCX], a ; $FF00+$43
+	ld [rSCX], a ; $ff43
 .asm_3c118
-	ld a, [$FF00+$44]
+	ld a, [$ff44]
 	cp h
 	jr z, .asm_3c118
 	ret
@@ -56526,7 +56526,7 @@ asm_3c202: ; 3c202 (f:4202)
 	ld a, $97
 	call PlaySoundWaitForCurrent
 	xor a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld hl, AnimationSlideEnemyMonOut
 	ld b, BANK(AnimationSlideEnemyMonOut)
 	jp Bankswitch
@@ -56656,7 +56656,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jr nc, .playerMovesFirst
 	jr .enemyMovesFirst
 .speedEqual
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	jr z, .invertOutcome
 	call GenRandomInBattle
@@ -56732,7 +56732,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld de, W_PLAYERMONSTATUS ; $d018
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
 	ld hl, W_ENEMYMONCURHP ; $cfe6
@@ -56757,7 +56757,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
 .notBurnedOrPoisoned
 	ld de, W_PLAYERBATTSTATUS2 ; $d063
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn2
 	ld de, W_ENEMYBATTSTATUS2 ; $d068
@@ -56766,16 +56766,16 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	add a
 	jr nc, .notLeechSeeded
 	push hl
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	push af
 	xor $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	xor a
 	ld [$cc5b], a
 	ld a,ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
 	call HandlePoisonBurnLeechSeed_IncreaseEnemyHP
@@ -56833,7 +56833,7 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 .nonZeroDamage
 	ld hl, W_PLAYERBATTSTATUS3 ; $d064
 	ld de, W_PLAYERTOXICCOUNTER ; $d06c
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
 	ld hl, W_ENEMYBATTSTATUS3 ; $d069
@@ -56879,7 +56879,7 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	push hl
 	ld hl, W_ENEMYMONMAXHP ; $cff4
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
 	ld hl, W_PLAYERMONMAXHP ; $d023
@@ -56916,20 +56916,20 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	ld [hl], a
 	ld [wHPBarNewHP], a
 .noOverfullHeal
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	xor $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	call UpdateCurMonHPBar
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	xor $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	pop hl
 	ret
 
 UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	FuncCoord 10, 9 ; $c45e
 	ld hl, Coord    ; tile pointer to player HP bar
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $1
 	jr z, .playersTurn
@@ -57462,7 +57462,7 @@ SevenSpacesText: ; 3c8d7 (f:48d7)
 	db "       @"
 
 Func_3c8df: ; 3c8df (f:48df)
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld c, a
 .asm_3c8e2
 	push bc
@@ -57470,10 +57470,10 @@ Func_3c8df: ; 3c8df (f:48df)
 	ld b, $7
 .asm_3c8e6
 	push hl
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	ld c, a
 .asm_3c8ea
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	cp $8
 	jr z, .asm_3c8f5
 	ld a, [hld]
@@ -57737,14 +57737,14 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	inc a
 	ld [$d120], a
 	ld a, [hli]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, [hl]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, [de]
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	inc de
 	ld a, [de]
-	ld [$FF00+$8e], a
+	ld [$ff8e], a
 	call LoadScreenTilesFromBuffer1
 	ld de, $ff97
 	ld hl, $ff8d
@@ -57752,27 +57752,27 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	call StringCmp
 	jr nc, .asm_3cb5c
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, $20
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
-	ld a, [$FF00+$97]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
-	ld a, [$FF00+$98]
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld a, [$FF00+$8d]
+	ld a, [$ff97]
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff98]
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff8d]
 	ld b, a
-	ld a, [$FF00+$8e]
+	ld a, [$ff8e]
 	srl b
 	rr a
 	srl b
 	rr a
 	and a
 	jr z, .asm_3cb5c
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $2
 	call Divide
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	and a
 	jr nz, .asm_3cb5c
 	ld a, [$d120]
@@ -57781,15 +57781,15 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	dec c
 	jr z, .asm_3cb39
 	ld b, $1e
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	add b
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	jr c, .asm_3cb5c
 	jr .asm_3cb2b
 .asm_3cb39
 	call GenRandomInBattle
 	ld b, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	cp b
 	jr nc, .asm_3cb5c
 	ld a, $1
@@ -57956,7 +57956,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	ld a, $4
 	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
 	xor a
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	ld hl, $cc2d
 	ld [hli], a
 	ld [hl], a
@@ -57980,7 +57980,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 5, [hl]
 	ld a, $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	FuncCoord 4, 11 ; $c480
@@ -58002,7 +58002,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	ld bc, $505
 	xor a
 	ld [$cd6c], a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
 	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
 	ld c, $4
@@ -58014,7 +58014,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	ld a, $1
 	ld [$cd6c], a
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
 	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
 	call Delay3
@@ -58047,7 +58047,7 @@ Func_3cd5a: ; 3cd5a (f:4d5a)
 
 Func_3cd60: ; 3cd60 (f:4d60)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 9, 7 ; $c435
 	ld hl, Coord
 	ld bc, $50b
@@ -58088,7 +58088,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	ld a, $5f
 	call Predef ; indirect jump to Func_128ef (128ef (4:68ef))
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, $cf1d
 	call Func_3ce90
 	ld hl, W_PLAYERMONCURHP ; $d015
@@ -58116,7 +58116,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 
 Func_3cdec: ; 3cdec (f:4dec)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wTileMap
 	ld bc, $40c
 	call ClearScreenArea
@@ -58142,9 +58142,9 @@ Func_3cdec: ; 3cdec (f:4dec)
 .asm_3ce23
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, [hld]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	or [hl]
 	jr nz, .asm_3ce36
 	ld c, a
@@ -58153,43 +58153,43 @@ Func_3cdec: ; 3cdec (f:4dec)
 	jp Func_3ce7f
 .asm_3ce36
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, $30
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld hl, W_ENEMYMONMAXHP ; $cff4
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld a, b
 	and a
 	jr z, .asm_3ce6a
-	ld a, [H_REMAINDER] ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	srl b
 	rr a
 	srl b
 	rr a
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld a, [$FF00+$97]
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$ff97]
 	ld b, a
 	srl b
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	rr a
 	srl b
 	rr a
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, b
-	ld [$FF00+$97], a
+	ld [$ff97], a
 .asm_3ce6a
-	ld a, [$FF00+$97]
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
-	ld a, [$FF00+$98]
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff97]
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff98]
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, $2
 	ld b, a
 	call Divide
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld e, a
 	ld a, $6
 	ld d, a
@@ -58202,7 +58202,7 @@ Func_3ce7f: ; 3ce7f (f:4e7f)
 	ld hl, Coord
 	call DrawHPBar
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, $cf1e
 
 Func_3ce90: ; 3ce90 (f:4e90)
@@ -58692,13 +58692,13 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 
 .writemoves
 	ld de, $d0e1
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	set 2, a
-	ld [$FF00+$f6], a
+	ld [$fff6], a
 	call PlaceString
-	ld a, [$FF00+$f6]
+	ld a, [$fff6]
 	res 2, a
-	ld [$FF00+$f6], a
+	ld [$fff6], a
 	ret
 
 .regularmenu
@@ -59055,7 +59055,7 @@ asm_3d4ad: ; 3d4ad (f:54ad)
 
 Func_3d4b6: ; 3d4b6 (f:54b6)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 0, 8 ; $c440
 	ld hl, Coord
 	ld b, $3
@@ -59079,7 +59079,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld hl, wCurrentMenuItem ; $cc26
 	dec [hl]
 	xor a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld hl, W_PLAYERMONMOVES
 	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
@@ -59130,7 +59130,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	call Predef ; indirect jump to Func_27d98 (27d98 (9:7d98))
 .asm_3d54e
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	jp Delay3
 
 DisabledText: ; 3d555 (f:5555)
@@ -59283,7 +59283,7 @@ Func_3d605: ; 3d605 (f:5605)
 
 Func_3d65e: ; 3d65e (f:565e)
 	xor a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld a, [wPlayerSelectedMove] ; $ccdc
 	inc a
 	jp z, Func_3d80a
@@ -59840,7 +59840,7 @@ CantMoveText: ; 3da83 (f:5a83)
 Func_3da88: ; 3da88 (f:5a88)
 	ld hl, wPlayerSelectedMove ; $ccdc
 	ld de, W_PLAYERBATTSTATUS1 ; $d062
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3da97
 	inc hl
@@ -59895,11 +59895,11 @@ Func_3daad: ; 3daad (f:5aad)
 	xor a
 	ld [$cc5b], a
 	inc a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	call PlayMoveAnimation
 	call Func_3cd60
 	xor a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	jp ApplyDamageToPlayerPokemon
 
 Func_3daf5: ; 3daf5 (f:5af5)
@@ -59909,7 +59909,7 @@ Func_3daf5: ; 3daf5 (f:5af5)
 UnnamedText_3dafb: ; 3dafb (f:5afb)
 	TX_FAR _UnnamedText_3dafb
 	db $08 ; asm
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	ld hl, $ccf1
@@ -60037,7 +60037,7 @@ UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
 
 Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3dbed
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
@@ -60082,7 +60082,7 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld b, $4
 	ld a, $24
 	call Predef ; indirect jump to Func_48125 (48125 (12:4125))
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3dc3f
 	jp ApplyDamageToPlayerPokemon
@@ -60369,9 +60369,9 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	jr z, .next3
 	ld c, 3
 	call Func_3df1c
-	ld a, [$ff00+$97]
+	ld a, [$ff97]
 	ld b, a
-	ld a, [$ff00+$98]
+	ld a, [$ff98]
 	ld c, a
 	push bc
 	ld hl, $d18f
@@ -60399,9 +60399,9 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 .loadOtherPoke
 	ld c, 5
 	call Func_3df1c
-	ld a, [$ff00+$97]
+	ld a, [$ff97]
 	ld b, a
-	ld a, [$ff00+$98]
+	ld a, [$ff98]
 	ld c, a
 	push bc
 	ld hl, $d195
@@ -60554,9 +60554,9 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, [hl]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	pop bc
 	pop de
 	ret
@@ -60587,7 +60587,7 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 ;	d: base power
 ;	e: level
 
-	ld a, [$ff00+$f3] ; whose turn?
+	ld a, [$fff3] ; whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .effect
@@ -60760,7 +60760,7 @@ UnusedHighCriticalMoves: ; 3e01e (f:601e)
 CriticalHitTest: ; 3e023 (f:6023)
 	xor a
 	ld [$d05e], a
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [$cfe5]
 	jr nz, .asm_3e032
@@ -60771,7 +60771,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a, [W_MONHBASESPEED]
 	ld b, a
 	srl b                        ; (effective (base speed/2))
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, W_PLAYERMOVEPOWER ; $cfd4
 	ld de, W_PLAYERBATTSTATUS2 ; $d063
@@ -61784,27 +61784,27 @@ Func_3e687: ; 3e687 (f:6687)
 	ret c
 .asm_3e692
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	dec hl
 	ld a, [hli]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, [hl]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 .asm_3e69c
 	call GenRandomInBattle
 	rrca
 	cp $d9
 	jr c, .asm_3e69c
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld a, $ff
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $4
 	call Divide
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld hl, W_DAMAGE ; $d0d7
 	ld [hli], a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [hl], a
 	ret
 
@@ -62161,11 +62161,11 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	ld [hl], a
 	xor a
 	ld [$cc5b], a
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld a, POUND
 	call PlayMoveAnimation
 	ld a, $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	call ApplyDamageToEnemyPokemon
 	jr asm_3e9d3
 
@@ -62313,7 +62313,7 @@ Func_3eaba: ; 3eaba (f:6aba)
 	ret
 
 GetCurrentMove: ; 3eabe (f:6abe)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, .player
 	ld de, W_ENEMYMOVENUM ; $cfcc
@@ -62519,16 +62519,16 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld b, BANK(Func_3ee58)
 	call Bankswitch
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
 	ld [$cfcb], a
 	call CleanLCD_OAM
 	call ClearScreen
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld [$FF00+$b0], a
-	ld [rWY], a ; $FF00+$4a
-	ld [$FF00+$d7], a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [$ffb0], a
+	ld [rWY], a ; $ff4a
+	ld [$ffd7], a
 	ld hl, $d060
 	ld [hli], a
 	ld [hli], a
@@ -62562,7 +62562,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
 	ld hl, wOAMBuffer
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld b, $7
 	ld e, $a0
 .asm_3ecb2
@@ -62576,16 +62576,16 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	add d
 	ld d, a
 	inc hl
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	ld [hli], a
 	inc a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	inc hl
 	dec c
 	jr nz, .asm_3ecb6
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	add $4
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $8
 	add e
 	ld e, a
@@ -62606,7 +62606,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	xor a
 	ld [$0], a
 	ld a, $31
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	FuncCoord 1, 5 ; $c405
 	ld hl, Coord
 	ld a, $1
@@ -62632,12 +62632,12 @@ Func_3ed1a: ; 3ed1a (f:6d1a)
 Func_3ed1e: ; 3ed1e (f:6d1e)
 	xor a
 asm_3ed1f: ; 3ed1f (f:6d1f)
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	call Func_3ed27
 	jp Func_3ed64
 
 Func_3ed27: ; 3ed27 (f:6d27)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ed48
 	ld a, [W_PLAYERMONSTATUS] ; $d018
@@ -62679,7 +62679,7 @@ Func_3ed27: ; 3ed27 (f:6d27)
 	ret
 
 Func_3ed64: ; 3ed64 (f:6d64)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ed81
 	ld a, [W_PLAYERMONSTATUS] ; $d018
@@ -62767,35 +62767,35 @@ Func_3eda5: ; 3eda5 (f:6da5)
 	ld b, $0
 	add hl, bc
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, [de]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	inc de
 	ld a, [de]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, [hli]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld a, [hl]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $4
 	call Divide
 	pop hl
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	sub $e7
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	sbc $3
 	jp c, Func_3ee0c
 	ld a, $3
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, $e7
-	ld [$FF00+$98], a
+	ld [$ff98], a
 
 Func_3ee0c: ; 3ee0c (f:6e0c)
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld [hli], a
 	ld b, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [hl], a
 	or b
 	jr nz, .asm_3ee17
@@ -62853,7 +62853,7 @@ Func_3ee58: ; 3ee58 (f:6e58)
 	call LoadHpBarAndStatusTilePatterns
 
 Func_3ee5b: ; 3ee5b (f:6e5b)
-	ld a, [rLCDC] ; $FF00+$40
+	ld a, [rLCDC] ; $ff40
 	add a
 	jr c, .asm_3ee7c
 	ld hl, BattleHudTiles1 ; $6080
@@ -62926,7 +62926,7 @@ GenRandomInBattle: ; 3ee9b (f:6e9b)
 	ret
 
 Func_3eed3: ; 3eed3 (f:6ed3)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
 	ld de, W_ENEMYBATTSTATUS1 ; $d067
@@ -63008,7 +63008,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	call _LoadTrainerPic
 	xor a
 	ld [W_ENEMYMONID], a
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	dec a
 	ld [wAICount], a ; $ccdf
 	FuncCoord 12, 0 ; $c3ac
@@ -63066,7 +63066,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 .spriteLoaded
 	xor a
 	ld [W_TRAINERCLASS], a ; $d031
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	FuncCoord 12, 0 ; $c3ac
 	ld hl, Coord
 	ld a, $1
@@ -63077,18 +63077,18 @@ Func_3efeb: ; 3efeb (f:6feb)
 	call GoPAL_SET
 	call Func_3c04c
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, TerminatorText_3f04a
 	call PrintText
 	call SaveScreenTilesToBuffer1
 	call ClearScreen
 	ld a, $98
-	ld [$FF00+$bd], a
+	ld [$ffbd], a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	ld a, $9c
-	ld [$FF00+$bd], a
+	ld [$ffbd], a
 	call LoadScreenTilesFromBuffer1
 	FuncCoord 9, 7 ; $c435
 	ld hl, Coord
@@ -63111,7 +63111,7 @@ Func_3efeb: ; 3efeb (f:6feb)
 	pop af
 	ld [$d35d], a
 	ld a, [$d0d4]
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	scf
 	ret
 
@@ -63147,8 +63147,8 @@ Func_3f073: ; 3f073 (f:7073)
 	ld h, a
 	ld a, [$cc50]
 	ld l, a
-	ld a, [$FF00+$e1]
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld a, [$ffe1]
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld b, $4c
 	ld a, [W_ISINBATTLE] ; $d057
 	and a
@@ -63180,7 +63180,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld bc, $ff85
 .asm_3f0bf
 	add hl, bc
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	add $31
 	jr asm_3f0d0
 
@@ -63189,7 +63189,7 @@ Func_3f0c6: ; 3f0c6 (f:70c6)
 	ld h, a
 	ld a, [$cc50]
 	ld l, a
-	ld a, [$FF00+$e1]
+	ld a, [$ffe1]
 asm_3f0d0: ; 3f0d0 (f:70d0)
 	ld bc, $707
 	ld de, $14
@@ -63265,7 +63265,7 @@ Func_3f132: ; 3f132 (f:7132)
 	ret
 
 JumpMoveEffect: ; 3f138 (f:7138)
-	ld a, [$ff00+$f3]  ;whose turn?
+	ld a, [$fff3]  ;whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .next1
@@ -63373,7 +63373,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 Func_3f1fc: ; 3f1fc (f:71fc)
 	ld de, W_ENEMYMONSTATUS ; $cfe9
 	ld bc, W_ENEMYBATTSTATUS2 ; $d068
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_3f20e
 	ld de, W_PLAYERMONSTATUS ; $d018
@@ -63423,7 +63423,7 @@ UnnamedText_3f24a: ; 3f24a (f:724a)
 Func_3f24f: ; 3f24f (f:724f)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f260
 	ld hl, W_PLAYERMONSTATUS ; $d018
@@ -63466,7 +63466,7 @@ Func_3f24f: ; 3f24f (f:724f)
 	set 3, [hl]
 	push de
 	dec de
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld b, $c7
 	ld hl, W_PLAYERBATTSTATUS3 ; $d064
@@ -63522,7 +63522,7 @@ Func_3f2e9: ; 3f2e9 (f:72e9)
 Func_3f2f1: ; 3f2f1 (f:72f1)
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld de, W_PLAYERBATTSTATUS2 ; $d063
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f302
 	ld hl, W_ENEMYMONCURHP ; $cfe6
@@ -63543,7 +63543,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld [$cc5b], a
 	call CheckTargetSubstitute         ;test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz             ;return if they have a substitute, can't effect them
-	ld a, [$ff00+$f3]  ;whose turn?
+	ld a, [$fff3]  ;whose turn?
 	and a
 	jp nz, opponentAttacker
 	ld a, [W_ENEMYMONSTATUS]
@@ -63655,7 +63655,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	and a, FRZ			;are they frozen?
 	ret z				;return if so
 						;not frozen
-	ld a, [$ff00+$f3]	;whose turn?
+	ld a, [$fff3]	;whose turn?
 	and a
 	jr nz, .opponent
 	;player [attacker]
@@ -63694,7 +63694,7 @@ UnnamedText_3f423: ; 3f423 (f:7423)
 Func_3f428: ; 3f428 (f:7428)
 	ld hl, wPlayerMonStatMods ; $cd1a
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f439
 	ld hl, wEnemyMonStatMods ; $cd2e
@@ -63730,7 +63730,7 @@ Func_3f428: ; 3f428 (f:7428)
 	push hl
 	ld hl, $d026
 	ld de, $cd12
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f472
 	ld hl, $cff7
@@ -63764,34 +63764,34 @@ Func_3f428: ; 3f428 (f:7428)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, [de]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	inc de
 	ld a, [de]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, [hli]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld a, [hl]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $4
 	call Divide
 	pop hl
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	sub $e7
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	sbc $3
 	jp c, Func_3f4c3
 	ld a, $3
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, $e7
-	ld [$FF00+$98], a
+	ld [$ff98], a
 
 Func_3f4c3: ; 3f4c3 (f:74c3)
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld [hli], a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [hl], a
 	pop hl
 asm_3f4ca: ; 3f4ca (f:74ca)
@@ -63801,7 +63801,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 	ld de, W_PLAYERMOVENUM ; $cfd2
 	ld bc, $ccf7
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f4e6
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
@@ -63832,7 +63832,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	pop af
 	call nz, Bankswitch
 .asm_3f50e
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call z, Func_3ee19
 	ld hl, UnnamedText_3f528 ; $7528
@@ -63852,7 +63852,7 @@ UnnamedText_3f528: ; 3f528 (f:7528)
 	TX_FAR _UnnamedText_3f528
 	db $08 ; asm
 	ld hl, UnnamedText_3f542 ; $7542
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
 	jr z, .asm_3f53b
@@ -63875,7 +63875,7 @@ Func_3f54c: ; 3f54c (f:754c)
 	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld bc, W_ENEMYBATTSTATUS1 ; $d067
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f572
 	ld hl, wPlayerMonStatMods ; $cd1a
@@ -63942,7 +63942,7 @@ Func_3f54c: ; 3f54c (f:754c)
 	push de
 	ld hl, $cff7
 	ld de, $cd26
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f5d8
 	ld hl, $d026
@@ -63976,33 +63976,33 @@ Func_3f54c: ; 3f54c (f:754c)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, [de]
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	inc de
 	ld a, [de]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, [hli]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld a, [hl]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $4
 	call Divide
 	pop hl
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld b, a
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	or b
 	jp nz, Func_3f624
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, $1
-	ld [$FF00+$98], a
+	ld [$ff98], a
 
 Func_3f624: ; 3f624 (f:7624)
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld [hli], a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [hl], a
 	pop de
 	pop hl
@@ -64017,7 +64017,7 @@ asm_3f62c: ; 3f62c (f:762c)
 	jr nc, .asm_3f63b
 	call Func_3fb89
 .asm_3f63b
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call nz, Func_3ee19
 	ld hl, UnnamedText_3f661 ; $7661
@@ -64047,7 +64047,7 @@ UnnamedText_3f661: ; 3f661 (f:7661)
 	TX_FAR _UnnamedText_3f661
 	db $08 ; asm
 	ld hl, UnnamedText_3f683 ; $7683
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
 	jr z, .asm_3f674
@@ -64138,7 +64138,7 @@ Func_3f6e5: ; 3f6e5 (f:76e5)
 Func_3f717: ; 3f717 (f:7717)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f728
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -64150,12 +64150,12 @@ Func_3f717: ; 3f717 (f:7717)
 	inc a
 	inc a
 	ld [de], a
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	add $b0
 	jp Func_3fb96
 
 Func_3f739: ; 3f739 (f:7739)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3f791
 	ld a, [W_ISINBATTLE] ; $d057
@@ -64273,7 +64273,7 @@ Func_3f811: ; 3f811 (f:7811)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
 	ld bc, W_NUMHITS ; $d074
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f828
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -64284,7 +64284,7 @@ Func_3f811: ; 3f811 (f:7811)
 	ret nz
 	set 2, [hl]
 	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f838
 	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
@@ -64318,7 +64318,7 @@ Func_3f85b: ; 3f85b (f:785b)
 	ret nz
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f870
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
@@ -64345,7 +64345,7 @@ Func_3f884: ; 3f884 (f:7884)
 Func_3f88c: ; 3f88c (f:788c)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld b, $ae
 	jr z, .asm_3f8a1
@@ -64427,7 +64427,7 @@ UnnamedText_3f912: ; 3f912 (f:7912)
 Func_3f917: ; 3f917 (f:7917)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f928
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -64478,7 +64478,7 @@ Func_3f961: ; 3f961 (f:7961)
 	jr nz, Func_3f9a6
 
 Func_3f96f: ; 3f96f (f:796f)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	ld bc, $d070
@@ -64526,7 +64526,7 @@ Func_3f9b9: ; 3f9b9 (f:79b9)
 
 Func_3f9c1: ; 3f9c1 (f:79c1)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f9cc
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
@@ -64537,7 +64537,7 @@ Func_3f9c1: ; 3f9c1 (f:79c1)
 Func_3f9cf: ; 3f9cf (f:79cf)
 	push hl
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f9db
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
@@ -64648,7 +64648,7 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 	jr nz, .asm_3fb06
 	ld de, W_ENEMYDISABLEDMOVE ; $d072
 	ld hl, W_ENEMYMONMOVES
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3faa4
 	ld de, W_PLAYERDISABLEDMOVE ; $d06d
@@ -64670,7 +64670,7 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 	jr z, .asm_3faa8
 	ld [$d11e], a
 	push hl
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, W_PLAYERMONPP ; $d02d
 	jr nz, .asm_3facf
@@ -64706,7 +64706,7 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 	ld [de], a
 	call Func_3fb89
 	ld hl, $ccee
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3faf8
 	inc hl
@@ -64803,7 +64803,7 @@ UnnamedText_3fb74: ; 3fb74 (f:7b74)
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
 	ld hl, $d068
-	ld a, [$ff00+$f3]   ;whose turn?
+	ld a, [$fff3]   ;whose turn?
 	and a
 	jr z, .next1
 	ld hl, $d063
@@ -64813,7 +64813,7 @@ CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	ret
 
 Func_3fb89: ; 3fb89 (f:7b89)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	jr z, .asm_3fb94
@@ -64824,7 +64824,7 @@ Func_3fb89: ; 3fb89 (f:7b89)
 
 Func_3fb96: ; 3fb96 (f:7b96)
 	ld [W_ANIMATIONID], a ; $d07c
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $6
 	jr z, .asm_3fba2
@@ -64836,7 +64836,7 @@ Func_3fb96: ; 3fb96 (f:7b96)
 Func_3fba8: ; 3fba8 (f:7ba8)
 	xor a
 	ld [$cc5b], a
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	jr z, .asm_3fbb7
@@ -67008,14 +67008,14 @@ Func_410f3: ; 410f3 (10:50f3)
 Func_41102: ; 41102 (10:5102)
 	ld a, [W_OPTIONS] ; $d355
 	push af
-	ld a, [$FF00+$af]
+	ld a, [$ffaf]
 	push af
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	push af
 	xor a
 	ld [W_OPTIONS], a ; $d355
-	ld [$FF00+$af], a
-	ld [$FF00+$ae], a
+	ld [$ffaf], a
+	ld [$ffae], a
 	push de
 .asm_41115
 	pop de
@@ -67037,9 +67037,9 @@ Func_41102: ; 41102 (10:5102)
 	jp [hl]
 .asm_4112d
 	pop af
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	pop af
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	pop af
 	ld [W_OPTIONS], a ; $d355
 	ret
@@ -67076,10 +67076,10 @@ Func_41181: ; 41181 (10:5181)
 
 Func_41186: ; 41186 (10:5186)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 Delay50: ; 41191 (10:5191)
@@ -67120,10 +67120,10 @@ Func_411a1: ; 411a1 (10:51a1)
 	jr z, .asm_411e5
 	ld a, $f0
 .asm_411e5
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	call EnableLCD
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$d11e], a
 	call GetMonName
@@ -67137,7 +67137,7 @@ Func_411a1: ; 411a1 (10:51a1)
 
 Func_4120b: ; 4120b (10:520b)
 	ld a, $d0
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld b, BANK(Func_7176c)
 	ld hl, Func_7176c
 	jp Bankswitch
@@ -67165,14 +67165,14 @@ Func_4123b: ; 4123b (10:523b)
 
 Func_41245: ; 41245 (10:5245)
 	ld a, $ab
-	ld [rLCDC], a ; $FF00+$40
+	ld [rLCDC], a ; $ff40
 	ld a, $50
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld a, $86
-	ld [rWX], a ; $FF00+$4b
-	ld [$FF00+$ae], a
+	ld [rWX], a ; $ff4b
+	ld [$ffae], a
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 4, 0 ; $c3a4
 	ld hl, Coord
 	ld b, $6
@@ -67189,8 +67189,8 @@ Func_41245: ; 41245 (10:5245)
 	push af
 	call DelayFrame
 	pop af
-	ld [rWX], a ; $FF00+$4b
-	ld [$FF00+$ae], a
+	ld [rWX], a ; $ff4b
+	ld [$ffae], a
 	dec a
 	dec a
 	and a
@@ -67203,7 +67203,7 @@ Func_41245: ; 41245 (10:5245)
 	ld a, [wWhichTrade] ; $cd3d
 	call PlayCry
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 Func_41298: ; 41298 (10:5298)
@@ -67215,10 +67215,10 @@ Func_41298: ; 41298 (10:5298)
 	ld hl, $9c8c
 	call Func_414ae
 	ld a, $a0
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	call DelayFrame
 	ld a, $8b
-	ld [rLCDC], a ; $FF00+$40
+	ld [rLCDC], a ; $ff40
 	FuncCoord 6, 2 ; $c3ce
 	ld hl, Coord
 	ld b, $7
@@ -67228,9 +67228,9 @@ Func_41298: ; 41298 (10:5298)
 	call PlaySound
 	ld c, $14
 .asm_412c8
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	add $4
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	dec c
 	jr nz, .asm_412c8
 	ret
@@ -67241,7 +67241,7 @@ Func_412d2: ; 412d2 (10:52d2)
 	ld c, $a
 	call DelayFrames
 	ld a, $e4
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	xor a
 	ld [$d09f], a
 	ld bc, $2060
@@ -67275,13 +67275,13 @@ Func_412d2: ; 412d2 (10:52d2)
 .asm_41318
 	call CleanLCD_OAM
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 UnknownOAM_4132e: ; 4132e (10:532e)
@@ -67300,13 +67300,13 @@ Func_41336: ; 41336 (10:5336)
 	call Func_427a7
 	call Func_41186
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [$cd3e]
 	call Func_415a4
 	ld a, $ad
 	call Func_41676
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [$cd3e]
 	call PlayCry
 	call Func_41181
@@ -67321,7 +67321,7 @@ Func_41376: ; 41376 (10:5376)
 	ld a, $1
 	ld [$d08a], a
 	ld a, $e4
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	ld a, $54
 	ld [W_BASECOORDX], a ; $d081
 	ld a, $1c
@@ -67337,7 +67337,7 @@ Func_41376: ; 41376 (10:5376)
 	ld b, $6
 	call Func_414c5
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_4149f
 	ld b, $4
 	call Func_414c5
@@ -67345,7 +67345,7 @@ Func_41376: ; 41376 (10:5376)
 	ld b, $6
 	call Func_414c5
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_41525
 	jp CleanLCD_OAM
 
@@ -67369,7 +67369,7 @@ Func_413c6: ; 413c6 (10:53c6)
 	ld b, $6
 	call Func_414c5
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_4149f
 	ld b, $4
 	call Func_414c5
@@ -67377,23 +67377,23 @@ Func_413c6: ; 413c6 (10:53c6)
 	ld b, $6
 	call Func_414c5
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	jp CleanLCD_OAM
 
 Func_41411: ; 41411 (10:5411)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_4120b
 	call DelayFrame
 	ld a, $ab
-	ld [rLCDC], a ; $FF00+$40
+	ld [rLCDC], a ; $ff40
 	xor a
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ret
 
 Func_4142d: ; 4142d (10:542d)
@@ -67484,11 +67484,11 @@ Func_414ae: ; 414ae (10:54ae)
 	call ScheduleRowRedrawHelper
 	pop hl
 	ld a, h
-	ld [$FF00+$d2], a
+	ld [$ffd2], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a ; $FF00+$d1
+	ld [H_SCREENEDGEREDRAWADDR], a ; $ffd1
 	ld a, $2
-	ld [H_SCREENEDGEREDRAW], a ; $FF00+$d0
+	ld [H_SCREENEDGEREDRAW], a ; $ffd0
 	ld c, $a
 	jp DelayFrames
 
@@ -67500,14 +67500,14 @@ Func_414c5: ; 414c5 (10:54c5)
 	ld a, e
 	dec a
 	jr z, .asm_414d5
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	sub $2
 	jr .asm_414d9
 .asm_414d5
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	add $2
 .asm_414d9
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	call DelayFrame
 	dec d
 	jr nz, .asm_414cb
@@ -67520,9 +67520,9 @@ Func_414e8: ; 414e8 (10:54e8)
 	push de
 	push bc
 	push hl
-	ld a, [rBGP] ; $FF00+$47
+	ld a, [rBGP] ; $ff47
 	xor $3c
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld hl, $c302
 	ld de, $4
 	ld c, $14
@@ -67645,9 +67645,9 @@ Func_415a4: ; 415a4 (10:55a4)
 	ld b, $b
 	ld c, $0
 	call GoPAL_SET
-	ld a, [H_AUTOBGTRANSFERENABLED] ; $FF00+$ba
+	ld a, [H_AUTOBGTRANSFERENABLED] ; $ffba
 	xor $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call GetMonHeader
 	FuncCoord 7, 2 ; $c3cf
 	ld hl, Coord
@@ -67657,16 +67657,16 @@ Func_415a4: ; 415a4 (10:55a4)
 
 Func_415c8: ; 415c8 (10:55c8)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
 	ld a, $e3
-	ld [rLCDC], a ; $FF00+$40
+	ld [rLCDC], a ; $ff40
 	ld a, $7
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld a, $90
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	ret
 
 Func_415df: ; 415df (10:55df)
@@ -67674,17 +67674,17 @@ Func_415df: ; 415df (10:55df)
 	call DelayFrames
 .asm_415e4
 	call DelayFrame
-	ld a, [rWX] ; $FF00+$4b
+	ld a, [rWX] ; $ff4b
 	inc a
 	inc a
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	cp $a1
 	jr nz, .asm_415e4
 	call Func_41196
 	ld c, $a
 	call DelayFrames
 	ld a, $7
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	ret
 
 Func_415fe: ; 415fe (10:55fe)
@@ -67772,7 +67772,7 @@ PlayIntro: ; 41682 (10:5682)
 	call PlayIntroScene
 	call GBFadeOut2
 	xor a
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call CleanLCD_OAM
 	call DelayFrame
@@ -67786,7 +67786,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld [rOBP0], a
 	ld [rOBP1], a
 	xor a
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	ld b, $3
 	call Func_4183f
 	ld a, 0
@@ -67995,7 +67995,7 @@ Func_4180e: ; 4180e (10:580e)
 	jr z, .asm_4181d
 	cp $1
 	jr z, .asm_4182d
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	dec a
 	dec a
 	jr .asm_41831
@@ -68009,11 +68009,11 @@ Func_4180e: ; 4180e (10:580e)
 	call Func_417ae
 	pop de
 .asm_4182d
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	inc a
 	inc a
 .asm_41831
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	push de
 	ld c, $2
 	call CheckForUserInterruption
@@ -68067,7 +68067,7 @@ Func_4188a: ; 4188a (10:588a)
 	ld hl, Func_4538
 	call Bankswitch
 	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld c, $b4
 	call DelayFrames
 	call ClearScreen
@@ -72316,7 +72316,7 @@ Func_469a0: ; 469a0 (11:69a0)
 	ld [$cd41], a
 	ld c, a
 	call Func_46a01
-	ld a, [$FF00+$ea]
+	ld a, [$ffea]
 	and a
 	jr z, .asm_469f0
 	inc hl
@@ -72339,7 +72339,7 @@ Func_469a0: ; 469a0 (11:69a0)
 	ret
 .asm_469fc
 	ld a, $ff
-	ld [$FF00+$ee], a
+	ld [$ffee], a
 	ret
 
 Func_46a01: ; 46a01 (11:6a01)
@@ -72382,7 +72382,7 @@ Func_46a01: ; 46a01 (11:6a01)
 .asm_46a3b
 	ld a, $ff
 .asm_46a3d
-	ld [$FF00+$ea], a
+	ld [$ffea], a
 	ret
 
 HiddenObjectMaps: ; 46a40 (11:6a40)
@@ -73221,14 +73221,14 @@ Route11GateUpstairsBlocks: ; 480db (12:40db)
 
 Func_480eb: ; 480eb (12:40eb)
 	call Load16BitRegisters
-	ld a, [rBGP] ; $FF00+$47
+	ld a, [rBGP] ; $ff47
 	or b
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld c, $4
 	call DelayFrames
-	ld a, [rBGP] ; $FF00+$47
+	ld a, [rBGP] ; $ff47
 	and $fc
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ret
 
 Func_480ff: ; 480ff (12:40ff)
@@ -73237,7 +73237,7 @@ Func_480ff: ; 480ff (12:40ff)
 	ld [$d0a0], a
 	xor a
 .asm_48108
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	call Func_48119
 	call Func_48119
 	dec b
@@ -73248,10 +73248,10 @@ Func_480ff: ; 480ff (12:40ff)
 	ret
 
 Func_48119: ; 48119 (12:4119)
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	xor b
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [rWY], a ; $FF00+$4a
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld [rWY], a ; $ff4a
 	ld c, $3
 	jp DelayFrames
 
@@ -73259,7 +73259,7 @@ Func_48125: ; 48125 (12:4125)
 	call Load16BitRegisters
 	xor a
 .asm_48129
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	call Func_4813f
 	ld c, $1
 	call DelayFrames
@@ -73268,19 +73268,19 @@ Func_48125: ; 48125 (12:4125)
 	ld a, b
 	jr nz, .asm_48129
 	ld a, $7
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	ret
 
 Func_4813f: ; 4813f (12:413f)
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	xor b
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	bit 7, a
 	jr z, .asm_48149
 	xor a
 .asm_48149
 	add $7
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	ld c, $4
 	jp DelayFrames
 
@@ -73687,7 +73687,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	cp FRESH_WATER
 	jr z, .asm_484b6
 	cp SODA_POP
@@ -73801,7 +73801,7 @@ UnnamedText_4852c: ; 4852c (12:452c)
 CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	ld hl, $cc5b
 	xor a
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 .asm_48538
 	ld a, [hli]
 	cp $ff
@@ -73811,7 +73811,7 @@ CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	call GetItemName
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes
 	ld de, $cd6d
@@ -74359,7 +74359,7 @@ CeladonGymScript3: ; 48956 (12:4956)
 
 Func_48963: ; 48963 (12:4963)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d77c
 	set 1, [hl]
@@ -74367,14 +74367,14 @@ Func_48963: ; 48963 (12:4963)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d77c
 	set 0, [hl]
 	jr .asm_4898c
 .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_4898c
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -75220,9 +75220,9 @@ GameCornerBlankText2: ; 48f8d (12:4f8d)
 
 Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $99
-	ld [$ff00+$a0], a
+	ld [$ffa0], a
 	ld a, $90
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	jp HasEnoughCoins
 
 CeladonGameCornerObject: ; 0x48fa0 (size=99)
@@ -75803,9 +75803,9 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	add a
 	jr c, .asm_4949b ; 0x49471 $28
 	ld a, $1e
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld a, $47
-	ld [$ff00+$dc], a
+	ld [$ffdc], a
 	ld [$d11e], a
 	call GetItemName
 	ld h, d
@@ -75815,7 +75815,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	call CopyData
 	ld a, $62
 	call Predef
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1 ; 0x49494 $b
 	ld hl, $d7d6
@@ -76082,9 +76082,9 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	bit 0, a
 	jr nz, .asm_49683 ; 0x49657 $2a
 	ld a, $32
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld a, $4b
-	ld [$ff00+$dc], a
+	ld [$ffdc], a
 	ld [$d11e], a
 	call GetItemName
 	ld hl, $cd6d
@@ -76093,7 +76093,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	call CopyData
 	ld a, $62
 	call Predef
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_49689 ; 0x4967c $b
 	ld hl, $d7dd
@@ -76160,7 +76160,7 @@ Route16GateMapScript0: ; 496d7 (12:56d7)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -76394,7 +76394,7 @@ Route18GateScript0: ; 4988f (12:588f)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -76911,7 +76911,7 @@ MtMoon3Script0: ; 49d6f (12:5d6f)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 Func_49d91: ; 49d91 (12:5d91)
@@ -76937,7 +76937,7 @@ MtMoon3Script3: ; 49d9a (12:5d9a)
 
 MtMoon3Script4: ; 49dba (12:5dba)
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call SetSpriteMovementBytesToFF
 	ld hl, CoordsData_49dea
 	call ArePlayerCoordsInArray
@@ -76951,7 +76951,7 @@ MtMoon3Script4: ; 49dba (12:5dba)
 	ld de, MovementData_49df8
 .asm_49dda
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call MoveSprite
 	ld a, $5
 	ld [W_MTMOON3CURSCRIPT], a
@@ -76985,7 +76985,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $1
 	ld [$cc3c], a
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, [$d7f6]
 	bit 6, a
@@ -77539,15 +77539,15 @@ BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 
 BattleCenterMScript: ; 4fd10 (13:7d10)
 	call EnableAutoTextBoxDrawing
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	ld a, $8
 	jr z, .asm_4fd1d ; 0x4fd19 $2
 	ld a, $c
 .asm_4fd1d
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call Func_34ae
 	ld hl, $d72d
 	bit 0, [hl]
@@ -77560,7 +77560,7 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld [hl], a
 	ld a, $8
 	ld [$c119], a
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	ret z
 	ld a, $7
@@ -78676,7 +78676,7 @@ Func_50ee6: ; 50ee6 (14:4ee6)
 .asm_50ef1
 	call MoveSprite
 	ld a, $c
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	jp Func_34a6
 
 MovementData_50efb: ; 50efb (14:4efb)
@@ -78727,7 +78727,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call Func_50ee6
 	ld a, $1
 	ld [W_ROUTE22CURSCRIPT], a
@@ -78747,14 +78747,14 @@ Route22Script1: ; 50f62 (14:4f62)
 .asm_50f78
 	ld a, $c
 .asm_50f7a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call Func_34a6
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d72d
 	set 6, [hl]
@@ -78787,16 +78787,16 @@ Route22Script2: ; 50fb5 (14:4fb5)
 .asm_50fc7
 	ld a, $c
 .asm_50fc9
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call Func_34a6
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7eb
 	set 5, [hl]
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
@@ -78872,7 +78872,7 @@ Func_5104e: ; 5104e (14:504e)
 	ld hl, Music_RivalAlternateTempo
 	call Bankswitch
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_50ee6
 	ld a, $4
 	ld [W_ROUTE22CURSCRIPT], a
@@ -78883,7 +78883,7 @@ Route22Script4: ; 51087 (14:5087)
 	bit 0, a
 	ret nz
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_510a1
@@ -78896,12 +78896,12 @@ Route22Script4: ; 51087 (14:5087)
 	ld [$d528], a
 	ld a, $c
 .asm_510a8
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d72d
 	set 6, [hl]
@@ -78927,7 +78927,7 @@ Route22Script5: ; 510df (14:50df)
 	cp $ff
 	jp z, Func_50ece
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_510fb
@@ -78940,14 +78940,14 @@ Route22Script5: ; 510df (14:50df)
 	ld [$d528], a
 	ld a, $c
 .asm_51102
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld hl, $d7eb
 	set 6, [hl]
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
@@ -78975,7 +78975,7 @@ Func_51142: ; 51142 (14:5142)
 	ld de, MovementData_5114d ; $514d
 asm_51145: ; 51145 (14:5145)
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp MoveSprite
 
 MovementData_5114c: ; 5114c (14:514c)
@@ -79124,7 +79124,7 @@ Route23Script0: ; 51219 (14:5219)
 	ret nc
 .asm_51237
 	ld a, e
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, c
 	ld [$cd3d], a
 	ld b, $2
@@ -79350,7 +79350,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d7f0
 	bit 1, [hl]
@@ -79389,7 +79389,7 @@ Route24Script3: ; 51422 (14:5422)
 	ld hl, $d7ef
 	set 1, [hl]
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
@@ -79489,7 +79489,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld hl, UnnamedText_5152b
 	ld de, UnnamedText_5152b
 	call PreBattleSaveRegisters
-	ld a, [$ff00+$8c]
+	ld a, [$ff8c]
 	ld [$cf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -80364,7 +80364,7 @@ Func_51bc8: ; 51bc8 (14:5bc8)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_51bd4
 	ld a, [hli]
@@ -80389,12 +80389,12 @@ Func_51bc8: ; 51bc8 (14:5bc8)
 	ret
 .asm_51bf0
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	ret
 
 Func_51bf4: ; 51bf4 (14:5bf4)
 	ld hl, $d830
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
@@ -80447,10 +80447,10 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
 	ld a, [wWhichTrade] ; $cd3d
@@ -80460,7 +80460,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	inc de
 .asm_51c6c
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call MoveSprite
 	ld a, $3
 	jp Func_51c10
@@ -80480,7 +80480,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	call Delay3
 	ld hl, $d72d
@@ -80519,12 +80519,12 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, $4
 	ld [$d528], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, $4
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $f
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $ff
 	ld [$c0ee], a
@@ -80539,7 +80539,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call MoveSprite
 	ld a, $5
 	jp Func_51c10
@@ -81136,7 +81136,7 @@ Func_5227a: ; 5227a (14:627a)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 Mansion3TextPointers: ; 5228a (14:628a)
@@ -81293,7 +81293,7 @@ Func_52420: ; 52420 (14:6420)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 Mansion4ScriptPointers: ; 52430 (14:6430)
@@ -81398,7 +81398,7 @@ Mansion4Blocks: ; 524dd (14:64dd)
 	INCBIN "maps/mansion4.blk"
 
 Func_525af: ; 525af (14:65af)
-	ld a, [$FF00+$d7]
+	ld a, [$ffd7]
 	ld [$d0d4], a
 	xor a
 	ld [$cd6a], a
@@ -81441,7 +81441,7 @@ Func_525af: ; 525af (14:65af)
 Func_52601: ; 52601 (14:6601)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVETYPE ; $cfd5
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_52613
 	ld hl, W_PLAYERMONSTATUS ; $d018
@@ -81529,7 +81529,7 @@ Func_52673: ; 52673 (14:6673)
 	call Func_526fd
 	push de
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_3ef5
 	pop de
 	srl d
@@ -81557,7 +81557,7 @@ Func_52673: ; 52673 (14:6673)
 	jp PlaySound
 .asm_526dc
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp Func_3ef5
 
 SilphCoMapList: ; 526e3 (14:66e3)
@@ -82526,15 +82526,15 @@ Func_5525f: ; 5525f (15:525f)
 	jr .asm_55285
 .asm_552a1
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
-	ld [$FF00+$97], a
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	ld [$ff97], a
 	ld a, [$d008]
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, [W_ENEMYMONLEVEL] ; $cff3
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld a, $7
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $4
 	call Divide
 	ld hl, $fff2
@@ -82561,12 +82561,12 @@ Func_5525f: ; 5525f (15:525f)
 	inc hl
 	inc hl
 	ld b, [hl]
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [$cf4c], a
 	add b
 	ld [hld], a
 	ld b, [hl]
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld [$cf4b], a
 	adc b
 	ld [hl], a
@@ -82589,11 +82589,11 @@ Func_5525f: ; 5525f (15:525f)
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
 	call Bankswitch
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	ld b, a
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld c, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld d, a
 	pop hl
 	ld a, [hld]
@@ -82792,31 +82792,31 @@ Func_5546c: ; 5546c (15:546c)
 	ld c, $7
 .asm_55488
 	xor a
-	ld [H_DIVIDEND], a ; $FF00+$95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld a, [hl]
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld a, [$d11e]
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	ld b, $2
 	call Divide
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld [hli], a
 	dec c
 	jr nz, .asm_55488
 	ret
 
 Func_5549f: ; 5549f (15:549f)
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld b, a
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld c, a
 	srl b
 	rr c
 	add c
-	ld [$FF00+$98], a
-	ld a, [$FF00+$97]
+	ld [$ff98], a
+	ld a, [$ff97]
 	adc b
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ret
 
 UnnamedText_554b2: ; 554b2 (15:54b2)
@@ -85647,7 +85647,7 @@ Func_56541: ; 56541 (15:6541)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_5654d
 	ld a, [hli]
@@ -85672,11 +85672,11 @@ Func_56541: ; 56541 (15:6541)
 	ret
 .asm_56569
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	ret
 
 Func_5656d: ; 5656d (15:656d)
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	ld hl, $d832
@@ -85893,7 +85893,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call Delay3
 	call GBPalNormal
 	ld a, $90
-	ld [$ff00+$48], a
+	ld [$ff48], a
 	call WaitForTextScrollButtonPress
 	ld hl, $d730
 	res 6, [hl]
@@ -85947,26 +85947,26 @@ Func_567f9: ; 567f9 (15:67f9)
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_56903
 	ld a, [hli]
-	ld [$FF00+$eb], a
+	ld [$ffeb], a
 	inc hl
 	ld a, [hl]
-	ld [$FF00+$ec], a
+	ld [$ffec], a
 	ld de, $fe
 	add hl, de
 	ld a, [hli]
-	ld [$FF00+$ed], a
+	ld [$ffed], a
 	ld a, [hl]
-	ld [$FF00+$ee], a
+	ld [$ffee], a
 	ret
 
 Func_56819: ; 56819 (15:6819)
 	ld hl, wSpriteStateData1
 	ld de, $0004
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_56903
 	ld a, [hli]
 	ld [$d130], a
@@ -85985,18 +85985,18 @@ Func_5683d: ; 5683d (15:683d)
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_56903
-	ld a, [$FF00+$eb]
+	ld a, [$ffeb]
 	ld [hli], a
 	inc hl
-	ld a, [$FF00+$ec]
+	ld a, [$ffec]
 	ld [hl], a
 	ld de, $fe
 	add hl, de
-	ld a, [$FF00+$ed]
+	ld a, [$ffed]
 	ld [hli], a
-	ld a, [$FF00+$ee]
+	ld a, [$ffee]
 	ld [hl], a
 	ret
 
@@ -86004,7 +86004,7 @@ Func_5685d: ; 5685d (15:685d)
 	ld hl, wSpriteStateData1
 	ld de, $0004
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call Func_56903
 	ld a, [$d130]
 	ld [hli], a
@@ -86089,13 +86089,13 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp MoveSprite_
 
 Func_56903: ; 56903 (15:6903)
 	push de
 	add hl, de
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	swap a
 	ld d, $0
 	ld e, a
@@ -86745,16 +86745,16 @@ Func_58e59: ; 58e59 (16:4e59)
 	ld hl, UnnamedText_58eae ; $4eae
 	jr z, .asm_58eab
 	xor a
-	ld [H_NUMTOPRINT], a ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	ld [$cce3], a
-	ld [$FF00+$97], a
+	ld [$ff97], a
 	ld a, [hl]
 	ld [$cce4], a
-	ld [$FF00+$98], a
+	ld [$ff98], a
 	ld a, $19
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
 	ld hl, W_ENEMYMONMAXHP ; $cff4
 	ld a, [hli]
@@ -86765,9 +86765,9 @@ Func_58e59: ; 58e59 (16:4e59)
 	rr b
 	ld a, b
 	ld b, $4
-	ld [H_REMAINDER], a ; $FF00+$99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Divide
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld hl, UnnamedText_58eae ; $4eae
 	cp $46
 	jr nc, .asm_58eab
@@ -86891,15 +86891,15 @@ Func_58f43: ; 58f43 (16:4f43)
 	call CalcExperience
 	push hl
 	ld hl, $cfa8
-	ld a, [$FF00+$98]
+	ld a, [$ff98]
 	ld c, a
 	ld a, [hld]
 	sub c
-	ld a, [$FF00+$97]
+	ld a, [$ff97]
 	ld c, a
 	ld a, [hld]
 	sbc c
-	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	ld c, a
 	ld a, [hl]
 	sbc c
@@ -86919,19 +86919,19 @@ CalcExperience: ; 58f6a (16:4f6a)
 	add hl, bc
 	call CalcDSquared
 	ld a, d
-	ld [H_MULTIPLIER], a ; $FF00+$99
+	ld [H_MULTIPLIER], a ; $ff99
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [H_MULTIPLIER], a ; $FF00+$99
+	ld [H_MULTIPLIER], a ; $ff99
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [H_DIVISOR], a ; $FF00+$99
+	ld [H_DIVISOR], a ; $ff99
 	ld b, $4
 	call Divide
-	ld a, [H_MULTIPLICAND] ; $FF00+$96 (aliases: H_NUMTOPRINT)
+	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
 	push af
 	ld a, [H_MULTIPLICAND+1]
 	push af
@@ -86940,9 +86940,9 @@ CalcExperience: ; 58f6a (16:4f6a)
 	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [H_MULTIPLIER], a ; $FF00+$99
+	ld [H_MULTIPLIER], a ; $ff99
 	call Multiply
-	ld a, [H_MULTIPLICAND] ; $FF00+$96 (aliases: H_NUMTOPRINT)
+	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
 	push af
 	ld a, [H_MULTIPLICAND+1]
 	push af
@@ -86951,7 +86951,7 @@ CalcExperience: ; 58f6a (16:4f6a)
 	ld a, [hli]
 	push af
 	xor a
-	ld [H_MULTIPLICAND], a ; $FF00+$96
+	ld [H_MULTIPLICAND], a ; $ff96
 	ld [H_MULTIPLICAND+1], a
 	ld a, d
 	ld [H_MULTIPLICAND+2], a
@@ -86966,9 +86966,9 @@ CalcExperience: ; 58f6a (16:4f6a)
 	ld a, [H_MULTIPLICAND+1]
 	sbc b
 	ld [H_MULTIPLICAND+1], a
-	ld a, [H_MULTIPLICAND] ; $FF00+$96
+	ld a, [H_MULTIPLICAND] ; $ff96
 	sbc b
-	ld [H_MULTIPLICAND], a ; $FF00+$96
+	ld [H_MULTIPLICAND], a ; $ff96
 	pop af
 	and $80
 	jr nz, .subtractSquaredTerm ; check sign
@@ -87016,11 +87016,11 @@ CalcExperience: ; 58f6a (16:4f6a)
 ; calculates d*d
 CalcDSquared: ; 59010 (16:5010)
 	xor a
-	ld [H_MULTIPLICAND], a ; $FF00+$96 (aliases: H_NUMTOPRINT)
+	ld [H_MULTIPLICAND], a ; $ff96 (aliases: H_NUMTOPRINT)
 	ld [H_MULTIPLICAND+1], a
 	ld a, d
 	ld [H_MULTIPLICAND+2], a
-	ld [H_MULTIPLIER], a ; $FF00+$99 (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a ; $ff99 (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
 	jp Multiply
 
 ; each entry has the following scheme:
@@ -87047,16 +87047,16 @@ Func_59035 ; 0x59035
 	ld b, $13
 	call CountSetBits
 	ld a, [$d11e]
-	ld [$ff00+$dd], a
+	ld [$ffdd], a
 	ld b, a
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	cp b
 	jr z, .asm_59059 ; 0x59055 $2
 	jr nc, .asm_5907c ; 0x59057 $23
 .asm_59059
 	ld hl, UnnamedText_590a0 ; $50a0
 	call PrintText
-	ld a, [$ff00+$dc]
+	ld a, [$ffdc]
 	ld b, a
 	ld c, 1
 	call GiveItem
@@ -87080,7 +87080,7 @@ Func_59035 ; 0x59035
 	call PrintText
 	ld a, $ff
 .asm_5908e
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ret
 
 UnnamedText_59091: ; 59091 (16:5091)
@@ -88106,7 +88106,7 @@ Route12Script0: ; 59619 (16:5619)
 	res 6, [hl]
 	jp z, CheckFightingMapTrainers
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $84
 	ld [W_CUROPPONENT], a ; $d059
@@ -88130,7 +88130,7 @@ Route12Script3: ; 5964c (16:564c)
 	cp $2
 	jr z, .asm_59664
 	ld a, $e
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_59664
 	ld hl, $d7d8
@@ -88698,7 +88698,7 @@ Route16Script0: ; 59959 (16:5959)
 	res 0, [hl]
 	jp z, CheckFightingMapTrainers
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $84
 	ld [W_CUROPPONENT], a ; $d059
@@ -88723,7 +88723,7 @@ Route16Script3: ; 5998f (16:598f)
 	cp $2
 	jr z, .asm_599a8
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_599a8
 	ld hl, $d7e0
@@ -89306,7 +89306,7 @@ Func_59d43: ; 59d43 (16:5d43)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_59d4f
 	ld a, [hli]
@@ -89331,7 +89331,7 @@ Func_59d43: ; 59d43 (16:5d43)
 	ret
 .asm_59d6b
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	ret
 
 Func_59d6f: ; 59d6f (16:5d6f)
@@ -89589,7 +89589,7 @@ DataTable_59fa8: ; 59fa8 (16:5fa8)
 
 Func_59fad: ; 59fad (16:5fad)
 	ld hl, $d828
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
@@ -89763,7 +89763,7 @@ DataTable_5a173: ; 5a173 (16:6173)
 	db $04,$05,$FF
 
 Func_5a176: ; 5a176 (16:6176)
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	ld hl, $d836
@@ -89965,7 +89965,7 @@ LanceScript0: ; 5a305 (16:6305)
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 .asm_5a325
 	cp $5
@@ -89994,7 +89994,7 @@ LanceScript2: ; 5a349 (16:6349)
 	cp $ff
 	jp z, Func_5a2f5
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 Func_5a35b: ; 5a35b (16:635b)
@@ -90181,10 +90181,10 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld a, $1
 	ld [$d528], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld a, $8
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	call Delay3
 	xor a
@@ -90192,7 +90192,7 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	inc a
 	ld [$d528], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -90234,7 +90234,7 @@ RemoveGuardDrink: ; 5a59f (16:659f)
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	and a
 	ret z
 	push hl
@@ -90372,7 +90372,7 @@ MuseumF1Script0: ; 5c10d (17:410d)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 MuseumF1Script1: ; 5c12a (17:412a)
@@ -90428,10 +90428,10 @@ asm_3ded4: ; 5c173 (17:4173)
 	and a
 	jr nz, asm_de133 ; 0x5c18b $4d
 	xor a
-	ld [$ff00+$9f], a
-	ld [$ff00+$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $50
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	call HasEnoughMoney
 	jr nc, asm_0f3e3 ; 0x5c199 $9
 	ld hl, UnnamedText_5c229
@@ -90745,7 +90745,7 @@ PewterGymScript3: ; 5c3d2 (17:43d2)
 
 Func_5c3df: ; 5c3df (17:43df)
 	ld a, $4
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d755
 	set 7, [hl]
@@ -90753,14 +90753,14 @@ Func_5c3df: ; 5c3df (17:43df)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d755
 	set 6, [hl]
 	jr .asm_5c408
 .BagFull
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c408
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -91161,7 +91161,7 @@ CeruleanGymScript3: ; 5c700 (17:4700)
 
 Func_5c70d: ; 5c70d (17:470d)
 	ld a, $5
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d75e
 	set 7, [hl]
@@ -91169,14 +91169,14 @@ Func_5c70d: ; 5c70d (17:470d)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d75e
 	set 6, [hl]
 	jr .asm_5c736
 .BagFull
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c736
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -91674,7 +91674,7 @@ VermilionGymScript3: ; 5ca9d (17:4a9d)
 
 Func_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d773
 	set 7, [hl]
@@ -91682,14 +91682,14 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d773
 	set 6, [hl]
 	jr .asm_5cad3
 .BagFull
 	ld a, $8
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5cad3
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -92458,7 +92458,7 @@ SaffronGymScript3: ; 5d05b (17:505b)
 
 Func_5d068: ; 5d068 (17:5068)
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d7b3
 	set 1, [hl]
@@ -92466,14 +92466,14 @@ Func_5d068: ; 5d068 (17:5068)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d7b3
 	set 0, [hl]
 	jr .asm_5d091
 .BagFull
 	ld a, $c
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5d091
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -93410,7 +93410,7 @@ Func_5d837: ; 5d837 (17:5837)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_5d843
 	ld a, [hli]
@@ -93435,12 +93435,12 @@ Func_5d837: ; 5d837 (17:5837)
 	ret
 .asm_5d85f
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	ret
 
 Func_5d863: ; 5d863 (17:5863)
 	ld hl, $d834
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
@@ -93840,10 +93840,10 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [$cf91] = pokemon interal id number
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	call SaveScreenTilesToBuffer1
 	ld a, $11
 	ld [$d125], a
@@ -93855,7 +93855,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld de, $8b10
 	call LoadMonFrontSprite
 	ld a, $80
-	ld [$FF00+$e1], a
+	ld [$ffe1], a
 	FuncCoord 10, 11 ; $c486
 	ld hl, Coord
 	ld a, $2
@@ -93864,7 +93864,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	call LoadScreenTilesFromBuffer1
 	call Delay3
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ret
 
 Func_5dc1a: ; 5dc1a (17:5c1a)
@@ -94139,12 +94139,12 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	add hl, de
 	ld a, [hli]
 
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	push hl
 	call GenRandom
 	swap a
 	ld b, a
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	and b
 	dec a
 	pop hl
@@ -94377,12 +94377,12 @@ PokemonTower2Script0: ; 6050f (18:450f)
 .asm_60544
 	ld [$d528], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, b
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
@@ -94403,7 +94403,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld hl, $d764
 	set 7, [hl]
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld de, MovementData_605b2
 	ld a, [$d764]
@@ -94412,7 +94412,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld de, MovementData_605a9
 .asm_60589
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
@@ -94850,7 +94850,7 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	call Delay3
 	call GBFadeIn2
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
@@ -95055,7 +95055,7 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $91
 	ld [W_CUROPPONENT], a ; $d059
@@ -95087,7 +95087,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld hl, $d768
 	set 7, [hl]
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
@@ -95303,7 +95303,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	call Func_60db6
 	ld a, $3
@@ -95346,7 +95346,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $4
 	ld [$c109], a
 	ld a, $95
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
 	ld [$d42f], a
 	ld a, $4
@@ -95381,7 +95381,7 @@ Func_60db6: ; 60db6 (18:4db6)
 	ld d, [hl]
 	ld e, a
 	ld a, [$cf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp MoveSprite
 .asm_60dde
 	inc hl
@@ -95666,7 +95666,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	cp DOME_FOSSIL
 	jr z, .choseDomeFossil
 	cp HELIX_FOSSIL
@@ -95692,7 +95692,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, UnnamedText_610b3
 	call PrintText
 	ld a, [W_FOSSILITEM]
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
 	call Bankswitch
@@ -95726,7 +95726,7 @@ UnnamedText_610bd: ; 610bd (18:50bd)
 Func_610c2: ; 610c2 (18:50c2)
 	ld hl, $cc5b
 	xor a
-	ld [$FF00+$db], a
+	ld [$ffdb], a
 .asm_610c8
 	ld a, [hli]
 	cp $ff
@@ -95736,7 +95736,7 @@ Func_610c2: ; 610c2 (18:50c2)
 	call GetItemName
 	FuncCoord 2, 2 ; $c3ca
 	ld hl, Coord
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes
 	ld de, $cd6d
@@ -96048,20 +96048,20 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, [$cd3d]
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld a, $71
 	ld [$cc4d], a
 	ld a, $15
 	call Predef
 	call Delay3
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	cp $2
 	jr nz, .asm_61400 ; 0x613f9 $5
 	ld de, MovementData_6140c
@@ -96094,9 +96094,9 @@ Func_61416: ; 61416 (18:5416)
 .asm_61426
 	xor a
 .asm_61427
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp Func_34a6
 
 SSAnne2Script1: ; 61430 (18:5430)
@@ -96107,7 +96107,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld a, $f2
@@ -96142,10 +96142,10 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld a, [$d362]
 	cp $25
@@ -96156,7 +96156,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld de, MovementData_614b7
 .asm_6149a
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $ff
 	ld [$c0ee], a
@@ -97510,7 +97510,7 @@ Func_62137: ; 62137 (18:6137)
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	pop hl
 .asm_62143
 	ld a, [hli]
@@ -97535,11 +97535,11 @@ Func_62137: ; 62137 (18:6137)
 	ret
 .asm_6215f
 	xor a
-	ld [$FF00+$e0], a
+	ld [$ffe0], a
 	ret
 
 Func_62163: ; 62163 (18:6163)
-	ld a, [$FF00+$e0]
+	ld a, [$ffe0]
 	and a
 	ret z
 	ld hl, $d838
@@ -97613,10 +97613,10 @@ SilphCo11Script0: ; 621db (18:61db)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_62216
 	call MoveSprite
@@ -97634,9 +97634,9 @@ MovementData_62216: ; 62216 (18:6216)
 SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [$d528], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, b
-	ld [$FF00+$8d], a
+	ld [$ff8d], a
 	jp Func_34a6
 
 SilphCo11Script5: ; 62227 (18:6227)
@@ -97657,7 +97657,7 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	call GBFadeIn1
 	call Func_6216d
@@ -97675,7 +97675,7 @@ SilphCo11Script3: ; 6226a (18:626a)
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call SetSpriteMovementBytesToFF
 	ld a, [$cf0d]
 	cp $1
@@ -97699,7 +97699,7 @@ SilphCo11Script4: ; 62293 (18:6293)
 	ld hl, UnnamedText_62330 ; $6330
 	ld de, UnnamedText_62330 ; $6330
 	call PreBattleSaveRegisters
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld [$cf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -98199,9 +98199,9 @@ SECTION "bank1C",ROMX,BANK[$1C]
 
 Func_70000: ; 70000 (1c:4000)
 	ld a, $f9
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	ld a, $a4
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld de, AnimationTileset2 + $30 ; $471e ; star tile (top left quadrant)
 	ld hl, $8a00
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
@@ -98381,9 +98381,9 @@ Func_7011f: ; 7011f (1c:411f)
 	add hl, de
 	dec c
 	jr nz, .asm_7012b
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	xor $a0
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld c, $3
 	call CheckForUserInterruption
 	ret c
@@ -98439,12 +98439,12 @@ Func_701a0: ; 701a0 (1c:41a0)
 	call FillMemory
 	xor a
 	ld [$cfcb], a
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	ld [W_SPRITEFLIPPED], a
 	ld [$d358], a
 	ld [$cd40], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, $d5a2
 	ld a, [hl]
 	inc a
@@ -98452,7 +98452,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	inc [hl]
 .asm_701eb
 	ld a, $90
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -98508,7 +98508,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	call Func_70377
 	call Func_70423
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	ld hl, rLCDC ; $ff40
 	res 3, [hl]
 	ret
@@ -98519,9 +98519,9 @@ HallOfFameText: ; 7026b (1c:426b)
 Func_70278: ; 70278 (1c:4278)
 	call ClearScreen
 	ld a, $d0
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	ld a, $c0
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$cf91], a
 	ld [$d0b5], a
@@ -98544,7 +98544,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld c, $0
 	call GoPAL_SET
 	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld c, $31
 	call Func_7036d
 	ld d, $a0
@@ -98556,16 +98556,16 @@ Func_70278: ; 70278 (1c:4278)
 .asm_702c7
 	call .asm_702d5
 	xor a
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	ld c, a
 	call Func_7036d
 	ld d, $0
 	ld e, $fc
 .asm_702d5
 	call DelayFrame
-	ld a, [$FF00+$ae]
+	ld a, [$ffae]
 	add e
-	ld [$FF00+$ae], a
+	ld [$ffae], a
 	cp d
 	jr nz, .asm_702d5
 	ret
@@ -98735,10 +98735,10 @@ Func_70433: ; 70433 (1c:4433)
 	push af
 	ld [hl], $ff
 	push hl
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	push af
 	ld a, $e0
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld hl, $c384
 	ld de, PokeCenterOAMData ; $44d7
 	call Func_70503
@@ -98783,7 +98783,7 @@ Func_70433: ; 70433 (1c:4433)
 	ld c, $20
 	call DelayFrames
 	pop af
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	pop hl
 	pop af
 	ld [hl], a
@@ -98804,9 +98804,9 @@ PokeCenterOAMData: ; 704d7 (1c:44d7)
 Func_704f3: ; 704f3 (1c:44f3)
 	ld b, $8
 .asm_704f5
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	xor d
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld c, $a
 	call DelayFrames
 	dec b
@@ -99352,7 +99352,7 @@ PlayerJumpingYScreenCoords: ; 708ba (1c:48ba)
 
 Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	call Func_7092a
 	FuncCoord 12, 0 ; $c3ac
 	ld hl, Coord
@@ -99360,11 +99360,11 @@ Func_708ca: ; 708ca (1c:48ca)
 	call ClearScreenArea
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $91
 	ld [$cee9], a
 	ld a, $1
-	ld [H_WHOSETURN], a ; $FF00+$f3
+	ld [H_WHOSETURN], a ; $fff3
 	ld hl, Func_79793
 	ld b, BANK(Func_79793)
 	call Bankswitch
@@ -99373,10 +99373,10 @@ Func_708ca: ; 708ca (1c:48ca)
 .asm_708f6
 	ld c, $a
 	call DelayFrames
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	sla a
 	sla a
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	jr nz, .asm_708f6
 	call CleanLCD_OAM
 	call Func_7092a
@@ -99384,17 +99384,17 @@ Func_708ca: ; 708ca (1c:48ca)
 .asm_7090d
 	ld c, $a
 	call DelayFrames
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	srl b
 	rra
 	srl b
 	rra
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ld a, b
 	and a
 	jr nz, .asm_7090d
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	jp CleanLCD_OAM
 
@@ -99439,15 +99439,15 @@ Func_7092a: ; 7092a (1c:492a)
 
 Func_7096d: ; 7096d (1c:496d)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	xor a
-	ld [$FF00+$b0], a
+	ld [$ffb0], a
 	dec a
 	ld [$cfcb], a
 	call DelayFrame
 	ld hl, $c102
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld c, a
 	ld b, $0
 	ld de, $10
@@ -99614,9 +99614,9 @@ BattleTransitionTile: ; 70a59 (1c:4a59)
 
 Func_70a69: ; 70a69 (1c:4a69)
 	ld a, $ff
-	ld [rBGP], a ; $FF00+$47
-	ld [rOBP0], a ; $FF00+$48
-	ld [rOBP1], a ; $FF00+$49
+	ld [rBGP], a ; $ff47
+	ld [rOBP0], a ; $ff48
+	ld [rOBP1], a ; $ff49
 	ret
 
 Func_70a72: ; 70a72 (1c:4a72)
@@ -99775,7 +99775,7 @@ Func_70b5d: ; 70b5d (1c:4b5d)
 	ld a, [hli]
 	cp $1
 	jr z, .asm_70b6e
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld c, $2
 	call DelayFrames
 	jr .asm_70b60
@@ -99793,7 +99793,7 @@ Func_70b7f: ; 70b7f (1c:4b7f)
 .asm_70b81
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 0, 7 ; $c42c
 	ld hl, Coord
 	FuncCoord 0, 8 ; $c440
@@ -99819,7 +99819,7 @@ Func_70b7f: ; 70b7f (1c:4b7f)
 	ld bc, $2
 	call Func_70c3f
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld c, $6
 	call DelayFrames
 	pop bc
@@ -99832,7 +99832,7 @@ Func_70b7f: ; 70b7f (1c:4b7f)
 Func_70bca: ; 70bca (1c:4bca)
 	ld c, $9
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 .asm_70bcf
 	push bc
 	FuncCoord 0, 16 ; $c4e0
@@ -99953,7 +99953,7 @@ Func_70c7e: ; 70c7e (1c:4c7e)
 	FuncCoord 1, 17 ; $c4f5
 	ld de, Coord
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 .asm_70c89
 	push bc
 	push hl
@@ -99992,7 +99992,7 @@ Func_70cb4: ; 70cb4 (1c:4cb4)
 	FuncCoord 19, 1 ; $c3c7
 	ld de, Coord
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 .asm_70cbf
 	push bc
 	push hl
@@ -100036,7 +100036,7 @@ Func_70cfd: ; 70cfd (1c:4cfd)
 	ld b, $3
 	call Func_70b5d
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 Func_70d06: ; 70d06 (1c:4d06)
@@ -100055,10 +100055,10 @@ Func_70d06: ; 70d06 (1c:4d06)
 
 Func_70d19: ; 70d19 (1c:4d19)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 Func_70d24: ; 70d24 (1c:4d24)
@@ -100272,7 +100272,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld [hl], $ff
 	push hl
 	ld a, $1
-	ld [$FF00+$b7], a
+	ld [$ffb7], a
 	ld a, [W_CURMAP] ; $d35e
 	push af
 	ld b, $0
@@ -100334,7 +100334,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 .asm_70ec8
 	call Func_716c6
 	call GetJoypadStateLowSensitivity
-	ld a, [$FF00+$b5]
+	ld a, [$ffb5]
 	ld b, a
 	and $c3
 	jr z, .asm_70ec8
@@ -100346,7 +100346,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	jr nz, .asm_70f01
 	xor a
 	ld [$d09b], a
-	ld [$FF00+$b7], a
+	ld [$ffb7], a
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	call Func_711ab
 	pop hl
@@ -100509,7 +100509,7 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	push hl
 	call DelayFrame
 	call GetJoypadStateLowSensitivity
-	ld a, [$FF00+$b5]
+	ld a, [$ffb5]
 	ld b, a
 	pop hl
 	and $c3
@@ -101422,7 +101422,7 @@ Func_71868: ; 71868 (1c:5868)
 	push hl
 	push de
 	push bc
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld hl, W_PARTYMON1 ; $d164
 	ld e, a
 	ld d, $0
@@ -101438,7 +101438,7 @@ Func_71868: ; 71868 (1c:5868)
 
 Func_71882: ; 71882 (1c:5882)
 	xor a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [$cd5d]
 	call Func_718e9
 	ld [$cd5b], a
@@ -101482,7 +101482,7 @@ Func_718c3: ; 718c3 (1c:58c3)
 	push af
 	ld c, $10
 	ld h, $c3
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	swap a
 	ld l, a
 	add $10
@@ -102390,41 +102390,41 @@ Func_7209b: ; 7209b (1c:609b)
 	di
 	call SendSGBPacket
 	ld a, $1
-	ld [$FF00+$f9], a
+	ld [$fff9], a
 	ei
 	call Wait7000
-	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $ff0
 	and $3
 	cp $3
 	jr nz, .asm_720fd
 	ld a, $20
-	ld [rJOYP], a ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
+	ld [rJOYP], a ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a ; $FF00+$0
+	ld [rJOYP], a ; $ff0
 	call Wait7000
 	call Wait7000
 	ld a, $10
-	ld [rJOYP], a ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
+	ld [rJOYP], a ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
-	ld a, [rJOYP] ; $FF00+$0
+	ld [rJOYP], a ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP] ; $ff0
 	call Wait7000
 	call Wait7000
-	ld a, [rJOYP] ; $FF00+$0
+	ld a, [rJOYP] ; $ff0
 	and $3
 	cp $3
 	jr nz, .asm_720fd
@@ -102446,7 +102446,7 @@ Func_7210b: ; 7210b (1c:610b)
 	push de
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld de, $8800
 	ld a, [$cf2d]
 	and a
@@ -102472,11 +102472,11 @@ Func_7210b: ; 7210b (1c:610b)
 	dec c
 	jr nz, .asm_72132
 	ld a, $e3
-	ld [rLCDC], a ; $FF00+$40
+	ld [rLCDC], a ; $ff40
 	pop hl
 	call SendSGBPacket
 	xor a
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ei
 	ret
 
@@ -102511,7 +102511,7 @@ Func_72156: ; 72156 (1c:6156)
 
 Func_7216d: ; 7216d (1c:616d)
 	ld a, $80
-	ld [$FF00+$68], a
+	ld [$ff68], a
 	inc hl
 	ld c, $20
 .asm_72174
@@ -102526,7 +102526,7 @@ Func_7216d: ; 7216d (1c:616d)
 	inc d
 .asm_72180
 	ld a, [de]
-	ld [$FF00+$69], a
+	ld [$ff69], a
 	dec c
 	jr nz, .asm_72174
 	ret
@@ -103163,7 +103163,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld bc, $200
 	call CopyData
 	ld a, [$b522]
-	ld [$FF00+$d7], a
+	ld [$ffd7], a
 	ld hl, $b0c0
 	ld de, W_NUMINBOX ; $da80
 	ld bc, $462
@@ -103314,7 +103314,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld de, $b0c0
 	ld bc, $462
 	call CopyData
-	ld a, [$FF00+$d7]
+	ld a, [$ffd7]
 	ld [$b522], a
 	ld hl, $a598
 	ld bc, $f8b
@@ -103511,7 +103511,7 @@ Func_7390e: ; 7390e (1c:790e)
 
 Func_7393f: ; 7393f (1c:793f)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $3
 	ld [wMenuWatchedKeys], a ; $cc29
 	ld a, $b
@@ -103583,7 +103583,7 @@ Func_7393f: ; 7393f (1c:793f)
 	dec a
 	jr nz, .asm_739c2
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 UnnamedText_739d4: ; 739d4 (1c:79d4)
@@ -103837,7 +103837,7 @@ Func_7405c: ; 7405c (1d:405c)
 	ld hl, Coord
 	call Func_7417b
 	ld a, $c0
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	call EnableLCD
 	ld a, $ff
 	call PlaySoundWaitForCurrent
@@ -103856,7 +103856,7 @@ Func_740ba: ; 740ba (1d:40ba)
 	ld b, $4
 .asm_740bf
 	ld a, [hli]
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ld c, $5
 	call DelayFrames
 	dec b
@@ -103946,13 +103946,13 @@ Func_74140: ; 74140 (1d:4140)
 	ret
 
 Func_74152: ; 74152 (1d:4152)
-	ld a, [$FF00+$44]
+	ld a, [$ff44]
 	cp l
 	jr nz, Func_74152
 	ld a, h
-	ld [rSCX], a ; $FF00+$43
+	ld [rSCX], a ; $ff43
 .asm_7415a
-	ld a, [$FF00+$44]
+	ld a, [$ff44]
 	cp h
 	jr z, .asm_7415a
 	ret
@@ -103962,11 +103962,11 @@ DataTable_74160: ; 74160 (1d:4160)
 
 Func_74164: ; 74164 (1d:4164)
 	ld a, l
-	ld [H_AUTOBGTRANSFERDEST], a ; $FF00+$bc
+	ld [H_AUTOBGTRANSFERDEST], a ; $ffbc
 	ld a, h
-	ld [$FF00+$bd], a
+	ld [$ffbd], a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	jp Delay3
 
 Func_74171: ; 74171 (1d:4171)
@@ -104605,7 +104605,7 @@ ViridianGymScript3: ; 74988 (1d:4988)
 	ld [wJoypadForbiddenButtonsMask], a
 ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d751
 	set 1, [hl]
@@ -104613,14 +104613,14 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d751
 	set 0, [hl]
 	jr .asm_749be
 .BagFull
 	ld a, $e
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_749be
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -105283,17 +105283,17 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	cp $3
 	jr z, .asm_74f93
 	xor a
-	ld [$FF00+$9f], a
-	ld [$FF00+$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $2
-	ld [$FF00+$a0], a
+	ld [$ffa0], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, VendingMachineText4
 	jp PrintText
 .enoughMoney
 	call Func_74fe7
-	ld a, [$FF00+$db]
+	ld a, [$ffdb]
 	ld b, a
 	ld c, 1
 	call GiveItem
@@ -105366,13 +105366,13 @@ Func_74fe7: ; 74fe7 (1d:4fe7)
 	ld e, a
 	add hl, de
 	ld a, [hli]
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld a, [hli]
-	ld [$ff00+$dc], a
+	ld [$ffdc], a
 	ld a, [hli]
-	ld [$ff00+$dd], a
+	ld [$ffdd], a
 	ld a, [hl]
-	ld [$ff00+$de], a
+	ld [$ffde], a
 	ret
 
 VendingPrices: ; 75000 (1d:5000)
@@ -105652,7 +105652,7 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -105690,7 +105690,7 @@ SafariZoneEntranceScript2: ; 7522a (1d:522a)
 	ld [wJoypadForbiddenButtonsMask], a
 	call UpdateSprites
 	ld a, $4
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -105717,7 +105717,7 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $6
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [$da47], a
@@ -105729,7 +105729,7 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	jr .asm_75286 ; 0x7527d $7
 .asm_7527f
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 .asm_75286
 	ret
@@ -105790,11 +105790,11 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	and a
 	jp nz, .asm_75346
 	xor a
-	ld [$ff00+$9f], a
+	ld [$ff9f], a
 	ld a, $5
-	ld [$ff00+$a0], a
+	ld [$ffa0], a
 	ld a, $0
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	call HasEnoughMoney
 	jr nc, .asm_752f9 ; 0x752ef $8
 	ld hl, UnnamedText_7536a
@@ -106010,7 +106010,7 @@ FuchsiaGymScript3: ; 7548a (1d:548a)
 	ld [wJoypadForbiddenButtonsMask], a
 FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d792
 	set 1, [hl]
@@ -106018,14 +106018,14 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld hl, $d792
 	set 0, [hl]
 	jr .asm_754c0
 .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_754c0
 	ld hl, W_OBTAINEDBADGES ; $d356
@@ -106419,7 +106419,7 @@ CinnabarGymScript_75792: ; 75792 (1d:5792)
 	ret
 
 CinnabarGymScript_757a0: ; 757a0 (1d:57a0)
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld [wTrainerHeaderFlagBit], a
 	ret
 
@@ -106433,7 +106433,7 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld a, [$da38]
 	and a
 	ret z
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	cp $4
 	jr nz, .asm_757c3 ; 0x757b7 $a
 	ld a, $4
@@ -106465,7 +106465,7 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, [$da38]
 	ld [wTrainerHeaderFlagBit], a
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	jp DisplayTextID
 
 Func_757f1: ; 757f1 (1d:57f1)
@@ -106477,7 +106477,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	cp $ff
 	jp z, CinnabarGymScript_75792
 	ld a, [wTrainerHeaderFlagBit]
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld c, a
 	ld b, $2
 	ld hl, $d79a
@@ -106491,7 +106491,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	call WaitForSoundToFinish
 .asm_7581b
 	ld a, [wTrainerHeaderFlagBit]
-	ld [$ff00+$db], a
+	ld [$ffdb], a
 	ld c, a
 	ld b, $1
 	ld hl, $d79a
@@ -106519,7 +106519,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	ld [wJoypadForbiddenButtonsMask], a
 CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d79a
 	set 1, [hl]
@@ -106527,14 +106527,14 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, $d79a
 	set 0, [hl]
 	jr .asm_75880 ; 0x75877 $7
 .BagFull
 	ld a, $c
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 .asm_75880
 	ld hl, $d356
@@ -106565,7 +106565,7 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw TM38NoRoomText
 
 Func_758b7: ; 758b7 (1d:58b7)
-	ld a, [H_DOWNARROWBLINKCNT2] ; $FF00+$8c
+	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld [$cf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -107453,7 +107453,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, $d355
 	res 7, [hl]
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
 	ld hl, $d72d
@@ -107497,10 +107497,10 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call GaryScript_760c8
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld a, $4
 	ld [W_GARYCURSCRIPT], a
@@ -107511,14 +107511,14 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld hl, Music_Cities1AlternateTempo
 	call Bankswitch
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call GaryScript_760c8
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_76014
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $d6
 	ld [$cc4d], a
@@ -107538,17 +107538,17 @@ GaryScript5: ; 7601a (1d:601a)
 	ld a, $2
 	ld [$d528], a
 	ld a, $1
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $8
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call GaryScript_760c8
 	ld a, $6
 	ld [W_GARYCURSCRIPT], a
@@ -107556,12 +107556,12 @@ GaryScript5: ; 7601a (1d:601a)
 
 GaryScript6: ; 76047 (1d:6047)
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	ld a, $c
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $4
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call GaryScript_760c8
 	ld a, $7
 	ld [W_GARYCURSCRIPT], a
@@ -107569,16 +107569,16 @@ GaryScript6: ; 76047 (1d:6047)
 
 GaryScript7: ; 7605f (1d:605f)
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	xor a
-	ld [$ff00+$8d], a
+	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $5
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call GaryScript_760c8
 	ld de, MovementData_76080
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call MoveSprite
 	ld a, $8
 	ld [W_GARYCURSCRIPT], a
@@ -107803,7 +107803,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	jr z, asm_761c6
 .asm_76206
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $40
 	ld [$ccd3], a
@@ -107838,7 +107838,7 @@ LoreleiScript2: ; 7623f (1d:623f)
 	cp $ff
 	jp z, Func_761b6
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 LoreleiTextPointers: ; 76251 (1d:6251)
@@ -107987,7 +107987,7 @@ BrunoScript0: ; 76339 (1d:6339)
 	jr z, asm_7631d
 .asm_7635d
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $40
 	ld [$ccd3], a
@@ -108023,7 +108023,7 @@ BrunoScript2: ; 76396 (1d:6396)
 	cp $ff
 	jp z, Func_7630d
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 BrunoTextPointers: ; 763a8 (1d:63a8)
@@ -108172,7 +108172,7 @@ AgathaScript0: ; 76490 (1d:6490)
 	jr z, asm_76474
 .asm_764b4
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $40
 	ld [$ccd3], a
@@ -108208,7 +108208,7 @@ AgathaScript2: ; 764ed (1d:64ed)
 	cp $ff
 	jp z, Func_76464
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $1
 	ld [W_GARYCURSCRIPT], a
@@ -108283,10 +108283,10 @@ Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7
 	push hl
 	ld a, [$CFCB]
 	push af
-	ld a, [$FF00+$D7]
+	ld a, [$ffD7]
 	push af
 	xor a
-	ld [$FF00+$D7], a
+	ld [$ffD7], a
 	ld [W_SPRITEFLIPPED], a
 	ld [$CFCB], a
 	ld [$CD41], a
@@ -108317,7 +108317,7 @@ Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7
 	jr nz, .first
 .second
 	pop af
-	ld [$FF00+$D7], a
+	ld [$ffD7], a
 	pop af
 	ld [$CFCB], a
 	pop hl
@@ -108533,9 +108533,9 @@ HiddenCoins: ; 76799 (1d:6799)
 	and a
 	ret nz
 	xor a
-	ld [$ff00+$9f], a
-	ld [$ff00+$a0], a
-	ld [$ff00+$a1], a
+	ld [$ff9f], a
+	ld [$ffa0], a
+	ld [$ffa1], a
 	ld a, [$cd3d]
 	sub COIN
 	cp 10
@@ -108547,19 +108547,19 @@ HiddenCoins: ; 76799 (1d:6799)
 	jr .bcd100
 .bcd10
 	ld a, $10
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	jr .bcddone
 .bcd20
 	ld a, $20
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	jr .bcddone
 .bcd40 ; due to a typo, this is never used
 	ld a, $40
-	ld [$ff00+$a1], a
+	ld [$ffa1], a
 	jr .bcddone
 .bcd100
 	ld a, $1
-	ld [$ff00+$a0], a
+	ld [$ffa0], a
 .bcddone
 	ld de, $d5a5
 	ld hl, $ffa1
@@ -109139,18 +109139,18 @@ Func_78e01: ; 78e01 (1e:4e01)
 	push bc
 	push bc
 .asm_78e03
-	ld a, [rWX] ; $FF00+$4b
+	ld a, [rWX] ; $ff4b
 	inc a
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	ld c, $2
 	call DelayFrames
 	dec b
 	jr nz, .asm_78e03
 	pop bc
 .asm_78e11
-	ld a, [rWX] ; $FF00+$4b
+	ld a, [rWX] ; $ff4b
 	dec a
-	ld [rWX], a ; $FF00+$4b
+	ld [rWX], a ; $ff4b
 	ld c, $2
 	call DelayFrames
 	dec b
@@ -109176,16 +109176,16 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld b, $f0
 .asm_78e3f
 	ld a, b
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	ld a, $6c
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ret
 .asm_78e47
 	ld a, $e4
 	ld [$cc79], a
-	ld [rOBP0], a ; $FF00+$48
+	ld [rOBP0], a ; $ff48
 	ld a, $6c
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	ret
 
 PlaySubanimation: ; 78e53 (1e:4e53)
@@ -109865,7 +109865,7 @@ Func_791fc: ; 791fc (1e:51fc)
 	jr z, .asm_79204
 	ld a, c
 .asm_79204
-	ld [rBGP], a ; $FF00+$47
+	ld [rBGP], a ; $ff47
 	ret
 
 	ld b, $5
@@ -110207,7 +110207,7 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 ; Shifts the mon's sprite horizontally to a fixed location. Used by lots of
 ; animations like Tackle/Body Slam.
 	call AnimationHideMonPic
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	FuncCoord 2, 5 ; $c406
 	ld hl, Coord
@@ -110225,7 +110225,7 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 
 AnimationResetMonPosition: ; 79415 (1e:5415)
 ; Resets the mon's sprites to be located at the normal coordinates.
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $66
 	jr z, .asm_7941e
@@ -110237,7 +110237,7 @@ AnimationResetMonPosition: ; 79415 (1e:5415)
 AnimationSpiralBallsInward: ; 79424 (1e:5424)
 ; Creates an effect that looks like energy balls sprialing into the
 ; player mon's sprite.  Used in Focus Energy, for example.
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_79435
 	ld a, $d8
@@ -110321,7 +110321,7 @@ AnimationSquishMonPic: ; 794a1 (1e:54a1)
 	ld c, $4
 .asm_794a3
 	push bc
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_794b1
 	FuncCoord 16, 0 ; $c3b0
@@ -110378,7 +110378,7 @@ Func_794d4: ; 794d4 (1e:54d4)
 AnimationShootBallsUpward: ; 794f9 (1e:54f9)
 ; Shoots one pillar of "energy" balls upwards. Used in Teleport/Sky Attack
 ; animations.
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_79503
 	ld bc, $80
@@ -110534,7 +110534,7 @@ AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 	jp Func_79652
 
 Func_795f8: ; 795f8 (1e:55f8)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_79602
 	FuncCoord 12, 0 ; $c3ac
@@ -110551,7 +110551,7 @@ Func_795f8: ; 795f8 (1e:55f8)
 .asm_7960a
 	ld c, $8
 .asm_7960c
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_79616
 	call Func_7963c
@@ -110602,7 +110602,7 @@ AnimationSlideMonHalfLeft: ; 79645 (1e:5645)
 	jp Delay3
 
 Func_79652: ; 79652 (1e:5652)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, $9310
 	jr z, .asm_7965d
@@ -110679,7 +110679,7 @@ AnimationSubstitute: ; 796e0 (1e:56e0)
 	xor a
 	ld bc, $0310
 	call FillMemory
-	ld a, [$ff00+$f3]
+	ld a, [$fff3]
 	and a
 	jr z, .asm_79715 ; 0x796ed $26
 	ld hl, SlowbroSprite ; $4780       ; facing down sprite
@@ -110718,7 +110718,7 @@ CopySlowbroSpriteData: ; 7973f (1e:573f)
 	jp FarCopyData2
 
 Func_79747: ; 79747 (1e:5747)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, $ccf7
 	ld a, [W_PLAYERBATTSTATUS2] ; $d063
@@ -110767,7 +110767,7 @@ AnimationTransformMon: ; 79787 (1e:5787)
 	ld [$cee9], a
 
 Func_79793: ; 79793 (1e:5793)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_797b0
 	ld a, [$cee9]
@@ -110802,11 +110802,11 @@ Func_79793: ; 79793 (1e:5793)
 AnimationHideEnemyMonPic: ; 797d8 (1e:57d8)
 ; Hides the enemy mon's sprite
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, AnimationHideMonPic ; $5801
 	call CallWithTurnFlipped
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	jp Delay3
 
 Func_797e8: ; 797e8 (1e:57e8)
@@ -110828,7 +110828,7 @@ Func_797e8: ; 797e8 (1e:57e8)
 
 AnimationHideMonPic: ; 79801 (1e:5801)
 ; Hides the mon's sprite.
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_7980a
 	ld a, $c
@@ -110853,7 +110853,7 @@ Func_7980c: ; 7980c (1e:580c)
 
 Func_79820: ; 79820 (1e:5820)
 	push de
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_7982a
 	ld a, $65
@@ -111143,13 +111143,13 @@ MoveSoundTable: ; 798bc (1e:58bc)
 	db $a1,$00,$80
 
 Func_79aae: ; 79aae (1e:5aae)
-	ld a, [H_WHOSETURN] ; $FF00+$f3
+	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $31
 	jr z, .asm_79ab6
 	xor a
 .asm_79ab6
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	jr asm_79acb
 
 Func_79aba: ; 79aba (1e:5aba)
@@ -111163,14 +111163,14 @@ Func_79aba: ; 79aba (1e:5aba)
 	ld de, Unknown_79b1b ; $5b1b
 asm_79acb: ; 79acb (1e:5acb)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 
 Func_79ace: ; 79ace (1e:5ace)
 	push hl
 .asm_79acf
 	push bc
 	push hl
-	ld a, [H_DOWNARROWBLINKCNT1] ; $FF00+$8b
+	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
 	ld b, a
 .asm_79ad4
 	ld a, [de]
@@ -111186,7 +111186,7 @@ Func_79ace: ; 79ace (1e:5ace)
 	dec b
 	jr nz, .asm_79acf
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	pop hl
 	ret
 
@@ -111436,7 +111436,7 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 Func_79dda: ; 79dda (1e:5dda)
 	call Load16BitRegisters
 	ld a, c
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, b
 	push hl
 	call Func_79842
@@ -111568,9 +111568,9 @@ Func_79e96: ; 79e96 (1e:5e96)
 	ld [$d08a], a
 	ld c, $2
 	call Func_79339
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	xor $64
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	call DelayFrame
 	pop bc
 	dec c
@@ -111618,9 +111618,9 @@ Func_79eed: ; 79eed (1e:5eed)
 	ld [$d08a], a
 	ld c, $1
 	call Func_79339
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	xor $64
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	call DelayFrame
 	pop bc
 	dec c
@@ -111649,7 +111649,7 @@ Func_79f54: ; 79f54 (1e:5f54)
 	ld a, $ff
 	ld [$cfcb], a
 	ld a, $e4
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	call Func_79fc0
 	ld b, BANK(asm_f055)
 	ld hl, asm_f055
@@ -111663,9 +111663,9 @@ Func_79f54: ; 79f54 (1e:5f54)
 	ld c, $4
 	jp [hl]
 .asm_79f7e
-	ld a, [rOBP1] ; $FF00+$49
+	ld a, [rOBP1] ; $ff49
 	xor $64
-	ld [rOBP1], a ; $FF00+$49
+	ld [rOBP1], a ; $ff49
 	call Delay3
 	pop bc
 	dec c
@@ -115388,13 +115388,13 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [$c0ee], a
 	call PlaySound
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $8c
 	call PlaySound
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
-	ld [$FF00+$d7], a
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [$ffd7], a
 	ld a, [$cee9]
 	ld [$cf1d], a
 	ld c, $0
@@ -115412,7 +115412,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [$d0b5], a
 	call Func_7beb9
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [$cee9]
 	call PlayCry
 	call WaitForSoundToFinish
@@ -115491,7 +115491,7 @@ asm_7bec2: ; 7bec2 (1e:7ec2)
 Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 7, 2 ; $c3cf
 	ld hl, Coord
 	ld bc, $707
@@ -115509,7 +115509,7 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	dec b
 	jr nz, .asm_7bee3
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	pop bc
 	ret
@@ -115517,7 +115517,7 @@ asm_7befa: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
 	call GetJoypadStateLowSensitivity
-	ld a, [$FF00+$b5]
+	ld a, [$ffb5]
 	pop bc
 	and $2
 	jr nz, .asm_7bf0d
@@ -115541,7 +115541,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	call Delay3
 	ld a, $ff
 	call PlaySound
-	ld a, [$FF00+$af]
+	ld a, [$ffaf]
 	ld d, a
 	ld e, $1
 	ld b, $64
@@ -115550,7 +115550,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	xor $fe
 	ld e, a
 	add d
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	push bc
 	ld c, BANK(SFX_02_5b)
 	ld a, (SFX_02_5b - $4000) / 3
@@ -115561,7 +115561,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	dec b
 	jr nz, .asm_7bf30
 	ld a, d
-	ld [$FF00+$af], a
+	ld [$ffaf], a
 	ld a, $ff
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
@@ -115618,10 +115618,10 @@ GetMachinePrice: ; 7bf86 (1e:7f86)
 	swap a
 .asm_7bf9d
 	and $f0
-	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
+	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
-	ld [$FF00+$8d], a
+	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [$ff8d], a
 	ret
 
 TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)

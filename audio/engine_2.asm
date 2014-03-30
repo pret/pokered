@@ -20,10 +20,10 @@ Func_21879:: ; 21879 (8:5879)
 	set 7, a
 	ld [$c002], a
 	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1a], a
+	ld [$ff25], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	jr .nextChannel
 .applyAffects
 	call Music8_ApplyMusicAffects
@@ -190,9 +190,9 @@ Music8_endchannel: ; 21967 (8:5967)
 	cp CH6
 	jr nz, .notSfxChannel3
 	ld a, $0
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 .notSfxChannel3
 	jr nz, .asm_219a3
 	ld a, [$c003]
@@ -226,9 +226,9 @@ Music8_endchannel: ; 21967 (8:5967)
 .asm_219c0
 	ld hl, Unknown_222de
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$FF00+$25], a
+	ld [$ff25], a
 .asm_219c9
 	ld a, [$c02a]
 	cp $14
@@ -248,7 +248,7 @@ Music8_endchannel: ; 21967 (8:5967)
 	ret c
 .asm_219e6
 	ld a, [$c005]
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c005], a
 .asm_219ef
@@ -541,7 +541,7 @@ Music8_stereopanning: ; 21bc5 (8:5bc5)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music8_executemusic ; no
 	call Music8_GetNextMusicByte ; yes
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	jp Music8_endchannel
 
 Music8_executemusic: ; 21bd1 (8:5bd1)
@@ -623,7 +623,7 @@ Music8_unknownsfx0x10: ; 21c40 (8:5c40)
 	bit 0, [hl]
 	jr nz, Music8_note ; no
 	call Music8_GetNextMusicByte ; yes
-	ld [$FF00+$10], a
+	ld [$ff10], a
 	jp Music8_endchannel
 
 Music8_note: ; 21c5c (8:5c5c)
@@ -744,9 +744,9 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld b, $0
 	ld hl, Unknown_222de
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	jr .done
 .notSfxChannel3
 	ld b, $2
@@ -817,7 +817,7 @@ Func_21d79: ; 21d79 (8:5d79)
 	ld b, $0
 	ld hl, Unknown_222e6
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	or [hl]
 	ld d, a
 	ld a, c
@@ -836,7 +836,7 @@ Func_21d79: ; 21d79 (8:5d79)
 	add hl, bc
 	and [hl]
 	ld d, a
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	ld hl, Unknown_222de
 	add hl, bc
 	and [hl]
@@ -844,7 +844,7 @@ Func_21d79: ; 21d79 (8:5d79)
 	ld d, a
 .skip
 	ld a, d
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	ret
 
 Func_21daa: ; 21daa (8:5daa)
@@ -897,7 +897,7 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	ld hl, $ff30
 	ld b, $f
 	ld a, $0
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 .loop
 	ld a, [de]
 	inc de
@@ -907,7 +907,7 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	and a
 	jr nz, .loop
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	pop de
 .notSfxChannel3
 	ld a, d
@@ -1394,17 +1394,17 @@ Func_22035:: ; 22035 (8:6035)
 	ld a, $ff
 	ld [$c004], a
 	xor a
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	ld a, $8
-	ld [$FF00+$10], a
+	ld [$ff10], a
 	ld a, $0
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	xor a
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	jp Func_2224e
 
 Func_2210d: ; 2210d (8:610d)
@@ -1550,7 +1550,7 @@ Func_2210d: ; 2210d (8:610d)
 	cp $4
 	jr nz, .asm_221ea
 	ld a, $8
-	ld [$FF00+$10], a
+	ld [$ff10], a
 .asm_221ea
 	ld a, c
 	and a
@@ -1560,22 +1560,22 @@ Func_2210d: ; 2210d (8:610d)
 
 Func_221f3: ; 221f3 (8:61f3)
 	ld a, $80
-	ld [$FF00+$26], a
-	ld [$FF00+$1a], a
+	ld [$ff26], a
+	ld [$ff1a], a
 	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1c], a
+	ld [$ff25], a
+	ld [$ff1c], a
 	ld a, $8
-	ld [$FF00+$10], a
-	ld [$FF00+$12], a
-	ld [$FF00+$17], a
-	ld [$FF00+$21], a
+	ld [$ff10], a
+	ld [$ff12], a
+	ld [$ff17], a
+	ld [$ff21], a
 	ld a, $40
-	ld [$FF00+$14], a
-	ld [$FF00+$19], a
-	ld [$FF00+$23], a
+	ld [$ff14], a
+	ld [$ff19], a
+	ld [$ff23], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c000], a
 	ld [$c003], a
@@ -1694,10 +1694,10 @@ Func_2224e: ; 2224e (8:624e)
 	ld a, [$c005]
 	and a
 	jr nz, .asm_222d4
-	ld a, [$FF00+$24]
+	ld a, [$ff24]
 	ld [$c005], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 .asm_222d4
 	ret
 

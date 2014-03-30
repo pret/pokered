@@ -1,7 +1,7 @@
 
 Func_213c8:: ; 213c8 (8:53c8)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call SaveScreenTilesToBuffer2
 	ld a, [$d5a2]
 	and a
@@ -94,7 +94,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld [wCurrentMenuItem], a ; $cc26
 	ld [wLastMenuItem], a ; $cc2a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
 SomeonesPCText: ; 2148b (8:548b)
@@ -196,7 +196,7 @@ BillsPCMenu:
 	ld de, BoxNoPCText ; $5713
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
+	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	call HandleMenuInput
 	bit 1, a
@@ -537,7 +537,7 @@ MonWasReleasedText: ; 0x21820
 	db "@"
 
 Func_21825:: ; 5824 (8:5825)
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $1
 	ret z
 	ld a, [$c109]
@@ -555,7 +555,7 @@ Func_21825:: ; 5824 (8:5825)
 	jp Func_3ef5
 
 Func_21845:: ; 5845 (8:5845)
-	ld a, [$ff00+$aa]
+	ld a, [$ffaa]
 	cp $2
 	ret z
 	ld a, [$c109]

@@ -541,7 +541,7 @@ Music8_OverwriteChannelPointer: ; 2231d (8:631d)
 SECTION "Audio Engine 3", ROMX, BANK[AUDIO_3]
 
 Func_7d13b:: ; 7d13b (1f:513b)
-	ld a, [$FF00+$dc]
+	ld a, [$ffdc]
 	ld c, $0
 	ld hl, OwnedMonValues
 .getSfxPointer
