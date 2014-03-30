@@ -30243,7 +30243,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call PlaceString
 	ld a, [$cfb9] ; level
 	push af
-	cp $64
+	cp 100
 	jr z, .Level100 ; 0x12c20 $4
 	inc a
 	ld [$cfb9], a ; Increase temporarily if not 100
@@ -102263,7 +102263,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	ret z
 ; store number of packets in B
 	ld b,a
-.loop2\@
+.loop2
 ; save B for later use
 	push bc
 ; load a non-zero value in $fff9 to disable the routine that checks actual
@@ -102279,20 +102279,20 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	ld [$ff00],a
 ;load length of packets (16 bytes)
 	ld b,$10
-.nextByte\@
+.nextByte
 ;set bit counter (8 bits per byte)
 	ld e,$08
 ; get next byte in the packet
 	ld a,[hli]
 	ld d,a
-.nextBit0\@
+.nextBit0
 	bit 0,d
 ; if 0th bit is not zero set P14=HIGH,P15=LOW (send bit 1)
 	ld a,$10
-	jr nz,.next0\@
+	jr nz,.next0
 ; else (if 0th bit is zero) set P14=LOW,P15=HIGH (send bit 0)
 	ld a,$20
-.next0\@
+.next0
 	ld [$ff00],a
 ; must set P14=HIGH,P15=HIGH between each "pulse"
 	ld a,$30
@@ -102302,9 +102302,9 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	rr d
 ; decrease bit counter so we know when we have sent all 8 bits of current byte
 	dec e
-	jr nz,.nextBit0\@
+	jr nz,.nextBit0
 	dec b
-	jr nz,.nextByte\@
+	jr nz,.nextByte
 ; send bit 1 as a "stop bit" (end of parameter data)
 	ld a,$20
 	ld [$ff00],a
@@ -102321,7 +102321,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; return if there are no more packets
 	ret z
 ; else send 16 more bytes
-	jr .loop2\@
+	jr .loop2
 
 Func_7202b: ; 7202b (1c:602b)
 	xor a
@@ -102483,15 +102483,15 @@ Func_7210b: ; 7210b (1c:610b)
 Wait7000: ; 7214a (1c:614a)
 ; each loop takes about 10 cycles so this routine actually loops through 70000
 ; cycles.
-	ld de,$1b58    ; = 7000
-.loop\@
+	ld de, 7000
+.loop
 	nop
 	nop
 	nop
 	dec de
-	ld a,d
+	ld a, d
 	or e
-	jr nz,.loop\@
+	jr nz, .loop
 	ret
 
 Func_72156: ; 72156 (1c:6156)
