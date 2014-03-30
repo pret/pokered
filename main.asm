@@ -13840,7 +13840,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [$d52e], a
 	ld a, Bank(Tset15_GFX)
 	ld [$d52b], a
-	ld hl, $17d1
+	ld hl, Tset15_Coll
 	ld a, h
 	ld [$d531], a
 	ld a, l
