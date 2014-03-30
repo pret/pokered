@@ -1,7 +1,7 @@
 ; Song ids are calculated by address to save space.
 
 music_const: MACRO
-\1 EQUS "((\2 - $4000) / 3)"
+\1 EQUS "((\2 - SFX_Headers_02) / 3)"
 ENDM
 
 	music_const MUSIC_PALLET_TOWN,         Music_PalletTown

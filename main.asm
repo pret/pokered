@@ -6996,7 +6996,7 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 	ld [$2000],a ; ROM bank 4
 	ld a,[$d700] ; walking/biking/surfing
 	ld [$d11a],a
-	ld a, (SFX_02_3f - $4000) / 3 ; Start menu sound
+	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
 	call PlaySound
 
 RedisplayStartMenu:: ; 2adf (0:2adf)
@@ -7125,7 +7125,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld a,$13
 	ld [$d125],a
 	call DisplayTextBoxID ; redraw money text box
-	ld a, (SFX_02_5a - $4000) / 3
+	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	jp WaitForSoundToFinish ; wait until sound is done playing
 
@@ -26084,7 +26084,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, (SFX_02_5e - $4000) / 3
+	ld a, (SFX_02_5e - SFX_Headers_02) / 3
 	ld c, BANK(SFX_02_5e)
 	call PlayMusic ; play music
 .musicWaitLoop ; wait for music to finish playing
@@ -41968,7 +41968,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	dec a
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
-	ld a, (SFX_02_5f - $4000) / 3
+	ld a, (SFX_02_5f - SFX_Headers_02) / 3
 	call PlayMusic
 .asm_1e9c2
 	ld a, [$c02a]
@@ -115553,7 +115553,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	ld [$ffaf], a
 	push bc
 	ld c, BANK(SFX_02_5b)
-	ld a, (SFX_02_5b - $4000) / 3
+	ld a, (SFX_02_5b - SFX_Headers_02) / 3
 	call PlayMusic
 	pop bc
 	ld c, $2
@@ -115565,7 +115565,7 @@ Func_7bf15: ; 7bf15 (1e:7f15)
 	ld a, $ff
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
-	ld a, (SFX_02_5f - $4000) / 3
+	ld a, (SFX_02_5f - SFX_Headers_02) / 3
 	call PlayMusic
 .asm_7bf57
 	ld a, [$c02a]
