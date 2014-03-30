@@ -8007,12 +8007,12 @@ Func_310e:: ; 310e (0:310e)
 .asm_3146
 	ld b, BANK(Func_1a3e0)
 	ld hl, Func_1a3e0
-	jp Bankswitch ; indirect jump to Func_1a3e0 (1a3e0 (6:63e0))
+	jp Bankswitch
 
 Func_314e:: ; 314e (0:314e)
 	ld b, BANK(Func_1a41d)
 	ld hl, Func_1a41d
-	jp Bankswitch ; indirect jump to Func_1a41d (1a41d (6:641d))
+	jp Bankswitch
 
 Func_3156:: ; 3156 (0:3156)
 	ret
@@ -8242,7 +8242,7 @@ ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 	ld b, BANK(TrainerWalkUpToPlayer)
 	ld hl, TrainerWalkUpToPlayer
-	jp Bankswitch ; indirect jump to TrainerWalkUpToPlayer (56881 (15:6881))
+	jp Bankswitch
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
@@ -8368,7 +8368,7 @@ Func_3381:: ; 3381 (0:3381)
 	push hl
 	ld b, BANK(SaveTrainerName)
 	ld hl, SaveTrainerName
-	call Bankswitch ; indirect jump to SaveTrainerName (27e4a (9:7e4a))
+	call Bankswitch
 	ld hl, UnnamedText_33cf
 	call PrintText
 	pop hl
@@ -8377,7 +8377,7 @@ Func_3381:: ; 3381 (0:3381)
 	ld [$2000], a
 	ld b, BANK(Func_1a5e7)
 	ld hl, Func_1a5e7
-	call Bankswitch ; indirect jump to Func_1a5e7 (1a5e7 (6:65e7))
+	call Bankswitch
 	jp WaitForSoundToFinish
 
 Func_33b7:: ; 33b7 (0:33b7)
@@ -8759,7 +8759,7 @@ Func_3566:: ; 3566 (0:3566)
 Func_359e:: ; 359e (0:359e)
 	ld b, BANK(Func_13a58)
 	ld hl, Func_13a58
-	jp Bankswitch ; indirect jump to Func_13a58 (13a58 (4:7a58))
+	jp Bankswitch
 
 ; tests if player's money are at least as much as [$ff9f]
 ; sets carry flag if not enough money
@@ -10388,7 +10388,7 @@ Func_3e08:: ; 3e08 (0:3e08)
 	call DisableLCD
 	ld b, BANK(InitMapSprites)
 	ld hl, InitMapSprites
-	call Bankswitch ; indirect jump to InitMapSprites (1785b (5:785b))
+	call Bankswitch
 	call EnableLCD
 	pop hl
 	pop af
@@ -10489,7 +10489,7 @@ Load16BitRegisters:: ; 3e94 (0:3e94)
 Func_3ead:: ; 3ead (0:3ead)
 	ld b, BANK(Func_1eb0a)
 	ld hl, Func_1eb0a
-	jp Bankswitch ; indirect jump to Func_1eb0a (1eb0a (7:6b0a))
+	jp Bankswitch
 
 Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
@@ -10515,7 +10515,7 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 .asm_3edd
 	ld b, BANK(Func_fb50)
 	ld hl, Func_fb50
-	call Bankswitch ; indirect jump to Func_fb50 (fb50 (3:7b50))
+	call Bankswitch
 	ld a, [$FF00+$db]
 	and a
 	jr z, .asm_3eec
@@ -11027,7 +11027,7 @@ ENDC
 	jr c, .asm_4459
 	ld b, BANK(Func_372ac)
 	ld hl, Func_372ac
-	call Bankswitch ; indirect jump to Func_372ac (372ac (d:72ac))
+	call Bankswitch
 	call Func_4496
 	jr .asm_443b
 .asm_4459
@@ -11057,7 +11057,7 @@ ENDC
 Func_448e: ; 448e (1:448e)
 	ld b, BANK(Func_1c98a)
 	ld hl, Func_1c98a
-	jp Bankswitch ; indirect jump to Func_1c98a (1c98a (7:498a))
+	jp Bankswitch
 
 Func_4496: ; 4496 (1:4496)
 	ld a, $98
@@ -11254,7 +11254,7 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 	ld de, VersionOnTitleScreenText ; $45a1
 	jp PlaceString
 
-; these point to special tiles specifically loaded for that purpose ad are no usual text
+; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
 IF _RED
 	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
@@ -13516,7 +13516,7 @@ Func_577d: ; 577d (1:577d)
 	call LoadMapData
 	ld b, BANK(Func_c335)
 	ld hl, Func_c335
-	call Bankswitch ; indirect jump to Func_c335 (c335 (3:4335))
+	call Bankswitch
 	pop hl
 	pop af
 	ld [hl], a
@@ -13755,7 +13755,7 @@ Func_5849:
 	ld [wMusicHeaderPointer], a
 	ld a, $2
 	ld [$c0f0], a
-	ld a, $e5
+	ld a, MUSIC_SAFARI_ZONE
 	ld [$c0ee], a
 	call PlaySound
 	ld c, $64
@@ -15265,7 +15265,7 @@ Func_6596: ; 6596 (1:6596)
 	call Func_675b
 	ld b, BANK(Func_7176c)
 	ld hl, Func_7176c
-	call Bankswitch ; indirect jump to Func_7176c (7176c (1c:576c))
+	call Bankswitch
 	FuncCoord 0, 4 ; $c3f0
 	ld hl, Coord
 	ld b, $9
@@ -15304,7 +15304,7 @@ Func_6596: ; 6596 (1:6596)
 	push af
 	ld b, BANK(Func_716f7)
 	ld hl, Func_716f7
-	call Bankswitch ; indirect jump to Func_716f7 (716f7 (1c:56f7))
+	call Bankswitch
 	pop af
 	ld [wCurrentMenuItem], a ; $cc26
 	call GetJoypadStateLowSensitivity
@@ -15349,7 +15349,7 @@ Func_6596: ; 6596 (1:6596)
 	jp z, LoadTextBoxTilePatterns
 	ld hl, Func_3ee5b
 	ld b, BANK(Func_3ee5b)
-	jp Bankswitch ; indirect jump to Func_3ee5b (3ee5b (f:6e5b))
+	jp Bankswitch
 
 .unknownPointerTable_665e: ; 665e (1:665e)
 	dw .asm_65fc
@@ -15695,7 +15695,7 @@ Func_68f8: ; 68f8 (1:68f8)
 	push af
 	ld b, BANK(Func_71882)
 	ld hl, Func_71882
-	call Bankswitch ; indirect jump to Func_71882 (71882 (1c:5882))
+	call Bankswitch
 	pop af
 	ld [$d11e], a
 	call GetMonName
@@ -16535,7 +16535,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	call CopyData
 	ld hl, Func_39b87
 	ld b, BANK(Func_39b87)
-	call Bankswitch ; indirect jump to Func_39b87 (39b87 (e:5b87))
+	call Bankswitch
 	pop hl
 .asm_6f39
 	push hl
@@ -17901,7 +17901,7 @@ Func_7861: ; 7861 (1:7861)
 	call Predef ; indirect jump to Func_3cdec (3cdec (f:4dec))
 	ld hl, ReadPlayerMonCurHPAndStatus
 	ld b, BANK(ReadPlayerMonCurHPAndStatus)
-	call Bankswitch ; indirect jump to ReadPlayerMonCurHPAndStatus (3cd43 (f:4d43))
+	call Bankswitch
 	ld hl, UnnamedText_78dc ; $78dc
 	ld a, [H_WHOSETURN] ; $FF00+$f3
 	and a
@@ -19142,7 +19142,7 @@ Func_c49d: ; c49d (3:449d)
 	push bc
 	ld b, BANK(Func_1a609)
 	ld hl, Func_1a609
-	call Bankswitch ; indirect jump to Func_1a609 (1a609 (6:6609))
+	call Bankswitch
 	jr c, .asm_c4c8
 	ld a, [W_CURMAPTILESET] ; $d367
 	add a
@@ -27094,7 +27094,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld d, a
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
+	call Bankswitch
 	pop de
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
 	ld [de], a
@@ -27666,7 +27666,7 @@ asm_ef82: ; ef82 (3:6f82)
 	call Func_eedc
 	ld b, BANK(Func_79e96)
 	ld hl, Func_79e96
-	call Bankswitch ; indirect jump to Func_79e96 (79e96 (1e:5e96))
+	call Bankswitch
 	ld a, $1
 	ld [$cfcb], a
 	ld a, $ac
@@ -28164,7 +28164,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ret nz
 	ld hl, Func_79f54
 	ld b, BANK(Func_79f54)
-	call Bankswitch ; indirect jump to Func_79f54 (79f54 (1e:5f54))
+	call Bankswitch
 	call DiscardButtonPresses
 	ld [wJoypadForbiddenButtonsMask], a
 	call Func_f2dd
@@ -28379,7 +28379,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld d, a
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
+	call Bankswitch
 	pop de
 	inc de
 	ld a, [H_MULTIPLICAND] ; write experience
@@ -28675,7 +28675,7 @@ Func_f51e: ; f51e (3:751e)
 	call LoadMonData
 	ld b, BANK(Func_58f43)
 	ld hl, Func_58f43
-	call Bankswitch ; indirect jump to Func_58f43 (58f43 (16:4f43))
+	call Bankswitch
 	ld a, d
 	ld [W_CURENEMYLVL], a ; $d127
 	pop hl
@@ -29607,9 +29607,9 @@ Func_fb50: ; fb50 (3:7b50)
 	ld [$FF00+$db], a
 	ld b, BANK(Func_52673)
 	ld hl, Func_52673
-	jp Bankswitch ; indirect jump to Func_52673 (52673 (14:6673))
+	jp Bankswitch
 
-; format: db tileset id, bookshelf tile id, unknown
+; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
 	db $17,$30,$3A
 	db $08,$3D,$3F
@@ -31691,7 +31691,7 @@ Func_137aa: ; 137aa (4:77aa)
 	call ClearScreen
 	ld hl, Func_372d6
 	ld b, BANK(Func_372d6)
-	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
+	call Bankswitch
 	ld a, [$cf0b]
 	cp $1
 	ld de, YouWinText ; $7853
@@ -31780,7 +31780,7 @@ Func_13870: ; 13870 (4:7870)
 	ret nz
 	ld hl, Func_c49d
 	ld b, BANK(Func_c49d)
-	call Bankswitch ; indirect jump to Func_c49d (c49d (3:449d))
+	call Bankswitch
 	jr nc, .asm_13888
 .asm_13884
 	ld a, $1
@@ -31789,7 +31789,7 @@ Func_13870: ; 13870 (4:7870)
 .asm_13888
 	ld hl, Func_128d8
 	ld b, BANK(Func_128d8)
-	call Bankswitch ; indirect jump to Func_128d8 (128d8 (4:68d8))
+	call Bankswitch
 	jr z, .asm_13884
 	ld a, [$d0db]
 	and a
@@ -33283,7 +33283,7 @@ Func_17d7d: ; 17d7d (5:7d7d)
 	ld [W_ISLINKBATTLE], a ; $d12b
 	ld hl, Func_3ad0e
 	ld b, BANK(Func_3ad0e)
-	call Bankswitch ; indirect jump to Func_3ad0e (3ad0e (e:6d0e))
+	call Bankswitch
 	xor a
 	ld [W_ISLINKBATTLE], a ; $d12b
 	jp Func_2307
@@ -34603,13 +34603,13 @@ PewterCityScript1: ; 19280 (6:5280)
 	call Func_32f9
 	ld a, $3
 	ld [$ff00+$8c], a
-	ld de, MovementData_192ce ; $52ce
+	ld de, MovementData_PewterMuseumGuyExit ; $52ce
 	call MoveSprite
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_192ce: ; 192ce (6:52ce)
+MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
 	db $00,$00,$00,$00,$FF
 
 PewterCityScript2: ; 192d3 (6:52d3)
@@ -34669,13 +34669,13 @@ PewterCityScript4: ; 19305 (6:5305)
 	call Func_32f9
 	ld a, $5
 	ld [$ff00+$8c], a
-	ld de, MovementData_19353
+	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
 
-MovementData_19353: ; 19353 (6:5353)
+MovementData_PewterGymGuyExit: ; 19353 (6:5353)
 	db $C0,$C0,$C0,$C0,$C0,$FF
 
 PewterCityScript5: ; 19359 (6:5359)
@@ -37049,7 +37049,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
-	ld a, $e1
+	ld a, MUSIC_MUSEUM_GUY
 	ld [$c0ee], a
 	call PlaySound
 	ld a, [$cf13]
@@ -37057,7 +37057,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld [$cf17], a
 	call Func_3486
 	ld hl, $ccd3
-	ld de, RLEList_1a559
+	ld de, RLEList_PewterMuseumPlayer
 	call DecodeRLEList
 	dec a
 	ld [$cd38], a
@@ -37066,7 +37066,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld a, $4f
 	call Predef
 	ld hl, $cc97
-	ld de, RLEList_1a562
+	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
 	ld hl, $d72e
 	res 7, [hl]
@@ -37074,14 +37074,14 @@ Func_1a514: ; 1a514 (6:6514)
 	ld [$cf10], a
 	ret
 
-RLEList_1a559: ; 1a559 (6:6559)
+RLEList_PewterMuseumPlayer: ; 1a559 (6:6559)
 	db $00, $01
 	db $40, $03
 	db $20, $0D
 	db $40, $06
 	db $FF
 
-RLEList_1a562: ; 1a562 (6:6562)
+RLEList_PewterMuseumGuy: ; 1a562 (6:6562)
 	db $40, $06
 	db $80, $0D
 	db $40, $03
@@ -37106,7 +37106,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
-	ld a, $e1
+	ld a, MUSIC_MUSEUM_GUY
 	ld [$c0ee], a
 	call PlaySound
 	ld a, [$cf13]
@@ -37115,7 +37115,7 @@ Func_1a581: ; 1a581 (6:6581)
 	xor a
 	ld [$c206], a
 	ld hl, $ccd3
-	ld de, RLEList_1a5cd
+	ld de, RLEList_PewterGymPlayer
 	call DecodeRLEList
 	dec a
 	ld [$cd38], a
@@ -37124,7 +37124,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld a, $4f
 	call Predef
 	ld hl, $cc97
-	ld de, RLEList_1a5da
+	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
 	ld hl, $d72e
 	res 7, [hl]
@@ -37134,7 +37134,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld [$cf10], a
 	ret
 
-RLEList_1a5cd: ; 1a5cd (6:65cd)
+RLEList_PewterGymPlayer: ; 1a5cd (6:65cd)
 	db $00, $01
 	db $10, $02
 	db $80, $05
@@ -37143,7 +37143,7 @@ RLEList_1a5cd: ; 1a5cd (6:65cd)
 	db $20, $0F
 	db $FF
 
-RLEList_1a5da: ; 1a5da (6:65da)
+RLEList_PewterGymGuy: ; 1a5da (6:65da)
 	db $00, $02
 	db $80, $0F
 	db $40, $05
@@ -37666,7 +37666,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	jp z, InitGame
 	ld b, BANK(Func_73b6a)
 	ld hl, Func_73b6a
-	call Bankswitch ; indirect jump to Func_73b6a (73b6a (1c:7b6a))
+	call Bankswitch
 	jp InitGame
 
 UnnamedText_1c9c1: ; 1c9c1 (7:49c1)
@@ -39192,8 +39192,8 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ret
 
 RLEMovement1d4bb: ; 1d4bb (7:54bb)
-	db $20
-	TX_RAM $0240
+	db $20, $01
+	db $40, $02
 	db $ff
 
 ViridianMartScript1: ; 1d4c0 (7:54c0)
@@ -42720,7 +42720,7 @@ Func_27f86: ; 27f86 (9:7f86)
 	set 2, [hl]
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
-	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	call Bankswitch
 	ld hl, UnnamedText_27fb3 ; $7fb2
 	jp PrintText
 .asm_27fa5
@@ -42728,7 +42728,7 @@ Func_27f86: ; 27f86 (9:7f86)
 	call DelayFrames
 	ld hl, Func_3fb53
 	ld b, BANK(Func_3fb53)
-	jp Bankswitch ; indirect jump to Func_3fb53 (3fb53 (f:7b53))
+	jp Bankswitch
 
 UnnamedText_27fb3: ; 27fb3 (9:7fb3)
 	db $0a
@@ -42868,7 +42868,7 @@ MoltresPicBack: ; 2be02 (a:7e02)
 Func_2bea9: ; 2bea9 (a:7ea9)
 	ld hl, MoveHitTest
 	ld b, BANK(MoveHitTest)
-	call Bankswitch ; indirect jump to MoveHitTest (3e56b (f:656b))
+	call Bankswitch
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
 	jr nz, .asm_2bee7
@@ -42892,7 +42892,7 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 	set 7, [hl]
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
-	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	call Bankswitch
 	ld hl, UnnamedText_2bef2 ; $7ef2
 	jp PrintText
 .asm_2bee7
@@ -43709,7 +43709,7 @@ Func_372d6: ; 372d6 (d:72d6)
 	ld [$cfcb], a
 	ld hl, Func_3a948
 	ld b, BANK(Func_3a948)
-	call Bankswitch ; indirect jump to Func_3a948 (3a948 (e:6948))
+	call Bankswitch
 	ld c, $96
 	jp DelayFrames
 
@@ -44695,10 +44695,13 @@ Func_37ca1: ; 37ca1 (d:7ca1)
 	jr .asm_37cc7
 
 PointerTable_37ce6: ; 37ce6 (d:7ce6)
-	dw Unknown_37cea
-	dw Unknown_37d06
+	dw PewterMuseumGuyCoords
+	dw PewterGymGuyCoords
 
-Unknown_37cea: ; 37cea (d:7cea)
+; these are the four coordinates of the spaces below, above, to the left and
+; to the right of the museum guy, and pointers to different movements for
+; the player to make to get positioned before the main movement.
+PewterMuseumGuyCoords: ; 37cea (d:7cea)
 	db 18, 27
 	dw .down
 	db 16, 27
@@ -44717,7 +44720,10 @@ Unknown_37cea: ; 37cea (d:7cea)
 .right
 	db $40, $20, $ff
 
-Unknown_37d06: ; 37d06 (d:7d06)
+; these are the five coordinates which trigger the gym guy and pointers to
+; different movements for the player to make to get positioned before the
+; main movement
+PewterGymGuyCoords: ; 37d06 (d:7d06)
 	db 16, 34
 	dw .one
 	db 17, 35
@@ -50924,7 +50930,7 @@ Func_396d3: ; 396d3 (e:56d3)
 	call GoPAL_SET
 	ld hl, Func_3f04b
 	ld b, BANK(Func_3f04b)
-	call Bankswitch ; indirect jump to Func_3f04b (3f04b (f:704b))
+	call Bankswitch
 	FuncCoord 19, 0 ; $c3b3
 	ld hl, Coord
 	ld c, $0
@@ -53394,7 +53400,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call CleanLCD_OAM
 	ld hl, Func_7bde9
 	ld b, BANK(Func_7bde9)
-	call Bankswitch ; indirect jump to Func_7bde9 (7bde9 (1e:7de9))
+	call Bankswitch
 	jp c, Func_3af2e
 	ld hl, UnnamedText_3af3e ; $6f3e
 	call PrintText
@@ -56356,7 +56362,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	call ResetLCD_OAM
 	ld hl, Func_58d99
 	ld b, BANK(Func_58d99)
-	jp Bankswitch ; indirect jump to Func_58d99 (58d99 (16:4d99))
+	jp Bankswitch
 
 Func_3c0ff: ; 3c0ff (f:40ff)
 	push bc
@@ -56434,7 +56440,7 @@ Func_3c11e: ; 3c11e (f:411e)
 .asm_3c17a
 	ld hl, Func_4277
 	ld b, BANK(Func_4277)
-	call Bankswitch ; indirect jump to Func_4277 (4277 (1:4277))
+	call Bankswitch
 	ld a, [$cffb]
 	add a
 	ld b, a
@@ -56519,7 +56525,7 @@ asm_3c202: ; 3c202 (f:4202)
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	ld hl, AnimationSlideEnemyMonOut
 	ld b, BANK(AnimationSlideEnemyMonOut)
-	jp Bankswitch ; indirect jump to AnimationSlideEnemyMonOut (792b9 (1e:52b9))
+	jp Bankswitch
 
 UnnamedText_3c229: ; 3c229 (f:4229)
 	TX_FAR _UnnamedText_3c229
@@ -57074,7 +57080,7 @@ FaintEnemyPokemon ; 0x3c567
 	ld [$cc5b], a
 	ld hl, Func_5524f
 	ld b, BANK(Func_5524f)
-	call Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
+	call Bankswitch
 	pop af
 	ret z
 	ld a, $1
@@ -57090,7 +57096,7 @@ FaintEnemyPokemon ; 0x3c567
 	ld [W_PLAYERMONSALIVEFLAGS], a
 	ld hl, Func_5524f
 	ld b, BANK(Func_5524f)
-	jp Bankswitch ; indirect jump to Func_5524f (5524f (15:524f))
+	jp Bankswitch
 
 EnemyMonFainted: ; 0x3c63e
 	TX_FAR _EnemyMonFainted
@@ -57127,7 +57133,7 @@ Func_3c664: ; 3c664 (f:4664)
 	call Func_3ce90
 	ld hl, DrawEnemyPokeballs
 	ld b, BANK(DrawEnemyPokeballs)
-	call Bankswitch ; indirect jump to Func_3a857 (3a857 (e:6857))
+	call Bankswitch
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr nz, .asm_3c687
@@ -57934,7 +57940,7 @@ Func_3cc13: ; 3cc13 (f:4c13)
 Func_3cc91: ; 3cc91 (f:4c91)
 	ld hl, Func_58e59
 	ld b, BANK(Func_58e59)
-	call Bankswitch ; indirect jump to Func_58e59 (58e59 (16:4e59))
+	call Bankswitch
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	or [hl]
@@ -58044,7 +58050,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	call ClearScreenArea
 	ld hl, Func_3a902
 	ld b, BANK(Func_3a902)
-	call Bankswitch ; indirect jump to Func_3a902 (3a902 (e:6902))
+	call Bankswitch
 	FuncCoord 18, 9 ; $c466
 	ld hl, Coord
 	ld [hl], $73
@@ -58112,7 +58118,7 @@ Func_3cdec: ; 3cdec (f:4dec)
 	call ClearScreenArea
 	ld hl, Func_3a919
 	ld b, BANK(Func_3a919)
-	call Bankswitch ; indirect jump to Func_3a919 (3a919 (e:6919))
+	call Bankswitch
 	ld de, W_ENEMYMONNAME
 	FuncCoord 1, 0 ; $c3a1
 	ld hl, Coord
@@ -58620,7 +58626,7 @@ Func_3d119: ; 3d119 (f:5119)
 Func_3d1ba: ; 3d1ba (f:51ba)
 	ld hl, Func_58ed1
 	ld b, BANK(Func_58ed1)
-	call Bankswitch ; indirect jump to Func_58ed1 (58ed1 (16:4ed1))
+	call Bankswitch
 	ld c, $32
 	call DelayFrames
 	call Func_3ccfa
@@ -58677,7 +58683,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	call CopyData
 	ld hl, Func_39b87
 	ld b, BANK(Func_39b87)
-	call Bankswitch ; indirect jump to Func_39b87 (39b87 (e:5b87))
+	call Bankswitch
 	ret
 
 .writemoves
@@ -59083,7 +59089,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [$cc49], a
 	ld hl, GetMaxPP
 	ld b, BANK(GetMaxPP)
-	call Bankswitch ; indirect jump to GetMaxPP (e677 (3:6677))
+	call Bankswitch
 	ld hl, wCurrentMenuItem ; $cc26
 	ld c, [hl]
 	inc [hl]
@@ -59250,7 +59256,7 @@ Func_3d605: ; 3d605 (f:5605)
 	ld [$cc42], a
 	ld hl, Func_4c05
 	ld b, BANK(Func_4c05)
-	call Bankswitch ; indirect jump to Func_4c05 (4c05 (1:4c05))
+	call Bankswitch
 .asm_3d63b
 	call Func_22c3
 	call DelayFrame
@@ -61971,7 +61977,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call Func_3dc5c
 	ld hl, DisplayEffectiveness
 	ld b, BANK(DisplayEffectiveness)
-	call Bankswitch ; indirect jump to DisplayEffectiveness (2fb7b (b:7b7b))
+	call Bankswitch
 	ld a, $1
 	ld [$ccf4], a
 .asm_3e83e
@@ -62497,7 +62503,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld [wMenuJoypadPollCount], a ; $cc34
 	ld hl, Func_372d6
 	ld b, BANK(Func_372d6)
-	call Bankswitch ; indirect jump to Func_372d6 (372d6 (d:72d6))
+	call Bankswitch
 	ld a, $1
 	ld [$cfcb], a
 	call ClearScreen
@@ -62507,7 +62513,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	call Predef ; indirect jump to Func_7096d (7096d (1c:496d))
 	ld hl, Func_3ee58
 	ld b, BANK(Func_3ee58)
-	call Bankswitch ; indirect jump to Func_3ee58 (3ee58 (f:6e58))
+	call Bankswitch
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld a, $ff
@@ -62605,15 +62611,15 @@ Func_3ec92: ; 3ec92 (f:6c92)
 Func_3ed02: ; 3ed02 (f:6d02)
 	ld hl, Func_39680
 	ld b, BANK(Func_39680)
-	call Bankswitch ; indirect jump to Func_39680 (39680 (e:5680))
+	call Bankswitch
 	ld hl, Func_396a7
 	ld b, BANK(Func_396a7)
-	jp Bankswitch ; indirect jump to Func_396a7 (396a7 (e:56a7))
+	jp Bankswitch
 
 Func_3ed12: ; 3ed12 (f:6d12)
 	ld hl, Func_396d3
 	ld b, BANK(Func_396d3)
-	jp Bankswitch ; indirect jump to Func_396d3 (396d3 (e:56d3))
+	jp Bankswitch
 
 Func_3ed1a: ; 3ed1a (f:6d1a)
 	ld a, $1
@@ -62974,7 +62980,7 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	ret nz
 	ld hl, Func_13870
 	ld b, BANK(Func_13870)
-	call Bankswitch ; indirect jump to Func_13870 (13870 (4:7870))
+	call Bankswitch
 	ret nz
 asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [$d35d]
@@ -62985,7 +62991,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	res 1, [hl]
 	ld hl, Func_525af
 	ld b, BANK(Func_525af)
-	call Bankswitch ; indirect jump to Func_525af (525af (14:65af))
+	call Bankswitch
 	ld a, [W_ENEMYMONID]
 	sub $c8
 	jp c, Func_3ef8b
@@ -62993,7 +62999,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	call Func_3566
 	ld hl, ReadTrainer
 	ld b, BANK(ReadTrainer)
-	call Bankswitch ; indirect jump to ReadTrainer (39c53 (e:5c53))
+	call Bankswitch
 	call Func_3ec32
 	call Func_3f04b
 	xor a
@@ -63095,7 +63101,7 @@ Func_3efeb: ; 3efeb (f:6feb)
 	call Func_3c11e
 	ld hl, Func_137aa
 	ld b, BANK(Func_137aa)
-	call Bankswitch ; indirect jump to Func_137aa (137aa (4:77aa))
+	call Bankswitch
 	pop af
 	ld [$d358], a
 	pop af
@@ -63506,7 +63512,7 @@ UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
 Func_3f2e9: ; 3f2e9 (f:72e9)
 	ld hl, Func_783f
 	ld b, BANK(Func_783f)
-	jp Bankswitch ; indirect jump to Func_783f (783f (1:783f))
+	jp Bankswitch
 
 Func_3f2f1: ; 3f2f1 (f:72f1)
 	ld hl, W_PLAYERMONCURHP ; $d015
@@ -64329,7 +64335,7 @@ Func_3f85b: ; 3f85b (f:785b)
 Func_3f884: ; 3f884 (f:7884)
 	ld hl, Func_33f57
 	ld b, BANK(Func_33f57)
-	jp Bankswitch ; indirect jump to Func_33f57 (33f57 (c:7f57))
+	jp Bankswitch
 
 Func_3f88c: ; 3f88c (f:788c)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
@@ -64506,7 +64512,7 @@ Func_3f9a6: ; 3f9a6 (f:79a6)
 Func_3f9b1: ; 3f9b1 (f:79b1)
 	ld hl, Func_52601
 	ld b, BANK(Func_52601)
-	jp Bankswitch ; indirect jump to Func_52601 (52601 (14:6601))
+	jp Bankswitch
 
 Func_3f9b9: ; 3f9b9 (f:79b9)
 	ld hl, SubstituteEffectHandler
@@ -64624,7 +64630,7 @@ UnnamedText_3fa77: ; 3fa77 (f:7a77)
 Func_3fa7c: ; 3fa7c (f:7a7c)
 	ld hl, Func_2bea9
 	ld b, BANK(Func_2bea9)
-	jp Bankswitch ; indirect jump to Func_2bea9 (2bea9 (a:7ea9))
+	jp Bankswitch
 
 Func_3fa84: ; 3fa84 (f:7a84)
 	call Func_3fba8
@@ -67129,7 +67135,7 @@ Func_4120b: ; 4120b (10:520b)
 	ld [rOBP1], a ; $FF00+$49
 	ld b, BANK(Func_7176c)
 	ld hl, Func_7176c
-	jp Bankswitch ; indirect jump to Func_7176c (7176c (1c:576c))
+	jp Bankswitch
 
 Func_41217: ; 41217 (10:5217)
 	ld hl, W_PLAYERNAME
@@ -67530,7 +67536,7 @@ Func_414e8: ; 414e8 (10:54e8)
 Func_41505: ; 41505 (10:5505)
 	ld b, BANK(Func_71882)
 	ld hl, Func_71882
-	call Bankswitch ; indirect jump to Func_71882 (71882 (1c:5882))
+	call Bankswitch
 	call Func_41558
 
 Func_41510: ; 41510 (10:5510)
@@ -68023,9 +68029,9 @@ Func_41842: ; 41842 (10:5842)
 
 Func_41849: ; 41849 (10:5849)
 	ld a, $33
-	call Predef
+	call Predef ; indirect jump to Func_79869
 	ld a, b
-	jp PlaySound ; indirect jump to Func_79869
+	jp PlaySound
 
 Func_41852: ; 41852 (10:5852)
 	ld hl, FightIntroBackMon ; $5a99
@@ -68054,7 +68060,7 @@ Func_4188a: ; 4188a (10:588a)
 	call GoPAL_SET
 	ld b, BANK(Func_4538)
 	ld hl, Func_4538
-	call Bankswitch ; indirect jump to Func_4538 (4538 (1:4538))
+	call Bankswitch
 	ld a, $e4
 	ld [rBGP], a ; $FF00+$47
 	ld c, $b4
@@ -68073,7 +68079,7 @@ Func_4188a: ; 4188a (10:588a)
 	call DelayFrames
 	ld b, BANK(Func_70044)
 	ld hl, Func_70044
-	call Bankswitch ; indirect jump to Func_70044 (70044 (1c:4044))
+	call Bankswitch
 	push af
 	pop af
 	jr c, .asm_418d0
@@ -68083,7 +68089,7 @@ Func_4188a: ; 4188a (10:588a)
 	ld a, Bank(Func_7d8ea)
 	ld [$c0ef], a
 	ld [$c0f0], a
-	ld a, $dc
+	ld a, MUSIC_INTRO_BATTLE
 	ld [$c0ee], a
 	call PlaySound
 	call Func_417f8
@@ -70868,7 +70874,7 @@ Func_45827: ; 45827 (11:5827)
 	call Delay3
 	ld b, BANK(Func_7bf15)
 	ld hl, Func_7bf15
-	call Bankswitch ; indirect jump to Func_7bf15 (7bf15 (1e:7f15))
+	call Bankswitch
 	ret
 
 SilphCoElevatorTextPointers: ; 45833 (11:5833)
@@ -73320,12 +73326,12 @@ MomHealPokemon: ; 4818a (12:418a)
 	call GBFadeOut2
 	call ReloadMapData
 	PREDEF HealPartyPredef
-	ld a, $E8
+	ld a, MUSIC_PKMN_HEALED
 	ld [$C0EE], a
 	call PlaySound ; play sound?
 .next
 	ld a, [$C026]
-	cp $E8
+	cp MUSIC_PKMN_HEALED
 	jr z, .next
 	ld a, [$D35B]
 	ld [$C0EE], a
@@ -73735,7 +73741,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 RemoveItemByIDBank12: ; 484e6 (12:44e6)
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
-	jp Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
+	jp Bankswitch
 
 UnnamedText_484ee: ; 484ee (12:44ee)
 	TX_FAR _UnnamedText_484ee
@@ -77624,11 +77630,11 @@ Func_4fda5: ; 4fda5 (13:7da5)
 	ld [W_ENEMYMONID], a
 	ld hl, Func_3eb01
 	ld b, BANK(Func_3eb01)
-	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	call Bankswitch
 	call Func_4fe11
 	ld hl, Func_e7a4
 	ld b, BANK(Func_e7a4)
-	call Bankswitch ; indirect jump to Func_e7a4 (e7a4 (3:67a4))
+	call Bankswitch
 	ld hl, $cf4b
 	ld a, [$d5a0]
 	and $7f
@@ -78859,7 +78865,7 @@ Func_5104e: ; 5104e (14:504e)
 	call PlaySound
 	ld b, BANK(Music_RivalAlternateTempo)
 	ld hl, Music_RivalAlternateTempo
-	call Bankswitch ; indirect jump to Music_RivalAlternateTempo (9b65 (2:5b65))
+	call Bankswitch
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $FF00+$8c
 	call Func_50ee6
@@ -78943,7 +78949,7 @@ Route22Script5: ; 510df (14:50df)
 	call PlaySound
 	ld b, BANK(Music_RivalAlternateStartAndTempo)
 	ld hl, Music_RivalAlternateStartAndTempo
-	call Bankswitch ; indirect jump to Music_RivalAlternateStartAndTempo (9b75 (2:5b75))
+	call Bankswitch
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_51134
@@ -80520,7 +80526,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	call PlaySound
 	ld b, BANK(Music_RivalAlternateStart)
 	ld hl, Music_RivalAlternateStart
-	call Bankswitch ; indirect jump to Music_RivalAlternateStart (9b47 (2:5b47))
+	call Bankswitch
 	ld de, MovementData_51d1d
 	ld a, [$cf0d]
 	cp $1
@@ -81425,7 +81431,7 @@ Func_525af: ; 525af (14:65af)
 .asm_525f9
 	ld hl, PlayBattleMusic
 	ld b, BANK(PlayBattleMusic)
-	jp Bankswitch ; indirect jump to PlayBattleMusic (90c6 (2:50c6))
+	jp Bankswitch
 
 Func_52601: ; 52601 (14:6601)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
@@ -81457,7 +81463,7 @@ Func_52613: ; 52613 (14:6613)
 	push hl
 	ld hl, MoveHitTest
 	ld b, BANK(MoveHitTest)
-	call Bankswitch ; indirect jump to MoveHitTest (3e56b (f:656b))
+	call Bankswitch
 	pop hl
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
@@ -81465,27 +81471,27 @@ Func_52613: ; 52613 (14:6613)
 	set 6, [hl]
 	ld hl, Func_3ed27
 	ld b, BANK(Func_3ed27)
-	call Bankswitch ; indirect jump to Func_3ed27 (3ed27 (f:6d27))
+	call Bankswitch
 	ld c, $1e
 	call DelayFrames
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
-	call Bankswitch ; indirect jump to Func_3fba8 (3fba8 (f:7ba8))
+	call Bankswitch
 	ld hl, Func_3fb6e
 	ld b, BANK(Func_3fb6e)
-	jp Bankswitch ; indirect jump to Func_3fb6e (3fb6e (f:7b6e))
+	jp Bankswitch
 .asm_52659
 	ld c, $32
 	call DelayFrames
 	ld hl, Func_3fb5e
 	ld b, BANK(Func_3fb5e)
-	jp Bankswitch ; indirect jump to Func_3fb5e (3fb5e (f:7b5e))
+	jp Bankswitch
 .asm_52666
 	ld c, $32
 	call DelayFrames
 	ld hl, Func_3dc51
 	ld b, BANK(Func_3dc51)
-	jp Bankswitch ; indirect jump to Func_3dc51 (3dc51 (f:5c51))
+	jp Bankswitch
 
 Func_52673: ; 52673 (14:6673)
 	ld hl, SilphCoMapList
@@ -82577,7 +82583,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld d, $64
 	ld hl, CalcExperience
 	ld b, BANK(CalcExperience)
-	call Bankswitch ; indirect jump to CalcExperience (58f6a (16:4f6a))
+	call Bankswitch
 	ld a, [H_NUMTOPRINT] ; $FF00+$96 (aliases: H_MULTIPLICAND)
 	ld b, a
 	ld a, [$FF00+$97]
@@ -82615,7 +82621,7 @@ Func_5525f: ; 5525f (15:525f)
 	push hl
 	ld b, BANK(Func_58f43)
 	ld hl, Func_58f43
-	call Bankswitch ; indirect jump to Func_58f43 (58f43 (16:4f43))
+	call Bankswitch
 	pop hl
 	ld a, [hl]
 	cp d
@@ -82690,19 +82696,19 @@ Func_5525f: ; 5525f (15:525f)
 	ld [$d11e], a
 	ld hl, Func_3ed99
 	ld b, BANK(Func_3ed99)
-	call Bankswitch ; indirect jump to Func_3ed99 (3ed99 (f:6d99))
+	call Bankswitch
 	ld hl, Func_3ed1a
 	ld b, BANK(Func_3ed1a)
-	call Bankswitch ; indirect jump to Func_3ed1a (3ed1a (f:6d1a))
+	call Bankswitch
 	ld hl, Func_3ee19
 	ld b, BANK(Func_3ee19)
-	call Bankswitch ; indirect jump to Func_3ee19 (3ee19 (f:6e19))
+	call Bankswitch
 	ld hl, Func_3cd60
 	ld b, BANK(Func_3cd60)
-	call Bankswitch ; indirect jump to Func_3cd60 (3cd60 (f:4d60))
+	call Bankswitch
 	ld hl, Func_3ee94
 	ld b, BANK(Func_3ee94)
-	call Bankswitch ; indirect jump to Func_3ee94 (3ee94 (f:6e94))
+	call Bankswitch
 	call SaveScreenTilesToBuffer1
 .asm_553f7
 	ld hl, UnnamedText_554dd ; $54dd
@@ -82713,7 +82719,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld d, $1
 	ld hl, PrintStatsBox
 	ld b, BANK(PrintStatsBox)
-	call Bankswitch ; indirect jump to PrintStatsBox (12ae4 (4:6ae4))
+	call Bankswitch
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	xor a
@@ -86651,7 +86657,7 @@ Func_58d99: ; 58d99 (16:4d99)
 	push hl
 	ld hl, Func_3a849
 	ld b, BANK(Func_3a849)
-	call Bankswitch ; indirect jump to Func_3a849 (3a849 (e:6849))
+	call Bankswitch
 	pop hl
 	call PrintText
 	jr asm_58e3a
@@ -86667,7 +86673,7 @@ Func_58d99: ; 58d99 (16:4d99)
 	jr z, .asm_58df5
 	ld hl, Func_3eb01
 	ld b, BANK(Func_3eb01)
-	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	call Bankswitch
 	jr .asm_58daa
 .asm_58df5
 	ld hl, UnnamedText_58e45 ; $4e45
@@ -86685,10 +86691,10 @@ Func_58d99: ; 58d99 (16:4d99)
 	call PrintText
 	ld hl, Func_3eb01
 	ld b, BANK(Func_3eb01)
-	call Bankswitch ; indirect jump to Func_3eb01 (3eb01 (f:6b01))
+	call Bankswitch
 	ld hl, Func_708ca
 	ld b, BANK(Func_708ca)
-	call Bankswitch ; indirect jump to Func_708ca (708ca (1c:48ca))
+	call Bankswitch
 	ld hl, UnnamedText_58e3b ; $4e3b
 	call PrintText
 
@@ -90233,7 +90239,7 @@ RemoveGuardDrink: ; 5a59f (16:659f)
 	jr z, .drinkLoop
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
-	jp Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
+	jp Bankswitch
 
 GuardDrinksList: ; 5a5b7 (16:65b7)
 	db FRESH_WATER, SODA_POP, LEMONADE, $00
@@ -95684,7 +95690,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld [$FF00+$db], a
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
-	call Bankswitch ; indirect jump to RemoveItemByID (17f37 (5:7f37))
+	call Bankswitch
 	ld hl, UnnamedText_610b8
 	call PrintText
 	ld hl, $d7a3
@@ -96577,12 +96583,12 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 .asm_61908
-	ld a, $e8
+	ld a, MUSIC_PKMN_HEALED
 	ld [$c0ee], a
 	call PlaySound
 .asm_61910
 	ld a, [$c026]
-	cp $e8
+	cp MUSIC_PKMN_HEALED
 	jr z, .asm_61910 ; 0x61915 $f9
 	call Func_2307
 	ld hl, $d803
@@ -98760,14 +98766,14 @@ Func_70433: ; 70433 (1c:4433)
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 .asm_70495
-	ld a, $e8
+	ld a, MUSIC_PKMN_HEALED
 	ld [$c0ee], a
 	call PlaySound
 	ld d, $28
 	call Func_704f3
 .asm_704a2
 	ld a, [$c026]
-	cp $e8
+	cp MUSIC_PKMN_HEALED
 	jr z, .asm_704a2
 	ld c, $20
 	call DelayFrames
@@ -99356,7 +99362,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld [H_WHOSETURN], a ; $FF00+$f3
 	ld hl, Func_79793
 	ld b, BANK(Func_79793)
-	call Bankswitch ; indirect jump to Func_79793 (79793 (1e:5793))
+	call Bankswitch
 	ld d, $80
 	call Func_704f3
 .asm_708f6
@@ -100678,7 +100684,7 @@ Func_711c4: ; 711c4 (1c:51c4)
 Func_711ef: ; 711ef (1c:51ef)
 	ld b, BANK(Func_e9cb)
 	ld hl, Func_e9cb
-	call Bankswitch ; indirect jump to Func_e9cb (e9cb (3:69cb))
+	call Bankswitch
 	call Func_712d9
 	ld hl, wOAMBuffer
 	ld de, $cee9
@@ -101771,7 +101777,7 @@ Func_71ca2: ; 71ca2 (1c:5ca2)
 	call DelayFrames
 	ld b, BANK(LoadWildData)
 	ld hl, LoadWildData
-	jp Bankswitch ; indirect jump to LoadWildData (ceb8 (3:4eb8))
+	jp Bankswitch
 
 Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld hl, wWhichTrade ; $cd3d
@@ -103805,7 +103811,7 @@ CeruleanHouse2Blocks: ; 7404c (1d:404c)
 Func_7405c: ; 7405c (1d:405c)
 	ld b, BANK(Func_701a0)
 	ld hl, Func_701a0
-	call Bankswitch ; indirect jump to Func_701a0 (701a0 (1c:41a0))
+	call Bankswitch
 	call ClearScreen
 	ld c, $64
 	call DelayFrames
@@ -104051,7 +104057,7 @@ Func_7418e: ; 7418e (1d:418e)
 	push de
 	ld b, BANK(Func_4541)
 	ld hl, Func_4541
-	call Bankswitch ; indirect jump to Func_4541 (4541 (1:4541))
+	call Bankswitch
 	pop de
 	pop de
 	jr .asm_7419b
@@ -104584,7 +104590,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 .asm_74980
 	ld b, BANK(Func_44fd7)
 	ld hl, Func_44fd7
-	jp Bankswitch ; indirect jump to Func_44fd7 (44fd7 (11:4fd7))
+	jp Bankswitch
 
 ViridianGymScript3: ; 74988 (1d:4988)
 	ld a, [W_ISINBATTLE] ; $d057
@@ -111642,7 +111648,7 @@ Func_79f54: ; 79f54 (1e:5f54)
 	call Func_79fc0
 	ld b, BANK(asm_f055)
 	ld hl, asm_f055
-	call Bankswitch ; indirect jump to asm_f055 (f055 (3:7055))
+	call Bankswitch
 	ld c, $8
 .asm_79f73
 	push bc
