@@ -15753,7 +15753,7 @@ Func_695d: ; 695d (1:695d)
 	call ClearScreen
 	call Delay3
 	ld de, RedPicFront ; $6ede
-	ld b, $4
+	ld b, BANK(RedPicFront)
 	call IntroPredef3B
 .asm_6999
 	ld hl, UnnamedText_699f ; $699f
@@ -31244,7 +31244,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 ; loads tile patterns and draws everything except for gym leader faces / badges
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedPicFront
-	ld bc,$0401
+	ld bc,(BANK(RedPicFront) << 8) | $01
 	ld a,$3b
 	call Predef
 	call DisableLCD
@@ -32078,11 +32078,11 @@ Func_13a58: ; 13a58 (4:7a58)
 	jr nz, .asm_13a86
 	ld hl, W_RIVALNAME ; $d34a
 	ld a, [W_TRAINERCLASS] ; $d031
-	cp $19
+	cp SONY1
 	jr z, .asm_13a86
-	cp $2a
+	cp SONY2
 	jr z, .asm_13a86
-	cp $2b
+	cp SONY3
 	jr z, .asm_13a86
 	ld [$d0b5], a
 	ld a, TRAINER_NAME
@@ -38664,33 +38664,33 @@ OaksLabText41: ; 1d0fd (7:50fd)
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
 	db $8
-	ld a, $b1
+	ld a, SQUIRTLE
 	ld [$cd3d], a
 	ld a, $3
 	ld [$cd3e], a
-	ld a, $b0
+	ld a, CHARMANDER
 	ld b, $2
 	jr OaksLabScript_1d133 ; 0x1d111 $20
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
 	db $8
-	ld a, $99
+	ld a, BULBASAUR
 	ld [$cd3d], a
 	ld a, $4
 	ld [$cd3e], a
-	ld a, $b1
+	ld a, SQUIRTLE
 	ld b, $3
 	jr OaksLabScript_1d133 ; 0x1d122 $f
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
 	db $8
-	ld a, $b0
+	ld a, CHARMANDER
 	ld [$cd3d], a
 	ld a, $2
 	ld [$cd3e], a
-	ld a, $99
+	ld a, BULBASAUR
 	ld b, $4
 
 OaksLabScript_1d133: ; 1d133 (7:5133)
@@ -63126,7 +63126,7 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	ld d, a ; de contains pointer to trainer pic
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	and a
-	ld a, Bank(YoungsterPic) ; this is where all the trainer pics are (not counting Red's)
+	ld a, Bank(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
 	jr z, .loadSprite
 	ld a, Bank(RedPicFront)
 .loadSprite
@@ -77438,6 +77438,8 @@ SafariZoneSecretHouseBlocks: ; 4a37f (12:637f)
 
 SECTION "bank13",ROMX,BANK[$13]
 
+TrainerPics:
+
 YoungsterPic: ; 4c000 (13:4000)
 	INCBIN "pic/trainer/youngster.pic"
 BugCatcherPic: ; 4c0c6 (13:40c6)
@@ -88108,9 +88110,9 @@ Route12Script0: ; 59619 (16:5619)
 	ld a, $d
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $84
+	ld a, SNORLAX
 	ld [W_CUROPPONENT], a ; $d059
-	ld a, $1e
+	ld a, 30
 	ld [W_CURENEMYLVL], a ; $d127
 	ld a, $1d
 	ld [$cc4d], a
@@ -98610,8 +98612,8 @@ HoFMonInfoText: ; 70329 (1c:4329)
 	next "TYPE2/@"
 
 Func_7033e: ; 7033e (1c:433e)
-	ld de, Unknown_72ede ; $6ede
-	ld a, $4
+	ld de, RedPicFront ; $6ede
+	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
 	ld hl, S_SPRITEBUFFER1
 	ld de, $a000
@@ -103035,10 +103037,7 @@ IF _BLUE
 	INCBIN "gfx/blue/sgbborder.map"
 ENDC
 
-	ds $56
-
-Unknown_72ede: ; 72ede (1c:6ede)
-	ds $AA
+	ds $100
 
 IF _RED
 	RGB 30,29,29 ; PAL_SGB1
