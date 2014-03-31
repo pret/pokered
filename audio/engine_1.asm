@@ -20,10 +20,10 @@ Func_9103:: ; 0x9103
 	set 7, a
 	ld [$c002], a
 	xor a
-	ld [$ff00+$25], a
-	ld [$ff00+$1a], a
+	ld [$ff25], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 	jr .nextChannel
 .asm_912e
 	call Music2_ApplyMusicAffects
@@ -183,9 +183,9 @@ Music2_endchannel: ; 0x91e6
 	cp CH6
 	jr nz, .notSfxChannel3
 	ld a, $0
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 .notSfxChannel3
 	jr nz, .asm_9222
 	ld a, [$c003]
@@ -219,9 +219,9 @@ Music2_endchannel: ; 0x91e6
 .asm_923f
 	ld hl, Unknown_9b1f
 	add hl, bc
-	ld a, [$ff00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$ff00+$25], a
+	ld [$ff25], a
 .asm_9248
 	ld a, [$c02a]
 	cp $14
@@ -241,7 +241,7 @@ Music2_endchannel: ; 0x91e6
 	ret c
 .asm_9265
 	ld a, [$c005]
-	ld [$ff00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c005], a
 .asm_926e
@@ -534,7 +534,7 @@ Music2_stereopanning: ; 0x9444
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music2_executemusic ; no
 	call Music2_GetNextMusicByte ; yes
-	ld [$ff00+$24], a ; store stereopanning
+	ld [$ff24], a ; store stereopanning
 	jp Music2_endchannel
 
 Music2_executemusic: ; 0x9450
@@ -616,7 +616,7 @@ Music2_unknownsfx0x10:
 	bit 0, [hl]
 	jr nz, Music2_note ; no
 	call Music2_GetNextMusicByte ; yes
-	ld [$ff00+$10], a
+	ld [$ff10], a
 	jp Music2_endchannel
 
 Music2_note:
@@ -737,9 +737,9 @@ Music2_notepitch: ; 0x9568
 	ld b, $0
 	ld hl, Unknown_9b1f
 	add hl, bc
-	ld a, [$ff00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$ff00+$25], a
+	ld [$ff25], a
 	jr .done
 .notSfxChannel3
 	ld b, $2
@@ -810,7 +810,7 @@ Func_95f8: ; 0x95f8
 	ld b, $0
 	ld hl, Unknown_9b27
 	add hl, bc
-	ld a, [$ff00+$25]
+	ld a, [$ff25]
 	or [hl]
 	ld d, a
 	ld a, c
@@ -829,7 +829,7 @@ Func_95f8: ; 0x95f8
 	add hl, bc
 	and [hl]
 	ld d, a
-	ld a, [$ff00+$25]
+	ld a, [$ff25]
 	ld hl, Unknown_9b1f
 	add hl, bc
 	and [hl]
@@ -837,7 +837,7 @@ Func_95f8: ; 0x95f8
 	ld d, a
 .skip
 	ld a, d
-	ld [$ff00+$25], a
+	ld [$ff25], a
 	ret
 
 Func_9629: ; 0x9629
@@ -890,7 +890,7 @@ Func_964b: ; 0x964b
 	ld hl, $ff30
 	ld b, $f
 	ld a, $0
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 .loop
 	ld a, [de]
 	inc de
@@ -900,7 +900,7 @@ Func_964b: ; 0x964b
 	and a
 	jr nz, .loop
 	ld a, $80
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 	pop de
 .notSfxChannel3
 	ld a, d
@@ -1343,17 +1343,17 @@ Func_9876:: ; 0x9876
 	ld a, $ff
 	ld [$c004], a
 	xor a
-	ld [$ff00+$24], a
+	ld [$ff24], a
 	ld a, $8
-	ld [$ff00+$10], a
+	ld [$ff10], a
 	ld a, $0
-	ld [$ff00+$25], a
+	ld [$ff25], a
 	xor a
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$ff00+$1a], a
+	ld [$ff1a], a
 	ld a, $77
-	ld [$ff00+$24], a
+	ld [$ff24], a
 	jp Func_9a8f
 
 Func_994e: ; 0x994e
@@ -1499,7 +1499,7 @@ Func_994e: ; 0x994e
 	cp $4
 	jr nz, .asm_9a2b
 	ld a, $8
-	ld [$ff00+$10], a
+	ld [$ff10], a
 .asm_9a2b
 	ld a, c
 	and a
@@ -1509,22 +1509,22 @@ Func_994e: ; 0x994e
 
 Func_9a34: ; 0x9a34
 	ld a, $80
-	ld [$ff00+$26], a
-	ld [$ff00+$1a], a
+	ld [$ff26], a
+	ld [$ff1a], a
 	xor a
-	ld [$ff00+$25], a
-	ld [$ff00+$1c], a
+	ld [$ff25], a
+	ld [$ff1c], a
 	ld a, $8
-	ld [$ff00+$10], a
-	ld [$ff00+$12], a
-	ld [$ff00+$17], a
-	ld [$ff00+$21], a
+	ld [$ff10], a
+	ld [$ff12], a
+	ld [$ff17], a
+	ld [$ff21], a
 	ld a, $40
-	ld [$ff00+$14], a
-	ld [$ff00+$19], a
-	ld [$ff00+$23], a
+	ld [$ff14], a
+	ld [$ff19], a
+	ld [$ff23], a
 	ld a, $77
-	ld [$ff00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c000], a
 	ld [$c003], a
@@ -1643,10 +1643,10 @@ Func_9a8f: ; 0x9a8f
 	ld a, [$c005]
 	and a
 	jr nz, .asm_9b15
-	ld a, [$ff00+$24]
+	ld a, [$ff24]
 	ld [$c005], a
 	ld a, $77
-	ld [$ff00+$24], a
+	ld [$ff24], a
 .asm_9b15
 	ret
 

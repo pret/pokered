@@ -20,10 +20,10 @@ Func_7d177:: ; 7d177 (1f:5177)
 	set 7, a
 	ld [$c002], a
 	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1a], a
+	ld [$ff25], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	jr .nextChannel
 .applyAffects
 	call Music1f_Music2_ApplyMusicAffects
@@ -183,9 +183,9 @@ Music1f_endchannel: ; 7d25a (1f:525a)
 	cp CH6
 	jr nz, .notSfxChannel3
 	ld a, $0
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 .notSfxChannel3
 	jr nz, .asm_7d296
 	ld a, [$c003]
@@ -219,9 +219,9 @@ Music1f_endchannel: ; 7d25a (1f:525a)
 .asm_7d2b3
 	ld hl, Unknown_7db93
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$FF00+$25], a
+	ld [$ff25], a
 .asm_7d2bc
 	ld a, [$c02a]
 	cp $14
@@ -241,7 +241,7 @@ Music1f_endchannel: ; 7d25a (1f:525a)
 	ret c
 .asm_7d2d9
 	ld a, [$c005]
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c005], a
 .asm_7d2e2
@@ -534,7 +534,7 @@ Music1f_stereopanning: ; 7d4b8 (1f:54b8)
 	cp $f0 ; is this command a stereopanning?
 	jr nz, Music1f_executemusic ; no
 	call Music1f_GetNextMusicByte ; yes
-	ld [$FF00+$24], a ; store stereopanning
+	ld [$ff24], a ; store stereopanning
 	jp Music1f_endchannel
 
 Music1f_executemusic: ; 7d4c4 (1f:54c4)
@@ -616,7 +616,7 @@ Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
 	bit 0, [hl]
 	jr nz, Music1f_note ; no
 	call Music1f_GetNextMusicByte ; yes
-	ld [$FF00+$10], a
+	ld [$ff10], a
 	jp Music1f_endchannel
 
 Music1f_note: ; 7d54f (1f:554f)
@@ -737,9 +737,9 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	ld b, $0
 	ld hl, Unknown_7db93
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	and [hl]
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	jr .quit
 .notSfxChannel3
 	ld b, $2
@@ -810,7 +810,7 @@ Func_7d66c: ; 7d66c (1f:566c)
 	ld b, $0
 	ld hl, Unknown_7db9b
 	add hl, bc
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	or [hl]
 	ld d, a
 	ld a, c
@@ -829,7 +829,7 @@ Func_7d66c: ; 7d66c (1f:566c)
 	add hl, bc
 	and [hl]
 	ld d, a
-	ld a, [$FF00+$25]
+	ld a, [$ff25]
 	ld hl, Unknown_7db93
 	add hl, bc
 	and [hl]
@@ -837,7 +837,7 @@ Func_7d66c: ; 7d66c (1f:566c)
 	ld d, a
 .skip
 	ld a, d
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	ret
 
 Func_7d69d: ; 7d69d (1f:569d)
@@ -890,7 +890,7 @@ Func_7d6bf: ; 7d6bf (1f:56bf)
 	ld hl, $ff30
 	ld b, $f
 	ld a, $0
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 .loop
 	ld a, [de]
 	inc de
@@ -900,7 +900,7 @@ Func_7d6bf: ; 7d6bf (1f:56bf)
 	and a
 	jr nz, .loop
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	pop de
 .notSfxChannel3
 	ld a, d
@@ -1343,17 +1343,17 @@ Func_7d8ea:: ; 7d8ea (1f:58ea)
 	ld a, $ff
 	ld [$c004], a
 	xor a
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	ld a, $8
-	ld [$FF00+$10], a
+	ld [$ff10], a
 	ld a, $0
-	ld [$FF00+$25], a
+	ld [$ff25], a
 	xor a
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $80
-	ld [$FF00+$1a], a
+	ld [$ff1a], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	jp Func_7db03
 
 Func_7d9c2: ; 7d9c2 (1f:59c2)
@@ -1499,7 +1499,7 @@ Func_7d9c2: ; 7d9c2 (1f:59c2)
 	cp $4
 	jr nz, .asm_7da9f
 	ld a, $8
-	ld [$FF00+$10], a
+	ld [$ff10], a
 .asm_7da9f
 	ld a, c
 	and a
@@ -1509,22 +1509,22 @@ Func_7d9c2: ; 7d9c2 (1f:59c2)
 
 Func_7daa8: ; 7daa8 (1f:5aa8)
 	ld a, $80
-	ld [$FF00+$26], a
-	ld [$FF00+$1a], a
+	ld [$ff26], a
+	ld [$ff1a], a
 	xor a
-	ld [$FF00+$25], a
-	ld [$FF00+$1c], a
+	ld [$ff25], a
+	ld [$ff1c], a
 	ld a, $8
-	ld [$FF00+$10], a
-	ld [$FF00+$12], a
-	ld [$FF00+$17], a
-	ld [$FF00+$21], a
+	ld [$ff10], a
+	ld [$ff12], a
+	ld [$ff17], a
+	ld [$ff21], a
 	ld a, $40
-	ld [$FF00+$14], a
-	ld [$FF00+$19], a
-	ld [$FF00+$23], a
+	ld [$ff14], a
+	ld [$ff19], a
+	ld [$ff23], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 	xor a
 	ld [$c000], a
 	ld [$c003], a
@@ -1643,10 +1643,10 @@ Func_7db03: ; 7db03 (1f:5b03)
 	ld a, [$c005]
 	and a
 	jr nz, .asm_7db89
-	ld a, [$FF00+$24]
+	ld a, [$ff24]
 	ld [$c005], a
 	ld a, $77
-	ld [$FF00+$24], a
+	ld [$ff24], a
 .asm_7db89
 	ret
 
