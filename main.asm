@@ -8273,7 +8273,7 @@ Func_32f9:: ; 32f9 (0:32f9)
 Func_32fe:: ; 32fe (0:32fe)
 	ld hl, Func_5685d
 asm_3301:: ; 3301 (0:3301)
-	ld b, $15
+	ld b, BANK(Func_567f9) ; BANK(Func_56819), BANK(Func_5683d), BANK(Func_5685d)
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers:: ; 3306 (0:3306)
@@ -13287,7 +13287,7 @@ Func_5530
 	ld a, $1
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	ld hl, wEnemyMons
 	call Func_57d6
@@ -13346,7 +13346,7 @@ Func_5530
 	ld a, $4
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	call Func_57d6
 	jp .asm_565b
@@ -13441,7 +13441,7 @@ Func_5530
 	ld a, $4
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	call Func_57d6
 	call LoadScreenTilesFromBuffer1
@@ -56207,10 +56207,12 @@ UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
 	db "@"
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
-	ld b, $f
+	ld b, BANK(BattleCore)
 	jp Bankswitch
 
 SECTION "bankF",ROMX,BANK[$F]
+
+BattleCore:
 
 ; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 3c000 (f:4000)
@@ -58562,7 +58564,7 @@ Func_3d119: ; 3d119 (f:5119)
 	call LoadMonFrontSprite
 	jr .asm_3d187
 .asm_3d182
-	ld b, $1e
+	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
 	call Bankswitch
 .asm_3d187
 	jp Func_3d0e0
