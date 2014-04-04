@@ -108962,7 +108962,7 @@ LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld a,[hl]
 	ld d,a ; de = address of tileset
 	ld hl,$8310 ; destination address in VRAM
-	ld b,$1E ; ROM bank
+	ld b, BANK(AnimationTileset1) ; ROM bank
 	ld a,[$D07D]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
