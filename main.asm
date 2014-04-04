@@ -104174,137 +104174,137 @@ CreditsTextPointers: ; 742c3 (1d:42c3)
 
 CredVersion: ; 74343 (1d:4343) ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
 IF _RED
-	db "2RED VERSION STAFF@"
+	db -8, "RED VERSION STAFF@"
 ENDC
 IF _BLUE
-	db "2BLUE VERSION STAFF@"
+	db -8, "BLUE VERSION STAFF@"
 ENDC
 CredTajiri: ; 74356 (1d:4356)
-	db "4SATOSHI TAJIRI@"
+	db -6, "SATOSHI TAJIRI@"
 CredTaOota: ; 74366 (1d:4366)
-	db "4TAKENORI OOTA@"
+	db -6, "TAKENORI OOTA@"
 CredMorimoto: ; 74375 (1d:4375)
-	db "3SHIGEKI MORIMOTO@"
+	db -7, "SHIGEKI MORIMOTO@"
 CredWatanabe: ; 74387 (1d:4387)
-	db "3TETSUYA WATANABE@"
+	db -7, "TETSUYA WATANABE@"
 CredMasuda: ; 74399 (1d:4399)
-	db "4JUNICHI MASUDA@"
+	db -6, "JUNICHI MASUDA@"
 CredNisino: ; 743a9 (1d:43a9)
-	db "5KOHJI NISINO@"
+	db -5, "KOHJI NISINO@"
 CredSugimori: ; 743b7 (1d:43b7)
-	db "5KEN SUGIMORI@"
+	db -5, "KEN SUGIMORI@"
 CredNishida: ; 743c5 (1d:43c5)
-	db "4ATSUKO NISHIDA@"
+	db -6, "ATSUKO NISHIDA@"
 CredMiyamoto: ; 743d5 (1d:43d5)
-	db "3SHIGERU MIYAMOTO@"
+	db -7, "SHIGERU MIYAMOTO@"
 CredKawaguchi: ; 743e7 (1d:43e7)
-	db "2TAKASHI KAWAGUCHI@"
+	db -8, "TAKASHI KAWAGUCHI@"
 CredIshihara: ; 743fa (1d:43fa)
-	db "2TSUNEKAZU ISHIHARA@"
+	db -8, "TSUNEKAZU ISHIHARA@"
 CredYamauchi: ; 7440e (1d:440e)
-	db "3HIROSHI YAMAUCHI@"
+	db -7, "HIROSHI YAMAUCHI@"
 CredZinnai: ; 74420 (1d:4420)
-	db "3HIROYUKI ZINNAI@"
+	db -7, "HIROYUKI ZINNAI@"
 CredHishida: ; 74431 (1d:4431)
-	db "3TATSUYA HISHIDA@"
+	db -7, "TATSUYA HISHIDA@"
 CredSakai: ; 74442 (1d:4442)
-	db "4YASUHIRO SAKAI@"
+	db -6, "YASUHIRO SAKAI@"
 CredYamaguchi: ; 74452 (1d:4452)
-	db "3WATARU YAMAGUCHI@"
+	db -7, "WATARU YAMAGUCHI@"
 CredYamamoto: ; 74464 (1d:4464)
-	db "2KAZUYUKI YAMAMOTO@"
+	db -8, "KAZUYUKI YAMAMOTO@"
 CredTaniguchi: ; 74477 (1d:4477)
-	db "2RYOHSUKE TANIGUCHI@"
+	db -8, "RYOHSUKE TANIGUCHI@"
 CredNonomura: ; 7448b (1d:448b)
-	db "2FUMIHIRO NONOMURA@"
+	db -8, "FUMIHIRO NONOMURA@"
 CredFuziwara: ; 7449e (1d:449e)
-	db "3MOTOFUMI FUZIWARA@"
+	db -7, "MOTOFUMI FUZIWARA@"
 CredMatsusima: ; 744b1 (1d:44b1)
-	db "3KENJI MATSUSIMA@"
+	db -7, "KENJI MATSUSIMA@"
 CredTomisawa: ; 744c2 (1d:44c2)
-	db "3AKIHITO TOMISAWA@"
+	db -7, "AKIHITO TOMISAWA@"
 CredKawamoto: ; 744d4 (1d:44d4)
-	db "3HIROSHI KAWAMOTO@"
+	db -7, "HIROSHI KAWAMOTO@"
 CredKakei: ; 744e6 (1d:44e6)
-	db "4AKIYOSHI KAKEI@"
+	db -6, "AKIYOSHI KAKEI@"
 CredTsuchiya: ; 744f6 (1d:44f6)
-	db "3KAZUKI TSUCHIYA@"
+	db -7, "KAZUKI TSUCHIYA@"
 CredTaNakamura: ; 74507 (1d:4507)
-	db "4TAKEO NAKAMURA@"
+	db -6, "TAKEO NAKAMURA@"
 CredYuda: ; 74517 (1d:4517)
-	db "4MASAMITSU YUDA@"
+	db -6, "MASAMITSU YUDA@"
 CredMon: ; 74527 (1d:4527)
-	db "7#MON@"
+	db -3, "#MON@"
 CredDirector: ; 7452d (1d:452d)
-	db "7DIRECTOR@"
+	db -3, "DIRECTOR@"
 CredProgrammers: ; 74537 (1d:4537)
-	db "5PROGRAMMERS@"
+	db -5, "PROGRAMMERS@"
 CredCharDesign: ; 74544 (1d:4544)
-	db "3CHARACTER DESIGN@"
+	db -7, "CHARACTER DESIGN@"
 CredMusic: ; 74556 (1d:4556)
-	db "8MUSIC@"
+	db -2, "MUSIC@"
 CredSoundEffects: ; 7455d (1d:455d)
-	db "4SOUND EFFECTS@"
+	db -6, "SOUND EFFECTS@"
 CredGameDesign: ; 7456c (1d:456c)
-	db "5GAME DESIGN@"
+	db -5, "GAME DESIGN@"
 CredMonsterDesign: ; 74579 (1d:4579)
-	db "4MONSTER DESIGN@"
+	db -6, "MONSTER DESIGN@"
 CredGameScene: ; 74589 (1d:4589)
-	db "4GAME SCENARIO@"
+	db -6, "GAME SCENARIO@"
 CredParam: ; 74598 (1d:4598)
-	db "2PARAMETRIC DESIGN@"
+	db -8, "PARAMETRIC DESIGN@"
 CredMap: ; 745ab (1d:45ab)
-	db "6MAP DESIGN@"
+	db -4, "MAP DESIGN@"
 CredTest: ; 745b7 (1d:45b7)
-	db "3PRODUCT TESTING@"
+	db -7, "PRODUCT TESTING@"
 CredSpecial: ; 745c8 (1d:45c8)
-	db "4SPECIAL THANKS@"
+	db -6, "SPECIAL THANKS@"
 CredProducers: ; 745d8 (1d:45d8)
-	db "6PRODUCERS@"
+	db -4, "PRODUCERS@"
 CredProducer: ; 745e3 (1d:45e3)
-	db "6PRODUCER@"
+	db -4, "PRODUCER@"
 CredExecutive: ; 745ed (1d:45ed)
-	db "2EXECUTIVE PRODUCER@"
+	db -8, "EXECUTIVE PRODUCER@"
 CredTamada: ; 74601 (1d:4601)
-	db "4SOUSUKE TAMADA@"
+	db -6, "SOUSUKE TAMADA@"
 CredSaOota: ; 74611 (1d:4611)
-	db "5SATOSHI OOTA@"
+	db -5, "SATOSHI OOTA@"
 CredYoshikawa: ; 7461f (1d:461f)
-	db "4RENA YOSHIKAWA@"
+	db -6, "RENA YOSHIKAWA@"
 CredToOota: ; 7462f (1d:462f)
-	db "4TOMOMICHI OOTA@"
+	db -6, "TOMOMICHI OOTA@"
 CredUSStaff: ; 7463f (1d:463f)
-	db "3US VERSION STAFF@"
+	db -7, "US VERSION STAFF@"
 CredUSCoord: ; 74651 (1d:4651)
-	db "3US COORDINATION@"
+	db -7, "US COORDINATION@"
 CredTilden: ; 74662 (1d:4662)
-	db "5GAIL TILDEN@"
+	db -5, "GAIL TILDEN@"
 CredKawakami: ; 7466f (1d:466f)
-	db "4NAOKO KAWAKAMI@"
+	db -6, "NAOKO KAWAKAMI@"
 CredHiNakamura: ; 7467f (1d:467f)
-	db "4HIRO NAKAMURA@"
+	db -6, "HIRO NAKAMURA@"
 CredGiese: ; 7468e (1d:468e)
-	db "4WILLIAM GIESE@"
+	db -6, "WILLIAM GIESE@"
 CredOsborne: ; 7469d (1d:469d)
-	db "5SARA OSBORNE@"
+	db -5, "SARA OSBORNE@"
 CredTrans: ; 746ab (1d:46ab)
-	db "3TEXT TRANSLATION@"
+	db -7, "TEXT TRANSLATION@"
 CredOgasawara: ; 746bd (1d:46bd)
-	db "4NOB OGASAWARA@"
+	db -6, "NOB OGASAWARA@"
 CredIwata: ; 746cc (1d:46cc)
-	db "5SATORU IWATA@"
+	db -5, "SATORU IWATA@"
 CredIzushi: ; 746da (1d:46da)
-	db "3TAKEHIRO IZUSHI@"
+	db -7, "TAKEHIRO IZUSHI@"
 CredHarada: ; 746eb (1d:46eb)
-	db "3TAKAHIRO HARADA@"
+	db -7, "TAKAHIRO HARADA@"
 CredMurakawa: ; 746fc (1d:46fc)
-	db "3TERUKI MURAKAWA@"
+	db -7, "TERUKI MURAKAWA@"
 CredFukui: ; 7470d (1d:470d)
-	db "5KOHTA FUKUI@"
+	db -5, "KOHTA FUKUI@"
 CredClub: ; 7471a (1d:471a)
-	db "1NCL SUPER MARIO CLUB@"
+	db -9, "NCL SUPER MARIO CLUB@"
 CredPAAD: ; 74730 (1d:4730)
-	db "5PAAD TESTING@"
+	db -5, "PAAD TESTING@"
 
 TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
 	INCBIN "gfx/theend.2bpp"
