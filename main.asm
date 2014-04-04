@@ -1146,10 +1146,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 
 CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; If the player is in an outside map (a town or route), set the z flag
-	ld a,[W_CURMAPTILESET]
-	and a ; most towns/routes have tileset 0
+	ld a, [W_CURMAPTILESET]
+	and a ; most towns/routes have tileset 0 (OVERWORLD)
 	ret z
-	cp a,$17 ; Route 23 / Indigo Plateau
+	cp PLATEAU ; Route 23 / Indigo Plateau
 	ret
 
 ; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
@@ -1159,28 +1159,28 @@ CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; "function 2" passes when the the tile in front of the player is among a certain set
 ; sets carry if the check passes, otherwise clears carry
 ExtraWarpCheck:: ; 08e9 (0:08e9)
-	ld a,[W_CURMAP]
-	cp a,SS_ANNE_3
-	jr z,.useFunction1
-	cp a,ROCKET_HIDEOUT_1
-	jr z,.useFunction2
-	cp a,ROCKET_HIDEOUT_2
-	jr z,.useFunction2
-	cp a,ROCKET_HIDEOUT_4
-	jr z,.useFunction2
-	cp a,ROCK_TUNNEL_1
-	jr z,.useFunction2
-	ld a,[W_CURMAPTILESET]
-	and a ; outside tileset
-	jr z,.useFunction2
-	cp a,$0d ; S.S. Anne tileset
-	jr z,.useFunction2
-	cp a,$0e ; Vermilion Port tileset
-	jr z,.useFunction2
-	cp a,$17 ; Indigo Plateau tileset
-	jr z,.useFunction2
+	ld a, [W_CURMAP]
+	cp SS_ANNE_3
+	jr z, .useFunction1
+	cp ROCKET_HIDEOUT_1
+	jr z, .useFunction2
+	cp ROCKET_HIDEOUT_2
+	jr z, .useFunction2
+	cp ROCKET_HIDEOUT_4
+	jr z, .useFunction2
+	cp ROCK_TUNNEL_1
+	jr z, .useFunction2
+	ld a, [W_CURMAPTILESET]
+	and a ; outside tileset (OVERWORLD)
+	jr z, .useFunction2
+	cp SHIP ; S.S. Anne tileset
+	jr z, .useFunction2
+	cp SHIP_PORT ; Vermilion Port tileset
+	jr z, .useFunction2
+	cp PLATEAU ; Indigo Plateau tileset
+	jr z, .useFunction2
 .useFunction1
-	ld hl,Func_c3ff
+	ld hl, Func_c3ff
 	jr .doBankswitch
 .useFunction2
 	ld hl, Func_c44e
@@ -2408,9 +2408,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	call Func_2307
 	jr .noCollision
 .checkIfVermilionDockTileset
-	ld a,[W_CURMAPTILESET] ; tileset
-	cp a,$0e ; Vermilion Dock tileset
-	jr nz,.noCollision ; keep surfing if it's not the boarding platform tile
+	ld a, [W_CURMAPTILESET] ; tileset
+	cp SHIP_PORT ; Vermilion Dock tileset
+	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
 
 ; function to run the current map's script
@@ -15059,86 +15059,86 @@ DungeonWarpData: ; 63d8 (1:63d8)
 FirstMapSpec: ; 6420 (1:6420)
 	db REDS_HOUSE_2F
 	FLYWARP_DATA REDS_HOUSE_2F_WIDTH,6,3
-	db $04
+	db REDS_HOUSE_2
 
 BattleCenterSpec1: ; 6428 (1:6428)
 	db BATTLE_CENTER
 	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,3
-	db $15
+	db CLUB
 
 BattleCenterSpec2: ; 6430 (1:6430)
 	db BATTLE_CENTER
 	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,6
-	db $15
+	db CLUB
 
 TradeCenterSpec1: ; 6438 (1:6438)
 	db TRADE_CENTER
 	FLYWARP_DATA TRADE_CENTER_WIDTH,4,3
-	db $15
+	db CLUB
 
 TradeCenterSpec2: ; 6440 (1:6440)
 	db TRADE_CENTER
 	FLYWARP_DATA TRADE_CENTER_WIDTH,4,6
-	db $15
+	db CLUB
 
 FlyWarpDataPtr: ; 6448 (1:6448)
-	db $00,0
-	dw Map00FlyWarp
-	db $01,0
-	dw Map01FlyWarp
-	db $02,0
-	dw Map02FlyWarp
-	db $03,0
-	dw Map03FlyWarp
-	db $04,0
-	dw Map04FlyWarp
-	db $05,0
-	dw Map05FlyWarp
-	db $06,0
-	dw Map06FlyWarp
-	db $07,0
-	dw Map07FlyWarp
-	db $08,0
-	dw Map08FlyWarp
-	db $09,0
-	dw Map09FlyWarp
-	db $0A,0
-	dw Map0aFlyWarp
-	db $0F,0
-	dw Map0fFlyWarp
-	db $15,0
-	dw Map15FlyWarp
+	db PALLET_TOWN, 0
+	dw PalletTownFlyWarp
+	db VIRIDIAN_CITY, 0
+	dw ViridianCityFlyWarp
+	db PEWTER_CITY, 0
+	dw PewterCityFlyWarp
+	db CERULEAN_CITY, 0
+	dw CeruleanCityFlyWarp
+	db LAVENDER_TOWN, 0
+	dw LavenderTownFlyWarp
+	db VERMILION_CITY, 0
+	dw VermilionCityFlyWarp
+	db CELADON_CITY, 0
+	dw CeladonCityFlyWarp
+	db FUCHSIA_CITY, 0
+	dw FuchsiaCityFlyWarp
+	db CINNABAR_ISLAND, 0
+	dw CinnabarIslandFlyWarp
+	db INDIGO_PLATEAU, 0
+	dw IndigoPlateauFlyWarp
+	db SAFFRON_CITY, 0
+	dw SaffronCityFlyWarp
+	db ROUTE_4, 0
+	dw Route4FlyWarp
+	db ROUTE_10, 0
+	dw Route10FlyWarp
 
 ; Original Format:
 ;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
 ; Macro Format:
 ;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
-Map00FlyWarp: ; 647c (1:647c)
-	FLYWARP_DATA 10,6,5
-Map01FlyWarp: ; 6482 (1:6482)
-	FLYWARP_DATA 20,26,23
-Map02FlyWarp: ; 6488 (1:6488)
-	FLYWARP_DATA 20,26,13
-Map03FlyWarp: ; 648e (1:648e)
-	FLYWARP_DATA 20,18,19
-Map04FlyWarp: ; 6494 (1:6494)
-	FLYWARP_DATA 10,6,3
-Map05FlyWarp: ; 649a (1:649a)
-	FLYWARP_DATA 20,4,11
-Map06FlyWarp: ; 64a0 (1:64a0)
-	FLYWARP_DATA 25,10,41
-Map07FlyWarp: ; 64a6 (1:64a6)
-	FLYWARP_DATA 20,28,19
-Map08FlyWarp: ; 64ac (1:64ac)
-	FLYWARP_DATA 10,12,11
-Map09FlyWarp: ; 64b2 (1:64b2)
-	FLYWARP_DATA 10,6,9
-Map0aFlyWarp: ; 64b8 (1:64b8)
-	FLYWARP_DATA 20,30,9
-Map0fFlyWarp: ; 64be (1:64be)
-	FLYWARP_DATA 45,6,11
-Map15FlyWarp: ; 64c4 (1:64c4)
-	FLYWARP_DATA 10,20,11
+PalletTownFlyWarp: ; 647c (1:647c)
+	FLYWARP_DATA PALLET_TOWN_WIDTH,      6,  5
+ViridianCityFlyWarp: ; 6482 (1:6482)
+	FLYWARP_DATA VIRIDIAN_CITY_WIDTH,   26, 23
+PewterCityFlyWarp: ; 6488 (1:6488)
+	FLYWARP_DATA PEWTER_CITY_WIDTH,     26, 13
+CeruleanCityFlyWarp: ; 648e (1:648e)
+	FLYWARP_DATA CERULEAN_CITY_WIDTH,   18, 19
+LavenderTownFlyWarp: ; 6494 (1:6494)
+	FLYWARP_DATA LAVENDER_TOWN_WIDTH,    6,  3
+VermilionCityFlyWarp: ; 649a (1:649a)
+	FLYWARP_DATA VERMILION_CITY_WIDTH,   4, 11
+CeladonCityFlyWarp: ; 64a0 (1:64a0)
+	FLYWARP_DATA CELADON_CITY_WIDTH,    10, 41
+FuchsiaCityFlyWarp: ; 64a6 (1:64a6)
+	FLYWARP_DATA FUCHSIA_CITY_WIDTH,    28, 19
+CinnabarIslandFlyWarp: ; 64ac (1:64ac)
+	FLYWARP_DATA CINNABAR_ISLAND_WIDTH, 12, 11
+IndigoPlateauFlyWarp: ; 64b2 (1:64b2)
+	FLYWARP_DATA INDIGO_PLATEAU_WIDTH,   6,  9
+SaffronCityFlyWarp: ; 64b8 (1:64b8)
+	FLYWARP_DATA SAFFRON_CITY_WIDTH,    30,  9
+Route4FlyWarp: ; 64be (1:64be)
+	FLYWARP_DATA ROUTE_4_WIDTH,          6, 11
+Route10FlyWarp: ; 64c4 (1:64c4)
+	FLYWARP_DATA ROUTE_10_WIDTH,        20, 11
 
 ; This function appears to never be used.
 ; It is likely a debugging feature to give the player Tsunekazu Ishihara's
@@ -19133,89 +19133,89 @@ Func_c49d: ; c49d (3:449d)
 	ret
 
 WarpTileIDPointers: ; c4cc (3:44cc)
-	dw Tileset00WarpTileIDs
-	dw Tileset01WarpTileIDs
-	dw Tileset02WarpTileIDs
-	dw Tileset03WarpTileIDs
-	dw Tileset04WarpTileIDs
-	dw Tileset05WarpTileIDs
-	dw Tileset06WarpTileIDs
-	dw Tileset07WarpTileIDs
-	dw Tileset08WarpTileIDs
-	dw Tileset09WarpTileIDs
-	dw Tileset0AWarpTileIDs
-	dw Tileset0BWarpTileIDs
-	dw Tileset0CWarpTileIDs
-	dw Tileset0DWarpTileIDs
-	dw Tileset0EWarpTileIDs
-	dw Tileset0FWarpTileIDs
-	dw Tileset10WarpTileIDs
-	dw Tileset11WarpTileIDs
-	dw Tileset12WarpTileIDs
-	dw Tileset13WarpTileIDs
-	dw Tileset14WarpTileIDs
-	dw Tileset15WarpTileIDs
-	dw Tileset16WarpTileIDs
-	dw Tileset17WarpTileIDs
+	dw OverworldWarpTileIDs
+	dw RedsHouse1WarpTileIDs
+	dw MartWarpTileIDs
+	dw ForestWarpTileIDs
+	dw RedsHouse2WarpTileIDs
+	dw DojoWarpTileIDs
+	dw PokecenterWarpTileIDs
+	dw GymWarpTileIDs
+	dw HouseWarpTileIDs
+	dw ForestGateWarpTileIDs
+	dw MuseumWarpTileIDs
+	dw UndergroundWarpTileIDs
+	dw GateWarpTileIDs
+	dw ShipWarpTileIDs
+	dw ShipPortWarpTileIDs
+	dw CemeteryWarpTileIDs
+	dw InteriorWarpTileIDs
+	dw CavernWarpTileIDs
+	dw LobbyWarpTileIDs
+	dw MansionWarpTileIDs
+	dw LabWarpTileIDs
+	dw ClubWarpTileIDs
+	dw FacilityWarpTileIDs
+	dw PlateauWarpTileIDs
 
-Tileset00WarpTileIDs: ; c4fc (3:44fc)
+OverworldWarpTileIDs: ; c4fc (3:44fc)
 	db $1B,$58,$FF
 
-Tileset09WarpTileIDs: ; c4ff (3:44ff)
-Tileset0AWarpTileIDs: ; c4ff (3:44ff)
-Tileset0CWarpTileIDs: ; c4ff (3:44ff)
+ForestGateWarpTileIDs: ; c4ff (3:44ff)
+MuseumWarpTileIDs: ; c4ff (3:44ff)
+GateWarpTileIDs: ; c4ff (3:44ff)
 	db $3B
 
-Tileset01WarpTileIDs: ; c500 (3:4500)
-Tileset04WarpTileIDs: ; c500 (3:4500)
+RedsHouse1WarpTileIDs: ; c500 (3:4500)
+RedsHouse2WarpTileIDs: ; c500 (3:4500)
 	db $1A,$1C,$FF
 
-Tileset02WarpTileIDs: ; c503 (3:4503)
-Tileset06WarpTileIDs: ; c503 (3:4503)
+MartWarpTileIDs: ; c503 (3:4503)
+PokecenterWarpTileIDs: ; c503 (3:4503)
 	db $5E,$FF
 
-Tileset03WarpTileIDs: ; c505 (3:4505)
+ForestWarpTileIDs: ; c505 (3:4505)
 	db $5A,$5C,$3A,$FF
 
-Tileset05WarpTileIDs: ; c509 (3:4509)
-Tileset07WarpTileIDs: ; c509 (3:4509)
+DojoWarpTileIDs: ; c509 (3:4509)
+GymWarpTileIDs: ; c509 (3:4509)
 	db $4A,$FF
 
-Tileset08WarpTileIDs: ; c50b (3:450b)
+HouseWarpTileIDs: ; c50b (3:450b)
 	db $54,$5C,$32,$FF
 
-Tileset0DWarpTileIDs: ; c50f (3:450f)
+ShipWarpTileIDs: ; c50f (3:450f)
 	db $37,$39,$1E,$4A,$FF
 
-Tileset10WarpTileIDs: ; c514 (3:4514)
+InteriorWarpTileIDs: ; c514 (3:4514)
 	db $15,$55,$04,$FF
 
-Tileset11WarpTileIDs: ; c518 (3:4518)
+CavernWarpTileIDs: ; c518 (3:4518)
 	db $18,$1A,$22,$FF
 
-Tileset12WarpTileIDs: ; c51c (3:451c)
+LobbyWarpTileIDs: ; c51c (3:451c)
 	db $1A,$1C,$38,$FF
 
-Tileset13WarpTileIDs: ; c520 (3:4520)
+MansionWarpTileIDs: ; c520 (3:4520)
 	db $1A,$1C,$53,$FF
 
-Tileset14WarpTileIDs: ; c524 (3:4524)
+LabWarpTileIDs: ; c524 (3:4524)
 	db $34,$FF
 
-Tileset16WarpTileIDs: ; c526 (3:4526)
+FacilityWarpTileIDs: ; c526 (3:4526)
 	db $43,$58,$20
 
-Tileset0FWarpTileIDs: ; c529 (3:4529)
+CemeteryWarpTileIDs: ; c529 (3:4529)
 	db $1B
 
-Tileset0BWarpTileIDs: ; c52a (3:452a)
+UndergroundWarpTileIDs: ; c52a (3:452a)
 	db $13,$FF
 
-Tileset17WarpTileIDs: ; c52c (3:452c)
+PlateauWarpTileIDs: ; c52c (3:452c)
 	db $1B,$3B
 
-Tileset0EWarpTileIDs: ; c52e (3:452e)
-Tileset15WarpTileIDs: ; c52e (3:452e)
+ShipPortWarpTileIDs: ; c52e (3:452e)
+ClubWarpTileIDs: ; c52e (3:452e)
 	db $FF
 
 Func_c52f: ; c52f (3:452f)
@@ -27575,20 +27575,20 @@ Func_ef54: ; ef54 (3:6f54)
 	xor a
 	ld [$cd6a], a
 	ld a, [W_CURMAPTILESET] ; $d367
-	and a
+	and a ; OVERWORLD
 	jr z, .asm_ef6b
-	cp $7
+	cp GYM
 	jr nz, .asm_ef77
 	ld a, [$cfc6]
-	cp $50
+	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
 	jr asm_ef82
 .asm_ef6b
 	dec a
 	ld a, [$cfc6]
-	cp $3d
+	cp $3d ; cut tree
 	jr z, asm_ef82
-	cp $52
+	cp $52 ; grass
 	jr z, asm_ef82
 .asm_ef77
 	ld hl, UnnamedText_ef7d ; $6f7d
@@ -29577,23 +29577,23 @@ Func_fb50: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
-	db $17,$30,$3A
-	db $08,$3D,$3F
-	db $08,$1E,$40
-	db $13,$32,$40
-	db $01,$32,$40
-	db $14,$28,$40
-	db $12,$16,$41
-	db $07,$1D,$40
-	db $05,$1D,$40
-	db $0C,$22,$40
-	db $02,$54,$42
-	db $02,$55,$42
-	db $06,$54,$42
-	db $06,$55,$42
-	db $12,$50,$42
-	db $12,$52,$42
-	db $0D,$36,$40
+	db PLATEAU,      $30, $3A
+	db HOUSE,        $3D, $3F
+	db HOUSE,        $1E, $40
+	db MANSION,      $32, $40
+	db REDS_HOUSE_1, $32, $40
+	db LAB,          $28, $40
+	db LOBBY,        $16, $41
+	db GYM,          $1D, $40
+	db DOJO,         $1D, $40
+	db GATE,         $22, $40
+	db MART,         $54, $42
+	db MART,         $55, $42
+	db POKECENTER,   $54, $42
+	db POKECENTER,   $55, $42
+	db LOBBY,        $50, $42
+	db LOBBY,        $52, $42
+	db SHIP,         $36, $40
 	db $FF
 
 IndigoPlateauStatues: ; fbbf (3:7bbf)
@@ -29625,7 +29625,7 @@ BookOrSculptureText: ; fbe8 (3:7be8)
 	db $08 ; asm
 	ld hl, PokemonBooksText
 	ld a, [W_CURMAPTILESET]
-	cp $13 ; Celadon Mansion tileset
+	cp MANSION ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
 	ld a, [$c420]
 	cp $38
@@ -31779,7 +31779,7 @@ Func_13870: ; 13870 (4:7870)
 	cp REDS_HOUSE_1F
 	jr c, .asm_13912
 	ld a, [W_CURMAPTILESET] ; $d367
-	cp $3 ; Viridian Forest/Safari Zone
+	cp FOREST ; Viridian Forest/Safari Zone
 	jr z, .asm_13912
 	ld a, [W_GRASSRATE] ; $d887
 .asm_138c4
@@ -37172,65 +37172,65 @@ Func_1a609: ; 1a609 (6:6609)
 	ret
 
 DoorTileIDPointers: ; 1a62c (6:662c)
-	db $00
-	dw Tileset00DoorTileIDs
-	db $03
-	dw Tileset03DoorTileIDs
-	db $02
-	dw Tileset02DoorTileIDs
-	db $08
-	dw Tileset08DoorTileIDs
-	db $09
+	db OVERWORLD
+	dw OverworldDoorTileIDs
+	db FOREST
+	dw ForestDoorTileIDs
+	db MART
+	dw MartDoorTileIDs
+	db HOUSE
+	dw HouseDoorTileIDs
+	db FOREST_GATE
 	dw TilesetMuseumDoorTileIDs
-	db $0a
+	db MUSEUM
 	dw TilesetMuseumDoorTileIDs
-	db $0c
+	db GATE
 	dw TilesetMuseumDoorTileIDs
-	db $0d
-	dw Tileset0DDoorTileIDs
-	db $12
-	dw Tileset12DoorTileIDs
-	db $13
-	dw Tileset13DoorTileIDs
-	db $14
-	dw Tileset14DoorTileIDs
-	db $16
-	dw Tileset16DoorTileIDs
-	db $17
-	dw Tileset17DoorTileIDs
+	db SHIP
+	dw ShipDoorTileIDs
+	db LOBBY
+	dw LobbyDoorTileIDs
+	db MANSION
+	dw MansionDoorTileIDs
+	db LAB
+	dw LabDoorTileIDs
+	db FACILITY
+	dw FacilityDoorTileIDs
+	db PLATEAU
+	dw PlateauDoorTileIDs
 	db $ff
 
-Tileset00DoorTileIDs: ; 1a654 (6:6654)
+OverworldDoorTileIDs: ; 1a654 (6:6654)
 	db $1B,$58,$00
 
-Tileset03DoorTileIDs: ; 1a657 (6:6657)
+ForestDoorTileIDs: ; 1a657 (6:6657)
 	db $3a,$00
 
-Tileset02DoorTileIDs: ; 1a659 (6:6659)
+MartDoorTileIDs: ; 1a659 (6:6659)
 	db $5e,$00
 
-Tileset08DoorTileIDs: ; 1a65b (6:665b)
+HouseDoorTileIDs: ; 1a65b (6:665b)
 	db $54,$00
 
 TilesetMuseumDoorTileIDs: ; 1a65d (6:665d)
 	db $3b,$00
 
-Tileset0DDoorTileIDs: ; 1a65f (6:665f)
+ShipDoorTileIDs: ; 1a65f (6:665f)
 	db $1e,$00
 
-Tileset12DoorTileIDs: ; 1a661 (6:6661)
+LobbyDoorTileIDs: ; 1a661 (6:6661)
 	db $1c,$38,$1a,$00
 
-Tileset13DoorTileIDs: ; 1a665 (6:6665)
+MansionDoorTileIDs: ; 1a665 (6:6665)
 	db $1a,$1c,$53,$00
 
-Tileset14DoorTileIDs: ; 1a669 (6:6669)
+LabDoorTileIDs: ; 1a669 (6:6669)
 	db $34,$00
 
-Tileset16DoorTileIDs: ; 1a66b (6:666b)
+FacilityDoorTileIDs: ; 1a66b (6:666b)
 	db $43,$58,$1b,$00
 
-Tileset17DoorTileIDs: ; 1a66f (6:666f)
+PlateauDoorTileIDs: ; 1a66f (6:666f)
 	db $3b,$1b,$00
 
 Func_1a672: ; 1a672 (6:6672)
@@ -37238,7 +37238,7 @@ Func_1a672: ; 1a672 (6:6672)
 	bit 6, a
 	ret nz
 	ld a, [W_CURMAPTILESET] ; $d367
-	and a
+	and a ; OVERWORLD
 	ret nz
 	ld a, $35
 	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
@@ -69950,7 +69950,7 @@ Func_44fd7: ; 44fd7 (11:4fd7)
 	ld a, [hl]
 	ld [$c102], a
 	ld a, [W_CURMAPTILESET] ; $d367
-	cp $16
+	cp FACILITY
 	ld hl, SpinnerArrowTilePointers1 ; $5023
 	jr z, .asm_44ff6
 	ld hl, SpinnerArrowTilePointers2 ; $5053
@@ -99148,7 +99148,7 @@ Func_7077f: ; 7077f (1c:477f)
 	ret
 
 Func_70787: ; 70787 (1c:4787)
-	ld b, $0
+	ld b, 0
 	ld hl, DataTable_707a9 ; $47a9
 	ld a, [W_CURMAPTILESET] ; $d367
 	ld c, a
@@ -99176,10 +99176,10 @@ Func_70787: ; 70787 (1c:4787)
 
 ; format: db tileset id, tile id, value to be put in $cd5b
 DataTable_707a9: ; 707a9 (1c:47a9)
-	db $16,$20,$01
-	db $16,$11,$02
-	db $11,$22,$02
-	db $10,$55,$01
+	db FACILITY, $20, 1 ; warp pad
+	db FACILITY, $11, 2 ; hole
+	db CAVERN,   $22, 2 ; hole
+	db INTERIOR, $55, 1 ; warp pad
 	db $FF
 
 Func_707b6: ; 707b6 (1c:47b6)
@@ -102065,9 +102065,9 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	ld bc, $10
 	call CopyData
 	ld a, [W_CURMAPTILESET]
-	cp $f
+	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
-	cp $11
+	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
