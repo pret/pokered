@@ -1787,24 +1787,24 @@ CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
 ; it's mainly used to simulate differences in elevation
 
 TilePairCollisionsLand:: ; 0c7e (0:0c7e)
-	db $11, $20, $05;
-	db $11, $41, $05;
-	db $03, $30, $2E;
-	db $11, $2A, $05;
-	db $11, $05, $21;
-	db $03, $52, $2E;
-	db $03, $55, $2E;
-	db $03, $56, $2E;
-	db $03, $20, $2E;
-	db $03, $5E, $2E;
-	db $03, $5F, $2E;
-	db $FF;
+	db CAVERN, $20, $05
+	db CAVERN, $41, $05
+	db FOREST, $30, $2E
+	db CAVERN, $2A, $05
+	db CAVERN, $05, $21
+	db FOREST, $52, $2E
+	db FOREST, $55, $2E
+	db FOREST, $56, $2E
+	db FOREST, $20, $2E
+	db FOREST, $5E, $2E
+	db FOREST, $5F, $2E
+	db $FF
 
 TilePairCollisionsWater:: ; 0ca0 (0:0ca0)
-	db $03, $14, $2E;
-	db $03, $48, $2E;
-	db $11, $14, $05;
-	db $FF;
+	db FOREST, $14, $2E
+	db FOREST, $48, $2E
+	db CAVERN, $14, $05
+	db $FF
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
 LoadCurrentMapView:: ; 0caa (0:0caa)
@@ -107366,7 +107366,7 @@ CopycatsHouseF1Object: ; 0x75ee3 (size=46)
 	EVENT_DISP $4, $1, $7 ; COPYCATS_HOUSE_2F
 
 Gary_h: ; 75f11 (1d:5f11)
-	db $7 ;tileset
+	db GYM ;tileset
 	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; Height, Width
 	dw GaryBlocks, GaryTextPointers, GaryScript
 	db $0 ;No Connections
