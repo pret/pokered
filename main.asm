@@ -98051,7 +98051,7 @@ RedsHouse1_Block:
 RedsHouse2_Block: ; 65270 (19:5270)
 	INCBIN "gfx/blocksets/reds_house.bst"
 House_GFX: ; 653a0 (19:53a0)
-	INCBIN "gfx/tilesets/house.w128.2bpp"
+	INCBIN "gfx/tilesets/house.w128.t2.2bpp"
 House_Block: ; 65980 (19:5980)
 	INCBIN "gfx/blocksets/house.bst"
 Mansion_GFX: ; 65bb0 (19:5bb0)
@@ -98059,7 +98059,7 @@ Mansion_GFX: ; 65bb0 (19:5bb0)
 Mansion_Block: ; 66190 (19:6190)
 	INCBIN "gfx/blocksets/mansion.bst"
 ShipPort_GFX: ; 66610 (19:6610)
-	INCBIN "gfx/tilesets/ship_port.w128.2bpp"
+	INCBIN "gfx/tilesets/ship_port.w128.t2.2bpp"
 ShipPort_Block: ; 66bf0 (19:6bf0)
 	INCBIN "gfx/blocksets/ship_port.bst"
 Interior_GFX: ; 66d60 (19:6d60)
