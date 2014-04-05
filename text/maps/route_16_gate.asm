@@ -16,7 +16,7 @@ _UnnamedText_49781:: ; 8cd0e (23:4d0e)
 	line "up please!"
 	done
 
-_Route16GateMapText2:: ; 8cd2a (23:4d2a)
+_Route16GateText2:: ; 8cd2a (23:4d2a)
 	text "How'd you get in?"
 	line "Good effort!"
 	done
