@@ -18,6 +18,11 @@
 # generated
 *.tx
 
+# converted image data
+*.2bpp
+*.1bpp
+*.pic
+
 # swap files for vim
 .*.swp
 
