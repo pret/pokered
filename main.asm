@@ -1146,10 +1146,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 
 CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; If the player is in an outside map (a town or route), set the z flag
-	ld a,[W_CURMAPTILESET]
-	and a ; most towns/routes have tileset 0
+	ld a, [W_CURMAPTILESET]
+	and a ; most towns/routes have tileset 0 (OVERWORLD)
 	ret z
-	cp a,$17 ; Route 23 / Indigo Plateau
+	cp PLATEAU ; Route 23 / Indigo Plateau
 	ret
 
 ; this function is an extra check that sometimes has to pass in order to warp, beyond just standing on a warp
@@ -1159,28 +1159,28 @@ CheckIfInOutsideMap:: ; 08e1 (0:08e1)
 ; "function 2" passes when the the tile in front of the player is among a certain set
 ; sets carry if the check passes, otherwise clears carry
 ExtraWarpCheck:: ; 08e9 (0:08e9)
-	ld a,[W_CURMAP]
-	cp a,SS_ANNE_3
-	jr z,.useFunction1
-	cp a,ROCKET_HIDEOUT_1
-	jr z,.useFunction2
-	cp a,ROCKET_HIDEOUT_2
-	jr z,.useFunction2
-	cp a,ROCKET_HIDEOUT_4
-	jr z,.useFunction2
-	cp a,ROCK_TUNNEL_1
-	jr z,.useFunction2
-	ld a,[W_CURMAPTILESET]
-	and a ; outside tileset
-	jr z,.useFunction2
-	cp a,$0d ; S.S. Anne tileset
-	jr z,.useFunction2
-	cp a,$0e ; Vermilion Port tileset
-	jr z,.useFunction2
-	cp a,$17 ; Indigo Plateau tileset
-	jr z,.useFunction2
+	ld a, [W_CURMAP]
+	cp SS_ANNE_3
+	jr z, .useFunction1
+	cp ROCKET_HIDEOUT_1
+	jr z, .useFunction2
+	cp ROCKET_HIDEOUT_2
+	jr z, .useFunction2
+	cp ROCKET_HIDEOUT_4
+	jr z, .useFunction2
+	cp ROCK_TUNNEL_1
+	jr z, .useFunction2
+	ld a, [W_CURMAPTILESET]
+	and a ; outside tileset (OVERWORLD)
+	jr z, .useFunction2
+	cp SHIP ; S.S. Anne tileset
+	jr z, .useFunction2
+	cp SHIP_PORT ; Vermilion Port tileset
+	jr z, .useFunction2
+	cp PLATEAU ; Indigo Plateau tileset
+	jr z, .useFunction2
 .useFunction1
-	ld hl,Func_c3ff
+	ld hl, Func_c3ff
 	jr .doBankswitch
 .useFunction2
 	ld hl, Func_c44e
@@ -1299,7 +1299,7 @@ IsBikeRidingAllowed:: ; 09c5 (0:09c5)
 	ret
 
 BikeRidingTilesets:: ; 09e2 (0:09e2)
-	db $00, $03, $0B, $0E, $11, $FF
+	db OVERWORLD, FOREST, UNDERGROUND, SHIP_PORT, CAVERN, $FF
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData:: ; 09e8 (0:09e8)
@@ -1787,24 +1787,24 @@ CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
 ; it's mainly used to simulate differences in elevation
 
 TilePairCollisionsLand:: ; 0c7e (0:0c7e)
-	db $11, $20, $05;
-	db $11, $41, $05;
-	db $03, $30, $2E;
-	db $11, $2A, $05;
-	db $11, $05, $21;
-	db $03, $52, $2E;
-	db $03, $55, $2E;
-	db $03, $56, $2E;
-	db $03, $20, $2E;
-	db $03, $5E, $2E;
-	db $03, $5F, $2E;
-	db $FF;
+	db CAVERN, $20, $05
+	db CAVERN, $41, $05
+	db FOREST, $30, $2E
+	db CAVERN, $2A, $05
+	db CAVERN, $05, $21
+	db FOREST, $52, $2E
+	db FOREST, $55, $2E
+	db FOREST, $56, $2E
+	db FOREST, $20, $2E
+	db FOREST, $5E, $2E
+	db FOREST, $5F, $2E
+	db $FF
 
 TilePairCollisionsWater:: ; 0ca0 (0:0ca0)
-	db $03, $14, $2E;
-	db $03, $48, $2E;
-	db $11, $14, $05;
-	db $FF;
+	db FOREST, $14, $2E
+	db FOREST, $48, $2E
+	db CAVERN, $14, $05
+	db $FF
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
 LoadCurrentMapView:: ; 0caa (0:0caa)
@@ -2408,9 +2408,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	call Func_2307
 	jr .noCollision
 .checkIfVermilionDockTileset
-	ld a,[W_CURMAPTILESET] ; tileset
-	cp a,$0e ; Vermilion Dock tileset
-	jr nz,.noCollision ; keep surfing if it's not the boarding platform tile
+	ld a, [W_CURMAPTILESET] ; tileset
+	cp SHIP_PORT ; Vermilion Dock tileset
+	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
 	jr .stopSurfing ; if it is the boarding platform tile, stop surfing
 
 ; function to run the current map's script
@@ -3659,44 +3659,49 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	ld b, a
 	jp CopyVideoData
 
-Tset0B_Coll:: ; 172f (0:172f)
-	INCBIN "gfx/tilesets/0b.tilecoll"
-Tset00_Coll:: ; 1735 (0:1735)
-	INCBIN "gfx/tilesets/00.tilecoll"
-Tset01_Coll:: ; 1749 (0:1749)
-	INCBIN "gfx/tilesets/01.tilecoll"
-Tset02_Coll:: ; 1753 (0:1753)
-	INCBIN "gfx/tilesets/02.tilecoll"
-Tset05_Coll:: ; 1759 (0:1759)
-	INCBIN "gfx/tilesets/05.tilecoll"
-Tset03_Coll:: ; 1765 (0:1765)
-	INCBIN "gfx/tilesets/03.tilecoll"
-Tset08_Coll:: ; 1775 (0:1775)
-	INCBIN "gfx/tilesets/08.tilecoll"
-Tset09_Coll:: ; 177f (0:177f)
-	INCBIN "gfx/tilesets/09.tilecoll"
-Tset0D_Coll:: ; 178a (0:178a)
-	INCBIN "gfx/tilesets/0d.tilecoll"
-Tset0E_Coll:: ; 1795 (0:1795)
-	INCBIN "gfx/tilesets/0e.tilecoll"
-Tset0F_Coll:: ; 179a (0:179a)
-	INCBIN "gfx/tilesets/0f.tilecoll"
-Tset10_Coll:: ; 17a2 (0:17a2)
-	INCBIN "gfx/tilesets/10.tilecoll"
-Tset11_Coll:: ; 17ac (0:17ac)
-	INCBIN "gfx/tilesets/11.tilecoll"
-Tset12_Coll:: ; 17b8 (0:17b8)
-	INCBIN "gfx/tilesets/12.tilecoll"
-Tset13_Coll:: ; 17c0 (0:17c0)
-	INCBIN "gfx/tilesets/13.tilecoll"
-Tset14_Coll:: ; 17ca (0:17ca)
-	INCBIN "gfx/tilesets/14.tilecoll"
-Tset15_Coll:: ; 17d1 (0:17d1)
-	INCBIN "gfx/tilesets/15.tilecoll"
-Tset16_Coll:: ; 17dd (0:17dd)
-	INCBIN "gfx/tilesets/16.tilecoll"
-Tset17_Coll:: ; 17f0 (0:17f0)
-	INCBIN "gfx/tilesets/17.tilecoll"
+Underground_Coll:: ; 172f (0:172f)
+	INCBIN "gfx/tilesets/underground.tilecoll"
+Overworld_Coll:: ; 1735 (0:1735)
+	INCBIN "gfx/tilesets/overworld.tilecoll"
+RedsHouse1_Coll::
+RedsHouse2_Coll:: ; 1749 (0:1749)
+	INCBIN "gfx/tilesets/reds_house.tilecoll"
+Mart_Coll
+Pokecenter_Coll:: ; 1753 (0:1753)
+	INCBIN "gfx/tilesets/pokecenter.tilecoll"
+Dojo_Coll::
+Gym_Coll:: ; 1759 (0:1759)
+	INCBIN "gfx/tilesets/gym.tilecoll"
+Forest_Coll:: ; 1765 (0:1765)
+	INCBIN "gfx/tilesets/forest.tilecoll"
+House_Coll:: ; 1775 (0:1775)
+	INCBIN "gfx/tilesets/house.tilecoll"
+ForestGate_Coll::
+Museum_Coll::
+Gate_Coll:: ; 177f (0:177f)
+	INCBIN "gfx/tilesets/gate.tilecoll"
+Ship_Coll:: ; 178a (0:178a)
+	INCBIN "gfx/tilesets/ship.tilecoll"
+ShipPort_Coll:: ; 1795 (0:1795)
+	INCBIN "gfx/tilesets/ship_port.tilecoll"
+Cemetery_Coll:: ; 179a (0:179a)
+	INCBIN "gfx/tilesets/cemetery.tilecoll"
+Interior_Coll:: ; 17a2 (0:17a2)
+	INCBIN "gfx/tilesets/interior.tilecoll"
+Cavern_Coll:: ; 17ac (0:17ac)
+	INCBIN "gfx/tilesets/cavern.tilecoll"
+Lobby_Coll:: ; 17b8 (0:17b8)
+	INCBIN "gfx/tilesets/lobby.tilecoll"
+Mansion_Coll:: ; 17c0 (0:17c0)
+	INCBIN "gfx/tilesets/mansion.tilecoll"
+Lab_Coll:: ; 17ca (0:17ca)
+	INCBIN "gfx/tilesets/lab.tilecoll"
+Club_Coll:: ; 17d1 (0:17d1)
+	INCBIN "gfx/tilesets/club.tilecoll"
+Facility_Coll:: ; 17dd (0:17dd)
+	INCBIN "gfx/tilesets/facility.tilecoll"
+Plateau_Coll:: ; 17f0 (0:17f0)
+	INCBIN "gfx/tilesets/plateau.tilecoll"
 ;Tile Collision ends 0x17f7
 
 ; does the same thing as FarCopyData at 009D
@@ -8273,7 +8278,7 @@ Func_32f9:: ; 32f9 (0:32f9)
 Func_32fe:: ; 32fe (0:32fe)
 	ld hl, Func_5685d
 asm_3301:: ; 3301 (0:3301)
-	ld b, $15
+	ld b, BANK(Func_567f9) ; BANK(Func_56819), BANK(Func_5683d), BANK(Func_5685d)
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers:: ; 3306 (0:3306)
@@ -13287,7 +13292,7 @@ Func_5530
 	ld a, $1
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	ld hl, wEnemyMons
 	call Func_57d6
@@ -13346,7 +13351,7 @@ Func_5530
 	ld a, $4
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	call Func_57d6
 	jp .asm_565b
@@ -13441,7 +13446,7 @@ Func_5530
 	ld a, $4
 	ld [$d11b], a
 	ld hl, Func_39bd5
-	ld b, $e
+	ld b, BANK(Func_39bd5)
 	call Bankswitch
 	call Func_57d6
 	call LoadScreenTilesFromBuffer1
@@ -13833,14 +13838,14 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	jp InitGame
 .asm_5a75
 	call Func_5317
-	ld hl, Tset15_GFX
+	ld hl, Club_GFX
 	ld a, h
 	ld [$d52f], a
 	ld a, l
 	ld [$d52e], a
-	ld a, Bank(Tset15_GFX)
+	ld a, Bank(Club_GFX)
 	ld [$d52b], a
-	ld hl, Tset15_Coll
+	ld hl, Club_Coll
 	ld a, h
 	ld [$d531], a
 	ld a, l
@@ -15054,86 +15059,86 @@ DungeonWarpData: ; 63d8 (1:63d8)
 FirstMapSpec: ; 6420 (1:6420)
 	db REDS_HOUSE_2F
 	FLYWARP_DATA REDS_HOUSE_2F_WIDTH,6,3
-	db $04
+	db REDS_HOUSE_2
 
 BattleCenterSpec1: ; 6428 (1:6428)
 	db BATTLE_CENTER
 	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,3
-	db $15
+	db CLUB
 
 BattleCenterSpec2: ; 6430 (1:6430)
 	db BATTLE_CENTER
 	FLYWARP_DATA BATTLE_CENTER_WIDTH,4,6
-	db $15
+	db CLUB
 
 TradeCenterSpec1: ; 6438 (1:6438)
 	db TRADE_CENTER
 	FLYWARP_DATA TRADE_CENTER_WIDTH,4,3
-	db $15
+	db CLUB
 
 TradeCenterSpec2: ; 6440 (1:6440)
 	db TRADE_CENTER
 	FLYWARP_DATA TRADE_CENTER_WIDTH,4,6
-	db $15
+	db CLUB
 
 FlyWarpDataPtr: ; 6448 (1:6448)
-	db $00,0
-	dw Map00FlyWarp
-	db $01,0
-	dw Map01FlyWarp
-	db $02,0
-	dw Map02FlyWarp
-	db $03,0
-	dw Map03FlyWarp
-	db $04,0
-	dw Map04FlyWarp
-	db $05,0
-	dw Map05FlyWarp
-	db $06,0
-	dw Map06FlyWarp
-	db $07,0
-	dw Map07FlyWarp
-	db $08,0
-	dw Map08FlyWarp
-	db $09,0
-	dw Map09FlyWarp
-	db $0A,0
-	dw Map0aFlyWarp
-	db $0F,0
-	dw Map0fFlyWarp
-	db $15,0
-	dw Map15FlyWarp
+	db PALLET_TOWN, 0
+	dw PalletTownFlyWarp
+	db VIRIDIAN_CITY, 0
+	dw ViridianCityFlyWarp
+	db PEWTER_CITY, 0
+	dw PewterCityFlyWarp
+	db CERULEAN_CITY, 0
+	dw CeruleanCityFlyWarp
+	db LAVENDER_TOWN, 0
+	dw LavenderTownFlyWarp
+	db VERMILION_CITY, 0
+	dw VermilionCityFlyWarp
+	db CELADON_CITY, 0
+	dw CeladonCityFlyWarp
+	db FUCHSIA_CITY, 0
+	dw FuchsiaCityFlyWarp
+	db CINNABAR_ISLAND, 0
+	dw CinnabarIslandFlyWarp
+	db INDIGO_PLATEAU, 0
+	dw IndigoPlateauFlyWarp
+	db SAFFRON_CITY, 0
+	dw SaffronCityFlyWarp
+	db ROUTE_4, 0
+	dw Route4FlyWarp
+	db ROUTE_10, 0
+	dw Route10FlyWarp
 
 ; Original Format:
 ;   [Event Displacement][Y-block][X-block][Y-sub_block][X-sub_block]
 ; Macro Format:
 ;   FLYWARP_DATA [Map Width][Y-pos][X-pos]
-Map00FlyWarp: ; 647c (1:647c)
-	FLYWARP_DATA 10,6,5
-Map01FlyWarp: ; 6482 (1:6482)
-	FLYWARP_DATA 20,26,23
-Map02FlyWarp: ; 6488 (1:6488)
-	FLYWARP_DATA 20,26,13
-Map03FlyWarp: ; 648e (1:648e)
-	FLYWARP_DATA 20,18,19
-Map04FlyWarp: ; 6494 (1:6494)
-	FLYWARP_DATA 10,6,3
-Map05FlyWarp: ; 649a (1:649a)
-	FLYWARP_DATA 20,4,11
-Map06FlyWarp: ; 64a0 (1:64a0)
-	FLYWARP_DATA 25,10,41
-Map07FlyWarp: ; 64a6 (1:64a6)
-	FLYWARP_DATA 20,28,19
-Map08FlyWarp: ; 64ac (1:64ac)
-	FLYWARP_DATA 10,12,11
-Map09FlyWarp: ; 64b2 (1:64b2)
-	FLYWARP_DATA 10,6,9
-Map0aFlyWarp: ; 64b8 (1:64b8)
-	FLYWARP_DATA 20,30,9
-Map0fFlyWarp: ; 64be (1:64be)
-	FLYWARP_DATA 45,6,11
-Map15FlyWarp: ; 64c4 (1:64c4)
-	FLYWARP_DATA 10,20,11
+PalletTownFlyWarp: ; 647c (1:647c)
+	FLYWARP_DATA PALLET_TOWN_WIDTH,      6,  5
+ViridianCityFlyWarp: ; 6482 (1:6482)
+	FLYWARP_DATA VIRIDIAN_CITY_WIDTH,   26, 23
+PewterCityFlyWarp: ; 6488 (1:6488)
+	FLYWARP_DATA PEWTER_CITY_WIDTH,     26, 13
+CeruleanCityFlyWarp: ; 648e (1:648e)
+	FLYWARP_DATA CERULEAN_CITY_WIDTH,   18, 19
+LavenderTownFlyWarp: ; 6494 (1:6494)
+	FLYWARP_DATA LAVENDER_TOWN_WIDTH,    6,  3
+VermilionCityFlyWarp: ; 649a (1:649a)
+	FLYWARP_DATA VERMILION_CITY_WIDTH,   4, 11
+CeladonCityFlyWarp: ; 64a0 (1:64a0)
+	FLYWARP_DATA CELADON_CITY_WIDTH,    10, 41
+FuchsiaCityFlyWarp: ; 64a6 (1:64a6)
+	FLYWARP_DATA FUCHSIA_CITY_WIDTH,    28, 19
+CinnabarIslandFlyWarp: ; 64ac (1:64ac)
+	FLYWARP_DATA CINNABAR_ISLAND_WIDTH, 12, 11
+IndigoPlateauFlyWarp: ; 64b2 (1:64b2)
+	FLYWARP_DATA INDIGO_PLATEAU_WIDTH,   6,  9
+SaffronCityFlyWarp: ; 64b8 (1:64b8)
+	FLYWARP_DATA SAFFRON_CITY_WIDTH,    30,  9
+Route4FlyWarp: ; 64be (1:64be)
+	FLYWARP_DATA ROUTE_4_WIDTH,          6, 11
+Route10FlyWarp: ; 64c4 (1:64c4)
+	FLYWARP_DATA ROUTE_10_WIDTH,        20, 11
 
 ; This function appears to never be used.
 ; It is likely a debugging feature to give the player Tsunekazu Ishihara's
@@ -19128,89 +19133,89 @@ Func_c49d: ; c49d (3:449d)
 	ret
 
 WarpTileIDPointers: ; c4cc (3:44cc)
-	dw Tileset00WarpTileIDs
-	dw Tileset01WarpTileIDs
-	dw Tileset02WarpTileIDs
-	dw Tileset03WarpTileIDs
-	dw Tileset04WarpTileIDs
-	dw Tileset05WarpTileIDs
-	dw Tileset06WarpTileIDs
-	dw Tileset07WarpTileIDs
-	dw Tileset08WarpTileIDs
-	dw Tileset09WarpTileIDs
-	dw Tileset0AWarpTileIDs
-	dw Tileset0BWarpTileIDs
-	dw Tileset0CWarpTileIDs
-	dw Tileset0DWarpTileIDs
-	dw Tileset0EWarpTileIDs
-	dw Tileset0FWarpTileIDs
-	dw Tileset10WarpTileIDs
-	dw Tileset11WarpTileIDs
-	dw Tileset12WarpTileIDs
-	dw Tileset13WarpTileIDs
-	dw Tileset14WarpTileIDs
-	dw Tileset15WarpTileIDs
-	dw Tileset16WarpTileIDs
-	dw Tileset17WarpTileIDs
+	dw OverworldWarpTileIDs
+	dw RedsHouse1WarpTileIDs
+	dw MartWarpTileIDs
+	dw ForestWarpTileIDs
+	dw RedsHouse2WarpTileIDs
+	dw DojoWarpTileIDs
+	dw PokecenterWarpTileIDs
+	dw GymWarpTileIDs
+	dw HouseWarpTileIDs
+	dw ForestGateWarpTileIDs
+	dw MuseumWarpTileIDs
+	dw UndergroundWarpTileIDs
+	dw GateWarpTileIDs
+	dw ShipWarpTileIDs
+	dw ShipPortWarpTileIDs
+	dw CemeteryWarpTileIDs
+	dw InteriorWarpTileIDs
+	dw CavernWarpTileIDs
+	dw LobbyWarpTileIDs
+	dw MansionWarpTileIDs
+	dw LabWarpTileIDs
+	dw ClubWarpTileIDs
+	dw FacilityWarpTileIDs
+	dw PlateauWarpTileIDs
 
-Tileset00WarpTileIDs: ; c4fc (3:44fc)
+OverworldWarpTileIDs: ; c4fc (3:44fc)
 	db $1B,$58,$FF
 
-Tileset09WarpTileIDs: ; c4ff (3:44ff)
-Tileset0AWarpTileIDs: ; c4ff (3:44ff)
-Tileset0CWarpTileIDs: ; c4ff (3:44ff)
+ForestGateWarpTileIDs: ; c4ff (3:44ff)
+MuseumWarpTileIDs: ; c4ff (3:44ff)
+GateWarpTileIDs: ; c4ff (3:44ff)
 	db $3B
 
-Tileset01WarpTileIDs: ; c500 (3:4500)
-Tileset04WarpTileIDs: ; c500 (3:4500)
+RedsHouse1WarpTileIDs: ; c500 (3:4500)
+RedsHouse2WarpTileIDs: ; c500 (3:4500)
 	db $1A,$1C,$FF
 
-Tileset02WarpTileIDs: ; c503 (3:4503)
-Tileset06WarpTileIDs: ; c503 (3:4503)
+MartWarpTileIDs: ; c503 (3:4503)
+PokecenterWarpTileIDs: ; c503 (3:4503)
 	db $5E,$FF
 
-Tileset03WarpTileIDs: ; c505 (3:4505)
+ForestWarpTileIDs: ; c505 (3:4505)
 	db $5A,$5C,$3A,$FF
 
-Tileset05WarpTileIDs: ; c509 (3:4509)
-Tileset07WarpTileIDs: ; c509 (3:4509)
+DojoWarpTileIDs: ; c509 (3:4509)
+GymWarpTileIDs: ; c509 (3:4509)
 	db $4A,$FF
 
-Tileset08WarpTileIDs: ; c50b (3:450b)
+HouseWarpTileIDs: ; c50b (3:450b)
 	db $54,$5C,$32,$FF
 
-Tileset0DWarpTileIDs: ; c50f (3:450f)
+ShipWarpTileIDs: ; c50f (3:450f)
 	db $37,$39,$1E,$4A,$FF
 
-Tileset10WarpTileIDs: ; c514 (3:4514)
+InteriorWarpTileIDs: ; c514 (3:4514)
 	db $15,$55,$04,$FF
 
-Tileset11WarpTileIDs: ; c518 (3:4518)
+CavernWarpTileIDs: ; c518 (3:4518)
 	db $18,$1A,$22,$FF
 
-Tileset12WarpTileIDs: ; c51c (3:451c)
+LobbyWarpTileIDs: ; c51c (3:451c)
 	db $1A,$1C,$38,$FF
 
-Tileset13WarpTileIDs: ; c520 (3:4520)
+MansionWarpTileIDs: ; c520 (3:4520)
 	db $1A,$1C,$53,$FF
 
-Tileset14WarpTileIDs: ; c524 (3:4524)
+LabWarpTileIDs: ; c524 (3:4524)
 	db $34,$FF
 
-Tileset16WarpTileIDs: ; c526 (3:4526)
+FacilityWarpTileIDs: ; c526 (3:4526)
 	db $43,$58,$20
 
-Tileset0FWarpTileIDs: ; c529 (3:4529)
+CemeteryWarpTileIDs: ; c529 (3:4529)
 	db $1B
 
-Tileset0BWarpTileIDs: ; c52a (3:452a)
+UndergroundWarpTileIDs: ; c52a (3:452a)
 	db $13,$FF
 
-Tileset17WarpTileIDs: ; c52c (3:452c)
+PlateauWarpTileIDs: ; c52c (3:452c)
 	db $1B,$3B
 
-Tileset0EWarpTileIDs: ; c52e (3:452e)
-Tileset15WarpTileIDs: ; c52e (3:452e)
+ShipPortWarpTileIDs: ; c52e (3:452e)
+ClubWarpTileIDs: ; c52e (3:452e)
 	db $FF
 
 Func_c52f: ; c52f (3:452f)
@@ -19570,7 +19575,7 @@ Func_c754: ; c754 (3:4754)
 	inc d
 .asm_c765
 	ld e, a
-	ld hl, TilesetsHeadPtr
+	ld hl, Tilesets
 	add hl, de
 	ld de, $d52b
 	ld c, $b
@@ -19588,7 +19593,7 @@ Func_c754: ; c754 (3:4754)
 	ld a, [W_CURMAPTILESET] ; $d367
 	push hl
 	push de
-	ld hl, DungeonTilesetIDs ; $47b2
+	ld hl, DungeonTilesets ; $47b2
 	ld de, $1
 	call IsInArray
 	pop de
@@ -19613,34 +19618,34 @@ Func_c754: ; c754 (3:4754)
 .asm_c7b1
 	ret
 
-DungeonTilesetIDs: ; c7b2 (3:47b2)
-	db $03,$0A,$0D,$11,$12,$13,$0C,$14,$16,$0F,$07,$FF
+DungeonTilesets: ; c7b2 (3:47b2)
+	db FOREST, MUSEUM, SHIP, CAVERN, LOBBY, MANSION, GATE, LAB, FACILITY, CEMETERY, GYM, $FF
 
-TilesetsHeadPtr: ; c7be (3:47be)
-	TSETHEAD Tset00_Block,Tset00_GFX,Tset00_Coll,$FF,$FF,$FF,$52,2
-	TSETHEAD Tset01_Block,Tset01_GFX,Tset01_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset02_Block,Tset02_GFX,Tset02_Coll,$18,$19,$1E,$FF,0
-	TSETHEAD Tset03_Block,Tset03_GFX,Tset03_Coll,$FF,$FF,$FF,$20,1
-	TSETHEAD Tset01_Block,Tset01_GFX,Tset01_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset05_Block,Tset05_GFX,Tset05_Coll,$3A,$FF,$FF,$FF,2
-	TSETHEAD Tset02_Block,Tset02_GFX,Tset02_Coll,$18,$19,$1E,$FF,0
-	TSETHEAD Tset05_Block,Tset05_GFX,Tset05_Coll,$3A,$FF,$FF,$FF,2
-	TSETHEAD Tset08_Block,Tset08_GFX,Tset08_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
-	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
-	TSETHEAD Tset0B_Block,Tset0B_GFX,Tset0B_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset09_Block,Tset09_GFX,Tset09_Coll,$17,$32,$FF,$FF,0
-	TSETHEAD Tset0D_Block,Tset0D_GFX,Tset0D_Coll,$FF,$FF,$FF,$FF,1
-	TSETHEAD Tset0E_Block,Tset0E_GFX,Tset0E_Coll,$FF,$FF,$FF,$FF,1
-	TSETHEAD Tset0F_Block,Tset0F_GFX,Tset0F_Coll,$12,$FF,$FF,$FF,0
-	TSETHEAD Tset10_Block,Tset10_GFX,Tset10_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset11_Block,Tset11_GFX,Tset11_Coll,$FF,$FF,$FF,$FF,1
-	TSETHEAD Tset12_Block,Tset12_GFX,Tset12_Coll,$15,$36,$FF,$FF,0
-	TSETHEAD Tset13_Block,Tset13_GFX,Tset13_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset14_Block,Tset14_GFX,Tset14_Coll,$FF,$FF,$FF,$FF,0
-	TSETHEAD Tset15_Block,Tset15_GFX,Tset15_Coll,$07,$17,$FF,$FF,0
-	TSETHEAD Tset16_Block,Tset16_GFX,Tset16_Coll,$12,$FF,$FF,$FF,1
-	TSETHEAD Tset17_Block,Tset17_GFX,Tset17_Coll,$FF,$FF,$FF,$45,1
+Tilesets: ; c7be (3:47be)
+	tileset Overworld_Block,   Overworld_GFX,   Overworld_Coll,   $FF,$FF,$FF, $52, OUTDOOR
+	tileset RedsHouse1_Block,  RedsHouse1_GFX,  RedsHouse1_Coll,  $FF,$FF,$FF, $FF, INDOOR
+	tileset Mart_Block,        Mart_GFX,        Mart_Coll,        $18,$19,$1E, $FF, INDOOR
+	tileset Forest_Block,      Forest_GFX,      Forest_Coll,      $FF,$FF,$FF, $20, CAVE
+	tileset RedsHouse2_Block,  RedsHouse2_GFX,  RedsHouse2_Coll,  $FF,$FF,$FF, $FF, INDOOR
+	tileset Dojo_Block,        Dojo_GFX,        Dojo_Coll,        $3A,$FF,$FF, $FF, OUTDOOR
+	tileset Pokecenter_Block,  Pokecenter_GFX,  Pokecenter_Coll,  $18,$19,$1E, $FF, INDOOR
+	tileset Gym_Block,         Gym_GFX,         Gym_Coll,         $3A,$FF,$FF, $FF, OUTDOOR
+	tileset House_Block,       House_GFX,       House_Coll,       $FF,$FF,$FF, $FF, INDOOR
+	tileset ForestGate_Block,  ForestGate_GFX,  ForestGate_Coll,  $17,$32,$FF, $FF, INDOOR
+	tileset Museum_Block,      Museum_GFX,      Museum_Coll,      $17,$32,$FF, $FF, INDOOR
+	tileset Underground_Block, Underground_GFX, Underground_Coll, $FF,$FF,$FF, $FF, INDOOR
+	tileset Gate_Block,        Gate_GFX,        Gate_Coll,        $17,$32,$FF, $FF, INDOOR
+	tileset Ship_Block,        Ship_GFX,        Ship_Coll,        $FF,$FF,$FF, $FF, CAVE
+	tileset ShipPort_Block,    ShipPort_GFX,    ShipPort_Coll,    $FF,$FF,$FF, $FF, CAVE
+	tileset Cemetery_Block,    Cemetery_GFX,    Cemetery_Coll,    $12,$FF,$FF, $FF, INDOOR
+	tileset Interior_Block,    Interior_GFX,    Interior_Coll,    $FF,$FF,$FF, $FF, INDOOR
+	tileset Cavern_Block,      Cavern_GFX,      Cavern_Coll,      $FF,$FF,$FF, $FF, CAVE
+	tileset Lobby_Block,       Lobby_GFX,       Lobby_Coll,       $15,$36,$FF, $FF, INDOOR
+	tileset Mansion_Block,     Mansion_GFX,     Mansion_Coll,     $FF,$FF,$FF, $FF, INDOOR
+	tileset Lab_Block,         Lab_GFX,         Lab_Coll,         $FF,$FF,$FF, $FF, INDOOR
+	tileset Club_Block,        Club_GFX,        Club_Coll,        $07,$17,$FF, $FF, INDOOR
+	tileset Facility_Block,    Facility_GFX,    Facility_Coll,    $12,$FF,$FF, $FF, CAVE
+	tileset Plateau_Block,     Plateau_GFX,     Plateau_Coll,     $FF,$FF,$FF, $45, CAVE
 
 Func_c8de: ; c8de (3:48de)
 	ld a, [W_DAYCARE_IN_USE]
@@ -25716,7 +25721,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	jp ItemUseNotTime
 
 EscapeRopeTilesets: ; dffd (3:5ffd)
-	db $03,$0f,$11,$16,$10
+	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
 	db $ff ; terminator
 
 ItemUseRepel: ; e003 (3:6003)
@@ -27093,22 +27098,22 @@ Func_e7a4: ; e7a4 (3:67a4)
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
 IsNextTileShoreOrWater: ; e8b8 (3:68b8)
-	ld a,[W_CURMAPTILESET]
-	ld hl,WaterTilesets
+	ld a, [W_CURMAPTILESET]
+	ld hl, WaterTilesets
 	ld de,1
 	call IsInArray
-	jr nc,.notShoreOrWater
-	ld a,[W_CURMAPTILESET]
-	cp a,$0e ; Vermilion Dock tileset
-	ld a,[$cfc6] ; tile in front of player
-	jr z,.skipShoreTiles ; if it's the Vermilion Dock tileset
-	cp a,$48 ; eastern shore tile in Safari Zone
-	jr z,.shoreOrWater
-	cp a,$32 ; usual eastern shore tile
-	jr z,.shoreOrWater
+	jr nc, .notShoreOrWater
+	ld a, [W_CURMAPTILESET]
+	cp SHIP_PORT ; Vermilion Dock tileset
+	ld a, [$cfc6] ; tile in front of player
+	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
+	cp $48 ; eastern shore tile in Safari Zone
+	jr z, .shoreOrWater
+	cp $32 ; usual eastern shore tile
+	jr z, .shoreOrWater
 .skipShoreTiles
-	cp a,$14 ; water tile
-	jr z,.shoreOrWater
+	cp $14 ; water tile
+	jr z, .shoreOrWater
 .notShoreOrWater
 	scf
 	ret
@@ -27118,7 +27123,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 
 ; tilesets with water
 WaterTilesets: ; e8e0 (3:68e0)
-	db $00,$03,$05,$07,$0d,$0e,$11,$16,$17
+	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU
 	db $ff ; terminator
 
 ReadSuperRodData: ; e8ea (3:68ea)
@@ -27570,20 +27575,20 @@ Func_ef54: ; ef54 (3:6f54)
 	xor a
 	ld [$cd6a], a
 	ld a, [W_CURMAPTILESET] ; $d367
-	and a
+	and a ; OVERWORLD
 	jr z, .asm_ef6b
-	cp $7
+	cp GYM
 	jr nz, .asm_ef77
 	ld a, [$cfc6]
-	cp $50
+	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
 	jr asm_ef82
 .asm_ef6b
 	dec a
 	ld a, [$cfc6]
-	cp $3d
+	cp $3d ; cut tree
 	jr z, asm_ef82
-	cp $52
+	cp $52 ; grass
 	jr z, asm_ef82
 .asm_ef77
 	ld hl, UnnamedText_ef7d ; $6f7d
@@ -27649,13 +27654,13 @@ Func_eff7: ; eff7 (3:6ff7)
 	ld a, [$cd4d]
 	cp $52
 	jr z, .asm_f020
-	ld de, Tset00_GFX + $2d0 ; $42d0 ; cuttable tree sprite top row
+	ld de, Overworld_GFX + $2d0 ; $42d0 ; cuttable tree sprite top row
 	ld hl, $8fc0
-	ld bc, (BANK(Tset00_GFX) << 8) + $02
+	ld bc, (BANK(Overworld_GFX) << 8) + $02
 	call CopyVideoData
-	ld de, Tset00_GFX + $3d0 ; $43d0 ; cuttable tree sprite bottom row
+	ld de, Overworld_GFX + $3d0 ; $43d0 ; cuttable tree sprite bottom row
 	ld hl, $8fe0
-	ld bc, (BANK(Tset00_GFX) << 8) + $02
+	ld bc, (BANK(Overworld_GFX) << 8) + $02
 	call CopyVideoData
 	jr asm_f055
 .asm_f020
@@ -29572,23 +29577,23 @@ Func_fb50: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
-	db $17,$30,$3A
-	db $08,$3D,$3F
-	db $08,$1E,$40
-	db $13,$32,$40
-	db $01,$32,$40
-	db $14,$28,$40
-	db $12,$16,$41
-	db $07,$1D,$40
-	db $05,$1D,$40
-	db $0C,$22,$40
-	db $02,$54,$42
-	db $02,$55,$42
-	db $06,$54,$42
-	db $06,$55,$42
-	db $12,$50,$42
-	db $12,$52,$42
-	db $0D,$36,$40
+	db PLATEAU,      $30, $3A
+	db HOUSE,        $3D, $3F
+	db HOUSE,        $1E, $40
+	db MANSION,      $32, $40
+	db REDS_HOUSE_1, $32, $40
+	db LAB,          $28, $40
+	db LOBBY,        $16, $41
+	db GYM,          $1D, $40
+	db DOJO,         $1D, $40
+	db GATE,         $22, $40
+	db MART,         $54, $42
+	db MART,         $55, $42
+	db POKECENTER,   $54, $42
+	db POKECENTER,   $55, $42
+	db LOBBY,        $50, $42
+	db LOBBY,        $52, $42
+	db SHIP,         $36, $40
 	db $FF
 
 IndigoPlateauStatues: ; fbbf (3:7bbf)
@@ -29620,7 +29625,7 @@ BookOrSculptureText: ; fbe8 (3:7be8)
 	db $08 ; asm
 	ld hl, PokemonBooksText
 	ld a, [W_CURMAPTILESET]
-	cp $13 ; Celadon Mansion tileset
+	cp MANSION ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
 	ld a, [$c420]
 	cp $38
@@ -31774,7 +31779,7 @@ Func_13870: ; 13870 (4:7870)
 	cp REDS_HOUSE_1F
 	jr c, .asm_13912
 	ld a, [W_CURMAPTILESET] ; $d367
-	cp $3 ; Viridian Forest/Safari Zone
+	cp FOREST ; Viridian Forest/Safari Zone
 	jr z, .asm_13912
 	ld a, [W_GRASSRATE] ; $d887
 .asm_138c4
@@ -33483,7 +33488,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 SECTION "bank6",ROMX,BANK[$6]
 
 CeladonCity_h: ; 18000 (6:4000)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db CELADON_CITY_HEIGHT, CELADON_CITY_WIDTH ; dimensions (y, x)
 	dw CeladonCityBlocks, CeladonCityTextPointers, CeladonCityScript ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -33550,7 +33555,7 @@ CeladonCityBlocks: ; 180df (6:40df)
 	INCBIN "maps/celadoncity.blk"
 
 PalletTown_h: ; 182a1 (6:42a1)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTextPointers, PalletTownScript
 	db NORTH | SOUTH ; connections
@@ -33586,7 +33591,7 @@ PalletTownBlocks: ; 182fd (6:42fd)
 	INCBIN "maps/pallettown.blk"
 
 ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
 	dw ViridianCityBlocks, ViridianCityTextPointers, ViridianCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
@@ -33633,7 +33638,7 @@ ViridianCityBlocks: ; 183ec (6:43ec)
 	INCBIN "maps/viridiancity.blk"
 
 PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
 	dw PewterCityBlocks, PewterCityTextPointers, PewterCityScript ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
@@ -33684,7 +33689,7 @@ PewterCityBlocks: ; 185e6 (6:45e6)
 	INCBIN "maps/pewtercity.blk"
 
 CeruleanCity_h: ; 0x1874e to 0x18786 (56 bytes) (bank=6) (id=3)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db CERULEAN_CITY_HEIGHT, CERULEAN_CITY_WIDTH ; dimensions (y, x)
 	dw CeruleanCityBlocks, CeruleanCityTextPointers, CeruleanCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST | EAST ; connections
@@ -33746,7 +33751,7 @@ CeruleanCityBlocks: ; 18830 (6:4830)
 	INCBIN "maps/ceruleancity.blk"
 
 VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
 	dw VermilionCityBlocks, VermilionCityTextPointers, VermilionCityScript ; blocks, texts, scripts
 	db NORTH | EAST ; connections
@@ -33800,7 +33805,7 @@ VermilionCityBlocks: ; 18a3f (6:4a3f)
 	INCBIN "maps/vermilioncity.blk"
 
 FuchsiaCity_h: ; 0x18ba7 to 0x18bd4 (45 bytes) (bank=6) (id=7)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db FUCHSIA_CITY_HEIGHT, FUCHSIA_CITY_WIDTH ; dimensions (y, x)
 	dw FuchsiaCityBlocks, FuchsiaCityTextPointers, FuchsiaCityScript ; blocks, texts, scripts
 	db SOUTH | WEST | EAST ; connections
@@ -35834,7 +35839,7 @@ UnnamedText_19b2a: ; 19b2a (6:5b2a)
 	db "@"
 
 BluesHouse_h: ; 0x19b2f id=39
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions
 	dw BluesHouseBlocks, BluesHouseTextPointers, BluesHouseScript
 	db 0
@@ -35953,7 +35958,7 @@ BluesHouseBlocks: ; 19bf6 (6:5bf6)
 	INCBIN "maps/blueshouse.blk"
 
 VermilionHouse3_h: ; 0x19c06 to 0x19c12 (12 bytes) (bank=6) (id=196)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db VERMILION_HOUSE_3_HEIGHT, VERMILION_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw VermilionHouse3Blocks, VermilionHouse3TextPointers, VermilionHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -35993,7 +35998,7 @@ VermilionHouse3Blocks: ; 19c3f (6:5c3f)
 	INCBIN "maps/vermilionhouse3.blk"
 
 IndigoPlateauLobby_h: ; 0x19c4f to 0x19c5b (12 bytes) (bank=6) (id=174)
-	db $02 ; tileset
+	db MART ; tileset
 	db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauLobbyBlocks, IndigoPlateauLobbyTextPointers, IndigoPlateauLobbyScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -36067,7 +36072,7 @@ IndigoPlateauLobbyBlocks: ; 19ccf (6:5ccf)
 	INCBIN "maps/indigoplateaulobby.blk"
 
 SilphCo4_h: ; 0x19cff to 0x19d0b (12 bytes) (bank=6) (id=209)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_4F_HEIGHT, SILPH_CO_4F_WIDTH ; dimensions (y, x)
 	dw SilphCo4Blocks, SilphCo4TextPointers, SilphCo4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -36311,7 +36316,7 @@ SilphCo4Blocks: ; 19ea4 (6:5ea4)
 	INCBIN "maps/silphco4.blk"
 
 SilphCo5_h: ; 0x19f2b to 0x19f37 (12 bytes) (bank=6) (id=210)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_5F_HEIGHT, SILPH_CO_5F_WIDTH ; dimensions (y, x)
 	dw SilphCo5Blocks, SilphCo5TextPointers, SilphCo5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -36581,7 +36586,7 @@ SilphCo5Blocks: ; 1a116 (6:6116)
 	INCBIN "maps/silphco5.blk"
 
 SilphCo6_h: ; 0x1a19d to 0x1a1a9 (12 bytes) (bank=6) (id=211)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_6F_HEIGHT, SILPH_CO_6F_WIDTH ; dimensions (y, x)
 	dw SilphCo6Blocks, SilphCo6TextPointers, SilphCo6Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -37167,65 +37172,65 @@ Func_1a609: ; 1a609 (6:6609)
 	ret
 
 DoorTileIDPointers: ; 1a62c (6:662c)
-	db $00
-	dw Tileset00DoorTileIDs
-	db $03
-	dw Tileset03DoorTileIDs
-	db $02
-	dw Tileset02DoorTileIDs
-	db $08
-	dw Tileset08DoorTileIDs
-	db $09
+	db OVERWORLD
+	dw OverworldDoorTileIDs
+	db FOREST
+	dw ForestDoorTileIDs
+	db MART
+	dw MartDoorTileIDs
+	db HOUSE
+	dw HouseDoorTileIDs
+	db FOREST_GATE
 	dw TilesetMuseumDoorTileIDs
-	db $0a
+	db MUSEUM
 	dw TilesetMuseumDoorTileIDs
-	db $0c
+	db GATE
 	dw TilesetMuseumDoorTileIDs
-	db $0d
-	dw Tileset0DDoorTileIDs
-	db $12
-	dw Tileset12DoorTileIDs
-	db $13
-	dw Tileset13DoorTileIDs
-	db $14
-	dw Tileset14DoorTileIDs
-	db $16
-	dw Tileset16DoorTileIDs
-	db $17
-	dw Tileset17DoorTileIDs
+	db SHIP
+	dw ShipDoorTileIDs
+	db LOBBY
+	dw LobbyDoorTileIDs
+	db MANSION
+	dw MansionDoorTileIDs
+	db LAB
+	dw LabDoorTileIDs
+	db FACILITY
+	dw FacilityDoorTileIDs
+	db PLATEAU
+	dw PlateauDoorTileIDs
 	db $ff
 
-Tileset00DoorTileIDs: ; 1a654 (6:6654)
+OverworldDoorTileIDs: ; 1a654 (6:6654)
 	db $1B,$58,$00
 
-Tileset03DoorTileIDs: ; 1a657 (6:6657)
+ForestDoorTileIDs: ; 1a657 (6:6657)
 	db $3a,$00
 
-Tileset02DoorTileIDs: ; 1a659 (6:6659)
+MartDoorTileIDs: ; 1a659 (6:6659)
 	db $5e,$00
 
-Tileset08DoorTileIDs: ; 1a65b (6:665b)
+HouseDoorTileIDs: ; 1a65b (6:665b)
 	db $54,$00
 
 TilesetMuseumDoorTileIDs: ; 1a65d (6:665d)
 	db $3b,$00
 
-Tileset0DDoorTileIDs: ; 1a65f (6:665f)
+ShipDoorTileIDs: ; 1a65f (6:665f)
 	db $1e,$00
 
-Tileset12DoorTileIDs: ; 1a661 (6:6661)
+LobbyDoorTileIDs: ; 1a661 (6:6661)
 	db $1c,$38,$1a,$00
 
-Tileset13DoorTileIDs: ; 1a665 (6:6665)
+MansionDoorTileIDs: ; 1a665 (6:6665)
 	db $1a,$1c,$53,$00
 
-Tileset14DoorTileIDs: ; 1a669 (6:6669)
+LabDoorTileIDs: ; 1a669 (6:6669)
 	db $34,$00
 
-Tileset16DoorTileIDs: ; 1a66b (6:666b)
+FacilityDoorTileIDs: ; 1a66b (6:666b)
 	db $43,$58,$1b,$00
 
-Tileset17DoorTileIDs: ; 1a66f (6:666f)
+PlateauDoorTileIDs: ; 1a66f (6:666f)
 	db $3b,$1b,$00
 
 Func_1a672: ; 1a672 (6:6672)
@@ -37233,7 +37238,7 @@ Func_1a672: ; 1a672 (6:6672)
 	bit 6, a
 	ret nz
 	ld a, [W_CURMAPTILESET] ; $d367
-	and a
+	and a ; OVERWORLD
 	ret nz
 	ld a, $35
 	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
@@ -37319,7 +37324,7 @@ LedgeHoppingShadowOAM: ; 1a710 (6:6710)
 SECTION "bank7",ROMX,BANK[$7]
 
 CinnabarIsland_h: ; 0x1c000 to 0x1c022 (34 bytes) (bank=7) (id=8)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
 	dw CinnabarIslandBlocks, CinnabarIslandTextPointers, CinnabarIslandScript ; blocks, texts, scripts
 	db NORTH | EAST ; connections
@@ -37359,7 +37364,7 @@ CinnabarIslandBlocks: ; 1c069 (7:4069)
 	INCBIN "maps/cinnabarisland.blk"
 
 Route1_h: ; 0x1c0c3 to 0x1c0e5 (34 bytes) (bank=7) (id=12)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_1_HEIGHT, ROUTE_1_WIDTH ; dimensions (y, x)
 	dw Route1Blocks, Route1TextPointers, Route1Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -37827,7 +37832,7 @@ Route1Text3: ; 1cafd (7:4afd)
 	db "@"
 
 OaksLab_h: ; 0x1cb02 to 0x1cb0e (12 bytes) (bank=7) (id=40)
-	db $05 ; tileset
+	db DOJO ; tileset
 	db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
 	dw OaksLabBlocks, OaksLabTextPointers, OaksLabScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39105,7 +39110,7 @@ OaksLabObject: ; 0x1d40a (size=88)
 	EVENT_DISP OAKS_LAB_WIDTH, $b, $5
 
 ViridianMart_h: ; 0x1d462 to 0x1d46e (12 bytes) (bank=7) (id=42)
-	db $02 ; tileset
+	db MART ; tileset
 	db VIRIDIAN_MART_HEIGHT, VIRIDIAN_MART_WIDTH ; dimensions (y, x)
 	dw ViridianMartBlocks, ViridianMartTextPointers, ViridianMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39229,7 +39234,7 @@ ViridianMartBlocks: ; 1d530 (7:5530)
 	INCBIN "maps/viridianmart.blk"
 
 School_h: ; 0x1d540 to 0x1d54c (12 bytes) (bank=7) (id=43)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db VIRIDIAN_SCHOOL_HEIGHT, VIRIDIAN_SCHOOL_WIDTH ; dimensions (y, x)
 	dw SchoolBlocks, SchoolTextPointers, SchoolScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39268,7 +39273,7 @@ SchoolObject: ; 0x1d55d (size=32)
 	EVENT_DISP VIRIDIAN_SCHOOL_WIDTH, $7, $3
 
 ViridianHouse_h: ; 0x1d57d to 0x1d589 (12 bytes) (bank=7) (id=44)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db VIRIDIAN_HOUSE_HEIGHT, VIRIDIAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw ViridianHouseBlocks, ViridianHouseTextPointers, ViridianHouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39330,7 +39335,7 @@ ViridianHouseObject: ; 0x1d5bb (size=44)
 	EVENT_DISP VIRIDIAN_HOUSE_WIDTH, $7, $3
 
 PewterHouse1_h: ; 0x1d5e7 to 0x1d5f3 (12 bytes) (bank=7) (id=55)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db PEWTER_HOUSE_1_HEIGHT, PEWTER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw PewterHouse1Blocks, PewterHouse1TextPointers, PewterHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -39379,7 +39384,7 @@ PewterHouse1Object: ; 0x1d616 (size=38)
 	EVENT_DISP PEWTER_HOUSE_1_WIDTH, $7, $3
 
 PewterHouse2_h: ; 0x1d63c to 0x1d648 (12 bytes) (bank=7) (id=57)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db PEWTER_HOUSE_2_HEIGHT, PEWTER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw PewterHouse2Blocks, PewterHouse2TextPointers, PewterHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -39418,7 +39423,7 @@ PewterHouse2Object: ; 0x1d659 (size=32)
 	EVENT_DISP PEWTER_HOUSE_2_WIDTH, $7, $3
 
 CeruleanHouseTrashed_h: ; 0x1d679 to 0x1d685 (12 bytes) (bank=7) (id=62)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db TRASHED_HOUSE_HEIGHT, TRASHED_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeruleanHouseTrashedBlocks, CeruleanHouseTrashedTextPointers, CeruleanHouseTrashedScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39486,7 +39491,7 @@ CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
 	EVENT_DISP TRASHED_HOUSE_WIDTH, $0, $3
 
 CeruleanHouse1_h: ; 0x1d6ea to 0x1d6f6 (12 bytes) (bank=7) (id=63)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db CERULEAN_HOUSE_1_HEIGHT, CERULEAN_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw CeruleanHouse1Blocks, CeruleanHouse1TextPointers, CeruleanHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -39529,7 +39534,7 @@ CeruleanHouse1Object: ; 0x1d710 (size=32)
 	EVENT_DISP CERULEAN_HOUSE_1_WIDTH, $7, $3
 
 BikeShop_h: ; 0x1d730 to 0x1d73c (12 bytes) (bank=7) (id=66)
-	db $15 ; tileset
+	db CLUB ; tileset
 	db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
 	dw BikeShopBlocks, BikeShopTextPointers, BikeShopScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -39711,7 +39716,7 @@ BikeShopBlocks: ; 1d88c (7:588c)
 	INCBIN "maps/bikeshop.blk"
 
 LavenderHouse1_h: ; 0x1d89c to 0x1d8a8 (12 bytes) (bank=7) (id=149)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db LAVENDER_HOUSE_1_HEIGHT, LAVENDER_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw LavenderHouse1Blocks, LavenderHouse1TextPointers, LavenderHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -39856,7 +39861,7 @@ LavenderHouse1Object: ; 0x1d96a (size=56)
 	EVENT_DISP LAVENDER_HOUSE_1_WIDTH, $7, $3
 
 LavenderHouse2_h: ; 0x1d9a2 to 0x1d9ae (12 bytes) (bank=7) (id=151)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db LAVENDER_HOUSE_2_HEIGHT, LAVENDER_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw LavenderHouse2Blocks, LavenderHouse2TextPointers, LavenderHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -39917,7 +39922,7 @@ LavenderHouse2Object: ; 0x1d9e6 (size=32)
 	EVENT_DISP LAVENDER_HOUSE_2_WIDTH, $7, $3
 
 NameRater_h: ; 0x1da06 to 0x1da12 (12 bytes) (bank=7) (id=229)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
 	dw NameRaterBlocks, NameRaterTextPointers, NameRaterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40050,7 +40055,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 	EVENT_DISP NAME_RATERS_HOUSE_WIDTH, $7, $3
 
 VermilionHouse1_h: ; 0x1daf0 to 0x1dafc (12 bytes) (bank=7) (id=93)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db VERMILION_HOUSE_1_HEIGHT, VERMILION_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw VermilionHouse1Blocks, VermilionHouse1TextPointers, VermilionHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -40100,7 +40105,7 @@ VermilionHouse1Object: ; 0x1db20 (size=38)
 	EVENT_DISP VERMILION_HOUSE_1_WIDTH, $7, $3
 
 VermilionDock_h: ; 0x1db46 to 0x1db52 (12 bytes) (bank=7) (id=94)
-	db $0e ; tileset
+	db SHIP_PORT ; tileset
 	db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
 	dw VermilionDockBlocks, VermilionDockTextPointers, VermilionDockScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40336,7 +40341,7 @@ VermilionDockBlocks: ; 1dcda (7:5cda)
 	INCBIN "maps/vermiliondock.blk"
 
 CeladonMansion5_h: ; 0x1dd2e to 0x1dd3a (12 bytes) (bank=7) (id=132)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db CELADON_MANSION_5_HEIGHT, CELADON_MANSION_5_WIDTH ; dimensions (y, x)
 	dw CeladonMansion5Blocks, CeladonMansion5TextPointers, CeladonMansion5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -40383,7 +40388,7 @@ CeladonMansion5Object: ; 0x1dd5c (size=32)
 	EVENT_DISP CELADON_MANSION_5_WIDTH, $7, $3 ; CELADON_MANSION_4
 
 FuchsiaMart_h: ; 0x1dd7c to 0x1dd88 (12 bytes) (bank=7) (id=152)
-	db $02 ; tileset
+	db MART ; tileset
 	db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
 	dw FuchsiaMartBlocks, FuchsiaMartTextPointers, FuchsiaMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40427,7 +40432,7 @@ FuchsiaMartBlocks: ; 1ddc1 (7:5dc1)
 	INCBIN "maps/fuchsiamart.blk"
 
 SaffronHouse1_h: ; 0x1ddd1 to 0x1dddd (12 bytes) (bank=7) (id=179)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db SAFFRON_HOUSE_1_HEIGHT, SAFFRON_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SaffronHouse1Blocks, SaffronHouse1TextPointers, SaffronHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -40481,7 +40486,7 @@ SaffronHouse1Object: ; 0x1de04 (size=44)
 	EVENT_DISP SAFFRON_HOUSE_1_WIDTH, $7, $3
 
 SaffronHouse2_h: ; 0x1de30 to 0x1de3c (12 bytes) (bank=7) (id=183)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db SAFFRON_HOUSE_2_HEIGHT, SAFFRON_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw SaffronHouse2Blocks, SaffronHouse2TextPointers, SaffronHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -40551,7 +40556,7 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 	EVENT_DISP SAFFRON_HOUSE_2_WIDTH, $7, $3
 
 DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db DIGLETTS_CAVE_EXIT_HEIGHT, DIGLETTS_CAVE_EXIT_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveRoute2Blocks, DiglettsCaveRoute2TextPointers, DiglettsCaveRoute2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -40588,7 +40593,7 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 	EVENT_DISP DIGLETTS_CAVE_EXIT_WIDTH, $4, $4 ; DIGLETTS_CAVE
 
 Route2House_h: ; 0x1dee1 to 0x1deed (12 bytes) (bank=7) (id=48)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db ROUTE_2_HOUSE_HEIGHT, ROUTE_2_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route2HouseBlocks, Route2HouseTextPointers, Route2HouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40631,7 +40636,7 @@ Route2HouseObject: ; 0x1df07 (size=32)
 	EVENT_DISP ROUTE_2_HOUSE_WIDTH, $7, $3
 
 Route5Gate_h: ; 0x1df27 to 0x1df33 (12 bytes) (bank=7) (id=70)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_5_GATE_HEIGHT, ROUTE_5_GATE_WIDTH ; dimensions (y, x)
 	dw Route5GateBlocks, Route5GateTextPointers, Route5GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40783,7 +40788,7 @@ Route5GateBlocks: ; 1e025 (7:6025)
 	INCBIN "maps/route5gate.blk"
 
 Route6Gate_h: ; 0x1e031 to 0x1e03d (12 bytes) (bank=7) (id=73)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_6_GATE_HEIGHT, ROUTE_6_GATE_WIDTH ; dimensions (y, x)
 	dw Route6GateBlocks, Route6GateTextPointers, Route6GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40886,7 +40891,7 @@ Route6GateBlocks: ; 1e0e8 (7:60e8)
 	INCBIN "maps/route6gate.blk"
 
 Route7Gate_h: ; 0x1e0f4 to 0x1e100 (12 bytes) (bank=7) (id=76)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_7_GATE_HEIGHT, ROUTE_7_GATE_WIDTH ; dimensions (y, x)
 	dw Route7GateBlocks, Route7GateTextPointers, Route7GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -40992,7 +40997,7 @@ Route7GateBlocks: ; 1e1af (7:61af)
 	INCBIN "maps/route7gate.blk"
 
 Route8Gate_h: ; 0x1e1bb to 0x1e1c7 (12 bytes) (bank=7) (id=79)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_8_GATE_HEIGHT, ROUTE_8_GATE_WIDTH ; dimensions (y, x)
 	dw Route8GateBlocks, Route8GateTextPointers, Route8GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -41095,7 +41100,7 @@ Route8GateBlocks: ; 1e271 (7:6271)
 	INCBIN "maps/route8gate.blk"
 
 UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80)
-	db $0c ; tileset
+	db GATE ; tileset
 	db PATH_ENTRANCE_ROUTE_8_HEIGHT, PATH_ENTRANCE_ROUTE_8_WIDTH ; dimensions (y, x)
 	dw UndergroundPathEntranceRoute8Blocks, UndergroundPathEntranceRoute8TextPointers, UndergroundPathEntranceRoute8Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -41132,7 +41137,7 @@ UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
 	EVENT_DISP PATH_ENTRANCE_ROUTE_8_WIDTH, $4, $4 ; UNDERGROUND_PATH_WE
 
 PowerPlant_h: ; 0x1e2ba to 0x1e2c6 (12 bytes) (bank=7) (id=83)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
 	dw PowerPlantBlocks, PowerPlantTextPointers, PowerPlantScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -41350,7 +41355,7 @@ PowerPlantBlocks: ; 1e446 (7:6446)
 	INCBIN "maps/powerplant.blk"
 
 DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db DIGLETTS_CAVE_ENTRANCE_HEIGHT, DIGLETTS_CAVE_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveEntranceRoute11Blocks, DiglettsCaveEntranceRoute11TextPointers, DiglettsCaveEntranceRoute11Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -41388,7 +41393,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 	EVENT_DISP DIGLETTS_CAVE_ENTRANCE_WIDTH, $4, $4 ; DIGLETTS_CAVE
 
 Route16House_h: ; 0x1e5ec to 0x1e5f8 (12 bytes) (bank=7) (id=188)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db ROUTE_16_HOUSE_HEIGHT, ROUTE_16_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route16HouseBlocks, Route16HouseTextPointers, Route16HouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -41469,7 +41474,7 @@ Route16HouseObject: ; 0x1e657 (size=32)
 	EVENT_DISP ROUTE_16_HOUSE_WIDTH, $7, $3
 
 Route22Gate_h: ; 0x1e677 to 0x1e683 (12 bytes) (bank=7) (id=193)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_22_GATE_HEIGHT, ROUTE_22_GATE_WIDTH ; dimensions (y, x)
 	dw Route22GateBlocks, Route22GateTextPointers, Route22GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -41592,7 +41597,7 @@ Route22GateBlocks: ; 1e74a (7:674a)
 	INCBIN "maps/route22gate.blk"
 
 BillsHouse_h: ; 0x1e75e to 0x1e76a (12 bytes) (bank=7) (id=88)
-	db $10 ; tileset
+	db INTERIOR ; tileset
 	db BILLS_HOUSE_HEIGHT, BILLS_HOUSE_WIDTH ; dimensions (y, x)
 	dw BillsHouseBlocks, BillsHouseTextPointers, BillsHouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -56207,10 +56212,12 @@ UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
 	db "@"
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
-	ld b, $f
+	ld b, BANK(BattleCore)
 	jp Bankswitch
 
 SECTION "bankF",ROMX,BANK[$F]
+
+BattleCore:
 
 ; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 3c000 (f:4000)
@@ -58562,7 +58569,7 @@ Func_3d119: ; 3d119 (f:5119)
 	call LoadMonFrontSprite
 	jr .asm_3d187
 .asm_3d182
-	ld b, $1e
+	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
 	call Bankswitch
 .asm_3d187
 	jp Func_3d0e0
@@ -68234,7 +68241,7 @@ OTString67E5: ; 427e5 (10:67e5)
 SECTION "bank11",ROMX,BANK[$11]
 
 LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
 	dw LavenderTownBlocks, LavenderTownTextPointers, LavenderTownScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
@@ -68512,7 +68519,7 @@ UnnamedText_4424c: ; 4424c (11:424c)
 	db "@"
 
 ViridianPokecenter_h: ; 0x44251 to 0x4425d (12 bytes) (bank=11) (id=41)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db VIRIDIAN_POKECENTER_HEIGHT, VIRIDIAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw ViridianPokecenterBlocks, ViridianPokecenterTextPointers, ViridianPokeCenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -68562,7 +68569,7 @@ ViridianPokecenterObject: ; 0x44277 (size=44)
 	EVENT_DISP VIRIDIAN_POKECENTER_WIDTH, $7, $4
 
 Mansion1_h: ; 0x442a3 to 0x442af (12 bytes) (bank=11) (id=165)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db MANSION_1_HEIGHT, MANSION_1_WIDTH ; dimensions (y, x)
 	dw Mansion1Blocks, Mansion1TextPointers, Mansion1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -68742,7 +68749,7 @@ Mansion1Blocks: ; 443fe (11:43fe)
 	INCBIN "maps/mansion1.blk"
 
 RockTunnel1_h: ; 0x444d0 to 0x444dc (12 bytes) (bank=11) (id=82)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db ROCK_TUNNEL_1_HEIGHT, ROCK_TUNNEL_1_WIDTH ; dimensions (y, x)
 	dw RockTunnel1Blocks, RockTunnel1TextPointers, RockTunnel1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69002,7 +69009,7 @@ RockTunnel1Blocks: ; 44675 (11:4675)
 	INCBIN "maps/rocktunnel1.blk"
 
 SeafoamIslands1_h: ; 0x447dd to 0x447e9 (12 bytes) (bank=11) (id=192)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_1_HEIGHT, SEAFOAM_ISLANDS_1_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands1Blocks, SeafoamIslands1TextPointers, SeafoamIslands1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69094,7 +69101,7 @@ SeafoamIslands1Blocks: ; 4489f (11:489f)
 	INCBIN "maps/seafoamislands1.blk"
 
 SSAnne3_h: ; 0x44926 to 0x44932 (12 bytes) (bank=11) (id=97)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_3_HEIGHT, SS_ANNE_3_WIDTH ; dimensions (y, x)
 	dw SSAnne3Blocks, SSAnne3TextPointers, SSAnne3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69130,7 +69137,7 @@ SSAnne3Blocks: ; 44956 (11:4956)
 	INCBIN "maps/ssanne3.blk"
 
 VictoryRoad3_h: ; 0x44974 to 0x44980 (12 bytes) (bank=11) (id=198)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db VICTORY_ROAD_3_HEIGHT, VICTORY_ROAD_3_WIDTH ; dimensions (y, x)
 	dw VictoryRoad3Blocks, VictoryRoad3TextPointers, VictoryRoad3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69375,7 +69382,7 @@ VictoryRoad3Blocks: ; 44b37 (11:4b37)
 	INCBIN "maps/victoryroad3.blk"
 
 RocketHideout1_h: ; 0x44bbe to 0x44bca (12 bytes) (bank=11) (id=199)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db ROCKET_HIDEOUT_1_HEIGHT, ROCKET_HIDEOUT_1_WIDTH ; dimensions (y, x)
 	dw RocketHideout1Blocks, RocketHideout1TextPointers, RocketHideout1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69607,7 +69614,7 @@ RocketHideout1Blocks: ; 44d49 (11:4d49)
 	INCBIN "maps/rockethideout1.blk"
 
 RocketHideout2_h: ; 0x44e1b to 0x44e27 (12 bytes) (bank=11) (id=200)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db ROCKET_HIDEOUT_2_HEIGHT, ROCKET_HIDEOUT_2_WIDTH ; dimensions (y, x)
 	dw RocketHideout2Blocks, RocketHideout2TextPointers, RocketHideout2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -69943,7 +69950,7 @@ Func_44fd7: ; 44fd7 (11:4fd7)
 	ld a, [hl]
 	ld [$c102], a
 	ld a, [W_CURMAPTILESET] ; $d367
-	cp $16
+	cp FACILITY
 	ld hl, SpinnerArrowTilePointers1 ; $5023
 	jr z, .asm_44ff6
 	ld hl, SpinnerArrowTilePointers2 ; $5053
@@ -70004,24 +70011,24 @@ SpinnerArrowTilePointers1: ; 45023 (11:5023)
 	db BANK(SpinnerArrowAnimTiles)
 	dw $9310
 
-	dw Tset16_GFX + $200
+	dw Facility_GFX + $200
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $9200
 
-	dw Tset16_GFX + $210
+	dw Facility_GFX + $210
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $9210
 
-	dw Tset16_GFX + $300
+	dw Facility_GFX + $300
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $9300
 
-	dw Tset16_GFX + $310
+	dw Facility_GFX + $310
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $9310
 
 SpinnerArrowTilePointers2: ; 45053 (11:5053)
@@ -70045,24 +70052,24 @@ SpinnerArrowTilePointers2: ; 45053 (11:5053)
 	db BANK(SpinnerArrowAnimTiles)
 	dw $94D0
 
-	dw Tset05_GFX + $3C0
+	dw Gym_GFX + $3C0
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $93C0
 
-	dw Tset05_GFX + $3D0
+	dw Gym_GFX + $3D0
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $93D0
 
-	dw Tset05_GFX + $4C0
+	dw Gym_GFX + $4C0
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $94C0
 
-	dw Tset05_GFX + $4D0
+	dw Gym_GFX + $4D0
 	db 1
-	db BANK(Tset16_GFX)
+	db BANK(Facility_GFX)
 	dw $94D0
 
 SpinnerPlayerFacingDirections: ; 45083 (11:5083)
@@ -70145,7 +70152,7 @@ RocketHideout2Blocks: ; 45147 (11:5147)
 	INCBIN "maps/rockethideout2.blk"
 
 RocketHideout3_h: ; 0x45219 to 0x45225 (12 bytes) (bank=11) (id=201)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db ROCKET_HIDEOUT_3_HEIGHT, ROCKET_HIDEOUT_3_WIDTH ; dimensions (y, x)
 	dw RocketHideout3Blocks, RocketHideout3TextPointers, RocketHideout3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -70386,7 +70393,7 @@ RocketHideout3Blocks: ; 4537f (11:537f)
 	INCBIN "maps/rockethideout3.blk"
 
 RocketHideout4_h: ; 0x45451 to 0x4545d (12 bytes) (bank=11) (id=202)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db ROCKET_HIDEOUT_4_HEIGHT, ROCKET_HIDEOUT_4_WIDTH ; dimensions (y, x)
 	dw RocketHideout4Blocks, RocketHideout4TextPointers, RocketHideout4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -70655,7 +70662,7 @@ RocketHideout4Blocks: ; 45650 (11:5650)
 	INCBIN "maps/rockethideout4.blk"
 
 RocketHideoutElevator_h: ; 0x45704 to 0x45710 (12 bytes) (bank=11) (id=203)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw RocketHideoutElevatorBlocks, RocketHideoutElevatorTextPointers, RocketHideoutElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -70766,7 +70773,7 @@ RocketHideoutElevatorBlocks: ; 457a8 (11:57a8)
 	INCBIN "maps/rockethideoutelevator.blk"
 
 SilphCoElevator_h: ; 0x457b4 to 0x457c0 (12 bytes) (bank=11) (id=236)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db SILPH_CO_ELEVATOR_HEIGHT, SILPH_CO_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw SilphCoElevatorBlocks, SilphCoElevatorTextPointers, SilphCoElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -70873,7 +70880,7 @@ SilphCoElevatorBlocks: ; 4585b (11:585b)
 	INCBIN "maps/silphcoelevator.blk"
 
 SafariZoneEast_h: ; 0x4585f to 0x4586b (12 bytes) (bank=11) (id=217)
-	db $03 ; tileset
+	db FOREST ; tileset
 	db SAFARI_ZONE_EAST_HEIGHT, SAFARI_ZONE_EAST_WIDTH ; dimensions (y, x)
 	dw SafariZoneEastBlocks, SafariZoneEastTextPointers, SafariZoneEastScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -70935,7 +70942,7 @@ SafariZoneEastBlocks: ; 458dc (11:58dc)
 	INCBIN "maps/safarizoneeast.blk"
 
 SafariZoneNorth_h: ; 0x4599f to 0x459ab (12 bytes) (bank=11) (id=218)
-	db $03 ; tileset
+	db FOREST ; tileset
 	db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
 	dw SafariZoneNorthBlocks, SafariZoneNorthTextPointers, SafariZoneNorthScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -71013,7 +71020,7 @@ SafariZoneNorthBlocks: ; 45a3e (11:5a3e)
 	INCBIN "maps/safarizonenorth.blk"
 
 SafariZoneCenter_h: ; 0x45ba6 to 0x45bb2 (12 bytes) (bank=11) (id=220)
-	db $03 ; tileset
+	db FOREST ; tileset
 	db SAFARI_ZONE_CENTER_HEIGHT, SAFARI_ZONE_CENTER_WIDTH ; dimensions (y, x)
 	dw SafariZoneCenterBlocks, SafariZoneCenterTextPointers, SafariZoneCenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -71071,7 +71078,7 @@ SafariZoneCenterBlocks: ; 45c1e (11:5c1e)
 	INCBIN "maps/safarizonecenter.blk"
 
 SafariZoneRestHouse1_h: ; 0x45ce1 to 0x45ced (12 bytes) (bank=11) (id=221)
-	db $0c ; tileset
+	db GATE ; tileset
 	db SAFARI_ZONE_REST_HOUSE_1_HEIGHT, SAFARI_ZONE_REST_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse1Blocks, SafariZoneRestHouse1TextPointers, SafariZoneRestHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71110,7 +71117,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 	EVENT_DISP SAFARI_ZONE_REST_HOUSE_1_WIDTH, $7, $3 ; SAFARI_ZONE_CENTER
 
 SafariZoneRestHouse2_h: ; 0x45d1e to 0x45d2a (12 bytes) (bank=11) (id=223)
-	db $0c ; tileset
+	db GATE ; tileset
 	db SAFARI_ZONE_REST_HOUSE_2_HEIGHT, SAFARI_ZONE_REST_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse2Blocks, SafariZoneRestHouse2TextPointers, SafariZoneRestHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71156,7 +71163,7 @@ SafariZoneRestHouse2Object: ; 0x45d43 (size=38)
 	EVENT_DISP SAFARI_ZONE_REST_HOUSE_2_WIDTH, $7, $3 ; SAFARI_ZONE_WEST
 
 SafariZoneRestHouse3_h: ; 0x45d69 to 0x45d75 (12 bytes) (bank=11) (id=224)
-	db $0c ; tileset
+	db GATE ; tileset
 	db SAFARI_ZONE_REST_HOUSE_3_HEIGHT, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse3Blocks, SafariZoneRestHouse3TextPointers, SafariZoneRestHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71202,7 +71209,7 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 	EVENT_DISP SAFARI_ZONE_REST_HOUSE_3_WIDTH, $7, $3 ; SAFARI_ZONE_EAST
 
 SafariZoneRestHouse4_h: ; 0x45db4 to 0x45dc0 (12 bytes) (bank=11) (id=225)
-	db $0c ; tileset
+	db GATE ; tileset
 	db SAFARI_ZONE_REST_HOUSE_4_HEIGHT, SAFARI_ZONE_REST_HOUSE_4_WIDTH ; dimensions (y, x)
 	dw SafariZoneRestHouse4Blocks, SafariZoneRestHouse4TextPointers, SafariZoneRestHouse4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71248,7 +71255,7 @@ SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 	EVENT_DISP SAFARI_ZONE_REST_HOUSE_4_WIDTH, $7, $3 ; SAFARI_ZONE_NORTH
 
 UnknownDungeon2_h: ; 0x45dff to 0x45e0b (12 bytes) (bank=11) (id=226)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db UNKNOWN_DUNGEON_2_HEIGHT, UNKNOWN_DUNGEON_2_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon2Blocks, UnknownDungeon2TextPointers, UnknownDungeon2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71292,7 +71299,7 @@ UnknownDungeon2Blocks: ; 45e5d (11:5e5d)
 	INCBIN "maps/unknowndungeon2.blk"
 
 UnknownDungeon3_h: ; 0x45ee4 to 0x45ef0 (12 bytes) (bank=11) (id=227)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db UNKNOWN_DUNGEON_3_HEIGHT, UNKNOWN_DUNGEON_3_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon3Blocks, UnknownDungeon3TextPointers, UnknownDungeon3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71363,7 +71370,7 @@ UnknownDungeon3Blocks: ; 45f58 (11:5f58)
 	INCBIN "maps/unknowndungeon3.blk"
 
 RockTunnel2_h: ; 0x45fdf to 0x45feb (12 bytes) (bank=11) (id=232)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db ROCK_TUNNEL_2_HEIGHT, ROCK_TUNNEL_2_WIDTH ; dimensions (y, x)
 	dw RockTunnel2Blocks, RockTunnel2TextPointers, RockTunnel2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71643,7 +71650,7 @@ RockTunnel2Blocks: ; 461a1 (11:61a1)
 	INCBIN "maps/rocktunnel2.blk"
 
 SeafoamIslands2_h: ; 0x46309 to 0x46315 (12 bytes) (bank=11) (id=159)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_2_HEIGHT, SEAFOAM_ISLANDS_2_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands2Blocks, SeafoamIslands2TextPointers, SeafoamIslands2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71729,7 +71736,7 @@ SeafoamIslands2Blocks: ; 463be (11:63be)
 	INCBIN "maps/seafoamislands2.blk"
 
 SeafoamIslands3_h: ; 0x46445 to 0x46451 (12 bytes) (bank=11) (id=160)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_3_HEIGHT, SEAFOAM_ISLANDS_3_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands3Blocks, SeafoamIslands3TextPointers, SeafoamIslands3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -71815,7 +71822,7 @@ SeafoamIslands3Blocks: ; 464fa (11:64fa)
 	INCBIN "maps/seafoamislands3.blk"
 
 SeafoamIslands4_h: ; 0x46581 to 0x4658d (12 bytes) (bank=11) (id=161)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_4_HEIGHT, SEAFOAM_ISLANDS_4_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands4Blocks, SeafoamIslands4TextPointers, SeafoamIslands4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -72005,7 +72012,7 @@ SeafoamIslands4Blocks: ; 46706 (11:6706)
 	INCBIN "maps/seafoamislands4.blk"
 
 SeafoamIslands5_h: ; 0x4678d to 0x46799 (12 bytes) (bank=11) (id=162)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_5_HEIGHT, SEAFOAM_ISLANDS_5_WIDTH ; dimensions (y, x)
 	dw SeafoamIslands5Blocks, SeafoamIslands5TextPointers, SeafoamIslands5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -73129,7 +73136,7 @@ Route4HiddenObjects: ; 470a4 (11:70a4)
 SECTION "bank12",ROMX,BANK[$12]
 
 Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
 	dw Route7Blocks, Route7TextPointers, Route7Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -73255,7 +73262,7 @@ Route7Text1: ; 48157 (12:4157)
 	db "@"
 
 RedsHouse1F_h: ; 4815c (12:415c)
-	db $01 ; tileset
+	db REDS_HOUSE_1 ; tileset
 	db REDS_HOUSE_1F_HEIGHT, REDS_HOUSE_1F_WIDTH ; dimensions
 	dw RedsHouse1FBlocks, RedsHouse1FTextPointers, RedsHouse1FScript
 	db 0 ; no connections
@@ -73354,7 +73361,7 @@ RedsHouse1FBlocks: ; 48209 (12:4209)
 	INCBIN "maps/redshouse1f.blk"
 
 CeladonMart3_h: ; 0x48219 to 0x48225 (12 bytes) (bank=12) (id=124)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_3_HEIGHT, CELADON_MART_3_WIDTH ; dimensions (y, x)
 	dw CeladonMart3Blocks, CeladonMart3TextPointers, CeladonMart3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -73508,7 +73515,7 @@ CeladonMart3Blocks: ; 48322 (12:4322)
 	INCBIN "maps/celadonmart3.blk"
 
 CeladonMart4_h: ; 0x4834a to 0x48356 (12 bytes) (bank=12) (id=125)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_4_HEIGHT, CELADON_MART_4_WIDTH ; dimensions (y, x)
 	dw CeladonMart4Blocks, CeladonMart4TextPointers, CeladonMart4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -73560,7 +73567,7 @@ CeladonMart4Blocks: ; 483a1 (12:43a1)
 	INCBIN "maps/celadonmart4.blk"
 
 CeladonMartRoof_h: ; 0x483c9 to 0x483d5 (12 bytes) (bank=12) (id=126)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_ROOF_HEIGHT, CELADON_MART_ROOF_WIDTH ; dimensions (y, x)
 	dw CeladonMartRoofBlocks, CeladonMartRoofTextPointers, CeladonMartRoofScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -73853,7 +73860,7 @@ CeladonMartRoofBlocks: ; 485cc (12:45cc)
 	INCBIN "maps/celadonmartroof.blk"
 
 CeladonMartElevator_h: ; 0x485f4 to 0x48600 (12 bytes) (bank=12) (id=127)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw CeladonMartElevatorBlocks, CeladonMartElevatorTextPointers, CeladonMartElevatorScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -73951,7 +73958,7 @@ CeladonMartElevatorBlocks: ; 48684 (12:4684)
 	INCBIN "maps/celadonmartelevator.blk"
 
 CeladonMansion1_h: ; 0x48688 to 0x48694 (12 bytes) (bank=12) (id=128)
-	db $13 ; tileset
+	db MANSION ; tileset
 	db CELADON_MANSION_1_HEIGHT, CELADON_MANSION_1_WIDTH ; dimensions (y, x)
 	dw CeladonMansion1Blocks, CeladonMansion1TextPointers, CeladonMansion1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -74027,7 +74034,7 @@ CeladonMansion1Blocks: ; 48716 (12:4716)
 	INCBIN "maps/celadonmansion1.blk"
 
 CeladonMansion2_h: ; 0x4872e to 0x4873a (12 bytes) (bank=12) (id=129)
-	db $13 ; tileset
+	db MANSION ; tileset
 	db CELADON_MANSION_2_HEIGHT, CELADON_MANSION_2_WIDTH ; dimensions (y, x)
 	dw CeladonMansion2Blocks, CeladonMansion2TextPointers, CeladonMansion2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -74068,7 +74075,7 @@ CeladonMansion2Blocks: ; 4876c (12:476c)
 	INCBIN "maps/celadonmansion2.blk"
 
 CeladonMansion3_h: ; 0x48784 to 0x48790 (12 bytes) (bank=12) (id=130)
-	db $13 ; tileset
+	db MANSION ; tileset
 	db CELADON_MANSION_3_HEIGHT, CELADON_MANSION_3_WIDTH ; dimensions (y, x)
 	dw CeladonMansion3Blocks, CeladonMansion3TextPointers, CeladonMansion3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -74179,7 +74186,7 @@ CeladonMansion3Blocks: ; 48847 (12:4847)
 	INCBIN "maps/celadonmansion3.blk"
 
 CeladonMansion4_h: ; 0x4885f to 0x4886b (12 bytes) (bank=12) (id=131)
-	db $13 ; tileset
+	db MANSION ; tileset
 	db CELADON_MANSION_4_HEIGHT, CELADON_MANSION_4_WIDTH ; dimensions (y, x)
 	dw CeladonMansion4Blocks, CeladonMansion4TextPointers, CeladonMansion4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -74217,7 +74224,7 @@ CeladonMansion4Blocks: ; 48894 (12:4894)
 	INCBIN "maps/celadonmansion4.blk"
 
 CeladonPokecenter_h: ; 0x488ac to 0x488b8 (12 bytes) (bank=12) (id=133)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeladonPokecenterBlocks, CeladonPokecenterTextPointers, CeladonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -74267,7 +74274,7 @@ CeladonPokecenterObject: ; 0x488d2 (size=44)
 	EVENT_DISP CELADON_POKECENTER_WIDTH, $7, $4
 
 CeladonGym_h: ; 0x488fe to 0x4890a (12 bytes) (bank=12) (id=134)
-	db $07 ; tileset
+	db GYM ; tileset
 	db CELADON_GYM_HEIGHT, CELADON_GYM_WIDTH ; dimensions (y, x)
 	dw CeladonGymBlocks, CeladonGymTextPointers, CeladonGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -74642,7 +74649,7 @@ CeladonGymBlocks: ; 48b84 (12:4b84)
 	INCBIN "maps/celadongym.blk"
 
 CeladonGameCorner_h: ; 0x48bb1 to 0x48bbd (12 bytes) (bank=12) (id=135)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
 	dw CeladonGameCornerBlocks, CeladonGameCornerTextPointers, CeladonGameCornerScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75218,7 +75225,7 @@ CeladonGameCornerBlocks: ; 49003 (12:5003)
 	INCBIN "maps/celadongamecorner.blk"
 
 CeladonMart5_h: ; 0x4905d to 0x49069 (12 bytes) (bank=12) (id=136)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_5_HEIGHT, CELADON_MART_5_WIDTH ; dimensions (y, x)
 	dw CeladonMart5Blocks, CeladonMart5TextPointers, CeladonMart5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -75272,7 +75279,7 @@ CeladonMart5Blocks: ; 490bc (12:50bc)
 	INCBIN "maps/celadonmart5.blk"
 
 CeladonPrizeRoom_h: ; 0x490e4 to 0x490f0 (12 bytes) (bank=12) (id=137)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_PRIZE_ROOM_HEIGHT, CELADON_PRIZE_ROOM_WIDTH ; dimensions (y, x)
 	dw CeladonPrizeRoomBlocks, CeladonPrizeRoomTextPointers, CeladonPrizeRoomScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75323,7 +75330,7 @@ CeladonPrizeRoomBlocks: ; 49131 (12:5131)
 	INCBIN "maps/celadonprizeroom.blk"
 
 CeladonDiner_h: ; 0x49145 to 0x49151 (12 bytes) (bank=12) (id=138)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
 	dw CeladonDinerBlocks, CeladonDinerTextPointers, CeladonDinerScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75421,7 +75428,7 @@ CeladonDinerBlocks: ; 491ee (12:51ee)
 	INCBIN "maps/celadondiner.blk"
 
 CeladonHouse_h: ; 0x49202 to 0x4920e (12 bytes) (bank=12) (id=139)
-	db $13 ; tileset
+	db MANSION ; tileset
 	db CELADON_HOUSE_HEIGHT, CELADON_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeladonHouseBlocks, CeladonHouseTextPointers, CeladonHouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75470,7 +75477,7 @@ CeladonHouseBlocks: ; 4924d (12:524d)
 	INCBIN "maps/celadonhouse.blk"
 
 CeladonHotel_h: ; 0x4925d to 0x49269 (12 bytes) (bank=12) (id=140)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db CELADON_HOTEL_HEIGHT, CELADON_HOTEL_WIDTH ; dimensions (y, x)
 	dw CeladonHotelBlocks, CeladonHotelTextPointers, CeladonHotelScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75518,7 +75525,7 @@ CeladonHotelBlocks: ; 492a7 (12:52a7)
 	INCBIN "maps/celadonhotel.blk"
 
 MtMoonPokecenter_h: ; 0x492c3 to 0x492cf (12 bytes) (bank=12) (id=68)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db MT_MOON_POKECENTER_HEIGHT, MT_MOON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw MtMoonPokecenterBlocks, MtMoonPokecenterTextPointers, MtMoonPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75644,7 +75651,7 @@ MtMoonPokecenterObject: ; 0x49376 (size=56)
 	EVENT_DISP MT_MOON_POKECENTER_WIDTH, $7, $4
 
 RockTunnelPokecenter_h: ; 0x493ae to 0x493ba (12 bytes) (id=81)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
 	dw RockTunnelPokecenterBlocks, RockTunnelPokecenterTextPointers, RockTunnelPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75694,7 +75701,7 @@ RockTunnelPokecenterObject: ; 0x493d4 (size=44)
 	EVENT_DISP ROCK_TUNNEL_POKECENTER_WIDTH, $7, $4
 
 Route11Gate_h: ; 0x49400 to 0x4940c (12 bytes) (id=84)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_11_GATE_1F_HEIGHT, ROUTE_11_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route11GateBlocks, Route11GateTextPointers, Route11GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75733,7 +75740,7 @@ Route11GateObject: ; 0x49416 (size=50)
 	EVENT_DISP ROUTE_11_GATE_1F_WIDTH, $8, $6 ; ROUTE_11_GATE_2F
 
 Route11GateUpstairs_h: ; 0x49448 to 0x49454 (12 bytes) (id=86)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_11_GATE_2F_HEIGHT, ROUTE_11_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route11GateUpstairsBlocks, Route11GateUpstairsTextPointers, Route11GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75839,7 +75846,7 @@ Route11GateUpstairsObject: ; 0x494da (size=30)
 	EVENT_DISP ROUTE_11_GATE_2F_WIDTH, $7, $7 ; ROUTE_11_GATE_1F
 
 Route12Gate_h: ; 0x494f8 to 0x49504 (12 bytes) (id=87)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_12_GATE_1F_HEIGHT, ROUTE_12_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route12GateBlocks, Route12GateTextPointers, Route12GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75881,7 +75888,7 @@ Route12GateBlocks: ; 49540 (12:5540)
 	INCBIN "maps/route12gate.blk"
 
 Route12GateUpstairs_h: ; 0x49554 to 0x49560 (12 bytes) (id=195)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_12_GATE_2F_HEIGHT, ROUTE_12_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route12GateUpstairsBlocks, Route12GateUpstairsTextPointers, Route12GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -75984,7 +75991,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 	EVENT_DISP ROUTE_12_GATE_2F_WIDTH, $7, $7 ; ROUTE_12_GATE_1F
 
 Route15Gate_h: ; 0x495f6 to 0x49602 (12 bytes) (id=184)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_15_GATE_1F_HEIGHT, ROUTE_15_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route15GateBlocks, Route15GateTextPointers, Route15GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76023,7 +76030,7 @@ Route15GateObject: ; 0x4960c (size=50)
 	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $8, $6 ; ROUTE_15_GATE_2F
 
 Route15GateUpstairs_h: ; 4963e (12:563e)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_15_GATE_2F_HEIGHT, ROUTE_15_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route15GateUpstairsBlocks, Route15GateUpstairsTextPointers, Route15GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76093,7 +76100,7 @@ Route15GateUpstairsObject: ; 4969d (12:569d)
 	EVENT_DISP ROUTE_15_GATE_2F_WIDTH, $7, $7 ; ROUTE_15_GATE_1F
 
 Route16Gate_h: ; 0x496b2 to 0x496be (12 bytes) (id=186)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_16_GATE_1F_HEIGHT, ROUTE_16_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route16GateBlocks, Route16GateTextPointers, Route16GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76256,7 +76263,7 @@ Route16GateBlocks: ; 497e3 (12:57e3)
 	INCBIN "maps/route16gate.blk"
 
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_16_GATE_2F_HEIGHT, ROUTE_16_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route16GateUpstairsBlocks, Route16GateUpstairsTextPointers, Route16GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76327,7 +76334,7 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
 	EVENT_DISP ROUTE_16_GATE_2F_WIDTH, $7, $7 ; ROUTE_16_GATE_1F
 
 Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route18GateBlocks, Route18GateTextPointers, Route18GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76469,7 +76476,7 @@ Route18GateObject: ; 0x49937 (size=50)
 	EVENT_DISP ROUTE_18_GATE_1F_WIDTH, $8, $6 ; ROUTE_18_GATE_2F
 
 Route18GateUpstairs_h: ; 0x49969 to 0x49975 (12 bytes) (id=191)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_18_GATE_2F_HEIGHT, ROUTE_18_GATE_2F_WIDTH ; dimensions (y, x)
 	dw Route18GateUpstairsBlocks, Route18GateUpstairsTextPointers, Route18GateUpstairsScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -76526,7 +76533,7 @@ Route18GateUpstairsObject: ; 0x499a4 (size=24)
 	EVENT_DISP ROUTE_18_GATE_2F_WIDTH, $7, $7 ; ROUTE_18_GATE_1F
 
 MtMoon1_h: ; 0x499bc to 0x499c8 (12 bytes) (id=59)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db MT_MOON_1_HEIGHT, MT_MOON_1_WIDTH ; dimensions (y, x)
 	dw MtMoon1Blocks, MtMoon1TextPointers, MtMoon1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -76797,7 +76804,7 @@ MtMoon1Blocks: ; 49b97 (12:5b97)
 	INCBIN "maps/mtmoon1.blk"
 
 MtMoon3_h: ; 0x49cff to 0x49d0b (12 bytes) (id=61)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db MT_MOON_3_HEIGHT, MT_MOON_3_WIDTH ; dimensions (y, x)
 	dw MtMoon3Blocks, MtMoon3TextPointers, MtMoon3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -77250,7 +77257,7 @@ MtMoon3Blocks: ; 4a041 (12:6041)
 	INCBIN "maps/mtmoon3.blk"
 
 SafariZoneWest_h: ; 0x4a1a9 to 0x4a1b5 (12 bytes) (id=219)
-	db $03 ; tileset
+	db FOREST ; tileset
 	db SAFARI_ZONE_WEST_HEIGHT, SAFARI_ZONE_WEST_WIDTH ; dimensions (y, x)
 	dw SafariZoneWestBlocks, SafariZoneWestTextPointers, SafariZoneWestScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -77324,7 +77331,7 @@ SafariZoneWestBlocks: ; 4a248 (12:6248)
 	INCBIN "maps/safarizonewest.blk"
 
 SafariZoneSecretHouse_h: ; 0x4a30b to 0x4a317 (12 bytes) (id=222)
-	db $14 ; tileset
+	db LAB ; tileset
 	db SAFARI_ZONE_SECRET_HOUSE_HEIGHT, SAFARI_ZONE_SECRET_HOUSE_WIDTH ; dimensions (y, x)
 	dw SafariZoneSecretHouseBlocks, SafariZoneSecretHouseTextPointers, SafariZoneSecretHouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -77493,7 +77500,7 @@ LancePic: ; 4fba2 (13:7ba2)
 	INCBIN "pic/trainer/lance.pic"
 
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
-	db $15 ; tileset
+	db CLUB ; tileset
 	db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
 	dw BattleCenterMBlocks, BattleCenterMTextPointers, BattleCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -77552,7 +77559,7 @@ BattleCenterMBlocks: ; 4fd5d (13:7d5d)
 	INCBIN "maps/battlecenterm.blk"
 
 TradeCenterM_h: ; 0x4fd71 to 0x4fd7d (12 bytes) (id=240)
-	db $15 ; tileset
+	db CLUB ; tileset
 	db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
 	dw TradeCenterMBlocks, TradeCenterMTextPointers, TradeCenterMScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -77848,7 +77855,7 @@ DrawHPBarPredef: ; 4ff96 (13:7f96)
 SECTION "bank14",ROMX,BANK[$14]
 
 Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; dimensions (y, x)
 	dw Route22Blocks, Route22TextPointers, Route22Script ; blocks, texts, scripts
 	db NORTH | EAST ; connections
@@ -77876,7 +77883,7 @@ Route22Blocks: ; 5003d (14:403d)
 	INCBIN "maps/route22.blk"
 
 Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; dimensions (y, x)
 	dw Route20Blocks, Route20TextPointers, Route20Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -77915,7 +77922,7 @@ Route20Blocks: ; 5017d (14:417d)
 	INCBIN "maps/route20.blk"
 
 Route23_h: ; 0x5033f to 0x50361 (34 bytes) (id=34)
-	db $17 ; tileset
+	db PLATEAU ; tileset
 	db ROUTE_23_HEIGHT, ROUTE_23_WIDTH ; dimensions (y, x)
 	dw Route23Blocks, Route23TextPointers, Route23Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -77954,7 +77961,7 @@ Route23Blocks: ; 503b2 (14:43b2)
 	INCBIN "maps/route23.blk"
 
 Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
 	dw Route24Blocks, Route24TextPointers, Route24Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
@@ -77983,7 +77990,7 @@ Route24Blocks: ; 506e7 (14:46e7)
 	INCBIN "maps/route24.blk"
 
 Route25_h: ; 0x5079b to 0x507b2 (23 bytes) (id=36)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_25_HEIGHT, ROUTE_25_WIDTH ; dimensions (y, x)
 	dw Route25Blocks, Route25TextPointers, Route25Script ; blocks, texts, scripts
 	db WEST ; connections
@@ -78018,7 +78025,7 @@ Route25Blocks: ; 50810 (14:4810)
 	INCBIN "maps/route25.blk"
 
 IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
-	db $17 ; tileset
+	db PLATEAU ; tileset
 	db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauBlocks, IndigoPlateauTextPointers, IndigoPlateauScript ; blocks, texts, scripts
 	db SOUTH ; connections
@@ -78048,7 +78055,7 @@ IndigoPlateauBlocks: ; 5094a (14:494a)
 	INCBIN "maps/indigoplateau.blk"
 
 SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
 	dw SaffronCityBlocks, SaffronCityTextPointers, SaffronCityScript ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST | EAST ; connections
@@ -79917,7 +79924,7 @@ Route25Text11: ; 5178c (14:578c)
 	db "@"
 
 VictoryRoad2_h: ; 0x51791 to 0x5179d (12 bytes) (id=194)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db VICTORY_ROAD_2_HEIGHT, VICTORY_ROAD_2_WIDTH ; dimensions (y, x)
 	dw VictoryRoad2Blocks, VictoryRoad2TextPointers, VictoryRoad2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -80214,7 +80221,7 @@ VictoryRoad2Blocks: ; 519af (14:59af)
 	INCBIN "maps/victoryroad2.blk"
 
 MtMoon2_h: ; 0x51a36 to 0x51a42 (12 bytes) (id=60)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db MT_MOON_2_HEIGHT, MT_MOON_2_WIDTH ; dimensions (y, x)
 	dw MtMoon2Blocks, MtMoon2TextPointers, MtMoon2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -80262,7 +80269,7 @@ MtMoon2Blocks: ; 51a91 (14:5a91)
 	INCBIN "maps/mtmoon2.blk"
 
 SilphCo7_h: ; 0x51b55 to 0x51b61 (12 bytes) (id=212)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_7F_HEIGHT, SILPH_CO_7F_WIDTH ; dimensions (y, x)
 	dw SilphCo7Blocks, SilphCo7TextPointers, SilphCo7Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -80831,7 +80838,7 @@ SilphCo7Blocks: ; 51f57 (14:5f57)
 	INCBIN "maps/silphco7.blk"
 
 Mansion2_h: ; 0x51fcc to 0x51fd8 (12 bytes) (id=214)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db MANSION_2_HEIGHT, MANSION_2_WIDTH ; dimensions (y, x)
 	dw Mansion2Blocks, Mansion2TextPointers, Mansion2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -81010,7 +81017,7 @@ Mansion2Blocks: ; 52110 (14:6110)
 	INCBIN "maps/mansion2.blk"
 
 Mansion3_h: ; 0x521e2 to 0x521ee (12 bytes) (id=215)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db MANSION_3_HEIGHT, MANSION_3_WIDTH ; dimensions (y, x)
 	dw Mansion3Blocks, Mansion3TextPointers, Mansion3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -81196,7 +81203,7 @@ Mansion3Blocks: ; 52326 (14:6326)
 	INCBIN "maps/mansion3.blk"
 
 Mansion4_h: ; 0x523ad to 0x523b9 (12 bytes) (id=216)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db MANSION_4_HEIGHT, MANSION_4_WIDTH ; dimensions (y, x)
 	dw Mansion4Blocks, Mansion4TextPointers, Mansion4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -82126,7 +82133,7 @@ Route2Blocks: ; 5407e (15:407e)
 	INCBIN "maps/route2.blk"
 
 Route3_h: ; 0x541e6 to 0x54208 (34 bytes) (id=14)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_3_HEIGHT, ROUTE_3_WIDTH ; dimensions (y, x)
 	dw Route3Blocks, Route3TextPointers, Route3Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
@@ -82157,7 +82164,7 @@ Route3Blocks: ; 54255 (15:4255)
 	INCBIN "maps/route3.blk"
 
 Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
 	dw Route4Blocks, Route4TextPointers, Route4Script; blocks, texts, scripts
 	db SOUTH | EAST ; connections
@@ -82192,7 +82199,7 @@ Route4Blocks: ; 543ec (15:43ec)
 	INCBIN "maps/route4.blk"
 
 Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_5_HEIGHT, ROUTE_5_WIDTH ; dimensions (y, x)
 	dw Route5Blocks, Route5TextPointers, Route5Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -82226,7 +82233,7 @@ Route5Blocks: ; 545d2 (15:45d2)
 	INCBIN "maps/route5.blk"
 
 Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; dimensions (y, x)
 	dw Route9Blocks, Route9TextPointers, Route9Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -82258,7 +82265,7 @@ Route9Blocks: ; 546fe (15:46fe)
 	INCBIN "maps/route9.blk"
 
 Route13_h: ; 0x5480c to 0x5482e (34 bytes) (id=24)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_13_HEIGHT, ROUTE_13_WIDTH ; dimensions (y, x)
 	dw Route13Blocks, Route13TextPointers, Route13Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
@@ -82292,7 +82299,7 @@ Route13Blocks: ; 5488b (15:488b)
 	INCBIN "maps/route13.blk"
 
 Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_14_HEIGHT, ROUTE_14_WIDTH ; dimensions (y, x)
 	dw Route14Blocks, Route14TextPointers, Route14Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -82324,7 +82331,7 @@ Route14Blocks: ; 54a12 (15:4a12)
 	INCBIN "maps/route14.blk"
 
 Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
 	dw Route17Blocks, Route17TextPointers, Route17Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -82361,7 +82368,7 @@ Route17Blocks: ; 54ba8 (15:4ba8)
 	INCBIN "maps/route17.blk"
 
 Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_19_HEIGHT, ROUTE_19_WIDTH ; dimensions (y, x)
 	dw Route19Blocks, Route19TextPointers, Route19Script ; blocks, texts, scripts
 	db NORTH | WEST ; connections
@@ -82393,7 +82400,7 @@ Route19Blocks: ; 54ef1 (15:4ef1)
 	INCBIN "maps/route19.blk"
 
 Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_21_HEIGHT, ROUTE_21_WIDTH ; dimensions (y, x)
 	dw Route21Blocks, Route21TextPointers, Route21Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -84950,7 +84957,7 @@ Route21AfterBattleText9: ; 5605f (15:605f)
 	db "@"
 
 VermilionHouse2_h: ; 0x56064 to 0x56070 (12 bytes) (id=163)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db VERMILION_HOUSE_2_HEIGHT, VERMILION_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw VermilionHouse2Blocks, VermilionHouse2TextPointers, VermilionHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -85031,7 +85038,7 @@ VermilionHouse2Object: ; 0x560cf (size=26)
 	EVENT_DISP VERMILION_HOUSE_2_WIDTH, $7, $3
 
 CeladonMart2_h: ; 0x560e9 to 0x560f5 (12 bytes) (id=123)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_2_HEIGHT, CELADON_MART_2_WIDTH ; dimensions (y, x)
 	dw CeladonMart2Blocks, CeladonMart2TextPointers, CeladonMart2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -85085,7 +85092,7 @@ CeladonMart2Blocks: ; 56148 (15:6148)
 	INCBIN "maps/celadonmart2.blk"
 
 FuchsiaHouse3_h: ; 0x56170 to 0x5617c (12 bytes) (id=164)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db FUCHSIA_HOUSE_3_HEIGHT, FUCHSIA_HOUSE_3_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse3Blocks, FuchsiaHouse3TextPointers, FuchsiaHouse3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -85186,7 +85193,7 @@ FuchsiaHouse3Object: ; 0x56221 (size=34)
 	EVENT_DISP FUCHSIA_HOUSE_3_WIDTH, $7, $3
 
 DayCareM_h: ; 0x56243 to 0x5624f (12 bytes) (id=72)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db DAYCAREM_HEIGHT, DAYCAREM_WIDTH ; dimensions (y, x)
 	dw DayCareMBlocks, DayCareMTextPointers, DayCareMScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -85484,7 +85491,7 @@ DayCareMObject: ; 0x56459 (size=26)
 	EVENT_DISP DAYCAREM_WIDTH, $7, $3
 
 Route12House_h: ; 0x56473 to 0x5647f (12 bytes) (id=189)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db ROUTE_12_HOUSE_HEIGHT, ROUTE_12_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route12HouseBlocks, Route12HouseTextPointers, Route12HouseScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -85565,7 +85572,7 @@ Route12HouseObject: ; 0x564de (size=26)
 	EVENT_DISP ROUTE_12_HOUSE_WIDTH, $7, $3
 
 SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
 	dw SilphCo8Blocks, SilphCo8TextPointers, SilphCo8Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -86256,7 +86263,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 SECTION "bank16",ROMX,BANK[$16]
 
 Route6_h: ; 0x58000 to 0x58022 (34 bytes) (id=17)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_6_HEIGHT, ROUTE_6_WIDTH ; dimensions (y, x)
 	dw Route6Blocks, Route6TextPointers, Route6Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
@@ -86294,7 +86301,7 @@ Route6Blocks: ; 58079 (16:4079)
 	INCBIN "maps/route6.blk"
 
 Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; dimensions (y, x)
 	dw Route8Blocks, Route8TextPointers, Route8Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -86337,7 +86344,7 @@ Route8Blocks: ; 581c6 (16:41c6)
 	INCBIN "maps/route8.blk"
 
 Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_10_HEIGHT, ROUTE_10_WIDTH ; dimensions (y, x)
 	dw Route10Blocks, Route10TextPointers, Route10Script ; blocks, texts, scripts
 	db SOUTH | WEST ; connections
@@ -86378,7 +86385,7 @@ Route10Blocks: ; 58356 (16:4356)
 	INCBIN "maps/route10.blk"
 
 Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; dimensions (y, x)
 	dw Route11Blocks, Route11TextPointers, Route11Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -86422,7 +86429,7 @@ Route11Blocks: ; 5855f (16:455f)
 	INCBIN "maps/route11.blk"
 
 Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_12_HEIGHT, ROUTE_12_WIDTH ; dimensions (y, x)
 	dw Route12Blocks, Route12TextPointers, Route12Script ; blocks, texts, scripts
 	db NORTH | SOUTH | WEST ; connections
@@ -86466,7 +86473,7 @@ Route12Blocks: ; 58710 (16:4710)
 	INCBIN "maps/route12.blk"
 
 Route15_h: ; 0x5892c to 0x5894e (34 bytes) (id=26)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; dimensions (y, x)
 	dw Route15Blocks, Route15TextPointers, Route15Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
@@ -86509,7 +86516,7 @@ Route15Blocks: ; 589cc (16:49cc)
 	INCBIN "maps/route15.blk"
 
 Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
 	dw Route16Blocks, Route16TextPointers, Route16Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
@@ -86559,7 +86566,7 @@ Route16Blocks: ; 58b84 (16:4b84)
 	INCBIN "maps/route16.blk"
 
 Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
-	db $00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; dimensions (y, x)
 	dw Route18Blocks, Route18TextPointers, Route18Script ; blocks, texts, scripts
 	db NORTH | EAST ; connections
@@ -89008,7 +89015,7 @@ Route18Text5: ; 59b5f (16:5b5f)
 	db "@"
 
 FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
-	db $10 ; tileset
+	db INTERIOR ; tileset
 	db POKEMON_FAN_CLUB_HEIGHT, POKEMON_FAN_CLUB_WIDTH ; dimensions (y, x)
 	dw FanClubBlocks, FanClubTextPointers, FanClubScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -89214,7 +89221,7 @@ FanClubBlocks: ; 59cd5 (16:5cd5)
 	INCBIN "maps/fanclub.blk"
 
 SilphCo2_h: ; 0x59ce5 to 0x59cf1 (12 bytes) (id=207)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_2F_HEIGHT, SILPH_CO_2F_WIDTH ; dimensions (y, x)
 	dw SilphCo2Blocks, SilphCo2TextPointers, SilphCo2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -89503,7 +89510,7 @@ SilphCo2Blocks: ; 59ec8 (16:5ec8)
 	INCBIN "maps/silphco2.blk"
 
 SilphCo3_h: ; 0x59f4f to 0x59f5b (12 bytes) (id=208)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_3F_HEIGHT, SILPH_CO_3F_WIDTH ; dimensions (y, x)
 	dw SilphCo3Blocks, SilphCo3TextPointers, SilphCo3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -89688,7 +89695,7 @@ SilphCo3Blocks: ; 5a0a6 (16:60a6)
 	INCBIN "maps/silphco3.blk"
 
 SilphCo10_h: ; 0x5a12d to 0x5a139 (12 bytes) (id=234)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
 	dw SilphCo10Blocks, SilphCo10TextPointers, SilphCo10Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -89854,7 +89861,7 @@ SilphCo10Blocks: ; 5a25a (16:625a)
 	INCBIN "maps/silphco10.blk"
 
 Lance_h: ; 0x5a2a2 to 0x5a2ae (12 bytes) (id=113)
-	db $05 ; tileset
+	db DOJO ; tileset
 	db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
 	dw LanceBlocks, LanceTextPointers, LanceScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -90049,7 +90056,7 @@ LanceBlocks: ; 5a3e9 (16:63e9)
 	INCBIN "maps/lance.blk"
 
 HallofFameRoom_h: ; 0x5a492 to 0x5a49e (12 bytes) (id=118)
-	db $07 ; tileset
+	db GYM ; tileset
 	db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
 	dw HallofFameRoomBlocks, HallofFameRoomTextPointers, HallofFameRoomScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -90247,7 +90254,7 @@ ViridianForestExitBlocks: ; 5c090 (17:4090)
 	INCBIN "maps/viridianforestexit.blk"
 
 RedsHouse2F_h: ; 5c0a4 (17:40a4)
-	db $04 ; tileset
+	db REDS_HOUSE_2 ; tileset
 	db REDS_HOUSE_2F_HEIGHT, REDS_HOUSE_2F_WIDTH ; dimensions
 	dw RedsHouse2FBlocks, RedsHouse2FTextPointers, RedsHouse2FScript
 	db $00 ; no connections
@@ -90301,7 +90308,7 @@ Func_5c0dc: ; 5c0dc (17:40dc)
 	ret
 
 Museum1F_h: ; 0x5c0eb to 0x5c0f7 (12 bytes) (id=52)
-	db $0a ; tileset
+	db MUSEUM ; tileset
 	db MUSEUM_1F_HEIGHT, MUSEUM_1F_WIDTH ; dimensions (y, x)
 	dw Museum1FBlocks, Museum1FTextPointers, Museum1FScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -90588,7 +90595,7 @@ Museum1FObject: ; 0x5c2c1 (size=74)
 	EVENT_DISP MUSEUM_1F_WIDTH, $7, $7 ; MUSEUM_2F
 
 Museum2F_h: ; 0x5c30b to 0x5c317 (12 bytes) (id=53)
-	db $0a ; tileset
+	db MUSEUM ; tileset
 	db MUSEUM_2F_HEIGHT, MUSEUM_2F_WIDTH ; dimensions (y, x)
 	dw Museum2FBlocks, Museum2FTextPointers, Museum2FScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -90655,7 +90662,7 @@ Museum2FObject: ; 0x5c34b (size=48)
 	EVENT_DISP MUSEUM_2F_WIDTH, $7, $7 ; MUSEUM_1F
 
 PewterGym_h: ; 0x5c37b to 0x5c387 (12 bytes) (id=54)
-	db $07 ; tileset
+	db GYM ; tileset
 	db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
 	dw PewterGymBlocks, PewterGymTextPointers, PewterGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -90916,7 +90923,7 @@ PewterGymBlocks: ; 5c558 (17:4558)
 	INCBIN "maps/pewtergym.blk"
 
 PewterPokecenter_h: ; 0x5c57b to 0x5c587 (12 bytes) (id=58)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db PEWTER_POKECENTER_HEIGHT, PEWTER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw PewterPokecenterBlocks, PewterPokecenterTextPointers, PewterPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91018,7 +91025,7 @@ PewterPokecenterObject: ; 0x5c60d (size=44)
 	EVENT_DISP PEWTER_POKECENTER_WIDTH, $7, $4
 
 CeruleanPokecenter_h: ; 0x5c639 to 0x5c645 (12 bytes) (id=64)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeruleanPokecenterBlocks, CeruleanPokecenterTextPointers, CeruleanPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91071,7 +91078,7 @@ CeruleanPokecenterBlocks: ; 5c68b (17:468b)
 	INCBIN "maps/ceruleanpokecenter.blk"
 
 CeruleanGym_h: ; 0x5c6a7 to 0x5c6b3 (12 bytes) (id=65)
-	db $07 ; tileset
+	db GYM ; tileset
 	db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
 	dw CeruleanGymBlocks, CeruleanGymTextPointers, CeruleanGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91322,7 +91329,7 @@ CeruleanGymBlocks: ; 5c866 (17:4866)
 	INCBIN "maps/ceruleangym.blk"
 
 CeruleanMart_h: ; 0x5c889 to 0x5c895 (12 bytes) (id=67)
-	db $02 ; tileset
+	db MART ; tileset
 	db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
 	dw CeruleanMartBlocks, CeruleanMartTextPointers, CeruleanMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91363,7 +91370,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 	EVENT_DISP CERULEAN_MART_WIDTH, $7, $4
 
 LavenderPokecenter_h: ; 0x5c8ce to 0x5c8da (12 bytes) (id=141)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw LavenderPokecenterBlocks, LavenderPokecenterTextPointers, LavenderPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91413,7 +91420,7 @@ LavenderPokecenterObject: ; 0x5c8f4 (size=44)
 	EVENT_DISP LAVENDER_POKECENTER_WIDTH, $7, $4
 
 LavenderMart_h: ; 0x5c920 to 0x5c92c (12 bytes) (id=150)
-	db $02 ; tileset
+	db MART ; tileset
 	db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
 	dw LavenderMartBlocks, LavenderMartTextPointers, LavenderMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91472,7 +91479,7 @@ LavenderMartObject: ; 0x5c95d (size=38)
 	EVENT_DISP LAVENDER_MART_WIDTH, $7, $4
 
 VermilionPokecenter_h: ; 0x5c983 to 0x5c98f (12 bytes) (id=89)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db VERMILION_POKECENTER_HEIGHT, VERMILION_POKECENTER_WIDTH ; dimensions (y, x)
 	dw VermilionPokecenterBlocks, VermilionPokecenterTextPointers, VermilionPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91522,7 +91529,7 @@ VermilionPokecenterObject: ; 0x5c9a9 (size=44)
 	EVENT_DISP VERMILION_POKECENTER_WIDTH, $7, $4
 
 VermilionMart_h: ; 0x5c9d5 to 0x5c9e1 (12 bytes) (id=91)
-	db $02 ; tileset
+	db MART ; tileset
 	db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
 	dw VermilionMartBlocks, VermilionMartTextPointers, VermilionMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91563,7 +91570,7 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
 	EVENT_DISP VERMILION_MART_WIDTH, $7, $4
 
 VermilionGym_h: ; 0x5ca1a to 0x5ca26 (12 bytes) (id=92)
-	db $07 ; tileset
+	db GYM ; tileset
 	db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
 	dw VermilionGymBlocks, VermilionGymTextPointers, VermilionGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91866,7 +91873,7 @@ VermilionGymBlocks: ; 5cc38 (17:4c38)
 	INCBIN "maps/vermiliongym.blk"
 
 CopycatsHouse2F_h: ; 0x5cc65 to 0x5cc71 (12 bytes) (id=176)
-	db $04 ; tileset
+	db REDS_HOUSE_2 ; tileset
 	db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouse2FBlocks, CopycatsHouse2FTextPointers, CopycatsHouse2FScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -91998,7 +92005,7 @@ CopycatsHouse2FObject: ; 0x5cd21 (size=48)
 	EVENT_DISP COPYCATS_HOUSE_2F_WIDTH, $1, $7 ; COPYCATS_HOUSE_1F
 
 FightingDojo_h: ; 0x5cd51 to 0x5cd5d (12 bytes) (id=177)
-	db $05 ; tileset
+	db DOJO ; tileset
 	db FIGHTING_DOJO_HEIGHT, FIGHTING_DOJO_WIDTH ; dimensions (y, x)
 	dw FightingDojoBlocks, FightingDojoTextPointers, FightingDojoScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -92368,7 +92375,7 @@ FightingDojoBlocks: ; 5cfe3 (17:4fe3)
 	INCBIN "maps/fightingdojo.blk"
 
 SaffronGym_h: ; 0x5d001 to 0x5d00d (12 bytes) (id=178)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SAFFRON_GYM_HEIGHT, SAFFRON_GYM_WIDTH ; dimensions (y, x)
 	dw SaffronGymBlocks, SaffronGymTextPointers, SaffronGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -92827,7 +92834,7 @@ SaffronGymBlocks: ; 5d3a3 (17:53a3)
 	INCBIN "maps/saffrongym.blk"
 
 SaffronMart_h: ; 0x5d3fd to 0x5d409 (12 bytes) (id=180)
-	db $02 ; tileset
+	db MART ; tileset
 	db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
 	dw SaffronMartBlocks, SaffronMartTextPointers, SaffronMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -92868,7 +92875,7 @@ SaffronMartObject: ; 0x5d41c (size=38)
 	EVENT_DISP SAFFRON_MART_WIDTH, $7, $4
 
 SilphCo1_h: ; 0x5d442 to 0x5d44e (12 bytes) (id=181)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_1F_HEIGHT, SILPH_CO_1F_WIDTH ; dimensions (y, x)
 	dw SilphCo1Blocks, SilphCo1TextPointers, SilphCo1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -92921,7 +92928,7 @@ SilphCo1Blocks: ; 5d4a2 (17:54a2)
 	INCBIN "maps/silphco1.blk"
 
 SaffronPokecenter_h: ; 0x5d529 to 0x5d535 (12 bytes) (id=182)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db SAFFRON_POKECENTER_HEIGHT, SAFFRON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw SaffronPokecenterBlocks, SaffronPokecenterTextPointers, SaffronPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -92971,7 +92978,7 @@ SaffronPokecenterObject: ; 0x5d54f (size=44)
 	EVENT_DISP SAFFRON_POKECENTER_WIDTH, $7, $4
 
 ViridianForestExit_h: ; 0x5d57b to 0x5d587 (12 bytes) (id=47)
-	db $09 ; tileset
+	db FOREST_GATE ; tileset
 	db VIRIDIAN_FOREST_EXIT_HEIGHT, VIRIDIAN_FOREST_EXIT_WIDTH ; dimensions (y, x)
 	dw ViridianForestExitBlocks, ViridianForestExitTextPointers, ViridianForestExitScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -93014,7 +93021,7 @@ ViridianForestExitObject: ; 0x5d598 (size=48)
 	EVENT_DISP VIRIDIAN_FOREST_EXIT_WIDTH, $7, $5 ; VIRIDIAN_FOREST
 
 Route2Gate_h: ; 0x5d5c8 to 0x5d5d4 (12 bytes) (id=49)
-	db $0c ; tileset
+	db GATE ; tileset
 	db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
 	dw Route2GateBlocks, Route2GateTextPointers, Route2GateScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -93085,7 +93092,7 @@ Route2GateObject: ; 0x5d620 (size=48)
 	EVENT_DISP ROUTE_2_GATE_WIDTH, $7, $5
 
 ViridianForestEntrance_h: ; 0x5d650 to 0x5d65c (12 bytes) (id=50)
-	db $09 ; tileset
+	db FOREST_GATE ; tileset
 	db VIRIDIAN_FOREST_ENTRANCE_HEIGHT, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw ViridianForestEntranceBlocks, ViridianForestEntranceTextPointers, ViridianForestEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -93128,7 +93135,7 @@ ViridianForestEntranceObject: ; 0x5d66d (size=48)
 	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $7, $5
 
 UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
-	db $0c ; tileset
+	db GATE ; tileset
 	db PATH_ENTRANCE_ROUTE_5_HEIGHT, PATH_ENTRANCE_ROUTE_5_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute5Blocks, UndergroundTunnelEntranceRoute5TextPointers, UndergroundTunnelEntranceRoute5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -93173,7 +93180,7 @@ UndergroundTunnelEntranceRoute5Object: ; 0x5d6c1 (size=34)
 	EVENT_DISP PATH_ENTRANCE_ROUTE_5_WIDTH, $4, $4 ; UNDERGROUND_PATH_NS
 
 UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
-	db $0c ; tileset
+	db GATE ; tileset
 	db PATH_ENTRANCE_ROUTE_6_HEIGHT, PATH_ENTRANCE_ROUTE_6_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute6Blocks, UndergroundTunnelEntranceRoute6TextPointers, UndergroundTunnelEntranceRoute6Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -93210,7 +93217,7 @@ UndergroundTunnelEntranceRoute6Object: ; 0x5d6fe (size=34)
 	EVENT_DISP PATH_ENTRANCE_ROUTE_6_WIDTH, $4, $4 ; UNDERGROUND_PATH_NS
 
 UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
-	db $0c ; tileset
+	db GATE ; tileset
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7Blocks, UndergroundPathEntranceRoute7TextPointers, UndergroundPathEntranceRoute7Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -93247,7 +93254,7 @@ UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
 	EVENT_DISP PATH_ENTRANCE_ROUTE_7_WIDTH, $4, $4 ; UNDERGROUND_PATH_WE
 
 UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
-	db $0c ; tileset
+	db GATE ; tileset
 	db PATH_ENTRANCE_ROUTE_7_HEIGHT, PATH_ENTRANCE_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundTunnelEntranceRoute7CopyBlocks, UndergroundPathEntranceRoute7CopyTextPointers, UndergroundPathEntranceRoute7CopyScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -93298,7 +93305,7 @@ UndergroundPathEntranceRoute7CopyObject: ; 5d787 (17:5787)
 	EVENT_DISP PATH_ENTRANCE_ROUTE_7_COPY_WIDTH, $4, $4 ; UNDERGROUND_PATH_WE
 
 SilphCo9_h: ; 0x5d7af to 0x5d7bb (12 bytes) (id=233)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db SILPH_CO_9F_HEIGHT, SILPH_CO_9F_WIDTH ; dimensions (y, x)
 	dw SilphCo9Blocks, SilphCo9TextPointers, SilphCo9Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -93582,7 +93589,7 @@ SilphCo9Blocks: ; 5d989 (17:5989)
 	INCBIN "maps/silphco9.blk"
 
 VictoryRoad1_h: ; 0x5d9fe to 0x5da0a (12 bytes) (id=108)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db VICTORY_ROAD_1_HEIGHT, VICTORY_ROAD_1_WIDTH ; dimensions (y, x)
 	dw VictoryRoad1Blocks, VictoryRoad1TextPointers, VictoryRoad1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94226,7 +94233,7 @@ SSAnne9Blocks: ; 603c0 (18:43c0)
 	INCBIN "maps/ssanne9.blk"
 
 PokemonTower1_h: ; 0x60420 to 0x6042c (12 bytes) (id=142)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_1_HEIGHT, POKEMONTOWER_1_WIDTH ; dimensions (y, x)
 	dw PokemonTower1Blocks, PokemonTower1TextPointers, PokemonTower1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94288,7 +94295,7 @@ PokemonTower1Blocks: ; 6048c (18:448c)
 	INCBIN "maps/pokemontower1.blk"
 
 PokemonTower2_h: ; 0x604e6 to 0x604f2 (12 bytes) (id=143)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_2_HEIGHT, POKEMONTOWER_2_WIDTH ; dimensions (y, x)
 	dw PokemonTower2Blocks, PokemonTower2TextPointers, PokemonTower2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94496,7 +94503,7 @@ PokemonTower2Blocks: ; 60666 (18:4666)
 	INCBIN "maps/pokemontower2.blk"
 
 PokemonTower3_h: ; 0x606c0 to 0x606cc (12 bytes) (id=144)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_3_HEIGHT, POKEMONTOWER_3_WIDTH ; dimensions (y, x)
 	dw PokemonTower3Blocks, PokemonTower3TextPointers, PokemonTower3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94628,7 +94635,7 @@ PokemonTower3Blocks: ; 60790 (18:4790)
 	INCBIN "maps/pokemontower3.blk"
 
 PokemonTower4_h: ; 0x607ea to 0x607f6 (12 bytes) (id=145)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_4_HEIGHT, POKEMONTOWER_4_WIDTH ; dimensions (y, x)
 	dw PokemonTower4Blocks, PokemonTower4TextPointers, PokemonTower4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94765,7 +94772,7 @@ PokemonTower4Blocks: ; 608cc (18:48cc)
 	INCBIN "maps/pokemontower4.blk"
 
 PokemonTower5_h: ; 0x60926 to 0x60932 (12 bytes) (id=146)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_5_HEIGHT, POKEMONTOWER_5_WIDTH ; dimensions (y, x)
 	dw PokemonTower5Blocks, PokemonTower5TextPointers, PokemonTower5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -94978,7 +94985,7 @@ PokemonTower5Blocks: ; 60a89 (18:4a89)
 	INCBIN "maps/pokemontower5.blk"
 
 PokemonTower6_h: ; 0x60ae3 to 0x60aef (12 bytes) (id=147)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_6_HEIGHT, POKEMONTOWER_6_WIDTH ; dimensions (y, x)
 	dw PokemonTower6Blocks, PokemonTower6TextPointers, PokemonTower6Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -95226,7 +95233,7 @@ PokemonTower6Blocks: ; 60c95 (18:4c95)
 	INCBIN "maps/unusedblocks60cef.blk"
 
 PokemonTower7_h: ; 0x60cf9 to 0x60d05 (12 bytes) (id=148)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db POKEMONTOWER_7_HEIGHT, POKEMONTOWER_7_WIDTH ; dimensions (y, x)
 	dw PokemonTower7Blocks, PokemonTower7TextPointers, PokemonTower7Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -95536,7 +95543,7 @@ PokemonTower7Blocks: ; 60f20 (18:4f20)
 	INCBIN "maps/pokemontower7.blk"
 
 CeladonMart1_h: ; 0x60f7a to 0x60f86 (12 bytes) (id=122)
-	db $12 ; tileset
+	db LOBBY ; tileset
 	db CELADON_MART_1_HEIGHT, CELADON_MART_1_WIDTH ; dimensions (y, x)
 	dw CeladonMart1Blocks, CeladonMart1TextPointers, CeladonMart1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -95720,7 +95727,7 @@ LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ret
 
 ViridianForest_h: ; 0x61101 to 0x6110d (12 bytes) (id=51)
-	db $03 ; tileset
+	db FOREST ; tileset
 	db VIRIDIAN_FOREST_HEIGHT, VIRIDIAN_FOREST_WIDTH ; dimensions (y, x)
 	dw ViridianForestBlocks, ViridianForestTextPointers, ViridianForestScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -95910,7 +95917,7 @@ ViridianForestObject: ; 0x611da (size=127)
 	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $2f, $12 ; VIRIDIAN_FOREST_ENTRANCE
 
 SSAnne1_h: ; 0x61259 to 0x61265 (12 bytes) (id=95)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_1_HEIGHT, SS_ANNE_1_WIDTH ; dimensions (y, x)
 	dw SSAnne1Blocks, SSAnne1TextPointers, SSAnne1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -95971,7 +95978,7 @@ SSAnne1Blocks: ; 612df (18:52df)
 	INCBIN "maps/ssanne1.blk"
 
 SSAnne2_h: ; 0x61393 to 0x6139f (12 bytes) (id=96)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_2_HEIGHT, SS_ANNE_2_WIDTH ; dimensions (y, x)
 	dw SSAnne2Blocks, SSAnne2TextPointers, SSAnne2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96223,7 +96230,7 @@ SSAnne2Blocks: ; 6156e (18:556e)
 	INCBIN "maps/ssanne2.blk"
 
 SSAnne4_h: ; 0x61622 to 0x6162e (12 bytes) (id=98)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_4_HEIGHT, SS_ANNE_4_WIDTH ; dimensions (y, x)
 	dw SSAnne4Blocks, SSAnne4TextPointers, SSAnne4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96262,7 +96269,7 @@ SSAnne4Blocks: ; 61666 (18:5666)
 	INCBIN "maps/ssanne4.blk"
 
 SSAnne5_h: ; 0x616a2 to 0x616ae (12 bytes) (id=99)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_5_HEIGHT, SS_ANNE_5_WIDTH ; dimensions (y, x)
 	dw SSAnne5Blocks, SSAnne5TextPointers, SSAnne5Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96382,7 +96389,7 @@ SSAnne5Blocks: ; 61761 (18:5761)
 	INCBIN "maps/ssanne5.blk"
 
 SSAnne6_h: ; 0x617a7 to 0x617b3 (12 bytes) (id=100)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_6_HEIGHT, SS_ANNE_6_WIDTH ; dimensions (y, x)
 	dw SSAnne6Blocks, SSAnne6TextPointers, SSAnne6Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96485,7 +96492,7 @@ SSAnne6Blocks: ; 61851 (18:5851)
 	INCBIN "maps/ssanne6.blk"
 
 SSAnne7_h: ; 0x61889 to 0x61895 (12 bytes) (id=101)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_7_HEIGHT, SS_ANNE_7_WIDTH ; dimensions (y, x)
 	dw SSAnne7Blocks, SSAnne7TextPointers, SSAnne7Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96608,7 +96615,7 @@ SSAnne7Blocks: ; 6195e (18:595e)
 	INCBIN "maps/ssanne7.blk"
 
 SSAnne8_h: ; 0x6196a to 0x61976 (12 bytes) (id=102)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_8_HEIGHT, SS_ANNE_8_WIDTH ; dimensions (y, x)
 	dw SSAnne8Blocks, SSAnne8TextPointers, SSAnne8Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -96817,7 +96824,7 @@ SSAnne8Blocks: ; 61adf (18:5adf)
 	INCBIN "maps/ssanne8.blk"
 
 SSAnne9_h: ; 0x61b3f to 0x61b4b (12 bytes) (id=103)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_9_HEIGHT, SS_ANNE_9_WIDTH ; dimensions (y, x)
 	dw SSAnne9Blocks, SSAnne9TextPointers, SSAnne9Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -97089,7 +97096,7 @@ SSAnne9Object: ; 0x61c8d (size=188)
 	EVENT_DISP SS_ANNE_9_WIDTH, $f, $17 ; SS_ANNE_2
 
 SSAnne10_h: ; 0x61d49 to 0x61d55 (12 bytes) (id=104)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db SS_ANNE_10_HEIGHT, SS_ANNE_10_WIDTH ; dimensions (y, x)
 	dw SSAnne10Blocks, SSAnne10TextPointers, SSAnne10Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -97341,7 +97348,7 @@ SSAnne10Object: ; 0x61e75 (size=165)
 	EVENT_DISP SS_ANNE_10_WIDTH, $f, $d ; SS_ANNE_4
 
 UndergroundPathNS_h: ; 0x61f1a to 0x61f26 (12 bytes) (id=119)
-	db $0b ; tileset
+	db UNDERGROUND ; tileset
 	db UNDERGROUND_PATH_NS_HEIGHT, UNDERGROUND_PATH_NS_WIDTH ; dimensions (y, x)
 	dw UndergroundPathNSBlocks, UndergroundPathNSTextPointers, UndergroundPathNSScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -97369,7 +97376,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 	EVENT_DISP UNDERGROUND_PATH_NS_WIDTH, $29, $2 ; PATH_ENTRANCE_ROUTE_6
 
 UndergroundPathWE_h: ; 0x61f3e to 0x61f4a (12 bytes) (id=121)
-	db $0b ; tileset
+	db UNDERGROUND ; tileset
 	db UNDERGROUND_PATH_WE_HEIGHT, UNDERGROUND_PATH_WE_WIDTH ; dimensions (y, x)
 	dw UndergroundPathWEBlocks, UndergroundPathWETextPointers, UndergroundPathWEScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -97397,7 +97404,7 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 	EVENT_DISP UNDERGROUND_PATH_WE_WIDTH, $2, $2f ; PATH_ENTRANCE_ROUTE_8
 
 DiglettsCave_h: ; 0x61f62 to 0x61f6e (12 bytes) (id=197)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveBlocks, DiglettsCaveTextPointers, DiglettsCaveScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -97428,7 +97435,7 @@ DiglettsCaveBlocks: ; 61f86 (18:5f86)
 	INCBIN "maps/diglettscave.blk"
 
 SilphCo11_h: ; 0x620ee to 0x620fa (12 bytes) (id=235)
-	db $10 ; tileset
+	db INTERIOR ; tileset
 	db SILPH_CO_11F_HEIGHT, SILPH_CO_11F_WIDTH ; dimensions (y, x)
 	dw SilphCo11Blocks, SilphCo11TextPointers, SilphCo11Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -98023,34 +98030,36 @@ Unknown_62529: ; 62529 (18:6529)
 
 SECTION "bank19",ROMX,BANK[$19]
 
-Tset00_GFX: ; 64000 (19:4000)
-	INCBIN "gfx/tilesets/00.2bpp"
-Tset00_Block: ; 645e0 (19:45e0)
-	INCBIN "gfx/blocksets/00.bst"
-Tset01_GFX: ; 64de0 (19:4de0)
-	INCBIN "gfx/tilesets/01.2bpp"
-Tset01_Block: ; 65270 (19:5270)
-	INCBIN "gfx/blocksets/01.bst"
-Tset08_GFX: ; 653a0 (19:53a0)
-	INCBIN "gfx/tilesets/08.2bpp"
-Tset08_Block: ; 65980 (19:5980)
-	INCBIN "gfx/blocksets/08.bst"
-Tset13_GFX: ; 65bb0 (19:5bb0)
-	INCBIN "gfx/tilesets/13.2bpp"
-Tset13_Block: ; 66190 (19:6190)
-	INCBIN "gfx/blocksets/13.bst"
-Tset0E_GFX: ; 66610 (19:6610)
-	INCBIN "gfx/tilesets/0e.2bpp"
-Tset0E_Block: ; 66bf0 (19:6bf0)
-	INCBIN "gfx/blocksets/0e.bst"
-Tset10_GFX: ; 66d60 (19:6d60)
-	INCBIN "gfx/tilesets/10.2bpp"
-Tset10_Block: ; 67350 (19:7350)
-	INCBIN "gfx/blocksets/10.bst"
-Tset17_GFX: ; 676f0 (19:76f0)
-	INCBIN "gfx/tilesets/17.2bpp"
-Tset17_Block: ; 67b50 (19:7b50)
-	INCBIN "gfx/blocksets/17.bst"
+Overworld_GFX: ; 64000 (19:4000)
+	INCBIN "gfx/tilesets/overworld.2bpp"
+Overworld_Block: ; 645e0 (19:45e0)
+	INCBIN "gfx/blocksets/overworld.bst"
+RedsHouse1_GFX:
+RedsHouse2_GFX: ; 64de0 (19:4de0)
+	INCBIN "gfx/tilesets/reds_house.2bpp"
+RedsHouse1_Block:
+RedsHouse2_Block: ; 65270 (19:5270)
+	INCBIN "gfx/blocksets/reds_house.bst"
+House_GFX: ; 653a0 (19:53a0)
+	INCBIN "gfx/tilesets/house.2bpp"
+House_Block: ; 65980 (19:5980)
+	INCBIN "gfx/blocksets/house.bst"
+Mansion_GFX: ; 65bb0 (19:5bb0)
+	INCBIN "gfx/tilesets/mansion.2bpp"
+Mansion_Block: ; 66190 (19:6190)
+	INCBIN "gfx/blocksets/mansion.bst"
+ShipPort_GFX: ; 66610 (19:6610)
+	INCBIN "gfx/tilesets/ship_port.2bpp"
+ShipPort_Block: ; 66bf0 (19:6bf0)
+	INCBIN "gfx/blocksets/ship_port.bst"
+Interior_GFX: ; 66d60 (19:6d60)
+	INCBIN "gfx/tilesets/interior.2bpp"
+Interior_Block: ; 67350 (19:7350)
+	INCBIN "gfx/blocksets/interior.bst"
+Plateau_GFX: ; 676f0 (19:76f0)
+	INCBIN "gfx/tilesets/plateau.2bpp"
+Plateau_Block: ; 67b50 (19:7b50)
+	INCBIN "gfx/blocksets/plateau.bst"
 
 SECTION "bank1A",ROMX,BANK[$1A]
 
@@ -98105,57 +98114,65 @@ IF _BLUE
 	; 64 bytes
 ENDC
 
-Tset05_GFX: ; 6807f (1a:407f)
-	INCBIN "gfx/tilesets/05.2bpp"
-Tset05_Block: ; 6867f (1a:467f)
-	INCBIN "gfx/blocksets/05.bst"
-Tset02_GFX: ; 68dbf (1a:4dbf)
-	INCBIN "gfx/tilesets/02.2bpp"
-Tset02_Block: ; 693bf (1a:53bf)
-	INCBIN "gfx/blocksets/02.bst"
-Tset09_GFX: ; 6960f (1a:560f)
-	INCBIN "gfx/tilesets/09.2bpp"
-Tset09_Block: ; 69bff (1a:5bff)
-	INCBIN "gfx/blocksets/09.bst"
-Tset03_GFX: ; 6a3ff (1a:63ff)
-	INCBIN "gfx/tilesets/03.2bpp"
-Tset03_Block: ; 6a9ff (1a:69ff)
-	INCBIN "gfx/blocksets/03.bst"
-Tset16_GFX: ; 6b1ff (1a:71ff)
-	INCBIN "gfx/tilesets/16.2bpp"
-Tset16_Block: ; 6b7ff (1a:77ff)
-	INCBIN "gfx/blocksets/16.bst"
+Dojo_GFX:
+Gym_GFX: ; 6807f (1a:407f)
+	INCBIN "gfx/tilesets/gym.2bpp"
+Dojo_Block:
+Gym_Block: ; 6867f (1a:467f)
+	INCBIN "gfx/blocksets/gym.bst"
+Mart_GFX:
+Pokecenter_GFX: ; 68dbf (1a:4dbf)
+	INCBIN "gfx/tilesets/pokecenter.2bpp"
+Mart_Block:
+Pokecenter_Block: ; 693bf (1a:53bf)
+	INCBIN "gfx/blocksets/pokecenter.bst"
+ForestGate_GFX:
+Museum_GFX:
+Gate_GFX: ; 6960f (1a:560f)
+	INCBIN "gfx/tilesets/gate.2bpp"
+ForestGate_Block:
+Museum_Block:
+Gate_Block: ; 69bff (1a:5bff)
+	INCBIN "gfx/blocksets/gate.bst"
+Forest_GFX: ; 6a3ff (1a:63ff)
+	INCBIN "gfx/tilesets/forest.2bpp"
+Forest_Block: ; 6a9ff (1a:69ff)
+	INCBIN "gfx/blocksets/forest.bst"
+Facility_GFX: ; 6b1ff (1a:71ff)
+	INCBIN "gfx/tilesets/facility.2bpp"
+Facility_Block: ; 6b7ff (1a:77ff)
+	INCBIN "gfx/blocksets/facility.bst"
 
 SECTION "bank1B",ROMX,BANK[$1B]
 
-Tset0F_GFX: ; 6c000 (1b:4000)
-	INCBIN "gfx/tilesets/0f.2bpp"
-Tset0F_Block: ; 6c5c0 (1b:45c0)
-	INCBIN "gfx/blocksets/0f.bst"
-Tset11_GFX: ; 6cca0 (1b:4ca0)
-	INCBIN "gfx/tilesets/11.2bpp"
-Tset11_Block: ; 6d0c0 (1b:50c0)
-	INCBIN "gfx/blocksets/11.bst"
-Tset12_GFX: ; 6d8c0 (1b:58c0)
-	INCBIN "gfx/tilesets/12.2bpp"
-Tset12_Block: ; 6dea0 (1b:5ea0)
-	INCBIN "gfx/blocksets/12.bst"
-Tset0D_GFX: ; 6e390 (1b:6390)
-	INCBIN "gfx/tilesets/0d.2bpp"
-Tset0D_Block: ; 6e930 (1b:6930)
-	INCBIN "gfx/blocksets/0d.bst"
-Tset14_GFX: ; 6ed10 (1b:6d10)
-	INCBIN "gfx/tilesets/14.2bpp"
-Tset14_Block: ; 6f2d0 (1b:72d0)
-	INCBIN "gfx/blocksets/14.bst"
-Tset15_GFX: ; 6f670 (1b:7670)
-	INCBIN "gfx/tilesets/15.2bpp"
-Tset15_Block: ; 6fb20 (1b:7b20)
-	INCBIN "gfx/blocksets/15.bst"
-Tset0B_GFX: ; 6fd60 (1b:7d60)
-	INCBIN "gfx/tilesets/0b.2bpp"
-Tset0B_Block: ; 6fef0 (1b:7ef0)
-	INCBIN "gfx/blocksets/0b.bst"
+Cemetery_GFX: ; 6c000 (1b:4000)
+	INCBIN "gfx/tilesets/cemetery.2bpp"
+Cemetery_Block: ; 6c5c0 (1b:45c0)
+	INCBIN "gfx/blocksets/cemetery.bst"
+Cavern_GFX: ; 6cca0 (1b:4ca0)
+	INCBIN "gfx/tilesets/cavern.2bpp"
+Cavern_Block: ; 6d0c0 (1b:50c0)
+	INCBIN "gfx/blocksets/cavern.bst"
+Lobby_GFX: ; 6d8c0 (1b:58c0)
+	INCBIN "gfx/tilesets/lobby.2bpp"
+Lobby_Block: ; 6dea0 (1b:5ea0)
+	INCBIN "gfx/blocksets/lobby.bst"
+Ship_GFX: ; 6e390 (1b:6390)
+	INCBIN "gfx/tilesets/ship.2bpp"
+Ship_Block: ; 6e930 (1b:6930)
+	INCBIN "gfx/blocksets/ship.bst"
+Lab_GFX: ; 6ed10 (1b:6d10)
+	INCBIN "gfx/tilesets/lab.2bpp"
+Lab_Block: ; 6f2d0 (1b:72d0)
+	INCBIN "gfx/blocksets/lab.bst"
+Club_GFX: ; 6f670 (1b:7670)
+	INCBIN "gfx/tilesets/club.2bpp"
+Club_Block: ; 6fb20 (1b:7b20)
+	INCBIN "gfx/blocksets/club.bst"
+Underground_GFX: ; 6fd60 (1b:7d60)
+	INCBIN "gfx/tilesets/underground.2bpp"
+Underground_Block: ; 6fef0 (1b:7ef0)
+	INCBIN "gfx/blocksets/underground.bst"
 
 SECTION "bank1C",ROMX,BANK[$1C]
 
@@ -99131,7 +99148,7 @@ Func_7077f: ; 7077f (1c:477f)
 	ret
 
 Func_70787: ; 70787 (1c:4787)
-	ld b, $0
+	ld b, 0
 	ld hl, DataTable_707a9 ; $47a9
 	ld a, [W_CURMAPTILESET] ; $d367
 	ld c, a
@@ -99159,10 +99176,10 @@ Func_70787: ; 70787 (1c:4787)
 
 ; format: db tileset id, tile id, value to be put in $cd5b
 DataTable_707a9: ; 707a9 (1c:47a9)
-	db $16,$20,$01
-	db $16,$11,$02
-	db $11,$22,$02
-	db $10,$55,$01
+	db FACILITY, $20, 1 ; warp pad
+	db FACILITY, $11, 2 ; hole
+	db CAVERN,   $22, 2 ; hole
+	db INTERIOR, $55, 1 ; warp pad
 	db $FF
 
 Func_707b6: ; 707b6 (1c:47b6)
@@ -102048,9 +102065,9 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	ld bc, $10
 	call CopyData
 	ld a, [W_CURMAPTILESET]
-	cp $f
+	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
-	cp $11
+	cp CAVERN
 	jr z, .caveOrBruno
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
@@ -104157,137 +104174,137 @@ CreditsTextPointers: ; 742c3 (1d:42c3)
 
 CredVersion: ; 74343 (1d:4343) ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
 IF _RED
-	db "2RED VERSION STAFF@"
+	db -8, "RED VERSION STAFF@"
 ENDC
 IF _BLUE
-	db "2BLUE VERSION STAFF@"
+	db -8, "BLUE VERSION STAFF@"
 ENDC
 CredTajiri: ; 74356 (1d:4356)
-	db "4SATOSHI TAJIRI@"
+	db -6, "SATOSHI TAJIRI@"
 CredTaOota: ; 74366 (1d:4366)
-	db "4TAKENORI OOTA@"
+	db -6, "TAKENORI OOTA@"
 CredMorimoto: ; 74375 (1d:4375)
-	db "3SHIGEKI MORIMOTO@"
+	db -7, "SHIGEKI MORIMOTO@"
 CredWatanabe: ; 74387 (1d:4387)
-	db "3TETSUYA WATANABE@"
+	db -7, "TETSUYA WATANABE@"
 CredMasuda: ; 74399 (1d:4399)
-	db "4JUNICHI MASUDA@"
+	db -6, "JUNICHI MASUDA@"
 CredNisino: ; 743a9 (1d:43a9)
-	db "5KOHJI NISINO@"
+	db -5, "KOHJI NISINO@"
 CredSugimori: ; 743b7 (1d:43b7)
-	db "5KEN SUGIMORI@"
+	db -5, "KEN SUGIMORI@"
 CredNishida: ; 743c5 (1d:43c5)
-	db "4ATSUKO NISHIDA@"
+	db -6, "ATSUKO NISHIDA@"
 CredMiyamoto: ; 743d5 (1d:43d5)
-	db "3SHIGERU MIYAMOTO@"
+	db -7, "SHIGERU MIYAMOTO@"
 CredKawaguchi: ; 743e7 (1d:43e7)
-	db "2TAKASHI KAWAGUCHI@"
+	db -8, "TAKASHI KAWAGUCHI@"
 CredIshihara: ; 743fa (1d:43fa)
-	db "2TSUNEKAZU ISHIHARA@"
+	db -8, "TSUNEKAZU ISHIHARA@"
 CredYamauchi: ; 7440e (1d:440e)
-	db "3HIROSHI YAMAUCHI@"
+	db -7, "HIROSHI YAMAUCHI@"
 CredZinnai: ; 74420 (1d:4420)
-	db "3HIROYUKI ZINNAI@"
+	db -7, "HIROYUKI ZINNAI@"
 CredHishida: ; 74431 (1d:4431)
-	db "3TATSUYA HISHIDA@"
+	db -7, "TATSUYA HISHIDA@"
 CredSakai: ; 74442 (1d:4442)
-	db "4YASUHIRO SAKAI@"
+	db -6, "YASUHIRO SAKAI@"
 CredYamaguchi: ; 74452 (1d:4452)
-	db "3WATARU YAMAGUCHI@"
+	db -7, "WATARU YAMAGUCHI@"
 CredYamamoto: ; 74464 (1d:4464)
-	db "2KAZUYUKI YAMAMOTO@"
+	db -8, "KAZUYUKI YAMAMOTO@"
 CredTaniguchi: ; 74477 (1d:4477)
-	db "2RYOHSUKE TANIGUCHI@"
+	db -8, "RYOHSUKE TANIGUCHI@"
 CredNonomura: ; 7448b (1d:448b)
-	db "2FUMIHIRO NONOMURA@"
+	db -8, "FUMIHIRO NONOMURA@"
 CredFuziwara: ; 7449e (1d:449e)
-	db "3MOTOFUMI FUZIWARA@"
+	db -7, "MOTOFUMI FUZIWARA@"
 CredMatsusima: ; 744b1 (1d:44b1)
-	db "3KENJI MATSUSIMA@"
+	db -7, "KENJI MATSUSIMA@"
 CredTomisawa: ; 744c2 (1d:44c2)
-	db "3AKIHITO TOMISAWA@"
+	db -7, "AKIHITO TOMISAWA@"
 CredKawamoto: ; 744d4 (1d:44d4)
-	db "3HIROSHI KAWAMOTO@"
+	db -7, "HIROSHI KAWAMOTO@"
 CredKakei: ; 744e6 (1d:44e6)
-	db "4AKIYOSHI KAKEI@"
+	db -6, "AKIYOSHI KAKEI@"
 CredTsuchiya: ; 744f6 (1d:44f6)
-	db "3KAZUKI TSUCHIYA@"
+	db -7, "KAZUKI TSUCHIYA@"
 CredTaNakamura: ; 74507 (1d:4507)
-	db "4TAKEO NAKAMURA@"
+	db -6, "TAKEO NAKAMURA@"
 CredYuda: ; 74517 (1d:4517)
-	db "4MASAMITSU YUDA@"
+	db -6, "MASAMITSU YUDA@"
 CredMon: ; 74527 (1d:4527)
-	db "7#MON@"
+	db -3, "#MON@"
 CredDirector: ; 7452d (1d:452d)
-	db "7DIRECTOR@"
+	db -3, "DIRECTOR@"
 CredProgrammers: ; 74537 (1d:4537)
-	db "5PROGRAMMERS@"
+	db -5, "PROGRAMMERS@"
 CredCharDesign: ; 74544 (1d:4544)
-	db "3CHARACTER DESIGN@"
+	db -7, "CHARACTER DESIGN@"
 CredMusic: ; 74556 (1d:4556)
-	db "8MUSIC@"
+	db -2, "MUSIC@"
 CredSoundEffects: ; 7455d (1d:455d)
-	db "4SOUND EFFECTS@"
+	db -6, "SOUND EFFECTS@"
 CredGameDesign: ; 7456c (1d:456c)
-	db "5GAME DESIGN@"
+	db -5, "GAME DESIGN@"
 CredMonsterDesign: ; 74579 (1d:4579)
-	db "4MONSTER DESIGN@"
+	db -6, "MONSTER DESIGN@"
 CredGameScene: ; 74589 (1d:4589)
-	db "4GAME SCENARIO@"
+	db -6, "GAME SCENARIO@"
 CredParam: ; 74598 (1d:4598)
-	db "2PARAMETRIC DESIGN@"
+	db -8, "PARAMETRIC DESIGN@"
 CredMap: ; 745ab (1d:45ab)
-	db "6MAP DESIGN@"
+	db -4, "MAP DESIGN@"
 CredTest: ; 745b7 (1d:45b7)
-	db "3PRODUCT TESTING@"
+	db -7, "PRODUCT TESTING@"
 CredSpecial: ; 745c8 (1d:45c8)
-	db "4SPECIAL THANKS@"
+	db -6, "SPECIAL THANKS@"
 CredProducers: ; 745d8 (1d:45d8)
-	db "6PRODUCERS@"
+	db -4, "PRODUCERS@"
 CredProducer: ; 745e3 (1d:45e3)
-	db "6PRODUCER@"
+	db -4, "PRODUCER@"
 CredExecutive: ; 745ed (1d:45ed)
-	db "2EXECUTIVE PRODUCER@"
+	db -8, "EXECUTIVE PRODUCER@"
 CredTamada: ; 74601 (1d:4601)
-	db "4SOUSUKE TAMADA@"
+	db -6, "SOUSUKE TAMADA@"
 CredSaOota: ; 74611 (1d:4611)
-	db "5SATOSHI OOTA@"
+	db -5, "SATOSHI OOTA@"
 CredYoshikawa: ; 7461f (1d:461f)
-	db "4RENA YOSHIKAWA@"
+	db -6, "RENA YOSHIKAWA@"
 CredToOota: ; 7462f (1d:462f)
-	db "4TOMOMICHI OOTA@"
+	db -6, "TOMOMICHI OOTA@"
 CredUSStaff: ; 7463f (1d:463f)
-	db "3US VERSION STAFF@"
+	db -7, "US VERSION STAFF@"
 CredUSCoord: ; 74651 (1d:4651)
-	db "3US COORDINATION@"
+	db -7, "US COORDINATION@"
 CredTilden: ; 74662 (1d:4662)
-	db "5GAIL TILDEN@"
+	db -5, "GAIL TILDEN@"
 CredKawakami: ; 7466f (1d:466f)
-	db "4NAOKO KAWAKAMI@"
+	db -6, "NAOKO KAWAKAMI@"
 CredHiNakamura: ; 7467f (1d:467f)
-	db "4HIRO NAKAMURA@"
+	db -6, "HIRO NAKAMURA@"
 CredGiese: ; 7468e (1d:468e)
-	db "4WILLIAM GIESE@"
+	db -6, "WILLIAM GIESE@"
 CredOsborne: ; 7469d (1d:469d)
-	db "5SARA OSBORNE@"
+	db -5, "SARA OSBORNE@"
 CredTrans: ; 746ab (1d:46ab)
-	db "3TEXT TRANSLATION@"
+	db -7, "TEXT TRANSLATION@"
 CredOgasawara: ; 746bd (1d:46bd)
-	db "4NOB OGASAWARA@"
+	db -6, "NOB OGASAWARA@"
 CredIwata: ; 746cc (1d:46cc)
-	db "5SATORU IWATA@"
+	db -5, "SATORU IWATA@"
 CredIzushi: ; 746da (1d:46da)
-	db "3TAKEHIRO IZUSHI@"
+	db -7, "TAKEHIRO IZUSHI@"
 CredHarada: ; 746eb (1d:46eb)
-	db "3TAKAHIRO HARADA@"
+	db -7, "TAKAHIRO HARADA@"
 CredMurakawa: ; 746fc (1d:46fc)
-	db "3TERUKI MURAKAWA@"
+	db -7, "TERUKI MURAKAWA@"
 CredFukui: ; 7470d (1d:470d)
-	db "5KOHTA FUKUI@"
+	db -5, "KOHTA FUKUI@"
 CredClub: ; 7471a (1d:471a)
-	db "1NCL SUPER MARIO CLUB@"
+	db -9, "NCL SUPER MARIO CLUB@"
 CredPAAD: ; 74730 (1d:4730)
-	db "5PAAD TESTING@"
+	db -5, "PAAD TESTING@"
 
 TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
 	INCBIN "gfx/theend.2bpp"
@@ -104412,7 +104429,7 @@ Func_74872: ; 74872 (1d:4872)
 	ret
 
 ViridianGym_h: ; 0x74897 to 0x748a3 (12 bytes) (id=45)
-	db $07 ; tileset
+	db GYM ; tileset
 	db VIRIDIAN_GYM_HEIGHT, VIRIDIAN_GYM_WIDTH ; dimensions (y, x)
 	dw ViridianGymBlocks, ViridianGymTextPointers, ViridianGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -104960,7 +104977,7 @@ ViridianGymBlocks: ; 74c47 (1d:4c47)
 	INCBIN "maps/viridiangym.blk"
 
 PewterMart_h: ; 0x74ca1 to 0x74cad (12 bytes) (id=56)
-	db $02 ; tileset
+	db MART ; tileset
 	db PEWTER_MART_HEIGHT, PEWTER_MART_WIDTH ; dimensions (y, x)
 	dw PewterMartBlocks, PewterMartTextPointers, PewterMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -105016,7 +105033,7 @@ PewterMartObject: ; 0x74cda (size=38)
 	EVENT_DISP PEWTER_MART_WIDTH, $7, $4
 
 UnknownDungeon1_h: ; 0x74d00 to 0x74d0c (12 bytes) (id=228)
-	db $11 ; tileset
+	db CAVERN ; tileset
 	db UNKNOWN_DUNGEON_1_HEIGHT, UNKNOWN_DUNGEON_1_WIDTH ; dimensions (y, x)
 	dw UnknownDungeon1Blocks, UnknownDungeon1TextPointers, UnknownDungeon1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -105066,7 +105083,7 @@ UnknownDungeon1Blocks: ; 74d76 (1d:4d76)
 	INCBIN "maps/unknowndungeon1.blk"
 
 CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
-	db $0d ; tileset
+	db SHIP ; tileset
 	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw CeruleanHouse2Blocks, CeruleanHouse2TextPointers, CeruleanHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -105340,7 +105357,7 @@ VendingPrices: ; 75000 (1d:5000)
 	db LEMONADE,   $00,$03,$50
 
 FuchsiaHouse1_h: ; 0x7500c to 0x75018 (12 bytes) (id=153)
-	db $08 ; tileset
+	db HOUSE ; tileset
 	db FUCHSIA_HOUSE_1_HEIGHT, FUCHSIA_HOUSE_1_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse1Blocks, FuchsiaHouse1TextPointers, FuchsiaHouse1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -105386,7 +105403,7 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 	EVENT_DISP FUCHSIA_HOUSE_1_WIDTH, $7, $3
 
 FuchsiaPokecenter_h: ; 0x75057 to 0x75063 (12 bytes) (id=154)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
 	dw FuchsiaPokecenterBlocks, FuchsiaPokecenterTextPointers, FuchsiaPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -105436,7 +105453,7 @@ FuchsiaPokecenterObject: ; 0x7507d (size=44)
 	EVENT_DISP FUCHSIA_POKECENTER_WIDTH, $7, $4
 
 FuchsiaHouse2_h: ; 0x750a9 to 0x750b5 (12 bytes) (id=155)
-	db $14 ; tileset
+	db LAB ; tileset
 	db FUCHSIA_HOUSE_2_HEIGHT, FUCHSIA_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw FuchsiaHouse2Blocks, FuchsiaHouse2TextPointers, FuchsiaHouse2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -105585,7 +105602,7 @@ FuchsiaHouse2Blocks: ; 751ad (1d:51ad)
 	INCBIN "maps/fuchsiahouse2.blk"
 
 SafariZoneEntrance_h: ; 0x751c1 to 0x751cd (12 bytes) (id=156)
-	db $0c ; tileset
+	db GATE ; tileset
 	db SAFARI_ZONE_ENTRANCE_HEIGHT, SAFARI_ZONE_ENTRANCE_WIDTH ; dimensions (y, x)
 	dw SafariZoneEntranceBlocks, SafariZoneEntranceTextPointers, SafariZoneEntranceScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -105917,7 +105934,7 @@ SafariZoneEntranceBlocks: ; 75425 (1d:5425)
 	INCBIN "maps/safarizoneentrance.blk"
 
 FuchsiaGym_h: ; 0x75431 to 0x7543d (12 bytes) (id=157)
-	db $07 ; tileset
+	db GYM ; tileset
 	db FUCHSIA_GYM_HEIGHT, FUCHSIA_GYM_WIDTH ; dimensions (y, x)
 	dw FuchsiaGymBlocks, FuchsiaGymTextPointers, FuchsiaGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -106284,7 +106301,7 @@ FuchsiaGymBlocks: ; 756aa (1d:56aa)
 	INCBIN "maps/fuchsiagym.blk"
 
 FuchsiaMeetingRoom_h: ; 0x756d7 to 0x756e3 (12 bytes) (id=158)
-	db $14 ; tileset
+	db LAB ; tileset
 	db FUCHSIA_MEETING_ROOM_HEIGHT, FUCHSIA_MEETING_ROOM_WIDTH ; dimensions (y, x)
 	dw FuchsiaMeetingRoomBlocks, FuchsiaMeetingRoomTextPointers, FuchsiaMeetingRoomScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -106333,7 +106350,7 @@ FuchsiaMeetingRoomBlocks: ; 75722 (1d:5722)
 	INCBIN "maps/fuchsiameetingroom.blk"
 
 CinnabarGym_h: ; 0x7573e to 0x7574a (12 bytes) (id=166)
-	db $16 ; tileset
+	db FACILITY ; tileset
 	db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
 	dw CinnabarGymBlocks, CinnabarGymTextPointers, CinnabarGymScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -106847,7 +106864,7 @@ CinnabarGymBlocks: ; 75b26 (1d:5b26)
 	INCBIN "maps/cinnabargym.blk"
 
 Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
-	db $14 ; tileset
+	db LAB ; tileset
 	db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH ; dimensions (y, x)
 	dw Lab1Blocks, Lab1TextPointers, Lab1Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -106914,7 +106931,7 @@ Lab1Blocks: ; 75bf1 (1d:5bf1)
 	INCBIN "maps/lab1.blk"
 
 Lab2_h: ; 0x75c15 to 0x75c21 (12 bytes) (id=168)
-	db $14 ; tileset
+	db LAB ; tileset
 	db CINNABAR_LAB_2_HEIGHT, CINNABAR_LAB_2_WIDTH ; dimensions (y, x)
 	dw Lab2Blocks, Lab2TextPointers, Lab2Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -106969,7 +106986,7 @@ Lab2Blocks: ; 75c6b (1d:5c6b)
 	INCBIN "maps/lab2.blk"
 
 Lab3_h: ; 0x75c7b to 0x75c87 (12 bytes) (id=169)
-	db $14 ; tileset
+	db LAB ; tileset
 	db CINNABAR_LAB_3_HEIGHT, CINNABAR_LAB_3_WIDTH ; dimensions (y, x)
 	dw Lab3Blocks, Lab3TextPointers, Lab3Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -107063,7 +107080,7 @@ Lab3Blocks: ; 75d15 (1d:5d15)
 	INCBIN "maps/lab3.blk"
 
 Lab4_h: ; 0x75d25 to 0x75d31 (12 bytes) (id=170)
-	db $14 ; tileset
+	db LAB ; tileset
 	db CINNABAR_LAB_4_HEIGHT, CINNABAR_LAB_4_WIDTH ; dimensions (y, x)
 	dw Lab4Blocks, Lab4TextPointers, Lab4Script ; blocks, texts, scripts
 	db $00 ; connections
@@ -107208,7 +107225,7 @@ Lab4Blocks: ; 75e10 (1d:5e10)
 	INCBIN "maps/lab4.blk"
 
 CinnabarPokecenter_h: ; 0x75e20 to 0x75e2c (12 bytes) (id=171)
-	db $06 ; tileset
+	db POKECENTER ; tileset
 	db CINNABAR_POKECENTER_HEIGHT, CINNABAR_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CinnabarPokecenterBlocks, CinnabarPokecenterTextPointers, CinnabarPokecenterScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -107258,7 +107275,7 @@ CinnabarPokecenterObject: ; 0x75e46 (size=44)
 	EVENT_DISP CINNABAR_POKECENTER_WIDTH, $7, $4
 
 CinnabarMart_h: ; 0x75e72 to 0x75e7e (12 bytes) (id=172)
-	db $02 ; tileset
+	db MART ; tileset
 	db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
 	dw CinnabarMartBlocks, CinnabarMartTextPointers, CinnabarMartScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -107299,7 +107316,7 @@ CinnabarMartObject: ; 0x75e91 (size=38)
 	EVENT_DISP CINNABAR_MART_WIDTH, $7, $4
 
 CopycatsHouse1F_h: ; 0x75eb7 to 0x75ec3 (12 bytes) (id=175)
-	db $01 ; tileset
+	db REDS_HOUSE_1 ; tileset
 	db COPYCATS_HOUSE_1F_HEIGHT, COPYCATS_HOUSE_1F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouse1FBlocks, CopycatsHouse1FTextPointers, CopycatsHouse1FScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -107349,7 +107366,7 @@ CopycatsHouse1FObject: ; 0x75ee3 (size=46)
 	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $1, $7 ; COPYCATS_HOUSE_2F
 
 Gary_h: ; 75f11 (1d:5f11)
-	db $7 ;tileset
+	db GYM ;tileset
 	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; Height, Width
 	dw GaryBlocks, GaryTextPointers, GaryScript
 	db $0 ;No Connections
@@ -107678,7 +107695,7 @@ GaryBlocks: ; 7615f (1d:615f)
 	INCBIN "maps/gary.blk"
 
 Lorelei_h: ; 0x7616f to 0x7617b (12 bytes) (id=245)
-	db $07 ; tileset
+	db GYM ; tileset
 	db LORELEIS_ROOM_HEIGHT, LORELEIS_ROOM_WIDTH ; dimensions (y, x)
 	dw LoreleiBlocks, LoreleiTextPointers, LoreleiScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -107862,7 +107879,7 @@ LoreleiBlocks: ; 762ac (1d:62ac)
 	INCBIN "maps/lorelei.blk"
 
 Bruno_h: ; 0x762ca to 0x762d6 (12 bytes) (id=246)
-	db $07 ; tileset
+	db GYM ; tileset
 	db BRUNOS_ROOM_HEIGHT, BRUNOS_ROOM_WIDTH ; dimensions (y, x)
 	dw BrunoBlocks, BrunoTextPointers, BrunoScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -108047,7 +108064,7 @@ BrunoBlocks: ; 76403 (1d:6403)
 	INCBIN "maps/bruno.blk"
 
 Agatha_h: ; 0x76421 to 0x7642d (12 bytes) (id=247)
-	db $0f ; tileset
+	db CEMETERY ; tileset
 	db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
 	dw AgathaBlocks, AgathaTextPointers, AgathaScript ; blocks, texts, scripts
 	db $00 ; connections
@@ -108945,7 +108962,7 @@ LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld a,[hl]
 	ld d,a ; de = address of tileset
 	ld hl,$8310 ; destination address in VRAM
-	ld b,$1E ; ROM bank
+	ld b, BANK(AnimationTileset1) ; ROM bank
 	ld a,[$D07D]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
