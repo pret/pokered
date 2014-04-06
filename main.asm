@@ -34507,7 +34507,7 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
-	ld [W_MUSEUMF1CURSCRIPT], a
+	ld [W_MUSEUM1FCURSCRIPT], a
 	ld hl, $d754
 	res 0, [hl]
 	call PewterCityScript_1925e
@@ -76253,7 +76253,7 @@ Route16GateObject: ; 0x4978b (size=88)
 	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $c, $6 ; ROUTE_16_GATE_2F
 
 Route16GateBlocks: ; 497e3 (12:57e3)
-	INCBIN "maps/route16Gate.blk"
+	INCBIN "maps/route16gate.blk"
 
 Route16GateUpstairs_h: ; 0x497ff to 0x4980b (12 bytes) (id=187)
 	db $0c ; tileset
@@ -90313,7 +90313,7 @@ Museum1FScript: ; 5c0f7 (17:40f7)
 	xor a
 	ld [$cc3c], a
 	ld hl, Museum1FScriptPointers
-	ld a, [W_MUSEUMF1CURSCRIPT]
+	ld a, [W_MUSEUM1FCURSCRIPT]
 	jp CallFunctionInTable
 
 Museum1FScriptPointers: ; 5c109 (17:4109)
@@ -90433,7 +90433,7 @@ asm_de133: ; 5c1da (17:41da)
 	jr asm_d1145 ; 0x5c1f0 $25
 asm_0b094: ; 5c1f2 (17:41f2)
 	ld a, $1
-	ld [W_MUSEUMF1CURSCRIPT], a
+	ld [W_MUSEUM1FCURSCRIPT], a
 	jr asm_d1145 ; 0x5c1f7 $1e
 
 Func_5c1f9: ; 5c1f9 (17:41f9)
@@ -91064,8 +91064,8 @@ CeruleanPokecenterObject: ; 0x5c65f (size=44)
 	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
 
 	; warp-to
-	EVENT_DISP MT_MOON_POKECENTER_WIDTH, $7, $3
-	EVENT_DISP MT_MOON_POKECENTER_WIDTH, $7, $4
+	EVENT_DISP CERULEAN_POKECENTER_WIDTH, $7, $3
+	EVENT_DISP CERULEAN_POKECENTER_WIDTH, $7, $4
 
 CeruleanPokecenterBlocks: ; 5c68b (17:468b)
 	INCBIN "maps/ceruleanpokecenter.blk"
