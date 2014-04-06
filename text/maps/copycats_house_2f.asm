@@ -58,7 +58,7 @@ _TM31NoRoomText:: ; a1733 (28:5733)
 	text "Don't you want"
 	line "this?@@"
 
-_CopycatsHouseF2Text2:: ; a1749 (28:5749)
+_CopycatsHouse2FText2:: ; a1749 (28:5749)
 	text "DODUO: Giiih!"
 
 	para "MIRROR MIRROR ON"
@@ -67,13 +67,13 @@ _CopycatsHouseF2Text2:: ; a1749 (28:5749)
 	cont "OF ALL?"
 	done
 
-_CopycatsHouseF2Text3:: ; a1792 (28:5792)
+_CopycatsHouse2FText3:: ; a1792 (28:5792)
 	text "This is a rare"
 	line "#MON! Huh?"
 	cont "It's only a doll!"
 	done
 
-_CopycatsHouseF2Text6:: ; a17be (28:57be)
+_CopycatsHouse2FText6:: ; a17be (28:57be)
 	text "A game with MARIO"
 	line "wearing a bucket"
 	cont "on his head!"
