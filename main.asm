@@ -1133,10 +1133,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 	ld a,[Coord] ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
-	ld a,$ad
+	ld a,(SFX_02_57 - SFX_Headers_02) / 3
 	jr .playSound
 .didNotGoThroughDoor
-	ld a,$b5
+	ld a,(SFX_02_5c - SFX_Headers_02) / 3
 .playSound
 	call PlaySound
 	ld a,[$d35d]
@@ -1676,9 +1676,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	jr nc,.noCollision
 .collision
 	ld a,[$c02a]
-	cp a,$b4 ; check if collision sound is already playing
+	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,$b4
+	ld a,(SFX_02_5b - SFX_Headers_02) / 3
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -2390,9 +2390,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	jr .loop
 .collision
 	ld a,[$c02a]
-	cp a,$b4 ; check if collision sound is already playing
+	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,$b4
+	ld a,(SFX_02_5b - SFX_Headers_02) / 3
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -9314,7 +9314,7 @@ ManualTextScroll:: ; 3898 (0:3898)
 	cp $4
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
-	ld a, $90
+	ld a, (SFX_02_40 - SFX_Headers_02) / 3
 	jp PlaySound
 .inLinkBattle
 	ld c, $41
@@ -9847,7 +9847,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	bit 5,[hl]
 	pop hl
 	jr nz,.skipPlayingSound
-	ld a,$90
+	ld a,(SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound ; play sound
 .skipPlayingSound
 	pop af
@@ -10961,7 +10961,7 @@ ENDC
 	ld d, a
 	cp $fd
 	jr nz, .asm_43d4
-	ld a, $bc
+	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
 	call PlaySound
 .asm_43d4
 	ld a, [hli]
@@ -10994,7 +10994,7 @@ ENDC
 	call LoadScreenTilesFromBuffer1
 	ld c, $24
 	call DelayFrames
-	ld a, $bd
+	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
 	call PlaySound
 	call PrintGameVersionOnTitleScreen
 	ld a, $90
@@ -14413,7 +14413,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	cp a,16 ; is the cursor on Cancel?
 	jr nz,.loop
 .exitMenu
-	ld a,$90
+	ld a,(SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound ; play sound
 	ret
 .eraseOldMenuCursor
@@ -14748,9 +14748,10 @@ Func_61bc: ; 61bc (1:61bc)
 	jr nz,.next
 	ld hl,OakSpeechText3
 	call PrintText
-.next	ld a,[H_LOADEDROMBANK]
+.next
+	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$9C
+	ld a,(SFX_02_48 - SFX_Headers_02) / 3
 	call PlaySound
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -15440,7 +15441,7 @@ Func_6596: ; 6596 (1:6596)
 	ld a, [$ceed]
 	ld [hli], a
 	ld [hl], $50
-	ld a, $90
+	ld a, (SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound
 	ret
 .deleteLetter
@@ -16300,7 +16301,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,$01
 	ld [$cf0a],a
 .skipSettingFlag2
-	ld a,$b2
+	ld a,(SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait until sound is done playing
 	ld hl,PokemartBoughtItemText
@@ -16596,7 +16597,7 @@ UnnamedText_6fc8: ; 6fc8 (1:6fc8)
 	TX_FAR _UnnamedText_6fc8 ; 0xa2819
 	db $a
 	db $8
-	ld a, $ae
+	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld hl, UnnamedText_6fd7 ; $6fd7
 	ret
@@ -16947,7 +16948,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld b, BANK(SaveSAVtoSRAM)
 	call Bankswitch
 	call WaitForSoundToFinish
-	ld a, $b6
+	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld hl, CableClubNPCText3 ; $72c2
 	call PrintText
@@ -17481,7 +17482,7 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
-	ld a, $90
+	ld a, (SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound
 	jr .asm_760f
 .asm_7603
@@ -17901,7 +17902,7 @@ Func_78e6: ; 78e6 (1:78e6)
 	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, Func_790c
-	ld a, $99
+	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, UnnamedText_7b22 ; $7b22
 	call PrintText
@@ -17957,7 +17958,7 @@ Func_796d: ; 796d (1:796d)
 	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, .asm_797c
-	ld a, $9a
+	ld a, (SFX_02_46 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_797c
@@ -18020,7 +18021,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld hl, wNumBagItems ; $d31d
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
-	ld a, $ab
+	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, UnnamedText_7b36 ; $7b36
@@ -18074,7 +18075,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld hl, wNumBoxItems ; $d53a
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
-	ld a, $ab
+	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, UnnamedText_7b4f ; $7b4f
@@ -19539,7 +19540,7 @@ Func_c69c: ; c69c (3:469c)
 	ld b, $2
 	ld a, $1f
 	call Predef ; indirect jump to Func_480eb (480eb (12:40eb))
-	ld a, $97
+	ld a, (SFX_02_43 - SFX_Headers_02) / 3
 	call PlaySound
 .asm_c733
 	ld a, $14
@@ -24953,7 +24954,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [$cf91],a
 	ld a,$01
 	ld [$ccd4],a
-	ld a,$8e
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait for sound to end
 	ld hl, Func_3ad0e
@@ -25232,7 +25233,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
-	ld a,$8d
+	ld a,(SFX_02_3d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	ld a,[$fff6]
 	set 0,a
@@ -25383,7 +25384,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr c,.playStatusAilmentCuringSound
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
-	ld a,$8d ; HP healing sound
+	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
 	call PlaySoundWaitForCurrent ; play sound
 	ld a,[$fff6]
 	set 0,a
@@ -25406,7 +25407,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$d07d],a
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
-	ld a,$8e ; status ailment curing sound
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
 	call PlaySoundWaitForCurrent ; play sound
 .showHealingItemMessage
 	xor a
@@ -25495,7 +25496,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,$cf4b
 	ld bc,10
 	call CopyData ; copy the stat's name to $cf4b
-	ld a,$8e
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound ; play sound
 	ld hl,VitaminStatRoseText
 	call PrintText
@@ -26157,7 +26158,7 @@ FishingInit: ; e2b4 (3:62b4)
 	call ItemUseReloadOverworldData
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,$8e
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound ; play sound
 	ld c,80
 	call DelayFrames
@@ -26182,9 +26183,9 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	jr nc,.printText ; if no hidden items
 	ld c,4
 .loop
-	ld a,$9e
+	ld a,(SFX_02_4a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
-	ld a,$b2
+	ld a,(SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	dec c
 	jr nz,.loop
@@ -26288,7 +26289,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld bc,4
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
-	ld a,$8e
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl,PPRestoredText
 	call PrintText
@@ -26486,7 +26487,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,$a5
+	ld a,(SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
@@ -26529,7 +26530,7 @@ MonCannotLearnMachineMoveText: ; e55e (3:655e)
 PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,$8e
+	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound ; play sound
 	call WaitForTextScrollButtonPress ; wait for button press
 
@@ -27635,7 +27636,7 @@ asm_ef82: ; ef82 (3:6f82)
 	call Bankswitch
 	ld a, $1
 	ld [$cfcb], a
-	ld a, $ac
+	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
 	ld [$ffb0], a
@@ -28106,7 +28107,7 @@ Func_f225: ; f225 (3:7225)
 	ld de, MovementData_f2b3
 .asm_f29f
 	call MoveSprite
-	ld a, $a8
+	ld a, (SFX_02_53 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, wFlags_0xcd60
 	set 1, [hl]
@@ -28139,7 +28140,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
-	ld a, $ac
+	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	jp PlaySound
 
 Func_f2dd: ; f2dd (3:72dd)
@@ -31435,7 +31436,7 @@ Func_13625: ; 13625 (4:7625)
 	dec c
 	jr nz, .asm_13645
 	call WaitForSoundToFinish
-	ld a, $ae
+	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	jp PlaySound
 
 Func_13653: ; 13653 (4:7653)
@@ -33334,7 +33335,7 @@ UnnamedText_17e27: ; 17e27 (5:7e27)
 
 ActivatePC: ; 17e2c (5:7e2c)
 	call SaveScreenTilesToBuffer2  ;XXX: copy background from wTileMap to wTileMapBackup2
-	ld a, $99
+	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	ld hl, UnnamedText_17f23  ;player turned on PC
 	call PrintText
@@ -33387,7 +33388,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	ld hl, wFlags_0xcd60
 	res 5, [hl]
 	set 3, [hl]
-	ld a, $9B
+	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld hl, UnnamedText_17f32  ;accessed players pc
@@ -33397,7 +33398,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	call Bankswitch
 	jr ReloadMainMenu
 OaksPC: ; 17ec0 (5:7ec0)
-	ld a, $9B
+	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld b, BANK(Func_1e915)
@@ -33405,7 +33406,7 @@ OaksPC: ; 17ec0 (5:7ec0)
 	call Bankswitch
 	jr ReloadMainMenu
 PKMNLeague: ; 17ed2 (5:7ed2)
-	ld a, $9B
+	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld b, BANK(Func_7657e)
@@ -33413,7 +33414,7 @@ PKMNLeague: ; 17ed2 (5:7ed2)
 	call Bankswitch
 	jr ReloadMainMenu
 BillsPC: ; 17ee4 (5:7ee4)
-	ld a, $9B
+	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound    ;XXX: play sound or stop music
 	call WaitForSoundToFinish    ;XXX: wait for sound to be done
 	ld a, [$D7F1] ;has to do with having met Bill
@@ -33435,7 +33436,7 @@ ReloadMainMenu: ; 17f06 (5:7f06)
 	call UpdateSprites  ;XXX: moves sprites
 	jp PCMainMenu
 LogOff: ; 17f13 (5:7f13)
-	ld a, $9A
+	ld a, (SFX_02_46 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld hl, wFlags_0xcd60
@@ -37287,7 +37288,7 @@ Func_1a672: ; 1a672 (6:6672)
 	ld a, $2
 	ld [$cd38], a
 	call Func_1a6f0
-	ld a, $a2
+	ld a, (SFX_02_4e - SFX_Headers_02) / 3
 	call PlaySound
 	ret
 
@@ -40188,7 +40189,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld b, [hl]
 	push bc
 	push hl
-	ld a, $a9
+	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $ff
 	ld [$cfcb], a
@@ -40309,7 +40310,7 @@ VermilionDock_1dc94: ; 1dc94 (7:5c94)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, $a9
+	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySound
 	ld c, $78
 	call DelayFrames
@@ -41559,7 +41560,7 @@ Route22GateText1: ; 1e6e1 (7:66e1)
 UnnamedText_1e704: ; 1e704 (7:6704)
 	TX_FAR _UnnamedText_1e704 ; 0x8cfbb
 	db $8
-	ld a, $a5
+	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld hl, UnnamedText_1e715 ; $6715
@@ -42081,7 +42082,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	jp Func_1eb0a
 .asm_1eab8
 	call WaitForSoundToFinish
-	ld a, $a5
+	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText ; $6b05
@@ -42114,7 +42115,7 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	and a
 	jp nz, TextScriptEnd
 	call WaitForSoundToFinish
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -42206,22 +42207,22 @@ Func_1eb6e: ; 1eb6e (7:6b6e)
 	call Func_3ef5
 	ld c, $20
 	call DelayFrames
-	ld a, $8c
+	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, $50
 	call DelayFrames
-	ld a, $9c
+	ld a, (SFX_02_48 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, $30
 	call DelayFrames
-	ld a, $8c
+	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, $20
 	call DelayFrames
-	ld a, $86
+	ld a, (SFX_02_3a - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	call Func_2307
@@ -42248,7 +42249,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	call PlaySound
 	ld c, $10
 	call DelayFrames
-	ld a, $9d
+	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, $3c
@@ -43799,7 +43800,7 @@ Func_37395: ; 37395 (d:7395)
 	ld [hli], a
 	ld [hl], a
 	call WaitForSoundToFinish
-	ld a, $c0
+	ld a, (SFX_1f_66 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld hl, StartSlotMachineText
 	call PrintText
@@ -44246,7 +44247,7 @@ SlotReward15Func: ; 376e5 (d:76e5)
 	ret
 
 SlotReward100Func: ; 376f3 (d:76f3)
-	ld a, $94
+	ld a, (SFX_1f_42 - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
 	ld [$cd4c], a
@@ -44257,7 +44258,7 @@ SlotReward100Func: ; 376f3 (d:76f3)
 SlotReward300Func: ; 37702 (d:7702)
 	ld hl, UnnamedText_37722
 	call PrintText
-	ld a, $89
+	ld a, (SFX_1f_3b - SFX_Headers_1f) / 3
 	call PlaySound
 	call GenRandom
 	cp $80
@@ -44345,7 +44346,7 @@ Func_3776b: ; 3776b (d:776b)
 	call Predef
 	call Func_37754
 	call Func_3775f
-	ld a, $bf
+	ld a, (SFX_1f_65 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld a, [W_SUBANIMTRANSFORM]
 	dec a
@@ -44494,7 +44495,7 @@ Func_37882: ; 37882 (d:7882)
 	jr z, .skip
 .loop
 	inc [hl]
-	ld a, $be
+	ld a, (SFX_1f_64 - SFX_Headers_1f) / 3
 	jp PlaySound
 .skip
 	ld a, [de]
@@ -52752,7 +52753,7 @@ DecrementAICount: ; 3a695 (e:6695)
 	ret
 
 Func_3a69b: ; 3a69b (e:669b)
-	ld a,$8E
+	ld a,(SFX_08_3e - SFX_Headers_08) / 3
 	jp PlaySoundWaitForCurrent
 
 AIUseFullRestore: ; 3a6a0 (e:66a0)
@@ -53386,7 +53387,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	push hl
 	ld hl, UnnamedText_3af43 ; $6f43
 	call Func_3c59
-	ld a, $89
+	ld a, (SFX_02_3b - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c, $28
@@ -56490,7 +56491,7 @@ asm_3c202: ; 3c202 (f:4202)
 	ld hl, UnnamedText_3c22e ; $422e
 .asm_3c216
 	call PrintText
-	ld a, $97
+	ld a, (SFX_08_44 - SFX_Headers_08) / 3
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a ; $fff3
@@ -57001,13 +57002,13 @@ FaintEnemyPokemon ; 0x3c567
 	xor a
 	ld [$c0f1], a
 	ld [$c0f2], a
-	ld a, $9e ; SFX_FALL?
+	ld a, (SFX_08_48 - SFX_Headers_08) / 3 ; SFX_FALL?
 	call PlaySoundWaitForCurrent
 .sfxwait
 	ld a, [$c02a]
-	cp $9e
+	cp (SFX_08_48 - SFX_Headers_08) / 3
 	jr z, .sfxwait
-	ld a, $95 ; SFX_DROP
+	ld a, (SFX_08_43 - SFX_Headers_08) / 3 ; SFX_DROP
 	call PlaySound
 	call WaitForSoundToFinish
 	jr .sfxplayed
@@ -57791,7 +57792,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	dec a
 .asm_3cb81
 	ld [$cf0b], a
-	ld a, $97
+	ld a, (SFX_08_44 - SFX_Headers_08) / 3
 	call PlaySoundWaitForCurrent
 	ld hl, UnnamedText_3cba1 ; $4ba1
 	call PrintText
@@ -67191,7 +67192,7 @@ Func_41298: ; 41298 (10:5298)
 	ld b, $7
 	call Func_41842
 	call Func_41186
-	ld a, $8d
+	ld a, (SFX_02_3d - SFX_Headers_02) / 3
 	call PlaySound
 	ld c, $14
 .asm_412c8
@@ -67236,7 +67237,7 @@ Func_412d2: ; 412d2 (10:52d2)
 	ld c, a
 	cp $a0
 	jr nc, .asm_41318
-	ld a, $8c
+	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	jr .asm_412e7
 .asm_41318
@@ -67767,14 +67768,14 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, $b9
+	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
-	ld a, $ba
+	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
@@ -67783,12 +67784,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, $b9
+	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
-	ld a, $ba
+	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
@@ -67799,7 +67800,7 @@ PlayIntroScene: ; 4169d (10:569d)
 ; raise
 	ld b, $4
 	call Func_4183f
-	ld a, $bb
+	ld a, (SFX_1f_61 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, $401
 	call Func_4180e
@@ -67810,12 +67811,12 @@ PlayIntroScene: ; 4169d (10:569d)
 ; slash
 	ld b, $5
 	call Func_4183f
-	ld a, $bc
+	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, $800
 	call Func_4180e
 ; hip
-	ld a, $b9
+	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	ld a, $24
 	ld [$d09f], a
@@ -67834,14 +67835,14 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, $b9
+	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
 	ld [$d09f], a
 	ld de, IntroNidorinoAnimation4 ; $5931
 	call AnimateIntroNidorino
 ; hop
-	ld a, $ba
+	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld de, IntroNidorinoAnimation5 ; $593c
 	call AnimateIntroNidorino
@@ -67858,7 +67859,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; lunge
-	ld a, $b8
+	ld a, (SFX_1f_5e - SFX_Headers_1f) / 3
 	call PlaySound
 	ld a, $48
 	ld [$d09f], a
@@ -68689,7 +68690,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText
 	call PrintText
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, $d796
 	bit 0, [hl]
@@ -69411,7 +69412,7 @@ Func_44be0: ; 44be0 (11:4be0)
 	ld a, $54
 	jr .asm_44c03
 .asm_44bf7
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, $d815
 	bit 7, [hl]
@@ -69647,7 +69648,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 	ld hl, $d736
 	set 7, [hl]
 	call Func_3486
-	ld a, $a7
+	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -70185,7 +70186,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	ld hl, $d736
 	set 7, [hl]
 	call Func_3486
-	ld a, $a7
+	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -70423,7 +70424,7 @@ Func_45473: ; 45473 (11:5473)
 	ld a, $2d
 	jr .asm_45498
 .asm_4548c
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, $d81b
 	set 5, [hl]
@@ -75105,7 +75106,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld hl, UnnamedText_48f09
 	call PrintText
 	call WaitForSoundToFinish
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, $d77e
@@ -75120,7 +75121,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 UnnamedText_48f09: ; 48f09 (12:4f09)
 	TX_FAR _UnnamedText_48f09 ; 0x9ddb0
 	db $8
-	ld a, $9d
+	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -79271,7 +79272,7 @@ Func_51388: ; 51388 (14:5388)
 VictoryRoadGuardText1: ; 5138e (14:538e)
 	TX_FAR _VictoryRoadGuardText1
 	db $08 ; asm
-	ld a, $a5
+	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -80964,7 +80965,7 @@ Mansion2Text5: ; 52087 (14:6087)
 	set 5, [hl]
 	ld hl, UnnamedText_520c7
 	call PrintText
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, $d796
 	bit 0, [hl]
@@ -81522,7 +81523,7 @@ Func_52673: ; 52673 (14:6673)
 	call Predef ; indirect jump to Func_ee9e
 	ld hl, $d126
 	set 5, [hl]
-	ld a, $ad
+	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3
 	jp PlaySound
 .asm_526dc
 	ld a, $2
@@ -85365,7 +85366,7 @@ Func_562e1: ; 562e1 (15:62e1)
 	ld c, $3
 	ld a, $c
 	call Predef
-	ld a, $b2
+	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $13
 	ld [$d125], a
@@ -86636,11 +86637,11 @@ Func_58d99: ; 58d99 (16:4d99)
 	call PrintText
 	jr asm_58e3a
 .asm_58dd8
-	ld b, $48
+	ld b, SILPH_SCOPE
 	call IsItemInBag
 	ld a, [W_ENEMYMONID]
 	ld [$cf91], a
-	cp $91
+	cp MAROWAK
 	jr z, .asm_58e03
 	ld a, b
 	and a
@@ -86677,7 +86678,7 @@ Func_58e29: ; 58e29 (16:4e29)
 	ld [$c0f1], a
 	ld a, $80
 	ld [$c0f2], a
-	ld a, $e9
+	ld a, (SFX_08_77 - SFX_Headers_08) / 3
 	call PlaySound
 	jp WaitForSoundToFinish
 asm_58e3a: ; 58e3a (16:4e3a)
@@ -89945,7 +89946,7 @@ LanceScript0: ; 5a305 (16:6305)
 	ret nz
 	ld hl, $d126
 	set 5, [hl]
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	jp LanceScript_5a2c4
 
@@ -90424,7 +90425,7 @@ asm_0f3e3: ; 5c1a4 (17:41a4)
 	ld a, $13
 	ld [$d125], a
 	call DisplayTextBoxID
-	ld a, $b2
+	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jr asm_0b094 ; 0x5c1d8 $18
@@ -91612,7 +91613,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, $24
 	jr .asm_5ca7f
 .asm_5ca78
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $5
 .asm_5ca7f
@@ -94180,7 +94181,7 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
 	db $08 ; asm
 	call WaitForSoundToFinish
-	ld a, $9d
+	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -94192,7 +94193,7 @@ VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 UnnamedText_5dee0: ; 5dee0 (17:5ee0)
 	db $08 ; asm
 	call WaitForSoundToFinish
-	ld a, $9d
+	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -94201,7 +94202,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
 	db $08 ; asm
 	call WaitForSoundToFinish
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -94210,7 +94211,7 @@ VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
 	db $08 ; asm
 	call WaitForSoundToFinish
-	ld a, $a5
+	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -98204,7 +98205,7 @@ Func_70000: ; 70000 (1c:4000)
 
 Func_70044: ; 70044 (1c:4044)
 	call Func_70000
-	ld a, $c2
+	ld a, (SFX_1f_67 - SFX_Headers_1f) / 3
 	call PlaySound
 	ld hl, wOAMBuffer
 	ld bc, $a004
@@ -98734,7 +98735,7 @@ Func_70433: ; 70433 (1c:4433)
 	ld b, a
 .asm_7046e
 	call Func_70503
-	ld a, $9e
+	ld a, (SFX_02_4a - SFX_Headers_02) / 3
 	call PlaySound
 	ld c, $1e
 	call DelayFrames
@@ -98818,7 +98819,7 @@ Func_70510: ; 70510 (1c:4510)
 	bit 7, [hl]
 	res 7, [hl]
 	jr nz, .asm_70568
-	ld a, $a0
+	ld a, (SFX_02_4c - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, $d732
 	bit 4, [hl]
@@ -98826,7 +98827,7 @@ Func_70510: ; 70510 (1c:4510)
 	pop hl
 	jr nz, .asm_7055e
 	call Func_705aa
-	ld a, $a3
+	ld a, (SFX_02_4f - SFX_Headers_02) / 3
 	call PlaySound
 	call Func_70787
 	ld a, b
@@ -98858,7 +98859,7 @@ Func_70510: ; 70510 (1c:4510)
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
 	call Func_706d7
-	ld a, $a4
+	ld a, (SFX_02_50 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, wWhichTrade ; $cd3d
 	xor a
@@ -98907,7 +98908,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	dec a
 	jp nz, Func_7067d
 .asm_705c8
-	ld a, $9f
+	ld a, (SFX_02_4b - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, wWhichTrade ; $cd3d
 	ld a, $f0
@@ -98952,7 +98953,7 @@ _DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
 	ld [hli], a
 	ld [hl], $c
 	call Func_706ae
-	ld a, $a4
+	ld a, (SFX_02_50 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, wWhichTrade ; $cd3d
 	xor a
@@ -100317,7 +100318,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	ld b, a
 	and $c3
 	jr z, .asm_70ec8
-	ld a, $8c
+	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	bit 6, b
 	jr nz, .asm_70ef2
@@ -100495,7 +100496,7 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	jr z, .asm_71004
 	bit 0, b
 	jr nz, .asm_71026
-	ld a, $8c
+	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	bit 6, b
 	jr nz, .asm_71042
@@ -100503,7 +100504,7 @@ Func_70fd6: ; 70fd6 (1c:4fd6)
 	jr nz, .asm_71058
 	jr .asm_71037
 .asm_71026
-	ld a, $8e
+	ld a, (SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, [hl]
 	ld [$d71a], a
@@ -103236,7 +103237,7 @@ SaveSAV: ;$770a
 	call DelayFrames
 	ld hl,GameSavedText
 	call PrintText
-	ld a,$b6        ;sound for saved game
+	ld a, (SFX_02_5d - SFX_Headers_02) / 3 ;sound for saved game
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c,$1e
@@ -103451,7 +103452,7 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	call SaveSAVtoSRAM
 	ld hl, wWhichTrade ; $cd3d
 	call Func_3f0f
-	ld a, $b6
+	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ret
@@ -104478,7 +104479,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	call Func_3486
 	ld hl, $d736
 	set 7, [hl]
-	ld a, $a7
+	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
 	ld [wJoypadForbiddenButtonsMask], a
@@ -105279,7 +105280,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld c, $2
 	call DelayFrames
 	push bc
-	ld a, $a8
+	ld a, (SFX_02_53 - SFX_Headers_02) / 3
 	call PlaySound
 	pop bc
 	dec b
@@ -106462,7 +106463,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	and a
 	jr nz, .asm_7581b ; 0x7580e $b
 	call WaitForSoundToFinish
-	ld a, $ad
+	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_7581b
@@ -108473,7 +108474,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	ld b, $1
 	ld a, $10
 	call Predef
-	ld a, $89
+	ld a, (SFX_02_3b - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait for sound to finish playing
 	jp TextScriptEnd
@@ -109356,7 +109357,7 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	cp a,11 ; is it the beginning of the subanimation?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
-	ld a,$91
+	ld a,(SFX_08_41 - SFX_Headers_08) / 3
 	call PlaySound ; play sound
 .skipPlayingSound
 	ld a,[W_ISINBATTLE]
@@ -109403,7 +109404,7 @@ DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
 	cp a,4 ; is it the beginning of a shake?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
-	ld a,$8c
+	ld a,(SFX_08_3c - SFX_Headers_08) / 3
 	call PlaySound ; play sound
 	ld c,40
 	call DelayFrames
@@ -109436,7 +109437,7 @@ DoPoofSpecialEffects: ; 78fce (1e:4fce)
 	ld a,[W_SUBANIMCOUNTER]
 	cp a,5
 	ret nz
-	ld a,$93
+	ld a,(SFX_08_42 - SFX_Headers_08) / 3
 	jp PlaySound
 
 DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
@@ -109542,7 +109543,7 @@ Func_7904c: ; 7904c (1e:504c)
 	jr .loop
 .done
 	call AnimationCleanOAM
-	ld a,$98
+	ld a,(SFX_02_44 - SFX_Headers_02) / 3
 	jp PlaySound ; play sound
 
 BallMoveDistances1: ; 79078 (1e:5078)
@@ -109574,7 +109575,7 @@ Func_7907c ; 507C
 	cp a,$ff
 	jr nz,.skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
-	ld a,$ae
+	ld a,(SFX_08_58 - SFX_Headers_08) / 3
 	call PlaySound
 .skipPlayingSound
 	push bc
@@ -111497,7 +111498,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld a,$C1
 	ld [W_ANIMATIONID],a
 	call PlayAnimation
-	ld a,$95
+	ld a,(SFX_08_43 - SFX_Headers_08) / 3
 	call PlaySound ; play sound effect
 	ld a,BLOCKBALL_ANIM
 	ld [W_ANIMATIONID],a
@@ -111511,15 +111512,15 @@ Func_79e6a: ; 79e6a (1e:5e6a)
 	cp $a
 	ld a, $20
 	ld b, $30
-	ld c, $a6
+	ld c, (SFX_08_50 - SFX_Headers_08) / 3
 	jr z, .asm_79e8b
 	ld a, $e0
 	ld b, $ff
-	ld c, $b0
+	ld c, (SFX_08_5a - SFX_Headers_08) / 3
 	jr nc, .asm_79e8b
 	ld a, $50
 	ld b, $1
-	ld c, $a7
+	ld c, (SFX_08_51 - SFX_Headers_08) / 3
 .asm_79e8b
 	ld [$c0f1], a
 	ld a, b
@@ -115365,7 +115366,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	call PlaySound
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, $8c
+	ld a, (SFX_08_3c - SFX_Headers_08) / 3
 	call PlaySound
 	call Delay3
 	xor a
