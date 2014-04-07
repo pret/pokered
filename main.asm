@@ -37707,7 +37707,7 @@ CinnabarIslandScriptPointers: ; 1ca34 (7:4a34)
 	dw CinnabarIslandScript1
 
 CinnabarIslandScript0: ; 1ca38 (7:4a38)
-	ld b, $2b
+	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
 	ld a, [$d361]
@@ -76192,7 +76192,7 @@ Route16GateScript3: ; 49741 (12:5741)
 	ret
 
 Func_49755: ; 49755 (12:5755)
-	ld b, $6
+	ld b, BICYCLE
 	jp IsItemInBag
 
 Route16GateTextPointers: ; 4975a (12:575a)
@@ -81493,7 +81493,7 @@ Func_52673: ; 52673 (14:6673)
 	cp $5e
 	ret nz
 .asm_5269c
-	ld b, $30
+	ld b, CARD_KEY
 	call IsItemInBag
 	jr z, .asm_526dc
 	call Func_526fd
@@ -89029,10 +89029,10 @@ Func_59b73: ; 59b73 (16:5b73)
 	ld a, [$d771]
 	bit 1, a
 	ret nz
-	ld b, $6
+	ld b, BICYCLE
 	call IsItemInBag
 	ret nz
-	ld b, $2d
+	ld b, BIKE_VOUCHER
 	jp IsItemInBag
 
 FanClubTextPointers: ; 59b84 (16:5b84)
