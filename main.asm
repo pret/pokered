@@ -56224,22 +56224,94 @@ BattleCore:
 
 ; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 3c000 (f:4000)
-	db $18,$19,$1C,$2E,$2F,$31,$38,$39,$40,$41,$42,$43,$4F,$52,$54,$55,$FF
+	db CONVERSION_EFFECT
+	db HAZE_EFFECT
+	db SWITCH_AND_TELEPORT_EFFECT
+	db MIST_EFFECT
+	db FOCUS_ENERGY_EFFECT
+	db CONFUSION_EFFECT
+	db HEAL_EFFECT
+	db TRANSFORM_EFFECT
+	db LIGHT_SCREEN_EFFECT
+	db REFLECT_EFFECT
+	db POISON_EFFECT
+	db PARALYZE_EFFECT
+	db SUBSTITUTE_EFFECT
+	db MIMIC_EFFECT
+	db LEECH_SEED_EFFECT
+	db SPLASH_EFFECT
+	db -1
 EffectsArray2: ; 3c011 (f:4011)
 ; moves that do damage but not through normal calculations
 ; e.g., Super Fang, Psywave
-	db $28,$29,$FF
+	db SUPER_FANG_EFFECT
+	db SPECIAL_DAMAGE_EFFECT
+	db -1
 EffectsArray3: ; 3c014 (f:4014)
 ; non-damaging, stat‐affecting or status‐causing moves?
 ; e.g., Meditate, Bide, Hypnosis
-	db $01,$0A,$0B,$0C,$0D,$0E,$0F,$12,$13,$14,$15,$16,$17,$1A,$20,$32,$33,$34,$35,$36,$37,$3A,$3B,$3C,$3D,$3E,$3F,$FF
+	db $01
+	db ATTACK_UP1_EFFECT
+	db DEFENSE_UP1_EFFECT
+	db SPEED_UP1_EFFECT
+	db SPECIAL_UP1_EFFECT
+	db ACCURACY_UP1_EFFECT
+	db EVASION_UP1_EFFECT
+	db ATTACK_DOWN1_EFFECT
+	db DEFENSE_DOWN1_EFFECT
+	db SPEED_DOWN1_EFFECT
+	db SPECIAL_DOWN1_EFFECT
+	db ACCURACY_DOWN1_EFFECT
+	db EVASION_DOWN1_EFFECT
+	db BIDE_EFFECT
+	db SLEEP_EFFECT
+	db ATTACK_UP2_EFFECT
+	db DEFENSE_UP2_EFFECT
+	db SPEED_UP2_EFFECT
+	db SPECIAL_UP2_EFFECT
+	db ACCURACY_UP2_EFFECT
+	db EVASION_UP2_EFFECT
+	db ATTACK_DOWN2_EFFECT
+	db DEFENSE_DOWN2_EFFECT
+	db SPEED_DOWN2_EFFECT
+	db SPECIAL_DOWN2_EFFECT
+	db ACCURACY_DOWN2_EFFECT
+	db EVASION_DOWN2_EFFECT
+	db -1
 EffectsArray4: ; 3c030 (f:4030)
-	db $03,$07,$08,$10,$1D,$1E,$2C,$30,$4D,$51,$FF
+; Attacks that aren't finished after they faint the opponent.
+	db DRAIN_HP_EFFECT
+	db EXPLODE_EFFECT
+	db DREAM_EATER_EFFECT
+	db PAY_DAY_EFFECT
+	db TWO_TO_FIVE_ATTACKS_EFFECT
+	db $1E
+	db ATTACK_TWICE_EFFECT
+	db RECOIL_EFFECT
+	db TWINEEDLE_EFFECT
+	db RAGE_EFFECT
+	db -1
 EffectsArray5: ; 3c03b (f:403b)
-	db $03,$07,$08,$10,$11,$1D,$1E,$27,$28,$29,$2B,$2C,$2D,$30 ; fallthru
+	db DRAIN_HP_EFFECT
+	db EXPLODE_EFFECT
+	db DREAM_EATER_EFFECT
+	db PAY_DAY_EFFECT
+	db SWIFT_EFFECT
+	db TWO_TO_FIVE_ATTACKS_EFFECT
+	db $1E
+	db CHARGE_EFFECT
+	db SUPER_FANG_EFFECT
+	db SPECIAL_DAMAGE_EFFECT
+	db FLY_EFFECT
+	db ATTACK_TWICE_EFFECT
+	db JUMP_KICK_EFFECT
+	db RECOIL_EFFECT
+	; fallthrough
 EffectsArray5B: ; 3c049 (f:4049)
 ; moves that prevent the player from switching moves?
-	db $1B,$2A,$FF
+	db THRASH_PETAL_DANCE_EFFECT
+	db TRAPPING_EFFECT
+	db -1
 
 Func_3c04c: ; 3c04c (f:404c)
 	call Func_3ec92
@@ -59361,9 +59433,9 @@ asm_3d74b
 	ld c,$1E
 	call DelayFrames
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$2B
+	cp a,FLY_EFFECT
 	jr z,.next5
-	cp a,$27 ; XXX SLP | FRZ ?
+	cp a,CHARGE_EFFECT
 	jr z,.next5
 	jr asm_3d766
 .next5
@@ -59373,7 +59445,7 @@ asm_3d74b
 	call PlayMoveAnimation
 asm_3d766
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,9
+	cp a,MIRROR_MOVE_EFFECT
 	jr nz,.next6 ; 577A
 	call MirrorMoveCopyMove
 	jp z,Func_3d80a
@@ -59381,7 +59453,7 @@ asm_3d766
 	ld [$CCED],a
 	jp Func_3d69a
 .next6
-	cp a,$53
+	cp a,METRONOME_EFFECT
 	jr nz,.next7 ; 5784
 	call MetronomePickMove
 	jp Func_3d69a
@@ -59396,7 +59468,7 @@ asm_3d766
 	jr z,.next8 ; 57A6
 	call Func_3dbe2
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,7
+	cp a,EXPLODE_EFFECT
 	jr z,.next9 ; 57B9
 	jp Func_3d80a
 .next8
