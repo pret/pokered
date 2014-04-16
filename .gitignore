@@ -1,6 +1,3 @@
-# global label defs are generated
-globals.asm
-
 # precompiled python
 *.pyc
 
@@ -20,6 +17,11 @@ globals.asm
 
 # generated
 *.tx
+
+# converted image data
+*.2bpp
+*.1bpp
+*.pic
 
 # swap files for vim
 .*.swp

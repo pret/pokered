@@ -27447,7 +27447,7 @@ DrawBadges: ; ea03 (3:6a03)
 	db $20, $28, $30, $38, $40, $48, $50, $58
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
-	INCBIN "gfx/badges.2bpp"
+	INCBIN "gfx/badges.w16.2bpp"
 
 Func_ee9e: ; ee9e (3:6e9e)
 	call Load16BitRegisters
@@ -29734,9 +29734,10 @@ LyingOldManSprite: ; 11340 (4:5340)
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
 
 PokemonLogoGraphics: ; 11380 (4:5380)
-	INCBIN "gfx/pokemon_logo.2bpp"
+	INCBIN "gfx/pokemon_logo.w128.2bpp"
+
 FontGraphics: ; 11a80 (4:5a80)
-	INCBIN "gfx/font.1bpp"
+	INCBIN "gfx/font.w128.1bpp"
 
 ABTiles: ; 11e80 (4:5e80)
 	INCBIN "gfx/AB.2bpp"
@@ -29754,10 +29755,10 @@ BattleHudTiles3: ; 120b0 (4:60b0)
 	INCBIN "gfx/battle_hud3.1bpp"
 
 NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
-	INCBIN "gfx/copyright.2bpp"
+	INCBIN "gfx/copyright.h8.2bpp"
 
 GamefreakLogoGraphics: ; 121f8 (4:61f8)
-	INCBIN "gfx/gamefreak.2bpp"
+	INCBIN "gfx/gamefreak.h8.2bpp"
 
 TextBoxGraphics: ; 12288 (4:6288)
 	INCBIN "gfx/text_box.2bpp"
@@ -33228,7 +33229,7 @@ EmotionBubblesOAM: ; 17cb5 (5:7cb5)
 	db $FA,$00,$FB,$00
 
 EmotionBubbles: ; 17cbd (5:7cbd)
-	INCBIN "gfx/emotion_bubbles.2bpp"
+	INCBIN "gfx/emotion_bubbles.w16.2bpp"
 
 Func_17d7d: ; 17d7d (5:7d7d)
 	ld a, [wPlayerMonAccuracyMod] ; $cd1e
@@ -53235,7 +53236,8 @@ PokeballTileGraphics:: ; 3a97e (e:697e)
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
 TradingAnimationGraphics: ; 3a9be (e:69be)
-	INCBIN "gfx/trade.2bpp"
+	INCBIN "gfx/game_boy.norepeat.2bpp"
+	INCBIN "gfx/link_cable.2bpp"
 
 ; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
 TradingAnimationGraphics2: ; 3acce (e:6cce)
@@ -68161,7 +68163,9 @@ IntroNidorinoAnimation7: ; 41950 (10:5950)
 	db $50 ; list terminator 
 
 GameFreakIntro: ; 41959 (10:5959)
-	INCBIN "gfx/gamefreak_intro.2bpp"
+	INCBIN "gfx/gamefreak_intro.h8.2bpp"
+	INCBIN "gfx/gamefreak_logo.2bpp"
+	ds $10 ; blank tile
 
 FightIntroBackMon: ; 41a99 (10:5a99)
 	INCBIN "gfx/intro_fight.2bpp"
@@ -68169,10 +68173,16 @@ FightIntroBackMon: ; 41a99 (10:5a99)
 FightIntroFrontMon: ; 42099 (10:6099)
 
 IF _RED
-	INCBIN "gfx/red/introfight.2bpp"
+	INCBIN "gfx/red/intro_nido_1.6x6.2bpp"
+	INCBIN "gfx/red/intro_nido_2.6x6.2bpp"
+	INCBIN "gfx/red/intro_nido_3.6x6.2bpp"
+	ds $10 ; blank tile
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/introfight.2bpp"
+	INCBIN "gfx/blue/intro_purin_1.6x6.2bpp"
+	INCBIN "gfx/blue/intro_purin_2.6x6.2bpp"
+	INCBIN "gfx/blue/intro_purin_3.6x6.2bpp"
+	ds $10 ; blank tile
 ENDC
 
 ; XXX what do these do
@@ -98031,33 +98041,33 @@ Unknown_62529: ; 62529 (18:6529)
 SECTION "bank19",ROMX,BANK[$19]
 
 Overworld_GFX: ; 64000 (19:4000)
-	INCBIN "gfx/tilesets/overworld.2bpp"
+	INCBIN "gfx/tilesets/overworld.w128.t2.2bpp"
 Overworld_Block: ; 645e0 (19:45e0)
 	INCBIN "gfx/blocksets/overworld.bst"
 RedsHouse1_GFX:
 RedsHouse2_GFX: ; 64de0 (19:4de0)
-	INCBIN "gfx/tilesets/reds_house.2bpp"
+	INCBIN "gfx/tilesets/reds_house.w128.t7.2bpp"
 RedsHouse1_Block:
 RedsHouse2_Block: ; 65270 (19:5270)
 	INCBIN "gfx/blocksets/reds_house.bst"
 House_GFX: ; 653a0 (19:53a0)
-	INCBIN "gfx/tilesets/house.2bpp"
+	INCBIN "gfx/tilesets/house.w128.t2.2bpp"
 House_Block: ; 65980 (19:5980)
 	INCBIN "gfx/blocksets/house.bst"
 Mansion_GFX: ; 65bb0 (19:5bb0)
-	INCBIN "gfx/tilesets/mansion.2bpp"
+	INCBIN "gfx/tilesets/mansion.w128.t2.2bpp"
 Mansion_Block: ; 66190 (19:6190)
 	INCBIN "gfx/blocksets/mansion.bst"
 ShipPort_GFX: ; 66610 (19:6610)
-	INCBIN "gfx/tilesets/ship_port.2bpp"
+	INCBIN "gfx/tilesets/ship_port.w128.t2.2bpp"
 ShipPort_Block: ; 66bf0 (19:6bf0)
 	INCBIN "gfx/blocksets/ship_port.bst"
 Interior_GFX: ; 66d60 (19:6d60)
-	INCBIN "gfx/tilesets/interior.2bpp"
+	INCBIN "gfx/tilesets/interior.w128.t1.2bpp"
 Interior_Block: ; 67350 (19:7350)
 	INCBIN "gfx/blocksets/interior.bst"
 Plateau_GFX: ; 676f0 (19:76f0)
-	INCBIN "gfx/tilesets/plateau.2bpp"
+	INCBIN "gfx/tilesets/plateau.w128.t10.2bpp"
 Plateau_Block: ; 67b50 (19:7b50)
 	INCBIN "gfx/blocksets/plateau.bst"
 
@@ -98106,71 +98116,71 @@ DecrementPP: ; 68000 (1a:4000)
 
 Version_GFX: ; 6802f (1a:402f)
 IF _RED
-	INCBIN "gfx/red/redgreenversion.1bpp"
+	INCBIN "gfx/red/redgreenversion.h8.1bpp"
 	; 80 bytes
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/blueversion.1bpp"
+	INCBIN "gfx/blue/blueversion.h8.1bpp"
 	; 64 bytes
 ENDC
 
 Dojo_GFX:
 Gym_GFX: ; 6807f (1a:407f)
-	INCBIN "gfx/tilesets/gym.2bpp"
+	INCBIN "gfx/tilesets/gym.w128.2bpp"
 Dojo_Block:
 Gym_Block: ; 6867f (1a:467f)
 	INCBIN "gfx/blocksets/gym.bst"
 Mart_GFX:
 Pokecenter_GFX: ; 68dbf (1a:4dbf)
-	INCBIN "gfx/tilesets/pokecenter.2bpp"
+	INCBIN "gfx/tilesets/pokecenter.w128.2bpp"
 Mart_Block:
 Pokecenter_Block: ; 693bf (1a:53bf)
 	INCBIN "gfx/blocksets/pokecenter.bst"
 ForestGate_GFX:
 Museum_GFX:
 Gate_GFX: ; 6960f (1a:560f)
-	INCBIN "gfx/tilesets/gate.2bpp"
+	INCBIN "gfx/tilesets/gate.w128.t1.2bpp"
 ForestGate_Block:
 Museum_Block:
 Gate_Block: ; 69bff (1a:5bff)
 	INCBIN "gfx/blocksets/gate.bst"
 Forest_GFX: ; 6a3ff (1a:63ff)
-	INCBIN "gfx/tilesets/forest.2bpp"
+	INCBIN "gfx/tilesets/forest.w128.2bpp"
 Forest_Block: ; 6a9ff (1a:69ff)
 	INCBIN "gfx/blocksets/forest.bst"
 Facility_GFX: ; 6b1ff (1a:71ff)
-	INCBIN "gfx/tilesets/facility.2bpp"
+	INCBIN "gfx/tilesets/facility.w128.2bpp"
 Facility_Block: ; 6b7ff (1a:77ff)
 	INCBIN "gfx/blocksets/facility.bst"
 
 SECTION "bank1B",ROMX,BANK[$1B]
 
 Cemetery_GFX: ; 6c000 (1b:4000)
-	INCBIN "gfx/tilesets/cemetery.2bpp"
+	INCBIN "gfx/tilesets/cemetery.w128.t4.2bpp"
 Cemetery_Block: ; 6c5c0 (1b:45c0)
 	INCBIN "gfx/blocksets/cemetery.bst"
 Cavern_GFX: ; 6cca0 (1b:4ca0)
-	INCBIN "gfx/tilesets/cavern.2bpp"
+	INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
 Cavern_Block: ; 6d0c0 (1b:50c0)
 	INCBIN "gfx/blocksets/cavern.bst"
 Lobby_GFX: ; 6d8c0 (1b:58c0)
-	INCBIN "gfx/tilesets/lobby.2bpp"
+	INCBIN "gfx/tilesets/lobby.w128.t2.2bpp"
 Lobby_Block: ; 6dea0 (1b:5ea0)
 	INCBIN "gfx/blocksets/lobby.bst"
 Ship_GFX: ; 6e390 (1b:6390)
-	INCBIN "gfx/tilesets/ship.2bpp"
+	INCBIN "gfx/tilesets/ship.w128.t6.2bpp"
 Ship_Block: ; 6e930 (1b:6930)
 	INCBIN "gfx/blocksets/ship.bst"
 Lab_GFX: ; 6ed10 (1b:6d10)
-	INCBIN "gfx/tilesets/lab.2bpp"
+	INCBIN "gfx/tilesets/lab.w128.t4.2bpp"
 Lab_Block: ; 6f2d0 (1b:72d0)
 	INCBIN "gfx/blocksets/lab.bst"
 Club_GFX: ; 6f670 (1b:7670)
-	INCBIN "gfx/tilesets/club.2bpp"
+	INCBIN "gfx/tilesets/club.w128.t5.2bpp"
 Club_Block: ; 6fb20 (1b:7b20)
 	INCBIN "gfx/blocksets/club.bst"
 Underground_GFX: ; 6fd60 (1b:7d60)
-	INCBIN "gfx/tilesets/underground.2bpp"
+	INCBIN "gfx/tilesets/underground.w128.t7.2bpp"
 Underground_Block: ; 6fef0 (1b:7ef0)
 	INCBIN "gfx/blocksets/underground.bst"
 
@@ -103063,10 +103073,10 @@ ENDC
 
 SGBBorderGraphics: ; 72fe8 (1c:6fe8)
 IF _RED
-	INCBIN "gfx/red/sgbborder.2bpp"
+	INCBIN "gfx/red/sgbborder.w128.2bpp"
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/sgbborder.2bpp"
+	INCBIN "gfx/blue/sgbborder.w128.2bpp"
 ENDC
 
 LoadSAV: ; 735e8 (1c:75e8)
@@ -104307,7 +104317,7 @@ CredPAAD: ; 74730 (1d:4730)
 	db -5, "PAAD TESTING@"
 
 TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
-	INCBIN "gfx/theend.2bpp"
+	INCBIN "gfx/theend.w40.interleave.2bpp"
 
 PrintStatusAilment: ; 747de (1d:47de)
 	ld a, [de]
