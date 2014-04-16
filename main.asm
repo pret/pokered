@@ -40565,7 +40565,7 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 	dw DiglettsCaveRoute2Object ; objects
 
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
-	ld a, $d
+	ld a, ROUTE_2
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
 
@@ -41109,7 +41109,7 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 	dw UndergroundPathEntranceRoute8Object ; objects
 
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
-	ld a, $13
+	ld a, ROUTE_8
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
 
@@ -41365,7 +41365,7 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 
 DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 	call EnableAutoTextBoxDrawing
-	ld a, $16
+	ld a, ROUTE_11
 	ld [$d365], a
 	ret
 
@@ -41489,9 +41489,9 @@ Route22GateScript: ; 1e683 (7:6683)
 	call CallFunctionInTable
 	ld a, [$d361]
 	cp $4
-	ld a, $22
+	ld a, ROUTE_23
 	jr c, .asm_1e69a ; 0x1e696 $2
-	ld a, $21
+	ld a, ROUTE_22
 .asm_1e69a
 	ld [$d365], a
 	ret
@@ -90123,14 +90123,14 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld [hl], a
 	xor a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
-	ld a, $0
+	ld a, PALLET_TOWN
 	ld [$d719], a
 	ld b, BANK(SaveSAVtoSRAM)
 	ld hl, SaveSAVtoSRAM
 	call Bankswitch
-	ld b, $5
+	ld b, 5
 .asm_5a4ff
-	ld c, $78
+	ld c, 600 / 5
 	call DelayFrames
 	dec b
 	jr nz, .asm_5a4ff ; 0x5a505 $f8
@@ -93153,7 +93153,7 @@ UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
 	dw UndergroundTunnelEntranceRoute5Object ; objects
 
 UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
-	ld a, $10
+	ld a, ROUTE_5
 	ld [$d365], a
 	ret
 
@@ -93198,7 +93198,7 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 	dw UndergroundTunnelEntranceRoute6Object ; objects
 
 UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
-	ld a, $11
+	ld a, ROUTE_6
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
 
@@ -93235,7 +93235,7 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 	dw UndergroundPathEntranceRoute7Object ; objects
 
 UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
-	ld a, $12
+	ld a, ROUTE_7
 	ld [$d365], a
 	jp EnableAutoTextBoxDrawing
 
@@ -93272,7 +93272,7 @@ UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
 	dw UndergroundPathEntranceRoute7CopyObject ; objects
 
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
-	ld a, $12
+	ld a, ROUTE_7
 	ld [$d365], a
 	ret
 
@@ -95329,7 +95329,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
 	ld [$d42f], a
-	ld a, $4
+	ld a, LAVENDER_TOWN
 	ld [$d365], a
 	ld hl, $d72d
 	set 3, [hl]
