@@ -1,6 +1,6 @@
-; status ailments (masks)
-SLP EQU %00000111
-PSN EQU %00001000
-BRN EQU %00010000
-FRZ EQU %00100000
-PAR EQU %01000000
+; status ailments
+SLP EQU %111 ; mask
+PSN EQU 3
+BRN EQU 4
+FRZ EQU 5
+PAR EQU 6

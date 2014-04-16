@@ -24483,7 +24483,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[W_ENEMYMONSTATUS]	;status ailments
 	and a
 	jr z,.noAilments
-	and a,(FRZ + SLP)	;is frozen and/or asleep?
+	and a, 1 << FRZ | SLP	;is frozen and/or asleep?
 	ld c,12
 	jr z,.notFrozenOrAsleep
 	ld c,25
@@ -24592,7 +24592,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[W_ENEMYMONSTATUS]	;status ailments
 	and a
 	jr z,.next13
-	and a,(FRZ + SLP)
+	and a, 1 << FRZ | SLP
 	ld b,5
 	jr z,.next14
 	ld b,10
@@ -56709,12 +56709,12 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	ld de, W_ENEMYMONSTATUS ; $cfe9
 .playersTurn
 	ld a, [de]
-	and BRN | PSN
+	and (1 << BRN) | (1 << PSN)
 	jr z, .notBurnedOrPoisoned
 	push hl
 	ld hl, HurtByPoisonText
 	ld a, [de]
-	and BRN
+	and 1 << BRN
 	jr z, .poisoned
 	ld hl, HurtByBurnText
 .poisoned
@@ -59139,7 +59139,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	and $12     ; using multi-turn move or bide
 	ret nz
 	ld a, [W_ENEMYMONSTATUS]
-	and SLP | FRZ ; sleeping or frozen
+	and SLP | 1 << FRZ ; sleeping or frozen
 	ret nz
 	ld a, [W_ENEMYBATTSTATUS1]
 	and $21      ; using fly/dig or thrash/petal dance
@@ -59461,7 +59461,7 @@ Func_3d811: ; 3d811 (f:5811)
 	and a
 	jr nz,.Ghost
 	ld a,[W_PLAYERMONSTATUS] ; player’s turn
-	and a,SLP | FRZ
+	and a,SLP | (1 << FRZ)
 	ret nz
 	ld hl,ScaredText
 	call PrintText
@@ -59526,7 +59526,7 @@ Func_3d854: ; 3d854 (f:5854)
 	jp Func_3da37
 
 .FrozenCheck
-	bit 5,[hl] ; frozen?
+	bit FRZ,[hl] ; frozen?
 	jr z,.HeldInPlaceCheck ; to 5898
 	ld hl,FrozenText
 	call PrintText
@@ -63546,14 +63546,14 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
-	ld a, PAR
+	ld a, 1 << PAR
 	ld [W_ENEMYMONSTATUS], a
 	call Func_3ed27  ;quarter speed of affected monster
 	ld a, $a9
 	call Func_3fbb9  ;animation
 	jp Func_3fb6e    ;print paralysis text
 .burn
-	ld a, BRN
+	ld a, 1 << BRN
 	ld [W_ENEMYMONSTATUS], a
 	call Func_3ed64
 	ld a, $a9
@@ -63562,7 +63562,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	jp PrintText
 .freeze
 	call Func_3f9cf  ;resets bit 5 of the D063/D068 flags
-	ld a, FRZ
+	ld a, 1 << FRZ
 	ld [W_ENEMYMONSTATUS], a
 	ld a, $a9
 	call Func_3fbb9  ;animation
@@ -63597,18 +63597,18 @@ opponentAttacker: ; 3f382 (f:7382)
 	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
-	ld a, PAR
+	ld a, 1 << PAR
 	ld [W_PLAYERMONSTATUS], a
 	call Func_3ed27
 	jp Func_3fb6e
 .burn
-	ld a, BRN
+	ld a, 1 << BRN
 	ld [W_PLAYERMONSTATUS], a
 	call Func_3ed64
 	ld hl, UnnamedText_3f3d8
 	jp PrintText
 .freeze
-	ld a, FRZ
+	ld a, 1 << FRZ
 	ld [W_PLAYERMONSTATUS], a
 	ld hl, UnnamedText_3f3dd
 	jp PrintText
@@ -63622,7 +63622,7 @@ UnnamedText_3f3dd: ; 3f3dd (f:73dd)
 	db "@"
 
 CheckDefrost: ; 3f3e2 (f:73e2)
-	and a, FRZ			;are they frozen?
+	and a, 1 << FRZ			;are they frozen?
 	ret z				;return if so
 						;not frozen
 	ld a, [$fff3]	;whose turn?
@@ -63644,7 +63644,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	jr .common
 .opponent
 	ld a, [W_ENEMYMOVETYPE]		;same as above with addresses swapped
-	sub a, $14
+	sub a, FIRE
 	ret nz
 	ld [W_PLAYERMONSTATUS], a
 	ld hl, $d16f
@@ -63753,9 +63753,9 @@ Func_3f428: ; 3f428 (f:7428)
 	ld a, [$ff97]
 	sbc $3
 	jp c, Func_3f4c3
-	ld a, $3
+	ld a, 999 / $100
 	ld [$ff97], a
-	ld a, $e7
+	ld a, 999 % $100
 	ld [$ff98], a
 
 Func_3f4c3: ; 3f4c3 (f:74c3)
@@ -104322,15 +104322,15 @@ TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
 
 PrintStatusAilment: ; 747de (1d:47de)
 	ld a, [de]
-	bit 3, a
+	bit PSN, a
 	jr nz, .psn
-	bit 4, a
+	bit BRN, a
 	jr nz, .brn
-	bit 5, a
+	bit FRZ, a
 	jr nz, .frz
-	bit 6, a
+	bit PAR, a
 	jr nz, .par
-	and $7 ; slp
+	and SLP
 	ret z
 	ld a, "S"
 	ld [hli], a
