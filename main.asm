@@ -75814,20 +75814,20 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	cp $4
 	jp nz, Func_55c9
 	ld a, [$d7d8]
-	bit 7, a
-	ld hl, UnnamedText_494c4
-	jr z, .asm_5ac80 ; 0x494b9
-	ld hl, UnnamedText_494c9
-.asm_5ac80 ; 0x494be
+	bit 7, a ; fought snorlax?
+	ld hl, BinocularsSnorlaxText
+	jr z, .print
+	ld hl, BinocularsNoSnorlaxText
+.print
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_494c4: ; 494c4 (12:54c4)
-	TX_FAR _UnnamedText_494c4
+BinocularsSnorlaxText:
+	TX_FAR _BinocularsSnorlaxText
 	db "@"
 
-UnnamedText_494c9: ; 494c9 (12:54c9)
-	TX_FAR _UnnamedText_494c9
+BinocularsNoSnorlaxText:
+	TX_FAR _BinocularsNoSnorlaxText
 	db "@"
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
