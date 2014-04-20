@@ -80599,117 +80599,118 @@ SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 
 	db $ff
 
-SilphCo7Text1: ; 51d8e (14:5d8e)
+SilphCo7Text1:
+; lapras guy
 	db $08 ; asm
 	ld a, [$d72e]
-	bit 0, a
-	jr z, .asm_d7e17 ; 0x51d94
+	bit 0, a ; got lapras?
+	jr z, .givelapras
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_688b4 ; 0x51d9b
-	ld hl, UnnamedText_51ddd
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .LaprasGuyText
 	call PrintText
-	jr .asm_b3069 ; 0x51da3
-.asm_d7e17 ; 0x51da5
-	ld hl, UnnamedText_51dd3
+	jr .done
+.givelapras
+	ld hl, .MeetLaprasGuyText
 	call PrintText
 	ld bc, (LAPRAS << 8) | 15
 	call GivePokemon
-	jr nc, .asm_b3069 ; 0x51db1
+	jr nc, .done
 	ld a, [$ccd3]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
-	ld hl, UnnamedText_51dd8
+	ld hl, .HeresYourLaprasText
 	call PrintText
 	ld hl, $d72e
 	set 0, [hl]
-	jr .asm_b3069 ; 0x51dc8
-.asm_688b4 ; 0x51dca
-	ld hl, UnnamedText_51de2
+	jr .done
+.savedsilph
+	ld hl, .LaprasGuySavedText
 	call PrintText
-.asm_b3069 ; 0x51dd0
+.done
 	jp TextScriptEnd
 
-UnnamedText_51dd3: ; 51dd3 (14:5dd3)
-	TX_FAR _UnnamedText_51dd3
+.MeetLaprasGuyText
+	TX_FAR _MeetLaprasGuyText
 	db "@"
 
-UnnamedText_51dd8: ; 51dd8 (14:5dd8)
-	TX_FAR _UnnamedText_51dd8
+.HeresYourLaprasText
+	TX_FAR _HeresYourLaprasText
 	db "@"
 
-UnnamedText_51ddd: ; 51ddd (14:5ddd)
-	TX_FAR _UnnamedText_51ddd
+.LaprasGuyText
+	TX_FAR _LaprasGuyText
 	db "@"
 
-UnnamedText_51de2: ; 51de2 (14:5de2)
-	TX_FAR _UnnamedText_51de2
+.LaprasGuySavedText
+	TX_FAR _LaprasGuySavedText
 	db "@"
 
-SilphCo7Text2: ; 51de7 (14:5de7)
+SilphCo7Text2:
 	db $8
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_892ce ; 0x51ded $8
-	ld hl, UnnamedText_51e00
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .asm_e4d89 ; 0x51df5 $6
-.asm_892ce ; 0x51df7
-	ld hl, UnnamedText_51e05
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.asm_e4d89 ; 0x51dfd
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e00: ; 51e00 (14:5e00)
+.rockettext
 	TX_FAR _UnnamedText_51e00
 	db "@"
 
-UnnamedText_51e05: ; 51e05 (14:5e05)
-	TX_FAR _UnnamedText_51e05
+.savedtext
+	TX_FAR _CanceledMasterBallText
 	db "@"
 
-SilphCo7Text3: ; 51e0a (14:5e0a)
+SilphCo7Text3:
 	db $08 ; asm
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_254aa ; 0x51e10
-	ld hl, UnnamedText_51e23
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .asm_6472b ; 0x51e18
-.asm_254aa ; 0x51e1a
-	ld hl, UnnamedText_51e28
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.asm_6472b ; 0x51e20
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e23: ; 51e23 (14:5e23)
+.rockettext
 	TX_FAR _UnnamedText_51e23
 	db "@"
 
-UnnamedText_51e28: ; 51e28 (14:5e28)
+.savedtext
 	TX_FAR _UnnamedText_51e28
 	db "@"
 
-SilphCo7Text4: ; 51e2d (14:5e2d)
+SilphCo7Text4:
 	db $08 ; asm
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_0f7ee ; 0x51e33
-	ld hl, UnnamedText_51e46
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .selectLowNybble2 ; 0x51e3b
-.asm_0f7ee ; 0x51e3d
-	ld hl, UnnamedText_51e4b
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.selectLowNybble2 ; 0x51e43
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e46: ; 51e46 (14:5e46)
+.rockettext
 	TX_FAR _UnnamedText_51e46
 	db "@"
 
-UnnamedText_51e4b: ; 51e4b (14:5e4b)
+.savedtext
 	TX_FAR _UnnamedText_51e4b
 	db "@"
 
