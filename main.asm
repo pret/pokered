@@ -20272,7 +20272,7 @@ Func_cdc0: ; cdc0 (3:4dc0)
 	bit 5, a
 	jr nz, .asm_cdec
 	ld a, [W_CURMAP] ; $d35e
-	cp $a2
+	cp SEAFOAM_ISLANDS_5
 	ret nz
 	ld a, [$d881]
 	and $3
