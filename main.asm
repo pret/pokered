@@ -89037,9 +89037,10 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 FanClubScript: ; 59b70 (16:5b70)
 	jp EnableAutoTextBoxDrawing
 
-Func_59b73: ; 59b73 (16:5b73)
+FanClubBikeInBag:
+; check if any bike paraphernalia in bag
 	ld a, [$d771]
-	bit 1, a
+	bit 1, a ; got bike voucher?
 	ret nz
 	ld b, BICYCLE
 	call IsItemInBag
@@ -89057,142 +89058,150 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 	dw FanClubText7
 	dw FanClubText8
 
-FanClubText1: ; 59b94 (16:5b94)
+FanClubText1:
+; pikachu fan
 	db $08 ; asm
 	ld a, [$d771]
 	bit 7, a
-	jr nz, asm_67b22 ; 0x59b9a
-	ld hl, UnnamedText_59bb7
+	jr nz, .mineisbetter
+	ld hl, .normaltext
 	call PrintText
 	ld hl, $d771
 	set 6, [hl]
-	jr asm_64f01 ; 0x59ba7
-asm_67b22 ; 0x59ba9
-	ld hl, UnnamedText_59bbc
+	jr .done
+.mineisbetter
+	ld hl, .bettertext
 	call PrintText
 	ld hl, $d771
 	res 7, [hl]
-asm_64f01 ; 0x59bb4
+.done
 	jp TextScriptEnd
 
-UnnamedText_59bb7: ; 59bb7 (16:5bb7)
-	TX_FAR _UnnamedText_59bb7
+.normaltext
+	TX_FAR PikachuFanText
 	db "@"
 
-UnnamedText_59bbc: ; 59bbc (16:5bbc)
-	TX_FAR _UnnamedText_59bbc
+.bettertext
+	TX_FAR PikachuFanBetterText
 	db "@"
 
-FanClubText2: ; 59bc1 (16:5bc1)
+FanClubText2:
+; seel fan
 	db $08 ; asm
 	ld a, [$d771]
 	bit 6, a
-	jr nz, asm_5cd59 ; 0x59bc7
-	ld hl, UnnamedText_59be4
+	jr nz, .mineisbetter
+	ld hl, .normaltext
 	call PrintText
 	ld hl, $d771
 	set 7, [hl]
-	jr asm_59625 ; 0x59bd4
-asm_5cd59 ; 0x59bd6
-	ld hl, UnnamedText_59be9
+	jr .done
+.mineisbetter
+	ld hl, .bettertext
 	call PrintText
 	ld hl, $d771
 	res 6, [hl]
-asm_59625 ; 0x59be1
+.done
 	jp TextScriptEnd
 
-UnnamedText_59be4: ; 59be4 (16:5be4)
-	TX_FAR _UnnamedText_59be4
+.normaltext
+	TX_FAR SeelFanText
 	db "@"
 
-UnnamedText_59be9: ; 59be9 (16:5be9)
-	TX_FAR _UnnamedText_59be9
+.bettertext
+	TX_FAR SeelFanBetterText
 	db "@"
 
-FanClubText3: ; 59bee (16:5bee)
+FanClubText3:
+; pikachu
 	db $8
-	ld hl, UnnamedText_59c00
+	ld hl, .text
 	call PrintText
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_59c00: ; 59c00 (16:5c00)
-	TX_FAR _UnnamedText_59c00
+.text
+	TX_FAR FanClubPikachuText
 	db "@"
 
-FanClubText4: ; 59c05 (16:5c05)
+FanClubText4:
+; seel
 	db $08 ; asm
-	ld hl, UnnamedText_59c17
+	ld hl, .text
 	call PrintText
 	ld a, SEEL
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_59c17: ; 59c17 (16:5c17)
-	TX_FAR _UnnamedText_59c17
+.text
+	TX_FAR FanClubSeelText
 	db "@"
 
-FanClubText5: ; 59c1c (16:5c1c)
+FanClubText5:
+; chair
 	db $08 ; asm
-	call Func_59b73
-	jr nz, asm_38bb3 ; 0x59c20
-	ld hl, UnnamedText_59c65
+	call FanClubBikeInBag
+	jr nz, .nothingleft
+
+	ld hl, .meetchairtext
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, asm_2c8d7 ; 0x59c2f
-	ld hl, UnnamedText_59c6a
+	jr nz, .nothanks
+
+	; tell the story
+	ld hl, .storytext
 	call PrintText
 	ld bc, (BIKE_VOUCHER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedBikeVoucherText
+	ld hl, .receivedvouchertext
 	call PrintText
 	ld hl, $d771
 	set 1, [hl]
-	jr asm_d3c26 ; 0x59c4a
+	jr .done
 .BagFull
-	ld hl, UnnamedText_59c83
+	ld hl, .bagfulltext
 	call PrintText
-	jr asm_d3c26 ; 0x59c52
-asm_2c8d7 ; 0x59c54
-	ld hl, UnnamedText_59c79
+	jr .done
+.nothanks
+	ld hl, .nostorytext
 	call PrintText
-	jr asm_d3c26 ; 0x59c5a
-asm_38bb3 ; 0x59c5c
-	ld hl, UnnamedText_59c7e
+	jr .done
+.nothingleft
+	ld hl, .finaltext
 	call PrintText
-asm_d3c26 ; 0x59c62
+.done
 	jp TextScriptEnd
 
-UnnamedText_59c65: ; 59c65 (16:5c65)
-	TX_FAR _UnnamedText_59c65
+.meetchairtext
+	TX_FAR FanClubMeetChairText
 	db "@"
 
-UnnamedText_59c6a: ; 59c6a (16:5c6a)
-	TX_FAR _UnnamedText_59c6a
+.storytext
+	TX_FAR FanClubChairStoryText
 	db "@"
 
-ReceivedBikeVoucherText: ; 59c6f (16:5c6f)
-	TX_FAR _ReceivedBikeVoucherText ; 0x9a82e
+.receivedvouchertext
+	TX_FAR ReceivedBikeVoucherText
 	db $11
-	TX_FAR _UnnamedText_59c74 ; 0x9a844
+	TX_FAR ExplainBikeVoucherText
 	db "@"
 
-UnnamedText_59c79: ; 59c79 (16:5c79)
-	TX_FAR _UnnamedText_59c79
+.nostorytext
+	TX_FAR FanClubNoStoryText
 	db "@"
 
-UnnamedText_59c7e: ; 59c7e (16:5c7e)
-	TX_FAR _UnnamedText_59c7e
+.finaltext
+	TX_FAR FanClubChairFinalText
 	db "@"
 
-UnnamedText_59c83: ; 59c83 (16:5c83)
-	TX_FAR _UnnamedText_59c83
+.bagfulltext
+	TX_FAR FanClubBagFullText
 	db "@"
 
 FanClubText6: ; 59c88 (16:5c88)
