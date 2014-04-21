@@ -74360,11 +74360,14 @@ Func_48963: ; 48963 (12:4963)
 	set 3, [hl]
 	ld hl, $d72a
 	set 3, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d77c]
-	or $fc
+	or %11111100
 	ld [$d77c], a
 	ld hl, $d77d
 	set 0, [hl]
+
 	jp Func_48943
 
 CeladonGymTextPointers: ; 489a6 (12:49a6)
@@ -90758,6 +90761,7 @@ Func_5c3df: ; 5c3df (17:43df)
 	set 0, [hl]
 	ld hl, $d72a
 	set 0, [hl]
+
 	ld a, $4
 	ld [$cc4d], a
 	ld a, $11
@@ -90766,11 +90770,15 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld [$cc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+
 	ld hl, $d7eb
 	res 0, [hl]
 	res 7, [hl]
+
+	; deactivate gym trainers
 	ld hl, $d755
 	set 2, [hl]
+
 	jp Func_5c3bf
 
 PewterGymTextPointers: ; 5c435 (17:4435)
@@ -91174,9 +91182,12 @@ Func_5c70d: ; 5c70d (17:470d)
 	set 1, [hl]
 	ld hl, $d72a
 	set 1, [hl]
+
+	; deactivate gym trainers
 	ld hl, $d75e
 	set 2, [hl]
 	set 3, [hl]
+
 	jp Func_5c6ed
 
 CeruleanGymTextPointers: ; 5c74a (17:474a)
@@ -91687,9 +91698,12 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	set 2, [hl]
 	ld hl, $d72a
 	set 2, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d773]
-	or $1c
+	or %00011100
 	ld [$d773], a
+
 	jp VermilionGymScript_5ca8a
 
 VermilionGymTextPointers: ; 5cae8 (17:4ae8)
@@ -92471,11 +92485,14 @@ Func_5d068: ; 5d068 (17:5068)
 	set 5, [hl]
 	ld hl, $d72a
 	set 5, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d7b3]
-	or $fc
+	or %11111100
 	ld [$d7b3], a
 	ld hl, $d7b4
 	set 0, [hl]
+
 	jp Func_5d048
 
 SaffronGymTextPointers: ; 5d0ab (17:50ab)
@@ -104625,12 +104642,15 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	set 7, [hl]
 	ld hl, $d72a
 	set 7, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d751]
-	or $fc
+	or %11111100
 	ld [$d751], a
 	ld a, [$d752]
-	or $3
+	or %00000011
 	ld [$d752], a
+
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $15
@@ -106030,9 +106050,12 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	set 4, [hl]
 	ld hl, $d72a
 	set 4, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d792]
-	or $fc
+	or %11111100
 	ld [$d792], a
+
 	jp Func_75477
 
 FuchsiaGymTextPointers: ; 754d5 (1d:54d5)
@@ -106539,13 +106562,17 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	set 6, [hl]
 	ld hl, $d72a
 	set 6, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d79a]
-	or $fc
+	or %11111100
 	ld [$d79a], a
 	ld hl, $d79b
 	set 0, [hl]
+
 	ld hl, $d126
 	set 5, [hl]
+
 	jp CinnabarGymScript_75792
 
 CinnabarGymTextPointers: ; 7589f (1d:589f)
