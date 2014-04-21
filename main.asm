@@ -1,32 +1,32 @@
 INCLUDE "constants.asm"
 
-; the rst vectors are unused
-SECTION "rst00",ROM0[0]
-	db $FF
-SECTION "rst08",ROM0[8]
-	db $FF
+; The rst vectors are unused.
+SECTION "rst00",ROM0[$00]
+	rst $38
+SECTION "rst08",ROM0[$08]
+	rst $38
 SECTION "rst10",ROM0[$10]
-	db $FF
+	rst $38
 SECTION "rst18",ROM0[$18]
-	db $FF
+	rst $38
 SECTION "rst20",ROM0[$20]
-	db $FF
+	rst $38
 SECTION "rst28",ROM0[$28]
-	db $FF
+	rst $38
 SECTION "rst30",ROM0[$30]
-	db $FF
+	rst $38
 SECTION "rst38",ROM0[$38]
-	db $FF
+	rst $38
 
 ; interrupts
 SECTION "vblank",ROM0[$40]
-	jp VBlankHandler
+	jp VBlank
 SECTION "lcdc",ROM0[$48]
 	db $FF
 SECTION "timer",ROM0[$50]
-	jp TimerHandler
+	jp Timer
 SECTION "serial",ROM0[$58]
-	jp SerialInterruptHandler
+	jp Serial
 SECTION "joypad",ROM0[$60]
 	reti
 
@@ -103,8 +103,8 @@ CopyData:: ; 00b5 (0:00b5)
 	ret
 
 SECTION "romheader",ROM0[$100]
-nop
-jp Start
+	nop
+	jp Start
 
 SECTION "start",ROM0[$150]
 Start:: ; 0150 (0:0150)
@@ -5281,7 +5281,7 @@ StopAllSounds:: ; 200e (0:200e)
 	dec a
 	jp PlaySound
 
-VBlankHandler:: ; 2024 (0:2024)
+VBlank:: ; 2024 (0:2024)
 	push af
 	push bc
 	push de
@@ -5468,7 +5468,7 @@ DecGradGBPalTable_02:: ; 2121 (0:2121)
 	db %00000000
 	db %00000000
 
-SerialInterruptHandler:: ; 2125 (0:2125)
+Serial:: ; 2125 (0:2125)
 	push af
 	push bc
 	push de
@@ -5776,7 +5776,7 @@ Func_22fa:: ; 22fa (0:22fa)
 	ret
 
 ; timer interrupt is apparently not invoked anyway
-TimerHandler:: ; 2306 (0:2306)
+Timer:: ; 2306 (0:2306)
 	reti
 
 Func_2307:: ; 2307 (0:2307)
