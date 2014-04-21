@@ -14314,7 +14314,7 @@ Func_5def: ; 5def (1:5def)
 
 Func_5e2f: ; 5e2f (1:5e2f)
 	push hl
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld b, $1
 	call CountSetBits
 	pop hl
@@ -29038,7 +29038,7 @@ InitializePlayerData: ; f850 (3:7850)
 	inc hl
 	ld [hl], a
 	ld [$cc49], a                 ; XXX what's this?
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld [hli], a                   ; no badges obtained
 	ld [hl], a                    ; XXX what's this?
 	ld hl, wPlayerCoins ; $d5a4
@@ -34315,8 +34315,8 @@ ViridianCityText1: ; 19102 (6:5102)
 
 ViridianCityText2: ; 19107 (6:5107)
 	db $08 ; asm
-	ld a, [$d356]
-	cp $7f
+	ld a, [W_OBTAINEDBADGES]
+	cp %01111111
 	ld hl, UnnamedText_19127
 	jr z, .asm_ae9fe ; 0x19110
 	ld a, [$d751]
@@ -41542,7 +41542,7 @@ Route22GateTextPointers: ; 1e6df (7:66df)
 
 Route22GateText1: ; 1e6e1 (7:66e1)
 	db $8
-	ld a, [$d356]
+	ld a, [W_OBTAINEDBADGES]
 	bit 0, a
 	jr nz, .asm_8a809 ; 0x1e6e7 $d
 	ld hl, UnnamedText_1e704
@@ -60133,20 +60133,21 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	cp [hl]
 	jp z, Func_3ddb0
 .asm_3dcb1
-	ld hl, W_OBTAINEDBADGES ; $d356
+; what level might disobey?
+	ld hl, W_OBTAINEDBADGES
 	bit 7, [hl]
-	ld a, $65
+	ld a, 101
 	jr nz, .asm_3dcce
 	bit 5, [hl]
-	ld a, $46
+	ld a, 70
 	jr nz, .asm_3dcce
 	bit 3, [hl]
-	ld a, $32
+	ld a, 50
 	jr nz, .asm_3dcce
 	bit 1, [hl]
-	ld a, $1e
+	ld a, 30
 	jr nz, .asm_3dcce
-	ld a, $a
+	ld a, 10
 .asm_3dcce
 	ld b, a
 	ld c, a
@@ -62775,10 +62776,10 @@ Func_3ee0c: ; 3ee0c (f:6e0c)
 	ret
 
 Func_3ee19: ; 3ee19 (f:6e19)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE]
 	cp $4
 	ret z
-	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld a, [W_OBTAINEDBADGES]
 	ld b, a
 	ld hl, W_PLAYERMONATK
 	ld c, $4
@@ -74355,7 +74356,7 @@ Func_48963: ; 48963 (12:4963)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_4898c
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 3, [hl]
 	ld hl, $d72a
 	set 3, [hl]
@@ -79250,7 +79251,7 @@ Func_51346: ; 51346 (14:5346)
 	inc a
 	ld c, a
 	ld b, $2
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld a, $10
 	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
@@ -90744,7 +90745,7 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c408
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 0, [hl]
 	ld hl, $d72a
 	set 0, [hl]
@@ -91160,7 +91161,7 @@ Func_5c70d: ; 5c70d (17:470d)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c736
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 1, [hl]
 	ld hl, $d72a
 	set 1, [hl]
@@ -91673,7 +91674,7 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5cad3
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 2, [hl]
 	ld hl, $d72a
 	set 2, [hl]
@@ -92457,7 +92458,7 @@ Func_5d068: ; 5d068 (17:5068)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5d091
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 5, [hl]
 	ld hl, $d72a
 	set 5, [hl]
@@ -104611,7 +104612,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_749be
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 7, [hl]
 	ld hl, $d72a
 	set 7, [hl]
@@ -106016,7 +106017,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_754c0
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 4, [hl]
 	ld hl, $d72a
 	set 4, [hl]
@@ -106525,7 +106526,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld [$ff8c], a
 	call DisplayTextID
 .asm_75880
-	ld hl, $d356
+	ld hl, W_OBTAINEDBADGES
 	set 6, [hl]
 	ld hl, $d72a
 	set 6, [hl]
