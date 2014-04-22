@@ -31865,12 +31865,12 @@ Func_1392c: ; 1392c (4:792c)
 	ld d, a
 	ld a, [W_DAMAGE] ; $d0d7
 	ld b, a
-	ld a, [$d0d8]
+	ld a, [W_DAMAGE + 1]
 	ld c, a
 	srl b
 	rr c
 	ld a, d
-	cp $a5
+	cp STRUGGLE
 	jr z, .asm_13953
 	srl b
 	rr c
@@ -55932,7 +55932,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	sbc [hl]
 	jp z, Func_3ba97
 	ld a, b
-	cp $9c
+	cp REST
 	jr nz, .asm_3ba37
 	push hl
 	push de
@@ -55947,7 +55947,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 .asm_3ba25
 	ld a, [hl]
 	and a
-	ld [hl], $2
+	ld [hl], 2 ; Number of turns from Rest
 	ld hl, UnnamedText_3baa2 ; $7aa2
 	jr z, .asm_3ba31
 	ld hl, UnnamedText_3baa7 ; $7aa7
@@ -59672,7 +59672,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jr c,.next3
 	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
-	and a,$80
+	and a,$80 ; confused
 	ld [hl],a
 	call Func_3daad
 	jr .next5 ; 5952
@@ -59688,7 +59688,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jp Func_3da37
 .ParalysisCheck
 	ld hl,W_PLAYERMONSTATUS
-	bit 6,[hl]
+	bit PAR,[hl]
 	jr z,.next7 ; 5975
 	call GenRandomInBattle ; random number
 	cp a,$3F
@@ -59701,9 +59701,9 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	and a,$CC
 	ld [hl],a
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$2B
+	cp a,FLY_EFFECT
 	jr z,.next8 ; 5966
-	cp a,$27
+	cp a,CHARGE_EFFECT
 	jr z,.next8
 	jr .next9 ; 596F
 .next8
@@ -59759,14 +59759,14 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	xor a
 	ld [hli],a
 	ld [hl],a
-	ld a,$75
+	ld a,BIDE
 	ld [W_PLAYERMOVENUM],a
 	ld hl,asm_3d705 ; $5705
 	jp Func_3da37
 .next10
 	bit 1,[hl]
 	jr z,.next13 ; 59FF
-	ld a,$25
+	ld a,THRASH
 	ld [W_PLAYERMOVENUM],a
 	ld hl,ThrashingAboutText
 	call PrintText
@@ -59801,7 +59801,7 @@ Func_3da1a: ; 3da1a (f:5a1a)
 	ld a, [W_PLAYERBATTSTATUS2] ; $d063
 	bit 6, a
 	jp z, Func_3da39
-	ld a, $63
+	ld a, RAGE
 	ld [$d11e], a
 	call GetMoveName
 	call CopyStringToCF4B
@@ -59967,7 +59967,7 @@ UnnamedText_3dafb: ; 3dafb (f:5afb)
 	ld hl, UnnamedText_3db34 ; $5b34
 	ret nz
 	ld a, [$d11e]
-	cp $3
+	cp DOUBLESLAP
 	ld hl, UnnamedText_3db34 ; $5b34
 	ret c
 	ld hl, UnnamedText_3db2d ; $5b2d
@@ -61344,7 +61344,7 @@ MetronomePickMove: ; 3e348 (f:6348)
 	call GenRandomInBattle ; random number
 	and a
 	jr z,.pickMoveLoop
-	cp a,$a5 ; max normal move number + 1 (this is Struggle's move number)
+	cp a,NUM_MOVES + 1 ; max normal move number + 1 (this is Struggle's move number)
 	jr nc,.pickMoveLoop
 	cp a,METRONOME
 	jr z,.pickMoveLoop
@@ -62294,7 +62294,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld a, $75
+	ld a, BIDE
 	ld [W_ENEMYMOVENUM], a ; $cfcc
 	call Func_3ec81
 	ld hl, asm_3e782 ; $6782
@@ -62302,7 +62302,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 .asm_3ea54
 	bit 1, [hl]
 	jr z, .asm_3ea83
-	ld a, $25
+	ld a, THRASH
 	ld [W_ENEMYMOVENUM], a ; $cfcc
 	ld hl, ThrashingAboutText ; $5a79
 	call PrintText
@@ -62336,7 +62336,7 @@ Func_3ea9b: ; 3ea9b (f:6a9b)
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
 	bit 6, a
 	jp z, Func_3eaba
-	ld a, $63
+	ld a, RAGE
 	ld [$d11e], a
 	call GetMoveName
 	call CopyStringToCF4B
@@ -62978,24 +62978,24 @@ Func_3eed3: ; 3eed3 (f:6ed3)
 	ld de, W_ENEMYBATTSTATUS1 ; $d067
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 .asm_3eeea
-	cp $78
+	cp SELFDESTRUCT
 	jr z, .asm_3eef1
-	cp $99
+	cp EXPLOSION
 	ret nz
 .asm_3eef1
 	ld a, [de]
-	bit 6, a
+	bit 6, a ; fly/dig
 	ret nz
 	ld a, [hli]
-	cp $8
+	cp GHOST
 	ret z
 	ld a, [hl]
-	cp $8
+	cp GHOST
 	ret z
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
 	ret nz
-	ld a, $5
+	ld a, MEGA_PUNCH
 	ld [$cc5b], a
 
 PlayMoveAnimation: ; 3ef07 (f:6f07)
@@ -63851,7 +63851,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld bc, $ccf3
 .asm_3f4e6
 	ld a, [de]
-	cp $6b
+	cp MINIMIZE
 	jr nz, .asm_3f4f9
 	bit 4, [hl]
 	push af
@@ -63864,7 +63864,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 .asm_3f4f9
 	call Func_3fba8
 	ld a, [de]
-	cp $6b
+	cp MINIMIZE
 	jr nz, .asm_3f50e
 	pop bc
 	ld a, $1
@@ -63900,7 +63900,7 @@ UnnamedText_3f528: ; 3f528 (f:7528)
 	jr z, .asm_3f53b
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 .asm_3f53b
-	cp $12
+	cp ATTACK_DOWN1_EFFECT
 	ret nc
 	ld hl, UnnamedText_3f547 ; $7547
 	ret
@@ -64264,7 +64264,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $32
 	call DelayFrames
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	cp $64
+	cp TELEPORT
 	jp nz, Func_3fb5e
 	jp Func_3fb53
 .asm_3f7c1
@@ -64280,7 +64280,7 @@ Func_3f739: ; 3f739 (f:7739)
 	call DelayFrames
 	ld hl, UnnamedText_3fb69 ; $7b69
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	cp $64
+	cp TELEPORT
 	jp nz, PrintText
 	jp Func_3fb4e
 .asm_3f7e4
@@ -64290,10 +64290,10 @@ Func_3f739: ; 3f739 (f:7739)
 	call DelayFrames
 	pop af
 	ld hl, UnnamedText_3f802 ; $7802
-	cp $64
+	cp TELEPORT
 	jr z, .asm_3f7ff
 	ld hl, UnnamedText_3f807 ; $7807
-	cp $2e
+	cp ROAR
 	jr z, .asm_3f7ff
 	ld hl, UnnamedText_3f80c ; $780c
 .asm_3f7ff
@@ -64332,9 +64332,9 @@ Func_3f811: ; 3f811 (f:7811)
 	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3f838
 	ld a, [hl]
-	cp $4d
+	cp TWINEEDLE_EFFECT
 	jr z, .asm_3f856
-	cp $2c
+	cp ATTACK_TWICE_EFFECT
 	ld a, $2
 	jr z, .asm_3f853
 	call GenRandomInBattle
@@ -64422,22 +64422,22 @@ UnnamedText_3f8c8: ; 3f8c8 (f:78c8)
 	TX_FAR _UnnamedText_3f8c8
 	db $08 ; asm
 	ld a, [wWhichTrade] ; $cd3d
-	cp $d
+	cp RAZOR_WIND
 	ld hl, UnnamedText_3f8f9 ; $78f9
 	jr z, .asm_3f8f8
-	cp $4c
+	cp SOLARBEAM
 	ld hl, UnnamedText_3f8fe ; $78fe
 	jr z, .asm_3f8f8
-	cp $82
+	cp SKULL_BASH
 	ld hl, UnnamedText_3f903 ; $7903
 	jr z, .asm_3f8f8
-	cp $8f
+	cp SKY_ATTACK
 	ld hl, UnnamedText_3f908 ; $7908
 	jr z, .asm_3f8f8
-	cp $13
+	cp FLY
 	ld hl, UnnamedText_3f90d ; $790d
 	jr z, .asm_3f8f8
-	cp $5b
+	cp DIG
 	ld hl, UnnamedText_3f912 ; $7912
 .asm_3f8f8
 	ret
@@ -64540,7 +64540,7 @@ Func_3f96f: ; 3f96f (f:796f)
 	inc a
 	ld [bc], a
 	pop af
-	cp $4c
+	cp CONFUSION_SIDE_EFFECT
 	call nz, Func_3fb89
 	ld hl, UnnamedText_3f9a1 ; $79a1
 	jp PrintText
@@ -64550,7 +64550,7 @@ UnnamedText_3f9a1: ; 3f9a1 (f:79a1)
 	db "@"
 
 Func_3f9a6: ; 3f9a6 (f:79a6)
-	cp $4c
+	cp CONFUSION_SIDE_EFFECT
 	ret z
 	ld c, $32
 	call DelayFrames
