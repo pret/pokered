@@ -33232,16 +33232,39 @@ EmotionBubblesOAM: ; 17cb5 (5:7cb5)
 EmotionBubbles: ; 17cbd (5:7cbd)
 	INCBIN "gfx/emotion_bubbles.w16.2bpp"
 
-Func_17d7d: ; 17d7d (5:7d7d)
-	ld a, [wPlayerMonAccuracyMod] ; $cd1e
-	cp $86
-	jr z, .asm_17d8d
-	cp $92
+EvolveTradeMon: ; 17d7d (5:7d7d)
+; Verify the TradeMon's species name before
+; attempting to initiate a trade evolution.
+
+; The names of the trade evolutions in Blue (JP)
+; are checked. In that version, TradeMons that
+; can evolve are Graveler and Haunter.
+
+; In localization, this check was translated
+; before monster names were finalized.
+; Then, Haunter's name was "Spectre".
+; Since its name no longer starts with
+; "SP", it is prevented from evolving.
+
+; This may have been why Red/Green's trades
+; were used instead, where none can evolve.
+
+; This was fixed in Yellow.
+
+	ld a, [wTradeMonNick]
+
+	; GRAVELER
+	cp "G"
+	jr z, .ok
+
+	; "SPECTRE" (HAUNTER)
+	cp "S"
 	ret nz
-	ld a, [wPlayerMonEvasionMod] ; $cd1f
-	cp $8f
+	ld a, [wTradeMonNick + 1]
+	cp "P"
 	ret nz
-.asm_17d8d
+
+.ok
 	ld a, [W_NUMINPARTY] ; $d163
 	dec a
 	ld [wWhichPokemon], a ; $cf92
@@ -101816,8 +101839,8 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld [$cc49],a
 	call AddPokemonToParty
 	call Func_71d19
-	ld hl, Func_17d7d
-	ld b, BANK(Func_17d7d)
+	ld hl, EvolveTradeMon
+	ld b, BANK(EvolveTradeMon)
 	call Bankswitch
 	call ClearScreen
 	call Func_71ca2
