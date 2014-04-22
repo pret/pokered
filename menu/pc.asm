@@ -346,9 +346,7 @@ Func_21673: ; 21673 (8:5673)
 	jp Func_214e8
 
 Func_216b3: ; 216b3 (8:56b3)
-	ld b, BANK(Func_738a1)
-	ld hl, Func_738a1
-	call Bankswitch ; indirect jump to Func_738a1 (738a1 (1c:78a1))
+	callba Func_738a1
 	jp Func_214e8
 
 Func_216be: ; 216be (8:56be)
