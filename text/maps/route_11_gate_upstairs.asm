@@ -12,7 +12,7 @@ _UnnamedText_494a3:: ; 8c689 (23:4689)
 	cont "to look yourself!"
 	done
 
-_UnnamedText_494c4:: ; 8c71b (23:471b)
+_BinocularsSnorlaxText::
 	text "Looked into the"
 	line "binoculars."
 
@@ -20,7 +20,7 @@ _UnnamedText_494c4:: ; 8c71b (23:471b)
 	line "asleep on a road!"
 	done
 
-_UnnamedText_494c9:: ; 8c758 (23:4758)
+_BinocularsNoSnorlaxText::
 	text "Looked into the"
 	line "binoculars."
 

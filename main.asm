@@ -14222,7 +14222,7 @@ Func_5def: ; 5def (1:5def)
 
 Func_5e2f: ; 5e2f (1:5e2f)
 	push hl
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld b, $1
 	call CountSetBits
 	pop hl
@@ -20165,7 +20165,7 @@ Func_cdc0: ; cdc0 (3:4dc0)
 	bit 5, a
 	jr nz, .asm_cdec
 	ld a, [W_CURMAP] ; $d35e
-	cp $a2
+	cp SEAFOAM_ISLANDS_5
 	ret nz
 	ld a, [$d881]
 	and $3
@@ -28897,7 +28897,7 @@ InitializePlayerData: ; f850 (3:7850)
 	inc hl
 	ld [hl], a
 	ld [$cc49], a                 ; XXX what's this?
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld [hli], a                   ; no badges obtained
 	ld [hl], a                    ; XXX what's this?
 	ld hl, wPlayerCoins ; $d5a4
@@ -34161,8 +34161,8 @@ ViridianCityText1: ; 19102 (6:5102)
 
 ViridianCityText2: ; 19107 (6:5107)
 	db $08 ; asm
-	ld a, [$d356]
-	cp $7f
+	ld a, [W_OBTAINEDBADGES]
+	cp %01111111
 	ld hl, UnnamedText_19127
 	jr z, .asm_ae9fe ; 0x19110
 	ld a, [$d751]
@@ -41360,7 +41360,7 @@ Route22GateTextPointers: ; 1e6df (7:66df)
 
 Route22GateText1: ; 1e6e1 (7:66e1)
 	db $8
-	ld a, [$d356]
+	ld a, [W_OBTAINEDBADGES]
 	bit 0, a
 	jr nz, .asm_8a809 ; 0x1e6e7 $d
 	ld hl, UnnamedText_1e704
@@ -59971,20 +59971,21 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	cp [hl]
 	jp z, Func_3ddb0
 .asm_3dcb1
-	ld hl, W_OBTAINEDBADGES ; $d356
+; what level might disobey?
+	ld hl, W_OBTAINEDBADGES
 	bit 7, [hl]
-	ld a, $65
+	ld a, 101
 	jr nz, .asm_3dcce
 	bit 5, [hl]
-	ld a, $46
+	ld a, 70
 	jr nz, .asm_3dcce
 	bit 3, [hl]
-	ld a, $32
+	ld a, 50
 	jr nz, .asm_3dcce
 	bit 1, [hl]
-	ld a, $1e
+	ld a, 30
 	jr nz, .asm_3dcce
-	ld a, $a
+	ld a, 10
 .asm_3dcce
 	ld b, a
 	ld c, a
@@ -62603,10 +62604,10 @@ Func_3ee0c: ; 3ee0c (f:6e0c)
 	ret
 
 Func_3ee19: ; 3ee19 (f:6e19)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE]
 	cp $4
 	ret z
-	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld a, [W_OBTAINEDBADGES]
 	ld b, a
 	ld hl, W_PLAYERMONATK
 	ld c, $4
@@ -74157,15 +74158,18 @@ Func_48963: ; 48963 (12:4963)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_4898c
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 3, [hl]
 	ld hl, $d72a
 	set 3, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d77c]
-	or $fc
+	or %11111100
 	ld [$d77c], a
 	ld hl, $d77d
 	set 0, [hl]
+
 	jp Func_48943
 
 CeladonGymTextPointers: ; 489a6 (12:49a6)
@@ -75616,20 +75620,20 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	cp $4
 	jp nz, Func_55c9
 	ld a, [$d7d8]
-	bit 7, a
-	ld hl, UnnamedText_494c4
-	jr z, .asm_5ac80 ; 0x494b9
-	ld hl, UnnamedText_494c9
-.asm_5ac80 ; 0x494be
+	bit 7, a ; fought snorlax?
+	ld hl, BinocularsSnorlaxText
+	jr z, .print
+	ld hl, BinocularsNoSnorlaxText
+.print
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_494c4: ; 494c4 (12:54c4)
-	TX_FAR _UnnamedText_494c4
+BinocularsSnorlaxText:
+	TX_FAR _BinocularsSnorlaxText
 	db "@"
 
-UnnamedText_494c9: ; 494c9 (12:54c9)
-	TX_FAR _UnnamedText_494c9
+BinocularsNoSnorlaxText:
+	TX_FAR _BinocularsNoSnorlaxText
 	db "@"
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
@@ -79042,7 +79046,7 @@ Func_51346: ; 51346 (14:5346)
 	inc a
 	ld c, a
 	ld b, $2
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	ld a, $10
 	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
 	ld a, c
@@ -80389,117 +80393,118 @@ SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 
 	db $ff
 
-SilphCo7Text1: ; 51d8e (14:5d8e)
+SilphCo7Text1:
+; lapras guy
 	db $08 ; asm
 	ld a, [$d72e]
-	bit 0, a
-	jr z, .asm_d7e17 ; 0x51d94
+	bit 0, a ; got lapras?
+	jr z, .givelapras
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_688b4 ; 0x51d9b
-	ld hl, UnnamedText_51ddd
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .LaprasGuyText
 	call PrintText
-	jr .asm_b3069 ; 0x51da3
-.asm_d7e17 ; 0x51da5
-	ld hl, UnnamedText_51dd3
+	jr .done
+.givelapras
+	ld hl, .MeetLaprasGuyText
 	call PrintText
 	ld bc, (LAPRAS << 8) | 15
 	call GivePokemon
-	jr nc, .asm_b3069 ; 0x51db1
+	jr nc, .done
 	ld a, [$ccd3]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing
-	ld hl, UnnamedText_51dd8
+	ld hl, .HeresYourLaprasText
 	call PrintText
 	ld hl, $d72e
 	set 0, [hl]
-	jr .asm_b3069 ; 0x51dc8
-.asm_688b4 ; 0x51dca
-	ld hl, UnnamedText_51de2
+	jr .done
+.savedsilph
+	ld hl, .LaprasGuySavedText
 	call PrintText
-.asm_b3069 ; 0x51dd0
+.done
 	jp TextScriptEnd
 
-UnnamedText_51dd3: ; 51dd3 (14:5dd3)
-	TX_FAR _UnnamedText_51dd3
+.MeetLaprasGuyText
+	TX_FAR _MeetLaprasGuyText
 	db "@"
 
-UnnamedText_51dd8: ; 51dd8 (14:5dd8)
-	TX_FAR _UnnamedText_51dd8
+.HeresYourLaprasText
+	TX_FAR _HeresYourLaprasText
 	db "@"
 
-UnnamedText_51ddd: ; 51ddd (14:5ddd)
-	TX_FAR _UnnamedText_51ddd
+.LaprasGuyText
+	TX_FAR _LaprasGuyText
 	db "@"
 
-UnnamedText_51de2: ; 51de2 (14:5de2)
-	TX_FAR _UnnamedText_51de2
+.LaprasGuySavedText
+	TX_FAR _LaprasGuySavedText
 	db "@"
 
-SilphCo7Text2: ; 51de7 (14:5de7)
+SilphCo7Text2:
 	db $8
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_892ce ; 0x51ded $8
-	ld hl, UnnamedText_51e00
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .asm_e4d89 ; 0x51df5 $6
-.asm_892ce ; 0x51df7
-	ld hl, UnnamedText_51e05
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.asm_e4d89 ; 0x51dfd
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e00: ; 51e00 (14:5e00)
+.rockettext
 	TX_FAR _UnnamedText_51e00
 	db "@"
 
-UnnamedText_51e05: ; 51e05 (14:5e05)
-	TX_FAR _UnnamedText_51e05
+.savedtext
+	TX_FAR _CanceledMasterBallText
 	db "@"
 
-SilphCo7Text3: ; 51e0a (14:5e0a)
+SilphCo7Text3:
 	db $08 ; asm
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_254aa ; 0x51e10
-	ld hl, UnnamedText_51e23
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .asm_6472b ; 0x51e18
-.asm_254aa ; 0x51e1a
-	ld hl, UnnamedText_51e28
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.asm_6472b ; 0x51e20
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e23: ; 51e23 (14:5e23)
+.rockettext
 	TX_FAR _UnnamedText_51e23
 	db "@"
 
-UnnamedText_51e28: ; 51e28 (14:5e28)
+.savedtext
 	TX_FAR _UnnamedText_51e28
 	db "@"
 
-SilphCo7Text4: ; 51e2d (14:5e2d)
+SilphCo7Text4:
 	db $08 ; asm
 	ld a, [$d838]
-	bit 7, a
-	jr nz, .asm_0f7ee ; 0x51e33
-	ld hl, UnnamedText_51e46
+	bit 7, a ; saved silph?
+	jr nz, .savedsilph
+	ld hl, .rockettext
 	call PrintText
-	jr .selectLowNybble2 ; 0x51e3b
-.asm_0f7ee ; 0x51e3d
-	ld hl, UnnamedText_51e4b
+	jr .done
+.savedsilph
+	ld hl, .savedtext
 	call PrintText
-.selectLowNybble2 ; 0x51e43
+.done
 	jp TextScriptEnd
 
-UnnamedText_51e46: ; 51e46 (14:5e46)
+.rockettext
 	TX_FAR _UnnamedText_51e46
 	db "@"
 
-UnnamedText_51e4b: ; 51e4b (14:5e4b)
+.savedtext
 	TX_FAR _UnnamedText_51e4b
 	db "@"
 
@@ -88785,9 +88790,10 @@ FanClub_h: ; 0x59b64 to 0x59b70 (12 bytes) (id=90)
 FanClubScript: ; 59b70 (16:5b70)
 	jp EnableAutoTextBoxDrawing
 
-Func_59b73: ; 59b73 (16:5b73)
+FanClubBikeInBag:
+; check if any bike paraphernalia in bag
 	ld a, [$d771]
-	bit 1, a
+	bit 1, a ; got bike voucher?
 	ret nz
 	ld b, BICYCLE
 	call IsItemInBag
@@ -88805,142 +88811,150 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 	dw FanClubText7
 	dw FanClubText8
 
-FanClubText1: ; 59b94 (16:5b94)
+FanClubText1:
+; pikachu fan
 	db $08 ; asm
 	ld a, [$d771]
 	bit 7, a
-	jr nz, asm_67b22 ; 0x59b9a
-	ld hl, UnnamedText_59bb7
+	jr nz, .mineisbetter
+	ld hl, .normaltext
 	call PrintText
 	ld hl, $d771
 	set 6, [hl]
-	jr asm_64f01 ; 0x59ba7
-asm_67b22 ; 0x59ba9
-	ld hl, UnnamedText_59bbc
+	jr .done
+.mineisbetter
+	ld hl, .bettertext
 	call PrintText
 	ld hl, $d771
 	res 7, [hl]
-asm_64f01 ; 0x59bb4
+.done
 	jp TextScriptEnd
 
-UnnamedText_59bb7: ; 59bb7 (16:5bb7)
-	TX_FAR _UnnamedText_59bb7
+.normaltext
+	TX_FAR PikachuFanText
 	db "@"
 
-UnnamedText_59bbc: ; 59bbc (16:5bbc)
-	TX_FAR _UnnamedText_59bbc
+.bettertext
+	TX_FAR PikachuFanBetterText
 	db "@"
 
-FanClubText2: ; 59bc1 (16:5bc1)
+FanClubText2:
+; seel fan
 	db $08 ; asm
 	ld a, [$d771]
 	bit 6, a
-	jr nz, asm_5cd59 ; 0x59bc7
-	ld hl, UnnamedText_59be4
+	jr nz, .mineisbetter
+	ld hl, .normaltext
 	call PrintText
 	ld hl, $d771
 	set 7, [hl]
-	jr asm_59625 ; 0x59bd4
-asm_5cd59 ; 0x59bd6
-	ld hl, UnnamedText_59be9
+	jr .done
+.mineisbetter
+	ld hl, .bettertext
 	call PrintText
 	ld hl, $d771
 	res 6, [hl]
-asm_59625 ; 0x59be1
+.done
 	jp TextScriptEnd
 
-UnnamedText_59be4: ; 59be4 (16:5be4)
-	TX_FAR _UnnamedText_59be4
+.normaltext
+	TX_FAR SeelFanText
 	db "@"
 
-UnnamedText_59be9: ; 59be9 (16:5be9)
-	TX_FAR _UnnamedText_59be9
+.bettertext
+	TX_FAR SeelFanBetterText
 	db "@"
 
-FanClubText3: ; 59bee (16:5bee)
+FanClubText3:
+; pikachu
 	db $8
-	ld hl, UnnamedText_59c00
+	ld hl, .text
 	call PrintText
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_59c00: ; 59c00 (16:5c00)
-	TX_FAR _UnnamedText_59c00
+.text
+	TX_FAR FanClubPikachuText
 	db "@"
 
-FanClubText4: ; 59c05 (16:5c05)
+FanClubText4:
+; seel
 	db $08 ; asm
-	ld hl, UnnamedText_59c17
+	ld hl, .text
 	call PrintText
 	ld a, SEEL
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-UnnamedText_59c17: ; 59c17 (16:5c17)
-	TX_FAR _UnnamedText_59c17
+.text
+	TX_FAR FanClubSeelText
 	db "@"
 
-FanClubText5: ; 59c1c (16:5c1c)
+FanClubText5:
+; chair
 	db $08 ; asm
-	call Func_59b73
-	jr nz, asm_38bb3 ; 0x59c20
-	ld hl, UnnamedText_59c65
+	call FanClubBikeInBag
+	jr nz, .nothingleft
+
+	ld hl, .meetchairtext
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
-	jr nz, asm_2c8d7 ; 0x59c2f
-	ld hl, UnnamedText_59c6a
+	jr nz, .nothanks
+
+	; tell the story
+	ld hl, .storytext
 	call PrintText
 	ld bc, (BIKE_VOUCHER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedBikeVoucherText
+	ld hl, .receivedvouchertext
 	call PrintText
 	ld hl, $d771
 	set 1, [hl]
-	jr asm_d3c26 ; 0x59c4a
+	jr .done
 .BagFull
-	ld hl, UnnamedText_59c83
+	ld hl, .bagfulltext
 	call PrintText
-	jr asm_d3c26 ; 0x59c52
-asm_2c8d7 ; 0x59c54
-	ld hl, UnnamedText_59c79
+	jr .done
+.nothanks
+	ld hl, .nostorytext
 	call PrintText
-	jr asm_d3c26 ; 0x59c5a
-asm_38bb3 ; 0x59c5c
-	ld hl, UnnamedText_59c7e
+	jr .done
+.nothingleft
+	ld hl, .finaltext
 	call PrintText
-asm_d3c26 ; 0x59c62
+.done
 	jp TextScriptEnd
 
-UnnamedText_59c65: ; 59c65 (16:5c65)
-	TX_FAR _UnnamedText_59c65
+.meetchairtext
+	TX_FAR FanClubMeetChairText
 	db "@"
 
-UnnamedText_59c6a: ; 59c6a (16:5c6a)
-	TX_FAR _UnnamedText_59c6a
+.storytext
+	TX_FAR FanClubChairStoryText
 	db "@"
 
-ReceivedBikeVoucherText: ; 59c6f (16:5c6f)
-	TX_FAR _ReceivedBikeVoucherText ; 0x9a82e
+.receivedvouchertext
+	TX_FAR ReceivedBikeVoucherText
 	db $11
-	TX_FAR _UnnamedText_59c74 ; 0x9a844
+	TX_FAR ExplainBikeVoucherText
 	db "@"
 
-UnnamedText_59c79: ; 59c79 (16:5c79)
-	TX_FAR _UnnamedText_59c79
+.nostorytext
+	TX_FAR FanClubNoStoryText
 	db "@"
 
-UnnamedText_59c7e: ; 59c7e (16:5c7e)
-	TX_FAR _UnnamedText_59c7e
+.finaltext
+	TX_FAR FanClubChairFinalText
 	db "@"
 
-UnnamedText_59c83: ; 59c83 (16:5c83)
-	TX_FAR _UnnamedText_59c83
+.bagfulltext
+	TX_FAR FanClubBagFullText
 	db "@"
 
 FanClubText6: ; 59c88 (16:5c88)
@@ -90491,10 +90505,11 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c408
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 0, [hl]
 	ld hl, $d72a
 	set 0, [hl]
+
 	ld a, $4
 	ld [$cc4d], a
 	ld a, $11
@@ -90503,11 +90518,15 @@ Func_5c3df: ; 5c3df (17:43df)
 	ld [$cc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+
 	ld hl, $d7eb
 	res 0, [hl]
 	res 7, [hl]
+
+	; deactivate gym trainers
 	ld hl, $d755
 	set 2, [hl]
+
 	jp Func_5c3bf
 
 PewterGymTextPointers: ; 5c435 (17:4435)
@@ -90907,13 +90926,16 @@ Func_5c70d: ; 5c70d (17:470d)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c736
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 1, [hl]
 	ld hl, $d72a
 	set 1, [hl]
+
+	; deactivate gym trainers
 	ld hl, $d75e
 	set 2, [hl]
 	set 3, [hl]
+
 	jp Func_5c6ed
 
 CeruleanGymTextPointers: ; 5c74a (17:474a)
@@ -91420,13 +91442,16 @@ Func_5caaa: ; 5caaa (17:4aaa)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5cad3
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 2, [hl]
 	ld hl, $d72a
 	set 2, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d773]
-	or $1c
+	or %00011100
 	ld [$d773], a
+
 	jp VermilionGymScript_5ca8a
 
 VermilionGymTextPointers: ; 5cae8 (17:4ae8)
@@ -92202,15 +92227,18 @@ Func_5d068: ; 5d068 (17:5068)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5d091
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 5, [hl]
 	ld hl, $d72a
 	set 5, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d7b3]
-	or $fc
+	or %11111100
 	ld [$d7b3], a
 	ld hl, $d7b4
 	set 0, [hl]
+
 	jp Func_5d048
 
 SaffronGymTextPointers: ; 5d0ab (17:50ab)
@@ -104336,16 +104364,19 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_749be
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 7, [hl]
 	ld hl, $d72a
 	set 7, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d751]
-	or $fc
+	or %11111100
 	ld [$d751], a
 	ld a, [$d752]
-	or $3
+	or %00000011
 	ld [$d752], a
+
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $15
@@ -105739,13 +105770,16 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_754c0
-	ld hl, W_OBTAINEDBADGES ; $d356
+	ld hl, W_OBTAINEDBADGES
 	set 4, [hl]
 	ld hl, $d72a
 	set 4, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d792]
-	or $fc
+	or %11111100
 	ld [$d792], a
+
 	jp Func_75477
 
 FuchsiaGymTextPointers: ; 754d5 (1d:54d5)
@@ -106248,17 +106282,21 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld [$ff8c], a
 	call DisplayTextID
 .asm_75880
-	ld hl, $d356
+	ld hl, W_OBTAINEDBADGES
 	set 6, [hl]
 	ld hl, $d72a
 	set 6, [hl]
+
+	; deactivate gym trainers
 	ld a, [$d79a]
-	or $fc
+	or %11111100
 	ld [$d79a], a
 	ld hl, $d79b
 	set 0, [hl]
+
 	ld hl, $d126
 	set 5, [hl]
+
 	jp CinnabarGymScript_75792
 
 CinnabarGymTextPointers: ; 7589f (1d:589f)

@@ -1,4 +1,4 @@
-_UnnamedText_51dd3:: ; 84430 (21:4430)
+_MeetLaprasGuyText::
 	text "Oh! Hi! You're"
 	line "not a ROCKET! You"
 	cont "came to save us?"
@@ -9,7 +9,7 @@ _UnnamedText_51dd3:: ; 84430 (21:4430)
 	cont "for saving us."
 	prompt
 
-_UnnamedText_51dd8:: ; 8449e (21:449e)
+_HeresYourLaprasText::
 	text "It's LAPRAS. It's"
 	line "very intelligent."
 
@@ -27,53 +27,53 @@ _UnnamedText_51dd8:: ; 8449e (21:449e)
 	cont "give you a lift!"
 	done
 
-_UnnamedText_51ddd:: ; 8455a (21:455a)
+_LaprasGuyText::
 	text "TEAM ROCKET's"
 	line "BOSS went to the"
 	cont "boardroom! Is our"
 	cont "PRESIDENT OK?"
 	done
 
-_UnnamedText_51de2:: ; 84599 (21:4599)
+_LaprasGuySavedText::
 	text "Saved at last!"
 	line "Thank you!"
 	done
 
-_UnnamedText_51e00:: ; 845b4 (21:45b4)
+_UnnamedText_51e00::
 	text "TEAM ROCKET was"
 	line "after the MASTER"
 	cont "BALL which will"
 	cont "catch any #MON!"
 	done
 
-_UnnamedText_51e05:: ; 845f6 (21:45f6)
+_CanceledMasterBallText::
 	text "We canceled the"
 	line "MASTER BALL"
 	cont "project because"
 	cont "of TEAM ROCKET."
 	done
 
-_UnnamedText_51e23:: ; 84633 (21:4633)
+_UnnamedText_51e23::
 	text "It would be bad"
 	line "if TEAM ROCKET"
 	cont "took over SILPH"
 	cont "or our #MON!"
 	done
 
-_UnnamedText_51e28:: ; 84670 (21:4670)
+_UnnamedText_51e28::
 	text "Wow! You chased"
 	line "off TEAM ROCKET"
 	cont "all by yourself?"
 	done
 
-_UnnamedText_51e46:: ; 846a2 (21:46a2)
+_UnnamedText_51e46::
 	text "You! It's really"
 	line "dangerous here!"
 	cont "You came to save"
 	cont "me? You can't!"
 	done
 
-_UnnamedText_51e4b:: ; 846e2 (21:46e2)
+_UnnamedText_51e4b::
 	text "Safe at last!"
 	line "Oh thank you!"
 	done
