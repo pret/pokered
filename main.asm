@@ -916,7 +916,7 @@ WarpFound2:: ; 073c (0:073c)
 	jr nz,.indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a,[W_CURMAP]
-	ld [$d365],a ; save current map as previous map
+	ld [wLastMap],a
 	ld a,[W_CURMAPWIDTH]
 	ld [$d366],a
 	ld a,[$ff8b] ; destination map number
@@ -953,7 +953,7 @@ WarpFound2:: ; 073c (0:073c)
 	res 1,[hl]
 	jr .done
 .goBackOutside
-	ld a,[$d365] ; previous map
+	ld a,[wLastMap]
 	ld [W_CURMAP],a
 	call PlayMapChangeSound
 	xor a
@@ -2997,7 +2997,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	and a
 	pop hl
 	jr z, .invalidDexNumber  ; dex #0 invalid
-	cp $98
+	cp 151 + 1
 	jr c, .validDexNumber    ; dex >#151 invalid
 .invalidDexNumber
 	ld a, RHYDON ; $1
@@ -14856,14 +14856,14 @@ Func_62ff: ; 62ff (1:62ff)
 	xor a
 	jr .asm_63b3
 .asm_6346
-	ld a, [$d365]
+	ld a, [wLastMap]
 	ld hl, $d732
 	bit 4, [hl]
 	jr nz, .asm_635b
 	bit 6, [hl]
 	res 6, [hl]
 	jr z, .asm_638e
-	ld a, [$d719]
+	ld a, [wLastBlackoutMap]
 	jr .asm_6391
 .asm_635b
 	ld hl, $d72d
@@ -16525,7 +16525,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .declinedHealing ; if the player chose No
-	call Func_7078
+	call SetLastBlackoutMap
 	call LoadScreenTilesFromBuffer1 ; restore screen
 	ld hl, NeedYourPokemonText
 	call PrintText
@@ -16578,30 +16578,35 @@ PokemonCenterFarewellText: ; 7072 (1:7072)
 	TX_FAR _PokemonCenterFarewellText
 	db "@"
 
-Func_7078: ; 7078 (1:7078)
+SetLastBlackoutMap:
+; Set the map to return to when
+; blacking out or using Teleport or Dig.
+; Safari rest houses don't count.
+
 	push hl
 	ld hl, SafariZoneRestHouses
 	ld a, [W_CURMAP]
 	ld b, a
-.asm_7080
+.loop
 	ld a, [hli]
-	cp $ff
-	jr z, .asm_708a ; 0x7083 $5
+	cp -1
+	jr z, .notresthouse
 	cp b
-	jr nz, .asm_7080 ; 0x7086 $f8
-	jr .asm_7090 ; 0x7088 $6
-.asm_708a
-	ld a, [$d365]
-	ld [$d719], a
-.asm_7090
+	jr nz, .loop
+	jr .done
+
+.notresthouse
+	ld a, [wLastMap]
+	ld [wLastBlackoutMap], a
+.done
 	pop hl
 	ret
 
-SafariZoneRestHouses: ; 7092 (1:7092)
+SafariZoneRestHouses:
 	db SAFARI_ZONE_REST_HOUSE_2
 	db SAFARI_ZONE_REST_HOUSE_3
 	db SAFARI_ZONE_REST_HOUSE_4
-	db $ff ; terminator
+	db -1
 
 ; function that performs initialization for DisplayTextID
 DisplayTextIDInit: ; 7096 (1:7096)
@@ -40389,7 +40394,7 @@ DiglettsCaveRoute2_h: ; 0x1dea4 to 0x1deb0 (12 bytes) (bank=7) (id=46)
 
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
 	ld a, ROUTE_2
-	ld [$d365], a
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 DiglettsCaveRoute2TextPointers: ; 1deb8 (7:5eb8)
@@ -40923,7 +40928,7 @@ UndergroundPathEntranceRoute8_h: ; 0x1e27d to 0x1e289 (12 bytes) (bank=7) (id=80
 
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
 	ld a, ROUTE_8
-	ld [$d365], a
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathEntranceRoute8TextPointers: ; 1e291 (7:6291)
@@ -41179,7 +41184,7 @@ DiglettsCaveEntranceRoute11_h: ; 0x1e5ae to 0x1e5ba (12 bytes) (bank=7) (id=85)
 DiglettsCaveEntranceRoute11Script: ; 1e5ba (7:65ba)
 	call EnableAutoTextBoxDrawing
 	ld a, ROUTE_11
-	ld [$d365], a
+	ld [wLastMap], a
 	ret
 
 DiglettsCaveEntranceRoute11TextPointers: ; 1e5c3 (7:65c3)
@@ -41306,7 +41311,7 @@ Route22GateScript: ; 1e683 (7:6683)
 	jr c, .asm_1e69a ; 0x1e696 $2
 	ld a, ROUTE_22
 .asm_1e69a
-	ld [$d365], a
+	ld [wLastMap], a
 	ret
 
 Route22GateScriptPointers: ; 1e69e (7:669e)
@@ -89869,7 +89874,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	xor a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ld a, PALLET_TOWN
-	ld [$d719], a
+	ld [wLastBlackoutMap], a
 	callba SaveSAVtoSRAM
 	ld b, 5
 .asm_5a4ff
@@ -92895,7 +92900,7 @@ UndergroundTunnelEntranceRoute5_h: ; 0x5d69d to 0x5d6a9 (12 bytes) (id=71)
 
 UndergroundTunnelEntranceRoute5Script: ; 5d6a9 (17:56a9)
 	ld a, ROUTE_5
-	ld [$d365], a
+	ld [wLastMap], a
 	ret
 
 UndergroundTunnelEntranceRoute5_5d6af: ; 5d6af (17:56af)
@@ -92940,7 +92945,7 @@ UndergroundTunnelEntranceRoute6_h: ; 0x5d6e3 to 0x5d6ef (12 bytes) (id=74)
 
 UndergroundTunnelEntranceRoute6Script: ; 5d6ef (17:56ef)
 	ld a, ROUTE_6
-	ld [$d365], a
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 UndergroundTunnelEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)
@@ -92977,7 +92982,7 @@ UndergroundPathEntranceRoute7_h: ; 0x5d720 to 0x5d72c (12 bytes) (id=77)
 
 UndergroundPathEntranceRoute7Script: ; 5d72c (17:572c)
 	ld a, ROUTE_7
-	ld [$d365], a
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathEntranceRoute7TextPointers: ; 5d734 (17:5734)
@@ -93014,7 +93019,7 @@ UndergroundPathEntranceRoute7Copy_h: ; 5d75d (17:575d)
 
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
 	ld a, ROUTE_7
-	ld [$d365], a
+	ld [wLastMap], a
 	ret
 
 UndergroundPathEntranceRoute7CopyTextPointers: ; 5d76f (17:576f)
@@ -95069,7 +95074,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $1
 	ld [$d42f], a
 	ld a, LAVENDER_TOWN
-	ld [$d365], a
+	ld [wLastMap], a
 	ld hl, $d72d
 	set 3, [hl]
 	ld a, $0
@@ -101819,7 +101824,7 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
 .normalDungeonOrBuilding
-	ld a, [$d365] ; town or route that current dungeon or building is located
+	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
 	cp SAFFRON_CITY + 1
 	jr c, .town
