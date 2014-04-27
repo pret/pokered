@@ -11,6 +11,18 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+callba: MACRO
+	ld b, BANK(\1)
+	ld hl, \1
+	call Bankswitch
+	ENDM
+
+callab: MACRO
+	ld hl, \1
+	ld b, BANK(\1)
+	call Bankswitch
+	ENDM
+
 ;\1 = X
 ;\2 = Y
 FuncCoord: MACRO

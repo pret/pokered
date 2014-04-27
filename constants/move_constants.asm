@@ -1,3 +1,5 @@
+NUM_MOVES    EQU $A4
+
 POUND        EQU $01
 KARATE_CHOP  EQU $02
 DOUBLESLAP   EQU $03
@@ -163,6 +165,7 @@ SUPER_FANG   EQU $A2
 SLASH        EQU $A3
 SUBSTITUTE   EQU $A4
 STRUGGLE     EQU $A5
+
 ; these do double duty as animation identifiers
 SHOWPIC_ANIM EQU $A6 ; redraw monster pic
 STATUS_AFFECTED_ANIM EQU $A7 ; effect when monster receives a status aliment
