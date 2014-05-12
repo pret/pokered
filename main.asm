@@ -17782,10 +17782,10 @@ FieldMoveDisplayData: ; 7823 (1:7823)
 	db $ff ; list terminator
 
 
-Func_783f: ; 783f (1:783f)
+DrainHPEffect_: ; 783f (1:783f)
 	ld hl, W_DAMAGE ; $d0d7
 	ld a, [hl]
-	srl a
+	srl a ; divide damage by 2
 	ld [hli], a
 	ld a, [hl]
 	rr a
@@ -17869,25 +17869,25 @@ Func_7861: ; 7861 (1:7861)
 	ld hl, ReadPlayerMonCurHPAndStatus
 	ld b, BANK(ReadPlayerMonCurHPAndStatus)
 	call Bankswitch
-	ld hl, UnnamedText_78dc ; $78dc
+	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
 	jr z, .asm_78d2
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 .asm_78d2
-	cp $8
+	cp DREAM_EATER_EFFECT
 	jr nz, .asm_78d9
-	ld hl, UnnamedText_78e1 ; $78e1
+	ld hl, DreamEatenText ; $78e1
 .asm_78d9
 	jp PrintText
 
-UnnamedText_78dc: ; 78dc (1:78dc)
-	TX_FAR _UnnamedText_78dc
+SuckedHealthText: ; 78dc (1:78dc)
+	TX_FAR _SuckedHealthText
 	db "@"
 
-UnnamedText_78e1: ; 78e1 (1:78e1)
-	TX_FAR _UnnamedText_78e1
+DreamEatenText: ; 78e1 (1:78e1)
+	TX_FAR _DreamEatenText
 	db "@"
 
 Func_78e6: ; 78e6 (1:78e6)
@@ -56224,22 +56224,97 @@ BattleCore:
 
 ; These are move effects (second value from the Moves table in bank $E).
 EffectsArray1: ; 3c000 (f:4000)
-	db $18,$19,$1C,$2E,$2F,$31,$38,$39,$40,$41,$42,$43,$4F,$52,$54,$55,$FF
+	db CONVERSION_EFFECT
+	db HAZE_EFFECT
+	db SWITCH_AND_TELEPORT_EFFECT
+	db MIST_EFFECT
+	db FOCUS_ENERGY_EFFECT
+	db CONFUSION_EFFECT
+	db HEAL_EFFECT
+	db TRANSFORM_EFFECT
+	db LIGHT_SCREEN_EFFECT
+	db REFLECT_EFFECT
+	db POISON_EFFECT
+	db PARALYZE_EFFECT
+	db SUBSTITUTE_EFFECT
+	db MIMIC_EFFECT
+	db LEECH_SEED_EFFECT
+	db SPLASH_EFFECT
+	db $FF
+
 EffectsArray2: ; 3c011 (f:4011)
 ; moves that do damage but not through normal calculations
 ; e.g., Super Fang, Psywave
-	db $28,$29,$FF
+	db SUPER_FANG_EFFECT
+	db SPECIAL_DAMAGE_EFFECT
+	db $FF
+
 EffectsArray3: ; 3c014 (f:4014)
 ; non-damaging, stat‐affecting or status‐causing moves?
 ; e.g., Meditate, Bide, Hypnosis
-	db $01,$0A,$0B,$0C,$0D,$0E,$0F,$12,$13,$14,$15,$16,$17,$1A,$20,$32,$33,$34,$35,$36,$37,$3A,$3B,$3C,$3D,$3E,$3F,$FF
+	db $01 ; unused move effect?
+	db ATTACK_UP1_EFFECT
+	db DEFENSE_UP1_EFFECT
+	db $0C ; unused move effect?
+	db SPECIAL_UP1_EFFECT
+	db $0E ; unused move effect?
+	db EVASION_UP1_EFFECT
+	db ATTACK_DOWN1_EFFECT
+	db DEFENSE_DOWN1_EFFECT
+	db SPEED_DOWN1_EFFECT
+	db $15 ; unused move effect?
+	db ACCURACY_DOWN1_EFFECT
+	db $17 ; unused move effect?
+	db BIDE_EFFECT
+	db SLEEP_EFFECT
+	db ATTACK_UP2_EFFECT
+	db DEFENSE_UP2_EFFECT
+	db SPEED_UP2_EFFECT
+	db SPECIAL_UP2_EFFECT
+	db $36 ; unused move effect?
+	db $37 ; unused move effect?
+	db $3A ; unused move effect?
+	db DEFENSE_DOWN2_EFFECT
+	db $3C ; unused move effect?
+	db $3D ; unused move effect?
+	db $3E ; unused move effect?
+	db $3F ; unused move effect?
+	db $FF
+
 EffectsArray4: ; 3c030 (f:4030)
-	db $03,$07,$08,$10,$1D,$1E,$2C,$30,$4D,$51,$FF
+	db DRAIN_HP_EFFECT
+	db EXPLODE_EFFECT
+	db DREAM_EATER_EFFECT
+	db PAY_DAY_EFFECT
+	db TWO_TO_FIVE_ATTACKS_EFFECT
+	db $1E
+	db ATTACK_TWICE_EFFECT
+	db RECOIL_EFFECT
+	db TWINEEDLE_EFFECT
+	db RAGE_EFFECT
+	db $FF
+
 EffectsArray5: ; 3c03b (f:403b)
-	db $03,$07,$08,$10,$11,$1D,$1E,$27,$28,$29,$2B,$2C,$2D,$30 ; fallthru
+	db DRAIN_HP_EFFECT
+	db EXPLODE_EFFECT
+	db DREAM_EATER_EFFECT
+	db PAY_DAY_EFFECT
+	db SWIFT_EFFECT
+	db TWO_TO_FIVE_ATTACKS_EFFECT
+	db $1E
+	db CHARGE_EFFECT
+	db SUPER_FANG_EFFECT
+	db SPECIAL_DAMAGE_EFFECT
+	db FLY_EFFECT
+	db ATTACK_TWICE_EFFECT
+	db JUMP_KICK_EFFECT
+	db RECOIL_EFFECT 
+	; fallthru to Next EffectsArray
 EffectsArray5B: ; 3c049 (f:4049)
 ; moves that prevent the player from switching moves?
-	db $1B,$2A,$FF
+	db THRASH_PETAL_DANCE_EFFECT
+	db TRAPPING_EFFECT
+	db $FF
 
 Func_3c04c: ; 3c04c (f:404c)
 	call Func_3ec92
@@ -59281,9 +59356,9 @@ Func_3d65e: ; 3d65e (f:565e)
 
 Func_3d69a: ; 3d69a (f:569a)
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
-	cp $27
+	cp CHARGE_EFFECT
 	jp z, Func_3f132
-	cp $2b
+	cp FLY_EFFECT
 	jp z, Func_3f132
 	jr asm_3d6b0
 
@@ -59361,9 +59436,9 @@ asm_3d74b
 	ld c,$1E
 	call DelayFrames
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$2B
+	cp a,FLY_EFFECT
 	jr z,.next5
-	cp a,$27 ; XXX SLP | FRZ ?
+	cp a,CHARGE_EFFECT
 	jr z,.next5
 	jr asm_3d766
 .next5
@@ -59373,7 +59448,7 @@ asm_3d74b
 	call PlayMoveAnimation
 asm_3d766
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,9
+	cp a,MIRROR_MOVE_EFFECT
 	jr nz,.next6 ; 577A
 	call MirrorMoveCopyMove
 	jp z,Func_3d80a
@@ -59381,7 +59456,7 @@ asm_3d766
 	ld [$CCED],a
 	jp Func_3d69a
 .next6
-	cp a,$53
+	cp a,METRONOME_EFFECT
 	jr nz,.next7 ; 5784
 	call MetronomePickMove
 	jp Func_3d69a
@@ -59396,7 +59471,7 @@ asm_3d766
 	jr z,.next8 ; 57A6
 	call Func_3dbe2
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,7
+	cp a,EXPLODE_EFFECT
 	jr z,.next9 ; 57B9
 	jp Func_3d80a
 .next8
@@ -59629,9 +59704,9 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	and a,$CC
 	ld [hl],a
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$2B
+	cp a,FLY_EFFECT
 	jr z,.next8 ; 5966
-	cp a,$27
+	cp a,CHARGE_EFFECT
 	jr z,.next8
 	jr .next9 ; 596F
 .next8
@@ -60012,15 +60087,15 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	jr z, .asm_3dbed
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3dbed
-	ld hl, UnnamedText_3dc57 ; $5c57
+	ld hl, DoesntAffectMonText ; $5c57
 	ld a, [$d05b]
 	and $7f
 	jr z, .asm_3dc04
-	ld hl, UnnamedText_3dc42 ; $5c42
+	ld hl, AttackMissedText ; $5c42
 	ld a, [$d05e]
 	cp $ff
 	jr nz, .asm_3dc04
-	ld hl, UnnamedText_3dc4c ; $5c4c
+	ld hl, UnaffectedText ; $5c4c
 .asm_3dc04
 	push de
 	call PrintText
@@ -60028,8 +60103,10 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	ld [$d05e], a
 	pop de
 	ld a, [de]
-	cp $2d
+	cp JUMP_KICK_EFFECT
 	ret nz
+
+	; if you get here, the mon used hi jump kick and missed
 	ld hl, W_DAMAGE ; $d0d7
 	ld a, [hli]
 	ld b, [hl]
@@ -60047,7 +60124,7 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	inc a
 	ld [hl], a
 .asm_3dc2a
-	ld hl, UnnamedText_3dc47 ; $5c47
+	ld hl, KeptGoingAndCrashedText ; $5c47
 	call PrintText
 	ld b, $4
 	ld a, $24
@@ -60059,24 +60136,24 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 .asm_3dc3f
 	jp ApplyDamageToEnemyPokemon
 
-UnnamedText_3dc42: ; 3dc42 (f:5c42)
-	TX_FAR _UnnamedText_3dc42
+AttackMissedText: ; 3dc42 (f:5c42)
+	TX_FAR _AttackMissedText
 	db "@"
 
-UnnamedText_3dc47: ; 3dc47 (f:5c47)
-	TX_FAR _UnnamedText_3dc47
+KeptGoingAndCrashedText: ; 3dc47 (f:5c47)
+	TX_FAR _KeptGoingAndCrashedText
 	db "@"
 
-UnnamedText_3dc4c: ; 3dc4c (f:5c4c)
-	TX_FAR _UnnamedText_3dc4c
+UnaffectedText: ; 3dc4c (f:5c4c)
+	TX_FAR _UnaffectedText
 	db "@"
 
 Func_3dc51: ; 3dc51 (f:5c51)
-	ld hl, UnnamedText_3dc57 ; $5c57
+	ld hl, DoesntAffectMonText ; $5c57
 	jp PrintText
 
-UnnamedText_3dc57: ; 3dc57 (f:5c57)
-	TX_FAR _UnnamedText_3dc57
+DoesntAffectMonText: ; 3dc57 (f:5c57)
+	TX_FAR _DoesntAffectMonText
 	db "@"
 
 Func_3dc5c: ; 3dc5c (f:5c5c)
@@ -61596,13 +61673,13 @@ MoveHitTest: ; 3e56b (f:656b)
 .playerTurn
 ; this checks if the move effect is disallowed by mist
 	ld a,[W_PLAYERMOVEEFFECT]
-	cp a,$12
+	cp a,ATTACK_DOWN1_EFFECT
 	jr c,.skipEnemyMistCheck
-	cp a,$1a
+	cp a,BIDE_EFFECT
 	jr c,.enemyMistCheck
 	cp a,$3a
 	jr c,.skipEnemyMistCheck
-	cp a,$42
+	cp a,POISON_EFFECT
 	jr c,.enemyMistCheck
 	jr .skipEnemyMistCheck
 .enemyMistCheck
@@ -61614,7 +61691,7 @@ MoveHitTest: ; 3e56b (f:656b)
 ; function is not called when those moves are used
 ; XXX are there are any others like those three?
 	ld a,[W_ENEMYBATTSTATUS2]
-	bit 1,a
+	bit 1,a ; is mon protected by mist?
 	jp nz,.moveMissed
 .skipEnemyMistCheck
 	ld a,[W_PLAYERBATTSTATUS2]
@@ -61623,19 +61700,19 @@ MoveHitTest: ; 3e56b (f:656b)
 	jr .calcHitChance
 .enemyTurn
 	ld a,[W_ENEMYMOVEEFFECT]
-	cp a,$12
+	cp a,ATTACK_DOWN1_EFFECT
 	jr c,.skipPlayerMistCheck
-	cp a,$1a
+	cp a,BIDE_EFFECT
 	jr c,.playerMistCheck
 	cp a,$3a
 	jr c,.skipPlayerMistCheck
-	cp a,$42
+	cp a,POISON_EFFECT
 	jr c,.playerMistCheck
 	jr .skipPlayerMistCheck
 .playerMistCheck
 ; similar to enemy mist check
 	ld a,[W_PLAYERBATTSTATUS2]
-	bit 1,a
+	bit 1,a ; is mon protected by mist?
 	jp nz,.moveMissed
 .skipPlayerMistCheck
 	ld a,[W_ENEMYBATTSTATUS2]
@@ -61813,15 +61890,15 @@ Func_3e6bc: ; 3e6bc (f:66bc)
 
 Func_3e6fc: ; 3e6fc (f:66fc)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $27
+	cp CHARGE_EFFECT
 	jp z, Func_3f132
-	cp $2b
+	cp FLY_EFFECT
 	jp z, Func_3f132
 	jr asm_3e72b
 asm_3e70b: ; 3e70b (f:670b)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	res 4, [hl]
-	res 6, [hl]
+	res 4, [hl] ; no longer charging up for attack
+	res 6, [hl] ; no longer invulnerable to typcial attacks
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 	ld [$d0b5], a
 	ld a, $2c
@@ -61870,7 +61947,7 @@ asm_3e782: ; 3e782 (f:6782)
 	and a
 	jr z, .asm_3e791
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $7
+	cp EXPLODE_EFFECT
 	jr z, asm_3e7a0
 	jr Func_3e7d1
 .asm_3e791
@@ -61889,7 +61966,7 @@ asm_3e7a0: ; 3e7a0 (f:67a0)
 asm_3e7a4: ; 3e7a4 (f:67a4)
 	push af
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
-	bit 4, a
+	bit 4, a ; does mon have a substitute?
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
@@ -61900,10 +61977,10 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	call Func_3eed3
 	call Func_3cdec
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
-	bit 4, a
+	bit 4, a ; does mon have a substitute?
 	ld hl, Func_79771
 	ld b, BANK(Func_79771)
-	call nz, Bankswitch
+	call nz, Bankswitch ; slide the substitute's sprite out
 	jr asm_3e7ef
 
 Func_3e7d1: ; 3e7d1 (f:67d1)
@@ -61911,9 +61988,9 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 	ld c, $1e
 	call DelayFrames
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $2b
+	cp FLY_EFFECT
 	jr z, .asm_3e7e6
-	cp $27
+	cp CHARGE_EFFECT
 	jr z, .asm_3e7e6
 	jr asm_3e7ef
 .asm_3e7e6
@@ -61923,17 +62000,17 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 	call PlayMoveAnimation
 asm_3e7ef: ; 3e7ef (f:67ef)
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $9
-	jr nz, .asm_3e7ff
+	cp MIRROR_MOVE_EFFECT
+	jr nz, .notMirrorMoveEffect
 	call MirrorMoveCopyMove
 	jp z, Func_3e88c
 	jp Func_3e6fc
-.asm_3e7ff
-	cp $53
-	jr nz, .asm_3e809
+.notMirrorMoveEffect
+	cp METRONOME_EFFECT
+	jr nz, .notMetronomeEffect
 	call MetronomePickMove
 	jp Func_3e6fc
-.asm_3e809
+.notMetronomeEffect
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 	ld hl, EffectsArray3 ; $4014
 	ld de, $1
@@ -61944,7 +62021,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	jr z, .asm_3e82b
 	call Func_3dbe2
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $7
+	cp EXPLODE_EFFECT
 	jr z, .asm_3e83e
 	jp Func_3e88c
 .asm_3e82b
@@ -61968,15 +62045,15 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	ret z
 	call HandleBuildingRage
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	bit 2, [hl]
+	bit 2, [hl] ; is mon hitting multiple times? (example: double kick)
 	jr z, .asm_3e873
 	push hl
 	ld hl, $d06f
 	dec [hl]
 	pop hl
 	jp nz, Func_3e794
-	res 2, [hl]
-	ld hl, UnnamedText_3e887 ; $6887
+	res 2, [hl] ; mon is no longer hitting multiple times
+	ld hl, HitXTimesText ; $6887
 	call PrintText
 	xor a
 	ld [$cd05], a
@@ -61990,8 +62067,8 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call nc, Func_3f132
 	jr Func_3e88c
 
-UnnamedText_3e887: ; 3e887 (f:6887)
-	TX_FAR _UnnamedText_3e887
+HitXTimesText: ; 3e887 (f:6887)
+	TX_FAR _HitXTimesText
 	db "@"
 
 Func_3e88c: ; 3e88c (f:688c)
@@ -62165,9 +62242,9 @@ asm_3e9d3: ; 3e9d3 (f:69d3)
 	and $cc
 	ld [hl], a
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
-	cp $2b
+	cp FLY_EFFECT
 	jr z, .asm_3e9e7
-	cp $27
+	cp CHARGE_EFFECT
 	jr z, .asm_3e9e7
 	jr .asm_3e9f0
 .asm_3e9e7
@@ -62180,7 +62257,7 @@ asm_3e9d3: ; 3e9d3 (f:69d3)
 	jp Func_3eab8
 asm_3e9f6: ; 3e9f6 (f:69f6)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	bit 0, [hl]
+	bit 0, [hl] ; is mon using bide?
 	jr z, .asm_3ea54
 	xor a
 	ld [W_ENEMYMOVENUM], a ; $cfcc
@@ -62223,15 +62300,15 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld a, $75
+	ld a, BIDE
 	ld [W_ENEMYMOVENUM], a ; $cfcc
 	call Func_3ec81
 	ld hl, asm_3e782 ; $6782
 	jp Func_3eab8
 .asm_3ea54
-	bit 1, [hl]
+	bit 1, [hl] ; is mon using thrash or petal dance?
 	jr z, .asm_3ea83
-	ld a, $25
+	ld a, THRASH
 	ld [W_ENEMYMOVENUM], a ; $cfcc
 	ld hl, ThrashingAboutText ; $5a79
 	call PrintText
@@ -62241,8 +62318,8 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	jp nz, Func_3eab8
 	push hl
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	res 1, [hl]
-	set 7, [hl]
+	res 1, [hl] ; mon is no longer using thrash or petal dance
+	set 7, [hl] ; mon is now confused
 	call GenRandomInBattle
 	and $3
 	inc a
@@ -62251,7 +62328,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	pop hl
 	jp Func_3eab8
 .asm_3ea83
-	bit 5, [hl]
+	bit 5, [hl] ; is mon using multi-turn move?
 	jp z, Func_3ea9b
 	ld hl, AttackContinuesText ; $5a7e
 	call PrintText
@@ -62263,9 +62340,9 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 
 Func_3ea9b: ; 3ea9b (f:6a9b)
 	ld a, [W_ENEMYBATTSTATUS2] ; $d068
-	bit 6, a
+	bit 6, a ; is mon using rage?
 	jp z, Func_3eaba
-	ld a, $63
+	ld a, RAGE
 	ld [$d11e], a
 	call GetMoveName
 	call CopyStringToCF4B
@@ -63254,14 +63331,14 @@ JumpMoveEffect: ; 3f138 (f:7138)
 	jp [hl]       ;jump to special effect handler
 
 MoveEffectPointerTable: ; 3f150 (f:7150)
-	 dw Func_3f1fc
+	 dw Func_3f1fc ; 
 	 dw Func_3f24f
-	 dw Func_3f2e9
+	 dw DrainHPEffect
 	 dw FreezeBurnParalyzeEffect
 	 dw FreezeBurnParalyzeEffect
 	 dw FreezeBurnParalyzeEffect
-	 dw Func_3f2f1
-	 dw Func_3f2e9
+	 dw ExplodeEffect
+	 dw DrainHPEffect
 	 dw $0000
 	 dw Func_3f428
 	 dw Func_3f428
@@ -63352,8 +63429,8 @@ Func_3f1fc: ; 3f1fc (f:71fc)
 
 Func_3f20e: ; 3f20e (f:720e)
 	ld a, [bc]
-	bit 5, a
-	res 5, a
+	bit 5, a ; does the mon need to recharge? (hyper beam)
+	res 5, a ; mon no longer needs to recharge
 	ld [bc], a
 	jr nz, .asm_3f231
 	ld a, [de]
@@ -63485,12 +63562,12 @@ UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
 	TX_FAR _UnnamedText_3f2e4
 	db "@"
 
-Func_3f2e9: ; 3f2e9 (f:72e9)
-	ld hl, Func_783f
-	ld b, BANK(Func_783f)
+DrainHPEffect: ; 3f2e9 (f:72e9)
+	ld hl, DrainHPEffect_
+	ld b, BANK(DrainHPEffect_)
 	jp Bankswitch
 
-Func_3f2f1: ; 3f2f1 (f:72f1)
+ExplodeEffect: ; 3f2f1 (f:72f1)
 	ld hl, W_PLAYERMONCURHP ; $d015
 	ld de, W_PLAYERBATTSTATUS2 ; $d063
 	ld a, [H_WHOSETURN] ; $fff3
@@ -63500,12 +63577,12 @@ Func_3f2f1: ; 3f2f1 (f:72f1)
 	ld de, W_ENEMYBATTSTATUS2 ; $d068
 .asm_3f302
 	xor a
-	ld [hli], a
+	ld [hli], a ; set the mon's HP to 0
 	ld [hli], a
 	inc hl
-	ld [hl], a
+	ld [hl], a ; set mon's status to 0
 	ld a, [de]
-	res 7, a
+	res 7, a ; clear mon's leech seed status
 	ld [de], a
 	ret
 
@@ -63862,13 +63939,13 @@ Func_3f54c: ; 3f54c (f:754c)
 	call CheckTargetSubstitute
 	jp nz, Func_3f65a
 	ld a, [de]
-	cp $44
+	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .asm_3f58a
 	call GenRandomInBattle
-	cp $55
+	cp SPLASH_EFFECT
 	jp nc, Func_3f650
 	ld a, [de]
-	sub $44
+	sub ATTACK_DOWN_SIDE_EFFECT
 	jr .asm_3f5a9
 .asm_3f58a
 	push hl
@@ -64003,7 +64080,7 @@ Func_3f64d: ; 3f64d (f:764d)
 
 Func_3f650: ; 3f650 (f:7650)
 	ld a, [de]
-	cp $44
+	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
 	ld hl, UnnamedText_3fb3e ; $7b3e
 	jp PrintText

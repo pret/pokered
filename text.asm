@@ -1340,23 +1340,23 @@ _UnnamedText_3db80:: ; 89a73 (22:5a73)
 	text "!"
 	done
 
-_UnnamedText_3dc42:: ; 89a76 (22:5a76)
+_AttackMissedText:: ; 89a76 (22:5a76)
 	text $5a, "'s"
 	line "attack missed!"
 	prompt
 
-_UnnamedText_3dc47:: ; 89a89 (22:5a89)
+_KeptGoingAndCrashedText:: ; 89a89 (22:5a89)
 	text $5a
 	line "kept going and"
 	cont "crashed!"
 	prompt
 
-_UnnamedText_3dc4c:: ; 89aa4 (22:5aa4)
+_UnaffectedText:: ; 89aa4 (22:5aa4)
 	text $59, "'s"
 	line "unaffected!"
 	prompt
 
-_UnnamedText_3dc57:: ; 89ab4 (22:5ab4)
+_DoesntAffectMonText:: ; 89ab4 (22:5ab4)
 	text "It doesn't affect"
 	line $59, "!"
 	prompt
@@ -1420,7 +1420,7 @@ _MirrorMoveFailedText:: ; 89b96 (22:5b96)
 	next "failed!"
 	prompt
 
-_UnnamedText_3e887:: ; 89baf (22:5baf)
+_HitXTimesText:: ; 89baf (22:5baf)
 	text "Hit @"
 	TX_NUM $cd05, 1, 1
 	text " times!"
@@ -2317,12 +2317,12 @@ _UnnamedText_33f52:: ; 94abf (25:4abf)
 	line "shrouded in mist!"
 	prompt
 
-_UnnamedText_78dc:: ; 94ad5 (25:4ad5)
+_SuckedHealthText:: ; 94ad5 (25:4ad5)
 	text "Sucked health from"
 	line $59, "!"
 	prompt
 
-_UnnamedText_78e1:: ; 94aec (25:4aec)
+_DreamEatenText:: ; 94aec (25:4aec)
 	text $59, "'s"
 	line "dream was eaten!"
 	prompt
