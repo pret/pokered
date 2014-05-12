@@ -2207,7 +2207,7 @@ _UnnamedText_3fb49:: ; 948c9 (25:48c9)
 	text "No effect!"
 	prompt
 
-_UnnamedText_3fb59:: ; 948d5 (25:48d5)
+_ButItFailedText:: ; 948d5 (25:48d5)
 	text "But, it failed! "
 	prompt
 
@@ -2301,13 +2301,13 @@ _UnnamedText_3bb92:: ; 94a6c (25:4a6c)
 	text "!"
 	prompt
 
-_UnnamedText_3bbd7:: ; 94a87 (25:4a87)
+_LightScreenProtectedText:: ; 94a87 (25:4a87)
 	text $5a, "'s"
 	line "protected against"
 	cont "special attacks!"
 	prompt
 
-_UnnamedText_3bbdc:: ; 94aae (25:4aae)
+_ReflectGainedArmorText:: ; 94aae (25:4aae)
 	text $5a
 	line "gained armor!"
 	prompt

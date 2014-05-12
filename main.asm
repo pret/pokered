@@ -31940,7 +31940,7 @@ Func_139a3: ; 139a3 (4:79a3)
 
 .asm_139b8
 	bit 6, a
-	jr nz, Func_139d2
+	jr nz, PrintButItFailedText
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -31955,10 +31955,10 @@ UnnamedText_139cd: ; 139cd (4:79cd)
 	TX_FAR _UnnamedText_139cd
 	db "@"
 
-Func_139d2: ; 139d2 (4:79d2)
-	ld hl, Func_3fb53
+PrintButItFailedText: ; 139d2 (4:79d2)
+	ld hl, PrintButItFailedText_
 Func_139d5: ; 139d5 (4:79d5)
-	ld b, BANK(Func_3fb53)
+	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
 Func_139da: ; 139da (4:79da)
@@ -42695,8 +42695,8 @@ Func_27f86: ; 27f86 (9:7f86)
 .asm_27fa5
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53
-	ld b, BANK(Func_3fb53)
+	ld hl, PrintButItFailedText_
+	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
 UnnamedText_27fb3: ; 27fb3 (9:7fb3)
@@ -43377,8 +43377,8 @@ Func_33f2b: ; 33f2b (c:7f2b)
 	ld hl, UnnamedText_33f52
 	jp PrintText
 .asm_33f4a
-	ld hl, Func_3fb53
-	ld b, BANK(Func_3fb53)
+	ld hl, PrintButItFailedText_
+	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
 UnnamedText_33f52: ; 33f52 (c:7f52)
@@ -56018,7 +56018,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 Func_3ba97: ; 3ba97 (e:7a97)
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53
+	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
 
 UnnamedText_3baa2: ; 3baa2 (e:7aa2)
@@ -56165,14 +56165,14 @@ Func_3bb7d: ; 3bb7d (e:7b7d)
 	jp CopyData
 
 Func_3bb8c: ; 3bb8c (e:7b8c)
-	ld hl, Func_3fb53 ; $7b53
+	ld hl, PrintButItFailedText_ ; $7b53
 	jp BankswitchEtoF
 
 UnnamedText_3bb92: ; 3bb92 (e:7b92)
 	TX_FAR _UnnamedText_3bb92
 	db "@"
 
-Func_3bb97: ; 3bb97 (e:7b97)
+ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
 	ld hl, W_PLAYERBATTSTATUS3 ; $d064
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
@@ -56182,36 +56182,36 @@ Func_3bb97: ; 3bb97 (e:7b97)
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3bba8
 	ld a, [de]
-	cp $40
-	jr nz, .asm_3bbb8
-	bit 1, [hl]
-	jr nz, .asm_3bbcc
-	set 1, [hl]
-	ld hl, UnnamedText_3bbd7 ; $7bd7
+	cp LIGHT_SCREEN_EFFECT
+	jr nz, .reflect
+	bit 1, [hl] ; is mon already protected by light screen?
+	jr nz, .moveFailed
+	set 1, [hl] ; mon is now protected by light screen
+	ld hl, LightScreenProtectedText ; $7bd7
 	jr .asm_3bbc1
-.asm_3bbb8
-	bit 2, [hl]
-	jr nz, .asm_3bbcc
-	set 2, [hl]
-	ld hl, UnnamedText_3bbdc ; $7bdc
+.reflect
+	bit 2, [hl] ; is mon already protected by reflect?
+	jr nz, .moveFailed
+	set 2, [hl] ; mon is now protected by reflect
+	ld hl, ReflectGainedArmorText ; $7bdc
 .asm_3bbc1
 	push hl
 	ld hl, Func_3fba8 ; $7ba8
 	call BankswitchEtoF
 	pop hl
 	jp PrintText
-.asm_3bbcc
+.moveFailed
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53 ; $7b53
+	ld hl, PrintButItFailedText_ ; $7b53
 	jp BankswitchEtoF
 
-UnnamedText_3bbd7: ; 3bbd7 (e:7bd7)
-	TX_FAR _UnnamedText_3bbd7
+LightScreenProtectedText: ; 3bbd7 (e:7bd7)
+	TX_FAR _LightScreenProtectedText
 	db "@"
 
-UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
-	TX_FAR _UnnamedText_3bbdc
+ReflectGainedArmorText: ; 3bbdc (e:7bdc)
+	TX_FAR _ReflectGainedArmorText
 	db "@"
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
@@ -63317,8 +63317,8 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw Func_3f54c
 	 dw Func_3f54c
 	 dw Func_3f54c
-	 dw Func_3fb36
-	 dw Func_3fb36
+	 dw ReflectLightScreenEffect
+	 dw ReflectLightScreenEffect
 	 dw Func_3f24f
 	 dw Func_3f9b1
 	 dw Func_3f54c
@@ -64153,7 +64153,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	cp $64
 	jp nz, Func_3fb5e
-	jp Func_3fb53
+	jp PrintButItFailedText_
 .asm_3f76e
 	call ReadPlayerMonCurHPAndStatus
 	xor a
@@ -64169,7 +64169,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	cp $64
 	jp nz, PrintText
-	jp Func_3fb53
+	jp PrintButItFailedText_
 .asm_3f791
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
@@ -64195,7 +64195,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 	cp $64
 	jp nz, Func_3fb5e
-	jp Func_3fb53
+	jp PrintButItFailedText_
 .asm_3f7c1
 	call ReadPlayerMonCurHPAndStatus
 	xor a
@@ -64597,7 +64597,7 @@ Func_3f9ed: ; 3f9ed (f:79ed)
 	ld hl, UnnamedText_3fa77
 	jp PrintText
 .asm_3fa74
-	jp Func_3fb53
+	jp PrintButItFailedText_
 
 UnnamedText_3fa77: ; 3fa77 (f:7a77)
 	TX_FAR _UnnamedText_3fa77
@@ -64690,7 +64690,7 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 .asm_3fb05
 	pop hl
 .asm_3fb06
-	jp Func_3fb53
+	jp PrintButItFailedText_
 
 UnnamedText_3fb09: ; 3fb09 (f:7b09)
 	TX_FAR _UnnamedText_3fb09
@@ -64721,9 +64721,9 @@ Func_3fb2e: ; 3fb2e (f:7b2e)
 	ld b, BANK(Func_3bab1)
 	jp Bankswitch
 
-Func_3fb36: ; 3fb36 (f:7b36)
-	ld hl, Func_3bb97
-	ld b, BANK(Func_3bb97)
+ReflectLightScreenEffect: ; 3fb36 (f:7b36)
+	ld hl, ReflectLightScreenEffect_
+	ld b, BANK(ReflectLightScreenEffect_)
 	jp Bankswitch
 
 UnnamedText_3fb3e: ; 3fb3e (f:7b3e)
@@ -64743,12 +64743,12 @@ Func_3fb4e: ; 3fb4e (f:7b4e)
 	and a
 	ret nz
 
-Func_3fb53: ; 3fb53 (f:7b53)
-	ld hl, UnnamedText_3fb59 ; $7b59
+PrintButItFailedText_: ; 3fb53 (f:7b53)
+	ld hl, ButItFailedText ; $7b59
 	jp PrintText
 
-UnnamedText_3fb59: ; 3fb59 (f:7b59)
-	TX_FAR _UnnamedText_3fb59
+ButItFailedText: ; 3fb59 (f:7b59)
+	TX_FAR _ButItFailedText
 	db "@"
 
 Func_3fb5e: ; 3fb5e (f:7b5e)
