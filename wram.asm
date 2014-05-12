@@ -964,7 +964,12 @@ W_YBLOCKCOORD:: ; d363
 	ds 1
 
 W_XBLOCKCOORD:: ; d364
-	ds 3
+	ds 1
+
+wLastMap:: ; d365
+	ds 1
+
+	ds 1
 
 W_CURMAPTILESET:: ; d367
 	ds 1
@@ -1323,7 +1328,12 @@ W_RIVALSTARTER:: ; d715
 W_PLAYERSTARTER:: ; d717
 	ds 1
 
-	ds 27
+	ds 1
+
+wLastBlackoutMap:: ; d719
+	ds 1
+
+	ds 25
 
 
 W_FLAGS_D733:: ; d733
