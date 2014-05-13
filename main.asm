@@ -25776,7 +25776,7 @@ ItemUseXStat: ; e104 (3:6104)
 	call Delay3
 	xor a
 	ld [H_WHOSETURN],a ; set turn to player's turn
-	callba Func_3f428 ; do stat increase move
+	callba StatModifierUpEffect ; do stat increase move
 	pop hl
 	pop af
 	ld [hld],a ; restore [W_PLAYERMOVEEFFECT]
@@ -31688,7 +31688,7 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 	db $FC, $10 ; 11/256 =  4.3% chance of slot 8
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
-Func_1392c: ; 1392c (4:792c)
+RecoilEffect_: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
@@ -31754,13 +31754,13 @@ Func_1392c: ; 1392c (4:792c)
 	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
-	ld hl, UnnamedText_1399e ; $799e
+	ld hl, HitWithRecoilText ; $799e
 	jp PrintText
-UnnamedText_1399e: ; 1399e (4:799e)
-	TX_FAR _UnnamedText_1399e
+HitWithRecoilText: ; 1399e (4:799e)
+	TX_FAR _HitWithRecoilText
 	db "@"
 
-Func_139a3: ; 139a3 (4:79a3)
+ConversionEffect_: ; 139a3 (4:79a3)
 	ld hl, W_ENEMYMONTYPE1
 	ld de, W_PLAYERMONTYPE1
 	ld a, [H_WHOSETURN]
@@ -31772,9 +31772,8 @@ Func_139a3: ; 139a3 (4:79a3)
 	ld l, e
 	pop de
 	ld a, [W_PLAYERBATTSTATUS1]
-
 .asm_139b8
-	bit 6, a
+	bit 6, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText
 	ld a, [hli]
 	ld [de], a
@@ -31783,11 +31782,11 @@ Func_139a3: ; 139a3 (4:79a3)
 	ld [de], a
 	ld hl, Func_3fba8
 	call Func_139d5
-	ld hl, UnnamedText_139cd
+	ld hl, ConvertedTypeText
 	jp PrintText
 
-UnnamedText_139cd: ; 139cd (4:79cd)
-	TX_FAR _UnnamedText_139cd
+ConvertedTypeText: ; 139cd (4:79cd)
+	TX_FAR _ConvertedTypeText
 	db "@"
 
 PrintButItFailedText: ; 139d2 (4:79d2)
@@ -31796,7 +31795,7 @@ Func_139d5: ; 139d5 (4:79d5)
 	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
-Func_139da: ; 139da (4:79da)
+HazeEffect_: ; 139da (4:79da)
 	ld a, $7
 	ld hl, wPlayerMonAttackMod
 	call Func_13a43
@@ -31837,7 +31836,7 @@ Func_139da: ; 139da (4:79da)
 	call Func_13a37
 	ld hl, Func_3fba8
 	call Func_139d5
-	ld hl, UnnamedText_13a53
+	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
 Func_13a37: ; 13a37 (4:7a37)
@@ -31869,8 +31868,8 @@ Func_13a4a: ; 13a4a (4:7a4a)
 	jr nz, .loop
 	ret
 
-UnnamedText_13a53: ; 13a53 (4:7a53)
-	TX_FAR _UnnamedText_13a53
+StatusChangesEliminatedText: ; 13a53 (4:7a53)
+	TX_FAR _StatusChangesEliminatedText
 	db "@"
 
 Func_13a58: ; 13a58 (4:7a58)
@@ -42495,18 +42494,18 @@ CooltrainerMName: ; 27f6c (9:7f6c)
 CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
 
-Func_27f86: ; 27f86 (9:7f86)
+FocusEnergyEffect_: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_27f91
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
 .asm_27f91
-	bit 2, [hl]
+	bit 2, [hl] ; is mon already using focus energy?
 	jr nz, .asm_27fa5
-	set 2, [hl]
+	set 2, [hl] ; mon is now using focus energy
 	callab Func_3fba8
-	ld hl, UnnamedText_27fb3 ; $7fb2
+	ld hl, GettingPumpedText ; $7fb2
 	jp PrintText
 .asm_27fa5
 	ld c, $32
@@ -42515,9 +42514,9 @@ Func_27f86: ; 27f86 (9:7f86)
 	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
-UnnamedText_27fb3: ; 27fb3 (9:7fb3)
+GettingPumpedText: ; 27fb3 (9:7fb3)
 	db $0a
-	TX_FAR _UnnamedText_27fb3
+	TX_FAR _GettingPumpedText
 	db "@"
 
 SECTION "bankA",ROMX,BANK[$A]
@@ -42650,7 +42649,7 @@ MoltresPicFront: ; 2bbac (a:7bac)
 MoltresPicBack: ; 2be02 (a:7e02)
 	INCBIN "pic/monback/moltresb.pic"
 
-Func_2bea9: ; 2bea9 (a:7ea9)
+LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	callab MoveHitTest
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
@@ -42674,20 +42673,20 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 	jr nz, .asm_2bee7
 	set 7, [hl]
 	callab Func_3fba8
-	ld hl, UnnamedText_2bef2 ; $7ef2
+	ld hl, WasSeededText ; $7ef2
 	jp PrintText
 .asm_2bee7
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_2bef7 ; $7ef7
+	ld hl, EvadedAttackText ; $7ef7
 	jp PrintText
 
-UnnamedText_2bef2: ; 2bef2 (a:7ef2)
-	TX_FAR _UnnamedText_2bef2
+WasSeededText: ; 2bef2 (a:7ef2)
+	TX_FAR _WasSeededText
 	db "@"
 
-UnnamedText_2bef7: ; 2bef7 (a:7ef7)
-	TX_FAR _UnnamedText_2bef7
+EvadedAttackText: ; 2bef7 (a:7ef7)
+	TX_FAR _EvadedAttackText
 	db "@"
 
 SECTION "bankB",ROMX,BANK[$B]
@@ -42973,7 +42972,7 @@ DuplicateBitsTable: ; 2fea8 (b:7ea8)
 	db $c0, $c3, $cc, $cf
 	db $f0, $f3, $fc, $ff
 
-Func_2feb8 ; 2feb8 (b:7eb8)
+PayDayEffect_ ; 2feb8 (b:7eb8)
 	xor a
 	ld hl, $cd6d
 	ld [hli], a
@@ -43011,11 +43010,11 @@ Func_2feb8 ; 2feb8 (b:7eb8)
 	ld c, $3
 	ld a, $b
 	call Predef
-	ld hl, UnnamedText_2ff04 ; $7f04
+	ld hl, CoinsScatteredText ; $7f04
 	jp PrintText
 
-UnnamedText_2ff04: ; 2ff04 (b:7f04)
-	TX_FAR _UnnamedText_2ff04
+CoinsScatteredText: ; 2ff04 (b:7f04)
+	TX_FAR _CoinsScatteredText
 	db "@"
 
 Func_2ff09 ; 2ff09 (b:7f09)
@@ -43173,33 +43172,33 @@ RedPicBack: ; 33e0a (c:7e0a)
 OldManPic: ; 33e9a (c:7e9a)
 	INCBIN "pic/trainer/oldman.pic"
 
-Func_33f2b: ; 33f2b (c:7f2b)
-	ld hl, $d063
+MistEffect_: ; 33f2b (c:7f2b)
+	ld hl, W_PLAYERBATTSTATUS2
 	ld a, [$fff3]
 	and a
 	jr z, .asm_33f36
-	ld hl, $d068
+	ld hl, W_ENEMYBATTSTATUS2
 .asm_33f36
-	bit 1, [hl]
+	bit 1, [hl] ; is mon protected by mist?
 	jr nz, .asm_33f4a
-	set 1, [hl]
+	set 1, [hl] ; mon is now protected by mist
 	callab Func_3fba8
-	ld hl, UnnamedText_33f52
+	ld hl, ShroudedInMistText
 	jp PrintText
 .asm_33f4a
 	ld hl, PrintButItFailedText_
 	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
-UnnamedText_33f52: ; 33f52 (c:7f52)
-	TX_FAR _UnnamedText_33f52
+ShroudedInMistText: ; 33f52 (c:7f52)
+	TX_FAR _ShroudedInMistText
 	db "@"
 
-Func_33f57: ; 33f57 (c:7f57)
+OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld hl, W_DAMAGE ; $d0d7
 	xor a
 	ld [hli], a
-	ld [hl], a
+	ld [hl], a ; set the damage output to zero
 	dec a
 	ld [$d05e], a
 	ld hl, $d02a
@@ -52813,7 +52812,7 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	ld a,$AF
 	ld [hli],a
 	ld [hl],b
-	callab Func_3f428
+	callab StatModifierUpEffect
 	pop hl
 	pop af
 	ld [hli],a
@@ -55708,7 +55707,7 @@ Mon071_EvosMoves: ; 3b9e4 (e:79e4)
 	db 18,SLEEP_POWDER
 	db 0
 
-Func_3b9ec: ; 3b9ec (e:79ec)
+HealEffect_: ; 3b9ec (e:79ec)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld de, W_PLAYERMONCURHP ; $d015
@@ -55744,9 +55743,9 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld a, [hl]
 	and a
 	ld [hl], 2 ; Number of turns from Rest
-	ld hl, UnnamedText_3baa2 ; $7aa2
+	ld hl, StartedSleepingEffect ; $7aa2
 	jr z, .asm_3ba31
-	ld hl, UnnamedText_3baa7 ; $7aa7
+	ld hl, FellAsleepBecameHealthyText ; $7aa7
 .asm_3ba31
 	call PrintText
 	pop af
@@ -55808,7 +55807,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, Func_3cd5a ; $4d5a
 	call BankswitchEtoF
-	ld hl, UnnamedText_3baac ; $7aac
+	ld hl, RegainedHealthText ; $7aac
 	jp PrintText
 
 Func_3ba97: ; 3ba97 (e:7a97)
@@ -55817,19 +55816,19 @@ Func_3ba97: ; 3ba97 (e:7a97)
 	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
 
-UnnamedText_3baa2: ; 3baa2 (e:7aa2)
-	TX_FAR _UnnamedText_3baa2
+StartedSleepingEffect: ; 3baa2 (e:7aa2)
+	TX_FAR _StartedSleepingEffect
 	db "@"
 
-UnnamedText_3baa7: ; 3baa7 (e:7aa7)
-	TX_FAR _UnnamedText_3baa7
+FellAsleepBecameHealthyText: ; 3baa7 (e:7aa7)
+	TX_FAR _FellAsleepBecameHealthyText
 	db "@"
 
-UnnamedText_3baac: ; 3baac (e:7aac)
-	TX_FAR _UnnamedText_3baac
+RegainedHealthText: ; 3baac (e:7aac)
+	TX_FAR _RegainedHealthText
 	db "@"
 
-Func_3bab1: ; 3bab1 (e:7ab1)
+TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, W_PLAYERMONID
 	ld de, $cfe5
 	ld bc, W_ENEMYBATTSTATUS3 ; $d069
@@ -55843,7 +55842,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld [wPlayerMoveListIndex], a ; $cc2e
 	ld a, [W_PLAYERBATTSTATUS1] ; $d062
 .asm_3bad1
-	bit 6, a
+	bit 6, a ; is mon invulnerable to typical attacks? (fly/dig)
 	jp nz, Func_3bb8c
 	push hl
 	push de
@@ -55945,7 +55944,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, wPlayerMonStatMods ; $cd1a
 	call Func_3bb7d
-	ld hl, UnnamedText_3bb92 ; $7b92
+	ld hl, TransformedText ; $7b92
 	jp PrintText
 
 Func_3bb7d: ; 3bb7d (e:7b7d)
@@ -55964,8 +55963,8 @@ Func_3bb8c: ; 3bb8c (e:7b8c)
 	ld hl, PrintButItFailedText_ ; $7b53
 	jp BankswitchEtoF
 
-UnnamedText_3bb92: ; 3bb92 (e:7b92)
-	TX_FAR _UnnamedText_3bb92
+TransformedText: ; 3bb92 (e:7b92)
+	TX_FAR _TransformedText
 	db "@"
 
 ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
@@ -61028,7 +61027,7 @@ HandleBuildingRage: ; 3e2b6 (f:62b6)
 	push hl
 	ld hl,BuildingRageText
 	call PrintText
-	call Func_3f428 ; stat modifier raising function
+	call StatModifierUpEffect ; stat modifier raising function
 	pop hl
 	xor a
 	ldd [hl],a ; null move effect
@@ -63076,94 +63075,94 @@ JumpMoveEffect: ; 3f138 (f:7138)
 	jp [hl]       ;jump to special effect handler
 
 MoveEffectPointerTable: ; 3f150 (f:7150)
-	 dw Func_3f1fc ; 
-	 dw Func_3f24f
-	 dw DrainHPEffect
-	 dw FreezeBurnParalyzeEffect
-	 dw FreezeBurnParalyzeEffect
-	 dw FreezeBurnParalyzeEffect
-	 dw ExplodeEffect
-	 dw DrainHPEffect
-	 dw $0000
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3fb0e
-	 dw $0000
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3fb16
-	 dw Func_3fb1e
-	 dw Func_3f6e5
-	 dw Func_3f717
-	 dw Func_3f739
-	 dw Func_3f811
-	 dw Func_3f811
-	 dw Func_3f85b
-	 dw Func_3f1fc
-	 dw Func_3f24f
-	 dw FreezeBurnParalyzeEffect
-	 dw FreezeBurnParalyzeEffect
-	 dw FreezeBurnParalyzeEffect
-	 dw Func_3f85b
-	 dw Func_3f884
-	 dw Func_3f88c
-	 dw $0000
-	 dw $0000
-	 dw Func_3f917
-	 dw Func_3f88c
-	 dw Func_3f811
-	 dw $0000
-	 dw Func_3f941
-	 dw Func_3f949
-	 dw Func_3f951
-	 dw Func_3f961
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3f428
-	 dw Func_3fb26
-	 dw Func_3fb2e
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw ReflectLightScreenEffect
-	 dw ReflectLightScreenEffect
-	 dw Func_3f24f
-	 dw Func_3f9b1
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f54c
-	 dw Func_3f959
-	 dw Func_3f811
-	 dw $0000
-	 dw Func_3f9b9
-	 dw Func_3f9c1
-	 dw Func_3f9df
-	 dw Func_3f9ed
-	 dw $0000
-	 dw Func_3fa7c
-	 dw Func_3fa84
-	 dw Func_3fa8a
+	 dw SleepEffect               ; unused effect
+	 dw PoisonEffect              ; POISON_SIDE_EFFECT1
+	 dw DrainHPEffect             ; DRAIN_HP_EFFECT
+	 dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT1
+	 dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT
+	 dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT1
+	 dw ExplodeEffect             ; EXPLODE_EFFECT
+	 dw DrainHPEffect             ; DREAM_EATER_EFFECT
+	 dw $0000                     ; MIRROR_MOVE_EFFECT
+	 dw StatModifierUpEffect      ; ATTACK_UP1_EFFECT
+	 dw StatModifierUpEffect      ; DEFENSE_UP1_EFFECT
+	 dw StatModifierUpEffect      ; SPEED_UP1_EFFECT
+	 dw StatModifierUpEffect      ; SPECIAL_UP1_EFFECT
+	 dw StatModifierUpEffect      ; ACCURACY_UP1_EFFECT
+	 dw StatModifierUpEffect      ; EVASION_UP1_EFFECT
+	 dw PayDayEffect              ; PAY_DAY_EFFECT
+	 dw $0000                     ; SWIFT_EFFECT
+	 dw StatModifierDownEffect    ; ATTACK_DOWN1_EFFECT
+	 dw StatModifierDownEffect    ; DEFENSE_DOWN1_EFFECT
+	 dw StatModifierDownEffect    ; SPEED_DOWN1_EFFECT
+	 dw StatModifierDownEffect    ; SPECIAL_DOWN1_EFFECT
+	 dw StatModifierDownEffect    ; ACCURACY_DOWN1_EFFECT
+	 dw StatModifierDownEffect    ; EVASION_DOWN1_EFFECT
+	 dw ConversionEffect          ; CONVERSION_EFFECT
+	 dw HazeEffect                ; HAZE_EFFECT
+	 dw BideEffect                ; BIDE_EFFECT
+	 dw ThrashPetalDanceEffect    ; THRASH_PETAL_DANCE_EFFECT
+	 dw SwitchAndTeleportEffect   ; SWITCH_AND_TELEPORT_EFFECT
+	 dw TwoToFiveAttacksEffect    ; TWO_TO_FIVE_ATTACKS_EFFECT
+	 dw TwoToFiveAttacksEffect    ; unused effect
+	 dw FlichSideEffect           ; FLINCH_SIDE_EFFECT1
+	 dw SleepEffect               ; SLEEP_EFFECT
+	 dw PoisonEffect              ; POISON_SIDE_EFFECT2
+	 dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT2
+	 dw FreezeBurnParalyzeEffect  ; unused effect
+	 dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT2
+	 dw FlichSideEffect           ; FLINCH_SIDE_EFFECT2
+	 dw OneHitKOEffect            ; OHKO_EFFECT
+	 dw ChargeEffect              ; CHARGE_EFFECT
+	 dw $0000                     ; SUPER_FANG_EFFECT
+	 dw $0000                     ; SPECIAL_DAMAGE_EFFECT
+	 dw TrappingEffect            ; TRAPPING_EFFECT
+	 dw ChargeEffect              ; FLY_EFFECT
+	 dw TwoToFiveAttacksEffect    ; ATTACK_TWICE_EFFECT
+	 dw $0000                     ; JUMP_KICK_EFFECT
+	 dw MistEffect                ; MIST_EFFECT
+	 dw FocusEnergyEffect         ; FOCUS_ENERGY_EFFECT
+	 dw RecoilEffect              ; RECOIL_EFFECT
+	 dw ConfusionEffect           ; CONFUSION_EFFECT
+	 dw StatModifierUpEffect      ; ATTACK_UP2_EFFECT
+	 dw StatModifierUpEffect      ; DEFENSE_UP2_EFFECT
+	 dw StatModifierUpEffect      ; SPEED_UP2_EFFECT
+	 dw StatModifierUpEffect      ; SPECIAL_UP2_EFFECT
+	 dw StatModifierUpEffect      ; ACCURACY_UP2_EFFECT
+	 dw StatModifierUpEffect      ; EVASION_UP2_EFFECT
+	 dw HealEffect                ; HEAL_EFFECT
+	 dw TransformEffect           ; TRANSFORM_EFFECT
+	 dw StatModifierDownEffect    ; ATTACK_DOWN2_EFFECT
+	 dw StatModifierDownEffect    ; DEFENSE_DOWN2_EFFECT
+	 dw StatModifierDownEffect    ; SPEED_DOWN2_EFFECT
+	 dw StatModifierDownEffect    ; SPECIAL_DOWN2_EFFECT
+	 dw StatModifierDownEffect    ; ACCURACY_DOWN2_EFFECT
+	 dw StatModifierDownEffect    ; EVASION_DOWN2_EFFECT
+	 dw ReflectLightScreenEffect  ; LIGHT_SCREEN_EFFECT
+	 dw ReflectLightScreenEffect  ; REFLECT_EFFECT
+	 dw PoisonEffect              ; POISON_EFFECT
+	 dw ParalyzeEffect            ; PARALYZE_EFFECT
+	 dw StatModifierDownEffect    ; ATTACK_DOWN_SIDE_EFFECT
+	 dw StatModifierDownEffect    ; DEFENSE_DOWN_SIDE_EFFECT
+	 dw StatModifierDownEffect    ; SPEED_DOWN_SIDE_EFFECT
+	 dw StatModifierDownEffect    ; SPECIAL_DOWN_SIDE_EFFECT
+	 dw StatModifierDownEffect    ; unused effect
+	 dw StatModifierDownEffect    ; unused effect
+	 dw StatModifierDownEffect    ; unused effect
+	 dw StatModifierDownEffect    ; unused effect
+	 dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
+	 dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
+	 dw $0000                     ; unused effect
+	 dw SubstituteEffect          ; SUBSTITUTE_EFFECT
+	 dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
+	 dw RageEffect                ; RAGE_EFFECT
+	 dw MimicEffect               ; MIMIC_EFFECT
+	 dw $0000                     ; METRONOME_EFFECT
+	 dw LeechSeedEffect           ; LEECH_SEED_EFFECT
+	 dw SplashEffect              ; SPLASH_EFFECT
+	 dw DisableEffect             ; DISABLE_EFFECT
 
-Func_3f1fc: ; 3f1fc (f:71fc)
+SleepEffect: ; 3f1fc (f:71fc)
 	ld de, W_ENEMYMONSTATUS ; $cfe9
 	ld bc, W_ENEMYBATTSTATUS2 ; $d068
 	ld a, [H_WHOSETURN] ; $fff3
@@ -63182,7 +63181,7 @@ Func_3f20e: ; 3f20e (f:720e)
 	ld b, a
 	and $7
 	jr z, .asm_3f222
-	ld hl, UnnamedText_3f24a ; $724a
+	ld hl, AlreadyAsleepText ; $724a
 	jp PrintText
 .asm_3f222
 	ld a, b
@@ -63200,20 +63199,20 @@ Func_3f20e: ; 3f20e (f:720e)
 	jr z, .asm_3f231
 	ld [de], a
 	call Func_3fb89
-	ld hl, UnnamedText_3f245 ; $7245
+	ld hl, FellAsleepText ; $7245
 	jp PrintText
 .asm_3f242
 	jp Func_3fb5e
 
-UnnamedText_3f245: ; 3f245 (f:7245)
-	TX_FAR _UnnamedText_3f245
+FellAsleepText: ; 3f245 (f:7245)
+	TX_FAR _FellAsleepText
 	db "@"
 
-UnnamedText_3f24a: ; 3f24a (f:724a)
-	TX_FAR _UnnamedText_3f24a
+AlreadyAsleepText: ; 3f24a (f:724a)
+	TX_FAR _AlreadyAsleepText
 	db "@"
 
-Func_3f24f: ; 3f24f (f:724f)
+PoisonEffect: ; 3f24f (f:724f)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
@@ -63235,11 +63234,11 @@ Func_3f24f: ; 3f24f (f:724f)
 	cp $3
 	jr z, .asm_3f2d3
 	ld a, [de]
-	cp $2
-	ld b, $34
+	cp POISON_SIDE_EFFECT1
+	ld b, $34 ; ~20% chance of poisoning
 	jr z, .asm_3f290
-	cp $21
-	ld b, $67
+	cp POISON_SIDE_EFFECT2
+	ld b, $67 ; ~40% chance of poisoning
 	jr z, .asm_3f290
 	push hl
 	push de
@@ -63275,14 +63274,14 @@ Func_3f24f: ; 3f24f (f:724f)
 	set 0, [hl]
 	xor a
 	ld [de], a
-	ld hl, UnnamedText_3f2e4 ; $72e4
+	ld hl, BadlyPoisonedText ; $72e4
 	jr .asm_3f2c0
 .asm_3f2bd
-	ld hl, UnnamedText_3f2df ; $72df
+	ld hl, PoisonedText ; $72df
 .asm_3f2c0
 	pop de
 	ld a, [de]
-	cp $42
+	cp POISON_EFFECT
 	jr z, .asm_3f2cd
 	ld a, b
 	call Func_3fb96
@@ -63292,19 +63291,19 @@ Func_3f24f: ; 3f24f (f:724f)
 	jp PrintText
 .asm_3f2d3
 	ld a, [de]
-	cp $42
+	cp POISON_EFFECT
 	ret nz
 .asm_3f2d7
 	ld c, $32
 	call DelayFrames
 	jp Func_3fb5e
 
-UnnamedText_3f2df: ; 3f2df (f:72df)
-	TX_FAR _UnnamedText_3f2df
+PoisonedText: ; 3f2df (f:72df)
+	TX_FAR _PoisonedText
 	db "@"
 
-UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
-	TX_FAR _UnnamedText_3f2e4
+BadlyPoisonedText: ; 3f2e4 (f:72e4)
+	TX_FAR _BadlyPoisonedText
 	db "@"
 
 DrainHPEffect: ; 3f2e9 (f:72e9)
@@ -63484,7 +63483,7 @@ UnnamedText_3f423: ; 3f423 (f:7423)
 	TX_FAR _UnnamedText_3f423
 	db "@"
 
-Func_3f428: ; 3f428 (f:7428)
+StatModifierUpEffect: ; 3f428 (f:7428)
 	ld hl, wPlayerMonStatMods ; $cd1a
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
@@ -63664,7 +63663,7 @@ UnnamedText_3f547: ; 3f547 (f:7547)
 	TX_FAR _UnnamedText_3f547
 	db "@"
 
-Func_3f54c: ; 3f54c (f:754c)
+StatModifierDownEffect: ; 3f54c (f:754c)
 	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld bc, W_ENEMYBATTSTATUS1 ; $d067
@@ -63901,7 +63900,7 @@ StatModifierRatios: ; 3f6cb (f:76cb)
 	db 35,  10  ; 3.50
 	db  4,   1  ; 4.00
 
-Func_3f6e5: ; 3f6e5 (f:76e5)
+BideEffect: ; 3f6e5 (f:76e5)
 	ld hl, W_PLAYERBATTSTATUS1
 	ld de, W_NUMHITS
 	ld bc, $d06a
@@ -63912,7 +63911,7 @@ Func_3f6e5: ; 3f6e5 (f:76e5)
 	ld de, $cd05
 	ld bc, $d06f
 .asm_3f6fc
-	set 0, [hl]
+	set 0, [hl] ; mon is now using bide
 	xor a
 	ld [de], a
 	inc de
@@ -63928,7 +63927,7 @@ Func_3f6e5: ; 3f6e5 (f:76e5)
 	add $ae
 	jp Func_3fb96
 
-Func_3f717: ; 3f717 (f:7717)
+ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
 	ld a, [H_WHOSETURN] ; $fff3
@@ -63937,7 +63936,7 @@ Func_3f717: ; 3f717 (f:7717)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	ld de, $d06f
 .asm_3f728
-	set 1, [hl]
+	set 1, [hl] ; mon is now using thrash/petal dance
 	call GenRandomInBattle
 	and $1
 	inc a
@@ -63947,7 +63946,7 @@ Func_3f717: ; 3f717 (f:7717)
 	add $b0
 	jp Func_3fb96
 
-Func_3f739: ; 3f739 (f:7739)
+SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3f791
@@ -63973,7 +63972,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $32
 	call DelayFrames
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	cp $64
+	cp TELEPORT
 	jp nz, Func_3fb5e
 	jp PrintButItFailedText_
 .asm_3f76e
@@ -63987,9 +63986,9 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f77e
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_3fb69 ; $7b69
+	ld hl, IsUnaffectedText ; $7b69
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	cp $64
+	cp TELEPORT
 	jp nz, PrintText
 	jp PrintButItFailedText_
 .asm_3f791
@@ -64029,7 +64028,7 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f7d1
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_3fb69 ; $7b69
+	ld hl, IsUnaffectedText ; $7b69
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 	cp TELEPORT
 	jp nz, PrintText
@@ -64040,29 +64039,29 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $14
 	call DelayFrames
 	pop af
-	ld hl, UnnamedText_3f802 ; $7802
+	ld hl, RanFromBattleText ; $7802
 	cp TELEPORT
 	jr z, .asm_3f7ff
-	ld hl, UnnamedText_3f807 ; $7807
+	ld hl, RanAwayScaredText ; $7807
 	cp ROAR
 	jr z, .asm_3f7ff
-	ld hl, UnnamedText_3f80c ; $780c
+	ld hl, WasBlownAwayText ; $780c
 .asm_3f7ff
 	jp PrintText
 
-UnnamedText_3f802: ; 3f802 (f:7802)
-	TX_FAR _UnnamedText_3f802
+RanFromBattleText: ; 3f802 (f:7802)
+	TX_FAR _RanFromBattleText
 	db "@"
 
-UnnamedText_3f807: ; 3f807 (f:7807)
-	TX_FAR _UnnamedText_3f807
+RanAwayScaredText: ; 3f807 (f:7807)
+	TX_FAR _RanAwayScaredText
 	db "@"
 
-UnnamedText_3f80c: ; 3f80c (f:780c)
-	TX_FAR _UnnamedText_3f80c
+WasBlownAwayText: ; 3f80c (f:780c)
+	TX_FAR _WasBlownAwayText
 	db "@"
 
-Func_3f811: ; 3f811 (f:7811)
+TwoToFiveAttacksEffect: ; 3f811 (f:7811)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
 	ld bc, W_NUMHITS ; $d074
@@ -64073,9 +64072,9 @@ Func_3f811: ; 3f811 (f:7811)
 	ld de, $d06f
 	ld bc, $cd05
 .asm_3f828
-	bit 2, [hl]
+	bit 2, [hl] ; is mon attacking multiple times?
 	ret nz
-	set 2, [hl]
+	set 2, [hl] ; mon is now attacking multiple times
 	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
@@ -64106,7 +64105,7 @@ Func_3f811: ; 3f811 (f:7811)
 	ld [hl], a
 	jr .asm_3f853
 
-Func_3f85b: ; 3f85b (f:785b)
+FlichSideEffect: ; 3f85b (f:785b)
 	call CheckTargetSubstitute
 	ret nz
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -64118,24 +64117,24 @@ Func_3f85b: ; 3f85b (f:785b)
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3f870
 	ld a, [de]
-	cp $1f
-	ld b, $1a
+	cp FLINCH_SIDE_EFFECT1
+	ld b, $1a ; ~10% chance of flinch
 	jr z, .asm_3f879
-	ld b, $4d
+	ld b, $4d ; ~30% chance of flinch
 .asm_3f879
 	call GenRandomInBattle
 	cp b
 	ret nc
-	set 3, [hl]
+	set 3, [hl] ; set mon's status to flinching
 	call Func_3f9cf
 	ret
 
-Func_3f884: ; 3f884 (f:7884)
-	ld hl, Func_33f57
-	ld b, BANK(Func_33f57)
+OneHitKOEffect: ; 3f884 (f:7884)
+	ld hl, OneHitKOEffect_
+	ld b, BANK(OneHitKOEffect_)
 	jp Bankswitch
 
-Func_3f88c: ; 3f88c (f:788c)
+ChargeEffect: ; 3f88c (f:788c)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
@@ -64148,16 +64147,16 @@ Func_3f88c: ; 3f88c (f:788c)
 .asm_3f8a1
 	set 4, [hl]
 	ld a, [de]
-	dec de
-	cp $2b
+	dec de ; de contains enemy or player MOVENUM
+	cp FLY_EFFECT
 	jr nz, .asm_3f8ad
-	set 6, [hl]
+	set 6, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld b, $64
 .asm_3f8ad
 	ld a, [de]
-	cp $5b
+	cp DIG
 	jr nz, .asm_3f8b6
-	set 6, [hl]
+	set 6, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
 	ld b, $c0
 .asm_3f8b6
 	xor a
@@ -64166,58 +64165,58 @@ Func_3f88c: ; 3f88c (f:788c)
 	call Func_3fbb9
 	ld a, [de]
 	ld [wWhichTrade], a ; $cd3d
-	ld hl, UnnamedText_3f8c8 ; $78c8
+	ld hl, ChargeMoveEffectText ; $78c8
 	jp PrintText
 
-UnnamedText_3f8c8: ; 3f8c8 (f:78c8)
-	TX_FAR _UnnamedText_3f8c8
+ChargeMoveEffectText: ; 3f8c8 (f:78c8)
+	TX_FAR _ChargeMoveEffectText
 	db $08 ; asm
 	ld a, [wWhichTrade] ; $cd3d
 	cp RAZOR_WIND
-	ld hl, UnnamedText_3f8f9 ; $78f9
+	ld hl, MadeWhirlwindText ; $78f9
 	jr z, .asm_3f8f8
 	cp SOLARBEAM
-	ld hl, UnnamedText_3f8fe ; $78fe
+	ld hl, TookInSunlightText ; $78fe
 	jr z, .asm_3f8f8
 	cp SKULL_BASH
-	ld hl, UnnamedText_3f903 ; $7903
+	ld hl, LoweredItsHeadText ; $7903
 	jr z, .asm_3f8f8
 	cp SKY_ATTACK
-	ld hl, UnnamedText_3f908 ; $7908
+	ld hl, SkyAttackGlowingText ; $7908
 	jr z, .asm_3f8f8
 	cp FLY
-	ld hl, UnnamedText_3f90d ; $790d
+	ld hl, FlewUpHighText ; $790d
 	jr z, .asm_3f8f8
 	cp DIG
-	ld hl, UnnamedText_3f912 ; $7912
+	ld hl, DugAHoleText ; $7912
 .asm_3f8f8
 	ret
 
-UnnamedText_3f8f9: ; 3f8f9 (f:78f9)
-	TX_FAR _UnnamedText_3f8f9
+MadeWhirlwindText: ; 3f8f9 (f:78f9)
+	TX_FAR _MadeWhirlwindText
 	db "@"
 
-UnnamedText_3f8fe: ; 3f8fe (f:78fe)
-	TX_FAR _UnnamedText_3f8fe
+TookInSunlightText: ; 3f8fe (f:78fe)
+	TX_FAR _TookInSunlightText
 	db "@"
 
-UnnamedText_3f903: ; 3f903 (f:7903)
-	TX_FAR _UnnamedText_3f903
+LoweredItsHeadText: ; 3f903 (f:7903)
+	TX_FAR _LoweredItsHeadText
 	db "@"
 
-UnnamedText_3f908: ; 3f908 (f:7908)
-	TX_FAR _UnnamedText_3f908
+SkyAttackGlowingText: ; 3f908 (f:7908)
+	TX_FAR _SkyAttackGlowingText
 	db "@"
 
-UnnamedText_3f90d: ; 3f90d (f:790d)
-	TX_FAR _UnnamedText_3f90d
+FlewUpHighText: ; 3f90d (f:790d)
+	TX_FAR _FlewUpHighText
 	db "@"
 
-UnnamedText_3f912: ; 3f912 (f:7912)
-	TX_FAR _UnnamedText_3f912
+DugAHoleText: ; 3f912 (f:7912)
+	TX_FAR _DugAHoleText
 	db "@"
 
-Func_3f917: ; 3f917 (f:7917)
+TrappingEffect: ; 3f917 (f:7917)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, $d06a
 	ld a, [H_WHOSETURN] ; $fff3
@@ -64241,28 +64240,28 @@ Func_3f917: ; 3f917 (f:7917)
 	ld [de], a
 	ret
 
-Func_3f941: ; 3f941 (f:7941)
-	ld hl, Func_33f2b
-	ld b, BANK(Func_33f2b)
+MistEffect: ; 3f941 (f:7941)
+	ld hl, MistEffect_
+	ld b, BANK(MistEffect_)
 	jp Bankswitch
 
-Func_3f949: ; 3f949 (f:7949)
-	ld hl, Func_27f86
-	ld b, BANK(Func_27f86)
+FocusEnergyEffect: ; 3f949 (f:7949)
+	ld hl, FocusEnergyEffect_
+	ld b, BANK(FocusEnergyEffect_)
 	jp Bankswitch
 
-Func_3f951: ; 3f951 (f:7951)
-	ld hl, Func_1392c
-	ld b, BANK(Func_1392c)
+RecoilEffect: ; 3f951 (f:7951)
+	ld hl, RecoilEffect_
+	ld b, BANK(RecoilEffect_)
 	jp Bankswitch
 
-Func_3f959: ; 3f959 (f:7959)
+ConfusionSideEffect: ; 3f959 (f:7959)
 	call GenRandomInBattle
 	cp $19
 	ret nc
 	jr Func_3f96f
 
-Func_3f961: ; 3f961 (f:7961)
+ConfusionEffect: ; 3f961 (f:7961)
 	call CheckTargetSubstitute
 	jr nz, Func_3f9a6
 	call MoveHitTest
@@ -64281,9 +64280,9 @@ Func_3f96f: ; 3f96f (f:796f)
 	ld bc, $d06b
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 .asm_3f986
-	bit 7, [hl]
+	bit 7, [hl] ; is mon confused?
 	jr nz, Func_3f9a6
-	set 7, [hl]
+	set 7, [hl] ; mon is now confused
 	push af
 	call GenRandomInBattle
 	and $3
@@ -64293,11 +64292,11 @@ Func_3f96f: ; 3f96f (f:796f)
 	pop af
 	cp CONFUSION_SIDE_EFFECT
 	call nz, Func_3fb89
-	ld hl, UnnamedText_3f9a1 ; $79a1
+	ld hl, BecameConfusedText ; $79a1
 	jp PrintText
 
-UnnamedText_3f9a1: ; 3f9a1 (f:79a1)
-	TX_FAR _UnnamedText_3f9a1
+BecameConfusedText: ; 3f9a1 (f:79a1)
+	TX_FAR _BecameConfusedText
 	db "@"
 
 Func_3f9a6: ; 3f9a6 (f:79a6)
@@ -64307,24 +64306,24 @@ Func_3f9a6: ; 3f9a6 (f:79a6)
 	call DelayFrames
 	jp Func_3fb4e
 
-Func_3f9b1: ; 3f9b1 (f:79b1)
-	ld hl, Func_52601
-	ld b, BANK(Func_52601)
+ParalyzeEffect: ; 3f9b1 (f:79b1)
+	ld hl, ParalyzeEffect_
+	ld b, BANK(ParalyzeEffect_)
 	jp Bankswitch
 
-Func_3f9b9: ; 3f9b9 (f:79b9)
+SubstituteEffect: ; 3f9b9 (f:79b9)
 	ld hl, SubstituteEffectHandler
 	ld b, BANK(SubstituteEffectHandler)
 	jp Bankswitch
 
-Func_3f9c1: ; 3f9c1 (f:79c1)
+HyperBeamEffect: ; 3f9c1 (f:79c1)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f9cc
 	ld hl, W_ENEMYBATTSTATUS2 ; $d068
 .asm_3f9cc
-	set 5, [hl]
+	set 5, [hl] ; mon now needs to recharge
 	ret
 
 Func_3f9cf: ; 3f9cf (f:79cf)
@@ -64335,21 +64334,21 @@ Func_3f9cf: ; 3f9cf (f:79cf)
 	jr z, .asm_3f9db
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 .asm_3f9db
-	res 5, [hl]
+	res 5, [hl] ; mon no longer needs to recharge
 	pop hl
 	ret
 
-Func_3f9df: ; 3f9df (f:79df)
+RageEffect: ; 3f9df (f:79df)
 	ld hl, W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .player
 	ld hl, W_ENEMYBATTSTATUS2
 .player
-	set 6, [hl]
+	set 6, [hl] ; mon is now in "rage" mode
 	ret
 
-Func_3f9ed: ; 3f9ed (f:79ed)
+MimicEffect: ; 3f9ed (f:79ed)
 	ld c, $32
 	call DelayFrames
 	call MoveHitTest
@@ -64416,25 +64415,25 @@ Func_3f9ed: ; 3f9ed (f:79ed)
 	ld [$d11e], a
 	call GetMoveName
 	call Func_3fba8
-	ld hl, UnnamedText_3fa77
+	ld hl, MimicLearnedMoveText
 	jp PrintText
 .asm_3fa74
 	jp PrintButItFailedText_
 
-UnnamedText_3fa77: ; 3fa77 (f:7a77)
-	TX_FAR _UnnamedText_3fa77
+MimicLearnedMoveText: ; 3fa77 (f:7a77)
+	TX_FAR _MimicLearnedMoveText
 	db "@"
 
-Func_3fa7c: ; 3fa7c (f:7a7c)
-	ld hl, Func_2bea9
-	ld b, BANK(Func_2bea9)
+LeechSeedEffect: ; 3fa7c (f:7a7c)
+	ld hl, LeechSeedEffect_
+	ld b, BANK(LeechSeedEffect_)
 	jp Bankswitch
 
-Func_3fa84: ; 3fa84 (f:7a84)
+SplashEffect: ; 3fa84 (f:7a84)
 	call Func_3fba8
 	jp Func_3fb43
 
-Func_3fa8a: ; 3fa8a (f:7a8a)
+DisableEffect: ; 3fa8a (f:7a8a)
 	call MoveHitTest
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
@@ -64507,40 +64506,40 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 	ld a, [$d11e]
 	ld [hl], a
 	call GetMoveName
-	ld hl, UnnamedText_3fb09 ; $7b09
+	ld hl, MoveWasDisabledText ; $7b09
 	jp PrintText
 .asm_3fb05
 	pop hl
 .asm_3fb06
 	jp PrintButItFailedText_
 
-UnnamedText_3fb09: ; 3fb09 (f:7b09)
-	TX_FAR _UnnamedText_3fb09
+MoveWasDisabledText: ; 3fb09 (f:7b09)
+	TX_FAR _MoveWasDisabledText
 	db "@"
 
-Func_3fb0e: ; 3fb0e (f:7b0e)
-	ld hl, Func_2feb8
-	ld b, BANK(Func_2feb8)
+PayDayEffect: ; 3fb0e (f:7b0e)
+	ld hl, PayDayEffect_
+	ld b, BANK(PayDayEffect_)
 	jp Bankswitch
 
-Func_3fb16: ; 3fb16 (f:7b16)
-	ld hl, Func_139a3
-	ld b, BANK(Func_139a3)
+ConversionEffect: ; 3fb16 (f:7b16)
+	ld hl, ConversionEffect_
+	ld b, BANK(ConversionEffect_)
 	jp Bankswitch
 
-Func_3fb1e: ; 3fb1e (f:7b1e)
-	ld hl, Func_139da
-	ld b, BANK(Func_139da)
+HazeEffect: ; 3fb1e (f:7b1e)
+	ld hl, HazeEffect_
+	ld b, BANK(HazeEffect_)
 	jp Bankswitch
 
-Func_3fb26: ; 3fb26 (f:7b26)
-	ld hl, Func_3b9ec
-	ld b, BANK(Func_3b9ec)
+HealEffect: ; 3fb26 (f:7b26)
+	ld hl, HealEffect_
+	ld b, BANK(HealEffect_)
 	jp Bankswitch
 
-Func_3fb2e: ; 3fb2e (f:7b2e)
-	ld hl, Func_3bab1
-	ld b, BANK(Func_3bab1)
+TransformEffect: ; 3fb2e (f:7b2e)
+	ld hl, TransformEffect_
+	ld b, BANK(TransformEffect_)
 	jp Bankswitch
 
 ReflectLightScreenEffect: ; 3fb36 (f:7b36)
@@ -64553,11 +64552,11 @@ UnnamedText_3fb3e: ; 3fb3e (f:7b3e)
 	db "@"
 
 Func_3fb43: ; 3fb43 (f:7b43)
-	ld hl, UnnamedText_3fb49
+	ld hl, NoEffectText
 	jp PrintText
 
-UnnamedText_3fb49: ; 3fb49 (f:7b49)
-	TX_FAR _UnnamedText_3fb49
+NoEffectText: ; 3fb49 (f:7b49)
+	TX_FAR _NoEffectText
 	db "@"
 
 Func_3fb4e: ; 3fb4e (f:7b4e)
@@ -64574,23 +64573,23 @@ ButItFailedText: ; 3fb59 (f:7b59)
 	db "@"
 
 Func_3fb5e: ; 3fb5e (f:7b5e)
-	ld hl, UnnamedText_3fb64 ; $7b64
+	ld hl, DidntAffectText ; $7b64
 	jp PrintText
 
-UnnamedText_3fb64: ; 3fb64 (f:7b64)
-	TX_FAR _UnnamedText_3fb64
+DidntAffectText: ; 3fb64 (f:7b64)
+	TX_FAR _DidntAffectText
 	db "@"
 
-UnnamedText_3fb69: ; 3fb69 (f:7b69)
-	TX_FAR _UnnamedText_3fb69
+IsUnaffectedText: ; 3fb69 (f:7b69)
+	TX_FAR _IsUnaffectedText
 	db "@"
 
 Func_3fb6e: ; 3fb6e (f:7b6e)
-	ld hl, UnnamedText_3fb74 ; $7b74
+	ld hl, ParalyzedMayNotAttackText ; $7b74
 	jp PrintText
 
-UnnamedText_3fb74: ; 3fb74 (f:7b74)
-	TX_FAR _UnnamedText_3fb74
+ParalyzedMayNotAttackText: ; 3fb74 (f:7b74)
+	TX_FAR _ParalyzedMayNotAttackText
 	db "@"
 
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
@@ -81215,7 +81214,7 @@ Func_525af: ; 525af (14:65af)
 	ld b, BANK(PlayBattleMusic)
 	jp Bankswitch
 
-Func_52601: ; 52601 (14:6601)
+ParalyzeEffect_: ; 52601 (14:6601)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	ld de, W_PLAYERMOVETYPE ; $cfd5
 	ld a, [H_WHOSETURN] ; $fff3
@@ -81229,7 +81228,7 @@ Func_52613: ; 52613 (14:6613)
 	and a
 	jr nz, .asm_52659
 	ld a, [de]
-	cp $17
+	cp EVASION_DOWN1_EFFECT
 	jr nz, .asm_5262a
 	ld b, h
 	ld c, l

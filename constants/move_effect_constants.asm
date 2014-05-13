@@ -31,10 +31,12 @@ BIDE_EFFECT                EQU $1A
 THRASH_PETAL_DANCE_EFFECT  EQU $1B
 SWITCH_AND_TELEPORT_EFFECT EQU $1C
 TWO_TO_FIVE_ATTACKS_EFFECT EQU $1D
+; unused effect            EQU $1E
 FLINCH_SIDE_EFFECT1        EQU $1F
 SLEEP_EFFECT               EQU $20
 POISON_SIDE_EFFECT2        EQU $21
 BURN_SIDE_EFFECT2          EQU $22
+; unused effect            EQU $23
 PARALYZE_SIDE_EFFECT2      EQU $24
 FLINCH_SIDE_EFFECT2        EQU $25
 OHKO_EFFECT                EQU $26 ; moves like Horn Drill
@@ -71,8 +73,13 @@ ATTACK_DOWN_SIDE_EFFECT    EQU $44
 DEFENSE_DOWN_SIDE_EFFECT   EQU $45
 SPEED_DOWN_SIDE_EFFECT     EQU $46
 SPECIAL_DOWN_SIDE_EFFECT   EQU $47
+; unused effect            EQU $48
+; unused effect            EQU $49
+; unused effect            EQU $4A
+; unused effect            EQU $4B
 CONFUSION_SIDE_EFFECT      EQU $4C
 TWINEEDLE_EFFECT           EQU $4D
+; unused effect            EQU $4E
 SUBSTITUTE_EFFECT          EQU $4F
 HYPER_BEAM_EFFECT          EQU $50
 RAGE_EFFECT                EQU $51

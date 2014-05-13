@@ -2069,22 +2069,22 @@ _UnnamedText_3af4d:: ; 946fb (25:46fb)
 	line "is evolving!"
 	done
 
-_UnnamedText_3f245:: ; 94715 (25:4715)
+_FellAsleepText:: ; 94715 (25:4715)
 	text $59
 	line "fell asleep!"
 	prompt
 
-_UnnamedText_3f24a:: ; 94725 (25:4725)
+_AlreadyAsleepText:: ; 94725 (25:4725)
 	text $59, "'s"
 	line "already asleep!"
 	prompt
 
-_UnnamedText_3f2df:: ; 94739 (25:4739)
+_PoisonedText:: ; 94739 (25:4739)
 	text $59
 	line "was poisoned!"
 	prompt
 
-_UnnamedText_3f2e4:: ; 9474a (25:474a)
+_BadlyPoisonedText:: ; 9474a (25:474a)
 	text $59, "'s"
 	line "badly poisoned!"
 	prompt
@@ -2130,60 +2130,60 @@ _UnnamedText_3f683:: ; 947c9 (25:47c9)
 	text " fell!"
 	prompt
 
-_UnnamedText_3f802:: ; 947d1 (25:47d1)
+_RanFromBattleText:: ; 947d1 (25:47d1)
 	text $5a
 	line "ran from battle!"
 	prompt
 
-_UnnamedText_3f807:: ; 947e5 (25:47e5)
+_RanAwayScaredText:: ; 947e5 (25:47e5)
 	text $59
 	line "ran away scared!"
 	prompt
 
-_UnnamedText_3f80c:: ; 947f9 (25:47f9)
+_WasBlownAwayText:: ; 947f9 (25:47f9)
 	text $59
 	line "was blown away!"
 	prompt
 
-_UnnamedText_3f8c8:: ; 9480c (25:480c)
+_ChargeMoveEffectText:: ; 9480c (25:480c)
 	text $5a, "@@"
 
-_UnnamedText_3f8f9:: ; 94810 (25:4810)
+_MadeWhirlwindText:: ; 94810 (25:4810)
 	db $0
 	line "made a whirlwind!"
 	prompt
 
-_UnnamedText_3f8fe:: ; 94824 (25:4824)
+_TookInSunlightText:: ; 94824 (25:4824)
 	db $0
 	line "took in sunlight!"
 	prompt
 
-_UnnamedText_3f903:: ; 94838 (25:4838)
+_LoweredItsHeadText:: ; 94838 (25:4838)
 	db $0
 	line "lowered its head!"
 	prompt
 
-_UnnamedText_3f908:: ; 9484c (25:484c)
+_SkyAttackGlowingText:: ; 9484c (25:484c)
 	db $0
 	line "is glowing!"
 	prompt
 
-_UnnamedText_3f90d:: ; 9485a (25:485a)
+_FlewUpHighText:: ; 9485a (25:485a)
 	db $0
 	line "flew up high!"
 	prompt
 
-_UnnamedText_3f912:: ; 9486a (25:486a)
+_DugAHoleText:: ; 9486a (25:486a)
 	db $0
 	line "dug a hole!"
 	prompt
 
-_UnnamedText_3f9a1:: ; 94878 (25:4878)
+_BecameConfusedText:: ; 94878 (25:4878)
 	text $59
 	line "became confused!"
 	prompt
 
-_UnnamedText_3fa77:: ; 9488c (25:488c)
+_MimicLearnedMoveText:: ; 9488c (25:488c)
 	text $5a
 	line "learned"
 	cont "@"
@@ -2191,7 +2191,7 @@ _UnnamedText_3fa77:: ; 9488c (25:488c)
 	text "!"
 	prompt
 
-_UnnamedText_3fb09:: ; 9489e (25:489e)
+_MoveWasDisabledText:: ; 9489e (25:489e)
 	text $59, "'s"
 	line "@"
 	TX_RAM $cd6d
@@ -2203,7 +2203,7 @@ _UnnamedText_3fb3e:: ; 948b6 (25:48b6)
 	text "Nothing happened!"
 	prompt
 
-_UnnamedText_3fb49:: ; 948c9 (25:48c9)
+_NoEffectText:: ; 948c9 (25:48c9)
 	text "No effect!"
 	prompt
 
@@ -2211,17 +2211,17 @@ _ButItFailedText:: ; 948d5 (25:48d5)
 	text "But, it failed! "
 	prompt
 
-_UnnamedText_3fb64:: ; 948e7 (25:48e7)
+_DidntAffectText:: ; 948e7 (25:48e7)
 	text "It didn't affect"
 	line $59, "!"
 	prompt
 
-_UnnamedText_3fb69:: ; 948fb (25:48fb)
+_IsUnaffectedText:: ; 948fb (25:48fb)
 	text $59
 	line "is unaffected!"
 	prompt
 
-_UnnamedText_3fb74:: ; 9490d (25:490d)
+_ParalyzedMayNotAttackText:: ; 9490d (25:490d)
 	text $59, "'s"
 	line "paralyzed! It may"
 	cont "not attack!"
@@ -2242,58 +2242,58 @@ _UnnamedText_17e27:: ; 9495e (25:495e)
 	line "a SUBSTITUTE!"
 	prompt
 
-_UnnamedText_2ff04:: ; 9497e (25:497e)
+_CoinsScatteredText:: ; 9497e (25:497e)
 	text "Coins scattered"
 	line "everywhere!"
 	prompt
 
-_UnnamedText_27fb3:: ; 9499b (25:499b)
+_GettingPumpedText:: ; 9499b (25:499b)
 	text $5a, "'s"
 	line "getting pumped!"
 	prompt
 
-_UnnamedText_2bef2:: ; 949af (25:49af)
+_WasSeededText:: ; 949af (25:49af)
 	text $59
 	line "was seeded!"
 	prompt
 
-_UnnamedText_2bef7:: ; 949be (25:49be)
+_EvadedAttackText:: ; 949be (25:49be)
 	text $59
 	line "evaded attack!"
 	prompt
 
-_UnnamedText_1399e:: ; 949d0 (25:49d0)
+_HitWithRecoilText:: ; 949d0 (25:49d0)
 	text $5a, "'s"
 	line "hit with recoil!"
 	prompt
 
-_UnnamedText_139cd:: ; 949e5 (25:49e5)
+_ConvertedTypeText:: ; 949e5 (25:49e5)
 	text "Converted type to"
 	line $59, "'s!"
 	prompt
 
-_UnnamedText_13a53:: ; 949fc (25:49fc)
+_StatusChangesEliminatedText:: ; 949fc (25:49fc)
 	text "All STATUS changes"
 	line "are eliminated!"
 	prompt
 
-_UnnamedText_3baa2:: ; 94a20 (25:4a20)
+_StartedSleepingEffect:: ; 94a20 (25:4a20)
 	text $5a
 	line "started sleeping!"
 	done
 
-_UnnamedText_3baa7:: ; 94a35 (25:4a35)
+_FellAsleepBecameHealthyText:: ; 94a35 (25:4a35)
 	text $5a
 	line "fell asleep and"
 	cont "became healthy!"
 	done
 
-_UnnamedText_3baac:: ; 94a58 (25:4a58)
+_RegainedHealthText:: ; 94a58 (25:4a58)
 	text $5a
 	line "regained health!"
 	prompt
 
-_UnnamedText_3bb92:: ; 94a6c (25:4a6c)
+_TransformedText:: ; 94a6c (25:4a6c)
 	text $5a
 	line "transformed into"
 	cont "@"
@@ -2312,7 +2312,7 @@ _ReflectGainedArmorText:: ; 94aae (25:4aae)
 	line "gained armor!"
 	prompt
 
-_UnnamedText_33f52:: ; 94abf (25:4abf)
+_ShroudedInMistText:: ; 94abf (25:4abf)
 	text $5a, "'s"
 	line "shrouded in mist!"
 	prompt
