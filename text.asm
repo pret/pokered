@@ -3046,7 +3046,7 @@ _TooImportantToTossText:: ; a8068 (2a:4068)
 	line "tant to toss!"
 	prompt
 
-_UnnamedText_2fe3b:: ; a8088 (2a:4088)
+_AlreadyKnowsText:: ; a8088 (2a:4088)
 	TX_RAM $cd6d
 	text " knows"
 	line "@"
