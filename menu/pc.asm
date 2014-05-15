@@ -572,8 +572,8 @@ Func_21845:: ; 5845 (8:5845)
 	ld a, $22
 	jp Func_3ef5
 
-UnnamedText_21865:: ; 21865 (8:5865)
-	TX_FAR _UnnamedText_21865
+JustAMomentText:: ; 21865 (8:5865)
+	TX_FAR _JustAMomentText
 	db "@"
 
 	ld a, [$c109]

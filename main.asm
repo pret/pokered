@@ -6059,12 +6059,12 @@ TextScriptEnd:: ; 24d7 (0:24d7)
 	ld hl,TextScriptEndingChar
 	ret
 
-UnnamedText_24db:: ; 24db (0:24db)
-	TX_FAR _UnnamedText_24db
+ExclamationText:: ; 24db (0:24db)
+	TX_FAR _ExclamationText
 	db "@"
 
-UnnamedText_24e0:: ; 24e0 (0:24e0)
-	TX_FAR _UnnamedText_24e0
+GroundRoseText:: ; 24e0 (0:24e0)
+	TX_FAR _GroundRoseText
 	db "@"
 
 BoulderText:: ; 24e5 (0:24e5)
@@ -8373,7 +8373,7 @@ Func_3381:: ; 3381 (0:3381)
 	ld b, BANK(SaveTrainerName)
 	ld hl, SaveTrainerName
 	call Bankswitch
-	ld hl, UnnamedText_33cf
+	ld hl, TrainerNameText
 	call PrintText
 	pop hl
 	pop af
@@ -8400,8 +8400,8 @@ Func_33b7:: ; 33b7 (0:33b7)
 	ld l, a
 	ret
 
-UnnamedText_33cf:: ; 33cf (0:33cf)
-	TX_FAR _UnnamedText_33cf
+TrainerNameText:: ; 33cf (0:33cf)
+	TX_FAR _TrainerNameText
 	db $08
 
 Func_33d4:: ; 33d4 (0:33d4)
@@ -10565,9 +10565,9 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw CardKeyFailText                      ; id = 02
 	dw Route15UpstairsLeftBinoculars        ; id = 03
 	dw RedBedroomSNESText                   ; id = 04
-	dw UnnamedText_1e960                    ; id = 05
-	dw UnnamedText_1e97e                    ; id = 06
-	dw UnnamedText_1e983                    ; id = 07
+	dw PushStartText                        ; id = 05
+	dw SaveOptionText                       ; id = 06
+	dw StrengthsAndWeaknessesText           ; id = 07
 	dw OakLabEmailText                      ; id = 08
 	dw AerodactylFossilText                 ; id = 09
 	dw Route15UpstairsBinocularsText        ; id = 0A
@@ -10590,11 +10590,11 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw UnnamedText_624c1                    ; id = 1B
 	dw UnnamedText_624c6                    ; id = 1C
 	dw UnnamedText_624cb                    ; id = 1D
-	dw Unknown_62508                        ; id = 1E
+	dw TerminatorText_62508                 ; id = 1E
 	dw Unknown_62529                        ; id = 1F
 	dw ViridianSchoolNotebook               ; id = 20
 	dw ViridianSchoolBlackboard             ; id = 21
-	dw UnnamedText_21865                    ; id = 22
+	dw JustAMomentText                      ; id = 22
 	dw Unknown_21878                        ; id = 23
 	dw FoundHiddenItemText                  ; id = 24
 	dw HiddenItemBagFullText                ; id = 25
@@ -10608,7 +10608,7 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw BillsHouseMonitorText                ; id = 2D
 	dw BillsHouseInitiatedText              ; id = 2E
 	dw BillsHousePokemonList                ; id = 2F
-	dw UnnamedText_1eb69                    ; id = 30
+	dw MagazinesText                        ; id = 30
 	dw CinnabarGymQuiz                      ; id = 31
 	dw GameCornerNoCoinsText                ; id = 32
 	dw GameCornerCoinCaseText               ; id = 33
@@ -10779,7 +10779,7 @@ Func_4277: ; 4277 (1:4277)
 	and a
 	jr z, .asm_4284
 	dec [hl]
-	ld hl, UnnamedText_42a7 ; $42a7
+	ld hl, SafariZoneEatingText ; $42a7
 	jr .asm_429f
 .asm_4284
 	dec hl
@@ -10787,7 +10787,7 @@ Func_4277: ; 4277 (1:4277)
 	and a
 	ret z
 	dec [hl]
-	ld hl, UnnamedText_42ac ; $42ac
+	ld hl, SafariZoneAngryText ; $42ac
 	jr nz, .asm_429f
 	push hl
 	ld a, [$cfe5]
@@ -10802,12 +10802,12 @@ Func_4277: ; 4277 (1:4277)
 	pop hl
 	jp PrintText
 
-UnnamedText_42a7: ; 42a7 (1:42a7)
-	TX_FAR SafariZoneEatingText
+SafariZoneEatingText: ; 42a7 (1:42a7)
+	TX_FAR _SafariZoneEatingText
 	db "@"
 
-UnnamedText_42ac: ; 42ac (1:42ac)
-	TX_FAR SafariZoneAngryText
+SafariZoneAngryText: ; 42ac (1:42ac)
+	TX_FAR _SafariZoneAngryText
 	db "@"
 
 ; copy text of fixed length $b (like player name, rival name, mon names, ...)
@@ -14055,7 +14055,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld hl, TextTerminator_6b20 ; $6b20
 	call PrintText
 	call SaveScreenTilesToBuffer1
-	ld hl, UnnamedText_5d43 ; $5d43
+	ld hl, WhereWouldYouLikeText ; $5d43
 	call PrintText
 	FuncCoord 5, 5 ; $c409
 	ld hl, Coord
@@ -14179,7 +14179,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, BATTLE_CENTER
 .asm_5cfc
 	ld [$d72d], a
-	ld hl, UnnamedText_5d48 ; $5d48
+	ld hl, PleaseWaitText ; $5d48
 	call PrintText
 	ld c, $32
 	call DelayFrames
@@ -14202,22 +14202,22 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld [wMenuJoypadPollCount], a ; $cc34
 	call Delay3
 	call Func_72d7
-	ld hl, UnnamedText_5d4d ; $5d4d
+	ld hl, LinkCanceledText ; $5d4d
 	call PrintText
 	ld hl, $d72e
 	res 6, [hl]
 	ret
 
-UnnamedText_5d43: ; 5d43 (1:5d43)
-	TX_FAR _UnnamedText_5d43
+WhereWouldYouLikeText: ; 5d43 (1:5d43)
+	TX_FAR _WhereWouldYouLikeText
 	db "@"
 
-UnnamedText_5d48: ; 5d48 (1:5d48)
-	TX_FAR _UnnamedText_5d48
+PleaseWaitText: ; 5d48 (1:5d48)
+	TX_FAR _PleaseWaitText
 	db "@"
 
-UnnamedText_5d4d: ; 5d4d (1:5d4d)
-	TX_FAR _UnnamedText_5d4d
+LinkCanceledText: ; 5d4d (1:5d4d)
+	TX_FAR _LinkCanceledText
 	db "@"
 
 Func_5d52: ; 5d52 (1:5d52)
@@ -15722,11 +15722,11 @@ Func_695d: ; 695d (1:695d)
 	ld b, BANK(RedPicFront)
 	call IntroPredef3B
 .asm_6999
-	ld hl, UnnamedText_699f ; $699f
+	ld hl, YourNameIsText ; $699f
 	jp PrintText
 
-UnnamedText_699f: ; 699f (1:699f)
-	TX_FAR _UnnamedText_699f
+YourNameIsText: ; 699f (1:699f)
+	TX_FAR _YourNameIsText
 	db "@"
 
 Func_69a4: ; 69a4 (1:69a4)
@@ -15755,11 +15755,11 @@ Func_69a4: ; 69a4 (1:69a4)
 	ld b, $13
 	call IntroPredef3B
 .asm_69e1
-	ld hl, UnnamedText_69e7 ; $69e7
+	ld hl, HisNameIsText ; $69e7
 	jp PrintText
 
-UnnamedText_69e7: ; 69e7 (1:69e7)
-	TX_FAR _UnnamedText_69e7
+HisNameIsText: ; 69e7 (1:69e7)
+	TX_FAR _HisNameIsText
 	db "@"
 
 Func_69ec: ; 69ec (1:69ec)
@@ -16415,7 +16415,7 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	push de
 	ld [$d11e], a
 	call GetMoveName
-	ld hl, UnnamedText_6fc8 ; $6fc8
+	ld hl, OneTwoAndText ; $6fc8
 	call PrintText
 	pop de
 	pop hl
@@ -16458,7 +16458,7 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	jp Func_6efe
 
 Func_6eda: ; 6eda (1:6eda)
-	ld hl, UnnamedText_6fb9 ; $6fb9
+	ld hl, AbandonLearningText ; $6fb9
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -16469,20 +16469,20 @@ Func_6eda: ; 6eda (1:6eda)
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jp nz, Func_6e5b
-	ld hl, UnnamedText_6fbe ; $6fbe
+	ld hl, DidNotLearnText ; $6fbe
 	call PrintText
 	ld b, $0
 	ret
 
 Func_6efe: ; 6efe (1:6efe)
-	ld hl, UnnamedText_6fad ; $6fad
+	ld hl, LearnedMove1Text ; $6fad
 	call PrintText
 	ld b, $1
 	ret
 
 Func_6f07: ; 6f07 (1:6f07)
 	push hl
-	ld hl, UnnamedText_6fc3 ; $6fc3
+	ld hl, TryingToLearnText ; $6fc3
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -16506,7 +16506,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	pop hl
 .asm_6f39
 	push hl
-	ld hl, UnnamedText_6fb4 ; $6fb4
+	ld hl, WhichMoveToForgetText ; $6fb4
 	call PrintText
 	FuncCoord 4, 7 ; $c430
 	ld hl, Coord
@@ -16565,7 +16565,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	and a
 	ret
 .asm_6fa2
-	ld hl, UnnamedText_6fe1 ; $6fe1
+	ld hl, HMCantDeleteText ; $6fe1
 	call PrintText
 	pop hl
 	jr .asm_6f39
@@ -16573,44 +16573,44 @@ Func_6f07: ; 6f07 (1:6f07)
 	scf
 	ret
 
-UnnamedText_6fad: ; 6fb4 (1:6fb4)
-	TX_FAR UnnamedText_a273b
+LearnedMove1Text: ; 6fb4 (1:6fb4)
+	TX_FAR _LearnedMove1Text
 	db $b,6,"@"
 
-UnnamedText_6fb4: ; 6fb4 (1:6fb4)
-	TX_FAR _UnnamedText_6fb4
+WhichMoveToForgetText: ; 6fb4 (1:6fb4)
+	TX_FAR _WhichMoveToForgetText
 	db "@"
 
-UnnamedText_6fb9: ; 6fb9 (1:6fb9)
-	TX_FAR _UnnamedText_6fb9
+AbandonLearningText: ; 6fb9 (1:6fb9)
+	TX_FAR _AbandonLearningText
 	db "@"
 
-UnnamedText_6fbe: ; 6fbe (1:6fbe)
-	TX_FAR _UnnamedText_6fbe
+DidNotLearnText: ; 6fbe (1:6fbe)
+	TX_FAR _DidNotLearnText
 	db "@"
 
-UnnamedText_6fc3: ; 6fc3 (1:6fc3)
-	TX_FAR _UnnamedText_6fc3
+TryingToLearnText: ; 6fc3 (1:6fc3)
+	TX_FAR _TryingToLearnText
 	db "@"
 
-UnnamedText_6fc8: ; 6fc8 (1:6fc8)
-	TX_FAR _UnnamedText_6fc8 ; 0xa2819
+OneTwoAndText: ; 6fc8 (1:6fc8)
+	TX_FAR _OneTwoAndText ; 0xa2819
 	db $a
 	db $8
 	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, UnnamedText_6fd7 ; $6fd7
+	ld hl, PoofText ; $6fd7
 	ret
 
-UnnamedText_6fd7: ; 6fd7 (1:6fd7)
-	TX_FAR _UnnamedText_6fd7 ; 0xa2827
+PoofText: ; 6fd7 (1:6fd7)
+	TX_FAR _PoofText ; 0xa2827
 	db $a ; 0x6fdb
-UnnamedText_6fdc: ; 6fdc (1:6fdc)
-	TX_FAR _UnnamedText_6fdc
+ForgotAndText: ; 6fdc (1:6fdc)
+	TX_FAR _ForgotAndText
 	db "@"
 
-UnnamedText_6fe1: ; 6fe1 (1:6fe1)
-	TX_FAR _UnnamedText_6fe1
+HMCantDeleteText: ; 6fe1 (1:6fe1)
+	TX_FAR _HMCantDeleteText
 	db "@"
 
 DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
@@ -17869,7 +17869,7 @@ Func_7861: ; 7861 (1:7861)
 	ld hl, ReadPlayerMonCurHPAndStatus
 	ld b, BANK(ReadPlayerMonCurHPAndStatus)
 	call Bankswitch
-	ld hl, UnnamedText_78dc ; $78dc
+	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -17878,16 +17878,16 @@ Func_7861: ; 7861 (1:7861)
 .asm_78d2
 	cp $8
 	jr nz, .asm_78d9
-	ld hl, UnnamedText_78e1 ; $78e1
+	ld hl, DreamWasEatenText ; $78e1
 .asm_78d9
 	jp PrintText
 
-UnnamedText_78dc: ; 78dc (1:78dc)
-	TX_FAR _UnnamedText_78dc
+SuckedHealthText: ; 78dc (1:78dc)
+	TX_FAR _SuckedHealthText
 	db "@"
 
-UnnamedText_78e1: ; 78e1 (1:78e1)
-	TX_FAR _UnnamedText_78e1
+DreamWasEatenText: ; 78e1 (1:78e1)
+	TX_FAR _DreamWasEatenText
 	db "@"
 
 Func_78e6: ; 78e6 (1:78e6)
@@ -17904,7 +17904,7 @@ Func_78e6: ; 78e6 (1:78e6)
 	jr nz, Func_790c
 	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, UnnamedText_7b22 ; $7b22
+	ld hl, TurnedOnPC2Text ; $7b22
 	call PrintText
 
 Func_790c: ; 790c (1:790c)
@@ -17939,7 +17939,7 @@ Func_790c: ; 790c (1:790c)
 	ld [hli], a
 	ld [hl], a
 	ld [wPlayerMonNumber], a ; $cc2f
-	ld hl, UnnamedText_7b27 ; $7b27
+	ld hl, WhatDoYouWantText ; $7b27
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
@@ -17981,12 +17981,12 @@ Func_7995: ; 7995 (1:7995)
 	ld a, [wNumBagItems] ; $d31d
 	and a
 	jr nz, Func_79ab
-	ld hl, UnnamedText_7b3b ; $7b3b
+	ld hl, NothingToDepositText ; $7b3b
 	call PrintText
 	jp Func_790c
 
 Func_79ab: ; 79ab (1:79ab)
-	ld hl, UnnamedText_7b2c ; $7b2c
+	ld hl, WhatToDepositText ; $7b2c
 	call PrintText
 	ld hl, wNumBagItems ; $d31d
 	ld a, l
@@ -18005,7 +18005,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld a, [$d124]
 	and a
 	jr nz, .asm_79e7
-	ld hl, UnnamedText_7b31 ; $7b31
+	ld hl, DepositHowManyText ; $7b31
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
@@ -18014,7 +18014,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld hl, wNumBoxItems ; $d53a
 	call AddItemToInventory
 	jr c, .asm_79f8
-	ld hl, UnnamedText_7b40 ; $7b40
+	ld hl, NoRoomToStoreText ; $7b40
 	call PrintText
 	jp Func_79ab
 .asm_79f8
@@ -18024,7 +18024,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, UnnamedText_7b36 ; $7b36
+	ld hl, ItemWasStoredText ; $7b36
 	call PrintText
 	jp Func_79ab
 
@@ -18035,12 +18035,12 @@ Func_7a12: ; 7a12 (1:7a12)
 	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7a28
-	ld hl, UnnamedText_7b54 ; $7b54
+	ld hl, NothingStoredText ; $7b54
 	call PrintText
 	jp Func_790c
 
 Func_7a28: ; 7a28 (1:7a28)
-	ld hl, UnnamedText_7b45 ; $7b45
+	ld hl, WhatToWithdrawText ; $7b45
 	call PrintText
 	ld hl, wNumBoxItems ; $d53a
 	ld a, l
@@ -18059,7 +18059,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld a, [$d124]
 	and a
 	jr nz, .asm_7a64
-	ld hl, UnnamedText_7b4a ; $7b4a
+	ld hl, WithdrawHowManyText ; $7b4a
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
@@ -18068,7 +18068,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld hl, wNumBagItems ; $d31d
 	call AddItemToInventory
 	jr c, .asm_7a75
-	ld hl, UnnamedText_7b59 ; $7b59
+	ld hl, CantCarryMoreText ; $7b59
 	call PrintText
 	jp Func_7a28
 .asm_7a75
@@ -18078,7 +18078,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, UnnamedText_7b4f ; $7b4f
+	ld hl, WithdrewItemText ; $7b4f
 	call PrintText
 	jp Func_7a28
 
@@ -18089,12 +18089,12 @@ Func_7a8f: ; 7a8f (1:7a8f)
 	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7aa5
-	ld hl, UnnamedText_7b54 ; $7b54
+	ld hl, NothingStoredText ; $7b54
 	call PrintText
 	jp Func_790c
 
 Func_7aa5: ; 7aa5 (1:7aa5)
-	ld hl, UnnamedText_7b5e ; $7b5e
+	ld hl, WhatToTossText ; $7b5e
 	call PrintText
 	ld hl, wNumBoxItems ; $d53a
 	ld a, l
@@ -18121,7 +18121,7 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	call IsItemHM
 	jr c, .asm_7aef
 	push hl
-	ld hl, UnnamedText_7b63 ; $7b63
+	ld hl, TossHowManyText ; $7b63
 	call PrintText
 	call DisplayChooseQuantityMenu
 	pop hl
@@ -18137,60 +18137,60 @@ PlayersPCMenuEntries: ; 7af5 (1:7af5)
 	next "TOSS ITEM"
 	next "LOG OFF@"
 
-UnnamedText_7b22: ; 7b22 (1:7b22)
-	TX_FAR _UnnamedText_7b22
+TurnedOnPC2Text: ; 7b22 (1:7b22)
+	TX_FAR _TurnedOnPC2Text
 	db "@"
 
-UnnamedText_7b27: ; 7b27 (1:7b27)
-	TX_FAR _UnnamedText_7b27
+WhatDoYouWantText: ; 7b27 (1:7b27)
+	TX_FAR _WhatDoYouWantText
 	db "@"
 
-UnnamedText_7b2c: ; 7b2c (1:7b2c)
-	TX_FAR _UnnamedText_7b2c
+WhatToDepositText: ; 7b2c (1:7b2c)
+	TX_FAR _WhatToDepositText
 	db "@"
 
-UnnamedText_7b31: ; 7b31 (1:7b31)
-	TX_FAR _UnnamedText_7b31
+DepositHowManyText: ; 7b31 (1:7b31)
+	TX_FAR _DepositHowManyText
 	db "@"
 
-UnnamedText_7b36: ; 7b36 (1:7b36)
-	TX_FAR _UnnamedText_7b36
+ItemWasStoredText: ; 7b36 (1:7b36)
+	TX_FAR _ItemWasStoredText
 	db "@"
 
-UnnamedText_7b3b: ; 7b3b (1:7b3b)
-	TX_FAR _UnnamedText_7b3b
+NothingToDepositText: ; 7b3b (1:7b3b)
+	TX_FAR _NothingToDepositText
 	db "@"
 
-UnnamedText_7b40: ; 7b40 (1:7b40)
-	TX_FAR _UnnamedText_7b40
+NoRoomToStoreText: ; 7b40 (1:7b40)
+	TX_FAR _NoRoomToStoreText
 	db "@"
 
-UnnamedText_7b45: ; 7b45 (1:7b45)
-	TX_FAR _UnnamedText_7b45
+WhatToWithdrawText: ; 7b45 (1:7b45)
+	TX_FAR _WhatToWithdrawText
 	db "@"
 
-UnnamedText_7b4a: ; 7b4a (1:7b4a)
-	TX_FAR _UnnamedText_7b4a
+WithdrawHowManyText: ; 7b4a (1:7b4a)
+	TX_FAR _WithdrawHowManyText
 	db "@"
 
-UnnamedText_7b4f: ; 7b4f (1:7b4f)
-	TX_FAR _UnnamedText_7b4f
+WithdrewItemText: ; 7b4f (1:7b4f)
+	TX_FAR _WithdrewItemText
 	db "@"
 
-UnnamedText_7b54: ; 7b54 (1:7b54)
-	TX_FAR _UnnamedText_7b54
+NothingStoredText: ; 7b54 (1:7b54)
+	TX_FAR _NothingStoredText
 	db "@"
 
-UnnamedText_7b59: ; 7b59 (1:7b59)
-	TX_FAR _UnnamedText_7b59
+CantCarryMoreText: ; 7b59 (1:7b59)
+	TX_FAR _CantCarryMoreText
 	db "@"
 
-UnnamedText_7b5e: ; 7b5e (1:7b5e)
-	TX_FAR _UnnamedText_7b5e
+WhatToTossText: ; 7b5e (1:7b5e)
+	TX_FAR _WhatToTossText
 	db "@"
 
-UnnamedText_7b63: ; 7b63 (1:7b63)
-	TX_FAR _UnnamedText_7b63
+TossHowManyText: ; 7b63 (1:7b63)
+	TX_FAR _TossHowManyText
 	db "@"
 
 _RemovePokemon: ; 7b68 (1:7b68)
@@ -20250,7 +20250,7 @@ Func_cd99: ; cd99 (3:4d99)
 	set 0, [hl]
 	ld hl, UsedStrengthText ; $4daa
 	call PrintText
-	ld hl, UnnamedText_cdbb ; $4dbb
+	ld hl, CanMoveBouldersText ; $4dbb
 	jp PrintText
 
 UsedStrengthText: ; cdaa (3:4daa)
@@ -20261,8 +20261,8 @@ UsedStrengthText: ; cdaa (3:4daa)
 	call Delay3
 	jp TextScriptEnd
 
-UnnamedText_cdbb: ; cdbb (3:4dbb)
-	TX_FAR _UnnamedText_cdbb
+CanMoveBouldersText: ; cdbb (3:4dbb)
+	TX_FAR _CanMoveBouldersText
 	db "@"
 
 Func_cdc0: ; cdc0 (3:4dc0)
@@ -20283,23 +20283,23 @@ Func_cdc0: ; cdc0 (3:4dc0)
 	ret nc
 	ld hl, $d728
 	res 1, [hl]
-	ld hl, UnnamedText_cdfa ; $4dfa
+	ld hl, CurrentTooFastText ; $4dfa
 	jp PrintText
 .asm_cdec
 	ld hl, $d728
 	res 1, [hl]
-	ld hl, UnnamedText_cdff ; $4dff
+	ld hl, CyclingIsFunText ; $4dff
 	jp PrintText
 
 CoordsData_cdf7: ; cdf7 (3:4df7)
 	db $0B,$07,$FF
 
-UnnamedText_cdfa: ; cdfa (3:4dfa)
-	TX_FAR _UnnamedText_cdfa
+CurrentTooFastText: ; cdfa (3:4dfa)
+	TX_FAR _CurrentTooFastText
 	db "@"
 
-UnnamedText_cdff: ; cdff (3:4dff)
-	TX_FAR _UnnamedText_cdff
+CyclingIsFunText: ; cdff (3:4dff)
+	TX_FAR _CyclingIsFunText
 	db "@"
 
 ; function to add an item (in varying quantities) to the player's bag or PC box
@@ -24433,8 +24433,8 @@ ItemUseBall: ; d687 (3:5687)
 	call LoadScreenTilesFromBuffer1	;restore screenBuffer from Backup
 	ld hl,ItemUseText00
 	call PrintText
-	ld hl, Func_3d83a
-	ld b, BANK(Func_3d83a)
+	ld hl, IsGhostBattle
+	ld b, BANK(IsGhostBattle)
 	call Bankswitch
 	ld b,$10
 	jp z,.next12
@@ -27592,11 +27592,11 @@ Func_ef54: ; ef54 (3:6f54)
 	cp $52 ; grass
 	jr z, asm_ef82
 .asm_ef77
-	ld hl, UnnamedText_ef7d ; $6f7d
+	ld hl, NothingToCutText ; $6f7d
 	jp PrintText
 
-UnnamedText_ef7d: ; ef7d (3:6f7d)
-	TX_FAR _UnnamedText_ef7d
+NothingToCutText: ; ef7d (3:6f7d)
+	TX_FAR _NothingToCutText
 	db "@"
 
 asm_ef82: ; ef82 (3:6f82)
@@ -31688,7 +31688,7 @@ Func_137aa: ; 137aa (4:77aa)
 	ld c, $3
 	ld a, $b
 	call Predef ; indirect jump to Func_f81d (f81d (3:781d))
-	ld hl, UnnamedText_1386b ; $786b
+	ld hl, PickUpPayDayMoneyText ; $786b
 	call PrintText
 .asm_1380a
 	xor a
@@ -31735,8 +31735,8 @@ YouLoseText: ; 1385b (4:785b)
 DrawText: ; 13864 (4:7864)
 	db "  DRAW@"
 
-UnnamedText_1386b: ; 1386b (4:786b)
-	TX_FAR _UnnamedText_1386b
+PickUpPayDayMoneyText: ; 1386b (4:786b)
+	TX_FAR _PickUpPayDayMoneyText
 	db "@"
 
 Func_13870: ; 13870 (4:7870)
@@ -31853,7 +31853,7 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 	db $FC, $10 ; 11/256 =  4.3% chance of slot 8
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
-Func_1392c: ; 1392c (4:792c)
+_RecoilEffect: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
@@ -31919,13 +31919,14 @@ Func_1392c: ; 1392c (4:792c)
 	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
-	ld hl, UnnamedText_1399e ; $799e
+	ld hl, RecoilText ; $799e
 	jp PrintText
-UnnamedText_1399e: ; 1399e (4:799e)
-	TX_FAR _UnnamedText_1399e
+
+RecoilText: ; 1399e (4:799e)
+	TX_FAR _RecoilText
 	db "@"
 
-Func_139a3: ; 139a3 (4:79a3)
+_ConversionEffect: ; 139a3 (4:79a3)
 	ld hl, W_ENEMYMONTYPE1
 	ld de, W_PLAYERMONTYPE1
 	ld a, [H_WHOSETURN]
@@ -31948,20 +31949,20 @@ Func_139a3: ; 139a3 (4:79a3)
 	ld [de], a
 	ld hl, Func_3fba8
 	call Func_139d5
-	ld hl, UnnamedText_139cd
+	ld hl, ConversionText
 	jp PrintText
 
-UnnamedText_139cd: ; 139cd (4:79cd)
-	TX_FAR _UnnamedText_139cd
+ConversionText: ; 139cd (4:79cd)
+	TX_FAR _ConversionText
 	db "@"
 
 Func_139d2: ; 139d2 (4:79d2)
-	ld hl, Func_3fb53
+	ld hl, PrintItFailedText
 Func_139d5: ; 139d5 (4:79d5)
-	ld b, BANK(Func_3fb53)
+	ld b, BANK(PrintItFailedText)
 	jp Bankswitch
 
-Func_139da: ; 139da (4:79da)
+_HazeEffect: ; 139da (4:79da)
 	ld a, $7
 	ld hl, wPlayerMonAttackMod
 	call Func_13a43
@@ -32002,7 +32003,7 @@ Func_139da: ; 139da (4:79da)
 	call Func_13a37
 	ld hl, Func_3fba8
 	call Func_139d5
-	ld hl, UnnamedText_13a53
+	ld hl, HazeText
 	jp PrintText
 
 Func_13a37: ; 13a37 (4:7a37)
@@ -32034,8 +32035,8 @@ Func_13a4a: ; 13a4a (4:7a4a)
 	jr nz, .loop
 	ret
 
-UnnamedText_13a53: ; 13a53 (4:7a53)
-	TX_FAR _UnnamedText_13a53
+HazeText: ; 13a53 (4:7a53)
+	TX_FAR _HazeText
 	db "@"
 
 Func_13a58: ; 13a58 (4:7a58)
@@ -33309,36 +33310,36 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
 	call Bankswitch           ;jump to routine depending on animation setting
-	ld hl, UnnamedText_17e1d  ;"it created a substitute"
+	ld hl, SubstituteText  ;"it created a substitute"
 	call PrintText
 	ld hl, Func_3cd5a
 	ld b, BANK(Func_3cd5a)
 	jp Bankswitch
 .alreadyHasSubstitute
-	ld hl, UnnamedText_17e22  ;"x has a substitute"
+	ld hl, HasSubstituteText  ;"x has a substitute"
 	jr .printText
 .notEnoughHP
-	ld hl, UnnamedText_17e27  ;"too weak to make substitute"
+	ld hl, TooWeakSubstituteText  ;"too weak to make substitute"
 .printText
 	jp PrintText
 
-UnnamedText_17e1d: ; 17e1d (5:7e1d)
-	TX_FAR _UnnamedText_17e1d
+SubstituteText: ; 17e1d (5:7e1d)
+	TX_FAR _SubstituteText
 	db "@"
 
-UnnamedText_17e22: ; 17e22 (5:7e22)
-	TX_FAR _UnnamedText_17e22
+HasSubstituteText: ; 17e22 (5:7e22)
+	TX_FAR _HasSubstituteText
 	db "@"
 
-UnnamedText_17e27: ; 17e27 (5:7e27)
-	TX_FAR _UnnamedText_17e27
+TooWeakSubstituteText: ; 17e27 (5:7e27)
+	TX_FAR _TooWeakSubstituteText
 	db "@"
 
 ActivatePC: ; 17e2c (5:7e2c)
 	call SaveScreenTilesToBuffer2  ;XXX: copy background from wTileMap to wTileMapBackup2
 	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
-	ld hl, UnnamedText_17f23  ;player turned on PC
+	ld hl, TurnedOnPC1Text
 	call PrintText
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld hl, wFlags_0xcd60
@@ -33392,7 +33393,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	ld hl, UnnamedText_17f32  ;accessed players pc
+	ld hl, AccessedMyPCText
 	call PrintText
 	ld b, BANK(Func_78e6)
 	ld hl, Func_78e6
@@ -33421,10 +33422,10 @@ BillsPC: ; 17ee4 (5:7ee4)
 	ld a, [$D7F1] ;has to do with having met Bill
 	bit 0, a
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
-	ld hl, UnnamedText_17f2d ;accessed someone's pc
+	ld hl, AccessedSomeonesPCText
 	jr .printText
 .billsPC
-	ld hl, UnnamedText_17f28 ;accessed bill's pc
+	ld hl, AccessedBillsPCText
 .printText
 	call PrintText
 	ld b, BANK(BillsPC_)
@@ -33445,20 +33446,20 @@ LogOff: ; 17f13 (5:7f13)
 	res 5, [hl]
 	ret
 
-UnnamedText_17f23: ; 17f23 (5:7f23)
-	TX_FAR _UnnamedText_17f23
+TurnedOnPC1Text: ; 17f23 (5:7f23)
+	TX_FAR _TurnedOnPC1Text
 	db "@"
 
-UnnamedText_17f28: ; 17f28 (5:7f28)
-	TX_FAR _UnnamedText_17f28
+AccessedBillsPCText: ; 17f28 (5:7f28)
+	TX_FAR _AccessedBillsPCText
 	db "@"
 
-UnnamedText_17f2d: ; 17f2d (5:7f2d)
-	TX_FAR _UnnamedText_17f2d
+AccessedSomeonesPCText: ; 17f2d (5:7f2d)
+	TX_FAR _AccessedSomeonesPCText
 	db "@"
 
-UnnamedText_17f32: ; 17f32 (5:7f32)
-	TX_FAR _UnnamedText_17f32
+AccessedMyPCText: ; 17f32 (5:7f32)
+	TX_FAR _AccessedMyPCText
 	db "@"
 
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
@@ -37620,7 +37621,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	call GoPAL_SET_CF1C
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
-	ld hl, UnnamedText_1c9c1 ; $49c1
+	ld hl, ClearSaveDataText ; $49c1
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -37638,12 +37639,12 @@ Func_1c98a: ; 1c98a (7:498a)
 	call Bankswitch
 	jp InitGame
 
-UnnamedText_1c9c1: ; 1c9c1 (7:49c1)
-	TX_FAR _UnnamedText_1c9c1
+ClearSaveDataText: ; 1c9c1 (7:49c1)
+	TX_FAR _ClearSaveDataText
 	db "@"
 
 Func_1c9c6: ; 1c9c6 (7:49c6)
-	ld hl, UnnamedText_1ca14 ; $4a14
+	ld hl, WhichFloorText ; $4a14
 	call PrintText
 	ld hl, $cf7b
 	ld a, l
@@ -37687,8 +37688,8 @@ Func_1ca0d: ; 1ca0d (7:4a0d)
 	ld [hli], a
 	ret
 
-UnnamedText_1ca14: ; 1ca14 (7:4a14)
-	TX_FAR _UnnamedText_1ca14
+WhichFloorText: ; 1ca14 (7:4a14)
+	TX_FAR _WhichFloorText
 	db "@"
 
 CinnabarIslandScript: ; 1ca19 (7:4a19)
@@ -41837,9 +41838,9 @@ BillsHouseBlocks: ; 1e905 (7:6905)
 
 Func_1e915: ; 1e915 (7:6915)
 	call SaveScreenTilesToBuffer2
-	ld hl, UnnamedText_1e946 ; $6946
+	ld hl, AccessedOaksPCText ; $6946
 	call PrintText
-	ld hl, UnnamedText_1e93b ; $693b
+	ld hl, GetDexRatedText ; $693b
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; $cc26
@@ -41848,20 +41849,20 @@ Func_1e915: ; 1e915 (7:6915)
 	ld a, $56
 	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
 .asm_1e932
-	ld hl, UnnamedText_1e940 ; $6940
+	ld hl, ClosedOaksPCText ; $6940
 	call PrintText
 	jp LoadScreenTilesFromBuffer2
 
-UnnamedText_1e93b: ; 1e93b (7:693b)
-	TX_FAR _UnnamedText_1e93b
+GetDexRatedText: ; 1e93b (7:693b)
+	TX_FAR _GetDexRatedText
 	db "@"
 
-UnnamedText_1e940: ; 1e940 (7:6940)
-	TX_FAR _UnnamedText_1e940
+ClosedOaksPCText: ; 1e940 (7:6940)
+	TX_FAR _ClosedOaksPCText
 	db $0d,"@"
 
-UnnamedText_1e946: ; 1e946 (7:6946)
-	TX_FAR _UnnamedText_1e946
+AccessedOaksPCText: ; 1e946 (7:6946)
+	TX_FAR _AccessedOaksPCText
 	db "@"
 
 Func_1e94b: ; 1e94b (7:694b)
@@ -41878,8 +41879,8 @@ Func_1e958: ; 1e958 (7:6958)
 	ld a, $05
 	jp Func_3ef5
 
-UnnamedText_1e960: ; 1e960 (7:6960)
-	TX_FAR _UnnamedText_1e960
+PushStartText: ; 1e960 (7:6960)
+	TX_FAR _PushStartText
 	db "@"
 
 Func_1e965: ; 1e965 (7:6965)
@@ -41895,12 +41896,12 @@ Func_1e965: ; 1e965 (7:6965)
 .asm_1e97b
     jp Func_3ef5
 
-UnnamedText_1e97e: ; 1e97e (7:697e)
-	TX_FAR _UnnamedText_1e97e
+SaveOptionText: ; 1e97e (7:697e)
+	TX_FAR _SaveOptionText
 	db "@"
 
-UnnamedText_1e983: ; 1e983 (7:6983)
-	TX_FAR _UnnamedText_1e983
+StrengthsAndWeaknessesText: ; 1e983 (7:6983)
+	TX_FAR _StrengthsAndWeaknessesText
 	db "@"
 
 Func_1e988: ; 1e988 (7:6988)
@@ -41961,27 +41962,27 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 Func_1e9ed: ; 1e9ed (7:69ed)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
-	ld hl, UnnamedText_1e9f7 ; $69f7
+	ld hl, SafariGameOverText ; $69f7
 	jp PrintText
 
-UnnamedText_1e9f7: ; 1e9f7 (7:69f7)
+SafariGameOverText: ; 1e9f7 (7:69f7)
 	db $08 ; asm
 	ld a, [W_NUMSAFARIBALLS] ; $da47
 	and a
 	jr z, .asm_1ea04
-	ld hl, UnnamedText_1ea0d ; $6a0d
+	ld hl, TimesUpText ; $6a0d
 	call PrintText
 .asm_1ea04
-	ld hl, UnnamedText_1ea12 ; $6a12
+	ld hl, GameOverText ; $6a12
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_1ea0d: ; 1ea0d (7:6a0d)
-	TX_FAR _UnnamedText_1ea0d
+TimesUpText: ; 1ea0d (7:6a0d)
+	TX_FAR _TimesUpText
 	db "@"
 
-UnnamedText_1ea12: ; 1ea12 (7:6a12)
-	TX_FAR _UnnamedText_1ea12
+GameOverText: ; 1ea12 (7:6a12)
+	TX_FAR _GameOverText
 	db "@"
 
 Func_1eaa17: ; 1ea17 (7:6a17)
@@ -42182,8 +42183,8 @@ Func_1eb60: ; 1eb60 (7:6b60)
     call Func_3ef5
     ret
 
-UnnamedText_1eb69: ; 1eb69 (7:6b69)
-	TX_FAR _UnnamedText_1eb69
+MagazinesText: ; 1eb69 (7:6b69)
+	TX_FAR _MagazinesText
 	db "@"
 
 Func_1eb6e: ; 1eb6e (7:6b6e)
@@ -42677,7 +42678,7 @@ CooltrainerMName: ; 27f6c (9:7f6c)
 CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
 
-Func_27f86: ; 27f86 (9:7f86)
+_FocusEnergyEffect: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2 ; $d063
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
@@ -42690,18 +42691,18 @@ Func_27f86: ; 27f86 (9:7f86)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch
-	ld hl, UnnamedText_27fb3 ; $7fb2
+	ld hl, FocusEnergyText
 	jp PrintText
 .asm_27fa5
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53
-	ld b, BANK(Func_3fb53)
+	ld hl, PrintItFailedText
+	ld b, BANK(PrintItFailedText)
 	jp Bankswitch
 
-UnnamedText_27fb3: ; 27fb3 (9:7fb3)
+FocusEnergyText: ; 27fb3 (9:7fb3)
 	db $0a
-	TX_FAR _UnnamedText_27fb3
+	TX_FAR _FocusEnergyText
 	db "@"
 
 SECTION "bankA",ROMX,BANK[$A]
@@ -42834,7 +42835,7 @@ MoltresPicFront: ; 2bbac (a:7bac)
 MoltresPicBack: ; 2be02 (a:7e02)
 	INCBIN "pic/monback/moltresb.pic"
 
-Func_2bea9: ; 2bea9 (a:7ea9)
+_LeechSeedEffect: ; 2bea9 (a:7ea9)
 	ld hl, MoveHitTest
 	ld b, BANK(MoveHitTest)
 	call Bankswitch
@@ -42862,20 +42863,20 @@ Func_2bea9: ; 2bea9 (a:7ea9)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch
-	ld hl, UnnamedText_2bef2 ; $7ef2
+	ld hl, SeededText ; $7ef2
 	jp PrintText
 .asm_2bee7
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_2bef7 ; $7ef7
+	ld hl, EvadedText ; $7ef7
 	jp PrintText
 
-UnnamedText_2bef2: ; 2bef2 (a:7ef2)
-	TX_FAR _UnnamedText_2bef2
+SeededText: ; 2bef2 (a:7ef2)
+	TX_FAR _SeededText
 	db "@"
 
-UnnamedText_2bef7: ; 2bef7 (a:7ef7)
-	TX_FAR _UnnamedText_2bef7
+EvadedText: ; 2bef7 (a:7ef7)
+	TX_FAR _EvadedText
 	db "@"
 
 SECTION "bankB",ROMX,BANK[$B]
@@ -43023,18 +43024,18 @@ DisplayEffectiveness: ; 2fb7b (b:7b7b)
 	and a, $7F
 	cp a, $0A
 	ret z
-	ld hl, UnnamedText_2fb8e	; It's super effective!
+	ld hl, SupperEffectiveText
 	jr nc, .done
-	ld hl, UnnamedText_2fb93	; It's not very effective...
+	ld hl, NotVeryEffectiveText	; It's not very effective...
 .done
 	jp PrintText
 
-UnnamedText_2fb8e: ; 2fb8e (b:7b8e)
-	TX_FAR _UnnamedText_2fb8e
+SupperEffectiveText: ; 2fb8e (b:7b8e)
+	TX_FAR _SupperEffectiveText
 	db "@"
 
-UnnamedText_2fb93: ; 2fb93 (b:7b93)
-	TX_FAR _UnnamedText_2fb93
+NotVeryEffectiveText: ; 2fb93 (b:7b93)
+	TX_FAR _NotVeryEffectiveText
 	db "@"
 
 TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
@@ -43162,7 +43163,7 @@ DuplicateBitsTable: ; 2fea8 (b:7ea8)
 	db $c0, $c3, $cc, $cf
 	db $f0, $f3, $fc, $ff
 
-Func_2feb8 ; 2feb8 (b:7eb8)
+_PayDayEffect ; 2feb8 (b:7eb8)
 	xor a
 	ld hl, $cd6d
 	ld [hli], a
@@ -43200,11 +43201,11 @@ Func_2feb8 ; 2feb8 (b:7eb8)
 	ld c, $3
 	ld a, $b
 	call Predef
-	ld hl, UnnamedText_2ff04 ; $7f04
+	ld hl, PayDayText ; $7f04
 	jp PrintText
 
-UnnamedText_2ff04: ; 2ff04 (b:7f04)
-	TX_FAR _UnnamedText_2ff04
+PayDayText: ; 2ff04 (b:7f04)
+	TX_FAR _PayDayText
 	db "@"
 
 Func_2ff09 ; 2ff09 (b:7f09)
@@ -43362,7 +43363,7 @@ RedPicBack: ; 33e0a (c:7e0a)
 OldManPic: ; 33e9a (c:7e9a)
 	INCBIN "pic/trainer/oldman.pic"
 
-Func_33f2b: ; 33f2b (c:7f2b)
+_MistEffect: ; 33f2b (c:7f2b)
 	ld hl, $d063
 	ld a, [$fff3]
 	and a
@@ -43375,15 +43376,15 @@ Func_33f2b: ; 33f2b (c:7f2b)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch
-	ld hl, UnnamedText_33f52
+	ld hl, MistText
 	jp PrintText
 .asm_33f4a
-	ld hl, Func_3fb53
-	ld b, BANK(Func_3fb53)
+	ld hl, PrintItFailedText
+	ld b, BANK(PrintItFailedText)
 	jp Bankswitch
 
-UnnamedText_33f52: ; 33f52 (c:7f52)
-	TX_FAR _UnnamedText_33f52
+MistText: ; 33f52 (c:7f52)
+	TX_FAR _MistText
 	db "@"
 
 Func_33f57: ; 33f57 (c:7f57)
@@ -44074,7 +44075,7 @@ Func_37588: ; 37588 (d:7588)
 	dec [hl]
 	jr nz, .skip4
 .skip3
-	ld hl, UnnamedText_3769d
+	ld hl, NotThisTimeText
 	call PrintText
 .loop
 	xor a
@@ -44145,7 +44146,7 @@ UnnamedText_37665: ; 37665 (d:7665)
 	db $08 ; asm
 	push bc
 	call Func_37728
-	ld hl, UnnamedText_37673
+	ld hl, LinedUpText
 	pop bc
 	inc bc
 	inc bc
@@ -44153,8 +44154,8 @@ UnnamedText_37665: ; 37665 (d:7665)
 	inc bc
 	ret
 
-UnnamedText_37673: ; 37673 (d:7673)
-	TX_FAR _UnnamedText_37673
+LinedUpText: ; 37673 (d:7673)
+	TX_FAR _LinedUpText
 	db "@"
 
 SlotRewardPointers: ; 37678 (d:7678)
@@ -44183,8 +44184,8 @@ SlotReward8Text: ; 37698 (d:7698)
 SlotReward15Text: ; 3769a (d:769a)
 	db "15@"
 
-UnnamedText_3769d: ; 3769d (d:769d)
-	TX_FAR _UnnamedText_3769d
+NotThisTimeText: ; 3769d (d:769d)
+	TX_FAR _NotThisTimeText
 	db "@"
 
 Func_376a2: ; 376a2 (d:76a2)
@@ -44258,7 +44259,7 @@ SlotReward100Func: ; 376f3 (d:76f3)
 	ret
 
 SlotReward300Func: ; 37702 (d:7702)
-	ld hl, UnnamedText_37722
+	ld hl, YeahText
 	call PrintText
 	ld a, (SFX_1f_3b - SFX_Headers_1f) / 3
 	call PlaySound
@@ -44273,8 +44274,8 @@ SlotReward300Func: ; 37702 (d:7702)
 	ld de, 300
 	ret
 
-UnnamedText_37722: ; 37722 (d:7722)
-	TX_FAR _UnnamedText_37722
+YeahText: ; 37722 (d:7722)
+	TX_FAR _YeahText
 	db $0a, "@"
 
 Func_37728: ; 37728 (d:7728)
@@ -53356,7 +53357,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	call CopyStringToCF4B
-	ld hl, UnnamedText_3af4d ; $6f4d
+	ld hl, IsEvolvingText ; $6f4d
 	call PrintText
 	ld c, $32
 	call DelayFrames
@@ -53374,7 +53375,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld b, BANK(Func_7bde9)
 	call Bankswitch
 	jp c, Func_3af2e
-	ld hl, UnnamedText_3af3e ; $6f3e
+	ld hl, EvolvedText ; $6f3e
 	call PrintText
 	pop hl
 	ld a, [hl]
@@ -53387,7 +53388,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [$d0b7], a
 	call GetName
 	push hl
-	ld hl, UnnamedText_3af43 ; $6f43
+	ld hl, IntoText ; $6f43
 	call Func_3c59
 	ld a, (SFX_02_3b - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
@@ -53532,27 +53533,27 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	jp CopyData
 
 Func_3af2e: ; 3af2e (e:6f2e)
-	ld hl, UnnamedText_3af48 ; $6f48
+	ld hl, StoppedEvolvingText ; $6f48
 	call PrintText
 	call ClearScreen
 	pop hl
 	call Func_3af52
 	jp asm_3ad2e
 
-UnnamedText_3af3e: ; 3af3e (e:6f3e)
-	TX_FAR _UnnamedText_3af3e
+EvolvedText: ; 3af3e (e:6f3e)
+	TX_FAR _EvolvedText
 	db "@"
 
-UnnamedText_3af43: ; 3af43 (e:6f43)
-	TX_FAR _UnnamedText_3af43
+IntoText: ; 3af43 (e:6f43)
+	TX_FAR _IntoText
 	db "@"
 
-UnnamedText_3af48: ; 3af48 (e:6f48)
-	TX_FAR _UnnamedText_3af48
+StoppedEvolvingText: ; 3af48 (e:6f48)
+	TX_FAR _StoppedEvolvingText
 	db "@"
 
-UnnamedText_3af4d: ; 3af4d (e:6f4d)
-	TX_FAR _UnnamedText_3af4d
+IsEvolvingText: ; 3af4d (e:6f4d)
+	TX_FAR _IsEvolvingText
 	db "@"
 
 Func_3af52: ; 3af52 (e:6f52)
@@ -55948,9 +55949,9 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld a, [hl]
 	and a
 	ld [hl], $2
-	ld hl, UnnamedText_3baa2 ; $7aa2
+	ld hl, RestText ; $7aa2
 	jr z, .asm_3ba31
-	ld hl, UnnamedText_3baa7 ; $7aa7
+	ld hl, RestBecameHealthyText ; $7aa7
 .asm_3ba31
 	call PrintText
 	pop af
@@ -56012,25 +56013,25 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, Func_3cd5a ; $4d5a
 	call BankswitchEtoF
-	ld hl, UnnamedText_3baac ; $7aac
+	ld hl, RecoverText ; $7aac
 	jp PrintText
 
 Func_3ba97: ; 3ba97 (e:7a97)
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53
+	ld hl, PrintItFailedText
 	jp BankswitchEtoF
 
-UnnamedText_3baa2: ; 3baa2 (e:7aa2)
-	TX_FAR _UnnamedText_3baa2
+RestText: ; 3baa2 (e:7aa2)
+	TX_FAR _RestText
 	db "@"
 
-UnnamedText_3baa7: ; 3baa7 (e:7aa7)
-	TX_FAR _UnnamedText_3baa7
+RestBecameHealthyText: ; 3baa7 (e:7aa7)
+	TX_FAR _RestBecameHealthyText
 	db "@"
 
-UnnamedText_3baac: ; 3baac (e:7aac)
-	TX_FAR _UnnamedText_3baac
+RecoverText: ; 3baac (e:7aac)
+	TX_FAR _RecoverText
 	db "@"
 
 Func_3bab1: ; 3bab1 (e:7ab1)
@@ -56149,7 +56150,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, wPlayerMonStatMods ; $cd1a
 	call Func_3bb7d
-	ld hl, UnnamedText_3bb92 ; $7b92
+	ld hl, TransformText ; $7b92
 	jp PrintText
 
 Func_3bb7d: ; 3bb7d (e:7b7d)
@@ -56165,11 +56166,11 @@ Func_3bb7d: ; 3bb7d (e:7b7d)
 	jp CopyData
 
 Func_3bb8c: ; 3bb8c (e:7b8c)
-	ld hl, Func_3fb53 ; $7b53
+	ld hl, PrintItFailedText ; $7b53
 	jp BankswitchEtoF
 
-UnnamedText_3bb92: ; 3bb92 (e:7b92)
-	TX_FAR _UnnamedText_3bb92
+TransformText: ; 3bb92 (e:7b92)
+	TX_FAR _TransformText
 	db "@"
 
 Func_3bb97: ; 3bb97 (e:7b97)
@@ -56187,13 +56188,13 @@ Func_3bb97: ; 3bb97 (e:7b97)
 	bit 1, [hl]
 	jr nz, .asm_3bbcc
 	set 1, [hl]
-	ld hl, UnnamedText_3bbd7 ; $7bd7
+	ld hl, LightscreenText ; $7bd7
 	jr .asm_3bbc1
 .asm_3bbb8
 	bit 2, [hl]
 	jr nz, .asm_3bbcc
 	set 2, [hl]
-	ld hl, UnnamedText_3bbdc ; $7bdc
+	ld hl, AcidArmorText ; $7bdc
 .asm_3bbc1
 	push hl
 	ld hl, Func_3fba8 ; $7ba8
@@ -56203,15 +56204,15 @@ Func_3bb97: ; 3bb97 (e:7b97)
 .asm_3bbcc
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb53 ; $7b53
+	ld hl, PrintItFailedText ; $7b53
 	jp BankswitchEtoF
 
-UnnamedText_3bbd7: ; 3bbd7 (e:7bd7)
-	TX_FAR _UnnamedText_3bbd7
+LightscreenText: ; 3bbd7 (e:7bd7)
+	TX_FAR _LightscreenText
 	db "@"
 
-UnnamedText_3bbdc: ; 3bbdc (e:7bdc)
-	TX_FAR _UnnamedText_3bbdc
+AcidArmorText: ; 3bbdc (e:7bdc)
+	TX_FAR _AcidArmorText
 	db "@"
 
 BankswitchEtoF: ; 3bbe1 (e:7be1)
@@ -56409,7 +56410,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	and a
 	jr nz, .asm_3c17a
 	call LoadScreenTilesFromBuffer1
-	ld hl, UnnamedText_3c1a8 ; $41a8
+	ld hl, OutOfSafariBallsText ; $41a8
 	jp PrintText
 .asm_3c17a
 	ld hl, Func_4277
@@ -56437,8 +56438,8 @@ Func_3c11e: ; 3c11e (f:411e)
 	jr nc, .asm_3c14f
 	jr asm_3c202
 
-UnnamedText_3c1a8: ; 3c1a8 (f:41a8)
-	TX_FAR _UnnamedText_3c1a8
+OutOfSafariBallsText: ; 3c1a8 (f:41a8)
+	TX_FAR _OutOfSafariBallsText
 	db "@"
 
 Func_3c1ad: ; 3c1ad (f:41ad)
@@ -56486,11 +56487,11 @@ asm_3c202: ; 3c202 (f:4202)
 	call LoadScreenTilesFromBuffer1
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
-	ld hl, UnnamedText_3c229 ; $4229
+	ld hl, WildRanText ; $4229
 	jr nz, .asm_3c216
 	xor a
 	ld [$cf0b], a
-	ld hl, UnnamedText_3c22e ; $422e
+	ld hl, EnemyRanText ; $422e
 .asm_3c216
 	call PrintText
 	ld a, (SFX_08_44 - SFX_Headers_08) / 3
@@ -56501,12 +56502,12 @@ asm_3c202: ; 3c202 (f:4202)
 	ld b, BANK(AnimationSlideEnemyMonOut)
 	jp Bankswitch
 
-UnnamedText_3c229: ; 3c229 (f:4229)
-	TX_FAR _UnnamedText_3c229
+WildRanText: ; 3c229 (f:4229)
+	TX_FAR _WildRanText
 	db "@"
 
-UnnamedText_3c22e: ; 3c22e (f:422e)
-	TX_FAR _UnnamedText_3c22e
+EnemyRanText: ; 3c22e (f:422e)
+	TX_FAR _EnemyRanText
 	db "@"
 
 MainInBattleLoop: ; 3c233 (f:4233)
@@ -57261,7 +57262,7 @@ Func_3c79b: ; 3c79b (f:479b)
 	and a
 	dec a
 	ret nz
-	ld hl, UnnamedText_3c7d3 ; $47d3
+	ld hl, UseNextMonText ; $47d3
 	call PrintText
 .asm_3c7ad
 	FuncCoord 13, 9 ; $c461
@@ -57283,8 +57284,8 @@ Func_3c79b: ; 3c79b (f:479b)
 	ld de, W_ENEMYMONSPEED
 	jp Func_3cab9
 
-UnnamedText_3c7d3: ; 3c7d3 (f:47d3)
-	TX_FAR _UnnamedText_3c7d3
+UseNextMonText: ; 3c7d3 (f:47d3)
+	TX_FAR _UseNextMonText
 	db "@"
 
 Func_3c7d8: ; 3c7d8 (f:47d8)
@@ -57596,7 +57597,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld a,[wWhichPokemon]
 	cp [hl]
 	jr nz,.next6
-	ld hl,UnnamedText_3d1f5 ; $51f5
+	ld hl,AlreadyOutText ; $51f5
 	call PrintText
 .next8
 	call GoBackToPartyMenu
@@ -57681,18 +57682,18 @@ Func_3ca97: ; 3ca97 (f:4a97)
 	ld a, [$d11d]
 	and a
 	jr nz, .asm_3cab2
-	ld hl, UnnamedText_3cab4 ; $4ab4
+	ld hl, NoWillText ; $4ab4
 	call PrintText
 .asm_3cab2
 	xor a
 	ret
 
-UnnamedText_3cab4: ; 3cab4 (f:4ab4)
-	TX_FAR _UnnamedText_3cab4
+NoWillText: ; 3cab4 (f:4ab4)
+	TX_FAR _NoWillText
 	db "@"
 
 Func_3cab9: ; 3cab9 (f:4ab9)
-	call Func_3d83a
+	call IsGhostBattle
 	jp z, .asm_3cb5c
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
@@ -57764,10 +57765,10 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	jr nc, .asm_3cb5c
 	ld a, $1
 	ld [$cd6a], a
-	ld hl, UnnamedText_3cb97 ; $4b97
+	ld hl, CantEscapeText ; $4b97
 	jr .asm_3cb4f
 .asm_3cb4c
-	ld hl, UnnamedText_3cb9c ; $4b9c
+	ld hl, NoRunningText ; $4b9c
 .asm_3cb4f
 	call PrintText
 	ld a, $1
@@ -57796,23 +57797,23 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	ld [$cf0b], a
 	ld a, (SFX_08_44 - SFX_Headers_08) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, UnnamedText_3cba1 ; $4ba1
+	ld hl, GotAwayText ; $4ba1
 	call PrintText
 	call WaitForSoundToFinish
 	call SaveScreenTilesToBuffer1
 	scf
 	ret
 
-UnnamedText_3cb97: ; 3cb97 (f:4b97)
-	TX_FAR _UnnamedText_3cb97
+CantEscapeText: ; 3cb97 (f:4b97)
+	TX_FAR _CantEscapeText
 	db "@"
 
-UnnamedText_3cb9c: ; 3cb9c (f:4b9c)
-	TX_FAR _UnnamedText_3cb9c
+NoRunningText: ; 3cb9c (f:4b9c)
+	TX_FAR _NoRunningText
 	db "@"
 
-UnnamedText_3cba1: ; 3cba1 (f:4ba1)
-	TX_FAR _UnnamedText_3cba1
+GotAwayText: ; 3cba1 (f:4ba1)
+	TX_FAR _GotAwayText
 	db "@"
 
 Func_3cba6: ; 3cba6 (f:4ba6)
@@ -58480,7 +58481,7 @@ asm_3d05f: ; 3d05f (f:505f)
 	ret
 
 ItemsCantBeUsedHere: ; 3d0c5 (f:50c5)
-	TX_FAR ItemsCantBeUsedHere_
+	TX_FAR _ItemsCantBeUsedHere
 	db "@"
 
 Func_3d0ca: ; 3d0ca (f:50ca)
@@ -58582,7 +58583,7 @@ Func_3d119: ; 3d119 (f:5119)
 	ld a, [wWhichPokemon] ; $cf92
 	cp d
 	jr nz, .asm_3d19d
-	ld hl, UnnamedText_3d1f5 ; $51f5
+	ld hl, AlreadyOutText ; $51f5
 	call PrintText
 	jp Func_3d105
 .asm_3d19d
@@ -58624,8 +58625,8 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	and a
 	ret
 
-UnnamedText_3d1f5: ; 3d1f5 (f:51f5)
-	TX_FAR _UnnamedText_3d1f5
+AlreadyOutText: ; 3d1f5 (f:51f5)
+	TX_FAR _AlreadyOutText
 	db "@"
 
 Func_3d1fa: ; 3d1fa (f:51fa)
@@ -58936,15 +58937,15 @@ Func_3d3f5: ; 3d3f5 (f:53f5)
 	and a
 	ret nz
 .asm_3d423
-	ld hl, UnnamedText_3d430 ; $5430
+	ld hl, NoMovesLeftText ; $5430
 	call PrintText
 	ld c, $3c
 	call DelayFrames
 	xor a
 	ret
 
-UnnamedText_3d430: ; 3d430 (f:5430)
-	TX_FAR _UnnamedText_3d430
+NoMovesLeftText: ; 3d430 (f:5430)
+	TX_FAR _NoMovesLeftText
 	db "@"
 
 Func_3d435: ; 3d435 (f:5435)
@@ -59266,7 +59267,7 @@ Func_3d65e: ; 3d65e (f:565e)
 	ld a, [$cd6a]
 	and a
 	jp nz, Func_3d80a
-	call Func_3d811
+	call PrintGhostText
 	jp z, Func_3d80a
 	call Func_3d854
 	jr nz, .asm_3d68a
@@ -59293,7 +59294,7 @@ asm_3d6a9: ; 3d6a9 (f:56a9)
 	res 4,[hl]
 	res 6,[hl]
 asm_3d6b0: ; 3d6b0 (f:56b0)
-	call Func_3daf5
+	call PrintMonName1Text
 	ld hl,DecrementPP
 	ld de,$CCDC ; pointer to the move just used
 	ld b,BANK(DecrementPP)
@@ -59394,7 +59395,7 @@ asm_3d766
 	ld a,[W_MOVEMISSED]
 	and a
 	jr z,.next8 ; 57A6
-	call Func_3dbe2
+	call PrintMoveFailureText
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,7
 	jr z,.next9 ; 57B9
@@ -59453,9 +59454,9 @@ Func_3d80a: ; 3d80a (f:580a)
 	ld b,1
 	ret
 
-Func_3d811: ; 3d811 (f:5811)
+PrintGhostText: ; 3d811 (f:5811)
 ; print the ghost battle messages
-	call Func_3d83a
+	call IsGhostBattle
 	ret nz
 	ld a,[H_WHOSETURN]
 	and a
@@ -59481,7 +59482,7 @@ GetOutText: ; 3d835 (f:5835)
 	TX_FAR _GetOutText
 	db "@"
 
-Func_3d83a: ; 3d83a (f:583a)
+IsGhostBattle: ; 3d83a (f:583a)
 	ld a,[W_ISINBATTLE]
 	dec a
 	ret nz
@@ -59528,7 +59529,7 @@ Func_3d854: ; 3d854 (f:5854)
 .FrozenCheck
 	bit 5,[hl] ; frozen?
 	jr z,.HeldInPlaceCheck ; to 5898
-	ld hl,FrozenText
+	ld hl,IsFrozenText
 	call PrintText
 	xor a
 	ld [$CCF1],a
@@ -59602,7 +59603,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld a,[hl]
 	and a,$80
 	ld [hl],a
-	call Func_3daad
+	call PrintHurtItselfText
 	jr .next5 ; 5952
 .next3
 	ld a,[$CCEE]
@@ -59611,7 +59612,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,$CCDC
 	cp [hl]
 	jr nz,.ParalysisCheck
-	call Func_3da88
+	call PrintMoveIsDisabledText
 	ld hl,Func_3d80a ; $580a
 	jp Func_3da37
 .ParalysisCheck
@@ -59755,8 +59756,8 @@ WokeUpText: ; 3da42 (f:5a42)
 	TX_FAR _WokeUpText
 	db "@"
 
-FrozenText: ; 3da47 (f:5a47)
-	TX_FAR _FrozenText
+IsFrozenText: ; 3da47 (f:5a47)
+	TX_FAR _IsFrozenText
 	db "@"
 
 FullyParalyzedText: ; 3da4c (f:5a4c)
@@ -59807,7 +59808,7 @@ CantMoveText: ; 3da83 (f:5a83)
 	TX_FAR _CantMoveText
 	db "@"
 
-Func_3da88: ; 3da88 (f:5a88)
+PrintMoveIsDisabledText: ; 3da88 (f:5a88)
 	ld hl, wPlayerSelectedMove ; $ccdc
 	ld de, W_PLAYERBATTSTATUS1 ; $d062
 	ld a, [H_WHOSETURN] ; $fff3
@@ -59822,14 +59823,14 @@ Func_3da88: ; 3da88 (f:5a88)
 	ld a, [hl]
 	ld [$d11e], a
 	call GetMoveName
-	ld hl, UnnamedText_3daa8 ; $5aa8
+	ld hl, MoveIsDisabledText ; $5aa8
 	jp PrintText
 
-UnnamedText_3daa8: ; 3daa8 (f:5aa8)
-	TX_FAR _UnnamedText_3daa8
+MoveIsDisabledText: ; 3daa8 (f:5aa8)
+	TX_FAR _MoveIsDisabledText
 	db "@"
 
-Func_3daad: ; 3daad (f:5aad)
+PrintHurtItselfText: ; 3daad (f:5aad)
 	ld hl, HurtItselfText ; $5a65
 	call PrintText
 	ld hl, W_ENEMYMONDEFENSE ; $cff8
@@ -59872,12 +59873,12 @@ Func_3daad: ; 3daad (f:5aad)
 	ld [H_WHOSETURN], a ; $fff3
 	jp ApplyDamageToPlayerPokemon
 
-Func_3daf5: ; 3daf5 (f:5af5)
-	ld hl, UnnamedText_3dafb ; $5afb
+PrintMonName1Text: ; 3daf5 (f:5af5)
+	ld hl, MonName1Text ; $5afb
 	jp PrintText
 
-UnnamedText_3dafb: ; 3dafb (f:5afb)
-	TX_FAR _UnnamedText_3dafb
+MonName1Text: ; 3dafb (f:5afb)
+	TX_FAR _MonName1Text
 	db $08 ; asm
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
@@ -59892,43 +59893,43 @@ UnnamedText_3dafb: ; 3dafb (f:5afb)
 	call Func_3db85
 	ld a, [$cced]
 	and a
-	ld hl, UnnamedText_3db34 ; $5b34
+	ld hl, Used2Text
 	ret nz
 	ld a, [$d11e]
 	cp $3
-	ld hl, UnnamedText_3db34 ; $5b34
+	ld hl, Used2Text
 	ret c
-	ld hl, UnnamedText_3db2d ; $5b2d
+	ld hl, Used1Text
 	ret
 
-UnnamedText_3db2d: ; 3db2d (f:5b2d)
-	TX_FAR _UnnamedText_3db2d
+Used1Text: ; 3db2d (f:5b2d)
+	TX_FAR _Used1Text
 	db $08 ; asm
-	jr Func_3db39
+	jr PrintInsteadText
 
-UnnamedText_3db34: ; 3db34 (f:5b34)
-	TX_FAR _UnnamedText_3db34
+Used2Text: ; 3db34 (f:5b34)
+	TX_FAR _Used2Text
 	db $08 ; asm
 
-Func_3db39: ; 3db39 (f:5b39)
+PrintInsteadText: ; 3db39 (f:5b39)
 	ld a, [$cced]
 	and a
-	jr z, Func_3db48
-	ld hl, UnnamedText_3db43 ; $5b43
+	jr z, PrintCF4BText
+	ld hl, InsteadText
 	ret
 
-UnnamedText_3db43: ; 3db43 (f:5b43)
-	TX_FAR _UnnamedText_3db43
+InsteadText: ; 3db43 (f:5b43)
+	TX_FAR _InsteadText
 	db $08 ; asm
 
-Func_3db48: ; 3db48 (f:5b48)
-	ld hl, UnnamedText_3db4c ; $5b4c
+PrintCF4BText: ; 3db48 (f:5b48)
+	ld hl, CF4BText
 	ret
 
-UnnamedText_3db4c: ; 3db4c (f:5b4c)
-	TX_FAR _UnnamedText_3db4c
+CF4BText: ; 3db4c (f:5b4c)
+	TX_FAR _CF4BText
 	db $08 ; asm
-	ld hl, TextPointerTable_3db62
+	ld hl, ExclamationPointPointerTable
 	ld a, [$d11e]
 	add a
 	push bc
@@ -59941,31 +59942,31 @@ UnnamedText_3db4c: ; 3db4c (f:5b4c)
 	ld l, a
 	ret
 
-TextPointerTable_3db62: ; 3db62 (f:5b62)
-	dw UnnamedText_3db6c
-	dw UnnamedText_3db71
-	dw UnnamedText_3db76
-	dw UnnamedText_3db7b
-	dw UnnamedText_3db80
+ExclamationPointPointerTable: ; 3db62 (f:5b62)
+	dw ExclamationPoint1Text
+	dw ExclamationPoint2Text
+	dw ExclamationPoint3Text
+	dw ExclamationPoint4Text
+	dw ExclamationPoint5Text
 
-UnnamedText_3db6c: ; 3db6c (f:5b6c)
-	TX_FAR _UnnamedText_3db6c
+ExclamationPoint1Text: ; 3db6c (f:5b6c)
+	TX_FAR _ExclamationPoint1Text
 	db "@"
 
-UnnamedText_3db71: ; 3db71 (f:5b71)
-	TX_FAR _UnnamedText_3db71
+ExclamationPoint2Text: ; 3db71 (f:5b71)
+	TX_FAR _ExclamationPoint2Text
 	db "@"
 
-UnnamedText_3db76: ; 3db76 (f:5b76)
-	TX_FAR _UnnamedText_3db76
+ExclamationPoint3Text: ; 3db76 (f:5b76)
+	TX_FAR _ExclamationPoint3Text
 	db "@"
 
-UnnamedText_3db7b: ; 3db7b (f:5b7b)
-	TX_FAR _UnnamedText_3db7b
+ExclamationPoint4Text: ; 3db7b (f:5b7b)
+	TX_FAR _ExclamationPoint4Text
 	db "@"
 
-UnnamedText_3db80: ; 3db80 (f:5b80)
-	TX_FAR _UnnamedText_3db80
+ExclamationPoint5Text: ; 3db80 (f:5b80)
+	TX_FAR _ExclamationPoint5Text
 	db "@"
 
 Func_3db85: ; 3db85 (f:5b85)
@@ -60005,22 +60006,22 @@ UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
 	db $00 
 	db $FF ; terminator
 
-Func_3dbe2: ; 3dbe2 (f:5be2)
+PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3dbed
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3dbed
-	ld hl, UnnamedText_3dc57 ; $5c57
+	ld hl, DoesntAffectText ; $5c57
 	ld a, [$d05b]
 	and $7f
 	jr z, .asm_3dc04
-	ld hl, UnnamedText_3dc42 ; $5c42
+	ld hl, MissedText ; $5c42
 	ld a, [$d05e]
 	cp $ff
 	jr nz, .asm_3dc04
-	ld hl, UnnamedText_3dc4c ; $5c4c
+	ld hl, UnaffectedText ; $5c4c
 .asm_3dc04
 	push de
 	call PrintText
@@ -60047,7 +60048,7 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 	inc a
 	ld [hl], a
 .asm_3dc2a
-	ld hl, UnnamedText_3dc47 ; $5c47
+	ld hl, CrashedText ; $5c47
 	call PrintText
 	ld b, $4
 	ld a, $24
@@ -60059,24 +60060,24 @@ Func_3dbe2: ; 3dbe2 (f:5be2)
 .asm_3dc3f
 	jp ApplyDamageToEnemyPokemon
 
-UnnamedText_3dc42: ; 3dc42 (f:5c42)
-	TX_FAR _UnnamedText_3dc42
+MissedText: ; 3dc42 (f:5c42)
+	TX_FAR _MissedText
 	db "@"
 
-UnnamedText_3dc47: ; 3dc47 (f:5c47)
-	TX_FAR _UnnamedText_3dc47
+CrashedText: ; 3dc47 (f:5c47)
+	TX_FAR _CrashedText
 	db "@"
 
-UnnamedText_3dc4c: ; 3dc4c (f:5c4c)
-	TX_FAR _UnnamedText_3dc4c
+UnaffectedText: ; 3dc4c (f:5c4c)
+	TX_FAR _UnaffectedText
 	db "@"
 
-Func_3dc51: ; 3dc51 (f:5c51)
-	ld hl, UnnamedText_3dc57 ; $5c57
+PrintDoesntAffectText: ; 3dc51 (f:5c51)
+	ld hl, DoesntAffectText ; $5c57
 	jp PrintText
 
-UnnamedText_3dc57: ; 3dc57 (f:5c57)
-	TX_FAR _UnnamedText_3dc57
+DoesntAffectText: ; 3dc57 (f:5c57)
+	TX_FAR _DoesntAffectText
 	db "@"
 
 Func_3dc5c: ; 3dc5c (f:5c5c)
@@ -60085,7 +60086,7 @@ Func_3dc5c: ; 3dc5c (f:5c5c)
 	jr z, .asm_3dc75
 	dec a
 	add a
-	ld hl, TextPointerTable_3dc7a ; $5c7a
+	ld hl, CriticalOHKOTextPointers ; $5c7a
 	ld b, $0
 	ld c, a
 	add hl, bc
@@ -60099,16 +60100,16 @@ Func_3dc5c: ; 3dc5c (f:5c5c)
 	ld c, $14
 	jp DelayFrames
 
-TextPointerTable_3dc7a: ; 3dc7a (f:5c7a)
-	dw UnnamedText_3dc7e
-	dw UnnamedText_3dc83
+CriticalOHKOTextPointers: ; 3dc7a (f:5c7a)
+	dw CriticalHitText
+	dw OHKOText
 
-UnnamedText_3dc7e: ; 3dc7e (f:5c7e)
-	TX_FAR _UnnamedText_3dc7e
+CriticalHitText: ; 3dc7e (f:5c7e)
+	TX_FAR _CriticalHitText
 	db "@"
 
-UnnamedText_3dc83: ; 3dc83 (f:5c83)
-	TX_FAR _UnnamedText_3dc83
+OHKOText: ; 3dc83 (f:5c83)
+	TX_FAR _OHKOText
 	db "@"
 
 Func_3dc88: ; 3dc88 (f:5c88)
@@ -60183,9 +60184,9 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	jr c, .asm_3dd0e
 	cp b
 	jr nc, .asm_3dd20
-	ld hl, UnnamedText_3ddc0 ; $5dc0
+	ld hl, WontObeyText ; $5dc0
 	call PrintText
-	call Func_3daad
+	call PrintHurtItselfText
 	jp Func_3ddb4
 .asm_3dd0e
 	call GenRandomInBattle
@@ -60194,21 +60195,21 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	and $7
 	jr z, .asm_3dd0e
 	ld [W_PLAYERMONSTATUS], a ; $d018
-	ld hl, UnnamedText_3ddbb ; $5dbb
+	ld hl, BeganToNapText ; $5dbb
 	jr .asm_3dd3a
 .asm_3dd20
 	call GenRandomInBattle
 	and $3
-	ld hl, UnnamedText_3ddb6 ; $5db6
+	ld hl, LoafingAroundText ; $5db6
 	and a
 	jr z, .asm_3dd3a
-	ld hl, UnnamedText_3ddc0 ; $5dc0
+	ld hl, WontObeyText ; $5dc0
 	dec a
 	jr z, .asm_3dd3a
-	ld hl, UnnamedText_3ddc5 ; $5dc5
+	ld hl, TurnedAwayText ; $5dc5
 	dec a
 	jr z, .asm_3dd3a
-	ld hl, UnnamedText_3ddca ; $5dca
+	ld hl, IgnoredOrdersText ; $5dca
 .asm_3dd3a
 	call PrintText
 	jr Func_3ddb4
@@ -60289,24 +60290,24 @@ Func_3ddb4: ; 3ddb4 (f:5db4)
 	xor a
 	ret
 
-UnnamedText_3ddb6: ; 3ddb6 (f:5db6)
-	TX_FAR _UnnamedText_3ddb6
+LoafingAroundText: ; 3ddb6 (f:5db6)
+	TX_FAR _LoafingAroundText
 	db "@"
 
-UnnamedText_3ddbb: ; 3ddbb (f:5dbb)
-	TX_FAR _UnnamedText_3ddbb
+BeganToNapText: ; 3ddbb (f:5dbb)
+	TX_FAR _BeganToNapText
 	db "@"
 
-UnnamedText_3ddc0: ; 3ddc0 (f:5dc0)
-	TX_FAR _UnnamedText_3ddc0
+WontObeyText: ; 3ddc0 (f:5dc0)
+	TX_FAR _WontObeyText
 	db "@"
 
-UnnamedText_3ddc5: ; 3ddc5 (f:5dc5)
-	TX_FAR _UnnamedText_3ddc5
+TurnedAwayText: ; 3ddc5 (f:5dc5)
+	TX_FAR _TurnedAwayText
 	db "@"
 
-UnnamedText_3ddca: ; 3ddca (f:5dca)
-	TX_FAR _UnnamedText_3ddca
+IgnoredOrdersText: ; 3ddca (f:5dca)
+	TX_FAR _IgnoredOrdersText
 	db "@"
 
 CalculateDamage: ; 3ddcf (f:5dcf)
@@ -61783,7 +61784,7 @@ Func_3e6bc: ; 3e6bc (f:66bc)
 	ld a, [wEnemySelectedMove] ; $ccdd
 	inc a
 	jp z, Func_3e88c
-	call Func_3d811
+	call PrintGhostText
 	jp z, Func_3e88c
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -61834,7 +61835,7 @@ asm_3e70b: ; 3e70b (f:670b)
 asm_3e72b: ; 3e72b (f:672b)
 	xor a
 	ld [$cced], a
-	call Func_3daf5
+	call PrintMonName1Text
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 	ld hl, EffectsArray1 ; $4000
 	ld de, $1
@@ -61942,7 +61943,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
 	jr z, .asm_3e82b
-	call Func_3dbe2
+	call PrintMoveFailureText
 	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
 	cp $7
 	jr z, .asm_3e83e
@@ -61976,7 +61977,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	pop hl
 	jp nz, Func_3e794
 	res 2, [hl]
-	ld hl, UnnamedText_3e887 ; $6887
+	ld hl, HitMultipleTimesText ; $6887
 	call PrintText
 	xor a
 	ld [$cd05], a
@@ -61990,8 +61991,8 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call nc, Func_3f132
 	jr Func_3e88c
 
-UnnamedText_3e887: ; 3e887 (f:6887)
-	TX_FAR _UnnamedText_3e887
+HitMultipleTimesText: ; 3e887 (f:6887)
+	TX_FAR _HitMultipleTimesText
 	db "@"
 
 Func_3e88c: ; 3e88c (f:688c)
@@ -62025,7 +62026,7 @@ Func_3e88f: ; 3e88f (f:688f)
 .asm_3e8bf
 	bit 5, [hl]
 	jr z, .asm_3e8d3
-	ld hl, FrozenText ; $5a47
+	ld hl, IsFrozenText ; $5a47
 	call PrintText
 	xor a
 	ld [$ccf2], a
@@ -62147,7 +62148,7 @@ Func_3e9aa: ; 3e9aa (f:69aa)
 	ld hl, wEnemySelectedMove ; $ccdd
 	cp [hl]
 	jr nz, .asm_3e9bf
-	call Func_3da88
+	call PrintMoveIsDisabledText
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e9bf
@@ -63000,7 +63001,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 	ld a, [W_CUROPPONENT] ; $d059
 	cp MAROWAK
 	jr z, .isGhost
-	call Func_3d83a
+	call IsGhostBattle
 	jr nz, .isNoGhost
 .isGhost
 	ld hl, W_MONHSPRITEDIM
@@ -63269,7 +63270,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw Func_3f428
 	 dw Func_3f428
 	 dw Func_3f428
-	 dw Func_3fb0e
+	 dw PayDayEffect
 	 dw $0000
 	 dw Func_3f54c
 	 dw Func_3f54c
@@ -63277,8 +63278,8 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw Func_3f54c
 	 dw Func_3f54c
 	 dw Func_3f54c
-	 dw Func_3fb16
-	 dw Func_3fb1e
+	 dw ConversionEffect
+	 dw HazeEffect
 	 dw Func_3f6e5
 	 dw Func_3f717
 	 dw Func_3f739
@@ -63292,16 +63293,16 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw FreezeBurnParalyzeEffect
 	 dw Func_3f85b
 	 dw Func_3f884
-	 dw Func_3f88c
+	 dw TwoTurnAttackEffect
 	 dw $0000
 	 dw $0000
 	 dw Func_3f917
-	 dw Func_3f88c
+	 dw TwoTurnAttackEffect
 	 dw Func_3f811
 	 dw $0000
-	 dw Func_3f941
-	 dw Func_3f949
-	 dw Func_3f951
+	 dw MistEffect
+	 dw FocusEnergyEffect
+	 dw RecoilEffect
 	 dw Func_3f961
 	 dw Func_3f428
 	 dw Func_3f428
@@ -63337,9 +63338,9 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw Func_3f9df
 	 dw Func_3f9ed
 	 dw $0000
-	 dw Func_3fa7c
+	 dw LeechSeedEffect
 	 dw Func_3fa84
-	 dw Func_3fa8a
+	 dw DisableEffect
 
 Func_3f1fc: ; 3f1fc (f:71fc)
 	ld de, W_ENEMYMONSTATUS ; $cfe9
@@ -63360,7 +63361,7 @@ Func_3f20e: ; 3f20e (f:720e)
 	ld b, a
 	and $7
 	jr z, .asm_3f222
-	ld hl, UnnamedText_3f24a ; $724a
+	ld hl, AlreadyAsleepText ; $724a
 	jp PrintText
 .asm_3f222
 	ld a, b
@@ -63378,17 +63379,17 @@ Func_3f20e: ; 3f20e (f:720e)
 	jr z, .asm_3f231
 	ld [de], a
 	call Func_3fb89
-	ld hl, UnnamedText_3f245 ; $7245
+	ld hl, FellAsleepText ; $7245
 	jp PrintText
 .asm_3f242
-	jp Func_3fb5e
+	jp PrintDidntAffectText
 
-UnnamedText_3f245: ; 3f245 (f:7245)
-	TX_FAR _UnnamedText_3f245
+FellAsleepText: ; 3f245 (f:7245)
+	TX_FAR _FellAsleepText
 	db "@"
 
-UnnamedText_3f24a: ; 3f24a (f:724a)
-	TX_FAR _UnnamedText_3f24a
+AlreadyAsleepText: ; 3f24a (f:724a)
+	TX_FAR _AlreadyAsleepText
 	db "@"
 
 Func_3f24f: ; 3f24f (f:724f)
@@ -63453,10 +63454,10 @@ Func_3f24f: ; 3f24f (f:724f)
 	set 0, [hl]
 	xor a
 	ld [de], a
-	ld hl, UnnamedText_3f2e4 ; $72e4
+	ld hl, BadlyPoisonedText ; $72e4
 	jr .asm_3f2c0
 .asm_3f2bd
-	ld hl, UnnamedText_3f2df ; $72df
+	ld hl, PoisonedText ; $72df
 .asm_3f2c0
 	pop de
 	ld a, [de]
@@ -63475,14 +63476,14 @@ Func_3f24f: ; 3f24f (f:724f)
 .asm_3f2d7
 	ld c, $32
 	call DelayFrames
-	jp Func_3fb5e
+	jp PrintDidntAffectText
 
-UnnamedText_3f2df: ; 3f2df (f:72df)
-	TX_FAR _UnnamedText_3f2df
+PoisonedText: ; 3f2df (f:72df)
+	TX_FAR _PoisonedText
 	db "@"
 
-UnnamedText_3f2e4: ; 3f2e4 (f:72e4)
-	TX_FAR _UnnamedText_3f2e4
+BadlyPoisonedText: ; 3f2e4 (f:72e4)
+	TX_FAR _BadlyPoisonedText
 	db "@"
 
 Func_3f2e9: ; 3f2e9 (f:72e9)
@@ -63552,14 +63553,14 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	call Func_3ed27  ;quarter speed of affected monster
 	ld a, $a9
 	call Func_3fbb9  ;animation
-	jp Func_3fb6e    ;print paralysis text
+	jp PrintMayNotAttackText    ;print paralysis text
 .burn
 	ld a, BRN
 	ld [W_ENEMYMONSTATUS], a
 	call Func_3ed64
 	ld a, $a9
 	call Func_3fbb9  ;animation
-	ld hl, UnnamedText_3f3d8
+	ld hl, BurnedText
 	jp PrintText
 .freeze
 	call Func_3f9cf  ;resets bit 5 of the D063/D068 flags
@@ -63567,7 +63568,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld [W_ENEMYMONSTATUS], a
 	ld a, $a9
 	call Func_3fbb9  ;animation
-	ld hl, UnnamedText_3f3dd
+	ld hl, FrozenText
 	jp PrintText
 opponentAttacker: ; 3f382 (f:7382)
 	ld a, [W_PLAYERMONSTATUS]  ;this appears to the same as above with addresses swapped for opponent
@@ -63601,25 +63602,25 @@ opponentAttacker: ; 3f382 (f:7382)
 	ld a, PAR
 	ld [W_PLAYERMONSTATUS], a
 	call Func_3ed27
-	jp Func_3fb6e
+	jp PrintMayNotAttackText
 .burn
 	ld a, BRN
 	ld [W_PLAYERMONSTATUS], a
 	call Func_3ed64
-	ld hl, UnnamedText_3f3d8
+	ld hl, BurnedText
 	jp PrintText
 .freeze
 	ld a, FRZ
 	ld [W_PLAYERMONSTATUS], a
-	ld hl, UnnamedText_3f3dd
+	ld hl, FrozenText
 	jp PrintText
 
-UnnamedText_3f3d8: ; 3f3d8 (f:73d8)
-	TX_FAR _UnnamedText_3f3d8
+BurnedText: ; 3f3d8 (f:73d8)
+	TX_FAR _BurnedText
 	db "@"
 
-UnnamedText_3f3dd: ; 3f3dd (f:73dd)
-	TX_FAR _UnnamedText_3f3dd
+FrozenText: ; 3f3dd (f:73dd)
+	TX_FAR _FrozenText
 	db "@"
 
 CheckDefrost: ; 3f3e2 (f:73e2)
@@ -63641,7 +63642,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	call AddNTimes
 	xor a
 	ld [hl], a			;clear status in roster
-	ld hl, UnnamedText_3f423
+	ld hl, FireDefrostedText
 	jr .common
 .opponent
 	ld a, [W_ENEMYMOVETYPE]		;same as above with addresses swapped
@@ -63654,12 +63655,12 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	call AddNTimes
 	xor a
 	ld [hl], a
-	ld hl, UnnamedText_3f423
+	ld hl, FireDefrostedText
 .common
 	jp PrintText
 
-UnnamedText_3f423: ; 3f423 (f:7423)
-	TX_FAR _UnnamedText_3f423
+FireDefrostedText: ; 3f423 (f:7423)
+	TX_FAR _FireDefrostedText
 	db "@"
 
 Func_3f428: ; 3f428 (f:7428)
@@ -63806,7 +63807,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call z, Func_3ee19
-	ld hl, UnnamedText_3f528 ; $7528
+	ld hl, MonsStatsRoseText ; $7528
 	call PrintText
 	call Func_3ed27
 	jp Func_3ed64
@@ -63816,13 +63817,13 @@ Func_3f520: ; 3f520 (f:7520)
 	dec [hl]
 
 Func_3f522: ; 3f522 (f:7522)
-	ld hl, UnnamedText_3fb3e ; $7b3e
+	ld hl, NothingHappenedText ; $7b3e
 	jp PrintText
 
-UnnamedText_3f528: ; 3f528 (f:7528)
-	TX_FAR _UnnamedText_3f528
+MonsStatsRoseText: ; 3f528 (f:7528)
+	TX_FAR _MonsStatsRoseText
 	db $08 ; asm
-	ld hl, UnnamedText_3f542 ; $7542
+	ld hl, GreatlyRoseText ; $7542
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -63831,15 +63832,15 @@ UnnamedText_3f528: ; 3f528 (f:7528)
 .asm_3f53b
 	cp $12
 	ret nc
-	ld hl, UnnamedText_3f547 ; $7547
+	ld hl, RoseText ; $7547
 	ret
 
-UnnamedText_3f542: ; 3f542 (f:7542)
+GreatlyRoseText: ; 3f542 (f:7542)
 	db $0a
-	TX_FAR _UnnamedText_3f542
+	TX_FAR _GreatlyRoseText
 
-UnnamedText_3f547: ; 3f547 (f:7547)
-	TX_FAR _UnnamedText_3f547
+RoseText: ; 3f547 (f:7547)
+	TX_FAR _RoseText
 	db "@"
 
 Func_3f54c: ; 3f54c (f:754c)
@@ -63991,7 +63992,7 @@ asm_3f62c: ; 3f62c (f:762c)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call nz, Func_3ee19
-	ld hl, UnnamedText_3f661 ; $7661
+	ld hl, MonsStatsFellText ; $7661
 	call PrintText
 	call Func_3ed27
 	jp Func_3ed64
@@ -64005,7 +64006,7 @@ Func_3f650: ; 3f650 (f:7650)
 	ld a, [de]
 	cp $44
 	ret nc
-	ld hl, UnnamedText_3fb3e ; $7b3e
+	ld hl, NothingHappenedText ; $7b3e
 	jp PrintText
 
 Func_3f65a: ; 3f65a (f:765a)
@@ -64014,10 +64015,10 @@ Func_3f65a: ; 3f65a (f:765a)
 	ret nc
 	jp Func_3fb4e
 
-UnnamedText_3f661: ; 3f661 (f:7661)
-	TX_FAR _UnnamedText_3f661
+MonsStatsFellText: ; 3f661 (f:7661)
+	TX_FAR _MonsStatsFellText
 	db $08 ; asm
-	ld hl, UnnamedText_3f683 ; $7683
+	ld hl, FellText ; $7683
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -64028,15 +64029,15 @@ UnnamedText_3f661: ; 3f661 (f:7661)
 	ret c
 	cp $44
 	ret nc
-	ld hl, UnnamedText_3f67e ; $767e
+	ld hl, GreatlyFellText ; $767e
 	ret
 
-UnnamedText_3f67e: ; 3f67e (f:767e)
+GreatlyFellText: ; 3f67e (f:767e)
 	db $0a
-	TX_FAR _UnnamedText_3f67e
+	TX_FAR _GreatlyFellText
 
-UnnamedText_3f683: ; 3f683 (f:7683)
-	TX_FAR _UnnamedText_3f683
+FellText: ; 3f683 (f:7683)
+	TX_FAR _FellText
 	db "@"
 
 Func_3f688: ; 3f688 (f:7688)
@@ -64152,8 +64153,8 @@ Func_3f739: ; 3f739 (f:7739)
 	call DelayFrames
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	cp $64
-	jp nz, Func_3fb5e
-	jp Func_3fb53
+	jp nz, PrintDidntAffectText
+	jp PrintItFailedText
 .asm_3f76e
 	call ReadPlayerMonCurHPAndStatus
 	xor a
@@ -64165,11 +64166,11 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f77e
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_3fb69 ; $7b69
+	ld hl, IsUnaffectedText ; $7b69
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
 	cp $64
 	jp nz, PrintText
-	jp Func_3fb53
+	jp PrintItFailedText
 .asm_3f791
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
@@ -64194,8 +64195,8 @@ Func_3f739: ; 3f739 (f:7739)
 	call DelayFrames
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 	cp $64
-	jp nz, Func_3fb5e
-	jp Func_3fb53
+	jp nz, PrintDidntAffectText
+	jp PrintItFailedText
 .asm_3f7c1
 	call ReadPlayerMonCurHPAndStatus
 	xor a
@@ -64207,7 +64208,7 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f7d1
 	ld c, $32
 	call DelayFrames
-	ld hl, UnnamedText_3fb69 ; $7b69
+	ld hl, IsUnaffectedText ; $7b69
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 	cp $64
 	jp nz, PrintText
@@ -64218,26 +64219,26 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $14
 	call DelayFrames
 	pop af
-	ld hl, UnnamedText_3f802 ; $7802
+	ld hl, RanText ; $7802
 	cp $64
 	jr z, .asm_3f7ff
-	ld hl, UnnamedText_3f807 ; $7807
+	ld hl, RanScaredText ; $7807
 	cp $2e
 	jr z, .asm_3f7ff
-	ld hl, UnnamedText_3f80c ; $780c
+	ld hl, BlownAwayText ; $780c
 .asm_3f7ff
 	jp PrintText
 
-UnnamedText_3f802: ; 3f802 (f:7802)
-	TX_FAR _UnnamedText_3f802
+RanText: ; 3f802 (f:7802)
+	TX_FAR _RanText
 	db "@"
 
-UnnamedText_3f807: ; 3f807 (f:7807)
-	TX_FAR _UnnamedText_3f807
+RanScaredText: ; 3f807 (f:7807)
+	TX_FAR _RanScaredText
 	db "@"
 
-UnnamedText_3f80c: ; 3f80c (f:780c)
-	TX_FAR _UnnamedText_3f80c
+BlownAwayText: ; 3f80c (f:780c)
+	TX_FAR _BlownAwayText
 	db "@"
 
 Func_3f811: ; 3f811 (f:7811)
@@ -64313,7 +64314,7 @@ Func_3f884: ; 3f884 (f:7884)
 	ld b, BANK(Func_33f57)
 	jp Bankswitch
 
-Func_3f88c: ; 3f88c (f:788c)
+TwoTurnAttackEffect: ; 3f88c (f:788c)
 	ld hl, W_PLAYERBATTSTATUS1 ; $d062
 	ld de, W_PLAYERMOVEEFFECT ; $cfd3
 	ld a, [H_WHOSETURN] ; $fff3
@@ -64344,55 +64345,55 @@ Func_3f88c: ; 3f88c (f:788c)
 	call Func_3fbb9
 	ld a, [de]
 	ld [wWhichTrade], a ; $cd3d
-	ld hl, UnnamedText_3f8c8 ; $78c8
+	ld hl, TwoTurnAttackTexts
 	jp PrintText
 
-UnnamedText_3f8c8: ; 3f8c8 (f:78c8)
-	TX_FAR _UnnamedText_3f8c8
+TwoTurnAttackTexts: ; 3f8c8 (f:78c8)
+	TX_FAR _MonName2Text
 	db $08 ; asm
-	ld a, [wWhichTrade] ; $cd3d
-	cp $d
-	ld hl, UnnamedText_3f8f9 ; $78f9
+	ld a, [wWhichTrade]
+	cp RAZOR_WIND
+	ld hl, RazorwindText
 	jr z, .asm_3f8f8
-	cp $4c
-	ld hl, UnnamedText_3f8fe ; $78fe
+	cp SOLARBEAM
+	ld hl, SolarBeamText
 	jr z, .asm_3f8f8
-	cp $82
-	ld hl, UnnamedText_3f903 ; $7903
+	cp SKULL_BASH
+	ld hl, SkullBashText
 	jr z, .asm_3f8f8
-	cp $8f
-	ld hl, UnnamedText_3f908 ; $7908
+	cp SKY_ATTACK
+	ld hl, SkyAttackText
 	jr z, .asm_3f8f8
-	cp $13
-	ld hl, UnnamedText_3f90d ; $790d
+	cp FLY
+	ld hl, FlyText
 	jr z, .asm_3f8f8
-	cp $5b
-	ld hl, UnnamedText_3f912 ; $7912
+	cp DIG
+	ld hl, DigText
 .asm_3f8f8
 	ret
 
-UnnamedText_3f8f9: ; 3f8f9 (f:78f9)
-	TX_FAR _UnnamedText_3f8f9
+RazorwindText: ; 3f8f9 (f:78f9)
+	TX_FAR _RazorwindText
 	db "@"
 
-UnnamedText_3f8fe: ; 3f8fe (f:78fe)
-	TX_FAR _UnnamedText_3f8fe
+SolarBeamText: ; 3f8fe (f:78fe)
+	TX_FAR _SolarBeamText
 	db "@"
 
-UnnamedText_3f903: ; 3f903 (f:7903)
-	TX_FAR _UnnamedText_3f903
+SkullBashText: ; 3f903 (f:7903)
+	TX_FAR _SkullBashText
 	db "@"
 
-UnnamedText_3f908: ; 3f908 (f:7908)
-	TX_FAR _UnnamedText_3f908
+SkyAttackText: ; 3f908 (f:7908)
+	TX_FAR _SkyAttackText
 	db "@"
 
-UnnamedText_3f90d: ; 3f90d (f:790d)
-	TX_FAR _UnnamedText_3f90d
+FlyText: ; 3f90d (f:790d)
+	TX_FAR _FlyText
 	db "@"
 
-UnnamedText_3f912: ; 3f912 (f:7912)
-	TX_FAR _UnnamedText_3f912
+DigText: ; 3f912 (f:7912)
+	TX_FAR _DigText
 	db "@"
 
 Func_3f917: ; 3f917 (f:7917)
@@ -64419,19 +64420,19 @@ Func_3f917: ; 3f917 (f:7917)
 	ld [de], a
 	ret
 
-Func_3f941: ; 3f941 (f:7941)
-	ld hl, Func_33f2b
-	ld b, BANK(Func_33f2b)
+MistEffect: ; 3f941 (f:7941)
+	ld hl, _MistEffect
+	ld b, BANK(_MistEffect)
 	jp Bankswitch
 
-Func_3f949: ; 3f949 (f:7949)
-	ld hl, Func_27f86
-	ld b, BANK(Func_27f86)
+FocusEnergyEffect: ; 3f949 (f:7949)
+	ld hl, _FocusEnergyEffect
+	ld b, BANK(_FocusEnergyEffect)
 	jp Bankswitch
 
-Func_3f951: ; 3f951 (f:7951)
-	ld hl, Func_1392c
-	ld b, BANK(Func_1392c)
+RecoilEffect: ; 3f951 (f:7951)
+	ld hl, _RecoilEffect
+	ld b, BANK(_RecoilEffect)
 	jp Bankswitch
 
 Func_3f959: ; 3f959 (f:7959)
@@ -64471,11 +64472,11 @@ Func_3f96f: ; 3f96f (f:796f)
 	pop af
 	cp $4c
 	call nz, Func_3fb89
-	ld hl, UnnamedText_3f9a1 ; $79a1
+	ld hl, ConfusedText
 	jp PrintText
 
-UnnamedText_3f9a1: ; 3f9a1 (f:79a1)
-	TX_FAR _UnnamedText_3f9a1
+ConfusedText: ; 3f9a1 (f:79a1)
+	TX_FAR _ConfusedText
 	db "@"
 
 Func_3f9a6: ; 3f9a6 (f:79a6)
@@ -64594,25 +64595,25 @@ Func_3f9ed: ; 3f9ed (f:79ed)
 	ld [$d11e], a
 	call GetMoveName
 	call Func_3fba8
-	ld hl, UnnamedText_3fa77
+	ld hl, LearnedMove2Text
 	jp PrintText
 .asm_3fa74
-	jp Func_3fb53
+	jp PrintItFailedText
 
-UnnamedText_3fa77: ; 3fa77 (f:7a77)
-	TX_FAR _UnnamedText_3fa77
+LearnedMove2Text: ; 3fa77 (f:7a77)
+	TX_FAR _LearnedMove2Text
 	db "@"
 
-Func_3fa7c: ; 3fa7c (f:7a7c)
-	ld hl, Func_2bea9
-	ld b, BANK(Func_2bea9)
+LeechSeedEffect: ; 3fa7c (f:7a7c)
+	ld hl, _LeechSeedEffect
+	ld b, BANK(_LeechSeedEffect)
 	jp Bankswitch
 
 Func_3fa84: ; 3fa84 (f:7a84)
 	call Func_3fba8
-	jp Func_3fb43
+	jp PrintNoEffectText
 
-Func_3fa8a: ; 3fa8a (f:7a8a)
+DisableEffect: ; 3fa8a (f:7a8a)
 	call MoveHitTest
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
@@ -64685,30 +64686,30 @@ Func_3fa8a: ; 3fa8a (f:7a8a)
 	ld a, [$d11e]
 	ld [hl], a
 	call GetMoveName
-	ld hl, UnnamedText_3fb09 ; $7b09
+	ld hl, DisableText ; $7b09
 	jp PrintText
 .asm_3fb05
 	pop hl
 .asm_3fb06
-	jp Func_3fb53
+	jp PrintItFailedText
 
-UnnamedText_3fb09: ; 3fb09 (f:7b09)
-	TX_FAR _UnnamedText_3fb09
+DisableText: ; 3fb09 (f:7b09)
+	TX_FAR _DisableText
 	db "@"
 
-Func_3fb0e: ; 3fb0e (f:7b0e)
-	ld hl, Func_2feb8
-	ld b, BANK(Func_2feb8)
+PayDayEffect: ; 3fb0e (f:7b0e)
+	ld hl, _PayDayEffect
+	ld b, BANK(_PayDayEffect)
 	jp Bankswitch
 
-Func_3fb16: ; 3fb16 (f:7b16)
-	ld hl, Func_139a3
-	ld b, BANK(Func_139a3)
+ConversionEffect: ; 3fb16 (f:7b16)
+	ld hl, _ConversionEffect
+	ld b, BANK(_ConversionEffect)
 	jp Bankswitch
 
-Func_3fb1e: ; 3fb1e (f:7b1e)
-	ld hl, Func_139da
-	ld b, BANK(Func_139da)
+HazeEffect: ; 3fb1e (f:7b1e)
+	ld hl, _HazeEffect
+	ld b, BANK(_HazeEffect)
 	jp Bankswitch
 
 Func_3fb26: ; 3fb26 (f:7b26)
@@ -64726,16 +64727,16 @@ Func_3fb36: ; 3fb36 (f:7b36)
 	ld b, BANK(Func_3bb97)
 	jp Bankswitch
 
-UnnamedText_3fb3e: ; 3fb3e (f:7b3e)
-	TX_FAR _UnnamedText_3fb3e
+NothingHappenedText: ; 3fb3e (f:7b3e)
+	TX_FAR _NothingHappenedText
 	db "@"
 
-Func_3fb43: ; 3fb43 (f:7b43)
-	ld hl, UnnamedText_3fb49
+PrintNoEffectText: ; 3fb43 (f:7b43)
+	ld hl, NoEffectText
 	jp PrintText
 
-UnnamedText_3fb49: ; 3fb49 (f:7b49)
-	TX_FAR _UnnamedText_3fb49
+NoEffectText: ; 3fb49 (f:7b49)
+	TX_FAR _NoEffectText
 	db "@"
 
 Func_3fb4e: ; 3fb4e (f:7b4e)
@@ -64743,32 +64744,32 @@ Func_3fb4e: ; 3fb4e (f:7b4e)
 	and a
 	ret nz
 
-Func_3fb53: ; 3fb53 (f:7b53)
-	ld hl, UnnamedText_3fb59 ; $7b59
+PrintItFailedText: ; 3fb53 (f:7b53)
+	ld hl, ItFailedText ; $7b59
 	jp PrintText
 
-UnnamedText_3fb59: ; 3fb59 (f:7b59)
-	TX_FAR _UnnamedText_3fb59
+ItFailedText: ; 3fb59 (f:7b59)
+	TX_FAR _ItFailedText
 	db "@"
 
-Func_3fb5e: ; 3fb5e (f:7b5e)
-	ld hl, UnnamedText_3fb64 ; $7b64
+PrintDidntAffectText: ; 3fb5e (f:7b5e)
+	ld hl, DidntAffectText ; $7b64
 	jp PrintText
 
-UnnamedText_3fb64: ; 3fb64 (f:7b64)
-	TX_FAR _UnnamedText_3fb64
+DidntAffectText: ; 3fb64 (f:7b64)
+	TX_FAR _DidntAffectText
 	db "@"
 
-UnnamedText_3fb69: ; 3fb69 (f:7b69)
-	TX_FAR _UnnamedText_3fb69
+IsUnaffectedText: ; 3fb69 (f:7b69)
+	TX_FAR _IsUnaffectedText
 	db "@"
 
-Func_3fb6e: ; 3fb6e (f:7b6e)
-	ld hl, UnnamedText_3fb74 ; $7b74
+PrintMayNotAttackText: ; 3fb6e (f:7b6e)
+	ld hl, MayNotAttackText ; $7b74
 	jp PrintText
 
-UnnamedText_3fb74: ; 3fb74 (f:7b74)
-	TX_FAR _UnnamedText_3fb74
+MayNotAttackText: ; 3fb74 (f:7b74)
+	TX_FAR _MayNotAttackText
 	db "@"
 
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
@@ -67659,72 +67660,72 @@ Func_415df: ; 415df (10:55df)
 	ret
 
 Func_415fe: ; 415fe (10:55fe)
-	ld hl, UnnamedText_4160c ; $560c
+	ld hl, TradeWentToText ; $560c
 	call PrintText
 	ld c, $c8
 	call DelayFrames
 	jp Func_415df
 
-UnnamedText_4160c: ; 4160c (10:560c)
-	TX_FAR _UnnamedText_4160c
+TradeWentToText: ; 4160c (10:560c)
+	TX_FAR _TradeWentToText
 	db "@"
 
 Func_41611: ; 41611 (10:5611)
-	ld hl, UnnamedText_41623 ; $5623
+	ld hl, TradeForText ; $5623
 	call PrintText
 	call Delay50
-	ld hl, UnnamedText_41628 ; $5628
+	ld hl, TradeSendsText ; $5628
 	call PrintText
 	jp Delay50
 
-UnnamedText_41623: ; 41623 (10:5623)
-	TX_FAR _UnnamedText_41623
+TradeForText: ; 41623 (10:5623)
+	TX_FAR _TradeForText
 	db "@"
 
-UnnamedText_41628: ; 41628 (10:5628)
-	TX_FAR _UnnamedText_41628
+TradeSendsText: ; 41628 (10:5628)
+	TX_FAR _TradeSendsText
 	db "@"
 
 Func_4162d: ; 4162d (10:562d)
-	ld hl, UnnamedText_41642 ; $5642
+	ld hl, TradeWavesFarewellText ; $5642
 	call PrintText
 	call Delay50
-	ld hl, UnnamedText_41647 ; $5647
+	ld hl, TradeTransferredText ; $5647
 	call PrintText
 	call Delay50
 	jp Func_415df
 
-UnnamedText_41642: ; 41642 (10:5642)
-	TX_FAR _UnnamedText_41642
+TradeWavesFarewellText: ; 41642 (10:5642)
+	TX_FAR _TradeWavesFarewellText
 	db "@"
 
-UnnamedText_41647: ; 41647 (10:5647)
-	TX_FAR _UnnamedText_41647
+TradeTransferredText: ; 41647 (10:5647)
+	TX_FAR _TradeTransferredText
 	db "@"
 
 Func_4164c: ; 4164c (10:564c)
-	ld hl, UnnamedText_41655 ; $5655
+	ld hl, TradeTakeCareText ; $5655
 	call PrintText
 	jp Delay50
 
-UnnamedText_41655: ; 41655 (10:5655)
-	TX_FAR _UnnamedText_41655
+TradeTakeCareText: ; 41655 (10:5655)
+	TX_FAR _TradeTakeCareText
 	db "@"
 
 Func_4165a: ; 4165a (10:565a)
-	ld hl, UnnamedText_4166c
+	ld hl, TradeWillTradeText
 	call PrintText
 	call Delay50
-	ld hl, UnnamedText_41671
+	ld hl, TradeforText
 	call PrintText
 	jp Delay50
 
-UnnamedText_4166c: ; 4166c (10:566c)
-	TX_FAR _UnnamedText_4166c
+TradeWillTradeText: ; 4166c (10:566c)
+	TX_FAR _TradeWillTradeText
 	db "@"
 
-UnnamedText_41671: ; 41671 (10:5671)
-	TX_FAR _UnnamedText_41671
+TradeforText: ; 41671 (10:5671)
+	TX_FAR _TradeforText
 	db "@"
 
 Func_41676: ; 41676 (10:5676)
@@ -77639,12 +77640,12 @@ Func_4fda5: ; 4fda5 (13:7da5)
 .asm_4fdee
 	ld [hli], a
 	ld [hl], $50
-	ld hl, UnnamedText_4fe3f ; $7e3f
+	ld hl, SetToBoxText ; $7e3f
 	call PrintText
 	scf
 	ret
 .asm_4fdf9
-	ld hl, UnnamedText_4fe44 ; $7e44
+	ld hl, BoxIsFullText ; $7e44
 	call PrintText
 	and a
 	ret
@@ -77673,20 +77674,20 @@ Func_4fe11: ; 4fe11 (13:7e11)
 	pop af
 	ld [$d11e], a
 	call GetMonName
-	ld hl, UnnamedText_4fe39 ; $7e39
+	ld hl, GotMonText ; $7e39
 	jp PrintText
 
-UnnamedText_4fe39: ; 4fe39 (13:7e39)
-	TX_FAR _UnnamedText_4fe39
+GotMonText: ; 4fe39 (13:7e39)
+	TX_FAR _GotMonText
 	db $0b
 	db "@"
 
-UnnamedText_4fe3f: ; 4fe3f (13:7e3f)
-	TX_FAR _UnnamedText_4fe3f
+SetToBoxText: ; 4fe3f (13:7e3f)
+	TX_FAR _SetToBoxText
 	db "@"
 
-UnnamedText_4fe44: ; 4fe44 (13:7e44)
-	TX_FAR _UnnamedText_4fe44
+BoxIsFullText: ; 4fe44 (13:7e44)
+	TX_FAR _BoxIsFullText
 	db "@"
 
 GetPredefPointer: ; 4fe49 (13:7e49)
@@ -81469,20 +81470,20 @@ Func_52613: ; 52613 (14:6613)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch
-	ld hl, Func_3fb6e
-	ld b, BANK(Func_3fb6e)
+	ld hl, PrintMayNotAttackText
+	ld b, BANK(PrintMayNotAttackText)
 	jp Bankswitch
 .asm_52659
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3fb5e
-	ld b, BANK(Func_3fb5e)
+	ld hl, PrintDidntAffectText
+	ld b, BANK(PrintDidntAffectText)
 	jp Bankswitch
 .asm_52666
 	ld c, $32
 	call DelayFrames
-	ld hl, Func_3dc51
-	ld b, BANK(Func_3dc51)
+	ld hl, PrintDoesntAffectText
+	ld b, BANK(PrintDoesntAffectText)
 	jp Bankswitch
 
 Func_52673: ; 52673 (14:6673)
@@ -81928,7 +81929,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld hl,PrizeRoomBagIsFullTextPtr
 	jp PrintText
 .NotEnoughCoins ; 14:6945
-	ld hl,SorryNeedMoreCoinsTextPtr
+	ld hl,SorryNeedMoreCoinsTextTextPtr
 	jp PrintText
 .PrintOhFineThen ; 14:694B
 	ld hl,OhFineThenTextPtr
@@ -81947,8 +81948,8 @@ SoYouWantPrizeTextPtr: ; 52960 (14:6960)
 	TX_FAR _SoYouWantPrizeText ; 22:62F6
 	db "@"
 
-SorryNeedMoreCoinsTextPtr: ; 52965 (14:6965)
-	TX_FAR _SorryNeedMoreCoins ; 22:630B
+SorryNeedMoreCoinsTextTextPtr: ; 52965 (14:6965)
+	TX_FAR _SorryNeedMoreCoinsText ; 22:630B
 	db $0D
 	db "@"
 
@@ -82602,7 +82603,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
-	ld hl, UnnamedText_554b2 ; $54b2
+	ld hl, GainedText ; $54b2
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -82703,7 +82704,7 @@ Func_5525f: ; 5525f (15:525f)
 	call Bankswitch
 	call SaveScreenTilesToBuffer1
 .asm_553f7
-	ld hl, UnnamedText_554dd ; $54dd
+	ld hl, GrewLevelText ; $54dd
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -82806,35 +82807,35 @@ Func_5549f: ; 5549f (15:549f)
 	ld [$ff97], a
 	ret
 
-UnnamedText_554b2: ; 554b2 (15:54b2)
-	TX_FAR _UnnamedText_554b2
+GainedText: ; 554b2 (15:54b2)
+	TX_FAR _GainedText
 	db $08 ; asm
 	ld a, [$cc5b]
-	ld hl, UnnamedText_554cb
+	ld hl, WithExpAllText
 	and a
 	ret nz
-	ld hl, UnnamedText_554d8
+	ld hl, ExpPointsText
 	ld a, [$cf4d]
 	and a
 	ret z
-	ld hl, UnnamedText_554d4
+	ld hl, BoostedText
 	ret
 
-UnnamedText_554cb: ; 554cb (15:54cb)
-	TX_FAR _UnnamedText_554cb
+WithExpAllText: ; 554cb (15:54cb)
+	TX_FAR _WithExpAllText
 	db $08 ; asm
-	ld hl, UnnamedText_554d8
+	ld hl, ExpPointsText
 	ret
 
-UnnamedText_554d4: ; 554d4 (15:54d4)
-	TX_FAR _UnnamedText_554d4
+BoostedText: ; 554d4 (15:54d4)
+	TX_FAR _BoostedText
 
-UnnamedText_554d8: ; 554d8 (15:54d8)
-	TX_FAR _UnnamedText_554d8
+ExpPointsText: ; 554d8 (15:54d8)
+	TX_FAR _ExpPointsText
 	db "@"
 
-UnnamedText_554dd: ; 554dd (15:54dd)
-	TX_FAR UnnamedText_89c01
+GrewLevelText: ; 554dd (15:54dd)
+	TX_FAR _GrewLevelText
 	db $0b
 	db "@"
 
@@ -86633,18 +86634,18 @@ Func_58d99: ; 58d99 (16:4d99)
 .asm_58daa
 	ld a, [W_ENEMYMONID]
 	call PlayCry
-	ld hl, UnnamedText_58e3b ; $4e3b
+	ld hl, WildMonAppeared ; $4e3b
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
 	jr z, .asm_58dbc
-	ld hl, UnnamedText_58e40 ; $4e40
+	ld hl, HookedMonAttacked ; $4e40
 .asm_58dbc
 	jr .asm_58dc9
 .asm_58dbe
 	call Func_58e29
 	ld c, $14
 	call DelayFrames
-	ld hl, UnnamedText_58e4a ; $4e4a
+	ld hl, TrainerWantsToFightText ; $4e4a
 .asm_58dc9
 	push hl
 	ld hl, DrawAllPokeballs
@@ -86668,18 +86669,18 @@ Func_58d99: ; 58d99 (16:4d99)
 	call Bankswitch
 	jr .asm_58daa
 .asm_58df5
-	ld hl, UnnamedText_58e45 ; $4e45
+	ld hl, EnemyAppearedText ; $4e45
 	call PrintText
-	ld hl, UnnamedText_58e54 ; $4e54
+	ld hl, GhostCantBeIDdText ; $4e54
 	call PrintText
 	jr asm_58e3a
 .asm_58e03
 	ld a, b
 	and a
 	jr z, .asm_58df5
-	ld hl, UnnamedText_58e45 ; $4e45
+	ld hl, EnemyAppearedText ; $4e45
 	call PrintText
-	ld hl, UnnamedText_58e4f ; $4e4f
+	ld hl, UnveiledGhostText ; $4e4f
 	call PrintText
 	ld hl, Func_3eb01
 	ld b, BANK(Func_3eb01)
@@ -86687,7 +86688,7 @@ Func_58d99: ; 58d99 (16:4d99)
 	ld hl, Func_708ca
 	ld b, BANK(Func_708ca)
 	call Bankswitch
-	ld hl, UnnamedText_58e3b ; $4e3b
+	ld hl, WildMonAppeared ; $4e3b
 	call PrintText
 
 Func_58e29: ; 58e29 (16:4e29)
@@ -86701,35 +86702,35 @@ Func_58e29: ; 58e29 (16:4e29)
 asm_58e3a: ; 58e3a (16:4e3a)
 	ret
 
-UnnamedText_58e3b: ; 58e3b (16:4e3b)
-	TX_FAR _UnnamedText_58e3b
+WildMonAppeared: ; 58e3b (16:4e3b)
+	TX_FAR _WildMonAppeared
 	db "@"
 
-UnnamedText_58e40: ; 58e40 (16:4e40)
-	TX_FAR _UnnamedText_58e40
+HookedMonAttacked: ; 58e40 (16:4e40)
+	TX_FAR _HookedMonAttacked
 	db "@"
 
-UnnamedText_58e45: ; 58e45 (16:4e45)
-	TX_FAR _UnnamedText_58e45
+EnemyAppearedText: ; 58e45 (16:4e45)
+	TX_FAR _EnemyAppearedText
 	db "@"
 
-UnnamedText_58e4a: ; 58e4a (16:4e4a)
-	TX_FAR _UnnamedText_58e4a
+TrainerWantsToFightText: ; 58e4a (16:4e4a)
+	TX_FAR _TrainerWantsToFightText
 	db "@"
 
-UnnamedText_58e4f: ; 58e4f (16:4e4f)
-	TX_FAR _UnnamedText_58e4f
+UnveiledGhostText: ; 58e4f (16:4e4f)
+	TX_FAR _UnveiledGhostText
 	db "@"
 
-UnnamedText_58e54: ; 58e54 (16:4e54)
-	TX_FAR _UnnamedText_58e54
+GhostCantBeIDdText: ; 58e54 (16:4e54)
+	TX_FAR _GhostCantBeIDdText
 	db "@"
 
 Func_58e59: ; 58e59 (16:4e59)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	or [hl]
-	ld hl, UnnamedText_58eae ; $4eae
+	ld hl, GoText ; $4eae
 	jr z, .asm_58eab
 	xor a
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
@@ -86755,52 +86756,52 @@ Func_58e59: ; 58e59 (16:4e59)
 	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Divide
 	ld a, [$ff98]
-	ld hl, UnnamedText_58eae ; $4eae
+	ld hl, GoText ; $4eae
 	cp $46
 	jr nc, .asm_58eab
-	ld hl, UnnamedText_58eb5 ; $4eb5
+	ld hl, DoItText ; $4eb5
 	cp $28
 	jr nc, .asm_58eab
-	ld hl, UnnamedText_58ebc ; $4ebc
+	ld hl, GetmText ; $4ebc
 	cp $a
 	jr nc, .asm_58eab
-	ld hl, UnnamedText_58ec3 ; $4ec3
+	ld hl, EnemysWeakText ; $4ec3
 .asm_58eab
 	jp PrintText
 
-UnnamedText_58eae: ; 58eae (16:4eae)
-	TX_FAR _UnnamedText_58eae
+GoText: ; 58eae (16:4eae)
+	TX_FAR _GoText
 	db $08 ; asm
 	jr Func_58ec8
 
-UnnamedText_58eb5: ; 58eb5 (16:4eb5)
-	TX_FAR _UnnamedText_58eb5
+DoItText: ; 58eb5 (16:4eb5)
+	TX_FAR _DoItText
 	db $08 ; asm
 	jr Func_58ec8
 
-UnnamedText_58ebc: ; 58ebc (16:4ebc)
-	TX_FAR _UnnamedText_58ebc
+GetmText: ; 58ebc (16:4ebc)
+	TX_FAR _GetmText
 	db $08 ; asm
 	jr Func_58ec8
 
-UnnamedText_58ec3: ; 58ec3 (16:4ec3)
-	TX_FAR _UnnamedText_58ec3
+EnemysWeakText: ; 58ec3 (16:4ec3)
+	TX_FAR _EnemysWeakText
 	db $08 ; asm
 
 Func_58ec8
-	ld hl, UnnamedText_58ecc ; $4ecc
+	ld hl, PlayerMon1Text ; $4ecc
 	ret
 
-UnnamedText_58ecc: ; 58ecc (16:4ecc)
-	TX_FAR _UnnamedText_58ecc
+PlayerMon1Text: ; 58ecc (16:4ecc)
+	TX_FAR _PlayerMon1Text
 	db "@"
 
 Func_58ed1: ; 58ed1 (16:4ed1)
-	ld hl, UnnamedText_58ed7 ; $4ed7
+	ld hl, PlayerMon2Text ; $4ed7
 	jp PrintText
 
-UnnamedText_58ed7: ; 58ed7 (16:4ed7)
-	TX_FAR _UnnamedText_58ed7
+PlayerMon2Text: ; 58ed7 (16:4ed7)
+	TX_FAR _PlayerMon2Text
 	db $08 ; asm
 	push de
 	push bc
@@ -86833,39 +86834,39 @@ UnnamedText_58ed7: ; 58ed7 (16:4ed7)
 	pop bc
 	pop de
 	ld a, [$ff98]
-	ld hl, UnnamedText_58f25
+	ld hl, EnoughText
 	and a
 	ret z
-	ld hl, UnnamedText_58f3e
+	ld hl, ComeBackText
 	cp $1e
 	ret c
-	ld hl, UnnamedText_58f2c
+	ld hl, OKExclamationText
 	cp $46
 	ret c
-	ld hl, UnnamedText_58f33
+	ld hl, GoodText
 	ret
 
-UnnamedText_58f25: ; 58f25 (16:4f25)
-	TX_FAR _UnnamedText_58f25
+EnoughText: ; 58f25 (16:4f25)
+	TX_FAR _EnoughText
 	db $08 ; asm
 	jr Func_58f3a
 
-UnnamedText_58f2c: ; 58f2c (16:4f2c)
-	TX_FAR _UnnamedText_58f2c
+OKExclamationText: ; 58f2c (16:4f2c)
+	TX_FAR _OKExclamationText
 	db $08 ; asm
 	jr Func_58f3a
 
-UnnamedText_58f33: ; 58f33 (16:4f33)
-	TX_FAR _UnnamedText_58f33
+GoodText: ; 58f33 (16:4f33)
+	TX_FAR _GoodText
 	db $08 ; asm
 	jr Func_58f3a
 
 Func_58f3a: ; 58f3a (16:4f3a)
-	ld hl, UnnamedText_58f3e
+	ld hl, ComeBackText
 	ret
 
-UnnamedText_58f3e: ; 58f3e (16:4f3e)
-	TX_FAR _UnnamedText_58f3e
+ComeBackText: ; 58f3e (16:4f3e)
+	TX_FAR _ComeBackText
 	db "@"
 
 Func_58f43: ; 58f43 (16:4f43)
@@ -87024,7 +87025,7 @@ GrowthRateTable: ; 5901d (16:501d)
 	db $54,$00,$00,$00 ; slow:        5/4 n^3
 
 Func_59035 ; 0x59035
-	ld hl, UnnamedText_59091 ; $5091
+	ld hl, OaksAideHiText ; $5091
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
@@ -87041,58 +87042,58 @@ Func_59035 ; 0x59035
 	jr z, .asm_59059 ; 0x59055 $2
 	jr nc, .asm_5907c ; 0x59057 $23
 .asm_59059
-	ld hl, UnnamedText_590a0 ; $50a0
+	ld hl, OaksAideHereYouGoText ; $50a0
 	call PrintText
 	ld a, [$ffdc]
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, UnnamedText_590a5 ; $50a5
+	ld hl, OaksAideGotItemText ; $50a5
 	call PrintText
 	ld a, $1
 	jr .asm_5908e ; 0x59071 $1b
 .BagFull
-	ld hl, UnnamedText_590ab ; $50ab
+	ld hl, OaksAideNoRoomText ; $50ab
 	call PrintText
 	xor a
 	jr .asm_5908e ; 0x5907a $12
 .asm_5907c
-	ld hl, UnnamedText_59096 ; $5096
+	ld hl, OaksAideUhOhText ; $5096
 	call PrintText
 	ld a, $80
 	jr .asm_5908e ; 0x59084 $8
 .asm_59086
-	ld hl, UnnamedText_5909b ; $509b
+	ld hl, OaksAideComeBackText ; $509b
 	call PrintText
 	ld a, $ff
 .asm_5908e
 	ld [$ffdb], a
 	ret
 
-UnnamedText_59091: ; 59091 (16:5091)
-	TX_FAR _UnnamedText_59091
+OaksAideHiText: ; 59091 (16:5091)
+	TX_FAR _OaksAideHiText
 	db "@"
 
-UnnamedText_59096: ; 59096 (16:5096)
-	TX_FAR _UnnamedText_59096
+OaksAideUhOhText: ; 59096 (16:5096)
+	TX_FAR _OaksAideUhOhText
 	db "@"
 
-UnnamedText_5909b: ; 5909b (16:509b)
-	TX_FAR _UnnamedText_5909b
+OaksAideComeBackText: ; 5909b (16:509b)
+	TX_FAR _OaksAideComeBackText
 	db "@"
 
-UnnamedText_590a0: ; 590a0 (16:50a0)
-	TX_FAR _UnnamedText_590a0
+OaksAideHereYouGoText: ; 590a0 (16:50a0)
+	TX_FAR _OaksAideHereYouGoText
 	db "@"
 
-UnnamedText_590a5: ; 590a5 (16:50a5)
-	TX_FAR _UnnamedText_590a5
+OaksAideGotItemText: ; 590a5 (16:50a5)
+	TX_FAR _OaksAideGotItemText
 	db $0b
 	db "@"
 
-UnnamedText_590ab: ; 590ab (16:50ab)
-	TX_FAR _UnnamedText_590ab
+OaksAideNoRoomText: ; 590ab (16:50ab)
+	TX_FAR _OaksAideNoRoomText
 	db "@"
 
 Route6Script: ; 590b0 (16:50b0)
@@ -98044,7 +98045,7 @@ CeladonCityHotelText: ; 62502 (18:6502)
 
 	ret
 
-Unknown_62508: ; 62508 (18:6508)
+TerminatorText_62508: ; 62508 (18:6508)
 	db "@"
 
 Func_62509: ; 6509 (18:6509)
@@ -98697,9 +98698,9 @@ Func_70377: ; 70377 (1c:4377)
 	ld de, wPlayerMoney ; $d347
 	ld c, $a3
 	call PrintBCDNumber
-	ld hl, UnnamedText_703fa ; $43fa
+	ld hl, DexSeenOwnedText ; $43fa
 	call Func_703e2
-	ld hl, UnnamedText_703ff ; $43ff
+	ld hl, DexRatingText ; $43ff
 	call Func_703e2
 	ld hl, $cc5d
 
@@ -98714,12 +98715,12 @@ HoFPlayTimeText: ; 703ea (1c:43ea)
 HoFMoneyText: ; 703f4 (1c:43f4)
 	db "MONEY@"
 
-UnnamedText_703fa: ; 703fa (1c:43fa)
-	TX_FAR _UnnamedText_703fa
+DexSeenOwnedText: ; 703fa (1c:43fa)
+	TX_FAR _DexSeenOwnedText
 	db "@"
 
-UnnamedText_703ff: ; 703ff (1c:43ff)
-	TX_FAR _UnnamedText_703ff
+DexRatingText: ; 703ff (1c:43ff)
+	TX_FAR _DexRatingText
 	db "@"
 
 Func_70404: ; 70404 (1c:4404)
@@ -99247,10 +99248,10 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call DelayFrames
 	ld a, [wWhichTrade] ; $cd3d
 	and a
-	ld hl, UnnamedText_70847 ; $4847
+	ld hl, NoNibbleText ; $4847
 	jr z, .asm_70836
 	cp $2
-	ld hl, UnnamedText_7084c ; $484c
+	ld hl, NothingHereText ; $484c
 	jr z, .asm_70836
 	ld b, $a
 .asm_707fe
@@ -99279,7 +99280,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld a, $44
 	ld [$c39c], a
 .asm_70833
-	ld hl, UnnamedText_70851 ; $4851
+	ld hl, ItsABiteText ; $4851
 .asm_70836
 	call PrintText
 	ld hl, $d736
@@ -99293,16 +99294,16 @@ Func_70842: ; 70842 (1c:4842)
 	ld [hl], a
 	ret
 
-UnnamedText_70847: ; 70847 (1c:4847)
-	TX_FAR _UnnamedText_70847
+NoNibbleText: ; 70847 (1c:4847)
+	TX_FAR _NoNibbleText
 	db "@"
 
-UnnamedText_7084c: ; 7084c (1c:484c)
-	TX_FAR _UnnamedText_7084c
+NothingHereText: ; 7084c (1c:484c)
+	TX_FAR _NothingHereText
 	db "@"
 
-UnnamedText_70851: ; 70851 (1c:4851)
-	TX_FAR _UnnamedText_70851
+ItsABiteText: ; 70851 (1c:4851)
+	TX_FAR _ItsABiteText
 	db "@"
 
 FishingRodGfxProperties: ; 70856 (1c:4856)
@@ -101689,7 +101690,7 @@ Predef54: ; 71ad9 (1c:5ad9)
 	jr nz,.asm_99bca ; 0x71b4b $b
 	call Func_71c07
 	jr c,.asm_99bca ; 0x71b50 $6
-	ld hl, UnnamedText_71d8d
+	ld hl, TradedForText
 	call PrintText
 .asm_99bca ; 0x71b58
 	ld hl,$cd12
@@ -101757,7 +101758,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld b,$1
 	ld a,$10
 	call Predef
-	ld hl, UnnamedText_71d88
+	ld hl, ConnectCableText
 	call PrintText
 	ld a,[wWhichPokemon]
 	push af
@@ -101887,92 +101888,92 @@ InGameTradeTextPointers: ; 71d64 (1c:5d64)
 	dw TradeTextPointers3
 
 TradeTextPointers1: ; 71d6a (1c:5d6a)
-	dw UnnamedText_71d94
-	dw UnnamedText_71d99
-	dw UnnamedText_71d9e
-	dw UnnamedText_71da3
-	dw UnnamedText_71da8
+	dw WannaTrade1Text
+	dw NoTrade1Text
+	dw WrongMon1Text
+	dw Thanks1Text
+	dw AfterTrade1Text
 
 TradeTextPointers2: ; 71d74 (1c:5d74)
-	dw UnnamedText_71dad
-	dw UnnamedText_71db2
-	dw UnnamedText_71db7
-	dw UnnamedText_71dbc
-	dw UnnamedText_71dc1
+	dw WannaTrade2Text
+	dw NoTrade2Text
+	dw WrongMon2Text
+	dw Thanks2Text
+	dw AfterTrade2Text
 
 TradeTextPointers3: ; 71d7e (1c:5d7e)
-	dw UnnamedText_71dc6
-	dw UnnamedText_71dcb
-	dw UnnamedText_71dd0
-	dw UnnamedText_71dd5
-	dw UnnamedText_71dda
+	dw WannaTrade3Text
+	dw NoTrade3Text
+	dw WrongMon3Text
+	dw Thanks3Text
+	dw AfterTrade3Text
 
-UnnamedText_71d88: ; 71d88 (1c:5d88)
-	TX_FAR _UnnamedText_71d88
+ConnectCableText: ; 71d88 (1c:5d88)
+	TX_FAR _ConnectCableText
 	db "@"
 
-UnnamedText_71d8d: ; 71d8d (1c:5d8d)
-	TX_FAR _UnnamedText_71d8d ; 0xa80bc
+TradedForText: ; 71d8d (1c:5d8d)
+	TX_FAR _TradedForText ; 0xa80bc
 	db $11, $a, "@"
 
-UnnamedText_71d94: ; 71d94 (1c:5d94)
-	TX_FAR _UnnamedText_71d94
+WannaTrade1Text: ; 71d94 (1c:5d94)
+	TX_FAR _WannaTrade1Text
 	db "@"
 
-UnnamedText_71d99: ; 71d99 (1c:5d99)
-	TX_FAR _UnnamedText_71d99
+NoTrade1Text: ; 71d99 (1c:5d99)
+	TX_FAR _NoTrade1Text
 	db "@"
 
-UnnamedText_71d9e: ; 71d9e (1c:5d9e)
-	TX_FAR _UnnamedText_71d9e
+WrongMon1Text: ; 71d9e (1c:5d9e)
+	TX_FAR _WrongMon1Text
 	db "@"
 
-UnnamedText_71da3: ; 71da3 (1c:5da3)
-	TX_FAR _UnnamedText_71da3
+Thanks1Text: ; 71da3 (1c:5da3)
+	TX_FAR _Thanks1Text
 	db "@"
 
-UnnamedText_71da8: ; 71da8 (1c:5da8)
-	TX_FAR _UnnamedText_71da8
+AfterTrade1Text: ; 71da8 (1c:5da8)
+	TX_FAR _AfterTrade1Text
 	db "@"
 
-UnnamedText_71dad: ; 71dad (1c:5dad)
-	TX_FAR _UnnamedText_71dad
+WannaTrade2Text: ; 71dad (1c:5dad)
+	TX_FAR _WannaTrade2Text
 	db "@"
 
-UnnamedText_71db2: ; 71db2 (1c:5db2)
-	TX_FAR _UnnamedText_71db2
+NoTrade2Text: ; 71db2 (1c:5db2)
+	TX_FAR _NoTrade2Text
 	db "@"
 
-UnnamedText_71db7: ; 71db7 (1c:5db7)
-	TX_FAR _UnnamedText_71db7
+WrongMon2Text: ; 71db7 (1c:5db7)
+	TX_FAR _WrongMon2Text
 	db "@"
 
-UnnamedText_71dbc: ; 71dbc (1c:5dbc)
-	TX_FAR _UnnamedText_71dbc
+Thanks2Text: ; 71dbc (1c:5dbc)
+	TX_FAR _Thanks2Text
 	db "@"
 
-UnnamedText_71dc1: ; 71dc1 (1c:5dc1)
-	TX_FAR _UnnamedText_71dc1
+AfterTrade2Text: ; 71dc1 (1c:5dc1)
+	TX_FAR _AfterTrade2Text
 	db "@"
 
-UnnamedText_71dc6: ; 71dc6 (1c:5dc6)
-	TX_FAR _UnnamedText_71dc6
+WannaTrade3Text: ; 71dc6 (1c:5dc6)
+	TX_FAR _WannaTrade3Text
 	db "@"
 
-UnnamedText_71dcb: ; 71dcb (1c:5dcb)
-	TX_FAR _UnnamedText_71dcb
+NoTrade3Text: ; 71dcb (1c:5dcb)
+	TX_FAR _NoTrade3Text
 	db "@"
 
-UnnamedText_71dd0: ; 71dd0 (1c:5dd0)
-	TX_FAR _UnnamedText_71dd0
+WrongMon3Text: ; 71dd0 (1c:5dd0)
+	TX_FAR _WrongMon3Text
 	db "@"
 
-UnnamedText_71dd5: ; 71dd5 (1c:5dd5)
-	TX_FAR _UnnamedText_71dd5
+Thanks3Text: ; 71dd5 (1c:5dd5)
+	TX_FAR _Thanks3Text
 	db "@"
 
-UnnamedText_71dda: ; 71dda (1c:5dda)
-	TX_FAR _UnnamedText_71dda
+AfterTrade3Text: ; 71dda (1c:5dda)
+	TX_FAR _AfterTrade3Text
 	db "@"
 
 Func_71ddf: ; 71ddf (1c:5ddf)
@@ -103459,7 +103460,7 @@ PointerTable_73895: ; 73895 (1c:7895)
 	dw $B5EA
 
 Func_738a1:: ; 738a1 (1c:78a1)
-	ld hl, UnnamedText_73909 ; $7909
+	ld hl, WhenYouChangeBoxText ; $7909
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; $cc26
@@ -103504,8 +103505,8 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	call WaitForSoundToFinish
 	ret
 
-UnnamedText_73909: ; 73909 (1c:7909)
-	TX_FAR _UnnamedText_73909
+WhenYouChangeBoxText: ; 73909 (1c:7909)
+	TX_FAR _WhenYouChangeBoxText
 	db "@"
 
 Func_7390e: ; 7390e (1c:790e)
@@ -103554,7 +103555,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
-	ld hl, UnnamedText_739d4 ; $79d4
+	ld hl, ChooseABoxText ; $79d4
 	call PrintText
 	FuncCoord 11, 0 ; $c3ab
 	ld hl, Coord
@@ -103610,8 +103611,8 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
-UnnamedText_739d4: ; 739d4 (1c:79d4)
-	TX_FAR _UnnamedText_739d4
+ChooseABoxText: ; 739d4 (1c:79d4)
+	TX_FAR _ChooseABoxText
 	db "@"
 
 BoxNames: ; 739d9 (1c:79d9)
@@ -108310,7 +108311,7 @@ AgathaBlocks: ; 76560 (1d:6560)
 	INCBIN "maps/agatha.blk"
 
 Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
-	ld hl, UnnamedText_76683
+	ld hl, AccessedHoFPCText
 	call PrintText
 	ld hl, $D730
 	set 6, [hl]
@@ -108432,8 +108433,8 @@ Func_76610: ; 76610 (1d:6610)
 HallOfFameNoText: ; 76670 (1d:6670)
 	db "HALL OF FAME No   @"
 
-UnnamedText_76683: ; 76683 (1d:6683)
-	TX_FAR _UnnamedText_76683
+AccessedHoFPCText: ; 76683 (1d:6683)
+	TX_FAR _AccessedHoFPCText
 	db "@"
 
 HiddenItems: ; 76688 (1d:6688)
@@ -108518,7 +108519,7 @@ HiddenItemCoords: ; 766b8 (1d:66b8)
 
 FoundHiddenItemText: ; 7675b (1d:675b)
 ; XXX where is the pointer to this?
-	TX_FAR UnnamedText_894d0
+	TX_FAR _FoundHiddenItemText
 	db $8
 	ld a, [$cd3d] ; item ID
 	ld b, a
@@ -108544,7 +108545,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	jp TextScriptEnd
 
 HiddenItemBagFullText: ; 76794 (1d:6794)
-	TX_FAR _UnnamedText_76794
+	TX_FAR _HiddenItemBagFullText
 	db "@"
 
 HiddenCoins: ; 76799 (1d:6799)

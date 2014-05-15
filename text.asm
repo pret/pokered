@@ -34,29 +34,29 @@ _CardKeyFailText:: ; 80029 (20:4029)
 	line "CARD KEY!"
 	done
 
-_UnnamedText_33cf:: ; 80045 (20:4045)
+_TrainerNameText:: ; 80045 (20:4045)
 	TX_RAM $cd6d
 	text ": @@"
 
-_UnnamedText_70847:: ; 8004d (20:404d)
+_NoNibbleText:: ; 8004d (20:404d)
 	text "Not even a nibble!"
 	prompt
 
-_UnnamedText_7084c:: ; 80061 (20:4061)
+_NothingHereText:: ; 80061 (20:4061)
 	text "Looks like there's"
 	line "nothing here."
 	prompt
 
-_UnnamedText_70851:: ; 80082 (20:4082)
+_ItsABiteText:: ; 80082 (20:4082)
 	text "Oh!"
 	line "It's a bite!"
 	prompt
 
-_UnnamedText_24db:: ; 80093 (20:4093)
+_ExclamationText:: ; 80093 (20:4093)
 	text "!"
 	done
 
-_UnnamedText_24e0:: ; 80096 (20:4096)
+_GroundRoseText:: ; 80096 (20:4096)
 	text "Ground rose up"
 	line "somewhere!"
 	done
@@ -88,7 +88,7 @@ _NoMoreRoomForItemText:: ; 8012a (20:412a)
 	line "items!"
 	done
 
-_UnnamedText_59091:: ; 80143 (20:4143)
+_OaksAideHiText:: ; 80143 (20:4143)
 	text "Hi! Remember me?"
 	line "I'm PROF.OAK's"
 	cont "AIDE!"
@@ -111,7 +111,7 @@ _UnnamedText_59091:: ; 80143 (20:4143)
 	cont "#MON?"
 	done
 
-_UnnamedText_59096:: ; 801e4 (20:41e4)
+_OaksAideUhOhText:: ; 801e4 (20:41e4)
 	text "Let's see..."
 	line "Uh-oh! You have"
 	cont "caught only @"
@@ -128,7 +128,7 @@ _UnnamedText_59096:: ; 801e4 (20:41e4)
 	text "."
 	done
 
-_UnnamedText_5909b:: ; 80250 (20:4250)
+_OaksAideComeBackText:: ; 80250 (20:4250)
 	text "Oh. I see."
 
 	para "When you get @"
@@ -140,7 +140,7 @@ _UnnamedText_5909b:: ; 80250 (20:4250)
 	text "."
 	done
 
-_UnnamedText_590a0:: ; 8028c (20:428c)
+_OaksAideHereYouGoText:: ; 8028c (20:428c)
 	text "Great! You have"
 	line "caught @"
 	TX_NUM $ffdd, 1, 3
@@ -151,13 +151,13 @@ _UnnamedText_590a0:: ; 8028c (20:428c)
 	para "Here you go!"
 	prompt
 
-_UnnamedText_590a5:: ; 802d9 (20:42d9)
+_OaksAideGotItemText:: ; 802d9 (20:42d9)
 	text $52, " got the"
 	line "@"
 	TX_RAM $cc5b
 	text "!@@"
 
-_UnnamedText_590ab:: ; 802ec (20:42ec)
+_OaksAideNoRoomText:: ; 802ec (20:42ec)
 	text "Oh! I see you"
 	line "don't have any"
 	cont "room for the"
@@ -254,7 +254,7 @@ _AIBattleUseItemText:: ; 880d5 (22:40d5)
 	text "!"
 	prompt
 
-_UnnamedText_4160c:: ; 880ef (22:40ef)
+_TradeWentToText:: ; 880ef (22:40ef)
 	TX_RAM $cf4b
 	text " went"
 	line "to @"
@@ -262,14 +262,14 @@ _UnnamedText_4160c:: ; 880ef (22:40ef)
 	text "."
 	done
 
-_UnnamedText_41623:: ; 88103 (22:4103)
+_TradeForText:: ; 88103 (22:4103)
 	text "For ", $52, "'s"
 	line "@"
 	TX_RAM $cf4b
 	text ","
 	done
 
-_UnnamedText_41628:: ; 88112 (22:4112)
+_TradeSendsText:: ; 88112 (22:4112)
 	TX_RAM $d887
 	text " sends"
 	line "@"
@@ -277,26 +277,26 @@ _UnnamedText_41628:: ; 88112 (22:4112)
 	text "."
 	done
 
-_UnnamedText_41642:: ; 88124 (22:4124)
+_TradeWavesFarewellText:: ; 88124 (22:4124)
 	TX_RAM $d887
 	text " waves"
 	line "farewell as"
 	done
 
-_UnnamedText_41647:: ; 8813b (22:413b)
+_TradeTransferredText:: ; 8813b (22:413b)
 	TX_RAM $cd6d
 	text " is"
 	line "transferred."
 	done
 
-_UnnamedText_41655:: ; 88150 (22:4150)
+_TradeTakeCareText:: ; 88150 (22:4150)
 	text "Take good care of"
 	line "@"
 	TX_RAM $cd6d
 	text "."
 	done
 
-_UnnamedText_4166c:: ; 8816a (22:416a)
+_TradeWillTradeText:: ; 8816a (22:416a)
 	TX_RAM $d887
 	text " will"
 	line "trade @"
@@ -304,7 +304,7 @@ _UnnamedText_4166c:: ; 8816a (22:416a)
 	db $0
 	done
 
-_UnnamedText_41671:: ; 88180 (22:4180)
+_TradeforText:: ; 88180 (22:4180)
 	text "for ", $52, "'s"
 	line "@"
 	TX_RAM $cf4b
@@ -340,21 +340,21 @@ _OneMoreGoSlotMachineText:: ; 881f7 (22:41f7)
 	line "go?"
 	done
 
-_UnnamedText_37673:: ; 88206 (22:4206)
+_LinedUpText:: ; 88206 (22:4206)
 	text " lined up!"
 	line "Scored @"
 	TX_RAM $cf4b
 	text " coins!"
 	done
 
-_UnnamedText_3769d:: ; 88226 (22:4226)
+_NotThisTimeText:: ; 88226 (22:4226)
 	text "Not this time!"
 	prompt
 
-_UnnamedText_37722:: ; 88236 (22:4236)
+_YeahText:: ; 88236 (22:4236)
 	text "Yeah!@@"
 
-_UnnamedText_703fa:: ; 8823e (22:423e)
+_DexSeenOwnedText:: ; 8823e (22:423e)
 	text "#DEX   Seen:@"
 	TX_NUM $cc5b, 1, 3
 	db $0
@@ -362,7 +362,7 @@ _UnnamedText_703fa:: ; 8823e (22:423e)
 	TX_NUM $cc5c, 1, 3
 	db "@"
 
-_UnnamedText_703ff:: ; 88267 (22:4267)
+_DexRatingText:: ; 88267 (22:4267)
 	text "#DEX Rating", $6d
 	done
 
@@ -525,31 +525,31 @@ _NewBicycleText:: ; 886e6 (22:46e6)
 	line "BICYCLE!"
 	done
 
-_UnnamedText_1e960:: ; 886fc (22:46fc)
+_PushStartText:: ; 886fc (22:46fc)
 	text "Push START to"
 	line "open the MENU!"
 	done
 
-_UnnamedText_1e97e:: ; 8871a (22:471a)
+_SaveOptionText:: ; 8871a (22:471a)
 	text "The SAVE option is"
 	line "on the MENU"
 	cont "screen."
 	done
 
-_UnnamedText_1e983:: ; 88742 (22:4742)
+_StrengthsAndWeaknessesText:: ; 88742 (22:4742)
 	text "All #MON types"
 	line "have strong and"
 	cont "weak points"
 	cont "against others."
 	done
 
-_UnnamedText_1ea0d:: ; 8877e (22:477e)
+_TimesUpText:: ; 8877e (22:477e)
 	text "PA: Ding-dong!"
 
 	para "Time's up!"
 	prompt
 
-_UnnamedText_1ea12:: ; 88798 (22:4798)
+_GameOverText:: ; 88798 (22:4798)
 	text "PA: Your SAFARI"
 	line "GAME is over!"
 	done
@@ -618,7 +618,7 @@ _CinnabarGymQuizIncorrectText:: ; 8898f (22:498f)
 	text "Sorry! Bad call!"
 	prompt
 
-_UnnamedText_1eb69:: ; 889a1 (22:49a1)
+_MagazinesText:: ; 889a1 (22:49a1)
 	text "#MON magazines!"
 
 	para "#MON notebooks!"
@@ -699,7 +699,7 @@ _GameCornerSomeonesKeysText:: ; 88bcd (22:4bcd)
 	line "They'll be back."
 	done
 
-_UnnamedText_21865:: ; 88bed (22:4bed)
+_JustAMomentText:: ; 88bed (22:4bed)
 	text "Just a moment."
 	done
 
@@ -977,13 +977,13 @@ _VermilionGymTrashFailText:: ; 8948c (22:548c)
 	cont "Hey! The electric"
 	cont "locks were reset!@@"
 
-UnnamedText_894d0:: ; 894d0 (22:54d0)
+_FoundHiddenItemText:: ; 894d0 (22:54d0)
 	text $52, " found"
 	line "@"
 	TX_RAM $cd6d
 	text "!@@"
 
-_UnnamedText_76794:: ; 894e1 (22:54e1)
+_HiddenItemBagFullText:: ; 894e1 (22:54e1)
 	text "But, ", $52, " has"
 	line "no more room for"
 	cont "other items!"
@@ -1046,21 +1046,21 @@ _PokemonStuffText:: ; 8961f (22:561f)
 	line "#MON stuff!"
 	done
 
-_UnnamedText_3c1a8:: ; 89639 (22:5639)
+_OutOfSafariBallsText:: ; 89639 (22:5639)
 	text "PA: Ding-dong!"
 
 	para "You are out of"
 	line "SAFARI BALLs!"
 	prompt
 
-_UnnamedText_3c229:: ; 89666 (22:5666)
+_WildRanText:: ; 89666 (22:5666)
 	text "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
 	line "ran!"
 	prompt
 
-_UnnamedText_3c22e:: ; 89677 (22:5677)
+_EnemyRanText:: ; 89677 (22:5677)
 	text "Enemy @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
@@ -1110,7 +1110,7 @@ _PlayerMonFaintedText:: ; 8970c (22:570c)
 	line "fainted!"
 	prompt
 
-_UnnamedText_3c7d3:: ; 8971a (22:571a)
+_UseNextMonText:: ; 8971a (22:571a)
 	text "Use next #MON?"
 	done
 
@@ -1154,31 +1154,31 @@ _TrainerSentOutText:: ; 897b4 (22:57b4)
 	text "!"
 	done
 
-_UnnamedText_3cab4:: ; 897c9 (22:57c9)
+_NoWillText:: ; 897c9 (22:57c9)
 	text "There's no will"
 	line "to fight!"
 	prompt
 
-_UnnamedText_3cb97:: ; 897e3 (22:57e3)
+_CantEscapeText:: ; 897e3 (22:57e3)
 	text "Can't escape!"
 	prompt
 
-_UnnamedText_3cb9c:: ; 897f1 (22:57f1)
+_NoRunningText:: ; 897f1 (22:57f1)
 	text "No! There's no"
 	line "running from a"
 	cont "trainer battle!"
 	prompt
 
-_UnnamedText_3cba1:: ; 8981f (22:581f)
+_GotAwayText:: ; 8981f (22:581f)
 	text "Got away safely!"
 	prompt
 
-ItemsCantBeUsedHere_:: ; 89831 (22:5831)
+_ItemsCantBeUsedHere:: ; 89831 (22:5831)
 	text "Items can't be"
 	line "used here."
 	prompt
 
-_UnnamedText_3d1f5:: ; 8984b (22:584b)
+_AlreadyOutText:: ; 8984b (22:584b)
 	TX_RAM W_PLAYERMONNAME
 	text " is"
 	line "already out!"
@@ -1194,7 +1194,7 @@ _MoveDisabledText:: ; 8987b (22:587b)
 	line "disabled!"
 	prompt
 
-_UnnamedText_3d430:: ; 89892 (22:5892)
+_NoMovesLeftText:: ; 89892 (22:5892)
 	TX_RAM W_PLAYERMONNAME
 	text " has no"
 	line "moves left!"
@@ -1228,7 +1228,7 @@ _WokeUpText:: ; 89914 (22:5914)
 	line "woke up!"
 	prompt
 
-_FrozenText:: ; 89920 (22:5920)
+_IsFrozenText:: ; 89920 (22:5920)
 	text $5A
 	line "is frozen solid!"
 	prompt
@@ -1293,7 +1293,7 @@ _CantMoveText:: ; 89a1b (22:5a1b)
 	line "can't move!"
 	prompt
 
-_UnnamedText_3daa8:: ; 89a29 (22:5a29)
+_MoveIsDisabledText:: ; 89a29 (22:5a29)
 	text $5a, "'s"
 	line "@"
 	TX_RAM $cd6d
@@ -1301,99 +1301,99 @@ _UnnamedText_3daa8:: ; 89a29 (22:5a29)
 	cont "disabled!"
 	prompt
 
-_UnnamedText_3dafb:: ; 89a40 (22:5a40)
+_MonName1Text:: ; 89a40 (22:5a40)
 	text $5a, "@@"
 
-_UnnamedText_3db2d:: ; 89a44 (22:5a44)
+_Used1Text:: ; 89a44 (22:5a44)
 	db $0
 	line "used @@"
 
-_UnnamedText_3db34:: ; 89a4d (22:5a4d)
+_Used2Text:: ; 89a4d (22:5a4d)
 	db $0
 	line "used @@"
 
-_UnnamedText_3db43:: ; 89a56 (22:5a56)
+_InsteadText:: ; 89a56 (22:5a56)
 	text "instead,"
 	cont "@@"
 
-_UnnamedText_3db4c:: ; 89a62 (22:5a62)
+_CF4BText:: ; 89a62 (22:5a62)
 	TX_RAM $cf4b
 	text "@"
 
-_UnnamedText_3db6c:: ; 89a67 (22:5a67)
+_ExclamationPoint1Text:: ; 89a67 (22:5a67)
 	text "!"
 	done
 
-_UnnamedText_3db71:: ; 89a6a (22:5a6a)
+_ExclamationPoint2Text:: ; 89a6a (22:5a6a)
 	text "!"
 	done
 
-_UnnamedText_3db76:: ; 89a6d (22:5a6d)
+_ExclamationPoint3Text:: ; 89a6d (22:5a6d)
 	text "!"
 	done
 
-_UnnamedText_3db7b:: ; 89a70 (22:5a70)
+_ExclamationPoint4Text:: ; 89a70 (22:5a70)
 	text "!"
 	done
 
-_UnnamedText_3db80:: ; 89a73 (22:5a73)
+_ExclamationPoint5Text:: ; 89a73 (22:5a73)
 	text "!"
 	done
 
-_UnnamedText_3dc42:: ; 89a76 (22:5a76)
+_MissedText:: ; 89a76 (22:5a76)
 	text $5a, "'s"
 	line "attack missed!"
 	prompt
 
-_UnnamedText_3dc47:: ; 89a89 (22:5a89)
+_CrashedText:: ; 89a89 (22:5a89)
 	text $5a
 	line "kept going and"
 	cont "crashed!"
 	prompt
 
-_UnnamedText_3dc4c:: ; 89aa4 (22:5aa4)
+_UnaffectedText:: ; 89aa4 (22:5aa4)
 	text $59, "'s"
 	line "unaffected!"
 	prompt
 
-_UnnamedText_3dc57:: ; 89ab4 (22:5ab4)
+_DoesntAffectText:: ; 89ab4 (22:5ab4)
 	text "It doesn't affect"
 	line $59, "!"
 	prompt
 
-_UnnamedText_3dc7e:: ; 89ac9 (22:5ac9)
+_CriticalHitText:: ; 89ac9 (22:5ac9)
 	text "Critical hit!"
 	prompt
 
-_UnnamedText_3dc83:: ; 89ad8 (22:5ad8)
+_OHKOText:: ; 89ad8 (22:5ad8)
 	text "One-hit KO!"
 	prompt
 
-_UnnamedText_3ddb6:: ; 89ae5 (22:5ae5)
+_LoafingAroundText:: ; 89ae5 (22:5ae5)
 	TX_RAM W_PLAYERMONNAME
 	text " is"
 	line "loafing around."
 	prompt
 
-_UnnamedText_3ddbb:: ; 89afd (22:5afd)
+_BeganToNapText:: ; 89afd (22:5afd)
 	TX_RAM W_PLAYERMONNAME
 	text " began"
 	line "to nap!"
 	prompt
 
-_UnnamedText_3ddc0:: ; 89b10 (22:5b10)
+_WontObeyText:: ; 89b10 (22:5b10)
 	TX_RAM W_PLAYERMONNAME
 	text " won't"
 	line "obey!"
 	prompt
 
-_UnnamedText_3ddc5:: ; 89b20 (22:5b20)
+_TurnedAwayText:: ; 89b20 (22:5b20)
 	TX_RAM W_PLAYERMONNAME
 	text " turned"
 	line "away!"
 	prompt
 
-_UnnamedText_3ddca:: ; 89b32 (22:5b32)
+_IgnoredOrdersText:: ; 89b32 (22:5b32)
 	TX_RAM W_PLAYERMONNAME
 	db $0
 	line "ignored orders!"
@@ -1420,44 +1420,44 @@ _MirrorMoveFailedText:: ; 89b96 (22:5b96)
 	next "failed!"
 	prompt
 
-_UnnamedText_3e887:: ; 89baf (22:5baf)
+_HitMultipleTimesText:: ; 89baf (22:5baf)
 	text "Hit @"
 	TX_NUM $cd05, 1, 1
 	text " times!"
 	prompt
 
-_UnnamedText_554b2:: ; 89bc2 (22:5bc2)
+_GainedText:: ; 89bc2 (22:5bc2)
 	TX_RAM $cd6d
 	text " gained"
 	line "@@"
 
-_UnnamedText_554cb:: ; 89bd0 (22:5bd0)
+_WithExpAllText:: ; 89bd0 (22:5bd0)
 	text "with EXP.ALL,"
 	cont "@@"
 
-_UnnamedText_554d4:: ; 89be1 (22:5be1)
+_BoostedText:: ; 89be1 (22:5be1)
 	text "a boosted"
 	cont "@@"
-_UnnamedText_554d8:: ; 89bee (22:5bee)
+_ExpPointsText:: ; 89bee (22:5bee)
 	TX_NUM $cf4b, 2, 4
 	text " EXP. Points!"
 	prompt
 
-UnnamedText_89c01:: ; 89c01 (22:5c01)
+_GrewLevelText:: ; 89c01 (22:5c01)
 	TX_RAM $cd6d
 	text " grew"
 	line "to level @"
 	TX_NUM $d127, 1, 3
 	text "!@@"
 
-_UnnamedText_58e3b:: ; 89c1d (22:5c1d)
+_WildMonAppeared:: ; 89c1d (22:5c1d)
 	text "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
 	line "appeared!"
 	prompt
 
-_UnnamedText_58e40:: ; 89c33 (22:5c33)
+_HookedMonAttacked:: ; 89c33 (22:5c33)
 	text "The hooked"
 	line "@"
 	TX_RAM W_ENEMYMONNAME
@@ -1465,83 +1465,83 @@ _UnnamedText_58e40:: ; 89c33 (22:5c33)
 	cont "attacked!"
 	prompt
 
-_UnnamedText_58e45:: ; 89c4f (22:5c4f)
+_EnemyAppearedText:: ; 89c4f (22:5c4f)
 	TX_RAM W_ENEMYMONNAME
 	db $0
 	line "appeared!"
 	prompt
 
-_UnnamedText_58e4a:: ; 89c5e (22:5c5e)
+_TrainerWantsToFightText:: ; 89c5e (22:5c5e)
 	TX_RAM W_TRAINERNAME
 	text " wants"
 	line "to fight!"
 	prompt
 
-_UnnamedText_58e4f:: ; 89c73 (22:5c73)
+_UnveiledGhostText:: ; 89c73 (22:5c73)
 	text "SILPH SCOPE"
 	line "unveiled the"
 	cont "GHOST's identity!"
 	prompt
 
-_UnnamedText_58e54:: ; 89c9e (22:5c9e)
+_GhostCantBeIDdText:: ; 89c9e (22:5c9e)
 	text "Darn! The GHOST"
 	line "can't be ID'd!"
 	prompt
 
-_UnnamedText_58eae:: ; 89cbc (22:5cbc)
+_GoText:: ; 89cbc (22:5cbc)
 	text "Go! @@"
 
-_UnnamedText_58eb5:: ; 89cc3 (22:5cc3)
+_DoItText:: ; 89cc3 (22:5cc3)
 	text "Do it! @@"
 
-_UnnamedText_58ebc:: ; 89ccd (22:5ccd)
+_GetmText:: ; 89ccd (22:5ccd)
 	text "Get'm! @@"
 
-_UnnamedText_58ec3:: ; 89cd6 (22:5cd6)
+_EnemysWeakText:: ; 89cd6 (22:5cd6)
 	text "The enemy's weak!"
 	line "Get'm! @@"
 
-_UnnamedText_58ecc:: ; 89cf0 (22:5cf0)
+_PlayerMon1Text:: ; 89cf0 (22:5cf0)
 	TX_RAM W_PLAYERMONNAME
 	text "!"
 	done
 
-_UnnamedText_58ed7:: ; 89cf6 (22:5cf6)
+_PlayerMon2Text:: ; 89cf6 (22:5cf6)
 	TX_RAM W_PLAYERMONNAME
 	text " @@"
 
-_UnnamedText_58f25:: ; 89cfd (22:5cfd)
+_EnoughText:: ; 89cfd (22:5cfd)
 	text "enough!@@"
 
-_UnnamedText_58f2c:: ; 89d07 (22:5d07)
+_OKExclamationText:: ; 89d07 (22:5d07)
 	text "OK!@@"
 
-_UnnamedText_58f33:: ; 89d0d (22:5d0d)
+_GoodText:: ; 89d0d (22:5d0d)
 	text "good!@@"
 
-_UnnamedText_58f3e:: ; 89d15 (22:5d15)
+_ComeBackText:: ; 89d15 (22:5d15)
 	db $0
 	line "Come back!"
 	done
 
-_UnnamedText_2fb8e:: ; 89d22 (22:5d22)
+_SupperEffectiveText:: ; 89d22 (22:5d22)
 	text "It's super"
 	line "effective!"
 	prompt
 
-_UnnamedText_2fb93:: ; 89d38 (22:5d38)
+_NotVeryEffectiveText:: ; 89d38 (22:5d38)
 	text "It's not very"
 	line "effective..."
 	prompt
 
-SafariZoneEatingText:: ; 89d53 (22:5d53)
+_SafariZoneEatingText:: ; 89d53 (22:5d53)
 	text "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
 	line "is eating!"
 	prompt
 
-SafariZoneAngryText:: ; 89d6a (22:5d6a)
+_SafariZoneAngryText:: ; 89d6a (22:5d6a)
 	text "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
@@ -1551,19 +1551,19 @@ SafariZoneAngryText:: ; 89d6a (22:5d6a)
 ; money related
 ; XXX $2 BCD macro
 ; $2, pointer, byte
-_UnnamedText_1386b:: ; 89d80 (22:5d80)
+_PickUpPayDayMoneyText:: ; 89d80 (22:5d80)
 	text $52, " picked up"
 	line "¥@"
 	db $2, $e5, $cc, $c3
 	text "!"
 	prompt
 
-_UnnamedText_1c9c1:: ; 89d96 (22:5d96)
+_ClearSaveDataText:: ; 89d96 (22:5d96)
 	text "Clear all saved"
 	line "data?"
 	done
 
-_UnnamedText_1ca14:: ; 89dad (22:5dad)
+_WhichFloorText:: ; 89dad (22:5dad)
 	text "Which floor do"
 	line "you want? "
 	done
@@ -1649,12 +1649,12 @@ _RareCandyText:: ; 89ee2 (22:5ee2)
 	TX_NUM $d127, $1,$3
 	text "!@@"
 
-_UnnamedText_17f23:: ; 89efe (22:5efe)
+_TurnedOnPC1Text:: ; 89efe (22:5efe)
 	text $52, " turned on"
 	line "the PC."
 	prompt
 
-_UnnamedText_17f28:: ; 89f13 (22:5f13)
+_AccessedBillsPCText:: ; 89f13 (22:5f13)
 	text "Accessed BILL's"
 	line "PC."
 
@@ -1662,7 +1662,7 @@ _UnnamedText_17f28:: ; 89f13 (22:5f13)
 	line "Storage System."
 	prompt
 
-_UnnamedText_17f2d:: ; 89f45 (22:5f45)
+_AccessedSomeonesPCText:: ; 89f45 (22:5f45)
 	text "Accessed someone's"
 	line "PC."
 
@@ -1670,84 +1670,84 @@ _UnnamedText_17f2d:: ; 89f45 (22:5f45)
 	line "Storage System."
 	prompt
 
-_UnnamedText_17f32:: ; 89f7a (22:5f7a)
+_AccessedMyPCText:: ; 89f7a (22:5f7a)
 	text "Accessed my PC."
 
 	para "Accessed Item"
 	line "Storage System."
 	prompt
 
-_UnnamedText_7b22:: ; 89fa9 (22:5fa9)
+_TurnedOnPC2Text:: ; 89fa9 (22:5fa9)
 	text $52, " turned on"
 	line "the PC."
 	prompt
 
-_UnnamedText_7b27:: ; 89fbe (22:5fbe)
+_WhatDoYouWantText:: ; 89fbe (22:5fbe)
 	text "What do you want"
 	line "to do?"
 	done
 
-_UnnamedText_7b2c:: ; 89fd7 (22:5fd7)
+_WhatToDepositText:: ; 89fd7 (22:5fd7)
 	text "What do you want"
 	line "to deposit?"
 	done
 
-_UnnamedText_7b31:: ; 89ff5 (22:5ff5)
+_DepositHowManyText:: ; 89ff5 (22:5ff5)
 	text "How many?"
 	done
 
-_UnnamedText_7b36:: ; 8a000 (22:6000)
+_ItemWasStoredText:: ; 8a000 (22:6000)
 	TX_RAM $cd6d
 	text " was"
 	line "stored via PC."
 	prompt
 
-_UnnamedText_7b3b:: ; 8a018 (22:6018)
+_NothingToDepositText:: ; 8a018 (22:6018)
 	text "You have nothing"
 	line "to deposit."
 	prompt
 
-_UnnamedText_7b40:: ; 8a036 (22:6036)
+_NoRoomToStoreText:: ; 8a036 (22:6036)
 	text "No room left to"
 	line "store items."
 	prompt
 
-_UnnamedText_7b45:: ; 8a054 (22:6054)
+_WhatToWithdrawText:: ; 8a054 (22:6054)
 	text "What do you want"
 	line "to withdraw?"
 	done
 
-_UnnamedText_7b4a:: ; 8a073 (22:6073)
+_WithdrawHowManyText:: ; 8a073 (22:6073)
 	text "How many?"
 	done
 
-_UnnamedText_7b4f:: ; 8a07e (22:607e)
+_WithdrewItemText:: ; 8a07e (22:607e)
 	text "Withdrew"
 	line "@"
 	TX_RAM $cd6d
 	text "."
 	prompt
 
-_UnnamedText_7b54:: ; 8a08f (22:608f)
+_NothingStoredText:: ; 8a08f (22:608f)
 	text "There is nothing"
 	line "stored."
 	prompt
 
-_UnnamedText_7b59:: ; 8a0a9 (22:60a9)
+_CantCarryMoreText:: ; 8a0a9 (22:60a9)
 	text "You can't carry"
 	line "any more items."
 	prompt
 
-_UnnamedText_7b5e:: ; 8a0c9 (22:60c9)
+_WhatToTossText:: ; 8a0c9 (22:60c9)
 	text "What do you want"
 	line "to toss away?"
 	done
 
-_UnnamedText_7b63:: ; 8a0e9 (22:60e9)
+_TossHowManyText:: ; 8a0e9 (22:60e9)
 	text "How many?"
 	done
 
-_UnnamedText_76683:: ; 8a0f4 (22:60f4)
+_AccessedHoFPCText:: ; 8a0f4 (22:60f4)
 	text "Accessed #MON"
 	line "LEAGUE's site."
 
@@ -1827,7 +1827,7 @@ _MonWasReleasedText:: ; 0x8a268
 	line "released outside."
 	cont "Bye @"
 
-_UnnamedText_8a288:: ; 8a288 (22:6288)
+_CF4BExclamationText:: ; 8a288 (22:6288)
 	TX_RAM $cf4b
 	text "!"
 	prompt
@@ -1856,7 +1856,7 @@ _SoYouWantPrizeText:: ; 8a2f6 (22:62f6)
 	text "?"
 	done
 
-_SorryNeedMoreCoins:: ; 8a30b (22:630b)
+_SorryNeedMoreCoinsText:: ; 8a30b (22:630b)
 	text "Sorry, you need"
 	line "more coins.@@"
 
@@ -1867,16 +1867,16 @@ _OopsYouDontHaveEnoughRoomText:: ; 8a329 (22:6329)
 _OhFineThenText:: ; 8a34c (22:634c)
 	text "Oh, fine then.@@"
 
-_UnnamedText_1e93b:: ; 8a35d (22:635d)
+_GetDexRatedText:: ; 8a35d (22:635d)
 	text "Want to get your"
 	line "#DEX rated?"
 	done
 
-_UnnamedText_1e940:: ; 8a37b (22:637b)
+_ClosedOaksPCText:: ; 8a37b (22:637b)
 	text "Closed link to"
 	line "PROF.OAK's PC.@@"
 
-_UnnamedText_1e946:: ; 8a39a (22:639a)
+_AccessedOaksPCText:: ; 8a39a (22:639a)
 	text "Accessed PROF."
 	line "OAK's PC."
 
@@ -1884,17 +1884,17 @@ _UnnamedText_1e946:: ; 8a39a (22:639a)
 	line "Rating System."
 	prompt
 
-_UnnamedText_5d43:: ; 8a3d0 (22:63d0)
+_WhereWouldYouLikeText:: ; 8a3d0 (22:63d0)
 	text "Where would you"
 	line "like to go?"
 	done
 
-_UnnamedText_5d48:: ; 8a3ed (22:63ed)
+_PleaseWaitText:: ; 8a3ed (22:63ed)
 	text "OK, please wait"
 	line "just a moment."
 	done
 
-_UnnamedText_5d4d:: ; 8a40d (22:640d)
+_LinkCanceledText:: ; 8a40d (22:640d)
 	text "The link was"
 	line "canceled."
 	done
@@ -1909,12 +1909,12 @@ _DoYouWantToNicknameText:: ; 0x8a605
 	text "?"
 	done
 
-_UnnamedText_699f:: ; 8a62f (22:662f)
+_YourNameIsText:: ; 8a62f (22:662f)
 	text "Right! So your"
 	line "name is ", $52, "!"
 	prompt
 
-_UnnamedText_69e7:: ; 8a64a (22:664a)
+_HisNameIsText:: ; 8a64a (22:664a)
 	text "That's right! I"
 	line "remember now! His"
 	cont "name is ", $53, "!"
@@ -2031,7 +2031,7 @@ _OlderFileWillBeErasedText:: ; 94643 (25:4643)
 	cont "save. Okay?"
 	done
 
-_UnnamedText_73909:: ; 94671 (25:4671)
+_WhenYouChangeBoxText:: ; 94671 (25:4671)
 	text "When you change a"
 	line "#MON BOX, data"
 	cont "will be saved."
@@ -2039,151 +2039,151 @@ _UnnamedText_73909:: ; 94671 (25:4671)
 	para "Is that okay?"
 	done
 
-_UnnamedText_739d4:: ; 946b0 (25:46b0)
+_ChooseABoxText:: ; 946b0 (25:46b0)
 	text "Choose a"
 	line $4a, " BOX.@@"
 
-_UnnamedText_3af3e:: ; 946c2 (25:46c2)
+_EvolvedText:: ; 946c2 (25:46c2)
 	TX_RAM $cf4b
 	text " evolved"
 	done
 
-_UnnamedText_3af43:: ; 946cf (25:46cf)
+_IntoText:: ; 946cf (25:46cf)
 	db $0
 	line "into @"
 	TX_RAM $cd6d
 	text "!"
 	done
 
-_UnnamedText_3af48:: ; 946dd (25:46dd)
+_StoppedEvolvingText:: ; 946dd (25:46dd)
 	text "Huh? @"
 	TX_RAM $cf4b
 	db $0
 	line "stopped evolving!"
 	prompt
 
-_UnnamedText_3af4d:: ; 946fb (25:46fb)
+_IsEvolvingText:: ; 946fb (25:46fb)
 	text "What? @"
 	TX_RAM $cf4b
 	db $0
 	line "is evolving!"
 	done
 
-_UnnamedText_3f245:: ; 94715 (25:4715)
+_FellAsleepText:: ; 94715 (25:4715)
 	text $59
 	line "fell asleep!"
 	prompt
 
-_UnnamedText_3f24a:: ; 94725 (25:4725)
+_AlreadyAsleepText:: ; 94725 (25:4725)
 	text $59, "'s"
 	line "already asleep!"
 	prompt
 
-_UnnamedText_3f2df:: ; 94739 (25:4739)
+_PoisonedText:: ; 94739 (25:4739)
 	text $59
 	line "was poisoned!"
 	prompt
 
-_UnnamedText_3f2e4:: ; 9474a (25:474a)
+_BadlyPoisonedText:: ; 9474a (25:474a)
 	text $59, "'s"
 	line "badly poisoned!"
 	prompt
 
-_UnnamedText_3f3d8:: ; 9475e (25:475e)
+_BurnedText:: ; 9475e (25:475e)
 	text $59
 	line "was burned!"
 	prompt
 
-_UnnamedText_3f3dd:: ; 9476d (25:476d)
+_FrozenText:: ; 9476d (25:476d)
 	text $59
 	line "was frozen solid!"
 	prompt
 
-_UnnamedText_3f423:: ; 94782 (25:4782)
+_FireDefrostedText:: ; 94782 (25:4782)
 	text "Fire defrosted"
 	line $59, "!"
 	prompt
 
-_UnnamedText_3f528:: ; 94795 (25:4795)
+_MonsStatsRoseText:: ; 94795 (25:4795)
 	text $5a, "'s"
 	line "@"
 	TX_RAM $cf4b
 	text "@@"
 
-_UnnamedText_3f542:: ; 947a0 (25:47a0)
+_GreatlyRoseText:: ; 947a0 (25:47a0)
 	text $4c, "greatly@@"
 
-_UnnamedText_3f547:: ; 947ab (25:47ab)
+_RoseText:: ; 947ab (25:47ab)
 	text " rose!"
 	prompt
 
-_UnnamedText_3f661:: ; 947b3 (25:47b3)
+_MonsStatsFellText:: ; 947b3 (25:47b3)
 	text $59, "'s"
 	line "@"
 	TX_RAM $cf4b
 	text "@@"
 
-_UnnamedText_3f67e:: ; 947be (25:47be)
+_GreatlyFellText:: ; 947be (25:47be)
 	text $4c, "greatly@@"
 
-_UnnamedText_3f683:: ; 947c9 (25:47c9)
+_FellText:: ; 947c9 (25:47c9)
 	text " fell!"
 	prompt
 
-_UnnamedText_3f802:: ; 947d1 (25:47d1)
+_RanText:: ; 947d1 (25:47d1)
 	text $5a
 	line "ran from battle!"
 	prompt
 
-_UnnamedText_3f807:: ; 947e5 (25:47e5)
+_RanScaredText:: ; 947e5 (25:47e5)
 	text $59
 	line "ran away scared!"
 	prompt
 
-_UnnamedText_3f80c:: ; 947f9 (25:47f9)
+_BlownAwayText:: ; 947f9 (25:47f9)
 	text $59
 	line "was blown away!"
 	prompt
 
-_UnnamedText_3f8c8:: ; 9480c (25:480c)
+_MonName2Text:: ; 9480c (25:480c)
 	text $5a, "@@"
 
-_UnnamedText_3f8f9:: ; 94810 (25:4810)
+_RazorwindText:: ; 94810 (25:4810)
 	db $0
 	line "made a whirlwind!"
 	prompt
 
-_UnnamedText_3f8fe:: ; 94824 (25:4824)
+_SolarBeamText:: ; 94824 (25:4824)
 	db $0
 	line "took in sunlight!"
 	prompt
 
-_UnnamedText_3f903:: ; 94838 (25:4838)
+_SkullBashText:: ; 94838 (25:4838)
 	db $0
 	line "lowered its head!"
 	prompt
 
-_UnnamedText_3f908:: ; 9484c (25:484c)
+_SkyAttackText:: ; 9484c (25:484c)
 	db $0
 	line "is glowing!"
 	prompt
 
-_UnnamedText_3f90d:: ; 9485a (25:485a)
+_FlyText:: ; 9485a (25:485a)
 	db $0
 	line "flew up high!"
 	prompt
 
-_UnnamedText_3f912:: ; 9486a (25:486a)
+_DigText:: ; 9486a (25:486a)
 	db $0
 	line "dug a hole!"
 	prompt
 
-_UnnamedText_3f9a1:: ; 94878 (25:4878)
+_ConfusedText:: ; 94878 (25:4878)
 	text $59
 	line "became confused!"
 	prompt
 
-_UnnamedText_3fa77:: ; 9488c (25:488c)
+_LearnedMove2Text:: ; 9488c (25:488c)
 	text $5a
 	line "learned"
 	cont "@"
@@ -2191,7 +2191,7 @@ _UnnamedText_3fa77:: ; 9488c (25:488c)
 	text "!"
 	prompt
 
-_UnnamedText_3fb09:: ; 9489e (25:489e)
+_DisableText:: ; 9489e (25:489e)
 	text $59, "'s"
 	line "@"
 	TX_RAM $cd6d
@@ -2199,101 +2199,101 @@ _UnnamedText_3fb09:: ; 9489e (25:489e)
 	cont "disabled!"
 	prompt
 
-_UnnamedText_3fb3e:: ; 948b6 (25:48b6)
+_NothingHappenedText:: ; 948b6 (25:48b6)
 	text "Nothing happened!"
 	prompt
 
-_UnnamedText_3fb49:: ; 948c9 (25:48c9)
+_NoEffectText:: ; 948c9 (25:48c9)
 	text "No effect!"
 	prompt
 
-_UnnamedText_3fb59:: ; 948d5 (25:48d5)
+_ItFailedText:: ; 948d5 (25:48d5)
 	text "But, it failed! "
 	prompt
 
-_UnnamedText_3fb64:: ; 948e7 (25:48e7)
+_DidntAffectText:: ; 948e7 (25:48e7)
 	text "It didn't affect"
 	line $59, "!"
 	prompt
 
-_UnnamedText_3fb69:: ; 948fb (25:48fb)
+_IsUnaffectedText:: ; 948fb (25:48fb)
 	text $59
 	line "is unaffected!"
 	prompt
 
-_UnnamedText_3fb74:: ; 9490d (25:490d)
+_MayNotAttackText:: ; 9490d (25:490d)
 	text $59, "'s"
 	line "paralyzed! It may"
 	cont "not attack!"
 	prompt
 
-_UnnamedText_17e1d:: ; 9492f (25:492f)
+_SubstituteText:: ; 9492f (25:492f)
 	text "It created a"
 	line "SUBSTITUTE!"
 	prompt
 
-_UnnamedText_17e22:: ; 94949 (25:4949)
+_HasSubstituteText:: ; 94949 (25:4949)
 	text $5a
 	line "has a SUBSTITUTE!"
 	prompt
 
-_UnnamedText_17e27:: ; 9495e (25:495e)
+_TooWeakSubstituteText:: ; 9495e (25:495e)
 	text "Too weak to make"
 	line "a SUBSTITUTE!"
 	prompt
 
-_UnnamedText_2ff04:: ; 9497e (25:497e)
+_PayDayText:: ; 9497e (25:497e)
 	text "Coins scattered"
 	line "everywhere!"
 	prompt
 
-_UnnamedText_27fb3:: ; 9499b (25:499b)
+_FocusEnergyText:: ; 9499b (25:499b)
 	text $5a, "'s"
 	line "getting pumped!"
 	prompt
 
-_UnnamedText_2bef2:: ; 949af (25:49af)
+_SeededText:: ; 949af (25:49af)
 	text $59
 	line "was seeded!"
 	prompt
 
-_UnnamedText_2bef7:: ; 949be (25:49be)
+_EvadedText:: ; 949be (25:49be)
 	text $59
 	line "evaded attack!"
 	prompt
 
-_UnnamedText_1399e:: ; 949d0 (25:49d0)
+_RecoilText:: ; 949d0 (25:49d0)
 	text $5a, "'s"
 	line "hit with recoil!"
 	prompt
 
-_UnnamedText_139cd:: ; 949e5 (25:49e5)
+_ConversionText:: ; 949e5 (25:49e5)
 	text "Converted type to"
 	line $59, "'s!"
 	prompt
 
-_UnnamedText_13a53:: ; 949fc (25:49fc)
+_HazeText:: ; 949fc (25:49fc)
 	text "All STATUS changes"
 	line "are eliminated!"
 	prompt
 
-_UnnamedText_3baa2:: ; 94a20 (25:4a20)
+_RestText:: ; 94a20 (25:4a20)
 	text $5a
 	line "started sleeping!"
 	done
 
-_UnnamedText_3baa7:: ; 94a35 (25:4a35)
+_RestBecameHealthyText:: ; 94a35 (25:4a35)
 	text $5a
 	line "fell asleep and"
 	cont "became healthy!"
 	done
 
-_UnnamedText_3baac:: ; 94a58 (25:4a58)
+_RecoverText:: ; 94a58 (25:4a58)
 	text $5a
 	line "regained health!"
 	prompt
 
-_UnnamedText_3bb92:: ; 94a6c (25:4a6c)
+_TransformText:: ; 94a6c (25:4a6c)
 	text $5a
 	line "transformed into"
 	cont "@"
@@ -2301,28 +2301,28 @@ _UnnamedText_3bb92:: ; 94a6c (25:4a6c)
 	text "!"
 	prompt
 
-_UnnamedText_3bbd7:: ; 94a87 (25:4a87)
+_LightscreenText:: ; 94a87 (25:4a87)
 	text $5a, "'s"
 	line "protected against"
 	cont "special attacks!"
 	prompt
 
-_UnnamedText_3bbdc:: ; 94aae (25:4aae)
+_AcidArmorText:: ; 94aae (25:4aae)
 	text $5a
 	line "gained armor!"
 	prompt
 
-_UnnamedText_33f52:: ; 94abf (25:4abf)
+_MistText:: ; 94abf (25:4abf)
 	text $5a, "'s"
 	line "shrouded in mist!"
 	prompt
 
-_UnnamedText_78dc:: ; 94ad5 (25:4ad5)
+_SuckedHealthText:: ; 94ad5 (25:4ad5)
 	text "Sucked health from"
 	line $59, "!"
 	prompt
 
-_UnnamedText_78e1:: ; 94aec (25:4aec)
+_DreamWasEatenText:: ; 94aec (25:4aec)
 	text $59, "'s"
 	line "dream was eaten!"
 	prompt
@@ -2518,26 +2518,26 @@ _PokemartAnythingElseText:: ; a2719 (28:6719)
 	line "else I can do?"
 	done
 
-UnnamedText_a273b:: ; a273b (28:673b)
+_LearnedMove1Text:: ; a273b (28:673b)
 	TX_RAM $d036
 	text " learned"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_6fb4:: ; a2750 (28:6750)
+_WhichMoveToForgetText:: ; a2750 (28:6750)
 	text "Which move should"
 	next "be forgotten?"
 	done
 
-_UnnamedText_6fb9:: ; a2771 (28:6771)
+_AbandonLearningText:: ; a2771 (28:6771)
 	text "Abandon learning"
 	line "@"
 	TX_RAM $cf4b
 	text "?"
 	done
 
-_UnnamedText_6fbe:: ; a278a (28:678a)
+_DidNotLearnText:: ; a278a (28:678a)
 	TX_RAM $d036
 	db $0
 	line "did not learn"
@@ -2546,7 +2546,7 @@ _UnnamedText_6fbe:: ; a278a (28:678a)
 	text "!"
 	prompt
 
-_UnnamedText_6fc3:: ; a27a4 (28:67a4)
+_TryingToLearnText:: ; a27a4 (28:67a4)
 	TX_RAM $d036
 	text " is"
 	line "trying to learn"
@@ -2567,13 +2567,13 @@ _UnnamedText_6fc3:: ; a27a4 (28:67a4)
 	text "?"
 	done
 
-_UnnamedText_6fc8:: ; a2819 (28:6819)
+_OneTwoAndText:: ; a2819 (28:6819)
 	text "1, 2 and...@@"
 
-_UnnamedText_6fd7:: ; a2827 (28:6827)
+_PoofText:: ; a2827 (28:6827)
 	text " Poof!@@"
 
-_UnnamedText_6fdc:: ; a2830 (28:6830)
+_ForgotAndText:: ; a2830 (28:6830)
 	db $0
 	para "@"
 	TX_RAM $d036
@@ -2585,7 +2585,7 @@ _UnnamedText_6fdc:: ; a2830 (28:6830)
 	para "And..."
 	prompt
 
-_UnnamedText_6fe1:: ; a284d (28:684d)
+_HMCantDeleteText:: ; a284d (28:684d)
 	text "HM techniques"
 	line "can't be deleted!"
 	prompt
@@ -2671,18 +2671,18 @@ _UsedStrengthText:: ; a403c (29:403c)
 	text " used"
 	line "STRENGTH.@@"
 
-_UnnamedText_cdbb:: ; a4051 (29:4051)
+_CanMoveBouldersText:: ; a4051 (29:4051)
 	TX_RAM $cd6d
 	text " can"
 	line "move boulders."
 	prompt
 
-_UnnamedText_cdfa:: ; a4069 (29:4069)
+_CurrentTooFastText:: ; a4069 (29:4069)
 	text "The current is"
 	line "much too fast!"
 	prompt
 
-_UnnamedText_cdff:: ; a4088 (29:4088)
+_CyclingIsFunText:: ; a4088 (29:4088)
 	text "Cycling is fun!"
 	line "Forget SURFing!"
 	prompt
@@ -2729,13 +2729,13 @@ _CannotGetOffHereText:: ; a4168 (29:4168)
 	line "here."
 	prompt
 
-_UnnamedText_4fe39:: ; a4180 (29:4180)
+_GotMonText:: ; a4180 (29:4180)
 	text $52, " got"
 	line "@"
 	TX_RAM $cd6d
 	text "!@@"
 
-_UnnamedText_4fe3f:: ; a418f (29:418f)
+_SetToBoxText:: ; a418f (29:418f)
 	text "There's no more"
 	line "room for #MON!"
 	cont "@"
@@ -2747,7 +2747,7 @@ _UnnamedText_4fe3f:: ; a418f (29:418f)
 	text " on PC!"
 	done
 
-_UnnamedText_4fe44:: ; a41d6 (29:41d6)
+_BoxIsFullText:: ; a41d6 (29:41d6)
 	text "There's no more"
 	line "room for #MON!"
 
@@ -3054,12 +3054,12 @@ _AlreadyKnowsText:: ; a8088 (2a:4088)
 	text "!"
 	prompt
 
-_UnnamedText_71d88:: ; a809a (2a:409a)
+_ConnectCableText:: ; a809a (2a:409a)
 	text "Okay, connect the"
 	line "cable like so!"
 	prompt
 
-_UnnamedText_71d8d:: ; a80bc (2a:40bc)
+_TradedForText:: ; a80bc (2a:40bc)
 	text $52, " traded"
 	line "@"
 	TX_RAM $cd13
@@ -3068,7 +3068,7 @@ _UnnamedText_71d8d:: ; a80bc (2a:40bc)
 	TX_RAM $cd1e
 	text "!@@"
 
-_UnnamedText_71d94:: ; a80d8 (2a:40d8)
+_WannaTrade1Text:: ; a80d8 (2a:40d8)
 	text "I'm looking for"
 	line "@"
 	TX_RAM $cd13
@@ -3080,12 +3080,12 @@ _UnnamedText_71d94:: ; a80d8 (2a:40d8)
 	text "? "
 	done
 
-_UnnamedText_71d99:: ; a810b (2a:410b)
+_NoTrade1Text:: ; a810b (2a:410b)
 	text "Awww!"
 	line "Oh well..."
 	done
 
-_UnnamedText_71d9e:: ; a811d (2a:411d)
+_WrongMon1Text:: ; a811d (2a:411d)
 	text "What? That's not"
 	line "@"
 	TX_RAM $cd13
@@ -3095,18 +3095,18 @@ _UnnamedText_71d9e:: ; a811d (2a:411d)
 	line "come back here!"
 	done
 
-_UnnamedText_71da3:: ; a8155 (2a:4155)
+_Thanks1Text:: ; a8155 (2a:4155)
 	text "Hey thanks!"
 	done
 
-_UnnamedText_71da8:: ; a8162 (2a:4162)
+_AfterTrade1Text:: ; a8162 (2a:4162)
 	text "Isn't my old"
 	line "@"
 	TX_RAM $cd1e
 	text " great?"
 	done
 
-_UnnamedText_71dad:: ; a817c (2a:417c)
+_WannaTrade2Text:: ; a817c (2a:417c)
 	text "Hello there! Do"
 	line "you want to trade"
 
@@ -3118,12 +3118,12 @@ _UnnamedText_71dad:: ; a817c (2a:417c)
 	text "?"
 	done
 
-_UnnamedText_71db2:: ; a81b5 (2a:41b5)
+_NoTrade2Text:: ; a81b5 (2a:41b5)
 	text "Well, if you"
 	line "don't want to..."
 	done
 
-_UnnamedText_71db7:: ; a81d3 (2a:41d3)
+_WrongMon2Text:: ; a81d3 (2a:41d3)
 	text "Hmmm? This isn't"
 	line "@"
 	TX_RAM $cd13
@@ -3133,11 +3133,11 @@ _UnnamedText_71db7:: ; a81d3 (2a:41d3)
 	line "you get one."
 	done
 
-_UnnamedText_71dbc:: ; a8209 (2a:4209)
+_Thanks2Text:: ; a8209 (2a:4209)
 	text "Thanks!"
 	done
 
-_UnnamedText_71dc1:: ; a8212 (2a:4212)
+_AfterTrade2Text:: ; a8212 (2a:4212)
 	text "The @"
 	TX_RAM $cd13
 	text " you"
@@ -3146,7 +3146,7 @@ _UnnamedText_71dc1:: ; a8212 (2a:4212)
 	para "went and evolved!"
 	done
 
-_UnnamedText_71dc6:: ; a8240 (2a:4240)
+_WannaTrade3Text:: ; a8240 (2a:4240)
 	text "Hi! Do you have"
 	line "@"
 	TX_RAM $cd13
@@ -3158,11 +3158,11 @@ _UnnamedText_71dc6:: ; a8240 (2a:4240)
 	text "?"
 	done
 
-_UnnamedText_71dcb:: ; a8274 (2a:4274)
+_NoTrade3Text:: ; a8274 (2a:4274)
 	text "That's too bad."
 	done
 
-_UnnamedText_71dd0:: ; a8284 (2a:4284)
+_WrongMon3Text:: ; a8284 (2a:4284)
 	text "...This is no"
 	line "@"
 	TX_RAM $cd13
@@ -3172,11 +3172,11 @@ _UnnamedText_71dd0:: ; a8284 (2a:4284)
 	line "trade it with me!"
 	done
 
-_UnnamedText_71dd5:: ; a82bc (2a:42bc)
+_Thanks3Text:: ; a82bc (2a:42bc)
 	text "Thanks pal!"
 	done
 
-_UnnamedText_71dda:: ; a82c9 (2a:42c9)
+_AfterTrade3Text:: ; a82c9 (2a:42c9)
 	text "How is my old"
 	line "@"
 	TX_RAM $cd1e
@@ -3188,7 +3188,7 @@ _UnnamedText_71dda:: ; a82c9 (2a:42c9)
 	line "doing great!"
 	done
 
-_UnnamedText_ef7d:: ; a82f8 (2a:42f8)
+_NothingToCutText:: ; a82f8 (2a:42f8)
 	text "There isn't"
 	line "anything to CUT!"
 	prompt
