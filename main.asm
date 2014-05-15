@@ -9766,8 +9766,8 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld a,[$d09b]
 	and a ; is it a pokemon selection menu?
 	jr z,.getJoypadState
-	ld b, BANK(Func_716ff)
-	ld hl, Func_716ff ; shake mini sprite of selected pokemon
+	ld b, BANK(AnimatePartyMon)
+	ld hl, AnimatePartyMon ; shake mini sprite of selected pokemon
 	call Bankswitch
 .getJoypadState
 	pop hl
@@ -15269,7 +15269,7 @@ Func_6596: ; 6596 (1:6596)
 	ld b, $8
 	call GoPAL_SET
 	call LoadHpBarAndStatusTilePatterns
-	call Func_675b
+	call LoadEDTile
 	ld b, BANK(Func_7176c)
 	ld hl, Func_7176c
 	call Bankswitch
@@ -15309,8 +15309,8 @@ Func_6596: ; 6596 (1:6596)
 .asm_65ff
 	ld a, [wCurrentMenuItem] ; $cc26
 	push af
-	ld b, BANK(Func_716f7)
-	ld hl, Func_716f7
+	ld b, BANK(AnimatePartyMon_ForceSpeed1)
+	ld hl, AnimatePartyMon_ForceSpeed1
 	call Bankswitch
 	pop af
 	ld [wCurrentMenuItem], a ; $cc26
@@ -15504,7 +15504,7 @@ Func_6596: ; 6596 (1:6596)
 	ld [wTopMenuItemX], a ; $cc25
 	jp EraseMenuCursor
 
-Func_675b: ; 675b (1:675b)
+LoadEDTile: ; 675b (1:675b)
 	ld de, ED_Tile
 	ld hl, $8f00
 	ld bc, $1
@@ -101148,23 +101148,28 @@ Func_716c6: ; 716c6 (1c:56c6)
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	jp DelayFrame
 
-Func_716f7: ; 716f7 (1c:56f7)
+AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
 	xor a
 	ld [wCurrentMenuItem], a ; $cc26
 	ld b, a
 	inc a
-	jr asm_7170a
+	jr GetAnimationSpeed
 
-Func_716ff: ; 716ff (1c:56ff)
+; $cf1f contains the party mon's health bar colors
+; 0: green
+; 1: yellow
+; 2: red
+AnimatePartyMon: ; 716ff (1c:56ff)
 	ld hl, $cf1f
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-asm_7170a: ; 7170a (1c:570a)
+
+GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
-	ld hl, DataTable_71769 ; $5769
+	ld hl, PartyMonSpeeds
 	add hl, bc
 	ld a, [$cf1b]
 	xor $1
@@ -101174,18 +101179,18 @@ asm_7170a: ; 7170a (1c:570a)
 	ld b, a
 	ld a, [W_SUBANIMTRANSFORM] ; $d08b
 	and a
-	jr z, .asm_7172c
+	jr z, .resetSprites
 	cp c
-	jr z, .asm_7173d
-.asm_71721
+	jr z, .animateSprite
+.incTimer
 	inc a
 	cp b
-	jr nz, .asm_71726
+	jr nz, .resetTimer
 	xor a
-.asm_71726
+.resetTimer
 	ld [W_SUBANIMTRANSFORM], a ; $d08b
 	jp DelayFrame
-.asm_7172c
+.resetSprites
 	push bc
 	ld hl, $cc5b
 	ld de, wOAMBuffer
@@ -101193,38 +101198,40 @@ asm_7170a: ; 7170a (1c:570a)
 	call CopyData
 	pop bc
 	xor a
-	jr .asm_71721
-.asm_7173d
+	jr .incTimer
+.animateSprite
 	push bc
-	ld hl, $c302
+	ld hl, $c302 ; OAM tile id
 	ld bc, $10
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem]
 	call AddNTimes
-	ld c, $40
+	ld c, $40 ; amout to increase the tile id by
 	ld a, [hl]
-	cp $4
-	jr z, .asm_71755
-	cp $8
-	jr nz, .asm_71759
-.asm_71755
+	cp $4 ; tile ID for SPRITE_BALL_M
+	jr z, .editCoords
+	cp $8 ; tile ID for SPRITE_HELIX
+	jr nz, .editTileIDS
+; SPRITE_BALL_M and SPRITE_HELIX only shake up and down
+.editCoords
 	dec hl
-	dec hl
-	ld c, $1
-.asm_71759
+	dec hl ; dec hl to the OAM y coord
+	ld c, $1 ; amount to increase the y coord by
+; otherwise, load a second sprite frame
+.editTileIDS
 	ld b, $4
 	ld de, $4
-.asm_7175e
+.loop
 	ld a, [hl]
 	add c
 	ld [hl], a
 	add hl, de
 	dec b
-	jr nz, .asm_7175e
+	jr nz, .loop
 	pop bc
 	ld a, c
-	jr .asm_71721
+	jr .incTimer
 
-DataTable_71769: ; 71769 (1c:5769)
+PartyMonSpeeds: ; 71769 (1c:5769)
 	db $05,$10,$20
 
 Func_7176c: ; 7176c (1c:576c)
@@ -101446,7 +101453,7 @@ Func_71868: ; 71868 (1c:5868)
 	ld d, $0
 	add hl, de
 	ld a, [hl]
-	call Func_718e9
+	call GetPartyMonSpriteID
 	ld [$cd5b], a
 	call Func_718c3
 	pop bc
@@ -101458,13 +101465,13 @@ Func_71882: ; 71882 (1c:5882)
 	xor a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [$cd5d]
-	call Func_718e9
+	call GetPartyMonSpriteID
 	ld [$cd5b], a
 	jr Func_718c3
 
 Func_71890: ; 71890 (1c:5890)
 	ld a, [$cf91]
-	call Func_718e9
+	call GetPartyMonSpriteID
 	push af
 	ld hl, $8000
 	call Func_718ac
@@ -101518,7 +101525,7 @@ Func_718c3: ; 718c3 (1c:58c3)
 	ld bc, $60
 	jp CopyData
 
-Func_718e9: ; 718e9 (1c:58e9)
+GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 	ld [$d11e], a
 	ld a, $3a
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
