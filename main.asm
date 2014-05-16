@@ -30338,8 +30338,8 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	cp a,$04
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	ld b, BANK(Func_71fb6)
-	ld hl, Func_71fb6
+	ld b, BANK(SendBlkPacket_PartyMenu)
+	ld hl, SendBlkPacket_PartyMenu
 	call Bankswitch ; loads some data to $cf2e
 	FuncCoord 3,0
 	ld hl,Coord
@@ -35818,7 +35818,7 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 .asm_3b4e8 ; 0x19b08
 	ld hl, FuchsiaCityOmanyteText
 	call PrintText
-	ld a, $62
+	ld a, OMANYTE
 	jr .asm_81556 ; 0x19b10
 .asm_667d5 ; 0x19b12
 	ld hl, FuchsiaCityKabutoText
@@ -42292,7 +42292,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	bit 1, a
 	jr nz, .asm_1ec74
 	ld a, [$cc26]
-	add $66
+	add EEVEE
 	cp EEVEE
 	jr z, .asm_1ec6c
 	cp FLAREON
@@ -91949,7 +91949,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	jr nc, .BagFull
 	ld hl, ReceivedTM31Text
 	call PrintText
-	ld a, $33
+	ld a, POKE_DOLL
 	ldh [$db], a
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
@@ -101997,12 +101997,13 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	push de
 	jp [hl]
 
-Func_71dff: ; 71dff (1c:5dff)
+SendPalPacket_Black: ; 71dff (1c:5dff)
 	ld hl, PalPacket_Black
-	ld de, BlkPacket_721b5
+	ld de, BlkPacket_Battle
 	ret
 
-Func_71e06: ; 71e06 (1c:5e06)
+; uses PalPacket_Empty to build a packet based on mon IDs and health color
+BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
@@ -102017,11 +102018,11 @@ Func_71e06: ; 71e06 (1c:5e06)
 	ld c, a
 	ld hl, $cf2e
 	ld a, [$cf1d]
-	add $1f
+	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
 	ld a, [$cf1e]
-	add $1f
+	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
 	ld a, b
@@ -102030,17 +102031,18 @@ Func_71e06: ; 71e06 (1c:5e06)
 	ld a, c
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, BlkPacket_721b5
+	ld de, BlkPacket_Battle
 	ld a, $1
 	ld [$cf1c], a
 	ret
 
-Func_71e48: ; 71e48 (1c:5e48)
+SendPalPacket_TownMap: ; 71e48 (1c:5e48)
 	ld hl, PalPacket_TownMap
-	ld de, BlkPacket_7219e
+	ld de, BlkPacket_WholeScreen
 	ret
 
-Func_71e4f: ; 71e4f (1c:5e4f)
+; uses PalPacket_Empty to build a packet based the mon ID
+BuildStatusScreenPalPacket: ; 71e4f (1c:5e4f)
 	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
@@ -102050,7 +102052,7 @@ Func_71e4f: ; 71e4f (1c:5e4f)
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
-	call DeterminePaletteIDOoutOfBattle
+	call DeterminePaletteIDOutOfBattle
 	push af
 	ld hl, $cf2e
 	ld a, [$cf25]
@@ -102060,55 +102062,57 @@ Func_71e4f: ; 71e4f (1c:5e4f)
 	pop af
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, BlkPacket_721fa
+	ld de, BlkPacket_StatusScreen
 	ret
 
-Func_71e7b: ; 71e7b (1c:5e7b)
+SendPalPacket_PartyMenu: ; 71e7b (1c:5e7b)
 	ld hl, PalPacket_PartyMenu
 	ld de, $cf2e
 	ret
 
-Func_71e82: ; 71e82 (1c:5e82)
+SendPalPacket_Pokedex: ; 71e82 (1c:5e82)
 	ld hl, PalPacket_Pokedex
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
 	ld a, [$cf91]
-	call DeterminePaletteIDOoutOfBattle
+	call DeterminePaletteIDOutOfBattle
 	ld hl, $cf30
 	ld [hl], a
 	ld hl, $cf2d
-	ld de, BlkPacket_72222
+	ld de, BlkPacket_Pokedex
 	ret
 
-Func_71e9f: ; 71e9f (1c:5e9f)
+SendPalPacket_Slots: ; 71e9f (1c:5e9f)
 	ld hl, PalPacket_Slots
-	ld de, BlkPacket_7224f
+	ld de, BlkPacket_Slots
 	ret
 
-Func_71ea6: ; 71ea6 (1c:5ea6)
+SendPalPacket_Titlescreen: ; 71ea6 (1c:5ea6)
 	ld hl, PalPacket_Titlescreen
-	ld de, BlkPacket_7228e
+	ld de, BlkPacket_Titlescreen
 	ret
 
-Func_71ead: ; 71ead (1c:5ead)
+; used mostly for menus and the Oak intro
+SendPalPacket_Generic: ; 71ead (1c:5ead)
 	ld hl, PalPacket_Generic
-	ld de, BlkPacket_7219e
+	ld de, BlkPacket_WholeScreen
 	ret
 
-Func_71eb4: ; 71eb4 (1c:5eb4)
+SendPalPacket_NidorinoIntro: ; 71eb4 (1c:5eb4)
 	ld hl, PalPacket_NidorinoIntro
-	ld de, BlkPacket_722c1
+	ld de, BlkPacket_NidorinoIntro
 	ret
 
-Func_71ebb: ; 71ebb (1c:5ebb)
+SendPalPacket_GameFreakIntro: ; 71ebb (1c:5ebb)
 	ld hl, PalPacket_GameFreakIntro
-	ld de, BlkPacket_723dd
+	ld de, BlkPacket_GameFreakIntro
 	ld a, $8
 	ld [$cf1c], a
 	ret
 
-GetMapPaletteID: ; 71ec7 (1c:5ec7)
+; uses PalPacket_Empty to build a packet based on the current map
+BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
@@ -102139,7 +102143,7 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	inc a ; a town's pallete ID is its map ID + 1
 	ld hl, $cf2e
 	ld [hld], a
-	ld de, BlkPacket_7219e
+	ld de, BlkPacket_WholeScreen
 	ld a, $9
 	ld [$cf1c], a
 	ret
@@ -102153,7 +102157,9 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 	xor a
 	jr .town
 
-Func_71f17: ; 71f17 (1c:5f17)
+; used when a Pokemon is the only thing on the screen
+; such as evolution, trading and the Hall of Fame
+SendPokemonPalette_WholeScreen: ; 71f17 (1c:5f17)
 	push bc
 	ld hl, PalPacket_Empty
 	ld de, $cf2d
@@ -102165,15 +102171,15 @@ Func_71f17: ; 71f17 (1c:5f17)
 	ld a, $1e
 	jr nz, .asm_71f31
 	ld a, [$cf1d]
-	call DeterminePaletteIDOoutOfBattle
+	call DeterminePaletteIDOutOfBattle
 .asm_71f31
 	ld [$cf2e], a
 	ld hl, $cf2d
-	ld de, BlkPacket_7219e
+	ld de, BlkPacket_WholeScreen
 	ret
 
-LoadTrainerCardBadgePalettes: ; 71f3b (1c:5f3b)
-	ld hl, BlkPacket_72360
+BuildTrainerCardPalPacket: ; 71f3b (1c:5f3b)
+	ld hl, BlkPacket_TrainerCard
 	ld de, $cc5b
 	ld bc, $40
 	call CopyData
@@ -102206,25 +102212,25 @@ LoadTrainerCardBadgePalettes: ; 71f3b (1c:5f3b)
 	inc de
 	dec c
 	jr nz, .asm_71f52
-	ld hl, PalPacket_TrainerInfo
+	ld hl, PalPacket_TrainerCard
 	ld de, $cc5b
 	ret
 
 PointerTable_71f73: ; 71f73 (1c:5f73)
-	dw Func_71dff
-	dw Func_71e06
-	dw Func_71e48
-	dw Func_71e4f
-	dw Func_71e82
-	dw Func_71e9f
-	dw Func_71ea6
-	dw Func_71eb4
-	dw Func_71ead
-	dw GetMapPaletteID
-	dw Func_71e7b
-	dw Func_71f17
-	dw Func_71ebb
-	dw LoadTrainerCardBadgePalettes
+	dw SendPalPacket_Black
+	dw BuildBattlePalPacket
+	dw SendPalPacket_TownMap
+	dw BuildStatusScreenPalPacket
+	dw SendPalPacket_Pokedex
+	dw SendPalPacket_Slots
+	dw SendPalPacket_Titlescreen
+	dw SendPalPacket_NidorinoIntro
+	dw SendPalPacket_Generic
+	dw BuildOverworldPalPacket
+	dw SendPalPacket_PartyMenu
+	dw SendPokemonPalette_WholeScreen
+	dw SendPalPacket_GameFreakIntro
+	dw BuildTrainerCardPalPacket
 
 ; each byte is the number of loops to make in .asm_71f5b for each badge
 LoopCounts_71f8f: ; 71f8f (1c:5f8f)
@@ -102235,7 +102241,7 @@ DeterminePaletteID: ; 71f97 (1c:5f97)
 	ld a, PAL_GREYMON        ; if yes, use Ditto's palette
 	ret nz
 	ld a, [hl]
-DeterminePaletteIDOoutOfBattle: ; 71f9d (1c:5f9d)
+DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ld [$D11E], a
 	and a
 	jr z, .idZero
@@ -102252,8 +102258,8 @@ DeterminePaletteIDOoutOfBattle: ; 71f9d (1c:5f9d)
 	ld a, [hl]
 	ret
 
-Func_71fb6: ; 71fb6 (1c:5fb6)
-	ld hl, BlkPacket_722f4 ; $62f4
+SendBlkPacket_PartyMenu: ; 71fb6 (1c:5fb6)
+	ld hl, BlkPacket_PartyMenu ; $62f4
 	ld de, $cf2e
 	ld bc, $30
 	jp CopyData
@@ -102583,46 +102589,46 @@ Func_72188: ; 72188 (1c:6188)
 	jr nz, .asm_7218a
 	ret
 
-BlkPacket_7219e: ; 7219e (1c:619e)
+BlkPacket_WholeScreen: ; 7219e (1c:619e)
 	db $21,$01,$03,$00,$00,$00,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00
 	db $03,$00,$00,$13,$11,$00,$00
 
-BlkPacket_721b5: ; 721b5 (1c:61b5)
+BlkPacket_Battle: ; 721b5 (1c:61b5)
 	db $22,$05,$07,$0a,$00,$0c,$13,$11,$03,$05,$01,$00,$0a,$03,$03,$00
 	db $0a,$07,$13,$0a,$03,$0a,$00,$04,$08,$0b,$03,$0f,$0b,$00,$13,$06
 	db $03,$00,$00,$13,$0b,$00,$03,$00,$0c,$13,$11,$02,$03,$01,$00,$0a
 	db $03,$01,$03,$0a,$08,$13,$0a,$00,$03,$00,$04,$08,$0b,$02,$03,$0b
 	db $00,$13,$07,$03,$00
 
-BlkPacket_721fa: ; 721fa (1c:61fa)
+BlkPacket_StatusScreen: ; 721fa (1c:61fa)
 	db $21,$01,$07,$05,$01,$00,$07,$06,$00,$00,$00,$00,$00,$00,$00,$00
 	db $02,$00,$00,$11,$00,$03,$01,$00,$07,$06,$01,$03,$01,$07,$13,$11
 	db $00,$03,$08,$00,$13,$06,$00,$00
 
-BlkPacket_72222: ; 72222 (1c:6222)
+BlkPacket_Pokedex: ; 72222 (1c:6222)
 	db $21,$01,$07,$05,$01,$01,$08,$08,$00,$00,$00,$00,$00,$00,$00,$00
 	db $02,$00,$00,$11,$00,$01,$00,$01,$13,$00,$03,$01,$01,$08,$08,$01
 	db $03,$01,$09,$08,$11,$00,$03,$09,$01,$13,$11,$00,$00
 
-BlkPacket_7224f: ; 7224f (1c:624f)
+BlkPacket_Slots: ; 7224f (1c:624f)
 	db $22,$05,$03,$05,$00,$00,$13,$0b,$03,$0a,$00,$04,$13,$09,$02,$0f
 	db $00,$06,$13,$07,$03,$00,$04,$04,$0f,$09,$03,$00,$00,$0c,$13,$11
 	db $03,$00,$00,$13,$0b,$01,$03,$00,$04,$13,$09,$02,$03,$00,$06,$13
 	db $07,$03,$03,$04,$04,$0f,$09,$00,$03,$00,$0c,$13,$11,$00,$00
 
-BlkPacket_7228e: ; 7228e (1c:628e)
+BlkPacket_Titlescreen: ; 7228e (1c:628e)
 	db $22,$03,$03,$00,$00,$00,$13,$07,$02,$05,$00,$08,$13,$09,$03,$0a
 	db $00,$0a,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	db $03,$00,$00,$13,$07,$00,$03,$00,$08,$13,$09,$01,$03,$00,$0a,$13
 	db $11,$02,$00
 
-BlkPacket_722c1: ; 722c1 (1c:62c1)
+BlkPacket_NidorinoIntro: ; 722c1 (1c:62c1)
 	db $22,$03,$03,$05,$00,$00,$13,$03,$03,$00,$00,$04,$13,$0d,$03,$05
 	db $00,$0e,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	db $03,$00,$00,$13,$03,$01,$03,$00,$04,$13,$0d,$00,$03,$00,$0e,$13
 	db $11,$01,$00
 
-BlkPacket_722f4: ; 722f4 (1c:62f4)
+BlkPacket_PartyMenu: ; 722f4 (1c:62f4)
 	db $23,$07,$06,$10,$01,$00,$02,$0c,$02,$00,$05,$01,$0b,$01,$02,$00
 	db $05,$03,$0b,$03,$02,$00,$05,$05,$0b,$05,$02,$00,$05,$07,$0b,$07
 	db $02,$00,$05,$09,$0b,$09,$02,$00,$05,$0b,$0b,$0b,$00,$00,$00,$00
@@ -102631,7 +102637,7 @@ BlkPacket_722f4: ; 722f4 (1c:62f4)
 	db $12,$03,$00,$03,$0c,$04,$12,$05,$00,$03,$0c,$06,$12,$07,$00,$03
 	db $0c,$08,$12,$09,$00,$03,$0c,$0a,$12,$0b,$00,$00
 
-BlkPacket_72360: ; 72360 (1c:6360)
+BlkPacket_TrainerCard: ; 72360 (1c:6360)
 	db $24,$0a,$02,$00,$03,$0c,$04,$0d,$02,$05,$07,$0c,$08,$0d,$02,$0f
 	db $0b,$0c,$0c,$0d,$02,$0a,$10,$0b,$11,$0c,$02,$05,$0e,$0d,$0f,$0e
 	db $02,$0f,$10,$0d,$11,$0e,$02,$0a,$03,$0f,$04,$10,$02,$0f,$07,$0f
@@ -102641,7 +102647,7 @@ BlkPacket_72360: ; 72360 (1c:6360)
 	db $0d,$11,$0e,$03,$03,$03,$0f,$04,$10,$02,$03,$07,$0f,$08,$10,$03
 	db $03,$0b,$0f,$0c,$10,$02,$03,$0f,$0f,$10,$10,$01,$00
 
-BlkPacket_723dd: ; 723dd (1c:63dd)
+BlkPacket_GameFreakIntro: ; 723dd (1c:63dd)
 	db $22,$03,$07,$05,$05,$0b,$07,$0d,$02,$0a,$08,$0b,$09,$0d,$03,$0f
 	db $0c,$0b,$0e,$0d,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 	db $03,$00,$00,$13,$0a,$00,$03,$00,$0b,$04,$0d,$00,$03,$05,$0b,$07
@@ -102669,7 +102675,7 @@ PalPacket_Slots: ; 72478 (1c:6478)
 PalPacket_Titlescreen: ; 72488 (1c:6488)
 	db $51,PAL_LOGO2,$00,PAL_LOGO1,$00,PAL_MEWMON,$00,PAL_PURPLEMON,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_TrainerInfo: ; 72498 (1c:6498)
+PalPacket_TrainerCard: ; 72498 (1c:6498)
 	db $51,PAL_MEWMON,$00,PAL_BADGE,$00,PAL_REDMON,$00,PAL_YELLOWMON,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_Generic: ; 724a8 (1c:64a8)
@@ -105546,7 +105552,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 .asm_3f30f ; 0x750f2
 	ld hl, WardenTeethText1
 	call PrintText
-	ld a, $40
+	ld a, GOLD_TEETH
 	ldh [$db], a
 	ld b, BANK(RemoveItemByID)
 	ld hl, RemoveItemByID
