@@ -12010,13 +12010,13 @@ Func_4da6: ; 4da6 (1:4da6)
 	ld [hl], a
 	ld a, $1
 	ld [$cf91], a
-	ld a, $14
+	ld a, 20
 	ld [W_CURENEMYLVL], a
 	xor a
 	ld [$cc49], a
 	ld [W_CURMAP], a
 	call AddPokemonToParty
-	ld a, $1
+	ld a, RHYDON
 	ld [W_CUROPPONENT], a
 	ld a, $2c
 	call Predef
@@ -13204,7 +13204,7 @@ Func_5345: ; 5345
 	jr nz, .asm_5506
 	ld a, $4
 	ld [W_ISLINKBATTLE], a ; $d12b
-	ld a, $e1
+	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a ; $d059
 	call ClearScreen
 	call Delay3
@@ -34901,7 +34901,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	ld a, $f0
 	ld [wJoypadForbiddenButtonsMask], a
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $14
 	jr z, .asm_19535 ; 0x19526 $d
 	ld a, $1
@@ -34958,8 +34958,8 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld hl, UnnamedText_1966d
 	ld de, UnnamedText_19672
 	call PreBattleSaveRegisters
-	ld a, $e1
-	ld [$d059], a
+	ld a, SONY1 + $c8
+	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
@@ -35005,7 +35005,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, $1
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $14
 	jr nz, .asm_195f0 ; 0x195e9 $5
 	ld de, CeruleanCityMovement4
@@ -37712,10 +37712,10 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $4
 	ret nz
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $12
 	ret nz
 	ld a, $8
@@ -38311,7 +38311,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, [$cf0f]
 	cp $5
 	jr nz, .asm_1cea8 ; 0x1ce91 $15
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $4
 	jr nz, .asm_1cea1 ; 0x1ce98 $7
 	ld a, $c
@@ -38512,7 +38512,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld [$ffeb], a
 	ld a, $8
 	ld [$ffee], a
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $3
 	jr nz, .asm_1d045 ; 0x1d038 $b
 	ld a, $4
@@ -38532,7 +38532,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld a, $3
 	ld [$cd37], a
 	ld b, $a
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $4
 	jr nz, .asm_1d066 ; 0x1d060 $4
 	ld a, $40
@@ -41488,7 +41488,7 @@ Route22GateScript: ; 1e683 (7:6683)
 	ld hl, Route22GateScriptPointers
 	ld a, [W_ROUTE22GATECURSCRIPT]
 	call CallFunctionInTable
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $4
 	ld a, $22
 	jr c, .asm_1e69a ; 0x1e696 $2
@@ -51686,7 +51686,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; check if our trainer's team has special moves
 
 ; get trainer class number
-	ld a,[$D059]
+	ld a,[W_CUROPPONENT]
 	sub $C8
 	ld b,a
 	ld hl,TeamMoves
@@ -71905,10 +71905,10 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	and $3
 	cp $3
 	ret z
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $8
 	ret nz
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $f
 	ret nz
 	ld hl, $ccd3
@@ -74738,13 +74738,13 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld [H_SPRITEHEIGHT], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $6
 	jr nz, .asm_48c43
 	ld de, MovementData_48c63
 	jr .asm_48c4d
 .asm_48c43
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $8
 	jr nz, .asm_48c4d
 	ld de, MovementData_48c63
@@ -78749,8 +78749,8 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld hl, UnnamedText_511b7
 	ld de, UnnamedText_511bc
 	call PreBattleSaveRegisters
-	ld a, $e1
-	ld [$d059], a
+	ld a, SONY1 + $c8
+	ld [W_CUROPPONENT], a
 	ld hl, StarterMons_50faf ; $4faf
 	call Func_50ed6
 	ld a, $2
@@ -78896,7 +78896,7 @@ Route22Script4: ; 51087 (14:5087)
 	ld hl, UnnamedText_511cb ; $51cb
 	ld de, UnnamedText_511d0 ; $51d0
 	call PreBattleSaveRegisters
-	ld a, $f2
+	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; $d059
 	ld hl, StarterMons_510d9 ; $50d9
 	call Func_50ed6
@@ -80476,15 +80476,15 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	ld hl, SilphCo7Text14 ; $5ec8
 	ld de, UnnamedText_51ecd ; $5ecd
 	call PreBattleSaveRegisters
-	ld a, $f2
+	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; $d059
 	ld a, [W_RIVALSTARTER] ; $d715
-	cp $b1
+	cp SQUIRTLE
 	jr nz, .asm_51cb6
 	ld a, $7
 	jr .asm_51cc0
 .asm_51cb6
-	cp $99
+	cp BULBASAUR
 	jr nz, .asm_51cbe
 	ld a, $8
 	jr .asm_51cc0
@@ -88688,9 +88688,9 @@ Route16Script0: ; 59959 (16:5959)
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $84
+	ld a, SNORLAX
 	ld [W_CUROPPONENT], a ; $d059
-	ld a, $1e
+	ld a, 30
 	ld [W_CURENEMYLVL], a ; $d127
 	ld a, $21
 	ld [$cc4d], a
@@ -90356,13 +90356,13 @@ Museum1FScriptPointers: ; 5c109 (17:4109)
 	dw Museum1FScript1
 
 Museum1FScript0: ; 5c10d (17:410d)
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $4
 	ret nz
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $9
 	jr z, .asm_5c120 ; 0x5c118 $6
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $a
 	ret nz
 .asm_5c120
@@ -90384,17 +90384,17 @@ Museum1FTextPointers: ; 5c12b (17:412b)
 
 Museum1FText1: ; 5c135 (17:4135)
 	db $8
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	cp $4
 	jr nz, asm_8774b ; 0x5c13b $a
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $d
 	jp z, Func_5c1f9
 	jr asm_b8709 ; 0x5c145 $1c
 asm_8774b: ; 5c147 (17:4147)
 	cp $3
 	jr nz, asm_d49e7 ; 0x5c149 $8
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $c
 	jp z, Func_5c1f9
 asm_d49e7: ; 5c153 (17:4153)
@@ -94479,8 +94479,8 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld hl, UnnamedText_60632
 	ld de, UnnamedText_60637 ; XXX $4637
 	call PreBattleSaveRegisters
-	ld a, $f2
-	ld [$d059], a
+	ld a, SONY2 + $c8
+	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
@@ -95068,9 +95068,9 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $91
+	ld a, MAROWAK
 	ld [W_CUROPPONENT], a ; $d059
-	ld a, $1e
+	ld a, 30
 	ld [W_CURENEMYLVL], a ; $d127
 	ld a, $4
 	ld [W_POKEMONTOWER6CURSCRIPT], a
@@ -96121,8 +96121,8 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
-	ld a, $f2
-	ld [$d059], a
+	ld a, SONY2 + $c8
+	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
@@ -96158,7 +96158,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $2
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	cp $25
 	jr nz, .asm_61497 ; 0x61490 $5
 	ld de, MovementData_614b9
@@ -101998,12 +101998,12 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	jp [hl]
 
 Func_71dff: ; 71dff (1c:5dff)
-	ld hl, PalPacket_72448
+	ld hl, PalPacket_Black
 	ld de, BlkPacket_721b5
 	ret
 
 Func_71e06: ; 71e06 (1c:5e06)
-	ld hl, PalPacket_72428
+	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102036,12 +102036,12 @@ Func_71e06: ; 71e06 (1c:5e06)
 	ret
 
 Func_71e48: ; 71e48 (1c:5e48)
-	ld hl, PalPacket_72458
+	ld hl, PalPacket_TownMap
 	ld de, BlkPacket_7219e
 	ret
 
 Func_71e4f: ; 71e4f (1c:5e4f)
-	ld hl, PalPacket_72428
+	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102064,12 +102064,12 @@ Func_71e4f: ; 71e4f (1c:5e4f)
 	ret
 
 Func_71e7b: ; 71e7b (1c:5e7b)
-	ld hl, PalPacket_72438
+	ld hl, PalPacket_PartyMenu
 	ld de, $cf2e
 	ret
 
 Func_71e82: ; 71e82 (1c:5e82)
-	ld hl, PalPacket_72468
+	ld hl, PalPacket_Pokedex
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102082,34 +102082,34 @@ Func_71e82: ; 71e82 (1c:5e82)
 	ret
 
 Func_71e9f: ; 71e9f (1c:5e9f)
-	ld hl, PalPacket_72478
+	ld hl, PalPacket_Slots
 	ld de, BlkPacket_7224f
 	ret
 
 Func_71ea6: ; 71ea6 (1c:5ea6)
-	ld hl, PalPacket_72488
+	ld hl, PalPacket_Titlescreen
 	ld de, BlkPacket_7228e
 	ret
 
 Func_71ead: ; 71ead (1c:5ead)
-	ld hl, PalPacket_724a8
+	ld hl, PalPacket_Generic
 	ld de, BlkPacket_7219e
 	ret
 
 Func_71eb4: ; 71eb4 (1c:5eb4)
-	ld hl, PalPacket_724b8
+	ld hl, PalPacket_NidorinoIntro
 	ld de, BlkPacket_722c1
 	ret
 
 Func_71ebb: ; 71ebb (1c:5ebb)
-	ld hl, PalPacket_724c8
+	ld hl, PalPacket_GameFreakIntro
 	ld de, BlkPacket_723dd
 	ld a, $8
 	ld [$cf1c], a
 	ret
 
 GetMapPaletteID: ; 71ec7 (1c:5ec7)
-	ld hl, PalPacket_72428
+	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102155,7 +102155,7 @@ GetMapPaletteID: ; 71ec7 (1c:5ec7)
 
 Func_71f17: ; 71f17 (1c:5f17)
 	push bc
-	ld hl, PalPacket_72428
+	ld hl, PalPacket_Empty
 	ld de, $cf2d
 	ld bc, $10
 	call CopyData
@@ -102206,7 +102206,7 @@ LoadTrainerCardBadgePalettes: ; 71f3b (1c:5f3b)
 	inc de
 	dec c
 	jr nz, .asm_71f52
-	ld hl, PalPacket_72498
+	ld hl, PalPacket_TrainerInfo
 	ld de, $cc5b
 	ret
 
@@ -102648,38 +102648,38 @@ BlkPacket_723dd: ; 723dd (1c:63dd)
 	db $0d,$01,$03,$08,$0b,$13,$0d,$00,$03,$00,$0e,$13,$11,$00,$03,$08
 	db $0b,$09,$0d,$02,$03,$0c,$0b,$0e,$0d,$03,$00
 
-PalPacket_72428: ; 72428 (1c:6428)
+PalPacket_Empty: ; 72428 (1c:6428)
 	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72438: ; 72438 (1c:6438)
-	db $51,$10,$00,$1F,$00,$20,$00,$21,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_PartyMenu: ; 72438 (1c:6438)
+	db $51,PAL_MEWMON,$00,PAL_GREENBAR,$00,PAL_YELLOWBAR,$00,PAL_REDBAR,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72448: ; 72448 (1c:6448)
-	db $51,$1E,$00,$1E,$00,$1E,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Black: ; 72448 (1c:6448)
+	db $51,PAL_BLACK,$00,PAL_BLACK,$00,PAL_BLACK,$00,PAL_BLACK,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72458: ; 72458 (1c:6458)
-	db $51,$0C,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_TownMap: ; 72458 (1c:6458)
+	db $51,PAL_TOWNMAP,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72468: ; 72468 (1c:6468)
-	db $51,$15,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Pokedex: ; 72468 (1c:6468)
+	db $51,PAL_BROWNMON,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72478: ; 72478 (1c:6478)
-	db $51,$1A,$00,$1B,$00,$1C,$00,$1D,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Slots: ; 72478 (1c:6478)
+	db $51,PAL_SLOTS1,$00,PAL_SLOTS2,$00,PAL_SLOTS3,$00,PAL_SLOTS4,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72488: ; 72488 (1c:6488)
-	db $51,$0E,$00,$0D,$00,$10,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Titlescreen: ; 72488 (1c:6488)
+	db $51,PAL_LOGO2,$00,PAL_LOGO1,$00,PAL_MEWMON,$00,PAL_PURPLEMON,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_72498: ; 72498 (1c:6498)
-	db $51,$10,$00,$22,$00,$12,$00,$18,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_TrainerInfo: ; 72498 (1c:6498)
+	db $51,PAL_MEWMON,$00,PAL_BADGE,$00,PAL_REDMON,$00,PAL_YELLOWMON,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_724a8: ; 724a8 (1c:64a8)
-	db $51,$10,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Generic: ; 724a8 (1c:64a8)
+	db $51,PAL_MEWMON,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_724b8: ; 724b8 (1c:64b8)
-	db $51,$14,$00,$1E,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_NidorinoIntro: ; 724b8 (1c:64b8)
+	db $51,PAL_PURPLEMON,$00,PAL_BLACK,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_724c8: ; 724c8 (1c:64c8)
-	db $51,$24,$00,$12,$00,$02,$00,$11,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_GameFreakIntro: ; 724c8 (1c:64c8)
+	db $51,PAL_GAMEFREAK,$00,PAL_REDMON,$00,PAL_VIRIDIAN,$00,PAL_BLUEMON,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_724d8: ; 724d8 (1c:64d8)
 	db $59,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
@@ -102946,11 +102946,11 @@ IF _BLUE
 	RGB 21,0,4
 	RGB 14,19,29
 ENDC
-	RGB 31,29,31 ; XXX
+	RGB 31,29,31 ; PAL_LOGO2
 	RGB 30,30,17
 	RGB 18,18,24
 	RGB 7,7,16
-	RGB 31,29,31 ; PAL_LOGO2
+	RGB 31,29,31 ; PAL_0F
 	RGB 24,20,30
 	RGB 11,20,30
 	RGB 3,2,2
@@ -103050,7 +103050,7 @@ ENDC
 	RGB 21,14,9
 	RGB 18,24,22
 	RGB 3,2,2
-	RGB 31,29,31 ; XXX
+	RGB 31,29,31 ; PAL_GAMEFREAK
 	RGB 31,28,14
 	RGB 24,20,10
 	RGB 3,2,2
@@ -104431,19 +104431,19 @@ HiddenItemNear: ; 7481f (1d:481f)
 	ld e, [hl]
 	inc hl
 	jr nz, .asm_74824 ; 0x74845 $dd
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	call Func_7486b
 	cp d
 	jr nc, .asm_74824 ; 0x7484e $d4
-	ld a, [$d361]
+	ld a, [W_YCOORD]
 	add $4
 	cp d
 	jr c, .asm_74824 ; 0x74856 $cc
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	call Func_7486b
 	cp e
 	jr nc, .asm_74824 ; 0x7485f $c3
-	ld a, [$d362]
+	ld a, [W_XCOORD]
 	add $5
 	cp e
 	jr c, .asm_74824 ; 0x74867 $bb
@@ -107497,8 +107497,8 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, UnnamedText_760f9
 	ld de, UnnamedText_760fe
 	call PreBattleSaveRegisters
-	ld a, $f3
-	ld [$d059], a
+	ld a, SONY3 + $c8
+	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
