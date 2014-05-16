@@ -6162,7 +6162,7 @@ UncompressSpriteDataLoop:: ; 2556 (0:2556)
 .unpackingMode0
 	ld [W_SPRITEUNPACKMODE], a
 .startDecompression
-	call ReadNextInputBit     
+	call ReadNextInputBit
 	and a
 	jr z, .readRLEncodedZeros ; if first bit is 0, the input starts with zeroes, otherwise with (non-zero) input
 .readNextInput
@@ -6194,7 +6194,7 @@ UncompressSpriteDataLoop:: ; 2556 (0:2556)
 	inc h
 .noCarry
 	ld a, [hli]                ; read offset that is added to the number later on
-	ld e, a                    ; adding an offset of 2^length - 1 makes every integer uniquely 
+	ld e, a                    ; adding an offset of 2^length - 1 makes every integer uniquely
 	ld d, [hl]                 ; representable in the length encoding and saves bits
 	push de
 	inc c
@@ -8989,7 +8989,7 @@ FillMemory:: ; 36e0 (0:36e0)
 	dec bc
 	ld a, b
 	or c
-	jr nz, .loop 
+	jr nz, .loop
 	pop de
 	ret
 
@@ -9269,7 +9269,7 @@ GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
 	and a
 	jr nz,.setShortDelay
 	xor a
-	ld [$ffb5],a             
+	ld [$ffb5],a
 .setShortDelay
 	ld a,5 ; 1/12 of a second delay
 	ld [H_FRAMECOUNTER],a
@@ -10779,7 +10779,7 @@ Func_4277: ; 4277 (1:4277)
 	and a
 	jr z, .asm_4284
 	dec [hl]
-	ld hl, SafariZoneEatingText ; $42a7
+	ld hl, SafariZoneEatingText
 	jr .asm_429f
 .asm_4284
 	dec hl
@@ -10787,7 +10787,7 @@ Func_4277: ; 4277 (1:4277)
 	and a
 	ret z
 	dec [hl]
-	ld hl, SafariZoneAngryText ; $42ac
+	ld hl, SafariZoneAngryText
 	jr nz, .asm_429f
 	push hl
 	ld a, [$cfe5]
@@ -11256,7 +11256,7 @@ ENDC
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 	FuncCoord 7, 8 ; $c447
 	ld hl, Coord
-	ld de, VersionOnTitleScreenText ; $45a1
+	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
@@ -11735,7 +11735,7 @@ Func_4c05: ; 4c05 (1:4c05)
 .asm_4c1a
 	FuncCoord 4, 11 ; $c480
 	ld hl, Coord
-	ld de, WaitingText ; $4c28
+	ld de, WaitingText
 	call PlaceString
 	ld c, $32
 	jp DelayFrames
@@ -12699,7 +12699,7 @@ CanWalkOntoTile: ; 516e (1:516e)
 	add $2
 	ld l, a
 	ld a, [hli]        ; c2x2 (sprite Y displacement, initialized at $8, keep track of where a sprite did go)
-	bit 7, d           ; check if going upwards (d=$ff) 
+	bit 7, d           ; check if going upwards (d=$ff)
 	jr nz, .upwards
 	add d
 	cp $5
@@ -12711,7 +12711,7 @@ CanWalkOntoTile: ; 516e (1:516e)
 .checkHorizontal
 	ld d, a
 	ld a, [hl]         ; c2x3 (sprite X displacement, initialized at $8, keep track of where a sprite did go)
-	bit 7, e           ; check if going left (e=$ff) 
+	bit 7, e           ; check if going left (e=$ff)
 	jr nz, .left
 	add e
 	cp $5              ; compare, but no conditional jump like in the vertical check above (bug?)
@@ -13955,7 +13955,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,ContinueText ; $5d7e
+	ld de,ContinueText
 	call PlaceString
 	jr .next2
 .next1
@@ -13966,7 +13966,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call TextBoxBorder
 	FuncCoord 2,2
 	ld hl,Coord
-	ld de,NewGameText ; $5d87
+	ld de,NewGameText
 	call PlaceString
 .next2
 	ld hl,$D730
@@ -14055,7 +14055,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld hl, TextTerminator_6b20 ; $6b20
 	call PrintText
 	call SaveScreenTilesToBuffer1
-	ld hl, WhereWouldYouLikeText ; $5d43
+	ld hl, WhereWouldYouLikeText
 	call PrintText
 	FuncCoord 5, 5 ; $c409
 	ld hl, Coord
@@ -14065,7 +14065,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	call UpdateSprites
 	FuncCoord 7, 7 ; $c433
 	ld hl, Coord
-	ld de, TradeCenterText ; $5d97
+	ld de, TradeCenterText
 	call PlaceString
 	xor a
 	ld [$cd37], a
@@ -14179,7 +14179,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld a, BATTLE_CENTER
 .asm_5cfc
 	ld [$d72d], a
-	ld hl, PleaseWaitText ; $5d48
+	ld hl, PleaseWaitText
 	call PrintText
 	ld c, $32
 	call DelayFrames
@@ -14202,7 +14202,7 @@ Func_5c0a: ; 5c0a (1:5c0a)
 	ld [wMenuJoypadPollCount], a ; $cc34
 	call Delay3
 	call Func_72d7
-	ld hl, LinkCanceledText ; $5d4d
+	ld hl, LinkCanceledText
 	call PrintText
 	ld hl, $d72e
 	res 6, [hl]
@@ -14265,7 +14265,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	call TextBoxBorder
 	FuncCoord 5, 9 ; $c459
 	ld hl, Coord
-	ld de, SaveScreenInfoText ; $5e6a
+	ld de, SaveScreenInfoText
 	call PlaceString
 	FuncCoord 12, 9 ; $c460
 	ld hl, Coord
@@ -14663,11 +14663,11 @@ Func_60ca: ; 60ca (1:60ca)
 	ld a, [$d08a]
 	and a
 	call z, Func_5bff
-	ld hl, NintenText ; $45aa
+	ld hl, NintenText
 	ld de, W_PLAYERNAME ; $d158
 	ld bc, $b
 	call CopyData
-	ld hl, SonyText ; $45b1
+	ld hl, SonyText
 	ld de, W_RIVALNAME ; $d34a
 	ld bc, $b
 	jp CopyData
@@ -15187,7 +15187,7 @@ AskForMonNickname: ; 64eb (1:64eb)
 	ld a, [$cf91]
 	ld [$d11e], a
 	call GetMonName
-	ld hl, DoYouWantToNicknameText ; $6557
+	ld hl, DoYouWantToNicknameText
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -15722,7 +15722,7 @@ Func_695d: ; 695d (1:695d)
 	ld b, BANK(RedPicFront)
 	call IntroPredef3B
 .asm_6999
-	ld hl, YourNameIsText ; $699f
+	ld hl, YourNameIsText
 	jp PrintText
 
 YourNameIsText: ; 699f (1:699f)
@@ -15755,7 +15755,7 @@ Func_69a4: ; 69a4 (1:69a4)
 	ld b, $13
 	call IntroPredef3B
 .asm_69e1
-	ld hl, HisNameIsText ; $69e7
+	ld hl, HisNameIsText
 	jp PrintText
 
 HisNameIsText: ; 69e7 (1:69e7)
@@ -16199,7 +16199,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call DisplayChooseQuantityMenu
 	inc a
 	jr z,.sellMenuLoop ; if the player closed the choose quantity menu with the B button
-	ld hl,PokemartTellSellPrice
+	ld hl,PokemartTellSellPriceText
 	ld bc,$0e01
 	call PrintText
 	FuncCoord 14,7
@@ -16274,7 +16274,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [$d11e],a ; store item ID for GetItemName
 	call GetItemName
 	call CopyStringToCF4B ; copy name to $cf4b
-	ld hl,PokemartTellBuyPrice
+	ld hl,PokemartTellBuyPriceText
 	call PrintText
 	FuncCoord 14,7
 	ld hl,Coord
@@ -16342,8 +16342,8 @@ PokemartBuyingGreetingText: ; 6e0c (1:6e0c)
 	TX_FAR _PokemartBuyingGreetingText
 	db "@"
 
-PokemartTellBuyPrice: ; 6e11 (1:6e11)
-	TX_FAR _PokemartTellBuyPrice
+PokemartTellBuyPriceText: ; 6e11 (1:6e11)
+	TX_FAR _PokemartTellBuyPriceText
 	db "@"
 
 PokemartBoughtItemText: ; 6e16 (1:6e16)
@@ -16362,8 +16362,8 @@ PokemonSellingGreetingText: ; 6e25 (1:6e25)
 	TX_FAR _PokemonSellingGreetingText
 	db "@"
 
-PokemartTellSellPrice: ; 6e2a (1:6e2a)
-	TX_FAR _PokemartTellSellPrice
+PokemartTellSellPriceText: ; 6e2a (1:6e2a)
+	TX_FAR _PokemartTellSellPriceText
 	db "@"
 
 PokemartItemBagEmptyText: ; 6e2f (1:6e2f)
@@ -16415,7 +16415,7 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	push de
 	ld [$d11e], a
 	call GetMoveName
-	ld hl, OneTwoAndText ; $6fc8
+	ld hl, OneTwoAndText
 	call PrintText
 	pop de
 	pop hl
@@ -16458,7 +16458,7 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	jp Func_6efe
 
 Func_6eda: ; 6eda (1:6eda)
-	ld hl, AbandonLearningText ; $6fb9
+	ld hl, AbandonLearningText
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -16469,20 +16469,20 @@ Func_6eda: ; 6eda (1:6eda)
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jp nz, Func_6e5b
-	ld hl, DidNotLearnText ; $6fbe
+	ld hl, DidNotLearnText
 	call PrintText
 	ld b, $0
 	ret
 
 Func_6efe: ; 6efe (1:6efe)
-	ld hl, LearnedMove1Text ; $6fad
+	ld hl, LearnedMove1Text
 	call PrintText
 	ld b, $1
 	ret
 
 Func_6f07: ; 6f07 (1:6f07)
 	push hl
-	ld hl, TryingToLearnText ; $6fc3
+	ld hl, TryingToLearnText
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -16506,7 +16506,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	pop hl
 .asm_6f39
 	push hl
-	ld hl, WhichMoveToForgetText ; $6fb4
+	ld hl, WhichMoveToForgetText
 	call PrintText
 	FuncCoord 4, 7 ; $c430
 	ld hl, Coord
@@ -16565,7 +16565,7 @@ Func_6f07: ; 6f07 (1:6f07)
 	and a
 	ret
 .asm_6fa2
-	ld hl, HMCantDeleteText ; $6fe1
+	ld hl, HMCantDeleteText
 	call PrintText
 	pop hl
 	jr .asm_6f39
@@ -16594,17 +16594,17 @@ TryingToLearnText: ; 6fc3 (1:6fc3)
 	db "@"
 
 OneTwoAndText: ; 6fc8 (1:6fc8)
-	TX_FAR _OneTwoAndText ; 0xa2819
+	TX_FAR _OneTwoAndText
 	db $a
 	db $8
 	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, PoofText ; $6fd7
+	ld hl, PoofText
 	ret
 
 PoofText: ; 6fd7 (1:6fd7)
-	TX_FAR _PoofText ; 0xa2827
-	db $a ; 0x6fdb
+	TX_FAR _PoofText
+	db $a
 ForgotAndText: ; 6fdc (1:6fdc)
 	TX_FAR _ForgotAndText
 	db "@"
@@ -16888,14 +16888,14 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 	ret
 
 CableClubNPC: ; 71c5 (1:71c5)
-	ld hl, CableClubNPCText1 ; $72b8
+	ld hl, CableClubNPCText1
 	call PrintText
 	ld a, [$d74b]
 	bit 5, a
 	jp nz, Func_71e1
 	ld c, $3c
 	call DelayFrames
-	ld hl, CableClubNPCText6 ; $72d2
+	ld hl, CableClubNPCText6
 	call PrintText
 	jp Func_7298
 
@@ -16934,7 +16934,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	call Func_22ed
 	ld c, $32
 	call DelayFrames
-	ld hl, CableClubNPCText2 ; $72bd
+	ld hl, CableClubNPCText2
 	call PrintText
 	xor a
 	ld [$cc34], a
@@ -16950,7 +16950,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	call WaitForSoundToFinish
 	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, CableClubNPCText3 ; $72c2
+	ld hl, CableClubNPCText3
 	call PrintText
 	ld hl, $cc47
 	ld a, $3
@@ -16974,16 +16974,16 @@ Func_71e1: ; 71e1 (1:71e1)
 	dec b
 	jr nz, .asm_7273 ; 0x727a $f7
 	call Func_72d7
-	ld hl, CableClubNPCText4 ; $72c8
+	ld hl, CableClubNPCText4
 	call PrintText
 	jr Func_7298 ; 0x7285 $11
 .asm_7287
-	ld hl, CableClubNPCText7 ; $72b3
+	ld hl, CableClubNPCText7
 	call PrintText
 	jr Func_7298 ; 0x728d $9
 .asm_728f
 	call Func_72d7
-	ld hl, CableClubNPCText5 ; $72cd
+	ld hl, CableClubNPCText5
 	call PrintText
 	; fall through
 
@@ -17771,14 +17771,14 @@ GetMonFieldMoves: ; 77d6 (1:77d6)
 ;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
 FieldMoveDisplayData: ; 7823 (1:7823)
 	db CUT, $01, $0C
-	db FLY, $02, $0C 
+	db FLY, $02, $0C
 	db $B4, $03, $0C ; unused field move
-	db SURF, $04, $0C 
-	db STRENGTH, $05, $0A 
-	db FLASH, $06, $0C 
-	db DIG, $07, $0C 
-	db TELEPORT, $08, $0A 
-	db SOFTBOILED, $09, $08 
+	db SURF, $04, $0C
+	db STRENGTH, $05, $0A
+	db FLASH, $06, $0C
+	db DIG, $07, $0C
+	db TELEPORT, $08, $0A
+	db SOFTBOILED, $09, $08
 	db $ff ; list terminator
 
 
@@ -17869,7 +17869,7 @@ Func_7861: ; 7861 (1:7861)
 	ld hl, ReadPlayerMonCurHPAndStatus
 	ld b, BANK(ReadPlayerMonCurHPAndStatus)
 	call Bankswitch
-	ld hl, SuckedHealthText ; $78dc
+	ld hl, SuckedHealthText
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -17878,7 +17878,7 @@ Func_7861: ; 7861 (1:7861)
 .asm_78d2
 	cp $8
 	jr nz, .asm_78d9
-	ld hl, DreamWasEatenText ; $78e1
+	ld hl, DreamWasEatenText
 .asm_78d9
 	jp PrintText
 
@@ -17904,7 +17904,7 @@ Func_78e6: ; 78e6 (1:78e6)
 	jr nz, Func_790c
 	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, TurnedOnPC2Text ; $7b22
+	ld hl, TurnedOnPC2Text
 	call PrintText
 
 Func_790c: ; 790c (1:790c)
@@ -17939,7 +17939,7 @@ Func_790c: ; 790c (1:790c)
 	ld [hli], a
 	ld [hl], a
 	ld [wPlayerMonNumber], a ; $cc2f
-	ld hl, WhatDoYouWantText ; $7b27
+	ld hl, WhatDoYouWantText
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
@@ -17981,12 +17981,12 @@ Func_7995: ; 7995 (1:7995)
 	ld a, [wNumBagItems] ; $d31d
 	and a
 	jr nz, Func_79ab
-	ld hl, NothingToDepositText ; $7b3b
+	ld hl, NothingToDepositText
 	call PrintText
 	jp Func_790c
 
 Func_79ab: ; 79ab (1:79ab)
-	ld hl, WhatToDepositText ; $7b2c
+	ld hl, WhatToDepositText
 	call PrintText
 	ld hl, wNumBagItems ; $d31d
 	ld a, l
@@ -18005,7 +18005,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld a, [$d124]
 	and a
 	jr nz, .asm_79e7
-	ld hl, DepositHowManyText ; $7b31
+	ld hl, DepositHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
@@ -18014,7 +18014,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld hl, wNumBoxItems ; $d53a
 	call AddItemToInventory
 	jr c, .asm_79f8
-	ld hl, NoRoomToStoreText ; $7b40
+	ld hl, NoRoomToStoreText
 	call PrintText
 	jp Func_79ab
 .asm_79f8
@@ -18024,7 +18024,7 @@ Func_79ab: ; 79ab (1:79ab)
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, ItemWasStoredText ; $7b36
+	ld hl, ItemWasStoredText
 	call PrintText
 	jp Func_79ab
 
@@ -18035,12 +18035,12 @@ Func_7a12: ; 7a12 (1:7a12)
 	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7a28
-	ld hl, NothingStoredText ; $7b54
+	ld hl, NothingStoredText
 	call PrintText
 	jp Func_790c
 
 Func_7a28: ; 7a28 (1:7a28)
-	ld hl, WhatToWithdrawText ; $7b45
+	ld hl, WhatToWithdrawText
 	call PrintText
 	ld hl, wNumBoxItems ; $d53a
 	ld a, l
@@ -18059,7 +18059,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld a, [$d124]
 	and a
 	jr nz, .asm_7a64
-	ld hl, WithdrawHowManyText ; $7b4a
+	ld hl, WithdrawHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
@@ -18068,7 +18068,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld hl, wNumBagItems ; $d31d
 	call AddItemToInventory
 	jr c, .asm_7a75
-	ld hl, CantCarryMoreText ; $7b59
+	ld hl, CantCarryMoreText
 	call PrintText
 	jp Func_7a28
 .asm_7a75
@@ -18078,7 +18078,7 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, WithdrewItemText ; $7b4f
+	ld hl, WithdrewItemText
 	call PrintText
 	jp Func_7a28
 
@@ -18089,12 +18089,12 @@ Func_7a8f: ; 7a8f (1:7a8f)
 	ld a, [wNumBoxItems] ; $d53a
 	and a
 	jr nz, Func_7aa5
-	ld hl, NothingStoredText ; $7b54
+	ld hl, NothingStoredText
 	call PrintText
 	jp Func_790c
 
 Func_7aa5: ; 7aa5 (1:7aa5)
-	ld hl, WhatToTossText ; $7b5e
+	ld hl, WhatToTossText
 	call PrintText
 	ld hl, wNumBoxItems ; $d53a
 	ld a, l
@@ -18121,7 +18121,7 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	call IsItemHM
 	jr c, .asm_7aef
 	push hl
-	ld hl, TossHowManyText ; $7b63
+	ld hl, TossHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	pop hl
@@ -18973,13 +18973,13 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 
 ForcedBikeOrSurfMaps: ; c3e6 (3:43e6)
 ; map id, y, x
-	db ROUTE_16,$0A,$11 
+	db ROUTE_16,$0A,$11
 	db ROUTE_16,$0B,$11
 	db ROUTE_18,$08,$21
 	db ROUTE_18,$09,$21
-	db SEAFOAM_ISLANDS_4,$07,$12 
-	db SEAFOAM_ISLANDS_4,$07,$13 
-	db SEAFOAM_ISLANDS_5,$0E,$04 
+	db SEAFOAM_ISLANDS_4,$07,$12
+	db SEAFOAM_ISLANDS_4,$07,$13
+	db SEAFOAM_ISLANDS_5,$0E,$04
 	db SEAFOAM_ISLANDS_5,$0E,$05
 	db $FF ;end
 
@@ -19240,7 +19240,7 @@ Func_c52f: ; c52f (3:452f)
 	call PlaceString
 	FuncCoord 1, 3 ; $c3dd
 	ld hl, Coord
-	ld de, SafariBallText ; $457e
+	ld de, SafariBallText
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS] ; $da47
 	cp $a
@@ -20248,9 +20248,9 @@ MapHSA2: ; cd8d (3:4d8d)
 Func_cd99: ; cd99 (3:4d99)
 	ld hl, $d728
 	set 0, [hl]
-	ld hl, UsedStrengthText ; $4daa
+	ld hl, UsedStrengthText
 	call PrintText
-	ld hl, CanMoveBouldersText ; $4dbb
+	ld hl, CanMoveBouldersText
 	jp PrintText
 
 UsedStrengthText: ; cdaa (3:4daa)
@@ -20283,12 +20283,12 @@ Func_cdc0: ; cdc0 (3:4dc0)
 	ret nc
 	ld hl, $d728
 	res 1, [hl]
-	ld hl, CurrentTooFastText ; $4dfa
+	ld hl, CurrentTooFastText
 	jp PrintText
 .asm_cdec
 	ld hl, $d728
 	res 1, [hl]
-	ld hl, CyclingIsFunText ; $4dff
+	ld hl, CyclingIsFunText
 	jp PrintText
 
 CoordsData_cdf7: ; cdf7 (3:4df7)
@@ -26056,7 +26056,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[$c028]
 	cp a,$b8
-	jr z,.musicWaitLoop 
+	jr z,.musicWaitLoop
 	call Func_2307 ; start playing normal music again
 .done
 	jp TextScriptEnd ; end text
@@ -27204,7 +27204,7 @@ SuperRodData: ; e919 (3:6919)
 	dbw $A2, FishingGroup8 ; SEAFOAM_ISLANDS_5
 	dbw SAFARI_ZONE_EAST, FishingGroup6
 	dbw $DA, FishingGroup6 ; SAFARI_ZONE_NORTH
-	dbw SAFARI_ZONE_WEST, FishingGroup6 
+	dbw SAFARI_ZONE_WEST, FishingGroup6
 	dbw $DC, FishingGroup6 ; SAFARI_ZONE_CENTER
 	dbw $E2, FishingGroup9 ; UNKNOWN_DUNGEON_2
 	dbw $E3, FishingGroup9 ; UNKNOWN_DUNGEON_3
@@ -27592,7 +27592,7 @@ Func_ef54: ; ef54 (3:6f54)
 	cp $52 ; grass
 	jr z, asm_ef82
 .asm_ef77
-	ld hl, NothingToCutText ; $6f7d
+	ld hl, NothingToCutText
 	jp PrintText
 
 NothingToCutText: ; ef7d (3:6f7d)
@@ -27620,7 +27620,7 @@ asm_ef82: ; ef82 (3:6f82)
 	call Delay3
 	xor a
 	ld [$ffb0], a
-	ld hl, UsedCutText ; $6ff2
+	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
 	ld hl, $d730
@@ -27823,15 +27823,15 @@ CutTreeBlockSwaps: ; f100 (3:7100)
 ; first byte = tileset block containing the cut tree
 ; second byte = corresponding tileset block after the cut animation happens
 	db $32, $6D
-	db $33, $6C 
-	db $34, $6F 
-	db $35, $4C 
-	db $60, $6E 
-	db $0B, $0A 
-	db $3C, $35 
+	db $33, $6C
+	db $34, $6F
+	db $35, $4C
+	db $60, $6E
+	db $0B, $0A
+	db $3C, $35
 	db $3F, $35
-	db $3D, $36 
-	db $FF ; list terminator 
+	db $3D, $36
+	db $FF ; list terminator
 
 Func_f113: ; f113 (3:7113)
 	ld a, [W_CURMAP] ; $d35e
@@ -31662,11 +31662,11 @@ Func_137aa: ; 137aa (4:77aa)
 	call Bankswitch
 	ld a, [$cf0b]
 	cp $1
-	ld de, YouWinText ; $7853
+	ld de, YouWinText
 	jr c, .asm_137de
-	ld de, YouLoseText ; $785b
+	ld de, YouLoseText
 	jr z, .asm_137de
-	ld de, DrawText ; $7864
+	ld de, DrawText
 .asm_137de
 	FuncCoord 6, 8 ; $c446
 	ld hl, Coord
@@ -31688,7 +31688,7 @@ Func_137aa: ; 137aa (4:77aa)
 	ld c, $3
 	ld a, $b
 	call Predef ; indirect jump to Func_f81d (f81d (3:781d))
-	ld hl, PickUpPayDayMoneyText ; $786b
+	ld hl, PickUpPayDayMoneyText
 	call PrintText
 .asm_1380a
 	xor a
@@ -31839,8 +31839,8 @@ Func_13870: ; 13870 (4:7870)
 
 WildMonEncounterSlotChances: ; 13918 (4:7918)
 ; There are 10 slots for wild pokemon, and this is the table that defines how common each of
-; those 10 slots is. A random number is generated and then the first byte of each pair in this 
-; table is compared against that random number. If the random number is less than or equal 
+; those 10 slots is. A random number is generated and then the first byte of each pair in this
+; table is compared against that random number. If the random number is less than or equal
 ; to the first byte, then that slot is chosen.  The second byte is double the slot number.
 	db $32, $00 ; 51/256 = 19.9% chance of slot 0
 	db $65, $02 ; 51/256 = 19.9% chance of slot 1
@@ -31870,7 +31870,7 @@ _RecoilEffect: ; 1392c (4:792c)
 	srl b
 	rr c
 	ld a, d
-	cp $a5
+	cp STRUGGLE
 	jr z, .asm_13953
 	srl b
 	rr c
@@ -31919,7 +31919,7 @@ _RecoilEffect: ; 1392c (4:792c)
 	ld [wListMenuID], a ; $cf94
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
-	ld hl, RecoilText ; $799e
+	ld hl, RecoilText
 	jp PrintText
 
 RecoilText: ; 1399e (4:799e)
@@ -32166,7 +32166,7 @@ LoadPokedexTilePatterns: ; 17840 (5:7840)
 	call LoadHpBarAndStatusTilePatterns
 	ld de,PokedexTileGraphics ; $6488
 	ld hl,$9600
-	ld bc,(BANK(PokedexTileGraphics) << 8) + $12 
+	ld bc,(BANK(PokedexTileGraphics) << 8) + $12
 	call CopyVideoData
 	ld de,PokeballTileGraphics ; $697e
 	ld hl,$9720
@@ -33310,16 +33310,16 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
 	call Bankswitch           ;jump to routine depending on animation setting
-	ld hl, SubstituteText  ;"it created a substitute"
+	ld hl, SubstituteText
 	call PrintText
 	ld hl, Func_3cd5a
 	ld b, BANK(Func_3cd5a)
 	jp Bankswitch
 .alreadyHasSubstitute
-	ld hl, HasSubstituteText  ;"x has a substitute"
+	ld hl, HasSubstituteText
 	jr .printText
 .notEnoughHP
-	ld hl, TooWeakSubstituteText  ;"too weak to make substitute"
+	ld hl, TooWeakSubstituteText
 .printText
 	jp PrintText
 
@@ -34141,7 +34141,7 @@ OakWalksUpText: ; 18fce (6:4fce)
 	db "@"
 
 PalletTownText2: ; 0x18fd3 girl
-	TX_FAR _PalletTownText2 ; dc 42 29 pointing to 0xa42dc
+	TX_FAR _PalletTownText2
 	db "@"
 
 PalletTownText3: ; 0x18fd8 fat man
@@ -34430,7 +34430,7 @@ UnnamedText_191ca: ; 191ca (6:51ca)
 	db "@"
 
 ReceivedTM42Text: ; 191cf (6:51cf)
-	TX_FAR _ReceivedTM42Text ; 0xa469a
+	TX_FAR _ReceivedTM42Text
 	db $10, "@"
 
 TM42Explanation: ; 191d5 (6:51d5)
@@ -35137,9 +35137,9 @@ UnnamedText_196d9: ; 196d9 (6:56d9)
 	db "@"
 
 ReceivedTM28Text: ; 196de (6:56de)
-	TX_FAR _ReceivedTM28Text ; 0xa4f82
+	TX_FAR _ReceivedTM28Text
 	db $0B
-	TX_FAR _ReceivedTM28Text2 ; 0xa4f96
+	TX_FAR _ReceivedTM28Text2
 	db $0D, "@"
 
 TM28NoRoomText: ; 196e9 (6:56e9)
@@ -35608,7 +35608,7 @@ TM41PreText: ; 199d2 (6:59d2)
 	db "@"
 
 ReceivedTM41Text: ; 199d7 (6:59d7)
-	TX_FAR _ReceivedTM41Text ; 0xa5b5a
+	TX_FAR _ReceivedTM41Text
 	db $0B, "@"
 
 TM41ExplanationText: ; 199dd (6:59dd)
@@ -36216,8 +36216,8 @@ SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 
 SilphCo4Text1: ; 19dd3 (6:5dd3)
 	db $08 ; asm
-	ld hl, UnnamedText_19de0 ; $5de0
-	ld de, UnnamedText_19de5 ; $5de5
+	ld hl, UnnamedText_19de0
+	ld de, UnnamedText_19de5
 	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
@@ -36452,8 +36452,8 @@ Silphco5TrainerHeader4: ; 19ff6 (6:5ff6)
 
 SilphCo5Text1: ; 1a003 (6:6003)
 	db $08 ; asm
-	ld hl, UnnamedText_1a010 ; $6010
-	ld de, UnnamedText_1a015 ; $6015
+	ld hl, UnnamedText_1a010
+	ld de, UnnamedText_1a015
 	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
@@ -37621,7 +37621,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	call GoPAL_SET_CF1C
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
-	ld hl, ClearSaveDataText ; $49c1
+	ld hl, ClearSaveDataText
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
 	ld hl, Coord
@@ -37644,7 +37644,7 @@ ClearSaveDataText: ; 1c9c1 (7:49c1)
 	db "@"
 
 Func_1c9c6: ; 1c9c6 (7:49c6)
-	ld hl, WhichFloorText ; $4a14
+	ld hl, WhichFloorText
 	call PrintText
 	ld hl, $cf7b
 	ld a, l
@@ -37795,7 +37795,7 @@ Route1Text1: ; 1cab8 (7:4ab8)
 	set 0, [hl]
 	jr nz, .asm_02840 ; 0x1cac0
 	ld hl, Route1ViridianMartSampleText
-	call PrintText 
+	call PrintText
 	ld bc, (POTION << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
@@ -38713,21 +38713,21 @@ OaksLabLookAtCharmander ; 0x1d195
 	ld hl, OaksLabCharmanderText
 	jr OaksLabMonChoiceMenu
 OaksLabCharmanderText: ; 1d19a (7:519a)
-	TX_FAR _OaksLabCharmanderText ; 0x94e06
+	TX_FAR _OaksLabCharmanderText
 	db "@"
 
 OaksLabLookAtSquirtle: ; 1d19f (7:519f)
 	ld hl, OaksLabSquirtleText
 	jr OaksLabMonChoiceMenu
 OaksLabSquirtleText: ; 1d1a4 (7:51a4)
-	TX_FAR _OaksLabSquirtleText ; 0x94e2f
+	TX_FAR _OaksLabSquirtleText
 	db "@"
 
 OaksLabLookAtBulbasaur: ; 1d1a9 (7:51a9)
 	ld hl, OaksLabBulbasaurText
 	jr OaksLabMonChoiceMenu
 OaksLabBulbasaurText: ; 1d1ae (7:51ae)
-	TX_FAR _OaksLabBulbasaurText ; 0x94e57
+	TX_FAR _OaksLabBulbasaurText
 	db "@"
 
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
@@ -38785,7 +38785,7 @@ OaksLabMonEnergeticText: ; 1d222 (7:5222)
 	db "@"
 
 OaksLabReceivedMonText: ; 1d227 (7:5227)
-	TX_FAR _OaksLabReceivedMonText ; 0x94ea0
+	TX_FAR _OaksLabReceivedMonText
 	db $11, "@"
 
 OaksLabScript_1d22d: ; 1d22d (7:522d)
@@ -38795,7 +38795,7 @@ OaksLabScript_1d22d: ; 1d22d (7:522d)
 	ld [$ff8b], a
 	call Func_34fc
 	ld [hl], $0
-	ld hl, OaksLabLastMonText ; $5243
+	ld hl, OaksLabLastMonText
 	call PrintText
 	jp TextScriptEnd
 
@@ -38895,7 +38895,7 @@ UnnamedText_1d2fa: ; 1d2fa (7:52fa)
 	db "@"
 
 OaksLabDeliverParcelText: ; 1d2ff (7:52ff)
-	TX_FAR _OaksLabDeliverParcelText1 ; 0x94f69
+	TX_FAR _OaksLabDeliverParcelText1
 	db $11
 	TX_FAR _OaksLabDeliverParcelText2
 	db "@"
@@ -38905,7 +38905,7 @@ OaksLabAroundWorldText: ; 1d309 (7:5309)
 	db "@"
 
 OaksLabGivePokeballsText: ; 1d30e (7:530e)
-	TX_FAR _OaksLabGivePokeballsText1 ; 0x9506d
+	TX_FAR _OaksLabGivePokeballsText1
 	db $11
 	TX_FAR _OaksLabGivePokeballsText2
 	db "@"
@@ -39014,7 +39014,7 @@ OaksLabText14: ; 1d39f (7:539f)
 	jp TextScriptEnd
 
 OaksLabRivalReceivedMonText: ; 1d3a9 (7:53a9)
-	TX_FAR _OaksLabRivalReceivedMonText ; 0x95461
+	TX_FAR _OaksLabRivalReceivedMonText
 	db $11, "@"
 
 OaksLabText15: ; 1d3af (7:53af)
@@ -39825,9 +39825,9 @@ UnnamedText_1d94c: ; 1d94c (7:594c)
 	db "@"
 
 ReceivedFluteText: ; 1d951 (7:5951)
-	TX_FAR _ReceivedFluteText ; 0x99ffb
+	TX_FAR _ReceivedFluteText
 	db $11
-	TX_FAR _FluteExplanationText ; 0x9a011
+	TX_FAR _FluteExplanationText
 	db "@"
 
 FluteNoRoomText: ; 1d95b (7:595b)
@@ -40531,7 +40531,7 @@ TM29PreReceiveText: ; 1de75 (7:5e75)
 	db "@"
 
 ReceivedTM29Text: ; 1de7a (7:5e7a)
-	TX_FAR _ReceivedTM29Text ; 0xa252a
+	TX_FAR _ReceivedTM29Text
 	db $0B, "@"
 
 TM29ExplanationText: ; 1de80 (7:5e80)
@@ -41312,11 +41312,11 @@ PowerPlantText9: ; 1e3a4 (7:63a4)
 	jr asm_234cc ; 0x1e3a8 $be
 
 VoltorbBattleText: ; 1e3aa (7:63aa)
-	TX_FAR _VoltorbBattleText ; 0x8c5e2
+	TX_FAR _VoltorbBattleText
 	db "@"
 
 ZapdosBattleText: ; 1e3af (7:63af)
-	TX_FAR _ZapdosBattleText ; 0x8c5ea
+	TX_FAR _ZapdosBattleText
 	db $8
 	ld a, ZAPDOS
 	call PlayCry
@@ -41435,7 +41435,7 @@ Route16HouseText3: ; 1e62b (7:662b)
 	db "@"
 
 ReceivedHM02Text: ; 1e630 (7:6630)
-	TX_FAR _ReceivedHM02Text ; 0x8ce66
+	TX_FAR _ReceivedHM02Text
 	db $11, "@"
 
 HM02ExplanationText: ; 1e636 (7:6636)
@@ -41794,7 +41794,7 @@ BillThankYouText: ; 1e8ba (7:68ba)
 	db "@"
 
 SSTicketReceivedText: ; 1e8bf (7:68bf)
-	TX_FAR _SSTicketReceivedText ; 0x8d499
+	TX_FAR _SSTicketReceivedText
 	db $11, $6, "@"
 
 SSTicketNoRoomText: ; 1e8c6 (7:68c6)
@@ -41838,9 +41838,9 @@ BillsHouseBlocks: ; 1e905 (7:6905)
 
 Func_1e915: ; 1e915 (7:6915)
 	call SaveScreenTilesToBuffer2
-	ld hl, AccessedOaksPCText ; $6946
+	ld hl, AccessedOaksPCText
 	call PrintText
-	ld hl, GetDexRatedText ; $693b
+	ld hl, GetDexRatedText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; $cc26
@@ -41849,7 +41849,7 @@ Func_1e915: ; 1e915 (7:6915)
 	ld a, $56
 	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
 .asm_1e932
-	ld hl, ClosedOaksPCText ; $6940
+	ld hl, ClosedOaksPCText
 	call PrintText
 	jp LoadScreenTilesFromBuffer2
 
@@ -41885,16 +41885,16 @@ PushStartText: ; 1e960 (7:6960)
 
 Func_1e965: ; 1e965 (7:6965)
 	call EnableAutoTextBoxDrawing
-    ld hl, $d2f7
-    ld b, $13
-    call CountSetBits
-    ld a, [$d11e]
-    cp $2
-    ld a, $6
-    jr c, .asm_1e97b
-    ld a, $7
+	ld hl, $d2f7
+	ld b, $13
+	call CountSetBits
+	ld a, [$d11e]
+	cp $2
+	ld a, $6
+	jr c, .asm_1e97b
+	ld a, $7
 .asm_1e97b
-    jp Func_3ef5
+	jp Func_3ef5
 
 SaveOptionText: ; 1e97e (7:697e)
 	TX_FAR _SaveOptionText
@@ -41962,7 +41962,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 Func_1e9ed: ; 1e9ed (7:69ed)
 	xor a
 	ld [wJoypadForbiddenButtonsMask], a
-	ld hl, SafariGameOverText ; $69f7
+	ld hl, SafariGameOverText
 	jp PrintText
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
@@ -41970,10 +41970,10 @@ SafariGameOverText: ; 1e9f7 (7:69f7)
 	ld a, [W_NUMSAFARIBALLS] ; $da47
 	and a
 	jr z, .asm_1ea04
-	ld hl, TimesUpText ; $6a0d
+	ld hl, TimesUpText
 	call PrintText
 .asm_1ea04
-	ld hl, GameOverText ; $6a12
+	ld hl, GameOverText
 	call PrintText
 	jp TextScriptEnd
 
@@ -42005,14 +42005,14 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	and $f0
 	swap a
 	ld [$ffdc], a
-	ld hl, CinnabarGymQuizIntroText ; $6a5b
+	ld hl, CinnabarGymQuizIntroText
 	call PrintText
 	ld a, [$ffdb]
 	dec a
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, CinnabarQuizQuestions ; $6a60
+	ld hl, CinnabarQuizQuestions
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -42075,7 +42075,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	set 5, [hl]
 	ld a, [$ffdb]
 	ld [$ffe0], a
-	ld hl, CinnabarGymQuizCorrectText ; $6ae3
+	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
 	ld a, [$ffe0]
 	ld c, a
@@ -42087,7 +42087,7 @@ Func_1ea92: ; 1ea92 (7:6a92)
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, CinnabarGymQuizIncorrectText ; $6b05
+	ld hl, CinnabarGymQuizIncorrectText
 	call PrintText
 	ld a, [$ffdb]
 	add $2
@@ -42179,9 +42179,9 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 
 Func_1eb60: ; 1eb60 (7:6b60)
 	call EnableAutoTextBoxDrawing
-    ld a, $30
-    call Func_3ef5
-    ret
+	ld a, $30
+	call Func_3ef5
+	ret
 
 MagazinesText: ; 1eb69 (7:6b69)
 	TX_FAR _MagazinesText
@@ -42851,11 +42851,11 @@ _LeechSeedEffect: ; 2bea9 (a:7ea9)
 	ld de, W_PLAYERMONTYPE1 ; $d019 (aliases: W_PLAYERMONTYPES)
 .asm_2bec8
 	ld a, [de]
-	cp $16
+	cp GRASS
 	jr z, .asm_2bee7
 	inc de
 	ld a, [de]
-	cp $16
+	cp GRASS
 	jr z, .asm_2bee7
 	bit 7, [hl]
 	jr nz, .asm_2bee7
@@ -42863,12 +42863,12 @@ _LeechSeedEffect: ; 2bea9 (a:7ea9)
 	ld hl, Func_3fba8
 	ld b, BANK(Func_3fba8)
 	call Bankswitch
-	ld hl, SeededText ; $7ef2
+	ld hl, SeededText
 	jp PrintText
 .asm_2bee7
 	ld c, $32
 	call DelayFrames
-	ld hl, EvadedText ; $7ef7
+	ld hl, EvadedText
 	jp PrintText
 
 SeededText: ; 2bef2 (a:7ef2)
@@ -43026,7 +43026,7 @@ DisplayEffectiveness: ; 2fb7b (b:7b7b)
 	ret z
 	ld hl, SupperEffectiveText
 	jr nc, .done
-	ld hl, NotVeryEffectiveText	; It's not very effective...
+	ld hl, NotVeryEffectiveText
 .done
 	jp PrintText
 
@@ -43201,7 +43201,7 @@ _PayDayEffect ; 2feb8 (b:7eb8)
 	ld c, $3
 	ld a, $b
 	call Predef
-	ld hl, PayDayText ; $7f04
+	ld hl, PayDayText
 	jp PrintText
 
 PayDayText: ; 2ff04 (b:7f04)
@@ -53357,7 +53357,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	call CopyStringToCF4B
-	ld hl, IsEvolvingText ; $6f4d
+	ld hl, IsEvolvingText
 	call PrintText
 	ld c, $32
 	call DelayFrames
@@ -53375,7 +53375,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld b, BANK(Func_7bde9)
 	call Bankswitch
 	jp c, Func_3af2e
-	ld hl, EvolvedText ; $6f3e
+	ld hl, EvolvedText
 	call PrintText
 	pop hl
 	ld a, [hl]
@@ -53388,7 +53388,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [$d0b7], a
 	call GetName
 	push hl
-	ld hl, IntoText ; $6f43
+	ld hl, IntoText
 	call Func_3c59
 	ld a, (SFX_02_3b - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
@@ -53533,7 +53533,7 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	jp CopyData
 
 Func_3af2e: ; 3af2e (e:6f2e)
-	ld hl, StoppedEvolvingText ; $6f48
+	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearScreen
 	pop hl
@@ -55933,7 +55933,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	sbc [hl]
 	jp z, Func_3ba97
 	ld a, b
-	cp $9c
+	cp REST
 	jr nz, .asm_3ba37
 	push hl
 	push de
@@ -55949,9 +55949,9 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	ld a, [hl]
 	and a
 	ld [hl], $2
-	ld hl, RestText ; $7aa2
+	ld hl, RestText
 	jr z, .asm_3ba31
-	ld hl, RestBecameHealthyText ; $7aa7
+	ld hl, RestBecameHealthyText
 .asm_3ba31
 	call PrintText
 	pop af
@@ -56013,7 +56013,7 @@ Func_3b9ec: ; 3b9ec (e:79ec)
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, Func_3cd5a ; $4d5a
 	call BankswitchEtoF
-	ld hl, RecoverText ; $7aac
+	ld hl, RecoverText
 	jp PrintText
 
 Func_3ba97: ; 3ba97 (e:7a97)
@@ -56150,7 +56150,7 @@ Func_3bab1: ; 3bab1 (e:7ab1)
 	ld hl, wEnemyMonStatMods ; $cd2e
 	ld de, wPlayerMonStatMods ; $cd1a
 	call Func_3bb7d
-	ld hl, TransformText ; $7b92
+	ld hl, TransformText
 	jp PrintText
 
 Func_3bb7d: ; 3bb7d (e:7b7d)
@@ -56166,7 +56166,7 @@ Func_3bb7d: ; 3bb7d (e:7b7d)
 	jp CopyData
 
 Func_3bb8c: ; 3bb8c (e:7b8c)
-	ld hl, PrintItFailedText ; $7b53
+	ld hl, PrintItFailedText
 	jp BankswitchEtoF
 
 TransformText: ; 3bb92 (e:7b92)
@@ -56188,13 +56188,13 @@ Func_3bb97: ; 3bb97 (e:7b97)
 	bit 1, [hl]
 	jr nz, .asm_3bbcc
 	set 1, [hl]
-	ld hl, LightscreenText ; $7bd7
+	ld hl, LightscreenText
 	jr .asm_3bbc1
 .asm_3bbb8
 	bit 2, [hl]
 	jr nz, .asm_3bbcc
 	set 2, [hl]
-	ld hl, AcidArmorText ; $7bdc
+	ld hl, AcidArmorText
 .asm_3bbc1
 	push hl
 	ld hl, Func_3fba8 ; $7ba8
@@ -56204,7 +56204,7 @@ Func_3bb97: ; 3bb97 (e:7b97)
 .asm_3bbcc
 	ld c, $32
 	call DelayFrames
-	ld hl, PrintItFailedText ; $7b53
+	ld hl, PrintItFailedText
 	jp BankswitchEtoF
 
 LightscreenText: ; 3bbd7 (e:7bd7)
@@ -56410,7 +56410,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	and a
 	jr nz, .asm_3c17a
 	call LoadScreenTilesFromBuffer1
-	ld hl, OutOfSafariBallsText ; $41a8
+	ld hl, OutOfSafariBallsText
 	jp PrintText
 .asm_3c17a
 	ld hl, Func_4277
@@ -56487,11 +56487,11 @@ asm_3c202: ; 3c202 (f:4202)
 	call LoadScreenTilesFromBuffer1
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
-	ld hl, WildRanText ; $4229
+	ld hl, WildRanText
 	jr nz, .asm_3c216
 	xor a
 	ld [$cf0b], a
-	ld hl, EnemyRanText ; $422e
+	ld hl, EnemyRanText
 .asm_3c216
 	call PrintText
 	ld a, (SFX_08_44 - SFX_Headers_08) / 3
@@ -57033,7 +57033,7 @@ FaintEnemyPokemon ; 0x3c567
 	ld a, d
 	and a
 	ret z
-	ld hl, EnemyMonFainted ; $463e
+	ld hl, EnemyMonFaintedText
 	call PrintText
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
@@ -57073,8 +57073,8 @@ FaintEnemyPokemon ; 0x3c567
 	ld b, BANK(Func_5524f)
 	jp Bankswitch
 
-EnemyMonFainted: ; 0x3c63e
-	TX_FAR _EnemyMonFainted
+EnemyMonFaintedText: ; 0x3c63e
+	TX_FAR _EnemyMonFaintedText
 	db "@"
 
 Func_3c643: ; 3c643 (f:4643)
@@ -57145,7 +57145,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	cp $4
 	ld a, b
 	call nz, Func_3c6ee
-	ld hl, TrainerDefeatedText ; $46e9
+	ld hl, TrainerDefeatedText
 	call PrintText
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
@@ -57154,7 +57154,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld c, $28
 	call DelayFrames
 	call Func_3381
-	ld hl, MoneyForWinningText ; $46e4
+	ld hl, MoneyForWinningText
 	call PrintText
 	ld de, wPlayerMoney + 2 ; $d349
 	ld hl, $d07b
@@ -57262,7 +57262,7 @@ Func_3c79b: ; 3c79b (f:479b)
 	and a
 	dec a
 	ret nz
-	ld hl, UseNextMonText ; $47d3
+	ld hl, UseNextMonText
 	call PrintText
 .asm_3c7ad
 	FuncCoord 13, 9 ; $c461
@@ -57416,7 +57416,7 @@ Func_3c893: ; 3c893 (f:4893)
 	jr nz, .asm_3c8a3
 	ld bc, $14
 	add hl, bc
-	ld de, SevenSpacesText ; $48d7
+	ld de, SevenSpacesText
 	call PlaceString
 	ld c, $2
 	call DelayFrames
@@ -57597,7 +57597,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld a,[wWhichPokemon]
 	cp [hl]
 	jr nz,.next6
-	ld hl,AlreadyOutText ; $51f5
+	ld hl,AlreadyOutText
 	call PrintText
 .next8
 	call GoBackToPartyMenu
@@ -57682,7 +57682,7 @@ Func_3ca97: ; 3ca97 (f:4a97)
 	ld a, [$d11d]
 	and a
 	jr nz, .asm_3cab2
-	ld hl, NoWillText ; $4ab4
+	ld hl, NoWillText
 	call PrintText
 .asm_3cab2
 	xor a
@@ -57765,10 +57765,10 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	jr nc, .asm_3cb5c
 	ld a, $1
 	ld [$cd6a], a
-	ld hl, CantEscapeText ; $4b97
+	ld hl, CantEscapeText
 	jr .asm_3cb4f
 .asm_3cb4c
-	ld hl, NoRunningText ; $4b9c
+	ld hl, NoRunningText
 .asm_3cb4f
 	call PrintText
 	ld a, $1
@@ -57797,7 +57797,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	ld [$cf0b], a
 	ld a, (SFX_08_44 - SFX_Headers_08) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, GotAwayText ; $4ba1
+	ld hl, GotAwayText
 	call PrintText
 	call WaitForSoundToFinish
 	call SaveScreenTilesToBuffer1
@@ -58380,7 +58380,7 @@ Func_3cfe8: ; 3cfe8 (f:4fe8)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr nz, .asm_3cffd
-	ld hl, ItemsCantBeUsedHere
+	ld hl, ItemsCantBeUsedHereText
 	call PrintText
 	jp InitBattleMenu
 .asm_3cffd ; bag?
@@ -58480,8 +58480,8 @@ asm_3d05f: ; 3d05f (f:505f)
 	scf
 	ret
 
-ItemsCantBeUsedHere: ; 3d0c5 (f:50c5)
-	TX_FAR _ItemsCantBeUsedHere
+ItemsCantBeUsedHereText: ; 3d0c5 (f:50c5)
+	TX_FAR _ItemsCantBeUsedHereText
 	db "@"
 
 Func_3d0ca: ; 3d0ca (f:50ca)
@@ -58583,7 +58583,7 @@ Func_3d119: ; 3d119 (f:5119)
 	ld a, [wWhichPokemon] ; $cf92
 	cp d
 	jr nz, .asm_3d19d
-	ld hl, AlreadyOutText ; $51f5
+	ld hl, AlreadyOutText
 	call PrintText
 	jp Func_3d105
 .asm_3d19d
@@ -58937,7 +58937,7 @@ Func_3d3f5: ; 3d3f5 (f:53f5)
 	and a
 	ret nz
 .asm_3d423
-	ld hl, NoMovesLeftText ; $5430
+	ld hl, NoMovesLeftText
 	call PrintText
 	ld c, $3c
 	call DelayFrames
@@ -59043,7 +59043,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	jr nz, .asm_3d4df
 	FuncCoord 1, 10 ; $c469
 	ld hl, Coord
-	ld de, DisabledText ; $5555
+	ld de, DisabledText
 	call PlaceString
 	jr .asm_3d54e
 .asm_3d4df
@@ -59076,7 +59076,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld [$cd6d], a
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, TypeText ; $555f
+	ld de, TypeText
 	call PlaceString
 	FuncCoord 7, 11 ; $c483
 	ld hl, Coord
@@ -59688,14 +59688,14 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	xor a
 	ld [hli],a
 	ld [hl],a
-	ld a,$75
+	ld a,BIDE
 	ld [W_PLAYERMOVENUM],a
 	ld hl,asm_3d705 ; $5705
 	jp Func_3da37
 .next10
 	bit 1,[hl]
 	jr z,.next13 ; 59FF
-	ld a,$25
+	ld a,THRASH
 	ld [W_PLAYERMOVENUM],a
 	ld hl,ThrashingAboutText
 	call PrintText
@@ -59823,7 +59823,7 @@ PrintMoveIsDisabledText: ; 3da88 (f:5a88)
 	ld a, [hl]
 	ld [$d11e], a
 	call GetMoveName
-	ld hl, MoveIsDisabledText ; $5aa8
+	ld hl, MoveIsDisabledText
 	jp PrintText
 
 MoveIsDisabledText: ; 3daa8 (f:5aa8)
@@ -59831,7 +59831,7 @@ MoveIsDisabledText: ; 3daa8 (f:5aa8)
 	db "@"
 
 PrintHurtItselfText: ; 3daad (f:5aad)
-	ld hl, HurtItselfText ; $5a65
+	ld hl, HurtItselfText
 	call PrintText
 	ld hl, W_ENEMYMONDEFENSE ; $cff8
 	ld a, [hli]
@@ -59874,7 +59874,7 @@ PrintHurtItselfText: ; 3daad (f:5aad)
 	jp ApplyDamageToPlayerPokemon
 
 PrintMonName1Text: ; 3daf5 (f:5af5)
-	ld hl, MonName1Text ; $5afb
+	ld hl, MonName1Text
 	jp PrintText
 
 MonName1Text: ; 3dafb (f:5afb)
@@ -60003,7 +60003,7 @@ UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
 	db STRENGTH, ABSORB, STRING_SHOT, EARTHQUAKE, FISSURE, DIG, TOXIC, SCREECH, HARDEN
 	db MINIMIZE, WITHDRAW, DEFENSE_CURL, METRONOME, LICK, CLAMP, CONSTRICT, POISON_GAS
 	db LEECH_LIFE, BUBBLE, FLASH, SPLASH, ACID_ARMOR, FURY_SWIPES, REST, SHARPEN, SLASH, SUBSTITUTE
-	db $00 
+	db $00
 	db $FF ; terminator
 
 PrintMoveFailureText: ; 3dbe2 (f:5be2)
@@ -60013,15 +60013,15 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	jr z, .asm_3dbed
 	ld de, W_ENEMYMOVEEFFECT ; $cfcd
 .asm_3dbed
-	ld hl, DoesntAffectText ; $5c57
+	ld hl, DoesntAffectText
 	ld a, [$d05b]
 	and $7f
 	jr z, .asm_3dc04
-	ld hl, MissedText ; $5c42
+	ld hl, MissedText
 	ld a, [$d05e]
 	cp $ff
 	jr nz, .asm_3dc04
-	ld hl, UnaffectedText ; $5c4c
+	ld hl, UnaffectedText
 .asm_3dc04
 	push de
 	call PrintText
@@ -60048,7 +60048,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	inc a
 	ld [hl], a
 .asm_3dc2a
-	ld hl, CrashedText ; $5c47
+	ld hl, CrashedText
 	call PrintText
 	ld b, $4
 	ld a, $24
@@ -60073,7 +60073,7 @@ UnaffectedText: ; 3dc4c (f:5c4c)
 	db "@"
 
 PrintDoesntAffectText: ; 3dc51 (f:5c51)
-	ld hl, DoesntAffectText ; $5c57
+	ld hl, DoesntAffectText
 	jp PrintText
 
 DoesntAffectText: ; 3dc57 (f:5c57)
@@ -60184,7 +60184,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	jr c, .asm_3dd0e
 	cp b
 	jr nc, .asm_3dd20
-	ld hl, WontObeyText ; $5dc0
+	ld hl, WontObeyText
 	call PrintText
 	call PrintHurtItselfText
 	jp Func_3ddb4
@@ -60195,21 +60195,21 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	and $7
 	jr z, .asm_3dd0e
 	ld [W_PLAYERMONSTATUS], a ; $d018
-	ld hl, BeganToNapText ; $5dbb
+	ld hl, BeganToNapText
 	jr .asm_3dd3a
 .asm_3dd20
 	call GenRandomInBattle
 	and $3
-	ld hl, LoafingAroundText ; $5db6
+	ld hl, LoafingAroundText
 	and a
 	jr z, .asm_3dd3a
-	ld hl, WontObeyText ; $5dc0
+	ld hl, WontObeyText
 	dec a
 	jr z, .asm_3dd3a
-	ld hl, TurnedAwayText ; $5dc5
+	ld hl, TurnedAwayText
 	dec a
 	jr z, .asm_3dd3a
-	ld hl, IgnoredOrdersText ; $5dca
+	ld hl, IgnoredOrdersText
 .asm_3dd3a
 	call PrintText
 	jr Func_3ddb4
@@ -60771,7 +60771,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 .Loop
 	ld a, [hli]                  ; read move from move table
 	cp c                         ; does it match the move about to be used?
-	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move 
+	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move
 	inc a                        ; move on to the next move, FF terminates loop
 	jr nz, .Loop                 ; check the next move in HighCriticalMoves
 	srl b                        ; /2 for regular move (effective (base speed / 2))
@@ -61274,7 +61274,7 @@ MetronomePickMove: ; 3e348 (f:6348)
 	call GenRandomInBattle ; random number
 	and a
 	jr z,.pickMoveLoop
-	cp a,$a5 ; max normal move number + 1 (this is Struggle's move number)
+	cp a,STRUGGLE ; max normal move number + 1 (this is Struggle's move number)
 	jr nc,.pickMoveLoop
 	cp a,METRONOME
 	jr z,.pickMoveLoop
@@ -61977,7 +61977,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	pop hl
 	jp nz, Func_3e794
 	res 2, [hl]
-	ld hl, HitMultipleTimesText ; $6887
+	ld hl, HitMultipleTimesText
 	call PrintText
 	xor a
 	ld [$cd05], a
@@ -62008,7 +62008,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	ld [W_ENEMYMONSTATUS], a ; $cfe9
 	and a
 	jr z, .asm_3e8af
-	ld hl, FastAsleepText ; $5a3d
+	ld hl, FastAsleepText
 	call PrintText
 	xor a
 	ld [$cc5b], a
@@ -62016,7 +62016,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	call PlayMoveAnimation
 	jr .asm_3e8b5
 .asm_3e8af
-	ld hl, WokeUpText ; $5a42
+	ld hl, WokeUpText
 	call PrintText
 .asm_3e8b5
 	xor a
@@ -62026,7 +62026,7 @@ Func_3e88f: ; 3e88f (f:688f)
 .asm_3e8bf
 	bit 5, [hl]
 	jr z, .asm_3e8d3
-	ld hl, IsFrozenText ; $5a47
+	ld hl, IsFrozenText
 	call PrintText
 	xor a
 	ld [$ccf2], a
@@ -62036,7 +62036,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	ld a, [W_PLAYERBATTSTATUS1] ; $d062
 	bit 5, a
 	jp z, Func_3e8e7
-	ld hl, CantMoveText ; $5a83
+	ld hl, CantMoveText
 	call PrintText
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
@@ -62046,7 +62046,7 @@ Func_3e8e7: ; 3e8e7 (f:68e7)
 	bit 3, [hl]
 	jp z, Func_3e8fd
 	res 3, [hl]
-	ld hl, FlinchedText ; $5a51
+	ld hl, FlinchedText
 	call PrintText
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
@@ -62056,7 +62056,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	bit 5, [hl]
 	jr z, .asm_3e912
 	res 5, [hl]
-	ld hl, MustRechargeText ; $5a56
+	ld hl, MustRechargeText
 	call PrintText
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
@@ -62071,7 +62071,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	jr nz, .asm_3e929
 	ld [hl], a
 	ld [$ccef], a
-	ld hl, DisabledNoMoreText ; $5a5b
+	ld hl, DisabledNoMoreText
 	call PrintText
 .asm_3e929
 	ld a, [W_ENEMYBATTSTATUS1] ; $d067
@@ -62082,11 +62082,11 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	jr nz, .asm_3e944
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 7, [hl]
-	ld hl, ConfusedNoMoreText ; $5a6a
+	ld hl, ConfusedNoMoreText
 	call PrintText
 	jp Func_3e9aa
 .asm_3e944
-	ld hl, IsConfusedText ; $5a60
+	ld hl, IsConfusedText
 	call PrintText
 	xor a
 	ld [$cc5b], a
@@ -62099,7 +62099,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	ld a, [hl]
 	and $80
 	ld [hl], a
-	ld hl, HurtItselfText ; $5a65
+	ld hl, HurtItselfText
 	call PrintText
 	ld hl, W_PLAYERMONDEF
 	ld a, [hli]
@@ -62158,7 +62158,7 @@ Func_3e9aa: ; 3e9aa (f:69aa)
 	call GenRandomInBattle
 	cp $3f
 	jr nc, asm_3e9f6
-	ld hl, FullyParalyzedText ; $5a4c
+	ld hl, FullyParalyzedText
 	call PrintText
 asm_3e9d3: ; 3e9d3 (f:69d3)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -62204,7 +62204,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 .asm_3ea1c
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 0, [hl]
-	ld hl, UnleashedEnergyText ; $5a74
+	ld hl, UnleashedEnergyText
 	call PrintText
 	ld a, $1
 	ld [W_ENEMYMOVEPOWER], a ; $cfce
@@ -62224,7 +62224,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld a, $75
+	ld a, BIDE
 	ld [W_ENEMYMOVENUM], a ; $cfcc
 	call Func_3ec81
 	ld hl, asm_3e782 ; $6782
@@ -62232,9 +62232,9 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 .asm_3ea54
 	bit 1, [hl]
 	jr z, .asm_3ea83
-	ld a, $25
+	ld a, THRASH
 	ld [W_ENEMYMOVENUM], a ; $cfcc
-	ld hl, ThrashingAboutText ; $5a79
+	ld hl, ThrashingAboutText
 	call PrintText
 	ld hl, $d06f
 	dec [hl]
@@ -62254,7 +62254,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 .asm_3ea83
 	bit 5, [hl]
 	jp z, Func_3ea9b
-	ld hl, AttackContinuesText ; $5a7e
+	ld hl, AttackContinuesText
 	call PrintText
 	ld hl, $d06f
 	dec [hl]
@@ -62908,19 +62908,19 @@ Func_3eed3: ; 3eed3 (f:6ed3)
 	ld de, W_ENEMYBATTSTATUS1 ; $d067
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
 .asm_3eeea
-	cp $78
+	cp SELFDESTRUCT
 	jr z, .asm_3eef1
-	cp $99
+	cp EXPLOSION
 	ret nz
 .asm_3eef1
 	ld a, [de]
 	bit 6, a
 	ret nz
 	ld a, [hli]
-	cp $8
+	cp GHOST
 	ret z
 	ld a, [hl]
-	cp $8
+	cp GHOST
 	ret z
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
@@ -63361,7 +63361,7 @@ Func_3f20e: ; 3f20e (f:720e)
 	ld b, a
 	and $7
 	jr z, .asm_3f222
-	ld hl, AlreadyAsleepText ; $724a
+	ld hl, AlreadyAsleepText
 	jp PrintText
 .asm_3f222
 	ld a, b
@@ -63379,7 +63379,7 @@ Func_3f20e: ; 3f20e (f:720e)
 	jr z, .asm_3f231
 	ld [de], a
 	call Func_3fb89
-	ld hl, FellAsleepText ; $7245
+	ld hl, FellAsleepText
 	jp PrintText
 .asm_3f242
 	jp PrintDidntAffectText
@@ -63454,10 +63454,10 @@ Func_3f24f: ; 3f24f (f:724f)
 	set 0, [hl]
 	xor a
 	ld [de], a
-	ld hl, BadlyPoisonedText ; $72e4
+	ld hl, BadlyPoisonedText
 	jr .asm_3f2c0
 .asm_3f2bd
-	ld hl, PoisonedText ; $72df
+	ld hl, PoisonedText
 .asm_3f2c0
 	pop de
 	ld a, [de]
@@ -63781,7 +63781,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld bc, $ccf3
 .asm_3f4e6
 	ld a, [de]
-	cp $6b
+	cp MINIMIZE
 	jr nz, .asm_3f4f9
 	bit 4, [hl]
 	push af
@@ -63794,7 +63794,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 .asm_3f4f9
 	call Func_3fba8
 	ld a, [de]
-	cp $6b
+	cp MINIMIZE
 	jr nz, .asm_3f50e
 	pop bc
 	ld a, $1
@@ -63807,7 +63807,7 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call z, Func_3ee19
-	ld hl, MonsStatsRoseText ; $7528
+	ld hl, MonsStatsRoseText
 	call PrintText
 	call Func_3ed27
 	jp Func_3ed64
@@ -63817,13 +63817,13 @@ Func_3f520: ; 3f520 (f:7520)
 	dec [hl]
 
 Func_3f522: ; 3f522 (f:7522)
-	ld hl, NothingHappenedText ; $7b3e
+	ld hl, NothingHappenedText
 	jp PrintText
 
 MonsStatsRoseText: ; 3f528 (f:7528)
 	TX_FAR _MonsStatsRoseText
 	db $08 ; asm
-	ld hl, GreatlyRoseText ; $7542
+	ld hl, GreatlyRoseText
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -63832,7 +63832,7 @@ MonsStatsRoseText: ; 3f528 (f:7528)
 .asm_3f53b
 	cp $12
 	ret nc
-	ld hl, RoseText ; $7547
+	ld hl, RoseText
 	ret
 
 GreatlyRoseText: ; 3f542 (f:7542)
@@ -63992,7 +63992,7 @@ asm_3f62c: ; 3f62c (f:762c)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	call nz, Func_3ee19
-	ld hl, MonsStatsFellText ; $7661
+	ld hl, MonsStatsFellText
 	call PrintText
 	call Func_3ed27
 	jp Func_3ed64
@@ -64006,7 +64006,7 @@ Func_3f650: ; 3f650 (f:7650)
 	ld a, [de]
 	cp $44
 	ret nc
-	ld hl, NothingHappenedText ; $7b3e
+	ld hl, NothingHappenedText
 	jp PrintText
 
 Func_3f65a: ; 3f65a (f:765a)
@@ -64018,7 +64018,7 @@ Func_3f65a: ; 3f65a (f:765a)
 MonsStatsFellText: ; 3f661 (f:7661)
 	TX_FAR _MonsStatsFellText
 	db $08 ; asm
-	ld hl, FellText ; $7683
+	ld hl, FellText
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
@@ -64029,7 +64029,7 @@ MonsStatsFellText: ; 3f661 (f:7661)
 	ret c
 	cp $44
 	ret nc
-	ld hl, GreatlyFellText ; $767e
+	ld hl, GreatlyFellText
 	ret
 
 GreatlyFellText: ; 3f67e (f:767e)
@@ -64041,7 +64041,7 @@ FellText: ; 3f683 (f:7683)
 	db "@"
 
 Func_3f688: ; 3f688 (f:7688)
-	ld hl, StatsTextStrings ; $769f
+	ld hl, StatsTextStrings
 	ld c, $50
 .asm_3f68d
 	dec b
@@ -64152,7 +64152,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $32
 	call DelayFrames
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	cp $64
+	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintItFailedText
 .asm_3f76e
@@ -64166,9 +64166,9 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f77e
 	ld c, $32
 	call DelayFrames
-	ld hl, IsUnaffectedText ; $7b69
+	ld hl, IsUnaffectedText
 	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	cp $64
+	cp TELEPORT
 	jp nz, PrintText
 	jp PrintItFailedText
 .asm_3f791
@@ -64194,7 +64194,7 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $32
 	call DelayFrames
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	cp $64
+	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintItFailedText
 .asm_3f7c1
@@ -64208,9 +64208,9 @@ Func_3f739: ; 3f739 (f:7739)
 .asm_3f7d1
 	ld c, $32
 	call DelayFrames
-	ld hl, IsUnaffectedText ; $7b69
+	ld hl, IsUnaffectedText
 	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	cp $64
+	cp TELEPORT
 	jp nz, PrintText
 	jp Func_3fb4e
 .asm_3f7e4
@@ -64219,13 +64219,13 @@ Func_3f739: ; 3f739 (f:7739)
 	ld c, $14
 	call DelayFrames
 	pop af
-	ld hl, RanText ; $7802
-	cp $64
+	ld hl, RanText
+	cp TELEPORT
 	jr z, .asm_3f7ff
-	ld hl, RanScaredText ; $7807
-	cp $2e
+	ld hl, RanScaredText
+	cp ROAR
 	jr z, .asm_3f7ff
-	ld hl, BlownAwayText ; $780c
+	ld hl, BlownAwayText
 .asm_3f7ff
 	jp PrintText
 
@@ -64686,7 +64686,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	ld a, [$d11e]
 	ld [hl], a
 	call GetMoveName
-	ld hl, DisableText ; $7b09
+	ld hl, DisableText
 	jp PrintText
 .asm_3fb05
 	pop hl
@@ -64745,7 +64745,7 @@ Func_3fb4e: ; 3fb4e (f:7b4e)
 	ret nz
 
 PrintItFailedText: ; 3fb53 (f:7b53)
-	ld hl, ItFailedText ; $7b59
+	ld hl, ItFailedText
 	jp PrintText
 
 ItFailedText: ; 3fb59 (f:7b59)
@@ -64753,7 +64753,7 @@ ItFailedText: ; 3fb59 (f:7b59)
 	db "@"
 
 PrintDidntAffectText: ; 3fb5e (f:7b5e)
-	ld hl, DidntAffectText ; $7b64
+	ld hl, DidntAffectText
 	jp PrintText
 
 DidntAffectText: ; 3fb64 (f:7b64)
@@ -64765,7 +64765,7 @@ IsUnaffectedText: ; 3fb69 (f:7b69)
 	db "@"
 
 PrintMayNotAttackText: ; 3fb6e (f:7b6e)
-	ld hl, MayNotAttackText ; $7b74
+	ld hl, MayNotAttackText
 	jp PrintText
 
 MayNotAttackText: ; 3fb74 (f:7b74)
@@ -67660,7 +67660,7 @@ Func_415df: ; 415df (10:55df)
 	ret
 
 Func_415fe: ; 415fe (10:55fe)
-	ld hl, TradeWentToText ; $560c
+	ld hl, TradeWentToText
 	call PrintText
 	ld c, $c8
 	call DelayFrames
@@ -67671,10 +67671,10 @@ TradeWentToText: ; 4160c (10:560c)
 	db "@"
 
 Func_41611: ; 41611 (10:5611)
-	ld hl, TradeForText ; $5623
+	ld hl, TradeForText
 	call PrintText
 	call Delay50
-	ld hl, TradeSendsText ; $5628
+	ld hl, TradeSendsText
 	call PrintText
 	jp Delay50
 
@@ -67687,10 +67687,10 @@ TradeSendsText: ; 41628 (10:5628)
 	db "@"
 
 Func_4162d: ; 4162d (10:562d)
-	ld hl, TradeWavesFarewellText ; $5642
+	ld hl, TradeWavesFarewellText
 	call PrintText
 	call Delay50
-	ld hl, TradeTransferredText ; $5647
+	ld hl, TradeTransferredText
 	call PrintText
 	call Delay50
 	jp Func_415df
@@ -67704,7 +67704,7 @@ TradeTransferredText: ; 41647 (10:5647)
 	db "@"
 
 Func_4164c: ; 4164c (10:564c)
-	ld hl, TradeTakeCareText ; $5655
+	ld hl, TradeTakeCareText
 	call PrintText
 	jp Delay50
 
@@ -68097,7 +68097,7 @@ IntroNidorinoAnimation0: ; 4190d (10:590d)
 	db $50
 
 IntroNidorinoAnimation1: ; 41910 (10:5910)
-; This is a sequence of pixel movements for part of the Nidorino animation. This 
+; This is a sequence of pixel movements for part of the Nidorino animation. This
 ; list describes how Nidorino should hop.
 ; First byte is y movement, second byte is x movement
 	db  0, 0
@@ -68105,7 +68105,7 @@ IntroNidorinoAnimation1: ; 41910 (10:5910)
 	db -1, 2
 	db  1, 2
 	db  2, 2
-	db $50 ; list terminator 
+	db $50 ; list terminator
 
 IntroNidorinoAnimation2: ; 4191b (10:591b)
 ; This is a sequence of pixel movements for part of the Nidorino animation.
@@ -68125,7 +68125,7 @@ IntroNidorinoAnimation3: ; 41926 (10:5926)
 	db  -8, 6
 	db   8, 6
 	db  12, 6
-	db $50 ; list terminator 
+	db $50 ; list terminator
 
 IntroNidorinoAnimation4: ; 41931 (10:5931)
 ; This is a sequence of pixel movements for part of the Nidorino animation.
@@ -68163,7 +68163,7 @@ IntroNidorinoAnimation7: ; 41950 (10:5950)
 	db -7, -14
 	db -6, -12
 	db -4, -10
-	db $50 ; list terminator 
+	db $50 ; list terminator
 
 GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.h8.2bpp"
@@ -68827,7 +68827,7 @@ RockTunnel1TrainerHeader4: ; 44529 (11:4529)
 	dw RockTunnel1BattleText4 ; 0x45b5 TextBeforeBattle
 	dw RockTunnel1AfterBattleText4 ; 0x45bf TextAfterBattle
 	dw RockTunnel1EndBattleText4 ; 0x45ba TextEndBattle
-	dw RockTunnel1EndBattleText4; 0x45ba TextEndBattle
+	dw RockTunnel1EndBattleText4 ; 0x45ba TextEndBattle
 
 RockTunnel1TrainerHeader5: ; 44535 (11:4535)
 	db $5 ; flag's bit
@@ -68851,7 +68851,7 @@ RockTunnel1TrainerHeader7: ; 4454d (11:454d)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw $d7d2 ; flag's byte
-	dw RockTunnel1BattleText7; 0x45e2 TextBeforeBattle
+	dw RockTunnel1BattleText7 ; 0x45e2 TextBeforeBattle
 	dw RockTunnel1AfterBattleText7 ; 0x45ec TextAfterBattle
 	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
 	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
@@ -69529,7 +69529,7 @@ RocketHideout1Text5: ; 44c87 (11:4c87)
 	jp TextScriptEnd
 
 RocketHideout1EndBattleText6: ; 44c91 (11:4c91)
-	TX_FAR _RocketHideout1EndBattleText6 ; 0x81f2a
+	TX_FAR _RocketHideout1EndBattleText6
 	db $8
 	ld hl, $d815
 	set 5, [hl]
@@ -71356,7 +71356,7 @@ UnknownDungeon3Text1: ; 45f1c (11:5f1c)
 	jp TextScriptEnd
 
 UnknownDungeon3MewtwoText: ; 45f26 (11:5f26)
-	TX_FAR _UnknownDungeon3MewtwoText ; 0x85c72
+	TX_FAR _UnknownDungeon3MewtwoText
 	db $8
 	ld a, MEWTWO
 	call PlayCry
@@ -72195,7 +72195,7 @@ SeafoamIslands5Text3: ; 46893 (11:6893)
 	jp TextScriptEnd
 
 SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
-	TX_FAR _SeafoamIslands5BattleText2 ; 0x88075
+	TX_FAR _SeafoamIslands5BattleText2
 	db $8
 	ld a, ARTICUNO
 	call PlayCry
@@ -73430,7 +73430,7 @@ TM18PreReceiveText: ; 48278 (12:4278)
 	db "@"
 
 ReceivedTM18Text: ; 4827d (12:427d)
-	TX_FAR _ReceivedTM18Text ; 0x9c85a
+	TX_FAR _ReceivedTM18Text
 	db $0B, "@"
 
 TM18ExplanationText: ; 48283 (12:4283)
@@ -73681,7 +73681,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld bc, (TM_49 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedTM49Text ; $451b
+	ld hl, ReceivedTM49Text
 	call PrintText
 	ld hl, $d778
 	set 6, [hl]
@@ -74142,7 +74142,7 @@ DirectorText: ; 487b2 (12:47b2)
 	db "@"
 
 .CompletedDexText
-	TX_FAR _CompletedDexText ; 0x9d0ad
+	TX_FAR _CompletedDexText
 	db $6
 	db $8 ; asm
 	ld hl, DisplayDiploma
@@ -74503,9 +74503,9 @@ UnnamedText_48a6d: ; 48a6d (12:4a6d)
 	db "@"
 
 TM21Text: ; 48a72 (12:4a72)
-	TX_FAR _ReceivedTM21Text ; 0x9d50c
+	TX_FAR _ReceivedTM21Text
 	db $0B
-	TX_FAR _TM21ExplanationText ; 0x9d520
+	TX_FAR _TM21ExplanationText
 	db "@"
 
 TM21NoRoomText: ; 48a7c (12:4a7c)
@@ -74934,7 +74934,7 @@ UnnamedText_48d9c: ; 48d9c (12:4d9c)
 	db "@"
 
 Received10CoinsText: ; 48da1 (12:4da1)
-	TX_FAR _Received10CoinsText ; 0x9daa9
+	TX_FAR _Received10CoinsText
 	db $0B, "@"
 
 UnnamedText_48da7: ; 48da7 (12:4da7)
@@ -75015,7 +75015,7 @@ UnnamedText_48e26: ; 48e26 (12:4e26)
 	db "@"
 
 Received20CoinsText: ; 48e2b (12:4e2b)
-	TX_FAR _Received20CoinsText ; 0x9dc4f
+	TX_FAR _Received20CoinsText
 	db $0B, "@"
 
 UnnamedText_48e31: ; 48e31 (12:4e31)
@@ -75161,11 +75161,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call ClearScreenArea
 	FuncCoord 12, 2 ; $c3d4
 	ld hl, Coord
-	ld de, GameCornerMoneyText ; $4f7a
+	ld de, GameCornerMoneyText
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
-	ld de, GameCornerBlankText1 ; $4f85
+	ld de, GameCornerBlankText1
 	call PlaceString
 	FuncCoord 12, 3 ; $c3e8
 	ld hl, Coord
@@ -75174,11 +75174,11 @@ Func_48f1e: ; 48f1e (12:4f1e)
 	call PrintBCDNumber
 	FuncCoord 12, 4 ; $c3fc
 	ld hl, Coord
-	ld de, GameCornerCoinText ; $4f80
+	ld de, GameCornerCoinText
 	call PlaceString
 	FuncCoord 12, 5 ; $c410
 	ld hl, Coord
-	ld de, GameCornerBlankText2 ; $4f8d
+	ld de, GameCornerBlankText2
 	call PlaceString
 	FuncCoord 15, 5 ; $c413
 	ld hl, Coord
@@ -75409,7 +75409,7 @@ UnnamedText_491a7: ; 491a7 (12:51a7)
 	db "@"
 
 ReceivedCoinCaseText: ; 491ac (12:51ac)
-	TX_FAR _ReceivedCoinCaseText ; 0x9e07a
+	TX_FAR _ReceivedCoinCaseText
 	db $11, "@"
 
 CoinCaseNoRoomText: ; 491b2 (12:51b2)
@@ -75948,7 +75948,7 @@ TM39PreReceiveText: ; 4959c (12:559c)
 	db "@"
 
 ReceivedTM39Text: ; 495a1 (12:55a1)
-	TX_FAR _ReceivedTM39Text ; 0x8c8c6
+	TX_FAR _ReceivedTM39Text
 	db $0B, "@"
 
 TM39ExplanationText: ; 495a7 (12:55a7)
@@ -75965,7 +75965,7 @@ Route12GateUpstairsText2: ; 495b1 (12:55b1)
 	jp Func_55c9
 
 UnnamedText_495b8: ; 495b8 (12:55b8)
-	TX_FAR _UnnamedText_495b8 ; 0x8c95a
+	TX_FAR _UnnamedText_495b8
 	db "@"
 
 Route12GateUpstairsText3: ; 495bd (12:55bd)
@@ -77389,7 +77389,7 @@ UnnamedText_4a350: ; 4a350 (12:6350)
 	db "@"
 
 ReceivedHM03Text: ; 4a355 (12:6355)
-	TX_FAR _ReceivedHM03Text ; 0x85943
+	TX_FAR _ReceivedHM03Text
 	db $0B, "@"
 
 HM03ExplanationText: ; 4a35b (12:635b)
@@ -77640,12 +77640,12 @@ Func_4fda5: ; 4fda5 (13:7da5)
 .asm_4fdee
 	ld [hli], a
 	ld [hl], $50
-	ld hl, SetToBoxText ; $7e3f
+	ld hl, SetToBoxText
 	call PrintText
 	scf
 	ret
 .asm_4fdf9
-	ld hl, BoxIsFullText ; $7e44
+	ld hl, BoxIsFullText
 	call PrintText
 	and a
 	ret
@@ -77674,7 +77674,7 @@ Func_4fe11: ; 4fe11 (13:7e11)
 	pop af
 	ld [$d11e], a
 	call GetMonName
-	ld hl, GotMonText ; $7e39
+	ld hl, GotMonText
 	jp PrintText
 
 GotMonText: ; 4fe39 (13:7e39)
@@ -77769,7 +77769,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_f71e),Func_f71e
 	dbw BANK(Func_f71e),Func_f71e
 	db BANK(InitializePlayerData)
-    dw InitializePlayerData
+	dw InitializePlayerData
 	dbw BANK(HandleBitArray),HandleBitArray
 	db BANK(RemoveMissableObject)
 	dw RemoveMissableObject
@@ -77784,7 +77784,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dw AddMissableObject
 	dbw BANK(Func_ee9e),Func_ee9e
 	db BANK(InitializePlayerData)
-    dw InitializePlayerData
+	dw InitializePlayerData
 	dbw BANK(Func_c754),Func_c754
 	dbw BANK(Func_3af5b),Func_3af5b
 	dbw BANK(Func_6e43),Func_6e43
@@ -79263,14 +79263,14 @@ Func_51346: ; 51346 (14:5346)
 	ld a, c
 	and a
 	jr nz, .asm_5136e
-	ld hl, VictoryRoadGuardText1 ; $538e
+	ld hl, VictoryRoadGuardText1
 	call PrintText
 	call Func_512d8
 	ld a, $1
 	ld [W_ROUTE23CURSCRIPT], a
 	ret
 .asm_5136e
-	ld hl, VictoryRoadGuardText2 ; $539e
+	ld hl, VictoryRoadGuardText2
 	call PrintText
 	ld a, [wWhichTrade] ; $cd3d
 	ld c, a
@@ -79366,7 +79366,7 @@ Route24Script4: ; 51411 (14:5411)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-Route24Script3: ; 51422 (14:5422) 
+Route24Script3: ; 51422 (14:5422)
 	ld a, [W_ISINBATTLE] ; $d057
 	cp $ff
 	jp z, Func_513c0
@@ -80130,7 +80130,7 @@ VictoryRoad2Text6: ; 518b0 (14:58b0)
 	jp TextScriptEnd
 
 VictoryRoad2BattleText6: ; 518ba (14:58ba)
-	TX_FAR _VictoryRoad2BattleText6 ; 0x8d06e
+	TX_FAR _VictoryRoad2BattleText6
 	db $8
 	ld a, MOLTRES
 	call PlayCry
@@ -81641,16 +81641,16 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	ret
 
 RequireCoinCaseTextPtr: ; 5277e (14:677e)
-	TX_FAR _RequireCoinCaseText ; 22:628E
+	TX_FAR _RequireCoinCaseText
 	db $0D
 	db "@"
 
 ExchangeCoinsForPrizesTextPtr: ; 52784 (14:6784)
-	TX_FAR _ExchangeCoinsForPrizesText ; 22:62A9
+	TX_FAR _ExchangeCoinsForPrizesText
 	db "@"
 
 WhichPrizeTextPtr: ; 52789 (14:6789)
-	TX_FAR _WhichPrizeText ; 22:62CD
+	TX_FAR _WhichPrizeText
 	db "@"
 
 GetPrizeMenuId: ; 5278e (14:678e)
@@ -81940,26 +81940,26 @@ UnknownData52951: ; 52951 (14:6951)
 	db $00,$01,$00,$01,$00,$01,$00,$00,$01
 
 HereYouGoTextPtr: ; 5295a (14:695a)
-	TX_FAR _HereYouGoText ; 22:62E7
+	TX_FAR _HereYouGoText
 	db $0D
 	db "@"
 
 SoYouWantPrizeTextPtr: ; 52960 (14:6960)
-	TX_FAR _SoYouWantPrizeText ; 22:62F6
+	TX_FAR _SoYouWantPrizeText
 	db "@"
 
 SorryNeedMoreCoinsTextTextPtr: ; 52965 (14:6965)
-	TX_FAR _SorryNeedMoreCoinsText ; 22:630B
+	TX_FAR _SorryNeedMoreCoinsText
 	db $0D
 	db "@"
 
 PrizeRoomBagIsFullTextPtr: ; 5296b (14:696b)
-	TX_FAR _OopsYouDontHaveEnoughRoomText ; 22:6329
+	TX_FAR _OopsYouDontHaveEnoughRoomText
 	db $0D
 	db "@"
 
 OhFineThenTextPtr: ; 52971 (14:6971)
-	TX_FAR _OhFineThenText; 22:634C
+	TX_FAR _OhFineThenText
 	db $0D ; wait keypress (A/B) without blink
 	db "@"
 
@@ -82603,7 +82603,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
-	ld hl, GainedText ; $54b2
+	ld hl, GainedText
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -82704,7 +82704,7 @@ Func_5525f: ; 5525f (15:525f)
 	call Bankswitch
 	call SaveScreenTilesToBuffer1
 .asm_553f7
-	ld hl, GrewLevelText ; $54dd
+	ld hl, GrewLevelText
 	call PrintText
 	xor a
 	ld [$cc49], a
@@ -86634,18 +86634,18 @@ Func_58d99: ; 58d99 (16:4d99)
 .asm_58daa
 	ld a, [W_ENEMYMONID]
 	call PlayCry
-	ld hl, WildMonAppeared ; $4e3b
+	ld hl, WildMonAppearedText
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
 	jr z, .asm_58dbc
-	ld hl, HookedMonAttacked ; $4e40
+	ld hl, HookedMonAttackedText
 .asm_58dbc
 	jr .asm_58dc9
 .asm_58dbe
 	call Func_58e29
 	ld c, $14
 	call DelayFrames
-	ld hl, TrainerWantsToFightText ; $4e4a
+	ld hl, TrainerWantsToFightText
 .asm_58dc9
 	push hl
 	ld hl, DrawAllPokeballs
@@ -86669,18 +86669,18 @@ Func_58d99: ; 58d99 (16:4d99)
 	call Bankswitch
 	jr .asm_58daa
 .asm_58df5
-	ld hl, EnemyAppearedText ; $4e45
+	ld hl, EnemyAppearedText
 	call PrintText
-	ld hl, GhostCantBeIDdText ; $4e54
+	ld hl, GhostCantBeIDdText
 	call PrintText
 	jr asm_58e3a
 .asm_58e03
 	ld a, b
 	and a
 	jr z, .asm_58df5
-	ld hl, EnemyAppearedText ; $4e45
+	ld hl, EnemyAppearedText
 	call PrintText
-	ld hl, UnveiledGhostText ; $4e4f
+	ld hl, UnveiledGhostText
 	call PrintText
 	ld hl, Func_3eb01
 	ld b, BANK(Func_3eb01)
@@ -86688,7 +86688,7 @@ Func_58d99: ; 58d99 (16:4d99)
 	ld hl, Func_708ca
 	ld b, BANK(Func_708ca)
 	call Bankswitch
-	ld hl, WildMonAppeared ; $4e3b
+	ld hl, WildMonAppearedText
 	call PrintText
 
 Func_58e29: ; 58e29 (16:4e29)
@@ -86702,12 +86702,12 @@ Func_58e29: ; 58e29 (16:4e29)
 asm_58e3a: ; 58e3a (16:4e3a)
 	ret
 
-WildMonAppeared: ; 58e3b (16:4e3b)
-	TX_FAR _WildMonAppeared
+WildMonAppearedText: ; 58e3b (16:4e3b)
+	TX_FAR _WildMonAppearedText
 	db "@"
 
-HookedMonAttacked: ; 58e40 (16:4e40)
-	TX_FAR _HookedMonAttacked
+HookedMonAttackedText: ; 58e40 (16:4e40)
+	TX_FAR _HookedMonAttackedText
 	db "@"
 
 EnemyAppearedText: ; 58e45 (16:4e45)
@@ -86730,7 +86730,7 @@ Func_58e59: ; 58e59 (16:4e59)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	or [hl]
-	ld hl, GoText ; $4eae
+	ld hl, GoText
 	jr z, .asm_58eab
 	xor a
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
@@ -86756,16 +86756,16 @@ Func_58e59: ; 58e59 (16:4e59)
 	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Divide
 	ld a, [$ff98]
-	ld hl, GoText ; $4eae
+	ld hl, GoText
 	cp $46
 	jr nc, .asm_58eab
-	ld hl, DoItText ; $4eb5
+	ld hl, DoItText
 	cp $28
 	jr nc, .asm_58eab
-	ld hl, GetmText ; $4ebc
+	ld hl, GetmText
 	cp $a
 	jr nc, .asm_58eab
-	ld hl, EnemysWeakText ; $4ec3
+	ld hl, EnemysWeakText
 .asm_58eab
 	jp PrintText
 
@@ -86789,7 +86789,7 @@ EnemysWeakText: ; 58ec3 (16:4ec3)
 	db $08 ; asm
 
 Func_58ec8
-	ld hl, PlayerMon1Text ; $4ecc
+	ld hl, PlayerMon1Text
 	ret
 
 PlayerMon1Text: ; 58ecc (16:4ecc)
@@ -86797,7 +86797,7 @@ PlayerMon1Text: ; 58ecc (16:4ecc)
 	db "@"
 
 Func_58ed1: ; 58ed1 (16:4ed1)
-	ld hl, PlayerMon2Text ; $4ed7
+	ld hl, PlayerMon2Text
 	jp PrintText
 
 PlayerMon2Text: ; 58ed7 (16:4ed7)
@@ -87013,7 +87013,7 @@ CalcDSquared: ; 59010 (16:5010)
 
 ; each entry has the following scheme:
 ; %AAAABBBB %SCCCCCCC %DDDDDDDD %EEEEEEEE
-; resulting in 
+; resulting in
 ;  (a*n^3)/b + sign*c*n^2 + d*n - e
 ; where sign = -1 <=> S=1
 GrowthRateTable: ; 5901d (16:501d)
@@ -87025,7 +87025,7 @@ GrowthRateTable: ; 5901d (16:501d)
 	db $54,$00,$00,$00 ; slow:        5/4 n^3
 
 Func_59035 ; 0x59035
-	ld hl, OaksAideHiText ; $5091
+	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
@@ -87042,29 +87042,29 @@ Func_59035 ; 0x59035
 	jr z, .asm_59059 ; 0x59055 $2
 	jr nc, .asm_5907c ; 0x59057 $23
 .asm_59059
-	ld hl, OaksAideHereYouGoText ; $50a0
+	ld hl, OaksAideHereYouGoText
 	call PrintText
 	ld a, [$ffdc]
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, OaksAideGotItemText ; $50a5
+	ld hl, OaksAideGotItemText
 	call PrintText
 	ld a, $1
 	jr .asm_5908e ; 0x59071 $1b
 .BagFull
-	ld hl, OaksAideNoRoomText ; $50ab
+	ld hl, OaksAideNoRoomText
 	call PrintText
 	xor a
 	jr .asm_5908e ; 0x5907a $12
 .asm_5907c
-	ld hl, OaksAideUhOhText ; $5096
+	ld hl, OaksAideUhOhText
 	call PrintText
 	ld a, $80
 	jr .asm_5908e ; 0x59084 $8
 .asm_59086
-	ld hl, OaksAideComeBackText ; $509b
+	ld hl, OaksAideComeBackText
 	call PrintText
 	ld a, $ff
 .asm_5908e
@@ -89421,7 +89421,7 @@ UnnamedText_59ded: ; 59ded (16:5ded)
 	db "@"
 
 ReceivedTM36Text: ; 59df2 (16:5df2)
-	TX_FAR _ReceivedTM36Text ; 0x824ba
+	TX_FAR _ReceivedTM36Text
 	db $0B, "@"
 
 TM36ExplanationText: ; 59df8 (16:5df8)
@@ -90056,7 +90056,7 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 	db "@"
 
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
-	TX_FAR _LanceAfterBattleText ; 0x85e9e
+	TX_FAR _LanceAfterBattleText
 	db $8
 	ld hl, $d866
 	set 6, [hl]
@@ -90565,7 +90565,7 @@ UnnamedText_5c28e: ; 5c28e (17:428e)
 	db "@"
 
 ReceivedOldAmberText: ; 5c293 (17:4293)
-	TX_FAR _ReceivedOldAmberText ; 0x96790
+	TX_FAR _ReceivedOldAmberText
 	db $0B, "@"
 
 UnnamedText_5c299: ; 5c299 (17:4299)
@@ -90854,9 +90854,9 @@ PewterGymText4: ; 5c4a8 (17:44a8)
 	db "@"
 
 PewterGymText5: ; 5c4ad (17:44ad)
-	TX_FAR _ReceivedTM34Text ; 0x980ad
+	TX_FAR _ReceivedTM34Text
 	db $0B
-	TX_FAR _TM34ExplanationText ; 0x980c0
+	TX_FAR _TM34ExplanationText
 	db "@"
 
 PewterGymText6: ; 5c4b7 (17:44b7)
@@ -90864,9 +90864,9 @@ PewterGymText6: ; 5c4b7 (17:44b7)
 	db "@"
 
 UnnamedText_5c4bc: ; 5c4bc (17:44bc)
-	TX_FAR _UnnamedText_5c4bc ; 0x981c9
+	TX_FAR _UnnamedText_5c4bc
 	db $0B
-	TX_FAR _UnnamedText_5c4c1 ; 0x98232
+	TX_FAR _UnnamedText_5c4c1
 	db "@"
 
 PewterGymText2: ; 5c4c6 (17:44c6)
@@ -91029,7 +91029,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	jp TextScriptEnd
 
 PewterPokecenterText5: ; 5c603 (17:4603)
-	TX_FAR _PewterPokecenterText5 ; 0x98744
+	TX_FAR _PewterPokecenterText5
 	db "@"
 
 Unknown_5c608: ; 5c608 (17:4608)
@@ -91273,7 +91273,7 @@ CeruleanGymText5: ; 5c7c8 (17:47c8)
 
 CeruleanGymText6: ; 5c7cd (17:47cd)
 ReceivedTM11Text: ; 5c7cd (17:47cd)
-	TX_FAR _ReceivedTM11Text ; 0x98b7d
+	TX_FAR _ReceivedTM11Text
 	db $0B, "@"
 
 CeruleanGymText7: ; 5c7d3 (17:47d3)
@@ -91281,7 +91281,7 @@ CeruleanGymText7: ; 5c7d3 (17:47d3)
 	db "@"
 
 UnnamedText_5c7d8: ; 5c7d8 (17:47d8)
-	TX_FAR _UnnamedText_5c7d8 ; 0x98bb0
+	TX_FAR _UnnamedText_5c7d8
 	db $11, $6, "@"
 
 CeruleanGymText2: ; 5c7df (17:47df)
@@ -91799,9 +91799,9 @@ VermilionGymText6: ; 5cb77 (17:4b77)
 	db "@"
 
 VermilionGymText7: ; 5cb7c (17:4b7c)
-	TX_FAR _ReceivedTM24Text ; 0x9c0e0
+	TX_FAR _ReceivedTM24Text
 	db $11
-	TX_FAR _TM24ExplanationText ; 0x9c0f5
+	TX_FAR _TM24ExplanationText
 	db "@"
 
 VermilionGymText8: ; 5cb86 (17:4b86)
@@ -91976,18 +91976,18 @@ TM31PreReceiveText: ; 5ccd9 (17:4cd9)
 	db "@"
 
 ReceivedTM31Text: ; 5ccde (17:4cde)
-	TX_FAR _ReceivedTM31Text ; 0xa1675
+	TX_FAR _ReceivedTM31Text
 	db $0B
 TM31ExplanationText1: ; 5cce3 (17:4ce3)
-	TX_FAR _TM31ExplanationText1 ; 0xa1689
+	TX_FAR _TM31ExplanationText1
 	db $d, "@"
 
 TM31ExplanationText2: ; 5cce9 (17:4ce9)
-	TX_FAR _TM31ExplanationText2 ; 0xa16c5
+	TX_FAR _TM31ExplanationText2
 	db "@"
 
 TM31NoRoomText: ; 5ccee (17:4cee)
-	TX_FAR _TM31NoRoomText ; 0xa1733
+	TX_FAR _TM31NoRoomText
 	db $d, "@"
 
 CopycatsHouse2FText2: ; 5ccf4 (17:4cf4)
@@ -92637,7 +92637,7 @@ SaffronGymText11: ; 5d178 (17:5178)
 	db "@"
 
 SaffronGymText12: ; 5d182 (17:5182)
-	TX_FAR _TM46NoRoomText ; pack full
+	TX_FAR _TM46NoRoomText
 	db "@"
 
 SaffronGymText2: ; 5d187 (17:5187)
@@ -96587,7 +96587,7 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	jp TextScriptEnd
 
 SSAnne7RubText: ; 618ec (18:58ec)
-	TX_FAR _SSAnne7RubText ; 0x812dd
+	TX_FAR _SSAnne7RubText
 	db $8
 	ld a, [$c0ef]
 	cp $1f
@@ -96618,7 +96618,7 @@ ReceivingHM01Text: ; 61927 (18:5927)
 	db "@"
 
 ReceivedHM01Text: ; 6192c (18:592c)
-	TX_FAR _ReceivedHM01Text ; 0x8140d
+	TX_FAR _ReceivedHM01Text
 	db $11, "@"
 
 UnnamedText_61932: ; 61932 (18:5932)
@@ -97778,7 +97778,7 @@ SilphCoPresidentText: ; 62311 (18:6311)
 	db "@"
 
 ReceivedSilphCoMasterBallText: ; 62316 (18:6316)
-	TX_FAR _ReceivedSilphCoMasterBallText ; 0x84f63
+	TX_FAR _ReceivedSilphCoMasterBallText
 	db $11, "@"
 
 UnnamedText_6231c: ; 6231c (18:631c)
@@ -97883,7 +97883,7 @@ SilphCo11Blocks: ; 623c8 (18:63c8)
 GymStatues: ; 62419 (18:6419)
 ; if in a gym and have the corresponding badge, a = $D and jp Func_3ef5
 ; if in a gym and don’t have the corresponding badge, a = $C and jp Func_3ef5
-; else ret 
+; else ret
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
 	cp $4
@@ -98126,7 +98126,7 @@ DecrementPP: ; 68000 (1a:4000)
 	ret nz               ; If it is, return.  Pokemon Red stores the "current pokemon's" PP
 	                     ; separately from the "Pokemon in your party's" PP.  This is
 	                     ; duplication -- in all cases *other* than Pokemon with Transform.
-	                     ; Normally, this means we have to go on and make the same     
+	                     ; Normally, this means we have to go on and make the same
 	                     ; modification to the "party's pokemon" PP that we made to the
 	                     ; "current pokemon's" PP.  But, if we're dealing with a Transformed
 	                     ; Pokemon, it has separate PP for the move set that it copied from
@@ -98505,7 +98505,7 @@ Func_701a0: ; 701a0 (1c:41a0)
 	call TextBoxBorder
 	FuncCoord 4, 15 ; $c4d0
 	ld hl, Coord
-	ld de, HallOfFameText ; $426b
+	ld de, HallOfFameText
 	call PlaceString
 	ld c, $b4
 	call DelayFrames
@@ -98606,7 +98606,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	call TextBoxBorder
 	FuncCoord 2, 6 ; $c41a
 	ld hl, Coord
-	ld de, HoFMonInfoText ; $4329
+	ld de, HoFMonInfoText
 	call PlaceString
 	FuncCoord 1, 4 ; $c3f1
 	ld hl, Coord
@@ -98677,7 +98677,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PlaceString
 	FuncCoord 1, 6 ; $c419
 	ld hl, Coord
-	ld de, HoFPlayTimeText ; $43ea
+	ld de, HoFPlayTimeText
 	call PlaceString
 	FuncCoord 5, 7 ; $c431
 	ld hl, Coord
@@ -98691,16 +98691,16 @@ Func_70377: ; 70377 (1c:4377)
 	call PrintNumber
 	FuncCoord 1, 9 ; $c455
 	ld hl, Coord
-	ld de, HoFMoneyText ; $43f4
+	ld de, HoFMoneyText
 	call PlaceString
 	FuncCoord 4, 10 ; $c46c
 	ld hl, Coord
 	ld de, wPlayerMoney ; $d347
 	ld c, $a3
 	call PrintBCDNumber
-	ld hl, DexSeenOwnedText ; $43fa
+	ld hl, DexSeenOwnedText
 	call Func_703e2
-	ld hl, DexRatingText ; $43ff
+	ld hl, DexRatingText
 	call Func_703e2
 	ld hl, $cc5d
 
@@ -98928,7 +98928,7 @@ FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
 	db $39, $58
 	db $3B, $50
 	db $3C, $48
-	db $3C, $40 
+	db $3C, $40
 
 Func_705aa: ; 705aa (1c:45aa)
 	ld hl, wWhichTrade ; $cd3d
@@ -99030,7 +99030,7 @@ FlyAnimationScreenCoords1: ; 7064f (1c:464f)
 	db $30, $88
 	db $2D, $90
 	db $2A, $98
-	db $27, $A0 
+	db $27, $A0
 
 FlyAnimationScreenCoords2: ; 70667 (1c:4667)
 ; y, x pairs
@@ -99045,9 +99045,9 @@ FlyAnimationScreenCoords2: ; 70667 (1c:4667)
 	db $0C, $30
 	db $09, $20
 	db $05, $10
-	db $00, $00 
+	db $00, $00
 
-	db $F0, $00 
+	db $F0, $00
 
 Func_7067d: ; 7067d (1c:467d)
 	ld a, $ff
@@ -99248,10 +99248,10 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call DelayFrames
 	ld a, [wWhichTrade] ; $cd3d
 	and a
-	ld hl, NoNibbleText ; $4847
+	ld hl, NoNibbleText
 	jr z, .asm_70836
 	cp $2
-	ld hl, NothingHereText ; $484c
+	ld hl, NothingHereText
 	jr z, .asm_70836
 	ld b, $a
 .asm_707fe
@@ -99280,7 +99280,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld a, $44
 	ld [$c39c], a
 .asm_70833
-	ld hl, ItsABiteText ; $4851
+	ld hl, ItsABiteText
 .asm_70836
 	call PrintText
 	ld hl, $d736
@@ -100459,7 +100459,7 @@ LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, MonsNestText ; $4f89
+	ld de, MonsNestText
 	call PlaceString
 	call WaitForTextScrollButtonPress
 	call Func_711ab
@@ -100491,7 +100491,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld [hl], $ff
 	push hl
 	ld hl, wTileMap
-	ld de, ToText ; $506d
+	ld de, ToText
 	call PlaceString
 	ld a, [W_CURMAP] ; $d35e
 	ld b, $0
@@ -100745,7 +100745,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	call TextBoxBorder
 	FuncCoord 2, 9 ; $c456
 	ld hl, Coord
-	ld de, AreaUnknownText ; $524a
+	ld de, AreaUnknownText
 	call PlaceString
 	jr .asm_7123e
 .asm_71236
@@ -101913,7 +101913,7 @@ ConnectCableText: ; 71d88 (1c:5d88)
 	db "@"
 
 TradedForText: ; 71d8d (1c:5d8d)
-	TX_FAR _TradedForText ; 0xa80bc
+	TX_FAR _TradedForText
 	db $11, $a, "@"
 
 WannaTrade1Text: ; 71d94 (1c:5d94)
@@ -102649,7 +102649,7 @@ BlkPacket_723dd: ; 723dd (1c:63dd)
 	db $0b,$09,$0d,$02,$03,$0c,$0b,$0e,$0d,$03,$00
 
 PalPacket_72428: ; 72428 (1c:6428)
-	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 
+	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
 
 PalPacket_72438: ; 72438 (1c:6438)
 	db $51,$10,$00,$1F,$00,$20,$00,$21,$00,$00,$00,$00,$00,$00,$00,$00
@@ -103136,7 +103136,7 @@ LoadSAV: ; 735e8 (1c:75e8)
 	ld hl, $d730
 	push hl
 	set 6, [hl]
-	ld hl, FileDataDestroyedText ; $761e
+	ld hl, FileDataDestroyedText
 	call PrintText
 	ld c, $64
 	call DelayFrames
@@ -103460,7 +103460,7 @@ PointerTable_73895: ; 73895 (1c:7895)
 	dw $B5EA
 
 Func_738a1:: ; 738a1 (1c:78a1)
-	ld hl, WhenYouChangeBoxText ; $7909
+	ld hl, WhenYouChangeBoxText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem] ; $cc26
@@ -103555,7 +103555,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
-	ld hl, ChooseABoxText ; $79d4
+	ld hl, ChooseABoxText
 	call PrintText
 	FuncCoord 11, 0 ; $c3ab
 	ld hl, Coord
@@ -103587,7 +103587,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [Coord], a
 	FuncCoord 1, 2 ; $c3c9
 	ld hl, Coord
-	ld de, BoxNoText ; $7a21
+	ld de, BoxNoText
 	call PlaceString
 	call Func_73a84
 	FuncCoord 18, 1 ; $c3c6
@@ -105599,7 +105599,7 @@ WardenThankYouText: ; 7514e (1d:514e)
 	db "@"
 
 ReceivedHM04Text: ; 75153 (1d:5153)
-	TX_FAR _ReceivedHM04Text ; 0x9e5a2
+	TX_FAR _ReceivedHM04Text
 	db $0B, "@"
 
 HM04ExplanationText: ; 75159 (1d:5159)
@@ -106191,7 +106191,7 @@ FuchsiaGymText9: ; 75590 (1d:5590)
 	db "@"
 
 FuchsiaGymText10: ; 75595 (1d:5595)
-	TX_FAR _ReceivedTM06Text ; 0xa00eb
+	TX_FAR _ReceivedTM06Text
 	db $11
 
 TM06ExplanationText: ; 7559a (1d:559a)
@@ -106662,7 +106662,7 @@ BlaineBadgeText: ; 75925 (1d:5925)
 	db "@"
 
 ReceivedTM38Text: ; 7592a (1d:592a)
-	TX_FAR _ReceivedTM38Text ; 0xa09a8
+	TX_FAR _ReceivedTM38Text
 	db $0B
 	TX_FAR _TM38ExplanationText
 	db "@"
@@ -107091,7 +107091,7 @@ TM35PreReceiveText: ; 75cc8 (1d:5cc8)
 	db "@"
 
 ReceivedTM35Text: ; 75ccd (1d:5ccd)
-	TX_FAR _ReceivedTM35Text ; 0xa0f48
+	TX_FAR _ReceivedTM35Text
 	db $0B, "@"
 
 TM35ExplanationText: ; 75cd3 (1d:5cd3)
@@ -108383,10 +108383,10 @@ Func_765e5: ; 765e5 (1d:65e5)
 	jr nz, .third
 .fourth
 	and a
-	ret 
+	ret
 .fifth
 	pop bc
-	scf 
+	scf
 	ret
 
 Func_76610: ; 76610 (1d:6610)
@@ -109768,7 +109768,7 @@ CallWithTurnFlipped: ; 79155 (1e:5155)
 .returnAddress
 	pop af
 	ld [H_WHOSETURN],a
-	ret 
+	ret
 
 ; flashes the screen for an extended period (48 frames)
 AnimationFlashScreenLong: ; 79165 (1e:5165)
@@ -109794,7 +109794,7 @@ AnimationFlashScreenLong: ; 79165 (1e:5165)
 	ld [$D08A],a
 	pop hl
 	jr nz,.loop
-	ret 
+	ret
 
 ; BG palettes
 FlashScreenLongMonochrome: ; 7918e (1e:518e)
@@ -109892,7 +109892,7 @@ AnimationLightScreenPalette: ; 791f4 (1e:51f4)
 
 Func_791f9: ; 791f9 (1e:51f9)
 	ld bc, $4040
-	
+
 Func_791fc: ; 791fc (1e:51fc)
 	ld a, [$cf1b]
 	and a
@@ -110348,7 +110348,7 @@ SpiralBallAnimationCoordinates: ; 79476 (1e:5476)
 	db $58, $28
 	db $50, $30
 	db $50, $28
-	db $FF ; list terminator 
+	db $FF ; list terminator
 
 AnimationSquishMonPic: ; 794a1 (1e:54a1)
 ; Squishes the mon's sprite horizontally making it
@@ -110503,16 +110503,16 @@ AnimationShootManyBallsUpward: ; 79566 (1e:5566)
 	jr .loop
 
 UpwardBallsAnimXCoordinatesPlayerTurn: ; 79591 (1e:5591)
-; List of x coordinates for each pillar of "energy" balls in the 
+; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
-	db $10, $40, $28, $18, $38, $30 
+	db $10, $40, $28, $18, $38, $30
 	db $FF ; list terminator
 
 UpwardBallsAnimXCoordinatesEnemyTurn: ; 79598 (1e:5598)
-; List of x coordinates for each pillar of "energy" balls in the 
+; List of x coordinates for each pillar of "energy" balls in the
 ; AnimationShootManyBallsUpward animation. It's unused in the game.
 	db $60, $90, $78, $68, $88, $80
-	db $FF ; list terminator 
+	db $FF ; list terminator
 
 AnimationMinimizeMon: ; 7959f (1e:559f)
 ; Changes the mon's sprite to a mini black sprite. Used by the
@@ -111274,7 +111274,7 @@ Unknown_79c50: ; 79c50 (1e:5c50)
 	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
 
 AnimationLeavesFalling: ; 79c74 (1e:5c74)
-; Makes leaves float down from the top of the screen. This is used 
+; Makes leaves float down from the top of the screen. This is used
 ; in Razor Leaf's animation.
 	ld a, [$ff48]
 	push af
@@ -111289,7 +111289,7 @@ AnimationLeavesFalling: ; 79c74 (1e:5c74)
 	ret
 
 AnimationPetalsFalling: ; 79c8a (1e:5c8a)
-; Makes lots of petals fall down from the top of the screen. It's used in 
+; Makes lots of petals fall down from the top of the screen. It's used in
 ; the animation for Petal Dance.
 	ld d, $71
 	ld a, $14

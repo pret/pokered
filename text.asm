@@ -1082,7 +1082,7 @@ _HurtByLeechSeedText:: ; 896b3 (22:56b3)
 	line $5a, "!"
 	prompt
 
-_EnemyMonFainted:: ; 0x896c7
+_EnemyMonFaintedText:: ; 0x896c7
 	text "Enemy @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
@@ -1173,7 +1173,7 @@ _GotAwayText:: ; 8981f (22:581f)
 	text "Got away safely!"
 	prompt
 
-_ItemsCantBeUsedHere:: ; 89831 (22:5831)
+_ItemsCantBeUsedHereText:: ; 89831 (22:5831)
 	text "Items can't be"
 	line "used here."
 	prompt
@@ -1450,14 +1450,14 @@ _GrewLevelText:: ; 89c01 (22:5c01)
 	TX_NUM $d127, 1, 3
 	text "!@@"
 
-_WildMonAppeared:: ; 89c1d (22:5c1d)
+_WildMonAppearedText:: ; 89c1d (22:5c1d)
 	text "Wild @"
 	TX_RAM W_ENEMYMONNAME
 	db $0
 	line "appeared!"
 	prompt
 
-_HookedMonAttacked:: ; 89c33 (22:5c33)
+_HookedMonAttackedText:: ; 89c33 (22:5c33)
 	text "The hooked"
 	line "@"
 	TX_RAM W_ENEMYMONNAME
@@ -2463,7 +2463,7 @@ _PokemartBuyingGreetingText:: ; a2608 (28:6608)
 	text "Take your time."
 	done
 
-_PokemartTellBuyPrice:: ; a2619 (28:6619)
+_PokemartTellBuyPriceText:: ; a2619 (28:6619)
 	TX_RAM $cf4b
 	text "?"
 	line "That will be"
@@ -2492,7 +2492,7 @@ _PokemonSellingGreetingText:: ; a2690 (28:6690)
 	line "like to sell?"
 	done
 
-_PokemartTellSellPrice:: ; a26ae (28:66ae)
+_PokemartTellSellPriceText:: ; a26ae (28:66ae)
 	text "I can pay you"
 	line "¥@"
 	db $2, $9f, $ff, $c3 ; XXX
