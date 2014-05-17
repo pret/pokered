@@ -17,3 +17,9 @@ Route6Object: ; 0x58022 (size=87)
 	db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, $44, JR__TRAINER_M + $C8, $5 ; trainer
 	db SPRITE_LASS, $1e + 4, $b + 4, $ff, $d2, $45, JR__TRAINER_F + $C8, $3 ; trainer
 	db SPRITE_BUG_CATCHER, $1a + 4, $13 + 4, $ff, $d2, $46, BUG_CATCHER + $C8, $b ; trainer
+
+	; warp-to
+	EVENT_DISP ROUTE_6_WIDTH, $1, $9 ; ROUTE_6_GATE
+	EVENT_DISP ROUTE_6_WIDTH, $1, $a ; ROUTE_6_GATE
+	EVENT_DISP ROUTE_6_WIDTH, $7, $a ; ROUTE_6_GATE
+	EVENT_DISP ROUTE_6_WIDTH, $d, $11 ; PATH_ENTRANCE_ROUTE_6
