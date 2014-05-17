@@ -10646,7 +10646,7 @@ MewPicFront: ; 4112 (1:4112)
 MewPicBack: ; 4205 (1:4205)
 	INCBIN "pic/monback/mewb.pic"
 
-INCLUDE "data/mew_base_stats.asm"
+INCLUDE "data/baseStats/mew.asm"
 
 Func_4277: ; 4277 (1:4277)
 	ld hl, $cce9
