@@ -1,4 +1,4 @@
-_UnnamedText_1d6ab:: ; 9875c (26:475c)
+_CeruleanTrashedText_1d6ab:: ; 9875c (26:475c)
 	text "Those miserable"
 	line "ROCKETs!"
 
@@ -14,7 +14,7 @@ _UnnamedText_1d6ab:: ; 9875c (26:475c)
 	line "bundle, it did!"
 	done
 
-_UnnamedText_1d6b0:: ; 987e2 (26:47e2)
+_CeruleanTrashedText_1d6b0:: ; 987e2 (26:47e2)
 	text "I figure what's"
 	line "lost is lost!"
 

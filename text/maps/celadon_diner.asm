@@ -26,7 +26,7 @@ _CeladonDinerText4:: ; 9dfc9 (27:5fc9)
 	cont "at the slots."
 	done
 
-_UnnamedText_491a7:: ; 9e003 (27:6003)
+_CeladonDinerText_491a7:: ; 9e003 (27:6003)
 	text "Go ahead! Laugh!"
 
 	para "I'm flat out"
@@ -52,7 +52,7 @@ _CoinCaseNoRoomText:: ; 9e090 (27:6090)
 	line "this!"
 	done
 
-_UnnamedText_491b7:: ; 9e0a5 (27:60a5)
+_CeladonDinerText_491b7:: ; 9e0a5 (27:60a5)
 	text "I always thought"
 	line "I was going to"
 	cont "win it back..."

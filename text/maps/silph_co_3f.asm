@@ -1,9 +1,9 @@
-_UnnamedText_59ff9:: ; 826b9 (20:66b9)
+_SilphCo3Text_59ff9:: ; 826b9 (20:66b9)
 	text "I work for SILPH."
 	line "What should I do?"
 	done
 
-_UnnamedText_59ffe:: ; 826de (20:66de)
+_SilphCo3Text_59ffe:: ; 826de (20:66de)
 	text $52, "! You and"
 	line "your #MON"
 	cont "saved us!"

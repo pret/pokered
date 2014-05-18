@@ -1,4 +1,4 @@
-_UnnamedText_5ce8e:: ; a1852 (28:5852)
+_FightingDojoText_5ce8e:: ; a1852 (28:5852)
 	text "Grunt!"
 
 	para "I am the KARATE"
@@ -12,12 +12,12 @@ _UnnamedText_5ce8e:: ; a1852 (28:5852)
 	para "Fwaaa!"
 	done
 
-_UnnamedText_5ce93:: ; a18ba (28:58ba)
+_FightingDojoText_5ce93:: ; a18ba (28:58ba)
 	text "Hwa!"
 	line "Arrgh! Beaten!"
 	prompt
 
-_UnnamedText_5ce98:: ; a18cf (28:58cf)
+_FightingDojoText_5ce98:: ; a18cf (28:58cf)
 	text "Indeed, I have"
 	line "lost!"
 
@@ -34,7 +34,7 @@ _UnnamedText_5ce98:: ; a18cf (28:58cf)
 	line "one you like!"
 	done
 
-_UnnamedText_5ce9d:: ; a1972 (28:5972)
+_FightingDojoText_5ce9d:: ; a1972 (28:5972)
 	text "Ho!"
 
 	para "Stay and train at"

@@ -114,7 +114,7 @@ _FuchsiaCityKabutoText:: ; a6191 (29:6191)
 	cont "from a fossil."
 	prompt
 
-_UnnamedText_19b2a:: ; a61ca (29:61ca)
+_FuchsiaCityText_19b2a:: ; a61ca (29:61ca)
 	text "..."
 	done
 

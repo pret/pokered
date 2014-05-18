@@ -1,55 +1,55 @@
-_UnnamedText_1a24a:: ; 84176 (21:4176)
+_SilphCo6Text_1a24a:: ; 84176 (21:4176)
 	text "The ROCKETs came"
 	line "and took over the"
 	cont "building!"
 	done
 
-_UnnamedText_1a24f:: ; 841a4 (21:41a4)
+_SilphCo6Text_1a24f:: ; 841a4 (21:41a4)
 	text "Well, better get"
 	line "back to work!"
 	done
 
-_UnnamedText_1a261:: ; 841c4 (21:41c4)
+_SilphCo6Text_1a261:: ; 841c4 (21:41c4)
 	text "Oh dear, oh dear."
 	line "Help me please!"
 	done
 
-_UnnamedText_1a266:: ; 841e7 (21:41e7)
+_SilphCo6Text_1a266:: ; 841e7 (21:41e7)
 	text "We got engaged!"
 	line "Heheh!"
 	done
 
-_UnnamedText_1a278:: ; 841ff (21:41ff)
+_SilphCo6Text_1a278:: ; 841ff (21:41ff)
 	text "Look at him! He's"
 	line "such a coward!"
 	done
 
-_UnnamedText_1a27d:: ; 84220 (21:4220)
+_SilphCo6Text_1a27d:: ; 84220 (21:4220)
 	text "I feel so sorry"
 	line "for him, I have"
 	cont "to marry him!"
 	done
 
-_UnnamedText_1a28f:: ; 8424f (21:424f)
+_SilphCo6Text_1a28f:: ; 8424f (21:424f)
 	text "TEAM ROCKET is"
 	line "trying to conquer"
 	cont "the world with"
 	cont "#MON!"
 	done
 
-_UnnamedText_1a294:: ; 84286 (21:4286)
+_SilphCo6Text_1a294:: ; 84286 (21:4286)
 	text "TEAM ROCKET ran"
 	line "because of you!"
 	done
 
-_UnnamedText_1a2a6:: ; 842a7 (21:42a7)
+_SilphCo6Text_1a2a6:: ; 842a7 (21:42a7)
 	text "They must have"
 	line "targeted SILPH"
 	cont "for our #MON"
 	cont "products."
 	done
 
-_UnnamedText_1a2ab:: ; 842dd (21:42dd)
+_SilphCo6Text_1a2ab:: ; 842dd (21:42dd)
 	text "Come work for"
 	line "SILPH when you"
 	cont "get older!"

@@ -1,0 +1,75 @@
+PewterPokecenterScript: ; 5c587 (17:4587)
+	call Func_22fa
+	jp EnableAutoTextBoxDrawing
+
+PewterPokecenterTextPointers: ; 5c58d (17:458d)
+	dw PewterPokecenterText1
+	dw PewterPokecenterText2
+	dw PewterPokecenterText3
+	dw PewterPokecenterText4
+
+PewterPokecenterText1: ; 5c595 (17:4595)
+	db $ff
+
+PewterPokecenterText2: ; 5c596 (17:4596)
+	TX_FAR _PewterPokecenterText1
+	db "@"
+
+PewterPokecenterText3: ; 5c59b (17:459b)
+	db $8
+	ld a, $1
+	ld [$cc3c], a
+	ld hl, PewterPokecenterText5
+	call PrintText
+	ld a, $ff
+	call PlaySound
+	ld c, $20
+	call DelayFrames
+	ld hl, Unknown_5c608 ; $4608
+	ld de, $cd3f
+	ld bc, $0004
+	call CopyData
+	ld a, [$c132]
+	ld hl, $cd3f
+.asm_5c5c3
+	cp [hl]
+	inc hl
+	jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
+	dec hl
+	push hl
+	ld c, BANK(Music_JigglypuffSong)
+	ld a, MUSIC_JIGGLYPUFF_SONG
+	call PlayMusic
+	pop hl
+.asm_5c5d1
+	ld a, [hl]
+	ld [$c132], a
+	push hl
+	ld hl, $cd3f
+	ld de, $cd3e
+	ld bc, $0004
+	call CopyData
+	ld a, [$cd3e]
+	ld [$cd42], a
+	pop hl
+	ld c, $18
+	call DelayFrames
+	ld a, [$c026]
+	ld b, a
+	ld a, [$c027]
+	or b
+	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
+	ld c, $30
+	call DelayFrames
+	call Func_2307
+	jp TextScriptEnd
+
+PewterPokecenterText5: ; 5c603 (17:4603)
+	TX_FAR _PewterPokecenterText5
+	db "@"
+
+Unknown_5c608: ; 5c608 (17:4608)
+	db $30, $38, $34, $3c
+
+PewterPokecenterText4: ; 5c60c (17:460c)
+	db $f6

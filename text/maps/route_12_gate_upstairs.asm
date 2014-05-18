@@ -27,14 +27,14 @@ _TM39NoRoomText:: ; 8c93c (23:493c)
 	line "room for this."
 	done
 
-_UnnamedText_495b8:: ; 8c95a (23:495a)
+_Route12GateUpstairsText_495b8:: ; 8c95a (23:495a)
 	text "Looked into the"
 	line "binoculars."
 
 	para "A man fishing!"
 	done
 
-_UnnamedText_495c4:: ; 8c986 (23:4986)
+_Route12GateUpstairsText_495c4:: ; 8c986 (23:4986)
 	text "Looked into the"
 	line "binoculars."
 

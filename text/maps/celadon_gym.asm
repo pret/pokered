@@ -1,4 +1,4 @@
-_UnnamedText_48a5e:: ; 9d28f (27:528f)
+_CeladonGymText_48a5e:: ; 9d28f (27:528f)
 	text "Hello. Lovely"
 	line "weather isn't it?"
 	cont "It's so pleasant."
@@ -25,7 +25,7 @@ _UnnamedText_48a5e:: ; 9d28f (27:528f)
 	line "shall not lose."
 	done
 
-_UnnamedText_48a63:: ; 9d3c2 (27:53c2)
+_CeladonGymText_48a63:: ; 9d3c2 (27:53c2)
 	text "Oh!"
 	line "I concede defeat."
 
@@ -36,7 +36,7 @@ _UnnamedText_48a63:: ; 9d3c2 (27:53c2)
 	line "the RAINBOWBADGE."
 	prompt
 
-_UnnamedText_48a68:: ; 9d418 (27:5418)
+_CeladonGymText_48a68:: ; 9d418 (27:5418)
 	text "You are cataloging"
 	line "#MON? I must"
 	cont "say I'm impressed."
@@ -47,7 +47,7 @@ _UnnamedText_48a68:: ; 9d418 (27:5418)
 	cont "unattractive."
 	done
 
-_UnnamedText_48a6d:: ; 9d481 (27:5481)
+_CeladonGymText9:: ; 9d481 (27:5481)
 	text "The RAINBOWBADGE"
 	line "will make #MON"
 	cont "up to L50 obey."

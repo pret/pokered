@@ -59,20 +59,20 @@ _OaksLabLastMonText:: ; 94eb6 (25:4eb6)
 	line "last #MON!"
 	done
 
-_UnnamedText_1d2f0:: ; 94ed2 (25:4ed2)
+_OaksLabText_1d2f0:: ; 94ed2 (25:4ed2)
 	text "OAK: Now, ", $52, ","
 	line "which #MON do"
 	cont "you want?"
 	done
 
-_UnnamedText_1d2f5:: ; 94ef8 (25:4ef8)
+_OaksLabText_1d2f5:: ; 94ef8 (25:4ef8)
 	text "OAK: If a wild"
 	line "#MON appears,"
 	cont "your #MON can"
 	cont "fight against it!"
 	done
 
-_UnnamedText_1d2fa:: ; 94f36 (25:4f36)
+_OaksLabText_1d2fa:: ; 94f36 (25:4f36)
 	text "OAK: ", $52, ","
 	line "raise your young"
 	cont "#MON by making"
@@ -153,7 +153,7 @@ _OaksLabPleaseVisitText:: ; 9519e (25:519e)
 	cont "coming along."
 	done
 
-_UnnamedText_1d31d:: ; 951e9 (25:51e9)
+_OaksLabText_1d31d:: ; 951e9 (25:51e9)
 	text "OAK: Good to see "
 	line "you! How is your "
 	cont "#DEX coming? "
@@ -161,7 +161,7 @@ _UnnamedText_1d31d:: ; 951e9 (25:51e9)
 	cont "a look!"
 	prompt
 
-_UnnamedText_1d32c:: ; 95236 (25:5236)
+_OaksLabText_1d32c:: ; 95236 (25:5236)
 	text "It's encyclopedia-"
 	line "like, but the"
 	cont "pages are blank!"
@@ -171,7 +171,7 @@ _OaksLabText8:: ; 95268 (25:5268)
 	text "?"
 	done
 
-_UnnamedText_1d340:: ; 9526b (25:526b)
+_OaksLabText_1d340:: ; 9526b (25:526b)
 	text "PROF.OAK is the"
 	line "authority on"
 	cont "#MON!"
@@ -253,14 +253,14 @@ _OaksLabRivalChallengeText:: ; 95477 (25:5477)
 	line "you on!"
 	done
 
-_UnnamedText_1d3be:: ; 954b6 (25:54b6)
+_OaksLabText_1d3be:: ; 954b6 (25:54b6)
 	text "WHAT?"
 	line "Unbelievable!"
 	cont "I picked the"
 	cont "wrong #MON!"
 	prompt
 
-_UnnamedText_1d3c3:: ; 954e4 (25:54e4)
+_OaksLabText_1d3c3:: ; 954e4 (25:54e4)
 	text $53, ": Yeah! Am"
 	line "I great or what?"
 	prompt
@@ -353,12 +353,12 @@ _OaksLabText27:: ; 95741 (25:5741)
 	cont $52, "! Hahaha!"
 	done
 
-_UnnamedText_1d405:: ; 957eb (25:57eb)
+_OaksLabText_1d405:: ; 957eb (25:57eb)
 	text "I study #MON as"
 	line "PROF.OAK's AIDE."
 	done
 
-_UnnamedText_441cc:: ; 9580c (25:580c)
+_OaksLabText_441cc:: ; 9580c (25:580c)
 	text "#DEX comp-"
 	line "letion is:"
 
@@ -373,41 +373,41 @@ _UnnamedText_441cc:: ; 9580c (25:580c)
 	line "Rating:"
 	prompt
 
-_UnnamedText_44201:: ; 95858 (25:5858)
+_OaksLabText_44201:: ; 95858 (25:5858)
 	text "You still have"
 	line "lots to do."
 	cont "Look for #MON"
 	cont "in grassy areas!"
 	done
 
-_UnnamedText_44206:: ; 95893 (25:5893)
+_OaksLabText_44206:: ; 95893 (25:5893)
 	text "You're on the"
 	line "right track! "
 	cont "Get a FLASH HM"
 	cont "from my AIDE!"
 	done
 
-_UnnamedText_4420b:: ; 958cc (25:58cc)
+_OaksLabText_4420b:: ; 958cc (25:58cc)
 	text "You still need"
 	line "more #MON!"
 	cont "Try to catch"
 	cont "other species!"
 	done
 
-_UnnamedText_44210:: ; 95903 (25:5903)
+_OaksLabText_44210:: ; 95903 (25:5903)
 	text "Good, you're"
 	line "trying hard!"
 	cont "Get an ITEMFINDER"
 	cont "from my AIDE!"
 	done
 
-_UnnamedText_44215:: ; 9593d (25:593d)
+_OaksLabText_44215:: ; 9593d (25:593d)
 	text "Looking good!"
 	line "Go find my AIDE"
 	cont "when you get 50!"
 	done
 
-_UnnamedText_4421a:: ; 9596d (25:596d)
+_OaksLabText_4421a:: ; 9596d (25:596d)
 	text "You finally got at"
 	line "least 50 species!"
 	cont "Be sure to get"
@@ -415,62 +415,62 @@ _UnnamedText_4421a:: ; 9596d (25:596d)
 	cont "AIDE!"
 	done
 
-_UnnamedText_4421f:: ; 959b8 (25:59b8)
+_OaksLabText_4421f:: ; 959b8 (25:59b8)
 	text "Ho! This is geting"
 	line "even better!"
 	done
 
-_UnnamedText_44224:: ; 959d9 (25:59d9)
+_OaksLabText_44224:: ; 959d9 (25:59d9)
 	text "Very good!"
 	line "Go fish for some"
 	cont "marine #MON!"
 	done
 
-_UnnamedText_44229:: ; 95a03 (25:5a03)
+_OaksLabText_44229:: ; 95a03 (25:5a03)
 	text "Wonderful!"
 	line "Do you like to"
 	cont "collect things?"
 	done
 
-_UnnamedText_4422e:: ; 95a2e (25:5a2e)
+_OaksLabText_4422e:: ; 95a2e (25:5a2e)
 	text "I'm impressed!"
 	line "It must have been"
 	cont "difficult to do!"
 	done
 
-_UnnamedText_44233:: ; 95a60 (25:5a60)
+_OaksLabText_44233:: ; 95a60 (25:5a60)
 	text "You finally got at"
 	line "least 100 species!"
 	cont "I can't believe"
 	cont "how good you are!"
 	done
 
-_UnnamedText_44238:: ; 95aa8 (25:5aa8)
+_OaksLabText_44238:: ; 95aa8 (25:5aa8)
 	text "You even have the"
 	line "evolved forms of"
 	cont "#MON! Super!"
 	done
 
-_UnnamedText_4423d:: ; 95ad9 (25:5ad9)
+_OaksLabText_4423d:: ; 95ad9 (25:5ad9)
 	text "Excellent! Trade"
 	line "with friends to"
 	cont "get some more!"
 	done
 
-_UnnamedText_44242:: ; 95b0a (25:5b0a)
+_OaksLabText_44242:: ; 95b0a (25:5b0a)
 	text "Outstanding!"
 	line "You've become a"
 	cont "real pro at this!"
 	done
 
-_UnnamedText_44247:: ; 95b39 (25:5b39)
+_OaksLabText_44247:: ; 95b39 (25:5b39)
 	text "I have nothing"
 	line "left to say!"
 	cont "You're the"
 	cont "authority now!"
 	done
 
-_UnnamedText_4424c:: ; 95b6f (25:5b6f)
+_OaksLabText_4424c:: ; 95b6f (25:5b6f)
 	text "Your #DEX is"
 	line "entirely complete!"
 	cont "Congratulations!"

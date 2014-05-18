@@ -608,7 +608,8 @@ Mansion1HiddenObjects: ; 46f2b (11:6f2b)
 	db $FF
 Mansion2HiddenObjects: ; 46f38 (11:6f38)
 	db $0b,$02,$04 ; XXX, y, x
-	dbw Bank(Func_52037), Func_52037
+	db Bank(Mansion2Script_52037)
+	dw Mansion2Script_52037
 	db $FF
 Mansion3HiddenObjects: ; 46f3f (11:6f3f)
 	db $09,$01,MAX_REVIVE

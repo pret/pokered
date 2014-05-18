@@ -1,4 +1,4 @@
-_UnnamedText_5d616:: ; 8a7fc (22:67fc)
+_Route2GateText_5d616:: ; 8a7fc (22:67fc)
 	text "The HM FLASH"
 	line "lights even the"
 	cont "darkest dungeons."

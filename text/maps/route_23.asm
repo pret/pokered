@@ -26,7 +26,7 @@ _VictoryRoadGuardText2:: ; 92696 (24:6696)
 	TX_RAM $cd6d
 	text "!@@"
 
-_UnnamedText_513a3:: ; 926dd (24:66dd)
+_VictoryRoadGuardText_513a3:: ; 926dd (24:66dd)
 	db $0
 	para "OK then! Please,"
 	line "go right ahead!"

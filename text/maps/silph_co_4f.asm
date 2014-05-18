@@ -1,9 +1,9 @@
-_UnnamedText_19de0:: ; 827e4 (20:67e4)
+_SilphCo4Text_19de0:: ; 827e4 (20:67e4)
 	text "Sssh! Can't you"
 	line "see I'm hiding?"
 	done
 
-_UnnamedText_19de5:: ; 82803 (20:6803)
+_SilphCo4Text_19de5:: ; 82803 (20:6803)
 	text "Huh? TEAM ROCKET"
 	line "is gone?"
 	done

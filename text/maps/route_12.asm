@@ -3,14 +3,14 @@ _Route12Text1:: ; 9009e (24:409e)
 	line "blocks the way!"
 	done
 
-_UnnamedText_596eb:: ; 900bf (24:40bf)
+_Route12Text13:: ; 900bf (24:40bf)
 	text "SNORLAX woke up!"
 
 	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
-_UnnamedText_596f0:: ; 900ef (24:40ef)
+_Route12Text14:: ; 900ef (24:40ef)
 	text "SNORLAX calmed"
 	line "down! With a big"
 	cont "yawn, it returned"

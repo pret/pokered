@@ -1,4 +1,4 @@
-_UnnamedText_5d162:: ; a1bb4 (28:5bb4)
+_SaffronGymText_5d162:: ; a1bb4 (28:5bb4)
 	text "I had a vision of"
 	line "your arrival!"
 
@@ -16,7 +16,7 @@ _UnnamedText_5d162:: ; a1bb4 (28:5bb4)
 	cont "you my powers!"
 	done
 
-_UnnamedText_5d167:: ; a1c73 (28:5c73)
+_SaffronGymText_5d167:: ; a1c73 (28:5c73)
 	text "I'm"
 	line "shocked!"
 	cont "But, a loss is a"
@@ -29,14 +29,14 @@ _UnnamedText_5d167:: ; a1c73 (28:5c73)
 	para "You earned the"
 	line "MARSHBADGE!@@"
 
-_UnnamedText_5d16e:: ; a1cdc (28:5cdc)
+_SaffronGymText_5d16e:: ; a1cdc (28:5cdc)
 	text "Everyone has"
 	line "psychic power!"
 	cont "People just don't"
 	cont "realize it!"
 	done
 
-_UnnamedText_5d173:: ; a1d16 (28:5d16)
+_SaffronGymText_5d173:: ; a1d16 (28:5d16)
 	text "The MARSHBADGE"
 	line "makes #MON up"
 	cont "to L70 obey you!"
@@ -71,7 +71,7 @@ _TM46NoRoomText:: ; a1e25 (28:5e25)
 	line "of other items!"
 	done
 
-_UnnamedText_5d1e6:: ; a1e48 (28:5e48)
+_SaffronGymText_5d1e6:: ; a1e48 (28:5e48)
 	text "Yo! Champ in"
 	line "making!"
 
@@ -88,7 +88,7 @@ _UnnamedText_5d1e6:: ; a1e48 (28:5e48)
 	cont "even aim a punch!"
 	done
 
-_UnnamedText_5d1eb:: ; a1ef0 (28:5ef0)
+_SaffronGymText_5d1eb:: ; a1ef0 (28:5ef0)
 	text "Psychic power,"
 	line "huh?"
 

@@ -16,7 +16,7 @@ _MtMoonPokecenterText3:: ; 8a929 (22:6929)
 	cont "news!"
 	done
 
-_UnnamedText_4935c:: ; 8a976 (22:6976)
+_MtMoonPokecenterText_4935c:: ; 8a976 (22:6976)
 	text "MAN: Hello, there!"
 	line "Have I got a deal"
 	cont "just for you!"
@@ -27,18 +27,18 @@ _UnnamedText_4935c:: ; 8a976 (22:6976)
 	cont "What do you say?"
 	done
 
-_UnnamedText_49361:: ; 8a9ec (22:69ec)
+_MtMoonPokecenterText_49361:: ; 8a9ec (22:69ec)
 	text "No? I'm only"
 	line "doing this as a"
 	cont "favor to you!"
 	done
 
-_UnnamedText_49366:: ; 8aa17 (22:6a17)
+_MtMoonPokecenterText_49366:: ; 8aa17 (22:6a17)
 	text "You'll need more"
 	line "money than that!"
 	done
 
-_UnnamedText_4936b:: ; 8aa39 (22:6a39)
+_MtMoonPokecenterText_4936b:: ; 8aa39 (22:6a39)
 	text "MAN: Well, I don't"
 	line "give refunds!"
 	done

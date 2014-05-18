@@ -1,10 +1,10 @@
-_UnnamedText_60c1f:: ; 99ac8 (26:5ac8)
+_PokemonTower2Text_60c1f:: ; 99ac8 (26:5ac8)
 	text "The GHOST was the"
 	line "restless soul of"
 	cont "CUBONE's mother!"
 	done
 
-_UnnamedText_60c24:: ; 99afc (26:5afc)
+_PokemonTower2Text_60c24:: ; 99afc (26:5afc)
 	text "The mother's soul"
 	line "was calmed."
 
@@ -55,7 +55,7 @@ _PokemonTower6AfterBattleText3:: ; 99beb (26:5beb)
 	line "here?"
 	done
 
-_UnnamedText_60c56:: ; 99c01 (26:5c01)
+_PokemonTower6Text6:: ; 99c01 (26:5c01)
 	text "Be gone..."
 	line "Intruders..."
 	done

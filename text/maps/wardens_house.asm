@@ -72,12 +72,12 @@ _HM04NoRoomText:: ; 9e67a (27:667a)
 	line "stuffed full!"
 	done
 
-_UnnamedText_75176:: ; 9e696 (27:6696)
+_FuchsiaHouse2Text_75176:: ; 9e696 (27:6696)
 	text "#MON photos"
 	line "and fossils."
 	done
 
-_UnnamedText_7517b:: ; 9e6b0 (27:66b0)
+_FuchsiaHouse2Text_7517b:: ; 9e6b0 (27:66b0)
 	text "Old #MON"
 	line "merchandise."
 	done

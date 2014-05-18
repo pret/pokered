@@ -1,0 +1,178 @@
+SeafoamIslands5Script: ; 46799 (11:6799)
+	call EnableAutoTextBoxDrawing
+	ld a, [W_SEAFOAMISLANDS5CURSCRIPT]
+	ld hl, SeafoamIslands5ScriptPointers
+	jp CallFunctionInTable
+
+SeafoamIslands5Script_467a5: ; 467a5 (11:67a5)
+	xor a
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wJoypadForbiddenButtonsMask], a
+	ret
+
+SeafoamIslands5ScriptPointers: ; 467ad (11:67ad)
+	dw SeafoamIslands5Script0
+	dw SeafoamIslands5Script1
+	dw SeafoamIslands5Script2
+	dw SeafoamIslands5Script3
+	dw SeafoamIslands5Script4
+
+SeafoamIslands5Script4: ; 467b7 (11:67b7)
+	ld a, [W_ISINBATTLE]
+	cp $ff
+	jr z, SeafoamIslands5Script_467a5
+	call EndTrainerBattle
+	ld a, $0
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ret
+
+SeafoamIslands5Script0: ; 467c7 (11:67c7)
+	ld a, [$d880]
+	and $3
+	cp $3
+	ret z
+	ld hl, CoordsData_467fe
+	call ArePlayerCoordsInArray
+	ret nc
+	ld a, [$cd3d]
+	cp $3
+	jr nc, .asm_467e6
+	ld a, $40
+	ld [$ccd4], a
+	ld a, $2
+	jr .asm_467e8
+.asm_467e6
+	ld a, $1
+.asm_467e8
+	ld [$cd38], a
+	ld a, $40
+	ld [$ccd3], a
+	call Func_3486
+	ld hl, W_FLAGS_D733
+	res 2, [hl]
+	ld a, $1
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ret
+
+CoordsData_467fe: ; 467fe (11:67fe)
+	db $11,$14
+	db $11,$15
+	db $10,$14
+	db $10,$15
+	db $FF
+
+SeafoamIslands5Script1: ; 46807 (11:6807)
+	ld a, [$cd38]
+	and a
+	ret nz
+	xor a
+	ld [wJoypadForbiddenButtonsMask], a
+	ld a, $0
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ret
+
+SeafoamIslands5Script2: ; 46816 (11:6816)
+	ld a, [$d881]
+	and $3
+	cp $3
+	ld a, $0
+	jr z, .asm_46849
+	ld hl, CoordsData_4684d
+	call ArePlayerCoordsInArray
+	ld a, $0
+	jr nc, .asm_46849
+	ld a, [$cd3d]
+	cp $1
+	jr nz, .asm_46837
+	ld de, RLEMovementData_46859
+	jr .asm_4683a
+.asm_46837
+	ld de, RLEMovementData_46852
+.asm_4683a
+	ld hl, $ccd3
+	call DecodeRLEList
+	dec a
+	ld [$cd38], a
+	call Func_3486
+	ld a, $3
+.asm_46849
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ret
+
+CoordsData_4684d: ; 4684d (11:684d)
+	db $0E,$04
+	db $0E,$05
+	db $FF
+
+RLEMovementData_46852: ; 46852 (11:6852)
+	db $40,$03
+	db $10,$02
+	db $40,$01
+	db $FF
+
+RLEMovementData_46859: ; 46859 (11:6859)
+	db $40,$03
+	db $10,$03
+	db $40,$01
+	db $FF
+
+SeafoamIslands5Script3: ; 46860 (11:6860)
+	ld a, [$cd38]
+	ld b, a
+	cp $1
+	call z, SeaFoamIslands5Script_46872
+	ld a, b
+	and a
+	ret nz
+	ld a, $0
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ret
+
+SeaFoamIslands5Script_46872: ; 46872 (11:6872)
+	xor a
+	ld [$d700], a
+	ld [$d11a], a
+	jp ForceBikeOrSurf
+
+SeafoamIslands5TextPointers: ; 4687c (11:687c)
+	dw BoulderText
+	dw BoulderText
+	dw SeafoamIslands5Text3
+	dw SeafoamIslands5Text4
+	dw SeafoamIslands5Text5
+
+SeafoamIslands5TrainerHeaders: ; 46886 (11:6886)
+SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
+	db $2 ; flag's bit
+	db ($0 << 4) ; trainer's view range
+	dw $d882 ; flag's byte
+	dw SeafoamIslands5BattleText2 ; 0x68a2 TextBeforeBattle
+	dw SeafoamIslands5BattleText2 ; 0x68a2 TextAfterBattle
+	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
+	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
+
+	db $ff
+
+SeafoamIslands5Text3: ; 46893 (11:6893)
+	db $08 ; asm
+	ld hl, SeafoamIslands5TrainerHeader0
+	call TalkToTrainer
+	ld a, $4
+	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	jp TextScriptEnd
+
+SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
+	TX_FAR _SeafoamIslands5BattleText2
+	db $8
+	ld a, ARTICUNO
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
+SeafoamIslands5Text4: ; 468b2 (11:68b2)
+	TX_FAR _SeafoamIslands5Text4
+	db "@"
+
+SeafoamIslands5Text5: ; 468b7 (11:68b7)
+	TX_FAR _SeafoamIslands5Text5
+	db "@"

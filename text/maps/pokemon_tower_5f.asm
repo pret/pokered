@@ -62,7 +62,7 @@ _PokemonTower5AfterBattleText4:: ; 99a5e (26:5a5e)
 	cont "my training!"
 	done
 
-_UnnamedText_60a43:: ; 99a8b (26:5a8b)
+_PokemonTower5Text7:: ; 99a8b (26:5a8b)
 	text "Entered purified,"
 	line "protected zone!"
 

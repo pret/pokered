@@ -1,4 +1,4 @@
-_UnnamedText_59ded:: ; 82454 (20:6454)
+_SilphCo2Text_59ded:: ; 82454 (20:6454)
 	text "Eeek!"
 	line "No! Stop! Help!"
 

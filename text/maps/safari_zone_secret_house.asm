@@ -1,4 +1,4 @@
-_UnnamedText_4a350:: ; 858a4 (21:58a4)
+_SecretHouseText_4a350:: ; 858a4 (21:58a4)
 	text "Ah! Finally!"
 
 	para "You're the first"

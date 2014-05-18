@@ -1,9 +1,9 @@
-_UnnamedText_5a1d3:: ; 84d8d (21:4d8d)
+_SilphCo10Text_5a1d3:: ; 84d8d (21:4d8d)
 	text "Waaaaa!"
 	cont "I'm scared!"
 	done
 
-_UnnamedText_5a1d8:: ; 84da1 (21:4da1)
+_SilphCo10Text_5a1d8:: ; 84da1 (21:4da1)
 	text "Please keep quiet"
 	line "about my crying!"
 	done

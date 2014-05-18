@@ -14,13 +14,13 @@ _LavenderMartText2:: ; 9a104 (26:6104)
 	line "I can get them?"
 	done
 
-_UnnamedText_5c953:: ; 9a1b4 (26:61b4)
+_LavenderMart_5c953:: ; 9a1b4 (26:61b4)
 	text "You know REVIVE?"
 	line "It revives any"
 	cont "fainted #MON!"
 	done
 
-_UnnamedText_5c958:: ; 9a1e3 (26:61e3)
+_LavenderMart_5c958:: ; 9a1e3 (26:61e3)
 	text "I found a NUGGET"
 	line "in the mountains."
 

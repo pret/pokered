@@ -1,4 +1,4 @@
-_UnnamedText_5cb72:: ; 9c000 (27:4000)
+_VermilionGymText_5cb72:: ; 9c000 (27:4000)
 	text "A little word of"
 	line "advice, kid!"
 
@@ -10,7 +10,7 @@ _UnnamedText_5cb72:: ; 9c000 (27:4000)
 	cont "type #MON!"
 	done
 
-_UnnamedText_5cb77:: ; 9c069 (27:4069)
+_VermilionGymText_5cb77:: ; 9c069 (27:4069)
 	text "The THUNDERBADGE"
 	line "cranks up your"
 	cont "#MON's SPEED!"
@@ -111,7 +111,7 @@ _VermilionGymAfterBattleText3:: ; 9c2c0 (27:42c0)
 	cont "next to it!"
 	done
 
-_UnnamedText_5cbf4:: ; 9c32b (27:432b)
+_VermilionGymText_5cbf4:: ; 9c32b (27:432b)
 	text "Yo! Champ in"
 	line "making!"
 
@@ -137,7 +137,7 @@ _UnnamedText_5cbf4:: ; 9c32b (27:432b)
 	cont "get to him!"
 	done
 
-_UnnamedText_5cbf9:: ; 9c429 (27:4429)
+_VermilionGymText_5cbf9:: ; 9c429 (27:4429)
 	text "Whew! That match"
 	line "was electric!"
 	done

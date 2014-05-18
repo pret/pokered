@@ -20,18 +20,18 @@ _PewterCityText2:: ; a49e0 (29:49e0)
 	cont "into it!"
 	done
 
-_UnnamedText_193f1:: ; a4a56 (29:4a56)
+_PewterCityText_193f1:: ; a4a56 (29:4a56)
 	text "Did you check out"
 	line "the MUSEUM?"
 	done
 
-_UnnamedText_193f6:: ; a4a75 (29:4a75)
+_PewterCityText_193f6:: ; a4a75 (29:4a75)
 	text "Weren't those"
 	line "fossils from MT."
 	cont "MOON amazing?"
 	done
 
-_UnnamedText_193fb:: ; a4aa2 (29:4aa2)
+_PewterCityText_193fb:: ; a4aa2 (29:4aa2)
 	text "Really?"
 	line "You absolutely"
 	cont "have to go!"
@@ -45,24 +45,24 @@ _PewterCityText13:: ; a4ac6 (29:4ac6)
 	cont "See you around!"
 	done
 
-_UnnamedText_19427:: ; a4b14 (29:4b14)
+_PewterCityText_19427:: ; a4b14 (29:4b14)
 	text "Psssst!"
 	line "Do you know what"
 	cont "I'm doing?"
 	done
 
-_UnnamedText_1942c:: ; a4b38 (29:4b38)
+_PewterCityText_1942c:: ; a4b38 (29:4b38)
 	text "That's right!"
 	line "It's hard work!"
 	done
 
-_UnnamedText_19431:: ; a4b55 (29:4b55)
+_PewterCityText_19431:: ; a4b55 (29:4b55)
 	text "I'm spraying REPEL"
 	line "to keep #MON"
 	cont "out of my garden!"
 	done
 
-_UnnamedText_1945d:: ; a4b87 (29:4b87)
+_PewterCityText_1945d:: ; a4b87 (29:4b87)
 	text "You're a trainer"
 	line "right? BROCK's"
 	cont "looking for new"
@@ -70,7 +70,7 @@ _UnnamedText_1945d:: ; a4b87 (29:4b87)
 	cont "Follow me!"
 	done
 
-_UnnamedText_19462:: ; a4bce (29:4bce)
+_PewterCityText_19462:: ; a4bce (29:4bce)
 	text "If you have the"
 	line "right stuff, go"
 	cont "take on BROCK!"

@@ -1,4 +1,4 @@
-_UnnamedText_5cb6d:: ; 9aaa5 (26:6aa5)
+_VermilionGymText_5cb6d:: ; 9aaa5 (26:6aa5)
 	text "Hey, kid! What do"
 	line "you think you're"
 	cont "doing here?"

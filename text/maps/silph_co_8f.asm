@@ -1,73 +1,9 @@
-_UnnamedText_51ebe:: ; 8488d (21:488d)
-	text $53, ": What"
-	line "kept you ", $52, "?"
-	done
-
-_UnnamedText_51ec3:: ; 848a2 (21:48a2)
-	text $53, ": Hahaha!"
-	line "I thought you'd"
-	cont "turn up if I"
-	cont "waited here!"
-
-	para "I guess TEAM"
-	line "ROCKET slowed you"
-	cont "down! Not that I"
-	cont "care!"
-
-	para "I saw you in"
-	line "SAFFRON, so I"
-	cont "decided to see if"
-	cont "you got better!"
-	done
-
-_UnnamedText_51ec8:: ; 8494a (21:494a)
-	text "Oh ho!"
-	line "So, you are ready"
-	cont "for BOSS ROCKET!"
-	prompt
-
-_UnnamedText_51ecd:: ; 84975 (21:4975)
-	text $53, ": How can"
-	line "I put this?"
-
-	para "You're not good"
-	line "enough to play"
-	cont "with us big boys!"
-	prompt
-
-_UnnamedText_51ed2:: ; 849bd (21:49bd)
-	text "Well, ", $52, "!"
-
-	para "I'm moving on up"
-	line "and ahead!"
-
-	para "By checking my"
-	line "#DEX, I'm"
-	cont "starting to see"
-	cont "what's strong and"
-	cont "how they evolve!"
-
-	para "I'm going to the"
-	line "#MON LEAGUE"
-	cont "to boot out the"
-	cont "ELITE FOUR!"
-
-	para "I'll become the"
-	line "world's most"
-	cont "powerful trainer!"
-
-	para $52, ", well"
-	line "good luck to you!"
-	cont "Don't sweat it!"
-	cont "Smell ya!"
-	done
-
-_UnnamedText_565be:: ; 84ac4 (21:4ac4)
+_SilphCo8Text_565be:: ; 84ac4 (21:4ac4)
 	text "I wonder if SILPH"
 	line "is finished..."
 	done
 
-_UnnamedText_565c3:: ; 84ae6 (21:4ae6)
+_SilphCo8Text_565c3:: ; 84ae6 (21:4ae6)
 	text "Thanks for saving"
 	line "us!"
 	done

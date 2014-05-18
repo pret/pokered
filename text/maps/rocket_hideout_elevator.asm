@@ -1,4 +1,4 @@
-_UnnamedText_4578b:: ; 82438 (20:6438)
+_RocketElevatorText_4578b:: ; 82438 (20:6438)
 	text "It appears to"
 	line "need a key.@@"
 

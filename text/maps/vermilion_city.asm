@@ -7,13 +7,13 @@ _VermilionCityText1:: ; a5668 (29:5668)
 	cont "toxic sludge!"
 	done
 
-_UnnamedText_198a7:: ; a56b5 (29:56b5)
+_VermilionCityText_198a7:: ; a56b5 (29:56b5)
 	text "Did you see S.S."
 	line "ANNE moored in"
 	cont "the harbor?"
 	done
 
-_UnnamedText_198ac:: ; a56e2 (29:56e2)
+_VermilionCityText_198ac:: ; a56e2 (29:56e2)
 	text "So, S.S.ANNE has"
 	line "departed!"
 

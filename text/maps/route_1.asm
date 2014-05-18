@@ -12,19 +12,19 @@ _Route1ViridianMartSampleText:: ; 8d5bf (23:55bf)
 	cont "Here you go!"
 	prompt
 
-_UnnamedText_1cae8:: ; 8d643 (23:5643)
+_Route1Text_1cae8:: ; 8d643 (23:5643)
 	text $52, " got"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_1caee:: ; 8d652 (23:5652)
+_Route1Text_1caee:: ; 8d652 (23:5652)
 	text "We also carry"
 	line "# BALLs for"
 	cont "catching #MON!"
 	done
 
-_UnnamedText_1caf3:: ; 8d67c (23:567c)
+_Route1Text_1caf3:: ; 8d67c (23:567c)
 	text "You have too much"
 	line "stuff with you!"
 	done

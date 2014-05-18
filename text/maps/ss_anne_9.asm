@@ -1,4 +1,4 @@
-_UnnamedText_61bf2:: ; 81799 (20:5799)
+_SSAnne9Text_61bf2:: ; 81799 (20:5799)
 	text "In all my travels"
 	line "I've never seen"
 	cont "any #MON sleep"
@@ -8,19 +8,19 @@ _UnnamedText_61bf2:: ; 81799 (20:5799)
 	line "like this!"
 	prompt
 
-_UnnamedText_61c01:: ; 817f5 (20:57f5)
+_SSAnne9Text_61c01:: ; 817f5 (20:57f5)
 	text "Ah yes, I have"
 	line "seen some #MON"
 	cont "ferry people"
 	cont "across the water!"
 	done
 
-_UnnamedText_61c10:: ; 81833 (20:5833)
+_SSAnne9Text_61c10:: ; 81833 (20:5833)
 	text "#MON can CUT"
 	line "down small bushes."
 	done
 
-_UnnamedText_61c1f:: ; 81854 (20:5854)
+_SSAnne9Text_61c1f:: ; 81854 (20:5854)
 	text "Have you gone to"
 	line "the SAFARI ZONE"
 	cont "in FUCHSIA CITY?"
@@ -29,19 +29,19 @@ _UnnamedText_61c1f:: ; 81854 (20:5854)
 	line "kinds of #MON!!"
 	done
 
-_UnnamedText_61c2e:: ; 818a8 (20:58a8)
+_SSAnne9Text_61c2e:: ; 818a8 (20:58a8)
 	text "Me and my Daddy"
 	line "think the SAFARI"
 	cont "ZONE is awesome!"
 	done
 
-_UnnamedText_61c3d:: ; 818db (20:58db)
+_SSAnne9Text_61c3d:: ; 818db (20:58db)
 	text "The CAPTAIN looked"
 	line "really sick and"
 	cont "pale!"
 	done
 
-_UnnamedText_61c4c:: ; 81905 (20:5905)
+_SSAnne9Text_61c4c:: ; 81905 (20:5905)
 	text "I hear many people"
 	line "get seasick!"
 	done

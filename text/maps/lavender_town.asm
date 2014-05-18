@@ -1,14 +1,14 @@
-_UnnamedText_4413c:: ; a5482 (29:5482)
+_LavenderTownText_4413c:: ; a5482 (29:5482)
 	text "Do you believe in"
 	line "GHOSTs?"
 	done
 
-_UnnamedText_44141:: ; a549d (29:549d)
+_LavenderTownText_44141:: ; a549d (29:549d)
 	text "Really? So there"
 	line "are believers..."
 	done
 
-_UnnamedText_44146:: ; a54c0 (29:54c0)
+_LavenderTownText_44146:: ; a54c0 (29:54c0)
 	text "Hahaha, I guess"
 	line "not."
 

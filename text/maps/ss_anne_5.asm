@@ -16,35 +16,35 @@ _SSAnne5Text3:: ; 80fda (20:4fda)
 	line "get some air."
 	done
 
-_SSAnneBattleText1:: ; 8100b (20:500b)
+_SSAnne5BattleText1:: ; 8100b (20:500b)
 	text "Hey matey!"
 
 	para "Let's do a little"
 	line "jig!"
 	done
 
-_SSAnneEndBattleText1:: ; 8102d (20:502d)
+_SSAnne5EndBattleText1:: ; 8102d (20:502d)
 	text "You're"
 	line "impressive!"
 	prompt
 
-_SSAnneAfterBattleText1:: ; 81040 (20:5040)
+_SSAnne5AfterBattleText1:: ; 81040 (20:5040)
 	text "How many kinds of"
 	line "#MON do you"
 	cont "think there are?"
 	done
 
-_SSAnneBattleText2:: ; 81070 (20:5070)
+_SSAnne5BattleText2:: ; 81070 (20:5070)
 	text "Ahoy there!"
 	line "Are you seasick?"
 	done
 
-_SSAnneEndBattleText2:: ; 8108e (20:508e)
+_SSAnne5EndBattleText2:: ; 8108e (20:508e)
 	text "I was"
 	line "just careless!"
 	prompt
 
-_SSAnneAfterBattleText2:: ; 810a4 (20:50a4)
+_SSAnne5AfterBattleText2:: ; 810a4 (20:50a4)
 	text "My Pa said there"
 	line "are 100 kinds of"
 	cont "#MON. I think"

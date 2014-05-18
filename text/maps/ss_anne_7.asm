@@ -36,7 +36,7 @@ _ReceivedHM01Text:: ; 8140d (20:540d)
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_61932:: ; 8141c (20:541c)
+_SSAnne7Text_61932:: ; 8141c (20:541c)
 	text "CAPTAIN: Whew!"
 
 	para "Now that I'm not"

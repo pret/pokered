@@ -1,9 +1,9 @@
-_UnnamedText_484ee:: ; 9cbb5 (27:4bb5)
+_CeladonMartRoofText_484ee:: ; 9cbb5 (27:4bb5)
 	text "Give her which"
 	line "drink?"
 	done
 
-_UnnamedText_484f3:: ; 9cbcc (27:4bcc)
+_CeladonMartRoofText_484f3:: ; 9cbcc (27:4bcc)
 	text "Yay!"
 
 	para "FRESH WATER!"
@@ -13,13 +13,13 @@ _UnnamedText_484f3:: ; 9cbcc (27:4bcc)
 	para "You can have this"
 	line "from me!@@"
 
-_UnnamedText_484f9:: ; 9cc06 (27:4c06)
+_CeladonMartRoofText_484f9:: ; 9cc06 (27:4c06)
 	text $52, " received"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_484fe:: ; 9cc1a (27:4c1a)
+_CeladonMartRoofText_484fe:: ; 9cc1a (27:4c1a)
 	db $0
 	para "@"
 	TX_RAM $cf4b
@@ -29,7 +29,7 @@ _UnnamedText_484fe:: ; 9cc1a (27:4c1a)
 	para "It can freeze the"
 	line "target sometimes!@@"
 
-_UnnamedText_48504:: ; 9cc5a (27:4c5a)
+_CeladonMartRoofText_48504:: ; 9cc5a (27:4c5a)
 	text "Yay!"
 
 	para "SODA POP!"
@@ -39,13 +39,13 @@ _UnnamedText_48504:: ; 9cc5a (27:4c5a)
 	para "You can have this"
 	line "from me!@@"
 
-_UnnamedText_4850a:: ; 9cc91 (27:4c91)
+_CeladonMartRoofText_4850a:: ; 9cc91 (27:4c91)
 	text $52, " received"
 	line "@"
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_4850f:: ; 9cca5 (27:4ca5)
+_CeladonMartRoofText_4850f:: ; 9cca5 (27:4ca5)
 	db $0
 	para "@"
 	TX_RAM $cf4b
@@ -55,7 +55,7 @@ _UnnamedText_4850f:: ; 9cca5 (27:4ca5)
 	para "It can spook the"
 	line "target sometimes!@@"
 
-_UnnamedText_48515:: ; 9cce6 (27:4ce6)
+_CeladonMartRoofText_48515:: ; 9cce6 (27:4ce6)
 	text "Yay!"
 
 	para "LEMONADE!"
@@ -69,16 +69,16 @@ _ReceivedTM49Text:: ; 9cd1d (27:4d1d)
 	text $52, " received"
 	line "TM49!@@"
 
-_UnnamedText_48520:: ; 9cd30 (27:4d30)
+_CeladonMartRoofText_48520:: ; 9cd30 (27:4d30)
 	db $0
 	para "TM49 contains"
 	line "TRI ATTACK!@@"
 
-_UnnamedText_48526:: ; 9cd4d (27:4d4d)
+_CeladonMartRoofText_48526:: ; 9cd4d (27:4d4d)
 	text "You don't have"
 	line "space for this!@@"
 
-_UnnamedText_4852c:: ; 9cd6d (27:4d6d)
+_CeladonMartRoofText_4852c:: ; 9cd6d (27:4d6d)
 	text "No thank you!"
 	line "I'm not thirsty"
 	cont "after all!@@"
@@ -93,7 +93,7 @@ _CeladonMartRoofText1:: ; 9cd97 (27:4d97)
 	cont "drives me nuts!"
 	done
 
-_UnnamedText_48598:: ; 9cdee (27:4dee)
+_CeladonMartRoofText_48598:: ; 9cdee (27:4dee)
 	text "I'm thirsty!"
 	line "I want something"
 	cont "to drink!"

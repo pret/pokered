@@ -1,15 +1,15 @@
-_UnnamedText_4557a:: ; 8223e (20:623e)
+_RocketHideout4Text_4557a:: ; 8223e (20:623e)
 	text "So! I must say, I"
 	line "am impressed you"
 	cont "got here!"
 	done
 
-_UnnamedText_4557f:: ; 8226c (20:626c)
+_RocketHideout4Text_4557f:: ; 8226c (20:626c)
 	text "WHAT!"
 	line "This cannot be!"
 	prompt
 
-_UnnamedText_45584:: ; 82283 (20:6283)
+_RocketHideout4Text_45584:: ; 82283 (20:6283)
 	text "I see that you"
 	line "raise #MON"
 	cont "with utmost care."
@@ -68,7 +68,7 @@ _RocketHideout4EndBattleText4:: ; 82413 (20:6413)
 	text "No!"
 	prompt
 
-_UnnamedText_455ec:: ; 82418 (20:6418)
+_RocketHideout4Text_455ec:: ; 82418 (20:6418)
 	text "Oh no! I dropped"
 	line "the LIFT KEY!"
 	done

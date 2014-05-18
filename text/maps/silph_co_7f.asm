@@ -39,7 +39,7 @@ _LaprasGuySavedText::
 	line "Thank you!"
 	done
 
-_UnnamedText_51e00::
+_SilphCo7Text_51e00::
 	text "TEAM ROCKET was"
 	line "after the MASTER"
 	cont "BALL which will"
@@ -53,27 +53,27 @@ _CanceledMasterBallText::
 	cont "of TEAM ROCKET."
 	done
 
-_UnnamedText_51e23::
+_SilphCo7Text_51e23::
 	text "It would be bad"
 	line "if TEAM ROCKET"
 	cont "took over SILPH"
 	cont "or our #MON!"
 	done
 
-_UnnamedText_51e28::
+_SilphCo7Text_51e28::
 	text "Wow! You chased"
 	line "off TEAM ROCKET"
 	cont "all by yourself?"
 	done
 
-_UnnamedText_51e46::
+_SilphCo7Text_51e46::
 	text "You! It's really"
 	line "dangerous here!"
 	cont "You came to save"
 	cont "me? You can't!"
 	done
 
-_UnnamedText_51e4b::
+_SilphCo7Text_51e4b::
 	text "Safe at last!"
 	line "Oh thank you!"
 	done
@@ -142,5 +142,69 @@ _SilphCo7AfterBattleText4:: ; 84861 (21:4861)
 	text "Go on home"
 	line "before my BOSS"
 	cont "gets ticked off!"
+	done
+
+_SilphCo7Text_51ebe:: ; 8488d (21:488d)
+	text $53, ": What"
+	line "kept you ", $52, "?"
+	done
+
+_SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
+	text $53, ": Hahaha!"
+	line "I thought you'd"
+	cont "turn up if I"
+	cont "waited here!"
+
+	para "I guess TEAM"
+	line "ROCKET slowed you"
+	cont "down! Not that I"
+	cont "care!"
+
+	para "I saw you in"
+	line "SAFFRON, so I"
+	cont "decided to see if"
+	cont "you got better!"
+	done
+
+_SilphCo7Text_51ec8:: ; 8494a (21:494a)
+	text "Oh ho!"
+	line "So, you are ready"
+	cont "for BOSS ROCKET!"
+	prompt
+
+_SilphCo7Text_51ecd:: ; 84975 (21:4975)
+	text $53, ": How can"
+	line "I put this?"
+
+	para "You're not good"
+	line "enough to play"
+	cont "with us big boys!"
+	prompt
+
+_SilphCo7Text_51ed2:: ; 849bd (21:49bd)
+	text "Well, ", $52, "!"
+
+	para "I'm moving on up"
+	line "and ahead!"
+
+	para "By checking my"
+	line "#DEX, I'm"
+	cont "starting to see"
+	cont "what's strong and"
+	cont "how they evolve!"
+
+	para "I'm going to the"
+	line "#MON LEAGUE"
+	cont "to boot out the"
+	cont "ELITE FOUR!"
+
+	para "I'll become the"
+	line "world's most"
+	cont "powerful trainer!"
+
+	para $52, ", well"
+	line "good luck to you!"
+	cont "Don't sweat it!"
+	cont "Smell ya!"
 	done
 

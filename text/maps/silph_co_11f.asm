@@ -25,7 +25,7 @@ _ReceivedSilphCoMasterBallText:: ; 84f63 (21:4f63)
 	TX_RAM $cf4b
 	text "!@@"
 
-_UnnamedText_6231c:: ; 84f74 (21:4f74)
+_SilphCo10Text_6231c:: ; 84f74 (21:4f74)
 	text "PRESIDENT: You"
 	line "can't buy that"
 	cont "anywhere!"
@@ -74,12 +74,12 @@ _SilphCo11Text3:: ; 85075 (21:5075)
 	line "world of pain!"
 	done
 
-_UnnamedText_62330:: ; 85119 (21:5119)
+_SilphCo10Text_62330:: ; 85119 (21:5119)
 	text "Arrgh!!"
 	line "I lost again!?"
 	prompt
 
-_UnnamedText_62335:: ; 85131 (21:5131)
+_SilphCo10Text_62335:: ; 85131 (21:5131)
 	text "Blast it all!"
 	line "You ruined our"
 	cont "plans for SILPH!"
@@ -128,7 +128,7 @@ _SilphCo11AfterBattleText2:: ; 8526a (21:526a)
 	cont "#MON tough!"
 	done
 
-_UnnamedText_6237b:: ; 8529a (21:529a)
+_SilphCo10Text_6237b:: ; 8529a (21:529a)
 	text "The monitor has"
 	line "#MON on it!"
 	done

@@ -1,14 +1,14 @@
-_UnnamedText_5d8e5:: ; 84c0b (21:4c0b)
+_SilphCo9Text_5d8e5:: ; 84c0b (21:4c0b)
 	text "You look tired!"
 	line "You should take a"
 	cont "quick nap!"
 	prompt
 
-_UnnamedText_5d8ea:: ; 84c39 (21:4c39)
+_SilphCo9Text_5d8ea:: ; 84c39 (21:4c39)
 	text "Don't give up!"
 	done
 
-_UnnamedText_5d8ef:: ; 84c48 (21:4c48)
+_SilphCo9Text_5d8ef:: ; 84c48 (21:4c48)
 	text "Thank you so"
 	line "much!"
 	done

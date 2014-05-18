@@ -1,4 +1,4 @@
-_UnnamedText_19668:: ; a4d2b (29:4d2b)
+_CeruleanCityText_19668:: ; a4d2b (29:4d2b)
 	text $53, ": Yo!"
 	line $52, "!"
 
@@ -16,19 +16,19 @@ _UnnamedText_19668:: ; a4d2b (29:4d2b)
 	cont $52, "!"
 	done
 
-_UnnamedText_1966d:: ; a4dbe (29:4dbe)
+_CeruleanCityText_1966d:: ; a4dbe (29:4dbe)
 	text "Hey!"
 	line "Take it easy!"
 	cont "You won already!"
 	prompt
 
-_UnnamedText_19672:: ; a4de3 (29:4de3)
+_CeruleanCityText_19672:: ; a4de3 (29:4de3)
 	text "Heh!"
 	line "You're no match"
 	cont "for my genius!"
 	prompt
 
-_UnnamedText_19677:: ; a4e07 (29:4e07)
+_CeruleanCityText_19677:: ; a4e07 (29:4e07)
 	text $53, ": Hey,"
 	line "guess what?"
 
@@ -58,7 +58,7 @@ _UnnamedText_19677:: ; a4e07 (29:4e07)
 	cont "Smell ya later!"
 	done
 
-_UnnamedText_196d9:: ; a4f27 (29:4f27)
+_CeruleanCityText_196d9:: ; a4f27 (29:4f27)
 	text "Hey! Stay out!"
 	line "It's not your"
 	cont "yard! Huh? Me?"
@@ -85,13 +85,13 @@ _TM28NoRoomText:: ; a4fb3 (29:4fb3)
 	line "I give it to you!"
 	done
 
-_UnnamedText_196ee:: ; a4feb (29:4feb)
+_CeruleanCityText_196ee:: ; a4feb (29:4feb)
 	text "Stop!"
 	line "I give up! I'll"
 	cont "leave quietly!"
 	prompt
 
-_UnnamedText_196f3:: ; a5010 (29:5010)
+_CeruleanCityText_196f3:: ; a5010 (29:5010)
 	text "OK! I'll return"
 	line "the TM I stole!"
 	prompt
@@ -133,20 +133,20 @@ _CeruleanCityText6:: ; a50f6 (29:50f6)
 	cont "with the ROCKETs!"
 	done
 
-_UnnamedText_19730:: ; a5188 (29:5188)
+_CeruleanCityText_19730:: ; a5188 (29:5188)
 	text "OK! SLOWBRO!"
 	line "Use SONICBOOM!"
 	cont "Come on, SLOWBRO"
 	cont "pay attention!"
 	done
 
-_UnnamedText_19735:: ; a51c5 (29:51c5)
+_CeruleanCityText_19735:: ; a51c5 (29:51c5)
 	text "SLOWBRO punch!"
 	line "No! You blew it"
 	cont "again!"
 	done
 
-_UnnamedText_1973a:: ; a51ec (29:51ec)
+_CeruleanCityText_1973a:: ; a51ec (29:51ec)
 	text "SLOWBRO, WITHDRAW!"
 	line "No! That's wrong!"
 
@@ -159,22 +159,22 @@ _UnnamedText_1973a:: ; a51ec (29:51ec)
 	cont "as a trainer!"
 	done
 
-_UnnamedText_1976f:: ; a526b (29:526b)
+_CeruleanCityText_1976f:: ; a526b (29:526b)
 	text "SLOWBRO took a"
 	line "snooze..."
 	done
 
-_UnnamedText_19774:: ; a5285 (29:5285)
+_CeruleanCityText_19774:: ; a5285 (29:5285)
 	text "SLOWBRO is"
 	line "loafing around..."
 	done
 
-_UnnamedText_19779:: ; a52a3 (29:52a3)
+_CeruleanCityText_19779:: ; a52a3 (29:52a3)
 	text "SLOWBRO turned"
 	line "away..."
 	done
 
-_UnnamedText_1977e:: ; a52bb (29:52bb)
+_CeruleanCityText_1977e:: ; a52bb (29:52bb)
 	text "SLOWBRO"
 	line "ignored orders..."
 	done

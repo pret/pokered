@@ -32,17 +32,17 @@ _Mansion2Text4:: ; 85389 (21:5389)
 	cont "#MON, MEW."
 	done
 
-_UnnamedText_520c2:: ; 853c7 (21:53c7)
+_Mansion2Text_520c2:: ; 853c7 (21:53c7)
 	text "A secret switch!"
 
 	para "Press it?"
 	done
 
-_UnnamedText_520c7:: ; 853e3 (21:53e3)
+_Mansion2Text_520c7:: ; 853e3 (21:53e3)
 	text "Who wouldn't?"
 	prompt
 
-_UnnamedText_520cc:: ; 853f1 (21:53f1)
+_Mansion2Text_520cc:: ; 853f1 (21:53f1)
 	text "Not quite yet!"
 	done
 

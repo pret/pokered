@@ -1,4 +1,4 @@
-_UnnamedText_5ccd4:: ; a15ad (28:55ad)
+_CopycatsHouse2FText_5ccd4:: ; a15ad (28:55ad)
 	text $52, ": Hi! Do"
 	line "you like #MON?"
 
@@ -79,7 +79,7 @@ _CopycatsHouse2FText6:: ; a17be (28:57be)
 	cont "on his head!"
 	done
 
-_UnnamedText_5cd17:: ; a17ef (28:57ef)
+_CopycatsHouse2FText_5cd17:: ; a17ef (28:57ef)
 	text "..."
 
 	para "My Secrets!"
@@ -91,7 +91,7 @@ _UnnamedText_5cd17:: ; a17ef (28:57ef)
 	cont "CLEFAIRY!"
 	done
 
-_UnnamedText_5cd1c:: ; a1842 (28:5842)
+_CopycatsHouse2FText_5cd1c:: ; a1842 (28:5842)
 	text "Huh? Can't see!"
 	done
 

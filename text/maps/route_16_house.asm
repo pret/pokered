@@ -26,7 +26,7 @@ _HM02NoRoomText:: ; 8cebe (23:4ebe)
 	line "room for this."
 	done
 
-_UnnamedText_1e652:: ; 8cee0 (23:4ee0)
+_Route16HouseText_1e652:: ; 8cee0 (23:4ee0)
 	text "FEAROW: Kyueen!"
 	done
 
