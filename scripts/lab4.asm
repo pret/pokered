@@ -55,9 +55,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	ld a, [$cd37]
 	and a
 	jr z, .asm_75d8d ; 0x75d81 $a
-	ld b, BANK(GiveFossilToCinnabarLab)
-	ld hl, GiveFossilToCinnabarLab
-	call Bankswitch
+	callba GiveFossilToCinnabarLab
 	jr .asm_75d93 ; 0x75d8b $6
 .asm_75d8d
 	ld hl, Lab4Text_75dcb

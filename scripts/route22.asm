@@ -35,8 +35,8 @@ Route22Script_50ed6: ; 50ed6 (14:4ed6)
 	ld [W_TRAINERNO], a ; $d05d
 	ret
 
-Route22Script_50ee6: ; 50ee6 (14:4ee6)
-	ld de, MovementData_50efb ; $4efb
+Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
+	ld de, Route22RivalMovementData ; $4efb
 	ld a, [$cf0d]
 	cp $1
 	jr z, .asm_50ef1
@@ -47,14 +47,14 @@ Route22Script_50ee6: ; 50ee6 (14:4ee6)
 	ld [$ff8d], a
 	jp Func_34a6
 
-MovementData_50efb: ; 50efb (14:4efb)
-	db $C0,$C0,$C0,$C0,$FF
+Route22RivalMovementData: ; 50efb (14:4efb)
+	db $C0,$C0,$C0,$C0,$FF ; move right 4 times
 
 Route22Script0: ; 50f00 (14:4f00)
 	ld a, [$d7eb]
 	bit 7, a
 	ret z
-	ld hl, .CoordsData_50f2d ; $4f2d
+	ld hl, .Route22RivalBattleCoords  ; $4f2d
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [$cd3d]
@@ -66,18 +66,18 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld a, $2
 	ld [$d528], a
 	ld a, [$d7eb]
-	bit 0, a
-	jr nz, .asm_50f32 ; 0x50f25 $b
-	bit 1, a
+	bit 0, a ; is this the rival battle at the beginning of the game?
+	jr nz, .firstRivalBattle ; 0x50f25 $b
+	bit 1, a ; is this the rival at the end of the game?
 	jp nz, Route22Script_5104e
 	ret
 
-.CoordsData_50f2d
+.Route22RivalBattleCoords 
 	db $04, $1D
 	db $05, $1D
 	db $FF
 
-.asm_50f32
+.firstRivalBattle
 	ld a, $1
 	ld [$cd4f], a
 	xor a
@@ -96,7 +96,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	call PlayMusic
 	ld a, $1
 	ld [$ff8c], a
-	call Route22Script_50ee6
+	call Route22MoveRivalSprite
 	ld a, $1
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
@@ -127,7 +127,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, Route22Text_511b7
+	ld hl, Route22RivalDefeatedText1
 	ld de, Route22Text_511bc
 	call PreBattleSaveRegisters
 	ld a, SONY1 + $c8
@@ -139,6 +139,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ret
 
 StarterMons_50faf: ; 50faf (14:4faf)
+; starter the rival picked, rival trainer number
 	db SQUIRTLE,$04
 	db BULBASAUR,$05
 	db CHARMANDER,$06
@@ -169,9 +170,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_50fff ; 0x50ff8 $5
@@ -185,20 +184,20 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ret
 
 Route22Script_51008: ; 51008 (14:5008)
-	ld de, MovementData_51017 ; $5017
+	ld de, Route22RivalExitMovementData1 ; $5017
 	jr asm_51010
 
 Route22Script_5100d: ; 5100d (14:500d)
-	ld de, MovementData_5101f ; $501f
+	ld de, Route22RivalExitMovementData2 ; $501f
 asm_51010
 	ld a, $1
 	ld [H_SPRITEHEIGHT], a
 	jp MoveSprite
 
-MovementData_51017: ; 51017 (14:5017)
+Route22RivalExitMovementData1: ; 51017 (14:5017)
 	db $C0,$C0,$00,$00,$00,$00,$00,$FF
 
-MovementData_5101f: ; 5101f (14:501f)
+Route22RivalExitMovementData2: ; 5101f (14:501f)
 	db $40,$C0,$C0,$C0,$00,$00,$00,$00,$00,$00,$FF
 
 Route22Script3: ; 5102a (14:502a)
@@ -236,12 +235,10 @@ Route22Script_5104e: ; 5104e (14:504e)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateTempo)
-	ld hl, Music_RivalAlternateTempo
-	call Bankswitch
+	callba Music_RivalAlternateTempo
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Route22Script_50ee6
+	call Route22MoveRivalSprite
 	ld a, $4
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
@@ -274,7 +271,7 @@ Route22Script4: ; 51087 (14:5087)
 	ld hl, $d72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, Route22Text_511cb ; $51cb
+	ld hl, Route22RivalDefeatedText2 ; $51cb
 	ld de, Route22Text_511d0 ; $51d0
 	call PreBattleSaveRegisters
 	ld a, SONY2 + $c8
@@ -320,9 +317,7 @@ Route22Script5: ; 510df (14:50df)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStartAndTempo)
-	ld hl, Music_RivalAlternateStartAndTempo
-	call Bankswitch
+	callba Music_RivalAlternateStartAndTempo
 	ld a, [$cf0d]
 	cp $1
 	jr nz, .asm_51134
@@ -347,10 +342,10 @@ asm_51145: ; 51145 (14:5145)
 	jp MoveSprite
 
 MovementData_5114c: ; 5114c (14:514c)
-	db $80
+	db $80 ; left
 
 MovementData_5114d: ; 5114d (14:514d)
-	db $80,$80,$80,$FF
+	db $80,$80,$80,$FF ; left x3
 
 Route22Script6: ; 51151 (14:5151)
 	ld a, [$d730]
@@ -373,18 +368,18 @@ Route22Script6: ; 51151 (14:5151)
 Route22TextPointers: ; 51175 (14:5175)
 	dw Route22Text1
 	dw Route22Text2
-	dw Route22Text3
+	dw Route22FrontGateText
 
 Route22Text1: ; 5117b (14:517b)
 	db $08 ; asm
 	ld a, [$d7eb]
 	bit 5, a
 	jr z, .asm_a88cf ; 0x51181
-	ld hl, Route22Text_511b2
+	ld hl, Route22RivalAfterBattleText1
 	call PrintText
 	jr .asm_48088 ; 0x51189
 .asm_a88cf ; 0x5118b
-	ld hl, Route22Text_511ad
+	ld hl, Route22RivalBeforeBattleText1
 	call PrintText
 .asm_48088 ; 0x51191
 	jp TextScriptEnd
@@ -394,47 +389,47 @@ Route22Text2: ; 51194 (14:5194)
 	ld a, [$d7eb]
 	bit 6, a
 	jr z, .asm_58c0a ; 0x5119a
-	ld hl, Route22Text_511c6
+	ld hl, Route22RivalAfterBattleText2
 	call PrintText
 	jr .asm_673ee ; 0x511a2
 .asm_58c0a ; 0x511a4
-	ld hl, Route22Text_511c1
+	ld hl, Route22RivalBeforeBattleText2
 	call PrintText
 .asm_673ee ; 0x511aa
 	jp TextScriptEnd
 
-Route22Text_511ad: ; 511ad (14:51ad)
-	TX_FAR _Route22Text_511ad
+Route22RivalBeforeBattleText1: ; 511ad (14:51ad)
+	TX_FAR _Route22RivalBeforeBattleText1
 	db "@"
 
-Route22Text_511b2: ; 511b2 (14:51b2)
-	TX_FAR _Route22Text_511b2
+Route22RivalAfterBattleText1: ; 511b2 (14:51b2)
+	TX_FAR _Route22RivalAfterBattleText1
 	db "@"
 
-Route22Text_511b7: ; 511b7 (14:51b7)
-	TX_FAR _Route22Text_511b7
+Route22RivalDefeatedText1: ; 511b7 (14:51b7)
+	TX_FAR _Route22RivalDefeatedText1
 	db "@"
 
 Route22Text_511bc: ; 511bc (14:51bc)
 	TX_FAR _Route22Text_511bc
 	db "@"
 
-Route22Text_511c1: ; 511c1 (14:51c1)
-	TX_FAR _Route22Text_511c1
+Route22RivalBeforeBattleText2: ; 511c1 (14:51c1)
+	TX_FAR _Route22RivalBeforeBattleText2
 	db "@"
 
-Route22Text_511c6: ; 511c6 (14:51c6)
-	TX_FAR _Route22Text_511c6
+Route22RivalAfterBattleText2: ; 511c6 (14:51c6)
+	TX_FAR _Route22RivalAfterBattleText2
 	db "@"
 
-Route22Text_511cb: ; 511cb (14:51cb)
-	TX_FAR _Route22Text_511cb
+Route22RivalDefeatedText2: ; 511cb (14:51cb)
+	TX_FAR _Route22RivalDefeatedText2
 	db "@"
 
 Route22Text_511d0: ; 511d0 (14:51d0)
 	TX_FAR _Route22Text_511d0
 	db "@"
 
-Route22Text3: ; 511d5 (14:51d5)
-	TX_FAR _Route22Text3
+Route22FrontGateText: ; 511d5 (14:51d5)
+	TX_FAR _Route22FrontGateText
 	db "@"

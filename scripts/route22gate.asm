@@ -5,11 +5,11 @@ Route22GateScript: ; 1e683 (7:6683)
 	call CallFunctionInTable
 	ld a, [W_YCOORD]
 	cp $4
-	ld a, $22
+	ld a, ROUTE_23
 	jr c, .asm_1e69a ; 0x1e696 $2
-	ld a, $21
+	ld a, ROUTE_22
 .asm_1e69a
-	ld [$d365], a
+	ld [wLastMap], a
 	ret
 
 Route22GateScriptPointers: ; 1e69e (7:669e)

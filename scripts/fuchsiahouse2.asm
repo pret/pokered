@@ -35,9 +35,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	call PrintText
 	ld a, GOLD_TEETH
 	ldh [$db], a
-	ld b, BANK(RemoveItemByID)
-	ld hl, RemoveItemByID
-	call Bankswitch
+	callba RemoveItemByID
 	ld hl, $d78e
 	set 1, [hl]
 .asm_60cba ; 0x75109

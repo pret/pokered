@@ -1,6 +1,6 @@
 UndergroundPathEntranceRoute6Script: ; 5d6ef (17:56ef)
-	ld a, $11
-	ld [$d365], a
+	ld a, ROUTE_6
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)

@@ -20,9 +20,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld [$d528], a
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld b, BANK(RemoveGuardDrink)
-	ld hl, RemoveGuardDrink
-	call Bankswitch
+	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1e080 ; 0x1e06e $10

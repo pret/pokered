@@ -109,9 +109,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ret
 
 GaryScript4: ; 75fe4 (1d:5fe4)
-	ld b, BANK(Music_Cities1AlternateTempo)
-	ld hl, Music_Cities1AlternateTempo
-	call Bankswitch
+	callba Music_Cities1AlternateTempo
 	ld a, $2
 	ld [$ff8c], a
 	call GaryScript_760c8

@@ -63,9 +63,7 @@ SilphCoElevatorWarpMaps: ; 45811 (11:45811)
 
 SilphCoElevatorScript_45827: ; 45827 (11:5827)
 	call Delay3
-	ld b, BANK(ShakeElevator)
-	ld hl, ShakeElevator
-	call Bankswitch
+	callba ShakeElevator
 	ret
 
 SilphCoElevatorTextPointers: ; 45833 (11:5833)

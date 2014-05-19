@@ -77,8 +77,8 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
 	ld [$d42f], a
-	ld a, $4
-	ld [$d365], a
+	ld a, LAVENDER_TOWN
+	ld [wLastMap], a
 	ld hl, $d72d
 	set 3, [hl]
 	ld a, $0

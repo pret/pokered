@@ -1340,12 +1340,12 @@ _ExclamationPoint5Text:: ; 89a73 (22:5a73)
 	text "!"
 	done
 
-_MissedText:: ; 89a76 (22:5a76)
+_AttackMissedText:: ; 89a76 (22:5a76)
 	text $5a, "'s"
 	line "attack missed!"
 	prompt
 
-_CrashedText:: ; 89a89 (22:5a89)
+_KeptGoingAndCrashedText:: ; 89a89 (22:5a89)
 	text $5a
 	line "kept going and"
 	cont "crashed!"
@@ -1356,7 +1356,7 @@ _UnaffectedText:: ; 89aa4 (22:5aa4)
 	line "unaffected!"
 	prompt
 
-_DoesntAffectText:: ; 89ab4 (22:5ab4)
+_DoesntAffectMonText:: ; 89ab4 (22:5ab4)
 	text "It doesn't affect"
 	line $59, "!"
 	prompt
@@ -1420,7 +1420,7 @@ _MirrorMoveFailedText:: ; 89b96 (22:5b96)
 	next "failed!"
 	prompt
 
-_HitMultipleTimesText:: ; 89baf (22:5baf)
+_HitXTimesText:: ; 89baf (22:5baf)
 	text "Hit @"
 	TX_NUM $cd05, 1, 1
 	text " times!"
@@ -2130,60 +2130,60 @@ _FellText:: ; 947c9 (25:47c9)
 	text " fell!"
 	prompt
 
-_RanText:: ; 947d1 (25:47d1)
+_RanFromBattleText:: ; 947d1 (25:47d1)
 	text $5a
 	line "ran from battle!"
 	prompt
 
-_RanScaredText:: ; 947e5 (25:47e5)
+_RanAwayScaredText:: ; 947e5 (25:47e5)
 	text $59
 	line "ran away scared!"
 	prompt
 
-_BlownAwayText:: ; 947f9 (25:47f9)
+_WasBlownAwayText:: ; 947f9 (25:47f9)
 	text $59
 	line "was blown away!"
 	prompt
 
-_MonName2Text:: ; 9480c (25:480c)
+_ChargeMoveEffectText:: ; 9480c (25:480c)
 	text $5a, "@@"
 
-_RazorwindText:: ; 94810 (25:4810)
+_MadeWhirlwindText:: ; 94810 (25:4810)
 	db $0
 	line "made a whirlwind!"
 	prompt
 
-_SolarBeamText:: ; 94824 (25:4824)
+_TookInSunlightText:: ; 94824 (25:4824)
 	db $0
 	line "took in sunlight!"
 	prompt
 
-_SkullBashText:: ; 94838 (25:4838)
+_LoweredItsHeadText:: ; 94838 (25:4838)
 	db $0
 	line "lowered its head!"
 	prompt
 
-_SkyAttackText:: ; 9484c (25:484c)
+_SkyAttackGlowingText:: ; 9484c (25:484c)
 	db $0
 	line "is glowing!"
 	prompt
 
-_FlyText:: ; 9485a (25:485a)
+_FlewUpHighText:: ; 9485a (25:485a)
 	db $0
 	line "flew up high!"
 	prompt
 
-_DigText:: ; 9486a (25:486a)
+_DugAHoleText:: ; 9486a (25:486a)
 	db $0
 	line "dug a hole!"
 	prompt
 
-_ConfusedText:: ; 94878 (25:4878)
+_BecameConfusedText:: ; 94878 (25:4878)
 	text $59
 	line "became confused!"
 	prompt
 
-_LearnedMove2Text:: ; 9488c (25:488c)
+_MimicLearnedMoveText:: ; 9488c (25:488c)
 	text $5a
 	line "learned"
 	cont "@"
@@ -2191,7 +2191,7 @@ _LearnedMove2Text:: ; 9488c (25:488c)
 	text "!"
 	prompt
 
-_DisableText:: ; 9489e (25:489e)
+_MoveWasDisabledText:: ; 9489e (25:489e)
 	text $59, "'s"
 	line "@"
 	TX_RAM $cd6d
@@ -2207,7 +2207,7 @@ _NoEffectText:: ; 948c9 (25:48c9)
 	text "No effect!"
 	prompt
 
-_ItFailedText:: ; 948d5 (25:48d5)
+_ButItFailedText:: ; 948d5 (25:48d5)
 	text "But, it failed! "
 	prompt
 
@@ -2221,7 +2221,7 @@ _IsUnaffectedText:: ; 948fb (25:48fb)
 	line "is unaffected!"
 	prompt
 
-_MayNotAttackText:: ; 9490d (25:490d)
+_ParalyzedMayNotAttackText:: ; 9490d (25:490d)
 	text $59, "'s"
 	line "paralyzed! It may"
 	cont "not attack!"
@@ -2242,58 +2242,58 @@ _TooWeakSubstituteText:: ; 9495e (25:495e)
 	line "a SUBSTITUTE!"
 	prompt
 
-_PayDayText:: ; 9497e (25:497e)
+_CoinsScatteredText:: ; 9497e (25:497e)
 	text "Coins scattered"
 	line "everywhere!"
 	prompt
 
-_FocusEnergyText:: ; 9499b (25:499b)
+_GettingPumpedText:: ; 9499b (25:499b)
 	text $5a, "'s"
 	line "getting pumped!"
 	prompt
 
-_SeededText:: ; 949af (25:49af)
+_WasSeededText:: ; 949af (25:49af)
 	text $59
 	line "was seeded!"
 	prompt
 
-_EvadedText:: ; 949be (25:49be)
+_EvadedAttackText:: ; 949be (25:49be)
 	text $59
 	line "evaded attack!"
 	prompt
 
-_RecoilText:: ; 949d0 (25:49d0)
+_HitWithRecoilText:: ; 949d0 (25:49d0)
 	text $5a, "'s"
 	line "hit with recoil!"
 	prompt
 
-_ConversionText:: ; 949e5 (25:49e5)
+_ConvertedTypeText:: ; 949e5 (25:49e5)
 	text "Converted type to"
 	line $59, "'s!"
 	prompt
 
-_HazeText:: ; 949fc (25:49fc)
+_StatusChangesEliminatedText:: ; 949fc (25:49fc)
 	text "All STATUS changes"
 	line "are eliminated!"
 	prompt
 
-_RestText:: ; 94a20 (25:4a20)
+_StartedSleepingEffect:: ; 94a20 (25:4a20)
 	text $5a
 	line "started sleeping!"
 	done
 
-_RestBecameHealthyText:: ; 94a35 (25:4a35)
+_FellAsleepBecameHealthyText:: ; 94a35 (25:4a35)
 	text $5a
 	line "fell asleep and"
 	cont "became healthy!"
 	done
 
-_RecoverText:: ; 94a58 (25:4a58)
+_RegainedHealthText:: ; 94a58 (25:4a58)
 	text $5a
 	line "regained health!"
 	prompt
 
-_TransformText:: ; 94a6c (25:4a6c)
+_TransformedText:: ; 94a6c (25:4a6c)
 	text $5a
 	line "transformed into"
 	cont "@"
@@ -2301,18 +2301,18 @@ _TransformText:: ; 94a6c (25:4a6c)
 	text "!"
 	prompt
 
-_LightscreenText:: ; 94a87 (25:4a87)
+_LightScreenProtectedText:: ; 94a87 (25:4a87)
 	text $5a, "'s"
 	line "protected against"
 	cont "special attacks!"
 	prompt
 
-_AcidArmorText:: ; 94aae (25:4aae)
+_ReflectGainedArmorText:: ; 94aae (25:4aae)
 	text $5a
 	line "gained armor!"
 	prompt
 
-_MistText:: ; 94abf (25:4abf)
+_ShroudedInMistText:: ; 94abf (25:4abf)
 	text $5a, "'s"
 	line "shrouded in mist!"
 	prompt

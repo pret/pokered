@@ -48,14 +48,12 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld [hl], a
 	xor a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
-	ld a, $0
-	ld [$d719], a
-	ld b, BANK(SaveSAVtoSRAM)
-	ld hl, SaveSAVtoSRAM
-	call Bankswitch
-	ld b, $5
+	ld a, PALLET_TOWN
+	ld [wLastBlackoutMap], a
+	callba SaveSAVtoSRAM
+	ld b, 5
 .asm_5a4ff
-	ld c, $78
+	ld c, 600 / 5
 	call DelayFrames
 	dec b
 	jr nz, .asm_5a4ff ; 0x5a505 $f8

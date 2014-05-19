@@ -1,6 +1,6 @@
 DiglettsCaveRoute2Script: ; 1deb0 (7:5eb0)
-	ld a, $d
-	ld [$d365], a
+	ld a, ROUTE_2
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 DiglettsCaveRoute2TextPointers: ; 1deb8 (7:5eb8)

@@ -31,9 +31,7 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld [$d528], a
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld b, BANK(RemoveGuardDrink)
-	ld hl, RemoveGuardDrink
-	call Bankswitch
+	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1e220 ; 0x1e20e $10

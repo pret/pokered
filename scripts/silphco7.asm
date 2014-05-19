@@ -221,9 +221,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld de, MovementData_51d1d
 	ld a, [$cf0d]
 	cp $1

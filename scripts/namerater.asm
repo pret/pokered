@@ -68,9 +68,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	jr nz, .asm_1daae ; 0x1da93 $19
 	ld hl, NameRaterText_1dac2
 	call PrintText
-	ld b, BANK(Func_655c)
-	ld hl, Func_655c
-	call Bankswitch
+	callba Func_655c
 	jr c, .asm_1daae ; 0x1daa3 $9
 	ld hl, NameRaterText_1dac7
 .asm_1daa8

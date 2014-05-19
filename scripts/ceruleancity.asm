@@ -177,9 +177,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, $1
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
@@ -304,9 +302,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	ld [$cc3c], a
 	ld hl, ReceivedTM28Text
 	call PrintText
-	ld b, BANK(Func_74872)
-	ld hl, Func_74872
-	call Bankswitch
+	callba Func_74872
 .Done
 	jp TextScriptEnd
 

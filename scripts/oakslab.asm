@@ -425,9 +425,7 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, $10
 	ld [$ff8c], a
 	call DisplayTextID
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, $1
 	ld [$ff8c], a
 	ld de, .RivalExitMovement
@@ -493,9 +491,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, $15
 	ld [$ff8c], a
 	call DisplayTextID
@@ -603,9 +599,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, $1
 	ld [$ff8c], a
 	ld de, $cc97

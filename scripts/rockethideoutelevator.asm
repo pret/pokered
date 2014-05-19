@@ -55,9 +55,7 @@ RocketHideoutElevatorWarpMaps: ; 45759 (11:5759)
 
 RocketHideoutElevatorScript_4575f: ; 4575f (11:575f)
 	call Delay3
-	ld b, BANK(ShakeElevator)
-	ld hl, ShakeElevator
-	call Bankswitch
+	callba ShakeElevator
 	ret
 
 RocketHideoutElevatorTextPointers: ; 4576b (11:576b)

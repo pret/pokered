@@ -25,9 +25,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
 	ldh [$db], a
-	ld b, BANK(RemoveItemByID)
-	ld hl, RemoveItemByID
-	call Bankswitch
+	callba RemoveItemByID
 	ld hl, $d75f
 	set 0, [hl]
 	ld hl, BikeShopText_1d824

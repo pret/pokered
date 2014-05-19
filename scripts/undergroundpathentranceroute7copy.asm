@@ -1,6 +1,6 @@
 UndergroundPathEntranceRoute7CopyScript: ; 5d769 (17:5769)
-	ld a, $12
-	ld [$d365], a
+	ld a, ROUTE_7
+	ld [wLastMap], a
 	ret
 
 UndergroundPathEntranceRoute7CopyTextPointers: ; 5d76f (17:576f)

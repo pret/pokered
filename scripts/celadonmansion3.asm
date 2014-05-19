@@ -49,9 +49,7 @@ DirectorText: ; 487b2 (12:47b2)
 	TX_FAR _CompletedDexText
 	db $6
 	db $8 ; asm
-	ld hl, DisplayDiploma
-	ld b, BANK(DisplayDiploma)
-	call Bankswitch
+	callab DisplayDiploma
 	ld a, $1
 	ld [$cc3c], a
 	jp TextScriptEnd

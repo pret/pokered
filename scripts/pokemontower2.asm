@@ -83,9 +83,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld a, $ff
 	ld [$c0ee], a
 	call PlaySound
-	ld b, BANK(Music_RivalAlternateStart)
-	ld hl, Music_RivalAlternateStart
-	call Bankswitch
+	callba Music_RivalAlternateStart
 	ld a, $2
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

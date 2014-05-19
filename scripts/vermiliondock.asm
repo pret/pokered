@@ -46,9 +46,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
-	ld b, BANK(LoadSmokeTileFourTimes)
-	ld hl, LoadSmokeTileFourTimes
-	call Bankswitch
+	callba LoadSmokeTileFourTimes
 	xor a
 	ld [$c102], a
 	ld c, $78

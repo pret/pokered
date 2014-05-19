@@ -35,9 +35,7 @@ DayCareMText1: ; 56254 (15:6254)
 	pop af
 	ld hl, DayCareMText_56437
 	jp c, DayCareMScript_56409
-	ld hl, Func_2171b
-	ld b, BANK(Func_2171b)
-	call Bankswitch
+	callab Func_2171b
 	ld hl, DayCareMText_5644a
 	jp c, DayCareMScript_56409
 	xor a
@@ -67,16 +65,12 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, $3
 	ld [$cc49], a
 	call LoadMonData
-	ld hl, Func_58f43
-	ld b, BANK(Func_58f43)
-	call Bankswitch
+	callab Func_58f43
 	ld a, d
 	cp $64
 	jr c, .asm_56315
 	ld d, $64
-	ld hl, CalcExperience
-	ld b, BANK(CalcExperience)
-	call Bankswitch
+	callab CalcExperience
 	ld hl, $da6d
 	ld a, [H_NUMTOPRINT]
 	ld [hli], a

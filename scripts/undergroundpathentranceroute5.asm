@@ -1,6 +1,6 @@
 UndergroundPathEntranceRoute5Script: ; 5d6a9 (17:56a9)
-	ld a, $10
-	ld [$d365], a
+	ld a, ROUTE_5
+	ld [wLastMap], a
 	ret
 
 UndergroundPathEntranceRoute5_5d6af: ; 5d6af (17:56af)

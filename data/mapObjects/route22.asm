@@ -5,7 +5,7 @@ Route22Object: ; 0x50022 (size=27)
 	db $5, $8, $0, ROUTE_22_GATE
 
 	db $1 ; signs
-	db $b, $7, $3 ; Route22Text3
+	db $b, $7, $3 ; Route22FrontGateText
 
 	db $2 ; people
 	db SPRITE_BLUE, $5 + 4, $19 + 4, $ff, $ff, $1 ; person

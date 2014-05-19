@@ -26,9 +26,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ld [$d528], a
 	xor a
 	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld b, BANK(RemoveGuardDrink)
-	ld hl, RemoveGuardDrink
-	call Bankswitch
+	callba RemoveGuardDrink
 	ld a, [$ff00+$db]
 	and a
 	jr nz, .asm_1df82 ; 0x1df70 $10
@@ -75,9 +73,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	ld a, [$d728]
 	bit 6, a
 	jr nz, .asm_88856 ; 0x1dfb0 $2c
-	ld b, BANK(RemoveGuardDrink)
-	ld hl, RemoveGuardDrink
-	call Bankswitch
+	callba RemoveGuardDrink
 	ld a, [$ff00+$db]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11

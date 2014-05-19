@@ -1,6 +1,6 @@
 UndergroundPathEntranceRoute8Script: ; 1e289 (7:6289)
-	ld a, $13
-	ld [$d365], a
+	ld a, ROUTE_8
+	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathEntranceRoute8TextPointers: ; 1e291 (7:6291)

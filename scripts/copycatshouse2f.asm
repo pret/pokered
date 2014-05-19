@@ -31,9 +31,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	call PrintText
 	ld a, POKE_DOLL
 	ldh [$db], a
-	ld b, BANK(RemoveItemByID)
-	ld hl, RemoveItemByID
-	call Bankswitch
+	callba RemoveItemByID
 	ld hl, $d7af
 	set 0, [hl]
 	jr .asm_62ecd ; 0x5ccc1
