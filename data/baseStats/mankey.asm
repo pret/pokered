@@ -26,4 +26,4 @@ db %11001001
 db %11000110
 db %10001000
 db %00100010
-db 0 ; padding	
+db 0 ; padding
