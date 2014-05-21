@@ -44,7 +44,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	call Mansion2Script_5202f
 	ret
 
-Func_52420: ; 52420 (14:6420)
+Mansion4Script_Switches: ; 52420 (14:6420)
 	ld a, [$c109]
 	cp $4
 	ret nz

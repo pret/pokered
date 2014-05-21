@@ -47,7 +47,7 @@ asm_44310: ; 44310 (11:4310)
 	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 	ret
 
-Func_44316: ; 44316 (11:4316)
+Mansion1Script_Switches: ; 44316 (11:4316)
 	ld a, [$c109]
 	cp $4
 	ret nz

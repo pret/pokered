@@ -73,7 +73,7 @@ Mansion3Script_5225b: ; 5225b (14:625b)
 	set 4, [hl]
 	ret
 
-Func_5227a: ; 5227a (14:627a)
+Mansion3Script_Switches: ; 5227a (14:627a)
 	ld a, [$c109]
 	cp $4
 	ret nz

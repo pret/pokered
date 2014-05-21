@@ -43,7 +43,7 @@ Mansion2Script_5202f: ; 5202f (14:602f)
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
-Mansion2Script_52037: ; 52037 (14:6037)
+Mansion2Script_Switches: ; 52037 (14:6037)
 	ld a, [$c109]
 	cp $4
 	ret nz

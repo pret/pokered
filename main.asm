@@ -10398,7 +10398,7 @@ Func_3f0f:: ; 3f0f (0:3f0f)
 PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw CardKeySuccessText                   ; id = 01
 	dw CardKeyFailText                      ; id = 02
-	dw Route15UpstairsLeftBinoculars        ; id = 03
+	dw RedBedroomPC                         ; id = 03
 	dw RedBedroomSNESText                   ; id = 04
 	dw PushStartText                        ; id = 05
 	dw SaveOptionText                       ; id = 06
@@ -10422,9 +10422,9 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw SaffronCityPokecenterBenchGuyText    ; id = 18
 	dw MtMoonPokecenterBenchGuyText         ; id = 19
 	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
-	dw UnnamedText_624c1                    ; id = 1B
-	dw UnnamedText_624c6                    ; id = 1C
-	dw UnnamedText_624cb                    ; id = 1D
+	dw UnusedBenchGuyText1                  ; id = 1B
+	dw UnusedBenchGuyText2                  ; id = 1C
+	dw UnusedBenchGuyText3                  ; id = 1D
 	dw TerminatorText_62508                 ; id = 1E
 	dw PredefText1f                         ; id = 1F
 	dw ViridianSchoolNotebook               ; id = 20
@@ -10450,8 +10450,8 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw LinkCableHelp                        ; id = 34
 	dw TMNotebook                           ; id = 35
 	dw FightingDojoText                     ; id = 36
-	dw UnnamedText_52a10                    ; id = 37
-	dw UnnamedText_52a1d                    ; id = 38
+	dw FightingDojoText_52a10               ; id = 37
+	dw FightingDojoText_52a1d               ; id = 38
 	dw NewBicycleText                       ; id = 39
 	dw IndigoPlateauStatues                 ; id = 3A
 	dw VermilionGymTrashSuccesText1         ; id = 3B
@@ -28392,7 +28392,7 @@ AccessedOaksPCText: ; 1e946 (7:6946)
 	TX_FAR _AccessedOaksPCText
 	db "@"
 
-Func_1e94b: ; 1e94b (7:694b)
+PrintNewBikeText: ; 1e94b (7:694b)
 	call EnableAutoTextBoxDrawing
 	ld a, $39
 	jp PrintPredefTextID
@@ -28401,25 +28401,25 @@ NewBicycleText: ; 1e953 (7:6953)
 	TX_FAR _NewBicycleText
 	db "@"
 
-Func_1e958: ; 1e958 (7:6958)
+DisplayOakLabLeftPoster: ; 1e958 (7:6958)
 	call EnableAutoTextBoxDrawing
-	ld a, $05
+	ld a, $05 ; PushStartText
 	jp PrintPredefTextID
 
 PushStartText: ; 1e960 (7:6960)
 	TX_FAR _PushStartText
 	db "@"
 
-Func_1e965: ; 1e965 (7:6965)
+DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	call EnableAutoTextBoxDrawing
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [$d11e]
 	cp $2
-	ld a, $6
+	ld a, $6 ; SaveOptionText
 	jr c, .asm_1e97b
-	ld a, $7
+	ld a, $7 ; StrengthsAndWeaknessesText
 .asm_1e97b
 	jp PrintPredefTextID
 
@@ -28512,7 +28512,7 @@ GameOverText: ; 1ea12 (7:6a12)
 	TX_FAR _GameOverText
 	db "@"
 
-Func_1eaa17: ; 1ea17 (7:6a17)
+PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -28704,7 +28704,7 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 	db $02,$06,$54,$00
 	db $02,$03,$54,$00
 
-Func_1eb60: ; 1eb60 (7:6b60)
+PrintMagazinesText: ; 1eb60 (7:6b60)
 	call EnableAutoTextBoxDrawing
 	ld a, $30
 	call PrintPredefTextID
@@ -28714,7 +28714,7 @@ MagazinesText: ; 1eb69 (7:6b69)
 	TX_FAR _MagazinesText
 	db "@"
 
-Func_1eb6e: ; 1eb6e (7:6b6e)
+BillsHousePC: ; 1eb6e (7:6b6e)
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
 	cp $4
@@ -28854,12 +28854,12 @@ BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 	TX_FAR _BillsHousePokemonListText2
 	db "@"
 
-Func_1ecaf: ; 1ecaf (7:6caf)
+DisplayOakLabEmailText: ; 1ecaf (7:6caf)
 	ld a, [$c109]
 	cp $4
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $8
+	ld a, $8 ; OakLabEmailText
 	jp PrintPredefTextID
 
 OakLabEmailText: ; 1ecbd (7:6cbd)
@@ -31261,7 +31261,7 @@ _Divide: ; 37da5 (d:7da5)
 	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ret
 
-Func_37e2d: ; 37e2d (d:7e2d)
+StartSlotMachine: ; 37e2d (d:7e2d)
 	ld a, [wTrainerSpriteOffset]
 	cp $fd
 	jr z, .asm_37e66
@@ -46114,7 +46114,7 @@ GetPrizeMonLevel: ; 52977 (14:6977)
 
 INCLUDE "data/prize_mon_levels.asm"
 
-Func_52996: ; 52996 (14:6996)
+PrintNotebookText: ; 52996 (14:6996)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [$cc3c], a
@@ -46180,25 +46180,25 @@ ViridianSchoolNotebookText4: ; 52a03 (14:6a03)
 	TX_FAR _ViridianSchoolNotebookText4
 	db "@"
 
-Func_52a08: ; 52a08 (14:6a08)
+PrintFightingDojoText2: ; 52a08 (14:6a08)
 	call EnableAutoTextBoxDrawing
 	ld a, $37
 	jp PrintPredefTextID
 
-UnnamedText_52a10: ; 52a10 (14:6a10)
-	TX_FAR _UnnamedText_52a10
+FightingDojoText_52a10: ; 52a10 (14:6a10)
+	TX_FAR _FightingDojoText_52a10
 	db "@"
 
-Func_52a15: ; 52a15 (14:6a15)
+PrintFightingDojoText3: ; 52a15 (14:6a15)
 	call EnableAutoTextBoxDrawing
 	ld a, $38
 	jp PrintPredefTextID
 
-UnnamedText_52a1d: ; 52a1d (14:6a1d)
-	TX_FAR _UnnamedText_52a1d
+FightingDojoText_52a1d: ; 52a1d (14:6a1d)
+	TX_FAR _FightingDojoText_52a1d
 	db "@"
 
-Func_52a22: ; 52a22 (14:6a22)
+PrintFightingDojoText: ; 52a22 (14:6a22)
 	call EnableAutoTextBoxDrawing
 	ld a, $36
 	jp PrintPredefTextID
@@ -46207,7 +46207,7 @@ FightingDojoText: ; 52a2a (14:6a2a)
 	TX_FAR _FightingDojoText
 	db "@"
 
-Func_52a2f: ; 52a2f (14:6a2f)
+PrintIndigoPlateauHQText: ; 52a2f (14:6a2f)
 	ld a, [$c109]
 	cp $4
 	ret nz
@@ -48058,23 +48058,24 @@ SetPartyMonTypes: ; 5db5e (17:5b5e)
 	ld [hl], a
 	ret
 
-Func_5db79: ; 5db79 (17:5b79)
+PrintRedsNESText: ; 5db79 (17:5b79)
 	call EnableAutoTextBoxDrawing
-	ld a, $4
+	ld a, $4 ; RedBedroomSNESText
 	jp PrintPredefTextID
 
 RedBedroomSNESText: ; 5db81 (17:5b81)
 	TX_FAR _RedBedroomSNESText
 	db "@"
 
-Func_5db86: ; 5db86 (17:5b86)
+OpenRedsPC: ; 5db86 (17:5b86)
 	call EnableAutoTextBoxDrawing
 	ld a, $3
 	jp PrintPredefTextID
 
-Route15UpstairsLeftBinoculars: ; 5db8e (17:5b8e)
-	db $fc
-Func_5db8f: ; 5db8f (17:5b8f)
+RedBedroomPC: ; 5db8e (17:5b8e)
+	db $fc ; FuncTX_ItemStoragePC
+
+Route15GateLeftBinoculars: ; 5db8f (17:5b8f)
 	ld a, [$c109]
 	cp $4 ; i
 	ret nz
@@ -48147,7 +48148,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld [$ffb0], a
 	ret
 
-Func_5dc1a: ; 5dc1a (17:5c1a)
+PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [$cc3c], a
@@ -48366,7 +48367,7 @@ ViridianBlackboardFrozenText: ; 5ddea (17:5dea)
 	TX_FAR _ViridianBlackboardFrozenText
 	db "@"
 
-Func_5ddef: ; 5ddef (17:5def)
+PrintTrashText: ; 5ddef (17:5def)
 	call EnableAutoTextBoxDrawing
 	ld a, $26
 	jp PrintPredefTextID
@@ -48903,7 +48904,7 @@ GymStatueText2: ; 62458 (18:6458)
 	TX_FAR _GymStatueText2
 	db "@"
 
-Func_6245d: ; 6245d (18:645d)
+PrintBenchGuyText: ; 6245d (18:645d)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokeCenterMapIDList
 	ld a, [W_CURMAP]
@@ -48966,16 +48967,16 @@ RockTunnelPokecenterBenchGuyText: ; 624bc (18:64bc)
 	TX_FAR _RockTunnelPokecenterGuyText
 	db "@"
 
-UnnamedText_624c1: ; 624c1 (18:64c1)
-	TX_FAR _UnnamedText_624c1
+UnusedBenchGuyText1: ; 624c1 (18:64c1)
+	TX_FAR _UnusedBenchGuyText1
 	db "@"
 
-UnnamedText_624c6: ; 624c6 (18:64c6)
-	TX_FAR _UnnamedText_624c6
+UnusedBenchGuyText2: ; 624c6 (18:64c6)
+	TX_FAR _UnusedBenchGuyText2
 	db "@"
 
-UnnamedText_624cb: ; 624cb (18:64cb)
-	TX_FAR _UnnamedText_624cb
+UnusedBenchGuyText3: ; 624cb (18:64cb)
+	TX_FAR _UnusedBenchGuyText3
 	db "@"
 
 VermilionCityPokecenterBenchGuyText: ; 624d0 (18:64d0)
@@ -49022,27 +49023,27 @@ CeladonCityHotelText: ; 62502 (18:6502)
 TerminatorText_62508: ; 62508 (18:6508)
 	db "@"
 
-Func_62509: ; 6509 (18:6509)
+PrintBookcaseText: ; 6509 (18:6509)
 	call EnableAutoTextBoxDrawing
-	ld a, $e
+	ld a, $e ; BookcaseText
 	jp PrintPredefTextID
 
 BookcaseText: ; 62511 (18:6511)
 	TX_FAR _BookcaseText
 	db "@"
 
-Func_62516: ; 62516 (18:6516)
+OpenPokemonCenterPC: ; 62516 (18:6516)
 	ld a, [$c109]
 	cp $4 ; check to see if player is facing up
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [$cf0c], a
-	ld a, $1f
+	ld a, $1f ; PredefText1f
 	jp PrintPredefTextID
 
 PredefText1f: ; 62529 (18:6529)
-	db $F9
+	db $F9 ; FuncTX_PokemonCenterPC
 
 SECTION "bank19",ROMX,BANK[$19]
 

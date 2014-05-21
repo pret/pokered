@@ -534,7 +534,7 @@ MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
 	db "@"
 
-Func_21825:: ; 5824 (8:5825)
+PrintJustAMomentText1:: ; 5824 (8:5825)
 	ld a, [$ffaa]
 	cp $1
 	ret z
@@ -552,7 +552,7 @@ Func_21825:: ; 5824 (8:5825)
 	ld a, $22
 	jp PrintPredefTextID
 
-Func_21845:: ; 5845 (8:5845)
+PrintJustAMomentText2:: ; 5845 (8:5845)
 	ld a, [$ffaa]
 	cp $2
 	ret z
@@ -582,5 +582,5 @@ JustAMomentText:: ; 21865 (8:5865)
 	jp PrintPredefTextID
 
 PredefText23:: ; 21878 (8:5878)
-	db $FD
+	db $FD ; FuncTX_BillsPC
 
