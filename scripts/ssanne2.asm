@@ -98,12 +98,12 @@ SSAnne2Script1: ; 61430 (18:5430)
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .NotSquirtle ; 0x61451 $4
 	ld a, $1
 	jr .done
 .NotSquirtle
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .Charmander ; 0x61459 $4
 	ld a, $2
 	jr .done

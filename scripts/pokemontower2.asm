@@ -137,12 +137,12 @@ PokemonTower2Text1: ; 605df (18:45df)
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .NotSquirtle ; 0x6060f
 	ld a, $4
 	jr .done
 .NotSquirtle ; 0x60615
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .Charmander ; 0x60617
 	ld a, $5
 	jr .done

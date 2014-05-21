@@ -30086,11 +30086,11 @@ TitleBallYTable: ; 372a0 (d:72a0)
 Func_372ac: ; 372ac (d:72ac)
 ; Animate the TitleBall if a starter just got scrolled out.
 	ld a, [wWhichTrade] ; $cd3d
-	cp CHARMANDER
+	cp STARTER1
 	jr z, .ok
-	cp SQUIRTLE
+	cp STARTER2
 	jr z, .ok
-	cp BULBASAUR
+	cp STARTER3
 	ret nz
 .ok
 	ld e, 1 ; animate titleball
@@ -32157,10 +32157,10 @@ ReadTrainer: ; 39c53 (e:5c53)
 
 ; starter
 	ld a,[W_RIVALSTARTER]
-	cp BULBASAUR
+	cp STARTER3
 	ld b,MEGA_DRAIN
 	jr z,.GiveStarterMove
-	cp CHARMANDER
+	cp STARTER1
 	ld b,FIRE_BLAST
 	jr z,.GiveStarterMove
 	ld b,BLIZZARD ; must be squirtle

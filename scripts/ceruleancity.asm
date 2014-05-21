@@ -141,12 +141,12 @@ CeruleanCityScript1: ; 19567 (6:5567)
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .NotSquirtle ; 0x19592 $4
 	ld a, $7
 	jr .done
 .NotSquirtle
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .Charmander ; 0x1959a $4
 	ld a, $8
 	jr .done

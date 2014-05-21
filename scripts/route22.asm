@@ -140,9 +140,9 @@ Route22Script1: ; 50f62 (14:4f62)
 
 StarterMons_50faf: ; 50faf (14:4faf)
 ; starter the rival picked, rival trainer number
-	db SQUIRTLE,$04
-	db BULBASAUR,$05
-	db CHARMANDER,$06
+	db STARTER2,$04
+	db STARTER3,$05
+	db STARTER1,$06
 
 Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, [$d057]
@@ -283,9 +283,9 @@ Route22Script4: ; 51087 (14:5087)
 	ret
 
 StarterMons_510d9: ; 510d9 (14:50d9)
-	db SQUIRTLE,$0a
-	db BULBASAUR,$0b
-	db CHARMANDER,$0c
+	db STARTER2,$0a
+	db STARTER3,$0b
+	db STARTER1,$0c
 
 Route22Script5: ; 510df (14:50df)
 	ld a, [W_ISINBATTLE] ; $d057

@@ -196,9 +196,9 @@ OaksLabScript7: ; 1cc72 (7:4c72)
 
 OaksLabScript8: ; 1cc80 (7:4c80)
 	ld a, [W_PLAYERSTARTER]
-	cp CHARMANDER
+	cp STARTER1
 	jr z, .Charmander ; 0x1cc85 $6
-	cp SQUIRTLE
+	cp STARTER2
 	jr z, .Squirtle ; 0x1cc89 $1d
 	jr .Bulbasaur ; 0x1cc8b $38
 .Charmander
@@ -366,12 +366,12 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ld a, SONY1 + $C8
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .NotSquirtle ; 0x1cdc9 $4
 	ld a, $1
 	jr .done ; 0x1cdcd $a
 .NotSquirtle
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .Charmander ; 0x1cdd1 $4
 	ld a, $2
 	jr .done ; 0x1cdd5 $2
@@ -783,33 +783,33 @@ OaksLabText41: ; 1d0fd (7:50fd)
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
 	db $8
-	ld a, SQUIRTLE
+	ld a, STARTER2
 	ld [$cd3d], a
 	ld a, $3
 	ld [$cd3e], a
-	ld a, CHARMANDER
+	ld a, STARTER1
 	ld b, $2
 	jr OaksLabScript_1d133 ; 0x1d111 $20
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
 	db $8
-	ld a, BULBASAUR
+	ld a, STARTER3
 	ld [$cd3d], a
 	ld a, $4
 	ld [$cd3e], a
-	ld a, SQUIRTLE
+	ld a, STARTER2
 	ld b, $3
 	jr OaksLabScript_1d133 ; 0x1d122 $f
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
 	db $8
-	ld a, CHARMANDER
+	ld a, STARTER1
 	ld [$cd3d], a
 	ld a, $2
 	ld [$cd3e], a
-	ld a, BULBASAUR
+	ld a, STARTER3
 	ld b, $4
 
 OaksLabScript_1d133: ; 1d133 (7:5133)

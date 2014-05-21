@@ -69,12 +69,12 @@ GaryScript2: ; 75f6a (1d:5f6a)
 
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .NotSquirtle ; 0x75f9f $4
 	ld a, $1
 	jr .done
 .NotSquirtle
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .Charmander ; 0x75fa7 $4
 	ld a, $2
 	jr .done

@@ -184,12 +184,12 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; $d059
 	ld a, [W_RIVALSTARTER] ; $d715
-	cp SQUIRTLE
+	cp STARTER2
 	jr nz, .asm_51cb6
 	ld a, $7
 	jr .asm_51cc0
 .asm_51cb6
-	cp BULBASAUR
+	cp STARTER3
 	jr nz, .asm_51cbe
 	ld a, $8
 	jr .asm_51cc0
