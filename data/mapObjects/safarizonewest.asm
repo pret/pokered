@@ -18,10 +18,10 @@ SafariZoneWestObject: ; 0x4a1dc (size=108)
 	db $16, $18, $8 ; SafariZoneWestText8
 
 	db $4 ; people
-	db SPRITE_BALL, $14 + 4, $8 + 4, $ff, $ff, $81, MAX_POTION ; item
-	db SPRITE_BALL, $7 + 4, $9 + 4, $ff, $ff, $82, TM_32 ; item
-	db SPRITE_BALL, $12 + 4, $12 + 4, $ff, $ff, $83, MAX_REVIVE ; item
-	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $84, GOLD_TEETH ; item
+	db SPRITE_BALL, $14 + 4, $8 + 4, $ff, $ff, ITEM | $1, MAX_POTION
+	db SPRITE_BALL, $7 + 4, $9 + 4, $ff, $ff, ITEM | $2, TM_32
+	db SPRITE_BALL, $12 + 4, $12 + 4, $ff, $ff, ITEM | $3, MAX_REVIVE
+	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, ITEM | $4, GOLD_TEETH
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_WEST_WIDTH, $0, $14 ; SAFARI_ZONE_NORTH

@@ -10,7 +10,7 @@ LoreleiObject: ; 0x76280 (size=44)
 	db $0 ; signs
 
 	db $1 ; people
-	db SPRITE_LORELEI, $2 + 4, $5 + 4, $ff, $d0, $41, LORELEI + $C8, $1 ; trainer
+	db SPRITE_LORELEI, $2 + 4, $5 + 4, $ff, $d0, TRAINER | $1, LORELEI + $C8, $1
 
 	; warp-to
 	EVENT_DISP LORELEIS_ROOM_WIDTH, $b, $4 ; INDIGO_PLATEAU_LOBBY

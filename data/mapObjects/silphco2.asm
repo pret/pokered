@@ -14,10 +14,10 @@ SilphCo2Object: ; 0x59e66 (size=98)
 
 	db $5 ; people
 	db SPRITE_ERIKA, $1 + 4, $a + 4, $ff, $d1, $1 ; person
-	db SPRITE_OAK_AIDE, $c + 4, $5 + 4, $ff, $d0, $42, SCIENTIST + $C8, $2 ; trainer
-	db SPRITE_OAK_AIDE, $d + 4, $18 + 4, $ff, $d2, $43, SCIENTIST + $C8, $3 ; trainer
-	db SPRITE_ROCKET, $b + 4, $10 + 4, $ff, $d1, $44, ROCKET + $C8, $17 ; trainer
-	db SPRITE_ROCKET, $7 + 4, $18 + 4, $ff, $d1, $45, ROCKET + $C8, $18 ; trainer
+	db SPRITE_OAK_AIDE, $c + 4, $5 + 4, $ff, $d0, TRAINER | $2, SCIENTIST + $C8, $2
+	db SPRITE_OAK_AIDE, $d + 4, $18 + 4, $ff, $d2, TRAINER | $3, SCIENTIST + $C8, $3
+	db SPRITE_ROCKET, $b + 4, $10 + 4, $ff, $d1, TRAINER | $4, ROCKET + $C8, $17
+	db SPRITE_ROCKET, $7 + 4, $18 + 4, $ff, $d1, TRAINER | $5, ROCKET + $C8, $18
 
 	; warp-to
 	EVENT_DISP SILPH_CO_2F_WIDTH, $0, $18 ; SILPH_CO_1F

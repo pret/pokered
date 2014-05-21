@@ -23,7 +23,7 @@ CeruleanCityObject: ; 0x18786 (size=170)
 
 	db $b ; people
 	db SPRITE_BLUE, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $8 + 4, $1e + 4, $ff, $ff, $42, ROCKET + $C8, $5 ; trainer
+	db SPRITE_ROCKET, $8 + 4, $1e + 4, $ff, $ff, TRAINER | $2, ROCKET + $C8, $5
 	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1f + 4, $ff, $d0, $3 ; person
 	db SPRITE_BLACK_HAIR_BOY_2, $12 + 4, $f + 4, $fe, $1, $4 ; person
 	db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $9 + 4, $fe, $2, $5 ; person

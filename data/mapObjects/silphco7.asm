@@ -16,13 +16,13 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	db SPRITE_LAPRAS_GIVER, $d + 4, $d + 4, $ff, $d1, $2 ; person
 	db SPRITE_LAPRAS_GIVER, $a + 4, $7 + 4, $ff, $ff, $3 ; person
 	db SPRITE_ERIKA, $8 + 4, $a + 4, $ff, $ff, $4 ; person
-	db SPRITE_ROCKET, $1 + 4, $d + 4, $ff, $d0, $45, ROCKET + $C8, $20 ; trainer
-	db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, $46, SCIENTIST + $C8, $8 ; trainer
-	db SPRITE_ROCKET, $2 + 4, $14 + 4, $ff, $d2, $47, ROCKET + $C8, $21 ; trainer
-	db SPRITE_ROCKET, $e + 4, $13 + 4, $ff, $d3, $48, ROCKET + $C8, $22 ; trainer
+	db SPRITE_ROCKET, $1 + 4, $d + 4, $ff, $d0, TRAINER | $5, ROCKET + $C8, $20
+	db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, TRAINER | $6, SCIENTIST + $C8, $8
+	db SPRITE_ROCKET, $2 + 4, $14 + 4, $ff, $d2, TRAINER | $7, ROCKET + $C8, $21
+	db SPRITE_ROCKET, $e + 4, $13 + 4, $ff, $d3, TRAINER | $8, ROCKET + $C8, $22
 	db SPRITE_BLUE, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
-	db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, $8a, CALCIUM ; item
-	db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, $8b, TM_03 ; item
+	db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, ITEM | $a, CALCIUM
+	db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, ITEM | $b, TM_03
 
 	; warp-to
 	EVENT_DISP SILPH_CO_7F_WIDTH, $0, $10 ; SILPH_CO_8F

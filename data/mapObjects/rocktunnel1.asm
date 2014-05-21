@@ -15,13 +15,13 @@ RockTunnel1Object: ; 0x445f6 (size=127)
 	db $1d, $b, $8 ; RockTunnel1Text8
 
 	db $7 ; people
-	db SPRITE_HIKER, $5 + 4, $7 + 4, $ff, $d0, $41, HIKER + $C8, $c ; trainer
-	db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, $42, HIKER + $C8, $d ; trainer
-	db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, $43, HIKER + $C8, $e ; trainer
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, $44, POKEMANIAC + $C8, $7 ; trainer
-	db SPRITE_LASS, $15 + 4, $25 + 4, $ff, $d2, $45, JR__TRAINER_F + $C8, $11 ; trainer
-	db SPRITE_LASS, $18 + 4, $16 + 4, $ff, $d0, $46, JR__TRAINER_F + $C8, $12 ; trainer
-	db SPRITE_LASS, $18 + 4, $20 + 4, $ff, $d3, $47, JR__TRAINER_F + $C8, $13 ; trainer
+	db SPRITE_HIKER, $5 + 4, $7 + 4, $ff, $d0, TRAINER | $1, HIKER + $C8, $c
+	db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, TRAINER | $2, HIKER + $C8, $d
+	db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, TRAINER | $3, HIKER + $C8, $e
+	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, TRAINER | $4, POKEMANIAC + $C8, $7
+	db SPRITE_LASS, $15 + 4, $25 + 4, $ff, $d2, TRAINER | $5, JR__TRAINER_F + $C8, $11
+	db SPRITE_LASS, $18 + 4, $16 + 4, $ff, $d0, TRAINER | $6, JR__TRAINER_F + $C8, $12
+	db SPRITE_LASS, $18 + 4, $20 + 4, $ff, $d3, TRAINER | $7, JR__TRAINER_F + $C8, $13
 
 	; warp-to
 	EVENT_DISP ROCK_TUNNEL_1_WIDTH, $3, $f

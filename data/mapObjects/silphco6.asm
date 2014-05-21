@@ -16,11 +16,11 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 	db SPRITE_ERIKA, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
 	db SPRITE_ERIKA, $a + 4, $b + 4, $ff, $d3, $4 ; person
 	db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
-	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, $46, ROCKET + $C8, $1e ; trainer
-	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, $47, SCIENTIST + $C8, $7 ; trainer
-	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, $48, ROCKET + $C8, $1f ; trainer
-	db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, $89, HP_UP ; item
-	db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, $8a, X_ACCURACY ; item
+	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, TRAINER | $6, ROCKET + $C8, $1e
+	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, TRAINER | $7, SCIENTIST + $C8, $7
+	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, TRAINER | $8, ROCKET + $C8, $1f
+	db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, ITEM | $9, HP_UP
+	db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, ITEM | $a, X_ACCURACY
 
 	; warp-to
 	EVENT_DISP SILPH_CO_6F_WIDTH, $0, $10 ; SILPH_CO_7F

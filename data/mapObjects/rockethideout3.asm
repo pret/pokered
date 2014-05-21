@@ -8,10 +8,10 @@ RocketHideout3Object: ; 0x4534d (size=50)
 	db $0 ; signs
 
 	db $4 ; people
-	db SPRITE_ROCKET, $16 + 4, $a + 4, $ff, $d3, $41, ROCKET + $C8, $e ; trainer
-	db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d1, $42, ROCKET + $C8, $f ; trainer
-	db SPRITE_BALL, $11 + 4, $1a + 4, $ff, $ff, $83, TM_10 ; item
-	db SPRITE_BALL, $e + 4, $14 + 4, $ff, $ff, $84, RARE_CANDY ; item
+	db SPRITE_ROCKET, $16 + 4, $a + 4, $ff, $d3, TRAINER | $1, ROCKET + $C8, $e
+	db SPRITE_ROCKET, $c + 4, $1a + 4, $ff, $d1, TRAINER | $2, ROCKET + $C8, $f
+	db SPRITE_BALL, $11 + 4, $1a + 4, $ff, $ff, ITEM | $3, TM_10
+	db SPRITE_BALL, $e + 4, $14 + 4, $ff, $ff, ITEM | $4, RARE_CANDY
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_3_WIDTH, $6, $19 ; ROCKET_HIDEOUT_2

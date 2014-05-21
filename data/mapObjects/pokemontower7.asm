@@ -7,9 +7,9 @@ PokemonTower7Object: ; 0x60ef6 (size=42)
 	db $0 ; signs
 
 	db $4 ; people
-	db SPRITE_ROCKET, $b + 4, $9 + 4, $ff, $d3, $41, ROCKET + $C8, $13 ; trainer
-	db SPRITE_ROCKET, $9 + 4, $c + 4, $ff, $d2, $42, ROCKET + $C8, $14 ; trainer
-	db SPRITE_ROCKET, $7 + 4, $9 + 4, $ff, $d3, $43, ROCKET + $C8, $15 ; trainer
+	db SPRITE_ROCKET, $b + 4, $9 + 4, $ff, $d3, TRAINER | $1, ROCKET + $C8, $13
+	db SPRITE_ROCKET, $9 + 4, $c + 4, $ff, $d2, TRAINER | $2, ROCKET + $C8, $14
+	db SPRITE_ROCKET, $7 + 4, $9 + 4, $ff, $d3, TRAINER | $3, ROCKET + $C8, $15
 	db SPRITE_MR_FUJI, $3 + 4, $a + 4, $ff, $d0, $4 ; person
 
 	; warp-to

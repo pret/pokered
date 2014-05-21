@@ -18,15 +18,15 @@ SSAnne9Object: ; 0x61c8d (size=188)
 	db $0 ; signs
 
 	db $d ; people
-	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, $41, GENTLEMAN + $C8, $3 ; trainer
-	db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, $42, FISHER + $C8, $1 ; trainer
-	db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, $43, GENTLEMAN + $C8, $5 ; trainer
-	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, $44, LASS + $C8, $c ; trainer
+	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, TRAINER | $1, GENTLEMAN + $C8, $3
+	db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, TRAINER | $2, FISHER + $C8, $1
+	db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, TRAINER | $3, GENTLEMAN + $C8, $5
+	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, TRAINER | $4, LASS + $C8, $c
 	db SPRITE_GENTLEMAN, $2 + 4, $1 + 4, $ff, $d0, $5 ; person
-	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, $86, MAX_ETHER ; item
+	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, ITEM | $6, MAX_ETHER
 	db SPRITE_GENTLEMAN, $2 + 4, $15 + 4, $ff, $d0, $7 ; person
 	db SPRITE_OLD_PERSON, $1 + 4, $16 + 4, $ff, $d0, $8 ; person
-	db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, $89, RARE_CANDY ; item
+	db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, ITEM | $9, RARE_CANDY
 	db SPRITE_GENTLEMAN, $c + 4, $c + 4, $ff, $d0, $a ; person
 	db SPRITE_YOUNG_BOY, $e + 4, $b + 4, $ff, $ff, $b ; person
 	db SPRITE_BRUNETTE_GIRL, $c + 4, $16 + 4, $ff, $d2, $c ; person

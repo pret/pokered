@@ -38,14 +38,14 @@ SaffronGymObject: ; 0x5d259 (size=330)
 	db $0 ; signs
 
 	db $9 ; people
-	db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, $41, SABRINA + $C8, $1 ; trainer
-	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, $42, CHANNELER + $C8, $16 ; trainer
-	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, $43, PSYCHIC_TR + $C8, $1 ; trainer
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, $44, CHANNELER + $C8, $17 ; trainer
-	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, $45, PSYCHIC_TR + $C8, $2 ; trainer
-	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, $46, CHANNELER + $C8, $18 ; trainer
-	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, $47, PSYCHIC_TR + $C8, $3 ; trainer
-	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, $48, PSYCHIC_TR + $C8, $4 ; trainer
+	db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + $C8, $1
+	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, CHANNELER + $C8, $16
+	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, TRAINER | $3, PSYCHIC_TR + $C8, $1
+	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, CHANNELER + $C8, $17
+	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, TRAINER | $5, PSYCHIC_TR + $C8, $2
+	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, TRAINER | $6, CHANNELER + $C8, $18
+	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, TRAINER | $7, PSYCHIC_TR + $C8, $3
+	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, TRAINER | $8, PSYCHIC_TR + $C8, $4
 	db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
 
 	; warp-to

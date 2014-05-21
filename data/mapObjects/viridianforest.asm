@@ -19,12 +19,12 @@ ViridianForestObject: ; 0x611da (size=127)
 
 	db $8 ; people
 	db SPRITE_BUG_CATCHER, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, $42, BUG_CATCHER + $C8, $1 ; trainer
-	db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, $43, BUG_CATCHER + $C8, $2 ; trainer
-	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, $44, BUG_CATCHER + $C8, $3 ; trainer
-	db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, $85, ANTIDOTE ; item
-	db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, $86, POTION ; item
-	db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, $87, POKE_BALL ; item
+	db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, TRAINER | $2, BUG_CATCHER + $C8, $1
+	db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, TRAINER | $3, BUG_CATCHER + $C8, $2
+	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, TRAINER | $4, BUG_CATCHER + $C8, $3
+	db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, ITEM | $5, ANTIDOTE
+	db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, ITEM | $6, POTION
+	db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, ITEM | $7, POKE_BALL
 	db SPRITE_BUG_CATCHER, $28 + 4, $1b + 4, $ff, $ff, $8 ; person
 
 	; warp-to

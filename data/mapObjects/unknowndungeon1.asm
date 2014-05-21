@@ -15,9 +15,9 @@ UnknownDungeon1Object: ; 0x74d15 (size=97)
 	db $0 ; signs
 
 	db $3 ; people
-	db SPRITE_BALL, $d + 4, $7 + 4, $ff, $ff, $81, FULL_RESTORE ; item
-	db SPRITE_BALL, $3 + 4, $13 + 4, $ff, $ff, $82, MAX_ELIXER ; item
-	db SPRITE_BALL, $0 + 4, $5 + 4, $ff, $ff, $83, NUGGET ; item
+	db SPRITE_BALL, $d + 4, $7 + 4, $ff, $ff, ITEM | $1, FULL_RESTORE
+	db SPRITE_BALL, $3 + 4, $13 + 4, $ff, $ff, ITEM | $2, MAX_ELIXER
+	db SPRITE_BALL, $0 + 4, $5 + 4, $ff, $ff, ITEM | $3, NUGGET
 
 	; warp-to
 	EVENT_DISP UNKNOWN_DUNGEON_1_WIDTH, $11, $18

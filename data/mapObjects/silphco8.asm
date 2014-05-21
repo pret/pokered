@@ -14,9 +14,9 @@ SilphCo8Object: ; 0x56613 (size=90)
 
 	db $4 ; people
 	db SPRITE_LAPRAS_GIVER, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $2 + 4, $13 + 4, $ff, $d2, $42, ROCKET + $C8, $23 ; trainer
-	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, $43, SCIENTIST + $C8, $9 ; trainer
-	db SPRITE_ROCKET, $f + 4, $c + 4, $ff, $d3, $44, ROCKET + $C8, $24 ; trainer
+	db SPRITE_ROCKET, $2 + 4, $13 + 4, $ff, $d2, TRAINER | $2, ROCKET + $C8, $23
+	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, TRAINER | $3, SCIENTIST + $C8, $9
+	db SPRITE_ROCKET, $f + 4, $c + 4, $ff, $d3, TRAINER | $4, ROCKET + $C8, $24
 
 	; warp-to
 	EVENT_DISP SILPH_CO_8F_WIDTH, $0, $10 ; SILPH_CO_9F

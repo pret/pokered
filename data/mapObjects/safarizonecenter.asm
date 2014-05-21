@@ -17,7 +17,7 @@ SafariZoneCenterObject: ; 0x45bc5 (size=89)
 	db $16, $e, $3 ; SafariZoneCenterText3
 
 	db $1 ; people
-	db SPRITE_BALL, $a + 4, $e + 4, $ff, $ff, $81, NUGGET ; item
+	db SPRITE_BALL, $a + 4, $e + 4, $ff, $ff, ITEM | $1, NUGGET
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_CENTER_WIDTH, $19, $e ; SAFARI_ZONE_ENTRANCE

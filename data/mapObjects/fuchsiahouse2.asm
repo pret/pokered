@@ -11,7 +11,7 @@ FuchsiaHouse2Object: ; 0x75180 (size=45)
 
 	db $3 ; people
 	db SPRITE_WARDEN, $3 + 4, $2 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, $82, RARE_CANDY ; item
+	db SPRITE_BALL, $3 + 4, $8 + 4, $ff, $ff, ITEM | $2, RARE_CANDY
 	db SPRITE_BOULDER, $4 + 4, $8 + 4, $ff, $10, $3 ; person
 
 	; warp-to

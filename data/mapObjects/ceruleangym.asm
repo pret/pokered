@@ -8,9 +8,9 @@ CeruleanGymObject: ; 0x5c834 (size=50)
 	db $0 ; signs
 
 	db $4 ; people
-	db SPRITE_BRUNETTE_GIRL, $2 + 4, $4 + 4, $ff, $d0, $41, MISTY + $C8, $1 ; trainer
-	db SPRITE_LASS, $3 + 4, $2 + 4, $ff, $d3, $42, JR__TRAINER_F + $C8, $1 ; trainer
-	db SPRITE_SWIMMER, $7 + 4, $8 + 4, $ff, $d2, $43, SWIMMER + $C8, $1 ; trainer
+	db SPRITE_BRUNETTE_GIRL, $2 + 4, $4 + 4, $ff, $d0, TRAINER | $1, MISTY + $C8, $1
+	db SPRITE_LASS, $3 + 4, $2 + 4, $ff, $d3, TRAINER | $2, JR__TRAINER_F + $C8, $1
+	db SPRITE_SWIMMER, $7 + 4, $8 + 4, $ff, $d2, TRAINER | $3, SWIMMER + $C8, $1
 	db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $4 ; person
 
 	; warp-to

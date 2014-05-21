@@ -12,9 +12,9 @@ UnknownDungeon2Object: ; 0x45e14 (size=73)
 	db $0 ; signs
 
 	db $3 ; people
-	db SPRITE_BALL, $9 + 4, $1d + 4, $ff, $ff, $81, PP_UP ; item
-	db SPRITE_BALL, $f + 4, $4 + 4, $ff, $ff, $82, ULTRA_BALL ; item
-	db SPRITE_BALL, $6 + 4, $d + 4, $ff, $ff, $83, FULL_RESTORE ; item
+	db SPRITE_BALL, $9 + 4, $1d + 4, $ff, $ff, ITEM | $1, PP_UP
+	db SPRITE_BALL, $f + 4, $4 + 4, $ff, $ff, ITEM | $2, ULTRA_BALL
+	db SPRITE_BALL, $6 + 4, $d + 4, $ff, $ff, ITEM | $3, FULL_RESTORE
 
 	; warp-to
 	EVENT_DISP UNKNOWN_DUNGEON_2_WIDTH, $1, $1d ; UNKNOWN_DUNGEON_1

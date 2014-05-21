@@ -20,8 +20,8 @@ SafariZoneNorthObject: ; 0x459d5 (size=105)
 	db $1c, $1a, $7 ; SafariZoneNorthText7
 
 	db $2 ; people
-	db SPRITE_BALL, $1 + 4, $19 + 4, $ff, $ff, $81, PROTEIN ; item
-	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, $82, TM_40 ; item
+	db SPRITE_BALL, $1 + 4, $19 + 4, $ff, $ff, ITEM | $1, PROTEIN
+	db SPRITE_BALL, $7 + 4, $13 + 4, $ff, $ff, ITEM | $2, TM_40
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_NORTH_WIDTH, $23, $2 ; SAFARI_ZONE_WEST

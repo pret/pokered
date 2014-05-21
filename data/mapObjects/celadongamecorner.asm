@@ -20,7 +20,7 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	db SPRITE_GAMBLER, $f + 4, $b + 4, $ff, $d3, $8 ; person
 	db SPRITE_MART_GUY, $b + 4, $e + 4, $ff, $d2, $9 ; person
 	db SPRITE_GENTLEMAN, $d + 4, $11 + 4, $ff, $d3, $a ; person
-	db SPRITE_ROCKET, $5 + 4, $9 + 4, $ff, $d1, $4b, ROCKET + $C8, $7 ; trainer
+	db SPRITE_ROCKET, $5 + 4, $9 + 4, $ff, $d1, TRAINER | $b, ROCKET + $C8, $7
 
 	; warp-to
 	EVENT_DISP GAME_CORNER_WIDTH, $11, $f

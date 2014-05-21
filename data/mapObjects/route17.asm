@@ -12,13 +12,13 @@ Route17Object: ; 0x54b42 (size=102)
 	db $8d, $9, $10 ; Route17Text16
 
 	db $a ; people
-	db SPRITE_BIKER, $13 + 4, $c + 4, $ff, $d2, $41, CUE_BALL + $C8, $4 ; trainer
-	db SPRITE_BIKER, $10 + 4, $b + 4, $ff, $d3, $42, CUE_BALL + $C8, $5 ; trainer
-	db SPRITE_BIKER, $12 + 4, $4 + 4, $ff, $d1, $43, BIKER + $C8, $8 ; trainer
-	db SPRITE_BIKER, $20 + 4, $7 + 4, $ff, $d2, $44, BIKER + $C8, $9 ; trainer
-	db SPRITE_BIKER, $22 + 4, $e + 4, $ff, $d3, $45, BIKER + $C8, $a ; trainer
-	db SPRITE_BIKER, $3a + 4, $11 + 4, $ff, $d2, $46, CUE_BALL + $C8, $6 ; trainer
-	db SPRITE_BIKER, $44 + 4, $2 + 4, $ff, $d3, $47, CUE_BALL + $C8, $7 ; trainer
-	db SPRITE_BIKER, $62 + 4, $e + 4, $ff, $d3, $48, CUE_BALL + $C8, $8 ; trainer
-	db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, $49, BIKER + $C8, $b ; trainer
-	db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, $4a, BIKER + $C8, $c ; trainer
+	db SPRITE_BIKER, $13 + 4, $c + 4, $ff, $d2, TRAINER | $1, CUE_BALL + $C8, $4
+	db SPRITE_BIKER, $10 + 4, $b + 4, $ff, $d3, TRAINER | $2, CUE_BALL + $C8, $5
+	db SPRITE_BIKER, $12 + 4, $4 + 4, $ff, $d1, TRAINER | $3, BIKER + $C8, $8
+	db SPRITE_BIKER, $20 + 4, $7 + 4, $ff, $d2, TRAINER | $4, BIKER + $C8, $9
+	db SPRITE_BIKER, $22 + 4, $e + 4, $ff, $d3, TRAINER | $5, BIKER + $C8, $a
+	db SPRITE_BIKER, $3a + 4, $11 + 4, $ff, $d2, TRAINER | $6, CUE_BALL + $C8, $6
+	db SPRITE_BIKER, $44 + 4, $2 + 4, $ff, $d3, TRAINER | $7, CUE_BALL + $C8, $7
+	db SPRITE_BIKER, $62 + 4, $e + 4, $ff, $d3, TRAINER | $8, CUE_BALL + $C8, $8
+	db SPRITE_BIKER, $62 + 4, $5 + 4, $ff, $d2, TRAINER | $9, BIKER + $C8, $b
+	db SPRITE_BIKER, $76 + 4, $a + 4, $ff, $d0, TRAINER | $a, BIKER + $C8, $c
