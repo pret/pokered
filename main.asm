@@ -4532,16 +4532,16 @@ TextCommand0B:: ; 1c31 (0:1c31)
 
 ; format: text command ID, sound ID or cry ID
 TextCommandSounds:: ; 1c64 (0:1c64)
-	db $0B,$86
-	db $12,$9A
-	db $0E,$91
-	db $0F,$86
-	db $10,$89
-	db $11,$94
-	db $13,$98
-	db $14,$A8
-	db $15,$97
-	db $16,$78
+	db $0B,(SFX_02_3a - SFX_Headers_02) / 3
+	db $12,(SFX_02_46 - SFX_Headers_02) / 3
+	db $0E,(SFX_02_41 - SFX_Headers_02) / 3
+	db $0F,(SFX_02_3a - SFX_Headers_02) / 3
+	db $10,(SFX_02_3b - SFX_Headers_02) / 3
+	db $11,(SFX_02_42 - SFX_Headers_02) / 3
+	db $13,(SFX_02_44 - SFX_Headers_02) / 3
+	db $14,NIDORINA ; used in OakSpeech
+	db $15,PIDGEOT  ; used in SaffronCityText12
+	db $16,DEWGONG  ; unused?
 
 ; draw ellipses
 ; 0CAA
@@ -10368,7 +10368,7 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 	ld [H_LOADEDROMBANK], a
 	ret
 
-Func_3ef5:: ; 3ef5 (0:3ef5)
+PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld hl, PointerTable_3f22
 	call Func_3f0f
@@ -10426,11 +10426,11 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw UnnamedText_624c6                    ; id = 1C
 	dw UnnamedText_624cb                    ; id = 1D
 	dw TerminatorText_62508                 ; id = 1E
-	dw Unknown_62529                        ; id = 1F
+	dw PredefText1f                         ; id = 1F
 	dw ViridianSchoolNotebook               ; id = 20
 	dw ViridianSchoolBlackboard             ; id = 21
 	dw JustAMomentText                      ; id = 22
-	dw Unknown_21878                        ; id = 23
+	dw PredefText23                         ; id = 23
 	dw FoundHiddenItemText                  ; id = 24
 	dw HiddenItemBagFullText                ; id = 25
 	dw VermilionGymTrashText                ; id = 26
@@ -14336,7 +14336,7 @@ OakSpeechText1: ; 6253 (1:6253)
 	db "@"
 OakSpeechText2: ; 6258 (1:6258)
 	TX_FAR _OakSpeechText2A
-	db $14
+	db $14 ; play NIDORINA cry from TextCommandSounds
 	TX_FAR _OakSpeechText2B
 	db "@"
 IntroducePlayerText: ; 6262 (1:6262)
@@ -22140,7 +22140,7 @@ asm_ef82: ; ef82 (3:6f82)
 	res 6, [hl]
 	ld a, $ff
 	ld [$cfcb], a
-	call Func_eff7
+	call AnimateCutTree
 	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
 	call Func_eedc
@@ -22158,7 +22158,7 @@ UsedCutText: ; eff2 (3:6ff2)
 	TX_FAR _UsedCutText
 	db "@"
 
-Func_eff7: ; eff7 (3:6ff7)
+AnimateCutTree: ; eff7 (3:6ff7)
 	xor a
 	ld [$cd50], a
 	ld a, $e4
@@ -22177,13 +22177,13 @@ Func_eff7: ; eff7 (3:6ff7)
 	jr asm_f055
 .asm_f020
 	ld hl, $8fc0
-	call Func_f04c
+	call LoadCutTreeOAM
 	ld hl, $8fd0
-	call Func_f04c
+	call LoadCutTreeOAM
 	ld hl, $8fe0
-	call Func_f04c
+	call LoadCutTreeOAM
 	ld hl, $8ff0
-	call Func_f04c
+	call LoadCutTreeOAM
 	call asm_f055
 	ld hl, $c393
 	ld de, $4
@@ -22197,17 +22197,17 @@ Func_eff7: ; eff7 (3:6ff7)
 	jr nz, .asm_f044
 	ret
 
-Func_f04c: ; f04c (3:704c)
+LoadCutTreeOAM: ; f04c (3:704c)
 	ld de, AnimationTileset2 + $60 ; $474e ; tile depicting a leaf
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	jp CopyVideoData
 asm_f055: ; f055 (3:7055)
 	call Func_f068
 	ld a, $9
-	ld de, UnknownOAM_f060 ; $7060
+	ld de, CutTreeOAM ; $7060
 	jp WriteOAMBlock
 
-UnknownOAM_f060: ; f060 (3:7060)
+CutTreeOAM: ; f060 (3:7060)
 	db $FC,$10,$FD,$10
 	db $FE,$10,$FF,$10
 
@@ -24065,7 +24065,7 @@ PrintBookshelfText: ; fb50 (3:7b50)
 	push af
 	call EnableAutoTextBoxDrawing
 	pop af
-	call Func_3ef5
+	call PrintPredefTextID
 	xor a
 	ld [$ffdb], a
 	ret
@@ -28395,7 +28395,7 @@ AccessedOaksPCText: ; 1e946 (7:6946)
 Func_1e94b: ; 1e94b (7:694b)
 	call EnableAutoTextBoxDrawing
 	ld a, $39
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 NewBicycleText: ; 1e953 (7:6953)
 	TX_FAR _NewBicycleText
@@ -28404,7 +28404,7 @@ NewBicycleText: ; 1e953 (7:6953)
 Func_1e958: ; 1e958 (7:6958)
 	call EnableAutoTextBoxDrawing
 	ld a, $05
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 PushStartText: ; 1e960 (7:6960)
 	TX_FAR _PushStartText
@@ -28421,7 +28421,7 @@ Func_1e965: ; 1e965 (7:6965)
 	jr c, .asm_1e97b
 	ld a, $7
 .asm_1e97b
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 SaveOptionText: ; 1e97e (7:697e)
 	TX_FAR _SaveOptionText
@@ -28518,7 +28518,7 @@ Func_1eaa17: ; 1ea17 (7:6a17)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $31
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	db $08 ; asm
@@ -28707,7 +28707,7 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 Func_1eb60: ; 1eb60 (7:6b60)
 	call EnableAutoTextBoxDrawing
 	ld a, $30
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 MagazinesText: ; 1eb69 (7:6b69)
@@ -28728,12 +28728,12 @@ Func_1eb6e: ; 1eb6e (7:6b6e)
 	jr nz, .asm_1eb8b
 .asm_1eb86
 	ld a, $2d
-	jp Func_3ef5
+	jp PrintPredefTextID
 .asm_1eb8b
 	ld a, $1
 	ld [$cc3c], a
 	ld a, $2e
-	call Func_3ef5
+	call PrintPredefTextID
 	ld c, $20
 	call DelayFrames
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
@@ -28762,7 +28762,7 @@ Func_1eb6e: ; 1eb6e (7:6b6e)
 	ld a, $1
 	ld [$cc3c], a
 	ld a, $2f
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 BillsHouseMonitorText: ; 1ebdd (7:6bdd)
@@ -28860,7 +28860,7 @@ Func_1ecaf: ; 1ecaf (7:6caf)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $8
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 OakLabEmailText: ; 1ecbd (7:6cbd)
 	TX_FAR _OakLabEmailText
@@ -29688,7 +29688,7 @@ Func_2ff09 ; 2ff09 (b:7f09)
 .asm_2ff26
 	call EnableAutoTextBoxDrawing
 	ld a, b
-	call Func_3ef5
+	call PrintPredefTextID
 	xor a
 .asm_2ff2e
 	ld [$cd3d], a
@@ -31301,7 +31301,7 @@ Func_37e2d: ; 37e2d (d:7e2d)
 	push af
 	call EnableAutoTextBoxDrawing
 	pop af
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 GameCornerOutOfOrderText: ; 37e79 (d:7e79)
@@ -35904,7 +35904,7 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	ld [$d120], a
 	jp LoadScreenTilesFromBuffer1 ; restore saved screen and return??
 .safari1 ; safari first option??
-	ld a, $8
+	ld a, SAFARI_BALL
 	ld [$cf91], a
 	jr asm_3d05f
 
@@ -35922,7 +35922,7 @@ Func_3cfe8: ; 3cfe8 (f:4fe8)
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
 	jr nz, asm_3d00e
-	ld a, $15
+	ld a, SAFARI_BAIT
 	ld [$cf91], a
 	jr asm_3d05f
 asm_3d00e: ; 3d00e (f:500e)
@@ -36025,7 +36025,7 @@ Func_3d0ca: ; 3d0ca (f:50ca)
 	ld a, [W_BATTLETYPE] ; $d05a
 	cp $2
 	jr nz, Func_3d0e0
-	ld a, $16
+	ld a, SAFARI_ROCK
 	ld [$cf91], a
 	jp asm_3d05f
 
@@ -45720,7 +45720,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	push de
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Func_3ef5
+	call PrintPredefTextID
 	pop de
 	srl d
 	ld a, d
@@ -45748,7 +45748,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 .asm_526dc
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 SilphCoMapList: ; 526e3 (14:66e3)
 	db SILPH_CO_2F
@@ -46119,7 +46119,7 @@ Func_52996: ; 52996 (14:6996)
 	ld a, $1
 	ld [$cc3c], a
 	ld a, [wTrainerSpriteOffset]
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 TMNotebook: ; 529a4 (14:69a4)
 	TX_FAR TMNotebookText
@@ -46183,7 +46183,7 @@ ViridianSchoolNotebookText4: ; 52a03 (14:6a03)
 Func_52a08: ; 52a08 (14:6a08)
 	call EnableAutoTextBoxDrawing
 	ld a, $37
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 UnnamedText_52a10: ; 52a10 (14:6a10)
 	TX_FAR _UnnamedText_52a10
@@ -46192,7 +46192,7 @@ UnnamedText_52a10: ; 52a10 (14:6a10)
 Func_52a15: ; 52a15 (14:6a15)
 	call EnableAutoTextBoxDrawing
 	ld a, $38
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 UnnamedText_52a1d: ; 52a1d (14:6a1d)
 	TX_FAR _UnnamedText_52a1d
@@ -46201,7 +46201,7 @@ UnnamedText_52a1d: ; 52a1d (14:6a1d)
 Func_52a22: ; 52a22 (14:6a22)
 	call EnableAutoTextBoxDrawing
 	ld a, $36
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 FightingDojoText: ; 52a2a (14:6a2a)
 	TX_FAR _FightingDojoText
@@ -46213,7 +46213,7 @@ Func_52a2f: ; 52a2f (14:6a2f)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $27
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 IndigoPlateauHQText: ; 52a3d (14:6a3d)
 	TX_FAR _IndigoPlateauHQText
@@ -48061,7 +48061,7 @@ SetPartyMonTypes: ; 5db5e (17:5b5e)
 Func_5db79: ; 5db79 (17:5b79)
 	call EnableAutoTextBoxDrawing
 	ld a, $4
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 RedBedroomSNESText: ; 5db81 (17:5b81)
 	TX_FAR _RedBedroomSNESText
@@ -48070,7 +48070,7 @@ RedBedroomSNESText: ; 5db81 (17:5b81)
 Func_5db86: ; 5db86 (17:5b86)
 	call EnableAutoTextBoxDrawing
 	ld a, $3
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 Route15UpstairsLeftBinoculars: ; 5db8e (17:5b8e)
 	db $fc
@@ -48080,7 +48080,7 @@ Func_5db8f: ; 5db8f (17:5b8f)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $a ; text id Route15UpstairsBinocularsText
-	call Func_3ef5
+	call PrintPredefTextID
 	ld a, ARTICUNO
 	ld [$cf91], a
 	call PlayCry
@@ -48096,7 +48096,7 @@ AerodactylFossil: ; 5dbad (17:5bad)
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $9
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 AerodactylFossilText: ; 5dbbe (17:5bbe)
@@ -48109,7 +48109,7 @@ KabutopsFossil: ; 5bdc3 (17:5bc3)
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $b
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 KabutopsFossilText: ; 5dbd4 (17:5bd4)
@@ -48152,7 +48152,7 @@ Func_5dc1a: ; 5dc1a (17:5c1a)
 	ld a, $1
 	ld [$cc3c], a
 	ld a, [$cd3d]
-	call Func_3ef5
+	call PrintPredefTextID
 	ret
 
 LinkCableHelp: ; 5dc29 (17:5c29)
@@ -48369,7 +48369,7 @@ ViridianBlackboardFrozenText: ; 5ddea (17:5dea)
 Func_5ddef: ; 5ddef (17:5def)
 	call EnableAutoTextBoxDrawing
 	ld a, $26
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 VermilionGymTrashText: ; 5ddf7 (17:5df7)
 	TX_FAR _VermilionGymTrashText
@@ -48386,7 +48386,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	jr z, .ok
 
 	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 .ok
 	bit 1, a
@@ -48467,7 +48467,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)
 
 .done
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 GymTrashCans: ; 5de7d (17:5e7d)
 	db 2,  1,  3,  0,  0 ; 0
@@ -48855,8 +48855,8 @@ SilphCo11Blocks: ; 623c8 (18:63c8)
 	INCBIN "maps/silphco11.blk"
 
 GymStatues: ; 62419 (18:6419)
-; if in a gym and have the corresponding badge, a = $D and jp Func_3ef5
-; if in a gym and don’t have the corresponding badge, a = $C and jp Func_3ef5
+; if in a gym and have the corresponding badge, a = $D and jp PrintPredefTextID
+; if in a gym and don’t have the corresponding badge, a = $C and jp PrintPredefTextID
 ; else ret
 	call EnableAutoTextBoxDrawing
 	ld a, [$c109]
@@ -48882,7 +48882,7 @@ GymStatues: ; 62419 (18:6419)
 	jr z, .asm_6243f ; 0x6243b $2
 	ld a, $c
 .asm_6243f
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 .BadgeFlags: ; 62442 (18:6442)
 	db PEWTER_GYM,   %00000001
@@ -48924,7 +48924,7 @@ Func_6245d: ; 6245d (18:645d)
 	cp b
 	jr nz, .asm_62467
 	ld a, [hl]
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 ; format: db map id, 08, text id of PointerTable_3f22
 PokeCenterMapIDList: ; 6247e (18:647e)
@@ -49025,7 +49025,7 @@ TerminatorText_62508: ; 62508 (18:6508)
 Func_62509: ; 6509 (18:6509)
 	call EnableAutoTextBoxDrawing
 	ld a, $e
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 BookcaseText: ; 62511 (18:6511)
 	TX_FAR _BookcaseText
@@ -49039,9 +49039,9 @@ Func_62516: ; 62516 (18:6516)
 	ld a, $1
 	ld [$cf0c], a
 	ld a, $1f
-	jp Func_3ef5
+	jp PrintPredefTextID
 
-Unknown_62529: ; 62529 (18:6529)
+PredefText1f: ; 62529 (18:6529)
 	db $F9
 
 SECTION "bank19",ROMX,BANK[$19]
@@ -54785,7 +54785,7 @@ HiddenItems: ; 76688 (1d:6688)
 	ld [$d11e], a
 	call GetItemName
 	ld a, $24
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 INCLUDE "data/hidden_item_coords.asm"
 
@@ -54891,7 +54891,7 @@ HiddenCoins: ; 76799 (1d:6799)
 .RoomInCoinCase
 	ld a, $2b
 .done
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 INCLUDE "data/hidden_coins.asm"
 

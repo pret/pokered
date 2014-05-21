@@ -550,7 +550,7 @@ Func_21825:: ; 5824 (8:5825)
 	ld [$d12b], a
 	call EnableAutoTextBoxDrawing
 	ld a, $22
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 Func_21845:: ; 5845 (8:5845)
 	ld a, [$ffaa]
@@ -568,7 +568,7 @@ Func_21845:: ; 5845 (8:5845)
 	ld [$d12b], a
 	call EnableAutoTextBoxDrawing
 	ld a, $22
-	jp Func_3ef5
+	jp PrintPredefTextID
 
 JustAMomentText:: ; 21865 (8:5865)
 	TX_FAR _JustAMomentText
@@ -579,8 +579,8 @@ JustAMomentText:: ; 21865 (8:5865)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $23
-	jp Func_3ef5
+	jp PrintPredefTextID
 
-Unknown_21878:: ; 21878 (8:5878)
+PredefText23:: ; 21878 (8:5878)
 	db $FD
 

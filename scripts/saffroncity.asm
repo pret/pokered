@@ -74,7 +74,7 @@ SaffronCityText11: ; 50c67 (14:4c67)
 
 SaffronCityText12: ; 50c6c (14:4c6c)
 	TX_FAR _SaffronCityText12
-	db $15, "@"
+	db $15, "@" ; play PIDGEOT cry from TextCommandSounds
 
 SaffronCityText13: ; 50c72 (14:4c72)
 	TX_FAR _SaffronCityText13
