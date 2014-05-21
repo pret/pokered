@@ -1920,7 +1920,7 @@ _HisNameIsText:: ; 8a64a (22:664a)
 	cont "name is ", $53, "!"
 	prompt
 
-_SSAnne8AfterBattleText2:: ; 8a677 (22:6677)
+_WillBeTradedText:: ; 8a677 (22:6677)
 	TX_RAM $cd3f
 	text " and"
 	line "@"

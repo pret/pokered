@@ -30,7 +30,7 @@ _SSAnne8EndBattleText2:: ; 81582 (20:5582)
 	line "You rude child!"
 	prompt
 
-_SSAnne8Text_61a24:: ; 8159a (20:559a)
+_SSAnne8AfterBattleText2:: ; 8159a (20:559a)
 	text "I wish to be left"
 	line "alone! Get out!"
 	done

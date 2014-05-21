@@ -847,7 +847,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld hl, $d730
 	set 6, [hl]
 	ld a, $46
-	call Predef
+	call Predef ; DisplayStarterMonDex
 	ld hl, $d730
 	res 6, [hl]
 	call ReloadMapData

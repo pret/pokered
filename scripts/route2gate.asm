@@ -10,9 +10,9 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld a, [$d7c2]
 	bit 0, a
 	jr nz, .asm_6592c ; 0x5d5e1
-	ld a, $a
+	ld a, 10 ; pokemon needed
 	ldh [$db], a
-	ld a, $c8
+	ld a, HM_05 ; oak's aide reward
 	ldh [$dc], a
 	ld [$d11e], a
 	call GetItemName ; $2fcf
@@ -21,7 +21,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld bc, $000d
 	call CopyData
 	ld a, $62
-	call Predef
+	call Predef ; call oak's aide script
 	ldh a, [$db]
 	cp $1
 	jr nz, .asm_ad646 ; 0x5d606

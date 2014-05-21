@@ -793,9 +793,9 @@ NewBattle:: ; 0683 (0:0683)
 	ld a,[$d72e]
 	bit 4,a
 	jr nz,.noBattle
-	ld b, BANK(Func_3ef12)
-	ld hl, Func_3ef12
-	jp Bankswitch ; determines if a battle will occurr and runs the battle if so
+	ld b, BANK(InitBattle)
+	ld hl, InitBattle
+	jp Bankswitch ; determines if a battle will occur and runs the battle if so
 .noBattle
 	and a
 	ret
@@ -3169,7 +3169,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 .handleSwap
 	ld a,[wCurrentMenuItem]
 	ld [wWhichPokemon],a
-	callba Func_13613
+	callba SwitchPartyMon
 	jr HandlePartyMenuInput
 
 DrawPartyMenu:: ; 14d4 (0:14d4)
@@ -5220,7 +5220,7 @@ InitGame:: ; 1f54 (0:1f54)
 	call CleanLCD_OAM
 	ld a,%11100011
 	ld [rLCDC],a ; enable LCD
-	jp Func_42b7
+	jp SetDefaultNamesBeforeTitlescreen
 
 ; zeroes all VRAM
 ZeroVram:: ; 2004 (0:2004)
@@ -5645,7 +5645,7 @@ Func_2247:: ; 2247 (0:2247)
 
 Func_226e:: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
-	callab Func_4c05
+	callab PrintWaitingText
 	call Func_227f
 	jp LoadScreenTilesFromBuffer1
 
@@ -6878,7 +6878,7 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 
 RedisplayStartMenu:: ; 2adf (0:2adf)
 	callba DrawStartMenu
-	callba Func_c52f ; print Safari Zone info, if in Safari Zone
+	callba PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
 	call UpdateSprites ; move sprites
 .loop
 	call HandleMenuInput
@@ -8353,8 +8353,8 @@ Func_3442:: ; 3442 (0:3442)
 
 FuncTX_ItemStoragePC:: ; 3460 (0:3460)
 	call SaveScreenTilesToBuffer2
-	ld b, BANK(Func_78e6)
-	ld hl, Func_78e6
+	ld b, BANK(PlayerPC)
+	ld hl, PlayerPC
 	jr bankswitchAndContinue
 
 FuncTX_BillsPC:: ; 346a (0:346a)
@@ -10355,7 +10355,7 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 	xor a
 	jr .asm_3eec
 .asm_3edd
-	callba Func_fb50
+	callba PrintBookshelfText
 	ld a, [$ffdb]
 	and a
 	jr z, .asm_3eec
@@ -10574,7 +10574,7 @@ MewPicBack: ; 4205 (1:4205)
 
 INCLUDE "data/baseStats/mew.asm"
 
-Func_4277: ; 4277 (1:4277)
+PrintSafariZoneBattleText: ; 4277 (1:4277)
 	ld hl, $cce9
 	ld a, [hl]
 	and a
@@ -10616,7 +10616,7 @@ CopyFixedLengthText: ; 42b1 (1:42b1)
 	ld bc, $b
 	jp CopyData
 
-Func_42b7: ; 42b7 (1:42b7)
+SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld hl, NintenText
 	ld de, W_PLAYERNAME ; $d158
 	call CopyFixedLengthText
@@ -11264,7 +11264,7 @@ DMARoutine: ; 4bfb (1:4bfb)
 	jr nz, .waitLoop
 	ret
 
-Func_4c05: ; 4c05 (1:4c05)
+PrintWaitingText: ; 4c05 (1:4c05)
 	FuncCoord 3, 10 ; $c46b
 	ld hl, Coord
 	ld b, $1
@@ -12782,7 +12782,7 @@ Func_551c:
 	ld l, a
 	jp [hl]
 
-Func_5530
+Func_5530:
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
 	call Func_57f2
@@ -13146,7 +13146,7 @@ Func_5827:
 	inc c
 	jr .asm_5829 ; 0x5847 $e0
 
-Func_5849:
+CableClubTradeCenter:
 	ld c, $64
 	call DelayFrames
 	xor a
@@ -13178,7 +13178,7 @@ Func_5849:
 	ld a, [hl]
 	ld [$d11e], a
 	call GetMonName
-	ld hl, SSAnne8AfterBattleText2
+	ld hl, WillBeTradedText
 	ld bc, $c4b9
 	call TextCommandProcessor
 	call SaveScreenTilesToBuffer1
@@ -13343,8 +13343,8 @@ Func_5a18:
 	ld [$cc38], a
 	jp Func_551c
 
-SSAnne8AfterBattleText2: ; 5a24 (1:5a24)
-	TX_FAR _SSAnne8AfterBattleText2
+WillBeTradedText: ; 5a24 (1:5a24)
+	TX_FAR _WillBeTradedText
 	db "@"
 
 TradeCompleted:
@@ -13356,7 +13356,7 @@ TradeCanceled:
 
 PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw Func_5530
-	dw Func_5849
+	dw CableClubTradeCenter
 
 Func_5a5f: ; 5a5f (1:5a5f)
 	ld a, [W_ISLINKBATTLE] ; $d12b
@@ -13540,7 +13540,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [$D08A],a
 	jp .next0
 .next4
-	call Func_5db5
+	call ContinueGame
 	ld hl,$D126
 	set 5,[hl]
 .next6
@@ -13581,7 +13581,7 @@ Func_5bff: ; 5bff (1:5bff)
 	ld [$D355],a
 	ret
 
-Func_5c0a: ; 5c0a (1:5c0a)
+LinkMenu: ; 5c0a (1:5c0a)
 	xor a
 	ld [$d358], a
 	ld hl, $d72e
@@ -13789,7 +13789,7 @@ TradeCenterText: ; 5d97 (1:5d97)
 	db "COLOSSEUM",    $4e
 	db "CANCEL@"
 
-Func_5db5: ; 5db5 (1:5db5)
+ContinueGame: ; 5db5 (1:5db5)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	FuncCoord 4, 7 ; $c430
@@ -13819,7 +13819,7 @@ Func_5db5: ; 5db5 (1:5db5)
 	ld c, $1e
 	jp DelayFrames
 
-Func_5def: ; 5def (1:5def)
+PrintSaveScreenText: ; 5def (1:5def)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, $c3a4
@@ -13858,7 +13858,7 @@ Func_5e2f: ; 5e2f (1:5e2f)
 Func_5e42: ; 5e42 (1:5e42)
 	push hl
 	ld hl, wPokedexOwned ; $d2f7
-	ld b, $13
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	pop hl
 	ld de, $d11e
@@ -14173,7 +14173,7 @@ Func_609e: ; 609e (1:609e)
 	scf
 	ret
 
-Func_60ca: ; 60ca (1:60ca)
+SetDefaultNames: ; 60ca (1:60ca)
 	ld a, [$d358]
 	push af
 	ld a, [W_OPTIONS] ; $d355
@@ -14215,7 +14215,7 @@ OakSpeech: ; 6115 (1:6115)
 	call PlayMusic  ; plays music
 	call ClearScreen
 	call LoadTextBoxTilePatterns
-	call Func_60ca
+	call SetDefaultNames
 	ld a,$18
 	call Predef ; indirect jump to InitializePlayerData
 	ld hl,$D53A
@@ -14258,7 +14258,7 @@ OakSpeech: ; 6115 (1:6115)
 	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
-	call Func_695d ; brings up NewName/Red/etc menu
+	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
 	call GBFadeOut2
 	call ClearScreen
 	ld de,Rival1Pic
@@ -14267,7 +14267,7 @@ OakSpeech: ; 6115 (1:6115)
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	call Func_69a4
+	call LoadDefaultNamesRival
 
 Func_61bc: ; 61bc (1:61bc)
 	call GBFadeOut2
@@ -15109,10 +15109,10 @@ NameTextString: ; 694d (1:694d)
 NicknameTextString: ; 6953 (1:6953)
 	db "NICKNAME?@"
 
-Func_695d: ; 695d (1:695d)
+LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Func_6a12
 	ld de, DefaultNamesPlayer ; $6aa8
-	call Func_6a6c
+	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_697a
@@ -15142,10 +15142,10 @@ YourNameIsText: ; 699f (1:699f)
 	TX_FAR _YourNameIsText
 	db "@"
 
-Func_69a4: ; 69a4 (1:69a4)
+LoadDefaultNamesRival: ; 69a4 (1:69a4)
 	call Func_6a12 ; 0x69a4 call 0x6a12
 	ld de, DefaultNamesRival
-	call Func_6a6c
+	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
 	jr z, .asm_69c1
@@ -15266,7 +15266,7 @@ asm_6a19: ; 6a19 (1:6a19)
 	pop hl
 	ret
 
-Func_6a6c: ; 6a6c (1:6a6c)
+DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	push de
 	ld hl, wTileMap
 	ld b, $a
@@ -15791,7 +15791,7 @@ PokemartAnythingElseText: ; 6e3e (1:6e3e)
 	TX_FAR _PokemartAnythingElseText
 	db "@"
 
-Func_6e43: ; 6e43 (1:6e43)
+LearnMove: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon] ; $cf92
 	ld hl, W_PARTYMON1NAME ; $d2b5
@@ -15801,7 +15801,7 @@ Func_6e43: ; 6e43 (1:6e43)
 	ld bc, $b
 	call CopyData
 
-Func_6e5b: ; 6e5b (1:6e5b)
+DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld hl, W_PARTYMON1_MOVE1 ; $d173
 	ld bc, $2c
 	ld a, [wWhichPokemon] ; $cf92
@@ -15817,9 +15817,9 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	dec b
 	jr nz, .asm_6e6b
 	push de
-	call Func_6f07
+	call TryingToLearn
 	pop de
-	jp c, Func_6eda
+	jp c, AbandonLearning
 	push hl
 	push de
 	ld [$d11e], a
@@ -15848,12 +15848,12 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	ld [hl], a
 	ld a, [W_ISINBATTLE] ; $d057
 	and a
-	jp z, Func_6efe
+	jp z, PrintLearnedMove
 	ld a, [wWhichPokemon] ; $cf92
 	ld b, a
 	ld a, [wPlayerMonNumber] ; $cc2f
 	cp b
-	jp nz, Func_6efe
+	jp nz, PrintLearnedMove
 	ld h, d
 	ld l, e
 	ld de, W_PLAYERMONMOVES
@@ -15864,9 +15864,9 @@ Func_6e5b: ; 6e5b (1:6e5b)
 	ld de, W_PLAYERMONPP ; $d02d
 	ld bc, $4
 	call CopyData
-	jp Func_6efe
+	jp PrintLearnedMove
 
-Func_6eda: ; 6eda (1:6eda)
+AbandonLearning: ; 6eda (1:6eda)
 	ld hl, AbandonLearningText
 	call PrintText
 	FuncCoord 14, 7 ; $c43a
@@ -15877,19 +15877,19 @@ Func_6eda: ; 6eda (1:6eda)
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
-	jp nz, Func_6e5b
+	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
 	call PrintText
 	ld b, $0
 	ret
 
-Func_6efe: ; 6efe (1:6efe)
+PrintLearnedMove: ; 6efe (1:6efe)
 	ld hl, LearnedMove1Text
 	call PrintText
 	ld b, $1
 	ret
 
-Func_6f07: ; 6f07 (1:6f07)
+TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
@@ -16410,8 +16410,8 @@ Func_72a8: ; 72a8 (1:72a8)
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld hl, Func_5c0a
-	ld b, BANK(Func_5c0a)
+	ld hl, LinkMenu
+	ld b, BANK(LinkMenu)
 	jp Bankswitch
 
 CableClubNPCText7: ; 72b3 (1:72b3)
@@ -17296,7 +17296,7 @@ DreamWasEatenText: ; 78e1 (1:78e1)
 	TX_FAR _DreamWasEatenText
 	db "@"
 
-Func_78e6: ; 78e6 (1:78e6)
+PlayerPC: ; 78e6 (1:78e6)
 	ld hl, $d730
 	set 6, [hl]
 	ld a, ITEM_NAME
@@ -17711,7 +17711,7 @@ Func_7c18: ; 7c18 (1:7c18)
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, $d30a
+	ld hl, wPokedexSeen
 	ld a, $10
 	call Predef
 	ld a, $1
@@ -18281,7 +18281,7 @@ Func_c49d: ; c49d (3:449d)
 
 INCLUDE "data/warp_tile_ids.asm"
 
-Func_c52f: ; c52f (3:452f)
+PrintSafariZoneSteps: ; c52f (3:452f)
 	ld a, [W_CURMAP] ; $d35e
 	cp SAFARI_ZONE_EAST
 	ret c
@@ -18706,7 +18706,7 @@ Func_c8de: ; c8de (3:48de)
 
 INCLUDE "data/hide_show_data.asm"
 
-Func_cd99: ; cd99 (3:4d99)
+PrintUsedStrengthText: ; cd99 (3:4d99)
 	ld hl, $d728
 	set 0, [hl]
 	ld hl, UsedStrengthText
@@ -18726,7 +18726,7 @@ CanMoveBouldersText: ; cdbb (3:4dbb)
 	TX_FAR _CanMoveBouldersText
 	db "@"
 
-Func_cdc0: ; cdc0 (3:4dc0)
+CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
 	ld hl, $d728
 	set 1, [hl]
 	ld a, [$d732]
@@ -19355,7 +19355,7 @@ ItemUseBall: ; d687 (3:5687)
 	dec a
 	ld c,a
 	ld b,2
-	ld hl,$d2f7	;Dex_own_flags (pokemon)
+	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
 	ld a,$10
 	call Predef	;check Dex flag (own already or not)
 	ld a,c
@@ -22085,7 +22085,7 @@ Func_ef4e: ; ef4e (3:6f4e)
 	sub c
 	ret
 
-Func_ef54: ; ef54 (3:6f54)
+UsedCut: ; ef54 (3:6f54)
 	xor a
 	ld [$cd6a], a
 	ld a, [W_CURMAPTILESET] ; $d367
@@ -22928,7 +22928,7 @@ AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 	ret
 
 ; adds enemy mon [$cf91] (at position [$cf92] in enemy list) to own party
-; no known uses in the game
+; used in the cable club trade center
 _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, W_NUMINPARTY
 	ld a, [hl]
@@ -24042,7 +24042,7 @@ UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	ret
 
 ; prints text for bookshelves in buildings without sign events
-Func_fb50: ; fb50 (3:7b50)
+PrintBookshelfText: ; fb50 (3:7b50)
 	ld a, [$c109]
 	cp $4
 	jr nz, .asm_fb7f
@@ -24077,8 +24077,8 @@ Func_fb50: ; fb50 (3:7b50)
 .asm_fb7f
 	ld a, $ff
 	ld [$ffdb], a
-	ld b, BANK(Func_52673)
-	ld hl, Func_52673
+	ld b, BANK(PrintCardKeyText)
+	ld hl, PrintCardKeyText
 	jp Bankswitch
 
 ; format: db tileset id, bookshelf tile id, text id
@@ -25255,7 +25255,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld a,[W_NUMINPARTY]
 	cp a,2 ; is there more than one pokemon in the party?
 	jp c,StartMenu_Pokemon ; if not, no switching
-	call Func_13653
+	call SwitchPartyMon_Stats
 	ld a,$04 ; swap pokemon positions menu
 	ld [$d07d],a
 	call GoBackToPartyMenu
@@ -25330,7 +25330,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .surf
 	bit 4,a ; does the player have the Soul Badge?
 	jp z,.newBadgeRequired
-	callba Func_cdc0
+	callba CheckForForcedBikeSurf
 	ld hl,$d728
 	bit 1,[hl]
 	res 1,[hl]
@@ -25893,15 +25893,15 @@ StartMenu_Option: ; 135f6 (4:75f6)
 	call UpdateSprites
 	jp RedisplayStartMenu
 
-Func_13613: ; 13613 (4:7613)
-	call Func_13653
+SwitchPartyMon: ; 13613 (4:7613)
+	call SwitchPartyMon_Stats
 	ld a, [wWhichTrade] ; $cd3d
-	call Func_13625
+	call SwitchPartyMon_OAM
 	ld a, [wCurrentMenuItem] ; $cc26
-	call Func_13625
+	call SwitchPartyMon_OAM
 	jp RedrawPartyMenu_
 
-Func_13625: ; 13625 (4:7625)
+SwitchPartyMon_OAM: ; 13625 (4:7625)
 	push af
 	ld hl, wTileMap
 	ld bc, $28
@@ -25927,7 +25927,7 @@ Func_13625: ; 13625 (4:7625)
 	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	jp PlaySound
 
-Func_13653: ; 13653 (4:7653)
+SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [$cc35]
 	and a
 	jr nz, .asm_13661
@@ -27288,7 +27288,7 @@ PCMainMenu: ; 17e48 (5:7e48)
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
 	ld hl, AccessedMyPCText
 	call PrintText
-	callba Func_78e6
+	callba PlayerPC
 	jr ReloadMainMenu
 OaksPC: ; 17ec0 (5:7ec0)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
@@ -27300,7 +27300,7 @@ PKMNLeague: ; 17ed2 (5:7ed2)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound  ;XXX: play sound or stop music
 	call WaitForSoundToFinish  ;XXX: wait for sound to be done
-	callba Func_7657e
+	callba PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC: ; 17ee4 (5:7ee4)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
@@ -28412,8 +28412,8 @@ PushStartText: ; 1e960 (7:6960)
 
 Func_1e965: ; 1e965 (7:6965)
 	call EnableAutoTextBoxDrawing
-	ld hl, $d2f7
-	ld b, $13
+	ld hl, wPokedexOwned
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [$d11e]
 	cp $2
@@ -33261,7 +33261,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	call GetMoveName
 	call CopyStringToCF4B
 	ld a, $1b
-	call Predef ; indirect jump to Func_6e43 (6e43 (1:6e43))
+	call Predef ; indirect jump to LearnMove (6e43 (1:6e43))
 .asm_3afb1
 	ld a, [$cf91]
 	ld [$d11e], a
@@ -33887,8 +33887,8 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld b, $1
 	call GoPAL_SET
 	call ResetLCD_OAM
-	ld hl, Func_58d99
-	ld b, BANK(Func_58d99)
+	ld hl, PrintBeginningBattleText
+	ld b, BANK(PrintBeginningBattleText)
 	jp Bankswitch
 
 Func_3c0ff: ; 3c0ff (f:40ff)
@@ -33965,7 +33965,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	ld hl, OutOfSafariBallsText
 	jp PrintText
 .asm_3c17a
-	callab Func_4277
+	callab PrintSafariZoneBattleText
 	ld a, [$cffb]
 	add a
 	ld b, a
@@ -34597,7 +34597,7 @@ FaintEnemyPokemon ; 0x3c567
 .no_exp_all
 	xor a
 	ld [$cc5b], a
-	callab Func_5524f
+	callab GainExperience
 	pop af
 	ret z
 	ld a, $1
@@ -34611,8 +34611,8 @@ FaintEnemyPokemon ; 0x3c567
 	jr nz, .asm_3c62c
 	ld a, b
 	ld [W_PLAYERMONSALIVEFLAGS], a
-	ld hl, Func_5524f
-	ld b, BANK(Func_5524f)
+	ld hl, GainExperience
+	ld b, BANK(GainExperience)
 	jp Bankswitch
 
 EnemyMonFaintedText: ; 0x3c63e
@@ -35453,7 +35453,7 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	ret
 
 Func_3cc91: ; 3cc91 (f:4c91)
-	callab Func_58e59
+	callab SendOutMon
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	or [hl]
@@ -36133,7 +36133,7 @@ Func_3d119: ; 3d119 (f:5119)
 	call GBPalNormal
 
 Func_3d1ba: ; 3d1ba (f:51ba)
-	callab Func_58ed1
+	callab RetreatMon
 	ld c, $32
 	call DelayFrames
 	call Func_3ccfa
@@ -36755,7 +36755,7 @@ Func_3d605: ; 3d605 (f:5605)
 	ld a, b
 .asm_3d630
 	ld [$cc42], a
-	callab Func_4c05
+	callab PrintWaitingText
 .asm_3d63b
 	call Func_22c3
 	call DelayFrame
@@ -40359,7 +40359,7 @@ PlayMoveAnimation: ; 3ef07 (f:6f07)
 	call Delay3
 	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
-Func_3ef12: ; 3ef12 (f:6f12)
+InitBattle: ; 3ef12 (f:6f12)
 	ld a, [W_CUROPPONENT] ; $d059
 	and a
 	jr z, asm_3ef23
@@ -40392,7 +40392,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	callab Func_525af
 	ld a, [W_ENEMYMONID]
 	sub $c8
-	jp c, Func_3ef8b
+	jp c, InitWildBattle
 	ld [W_TRAINERCLASS], a ; $d031
 	call Func_3566
 	callab ReadTrainer
@@ -40413,7 +40413,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld [W_ISINBATTLE], a ; $d057
 	jp Func_3efeb
 
-Func_3ef8b: ; 3ef8b (f:6f8b)
+InitWildBattle: ; 3ef8b (f:6f8b)
 	ld a, $1
 	ld [W_ISINBATTLE], a ; $d057
 	call Func_3eb01
@@ -40429,7 +40429,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 	ld [hli], a   ; write sprite dimensions
 	ld bc, GhostPic ; $66b5
 	ld a, c
-	ld [hli], a   ; write  front sprite pointer
+	ld [hli], a   ; write front sprite pointer
 	ld [hl], b
 	ld hl, W_ENEMYMONNAME  ; set name to "GHOST"
 	ld a, "G"
@@ -40765,11 +40765,11 @@ SleepEffect: ; 3f1fc (f:71fc)
 	ld bc, W_ENEMYBATTSTATUS2 ; $d068
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	jp z, Func_3f20e
+	jp z, .asm_3f20e
 	ld de, W_PLAYERMONSTATUS ; $d018
 	ld bc, W_PLAYERBATTSTATUS2 ; $d063
 
-Func_3f20e: ; 3f20e (f:720e)
+.asm_3f20e
 	ld a, [bc]
 	bit 5, a ; does the mon need to recharge? (hyper beam)
 	res 5, a ; mon no longer needs to recharge
@@ -42427,7 +42427,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld hl,Coord
 	call DrawPokedexVerticalLine
 	ld hl,wPokedexSeen
-	ld b,19
+	ld b,wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld de,$d11e
 	FuncCoord 16,3
@@ -42435,7 +42435,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld bc,$0103
 	call PrintNumber ; print number of seen pokemon
 	ld hl,wPokedexOwned
-	ld b,19
+	ld b,wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld de,$d11e
 	FuncCoord 16,6
@@ -42459,7 +42459,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld de,PokedexMenuItemsText
 	call PlaceString
 ; find the highest pokedex number among the pokemon the player has seen
-	ld hl,wPokedexSeen + 18
+	ld hl,wPokedexSeenEnd - 1
 	ld b,153
 .maxSeenPokemonLoop
 	ld a,[hld]
@@ -42999,11 +42999,11 @@ PointerTable_4115f: ; 4115f (10:515f)
 	dw Func_413c6
 	dw Func_41181
 	dw Func_415c8
-	dw Func_415fe
-	dw Func_41611
-	dw Func_4162d
-	dw Func_4164c
-	dw Func_4165a
+	dw PrintTradeWentToText
+	dw PrintTradeForSendsText
+	dw PrintTradeFarewellText
+	dw PrintTradeTakeCareText
+	dw PrintTradeWillTradeText
 	dw Func_4123b
 	dw Func_415df
 	dw Func_41217
@@ -43252,7 +43252,7 @@ Func_41336: ; 41336 (10:5336)
 	ld hl, Coord
 	ld bc, $80c
 	call ClearScreenArea
-	jp Func_4164c
+	jp PrintTradeTakeCareText
 
 Func_41376: ; 41376 (10:5376)
 	call Func_41411
@@ -43623,7 +43623,7 @@ Func_415df: ; 415df (10:55df)
 	ld [rWX], a ; $ff4b
 	ret
 
-Func_415fe: ; 415fe (10:55fe)
+PrintTradeWentToText: ; 415fe (10:55fe)
 	ld hl, TradeWentToText
 	call PrintText
 	ld c, $c8
@@ -43634,7 +43634,7 @@ TradeWentToText: ; 4160c (10:560c)
 	TX_FAR _TradeWentToText
 	db "@"
 
-Func_41611: ; 41611 (10:5611)
+PrintTradeForSendsText: ; 41611 (10:5611)
 	ld hl, TradeForText
 	call PrintText
 	call Delay50
@@ -43650,7 +43650,7 @@ TradeSendsText: ; 41628 (10:5628)
 	TX_FAR _TradeSendsText
 	db "@"
 
-Func_4162d: ; 4162d (10:562d)
+PrintTradeFarewellText: ; 4162d (10:562d)
 	ld hl, TradeWavesFarewellText
 	call PrintText
 	call Delay50
@@ -43667,7 +43667,7 @@ TradeTransferredText: ; 41647 (10:5647)
 	TX_FAR _TradeTransferredText
 	db "@"
 
-Func_4164c: ; 4164c (10:564c)
+PrintTradeTakeCareText: ; 4164c (10:564c)
 	ld hl, TradeTakeCareText
 	call PrintText
 	jp Delay50
@@ -43676,7 +43676,7 @@ TradeTakeCareText: ; 41655 (10:5655)
 	TX_FAR _TradeTakeCareText
 	db "@"
 
-Func_4165a: ; 4165a (10:565a)
+PrintTradeWillTradeText: ; 4165a (10:565a)
 	ld hl, TradeWillTradeText
 	call PrintText
 	call Delay50
@@ -43704,7 +43704,7 @@ PlayIntro: ; 41682 (10:5682)
 	ld [H_CURRENTPRESSEDBUTTONS], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	call Func_4188a
+	call PlayShootingStar
 	call PlayIntroScene
 	call GBFadeOut2
 	xor a
@@ -43996,7 +43996,7 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
-Func_4188a: ; 4188a (10:588a)
+PlayShootingStar: ; 4188a (10:588a)
 	ld b, $c
 	call GoPAL_SET
 	callba Func_4538
@@ -44233,12 +44233,12 @@ INCLUDE "scripts/lavendertown.asm"
 
 DisplayDexRating: ; 44169 (11:4169)
 	ld hl, wPokedexSeen
-	ld b, $13
+	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld a, [$D11E] ; result of CountSetBits (seen count)
 	ld [$FFDB], a
 	ld hl, wPokedexOwned
-	ld b, $13
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [$D11E] ; result of CountSetBits (own count)
 	ld [$FFDC], a
@@ -45224,7 +45224,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld a, [$cf91]
 	ld [W_ENEMYMONID], a
 	callab Func_3eb01
-	call Func_4fe11
+	call SetPokedexOwnedFlag
 	callab Func_e7a4
 	ld hl, $cf4b
 	ld a, [$d5a0]
@@ -45251,7 +45251,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	and a
 	ret
 .asm_4fe01
-	call Func_4fe11
+	call SetPokedexOwnedFlag
 	call AddPokemonToParty
 	ld a, $1
 	ld [$cc3c], a
@@ -45259,7 +45259,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	scf
 	ret
 
-Func_4fe11: ; 4fe11 (13:7e11)
+SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld a, [$cf91]
 	push af
 	ld [$d11e], a
@@ -45388,7 +45388,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dw InitializePlayerData
 	dbw BANK(Func_c754),Func_c754
 	dbw BANK(Func_3af5b),Func_3af5b
-	dbw BANK(Func_6e43),Func_6e43
+	dbw BANK(LearnMove),LearnMove
 	dbw BANK(Func_f8a5),Func_f8a5; 1C, used in Pokémon Tower
 	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
@@ -45423,7 +45423,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dw CheckEngagePlayer
 	dbw BANK(IndexToPokedex),IndexToPokedex
 	dbw BANK(Predef3B),Predef3B; 3B display pic?
-	dbw BANK(Func_ef54),Func_ef54
+	dbw BANK(UsedCut),UsedCut
 	dbw BANK(ShowPokedexData),ShowPokedexData
 	dbw BANK(WriteMonMoves),WriteMonMoves
 	dbw BANK(SaveSAV),SaveSAV
@@ -45435,7 +45435,8 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dw TestMonMoveCompatibility
 	dbw BANK(TMToMove),TMToMove
 	dbw BANK(Func_71ddf),Func_71ddf
-	dbw BANK(Func_5c0dc),Func_5c0dc; 46 load dex screen
+	db BANK(DisplayStarterMonDex)
+	dw DisplayStarterMonDex; 46 load dex screen
 	db BANK(_AddPokemonToParty)
 	dw _AddPokemonToParty
 	dbw BANK(UpdateHPBar),UpdateHPBar
@@ -45453,7 +45454,8 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(LoadSAV),LoadSAV
 	dbw BANK(SaveSAVtoSRAM1),SaveSAVtoSRAM1
 	dbw BANK(Predef54),Predef54 ; 54 initiate trade
-	dbw BANK(Func_7405c),Func_7405c
+	db BANK(HallOfFameComputer)
+	dw HallOfFameComputer
 	dbw BANK(DisplayDexRating),DisplayDexRating
 	db $1E ; uses wrong bank number
 	dw _DoFlyOrTeleportAwayGraphics
@@ -45461,7 +45463,8 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dw Func_70510
 	dbw BANK(Func_c5be),Func_c5be
 	dbw BANK(Func_c60b),Func_c60b
-	dbw BANK(Func_cd99),Func_cd99
+	db BANK(PrintUsedStrengthText)
+	dw PrintUsedStrengthText
 	dbw BANK(PickupItem),PickupItem
 	dbw BANK(Func_27d98),Func_27d98
 	dbw BANK(LoadMovePPs),LoadMovePPs
@@ -45469,7 +45472,7 @@ DrawHPBarPredef: ; 4ff96 (13:7f96)
 	dbw BANK(Func_128ef),Func_128ef ; 5F draw HP bar
 	dbw BANK(Func_128f6),Func_128f6
 	dbw BANK(Func_1c9c6),Func_1c9c6
-	dbw BANK(Func_59035),Func_59035
+	dbw BANK(OaksAideScript),OaksAideScript
 
 SECTION "bank14",ROMX,BANK[$14]
 
@@ -45636,11 +45639,11 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	ld de, W_PLAYERMOVETYPE ; $cfd5
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	jp z, Func_52613
+	jp z, .asm_52613
 	ld hl, W_PLAYERMONSTATUS ; $d018
 	ld de, W_ENEMYMOVETYPE ; $cfcf
 
-Func_52613: ; 52613 (14:6613)
+.asm_52613
 	ld a, [hl]
 	and a
 	jr nz, .asm_52659
@@ -45685,7 +45688,7 @@ Func_52613: ; 52613 (14:6613)
 	ld b, BANK(PrintDoesntAffectText)
 	jp Bankswitch
 
-Func_52673: ; 52673 (14:6673)
+PrintCardKeyText: ; 52673 (14:6673)
 	ld hl, SilphCoMapList
 	ld a, [W_CURMAP]
 	ld b, a
@@ -46296,7 +46299,7 @@ DayCareMBlocks: ; 5522f (15:522f)
 FuchsiaHouse3Blocks: ; 5523f (15:523f)
 	INCBIN "maps/fuchsiahouse3.blk"
 
-Func_5524f: ; 5524f (15:524f)
+GainExperience: ; 5524f (15:524f)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	ret z
@@ -47243,58 +47246,58 @@ Route18Blocks: ; 58c9c (16:4c9c)
 
 	INCBIN "maps/unusedblocks58d7d.blk"
 
-Func_58d99: ; 58d99 (16:4d99)
+PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
-	jr nz, .asm_58dbe
+	jr nz, .trainerBattle
 	ld a, [W_CURMAP] ; $d35e
 	cp POKEMONTOWER_3
-	jr c, .asm_58daa
+	jr c, .notPokemonTower
 	cp LAVENDER_HOUSE_1
-	jr c, .asm_58dd8
-.asm_58daa
+	jr c, .pokemonTower
+.notPokemonTower
 	ld a, [W_ENEMYMONID]
 	call PlayCry
 	ld hl, WildMonAppearedText
 	ld a, [W_MOVEMISSED] ; $d05f
 	and a
-	jr z, .asm_58dbc
+	jr z, .notFishing
 	ld hl, HookedMonAttackedText
-.asm_58dbc
-	jr .asm_58dc9
-.asm_58dbe
-	call Func_58e29
+.notFishing
+	jr .wildBattle
+.trainerBattle
+	call .playSFX
 	ld c, $14
 	call DelayFrames
 	ld hl, TrainerWantsToFightText
-.asm_58dc9
+.wildBattle
 	push hl
 	callab DrawAllPokeballs
 	pop hl
 	call PrintText
-	jr asm_58e3a
-.asm_58dd8
+	jr .done
+.pokemonTower
 	ld b, SILPH_SCOPE
 	call IsItemInBag
 	ld a, [W_ENEMYMONID]
 	ld [$cf91], a
 	cp MAROWAK
-	jr z, .asm_58e03
+	jr z, .isMarowak
 	ld a, b
 	and a
-	jr z, .asm_58df5
+	jr z, .noSilphScope
 	callab Func_3eb01
-	jr .asm_58daa
-.asm_58df5
+	jr .notPokemonTower
+.noSilphScope
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, GhostCantBeIDdText
 	call PrintText
-	jr asm_58e3a
-.asm_58e03
+	jr .done
+.isMarowak
 	ld a, b
 	and a
-	jr z, .asm_58df5
+	jr z, .noSilphScope
 	ld hl, EnemyAppearedText
 	call PrintText
 	ld hl, UnveiledGhostText
@@ -47304,7 +47307,7 @@ Func_58d99: ; 58d99 (16:4d99)
 	ld hl, WildMonAppearedText
 	call PrintText
 
-Func_58e29: ; 58e29 (16:4e29)
+.playSFX
 	xor a
 	ld [$c0f1], a
 	ld a, $80
@@ -47312,7 +47315,7 @@ Func_58e29: ; 58e29 (16:4e29)
 	ld a, (SFX_08_77 - SFX_Headers_08) / 3
 	call PlaySound
 	jp WaitForSoundToFinish
-asm_58e3a: ; 58e3a (16:4e3a)
+.done
 	ret
 
 WildMonAppearedText: ; 58e3b (16:4e3b)
@@ -47339,12 +47342,12 @@ GhostCantBeIDdText: ; 58e54 (16:4e54)
 	TX_FAR _GhostCantBeIDdText
 	db "@"
 
-Func_58e59: ; 58e59 (16:4e59)
+SendOutMon: ; 58e59 (16:4e59)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
 	ld a, [hli]
 	or [hl]
 	ld hl, GoText
-	jr z, .asm_58eab
+	jr z, .printText
 	xor a
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
 	ld hl, W_ENEMYMONCURHP ; $cfe6
@@ -47371,37 +47374,37 @@ Func_58e59: ; 58e59 (16:4e59)
 	ld a, [$ff98]
 	ld hl, GoText
 	cp $46
-	jr nc, .asm_58eab
+	jr nc, .printText
 	ld hl, DoItText
 	cp $28
-	jr nc, .asm_58eab
+	jr nc, .printText
 	ld hl, GetmText
 	cp $a
-	jr nc, .asm_58eab
+	jr nc, .printText
 	ld hl, EnemysWeakText
-.asm_58eab
+.printText
 	jp PrintText
 
 GoText: ; 58eae (16:4eae)
 	TX_FAR _GoText
 	db $08 ; asm
-	jr Func_58ec8
+	jr PrintPlayerMon1Text
 
 DoItText: ; 58eb5 (16:4eb5)
 	TX_FAR _DoItText
 	db $08 ; asm
-	jr Func_58ec8
+	jr PrintPlayerMon1Text
 
 GetmText: ; 58ebc (16:4ebc)
 	TX_FAR _GetmText
 	db $08 ; asm
-	jr Func_58ec8
+	jr PrintPlayerMon1Text
 
 EnemysWeakText: ; 58ec3 (16:4ec3)
 	TX_FAR _EnemysWeakText
 	db $08 ; asm
 
-Func_58ec8
+PrintPlayerMon1Text:
 	ld hl, PlayerMon1Text
 	ret
 
@@ -47409,7 +47412,7 @@ PlayerMon1Text: ; 58ecc (16:4ecc)
 	TX_FAR _PlayerMon1Text
 	db "@"
 
-Func_58ed1: ; 58ed1 (16:4ed1)
+RetreatMon: ; 58ed1 (16:4ed1)
 	ld hl, PlayerMon2Text
 	jp PrintText
 
@@ -47462,19 +47465,19 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 EnoughText: ; 58f25 (16:4f25)
 	TX_FAR _EnoughText
 	db $08 ; asm
-	jr Func_58f3a
+	jr PrintComeBackText
 
 OKExclamationText: ; 58f2c (16:4f2c)
 	TX_FAR _OKExclamationText
 	db $08 ; asm
-	jr Func_58f3a
+	jr PrintComeBackText
 
 GoodText: ; 58f33 (16:4f33)
 	TX_FAR _GoodText
 	db $08 ; asm
-	jr Func_58f3a
+	jr PrintComeBackText
 
-Func_58f3a: ; 58f3a (16:4f3a)
+PrintComeBackText: ; 58f3a (16:4f3a)
 	ld hl, ComeBackText
 	ret
 
@@ -47637,15 +47640,15 @@ GrowthRateTable: ; 5901d (16:501d)
 	db $45,$00,$00,$00 ; fast:        4/5 n^3
 	db $54,$00,$00,$00 ; slow:        5/4 n^3
 
-Func_59035 ; 0x59035
+OaksAideScript ; 0x59035
 	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
 	ld a, [$cc26]
 	and a
 	jr nz, .asm_59086 ; 0x59042 $42
-	ld hl, $d2f7
-	ld b, $13
+	ld hl, wPokedexOwned
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [$d11e]
 	ld [$ffdd], a
@@ -47839,12 +47842,14 @@ INCLUDE "scripts/redshouse2f.asm"
 
 INCLUDE "data/mapObjects/redshouse2f.asm"
 
-Func_5c0dc: ; 5c0dc (17:40dc)
-	ld a, $4b
+; this function temporarily makes the starters (and Ivysaur) seen
+; so that the full Pokedex information gets displayed in Oak's lab
+DisplayStarterMonDex: ; 5c0dc (17:40dc)
+	ld a, %01001011 ; set starter flags
 	ld [wPokedexOwned], a ; $d2f7
 	ld a, $3d
 	call Predef ; indirect jump to ShowPokedexData (402d1 (10:42d1))
-	xor a
+	xor a ; unset starter flags
 	ld [wPokedexOwned], a ; $d2f7
 	ret
 
@@ -49408,7 +49413,7 @@ GameFreakShootingStarOAMData: ; 70180 (1c:4180)
 FallingStar: ; 70190 (1c:4190)
 	INCBIN "gfx/falling_star.2bpp"
 
-Func_701a0: ; 701a0 (1c:41a0)
+AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_70423
 	call ClearScreen
 	ld c, $64
@@ -53335,7 +53340,7 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	call CopyData
 	ld hl, $a5a3
 	ld de, wPokedexOwned ; $d2f7
-	ld bc, $26
+	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	and a
 	jp SAVGoodChecksum
@@ -53355,7 +53360,7 @@ Func_73701: ; 0x73701
 	jp LoadSAVCheckSum2
 
 SaveSAV: ;$770a
-	callba Func_5def ; LoadGameMenuInGame
+	callba PrintSaveScreenText
 	ld hl,WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
@@ -53480,7 +53485,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	call CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, $a5a3
-	ld bc, $26
+	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	ld hl, $a598
 	ld bc, $f8b
@@ -53936,8 +53941,8 @@ FuchsiaPokecenterBlocks: ; 74030 (1d:4030)
 CeruleanHouse2Blocks: ; 7404c (1d:404c)
 	INCBIN "maps/ceruleanhouse2.blk"
 
-Func_7405c: ; 7405c (1d:405c)
-	callba Func_701a0
+HallOfFameComputer: ; 7405c (1d:405c)
+	callba AnimateHallOfFame
 	call ClearScreen
 	ld c, $64
 	call DelayFrames
@@ -53970,7 +53975,7 @@ Func_7405c: ; 7405c (1d:405c)
 	xor a
 	ld [wWhichTrade], a ; $cd3d
 	ld [$cd3e], a
-	jp Func_7418e
+	jp Credits
 
 Func_740ba: ; 740ba (1d:40ba)
 	ld hl, DataTable_74160 ; $4160
@@ -54097,7 +54102,7 @@ FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	ld a, $7f ; blank white tile
 	jp FillMemory
 
-Func_7418e: ; 7418e (1d:418e)
+Credits: ; 7418e (1d:418e)
 	ld de, CreditsOrder ; $4243
 	push de
 .asm_74192
@@ -54635,7 +54640,7 @@ INCLUDE "data/mapObjects/agatha.asm"
 AgathaBlocks: ; 76560 (1d:6560)
 	INCBIN "maps/agatha.blk"
 
-Func_7657e: ; XXX: make better (has to do with the hall of fame on the PC) ; 0x7657e
+PKMNLeaguePC: ; 0x7657e
 	ld hl, AccessedHoFPCText
 	call PrintText
 	ld hl, $D730

@@ -21,9 +21,9 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, [$d7d6]
 	add a
 	jr c, .asm_4949b ; 0x49471 $28
-	ld a, $1e
+	ld a, 30 ; pokemon needed
 	ld [$ffdb], a
-	ld a, $47
+	ld a, ITEMFINDER ; oak's aide reward
 	ld [$ffdc], a
 	ld [$d11e], a
 	call GetItemName
@@ -33,7 +33,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld bc, $000d
 	call CopyData
 	ld a, $62
-	call Predef
+	call Predef ; call oak's aide script
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1 ; 0x49494 $b

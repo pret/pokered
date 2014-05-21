@@ -115,8 +115,8 @@ SSAnne8EndBattleText2: ; 61a1f (18:5a1f)
 	TX_FAR _SSAnne8EndBattleText2
 	db "@"
 
-SSAnne8Text_61a24: ; 61a24 (18:5a24)
-	TX_FAR _SSAnne8Text_61a24
+SSAnne8AfterBattleText2: ; 61a24 (18:5a24)
+	TX_FAR _SSAnne8AfterBattleText2
 	db "@"
 
 SSAnne8BattleText3: ; 61a29 (18:5a29)
