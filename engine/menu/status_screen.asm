@@ -1,0 +1,446 @@
+; Predef 0x37
+StatusScreen: ; 12953 (4:6953)
+	call LoadMonData
+	ld a, [$cc49]
+	cp $2 ; 2 means we're in a PC box
+	jr c, .DontRecalculate ; 0x1295b $14
+	ld a, [$cf9b]
+	ld [$cfb9], a
+	ld [$d127], a
+	ld hl, $cfa8
+	ld de, $cfba
+	ld b, $1
+	call CalcStats ; Recalculate stats
+.DontRecalculate
+	ld hl, $d72c
+	set 1, [hl]
+	ld a, $33
+	ld [$ff24], a ; Reduce the volume
+	call GBPalWhiteOutWithDelay3
+	call ClearScreen
+	call UpdateSprites ; move sprites (?)
+	call LoadHpBarAndStatusTilePatterns
+	ld de, BattleHudTiles1  ; $6080 ; source
+	ld hl, $96d0 ; dest
+	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
+	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
+	ld de, BattleHudTiles2 ; $6098
+	ld hl, $9780
+	ld bc, (BANK(BattleHudTiles2) << 8) + $01
+	call CopyVideoDataDouble ; │
+	ld de, BattleHudTiles3 ; $60b0
+	ld hl, $9760
+	ld bc, (BANK(BattleHudTiles3) << 8) + $02
+	call CopyVideoDataDouble ; ─┘
+	ld de, PTile
+	ld hl, $9720
+	ld bc,(BANK(PTile) << 8 | $01)
+	call CopyVideoDataDouble ; P (for PP), inline
+	ld a, [$ffd7]
+	push af
+	xor a
+	ld [$ffd7], a
+	FuncCoord 19,1
+	ld hl, Coord
+	ld bc, $060a
+	call DrawLineBox ; Draws the box around name, HP and status
+	ld de, $fffa
+	add hl, de
+	ld [hl], $f2 ; . after No ("." is a different one)
+	dec hl
+	ld [hl], "№"
+	FuncCoord 19,9
+	ld hl, Coord
+	ld bc, $0806
+	call DrawLineBox ; Draws the box around types, ID No. and OT
+	FuncCoord 10,9
+	ld hl, Coord
+	ld de, Type1Text
+	call PlaceString ; "TYPE1/"
+	FuncCoord 11,3
+	ld hl, Coord
+	PREDEF DrawHPBarPredef ; predef $5f
+	ld hl, $cf25
+	call GetHealthBarColor
+	ld b, $3
+	call GoPAL_SET ; SGB palette
+	FuncCoord 16,6
+	ld hl, Coord
+	ld de, $cf9c
+	call PrintStatusCondition
+	jr nz, .StatusWritten ; 0x129fc $9
+	FuncCoord 16,6
+	ld hl, Coord
+	ld de, OKText
+	call PlaceString ; "OK"
+.StatusWritten
+	FuncCoord 9,6
+	ld hl, Coord
+	ld de, StatusText
+	call PlaceString ; "STATUS/"
+	FuncCoord 14,2
+	ld hl, Coord
+	call PrintLevel ; Pokémon level
+	ld a, [$d0b8]
+	ld [$d11e], a
+	ld [$d0b5], a
+	ld a, $3a
+	call Predef
+	FuncCoord 3,7
+	ld hl, Coord
+	ld de, $d11e
+	ld bc, $8103 ; Zero-padded, 3
+	call PrintNumber ; Pokémon no.
+	FuncCoord 11,10
+	ld hl, Coord
+	ld a, $4b
+	call Predef ; Prints the type (?)
+	ld hl, NamePointers2 ; $6a9d
+	call .unk_12a7e
+	ld d, h
+	ld e, l
+	FuncCoord 9,1
+	ld hl, Coord
+	call PlaceString ; Pokémon name
+	ld hl, OTPointers ; $6a95
+	call .unk_12a7e
+	ld d, h
+	ld e, l
+	FuncCoord 12,16
+	ld hl, Coord
+	call PlaceString ; OT
+	FuncCoord 12,14
+	ld hl, Coord
+	ld de, $cfa4
+	ld bc, $8205 ; 5
+	call PrintNumber ; ID Number
+	ld d, $0
+	call PrintStatsBox
+	call Delay3
+	call GBPalNormal
+	FuncCoord 1, 0 ; $c3a1
+	ld hl, Coord
+	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
+	ld a, [$cf91]
+	call PlayCry ; play Pokémon cry
+	call WaitForTextScrollButtonPress ; wait for button
+	pop af
+	ld [$ffd7], a
+	ret
+.unk_12a7e ; 0x12a7e ; I don't know what this does, iterates over pointers?
+	ld a, [$cc49]
+	add a
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [$cc49]
+	cp $3
+	ret z
+	ld a, [wWhichPokemon]
+	jp SkipFixedLengthTextEntries
+
+OTPointers: ; 12a95 (4:6a95)
+	dw W_PARTYMON1OT
+	dw W_ENEMYMON1OT
+	dw W_BOXMON1OT
+	dw W_DAYCAREMONOT
+
+NamePointers2: ; 12a9d (4:6a9d)
+	dw W_PARTYMON1NAME
+	dw W_ENEMYMON1NAME
+	dw W_BOXMON1NAME
+	dw W_DAYCAREMONNAME
+
+Type1Text: ; 12aa5 (4:6aa5)
+	db "TYPE1/", $4e
+
+Type2Text: ; 12aac (4:6aac)
+	db "TYPE2/", $4e
+
+IDNoText: ; 12ab3 (4:6ab3)
+	db $73, "№", "/", $4e
+
+OTText: ; 12ab7 (4:6ab7)
+	db "OT/", $4e, "@"
+
+StatusText: ; 12abc (4:6abc)
+	db "STATUS/@"
+
+OKText: ; 12ac4 (4:6ac4)
+	db "OK@"
+
+; Draws a line starting from hl high b and wide c
+DrawLineBox ; 0x12ac7
+	ld de, $0014 ; New line
+.PrintVerticalLine
+	ld [hl], $78 ; │
+	add hl, de
+	dec b
+	jr nz, .PrintVerticalLine ; 0x12ace $fa
+	ld [hl], $77 ; ┘
+	dec hl
+.PrintHorizLine
+	ld [hl], $76 ; ─
+	dec hl
+	dec c
+	jr nz, .PrintHorizLine ; 0x12ad7 $fa
+	ld [hl], $6f ; ← (halfarrow ending)
+	ret
+
+PTile: ; 12adc (4:6adc) ; This is a single 1bpp "P" tile
+	INCBIN "gfx/p_tile.1bpp"
+
+PrintStatsBox: ; 12ae4 (4:6ae4)
+	ld a, d
+	and a ; a is 0 from the status screen
+	jr nz, .DifferentBox ; 0x12ae6 $12
+	FuncCoord 0,8
+	ld hl, Coord
+	ld b, $8
+	ld c, $8
+	call TextBoxBorder ; Draws the box
+	FuncCoord 1,9 ; Start printing stats from here
+	ld hl, Coord
+	ld bc, $0019 ; Number offset
+	jr .PrintStats ; 0x12af8 $10
+.DifferentBox
+	FuncCoord 9,2
+	ld hl, Coord
+	ld b, $8
+	ld c, $9
+	call TextBoxBorder
+	FuncCoord 11, 3 ; $c3e7
+	ld hl, Coord
+	ld bc, $0018
+.PrintStats
+	push bc
+	push hl
+	ld de, StatsText
+	call PlaceString
+	pop hl
+	pop bc
+	add hl, bc
+	ld de, $cfbc
+	ld bc, $0203 ; three digits
+	call PrintStat
+	ld de, $cfbe
+	call PrintStat
+	ld de, $cfc0
+	call PrintStat
+	ld de, $cfc2
+	jp PrintNumber
+PrintStat
+	push hl
+	call PrintNumber
+	pop hl
+	ld de, $0028
+	add hl, de
+	ret
+
+StatsText: ; 12b3a (4:6b3a)
+	db   "ATTACK"
+	next "DEFENSE"
+	next "SPEED"
+	next "SPECIAL@"
+
+StatusScreen2: ; 12b57 (4:6b57)
+	ld a, [$ffd7]
+	push af
+	xor a
+	ld [$ffd7], a
+	ld [$ffba], a
+	ld bc, $0005
+	ld hl, $d0dc
+	call FillMemory
+	ld hl, $cfa0
+	ld de, $d0dc
+	ld bc, $0004
+	call CopyData
+	callab Func_39b87
+	FuncCoord 9,2
+	ld hl, Coord
+	ld bc, $050a
+	call ClearScreenArea ; Clear under name
+	FuncCoord 19, 3 ; $c3ef
+	ld hl, Coord
+	ld [hl], $78
+	FuncCoord 0,8
+	ld hl, Coord
+	ld b, $8
+	ld c, $12
+	call TextBoxBorder ; Draw move container
+	FuncCoord 2,9
+	ld hl, Coord
+	ld de, $d0e1
+	call PlaceString ; Print moves
+	ld a, [$cd6c]
+	inc a
+	ld c, a
+	ld a, $4
+	sub c
+	ld b, a ; Number of moves ?
+	FuncCoord 11,10
+	ld hl, Coord
+	ld de, $0028
+	ld a, $72
+	call Func_12ccb ; Print "PP"
+	ld a, b
+	and a
+	jr z, .InitPP ; 0x12bb3 $6
+	ld c, a
+	ld a, "-"
+	call Func_12ccb ; Fill the rest with --
+.InitPP ; 12bbb
+	ld hl, $cfa0
+	FuncCoord 14,10
+	ld de, Coord
+	ld b, $0
+.PrintPP ; 12bc3
+	ld a, [hli]
+	and a
+	jr z, .PPDone ; 0x12bc5 $4a
+	push bc
+	push hl
+	push de
+	ld hl, wCurrentMenuItem
+	ld a, [hl]
+	push af
+	ld a, b
+	ld [hl], a
+	push hl
+	callab GetMaxPP
+	pop hl
+	pop af
+	ld [hl], a
+	pop de
+	pop hl
+	push hl
+	ld bc, $0014
+	add hl, bc
+	ld a, [hl]
+	and $3f
+	ld [$cd71], a
+	ld h, d
+	ld l, e
+	push hl
+	ld de, $cd71
+	ld bc, $0102
+	call PrintNumber
+	ld a, "/"
+	ld [hli], a
+	ld de, $d11e
+	ld bc, $0102
+	call PrintNumber
+	pop hl
+	ld de, $0028
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+	inc b
+	ld a, b
+	cp $4
+	jr nz, .PrintPP ; 0x12c0f $b2
+.PPDone
+	FuncCoord 9,3
+	ld hl, Coord
+	ld de, EXPPointsText
+	call PlaceString
+	ld a, [$cfb9] ; level
+	push af
+	cp 100
+	jr z, .Level100 ; 0x12c20 $4
+	inc a
+	ld [$cfb9], a ; Increase temporarily if not 100
+.Level100
+	FuncCoord 14,6
+	ld hl, Coord
+	ld [hl], $70 ; 1-tile "to"
+	inc hl
+	inc hl
+	call PrintLevel
+	pop af
+	ld [$cfb9], a
+	ld de, $cfa6
+	FuncCoord 12,4
+	ld hl, Coord
+	ld bc, $0307
+	call PrintNumber ; exp
+	call .asm_12c86
+	ld de, $cfa6
+	FuncCoord 7,6
+	ld hl, Coord
+	ld bc, $0307
+	call PrintNumber
+	FuncCoord 9,0
+	ld hl, Coord
+	call Func_12cc3
+	FuncCoord 9,1
+	ld hl, Coord
+	call Func_12cc3
+	ld a, [$d0b8]
+	ld [$d11e], a
+	call GetMonName
+	FuncCoord 9,1
+	ld hl, Coord
+	call PlaceString
+	ld a, $1
+	ld [$ffba], a
+	call Delay3
+	call WaitForTextScrollButtonPress ; wait for button
+	pop af
+	ld [$ffd7], a
+	ld hl, $d72c
+	res 1, [hl]
+	ld a, $77
+	ld [$ff24], a
+	call GBPalWhiteOut
+	jp ClearScreen
+.asm_12c86 ; This does some magic with lvl/exp?
+	ld a, [$cfb9] ; Load level
+	cp $64
+	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
+	inc a
+	ld d, a
+	callab CalcExperience
+	ld hl, $cfa8
+	ld a, [$ff98]
+	sub [hl]
+	ld [hld], a
+	ld a, [$ff97]
+	sbc [hl]
+	ld [hld], a
+	ld a, [$ff96]
+	sbc [hl]
+	ld [hld], a
+	ret
+.asm_12ca7
+	ld hl, $cfa6
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ret
+
+EXPPointsText: ; 12caf (4:6caf)
+	db "EXP POINTS", $4e
+
+LevelUpText: ; 12cba (4:6cba)
+	db "LEVEL UP@"
+
+Func_12cc3: ; 12cc3 (4:6cc3)
+	ld bc, $a
+	ld a, $7f
+	jp FillMemory
+
+Func_12ccb: ; 12ccb (4:6ccb)
+	ld [hli], a
+	ld [hld], a
+	add hl, de
+	dec c
+	jr nz, Func_12ccb
+	ret

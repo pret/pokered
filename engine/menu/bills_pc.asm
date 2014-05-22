@@ -1,4 +1,3 @@
-
 Func_213c8:: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba

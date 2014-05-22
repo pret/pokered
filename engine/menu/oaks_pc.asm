@@ -1,0 +1,28 @@
+OpenOaksPC: ; 1e915 (7:6915)
+	call SaveScreenTilesToBuffer2
+	ld hl, AccessedOaksPCText
+	call PrintText
+	ld hl, GetDexRatedText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem] ; $cc26
+	and a
+	jr nz, .asm_1e932
+	ld a, $56
+	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
+.asm_1e932
+	ld hl, ClosedOaksPCText
+	call PrintText
+	jp LoadScreenTilesFromBuffer2
+
+GetDexRatedText: ; 1e93b (7:693b)
+	TX_FAR _GetDexRatedText
+	db "@"
+
+ClosedOaksPCText: ; 1e940 (7:6940)
+	TX_FAR _ClosedOaksPCText
+	db $0d,"@"
+
+AccessedOaksPCText: ; 1e946 (7:6946)
+	TX_FAR _AccessedOaksPCText
+	db "@"

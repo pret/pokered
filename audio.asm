@@ -515,7 +515,7 @@ Unknown_213c4: ; 213c4 (8:53c4)
 	db $00,$00,$00,$80
 
 
-INCLUDE "menu/pc.asm"
+INCLUDE "engine/menu/bills_pc.asm"
 
 INCLUDE "audio/engine_2.asm"
 
