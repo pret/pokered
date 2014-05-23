@@ -156,7 +156,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
 	ld a, [$d11e]
 	dec a
-	ld hl, BulbasaurBaseStats ; $43de
+	ld hl, BaseStats
 	ld bc, $1c
 	call AddNTimes
 	ld de, W_MONHEADER

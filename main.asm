@@ -3028,7 +3028,7 @@ Func_152e:: ; 152e (0:152e)
 GetMonHeader:: ; 1537 (0:1537)
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,BANK(BulbasaurBaseStats)
+	ld a,BANK(BaseStats)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	push bc
@@ -3056,7 +3056,7 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld a,[$d11e]
 	dec a
 	ld bc,28
-	ld hl,BulbasaurBaseStats
+	ld hl,BaseStats
 	call AddNTimes
 	ld de,W_MONHEADER
 	ld bc,28
@@ -17121,6 +17121,7 @@ SECTION "bankE",ROMX,BANK[$E]
 
 INCLUDE "data/moves.asm"
 
+BaseStats:
 INCLUDE "data/base_stats.asm"
 
 INCLUDE "data/cries.asm"
