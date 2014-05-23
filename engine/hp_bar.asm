@@ -1,5 +1,5 @@
 UpdateHPBar_LoadRegisters: ; f9dc (3:79dc)
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 ; calculates bc * 48 / de, the number of pixels the HP bar has
 ; the result is always at least 1
@@ -72,7 +72,7 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	ld a, $1
 .HPdecrease
 	ld [wHPBarDelta], a
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, [wHPBarNewHP]
 	ld e, a
 	ld a, [wHPBarNewHP+1]

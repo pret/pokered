@@ -16,12 +16,12 @@ Func_128ea: ; 128ea (4:68ea)
 	ret
 
 Func_128ef: ; 128ef (4:68ef)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, $1
 	jr asm_128fb
 
 Func_128f6: ; 128f6 (4:68f6)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, $2
 asm_128fb: ; 128fb (4:68fb)
 	ld [wListMenuID], a ; $cf94

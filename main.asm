@@ -926,103 +926,118 @@ MapEntryAfterBattle:: ; 091f (0:091f)
 	jp z,GBFadeIn2
 	jp LoadGBPal
 
-; for when all the player's pokemon faint
-; other code prints the "you blacked out" message before this is called
-HandleBlackOut:: ; 0931 (0:0931)
+HandleBlackOut::
+; For when all the player's pokemon faint.
+; Does not print the "blacked out" message.
+
 	call GBFadeIn1
-	ld a,$08
+	ld a, $08
 	call StopMusic
-	ld hl,$d72e
-	res 5,[hl]
-	ld a,Bank(Func_40b0) ; Bank(Func_40b0) and Bank(Func_62ce) need to be equal.
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld hl, $d72e
+	res 5, [hl]
+	ld a, Bank(Func_40b0) ; Bank(Func_40b0) and Bank(Func_62ce) need to be equal.
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
 	call Func_40b0
 	call Func_62ce
 	call Func_2312
 	jp Func_5d5f
 
-StopMusic:: ; 0951 (0:0951)
-	ld [wMusicHeaderPointer],a
-	ld a,$ff
-	ld [$c0ee],a
+StopMusic::
+	ld [wMusicHeaderPointer], a
+	ld a, $ff
+	ld [$c0ee], a
 	call PlaySound
-.waitLoop
-	ld a,[wMusicHeaderPointer]
+.wait
+	ld a, [wMusicHeaderPointer]
 	and a
-	jr nz,.waitLoop
+	jr nz, .wait
 	jp StopAllSounds
 
-HandleFlyOrTeleportAway:: ; 0965 (0:0965)
-	call UpdateSprites ; move sprites
+HandleFlyOrTeleportAway::
+	call UpdateSprites
 	call Delay3
 	xor a
-	ld [$cf0b],a
-	ld [$d700],a
-	ld [$d057],a
-	ld [$d35d],a
-	ld hl,$d732
-	set 2,[hl]
-	res 5,[hl]
+	ld [$cf0b], a
+	ld [$d700], a
+	ld [$d057], a
+	ld [$d35d], a
+	ld hl, $d732
+	set 2, [hl]
+	res 5, [hl]
 	call DoFlyOrTeleportAwayGraphics
-	ld a,Bank(Func_62ce)
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld a, Bank(Func_62ce)
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
 	call Func_62ce
 	jp Func_5d5f
 
-; function that calls a function to do fly away or teleport away graphics
-DoFlyOrTeleportAwayGraphics:: ; 098f (0:098f)
+DoFlyOrTeleportAwayGraphics::
 	ld b, BANK(_DoFlyOrTeleportAwayGraphics)
 	ld hl, _DoFlyOrTeleportAwayGraphics
 	jp Bankswitch
 
-; load sprite graphics based on whether the player is standing, biking, or surfing
-LoadPlayerSpriteGraphics:: ; 0997 (0:0997)
-	ld a,[$d700]
+LoadPlayerSpriteGraphics::
+; Load sprite graphics based on whether the player is standing, biking, or surfing.
+
+	; 0: standing
+	; 1: biking
+	; 2: surfing
+
+	ld a, [$d700]
 	dec a
-	jr z,.ridingBike
-	ld a,[$ffd7]
+	jr z, .ridingBike
+
+	ld a, [$ffd7]
 	and a
-	jr nz,.determineGraphics
+	jr nz, .determineGraphics
 	jr .startWalking
+
 .ridingBike
+	; If the bike can't be used,
+	; start walking instead.
 	call IsBikeRidingAllowed
-	jr c,.determineGraphics ; don't start walking if bike riding is allowed
+	jr c, .determineGraphics
+
 .startWalking
 	xor a
-	ld [$d700],a
-	ld [$d11a],a
-	jp LoadWalkingPlayerSpriteGraphics
-.determineGraphics
-	ld a,[$d700]
-	and a
-	jp z,LoadWalkingPlayerSpriteGraphics
-	dec a
-	jp z,LoadBikePlayerSpriteGraphics
-	dec a
-	jp z,LoadSurfingPlayerSpriteGraphics
+	ld [$d700], a
+	ld [$d11a], a
 	jp LoadWalkingPlayerSpriteGraphics
 
-; function to check if bike riding is allowed on the current map
-; sets carry if bike is allowed, clears carry otherwise
-IsBikeRidingAllowed:: ; 09c5 (0:09c5)
-	ld a,[W_CURMAP]
-	cp a,ROUTE_23
-	jr z,.allowed
-	cp a,INDIGO_PLATEAU
-	jr z,.allowed
-	ld a,[W_CURMAPTILESET]
-	ld b,a
-	ld hl,BikeRidingTilesets
+.determineGraphics
+	ld a, [$d700]
+	and a
+	jp z, LoadWalkingPlayerSpriteGraphics
+	dec a
+	jp z, LoadBikePlayerSpriteGraphics
+	dec a
+	jp z, LoadSurfingPlayerSpriteGraphics
+	jp LoadWalkingPlayerSpriteGraphics
+
+IsBikeRidingAllowed::
+; The bike can be used on Route 23 and Indigo Plateau,
+; or maps with tilesets in BikeRidingTilesets.
+; Return carry if biking is allowed.
+
+	ld a, [W_CURMAP]
+	cp ROUTE_23
+	jr z, .allowed
+	cp INDIGO_PLATEAU
+	jr z, .allowed
+
+	ld a, [W_CURMAPTILESET]
+	ld b, a
+	ld hl, BikeRidingTilesets
 .loop
-	ld a,[hli]
+	ld a, [hli]
 	cp b
-	jr z,.allowed
+	jr z, .allowed
 	inc a
-	jr nz,.loop
+	jr nz, .loop
 	and a
 	ret
+
 .allowed
 	scf
 	ret
@@ -2584,14 +2599,11 @@ Func_12e7:: ; 12e7 (0:12e7)
 	res 0, [hl]
 	ret
 
-;appears to be called twice inside function $C38B
-;if $d700,$d11a == $1 then biking
-;if $d700,$d11a == $2 then surfing
 ForceBikeOrSurf:: ; 12ed (0:12ed)
-	ld b,5 ;graphics bank 5
-	ld hl,LoadPlayerSpriteGraphics ;load player sprite graphics
-	call Bankswitch ;loads bank 5 and then calls LoadPlayerSpriteGraphics
-	jp Func_2307 ;update map/player state?
+	ld b, BANK(RedSprite)
+	ld hl, LoadPlayerSpriteGraphics
+	call Bankswitch
+	jp Func_2307 ; update map/player state?
 
 ; this is used to check if the player wants to interrupt the opening sequence at several points
 ; XXX is this used anywhere else?
@@ -2626,7 +2638,7 @@ LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld b,a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$cf12]
+	ld a,[wPredefParentBank]
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld a,b
@@ -9804,30 +9816,33 @@ CallFunctionInTable:: ; 3d97 (0:3d97)
 	pop hl
 	ret
 
-; searches an array at hl for the value in a.
-; skips (de − 1) bytes between reads, so to check every byte, de should be 1.
-; if found, returns count in b and sets carry.
-IsInArray:: ; 3dab (0:3dab)
-	ld b,0
-	; fall through
 
-IsInArrayCummulativeCount:: ; 3dad (0:3dad)
-	ld c,a
+IsInArray::
+; Search an array at hl for the value in a.
+; Entry size is de bytes.
+; Return count b and carry if found.
+	ld b, 0
+
+IsInRestOfArray::
+	ld c, a
 .loop
-	ld a,[hl]
-	cp a,$FF
-	jr z,.NotInArray
+	ld a, [hl]
+	cp -1
+	jr z, .notfound
 	cp c
-	jr z,.InArray
+	jr z, .found
 	inc b
-	add hl,de
+	add hl, de
 	jr .loop
-.NotInArray
+
+.notfound
 	and a
 	ret
-.InArray
+
+.found
 	scf
 	ret
+
 
 Func_3dbe:: ; 3dbe (0:3dbe)
 	call CleanLCD_OAM
@@ -9839,30 +9854,32 @@ Func_3dbe:: ; 3dbe (0:3dbe)
 	call GoPAL_SET_CF1C
 	jr Delay3
 
-; calls GBPalWhiteOut and then Delay3
-GBPalWhiteOutWithDelay3:: ; 3dd4 (0:3dd4)
+
+GBPalWhiteOutWithDelay3::
 	call GBPalWhiteOut
 
-Delay3:: ; 3dd7 (0:3dd7)
-; call Delay with a parameter of 3
-	ld c,3
+Delay3::
+; The bg map is updated each frame in thirds.
+; Wait three frames to let the bg map fully update.
+	ld c, 3
 	jp DelayFrames
 
-; resets BGP and OBP0 to their usual colors
-GBPalNormal:: ; 3ddc (0:3ddc)
-	ld a,%11100100
-	ld [rBGP],a
-	ld a,%11010000
-	ld [rOBP0],a
+GBPalNormal::
+; Reset BGP and OBP0.
+	ld a, %11100100 ; 3210
+	ld [rBGP], a
+	ld a, %11010000 ; 3100
+	ld [rOBP0], a
 	ret
 
-; makes all palette colors white
-GBPalWhiteOut:: ; 3de5 (0:3de5)
+GBPalWhiteOut::
+; White out all palettes.
 	xor a
 	ld [rBGP],a
 	ld [rOBP0],a
 	ld [rOBP1],a
 	ret
+
 
 GoPAL_SET_CF1C:: ; 3ded (0:3ded)
 	ld b,$ff
@@ -9945,53 +9962,58 @@ GenRandom:: ; 3e5c (0:3e5c)
 	pop hl
 	ret
 
-Predef:: ; 3e6d (0:3e6d)
-; runs a predefined ASM command, where the command ID is read from $D0B7
-; $3E6D grabs the ath pointer from PredefPointers and executes it
 
-	ld [$CC4E],a ; save the predef routine's ID for later
+Predef::
+; Call predefined function a.
+; To preserve other registers, have the
+; destination call GetPredefRegisters.
 
-	ld a,[H_LOADEDROMBANK]
-	ld [$CF12],a
+	; Save the predef id for GetPredefPointer.
+	ld [wPredefID], a
 
-	; save bank and call 13:7E49
+	; A hack for LoadDestinationWarpPosition.
+	; See Func_c754 (predef $19).
+	ld a, [H_LOADEDROMBANK]
+	ld [wPredefParentBank], a
+
 	push af
-	ld a,BANK(GetPredefPointer)
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld a, BANK(GetPredefPointer)
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
+
 	call GetPredefPointer
 
-	; call the predef function
-	; ($D0B7 has the bank of the predef routine)
-	ld a,[$D0B7]
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	ld de,.Return
+	ld a, [wPredefBank]
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
+
+	ld de, .done
 	push de
 	jp [hl]
-	; after the predefined function finishes it returns here
-.Return
+.done
+
 	pop af
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [H_LOADEDROMBANK], a
+	ld [$2000], a
 	ret
 
-;loads hl from cc4f, de from cc51, and bc from cc53
-
-Load16BitRegisters:: ; 3e94 (0:3e94)
-	ld a, [$cc4f]
+GetPredefRegisters::
+; Restore the contents of register pairs
+; when GetPredefPointer was called.
+	ld a, [wPredefRegisters + 0]
 	ld h, a
-	ld a, [$cc50]
+	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [$cc51]
+	ld a, [wPredefRegisters + 2]
 	ld d, a
-	ld a, [$cc52]
+	ld a, [wPredefRegisters + 3]
 	ld e, a
-	ld a, [$cc53]
+	ld a, [wPredefRegisters + 4]
 	ld b, a
-	ld a, [$cc54]
+	ld a, [wPredefRegisters + 5]
 	ld c, a
 	ret
+
 
 Func_3ead:: ; 3ead (0:3ead)
 	ld b, BANK(CinnabarGymQuiz_1eb0a)
@@ -13514,7 +13536,7 @@ SafariBallText: ; c57e (3:457e)
 	db "BALL×× @"
 
 Func_c586: ; c586 (3:4586)
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 Func_c589: ; c589 (3:4589)
 	ld a, [W_YCOORD] ; $d361
@@ -13814,7 +13836,7 @@ Func_c69c: ; c69c (3:469c)
 	ret
 
 Func_c754: ; c754 (3:4754)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	ld d, $0
 	ld a, [W_CURMAPTILESET] ; $d367
@@ -14265,7 +14287,7 @@ GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
 	INCBIN "gfx/badges.w16.2bpp"
 
 Func_ee9e: ; ee9e (3:6e9e)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld hl, $c6e8
 	ld a, [W_CURMAPWIDTH] ; $d369
 	add $6
@@ -14942,7 +14964,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ret
 
 LoadMovePPs: ; f473 (3:7473)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	; fallthrough
 AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 	ld b, $4
@@ -15216,7 +15238,7 @@ Func_f51e: ; f51e (3:751e)
 ; hl: base address
 ; c: bit index
 HandleBitArray: ; f666 (3:7666)
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 _HandleBitArray: ; f669 (3:7669)
 	push hl
@@ -15359,7 +15381,7 @@ HealParty: ; f6a5 (3:76a5)
 ; predef $d
 ; predef $e
 Func_f71e: ; f71e (3:771e)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	xor a
 	ld [$ffa5], a
 	ld [$ffa6], a
@@ -15512,7 +15534,7 @@ Func_f800: ; f800 (3:7800)
 	jr .asm_f803
 
 Func_f81d: ; f81d (3:781d)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	and a
 	ld b, c
 .asm_f822
@@ -15536,7 +15558,7 @@ Func_f81d: ; f81d (3:781d)
 	ret
 
 Func_f836: ; f836 (3:7836)
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 Func_f839: ; f839 (3:7839)
 	and a
@@ -15607,7 +15629,7 @@ InitializeEmptyList: ; f8a0 (3:78a0)
 	ret
 
 IsItemInBag_: ; f8a5 (3:78a5)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld hl, wNumBagItems ; $d31d
 .asm_f8ab
 	inc hl

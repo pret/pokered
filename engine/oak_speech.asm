@@ -211,7 +211,7 @@ MovePicLeft: ; 6288 (1:6288)
 	jr .next
 
 Predef3B: ; 62a1 (1:62a1)
-	call Load16BitRegisters
+	call GetPredefRegisters
 IntroPredef3B: ; 62a4 (1:62a4)
 ; bank of sprite given in b
 	push bc

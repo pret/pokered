@@ -2509,7 +2509,7 @@ Func_79aae: ; 79aae (1e:5aae)
 	jr asm_79acb
 
 Func_79aba: ; 79aba (1e:5aba)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, [$cd6c]
 	and a
 	jr nz, .asm_79ac8
@@ -2790,7 +2790,7 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	jp Func_79e0d
 
 Func_79dda: ; 79dda (1e:5dda)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, c
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, b

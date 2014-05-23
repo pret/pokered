@@ -1,5 +1,5 @@
 Func_27d6b: ; 27d6b (9:7d6b)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	call GetMonHeader
 	pop hl
@@ -26,7 +26,7 @@ asm_27d8c: ; 27d8c (9:7d8c)
 	jp FillMemory
 
 Func_27d98: ; 27d98 (9:7d98)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	ld a, [W_PLAYERMOVETYPE] ; $cfd5
 asm_27d9f: ; 27d9f (9:7d9f)

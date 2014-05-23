@@ -1,6 +1,6 @@
 AskForMonNickname: ; 64eb (1:64eb)
 	call SaveScreenTilesToBuffer1
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a

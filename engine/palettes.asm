@@ -1,5 +1,5 @@
 Func_71ddf: ; 71ddf (1c:5ddf)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, b
 	cp $ff
 	jr nz, .asm_71dea

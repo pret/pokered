@@ -4,7 +4,7 @@ HiddenItemNear: ; 7481f (1d:481f)
 .asm_74824
 	ld de, $0003
 	ld a, [W_CURMAP]
-	call IsInArrayCummulativeCount
+	call IsInRestOfArray
 	ret nc ; return if current map has no hidden items
 	push bc
 	push hl

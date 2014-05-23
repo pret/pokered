@@ -919,7 +919,7 @@ Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
 Func_5ab0:
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 Func_5ab3: ; 5ab3 (1:5ab3)
 	push hl

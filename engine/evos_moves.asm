@@ -372,7 +372,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 ; move slots are being filled up sequentially and shifted if all slots are full
 ; [$cee9]: (?)
 WriteMonMoves: ; 3afb8 (e:6fb8)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	push de
 	push bc
