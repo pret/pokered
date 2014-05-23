@@ -183,7 +183,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	call Delay3
 	ld b, $1
 	call GoPAL_SET
-	call ResetLCD_OAM
+	call HideSprites
 	ld hl, PrintBeginningBattleText
 	ld b, BANK(PrintBeginningBattleText)
 	jp Bankswitch
@@ -1146,7 +1146,7 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 .asm_3c7fa
 	xor a
 	ld [$cd6a], a
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, [wWhichPokemon] ; $cf92
 	ld [wPlayerMonNumber], a ; $cc2f
 	ld c, a
@@ -1449,7 +1449,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	call Func_3ee5b
 	call LoadScreenTilesFromBuffer1
 .next4
-	call CleanLCD_OAM
+	call ClearSprites
 	ld hl,wTileMap
 	ld bc,$040B
 	call ClearScreenArea
@@ -2271,7 +2271,7 @@ asm_3d05f: ; 3d05f (f:505f)
 	ld [$d152], a
 	call UseItem
 	call Func_3ee5b
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
 	ld [wCurrentMenuItem], a ; $cc26
 	ld a, [W_BATTLETYPE] ; $d05a
@@ -2335,7 +2335,7 @@ Func_3d0e0: ; 3d0e0 (f:50e0)
 asm_3d0ed: ; 3d0ed (f:50ed)
 	jp nc, Func_3d119
 asm_3d0f0: ; 3d0f0 (f:50f0)
-	call CleanLCD_OAM
+	call ClearSprites
 	call GBPalWhiteOut
 	call Func_3ee5b
 	call LoadScreenTilesFromBuffer2
@@ -2383,7 +2383,7 @@ Func_3d119: ; 3d119 (f:5119)
 	xor a
 	ld [$cc49], a
 	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $36
 	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
 	ld a, $37
@@ -2423,7 +2423,7 @@ Func_3d119: ; 3d119 (f:5119)
 	ld a, $1
 	ld [$cd6a], a
 	call GBPalWhiteOut
-	call CleanLCD_OAM
+	call ClearSprites
 	call Func_3ee5b
 	call LoadScreenTilesFromBuffer1
 	call GoPAL_SET_CF1C
@@ -6219,7 +6219,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
 	ld [$cfcb], a
-	call CleanLCD_OAM
+	call ClearSprites
 	call ClearScreen
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -6787,7 +6787,7 @@ Func_3efeb: ; 3efeb (f:6feb)
 	ld hl, Coord
 	ld bc, $40a
 	call ClearScreenArea
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, [W_ISINBATTLE] ; $d057
 	dec a
 	call z, Func_3cdec

@@ -271,8 +271,7 @@ wTileMapBackup2:: ; cd81
 	ds 20 * 18
 
 wBuffer:: ; cee9
-; used for temporary things
-
+; Temporary storage area of 30 bytes.
 wHPBarMaxHP:: ; cee9
 	ds 2
 wHPBarOldHP:: ; ceeb
@@ -281,12 +280,9 @@ wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
 	ds 1
-
 	ds 13
-
 wHPBarHPDifference:: ; cefd
 	ds 1
-
 	ds 9
 
 wAnimSoundID:: ; cf07
@@ -304,7 +300,12 @@ wCurSpriteMovement2:: ; cf14
 ; movement byte 2 of current sprite
 	ds 1
 
-	ds 74
+	ds 5
+
+wGBC:: ; cf1a
+	ds 1
+
+	ds 68
 
 wGymCityName:: ; cf5f
 wStringBuffer1:: ; cf5f
@@ -1473,3 +1474,7 @@ W_BOXMON2NAME:: ; de11
 	ds 11 * 19
 
 ; dee2
+
+SECTION "Stack", WRAMX[$dfff]
+wStack:: ; dfff
+	ds -$100

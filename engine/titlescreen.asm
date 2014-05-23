@@ -226,7 +226,7 @@ ENDC
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
 	ld [$ffb0], a
 	inc a
@@ -306,7 +306,7 @@ Func_44dd: ; 44dd (1:44dd)
 	ld bc, $230
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
 	ld [wWhichTrade], a ; $cd3d
 	ld hl, wOAMBuffer

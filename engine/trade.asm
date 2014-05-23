@@ -117,7 +117,7 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	ld bc, $800
 	ld a, $7f
 	call FillMemory
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $ff
 	ld [$cfcb], a
 	ld hl, $d730
@@ -281,7 +281,7 @@ Func_412d2: ; 412d2 (10:52d2)
 	call PlaySound
 	jr .asm_412e7
 .asm_41318
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
@@ -355,7 +355,7 @@ Func_41376: ; 41376 (10:5376)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_41525
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_413c6: ; 413c6 (10:53c6)
 	call Func_41411
@@ -386,7 +386,7 @@ Func_413c6: ; 413c6 (10:53c6)
 	call Func_414c5
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_41411: ; 41411 (10:5411)
 	ld a, $1

@@ -95,7 +95,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call GoBackToPartyMenu
 	jp .checkIfPokemonChosen
 .choseStats
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
 	ld [$cc49],a
 	ld a,$36
@@ -710,7 +710,7 @@ TrainerInfo_DrawVerticalLine: ; 135d8 (4:75d8)
 StartMenu_SaveReset: ; 135e3 (4:75e3)
 	ld a,[$d72e]
 	bit 6,a ; is the player using the link feature?
-	jp nz,InitGame
+	jp nz,Init
 	ld a,$3f
 	call Predef ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen

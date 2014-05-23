@@ -419,7 +419,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr nz,.checkParty
 	ld hl,ItemUseBallText06
 	call PrintText
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a,[$cfe5]	;caught mon_ID
 	ld [$d11e],a
 	ld a,$3d
@@ -430,11 +430,11 @@ ItemUseBall: ; d687 (3:5687)
 	jr z,.sendToBox
 	xor a
 	ld [$cc49],a
-	call CleanLCD_OAM
+	call ClearSprites
 	call AddPokemonToParty	;add mon to Party
 	jr .End
 .sendToBox	;$5907
-	call CleanLCD_OAM
+	call ClearSprites
 	call Func_e7a4
 	ld hl,ItemUseBallText07
 	ld a,[$d7f1]
@@ -448,7 +448,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld hl,ItemUseBallText05
 .printText0	;$5922
 	call PrintText
-	call CleanLCD_OAM
+	call ClearSprites
 .End	;$5928
 	ld a,[W_BATTLETYPE]
 	and a
@@ -2148,7 +2148,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	pop af
 	pop af
 	call GBPalWhiteOutWithDelay3
-	call CleanLCD_OAM
+	call ClearSprites
 	call GoPAL_SET_CF1C
 	jp LoadScreenTilesFromBuffer1 ; restore saved screen
 .checkIfAbleToLearnMove

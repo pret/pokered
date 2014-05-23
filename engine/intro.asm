@@ -9,7 +9,7 @@ PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [$ffae], a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	call CleanLCD_OAM
+	call ClearSprites
 	call DelayFrame
 	ret
 
@@ -329,7 +329,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	ld [$c0ee], a
 	call PlaySound
 	call Func_417f8
-	call CleanLCD_OAM
+	call ClearSprites
 	jp Delay3
 
 Func_418e9: ; 418e9 (10:58e9)

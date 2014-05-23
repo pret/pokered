@@ -11,6 +11,18 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+homecall: MACRO
+	ld a, [H_LOADEDROMBANK]
+	push af
+	ld a, BANK(\1)
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+	call \1
+	pop af
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+	ENDM
+
 callba: MACRO
 	ld b, BANK(\1)
 	ld hl, \1

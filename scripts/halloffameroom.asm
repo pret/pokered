@@ -58,7 +58,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	dec b
 	jr nz, .asm_5a4ff ; 0x5a505 $f8
 	call WaitForTextScrollButtonPress
-	jp InitGame
+	jp Init
 
 HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $ff

@@ -163,7 +163,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call CopyData
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call CleanLCD_OAM
+	call ClearSprites
 	call GoPAL_SET_CF1C
 	call GBPalNormal
 	xor a

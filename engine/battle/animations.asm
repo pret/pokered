@@ -616,7 +616,7 @@ AnimationCleanOAM: ; 78ec8 (1e:4ec8)
 	push bc
 	push af
 	call DelayFrame
-	call CleanLCD_OAM
+	call ClearSprites
 	pop af
 	pop bc
 	pop de
@@ -2616,7 +2616,7 @@ AnimationPetalsFalling: ; 79c8a (1e:5c8a)
 	ld a, $14
 	ld [W_SUBANIMTRANSFORM], a
 	call Func_79c97
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_79c97: ; 79c97 (1e:5c97)
 	ld c, a
@@ -2773,7 +2773,7 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld de, $0208
 	call Func_79de9
 	call AnimationShowMonPic
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $90
 	ld [$ffb0], a
 	ld hl, $9c00

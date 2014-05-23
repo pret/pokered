@@ -15,9 +15,9 @@ Func_1c98a: ; 1c98a (7:498a)
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem] ; $cc26
 	and a
-	jp z, InitGame
+	jp z, Init
 	callba Func_73b6a
-	jp InitGame
+	jp Init
 
 ClearSaveDataText: ; 1c9c1 (7:49c1)
 	TX_FAR _ClearSaveDataText

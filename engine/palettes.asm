@@ -409,7 +409,7 @@ LoadSGBBorderAndPalettes: ; 7202b (1c:602b)
 	ld de, PalPacket_724d8
 	ld hl, SuperPalettes
 	call Func_7210b
-	call ZeroVram
+	call ClearVram
 	ld hl, PalPacket_72538
 	jp SendSGBPacket
 

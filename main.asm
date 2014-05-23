@@ -1,235 +1,219 @@
 INCLUDE "constants.asm"
 
 ; The rst vectors are unused.
-SECTION "rst00",ROM0[$00]
+SECTION "rst00", ROM0[$00]
 	rst $38
-SECTION "rst08",ROM0[$08]
+SECTION "rst08", ROM0[$08]
 	rst $38
-SECTION "rst10",ROM0[$10]
+SECTION "rst10", ROM0[$10]
 	rst $38
-SECTION "rst18",ROM0[$18]
+SECTION "rst18", ROM0[$18]
 	rst $38
-SECTION "rst20",ROM0[$20]
+SECTION "rst20", ROM0[$20]
 	rst $38
-SECTION "rst28",ROM0[$28]
+SECTION "rst28", ROM0[$28]
 	rst $38
-SECTION "rst30",ROM0[$30]
+SECTION "rst30", ROM0[$30]
 	rst $38
-SECTION "rst38",ROM0[$38]
+SECTION "rst38", ROM0[$38]
 	rst $38
 
 ; interrupts
-SECTION "vblank",ROM0[$40]
+SECTION "vblank", ROM0[$40]
 	jp VBlank
-SECTION "lcdc",ROM0[$48]
-	db $FF
-SECTION "timer",ROM0[$50]
+SECTION "lcdc",   ROM0[$48]
+	rst $38
+SECTION "timer",  ROM0[$50]
 	jp Timer
-SECTION "serial",ROM0[$58]
+SECTION "serial", ROM0[$58]
 	jp Serial
-SECTION "joypad",ROM0[$60]
+SECTION "joypad", ROM0[$60]
 	reti
+
 
 SECTION "bank0",ROM0[$61]
 
-DisableLCD:: ; 0061 (0:0061)
+DisableLCD::
 	xor a
-	ld [$ff0f],a
-	ld a,[$ffff]
-	ld b,a
-	res 0,a
-	ld [$ffff],a
-.waitVBlank
-	ld a,[$ff44]
-	cp a,$91
-	jr nz,.waitVBlank
-	ld a,[$ff40]
-	and a,$7f	; res 7,a
-	ld [$ff40],a
-	ld a,b
-	ld [$ffff],a
+	ld [rIF], a
+	ld a, [rIE]
+	ld b, a
+	res 0, a
+	ld [rIE], a
+
+.wait
+	ld a, [rLY]
+	cp LY_VBLANK
+	jr nz, .wait
+
+	ld a, [rLCDC]
+	and $ff ^ rLCDC_ENABLE_MASK
+	ld [rLCDC], a
+	ld a, b
+	ld [rIE], a
 	ret
 
-EnableLCD:: ; 007b (0:007b)
-	ld a,[$ff40]
-	set 7,a
-	ld [$ff40],a
+EnableLCD::
+	ld a, [rLCDC]
+	set rLCDC_ENABLE, a
+	ld [rLCDC], a
 	ret
 
-CleanLCD_OAM:: ; 0082 (0:0082)
+ClearSprites::
 	xor a
-	ld hl,wOAMBuffer
-	ld b,$a0
+	ld hl, wOAMBuffer
+	ld b, 40 * 4
 .loop
-	ld [hli],a
+	ld [hli], a
 	dec b
-	jr nz,.loop
+	jr nz, .loop
 	ret
 
-ResetLCD_OAM:: ; 008d (0:008d)
-	ld a,$a0
-	ld hl,wOAMBuffer
-	ld de,$0004
-	ld b,$28
+HideSprites::
+	ld a, 160
+	ld hl, wOAMBuffer
+	ld de, 4
+	ld b, 40
 .loop
-	ld [hl],a
-	add hl,de
+	ld [hl], a
+	add hl, de
 	dec b
-	jr nz,.loop
+	jr nz, .loop
 	ret
 
-FarCopyData:: ; 009d (0:009d)
-; copy bc bytes of data from a:hl to de
-	ld [$CEE9],a ; save future bank # for later
-	ld a,[H_LOADEDROMBANK] ; get current bank #
+FarCopyData::
+; Copy bc bytes from a:hl to de.
+	ld [wBuffer], a
+	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a,[$CEE9] ; get future bank #, switch
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld a, [wBuffer]
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
 	call CopyData
-	pop af       ; okay, done, time to switch back
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	pop af
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
 	ret
-CopyData:: ; 00b5 (0:00b5)
-; copy bc bytes of data from hl to de
-	ld a,[hli]
-	ld [de],a
+
+CopyData::
+; Copy bc bytes from hl to de.
+	ld a, [hli]
+	ld [de], a
 	inc de
 	dec bc
-	ld a,c
+	ld a, c
 	or b
-	jr nz,CopyData
+	jr nz, CopyData
 	ret
 
-SECTION "romheader",ROM0[$100]
+
+SECTION "Entry", ROM0[$100]
 	nop
 	jp Start
 
-SECTION "start",ROM0[$150]
-Start:: ; 0150 (0:0150)
-	cp $11 ; value that indicates Gameboy Color
-	jr z,.gbcDetected
+
+SECTION "Start", ROM0[$150]
+
+Start::
+	cp GBC
+	jr z, .gbc
 	xor a
-	jr .storeValue
-.gbcDetected
-	ld a,$00
-.storeValue
-	ld [$cf1a],a ; same value ($00) either way
-	jp InitGame
+	jr .ok
+.gbc
+	ld a, 0
+.ok
+	ld [wGBC], a
+	jp Init
 
-; this function directly reads the joypad I/O register
-; it reads many times in order to give the joypad a chance to stabilize
-; it saves a result in [$fff8] in the following format
-; (set bit indicates pressed button)
-; bit 0 - A button
-; bit 1 - B button
-; bit 2 - Select button
-; bit 3 - Start button
-; bit 4 - Right
-; bit 5 - Left
-; bit 6 - Up
-; bit 7 - Down
-ReadJoypadRegister:: ; 015f (0:015f)
-	ld a,%00100000 ; select direction keys
-	ld c,$00
-	ld [rJOYP],a
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	cpl ; complement the result so that a set bit indicates a pressed key
-	and a,%00001111
-	swap a ; put direction keys in upper nibble
-	ld b,a
-	ld a,%00010000 ; select button keys
-	ld [rJOYP],a
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	ld a,[rJOYP]
-	cpl ; complement the result so that a set bit indicates a pressed key
-	and a,%00001111
-	or b ; put button keys in lower nibble
-	ld [H_JOYPADSTATE],a ; save joypad state
-	ld a,%00110000 ; unselect all keys
-	ld [rJOYP],a
+
+ReadJoypad::
+; Poll joypad input.
+; Unlike the hardware register, button
+; presses are indicated by a set bit.
+
+	ld a, 1 << 5 ; select direction keys
+	ld c, 0
+
+	ld [rJOYP], a
+	rept 6
+	ld a, [rJOYP]
+	endr
+	cpl
+	and %1111
+	swap a
+	ld b, a
+
+	ld a, 1 << 4 ; select button keys
+	ld [rJOYP], a
+	rept 10
+	ld a, [rJOYP]
+	endr
+	cpl
+	and %1111
+	or b
+
+	ld [H_JOYPADSTATE], a
+
+	ld a, 1 << 4 + 1 << 5 ; deselect keys
+	ld [rJOYP], a
 	ret
 
-; function to update the joypad state variables
-; output:
-; [H_NEWLYRELEASEDBUTTONS] = keys released since last time
-; [H_NEWLYPRESSEDBUTTONS] = keys pressed since last time
-; [H_CURRENTPRESSEDBUTTONS] = currently pressed keys
-GetJoypadState:: ; 019a (0:019a)
-	ld a, [H_LOADEDROMBANK]
-	push af
-	ld a,Bank(_GetJoypadState)
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	call _GetJoypadState
-	pop af
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+GetJoypadState::
+; Update the joypad state variables:
+; [H_NEWLYRELEASEDBUTTONS]  keys released since last time
+; [H_NEWLYPRESSEDBUTTONS]   keys pressed since last time
+; [H_CURRENTPRESSEDBUTTONS] currently pressed keys
+	homecall _GetJoypadState
 	ret
+
 
 INCLUDE "data/map_header_pointers.asm"
 
-; this function calls a function that takes necessary actions
-; at the beginning of each overworld loop iteration as the player jumps
-; down a ledge
-; it also ends the jump when it's completed
-HandleMidJump:: ; 039e (0:039e)
+HandleMidJump::
+; Handle the player jumping down
+; a ledge in the overworld.
 	ld b, BANK(_HandleMidJump)
 	ld hl, _HandleMidJump
 	jp Bankswitch
 
-; this is jumped to immediately after loading a save / starting a new game / loading a new map
-EnterMap:: ; 03a6 (0:03a6)
-	ld a,$ff
-	ld [wJoypadForbiddenButtonsMask],a
-	call LoadMapData ; load map data
-	callba Func_c335 ; initialize some variables
-	ld hl,$d72c
-	bit 0,[hl]
-	jr z,.doNotCountSteps
-	ld a,$03
-	ld [$d13c],a ; some kind of step counter (counts up to 3 steps?)
+EnterMap::
+; Load a new map.
+	ld a, $ff
+	ld [wJoypadForbiddenButtonsMask], a
+	call LoadMapData
+	callba Func_c335 ; initialize map variables
+	ld hl, $d72c
+	bit 0, [hl]
+	jr z, .doNotCountSteps
+	ld a, 3
+	ld [$d13c], a ; some kind of step counter (counts up to 3 steps?)
 .doNotCountSteps
-	ld hl,$d72e
-	bit 5,[hl] ; did a battle happen immediately before this?
-	res 5,[hl] ; unset the "battle just happened" flag
-	call z,Func_12e7
-	call nz,MapEntryAfterBattle
-	ld hl,$d732
-	ld a,[hl]
-	and a,$18
-	jr z,.didNotFlyOrTeleportIn
-	res 3,[hl]
+	ld hl, $d72e
+	bit 5, [hl] ; did a battle happen immediately before this?
+	res 5, [hl] ; unset the "battle just happened" flag
+	call z, Func_12e7
+	call nz, MapEntryAfterBattle
+	ld hl, $d732
+	ld a, [hl]
+	and 1 << 4 | 1 << 3
+	jr z, .didNotFlyOrTeleportIn
+	res 3, [hl]
 	callba Func_70510 ; display fly/teleport in graphical effect
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 .didNotFlyOrTeleportIn
 	callba CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
-	ld hl,$d72d
-	res 5,[hl]
-	call UpdateSprites ; move sprites
-	ld hl,$d126
-	set 5,[hl]
-	set 6,[hl]
+	ld hl, $d72d
+	res 5, [hl]
+	call UpdateSprites
+	ld hl, $d126
+	set 5, [hl]
+	set 6, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoypadForbiddenButtonsMask], a
 
-OverworldLoop:: ; 03ff (0:03ff)
+OverworldLoop::
 	call DelayFrame
-OverworldLoopLessDelay:: ; 0402 (0:0402)
+OverworldLoopLessDelay::
 	call DelayFrame
 	call LoadGBPal
 	ld a,[$d736]
@@ -2826,7 +2810,7 @@ DisplayPartyMenu:: ; 13fc (0:13fc)
 	xor a
 	ld [$ffd7],a
 	call GBPalWhiteOutWithDelay3
-	call CleanLCD_OAM
+	call ClearSprites
 	call PartyMenuInit
 	call DrawPartyMenu
 	jp HandlePartyMenuInput
@@ -4646,252 +4630,243 @@ VBlankCopyBgMap:: ; 1de1 (0:1de1)
 	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
 	jr TransferBgRows
 
-; This function copies ([H_VBCOPYDOUBLESIZE] * 8) source bytes
+
+VBlankCopyDouble::
+; Copy [H_VBCOPYDOUBLESIZE] 1bpp tiles
 ; from H_VBCOPYDOUBLESRC to H_VBCOPYDOUBLEDEST.
-; It copies each source byte to the destination twice (next to each other).
-; The function updates the source and destination addresses, so the transfer
-; can be continued easily by repeatingly calling this function.
-VBlankCopyDouble:: ; 1e02 (0:1e02)
-	ld a,[H_VBCOPYDOUBLESIZE]
-	and a ; are there any bytes to copy?
-	ret z
-	ld hl,[sp + 0]
-	ld a,h
-	ld [H_SPTEMP],a
-	ld a,l
-	ld [H_SPTEMP + 1],a ; save stack pointer
-	ld a,[H_VBCOPYDOUBLESRC]
-	ld l,a
-	ld a,[H_VBCOPYDOUBLESRC + 1]
-	ld h,a
-	ld sp,hl
-	ld a,[H_VBCOPYDOUBLEDEST]
-	ld l,a
-	ld a,[H_VBCOPYDOUBLEDEST + 1]
-	ld h,a
-	ld a,[H_VBCOPYDOUBLESIZE]
-	ld b,a
-	xor a
-	ld [H_VBCOPYDOUBLESIZE],a ; disable transfer so it doesn't continue next V-blank
-.loop
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	ld [hl],d
-	inc hl
-	dec b
-	jr nz,.loop
-	ld a,l
-	ld [H_VBCOPYDOUBLEDEST],a
-	ld a,h
-	ld [H_VBCOPYDOUBLEDEST + 1],a ; update destination address
-	ld hl,[sp + 0]
-	ld a,l
-	ld [H_VBCOPYDOUBLESRC],a
-	ld a,h
-	ld [H_VBCOPYDOUBLESRC + 1],a ; update source address
-	ld a,[H_SPTEMP]
-	ld h,a
-	ld a,[H_SPTEMP + 1]
-	ld l,a
-	ld sp,hl ; restore stack pointer
-	ret
 
-; Copies ([H_VBCOPYSIZE] * 16) bytes from H_VBCOPYSRC to H_VBCOPYDEST.
-; The function updates the source and destination addresses, so the transfer
-; can be continued easily by repeatingly calling this function.
-VBlankCopy:: ; 1e5e (0:1e5e)
-	ld a,[H_VBCOPYSIZE]
-	and a ; are there any bytes to copy?
-	ret z
-	ld hl,[sp + 0]
-	ld a,h
-	ld [H_SPTEMP],a
-	ld a,l
-	ld [H_SPTEMP + 1],a ; save stack pointer
-	ld a,[H_VBCOPYSRC]
-	ld l,a
-	ld a,[H_VBCOPYSRC + 1]
-	ld h,a
-	ld sp,hl
-	ld a,[H_VBCOPYDEST]
-	ld l,a
-	ld a,[H_VBCOPYDEST + 1]
-	ld h,a
-	ld a,[H_VBCOPYSIZE]
-	ld b,a
-	xor a
-	ld [H_VBCOPYSIZE],a ; disable transfer so it doesn't continue next V-blank
-.loop
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc hl
-	dec b
-	jr nz,.loop
-	ld a,l
-	ld [H_VBCOPYDEST],a
-	ld a,h
-	ld [H_VBCOPYDEST + 1],a
-	ld hl,[sp + 0]
-	ld a,l
-	ld [H_VBCOPYSRC],a
-	ld a,h
-	ld [H_VBCOPYSRC + 1],a
-	ld a,[H_SPTEMP]
-	ld h,a
-	ld a,[H_SPTEMP + 1]
-	ld l,a
-	ld sp,hl ; restore stack pointer
-	ret
+; While we're here, convert to 2bpp.
+; The process is straightforward:
+; copy each byte twice.
 
-; This function updates the moving water and flower background tiles.
-UpdateMovingBgTiles:: ; 1ebe (0:1ebe)
-	ld a,[$ffd7]
+	ld a, [H_VBCOPYDOUBLESIZE]
 	and a
 	ret z
-	ld a,[$ffd8]
+
+	ld hl, [sp + 0]
+	ld a, h
+	ld [H_SPTEMP], a
+	ld a, l
+	ld [H_SPTEMP + 1], a
+
+	ld a, [H_VBCOPYDOUBLESRC]
+	ld l, a
+	ld a, [H_VBCOPYDOUBLESRC + 1]
+	ld h, a
+	ld sp, hl
+
+	ld a, [H_VBCOPYDOUBLEDEST]
+	ld l, a
+	ld a, [H_VBCOPYDOUBLEDEST + 1]
+	ld h, a
+
+	ld a, [H_VBCOPYDOUBLESIZE]
+	ld b, a
+	xor a ; transferred
+	ld [H_VBCOPYDOUBLESIZE], a
+
+.loop
+	rept 3
+	pop de
+	ld [hl], e
+	inc l
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+	ld [hl], d
+	inc l
+	endr
+
+	pop de
+	ld [hl], e
+	inc l
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+	ld [hl], d
+	inc hl
+	dec b
+	jr nz, .loop
+
+	ld a, l
+	ld [H_VBCOPYDOUBLEDEST], a
+	ld a, h
+	ld [H_VBCOPYDOUBLEDEST + 1], a
+
+	ld hl, [sp + 0]
+	ld a, l
+	ld [H_VBCOPYDOUBLESRC], a
+	ld a, h
+	ld [H_VBCOPYDOUBLESRC + 1], a
+
+	ld a, [H_SPTEMP]
+	ld h, a
+	ld a, [H_SPTEMP + 1]
+	ld l, a
+	ld sp, hl
+
+	ret
+
+
+VBlankCopy::
+; Copy [H_VBCOPYSIZE] 2bpp tiles
+; from H_VBCOPYSRC to H_VBCOPYDEST.
+
+; Source and destination addresses
+; are updated, so transfer can
+; continue in subsequent calls.
+
+	ld a, [H_VBCOPYSIZE]
+	and a
+	ret z
+
+	ld hl, [sp + 0]
+	ld a, h
+	ld [H_SPTEMP], a
+	ld a, l
+	ld [H_SPTEMP + 1], a
+
+	ld a, [H_VBCOPYSRC]
+	ld l, a
+	ld a, [H_VBCOPYSRC + 1]
+	ld h, a
+	ld sp, hl
+
+	ld a, [H_VBCOPYDEST]
+	ld l, a
+	ld a, [H_VBCOPYDEST + 1]
+	ld h, a
+
+	ld a, [H_VBCOPYSIZE]
+	ld b, a
+	xor a ; transferred
+	ld [H_VBCOPYSIZE], a
+
+.loop
+	rept 7
+	pop de
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+	endr
+
+	pop de
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc hl
+	dec b
+	jr nz, .loop
+
+	ld a, l
+	ld [H_VBCOPYDEST], a
+	ld a, h
+	ld [H_VBCOPYDEST + 1], a
+
+	ld hl, [sp + 0]
+	ld a, l
+	ld [H_VBCOPYSRC], a
+	ld a, h
+	ld [H_VBCOPYSRC + 1], a
+
+	ld a, [H_SPTEMP]
+	ld h, a
+	ld a, [H_SPTEMP + 1]
+	ld l, a
+	ld sp, hl
+
+	ret
+
+
+UpdateMovingBgTiles::
+; Animate water and flower
+; tiles in the overworld.
+
+	ld a, [$ffd7]
+	and a
+	ret z
+
+	ld a, [$ffd8]
 	inc a
-	ld [$ffd8],a
-	cp a,20
+	ld [$ffd8], a
+	cp 20
 	ret c
-	cp a,21
-	jr z,.updateFlowerTile
-	ld hl,$9140 ; water tile pattern VRAM location
-	ld c,16 ; number of bytes in a tile pattern
-	ld a,[$d085]
+	cp 21
+	jr z, .flower
+
+	ld hl, $9140
+	ld c, $10
+
+	ld a, [$d085]
 	inc a
-	and a,$07
-	ld [$d085],a
-	and a,$04
-	jr nz,.rotateWaterLeftLoop
-.rotateWaterRightloop
-	ld a,[hl]
+	and 7
+	ld [$d085], a
+
+	and 4
+	jr nz, .left
+.right
+	ld a, [hl]
 	rrca
-	ld [hli],a
+	ld [hli], a
 	dec c
-	jr nz,.rotateWaterRightloop
+	jr nz, .right
 	jr .done
-.rotateWaterLeftLoop
-	ld a,[hl]
+.left
+	ld a, [hl]
 	rlca
-	ld [hli],a
+	ld [hli], a
 	dec c
-	jr nz,.rotateWaterLeftLoop
+	jr nz, .left
 .done
-	ld a,[$ffd7]
+	ld a, [$ffd7]
 	rrca
 	ret nc
 	xor a
-	ld [$ffd8],a
+	ld [$ffd8], a
 	ret
-.updateFlowerTile
+
+.flower
 	xor a
-	ld [$ffd8],a
-	ld a,[$d085]
-	and a,$03
-	cp a,2
-	ld hl,FlowerTilePattern1
-	jr c,.writeTilePatternToVram
-	ld hl,FlowerTilePattern2
-	jr z,.writeTilePatternToVram
-	ld hl,FlowerTilePattern3
-.writeTilePatternToVram
-	ld de,$9030 ; flower tile pattern VRAM location
-	ld c,16 ; number of bytes in a tile pattern
-.flowerTileLoop
-	ld a,[hli]
-	ld [de],a
+	ld [$ffd8], a
+
+	ld a, [$d085]
+	and 3
+	cp 2
+	ld hl, FlowerTile1
+	jr c, .copy
+	ld hl, FlowerTile2
+	jr z, .copy
+	ld hl, FlowerTile3
+.copy
+	ld de, $9030
+	ld c, $10
+.loop
+	ld a, [hli]
+	ld [de], a
 	inc de
 	dec c
-	jr nz,.flowerTileLoop
+	jr nz, .loop
 	ret
 
-FlowerTilePattern1:: ; 1f19 (0:1f19)
-	INCBIN "gfx/tilesets/flower/flower1.2bpp"
+FlowerTile1: INCBIN "gfx/tilesets/flower/flower1.2bpp"
+FlowerTile2: INCBIN "gfx/tilesets/flower/flower2.2bpp"
+FlowerTile3: INCBIN "gfx/tilesets/flower/flower3.2bpp"
 
-FlowerTilePattern2:: ; 1f29 (0:1f29)
-	INCBIN "gfx/tilesets/flower/flower2.2bpp"
 
-FlowerTilePattern3:: ; 1f39 (0:1f39)
-	INCBIN "gfx/tilesets/flower/flower3.2bpp"
-
-SoftReset:: ; 1f49 (0:1f49)
+SoftReset::
 	call StopAllSounds
 	call GBPalWhiteOut
 	ld c, $20
 	call DelayFrames
-	;fall through
+	; fallthrough
 
-; initialization code
-; explanation for %11100011 (value stored in rLCDC)
+Init::
+;  Program init.
+
+rLCDC_DEFAULT EQU %11100011
 ; * LCD enabled
 ; * Window tile map at $9C00
 ; * Window display enabled
@@ -4900,100 +4875,117 @@ SoftReset:: ; 1f49 (0:1f49)
 ; * 8x8 OBJ size
 ; * OBJ display enabled
 ; * BG display enabled
-InitGame:: ; 1f54 (0:1f54)
+
 	di
-; zero I/O registers
+
 	xor a
-	ld [$ff0f],a
-	ld [$ffff],a
-	ld [$ff43],a
-	ld [$ff42],a
-	ld [$ff01],a
-	ld [$ff02],a
-	ld [$ff4b],a
-	ld [$ff4a],a
-	ld [$ff06],a
-	ld [$ff07],a
-	ld [$ff47],a
-	ld [$ff48],a
-	ld [$ff49],a
-	ld a,%10000000 ; enable LCD
-	ld [rLCDC],a
-	call DisableLCD ; why enable then disable?
-	ld sp,$dfff ; initialize stack pointer
-	ld hl,$c000 ; start of WRAM
-	ld bc,$2000 ; size of WRAM
-.zeroWramLoop
-	ld [hl],0
+	ld [rIF], a
+	ld [rIE], a
+	ld [$ff43], a
+	ld [$ff42], a
+	ld [$ff01], a
+	ld [$ff02], a
+	ld [$ff4b], a
+	ld [$ff4a], a
+	ld [$ff06], a
+	ld [$ff07], a
+	ld [$ff47], a
+	ld [$ff48], a
+	ld [$ff49], a
+
+	ld a, rLCDC_ENABLE_MASK
+	ld [rLCDC], a
+	call DisableLCD
+
+	ld sp, wStack
+
+	ld hl, $c000 ; start of WRAM
+	ld bc, $2000 ; size of WRAM
+.loop
+	ld [hl], 0
 	inc hl
 	dec bc
-	ld a,b
+	ld a, b
 	or c
-	jr nz,.zeroWramLoop
-	call ZeroVram
-	ld hl,$ff80
-	ld bc,$007f
-	call FillMemory ; zero HRAM
-	call CleanLCD_OAM ; this is unnecessary since it was already cleared above
-	ld a,Bank(WriteDMACodeToHRAM)
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	call WriteDMACodeToHRAM ; copy DMA code to HRAM
+	jr nz, .loop
+
+	call ClearVram
+
+	ld hl, $ff80
+	ld bc, $ffff - $ff80
+	call FillMemory
+
+	call ClearSprites
+
+	ld a, Bank(WriteDMACodeToHRAM)
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+	call WriteDMACodeToHRAM
+
 	xor a
-	ld [$ffd7],a
-	ld [$ff41],a
-	ld [$ffae],a
-	ld [$ffaf],a
-	ld [$ff0f],a
-	ld a,%00001101 ; enable V-blank, timer, and serial interrupts
-	ld [rIE],a
-	ld a,$90 ; put the window off the screen
-	ld [$ffb0],a
-	ld [rWY],a
-	ld a,$07
-	ld [rWX],a
-	ld a,$ff
-	ld [$ffaa],a
-	ld h,$98
-	call ClearBgMap ; fill $9800-$9BFF (BG tile map) with $7F tiles
-	ld h,$9c
-	call ClearBgMap ; fill $9C00-$9FFF (Window tile map) with $7F tiles
-	ld a,%11100011
-	ld [rLCDC],a ; enabled LCD
-	ld a,$10
-	ld [H_SOFTRESETCOUNTER],a
+	ld [$ffd7], a
+	ld [$ff41], a
+	ld [$ffae], a
+	ld [$ffaf], a
+	ld [$ff0f], a
+	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
+	ld [rIE], a
+
+	ld a, 144 ; move the window off-screen
+	ld [$ffb0], a
+	ld [rWY], a
+	ld a, 7
+	ld [rWX], a
+
+	ld a, $ff
+	ld [$ffaa], a
+
+	ld h, $9800 / $100 ; bg map 0
+	call ClearBgMap
+	ld h, $9c00 / $100 ; bg map 1
+	call ClearBgMap
+
+	ld a, rLCDC_DEFAULT
+	ld [rLCDC], a
+	ld a, $10
+	ld [H_SOFTRESETCOUNTER], a
 	call StopAllSounds
+
 	ei
-	ld a,$40
-	call Predef ; SGB border
-	ld a,$1f
-	ld [$c0ef],a
-	ld [$c0f0],a
-	ld a,$9c
-	ld [$ffbd],a
+
+	ld a, $40 ; PREDEF_SGB_BORDER
+	call Predef
+
+	ld a, $1f
+	ld [$c0ef], a
+	ld [$c0f0], a
+	ld a, $9c
+	ld [$ffbd], a
 	xor a
-	ld [$ffbc],a
+	ld [$ffbc], a
 	dec a
-	ld [$cfcb],a
-	ld a,$32
-	call Predef ; display the copyrights, GameFreak logo, and battle animation
+	ld [$cfcb], a
+
+	ld a, $32 ; PREDEF_INTRO
+	call Predef
+
 	call DisableLCD
-	call ZeroVram
+	call ClearVram
 	call GBPalNormal
-	call CleanLCD_OAM
-	ld a,%11100011
-	ld [rLCDC],a ; enable LCD
+	call ClearSprites
+	ld a, rLCDC_DEFAULT
+	ld [rLCDC], a
+
 	jp SetDefaultNamesBeforeTitlescreen
 
-; zeroes all VRAM
-ZeroVram:: ; 2004 (0:2004)
-	ld hl,$8000
-	ld bc,$2000
+ClearVram:
+	ld hl, $8000
+	ld bc, $2000
 	xor a
 	jp FillMemory
 
-; immediately stops all sounds
-StopAllSounds:: ; 200e (0:200e)
+
+StopAllSounds::
 	ld a, Bank(Func_9876)
 	ld [$c0ef], a
 	ld [$c0f0], a
@@ -5004,91 +4996,116 @@ StopAllSounds:: ; 200e (0:200e)
 	dec a
 	jp PlaySound
 
-VBlank:: ; 2024 (0:2024)
+
+VBlank::
+
 	push af
 	push bc
 	push de
 	push hl
-	ld a,[H_LOADEDROMBANK] ; current ROM bank
-	ld [$d122],a
-	ld a,[$ffae]
-	ld [rSCX],a
-	ld a,[$ffaf]
-	ld [rSCY],a
-	ld a,[$d0a0]
+
+	ld a, [H_LOADEDROMBANK]
+	ld [$d122], a
+
+	ld a, [$ffae]
+	ld [rSCX], a
+	ld a, [$ffaf]
+	ld [rSCY], a
+
+	ld a, [$d0a0]
 	and a
-	jr nz,.doVramTransfers
-	ld a,[$ffb0]
-	ld [rWY],a
-.doVramTransfers
+	jr nz, .ok
+	ld a, [$ffb0]
+	ld [rWY], a
+.ok
+
 	call AutoBgMapTransfer
 	call VBlankCopyBgMap
 	call RedrawExposedScreenEdge
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
-	call $ff80 ; OAM DMA
-	ld a,Bank(PrepareOAMData)
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	call PrepareOAMData ; update OAM buffer with current sprite data
+	call $ff80 ; hOAMDMA
+	ld a, Bank(PrepareOAMData)
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+	call PrepareOAMData
+
+	; VBlank-sensitive operations end.
+
 	call GenRandom
-	ld a,[H_VBLANKOCCURRED]
+
+	ld a, [H_VBLANKOCCURRED]
 	and a
-	jr z,.next
+	jr z, .vblanked
 	xor a
-	ld [H_VBLANKOCCURRED],a
-.next
-	ld a,[H_FRAMECOUNTER]
+	ld [H_VBLANKOCCURRED], a
+.vblanked
+
+	ld a, [H_FRAMECOUNTER]
 	and a
-	jr z,.handleMusic
+	jr z, .decced
 	dec a
-	ld [H_FRAMECOUNTER],a
-.handleMusic
+	ld [H_FRAMECOUNTER], a
+.decced
+
 	call Func_28cb
-	ld a,[$c0ef] ; music ROM bank
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	cp a,$02
-	jr nz,.checkIfBank08
-.bank02
+
+	ld a, [$c0ef] ; music ROM bank
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+
+	cp BANK(Func_9103)
+	jr nz, .notbank2
+.bank2
 	call Func_9103
 	jr .afterMusic
-.checkIfBank08
-	cp a,$08
-	jr nz,.bank1F
-.bank08
+.notbank2
+	cp 8
+	jr nz, .bank1F
+.bank8
 	call Func_2136e
 	call Func_21879
 	jr .afterMusic
 .bank1F
 	call Func_7d177
 .afterMusic
+
 	callba Func_18dee ; keep track of time played
-	ld a,[$fff9]
+
+	ld a, [$fff9]
 	and a
-	call z,ReadJoypadRegister
-	ld a,[$d122]
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	call z, ReadJoypad
+
+	ld a, [$d122]
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+
 	pop hl
 	pop de
 	pop bc
 	pop af
 	reti
 
-DelayFrame:: ; 20af (0:20af)
-; delay for one frame
-	ld a,1
-	ld [H_VBLANKOCCURRED],a
 
-; wait for the next Vblank, halting to conserve battery
+DelayFrame::
+; Wait for the next vblank interrupt.
+; As a bonus, this saves battery.
+
+NOT_VBLANKED EQU 1
+
+	ld a, NOT_VBLANKED
+	ld [H_VBLANKOCCURRED], a
 .halt
-	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr even when ints are enabled
-	ld a,[H_VBLANKOCCURRED]
+	; XXX this is a hack--rgbasm adds
+	; a nop after halts by default.
+	db $76 ; halt
+
+	ld a, [H_VBLANKOCCURRED]
 	and a
-	jr nz,.halt
+	jr nz, .halt
 	ret
+
 
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
@@ -9845,7 +9862,7 @@ IsInRestOfArray::
 
 
 Func_3dbe:: ; 3dbe (0:3dbe)
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $1
 	ld [$cfcb], a
 	call Func_3e08
@@ -10352,7 +10369,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	cp $ff
 	ret nz
 	ld [$cfcb], a
-	jp ResetLCD_OAM
+	jp HideSprites
 .asm_4b1e
 	xor a
 	ld [$ff90], a

@@ -887,7 +887,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ret nz
 	ld a, $4d
 	call Predef ; indirect jump to Func_5aaf (5aaf (1:5aaf))
-	jp InitGame
+	jp Init
 .asm_5a75
 	call Func_5317
 	ld hl, Club_GFX

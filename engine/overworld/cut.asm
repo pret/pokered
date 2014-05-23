@@ -35,7 +35,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld hl, $d730
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
-	call CleanLCD_OAM
+	call ClearSprites
 	call Func_3dbe
 	ld a, $90
 	ld [$ffb0], a

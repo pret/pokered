@@ -138,7 +138,7 @@ MonsNestText: ; 70f89 (1c:4f89)
 	db "'s NEST@"
 
 LoadTownMap_Fly: ; 70f90 (1c:4f90)
-	call CleanLCD_OAM
+	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
@@ -343,7 +343,7 @@ Func_711ab: ; 711ab (1c:51ab)
 	ld [$d09b], a
 	call GBPalWhiteOut
 	call ClearScreen
-	call CleanLCD_OAM
+	call ClearSprites
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	call UpdateSprites

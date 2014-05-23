@@ -24,7 +24,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	sla a
 	ld [rOBP1], a ; $ff49
 	jr nz, .asm_708f6
-	call CleanLCD_OAM
+	call ClearSprites
 	call Func_7092a
 	ld b, $e4
 .asm_7090d
@@ -42,7 +42,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_7092a: ; 7092a (1c:492a)
 	ld de, $9000

@@ -123,7 +123,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
 	ld [$cfcb], a
-	call CleanLCD_OAM
+	call ClearSprites
 	callab Func_7bde9
 	jp c, Func_3af2e
 	ld hl, EvolvedText
