@@ -7710,7 +7710,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld [$cd50], a
 	ld a, $4c
 	call Predef
-	ld a, BTN_RIGHT | BTN_LEFT | BTN_UP | BTN_DOWN
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoypadForbiddenButtonsMask], a
 	xor a
 	ldh [$b4], a
@@ -8822,7 +8822,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	ld a, $2d
 	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
 	ld a, [$ffb5]
-	and BTN_A | BTN_B ; $3
+	and A_BUTTON | B_BUTTON
 	jr z, .asm_3872
 	pop af
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -13183,7 +13183,7 @@ SECTION "bank3",ROMX,BANK[$3]
 
 _GetJoypadState: ; c000 (3:4000)
 	ld a, [H_JOYPADSTATE]
-	cp BTN_A | BTN_B | BTN_SELECT | BTN_START ; soft reset sequence
+	cp A_BUTTON | B_BUTTON | SELECT | START ; soft reset sequence
 	jp z, HandleJoypadResetButtons
 	ld b, a
 	ld a, [H_OLDPRESSEDBUTTONS]
