@@ -362,7 +362,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 	ld [$ffdb], a
 	push hl
-	call GenRandom
+	call Random
 	swap a
 	ld b, a
 	ld a, [$ffdb]
@@ -390,7 +390,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 ; Reset the cans.
 	ld hl, $d773
 	res 1, [hl]
-	call GenRandom
+	call Random
 
 	and $e
 	ld [$d743], a

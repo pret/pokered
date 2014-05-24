@@ -11,7 +11,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	call GenRandom
+	call Random
 	ld a, [$ffd3]
 	cp $7
 	jr nc, .asm_48be2

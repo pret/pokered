@@ -256,7 +256,7 @@ Func_4496: ; 4496 (1:4496)
 
 .new
 ; Generate a new TitleMon.
-	call GenRandom
+	call Random
 	and $f
 	ld c, a
 	ld b, 0

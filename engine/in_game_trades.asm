@@ -189,8 +189,8 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld de, $cd4c
 	ld bc, $2
 	call Func_71d11
-	call GenRandom
-	ld hl, H_RAND1 ; $ffd3
+	call Random
+	ld hl, hRandomAdd
 	ld de, $cd59
 	jp CopyData
 

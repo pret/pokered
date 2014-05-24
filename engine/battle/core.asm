@@ -280,7 +280,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	jr nc, .asm_3c1a0
 	ld b, $ff
 .asm_3c1a0
-	call GenRandom
+	call Random
 	cp b
 	jr nc, .asm_3c14f
 	jr asm_3c202
@@ -475,12 +475,12 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [$ffaa]
 	cp $2
 	jr z, .invertOutcome
-	call GenRandomInBattle
+	call BattleRandom
 	cp $80
 	jr c, .playerMovesFirst
 	jr .enemyMovesFirst
 .invertOutcome
-	call GenRandomInBattle
+	call BattleRandom
 	cp $80
 	jr c, .enemyMovesFirst
 	jr .playerMovesFirst
@@ -1595,7 +1595,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	jr c, .asm_3cb5c
 	jr .asm_3cb2b
 .asm_3cb39
-	call GenRandomInBattle
+	call BattleRandom
 	ld b, a
 	ld a, [$ff98]
 	cp b
@@ -2992,7 +2992,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	callab AIEnemyTrainerChooseMoves
 .chooseRandomMove
 	push hl
-	call GenRandomInBattle ; get random
+	call BattleRandom
 	ld b, $1
 	cp $3f ; select move 1 in [0,3e] (63/256 chance)
 	jr c, .moveChosen
@@ -3415,7 +3415,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld [$CC5B],a
 	ld a,CONF_ANIM - 1
 	call PlayMoveAnimation
-	call GenRandomInBattle
+	call BattleRandom
 	cp a,$80
 	jr c,.next3
 	ld hl,W_PLAYERBATTSTATUS1
@@ -3438,7 +3438,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,W_PLAYERMONSTATUS
 	bit PAR,[hl]
 	jr z,.next7 ; 5975
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	cp a,$3F
 	jr nc,.next7
 	ld hl,FullyParalyzedText
@@ -3526,7 +3526,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,W_PLAYERBATTSTATUS1
 	res 1,[hl]
 	set 7,[hl]
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	and a,3
 	inc a
 	inc a
@@ -3984,14 +3984,14 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	cp d
 	jp nc, Func_3ddb0
 .asm_3dcdf
-	call GenRandomInBattle
+	call BattleRandom
 	swap a
 	cp b
 	jr nc, .asm_3dcdf
 	cp c
 	jp c, Func_3ddb0
 .asm_3dceb
-	call GenRandomInBattle
+	call BattleRandom
 	cp b
 	jr nc, .asm_3dceb
 	cp c
@@ -3999,7 +3999,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld a, d
 	sub c
 	ld b, a
-	call GenRandomInBattle
+	call BattleRandom
 	swap a
 	sub b
 	jr c, .asm_3dd0e
@@ -4010,7 +4010,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	call PrintHurtItselfText
 	jp Func_3ddb4
 .asm_3dd0e
-	call GenRandomInBattle
+	call BattleRandom
 	add a
 	swap a
 	and $7
@@ -4019,7 +4019,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld hl, BeganToNapText
 	jr .asm_3dd3a
 .asm_3dd20
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	ld hl, LoafingAroundText
 	and a
@@ -4079,7 +4079,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	ld a, [wCurrentMenuItem] ; $cc26
 	ld c, a
 .asm_3dd86
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	cp b
 	jr nc, .asm_3dd86
@@ -4606,7 +4606,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 	jr nc, .SkipHighCritical
 	ld b, $ff
 .SkipHighCritical
-	call GenRandomInBattle       ; generates a random value, in "a"
+	call BattleRandom          ; generates a random value, in "a"
 	rlc a
 	rlc a
 	rlc a
@@ -4736,7 +4736,7 @@ ApplyAttackToEnemyPokemon: ; 3e0df (f:60df)
 	ld b,a ; b = level * 1.5
 ; loop until a random number in the range [1, b) is found
 .loop
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	and a
 	jr z,.loop
 	cp b
@@ -4859,7 +4859,7 @@ ApplyAttackToPlayerPokemon: ; 3e1a0 (f:61a0)
 ; this differs from the range when the player attacks, which is [1, b)
 ; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
 .loop
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	cp b
 	jr nc,.loop
 	ld b,a
@@ -5090,7 +5090,7 @@ MetronomePickMove: ; 3e348 (f:6348)
 	ld hl,wEnemySelectedMove
 ; loop to pick a random number in the range [1, $a5) to be the move used by Metronome
 .pickMoveLoop
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	and a
 	jr z,.pickMoveLoop
 	cp a,NUM_MOVES + 1 ; max normal move number + 1 (this is Struggle's move number)
@@ -5385,7 +5385,7 @@ MoveHitTest: ; 3e56b (f:656b)
 .doAccuracyCheck
 ; if the random number generated is greater than or equal to the scaled accuracy, the move misses
 ; note that this means that even the highest accuracy is still just a 255/256 chance, not 100%
-	call GenRandomInBattle ; random number
+	call BattleRandom
 	cp b
 	jr nc,.moveMissed
 	ret
@@ -5494,7 +5494,7 @@ Func_3e687: ; 3e687 (f:6687)
 	ld a, [hl]
 	ld [$ff98], a
 .asm_3e69c
-	call GenRandomInBattle
+	call BattleRandom
 	rrca
 	cp $d9
 	jr c, .asm_3e69c
@@ -5821,7 +5821,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	ld [$cc5b], a
 	ld a,CONF_ANIM
 	call PlayMoveAnimation
-	call GenRandomInBattle
+	call BattleRandom
 	cp $80
 	jr c, Func_3e9aa
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
@@ -5884,7 +5884,7 @@ Func_3e9aa: ; 3e9aa (f:69aa)
 	ld hl, W_ENEMYMONSTATUS ; $cfe9
 	bit 6, [hl]
 	jr z, asm_3e9f6
-	call GenRandomInBattle
+	call BattleRandom
 	cp $3f
 	jr nc, asm_3e9f6
 	ld hl, FullyParalyzedText
@@ -5973,7 +5973,7 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 1, [hl] ; mon is no longer using thrash or petal dance
 	set 7, [hl] ; mon is now confused
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	inc a
 	inc a
@@ -6062,9 +6062,9 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, $98
 	ld b, $88
 	jr z, .asm_3eb33
-	call GenRandomInBattle
+	call BattleRandom
 	ld b, a
-	call GenRandomInBattle
+	call BattleRandom
 .asm_3eb33
 	ld hl, $cff1
 	ld [hli], a
@@ -6578,34 +6578,39 @@ Func_3ee94: ; 3ee94 (f:6e94)
 TerminatorText_3ee9a: ; 3ee9a (f:6e9a)
 	db "@"
 
-; generates a random number unless in link battle
-; stores random number in A
-GenRandomInBattle: ; 3ee9b (f:6e9b)
+
+BattleRandom:
+; Link battles use a shared PRNG.
+
 	ld a, [W_ISLINKBATTLE]
 	cp $4
-	jp nz, GenRandom
+	jp nz, Random
+
 	push hl
 	push bc
 	ld a, [$ccde]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, $d148
 	add hl, bc
 	inc a
 	ld [$ccde], a
-	cp $9
+	cp 9
 	ld a, [hl]
 	pop bc
 	pop hl
 	ret c
+
 	push hl
 	push bc
 	push af
+
 	xor a
 	ld [$ccde], a
+
 	ld hl, $d148
-	ld b, $9
-.asm_3eec5
+	ld b, 9
+.loop
 	ld a, [hl]
 	ld c, a
 	add a
@@ -6614,11 +6619,13 @@ GenRandomInBattle: ; 3ee9b (f:6e9b)
 	inc a
 	ld [hli], a
 	dec b
-	jr nz, .asm_3eec5 ; 0x3eecd $f6
+	jr nz, .loop
+
 	pop af
 	pop bc
 	pop hl
 	ret
+
 
 Func_3eed3: ; 3eed3 (f:6ed3)
 	ld a, [H_WHOSETURN] ; $fff3
@@ -7089,7 +7096,7 @@ SleepEffect: ; 3f1fc (f:71fc)
 	and a
 	jr nz, .asm_3f242
 .asm_3f231
-	call GenRandomInBattle
+	call BattleRandom
 	and $7
 	jr z, .asm_3f231
 	ld [de], a
@@ -7145,7 +7152,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	jr nz, .asm_3f2d7
 	jr .asm_3f295
 .asm_3f290
-	call GenRandomInBattle
+	call BattleRandom
 	cp b
 	ret nc
 .asm_3f295
@@ -7253,7 +7260,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
 	push af     ;push effect...
-	call GenRandomInBattle  ;get random 8bit value for probability test
+	call BattleRandom  ;get random 8bit value for probability test
 	cp b        ;success?
 	pop bc      ;...pop effect into C
 	ret nc      ;do nothing if random value is >= 1A or 4D [no status applied]
@@ -7305,7 +7312,7 @@ opponentAttacker: ; 3f382 (f:7382)
 	sub a, $1e
 .next1
 	push af
-	call GenRandomInBattle
+	call BattleRandom
 	cp b
 	pop bc
 	ret nc
@@ -7571,7 +7578,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	ld a, [W_ISLINKBATTLE] ; $d12b
 	cp $4
 	jr z, .asm_3f572
-	call GenRandomInBattle
+	call BattleRandom
 	cp $40
 	jp c, Func_3f65a
 .asm_3f572
@@ -7580,7 +7587,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .asm_3f58a
-	call GenRandomInBattle
+	call BattleRandom
 	cp SPLASH_EFFECT
 	jp nc, Func_3f650
 	ld a, [de]
@@ -7813,7 +7820,7 @@ BideEffect: ; 3f6e5 (f:76e5)
 	ld [de], a
 	ld [W_PLAYERMOVEEFFECT], a
 	ld [W_ENEMYMOVEEFFECT], a
-	call GenRandomInBattle
+	call BattleRandom
 	and $1
 	inc a
 	inc a
@@ -7832,7 +7839,7 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld de, $d06f
 .asm_3f728
 	set 1, [hl] ; mon is now using thrash/petal dance
-	call GenRandomInBattle
+	call BattleRandom
 	and $1
 	inc a
 	inc a
@@ -7857,7 +7864,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld c, a
 	inc c
 .asm_3f751
-	call GenRandomInBattle
+	call BattleRandom
 	cp c
 	jr nc, .asm_3f751
 	srl b
@@ -7899,7 +7906,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld c, a
 	inc c
 .asm_3f7a4
-	call GenRandomInBattle
+	call BattleRandom
 	cp c
 	jr nc, .asm_3f7a4
 	srl b
@@ -7982,11 +7989,11 @@ TwoToFiveAttacksEffect: ; 3f811 (f:7811)
 	cp ATTACK_TWICE_EFFECT
 	ld a, $2
 	jr z, .asm_3f853
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	cp $2
 	jr c, .asm_3f851
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 .asm_3f851
 	inc a
@@ -8017,7 +8024,7 @@ FlichSideEffect: ; 3f85b (f:785b)
 	jr z, .asm_3f879
 	ld b, $4d ; ~30% chance of flinch
 .asm_3f879
-	call GenRandomInBattle
+	call BattleRandom
 	cp b
 	ret nc
 	set 3, [hl] ; set mon's status to flinching
@@ -8124,11 +8131,11 @@ TrappingEffect: ; 3f917 (f:7917)
 	ret nz
 	call Func_3f9cf
 	set 5, [hl]
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	cp $2
 	jr c, .asm_3f93e
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 .asm_3f93e
 	inc a
@@ -8151,7 +8158,7 @@ RecoilEffect: ; 3f951 (f:7951)
 	jp Bankswitch
 
 ConfusionSideEffect: ; 3f959 (f:7959)
-	call GenRandomInBattle
+	call BattleRandom
 	cp $19
 	ret nc
 	jr Func_3f96f
@@ -8179,7 +8186,7 @@ Func_3f96f: ; 3f96f (f:796f)
 	jr nz, Func_3f9a6
 	set 7, [hl] ; mon is now confused
 	push af
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	inc a
 	inc a
@@ -8265,7 +8272,7 @@ MimicEffect: ; 3f9ed (f:79ed)
 	jr nz, .asm_3fa74
 .asm_3fa17
 	push hl
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	ld c, a
 	ld b, $0
@@ -8346,7 +8353,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	jr nz, .asm_3fb06
 .asm_3faa8
 	push hl
-	call GenRandomInBattle
+	call BattleRandom
 	and $3
 	ld c, a
 	ld b, $0
@@ -8384,7 +8391,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	and a
 	jr z, .asm_3faa8
 .asm_3fae1
-	call GenRandomInBattle
+	call BattleRandom
 	and $7
 	inc a
 	inc c

@@ -156,7 +156,7 @@ ItemUseBall: ; d687 (3:5687)
 ; if not fighting ghost Marowak, loop until a random number in the current
 ; pokeball's allowed range is found
 .loop	;$56fa
-	call GenRandom
+	call Random
 	ld b,a
 	ld hl,$cf91
 	ld a,[hl]
@@ -243,7 +243,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[H_QUOTIENT + 2]
 	and a
 	jr nz,.BallSuccess ; if ((MaxHP * 255) / BallFactor) / (CurHP / 4) > 0x255, automatic success
-	call GenRandom
+	call Random
 	ld b,a
 	ld a,[H_QUOTIENT + 3]
 	cp b
@@ -1344,7 +1344,7 @@ BaitRockCommon: ; df7f (3:5f7f)
 	ld [H_WHOSETURN],a
 	ld [de],a ; zero escape factor (for bait), zero bait factor (for rock)
 .randomLoop ; loop until a random number less than 5 is generated
-	call GenRandom
+	call Random
 	and a,7
 	cp a,5
 	jr nc,.randomLoop
@@ -1767,7 +1767,7 @@ GoodRodCode: ; e259 (3:6259)
 	call FishingInit
 	jp c,ItemUseNotTime
 .RandomLoop
-	call GenRandom
+	call Random
 	srl a
 	jr c, .SetBite
 	and %11
@@ -2814,7 +2814,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	ld e, $0 ; no bite yet
 
 .RandomLoop ; 0xe90c
-	call GenRandom
+	call Random
 	srl a
 	ret c ; 50% chance of no battle
 

@@ -37,7 +37,7 @@ Func_5345: ; 5345
 	jr nz, .asm_5357
 	ld b, $a
 .asm_535d
-	call GenRandom
+	call Random
 	cp $fd
 	jr nc, .asm_535d
 	ld [hli], a

@@ -132,10 +132,10 @@ Func_13870: ; 13870 (4:7870)
 	ld a, [W_GRASSRATE] ; $d887
 .asm_138c4
 	ld b, a
-	ld a, [H_RAND1] ; $ffd3
+	ld a, [hRandomAdd]
 	cp b
 	jr nc, .asm_13912
-	ld a, [H_RAND2] ; $ffd4
+	ld a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances ; $7918
 .asm_138d0

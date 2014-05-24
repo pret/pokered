@@ -98,8 +98,8 @@ REDRAWROW EQU 2
 
 H_SCREENEDGEREDRAWADDR EQU $FFD1
 
-H_RAND1 EQU $FFD3
-H_RAND2 EQU $FFD4
+hRandomAdd EQU $FFD3
+hRandomSub EQU $FFD4
 
 H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
 

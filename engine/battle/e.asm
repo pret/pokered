@@ -898,7 +898,7 @@ TrainerAI: ; 3a52e (e:652e)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	call GenRandom
+	call Random
 	jp [hl]
 
 TrainerAIPointers: ; 3a55c (e:655c)

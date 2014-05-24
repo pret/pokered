@@ -5033,7 +5033,7 @@ VBlank::
 
 	; VBlank-sensitive operations end.
 
-	call GenRandom
+	call Random
 
 	ld a, [H_VBLANKOCCURRED]
 	and a
@@ -9907,12 +9907,12 @@ GoPAL_SET:: ; 3def (0:3def)
 	ld a,$45
 	jp Predef
 
-; hl points to where the color gets stored
-; e contains the number of pixels filled in the health bar (out of 48)
-GetHealthBarColor:: ; 3df9 (0:3df9)
+GetHealthBarColor::
+; Return at hl the palette of
+; an HP bar e pixels long.
 	ld a, e
 	cp 27
-	ld d, $0 ; green
+	ld d, 0 ; green
 	jr nc, .gotColor
 	cp 10
 	inc d ; yellow
@@ -9940,9 +9940,11 @@ Func_3e08:: ; 3e08 (0:3e08)
 	call LoadFontTilePatterns
 	jp UpdateSprites
 
-GiveItem:: ; 3e2e (0:3e2e)
-; Give player quantity c of item b, and copy item name to $cf4b.
-; Set carry on success. If no room in bag, reset carry.
+
+GiveItem::
+; Give player quantity c of item b,
+; and copy the item's name to $cf4b.
+; Return carry on success.
 	ld a, b
 	ld [$d11e], a
 	ld [$cf91], a
@@ -9951,12 +9953,13 @@ GiveItem:: ; 3e2e (0:3e2e)
 	ld hl,wNumBagItems
 	call AddItemToInventory
 	ret nc
-	call GetItemName ; $2fcf
+	call GetItemName
 	call CopyStringToCF4B
 	scf
 	ret
 
-GivePokemon:: ; 3e48 (0:3e48)
+GivePokemon::
+; Give the player monster b at level c.
 	ld a, b
 	ld [$cf91], a
 	ld a, c
@@ -9967,13 +9970,15 @@ GivePokemon:: ; 3e48 (0:3e48)
 	ld hl, _GivePokemon
 	jp Bankswitch
 
-GenRandom:: ; 3e5c (0:3e5c)
-; store a random 8-bit value in a
+
+Random::
+; Return a random number in a.
+; For battles, use BattleRandom.
 	push hl
 	push de
 	push bc
-	callba GenRandom_
-	ld a,[H_RAND1]
+	callba Random_
+	ld a,[hRandomAdd]
 	pop bc
 	pop de
 	pop hl
@@ -11075,7 +11080,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	jr .asm_4f5f
 .asm_4f59
 	call getTileSpriteStandsOn
-	call GenRandom
+	call Random
 .asm_4f5f
 	ld b, a
 	ld a, [wCurSpriteMovement2]
@@ -11235,11 +11240,11 @@ UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
 	ld [hl], $1                      ; c1x1 = 1 (movement status ready)
 	ret
 .initNextMovementCounter
-	call GenRandom
+	call Random
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
-	ld a, [H_RAND1] ; $ffd3
+	ld a, [hRandomAdd]
 	and $7f
 	ld [hl], a                       ; c2x8: set next movement delay to a random value in [0,$7f]
 	dec h                            ;       note that value 0 actually makes the delay $100 (bug?)
@@ -11559,8 +11564,8 @@ CanWalkOntoTile: ; 516e (1:516e)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
-	call GenRandom
-	ld a, [H_RAND1] ; $ffd3
+	call Random
+	ld a, [hRandomAdd]
 	and $7f
 	ld [hl], a         ; c2x8: set next movement delay to a random value in [0,$7f] (again with delay $100 if value is 0)
 	scf                ; set carry (marking failure to walk)
@@ -14846,9 +14851,9 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [W_ISINBATTLE] ; $d057
 	and a
 	jr nz, .copyEnemyMonData
-	call GenRandom     ; generate random IVs
+	call Random ; generate random IVs
 	ld b, a
-	call GenRandom
+	call Random
 .writeFreshMonData ; f3b3
 	push bc
 	ld bc, $1b
@@ -15602,11 +15607,11 @@ Func_f839: ; f839 (3:7839)
 	ret
 
 InitializePlayerData: ; f850 (3:7850)
-	call GenRandom
-	ld a, [H_RAND2]
+	call Random
+	ld a, [hRandomSub]
 	ld [wPlayerID], a          ; set player trainer id
-	call GenRandom
-	ld a, [H_RAND1]
+	call Random
+	ld a, [hRandomAdd]
 	ld [wPlayerID + 1], a
 	ld a, $ff
 	ld [$d71b], a                 ; XXX what's this?

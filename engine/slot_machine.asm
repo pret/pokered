@@ -179,7 +179,7 @@ SlotMachine_37480: ; 37480 (d:7480)
 	ld a, [W_SUBANIMSUBENTRYADDR]
 	and a
 	jr nz, .skip1
-	call GenRandom
+	call Random
 	and a
 	jr z, .skip2
 	ld b, a
@@ -578,7 +578,7 @@ SlotReward300Func: ; 37702 (d:7702)
 	call PrintText
 	ld a, (SFX_1f_3b - SFX_Headers_1f) / 3
 	call PlaySound
-	call GenRandom
+	call Random
 	cp $80
 	ld a, $0
 	jr c, .skip

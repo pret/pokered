@@ -14,7 +14,7 @@ VermilionCityScript: ; 197a1 (6:57a1)
 	jp CallFunctionInTable
 
 VermilionCityScript_197c0: ; 197c0 (6:57c0)
-	call GenRandom
+	call Random
 	ld a, [$ffd4]
 	and $e
 	ld [$d743], a
