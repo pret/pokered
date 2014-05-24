@@ -15982,7 +15982,7 @@ INCLUDE "engine/items/tms.asm"
 
 INCLUDE "engine/battle/4_2.asm"
 
-INCLUDE "engine/rng.asm"
+INCLUDE "engine/random.asm"
 
 SECTION "bank5",ROMX,BANK[$5]
 
