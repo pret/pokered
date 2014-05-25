@@ -3075,7 +3075,7 @@ Func_7c18: ; 7c18 (1:7c18)
 
 SECTION "bank3",ROMX,BANK[$3]
 
-_GetJoypadState::
+_Joypad::
 	ld a, [hJoyInput]
 	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
 	jp z, TrySoftReset
@@ -3125,7 +3125,7 @@ TrySoftReset:
 	ld hl, hSoftReset
 	dec [hl]
 	jp z, SoftReset
-	jp GetJoypadState
+	jp Joypad
 
 INCLUDE "data/map_songs.asm"
 

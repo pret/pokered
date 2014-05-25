@@ -540,7 +540,7 @@ TradeCenter_SelectMon:
 	ld a, $ed
 	ld [$c4e1], a
 .asm_574a
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	and a
 	jr z, .asm_574a ; 0x5750 $f8

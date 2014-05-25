@@ -100,7 +100,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [hJoyPressed],a
 	ld [hJoyReleased],a
 	ld [hJoyHeld],a
-	call GetJoypadState
+	call Joypad
 	ld a,[hJoyHeld]
 	bit 0,a
 	jr nz,.next5
@@ -483,7 +483,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call PlaceMenuCursor
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	ld b,a
 	and a,%11111011 ; any key besides select pressed?

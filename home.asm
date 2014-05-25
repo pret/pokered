@@ -156,12 +156,12 @@ ReadJoypad::
 	ld [rJOYP], a
 	ret
 
-GetJoypadState::
+Joypad::
 ; Update the joypad state variables:
 ; [hJoyReleased]  keys released since last time
 ; [hJoyPressed]   keys pressed since last time
 ; [hJoyHeld] currently pressed keys
-	homecall _GetJoypadState
+	homecall _Joypad
 	ret
 
 
@@ -220,7 +220,7 @@ OverworldLoopLessDelay::
 	ld a,[wWalkCounter]
 	and a
 	jp nz,.moveAhead ; if the player sprite has not yet completed the walking animation
-	call GetJoypadStateOverworld ; get joypad state (which is possibly simulated)
+	call JoypadOverworld ; get joypad state (which is possibly simulated)
 	callba SafariZoneCheck
 	ld a,[$da46]
 	and a
@@ -588,7 +588,7 @@ CheckWarpsNoCollisionLoop:: ; 06cc (0:06cc)
 	jr nz,WarpFound1
 	push de
 	push bc
-	call GetJoypadState
+	call Joypad
 	pop bc
 	pop de
 	ld a,[hJoyHeld] ; current joypad state
@@ -2006,12 +2006,12 @@ DrawTileBlock:: ; 0f1d (0:0f1d)
 	ret
 
 ; function to update joypad state and simulate button presses
-GetJoypadStateOverworld:: ; 0f4d (0:0f4d)
+JoypadOverworld:: ; 0f4d (0:0f4d)
 	xor a
 	ld [$c103],a
 	ld [$c105],a
 	call RunMapScript
-	call GetJoypadState
+	call Joypad
 	ld a,[W_FLAGS_D733]
 	bit 3,a ; check if a trainer wants a challenge
 	jr nz,.notForcedDownwards
@@ -2596,7 +2596,7 @@ ForceBikeOrSurf:: ; 12ed (0:12ed)
 CheckForUserInterruption:: ; 12f8 (0:12f8)
 	call DelayFrame
 	push bc
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	pop bc
 	ld a,[hJoyHeld] ; currently pressed buttons
 	cp a,%01000110 ; Up, Select button, B button
@@ -4225,7 +4225,7 @@ TextCommand09:: ; 1bff (0:1bff)
 ; (no arguments)
 TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
-	call GetJoypadState
+	call Joypad
 	ld a,[hJoyHeld]
 	and a,%00000011 ; A and B buttons
 	jr nz,.skipDelay
@@ -4302,7 +4302,7 @@ TextCommand0C:: ; 1c78 (0:1c78)
 	ld a,$75 ; ellipsis
 	ld [hli],a
 	push de
-	call GetJoypadState
+	call Joypad
 	pop de
 	ld a,[hJoyHeld] ; joypad state
 	and a,%00000011 ; is A or B button pressed?
@@ -6513,7 +6513,7 @@ AfterDisplayingTextID:: ; 29d6 (0:29d6)
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen:: ; 29df (0:29df)
-	call GetJoypadState
+	call Joypad
 	ld a,[hJoyHeld]
 	bit 0,a ; is the A button being pressed?
 	jr nz,HoldTextDisplayOpen
@@ -6953,7 +6953,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld [$cf96],a ; initialize current quantity to 0
 	jp .incrementQuantity
 .waitForKeyPressLoop
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[hJoyPressed] ; newly pressed buttons
 	bit 0,a ; was the A button pressed?
 	jp nz,.buttonAPressed
@@ -8773,8 +8773,8 @@ CopyString:: ; 3829 (0:3829)
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
 ;    ([$ffb7] == 1, [$ffb6] == 0)
-GetJoypadStateLowSensitivity:: ; 3831 (0:3831)
-	call GetJoypadState
+JoypadLowSensitivity:: ; 3831 (0:3831)
+	call Joypad
 	ld a,[$ffb7] ; flag
 	and a ; get all currently pressed buttons or only newly pressed buttons?
 	ld a,[hJoyPressed] ; newly pressed buttons
@@ -8832,7 +8832,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	ld hl, Coord
 	call HandleDownArrowBlinkTiming
 	pop hl
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, $2d
 	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
 	ld a, [$ffb5]
@@ -8922,7 +8922,7 @@ PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,1
 	ld [H_FRAMECOUNTER],a
 .checkButtons
-	call GetJoypadState
+	call Joypad
 	ld a,[hJoyHeld]
 .checkAButton
 	bit 0,a ; is the A button pressed?
@@ -9301,7 +9301,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	callba AnimatePartyMon ; shake mini sprite of selected pokemon
 .getJoypadState
 	pop hl
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	and a ; was a key pressed?
 	jr nz,.keyPressed

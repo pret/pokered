@@ -799,7 +799,7 @@ SlotMachine_3784e: ; 3784e (d:784e)
 
 SlotMachine_37882: ; 37882 (d:7882)
 	call DelayFrame
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	and $1
 	ret z

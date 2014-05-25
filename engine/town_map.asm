@@ -67,7 +67,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	call CopyData
 .asm_70ec8
 	call Func_716c6
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	ld b, a
 	and $c3
@@ -195,7 +195,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 .asm_71004
 	push hl
 	call DelayFrame
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	ld b, a
 	pop hl

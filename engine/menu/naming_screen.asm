@@ -133,7 +133,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	callba AnimatePartyMon_ForceSpeed1
 	pop af
 	ld [wCurrentMenuItem], a ; $cc26
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [hJoyPressed]
 	and a
 	jr z, .asm_65ff

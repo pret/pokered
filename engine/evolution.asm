@@ -141,7 +141,7 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 asm_7befa: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	pop bc
 	and $2

@@ -584,7 +584,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	xor a
 	ld [$fff4],a
 .waitForButtonPress
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	and a,%00000011 ; A button and B button
 	jr z,.waitForButtonPress
