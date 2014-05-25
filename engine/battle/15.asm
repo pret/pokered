@@ -17,8 +17,8 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $2
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld a, c
 	and a
 	pop hl
@@ -251,8 +251,8 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wWhichPokemon] ; $cf92
 	ld c, a
 	ld b, $1
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	pop hl
 	pop af
 	ld [W_CURENEMYLVL], a ; $d127
@@ -277,14 +277,14 @@ Func_55436: ; 55436 (15:5436)
 	ld c, a
 	ld b, $1
 	push bc
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld hl, $ccf5
 	xor a
 	ld [hl], a
 	pop bc
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 Func_5546c: ; 5546c (15:546c)
 	ld a, [W_PLAYERMONSALIVEFLAGS]

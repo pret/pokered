@@ -198,8 +198,8 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld c, a
 	ld b, $2
 	ld hl, W_OBTAINEDBADGES
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld a, c
 	and a
 	jr nz, .asm_5136e
@@ -216,8 +216,8 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld c, a
 	ld b, $1
 	ld hl, $d7ed
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld a, $2
 	ld [W_ROUTE23CURSCRIPT], a
 	ret

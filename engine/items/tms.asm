@@ -18,8 +18,8 @@ TestMonMoveCompatibility: ; 1373e (4:773e)
 .TMfoundLoop
 	pop hl
 	ld b, $2  ; read corresponding bit from TM compatibility array
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 ; converts TM/HM number in $d11e into move number
 ; HMs start at 51

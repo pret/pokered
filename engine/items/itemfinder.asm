@@ -11,8 +11,8 @@ HiddenItemNear: ; 7481f (1d:481f)
 	ld hl, $d6f0
 	ld c, b
 	ld b, $2
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld a, c
 	pop hl
 	pop bc

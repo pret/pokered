@@ -194,8 +194,8 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 
 CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
 	ld hl, $d79c
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
@@ -227,8 +227,8 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld c, a
 	ld b, $2
 	ld hl, $d79a
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld a, c
 	and a
 	ret nz

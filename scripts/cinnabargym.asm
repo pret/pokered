@@ -87,8 +87,8 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	jp DisplayTextID
 
 CinnabarGymScript_757f1: ; 757f1 (1d:57f1)
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [$d057]

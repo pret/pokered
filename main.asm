@@ -7666,10 +7666,9 @@ ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	pop de
 	ret
 
-; calls HandleBitArray
-HandleBitArray_Bank0:: ; 31c7 (0:31c7)
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+TrainerFlagAction::
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 ; direct talking to a trainer (rather than getting seen by one)
 TalkToTrainer:: ; 31cc (0:31cc)
@@ -7681,7 +7680,7 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, $2
-	call HandleBitArray_Bank0      ; read trainer's flag
+	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
 	jr z, .trainerNotYetFought     ; test trainer's flag
@@ -7774,7 +7773,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, $1
-	call HandleBitArray_Bank0   ; flag trainer as fought
+	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [W_ENEMYMONORTRAINERCLASS]
 	cp $c8
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
@@ -7857,7 +7856,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld b, $2
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	call HandleBitArray_Bank0        ; read trainer flag
+	call TrainerFlagAction        ; read trainer flag
 	ld a, c
 	and a
 	jr nz, .trainerAlreadyFought
@@ -10173,6 +10172,7 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw ElevatorText                         ; id = 41
 	dw PokemonStuffText                     ; id = 42
 
+
 SECTION "bank1",ROMX,BANK[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
@@ -10285,11 +10285,8 @@ INCLUDE "engine/battle/safari_zone.asm"
 
 INCLUDE "engine/titlescreen.asm"
 
-NintenText: ; 45aa (1:45aa)
-	db "NINTEN@"
-
-SonyText: ; 45b1 (1:45b1)
-	db "SONY@"
+NintenText: db "NINTEN@"
+SonyText:   db "SONY@"
 
 ; loads pokemon data from one of multiple sources to $cf98
 ; loads base stats to $d0b8
@@ -10541,12 +10538,13 @@ DMARoutine: ; 4bfb (1:4bfb)
 	jr nz, .waitLoop
 	ret
 
-PrintWaitingText: ; 4c05 (1:4c05)
-	FuncCoord 3, 10 ; $c46b
+
+PrintWaitingText:
+	FuncCoord 3, 10
 	ld hl, Coord
 	ld b, $1
 	ld c, $b
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE]
 	and a
 	jr z, .asm_4c17
 	call TextBoxBorder
@@ -10554,15 +10552,16 @@ PrintWaitingText: ; 4c05 (1:4c05)
 .asm_4c17
 	call Func_5ab3
 .asm_4c1a
-	FuncCoord 4, 11 ; $c480
+	FuncCoord 4, 11
 	ld hl, Coord
 	ld de, WaitingText
 	call PlaceString
-	ld c, $32
+	ld c, 50
 	jp DelayFrames
 
-WaitingText: ; 4c28 (1:4c28)
+WaitingText:
 	db "Waiting...!@"
+
 
 _UpdateSprites: ; 4c34 (1:4c34)
 	ld h, $c1
@@ -10594,7 +10593,7 @@ _UpdateSprites: ; 4c34 (1:4c34)
 	jp nz, UpdateNonPlayerSprite
 	jp UpdatePlayerSprite
 
-UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
+UpdateNonPlayerSprite:
 	dec a
 	swap a
 	ld [$ff93], a  ; $10 * sprite#
@@ -10607,36 +10606,46 @@ UpdateNonPlayerSprite: ; 4c5c (1:4c5c)
 .unequal
 	jp Func_4ed1
 
-Func_4c70: ; 4c70 (1:4c70)
+
+Func_4c70:
 	nop
-	ld h, $c1
+
+	ld h, $c100 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
-	add $0
+	add $c100 % $100
 	ld l, a
+
 	ld a, [hl]
 	and a
 	ret z
+
 	ld a, l
-	add $3
+	add 3
 	ld l, a
+
 	ld a, [hli]
 	call Func_4d72
+
 	ld a, [hli]
-	add $4
+	add 4
 	add b
 	and $f0
 	or c
 	ld [$ff90], a
+
 	ld a, [hli]
 	call Func_4d72
+
 	ld a, [hl]
 	add b
 	and $f0
 	or c
 	ld [$ff91], a
+
 	ld a, l
-	add $7
+	add 7
 	ld l, a
+
 	xor a
 	ld [hld], a
 	ld [hld], a
@@ -10646,31 +10655,36 @@ Func_4c70: ; 4c70 (1:4c70)
 	ld [hl], a
 	xor a
 
-Func_4ca5: ; 4ca5 (1:4ca5)
+.loop
 	ld [$ff8f], a
 	swap a
 	ld e, a
 	ld a, [H_CURRENTSPRITEOFFSET]
 	cp e
-	jp z, .asm_4d69
+	jp z, .next
+
 	ld d, h
 	ld a, [de]
 	and a
-	jp z, .asm_4d69
+	jp z, .next
+
 	inc e
 	inc e
 	ld a, [de]
 	inc a
-	jp z, .asm_4d69
+	jp z, .next
+
 	ld a, [H_CURRENTSPRITEOFFSET]
-	add $a
+	add 10
 	ld l, a
 	inc e
+
 	ld a, [de]
 	call Func_4d72
 	inc e
+
 	ld a, [de]
-	add $4
+	add 4
 	add b
 	and $f0
 	or c
@@ -10680,16 +10694,17 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	inc a
 .asm_4cd4
 	ld [$ff90], a
+
 	push af
 	rl c
 	pop af
 	ccf
 	rl c
-	ld b, $7
+	ld b, 7
 	ld a, [hl]
 	and $f
 	jr z, .asm_4ce6
-	ld b, $9
+	ld b, 9
 .asm_4ce6
 	ld a, [$ff90]
 	sub b
@@ -10697,22 +10712,25 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld a, b
 	ld [$ff90], a
 	jr c, .asm_4d01
-	ld b, $7
+
+	ld b, 7
 	dec e
 	ld a, [de]
 	inc e
 	and a
 	jr z, .asm_4cfa
-	ld b, $9
+	ld b, 9
 .asm_4cfa
 	ld a, [$ff92]
 	sub b
 	jr z, .asm_4d01
-	jr nc, .asm_4d69
+	jr nc, .next
+
 .asm_4d01
 	inc e
 	inc l
 	ld a, [de]
+
 	push bc
 	call Func_4d72
 	inc e
@@ -10721,22 +10739,24 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	and $f0
 	or c
 	pop bc
+
 	sub [hl]
 	jr nc, .asm_4d14
 	cpl
 	inc a
 .asm_4d14
 	ld [$ff91], a
+
 	push af
 	rl c
 	pop af
 	ccf
 	rl c
-	ld b, $7
+	ld b, 7
 	ld a, [hl]
 	and $f
 	jr z, .asm_4d26
-	ld b, $9
+	ld b, 9
 .asm_4d26
 	ld a, [$ff91]
 	sub b
@@ -10744,18 +10764,19 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld a, b
 	ld [$ff91], a
 	jr c, .asm_4d41
-	ld b, $7
+	ld b, 7
 	dec e
 	ld a, [de]
 	inc e
 	and a
 	jr z, .asm_4d3a
-	ld b, $9
+	ld b, 9
 .asm_4d3a
 	ld a, [$ff92]
 	sub b
 	jr z, .asm_4d41
-	jr nc, .asm_4d69
+	jr nc, .next
+
 .asm_4d41
 	ld a, [$ff91]
 	ld b, a
@@ -10763,10 +10784,10 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	inc l
 	cp b
 	jr c, .asm_4d4e
-	ld b, $c
+	ld b, 12
 	jr .asm_4d50
 .asm_4d4e
-	ld b, $3
+	ld b, 3
 .asm_4d50
 	ld a, c
 	and b
@@ -10776,7 +10797,7 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	inc l
 	inc l
 	ld a, [$ff8f]
-	ld de, DiagonalLines ; $4d85
+	ld de, DiagonalLines
 	add a
 	add e
 	ld e, a
@@ -10790,46 +10811,56 @@ Func_4ca5: ; 4ca5 (1:4ca5)
 	ld a, [de]
 	or [hl]
 	ld [hl], a
-.asm_4d69
+
+.next
 	ld a, [$ff8f]
 	inc a
 	cp $10
-	jp nz, Func_4ca5
+	jp nz, .loop
 	ret
 
-Func_4d72: ; 4d72 (1:4d72)
+Func_4d72:
 	and a
-	ld b, $0
-	ld c, $0
-	jr z, .asm_4d84
-	ld c, $9
-	cp $ff
-	jr z, .asm_4d83
-	ld c, $7
-	ld a, $0
-.asm_4d83
+	ld b, 0
+	ld c, 0
+	jr z, .done
+	ld c, 9
+	cp -1
+	jr z, .ok
+	ld c, 7
+	ld a, 0
+.ok
 	ld b, a
-.asm_4d84
+.done
 	ret
 
-DiagonalLines: ; 4d85 (1:4d85)
-	INCBIN "gfx/diagonal_lines.2bpp"
+DiagonalLines: INCBIN "gfx/diagonal_lines.2bpp"
 
-Func_4da5: ; 4da5 (1:4da5)
+
+TestBattle:
 	ret
 
-Func_4da6: ; 4da6 (1:4da6)
+.loop
 	call GBPalNormal
-	ld a, $80
+
+	; Don't mess around
+	; with obedience.
+	ld a, %10000000 ; EARTHBADGE
 	ld [W_OBTAINEDBADGES], a
+
 	ld hl, W_FLAGS_D733
 	set 0, [hl]
+
+	; Reset the party.
 	ld hl, W_NUMINPARTY
 	xor a
 	ld [hli], a
 	dec a
 	ld [hl], a
-	ld a, $1
+
+	; Give the player a
+	; level 20 Rhydon.
+	ld a, RHYDON
 	ld [$cf91], a
 	ld a, 20
 	ld [W_CURENEMYLVL], a
@@ -10837,17 +10868,26 @@ Func_4da6: ; 4da6 (1:4da6)
 	ld [$cc49], a
 	ld [W_CURMAP], a
 	call AddPokemonToParty
+
+	; Fight against a
+	; level 20 Rhydon.
 	ld a, RHYDON
 	ld [W_CUROPPONENT], a
-	ld a, $2c
+
+	ld a, $2c ; PREDEF_BATTLE
 	call Predef
-	ld a, $1
+
+	; When the battle ends,
+	; do it all again.
+	ld a, 1
 	ld [$cfcb], a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	jr Func_4da6
+	jr .loop
 
-PickupItem: ; 4de1 (1:4de1)
+
+PickupItem:
 	call EnableAutoTextBoxDrawing
+
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld b, a
 	ld hl, W_MISSABLEOBJECTLIST
@@ -10859,43 +10899,48 @@ PickupItem: ; 4de1 (1:4de1)
 	jr z, .isMissable
 	inc hl
 	jr .missableObjectsListLoop
+
 .isMissable
 	ld a, [hl]
 	ld [$ffdb], a
+
 	ld hl, W_MAPSPRITEEXTRADATA
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	dec a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
-	add hl, de        ; seek to item data of found item
-	ld a, [hl]        ; read Item type
-	ld b, a
-	ld c, 1          ; quantity is 1
+	add hl, de
+	ld a, [hl]
+	ld b, a ; item
+	ld c, 1 ; quantity
 	call GiveItem
 	jr nc, .BagFull
+
 	ld a, [$ffdb]
 	ld [$cc4d], a
-	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
-	ld a, $1
+	ld a, $11 ; RemoveMissableObject
+	call Predef
+	ld a, 1
 	ld [$cc3c], a
 	ld hl, FoundItemText
-	jr .printText
+	jr .print
+
 .BagFull
 	ld hl, NoMoreRoomForItemText
-.printText
+.print
 	call PrintText
 	ret
 
-FoundItemText: ; 4e26 (1:4e26)
+FoundItemText:
 	TX_FAR _FoundItemText
 	db $0B
 	db "@"
 
-NoMoreRoomForItemText: ; 4e2c (1:4e2c)
+NoMoreRoomForItemText:
 	TX_FAR _NoMoreRoomForItemText
 	db "@"
+
 
 UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [wSpriteStateData2]
@@ -13200,9 +13245,9 @@ Func_7c18: ; 7c18 (1:7c18)
 
 SECTION "bank3",ROMX,BANK[$3]
 
-_GetJoypadState: ; c000 (3:4000)
+_GetJoypadState::
 	ld a, [H_JOYPADSTATE]
-	cp A_BUTTON | B_BUTTON | SELECT | START ; soft reset sequence
+	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
 	jp z, HandleJoypadResetButtons
 	ld b, a
 	ld a, [H_OLDPRESSEDBUTTONS]
@@ -14436,8 +14481,8 @@ Func_f113: ; f113 (3:7113)
 	ld c, a
 	ld b, $1
 	ld hl, W_TOWNVISITEDFLAG   ; mark town as visited (for flying)
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 .notInTown
 	ld hl, MapHSPointers
 	ld a, [W_CURMAP] ; $d35e
@@ -14519,7 +14564,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld a, [$d048]
 	ld c, a
 	ld b, $1
-	call HandleBitArray2 ; set flag iff Item is hidden
+	call MissableObjectFlagAction ; set flag iff Item is hidden
 .asm_f19d
 	ld hl, $d048
 	inc [hl]
@@ -14544,7 +14589,7 @@ IsMissableObjectHidden: ; f1a6 (3:71a6)
 	ld c, a
 	ld b, $2
 	ld hl, W_MISSABLEOBJECTFLAGS
-	call HandleBitArray2
+	call MissableObjectFlagAction
 	ld a, c
 	and a
 	jr nz, .hidden
@@ -14561,7 +14606,7 @@ AddMissableObject: ; f1c8 (3:71c8)
 	ld a, [$cc4d]
 	ld c, a
 	ld b, $0
-	call HandleBitArray2   ; reset "removed" flag
+	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
 ; removes missable object (items, leg. pokemon, etc.) from the map
@@ -14571,53 +14616,58 @@ RemoveMissableObject: ; f1d7 (3:71d7)
 	ld a, [$cc4d]
 	ld c, a
 	ld b, $1
-	call HandleBitArray2   ; set "removed" flag
+	call MissableObjectFlagAction   ; set "removed" flag
 	jp UpdateSprites
 
-; functionally identical to _HandleBitArray, but with less optimized instructions
-; executes operations on a field of bits
-; b = 0 -> reset bit
-; b = 1 -> set bit
-; b = 2 -> read bit (into c and z-flag)
-; hl: base address
-; c: bit index
-HandleBitArray2: ; f1e6 (3:71e6)
+MissableObjectFlagAction:
+; identical to FlagAction
+
 	push hl
 	push de
 	push bc
+
+	; bit
 	ld a, c
 	ld d, a
-	and $7
-	ld e, a        ; store bit offset in e
+	and 7
+	ld e, a
+
+	; byte
 	ld a, d
 	srl a
 	srl a
-	srl a          ; calc byte offset
+	srl a
 	add l
 	ld l, a
-	jr nc, .noCarry
+	jr nc, .ok
 	inc h
-.noCarry
+.ok
+
+	; d = 1 << e (bitmask)
 	inc e
-	ld d, $1
-.shiftLeftLoop     ; d = 1 << e, bitmask for the used bit
+	ld d, 1
+.shift
 	dec e
-	jr z, .operationSelect
+	jr z, .shifted
 	sla d
-	jr .shiftLeftLoop
-.operationSelect
+	jr .shift
+.shifted
+
 	ld a, b
 	and a
-	jr z, .resetBit
-	cp $2
-	jr z, .readBit
-	ld a, [hl] ; set bit
+	jr z, .reset
+	cp 2
+	jr z, .read
+
+.set
+	ld a, [hl]
 	ld b, a
 	ld a, d
 	or b
 	ld [hl], a
 	jr .done
-.resetBit
+
+.reset
 	ld a, [hl]
 	ld b, a
 	ld a, d
@@ -14625,11 +14675,13 @@ HandleBitArray2: ; f1e6 (3:71e6)
 	and b
 	ld [hl], a
 	jr .done
-.readBit
+
+.read
 	ld a, [hl]
 	ld b, a
 	ld a, d
 	and b
+
 .done
 	pop bc
 	pop de
@@ -14831,7 +14883,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld c, a
 	ld b, $2
 	ld hl, wPokedexOwned ; $d2f7
-	call _HandleBitArray
+	call FlagAction
 	ld a, c
 	ld [$d153], a
 	ld a, [$d11e]
@@ -14839,10 +14891,10 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld c, a
 	ld b, $1
 	push bc
-	call _HandleBitArray
+	call FlagAction
 	pop bc
 	ld hl, wPokedexSeen ; $d30a
-	call _HandleBitArray
+	call FlagAction
 	pop hl
 	push hl
 	ld a, [W_ISINBATTLE] ; $d057
@@ -15069,10 +15121,10 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld b, $1
 	ld hl, wPokedexOwned
 	push bc
-	call _HandleBitArray ; add to owned pokemon
+	call FlagAction ; add to owned pokemon
 	pop bc
 	ld hl, wPokedexSeen
-	call _HandleBitArray ; add to seen pokemon
+	call FlagAction ; add to seen pokemon
 	and a
 	ret                  ; return success
 
@@ -15249,59 +15301,71 @@ Func_f51e: ; f51e (3:751e)
 	and a
 	ret
 
-; predef $10
-; executes operations on a field of bits
-; b = 0 -> reset bit
-; b = 1 -> set bit
-; b = 2 -> read bit (into c and z-flag)
-; hl: base address
-; c: bit index
-HandleBitArray: ; f666 (3:7666)
+
+FlagActionPredef:
 	call GetPredefRegisters
 
-_HandleBitArray: ; f669 (3:7669)
+FlagAction:
+; Perform action b on bit c
+; in the bitfield at hl.
+;  0: reset
+;  1: set
+;  2: read
+; Return the result in c.
+
 	push hl
 	push de
 	push bc
+
+	; bit
 	ld a, c
 	ld d, a
-	and $7
-	ld e, a        ; store bit offset in e
+	and 7
+	ld e, a
+
+	; byte
 	ld a, d
 	srl a
 	srl a
-	srl a          ; calc byte offset
+	srl a
 	add l
 	ld l, a
-	jr nc, .noCarry
+	jr nc, .ok
 	inc h
-.noCarry
+.ok
+
+	; d = 1 << e (bitmask)
 	inc e
-	ld d, $1
-.shiftLeftLoop     ; d = 1 << e, bitmask for the used bit
+	ld d, 1
+.shift
 	dec e
-	jr z, .operationSelect
+	jr z, .shifted
 	sla d
-	jr .shiftLeftLoop
-.operationSelect
+	jr .shift
+.shifted
+
 	ld a, b
 	and a
-	jr z, .resetBit
-	cp $2
-	jr z, .readBit
-	ld b, [hl] ; set bit
+	jr z, .reset
+	cp 2
+	jr z, .read
+
+.set
+	ld b, [hl]
 	ld a, d
 	or b
 	ld [hl], a
 	jr .done
-.resetBit
+
+.reset
 	ld b, [hl]
 	ld a, d
 	xor $ff
 	and b
 	ld [hl], a
 	jr .done
-.readBit
+
+.read
 	ld b, [hl]
 	ld a, d
 	and b
@@ -15312,43 +15376,55 @@ _HandleBitArray: ; f669 (3:7669)
 	ld c, a
 	ret
 
-HealParty: ; f6a5 (3:76a5)
+
+HealParty:
+; Restore HP and PP.
+
 	ld hl, W_PARTYMON1
 	ld de, W_PARTYMON1_HP
-.HealPokemon: ; f6ab (3:76ab)
+.healmon
 	ld a, [hli]
 	cp $ff
-	jr z, .DoneHealing ; End if there's no Pokémon
+	jr z, .done
+
 	push hl
 	push de
-	ld hl, $0003 ; Status offset
+
+	ld hl, $0003 ; status
 	add hl, de
 	xor a
-	ld [hl], a ; Clean status conditions
+	ld [hl], a
+
 	push de
 	ld b, $4 ; A Pokémon has 4 moves
-.RestorePP: ; f6bb (3:76bb)
-	ld hl, $0007 ; Move offset
+.pp
+	ld hl, $0007 ; moves
 	add hl, de
+
 	ld a, [hl]
 	and a
-	jr z, .HealNext ; Skip if there's no move here
+	jr z, .nextmove
+
 	dec a
-	ld hl, $001c ; PP offset
+	ld hl, $001c ; pp
 	add hl, de
+
 	push hl
 	push de
 	push bc
+
 	ld hl, Moves
 	ld bc, $0006
 	call AddNTimes
 	ld de, $cd6d
 	ld a, BANK(Moves)
-	call FarCopyData ; copy move header to memory
-	ld a, [$cd72] ; get default PP
+	call FarCopyData
+	ld a, [$cd72] ; default pp
+
 	pop bc
 	pop de
 	pop hl
+
 	inc de
 	push bc
 	ld b, a
@@ -15357,43 +15433,50 @@ HealParty: ; f6a5 (3:76a5)
 	add b
 	ld [hl], a
 	pop bc
-.HealNext: ; f6eb (3:76eb)
+
+.nextmove
 	dec b
-	jr nz, .RestorePP ; Continue if there's still moves
+	jr nz, .pp
 	pop de
-	ld hl, $0021 ; Max HP offset
+
+	ld hl, $0021 ; max hp - cur hp
 	add hl, de
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hl]
-	ld [de], a ; Restore full HP
+	ld [de], a
+
 	pop de
 	pop hl
+
 	push hl
-	ld bc, $002c
+	ld bc, $002c ; next mon
 	ld h, d
 	ld l, e
 	add hl, bc
 	ld d, h
 	ld e, l
 	pop hl
-	jr .HealPokemon ; Next Pokémon
-.DoneHealing
+	jr .healmon
+
+.done
 	xor a
 	ld [wWhichPokemon], a
 	ld [$d11e], a
+
 	ld a, [W_NUMINPARTY]
 	ld b, a
-.restoreBonusPPLoop ; loop to restore bonus PP from PP Ups
+.ppup
 	push bc
 	call RestoreBonusPP
 	pop bc
 	ld hl, wWhichPokemon
 	inc [hl]
 	dec b
-	jr nz,.restoreBonusPPLoop
+	jr nz, .ppup
 	ret
+
 
 ; predef $9
 ; predef $a
@@ -15603,49 +15686,62 @@ Func_f839: ; f839 (3:7839)
 .asm_f84f
 	ret
 
-InitializePlayerData: ; f850 (3:7850)
+
+InitializePlayerData:
+
 	call Random
 	ld a, [hRandomSub]
-	ld [wPlayerID], a          ; set player trainer id
+	ld [wPlayerID], a
+
 	call Random
 	ld a, [hRandomAdd]
 	ld [wPlayerID + 1], a
+
 	ld a, $ff
 	ld [$d71b], a                 ; XXX what's this?
-	ld hl, W_NUMINPARTY ; $d163
-	call InitializeEmptyList      ; no party mons
-	ld hl, W_NUMINBOX ; $da80
-	call InitializeEmptyList      ; no boxed mons
-	ld hl, wNumBagItems ; $d31d
-	call InitializeEmptyList      ; no items
-	ld hl, wNumBoxItems ; $d53a
-	call InitializeEmptyList      ; no boxed items
-	ld hl, wPlayerMoney + 1 ; $d348
-	ld a, $30
-	ld [hld], a                   ; set money to 00 30 00 (3000)
+
+	ld hl, W_NUMINPARTY
+	call InitializeEmptyList
+	ld hl, W_NUMINBOX
+	call InitializeEmptyList
+	ld hl, wNumBagItems
+	call InitializeEmptyList
+	ld hl, wNumBoxItems
+	call InitializeEmptyList
+
+START_MONEY EQU $3000
+	ld hl, wPlayerMoney + 1
+	ld a, START_MONEY / $100
+	ld [hld], a
 	xor a
 	ld [hli], a
 	inc hl
 	ld [hl], a
-	ld [$cc49], a                 ; XXX what's this?
+
+	ld [$cc49], a
+
 	ld hl, W_OBTAINEDBADGES
-	ld [hli], a                   ; no badges obtained
-	ld [hl], a                    ; XXX what's this?
-	ld hl, wPlayerCoins ; $d5a4
-	ld [hli], a                   ; no coins
+	ld [hli], a
+
 	ld [hl], a
-	ld hl, W_GAMEPROGRESSFLAGS ; $d5f0
+
+	ld hl, wPlayerCoins
+	ld [hli], a
+	ld [hl], a
+
+	ld hl, W_GAMEPROGRESSFLAGS
 	ld bc, $c8
-	call FillMemory               ; clear all game progress flags
+	call FillMemory ; clear all game progress flags
+
 	jp InitializeMissableObjectsFlags
 
-; writes two bytes $00 $ff to hl
-InitializeEmptyList: ; f8a0 (3:78a0)
-	xor a
+InitializeEmptyList:
+	xor a ; count
 	ld [hli], a
-	dec a
+	dec a ; terminator
 	ld [hl], a
 	ret
+
 
 IsItemInBag_: ; f8a5 (3:78a5)
 	call GetPredefRegisters
@@ -16595,13 +16691,12 @@ BaseStats: INCLUDE "data/base_stats.asm"
 INCLUDE "data/cries.asm"
 INCLUDE "engine/battle/e.asm"
 
-; tiles for gameboy and link cable graphics used for trading sequence animation
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
 
-; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
 TradingAnimationGraphics2:
+; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
 
 INCLUDE "engine/evos_moves.asm"
@@ -16942,8 +17037,7 @@ SafariZoneWestBlocks: INCBIN "maps/safarizonewest.blk"
 INCLUDE "data/mapHeaders/safarizonesecrethouse.asm"
 INCLUDE "scripts/safarizonesecrethouse.asm"
 INCLUDE "data/mapObjects/safarizonesecrethouse.asm"
-SafariZoneSecretHouseBlocks:
-	INCBIN "maps/safarizonesecrethouse.blk"
+SafariZoneSecretHouseBlocks: INCBIN "maps/safarizonesecrethouse.blk"
 
 
 SECTION "bank13",ROMX,BANK[$13]

@@ -489,7 +489,7 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	ret
 
 Func_3b057: ; 3b057 (e:7057)
-	ld a, $10
-	jp Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	jp Predef
 
 INCLUDE "data/evos_moves.asm"

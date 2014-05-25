@@ -320,12 +320,12 @@ Func_3c1ad: ; 3c1ad (f:41ad)
 	ld b, $1
 	push bc
 	ld hl, W_PLAYERMONSALIVEFLAGS
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld hl, $ccf5
 	pop bc
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	call Func_3cba6
 	call LoadScreenTilesFromBuffer1
 	call Func_3cc91
@@ -1053,8 +1053,8 @@ Func_3c741: ; 3c741 (f:4741)
 	ld c, a
 	ld hl, W_PLAYERMONSALIVEFLAGS ; clear fainted mon's alive flag
 	ld b, $0
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld hl, W_ENEMYBATTSTATUS1 ; $d067
 	res 2, [hl]   ; reset "attacking multiple times" flag
 	ld a, [$d083]
@@ -1153,12 +1153,12 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld hl, W_PLAYERMONSALIVEFLAGS
 	ld b, $1
 	push bc
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	pop bc
 	ld hl, $ccf5
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	call Func_3cba6
 	call GBPalWhiteOut
 	call Func_3ee5b
@@ -2440,12 +2440,12 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld b, $1
 	push bc
 	ld hl, W_PLAYERMONSALIVEFLAGS
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	pop bc
 	ld hl, $ccf5
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	call Func_3cba6
 	call Func_3cc91
 	call SaveScreenTilesToBuffer1
@@ -6185,8 +6185,8 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld c, a
 	ld b, $1
 	ld hl, wPokedexSeen ; $d30a
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	ld hl, W_ENEMYMONLEVEL ; $cff3
 	ld de, $cd23
 	ld bc, $b

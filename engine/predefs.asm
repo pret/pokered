@@ -78,7 +78,7 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_f71e),Func_f71e
 	db BANK(InitializePlayerData)
 	dw InitializePlayerData
-	dbw BANK(HandleBitArray),HandleBitArray
+	dbw BANK(FlagActionPredef),FlagActionPredef
 	db BANK(RemoveMissableObject)
 	dw RemoveMissableObject
 	db BANK(IsMissableObjectHidden)

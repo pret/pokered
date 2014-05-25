@@ -59,8 +59,8 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld c, a
 	ld hl, wPokedexOwned ; $d2f7
 	ld b, $1
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	ld a, $10 ; FlagActionPredef
+	call Predef
 	pop af
 	ld [$d11e], a
 	call GetMonName
