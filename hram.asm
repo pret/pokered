@@ -4,7 +4,11 @@ H_SPRITEINTERLACECOUNTER EQU $FF8B
 H_SPRITEHEIGHT          EQU $FF8C ; in bytes
 H_SPRITEOFFSET          EQU $FF8D
 
-H_SOFTRESETCOUNTER EQU $FF8A ; initialized to 16, decremented each input iteration if the user presses the reset sequence (A+B+S+s). Soft reset when 0 is reached.
+hSoftReset EQU $FF8A
+; Initialized to 16.
+; Decremented each input iteration if the player
+; presses the reset sequence (A+B+SEL+START).
+; Soft reset when 0 is reached.
 
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
@@ -28,10 +32,10 @@ H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
 H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
 
-H_OLDPRESSEDBUTTONS     EQU $FFB1
-H_NEWLYRELEASEDBUTTONS  EQU $FFB2
-H_NEWLYPRESSEDBUTTONS   EQU $FFB3
-H_CURRENTPRESSEDBUTTONS EQU $FFB4
+hJoyHeldLast     EQU $FFB1
+hJoyReleased  EQU $FFB2
+hJoyPressed   EQU $FFB3
+hJoyHeld EQU $FFB4
 
 H_LOADEDROMBANK     EQU $FFB8
 
@@ -112,5 +116,5 @@ H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
-H_JOYPADSTATE EQU $FFF8
+hJoyInput EQU $FFF8
 

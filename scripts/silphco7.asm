@@ -104,7 +104,7 @@ SilphCo7Text_51bf4: ; 51bf4 (14:5bf4)
 
 SilphCo7Text_51c0c: ; 51c0c (14:5c0c)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 SilphCo7Text_51c10: ; 51c10 (14:5c10)
 	ld [W_SILPHCO7CURSCRIPT], a
@@ -127,9 +127,9 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $4
 	ld [$d528], a
 	ld a, $ff
@@ -170,7 +170,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $d
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -205,7 +205,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	cp $ff
 	jp z, SilphCo7Text_51c0c
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d82f
 	set 0, [hl]
 	ld a, $4
@@ -250,7 +250,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	call Func_2307
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	jp SilphCo7Text_51c10
 
 SilphCo7TextPointers: ; 51d3f (14:5d3f)

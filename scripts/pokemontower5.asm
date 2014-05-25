@@ -27,9 +27,9 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	set 7, [hl]
 	ret nz
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d72e
 	set 4, [hl]
 	ld a, $7
@@ -42,7 +42,7 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 CoordsData_60992: ; 60992 (18:4992)

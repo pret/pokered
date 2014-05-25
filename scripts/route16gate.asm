@@ -22,7 +22,7 @@ Route16GateScript0: ; 496d7 (12:56d7)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, [$cd3d]
 	cp $1
 	jr z, .asm_4970e ; 0x496f1 $1b
@@ -55,7 +55,7 @@ Route16GateScript1: ; 4971d (12:571d)
 	and a
 	ret nz
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 Route16GateScript2: ; 49727 (12:5727)
 	ld a, $1
@@ -75,7 +75,7 @@ Route16GateScript3: ; 49741 (12:5741)
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d730
 	res 7, [hl]
 	ld a, $0

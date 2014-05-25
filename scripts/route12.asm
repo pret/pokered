@@ -9,7 +9,7 @@ Route12Script: ; 595f3 (16:55f3)
 
 Route12Script_59606: ; 59606 (16:5606)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE12CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

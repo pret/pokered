@@ -238,7 +238,7 @@ ENDC
 	call Func_4533
 	call Delay3
 	call LoadGBPal
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	ld b, a
 	and $46
 	cp $46

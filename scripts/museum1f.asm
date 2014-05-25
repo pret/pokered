@@ -23,7 +23,7 @@ Museum1FScript0: ; 5c10d (17:410d)
 	ret nz
 .asm_5c120
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [$ff8c], a
 	jp DisplayTextID
@@ -73,7 +73,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld [$d125], a
 	call DisplayTextBoxID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld hl, Museum1FText_5c21f
 	call PrintText
 	call YesNoChoice

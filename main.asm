@@ -70,7 +70,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	ld [W_ISINBATTLE], a ; $d057
 	ld [$d35d], a
 	ld [$cf10], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld [$cc57], a
 	ld [wFlags_0xcd60], a
 	ld [$ff9f], a
@@ -103,7 +103,7 @@ Func_40b0: ; 40b0 (1:40b0)
 	res 3, [hl]
 	set 6, [hl]
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $7
 	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
 
@@ -3076,52 +3076,53 @@ Func_7c18: ; 7c18 (1:7c18)
 SECTION "bank3",ROMX,BANK[$3]
 
 _GetJoypadState::
-	ld a, [H_JOYPADSTATE]
+	ld a, [hJoyInput]
 	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
-	jp z, HandleJoypadResetButtons
+	jp z, TrySoftReset
 	ld b, a
-	ld a, [H_OLDPRESSEDBUTTONS]
+	ld a, [hJoyHeldLast]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [hJoyReleased], a
 	ld a, d
 	and b
-	ld [H_NEWLYPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
 	ld a, b
-	ld [H_OLDPRESSEDBUTTONS], a
+	ld [hJoyHeldLast], a
 	ld a, [$d730]
 	bit 5, a
 	jr nz, DiscardButtonPresses
-	ld a, [H_OLDPRESSEDBUTTONS]
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [wJoypadForbiddenButtonsMask]
+	ld a, [hJoyHeldLast]
+	ld [hJoyHeld], a
+	ld a, [wJoyIgnore]
 	and a
 	ret z
 	cpl
 	ld b, a
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and b
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [H_NEWLYPRESSEDBUTTONS]
+	ld [hJoyHeld], a
+	ld a, [hJoyPressed]
 	and b
-	ld [H_NEWLYPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
 	ret
 
-; clears all button presses
-DiscardButtonPresses: ; c034 (3:4034)
+DiscardButtonPresses:
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
 	ret
 
-HandleJoypadResetButtons: ; c03c (3:403c)
+TrySoftReset:
 	call DelayFrame
+	; reset joypad (to make sure the
+	; player is really trying to reset)
 	ld a, $30
-	ld [rJOYP], a ; reset joypad state (to enusre the user really intends to reset)
-	ld hl, H_SOFTRESETCOUNTER
+	ld [rJOYP], a
+	ld hl, hSoftReset
 	dec [hl]
 	jp z, SoftReset
 	jp GetJoypadState
@@ -3138,9 +3139,9 @@ Func_c335: ; c335 (3:4335)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld [$d13b], a
 	ld [W_LONEATTACKNO], a ; $d05c
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
+	ld [hJoyHeld], a
 	ld [$cd6a], a
 	ld [$d5a3], a
 	ld hl, $d73f
@@ -3665,7 +3666,7 @@ Func_c69c: ; c69c (3:469c)
 	ld hl, W_PARTYMON1NAME ; $d2b5
 	call GetPartyMonName
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -4548,7 +4549,7 @@ Func_f225: ; f225 (3:7225)
 	bit 6, [hl]
 	set 6, [hl]
 	ret z
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and $f0
 	ret z
 	ld a, $5a
@@ -4556,7 +4557,7 @@ Func_f225: ; f225 (3:7225)
 	ld a, [$d71c]
 	and a
 	jp nz, Func_f2dd
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	ld b, a
 	ld a, [$c109]
 	cp $4
@@ -4609,7 +4610,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ret nz
 	callab Func_79f54
 	call DiscardButtonPresses
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_f2dd
 	set 7, [hl]
 	ld a, [$d718]

@@ -38,11 +38,11 @@ HandleLedges: ; 1a672 (6:6672)
 	inc hl
 	jr .asm_1a691
 .asm_1a6a9
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d736
 	set 6, [hl]
 	call Func_3486

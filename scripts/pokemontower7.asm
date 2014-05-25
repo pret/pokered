@@ -9,7 +9,7 @@ PokemonTower7Script: ; 60d05 (18:4d05)
 
 PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -29,7 +29,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	jp z, PokemonTower7Script_60d18
 	call EndTrainerBattle
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$cf13]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -55,7 +55,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [$cf13], a
 	ld [wTrainerHeaderFlagBit], a
 	ld [$da38], a
@@ -66,7 +66,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 
 PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $43
 	ld [$cc4d], a
 	ld a, $11

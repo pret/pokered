@@ -24,7 +24,7 @@ Gym4LeaderName: ; 4893d (12:493d)
 
 CeladonGymText_48943: ; 48943 (12:4943)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CELADONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -40,7 +40,7 @@ CeladonGymScript3: ; 48956 (12:4956)
 	cp $ff
 	jp z, CeladonGymText_48943
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 CeladonGymText_48963: ; 48963 (12:4963)
 	ld a, $9

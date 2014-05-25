@@ -64,7 +64,7 @@ Route23Script0: ; 51219 (14:5219)
 	call Route23Script_5125d
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ret
 
 YCoordsData_51255: ; 51255 (14:5255)
@@ -126,7 +126,7 @@ Route23Script_512d8: ; 512d8 (14:52d8)
 	ld [$ccd3], a
 	xor a
 	ld [$c109], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	jp Func_3486
 
 Route23Script1: ; 512ec (14:52ec)

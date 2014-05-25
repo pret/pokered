@@ -24,7 +24,7 @@ Gym1LeaderName: ; 5c3b9 (17:43b9)
 
 PewterGymScript_5c3bf: ; 5c3bf (17:43bf)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_PEWTERGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -40,7 +40,7 @@ PewterGymScript3: ; 5c3d2 (17:43d2)
 	cp $ff
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4

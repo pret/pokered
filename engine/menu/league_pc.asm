@@ -54,7 +54,7 @@ Func_765e5: ; 765e5 (1d:65e5)
 	push bc
 	call Func_76610
 	call WaitForTextScrollButtonPress
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	bit 1, a
 	jr nz, .fifth
 	ld hl, $CC6B

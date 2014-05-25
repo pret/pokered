@@ -7,7 +7,7 @@ SeafoamIslands5Script: ; 46799 (11:6799)
 SeafoamIslands5Script_467a5: ; 467a5 (11:67a5)
 	xor a
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 SeafoamIslands5ScriptPointers: ; 467ad (11:67ad)
@@ -66,7 +66,7 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
 	ret

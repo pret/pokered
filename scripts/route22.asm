@@ -16,7 +16,7 @@ Route22ScriptPointers: ; 50ebe (14:4ebe)
 
 Route22Script_50ece: ; 50ece (14:4ece)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE22CURSCRIPT], a
 Route22Script7: ; 50ed5 (14:4ed5)
 	ret
@@ -60,9 +60,9 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld a, [$cd3d]
 	ld [$cf0d], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $2
 	ld [$d528], a
 	ld a, [$d7eb]
@@ -120,7 +120,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld [$ff8c], a
 	call Func_34a6
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -161,7 +161,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld [$ff8c], a
 	call Func_34a6
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d7eb
 	set 5, [hl]
 	ld a, $1
@@ -205,7 +205,7 @@ Route22Script3: ; 5102a (14:502a)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $22
 	ld [$cc4d], a
 	ld a, $11
@@ -264,7 +264,7 @@ Route22Script4: ; 51087 (14:5087)
 	ld [$ff8d], a
 	call Func_34a6
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -308,7 +308,7 @@ Route22Script5: ; 510df (14:50df)
 	ld [$ff8d], a
 	call Func_34a6
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d7eb
 	set 6, [hl]
 	ld a, $2
@@ -352,7 +352,7 @@ Route22Script6: ; 51151 (14:5151)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $23
 	ld [$cc4d], a
 	ld a, $11

@@ -32,7 +32,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	bit 1, a
 	ret nz
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld [$cf0d], a
 	ld a, [W_YCOORD]
 	cp $3

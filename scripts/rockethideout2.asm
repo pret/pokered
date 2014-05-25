@@ -28,7 +28,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $3
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -310,7 +310,7 @@ RocketHideout2Script3: ; 44fc2 (11:4fc2)
 	and a
 	jr nz, LoadSpinnerArrowTiles
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d736
 	res 7, [hl]
 	ld a, $0

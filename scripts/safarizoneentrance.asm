@@ -21,9 +21,9 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $c
 	ld [$c109], a
 	ld a, [$cd3d]
@@ -37,7 +37,7 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	ld c, $1
 	call SafariZoneEntranceScript_752a3
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -52,21 +52,21 @@ SafariZoneEntranceScript1: ; 75226 (1d:5226)
 	ret nz
 SafariZoneEntranceScript2: ; 7522a (1d:522a)
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [hJoyHeld], a
+	ld [wJoyIgnore], a
 	call UpdateSprites
 	ld a, $4
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 SafariZoneEntranceScript3: ; 75240 (1d:5240)
 	call SafariZoneEntranceScript_752b4
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -81,7 +81,7 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	res 7, [hl]
 	call UpdateSprites
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $6
 	ld [$ff8c], a
 	call DisplayTextID
@@ -104,7 +104,7 @@ SafariZoneEntranceScript4: ; 75287 (1d:5287)
 	call SafariZoneEntranceScript_752b4
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret

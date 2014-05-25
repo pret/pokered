@@ -6677,7 +6677,7 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	ld a, [$d732]
 	bit 1, a
 	jr z, .asm_3ef2f
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	bit 1, a
 	ret nz
 .asm_3ef2f

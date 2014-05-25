@@ -530,7 +530,7 @@ ItemUseBicycle: ; d977 (3:5977)
 	jp nc,NoCyclingAllowedHere
 	call ItemUseReloadOverworldData
 	xor a ; no keys pressed
-	ld [H_CURRENTPRESSEDBUTTONS],a ; current joypad state
+	ld [hJoyHeld],a ; current joypad state
 	inc a
 	ld [$d700],a ; change player state to bicycling
 	ld hl,GotOnBicycleText
@@ -593,7 +593,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	xor a
 	ld [$d700],a ; change player state to walking
 	dec a
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	call Func_2307 ; play walking music
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward

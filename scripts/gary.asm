@@ -6,7 +6,7 @@ GaryScript: ; 75f1d (1d:5f1d)
 
 GaryScript_75f29: ; 75f29 (1d:5f29)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_GARYCURSCRIPT], a
 	ret
 
@@ -28,7 +28,7 @@ GaryScript0: ; 75f47 (1d:5f47)
 
 GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $ccd3
 	ld de, RLEMovement75f63
 	call DecodeRLEList
@@ -51,7 +51,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d355
 	res 7, [hl]
 	ld a, $1
@@ -84,7 +84,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld [W_TRAINERNO], a
 
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_GARYCURSCRIPT], a
 	ret
@@ -97,7 +97,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld hl, $d867
 	set 1, [hl]
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$ff8c], a
 	call GaryScript_760c8
@@ -201,7 +201,7 @@ GaryScript8: ; 76083 (1d:6083)
 
 GaryScript9: ; 76099 (1d:6099)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $ccd3
 	ld de, RLEMovement760b4
 	call DecodeRLEList
@@ -222,17 +222,17 @@ GaryScript10: ; 760b9 (1d:60b9)
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_GARYCURSCRIPT], a
 	ret
 
 GaryScript_760c8 ; 760c8 (1d:60c8)
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 GaryTextPointers: ; 760d6 (1d:60d6)

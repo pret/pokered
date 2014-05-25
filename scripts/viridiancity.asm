@@ -35,7 +35,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [W_VIRIDIANCITYCURSCRIPT], a
@@ -55,7 +55,7 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [W_VIRIDIANCITYCURSCRIPT], a
@@ -96,13 +96,13 @@ ViridianCityScript2: ; 1908f (6:508f)
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $f
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [W_BATTLETYPE], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_VIRIDIANCITYCURSCRIPT], a
 	ret
@@ -124,7 +124,7 @@ ViridianCityScript_190cf: ; 190cf (6:50cf)
 	ld [$ccd3], a
 	xor a
 	ld [$c109], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 ViridianCityTextPointers: ; 190e4 (6:50e4)

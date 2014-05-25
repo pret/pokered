@@ -46,7 +46,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld [$cf0d], a
 	ld a, $3
 	ld [$ff8c], a
@@ -84,7 +84,7 @@ VermilionCityScript4: ; 19826 (6:5826)
 
 VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $40
 	ld [$ccd3], a
 	ld [$ccd4], a
@@ -100,8 +100,8 @@ VermilionCityScript3: ; 1984e (6:584e)
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [wJoyIgnore], a
+	ld [hJoyHeld], a
 	ld a, $0
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret

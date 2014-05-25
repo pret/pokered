@@ -94,7 +94,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 
 PrintSafariGameOverText: ; 1e9ed (7:69ed)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, SafariGameOverText
 	jp PrintText
 

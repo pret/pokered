@@ -30,7 +30,7 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld a, $2
 	ld [$d528], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
@@ -60,7 +60,7 @@ Route8GateScript1: ; 1e231 (7:6231)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE8GATECURSCRIPT], a
 	ret
 

@@ -25,7 +25,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld [$c206], a
 	ld [$cd3b], a
 	dec a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 .asm_1db8d
 	bit 5, [hl]
@@ -33,14 +33,14 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld a, [$cd38]
 	and a
 	ret nz
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	set 5, [hl]
 	ret
 
 VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	set 2, [hl]
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [$c0ee], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)

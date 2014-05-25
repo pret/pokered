@@ -40,7 +40,7 @@ CoordsData_49d37: ; 49d37 (12:5d37)
 
 MtMoon3Script_49d58: ; 49d58 (12:5d58)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -64,7 +64,7 @@ MtMoon3Script0: ; 49d6f (12:5d6f)
 	cp $d
 	jp nz, MtMoon3Script_49d91
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
@@ -84,7 +84,7 @@ MtMoon3Script3: ; 49d9a (12:5d9a)
 	ld hl, $d7f6
 	set 1, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -136,7 +136,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	bit 0, a
 	ret nz
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$cc3c], a
 	ld a, $a
@@ -154,7 +154,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

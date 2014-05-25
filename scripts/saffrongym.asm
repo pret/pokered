@@ -24,7 +24,7 @@ Gym6LeaderName: ; 5d040 (17:5040)
 
 SaffronGymText_5d048: ; 5d048 (17:5048)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_SAFFRONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -40,7 +40,7 @@ SaffronGymScript3: ; 5d05b (17:505b)
 	cp $ff
 	jp z, SaffronGymText_5d048
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld a, $a

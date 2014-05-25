@@ -19,7 +19,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld a, $1
 	ld [$d528], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
@@ -48,7 +48,7 @@ Route6GateScript1: ; 1e091 (7:6091)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
 

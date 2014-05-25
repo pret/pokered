@@ -30,7 +30,7 @@ Gym7LeaderName: ; 7578b (1d:578b)
 
 CinnabarGymScript_75792: ; 75792 (1d:5792)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ld [$da38], a
@@ -80,7 +80,7 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$da38]
 	ld [wTrainerHeaderFlagBit], a
 	ld [$ff8c], a
@@ -122,7 +122,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	call CinnabarGymScript_757f1
 	call Func_3ead
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [$da38], a
 	ld a, $0
 	ld [W_CINNABARGYMCURSCRIPT], a
@@ -134,7 +134,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	cp $ff
 	jp z, CinnabarGymScript_75792
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [$ff8c], a

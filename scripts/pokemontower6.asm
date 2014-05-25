@@ -9,7 +9,7 @@ PokemonTower6Script: ; 60aef (18:4aef)
 
 Func_60b02: ; 60b02 (18:4b02)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -29,7 +29,7 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -50,13 +50,13 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	cp $ff
 	jp z, Func_60b02
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$d72d]
 	bit 6, a
 	ret nz
 	call UpdateSprites
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$cf0b]
 	and a
 	jr nz, .asm_60b82
@@ -66,7 +66,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

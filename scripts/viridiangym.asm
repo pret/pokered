@@ -17,7 +17,7 @@ Gym8LeaderName: ; 748cd (1d:48cd)
 
 ViridianGymScript_748d6: ; 748d6 (1d:48d6)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_VIRIDIANGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -44,7 +44,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $4
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -125,7 +125,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	and a
 	jr nz, .asm_74980
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d736
 	res 7, [hl]
 	ld a, $0
@@ -141,7 +141,7 @@ ViridianGymScript3: ; 74988 (1d:4988)
 	cp $ff
 	jp z, ViridianGymScript_748d6
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c

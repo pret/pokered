@@ -97,11 +97,11 @@ MainMenu: ; 5af2 (1:5af2)
 	set 5,[hl]
 .next6
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS],a
-	ld [H_NEWLYRELEASEDBUTTONS],a
-	ld [H_CURRENTPRESSEDBUTTONS],a
+	ld [hJoyPressed],a
+	ld [hJoyReleased],a
+	ld [hJoyHeld],a
 	call GetJoypadState
-	ld a,[H_CURRENTPRESSEDBUTTONS]
+	ld a,[hJoyHeld]
 	bit 0,a
 	jr nz,.next5
 	bit 1,a
@@ -315,8 +315,8 @@ Func_5d52: ; 5d52 (1:5d52)
 
 Func_5d5f: ; 5d5f (1:5d5f)
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [$ffb5], a
 	ld [$d72d], a
 	ld hl, $d732

@@ -110,7 +110,7 @@ MissableObjectIDs_6219b: ; 6219b (18:619b)
 
 SilphCo11Script_621c4: ; 621c4 (18:61c4)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 SilphCo11Script_621c8: ; 621c8 (18:61c8)
 	ld [W_SILPHCO11CURSCRIPT], a
@@ -135,9 +135,9 @@ SilphCo11Script0: ; 621db (18:61db)
 	ld a, [wWhichTrade] ; $cd3d
 	ld [$cf0d], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -181,7 +181,7 @@ SilphCo11Script5: ; 62227 (18:6227)
 .asm_62240
 	call SilphCo11Script_6221a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -193,7 +193,7 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld hl, $d838
 	set 7, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	jp SilphCo11Script_621c8
 
 SilphCo11Script3: ; 6226a (18:626a)
@@ -230,7 +230,7 @@ SilphCo11Script4: ; 62293 (18:6293)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $5
 	jp SilphCo11Script_621c8
 

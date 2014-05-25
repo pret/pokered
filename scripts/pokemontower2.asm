@@ -6,7 +6,7 @@ PokemonTower2Script: ; 604f2 (18:44f2)
 
 PokemonTower2Script_604fe: ; 604fe (18:44fe)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -51,8 +51,8 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [H_NEWLYPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
 	ret
 
 CoordsData_6055e: ; 6055e (18:455e)
@@ -65,7 +65,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	cp $ff
 	jp z, PokemonTower2Script_604fe
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d764
 	set 7, [hl]
 	ld a, $1
@@ -104,7 +104,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld a, $11
 	call Predef
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_2307
 	ld a, $0
 	ld [W_POKEMONTOWER2CURSCRIPT], a

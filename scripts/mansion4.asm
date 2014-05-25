@@ -49,7 +49,7 @@ Mansion4Script_Switches: ; 52420 (14:6420)
 	cp $4
 	ret nz
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID

@@ -9,7 +9,7 @@ Route16Script: ; 59933 (16:5933)
 
 Func_59946: ; 59946 (16:5946)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE16CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

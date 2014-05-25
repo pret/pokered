@@ -4,7 +4,7 @@ Func_1a3e0: ; 1a3e0 (6:63e0)
 	call HandleDoors
 	jr nc, .asm_1a406
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d736
 	set 1, [hl]
 	ld a, $1
@@ -76,7 +76,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 Func_1a485: ; 1a485 (6:6485)

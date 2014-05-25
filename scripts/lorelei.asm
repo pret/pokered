@@ -63,8 +63,8 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [$ccd3], a
 	ld [$cd38], a
 	ld a, [wWhichTrade] ; $cd3d
@@ -101,7 +101,7 @@ LoreleiScript3: ; 7622c (1d:622c)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_LORELEICURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

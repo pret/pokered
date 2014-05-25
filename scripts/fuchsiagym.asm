@@ -25,7 +25,7 @@ Gym5LeaderName: ; 75472 (1d:5472)
 
 FuchsiaGymScript_75477: ; 75477 (1d:5477)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -41,7 +41,7 @@ FuchsiaGymScript3: ; 7548a (1d:548a)
 	cp $ff
 	jp z, FuchsiaGymScript_75477
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c

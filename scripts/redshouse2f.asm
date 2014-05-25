@@ -10,7 +10,7 @@ RedsHouse2FScriptPointers: ; 5c0bc (17:40bc)
 
 RedsHouse2FScript0: ; 5c0c0 (17:40c0)
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS],a
+	ld [hJoyHeld],a
 	ld a,8
 	ld [$D528],a
 	ld a,1

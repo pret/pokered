@@ -6,7 +6,7 @@ SSAnne2Script: ; 6139f (18:539f)
 
 SSAnne2Script_613ab: ; 613ab (18:53ab)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
 
@@ -41,9 +41,9 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [$ffdb]
 	cp $2
 	jr nz, .asm_61400 ; 0x613f9 $5
@@ -88,7 +88,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ret nz
 	call SSAnne2Script_61416
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $2
 	ld [$ff8c], a
 	call DisplayTextID
@@ -123,7 +123,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	jp z, SSAnne2Script_613ab
 	call SSAnne2Script_61416
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $3
 	ld [$ff8c], a
 	call DisplayTextID
@@ -160,7 +160,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $71
 	ld [$cc4d], a
 	ld a, $11

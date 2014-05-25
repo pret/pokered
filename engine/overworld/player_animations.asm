@@ -503,16 +503,16 @@ _HandleMidJump: ; 7087e (1c:487e)
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_NEWLYRELEASEDBUTTONS], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
 	ld [$d714], a
 	ld hl, $d736
 	res 6, [hl]
 	ld hl, $d730
 	res 7, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ret
 
 PlayerJumpingYScreenCoords: ; 708ba (1c:48ba)

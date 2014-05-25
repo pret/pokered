@@ -24,7 +24,7 @@ Gym2LeaderName: ; 5c6e7 (17:46e7)
 
 CeruleanGymScript_5c6ed: ; 5c6ed (17:46ed)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CERULEANGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -40,7 +40,7 @@ CeruleanGymScript3: ; 5c700 (17:4700)
 	cp $ff
 	jp z, CeruleanGymScript_5c6ed
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld a, $5

@@ -25,7 +25,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ld a, $2
 	ld [$d528], a
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	callba RemoveGuardDrink
 	ld a, [$ff00+$db]
 	and a
@@ -56,7 +56,7 @@ Route5GateScript1: ; 1df94 (7:5f94)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE5GATECURSCRIPT], a
 	ret
 	

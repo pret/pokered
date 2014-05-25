@@ -81,7 +81,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 ; EXIT falls through to here
 CloseStartMenu:: ; 2b70 (0:2b70)
 	call GetJoypadState
-	ld a,[H_NEWLYPRESSEDBUTTONS]
+	ld a,[hJoyPressed]
 	bit 0,a ; was A button newly pressed?
 	jr nz,CloseStartMenu
 	call LoadTextBoxTilePatterns

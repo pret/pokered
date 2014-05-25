@@ -46,7 +46,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld hl, $d7f2
 	set 6, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $3
 	ld [W_BILLSHOUSECURSCRIPT], a
 	ret
@@ -56,7 +56,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	bit 3, a
 	ret z
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $2
 	ld [$cf13], a
 	ld a, $c
@@ -90,7 +90,7 @@ BillsHouseScript4: ; 1e80d (7:680d)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d7f2
 	set 5, [hl]
 	ld hl, $d7f1

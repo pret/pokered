@@ -30,7 +30,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [$cd38], a
 	ld a, $80
@@ -38,7 +38,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	call Func_3486
 	xor a
 	ld [$c109], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [W_CINNABARISLANDCURSCRIPT], a
 	ret

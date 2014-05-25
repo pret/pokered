@@ -1,6 +1,6 @@
 PlayIntro: ; 41682 (10:5682)
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call PlayShootingStar

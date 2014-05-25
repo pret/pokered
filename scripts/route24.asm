@@ -9,7 +9,7 @@ Route24Script: ; 513ad (14:53ad)
 
 Route24Script_513c0: ; 513c0 (14:53c0)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -29,7 +29,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -66,14 +66,14 @@ Route24Script3: ; 51422 (14:5422)
 	jp z, Route24Script_513c0
 	call UpdateSprites
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d7ef
 	set 1, [hl]
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -175,7 +175,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

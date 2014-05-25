@@ -56,6 +56,6 @@ Func_18e36: ; 18e36 (6:4e36)
 	ld [$d730], a
 	ret z
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ret

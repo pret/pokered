@@ -36,7 +36,7 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 
 RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -53,7 +53,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	jp z, RocketHideout4Script_454a3
 	call UpdateSprites
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d81b
 	set 7, [hl]
 	ld a, $a
@@ -71,7 +71,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	call UpdateSprites
 	call GBFadeOut1
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d126
 	set 5, [hl]
 	ld a, $0

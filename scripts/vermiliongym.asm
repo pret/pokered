@@ -45,7 +45,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 
 VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -61,7 +61,7 @@ VermilionGymScript3: ; 5ca9d (17:4a9d)
 	cp $ff
 	jp z, VermilionGymScript_5ca8a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6

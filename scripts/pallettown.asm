@@ -27,7 +27,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	cp 1 ; is player near north exit?
 	ret nz
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS],a
+	ld [hJoyHeld],a
 	ld a,4
 	ld [$D528],a
 	ld a,$FF
@@ -37,7 +37,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
 	call PlayMusic ; plays music
 	ld a,$FC
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	ld hl,$D74B
 	set 7,[hl]
 
@@ -53,7 +53,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	ld [$FF8C],a
 	call DisplayTextID
 	ld a,$FF
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	ld a,0
 	ld [$CC4D],a
 	ld a,$15
@@ -89,7 +89,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld [$FF8C],a
 	call MoveSprite
 	ld a,$FF
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 
 	; trigger the next script
 	ld a,3
@@ -105,12 +105,12 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,1
 	ld [$CF0D],a
 	ld a,$FC
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	ld a,1
 	ld [$FF8C],a
 	call DisplayTextID
 	ld a,$FF
-	ld [wJoypadForbiddenButtonsMask],a
+	ld [wJoyIgnore],a
 	ld a,1
 	ld [$CF13],a
 	xor a

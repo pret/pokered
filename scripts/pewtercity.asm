@@ -29,7 +29,7 @@ PewterCityScript_1925e: ; 1925e (6:525e)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $5
 	ld [$ff8c], a
 	jp DisplayTextID
@@ -102,7 +102,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $15
 	call Predef
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
@@ -168,7 +168,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	ld a, $15
 	call Predef
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret

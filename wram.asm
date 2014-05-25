@@ -260,8 +260,8 @@ wFlags_0xcd60:: ; cd60
 
 	ds 10
 
-wJoypadForbiddenButtonsMask:: ; cd6b
-; bit 1 means button presses will be ignored for that button
+wJoyIgnore:: ; cd6b
+; Set buttons are ignored.
 	ds 1
 
 	ds 21

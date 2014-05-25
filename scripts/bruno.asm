@@ -63,8 +63,8 @@ BrunoScript0: ; 76339 (1d:6339)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [$ccd3], a
 	ld [$cd38], a
 	ld a, [wWhichTrade] ; $cd3d
@@ -101,7 +101,7 @@ BrunoScript3: ; 76383 (1d:6383)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_BRUNOCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

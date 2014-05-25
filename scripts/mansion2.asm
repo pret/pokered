@@ -48,7 +48,7 @@ Mansion2Script_Switches: ; 52037 (14:6037)
 	cp $4
 	ret nz
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $5
 	ld [H_SPRITEHEIGHT], a
 	jp DisplayTextID

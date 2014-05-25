@@ -22,7 +22,7 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, [$cd3d]
 	cp $1
 	jr z, .asm_498c6 ; 0x498a9 $1b
@@ -55,7 +55,7 @@ Route18GateScript1: ; 498d5 (12:58d5)
 	and a
 	ret nz
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 Route18GateScript2: ; 498df (12:58df)
 	ld a, $1
@@ -75,7 +75,7 @@ Route18GateScript3: ; 498f9 (12:58f9)
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d730
 	res 7, [hl]
 	ld a, $0

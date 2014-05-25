@@ -6,7 +6,7 @@ HallofFameRoomScript: ; 5a49e (16:649e)
 
 HallofFameRoomScript_5a4aa: ; 5a4aa (16:64aa)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ret
 
@@ -24,7 +24,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld a, [$d358]
 	push af
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $55
 	call Predef
 	pop af
@@ -62,7 +62,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 
 HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $ccd3
 	ld de, RLEMovement5a528
 	call DecodeRLEList
@@ -91,14 +91,14 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	call Func_34a6
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	inc a
 	ld [$d528], a
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
 	ld [$cc4d], a
 	ld a, $11

@@ -63,8 +63,8 @@ AgathaScript0: ; 76490 (1d:6490)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_NEWLYPRESSEDBUTTONS], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [$ccd3], a
 	ld [$cd38], a
 	ld a, [wWhichTrade] ; $cd3d
@@ -101,7 +101,7 @@ AgathaScript3: ; 764da (1d:64da)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_AGATHACURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

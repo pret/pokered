@@ -60,7 +60,7 @@ LanceScript0: ; 5a305 (16:6305)
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, [wWhichTrade] ; $cd3d
 	cp $3
 	jr nc, .asm_5a325
@@ -99,7 +99,7 @@ LanceScript2: ; 5a349 (16:6349)
 
 LanceScript_5a35b: ; 5a35b (16:635b)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $ccd3
 	ld de, RLEList_5a379
 	call DecodeRLEList
@@ -124,7 +124,7 @@ LanceScript3: ; 5a382 (16:6382)
 	ret nz
 	call Delay3
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_LANCECURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret

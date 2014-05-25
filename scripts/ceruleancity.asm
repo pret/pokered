@@ -6,7 +6,7 @@ CeruleanCityScript: ; 19480 (6:5480)
 
 CeruleanCityScript_1948c: ; 1948c (6:548c)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ld a, $5
 	ld [$cc4d], a
@@ -25,14 +25,14 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	cp $ff
 	jp z, CeruleanCityScript_1948c
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d75b
 	set 7, [hl]
 	ld a, $2
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
 
@@ -76,9 +76,9 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, [W_XCOORD]
 	cp $14
 	jr z, .asm_19535 ; 0x19526 $d
@@ -126,7 +126,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -156,7 +156,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld [W_TRAINERNO], a
 
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	call CeruleanCityScript_1955d
 	ld a, $2
 	ld [W_CERULEANCITYCURSCRIPT], a
@@ -168,7 +168,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	jp z, CeruleanCityScript_1948c
 	call CeruleanCityScript_1955d
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld hl, $d75a
 	set 0, [hl]
 	ld a, $1
@@ -211,7 +211,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, $11
 	call Predef
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_2307
 	ld a, $0
 	ld [W_CERULEANCITYCURSCRIPT], a

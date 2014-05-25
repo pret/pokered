@@ -39,7 +39,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -57,7 +57,7 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	cp $ff
 	jp z, CeladonGameCornerScript_48c07
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $d
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
@@ -94,7 +94,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $46
 	ld [$cc4d], a
 	ld a, $11
