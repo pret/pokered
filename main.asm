@@ -15865,114 +15865,58 @@ INCLUDE "engine/hp_bar.asm"
 
 INCLUDE "engine/hidden_object_functions3.asm"
 
+
 SECTION "bank4",ROMX,BANK[$4]
 
-OakAideSprite: ; 10000 (4:4000)
-	INCBIN "gfx/sprites/oak_aide.2bpp"
-RockerSprite: ; 10180 (4:4180)
-	INCBIN "gfx/sprites/rocker.2bpp"
-SwimmerSprite: ; 10300 (4:4300)
-	INCBIN "gfx/sprites/swimmer.2bpp"
-WhitePlayerSprite: ; 10480 (4:4480)
-	INCBIN "gfx/sprites/white_player.2bpp"
-GymHelperSprite: ; 10540 (4:4540)
-	INCBIN "gfx/sprites/gym_helper.2bpp"
-OldPersonSprite: ; 10600 (4:4600)
-	INCBIN "gfx/sprites/old_person.2bpp"
-MartGuySprite: ; 106c0 (4:46c0)
-	INCBIN "gfx/sprites/mart_guy.2bpp"
-FisherSprite: ; 10780 (4:4780)
-	INCBIN "gfx/sprites/fisher.2bpp"
-OldMediumWomanSprite: ; 10840 (4:4840)
-	INCBIN "gfx/sprites/old_medium_woman.2bpp"
-NurseSprite: ; 10900 (4:4900)
-	INCBIN "gfx/sprites/nurse.2bpp"
-CableClubWomanSprite: ; 109c0 (4:49c0)
-	INCBIN "gfx/sprites/cable_club_woman.2bpp"
-MrMasterballSprite: ; 10a80 (4:4a80)
-	INCBIN "gfx/sprites/mr_masterball.2bpp"
-LaprasGiverSprite: ; 10b40 (4:4b40)
-	INCBIN "gfx/sprites/lapras_giver.2bpp"
-WardenSprite: ; 10c00 (4:4c00)
-	INCBIN "gfx/sprites/warden.2bpp"
-SsCaptainSprite: ; 10cc0 (4:4cc0)
-	INCBIN "gfx/sprites/ss_captain.2bpp"
-Fisher2Sprite: ; 10d80 (4:4d80)
-	INCBIN "gfx/sprites/fisher2.2bpp"
-BlackbeltSprite: ; 10f00 (4:4f00)
-	INCBIN "gfx/sprites/blackbelt.2bpp"
-GuardSprite: ; 11080 (4:5080)
-	INCBIN "gfx/sprites/guard.2bpp"
-BallSprite: ; 11140 (4:5140)
-	INCBIN "gfx/sprites/ball.2bpp"
-OmanyteSprite: ; 11180 (4:5180)
-	INCBIN "gfx/sprites/omanyte.2bpp"
-BoulderSprite: ; 111c0 (4:51c0)
-	INCBIN "gfx/sprites/boulder.2bpp"
-PaperSheetSprite: ; 11200 (4:5200)
-	INCBIN "gfx/sprites/paper_sheet.2bpp"
-BookMapDexSprite: ; 11240 (4:5240)
-	INCBIN "gfx/sprites/book_map_dex.2bpp"
-ClipboardSprite: ; 11280 (4:5280)
-	INCBIN "gfx/sprites/clipboard.2bpp"
-SnorlaxSprite: ; 112c0 (4:52c0)
-	INCBIN "gfx/sprites/snorlax.2bpp"
-OldAmberSprite: ; 11300 (4:5300)
-	INCBIN "gfx/sprites/old_amber.2bpp"
-LyingOldManSprite: ; 11340 (4:5340)
-	INCBIN "gfx/sprites/lying_old_man.2bpp"
+OakAideSprite:         INCBIN "gfx/sprites/oak_aide.2bpp"
+RockerSprite:          INCBIN "gfx/sprites/rocker.2bpp"
+SwimmerSprite:         INCBIN "gfx/sprites/swimmer.2bpp"
+WhitePlayerSprite:     INCBIN "gfx/sprites/white_player.2bpp"
+GymHelperSprite:       INCBIN "gfx/sprites/gym_helper.2bpp"
+OldPersonSprite:       INCBIN "gfx/sprites/old_person.2bpp"
+MartGuySprite:         INCBIN "gfx/sprites/mart_guy.2bpp"
+FisherSprite:          INCBIN "gfx/sprites/fisher.2bpp"
+OldMediumWomanSprite:  INCBIN "gfx/sprites/old_medium_woman.2bpp"
+NurseSprite:           INCBIN "gfx/sprites/nurse.2bpp"
+CableClubWomanSprite:  INCBIN "gfx/sprites/cable_club_woman.2bpp"
+MrMasterballSprite:    INCBIN "gfx/sprites/mr_masterball.2bpp"
+LaprasGiverSprite:     INCBIN "gfx/sprites/lapras_giver.2bpp"
+WardenSprite:          INCBIN "gfx/sprites/warden.2bpp"
+SsCaptainSprite:       INCBIN "gfx/sprites/ss_captain.2bpp"
+Fisher2Sprite:         INCBIN "gfx/sprites/fisher2.2bpp"
+BlackbeltSprite:       INCBIN "gfx/sprites/blackbelt.2bpp"
+GuardSprite:           INCBIN "gfx/sprites/guard.2bpp"
+BallSprite:            INCBIN "gfx/sprites/ball.2bpp"
+OmanyteSprite:         INCBIN "gfx/sprites/omanyte.2bpp"
+BoulderSprite:         INCBIN "gfx/sprites/boulder.2bpp"
+PaperSheetSprite:      INCBIN "gfx/sprites/paper_sheet.2bpp"
+BookMapDexSprite:      INCBIN "gfx/sprites/book_map_dex.2bpp"
+ClipboardSprite:       INCBIN "gfx/sprites/clipboard.2bpp"
+SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
+OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
+LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 
-PokemonLogoGraphics: ; 11380 (4:5380)
-	INCBIN "gfx/pokemon_logo.w128.2bpp"
-
-FontGraphics: ; 11a80 (4:5a80)
-	INCBIN "gfx/font.w128.1bpp"
-
-ABTiles: ; 11e80 (4:5e80)
-	INCBIN "gfx/AB.2bpp"
-
-HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
-	INCBIN "gfx/hp_bar_and_status.2bpp"
-
-BattleHudTiles1: ; 12080 (4:6080)
-	INCBIN "gfx/battle_hud1.1bpp"
-
-BattleHudTiles2: ; 12098 (4:6098)
-	INCBIN "gfx/battle_hud2.1bpp"
-
-BattleHudTiles3: ; 120b0 (4:60b0)
-	INCBIN "gfx/battle_hud3.1bpp"
-
-NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
-	INCBIN "gfx/copyright.h8.2bpp"
-
-GamefreakLogoGraphics: ; 121f8 (4:61f8)
-	INCBIN "gfx/gamefreak.h8.2bpp"
-
-TextBoxGraphics: ; 12288 (4:6288)
-	INCBIN "gfx/text_box.2bpp"
-
-PokedexTileGraphics: ; 12488 (4:6488)
-	INCBIN "gfx/pokedex.2bpp"
-
-WorldMapTileGraphics: ; 125a8 (4:65a8)
-	INCBIN "gfx/town_map.2bpp"
-
-PlayerCharacterTitleGraphics: ; 126a8 (4:66a8)
-	INCBIN "gfx/player_title.2bpp"
+PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.w128.2bpp"
+FontGraphics:                   INCBIN "gfx/font.w128.1bpp"
+ABTiles:                        INCBIN "gfx/AB.2bpp"
+HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
+BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
+BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.h8.2bpp"
+GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.h8.2bpp"
+TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
 
 INCLUDE "engine/battle/4.asm"
-
 INCLUDE "engine/menu/status_screen.asm"
-
 INCLUDE "engine/menu/party_menu.asm"
 
-RedPicFront: ; 12ede (4:6ede)
-	INCBIN "pic/trainer/red.pic"
-ShrinkPic1: ; 12fe8 (4:6fe8)
-	INCBIN "pic/trainer/shrink1.pic"
-ShrinkPic2: ; 13042 (4:7042)
-	INCBIN "pic/trainer/shrink2.pic"
+RedPicFront: INCBIN "pic/trainer/red.pic"
+ShrinkPic1:  INCBIN "pic/trainer/shrink1.pic"
+ShrinkPic2:  INCBIN "pic/trainer/shrink2.pic"
 
 INCLUDE "engine/turn_sprite.asm"
 
@@ -15984,93 +15928,53 @@ INCLUDE "engine/battle/4_2.asm"
 
 INCLUDE "engine/random.asm"
 
+
 SECTION "bank5",ROMX,BANK[$5]
 
-RedCyclingSprite: ; 14000 (5:4000)
-	INCBIN "gfx/sprites/cycling.2bpp"
-RedSprite: ; 14180 (5:4180)
-	INCBIN "gfx/sprites/red.2bpp"
-BlueSprite: ; 14300 (5:4300)
-	INCBIN "gfx/sprites/blue.2bpp"
-OakSprite: ; 14480 (5:4480)
-	INCBIN "gfx/sprites/oak.2bpp"
-BugCatcherSprite: ; 14600 (5:4600)
-	INCBIN "gfx/sprites/bug_catcher.2bpp"
-SlowbroSprite: ; 14780 (5:4780)
-	INCBIN "gfx/sprites/slowbro.2bpp"
-LassSprite: ; 14900 (5:4900)
-	INCBIN "gfx/sprites/lass.2bpp"
-BlackHairBoy1Sprite: ; 14a80 (5:4a80)
-	INCBIN "gfx/sprites/black_hair_boy_1.2bpp"
-LittleGirlSprite: ; 14c00 (5:4c00)
-	INCBIN "gfx/sprites/little_girl.2bpp"
-BirdSprite: ; 14d80 (5:4d80)
-	INCBIN "gfx/sprites/bird.2bpp"
-FatBaldGuySprite: ; 14f00 (5:4f00)
-	INCBIN "gfx/sprites/fat_bald_guy.2bpp"
-GamblerSprite: ; 15080 (5:5080)
-	INCBIN "gfx/sprites/gambler.2bpp"
-BlackHairBoy2Sprite: ; 15200 (5:5200)
-	INCBIN "gfx/sprites/black_hair_boy_2.2bpp"
-GirlSprite: ; 15380 (5:5380)
-	INCBIN "gfx/sprites/girl.2bpp"
-HikerSprite: ; 15500 (5:5500)
-	INCBIN "gfx/sprites/hiker.2bpp"
-FoulardWomanSprite: ; 15680 (5:5680)
-	INCBIN "gfx/sprites/foulard_woman.2bpp"
-GentlemanSprite: ; 15800 (5:5800)
-	INCBIN "gfx/sprites/gentleman.2bpp"
-DaisySprite: ; 15980 (5:5980)
-	INCBIN "gfx/sprites/daisy.2bpp"
-BikerSprite: ; 15b00 (5:5b00)
-	INCBIN "gfx/sprites/biker.2bpp"
-SailorSprite: ; 15c80 (5:5c80)
-	INCBIN "gfx/sprites/sailor.2bpp"
-CookSprite: ; 15e00 (5:5e00)
-	INCBIN "gfx/sprites/cook.2bpp"
-BikeShopGuySprite: ; 15f80 (5:5f80)
-	INCBIN "gfx/sprites/bike_shop_guy.2bpp"
-MrFujiSprite: ; 16040 (5:6040)
-	INCBIN "gfx/sprites/mr_fuji.2bpp"
-GiovanniSprite: ; 161c0 (5:61c0)
-	INCBIN "gfx/sprites/giovanni.2bpp"
-RocketSprite: ; 16340 (5:6340)
-	INCBIN "gfx/sprites/rocket.2bpp"
-MediumSprite: ; 164c0 (5:64c0)
-	INCBIN "gfx/sprites/medium.2bpp"
-WaiterSprite: ; 16640 (5:6640)
-	INCBIN "gfx/sprites/waiter.2bpp"
-ErikaSprite: ; 167c0 (5:67c0)
-	INCBIN "gfx/sprites/erika.2bpp"
-MomGeishaSprite: ; 16940 (5:6940)
-	INCBIN "gfx/sprites/mom_geisha.2bpp"
-BrunetteGirlSprite: ; 16ac0 (5:6ac0)
-	INCBIN "gfx/sprites/brunette_girl.2bpp"
-LanceSprite: ; 16c40 (5:6c40)
-	INCBIN "gfx/sprites/lance.2bpp"
-MomSprite: ; 16dc0 (5:6dc0)
-	INCBIN "gfx/sprites/mom.2bpp"
-BaldingGuySprite: ; 16e80 (5:6e80)
-	INCBIN "gfx/sprites/balding_guy.2bpp"
-YoungBoySprite: ; 16f40 (5:6f40)
-	INCBIN "gfx/sprites/young_boy.2bpp"
-GameboyKidSprite: ; 17000 (5:7000)
-	INCBIN "gfx/sprites/gameboy_kid.2bpp"
-ClefairySprite: ; 170c0 (5:70c0)
-	INCBIN "gfx/sprites/clefairy.2bpp"
-AgathaSprite: ; 17240 (5:7240)
-	INCBIN "gfx/sprites/agatha.2bpp"
-BrunoSprite: ; 173c0 (5:73c0)
-	INCBIN "gfx/sprites/bruno.2bpp"
-LoreleiSprite: ; 17540 (5:7540)
-	INCBIN "gfx/sprites/lorelei.2bpp"
-SeelSprite: ; 176c0 (5:76c0)
-	INCBIN "gfx/sprites/seel.2bpp"
+RedCyclingSprite:     INCBIN "gfx/sprites/cycling.2bpp"
+RedSprite:            INCBIN "gfx/sprites/red.2bpp"
+BlueSprite:           INCBIN "gfx/sprites/blue.2bpp"
+OakSprite:            INCBIN "gfx/sprites/oak.2bpp"
+BugCatcherSprite:     INCBIN "gfx/sprites/bug_catcher.2bpp"
+SlowbroSprite:        INCBIN "gfx/sprites/slowbro.2bpp"
+LassSprite:           INCBIN "gfx/sprites/lass.2bpp"
+BlackHairBoy1Sprite:  INCBIN "gfx/sprites/black_hair_boy_1.2bpp"
+LittleGirlSprite:     INCBIN "gfx/sprites/little_girl.2bpp"
+BirdSprite:           INCBIN "gfx/sprites/bird.2bpp"
+FatBaldGuySprite:     INCBIN "gfx/sprites/fat_bald_guy.2bpp"
+GamblerSprite:        INCBIN "gfx/sprites/gambler.2bpp"
+BlackHairBoy2Sprite:  INCBIN "gfx/sprites/black_hair_boy_2.2bpp"
+GirlSprite:           INCBIN "gfx/sprites/girl.2bpp"
+HikerSprite:          INCBIN "gfx/sprites/hiker.2bpp"
+FoulardWomanSprite:   INCBIN "gfx/sprites/foulard_woman.2bpp"
+GentlemanSprite:      INCBIN "gfx/sprites/gentleman.2bpp"
+DaisySprite:          INCBIN "gfx/sprites/daisy.2bpp"
+BikerSprite:          INCBIN "gfx/sprites/biker.2bpp"
+SailorSprite:         INCBIN "gfx/sprites/sailor.2bpp"
+CookSprite:           INCBIN "gfx/sprites/cook.2bpp"
+BikeShopGuySprite:    INCBIN "gfx/sprites/bike_shop_guy.2bpp"
+MrFujiSprite:         INCBIN "gfx/sprites/mr_fuji.2bpp"
+GiovanniSprite:       INCBIN "gfx/sprites/giovanni.2bpp"
+RocketSprite:         INCBIN "gfx/sprites/rocket.2bpp"
+MediumSprite:         INCBIN "gfx/sprites/medium.2bpp"
+WaiterSprite:         INCBIN "gfx/sprites/waiter.2bpp"
+ErikaSprite:          INCBIN "gfx/sprites/erika.2bpp"
+MomGeishaSprite:      INCBIN "gfx/sprites/mom_geisha.2bpp"
+BrunetteGirlSprite:   INCBIN "gfx/sprites/brunette_girl.2bpp"
+LanceSprite:          INCBIN "gfx/sprites/lance.2bpp"
+MomSprite:            INCBIN "gfx/sprites/mom.2bpp"
+BaldingGuySprite:     INCBIN "gfx/sprites/balding_guy.2bpp"
+YoungBoySprite:       INCBIN "gfx/sprites/young_boy.2bpp"
+GameboyKidSprite:     INCBIN "gfx/sprites/gameboy_kid.2bpp"
+ClefairySprite:       INCBIN "gfx/sprites/clefairy.2bpp"
+AgathaSprite:         INCBIN "gfx/sprites/agatha.2bpp"
+BrunoSprite:          INCBIN "gfx/sprites/bruno.2bpp"
+LoreleiSprite:        INCBIN "gfx/sprites/lorelei.2bpp"
+SeelSprite:           INCBIN "gfx/sprites/seel.2bpp"
 
 INCLUDE "engine/load_pokedex_tiles.asm"
 
 INCLUDE "engine/overworld/map_sprites.asm"
-
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 
 INCLUDE "engine/evolve_trade.asm"
@@ -16079,179 +15983,116 @@ INCLUDE "engine/battle/5.asm"
 
 INCLUDE "engine/menu/pc.asm"
 
+
 SECTION "bank6",ROMX,BANK[$6]
 
 INCLUDE "data/mapHeaders/celadoncity.asm"
-
 INCLUDE "data/mapObjects/celadoncity.asm"
-
-CeladonCityBlocks: ; 180df (6:40df)
-	INCBIN "maps/celadoncity.blk"
+CeladonCityBlocks: INCBIN "maps/celadoncity.blk"
 
 INCLUDE "data/mapHeaders/pallettown.asm"
-
 INCLUDE "data/mapObjects/pallettown.asm"
-
-PalletTownBlocks: ; 182fd (6:42fd)
-	INCBIN "maps/pallettown.blk"
+PalletTownBlocks: INCBIN "maps/pallettown.blk"
 
 INCLUDE "data/mapHeaders/viridiancity.asm"
-
 INCLUDE "data/mapObjects/viridiancity.asm"
-
-ViridianCityBlocks: ; 183ec (6:43ec)
-	INCBIN "maps/viridiancity.blk"
+ViridianCityBlocks: INCBIN "maps/viridiancity.blk"
 
 INCLUDE "data/mapHeaders/pewtercity.asm"
-
 INCLUDE "data/mapObjects/pewtercity.asm"
-
-PewterCityBlocks: ; 185e6 (6:45e6)
-	INCBIN "maps/pewtercity.blk"
+PewterCityBlocks: INCBIN "maps/pewtercity.blk"
 
 INCLUDE "data/mapHeaders/ceruleancity.asm"
-
 INCLUDE "data/mapObjects/ceruleancity.asm"
-
-CeruleanCityBlocks: ; 18830 (6:4830)
-	INCBIN "maps/ceruleancity.blk"
+CeruleanCityBlocks: INCBIN "maps/ceruleancity.blk"
 
 INCLUDE "data/mapHeaders/vermilioncity.asm"
-
 INCLUDE "data/mapObjects/vermilioncity.asm"
-
-VermilionCityBlocks: ; 18a3f (6:4a3f)
-	INCBIN "maps/vermilioncity.blk"
+VermilionCityBlocks: INCBIN "maps/vermilioncity.blk"
 
 INCLUDE "data/mapHeaders/fuchsiacity.asm"
-
 INCLUDE "data/mapObjects/fuchsiacity.asm"
-
-FuchsiaCityBlocks: ; 18c86 (6:4c86)
-	INCBIN "maps/fuchsiacity.blk"
+FuchsiaCityBlocks: INCBIN "maps/fuchsiacity.blk"
 
 INCLUDE "engine/play_time.asm"
 
 INCLUDE "scripts/pallettown.asm"
-
 INCLUDE "scripts/viridiancity.asm"
-
 INCLUDE "scripts/pewtercity.asm"
-
 INCLUDE "scripts/ceruleancity.asm"
-
 INCLUDE "scripts/vermilioncity.asm"
-
 INCLUDE "scripts/celadoncity.asm"
-
 INCLUDE "scripts/fuchsiacity.asm"
 
 INCLUDE "data/mapHeaders/blueshouse.asm"
-
 INCLUDE "scripts/blueshouse.asm"
-
 INCLUDE "data/mapObjects/blueshouse.asm"
-
-BluesHouseBlocks: ; 19bf6 (6:5bf6)
-	INCBIN "maps/blueshouse.blk"
+BluesHouseBlocks: INCBIN "maps/blueshouse.blk"
 
 INCLUDE "data/mapHeaders/vermilionhouse3.asm"
-
 INCLUDE "scripts/vermilionhouse3.asm"
-
 INCLUDE "data/mapObjects/vermilionhouse3.asm"
-
-VermilionHouse3Blocks: ; 19c3f (6:5c3f)
-	INCBIN "maps/vermilionhouse3.blk"
+VermilionHouse3Blocks: INCBIN "maps/vermilionhouse3.blk"
 
 INCLUDE "data/mapHeaders/indigoplateaulobby.asm"
-
 INCLUDE "scripts/indigoplateaulobby.asm"
-
 INCLUDE "data/mapObjects/indigoplateaulobby.asm"
-
-IndigoPlateauLobbyBlocks: ; 19ccf (6:5ccf)
-	INCBIN "maps/indigoplateaulobby.blk"
+IndigoPlateauLobbyBlocks: INCBIN "maps/indigoplateaulobby.blk"
 
 INCLUDE "data/mapHeaders/silphco4.asm"
-
 INCLUDE "scripts/silphco4.asm"
-
 INCLUDE "data/mapObjects/silphco4.asm"
-
-SilphCo4Blocks: ; 19ea4 (6:5ea4)
-	INCBIN "maps/silphco4.blk"
+SilphCo4Blocks: INCBIN "maps/silphco4.blk"
 
 INCLUDE "data/mapHeaders/silphco5.asm"
-
 INCLUDE "scripts/silphco5.asm"
-
 INCLUDE "data/mapObjects/silphco5.asm"
-
-SilphCo5Blocks: ; 1a116 (6:6116)
-	INCBIN "maps/silphco5.blk"
+SilphCo5Blocks: INCBIN "maps/silphco5.blk"
 
 INCLUDE "data/mapHeaders/silphco6.asm"
-
 INCLUDE "scripts/silphco6.asm"
-
 INCLUDE "data/mapObjects/silphco6.asm"
-
-SilphCo6Blocks: ; 1a36b (6:636b)
-	INCBIN "maps/silphco6.blk"
+SilphCo6Blocks: INCBIN "maps/silphco6.blk"
 
 INCLUDE "engine/overworld/npc_movement.asm"
-
 INCLUDE "engine/overworld/doors.asm"
-
 INCLUDE "engine/overworld/ledges.asm"
+
 
 SECTION "bank7",ROMX,BANK[$7]
 
 INCLUDE "data/mapHeaders/cinnabarisland.asm"
-
 INCLUDE "data/mapObjects/cinnabarisland.asm"
-
-CinnabarIslandBlocks: ; 1c069 (7:4069)
-	INCBIN "maps/cinnabarisland.blk"
+CinnabarIslandBlocks: INCBIN "maps/cinnabarisland.blk"
 
 INCLUDE "data/mapHeaders/route1.asm"
-
 INCLUDE "data/mapObjects/route1.asm"
+Route1Blocks: INCBIN "maps/route1.blk"
 
-Route1Blocks: ; 1c0fc (7:40fc)
-	INCBIN "maps/route1.blk"
+UndergroundPathEntranceRoute8Blocks: INCBIN "maps/undergroundpathentranceroute8.blk"
 
-UndergroundPathEntranceRoute8Blocks: ; 1c1b0 (7:41b0)
-	INCBIN "maps/undergroundpathentranceroute8.blk"
+OaksLabBlocks: INCBIN "maps/oakslab.blk"
 
-OaksLabBlocks: ; 1c1c0 (7:41c0)
-	INCBIN "maps/oakslab.blk"
+Route16HouseBlocks:
+Route2HouseBlocks:
+SaffronHouse1Blocks:
+SaffronHouse2Blocks:
+VermilionHouse1Blocks:
+NameRaterBlocks:
+LavenderHouse1Blocks:
+LavenderHouse2Blocks:
+CeruleanHouse1Blocks:
+PewterHouse1Blocks:
+PewterHouse2Blocks:
+ViridianHouseBlocks: INCBIN "maps/viridianhouse.blk"
 
-Route16HouseBlocks: ; 1c1de (7:41de)
-Route2HouseBlocks: ; 1c1de (7:41de)
-SaffronHouse1Blocks: ; 1c1de (7:41de)
-SaffronHouse2Blocks: ; 1c1de (7:41de)
-VermilionHouse1Blocks: ; 1c1de (7:41de)
-NameRaterBlocks: ; 1c1de (7:41de)
-LavenderHouse1Blocks: ; 1c1de (7:41de)
-LavenderHouse2Blocks: ; 1c1de (7:41de)
-CeruleanHouse1Blocks: ; 1c1de (7:41de)
-PewterHouse1Blocks: ; 1c1de (7:41de)
-PewterHouse2Blocks: ; 1c1de (7:41de)
-ViridianHouseBlocks: ; 0x1c1de 41DE size=16
-	INCBIN "maps/viridianhouse.blk"
+CeladonMansion5Blocks:
+SchoolBlocks: INCBIN "maps/school.blk"
 
-CeladonMansion5Blocks: ; 1c1ee (7:41ee)
-SchoolBlocks: ; 0x1c1ee 41EE size=16
-	INCBIN "maps/school.blk"
+CeruleanHouseTrashedBlocks: INCBIN "maps/ceruleanhousetrashed.blk"
 
-CeruleanHouseTrashedBlocks: ; 0x1c1fe size=16
-	INCBIN "maps/ceruleanhousetrashed.blk"
-
-DiglettsCaveEntranceRoute11Blocks: ; 1c20e (7:420e)
-DiglettsCaveRoute2Blocks: ; 0x1c20e size=16
-	INCBIN "maps/diglettscaveroute2.blk"
+DiglettsCaveEntranceRoute11Blocks:
+DiglettsCaveRoute2Blocks: INCBIN "maps/diglettscaveroute2.blk"
 
 INCLUDE "text/monster_names.asm"
 
@@ -16264,1692 +16105,982 @@ INCLUDE "scripts/cinnabarisland.asm"
 INCLUDE "scripts/route1.asm"
 
 INCLUDE "data/mapHeaders/oakslab.asm"
-
 INCLUDE "scripts/oakslab.asm"
-
 INCLUDE "data/mapObjects/oakslab.asm"
 
 INCLUDE "data/mapHeaders/viridianmart.asm"
-
 INCLUDE "scripts/viridianmart.asm"
-
 INCLUDE "data/mapObjects/viridianmart.asm"
-
-ViridianMartBlocks: ; 1d530 (7:5530)
-	INCBIN "maps/viridianmart.blk"
+ViridianMartBlocks: INCBIN "maps/viridianmart.blk"
 
 INCLUDE "data/mapHeaders/school.asm"
-
 INCLUDE "scripts/school.asm"
-
 INCLUDE "data/mapObjects/school.asm"
 
 INCLUDE "data/mapHeaders/viridianhouse.asm"
-
 INCLUDE "scripts/viridianhouse.asm"
-
 INCLUDE "data/mapObjects/viridianhouse.asm"
 
 INCLUDE "data/mapHeaders/pewterhouse1.asm"
-
 INCLUDE "scripts/pewterhouse1.asm"
-
 INCLUDE "data/mapObjects/pewterhouse1.asm"
 
 INCLUDE "data/mapHeaders/pewterhouse2.asm"
-
 INCLUDE "scripts/pewterhouse2.asm"
-
 INCLUDE "data/mapObjects/pewterhouse2.asm"
 
 INCLUDE "data/mapHeaders/ceruleanhousetrashed.asm"
-
 INCLUDE "scripts/ceruleanhousetrashed.asm"
-
 INCLUDE "data/mapObjects/ceruleanhousetrashed.asm"
 
 INCLUDE "data/mapHeaders/ceruleanhouse1.asm"
-
 INCLUDE "scripts/ceruleanhouse1.asm"
-
 INCLUDE "data/mapObjects/ceruleanhouse1.asm"
 
 INCLUDE "data/mapHeaders/bikeshop.asm"
-
 INCLUDE "scripts/bikeshop.asm"
-
 INCLUDE "data/mapObjects/bikeshop.asm"
-
-BikeShopBlocks: ; 1d88c (7:588c)
-	INCBIN "maps/bikeshop.blk"
+BikeShopBlocks: INCBIN "maps/bikeshop.blk"
 
 INCLUDE "data/mapHeaders/lavenderhouse1.asm"
-
 INCLUDE "scripts/lavenderhouse1.asm"
-
 INCLUDE "data/mapObjects/lavenderhouse1.asm"
 
 INCLUDE "data/mapHeaders/lavenderhouse2.asm"
-
 INCLUDE "scripts/lavenderhouse2.asm"
-
 INCLUDE "data/mapObjects/lavenderhouse2.asm"
 
 INCLUDE "data/mapHeaders/namerater.asm"
-
 INCLUDE "scripts/namerater.asm"
-
 INCLUDE "data/mapObjects/namerater.asm"
 
 INCLUDE "data/mapHeaders/vermilionhouse1.asm"
-
 INCLUDE "scripts/vermilionhouse1.asm"
-
 INCLUDE "data/mapObjects/vermilionhouse1.asm"
 
 INCLUDE "data/mapHeaders/vermiliondock.asm"
-
 INCLUDE "scripts/vermiliondock.asm"
-
 INCLUDE "data/mapObjects/vermiliondock.asm"
-
-VermilionDockBlocks: ; 1dcda (7:5cda)
-	INCBIN "maps/vermiliondock.blk"
+VermilionDockBlocks: INCBIN "maps/vermiliondock.blk"
 
 INCLUDE "data/mapHeaders/celadonmansion5.asm"
-
 INCLUDE "scripts/celadonmansion5.asm"
-
 INCLUDE "data/mapObjects/celadonmansion5.asm"
 
 INCLUDE "data/mapHeaders/fuchsiamart.asm"
-
 INCLUDE "scripts/fuchsiamart.asm"
-
 INCLUDE "data/mapObjects/fuchsiamart.asm"
-
-FuchsiaMartBlocks: ; 1ddc1 (7:5dc1)
-	INCBIN "maps/fuchsiamart.blk"
+FuchsiaMartBlocks: INCBIN "maps/fuchsiamart.blk"
 
 INCLUDE "data/mapHeaders/saffronhouse1.asm"
-
 INCLUDE "scripts/saffronhouse1.asm"
-
 INCLUDE "data/mapObjects/saffronhouse1.asm"
 
 INCLUDE "data/mapHeaders/saffronhouse2.asm"
-
 INCLUDE "scripts/saffronhouse2.asm"
-
 INCLUDE "data/mapObjects/saffronhouse2.asm"
 
 INCLUDE "data/mapHeaders/diglettscaveroute2.asm"
-
 INCLUDE "scripts/diglettscaveroute2.asm"
-
 INCLUDE "data/mapObjects/diglettscaveroute2.asm"
 
 INCLUDE "data/mapHeaders/route2house.asm"
-
 INCLUDE "scripts/route2house.asm"
-
 INCLUDE "data/mapObjects/route2house.asm"
 
 INCLUDE "data/mapHeaders/route5gate.asm"
-
 INCLUDE "scripts/route5gate.asm"
-
 INCLUDE "data/mapObjects/route5gate.asm"
-
-Route5GateBlocks: ; 1e025 (7:6025)
-	INCBIN "maps/route5gate.blk"
+Route5GateBlocks: INCBIN "maps/route5gate.blk"
 
 INCLUDE "data/mapHeaders/route6gate.asm"
-
 INCLUDE "scripts/route6gate.asm"
-
 INCLUDE "data/mapObjects/route6gate.asm"
-
-Route6GateBlocks: ; 1e0e8 (7:60e8)
-	INCBIN "maps/route6gate.blk"
+Route6GateBlocks: INCBIN "maps/route6gate.blk"
 
 INCLUDE "data/mapHeaders/route7gate.asm"
-
 INCLUDE "scripts/route7gate.asm"
-
 INCLUDE "data/mapObjects/route7gate.asm"
-
-Route7GateBlocks: ; 1e1af (7:61af)
-	INCBIN "maps/route7gate.blk"
+Route7GateBlocks: INCBIN "maps/route7gate.blk"
 
 INCLUDE "data/mapHeaders/route8gate.asm"
-
 INCLUDE "scripts/route8gate.asm"
-
 INCLUDE "data/mapObjects/route8gate.asm"
-
-Route8GateBlocks: ; 1e271 (7:6271)
-	INCBIN "maps/route8gate.blk"
+Route8GateBlocks: INCBIN "maps/route8gate.blk"
 
 INCLUDE "data/mapHeaders/undergroundpathentranceroute8.asm"
-
 INCLUDE "scripts/undergroundpathentranceroute8.asm"
-
 INCLUDE "data/mapObjects/undergroundpathentranceroute8.asm"
 
 INCLUDE "data/mapHeaders/powerplant.asm"
-
 INCLUDE "scripts/powerplant.asm"
-
 INCLUDE "data/mapObjects/powerplant.asm"
-
-PowerPlantBlocks: ; 1e446 (7:6446)
-	INCBIN "maps/powerplant.blk"
+PowerPlantBlocks: INCBIN "maps/powerplant.blk"
 
 INCLUDE "data/mapHeaders/diglettscaveroute11.asm"
-
 INCLUDE "scripts/diglettscaveroute11.asm"
-
 INCLUDE "data/mapObjects/diglettscaveroute11.asm"
 
 INCLUDE "data/mapHeaders/route16house.asm"
-
 INCLUDE "scripts/route16house.asm"
-
 INCLUDE "data/mapObjects/route16house.asm"
 
 INCLUDE "data/mapHeaders/route22gate.asm"
-
 INCLUDE "scripts/route22gate.asm"
-
 INCLUDE "data/mapObjects/route22gate.asm"
-
-Route22GateBlocks: ; 1e74a (7:674a)
-	INCBIN "maps/route22gate.blk"
+Route22GateBlocks: INCBIN "maps/route22gate.blk"
 
 INCLUDE "data/mapHeaders/billshouse.asm"
-
 INCLUDE "scripts/billshouse.asm"
-
 INCLUDE "data/mapObjects/billshouse.asm"
-
-BillsHouseBlocks: ; 1e905 (7:6905)
-	INCBIN "maps/billshouse.blk"
+BillsHouseBlocks: INCBIN "maps/billshouse.blk"
 
 INCLUDE "engine/menu/oaks_pc.asm"
 
 INCLUDE "engine/hidden_object_functions7.asm"
 
+
 SECTION "bank9",ROMX,BANK[$9]
 
-RhydonPicFront: ; 24000 (9:4000)
-	INCBIN "pic/bmon/rhydon.pic"
-RhydonPicBack: ; 24202 (9:4202)
-	INCBIN "pic/monback/rhydonb.pic"
-KangaskhanPicFront: ; 2429a (9:429a)
-	INCBIN "pic/bmon/kangaskhan.pic"
-KangaskhanPicBack: ; 244a6 (9:44a6)
-	INCBIN "pic/monback/kangaskhanb.pic"
-NidoranMPicFront: ; 2453c (9:453c)
-	INCBIN "pic/bmon/nidoranm.pic"
-NidoranMPicBack: ; 24623 (9:4623)
-	INCBIN "pic/monback/nidoranmb.pic"
-ClefairyPicFront: ; 24682 (9:4682)
-	INCBIN "pic/bmon/clefairy.pic"
-ClefairyPicBack: ; 24785 (9:4785)
-	INCBIN "pic/monback/clefairyb.pic"
-SpearowPicFront: ; 247df (9:47df)
-	INCBIN "pic/bmon/spearow.pic"
-SpearowPicBack: ; 248c2 (9:48c2)
-	INCBIN "pic/monback/spearowb.pic"
-VoltorbPicFront: ; 24911 (9:4911)
-	INCBIN "pic/bmon/voltorb.pic"
-VoltorbPicBack: ; 2499a (9:499a)
-	INCBIN "pic/monback/voltorbb.pic"
-NidokingPicFront: ; 249f8 (9:49f8)
-	INCBIN "pic/bmon/nidoking.pic"
-NidokingPicBack: ; 24c60 (9:4c60)
-	INCBIN "pic/monback/nidokingb.pic"
-SlowbroPicFront: ; 24d0a (9:4d0a)
-	INCBIN "pic/bmon/slowbro.pic"
-SlowbroPicBack: ; 24f87 (9:4f87)
-	INCBIN "pic/monback/slowbrob.pic"
-IvysaurPicFront: ; 2502b (9:502b)
-	INCBIN "pic/bmon/ivysaur.pic"
-IvysaurPicBack: ; 25157 (9:5157)
-	INCBIN "pic/monback/ivysaurb.pic"
-ExeggutorPicFront: ; 251d6 (9:51d6)
-	INCBIN "pic/bmon/exeggutor.pic"
-ExeggutorPicBack: ; 253f8 (9:53f8)
-	INCBIN "pic/monback/exeggutorb.pic"
-LickitungPicFront: ; 254a7 (9:54a7)
-	INCBIN "pic/bmon/lickitung.pic"
-LickitungPicBack: ; 2563e (9:563e)
-	INCBIN "pic/monback/lickitungb.pic"
-ExeggcutePicFront: ; 256d7 (9:56d7)
-	INCBIN "pic/bmon/exeggcute.pic"
-ExeggcutePicBack: ; 258f0 (9:58f0)
-	INCBIN "pic/monback/exeggcuteb.pic"
-GrimerPicFront: ; 25973 (9:5973)
-	INCBIN "pic/bmon/grimer.pic"
-GrimerPicBack: ; 25ab0 (9:5ab0)
-	INCBIN "pic/monback/grimerb.pic"
-GengarPicFront: ; 25b76 (9:5b76)
-	INCBIN "pic/bmon/gengar.pic"
-GengarPicBack: ; 25cc6 (9:5cc6)
-	INCBIN "pic/monback/gengarb.pic"
-NidoranFPicFront: ; 25d28 (9:5d28)
-	INCBIN "pic/bmon/nidoranf.pic"
-NidoranFPicBack: ; 25dc2 (9:5dc2)
-	INCBIN "pic/monback/nidoranfb.pic"
-NidoqueenPicFront: ; 25e09 (9:5e09)
-	INCBIN "pic/bmon/nidoqueen.pic"
-NidoqueenPicBack: ; 25fef (9:5fef)
-	INCBIN "pic/monback/nidoqueenb.pic"
-CubonePicFront: ; 260a8 (9:60a8)
-	INCBIN "pic/bmon/cubone.pic"
-CubonePicBack: ; 26196 (9:6196)
-	INCBIN "pic/monback/cuboneb.pic"
-RhyhornPicFront: ; 26208 (9:6208)
-	INCBIN "pic/bmon/rhyhorn.pic"
-RhyhornPicBack: ; 2640f (9:640f)
-	INCBIN "pic/monback/rhyhornb.pic"
-LaprasPicFront: ; 264c1 (9:64c1)
-	INCBIN "pic/bmon/lapras.pic"
-LaprasPicBack: ; 2667c (9:667c)
-	INCBIN "pic/monback/laprasb.pic"
-ArcaninePicFront: ; 266ff (9:66ff)
-	INCBIN "pic/bmon/arcanine.pic"
-ArcaninePicBack: ; 2693d (9:693d)
-	INCBIN "pic/monback/arcanineb.pic"
-GyaradosPicFront: ; 269d4 (9:69d4)
-	INCBIN "pic/bmon/gyarados.pic"
-GyaradosPicBack: ; 26c25 (9:6c25)
-	INCBIN "pic/monback/gyaradosb.pic"
-ShellderPicFront: ; 26cb6 (9:6cb6)
-	INCBIN "pic/bmon/shellder.pic"
-ShellderPicBack: ; 26dc3 (9:6dc3)
-	INCBIN "pic/monback/shellderb.pic"
-TentacoolPicFront: ; 26e2a (9:6e2a)
-	INCBIN "pic/bmon/tentacool.pic"
-TentacoolPicBack: ; 26f1c (9:6f1c)
-	INCBIN "pic/monback/tentacoolb.pic"
-GastlyPicFront: ; 26f77 (9:6f77)
-	INCBIN "pic/bmon/gastly.pic"
-GastlyPicBack: ; 27190 (9:7190)
-	INCBIN "pic/monback/gastlyb.pic"
-ScytherPicFront: ; 2721c (9:721c)
-	INCBIN "pic/bmon/scyther.pic"
-ScytherPicBack: ; 2743c (9:743c)
-	INCBIN "pic/monback/scytherb.pic"
-StaryuPicFront: ; 274e0 (9:74e0)
-	INCBIN "pic/bmon/staryu.pic"
-StaryuPicBack: ; 275ec (9:75ec)
-	INCBIN "pic/monback/staryub.pic"
-BlastoisePicFront: ; 27637 (9:7637)
-	INCBIN "pic/bmon/blastoise.pic"
-BlastoisePicBack: ; 27851 (9:7851)
-	INCBIN "pic/monback/blastoiseb.pic"
-PinsirPicFront: ; 278da (9:78da)
-	INCBIN "pic/bmon/pinsir.pic"
-PinsirPicBack: ; 27aaa (9:7aaa)
-	INCBIN "pic/monback/pinsirb.pic"
-TangelaPicFront: ; 27b39 (9:7b39)
-	INCBIN "pic/bmon/tangela.pic"
-TangelaPicBack: ; 27ce7 (9:7ce7)
-	INCBIN "pic/monback/tangelab.pic"
+RhydonPicFront:      INCBIN "pic/bmon/rhydon.pic"
+RhydonPicBack:       INCBIN "pic/monback/rhydonb.pic"
+KangaskhanPicFront:  INCBIN "pic/bmon/kangaskhan.pic"
+KangaskhanPicBack:   INCBIN "pic/monback/kangaskhanb.pic"
+NidoranMPicFront:    INCBIN "pic/bmon/nidoranm.pic"
+NidoranMPicBack:     INCBIN "pic/monback/nidoranmb.pic"
+ClefairyPicFront:    INCBIN "pic/bmon/clefairy.pic"
+ClefairyPicBack:     INCBIN "pic/monback/clefairyb.pic"
+SpearowPicFront:     INCBIN "pic/bmon/spearow.pic"
+SpearowPicBack:      INCBIN "pic/monback/spearowb.pic"
+VoltorbPicFront:     INCBIN "pic/bmon/voltorb.pic"
+VoltorbPicBack:      INCBIN "pic/monback/voltorbb.pic"
+NidokingPicFront:    INCBIN "pic/bmon/nidoking.pic"
+NidokingPicBack:     INCBIN "pic/monback/nidokingb.pic"
+SlowbroPicFront:     INCBIN "pic/bmon/slowbro.pic"
+SlowbroPicBack:      INCBIN "pic/monback/slowbrob.pic"
+IvysaurPicFront:     INCBIN "pic/bmon/ivysaur.pic"
+IvysaurPicBack:      INCBIN "pic/monback/ivysaurb.pic"
+ExeggutorPicFront:   INCBIN "pic/bmon/exeggutor.pic"
+ExeggutorPicBack:    INCBIN "pic/monback/exeggutorb.pic"
+LickitungPicFront:   INCBIN "pic/bmon/lickitung.pic"
+LickitungPicBack:    INCBIN "pic/monback/lickitungb.pic"
+ExeggcutePicFront:   INCBIN "pic/bmon/exeggcute.pic"
+ExeggcutePicBack:    INCBIN "pic/monback/exeggcuteb.pic"
+GrimerPicFront:      INCBIN "pic/bmon/grimer.pic"
+GrimerPicBack:       INCBIN "pic/monback/grimerb.pic"
+GengarPicFront:      INCBIN "pic/bmon/gengar.pic"
+GengarPicBack:       INCBIN "pic/monback/gengarb.pic"
+NidoranFPicFront:    INCBIN "pic/bmon/nidoranf.pic"
+NidoranFPicBack:     INCBIN "pic/monback/nidoranfb.pic"
+NidoqueenPicFront:   INCBIN "pic/bmon/nidoqueen.pic"
+NidoqueenPicBack:    INCBIN "pic/monback/nidoqueenb.pic"
+CubonePicFront:      INCBIN "pic/bmon/cubone.pic"
+CubonePicBack:       INCBIN "pic/monback/cuboneb.pic"
+RhyhornPicFront:     INCBIN "pic/bmon/rhyhorn.pic"
+RhyhornPicBack:      INCBIN "pic/monback/rhyhornb.pic"
+LaprasPicFront:      INCBIN "pic/bmon/lapras.pic"
+LaprasPicBack:       INCBIN "pic/monback/laprasb.pic"
+ArcaninePicFront:    INCBIN "pic/bmon/arcanine.pic"
+ArcaninePicBack:     INCBIN "pic/monback/arcanineb.pic"
+GyaradosPicFront:    INCBIN "pic/bmon/gyarados.pic"
+GyaradosPicBack:     INCBIN "pic/monback/gyaradosb.pic"
+ShellderPicFront:    INCBIN "pic/bmon/shellder.pic"
+ShellderPicBack:     INCBIN "pic/monback/shellderb.pic"
+TentacoolPicFront:   INCBIN "pic/bmon/tentacool.pic"
+TentacoolPicBack:    INCBIN "pic/monback/tentacoolb.pic"
+GastlyPicFront:      INCBIN "pic/bmon/gastly.pic"
+GastlyPicBack:       INCBIN "pic/monback/gastlyb.pic"
+ScytherPicFront:     INCBIN "pic/bmon/scyther.pic"
+ScytherPicBack:      INCBIN "pic/monback/scytherb.pic"
+StaryuPicFront:      INCBIN "pic/bmon/staryu.pic"
+StaryuPicBack:       INCBIN "pic/monback/staryub.pic"
+BlastoisePicFront:   INCBIN "pic/bmon/blastoise.pic"
+BlastoisePicBack:    INCBIN "pic/monback/blastoiseb.pic"
+PinsirPicFront:      INCBIN "pic/bmon/pinsir.pic"
+PinsirPicBack:       INCBIN "pic/monback/pinsirb.pic"
+TangelaPicFront:     INCBIN "pic/bmon/tangela.pic"
+TangelaPicBack:      INCBIN "pic/monback/tangelab.pic"
 
 INCLUDE "engine/battle/9.asm"
 
+
 SECTION "bankA",ROMX,BANK[$A]
-GrowlithePicFront: ; 28000 (a:4000)
-	INCBIN "pic/bmon/growlithe.pic"
-GrowlithePicBack: ; 28101 (a:4101)
-	INCBIN "pic/monback/growlitheb.pic"
-OnixPicFront: ; 28164 (a:4164)
-	INCBIN "pic/bmon/onix.pic"
-OnixPicBack: ; 28300 (a:4300)
-	INCBIN "pic/monback/onixb.pic"
-FearowPicFront: ; 28383 (a:4383)
-	INCBIN "pic/bmon/fearow.pic"
-FearowPicBack: ; 28529 (a:4529)
-	INCBIN "pic/monback/fearowb.pic"
-PidgeyPicFront: ; 285a7 (a:45a7)
-	INCBIN "pic/bmon/pidgey.pic"
-PidgeyPicBack: ; 2865b (a:465b)
-	INCBIN "pic/monback/pidgeyb.pic"
-SlowpokePicFront: ; 286a0 (a:46a0)
-	INCBIN "pic/bmon/slowpoke.pic"
-SlowpokePicBack: ; 287c2 (a:47c2)
-	INCBIN "pic/monback/slowpokeb.pic"
-KadabraPicFront: ; 28830 (a:4830)
-	INCBIN "pic/bmon/kadabra.pic"
-KadabraPicBack: ; 289b9 (a:49b9)
-	INCBIN "pic/monback/kadabrab.pic"
-GravelerPicFront: ; 28a4c (a:4a4c)
-	INCBIN "pic/bmon/graveler.pic"
-GravelerPicBack: ; 28c00 (a:4c00)
-	INCBIN "pic/monback/gravelerb.pic"
-ChanseyPicFront: ; 28cae (a:4cae)
-	INCBIN "pic/bmon/chansey.pic"
-ChanseyPicBack: ; 28e21 (a:4e21)
-	INCBIN "pic/monback/chanseyb.pic"
-MachokePicFront: ; 28e85 (a:4e85)
-	INCBIN "pic/bmon/machoke.pic"
-MachokePicBack: ; 29063 (a:5063)
-	INCBIN "pic/monback/machokeb.pic"
-MrMimePicFront: ; 290f3 (a:50f3)
-	INCBIN "pic/bmon/mr.mime.pic"
-MrMimePicBack: ; 29247 (a:5247)
-	INCBIN "pic/monback/mr.mimeb.pic"
-HitmonleePicFront: ; 292bf (a:52bf)
-	INCBIN "pic/bmon/hitmonlee.pic"
-HitmonleePicBack: ; 2945e (a:545e)
-	INCBIN "pic/monback/hitmonleeb.pic"
-HitmonchanPicFront: ; 294bc (a:54bc)
-	INCBIN "pic/bmon/hitmonchan.pic"
-HitmonchanPicBack: ; 29643 (a:5643)
-	INCBIN "pic/monback/hitmonchanb.pic"
-ArbokPicFront: ; 296b4 (a:56b4)
-	INCBIN "pic/bmon/arbok.pic"
-ArbokPicBack: ; 29911 (a:5911)
-	INCBIN "pic/monback/arbokb.pic"
-ParasectPicFront: ; 299a8 (a:59a8)
-	INCBIN "pic/bmon/parasect.pic"
-ParasectPicBack: ; 29b8c (a:5b8c)
-	INCBIN "pic/monback/parasectb.pic"
-PsyduckPicFront: ; 29c0a (a:5c0a)
-	INCBIN "pic/bmon/psyduck.pic"
-PsyduckPicBack: ; 29d3e (a:5d3e)
-	INCBIN "pic/monback/psyduckb.pic"
-DrowzeePicFront: ; 29da9 (a:5da9)
-	INCBIN "pic/bmon/drowzee.pic"
-DrowzeePicBack: ; 29f05 (a:5f05)
-	INCBIN "pic/monback/drowzeeb.pic"
-GolemPicFront: ; 29f74 (a:5f74)
-	INCBIN "pic/bmon/golem.pic"
-GolemPicBack: ; 2a0f2 (a:60f2)
-	INCBIN "pic/monback/golemb.pic"
-MagmarPicFront: ; 2a161 (a:6161)
-	INCBIN "pic/bmon/magmar.pic"
-MagmarPicBack: ; 2a2bf (a:62bf)
-	INCBIN "pic/monback/magmarb.pic"
-ElectabuzzPicFront: ; 2a367 (a:6367)
-	INCBIN "pic/bmon/electabuzz.pic"
-ElectabuzzPicBack: ; 2a4ef (a:64ef)
-	INCBIN "pic/monback/electabuzzb.pic"
-MagnetonPicFront: ; 2a588 (a:6588)
-	INCBIN "pic/bmon/magneton.pic"
-MagnetonPicBack: ; 2a723 (a:6723)
-	INCBIN "pic/monback/magnetonb.pic"
-KoffingPicFront: ; 2a7a6 (a:67a6)
-	INCBIN "pic/bmon/koffing.pic"
-KoffingPicBack: ; 2a974 (a:6974)
-	INCBIN "pic/monback/koffingb.pic"
-MankeyPicFront: ; 2aa11 (a:6a11)
-	INCBIN "pic/bmon/mankey.pic"
-MankeyPicBack: ; 2ab16 (a:6b16)
-	INCBIN "pic/monback/mankeyb.pic"
-SeelPicFront: ; 2ab84 (a:6b84)
-	INCBIN "pic/bmon/seel.pic"
-SeelPicBack: ; 2ace8 (a:6ce8)
-	INCBIN "pic/monback/seelb.pic"
-DiglettPicFront: ; 2ad33 (a:6d33)
-	INCBIN "pic/bmon/diglett.pic"
-DiglettPicBack: ; 2ae10 (a:6e10)
-	INCBIN "pic/monback/diglettb.pic"
-TaurosPicFront: ; 2ae7e (a:6e7e)
-	INCBIN "pic/bmon/tauros.pic"
-TaurosPicBack: ; 2b054 (a:7054)
-	INCBIN "pic/monback/taurosb.pic"
-FarfetchdPicFront: ; 2b0e9 (a:70e9)
-	INCBIN "pic/bmon/farfetchd.pic"
-FarfetchdPicBack: ; 2b2c6 (a:72c6)
-	INCBIN "pic/monback/farfetchdb.pic"
-VenonatPicFront: ; 2b357 (a:7357)
-	INCBIN "pic/bmon/venonat.pic"
-VenonatPicBack: ; 2b45c (a:745c)
-	INCBIN "pic/monback/venonatb.pic"
-DragonitePicFront: ; 2b4aa (a:74aa)
-	INCBIN "pic/bmon/dragonite.pic"
-DragonitePicBack: ; 2b67f (a:767f)
-	INCBIN "pic/monback/dragoniteb.pic"
-DoduoPicFront: ; 2b72c (a:772c)
-	INCBIN "pic/bmon/doduo.pic"
-DoduoPicBack: ; 2b80d (a:780d)
-	INCBIN "pic/monback/doduob.pic"
-PoliwagPicFront: ; 2b875 (a:7875)
-	INCBIN "pic/bmon/poliwag.pic"
-PoliwagPicBack: ; 2b947 (a:7947)
-	INCBIN "pic/monback/poliwagb.pic"
-JynxPicFront: ; 2b98e (a:798e)
-	INCBIN "pic/bmon/jynx.pic"
-JynxPicBack: ; 2bb42 (a:7b42)
-	INCBIN "pic/monback/jynxb.pic"
-MoltresPicFront: ; 2bbac (a:7bac)
-	INCBIN "pic/bmon/moltres.pic"
-MoltresPicBack: ; 2be02 (a:7e02)
-	INCBIN "pic/monback/moltresb.pic"
+
+GrowlithePicFront:   INCBIN "pic/bmon/growlithe.pic"
+GrowlithePicBack:    INCBIN "pic/monback/growlitheb.pic"
+OnixPicFront:        INCBIN "pic/bmon/onix.pic"
+OnixPicBack:         INCBIN "pic/monback/onixb.pic"
+FearowPicFront:      INCBIN "pic/bmon/fearow.pic"
+FearowPicBack:       INCBIN "pic/monback/fearowb.pic"
+PidgeyPicFront:      INCBIN "pic/bmon/pidgey.pic"
+PidgeyPicBack:       INCBIN "pic/monback/pidgeyb.pic"
+SlowpokePicFront:    INCBIN "pic/bmon/slowpoke.pic"
+SlowpokePicBack:     INCBIN "pic/monback/slowpokeb.pic"
+KadabraPicFront:     INCBIN "pic/bmon/kadabra.pic"
+KadabraPicBack:      INCBIN "pic/monback/kadabrab.pic"
+GravelerPicFront:    INCBIN "pic/bmon/graveler.pic"
+GravelerPicBack:     INCBIN "pic/monback/gravelerb.pic"
+ChanseyPicFront:     INCBIN "pic/bmon/chansey.pic"
+ChanseyPicBack:      INCBIN "pic/monback/chanseyb.pic"
+MachokePicFront:     INCBIN "pic/bmon/machoke.pic"
+MachokePicBack:      INCBIN "pic/monback/machokeb.pic"
+MrMimePicFront:      INCBIN "pic/bmon/mr.mime.pic"
+MrMimePicBack:       INCBIN "pic/monback/mr.mimeb.pic"
+HitmonleePicFront:   INCBIN "pic/bmon/hitmonlee.pic"
+HitmonleePicBack:    INCBIN "pic/monback/hitmonleeb.pic"
+HitmonchanPicFront:  INCBIN "pic/bmon/hitmonchan.pic"
+HitmonchanPicBack:   INCBIN "pic/monback/hitmonchanb.pic"
+ArbokPicFront:       INCBIN "pic/bmon/arbok.pic"
+ArbokPicBack:        INCBIN "pic/monback/arbokb.pic"
+ParasectPicFront:    INCBIN "pic/bmon/parasect.pic"
+ParasectPicBack:     INCBIN "pic/monback/parasectb.pic"
+PsyduckPicFront:     INCBIN "pic/bmon/psyduck.pic"
+PsyduckPicBack:      INCBIN "pic/monback/psyduckb.pic"
+DrowzeePicFront:     INCBIN "pic/bmon/drowzee.pic"
+DrowzeePicBack:      INCBIN "pic/monback/drowzeeb.pic"
+GolemPicFront:       INCBIN "pic/bmon/golem.pic"
+GolemPicBack:        INCBIN "pic/monback/golemb.pic"
+MagmarPicFront:      INCBIN "pic/bmon/magmar.pic"
+MagmarPicBack:       INCBIN "pic/monback/magmarb.pic"
+ElectabuzzPicFront:  INCBIN "pic/bmon/electabuzz.pic"
+ElectabuzzPicBack:   INCBIN "pic/monback/electabuzzb.pic"
+MagnetonPicFront:    INCBIN "pic/bmon/magneton.pic"
+MagnetonPicBack:     INCBIN "pic/monback/magnetonb.pic"
+KoffingPicFront:     INCBIN "pic/bmon/koffing.pic"
+KoffingPicBack:      INCBIN "pic/monback/koffingb.pic"
+MankeyPicFront:      INCBIN "pic/bmon/mankey.pic"
+MankeyPicBack:       INCBIN "pic/monback/mankeyb.pic"
+SeelPicFront:        INCBIN "pic/bmon/seel.pic"
+SeelPicBack:         INCBIN "pic/monback/seelb.pic"
+DiglettPicFront:     INCBIN "pic/bmon/diglett.pic"
+DiglettPicBack:      INCBIN "pic/monback/diglettb.pic"
+TaurosPicFront:      INCBIN "pic/bmon/tauros.pic"
+TaurosPicBack:       INCBIN "pic/monback/taurosb.pic"
+FarfetchdPicFront:   INCBIN "pic/bmon/farfetchd.pic"
+FarfetchdPicBack:    INCBIN "pic/monback/farfetchdb.pic"
+VenonatPicFront:     INCBIN "pic/bmon/venonat.pic"
+VenonatPicBack:      INCBIN "pic/monback/venonatb.pic"
+DragonitePicFront:   INCBIN "pic/bmon/dragonite.pic"
+DragonitePicBack:    INCBIN "pic/monback/dragoniteb.pic"
+DoduoPicFront:       INCBIN "pic/bmon/doduo.pic"
+DoduoPicBack:        INCBIN "pic/monback/doduob.pic"
+PoliwagPicFront:     INCBIN "pic/bmon/poliwag.pic"
+PoliwagPicBack:      INCBIN "pic/monback/poliwagb.pic"
+JynxPicFront:        INCBIN "pic/bmon/jynx.pic"
+JynxPicBack:         INCBIN "pic/monback/jynxb.pic"
+MoltresPicFront:     INCBIN "pic/bmon/moltres.pic"
+MoltresPicBack:      INCBIN "pic/monback/moltresb.pic"
 
 INCLUDE "engine/battle/a.asm"
 
+
 SECTION "bankB",ROMX,BANK[$B]
-ArticunoPicFront: ; 2c000 (b:4000)
-	INCBIN "pic/bmon/articuno.pic"
-ArticunoPicBack: ; 2c238 (b:4238)
-	INCBIN "pic/monback/articunob.pic"
-ZapdosPicFront: ; 2c29d (b:429d)
-	INCBIN "pic/bmon/zapdos.pic"
-ZapdosPicBack: ; 2c484 (b:4484)
-	INCBIN "pic/monback/zapdosb.pic"
-DittoPicFront: ; 2c514 (b:4514)
-	INCBIN "pic/bmon/ditto.pic"
-DittoPicBack: ; 2c5bd (b:45bd)
-	INCBIN "pic/monback/dittob.pic"
-MeowthPicFront: ; 2c609 (b:4609)
-	INCBIN "pic/bmon/meowth.pic"
-MeowthPicBack: ; 2c71f (b:471f)
-	INCBIN "pic/monback/meowthb.pic"
-KrabbyPicFront: ; 2c777 (b:4777)
-	INCBIN "pic/bmon/krabby.pic"
-KrabbyPicBack: ; 2c8b0 (b:48b0)
-	INCBIN "pic/monback/krabbyb.pic"
-VulpixPicFront: ; 2c924 (b:4924)
-	INCBIN "pic/bmon/vulpix.pic"
-VulpixPicBack: ; 2ca9a (b:4a9a)
-	INCBIN "pic/monback/vulpixb.pic"
-NinetalesPicFront: ; 2caff (b:4aff)
-	INCBIN "pic/bmon/ninetales.pic"
-NinetalesPicBack: ; 2ccfb (b:4cfb)
-	INCBIN "pic/monback/ninetalesb.pic"
-PikachuPicFront: ; 2cd7d (b:4d7d)
-	INCBIN "pic/bmon/pikachu.pic"
-PikachuPicBack: ; 2ce8b (b:4e8b)
-	INCBIN "pic/monback/pikachub.pic"
-RaichuPicFront: ; 2cf03 (b:4f03)
-	INCBIN "pic/bmon/raichu.pic"
-RaichuPicBack: ; 2d0c3 (b:50c3)
-	INCBIN "pic/monback/raichub.pic"
-DratiniPicFront: ; 2d151 (b:5151)
-	INCBIN "pic/bmon/dratini.pic"
-DratiniPicBack: ; 2d234 (b:5234)
-	INCBIN "pic/monback/dratinib.pic"
-DragonairPicFront: ; 2d297 (b:5297)
-	INCBIN "pic/bmon/dragonair.pic"
-DragonairPicBack: ; 2d3d9 (b:53d9)
-	INCBIN "pic/monback/dragonairb.pic"
-KabutoPicFront: ; 2d464 (b:5464)
-	INCBIN "pic/bmon/kabuto.pic"
-KabutoPicBack: ; 2d529 (b:5529)
-	INCBIN "pic/monback/kabutob.pic"
-KabutopsPicFront: ; 2d583 (b:5583)
-	INCBIN "pic/bmon/kabutops.pic"
-KabutopsPicBack: ; 2d73c (b:573c)
-	INCBIN "pic/monback/kabutopsb.pic"
-HorseaPicFront: ; 2d7c1 (b:57c1)
-	INCBIN "pic/bmon/horsea.pic"
-HorseaPicBack: ; 2d873 (b:5873)
-	INCBIN "pic/monback/horseab.pic"
-SeadraPicFront: ; 2d8c4 (b:58c4)
-	INCBIN "pic/bmon/seadra.pic"
-SeadraPicBack: ; 2da2b (b:5a2b)
-	INCBIN "pic/monback/seadrab.pic"
-SandshrewPicFront: ; 2dac9 (b:5ac9)
-	INCBIN "pic/bmon/sandshrew.pic"
-SandshrewPicBack: ; 2dbe7 (b:5be7)
-	INCBIN "pic/monback/sandshrewb.pic"
-SandslashPicFront: ; 2dc6b (b:5c6b)
-	INCBIN "pic/bmon/sandslash.pic"
-SandslashPicBack: ; 2de04 (b:5e04)
-	INCBIN "pic/monback/sandslashb.pic"
-OmanytePicFront: ; 2de9d (b:5e9d)
-	INCBIN "pic/bmon/omanyte.pic"
-OmanytePicBack: ; 2df76 (b:5f76)
-	INCBIN "pic/monback/omanyteb.pic"
-OmastarPicFront: ; 2dfd3 (b:5fd3)
-	INCBIN "pic/bmon/omastar.pic"
-OmastarPicBack: ; 2e18b (b:618b)
-	INCBIN "pic/monback/omastarb.pic"
-JigglypuffPicFront: ; 2e22f (b:622f)
-	INCBIN "pic/bmon/jigglypuff.pic"
-JigglypuffPicBack: ; 2e30f (b:630f)
-	INCBIN "pic/monback/jigglypuffb.pic"
-WigglytuffPicFront: ; 2e348 (b:6348)
-	INCBIN "pic/bmon/wigglytuff.pic"
-WigglytuffPicBack: ; 2e4bf (b:64bf)
-	INCBIN "pic/monback/wigglytuffb.pic"
-EeveePicFront: ; 2e531 (b:6531)
-	INCBIN "pic/bmon/eevee.pic"
-EeveePicBack: ; 2e625 (b:6625)
-	INCBIN "pic/monback/eeveeb.pic"
-FlareonPicFront: ; 2e68d (b:668d)
-	INCBIN "pic/bmon/flareon.pic"
-FlareonPicBack: ; 2e806 (b:6806)
-	INCBIN "pic/monback/flareonb.pic"
-JolteonPicFront: ; 2e88f (b:688f)
-	INCBIN "pic/bmon/jolteon.pic"
-JolteonPicBack: ; 2ea0a (b:6a0a)
-	INCBIN "pic/monback/jolteonb.pic"
-VaporeonPicFront: ; 2eaae (b:6aae)
-	INCBIN "pic/bmon/vaporeon.pic"
-VaporeonPicBack: ; 2ec02 (b:6c02)
-	INCBIN "pic/monback/vaporeonb.pic"
-MachopPicFront: ; 2ec9f (b:6c9f)
-	INCBIN "pic/bmon/machop.pic"
-MachopPicBack: ; 2eda2 (b:6da2)
-	INCBIN "pic/monback/machopb.pic"
-ZubatPicFront: ; 2ee0c (b:6e0c)
-	INCBIN "pic/bmon/zubat.pic"
-ZubatPicBack: ; 2ef17 (b:6f17)
-	INCBIN "pic/monback/zubatb.pic"
-EkansPicFront: ; 2ef6b (b:6f6b)
-	INCBIN "pic/bmon/ekans.pic"
-EkansPicBack: ; 2f06d (b:706d)
-	INCBIN "pic/monback/ekansb.pic"
-ParasPicFront: ; 2f0b4 (b:70b4)
-	INCBIN "pic/bmon/paras.pic"
-ParasPicBack: ; 2f177 (b:7177)
-	INCBIN "pic/monback/parasb.pic"
-PoliwhirlPicFront: ; 2f1ed (b:71ed)
-	INCBIN "pic/bmon/poliwhirl.pic"
-PoliwhirlPicBack: ; 2f35e (b:735e)
-	INCBIN "pic/monback/poliwhirlb.pic"
-PoliwrathPicFront: ; 2f3c1 (b:73c1)
-	INCBIN "pic/bmon/poliwrath.pic"
-PoliwrathPicBack: ; 2f52c (b:752c)
-	INCBIN "pic/monback/poliwrathb.pic"
-WeedlePicFront: ; 2f57d (b:757d)
-	INCBIN "pic/bmon/weedle.pic"
-WeedlePicBack: ; 2f624 (b:7624)
-	INCBIN "pic/monback/weedleb.pic"
-KakunaPicFront: ; 2f677 (b:7677)
-	INCBIN "pic/bmon/kakuna.pic"
-KakunaPicBack: ; 2f736 (b:7736)
-	INCBIN "pic/monback/kakunab.pic"
-BeedrillPicFront: ; 2f788 (b:7788)
-	INCBIN "pic/bmon/beedrill.pic"
-BeedrillPicBack: ; 2f980 (b:7980)
-	INCBIN "pic/monback/beedrillb.pic"
-FossilKabutopsPic: ; 2f9e8 (b:79e8)
-	INCBIN "pic/bmon/fossilkabutops.pic"
+
+ArticunoPicFront:    INCBIN "pic/bmon/articuno.pic"
+ArticunoPicBack:     INCBIN "pic/monback/articunob.pic"
+ZapdosPicFront:      INCBIN "pic/bmon/zapdos.pic"
+ZapdosPicBack:       INCBIN "pic/monback/zapdosb.pic"
+DittoPicFront:       INCBIN "pic/bmon/ditto.pic"
+DittoPicBack:        INCBIN "pic/monback/dittob.pic"
+MeowthPicFront:      INCBIN "pic/bmon/meowth.pic"
+MeowthPicBack:       INCBIN "pic/monback/meowthb.pic"
+KrabbyPicFront:      INCBIN "pic/bmon/krabby.pic"
+KrabbyPicBack:       INCBIN "pic/monback/krabbyb.pic"
+VulpixPicFront:      INCBIN "pic/bmon/vulpix.pic"
+VulpixPicBack:       INCBIN "pic/monback/vulpixb.pic"
+NinetalesPicFront:   INCBIN "pic/bmon/ninetales.pic"
+NinetalesPicBack:    INCBIN "pic/monback/ninetalesb.pic"
+PikachuPicFront:     INCBIN "pic/bmon/pikachu.pic"
+PikachuPicBack:      INCBIN "pic/monback/pikachub.pic"
+RaichuPicFront:      INCBIN "pic/bmon/raichu.pic"
+RaichuPicBack:       INCBIN "pic/monback/raichub.pic"
+DratiniPicFront:     INCBIN "pic/bmon/dratini.pic"
+DratiniPicBack:      INCBIN "pic/monback/dratinib.pic"
+DragonairPicFront:   INCBIN "pic/bmon/dragonair.pic"
+DragonairPicBack:    INCBIN "pic/monback/dragonairb.pic"
+KabutoPicFront:      INCBIN "pic/bmon/kabuto.pic"
+KabutoPicBack:       INCBIN "pic/monback/kabutob.pic"
+KabutopsPicFront:    INCBIN "pic/bmon/kabutops.pic"
+KabutopsPicBack:     INCBIN "pic/monback/kabutopsb.pic"
+HorseaPicFront:      INCBIN "pic/bmon/horsea.pic"
+HorseaPicBack:       INCBIN "pic/monback/horseab.pic"
+SeadraPicFront:      INCBIN "pic/bmon/seadra.pic"
+SeadraPicBack:       INCBIN "pic/monback/seadrab.pic"
+SandshrewPicFront:   INCBIN "pic/bmon/sandshrew.pic"
+SandshrewPicBack:    INCBIN "pic/monback/sandshrewb.pic"
+SandslashPicFront:   INCBIN "pic/bmon/sandslash.pic"
+SandslashPicBack:    INCBIN "pic/monback/sandslashb.pic"
+OmanytePicFront:     INCBIN "pic/bmon/omanyte.pic"
+OmanytePicBack:      INCBIN "pic/monback/omanyteb.pic"
+OmastarPicFront:     INCBIN "pic/bmon/omastar.pic"
+OmastarPicBack:      INCBIN "pic/monback/omastarb.pic"
+JigglypuffPicFront:  INCBIN "pic/bmon/jigglypuff.pic"
+JigglypuffPicBack:   INCBIN "pic/monback/jigglypuffb.pic"
+WigglytuffPicFront:  INCBIN "pic/bmon/wigglytuff.pic"
+WigglytuffPicBack:   INCBIN "pic/monback/wigglytuffb.pic"
+EeveePicFront:       INCBIN "pic/bmon/eevee.pic"
+EeveePicBack:        INCBIN "pic/monback/eeveeb.pic"
+FlareonPicFront:     INCBIN "pic/bmon/flareon.pic"
+FlareonPicBack:      INCBIN "pic/monback/flareonb.pic"
+JolteonPicFront:     INCBIN "pic/bmon/jolteon.pic"
+JolteonPicBack:      INCBIN "pic/monback/jolteonb.pic"
+VaporeonPicFront:    INCBIN "pic/bmon/vaporeon.pic"
+VaporeonPicBack:     INCBIN "pic/monback/vaporeonb.pic"
+MachopPicFront:      INCBIN "pic/bmon/machop.pic"
+MachopPicBack:       INCBIN "pic/monback/machopb.pic"
+ZubatPicFront:       INCBIN "pic/bmon/zubat.pic"
+ZubatPicBack:        INCBIN "pic/monback/zubatb.pic"
+EkansPicFront:       INCBIN "pic/bmon/ekans.pic"
+EkansPicBack:        INCBIN "pic/monback/ekansb.pic"
+ParasPicFront:       INCBIN "pic/bmon/paras.pic"
+ParasPicBack:        INCBIN "pic/monback/parasb.pic"
+PoliwhirlPicFront:   INCBIN "pic/bmon/poliwhirl.pic"
+PoliwhirlPicBack:    INCBIN "pic/monback/poliwhirlb.pic"
+PoliwrathPicFront:   INCBIN "pic/bmon/poliwrath.pic"
+PoliwrathPicBack:    INCBIN "pic/monback/poliwrathb.pic"
+WeedlePicFront:      INCBIN "pic/bmon/weedle.pic"
+WeedlePicBack:       INCBIN "pic/monback/weedleb.pic"
+KakunaPicFront:      INCBIN "pic/bmon/kakuna.pic"
+KakunaPicBack:       INCBIN "pic/monback/kakunab.pic"
+BeedrillPicFront:    INCBIN "pic/bmon/beedrill.pic"
+BeedrillPicBack:     INCBIN "pic/monback/beedrillb.pic"
+
+FossilKabutopsPic:   INCBIN "pic/bmon/fossilkabutops.pic"
 
 INCLUDE "engine/battle/b.asm"
 
-TrainerInfoTextBoxTileGraphics: ; 2fb98 (b:7b98)
-	INCBIN "gfx/trainer_info.2bpp"
-
-BlankLeaderNames: ; 2fc28 (b:7c28)
-	INCBIN "gfx/blank_leader_names.2bpp"
-
-CircleTile: ; 2fd88 (b:7d88)
-	INCBIN "gfx/circle_tile.2bpp"
-
-BadgeNumbersTileGraphics: ; 2fd98 (b:7d98)
-	INCBIN "gfx/badge_numbers.2bpp"
+TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
+CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
+BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
 
 INCLUDE "engine/items/tmhm.asm"
-
 INCLUDE "engine/battle/b_2.asm"
-
 INCLUDE "engine/game_corner_slots2.asm"
 
+
 SECTION "bankC",ROMX,BANK[$C]
-DodrioPicFront: ; 30000 (c:4000)
-	INCBIN "pic/bmon/dodrio.pic"
-DodrioPicBack: ; 301a2 (c:41a2)
-	INCBIN "pic/monback/dodriob.pic"
-PrimeapePicFront: ; 30247 (c:4247)
-	INCBIN "pic/bmon/primeape.pic"
-PrimeapePicBack: ; 30408 (c:4408)
-	INCBIN "pic/monback/primeapeb.pic"
-DugtrioPicFront: ; 30480 (c:4480)
-	INCBIN "pic/bmon/dugtrio.pic"
-DugtrioPicBack: ; 3062a (c:462a)
-	INCBIN "pic/monback/dugtriob.pic"
-VenomothPicFront: ; 306a9 (c:46a9)
-	INCBIN "pic/bmon/venomoth.pic"
-VenomothPicBack: ; 30841 (c:4841)
-	INCBIN "pic/monback/venomothb.pic"
-DewgongPicFront: ; 30899 (c:4899)
-	INCBIN "pic/bmon/dewgong.pic"
-DewgongPicBack: ; 309e2 (c:49e2)
-	INCBIN "pic/monback/dewgongb.pic"
-CaterpiePicFront: ; 30a49 (c:4a49)
-	INCBIN "pic/bmon/caterpie.pic"
-CaterpiePicBack: ; 30ae1 (c:4ae1)
-	INCBIN "pic/monback/caterpieb.pic"
-MetapodPicFront: ; 30b3a (c:4b3a)
-	INCBIN "pic/bmon/metapod.pic"
-MetapodPicBack: ; 30bc8 (c:4bc8)
-	INCBIN "pic/monback/metapodb.pic"
-ButterfreePicFront: ; 30c37 (c:4c37)
-	INCBIN "pic/bmon/butterfree.pic"
-ButterfreePicBack: ; 30e0e (c:4e0e)
-	INCBIN "pic/monback/butterfreeb.pic"
-MachampPicFront: ; 30e93 (c:4e93)
-	INCBIN "pic/bmon/machamp.pic"
-MachampPicBack: ; 3108c (c:508c)
-	INCBIN "pic/monback/machampb.pic"
-GolduckPicFront: ; 31108 (c:5108)
-	INCBIN "pic/bmon/golduck.pic"
-GolduckPicBack: ; 312c2 (c:52c2)
-	INCBIN "pic/monback/golduckb.pic"
-HypnoPicFront: ; 3135d (c:535d)
-	INCBIN "pic/bmon/hypno.pic"
-HypnoPicBack: ; 31552 (c:5552)
-	INCBIN "pic/monback/hypnob.pic"
-GolbatPicFront: ; 315e0 (c:55e0)
-	INCBIN "pic/bmon/golbat.pic"
-GolbatPicBack: ; 3180a (c:580a)
-	INCBIN "pic/monback/golbatb.pic"
-MewtwoPicFront: ; 3187f (c:587f)
-	INCBIN "pic/bmon/mewtwo.pic"
-MewtwoPicBack: ; 31a85 (c:5a85)
-	INCBIN "pic/monback/mewtwob.pic"
-SnorlaxPicFront: ; 31b19 (c:5b19)
-	INCBIN "pic/bmon/snorlax.pic"
-SnorlaxPicBack: ; 31ce5 (c:5ce5)
-	INCBIN "pic/monback/snorlaxb.pic"
-MagikarpPicFront: ; 31d31 (c:5d31)
-	INCBIN "pic/bmon/magikarp.pic"
-MagikarpPicBack: ; 31ec3 (c:5ec3)
-	INCBIN "pic/monback/magikarpb.pic"
-MukPicFront: ; 31f56 (c:5f56)
-	INCBIN "pic/bmon/muk.pic"
-MukPicBack: ; 3215f (c:615f)
-	INCBIN "pic/monback/mukb.pic"
-KinglerPicFront: ; 321ec (c:61ec)
-	INCBIN "pic/bmon/kingler.pic"
-KinglerPicBack: ; 323de (c:63de)
-	INCBIN "pic/monback/kinglerb.pic"
-CloysterPicFront: ; 3247f (c:647f)
-	INCBIN "pic/bmon/cloyster.pic"
-CloysterPicBack: ; 326ab (c:66ab)
-	INCBIN "pic/monback/cloysterb.pic"
-ElectrodePicFront: ; 32760 (c:6760)
-	INCBIN "pic/bmon/electrode.pic"
-ElectrodePicBack: ; 32827 (c:6827)
-	INCBIN "pic/monback/electrodeb.pic"
-ClefablePicFront: ; 3288c (c:688c)
-	INCBIN "pic/bmon/clefable.pic"
-ClefablePicBack: ; 329b8 (c:69b8)
-	INCBIN "pic/monback/clefableb.pic"
-WeezingPicFront: ; 32a44 (c:6a44)
-	INCBIN "pic/bmon/weezing.pic"
-WeezingPicBack: ; 32c76 (c:6c76)
-	INCBIN "pic/monback/weezingb.pic"
-PersianPicFront: ; 32d1e (c:6d1e)
-	INCBIN "pic/bmon/persian.pic"
-PersianPicBack: ; 32f04 (c:6f04)
-	INCBIN "pic/monback/persianb.pic"
-MarowakPicFront: ; 32f8f (c:6f8f)
-	INCBIN "pic/bmon/marowak.pic"
-MarowakPicBack: ; 33101 (c:7101)
-	INCBIN "pic/monback/marowakb.pic"
-HaunterPicFront: ; 3318a (c:718a)
-	INCBIN "pic/bmon/haunter.pic"
-HaunterPicBack: ; 33345 (c:7345)
-	INCBIN "pic/monback/haunterb.pic"
-AbraPicFront: ; 333cc (c:73cc)
-	INCBIN "pic/bmon/abra.pic"
-AbraPicBack: ; 334cf (c:74cf)
-	INCBIN "pic/monback/abrab.pic"
-AlakazamPicFront: ; 3355a (c:755a)
-	INCBIN "pic/bmon/alakazam.pic"
-AlakazamPicBack: ; 33779 (c:7779)
-	INCBIN "pic/monback/alakazamb.pic"
-PidgeottoPicFront: ; 3380a (c:780a)
-	INCBIN "pic/bmon/pidgeotto.pic"
-PidgeottoPicBack: ; 3395b (c:795b)
-	INCBIN "pic/monback/pidgeottob.pic"
-PidgeotPicFront: ; 339c2 (c:79c2)
-	INCBIN "pic/bmon/pidgeot.pic"
-PidgeotPicBack: ; 33b79 (c:7b79)
-	INCBIN "pic/monback/pidgeotb.pic"
-StarmiePicFront: ; 33c1c (c:7c1c)
-	INCBIN "pic/bmon/starmie.pic"
-StarmiePicBack: ; 33dac (c:7dac)
-	INCBIN "pic/monback/starmieb.pic"
-RedPicBack: ; 33e0a (c:7e0a)
-	INCBIN "pic/trainer/redb.pic"
-OldManPic: ; 33e9a (c:7e9a)
-	INCBIN "pic/trainer/oldman.pic"
+
+DodrioPicFront:       INCBIN "pic/bmon/dodrio.pic"
+DodrioPicBack:        INCBIN "pic/monback/dodriob.pic"
+PrimeapePicFront:     INCBIN "pic/bmon/primeape.pic"
+PrimeapePicBack:      INCBIN "pic/monback/primeapeb.pic"
+DugtrioPicFront:      INCBIN "pic/bmon/dugtrio.pic"
+DugtrioPicBack:       INCBIN "pic/monback/dugtriob.pic"
+VenomothPicFront:     INCBIN "pic/bmon/venomoth.pic"
+VenomothPicBack:      INCBIN "pic/monback/venomothb.pic"
+DewgongPicFront:      INCBIN "pic/bmon/dewgong.pic"
+DewgongPicBack:       INCBIN "pic/monback/dewgongb.pic"
+CaterpiePicFront:     INCBIN "pic/bmon/caterpie.pic"
+CaterpiePicBack:      INCBIN "pic/monback/caterpieb.pic"
+MetapodPicFront:      INCBIN "pic/bmon/metapod.pic"
+MetapodPicBack:       INCBIN "pic/monback/metapodb.pic"
+ButterfreePicFront:   INCBIN "pic/bmon/butterfree.pic"
+ButterfreePicBack:    INCBIN "pic/monback/butterfreeb.pic"
+MachampPicFront:      INCBIN "pic/bmon/machamp.pic"
+MachampPicBack:       INCBIN "pic/monback/machampb.pic"
+GolduckPicFront:      INCBIN "pic/bmon/golduck.pic"
+GolduckPicBack:       INCBIN "pic/monback/golduckb.pic"
+HypnoPicFront:        INCBIN "pic/bmon/hypno.pic"
+HypnoPicBack:         INCBIN "pic/monback/hypnob.pic"
+GolbatPicFront:       INCBIN "pic/bmon/golbat.pic"
+GolbatPicBack:        INCBIN "pic/monback/golbatb.pic"
+MewtwoPicFront:       INCBIN "pic/bmon/mewtwo.pic"
+MewtwoPicBack:        INCBIN "pic/monback/mewtwob.pic"
+SnorlaxPicFront:      INCBIN "pic/bmon/snorlax.pic"
+SnorlaxPicBack:       INCBIN "pic/monback/snorlaxb.pic"
+MagikarpPicFront:     INCBIN "pic/bmon/magikarp.pic"
+MagikarpPicBack:      INCBIN "pic/monback/magikarpb.pic"
+MukPicFront:          INCBIN "pic/bmon/muk.pic"
+MukPicBack:           INCBIN "pic/monback/mukb.pic"
+KinglerPicFront:      INCBIN "pic/bmon/kingler.pic"
+KinglerPicBack:       INCBIN "pic/monback/kinglerb.pic"
+CloysterPicFront:     INCBIN "pic/bmon/cloyster.pic"
+CloysterPicBack:      INCBIN "pic/monback/cloysterb.pic"
+ElectrodePicFront:    INCBIN "pic/bmon/electrode.pic"
+ElectrodePicBack:     INCBIN "pic/monback/electrodeb.pic"
+ClefablePicFront:     INCBIN "pic/bmon/clefable.pic"
+ClefablePicBack:      INCBIN "pic/monback/clefableb.pic"
+WeezingPicFront:      INCBIN "pic/bmon/weezing.pic"
+WeezingPicBack:       INCBIN "pic/monback/weezingb.pic"
+PersianPicFront:      INCBIN "pic/bmon/persian.pic"
+PersianPicBack:       INCBIN "pic/monback/persianb.pic"
+MarowakPicFront:      INCBIN "pic/bmon/marowak.pic"
+MarowakPicBack:       INCBIN "pic/monback/marowakb.pic"
+HaunterPicFront:      INCBIN "pic/bmon/haunter.pic"
+HaunterPicBack:       INCBIN "pic/monback/haunterb.pic"
+AbraPicFront:         INCBIN "pic/bmon/abra.pic"
+AbraPicBack:          INCBIN "pic/monback/abrab.pic"
+AlakazamPicFront:     INCBIN "pic/bmon/alakazam.pic"
+AlakazamPicBack:      INCBIN "pic/monback/alakazamb.pic"
+PidgeottoPicFront:    INCBIN "pic/bmon/pidgeotto.pic"
+PidgeottoPicBack:     INCBIN "pic/monback/pidgeottob.pic"
+PidgeotPicFront:      INCBIN "pic/bmon/pidgeot.pic"
+PidgeotPicBack:       INCBIN "pic/monback/pidgeotb.pic"
+StarmiePicFront:      INCBIN "pic/bmon/starmie.pic"
+StarmiePicBack:       INCBIN "pic/monback/starmieb.pic"
+
+RedPicBack:           INCBIN "pic/trainer/redb.pic"
+OldManPic:            INCBIN "pic/trainer/oldman.pic"
 
 INCLUDE "engine/battle/c.asm"
 
+
 SECTION "bankD",ROMX,BANK[$D]
-BulbasaurPicFront: ; 34000 (d:4000)
-	INCBIN "pic/bmon/bulbasaur.pic"
-BulbasaurPicBack: ; 340e5 (d:40e5)
-	INCBIN "pic/monback/bulbasaurb.pic"
-VenusaurPicFront: ; 34162 (d:4162)
-	INCBIN "pic/bmon/venusaur.pic"
-VenusaurPicBack: ; 34397 (d:4397)
-	INCBIN "pic/monback/venusaurb.pic"
-TentacruelPicFront: ; 34455 (d:4455)
-	INCBIN "pic/bmon/tentacruel.pic"
-TentacruelPicBack: ; 345c3 (d:45c3)
-	INCBIN "pic/monback/tentacruelb.pic"
-GoldeenPicFront: ; 3466f (d:466f)
-	INCBIN "pic/bmon/goldeen.pic"
-GoldeenPicBack: ; 34796 (d:4796)
-	INCBIN "pic/monback/goldeenb.pic"
-SeakingPicFront: ; 34803 (d:4803)
-	INCBIN "pic/bmon/seaking.pic"
-SeakingPicBack: ; 34a03 (d:4a03)
-	INCBIN "pic/monback/seakingb.pic"
-PonytaPicFront: ; 34ab1 (d:4ab1)
-	INCBIN "pic/bmon/ponyta.pic"
-RapidashPicFront: ; 34c10 (d:4c10)
-	INCBIN "pic/bmon/rapidash.pic"
-PonytaPicBack: ; 34e32 (d:4e32)
-	INCBIN "pic/monback/ponytab.pic"
-RapidashPicBack: ; 34eba (d:4eba)
-	INCBIN "pic/monback/rapidashb.pic"
-RattataPicFront: ; 34f6a (d:4f6a)
-	INCBIN "pic/bmon/rattata.pic"
-RattataPicBack: ; 35041 (d:5041)
-	INCBIN "pic/monback/rattatab.pic"
-RaticatePicFront: ; 3507a (d:507a)
-	INCBIN "pic/bmon/raticate.pic"
-RaticatePicBack: ; 3520d (d:520d)
-	INCBIN "pic/monback/raticateb.pic"
-NidorinoPicFront: ; 35282 (d:5282)
-	INCBIN "pic/bmon/nidorino.pic"
-NidorinoPicBack: ; 353f0 (d:53f0)
-	INCBIN "pic/monback/nidorinob.pic"
-NidorinaPicFront: ; 3548b (d:548b)
-	INCBIN "pic/bmon/nidorina.pic"
-NidorinaPicBack: ; 355c8 (d:55c8)
-	INCBIN "pic/monback/nidorinab.pic"
-GeodudePicFront: ; 3564f (d:564f)
-	INCBIN "pic/bmon/geodude.pic"
-GeodudePicBack: ; 35729 (d:5729)
-	INCBIN "pic/monback/geodudeb.pic"
-PorygonPicFront: ; 35784 (d:5784)
-	INCBIN "pic/bmon/porygon.pic"
-PorygonPicBack: ; 358d1 (d:58d1)
-	INCBIN "pic/monback/porygonb.pic"
-AerodactylPicFront: ; 35931 (d:5931)
-	INCBIN "pic/bmon/aerodactyl.pic"
-AerodactylPicBack: ; 35aec (d:5aec)
-	INCBIN "pic/monback/aerodactylb.pic"
-MagnemitePicFront: ; 35b87 (d:5b87)
-	INCBIN "pic/bmon/magnemite.pic"
-MagnemitePicBack: ; 35c0d (d:5c0d)
-	INCBIN "pic/monback/magnemiteb.pic"
-CharmanderPicFront: ; 35c5c (d:5c5c)
-	INCBIN "pic/bmon/charmander.pic"
-CharmanderPicBack: ; 35d5c (d:5d5c)
-	INCBIN "pic/monback/charmanderb.pic"
-SquirtlePicFront: ; 35db8 (d:5db8)
-	INCBIN "pic/bmon/squirtle.pic"
-SquirtlePicBack: ; 35e8f (d:5e8f)
-	INCBIN "pic/monback/squirtleb.pic"
-CharmeleonPicFront: ; 35f0c (d:5f0c)
-	INCBIN "pic/bmon/charmeleon.pic"
-CharmeleonPicBack: ; 36048 (d:6048)
-	INCBIN "pic/monback/charmeleonb.pic"
-WartortlePicFront: ; 360b1 (d:60b1)
-	INCBIN "pic/bmon/wartortle.pic"
-WartortlePicBack: ; 361f1 (d:61f1)
-	INCBIN "pic/monback/wartortleb.pic"
-CharizardPicFront: ; 36286 (d:6286)
-	INCBIN "pic/bmon/charizard.pic"
-CharizardPicBack: ; 36495 (d:6495)
-	INCBIN "pic/monback/charizardb.pic"
-FossilAerodactylPic: ; 36536 (d:6536)
-	INCBIN "pic/bmon/fossilaerodactyl.pic"
-GhostPic: ; 366b5 (d:66b5)
-	INCBIN "pic/other/ghost.pic"
-OddishPicFront: ; 3680b (d:680b)
-	INCBIN "pic/bmon/oddish.pic"
-OddishPicBack: ; 368a9 (d:68a9)
-	INCBIN "pic/monback/oddishb.pic"
-GloomPicFront: ; 36941 (d:6941)
-	INCBIN "pic/bmon/gloom.pic"
-GloomPicBack: ; 36a78 (d:6a78)
-	INCBIN "pic/monback/gloomb.pic"
-VileplumePicFront: ; 36b21 (d:6b21)
-	INCBIN "pic/bmon/vileplume.pic"
-VileplumePicBack: ; 36c82 (d:6c82)
-	INCBIN "pic/monback/vileplumeb.pic"
-BellsproutPicFront: ; 36d00 (d:6d00)
-	INCBIN "pic/bmon/bellsprout.pic"
-BellsproutPicBack: ; 36dba (d:6dba)
-	INCBIN "pic/monback/bellsproutb.pic"
-WeepinbellPicFront: ; 36e30 (d:6e30)
-	INCBIN "pic/bmon/weepinbell.pic"
-WeepinbellPicBack: ; 36f6f (d:6f6f)
-	INCBIN "pic/monback/weepinbellb.pic"
-VictreebelPicFront: ; 36fea (d:6fea)
-	INCBIN "pic/bmon/victreebel.pic"
-VictreebelPicBack: ; 371b2 (d:71b2)
-	INCBIN "pic/monback/victreebelb.pic"
+
+BulbasaurPicFront:    INCBIN "pic/bmon/bulbasaur.pic"
+BulbasaurPicBack:     INCBIN "pic/monback/bulbasaurb.pic"
+VenusaurPicFront:     INCBIN "pic/bmon/venusaur.pic"
+VenusaurPicBack:      INCBIN "pic/monback/venusaurb.pic"
+TentacruelPicFront:   INCBIN "pic/bmon/tentacruel.pic"
+TentacruelPicBack:    INCBIN "pic/monback/tentacruelb.pic"
+GoldeenPicFront:      INCBIN "pic/bmon/goldeen.pic"
+GoldeenPicBack:       INCBIN "pic/monback/goldeenb.pic"
+SeakingPicFront:      INCBIN "pic/bmon/seaking.pic"
+SeakingPicBack:       INCBIN "pic/monback/seakingb.pic"
+PonytaPicFront:       INCBIN "pic/bmon/ponyta.pic"
+RapidashPicFront:     INCBIN "pic/bmon/rapidash.pic"
+PonytaPicBack:        INCBIN "pic/monback/ponytab.pic"
+RapidashPicBack:      INCBIN "pic/monback/rapidashb.pic"
+RattataPicFront:      INCBIN "pic/bmon/rattata.pic"
+RattataPicBack:       INCBIN "pic/monback/rattatab.pic"
+RaticatePicFront:     INCBIN "pic/bmon/raticate.pic"
+RaticatePicBack:      INCBIN "pic/monback/raticateb.pic"
+NidorinoPicFront:     INCBIN "pic/bmon/nidorino.pic"
+NidorinoPicBack:      INCBIN "pic/monback/nidorinob.pic"
+NidorinaPicFront:     INCBIN "pic/bmon/nidorina.pic"
+NidorinaPicBack:      INCBIN "pic/monback/nidorinab.pic"
+GeodudePicFront:      INCBIN "pic/bmon/geodude.pic"
+GeodudePicBack:       INCBIN "pic/monback/geodudeb.pic"
+PorygonPicFront:      INCBIN "pic/bmon/porygon.pic"
+PorygonPicBack:       INCBIN "pic/monback/porygonb.pic"
+AerodactylPicFront:   INCBIN "pic/bmon/aerodactyl.pic"
+AerodactylPicBack:    INCBIN "pic/monback/aerodactylb.pic"
+MagnemitePicFront:    INCBIN "pic/bmon/magnemite.pic"
+MagnemitePicBack:     INCBIN "pic/monback/magnemiteb.pic"
+CharmanderPicFront:   INCBIN "pic/bmon/charmander.pic"
+CharmanderPicBack:    INCBIN "pic/monback/charmanderb.pic"
+SquirtlePicFront:     INCBIN "pic/bmon/squirtle.pic"
+SquirtlePicBack:      INCBIN "pic/monback/squirtleb.pic"
+CharmeleonPicFront:   INCBIN "pic/bmon/charmeleon.pic"
+CharmeleonPicBack:    INCBIN "pic/monback/charmeleonb.pic"
+WartortlePicFront:    INCBIN "pic/bmon/wartortle.pic"
+WartortlePicBack:     INCBIN "pic/monback/wartortleb.pic"
+CharizardPicFront:    INCBIN "pic/bmon/charizard.pic"
+CharizardPicBack:     INCBIN "pic/monback/charizardb.pic"
+FossilAerodactylPic:  INCBIN "pic/bmon/fossilaerodactyl.pic"
+GhostPic:             INCBIN "pic/other/ghost.pic"
+OddishPicFront:       INCBIN "pic/bmon/oddish.pic"
+OddishPicBack:        INCBIN "pic/monback/oddishb.pic"
+GloomPicFront:        INCBIN "pic/bmon/gloom.pic"
+GloomPicBack:         INCBIN "pic/monback/gloomb.pic"
+VileplumePicFront:    INCBIN "pic/bmon/vileplume.pic"
+VileplumePicBack:     INCBIN "pic/monback/vileplumeb.pic"
+BellsproutPicFront:   INCBIN "pic/bmon/bellsprout.pic"
+BellsproutPicBack:    INCBIN "pic/monback/bellsproutb.pic"
+WeepinbellPicFront:   INCBIN "pic/bmon/weepinbell.pic"
+WeepinbellPicBack:    INCBIN "pic/monback/weepinbellb.pic"
+VictreebelPicFront:   INCBIN "pic/bmon/victreebel.pic"
+VictreebelPicBack:    INCBIN "pic/monback/victreebelb.pic"
 
 INCLUDE "engine/titlescreen2.asm"
-
 INCLUDE "engine/battle/d.asm"
-
 INCLUDE "engine/slot_machine.asm"
-
 INCLUDE "engine/overworld/pewter_guys.asm"
-
 INCLUDE "engine/multiply_divide.asm"
-
 INCLUDE "engine/game_corner_slots.asm"
+
 
 SECTION "bankE",ROMX,BANK[$E]
 
 INCLUDE "data/moves.asm"
-
-BaseStats:
-INCLUDE "data/base_stats.asm"
-
+BaseStats: INCLUDE "data/base_stats.asm"
 INCLUDE "data/cries.asm"
-
 INCLUDE "engine/battle/e.asm"
 
 ; tiles for gameboy and link cable graphics used for trading sequence animation
-TradingAnimationGraphics: ; 3a9be (e:69be)
+TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
 
 ; 4 tiles for actual wire transfer animation (pokeball wandering inside wire)
-TradingAnimationGraphics2: ; 3acce (e:6cce)
+TradingAnimationGraphics2:
 	INCBIN "gfx/trade2.2bpp"
 
 INCLUDE "engine/evos_moves.asm"
-
 INCLUDE "engine/battle/e_2.asm"
+
 
 SECTION "bankF",ROMX,BANK[$F]
 
 INCLUDE "engine/battle/core.asm"
 
+
 SECTION "bank10",ROMX,BANK[$10]
 
 INCLUDE "engine/menu/pokedex.asm"
-
 INCLUDE "engine/trade.asm"
-
 INCLUDE "engine/intro.asm"
-
 INCLUDE "engine/trade2.asm"
+
 
 SECTION "bank11",ROMX,BANK[$11]
 
 INCLUDE "data/mapHeaders/lavendertown.asm"
-
 INCLUDE "data/mapObjects/lavendertown.asm"
+LavenderTownBlocks: INCBIN "maps/lavendertown.blk"
 
-LavenderTownBlocks: ; 44085 (11:4085)
-	INCBIN "maps/lavendertown.blk"
+ViridianPokecenterBlocks: INCBIN "maps/viridianpokecenter.blk"
 
-ViridianPokecenterBlocks: ; 440df (11:40df)
-	INCBIN "maps/viridianpokecenter.blk"
-
-SafariZoneRestHouse1Blocks: ; 440fb (11:40fb)
-SafariZoneRestHouse2Blocks: ; 440fb (11:40fb)
-SafariZoneRestHouse3Blocks: ; 440fb (11:40fb)
-SafariZoneRestHouse4Blocks: ; 440fb (11:40fb)
-	INCBIN "maps/safarizoneresthouse1.blk"
+SafariZoneRestHouse1Blocks:
+SafariZoneRestHouse2Blocks:
+SafariZoneRestHouse3Blocks:
+SafariZoneRestHouse4Blocks: INCBIN "maps/safarizoneresthouse1.blk"
 
 INCLUDE "scripts/lavendertown.asm"
 
 INCLUDE "engine/pokedex_rating.asm"
 
 INCLUDE "data/mapHeaders/viridianpokecenter.asm"
-
 INCLUDE "scripts/viridianpokecenter.asm"
-
 INCLUDE "data/mapObjects/viridianpokecenter.asm"
 
 INCLUDE "data/mapHeaders/mansion1.asm"
-
 INCLUDE "scripts/mansion1.asm"
-
 INCLUDE "data/mapObjects/mansion1.asm"
-
-Mansion1Blocks: ; 443fe (11:43fe)
-	INCBIN "maps/mansion1.blk"
+Mansion1Blocks: INCBIN "maps/mansion1.blk"
 
 INCLUDE "data/mapHeaders/rocktunnel1.asm"
-
 INCLUDE "scripts/rocktunnel1.asm"
-
 INCLUDE "data/mapObjects/rocktunnel1.asm"
-
-RockTunnel1Blocks: ; 44675 (11:4675)
-	INCBIN "maps/rocktunnel1.blk"
+RockTunnel1Blocks: INCBIN "maps/rocktunnel1.blk"
 
 INCLUDE "data/mapHeaders/seafoamislands1.asm"
-
 INCLUDE "scripts/seafoamislands1.asm"
-
 INCLUDE "data/mapObjects/seafoamislands1.asm"
-
-SeafoamIslands1Blocks: ; 4489f (11:489f)
-	INCBIN "maps/seafoamislands1.blk"
+SeafoamIslands1Blocks: INCBIN "maps/seafoamislands1.blk"
 
 INCLUDE "data/mapHeaders/ssanne3.asm"
-
 INCLUDE "scripts/ssanne3.asm"
-
 INCLUDE "data/mapObjects/ssanne3.asm"
-
-SSAnne3Blocks: ; 44956 (11:4956)
-	INCBIN "maps/ssanne3.blk"
+SSAnne3Blocks: INCBIN "maps/ssanne3.blk"
 
 INCLUDE "data/mapHeaders/victoryroad3.asm"
-
 INCLUDE "scripts/victoryroad3.asm"
-
 INCLUDE "data/mapObjects/victoryroad3.asm"
-
-VictoryRoad3Blocks: ; 44b37 (11:4b37)
-	INCBIN "maps/victoryroad3.blk"
+VictoryRoad3Blocks: INCBIN "maps/victoryroad3.blk"
 
 INCLUDE "data/mapHeaders/rockethideout1.asm"
-
 INCLUDE "scripts/rockethideout1.asm"
-
 INCLUDE "data/mapObjects/rockethideout1.asm"
-
-RocketHideout1Blocks: ; 44d49 (11:4d49)
-	INCBIN "maps/rockethideout1.blk"
+RocketHideout1Blocks: INCBIN "maps/rockethideout1.blk"
 
 INCLUDE "data/mapHeaders/rockethideout2.asm"
-
 INCLUDE "scripts/rockethideout2.asm"
-
 INCLUDE "data/mapObjects/rockethideout2.asm"
-
-RocketHideout2Blocks: ; 45147 (11:5147)
-	INCBIN "maps/rockethideout2.blk"
+RocketHideout2Blocks: INCBIN "maps/rockethideout2.blk"
 
 INCLUDE "data/mapHeaders/rockethideout3.asm"
-
 INCLUDE "scripts/rockethideout3.asm"
-
 INCLUDE "data/mapObjects/rockethideout3.asm"
-
-RocketHideout3Blocks: ; 4537f (11:537f)
-	INCBIN "maps/rockethideout3.blk"
+RocketHideout3Blocks: INCBIN "maps/rockethideout3.blk"
 
 INCLUDE "data/mapHeaders/rockethideout4.asm"
-
 INCLUDE "scripts/rockethideout4.asm"
-
 INCLUDE "data/mapObjects/rockethideout4.asm"
-
-RocketHideout4Blocks: ; 45650 (11:5650)
-	INCBIN "maps/rockethideout4.blk"
+RocketHideout4Blocks: INCBIN "maps/rockethideout4.blk"
 
 INCLUDE "data/mapHeaders/rockethideoutelevator.asm"
-
 INCLUDE "scripts/rockethideoutelevator.asm"
-
 INCLUDE "data/mapObjects/rockethideoutelevator.asm"
-
-RocketHideoutElevatorBlocks: ; 457a8 (11:57a8)
-	INCBIN "maps/rockethideoutelevator.blk"
+RocketHideoutElevatorBlocks: INCBIN "maps/rockethideoutelevator.blk"
 
 INCLUDE "data/mapHeaders/silphcoelevator.asm"
-
 INCLUDE "scripts/silphcoelevator.asm"
-
 INCLUDE "data/mapObjects/silphcoelevator.asm"
-
-SilphCoElevatorBlocks: ; 4585b (11:585b)
-	INCBIN "maps/silphcoelevator.blk"
+SilphCoElevatorBlocks: INCBIN "maps/silphcoelevator.blk"
 
 INCLUDE "data/mapHeaders/safarizoneeast.asm"
-
 INCLUDE "scripts/safarizoneeast.asm"
-
 INCLUDE "data/mapObjects/safarizoneeast.asm"
-
-SafariZoneEastBlocks: ; 458dc (11:58dc)
-	INCBIN "maps/safarizoneeast.blk"
+SafariZoneEastBlocks: INCBIN "maps/safarizoneeast.blk"
 
 INCLUDE "data/mapHeaders/safarizonenorth.asm"
-
 INCLUDE "scripts/safarizonenorth.asm"
-
 INCLUDE "data/mapObjects/safarizonenorth.asm"
-
-SafariZoneNorthBlocks: ; 45a3e (11:5a3e)
-	INCBIN "maps/safarizonenorth.blk"
+SafariZoneNorthBlocks: INCBIN "maps/safarizonenorth.blk"
 
 INCLUDE "data/mapHeaders/safarizonecenter.asm"
-
 INCLUDE "scripts/safarizonecenter.asm"
-
 INCLUDE "data/mapObjects/safarizonecenter.asm"
-
-SafariZoneCenterBlocks: ; 45c1e (11:5c1e)
-	INCBIN "maps/safarizonecenter.blk"
+SafariZoneCenterBlocks: INCBIN "maps/safarizonecenter.blk"
 
 INCLUDE "data/mapHeaders/safarizoneresthouse1.asm"
-
 INCLUDE "scripts/safarizoneresthouse1.asm"
-
 INCLUDE "data/mapObjects/safarizoneresthouse1.asm"
 
 INCLUDE "data/mapHeaders/safarizoneresthouse2.asm"
-
 INCLUDE "scripts/safarizoneresthouse2.asm"
-
 INCLUDE "data/mapObjects/safarizoneresthouse2.asm"
 
 INCLUDE "data/mapHeaders/safarizoneresthouse3.asm"
-
 INCLUDE "scripts/safarizoneresthouse3.asm"
-
 INCLUDE "data/mapObjects/safarizoneresthouse3.asm"
 
 INCLUDE "data/mapHeaders/safarizoneresthouse4.asm"
-
 INCLUDE "scripts/safarizoneresthouse4.asm"
-
 INCLUDE "data/mapObjects/safarizoneresthouse4.asm"
 
 INCLUDE "data/mapHeaders/unknowndungeon2.asm"
-
 INCLUDE "scripts/unknowndungeon2.asm"
-
 INCLUDE "data/mapObjects/unknowndungeon2.asm"
-
-UnknownDungeon2Blocks: ; 45e5d (11:5e5d)
-	INCBIN "maps/unknowndungeon2.blk"
+UnknownDungeon2Blocks: INCBIN "maps/unknowndungeon2.blk"
 
 INCLUDE "data/mapHeaders/unknowndungeon3.asm"
-
 INCLUDE "scripts/unknowndungeon3.asm"
-
 INCLUDE "data/mapObjects/unknowndungeon3.asm"
-
-UnknownDungeon3Blocks: ; 45f58 (11:5f58)
-	INCBIN "maps/unknowndungeon3.blk"
+UnknownDungeon3Blocks: INCBIN "maps/unknowndungeon3.blk"
 
 INCLUDE "data/mapHeaders/rocktunnel2.asm"
-
 INCLUDE "scripts/rocktunnel2.asm"
-
 INCLUDE "data/mapObjects/rocktunnel2.asm"
-
-RockTunnel2Blocks: ; 461a1 (11:61a1)
-	INCBIN "maps/rocktunnel2.blk"
+RockTunnel2Blocks: INCBIN "maps/rocktunnel2.blk"
 
 INCLUDE "data/mapHeaders/seafoamislands2.asm"
-
 INCLUDE "scripts/seafoamislands2.asm"
-
 INCLUDE "data/mapObjects/seafoamislands2.asm"
-
-SeafoamIslands2Blocks: ; 463be (11:63be)
-	INCBIN "maps/seafoamislands2.blk"
+SeafoamIslands2Blocks: INCBIN "maps/seafoamislands2.blk"
 
 INCLUDE "data/mapHeaders/seafoamislands3.asm"
-
 INCLUDE "scripts/seafoamislands3.asm"
-
 INCLUDE "data/mapObjects/seafoamislands3.asm"
-
-SeafoamIslands3Blocks: ; 464fa (11:64fa)
-	INCBIN "maps/seafoamislands3.blk"
+SeafoamIslands3Blocks: INCBIN "maps/seafoamislands3.blk"
 
 INCLUDE "data/mapHeaders/seafoamislands4.asm"
-
 INCLUDE "scripts/seafoamislands4.asm"
-
 INCLUDE "data/mapObjects/seafoamislands4.asm"
-
-SeafoamIslands4Blocks: ; 46706 (11:6706)
-	INCBIN "maps/seafoamislands4.blk"
+SeafoamIslands4Blocks: INCBIN "maps/seafoamislands4.blk"
 
 INCLUDE "data/mapHeaders/seafoamislands5.asm"
-
 INCLUDE "scripts/seafoamislands5.asm"
-
 INCLUDE "data/mapObjects/seafoamislands5.asm"
-
-SeafoamIslands5Blocks: ; 468fa (11:68fa)
-	INCBIN "maps/seafoamislands5.blk"
+SeafoamIslands5Blocks: INCBIN "maps/seafoamislands5.blk"
 
 INCLUDE "engine/overworld/hidden_objects.asm"
+
 
 SECTION "bank12",ROMX,BANK[$12]
 
 INCLUDE "data/mapHeaders/route7.asm"
-
 INCLUDE "data/mapObjects/route7.asm"
+Route7Blocks: INCBIN "maps/route7.blk"
 
-Route7Blocks: ; 48051 (12:4051)
-	INCBIN "maps/route7.blk"
+CeladonPokecenterBlocks:
+RockTunnelPokecenterBlocks:
+MtMoonPokecenterBlocks: INCBIN "maps/mtmoonpokecenter.blk"
 
-CeladonPokecenterBlocks: ; 480ab (12:40ab)
-RockTunnelPokecenterBlocks: ; 480ab (12:40ab)
-MtMoonPokecenterBlocks: ; 480ab (12:40ab)
-	INCBIN "maps/mtmoonpokecenter.blk"
+Route18GateBlocks:
+Route15GateBlocks:
+Route11GateBlocks: INCBIN "maps/route11gate.blk"
 
-Route18GateBlocks: ; 480c7 (12:40c7)
-Route15GateBlocks: ; 480c7 (12:40c7)
-Route11GateBlocks: ; 480c7 (12:40c7)
-	INCBIN "maps/route11gate.blk"
-
-Route18GateUpstairsBlocks: ; 480db (12:40db)
-Route16GateUpstairsBlocks: ; 480db (12:40db)
-Route12GateUpstairsBlocks: ; 480db (12:40db)
-Route15GateUpstairsBlocks: ; 480db (12:40db)
-Route11GateUpstairsBlocks: ; 480db (12:40db)
-	INCBIN "maps/route11gateupstairs.blk"
+Route18GateUpstairsBlocks:
+Route16GateUpstairsBlocks:
+Route12GateUpstairsBlocks:
+Route15GateUpstairsBlocks:
+Route11GateUpstairsBlocks: INCBIN "maps/route11gateupstairs.blk"
 
 INCLUDE "engine/predefs12.asm"
 
 INCLUDE "scripts/route7.asm"
 
 INCLUDE "data/mapHeaders/redshouse1f.asm"
-
 INCLUDE "scripts/redshouse1f.asm"
-
 INCLUDE "data/mapObjects/redshouse1f.asm"
-
-RedsHouse1FBlocks: ; 48209 (12:4209)
-	INCBIN "maps/redshouse1f.blk"
+RedsHouse1FBlocks: INCBIN "maps/redshouse1f.blk"
 
 INCLUDE "data/mapHeaders/celadonmart3.asm"
-
 INCLUDE "scripts/celadonmart3.asm"
-
 INCLUDE "data/mapObjects/celadonmart3.asm"
-
-CeladonMart3Blocks: ; 48322 (12:4322)
-	INCBIN "maps/celadonmart3.blk"
+CeladonMart3Blocks: INCBIN "maps/celadonmart3.blk"
 
 INCLUDE "data/mapHeaders/celadonmart4.asm"
-
 INCLUDE "scripts/celadonmart4.asm"
-
 INCLUDE "data/mapObjects/celadonmart4.asm"
-
-CeladonMart4Blocks: ; 483a1 (12:43a1)
-	INCBIN "maps/celadonmart4.blk"
+CeladonMart4Blocks: INCBIN "maps/celadonmart4.blk"
 
 INCLUDE "data/mapHeaders/celadonmartroof.asm"
-
 INCLUDE "scripts/celadonmartroof.asm"
-
 INCLUDE "data/mapObjects/celadonmartroof.asm"
-
-CeladonMartRoofBlocks: ; 485cc (12:45cc)
-	INCBIN "maps/celadonmartroof.blk"
+CeladonMartRoofBlocks: INCBIN "maps/celadonmartroof.blk"
 
 INCLUDE "data/mapHeaders/celadonmartelevator.asm"
-
 INCLUDE "scripts/celadonmartelevator.asm"
-
 INCLUDE "data/mapObjects/celadonmartelevator.asm"
-
-CeladonMartElevatorBlocks: ; 48684 (12:4684)
-	INCBIN "maps/celadonmartelevator.blk"
+CeladonMartElevatorBlocks: INCBIN "maps/celadonmartelevator.blk"
 
 INCLUDE "data/mapHeaders/celadonmansion1.asm"
-
 INCLUDE "scripts/celadonmansion1.asm"
-
 INCLUDE "data/mapObjects/celadonmansion1.asm"
-
-CeladonMansion1Blocks: ; 48716 (12:4716)
-	INCBIN "maps/celadonmansion1.blk"
+CeladonMansion1Blocks: INCBIN "maps/celadonmansion1.blk"
 
 INCLUDE "data/mapHeaders/celadonmansion2.asm"
-
 INCLUDE "scripts/celadonmansion2.asm"
-
 INCLUDE "data/mapObjects/celadonmansion2.asm"
-
-CeladonMansion2Blocks: ; 4876c (12:476c)
-	INCBIN "maps/celadonmansion2.blk"
+CeladonMansion2Blocks: INCBIN "maps/celadonmansion2.blk"
 
 INCLUDE "data/mapHeaders/celadonmansion3.asm"
-
 INCLUDE "scripts/celadonmansion3.asm"
-
 INCLUDE "data/mapObjects/celadonmansion3.asm"
-
-CeladonMansion3Blocks: ; 48847 (12:4847)
-	INCBIN "maps/celadonmansion3.blk"
+CeladonMansion3Blocks: INCBIN "maps/celadonmansion3.blk"
 
 INCLUDE "data/mapHeaders/celadonmansion4.asm"
-
 INCLUDE "scripts/celadonmansion4.asm"
-
 INCLUDE "data/mapObjects/celadonmansion4.asm"
-
-CeladonMansion4Blocks: ; 48894 (12:4894)
-	INCBIN "maps/celadonmansion4.blk"
+CeladonMansion4Blocks: INCBIN "maps/celadonmansion4.blk"
 
 INCLUDE "data/mapHeaders/celadonpokecenter.asm"
-
 INCLUDE "scripts/celadonpokecenter.asm"
-
 INCLUDE "data/mapObjects/celadonpokecenter.asm"
 
 INCLUDE "data/mapHeaders/celadongym.asm"
-
 INCLUDE "scripts/celadongym.asm"
-
 INCLUDE "data/mapObjects/celadongym.asm"
-
-CeladonGymBlocks: ; 48b84 (12:4b84)
-	INCBIN "maps/celadongym.blk"
+CeladonGymBlocks: INCBIN "maps/celadongym.blk"
 
 INCLUDE "data/mapHeaders/celadongamecorner.asm"
-
 INCLUDE "scripts/celadongamecorner.asm"
-
 INCLUDE "data/mapObjects/celadongamecorner.asm"
-
-CeladonGameCornerBlocks: ; 49003 (12:5003)
-	INCBIN "maps/celadongamecorner.blk"
+CeladonGameCornerBlocks: INCBIN "maps/celadongamecorner.blk"
 
 INCLUDE "data/mapHeaders/celadonmart5.asm"
-
 INCLUDE "scripts/celadonmart5.asm"
-
 INCLUDE "data/mapObjects/celadonmart5.asm"
-
-CeladonMart5Blocks: ; 490bc (12:50bc)
-	INCBIN "maps/celadonmart5.blk"
+CeladonMart5Blocks: INCBIN "maps/celadonmart5.blk"
 
 INCLUDE "data/mapHeaders/celadonprizeroom.asm"
-
 INCLUDE "scripts/celadonprizeroom.asm"
-
 INCLUDE "data/mapObjects/celadonprizeroom.asm"
-
-CeladonPrizeRoomBlocks: ; 49131 (12:5131)
-	INCBIN "maps/celadonprizeroom.blk"
+CeladonPrizeRoomBlocks: INCBIN "maps/celadonprizeroom.blk"
 
 INCLUDE "data/mapHeaders/celadondiner.asm"
-
 INCLUDE "scripts/celadondiner.asm"
-
 INCLUDE "data/mapObjects/celadondiner.asm"
-
-CeladonDinerBlocks: ; 491ee (12:51ee)
-	INCBIN "maps/celadondiner.blk"
+CeladonDinerBlocks: INCBIN "maps/celadondiner.blk"
 
 INCLUDE "data/mapHeaders/celadonhouse.asm"
-
 INCLUDE "scripts/celadonhouse.asm"
-
 INCLUDE "data/mapObjects/celadonhouse.asm"
-
-CeladonHouseBlocks: ; 4924d (12:524d)
-	INCBIN "maps/celadonhouse.blk"
+CeladonHouseBlocks: INCBIN "maps/celadonhouse.blk"
 
 INCLUDE "data/mapHeaders/celadonhotel.asm"
-
 INCLUDE "scripts/celadonhotel.asm"
-
 INCLUDE "data/mapObjects/celadonhotel.asm"
-
-CeladonHotelBlocks: ; 492a7 (12:52a7)
-	INCBIN "maps/celadonhotel.blk"
+CeladonHotelBlocks: INCBIN "maps/celadonhotel.blk"
 
 INCLUDE "data/mapHeaders/mtmoonpokecenter.asm"
-
 INCLUDE "scripts/mtmoonpokecenter.asm"
-
 INCLUDE "data/mapObjects/mtmoonpokecenter.asm"
 
 INCLUDE "data/mapHeaders/rocktunnelpokecenter.asm"
-
 INCLUDE "scripts/rocktunnelpokecenter.asm"
-
 INCLUDE "data/mapObjects/rocktunnelpokecenter.asm"
 
 INCLUDE "data/mapHeaders/route11gate.asm"
-
 INCLUDE "scripts/route11gate.asm"
-
 INCLUDE "data/mapObjects/route11gate.asm"
 
 INCLUDE "data/mapHeaders/route11gateupstairs.asm"
-
 INCLUDE "scripts/route11gateupstairs.asm"
-
 INCLUDE "data/mapObjects/route11gateupstairs.asm"
 
 INCLUDE "data/mapHeaders/route12gate.asm"
-
 INCLUDE "scripts/route12gate.asm"
-
 INCLUDE "data/mapObjects/route12gate.asm"
-
-Route12GateBlocks: ; 49540 (12:5540)
-	INCBIN "maps/route12gate.blk"
+Route12GateBlocks: INCBIN "maps/route12gate.blk"
 
 INCLUDE "data/mapHeaders/route12gateupstairs.asm"
-
 INCLUDE "scripts/route12gateupstairs.asm"
-
 INCLUDE "data/mapObjects/route12gateupstairs.asm"
 
 INCLUDE "data/mapHeaders/route15gate.asm"
-
 INCLUDE "scripts/route15gate.asm"
-
 INCLUDE "data/mapObjects/route15gate.asm"
 
 INCLUDE "data/mapHeaders/route15gateupstairs.asm"
-
 INCLUDE "scripts/route15gateupstairs.asm"
-
 INCLUDE "data/mapObjects/route15gateupstairs.asm"
 
 INCLUDE "data/mapHeaders/route16gate.asm"
-
 INCLUDE "scripts/route16gate.asm"
-
 INCLUDE "data/mapObjects/route16gate.asm"
-
-Route16GateBlocks: ; 497e3 (12:57e3)
-	INCBIN "maps/route16gate.blk"
+Route16GateBlocks: INCBIN "maps/route16gate.blk"
 
 INCLUDE "data/mapHeaders/route16gateupstairs.asm"
-
 INCLUDE "scripts/route16gateupstairs.asm"
-
 INCLUDE "data/mapObjects/route16gateupstairs.asm"
 
 INCLUDE "data/mapHeaders/route18gate.asm"
-
 INCLUDE "scripts/route18gate.asm"
-
 INCLUDE "data/mapObjects/route18gate.asm"
 
 INCLUDE "data/mapHeaders/route18gateupstairs.asm"
-
 INCLUDE "scripts/route18gateupstairs.asm"
-
 INCLUDE "data/mapObjects/route18gateupstairs.asm"
 
 INCLUDE "data/mapHeaders/mtmoon1.asm"
-
 INCLUDE "scripts/mtmoon1.asm"
-
 INCLUDE "data/mapObjects/mtmoon1.asm"
-
-MtMoon1Blocks: ; 49b97 (12:5b97)
-	INCBIN "maps/mtmoon1.blk"
+MtMoon1Blocks: INCBIN "maps/mtmoon1.blk"
 
 INCLUDE "data/mapHeaders/mtmoon3.asm"
-
 INCLUDE "scripts/mtmoon3.asm"
-
 INCLUDE "data/mapObjects/mtmoon3.asm"
-
-MtMoon3Blocks: ; 4a041 (12:6041)
-	INCBIN "maps/mtmoon3.blk"
+MtMoon3Blocks: INCBIN "maps/mtmoon3.blk"
 
 INCLUDE "data/mapHeaders/safarizonewest.asm"
-
 INCLUDE "scripts/safarizonewest.asm"
-
 INCLUDE "data/mapObjects/safarizonewest.asm"
-
-SafariZoneWestBlocks: ; 4a248 (12:6248)
-	INCBIN "maps/safarizonewest.blk"
+SafariZoneWestBlocks: INCBIN "maps/safarizonewest.blk"
 
 INCLUDE "data/mapHeaders/safarizonesecrethouse.asm"
-
 INCLUDE "scripts/safarizonesecrethouse.asm"
-
 INCLUDE "data/mapObjects/safarizonesecrethouse.asm"
-
-SafariZoneSecretHouseBlocks: ; 4a37f (12:637f)
+SafariZoneSecretHouseBlocks:
 	INCBIN "maps/safarizonesecrethouse.blk"
+
 
 SECTION "bank13",ROMX,BANK[$13]
 
 TrainerPics:
-
-YoungsterPic: ; 4c000 (13:4000)
-	INCBIN "pic/trainer/youngster.pic"
-BugCatcherPic: ; 4c0c6 (13:40c6)
-	INCBIN "pic/trainer/bugcatcher.pic"
-LassPic: ; 4c200 (13:4200)
-	INCBIN "pic/trainer/lass.pic"
-SailorPic: ; 4c2db (13:42db)
-	INCBIN "pic/trainer/sailor.pic"
-JrTrainerMPic: ; 4c450 (13:4450)
-	INCBIN "pic/trainer/jr.trainerm.pic"
-JrTrainerFPic: ; 4c588 (13:4588)
-	INCBIN "pic/trainer/jr.trainerf.pic"
-PokemaniacPic: ; 4c6c9 (13:46c9)
-	INCBIN "pic/trainer/pokemaniac.pic"
-SuperNerdPic: ; 4c7f1 (13:47f1)
-	INCBIN "pic/trainer/supernerd.pic"
-HikerPic: ; 4c8e7 (13:48e7)
-	INCBIN "pic/trainer/hiker.pic"
-BikerPic: ; 4cabe (13:4abe)
-	INCBIN "pic/trainer/biker.pic"
-BurglarPic: ; 4cc91 (13:4c91)
-	INCBIN "pic/trainer/burglar.pic"
-EngineerPic: ; 4ce0a (13:4e0a)
-	INCBIN "pic/trainer/engineer.pic"
-FisherPic: ; 4cf87 (13:4f87)
-	INCBIN "pic/trainer/fisher.pic"
-SwimmerPic: ; 4d133 (13:5133)
-	INCBIN "pic/trainer/swimmer.pic"
-CueBallPic: ; 4d24f (13:524f)
-	INCBIN "pic/trainer/cueball.pic"
-GamblerPic: ; 4d421 (13:5421)
-	INCBIN "pic/trainer/gambler.pic"
-BeautyPic: ; 4d5df (13:55df)
-	INCBIN "pic/trainer/beauty.pic"
-PsychicPic: ; 4d728 (13:5728)
-	INCBIN "pic/trainer/psychic.pic"
-RockerPic: ; 4d843 (13:5843)
-	INCBIN "pic/trainer/rocker.pic"
-JugglerPic: ; 4d97d (13:597d)
-	INCBIN "pic/trainer/juggler.pic"
-TamerPic: ; 4db4e (13:5b4e)
-	INCBIN "pic/trainer/tamer.pic"
-BirdKeeperPic: ; 4dcdb (13:5cdb)
-	INCBIN "pic/trainer/birdkeeper.pic"
-BlackbeltPic: ; 4de76 (13:5e76)
-	INCBIN "pic/trainer/blackbelt.pic"
-Rival1Pic: ; 4e049 (13:6049)
-	INCBIN "pic/trainer/rival1.pic"
-ProfOakPic: ; 4e15f (13:615f)
-	INCBIN "pic/trainer/prof.oak.pic"
-ChiefPic: ; 4e27d (13:627d)
-ScientistPic: ; 4e27d (13:627d)
-	INCBIN "pic/trainer/scientist.pic"
-GiovanniPic: ; 4e3be (13:63be)
-	INCBIN "pic/trainer/giovanni.pic"
-RocketPic: ; 4e49f (13:649f)
-	INCBIN "pic/trainer/rocket.pic"
-CooltrainerMPic: ; 4e635 (13:6635)
-	INCBIN "pic/trainer/cooltrainerm.pic"
-CooltrainerFPic: ; 4e7be (13:67be)
-	INCBIN "pic/trainer/cooltrainerf.pic"
-BrunoPic: ; 4e943 (13:6943)
-	INCBIN "pic/trainer/bruno.pic"
-BrockPic: ; 4eb3e (13:6b3e)
-	INCBIN "pic/trainer/brock.pic"
-MistyPic: ; 4ec40 (13:6c40)
-	INCBIN "pic/trainer/misty.pic"
-LtSurgePic: ; 4ed30 (13:6d30)
-	INCBIN "pic/trainer/lt.surge.pic"
-ErikaPic: ; 4eeb5 (13:6eb5)
-	INCBIN "pic/trainer/erika.pic"
-KogaPic: ; 4efd6 (13:6fd6)
-	INCBIN "pic/trainer/koga.pic"
-BlainePic: ; 4f150 (13:7150)
-	INCBIN "pic/trainer/blaine.pic"
-SabrinaPic: ; 4f252 (13:7252)
-	INCBIN "pic/trainer/sabrina.pic"
-GentlemanPic: ; 4f3d0 (13:73d0)
-	INCBIN "pic/trainer/gentleman.pic"
-Rival2Pic: ; 4f4cf (13:74cf)
-	INCBIN "pic/trainer/rival2.pic"
-Rival3Pic: ; 4f623 (13:7623)
-	INCBIN "pic/trainer/rival3.pic"
-LoreleiPic: ; 4f779 (13:7779)
-	INCBIN "pic/trainer/lorelei.pic"
-ChannelerPic: ; 4f8a4 (13:78a4)
-	INCBIN "pic/trainer/channeler.pic"
-AgathaPic: ; 4fa71 (13:7a71)
-	INCBIN "pic/trainer/agatha.pic"
-LancePic: ; 4fba2 (13:7ba2)
-	INCBIN "pic/trainer/lance.pic"
+YoungsterPic:     INCBIN "pic/trainer/youngster.pic"
+BugCatcherPic:    INCBIN "pic/trainer/bugcatcher.pic"
+LassPic:          INCBIN "pic/trainer/lass.pic"
+SailorPic:        INCBIN "pic/trainer/sailor.pic"
+JrTrainerMPic:    INCBIN "pic/trainer/jr.trainerm.pic"
+JrTrainerFPic:    INCBIN "pic/trainer/jr.trainerf.pic"
+PokemaniacPic:    INCBIN "pic/trainer/pokemaniac.pic"
+SuperNerdPic:     INCBIN "pic/trainer/supernerd.pic"
+HikerPic:         INCBIN "pic/trainer/hiker.pic"
+BikerPic:         INCBIN "pic/trainer/biker.pic"
+BurglarPic:       INCBIN "pic/trainer/burglar.pic"
+EngineerPic:      INCBIN "pic/trainer/engineer.pic"
+FisherPic:        INCBIN "pic/trainer/fisher.pic"
+SwimmerPic:       INCBIN "pic/trainer/swimmer.pic"
+CueBallPic:       INCBIN "pic/trainer/cueball.pic"
+GamblerPic:       INCBIN "pic/trainer/gambler.pic"
+BeautyPic:        INCBIN "pic/trainer/beauty.pic"
+PsychicPic:       INCBIN "pic/trainer/psychic.pic"
+RockerPic:        INCBIN "pic/trainer/rocker.pic"
+JugglerPic:       INCBIN "pic/trainer/juggler.pic"
+TamerPic:         INCBIN "pic/trainer/tamer.pic"
+BirdKeeperPic:    INCBIN "pic/trainer/birdkeeper.pic"
+BlackbeltPic:     INCBIN "pic/trainer/blackbelt.pic"
+Rival1Pic:        INCBIN "pic/trainer/rival1.pic"
+ProfOakPic:       INCBIN "pic/trainer/prof.oak.pic"
+ChiefPic:
+ScientistPic:     INCBIN "pic/trainer/scientist.pic"
+GiovanniPic:      INCBIN "pic/trainer/giovanni.pic"
+RocketPic:        INCBIN "pic/trainer/rocket.pic"
+CooltrainerMPic:  INCBIN "pic/trainer/cooltrainerm.pic"
+CooltrainerFPic:  INCBIN "pic/trainer/cooltrainerf.pic"
+BrunoPic:         INCBIN "pic/trainer/bruno.pic"
+BrockPic:         INCBIN "pic/trainer/brock.pic"
+MistyPic:         INCBIN "pic/trainer/misty.pic"
+LtSurgePic:       INCBIN "pic/trainer/lt.surge.pic"
+ErikaPic:         INCBIN "pic/trainer/erika.pic"
+KogaPic:          INCBIN "pic/trainer/koga.pic"
+BlainePic:        INCBIN "pic/trainer/blaine.pic"
+SabrinaPic:       INCBIN "pic/trainer/sabrina.pic"
+GentlemanPic:     INCBIN "pic/trainer/gentleman.pic"
+Rival2Pic:        INCBIN "pic/trainer/rival2.pic"
+Rival3Pic:        INCBIN "pic/trainer/rival3.pic"
+LoreleiPic:       INCBIN "pic/trainer/lorelei.pic"
+ChannelerPic:     INCBIN "pic/trainer/channeler.pic"
+AgathaPic:        INCBIN "pic/trainer/agatha.pic"
+LancePic:         INCBIN "pic/trainer/lance.pic"
 
 INCLUDE "data/mapHeaders/battlecenterm.asm"
-
 INCLUDE "scripts/battlecenterm.asm"
-
 INCLUDE "data/mapObjects/battlecenterm.asm"
-
-BattleCenterMBlocks: ; 4fd5d (13:7d5d)
-	INCBIN "maps/battlecenterm.blk"
+BattleCenterMBlocks: INCBIN "maps/battlecenterm.blk"
 
 INCLUDE "data/mapHeaders/tradecenterm.asm"
-
 INCLUDE "scripts/tradecenterm.asm"
-
 INCLUDE "data/mapObjects/tradecenterm.asm"
-
-TradeCenterMBlocks: ; 4fd91 (13:7d91)
-	INCBIN "maps/tradecenterm.blk"
+TradeCenterMBlocks: INCBIN "maps/tradecenterm.blk"
 
 INCLUDE "engine/give_pokemon.asm"
 
 INCLUDE "engine/predefs.asm"
 
+
 SECTION "bank14",ROMX,BANK[$14]
 
 INCLUDE "data/mapHeaders/route22.asm"
-
 INCLUDE "data/mapObjects/route22.asm"
-
-Route22Blocks: ; 5003d (14:403d)
-	INCBIN "maps/route22.blk"
+Route22Blocks: INCBIN "maps/route22.blk"
 
 INCLUDE "data/mapHeaders/route20.asm"
-
 INCLUDE "data/mapObjects/route20.asm"
-
-Route20Blocks: ; 5017d (14:417d)
-	INCBIN "maps/route20.blk"
+Route20Blocks: INCBIN "maps/route20.blk"
 
 INCLUDE "data/mapHeaders/route23.asm"
-
 INCLUDE "data/mapObjects/route23.asm"
-
-Route23Blocks: ; 503b2 (14:43b2)
-	INCBIN "maps/route23.blk"
+Route23Blocks: INCBIN "maps/route23.blk"
 
 INCLUDE "data/mapHeaders/route24.asm"
-
 INCLUDE "data/mapObjects/route24.asm"
-
-Route24Blocks: ; 506e7 (14:46e7)
-	INCBIN "maps/route24.blk"
+Route24Blocks: INCBIN "maps/route24.blk"
 
 INCLUDE "data/mapHeaders/route25.asm"
-
 INCLUDE "data/mapObjects/route25.asm"
-
-Route25Blocks: ; 50810 (14:4810)
-	INCBIN "maps/route25.blk"
+Route25Blocks: INCBIN "maps/route25.blk"
 
 INCLUDE "data/mapHeaders/indigoplateau.asm"
-
 INCLUDE "scripts/indigoplateau.asm"
-
 INCLUDE "data/mapObjects/indigoplateau.asm"
-
-IndigoPlateauBlocks: ; 5094a (14:494a)
-	INCBIN "maps/indigoplateau.blk"
+IndigoPlateauBlocks: INCBIN "maps/indigoplateau.blk"
 
 INCLUDE "data/mapHeaders/saffroncity.asm"
-
 INCLUDE "data/mapObjects/saffroncity.asm"
-
-SaffronCityBlocks: ; 50a98 (14:4a98)
-	INCBIN "maps/saffroncity.blk"
-
+SaffronCityBlocks: INCBIN "maps/saffroncity.blk"
 INCLUDE "scripts/saffroncity.asm"
 
 INCLUDE "scripts/route20.asm"
-
 INCLUDE "scripts/route22.asm"
-
 INCLUDE "scripts/route23.asm"
-
 INCLUDE "scripts/route24.asm"
-
 INCLUDE "scripts/route25.asm"
 
 INCLUDE "data/mapHeaders/victoryroad2.asm"
-
 INCLUDE "scripts/victoryroad2.asm"
-
 INCLUDE "data/mapObjects/victoryroad2.asm"
-
-VictoryRoad2Blocks: ; 519af (14:59af)
-	INCBIN "maps/victoryroad2.blk"
+VictoryRoad2Blocks: INCBIN "maps/victoryroad2.blk"
 
 INCLUDE "data/mapHeaders/mtmoon2.asm"
-
 INCLUDE "scripts/mtmoon2.asm"
-
 INCLUDE "data/mapObjects/mtmoon2.asm"
-
-MtMoon2Blocks: ; 51a91 (14:5a91)
-	INCBIN "maps/mtmoon2.blk"
+MtMoon2Blocks: INCBIN "maps/mtmoon2.blk"
 
 INCLUDE "data/mapHeaders/silphco7.asm"
-
 INCLUDE "scripts/silphco7.asm"
-
 INCLUDE "data/mapObjects/silphco7.asm"
-
-SilphCo7Blocks: ; 51f57 (14:5f57)
-	INCBIN "maps/silphco7.blk"
+SilphCo7Blocks: INCBIN "maps/silphco7.blk"
 
 INCLUDE "data/mapHeaders/mansion2.asm"
-
 INCLUDE "scripts/mansion2.asm"
-
 INCLUDE "data/mapObjects/mansion2.asm"
-
-Mansion2Blocks: ; 52110 (14:6110)
-	INCBIN "maps/mansion2.blk"
+Mansion2Blocks: INCBIN "maps/mansion2.blk"
 
 INCLUDE "data/mapHeaders/mansion3.asm"
-
 INCLUDE "scripts/mansion3.asm"
-
 INCLUDE "data/mapObjects/mansion3.asm"
-
-Mansion3Blocks: ; 52326 (14:6326)
-	INCBIN "maps/mansion3.blk"
+Mansion3Blocks: INCBIN "maps/mansion3.blk"
 
 INCLUDE "data/mapHeaders/mansion4.asm"
-
 INCLUDE "scripts/mansion4.asm"
-
 INCLUDE "data/mapObjects/mansion4.asm"
-
-Mansion4Blocks: ; 524dd (14:64dd)
-	INCBIN "maps/mansion4.blk"
+Mansion4Blocks: INCBIN "maps/mansion4.blk"
 
 INCLUDE "engine/battle/14.asm"
 
@@ -17959,211 +17090,132 @@ INCLUDE "engine/menu/prize_menu.asm"
 
 INCLUDE "engine/hidden_object_functions14.asm"
 
+
 SECTION "bank15",ROMX,BANK[$15]
 
 INCLUDE "data/mapHeaders/route2.asm"
-
 INCLUDE "data/mapObjects/route2.asm"
-
-Route2Blocks: ; 5407e (15:407e)
-	INCBIN "maps/route2.blk"
+Route2Blocks: INCBIN "maps/route2.blk"
 
 INCLUDE "data/mapHeaders/route3.asm"
-
 INCLUDE "data/mapObjects/route3.asm"
-
-Route3Blocks: ; 54255 (15:4255)
-	INCBIN "maps/route3.blk"
+Route3Blocks: INCBIN "maps/route3.blk"
 
 INCLUDE "data/mapHeaders/route4.asm"
-
 INCLUDE "data/mapObjects/route4.asm"
-
-Route4Blocks: ; 543ec (15:43ec)
-	INCBIN "maps/route4.blk"
+Route4Blocks: INCBIN "maps/route4.blk"
 
 INCLUDE "data/mapHeaders/route5.asm"
-
 INCLUDE "data/mapObjects/route5.asm"
-
-Route5Blocks: ; 545d2 (15:45d2)
-	INCBIN "maps/route5.blk"
+Route5Blocks: INCBIN "maps/route5.blk"
 
 INCLUDE "data/mapHeaders/route9.asm"
-
 INCLUDE "data/mapObjects/route9.asm"
-
-Route9Blocks: ; 546fe (15:46fe)
-	INCBIN "maps/route9.blk"
+Route9Blocks: INCBIN "maps/route9.blk"
 
 INCLUDE "data/mapHeaders/route13.asm"
-
 INCLUDE "data/mapObjects/route13.asm"
-
-Route13Blocks: ; 5488b (15:488b)
-	INCBIN "maps/route13.blk"
+Route13Blocks: INCBIN "maps/route13.blk"
 
 INCLUDE "data/mapHeaders/route14.asm"
-
 INCLUDE "data/mapObjects/route14.asm"
-
-Route14Blocks: ; 54a12 (15:4a12)
-	INCBIN "maps/route14.blk"
+Route14Blocks: INCBIN "maps/route14.blk"
 
 INCLUDE "data/mapHeaders/route17.asm"
-
 INCLUDE "data/mapObjects/route17.asm"
-
-Route17Blocks: ; 54ba8 (15:4ba8)
-	INCBIN "maps/route17.blk"
+Route17Blocks: INCBIN "maps/route17.blk"
 
 INCLUDE "data/mapHeaders/route19.asm"
-
 INCLUDE "data/mapObjects/route19.asm"
-
-Route19Blocks: ; 54ef1 (15:4ef1)
-	INCBIN "maps/route19.blk"
+Route19Blocks: INCBIN "maps/route19.blk"
 
 INCLUDE "data/mapHeaders/route21.asm"
-
 INCLUDE "data/mapObjects/route21.asm"
+Route21Blocks: INCBIN "maps/route21.blk"
 
-Route21Blocks: ; 5506d (15:506d)
-	INCBIN "maps/route21.blk"
+VermilionHouse2Blocks:
+Route12HouseBlocks:
+DayCareMBlocks: INCBIN "maps/daycarem.blk"
 
-VermilionHouse2Blocks: ; 5522f (15:522f)
-Route12HouseBlocks: ; 5522f (15:522f)
-DayCareMBlocks: ; 5522f (15:522f)
-	INCBIN "maps/daycarem.blk"
-
-FuchsiaHouse3Blocks: ; 5523f (15:523f)
-	INCBIN "maps/fuchsiahouse3.blk"
+FuchsiaHouse3Blocks: INCBIN "maps/fuchsiahouse3.blk"
 
 INCLUDE "engine/battle/15.asm"
 
 INCLUDE "scripts/route2.asm"
-
 INCLUDE "scripts/route3.asm"
-
 INCLUDE "scripts/route4.asm"
-
 INCLUDE "scripts/route5.asm"
-
 INCLUDE "scripts/route9.asm"
-
 INCLUDE "scripts/route13.asm"
-
 INCLUDE "scripts/route14.asm"
-
 INCLUDE "scripts/route17.asm"
-
 INCLUDE "scripts/route19.asm"
-
 INCLUDE "scripts/route21.asm"
 
 INCLUDE "data/mapHeaders/vermilionhouse2.asm"
-
 INCLUDE "scripts/vermilionhouse2.asm"
-
 INCLUDE "data/mapObjects/vermilionhouse2.asm"
 
 INCLUDE "data/mapHeaders/celadonmart2.asm"
-
 INCLUDE "scripts/celadonmart2.asm"
-
 INCLUDE "data/mapObjects/celadonmart2.asm"
-
-CeladonMart2Blocks: ; 56148 (15:6148)
-	INCBIN "maps/celadonmart2.blk"
+CeladonMart2Blocks: INCBIN "maps/celadonmart2.blk"
 
 INCLUDE "data/mapHeaders/fuchsiahouse3.asm"
-
 INCLUDE "scripts/fuchsiahouse3.asm"
-
 INCLUDE "data/mapObjects/fuchsiahouse3.asm"
 
 INCLUDE "data/mapHeaders/daycarem.asm"
-
 INCLUDE "scripts/daycarem.asm"
-
 INCLUDE "data/mapObjects/daycarem.asm"
 
 INCLUDE "data/mapHeaders/route12house.asm"
-
 INCLUDE "scripts/route12house.asm"
-
 INCLUDE "data/mapObjects/route12house.asm"
 
 INCLUDE "data/mapHeaders/silphco8.asm"
-
 INCLUDE "scripts/silphco8.asm"
-
 INCLUDE "data/mapObjects/silphco8.asm"
-
-SilphCo8Blocks: ; 5666d (15:666d)
-	INCBIN "maps/silphco8.blk"
+SilphCo8Blocks: INCBIN "maps/silphco8.blk"
 
 INCLUDE "engine/menu/diploma.asm"
 
 INCLUDE "engine/overworld/trainers.asm"
 
+
 SECTION "bank16",ROMX,BANK[$16]
 
 INCLUDE "data/mapHeaders/route6.asm"
-
 INCLUDE "data/mapObjects/route6.asm"
-
-Route6Blocks: ; 58079 (16:4079)
-	INCBIN "maps/route6.blk"
+Route6Blocks: INCBIN "maps/route6.blk"
 
 INCLUDE "data/mapHeaders/route8.asm"
-
 INCLUDE "data/mapObjects/route8.asm"
-
-Route8Blocks: ; 581c6 (16:41c6)
-	INCBIN "maps/route8.blk"
+Route8Blocks: INCBIN "maps/route8.blk"
 
 INCLUDE "data/mapHeaders/route10.asm"
-
 INCLUDE "data/mapObjects/route10.asm"
-
-Route10Blocks: ; 58356 (16:4356)
-	INCBIN "maps/route10.blk"
+Route10Blocks: INCBIN "maps/route10.blk"
 
 INCLUDE "data/mapHeaders/route11.asm"
-
 INCLUDE "data/mapObjects/route11.asm"
-
-Route11Blocks: ; 5855f (16:455f)
-	INCBIN "maps/route11.blk"
+Route11Blocks: INCBIN "maps/route11.blk"
 
 INCLUDE "data/mapHeaders/route12.asm"
-
 INCLUDE "data/mapObjects/route12.asm"
-
-Route12Blocks: ; 58710 (16:4710)
-	INCBIN "maps/route12.blk"
+Route12Blocks: INCBIN "maps/route12.blk"
 
 INCLUDE "data/mapHeaders/route15.asm"
-
 INCLUDE "data/mapObjects/route15.asm"
-
-Route15Blocks: ; 589cc (16:49cc)
-	INCBIN "maps/route15.blk"
+Route15Blocks: INCBIN "maps/route15.blk"
 
 INCLUDE "data/mapHeaders/route16.asm"
-
 INCLUDE "data/mapObjects/route16.asm"
-
-Route16Blocks: ; 58b84 (16:4b84)
-	INCBIN "maps/route16.blk"
+Route16Blocks: INCBIN "maps/route16.blk"
 
 INCLUDE "data/mapHeaders/route18.asm"
-
 INCLUDE "data/mapObjects/route18.asm"
-
-Route18Blocks: ; 58c9c (16:4c9c)
-	INCBIN "maps/route18.blk"
+Route18Blocks: INCBIN "maps/route18.blk"
 
 	INCBIN "maps/unusedblocks58d7d.blk"
 
@@ -18174,666 +17226,434 @@ INCLUDE "engine/experience.asm"
 INCLUDE "engine/overworld/oaks_aide.asm"
 
 INCLUDE "scripts/route6.asm"
-
 INCLUDE "scripts/route8.asm"
-
 INCLUDE "scripts/route10.asm"
-
 INCLUDE "scripts/route11.asm"
-
 INCLUDE "scripts/route12.asm"
-
 INCLUDE "scripts/route15.asm"
-
 INCLUDE "scripts/route16.asm"
-
 INCLUDE "scripts/route18.asm"
 
 INCLUDE "data/mapHeaders/fanclub.asm"
-
 INCLUDE "scripts/fanclub.asm"
-
 INCLUDE "data/mapObjects/fanclub.asm"
-
-FanClubBlocks: ; 59cd5 (16:5cd5)
+FanClubBlocks:
 	INCBIN "maps/fanclub.blk"
 
 INCLUDE "data/mapHeaders/silphco2.asm"
-
 INCLUDE "scripts/silphco2.asm"
-
 INCLUDE "data/mapObjects/silphco2.asm"
-
-SilphCo2Blocks: ; 59ec8 (16:5ec8)
+SilphCo2Blocks:
 	INCBIN "maps/silphco2.blk"
 
 INCLUDE "data/mapHeaders/silphco3.asm"
-
 INCLUDE "scripts/silphco3.asm"
-
 INCLUDE "data/mapObjects/silphco3.asm"
-
-SilphCo3Blocks: ; 5a0a6 (16:60a6)
+SilphCo3Blocks:
 	INCBIN "maps/silphco3.blk"
 
 INCLUDE "data/mapHeaders/silphco10.asm"
-
 INCLUDE "scripts/silphco10.asm"
-
 INCLUDE "data/mapObjects/silphco10.asm"
-
-SilphCo10Blocks: ; 5a25a (16:625a)
+SilphCo10Blocks:
 	INCBIN "maps/silphco10.blk"
 
 INCLUDE "data/mapHeaders/lance.asm"
-
 INCLUDE "scripts/lance.asm"
-
 INCLUDE "data/mapObjects/lance.asm"
-
-LanceBlocks: ; 5a3e9 (16:63e9)
+LanceBlocks:
 	INCBIN "maps/lance.blk"
 
 INCLUDE "data/mapHeaders/halloffameroom.asm"
-
 INCLUDE "scripts/halloffameroom.asm"
-
 INCLUDE "data/mapObjects/halloffameroom.asm"
-
-HallofFameRoomBlocks: ; 5a58b (16:658b)
+HallofFameRoomBlocks:
 	INCBIN "maps/halloffameroom.blk"
 
 INCLUDE "engine/overworld/saffron_guards.asm"
 
+
 SECTION "bank17",ROMX,BANK[$17]
 
-SaffronMartBlocks: ; 5c000 (17:4000)
-LavenderMartBlocks: ; 5c000 (17:4000)
-CeruleanMartBlocks: ; 5c000 (17:4000)
-VermilionMartBlocks: ; 5c000 (17:4000)
-	INCBIN "maps/vermilionmart.blk"
+SaffronMartBlocks:
+LavenderMartBlocks:
+CeruleanMartBlocks:
+VermilionMartBlocks: INCBIN "maps/vermilionmart.blk"
 
-CopycatsHouse2FBlocks: ; 5c010 (17:4010)
-RedsHouse2FBlocks: ; 0x5c010 16?
-	INCBIN "maps/redshouse2f.blk"
+CopycatsHouse2FBlocks:
+RedsHouse2FBlocks: INCBIN "maps/redshouse2f.blk"
 
-Museum1FBlocks: ; 5c020 (17:4020)
-	INCBIN "maps/museum1f.blk"
+Museum1FBlocks: INCBIN "maps/museum1f.blk"
 
-Museum2FBlocks: ; 5c048 (17:4048)
-	INCBIN "maps/museum2f.blk"
+Museum2FBlocks: INCBIN "maps/museum2f.blk"
 
-SaffronPokecenterBlocks: ; 5c064 (17:4064)
-VermilionPokecenterBlocks: ; 5c064 (17:4064)
-LavenderPokecenterBlocks: ; 5c064 (17:4064)
-PewterPokecenterBlocks: ; 5c064 (17:4064)
-	INCBIN "maps/pewterpokecenter.blk"
+SaffronPokecenterBlocks:
+VermilionPokecenterBlocks:
+LavenderPokecenterBlocks:
+PewterPokecenterBlocks: INCBIN "maps/pewterpokecenter.blk"
 
-UndergroundPathEntranceRoute7Blocks: ; 5c080 (17:4080)
-UndergroundPathEntranceRoute7CopyBlocks: ; 5c080 (17:4080)
-UndergroundPathEntranceRoute6Blocks: ; 5c080 (17:4080)
-UndergroundPathEntranceRoute5Blocks: ; 5c080 (17:4080)
-	INCBIN "maps/undergroundpathentranceroute5.blk"
+UndergroundPathEntranceRoute7Blocks:
+UndergroundPathEntranceRoute7CopyBlocks:
+UndergroundPathEntranceRoute6Blocks:
+UndergroundPathEntranceRoute5Blocks: INCBIN "maps/undergroundpathentranceroute5.blk"
 
-Route2GateBlocks: ; 5c090 (17:4090)
-ViridianForestEntranceBlocks: ; 5c090 (17:4090)
-ViridianForestExitBlocks: ; 5c090 (17:4090)
-	INCBIN "maps/viridianforestexit.blk"
+Route2GateBlocks:
+ViridianForestEntranceBlocks:
+ViridianForestExitBlocks: INCBIN "maps/viridianforestexit.blk"
 
 INCLUDE "data/mapHeaders/redshouse2f.asm"
-
 INCLUDE "scripts/redshouse2f.asm"
-
 INCLUDE "data/mapObjects/redshouse2f.asm"
 
 INCLUDE "engine/predefs17.asm"
 
 INCLUDE "data/mapHeaders/museum1f.asm"
-
 INCLUDE "scripts/museum1f.asm"
-
 INCLUDE "data/mapObjects/museum1f.asm"
 
 INCLUDE "data/mapHeaders/museum2f.asm"
-
 INCLUDE "scripts/museum2f.asm"
-
 INCLUDE "data/mapObjects/museum2f.asm"
 
 INCLUDE "data/mapHeaders/pewtergym.asm"
-
 INCLUDE "scripts/pewtergym.asm"
-
 INCLUDE "data/mapObjects/pewtergym.asm"
-
-PewterGymBlocks: ; 5c558 (17:4558)
-	INCBIN "maps/pewtergym.blk"
+PewterGymBlocks: INCBIN "maps/pewtergym.blk"
 
 INCLUDE "data/mapHeaders/pewterpokecenter.asm"
-
 INCLUDE "scripts/pewterpokecenter.asm"
-
 INCLUDE "data/mapObjects/pewterpokecenter.asm"
 
 INCLUDE "data/mapHeaders/ceruleanpokecenter.asm"
-
 INCLUDE "scripts/ceruleanpokecenter.asm"
-
 INCLUDE "data/mapObjects/ceruleanpokecenter.asm"
-
-CeruleanPokecenterBlocks: ; 5c68b (17:468b)
-	INCBIN "maps/ceruleanpokecenter.blk"
+CeruleanPokecenterBlocks: INCBIN "maps/ceruleanpokecenter.blk"
 
 INCLUDE "data/mapHeaders/ceruleangym.asm"
-
 INCLUDE "scripts/ceruleangym.asm"
-
 INCLUDE "data/mapObjects/ceruleangym.asm"
-
-CeruleanGymBlocks: ; 5c866 (17:4866)
-	INCBIN "maps/ceruleangym.blk"
+CeruleanGymBlocks: INCBIN "maps/ceruleangym.blk"
 
 INCLUDE "data/mapHeaders/ceruleanmart.asm"
-
 INCLUDE "scripts/ceruleanmart.asm"
-
 INCLUDE "data/mapObjects/ceruleanmart.asm"
 
 INCLUDE "data/mapHeaders/lavenderpokecenter.asm"
-
 INCLUDE "scripts/lavenderpokecenter.asm"
-
 INCLUDE "data/mapObjects/lavenderpokecenter.asm"
 
 INCLUDE "data/mapHeaders/lavendermart.asm"
-
 INCLUDE "scripts/lavendermart.asm"
-
 INCLUDE "data/mapObjects/lavendermart.asm"
 
 INCLUDE "data/mapHeaders/vermilionpokecenter.asm"
-
 INCLUDE "scripts/vermilionpokecenter.asm"
-
 INCLUDE "data/mapObjects/vermilionpokecenter.asm"
 
 INCLUDE "data/mapHeaders/vermilionmart.asm"
-
 INCLUDE "scripts/vermilionmart.asm"
-
 INCLUDE "data/mapObjects/vermilionmart.asm"
 
 INCLUDE "data/mapHeaders/vermiliongym.asm"
-
 INCLUDE "scripts/vermiliongym.asm"
-
 INCLUDE "data/mapObjects/vermiliongym.asm"
-
-VermilionGymBlocks: ; 5cc38 (17:4c38)
-	INCBIN "maps/vermiliongym.blk"
+VermilionGymBlocks: INCBIN "maps/vermiliongym.blk"
 
 INCLUDE "data/mapHeaders/copycatshouse2f.asm"
-
 INCLUDE "scripts/copycatshouse2f.asm"
-
 INCLUDE "data/mapObjects/copycatshouse2f.asm"
 
 INCLUDE "data/mapHeaders/fightingdojo.asm"
-
 INCLUDE "scripts/fightingdojo.asm"
-
 INCLUDE "data/mapObjects/fightingdojo.asm"
-
-FightingDojoBlocks: ; 5cfe3 (17:4fe3)
-	INCBIN "maps/fightingdojo.blk"
+FightingDojoBlocks: INCBIN "maps/fightingdojo.blk"
 
 INCLUDE "data/mapHeaders/saffrongym.asm"
-
 INCLUDE "scripts/saffrongym.asm"
-
 INCLUDE "data/mapObjects/saffrongym.asm"
-
-SaffronGymBlocks: ; 5d3a3 (17:53a3)
-	INCBIN "maps/saffrongym.blk"
+SaffronGymBlocks: INCBIN "maps/saffrongym.blk"
 
 INCLUDE "data/mapHeaders/saffronmart.asm"
-
 INCLUDE "scripts/saffronmart.asm"
-
 INCLUDE "data/mapObjects/saffronmart.asm"
 
 INCLUDE "data/mapHeaders/silphco1.asm"
-
 INCLUDE "scripts/silphco1.asm"
-
 INCLUDE "data/mapObjects/silphco1.asm"
-
-SilphCo1Blocks: ; 5d4a2 (17:54a2)
-	INCBIN "maps/silphco1.blk"
+SilphCo1Blocks: INCBIN "maps/silphco1.blk"
 
 INCLUDE "data/mapHeaders/saffronpokecenter.asm"
-
 INCLUDE "scripts/saffronpokecenter.asm"
-
 INCLUDE "data/mapObjects/saffronpokecenter.asm"
 
 INCLUDE "data/mapHeaders/viridianforestexit.asm"
-
 INCLUDE "scripts/viridianforestexit.asm"
-
 INCLUDE "data/mapObjects/viridianforestexit.asm"
 
 INCLUDE "data/mapHeaders/route2gate.asm"
-
 INCLUDE "scripts/route2gate.asm"
-
 INCLUDE "data/mapObjects/route2gate.asm"
 
 INCLUDE "data/mapHeaders/viridianforestentrance.asm"
-
 INCLUDE "scripts/viridianforestentrance.asm"
-
 INCLUDE "data/mapObjects/viridianforestentrance.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathentranceroute5.asm"
-
 INCLUDE "scripts/undergroundpathentranceroute5.asm"
-
 INCLUDE "data/mapObjects/undergroundpathentranceroute5.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathentranceroute6.asm"
-
 INCLUDE "scripts/undergroundpathentranceroute6.asm"
-
 INCLUDE "data/mapObjects/undergroundpathentranceroute6.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathentranceroute7.asm"
-
 INCLUDE "scripts/undergroundpathentranceroute7.asm"
-
 INCLUDE "data/mapObjects/undergroundpathentranceroute7.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathentranceroute7copy.asm"
-
 INCLUDE "scripts/undergroundpathentranceroute7copy.asm"
-
 INCLUDE "data/mapObjects/undergroundpathentranceroute7copy.asm"
 
 INCLUDE "data/mapHeaders/silphco9.asm"
-
 INCLUDE "scripts/silphco9.asm"
-
 INCLUDE "data/mapObjects/silphco9.asm"
-
-SilphCo9Blocks: ; 5d989 (17:5989)
-	INCBIN "maps/silphco9.blk"
+SilphCo9Blocks: INCBIN "maps/silphco9.blk"
 
 INCLUDE "data/mapHeaders/victoryroad1.asm"
-
 INCLUDE "scripts/victoryroad1.asm"
-
 INCLUDE "data/mapObjects/victoryroad1.asm"
-
-VictoryRoad1Blocks: ; 5db04 (17:5b04)
-	INCBIN "maps/victoryroad1.blk"
+VictoryRoad1Blocks: INCBIN "maps/victoryroad1.blk"
 
 INCLUDE "engine/predefs17_2.asm"
 
 INCLUDE "engine/hidden_object_functions17.asm"
 
+
 SECTION "bank18",ROMX,BANK[$18]
 
-ViridianForestBlocks: ; 60000 (18:4000)
-	INCBIN "maps/viridianforest.blk"
-
-UndergroundPathNSBlocks: ; 60198 (18:4198)
-	INCBIN "maps/undergroundpathns.blk"
-
-UndergroundPathWEBlocks: ; 601f4 (18:41f4)
-	INCBIN "maps/undergroundpathwe.blk"
+ViridianForestBlocks:    INCBIN "maps/viridianforest.blk"
+UndergroundPathNSBlocks: INCBIN "maps/undergroundpathns.blk"
+UndergroundPathWEBlocks: INCBIN "maps/undergroundpathwe.blk"
 
 	INCBIN "maps/unusedblocks60258.blk"
 
-SSAnne10Blocks: ; 603c0 (18:43c0)
-SSAnne9Blocks: ; 603c0 (18:43c0)
-	INCBIN "maps/ssanne9.blk"
+SSAnne10Blocks:
+SSAnne9Blocks: INCBIN "maps/ssanne9.blk"
 
 INCLUDE "data/mapHeaders/pokemontower1.asm"
-
 INCLUDE "scripts/pokemontower1.asm"
-
 INCLUDE "data/mapObjects/pokemontower1.asm"
-
-PokemonTower1Blocks: ; 6048c (18:448c)
-	INCBIN "maps/pokemontower1.blk"
+PokemonTower1Blocks: INCBIN "maps/pokemontower1.blk"
 
 INCLUDE "data/mapHeaders/pokemontower2.asm"
-
 INCLUDE "scripts/pokemontower2.asm"
-
 INCLUDE "data/mapObjects/pokemontower2.asm"
-
-PokemonTower2Blocks: ; 60666 (18:4666)
-	INCBIN "maps/pokemontower2.blk"
+PokemonTower2Blocks: INCBIN "maps/pokemontower2.blk"
 
 INCLUDE "data/mapHeaders/pokemontower3.asm"
-
 INCLUDE "scripts/pokemontower3.asm"
-
 INCLUDE "data/mapObjects/pokemontower3.asm"
-
-PokemonTower3Blocks: ; 60790 (18:4790)
-	INCBIN "maps/pokemontower3.blk"
+PokemonTower3Blocks: INCBIN "maps/pokemontower3.blk"
 
 INCLUDE "data/mapHeaders/pokemontower4.asm"
-
 INCLUDE "scripts/pokemontower4.asm"
-
 INCLUDE "data/mapObjects/pokemontower4.asm"
-
-PokemonTower4Blocks: ; 608cc (18:48cc)
-	INCBIN "maps/pokemontower4.blk"
+PokemonTower4Blocks: INCBIN "maps/pokemontower4.blk"
 
 INCLUDE "data/mapHeaders/pokemontower5.asm"
-
 INCLUDE "scripts/pokemontower5.asm"
-
 INCLUDE "data/mapObjects/pokemontower5.asm"
-
-PokemonTower5Blocks: ; 60a89 (18:4a89)
-	INCBIN "maps/pokemontower5.blk"
+PokemonTower5Blocks: INCBIN "maps/pokemontower5.blk"
 
 INCLUDE "data/mapHeaders/pokemontower6.asm"
-
 INCLUDE "scripts/pokemontower6.asm"
-
 INCLUDE "data/mapObjects/pokemontower6.asm"
-
-PokemonTower6Blocks: ; 60c95 (18:4c95)
-	INCBIN "maps/pokemontower6.blk"
+PokemonTower6Blocks: INCBIN "maps/pokemontower6.blk"
 
 	INCBIN "maps/unusedblocks60cef.blk"
 
 INCLUDE "data/mapHeaders/pokemontower7.asm"
-
 INCLUDE "scripts/pokemontower7.asm"
-
 INCLUDE "data/mapObjects/pokemontower7.asm"
-
-PokemonTower7Blocks: ; 60f20 (18:4f20)
-	INCBIN "maps/pokemontower7.blk"
+PokemonTower7Blocks: INCBIN "maps/pokemontower7.blk"
 
 INCLUDE "data/mapHeaders/celadonmart1.asm"
-
 INCLUDE "scripts/celadonmart1.asm"
-
 INCLUDE "data/mapObjects/celadonmart1.asm"
-
-CeladonMart1Blocks: ; 60fde (18:4fde)
-	INCBIN "maps/celadonmart1.blk"
+CeladonMart1Blocks: INCBIN "maps/celadonmart1.blk"
 
 INCLUDE "engine/overworld/cinnabar_lab.asm"
 
 INCLUDE "data/mapHeaders/viridianforest.asm"
-
 INCLUDE "scripts/viridianforest.asm"
-
 INCLUDE "data/mapObjects/viridianforest.asm"
 
 INCLUDE "data/mapHeaders/ssanne1.asm"
-
 INCLUDE "scripts/ssanne1.asm"
-
 INCLUDE "data/mapObjects/ssanne1.asm"
-
-SSAnne1Blocks: ; 612df (18:52df)
-	INCBIN "maps/ssanne1.blk"
+SSAnne1Blocks: INCBIN "maps/ssanne1.blk"
 
 INCLUDE "data/mapHeaders/ssanne2.asm"
-
 INCLUDE "scripts/ssanne2.asm"
-
 INCLUDE "data/mapObjects/ssanne2.asm"
-
-SSAnne2Blocks: ; 6156e (18:556e)
-	INCBIN "maps/ssanne2.blk"
+SSAnne2Blocks: INCBIN "maps/ssanne2.blk"
 
 INCLUDE "data/mapHeaders/ssanne4.asm"
-
 INCLUDE "scripts/ssanne4.asm"
-
 INCLUDE "data/mapObjects/ssanne4.asm"
-
-SSAnne4Blocks: ; 61666 (18:5666)
-	INCBIN "maps/ssanne4.blk"
+SSAnne4Blocks: INCBIN "maps/ssanne4.blk"
 
 INCLUDE "data/mapHeaders/ssanne5.asm"
-
 INCLUDE "scripts/ssanne5.asm"
-
 INCLUDE "data/mapObjects/ssanne5.asm"
-
-SSAnne5Blocks: ; 61761 (18:5761)
-	INCBIN "maps/ssanne5.blk"
+SSAnne5Blocks: INCBIN "maps/ssanne5.blk"
 
 INCLUDE "data/mapHeaders/ssanne6.asm"
-
 INCLUDE "scripts/ssanne6.asm"
-
 INCLUDE "data/mapObjects/ssanne6.asm"
-
-SSAnne6Blocks: ; 61851 (18:5851)
-	INCBIN "maps/ssanne6.blk"
+SSAnne6Blocks: INCBIN "maps/ssanne6.blk"
 
 INCLUDE "data/mapHeaders/ssanne7.asm"
-
 INCLUDE "scripts/ssanne7.asm"
-
 INCLUDE "data/mapObjects/ssanne7.asm"
-
-SSAnne7Blocks: ; 6195e (18:595e)
-	INCBIN "maps/ssanne7.blk"
+SSAnne7Blocks: INCBIN "maps/ssanne7.blk"
 
 INCLUDE "data/mapHeaders/ssanne8.asm"
-
 INCLUDE "scripts/ssanne8.asm"
-
 INCLUDE "data/mapObjects/ssanne8.asm"
-
-SSAnne8Blocks: ; 61adf (18:5adf)
-	INCBIN "maps/ssanne8.blk"
+SSAnne8Blocks: INCBIN "maps/ssanne8.blk"
 
 INCLUDE "data/mapHeaders/ssanne9.asm"
-
 INCLUDE "scripts/ssanne9.asm"
-
 INCLUDE "data/mapObjects/ssanne9.asm"
 
 INCLUDE "data/mapHeaders/ssanne10.asm"
-
 INCLUDE "scripts/ssanne10.asm"
-
 INCLUDE "data/mapObjects/ssanne10.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathns.asm"
-
 INCLUDE "scripts/undergroundpathns.asm"
-
 INCLUDE "data/mapObjects/undergroundpathns.asm"
 
 INCLUDE "data/mapHeaders/undergroundpathwe.asm"
-
 INCLUDE "scripts/undergroundpathwe.asm"
-
 INCLUDE "data/mapObjects/undergroundpathwe.asm"
 
 INCLUDE "data/mapHeaders/diglettscave.asm"
-
 INCLUDE "scripts/diglettscave.asm"
-
 INCLUDE "data/mapObjects/diglettscave.asm"
-
-DiglettsCaveBlocks: ; 61f86 (18:5f86)
-	INCBIN "maps/diglettscave.blk"
+DiglettsCaveBlocks: INCBIN "maps/diglettscave.blk"
 
 INCLUDE "data/mapHeaders/silphco11.asm"
-
 INCLUDE "scripts/silphco11.asm"
-
 INCLUDE "data/mapObjects/silphco11.asm"
-
-SilphCo11Blocks: ; 623c8 (18:63c8)
-	INCBIN "maps/silphco11.blk"
+SilphCo11Blocks: INCBIN "maps/silphco11.blk"
 
 INCLUDE "engine/hidden_object_functions18.asm"
 
+
 SECTION "bank19",ROMX,BANK[$19]
 
-Overworld_GFX: ; 64000 (19:4000)
-	INCBIN "gfx/tilesets/overworld.w128.t2.2bpp"
-Overworld_Block: ; 645e0 (19:45e0)
-	INCBIN "gfx/blocksets/overworld.bst"
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.w128.t2.2bpp"
+Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+
 RedsHouse1_GFX:
-RedsHouse2_GFX: ; 64de0 (19:4de0)
-	INCBIN "gfx/tilesets/reds_house.w128.t7.2bpp"
+RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.w128.t7.2bpp"
 RedsHouse1_Block:
-RedsHouse2_Block: ; 65270 (19:5270)
-	INCBIN "gfx/blocksets/reds_house.bst"
-House_GFX: ; 653a0 (19:53a0)
-	INCBIN "gfx/tilesets/house.w128.t2.2bpp"
-House_Block: ; 65980 (19:5980)
-	INCBIN "gfx/blocksets/house.bst"
-Mansion_GFX: ; 65bb0 (19:5bb0)
-	INCBIN "gfx/tilesets/mansion.w128.t2.2bpp"
-Mansion_Block: ; 66190 (19:6190)
-	INCBIN "gfx/blocksets/mansion.bst"
-ShipPort_GFX: ; 66610 (19:6610)
-	INCBIN "gfx/tilesets/ship_port.w128.t2.2bpp"
-ShipPort_Block: ; 66bf0 (19:6bf0)
-	INCBIN "gfx/blocksets/ship_port.bst"
-Interior_GFX: ; 66d60 (19:6d60)
-	INCBIN "gfx/tilesets/interior.w128.t1.2bpp"
-Interior_Block: ; 67350 (19:7350)
-	INCBIN "gfx/blocksets/interior.bst"
-Plateau_GFX: ; 676f0 (19:76f0)
-	INCBIN "gfx/tilesets/plateau.w128.t10.2bpp"
-Plateau_Block: ; 67b50 (19:7b50)
-	INCBIN "gfx/blocksets/plateau.bst"
+RedsHouse2_Block:  INCBIN "gfx/blocksets/reds_house.bst"
+
+House_GFX:         INCBIN "gfx/tilesets/house.w128.t2.2bpp"
+House_Block:       INCBIN "gfx/blocksets/house.bst"
+Mansion_GFX:       INCBIN "gfx/tilesets/mansion.w128.t2.2bpp"
+Mansion_Block:     INCBIN "gfx/blocksets/mansion.bst"
+ShipPort_GFX:      INCBIN "gfx/tilesets/ship_port.w128.t2.2bpp"
+ShipPort_Block:    INCBIN "gfx/blocksets/ship_port.bst"
+Interior_GFX:      INCBIN "gfx/tilesets/interior.w128.t1.2bpp"
+Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
+Plateau_GFX:       INCBIN "gfx/tilesets/plateau.w128.t10.2bpp"
+Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
+
 
 SECTION "bank1A",ROMX,BANK[$1A]
 
 INCLUDE "engine/battle/1a.asm"
 
-Version_GFX: ; 6802f (1a:402f)
+Version_GFX:
 IF _RED
-	INCBIN "gfx/red/redgreenversion.h8.1bpp"
-	; 80 bytes
+	INCBIN "gfx/red/redgreenversion.h8.1bpp" ; 10 tiles
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/blueversion.h8.1bpp"
-	; 64 bytes
+	INCBIN "gfx/blue/blueversion.h8.1bpp" ; 8 tiles
 ENDC
 
 Dojo_GFX:
-Gym_GFX: ; 6807f (1a:407f)
-	INCBIN "gfx/tilesets/gym.w128.2bpp"
+Gym_GFX:           INCBIN "gfx/tilesets/gym.w128.2bpp"
 Dojo_Block:
-Gym_Block: ; 6867f (1a:467f)
-	INCBIN "gfx/blocksets/gym.bst"
+Gym_Block:         INCBIN "gfx/blocksets/gym.bst"
+
 Mart_GFX:
-Pokecenter_GFX: ; 68dbf (1a:4dbf)
-	INCBIN "gfx/tilesets/pokecenter.w128.2bpp"
+Pokecenter_GFX:    INCBIN "gfx/tilesets/pokecenter.w128.2bpp"
 Mart_Block:
-Pokecenter_Block: ; 693bf (1a:53bf)
-	INCBIN "gfx/blocksets/pokecenter.bst"
+Pokecenter_Block:  INCBIN "gfx/blocksets/pokecenter.bst"
+
 ForestGate_GFX:
 Museum_GFX:
-Gate_GFX: ; 6960f (1a:560f)
-	INCBIN "gfx/tilesets/gate.w128.t1.2bpp"
+Gate_GFX:          INCBIN "gfx/tilesets/gate.w128.t1.2bpp"
 ForestGate_Block:
 Museum_Block:
-Gate_Block: ; 69bff (1a:5bff)
-	INCBIN "gfx/blocksets/gate.bst"
-Forest_GFX: ; 6a3ff (1a:63ff)
-	INCBIN "gfx/tilesets/forest.w128.2bpp"
-Forest_Block: ; 6a9ff (1a:69ff)
-	INCBIN "gfx/blocksets/forest.bst"
-Facility_GFX: ; 6b1ff (1a:71ff)
-	INCBIN "gfx/tilesets/facility.w128.2bpp"
-Facility_Block: ; 6b7ff (1a:77ff)
-	INCBIN "gfx/blocksets/facility.bst"
+Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
+
+Forest_GFX:        INCBIN "gfx/tilesets/forest.w128.2bpp"
+Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
+Facility_GFX:      INCBIN "gfx/tilesets/facility.w128.2bpp"
+Facility_Block:    INCBIN "gfx/blocksets/facility.bst"
+
 
 SECTION "bank1B",ROMX,BANK[$1B]
 
-Cemetery_GFX: ; 6c000 (1b:4000)
-	INCBIN "gfx/tilesets/cemetery.w128.t4.2bpp"
-Cemetery_Block: ; 6c5c0 (1b:45c0)
-	INCBIN "gfx/blocksets/cemetery.bst"
-Cavern_GFX: ; 6cca0 (1b:4ca0)
-	INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
-Cavern_Block: ; 6d0c0 (1b:50c0)
-	INCBIN "gfx/blocksets/cavern.bst"
-Lobby_GFX: ; 6d8c0 (1b:58c0)
-	INCBIN "gfx/tilesets/lobby.w128.t2.2bpp"
-Lobby_Block: ; 6dea0 (1b:5ea0)
-	INCBIN "gfx/blocksets/lobby.bst"
-Ship_GFX: ; 6e390 (1b:6390)
-	INCBIN "gfx/tilesets/ship.w128.t6.2bpp"
-Ship_Block: ; 6e930 (1b:6930)
-	INCBIN "gfx/blocksets/ship.bst"
-Lab_GFX: ; 6ed10 (1b:6d10)
-	INCBIN "gfx/tilesets/lab.w128.t4.2bpp"
-Lab_Block: ; 6f2d0 (1b:72d0)
-	INCBIN "gfx/blocksets/lab.bst"
-Club_GFX: ; 6f670 (1b:7670)
-	INCBIN "gfx/tilesets/club.w128.t5.2bpp"
-Club_Block: ; 6fb20 (1b:7b20)
-	INCBIN "gfx/blocksets/club.bst"
-Underground_GFX: ; 6fd60 (1b:7d60)
-	INCBIN "gfx/tilesets/underground.w128.t7.2bpp"
-Underground_Block: ; 6fef0 (1b:7ef0)
-	INCBIN "gfx/blocksets/underground.bst"
+Cemetery_GFX:      INCBIN "gfx/tilesets/cemetery.w128.t4.2bpp"
+Cemetery_Block:    INCBIN "gfx/blocksets/cemetery.bst"
+Cavern_GFX:        INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
+Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
+Lobby_GFX:         INCBIN "gfx/tilesets/lobby.w128.t2.2bpp"
+Lobby_Block:       INCBIN "gfx/blocksets/lobby.bst"
+Ship_GFX:          INCBIN "gfx/tilesets/ship.w128.t6.2bpp"
+Ship_Block:        INCBIN "gfx/blocksets/ship.bst"
+Lab_GFX:           INCBIN "gfx/tilesets/lab.w128.t4.2bpp"
+Lab_Block:         INCBIN "gfx/blocksets/lab.bst"
+Club_GFX:          INCBIN "gfx/tilesets/club.w128.t5.2bpp"
+Club_Block:        INCBIN "gfx/blocksets/club.bst"
+Underground_GFX:   INCBIN "gfx/tilesets/underground.w128.t7.2bpp"
+Underground_Block: INCBIN "gfx/blocksets/underground.bst"
+
 
 SECTION "bank1C",ROMX,BANK[$1C]
 
 INCLUDE "engine/gamefreak.asm"
-
 INCLUDE "engine/hall_of_fame.asm"
-
 INCLUDE "engine/overworld/healing_machine.asm"
-
 INCLUDE "engine/overworld/player_animations.asm"
-
 INCLUDE "engine/battle/1c.asm"
-
 INCLUDE "engine/town_map.asm"
-
 INCLUDE "engine/mon_party_sprites.asm"
-
 INCLUDE "engine/in_game_trades.asm"
-
 INCLUDE "engine/palettes.asm"
-
 INCLUDE "engine/save.asm"
+
 
 SECTION "bank1D",ROMX,BANK[$1D]
 
-CopycatsHouse1FBlocks: ; 74000 (1d:4000)
-	INCBIN "maps/copycatshouse1f.blk"
+CopycatsHouse1FBlocks: INCBIN "maps/copycatshouse1f.blk"
 
-CinnabarMartBlocks: ; 74010 (1d:4010)
-PewterMartBlocks: ; 74010 (1d:4010)
-	INCBIN "maps/pewtermart.blk"
+CinnabarMartBlocks:
+PewterMartBlocks: INCBIN "maps/pewtermart.blk"
 
-FuchsiaHouse1Blocks: ; 74020 (1d:4020)
-	INCBIN "maps/fuchsiahouse1.blk"
+FuchsiaHouse1Blocks: INCBIN "maps/fuchsiahouse1.blk"
 
-CinnabarPokecenterBlocks: ; 74030 (1d:4030)
-FuchsiaPokecenterBlocks: ; 74030 (1d:4030)
-	INCBIN "maps/fuchsiapokecenter.blk"
+CinnabarPokecenterBlocks:
+FuchsiaPokecenterBlocks: INCBIN "maps/fuchsiapokecenter.blk"
 
-CeruleanHouse2Blocks: ; 7404c (1d:404c)
-	INCBIN "maps/ceruleanhouse2.blk"
+CeruleanHouse2Blocks: INCBIN "maps/ceruleanhouse2.blk"
 
 INCLUDE "engine/HoF_room_pc.asm"
 
@@ -18844,187 +17664,114 @@ INCLUDE "engine/items/itemfinder.asm"
 INCLUDE "scripts/ceruleancity2.asm"
 
 INCLUDE "data/mapHeaders/viridiangym.asm"
-
 INCLUDE "scripts/viridiangym.asm"
-
 INCLUDE "data/mapObjects/viridiangym.asm"
-
-ViridianGymBlocks: ; 74c47 (1d:4c47)
-	INCBIN "maps/viridiangym.blk"
+ViridianGymBlocks: INCBIN "maps/viridiangym.blk"
 
 INCLUDE "data/mapHeaders/pewtermart.asm"
-
 INCLUDE "scripts/pewtermart.asm"
-
 INCLUDE "data/mapObjects/pewtermart.asm"
 
 INCLUDE "data/mapHeaders/unknowndungeon1.asm"
-
 INCLUDE "scripts/unknowndungeon1.asm"
-
 INCLUDE "data/mapObjects/unknowndungeon1.asm"
-
-UnknownDungeon1Blocks: ; 74d76 (1d:4d76)
-	INCBIN "maps/unknowndungeon1.blk"
+UnknownDungeon1Blocks: INCBIN "maps/unknowndungeon1.blk"
 
 INCLUDE "data/mapHeaders/ceruleanhouse2.asm"
-
 INCLUDE "scripts/ceruleanhouse2.asm"
-
 INCLUDE "data/mapObjects/ceruleanhouse2.asm"
 
 INCLUDE "engine/menu/vending_machine.asm"
 
 INCLUDE "data/mapHeaders/fuchsiahouse1.asm"
-
 INCLUDE "scripts/fuchsiahouse1.asm"
-
 INCLUDE "data/mapObjects/fuchsiahouse1.asm"
 
 INCLUDE "data/mapHeaders/fuchsiapokecenter.asm"
-
 INCLUDE "scripts/fuchsiapokecenter.asm"
-
 INCLUDE "data/mapObjects/fuchsiapokecenter.asm"
 
 INCLUDE "data/mapHeaders/fuchsiahouse2.asm"
-
 INCLUDE "scripts/fuchsiahouse2.asm"
-
 INCLUDE "data/mapObjects/fuchsiahouse2.asm"
-
-FuchsiaHouse2Blocks: ; 751ad (1d:51ad)
-	INCBIN "maps/fuchsiahouse2.blk"
+FuchsiaHouse2Blocks: INCBIN "maps/fuchsiahouse2.blk"
 
 INCLUDE "data/mapHeaders/safarizoneentrance.asm"
-
 INCLUDE "scripts/safarizoneentrance.asm"
-
 INCLUDE "data/mapObjects/safarizoneentrance.asm"
-
-SafariZoneEntranceBlocks: ; 75425 (1d:5425)
-	INCBIN "maps/safarizoneentrance.blk"
+SafariZoneEntranceBlocks: INCBIN "maps/safarizoneentrance.blk"
 
 INCLUDE "data/mapHeaders/fuchsiagym.asm"
-
 INCLUDE "scripts/fuchsiagym.asm"
-
 INCLUDE "data/mapObjects/fuchsiagym.asm"
-
-FuchsiaGymBlocks: ; 756aa (1d:56aa)
-	INCBIN "maps/fuchsiagym.blk"
+FuchsiaGymBlocks: INCBIN "maps/fuchsiagym.blk"
 
 INCLUDE "data/mapHeaders/fuchsiameetingroom.asm"
-
 INCLUDE "scripts/fuchsiameetingroom.asm"
-
 INCLUDE "data/mapObjects/fuchsiameetingroom.asm"
-
-FuchsiaMeetingRoomBlocks: ; 75722 (1d:5722)
-	INCBIN "maps/fuchsiameetingroom.blk"
+FuchsiaMeetingRoomBlocks: INCBIN "maps/fuchsiameetingroom.blk"
 
 INCLUDE "data/mapHeaders/cinnabargym.asm"
-
 INCLUDE "scripts/cinnabargym.asm"
-
 INCLUDE "data/mapObjects/cinnabargym.asm"
-
-CinnabarGymBlocks: ; 75b26 (1d:5b26)
-	INCBIN "maps/cinnabargym.blk"
+CinnabarGymBlocks: INCBIN "maps/cinnabargym.blk"
 
 INCLUDE "data/mapHeaders/lab1.asm"
-
 INCLUDE "scripts/lab1.asm"
-
 INCLUDE "data/mapObjects/lab1.asm"
-
-Lab1Blocks: ; 75bf1 (1d:5bf1)
-	INCBIN "maps/lab1.blk"
+Lab1Blocks: INCBIN "maps/lab1.blk"
 
 INCLUDE "data/mapHeaders/lab2.asm"
-
 INCLUDE "scripts/lab2.asm"
-
 INCLUDE "data/mapObjects/lab2.asm"
-
-Lab2Blocks: ; 75c6b (1d:5c6b)
-	INCBIN "maps/lab2.blk"
+Lab2Blocks: INCBIN "maps/lab2.blk"
 
 INCLUDE "data/mapHeaders/lab3.asm"
-
 INCLUDE "scripts/lab3.asm"
-
 INCLUDE "data/mapObjects/lab3.asm"
-
-Lab3Blocks: ; 75d15 (1d:5d15)
-	INCBIN "maps/lab3.blk"
+Lab3Blocks: INCBIN "maps/lab3.blk"
 
 INCLUDE "data/mapHeaders/lab4.asm"
-
 INCLUDE "scripts/lab4.asm"
-
 INCLUDE "data/mapObjects/lab4.asm"
-
-Lab4Blocks: ; 75e10 (1d:5e10)
-	INCBIN "maps/lab4.blk"
+Lab4Blocks: INCBIN "maps/lab4.blk"
 
 INCLUDE "data/mapHeaders/cinnabarpokecenter.asm"
-
 INCLUDE "scripts/cinnabarpokecenter.asm"
-
 INCLUDE "data/mapObjects/cinnabarpokecenter.asm"
 
 INCLUDE "data/mapHeaders/cinnabarmart.asm"
-
 INCLUDE "scripts/cinnabarmart.asm"
-
 INCLUDE "data/mapObjects/cinnabarmart.asm"
 
 INCLUDE "data/mapHeaders/copycatshouse1f.asm"
-
 INCLUDE "scripts/copycatshouse1f.asm"
-
 INCLUDE "data/mapObjects/copycatshouse1f.asm"
 
 INCLUDE "data/mapHeaders/gary.asm"
-
 INCLUDE "scripts/gary.asm"
-
 INCLUDE "data/mapObjects/gary.asm"
-
-GaryBlocks: ; 7615f (1d:615f)
-	INCBIN "maps/gary.blk"
+GaryBlocks: INCBIN "maps/gary.blk"
 
 INCLUDE "data/mapHeaders/lorelei.asm"
-
 INCLUDE "scripts/lorelei.asm"
-
 INCLUDE "data/mapObjects/lorelei.asm"
-
-LoreleiBlocks: ; 762ac (1d:62ac)
-	INCBIN "maps/lorelei.blk"
+LoreleiBlocks: INCBIN "maps/lorelei.blk"
 
 INCLUDE "data/mapHeaders/bruno.asm"
-
 INCLUDE "scripts/bruno.asm"
-
 INCLUDE "data/mapObjects/bruno.asm"
-
-BrunoBlocks: ; 76403 (1d:6403)
-	INCBIN "maps/bruno.blk"
+BrunoBlocks: INCBIN "maps/bruno.blk"
 
 INCLUDE "data/mapHeaders/agatha.asm"
-
 INCLUDE "scripts/agatha.asm"
-
 INCLUDE "data/mapObjects/agatha.asm"
-
-AgathaBlocks: ; 76560 (1d:6560)
-	INCBIN "maps/agatha.blk"
+AgathaBlocks: INCBIN "maps/agatha.blk"
 
 INCLUDE "engine/menu/league_pc.asm"
 
 INCLUDE "engine/overworld/hidden_items.asm"
+
 
 SECTION "bank1E",ROMX,BANK[$1E]
 
@@ -19034,17 +17781,10 @@ INCLUDE "engine/overworld/cut2.asm"
 
 INCLUDE "engine/overworld/ssanne.asm"
 
-RedFishingTilesFront: ; 79fed (1e:5fed)
-	INCBIN "gfx/red_fishing_tile_front.2bpp"
-
-RedFishingTilesBack: ; 7a00d (1e:600d)
-	INCBIN "gfx/red_fishing_tile_back.2bpp"
-
-RedFishingTilesSide: ; 7a02d (1e:602d)
-	INCBIN "gfx/red_fishing_tile_side.2bpp"
-
-RedFishingRodTiles: ; 7a04d (1e:604d)
-	INCBIN "gfx/red_fishingrod_tiles.2bpp"
+RedFishingTilesFront: INCBIN "gfx/red_fishing_tile_front.2bpp"
+RedFishingTilesBack:  INCBIN "gfx/red_fishing_tile_back.2bpp"
+RedFishingTilesSide:  INCBIN "gfx/red_fishing_tile_side.2bpp"
+RedFishingRodTiles:   INCBIN "gfx/red_fishingrod_tiles.2bpp"
 
 INCLUDE "data/animations.asm"
 
