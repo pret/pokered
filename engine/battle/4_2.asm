@@ -36,8 +36,8 @@ Func_137aa: ; 137aa (4:77aa)
 	jr z, .asm_1380a
 	ld de, wPlayerMoney + 2 ; $d349
 	ld c, $3
-	ld a, $b
-	call Predef ; indirect jump to Func_f81d (f81d (3:781d))
+	ld a, $b ; AddBCDPredef
+	call Predef
 	ld hl, PickUpPayDayMoneyText
 	call PrintText
 .asm_1380a

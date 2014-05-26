@@ -104,7 +104,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d6fe
 	ld a, [$cd41]

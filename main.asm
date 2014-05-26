@@ -63,49 +63,55 @@ SpriteOAMParametersFlipped: ; 40a4 (1:40a4)
 	db $08,$08, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED
 	db $08,$00, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA
 
-Func_40b0: ; 40b0 (1:40b0)
+
+Func_40b0::
+; Reset player status on blackout.
 	xor a
 	ld [$cf0b], a
 	ld [$d700], a
-	ld [W_ISINBATTLE], a ; $d057
+	ld [W_ISINBATTLE], a
 	ld [$d35d], a
 	ld [$cf10], a
 	ld [hJoyHeld], a
 	ld [$cc57], a
 	ld [wFlags_0xcd60], a
+
 	ld [$ff9f], a
-	ld [$ffa0], a
-	ld [$ffa1], a
+	ld [$ff9f + 1], a
+	ld [$ff9f + 2], a
 	call HasEnoughMoney
-	jr c, .asm_40ff
-	ld a, [wPlayerMoney] ; $d347
+	jr c, .lostmoney ; never happens
+
+	; Halve the player's money.
+	ld a, [wPlayerMoney]
 	ld [$ff9f], a
-	ld a, [wPlayerMoney + 1] ; $d348
-	ld [$ffa0], a
-	ld a, [wPlayerMoney + 2] ; $d349
-	ld [$ffa1], a
+	ld a, [wPlayerMoney + 1]
+	ld [$ff9f + 1], a
+	ld a, [wPlayerMoney + 2]
+	ld [$ff9f + 2], a
 	xor a
 	ld [$ffa2], a
 	ld [$ffa3], a
-	ld a, $2
+	ld a, 2
 	ld [$ffa4], a
-	ld a, $d
-	call Predef ; indirect jump to Func_f71e (f71e (3:771e))
+	ld a, $d ; DivideBCDPredef
+	call Predef
 	ld a, [$ffa2]
-	ld [wPlayerMoney], a ; $d347
-	ld a, [$ffa3]
-	ld [wPlayerMoney + 1], a ; $d348
-	ld a, [$ffa4]
-	ld [wPlayerMoney + 2], a ; $d349
-.asm_40ff
+	ld [wPlayerMoney], a
+	ld a, [$ffa2 + 1]
+	ld [wPlayerMoney + 1], a
+	ld a, [$ffa2 + 2]
+	ld [wPlayerMoney + 2], a
+
+.lostmoney
 	ld hl, $d732
 	set 2, [hl]
 	res 3, [hl]
 	set 6, [hl]
-	ld a, $ff
+	ld a, %11111111
 	ld [wJoyIgnore], a
-	ld a, $7
-	jp Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	ld a, $7 ; HealParty
+	jp Predef
 
 MewPicFront:: INCBIN "pic/bmon/mew.pic"
 MewPicBack::  INCBIN "pic/monback/mewb.pic"
@@ -5309,12 +5315,10 @@ HealParty:
 	ret
 
 
-; predef $9
-; predef $a
-; predef $d
-; predef $e
-Func_f71e: ; f71e (3:771e)
+DivideBCDPredef::
 	call GetPredefRegisters
+
+DivideBCD::
 	xor a
 	ld [$ffa5], a
 	ld [$ffa6], a
@@ -5462,15 +5466,18 @@ Func_f800: ; f800 (3:7800)
 	ld de, $ffa1
 	ld hl, $ffa4
 	push bc
-	call Func_f839
+	call SubtractBCD
 	pop bc
 	jr .asm_f803
 
-Func_f81d: ; f81d (3:781d)
+
+AddBCDPredef::
 	call GetPredefRegisters
+
+AddBCD::
 	and a
 	ld b, c
-.asm_f822
+.add
 	ld a, [de]
 	adc [hl]
 	daa
@@ -5478,25 +5485,26 @@ Func_f81d: ; f81d (3:781d)
 	dec de
 	dec hl
 	dec c
-	jr nz, .asm_f822
-	jr nc, .asm_f835
+	jr nz, .add
+	jr nc, .done
 	ld a, $99
 	inc de
-.asm_f830
+.fill
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_f830
-.asm_f835
+	jr nz, .fill
+.done
 	ret
 
-Func_f836: ; f836 (3:7836)
+
+SubtractBCDPredef::
 	call GetPredefRegisters
 
-Func_f839: ; f839 (3:7839)
+SubtractBCD::
 	and a
 	ld b, c
-.asm_f83b
+.sub
 	ld a, [de]
 	sbc [hl]
 	daa
@@ -5504,17 +5512,17 @@ Func_f839: ; f839 (3:7839)
 	dec de
 	dec hl
 	dec c
-	jr nz, .asm_f83b
-	jr nc, .asm_f84f
-	ld a, $0
+	jr nz, .sub
+	jr nc, .done
+	ld a, $00
 	inc de
-.asm_f849
+.fill
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_f849
+	jr nz, .fill
 	scf
-.asm_f84f
+.done
 	ret
 
 

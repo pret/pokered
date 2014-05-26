@@ -103,7 +103,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, $cd3f
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
 	ld [$d125], a

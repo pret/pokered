@@ -176,7 +176,7 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	ld hl, $cd3f
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
 	ld [$d125], a

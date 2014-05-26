@@ -618,7 +618,7 @@ SlotMachine_37741: ; 37741 (d:7741)
 	ld [hli], a
 	ld de, $d5a5
 	ld c, $2
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 
 SlotMachine_37754: ; 37754 (d:7754)
@@ -660,7 +660,7 @@ SlotMachine_3776b: ; 3776b (d:776b)
 	ld hl, $cd47
 	ld de, $d5a5
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	call SlotMachine_37754
 	call SlotMachine_3775f

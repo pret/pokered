@@ -71,8 +71,8 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, $ffde
 	ld de, wPlayerMoney + 2 ; $d349
 	ld c, $3
-	ld a, $c
-	call Predef ; indirect jump to Func_f836 (f836 (3:7836))
+	ld a, $c ; SubtractBCDPredef
+	call Predef
 	ld a, $13
 	ld [$d125], a
 	jp DisplayTextBoxID

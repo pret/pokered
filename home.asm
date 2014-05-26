@@ -917,9 +917,9 @@ HandleBlackOut::
 	call StopMusic
 	ld hl, $d72e
 	res 5, [hl]
-	ld a, Bank(Func_40b0) ; Bank(Func_40b0) and Bank(Func_62ce) need to be equal.
+	ld a, Bank(Func_40b0) ; also Bank(Func_62ce) and Bank(Func_5d5f)
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC3RomBank], a
 	call Func_40b0
 	call Func_62ce
 	call Func_2312
@@ -8302,23 +8302,23 @@ GetTrainerName:: ; 359e (0:359e)
 	ld hl, GetTrainerName_
 	jp Bankswitch
 
-; tests if player's money are at least as much as [$ff9f]
-; sets carry flag if not enough money
-; sets zero flag if amounts match exactly
-HasEnoughMoney:: ; 35a6 (0:35a6)
-	ld de, wPlayerMoney ; $d347
+
+HasEnoughMoney::
+; Check if the player has at least as much
+; money as the 3-byte BCD value at $ff9f.
+	ld de, wPlayerMoney
 	ld hl, $ff9f
-	ld c, $3
+	ld c, 3
 	jp StringCmp
 
-; tests if player's game corner coins are at least as many as [$ffa0]
-; sets carry flag if not enough coins
-; sets zero flag if amounts match exactly
-HasEnoughCoins:: ; 35b1 (0:35b1)
+HasEnoughCoins::
+; Check if the player has at least as many
+; coins as the 2-byte BCD value at $ffa0.
 	ld de, wPlayerCoins
 	ld hl, $ffa0
-	ld c, $2
+	ld c, 2
 	jp StringCmp
+
 
 BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a

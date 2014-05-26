@@ -157,7 +157,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld hl, $ffa1
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	xor a
 	ldh [$9f], a
@@ -167,7 +167,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
@@ -236,7 +236,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 2, [hl]
@@ -319,7 +319,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 4, [hl]
@@ -373,7 +373,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld de, $d5a5
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, $d77e
 	set 3, [hl]

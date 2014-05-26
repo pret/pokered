@@ -996,8 +996,8 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld de, wPlayerMoney + 2 ; $d349
 	ld hl, $d07b
 	ld c, $3
-	ld a, $b
-	jp Predef ; indirect jump to Func_f81d (f81d (3:781d))
+	ld a, $b ; AddBCDPredef
+	jp Predef
 
 MoneyForWinningText: ; 3c6e4 (f:46e4)
 	TX_FAR _MoneyForWinningText

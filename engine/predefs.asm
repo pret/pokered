@@ -70,12 +70,13 @@ HealPartyPredef: ; 4fe8e (13:7e8e)
 	dbw BANK(HealParty),HealParty
 MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
-	dbw BANK(Func_f71e),Func_f71e
-	dbw BANK(Func_f71e),Func_f71e
-	dbw BANK(Func_f81d),Func_f81d
-	dbw BANK(Func_f836),Func_f836
-	dbw BANK(Func_f71e),Func_f71e
-	dbw BANK(Func_f71e),Func_f71e
+	dbw BANK(DivideBCDPredef),DivideBCDPredef
+	dbw BANK(DivideBCDPredef),DivideBCDPredef
+	dbw BANK(AddBCDPredef),AddBCDPredef
+	db BANK(SubtractBCDPredef)
+	dw SubtractBCDPredef
+	dbw BANK(DivideBCDPredef),DivideBCDPredef
+	dbw BANK(DivideBCDPredef),DivideBCDPredef
 	db BANK(InitializePlayerData)
 	dw InitializePlayerData
 	dbw BANK(FlagActionPredef),FlagActionPredef

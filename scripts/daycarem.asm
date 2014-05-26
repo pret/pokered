@@ -120,7 +120,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	push hl
 	push de
 	push bc
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	pop bc
 	pop de
@@ -156,7 +156,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	inc hl
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent

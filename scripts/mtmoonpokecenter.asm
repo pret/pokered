@@ -55,7 +55,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld hl, $cd3f
 	ld de, $d349
 	ld c, $3
-	ld a, $c
+	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
 	ld [$d125], a

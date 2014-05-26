@@ -120,7 +120,7 @@ PayDayEffect_ ; 2feb8 (b:7eb8)
 	ld [hl], a
 	ld de, $cce7
 	ld c, $3
-	ld a, $b
+	ld a, $b ; AddBCDPredef
 	call Predef
 	ld hl, CoinsScatteredText ; $7f04
 	jp PrintText
