@@ -4,6 +4,8 @@ INCLUDE "constants/wram_constants.asm"
 
 SECTION "WRAM Bank 0", WRAM0
 
+	ds 256
+
 
 SECTION "Sprite State Data", WRAM0[$c100]
 
@@ -29,6 +31,9 @@ wSpriteStateData1:: ; c100
 ; C1xF
 	ds $10 * $10
 
+
+SECTION "Sprite State Data 2", WRAM0[$c200]
+
 wSpriteStateData2:: ; c200
 ; more data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
@@ -52,12 +57,11 @@ wSpriteStateData2:: ; c200
 	ds $10 * $10
 
 
+SECTION "OAM Buffer", WRAM0[$c300]
+
 wOAMBuffer:: ; c300
 ; buffer for OAM data. Copied to OAM by DMA
 	ds 4 * 40
-
-
-SECTION "Tile Map", WRAM0[$c3a0]
 
 wTileMap:: ; c3a0
 ; buffer for tiles that are visible on screen (20 columns by 18 rows)
@@ -70,8 +74,7 @@ wTileMapBackup:: ; c508
 
 ; c670
 
-
-SECTION "Screen Edge Tiles", WRAM0[$cbfc]
+	ds 1420
 
 wScreenEdgeTiles:: ; cbfc
 ; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
@@ -152,8 +155,8 @@ wTrainerHeaderFlagBit:: ; cc55
 
 ; cc56
 
+	ds 124
 
-SECTION "RLE", WRAM0[$ccd2]
 wRLEByteCount:: ; ccd2
 	ds 1
 
@@ -189,8 +192,7 @@ wEnemyMoveListIndex:: ; cce2
 
 ; cce3
 
-
-SECTION "Stat Modifiers", WRAM0[$cd1a]
+	ds 55
 
 ; stat modifiers for the player's current pokemon
 ; value can range from 1 - 13 ($1 to $D)
@@ -653,6 +655,7 @@ W_FBMODE:: ; d09e
 ; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
 
+	ds 2
 
 SECTION "Sprite Buffers", SRAM
 
@@ -664,7 +667,7 @@ S_SPRITEBUFFER2:: ; a310
 	ds SPRITEBUFFERSIZE
 
 
-SECTION "Sprites", WRAMX[$d0a1], BANK[1]
+SECTION "Sprites", WRAMX, BANK[1]
 
 W_SPRITECURPOSX:: ; d0a1
 	ds 1
@@ -911,14 +914,16 @@ W_PARTYMON6NAME:: ; d2ec
 	ds 11
 
 
-SECTION "Pokedex", WRAMX[$d2f7], BANK[1]
+flag_array: MACRO
+	ds ((\1) + 7) / 8
+ENDM
 
 wPokedexOwned:: ; d2f7
-	ds (150 / 8) + 1
+	flag_array 151
 wPokedexOwnedEnd::
 
 wPokedexSeen:: ; d30a
-	ds (150 / 8) + 1
+	flag_array 151
 wPokedexSeenEnd::
 
 
@@ -929,9 +934,8 @@ wBagItems:: ; d31e
 	ds 20 * 2
 	ds 1 ; end
 
-; money is in decimal
 wPlayerMoney:: ; d347
-	ds 3
+	ds 3 ; BCD
 
 W_RIVALNAME:: ; d34a
 	ds 11
@@ -1065,8 +1069,7 @@ W_TILESETTALKINGOVERTILES:: ; d532
 W_GRASSTILE:: ; d535
 	ds 1
 
-
-SECTION "Items", WRAMX[$d53a], BANK[1]
+	ds 4
 
 wNumBoxItems:: ; d53a
 	ds 1
@@ -1077,9 +1080,8 @@ wBoxItems:: ; d53b
 
 	ds 4
 
-; coins are in decimal
 wPlayerCoins:: ; d5a4
-	ds 2
+	ds 2 ; BCD
 
 W_MISSABLEOBJECTFLAGS:: ; d5a6
 ; bit array of missable objects. set = removed
