@@ -1,25 +1,20 @@
-GetPredefPointer: ; 4fe49 (13:7e49)
-; stores hl in $CC4F,$CC50
-; stores de in $CC51,$CC52
-; stores bc in $CC53,$CC54
-; grabs a byte "n" from $CC4E,
-;    and gets the nth (3-byte) pointer in PredefPointers
-; stores the bank of said pointer in [$D0B7]
-; stores the pointer in hl and returns
-	; ld $CC4F,hl
-	ld a,h
-	ld [$CC4F],a
-	ld a,l
-	ld [$CC50],a
+GetPredefPointer:
+; Store the contents of the register
+; pairs (hl, de, bc) at wPredefRegisters.
+; Then put the bank and address of predef
+; wPredefID in [wPredefBank] and hl.
 
-	; ld $CC51,de
-	ld hl,$CC51
+	ld a,h
+	ld [wPredefRegisters],a
+	ld a,l
+	ld [wPredefRegisters + 1],a
+
+	ld hl,wPredefRegisters + 2
 	ld a,d
 	ld [hli],a
 	ld a,e
 	ld [hli],a
 
-	; ld $CC53,bc
 	ld a,b
 	ld [hli],a
 	ld [hl],c
@@ -27,11 +22,10 @@ GetPredefPointer: ; 4fe49 (13:7e49)
 	ld hl,PredefPointers
 	ld de,0
 
-	; de = 3 * [$CC4E]
-	ld a,[$CC4E]
+	ld a,[wPredefID]
 	ld e,a
-	add a,a
-	add a,e
+	add a
+	add e
 	ld e,a
 	jr nc,.next
 	inc d
@@ -43,7 +37,7 @@ GetPredefPointer: ; 4fe49 (13:7e49)
 
 	; get bank of predef routine
 	ld a,[de]
-	ld [$D0B7],a
+	ld [wPredefBank],a
 
 	; get pointer
 	inc de

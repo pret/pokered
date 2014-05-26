@@ -38,7 +38,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
-	ld [$d09f], a
+	ld [wd09f], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
@@ -86,7 +86,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	ld a, $24
-	ld [$d09f], a
+	ld [wd09f], a
 	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
 	ld c, $1e
@@ -105,7 +105,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
-	ld [$d09f], a
+	ld [wd09f], a
 	ld de, IntroNidorinoAnimation4 ; $5931
 	call AnimateIntroNidorino
 ; hop
@@ -118,7 +118,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 	ld a, $24
-	ld [$d09f], a
+	ld [wd09f], a
 	ld de, IntroNidorinoAnimation6 ; $5947
 	call AnimateIntroNidorino
 	ld c, $1e
@@ -129,7 +129,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, (SFX_1f_5e - SFX_Headers_1f) / 3
 	call PlaySound
 	ld a, $48
-	ld [$d09f], a
+	ld [wd09f], a
 	ld de, IntroNidorinoAnimation7 ; $5950
 	jp AnimateIntroNidorino
 
@@ -137,10 +137,10 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 	ld a, [de]
 	cp $50
 	ret z
-	ld [W_BASECOORDY], a ; $d082
+	ld [W_BASECOORDY], a ; wd082
 	inc de
 	ld a, [de]
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	push de
 	ld c, $24
 	call Func_417ae
@@ -152,13 +152,13 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 
 Func_417ae: ; 417ae (10:57ae)
 	ld hl, wOAMBuffer
-	ld a, [$d09f]
+	ld a, [wd09f]
 	ld d, a
 .asm_417b5
-	ld a, [W_BASECOORDY] ; $d082
+	ld a, [W_BASECOORDY] ; wd082
 	add [hl]
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	add [hl]
 	ld [hli], a
 	ld a, d
@@ -174,14 +174,14 @@ Func_417c7: ; 417c7 (10:57c7)
 	ld d, $0
 .asm_417cc
 	push bc
-	ld a, [W_BASECOORDY] ; $d082
+	ld a, [W_BASECOORDY] ; wd082
 	ld e, a
 .asm_417d1
 	ld a, e
 	add $8
 	ld e, a
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	ld [hli], a
 	ld a, d
 	ld [hli], a
@@ -190,9 +190,9 @@ Func_417c7: ; 417c7 (10:57c7)
 	inc d
 	dec c
 	jr nz, .asm_417d1
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	add $8
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	pop bc
 	dec b
 	jr nz, .asm_417cc
@@ -204,7 +204,7 @@ Func_417f0: ; 417f0 (10:57f0)
 	jr asm_417fe
 
 Func_417f8: ; 417f8 (10:57f8)
-	FuncCoord 0, 4 ; $c3f0
+	FuncCoord 0, 4
 	ld hl, Coord
 	ld bc, $c8
 asm_417fe: ; 417fe (10:57fe)
@@ -237,9 +237,9 @@ Func_4180e: ; 4180e (10:580e)
 .asm_4181d
 	push de
 	ld a, $2
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	xor a
-	ld [W_BASECOORDY], a ; $d082
+	ld [W_BASECOORDY], a ; wd082
 	ld c, $24
 	call Func_417ae
 	pop de
@@ -259,7 +259,7 @@ Func_4180e: ; 4180e (10:580e)
 	ret
 
 Func_4183f: ; 4183f (10:583f)
-	FuncCoord 13, 7 ; $c439
+	FuncCoord 13, 7
 	ld hl, Coord
 
 Func_41842: ; 41842 (10:5842)
@@ -306,7 +306,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	call ClearScreen
 	call DisableLCD
 	xor a
-	ld [W_CUROPPONENT], a ; $d059
+	ld [W_CUROPPONENT], a ; wd059
 	call Func_418e9
 	call LoadIntroGraphics
 	call EnableLCD
@@ -323,10 +323,10 @@ PlayShootingStar: ; 4188a (10:588a)
 	call DelayFrames
 .asm_418d0
 	ld a, Bank(Func_7d8ea)
-	ld [$c0ef], a
-	ld [$c0f0], a
+	ld [wc0ef], a
+	ld [wc0f0], a
 	ld a, MUSIC_INTRO_BATTLE
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	call Func_417f8
 	call ClearSprites
@@ -337,7 +337,7 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld hl, wTileMap
 	ld c, $50
 	call Func_41807
-	FuncCoord 0, 14 ; $c4b8
+	FuncCoord 0, 14
 	ld hl, Coord
 	ld c, $50
 	call Func_41807

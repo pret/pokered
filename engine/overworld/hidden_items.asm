@@ -1,9 +1,9 @@
 HiddenItems: ; 76688 (1d:6688)
 	ld hl, HiddenItemCoords
 	call Func_76857
-	ld [$cd41], a
-	ld hl, $d6f0
-	ld a, [$cd41]
+	ld [wTrainerScreenX], a
+	ld hl, wd6f0
+	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $2
 	ld a, $10
@@ -13,9 +13,9 @@ HiddenItems: ; 76688 (1d:6688)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [$cc3c], a
-	ld a, [$cd3d] ; item ID
-	ld [$d11e], a
+	ld [wcc3c], a
+	ld a, [wWhichTrade] ; item ID
+	ld [wd11e], a
 	call GetItemName
 	ld a, $24
 	jp PrintPredefTextID
@@ -26,13 +26,13 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 ; XXX where is the pointer to this?
 	TX_FAR _FoundHiddenItemText
 	db $8
-	ld a, [$cd3d] ; item ID
+	ld a, [wWhichTrade] ; item ID
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d6f0
-	ld a, [$cd41]
+	ld hl, wd6f0
+	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $1
 	ld a, $10
@@ -44,7 +44,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 .BagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, HiddenItemBagFullText
 	call PrintText
 	jp TextScriptEnd
@@ -62,9 +62,9 @@ HiddenCoins: ; 76799 (1d:6799)
 	ret z
 	ld hl, HiddenCoinCoords
 	call Func_76857
-	ld [$cd41], a
-	ld hl, $d6fe
-	ld a, [$cd41]
+	ld [wTrainerScreenX], a
+	ld hl, wd6fe
+	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $2
 	ld a, $10
@@ -76,7 +76,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld [$ff9f], a
 	ld [$ffa0], a
 	ld [$ffa1], a
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	sub COIN
 	cp 10
 	jr z, .bcd10
@@ -101,13 +101,13 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld a, $1
 	ld [$ffa0], a
 .bcddone
-	ld de, $d5a5
+	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
 	ld a, $b ; AddBCDPredef
 	call Predef
-	ld hl, $d6fe
-	ld a, [$cd41]
+	ld hl, wd6fe
+	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $1
 	ld a, $10
@@ -139,9 +139,9 @@ DroppedHiddenCoinsText: ; 7684d (1d:684d)
 	db "@"
 
 Func_76857: ; 76857 (1d:6857)
-	ld a, [$cd40]
+	ld a, [wTrainerScreenY]
 	ld d, a
-	ld a, [$cd41]
+	ld a, [wTrainerScreenX]
 	ld e, a
 	ld a, [W_CURMAP]
 	ld b, a

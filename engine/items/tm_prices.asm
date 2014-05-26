@@ -1,5 +1,5 @@
 GetMachinePrice: ; 7bf86 (1e:7f86)
-	ld a, [$cf91]
+	ld a, [wcf91]
 	sub TM_01
 	ret c
 	ld d, a

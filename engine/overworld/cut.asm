@@ -1,18 +1,18 @@
 UsedCut: ; ef54 (3:6f54)
 	xor a
-	ld [$cd6a], a
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld [wcd6a], a
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	and a ; OVERWORLD
 	jr z, .asm_ef6b
 	cp GYM
 	jr nz, .asm_ef77
-	ld a, [$cfc6]
+	ld a, [wcfc6]
 	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
 	jr asm_ef82
 .asm_ef6b
 	dec a
-	ld a, [$cfc6]
+	ld a, [wcfc6]
 	cp $3d ; cut tree
 	jr z, asm_ef82
 	cp $52 ; grass
@@ -26,13 +26,13 @@ NothingToCutText: ; ef7d (3:6f7d)
 	db "@"
 
 asm_ef82: ; ef82 (3:6f82)
-	ld [$cd4d], a
+	ld [wcd4d], a
 	ld a, $1
-	ld [$cd6a], a
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld [wcd6a], a
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
 	call GetPartyMonName
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
@@ -49,17 +49,17 @@ asm_ef82: ; ef82 (3:6f82)
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ld a, $ff
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call AnimateCutTree
 	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
 	call Func_eedc
 	callba Func_79e96
 	ld a, $1
-	ld [$cfcb], a
+	ld [wcfcb], a
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
@@ -73,10 +73,10 @@ UsedCutText: ; eff2 (3:6ff2)
 
 AnimateCutTree: ; eff7 (3:6ff7)
 	xor a
-	ld [$cd50], a
+	ld [wcd50], a
 	ld a, $e4
 	ld [rOBP1], a ; $ff49
-	ld a, [$cd4d]
+	ld a, [wcd4d]
 	cp $52
 	jr z, .asm_f020
 	ld de, Overworld_GFX + $2d0 ; $42d0 ; cuttable tree sprite top row
@@ -98,7 +98,7 @@ AnimateCutTree: ; eff7 (3:6ff7)
 	ld hl, $8ff0
 	call LoadCutTreeOAM
 	call asm_f055
-	ld hl, $c393
+	ld hl, wOAMBuffer + $93
 	ld de, $4
 	ld a, $30
 	ld c, e
@@ -125,7 +125,7 @@ CutTreeOAM: ; f060 (3:7060)
 	db $FE,$10,$FF,$10
 
 Func_f068: ; f068 (3:7068)
-	ld hl, $c104
+	ld hl, wSpriteStateData1 + 4
 	ld a, [hli]
 	ld b, a
 	inc hl
@@ -137,7 +137,7 @@ Func_f068: ; f068 (3:7068)
 	srl a
 	ld e, a
 	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
-	ld a, [$cd50]
+	ld a, [wcd50]
 	and a
 	ld hl, CutTreeAnimationOffsets ; $708f
 	jr z, .asm_f084
@@ -173,39 +173,39 @@ CutTreeAnimationOffsets2: ; f097 (3:7097)
 
 Func_f09f: ; f09f (3:709f)
 	push de
-	ld a, [W_CURMAPWIDTH] ; $d369
+	ld a, [W_CURMAPWIDTH] ; wd369
 	add $6
 	ld c, a
 	ld b, $0
 	ld d, $0
-	ld hl, $d35f
+	ld hl, wd35f
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	add hl, bc
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	and a
 	jr z, .asm_f0c7
 	cp $4
 	jr z, .asm_f0cf
 	cp $8
 	jr z, .asm_f0d7
-	ld a, [W_XBLOCKCOORD] ; $d364
+	ld a, [W_XBLOCKCOORD] ; wd364
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0ec
 .asm_f0c7
-	ld a, [W_YBLOCKCOORD] ; $d363
+	ld a, [W_YBLOCKCOORD] ; wd363
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0df
 .asm_f0cf
-	ld a, [W_YBLOCKCOORD] ; $d363
+	ld a, [W_YBLOCKCOORD] ; wd363
 	and a
 	jr z, .asm_f0e1
 	jr .asm_f0e0
 .asm_f0d7
-	ld a, [W_XBLOCKCOORD] ; $d364
+	ld a, [W_XBLOCKCOORD] ; wd364
 	and a
 	jr z, .asm_f0e6
 	jr .asm_f0e0

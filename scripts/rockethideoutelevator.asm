@@ -1,5 +1,5 @@
 RocketHideoutElevatorScript: ; 45710 (11:5710)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
@@ -9,16 +9,16 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 	res 7, [hl]
 	call nz, RocketHideoutElevatorScript_4575f
 	xor a
-	ld [$cf0c], a
+	ld [wcf0c], a
 	inc a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ret
 
 RocketHideoutElevatorScript_4572c: ; 4572c (11:572c)
-	ld hl, $d3af
-	ld a, [$d73b]
+	ld hl, wd3af
+	ld a, [wd73b]
 	ld b, a
-	ld a, [$d73c]
+	ld a, [wd73c]
 	ld c, a
 	call RocketHideoutElevatorScript_4573a
 
@@ -35,7 +35,7 @@ RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
 	ld hl, RocketHideoutElavatorFloors ; $5754
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps ; $5759
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $0006
 	call CopyData
 	ret

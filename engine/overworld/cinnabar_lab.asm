@@ -1,18 +1,18 @@
 GiveFossilToCinnabarLab: ; 61006 (18:5006)
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; $cc29
-	ld a, [$cd37]
+	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld a, [wcd37]
 	dec a
-	ld [wMaxMenuItem], a ; $cc28
+	ld [wMaxMenuItem], a ; wMaxMenuItem
 	ld a, $2
-	ld [wTopMenuItemY], a ; $cc24
+	ld [wTopMenuItemY], a ; wTopMenuItemY
 	ld a, $1
-	ld [wTopMenuItemX], a ; $cc25
-	ld a, [$cd37]
+	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld a, [wcd37]
 	dec a
 	ld bc, $2
 	ld hl, $3
@@ -24,13 +24,13 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	call TextBoxBorder
 	call UpdateSprites
 	call Func_610c2
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_610a7
-	ld hl, $cc5b
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld hl, wcc5b
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -55,7 +55,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, LabFossil_610ae
 	call PrintText
 	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr nz, .asm_610a7
 	ld hl, LabFossil_610b3
@@ -65,7 +65,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
-	ld hl, $d7a3
+	ld hl, wd7a3
 	set 0, [hl]
 	set 1, [hl]
 	ret
@@ -91,7 +91,7 @@ LabFossil_610bd: ; 610bd (18:50bd)
 	db "@"
 
 Func_610c2: ; 610c2 (18:50c2)
-	ld hl, $cc5b
+	ld hl, wcc5b
 	xor a
 	ld [$ffdb], a
 .asm_610c8
@@ -99,14 +99,14 @@ Func_610c2: ; 610c2 (18:50c2)
 	cp $ff
 	ret z
 	push hl
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes
-	ld de, $cd6d
+	ld de, wcd6d
 	call PlaceString
 	ld hl, $ffdb
 	inc [hl]
@@ -116,10 +116,10 @@ Func_610c2: ; 610c2 (18:50c2)
 ; loads the names of the fossil item and the resulting mon
 LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ld a, [W_FOSSILMON]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMonName
 	call CopyStringToCF4B
 	ld a, [W_FOSSILITEM]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName
 	ret

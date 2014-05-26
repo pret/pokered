@@ -14,7 +14,7 @@ _NameRaterText_1dab8:: ; 9a361 (26:6361)
 	prompt
 
 _NameRaterText_1dabd:: ; 9a37f (26:637f)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text ", is it?"
 	line "That is a decent"
 	cont "nickname!"
@@ -35,7 +35,7 @@ _NameRaterText_1dac7:: ; 9a404 (26:6404)
 	text "OK! This #MON"
 	line "has been renamed"
 	cont "@"
-	TX_RAM $cee9
+	TX_RAM wHPBarMaxHP
 	text "!"
 
 	para "That's a better"
@@ -48,14 +48,14 @@ _NameRaterText_1dacc:: ; 9a44c (26:644c)
 	done
 
 _NameRaterText_1dad1:: ; 9a46b (26:646b)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text ", is it?"
 	line "That is a truly"
 	cont "impeccable name!"
 
 	para "Take good care of"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	done
 

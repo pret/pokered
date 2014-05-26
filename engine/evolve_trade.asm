@@ -31,14 +31,14 @@ EvolveTradeMon: ; 17d7d (5:7d7d)
 	ret nz
 
 .ok
-	ld a, [W_NUMINPARTY] ; $d163
+	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
 	dec a
-	ld [wWhichPokemon], a ; $cf92
+	ld [wWhichPokemon], a ; wWhichPokemon
 	ld a, $1
-	ld [$ccd4], a
+	ld [wccd4], a
 	ld a, $32
-	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	callab Func_3ad0e
 	xor a
-	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	jp Func_2307

@@ -11,12 +11,12 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld b,$0
 	add hl,bc
 	ld a,[hli]
-	ld [$cd0f],a
+	ld [wcd0f],a
 	ld a,[hli]
-	ld [$cd34],a
+	ld [wcd34],a
 	ld a,[hli]
 	push af
-	ld de,$cd29
+	ld de,wcd29
 	ld bc,$000b
 	call CopyData
 	pop af
@@ -26,16 +26,16 @@ Predef54: ; 71ad9 (1c:5ad9)
 	add hl,hl
 	add hl,de
 	ld a,[hli]
-	ld [$cd10],a
+	ld [wcd10],a
 	ld a,[hl]
-	ld [$cd11],a
-	ld a,[$cd0f]
-	ld de,$cd13
+	ld [wcd11],a
+	ld a,[wcd0f]
+	ld de,wcd13
 	call Func_71b6a
-	ld a,[$cd34]
-	ld de,$cd1e
+	ld a,[wcd34]
+	ld de,wPlayerMonAccuracyMod
 	call Func_71b6a
-	ld hl,$d737
+	ld hl,wd737
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$2
@@ -44,15 +44,15 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld a,c
 	and a
 	ld a,$4
-	ld [$cd12],a
+	ld [wcd12],a
 	jr nz,.asm_99bca ; 0x71b36 $20
 	xor a
-	ld [$cd12],a
+	ld [wcd12],a
 	call .asm_99bca
 	ld a,$1
-	ld [$cd12],a
+	ld [wcd12],a
 	call YesNoChoice
-	ld a,[$cc26]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.asm_99bca ; 0x71b4b $b
 	call Func_71c07
@@ -60,7 +60,7 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld hl, TradedForText
 	call PrintText
 .asm_99bca ; 0x71b58
-	ld hl,$cd12
+	ld hl,wcd12
 	ld a,[hld]
 	ld e,a
 	ld d,$0
@@ -76,9 +76,9 @@ Predef54: ; 71ad9 (1c:5ad9)
 
 Func_71b6a: ; 71b6a (1c:5b6a)
 	push de
-	ld [$d11e],a
+	ld [wd11e],a
 	call GetMonName
-	ld hl,$cd6d
+	ld hl,wcd6d
 	pop de
 	ld bc,$b
 	jp CopyData
@@ -87,28 +87,28 @@ INCLUDE "data/trades.asm"
 
 Func_71c07: ; 71c07 (1c:5c07)
 	xor a
-	ld [$d07d],a
+	ld [wd07d],a
 	dec a
-	ld [$cfcb],a
+	ld [wcfcb],a
 	call DisplayPartyMenu
 	push af
 	call Func_71ca2
 	pop af
 	ld a,$1
 	jp c,.asm_c4bc2
-	ld a,[$cd0f]
+	ld a,[wcd0f]
 	ld b,a
-	ld a,[$cf91]
+	ld a,[wcf91]
 	cp b
 	ld a,$2
 	jr nz,.asm_c4bc2 ; 0x71c26 $75
 	ld a,[wWhichPokemon]
-	ld hl,$d18c
+	ld hl,W_PARTYMON1_LEVEL
 	ld bc,$002c
 	call AddNTimes
 	ld a,[hl]
-	ld [$d127],a
-	ld hl,$d737
+	ld [W_CURENEMYLVL],a
+	ld hl,wd737
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$1
@@ -118,24 +118,24 @@ Func_71c07: ; 71c07 (1c:5c07)
 	call PrintText
 	ld a,[wWhichPokemon]
 	push af
-	ld a,[$d127]
+	ld a,[W_CURENEMYLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call Func_71cc1
 	ld a,$38
 	call Predef
 	pop af
-	ld [$d127],a
+	ld [W_CURENEMYLVL],a
 	pop af
 	ld [wWhichPokemon],a
-	ld a,[$cd34]
-	ld [$cf91],a
+	ld a,[wcd34]
+	ld [wcf91],a
 	xor a
-	ld [$cc49],a
-	ld [$cf95],a
+	ld [wcc49],a
+	ld [wcf95],a
 	call RemovePokemon
 	ld a,$80
-	ld [$cc49],a
+	ld [wcc49],a
 	call AddPokemonToParty
 	call Func_71d19
 	callab EvolveTradeMon
@@ -148,7 +148,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 .asm_c4bc2 ; 0x71c9d
 	scf
 .asm_ee803 ; 0x71c9e
-	ld [$cd12],a
+	ld [wcd12],a
 	ret
 
 Func_71ca2: ; 71ca2 (1c:5ca2)
@@ -165,33 +165,33 @@ Func_71ca2: ; 71ca2 (1c:5ca2)
 	jp Bankswitch
 
 Func_71cc1: ; 71cc1 (1c:5cc1)
-	ld hl, wWhichTrade ; $cd3d
-	ld a, [$cd0f]
+	ld hl, wWhichTrade ; wWhichTrade
+	ld a, [wcd0f]
 	ld [hli], a
-	ld a, [$cd34]
+	ld a, [wcd34]
 	ld [hl], a
-	ld hl, W_PARTYMON1OT ; $d273
+	ld hl, W_PARTYMON1OT ; wd273
 	ld bc, $b
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
-	ld de, $cd41
+	ld de, wTrainerScreenX
 	ld bc, $b
 	call Func_71d11
 	ld hl, String_71d59 ; $5d59
-	ld de, $cd4e
+	ld de, wcd4e
 	call Func_71d11
-	ld de, W_GRASSRATE ; $d887
+	ld de, W_GRASSRATE ; W_GRASSRATE
 	call Func_71d11
-	ld hl, W_PARTYMON1_OTID ; $d177
+	ld hl, W_PARTYMON1_OTID ; W_PARTYMON1_OTID
 	ld bc, $2c
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
-	ld de, $cd4c
+	ld de, wcd4c
 	ld bc, $2
 	call Func_71d11
 	call Random
 	ld hl, hRandomAdd
-	ld de, $cd59
+	ld de, wcd59
 	jp CopyData
 
 Func_71d11: ; 71d11 (1c:5d11)
@@ -203,27 +203,27 @@ Func_71d11: ; 71d11 (1c:5d11)
 	ret
 
 Func_71d19: ; 71d19 (1c:5d19)
-	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
 	ld bc, $b
 	call Func_71d4f
-	ld hl, $cd29
+	ld hl, wcd29
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1OT ; $d273
+	ld hl, W_PARTYMON1OT ; wd273
 	ld bc, $b
 	call Func_71d4f
 	ld hl, String_71d59 ; $5d59
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1_OTID ; $d177
+	ld hl, W_PARTYMON1_OTID ; W_PARTYMON1_OTID
 	ld bc, $2c
 	call Func_71d4f
-	ld hl, $cd59
+	ld hl, wcd59
 	ld bc, $2
 	jp CopyData
 
 Func_71d4f: ; 71d4f (1c:5d4f)
-	ld a, [W_NUMINPARTY] ; $d163
+	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
 	dec a
 	call AddNTimes
 	ld e, l

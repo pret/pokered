@@ -6,7 +6,7 @@ ViridianMartScript: ; 1d46e (7:546e)
 	jp CallFunctionInTable
 
 ViridianMartScript_1d47d: ; 1d47d (7:547d)
-	ld a, [$d74e]
+	ld a, [wd74e]
 	bit 0, a
 	jr nz, .asm_1d489 ; 0x1d482 $5
 	ld hl, ViridianMartTextPointers ; $54e0
@@ -30,11 +30,11 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ld a, $4
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, RLEMovement1d4bb
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $1
 	ld [W_VIRIDIANMARKETCURSCRIPT], a
@@ -46,7 +46,7 @@ RLEMovement1d4bb: ; 1d4bb (7:54bb)
 	db $ff
 
 ViridianMartScript1: ; 1d4c0 (7:54c0)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -55,7 +55,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	call DisplayTextID
 	ld bc, (OAKS_PARCEL << 8) + 1
 	call GiveItem
-	ld hl, $d74e
+	ld hl, wd74e
 	set 1, [hl]
 	ld a, $2
 	ld [W_VIRIDIANMARKETCURSCRIPT], a

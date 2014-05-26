@@ -21,7 +21,7 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [$d11e]
+	ld a, [wd11e]
 	cp $2
 	ld a, $6 ; SaveOptionText
 	jr c, .asm_1e97b
@@ -38,29 +38,29 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 	db "@"
 
 SafariZoneCheck: ; 1e988 (7:6988)
-	ld hl, $d790
+	ld hl, wd790
 	bit 7, [hl]
 	jr z, asm_1e9ab
-	ld a, [W_NUMSAFARIBALLS] ; $da47
+	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
 	and a
 	jr z, asm_1e9b0
 	jr asm_1e9ab
 
 SafariZoneCheckSteps: ; 1e997 (7:6997)
-	ld a, [wSafariSteps] ; $d70d
+	ld a, [wSafariSteps] ; wd70d
 	ld b, a
-	ld a, [wSafariSteps + 1] ; $d70e
+	ld a, [wSafariSteps + 1] ; wd70e
 	ld c, a
 	or b
 	jr z, asm_1e9b0
 	dec bc
 	ld a, b
-	ld [wSafariSteps], a ; $d70d
+	ld [wSafariSteps], a ; wd70d
 	ld a, c
-	ld [wSafariSteps + 1], a ; $d70e
+	ld [wSafariSteps + 1], a ; wd70e
 asm_1e9ab: ; 1e9ab (7:69ab)
 	xor a
-	ld [$da46], a
+	ld [wda46], a
 	ret
 asm_1e9b0: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
@@ -72,24 +72,24 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld a, (SFX_02_5f - SFX_Headers_02) / 3
 	call PlayMusic
 .asm_1e9c2
-	ld a, [$c02a]
+	ld a, [wc02a]
 	cp $b9
 	jr nz, .asm_1e9c2
 	ld a, $d3
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	xor a
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $9c
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $3
-	ld [$d42f], a
+	ld [wd42f], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	ld hl, $d790
+	ld hl, wd790
 	set 6, [hl]
 	ld a, $1
-	ld [$da46], a
+	ld [wda46], a
 	ret
 
 PrintSafariGameOverText: ; 1e9ed (7:69ed)
@@ -100,7 +100,7 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
 	db $08 ; asm
-	ld a, [W_NUMSAFARIBALLS] ; $da47
+	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
 	and a
 	jr z, .asm_1ea04
 	ld hl, TimesUpText
@@ -119,7 +119,7 @@ GameOverText: ; 1ea12 (7:6a12)
 	db "@"
 
 PrintCinnabarQuiz: ; 1ea17 (7:6a17)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	call EnableAutoTextBoxDrawing
@@ -129,8 +129,8 @@ PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	db $08 ; asm
 	xor a
-	ld [$da38], a
-	ld a, [wWhichTrade] ; $cd3d
+	ld [wda38], a
+	ld a, [wWhichTrade] ; wWhichTrade
 	push af
 	and $f
 	ld [$ffdb], a
@@ -152,7 +152,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld l, a
 	call PrintText
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
 
@@ -193,7 +193,7 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	db "@"
 
 CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	ld hl, $d79c
+	ld hl, wd79c
 	ld a, $10 ; FlagActionPredef
 	jp Predef
 
@@ -201,10 +201,10 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
 	ld a, [$ffdc]
 	ld c, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp c
 	jr nz, .asm_1eab8
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
 	ld a, [$ffdb]
 	ld [$ffe0], a
@@ -226,7 +226,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	add $2
 	ld c, a
 	ld b, $2
-	ld hl, $d79a
+	ld hl, wd79a
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	ld a, c
@@ -234,7 +234,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ret nz
 	ld a, [$ffdb]
 	add $2
-	ld [$da38], a
+	ld [wda38], a
 	ret
 
 CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
@@ -276,7 +276,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	ld c, a
 	inc hl
 	ld a, [hl]
-	ld [$d12f], a
+	ld [wd12f], a
 	push bc
 	ld a, [$ffdb]
 	ld [$ffe0], a
@@ -286,13 +286,13 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, c
 	and a
 	jr nz, .asm_1eb36
-	ld a, [$d12f]
+	ld a, [wd12f]
 	jr .asm_1eb38
 .asm_1eb36
 	ld a, $e
 .asm_1eb38
 	pop bc
-	ld [$d09f], a
+	ld [wd09f], a
 	ld a, $17
 	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 	ld hl, $ffdb
@@ -322,10 +322,10 @@ MagazinesText: ; 1eb69 (7:6b69)
 
 BillsHousePC: ; 1eb6e (7:6b6e)
 	call EnableAutoTextBoxDrawing
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
-	ld a, [$d7f2]
+	ld a, [wd7f2]
 	bit 7, a
 	jr nz, .asm_1ebd2
 	bit 3, a
@@ -337,7 +337,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	jp PrintPredefTextID
 .asm_1eb8b
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld a, $2e
 	call PrintPredefTextID
 	ld c, $20
@@ -361,12 +361,12 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	call PlaySound
 	call WaitForSoundToFinish
 	call Func_2307
-	ld hl, $d7f2
+	ld hl, wd7f2
 	set 3, [hl]
 	ret
 .asm_1ebd2
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld a, $2f
 	call PrintPredefTextID
 	ret
@@ -380,7 +380,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	db $06
 	db $08 ; asm
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld c, $10
 	call DelayFrames
@@ -397,25 +397,25 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld hl, BillsHousePokemonListText1
 	call PrintText
 	xor a
-	ld [$d07c], a
-	ld [$cc26], a
-	ld [$cc2a], a
+	ld [W_ANIMATIONID], a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld a, $3
-	ld [$cc29], a
+	ld [wMenuWatchedKeys], a
 	ld a, $4
-	ld [$cc28], a
+	ld [wMaxMenuItem], a
 	ld a, $2
-	ld [$cc24], a
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [$cc25], a
+	ld [wTopMenuItemX], a
 .asm_1ec2d
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	ld hl, wTileMap
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	ld hl, $c3ca
+	ld hl, wTileMap + $2a
 	ld de, BillsMonListText
 	call PlaceString
 	ld hl, BillsHousePokemonListText2
@@ -424,7 +424,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_1ec74
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	add EEVEE
 	cp EEVEE
 	jr z, .asm_1ec6c
@@ -440,7 +440,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	call LoadScreenTilesFromBuffer2
 	jr .asm_1ec2d
 .asm_1ec74
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
@@ -461,7 +461,7 @@ BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 	db "@"
 
 DisplayOakLabEmailText: ; 1ecaf (7:6caf)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	call EnableAutoTextBoxDrawing

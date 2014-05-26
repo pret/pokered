@@ -7,34 +7,34 @@ SeafoamIslands2Script: ; 46315 (11:6315)
 	ld hl, Seafoam2HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	ld hl, $d87f
-	ld a, [$cd3d]
+	ld hl, wd87f
+	ld a, [wWhichTrade]
 	cp $1
 	jr nz, .asm_46340 ; 0x46330 $e
 	set 0, [hl]
 	ld a, $d9
-	ld [$d079], a
+	ld [wd079], a
 	ld a, $db
-	ld [$d07a], a
+	ld [wd07a], a
 	jr .asm_4634c ; 0x4633e $c
 .asm_46340
 	set 1, [hl]
 	ld a, $da
-	ld [$d079], a
+	ld [wd079], a
 	ld a, $dc
-	ld [$d07a], a
+	ld [wd07a], a
 .asm_4634c
-	ld a, [$d079]
-	ld [$cc4d], a
+	ld a, [wd079]
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
-	ld a, [$d07a]
-	ld [$cc4d], a
+	ld a, [wd07a]
+	ld [wcc4d], a
 	ld a, $15
 	jp Predef
 .asm_46362
 	ld a, $a0
-	ld [$d71d], a
+	ld [wd71d], a
 	ld hl, Seafoam2HolesCoords
 	jp Func_46981
 

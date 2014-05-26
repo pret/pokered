@@ -10,7 +10,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	jr nz, .asm_5267a
 	ld a, $35
 	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
-	ld a, [$cfc6]
+	ld a, [wcfc6]
 	cp $18
 	jr z, .asm_5269c
 	cp $24
@@ -35,12 +35,12 @@ PrintCardKeyText: ; 52673 (14:6673)
 	srl d
 	ld a, d
 	ld b, a
-	ld [$d73f], a
+	ld [wd73f], a
 	srl e
 	ld a, e
 	ld c, a
-	ld [$d740], a
-	ld a, [W_CURMAP] ; $d35e
+	ld [wd740], a
+	ld a, [W_CURMAP] ; W_CURMAP
 	cp SILPH_CO_11F
 	jr nz, .asm_526c8
 	ld a, $3
@@ -48,10 +48,10 @@ PrintCardKeyText: ; 52673 (14:6673)
 .asm_526c8
 	ld a, $e
 .asm_526ca
-	ld [$d09f], a
+	ld [wd09f], a
 	ld a, $17
 	call Predef ; indirect jump to Func_ee9e
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
 	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3
 	jp PlaySound
@@ -84,11 +84,11 @@ CardKeyFailText: ; 526f8 (14:66f8)
 	db "@"
 
 Func_526fd: ; 526fd (14:66fd)
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	ld d, a
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	ld e, a
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	and a
 	jr nz, .asm_5270d
 	inc d

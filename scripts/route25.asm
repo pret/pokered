@@ -9,18 +9,18 @@ Route25Script: ; 515cb (14:55cb)
 	ret
 
 Route25Script_515e1: ; 515e1 (14:55e1)
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, $d7f2
+	ld hl, wd7f2
 	bit 7, [hl]
 	ret nz
 	bit 5, [hl]
 	jr nz, .asm_515ff
 	res 6, [hl]
 	ld a, $61
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 .asm_515ff
@@ -28,15 +28,15 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	ret z
 	set 7, [hl]
 	ld a, $24
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $62
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $63
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
@@ -62,7 +62,7 @@ Route25TrainerHeaders: ; 5163e (14:563e)
 Route25TrainerHeader0: ; 5163e (14:563e)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText1 ; 0x5705 TextBeforeBattle
 	dw Route25AfterBattleText1 ; 0x570f TextAfterBattle
 	dw Route25EndBattleText1 ; 0x570a TextEndBattle
@@ -71,7 +71,7 @@ Route25TrainerHeader0: ; 5163e (14:563e)
 Route25TrainerHeader2: ; 5164a (14:564a)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText2 ; 0x5714 TextBeforeBattle
 	dw Route25AfterBattleText2 ; 0x571e TextAfterBattle
 	dw Route25EndBattleText2 ; 0x5719 TextEndBattle
@@ -80,7 +80,7 @@ Route25TrainerHeader2: ; 5164a (14:564a)
 Route25TrainerHeader3: ; 51656 (14:5656)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText3 ; 0x5723 TextBeforeBattle
 	dw Route25AfterBattleText3 ; 0x572d TextAfterBattle
 	dw Route25EndBattleText3 ; 0x5728 TextEndBattle
@@ -89,7 +89,7 @@ Route25TrainerHeader3: ; 51656 (14:5656)
 Route25TrainerHeader4: ; 51662 (14:5662)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText4 ; 0x5732 TextBeforeBattle
 	dw Route25AfterBattleText4 ; 0x573c TextAfterBattle
 	dw Route25EndBattleText4 ; 0x5737 TextEndBattle
@@ -98,7 +98,7 @@ Route25TrainerHeader4: ; 51662 (14:5662)
 Route25TrainerHeader5: ; 5166e (14:566e)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText5 ; 0x5741 TextBeforeBattle
 	dw Route25AfterBattleText5 ; 0x574b TextAfterBattle
 	dw Route25EndBattleText5 ; 0x5746 TextEndBattle
@@ -107,7 +107,7 @@ Route25TrainerHeader5: ; 5166e (14:566e)
 Route25TrainerHeader6: ; 5167a (14:567a)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText6 ; 0x5750 TextBeforeBattle
 	dw Route25AfterBattleText6 ; 0x575a TextAfterBattle
 	dw Route25EndBattleText6 ; 0x5755 TextEndBattle
@@ -116,7 +116,7 @@ Route25TrainerHeader6: ; 5167a (14:567a)
 Route25TrainerHeader7: ; 51686 (14:5686)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText7 ; 0x575f TextBeforeBattle
 	dw Route25AfterBattleText7 ; 0x5769 TextAfterBattle
 	dw Route25EndBattleText7 ; 0x5764 TextEndBattle
@@ -125,7 +125,7 @@ Route25TrainerHeader7: ; 51686 (14:5686)
 Route25TrainerHeader8: ; 51692 (14:5692)
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText8 ; 0x576e TextBeforeBattle
 	dw Route25AfterBattleText8 ; 0x5778 TextAfterBattle
 	dw Route25EndBattleText8 ; 0x5773 TextEndBattle
@@ -134,7 +134,7 @@ Route25TrainerHeader8: ; 51692 (14:5692)
 Route25TrainerHeader9: ; 5169e (14:569e)
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7f1 ; flag's byte
+	dw wd7f1 ; flag's byte
 	dw Route25BattleText9 ; 0x577d TextBeforeBattle
 	dw Route25AfterBattleText9 ; 0x5787 TextAfterBattle
 	dw Route25EndBattleText9 ; 0x5782 TextEndBattle

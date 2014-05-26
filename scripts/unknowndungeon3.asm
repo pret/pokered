@@ -21,7 +21,7 @@ UnknownDungeon3TrainerHeaders: ; 45f0f (11:5f0f)
 UnknownDungeon3TrainerHeader0: ; 45f0f (11:5f0f)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d85f ; flag's byte
+	dw wd85f ; flag's byte
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextBeforeBattle
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextAfterBattle
 	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle

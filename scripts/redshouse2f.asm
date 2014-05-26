@@ -12,7 +12,7 @@ RedsHouse2FScript0: ; 5c0c0 (17:40c0)
 	xor a
 	ld [hJoyHeld],a
 	ld a,8
-	ld [$D528],a
+	ld [wd528],a
 	ld a,1
 	ld [W_REDSHOUSE2CURSCRIPT],a
 	ret

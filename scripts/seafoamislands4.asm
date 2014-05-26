@@ -7,38 +7,38 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld hl, Seafoam4HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	ld hl, $d881
-	ld a, [$cd3d]
+	ld hl, wd881
+	ld a, [wWhichTrade]
 	cp $1
 	jr nz, .asm_465b8 ; 0x465a8 $e
 	set 0, [hl]
 	ld a, $dd
-	ld [$d079], a
+	ld [wd079], a
 	ld a, $e1
-	ld [$d07a], a
+	ld [wd07a], a
 	jr .asm_465c4 ; 0x465b6 $c
 .asm_465b8
 	set 1, [hl]
 	ld a, $de
-	ld [$d079], a
+	ld [wd079], a
 	ld a, $e2
-	ld [$d07a], a
+	ld [wd07a], a
 .asm_465c4
-	ld a, [$d079]
-	ld [$cc4d], a
+	ld a, [wd079]
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
-	ld a, [$d07a]
-	ld [$cc4d], a
+	ld a, [wd07a]
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	jr .asm_465ed ; 0x465da $11
 .asm_465dc
 	ld a, $a2
-	ld [$d71d], a
+	ld [wd71d], a
 	ld hl, Seafoam4HolesCoords
 	call Func_46981
-	ld a, [$d732]
+	ld a, [wd732]
 	bit 4, a
 	ret nz
 .asm_465ed
@@ -58,7 +58,7 @@ SeafoamIslands4ScriptPointers: ; 465fb (11:65fb)
 	dw SeafoamIslands4Script3
 
 SeafoamIslands4Script0: ; 46603 (11:6603)
-	ld a, [$d880]
+	ld a, [wd880]
 	and $3
 	cp $3
 	ret z
@@ -68,11 +68,11 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	ld a, [W_XCOORD]
 	cp $f
 	ret nz
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, RLEMovement46632
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld hl, W_FLAGS_D733
 	set 2, [hl]
@@ -87,7 +87,7 @@ RLEMovement46632: ; 46632 (11:6632)
 	db $ff
 
 SeafoamIslands4Script1: ; 46639 (11:6639)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld a, $0
@@ -95,7 +95,7 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	ret
 
 SeafoamIslands4Script2: ; 46644 (11:6644)
-	ld a, [$d880]
+	ld a, [wd880]
 	and $3
 	cp $3
 	ret z
@@ -110,13 +110,13 @@ SeafoamIslands4Script2: ; 46644 (11:6644)
 .asm_4665e
 	ld de, RLEData_46688
 .asm_46661
-	ld hl, $ccd3
+	ld hl, wccd3
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	xor a
-	ld [$c206], a
-	ld hl, $d730
+	ld [wSpriteStateData2 + $06], a
+	ld hl, wd730
 	set 7, [hl]
 	ld hl, W_FLAGS_D733
 	set 2, [hl]
@@ -132,7 +132,7 @@ RLEData_46688: ; 46688 (11:6688)
 	db $80,$06,$10,$02,$80,$04,$FF
 
 SeafoamIslands4Script3: ; 4668f (11:668f)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld a, $0

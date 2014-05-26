@@ -1,5 +1,5 @@
 Route20Script: ; 50ca9 (14:4ca9)
-	ld hl, $d7e7
+	ld hl, wd7e7
 	bit 0, [hl]
 	res 0, [hl]
 	call nz, Route20Script_50cc6
@@ -12,7 +12,7 @@ Route20Script: ; 50ca9 (14:4ca9)
 	ret
 
 Route20Script_50cc6: ; 50cc6 (14:4cc6)
-	ld a, [$d880]
+	ld a, [wd880]
 	and $3
 	cp $3
 	jr z, .asm_50cef
@@ -34,7 +34,7 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	db $D9,$DA,$DB,$DC,$DF,$E0,$FF
 
 .asm_50cef
-	ld a, [$d881]
+	ld a, [wd881]
 	and $3
 	cp $3
 	ret z
@@ -49,12 +49,12 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	ret
 
 Route20Script_50d0c: ; 50d0c (14:4d0c)
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
 Route20Script_50d14: ; 50d14 (14:4d14)
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 
@@ -81,7 +81,7 @@ Route20TrainerHeaders: ; 50d3a (14:4d3a)
 Route20TrainerHeader0: ; 50d3a (14:4d3a)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText1 ; 0x4e17 TextBeforeBattle
 	dw Route20AfterBattleText1 ; 0x4e21 TextAfterBattle
 	dw Route20EndBattleText1 ; 0x4e1c TextEndBattle
@@ -90,7 +90,7 @@ Route20TrainerHeader0: ; 50d3a (14:4d3a)
 Route20TrainerHeader2: ; 50d46 (14:4d46)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText2 ; 0x4e26 TextBeforeBattle
 	dw Route20AfterBattleText2 ; 0x4e30 TextAfterBattle
 	dw Route20EndBattleText2 ; 0x4e2b TextEndBattle
@@ -99,7 +99,7 @@ Route20TrainerHeader2: ; 50d46 (14:4d46)
 Route20TrainerHeader3: ; 50d52 (14:4d52)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText3 ; 0x4e35 TextBeforeBattle
 	dw Route20AfterBattleText3 ; 0x4e3f TextAfterBattle
 	dw Route20EndBattleText3 ; 0x4e3a TextEndBattle
@@ -108,7 +108,7 @@ Route20TrainerHeader3: ; 50d52 (14:4d52)
 Route20TrainerHeader4: ; 50d5e (14:4d5e)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText4 ; 0x4e44 TextBeforeBattle
 	dw Route20AfterBattleText4 ; 0x4e4e TextAfterBattle
 	dw Route20EndBattleText4 ; 0x4e49 TextEndBattle
@@ -117,7 +117,7 @@ Route20TrainerHeader4: ; 50d5e (14:4d5e)
 Route20TrainerHeader5: ; 50d6a (14:4d6a)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText5 ; 0x4e53 TextBeforeBattle
 	dw Route20AfterBattleText5 ; 0x4e5d TextAfterBattle
 	dw Route20EndBattleText5 ; 0x4e58 TextEndBattle
@@ -126,7 +126,7 @@ Route20TrainerHeader5: ; 50d6a (14:4d6a)
 Route20TrainerHeader6: ; 50d76 (14:4d76)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText6 ; 0x4e62 TextBeforeBattle
 	dw Route20AfterBattleText6 ; 0x4e6c TextAfterBattle
 	dw Route20EndBattleText6 ; 0x4e67 TextEndBattle
@@ -135,7 +135,7 @@ Route20TrainerHeader6: ; 50d76 (14:4d76)
 Route20TrainerHeader7: ; 50d82 (14:4d82)
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText7 ; 0x4e71 TextBeforeBattle
 	dw Route20AfterBattleText7 ; 0x4e7b TextAfterBattle
 	dw Route20EndBattleText7 ; 0x4e76 TextEndBattle
@@ -144,7 +144,7 @@ Route20TrainerHeader7: ; 50d82 (14:4d82)
 Route20TrainerHeader8: ; 50d8e (14:4d8e)
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText8 ; 0x4e80 TextBeforeBattle
 	dw Route20AfterBattleText8 ; 0x4e8a TextAfterBattle
 	dw Route20EndBattleText8 ; 0x4e85 TextEndBattle
@@ -153,7 +153,7 @@ Route20TrainerHeader8: ; 50d8e (14:4d8e)
 Route20TrainerHeader9: ; 50d9a (14:4d9a)
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText9 ; 0x4e8f TextBeforeBattle
 	dw Route20AfterBattleText9 ; 0x4e99 TextAfterBattle
 	dw Route20EndBattleText9 ; 0x4e94 TextEndBattle
@@ -162,7 +162,7 @@ Route20TrainerHeader9: ; 50d9a (14:4d9a)
 Route20TrainerHeader10: ; 50da6 (14:4da6)
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e7 ; flag's byte
+	dw wd7e7 ; flag's byte
 	dw Route20BattleText10 ; 0x4e9e TextBeforeBattle
 	dw Route20AfterBattleText10 ; 0x4ea8 TextAfterBattle
 	dw Route20EndBattleText10 ; 0x4ea3 TextEndBattle

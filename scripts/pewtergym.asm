@@ -1,5 +1,5 @@
 PewterGymScript: ; 5c387 (17:4387)
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, PewterGymScript_5c3a4
@@ -36,7 +36,7 @@ PewterGymScriptPointers: ; 5c3ca (17:43ca)
 	dw PewterGymScript3
 
 PewterGymScript3: ; 5c3d2 (17:43d2)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
@@ -46,7 +46,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d755
+	ld hl, wd755
 	set 7, [hl]
 	ld bc, (TM_34 << 8) | 1
 	call GiveItem
@@ -54,7 +54,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $5
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d755
+	ld hl, wd755
 	set 6, [hl]
 	jr .asm_5c408
 .BagFull
@@ -64,24 +64,24 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 .asm_5c408
 	ld hl, W_OBTAINEDBADGES
 	set 0, [hl]
-	ld hl, $d72a
+	ld hl, wd72a
 	set 0, [hl]
 
 	ld a, $4
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $22
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 
-	ld hl, $d7eb
+	ld hl, wd7eb
 	res 0, [hl]
 	res 7, [hl]
 
 	; deactivate gym trainers
-	ld hl, $d755
+	ld hl, wd755
 	set 2, [hl]
 
 	jp PewterGymScript_5c3bf
@@ -98,7 +98,7 @@ PewterGymTrainerHeaders: ; 5c441 (17:4441)
 PewterGymTrainerHeader0: ; 5c441 (17:4441)
 	db $2 ; flag's bit
 	db ($5 << 4) ; trainer's view range
-	dw $d755 ; flag's byte
+	dw wd755 ; flag's byte
 	dw PewterGymBattleText1 ; 0x44d0 TextBeforeBattle
 	dw PewterGymAfterBattleText1 ; 0x44da TextAfterBattle
 	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
@@ -108,7 +108,7 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 
 PewterGymText1: ; 5c44e (17:444e)
 	db $08 ; asm
-	ld a, [$d755]
+	ld a, [wd755]
 	bit 7, a
 	jr z, .asm_4a735 ; 0x5c454
 	bit 6, a
@@ -123,18 +123,18 @@ PewterGymText1: ; 5c44e (17:444e)
 .asm_4a735 ; 0x5c46a
 	ld hl, PewterGymText_5c49e
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1
-	ld [$d05c], a
+	ld [W_GYMLEADERNO], a
 	xor a
 	ldh [$b4], a
 	ld a, $3
@@ -191,13 +191,13 @@ PewterGymAfterBattleText1: ; 5c4da (17:44da)
 
 PewterGymText3: ; 5c4df (17:44df)
 	db $08 ; asm
-	ld a, [$d72a]
+	ld a, [wd72a]
 	bit 0, a
 	jr nz, .asm_71369 ; 0x5c4e5
 	ld hl, PewterGymText_5c515
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_6123a ; 0x5c4f4
 	ld hl, PewterGymText_5c51a

@@ -13,7 +13,7 @@ Func_480eb: ; 480eb (12:40eb)
 Func_480ff: ; 480ff (12:40ff)
 	call GetPredefRegisters
 	ld a, $1
-	ld [$d0a0], a
+	ld [wd0a0], a
 	xor a
 .asm_48108
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
@@ -23,7 +23,7 @@ Func_480ff: ; 480ff (12:40ff)
 	ld a, b
 	jr nz, .asm_48108
 	xor a
-	ld [$d0a0], a
+	ld [wd0a0], a
 	ret
 
 Func_48119: ; 48119 (12:4119)

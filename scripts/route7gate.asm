@@ -10,26 +10,26 @@ Route7GateScriptPointers: ; 1e10d (7:610d)
 	dw Route7GateScript1
 
 Route7GateScript_1e111: ; 1e111 (7:6111)
-	ld hl, $d730
+	ld hl, wd730
 	set 7, [hl]
 	ld a, $20
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	xor a
-	ld [$c206], a
-	ld [$cd3b], a
+	ld [wSpriteStateData2 + $06], a
+	ld [wcd3b], a
 	ret
 
 Route7GateScript0: ; 1e128 (7:6128)
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 6, a
 	ret nz
 	ld hl, CoordsData_1e167
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
@@ -47,7 +47,7 @@ Route7GateScript0: ; 1e128 (7:6128)
 	ld a, $3
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d728
+	ld hl, wd728
 	set 6, [hl]
 	ret
 
@@ -57,7 +57,7 @@ CoordsData_1e167: ; 1e167 (7:6167)
 	db $ff
 
 Route7GateScript1: ; 1e16c (7:616c)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3

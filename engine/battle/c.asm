@@ -21,19 +21,19 @@ ShroudedInMistText: ; 33f52 (c:7f52)
 	db "@"
 
 OneHitKOEffect_: ; 33f57 (c:7f57)
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	xor a
 	ld [hli], a
 	ld [hl], a ; set the damage output to zero
 	dec a
-	ld [$d05e], a
-	ld hl, $d02a
-	ld de, $cffb
+	ld [wd05e], a
+	ld hl, W_PLAYERMONSPEED + 1
+	ld de, W_ENEMYMONSPEED + 1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_33f72
-	ld hl, $cffb
-	ld de, $d02a
+	ld hl, W_ENEMYMONSPEED + 1
+	ld de, W_PLAYERMONSPEED + 1
 .asm_33f72
 	ld a, [de]
 	dec de
@@ -45,14 +45,14 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld a, [hl]
 	sbc b
 	jr c, .asm_33f8a
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
 	ld a, $2
-	ld [$d05e], a
+	ld [wd05e], a
 	ret
 .asm_33f8a
 	ld a, $1
-	ld [W_MOVEMISSED], a ; $d05f
+	ld [W_MOVEMISSED], a ; W_MOVEMISSED
 	ret

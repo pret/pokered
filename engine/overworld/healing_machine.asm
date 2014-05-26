@@ -3,7 +3,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld hl, $87c0
 	ld bc, (BANK(PokeCenterFlashingMonitorAndHealBall) << 8) + $03
 	call CopyVideoData
-	ld hl, $cfcb
+	ld hl, wcfcb
 	ld a, [hl]
 	push af
 	ld [hl], $ff
@@ -12,19 +12,19 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	push af
 	ld a, $e0
 	ld [rOBP1], a ; $ff49
-	ld hl, $c384
+	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData ; $44d7
 	call Func_70503
 	ld a, $4
 	ld [wMusicHeaderPointer], a
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 .asm_70464
 	ld a, [wMusicHeaderPointer]
 	and a
 	jr nz, .asm_70464
-	ld a, [W_NUMINPARTY] ; $d163
+	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
 	ld b, a
 .asm_7046e
 	call Func_70503
@@ -34,23 +34,23 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	call DelayFrames
 	dec b
 	jr nz, .asm_7046e
-	ld a, [$c0ef]
+	ld a, [wc0ef]
 	cp $1f
-	ld [$c0f0], a
+	ld [wc0f0], a
 	jr nz, .asm_70495
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld a, Bank(Func_9876)
-	ld [$c0ef], a
+	ld [wc0ef], a
 .asm_70495
 	ld a, MUSIC_PKMN_HEALED
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld d, $28
 	call Func_704f3
 .asm_704a2
-	ld a, [$c026]
+	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
 	jr z, .asm_704a2
 	ld c, $20

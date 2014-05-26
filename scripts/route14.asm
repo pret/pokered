@@ -29,7 +29,7 @@ Route14TrainerHeaders: ; 55a02 (15:5a02)
 Route14TrainerHeader0: ; 55a02 (15:5a02)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText1 ; 0x5a85 TextBeforeBattle
 	dw Route14AfterBattleText1 ; 0x5a8f TextAfterBattle
 	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
@@ -38,7 +38,7 @@ Route14TrainerHeader0: ; 55a02 (15:5a02)
 Route14TrainerHeader1: ; 55a0e (15:5a0e)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText2 ; 0x5a9e TextBeforeBattle
 	dw Route14AfterBattleText2 ; 0x5aa8 TextAfterBattle
 	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
@@ -47,7 +47,7 @@ Route14TrainerHeader1: ; 55a0e (15:5a0e)
 Route14TrainerHeader2: ; 55a1a (15:5a1a)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText3 ; 0x5ab7 TextBeforeBattle
 	dw Route14AfterBattleText3 ; 0x5ac1 TextAfterBattle
 	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
@@ -56,7 +56,7 @@ Route14TrainerHeader2: ; 55a1a (15:5a1a)
 Route14TrainerHeader3: ; 55a26 (15:5a26)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText4 ; 0x5ad0 TextBeforeBattle
 	dw Route14AfterBattleText4 ; 0x5ada TextAfterBattle
 	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
@@ -65,7 +65,7 @@ Route14TrainerHeader3: ; 55a26 (15:5a26)
 Route14TrainerHeader4: ; 55a32 (15:5a32)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText5 ; 0x5ae9 TextBeforeBattle
 	dw Route14AfterBattleText5 ; 0x5af3 TextAfterBattle
 	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
@@ -74,7 +74,7 @@ Route14TrainerHeader4: ; 55a32 (15:5a32)
 Route14TrainerHeader5: ; 55a3e (15:5a3e)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText6 ; 0x5b02 TextBeforeBattle
 	dw Route14AfterBattleText6 ; 0x5b0c TextAfterBattle
 	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
@@ -83,7 +83,7 @@ Route14TrainerHeader5: ; 55a3e (15:5a3e)
 Route14TrainerHeader6: ; 55a4a (15:5a4a)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText7 ; 0x5b1b TextBeforeBattle
 	dw Route14AfterBattleText7 ; 0x5b25 TextAfterBattle
 	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
@@ -92,7 +92,7 @@ Route14TrainerHeader6: ; 55a4a (15:5a4a)
 Route14TrainerHeader7: ; 55a56 (15:5a56)
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText8 ; 0x5b34 TextBeforeBattle
 	dw Route14AfterBattleText8 ; 0x5b3e TextAfterBattle
 	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
@@ -101,7 +101,7 @@ Route14TrainerHeader7: ; 55a56 (15:5a56)
 Route14TrainerHeader8: ; 55a62 (15:5a62)
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText9 ; 0x5b4d TextBeforeBattle
 	dw Route14AfterBattleText9 ; 0x5b57 TextAfterBattle
 	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
@@ -110,7 +110,7 @@ Route14TrainerHeader8: ; 55a62 (15:5a62)
 Route14TrainerHeader9: ; 55a6e (15:5a6e)
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7db ; flag's byte
+	dw wd7db ; flag's byte
 	dw Route14BattleText10 ; 0x5b66 TextBeforeBattle
 	dw Route14AfterBattleText10 ; 0x5b70 TextAfterBattle
 	dw Route14EndBattleText10 ; 0x5b6b TextEndBattle

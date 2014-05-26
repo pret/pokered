@@ -10,14 +10,14 @@ Route6GateScriptPointers: ; 1e04a (7:604a)
 	dw Route6GateScript1
 
 Route6GateScript0: ; 1e04e (7:604e)
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 6, a
 	ret nz
 	ld hl, CoordsData_1e08c
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $1
-	ld [$d528], a
+	ld [wd528], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
@@ -32,7 +32,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld [W_ROUTE6GATECURSCRIPT], a
 	ret
 .asm_1e080
-	ld hl, $d728
+	ld hl, wd728
 	set 6, [hl]
 	ld a, $3
 	ld [$ff8c], a
@@ -43,7 +43,7 @@ CoordsData_1e08c: ; 1e08c (7:608c)
 	db $02,$04,$FF
 
 Route6GateScript1: ; 1e091 (7:6091)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -53,15 +53,15 @@ Route6GateScript1: ; 1e091 (7:6091)
 	ret
 
 Route6GateScript_1e0a1: ; 1e0a1 (7:60a1)
-	ld hl, $d730
+	ld hl, wd730
 	set 7, [hl]
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	xor a
-	ld [$c206], a
-	ld [$cd3b], a
+	ld [wSpriteStateData2 + $06], a
+	ld [wcd3b], a
 	ret
 
 Route6GateTextPointers: ; 1e0b8 (7:60b8)

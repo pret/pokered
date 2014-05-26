@@ -17,31 +17,31 @@ PokemonTower2ScriptPointers: ; 60509 (18:4509)
 	dw PokemonTower2Script2
 
 PokemonTower2Script0: ; 6050f (18:450f)
-	ld a, [$d764]
+	ld a, [wd764]
 	bit 7, a
 	ret nz
 	ld hl, CoordsData_6055e ; $455e
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, $d764
+	ld hl, wd764
 	res 6, [hl]
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	cp $1
 	ld a, $8
 	ld b, $0
 	jr nz, .asm_60544 ; 0x60539 $9
-	ld hl, $d764
+	ld hl, wd764
 	set 6, [hl]
 	ld a, $2
 	ld b, $c
 .asm_60544
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $1
 	ld [$ff8c], a
 	ld a, b
@@ -61,18 +61,18 @@ CoordsData_6055e: ; 6055e (18:455e)
 	db $0F ; isn't this supposed to end in $ff?
 
 PokemonTower2Script1: ; 60563 (18:4563)
-	ld a, [$d057]
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, PokemonTower2Script_604fe
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d764
+	ld hl, wd764
 	set 7, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	ld de, MovementData_605b2
-	ld a, [$d764]
+	ld a, [wd764]
 	bit 6, a
 	jr nz, .asm_60589 ; 0x60584 $3
 	ld de, MovementData_605a9
@@ -81,7 +81,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld [$ff8c], a
 	call MoveSprite
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $2
@@ -96,11 +96,11 @@ MovementData_605b2: ; 605b2 (18:45b2)
 	db $00,$00,$C0,$C0,$C0,$C0,$00,$00,$FF
 
 PokemonTower2Script2: ; 605bb (18:45bb)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $38
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	xor a
@@ -117,7 +117,7 @@ PokemonTower2TextPointers: ; 605db (18:45db)
 
 PokemonTower2Text1: ; 605df (18:45df)
 	db $08 ; asm
-	ld a, [$d764]
+	ld a, [wd764]
 	bit 7, a
 	jr z, .asm_16f24 ; 0x605e5
 	ld hl, PokemonTower2Text_6063c
@@ -126,7 +126,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 .asm_16f24 ; 0x605ef
 	ld hl, PokemonTower2Text_6062d
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, PokemonTower2Text_60632

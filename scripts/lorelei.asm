@@ -9,13 +9,13 @@ LoreleiScript: ; 7617b (1d:617b)
 	ret
 
 LoreleiScript_76191: ; 76191 (1d:6191)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, $d734
+	ld hl, wd734
 	set 1, [hl]
-	ld a, [$d863]
+	ld a, [wd863]
 	bit 1, a
 	jr z, .asm_761a9
 	ld a, $5
@@ -23,7 +23,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 .asm_761a9
 	ld a, $24
 .asm_761ab
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $2
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
@@ -43,7 +43,7 @@ LoreleiScriptPointers: ; 761bb (1d:61bb)
 LoreleiScript4: ; 761c5 (1d:61c5)
 	ret
 asm_761c6: ; 761c6 (1d:61c6)
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld a, $40
 	ld [hli], a
 	ld [hli], a
@@ -52,7 +52,7 @@ asm_761c6: ; 761c6 (1d:61c6)
 	ld [hli], a
 	ld [hl], a
 	ld a, $6
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
@@ -65,12 +65,12 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [$ccd3], a
-	ld [$cd38], a
-	ld a, [wWhichTrade] ; $cd3d
+	ld [wccd3], a
+	ld [wcd38], a
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr c, .asm_76206
-	ld hl, $d863
+	ld hl, wd863
 	bit 6, [hl]
 	set 6, [hl]
 	jr z, asm_761c6
@@ -79,9 +79,9 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
@@ -96,7 +96,7 @@ CoordsData_76223: ; 76223 (1d:6223)
 	db $FF
 
 LoreleiScript3: ; 7622c (1d:622c)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -107,7 +107,7 @@ LoreleiScript3: ; 7622c (1d:622c)
 	ret
 LoreleiScript2: ; 7623f (1d:623f)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, LoreleiScript_761b6
 	ld a, $1
@@ -122,7 +122,7 @@ LoreleiTrainerHeaders: ; 76255 (1d:6255)
 LoreleiTrainerHeader0: ; 76255 (1d:6255)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d863 ; flag's byte
+	dw wd863 ; flag's byte
 	dw LoreleiBeforeBattleText ; 0x626c TextBeforeBattle
 	dw LoreleiAfterBattleText ; 0x6276 TextAfterBattle
 	dw LoreleiEndBattleText ; 0x6271 TextEndBattle

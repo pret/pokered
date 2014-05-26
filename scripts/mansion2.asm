@@ -9,11 +9,11 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	ret
 
 Mansion2Script_51fee: ; 51fee (14:5fee)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d796]
+	ld a, [wd796]
 	bit 0, a
 	jr nz, .asm_52016
 	ld a, $e
@@ -39,12 +39,12 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	ret
 
 Mansion2Script_5202f: ; 5202f (14:602f)
-	ld [$d09f], a
+	ld [wd09f], a
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
 
 Mansion2Script_Switches: ; 52037 (14:6037)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	xor a
@@ -69,7 +69,7 @@ Mansion2TrainerHeaders: ; 52057 (14:6057)
 Mansion2TrainerHeader0: ; 52057 (14:6057)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d847 ; flag's byte
+	dw wd847 ; flag's byte
 	dw Mansion2BattleText1 ; 0x606e TextBeforeBattle
 	dw Mansion2AfterBattleText1 ; 0x6078 TextAfterBattle
 	dw Mansion2EndBattleText1 ; 0x6073 TextEndBattle
@@ -109,18 +109,18 @@ Mansion2Text5: ; 52087 (14:6087)
 	ld hl, Mansion2Text_520c2
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_520b9 ; 0x52095 $22
 	ld a, $1
-	ld [$cc3c], a
-	ld hl, $d126
+	ld [wcc3c], a
+	ld hl, wd126
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7
 	call PrintText
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, $d796
+	ld hl, wd796
 	bit 0, [hl]
 	set 0, [hl]
 	jr z, .asm_520bf ; 0x520b3 $a

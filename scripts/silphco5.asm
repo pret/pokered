@@ -9,19 +9,19 @@ SilphCo5Script: ; 19f37 (6:5f37)
 	ret
 
 SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo5Coords
 	call SilphCo4Script_19d5d
 	call SilphCo5Script_19f9e
-	ld a, [$d82c]
+	ld a, [wd82c]
 	bit 0, a
 	jr nz, .asm_19f74 ; 0x19f63 $f
 	push af
 	ld a, $5f
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0203
 	ld a, $17
 	call Predef
@@ -31,7 +31,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	jr nz, .asm_19f87 ; 0x19f76 $f
 	push af
 	ld a, $5f
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0603
 	ld a, $17
 	call Predef
@@ -40,7 +40,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	bit 2, a
 	ret nz
 	ld a, $5f
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0507
 	ld a, $17
 	jp Predef
@@ -49,7 +49,7 @@ SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 	db $02, $03, $06, $03, $05, $07, $ff
 
 SilphCo5Script_19f9e: ; 19f9e (6:5f9e)
-	ld hl, $d82c
+	ld hl, wd82c
 	ld a, [$ffe0]
 	and a
 	ret z
@@ -88,7 +88,7 @@ SilphCo5TrainerHeaders: ; 19fd2 (6:5fd2)
 Silphco5TrainerHeader0: ; 19fd2 (6:5fd2)
 	db $2 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d82b ; flag's byte
+	dw wd82b ; flag's byte
 	dw SilphCo5BattleText2 ; 0x6024 TextBeforeBattle
 	dw SilphCo5AfterBattleText2 ; 0x602e TextAfterBattle
 	dw SilphCo5EndBattleText2 ; 0x6029 TextEndBattle
@@ -97,7 +97,7 @@ Silphco5TrainerHeader0: ; 19fd2 (6:5fd2)
 Silphco5TrainerHeader2: ; 19fde (6:5fde)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d82b ; flag's byte
+	dw wd82b ; flag's byte
 	dw SilphCo5BattleText3 ; 0x603d TextBeforeBattle
 	dw SilphCo5AfterBattleText3 ; 0x6047 TextAfterBattle
 	dw SilphCo5EndBattleText3 ; 0x6042 TextEndBattle
@@ -106,7 +106,7 @@ Silphco5TrainerHeader2: ; 19fde (6:5fde)
 Silphco5TrainerHeader3: ; 19fea (6:5fea)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d82b ; flag's byte
+	dw wd82b ; flag's byte
 	dw SilphCo5BattleText4 ; 0x6056 TextBeforeBattle
 	dw SilphCo5AfterBattleText4 ; 0x6060 TextAfterBattle
 	dw SilphCo5EndBattleText4 ; 0x605b TextEndBattle
@@ -115,7 +115,7 @@ Silphco5TrainerHeader3: ; 19fea (6:5fea)
 Silphco5TrainerHeader4: ; 19ff6 (6:5ff6)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d82b ; flag's byte
+	dw wd82b ; flag's byte
 	dw SilphCo5BattleText5 ; 0x606f TextBeforeBattle
 	dw SilphCo5AfterBattleText5 ; 0x6079 TextAfterBattle
 	dw SilphCo5EndBattleText5 ; 0x6074 TextEndBattle

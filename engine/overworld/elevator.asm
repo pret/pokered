@@ -34,14 +34,14 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld a, (SFX_02_5f - SFX_Headers_02) / 3
 	call PlayMusic
 .asm_7bf57
-	ld a, [$c02a]
+	ld a, [wc02a]
 	cp $b9
 	jr z, .asm_7bf57
 	call UpdateSprites
 	jp Func_2307
 
 Func_7bf64: ; 7bf64 (1e:7f64)
-	ld hl, $d527
+	ld hl, wd527
 	ld a, [hld]
 	push af
 	ld a, [hl]

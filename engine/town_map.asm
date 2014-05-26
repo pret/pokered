@@ -1,19 +1,19 @@
 DisplayTownMap: ; 70e3e (1c:4e3e)
 	call LoadTownMap
-	ld hl, $cfcb
+	ld hl, wcfcb
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
 	ld a, $1
 	ld [$ffb7], a
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	push af
 	ld b, $0
 	call Func_711c4
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
-	ld de, $cd6d
+	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer
 	ld de, wTileMapBackup
@@ -24,7 +24,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
 	xor a
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	pop af
 	jr Func_70e92
 
@@ -33,36 +33,36 @@ Func_70e7e: ; 70e7e (1c:4e7e)
 	ld bc, $114
 	call ClearScreenArea
 	ld hl, TownMapOrder ; $4f11
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
 
 Func_70e92: ; 70e92 (1c:4e92)
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 	call Func_712f1
 	ld a, [de]
 	push hl
 	call Func_71258
 	ld a, $4
-	ld [$cd5b], a
-	ld hl, $c310
+	ld [wcd5b], a
+	ld hl, wOAMBuffer + $10
 	call Func_71279
 	pop hl
-	ld de, $cd6d
+	ld de, wcd6d
 .asm_70eac
 	ld a, [hli]
 	ld [de], a
 	inc de
 	cp $50
 	jr nz, .asm_70eac
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
-	ld de, $cd6d
+	ld de, wcd6d
 	call PlaceString
-	ld hl, $c310
-	ld de, $c518
+	ld hl, wOAMBuffer + $10
+	ld de, wTileMapBackup + 16
 	ld bc, $10
 	call CopyData
 .asm_70ec8
@@ -79,31 +79,31 @@ Func_70e92: ; 70e92 (1c:4e92)
 	bit 7, b
 	jr nz, .asm_70f01
 	xor a
-	ld [$d09b], a
+	ld [wd09b], a
 	ld [$ffb7], a
-	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
 	call Func_711ab
 	pop hl
 	pop af
 	ld [hl], a
 	ret
 .asm_70ef2
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	inc a
 	cp $2f
 	jr nz, .asm_70efb
 	xor a
 .asm_70efb
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	jp Func_70e7e
 .asm_70f01
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	dec a
 	cp $ff
 	jr nz, .asm_70f0b
 	ld a, $2e
 .asm_70f0b
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	jp Func_70e7e
 
 INCLUDE "data/town_map_order.asm"
@@ -113,14 +113,14 @@ TownMapCursor: ; 70f40 (1c:4f40)
 
 LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	call LoadTownMap
-	ld hl, $cfcb
+	ld hl, wcfcb
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
 	call Func_711ef
 	call GetMonName
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
 	call PlaceString
 	ld h, b
@@ -151,7 +151,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
 	call Func_71070
-	ld hl, $cfcb
+	ld hl, wcfcb
 	ld a, [hl]
 	push af
 	ld [hl], $ff
@@ -159,11 +159,11 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wTileMap
 	ld de, ToText
 	call PlaceString
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	ld b, $0
 	call Func_711c4
-	ld hl, $cd3e
-	FuncCoord 18, 0 ; $c3b2
+	ld hl, wTrainerEngageDistance
+	FuncCoord 18, 0
 	ld de, Coord
 
 .townMapFlyLoop
@@ -171,7 +171,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld [de], a
 	push hl
 	push hl
-	FuncCoord 3, 0 ; $c3a3
+	FuncCoord 3, 0
 	ld hl, Coord
 	ld bc, $10f
 	call ClearScreenArea
@@ -179,16 +179,16 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld a, [hl]
 	ld b, $4
 	call Func_711c4
-	FuncCoord 3, 0 ; $c3a3
+	FuncCoord 3, 0
 	ld hl, Coord
-	ld de, $cd6d
+	ld de, wcd6d
 	call PlaceString
 	ld c, $f
 	call DelayFrames
-	FuncCoord 18, 0 ; $c3b2
+	FuncCoord 18, 0
 	ld hl, Coord
 	ld [hl], $ed
-	FuncCoord 19, 0 ; $c3b3
+	FuncCoord 19, 0
 	ld hl, Coord
 	ld [hl], $ee
 	pop hl
@@ -214,21 +214,21 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld a, (SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, [hl]
-	ld [$d71a], a
-	ld hl, $d732
+	ld [wd71a], a
+	ld hl, wd732
 	set 3, [hl]
 	inc hl
 	set 7, [hl]
 .asm_71037
 	xor a
-	ld [$d09b], a
+	ld [wd09b], a
 	call GBPalWhiteOutWithDelay3
 	pop hl
 	pop af
 	ld [hl], a
 	ret
 .asm_71042
-	FuncCoord 18, 0 ; $c3b2
+	FuncCoord 18, 0
 	ld de, Coord
 	inc hl
 	ld a, [hl]
@@ -238,10 +238,10 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	jr z, .asm_71042
 	jp .townMapFlyLoop
 .asm_71052
-	ld hl, $cd3e
+	ld hl, wTrainerEngageDistance
 	jp .townMapFlyLoop
 .asm_71058
-	FuncCoord 19, 0 ; $c3b3
+	FuncCoord 19, 0
 	ld de, Coord
 	dec hl
 	ld a, [hl]
@@ -251,19 +251,19 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	jr z, .asm_71058
 	jp .townMapFlyLoop
 .asm_71068
-	ld hl, $cd49
+	ld hl, wcd49
 	jr .asm_71058
 
 ToText: ; 7106d (1c:506d)
 	db "To@"
 
 Func_71070: ; 71070 (1c:5070)
-	ld hl, wWhichTrade ; $cd3d
+	ld hl, wWhichTrade ; wWhichTrade
 	ld [hl], $ff
 	inc hl
-	ld a, [$d70b]
+	ld a, [W_TOWNVISITEDFLAG]
 	ld e, a
-	ld a, [$d70c]
+	ld a, [W_TOWNVISITEDFLAG + 1]
 	ld d, a
 	ld bc, $b
 .asm_71081
@@ -329,9 +329,9 @@ LoadTownMap: ; 7109b (1c:509b)
 	call Delay3
 	call GBPalNormal
 	xor a
-	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
 	inc a
-	ld [$d09b], a
+	ld [wd09b], a
 	ret
 
 CompressedMap: ; 71100 (1c:5100)
@@ -340,7 +340,7 @@ CompressedMap: ; 71100 (1c:5100)
 
 Func_711ab: ; 711ab (1c:51ab)
 	xor a
-	ld [$d09b], a
+	ld [wd09b], a
 	call GBPalWhiteOut
 	call ClearScreen
 	call ClearSprites
@@ -352,16 +352,16 @@ Func_711ab: ; 711ab (1c:51ab)
 Func_711c4: ; 711c4 (1c:51c4)
 	push af
 	ld a, b
-	ld [$cd5b], a
+	ld [wcd5b], a
 	pop af
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 	call Func_712f1
 	ld a, [de]
 	push hl
 	call Func_71258
 	call Func_7126d
 	pop hl
-	ld de, $cd6d
+	ld de, wcd6d
 .asm_711dc
 	ld a, [hli]
 	ld [de], a
@@ -377,7 +377,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	callba Func_e9cb
 	call Func_712d9
 	ld hl, wOAMBuffer
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 .asm_71200
 	ld a, [de]
 	cp $ff
@@ -402,18 +402,18 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld a, l
 	and a
 	jr nz, .asm_71236
-	FuncCoord 1, 7 ; $c42d
+	FuncCoord 1, 7
 	ld hl, Coord
 	ld b, $2
 	ld c, $f
 	call TextBoxBorder
-	FuncCoord 2, 9 ; $c456
+	FuncCoord 2, 9
 	ld hl, Coord
 	ld de, AreaUnknownText
 	call PlaceString
 	jr .asm_7123e
 .asm_71236
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	ld b, $0
 	call Func_711c4
 .asm_7123e
@@ -442,11 +442,11 @@ Func_71258: ; 71258 (1c:5258)
 	ret
 
 Func_7126d: ; 7126d (1c:526d)
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	and a
-	ld hl, $c390
+	ld hl, wOAMBuffer + $90
 	jr z, Func_71279
-	ld hl, $c380
+	ld hl, wOAMBuffer + $80
 
 Func_71279: ; 71279 (1c:5279)
 	push hl
@@ -466,10 +466,10 @@ Func_71281: ; 71281 (1c:5281)
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	ld [hli], a
 	inc a
-	ld [$cd5b], a
+	ld [wcd5b], a
 	xor a
 	ld [hli], a
 	inc d
@@ -489,7 +489,7 @@ Func_71281: ; 71281 (1c:5281)
 
 Func_712a6: ; 712a6 (1c:52a6)
 	xor a
-	ld [$cd5c], a
+	ld [wcd5c], a
 	ld de, $202
 .asm_712ad
 	push de
@@ -499,12 +499,12 @@ Func_712a6: ; 712a6 (1c:52a6)
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	ld [hli], a
-	ld a, [$cd5c]
+	ld a, [wcd5c]
 	ld [hli], a
 	xor $20
-	ld [$cd5c], a
+	ld [wcd5c], a
 	inc d
 	ld a, $8
 	add c
@@ -514,7 +514,7 @@ Func_712a6: ; 712a6 (1c:52a6)
 	pop bc
 	pop de
 	push hl
-	ld hl, $cd5b
+	ld hl, wcd5b
 	inc [hl]
 	inc [hl]
 	pop hl
@@ -526,7 +526,7 @@ Func_712a6: ; 712a6 (1c:52a6)
 	ret
 
 Func_712d9: ; 712d9 (1c:52d9)
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 .asm_712dc
 	ld a, [de]
 	inc de
@@ -583,7 +583,7 @@ MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
 
 Func_716c6: ; 716c6 (1c:56c6)
-	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	ld a, [W_SUBANIMTRANSFORM] ; W_SUBANIMTRANSFORM
 	inc a
 	cp $19
 	jr z, .asm_716e1
@@ -606,5 +606,5 @@ Func_716c6: ; 716c6 (1c:56c6)
 	jr nz, .asm_716e9
 	ld a, $19
 .asm_716f1
-	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
 	jp DelayFrame

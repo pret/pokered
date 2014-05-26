@@ -5,7 +5,7 @@ OpenOaksPC: ; 1e915 (7:6915)
 	ld hl, GetDexRatedText
 	call PrintText
 	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr nz, .asm_1e932
 	ld a, $56

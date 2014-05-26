@@ -1,8 +1,8 @@
 SSAnne9Script: ; 61b4b (18:5b4b)
 	ld a, $1
-	ld [$cf0c], a
+	ld [wcf0c], a
 	xor a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, SSAnne9TrainerHeaders
 	ld de, SSAnne9ScriptPointers
 	ld a, [W_SSANNE9CURSCRIPT]
@@ -34,7 +34,7 @@ SSAnne9TrainerHeaders: ; 61b84 (18:5b84)
 SSAnne9TrainerHeader0: ; 61b84 (18:5b84)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d807 ; flag's byte
+	dw wd807 ; flag's byte
 	dw SSAnne9BattleText1 ; 0x5c51 TextBeforeBattle
 	dw SSAnne9AfterBattleText1 ; 0x5c5b TextAfterBattle
 	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
@@ -43,7 +43,7 @@ SSAnne9TrainerHeader0: ; 61b84 (18:5b84)
 SSAnne9TrainerHeader1: ; 61b90 (18:5b90)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d807 ; flag's byte
+	dw wd807 ; flag's byte
 	dw SSAnne9BattleText2 ; 0x5c60 TextBeforeBattle
 	dw SSAnne9AfterBattleText2 ; 0x5c6a TextAfterBattle
 	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
@@ -52,7 +52,7 @@ SSAnne9TrainerHeader1: ; 61b90 (18:5b90)
 SSAnne9TrainerHeader2: ; 61b9c (18:5b9c)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d807 ; flag's byte
+	dw wd807 ; flag's byte
 	dw SSAnne9BattleText3 ; 0x5c6f TextBeforeBattle
 	dw SSAnne9AfterBattleText3 ; 0x5c79 TextAfterBattle
 	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
@@ -61,7 +61,7 @@ SSAnne9TrainerHeader2: ; 61b9c (18:5b9c)
 SSAnne9TrainerHeader3: ; 61ba8 (18:5ba8)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d807 ; flag's byte
+	dw wd807 ; flag's byte
 	dw SSAnne9BattleText4 ; 0x5c7e TextBeforeBattle
 	dw SSAnne9AfterBattleText4 ; 0x5c88 TextAfterBattle
 	dw SSAnne9EndBattleText4 ; 0x5c83 TextEndBattle

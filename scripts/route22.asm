@@ -22,7 +22,7 @@ Route22Script7: ; 50ed5 (14:4ed5)
 	ret
 
 Route22Script_50ed6: ; 50ed6 (14:4ed6)
-	ld a, [W_RIVALSTARTER] ; $d715
+	ld a, [W_RIVALSTARTER] ; wd715
 	ld b, a
 .asm_50eda
 	ld a, [hli]
@@ -32,12 +32,12 @@ Route22Script_50ed6: ; 50ed6 (14:4ed6)
 	jr .asm_50eda
 .asm_50ee1
 	ld a, [hl]
-	ld [W_TRAINERNO], a ; $d05d
+	ld [W_TRAINERNO], a ; wd05d
 	ret
 
 Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
 	ld de, Route22RivalMovementData ; $4efb
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_50ef1
 	inc de
@@ -51,21 +51,21 @@ Route22RivalMovementData: ; 50efb (14:4efb)
 	db $C0,$C0,$C0,$C0,$FF ; move right 4 times
 
 Route22Script0: ; 50f00 (14:4f00)
-	ld a, [$d7eb]
+	ld a, [wd7eb]
 	bit 7, a
 	ret z
 	ld hl, .Route22RivalBattleCoords  ; $4f2d
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [$cd3d]
-	ld [$cf0d], a
+	ld a, [wWhichTrade]
+	ld [wcf0d], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [$d528], a
-	ld a, [$d7eb]
+	ld [wd528], a
+	ld a, [wd7eb]
 	bit 0, a ; is this the rival battle at the beginning of the game?
 	jr nz, .firstRivalBattle ; 0x50f25 $b
 	bit 1, a ; is this the rival at the end of the game?
@@ -79,16 +79,16 @@ Route22Script0: ; 50f00 (14:4f00)
 
 .firstRivalBattle
 	ld a, $1
-	ld [$cd4f], a
+	ld [wcd4f], a
 	xor a
-	ld [$cd50], a
+	ld [wcd50], a
 	ld a, $4c
 	call Predef
-	ld a, [$d700]
+	ld a, [wd700]
 	and a
 	jr z, .asm_50f4e ; 0x50f44 $8
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 .asm_50f4e
 	ld c, BANK(Music_MeetRival)
@@ -102,14 +102,14 @@ Route22Script0: ; 50f00 (14:4f00)
 	ret
 
 Route22Script1: ; 50f62 (14:4f62)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_50f78 ; 0x50f6d $9
 	ld a, $4
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $4
 	jr .asm_50f7a ; 0x50f76 $2
 .asm_50f78
@@ -124,7 +124,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText1
@@ -145,10 +145,10 @@ StarterMons_50faf: ; 50faf (14:4faf)
 	db STARTER1,$06
 
 Route22Script2: ; 50fb5 (14:4fb5)
-	ld a, [$d057]
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, Route22Script_50ece
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	and a
 	jr nz, .asm_50fc7 ; 0x50fc1 $4
 	ld a, $4
@@ -162,16 +162,16 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	call Func_34a6
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d7eb
+	ld hl, wd7eb
 	set 5, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_50fff ; 0x50ff8 $5
 	call Route22Script_51008
@@ -201,17 +201,17 @@ Route22RivalExitMovementData2: ; 5101f (14:501f)
 	db $40,$C0,$C0,$C0,$00,$00,$00,$00,$00,$00,$FF
 
 Route22Script3: ; 5102a (14:502a)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $22
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	call Func_2307
-	ld hl, $d7eb
+	ld hl, wd7eb
 	res 0, [hl]
 	res 7, [hl]
 	ld a, $0
@@ -220,20 +220,20 @@ Route22Script3: ; 5102a (14:502a)
 
 Route22Script_5104e: ; 5104e (14:504e)
 	ld a, $2
-	ld [$cd4f], a
+	ld [wcd4f], a
 	xor a
-	ld [$cd50], a
+	ld [wcd50], a
 	ld a, $4c
 	call Predef ; indirect jump to PrintEmotionBubble (17c47 (5:7c47))
-	ld a, [$d700]
+	ld a, [wd700]
 	and a
 	jr z, .skipYVisibilityTesta
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 .skipYVisibilityTesta
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateTempo
 	ld a, $2
@@ -244,21 +244,21 @@ Route22Script_5104e: ; 5104e (14:504e)
 	ret
 
 Route22Script4: ; 51087 (14:5087)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510a1
 	ld a, $4
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $4
 	jr .asm_510a8
 .asm_510a1
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $c
 .asm_510a8
 	ld [$ff8d], a
@@ -268,14 +268,14 @@ Route22Script4: ; 51087 (14:5087)
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText2 ; $51cb
 	ld de, Route22Text_511d0 ; $51d0
 	call PreBattleSaveRegisters
 	ld a, SONY2 + $c8
-	ld [W_CUROPPONENT], a ; $d059
+	ld [W_CUROPPONENT], a ; wd059
 	ld hl, StarterMons_510d9 ; $50d9
 	call Route22Script_50ed6
 	ld a, $5
@@ -288,37 +288,37 @@ StarterMons_510d9: ; 510d9 (14:50d9)
 	db STARTER1,$0c
 
 Route22Script5: ; 510df (14:50df)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, Route22Script_50ece
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510fb
 	ld a, $4
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $4
 	jr .asm_51102
 .asm_510fb
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $c
 .asm_51102
 	ld [$ff8d], a
 	call Func_34a6
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d7eb
+	ld hl, wd7eb
 	set 6, [hl]
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStartAndTempo
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_51134
 	call Route22Script_5113d
@@ -348,17 +348,17 @@ MovementData_5114d: ; 5114d (14:514d)
 	db $80,$80,$80,$FF ; left x3
 
 Route22Script6: ; 51151 (14:5151)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $23
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	call Func_2307
-	ld hl, $d7eb
+	ld hl, wd7eb
 	res 1, [hl]
 	res 7, [hl]
 	ld a, $7
@@ -372,7 +372,7 @@ Route22TextPointers: ; 51175 (14:5175)
 
 Route22Text1: ; 5117b (14:517b)
 	db $08 ; asm
-	ld a, [$d7eb]
+	ld a, [wd7eb]
 	bit 5, a
 	jr z, .asm_a88cf ; 0x51181
 	ld hl, Route22RivalAfterBattleText1
@@ -386,7 +386,7 @@ Route22Text1: ; 5117b (14:517b)
 
 Route22Text2: ; 51194 (14:5194)
 	db $08 ; asm
-	ld a, [$d7eb]
+	ld a, [wd7eb]
 	bit 6, a
 	jr z, .asm_58c0a ; 0x5119a
 	ld hl, Route22RivalAfterBattleText2

@@ -9,19 +9,19 @@ SilphCo2Script: ; 59cf1 (16:5cf1)
 	ret
 
 SilphCo2Script_59d07: ; 59d07 (16:5d07)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, DataTable_59d3e
 	call SilphCo2Script_59d43
 	call SilphCo2Script_59d6f
-	ld a, [$d826]
+	ld a, [wd826]
 	bit 5, a
 	jr nz, .asm_59d2e
 	push af
 	ld a, $54
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0202
 	ld a, $17
 	call Predef
@@ -30,7 +30,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	bit 6, a
 	ret nz
 	ld a, $54
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0502
 	ld a, $17
 	jp Predef
@@ -40,7 +40,7 @@ DataTable_59d3e: ; 59d3e (16:5d3e)
 
 SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	push hl
-	ld hl, $d73f
+	ld hl, wd73f
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -64,7 +64,7 @@ SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_59d4f
-	ld hl, $d73f
+	ld hl, wd73f
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -75,7 +75,7 @@ SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	ret
 
 SilphCo2Script_59d6f: ; 59d6f (16:5d6f)
-	ld hl, $d826
+	ld hl, wd826
 	ld a, [$ffe0]
 	and a
 	ret z
@@ -103,7 +103,7 @@ SilphCo2TrainerHeaders: ; 59d90 (16:5d90)
 SilphCo2TrainerHeader0: ; 59d90 (16:5d90)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d825 ; flag's byte
+	dw wd825 ; flag's byte
 	dw SilphCo2BattleText1 ; 0x5e2a TextBeforeBattle
 	dw SilphCo2AfterBattleText1 ; 0x5e34 TextAfterBattle
 	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
@@ -112,7 +112,7 @@ SilphCo2TrainerHeader0: ; 59d90 (16:5d90)
 SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d825 ; flag's byte
+	dw wd825 ; flag's byte
 	dw SilphCo2BattleText2 ; 0x5e39 TextBeforeBattle
 	dw SilphCo2AfterBattleText2 ; 0x5e43 TextAfterBattle
 	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
@@ -121,7 +121,7 @@ SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
 SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d825 ; flag's byte
+	dw wd825 ; flag's byte
 	dw SilphCo2BattleText3 ; 0x5e48 TextBeforeBattle
 	dw SilphCo2AfterBattleText3 ; 0x5e52 TextAfterBattle
 	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
@@ -130,7 +130,7 @@ SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
 SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d825 ; flag's byte
+	dw wd825 ; flag's byte
 	dw SilphCo2BattleText4 ; 0x5e57 TextBeforeBattle
 	dw SilphCo2AfterBattleText4 ; 0x5e61 TextAfterBattle
 	dw SilphCo2EndBattleText4 ; 0x5e5c TextEndBattle
@@ -140,7 +140,7 @@ SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 
 SilphCo2Text1: ; 59dc1 (16:5dc1)
 	db $08 ; asm
-	ld a, [$d826]
+	ld a, [wd826]
 	bit 7, a
 	jr nz, asm_b8a0d ; 0x59dc7
 	ld hl, SilphCo2Text_59ded
@@ -149,7 +149,7 @@ SilphCo2Text1: ; 59dc1 (16:5dc1)
 	call GiveItem
 	ld hl, TM36NoRoomText
 	jr nc, asm_2c1e0 ; 0x59dd8
-	ld hl, $d826
+	ld hl, wd826
 	set 7, [hl]
 	ld hl, ReceivedTM36Text
 	jr asm_2c1e0 ; 0x59de2

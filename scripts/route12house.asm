@@ -6,19 +6,19 @@ Route12HouseTextPointers: ; 56482 (15:6482)
 
 Route12HouseText1: ; 56484 (15:6484)
 	db $08 ; asm
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 5, a
 	jr nz, .asm_b4cad
 	ld hl, Route12HouseText_564c0
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_a2d76
 	ld bc, (SUPER_ROD << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d728
+	ld hl, wd728
 	set 5, [hl]
 	ld hl, Route12HouseText_564c5
 	jr .asm_df984

@@ -1,5 +1,5 @@
 PrintSafariZoneBattleText: ; 4277 (1:4277)
-	ld hl, $cce9
+	ld hl, wcce9
 	ld a, [hl]
 	and a
 	jr z, .asm_4284
@@ -15,11 +15,11 @@ PrintSafariZoneBattleText: ; 4277 (1:4277)
 	ld hl, SafariZoneAngryText
 	jr nz, .asm_429f
 	push hl
-	ld a, [$cfe5]
-	ld [$d0b5], a
+	ld a, [wcfe5]
+	ld [wd0b5], a
 	call GetMonHeader
 	ld a, [W_MONHCATCHRATE]
-	ld [$d007], a
+	ld [wd007], a
 	pop hl
 .asm_429f
 	push hl

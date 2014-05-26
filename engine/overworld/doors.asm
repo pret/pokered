@@ -1,7 +1,7 @@
 HandleDoors: ; 1a609 (6:6609)
 	push de
 	ld hl, DoorTileIDPointers ; $662c
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	ld de, $3
 	call IsInArray
 	pop de
@@ -10,7 +10,7 @@ HandleDoors: ; 1a609 (6:6609)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	FuncCoord 8, 9 ; $c45c
+	FuncCoord 8, 9
 	ld a, [Coord]
 	ld b, a
 .asm_1a621

@@ -8,7 +8,7 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 
 BikeShopText1: ; 1d745 (7:5745)
 	db $08 ; asm
-	ld a, [$d75f]
+	ld a, [wd75f]
 	bit 0, a
 	jr z, .asm_260d4 ; 0x1d74b
 	ld hl, BikeShopText_1d82f
@@ -26,7 +26,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld a, BIKE_VOUCHER
 	ldh [$db], a
 	callba RemoveItemByID
-	ld hl, $d75f
+	ld hl, wd75f
 	set 0, [hl]
 	ld hl, BikeShopText_1d824
 	call PrintText
@@ -39,28 +39,28 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld hl, BikeShopText_1d810
 	call PrintText
 	xor a
-	ld [$cc26], a
-	ld [$cc2a], a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld a, $3
-	ld [$cc29], a
+	ld [wMenuWatchedKeys], a
 	ld a, $1
-	ld [$cc28], a
+	ld [wMaxMenuItem], a
 	ld a, $2
-	ld [$cc24], a
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [$cc25], a
-	ld hl, $d730
+	ld [wTopMenuItemX], a
+	ld hl, wd730
 	set 6, [hl]
 	ld hl, wTileMap
 	ld b, $4
 	ld c, $f
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord
 	ld de, BikeShopMenuText
 	call PlaceString
-	FuncCoord 8, 3 ; $c3e4
+	FuncCoord 8, 3
 	ld hl, Coord
 	ld de, BikeShopMenuPrice
 	call PlaceString
@@ -69,9 +69,9 @@ BikeShopText1: ; 1d745 (7:5745)
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_b7579 ; 0x1d7dc
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_b7579 ; 0x1d7e7
 	ld hl, BikeShopText_1d81a
@@ -133,7 +133,7 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 
 BikeShopText3: ; 1d848 (7:5848)
 	db $08 ; asm
-	ld a, [$d75f]
+	ld a, [wd75f]
 	bit 0, a
 	ld hl, BikeShopText_1d861
 	jr nz, .asm_34d2d ; 0x1d851

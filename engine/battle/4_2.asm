@@ -1,16 +1,16 @@
 Func_137aa: ; 137aa (4:77aa)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_137eb
-	ld a, [W_ENEMYMONNUMBER] ; $cfe8
-	ld hl, $d8a8
+	ld a, [W_ENEMYMONNUMBER] ; W_ENEMYMONNUMBER
+	ld hl, wd8a8
 	ld bc, $2c
 	call AddNTimes
-	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	ld a, [W_ENEMYMONSTATUS] ; wcfe9
 	ld [hl], a
 	call ClearScreen
 	callab Func_372d6
-	ld a, [$cf0b]
+	ld a, [wcf0b]
 	cp $1
 	ld de, YouWinText
 	jr c, .asm_137de
@@ -18,23 +18,23 @@ Func_137aa: ; 137aa (4:77aa)
 	jr z, .asm_137de
 	ld de, DrawText
 .asm_137de
-	FuncCoord 6, 8 ; $c446
+	FuncCoord 6, 8
 	ld hl, Coord
 	call PlaceString
 	ld c, $c8
 	call DelayFrames
 	jr .asm_1380a
 .asm_137eb
-	ld a, [$cf0b]
+	ld a, [wcf0b]
 	and a
 	jr nz, .asm_13813
-	ld hl, $cce5
+	ld hl, wcce5
 	ld a, [hli]
 	or [hl]
 	inc hl
 	or [hl]
 	jr z, .asm_1380a
-	ld de, wPlayerMoney + 2 ; $d349
+	ld de, wPlayerMoney + 2 ; wd349
 	ld c, $3
 	ld a, $b ; AddBCDPredef
 	call Predef
@@ -42,38 +42,38 @@ Func_137aa: ; 137aa (4:77aa)
 	call PrintText
 .asm_1380a
 	xor a
-	ld [$ccd4], a
+	ld [wccd4], a
 	ld a, $2a
 	call Predef ; indirect jump to Func_3ad1c (3ad1c (e:6d1c))
 .asm_13813
 	xor a
-	ld [$d083], a
-	ld [$c02a], a
-	ld [W_ISINBATTLE], a ; $d057
-	ld [W_BATTLETYPE], a ; $d05a
-	ld [W_MOVEMISSED], a ; $d05f
-	ld [W_CUROPPONENT], a ; $d059
-	ld [$d11f], a
-	ld [$d120], a
-	ld [$d078], a
-	ld hl, $cc2b
+	ld [wd083], a
+	ld [wc02a], a
+	ld [W_ISINBATTLE], a ; W_ISINBATTLE
+	ld [W_BATTLETYPE], a ; wd05a
+	ld [W_MOVEMISSED], a ; W_MOVEMISSED
+	ld [W_CUROPPONENT], a ; wd059
+	ld [wd11f], a
+	ld [wd120], a
+	ld [wd078], a
+	ld hl, wcc2b
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [wListScrollOffset], a ; $cc36
-	ld hl, $d060
+	ld [wListScrollOffset], a ; wcc36
+	ld hl, wd060
 	ld b, $18
 .asm_1383e
 	ld [hli], a
 	dec b
 	jr nz, .asm_1383e
-	ld hl, $d72c
+	ld hl, wd72c
 	set 0, [hl]
 	call WaitForSoundToFinish
 	call GBPalWhiteOut
 	ld a, $ff
-	ld [$d42f], a
+	ld [wd42f], a
 	ret
 
 YouWinText: ; 13853 (4:7853)
@@ -90,10 +90,10 @@ PickUpPayDayMoneyText: ; 1386b (4:786b)
 	db "@"
 
 Func_13870: ; 13870 (4:7870)
-	ld a, [$cc57]
+	ld a, [wcc57]
 	and a
 	ret nz
-	ld a, [$d736]
+	ld a, [wd736]
 	and a
 	ret nz
 	callab Func_c49d
@@ -105,31 +105,31 @@ Func_13870: ; 13870 (4:7870)
 .asm_13888
 	callab Func_128d8
 	jr z, .asm_13884
-	ld a, [$d0db]
+	ld a, [wd0db]
 	and a
 	jr z, .asm_1389e
 	dec a
 	jr z, .asm_13905
-	ld [$d0db], a
+	ld [wd0db], a
 .asm_1389e
-	FuncCoord 9, 9 ; $c45d
+	FuncCoord 9, 9
 	ld hl, Coord
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
-	ld a, [W_GRASSRATE] ; $d887
+	ld a, [W_GRASSRATE] ; W_GRASSRATE
 	jr z, .asm_138c4
 	ld a, $14
 	cp c
-	ld a, [W_WATERRATE] ; $d8a4
+	ld a, [W_WATERRATE] ; wEnemyMon1Species
 	jr z, .asm_138c4
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	cp REDS_HOUSE_1F
 	jr c, .asm_13912
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	cp FOREST ; Viridian Forest/Safari Zone
 	jr z, .asm_13912
-	ld a, [W_GRASSRATE] ; $d887
+	ld a, [W_GRASSRATE] ; W_GRASSRATE
 .asm_138c4
 	ld b, a
 	ld a, [hRandomAdd]
@@ -146,31 +146,31 @@ Func_13870: ; 13870 (4:7870)
 	jr .asm_138d0
 .asm_138d7
 	ld c, [hl]
-	ld hl, W_GRASSMONS ; $d888
-	FuncCoord 8, 9 ; $c45c
+	ld hl, W_GRASSMONS ; wd888
+	FuncCoord 8, 9
 	ld a, [Coord]
 	cp $14
 	jr nz, .asm_138e5
-	ld hl, W_WATERMONS ; $d8a5 (aliases: W_ENEMYMON1HP)
+	ld hl, W_WATERMONS ; wd8a5 (aliases: W_ENEMYMON1HP)
 .asm_138e5
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
-	ld [W_CURENEMYLVL], a ; $d127
+	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, [hl]
-	ld [$cf91], a
+	ld [wcf91], a
 	ld [W_ENEMYMONID], a
-	ld a, [$d0db]
+	ld a, [wd0db]
 	and a
 	jr z, .asm_13916
-	ld a, [W_PARTYMON1_LEVEL] ; $d18c
+	ld a, [W_PARTYMON1_LEVEL] ; W_PARTYMON1_LEVEL
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	cp b
 	jr c, .asm_13912
 	jr .asm_13916
 .asm_13905
-	ld [$d0db], a
+	ld [wd0db], a
 	ld a, $d2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call EnableAutoTextBoxDrawing
@@ -202,14 +202,14 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 RecoilEffect_: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	ld hl, W_PLAYERMONMAXHP ; $d023
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
+	ld hl, W_PLAYERMONMAXHP ; wd023
 	jr z, .asm_1393d
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
+	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
 .asm_1393d
 	ld d, a
-	ld a, [W_DAMAGE] ; $d0d7
+	ld a, [W_DAMAGE] ; W_DAMAGE
 	ld b, a
 	ld a, [W_DAMAGE + 1]
 	ld c, a
@@ -252,17 +252,17 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [hli], a
 	ld [hl], a
 .asm_13982
-	FuncCoord 10, 9 ; $c45e
+	FuncCoord 10, 9
 	ld hl, Coord
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $1
 	jr z, .asm_13990
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord
 	xor a
 .asm_13990
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	ld hl, HitWithRecoilText ; $799e
@@ -312,10 +312,10 @@ HazeEffect_: ; 139da (4:79da)
 	call Func_13a43
 	ld hl, wEnemyMonAttackMod
 	call Func_13a43
-	ld hl, $cd12
+	ld hl, wcd12
 	ld de, W_PLAYERMONATK
 	call Func_13a4a
-	ld hl, $cd26
+	ld hl, wcd26
 	ld de, W_ENEMYMONATTACK
 	call Func_13a4a
 	ld hl, W_ENEMYMONSTATUS
@@ -338,7 +338,7 @@ HazeEffect_: ; 139da (4:79da)
 	xor a
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [W_ENEMYDISABLEDMOVE], a
-	ld hl, $ccee
+	ld hl, wccee
 	ld [hli], a
 	ld [hl], a
 	ld hl, W_PLAYERBATTSTATUS1
@@ -384,25 +384,25 @@ StatusChangesEliminatedText: ; 13a53 (4:7a53)
 	db "@"
 
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE ; $d887
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld hl, W_GRASSRATE ; W_GRASSRATE
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	and a
 	jr nz, .rival
-	ld hl, W_RIVALNAME ; $d34a
-	ld a, [W_TRAINERCLASS] ; $d031
+	ld hl, W_RIVALNAME ; wd34a
+	ld a, [W_TRAINERCLASS] ; wd031
 	cp SONY1
 	jr z, .rival
 	cp SONY2
 	jr z, .rival
 	cp SONY3
 	jr z, .rival
-	ld [$d0b5], a
+	ld [wd0b5], a
 	ld a, TRAINER_NAME
 	ld [W_LISTTYPE], a
 	ld a, $e
-	ld [$d0b7], a
+	ld [wPredefBank], a
 	call GetName
-	ld hl, $cd6d
+	ld hl, wcd6d
 .rival
 	ld de, W_TRAINERNAME
 	ld bc, $d

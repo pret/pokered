@@ -96,7 +96,7 @@ _GaryText_76120:: ; 863ca (21:63ca)
 	line "much since you"
 	cont "first left with"
 	cont "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 
 	para $52, ", you have"

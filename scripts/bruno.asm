@@ -9,11 +9,11 @@ BrunoScript: ; 762d6 (1d:62d6)
 	ret
 
 BrunoScript_762ec: ; 762ec (1d:62ec)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d864]
+	ld a, [wd864]
 	bit 1, a
 	jr z, .asm_76300
 	ld a, $5
@@ -22,7 +22,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 	ld a, $24
 
 BrunoScript_76302: ; 76302 (1d:6302)
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $2
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
@@ -42,7 +42,7 @@ BrunoScriptPointers: ; 76312 (1d:6312)
 BrunoScript4: ; 7631c (1d:631c)
 	ret
 asm_7631d: ; 7631d (1d:631d)
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld a, $40
 	ld [hli], a
 	ld [hli], a
@@ -51,7 +51,7 @@ asm_7631d: ; 7631d (1d:631d)
 	ld [hli], a
 	ld [hl], a
 	ld a, $6
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
@@ -65,12 +65,12 @@ BrunoScript0: ; 76339 (1d:6339)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [$ccd3], a
-	ld [$cd38], a
-	ld a, [wWhichTrade] ; $cd3d
+	ld [wccd3], a
+	ld [wcd38], a
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr c, .asm_7635d
-	ld hl, $d864
+	ld hl, wd864
 	bit 6, [hl]
 	set 6, [hl]
 	jr z, asm_7631d
@@ -79,9 +79,9 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
@@ -96,7 +96,7 @@ CoordsData_7637a: ; 7637a (1d:637a)
 	db $FF
 
 BrunoScript3: ; 76383 (1d:6383)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -108,7 +108,7 @@ BrunoScript3: ; 76383 (1d:6383)
 
 BrunoScript2: ; 76396 (1d:6396)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, BrunoScript_7630d
 	ld a, $1
@@ -123,7 +123,7 @@ BrunoTrainerHeaders: ; 763ac (1d:63ac)
 BrunoTrainerHeader0: ; 763ac (1d:63ac)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d864 ; flag's byte
+	dw wd864 ; flag's byte
 	dw BrunoBeforeBattleText ; 0x63c3 TextBeforeBattle
 	dw BrunoAfterBattleText ; 0x63cd TextAfterBattle
 	dw BrunoEndBattleText ; 0x63c8 TextEndBattle

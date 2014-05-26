@@ -26,7 +26,7 @@ RockTunnel2TrainerHeaders: ; 46014 (11:6014)
 RockTunnel2TrainerHeader0: ; 46014 (11:6014)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText2 ; 0x60c5 TextBeforeBattle
 	dw RockTunnel2AfterBattleText2 ; 0x60cf TextAfterBattle
 	dw RockTunnel2EndBattleText2 ; 0x60ca TextEndBattle
@@ -35,7 +35,7 @@ RockTunnel2TrainerHeader0: ; 46014 (11:6014)
 RockTunnel2TrainerHeader2: ; 46020 (11:6020)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText3 ; 0x60d4 TextBeforeBattle
 	dw RockTunnel2AfterBattleText3 ; 0x60de TextAfterBattle
 	dw RockTunnel2EndBattleText3 ; 0x60d9 TextEndBattle
@@ -44,7 +44,7 @@ RockTunnel2TrainerHeader2: ; 46020 (11:6020)
 RockTunnel2TrainerHeader3: ; 4602c (11:602c)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText4 ; 0x60e3 TextBeforeBattle
 	dw RockTunnel2AfterBattleText4 ; 0x60ed TextAfterBattle
 	dw RockTunnel2EndBattleText4 ; 0x60e8 TextEndBattle
@@ -53,7 +53,7 @@ RockTunnel2TrainerHeader3: ; 4602c (11:602c)
 RockTunnel2TrainerHeader4: ; 46038 (11:6038)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText5 ; 0x60f2 TextBeforeBattle
 	dw RockTunnel2AfterBattleText5 ; 0x60fc TextAfterBattle
 	dw RockTunnel2EndBattleText5 ; 0x60f7 TextEndBattle
@@ -62,7 +62,7 @@ RockTunnel2TrainerHeader4: ; 46038 (11:6038)
 RockTunnel2TrainerHeader5: ; 46044 (11:6044)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText6 ; 0x6101 TextBeforeBattle
 	dw RockTunnel2AfterBattleText6 ; 0x610b TextAfterBattle
 	dw RockTunnel2EndBattleText6 ; 0x6106 TextEndBattle
@@ -71,7 +71,7 @@ RockTunnel2TrainerHeader5: ; 46044 (11:6044)
 RockTunnel2TrainerHeader6: ; 46050 (11:6050)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText7 ; 0x6110 TextBeforeBattle
 	dw RockTunnel2AfterBattleText7 ; 0x611a TextAfterBattle
 	dw RockTunnel2EndBattleText7 ; 0x6115 TextEndBattle
@@ -80,7 +80,7 @@ RockTunnel2TrainerHeader6: ; 46050 (11:6050)
 RockTunnel2TrainerHeader7: ; 4605c (11:605c)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText8 ; 0x611f TextBeforeBattle
 	dw RockTunnel2AfterBattleText8 ; 0x6129 TextAfterBattle
 	dw RockTunnel2EndBattleText8 ; 0x6124 TextEndBattle
@@ -89,7 +89,7 @@ RockTunnel2TrainerHeader7: ; 4605c (11:605c)
 RockTunnel2TrainerHeader8: ; 46068 (11:6068)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d87d ; flag's byte
+	dw wd87d ; flag's byte
 	dw RockTunnel2BattleText9 ; 0x612e TextBeforeBattle
 	dw RockTunnel2AfterBattleText9 ; 0x6138 TextAfterBattle
 	dw RockTunnel2EndBattleText9 ; 0x6133 TextEndBattle

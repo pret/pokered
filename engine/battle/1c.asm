@@ -2,7 +2,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
 	ld [rOBP1], a ; $ff49
 	call Func_7092a
-	FuncCoord 12, 0 ; $c3ac
+	FuncCoord 12, 0
 	ld hl, Coord
 	ld bc, $707
 	call ClearScreenArea
@@ -10,7 +10,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $91
-	ld [$cee9], a
+	ld [wHPBarMaxHP], a
 	ld a, $1
 	ld [H_WHOSETURN], a ; $fff3
 	callab Func_79793
@@ -50,22 +50,22 @@ Func_7092a: ; 7092a (1c:492a)
 	ld bc, $31
 	call CopyVideoData
 	ld a, $10
-	ld [W_BASECOORDY], a ; $d082
+	ld [W_BASECOORDY], a ; wd082
 	ld a, $70
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	ld hl, wOAMBuffer
 	ld bc, $606
 	ld d, $8
 .asm_70948
 	push bc
-	ld a, [W_BASECOORDY] ; $d082
+	ld a, [W_BASECOORDY] ; wd082
 	ld e, a
 .asm_7094d
 	ld a, e
 	add $8
 	ld e, a
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	ld [hli], a
 	ld a, d
 	ld [hli], a
@@ -75,9 +75,9 @@ Func_7092a: ; 7092a (1c:492a)
 	dec c
 	jr nz, .asm_7094d
 	inc d
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	add $8
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	pop bc
 	dec b
 	jr nz, .asm_70948
@@ -90,9 +90,9 @@ Func_7096d: ; 7096d (1c:496d)
 	xor a
 	ld [$ffb0], a
 	dec a
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call DelayFrame
-	ld hl, $c102
+	ld hl, wSpriteStateData1 + 2
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld c, a
 	ld b, $0
@@ -106,7 +106,7 @@ Func_7096d: ; 7096d (1c:496d)
 	add hl, de
 	dec c
 	jr nz, .asm_70989
-	ld hl, $c310
+	ld hl, wOAMBuffer + $10
 	ld c, $9
 .asm_70998
 	ld a, b
@@ -128,7 +128,7 @@ Func_7096d: ; 7096d (1c:496d)
 	call Delay3
 	call LoadBattleTransitionTile
 	ld bc, $0
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr z, .asm_709c9
 	call Func_709e2
@@ -154,7 +154,7 @@ PointerTable_709d2: ; 709d2 (1c:49d2)
 	dw Func_70bca
 
 Func_709e2: ; 709e2 (1c:49e2)
-	ld a, [W_CUROPPONENT] ; $d059
+	ld a, [W_CUROPPONENT] ; wd059
 	cp $c8
 	jr nc, .asm_709ec
 	res 0, c
@@ -164,7 +164,7 @@ Func_709e2: ; 709e2 (1c:49e2)
 	ret
 
 Func_709ef: ; 709ef (1c:49ef)
-	ld hl, W_PARTYMON1_HP ; $d16c
+	ld hl, W_PARTYMON1_HP ; wd16c
 .asm_709f2
 	ld a, [hli]
 	or [hl]
@@ -178,21 +178,21 @@ Func_709ef: ; 709ef (1c:49ef)
 	ld a, [hl]
 	add $3
 	ld e, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	sub e
 	jr nc, .asm_70a12
 	res 1, c
 	ld a, $1
-	ld [$cd47], a
+	ld [wcd47], a
 	ret
 .asm_70a12
 	set 1, c
 	xor a
-	ld [$cd47], a
+	ld [wcd47], a
 	ret
 
 Func_70a19: ; 70a19 (1c:4a19)
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	ld e, a
 	ld hl, MapIDList_70a3f ; $4a3f
 .asm_70a20
@@ -266,20 +266,20 @@ Func_70a69: ; 70a69 (1c:4a69)
 	ret
 
 Func_70a72: ; 70a72 (1c:4a72)
-	ld a, [$cd47]
+	ld a, [wcd47]
 	and a
 	jr z, .asm_70a7d
 	call Func_70aaa
 	jr .asm_70a9f
 .asm_70a7d
-	FuncCoord 10, 10 ; $c472
+	FuncCoord 10, 10
 	ld hl, Coord
 	ld a, $3
-	ld [$d09f], a
+	ld [wd09f], a
 	ld a, l
-	ld [$d09b], a
+	ld [wd09b], a
 	ld a, h
-	ld [$d09a], a
+	ld [wd09a], a
 	ld b, $78
 .asm_70a8f
 	ld c, $3
@@ -295,13 +295,13 @@ Func_70a72: ; 70a72 (1c:4a72)
 .asm_70a9f
 	call Func_70a69
 	xor a
-	ld [$d09b], a
-	ld [$d09a], a
+	ld [wd09b], a
+	ld [wd09a], a
 	ret
 
 Func_70aaa: ; 70aaa (1c:4aaa)
 	ld a, $7
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld hl, wTileMap
 	ld c, $11
 	ld de, $14
@@ -335,13 +335,13 @@ Func_70ae0: ; 70ae0 (1c:4ae0)
 	ld [hl], $ff
 	add hl, de
 	push bc
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	dec a
 	jr nz, .asm_70af0
 	call Func_70d19
 	ld a, $7
 .asm_70af0
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	pop bc
 	dec c
 	jr nz, .asm_70ae1
@@ -351,11 +351,11 @@ Func_70ae0: ; 70ae0 (1c:4ae0)
 Func_70af9: ; 70af9 (1c:4af9)
 	ld bc, $ffec
 	ld de, $14
-	ld a, [$d09b]
+	ld a, [wd09b]
 	ld l, a
-	ld a, [$d09a]
+	ld a, [wd09a]
 	ld h, a
-	ld a, [$d09f]
+	ld a, [wd09f]
 	cp $0
 	jr z, .asm_70b25
 	cp $1
@@ -368,9 +368,9 @@ Func_70af9: ; 70af9 (1c:4af9)
 	ld [hl], $ff
 .asm_70b1c
 	ld a, l
-	ld [$d09b], a
+	ld [wd09b], a
 	ld a, h
-	ld [$d09a], a
+	ld [wd09a], a
 	ret
 .asm_70b25
 	dec hl
@@ -406,13 +406,13 @@ Func_70af9: ; 70af9 (1c:4af9)
 	jr .asm_70b1a
 .asm_70b4d
 	ld [hl], $ff
-	ld a, [$d09f]
+	ld a, [wd09f]
 	inc a
 	cp $4
 	jr nz, .asm_70b58
 	xor a
 .asm_70b58
-	ld [$d09f], a
+	ld [wd09f], a
 	jr .asm_70b1c
 
 Func_70b5d: ; 70b5d (1c:4b5d)
@@ -440,27 +440,27 @@ Func_70b7f: ; 70b7f (1c:4b7f)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 0, 7 ; $c42c
+	FuncCoord 0, 7
 	ld hl, Coord
-	FuncCoord 0, 8 ; $c440
+	FuncCoord 0, 8
 	ld de, Coord
 	ld bc, $ffd8
 	call Func_70c12
-	FuncCoord 0, 10 ; $c468
+	FuncCoord 0, 10
 	ld hl, Coord
-	FuncCoord 0, 9 ; $c454
+	FuncCoord 0, 9
 	ld de, Coord
 	ld bc, $28
 	call Func_70c12
-	FuncCoord 8, 0 ; $c3a8
+	FuncCoord 8, 0
 	ld hl, Coord
-	FuncCoord 9, 0 ; $c3a9
+	FuncCoord 9, 0
 	ld de, Coord
 	ld bc, $fffe
 	call Func_70c3f
-	FuncCoord 11, 0 ; $c3ab
+	FuncCoord 11, 0
 	ld hl, Coord
-	FuncCoord 10, 0 ; $c3aa
+	FuncCoord 10, 0
 	ld de, Coord
 	ld bc, $2
 	call Func_70c3f
@@ -481,24 +481,24 @@ Func_70bca: ; 70bca (1c:4bca)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 .asm_70bcf
 	push bc
-	FuncCoord 0, 16 ; $c4e0
+	FuncCoord 0, 16
 	ld hl, Coord
-	FuncCoord 0, 17 ; $c4f4
+	FuncCoord 0, 17
 	ld de, Coord
 	ld bc, $ffd8
 	call Func_70c12
-	FuncCoord 0, 1 ; $c3b4
+	FuncCoord 0, 1
 	ld hl, Coord
 	ld de, wTileMap
 	ld bc, $28
 	call Func_70c12
-	FuncCoord 18, 0 ; $c3b2
+	FuncCoord 18, 0
 	ld hl, Coord
-	FuncCoord 19, 0 ; $c3b3
+	FuncCoord 19, 0
 	ld de, Coord
 	ld bc, $fffe
 	call Func_70c3f
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
 	ld de, wTileMap
 	ld bc, $2
@@ -514,9 +514,9 @@ Func_70bca: ; 70bca (1c:4bca)
 
 Func_70c12: ; 70c12 (1c:4c12)
 	ld a, c
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld a, b
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld c, $8
 .asm_70c1c
 	push bc
@@ -526,9 +526,9 @@ Func_70c12: ; 70c12 (1c:4c12)
 	call CopyData
 	pop hl
 	pop de
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld b, a
 	add hl, bc
 	pop bc
@@ -546,9 +546,9 @@ Func_70c12: ; 70c12 (1c:4c12)
 
 Func_70c3f: ; 70c3f (1c:4c3f)
 	ld a, c
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld a, b
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld c, $9
 .asm_70c49
 	push bc
@@ -574,9 +574,9 @@ Func_70c3f: ; 70c3f (1c:4c3f)
 	jr nz, .asm_70c4e
 	pop hl
 	pop de
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld b, a
 	add hl, bc
 	pop bc
@@ -596,7 +596,7 @@ Func_70c3f: ; 70c3f (1c:4c3f)
 Func_70c7e: ; 70c7e (1c:4c7e)
 	ld c, $12
 	ld hl, wTileMap
-	FuncCoord 1, 17 ; $c4f5
+	FuncCoord 1, 17
 	ld de, Coord
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -635,7 +635,7 @@ Func_70caa: ; 70caa (1c:4caa)
 Func_70cb4: ; 70cb4 (1c:4cb4)
 	ld c, $14
 	ld hl, wTileMap
-	FuncCoord 19, 1 ; $c3c7
+	FuncCoord 19, 1
 	ld de, Coord
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -736,9 +736,9 @@ Func_70d24: ; 70d24 (1c:4d24)
 	jp Func_70a69
 
 Func_70d50: ; 70d50 (1c:4d50)
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld a, [hli]
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -857,7 +857,7 @@ Func_70dc5: ; 70dc5 (1c:4dc5)
 	inc de
 .asm_70dc9
 	ld [hl], $ff
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	and a
 	jr z, .asm_70dd4
 	inc hl
@@ -868,7 +868,7 @@ Func_70dc5: ; 70dc5 (1c:4dc5)
 	dec c
 	jr nz, .asm_70dc9
 	pop hl
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	and a
 	ld bc, $14
 	jr z, .asm_70de5
@@ -883,7 +883,7 @@ Func_70dc5: ; 70dc5 (1c:4dc5)
 	jr z, Func_70dc5
 	ld c, a
 .asm_70def
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	and a
 	jr z, .asm_70df8
 	dec hl

@@ -13,7 +13,7 @@ _DayCareMText_56414:: ; 8abd4 (22:6bd4)
 _DayCareMText_56419:: ; 8abf0 (22:6bf0)
 	text "Fine, I'll look"
 	line "after @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	cont "for a while."
 	prompt
@@ -25,7 +25,7 @@ _DayCareMText_5641e:: ; 8ac19 (22:6c19)
 
 _DayCareMText_56423:: ; 8ac32 (22:6c32)
 	text "Your @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	line "has grown a lot!"
 
@@ -33,7 +33,7 @@ _DayCareMText_56423:: ; 8ac32 (22:6c32)
 	line "grown by @"
 
 DayCareMText_8ac67:: ; 8ac67 (22:6c67)
-	TX_NUM $cd3e,$1,$3
+	TX_NUM wTrainerEngageDistance,$1,$3
 	text "!"
 
 	para "Aren't I great?"
@@ -57,7 +57,7 @@ _DayCareMText_5642d:: ; 8acae (22:6cae)
 _DayCareMText_56432:: ; 8acc1 (22:6cc1)
 	text "Back already?"
 	line "Your @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	cont "needs some more"
 	cont "time with me."

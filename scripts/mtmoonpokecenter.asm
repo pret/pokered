@@ -23,16 +23,16 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 
 MtMoonPokecenterText4: ; 492ec (12:52ec)
 	db $08 ; asm
-	ld a, [$d7c6]
+	ld a, [wd7c6]
 	add a
 	jp c, .asm_49353
 	ld hl, MtMoonPokecenterText_4935c
 	call PrintText
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .asm_4934e
 	ldh [$9f], a
@@ -49,18 +49,18 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	jr nc, .asm_49359 ; 0x49324
 	xor a
 	ld [wWhichTrade], a
-	ld [$cd3f], a
+	ld [wTrainerFacingDirection], a
 	ld a, $5
-	ld [$cd3e], a
-	ld hl, $cd3f
-	ld de, $d349
+	ld [wTrainerEngageDistance], a
+	ld hl, wTrainerFacingDirection
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	ld hl, $d7c6
+	ld hl, wd7c6
 	set 7, [hl]
 	jr .asm_49359 ; 0x4934c
 .asm_4934e ; 0x4934e

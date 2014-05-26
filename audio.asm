@@ -365,9 +365,9 @@ SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
 PlayBattleMusic:: ; 0x90c6
 	xor a
 	ld [wMusicHeaderPointer], a
-	ld [$d083], a
+	ld [wd083], a
 	dec a
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound ; stop music
 	call DelayFrame
 	ld c, BANK(Music_GymLeaderBattle)
@@ -406,7 +406,7 @@ Music_RivalAlternateStart:: ; 0x9b47
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, $c006
+	ld hl, wc006
 	ld de, Music_MeetRival_branch_b1a2
 	call Music2_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b21d
@@ -425,22 +425,22 @@ Music_RivalAlternateTempo:: ; 0x9b65
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, $c006
+	ld hl, wc006
 	ld de, Music_MeetRival_branch_b119
 	jp Music2_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo:: ; 0x9b75
 	call Music_RivalAlternateStart
-	ld hl, $c006
+	ld hl, wc006
 	ld de, Music_MeetRival_branch_b19b
 	jp Music2_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
 Music_Cities1AlternateTempo:: ; 0x9b81
 	ld a, $a
-	ld [$cfc8], a
-	ld [$cfc9], a
+	ld [wcfc8], a
+	ld [wcfc9], a
 	ld a, $ff
 	ld [wMusicHeaderPointer], a
 	ld c, $64
@@ -448,7 +448,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 	ld c, BANK(Music_Cities1)
 	ld a, MUSIC_CITIES1
 	call PlayMusic
-	ld hl, $c006
+	ld hl, wc006
 	ld de, Music_Cities1_branch_aa6f
 	jp Music2_OverwriteChannelPointer
 
@@ -456,7 +456,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
 
 Func_2136e:: ; 2136e (8:536e)
-	ld a, [$d083]
+	ld a, [wd083]
 	cp $ff
 	jr z, .asm_2139b
 	bit 7, a
@@ -472,18 +472,18 @@ Func_2136e:: ; 2136e (8:536e)
 	call Func_213ac
 .asm_2138a
 	ld a, $86
-	ld [$c02a], a
-	ld a, [$d083]
+	ld [wc02a], a
+	ld a, [wd083]
 	and $7f
 	dec a
 .asm_21395
 	set 7, a
-	ld [$d083], a
+	ld [wd083], a
 	ret
 .asm_2139b
 	xor a
-	ld [$d083], a
-	ld [$c02a], a
+	ld [wd083], a
+	ld [wc02a], a
 	ld de, Unknown_213c4 ; $53c4
 	jr asm_213af
 
@@ -523,7 +523,7 @@ INCLUDE "audio/engine_2.asm"
 Music_PokeFluteInBattle:: ; 22306 (8:6306)
 	ld a, (SFX_08_46 - SFX_Headers_08) / 3 ; PokeFlute outside of battle
 	call PlaySoundWaitForCurrent
-	ld hl, $c00e
+	ld hl, wc00e
 	ld de, SFX_08_PokeFlute_Ch1
 	call Music8_OverwriteChannelPointer
 	ld de, SFX_08_PokeFlute_Ch2
@@ -553,7 +553,7 @@ Func_7d13b:: ; 7d13b (1f:513b)
 .gotSfxPointer
 	push bc
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySoundWaitForCurrent
 	pop bc
 	ld b, $0

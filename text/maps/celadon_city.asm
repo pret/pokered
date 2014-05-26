@@ -42,7 +42,7 @@ _TM41PreText:: ; a5afd (29:5afd)
 _ReceivedTM41Text:: ; a5b5a (29:5b5a)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM41ExplanationText:: ; a5b6e (29:5b6e)

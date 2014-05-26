@@ -8,7 +8,7 @@ HiddenItemNear: ; 7481f (1d:481f)
 	ret nc ; return if current map has no hidden items
 	push bc
 	push hl
-	ld hl, $d6f0
+	ld hl, wd6f0
 	ld c, b
 	ld b, $2
 	ld a, $10 ; FlagActionPredef

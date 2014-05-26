@@ -1,12 +1,12 @@
 Func_128d8: ; 128d8 (4:68d8)
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	ld b, a
-	ld a, [W_CURMAPHEIGHT] ; $d368
+	ld a, [W_CURMAPHEIGHT] ; wd368
 	call Func_128ea
 	ret z
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	ld b, a
-	ld a, [W_CURMAPWIDTH] ; $d369
+	ld a, [W_CURMAPWIDTH] ; wd369
 
 Func_128ea: ; 128ea (4:68ea)
 	add a
@@ -24,11 +24,11 @@ Func_128f6: ; 128f6 (4:68f6)
 	call GetPredefRegisters
 	ld a, $2
 asm_128fb: ; 128fb (4:68fb)
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	push hl
-	ld a, [$cf99]
+	ld a, [wcf99]
 	ld b, a
-	ld a, [$cf9a]
+	ld a, [wcf9a]
 	ld c, a
 	or b
 	jr nz, .asm_12913
@@ -39,9 +39,9 @@ asm_128fb: ; 128fb (4:68fb)
 	ld d, a
 	jp Func_12924
 .asm_12913
-	ld a, [$cfba]
+	ld a, [wcfba]
 	ld d, a
-	ld a, [$cfbb]
+	ld a, [wcfbb]
 	ld e, a
 	ld a, $26
 	call Predef ; indirect jump to UpdateHPBar_LoadRegisters (f9dc (3:79dc))
@@ -65,12 +65,12 @@ Func_12924: ; 12924 (4:6924)
 	ld bc, $15
 .asm_1293a
 	add hl, bc
-	ld de, $cf99
+	ld de, wcf99
 	ld bc, $203
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, $cfba
+	ld de, wcfba
 	ld bc, $203
 	call PrintNumber
 	pop hl

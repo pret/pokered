@@ -9,7 +9,7 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ld a, $5
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	jp Predef
 
@@ -26,7 +26,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	jp z, CeruleanCityScript_1948c
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d75b
+	ld hl, wd75b
 	set 7, [hl]
 	ld a, $2
 	ld [$ff8c], a
@@ -37,13 +37,13 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ret
 
 CeruleanCityScript0: ; 194c8 (6:54c8)
-	ld a, [$d75b]
+	ld a, [wd75b]
 	bit 7, a
 	jr nz, .asm_194f7 ; 0x194cd $28
 	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_194f7 ; 0x194d5 $20
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	cp $1
 	ld a, $8
 	ld b, $0
@@ -51,25 +51,25 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld a, $4
 	ld b, $4
 .asm_194e6
-	ld [$d528], a
+	ld [wd528], a
 	ld a, b
-	ld [$c129], a
+	ld [wSpriteStateData1 + $29], a
 	call Delay3
 	ld a, $2
 	ld [$ff8c], a
 	jp DisplayTextID
 .asm_194f7
-	ld a, [$d75a]
+	ld a, [wd75a]
 	bit 0, a
 	ret nz
 	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [$d700]
+	ld a, [wd700]
 	and a
 	jr z, .asm_19512 ; 0x19508 $8
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 .asm_19512
 	ld c, BANK(Music_MeetRival)
@@ -90,7 +90,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hl], $19
 .asm_19535
 	ld a, $5
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	ld de, CeruleanCityMovement1
@@ -122,7 +122,7 @@ CeruleanCityScript_1955d: ; 1955d (6:555d)
 	jp Func_34a6 ; face object
 
 CeruleanCityScript1: ; 19567 (6:5567)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
@@ -130,7 +130,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, CeruleanCityText_1966d
@@ -163,19 +163,19 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ret
 
 CeruleanCityScript2: ; 195b1 (6:55b1)
-	ld a, [$d057]
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
 	call CeruleanCityScript_1955d
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d75a
+	ld hl, wd75a
 	set 0, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
@@ -203,11 +203,11 @@ CeruleanCityMovement4: ; 19608 (6:5608)
 	db $c0,$00,$00,$00,$00,$00,$00,$FF
 
 CeruleanCityScript3: ; 19610 (6:5610)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $5
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	xor a
@@ -238,7 +238,7 @@ CeruleanCityTextPointers: ; 1962d (6:562d)
 
 CeruleanCityText1: ; 1964f (6:564f)
 	db $08 ; asm
-	ld a, [$d75a] ; rival battle flag
+	ld a, [wd75a] ; rival battle flag
 	bit 0, a
 	; do pre-battle text
 	jr z, .PreBattleText
@@ -270,19 +270,19 @@ CeruleanCityText_19677: ; 19677 (6:5677)
 
 CeruleanCityText2: ; 1967c (6:567c)
 	db $8
-	ld a, [$d75b]
+	ld a, [wd75b]
 	bit 7, a
 	jr nz, .asm_4ca20 ; 0x19682 $29
 	ld hl, CeruleanCityText_196d9
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, CeruleanCityText_196ee
 	ld de, CeruleanCityText_196ee
 	call PreBattleSaveRegisters
 	ld a, [$ff8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4
@@ -299,7 +299,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	jr .Done
 .Success
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, ReceivedTM28Text
 	call PrintText
 	callba Func_74872

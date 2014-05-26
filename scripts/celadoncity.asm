@@ -1,9 +1,9 @@
 CeladonCityScript: ; 19956 (6:5956)
 	call EnableAutoTextBoxDrawing
-	ld hl, $d77e
+	ld hl, wd77e
 	res 0, [hl]
 	res 7, [hl]
-	ld hl, $d816
+	ld hl, wd816
 	res 7, [hl]
 	ret
 
@@ -45,7 +45,7 @@ CeladonCityText4: ; 19999 (6:5999)
 
 CeladonCityText5: ; 1999e (6:599e)
 	db $08 ; asm
-	ld a, [$d777]
+	ld a, [wd777]
 	bit 0, a
 	jr nz, .asm_7053f ; 0x199a4
 	ld hl, TM41PreText
@@ -59,7 +59,7 @@ CeladonCityText5: ; 1999e (6:599e)
 .Success
 	ld hl, ReceivedTM41Text
 	call PrintText
-	ld hl, $d777
+	ld hl, wd777
 	set 0, [hl]
 	jr .Done
 .asm_7053f ; 0x199c9

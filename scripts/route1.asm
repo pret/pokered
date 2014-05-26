@@ -8,7 +8,7 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 
 Route1Text1: ; 1cab8 (7:4ab8)
 	db $08 ; asm
-	ld hl, $d7bf
+	ld hl, wd7bf
 	bit 0, [hl]
 	set 0, [hl]
 	jr nz, .asm_02840 ; 0x1cac0

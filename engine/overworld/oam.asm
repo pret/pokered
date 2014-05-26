@@ -2,13 +2,13 @@ PrepareOAMData:
 ; Determine OAM data for currently visible
 ; sprites and write it to wOAMBuffer.
 
-	ld a, [$cfcb]
+	ld a, [wcfcb]
 	dec a
 	jr z, .asm_4b1e
 
 	cp 0 - 1
 	ret nz
-	ld [$cfcb], a
+	ld [wcfcb], a
 	jp HideSprites
 
 .asm_4b1e
@@ -27,7 +27,7 @@ PrepareOAMData:
 	inc e
 	inc e
 	ld a, [de] ; c1x2 (facing/anim)
-	ld [$d5cd], a
+	ld [wd5cd], a
 	cp $ff ; off-screen (don't draw)
 	jr nz, .visible
 
@@ -92,7 +92,7 @@ PrepareOAMData:
 	push bc
 	ld b, a
 
-	ld a, [$d5cd]            ; temp copy of c1x2
+	ld a, [wd5cd]            ; temp copy of c1x2
 	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
 
@@ -143,7 +143,7 @@ PrepareOAMData:
 	ld h, wOAMBuffer / $100
 	ld de, $4
 	ld b, $a0
-	ld a, [$d736]
+	ld a, [wd736]
 	bit 6, a
 	ld a, $a0
 	jr z, .clear

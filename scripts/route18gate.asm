@@ -1,5 +1,5 @@
 Route18GateScript: ; 49876 (12:5876)
-	ld hl, $d732
+	ld hl, wd732
 	res 5, [hl]
 	call EnableAutoTextBoxDrawing
 	ld a, [W_ROUTE18GATECURSCRIPT]
@@ -23,16 +23,16 @@ Route18GateScript0: ; 4988f (12:588f)
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	cp $1
 	jr z, .asm_498c6 ; 0x498a9 $1b
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	ld b, $0
 	ld c, a
 	ld a, $40
-	ld hl, $ccd3
+	ld hl, wccd3
 	call FillMemory
 	call Func_3486
 	ld a, $1
@@ -51,7 +51,7 @@ CoordsData_498cc: ; 498cc (12:58cc)
 	db $FF
 
 Route18GateScript1: ; 498d5 (12:58d5)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld a, $f0
@@ -62,21 +62,21 @@ Route18GateScript2: ; 498df (12:58df)
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $10
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	ld a, $3
 	ld [W_ROUTE18GATECURSCRIPT], a
 	ret
 
 Route18GateScript3: ; 498f9 (12:58f9)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d730
+	ld hl, wd730
 	res 7, [hl]
 	ld a, $0
 	ld [W_ROUTE18GATECURSCRIPT], a

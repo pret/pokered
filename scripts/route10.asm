@@ -28,7 +28,7 @@ Route10TrainerHeaders: ; 59363 (16:5363)
 Route10TrainerHeader0: ; 59363 (16:5363)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText1 ; 0x53b6 TextBeforeBattle
 	dw Route10AfterBattleText1 ; 0x53c0 TextAfterBattle
 	dw Route10EndBattleText1 ; 0x53bb TextEndBattle
@@ -37,7 +37,7 @@ Route10TrainerHeader0: ; 59363 (16:5363)
 Route10TrainerHeader1: ; 5936f (16:536f)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText2 ; 0x53cf TextBeforeBattle
 	dw Route10AfterBattleText2 ; 0x53d9 TextAfterBattle
 	dw Route10EndBattleText2 ; 0x53d4 TextEndBattle
@@ -46,7 +46,7 @@ Route10TrainerHeader1: ; 5936f (16:536f)
 Route10TrainerHeader2: ; 5937b (16:537b)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText3 ; 0x53e8 TextBeforeBattle
 	dw Route10AfterBattleText3 ; 0x53f2 TextAfterBattle
 	dw Route10EndBattleText3 ; 0x53ed TextEndBattle
@@ -55,7 +55,7 @@ Route10TrainerHeader2: ; 5937b (16:537b)
 Route10TrainerHeader3: ; 59387 (16:5387)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText4 ; 0x5401 TextBeforeBattle
 	dw Route10AfterBattleText4 ; 0x540b TextAfterBattle
 	dw Route10EndBattleText4 ; 0x5406 TextEndBattle
@@ -64,7 +64,7 @@ Route10TrainerHeader3: ; 59387 (16:5387)
 Route10TrainerHeader4: ; 59393 (16:5393)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText5 ; 0x541a TextBeforeBattle
 	dw Route10AfterBattleText5 ; 0x5424 TextAfterBattle
 	dw Route10EndBattleText5 ; 0x541f TextEndBattle
@@ -73,7 +73,7 @@ Route10TrainerHeader4: ; 59393 (16:5393)
 Route10TrainerHeader5: ; 5939f (16:539f)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d7d1 ; flag's byte
+	dw wd7d1 ; flag's byte
 	dw Route10BattleText6 ; 0x5433 TextBeforeBattle
 	dw Route10AfterBattleText6 ; 0x543d TextAfterBattle
 	dw Route10EndBattleText6 ; 0x5438 TextEndBattle

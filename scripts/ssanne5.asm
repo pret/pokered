@@ -23,7 +23,7 @@ SSAnne5TrainerHeaders: ; 616d1 (18:56d1)
 SSAnne5TrainerHeader0: ; 616d1 (18:56d1)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7ff ; flag's byte
+	dw wd7ff ; flag's byte
 	dw SSAnne5BattleText1 ; 0x5703 TextBeforeBattle
 	dw SSAnne5AfterBattleText1 ; 0x570d TextAfterBattle
 	dw SSAnne5EndBattleText1 ; 0x5708 TextEndBattle
@@ -32,7 +32,7 @@ SSAnne5TrainerHeader0: ; 616d1 (18:56d1)
 SSAnne5TrainerHeader1: ; 616dd (18:56dd)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7ff ; flag's byte
+	dw wd7ff ; flag's byte
 	dw SSAnne5BattleText2 ; 0x571c TextBeforeBattle
 	dw SSAnne5AfterBattleText2 ; 0x5726 TextAfterBattle
 	dw SSAnne5EndBattleText2 ; 0x5721 TextEndBattle

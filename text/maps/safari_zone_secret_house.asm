@@ -17,7 +17,7 @@ _SecretHouseText_4a350:: ; 858a4 (21:58a4)
 _ReceivedHM03Text:: ; 85943 (21:5943)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _HM03ExplanationText:: ; 85957 (21:5957)

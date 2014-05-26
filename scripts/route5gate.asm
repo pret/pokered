@@ -10,20 +10,20 @@ Route5GateScriptPointers: ; 1df3f (7:5f3f)
 
 Route5GateScript_1df43: ; 1df43 (7:5f43)
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	jp Func_3486
 
 Route5GateScript0: ; 1df50 (7:5f50)
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 6, a
 	ret nz
 	ld hl, CoordsData_1df8f
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
@@ -41,7 +41,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ld a, $3
 	ld [$ff00+$8c], a
 	call DisplayTextID
-	ld hl, $d728
+	ld hl, wd728
 	set 6, [hl]
 	ret
 
@@ -51,7 +51,7 @@ CoordsData_1df8f: ; 1df8f (7:5f8f)
 	db $ff
 
 Route5GateScript1: ; 1df94 (7:5f94)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -70,7 +70,7 @@ Route7GateText1: ; 1dfaa (7:5faa)
 Route6GateText1: ; 1dfaa (7:5faa)
 Route5GateText1: ; 1dfaa (7:5faa)
 	db $8
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 6, a
 	jr nz, .asm_88856 ; 0x1dfb0 $2c
 	callba RemoveGuardDrink
@@ -86,7 +86,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 .asm_768a2 ; 0x1dfd0
 	ld hl, Route5GateText3
 	call PrintText
-	ld hl, $d728
+	ld hl, wd728
 	set 6, [hl]
 	jp TextScriptEnd
 .asm_88856 ; 0x1dfde

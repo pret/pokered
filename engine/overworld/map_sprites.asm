@@ -4,7 +4,7 @@
 ; This is also called after displaying text because loading
 ; text tile patterns overwrites half of the sprite tile pattern data.
 ; Note on notation:
-; $C1X* and $C2X* are used to denote $C100-$C1FF and $C200-$C2FF sprite slot
+; $C1X* and $C2X* are used to denote wSpriteStateData1-wSpriteStateData1 + $ff and wSpriteStateData2 + $00-wSpriteStateData2 + $ff sprite slot
 ; fields, respectively, within loops. The X is the loop index.
 ; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
 ; denote fields of the sprite slots interated over in the inner loop.
@@ -13,7 +13,7 @@ InitMapSprites: ; 1785b (5:785b)
 	ret c ; return if the map is an outside map (already handled by above call)
 ; if the map is an inside map (i.e. mapID >= $25)
 	ld hl,wSpriteStateData1
-	ld de,$c20d
+	ld de,wSpriteStateData2 + $0d
 ; Loop to copy picture ID's from $C1X0 to $C2XD for LoadMapSpriteTilePatterns.
 .copyPictureIDLoop
 	ld a,[hl] ; $C1X0 (picture ID)
@@ -37,7 +37,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 .spritesExist
 	ld c,a ; c = [W_NUMSPRITES]
 	ld b,$10 ; number of sprite slots
-	ld hl,$c20d
+	ld hl,wSpriteStateData2 + $0d
 	xor a
 	ld [$ff8e],a ; 4-tile sprite counter
 .copyPictureIDLoop ; loop to copy picture ID from $C2XD to $C2XE
@@ -48,9 +48,9 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	ld l,a
 	dec b
 	jr nz,.copyPictureIDLoop
-	ld hl,$c21e
+	ld hl,wSpriteStateData2 + $1e
 .loadTilePatternLoop
-	ld de,$c21d
+	ld de,wSpriteStateData2 + $1d
 ; Check if the current picture ID has already had its tile patterns loaded.
 ; This done by looping through the previous sprite slots and seeing if any of
 ; their picture ID's match that of the current sprite slot.
@@ -70,7 +70,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	ld e,a
 	jr .checkIfAlreadyLoadedLoop
 .notAlreadyLoaded
-	ld de,$c20e
+	ld de,wSpriteStateData2 + $0e
 	ld b,$01
 ; loop to find the highest tile pattern VRAM slot (among the first 10 slots) used by a previous sprite slot
 ; this is done in order to find the first free VRAM slot available
@@ -159,7 +159,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	ld l,e
 	pop de
 	ld b,a
-	ld a,[$cfc4]
+	ld a,[wcfc4]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.skipFirstLoad ; if so, skip loading data into the lower half
 	ld a,b
@@ -180,7 +180,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	jr nc,.noCarry3
 	inc d
 .noCarry3
-	ld a,[$cfc4]
+	ld a,[wcfc4]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadWhileLCDOn
 	pop af
@@ -216,7 +216,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	ld l,a
 	dec c
 	jp nz,.loadTilePatternLoop
-	ld hl,$c20d
+	ld hl,wSpriteStateData2 + $0d
 	ld b,$10
 ; the pictures ID's stored at $C2XD are no longer needed, so zero them
 .zeroStoredPictureIDLoop
@@ -264,7 +264,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	cp a,$f0 ; does the map have 2 sprite sets?
 	call nc,GetSplitMapSpriteSetID ; if so, choose the appropriate one
 	ld b,a ; b = spriteSetID
-	ld a,[$cfc4]
+	ld a,[wcfc4]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadSpriteSet ; if so, forcibly reload the sprite set
 	ld a,[W_SPRITESETID]
@@ -288,7 +288,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	jr nc,.noCarry2
 	inc d
 .noCarry2
-	ld hl,$c20d
+	ld hl,wSpriteStateData2 + $0d
 	ld a,SPRITE_RED
 	ld [hl],a
 	ld bc,W_SPRITESET
@@ -324,7 +324,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	call LoadMapSpriteTilePatterns
 	pop af
 	ld [W_NUMSPRITES],a ; restore number of sprites
-	ld hl,$c21e
+	ld hl,wSpriteStateData2 + $1e
 	ld b,$0f
 ; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
 ; order of the map's sprite set, not the order of the actual sprites loaded
@@ -338,7 +338,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	dec b
 	jr nz,.zeroVRAMSlotsLoop
 .skipLoadingSpriteSet
-	ld hl,$c110
+	ld hl,wSpriteStateData1 + $10
 ; This loop stores the correct VRAM tile pattern slots according the sprite
 ; data from the map's header. Since the VRAM tile pattern slots are filled in
 ; the order of the sprite set, in order to find the VRAM tile pattern slot

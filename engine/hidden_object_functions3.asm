@@ -1,11 +1,11 @@
 ; prints text for bookshelves in buildings without sign events
 PrintBookshelfText: ; fb50 (3:7b50)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	jr nz, .asm_fb7f
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	ld b, a
-	FuncCoord 8, 7 ; $c434
+	FuncCoord 8, 7
 	ld a, [Coord]
 	ld c, a
 	ld hl, BookshelfTileIDs ; $7b8b
@@ -90,7 +90,7 @@ BookOrSculptureText: ; fbe8 (3:7be8)
 	ld a, [W_CURMAPTILESET]
 	cp MANSION ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
-	ld a, [$c420]
+	ld a, [wTileMap + $80]
 	cp $38
 	jr nz, .asm_fbfd
 	ld hl, DiglettSculptureText
@@ -115,8 +115,8 @@ TownMapText: ; fc12 (3:7c12)
 	db $06
 	db $08 ; asm
 	ld a, $1
-	ld [$cc3c], a
-	ld hl, $d730
+	ld [wcc3c], a
+	ld hl, wd730
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	xor a
@@ -125,7 +125,7 @@ TownMapText: ; fc12 (3:7c12)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call LoadFontTilePatterns
 	callba DisplayTownMap
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ld de, TextScriptEnd
 	push de

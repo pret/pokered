@@ -15,7 +15,7 @@ _Route1ViridianMartSampleText:: ; 8d5bf (23:55bf)
 _Route1Text_1cae8:: ; 8d643 (23:5643)
 	text $52, " got"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _Route1Text_1caee:: ; 8d652 (23:5652)

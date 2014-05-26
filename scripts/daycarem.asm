@@ -13,20 +13,20 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareMText_5640f
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, DayCareMText_5643b
 	jp nz, DayCareMScript_56409
-	ld a, [$d163]
+	ld a, [W_NUMINPARTY]
 	dec a
 	ld hl, DayCareMText_56445
 	jp z, DayCareMScript_56409
 	ld hl, DayCareMText_56414
 	call PrintText
 	xor a
-	ld [$cfcb], a
-	ld [$d07d], a
-	ld [$cc35], a
+	ld [wcfcb], a
+	ld [wd07d], a
+	ld [wcc35], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
@@ -39,21 +39,21 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareMText_5644a
 	jp c, DayCareMScript_56409
 	xor a
-	ld [$cc2b], a
+	ld [wcc2b], a
 	ld a, [wWhichPokemon]
-	ld hl, $d2b5
+	ld hl, W_PARTYMON1NAME
 	call GetPartyMonName
 	ld hl, DayCareMText_56419
 	call PrintText
 	ld a, $1
 	ld [W_DAYCARE_IN_USE], a
 	ld a, $3
-	ld [$cf95], a
+	ld [wcf95], a
 	call Func_3a68
 	xor a
-	ld [$cf95], a
+	ld [wcf95], a
 	call RemovePokemon
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call PlayCry
 	ld hl, DayCareMText_5641e
 	jp DayCareMScript_56409
@@ -63,7 +63,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld hl, W_DAYCAREMONNAME
 	call GetPartyMonName
 	ld a, $3
-	ld [$cc49], a
+	ld [wcc49], a
 	call LoadMonData
 	callab Func_58f43
 	ld a, d
@@ -71,7 +71,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	jr c, .asm_56315
 	ld d, $64
 	callab CalcExperience
-	ld hl, $da6d
+	ld hl, wda6d
 	ld a, [H_NUMTOPRINT]
 	ld [hli], a
 	ld a, [$ff97]
@@ -83,7 +83,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 .asm_56315
 	xor a
 	ld [wTrainerEngageDistance], a
-	ld hl, $da62
+	ld hl, wda62
 	ld a, [hl]
 	ld [wTrainerSpriteOffset], a
 	cp d
@@ -130,7 +130,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld hl, DayCareMText_56428
 	call PrintText
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld hl, DayCareMText_56437
@@ -154,22 +154,22 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld hl, wTrainerEngageDistance
 	ld [hli], a
 	inc hl
-	ld de, $d349
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	ld hl, DayCareMText_5644f
 	call PrintText
 	ld a, $2
-	ld [$cf95], a
+	ld [wcf95], a
 	call Func_3a68
 	ld a, [W_DAYCAREMONDATA]
-	ld [$cf91], a
+	ld [wcf91], a
 	ld a, [W_NUMINPARTY]
 	dec a
 	push af
@@ -196,14 +196,14 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call PlayCry
 	ld hl, DayCareMText_5642d
 	jr DayCareMScript_56409
 
 .asm_56403
 	ld a, [wTrainerSpriteOffset]
-	ld [$da62], a
+	ld [wda62], a
 
 DayCareMScript_56409: ; 56409 (15:6409)
 	call PrintText

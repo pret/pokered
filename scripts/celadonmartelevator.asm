@@ -1,5 +1,5 @@
 CeladonMartElevatorScript: ; 48600 (12:4600)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
@@ -9,16 +9,16 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	res 7, [hl]
 	call nz, CeladonMartElevatorScript_48654
 	xor a
-	ld [$cf0c], a
+	ld [wcf0c], a
 	inc a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ret
 
 CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
-	ld hl, $d3af
-	ld a, [$d73b]
+	ld hl, wd3af
+	ld a, [wd73b]
 	ld b, a
-	ld a, [$d73c]
+	ld a, [wd73c]
 	ld c, a
 	call CeladonMartElevatorScript_4862a
 
@@ -35,7 +35,7 @@ CeladonMartElevatorScript_48631: ; 48631 (12:4631)
 	ld hl, CeladonMartElavatorFloors ; $4643
 	call LoadItemList
 	ld hl, CeldaonMartElevatorWarpMaps ; $464a
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $000a
 	jp CopyData
 

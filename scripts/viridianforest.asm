@@ -32,7 +32,7 @@ ViridianForestTrainerHeaders: ; 61142 (18:5142)
 ViridianForestTrainerHeader0: ; 61142 (18:5142)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f3 ; flag's byte
+	dw wd7f3 ; flag's byte
 	dw ViridianForestBattleText1 ; 0x518a TextBeforeBattle
 	dw ViridianForestAfterBattleText1 ; 0x5194 TextAfterBattle
 	dw ViridianForestEndBattleText1 ; 0x518f TextEndBattle
@@ -41,7 +41,7 @@ ViridianForestTrainerHeader0: ; 61142 (18:5142)
 ViridianForestTrainerHeader1: ; 6114e (18:514e)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f3 ; flag's byte
+	dw wd7f3 ; flag's byte
 	dw ViridianForestBattleText2 ; 0x5199 TextBeforeBattle
 	dw ViridianForestAfterBattleText2 ; 0x51a3 TextAfterBattle
 	dw ViridianForestEndBattleText2 ; 0x519e TextEndBattle
@@ -50,7 +50,7 @@ ViridianForestTrainerHeader1: ; 6114e (18:514e)
 ViridianForestTrainerHeader2: ; 6115a (18:515a)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7f3 ; flag's byte
+	dw wd7f3 ; flag's byte
 	dw ViridianForestBattleText3 ; 0x51a8 TextBeforeBattle
 	dw ViridianForestAfterBattleText3 ; 0x51b2 TextAfterBattle
 	dw ViridianForestEndBattleText3 ; 0x51ad TextEndBattle

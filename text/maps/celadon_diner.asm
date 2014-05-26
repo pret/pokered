@@ -44,7 +44,7 @@ _CeladonDinerText_491a7:: ; 9e003 (27:6003)
 _ReceivedCoinCaseText:: ; 9e07a (27:607a)
 	text $52, " received"
 	line "a @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _CoinCaseNoRoomText:: ; 9e090 (27:6090)

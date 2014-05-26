@@ -1,11 +1,11 @@
 SetDefaultNames: ; 60ca (1:60ca)
-	ld a, [$d358]
+	ld a, [wd358]
 	push af
-	ld a, [W_OPTIONS] ; $d355
+	ld a, [W_OPTIONS] ; W_OPTIONS
 	push af
-	ld a, [$d732]
+	ld a, [wd732]
 	push af
-	ld hl, W_PLAYERNAME ; $d158
+	ld hl, W_PLAYERNAME ; wd158
 	ld bc, $d8a
 	xor a
 	call FillMemory
@@ -14,20 +14,20 @@ SetDefaultNames: ; 60ca (1:60ca)
 	xor a
 	call FillMemory
 	pop af
-	ld [$d732], a
+	ld [wd732], a
 	pop af
-	ld [W_OPTIONS], a ; $d355
+	ld [W_OPTIONS], a ; W_OPTIONS
 	pop af
-	ld [$d358], a
-	ld a, [$d08a]
+	ld [wd358], a
+	ld a, [wd08a]
 	and a
 	call z, Func_5bff
 	ld hl, NintenText
-	ld de, W_PLAYERNAME ; $d158
+	ld de, W_PLAYERNAME ; wd158
 	ld bc, $b
 	call CopyData
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; $d34a
+	ld de, W_RIVALNAME ; wd34a
 	ld bc, $b
 	jp CopyData
 
@@ -43,18 +43,18 @@ OakSpeech: ; 6115 (1:6115)
 	call SetDefaultNames
 	ld a,$18
 	call Predef ; indirect jump to InitializePlayerData
-	ld hl,$D53A
+	ld hl,wNumBoxItems
 	ld a,POTION
-	ld [$CF91],a
+	ld [wcf91],a
 	ld a,1
-	ld [$CF96],a
+	ld [wcf96],a
 	call AddItemToInventory  ; give one potion
-	ld a,[$D07C]
-	ld [$D71A],a
+	ld a,[W_ANIMATIONID]
+	ld [wd71a],a
 	call Func_62ce
 	xor a
 	ld [$FFD7],a
-	ld a,[$D732]
+	ld a,[wd732]
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Func_61bc ; easter egg: skip the intro
 	ld de,ProfOakPic
@@ -66,10 +66,10 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOut2
 	call ClearScreen
 	ld a,NIDORINO
-	ld [$D0B5],a    ; pic displayed is stored at this location
-	ld [$CF91],a
+	ld [wd0b5],a    ; pic displayed is stored at this location
+	ld [wcf91],a
 	call GetMonHeader      ; this is also related to the pic
-	FuncCoord 6, 4 ; $c3f6
+	FuncCoord 6, 4
 	ld hl,Coord     ; position on tilemap the pic is displayed
 	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
 	call MovePicLeft
@@ -101,7 +101,7 @@ Func_61bc: ; 61bc (1:61bc)
 	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B
 	call GBFadeIn2
-	ld a,[$D72D]
+	ld a,[wd72d]
 	and a
 	jr nz,.next
 	ld hl,OakSpeechText3
@@ -132,26 +132,26 @@ Func_61bc: ; 61bc (1:61bc)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,2
-	ld [$C0EF],a
-	ld [$C0F0],a
+	ld [wc0ef],a
+	ld [wc0f0],a
 	ld a,$A
 	ld [wMusicHeaderPointer],a
 	ld a,$FF
-	ld [$C0EE],a
+	ld [wc0ee],a
 	call PlaySound ; stop music
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	ld c,$14
 	call DelayFrames
-	FuncCoord 6, 5 ; $c40a
+	FuncCoord 6, 5
 	ld hl,Coord
 	ld b,7
 	ld c,7
 	call ClearScreenArea
 	call LoadTextBoxTilePatterns
 	ld a,1
-	ld [$CFCB],a
+	ld [wcfcb],a
 	ld c,$32
 	call DelayFrames
 	call GBFadeOut2
@@ -226,10 +226,10 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	pop bc
 	ld a,c
 	and a
-	FuncCoord 15, 1 ; $c3c3
+	FuncCoord 15, 1
 	ld hl,Coord
 	jr nz,.next
-	FuncCoord 6, 4 ; $c3f6
+	FuncCoord 6, 4
 	ld hl,Coord
 .next
 	xor a

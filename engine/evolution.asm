@@ -2,15 +2,15 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	push hl
 	push de
 	push bc
-	ld a, [$cf91]
+	ld a, [wcf91]
 	push af
-	ld a, [$d0b5]
+	ld a, [wd0b5]
 	push af
 	xor a
-	ld [$d083], a
-	ld [$c02a], a
+	ld [wd083], a
+	ld [wc02a], a
 	dec a
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -20,25 +20,25 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld [$ffd7], a
-	ld a, [$cee9]
-	ld [$cf1d], a
+	ld a, [wHPBarMaxHP]
+	ld [wcf1d], a
 	ld c, $0
 	call Func_7beb4
-	ld a, [$ceea]
-	ld [$cf91], a
-	ld [$d0b5], a
+	ld a, [wHPBarMaxHP + 1]
+	ld [wcf91], a
+	ld [wd0b5], a
 	call Func_7beb9
 	ld de, $9000
 	ld hl, $9310
 	ld bc, $31
 	call CopyVideoData
-	ld a, [$cee9]
-	ld [$cf91], a
-	ld [$d0b5], a
+	ld a, [wHPBarMaxHP]
+	ld [wcf91], a
+	ld [wd0b5], a
 	call Func_7beb9
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [$cee9]
+	ld a, [wHPBarMaxHP]
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
@@ -60,28 +60,28 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	dec c
 	jr nz, .asm_7be63
 	xor a
-	ld [$ceec], a
+	ld [wHPBarOldHP + 1], a
 	ld a, $31
-	ld [$ceeb], a
+	ld [wHPBarOldHP], a
 	call Func_7bed6
-	ld a, [$ceea]
+	ld a, [wHPBarMaxHP + 1]
 .asm_7be81
-	ld [$cf1d], a
+	ld [wcf1d], a
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
-	ld a, [$cf1d]
+	ld a, [wcf1d]
 	call PlayCry
 	ld c, $0
 	call Func_7beb4
 	pop af
-	ld [$d0b5], a
+	ld [wd0b5], a
 	pop af
-	ld [$cf91], a
+	ld [wcf91], a
 	pop bc
 	pop de
 	pop hl
-	ld a, [$ceec]
+	ld a, [wHPBarOldHP + 1]
 	and a
 	ret z
 	scf
@@ -89,8 +89,8 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 .asm_7bea9
 	pop bc
 	ld a, $1
-	ld [$ceec], a
-	ld a, [$cee9]
+	ld [wHPBarOldHP + 1], a
+	ld a, [wHPBarMaxHP]
 	jr .asm_7be81
 
 Func_7beb4: ; 7beb4 (1e:7eb4)
@@ -99,15 +99,15 @@ Func_7beb4: ; 7beb4 (1e:7eb4)
 
 Func_7beb9: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
-	FuncCoord 7, 2 ; $c3cf
+	FuncCoord 7, 2
 	ld hl, Coord
 	jp LoadFlippedFrontSpriteByMonIndex
 asm_7bec2: ; 7bec2 (1e:7ec2)
 	ld a, $31
-	ld [$ceeb], a
+	ld [wHPBarOldHP], a
 	call Func_7bed6
 	ld a, $cf
-	ld [$ceeb], a
+	ld [wHPBarOldHP], a
 	call Func_7bed6
 	dec b
 	jr nz, asm_7bec2
@@ -117,14 +117,14 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 7, 2 ; $c3cf
+	FuncCoord 7, 2
 	ld hl, Coord
 	ld bc, $707
 	ld de, $d
 .asm_7bee3
 	push bc
 .asm_7bee4
-	ld a, [$ceeb]
+	ld a, [wHPBarOldHP]
 	add [hl]
 	ld [hli], a
 	dec c
@@ -152,7 +152,7 @@ asm_7befa: ; 7befa (1e:7efa)
 	and a
 	ret
 .asm_7bf0d
-	ld a, [$ccd4]
+	ld a, [wccd4]
 	and a
 	jr nz, .asm_7bf08
 	scf

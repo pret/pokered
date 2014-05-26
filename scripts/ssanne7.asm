@@ -3,10 +3,10 @@ SSAnne7Script: ; 61895 (18:5895)
 	jp EnableAutoTextBoxDrawing
 
 SSAnne7Script_6189b: ; 6189b (18:589b)
-	ld a, [$d803]
+	ld a, [wd803]
 	bit 1, a
 	ret nz
-	ld hl, $d72d
+	ld hl, wd72d
 	set 5, [hl]
 	ret
 
@@ -17,7 +17,7 @@ SSAnne7TextPointers: ; 618a7 (18:58a7)
 
 SSAnne7Text1: ; 618ad (18:58ad)
 	db $08 ; asm
-	ld a, [$d803]
+	ld a, [wd803]
 	bit 0, a
 	jr nz, .asm_797c4 ; 0x618b3
 	ld hl, SSAnne7RubText
@@ -29,13 +29,13 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	jr nc, .BagFull
 	ld hl, ReceivedHM01Text
 	call PrintText
-	ld hl, $d803
+	ld hl, wd803
 	set 0, [hl]
 	jr .asm_0faf5 ; 0x618d4
 .BagFull
 	ld hl, HM01NoRoomText
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 5, [hl]
 	jr .asm_0faf5 ; 0x618e1
 .asm_797c4 ; 0x618e3
@@ -47,27 +47,27 @@ SSAnne7Text1: ; 618ad (18:58ad)
 SSAnne7RubText: ; 618ec (18:58ec)
 	TX_FAR _SSAnne7RubText
 	db $8
-	ld a, [$c0ef]
+	ld a, [wc0ef]
 	cp $1f
-	ld [$c0f0], a
+	ld [wc0f0], a
 	jr nz, .asm_61908 ; 0x618f9 $d
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld a, Bank(Func_9876)
-	ld [$c0ef], a
+	ld [wc0ef], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 .asm_61910
-	ld a, [$c026]
+	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
 	jr z, .asm_61910 ; 0x61915 $f9
 	call Func_2307
-	ld hl, $d803
+	ld hl, wd803
 	set 1, [hl]
-	ld hl, $d72d
+	ld hl, wd72d
 	res 5, [hl]
 	jp TextScriptEnd
 

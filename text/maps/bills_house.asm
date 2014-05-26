@@ -56,7 +56,7 @@ _BillThankYouText:: ; 8d3f5 (23:53f5)
 _SSTicketReceivedText:: ; 8d499 (23:5499)
 	text $52, " received"
 	line "an @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _SSTicketNoRoomText:: ; 8d4b0 (23:54b0)

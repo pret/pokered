@@ -21,7 +21,7 @@ Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script3
 
 Route12Script0: ; 59619 (16:5619)
-	ld hl, $d7d8
+	ld hl, wd7d8
 	bit 7, [hl]
 	jp nz, CheckFightingMapTrainers
 	bit 6, [hl]
@@ -31,11 +31,11 @@ Route12Script0: ; 59619 (16:5619)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, SNORLAX
-	ld [W_CUROPPONENT], a ; $d059
+	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
-	ld [W_CURENEMYLVL], a ; $d127
+	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, $1d
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $3
@@ -44,18 +44,18 @@ Route12Script0: ; 59619 (16:5619)
 	ret
 
 Route12Script3: ; 5964c (16:564c)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jr z, Route12Script_59606
 	call UpdateSprites
-	ld a, [$cf0b]
+	ld a, [wcf0b]
 	cp $2
 	jr z, .asm_59664
 	ld a, $e
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_59664
-	ld hl, $d7d8
+	ld hl, wd7d8
 	set 7, [hl]
 	call Delay3
 	ld a, $0
@@ -83,7 +83,7 @@ Route12TrainerHeaders: ; 59691 (16:5691)
 Route12TrainerHeader0: ; 59691 (16:5691)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText1 ; 0x56ff TextBeforeBattle
 	dw Route12AfterBattleText1 ; 0x5709 TextAfterBattle
 	dw Route12EndBattleText1 ; 0x5704 TextEndBattle
@@ -92,7 +92,7 @@ Route12TrainerHeader0: ; 59691 (16:5691)
 Route12TrainerHeader1: ; 5969d (16:569d)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText2 ; 0x5718 TextBeforeBattle
 	dw Route12AfterBattleText2 ; 0x5722 TextAfterBattle
 	dw Route12EndBattleText2 ; 0x571d TextEndBattle
@@ -101,7 +101,7 @@ Route12TrainerHeader1: ; 5969d (16:569d)
 Route12TrainerHeader2: ; 596a9 (16:56a9)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText3 ; 0x5731 TextBeforeBattle
 	dw Route12AfterBattleText3 ; 0x573b TextAfterBattle
 	dw Route12EndBattleText3 ; 0x5736 TextEndBattle
@@ -110,7 +110,7 @@ Route12TrainerHeader2: ; 596a9 (16:56a9)
 Route12TrainerHeader3: ; 596b5 (16:56b5)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText4 ; 0x574a TextBeforeBattle
 	dw Route12AfterBattleText4 ; 0x5754 TextAfterBattle
 	dw Route12EndBattleText4 ; 0x574f TextEndBattle
@@ -119,7 +119,7 @@ Route12TrainerHeader3: ; 596b5 (16:56b5)
 Route12TrainerHeader4: ; 596c1 (16:56c1)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText5 ; 0x5763 TextBeforeBattle
 	dw Route12AfterBattleText5 ; 0x576d TextAfterBattle
 	dw Route12EndBattleText5 ; 0x5768 TextEndBattle
@@ -128,7 +128,7 @@ Route12TrainerHeader4: ; 596c1 (16:56c1)
 Route12TrainerHeader5: ; 596cd (16:56cd)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText6 ; 0x577c TextBeforeBattle
 	dw Route12AfterBattleText6 ; 0x5786 TextAfterBattle
 	dw Route12EndBattleText6 ; 0x5781 TextEndBattle
@@ -137,7 +137,7 @@ Route12TrainerHeader5: ; 596cd (16:56cd)
 Route12TrainerHeader6: ; 596d9 (16:56d9)
 	db $8 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7d7 ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText7 ; 0x5795 TextBeforeBattle
 	dw Route12AfterBattleText7 ; 0x579f TextAfterBattle
 	dw Route12EndBattleText7 ; 0x579a TextEndBattle

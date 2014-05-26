@@ -1,15 +1,15 @@
 LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	callab MoveHitTest
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr nz, .asm_2bee7
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
-	ld de, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
+	ld de, W_ENEMYMONTYPE1 ; wcfea (aliases: W_ENEMYMONTYPES)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_2bec8
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
-	ld de, W_PLAYERMONTYPE1 ; $d019 (aliases: W_PLAYERMONTYPES)
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
+	ld de, W_PLAYERMONTYPE1 ; wd019 (aliases: W_PLAYERMONTYPES)
 .asm_2bec8
 	ld a, [de]
 	cp GRASS

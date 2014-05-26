@@ -9,11 +9,11 @@ Mansion3Script: ; 521ee (14:61ee)
 	ret
 
 Mansion3Script_52204: ; 52204 (14:6204)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d796]
+	ld a, [wd796]
 	bit 0, a
 	jr nz, .asm_52224
 	ld a, $e
@@ -40,7 +40,7 @@ Mansion3ScriptPointers: ; 52235 (14:6235)
 Mansion3Script0: ; 5223b (14:623b)
 	ld hl, CoordsData_52254
 	call Mansion3Script_5225b
-	ld a, [$d71e]
+	ld a, [wd71e]
 	and a
 	jp z, CheckFightingMapTrainers
 	cp $3
@@ -48,7 +48,7 @@ Mansion3Script0: ; 5223b (14:623b)
 	jr nz, .asm_52250
 	ld a, $d6
 .asm_52250
-	ld [$d71d], a
+	ld [wd71d], a
 	ret
 
 CoordsData_52254: ; 52254 (14:6254)
@@ -59,22 +59,22 @@ CoordsData_52254: ; 52254 (14:6254)
 
 Mansion3Script_5225b: ; 5225b (14:625b)
 	xor a
-	ld [$d71e], a
-	ld a, [$d72d]
+	ld [wd71e], a
+	ld a, [wd72d]
 	bit 4, a
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade] ; $cd3d
-	ld [$d71e], a
-	ld hl, $d72d
+	ld a, [wWhichTrade] ; wWhichTrade
+	ld [wd71e], a
+	ld hl, wd72d
 	set 4, [hl]
-	ld hl, $d732
+	ld hl, wd732
 	set 4, [hl]
 	ret
 
 Mansion3Script_Switches: ; 5227a (14:627a)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	xor a
@@ -95,7 +95,7 @@ Mansion3TrainerHeaders: ; 52296 (14:6296)
 Mansion3TrainerHeader0: ; 52296 (14:6296)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d849 ; flag's byte
+	dw wd849 ; flag's byte
 	dw Mansion3BattleText1 ; 0x62c3 TextBeforeBattle
 	dw Mansion3AfterBattleText1 ; 0x62cd TextAfterBattle
 	dw Mansion3EndBattleText1 ; 0x62c8 TextEndBattle
@@ -104,7 +104,7 @@ Mansion3TrainerHeader0: ; 52296 (14:6296)
 Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d849 ; flag's byte
+	dw wd849 ; flag's byte
 	dw Mansion3BattleText2 ; 0x62d2 TextBeforeBattle
 	dw Mansion3AfterBattleText2 ; 0x62dc TextAfterBattle
 	dw Mansion3EndBattleText2 ; 0x62d7 TextEndBattle

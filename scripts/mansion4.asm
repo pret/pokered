@@ -9,11 +9,11 @@ Mansion4Script: ; 523b9 (14:63b9)
 	ret
 
 Mansion4Script_523cf: ; 523cf (14:63cf)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d796]
+	ld a, [wd796]
 	bit 0, a
 	jr nz, .asm_523ff
 	ld a, $e
@@ -45,7 +45,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	ret
 
 Mansion4Script_Switches: ; 52420 (14:6420)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	xor a
@@ -74,7 +74,7 @@ Mansion4TrainerHeaders: ; 52448 (14:6448)
 Mansion4TrainerHeader0: ; 52448 (14:6448)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d84b ; flag's byte
+	dw wd84b ; flag's byte
 	dw Mansion4BattleText1 ; 0x6475 TextBeforeBattle
 	dw Mansion4AfterBattleText1 ; 0x647f TextAfterBattle
 	dw Mansion4EndBattleText1 ; 0x647a TextEndBattle
@@ -83,7 +83,7 @@ Mansion4TrainerHeader0: ; 52448 (14:6448)
 Mansion4TrainerHeader2: ; 52454 (14:6454)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d84b ; flag's byte
+	dw wd84b ; flag's byte
 	dw Mansion4BattleText2 ; 0x6484 TextBeforeBattle
 	dw Mansion4AfterBattleText2 ; 0x648e TextAfterBattle
 	dw Mansion4EndBattleText2 ; 0x6489 TextEndBattle

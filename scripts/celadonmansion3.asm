@@ -30,7 +30,7 @@ DirectorText: ; 487b2 (12:47b2)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [$d11e]
+	ld a, [wd11e]
 	cp 150
 	jr nc, .CompletedDex
 	ld hl, .GameDesigner
@@ -51,7 +51,7 @@ DirectorText: ; 487b2 (12:47b2)
 	db $8 ; asm
 	callab DisplayDiploma
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	jp TextScriptEnd
 
 GameFreakPCText1: ; 487eb (12:47eb)

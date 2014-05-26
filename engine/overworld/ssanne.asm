@@ -1,10 +1,10 @@
 Func_79f54: ; 79f54 (1e:5f54)
 	ld a, $1
-	ld [$cd50], a
-	ld a, [$cfcb]
+	ld [wcd50], a
+	ld a, [wcfcb]
 	push af
 	ld a, $ff
-	ld [$cfcb], a
+	ld [wcfcb], a
 	ld a, $e4
 	ld [rOBP1], a ; $ff49
 	call LoadSmokeTileFourTimes
@@ -26,24 +26,24 @@ Func_79f54: ; 79f54 (1e:5f54)
 	dec c
 	jr nz, .asm_79f73
 	pop af
-	ld [$cfcb], a
+	ld [wcfcb], a
 	jp LoadPlayerSpriteGraphics
 
 Func_79f92: ; 79f92 (1e:5f92)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	ld hl, PointerTable_79fb0 ; $5fb0
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
-	ld [$d08a], a
+	ld [wd08a], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, $c390
+	ld hl, wOAMBuffer + $90
 	ld d, $0
 	add hl, de
 	ld e, l

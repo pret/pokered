@@ -6,22 +6,22 @@ Route23Script: ; 511da (14:51da)
 	jp CallFunctionInTable
 
 Route23Script_511e9: ; 511e9 (14:51e9)
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, $d7ee
+	ld hl, wd7ee
 	res 0, [hl]
 	res 7, [hl]
-	ld hl, $d813
+	ld hl, wd813
 	res 0, [hl]
 	res 6, [hl]
 	ld a, $7a
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 	ld a, $60
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 
@@ -53,9 +53,9 @@ Route23Script0: ; 51219 (14:5219)
 	ld a, e
 	ld [$ff8c], a
 	ld a, c
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld b, $2
-	ld hl, $d7ed
+	ld hl, wd7ed
 	ld a, $10
 	call Predef
 	ld a, c
@@ -72,7 +72,7 @@ YCoordsData_51255: ; 51255 (14:5255)
 
 Route23Script_5125d: ; 5125d (14:525d)
 	ld hl, BadgeTextPointers ; $5276
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -80,7 +80,7 @@ Route23Script_5125d: ; 5125d (14:525d)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, $cd6d
+	ld de, wcd6d
 .asm_5126e
 	ld a, [hli]
 	ld [de], a
@@ -121,16 +121,16 @@ CascadeBadgeText: ; 512cb (14:52cb)
 
 Route23Script_512d8: ; 512d8 (14:52d8)
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	xor a
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
 	jp Func_3486
 
 Route23Script1: ; 512ec (14:52ec)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 Route23Script2: ; 512f1 (14:52f1)
@@ -191,9 +191,9 @@ Route23Text7: ; 5133d (14:533d)
 	jp TextScriptEnd
 
 Route23Script_51346: ; 51346 (14:5346)
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	call Route23Script_5125d
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	inc a
 	ld c, a
 	ld b, $2
@@ -212,10 +212,10 @@ Route23Script_51346: ; 51346 (14:5346)
 .asm_5136e
 	ld hl, VictoryRoadGuardText2
 	call PrintText
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
 	ld b, $1
-	ld hl, $d7ed
+	ld hl, wd7ed
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	ld a, $2

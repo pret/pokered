@@ -1,17 +1,17 @@
 IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	call Func_22fa
 	call EnableAutoTextBoxDrawing
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, $d869
+	ld hl, wd869
 	res 7, [hl]
-	ld hl, $d734
+	ld hl, wd734
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
-	ld hl, $d863
+	ld hl, wd863
 	xor a
 	ld [hli], a
 	ld [hli], a

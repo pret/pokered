@@ -29,7 +29,7 @@ SSAnne8TrainerHeaders: ; 619a5 (18:59a5)
 SSAnne8TrainerHeader0: ; 619a5 (18:59a5)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d805 ; flag's byte
+	dw wd805 ; flag's byte
 	dw SSAnne8BattleText1 ; 0x5a0b TextBeforeBattle
 	dw SSAnne8AfterBattleText1 ; 0x5a15 TextAfterBattle
 	dw SSAnne8EndBattleText1 ; 0x5a10 TextEndBattle
@@ -38,7 +38,7 @@ SSAnne8TrainerHeader0: ; 619a5 (18:59a5)
 SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d805 ; flag's byte
+	dw wd805 ; flag's byte
 	dw SSAnne8BattleText2 ; 0x5a1a TextBeforeBattle
 	dw SSAnne8AfterBattleText2 ; 0x5a24 TextAfterBattle
 	dw SSAnne8EndBattleText2 ; 0x5a1f TextEndBattle
@@ -47,7 +47,7 @@ SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
 SSAnne8TrainerHeader2: ; 619bd (18:59bd)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d805 ; flag's byte
+	dw wd805 ; flag's byte
 	dw SSAnne8BattleText3 ; 0x5a29 TextBeforeBattle
 	dw SSAnne8AfterBattleText3 ; 0x5a33 TextAfterBattle
 	dw SSAnne8EndBattleText3 ; 0x5a2e TextEndBattle
@@ -56,7 +56,7 @@ SSAnne8TrainerHeader2: ; 619bd (18:59bd)
 SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d805 ; flag's byte
+	dw wd805 ; flag's byte
 	dw SSAnne8BattleText4 ; 0x5a38 TextBeforeBattle
 	dw SSAnne8AfterBattleText4 ; 0x5a42 TextAfterBattle
 	dw SSAnne8EndBattleText4 ; 0x5a3d TextEndBattle

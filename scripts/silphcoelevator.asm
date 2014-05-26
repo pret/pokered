@@ -1,5 +1,5 @@
 SilphCoElevatorScript: ; 457c0 (11:57c0)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	push hl
@@ -9,16 +9,16 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	res 7, [hl]
 	call nz, SilphCoElevatorScript_45827
 	xor a
-	ld [$cf0c], a
+	ld [wcf0c], a
 	inc a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ret
 
 SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
-	ld hl, $d3af
-	ld a, [$d73b]
+	ld hl, wd3af
+	ld a, [wd73b]
 	ld b, a
-	ld a, [$d73c]
+	ld a, [wd73c]
 	ld c, a
 	call SilphCoElevatorScript_457ea
 
@@ -35,7 +35,7 @@ SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
 	ld hl, SilphCoElavatorFloors ; $5804
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps ; $5811
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $16
 	call CopyData
 	ret

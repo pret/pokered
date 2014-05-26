@@ -18,18 +18,18 @@ asm_49469: ; 49469 (12:5469)
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	db $8
-	ld a, [$d7d6]
+	ld a, [wd7d6]
 	add a
 	jr c, .asm_4949b ; 0x49471 $28
 	ld a, 30 ; pokemon needed
 	ld [$ffdb], a
 	ld a, ITEMFINDER ; oak's aide reward
 	ld [$ffdc], a
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName
 	ld h, d
 	ld l, e
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
 	ld a, $62
@@ -37,7 +37,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1 ; 0x49494 $b
-	ld hl, $d7d6
+	ld hl, wd7d6
 	set 7, [hl]
 .asm_4949b
 	ld hl, Route11GateUpstairsText_494a3
@@ -51,10 +51,10 @@ Route11GateUpstairsText_494a3: ; 494a3 (12:54a3)
 
 Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	db $08 ; asm
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	jp nz, Route12GateUpstairsScript_495c9
-	ld a, [$d7d8]
+	ld a, [wd7d8]
 	bit 7, a ; fought snorlax?
 	ld hl, BinocularsSnorlaxText
 	jr z, .print

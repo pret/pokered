@@ -22,7 +22,7 @@ PokemonTower3TrainerHeaders: ; 606ed (18:46ed)
 PokemonTower3TrainerHeader0: ; 606ed (18:46ed)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d765 ; flag's byte
+	dw wd765 ; flag's byte
 	dw PokemonTower3BattleText1 ; 0x4730 TextBeforeBattle
 	dw PokemonTower3AfterBattleText1 ; 0x473a TextAfterBattle
 	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
@@ -31,7 +31,7 @@ PokemonTower3TrainerHeader0: ; 606ed (18:46ed)
 PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d765 ; flag's byte
+	dw wd765 ; flag's byte
 	dw PokemonTower3BattleText2 ; 0x473f TextBeforeBattle
 	dw PokemonTower3AfterBattleText2 ; 0x4749 TextAfterBattle
 	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
@@ -40,7 +40,7 @@ PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
 PokemonTower3TrainerHeader2: ; 60705 (18:4705)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d765 ; flag's byte
+	dw wd765 ; flag's byte
 	dw PokemonTower3BattleText3 ; 0x474e TextBeforeBattle
 	dw PokemonTower3AfterBattleText3 ; 0x4758 TextAfterBattle
 	dw PokemonTower3EndBattleText3 ; 0x4753 TextEndBattle

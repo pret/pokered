@@ -9,11 +9,11 @@ LanceScript: ; 5a2ae (16:62ae)
 	ret
 
 LanceScript_5a2c4: ; 5a2c4 (16:62c4)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d866]
+	ld a, [wd866]
 	bit 7, a
 	jr nz, .asm_5a2da
 	ld a, $31
@@ -25,12 +25,12 @@ LanceScript_5a2c4: ; 5a2c4 (16:62c4)
 
 LanceScript_5a2de: ; 5a2de (16:62de)
 	push bc
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $602
 	call LanceScript_5a2f0
 	pop bc
 	ld a, b
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $603
 
 LanceScript_5a2f0: ; 5a2f0 (16:62f0)
@@ -53,7 +53,7 @@ LanceScript4: ; 5a304 (16:6304)
 	ret
 
 LanceScript0: ; 5a305 (16:6305)
-	ld a, [$d866]
+	ld a, [wd866]
 	bit 6, a
 	ret nz
 	ld hl, CoordsData_5a33e
@@ -61,7 +61,7 @@ LanceScript0: ; 5a305 (16:6305)
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ld [hJoyHeld], a
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1
@@ -70,11 +70,11 @@ LanceScript0: ; 5a305 (16:6305)
 .asm_5a325
 	cp $5
 	jr z, LanceScript_5a35b
-	ld hl, $d866
+	ld hl, wd866
 	bit 7, [hl]
 	set 7, [hl]
 	ret nz
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
@@ -90,7 +90,7 @@ CoordsData_5a33e: ; 5a33e (16:633e)
 
 LanceScript2: ; 5a349 (16:6349)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, LanceScript_5a2f5
 	ld a, $1
@@ -100,11 +100,11 @@ LanceScript2: ; 5a349 (16:6349)
 LanceScript_5a35b: ; 5a35b (16:635b)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, RLEList_5a379
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_LANCECURSCRIPT], a
@@ -119,7 +119,7 @@ RLEList_5a379: ; 5a379 (16:6379)
 	db $FF
 
 LanceScript3: ; 5a382 (16:6382)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -136,7 +136,7 @@ LanceTrainerHeaders: ; 5a397 (16:6397)
 LanceTrainerHeader0: ; 5a397 (16:6397)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d866 ; flag's byte
+	dw wd866 ; flag's byte
 	dw LanceBeforeBattleText ; 0x63ae TextBeforeBattle
 	dw LanceAfterBattleText ; 0x63b8 TextAfterBattle
 	dw LanceEndBattleText ; 0x63b3 TextEndBattle
@@ -161,6 +161,6 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText
 	db $8
-	ld hl, $d866
+	ld hl, wd866
 	set 6, [hl]
 	jp TextScriptEnd

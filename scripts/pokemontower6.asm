@@ -22,7 +22,7 @@ PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
 	dw PokemonTower6Script4
 
 PokemonTower6Script0: ; 60b17 (18:4b17)
-	ld a, [$d768]
+	ld a, [wd768]
 	bit 7, a
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_60b45 ; $4b45
@@ -34,9 +34,9 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, MAROWAK
-	ld [W_CUROPPONENT], a ; $d059
+	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
-	ld [W_CURENEMYLVL], a ; $d127
+	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, $4
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -46,21 +46,21 @@ CoordsData_60b45: ; 60b45 (18:4b45)
 	db $10,$0A,$FF
 
 PokemonTower6Script4: ; 60b48 (18:4b48)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, Func_60b02
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, [$d72d]
+	ld a, [wd72d]
 	bit 6, a
 	ret nz
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [$cf0b]
+	ld a, [wcf0b]
 	and a
 	jr nz, .asm_60b82
-	ld hl, $d768
+	ld hl, wd768
 	set 7, [hl]
 	ld a, $7
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -73,13 +73,13 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ret
 .asm_60b82
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $10
-	ld [$ccd3], a
+	ld [wccd3], a
 	xor a
-	ld [$c206], a
-	ld [$cd3b], a
-	ld hl, $d730
+	ld [wSpriteStateData2 + $06], a
+	ld [wcd3b], a
+	ld hl, wd730
 	set 7, [hl]
 	ld a, $3
 	ld [W_POKEMONTOWER6CURSCRIPT], a
@@ -87,7 +87,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ret
 
 PokemonTower6Script3: ; 60ba1 (18:4ba1)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -109,7 +109,7 @@ PokemonTower6TrainerHeaders: ; 60bbf (18:4bbf)
 PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d768 ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText1 ; 0x4c29 TextBeforeBattle
 	dw PokemonTower6AfterBattleText1 ; 0x4c33 TextAfterBattle
 	dw PokemonTower6EndBattleText1 ; 0x4c2e TextEndBattle
@@ -118,7 +118,7 @@ PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
 PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d768 ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText2 ; 0x4c38 TextBeforeBattle
 	dw PokemonTower6AfterBattleText2 ; 0x4c42 TextAfterBattle
 	dw PokemonTower6EndBattleText2 ; 0x4c3d TextEndBattle
@@ -127,7 +127,7 @@ PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d768 ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText3 ; 0x4c47 TextBeforeBattle
 	dw PokemonTower6AfterBattleText3 ; 0x4c51 TextAfterBattle
 	dw PokemonTower6EndBattleText3 ; 0x4c4c TextEndBattle

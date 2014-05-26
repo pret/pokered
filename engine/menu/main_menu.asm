@@ -2,9 +2,9 @@ MainMenu: ; 5af2 (1:5af2)
 ; Check save file
 	call Func_5bff
 	xor a
-	ld [$D08A],a
+	ld [wd08a],a
 	inc a
-	ld [$D088],a
+	ld [wd088],a
 	call Func_609e
 	jr nc,.next0
 
@@ -16,22 +16,22 @@ MainMenu: ; 5af2 (1:5af2)
 	ld c,20
 	call DelayFrames
 	xor a
-	ld [$D12B],a
-	ld hl,$CC2B
+	ld [W_ISLINKBATTLE],a
+	ld hl,wcc2b
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hl],a
-	ld [$D07C],a
-	ld hl,$D72E
+	ld [W_ANIMATIONID],a
+	ld hl,wd72e
 	res 6,[hl]
 	call ClearScreen
 	call GoPAL_SET_CF1C
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
-	ld hl,$D730
+	ld hl,wd730
 	set 6,[hl]
-	ld a,[$D088]
+	ld a,[wd088]
 	cp a,1
 	jr z,.next1
 	FuncCoord 0,0
@@ -55,29 +55,29 @@ MainMenu: ; 5af2 (1:5af2)
 	ld de,NewGameText
 	call PlaceString
 .next2
-	ld hl,$D730
+	ld hl,wd730
 	res 6,[hl]
 	call UpdateSprites ; OAM?
 	xor a
-	ld [$CC26],a
-	ld [$CC2A],a
-	ld [$CC34],a
+	ld [wCurrentMenuItem],a
+	ld [wLastMenuItem],a
+	ld [wMenuJoypadPollCount],a
 	inc a
-	ld [$CC25],a
+	ld [wTopMenuItemX],a
 	inc a
-	ld [$CC24],a
+	ld [wTopMenuItemY],a
 	ld a,$B
-	ld [$CC29],a
-	ld a,[$D088]
-	ld [$CC28],a
+	ld [wMenuWatchedKeys],a
+	ld a,[wd088]
+	ld [wMaxMenuItem],a
 	call HandleMenuInput
 	bit 1,a
 	jp nz,LoadTitlescreenGraphics ; load title screen (gfx and arrangement)
 	ld c,20
 	call DelayFrames
-	ld a,[$CC26]
+	ld a,[wCurrentMenuItem]
 	ld b,a
-	ld a,[$D088]
+	ld a,[wd088]
 	cp a,2
 	jp z,.next3
 	inc b ; adjust MenuArrow_Counter
@@ -89,11 +89,11 @@ MainMenu: ; 5af2 (1:5af2)
 	jp z,Func_5d52 ; if press_A on NewGame
 	call DisplayOptionMenu ; if press_a on Options
 	ld a,1
-	ld [$D08A],a
+	ld [wd08a],a
 	jp .next0
 .next4
 	call ContinueGame
-	ld hl,$D126
+	ld hl,wd126
 	set 5,[hl]
 .next6
 	xor a
@@ -111,52 +111,52 @@ MainMenu: ; 5af2 (1:5af2)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld a,4
-	ld [$D52A],a
+	ld [wd52a],a
 	ld c,10
 	call DelayFrames
-	ld a,[$D5A2]
+	ld a,[wd5a2]
 	and a
 	jp z,Func_5d5f
 	ld a,[W_CURMAP] ; map ID
 	cp a,HALL_OF_FAME
 	jp nz,Func_5d5f
 	xor a
-	ld [$D71A],a
-	ld hl,$D732
+	ld [wd71a],a
+	ld hl,wd732
 	set 2,[hl]
 	call Func_62ce
 	jp Func_5d5f
 Func_5bff: ; 5bff (1:5bff)
 	ld a,1
-	ld [$D358],a
+	ld [wd358],a
 	ld a,3
-	ld [$D355],a
+	ld [W_OPTIONS],a
 	ret
 
 LinkMenu: ; 5c0a (1:5c0a)
 	xor a
-	ld [$d358], a
-	ld hl, $d72e
+	ld [wd358], a
+	ld hl, wd72e
 	set 6, [hl]
 	ld hl, TextTerminator_6b20 ; $6b20
 	call PrintText
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
-	FuncCoord 5, 5 ; $c409
+	FuncCoord 5, 5
 	ld hl, Coord
 	ld b, $6
 	ld c, $d
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 7, 7 ; $c433
+	FuncCoord 7, 7
 	ld hl, Coord
 	ld de, TradeCenterText
 	call PlaceString
 	xor a
-	ld [$cd37], a
-	ld [$d72d], a
-	ld hl, wTopMenuItemY ; $cc24
+	ld [wcd37], a
+	ld [wd72d], a
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $7
 	ld [hli], a
 	ld a, $6
@@ -176,19 +176,19 @@ LinkMenu: ; 5c0a (1:5c0a)
 	add a
 	add a
 	ld b, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	add b
 	add $d0
-	ld [$cc42], a
-	ld [$cc43], a
+	ld [wcc42], a
+	ld [wcc43], a
 .asm_5c66
 	call Func_2247
-	ld a, [$cc3d]
+	ld a, [wcc3d]
 	ld b, a
 	and $f0
 	cp $d0
 	jr z, .asm_5c7d
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	ld b, a
 	and $f0
 	cp $d0
@@ -197,12 +197,12 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld a, b
 	and $c
 	jr nz, .asm_5c8b
-	ld a, [$cc42]
+	ld a, [wcc42]
 	and $c
 	jr z, .asm_5c52
 	jr .asm_5ca1
 .asm_5c8b
-	ld a, [$cc42]
+	ld a, [wcc42]
 	and $c
 	jr z, .asm_5c98
 	ld a, [$ffaa]
@@ -210,9 +210,9 @@ LinkMenu: ; 5c0a (1:5c0a)
 	jr z, .asm_5ca1
 .asm_5c98
 	ld a, b
-	ld [$cc42], a
+	ld [wcc42], a
 	and $3
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 .asm_5ca1
 	ld a, [$ffaa]
 	cp $2
@@ -225,10 +225,10 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld b, $7f
 	ld c, $7f
 	ld d, $ec
-	ld a, [$cc42]
+	ld a, [wcc42]
 	and $8
 	jr nz, .asm_5ccc
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp $2
 	jr z, .asm_5ccc
 	ld c, d
@@ -239,58 +239,58 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld c, d
 .asm_5ccc
 	ld a, b
-	FuncCoord 6, 7 ; $c432
+	FuncCoord 6, 7
 	ld [Coord], a
 	ld a, c
-	FuncCoord 6, 9 ; $c45a
+	FuncCoord 6, 9
 	ld [Coord], a
 	ld a, d
-	FuncCoord 6, 11 ; $c482
+	FuncCoord 6, 11
 	ld [Coord], a
 	ld c, $28
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
-	ld a, [$cc42]
+	ld a, [wcc42]
 	and $8
 	jr nz, .asm_5d2d
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp $2
 	jr z, .asm_5d2d
 	xor a
-	ld [$d700], a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld [wd700], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	ld a, TRADE_CENTER
 	jr nz, .asm_5cfc
 	ld a, BATTLE_CENTER
 .asm_5cfc
-	ld [$d72d], a
+	ld [wd72d], a
 	ld hl, PleaseWaitText
 	call PrintText
 	ld c, $32
 	call DelayFrames
-	ld hl, $d732
+	ld hl, wd732
 	res 1, [hl]
-	ld a, [W_ANIMATIONID] ; $d07c
-	ld [$d71a], a
+	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
+	ld [wd71a], a
 	call Func_62ce
 	ld c, $14
 	call DelayFrames
 	xor a
-	ld [wMenuJoypadPollCount], a ; $cc34
-	ld [$cc42], a
+	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
+	ld [wcc42], a
 	inc a
-	ld [W_ISLINKBATTLE], a ; $d12b
-	ld [$cc47], a
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
+	ld [wcc47], a
 	jr Func_5d5f
 .asm_5d2d
 	xor a
-	ld [wMenuJoypadPollCount], a ; $cc34
+	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
 	call Delay3
 	call Func_72d7
 	ld hl, LinkCanceledText
 	call PrintText
-	ld hl, $d72e
+	ld hl, wd72e
 	res 6, [hl]
 	ret
 
@@ -307,7 +307,7 @@ LinkCanceledText: ; 5d4d (1:5d4d)
 	db "@"
 
 Func_5d52: ; 5d52 (1:5d52)
-	ld hl, $d732
+	ld hl, wd732
 	res 1, [hl]
 	call OakSpeech
 	ld c, $14
@@ -318,13 +318,13 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
 	ld [$ffb5], a
-	ld [$d72d], a
-	ld hl, $d732
+	ld [wd72d], a
+	ld hl, wd732
 	set 0, [hl]
 	call ResetPlayerSpriteData
 	ld c, $14
 	call DelayFrames
-	ld a, [$cc47]
+	ld a, [wcc47]
 	and a
 	ret nz
 	jp EnterMap
@@ -344,26 +344,26 @@ TradeCenterText: ; 5d97 (1:5d97)
 ContinueGame: ; 5db5 (1:5db5)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 4, 7 ; $c430
+	FuncCoord 4, 7
 	ld hl, Coord
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 5, 9 ; $c459
+	FuncCoord 5, 9
 	ld hl, Coord
 	ld de, SaveScreenInfoText
 	call PlaceString
-	FuncCoord 12, 9 ; $c460
+	FuncCoord 12, 9
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; $d158
+	ld de, W_PLAYERNAME ; wd158
 	call PlaceString
-	FuncCoord 17, 11 ; $c48d
+	FuncCoord 17, 11
 	ld hl, Coord
 	call Func_5e2f
-	FuncCoord 16, 13 ; $c4b4
+	FuncCoord 16, 13
 	ld hl, Coord
 	call Func_5e42
-	FuncCoord 13, 15 ; $c4d9
+	FuncCoord 13, 15
 	ld hl, Coord
 	call Func_5e55
 	ld a, $1
@@ -374,23 +374,23 @@ ContinueGame: ; 5db5 (1:5db5)
 PrintSaveScreenText: ; 5def (1:5def)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, $c3a4
+	ld hl, wTileMap + $4
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	ld hl, $c3cd
+	ld hl, wTileMap + $2d
 	ld de, SaveScreenInfoText
 	call PlaceString
-	ld hl, $c3d4
+	ld hl, wTileMap + $34
 	ld de, W_PLAYERNAME
 	call PlaceString
-	ld hl, $c401
+	ld hl, wTileMap + $61
 	call Func_5e2f
-	ld hl, $c428
+	ld hl, wTileMap + $88
 	call Func_5e42
-	ld hl, $c44d
+	ld hl, wTileMap + $ad
 	call Func_5e55
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -403,27 +403,27 @@ Func_5e2f: ; 5e2f (1:5e2f)
 	ld b, $1
 	call CountSetBits
 	pop hl
-	ld de, $d11e
+	ld de, wd11e
 	ld bc, $102
 	jp PrintNumber
 
 Func_5e42: ; 5e42 (1:5e42)
 	push hl
-	ld hl, wPokedexOwned ; $d2f7
+	ld hl, wPokedexOwned ; wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	pop hl
-	ld de, $d11e
+	ld de, wd11e
 	ld bc, $103
 	jp PrintNumber
 
 Func_5e55: ; 5e55 (1:5e55)
-	ld de, $da41
+	ld de, W_PLAYTIMEHOURS + 1
 	ld bc, $103
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, $da43
+	ld de, W_PLAYTIMEMINUTES + 1
 	ld bc, $8102
 	jp PrintNumber
 
@@ -469,12 +469,12 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	inc a
-	ld [$d358],a
-	ld [$cd40],a
+	ld [wd358],a
+	ld [wTrainerScreenY],a
 	ld a,3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY],a
 	call SetCursorPositionsFromOptions
-	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld a,[wWhichTrade] ; text speed cursor X coordinate
 	ld [wTopMenuItemX],a
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable auto background transfer
@@ -524,7 +524,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .downPressed
 	cp a,16
 	ld b,-13
-	ld hl,$cd3d
+	ld hl,wWhichTrade
 	jr z,.updateMenuVariables
 	ld b,5
 	cp a,3
@@ -539,7 +539,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .upPressed
 	cp a,8
 	ld b,-5
-	ld hl,$cd3d
+	ld hl,wWhichTrade
 	jr z,.updateMenuVariables
 	cp a,13
 	inc hl
@@ -558,17 +558,17 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call PlaceUnfilledArrowMenuCursor
 	jp .loop
 .cursorInBattleAnimation
-	ld a,[$cd3e] ; battle animation cursor X coordinate
+	ld a,[wTrainerEngageDistance] ; battle animation cursor X coordinate
 	xor a,$0b ; toggle between 1 and 10
-	ld [$cd3e],a
+	ld [wTrainerEngageDistance],a
 	jp .eraseOldMenuCursor
 .cursorInBattleStyle
-	ld a,[$cd3f] ; battle style cursor X coordinate
+	ld a,[wTrainerFacingDirection] ; battle style cursor X coordinate
 	xor a,$0b ; toggle between 1 and 10
-	ld [$cd3f],a
+	ld [wTrainerFacingDirection],a
 	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
-	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld a,[wWhichTrade] ; text speed cursor X coordinate
 	cp a,1
 	jr z,.updateTextSpeedXCoord
 	cp a,7
@@ -579,7 +579,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	sub a,7
 	jr .updateTextSpeedXCoord
 .pressedRightInTextSpeed
-	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld a,[wWhichTrade] ; text speed cursor X coordinate
 	cp a,14
 	jr z,.updateTextSpeedXCoord
 	cp a,7
@@ -589,7 +589,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .fromFastToMedium
 	add a,6
 .updateTextSpeedXCoord
-	ld [$cd3d],a ; text speed cursor X coordinate
+	ld [wWhichTrade],a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText: ; 5fc0 (1:5fc0)
@@ -610,7 +610,7 @@ OptionMenuCancelText: ; 6018 (1:6018)
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions: ; 601f (1:601f)
 	ld hl,TextSpeedOptionData
-	ld a,[$cd3d] ; text speed cursor X coordinate
+	ld a,[wWhichTrade] ; text speed cursor X coordinate
 	ld c,a
 .loop
 	ld a,[hli]
@@ -621,7 +621,7 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 .textSpeedMatchFound
 	ld a,[hl]
 	ld d,a
-	ld a,[$cd3e] ; battle animation cursor X coordinate
+	ld a,[wTrainerEngageDistance] ; battle animation cursor X coordinate
 	dec a
 	jr z,.battleAnimationOn
 .battleAnimationOff
@@ -630,7 +630,7 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 .battleAnimationOn
 	res 7,d
 .checkBattleStyle
-	ld a,[$cd3f] ; battle style cursor X coordinate
+	ld a,[wTrainerFacingDirection] ; battle style cursor X coordinate
 	dec a
 	jr z,.battleStyleShift
 .battleStyleSet
@@ -655,7 +655,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	pop bc
 	dec hl
 	ld a,[hl]
-	ld [$cd3d],a ; text speed cursor X coordinate
+	ld [wWhichTrade],a ; text speed cursor X coordinate
 	FuncCoord 0,3
 	ld hl,Coord
 	call .placeUnfilledRightArrow
@@ -664,7 +664,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	jr nc,.storeBattleAnimationCursorX
 	ld a,10 ; Off
 .storeBattleAnimationCursorX
-	ld [$cd3e],a ; battle animation cursor X coordinate
+	ld [wTrainerEngageDistance],a ; battle animation cursor X coordinate
 	FuncCoord 0,8
 	ld hl,Coord
 	call .placeUnfilledRightArrow
@@ -673,7 +673,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	jr nc,.storeBattleStyleCursorX
 	ld a,10
 .storeBattleStyleCursorX
-	ld [$cd3f],a ; battle style cursor X coordinate
+	ld [wTrainerFacingDirection],a ; battle style cursor X coordinate
 	FuncCoord 0,13
 	ld hl,Coord
 	call .placeUnfilledRightArrow

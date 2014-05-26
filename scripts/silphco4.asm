@@ -9,19 +9,19 @@ SilphCo4Script: ; 19d0b (6:5d0b)
 	ret
 
 SilphCo4Script_19d21: ; 19d21 (6:5d21)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, SilphCo4Data19d58
 	call SilphCo4Script_19d5d
 	call SilphCo4Script_19d89
-	ld a, [$d82a]
+	ld a, [wd82a]
 	bit 0, a
 	jr nz, .asm_19d48
 	push af
 	ld a, $54
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0602
 	ld a, $17
 	call Predef
@@ -30,7 +30,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	bit 1, a
 	ret nz
 	ld a, $54
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0406
 	ld a, $17
 	jp Predef
@@ -40,7 +40,7 @@ SilphCo4Data19d58: ; 19d58 (6:5d58)
 
 SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	push hl
-	ld hl, $d73f
+	ld hl, wd73f
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -64,7 +64,7 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_19d69 ; 0x19d7c $eb
-	ld hl, $d73f
+	ld hl, wd73f
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -75,7 +75,7 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ret
 
 SilphCo4Script_19d89: ; 19d89 (6:5d89)
-	ld hl, $d82a
+	ld hl, wd82a
 	ld a, [$ffe0]
 	and a
 	ret z
@@ -105,7 +105,7 @@ SilphCo4TrainerHeaders: ; 19dae (6:5dae)
 SilphCo4TrainerHeader0: ; 19dae (6:5dae)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d829 ; flag's byte
+	dw wd829 ; flag's byte
 	dw SilphCo4BattleText2 ; 0x5df4 TextBeforeBattle
 	dw SilphCo4AfterBattleText2 ; 0x5dfe TextAfterBattle
 	dw SilphCo4EndBattleText2 ; 0x5df9 TextEndBattle
@@ -114,7 +114,7 @@ SilphCo4TrainerHeader0: ; 19dae (6:5dae)
 SilphCo4TrainerHeader2: ; 19dba (6:5dba)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d829 ; flag's byte
+	dw wd829 ; flag's byte
 	dw SilphCo4BattleText3 ; 0x5e0d TextBeforeBattle
 	dw SilphCo4AfterBattleText3 ; 0x5e17 TextAfterBattle
 	dw SilphCo4EndBattleText3 ; 0x5e12 TextEndBattle
@@ -123,7 +123,7 @@ SilphCo4TrainerHeader2: ; 19dba (6:5dba)
 SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d829 ; flag's byte
+	dw wd829 ; flag's byte
 	dw SilphCo4BattleText4 ; 0x5e26 TextBeforeBattle
 	dw SilphCo4AfterBattleText4 ; 0x5e30 TextAfterBattle
 	dw SilphCo4EndBattleText4 ; 0x5e2b TextEndBattle

@@ -1,5 +1,5 @@
 VictoryRoad1Script: ; 5da0a (17:5a0a)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, .next
@@ -11,11 +11,11 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld [W_VICTORYROAD1CURSCRIPT], a
 	ret
 .next
-	ld a, [$d869]
+	ld a, [wd869]
 	bit 7, a
 	ret z
 	ld a, $1d
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $604
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
@@ -26,15 +26,15 @@ VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
 	dw EndTrainerBattle
 
 VictoryRoad1Script0: ; 5da40 (17:5a40)
-	ld a, [$d869]
+	ld a, [wd869]
 	bit 7, a
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5da5c ; $5a5c
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
-	ld hl, $d869
+	ld hl, wd869
 	set 7, [hl]
 	ret
 
@@ -54,7 +54,7 @@ VictoryRoad1TrainerHeaders: ; 5da6d (17:5a6d)
 VictoryRoad1TrainerHeader0: ; 5da6d (17:5a6d)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d869 ; flag's byte
+	dw wd869 ; flag's byte
 	dw VictoryRoad1BattleText1 ; 0x5a9a TextBeforeBattle
 	dw VictoryRoad1AfterBattleText1 ; 0x5aa4 TextAfterBattle
 	dw VictoryRoad1EndBattleText1 ; 0x5a9f TextEndBattle
@@ -63,7 +63,7 @@ VictoryRoad1TrainerHeader0: ; 5da6d (17:5a6d)
 VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d869 ; flag's byte
+	dw wd869 ; flag's byte
 	dw VictoryRoad1BattleText2 ; 0x5aa9 TextBeforeBattle
 	dw VictoryRoad1AfterBattleText2 ; 0x5ab3 TextAfterBattle
 	dw VictoryRoad1EndBattleText2 ; 0x5aae TextEndBattle

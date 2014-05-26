@@ -8,7 +8,7 @@ _TM29PreReceiveText:: ; a24fe (28:64fe)
 _ReceivedTM29Text:: ; a252a (28:652a)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM29ExplanationText:: ; a253e (28:653e)

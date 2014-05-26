@@ -18,7 +18,7 @@ PewterPokecenterText2: ; 5c596 (17:4596)
 PewterPokecenterText3: ; 5c59b (17:459b)
 	db $8
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, PewterPokecenterText5
 	call PrintText
 	ld a, $ff
@@ -26,11 +26,11 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	ld c, $20
 	call DelayFrames
 	ld hl, Unknown_5c608 ; $4608
-	ld de, $cd3f
+	ld de, wTrainerFacingDirection
 	ld bc, $0004
 	call CopyData
-	ld a, [$c132]
-	ld hl, $cd3f
+	ld a, [wSpriteStateData1 + $32]
+	ld hl, wTrainerFacingDirection
 .asm_5c5c3
 	cp [hl]
 	inc hl
@@ -43,20 +43,20 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	pop hl
 .asm_5c5d1
 	ld a, [hl]
-	ld [$c132], a
+	ld [wSpriteStateData1 + $32], a
 	push hl
-	ld hl, $cd3f
-	ld de, $cd3e
+	ld hl, wTrainerFacingDirection
+	ld de, wTrainerEngageDistance
 	ld bc, $0004
 	call CopyData
-	ld a, [$cd3e]
-	ld [$cd42], a
+	ld a, [wTrainerEngageDistance]
+	ld [wcd42], a
 	pop hl
 	ld c, $18
 	call DelayFrames
-	ld a, [$c026]
+	ld a, [wc026]
 	ld b, a
-	ld a, [$c027]
+	ld a, [wc027]
 	or b
 	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
 	ld c, $30

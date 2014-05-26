@@ -1,17 +1,17 @@
 LearnMove: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
 	call GetPartyMonName
-	ld hl, $cd6d
-	ld de, $d036
+	ld hl, wcd6d
+	ld de, wd036
 	ld bc, $b
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
-	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
 	ld bc, $2c
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -29,14 +29,14 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	jp c, AbandonLearning
 	push hl
 	push de
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMoveName
 	ld hl, OneTwoAndText
 	call PrintText
 	pop de
 	pop hl
 .asm_6e8b
-	ld a, [$d0e0]
+	ld a, [wd0e0]
 	ld [hl], a
 	ld bc, $15
 	add hl, bc
@@ -46,19 +46,19 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld hl, Moves ; $4000
 	ld bc, $6
 	call AddNTimes
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, [$ceee]
+	ld a, [wHPBarNewHP + 1]
 	pop de
 	pop hl
 	ld [hl], a
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jp z, PrintLearnedMove
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld b, a
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	cp b
 	jp nz, PrintLearnedMove
 	ld h, d
@@ -68,7 +68,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	call CopyData
 	ld bc, $11
 	add hl, bc
-	ld de, W_PLAYERMONPP ; $d02d
+	ld de, W_PLAYERMONPP ; W_PLAYERMONPP
 	ld bc, $4
 	call CopyData
 	jp PrintLearnedMove
@@ -76,13 +76,13 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 AbandonLearning: ; 6eda (1:6eda)
 	ld hl, AbandonLearningText
 	call PrintText
-	FuncCoord 14, 7 ; $c43a
+	FuncCoord 14, 7
 	ld hl, Coord
 	ld bc, $80f
 	ld a, $14
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
@@ -100,20 +100,20 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
-	FuncCoord 14, 7 ; $c43a
+	FuncCoord 14, 7
 	ld hl, Coord
 	ld bc, $80f
 	ld a, $14
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	pop hl
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	rra
 	ret c
 	ld bc, $fffc
 	add hl, bc
 	push hl
-	ld de, $d0dc
+	ld de, wd0dc
 	ld bc, $4
 	call CopyData
 	callab Func_39b87
@@ -122,14 +122,14 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
-	FuncCoord 4, 7 ; $c430
+	FuncCoord 4, 7
 	ld hl, Coord
 	ld b, $4
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 6, 8 ; $c446
+	FuncCoord 6, 8
 	ld hl, Coord
-	ld de, $d0e1
+	ld de, wd0e1
 	ld a, [$fff6]
 	set 2, a
 	ld [$fff6], a
@@ -137,7 +137,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, [$fff6]
 	res 2, a
 	ld [$fff6], a
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $8
 	ld [hli], a
 	ld a, $5
@@ -145,7 +145,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	xor a
 	ld [hli], a
 	inc hl
-	ld a, [$cd6c]
+	ld a, [wcd6c]
 	ld [hli], a
 	ld a, $3
 	ld [hli], a
@@ -162,7 +162,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	bit 1, a
 	jr nz, .asm_6fab
 	push hl
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 	ld b, $0
 	add hl, bc

@@ -202,13 +202,13 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	push af
 	push de
-	ld a, [wListMenuID] ; $cf94
+	ld a, [wListMenuID] ; wListMenuID
 	and a
 	jr z, .asm_fb2d
 	ld a, [wHPBarOldHP]
-	ld [$cef1], a
+	ld [wcef1], a
 	ld a, [wHPBarOldHP+1]
-	ld [$cef0], a
+	ld [wcef0], a
 	push hl
 	ld a, [$fff6]
 	bit 0, a
@@ -225,7 +225,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	ld [hli], a
 	ld [hli], a
 	pop hl
-	ld de, $cef0
+	ld de, wcef0
 	ld bc, $203
 	call PrintNumber
 	call DelayFrame

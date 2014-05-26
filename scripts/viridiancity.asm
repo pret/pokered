@@ -15,13 +15,13 @@ ViridianCityScript0: ; 19005 (6:5005)
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b: ; 1900b (6:500b)
-	ld a, [$d74c]
+	ld a, [wd74c]
 	bit 0, a
 	ret nz
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	jr nz, .asm_1901e ; 0x19016 $6
-	ld hl, $d74c
+	ld hl, wd74c
 	set 0, [hl]
 	ret
 .asm_1901e
@@ -42,7 +42,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ret
 
 ViridianCityScript_1903d: ; 1903d (6:503d)
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 5, a
 	ret nz
 	ld a, [W_YCOORD]
@@ -62,13 +62,13 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 	ret
 
 ViridianCityScript1: ; 19062 (6:5062)
-	ld a, [$c134]
+	ld a, [wSpriteStateData1 + $34]
 	ld [$ffeb], a
-	ld a, [$c136]
+	ld a, [wSpriteStateData1 + $36]
 	ld [$ffec], a
-	ld a, [$c234]
+	ld a, [wSpriteStateData2 + $34]
 	ld [$ffed], a
-	ld a, [$c235]
+	ld a, [wSpriteStateData2 + $35]
 	ld [$ffee], a
 	xor a
 	ld [wListScrollOffset], a
@@ -86,13 +86,13 @@ ViridianCityScript1: ; 19062 (6:5062)
 
 ViridianCityScript2: ; 1908f (6:508f)
 	ld a, [$ffeb]
-	ld [$c134], a
+	ld [wSpriteStateData1 + $34], a
 	ld a, [$ffec]
-	ld [$c136], a
+	ld [wSpriteStateData1 + $36], a
 	ld a, [$ffed]
-	ld [$c234], a
+	ld [wSpriteStateData2 + $34], a
 	ld a, [$ffee]
-	ld [$c235], a
+	ld [wSpriteStateData2 + $35], a
 	call UpdateSprites
 	call Delay3
 	xor a
@@ -108,7 +108,7 @@ ViridianCityScript2: ; 1908f (6:508f)
 	ret
 
 ViridianCityScript3: ; 190c1 (6:50c1)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -119,11 +119,11 @@ ViridianCityScript3: ; 190c1 (6:50c1)
 ViridianCityScript_190cf: ; 190cf (6:50cf)
 	call Func_3486
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	xor a
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
 	ret
 
@@ -154,7 +154,7 @@ ViridianCityText2: ; 19107 (6:5107)
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe ; 0x19110
-	ld a, [$d751]
+	ld a, [wd751]
 	bit 1, a
 	jr nz, .asm_ae9fe ; 0x19117
 	ld hl, ViridianCityText_19122
@@ -175,7 +175,7 @@ ViridianCityText3: ; 1912c (6:512c)
 	ld hl, ViridianCityText_1914d
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_6dfea ; 0x1913a
 	ld hl, ViridianCityText_19157
@@ -201,7 +201,7 @@ ViridianCityText_19157: ; 19157 (6:5157)
 
 ViridianCityText4: ; 1915c (6:515c)
 	db $08 ; asm
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 5, a
 	jr nz, .asm_83894 ; 0x19162
 	ld hl, ViridianCityText_19175
@@ -236,7 +236,7 @@ ViridianCityText_19191: ; 19191 (6:5191)
 
 ViridianCityText6: ; 19196 (6:5196)
 	db $08 ; asm
-	ld a, [$d74c]
+	ld a, [wd74c]
 	bit 1, a
 	jr nz, .asm_4e5a0 ; 0x1919c
 	ld hl, ViridianCityText_191ca
@@ -246,7 +246,7 @@ ViridianCityText6: ; 19196 (6:5196)
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
-	ld hl, $d74c
+	ld hl, wd74c
 	set 1, [hl]
 	jr .asm_3c73c ; 0x191b7
 .BagFull
@@ -282,7 +282,7 @@ ViridianCityText7: ; 191df (6:51df)
 	ld c, $2
 	call DelayFrames
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .asm_42f68 ; 0x191f2
 	ld hl, ViridianCityText_1920f

@@ -22,7 +22,7 @@ Route24ScriptPointers: ; 513cb (14:53cb)
 	dw Route24Script4
 
 Route24Script0: ; 513d5 (14:53d5)
-	ld a, [$d7ef]
+	ld a, [wd7ef]
 	bit 0, a
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5140e ; $540e
@@ -33,14 +33,14 @@ Route24Script0: ; 513d5 (14:53d5)
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d7f0
+	ld hl, wd7f0
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $4
 	ld [W_ROUTE24CURSCRIPT], a
@@ -51,7 +51,7 @@ CoordsData_5140e: ; 5140e (14:540e)
 	db $0F,$0A,$FF
 
 Route24Script4: ; 51411 (14:5411)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -61,13 +61,13 @@ Route24Script4: ; 51411 (14:5411)
 	ret
 
 Route24Script3: ; 51422 (14:5422)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, Route24Script_513c0
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d7ef
+	ld hl, wd7ef
 	set 1, [hl]
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -93,7 +93,7 @@ Route24TrainerHeaders: ; 5145b (14:545b)
 Route24TrainerHeader0: ; 5145b (14:545b)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText1 ; 0x5571 TextBeforeBattle
 	dw Route24AfterBattleText1 ; 0x557b TextAfterBattle
 	dw Route24EndBattleText1 ; 0x5576 TextEndBattle
@@ -102,7 +102,7 @@ Route24TrainerHeader0: ; 5145b (14:545b)
 Route24TrainerHeader2: ; 51467 (14:5467)
 	db $3 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText2 ; 0x5580 TextBeforeBattle
 	dw Route24AfterBattleText2 ; 0x558a TextAfterBattle
 	dw Route24EndBattleText2 ; 0x5585 TextEndBattle
@@ -111,7 +111,7 @@ Route24TrainerHeader2: ; 51467 (14:5467)
 Route24TrainerHeader3: ; 51473 (14:5473)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText3 ; 0x558f TextBeforeBattle
 	dw Route24AfterBattleText3 ; 0x5599 TextAfterBattle
 	dw Route24EndBattleText3 ; 0x5594 TextEndBattle
@@ -120,7 +120,7 @@ Route24TrainerHeader3: ; 51473 (14:5473)
 Route24TrainerHeader4: ; 5147f (14:547f)
 	db $5 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText4 ; 0x559e TextBeforeBattle
 	dw Route24AfterBattleText4 ; 0x55a8 TextAfterBattle
 	dw Route24EndBattleText4 ; 0x55a3 TextEndBattle
@@ -129,7 +129,7 @@ Route24TrainerHeader4: ; 5147f (14:547f)
 Route24TrainerHeader5: ; 5148b (14:548b)
 	db $6 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText5 ; 0x55ad TextBeforeBattle
 	dw Route24AfterBattleText5 ; 0x55b7 TextAfterBattle
 	dw Route24EndBattleText5 ; 0x55b2 TextEndBattle
@@ -138,7 +138,7 @@ Route24TrainerHeader5: ; 5148b (14:548b)
 Route24TrainerHeader6: ; 51497 (14:5497)
 	db $7 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d7ef ; flag's byte
+	dw wd7ef ; flag's byte
 	dw Route24BattleText6 ; 0x55bc TextBeforeBattle
 	dw Route24AfterBattleText6 ; 0x55c6 TextAfterBattle
 	dw Route24EndBattleText6 ; 0x55c1 TextEndBattle
@@ -148,9 +148,9 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 
 Route24Text1: ; 514a4 (14:54a4)
 	db $8
-	ld hl, $d7f0
+	ld hl, wd7f0
 	res 1, [hl]
-	ld a, [$d7ef]
+	ld a, [wd7ef]
 	bit 0, a
 	jr nz, .asm_a03f5 ; 0x514af $48
 	ld hl, Route24Text_51510
@@ -158,20 +158,20 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld bc, (NUGGET << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d7ef
+	ld hl, wd7ef
 	set 0, [hl]
 	ld hl, Route24Text_5151a
 	call PrintText
 	ld hl, Route24Text_51526
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
 	call PreBattleSaveRegisters
 	ld a, [$ff8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -187,7 +187,7 @@ Route24Text1: ; 514a4 (14:54a4)
 .BagFull
 	ld hl, Route24Text_51521
 	call PrintText
-	ld hl, $d7f0
+	ld hl, wd7f0
 	set 1, [hl]
 	jp TextScriptEnd
 

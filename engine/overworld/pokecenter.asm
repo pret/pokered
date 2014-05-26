@@ -2,7 +2,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	call SaveScreenTilesToBuffer1 ; save screen
 	ld hl, PokemonCenterWelcomeText
 	call PrintText
-	ld hl, $d72e
+	ld hl, wd72e
 	bit 2, [hl]
 	set 1, [hl]
 	set 2, [hl]
@@ -19,22 +19,22 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	ld hl, NeedYourPokemonText
 	call PrintText
 	ld a, $18
-	ld [$c112], a ; make the nurse turn to face the machine
+	ld [wSpriteStateData1 + $12], a ; make the nurse turn to face the machine
 	call Delay3
 	PREDEF HealPartyPredef
 	callba AnimateHealingMachine ; do the healing machine animation
 	xor a
 	ld [wMusicHeaderPointer], a
-	ld a, [$c0f0]
-	ld [$c0ef], a
-	ld a, [$d35b]
-	ld [$cfca], a
-	ld [$c0ee], a
+	ld a, [wc0f0]
+	ld [wc0ef], a
+	ld a, [wd35b]
+	ld [wcfca], a
+	ld [wc0ee], a
 	call PlaySound
 	ld hl, PokemonFightingFitText
 	call PrintText
 	ld a, $14
-	ld [$c112], a ; make the nurse bow
+	ld [wSpriteStateData1 + $12], a ; make the nurse bow
 	ld c, a
 	call DelayFrames
 	jr .done

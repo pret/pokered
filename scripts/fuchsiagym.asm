@@ -9,7 +9,7 @@ FuchsiaGymScript: ; 7543d (1d:543d)
 	ret
 
 FuchsiaGymScript_75453: ; 75453 (1d:5453)
-	ld hl, $D126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
@@ -37,7 +37,7 @@ FuchsiaGymScriptPointers: ; 75482 (1d:5482)
 	dw FuchsiaGymScript3
 
 FuchsiaGymScript3: ; 7548a (1d:548a)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, FuchsiaGymScript_75477
 	ld a, $f0
@@ -46,7 +46,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d792
+	ld hl, wd792
 	set 1, [hl]
 	ld bc, (TM_06 << 8) | 1
 	call GiveItem
@@ -54,7 +54,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d792
+	ld hl, wd792
 	set 0, [hl]
 	jr .asm_754c0
 .BagFull
@@ -64,13 +64,13 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 .asm_754c0
 	ld hl, W_OBTAINEDBADGES
 	set 4, [hl]
-	ld hl, $d72a
+	ld hl, wd72a
 	set 4, [hl]
 
 	; deactivate gym trainers
-	ld a, [$d792]
+	ld a, [wd792]
 	or %11111100
-	ld [$d792], a
+	ld [wd792], a
 
 	jp FuchsiaGymScript_75477
 
@@ -91,7 +91,7 @@ FuchsiaGymTrainerHeaders: ; 754eb (1d:54eb)
 FuchsiaGymTrainerHeader0: ; 754eb (1d:54eb)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText1 ; 0x55ae TextBeforeBattle
 	dw FuchsiaGymAfterBattleText1 ; 0x55b8 TextAfterBattle
 	dw FuchsiaGymEndBattleText1 ; 0x55b3 TextEndBattle
@@ -100,7 +100,7 @@ FuchsiaGymTrainerHeader0: ; 754eb (1d:54eb)
 FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText2 ; 0x55c7 TextBeforeBattle
 	dw FuchsiaGymAfterBattleText2 ; 0x55d1 TextAfterBattle
 	dw FuchsiaGymEndBattleText2 ; 0x55cc TextEndBattle
@@ -109,7 +109,7 @@ FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
 FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText3 ; 0x55e0 TextBeforeBattle
 	dw FuchsiaGymAfterBattleText3 ; 0x55ea TextAfterBattle
 	dw FuchsiaGymEndBattleText3 ; 0x55e5 TextEndBattle
@@ -118,7 +118,7 @@ FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
 FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText4 ; 0x55f9 TextBeforeBattle
 	dw FuchsiaGymAfterBattleText4 ; 0x5603 TextAfterBattle
 	dw FuchsiaGymEndBattleText4 ; 0x55fe TextEndBattle
@@ -127,7 +127,7 @@ FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
 FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText5 ; 0x5612 TextBeforeBattle
 	dw FuchsiaGymAfterBattleText5 ; 0x561c TextAfterBattle
 	dw FuchsiaGymEndBattleText5 ; 0x5617 TextEndBattle
@@ -136,7 +136,7 @@ FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
 FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d792 ; flag's byte
+	dw wd792 ; flag's byte
 	dw FuchsiaGymBattleText6 ; 0x562b TextBeforeBattle
 	dw FuchsiaGymAfterBattleText6 ; 0x5635 TextAfterBattle
 	dw FuchsiaGymEndBattleText6 ; 0x5630 TextEndBattle
@@ -146,7 +146,7 @@ FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 
 FuchsiaGymText1: ; 75534 (1d:5534)
 	db $08 ; asm
-	ld a, [$d792]
+	ld a, [wd792]
 	bit 1, a
 	jr z, .asm_181b6 ; 0x7553a
 	bit 0, a
@@ -161,18 +161,18 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 .asm_181b6 ; 0x75550
 	ld hl, UnnamedText_75581
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, UnnamedText_75586
 	ld de, UnnamedText_75586
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5
-	ld [$d05c], a
+	ld [W_GYMLEADERNO], a
 	xor a
 	ldh [$b4], a
 	ld a, $3
@@ -318,7 +318,7 @@ FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 
 FuchsiaGymText8: ; 7563a (1d:563a)
 	db $08 ; asm
-	ld a, [$d792]
+	ld a, [wd792]
 	bit 1, a
 	ld hl, UnnamedText_75653
 	jr nz, .asm_50671 ; 0x75643

@@ -24,7 +24,7 @@ Route4TrainerHeaders: ; 5567d (15:567d)
 Route4TrainerHeader0: ; 5567d (15:567d)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7c5 ; flag's byte
+	dw wd7c5 ; flag's byte
 	dw Route4BattleText1 ; 0x5699 TextBeforeBattle
 	dw Route4AfterBattleText1 ; 0x56a3 TextAfterBattle
 	dw Route4EndBattleText1 ; 0x569e TextEndBattle

@@ -3,26 +3,26 @@ Func_42769: ; 42769 (10:6769)
 	ld hl,Coord
 	ld de,OTString67E5
 	call PlaceString
-	ld a,[$CD3D]
-	ld [$D11E],a
+	ld a,[wWhichTrade]
+	ld [wd11e],a
 	ld a,$3A
 	call Predef
-	FuncCoord 9, 0 ; $c3a9
+	FuncCoord 9, 0
 	ld hl,Coord
-	ld de,$D11E
+	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber
 	FuncCoord 5,2
 	ld hl,Coord
-	ld de,$CF4B
+	ld de,wcf4b
 	call PlaceString
 	FuncCoord 8,4
 	ld hl,Coord
-	ld de,$CD41
+	ld de,wTrainerScreenX
 	call PlaceString
-	FuncCoord 8, 6 ; $c420
+	FuncCoord 8, 6
 	ld hl,Coord
-	ld de,$CD4C
+	ld de,wcd4c
 	ld bc,$8205
 	jp PrintNumber
 
@@ -31,26 +31,26 @@ Func_427a7: ; 427a7 (10:67a7)
 	ld hl,Coord
 	ld de,OTString67E5
 	call PlaceString
-	ld a,[$CD3E]
-	ld [$D11E],a
+	ld a,[wTrainerEngageDistance]
+	ld [wd11e],a
 	ld a,$3A
 	call Predef
-	FuncCoord 9, 10 ; $c471
+	FuncCoord 9, 10
 	ld hl,Coord
-	ld de,$D11E
+	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber
 	FuncCoord 5,12
 	ld hl,Coord
-	ld de,$CD6D
+	ld de,wcd6d
 	call PlaceString
 	FuncCoord 8,14
 	ld hl,Coord
-	ld de,$CD4E
+	ld de,wcd4e
 	call PlaceString
-	FuncCoord 8, 16 ; $c4e8
+	FuncCoord 8, 16
 	ld hl,Coord
-	ld de,$CD59
+	ld de,wcd59
 	ld bc,$8205
 	jp PrintNumber
 

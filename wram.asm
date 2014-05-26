@@ -1,10 +1,73 @@
 
 INCLUDE "constants/wram_constants.asm"
 
+flag_array: MACRO
+	ds ((\1) + 7) / 8
+ENDM
+
 
 SECTION "WRAM Bank 0", WRAM0
 
-	ds 256
+wc000:: ds 1
+wc001:: ds 1
+wc002:: ds 1
+wc003:: ds 1
+wc004:: ds 1
+wc005:: ds 1
+wc006:: ds 8
+wc00e:: ds 4
+wc012:: ds 4
+wc016:: ds 16
+wc026:: ds 1
+wc027:: ds 1
+wc028:: ds 2
+wc02a:: ds 1
+wc02b:: ds 1
+wc02c:: ds 1
+wc02d:: ds 1
+wc02e:: ds 8
+wc036:: ds 8
+wc03e:: ds 8
+wc046:: ds 8
+wc04e:: ds 8
+wc056:: ds 8
+wc05e:: ds 8
+wc066:: ds 8
+wc06e:: ds 8
+wc076:: ds 8
+wc07e:: ds 8
+wc086:: ds 8
+wc08e:: ds 8
+wc096:: ds 8
+wc09e:: ds 8
+wc0a6:: ds 8
+wc0ae:: ds 8
+wc0b6:: ds 8
+wc0be:: ds 8
+wc0c6:: ds 8
+wc0ce:: ds 1
+wc0cf:: ds 1
+wc0d0:: ds 1
+wc0d1:: ds 1
+wc0d2:: ds 1
+wc0d3:: ds 1
+wc0d4:: ds 1
+wc0d5:: ds 1
+wc0d6:: ds 8
+wc0de:: ds 8
+wc0e6:: ds 1
+wc0e7:: ds 1
+wc0e8:: ds 1
+wc0e9:: ds 1
+wc0ea:: ds 1
+wc0eb:: ds 1
+wc0ec:: ds 1
+wc0ed:: ds 1
+wc0ee:: ds 1
+wc0ef:: ds 1
+wc0f0:: ds 1
+wc0f1:: ds 1
+wc0f2:: ds 14
 
 
 SECTION "Sprite State Data", WRAM0[$c100]
@@ -72,9 +135,11 @@ wTileMapBackup:: ; c508
 ; (e.g. if menus are drawn on top)
 	ds 20 * 18
 
-; c670
+	ds 120
 
-	ds 1420
+wTempPic::
+wOverworldMap:: ; c6e8
+	ds 1300
 
 wScreenEdgeTiles:: ; cbfc
 ; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
@@ -109,9 +174,9 @@ wLastMenuItem:: ; cc2a
 ; id of previously selected menu item
 	ds 1
 
-; cc2b
-
-	ds 3
+wcc2b:: ds 1
+wcc2c:: ds 1
+wcc2d:: ds 1
 
 wPlayerMoveListIndex:: ; cc2e
 	ds 1
@@ -129,21 +194,33 @@ wMenuJoypadPollCount:: ; cc34
 ; how many times should HandleMenuInput poll the joypad state before it returns?
 	ds 1
 
-	ds 1
+wcc35:: ds 1
 
 wListScrollOffset:: ; cc36
 ; offset of the current top menu item from the beginning of the list
 ; keeps track of what section of the list is on screen
 	ds 1
 
-	ds 19
+wcc37:: ds 1
+wcc38:: ds 2
+wcc3a:: ds 1
+wcc3b:: ds 1
+wcc3c:: ds 1
+wcc3d:: ds 1
+wcc3e:: ds 4
+wcc42:: ds 1
+wcc43:: ds 4
+wcc47:: ds 1
+wcc48:: ds 1
+wcc49:: ds 1
 
 wMenuWrappingEnabled:: ; cc4a
 ; set to 1 if you can go from the bottom to the top or top to bottom of a menu
 ; set to 0 if you can't go past the top or bottom of the menu
 	ds 1
 
-	ds 3
+wcc4b:: ds 2
+wcc4d:: ds 1
 
 wPredefID:: ; cc4e
 	ds 1
@@ -153,14 +230,25 @@ wPredefRegisters:: ; cc4f
 wTrainerHeaderFlagBit:: ; cc55
 	ds 1
 
-; cc56
+	ds 1
 
-	ds 124
+wcc57:: ds 1
+wcc58:: ds 3
+wcc5b:: ds 1
+wcc5c:: ds 1
+wcc5d:: ds 1
+wcc5e:: ds 13
+wcc6b:: ds 14
+wcc79:: ds 30
+wcc97:: ds 10
+wcca1:: ds 49
 
 wRLEByteCount:: ; ccd2
 	ds 1
 
-	ds 4
+wccd3:: ds 1
+wccd4:: ds 1
+wccd5:: ds 2
 
 ; current HP of player and enemy substitutes
 wPlayerSubstituteHP:: ; ccd7
@@ -168,7 +256,7 @@ wPlayerSubstituteHP:: ; ccd7
 wEnemySubstituteHP:: ; ccd8
 	ds 1
 
-	ds 2
+wccd9:: ds 2
 
 wMoveMenuType:: ; ccdb
 ; 0=regular, 1=mimic, 2=above message box (relearn, heal pp..)
@@ -179,7 +267,7 @@ wPlayerSelectedMove:: ; ccdc
 wEnemySelectedMove:: ; ccdd
 	ds 1
 
-	ds 1
+wccde:: ds 1
 
 wAICount:: ; ccdf
 ; number of times remaining that AI action can occur
@@ -190,9 +278,32 @@ wAICount:: ; ccdf
 wEnemyMoveListIndex:: ; cce2
 	ds 1
 
-; cce3
-
-	ds 55
+wcce3:: ds 1
+wcce4:: ds 1
+wcce5:: ds 2
+wcce7:: ds 1
+wcce8:: ds 1
+wcce9:: ds 2
+wcceb:: ds 1
+wccec:: ds 1
+wcced:: ds 1
+wccee:: ds 1
+wccef:: ds 1
+wccf0:: ds 1
+wccf1:: ds 1
+wccf2:: ds 1
+wccf3:: ds 1
+wccf4:: ds 1
+wccf5:: ds 1
+wccf6:: ds 1
+wccf7:: ds 14
+wcd05:: ds 1
+wcd06:: ds 9
+wcd0f:: ds 1
+wcd10:: ds 1
+wcd11:: ds 1
+wcd12:: ds 1
+wcd13:: ds 7
 
 ; stat modifiers for the player's current pokemon
 ; value can range from 1 - 13 ($1 to $D)
@@ -212,7 +323,11 @@ wPlayerMonAccuracyMod:: ; cd1e
 wPlayerMonEvasionMod:: ; cd1f
 	ds 1
 
-	ds 13
+	ds 3
+
+wcd23:: ds 3
+wcd26:: ds 3
+wcd29:: ds 4
 
 wEngagedTrainerClass:: ; cd2d
 	ds 1
@@ -237,7 +352,12 @@ wEnemyMonAccuracyMod:: ; cd32
 wEnemyMonEvasionMod:: ; cd33
 	ds 1
 
-	ds 9
+wcd34:: ds 3
+wcd37:: ds 1
+wcd38:: ds 1
+wcd39:: ds 1
+wcd3a:: ds 1
+wcd3b:: ds 2
 
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
@@ -254,19 +374,47 @@ wTrainerScreenY:: ; cd40
 wTrainerScreenX:: ; cd41
 	ds 1
 
-	ds 30
+wcd42:: ds 1
+wcd43:: ds 1
+wcd44:: ds 1
+wcd45:: ds 1
+wcd46:: ds 1
+wcd47:: ds 1
+wcd48:: ds 1
+wcd49:: ds 1
+wcd4a:: ds 1
+wcd4b:: ds 1
+wcd4c:: ds 1
+wcd4d:: ds 1
+wcd4e:: ds 1
+wcd4f:: ds 1
+wcd50:: ds 9
+wcd59:: ds 1
+wcd5a:: ds 1
+wcd5b:: ds 1
+wcd5c:: ds 1
+wcd5d:: ds 1
+wcd5e:: ds 1
+wcd5f:: ds 1
 
 wFlags_0xcd60:: ; cd60
-; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaniously)
+; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 	ds 1
 
-	ds 10
+	ds 9
+
+wcd6a:: ds 1
 
 wJoyIgnore:: ; cd6b
 ; Set buttons are ignored.
 	ds 1
 
-	ds 21
+wcd6c:: ds 1
+wcd6d:: ds 4
+wcd71:: ds 1
+wcd72:: ds 5
+wcd77:: ds 1
+wcd78:: ds 9
 
 wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
@@ -282,32 +430,62 @@ wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
 	ds 1
-	ds 13
+
+wcef0:: ds 1
+wcef1:: ds 12
+
 wHPBarHPDifference:: ; cefd
 	ds 1
-	ds 9
+	ds 7
+
+wcf05:: ds 1
+wcf06:: ds 1
 
 wAnimSoundID:: ; cf07
 ; sound ID during battle animations
 	ds 1
 
-	ds 10
+wcf08:: ds 1
+wcf09:: ds 1
+wcf0a:: ds 1
+wcf0b:: ds 1
+wcf0c:: ds 1
+wcf0d:: ds 1
+wcf0e:: ds 1
+wcf0f:: ds 1
+wcf10:: ds 1
+wcf11:: ds 1
 
 wPredefParentBank:: ; cf12
 	ds 1
 
-	ds 1
+wcf13:: ds 1
 
 wCurSpriteMovement2:: ; cf14
 ; movement byte 2 of current sprite
 	ds 1
 
-	ds 5
+	ds 2
+
+wcf17:: ds 1
+wcf18:: ds 2
 
 wGBC:: ; cf1a
 	ds 1
 
-	ds 68
+wcf1b:: ds 1
+wcf1c:: ds 1
+wcf1d:: ds 1
+wcf1e:: ds 1
+wcf1f:: ds 6
+wcf25:: ds 8
+wcf2d:: ds 1
+wcf2e:: ds 2
+wcf30:: ds 7
+wcf37:: ds 20
+wcf4b:: ds 1
+wcf4c:: ds 1
+wcf4d:: ds 18
 
 wGymCityName:: ; cf5f
 wStringBuffer1:: ; cf5f
@@ -316,31 +494,62 @@ wGymLeaderName:: ; cf70
 wStringBuffer2:: ; cf70
 	ds 16 + 1
 wStringBuffer3:: ; cf81
-	ds 16 + 1
+	ds 9 + 1
+
+wcf8b:: ds 1
+wcf8c:: ds 1
+wcf8d:: ds 1
+wcf8e:: ds 1
+wcf8f:: ds 1
+wcf90:: ds 1
+wcf91:: ds 1
 
 wWhichPokemon:: ; cf92
 ; which pokemon you selected
 	ds 1
 
-	ds 1
+wcf93:: ds 1
 
 wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1
 
-	ds 48
+wcf95:: ds 1
+wcf96:: ds 1
+wcf97:: ds 1
+wcf98:: ds 1
+wcf99:: ds 1
+wcf9a:: ds 1
+wcf9b:: ds 1
+wcf9c:: ds 4
+wcfa0:: ds 4
+wcfa4:: ds 2
+wcfa6:: ds 2
+wcfa8:: ds 7
+wcfaf:: ds 10
+wcfb9:: ds 1
+wcfba:: ds 1
+wcfbb:: ds 1
+wcfbc:: ds 2
+wcfbe:: ds 2
+wcfc0:: ds 2
+wcfc2:: ds 2
+wcfc4:: ds 1
 
 wWalkCounter:: ; cfc5
 ; walk animation counter
 	ds 1
 
-	ds 1
+wcfc6:: ds 1
 
 wMusicHeaderPointer:: ; cfc7
 ; (the current music channel address - $4000) / 3
 	ds 1
 
-	ds 4
+wcfc8:: ds 1
+wcfc9:: ds 1
+wcfca:: ds 1
+wcfcb:: ds 1
 
 W_ENEMYMOVENUM:: ; cfcc
 	ds 1
@@ -370,12 +579,12 @@ W_PLAYERMOVEMAXPP:: ; cfd7
 W_ENEMYMONID:: ; cfd8
 	ds 1
 
-	ds 1
+wcfd9:: ds 1
 
 W_ENEMYMONNAME:: ; cfda
 	ds 11
 
-	ds 1
+wcfe5:: ds 1
 
 W_ENEMYMONCURHP:: ; cfe6
 ; active opponent's hp (16 bits)
@@ -420,7 +629,9 @@ SECTION "WRAM Bank 1", WRAMX, BANK[1]
 
 	ds 2 ; W_ENEMYMONPP
 
-	ds 7
+wd002:: ds 5
+wd007:: ds 1
+wd008:: ds 1
 
 W_PLAYERMONNAME:: ; d009
 	ds 11
@@ -460,12 +671,17 @@ W_PLAYERMONSPECIAL:: ; d02b
 W_PLAYERMONPP:: ; d02d
 	ds 4
 
-
-
 W_TRAINERCLASS:: ; d031
 	ds 1
 
-	ds 24
+	ds 1
+
+wd033:: ds 1
+wd034:: ds 2
+wd036:: ds 16
+wd046:: ds 1
+wd047:: ds 1
+wd048:: ds 2
 
 W_TRAINERNAME:: ; d04a
 ; 13 bytes for the letters of the opposing trainer
@@ -494,7 +710,7 @@ W_BATTLETYPE:: ; d05a
 ; in safari battle, this is 2
 	ds 1
 
-	ds 1
+wd05b:: ds 1
 
 W_LONEATTACKNO:: ; d05c
 ; which entry in LoneAttacks to use
@@ -505,12 +721,13 @@ W_TRAINERNO:: ; d05d
 ; which instance of [youngster, lass, etc] is this?
 	ds 1
 
-	ds 1
+wd05e:: ds 1
 
 W_MOVEMISSED:: ; d05f
 	ds 1
 
-	ds 2
+wd060:: ds 1
+wd061:: ds 1
 
 W_PLAYERBATTSTATUS1:: ; d062
 ; bit 0 - bide
@@ -540,7 +757,8 @@ W_PLAYERBATTSTATUS3:: ; d064
 ; bit 3 - tranformed
 	ds 1
 
-	ds 2
+wd065:: ds 1
+wd066:: ds 1
 
 W_ENEMYBATTSTATUS1:: ; d067
 	ds 1
@@ -549,14 +767,18 @@ W_ENEMYBATTSTATUS2:: ; d068
 W_ENEMYBATTSTATUS3:: ; d069
 	ds 1
 
-	ds 2
+wd06a:: ds 1
+wd06b:: ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
 W_PLAYERDISABLEDMOVE:: ; d06d
 	ds 1
 
-	ds 3
+	ds 1
+
+wd06f:: ds 1
+wd070:: ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
@@ -569,13 +791,18 @@ W_NUMHITS:: ; d074
 ; number of hits in attacks like Doubleslap, etc.
 	ds 1
 
-	ds 7
+wd075:: ds 3
+wd078:: ds 1
+wd079:: ds 1
+wd07a:: ds 1
+wd07b:: ds 1
 
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
 
-	ds 4
+wd07d:: ds 1
+wd07e:: ds 3
 
 ; base coordinates of frame block
 W_BASECOORDX:: ; d081
@@ -583,13 +810,13 @@ W_BASECOORDX:: ; d081
 W_BASECOORDY:: ; d082
 	ds 1
 
-	ds 1
+wd083:: ds 1
 
 W_FBTILECOUNTER:: ; d084
 ; counts how many tiles of the current frame block have been drawn
 	ds 1
 
-	ds 1
+wd085:: ds 1
 
 W_SUBANIMFRAMEDELAY:: ; d086
 ; duration of each frame of the current subanimation in terms of screen refreshes
@@ -598,13 +825,13 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-	ds 1
+wd088:: ds 1
 
 W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
 
-	ds 1
+wd08a:: ds 1
 
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
@@ -637,7 +864,10 @@ W_SUBANIMSUBENTRYADDR:: ; d096
 ; the address of the current subentry of the current subanimation
 	ds 2
 
-	ds 4
+	ds 2
+
+wd09a:: ds 1
+wd09b:: ds 1
 
 W_FBDESTADDR:: ; d09c
 ; current destination address in OAM for frame blocks (big endian)
@@ -655,19 +885,8 @@ W_FBMODE:: ; d09e
 ; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
 
-	ds 2
-
-SECTION "Sprite Buffers", SRAM
-
-S_SPRITEBUFFER0:: ; a000
-	ds SPRITEBUFFERSIZE
-S_SPRITEBUFFER1:: ; a188
-	ds SPRITEBUFFERSIZE
-S_SPRITEBUFFER2:: ; a310
-	ds SPRITEBUFFERSIZE
-
-
-SECTION "Sprites", WRAMX, BANK[1]
+wd09f:: ds 1
+wd0a0:: ds 1
 
 W_SPRITECURPOSX:: ; d0a1
 	ds 1
@@ -716,7 +935,7 @@ W_SPRITEDECODETABLE1PTR:: ; d0b3
 ; pointer to differential decoding table (assuming initial value 1)
 	ds 2
 
-	ds 1
+wd0b5:: ds 1
 
 W_LISTTYPE:: ; d0b6
 	ds 1
@@ -765,9 +984,10 @@ W_MONHGROWTHRATE:: ; d0cb
 
 W_MONHLEARNSET:: ; d0cc
 ; bit field
-	ds 7
+	flag_array 50 + 5
+	ds 1
 
-	ds 4
+wd0d4:: ds 3
 
 W_MONHPADDING:: ; d0d7
 
@@ -775,17 +995,47 @@ W_MONHPADDING:: ; d0d7
 W_DAMAGE:: ; d0d7
 	ds 1
 
-	ds 79
+wd0d8:: ds 3
+wd0db:: ds 1
+wd0dc:: ds 4
+wd0e0:: ds 1
+wd0e1:: ds 56
+wd119:: ds 1
+wd11a:: ds 1
+wd11b:: ds 1
+wd11c:: ds 1
+wd11d:: ds 1
+wd11e:: ds 1
+wd11f:: ds 1
+wd120:: ds 1
+wd121:: ds 1
+wd122:: ds 2
+wd124:: ds 1
+wd125:: ds 1
+wd126:: ds 1
 
 W_CURENEMYLVL:: ; d127
 	ds 1
 
-	ds 3
+wd128:: ds 1
+wd129:: ds 1
+wd12a:: ds 1
 
 W_ISLINKBATTLE:: ; d12b
 	ds 1
 
-	ds 17
+wd12c:: ds 1
+wd12d:: ds 1
+wd12e:: ds 1
+wd12f:: ds 1
+wd130:: ds 1
+wd131:: ds 1
+wd132:: ds 1
+wd133:: ds 6
+wd139:: ds 1
+wd13a:: ds 1
+wd13b:: ds 1
+wd13c:: ds 1
 
 W_PRIZE1:: ; d13d
 	ds 1
@@ -794,7 +1044,16 @@ W_PRIZE2:: ; d13e
 W_PRIZE3:: ; d13f
 	ds 1
 
-	ds 24
+	ds 1
+
+wd141:: ds 2
+wd143:: ds 2
+wd145:: ds 3
+wd148:: ds 10
+wd152:: ds 1
+wd153:: ds 3
+wd156:: ds 1
+wd157:: ds 1
 
 W_PLAYERNAME:: ; d158
 	ds 11
@@ -914,10 +1173,6 @@ W_PARTYMON6NAME:: ; d2ec
 	ds 11
 
 
-flag_array: MACRO
-	ds ((\1) + 7) / 8
-ENDM
-
 wPokedexOwned:: ; d2f7
 	flag_array 151
 wPokedexOwnedEnd::
@@ -956,17 +1211,22 @@ W_OPTIONS:: ; d355
 W_OBTAINEDBADGES:: ; d356
 	ds 1
 
-	ds 2
+	ds 1
+
+wd358:: ds 1
 
 wPlayerID:: ; d359
 	ds 2
 
-	ds 3
+wd35b:: ds 1
+wd35c:: ds 1
+wd35d:: ds 1
 
 W_CURMAP:: ; d35e
 	ds 1
 
-	ds 2
+wd35f:: ds 1
+wd360:: ds 1
 
 W_YCOORD:: ; d361
 ; player’s position on the current map
@@ -985,7 +1245,7 @@ W_XBLOCKCOORD:: ; d364
 wLastMap:: ; d365
 	ds 1
 
-	ds 1
+wd366:: ds 1
 
 W_CURMAPTILESET:: ; d367
 	ds 1
@@ -1012,20 +1272,60 @@ W_MAPCONNECTIONS:: ; d370
 	ds 1
 
 W_MAPCONN1PTR:: ; d371
-	ds 2
-	ds 9
+	ds 1
+
+wd372:: ds 1
+wd373:: ds 1
+wd374:: ds 1
+wd375:: ds 1
+wd376:: ds 1
+wd377:: ds 1
+wd378:: ds 1
+wd379:: ds 1
+wd37a:: ds 1
+wd37b:: ds 1
 
 W_MAPCONN2PTR:: ; d37c
-	ds 2
-	ds 9
+	ds 1
+
+wd37d:: ds 1
+wd37e:: ds 1
+wd37f:: ds 1
+wd380:: ds 1
+wd381:: ds 1
+wd382:: ds 1
+wd383:: ds 1
+wd384:: ds 1
+wd385:: ds 1
+wd386:: ds 1
 
 W_MAPCONN3PTR:: ; d387
-	ds 2
-	ds 9
+	ds 1
+
+wd388:: ds 1
+wd389:: ds 1
+wd38a:: ds 1
+wd38b:: ds 1
+wd38c:: ds 1
+wd38d:: ds 1
+wd38e:: ds 1
+wd38f:: ds 1
+wd390:: ds 1
+wd391:: ds 1
 
 W_MAPCONN4PTR:: ; d392
-	ds 2
-	ds 9
+	ds 1
+
+wd393:: ds 1
+wd394:: ds 1
+wd395:: ds 1
+wd396:: ds 1
+wd397:: ds 1
+wd398:: ds 1
+wd399:: ds 1
+wd39a:: ds 1
+wd39b:: ds 1
+wd39c:: ds 1
 
 W_SPRITESET:: ; d39d
 ; sprite set for the current map (11 sprite picture ID's)
@@ -1035,19 +1335,38 @@ W_SPRITESETID:: ; d3a8
 ; sprite set ID for the current map
 	ds 1
 
-	ds 312
+wd3a9:: ds 1
+wd3aa:: ds 3
+wd3ad:: ds 1
+wd3ae:: ds 1
+wd3af:: ds 128
+wd42f:: ds 129
+wd4b0:: ds 1
+wd4b1:: ds 32
+wd4d1:: ds 16
 
 W_NUMSPRITES:: ; d4e1
 ; number of sprites on the current map
 ; two bytes per sprite (movement byte 2 , text ID)
-	ds 3
+	ds 1
+
+wd4e2:: ds 1
+wd4e3:: ds 1
 
 W_MAPSPRITEDATA:: ; d4e4
 ; two bytes per sprite (trainer class/item ID , trainer set ID)
 	ds 32
 
 W_MAPSPRITEEXTRADATA:: ; d504
-	ds 39
+	ds 32
+
+wd524:: ds 1
+wd525:: ds 1
+wd526:: ds 1
+wd527:: ds 1
+wd528:: ds 1
+wd529:: ds 1
+wd52a:: ds 1
 
 W_TILESETBANK:: ; d52b
 	ds 1
@@ -1078,14 +1397,18 @@ wBoxItems:: ; d53b
 	ds 50 * 2
 	ds 1 ; end
 
-	ds 4
+wd5a0:: ds 2
+wd5a2:: ds 1
+wd5a3:: ds 1
 
 wPlayerCoins:: ; d5a4
 	ds 2 ; BCD
 
 W_MISSABLEOBJECTFLAGS:: ; d5a6
 ; bit array of missable objects. set = removed
-	ds 40
+	ds 39
+
+wd5cd:: ds 1
 
 W_MISSABLEOBJECTLIST:: ; d5ce
 ; each entry consists of 2 bytes
@@ -1308,11 +1631,14 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 
-	ds 161
+	ds 134
+
+wd6f0:: ds 14
+wd6fe:: ds 2
+wd700:: ds 11
 
 W_TOWNVISITEDFLAG:: ; d70b
-; 2 bytes bit array, 1 means visited
-	ds 2
+	flag_array 13
 
 wSafariSteps:: ; d70d
 ; starts at 502
@@ -1332,7 +1658,7 @@ W_ENEMYMONORTRAINERCLASS:: ; d713
 ; trainer classes start at $c8
 	ds 1
 
-	ds 1
+wd714:: ds 1
 
 W_RIVALSTARTER:: ; d715
 	ds 1
@@ -1342,17 +1668,165 @@ W_RIVALSTARTER:: ; d715
 W_PLAYERSTARTER:: ; d717
 	ds 1
 
-	ds 1
+wd718:: ds 1
 
 wLastBlackoutMap:: ; d719
 	ds 1
 
-	ds 25
-
+wd71a:: ds 1
+wd71b:: ds 1
+wd71c:: ds 1
+wd71d:: ds 1
+wd71e:: ds 1
+wd71f:: ds 9
+wd728:: ds 2
+wd72a:: ds 2
+wd72c:: ds 1
+wd72d:: ds 1
+wd72e:: ds 2
+wd730:: ds 2
+wd732:: ds 1
 
 W_FLAGS_D733:: ; d733
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
-	ds 340
+	ds 1
+
+wd734:: ds 2
+wd736:: ds 1
+wd737:: ds 4
+wd73b:: ds 1
+wd73c:: ds 3
+wd73f:: ds 1
+wd740:: ds 3
+wd743:: ds 1
+wd744:: ds 3
+wd747:: ds 3
+wd74a:: ds 1
+wd74b:: ds 1
+wd74c:: ds 2
+wd74e:: ds 3
+wd751:: ds 1
+wd752:: ds 2
+wd754:: ds 1
+wd755:: ds 5
+wd75a:: ds 1
+wd75b:: ds 3
+wd75e:: ds 1
+wd75f:: ds 5
+wd764:: ds 1
+wd765:: ds 1
+wd766:: ds 1
+wd767:: ds 1
+wd768:: ds 1
+wd769:: ds 3
+wd76c:: ds 5
+wd771:: ds 2
+wd773:: ds 4
+wd777:: ds 1
+wd778:: ds 4
+wd77c:: ds 1
+wd77d:: ds 1
+wd77e:: ds 5
+wd783:: ds 11
+wd78e:: ds 2
+wd790:: ds 2
+wd792:: ds 4
+wd796:: ds 2
+wd798:: ds 2
+wd79a:: ds 1
+wd79b:: ds 1
+wd79c:: ds 5
+wd7a1:: ds 2
+wd7a3:: ds 12
+wd7af:: ds 2
+wd7b1:: ds 2
+wd7b3:: ds 1
+wd7b4:: ds 5
+wd7b9:: ds 4
+wd7bd:: ds 2
+wd7bf:: ds 3
+wd7c2:: ds 1
+wd7c3:: ds 2
+wd7c5:: ds 1
+wd7c6:: ds 3
+wd7c9:: ds 4
+wd7cd:: ds 2
+wd7cf:: ds 2
+wd7d1:: ds 1
+wd7d2:: ds 1
+wd7d3:: ds 2
+wd7d5:: ds 1
+wd7d6:: ds 1
+wd7d7:: ds 1
+wd7d8:: ds 1
+wd7d9:: ds 2
+wd7db:: ds 2
+wd7dd:: ds 2
+wd7df:: ds 1
+wd7e0:: ds 1
+wd7e1:: ds 2
+wd7e3:: ds 2
+wd7e5:: ds 2
+wd7e7:: ds 1
+wd7e8:: ds 1
+wd7e9:: ds 2
+wd7eb:: ds 2
+wd7ed:: ds 1
+wd7ee:: ds 1
+wd7ef:: ds 1
+wd7f0:: ds 1
+wd7f1:: ds 1
+wd7f2:: ds 1
+wd7f3:: ds 2
+wd7f5:: ds 1
+wd7f6:: ds 9
+wd7ff:: ds 4
+wd803:: ds 2
+wd805:: ds 2
+wd807:: ds 2
+wd809:: ds 10
+wd813:: ds 2
+wd815:: ds 1
+wd816:: ds 1
+wd817:: ds 2
+wd819:: ds 2
+wd81b:: ds 10
+wd825:: ds 1
+wd826:: ds 1
+wd827:: ds 1
+wd828:: ds 1
+wd829:: ds 1
+wd82a:: ds 1
+wd82b:: ds 1
+wd82c:: ds 1
+wd82d:: ds 1
+wd82e:: ds 1
+wd82f:: ds 1
+wd830:: ds 1
+wd831:: ds 1
+wd832:: ds 1
+wd833:: ds 1
+wd834:: ds 1
+wd835:: ds 1
+wd836:: ds 1
+wd837:: ds 1
+wd838:: ds 15
+wd847:: ds 2
+wd849:: ds 2
+wd84b:: ds 12
+wd857:: ds 8
+wd85f:: ds 4
+wd863:: ds 1
+wd864:: ds 1
+wd865:: ds 1
+wd866:: ds 1
+wd867:: ds 2
+wd869:: ds 20
+wd87d:: ds 2
+wd87f:: ds 1
+wd880:: ds 1
+wd881:: ds 1
+wd882:: ds 5
 
 W_GRASSRATE:: ; d887
 	ds 1
@@ -1375,10 +1849,17 @@ wEnemyMon1Species:: ; d8a4
 W_ENEMYMON1HP:: ; d8a5
 	ds 2
 
-	ds 7
+	ds 1
+
+wd8a8:: ds 4
+wd8ac:: ds 2
 
 W_ENEMYMON1MOVE3:: ; d8ae
-	ds 44
+	ds 19
+wd8c1:: ds 4
+wd8c5:: ds 1
+wd8c6:: ds 20
+
 W_ENEMYMON2MOVE3:: ; d8da
 	ds 44
 W_ENEMYMON3MOVE3:: ; d906
@@ -1388,7 +1869,8 @@ W_ENEMYMON4MOVE3:: ; d932
 W_ENEMYMON5MOVE3:: ; d95e
 	ds 44
 W_ENEMYMON6MOVE3:: ; d98a
-	ds 34
+	ds 22
+wd9a0:: ds 12
 
 W_ENEMYMON1OT:: ; d9ac
 	ds 11
@@ -1419,7 +1901,9 @@ W_ENEMYMON6NAME:: ; da25
 W_TRAINERHEADERPTR:: ; da30
 	ds 2
 
-	ds 7
+	ds 6
+
+wda38:: ds 1
 
 W_CURMAPSCRIPT:: ; da39
 ; index of current map script, mostly used as index for function pointer array
@@ -1437,7 +1921,7 @@ W_PLAYTIMESECONDS:: ; da44
 W_PLAYTIMEFRAMES:: ; da45
 	ds 1
 
-	ds 1
+wda46:: ds 1
 
 W_NUMSAFARIBALLS:: ; da47
 	ds 1
@@ -1454,14 +1938,23 @@ W_DAYCAREMONOT:: ; da54
 	ds 11
 
 W_DAYCAREMONDATA:: ; da5f
-	ds 33
+	ds 3
+wda62:: ds 5
+wda67:: ds 6
+wda6d:: ds 2
+wda6f:: ds 17
+
 
 W_NUMINBOX:: ; da80
 ; number of mons in current box
-	ds 22
+	ds 1
+wda81::
+	ds 20
+	ds 1
 
 W_BOXMON1DATA:: ; da96
-	ds 33
+	ds 8
+wda9e:: ds 25
 W_BOXMON2DATA:: ; dab7
 	ds 33 * 19
 
@@ -1475,8 +1968,20 @@ W_BOXMON1NAME:: ; de06
 W_BOXMON2NAME:: ; de11
 	ds 11 * 19
 
-; dee2
+wdee2::
+	ds 1
 
-SECTION "Stack", WRAMX[$dfff]
+SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff
 	ds -$100
+
+
+SECTION "Sprite Buffers", SRAM
+
+S_SPRITEBUFFER0:: ; a000
+	ds SPRITEBUFFERSIZE
+S_SPRITEBUFFER1:: ; a188
+	ds SPRITEBUFFERSIZE
+S_SPRITEBUFFER2:: ; a310
+	ds SPRITEBUFFERSIZE
+

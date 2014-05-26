@@ -27,26 +27,26 @@ SeafoamIslands5Script4: ; 467b7 (11:67b7)
 	ret
 
 SeafoamIslands5Script0: ; 467c7 (11:67c7)
-	ld a, [$d880]
+	ld a, [wd880]
 	and $3
 	cp $3
 	ret z
 	ld hl, CoordsData_467fe
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	cp $3
 	jr nc, .asm_467e6
 	ld a, $40
-	ld [$ccd4], a
+	ld [wccd4], a
 	ld a, $2
 	jr .asm_467e8
 .asm_467e6
 	ld a, $1
 .asm_467e8
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	ld hl, W_FLAGS_D733
 	res 2, [hl]
@@ -62,7 +62,7 @@ CoordsData_467fe: ; 467fe (11:67fe)
 	db $FF
 
 SeafoamIslands5Script1: ; 46807 (11:6807)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
@@ -72,7 +72,7 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	ret
 
 SeafoamIslands5Script2: ; 46816 (11:6816)
-	ld a, [$d881]
+	ld a, [wd881]
 	and $3
 	cp $3
 	ld a, $0
@@ -81,7 +81,7 @@ SeafoamIslands5Script2: ; 46816 (11:6816)
 	call ArePlayerCoordsInArray
 	ld a, $0
 	jr nc, .asm_46849
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	cp $1
 	jr nz, .asm_46837
 	ld de, RLEMovementData_46859
@@ -89,10 +89,10 @@ SeafoamIslands5Script2: ; 46816 (11:6816)
 .asm_46837
 	ld de, RLEMovementData_46852
 .asm_4683a
-	ld hl, $ccd3
+	ld hl, wccd3
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 .asm_46849
@@ -117,7 +117,7 @@ RLEMovementData_46859: ; 46859 (11:6859)
 	db $FF
 
 SeafoamIslands5Script3: ; 46860 (11:6860)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	ld b, a
 	cp $1
 	call z, SeaFoamIslands5Script_46872
@@ -130,8 +130,8 @@ SeafoamIslands5Script3: ; 46860 (11:6860)
 
 SeaFoamIslands5Script_46872: ; 46872 (11:6872)
 	xor a
-	ld [$d700], a
-	ld [$d11a], a
+	ld [wd700], a
+	ld [wd11a], a
 	jp ForceBikeOrSurf
 
 SeafoamIslands5TextPointers: ; 4687c (11:687c)
@@ -145,7 +145,7 @@ SeafoamIslands5TrainerHeaders: ; 46886 (11:6886)
 SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d882 ; flag's byte
+	dw wd882 ; flag's byte
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextBeforeBattle
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextAfterBattle
 	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle

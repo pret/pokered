@@ -1,5 +1,5 @@
 PrintEmotionBubble: ; 17c47 (5:7c47)
-	ld a, [$cd50]
+	ld a, [wcd50]
 	ld c, a
 	ld b, $0
 	ld hl, EmotionBubblesPointerTable ; $7caf
@@ -11,17 +11,17 @@ PrintEmotionBubble: ; 17c47 (5:7c47)
 	ld hl, $8f80
 	ld bc, (BANK(EmotionBubblesPointerTable) << 8) + $04
 	call CopyVideoData
-	ld a, [$cfcb]
+	ld a, [wcfcb]
 	push af
 	ld a, $ff
-	ld [$cfcb], a
-	ld a, [$d736]
+	ld [wcfcb], a
+	ld a, [wd736]
 	bit 6, a
-	ld hl, $c38f
-	ld de, $c39f
+	ld hl, wOAMBuffer + $8f
+	ld de, wOAMBuffer + $9f
 	jr z, .asm_17c7a
-	ld hl, $c37f
-	ld de, $c38f
+	ld hl, wOAMBuffer + $7f
+	ld de, wOAMBuffer + $8f
 .asm_17c7a
 	ld bc, $90
 .asm_17c7d
@@ -33,8 +33,8 @@ PrintEmotionBubble: ; 17c47 (5:7c47)
 	ld a, c
 	or b
 	jr nz, .asm_17c7d
-	ld hl, $c104
-	ld a, [$cd4f]
+	ld hl, wSpriteStateData1 + 4
+	ld a, [wcd4f]
 	swap a
 	ld c, a
 	ld b, $0
@@ -51,7 +51,7 @@ PrintEmotionBubble: ; 17c47 (5:7c47)
 	ld c, $3c
 	call DelayFrames
 	pop af
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call DelayFrame
 	jp UpdateSprites
 

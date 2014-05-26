@@ -7,17 +7,17 @@ Route15GateUpstairsTextPointers: ; 4964d (12:564d)
 
 Route15GateUpstairsText1: ; 49651 (12:5651)
 	db $8
-	ld a, [$d7dd]
+	ld a, [wd7dd]
 	bit 0, a
 	jr nz, .asm_49683 ; 0x49657 $2a
 	ld a, 50 ; pokemon needed
 	ld [$ffdb], a
 	ld a, EXP__ALL ; oak's aide reward
 	ld [$ffdc], a
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName
-	ld hl, $cd6d
-	ld de, $cc5b
+	ld hl, wcd6d
+	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
 	ld a, $62
@@ -25,7 +25,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_49689 ; 0x4967c $b
-	ld hl, $d7dd
+	ld hl, wd7dd
 	set 0, [hl]
 .asm_49683
 	ld hl, Route15GateUpstairsText_4968c

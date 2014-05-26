@@ -2,41 +2,41 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wLastMenuItem], a ; wLastMenuItem
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; $cc29
+	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
 	ld a, $3
-	ld [wMaxMenuItem], a ; $cc28
+	ld [wMaxMenuItem], a ; wMaxMenuItem
 	ld a, $5
-	ld [wTopMenuItemY], a ; $cc24
+	ld [wTopMenuItemY], a ; wTopMenuItemY
 	ld a, $1
-	ld [wTopMenuItemX], a ; $cc25
-	ld hl, $d730
+	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld hl, wd730
 	set 6, [hl]
-	FuncCoord 0, 3 ; $c3dc
+	FuncCoord 0, 3
 	ld hl, Coord
 	ld b, $8
 	ld c, $c
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 5 ; $c406
+	FuncCoord 2, 5
 	ld hl, Coord
 	ld de, DrinkText
 	call PlaceString
-	FuncCoord 9, 6 ; $c421
+	FuncCoord 9, 6
 	ld hl, Coord
 	ld de, DrinkPriceText
 	call PlaceString
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_74f93
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp $3
 	jr z, .asm_74f93
 	xor a
@@ -69,12 +69,12 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText5
 	call PrintText
 	ld hl, $ffde
-	ld de, wPlayerMoney + 2 ; $d349
+	ld de, wPlayerMoney + 2 ; wd349
 	ld c, $3
 	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	jp DisplayTextBoxID
 .BagFull
 	ld hl, VendingMachineText6
@@ -116,7 +116,7 @@ VendingMachineText7: ; 74fe2 (1d:4fe2)
 
 Func_74fe7: ; 74fe7 (1d:4fe7)
 	ld hl, VendingPrices
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	add a
 	add a
 	ld d, $0

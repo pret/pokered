@@ -30,16 +30,16 @@ ViridianGymScriptPointers: ; 748e1 (1d:48e1)
 	dw ViridianGymScript4
 
 ViridianGymScript0: ; 748eb (1d:48eb)
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	ld b, a
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	ld c, a
 	ld hl, ViridianGymArrowTilePlayerMovement
 	call Func_3442
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	call Func_3486
-	ld hl, $d736
+	ld hl, wd736
 	set 7, [hl]
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
@@ -121,12 +121,12 @@ ViridianGymArrowMovement12: ; 74968 (1d:4968)
 	db $20,$0C,$FF
 
 ViridianGymScript4: ; 7496b (1d:496b)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	jr nz, .asm_74980
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d736
+	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
 	ld [W_CURMAPSCRIPT], a
@@ -137,7 +137,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	jp Bankswitch
 
 ViridianGymScript3: ; 74988 (1d:4988)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, ViridianGymScript_748d6
 	ld a, $f0
@@ -146,7 +146,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d751
+	ld hl, wd751
 	set 1, [hl]
 	ld bc, (TM_27 << 8) | 1
 	call GiveItem
@@ -154,7 +154,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $d
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, $d751
+	ld hl, wd751
 	set 0, [hl]
 	jr .asm_749be
 .BagFull
@@ -164,22 +164,22 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 .asm_749be
 	ld hl, W_OBTAINEDBADGES
 	set 7, [hl]
-	ld hl, $d72a
+	ld hl, wd72a
 	set 7, [hl]
 
 	; deactivate gym trainers
-	ld a, [$d751]
+	ld a, [wd751]
 	or %11111100
-	ld [$d751], a
-	ld a, [$d752]
+	ld [wd751], a
+	ld a, [wd752]
 	or %00000011
-	ld [$d752], a
+	ld [wd752], a
 
 	ld a, $23
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
-	ld hl, $d7eb
+	ld hl, wd7eb
 	set 1, [hl]
 	set 7, [hl]
 	jp ViridianGymScript_748d6
@@ -204,7 +204,7 @@ ViridianGymTrainerHeaders: ; 74a08 (1d:4a08)
 ViridianGymTrainerHeader0: ; 74a08 (1d:4a08)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText1 ; 0x4afd TextBeforeBattle
 	dw ViridianGymAfterBattleText1 ; 0x4b07 TextAfterBattle
 	dw ViridianGymEndBattleText1 ; 0x4b02 TextEndBattle
@@ -213,7 +213,7 @@ ViridianGymTrainerHeader0: ; 74a08 (1d:4a08)
 ViridianGymTrainerHeader1: ; 74a14 (1d:4a14)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText2 ; 0x4b16 TextBeforeBattle
 	dw ViridianGymAfterBattleText2 ; 0x4b20 TextAfterBattle
 	dw ViridianGymEndBattleText2 ; 0x4b1b TextEndBattle
@@ -222,7 +222,7 @@ ViridianGymTrainerHeader1: ; 74a14 (1d:4a14)
 ViridianGymTrainerHeader2: ; 74a20 (1d:4a20)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText3 ; 0x4b2f TextBeforeBattle
 	dw ViridianGymAfterBattleText3 ; 0x4b39 TextAfterBattle
 	dw ViridianGymEndBattleText3 ; 0x4b34 TextEndBattle
@@ -231,7 +231,7 @@ ViridianGymTrainerHeader2: ; 74a20 (1d:4a20)
 ViridianGymTrainerHeader3: ; 74a2c (1d:4a2c)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText4 ; 0x4b48 TextBeforeBattle
 	dw ViridianGymAfterBattleText4 ; 0x4b52 TextAfterBattle
 	dw ViridianGymEndBattleText4 ; 0x4b4d TextEndBattle
@@ -240,7 +240,7 @@ ViridianGymTrainerHeader3: ; 74a2c (1d:4a2c)
 ViridianGymTrainerHeader4: ; 74a38 (1d:4a38)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText5 ; 0x4b61 TextBeforeBattle
 	dw ViridianGymAfterBattleText5 ; 0x4b6b TextAfterBattle
 	dw ViridianGymEndBattleText5 ; 0x4b66 TextEndBattle
@@ -249,7 +249,7 @@ ViridianGymTrainerHeader4: ; 74a38 (1d:4a38)
 ViridianGymTrainerHeader5: ; 74a44 (1d:4a44)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText6 ; 0x4b7a TextBeforeBattle
 	dw ViridianGymAfterBattleText6 ; 0x4b84 TextAfterBattle
 	dw ViridianGymEndBattleText6 ; 0x4b7f TextEndBattle
@@ -258,7 +258,7 @@ ViridianGymTrainerHeader5: ; 74a44 (1d:4a44)
 ViridianGymTrainerHeader6: ; 74a50 (1d:4a50)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText7 ; 0x4b93 TextBeforeBattle
 	dw ViridianGymAfterBattleText7 ; 0x4b9d TextAfterBattle
 	dw ViridianGymEndBattleText7 ; 0x4b98 TextEndBattle
@@ -267,7 +267,7 @@ ViridianGymTrainerHeader6: ; 74a50 (1d:4a50)
 ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d751 ; flag's byte
+	dw wd751 ; flag's byte
 	dw ViridianGymBattleText8 ; 0x4bac TextBeforeBattle
 	dw ViridianGymAfterBattleText8 ; 0x4bb6 TextAfterBattle
 	dw ViridianGymEndBattleText8 ; 0x4bb1 TextEndBattle
@@ -277,7 +277,7 @@ ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 
 ViridianGymText1: ; 74a69 (1d:4a69)
 	db $08 ; asm
-	ld a, [$d751]
+	ld a, [wd751]
 	bit 1, a
 	jr z, .asm_6de66 ; 0x74a6f
 	bit 0, a
@@ -287,12 +287,12 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, ViridianGymText_74ad9
 	call PrintText
 	call GBFadeIn1
 	ld a, $32
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	call UpdateSprites
@@ -302,18 +302,18 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 .asm_6de66 ; 0x74aa0
 	ld hl, ViridianGymText_74ace
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, ViridianGymText_74ad3
 	ld de, ViridianGymText_74ad3
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $8
-	ld [$d05c], a
+	ld [W_GYMLEADERNO], a
 	ld a, $3
 	ld [W_VIRIDIANGYMCURSCRIPT], a
 .asm_6dff7 ; 0x74acb
@@ -493,7 +493,7 @@ ViridianGymAfterBattleText8: ; 74bb6 (1d:4bb6)
 
 ViridianGymText10: ; 74bbb (1d:4bbb)
 	db $08 ; asm
-	ld a, [$d751]
+	ld a, [wd751]
 	bit 1, a
 	jr nz, .asm_1abd1 ; 0x74bc1
 	ld hl, ViridianGymText_74bd4

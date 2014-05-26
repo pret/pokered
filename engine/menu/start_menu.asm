@@ -2,8 +2,8 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 	ld a,$04 ; hardcoded Bank, not sure what's it refers to
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
-	ld a,[$d700] ; walking/biking/surfing
-	ld [$d11a],a
+	ld a,[wd700] ; walking/biking/surfing
+	ld [wd11a],a
 	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
 	call PlaySound
 
@@ -24,7 +24,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a
 	jr nz,.loop
 ; if the player pressed tried to go past the top item, wrap around to the bottom
-	ld a,[$d74b]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,6 ; there are 7 menu items with the pokedex, so the max index is 6
 	jr nz,.wrapMenuItemId
@@ -37,7 +37,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	bit 7,a
 	jr z,.buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
-	ld a,[$d74b]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,[wCurrentMenuItem]
 	ld c,7 ; there are 7 menu items with the pokedex
@@ -54,12 +54,12 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 .buttonPressed ; A, B, or Start button pressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a,[wCurrentMenuItem]
-	ld [$cc2d],a ; save current menu item ID
+	ld [wcc2d],a ; save current menu item ID
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
-	ld a,[$d74b]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,[wCurrentMenuItem]
 	jr nz,.displayMenuItem

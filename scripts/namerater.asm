@@ -4,7 +4,7 @@ NameRaterScript: ; 1da12 (7:5a12)
 NameRaterScript_1da15: ; 1da15 (7:5a15)
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	ret
 
@@ -17,11 +17,11 @@ NameRaterScript_1da20: ; 1da20 (7:5a20)
 	ld c, $b
 	call .asm_1da47
 	jr c, .asm_1da52 ; 0x1da34 $1c
-	ld hl, $d177
+	ld hl, W_PARTYMON1_OTID
 	ld bc, $002c
 	ld a, [wWhichPokemon]
 	call AddNTimes
-	ld de, $d359
+	ld de, wPlayerID
 	ld c, $2
 .asm_1da47
 	ld a, [de]
@@ -49,9 +49,9 @@ NameRaterText1: ; 1da56 (7:5a56)
 	ld hl, NameRaterText_1dab8
 	call PrintText
 	xor a
-	ld [$d07d], a
-	ld [$cfcb], a
-	ld [$cc35], a
+	ld [wd07d], a
+	ld [wcfcb], a
+	ld [wcc35], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3

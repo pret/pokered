@@ -29,11 +29,11 @@ GaryScript0: ; 75f47 (1d:5f47)
 GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, RLEMovement75f63
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $2
 	ld [W_GARYCURSCRIPT], a
@@ -46,19 +46,19 @@ RLEMovement75f63: ; 75f63 (1d:5f63)
 	db $ff
 
 GaryScript2: ; 75f6a (1d:5f6a)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d355
+	ld hl, W_OPTIONS
 	res 7, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, GaryText_760f9
@@ -94,7 +94,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	cp $ff
 	jp z, GaryScript_75f29
 	call UpdateSprites ; move sprites
-	ld hl, $d867
+	ld hl, wd867
 	set 1, [hl]
 	ld a, $f0
 	ld [wJoyIgnore], a
@@ -121,7 +121,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld [$ff8c], a
 	call MoveSprite
 	ld a, $d6
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	ld a, $5
@@ -132,11 +132,11 @@ MovementData_76014: ; 76014 (1d:6014)
 	db $40,$40,$40,$40,$40,$FF
 
 GaryScript5: ; 7601a (1d:601a)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $1
 	ld [$ff8c], a
 	ld a, $8
@@ -188,11 +188,11 @@ MovementData_76080: ; 76080 (1d:6080)
 	db $40,$40,$FF
 
 GaryScript8: ; 76083 (1d:6083)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $d6
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	ld a, $9
@@ -202,11 +202,11 @@ GaryScript8: ; 76083 (1d:6083)
 GaryScript9: ; 76099 (1d:6099)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, RLEMovement760b4
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $a
 	ld [W_GARYCURSCRIPT], a
@@ -218,7 +218,7 @@ RLEMovement760b4 ; 760b4 (1d:60b4)
 	db $ff
 
 GaryScript10: ; 760b9 (1d:60b9)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
@@ -244,7 +244,7 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 
 GaryText1: ; 760e0 (1d:60e0)
 	db $08 ; asm
-	ld a, [$d867]
+	ld a, [wd867]
 	bit 1, a
 	ld hl, GaryText_760f4
 	jr z, .asm_17e9f ; 0x760e9
@@ -275,8 +275,8 @@ GaryText2: ; 76108 (1d:6108)
 
 GaryText3: ; 7610d (1d:610d)
 	db $8
-	ld a, [$d717]
-	ld [$d11e], a
+	ld a, [W_PLAYERSTARTER]
+	ld [wd11e], a
 	call GetMonName
 	ld hl, GaryText_76120
 	call PrintText

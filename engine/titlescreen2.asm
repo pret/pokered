@@ -89,7 +89,7 @@ TitleBallYTable: ; 372a0 (d:72a0)
 
 Func_372ac: ; 372ac (d:72ac)
 ; Animate the TitleBall if a starter just got scrolled out.
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp STARTER1
 	jr z, .ok
 	cp STARTER2
@@ -115,6 +115,6 @@ GetTitleBallY: ; 372c4 (d:72c4)
 	pop de
 	and a
 	ret z
-	ld [$c328], a
+	ld [wOAMBuffer + $28], a
 	inc e
 	ret

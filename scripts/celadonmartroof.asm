@@ -3,8 +3,8 @@ CeladonMartRoofScript: ; 483d5 (12:43d5)
 
 CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	xor a
-	ld [$cd37], a
-	ld de, $cc5b
+	ld [wcd37], a
+	ld de, wcc5b
 	ld hl, CeladonMartRoofDrinkList ; $4408
 .asm_483e2
 	ld a, [hli]
@@ -12,7 +12,7 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	jr z, .asm_48404
 	push hl
 	push de
-	ld [$d11e], a
+	ld [wd11e], a
 	ld b, a
 	ld a, $1c
 	call Predef ; indirect jump to Func_f8a5 (f8a5 (3:78a5))
@@ -21,11 +21,11 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	ld a, b
 	and a
 	jr z, .asm_483e2
-	ld a, [$d11e]
+	ld a, [wd11e]
 	ld [de], a
 	inc de
 	push hl
-	ld hl, $cd37
+	ld hl, wcd37
 	inc [hl]
 	pop hl
 	jr .asm_483e2
@@ -41,22 +41,22 @@ CeladonMartRoofDrinkList: ; 48408 (12:4408)
 	db $00
 
 CeladonMartRoofScript_4840c: ; 4840c (12:440c)
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	ld hl, CeladonMartRoofText_484ee ; $44ee
 	call PrintText
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; $cc29
-	ld a, [$cd37]
+	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld a, [wcd37]
 	dec a
-	ld [wMaxMenuItem], a ; $cc28
+	ld [wMaxMenuItem], a ; wMaxMenuItem
 	ld a, $2
-	ld [wTopMenuItemY], a ; $cc24
+	ld [wTopMenuItemY], a ; wTopMenuItemY
 	ld a, $1
-	ld [wTopMenuItemX], a ; $cc25
-	ld a, [$cd37]
+	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld a, [wcd37]
 	dec a
 	ld bc, $2
 	ld hl, $3
@@ -68,13 +68,13 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	call TextBoxBorder
 	call UpdateSprites
 	call CeladonMartRoofScript_48532
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
 	bit 1, a
 	ret nz
-	ld hl, $cc5b
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld hl, wcc5b
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -84,7 +84,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr z, .asm_484b6
 	cp SODA_POP
 	jr z, .asm_48492
-	ld a, [$d778]
+	ld a, [wd778]
 	bit 6, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48515 ; $4515
@@ -95,11 +95,11 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, ReceivedTM49Text
 	call PrintText
-	ld hl, $d778
+	ld hl, wd778
 	set 6, [hl]
 	ret
 .asm_48492
-	ld a, [$d778]
+	ld a, [wd778]
 	bit 5, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48504 ; $4504
@@ -110,11 +110,11 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_4850a ; $450a
 	call PrintText
-	ld hl, $d778
+	ld hl, wd778
 	set 5, [hl]
 	ret
 .asm_484b6
-	ld a, [$d778]
+	ld a, [wd778]
 	bit 4, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_484f3 ; $44f3
@@ -125,7 +125,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_484f9 ; $44f9
 	call PrintText
-	ld hl, $d778
+	ld hl, wd778
 	set 4, [hl]
 	ret
 .BagFull
@@ -191,7 +191,7 @@ CeladonMartRoofText_4852c: ; 4852c (12:452c)
 	db "@"
 
 CeladonMartRoofScript_48532: ; 48532 (12:4532)
-	ld hl, $cc5b
+	ld hl, wcc5b
 	xor a
 	ld [$ffdb], a
 .asm_48538
@@ -199,14 +199,14 @@ CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	cp $ff
 	ret z
 	push hl
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes
-	ld de, $cd6d
+	ld de, wcd6d
 	call PlaceString
 	ld hl, $ffdb
 	inc [hl]
@@ -228,15 +228,15 @@ CeladonMartRoofText1: ; 48567 (12:4567)
 CeladonMartRoofText2: ; 4856c (12:456c)
 	db $08 ; asm
 	call CeladonMartRoofScript_483d8
-	ld a, [$cd37]
+	ld a, [wcd37]
 	and a
 	jr z, .asm_914b9 ; 0x48574
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, CeladonMartRoofText4
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_05aa4 ; 0x48588
 	call CeladonMartRoofScript_4840c

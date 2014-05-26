@@ -16,14 +16,14 @@ RedBedroomPC: ; 5db8e (17:5b8e)
 	db $fc ; FuncTX_ItemStoragePC
 
 Route15GateLeftBinoculars: ; 5db8f (17:5b8f)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4 ; i
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $a ; text id Route15UpstairsBinocularsText
 	call PrintPredefTextID
 	ld a, ARTICUNO
-	ld [$cf91], a
+	ld [wcf91], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 
@@ -33,7 +33,7 @@ Route15UpstairsBinocularsText: ; 5dba8 (17:5ba8)
 
 AerodactylFossil: ; 5dbad (17:5bad)
 	ld a, FOSSIL_AERODACTYL
-	ld [$cf91], a
+	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $9
@@ -46,7 +46,7 @@ AerodactylFossilText: ; 5dbbe (17:5bbe)
 
 KabutopsFossil: ; 5bdc3 (17:5bc3)
 	ld a, FOSSIL_KABUTOPS
-	ld [$cf91], a
+	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	ld a, $b
@@ -59,7 +59,7 @@ KabutopsFossilText: ; 5dbd4 (17:5bd4)
 
 DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
-; [$cf91] = pokemon interal id number
+; [wcf91] = pokemon interal id number
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
@@ -67,17 +67,17 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld [$ffb0], a
 	call SaveScreenTilesToBuffer1
 	ld a, $11
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	call UpdateSprites
-	ld a, [$cf91]
-	ld [$d0b5], a
+	ld a, [wcf91]
+	ld [wd0b5], a
 	call GetMonHeader
 	ld de, $8b10
 	call LoadMonFrontSprite
 	ld a, $80
 	ld [$ffe1], a
-	FuncCoord 10, 11 ; $c486
+	FuncCoord 10, 11
 	ld hl, Coord
 	ld a, $2
 	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
@@ -91,8 +91,8 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [$cc3c], a
-	ld a, [$cd3d]
+	ld [wcc3c], a
+	ld a, [wWhichTrade]
 	call PrintPredefTextID
 	ret
 
@@ -114,13 +114,13 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld a, $1
 	ld [wTopMenuItemX], a
 .asm_5c51
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	ld hl, wTileMap
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
-	ld hl, $c3ca
+	ld hl, wTileMap + $2a
 	ld de, HowToLinkText
 	call PlaceString
 	ld hl, LinkCableHelpText2
@@ -131,7 +131,7 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld a, [wCurrentMenuItem]
 	cp $3
 	jr z, .asm_5dc93 ; 0x5dc7b $16
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ld hl, LinkCableInfoTexts
 	add a
@@ -144,7 +144,7 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	call PrintText
 	jp .asm_5c51
 .asm_5dc93
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
@@ -198,15 +198,15 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld a, $1
 	ld [wTopMenuItemX], a
 .asm_5dd15
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	ld hl, wTileMap
 	ld bc, $060a
 	call TextBoxBorder
-	ld hl, $c3c9
+	ld hl, wTileMap + $29
 	ld de, StatusAilmentText1
 	call PlaceString
-	ld hl, $c3ce
+	ld hl, wTileMap + $2e
 	ld de, StatusAilmentText2
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2
@@ -244,7 +244,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	add b
 	cp $5
 	jr z, .exitBlackboard
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ld hl, ViridianBlackboardStatusPointers
 	add a
@@ -257,7 +257,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	call PrintText
 	jp .asm_5dd15
 .exitBlackboard
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer1
 	jp TextScriptEnd
@@ -318,11 +318,11 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
-	ld a, [wWhichTrade] ; $cd3d
-	ld [$cd5b], a
+	ld a, [wWhichTrade] ; wWhichTrade
+	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
-	ld a, [$d773]
+	ld a, [wd773]
 	bit 0, a
 	jr z, .ok
 
@@ -333,9 +333,9 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	bit 1, a
 	jr nz, .trySecondLock
 
-	ld a, [$d743]
+	ld a, [wd743]
 	ld b, a
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	cp b
 	jr z, .openFirstLock
 
@@ -344,11 +344,11 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 .openFirstLock
 ; Next can is trying for the second switch.
-	ld hl, $d773
+	ld hl, wd773
 	set 1, [hl]
 
 	ld hl, GymTrashCans ; $5e7d
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	; * 5
 	ld b, a
 	add a
@@ -375,34 +375,34 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	add hl, de
 	ld a, [hl]
 	and $f
-	ld [$d744], a
+	ld [wd744], a
 
 	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
 	jr .done
 
 .trySecondLock
-	ld a, [$d744]
+	ld a, [wd744]
 	ld b, a
-	ld a, [$cd5b]
+	ld a, [wcd5b]
 	cp b
 	jr z, .openSecondLock
 
 ; Reset the cans.
-	ld hl, $d773
+	ld hl, wd773
 	res 1, [hl]
 	call Random
 
 	and $e
-	ld [$d743], a
+	ld [wd743], a
 
 	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
 	jr .done
 
 .openSecondLock
 ; Completed the trash can puzzle.
-	ld hl, $d773
+	ld hl, wd773
 	set 0, [hl]
-	ld hl, $d126
+	ld hl, wd126
 	set 6, [hl]
 
 	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)

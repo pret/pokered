@@ -16,7 +16,7 @@ HallOfFameComputer: ; 7405c (1d:405c)
 	call FillMemory
 	ld hl, wTileMap
 	call Func_7417b
-	FuncCoord 0, 14 ; $c4b8
+	FuncCoord 0, 14
 	ld hl, Coord
 	call Func_7417b
 	ld a, $c0
@@ -30,8 +30,8 @@ HallOfFameComputer: ; 7405c (1d:405c)
 	ld c, $80
 	call DelayFrames
 	xor a
-	ld [wWhichTrade], a ; $cd3d
-	ld [$cd3e], a
+	ld [wWhichTrade], a ; wWhichTrade
+	ld [wTrainerEngageDistance], a
 	jp Credits
 
 Func_740ba: ; 740ba (1d:40ba)
@@ -53,16 +53,16 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call FillMiddleOfScreenWithWhite
 
 	; display the next monster from CreditsMons
-	ld hl,$CD3E
+	ld hl,wTrainerEngageDistance
 	ld c,[hl] ; how many monsters have we displayed so far?
 	inc [hl]
 	ld b,0
 	ld hl,CreditsMons
 	add hl,bc ; go that far in the list of monsters and get the next one
 	ld a,[hl]
-	ld [$CF91],a
-	ld [$D0B5],a
-	FuncCoord 8, 6 ; $c420
+	ld [wcf91],a
+	ld [wd0b5],a
+	FuncCoord 8, 6
 	ld hl,Coord
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
@@ -153,7 +153,7 @@ Func_7417b: ; 7417b (1d:417b)
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
-	FuncCoord 0, 4 ; $c3f0
+	FuncCoord 0, 4
 	ld hl, Coord
 	ld bc, $c8 ; 10 rows of 20 tiles each
 	ld a, $7f ; blank white tile
@@ -164,7 +164,7 @@ Credits: ; 7418e (1d:418e)
 	push de
 .asm_74192
 	pop de
-	FuncCoord 9, 6 ; $c421
+	FuncCoord 9, 6
 	ld hl, Coord
 	push hl
 	call FillMiddleOfScreenWithWhite
@@ -241,11 +241,11 @@ Credits: ; 7418e (1d:418e)
 	ld hl, $9600
 	ld bc, (BANK(TheEndGfx) << 8) + $0a
 	call CopyVideoData
-	FuncCoord 4, 8 ; $c444
+	FuncCoord 4, 8
 	ld hl, Coord
 	ld de, UnnamedText_74229 ; $4229
 	call PlaceString
-	FuncCoord 4, 9 ; $c458
+	FuncCoord 4, 9
 	ld hl, Coord
 	inc de
 	call PlaceString

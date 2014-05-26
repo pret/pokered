@@ -1,5 +1,5 @@
 DisplayEffectiveness: ; 2fb7b (b:7b7b)
-	ld a, [$D05B]
+	ld a, [wd05b]
 	and a, $7F
 	cp a, $0A
 	ret z

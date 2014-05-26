@@ -7,17 +7,17 @@ Route2GateTextPointers: ; 5d5d7 (17:55d7)
 
 Route2GateText1: ; 5d5db (17:55db)
 	db $08 ; asm
-	ld a, [$d7c2]
+	ld a, [wd7c2]
 	bit 0, a
 	jr nz, .asm_6592c ; 0x5d5e1
 	ld a, 10 ; pokemon needed
 	ldh [$db], a
 	ld a, HM_05 ; oak's aide reward
 	ldh [$dc], a
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetItemName ; $2fcf
-	ld hl, $cd6d
-	ld de, $cc5b
+	ld hl, wcd6d
+	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
 	ld a, $62
@@ -25,7 +25,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	ldh a, [$db]
 	cp $1
 	jr nz, .asm_ad646 ; 0x5d606
-	ld hl, $d7c2
+	ld hl, wd7c2
 	set 0, [hl]
 .asm_6592c ; 0x5d60d
 	ld hl, Route2GateText_5d616

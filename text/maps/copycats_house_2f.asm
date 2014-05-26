@@ -29,7 +29,7 @@ _TM31PreReceiveText:: ; a1636 (28:5636)
 _ReceivedTM31Text:: ; a1675 (28:5675)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM31ExplanationText1:: ; a1689 (28:5689)

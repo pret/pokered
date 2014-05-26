@@ -31,11 +31,11 @@ PickupItem:
 	jr nc, .BagFull
 
 	ld a, [$ffdb]
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11 ; RemoveMissableObject
 	call Predef
 	ld a, 1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, FoundItemText
 	jr .print
 

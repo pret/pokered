@@ -16,13 +16,13 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
-	ld hl, $d754
+	ld hl, wd754
 	res 0, [hl]
 	call PewterCityScript_1925e
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [$d755]
+	ld a, [wd755]
 	bit 7, a
 	ret nz
 	ld hl, CoordsData_19277
@@ -42,7 +42,7 @@ CoordsData_19277: ; 19277 (6:5277)
 	db $ff
 
 PewterCityScript1: ; 19280 (6:5280)
-	ld a, [$cc57]
+	ld a, [wcc57]
 	and a
 	ret nz
 	ld a, $3
@@ -68,7 +68,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld a, $11
 	ld [$ffee], a
 	ld a, $3
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f9
 	ld a, $3
 	ld [$ff8c], a
@@ -82,11 +82,11 @@ MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
 	db $00,$00,$00,$00,$FF
 
 PewterCityScript2: ; 192d3 (6:52d3)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	ld a, $3
@@ -95,10 +95,10 @@ PewterCityScript2: ; 192d3 (6:52d3)
 
 PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $3
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32fe
 	ld a, $3
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	xor a
@@ -108,7 +108,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ret
 
 PewterCityScript4: ; 19305 (6:5305)
-	ld a, [$cc57]
+	ld a, [wcc57]
 	and a
 	ret nz
 	ld a, $5
@@ -134,7 +134,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld a, $10
 	ld [$ffee], a
 	ld a, $5
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f9
 	ld a, $5
 	ld [$ff8c], a
@@ -148,11 +148,11 @@ MovementData_PewterGymGuyExit: ; 19353 (6:5353)
 	db $C0,$C0,$C0,$C0,$C0,$FF
 
 PewterCityScript5: ; 19359 (6:5359)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $4
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	ld a, $6
@@ -161,10 +161,10 @@ PewterCityScript5: ; 19359 (6:5359)
 
 PewterCityScript6: ; 1936f (6:536f)
 	ld a, $5
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32fe
 	ld a, $4
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	xor a
@@ -202,7 +202,7 @@ PewterCityText3: ; 193b1 (6:53b1)
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_f46a9 ; 0x193bf
 	ld hl, PewterCityText_193f6
@@ -214,13 +214,13 @@ PewterCityText3: ; 193b1 (6:53b1)
 	xor a
 	ldh [$b3], a
 	ldh [$b4], a
-	ld [$cf10], a
+	ld [wcf10], a
 	ld a, $2
-	ld [$cc57], a
+	ld [wcc57], a
 	ldh a, [$b8]
-	ld [$cc58], a
+	ld [wcc58], a
 	ld a, $3
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f4
 	ld a, $1
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -248,7 +248,7 @@ PewterCityText4: ; 19405 (6:5405)
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	cp $0
 	jr nz, .asm_e4603
 	ld hl, PewterCityText_1942c
@@ -278,13 +278,13 @@ PewterCityText5: ; 19436 (6:5436)
 	call PrintText
 	xor a
 	ldh [$b4], a
-	ld [$cf10], a
+	ld [wcf10], a
 	ld a, $3
-	ld [$cc57], a
+	ld [wcc57], a
 	ldh a, [$b8]
-	ld [$cc58], a
+	ld [wcc58], a
 	ld a, $5
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f4
 	ld a, $4
 	ld [W_PEWTERCITYCURSCRIPT], a

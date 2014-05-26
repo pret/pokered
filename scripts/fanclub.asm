@@ -3,7 +3,7 @@ FanClubScript: ; 59b70 (16:5b70)
 
 FanClubBikeInBag:
 ; check if any bike paraphernalia in bag
-	ld a, [$d771]
+	ld a, [wd771]
 	bit 1, a ; got bike voucher?
 	ret nz
 	ld b, BICYCLE
@@ -25,18 +25,18 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 FanClubText1:
 ; pikachu fan
 	db $08 ; asm
-	ld a, [$d771]
+	ld a, [wd771]
 	bit 7, a
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	ld hl, $d771
+	ld hl, wd771
 	set 6, [hl]
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ld hl, $d771
+	ld hl, wd771
 	res 7, [hl]
 .done
 	jp TextScriptEnd
@@ -52,18 +52,18 @@ FanClubText1:
 FanClubText2:
 ; seel fan
 	db $08 ; asm
-	ld a, [$d771]
+	ld a, [wd771]
 	bit 6, a
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	ld hl, $d771
+	ld hl, wd771
 	set 7, [hl]
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ld hl, $d771
+	ld hl, wd771
 	res 6, [hl]
 .done
 	jp TextScriptEnd
@@ -113,7 +113,7 @@ FanClubText5:
 	ld hl, .meetchairtext
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .nothanks
 
@@ -125,7 +125,7 @@ FanClubText5:
 	jr nc, .BagFull
 	ld hl, .receivedvouchertext
 	call PrintText
-	ld hl, $d771
+	ld hl, wd771
 	set 1, [hl]
 	jr .done
 .BagFull

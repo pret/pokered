@@ -2,12 +2,12 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld hl, wPokedexSeen
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
-	ld a, [$D11E] ; result of CountSetBits (seen count)
+	ld a, [wd11e] ; result of CountSetBits (seen count)
 	ld [$FFDB], a
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [$D11E] ; result of CountSetBits (own count)
+	ld a, [wd11e] ; result of CountSetBits (own count)
 	ld [$FFDC], a
 	ld hl, DexRatingsTable
 .findRating
@@ -23,10 +23,10 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; load text pointer into hl
-	ld a, [$D747]
+	ld a, [wd747]
 	bit 3, a
 	res 3, a
-	ld [$D747], a
+	ld [wd747], a
 	jr nz, .label3
 	push hl
 	ld hl, PokedexRatingText_441cc
@@ -36,7 +36,7 @@ DisplayDexRating: ; 44169 (11:4169)
 	callba Func_7d13b
 	jp WaitForTextScrollButtonPress ; wait for button press
 .label3
-	ld de, $CC5B
+	ld de, wcc5b
 	ld a, [$FFDB]
 	ld [de], a
 	inc de

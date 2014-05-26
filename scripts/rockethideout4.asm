@@ -9,11 +9,11 @@ RocketHideout4Script: ; 4545d (11:545d)
 	ret
 
 RocketHideout4Script_45473: ; 45473 (11:5473)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d81b]
+	ld a, [wd81b]
 	bit 5, a
 	jr nz, .asm_45496
 	and $c
@@ -24,12 +24,12 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 .asm_4548c
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, $d81b
+	ld hl, wd81b
 	set 5, [hl]
 .asm_45496
 	ld a, $e
 .asm_45498
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $050c
 	ld a, $17
 	jp Predef
@@ -54,25 +54,25 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, $d81b
+	ld hl, wd81b
 	set 7, [hl]
 	ld a, $a
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
 	call GBFadeIn1
 	ld a, $83
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	ld a, $87
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	call UpdateSprites
 	call GBFadeOut1
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
 	ld a, $0
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
@@ -95,7 +95,7 @@ RocketHideout4TrainerHeaders: ; 45515 (11:5515)
 RocketHideout4TrainerHeader0: ; 45515 (11:5515)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d81b ; flag's byte
+	dw wd81b ; flag's byte
 	dw RocketHideout4BattleText2 ; 0x5593 TextBeforeBattle
 	dw RocketHideout4AfterBattleText2 ; 0x559d TextAfterBattle
 	dw RocketHideout4EndBattleText2 ; 0x5598 TextEndBattle
@@ -104,7 +104,7 @@ RocketHideout4TrainerHeader0: ; 45515 (11:5515)
 RocketHideout4TrainerHeader2: ; 45521 (11:5521)
 	db $3 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw $d81b ; flag's byte
+	dw wd81b ; flag's byte
 	dw RocketHideout4BattleText3 ; 0x55ac TextBeforeBattle
 	dw RocketHideout4AfterBattleText3 ; 0x55b6 TextAfterBattle
 	dw RocketHideout4EndBattleText3 ; 0x55b1 TextEndBattle
@@ -113,7 +113,7 @@ RocketHideout4TrainerHeader2: ; 45521 (11:5521)
 RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d81b ; flag's byte
+	dw wd81b ; flag's byte
 	dw RocketHideout4BattleText4 ; 0x55c5 TextBeforeBattle
 	dw RocketHideout4AfterBattleText4 ; 0x55cf TextAfterBattle
 	dw RocketHideout4EndBattleText4 ; 0x55ca TextEndBattle
@@ -123,19 +123,19 @@ RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 
 RocketHideout4Text1: ; 4553a (11:553a)
 	db $08 ; asm
-	ld a, [$d81b]
+	ld a, [wd81b]
 	bit 7, a
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -216,12 +216,12 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	db $8
 	ld hl, RocketHideout4Text_455ec ; $55ec
 	call PrintText
-	ld hl, $d81b
+	ld hl, wd81b
 	bit 6, [hl]
 	set 6, [hl]
 	jr nz, .asm_455e9 ; 0x455dd $a
 	ld a, $88
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 .asm_455e9

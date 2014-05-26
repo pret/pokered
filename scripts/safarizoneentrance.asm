@@ -25,8 +25,8 @@ SafariZoneEntranceScript0: ; 751e7 (1d:51e7)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $c
-	ld [$c109], a
-	ld a, [$cd3d]
+	ld [wSpriteStateData1 + 9], a
+	ld a, [wWhichTrade]
 	cp $1
 	jr z, .asm_7520f ; 0x75207 $6
 	ld a, $2
@@ -73,8 +73,8 @@ SafariZoneEntranceScript3: ; 75240 (1d:5240)
 
 SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	ld a, $4
-	ld [$d528], a
-	ld hl, $d790
+	ld [wd528], a
+	ld hl, wd790
 	bit 6, [hl]
 	res 6, [hl]
 	jr z, .asm_7527f ; 0x7525a $23
@@ -86,7 +86,7 @@ SafariZoneEntranceScript5: ; 7524e (1d:524e)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [$da47], a
+	ld [W_NUMSAFARIBALLS], a
 	ld a, $80
 	ld c, $3
 	call SafariZoneEntranceScript_752a3
@@ -113,7 +113,7 @@ SafariZoneEntranceScript6: ; 75295 (1d:5295)
 	call SafariZoneEntranceScript_752b4
 	ret nz
 	call Delay3
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
 
@@ -121,14 +121,14 @@ SafariZoneEntranceScript_752a3: ; 752a3 (1d:52a3)
 	push af
 	ld b, $0
 	ld a, c
-	ld [$cd38], a
-	ld hl, $ccd3
+	ld [wcd38], a
+	ld hl, wccd3
 	pop af
 	call FillMemory
 	jp Func_3486
 
 SafariZoneEntranceScript_752b4: ; 752b4 (1d:52b4)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret
 
@@ -149,10 +149,10 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	TX_FAR SafariZoneEntranceText_9e6e4 ; 0x9e6e4
 	db $8
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .asm_75346
 	xor a
@@ -168,23 +168,23 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	jr .asm_7534c ; 0x752f7 $53
 .asm_752f9
 	xor a
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld a, $5
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, $0
-	ld [$cd3f], a
-	ld hl, $cd3f
-	ld de, $d349
+	ld [wTrainerFacingDirection], a
+	ld hl, wTrainerFacingDirection
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	ld a, $c ; SubtractBCDPredef
 	call Predef
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	ld hl, SafariZoneEntranceText_7535b
 	call PrintText
 	ld a, $1e
-	ld [$da47], a
+	ld [W_NUMSAFARIBALLS], a
 	ld a, 502 / $100
 	ld [wSafariSteps], a
 	ld a, 502 % $100
@@ -192,7 +192,7 @@ SafariZoneEntranceText4: ; 752ca (1d:52ca)
 	ld a, $40
 	ld c, $3
 	call SafariZoneEntranceScript_752a3
-	ld hl, $d790
+	ld hl, wd790
 	set 7, [hl]
 	res 6, [hl]
 	ld a, $3
@@ -230,32 +230,32 @@ SafariZoneEntranceText5: ; 7536f (1d:536f)
 	TX_FAR SafariZoneEntranceText_9e814 ; 0x9e814
 	db $8
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_7539c ; 0x7537b $1f
 	ld hl, SafariZoneEntranceText_753bb
 	call PrintText
 	xor a
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	ld a, $80
 	ld c, $3
 	call SafariZoneEntranceScript_752a3
-	ld hl, $d790
+	ld hl, wd790
 	res 6, [hl]
 	res 7, [hl]
 	ld a, $0
-	ld [$cf0d], a
+	ld [wcf0d], a
 	jr .asm_753b3 ; 0x7539a $17
 .asm_7539c
 	ld hl, SafariZoneEntranceText_753c0
 	call PrintText
 	ld a, $4
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	ld a, $40
 	ld c, $1
 	call SafariZoneEntranceScript_752a3
 	ld a, $5
-	ld [$cf0d], a
+	ld [wcf0d], a
 .asm_753b3
 	ld a, $6
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
@@ -278,7 +278,7 @@ SafariZoneEntranceText2: ; 753ca (1d:53ca)
 	ld hl, SafariZoneEntranceText_753e6
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, SafariZoneEntranceText_753f0
 	jr nz, .asm_278a6 ; 0x753db

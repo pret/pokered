@@ -9,15 +9,15 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	ret
 
 VictoryRoad3Script_44996: ; 44996 (11:4996)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, $d813
+	ld hl, wd813
 	bit 0, [hl]
 	ret z
 	ld a, $1d
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $503
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
@@ -35,25 +35,25 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	ld hl, .coordsData_449f9 ; $49f9
 	call CheckBoulderCoords
 	jp nc, .asm_449fe
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $1
 	jr nz, .asm_449dc
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
-	ld hl, $d813
+	ld hl, wd813
 	set 0, [hl]
 	ret
 .asm_449dc
-	ld hl, $d813
+	ld hl, wd813
 	bit 6, [hl]
 	set 6, [hl]
 	jr nz, .asm_449fe
 	ld a, $7a
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	ld a, $60
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 
@@ -64,19 +64,19 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 
 .asm_449fe
 	ld a, $c2
-	ld [$d71d], a
+	ld [wd71d], a
 	ld hl, .coordsData_449f9 ; $49f9
 	call Func_46981
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $1
 	jr nz, .asm_44a1b
-	ld hl, $d72d
+	ld hl, wd72d
 	res 4, [hl]
-	ld hl, $d732
+	ld hl, wd732
 	res 4, [hl]
 	ret
 .asm_44a1b
-	ld a, [$d72d]
+	ld a, [wd72d]
 	bit 4, a
 	jp z, CheckFightingMapTrainers
 	ret
@@ -97,7 +97,7 @@ VictoryRoad3TrainerHeaders: ; 44a38 (11:4a38)
 VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
 	db $1 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw $d813 ; flag's byte
+	dw wd813 ; flag's byte
 	dw VictoryRoad3BattleText2 ; 0x4a91 TextBeforeBattle
 	dw VictoryRoad3AfterBattleText2 ; 0x4a9b TextAfterBattle
 	dw VictoryRoad3EndBattleText2 ; 0x4a96 TextEndBattle
@@ -106,7 +106,7 @@ VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
 VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d813 ; flag's byte
+	dw wd813 ; flag's byte
 	dw VictoryRoad3BattleText3 ; 0x4aa0 TextBeforeBattle
 	dw VictoryRoad3AfterBattleText3 ; 0x4aaa TextAfterBattle
 	dw VictoryRoad3EndBattleText3 ; 0x4aa5 TextEndBattle
@@ -115,7 +115,7 @@ VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
 VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d813 ; flag's byte
+	dw wd813 ; flag's byte
 	dw VictoryRoad3BattleText4 ; 0x4aaf TextBeforeBattle
 	dw VictoryRoad3AfterBattleText4 ; 0x4ab9 TextAfterBattle
 	dw VictoryRoad3EndBattleText4 ; 0x4ab4 TextEndBattle
@@ -124,7 +124,7 @@ VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
 VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d813 ; flag's byte
+	dw wd813 ; flag's byte
 	dw VictoryRoad3BattleText5 ; 0x4abe TextBeforeBattle
 	dw VictoryRoad3AfterBattleText5 ; 0x4ac8 TextAfterBattle
 	dw VictoryRoad3EndBattleText5 ; 0x4ac3 TextEndBattle

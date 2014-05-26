@@ -1,10 +1,10 @@
 CinnabarIslandScript: ; 1ca19 (7:4a19)
 	call EnableAutoTextBoxDrawing
-	ld hl, $d126
+	ld hl, wd126
 	set 5, [hl]
-	ld hl, $d796
+	ld hl, wd796
 	res 0, [hl]
-	ld hl, $d7a3
+	ld hl, wd7a3
 	res 1, [hl]
 	ld hl, CinnabarIslandScriptPointers
 	ld a, [W_CINNABARISLANDCURSCRIPT]
@@ -25,26 +25,26 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	cp $12
 	ret nz
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $8
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	xor a
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [W_CINNABARISLANDCURSCRIPT], a
 	ret
 
 CinnabarIslandScript1: ; 1ca73 (7:4a73)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3

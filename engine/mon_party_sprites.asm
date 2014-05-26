@@ -1,16 +1,16 @@
 AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld b, a
 	inc a
 	jr GetAnimationSpeed
 
-; $cf1f contains the party mon's health bar colors
+; wcf1f contains the party mon's health bar colors
 ; 0: green
 ; 1: yellow
 ; 2: red
 AnimatePartyMon: ; 716ff (1c:56ff)
-	ld hl, $cf1f
+	ld hl, wcf1f
 	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
@@ -21,13 +21,13 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	ld hl, PartyMonSpeeds
 	add hl, bc
-	ld a, [$cf1b]
+	ld a, [wcf1b]
 	xor $1
 	add [hl]
 	ld c, a
 	add a
 	ld b, a
-	ld a, [W_SUBANIMTRANSFORM] ; $d08b
+	ld a, [W_SUBANIMTRANSFORM] ; W_SUBANIMTRANSFORM
 	and a
 	jr z, .resetSprites
 	cp c
@@ -38,11 +38,11 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	jr nz, .resetTimer
 	xor a
 .resetTimer
-	ld [W_SUBANIMTRANSFORM], a ; $d08b
+	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
 	jp DelayFrame
 .resetSprites
 	push bc
-	ld hl, $cc5b
+	ld hl, wcc5b
 	ld de, wOAMBuffer
 	ld bc, $60
 	call CopyData
@@ -51,7 +51,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	jr .incTimer
 .animateSprite
 	push bc
-	ld hl, $c302 ; OAM tile id
+	ld hl, wOAMBuffer + $02 ; OAM tile id
 	ld bc, $10
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
@@ -298,13 +298,13 @@ Func_71868: ; 71868 (1c:5868)
 	push de
 	push bc
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld hl, W_PARTYMON1 ; $d164
+	ld hl, W_PARTYMON1 ; W_PARTYMON1
 	ld e, a
 	ld d, $0
 	add hl, de
 	ld a, [hl]
 	call GetPartyMonSpriteID
-	ld [$cd5b], a
+	ld [wcd5b], a
 	call Func_718c3
 	pop bc
 	pop de
@@ -314,13 +314,13 @@ Func_71868: ; 71868 (1c:5868)
 Func_71882: ; 71882 (1c:5882)
 	xor a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	ld a, [$cd5d]
+	ld a, [wcd5d]
 	call GetPartyMonSpriteID
-	ld [$cd5b], a
+	ld [wcd5b], a
 	jr Func_718c3
 
 Func_71890: ; 71890 (1c:5890)
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
 	ld hl, $8000
@@ -330,7 +330,7 @@ Func_71890: ; 71890 (1c:5890)
 	ld hl, $8040
 	call Func_718ac
 	xor a
-	ld [$cd5d], a
+	ld [wcd5d], a
 	jr Func_71882
 
 Func_718ac: ; 718ac (1c:58ac)
@@ -371,15 +371,15 @@ Func_718c3: ; 718c3 (1c:58c3)
 	call Func_71281
 .asm_718dd
 	ld hl, wOAMBuffer
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $60
 	jp CopyData
 
 GetPartyMonSpriteID: ; 718e9 (1c:58e9)
-	ld [$d11e], a
+	ld [wd11e], a
 	ld a, $3a
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
-	ld a, [$d11e]
+	ld a, [wd11e]
 	ld c, a
 	dec a
 	srl a

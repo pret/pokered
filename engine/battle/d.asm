@@ -1,25 +1,25 @@
 Func_372d6: ; 372d6 (d:72d6)
 	call LoadTextBoxTilePatterns
-	FuncCoord 3, 4 ; $c3f3
+	FuncCoord 3, 4
 	ld hl, Coord
 	ld b, $7
 	ld c, $c
 	call TextBoxBorder
-	FuncCoord 4, 5 ; $c408
+	FuncCoord 4, 5
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; $d158
+	ld de, W_PLAYERNAME ; wd158
 	call PlaceString
-	FuncCoord 4, 10 ; $c46c
+	FuncCoord 4, 10
 	ld hl, Coord
-	ld de, W_GRASSRATE ; $d887
+	ld de, W_GRASSRATE ; W_GRASSRATE
 	call PlaceString
-	FuncCoord 9, 8 ; $c449
+	FuncCoord 9, 8
 	ld hl, Coord
 	ld a, $69
 	ld [hli], a
 	ld [hl], $6a
 	xor a
-	ld [$cfcb], a
+	ld [wcfcb], a
 	callab SetupPlayerAndEnemyPokeballs
 	ld c, $96
 	jp DelayFrames

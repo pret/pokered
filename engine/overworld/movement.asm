@@ -8,22 +8,22 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld [wSpriteStateData2], a
 	jr .asm_4e4a
 .asm_4e41
-	FuncCoord 8, 9 ; $c45c
+	FuncCoord 8, 9
 	ld a, [Coord]
 	ld [$ff93], a
 	cp $60
 	jr c, .asm_4e50
 .asm_4e4a
 	ld a, $ff
-	ld [$c102], a
+	ld [wSpriteStateData1 + 2], a
 	ret
 .asm_4e50
 	call Func_4c70
 	ld h, $c1
-	ld a, [wWalkCounter] ; $cfc5
+	ld a, [wWalkCounter] ; wcfc5
 	and a
 	jr nz, .asm_4e90
-	ld a, [$d528]
+	ld a, [wd528]
 	bit 2, a
 	jr z, .asm_4e65
 	xor a
@@ -45,16 +45,16 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	jr .asm_4e86
 .asm_4e7d
 	xor a
-	ld [$c107], a
-	ld [$c108], a
+	ld [wSpriteStateData1 + 7], a
+	ld [wSpriteStateData1 + 8], a
 	jr .asm_4eab
 .asm_4e86
-	ld [$c109], a
-	ld a, [$cfc4]
+	ld [wSpriteStateData1 + 9], a
+	ld a, [wcfc4]
 	bit 0, a
 	jr nz, .asm_4e7d
 .asm_4e90
-	ld a, [$d736]
+	ld a, [wd736]
 	bit 7, a
 	jr nz, .asm_4eb6
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -73,11 +73,11 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	and $3
 	ld [hl], a
 .asm_4eab
-	ld a, [$c108]
+	ld a, [wSpriteStateData1 + 8]
 	ld b, a
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	add b
-	ld [$c102], a
+	ld [wSpriteStateData1 + 2], a
 .asm_4eb6
 	ld a, [$ff93]
 	ld c, a
@@ -87,7 +87,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	jr nz, .asm_4ec3
 	ld a, $80
 .asm_4ec3
-	ld [$c207], a
+	ld [wSpriteStateData2 + $07], a
 	ret
 
 Func_4ec7: ; 4ec7 (1:4ec7)
@@ -106,7 +106,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	swap a
 	dec a
 	add a
-	ld hl, W_MAPSPRITEDATA ; $d4e4
+	ld hl, W_MAPSPRITEDATA ; wd4e4
 	add l
 	ld l, a
 	ld a, [hl]        ; read movement byte 2
@@ -128,7 +128,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	bit 7, a
 	jp nz, InitializeSpriteFacingDirection  ; c1x1 >= $80
 	ld b, a
-	ld a, [$cfc4]
+	ld a, [wcfc4]
 	bit 0, a
 	jp nz, notYetMoving
 	ld a, b
@@ -136,7 +136,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	jp z, UpdateSpriteMovementDelay  ; c1x1 == 2
 	cp $3
 	jp z, UpdateSpriteInWalkingAnimation  ; c1x1 == 3
-	ld a, [wWalkCounter] ; $cfc5
+	ld a, [wWalkCounter] ; wcfc5
 	and a
 	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
 	call InitializeSpriteScreenPosition
@@ -153,28 +153,28 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld [hl], a       ; (temporarily) increment movement byte 1
 	dec a
 	push hl
-	ld hl, $cf0f
-	dec [hl]         ; decrement $cf0f
+	ld hl, wcf0f
+	dec [hl]         ; decrement wcf0f
 	pop hl
-	ld de, $cc5b
-	call LoadDEPlusA ; a = [$cc5b + movement byte 1]
+	ld de, wcc5b
+	call LoadDEPlusA ; a = [wcc5b + movement byte 1]
 	cp $e0
 	jp z, ChangeFacingDirection
 	cp $ff
 	jr nz, .asm_4f4b
 	ld [hl], a       ; reset movement byte 1 to initial value
-	ld hl, $d730
+	ld hl, wd730
 	res 0, [hl]
 	xor a
-	ld [$cd38], a
-	ld [$cd3a], a
+	ld [wcd38], a
+	ld [wcd3a], a
 	ret
 .asm_4f4b
 	cp $fe
 	jr nz, .asm_4f5f
 	ld [hl], $1     ; set movement byte 1 to $1
-	ld de, $cc5b
-	call LoadDEPlusA ; a = [$cc5b + $fe] (?)
+	ld de, wcc5b
+	call LoadDEPlusA ; a = [wcc5b + $fe] (?)
 	jr .asm_4f5f
 .asm_4f59
 	call getTileSpriteStandsOn
@@ -391,11 +391,11 @@ notYetMoving: ; 5073 (1:5073)
 	jp UpdateSpriteImage
 
 InitializeSpriteFacingDirection: ; 507f (1:507f)
-	ld a, [$d72d]
+	ld a, [wd72d]
 	bit 5, a
 	jr nz, notYetMoving
 	res 7, [hl]
-	ld a, [$d52a]
+	ld a, [wd52a]
 	bit 3, a
 	jr z, .notFacingDown
 	ld c, $0                ; make sprite face down
@@ -438,7 +438,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	ld b, a
 	ld a, [hl]      ; c2x4 (Y position + 4)
 	sub b           ; relative to player position
@@ -447,7 +447,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	dec h
 	ld [hli], a     ; c1x4 (screen Y position)
 	inc h
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	ld b, a
 	ld a, [hli]     ; c2x6 (X position + 4)
 	sub b           ; relative to player position
@@ -474,7 +474,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	add $4
 	ld l, a
 	ld b, [hl]      ; c2x4: Y pos (+4)
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	cp b
 	jr z, .skipYVisibilityTest
 	jr nc, .spriteInvisible ; above screen region
@@ -484,7 +484,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .skipYVisibilityTest
 	inc l
 	ld b, [hl]      ; c2x5: X pos (+4)
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	cp b
 	jr z, .skipXVisibilityTest
 	jr nc, .spriteInvisible ; left of screen region
@@ -518,7 +518,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	jr .done
 .spriteVisible
 	ld c, a
-	ld a, [wWalkCounter] ; $cfc5
+	ld a, [wWalkCounter] ; wcfc5
 	and a
 	jr nz, .done           ; if player is currently walking, we're done
 	call UpdateSpriteImage
@@ -711,15 +711,15 @@ LoadDEPlusA: ; 522f (1:522f)
 	ret
 
 Func_5236: ; 5236 (1:5236)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 7, a
 	ret z
-	ld hl, $d72e
+	ld hl, wd72e
 	bit 7, [hl]
 	set 7, [hl]
 	jp z, Func_52a6
-	ld hl, $cc97
-	ld a, [$cd37]
+	ld hl, wcc97
+	ld a, [wcd37]
 	add l
 	ld l, a
 	jr nc, .asm_5251
@@ -767,20 +767,20 @@ Func_5236: ; 5236 (1:5236)
 	ld a, c
 	ld [hl], a
 	call Func_52c3
-	ld hl, $cf18
+	ld hl, wcf18
 	dec [hl]
 	ret nz
 	ld a, $8
-	ld [$cf18], a
-	ld hl, $cd37
+	ld [wcf18], a
+	ld hl, wcd37
 	inc [hl]
 	ret
 
 Func_52a6: ; 52a6 (1:52a6)
 	xor a
-	ld [$cd37], a
+	ld [wcd37], a
 	ld a, $8
-	ld [$cf18], a
+	ld [wcf18], a
 	jp Func_52c3
 
 Func_52b2: ; 52b2 (1:52b2)

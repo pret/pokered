@@ -22,7 +22,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 	call Func_3442
 	cp $ff
 	jp z, CheckFightingMapTrainers
-	ld hl, $d736
+	ld hl, wd736
 	set 7, [hl]
 	call Func_3486
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
@@ -306,19 +306,19 @@ RocketHideout2ArrowMovement36: ; 44fbb (11:4fbb)
 	db $FF
 
 RocketHideout2Script3: ; 44fc2 (11:4fc2)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	jr nz, LoadSpinnerArrowTiles
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d736
+	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
 	ld [W_CURMAPSCRIPT], a
 	ret
 
 LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
-	ld a, [$c102]
+	ld a, [wSpriteStateData1 + 2]
 	srl a
 	srl a
 	ld hl, SpinnerPlayerFacingDirections ; $5083
@@ -326,14 +326,14 @@ LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [$c102], a
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld [wSpriteStateData1 + 2], a
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	cp FACILITY
 	ld hl, SpinnerArrowTilePointers1 ; $5023
 	jr z, .asm_44ff6
 	ld hl, SpinnerArrowTilePointers2 ; $5053
 .asm_44ff6
-	ld a, [$cd38]
+	ld a, [wcd38]
 	bit 0, a
 	jr nz, .asm_45001
 	ld de, $18
@@ -474,7 +474,7 @@ RocketHideout2TrainerHeaders: ; 450d1 (11:50d1)
 RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d817 ; flag's byte
+	dw wd817 ; flag's byte
 	dw RocketHideout2BattleText2 ; 0x50e8 TextBeforeBattle
 	dw RocketHideout2AfterBattleTxt2 ; 0x50f2 TextAfterBattle
 	dw RocketHideout2EndBattleText2 ; 0x50ed TextEndBattle

@@ -35,7 +35,7 @@ _CardKeyFailText:: ; 80029 (20:4029)
 	done
 
 _TrainerNameText:: ; 80045 (20:4045)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text ": @@"
 
 _NoNibbleText:: ; 8004d (20:404d)
@@ -80,7 +80,7 @@ _PokeCenterSignText:: ; 800fc (20:40fc)
 _FoundItemText:: ; 80119 (20:4119)
 	text $52, " found"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _NoMoreRoomForItemText:: ; 8012a (20:412a)
@@ -100,7 +100,7 @@ _OaksAideHiText:: ; 80143 (20:4143)
 	cont "I'm supposed to"
 	cont "give you an"
 	cont "@"
-	TX_RAM $cc5b
+	TX_RAM wcc5b
 	text "!"
 
 	para "So, ", $52, "! Have"
@@ -124,7 +124,7 @@ _OaksAideUhOhText:: ; 801e4 (20:41e4)
 	text " kinds"
 	line "if you want the"
 	cont "@"
-	TX_RAM $cc5b
+	TX_RAM wcc5b
 	text "."
 	done
 
@@ -136,7 +136,7 @@ _OaksAideComeBackText:: ; 80250 (20:4250)
 	db $0
 	line "kinds, come back"
 	cont "for @"
-	TX_RAM $cc5b
+	TX_RAM wcc5b
 	text "."
 	done
 
@@ -154,7 +154,7 @@ _OaksAideHereYouGoText:: ; 8028c (20:428c)
 _OaksAideGotItemText:: ; 802d9 (20:42d9)
 	text $52, " got the"
 	line "@"
-	TX_RAM $cc5b
+	TX_RAM wcc5b
 	text "!@@"
 
 _OaksAideNoRoomText:: ; 802ec (20:42ec)
@@ -162,7 +162,7 @@ _OaksAideNoRoomText:: ; 802ec (20:42ec)
 	line "don't have any"
 	cont "room for the"
 	cont "@"
-	TX_RAM $cc5b
+	TX_RAM wcc5b
 	text "."
 	done
 
@@ -247,7 +247,7 @@ _AIBattleUseItemText:: ; 880d5 (22:40d5)
 	TX_RAM W_TRAINERNAME
 	db $0
 	line "used @"
-	TX_RAM $CD6D
+	TX_RAM wcd6d
 	db $0
 	cont "on @"
 	TX_RAM W_ENEMYMONNAME
@@ -255,36 +255,36 @@ _AIBattleUseItemText:: ; 880d5 (22:40d5)
 	prompt
 
 _TradeWentToText:: ; 880ef (22:40ef)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " went"
 	line "to @"
-	TX_RAM $d887
+	TX_RAM W_GRASSRATE
 	text "."
 	done
 
 _TradeForText:: ; 88103 (22:4103)
 	text "For ", $52, "'s"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text ","
 	done
 
 _TradeSendsText:: ; 88112 (22:4112)
-	TX_RAM $d887
+	TX_RAM W_GRASSRATE
 	text " sends"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "."
 	done
 
 _TradeWavesFarewellText:: ; 88124 (22:4124)
-	TX_RAM $d887
+	TX_RAM W_GRASSRATE
 	text " waves"
 	line "farewell as"
 	done
 
 _TradeTransferredText:: ; 8813b (22:413b)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " is"
 	line "transferred."
 	done
@@ -292,22 +292,22 @@ _TradeTransferredText:: ; 8813b (22:413b)
 _TradeTakeCareText:: ; 88150 (22:4150)
 	text "Take good care of"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "."
 	done
 
 _TradeWillTradeText:: ; 8816a (22:416a)
-	TX_RAM $d887
+	TX_RAM W_GRASSRATE
 	text " will"
 	line "trade @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	done
 
 _TradeforText:: ; 88180 (22:4180)
 	text "for ", $52, "'s"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "."
 	done
 
@@ -343,7 +343,7 @@ _OneMoreGoSlotMachineText:: ; 881f7 (22:41f7)
 _LinedUpText:: ; 88206 (22:4206)
 	text " lined up!"
 	line "Scored @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " coins!"
 	done
 
@@ -356,10 +356,10 @@ _YeahText:: ; 88236 (22:4236)
 
 _DexSeenOwnedText:: ; 8823e (22:423e)
 	text "#DEX   Seen:@"
-	TX_NUM $cc5b, 1, 3
+	TX_NUM wcc5b, 1, 3
 	db $0
 	line "         Owned:@"
-	TX_NUM $cc5c, 1, 3
+	TX_NUM wcc5c, 1, 3
 	db "@"
 
 _DexRatingText:: ; 88267 (22:4267)
@@ -980,7 +980,7 @@ _VermilionGymTrashFailText:: ; 8948c (22:548c)
 _FoundHiddenItemText:: ; 894d0 (22:54d0)
 	text $52, " found"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!@@"
 
 _HiddenItemBagFullText:: ; 894e1 (22:54e1)
@@ -1296,7 +1296,7 @@ _CantMoveText:: ; 89a1b (22:5a1b)
 _MoveIsDisabledText:: ; 89a29 (22:5a29)
 	text $5a, "'s"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " is"
 	cont "disabled!"
 	prompt
@@ -1317,7 +1317,7 @@ _InsteadText:: ; 89a56 (22:5a56)
 	cont "@@"
 
 _CF4BText:: ; 89a62 (22:5a62)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "@"
 
 _ExclamationPoint1Text:: ; 89a67 (22:5a67)
@@ -1422,12 +1422,12 @@ _MirrorMoveFailedText:: ; 89b96 (22:5b96)
 
 _HitXTimesText:: ; 89baf (22:5baf)
 	text "Hit @"
-	TX_NUM $cd05, 1, 1
+	TX_NUM wcd05, 1, 1
 	text " times!"
 	prompt
 
 _GainedText:: ; 89bc2 (22:5bc2)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " gained"
 	line "@@"
 
@@ -1439,15 +1439,15 @@ _BoostedText:: ; 89be1 (22:5be1)
 	text "a boosted"
 	cont "@@"
 _ExpPointsText:: ; 89bee (22:5bee)
-	TX_NUM $cf4b, 2, 4
+	TX_NUM wcf4b, 2, 4
 	text " EXP. Points!"
 	prompt
 
 _GrewLevelText:: ; 89c01 (22:5c01)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM $d127, 1, 3
+	TX_NUM W_CURENEMYLVL, 1, 3
 	text "!@@"
 
 _WildMonAppearedText:: ; 89c1d (22:5c1d)
@@ -1593,7 +1593,7 @@ _PartyMenuSwapMonText:: ; 89e1f (22:5e1f)
 	done
 
 _PotionText:: ; 89e31 (22:5e31)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	line "recovered by @"
 	TX_NUM wHPBarHPDifference, 2, 3
@@ -1601,52 +1601,52 @@ _PotionText:: ; 89e31 (22:5e31)
 	done
 
 _AntidoteText:: ; 89e4b (22:5e4b)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " was"
 	line "cured of poison!"
 	done
 
 _ParlyzHealText:: ; 89e65 (22:5e65)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "'s"
 	line "rid of paralysis!"
 	done
 
 _BurnHealText:: ; 89e7d (22:5e7d)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "'s"
 	line "burn was healed!"
 	done
 
 _IceHealText:: ; 89e94 (22:5e94)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " was"
 	line "defrosted!"
 	done
 
 _AwakeningText:: ; 89ea8 (22:5ea8)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	line "woke up!"
 	done
 
 _FullHealText:: ; 89eb6 (22:5eb6)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "'s"
 	line "health returned!"
 	done
 
 _ReviveText:: ; 89ecd (22:5ecd)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	line "is revitalized!"
 	done
 
 _RareCandyText:: ; 89ee2 (22:5ee2)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM $d127, $1,$3
+	TX_NUM W_CURENEMYLVL, $1,$3
 	text "!@@"
 
 _TurnedOnPC1Text:: ; 89efe (22:5efe)
@@ -1697,7 +1697,7 @@ _DepositHowManyText:: ; 89ff5 (22:5ff5)
 	done
 
 _ItemWasStoredText:: ; 8a000 (22:6000)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " was"
 	line "stored via PC."
 	prompt
@@ -1724,7 +1724,7 @@ _WithdrawHowManyText:: ; 8a073 (22:6073)
 _WithdrewItemText:: ; 8a07e (22:607e)
 	text "Withdrew"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "."
 	prompt
 
@@ -1769,10 +1769,10 @@ _DepositWhichMonText:: ; 0x8a144
 	done
 
 _MonWasStoredText:: ; 0x8a159
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " was"
 	line "stored in Box @"
-	TX_RAM $cd3d
+	TX_RAM wWhichTrade
 	text "."
 	prompt
 
@@ -1787,11 +1787,11 @@ _BoxFullText:: ; 0x8a198
 	prompt
 
 _MonIsTakenOutText:: ; 0x8a1b9
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " is"
 	line "taken out."
 	cont "Got @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "."
 	prompt
 
@@ -1816,19 +1816,19 @@ _ReleaseWhichMonText:: ; 0x8a228
 _OnceReleasedText:: ; 0x8a23d
 	text "Once released,"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " is"
 	cont "gone forever. OK?"
 	done
 
 _MonWasReleasedText:: ; 0x8a268
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " was"
 	line "released outside."
 	cont "Bye @"
 
 _CF4BExclamationText:: ; 8a288 (22:6288)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 	prompt
 
@@ -1852,7 +1852,7 @@ _HereYouGoText:: ; 8a2e7 (22:62e7)
 _SoYouWantPrizeText:: ; 8a2f6 (22:62f6)
 	text "So, you want"
 	line "@"
-	TX_RAM $CD6D
+	TX_RAM wcd6d
 	text "?"
 	done
 
@@ -1905,7 +1905,7 @@ _DoYouWantToNicknameText:: ; 0x8a605
 	text "Do you want to"
 	line "give a nickname"
 	cont "to @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "?"
 	done
 
@@ -1921,10 +1921,10 @@ _HisNameIsText:: ; 8a64a (22:664a)
 	prompt
 
 _WillBeTradedText:: ; 8a677 (22:6677)
-	TX_RAM $cd3f
+	TX_RAM wTrainerFacingDirection
 	text " and"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " will"
 	cont "be traded."
 	done
@@ -2044,27 +2044,27 @@ _ChooseABoxText:: ; 946b0 (25:46b0)
 	line $4a, " BOX.@@"
 
 _EvolvedText:: ; 946c2 (25:46c2)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " evolved"
 	done
 
 _IntoText:: ; 946cf (25:46cf)
 	db $0
 	line "into @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	done
 
 _StoppedEvolvingText:: ; 946dd (25:46dd)
 	text "Huh? @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	db $0
 	line "stopped evolving!"
 	prompt
 
 _IsEvolvingText:: ; 946fb (25:46fb)
 	text "What? @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	db $0
 	line "is evolving!"
 	done
@@ -2107,7 +2107,7 @@ _FireDefrostedText:: ; 94782 (25:4782)
 _MonsStatsRoseText:: ; 94795 (25:4795)
 	text $5a, "'s"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "@@"
 
 _GreatlyRoseText:: ; 947a0 (25:47a0)
@@ -2120,7 +2120,7 @@ _RoseText:: ; 947ab (25:47ab)
 _MonsStatsFellText:: ; 947b3 (25:47b3)
 	text $59, "'s"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "@@"
 
 _GreatlyFellText:: ; 947be (25:47be)
@@ -2187,14 +2187,14 @@ _MimicLearnedMoveText:: ; 9488c (25:488c)
 	text $5a
 	line "learned"
 	cont "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	prompt
 
 _MoveWasDisabledText:: ; 9489e (25:489e)
 	text $59, "'s"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " was"
 	cont "disabled!"
 	prompt
@@ -2297,7 +2297,7 @@ _TransformedText:: ; 94a6c (25:4a6c)
 	text $5a
 	line "transformed into"
 	cont "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	prompt
 
@@ -2441,7 +2441,7 @@ _PokemartGreetingText:: ; a259c (28:659c)
 	done
 
 _PokemonFaintedText:: ; a25b7 (28:65b7)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	db $0
 	line "fainted!"
 	done
@@ -2464,7 +2464,7 @@ _PokemartBuyingGreetingText:: ; a2608 (28:6608)
 	done
 
 _PokemartTellBuyPriceText:: ; a2619 (28:6619)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "?"
 	line "That will be"
 	cont "¥@"
@@ -2519,10 +2519,10 @@ _PokemartAnythingElseText:: ; a2719 (28:6719)
 	done
 
 _LearnedMove1Text:: ; a273b (28:673b)
-	TX_RAM $d036
+	TX_RAM wd036
 	text " learned"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _WhichMoveToForgetText:: ; a2750 (28:6750)
@@ -2533,29 +2533,29 @@ _WhichMoveToForgetText:: ; a2750 (28:6750)
 _AbandonLearningText:: ; a2771 (28:6771)
 	text "Abandon learning"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "?"
 	done
 
 _DidNotLearnText:: ; a278a (28:678a)
-	TX_RAM $d036
+	TX_RAM wd036
 	db $0
 	line "did not learn"
 	cont "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 	prompt
 
 _TryingToLearnText:: ; a27a4 (28:67a4)
-	TX_RAM $d036
+	TX_RAM wd036
 	text " is"
 	line "trying to learn"
 	cont "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 
 	para "But, @"
-	TX_RAM $d036
+	TX_RAM wd036
 	db $0
 	line "can't learn more"
 	cont "than 4 moves!"
@@ -2563,7 +2563,7 @@ _TryingToLearnText:: ; a27a4 (28:67a4)
 	para "Delete an older"
 	line "move to make room"
 	cont "for @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "?"
 	done
 
@@ -2576,10 +2576,10 @@ _PoofText:: ; a2827 (28:6827)
 _ForgotAndText:: ; a2830 (28:6830)
 	db $0
 	para "@"
-	TX_RAM $d036
+	TX_RAM wd036
 	text " forgot"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 
 	para "And..."
@@ -2667,12 +2667,12 @@ _CableClubNPCText6:: ; a4014 (29:4014)
 	done
 
 _UsedStrengthText:: ; a403c (29:403c)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " used"
 	line "STRENGTH.@@"
 
 _CanMoveBouldersText:: ; a4051 (29:4051)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " can"
 	line "move boulders."
 	prompt
@@ -2698,13 +2698,13 @@ _WarpToLastPokemonCenterText:: ; a40cc (29:40cc)
 	done
 
 _CannotUseTeleportNowText:: ; a40eb (29:40eb)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " can't"
 	line "use TELEPORT now."
 	prompt
 
 _CannotFlyHereText:: ; a4107 (29:4107)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " can't"
 	line "FLY here."
 	prompt
@@ -2732,7 +2732,7 @@ _CannotGetOffHereText:: ; a4168 (29:4168)
 _GotMonText:: ; a4180 (29:4180)
 	text $52, " got"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!@@"
 
 _SetToBoxText:: ; a418f (29:418f)
@@ -2743,7 +2743,7 @@ _SetToBoxText:: ; a418f (29:418f)
 	text " was"
 	cont "sent to #MON"
 	cont "BOX @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " on PC!"
 	done
 
@@ -2829,7 +2829,7 @@ _ItemUseBallText06:: ; a6835 (29:6835)
 _SurfingGotOnText:: ; a685e (29:685e)
 	text $52, " got on"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	prompt
 
@@ -2839,10 +2839,10 @@ _SurfingNoPlaceToGetOffText:: ; a686f (29:686f)
 	prompt
 
 _VitaminStatRoseText:: ; a688c (29:688c)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "'s"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text " rose."
 	prompt
 
@@ -2907,13 +2907,13 @@ _RestorePPWhichTechniqueText:: ; a69c2 (29:69c2)
 	done
 
 _PPMaxedOutText:: ; a69e2 (29:69e2)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "'s PP"
 	line "is maxed out."
 	prompt
 
 _PPIncreasedText:: ; a69f9 (29:69f9)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "'s PP"
 	line "increased."
 	prompt
@@ -2933,26 +2933,26 @@ _BootedUpHMText:: ; a6a30 (29:6a30)
 _TeachMachineMoveText:: ; a6a42 (29:6a42)
 	text "It contained"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 
 	para "Teach @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	db $0
 	line "to a #MON?"
 	done
 
 _MonCannotLearnMachineMoveText:: ; a6a6e (29:6a6e)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " is not"
 	line "compatible with"
 	cont "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "."
 
 	para "It can't learn"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "."
 	prompt
 
@@ -2989,7 +2989,7 @@ _NoCyclingAllowedHereText:: ; a6b34 (29:6b34)
 _NoSurfingHereText:: ; a6b4e (29:6b4e)
 	text "No SURFing on"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " here!"
 	prompt
 
@@ -3006,7 +3006,7 @@ _ItemUseText001:: ; a8000 (2a:4000)
 	text $52," used@@"
 
 _ItemUseText002:: ; a8009 (2a:4009)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 	done
 
@@ -3014,7 +3014,7 @@ _GotOnBicycleText1:: ; a800f (2a:400f)
 	text $52, " got on the@@"
 
 _GotOnBicycleText2:: ; a801e (2a:401e)
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 	prompt
 
@@ -3023,21 +3023,21 @@ _GotOffBicycleText1:: ; a8024 (2a:4024)
 
 _GotOffBicycleText2:: ; a8030 (2a:4030)
 	text "the @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "."
 	prompt
 
 _ThrewAwayItemText:: ; a803c (2a:403c)
 	text "Threw away"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "."
 	prompt
 
 _IsItOKToTossItemText:: ; a804f (2a:404f)
 	text "Is it OK to toss"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "?"
 	prompt
 
@@ -3047,10 +3047,10 @@ _TooImportantToTossText:: ; a8068 (2a:4068)
 	prompt
 
 _AlreadyKnowsText:: ; a8088 (2a:4088)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " knows"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!"
 	prompt
 
@@ -3062,21 +3062,21 @@ _ConnectCableText:: ; a809a (2a:409a)
 _TradedForText:: ; a80bc (2a:40bc)
 	text $52, " traded"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text " for"
 	cont "@"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text "!@@"
 
 _WannaTrade1Text:: ; a80d8 (2a:40d8)
 	text "I'm looking for"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text "! Wanna"
 
 	para "trade one for"
 	line "@"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text "? "
 	done
 
@@ -3088,7 +3088,7 @@ _NoTrade1Text:: ; a810b (2a:410b)
 _WrongMon1Text:: ; a811d (2a:411d)
 	text "What? That's not"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text "!"
 
 	para "If you get one,"
@@ -3102,7 +3102,7 @@ _Thanks1Text:: ; a8155 (2a:4155)
 _AfterTrade1Text:: ; a8162 (2a:4162)
 	text "Isn't my old"
 	line "@"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text " great?"
 	done
 
@@ -3111,10 +3111,10 @@ _WannaTrade2Text:: ; a817c (2a:417c)
 	line "you want to trade"
 
 	para "your @"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	db $0
 	line "for @"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text "?"
 	done
 
@@ -3126,7 +3126,7 @@ _NoTrade2Text:: ; a81b5 (2a:41b5)
 _WrongMon2Text:: ; a81d3 (2a:41d3)
 	text "Hmmm? This isn't"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text "."
 
 	para "Think of me when"
@@ -3139,7 +3139,7 @@ _Thanks2Text:: ; a8209 (2a:4209)
 
 _AfterTrade2Text:: ; a8212 (2a:4212)
 	text "The @"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text " you"
 	line "traded to me"
 
@@ -3149,12 +3149,12 @@ _AfterTrade2Text:: ; a8212 (2a:4212)
 _WannaTrade3Text:: ; a8240 (2a:4240)
 	text "Hi! Do you have"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text "?"
 
 	para "Want to trade it"
 	line "for @"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text "?"
 	done
 
@@ -3165,7 +3165,7 @@ _NoTrade3Text:: ; a8274 (2a:4274)
 _WrongMon3Text:: ; a8284 (2a:4284)
 	text "...This is no"
 	line "@"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text "."
 
 	para "If you get one,"
@@ -3179,11 +3179,11 @@ _Thanks3Text:: ; a82bc (2a:42bc)
 _AfterTrade3Text:: ; a82c9 (2a:42c9)
 	text "How is my old"
 	line "@"
-	TX_RAM $cd1e
+	TX_RAM wPlayerMonAccuracyMod
 	text "?"
 
 	para "My @"
-	TX_RAM $cd13
+	TX_RAM wcd13
 	text " is"
 	line "doing great!"
 	done
@@ -3194,7 +3194,7 @@ _NothingToCutText:: ; a82f8 (2a:42f8)
 	prompt
 
 _UsedCutText:: ; a8315 (2a:4315)
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text " hacked"
 	line "away with CUT!"
 	prompt

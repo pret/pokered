@@ -1,36 +1,36 @@
 VermilionDockScript: ; 1db52 (7:5b52)
 	call EnableAutoTextBoxDrawing
-	ld hl, $d803
+	ld hl, wd803
 	bit 4, [hl]
 	jr nz, .asm_1db8d ; 0x1db5a $31
 	bit 0, [hl]
 	ret z
-	ld a, [$d42f]
+	ld a, [wd42f]
 	cp $1
 	ret nz
 	bit 2, [hl]
 	jp z, VermilionDock_1db9b
 	set 4, [hl]
 	call Delay3
-	ld hl, $d730
+	ld hl, wd730
 	set 7, [hl]
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld a, $40
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld a, $3
-	ld [$cd38], a
+	ld [wcd38], a
 	xor a
-	ld [$c206], a
-	ld [$cd3b], a
+	ld [wSpriteStateData2 + $06], a
+	ld [wcd3b], a
 	dec a
 	ld [wJoyIgnore], a
 	ret
 .asm_1db8d
 	bit 5, [hl]
 	ret nz
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld [wJoyIgnore], a
@@ -41,19 +41,19 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	set 2, [hl]
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
 	callba LoadSmokeTileFourTimes
 	xor a
-	ld [$c102], a
+	ld [wSpriteStateData1 + 2], a
 	ld c, $78
 	call DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
-	FuncCoord 0, 10 ; $c468
+	FuncCoord 0, 10
 	ld hl, Coord
 	ld bc, $0078
 	ld a, $14
@@ -63,11 +63,11 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	call Delay3
 	xor a
 	ld [$ffba], a
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld [$ff49], a
 	ld a, $58
-	ld [$cd3e], a
-	ld hl, $d526
+	ld [wTrainerEngageDistance], a
+	ld hl, wd526
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -76,16 +76,16 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $ff
-	ld [$cfcb], a
+	ld [wcfcb], a
 	ld d, $0
 	ld e, $8
 .asm_1dbfa
 	ld hl, $0002
 	add hl, bc
 	ld a, l
-	ld [$d526], a
+	ld [wd526], a
 	ld a, h
-	ld [$d527], a
+	ld [wd527], a
 	push hl
 	push de
 	call ScheduleEastColumnRedraw
@@ -112,22 +112,22 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, $90
 	ld [$ffb0], a
 	ld a, $1
-	ld [$cfcb], a
+	ld [wcfcb], a
 	pop hl
 	pop bc
 	ld [hl], b
 	dec hl
 	ld [hl], c
 	call LoadPlayerSpriteGraphics
-	ld hl, $d3ae
+	ld hl, wd3ae
 	dec [hl]
 	ret
 
 VermilionDock_1dc42: ; 1dc42 (7:5c42)
 	push bc
 	push de
-	ld hl, $c311
-	ld a, [$cd3d]
+	ld hl, wOAMBuffer + $11
+	ld a, [wWhichTrade]
 	swap a
 	ld c, a
 	ld de, $0004
@@ -142,14 +142,14 @@ VermilionDock_1dc42: ; 1dc42 (7:5c42)
 	ret
 
 VermilionDock_1dc59: ; 1dc59 (7:5c59)
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	sub $10
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld c, a
 	ld b, $64
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	inc a
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld a, $1
 	ld de, VermilionDockOAMBlock
 	call WriteOAMBlock
@@ -180,15 +180,15 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 	ret
 
 VermilionDock_1dc94: ; 1dc94 (7:5c94)
-	ld hl, $cc5b
+	ld hl, wcc5b
 	ld bc, $00b4
 	ld a, $14
 	call FillMemory
 	ld hl, $9940
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $000c
 	call CopyVideoData
-	ld hl, $c754
+	ld hl, wOverworldMap + 10 + 7 * VERMILION_DOCK_WIDTH ; 10, 7
 	ld a, $d
 	ld [hli], a
 	ld [hli], a

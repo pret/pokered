@@ -22,7 +22,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	call Func_3442
 	cp $ff
 	jp z, CheckFightingMapTrainers
-	ld hl, $d736
+	ld hl, wd736
 	set 7, [hl]
 	call Func_3486
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
@@ -136,12 +136,12 @@ RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
 	db $FF
 
 RocketHideout3Script3 ; 452e4 (11:452e4)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	jp nz, LoadSpinnerArrowTiles
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, $d736
+	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
 	ld [W_CURMAPSCRIPT], a
@@ -157,7 +157,7 @@ RocketHideout3TrainerHeaders: ; 45302 (11:5302)
 RocketHideout3TrainerHeader0: ; 45302 (11:5302)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d819 ; flag's byte
+	dw wd819 ; flag's byte
 	dw RocketHideout3BattleText2 ; 0x5325 TextBeforeBattle
 	dw RocketHideout3AfterBattleTxt2 ; 0x532f TextAfterBattle
 	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
@@ -166,7 +166,7 @@ RocketHideout3TrainerHeader0: ; 45302 (11:5302)
 RocketHideout3TrainerHeader2: ; 4530e (11:530e)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d819 ; flag's byte
+	dw wd819 ; flag's byte
 	dw RocketHideout3BattleTxt ; 0x533e TextBeforeBattle
 	dw RocketHideout3AfterBattleText3 ; 0x5348 TextAfterBattle
 	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle

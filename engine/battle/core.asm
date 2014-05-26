@@ -94,9 +94,9 @@ EffectsArray5B: ; 3c049 (f:4049)
 Func_3c04c: ; 3c04c (f:404c)
 	call Func_3ec92
 	ld a, $1
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld bc, $307
 	call ClearScreenArea
@@ -139,7 +139,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld [$ffd7], a
 	ld [$ffaf], a
 	dec a
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -171,7 +171,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $31
 	ld [$ffe1], a
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld a, $1
 	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
@@ -190,7 +190,7 @@ Func_3c04c: ; 3c04c (f:404c)
 
 Func_3c0ff: ; 3c0ff (f:40ff)
 	push bc
-	ld hl, $c301
+	ld hl, wOAMBuffer + $01
 	ld c, $15
 	ld de, $4
 .asm_3c108
@@ -217,11 +217,11 @@ Func_3c110: ; 3c110 (f:4110)
 Func_3c11e: ; 3c11e (f:411e)
 	xor a
 	ld [W_PLAYERMONSALIVEFLAGS], a
-	ld [$ccf5], a
-	ld [$cd6a], a
+	ld [wccf5], a
+	ld [wcd6a], a
 	inc a
-	ld [$d11d], a
-	ld hl, W_ENEMYMON1HP ; $d8a5
+	ld [wd11d], a
+	ld hl, W_ENEMYMON1HP ; wd8a5
 	ld bc, $2b
 	ld d, $3
 .asm_3c134
@@ -233,8 +233,8 @@ Func_3c11e: ; 3c11e (f:411e)
 	jr .asm_3c134
 .asm_3c13c
 	ld a, d
-	ld [$cc3e], a
-	ld a, [W_ISINBATTLE] ; $d057
+	ld [wcc3e], a
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	call nz, Func_3c92a
 	ld c, $28
@@ -246,16 +246,16 @@ Func_3c11e: ; 3c11e (f:411e)
 	and a
 	jp z, HandlePlayerBlackOut
 	call LoadScreenTilesFromBuffer1
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	and a
 	jp z, Func_3c1ad
 .asm_3c161
 	call InitBattleMenu
 	ret c
-	ld a, [$cd6a]
+	ld a, [wcd6a]
 	and a
 	jr z, .asm_3c161
-	ld a, [W_NUMSAFARIBALLS] ; $da47
+	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
 	and a
 	jr nz, .asm_3c17a
 	call LoadScreenTilesFromBuffer1
@@ -263,17 +263,17 @@ Func_3c11e: ; 3c11e (f:411e)
 	jp PrintText
 .asm_3c17a
 	callab PrintSafariZoneBattleText
-	ld a, [$cffb]
+	ld a, [W_ENEMYMONSPEED + 1]
 	add a
 	ld b, a
 	jp c, asm_3c202
-	ld a, [$cce9]
+	ld a, [wcce9]
 	and a
 	jr z, .asm_3c194
 	srl b
 	srl b
 .asm_3c194
-	ld a, [$cce8]
+	ld a, [wcce8]
 	and a
 	jr z, .asm_3c1a0
 	sla b
@@ -291,38 +291,38 @@ OutOfSafariBallsText: ; 3c1a8 (f:41a8)
 
 Func_3c1ad: ; 3c1ad (f:41ad)
 	xor a
-	ld [wWhichPokemon], a ; $cf92
+	ld [wWhichPokemon], a ; wWhichPokemon
 .asm_3c1b1
 	call Func_3ca97
 	jr nz, .asm_3c1bc
-	ld hl, wWhichPokemon ; $cf92
+	ld hl, wWhichPokemon ; wWhichPokemon
 	inc [hl]
 	jr .asm_3c1b1
 .asm_3c1bc
-	ld a, [wWhichPokemon] ; $cf92
-	ld [wPlayerMonNumber], a ; $cc2f
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	inc a
-	ld hl, W_NUMINPARTY ; $d163
+	ld hl, W_NUMINPARTY ; W_NUMINPARTY
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [$cf91], a
-	ld [$cfd9], a
+	ld [wcf91], a
+	ld [wcfd9], a
 	call LoadScreenTilesFromBuffer1
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld a, $9
 	call Func_3c8df
 	call SaveScreenTilesToBuffer1
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld c, a
 	ld b, $1
 	push bc
 	ld hl, W_PLAYERMONSALIVEFLAGS
 	ld a, $10 ; FlagActionPredef
 	call Predef
-	ld hl, $ccf5
+	ld hl, wccf5
 	pop bc
 	ld a, $10 ; FlagActionPredef
 	call Predef
@@ -332,12 +332,12 @@ Func_3c1ad: ; 3c1ad (f:41ad)
 	jr MainInBattleLoop
 asm_3c202: ; 3c202 (f:4202)
 	call LoadScreenTilesFromBuffer1
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	ld hl, WildRanText
 	jr nz, .asm_3c216
 	xor a
-	ld [$cf0b], a
+	ld [wcf0b], a
 	ld hl, EnemyRanText
 .asm_3c216
 	call PrintText
@@ -363,49 +363,49 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [hli]
 	or [hl]
 	jp z, HandlePlayerMonFainted  ; test if current player mon is fainted
-	ld hl, $cfe6
+	ld hl, W_ENEMYMONCURHP
 	ld a, [hli]
 	or [hl]
 	jp z, HandleEnemyMonFainted
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [$d11d], a
-	ld a, [$d063]
+	ld [wd11d], a
+	ld a, [W_PLAYERBATTSTATUS2]
 	and $60
 	jr nz, .asm_3c2a6 ; 0x3c252 $52
-	ld hl, $d067
+	ld hl, W_ENEMYBATTSTATUS1
 	res 3, [hl]
-	ld hl, $d062
+	ld hl, W_PLAYERBATTSTATUS1
 	res 3, [hl]
 	ld a, [hl]
 	and $12
 	jr nz, .asm_3c2a6 ; 0x3c261 $43
 	call InitBattleMenu ; show battle menu
 	ret c
-	ld a, [$d078]
+	ld a, [wd078]
 	and a
 	ret nz
-	ld a, [$d018]
+	ld a, [W_PLAYERMONSTATUS]
 	and $27
 	jr nz, .asm_3c2a6 ; 0x3c271 $33
-	ld a, [$d062]
+	ld a, [W_PLAYERBATTSTATUS1]
 	and $21
 	jr nz, .asm_3c2a6 ; 0x3c278 $2c
-	ld a, [$d067]
+	ld a, [W_ENEMYBATTSTATUS1]
 	bit 5, a
 	jr z, .asm_3c288 ; 0x3c27f $7
 	ld a, $ff
-	ld [$ccdc], a
+	ld [wPlayerSelectedMove], a
 	jr .asm_3c2a6 ; 0x3c286 $1e
 .asm_3c288
-	ld a, [$cd6a]
+	ld a, [wcd6a]
 	and a
 	jr nz, .asm_3c2a6 ; 0x3c28c $18
-	ld [$ccdb], a
+	ld [wMoveMenuType], a
 	inc a
-	ld [$d07c], a
+	ld [W_ANIMATIONID], a
 	xor a
-	ld [$cc35], a
+	ld [wcc35], a
 	call MoveSelectionMenu
 	push af
 	call LoadScreenTilesFromBuffer1
@@ -417,7 +417,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [W_ISLINKBATTLE]
 	cp $4
 	jr nz, .noLinkBattle
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	cp $f
 	jp z, asm_3c202
 	cp $e
@@ -426,10 +426,10 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jr z, .noLinkBattle
 	sub $4
 	jr c, .noLinkBattle
-	ld a, [$d062]
+	ld a, [W_PLAYERBATTSTATUS1]
 	bit 5, a
 	jr z, .asm_3c2dd ; 0x3c2c9 $12
-	ld a, [$cc2e]
+	ld a, [wPlayerMoveListIndex]
 	ld hl, W_PLAYERMONMOVES
 	ld c, a
 	ld b, $0
@@ -490,7 +490,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	callab TrainerAI
 	jr c, .AIActionUsedEnemyFirst
 	call Func_3e6bc ; execute enemy move
-	ld a, [$d078]
+	ld a, [wd078]
 	and a
 	ret nz
 	ld a, b
@@ -501,7 +501,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jp z, HandleEnemyMonFainted
 	call Func_3cd5a
 	call Func_3d65e ; execute player move
-	ld a, [$d078]
+	ld a, [wd078]
 	and a
 	ret nz
 	ld a, b
@@ -514,7 +514,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jp MainInBattleLoop
 .playerMovesFirst
 	call Func_3d65e ; execute player move
-	ld a, [$d078]
+	ld a, [wd078]
 	and a
 	ret nz
 	ld a, b
@@ -528,7 +528,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	callab TrainerAI
 	jr c, .AIActionUsedPlayerFirst
 	call Func_3e6bc ; execute enemy move
-	ld a, [$d078]
+	ld a, [wd078]
 	and a
 	ret nz
 	ld a, b
@@ -542,13 +542,13 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jp MainInBattleLoop
 
 HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
-	ld hl, W_PLAYERMONCURHP ; $d015
-	ld de, W_PLAYERMONSTATUS ; $d018
+	ld hl, W_PLAYERMONCURHP ; wd015
+	ld de, W_PLAYERMONSTATUS ; W_PLAYERMONSTATUS
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
-	ld hl, W_ENEMYMONCURHP ; $cfe6
-	ld de, W_ENEMYMONSTATUS ; $cfe9
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
+	ld de, W_ENEMYMONSTATUS ; wcfe9
 .playersTurn
 	ld a, [de]
 	and (1 << BRN) | (1 << PSN)
@@ -562,17 +562,17 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 .poisoned
 	call PrintText
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a,BURN_PSN_ANIM
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
 .notBurnedOrPoisoned
-	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	ld de, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn2
-	ld de, W_ENEMYBATTSTATUS2 ; $d068
+	ld de, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .playersTurn2
 	ld a, [de]
 	add a
@@ -583,7 +583,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	xor $1
 	ld [H_WHOSETURN], a ; $fff3
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a,ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
@@ -643,13 +643,13 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 	jr nz, .nonZeroDamage
 	inc c         ; damage is at least 1
 .nonZeroDamage
-	ld hl, W_PLAYERBATTSTATUS3 ; $d064
-	ld de, W_PLAYERTOXICCOUNTER ; $d06c
+	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
+	ld de, W_PLAYERTOXICCOUNTER ; wd06c
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
-	ld hl, W_ENEMYBATTSTATUS3 ; $d069
-	ld de, W_ENEMYTOXICCOUNTER ; $d071
+	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
+	ld de, W_ENEMYTOXICCOUNTER ; wd071
 .playersTurn
 	bit 0, [hl]
 	jr z, .noToxic
@@ -690,11 +690,11 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP: ; 3c43d (f:443d)
 ; adds bc to enemy HP
 HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	push hl
-	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .playersTurn
-	ld hl, W_PLAYERMONMAXHP ; $d023
+	ld hl, W_PLAYERMONMAXHP ; wd023
 .playersTurn
 	ld a, [hli]
 	ld [wHPBarMaxHP+1], a
@@ -739,55 +739,55 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	ret
 
 UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
-	FuncCoord 10, 9 ; $c45e
+	FuncCoord 10, 9
 	ld hl, Coord    ; tile pointer to player HP bar
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $1
 	jr z, .playersTurn
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord    ; tile pointer to enemy HP bar
 	xor a
 .playersTurn
 	push bc
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	ld a, $48
 	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
 	pop bc
 	ret
 
 Func_3c50f: ; 3c50f (f:450f)
-	ld a, [$d06a]
+	ld a, [wd06a]
 	and a
 	jr nz, .asm_3c51a
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
 	res 5, [hl]
 .asm_3c51a
-	ld a, [$d06f]
+	ld a, [wd06f]
 	and a
 	ret nz
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 5, [hl]
 	ret
 
 HandleEnemyMonFainted: ; 3c525 (f:4525)
 	xor a
-	ld [$ccf0], a
+	ld [wccf0], a
 	call FaintEnemyPokemon
 	call AnyPlayerPokemonAliveCheck
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld a, [hli]
 	or [hl]
 	call nz, Func_3cd60
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	ret z
 	call AnyEnemyPokemonAliveCheck
 	jp z, TrainerBattleVictory
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld a, [hli]
 	or [hl]
 	jr nz, .asm_3c555
@@ -796,19 +796,19 @@ HandleEnemyMonFainted: ; 3c525 (f:4525)
 	call Func_3c7d8
 .asm_3c555
 	ld a, $1
-	ld [$cd6a], a
+	ld [wcd6a], a
 	call Func_3c664
 	jp z, asm_3c202
 	xor a
-	ld [$cd6a], a
+	ld [wcd6a], a
 	jp MainInBattleLoop
 
 FaintEnemyPokemon ; 0x3c567
 	call ReadPlayerMonCurHPAndStatus
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr z, .wild
-	ld a, [W_ENEMYMONNUMBER] ; $cfe8
+	ld a, [W_ENEMYMONNUMBER] ; W_ENEMYMONNUMBER
 	ld hl, W_ENEMYMON1HP
 	ld bc, $2c ; mon struct len
 	call AddNTimes
@@ -816,40 +816,40 @@ FaintEnemyPokemon ; 0x3c567
 	ld [hli], a
 	ld [hl], a
 .wild
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
 	res 2, [hl]
 	xor a
-	ld [W_NUMHITS], a ; $d074
-	ld hl, $d065 ; enemy statuses
+	ld [W_NUMHITS], a ; wd074
+	ld hl, wd065 ; enemy statuses
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [W_ENEMYDISABLEDMOVE], a ; $d072
-	ld [$ccef], a
-	ld [$ccf3], a
-	ld hl, $ccf1
+	ld [W_ENEMYDISABLEDMOVE], a ; W_ENEMYDISABLEDMOVE
+	ld [wccef], a
+	ld [wccf3], a
+	ld hl, wccf1
 	ld [hli], a
 	ld [hl], a
-	FuncCoord 12, 5 ; $c410
+	FuncCoord 12, 5
 	ld hl, Coord
-	FuncCoord 12, 6 ; $c424
+	FuncCoord 12, 6
 	ld de, Coord
 	call Func_3c893
 	ld hl, wTileMap
 	ld bc, $40b
 	call ClearScreenArea
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr z, .wild_win
 	xor a
-	ld [$c0f1], a
-	ld [$c0f2], a
+	ld [wc0f1], a
+	ld [wc0f2], a
 	ld a, (SFX_08_48 - SFX_Headers_08) / 3 ; SFX_FALL?
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [$c02a]
+	ld a, [wc02a]
 	cp (SFX_08_48 - SFX_Headers_08) / 3
 	jr z, .sfxwait
 	ld a, (SFX_08_43 - SFX_Headers_08) / 3 ; SFX_DROP
@@ -861,11 +861,11 @@ FaintEnemyPokemon ; 0x3c567
 	ld a, MUSIC_DEFEATED_WILD_MON
 	call PlayBattleVictoryMusic
 .sfxplayed
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld a, [hli]
 	or [hl]
 	jr nz, .playermonnotfaint
-	ld a, [$ccf0]
+	ld a, [wccf0]
 	and a
 	jr nz, .playermonnotfaint
 	call Func_3c741
@@ -879,12 +879,12 @@ FaintEnemyPokemon ; 0x3c567
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [$cf0b], a
+	ld [wcf0b], a
 	ld b, EXP__ALL
 	call IsItemInBag
 	push af
 	jr z, .no_exp_all
-	ld hl, $d002
+	ld hl, wd002
 	ld b, $7
 .exp_all_loop
 	srl [hl]
@@ -893,13 +893,13 @@ FaintEnemyPokemon ; 0x3c567
 	jr nz, .exp_all_loop
 .no_exp_all
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	callab GainExperience
 	pop af
 	ret z
 	ld a, $1
-	ld [$cc5b], a
-	ld a, [W_NUMINPARTY] ; $d163
+	ld [wcc5b], a
+	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
 	ld b, $0
 .asm_3c62c
 	scf
@@ -918,17 +918,17 @@ EnemyMonFaintedText: ; 0x3c63e
 
 Func_3c643: ; 3c643 (f:4643)
 	xor a
-	ld [$d083], a
-	ld [$c02a], a
+	ld [wd083], a
+	ld [wc02a], a
 	inc a
-	ld [$ccf6], a
+	ld [wccf6], a
 	ret
 
 AnyEnemyPokemonAliveCheck: ; 3c64f (f:464f)
-	ld a, [wEnemyPartyCount] ; $d89c
+	ld a, [wEnemyPartyCount] ; wEnemyPartyCount
 	ld b, a
 	xor a
-	ld hl, W_ENEMYMON1HP ; $d8a5
+	ld hl, W_ENEMYMON1HP ; wd8a5
 	ld de, $2c
 .asm_3c65a
 	or [hl]
@@ -942,49 +942,49 @@ AnyEnemyPokemonAliveCheck: ; 3c64f (f:464f)
 	ret
 
 Func_3c664: ; 3c664 (f:4664)
-	ld hl, $cf1e
+	ld hl, wcf1e
 	ld e, $30
 	call GetBattleHealthBarColor
 	callab DrawEnemyPokeballs
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3c687
 	call Func_3d605
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	cp $f
 	ret z
 	call LoadScreenTilesFromBuffer1
 .asm_3c687
 	call EnemySendOut
 	xor a
-	ld [W_ENEMYMOVENUM], a ; $cfcc
-	ld [$cd6a], a
-	ld [$ccd5], a
+	ld [W_ENEMYMOVENUM], a ; W_ENEMYMOVENUM
+	ld [wcd6a], a
+	ld [wccd5], a
 	inc a
 	ret
 
 TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3c643
 	ld b, MUSIC_DEFEATED_GYM_LEADER
-	ld a, [W_GYMLEADERNO] ; $d05c
+	ld a, [W_GYMLEADERNO] ; W_GYMLEADERNO
 	and a
 	jr nz, .gymleader
 	ld b, MUSIC_DEFEATED_TRAINER
 .gymleader
-	ld a, [W_TRAINERCLASS] ; $d031
+	ld a, [W_TRAINERCLASS] ; wd031
 	cp SONY3 ; final battle against rival
 	jr nz, .notrival
 	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 .notrival
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	ld a, b
 	call nz, PlayBattleVictoryMusic
 	ld hl, TrainerDefeatedText
 	call PrintText
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	ret z
 	call ScrollTrainerPicAfterBattle
@@ -993,8 +993,8 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	call Func_3381
 	ld hl, MoneyForWinningText
 	call PrintText
-	ld de, wPlayerMoney + 2 ; $d349
-	ld hl, $d07b
+	ld de, wPlayerMoney + 2 ; wd349
+	ld hl, wd07b
 	ld c, $3
 	ld a, $b ; AddBCDPredef
 	jp Predef
@@ -1010,7 +1010,7 @@ TrainerDefeatedText: ; 3c6e9 (f:46e9)
 PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 	push af
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
@@ -1019,18 +1019,18 @@ PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 
 HandlePlayerMonFainted: ; 3c700 (f:4700)
 	ld a, $1
-	ld [$ccf0], a
+	ld [wccf0], a
 	call Func_3c741
 	call AnyPlayerPokemonAliveCheck     ; test if any more mons are alive
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
 	or [hl]
 	jr nz, .enemyMonNotFainted
 	call FaintEnemyPokemon
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	ret z            ; if wild encounter, battle is over
 	call AnyEnemyPokemonAliveCheck
@@ -1041,46 +1041,46 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	call Func_3c7d8
 	jp nz, MainInBattleLoop
 	ld a, $1
-	ld [$cd6a], a
+	ld [wcd6a], a
 	call Func_3c664
 	jp z, asm_3c202
 	xor a
-	ld [$cd6a], a
+	ld [wcd6a], a
 	jp MainInBattleLoop
 
 Func_3c741: ; 3c741 (f:4741)
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	ld c, a
 	ld hl, W_PLAYERMONSALIVEFLAGS ; clear fainted mon's alive flag
 	ld b, $0
 	ld a, $10 ; FlagActionPredef
 	call Predef
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 2, [hl]   ; reset "attacking multiple times" flag
-	ld a, [$d083]
+	ld a, [wd083]
 	bit 7, a      ; skip sound flag (red bar (?))
 	jr z, .skipWaitForSound
 	ld a, $ff
-	ld [$d083], a
+	ld [wd083], a
 	call WaitForSoundToFinish
 .skipWaitForSound
-	ld hl, $cd05
+	ld hl, wcd05
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERMONSTATUS], a ; $d018
+	ld [W_PLAYERMONSTATUS], a ; W_PLAYERMONSTATUS
 	call ReadPlayerMonCurHPAndStatus
-	FuncCoord 9, 7 ; $c435
+	FuncCoord 9, 7
 	ld hl, Coord
 	ld bc, $50b
 	call ClearScreenArea
-	FuncCoord 1, 10 ; $c469
+	FuncCoord 1, 10
 	ld hl, Coord
-	FuncCoord 1, 11 ; $c47d
+	FuncCoord 1, 11
 	ld de, Coord
 	call Func_3c893
 	ld a, $1
-	ld [$cf0b], a
-	ld a, [$ccf0]
+	ld [wcf0b], a
+	ld a, [wccf0]
 	and a
 	ret z
 	ld a, [W_PLAYERMONID]
@@ -1095,29 +1095,29 @@ PlayerMonFaintedText: ; 3c796 (f:4796)
 Func_3c79b: ; 3c79b (f:479b)
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	dec a
 	ret nz
 	ld hl, UseNextMonText
 	call PrintText
 .asm_3c7ad
-	FuncCoord 13, 9 ; $c461
+	FuncCoord 13, 9
 	ld hl, Coord
 	ld bc, $a0e
 	ld a, $14
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	ld a, [$d12e]
+	ld a, [wd12e]
 	cp $2
 	jr z, .asm_3c7c4
 	and a
 	ret
 .asm_3c7c4
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr z, .asm_3c7ad
-	ld hl, W_PARTYMON1_SPEED ; $d193
+	ld hl, W_PARTYMON1_SPEED ; wd193
 	ld de, W_ENEMYMONSPEED
 	jp Func_3cab9
 
@@ -1127,7 +1127,7 @@ UseNextMonText: ; 3c7d3 (f:47d3)
 
 Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld a, $2
-	ld [$d07d], a
+	ld [wd07d], a
 	call DisplayPartyMenu
 .asm_3c7e0
 	jr nc, .asm_3c7e7
@@ -1137,18 +1137,18 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 .asm_3c7e7
 	call Func_3ca97
 	jr z, .asm_3c7e2
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3c7fa
 	inc a
-	ld [$cd6a], a
+	ld [wcd6a], a
 	call Func_3d605
 .asm_3c7fa
 	xor a
-	ld [$cd6a], a
+	ld [wcd6a], a
 	call ClearSprites
-	ld a, [wWhichPokemon] ; $cf92
-	ld [wPlayerMonNumber], a ; $cc2f
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld c, a
 	ld hl, W_PLAYERMONSALIVEFLAGS
 	ld b, $1
@@ -1156,7 +1156,7 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	pop bc
-	ld hl, $ccf5
+	ld hl, wccf5
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	call Func_3cba6
@@ -1166,7 +1166,7 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	call GoPAL_SET_CF1C
 	call GBPalNormal
 	call Func_3cc91
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
 	or [hl]
 	ret
@@ -1174,10 +1174,10 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 ; called when player is out of usable mons.
 ; prints approriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut: ; 3c837 (f:4837)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr z, .notSony1Battle
-	ld a, [W_CUROPPONENT] ; $d059
+	ld a, [W_CUROPPONENT] ; wd059
 	cp $c8 + SONY1
 	jr nz, .notSony1Battle
 	ld hl, wTileMap  ; sony 1 battle
@@ -1195,15 +1195,15 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld b, $0
 	call GoPAL_SET
 	ld hl, PlayerBlackedOutText2
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .noLinkBattle
 	ld hl, LinkBattleLostText
 .noLinkBattle
 	call PrintText
-	ld a, [$d732]
+	ld a, [wd732]
 	res 5, a
-	ld [$d732], a
+	ld [wd732], a
 	call ClearScreen
 	scf
 	ret
@@ -1221,10 +1221,10 @@ LinkBattleLostText: ; 3c88e (f:488e)
 	db "@"
 
 Func_3c893: ; 3c893 (f:4893)
-	ld a, [$d730]
+	ld a, [wd730]
 	push af
 	set 6, a
-	ld [$d730], a
+	ld [wd730], a
 	ld b, $7
 .asm_3c89e
 	push bc
@@ -1263,7 +1263,7 @@ Func_3c893: ; 3c893 (f:4893)
 	dec b
 	jr nz, .asm_3c89e
 	pop af
-	ld [$d730], a
+	ld [wd730], a
 	ret
 
 SevenSpacesText: ; 3c8d7 (f:48d7)
@@ -1313,13 +1313,13 @@ EnemySendOut: ; 3c90e (f:490e)
 	ld hl,W_PLAYERMONSALIVEFLAGS
 	xor a
 	ld [hl],a
-	ld a,[$CC2F]
+	ld a,[wPlayerMonNumber]
 	ld c,a
 	ld b,1
 	push bc
 	ld a,$10
 	call Predef
-	ld hl,$CCF5
+	ld hl,wccf5
 	xor a
 	ld [hl],a
 	pop bc
@@ -1327,32 +1327,32 @@ EnemySendOut: ; 3c90e (f:490e)
 	call Predef
 Func_3c92a: ; 3c92a (f:492a)
 	xor a
-	ld hl,$D065
+	ld hl,wd065
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hl],a
-	ld [$D072],a
-	ld [$CCEF],a
-	ld [$CCF3],a
-	ld hl,$CCF1
+	ld [W_ENEMYDISABLEDMOVE],a
+	ld [wccef],a
+	ld [wccf3],a
+	ld hl,wccf1
 	ld [hli],a
 	ld [hl],a
 	dec a
 	ld [wAICount],a
 	ld hl,W_PLAYERBATTSTATUS1
 	res 5,[hl]
-	FuncCoord 18, 0 ; $c3b2
+	FuncCoord 18, 0
 	ld hl,Coord
 	ld a,8
 	call Func_3c8df
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
-	ld a,[$D12B]
+	ld a,[W_ISLINKBATTLE]
 	cp 4
 	jr nz,.next
-	ld a,[$CC3E]
+	ld a,[wcc3e]
 	sub 4
 	ld [wWhichPokemon],a
 	jr .next3
@@ -1360,10 +1360,10 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld b,$FF
 .next2
 	inc b
-	ld a,[$CFE8]
+	ld a,[W_ENEMYMONNUMBER]
 	cp b
 	jr z,.next2
-	ld hl,$D8A4
+	ld hl,wEnemyMon1Species
 	ld a,b
 	ld [wWhichPokemon],a
 	push bc
@@ -1378,59 +1378,59 @@ Func_3c92a: ; 3c92a (f:492a)
 	jr z,.next2
 .next3
 	ld a,[wWhichPokemon]
-	ld hl,$D8C5
+	ld hl,wd8c5
 	ld bc,$2C
 	call AddNTimes
 	ld a,[hl]
-	ld [$D127],a
+	ld [W_CURENEMYLVL],a
 	ld a,[wWhichPokemon]
 	inc a
-	ld hl,$D89C
+	ld hl,wEnemyPartyCount
 	ld c,a
 	ld b,0
 	add hl,bc
 	ld a,[hl]
 	ld [W_ENEMYMONID],a
-	ld [$CF91],a
+	ld [wcf91],a
 	call Func_3eb01
-	ld hl,$CFE6
+	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
-	ld [$CCE3],a
+	ld [wcce3],a
 	ld a,[hl]
-	ld [$CCE4],a
+	ld [wcce4],a
 	ld a,1
-	ld [$CC26],a
-	ld a,[$D11D]
+	ld [wCurrentMenuItem],a
+	ld a,[wd11d]
 	dec a
 	jr z,.next4
 	ld a,[W_NUMINPARTY]
 	dec a
 	jr z,.next4
-	ld a,[$D12B]
+	ld a,[W_ISLINKBATTLE]
 	cp 4
 	jr z,.next4
-	ld a,[$D355]
+	ld a,[W_OPTIONS]
 	bit 6,a
 	jr nz,.next4
 	ld hl, TrainerAboutToUseText
 	call PrintText
-	FuncCoord 0, 7 ; $c42c
+	FuncCoord 0, 7
 	ld hl,Coord
 	ld bc,$0801
 	ld a,$14
-	ld [$D125],a
+	ld [wd125],a
 	call DisplayTextBoxID
-	ld a,[$CC26]
+	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.next4
 	ld a,2
-	ld [$D07D],a
+	ld [wd07d],a
 	call DisplayPartyMenu
 .next9
 	ld a,1
-	ld [$CC26],a
+	ld [wCurrentMenuItem],a
 	jr c,.next7
-	ld hl,$CC2F
+	ld hl,wPlayerMonNumber
 	ld a,[wWhichPokemon]
 	cp [hl]
 	jr nz,.next6
@@ -1443,7 +1443,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	call Func_3ca97
 	jr z,.next8
 	xor a
-	ld [$CC26],a
+	ld [wCurrentMenuItem],a
 .next7
 	call GBPalWhiteOut
 	call Func_3ee5b
@@ -1459,26 +1459,26 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld hl,TrainerSentOutText
 	call PrintText
 	ld a,[W_ENEMYMONID]
-	ld [$CF91],a
-	ld [$D0B5],a
+	ld [wcf91],a
+	ld [wd0b5],a
 	call GetMonHeader
 	ld de,$9000
 	call LoadMonFrontSprite
 	ld a,$CF
 	ld [$FFE1],a
-	FuncCoord 15, 6 ; $c427
+	FuncCoord 15, 6
 	ld hl,Coord
 	ld a,2
 	call Predef
 	ld a,[W_ENEMYMONID]
 	call PlayCry
 	call Func_3cdec
-	ld a,[$CC26]
+	ld a,[wCurrentMenuItem]
 	and a
 	ret nz
 	xor a
 	ld [W_PLAYERMONSALIVEFLAGS],a
-	ld [$CCF5],a
+	ld [wccf5],a
 	call SaveScreenTilesToBuffer1
 	jp Func_3d1ba
 
@@ -1493,10 +1493,10 @@ TrainerSentOutText: ; 3ca7e (f:4a7e)
 ; tests if the player has any pokemon that are not fainted
 ; sets d = 0 if all fainted, d != 0 if some mons are still alive
 AnyPlayerPokemonAliveCheck: ; 3ca83 (f:4a83)
-	ld a, [W_NUMINPARTY] ; $d163
+	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
 	ld e, a
 	xor a
-	ld hl, W_PARTYMON1_HP ; $d16c
+	ld hl, W_PARTYMON1_HP ; wd16c
 	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA - 1
 .partyMonsLoop
 	or [hl]
@@ -1509,14 +1509,14 @@ AnyPlayerPokemonAliveCheck: ; 3ca83 (f:4a83)
 	ret
 
 Func_3ca97: ; 3ca97 (f:4a97)
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1_HP ; $d16c
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1_HP ; wd16c
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
 	or [hl]
 	ret nz
-	ld a, [$d11d]
+	ld a, [wd11d]
 	and a
 	jr nz, .asm_3cab2
 	ld hl, NoWillText
@@ -1532,18 +1532,18 @@ NoWillText: ; 3cab4 (f:4ab4)
 Func_3cab9: ; 3cab9 (f:4ab9)
 	call IsGhostBattle
 	jp z, .asm_3cb5c
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jp z, .asm_3cb5c
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jp z, .asm_3cb5c
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr nz, .asm_3cb4c
-	ld a, [$d120]
+	ld a, [wd120]
 	inc a
-	ld [$d120], a
+	ld [wd120], a
 	ld a, [hli]
 	ld [$ff97], a
 	ld a, [hl]
@@ -1583,7 +1583,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	ld a, [$ff97]
 	and a
 	jr nz, .asm_3cb5c
-	ld a, [$d120]
+	ld a, [wd120]
 	ld c, a
 .asm_3cb2b
 	dec c
@@ -1601,7 +1601,7 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 	cp b
 	jr nc, .asm_3cb5c
 	ld a, $1
-	ld [$cd6a], a
+	ld [wcd6a], a
 	ld hl, CantEscapeText
 	jr .asm_3cb4f
 .asm_3cb4c
@@ -1609,29 +1609,29 @@ Func_3cab9: ; 3cab9 (f:4ab9)
 .asm_3cb4f
 	call PrintText
 	ld a, $1
-	ld [$d11f], a
+	ld [wd11f], a
 	call SaveScreenTilesToBuffer1
 	and a
 	ret
 .asm_3cb5c
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	ld a, $2
 	jr nz, .asm_3cb81
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [$cd6a], a
+	ld [wcd6a], a
 	ld a, $f
-	ld [wPlayerMoveListIndex], a ; $cc2e
+	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
 	call Func_3d605
 	call LoadScreenTilesFromBuffer1
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	cp $f
 	ld a, $2
 	jr z, .asm_3cb81
 	dec a
 .asm_3cb81
-	ld [$cf0b], a
+	ld [wcf0b], a
 	ld a, (SFX_08_44 - SFX_Headers_08) / 3
 	call PlaySoundWaitForCurrent
 	ld hl, GotAwayText
@@ -1654,9 +1654,9 @@ GotAwayText: ; 3cba1 (f:4ba1)
 	db "@"
 
 Func_3cba6: ; 3cba6 (f:4ba6)
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $2c
-	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
 	call AddNTimes
 	ld de, W_PLAYERMONID
 	ld bc, $c
@@ -1666,30 +1666,30 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	ld de, W_PLAYERMONIVS
 	ld bc, $2
 	call CopyData
-	ld de, W_PLAYERMONPP ; $d02d
+	ld de, W_PLAYERMONPP ; W_PLAYERMONPP
 	ld bc, $4
 	call CopyData
-	ld de, W_PLAYERMONLEVEL ; $d022
+	ld de, W_PLAYERMONLEVEL ; W_PLAYERMONLEVEL
 	ld bc, $b
 	call CopyData
-	ld a, [$cfd9]
-	ld [$d0b5], a
+	ld a, [wcfd9]
+	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, W_PARTYMON1NAME ; $d2b5
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	call SkipFixedLengthTextEntries
 	ld de, W_PLAYERMONNAME
 	ld bc, $b
 	call CopyData
-	ld hl, W_PLAYERMONLEVEL ; $d022
-	ld de, $cd0f
+	ld hl, W_PLAYERMONLEVEL ; W_PLAYERMONLEVEL
+	ld de, wcd0f
 	ld bc, $b
 	call CopyData
 	call Func_3ed1a
 	call Func_3ee19
 	ld a, $7
 	ld b, $8
-	ld hl, wPlayerMonAttackMod ; $cd1a
+	ld hl, wPlayerMonAttackMod ; wcd1a
 .asm_3cc0e
 	ld [hli], a
 	dec b
@@ -1697,40 +1697,40 @@ Func_3cba6: ; 3cba6 (f:4ba6)
 	ret
 
 Func_3cc13: ; 3cc13 (f:4c13)
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $2c
-	ld hl, wEnemyMons ; $d8a4
+	ld hl, wEnemyMons ; wEnemyMon1Species
 	call AddNTimes
-	ld de, $cfe5
+	ld de, wcfe5
 	ld bc, $c
 	call CopyData
 	ld bc, $f
 	add hl, bc
-	ld de, $cff1
+	ld de, W_ENEMYMONATKDEFIV
 	ld bc, $2
 	call CopyData
-	ld de, W_ENEMYMONPP ; $cffe
+	ld de, W_ENEMYMONPP ; wcffe
 	ld bc, $4
 	call CopyData
-	ld de, W_ENEMYMONLEVEL ; $cff3
+	ld de, W_ENEMYMONLEVEL ; W_ENEMYMONLEVEL
 	ld bc, $b
 	call CopyData
-	ld a, [$cfe5]
-	ld [$d0b5], a
+	ld a, [wcfe5]
+	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, $d9ee
-	ld a, [wWhichPokemon] ; $cf92
+	ld hl, W_ENEMYMON1NAME
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	call SkipFixedLengthTextEntries
 	ld de, W_ENEMYMONNAME
 	ld bc, $b
 	call CopyData
-	ld hl, W_ENEMYMONLEVEL ; $cff3
-	ld de, $cd23
+	ld hl, W_ENEMYMONLEVEL ; W_ENEMYMONLEVEL
+	ld de, wcd23
 	ld bc, $b
 	call CopyData
 	call Func_3ed1e
 	ld hl, W_MONHBASESTATS
-	ld de, $d002
+	ld de, wd002
 	ld b, $5
 .asm_3cc79
 	ld a, [hli]
@@ -1740,18 +1740,18 @@ Func_3cc13: ; 3cc13 (f:4c13)
 	jr nz, .asm_3cc79
 	ld a, $7
 	ld b, $8
-	ld hl, wEnemyMonStatMods ; $cd2e
+	ld hl, wEnemyMonStatMods ; wcd2e
 .asm_3cc86
 	ld [hli], a
 	dec b
 	jr nz, .asm_3cc86
-	ld a, [wWhichPokemon] ; $cf92
-	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld [W_ENEMYMONNUMBER], a ; W_ENEMYMONNUMBER
 	ret
 
 Func_3cc91: ; 3cc91 (f:4c91)
 	callab SendOutMon
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
 	or [hl]
 	jp z, Func_3cca4
@@ -1763,62 +1763,62 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
 	xor a
 	ld [$ffe1], a
-	ld hl, $cc2d
+	ld hl, wcc2d
 	ld [hli], a
 	ld [hl], a
-	ld [$cc5b], a
-	ld [$d05b], a
-	ld [W_PLAYERMOVENUM], a ; $cfd2
-	ld hl, $ccf1
+	ld [wcc5b], a
+	ld [wd05b], a
+	ld [W_PLAYERMOVENUM], a ; wcfd2
+	ld hl, wccf1
 	ld [hli], a
 	ld [hl], a
-	ld hl, $d060
+	ld hl, wd060
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERDISABLEDMOVE], a ; $d06d
-	ld [$ccee], a
-	ld [$ccf7], a
+	ld [W_PLAYERDISABLEDMOVE], a ; W_PLAYERDISABLEDMOVE
+	ld [wccee], a
+	ld [wccf7], a
 	ld b, $1
 	call GoPAL_SET
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 5, [hl]
 	ld a, $1
 	ld [H_WHOSETURN], a ; $fff3
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
-	FuncCoord 4, 11 ; $c480
+	FuncCoord 4, 11
 	ld hl, Coord
 	ld a, $2
 	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call PlayCry
 	call Func_3ee94
 	jp SaveScreenTilesToBuffer1
 
 Func_3ccfa: ; 3ccfa (f:4cfa)
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld bc, $707
 	call ClearScreenArea
-	FuncCoord 3, 7 ; $c42f
+	FuncCoord 3, 7
 	ld hl, Coord
 	ld bc, $505
 	xor a
-	ld [$cd6c], a
+	ld [wcd6c], a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
 	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
 	ld c, $4
 	call DelayFrames
 	call Func_3cd3a
-	FuncCoord 4, 9 ; $c458
+	FuncCoord 4, 9
 	ld hl, Coord
 	ld bc, $303
 	ld a, $1
-	ld [$cd6c], a
+	ld [wcd6c], a
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
@@ -1826,24 +1826,24 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	call Delay3
 	call Func_3cd3a
 	ld a, $4c
-	FuncCoord 5, 11 ; $c481
+	FuncCoord 5, 11
 	ld [Coord], a
 
 Func_3cd3a: ; 3cd3a (f:4d3a)
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld bc, $707
 	jp ClearScreenArea
 
 ; reads player's current mon's HP into W_PLAYERMONCURHP
 ReadPlayerMonCurHPAndStatus: ; 3cd43 (f:4d43)
-	ld a, [wPlayerMonNumber] ; $cc2f
-	ld hl, W_PARTYMON1_HP ; $d16c
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
+	ld hl, W_PARTYMON1_HP ; wd16c
 	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld bc, $4               ; 2 bytes HP, 1 byte unknown (unused?), 1 byte status
 	jp CopyData
 
@@ -1854,67 +1854,67 @@ Func_3cd5a: ; 3cd5a (f:4d5a)
 Func_3cd60: ; 3cd60 (f:4d60)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 9, 7 ; $c435
+	FuncCoord 9, 7
 	ld hl, Coord
 	ld bc, $50b
 	call ClearScreenArea
 	callab PlacePlayerHUDTiles
-	FuncCoord 18, 9 ; $c466
+	FuncCoord 18, 9
 	ld hl, Coord
 	ld [hl], $73
 	ld de, W_PLAYERMONNAME
-	FuncCoord 10, 7 ; $c436
+	FuncCoord 10, 7
 	ld hl, Coord
 	call Func_3ce9c
 	call PlaceString
 	ld hl, W_PLAYERMONID
-	ld de, $cf98
+	ld de, wcf98
 	ld bc, $c
 	call CopyData
-	ld hl, W_PLAYERMONLEVEL ; $d022
-	ld de, $cfb9
+	ld hl, W_PLAYERMONLEVEL ; W_PLAYERMONLEVEL
+	ld de, wcfb9
 	ld bc, $b
 	call CopyData
-	FuncCoord 14, 8 ; $c44e
+	FuncCoord 14, 8
 	ld hl, Coord
 	push hl
 	inc hl
-	ld de, $cf9c
+	ld de, wcf9c
 	call PrintStatusConditionNotFainted
 	pop hl
 	jr nz, .asm_3cdae
 	call PrintLevel
 .asm_3cdae
-	ld a, [$cf98]
-	ld [$cf91], a
-	FuncCoord 10, 9 ; $c45e
+	ld a, [wcf98]
+	ld [wcf91], a
+	FuncCoord 10, 9
 	ld hl, Coord
 	ld a, $5f
 	call Predef ; indirect jump to Func_128ef (128ef (4:68ef))
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld hl, $cf1d
+	ld hl, wcf1d
 	call GetBattleHealthBarColor
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld a, [hli]
 	or [hl]
 	jr z, .asm_3cdd9
-	ld a, [$ccf6]
+	ld a, [wccf6]
 	and a
 	ret nz
-	ld a, [$cf1d]
+	ld a, [wcf1d]
 	cp $2
 	jr z, .asm_3cde6
 .asm_3cdd9
-	ld hl, $d083
+	ld hl, wd083
 	bit 7, [hl]
 	ld [hl], $0
 	ret z
 	xor a
-	ld [$c02a], a
+	ld [wc02a], a
 	ret
 .asm_3cde6
-	ld hl, $d083
+	ld hl, wd083
 	set 7, [hl]
 	ret
 
@@ -1926,23 +1926,23 @@ Func_3cdec: ; 3cdec (f:4dec)
 	call ClearScreenArea
 	callab PlaceEnemyHUDTiles
 	ld de, W_ENEMYMONNAME
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
 	call Func_3ce9c
 	call PlaceString
-	FuncCoord 4, 1 ; $c3b8
+	FuncCoord 4, 1
 	ld hl, Coord
 	push hl
 	inc hl
-	ld de, W_ENEMYMONSTATUS ; $cfe9
+	ld de, W_ENEMYMONSTATUS ; wcfe9
 	call PrintStatusConditionNotFainted
 	pop hl
 	jr nz, .asm_3ce23
-	ld a, [W_ENEMYMONLEVEL] ; $cff3
-	ld [$cfb9], a
+	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
+	ld [wcfb9], a
 	call PrintLevel
 .asm_3ce23
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
 	ld [$ff97], a
 	ld a, [hld]
@@ -1959,7 +1959,7 @@ Func_3cdec: ; 3cdec (f:4dec)
 	ld a, $30
 	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
-	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -1999,13 +1999,13 @@ Func_3cdec: ; 3cdec (f:4dec)
 
 Func_3ce7f: ; 3ce7f (f:4e7f)
 	xor a
-	ld [wListMenuID], a ; $cf94
-	FuncCoord 2, 2 ; $c3ca
+	ld [wListMenuID], a ; wListMenuID
+	FuncCoord 2, 2
 	ld hl, Coord
 	call DrawHPBar
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld hl, $cf1e
+	ld hl, wcf1e
 
 GetBattleHealthBarColor: ; 3ce90 (f:4e90)
 	ld b, [hl]
@@ -2039,27 +2039,27 @@ Func_3ce9c: ; 3ce9c (f:4e9c)
 
 InitBattleMenu: ; 3ceb3 (f:4eb3)
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	and a
 	jr nz, .nonstandardbattle
 	call Func_3cd5a ; redraw names and HP bars?
 	call Func_3ee94
 	call SaveScreenTilesToBuffer1
 .nonstandardbattle
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2 ; safari
 	ld a, $b ; safari menu id
 	jr nz, .menuselected
 	ld a, $1b ; regular menu id
 .menuselected
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	dec a
 	jp nz, RegularBattleMenu ; regular battle
 	; the following happens for the old man tutorial
-	ld hl, W_PLAYERNAME ; $d158
-	ld de, W_GRASSRATE ; $d887
+	ld hl, W_PLAYERNAME ; wd158
+	ld de, W_GRASSRATE ; W_GRASSRATE
 	ld bc, $b
 	call CopyData  ; temporarily save the player name in unused space,
 	               ; which is supposed to get overwritten when entering a
@@ -2067,17 +2067,17 @@ InitBattleMenu: ; 3ceb3 (f:4eb3)
 	               ; may not get overwritten (cinnabar) and the infamous
 	               ; missingno. glitch can show up.
 	ld hl, OldManName ; $4f12
-	ld de, W_PLAYERNAME ; $d158
+	ld de, W_PLAYERNAME ; wd158
 	ld bc, $b
 	call CopyData
 	; the following simulates the keystrokes by drawing menus on screen
-	FuncCoord 9, 14 ; $c4c1
+	FuncCoord 9, 14
 	ld hl, Coord
 	ld [hl], "▶"
 	ld c, $50
 	call DelayFrames
 	ld [hl], $7f
-	FuncCoord 9, 16 ; $c4e9
+	FuncCoord 9, 16
 	ld hl, Coord
 	ld [hl], "▶"
 	ld c, $32
@@ -2090,38 +2090,38 @@ OldManName: ; 3cf12 (f:4f12)
 	db "OLD MAN@"
 
 RegularBattleMenu: ; 3cf1a (f:4f1a)
-	ld a, [$cc2d]
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
+	ld a, [wcc2d]
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wLastMenuItem], a ; wLastMenuItem
 	sub $2
 	jr c, .leftcolumn
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wLastMenuItem], a ; wLastMenuItem
 	jr .rightcolumn
 .leftcolumn
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	ld a, " "
 	jr z, .safaribattle
-	FuncCoord 15, 14 ; $c4c7
+	FuncCoord 15, 14
 	ld [Coord], a
-	FuncCoord 15, 16 ; $c4ef
+	FuncCoord 15, 16
 	ld [Coord], a
 	ld b, $9
 	jr .notsafari
 .safaribattle
-	FuncCoord 13, 14 ; $c4c5
+	FuncCoord 13, 14
 	ld [Coord], a
-	FuncCoord 13, 16 ; $c4ed
+	FuncCoord 13, 16
 	ld [Coord], a
-	FuncCoord 7, 14 ; $c4bf
+	FuncCoord 7, 14
 	ld hl, Coord
-	ld de, W_NUMSAFARIBALLS ; $da47
+	ld de, W_NUMSAFARIBALLS ; W_NUMSAFARIBALLS
 	ld bc, $102
 	call PrintNumber
 	ld b, $1
 .notsafari
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $e
 	ld [hli], a
 	ld a, b
@@ -2136,29 +2136,29 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	jr nz, .rightcolumn
 	jr .selection
 .rightcolumn
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	ld a, " "
 	jr z, .safarirightcolumn
-	FuncCoord 9, 14 ; $c4c1
+	FuncCoord 9, 14
 	ld [Coord], a
-	FuncCoord 9, 16 ; $c4e9
+	FuncCoord 9, 16
 	ld [Coord], a
 	ld b, $f
 	jr .notsafarirightcolumn
 .safarirightcolumn
-	FuncCoord 1, 14 ; $c4b9
+	FuncCoord 1, 14
 	ld [Coord], a
-	FuncCoord 1, 16 ; $c4e1
+	FuncCoord 1, 16
 	ld [Coord], a
-	FuncCoord 7, 14 ; $c4bf
+	FuncCoord 7, 14
 	ld hl, Coord
-	ld de, W_NUMSAFARIBALLS ; $da47
+	ld de, W_NUMSAFARIBALLS ; W_NUMSAFARIBALLS
 	ld bc, $102
 	call PrintNumber
 	ld b, $d
 .notsafarirightcolumn
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $e
 	ld [hli], a
 	ld a, b
@@ -2172,15 +2172,15 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	call HandleMenuInput
 	bit 5, a
 	jr nz, .leftcolumn
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	add $2 ; if we're in the right column, the actual id is +2
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 .selection
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$cc2d], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld [wcc2d], a
 	jr z, .asm_3cfd0
 	cp $1
 	jr nz, .asm_3cfcb
@@ -2194,21 +2194,21 @@ RegularBattleMenu: ; 3cf1a (f:4f1a)
 	and a
 	jr nz, Func_3cfe8
 	; first option was selected...
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jr z, .safari1
 	xor a
-	ld [$d120], a
+	ld [wd120], a
 	jp LoadScreenTilesFromBuffer1 ; restore saved screen and return??
 .safari1 ; safari first option??
 	ld a, SAFARI_BALL
-	ld [$cf91], a
+	ld [wcf91], a
 	jr asm_3d05f
 
 Func_3cfe8: ; 3cfe8 (f:4fe8)
 	cp $2
 	jp nz, Func_3d0ca
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3cffd
 	ld hl, ItemsCantBeUsedHereText
@@ -2216,83 +2216,83 @@ Func_3cfe8: ; 3cfe8 (f:4fe8)
 	jp InitBattleMenu
 .asm_3cffd ; bag?
 	call SaveScreenTilesToBuffer2 ; copy bg?
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jr nz, asm_3d00e
 	ld a, SAFARI_BAIT
-	ld [$cf91], a
+	ld [wcf91], a
 	jr asm_3d05f
 asm_3d00e: ; 3d00e (f:500e)
 	call LoadScreenTilesFromBuffer1
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	and a
 	jr nz, .asm_3d01a
 	call Func_3cd5a
 .asm_3d01a
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	dec a
 	jr nz, Func_3d031
 	ld hl, OldManItemList
 	ld a, l
-	ld [$cf8b], a
+	ld [wcf8b], a
 	ld a, h
-	ld [$cf8c], a
+	ld [wcf8c], a
 	jr Func_3d03c
 
 OldManItemList: ; 3d02d (f:502d)
 	db $01, POKE_BALL, 50, $ff
 
 Func_3d031
-	ld hl, wNumBagItems ; $d31d
+	ld hl, wNumBagItems ; wNumBagItems
 	ld a, l
-	ld [$cf8b], a
+	ld [wcf8b], a
 	ld a, h
-	ld [$cf8c], a
+	ld [wcf8c], a
 Func_3d03c
 	xor a
-	ld [$cf93], a
+	ld [wcf93], a
 	ld a, $3
-	ld [wListMenuID], a ; $cf94
-	ld a, [$cc2c]
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wListMenuID], a ; wListMenuID
+	ld a, [wcc2c]
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	call DisplayListMenuID
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$cc2c], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld [wcc2c], a
 	ld a, $0
-	ld [$cc37], a
-	ld [$cc35], a
+	ld [wcc37], a
+	ld [wcc35], a
 	jp c, InitBattleMenu
 asm_3d05f: ; 3d05f (f:505f)
-	ld a, [$cf91]
-	ld [$d11e], a
+	ld a, [wcf91]
+	ld [wd11e], a
 	call GetItemName
 	call CopyStringToCF4B ; copy name
 	xor a
-	ld [$d152], a
+	ld [wd152], a
 	call UseItem
 	call Func_3ee5b
 	call ClearSprites
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jr z, .asm_3d09c
-	ld a, [$cd6a]
+	ld a, [wcd6a]
 	and a
 	jp z, asm_3d00e
-	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
 	bit 5, a
 	jr z, .asm_3d09c
-	ld hl, $d06a
+	ld hl, wd06a
 	dec [hl]
 	jr nz, .asm_3d09c
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
 	res 5, [hl]
 .asm_3d09c
-	ld a, [$d11c]
+	ld a, [wd11c]
 	and a
 	jr nz, .asm_3d0b7
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jr z, .asm_3d0b2
 	call LoadScreenTilesFromBuffer1
@@ -2305,9 +2305,9 @@ asm_3d05f: ; 3d05f (f:505f)
 .asm_3d0b7
 	call GBPalNormal
 	xor a
-	ld [$d11c], a
+	ld [wd11c], a
 	ld a, $2
-	ld [$cf0b], a
+	ld [wcf0b], a
 	scf
 	ret
 
@@ -2319,18 +2319,18 @@ Func_3d0ca: ; 3d0ca (f:50ca)
 	dec a
 	jp nz, Func_3d1fa
 	call SaveScreenTilesToBuffer2
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	cp $2
 	jr nz, Func_3d0e0
 	ld a, SAFARI_ROCK
-	ld [$cf91], a
+	ld [wcf91], a
 	jp asm_3d05f
 
 Func_3d0e0: ; 3d0e0 (f:50e0)
 	call LoadScreenTilesFromBuffer1
 	xor a
-	ld [$d07d], a
-	ld [$cc35], a
+	ld [wd07d], a
+	ld [wcc35], a
 	call DisplayPartyMenu
 asm_3d0ed: ; 3d0ed (f:50ed)
 	jp nc, Func_3d119
@@ -2344,21 +2344,21 @@ asm_3d0f0: ; 3d0f0 (f:50f0)
 	jp InitBattleMenu
 
 Func_3d105: ; 3d105 (f:5105)
-	FuncCoord 11, 11 ; $c487
+	FuncCoord 11, 11
 	ld hl, Coord
 	ld bc, $81
 	ld a, $7f
 	call FillMemory
 	xor a
-	ld [$d07d], a
+	ld [wd07d], a
 	call GoBackToPartyMenu
 	jr asm_3d0ed
 
 Func_3d119: ; 3d119 (f:5119)
 	ld a, $c
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $c
 	ld [hli], a
 	ld [hli], a
@@ -2375,30 +2375,30 @@ Func_3d119: ; 3d119 (f:5119)
 	bit 1, a
 	jr nz, Func_3d105
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp $2
 	jr z, asm_3d0f0
 	and a
 	jr z, .asm_3d18a
 	xor a
-	ld [$cc49], a
-	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld [wcc49], a
+	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
 	call ClearSprites
 	ld a, $36
 	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
 	ld a, $37
 	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
-	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 4, a
 	ld hl, AnimationSubstitute
 	jr nz, .asm_3d182
-	ld a, [$ccf3]
+	ld a, [wccf3]
 	and a
 	ld hl, AnimationMinimizeMon
 	jr nz, .asm_3d182
-	ld a, [$cfe5]
-	ld [$cf91], a
-	ld [$d0b5], a
+	ld a, [wcfe5]
+	ld [wcf91], a
+	ld [wd0b5], a
 	call GetMonHeader
 	ld de, $9000
 	call LoadMonFrontSprite
@@ -2409,9 +2409,9 @@ Func_3d119: ; 3d119 (f:5119)
 .asm_3d187
 	jp Func_3d0e0
 .asm_3d18a
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	ld d, a
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	cp d
 	jr nz, .asm_3d19d
 	ld hl, AlreadyOutText
@@ -2421,7 +2421,7 @@ Func_3d119: ; 3d119 (f:5119)
 	call Func_3ca97
 	jp z, Func_3d105
 	ld a, $1
-	ld [$cd6a], a
+	ld [wcd6a], a
 	call GBPalWhiteOut
 	call ClearSprites
 	call Func_3ee5b
@@ -2434,8 +2434,8 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld c, $32
 	call DelayFrames
 	call Func_3ccfa
-	ld a, [wWhichPokemon] ; $cf92
-	ld [wPlayerMonNumber], a ; $cc2f
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld c, a
 	ld b, $1
 	push bc
@@ -2443,14 +2443,14 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	pop bc
-	ld hl, $ccf5
+	ld hl, wccf5
 	ld a, $10 ; FlagActionPredef
 	call Predef
 	call Func_3cba6
 	call Func_3cc91
 	call SaveScreenTilesToBuffer1
 	ld a, $2
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	and a
 	ret
 
@@ -2461,14 +2461,14 @@ AlreadyOutText: ; 3d1f5 (f:51f5)
 Func_3d1fa: ; 3d1fa (f:51fa)
 	call LoadScreenTilesFromBuffer1
 	ld a, $3
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld hl, W_PLAYERMONSPEED
 	ld de, W_ENEMYMONSPEED
 	call Func_3cab9
 	ld a, $0
-	ld [$d11f], a
+	ld [wd11f], a
 	ret c
-	ld a, [$cd6a]
+	ld a, [wcd6a]
 	and a
 	ret nz
 	jp InitBattleMenu
@@ -2482,14 +2482,14 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	jr .regularmenu
 
 .loadmoves
-	ld de, $d0dc
+	ld de, wd0dc
 	ld bc, $4
 	call CopyData
 	callab Func_39b87
 	ret
 
 .writemoves
-	ld de, $d0e1
+	ld de, wd0e1
 	ld a, [$fff6]
 	set 2, a
 	ld [$fff6], a
@@ -2504,20 +2504,20 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ret z
 	ld hl, W_PLAYERMONMOVES
 	call .loadmoves
-	FuncCoord 4, 12 ; $c494
+	FuncCoord 4, 12
 	ld hl, Coord
 	ld b, $4
 	ld c, $e
 	di
 	call TextBoxBorder
-	FuncCoord 4, 12 ; $c494
+	FuncCoord 4, 12
 	ld hl, Coord
 	ld [hl], $7a
-	FuncCoord 10, 12 ; $c49a
+	FuncCoord 10, 12
 	ld hl, Coord
 	ld [hl], $7e
 	ei
-	FuncCoord 6, 13 ; $c4aa
+	FuncCoord 6, 13
 	ld hl, Coord
 	call .writemoves
 	ld b, $5
@@ -2526,35 +2526,35 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 .mimicmenu
 	ld hl, W_ENEMYMONMOVES
 	call .loadmoves
-	FuncCoord 0, 7 ; $c42c
+	FuncCoord 0, 7
 	ld hl, Coord
 	ld b, $4
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 2, 8 ; $c442
+	FuncCoord 2, 8
 	ld hl, Coord
 	call .writemoves
 	ld b, $1
 	ld a, $7
 	jr .menuset
 .relearnmenu
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1_MOVE1 ; $d173
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
 	ld bc, $2c
 	call AddNTimes
 	call .loadmoves
-	FuncCoord 4, 7 ; $c430
+	FuncCoord 4, 7
 	ld hl, Coord
 	ld b, $4
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 6, 8 ; $c446
+	FuncCoord 6, 8
 	ld hl, Coord
 	call .writemoves
 	ld b, $5
 	ld a, $7
 .menuset
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld [hli], a
 	ld a, b
 	ld [hli], a ; wTopMenuItemX
@@ -2563,12 +2563,12 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	jr z, .selectedmoveknown
 	ld a, $1
 	jr nc, .selectedmoveknown
-	ld a, [wPlayerMoveListIndex] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; wPlayerMoveListIndex
 	inc a
 .selectedmoveknown
 	ld [hli], a ; wCurrentMenuItem
 	inc hl ; wTileBehindCursor untouched
-	ld a, [$cd6c]
+	ld a, [wcd6c]
 	inc a
 	inc a
 	ld [hli], a ; wMaxMenuItem
@@ -2579,7 +2579,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	dec a
 	ld b, $c3
 	jr z, .matchedkeyspicked
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr z, .matchedkeyspicked
 	ld a, [W_FLAGS_D733]
@@ -2593,7 +2593,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, [wMoveMenuType]
 	cp $1
 	jr z, .movelistindex1
-	ld a, [wPlayerMoveListIndex] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; wPlayerMoveListIndex
 	inc a
 .movelistindex1
 	ld [hl], a ; wLastMenuItem
@@ -2604,7 +2604,7 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	jr z, .battleselect
 	dec a
 	jr nz, .select
-	FuncCoord 1, 14 ; $c4b9
+	FuncCoord 1, 14
 	ld hl, Coord
 	ld de, WhichTechniqueString ; $53b8
 	call PlaceString
@@ -2614,10 +2614,10 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	bit 0, a
 	jr nz, .select
 	call Func_3d4b6
-	ld a, [$cc35]
+	ld a, [wcc35]
 	and a
 	jr z, .select
-	FuncCoord 5, 13 ; $c4a9
+	FuncCoord 5, 13
 	ld hl, Coord
 	dec a
 	ld bc, $14
@@ -2638,10 +2638,10 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 	bit 1, a ; B, but was it reset above?
 	push af
 	xor a
-	ld [$cc35], a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld [wcc35], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	dec a
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld b, a
 	ld a, [wMoveMenuType]
 	dec a ; if not mimic
@@ -2651,38 +2651,38 @@ Func_3d2fe: ; 3d2fe (f:52fe)
 .nob
 	dec a
 	ld a, b
-	ld [wPlayerMoveListIndex], a ; $cc2e
+	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
 	jr nz, .moveselected
 	pop af
 	ret
 .moveselected
 	pop af
 	ret nz
-	ld hl, W_PLAYERMONPP ; $d02d
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
 	and $3f
 	jr z, .nopp
-	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	ld a, [W_PLAYERDISABLEDMOVE] ; W_PLAYERDISABLEDMOVE
 	swap a
 	and $f
 	dec a
 	cp c
 	jr z, .disabled
-	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	ld a, [W_PLAYERBATTSTATUS3] ; W_PLAYERBATTSTATUS3
 	bit 3, a ; transformed
 	jr nz, .dummy ; game freak derp
 .dummy
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld hl, W_PLAYERMONMOVES
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [wPlayerSelectedMove], a ; $ccdc
+	ld [wPlayerSelectedMove], a ; wPlayerSelectedMove
 	xor a
 	ret
 .disabled
@@ -2707,34 +2707,34 @@ WhichTechniqueString: ; 3d3b8 (f:53b8)
 	db "WHICH TECHNIQUE?@"
 
 Func_3d3c9: ; 3d3c9 (f:53c9)
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jp nz, Func_3d2fe
 	call EraseMenuCursor
-	ld a, [$cd6c]
+	ld a, [wcd6c]
 	inc a
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	jp Func_3d2fe
 
 Func_3d3dd: ; 3d3dd (f:53dd)
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld b, a
-	ld a, [$cd6c]
+	ld a, [wcd6c]
 	inc a
 	inc a
 	cp b
 	jp nz, Func_3d2fe
 	call EraseMenuCursor
 	ld a, $1
-	ld [wCurrentMenuItem], a ; $cc26
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	jp Func_3d2fe
 
 Func_3d3f5: ; 3d3f5 (f:53f5)
 	ld a, $a5
-	ld [wPlayerSelectedMove], a ; $ccdc
-	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	ld [wPlayerSelectedMove], a ; wPlayerSelectedMove
+	ld a, [W_PLAYERDISABLEDMOVE] ; W_PLAYERDISABLEDMOVE
 	and a
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	jr nz, .asm_3d40e
 	ld a, [hli]
 	or [hl]
@@ -2776,43 +2776,43 @@ NoMovesLeftText: ; 3d430 (f:5430)
 	db "@"
 
 Func_3d435: ; 3d435 (f:5435)
-	ld a, [$cc35]
+	ld a, [wcc35]
 	and a
 	jr z, asm_3d4ad
 	ld hl, W_PLAYERMONMOVES
 	call Func_3d493
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	call Func_3d493
-	ld hl, W_PLAYERDISABLEDMOVE ; $d06d
+	ld hl, W_PLAYERDISABLEDMOVE ; W_PLAYERDISABLEDMOVE
 	ld a, [hl]
 	swap a
 	and $f
 	ld b, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp b
 	jr nz, .asm_3d463
 	ld a, [hl]
 	and $f
 	ld b, a
-	ld a, [$cc35]
+	ld a, [wcc35]
 	swap a
 	add b
 	ld [hl], a
 	jr .asm_3d474
 .asm_3d463
-	ld a, [$cc35]
+	ld a, [wcc35]
 	cp b
 	jr nz, .asm_3d474
 	ld a, [hl]
 	and $f
 	ld b, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	swap a
 	add b
 	ld [hl], a
 .asm_3d474
-	ld hl, W_PARTYMON1_MOVE1 ; $d173
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	ld bc, $2c
 	call AddNTimes
 	push hl
@@ -2822,12 +2822,12 @@ Func_3d435: ; 3d435 (f:5435)
 	add hl, bc
 	call Func_3d493
 	xor a
-	ld [$cc35], a
+	ld [wcc35], a
 	jp MoveSelectionMenu
 
 Func_3d493: ; 3d493 (f:5493)
 	push hl
-	ld a, [$cc35]
+	ld a, [wcc35]
 	dec a
 	ld c, a
 	ld b, $0
@@ -2835,7 +2835,7 @@ Func_3d493: ; 3d493 (f:5493)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	dec a
 	ld c, a
 	ld b, $0
@@ -2847,80 +2847,80 @@ Func_3d493: ; 3d493 (f:5493)
 	ld [de], a
 	ret
 asm_3d4ad: ; 3d4ad (f:54ad)
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$cc35], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld [wcc35], a
 	jp MoveSelectionMenu
 
 Func_3d4b6: ; 3d4b6 (f:54b6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 0, 8 ; $c440
+	FuncCoord 0, 8
 	ld hl, Coord
 	ld b, $3
 	ld c, $9
 	call TextBoxBorder
-	ld a, [W_PLAYERDISABLEDMOVE] ; $d06d
+	ld a, [W_PLAYERDISABLEDMOVE] ; W_PLAYERDISABLEDMOVE
 	and a
 	jr z, .asm_3d4df
 	swap a
 	and $f
 	ld b, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	cp b
 	jr nz, .asm_3d4df
-	FuncCoord 1, 10 ; $c469
+	FuncCoord 1, 10
 	ld hl, Coord
 	ld de, DisabledText
 	call PlaceString
 	jr .asm_3d54e
 .asm_3d4df
-	ld hl, wCurrentMenuItem ; $cc26
+	ld hl, wCurrentMenuItem ; wCurrentMenuItem
 	dec [hl]
 	xor a
 	ld [H_WHOSETURN], a ; $fff3
 	ld hl, W_PLAYERMONMOVES
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [wPlayerSelectedMove], a ; $ccdc
-	ld a, [wPlayerMonNumber] ; $cc2f
-	ld [wWhichPokemon], a ; $cf92
+	ld [wPlayerSelectedMove], a ; wPlayerSelectedMove
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
+	ld [wWhichPokemon], a ; wWhichPokemon
 	ld a, $4
-	ld [$cc49], a
+	ld [wcc49], a
 	callab GetMaxPP
-	ld hl, wCurrentMenuItem ; $cc26
+	ld hl, wCurrentMenuItem ; wCurrentMenuItem
 	ld c, [hl]
 	inc [hl]
 	ld b, $0
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	add hl, bc
 	ld a, [hl]
 	and $3f
-	ld [$cd6d], a
-	FuncCoord 1, 9 ; $c455
+	ld [wcd6d], a
+	FuncCoord 1, 9
 	ld hl, Coord
 	ld de, TypeText
 	call PlaceString
-	FuncCoord 7, 11 ; $c483
+	FuncCoord 7, 11
 	ld hl, Coord
 	ld [hl], "/"
-	FuncCoord 5, 9 ; $c459
+	FuncCoord 5, 9
 	ld hl, Coord
 	ld [hl], "/"
-	FuncCoord 5, 11 ; $c481
+	FuncCoord 5, 11
 	ld hl, Coord
-	ld de, $cd6d
+	ld de, wcd6d
 	ld bc, $102
 	call PrintNumber
-	FuncCoord 8, 11 ; $c484
+	FuncCoord 8, 11
 	ld hl, Coord
-	ld de, $d11e
+	ld de, wd11e
 	ld bc, $102
 	call PrintNumber
 	call GetCurrentMove
-	FuncCoord 2, 10 ; $c46a
+	FuncCoord 2, 10
 	ld hl, Coord
 	ld a, $5d
 	call Predef ; indirect jump to Func_27d98 (27d98 (9:7d98))
@@ -2942,14 +2942,14 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	call SaveScreenTilesToBuffer1
 	call Func_3d605
 	call LoadScreenTilesFromBuffer1
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	cp $e
 	jp z, .asm_3d601
 	cp $d
 	jr z, .unableToMove
 	cp $4
 	ret nc
-	ld [$cce2], a
+	ld [wEnemyMoveListIndex], a
 	ld c, a
 	ld hl, W_ENEMYMONMOVES
 	ld b, $0
@@ -3028,35 +3028,35 @@ SelectEnemyMove: ; 3d564 (f:5564)
 
 Func_3d605: ; 3d605 (f:5605)
 	ld a, $ff
-	ld [$cc3e], a
-	ld a, [wPlayerMoveListIndex] ; $cc2e
+	ld [wcc3e], a
+	ld a, [wPlayerMoveListIndex] ; wPlayerMoveListIndex
 	cp $f
 	jr z, .asm_3d630
-	ld a, [$cd6a]
+	ld a, [wcd6a]
 	and a
 	jr nz, .asm_3d629
-	ld a, [wPlayerSelectedMove] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; wPlayerSelectedMove
 	cp $a5
 	ld b, $e
 	jr z, .asm_3d62f
 	dec b
 	inc a
 	jr z, .asm_3d62f
-	ld a, [wPlayerMoveListIndex] ; $cc2e
+	ld a, [wPlayerMoveListIndex] ; wPlayerMoveListIndex
 	jr .asm_3d630
 .asm_3d629
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	add $4
 	ld b, a
 .asm_3d62f
 	ld a, b
 .asm_3d630
-	ld [$cc42], a
+	ld [wcc42], a
 	callab PrintWaitingText
 .asm_3d63b
 	call Func_22c3
 	call DelayFrame
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	inc a
 	jr z, .asm_3d63b
 	ld b, $a
@@ -3076,16 +3076,16 @@ Func_3d605: ; 3d605 (f:5605)
 Func_3d65e: ; 3d65e (f:565e)
 	xor a
 	ld [H_WHOSETURN], a ; $fff3
-	ld a, [wPlayerSelectedMove] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; wPlayerSelectedMove
 	inc a
 	jp z, Func_3d80a
 	xor a
-	ld [W_MOVEMISSED], a ; $d05f
-	ld [$cced], a
-	ld [$ccf4], a
+	ld [W_MOVEMISSED], a ; W_MOVEMISSED
+	ld [wcced], a
+	ld [wccf4], a
 	ld a, $a
-	ld [$d05b], a
-	ld a, [$cd6a]
+	ld [wd05b], a
+	ld a, [wcd6a]
 	and a
 	jp nz, Func_3d80a
 	call PrintGhostText
@@ -3095,14 +3095,14 @@ Func_3d65e: ; 3d65e (f:565e)
 	jp [hl]
 .asm_3d68a
 	call GetCurrentMove
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
 	bit 4, [hl]
 	jr nz, asm_3d6a9
 	call Func_3dc88
 	jp z, Func_3d80a
 
 Func_3d69a: ; 3d69a (f:569a)
-	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	cp CHARGE_EFFECT
 	jp z, Func_3f132
 	cp FLY_EFFECT
@@ -3117,7 +3117,7 @@ asm_3d6a9: ; 3d6a9 (f:56a9)
 asm_3d6b0: ; 3d6b0 (f:56b0)
 	call PrintMonName1Text
 	ld hl,DecrementPP
-	ld de,$CCDC ; pointer to the move just used
+	ld de,wPlayerSelectedMove ; pointer to the move just used
 	ld b,BANK(DecrementPP)
 	call Bankswitch
 	ld a,[W_PLAYERMOVEEFFECT] ; effect of the move just used
@@ -3168,7 +3168,7 @@ asm_3d71e
 	ld b,BANK(Func_79747)
 	call nz,Bankswitch
 	pop af
-	ld [$CC5B],a
+	ld [wcc5b],a
 	ld a,[W_PLAYERMOVENUM]
 	call PlayMoveAnimation
 	call Func_3eed3
@@ -3190,7 +3190,7 @@ asm_3d74b
 	jr asm_3d766
 .next5
 	xor a
-	ld [$CC5B],a
+	ld [wcc5b],a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3d766
@@ -3200,7 +3200,7 @@ asm_3d766
 	call MirrorMoveCopyMove
 	jp z,Func_3d80a
 	xor a
-	ld [$CCED],a
+	ld [wcced],a
 	jp Func_3d69a
 .next6
 	cp a,METRONOME_EFFECT
@@ -3226,14 +3226,14 @@ asm_3d766
 	call Func_3dc5c
 	callab DisplayEffectiveness
 	ld a,1
-	ld [$CCF4],a
+	ld [wccf4],a
 .next9
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,EffectsArray4
 	ld de,1
 	call IsInArray
 	call c,Func_3f132
-	ld hl,$CFE6
+	ld hl,W_ENEMYMONCURHP
 	ld a,[hli]
 	ld b,[hl]
 	or b
@@ -3243,9 +3243,9 @@ asm_3d766
 	ld hl,W_PLAYERBATTSTATUS1
 	bit 2,[hl]
 	jr z,.next10 ; 57EF
-	ld a,[$D06A]
+	ld a,[wd06a]
 	dec a
-	ld [$D06A],a
+	ld [wd06a],a
 	jp nz,asm_3d714
 
 	res 2,[hl]
@@ -3269,7 +3269,7 @@ MultiHitText: ; 3d805 (f:5805)
 
 Func_3d80a: ; 3d80a (f:580a)
 	xor a
-	ld [$CD6A],a
+	ld [wcd6a],a
 	ld b,1
 	ret
 
@@ -3330,7 +3330,7 @@ Func_3d854: ; 3d854 (f:5854)
 	jr z,.WakeUp ; to 5874
 
 	xor a
-	ld [$CC5B],a
+	ld [wcc5b],a
 	ld a,SLP_ANIM - 1
 	call PlayMoveAnimation
 	ld hl,FastAsleepText
@@ -3341,7 +3341,7 @@ Func_3d854: ; 3d854 (f:5854)
 	call PrintText
 .sleepDone
 	xor a
-	ld [$CCF1],a
+	ld [wccf1],a
 	ld hl,Func_3d80a
 	jp Func_3da37
 
@@ -3351,7 +3351,7 @@ Func_3d854: ; 3d854 (f:5854)
 	ld hl,IsFrozenText
 	call PrintText
 	xor a
-	ld [$CCF1],a
+	ld [wccf1],a
 	ld hl,Func_3d80a
 	jp Func_3da37
 
@@ -3384,7 +3384,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,Func_3d80a ; $580a
 	jp Func_3da37
 .next
-	ld hl,$D06D
+	ld hl,W_PLAYERDISABLEDMOVE
 	ld a,[hl]
 	and a
 	jr z,.next2 ; 58EE
@@ -3393,14 +3393,14 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	and a,$F
 	jr nz,.next2
 	ld [hl],a
-	ld [$CCEE],a
+	ld [wccee],a
 	ld hl,DisabledNoMoreText
 	call PrintText
 .next2
 	ld a,[W_PLAYERBATTSTATUS1]
 	add a
 	jr nc,.next3 ; 5929
-	ld hl,$D06B
+	ld hl,wd06b
 	dec [hl]
 	jr nz,.next4 ; 5907
 	ld hl,W_PLAYERBATTSTATUS1
@@ -3412,7 +3412,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,IsConfusedText
 	call PrintText
 	xor a
-	ld [$CC5B],a
+	ld [wcc5b],a
 	ld a,CONF_ANIM - 1
 	call PlayMoveAnimation
 	call BattleRandom
@@ -3425,10 +3425,10 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	call PrintHurtItselfText
 	jr .next5 ; 5952
 .next3
-	ld a,[$CCEE]
+	ld a,[wccee]
 	and a
 	jr z,.ParalysisCheck ; 593E
-	ld hl,$CCDC
+	ld hl,wPlayerSelectedMove
 	cp [hl]
 	jr nz,.ParalysisCheck
 	call PrintMoveIsDisabledText
@@ -3456,7 +3456,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jr .next9 ; 596F
 .next8
 	xor a
-	ld [$CC5B],a
+	ld [wcc5b],a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .next9
@@ -3468,18 +3468,18 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jr z,.next10 ; 59D0
 	xor a
 	ld [W_PLAYERMOVENUM],a
-	ld hl,$D0D7
+	ld hl,W_DAMAGE
 	ld a,[hli]
 	ld b,a
 	ld c,[hl]
-	ld hl,$D075
+	ld hl,wd075
 	ld a,[hl]
 	add c
 	ld [hld],a
 	ld a,[hl]
 	adc b
 	ld [hl],a
-	ld hl,$D06A
+	ld hl,wd06a
 	dec [hl]
 	jr z,.next11 ; 599B
 	ld hl,Func_3d80a ; $580a
@@ -3490,15 +3490,15 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld hl,UnleashedEnergyText
 	call PrintText
 	ld a,1
-	ld [$CFD4],a
-	ld hl,$D075
+	ld [W_PLAYERMOVEPOWER],a
+	ld hl,wd075
 	ld a,[hld]
 	add a
 	ld b,a
-	ld [$D0D8],a
+	ld [wd0d8],a
 	ld a,[hl]
 	rl a
-	ld [$D0D7],a
+	ld [W_DAMAGE],a
 	or b
 	jr nz,.next12 ; 59C2
 	ld a,1
@@ -3518,7 +3518,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	ld [W_PLAYERMOVENUM],a
 	ld hl,ThrashingAboutText
 	call PrintText
-	ld hl,$D06A
+	ld hl,wd06a
 	dec [hl]
 	ld hl,asm_3d6dc ; $56dc
 	jp nz,Func_3da37
@@ -3530,7 +3530,7 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	and a,3
 	inc a
 	inc a
-	ld [$D06B],a
+	ld [wd06b],a
 	pop hl
 	jp Func_3da37
 .next13
@@ -3538,23 +3538,23 @@ HyperBeamCheck: ; 3d8c2 (f:58c2)
 	jp z,Func_3da1a
 	ld hl,AttackContinuesText
 	call PrintText
-	ld a,[$D06A]
+	ld a,[wd06a]
 	dec a
-	ld [$D06A],a
+	ld [wd06a],a
 	ld hl,asm_3d714 ; $5714
 	jp nz,Func_3da37
 	jp Func_3da37
 
 Func_3da1a: ; 3da1a (f:5a1a)
-	ld a, [W_PLAYERBATTSTATUS2] ; $d063
+	ld a, [W_PLAYERBATTSTATUS2] ; W_PLAYERBATTSTATUS2
 	bit 6, a
 	jp z, Func_3da39
 	ld a, RAGE
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B
 	xor a
-	ld [W_PLAYERMOVEEFFECT], a ; $cfd3
+	ld [W_PLAYERMOVEEFFECT], a ; wcfd3
 	ld hl, asm_3d6b0 ; $56b0
 	jp Func_3da37
 
@@ -3628,19 +3628,19 @@ CantMoveText: ; 3da83 (f:5a83)
 	db "@"
 
 PrintMoveIsDisabledText: ; 3da88 (f:5a88)
-	ld hl, wPlayerSelectedMove ; $ccdc
-	ld de, W_PLAYERBATTSTATUS1 ; $d062
+	ld hl, wPlayerSelectedMove ; wPlayerSelectedMove
+	ld de, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3da97
 	inc hl
-	ld de, W_ENEMYBATTSTATUS1 ; $d067
+	ld de, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 .asm_3da97
 	ld a, [de]
 	res 4, a
 	ld [de], a
 	ld a, [hl]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMoveName
 	ld hl, MoveIsDisabledText
 	jp PrintText
@@ -3652,22 +3652,22 @@ MoveIsDisabledText: ; 3daa8 (f:5aa8)
 PrintHurtItselfText: ; 3daad (f:5aad)
 	ld hl, HurtItselfText
 	call PrintText
-	ld hl, W_ENEMYMONDEFENSE ; $cff8
+	ld hl, W_ENEMYMONDEFENSE ; wcff8
 	ld a, [hli]
 	push af
 	ld a, [hld]
 	push af
 	ld a, [W_PLAYERMONDEF]
 	ld [hli], a
-	ld a, [$d028]
+	ld a, [W_PLAYERMONDEF + 1]
 	ld [hl], a
-	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_PLAYERMOVEEFFECT ; wcfd3
 	push hl
 	ld a, [hl]
 	push af
 	xor a
 	ld [hli], a
-	ld [$d05e], a
+	ld [wd05e], a
 	ld a, $28
 	ld [hli], a
 	xor a
@@ -3677,13 +3677,13 @@ PrintHurtItselfText: ; 3daad (f:5aad)
 	pop af
 	pop hl
 	ld [hl], a
-	ld hl, $cff9
+	ld hl, W_ENEMYMONDEFENSE + 1
 	pop af
 	ld [hld], a
 	pop af
 	ld [hl], a
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	inc a
 	ld [H_WHOSETURN], a ; $fff3
 	call PlayMoveAnimation
@@ -3701,20 +3701,20 @@ MonName1Text: ; 3dafb (f:5afb)
 	db $08 ; asm
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
-	ld hl, $ccf1
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
+	ld hl, wccf1
 	jr z, .asm_3db11
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	ld hl, $ccf2
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
+	ld hl, wccf2
 .asm_3db11
 	ld [hl], a
-	ld [$d11e], a
+	ld [wd11e], a
 	call Func_3db85
-	ld a, [$cced]
+	ld a, [wcced]
 	and a
 	ld hl, Used2Text
 	ret nz
-	ld a, [$d11e]
+	ld a, [wd11e]
 	cp DOUBLESLAP
 	ld hl, Used2Text
 	ret c
@@ -3731,7 +3731,7 @@ Used2Text: ; 3db34 (f:5b34)
 	db $08 ; asm
 
 PrintInsteadText: ; 3db39 (f:5b39)
-	ld a, [$cced]
+	ld a, [wcced]
 	and a
 	jr z, PrintCF4BText
 	ld hl, InsteadText
@@ -3749,7 +3749,7 @@ CF4BText: ; 3db4c (f:5b4c)
 	TX_FAR _CF4BText
 	db $08 ; asm
 	ld hl, ExclamationPointPointerTable
-	ld a, [$d11e]
+	ld a, [wd11e]
 	add a
 	push bc
 	ld b, $0
@@ -3790,7 +3790,7 @@ ExclamationPoint5Text: ; 3db80 (f:5b80)
 
 Func_3db85: ; 3db85 (f:5b85)
 	push bc
-	ld a, [$d11e] ; move number
+	ld a, [wd11e] ; move number
 	ld c, a
 	ld b, $0
 	ld hl, UnknownMovesList_3dba3 ; $5ba3
@@ -3806,7 +3806,7 @@ Func_3db85: ; 3db85 (f:5b85)
 	jr .asm_3db8f
 .asm_3db9d
 	ld a, b
-	ld [$d11e], a
+	ld [wd11e], a
 	pop bc
 	ret
 
@@ -3826,18 +3826,18 @@ UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
 	db $FF ; terminator
 
 PrintMoveFailureText: ; 3dbe2 (f:5be2)
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3dbed
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3dbed
 	ld hl, DoesntAffectMonText ; $5c57
-	ld a, [$d05b]
+	ld a, [wd05b]
 	and $7f
 	jr z, .asm_3dc04
 	ld hl, AttackMissedText ; $5c42
-	ld a, [$d05e]
+	ld a, [wd05e]
 	cp $ff
 	jr nz, .asm_3dc04
 	ld hl, UnaffectedText ; $5c4c
@@ -3845,14 +3845,14 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	push de
 	call PrintText
 	xor a
-	ld [$d05e], a
+	ld [wd05e], a
 	pop de
 	ld a, [de]
 	cp JUMP_KICK_EFFECT
 	ret nz
 
 	; if you get here, the mon used hi jump kick and missed
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -3902,7 +3902,7 @@ DoesntAffectMonText: ; 3dc57 (f:5c57)
 	db "@"
 
 Func_3dc5c: ; 3dc5c (f:5c5c)
-	ld a, [$d05e]
+	ld a, [wd05e]
 	and a
 	jr z, .asm_3dc75
 	dec a
@@ -3916,7 +3916,7 @@ Func_3dc5c: ; 3dc5c (f:5c5c)
 	ld l, a
 	call PrintText
 	xor a
-	ld [$d05e], a
+	ld [wd05e], a
 .asm_3dc75
 	ld c, $14
 	jp DelayFrames
@@ -3935,23 +3935,23 @@ OHKOText: ; 3dc83 (f:5c83)
 
 Func_3dc88: ; 3dc88 (f:5c88)
 	xor a
-	ld [$cced], a
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld [wcced], a
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3dc97
 	ld a, $1
 	and a
 	ret
 .asm_3dc97
-	ld hl, W_PARTYMON1_OTID ; $d177
+	ld hl, W_PARTYMON1_OTID ; W_PARTYMON1_OTID
 	ld bc, $2c
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	call AddNTimes
-	ld a, [wPlayerID] ; $d359
+	ld a, [wPlayerID] ; wPlayerID
 	cp [hl]
 	jr nz, .asm_3dcb1
 	inc hl
-	ld a, [wPlayerID + 1] ; $d35a
+	ld a, [wPlayerID + 1] ; wd35a
 	cp [hl]
 	jp z, Func_3ddb0
 .asm_3dcb1
@@ -3973,7 +3973,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 .asm_3dcce
 	ld b, a
 	ld c, a
-	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld a, [W_PLAYERMONLEVEL] ; W_PLAYERMONLEVEL
 	ld d, a
 	add b
 	ld b, a
@@ -4015,7 +4015,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	swap a
 	and $7
 	jr z, .asm_3dd0e
-	ld [W_PLAYERMONSTATUS], a ; $d018
+	ld [W_PLAYERMONSTATUS], a ; W_PLAYERMONSTATUS
 	ld hl, BeganToNapText
 	jr .asm_3dd3a
 .asm_3dd20
@@ -4035,16 +4035,16 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	call PrintText
 	jr Func_3ddb4
 .asm_3dd3f
-	ld a, [$d01d]
+	ld a, [W_PLAYERMONMOVES + 1]
 	and a
 	jr z, .asm_3dd20
-	ld a, [$ccee]
+	ld a, [wccee]
 	and a
 	jr nz, .asm_3dd20
-	ld a, [wPlayerSelectedMove] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; wPlayerSelectedMove
 	cp $a5
 	jr z, .asm_3dd20
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	push hl
 	ld a, [hli]
 	and $3f
@@ -4062,7 +4062,7 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	add b
 	pop hl
 	push af
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -4073,10 +4073,10 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	cp b
 	jr z, .asm_3dd20
 	ld a, $1
-	ld [$cced], a
-	ld a, [wMaxMenuItem] ; $cc28
+	ld [wcced], a
+	ld a, [wMaxMenuItem] ; wMaxMenuItem
 	ld b, a
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 .asm_3dd86
 	call BattleRandom
@@ -4085,21 +4085,21 @@ Func_3dc88: ; 3dc88 (f:5c88)
 	jr nc, .asm_3dd86
 	cp c
 	jr z, .asm_3dd86
-	ld [wCurrentMenuItem], a ; $cc26
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	ld e, a
 	ld d, $0
 	add hl, de
 	ld a, [hl]
 	and a
 	jr z, .asm_3dd86
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	ld c, a
 	ld b, $0
 	ld hl, W_PLAYERMONMOVES
 	add hl, bc
 	ld a, [hl]
-	ld [wPlayerSelectedMove], a ; $ccdc
+	ld [wPlayerSelectedMove], a ; wPlayerSelectedMove
 	call GetCurrentMove
 
 Func_3ddb0: ; 3ddb0 (f:5db0)
@@ -4157,7 +4157,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	rl b
 .next
 	ld hl, W_PLAYERMONATK  ;attack pointer
-	ld a, [$d05e]
+	ld a, [wd05e]
 	and a
 	jr z, .next3
 	ld c, 3
@@ -4167,7 +4167,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld a, [$ff98]
 	ld c, a
 	push bc
-	ld hl, $d18f
+	ld hl, W_PARTYMON1_ATACK
 	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes
@@ -4186,7 +4186,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	rl b
 .next2
 	ld hl, W_PLAYERMONSPECIAL
-	ld a, [$d05e]   ;XXX
+	ld a, [wd05e]   ;XXX
 	and a
 	jr z, .next3  ;skip portion of code that pulls up inactive pokemon
 .loadOtherPoke
@@ -4197,7 +4197,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ld a, [$ff98]
 	ld c, a
 	push bc
-	ld hl, $d195
+	ld hl, W_PARTYMON1_SPECIAL
 	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes
@@ -4222,9 +4222,9 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	inc l            ;minimum HL = 1
 .next4
 	ld b, l        ;*B = attack [possibly scaled] [C contains defense]
-	ld a, [$d022]  ;*E = level
+	ld a, [W_PLAYERMONLEVEL]  ;*E = level
 	ld e, a
-	ld a, [$d05e]  ;critical hit?
+	ld a, [wd05e]  ;critical hit?
 	and a
 	jr z, .next5
 	sla e    ;double level if it was a critical hit
@@ -4234,11 +4234,11 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ret
 
 Func_3de75: ; 3de75 (f:5e75)
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld hl, W_ENEMYMOVEPOWER ; $cfce
+	ld hl, W_ENEMYMOVEPOWER ; wcfce
 	ld a, [hli]
 	ld d, a
 	and a
@@ -4250,18 +4250,18 @@ Func_3de75: ; 3de75 (f:5e75)
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	ld a, [W_PLAYERBATTSTATUS3] ; W_PLAYERBATTSTATUS3
 	bit 2, a
 	jr z, .asm_3de98
 	sla c
 	rl b
 .asm_3de98
 	ld hl, W_ENEMYMONATTACK
-	ld a, [$d05e]
+	ld a, [wd05e]
 	and a
 	jr z, .asm_3deef
-	ld hl, W_PARTYMON1_DEFENSE ; $d191
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld hl, W_PARTYMON1_DEFENSE ; wd191
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
@@ -4278,18 +4278,18 @@ Func_3de75: ; 3de75 (f:5e75)
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld a, [W_PLAYERBATTSTATUS3] ; $d064
+	ld a, [W_PLAYERBATTSTATUS3] ; W_PLAYERBATTSTATUS3
 	bit 1, a
 	jr z, .asm_3decd
 	sla c
 	rl b
 .asm_3decd
-	ld hl, W_ENEMYMONSPECIAL ; $cffc
-	ld a, [$d05e]
+	ld hl, W_ENEMYMONSPECIAL ; wcffc
+	ld a, [wd05e]
 	and a
 	jr z, .asm_3deef
-	ld hl, W_PARTYMON1_SPECIAL ; $d195
-	ld a, [wPlayerMonNumber] ; $cc2f
+	ld hl, W_PARTYMON1_SPECIAL ; W_PARTYMON1_SPECIAL
+	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
@@ -4320,9 +4320,9 @@ Func_3de75: ; 3de75 (f:5e75)
 	inc l
 .asm_3df0a
 	ld b, l
-	ld a, [W_ENEMYMONLEVEL] ; $cff3
+	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
 	ld e, a
-	ld a, [$d05e]
+	ld a, [wd05e]
 	and a
 	jr z, .asm_3df17
 	sla e
@@ -4335,15 +4335,15 @@ Func_3de75: ; 3de75 (f:5e75)
 Func_3df1c: ; 3df1c (f:5f1c)
 	push de
 	push bc
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3df40
-	ld hl, $d8c6
+	ld hl, wd8c6
 	dec c
 	sla c
 	ld b, $0
 	add hl, bc
-	ld a, [W_ENEMYMONNUMBER] ; $cfe8
+	ld a, [W_ENEMYMONNUMBER] ; W_ENEMYMONNUMBER
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
@@ -4354,13 +4354,13 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	pop de
 	ret
 .asm_3df40
-	ld a, [W_ENEMYMONLEVEL] ; $cff3
-	ld [W_CURENEMYLVL], a ; $d127
-	ld a, [$cfe5]
-	ld [$d0b5], a
+	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
+	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld a, [wcfe5]
+	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, $cff1
-	ld de, $cfaf
+	ld hl, W_ENEMYMONATKDEFIV
+	ld de, wcfaf
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -4368,7 +4368,7 @@ Func_3df1c: ; 3df1c (f:5f1c)
 	ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, $cfa4
+	ld hl, wcfa4
 	call CalcStat
 	pop de
 	ret
@@ -4384,7 +4384,7 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .effect
-	ld a, [$cfcd]
+	ld a, [W_ENEMYMOVEEFFECT]
 .effect
 
 ; EXPLODE_EFFECT halves defense.
@@ -4534,7 +4534,7 @@ MoreCalculateDamage: ; 3df65 (f:5f65)
 
 Func_3e016: ; 3e016 (f:6016)
 	call Func_3f132
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	dec a
 	ret
 
@@ -4552,25 +4552,25 @@ UnusedHighCriticalMoves: ; 3e01e (f:601e)
 ; among the most popular) tend to CH about 20 to 25% of the time."
 CriticalHitTest: ; 3e023 (f:6023)
 	xor a
-	ld [$d05e], a
+	ld [wd05e], a
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [$cfe5]
+	ld a, [wcfe5]
 	jr nz, .asm_3e032
 	ld a, [W_PLAYERMONID]
 .asm_3e032
-	ld [$d0b5], a
+	ld [wd0b5], a
 	call GetMonHeader
 	ld a, [W_MONHBASESPEED]
 	ld b, a
 	srl b                        ; (effective (base speed/2))
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld hl, W_PLAYERMOVEPOWER ; $cfd4
-	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERMOVEPOWER ; W_PLAYERMOVEPOWER
+	ld de, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	jr z, .calcCriticalHitProbability
-	ld hl, W_ENEMYMOVEPOWER ; $cfce
-	ld de, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYMOVEPOWER ; wcfce
+	ld de, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .calcCriticalHitProbability      ; 0x3e04f
 	ld a, [hld]                  ; read base power from RAM
 	and a
@@ -4613,7 +4613,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 	cp b                         ; check a against calculated crit rate
 	ret nc                       ; no critical hit if no borrow
 	ld a, $1
-	ld [$d05e], a                ; set critical hit flag
+	ld [wd05e], a                ; set critical hit flag
 	ret
 
 ; high critical hit moves
@@ -4795,10 +4795,10 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	ld [wHPBarNewHP+1],a
 	ld a,[hl]
 	ld [wHPBarNewHP],a
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl,Coord
 	xor a
-	ld [$cf94],a
+	ld [wListMenuID],a
 	ld a,$48
 	call Predef ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
@@ -4915,10 +4915,10 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
 	ld [wHPBarMaxHP],a
-	FuncCoord 10, 9 ; $c45e
+	FuncCoord 10, 9
 	ld hl,Coord
 	ld a,$01
-	ld [$cf94],a
+	ld [wListMenuID],a
 	ld a,$48
 	call Predef ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
@@ -5031,12 +5031,12 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 	ld a,[H_WHOSETURN]
 	and a
 ; values for player turn
-	ld a,[$ccf2]
+	ld a,[wccf2]
 	ld hl,wPlayerSelectedMove
 	ld de,W_PLAYERMOVENUM
 	jr z,.next
 ; values for enemy turn
-	ld a,[$ccf1]
+	ld a,[wccf1]
 	ld de,W_ENEMYMOVENUM
 	ld hl,wEnemySelectedMove
 .next
@@ -5058,7 +5058,7 @@ MirrorMoveFailedText: ; 3e324 (f:6324)
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData: ; 3e329 (f:6329)
-	ld [$d11e],a
+	ld [wd11e],a
 	dec a
 	ld hl,Moves
 	ld bc,$0006
@@ -5076,7 +5076,7 @@ ReloadMoveData: ; 3e329 (f:6329)
 ; function that picks a random move for metronome
 MetronomePickMove: ; 3e348 (f:6348)
 	xor a
-	ld [$cc5b],a
+	ld [wcc5b],a
 	ld a,METRONOME
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
@@ -5113,7 +5113,7 @@ IncrementMovePP: ; 3e373 (f:6373)
 	jr z,.next
 ; values for enemy turn
 	ld hl,W_ENEMYMONPP
-	ld de,$d8c1 ; enemy party pokemon 1 PP
+	ld de,wd8c1 ; enemy party pokemon 1 PP
 	ld a,[wEnemyMoveListIndex]
 .next
 	ld b,$00
@@ -5146,7 +5146,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_PLAYERMOVETYPE]
-	ld [$d11e],a
+	ld [wd11e],a
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.next
@@ -5160,9 +5160,9 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_ENEMYMOVETYPE]
-	ld [$d11e],a
+	ld [wd11e],a
 .next
-	ld a,[$d11e] ; move type
+	ld a,[wd11e] ; move type
 	cp b ; does the move type match type 1 of the attacker?
 	jr z,.sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
@@ -5184,10 +5184,10 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld [W_DAMAGE],a
 	ld a,l
 	ld [W_DAMAGE + 1],a
-	ld hl,$d05b
+	ld hl,wd05b
 	set 7,[hl]
 .skipSameTypeAttackBonus
-	ld a,[$d11e]
+	ld a,[wd11e]
 	ld b,a ; b = move type
 	ld hl,TypeEffects
 .loop
@@ -5207,13 +5207,13 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	push hl
 	push bc
 	inc hl
-	ld a,[$d05b]
+	ld a,[wd05b]
 	and a,$80
 	ld b,a
 	ld a,[hl] ; a = damage multiplier
 	ld [H_MULTIPLIER],a
 	add b
-	ld [$d05b],a
+	ld [wd05b],a
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld hl,W_DAMAGE
@@ -5250,7 +5250,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; this doesn't take into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
-; the result is stored in [$D11E]
+; the result is stored in [wd11e]
 ; ($05 is not very effective, $10 is neutral, $14 is super effective)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness: ; 3e449 (f:6449)
@@ -5261,7 +5261,7 @@ AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	inc hl
 	ld c,[hl]              ; c = type 2 of player's pokemon
 	ld a,$10
-	ld [$d11e],a           ; initialize [$D11E] to neutral effectiveness
+	ld [wd11e],a           ; initialize [wd11e] to neutral effectiveness
 	ld hl,TypeEffects
 .loop
 	ld a,[hli]
@@ -5282,7 +5282,7 @@ AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	jr .loop
 .done
 	ld a,[hl]
-	ld [$d11e],a           ; store damage multiplier
+	ld [wd11e],a           ; store damage multiplier
 	ret
 
 INCLUDE "data/type_effects.asm"
@@ -5478,7 +5478,7 @@ CalcHitChance: ; 3e624 (f:6624)
 	ret
 
 Func_3e687: ; 3e687 (f:6687)
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld a, [hli]
 	and a
 	jr nz, .asm_3e692
@@ -5505,81 +5505,81 @@ Func_3e687: ; 3e687 (f:6687)
 	ld b, $4
 	call Divide
 	ld a, [$ff97]
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld [hli], a
 	ld a, [$ff98]
 	ld [hl], a
 	ret
 
 Func_3e6bc: ; 3e6bc (f:66bc)
-	ld a, [wEnemySelectedMove] ; $ccdd
+	ld a, [wEnemySelectedMove] ; wccdd
 	inc a
 	jp z, Func_3e88c
 	call PrintGhostText
 	jp z, Func_3e88c
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3e6dc
 	ld b, $1
-	ld a, [$cc3e]
+	ld a, [wcc3e]
 	cp $e
 	jr z, .asm_3e6dc
 	cp $4
 	ret nc
 .asm_3e6dc
-	ld hl, $ccd5
+	ld hl, wccd5
 	inc [hl]
 	xor a
-	ld [W_MOVEMISSED], a ; $d05f
-	ld [$ccf4], a
+	ld [W_MOVEMISSED], a ; W_MOVEMISSED
+	ld [wccf4], a
 	ld a, $a
-	ld [$d05b], a
+	ld [wd05b], a
 	call Func_3e88f
 	jr nz, .asm_3e6f2
 	jp [hl]
 .asm_3e6f2
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	bit 4, [hl]
 	jr nz, asm_3e70b
 	call GetCurrentMove
 
 Func_3e6fc: ; 3e6fc (f:66fc)
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp CHARGE_EFFECT
 	jp z, Func_3f132
 	cp FLY_EFFECT
 	jp z, Func_3f132
 	jr asm_3e72b
 asm_3e70b: ; 3e70b (f:670b)
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 4, [hl] ; no longer charging up for attack
 	res 6, [hl] ; no longer invulnerable to typcial attacks
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
-	ld [$d0b5], a
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
+	ld [wd0b5], a
 	ld a, $2c
-	ld [$d0b7], a
+	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [W_LISTTYPE], a
 	call GetName
-	ld de, $cd6d
+	ld de, wcd6d
 	call CopyStringToCF4B
 asm_3e72b: ; 3e72b (f:672b)
 	xor a
-	ld [$cced], a
+	ld [wcced], a
 	call PrintMonName1Text
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	ld hl, EffectsArray1 ; $4000
 	ld de, $1
 	call IsInArray
 	jp c, Func_3f132
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	ld hl, EffectsArray5B ; $4049
 	ld de, $1
 	call IsInArray
 	call c, Func_3f132
 asm_3e750: ; 3e750 (f:6750)
 	call Func_3ec81
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	ld hl, EffectsArray2 ; $4011
 	ld de, $1
 	call IsInArray
@@ -5598,10 +5598,10 @@ asm_3e750: ; 3e750 (f:6750)
 Func_3e77f: ; 3e77f (f:677f)
 	call MoveHitTest
 asm_3e782: ; 3e782 (f:6782)
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr z, .asm_3e791
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp EXPLODE_EFFECT
 	jr z, asm_3e7a0
 	jr Func_3e7d1
@@ -5609,7 +5609,7 @@ asm_3e782: ; 3e782 (f:6782)
 	call Func_3ec81
 
 Func_3e794: ; 3e794 (f:6794)
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	and a
 	ld a, $1
 	jr z, asm_3e7a4
@@ -5620,18 +5620,18 @@ asm_3e7a0: ; 3e7a0 (f:67a0)
 	xor a
 asm_3e7a4: ; 3e7a4 (f:67a4)
 	push af
-	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 4, a ; does mon have a substitute?
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
 	pop af
-	ld [$cc5b], a
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld [wcc5b], a
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 	call PlayMoveAnimation
 	call Func_3eed3
 	call Func_3cdec
-	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 4, a ; does mon have a substitute?
 	ld hl, Func_79771
 	ld b, BANK(Func_79771)
@@ -5642,7 +5642,7 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 	call Func_3ec81
 	ld c, $1e
 	call DelayFrames
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp FLY_EFFECT
 	jr z, .asm_3e7e6
 	cp CHARGE_EFFECT
@@ -5650,11 +5650,11 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 	jr asm_3e7ef
 .asm_3e7e6
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3e7ef: ; 3e7ef (f:67ef)
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp MIRROR_MOVE_EFFECT
 	jr nz, .notMirrorMoveEffect
 	call MirrorMoveCopyMove
@@ -5666,16 +5666,16 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call MetronomePickMove
 	jp Func_3e6fc
 .notMetronomeEffect
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	ld hl, EffectsArray3 ; $4014
 	ld de, $1
 	call IsInArray
 	jp c, Func_3f132
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr z, .asm_3e82b
 	call PrintMoveFailureText
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp EXPLODE_EFFECT
 	jr z, .asm_3e83e
 	jp Func_3e88c
@@ -5684,24 +5684,24 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call Func_3dc5c
 	callab DisplayEffectiveness
 	ld a, $1
-	ld [$ccf4], a
+	ld [wccf4], a
 .asm_3e83e
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	ld hl, EffectsArray4 ; $4030
 	ld de, $1
 	call IsInArray
 	call c, Func_3f132
-	ld hl, W_PLAYERMONCURHP ; $d015
+	ld hl, W_PLAYERMONCURHP ; wd015
 	ld a, [hli]
 	ld b, [hl]
 	or b
 	ret z
 	call HandleBuildingRage
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	bit 2, [hl] ; is mon hitting multiple times? (example: double kick)
 	jr z, .asm_3e873
 	push hl
-	ld hl, $d06f
+	ld hl, wd06f
 	dec [hl]
 	pop hl
 	jp nz, Func_3e794
@@ -5709,9 +5709,9 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	ld hl, HitXTimesText ; $6887
 	call PrintText
 	xor a
-	ld [$cd05], a
+	ld [wcd05], a
 .asm_3e873
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	and a
 	jr z, Func_3e88c
 	ld hl, EffectsArray5 ; $403b
@@ -5729,18 +5729,18 @@ Func_3e88c: ; 3e88c (f:688c)
 	ret
 
 Func_3e88f: ; 3e88f (f:688f)
-	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld hl, W_ENEMYMONSTATUS ; wcfe9
 	ld a, [hl]
 	and $7
 	jr z, .asm_3e8bf
 	dec a
-	ld [W_ENEMYMONSTATUS], a ; $cfe9
+	ld [W_ENEMYMONSTATUS], a ; wcfe9
 	and a
 	jr z, .asm_3e8af
 	ld hl, FastAsleepText
 	call PrintText
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a,SLP_ANIM
 	call PlayMoveAnimation
 	jr .asm_3e8b5
@@ -5749,7 +5749,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	call PrintText
 .asm_3e8b5
 	xor a
-	ld [$ccf2], a
+	ld [wccf2], a
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e8bf
@@ -5758,11 +5758,11 @@ Func_3e88f: ; 3e88f (f:688f)
 	ld hl, IsFrozenText
 	call PrintText
 	xor a
-	ld [$ccf2], a
+	ld [wccf2], a
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e8d3
-	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
 	bit 5, a
 	jp z, Func_3e8e7
 	ld hl, CantMoveText
@@ -5771,7 +5771,7 @@ Func_3e88f: ; 3e88f (f:688f)
 	jp Func_3eab8
 
 Func_3e8e7: ; 3e8e7 (f:68e7)
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	bit 3, [hl]
 	jp z, Func_3e8fd
 	res 3, [hl]
@@ -5781,7 +5781,7 @@ Func_3e8e7: ; 3e8e7 (f:68e7)
 	jp Func_3eab8
 
 Func_3e8fd: ; 3e8fd (f:68fd)
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 	bit 5, [hl]
 	jr z, .asm_3e912
 	res 5, [hl]
@@ -5790,7 +5790,7 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e912
-	ld hl, W_ENEMYDISABLEDMOVE ; $d072
+	ld hl, W_ENEMYDISABLEDMOVE ; W_ENEMYDISABLEDMOVE
 	ld a, [hl]
 	and a
 	jr z, .asm_3e929
@@ -5799,17 +5799,17 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	and $f
 	jr nz, .asm_3e929
 	ld [hl], a
-	ld [$ccef], a
+	ld [wccef], a
 	ld hl, DisabledNoMoreText
 	call PrintText
 .asm_3e929
-	ld a, [W_ENEMYBATTSTATUS1] ; $d067
+	ld a, [W_ENEMYBATTSTATUS1] ; W_ENEMYBATTSTATUS1
 	add a
 	jp nc, Func_3e9aa
-	ld hl, $d070
+	ld hl, wd070
 	dec [hl]
 	jr nz, .asm_3e944
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 7, [hl]
 	ld hl, ConfusedNoMoreText
 	call PrintText
@@ -5818,13 +5818,13 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	ld hl, IsConfusedText
 	call PrintText
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a,CONF_ANIM
 	call PlayMoveAnimation
 	call BattleRandom
 	cp $80
 	jr c, Func_3e9aa
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	ld a, [hl]
 	and $80
 	ld [hl], a
@@ -5835,17 +5835,17 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	push af
 	ld a, [hld]
 	push af
-	ld a, [W_ENEMYMONDEFENSE] ; $cff8
+	ld a, [W_ENEMYMONDEFENSE] ; wcff8
 	ld [hli], a
-	ld a, [$cff9]
+	ld a, [W_ENEMYMONDEFENSE + 1]
 	ld [hl], a
-	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 	push hl
 	ld a, [hl]
 	push af
 	xor a
 	ld [hli], a
-	ld [$d05e], a
+	ld [wd05e], a
 	ld a, $28
 	ld [hli], a
 	xor a
@@ -5855,13 +5855,13 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	pop af
 	pop hl
 	ld [hl], a
-	ld hl, $d028
+	ld hl, W_PLAYERMONDEF + 1
 	pop af
 	ld [hld], a
 	pop af
 	ld [hl], a
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld [H_WHOSETURN], a ; $fff3
 	ld a, POUND
 	call PlayMoveAnimation
@@ -5871,17 +5871,17 @@ Func_3e8fd: ; 3e8fd (f:68fd)
 	jr asm_3e9d3
 
 Func_3e9aa: ; 3e9aa (f:69aa)
-	ld a, [$ccef]
+	ld a, [wccef]
 	and a
 	jr z, .asm_3e9bf
-	ld hl, wEnemySelectedMove ; $ccdd
+	ld hl, wEnemySelectedMove ; wccdd
 	cp [hl]
 	jr nz, .asm_3e9bf
 	call PrintMoveIsDisabledText
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e9bf
-	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld hl, W_ENEMYMONSTATUS ; wcfe9
 	bit 6, [hl]
 	jr z, asm_3e9f6
 	call BattleRandom
@@ -5890,11 +5890,11 @@ Func_3e9aa: ; 3e9aa (f:69aa)
 	ld hl, FullyParalyzedText
 	call PrintText
 asm_3e9d3: ; 3e9d3 (f:69d3)
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	ld a, [hl]
 	and $cc
 	ld [hl], a
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 	cp FLY_EFFECT
 	jr z, .asm_3e9e7
 	cp CHARGE_EFFECT
@@ -5902,59 +5902,59 @@ asm_3e9d3: ; 3e9d3 (f:69d3)
 	jr .asm_3e9f0
 .asm_3e9e7
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a, STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .asm_3e9f0
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 asm_3e9f6: ; 3e9f6 (f:69f6)
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	bit 0, [hl] ; is mon using bide?
 	jr z, .asm_3ea54
 	xor a
-	ld [W_ENEMYMOVENUM], a ; $cfcc
-	ld hl, W_DAMAGE ; $d0d7
+	ld [W_ENEMYMOVENUM], a ; W_ENEMYMOVENUM
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld hl, $cd06
+	ld hl, wcd06
 	ld a, [hl]
 	add c
 	ld [hld], a
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	ld hl, $d06f
+	ld hl, wd06f
 	dec [hl]
 	jr z, .asm_3ea1c
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3ea1c
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 0, [hl]
 	ld hl, UnleashedEnergyText
 	call PrintText
 	ld a, $1
-	ld [W_ENEMYMOVEPOWER], a ; $cfce
-	ld hl, $cd06
+	ld [W_ENEMYMOVEPOWER], a ; wcfce
+	ld hl, wcd06
 	ld a, [hld]
 	add a
 	ld b, a
-	ld [$d0d8], a
+	ld [wd0d8], a
 	ld a, [hl]
 	rl a
-	ld [W_DAMAGE], a ; $d0d7
+	ld [W_DAMAGE], a ; W_DAMAGE
 	or b
 	jr nz, .asm_3ea43
 	ld a, $1
-	ld [W_MOVEMISSED], a ; $d05f
+	ld [W_MOVEMISSED], a ; W_MOVEMISSED
 .asm_3ea43
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ld a, BIDE
-	ld [W_ENEMYMOVENUM], a ; $cfcc
+	ld [W_ENEMYMOVENUM], a ; W_ENEMYMOVENUM
 	call Func_3ec81
 	ld hl, asm_3e782 ; $6782
 	jp Func_3eab8
@@ -5962,22 +5962,22 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	bit 1, [hl] ; is mon using thrash or petal dance?
 	jr z, .asm_3ea83
 	ld a, THRASH
-	ld [W_ENEMYMOVENUM], a ; $cfcc
+	ld [W_ENEMYMOVENUM], a ; W_ENEMYMOVENUM
 	ld hl, ThrashingAboutText
 	call PrintText
-	ld hl, $d06f
+	ld hl, wd06f
 	dec [hl]
 	ld hl, asm_3e750 ; $6750
 	jp nz, Func_3eab8
 	push hl
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 1, [hl] ; mon is no longer using thrash or petal dance
 	set 7, [hl] ; mon is now confused
 	call BattleRandom
 	and $3
 	inc a
 	inc a
-	ld [$d070], a
+	ld [wd070], a
 	pop hl
 	jp Func_3eab8
 .asm_3ea83
@@ -5985,22 +5985,22 @@ asm_3e9f6: ; 3e9f6 (f:69f6)
 	jp z, Func_3ea9b
 	ld hl, AttackContinuesText
 	call PrintText
-	ld hl, $d06f
+	ld hl, wd06f
 	dec [hl]
 	ld hl, Func_3e794 ; $6794
 	jp nz, Func_3eab8
 	jp Func_3eab8
 
 Func_3ea9b: ; 3ea9b (f:6a9b)
-	ld a, [W_ENEMYBATTSTATUS2] ; $d068
+	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 6, a ; is mon using rage?
 	jp z, Func_3eaba
 	ld a, RAGE
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B
 	xor a
-	ld [W_ENEMYMOVEEFFECT], a ; $cfcd
+	ld [W_ENEMYMOVEEFFECT], a ; W_ENEMYMOVEEFFECT
 	ld hl, asm_3e72b ; $672b
 	jp Func_3eab8
 
@@ -6017,18 +6017,18 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, .player
-	ld de, W_ENEMYMOVENUM ; $cfcc
-	ld a, [wEnemySelectedMove] ; $ccdd
+	ld de, W_ENEMYMOVENUM ; W_ENEMYMOVENUM
+	ld a, [wEnemySelectedMove] ; wccdd
 	jr .selected
 .player
-	ld de, W_PLAYERMOVENUM ; $cfd2
+	ld de, W_PLAYERMOVENUM ; wcfd2
 	ld a, [W_FLAGS_D733]
 	bit 0, a
-	ld a, [$ccd9]
+	ld a, [wccd9]
 	jr nz, .selected
-	ld a, [wPlayerSelectedMove] ; $ccdc
+	ld a, [wPlayerSelectedMove] ; wPlayerSelectedMove
 .selected
-	ld [$d0b5], a
+	ld [wd0b5], a
 	dec a
 	ld hl, Moves ; $4000
 	ld bc, $6
@@ -6036,28 +6036,28 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, BANK(Moves)
 	call FarCopyData
 	ld a, $2c
-	ld [$d0b7], a
+	ld [wPredefBank], a
 	ld a, $2
 	ld [W_LISTTYPE], a ; list type 2 = move name
 	call GetName
-	ld de, $cd6d
+	ld de, wcd6d
 	jp CopyStringToCF4B
 
 Func_3eb01: ; 3eb01 (f:6b01)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jp z, Func_3cc13
 	ld a, [W_ENEMYMONID]
-	ld [$cfe5], a
-	ld [$d0b5], a
+	ld [wcfe5], a
+	ld [wd0b5], a
 	call GetMonHeader
-	ld a, [W_ENEMYBATTSTATUS3] ; $d069
+	ld a, [W_ENEMYBATTSTATUS3] ; W_ENEMYBATTSTATUS3
 	bit 3, a
-	ld hl, $cceb
+	ld hl, wcceb
 	ld a, [hli]
 	ld b, [hl]
 	jr nz, .asm_3eb33
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $2
 	ld a, $98
 	ld b, $88
@@ -6066,25 +6066,25 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld b, a
 	call BattleRandom
 .asm_3eb33
-	ld hl, $cff1
+	ld hl, W_ENEMYMONATKDEFIV
 	ld [hli], a
 	ld [hl], b
-	ld de, W_ENEMYMONLEVEL ; $cff3
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld de, W_ENEMYMONLEVEL ; W_ENEMYMONLEVEL
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	ld [de], a
 	inc de
 	ld b, $0
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	push hl
 	call CalcStats
 	pop hl
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $2
 	jr z, .asm_3eb65
-	ld a, [W_ENEMYBATTSTATUS3] ; $d069
+	ld a, [W_ENEMYBATTSTATUS3] ; W_ENEMYBATTSTATUS3
 	bit 3, a
 	jr nz, .asm_3eb86
-	ld a, [W_ENEMYMONMAXHP] ; $cff4
+	ld a, [W_ENEMYMONMAXHP] ; W_ENEMYMONMAXHP
 	ld [hli], a
 	ld a, [W_ENEMYMONMAXHP+1]
 	ld [hli], a
@@ -6093,23 +6093,23 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld [hl], a
 	jr .asm_3eb86
 .asm_3eb65
-	ld hl, W_ENEMYMON1HP ; $d8a5 (aliases: W_WATERMONS)
-	ld a, [wWhichPokemon] ; $cf92
+	ld hl, W_ENEMYMON1HP ; wd8a5 (aliases: W_WATERMONS)
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hli]
-	ld [W_ENEMYMONCURHP], a ; $cfe6
+	ld [W_ENEMYMONCURHP], a ; W_ENEMYMONCURHP
 	ld a, [hli]
-	ld [$cfe7], a
-	ld a, [wWhichPokemon] ; $cf92
-	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ld [W_ENEMYMONCURHP + 1], a
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld [W_ENEMYMONNUMBER], a ; W_ENEMYMONNUMBER
 	inc hl
 	ld a, [hl]
-	ld [W_ENEMYMONSTATUS], a ; $cfe9
+	ld [W_ENEMYMONSTATUS], a ; wcfe9
 	jr .asm_3eb86
 .asm_3eb86
 	ld hl, W_MONHTYPES
-	ld de, W_ENEMYMONTYPES ; $cfea
+	ld de, W_ENEMYMONTYPES ; wcfea
 	ld a, [hli]            ; copy type 1
 	ld [de], a
 	inc de
@@ -6119,11 +6119,11 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, [hli]            ; copy catch rate
 	ld [de], a
 	inc de
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $2
 	jr nz, .asm_3ebb0
-	ld hl, $d8ac
-	ld a, [wWhichPokemon] ; $cf92
+	ld hl, wd8ac
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $2c
 	call AddNTimes
 	ld bc, $4
@@ -6146,16 +6146,16 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	dec de
 	dec de
 	xor a
-	ld [$cee9], a
+	ld [wHPBarMaxHP], a
 	ld a, $3e
 	call Predef ; indirect jump to WriteMonMoves (3afb8 (e:6fb8))
 .asm_3ebca
 	ld hl, W_ENEMYMONMOVES
-	ld de, $cffd
+	ld de, W_ENEMYMONSPECIAL + 1
 	ld a, $5e
 	call Predef ; indirect jump to LoadMovePPs (f473 (3:7473))
 	ld hl, W_MONHBASESTATS
-	ld de, $d002
+	ld de, wd002
 	ld b, $5
 .asm_3ebdd
 	ld a, [hli]
@@ -6170,30 +6170,30 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, [hl]     ; base exp
 	ld [de], a
 	ld a, [W_ENEMYMONID]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMonName
-	ld hl, $cd6d
+	ld hl, wcd6d
 	ld de, W_ENEMYMONNAME
 	ld bc, $b
 	call CopyData
 	ld a, [W_ENEMYMONID]
-	ld [$d11e], a
+	ld [wd11e], a
 	ld a, $3a
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
-	ld a, [$d11e]
+	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, wPokedexSeen ; $d30a
+	ld hl, wPokedexSeen ; wd30a
 	ld a, $10 ; FlagActionPredef
 	call Predef
-	ld hl, W_ENEMYMONLEVEL ; $cff3
-	ld de, $cd23
+	ld hl, W_ENEMYMONLEVEL ; W_ENEMYMONLEVEL
+	ld de, wcd23
 	ld bc, $b
 	call CopyData
 	ld a, $7
 	ld b, $8
-	ld hl, wEnemyMonStatMods ; $cd2e
+	ld hl, wEnemyMonStatMods ; wcd2e
 .asm_3ec2d
 	ld [hli], a
 	dec b
@@ -6201,14 +6201,14 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ret
 
 Func_3ec32: ; 3ec32 (f:6c32)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr nz, .asm_3ec4d
 	xor a
-	ld [wMenuJoypadPollCount], a ; $cc34
+	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
 	callab Func_372d6
 	ld a, $1
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call ClearScreen
 .asm_3ec4d
 	call DelayFrame
@@ -6218,7 +6218,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call ClearSprites
 	call ClearScreen
 	xor a
@@ -6226,28 +6226,28 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	ld [$ffb0], a
 	ld [rWY], a ; $ff4a
 	ld [$ffd7], a
-	ld hl, $d060
+	ld hl, wd060
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [W_PLAYERDISABLEDMOVE], a ; $d06d
+	ld [W_PLAYERDISABLEDMOVE], a ; W_PLAYERDISABLEDMOVE
 	ret
 
 Func_3ec81: ; 3ec81 (f:6c81)
 	push bc
-	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld a, [W_PLAYERMONLEVEL] ; W_PLAYERMONLEVEL
 	ld b, a
-	ld a, [W_ENEMYMONLEVEL] ; $cff3
-	ld [W_PLAYERMONLEVEL], a ; $d022
+	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
+	ld [W_PLAYERMONLEVEL], a ; W_PLAYERMONLEVEL
 	ld a, b
-	ld [W_ENEMYMONLEVEL], a ; $cff3
+	ld [W_ENEMYMONLEVEL], a ; W_ENEMYMONLEVEL
 	pop bc
 	ret
 
 Func_3ec92: ; 3ec92 (f:6c92)
-	ld a, [W_BATTLETYPE] ; $d05a
+	ld a, [W_BATTLETYPE] ; wd05a
 	dec a
 	ld de, RedPicBack ; $7e0a
 	jr nz, .asm_3ec9e
@@ -6304,7 +6304,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld [$0], a
 	ld a, $31
 	ld [$ffe1], a
-	FuncCoord 1, 5 ; $c405
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld a, $1
 	jp Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
@@ -6335,10 +6335,10 @@ Func_3ed27: ; 3ed27 (f:6d27)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ed48
-	ld a, [W_PLAYERMONSTATUS] ; $d018
+	ld a, [W_PLAYERMONSTATUS] ; W_PLAYERMONSTATUS
 	and $40
 	ret z
-	ld hl, $d02a
+	ld hl, W_PLAYERMONSPEED + 1
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -6354,10 +6354,10 @@ Func_3ed27: ; 3ed27 (f:6d27)
 	ld [hl], b
 	ret
 .asm_3ed48
-	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	ld a, [W_ENEMYMONSTATUS] ; wcfe9
 	and $40
 	ret z
-	ld hl, $cffb
+	ld hl, W_ENEMYMONSPEED + 1
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -6377,10 +6377,10 @@ Func_3ed64: ; 3ed64 (f:6d64)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ed81
-	ld a, [W_PLAYERMONSTATUS] ; $d018
+	ld a, [W_PLAYERMONSTATUS] ; W_PLAYERMONSTATUS
 	and $10
 	ret z
-	ld hl, $d026
+	ld hl, W_PLAYERMONATK + 1
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -6394,10 +6394,10 @@ Func_3ed64: ; 3ed64 (f:6d64)
 	ld [hl], b
 	ret
 .asm_3ed81
-	ld a, [W_ENEMYMONSTATUS] ; $cfe9
+	ld a, [W_ENEMYMONSTATUS] ; wcfe9
 	and $10
 	ret z
-	ld hl, $cff7
+	ld hl, W_ENEMYMONATTACK + 1
 	ld a, [hld]
 	ld b, a
 	ld a, [hl]
@@ -6424,16 +6424,16 @@ Func_3ed99: ; 3ed99 (f:6d99)
 Func_3eda5: ; 3eda5 (f:6da5)
 	push bc
 	push bc
-	ld a, [$d11e]
+	ld a, [wd11e]
 	and a
 	ld a, c
 	ld hl, W_PLAYERMONATK
-	ld de, $cd12
-	ld bc, wPlayerMonAttackMod ; $cd1a
+	ld de, wcd12
+	ld bc, wPlayerMonAttackMod ; wcd1a
 	jr z, .asm_3edc0
 	ld hl, W_ENEMYMONATTACK
-	ld de, $cd26
-	ld bc, wEnemyMonStatMods ; $cd2e
+	ld de, wcd26
+	ld bc, wEnemyMonStatMods ; wcd2e
 .asm_3edc0
 	add c
 	ld c, a
@@ -6588,13 +6588,13 @@ BattleRandom:
 
 	push hl
 	push bc
-	ld a, [$ccde]
+	ld a, [wccde]
 	ld c, a
 	ld b, 0
-	ld hl, $d148
+	ld hl, wd148
 	add hl, bc
 	inc a
-	ld [$ccde], a
+	ld [wccde], a
 	cp 9
 	ld a, [hl]
 	pop bc
@@ -6606,9 +6606,9 @@ BattleRandom:
 	push af
 
 	xor a
-	ld [$ccde], a
+	ld [wccde], a
 
-	ld hl, $d148
+	ld hl, wd148
 	ld b, 9
 .loop
 	ld a, [hl]
@@ -6630,13 +6630,13 @@ BattleRandom:
 Func_3eed3: ; 3eed3 (f:6ed3)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld hl, W_ENEMYMONTYPE1 ; $cfea (aliases: W_ENEMYMONTYPES)
-	ld de, W_ENEMYBATTSTATUS1 ; $d067
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld hl, W_ENEMYMONTYPE1 ; wcfea (aliases: W_ENEMYMONTYPES)
+	ld de, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr z, .asm_3eeea
-	ld hl, W_PLAYERMONTYPE1 ; $d019 (aliases: W_PLAYERMONTYPES)
-	ld de, W_ENEMYBATTSTATUS1 ; $d067
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld hl, W_PLAYERMONTYPE1 ; wd019 (aliases: W_PLAYERMONTYPES)
+	ld de, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 .asm_3eeea
 	cp SELFDESTRUCT
 	jr z, .asm_3eef1
@@ -6652,44 +6652,44 @@ Func_3eed3: ; 3eed3 (f:6ed3)
 	ld a, [hl]
 	cp GHOST
 	ret z
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	ret nz
 	ld a, MEGA_PUNCH
-	ld [$cc5b], a
+	ld [wcc5b], a
 
 PlayMoveAnimation: ; 3ef07 (f:6f07)
-	ld [$D07C],a
+	ld [W_ANIMATIONID],a
 	call Delay3
 	PREDEF_JUMP MoveAnimationPredef ; predef 8
 
 InitBattle: ; 3ef12 (f:6f12)
-	ld a, [W_CUROPPONENT] ; $d059
+	ld a, [W_CUROPPONENT] ; wd059
 	and a
 	jr z, asm_3ef23
 
 InitOpponent: ; 3ef18 (f:6f18)
-	ld a, [W_CUROPPONENT] ; $d059
-	ld [$cf91], a
+	ld a, [W_CUROPPONENT] ; wd059
+	ld [wcf91], a
 	ld [W_ENEMYMONID], a
 	jr asm_3ef3d
 asm_3ef23: ; 3ef23 (f:6f23)
-	ld a, [$d732]
+	ld a, [wd732]
 	bit 1, a
 	jr z, .asm_3ef2f
 	ld a, [hJoyHeld]
 	bit 1, a
 	ret nz
 .asm_3ef2f
-	ld a, [$d13c]
+	ld a, [wd13c]
 	and a
 	ret nz
 	callab Func_13870
 	ret nz
 asm_3ef3d: ; 3ef3d (f:6f3d)
-	ld a, [$d35d]
+	ld a, [wd35d]
 	push af
-	ld hl, $d358
+	ld hl, wd358
 	ld a, [hl]
 	push af
 	res 1, [hl]
@@ -6697,7 +6697,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [W_ENEMYMONID]
 	sub $c8
 	jp c, InitWildBattle
-	ld [W_TRAINERCLASS], a ; $d031
+	ld [W_TRAINERCLASS], a ; wd031
 	call GetTrainerInformation
 	callab ReadTrainer
 	call Func_3ec32
@@ -6706,23 +6706,23 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld [W_ENEMYMONID], a
 	ld [$ffe1], a
 	dec a
-	ld [wAICount], a ; $ccdf
-	FuncCoord 12, 0 ; $c3ac
+	ld [wAICount], a ; wccdf
+	FuncCoord 12, 0
 	ld hl, Coord
 	ld a, $1
 	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
 	ld a, $ff
-	ld [W_ENEMYMONNUMBER], a ; $cfe8
+	ld [W_ENEMYMONNUMBER], a ; W_ENEMYMONNUMBER
 	ld a, $2
-	ld [W_ISINBATTLE], a ; $d057
+	ld [W_ISINBATTLE], a ; W_ISINBATTLE
 	jp Func_3efeb
 
 InitWildBattle: ; 3ef8b (f:6f8b)
 	ld a, $1
-	ld [W_ISINBATTLE], a ; $d057
+	ld [W_ISINBATTLE], a ; W_ISINBATTLE
 	call Func_3eb01
 	call Func_3ec32
-	ld a, [W_CUROPPONENT] ; $d059
+	ld a, [W_CUROPPONENT] ; wd059
 	cp MAROWAK
 	jr z, .isGhost
 	call IsGhostBattle
@@ -6747,23 +6747,23 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	ld a, "T"
 	ld [hli], a
 	ld [hl], "@"
-	ld a, [$cf91]
+	ld a, [wcf91]
 	push af
 	ld a, MON_GHOST
-	ld [$cf91], a
+	ld [wcf91], a
 	ld de, $9000
 	call LoadMonFrontSprite ; load ghost sprite
 	pop af
-	ld [$cf91], a
+	ld [wcf91], a
 	jr .spriteLoaded
 .isNoGhost
 	ld de, $9000
 	call LoadMonFrontSprite ; load mon sprite
 .spriteLoaded
 	xor a
-	ld [W_TRAINERCLASS], a ; $d031
+	ld [W_TRAINERCLASS], a ; wd031
 	ld [$ffe1], a
-	FuncCoord 12, 0 ; $c3ac
+	FuncCoord 12, 0
 	ld hl, Coord
 	ld a, $1
 	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
@@ -6786,25 +6786,25 @@ Func_3efeb: ; 3efeb (f:6feb)
 	ld a, $9c
 	ld [$ffbd], a
 	call LoadScreenTilesFromBuffer1
-	FuncCoord 9, 7 ; $c435
+	FuncCoord 9, 7
 	ld hl, Coord
 	ld bc, $50a
 	call ClearScreenArea
-	FuncCoord 1, 0 ; $c3a1
+	FuncCoord 1, 0
 	ld hl, Coord
 	ld bc, $40a
 	call ClearScreenArea
 	call ClearSprites
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	call z, Func_3cdec
 	call Func_3c11e
 	callab Func_137aa
 	pop af
-	ld [$d358], a
+	ld [wd358], a
 	pop af
-	ld [$d35d], a
-	ld a, [$d0d4]
+	ld [wd35d], a
+	ld a, [wd0d4]
 	ld [$ffd7], a
 	scf
 	ret
@@ -6813,12 +6813,12 @@ TerminatorText_3f04a: ; 3f04a (f:704a)
 	db "@"
 
 _LoadTrainerPic: ; 3f04b (f:704b)
-; $d033-$d034 contain pointer to pic
-	ld a, [$d033]
+; wd033-wd034 contain pointer to pic
+	ld a, [wd033]
 	ld e, a
-	ld a, [$d034]
+	ld a, [wd034]
 	ld d, a ; de contains pointer to trainer pic
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	and a
 	ld a, Bank(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
 	jr z, .loadSprite
@@ -6832,19 +6832,19 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 
 Func_3f069: ; 3f069 (f:7069)
 	xor a
-	ld [$c0f1], a
-	ld [$c0f2], a
+	ld [wc0f1], a
+	ld [wc0f2], a
 	jp PlaySound
 
 Func_3f073: ; 3f073 (f:7073)
-	ld a, [$cc4f]
+	ld a, [wPredefRegisters]
 	ld h, a
-	ld a, [$cc50]
+	ld a, [wPredefRegisters + 1]
 	ld l, a
 	ld a, [$ffe1]
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld b, $4c
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jr z, .asm_3f0bc
 	add b
@@ -6853,7 +6853,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld bc, $ffd7
 	add hl, bc
 	ld a, $1
-	ld [$cd6c], a
+	ld [wcd6c], a
 	ld bc, $303
 	ld a, $5
 	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
@@ -6862,7 +6862,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld bc, $ffd7
 	add hl, bc
 	xor a
-	ld [$cd6c], a
+	ld [wcd6c], a
 	ld bc, $505
 	ld a, $5
 	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
@@ -6879,9 +6879,9 @@ Func_3f073: ; 3f073 (f:7073)
 	jr asm_3f0d0
 
 Func_3f0c6: ; 3f0c6 (f:70c6)
-	ld a, [$cc4f]
+	ld a, [wPredefRegisters]
 	ld h, a
-	ld a, [$cc50]
+	ld a, [wPredefRegisters + 1]
 	ld l, a
 	ld a, [$ffe1]
 asm_3f0d0: ; 3f0d0 (f:70d0)
@@ -6933,9 +6933,9 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 ; loads back sprite of mon to $8000
 ; assumes the corresponding mon header is already loaded
 LoadMonBackSprite: ; 3f103 (f:7103)
-	ld a, [$cfd9]
-	ld [$cf91], a
-	FuncCoord 1, 5 ; $c405
+	ld a, [wcfd9]
+	ld [wcf91], a
+	FuncCoord 1, 5
 	ld hl, Coord
 	ld b, $7
 	ld c, $8
@@ -7065,13 +7065,13 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw DisableEffect             ; DISABLE_EFFECT
 
 SleepEffect: ; 3f1fc (f:71fc)
-	ld de, W_ENEMYMONSTATUS ; $cfe9
-	ld bc, W_ENEMYBATTSTATUS2 ; $d068
+	ld de, W_ENEMYMONSTATUS ; wcfe9
+	ld bc, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, .asm_3f20e
-	ld de, W_PLAYERMONSTATUS ; $d018
-	ld bc, W_PLAYERBATTSTATUS2 ; $d063
+	ld de, W_PLAYERMONSTATUS ; W_PLAYERMONSTATUS
+	ld bc, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 
 .asm_3f20e
 	ld a, [bc]
@@ -7092,7 +7092,7 @@ SleepEffect: ; 3f1fc (f:71fc)
 	push de
 	call MoveHitTest
 	pop de
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr nz, .asm_3f242
 .asm_3f231
@@ -7115,13 +7115,13 @@ AlreadyAsleepText: ; 3f24a (f:724a)
 	db "@"
 
 PoisonEffect: ; 3f24f (f:724f)
-	ld hl, W_ENEMYMONSTATUS ; $cfe9
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_ENEMYMONSTATUS ; wcfe9
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f260
-	ld hl, W_PLAYERMONSTATUS ; $d018
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_PLAYERMONSTATUS ; W_PLAYERMONSTATUS
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3f260
 	call CheckTargetSubstitute
 	jr nz, .asm_3f2d3
@@ -7147,7 +7147,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	call MoveHitTest
 	pop de
 	pop hl
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr nz, .asm_3f2d7
 	jr .asm_3f295
@@ -7163,13 +7163,13 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld b, $c7
-	ld hl, W_PLAYERBATTSTATUS3 ; $d064
+	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
 	ld a, [de]
-	ld de, W_PLAYERTOXICCOUNTER ; $d06c
+	ld de, W_PLAYERTOXICCOUNTER ; wd06c
 	jr nz, .asm_3f2b0
 	ld b, $a9
-	ld hl, W_ENEMYBATTSTATUS3 ; $d069
-	ld de, W_ENEMYTOXICCOUNTER ; $d071
+	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
+	ld de, W_ENEMYTOXICCOUNTER ; wd071
 .asm_3f2b0
 	cp $5c
 	jr nz, .asm_3f2bd
@@ -7214,13 +7214,13 @@ DrainHPEffect: ; 3f2e9 (f:72e9)
 	jp Bankswitch
 
 ExplodeEffect: ; 3f2f1 (f:72f1)
-	ld hl, W_PLAYERMONCURHP ; $d015
-	ld de, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERMONCURHP ; wd015
+	ld de, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f302
-	ld hl, W_ENEMYMONCURHP ; $cfe6
-	ld de, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
+	ld de, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_3f302
 	xor a
 	ld [hli], a ; set the mon's HP to 0
@@ -7234,7 +7234,7 @@ ExplodeEffect: ; 3f2f1 (f:72f1)
 
 FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	call CheckTargetSubstitute         ;test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz             ;return if they have a substitute, can't effect them
 	ld a, [$fff3]  ;whose turn?
@@ -7358,7 +7358,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	ret nz		;return if it isn't fire
 				;type is fire
 	ld [W_ENEMYMONSTATUS], a		;set opponent status to 00 ["defrost" a frozen monster]
-	ld hl, $d8a8					;status of first opponent monster in their roster
+	ld hl, wd8a8					;status of first opponent monster in their roster
 	ld a, [W_ENEMYMONNUMBER]
 	ld bc, $002c		;$2C bytes per roster entry
 	call AddNTimes
@@ -7371,7 +7371,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 	sub a, FIRE
 	ret nz
 	ld [W_PLAYERMONSTATUS], a
-	ld hl, $d16f
+	ld hl, W_PARTYMON1_STATUS
 	ld a, [wPlayerMonNumber]
 	ld bc, $002c
 	call AddNTimes
@@ -7386,13 +7386,13 @@ FireDefrostedText: ; 3f423 (f:7423)
 	db "@"
 
 StatModifierUpEffect: ; 3f428 (f:7428)
-	ld hl, wPlayerMonStatMods ; $cd1a
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, wPlayerMonStatMods ; wcd1a
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f439
-	ld hl, wEnemyMonStatMods ; $cd2e
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, wEnemyMonStatMods ; wcd2e
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3f439
 	ld a, [de]
 	sub $a
@@ -7422,13 +7422,13 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	cp $4
 	jr nc, asm_3f4ca
 	push hl
-	ld hl, $d026
-	ld de, $cd12
+	ld hl, W_PLAYERMONATK + 1
+	ld de, wcd12
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f472
-	ld hl, $cff7
-	ld de, $cd26
+	ld hl, W_ENEMYMONATTACK + 1
+	ld de, wcd26
 .asm_3f472
 	push bc
 	sla c
@@ -7492,15 +7492,15 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld b, c
 	inc b
 	call Func_3f688
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
-	ld de, W_PLAYERMOVENUM ; $cfd2
-	ld bc, $ccf7
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
+	ld de, W_PLAYERMOVENUM ; wcfd2
+	ld bc, wccf7
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f4e6
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
-	ld de, W_ENEMYMOVENUM ; $cfcc
-	ld bc, $ccf3
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
+	ld de, W_ENEMYMOVENUM ; W_ENEMYMOVENUM
+	ld bc, wccf3
 .asm_3f4e6
 	ld a, [de]
 	cp MINIMIZE
@@ -7548,9 +7548,9 @@ MonsStatsRoseText: ; 3f528 (f:7528)
 	ld hl, GreatlyRoseText
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	jr z, .asm_3f53b
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 .asm_3f53b
 	cp ATTACK_DOWN1_EFFECT
 	ret nc
@@ -7566,16 +7566,16 @@ RoseText: ; 3f547 (f:7547)
 	db "@"
 
 StatModifierDownEffect: ; 3f54c (f:754c)
-	ld hl, wEnemyMonStatMods ; $cd2e
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
-	ld bc, W_ENEMYBATTSTATUS1 ; $d067
+	ld hl, wEnemyMonStatMods ; wcd2e
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
+	ld bc, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f572
-	ld hl, wPlayerMonStatMods ; $cd1a
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
-	ld bc, W_PLAYERBATTSTATUS1 ; $d062
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld hl, wPlayerMonStatMods ; wcd1a
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
+	ld bc, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	jr z, .asm_3f572
 	call BattleRandom
@@ -7601,7 +7601,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	pop bc
 	pop de
 	pop hl
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jp nz, Func_3f65a
 	ld a, [bc]
@@ -7634,13 +7634,13 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	jr nc, asm_3f62c
 	push hl
 	push de
-	ld hl, $cff7
-	ld de, $cd26
+	ld hl, W_ENEMYMONATTACK + 1
+	ld de, wcd26
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f5d8
-	ld hl, $d026
-	ld de, $cd12
+	ld hl, W_PLAYERMONATK + 1
+	ld de, wcd12
 .asm_3f5d8
 	push bc
 	sla c
@@ -7743,9 +7743,9 @@ MonsStatsFellText: ; 3f661 (f:7661)
 	ld hl, FellText
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	jr z, .asm_3f674
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 .asm_3f674
 	cp $1a
 	ret c
@@ -7774,7 +7774,7 @@ Func_3f688: ; 3f688 (f:7688)
 	jr z, .asm_3f68d
 	jr .asm_3f690
 .asm_3f696
-	ld de, $cf4b
+	ld de, wcf4b
 	ld bc, $a
 	jp CopyData
 
@@ -7805,13 +7805,13 @@ StatModifierRatios: ; 3f6cb (f:76cb)
 BideEffect: ; 3f6e5 (f:76e5)
 	ld hl, W_PLAYERBATTSTATUS1
 	ld de, W_NUMHITS
-	ld bc, $d06a
+	ld bc, wd06a
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3f6fc
 	ld hl, W_ENEMYBATTSTATUS1
-	ld de, $cd05
-	ld bc, $d06f
+	ld de, wcd05
+	ld bc, wd06f
 .asm_3f6fc
 	set 0, [hl] ; mon is now using bide
 	xor a
@@ -7830,13 +7830,13 @@ BideEffect: ; 3f6e5 (f:76e5)
 	jp Func_3fb96
 
 ThrashPetalDanceEffect: ; 3f717 (f:7717)
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld de, $d06a
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld de, wd06a
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f728
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld de, $d06f
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, wd06f
 .asm_3f728
 	set 1, [hl] ; mon is now using thrash/petal dance
 	call BattleRandom
@@ -7852,12 +7852,12 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3f791
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr nz, .asm_3f77e
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	ld b, a
-	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld a, [W_PLAYERMONLEVEL] ; W_PLAYERMONLEVEL
 	cp b
 	jr nc, .asm_3f76e
 	add b
@@ -7873,33 +7873,33 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	jr nc, .asm_3f76e
 	ld c, $32
 	call DelayFrames
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintButItFailedText_
 .asm_3f76e
 	call ReadPlayerMonCurHPAndStatus
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	inc a
-	ld [$d078], a
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld [wd078], a
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr .asm_3f7e4
 .asm_3f77e
 	ld c, $32
 	call DelayFrames
 	ld hl, IsUnaffectedText
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	cp TELEPORT
 	jp nz, PrintText
 	jp PrintButItFailedText_
 .asm_3f791
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr nz, .asm_3f7d1
-	ld a, [W_PLAYERMONLEVEL] ; $d022
+	ld a, [W_PLAYERMONLEVEL] ; W_PLAYERMONLEVEL
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	cp b
 	jr nc, .asm_3f7c1
 	add b
@@ -7915,23 +7915,23 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	jr nc, .asm_3f7c1
 	ld c, $32
 	call DelayFrames
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 	cp TELEPORT
 	jp nz, PrintDidntAffectText
 	jp PrintButItFailedText_
 .asm_3f7c1
 	call ReadPlayerMonCurHPAndStatus
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	inc a
-	ld [$d078], a
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld [wd078], a
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 	jr .asm_3f7e4
 .asm_3f7d1
 	ld c, $32
 	call DelayFrames
 	ld hl, IsUnaffectedText
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 	cp TELEPORT
 	jp nz, PrintText
 	jp Func_3fb4e
@@ -7964,24 +7964,24 @@ WasBlownAwayText: ; 3f80c (f:780c)
 	db "@"
 
 TwoToFiveAttacksEffect: ; 3f811 (f:7811)
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld de, $d06a
-	ld bc, W_NUMHITS ; $d074
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld de, wd06a
+	ld bc, W_NUMHITS ; wd074
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f828
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld de, $d06f
-	ld bc, $cd05
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, wd06f
+	ld bc, wcd05
 .asm_3f828
 	bit 2, [hl] ; is mon attacking multiple times?
 	ret nz
 	set 2, [hl] ; mon is now attacking multiple times
-	ld hl, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f838
-	ld hl, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3f838
 	ld a, [hl]
 	cp TWINEEDLE_EFFECT
@@ -8010,13 +8010,13 @@ TwoToFiveAttacksEffect: ; 3f811 (f:7811)
 FlichSideEffect: ; 3f85b (f:785b)
 	call CheckTargetSubstitute
 	ret nz
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f870
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3f870
 	ld a, [de]
 	cp FLINCH_SIDE_EFFECT1
@@ -8037,14 +8037,14 @@ OneHitKOEffect: ; 3f884 (f:7884)
 	jp Bankswitch
 
 ChargeEffect: ; 3f88c (f:788c)
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld b, $ae
 	jr z, .asm_3f8a1
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 	ld b, $af
 .asm_3f8a1
 	set 4, [hl]
@@ -8062,18 +8062,18 @@ ChargeEffect: ; 3f88c (f:788c)
 	ld b, $c0
 .asm_3f8b6
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a, b
 	call Func_3fbb9
 	ld a, [de]
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld hl, ChargeMoveEffectText ; $78c8
 	jp PrintText
 
 ChargeMoveEffectText: ; 3f8c8 (f:78c8)
 	TX_FAR _ChargeMoveEffectText
 	db $08 ; asm
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText ; $78f9
 	jr z, .asm_3f8f8
@@ -8119,13 +8119,13 @@ DugAHoleText: ; 3f912 (f:7912)
 	db "@"
 
 TrappingEffect: ; 3f917 (f:7917)
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld de, $d06a
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld de, wd06a
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f928
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld de, $d06f
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, wd06f
 .asm_3f928
 	bit 5, [hl]
 	ret nz
@@ -8167,20 +8167,20 @@ ConfusionEffect: ; 3f961 (f:7961)
 	call CheckTargetSubstitute
 	jr nz, Func_3f9a6
 	call MoveHitTest
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr nz, Func_3f9a6
 
 Func_3f96f: ; 3f96f (f:796f)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld hl, W_ENEMYBATTSTATUS1 ; $d067
-	ld bc, $d070
-	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld bc, wd070
+	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	jr z, .asm_3f986
-	ld hl, W_PLAYERBATTSTATUS1 ; $d062
-	ld bc, $d06b
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld hl, W_PLAYERBATTSTATUS1 ; W_PLAYERBATTSTATUS1
+	ld bc, wd06b
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 .asm_3f986
 	bit 7, [hl] ; is mon confused?
 	jr nz, Func_3f9a6
@@ -8219,22 +8219,22 @@ SubstituteEffect: ; 3f9b9 (f:79b9)
 	jp Bankswitch
 
 HyperBeamEffect: ; 3f9c1 (f:79c1)
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f9cc
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_3f9cc
 	set 5, [hl] ; mon now needs to recharge
 	ret
 
 Func_3f9cf: ; 3f9cf (f:79cf)
 	push hl
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3f9db
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 .asm_3f9db
 	res 5, [hl] ; mon no longer needs to recharge
 	pop hl
@@ -8314,7 +8314,7 @@ MimicEffect: ; 3f9ed (f:79ed)
 	add hl, bc
 	ld a, d
 	ld [hl], a
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMoveName
 	call Func_3fba8
 	ld hl, MimicLearnedMoveText
@@ -8337,15 +8337,15 @@ SplashEffect: ; 3fa84 (f:7a84)
 
 DisableEffect: ; 3fa8a (f:7a8a)
 	call MoveHitTest
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr nz, .asm_3fb06
-	ld de, W_ENEMYDISABLEDMOVE ; $d072
+	ld de, W_ENEMYDISABLEDMOVE ; W_ENEMYDISABLEDMOVE
 	ld hl, W_ENEMYMONMOVES
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3faa4
-	ld de, W_PLAYERDISABLEDMOVE ; $d06d
+	ld de, W_PLAYERDISABLEDMOVE ; W_PLAYERDISABLEDMOVE
 	ld hl, W_PLAYERMONMOVES
 .asm_3faa4
 	ld a, [de]
@@ -8362,18 +8362,18 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	pop hl
 	and a
 	jr z, .asm_3faa8
-	ld [$d11e], a
+	ld [wd11e], a
 	push hl
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld hl, W_PLAYERMONPP ; $d02d
+	ld hl, W_PLAYERMONPP ; W_PLAYERMONPP
 	jr nz, .asm_3facf
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $4
 	pop hl
 	jr nz, .asm_3fae1
 	push hl
-	ld hl, W_ENEMYMONPP ; $cffe
+	ld hl, W_ENEMYMONPP ; wcffe
 .asm_3facf
 	push hl
 	ld a, [hli]
@@ -8399,13 +8399,13 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	add c
 	ld [de], a
 	call Func_3fb89
-	ld hl, $ccee
+	ld hl, wccee
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3faf8
 	inc hl
 .asm_3faf8
-	ld a, [$d11e]
+	ld a, [wd11e]
 	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText ; $7b09
@@ -8462,7 +8462,7 @@ NoEffectText: ; 3fb49 (f:7b49)
 	db "@"
 
 Func_3fb4e: ; 3fb4e (f:7b4e)
-	ld a, [$ccf4]
+	ld a, [wccf4]
 	and a
 	ret nz
 
@@ -8496,11 +8496,11 @@ ParalyzedMayNotAttackText: ; 3fb74 (f:7b74)
 
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
-	ld hl, $d068
+	ld hl, W_ENEMYBATTSTATUS2
 	ld a, [$fff3]   ;whose turn?
 	and a
 	jr z, .next1
-	ld hl, $d063
+	ld hl, W_PLAYERBATTSTATUS2
 .next1
 	bit 4, [hl]         ;test bit 4 in d063/d068 flags
 	pop hl
@@ -8509,38 +8509,38 @@ CheckTargetSubstitute: ; 3fb79 (f:7b79)
 Func_3fb89: ; 3fb89 (f:7b89)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr z, .asm_3fb94
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 .asm_3fb94
 	and a
 	ret z
 
 Func_3fb96: ; 3fb96 (f:7b96)
-	ld [W_ANIMATIONID], a ; $d07c
+	ld [W_ANIMATIONID], a ; W_ANIMATIONID
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $6
 	jr z, .asm_3fba2
 	ld a, $3
 .asm_3fba2
-	ld [$cc5b], a
+	ld [wcc5b], a
 	jp Func_3fbbc
 
 Func_3fba8: ; 3fba8 (f:7ba8)
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr z, .asm_3fbb7
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 .asm_3fbb7
 	and a
 	ret z
 
 Func_3fbb9: ; 3fbb9 (f:7bb9)
-	ld [W_ANIMATIONID], a ; $d07c
+	ld [W_ANIMATIONID], a ; W_ANIMATIONID
 
 Func_3fbbc: ; 3fbbc (f:7bbc)
 	push hl

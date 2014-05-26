@@ -9,18 +9,18 @@ SilphCo11Script: ; 620fa (18:60fa)
 	ret
 
 SilphCo11Script_62110: ; 62110 (18:6110)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	ld hl, DataTable_62134 ; $6134
 	call SilphCo11Script_62137
 	call SilphCo11Script_62163
-	ld a, [$d838]
+	ld a, [wd838]
 	bit 0, a
 	ret nz
 	ld a, $20
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $603
 	ld a, $17
 	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
@@ -30,7 +30,7 @@ DataTable_62134: ; 62134 (18:6134)
 
 SilphCo11Script_62137: ; 62137 (18:6137)
 	push hl
-	ld hl, $d73f
+	ld hl, wd73f
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -54,7 +54,7 @@ SilphCo11Script_62137: ; 62137 (18:6137)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_62143
-	ld hl, $d73f
+	ld hl, wd73f
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -68,7 +68,7 @@ SilphCo11Script_62163: ; 62163 (18:6163)
 	ld a, [$ffe0]
 	and a
 	ret z
-	ld hl, $d838
+	ld hl, wd838
 	set 0, [hl]
 	ret
 
@@ -79,7 +79,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	jr z, .asm_62181
 	push hl
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
 	pop hl
@@ -91,7 +91,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	ret z
 	push hl
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
 	pop hl
@@ -126,14 +126,14 @@ SilphCo11ScriptPointers: ; 621cf (18:61cf)
 	dw SilphCo11Script5
 
 SilphCo11Script0: ; 621db (18:61db)
-	ld a, [$d838]
+	ld a, [wd838]
 	bit 7, a
 	ret nz
 	ld hl, CoordsData_62211 ; $6211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld a, [wWhichTrade] ; $cd3d
-	ld [$cf0d], a
+	ld a, [wWhichTrade] ; wWhichTrade
+	ld [wcf0d], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $f0
@@ -158,7 +158,7 @@ MovementData_62216: ; 62216 (18:6216)
 	db $00,$00,$00,$FF
 
 SilphCo11Script_6221a: ; 6221a (18:621a)
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, b
@@ -166,10 +166,10 @@ SilphCo11Script_6221a: ; 6221a (18:621a)
 	jp Func_34a6
 
 SilphCo11Script5: ; 62227 (18:6227)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, SilphCo11Script_621c4
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_6223c
 	ld a, $2
@@ -190,20 +190,20 @@ SilphCo11Script5: ; 62227 (18:6227)
 	call UpdateSprites
 	call Delay3
 	call GBFadeOut1
-	ld hl, $d838
+	ld hl, wd838
 	set 7, [hl]
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo11Script_621c8
 
 SilphCo11Script3: ; 6226a (18:626a)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $3
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call SetSpriteMovementBytesToFF
-	ld a, [$cf0d]
+	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_62284
 	ld a, $2
@@ -219,14 +219,14 @@ SilphCo11Script3: ; 6226a (18:626a)
 	jp SilphCo11Script_621c8
 
 SilphCo11Script4: ; 62293 (18:6293)
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, SilphCo10Text_62330 ; $6330
 	ld de, SilphCo10Text_62330 ; $6330
 	call PreBattleSaveRegisters
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -246,7 +246,7 @@ SilphCo11TrainerHeaders: ; 622c3 (18:62c3)
 SilphCo11TrainerHeader0: ; 622c3 (18:62c3)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d837 ; flag's byte
+	dw wd837 ; flag's byte
 	dw SilphCo11BattleText1 ; 0x6344 TextBeforeBattle
 	dw SilphCo11AfterBattleText1 ; 0x634e TextAfterBattle
 	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
@@ -255,7 +255,7 @@ SilphCo11TrainerHeader0: ; 622c3 (18:62c3)
 SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d837 ; flag's byte
+	dw wd837 ; flag's byte
 	dw SilphCo11BattleText2 ; 0x635d TextBeforeBattle
 	dw SilphCo11AfterBattleText2 ; 0x6367 TextAfterBattle
 	dw SilphCo11EndBattleText2 ; 0x6362 TextEndBattle
@@ -265,7 +265,7 @@ SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 
 SilphCo11Text1: ; 622dc (18:62dc)
 	db $08 ; asm
-	ld a, [$d838]
+	ld a, [wd838]
 	bit 5, a
 	jp nz, .asm_62308
 	ld hl, SilphCoPresidentText
@@ -275,7 +275,7 @@ SilphCo11Text1: ; 622dc (18:62dc)
 	jr nc, .BagFull
 	ld hl, ReceivedSilphCoMasterBallText
 	call PrintText
-	ld hl, $d838
+	ld hl, wd838
 	set 5, [hl]
 	jr .asm_fd405 ; 0x622fe
 .BagFull

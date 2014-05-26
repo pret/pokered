@@ -9,26 +9,26 @@ Route8GateScriptPointers: ; 1e1d3 (7:61d3)
 	dw Route8GateScript1
 
 Route8GateScript_1e1d7: ; 1e1d7 (7:61d7)
-	ld hl, $d730
+	ld hl, wd730
 	set 7, [hl]
 	ld a, $10
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	xor a
-	ld [$c206], a
-	ld [$cd3b], a
+	ld [wSpriteStateData2 + $06], a
+	ld [wcd3b], a
 	ret
 
 Route8GateScript0: ; 1e1ee (7:61ee)
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 6, a
 	ret nz
 	ld hl, CoordsData_1e22c
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
@@ -43,7 +43,7 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld [W_ROUTE8GATECURSCRIPT], a
 	ret
 .asm_1e220
-	ld hl, $d728
+	ld hl, wd728
 	set 6, [hl]
 	ld a, $3
 	ld [$ff8c], a
@@ -55,7 +55,7 @@ CoordsData_1e22c: ; 1e22c (7:622c)
 	db $ff
 
 Route8GateScript1: ; 1e231 (7:6231)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3

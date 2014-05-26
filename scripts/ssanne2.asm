@@ -25,15 +25,15 @@ SSAnne2Script0: ; 613be (18:53be)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	ld [$ffdb], a
 	ld a, $71
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $15
 	call Predef
 	call Delay3
@@ -67,11 +67,11 @@ CoordsData_61411: ; 61411 (18:5411)
 	db $08,$24,$08,$25,$FF
 
 SSAnne2Script_61416: ; 61416 (18:5416)
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	cp $25
 	jr nz, .asm_61426
 	ld a, $2
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $c
 	jr .asm_61427
 .asm_61426
@@ -83,7 +83,7 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	jp Func_34a6
 
 SSAnne2Script1: ; 61430 (18:5430)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	call SSAnne2Script_61416
@@ -118,7 +118,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ret
 
 SSAnne2Script2: ; 6146d (18:546d)
-	ld a, [$d057]
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, SSAnne2Script_613ab
 	call SSAnne2Script_61416
@@ -142,7 +142,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld [$ff8c], a
 	call MoveSprite
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $3
@@ -156,13 +156,13 @@ MovementData_614b9: ; 614b9 (18:54b9)
 	db $00,$00,$00,$00,$FF
 
 SSAnne2Script3: ; 614be (18:54be)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $71
-	ld [$cc4d], a
+	ld [wcc4d], a
 	ld a, $11
 	call Predef
 	call Func_2307
@@ -183,7 +183,7 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 	db $8
 	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, SSAnneRivalDefeatedText

@@ -1,12 +1,12 @@
 PlayerPC: ; 78e6 (1:78e6)
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
 	ld a, ITEM_NAME
 	ld [W_LISTTYPE], a
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [$cc2c], a
-	ld [$ccd3], a
+	ld [wcc2c], a
+	ld [wccd3], a
 	ld a, [wFlags_0xcd60]
 	bit 3, a
 	jr nz, Func_790c
@@ -16,8 +16,8 @@ PlayerPC: ; 78e6 (1:78e6)
 	call PrintText
 
 Func_790c: ; 790c (1:790c)
-	ld a, [$ccd3]
-	ld [wCurrentMenuItem], a ; $cc26
+	ld a, [wccd3]
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
@@ -26,11 +26,11 @@ Func_790c: ; 790c (1:790c)
 	ld c, $e
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 2 ; $c3ca
+	FuncCoord 2, 2
 	ld hl, Coord
 	ld de, PlayersPCMenuEntries ; $7af5
 	call PlaceString
-	ld hl, wTopMenuItemY ; $cc24
+	ld hl, wTopMenuItemY ; wTopMenuItemY
 	ld a, $2
 	ld [hli], a
 	dec a
@@ -43,18 +43,18 @@ Func_790c: ; 790c (1:790c)
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld hl, wListScrollOffset ; $cc36
+	ld hl, wListScrollOffset ; wcc36
 	ld [hli], a
 	ld [hl], a
-	ld [wPlayerMonNumber], a ; $cc2f
+	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld hl, WhatDoYouWantText
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
 	jp nz, Func_796d
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [wCurrentMenuItem] ; $cc26
-	ld [$ccd3], a
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld [wccd3], a
 	and a
 	jp z, Func_7a12
 	dec a
@@ -74,19 +74,19 @@ Func_796d: ; 796d (1:796d)
 	res 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	xor a
-	ld [wListScrollOffset], a ; $cc36
-	ld [$cc2c], a
-	ld hl, $d730
+	ld [wListScrollOffset], a ; wcc36
+	ld [wcc2c], a
+	ld hl, wd730
 	res 6, [hl]
 	xor a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ret
 
 Func_7995: ; 7995 (1:7995)
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wListScrollOffset], a ; $cc36
-	ld a, [wNumBagItems] ; $d31d
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wListScrollOffset], a ; wcc36
+	ld a, [wNumBagItems] ; wNumBagItems
 	and a
 	jr nz, Func_79ab
 	ld hl, NothingToDepositText
@@ -96,21 +96,21 @@ Func_7995: ; 7995 (1:7995)
 Func_79ab: ; 79ab (1:79ab)
 	ld hl, WhatToDepositText
 	call PrintText
-	ld hl, wNumBagItems ; $d31d
+	ld hl, wNumBagItems ; wNumBagItems
 	ld a, l
-	ld [$cf8b], a
+	ld [wcf8b], a
 	ld a, h
-	ld [$cf8c], a
+	ld [wcf8c], a
 	xor a
-	ld [$cf93], a
+	ld [wcf93], a
 	ld a, $3
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
 	ld a, $1
-	ld [$cf96], a
-	ld a, [$d124]
+	ld [wcf96], a
+	ld a, [wd124]
 	and a
 	jr nz, .asm_79e7
 	ld hl, DepositHowManyText
@@ -119,14 +119,14 @@ Func_79ab: ; 79ab (1:79ab)
 	cp $ff
 	jp z, Func_79ab
 .asm_79e7
-	ld hl, wNumBoxItems ; $d53a
+	ld hl, wNumBoxItems ; wNumBoxItems
 	call AddItemToInventory
 	jr c, .asm_79f8
 	ld hl, NoRoomToStoreText
 	call PrintText
 	jp Func_79ab
 .asm_79f8
-	ld hl, wNumBagItems ; $d31d
+	ld hl, wNumBagItems ; wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
@@ -138,9 +138,9 @@ Func_79ab: ; 79ab (1:79ab)
 
 Func_7a12: ; 7a12 (1:7a12)
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wListScrollOffset], a ; $cc36
-	ld a, [wNumBoxItems] ; $d53a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wListScrollOffset], a ; wcc36
+	ld a, [wNumBoxItems] ; wNumBoxItems
 	and a
 	jr nz, Func_7a28
 	ld hl, NothingStoredText
@@ -150,21 +150,21 @@ Func_7a12: ; 7a12 (1:7a12)
 Func_7a28: ; 7a28 (1:7a28)
 	ld hl, WhatToWithdrawText
 	call PrintText
-	ld hl, wNumBoxItems ; $d53a
+	ld hl, wNumBoxItems ; wNumBoxItems
 	ld a, l
-	ld [$cf8b], a
+	ld [wcf8b], a
 	ld a, h
-	ld [$cf8c], a
+	ld [wcf8c], a
 	xor a
-	ld [$cf93], a
+	ld [wcf93], a
 	ld a, $3
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
 	ld a, $1
-	ld [$cf96], a
-	ld a, [$d124]
+	ld [wcf96], a
+	ld a, [wd124]
 	and a
 	jr nz, .asm_7a64
 	ld hl, WithdrawHowManyText
@@ -173,14 +173,14 @@ Func_7a28: ; 7a28 (1:7a28)
 	cp $ff
 	jp z, Func_7a28
 .asm_7a64
-	ld hl, wNumBagItems ; $d31d
+	ld hl, wNumBagItems ; wNumBagItems
 	call AddItemToInventory
 	jr c, .asm_7a75
 	ld hl, CantCarryMoreText
 	call PrintText
 	jp Func_7a28
 .asm_7a75
-	ld hl, wNumBoxItems ; $d53a
+	ld hl, wNumBoxItems ; wNumBoxItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
 	ld a, (SFX_02_55 - SFX_Headers_02) / 3
@@ -192,9 +192,9 @@ Func_7a28: ; 7a28 (1:7a28)
 
 Func_7a8f: ; 7a8f (1:7a8f)
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wListScrollOffset], a ; $cc36
-	ld a, [wNumBoxItems] ; $d53a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wListScrollOffset], a ; wcc36
+	ld a, [wNumBoxItems] ; wNumBoxItems
 	and a
 	jr nz, Func_7aa5
 	ld hl, NothingStoredText
@@ -204,15 +204,15 @@ Func_7a8f: ; 7a8f (1:7a8f)
 Func_7aa5: ; 7aa5 (1:7aa5)
 	ld hl, WhatToTossText
 	call PrintText
-	ld hl, wNumBoxItems ; $d53a
+	ld hl, wNumBoxItems ; wNumBoxItems
 	ld a, l
-	ld [$cf8b], a
+	ld [wcf8b], a
 	ld a, h
-	ld [$cf8c], a
+	ld [wcf8c], a
 	xor a
-	ld [$cf93], a
+	ld [wcf93], a
 	ld a, $3
-	ld [wListMenuID], a ; $cf94
+	ld [wListMenuID], a ; wListMenuID
 	push hl
 	call DisplayListMenuID
 	pop hl
@@ -221,11 +221,11 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	call IsKeyItem
 	pop hl
 	ld a, $1
-	ld [$cf96], a
-	ld a, [$d124]
+	ld [wcf96], a
+	ld a, [wd124]
 	and a
 	jr nz, .asm_7aef
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call IsItemHM
 	jr c, .asm_7aef
 	push hl

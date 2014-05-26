@@ -1,15 +1,15 @@
 PewterGuys: ; 37ca1 (d:7ca1)
-	ld hl, $ccd3
-	ld a, [$cd38]
+	ld hl, wccd3
+	ld a, [wcd38]
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	ld d, 0
 	ld e, a
 	add hl, de
 	ld d, h
 	ld e, l
 	ld hl, PointerTable_37ce6
-	ld a, [$d12f]
+	ld a, [wd12f]
 	add a
 	ld b, 0
 	ld c, a
@@ -37,9 +37,9 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ret z
 	ld [de], a
 	inc de
-	ld a, [$cd38]
+	ld a, [wcd38]
 	inc a
-	ld [$cd38], a
+	ld [wcd38], a
 	jr .asm_37cd2
 .asm_37ce1
 	inc hl

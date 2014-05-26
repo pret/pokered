@@ -29,7 +29,7 @@ Route19TrainerHeaders: ; 55d73 (15:5d73)
 Route19TrainerHeader0: ; 55d73 (15:5d73)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText1 ; 0x5e50 TextBeforeBattle
 	dw Route19AfterBattleText1 ; 0x5e5a TextAfterBattle
 	dw Route19EndBattleText1 ; 0x5e55 TextEndBattle
@@ -38,7 +38,7 @@ Route19TrainerHeader0: ; 55d73 (15:5d73)
 Route19TrainerHeader1: ; 55d7f (15:5d7f)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText2 ; 0x5e5f TextBeforeBattle
 	dw Route19AfterBattleText2 ; 0x5e69 TextAfterBattle
 	dw Route19EndBattleText2 ; 0x5e64 TextEndBattle
@@ -47,7 +47,7 @@ Route19TrainerHeader1: ; 55d7f (15:5d7f)
 Route19TrainerHeader2: ; 55d8b (15:5d8b)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText3 ; 0x5e6e TextBeforeBattle
 	dw Route19AfterBattleText3 ; 0x5e78 TextAfterBattle
 	dw Route19EndBattleText3 ; 0x5e73 TextEndBattle
@@ -56,7 +56,7 @@ Route19TrainerHeader2: ; 55d8b (15:5d8b)
 Route19TrainerHeader3: ; 55d97 (15:5d97)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText4 ; 0x5e7d TextBeforeBattle
 	dw Route19AfterBattleText4 ; 0x5e87 TextAfterBattle
 	dw Route19EndBattleText4 ; 0x5e82 TextEndBattle
@@ -65,7 +65,7 @@ Route19TrainerHeader3: ; 55d97 (15:5d97)
 Route19TrainerHeader4: ; 55da3 (15:5da3)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText5 ; 0x5e8c TextBeforeBattle
 	dw Route19AfterBattleText5 ; 0x5e96 TextAfterBattle
 	dw Route19EndBattleText5 ; 0x5e91 TextEndBattle
@@ -74,7 +74,7 @@ Route19TrainerHeader4: ; 55da3 (15:5da3)
 Route19TrainerHeader5: ; 55daf (15:5daf)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText6 ; 0x5e9b TextBeforeBattle
 	dw Route19AfterBattleText6 ; 0x5ea5 TextAfterBattle
 	dw Route19EndBattleText6 ; 0x5ea0 TextEndBattle
@@ -83,7 +83,7 @@ Route19TrainerHeader5: ; 55daf (15:5daf)
 Route19TrainerHeader6: ; 55dbb (15:5dbb)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText7 ; 0x5eaa TextBeforeBattle
 	dw Route19AfterBattleText7 ; 0x5eb4 TextAfterBattle
 	dw Route19EndBattleText7 ; 0x5eaf TextEndBattle
@@ -92,7 +92,7 @@ Route19TrainerHeader6: ; 55dbb (15:5dbb)
 Route19TrainerHeader7: ; 55dc7 (15:5dc7)
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText8 ; 0x5eb9 TextBeforeBattle
 	dw Route19AfterBattleText8 ; 0x5ec3 TextAfterBattle
 	dw Route19EndBattleText8 ; 0x5ebe TextEndBattle
@@ -101,7 +101,7 @@ Route19TrainerHeader7: ; 55dc7 (15:5dc7)
 Route19TrainerHeader8: ; 55dd3 (15:5dd3)
 	db $9 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText9 ; 0x5ec8 TextBeforeBattle
 	dw Route19AfterBattleText9 ; 0x5ed2 TextAfterBattle
 	dw Route19EndBattleText9 ; 0x5ecd TextEndBattle
@@ -110,7 +110,7 @@ Route19TrainerHeader8: ; 55dd3 (15:5dd3)
 Route19TrainerHeader9: ; 55ddf (15:5ddf)
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7e5 ; flag's byte
+	dw wd7e5 ; flag's byte
 	dw Route19BattleText10 ; 0x5ed7 TextBeforeBattle
 	dw Route19AfterBattleText10 ; 0x5ee1 TextAfterBattle
 	dw Route19EndBattleText10 ; 0x5edc TextEndBattle

@@ -1,8 +1,8 @@
 Func_3ad0e: ; 3ad0e (e:6d0e)
-	ld hl, $ccd3
+	ld hl, wccd3
 	xor a
 	ld [hl], a
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld c, a
 	ld b, $1
 	call Func_3b057
@@ -11,33 +11,33 @@ Func_3ad1c: ; 3ad1c (e:6d1c)
 	ld a, [$ffd7]
 	push af
 	xor a
-	ld [$d121], a
+	ld [wd121], a
 	dec a
-	ld [wWhichPokemon], a ; $cf92
+	ld [wWhichPokemon], a ; wWhichPokemon
 	push hl
 	push bc
 	push de
-	ld hl, W_NUMINPARTY ; $d163
+	ld hl, W_NUMINPARTY ; W_NUMINPARTY
 	push hl
 asm_3ad2e: ; 3ad2e (e:6d2e)
-	ld hl, wWhichPokemon ; $cf92
+	ld hl, wWhichPokemon ; wWhichPokemon
 	inc [hl]
 	pop hl
 	inc hl
 	ld a, [hl]
 	cp $ff
 	jp z, Func_3aede
-	ld [$cee9], a
+	ld [wHPBarMaxHP], a
 	push hl
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld c, a
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld b, $2
 	call Func_3b057
 	ld a, c
 	and a
 	jp z, asm_3ad2e
-	ld a, [$cee9]
+	ld a, [wHPBarMaxHP]
 	dec a
 	ld b, $0
 	ld hl, EvosMovesPointerTable
@@ -49,13 +49,13 @@ asm_3ad2e: ; 3ad2e (e:6d2e)
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld a, [$cf91]
+	ld a, [wcf91]
 	push af
 	xor a
-	ld [$cc49], a
+	ld [wcc49], a
 	call LoadMonData
 	pop af
-	ld [$cf91], a
+	ld [wcf91], a
 	pop hl
 
 Func_3ad71: ; 3ad71 (e:6d71)
@@ -65,49 +65,49 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld b, a
 	cp $3
 	jr z, .asm_3ad91
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $32
 	jr z, asm_3ad2e
 	ld a, b
 	cp $2
 	jr z, .asm_3ada4
-	ld a, [$ccd4]
+	ld a, [wccd4]
 	and a
 	jr nz, asm_3ad2e
 	ld a, b
 	cp $1
 	jr z, .asm_3adad
 .asm_3ad91
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $32
 	jp nz, Func_3aed9
 	ld a, [hli]
 	ld b, a
-	ld a, [$cfb9]
+	ld a, [wcfb9]
 	cp b
 	jp c, asm_3ad2e
 	jr .asm_3adb6
 .asm_3ada4
 	ld a, [hli]
 	ld b, a
-	ld a, [$cf91]
+	ld a, [wcf91]
 	cp b
 	jp nz, Func_3aed9
 .asm_3adad
 	ld a, [hli]
 	ld b, a
-	ld a, [$cfb9]
+	ld a, [wcfb9]
 	cp b
 	jp c, Func_3aeda
 .asm_3adb6
-	ld [W_CURENEMYLVL], a ; $d127
+	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, $1
-	ld [$d121], a
+	ld [wd121], a
 	push hl
 	ld a, [hl]
-	ld [$ceea], a
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld [wHPBarMaxHP + 1], a
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
 	call GetPartyMonName
 	call CopyStringToCF4B
 	ld hl, IsEvolvingText
@@ -122,7 +122,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $ff
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call ClearSprites
 	callab Func_7bde9
 	jp c, Func_3af2e
@@ -130,13 +130,13 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call PrintText
 	pop hl
 	ld a, [hl]
-	ld [$d0b5], a
-	ld [$cf98], a
-	ld [$ceea], a
+	ld [wd0b5], a
+	ld [wcf98], a
+	ld [wHPBarMaxHP + 1], a
 	ld a, MONSTER_NAME
 	ld [W_LISTTYPE], a
 	ld a, $e
-	ld [$d0b7], a
+	ld [wPredefBank], a
 	call GetName
 	push hl
 	ld hl, IntoText
@@ -148,29 +148,29 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call DelayFrames
 	call ClearScreen
 	call Func_3aef7
-	ld a, [$d11e]
+	ld a, [wd11e]
 	push af
-	ld a, [$d0b5]
-	ld [$d11e], a
+	ld a, [wd0b5]
+	ld [wd11e], a
 	ld a, $3a
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
-	ld a, [$d11e]
+	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
 	ld bc, $1c
 	call AddNTimes
 	ld de, W_MONHEADER
 	call CopyData
-	ld a, [$d0b5]
-	ld [$d0b8], a
+	ld a, [wd0b5]
+	ld [W_MONHDEXNUM], a
 	pop af
-	ld [$d11e], a
-	ld hl, $cfa8
-	ld de, $cfba
+	ld [wd11e], a
+	ld hl, wcfa8
+	ld de, wcfba
 	ld b, $1
 	call CalcStats
-	ld a, [wWhichPokemon] ; $cf92
-	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
 	ld bc, $2c
 	call AddNTimes
 	ld e, l
@@ -182,14 +182,14 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld hl, $cfbb
+	ld hl, wcfbb
 	ld a, [hld]
 	sub c
 	ld c, a
 	ld a, [hl]
 	sbc b
 	ld b, a
-	ld hl, $cf9a
+	ld hl, wcf9a
 	ld a, [hl]
 	add c
 	ld [hld], a
@@ -199,32 +199,32 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	dec hl
 	pop bc
 	call CopyData
-	ld a, [$d0b5]
-	ld [$d11e], a
+	ld a, [wd0b5]
+	ld [wd11e], a
 	xor a
-	ld [$cc49], a
+	ld [wcc49], a
 	call Func_3af5b
 	pop hl
 	ld a, $42
 	call Predef ; indirect jump to SetPartyMonTypes (5db5e (17:5b5e))
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	call z, Func_3af52
 	ld a, $3a
 	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
-	ld a, [$d11e]
+	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, wPokedexOwned ; $d2f7
+	ld hl, wPokedexOwned ; wPokedexOwned
 	push bc
 	call Func_3b057
 	pop bc
-	ld hl, wPokedexSeen ; $d30a
+	ld hl, wPokedexSeen ; wd30a
 	call Func_3b057
 	pop de
 	pop hl
-	ld a, [$cf98]
+	ld a, [wcf98]
 	ld [hl], a
 	push hl
 	ld l, e
@@ -244,27 +244,27 @@ Func_3aede: ; 3aede (e:6ede)
 	pop hl
 	pop af
 	ld [$ffd7], a
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $32
 	ret z
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	ret nz
-	ld a, [$d121]
+	ld a, [wd121]
 	and a
 	call nz, Func_2307
 	ret
 
 Func_3aef7: ; 3aef7 (e:6ef7)
-	ld a, [$d0b5]
+	ld a, [wd0b5]
 	push af
-	ld a, [$d0b8]
-	ld [$d0b5], a
+	ld a, [W_MONHDEXNUM]
+	ld [wd0b5], a
 	call GetName
 	pop af
-	ld [$d0b5], a
-	ld hl, $cd6d
-	ld de, $cf4b
+	ld [wd0b5], a
+	ld hl, wcd6d
+	ld de, wcf4b
 .asm_3af0e
 	ld a, [de]
 	inc de
@@ -273,13 +273,13 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	ret nz
 	cp $50
 	jr nz, .asm_3af0e
-	ld a, [wWhichPokemon] ; $cf92
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $b
-	ld hl, W_PARTYMON1NAME ; $d2b5
+	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
 	call AddNTimes
 	push hl
 	call GetName
-	ld hl, $cd6d
+	ld hl, wcd6d
 	pop de
 	jp CopyData
 
@@ -308,15 +308,15 @@ IsEvolvingText: ; 3af4d (e:6f4d)
 	db "@"
 
 Func_3af52: ; 3af52 (e:6f52)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $32
 	ret z
 	jp ReloadTilesetTilePatterns
 
 Func_3af5b: ; 3af5b (e:6f5b)
 	ld hl, EvosMovesPointerTable
-	ld a, [$d11e]
-	ld [$cf91], a
+	ld a, [wd11e]
+	ld [wcf91], a
 	dec a
 	ld bc, $0
 	ld hl, EvosMovesPointerTable
@@ -336,16 +336,16 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	and a
 	jr z, .asm_3afb1
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	cp b
 	ld a, [hli]
 	jr nz, .asm_3af77
 	ld d, a
-	ld a, [$cc49]
+	ld a, [wcc49]
 	and a
 	jr nz, .asm_3af96
-	ld hl, W_PARTYMON1_MOVE1 ; $d173
-	ld a, [wWhichPokemon] ; $cf92
+	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
+	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld bc, $2c
 	call AddNTimes
 .asm_3af96
@@ -357,20 +357,20 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	dec b
 	jr nz, .asm_3af98
 	ld a, d
-	ld [$d0e0], a
-	ld [$d11e], a
+	ld [wd0e0], a
+	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B
 	ld a, $1b
 	call Predef ; indirect jump to LearnMove (6e43 (1:6e43))
 .asm_3afb1
-	ld a, [$cf91]
-	ld [$d11e], a
+	ld a, [wcf91]
+	ld [wd11e], a
 	ret
 
 ; writes the moves a mon has at level [W_CURENEMYLVL] to [de]
 ; move slots are being filled up sequentially and shifted if all slots are full
-; [$cee9]: (?)
+; [wHPBarMaxHP]: (?)
 WriteMonMoves: ; 3afb8 (e:6fb8)
 	call GetPredefRegisters
 	push hl
@@ -378,7 +378,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	push bc
 	ld hl, EvosMovesPointerTable
 	ld b, $0
-	ld a, [$cf91]  ; cur mon ID
+	ld a, [wcf91]  ; cur mon ID
 	dec a
 	add a
 	rl b
@@ -401,13 +401,13 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	and a
 	jp z, .done       ; end of list
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	cp b
 	jp c, .done       ; mon level < move level (assumption: learnset is sorted by level)
-	ld a, [$cee9]
+	ld a, [wHPBarMaxHP]
 	and a
 	jr z, .skipMinLevelCheck
-	ld a, [wWhichTrade] ; $cd3d (min move level)
+	ld a, [wWhichTrade] ; wWhichTrade (min move level)
 	cp b
 	jr nc, .nextMove2 ; min level >= move level
 .skipMinLevelCheck
@@ -436,7 +436,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	ld h, d
 	ld l, e
 	call WriteMonMoves_ShiftMoveData ; shift all moves one up (deleting move 1)
-	ld a, [$cee9]
+	ld a, [wHPBarMaxHP]
 	and a
 	jr z, .writeMoveToSlot
 	push de
@@ -451,7 +451,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 .writeMoveToSlot2
 	ld a, [hl]
 	ld [de], a
-	ld a, [$cee9]
+	ld a, [wHPBarMaxHP]
 	and a
 	jr z, .nextMove
 	push hl            ; write move PP value
@@ -463,10 +463,10 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	ld hl, Moves
 	ld bc, $6
 	call AddNTimes
-	ld de, $cee9
+	ld de, wHPBarMaxHP
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, [$ceee]
+	ld a, [wHPBarNewHP + 1]
 	pop hl
 	ld [hl], a
 	pop hl

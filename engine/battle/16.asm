@@ -1,8 +1,8 @@
 PrintBeginningBattleText: ; 58d99 (16:4d99)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr nz, .trainerBattle
-	ld a, [W_CURMAP] ; $d35e
+	ld a, [W_CURMAP] ; W_CURMAP
 	cp POKEMONTOWER_3
 	jr c, .notPokemonTower
 	cp LAVENDER_HOUSE_1
@@ -11,7 +11,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, [W_ENEMYMONID]
 	call PlayCry
 	ld hl, WildMonAppearedText
-	ld a, [W_MOVEMISSED] ; $d05f
+	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr z, .notFishing
 	ld hl, HookedMonAttackedText
@@ -32,7 +32,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld b, SILPH_SCOPE
 	call IsItemInBag
 	ld a, [W_ENEMYMONID]
-	ld [$cf91], a
+	ld [wcf91], a
 	cp MAROWAK
 	jr z, .isMarowak
 	ld a, b
@@ -61,9 +61,9 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 
 .playSFX
 	xor a
-	ld [$c0f1], a
+	ld [wc0f1], a
 	ld a, $80
-	ld [$c0f2], a
+	ld [wc0f2], a
 	ld a, (SFX_08_77 - SFX_Headers_08) / 3
 	call PlaySound
 	jp WaitForSoundToFinish
@@ -95,24 +95,24 @@ GhostCantBeIDdText: ; 58e54 (16:4e54)
 	db "@"
 
 SendOutMon: ; 58e59 (16:4e59)
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
 	or [hl]
 	ld hl, GoText
 	jr z, .printText
 	xor a
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
-	ld hl, W_ENEMYMONCURHP ; $cfe6
+	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
 	ld a, [hli]
-	ld [$cce3], a
+	ld [wcce3], a
 	ld [$ff97], a
 	ld a, [hl]
-	ld [$cce4], a
+	ld [wcce4], a
 	ld [$ff98], a
 	ld a, $19
 	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
-	ld hl, W_ENEMYMONMAXHP ; $cff4
+	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -173,8 +173,8 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	db $08 ; asm
 	push de
 	push bc
-	ld hl, $cfe7
-	ld de, $cce4
+	ld hl, W_ENEMYMONCURHP + 1
+	ld de, wcce4
 	ld b, [hl]
 	dec hl
 	ld a, [de]

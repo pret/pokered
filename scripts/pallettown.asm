@@ -1,8 +1,8 @@
 PalletTownScript: ; 18e5b (6:4e5b)
-	ld a,[$D74B]
+	ld a,[wd74b]
 	bit 4,a
 	jr z,.next
-	ld hl,$D747
+	ld hl,wd747
 	set 6,[hl]
 .next
 	call EnableAutoTextBoxDrawing
@@ -20,7 +20,7 @@ PalletTownScriptPointers: ; 18e73 (6:4e73)
 	dw PalletTownScript6
 
 PalletTownScript0: ; 18e81 (6:4e81)
-	ld a,[$D747]
+	ld a,[wd747]
 	bit 0,a
 	ret nz
 	ld a,[W_YCOORD]
@@ -29,7 +29,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	xor a
 	ld [hJoyHeld],a
 	ld a,4
-	ld [$D528],a
+	ld [wd528],a
 	ld a,$FF
 	call PlaySound ; stop music
 	ld a, BANK(Music_MeetProfOak)
@@ -38,7 +38,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	call PlayMusic ; plays music
 	ld a,$FC
 	ld [wJoyIgnore],a
-	ld hl,$D74B
+	ld hl,wd74b
 	set 7,[hl]
 
 	; trigger the next script
@@ -48,14 +48,14 @@ PalletTownScript0: ; 18e81 (6:4e81)
 
 PalletTownScript1: ; 18eb2 (6:4eb2)
 	xor a
-	ld [$CF0D],a
+	ld [wcf0d],a
 	ld a,1
 	ld [$FF8C],a
 	call DisplayTextID
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,0
-	ld [$CC4D],a
+	ld [wcc4d],a
 	ld a,$15
 	call Predef
 
@@ -83,8 +83,8 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld hl,$FF95
 	dec [hl]
 	ld a,$20
-	call Predef ; load Oak’s movement into $CC97
-	ld de,$CC97
+	call Predef ; load Oak’s movement into wcc97
+	ld de,wcc97
 	ld a,1 ; oak
 	ld [$FF8C],a
 	call MoveSprite
@@ -97,13 +97,13 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ret
 
 PalletTownScript3: ; 18f12 (6:4f12)
-	ld a,[$D730]
+	ld a,[wd730]
 	bit 0,a
 	ret nz
 	xor a
-	ld [$C109],a
+	ld [wSpriteStateData1 + 9],a
 	ld a,1
-	ld [$CF0D],a
+	ld [wcf0d],a
 	ld a,$FC
 	ld [wJoyIgnore],a
 	ld a,1
@@ -112,13 +112,13 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,1
-	ld [$CF13],a
+	ld [wcf13],a
 	xor a
-	ld [$CF10],a
+	ld [wcf10],a
 	ld a,1
-	ld [$CC57],a
+	ld [wcc57],a
 	ld a,[H_LOADEDROMBANK]
-	ld [$CC58],a
+	ld [wcc58],a
 
 	; trigger the next script
 	ld a,4
@@ -126,7 +126,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ret
 
 PalletTownScript4: ; 18f4b (6:4f4b)
-	ld a,[$CC57]
+	ld a,[wcc57]
 	and a
 	ret nz
 
@@ -136,27 +136,27 @@ PalletTownScript4: ; 18f4b (6:4f4b)
 	ret
 
 PalletTownScript5: ; 18f56 (6:4f56)
-	ld a,[$D74A]
+	ld a,[wd74a]
 	bit 2,a
 	jr nz,.next
 	and 3
 	cp 3
 	jr nz,.next
-	ld hl,$D74A
+	ld hl,wd74a
 	set 2,[hl]
 	ld a,$27
-	ld [$CC4D],a
+	ld [wcc4d],a
 	ld a,$11
 	call Predef
 	ld a,$28
-	ld [$CC4D],a
+	ld [wcc4d],a
 	ld a,$15
 	jp Predef
 .next
-	ld a,[$D74B]
+	ld a,[wd74b]
 	bit 4,a
 	ret z
-	ld hl,$D74B
+	ld hl,wd74b
 	set 6,[hl]
 PalletTownScript6: ; 18f87 (6:4f87)
 	ret
@@ -172,11 +172,11 @@ PalletTownTextPointers: ; 18f88 (6:4f88)
 
 PalletTownText1: ; 18f96 (6:4f96)
 	db 8
-	ld a,[$CF0D]
+	ld a,[wcf0d]
 	and a
 	jr nz,.next
 	ld a,1
-	ld [$CC3C],a
+	ld [wcc3c],a
 	ld hl,OakAppearsText
 	jr .done
 .next
@@ -191,12 +191,12 @@ OakAppearsText: ; 18fb0 (6:4fb0)
 	ld c,10
 	call DelayFrames
 	xor a
-	ld [$CD4F],a
-	ld [$CD50],a
+	ld [wcd4f],a
+	ld [wcd50],a
 	ld a,$4C
 	call Predef ; display ! over head
 	ld a,4
-	ld [$D528],a
+	ld [wd528],a
 	jp TextScriptEnd
 
 OakWalksUpText: ; 18fce (6:4fce)

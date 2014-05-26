@@ -30,7 +30,7 @@ _Lab4Text_75dd5:: ; a118d (28:518d)
 	line "back to life!"
 
 	para "It was @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	db $0
 	line "like I think!"
 	prompt
@@ -38,12 +38,12 @@ _Lab4Text_75dd5:: ; a118d (28:518d)
 _Lab4Text_610ae:: ; a11d6 (28:51d6)
 	text "Oh! That is"
 	line "@"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 
 	para "It is fossil of"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text ", a"
 	cont "#MON that is"
 	cont "already extinct!"
@@ -60,7 +60,7 @@ _Lab4Text_610b3:: ; a1259 (28:5259)
 
 	para $52, " handed"
 	line "over @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!"
 	prompt
 
