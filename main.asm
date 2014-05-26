@@ -3,6 +3,7 @@ INCLUDE "constants.asm"
 
 INCLUDE "home.asm"
 
+
 SECTION "bank1",ROMX,BANK[$1]
 
 INCLUDE "data/facing.asm"
@@ -56,6 +57,7 @@ Func_40b0::
 	ld a, $7 ; HealParty
 	jp Predef
 
+
 MewPicFront:: INCBIN "pic/bmon/mew.pic"
 MewPicBack::  INCBIN "pic/monback/mewb.pic"
 INCLUDE "data/baseStats/mew.asm"
@@ -67,58 +69,62 @@ INCLUDE "engine/titlescreen.asm"
 NintenText: db "NINTEN@"
 SonyText:   db "SONY@"
 
-; loads pokemon data from one of multiple sources to $cf98
-; loads base stats to $d0b8
-; INPUT:
-; [$cf92] = index of pokemon within party/box
-; [$cc49] = source
-; 00: player's party
-; 01: enemy's party
-; 02: current box
-; 03: daycare
-; OUTPUT:
-; [$cf91] = pokemon ID
-; $cf98 = base address of pokemon data
-; $d0b8 = base address of base stats
-LoadMonData_: ; 45b6 (1:45b6)
-	ld a,[W_DAYCAREMONDATA] ; daycare pokemon ID
-	ld [$cf91],a
-	ld a,[$cc49]
-	cp a,$03
-	jr z,.GetMonHeader
-	ld a,[wWhichPokemon]
-	ld e,a
+
+LoadMonData_:
+; Load monster [wWhichPokemon] from list [$cc49]:
+;  0: partymon
+;  1: enemymon
+;  2: boxmon
+;  3: daycaremon
+; Return monster id at $cf91 and its data at $cf98.
+; Also load base stats at $d0b8 for convenience.
+
+	ld a, [W_DAYCAREMONDATA]
+	ld [$cf91], a
+	ld a, [$cc49]
+	cp 3
+	jr z, .GetMonHeader
+
+	ld a, [wWhichPokemon]
+	ld e, a
 	callab Func_39c37 ; get pokemon ID
+
 .GetMonHeader
-	ld a,[$cf91]
-	ld [$d0b5],a ; input for GetMonHeader
-	call GetMonHeader ; load base stats to $d0b8
-	ld hl,W_PARTYMON1DATA
-	ld bc,44
-	ld a,[$cc49]
-	cp a,$01
-	jr c,.getMonEntry
-	ld hl,wEnemyMons ; enemy pokemon 1 data
-	jr z,.getMonEntry
-	cp a,$02
-	ld hl,W_BOXMON1DATA ; box pokemon 1 data
-	ld bc,33
-	jr z,.getMonEntry
-	ld hl, W_DAYCAREMONDATA ; daycare pokemon data
+	ld a, [$cf91]
+	ld [$d0b5], a ; input for GetMonHeader
+	call GetMonHeader
+
+	ld hl, W_PARTYMON1DATA
+	ld bc, 44
+	ld a, [$cc49]
+	cp 1
+	jr c, .getMonEntry
+
+	ld hl, wEnemyMons
+	jr z, .getMonEntry
+
+	cp 2
+	ld hl, W_BOXMON1DATA
+	ld bc, 33
+	jr z, .getMonEntry
+
+	ld hl, W_DAYCAREMONDATA
 	jr .copyMonData
-.getMonEntry ; add the product of the index and the size of each entry
-	ld a,[wWhichPokemon]
+
+.getMonEntry
+	ld a, [wWhichPokemon]
 	call AddNTimes
+
 .copyMonData
-	ld de,$cf98
-	ld bc,44
+	ld de, $cf98
+	ld bc, 44
 	jp CopyData
 
-INCLUDE "data/item_prices.asm"
 
+INCLUDE "data/item_prices.asm"
 INCLUDE "text/item_names.asm"
 
-UnusedNames: ; 4a92 (1:4a92)
+UnusedNames:
 	db "かみなりバッヂ@"
 	db "かいがらバッヂ@"
 	db "おじぞうバッヂ@"
