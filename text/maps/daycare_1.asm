@@ -41,7 +41,7 @@ DayCareMText_8ac67:: ; 8ac67 (22:6c67)
 
 _DayCareMText_56428:: ; 8ac7d (22:6c7d)
 	text "You owe me ¥@"
-	db $2, $3f, $cd, $c2
+	TX_BCD wcd3f, $c2
 	db $0
 	line "for the return"
 	cont "of this #MON."

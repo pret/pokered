@@ -992,13 +992,13 @@ _HiddenItemBagFullText:: ; 894e1 (22:54e1)
 _FoundHiddenCoinsText:: ; 8950b (22:550b)
 	text $52, " found"
 	line "@"
-	db $2, $a0, $ff, $c2 ; XXX $2
+	TX_BCD $ffa0, $c2
 	text " coins!@@"
 
 _FoundHiddenCoins2Text:: ; 89523 (22:5523)
 	text $52, " found"
 	line "@"
-	db $2, $a0, $ff, $c2 ; XXX $2 probably coins
+	TX_BCD $ffa0, $c2
 	text " coins!@@"
 
 _DroppedHiddenCoinsText:: ; 8953b (22:553b)
@@ -1091,8 +1091,7 @@ _EnemyMonFaintedText:: ; 0x896c7
 
 _MoneyForWinningText:: ; 896dd (22:56dd)
 	text $52, " got ¥@"
-	;XXX $2
-	db $2, $79, $d0, $c3
+	TX_BCD wd079, $c3
 	db $0
 	line "for winning!"
 	prompt
@@ -1549,12 +1548,10 @@ _SafariZoneAngryText:: ; 89d6a (22:5d6a)
 	prompt
 
 ; money related
-; XXX $2 BCD macro
-; $2, pointer, byte
 _PickUpPayDayMoneyText:: ; 89d80 (22:5d80)
 	text $52, " picked up"
 	line "¥@"
-	db $2, $e5, $cc, $c3
+	TX_BCD wcce5, $c3
 	text "!"
 	prompt
 
@@ -2468,7 +2465,7 @@ _PokemartTellBuyPriceText:: ; a2619 (28:6619)
 	text "?"
 	line "That will be"
 	cont "¥@"
-	db $2, $9f, $ff, $c3
+	TX_BCD $ff9f, $c3
 	text ". OK?"
 	done
 
@@ -2495,7 +2492,7 @@ _PokemonSellingGreetingText:: ; a2690 (28:6690)
 _PokemartTellSellPriceText:: ; a26ae (28:66ae)
 	text "I can pay you"
 	line "¥@"
-	db $2, $9f, $ff, $c3 ; XXX
+	TX_BCD $ff9f, $c3
 	text " for that."
 	done
 
@@ -2881,7 +2878,7 @@ _PlayedFluteHadEffectText:: ; a6928 (29:6928)
 _CoinCaseNumCoinsText:: ; a6940 (29:6940)
 	text "Coins"
 	line "@"
-	db $2, $a4, $d5, $c2 ; print BCD number
+	TX_BCD wPlayerCoins, $c2
 	text " "
 	prompt
 

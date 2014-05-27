@@ -368,6 +368,7 @@ wTrainerSpriteOffset:: ; cd3d
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 wTrainerFacingDirection:: ; cd3f
+wcd3f::
 	ds 1
 wTrainerScreenY:: ; cd40
 	ds 1

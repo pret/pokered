@@ -131,6 +131,12 @@ TX_RAM: MACRO
 	dw \1
 	ENDM
 
+TX_BCD: MACRO
+	db $2
+	dw \1
+	db \2
+	ENDM
+
 ; Predef macro.
 PREDEF: MACRO
 	ld a, (\1 - PredefPointers) / 3
