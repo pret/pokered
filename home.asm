@@ -9244,7 +9244,7 @@ StringCmp:: ; 3a8e (0:3a8e)
 ; c = X coordinate of upper left corner of sprite
 ; de = base address of 4 tile number and attribute pairs
 WriteOAMBlock:: ; 3a97 (0:3a97)
-	ld h,$c3
+	ld h,wOAMBuffer / $100
 	swap a ; multiply by 16
 	ld l,a
 	call .writeOneEntry ; upper left

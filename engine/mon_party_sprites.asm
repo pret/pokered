@@ -356,7 +356,7 @@ Func_718ac: ; 718ac (1c:58ac)
 Func_718c3: ; 718c3 (1c:58c3)
 	push af
 	ld c, $10
-	ld h, $c3
+	ld h, wOAMBuffer / $100
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	swap a
 	ld l, a
