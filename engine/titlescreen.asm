@@ -36,33 +36,33 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call DisableLCD
 	call LoadFontTilePatterns
 	ld hl, NintendoCopyrightLogoGraphics ; $60c8
-	ld de, $9410
+	ld de, vTitleLogo2 + $100
 	ld bc, $50
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics ; $61f8
-	ld de, $9460
+	ld de, vTitleLogo2 + $100 + $50
 	ld bc, $90
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics ; $5380
-	ld de, $8800
+	ld de, vTitleLogo
 	ld bc, $600
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; first chunk
 	ld hl, PokemonLogoGraphics+$600 ; $5980
-	ld de, $9310
+	ld de, vTitleLogo2
 	ld bc, $100
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
 IF _RED
-	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
-	ld bc,$50 ; how big that file is
+	ld de,vChars2 + $600
+	ld bc,$50
 ENDC
 IF _BLUE
-	ld de,$9610 ; where to put blueversion.2bpp in the VRAM
-	ld bc,$40 ; how big that file is
+	ld de,vChars2 + $600 + $10
+	ld bc,$50 - $10
 ENDC
 
 	ld a, BANK(Version_GFX)
@@ -302,7 +302,7 @@ Func_44cf: ; 44cf (1:44cf)
 
 Func_44dd: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics ; $66a8
-	ld de, $8000
+	ld de, vSprites
 	ld bc, $230
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
@@ -338,7 +338,7 @@ Func_44dd: ; 44dd (1:44dd)
 	ret
 
 Func_4519: ; 4519 (1:4519)
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld bc, $800
 	ld a, $7f
 	jp FillMemory
@@ -363,7 +363,7 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics ; $60c8
-	ld hl, $9600
+	ld hl, vChars2 + $600
 	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
 	call CopyVideoData
 	FuncCoord 2, 7

@@ -500,7 +500,7 @@ INCLUDE "engine/cable_club.asm"
 
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics ; $7b98
-	ld hl, $9760
+	ld hl, vChars2 + $760
 	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
 	jp CopyVideoData
 

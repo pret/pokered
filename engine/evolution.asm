@@ -28,9 +28,9 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [wcf91], a
 	ld [wd0b5], a
 	call Func_7beb9
-	ld de, $9000
-	ld hl, $9310
-	ld bc, $31
+	ld de, vFrontPic
+	ld hl, vBackPic
+	ld bc, 7 * 7
 	call CopyVideoData
 	ld a, [wHPBarMaxHP]
 	ld [wcf91], a

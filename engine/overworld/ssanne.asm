@@ -65,7 +65,7 @@ PointerTable_79fb0: ; 79fb0 (1e:5fb0)
 	dw Func_79337
 
 LoadSmokeTileFourTimes: ; 79fc0 (1e:5fc0)
-	ld hl, $8fc0
+	ld hl, vChars1 + $7c0
 	ld c, $4
 .loop
 	push bc

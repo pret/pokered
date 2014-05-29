@@ -126,7 +126,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	push af
 	push de
 	push bc
-	ld hl,$8000 ; VRAM base address
+	ld hl,vNPCSprites ; VRAM base address
 	ld bc,$c0 ; number of bytes per VRAM slot
 	ld a,[$ff8d]
 	cp a,11 ; is it a 4-tile sprite?
@@ -141,12 +141,12 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	jr nz,.calculateVRAMAddrLoop
 	jr .loadStillTilePattern
 .fourTileSpriteVRAMAddr
-	ld hl,$87c0 ; address for second 4-tile sprite
+	ld hl,vSprites + $7c0 ; address for second 4-tile sprite
 	ld a,[$ff8e] ; 4-tile sprite counter
 	and a ; is it the first 4-tile sprite?
 	jr nz,.loadStillTilePattern
 ; if it's the first 4-tile sprite
-	ld hl,$8780 ; address for first 4-tile sprite
+	ld hl,vSprites + $780 ; address for first 4-tile sprite
 	inc a
 	ld [$ff8e],a ; 4-tile sprite counter
 .loadStillTilePattern

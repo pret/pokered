@@ -21,19 +21,19 @@ StatusScreen: ; 12953 (4:6953)
 	call UpdateSprites ; move sprites (?)
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; $6080 ; source
-	ld hl, $96d0 ; dest
+	ld hl, vChars2 + $6d0 ; dest
 	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2 ; $6098
-	ld hl, $9780
+	ld hl, vChars2 + $780
 	ld bc, (BANK(BattleHudTiles2) << 8) + $01
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3 ; $60b0
-	ld hl, $9760
+	ld hl, vChars2 + $760
 	ld bc, (BANK(BattleHudTiles3) << 8) + $02
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
-	ld hl, $9720
+	ld hl, vChars2 + $720
 	ld bc,(BANK(PTile) << 8 | $01)
 	call CopyVideoDataDouble ; P (for PP), inline
 	ld a, [$ffd7]

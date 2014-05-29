@@ -184,7 +184,7 @@ VermilionDock_1dc94: ; 1dc94 (7:5c94)
 	ld bc, $00b4
 	ld a, $14
 	call FillMemory
-	ld hl, $9940
+	ld hl, vBGMap0 + 10 * 32
 	ld de, wcc5b
 	ld bc, $000c
 	call CopyVideoData

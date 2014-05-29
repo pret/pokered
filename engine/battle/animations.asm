@@ -341,7 +341,7 @@ LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld e,a
 	ld a,[hl]
 	ld d,a ; de = address of tileset
-	ld hl,$8310 ; destination address in VRAM
+	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
 	ld a,[wd07d]
 	ld c,a ; number of tiles
@@ -1960,17 +1960,17 @@ AnimationSlideMonHalfLeft: ; 79645 (1e:5645)
 Func_79652: ; 79652 (1e:5652)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld hl, $9310
+	ld hl, vBackPic
 	jr z, .asm_7965d
-	ld hl, $9000
+	ld hl, vFrontPic
 .asm_7965d
 	ld de, wTempPic
-	ld bc, $31
+	ld bc, 7 * 7
 	jp CopyVideoData
 
 AnimationWavyScreen: ; 79666 (1e:5666)
 ; used in Psywave/Psychic etc.
-	ld hl, $9800
+	ld hl, vBGMap0
 	call Func_79e0d
 	call Delay3
 	xor a
@@ -2005,7 +2005,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	call LoadScreenTilesFromBuffer2
-	ld hl, $9c00
+	ld hl, vBGMap1
 	call Func_79e0d
 	ret
 
@@ -2751,22 +2751,22 @@ Unknown_79d63: ; 79d63 (1e:5d63)
 	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
 
 AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
-	ld de, $9310
-	ld hl, $8000
-	ld bc, $0031
+	ld de, vBackPic
+	ld hl, vSprites
+	ld bc, 7 * 7
 	call CopyVideoData
 	xor a
 	ld [$ffae], a
-	ld hl, $9800
+	ld hl, vBGMap0
 	call Func_79e0d
 	ld a, $90
 	ld [$ffb0], a
-	ld hl, $9b20
+	ld hl, vBGMap0 + $320
 	call Func_79e0d
 	ld a, $38
 	ld [$ffb0], a
 	call Func_792fd
-	ld hl, $9800
+	ld hl, vBGMap0
 	call Func_79e0d
 	call AnimationHideMonPic
 	call Delay3
@@ -2776,17 +2776,17 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	call ClearSprites
 	ld a, $90
 	ld [$ffb0], a
-	ld hl, $9c00
+	ld hl, vBGMap1
 	call Func_79e0d
 	xor a
 	ld [$ffb0], a
 	call SaveScreenTilesToBuffer1
-	ld hl, $9800
+	ld hl, vBGMap0
 	call Func_79e0d
 	call ClearScreen
 	call Delay3
 	call LoadScreenTilesFromBuffer1
-	ld hl, $9c00
+	ld hl, vBGMap1
 	jp Func_79e0d
 
 Func_79dda: ; 79dda (1e:5dda)

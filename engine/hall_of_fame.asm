@@ -6,7 +6,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call DisableLCD
-	ld hl, $9800
+	ld hl,vBGMap0
 	ld bc, $800
 	ld a, $7f
 	call FillMemory
@@ -197,14 +197,14 @@ Func_7033e: ; 7033e (1c:433e)
 	ld de, $a000
 	ld bc, $310
 	call CopyData
-	ld de, $9000
+	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld de, RedPicBack ; $7e0a
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
 	ld a, $3
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
-	ld de, $9310
+	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
 

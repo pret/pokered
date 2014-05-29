@@ -45,9 +45,9 @@ Func_708ca: ; 708ca (1c:48ca)
 	jp ClearSprites
 
 Func_7092a: ; 7092a (1c:492a)
-	ld de, $9000
-	ld hl, $8000
-	ld bc, $31
+	ld de, vFrontPic
+	ld hl, vSprites
+	ld bc, 7 * 7
 	call CopyVideoData
 	ld a, $10
 	ld [W_BASECOORDY], a ; wd082
@@ -250,7 +250,7 @@ MapIDList_70a44: ; 70a44 (1c:4a44)
 	db $FF
 
 LoadBattleTransitionTile: ; 70a4d (1c:4a4d)
-	ld hl, $8ff0
+	ld hl, vChars1 + $7f0
 	ld de, BattleTransitionTile ; $4a59
 	ld bc, (BANK(BattleTransitionTile) << 8) + $01
 	jp CopyVideoData

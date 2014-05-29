@@ -8,7 +8,7 @@ PrintEmotionBubble: ; 17c47 (5:7c47)
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, $8f80
+	ld hl, vChars1 + $780
 	ld bc, (BANK(EmotionBubblesPointerTable) << 8) + $04
 	call CopyVideoData
 	ld a, [wcfcb]

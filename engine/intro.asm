@@ -199,7 +199,7 @@ Func_417c7: ; 417c7 (10:57c7)
 	ret
 
 Func_417f0: ; 417f0 (10:57f0)
-	ld hl, $9c00
+	ld hl, vBGMap1
 	ld bc, $240
 	jr asm_417fe
 
@@ -275,22 +275,22 @@ Func_41849: ; 41849 (10:5849)
 
 LoadIntroGraphics: ; 41852 (10:5852)
 	ld hl, FightIntroBackMon ; $5a99
-	ld de, $9000
+	ld de, vChars2
 	ld bc, $600
 	ld a, BANK(FightIntroBackMon)
 	call FarCopyData2
 	ld hl, GameFreakIntro ; $5959
-	ld de, $9600
+	ld de, vChars2 + $600
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, GameFreakIntro ; $5959
-	ld de, $8800
+	ld de, vChars1
 	ld bc, $140
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, FightIntroFrontMon ; $6099
-	ld de, $8000
+	ld de, vChars0
 	ld bc, $6c0
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
@@ -341,10 +341,10 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld hl, Coord
 	ld c, $50
 	call Func_41807
-	ld hl, $9c00
+	ld hl, vBGMap1
 	ld c, $80
 	call Func_41807
-	ld hl, $9dc0
+	ld hl, vBGMap1 + $1c0
 	ld c, $80
 	jp Func_41807
 

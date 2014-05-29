@@ -69,7 +69,7 @@ LedgeTiles: ; 1a6cf (6:66cf)
 	db $FF
 
 LoadHoppingShadowOAM: ; 1a6f0 (6:66f0)
-	ld hl, $8ff0
+	ld hl, vChars1 + $7f0
 	ld de, LedgeHoppingShadow ; $6708
 	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
 	call CopyVideoDataDouble
