@@ -1382,7 +1382,7 @@ DrawEnemyPokeballs: ; 0x3a857
 
 LoadPartyPokeballGfx: ; 3a85d (e:685d)
 	ld de, PokeballTileGraphics ; $697e
-	ld hl, $8310
+	ld hl, vSprites + $310
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $04
 	jp CopyVideoData
 

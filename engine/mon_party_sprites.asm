@@ -156,142 +156,142 @@ MonPartySpritePointers: ; 717c0 (1c:57c0)
 	dw SlowbroSprite + $c0
 	db $40 / $10 ; 40 bytes
 	db BANK(SlowbroSprite)
-	dw $8000
+	dw vSprites
 
 	dw BallSprite
 	db $80 / $10 ; $80 bytes
 	db BANK(BallSprite)
-	dw $8040
+	dw vSprites + $40
 
 	dw ClefairySprite + $c0
 	db $40 / $10 ; $40 bytes
 	db BANK(ClefairySprite)
-	dw $80C0
+	dw vSprites + $c0
 
 	dw BirdSprite + $c0
 	db $40 / $10 ; $40 bytes
 	db BANK(BirdSprite)
-	dw $8100
+	dw vSprites + $100
 
 	dw SeelSprite
 	db $40 / $10 ; $40 bytes
 	db BANK(SeelSprite)
-	dw $8140
+	dw vSprites + $140
 
 	dw MonPartySprites + $40
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8180
+	dw vSprites + $180
 
 	dw MonPartySprites + $50
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $81A0
+	dw vSprites + $1a0
 
 	dw MonPartySprites + $60
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $81C0
+	dw vSprites + $1c0
 
 	dw MonPartySprites + $70
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $81E0
+	dw vSprites + $1e0
 
 	dw MonPartySprites + $80
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8200
+	dw vSprites + $200
 
 	dw MonPartySprites + $90
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8220
+	dw vSprites + $220
 
 	dw MonPartySprites + $A0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8240
+	dw vSprites + $240
 
 	dw MonPartySprites + $B0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8260
+	dw vSprites + $260
 
 	dw MonPartySprites + $100
 	db $40 / $10 ; $40 bytes
 	db BANK(MonPartySprites)
-	dw $8380
+	dw vSprites + $380
 
 	dw SlowbroSprite
 	db $40 / $10 ; $40 bytes
 	db BANK(SlowbroSprite)
-	dw $8400
+	dw vSprites + $400
 
 	dw BallSprite
 	db $80 / $10 ; $80 bytes
 	db BANK(BallSprite)
-	dw $8440
+	dw vSprites + $440
 
 	dw ClefairySprite
 	db $40 / $10 ; $40 bytes
 	db BANK(ClefairySprite)
-	dw $84C0
+	dw vSprites + $4c0
 
 	dw BirdSprite
 	db $40 / $10 ; $40 bytes
 	db BANK(BirdSprite)
-	dw $8500
+	dw vSprites + $500
 
 	dw SeelSprite + $C0
 	db $40 / $10 ; $40 bytes
 	db BANK(SeelSprite)
-	dw $8540
+	dw vSprites + $540
 
 	dw MonPartySprites
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8580
+	dw vSprites + $580
 
 	dw MonPartySprites + $10
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $85A0
+	dw vSprites + $5a0
 
 	dw MonPartySprites + $20
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $85C0
+	dw vSprites + $5c0
 
 	dw MonPartySprites + $30
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $85E0
+	dw vSprites + $5E0
 
 	dw MonPartySprites + $C0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8600
+	dw vSprites + $600
 
 	dw MonPartySprites + $D0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8620
+	dw vSprites + $620
 
 	dw MonPartySprites + $E0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8640
+	dw vSprites + $640
 
 	dw MonPartySprites + $F0
 	db $10 / $10 ; $10 bytes
 	db BANK(MonPartySprites)
-	dw $8660
+	dw vSprites + $660
 
 	dw MonPartySprites + $140
 	db $40 / $10 ; $40 bytes
 	db BANK(MonPartySprites)
-	dw $8780
+	dw vSprites + $780
 
 Func_71868: ; 71868 (1c:5868)
 	push hl
@@ -323,11 +323,11 @@ Func_71890: ; 71890 (1c:5890)
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
-	ld hl, $8000
+	ld hl, vSprites
 	call Func_718ac
 	pop af
 	add $54
-	ld hl, $8040
+	ld hl, vSprites + $40
 	call Func_718ac
 	xor a
 	ld [wcd5d], a

@@ -8,7 +8,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	set 6, [hl]
 	call DisableLCD
 	ld hl, CircleTile ; $7d88
-	ld de, $9700
+	ld de, vChars2 + $700
 	ld bc, $0010
 	ld a, BANK(CircleTile)
 	call FarCopyData2

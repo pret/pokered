@@ -73,7 +73,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld de, $8b10
+	ld de, vChars1 + $310
 	call LoadMonFrontSprite
 	ld a, $80
 	ld [$ffe1], a

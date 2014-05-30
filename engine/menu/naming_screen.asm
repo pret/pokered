@@ -325,7 +325,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 
 LoadEDTile: ; 675b (1:675b)
 	ld de, ED_Tile
-	ld hl, $8f00
+	ld hl, vFont + $700
 	ld bc, $1
 	jp CopyVideoDataDouble
 

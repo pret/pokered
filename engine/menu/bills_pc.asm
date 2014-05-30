@@ -137,7 +137,7 @@ Func_214e8: ; 214e8 (8:54e8)
 BillsPCMenu:
 	ld a, [wccd3]
 	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld hl, $9780
+	ld hl, vChars2 + $780
 	ld de, PokeballTileGraphics ; $697e
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
 	call CopyVideoData

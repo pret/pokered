@@ -117,7 +117,7 @@ Func_61bc: ; 61bc (1:61bc)
 	ld c,4
 	call DelayFrames
 	ld de,RedSprite ; $4180
-	ld hl,$8000
+	ld hl,vSprites
 	ld bc,(BANK(RedSprite) << 8) | $0C
 	call CopyVideoData
 	ld de,ShrinkPic1
@@ -219,9 +219,9 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	call UncompressSpriteFromDE
 	ld hl,S_SPRITEBUFFER1
 	ld de,$A000
-	ld bc,$0310
+	ld bc,$310
 	call CopyData
-	ld de,$9000
+	ld de,vFrontPic
 	call InterlaceMergeSpriteBuffers
 	pop bc
 	ld a,c

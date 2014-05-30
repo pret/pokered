@@ -19,7 +19,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
-	ld hl, $8040
+	ld hl, vSprites + $40
 	ld de, TownMapCursor ; $4f40
 	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
@@ -143,11 +143,11 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite ; $4d80
-	ld hl, $8040
+	ld hl, vSprites + $40
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
 	ld de, TownMapUpArrow ; $5093
-	ld hl, $8ed0
+	ld hl, vChars1 + $6d0
 	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
 	call Func_71070
@@ -294,12 +294,12 @@ LoadTownMap: ; 7109b (1c:509b)
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics ; $65a8
-	ld de, $9600
+	ld de, vChars2 + $600
 	ld bc, $100
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon ; $56be
-	ld de, $8040
+	ld de, vSprites + $40
 	ld bc, $8
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble

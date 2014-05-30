@@ -55,8 +55,8 @@ ENDC
 
 SGBBorderGraphics: ; 72fe8 (1c:6fe8)
 IF _RED
-	INCBIN "gfx/red/sgbborder.w128.2bpp"
+	INCBIN "gfx/red/sgbborder.2bpp"
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/sgbborder.w128.2bpp"
+	INCBIN "gfx/blue/sgbborder.2bpp"
 ENDC

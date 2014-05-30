@@ -500,7 +500,7 @@ INCLUDE "engine/cable_club.asm"
 
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics ; $7b98
-	ld hl, $9760
+	ld hl, vChars2 + $760
 	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
 	jp CopyVideoData
 
@@ -3044,7 +3044,7 @@ DrawBadges: ; ea03 (3:6a03)
 	db $20, $28, $30, $38, $40, $48, $50, $58
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
-	INCBIN "gfx/badges.w16.2bpp"
+	INCBIN "gfx/badges.2bpp"
 
 Func_ee9e: ; ee9e (3:6e9e)
 	call GetPredefRegisters
@@ -4687,15 +4687,15 @@ SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
 OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
 LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 
-PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.w128.2bpp"
-FontGraphics:                   INCBIN "gfx/font.w128.1bpp"
+PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
+FontGraphics:                   INCBIN "gfx/font.1bpp"
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
 BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
 BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
-NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.h8.2bpp"
-GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.h8.2bpp"
+NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
+GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
@@ -6343,23 +6343,23 @@ INCLUDE "engine/hidden_object_functions18.asm"
 
 SECTION "bank19",ROMX,BANK[$19]
 
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.w128.t2.2bpp"
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
 Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 RedsHouse1_GFX:
-RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.w128.t7.2bpp"
+RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.t7.2bpp"
 RedsHouse1_Block:
 RedsHouse2_Block:  INCBIN "gfx/blocksets/reds_house.bst"
 
-House_GFX:         INCBIN "gfx/tilesets/house.w128.t2.2bpp"
+House_GFX:         INCBIN "gfx/tilesets/house.t2.2bpp"
 House_Block:       INCBIN "gfx/blocksets/house.bst"
-Mansion_GFX:       INCBIN "gfx/tilesets/mansion.w128.t2.2bpp"
+Mansion_GFX:       INCBIN "gfx/tilesets/mansion.t2.2bpp"
 Mansion_Block:     INCBIN "gfx/blocksets/mansion.bst"
-ShipPort_GFX:      INCBIN "gfx/tilesets/ship_port.w128.t2.2bpp"
+ShipPort_GFX:      INCBIN "gfx/tilesets/ship_port.t2.2bpp"
 ShipPort_Block:    INCBIN "gfx/blocksets/ship_port.bst"
-Interior_GFX:      INCBIN "gfx/tilesets/interior.w128.t1.2bpp"
+Interior_GFX:      INCBIN "gfx/tilesets/interior.t1.2bpp"
 Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
-Plateau_GFX:       INCBIN "gfx/tilesets/plateau.w128.t10.2bpp"
+Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t10.2bpp"
 Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 
 
@@ -6369,50 +6369,50 @@ INCLUDE "engine/battle/1a.asm"
 
 Version_GFX:
 IF _RED
-	INCBIN "gfx/red/redgreenversion.h8.1bpp" ; 10 tiles
+	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
 ENDC
 IF _BLUE
-	INCBIN "gfx/blue/blueversion.h8.1bpp" ; 8 tiles
+	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
 ENDC
 
 Dojo_GFX:
-Gym_GFX:           INCBIN "gfx/tilesets/gym.w128.2bpp"
+Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"
 Dojo_Block:
 Gym_Block:         INCBIN "gfx/blocksets/gym.bst"
 
 Mart_GFX:
-Pokecenter_GFX:    INCBIN "gfx/tilesets/pokecenter.w128.2bpp"
+Pokecenter_GFX:    INCBIN "gfx/tilesets/pokecenter.2bpp"
 Mart_Block:
 Pokecenter_Block:  INCBIN "gfx/blocksets/pokecenter.bst"
 
 ForestGate_GFX:
 Museum_GFX:
-Gate_GFX:          INCBIN "gfx/tilesets/gate.w128.t1.2bpp"
+Gate_GFX:          INCBIN "gfx/tilesets/gate.t1.2bpp"
 ForestGate_Block:
 Museum_Block:
 Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
 
-Forest_GFX:        INCBIN "gfx/tilesets/forest.w128.2bpp"
+Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
-Facility_GFX:      INCBIN "gfx/tilesets/facility.w128.2bpp"
+Facility_GFX:      INCBIN "gfx/tilesets/facility.2bpp"
 Facility_Block:    INCBIN "gfx/blocksets/facility.bst"
 
 
 SECTION "bank1B",ROMX,BANK[$1B]
 
-Cemetery_GFX:      INCBIN "gfx/tilesets/cemetery.w128.t4.2bpp"
+Cemetery_GFX:      INCBIN "gfx/tilesets/cemetery.t4.2bpp"
 Cemetery_Block:    INCBIN "gfx/blocksets/cemetery.bst"
-Cavern_GFX:        INCBIN "gfx/tilesets/cavern.w128.t14.2bpp"
+Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
-Lobby_GFX:         INCBIN "gfx/tilesets/lobby.w128.t2.2bpp"
+Lobby_GFX:         INCBIN "gfx/tilesets/lobby.t2.2bpp"
 Lobby_Block:       INCBIN "gfx/blocksets/lobby.bst"
-Ship_GFX:          INCBIN "gfx/tilesets/ship.w128.t6.2bpp"
+Ship_GFX:          INCBIN "gfx/tilesets/ship.t6.2bpp"
 Ship_Block:        INCBIN "gfx/blocksets/ship.bst"
-Lab_GFX:           INCBIN "gfx/tilesets/lab.w128.t4.2bpp"
+Lab_GFX:           INCBIN "gfx/tilesets/lab.t4.2bpp"
 Lab_Block:         INCBIN "gfx/blocksets/lab.bst"
-Club_GFX:          INCBIN "gfx/tilesets/club.w128.t5.2bpp"
+Club_GFX:          INCBIN "gfx/tilesets/club.t5.2bpp"
 Club_Block:        INCBIN "gfx/blocksets/club.bst"
-Underground_GFX:   INCBIN "gfx/tilesets/underground.w128.t7.2bpp"
+Underground_GFX:   INCBIN "gfx/tilesets/underground.t7.2bpp"
 Underground_Block: INCBIN "gfx/blocksets/underground.bst"
 
 

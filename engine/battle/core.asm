@@ -103,7 +103,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	call DisableLCD
 	call LoadFontTilePatterns
 	call Func_3ee58
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld bc, $400
 .asm_3c06f
 	ld a, $7f
@@ -113,7 +113,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	or c
 	jr nz, .asm_3c06f
 	ld hl, wTileMap
-	ld de, $9800
+	ld de, vBGMap0
 	ld b, $12
 .asm_3c07f
 	ld c, $14
@@ -1462,7 +1462,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld [wcf91],a
 	ld [wd0b5],a
 	call GetMonHeader
-	ld de,$9000
+	ld de,vFrontPic
 	call LoadMonFrontSprite
 	ld a,$CF
 	ld [$FFE1],a
@@ -2400,7 +2400,7 @@ Func_3d119: ; 3d119 (f:5119)
 	ld [wcf91], a
 	ld [wd0b5], a
 	call GetMonHeader
-	ld de, $9000
+	ld de, vFrontPic
 	call LoadMonFrontSprite
 	jr .asm_3d187
 .asm_3d182
@@ -6288,17 +6288,17 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld e, a
 	dec b
 	jr nz, .asm_3ecb2
-	ld de, $9310
+	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld a, $a
 	ld [$0], a
 	xor a
 	ld [$4000], a
-	ld hl, $8000
+	ld hl, vSprites
 	ld de, S_SPRITEBUFFER1
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
-	ld c, $31
+	ld c, 7 * 7
 	call CopyVideoData
 	xor a
 	ld [$0], a
@@ -6552,22 +6552,22 @@ Func_3ee5b: ; 3ee5b (f:6e5b)
 	add a
 	jr c, .asm_3ee7c
 	ld hl, BattleHudTiles1 ; $6080
-	ld de, $96d0
+	ld de, vChars2 + $6d0
 	ld bc, $18
 	ld a, BANK(BattleHudTiles1)
 	call FarCopyDataDouble
 	ld hl, BattleHudTiles2 ; $6098
-	ld de, $9730
+	ld de, vChars2 + $730
 	ld bc, $30
 	ld a, BANK(BattleHudTiles2)
 	jp FarCopyDataDouble
 .asm_3ee7c
 	ld de, BattleHudTiles1 ; $6080
-	ld hl, $96d0
+	ld hl, vChars2 + $6d0
 	ld bc, (BANK(BattleHudTiles1) << 8) + $03
 	call CopyVideoDataDouble
 	ld de, BattleHudTiles2 ; $6098
-	ld hl, $9730
+	ld hl, vChars2 + $730
 	ld bc, (BANK(BattleHudTiles2) << 8) + $06
 	jp CopyVideoDataDouble
 
@@ -6751,13 +6751,13 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	push af
 	ld a, MON_GHOST
 	ld [wcf91], a
-	ld de, $9000
+	ld de, vFrontPic
 	call LoadMonFrontSprite ; load ghost sprite
 	pop af
 	ld [wcf91], a
 	jr .spriteLoaded
 .isNoGhost
-	ld de, $9000
+	ld de, vFrontPic
 	call LoadMonFrontSprite ; load mon sprite
 .spriteLoaded
 	xor a
@@ -6825,7 +6825,7 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	ld a, Bank(RedPicFront)
 .loadSprite
 	call UncompressSpriteFromDE
-	ld de, $9000
+	ld de, vFrontPic
 	ld a, $77
 	ld c, a
 	jp LoadUncompressedSpriteData
@@ -6930,9 +6930,9 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	jr nz, .asm_3f0f4
 	ret
 
-; loads back sprite of mon to $8000
-; assumes the corresponding mon header is already loaded
-LoadMonBackSprite: ; 3f103 (f:7103)
+LoadMonBackSprite:
+; Assumes the monster's attributes have
+; been loaded with GetMonHeader.
 	ld a, [wcfd9]
 	ld [wcf91], a
 	FuncCoord 1, 5
@@ -6944,10 +6944,10 @@ LoadMonBackSprite: ; 3f103 (f:7103)
 	call UncompressMonSprite
 	ld a, $3
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
-	ld de, $9310
+	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
-	ld hl, $8000
-	ld de, $9310
+	ld hl, vSprites
+	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ld a, [H_LOADEDROMBANK]
 	ld b, a

@@ -8,7 +8,7 @@ PrintEmotionBubble: ; 17c47 (5:7c47)
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, $8f80
+	ld hl, vChars1 + $780
 	ld bc, (BANK(EmotionBubblesPointerTable) << 8) + $04
 	call CopyVideoData
 	ld a, [wcfcb]
@@ -65,4 +65,4 @@ EmotionBubblesOAM: ; 17cb5 (5:7cb5)
 	db $FA,$00,$FB,$00
 
 EmotionBubbles: ; 17cbd (5:7cbd)
-	INCBIN "gfx/emotion_bubbles.w16.2bpp"
+	INCBIN "gfx/emotion_bubbles.2bpp"

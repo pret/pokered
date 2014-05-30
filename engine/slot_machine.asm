@@ -824,18 +824,18 @@ SlotMachine_37882: ; 37882 (d:7882)
 LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	call DisableLCD
 	ld hl, SlotMachineTiles2
-	ld de, $8000
-	ld bc, $01c0
+	ld de, vChars0
+	ld bc, $1c0
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineTiles1
-	ld de, $9000
-	ld bc, $0250
+	ld de, vChars2
+	ld bc, $250
 	ld a, BANK(SlotMachineTiles1)
 	call FarCopyData2
 	ld hl, SlotMachineTiles2
-	ld de, $9250
-	ld bc, $01c0
+	ld de, vChars2 + $250
+	ld bc, $1c0
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap

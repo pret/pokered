@@ -329,9 +329,9 @@ LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
 	ld [wSpriteStateData1 + 2], a
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	cp FACILITY
-	ld hl, SpinnerArrowTilePointers1 ; $5023
+	ld hl, FacilitySpinnerArrows ; $5023
 	jr z, .asm_44ff6
-	ld hl, SpinnerArrowTilePointers2 ; $5053
+	ld hl, GymSpinnerArrows ; $5053
 .asm_44ff6
 	ld a, [wcd38]
 	bit 0, a
@@ -368,87 +368,41 @@ LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
 	jr nz, .asm_45006
 	ret
 
-SpinnerArrowTilePointers1: ; 45023 (11:5023)
-	dw SpinnerArrowAnimTiles       ;address from within tileset graphics
-	db 1                           ;number of tiles to copy?
-	db BANK(SpinnerArrowAnimTiles) ;bank of tileset graphics
-	dw $9200                       ;where to load in VRAM
+spinner: MACRO
+; \1: source
+; \2: offset (BANK() chokes on literals)
+; \3: length
+; \4: dest
+	dw \1 + \2
+	db \3, BANK(\1)
+	dw \4
+ENDM
 
-	dw SpinnerArrowAnimTiles + $10
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $9210
+FacilitySpinnerArrows:
+FACILITY_SPINNER EQU $20 * $10
+vFacilitySpinner EQU vTileset + FACILITY_SPINNER
 
-	dw SpinnerArrowAnimTiles + $20
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $9300
+	spinner SpinnerArrowAnimTiles, $00, 1, vFacilitySpinner
+	spinner SpinnerArrowAnimTiles, $10, 1, vFacilitySpinner + $10
+	spinner SpinnerArrowAnimTiles, $20, 1, vFacilitySpinner + $100
+	spinner SpinnerArrowAnimTiles, $30, 1, vFacilitySpinner + $110
+	spinner Facility_GFX, FACILITY_SPINNER + $000, 1, vFacilitySpinner
+	spinner Facility_GFX, FACILITY_SPINNER + $010, 1, vFacilitySpinner + $10
+	spinner Facility_GFX, FACILITY_SPINNER + $100, 1, vFacilitySpinner + $100
+	spinner Facility_GFX, FACILITY_SPINNER + $110, 1, vFacilitySpinner + $110
 
-	dw SpinnerArrowAnimTiles + $30
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $9310
+GymSpinnerArrows:
+GYM_SPINNER EQU $3c * $10
+vGymSpinner EQU vTileset + GYM_SPINNER
 
-	dw Facility_GFX + $200
-	db 1
-	db BANK(Facility_GFX)
-	dw $9200
-
-	dw Facility_GFX + $210
-	db 1
-	db BANK(Facility_GFX)
-	dw $9210
-
-	dw Facility_GFX + $300
-	db 1
-	db BANK(Facility_GFX)
-	dw $9300
-
-	dw Facility_GFX + $310
-	db 1
-	db BANK(Facility_GFX)
-	dw $9310
-
-SpinnerArrowTilePointers2: ; 45053 (11:5053)
-	dw SpinnerArrowAnimTiles + $10
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $93C0
-
-	dw SpinnerArrowAnimTiles + $30
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $93D0
-
-	dw SpinnerArrowAnimTiles
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $94C0
-
-	dw SpinnerArrowAnimTiles + $20
-	db 1
-	db BANK(SpinnerArrowAnimTiles)
-	dw $94D0
-
-	dw Gym_GFX + $3C0
-	db 1
-	db BANK(Facility_GFX)
-	dw $93C0
-
-	dw Gym_GFX + $3D0
-	db 1
-	db BANK(Facility_GFX)
-	dw $93D0
-
-	dw Gym_GFX + $4C0
-	db 1
-	db BANK(Facility_GFX)
-	dw $94C0
-
-	dw Gym_GFX + $4D0
-	db 1
-	db BANK(Facility_GFX)
-	dw $94D0
+	spinner SpinnerArrowAnimTiles, $10, 1, vGymSpinner
+	spinner SpinnerArrowAnimTiles, $30, 1, vGymSpinner + $10
+	spinner SpinnerArrowAnimTiles, $00, 1, vGymSpinner + $100
+	spinner SpinnerArrowAnimTiles, $20, 1, vGymSpinner + $110
+	spinner Gym_GFX, GYM_SPINNER + $000, 1, vGymSpinner
+	spinner Gym_GFX, GYM_SPINNER + $010, 1, vGymSpinner + $10
+	spinner Gym_GFX, GYM_SPINNER + $100, 1, vGymSpinner + $100
+	spinner Gym_GFX, GYM_SPINNER + $110, 1, vGymSpinner + $110
 
 SpinnerPlayerFacingDirections: ; 45083 (11:5083)
 ; This isn't the order of the facing directions.  Rather, it's a list of

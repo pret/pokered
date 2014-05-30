@@ -503,7 +503,7 @@ Func_7210b: ; 7210b (1c:610b)
 	call DisableLCD
 	ld a, $e4
 	ld [rBGP], a ; $ff47
-	ld de, $8800
+	ld de, vChars1
 	ld a, [wcf2d]
 	and a
 	jr z, .asm_72122
@@ -513,7 +513,7 @@ Func_7210b: ; 7210b (1c:610b)
 	ld bc, $1000
 	call CopyData
 .asm_72128
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld de, $c
 	ld a, $80
 	ld c, $d

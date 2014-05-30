@@ -545,39 +545,39 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	FuncCoord 1,2
 	ld hl,Coord
 	call TrainerInfo_DrawVerticalLine
-	ld hl,$9070
-	ld de,$9000
-	ld bc,$01c0
+	ld hl,vChars2 + $70
+	ld de,vChars2
+	ld bc,$70 * 4
 	call CopyData
 	ld hl,TrainerInfoTextBoxTileGraphics ; $7b98 ; trainer info text box tile patterns
-	ld de,$9770
+	ld de,vChars2 + $770
 	ld bc,$0080
 	push bc
 	call TrainerInfo_FarCopyData
 	ld hl,BlankLeaderNames ; $7c28
-	ld de,$9600
+	ld de,vChars2 + $600
 	ld bc,$0170
 	call TrainerInfo_FarCopyData
 	pop bc
 	ld hl,BadgeNumbersTileGraphics  ; $7d98 ; badge number tile patterns
-	ld de,$8d80
+	ld de,vChars1 + $580
 	call TrainerInfo_FarCopyData
 	ld hl,GymLeaderFaceAndBadgeTileGraphics  ; $6a9e ; gym leader face and badge tile patterns
-	ld de,$9200
+	ld de,vChars2 + $200
 	ld bc,$0400
 	ld a,$03
 	call FarCopyData2
 	ld hl,TextBoxGraphics ; $6288
 	ld de,$00d0
 	add hl,de ; hl = colon tile pattern
-	ld de,$8d60
+	ld de,vChars1 + $560
 	ld bc,$0010
 	ld a,$04
 	push bc
 	call FarCopyData2
 	pop bc
 	ld hl,TrainerInfoTextBoxTileGraphics + $80  ; $7c18 ; background tile pattern
-	ld de,$8d70
+	ld de,vChars1 + $570
 	call TrainerInfo_FarCopyData
 	call EnableLCD
 	ld hl,wWhichTrade

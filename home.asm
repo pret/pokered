@@ -1032,8 +1032,8 @@ LoadTilesetTilePatternData:: ; 09e8 (0:09e8)
 	ld l,a
 	ld a,[W_TILESETGFXPTR + 1]
 	ld h,a
-	ld de,$9000
-	ld bc,$0600
+	ld de,vTileset
+	ld bc,$600
 	ld a,[W_TILESETBANK]
 	jp FarCopyData2
 
@@ -2165,17 +2165,17 @@ RunMapScript:: ; 101b (0:101b)
 
 LoadWalkingPlayerSpriteGraphics:: ; 104d (0:104d)
 	ld de,RedSprite ; $4180
-	ld hl,$8000
+	ld hl,vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadSurfingPlayerSpriteGraphics:: ; 1055 (0:1055)
 	ld de,SeelSprite
-	ld hl,$8000
+	ld hl,vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadBikePlayerSpriteGraphics:: ; 105d (0:105d)
 	ld de,RedCyclingSprite
-	ld hl,$8000
+	ld hl,vNPCSprites
 
 LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 	push de
@@ -2508,17 +2508,17 @@ LoadMapData:: ; 1241 (0:1241)
 	call LoadCurrentMapView
 ; copy current map view to VRAM
 	ld hl,wTileMap
-	ld de,$9800
-	ld b,$12
+	ld de,vBGMap0
+	ld b,18
 .vramCopyLoop
-	ld c,$14
+	ld c,20
 .vramCopyInnerLoop
 	ld a,[hli]
 	ld [de],a
 	inc e
 	dec c
 	jr nz,.vramCopyInnerLoop
-	ld a,$0c
+	ld a,32 - 20
 	add e
 	ld e,a
 	jr nc,.noCarry
@@ -2749,7 +2749,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ret
 .validDexNumber
 	push hl
-	ld de, $9000
+	ld de, vFrontPic
 	call LoadMonFrontSprite
 	pop hl
 	ld a, [H_LOADEDROMBANK]
@@ -4795,7 +4795,7 @@ UpdateMovingBgTiles::
 	cp 21
 	jr z, .flower
 
-	ld hl, $9140
+	ld hl, vTileset + $14 * $10
 	ld c, $10
 
 	ld a, [wd085]
@@ -4839,7 +4839,7 @@ UpdateMovingBgTiles::
 	jr z, .copy
 	ld hl, FlowerTile3
 .copy
-	ld de, $9030
+	ld de, vTileset + $3 * $10
 	ld c, $10
 .loop
 	ld a, [hli]
@@ -4938,9 +4938,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld a, $ff
 	ld [$ffaa], a
 
-	ld h, $9800 / $100 ; bg map 0
+	ld h, vBGMap0 / $100
 	call ClearBgMap
-	ld h, $9c00 / $100 ; bg map 1
+	ld h, vBGMap1 / $100
 	call ClearBgMap
 
 	ld a, rLCDC_DEFAULT
@@ -8471,13 +8471,13 @@ LoadFontTilePatterns:: ; 3680 (0:3680)
 	jr nz,.lcdEnabled
 .lcdDisabled
 	ld hl,FontGraphics
-	ld de,$8800
+	ld de,vFont
 	ld bc,$400
 	ld a,BANK(FontGraphics)
 	jp FarCopyDataDouble ; if LCD is off, transfer all at once
 .lcdEnabled
 	ld de,FontGraphics
-	ld hl,$8800
+	ld hl,vFont
 	ld bc,(BANK(FontGraphics) << 8 | $80)
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
@@ -8488,13 +8488,13 @@ LoadTextBoxTilePatterns:: ; 36a0 (0:36a0)
 	jr nz,.lcdEnabled
 .lcdDisabled
 	ld hl,TextBoxGraphics
-	ld de,$9600
-	ld bc,$0200
+	ld de,vChars2 + $600
+	ld bc,$200
 	ld a,BANK(TextBoxGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .lcdEnabled
 	ld de,TextBoxGraphics
-	ld hl,$9600
+	ld hl,vChars2 + $600
 	ld bc,(BANK(TextBoxGraphics) << 8 | $20)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
@@ -8505,13 +8505,13 @@ LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
 	jr nz,.lcdEnabled
 .lcdDisabled
 	ld hl,HpBarAndStatusGraphics
-	ld de,$9620
-	ld bc,$01e0
+	ld de,vChars2 + $620
+	ld bc,$1e0
 	ld a,BANK(HpBarAndStatusGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .lcdEnabled
 	ld de,HpBarAndStatusGraphics
-	ld hl,$9620
+	ld hl,vChars2 + $620
 	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
