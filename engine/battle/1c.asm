@@ -198,7 +198,8 @@ GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
 	ret
 
 ; fails to recognize VICTORY_ROAD_2, VICTORY_ROAD_3, all ROCKET_HIDEOUT maps,
-; all MANSION maps, and SEAFOAM_ISLANDS_[2-5] as dungeon maps
+; MANSION_1, SEAFOAM_ISLANDS_[2-5], POWER_PLANT, DIGLETTS_CAVE
+; and SILPH_CO_[9-11]F as dungeon maps
 GetBattleTransitionID_IsDungeonMap: ; 70a19 (1c:4a19)
 	ld a, [W_CURMAP]
 	ld e, a
@@ -253,7 +254,7 @@ DungeonMaps2: ; 70a44 (1c:4a44)
 	db LAVENDER_POKECENTER
 	db LAVENDER_HOUSE_2
 
-	; all SILPH_CO, MANSION, SAFARI_ZONE, and UNKNOWN_DUNGEON maps,
+	; SILPH_CO_[2-8]F, MANSION[2-4], SAFARI_ZONE, and UNKNOWN_DUNGEON maps,
 	; except for SILPH_CO_1F
 	db SILPH_CO_2F
 	db UNKNOWN_DUNGEON_1
