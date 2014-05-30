@@ -425,7 +425,7 @@ IntroNidorinoAnimation7: ; 41950 (10:5950)
 	db $50 ; list terminator
 
 GameFreakIntro: ; 41959 (10:5959)
-	INCBIN "gfx/gamefreak_intro.h8.2bpp"
+	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile
 

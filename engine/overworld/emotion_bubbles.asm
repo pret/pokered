@@ -65,4 +65,4 @@ EmotionBubblesOAM: ; 17cb5 (5:7cb5)
 	db $FA,$00,$FB,$00
 
 EmotionBubbles: ; 17cbd (5:7cbd)
-	INCBIN "gfx/emotion_bubbles.w16.2bpp"
+	INCBIN "gfx/emotion_bubbles.2bpp"
