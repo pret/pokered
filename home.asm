@@ -1861,10 +1861,7 @@ NOT_VBLANKED EQU 1
 	ld a, NOT_VBLANKED
 	ld [H_VBLANKOCCURRED], a
 .halt
-	; XXX this is a hack--rgbasm adds
-	; a nop after halts by default.
-	db $76 ; halt
-
+	halt
 	ld a, [H_VBLANKOCCURRED]
 	and a
 	jr nz, .halt

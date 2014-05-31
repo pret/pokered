@@ -50,7 +50,7 @@ $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
 	@$(gfx) 2bpp $(2bppq);    $(eval 2bppq :=)
 	@$(gfx) 1bpp $(1bppq);    $(eval 1bppq :=)
 	@$(pic) compress $(picq); $(eval picq  :=)
-	rgbasm -o $@ $*.tx
+	rgbasm -h -o $@ $*.tx
 
 
 link    := rgblink -n $*.sym -m $*.map
