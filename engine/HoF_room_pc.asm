@@ -243,7 +243,7 @@ Credits: ; 7418e (1d:418e)
 	call CopyVideoData
 	FuncCoord 4, 8
 	ld hl, Coord
-	ld de, UnnamedText_74229 ; $4229
+	ld de, TheEndTextString
 	call PlaceString
 	FuncCoord 4, 9
 	ld hl, Coord
@@ -251,7 +251,8 @@ Credits: ; 7418e (1d:418e)
 	call PlaceString
 	jp Func_740ba
 
-UnnamedText_74229: ; 74229 (1d:4229)
+TheEndTextString: ; 74229 (1d:4229)
+; "T H E  E N D"
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 

@@ -7,7 +7,7 @@ PokemonTower6Script: ; 60aef (18:4aef)
 	ld [W_POKEMONTOWER6CURSCRIPT], a
 	ret
 
-Func_60b02: ; 60b02 (18:4b02)
+PokemonTower6Script_60b02: ; 60b02 (18:4b02)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER6CURSCRIPT], a
@@ -48,7 +48,7 @@ CoordsData_60b45: ; 60b45 (18:4b45)
 PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
-	jp z, Func_60b02
+	jp z, PokemonTower6Script_60b02
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, [wd72d]
