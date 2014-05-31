@@ -1336,70 +1336,36 @@ AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	ld [H_AUTOBGTRANSFERPORTION],a ; store next portion
 	ld b,6
 
-; unrolled loop and using pop for speed
 TransferBgRows:: ; 1d9e (0:1d9e)
+; unrolled loop and using pop for speed
+
+	rept 20 / 2 - 1
 	pop de
-	ld [hl],e
+	ld [hl], e
 	inc l
-	ld [hl],d
+	ld [hl], d
 	inc l
+	endr
+
 	pop de
-	ld [hl],e
+	ld [hl], e
 	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	ld a,13
+	ld [hl], d
+
+i	ld a, 32 - (20 - 1)
 	add l
-	ld l,a
-	jr nc,.noCarry
+	ld l, a
+	jr nc, .ok
 	inc h
-.noCarry
+.ok
 	dec b
-	jr nz,TransferBgRows
-	ld a,[H_SPTEMP]
-	ld h,a
-	ld a,[H_SPTEMP + 1]
-	ld l,a
-	ld sp,hl ; restore stack pointer
+	jr nz, TransferBgRows
+
+	ld a, [H_SPTEMP]
+	ld h, a
+	ld a, [H_SPTEMP + 1]
+	ld l, a
+	ld sp, hl
 	ret
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
@@ -1590,9 +1556,9 @@ UpdateMovingBgTiles::
 	ld a, [$ffd8]
 	inc a
 	ld [$ffd8], a
-	cp 20
+	cp $14
 	ret c
-	cp 21
+	cp $15
 	jr z, .flower
 
 	ld hl, vTileset + $14 * $10
@@ -1697,7 +1663,7 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld sp, wStack
 
-	ld hl, wc000 ; start of WRAM
+	ld hl, $c000 ; start of WRAM
 	ld bc, $2000 ; size of WRAM
 .loop
 	ld [hl], 0
@@ -1907,102 +1873,78 @@ NOT_VBLANKED EQU 1
 
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
-LoadGBPal:: ; 20ba (0:20ba)
-	ld a,[wd35d] ;tells if cur.map is dark (requires HM5_FLASH?)
-	ld b,a
-	ld hl,GBPalTable_00	;16
-	ld a,l
+LoadGBPal::
+	ld a, [wd35d] ;tells if cur.map is dark (requires HM5_FLASH?)
+	ld b, a
+	ld hl, FadePal4
+	ld a, l
 	sub b
-	ld l,a
-	jr nc,.jr0
+	ld l, a
+	jr nc, .ok
 	dec h
-.jr0
-	ld a,[hli]
-	ld [rBGP],a
-	ld a,[hli]
-	ld [rOBP0],a
-	ld a,[hli]
-	ld [rOBP1],a
+.ok
+	ld a, [hli]
+	ld [rBGP], a
+	ld a, [hli]
+	ld [rOBP0], a
+	ld a, [hli]
+	ld [rOBP1], a
 	ret
 
-GBFadeOut1:: ; 20d1 (0:20d1)
-	ld hl,IncGradGBPalTable_01	;0d
-	ld b,$04
+GBFadeOut1::
+	ld hl, FadePal1
+	ld b, 4
 	jr GBFadeOutCommon
 
-GBFadeOut2:: ; 20d8 (0:20d8)
-	ld hl,IncGradGBPalTable_02	;1c
-	ld b,$03
+GBFadeOut2::
+	ld hl, FadePal6
+	ld b, 3
 
-GBFadeOutCommon:: ; 20dd (0:20dd)
-	ld a,[hli]
-	ld [rBGP],a
-	ld a,[hli]
-	ld [rOBP0],a
-	ld a,[hli]
-	ld [rOBP1],a
-	ld c,8
+GBFadeOutCommon::
+	ld a, [hli]
+	ld [rBGP], a
+	ld a, [hli]
+	ld [rOBP0], a
+	ld a, [hli]
+	ld [rOBP1], a
+	ld c, 8
 	call DelayFrames
 	dec b
-	jr nz,GBFadeOutCommon
+	jr nz, GBFadeOutCommon
 	ret
 
-GBFadeIn1:: ; 20ef (0:20ef)
-	ld hl,DecGradGBPalTable_01	;18
-	ld b,$04
+GBFadeIn1::
+	ld hl, FadePal4 + 2
+	ld b, 4
 	jr GBFadeInCommon
 
-GBFadeIn2:: ; 20f6 (0:20f6)
-	ld hl,DecGradGBPalTable_02	;21
-	ld b,$03
+GBFadeIn2::
+	ld hl, FadePal7 + 2
+	ld b, 3
 
-GBFadeInCommon:: ; 20fb (0:20fb)
-	ld a,[hld]
-	ld [rOBP1],a
-	ld a,[hld]
-	ld [rOBP0],a
-	ld a,[hld]
-	ld [rBGP],a
-	ld c,8
+GBFadeInCommon::
+	ld a, [hld]
+	ld [rOBP1], a
+	ld a, [hld]
+	ld [rOBP0], a
+	ld a, [hld]
+	ld [rBGP], a
+	ld c, 8
 	call DelayFrames
 	dec b
-	jr nz,GBFadeInCommon
+	jr nz, GBFadeInCommon
 	ret
 
-IncGradGBPalTable_01:: ; 210d (0:210d)
-	db %11111111 ;BG Pal
-	db %11111111 ;OBJ Pal 1
-	db %11111111 ;OBJ Pal 2
-	             ;and so on...
-	db %11111110
-	db %11111110
-	db %11111000
+FadePal1:: db %11111111, %11111111, %11111111
+FadePal2:: db %11111110, %11111110, %11111000
+FadePal3:: db %11111001, %11100100, %11100100
+FadePal4:: db %11100100, %11010000, %11100000
+;                rBGP      rOBP0      rOBP1
+FadePal5:: db %11100100, %11010000, %11100000
+FadePal6:: db %10010000, %10000000, %10010000
+FadePal7:: db %01000000, %01000000, %01000000
+FadePal8:: db %00000000, %00000000, %00000000
 
-	db %11111001
-	db %11100100
-	db %11100100
-GBPalTable_00:: ; 2116 (0:2116)
-	db %11100100
-	db %11010000
-DecGradGBPalTable_01:: ; 2118 (0:2118)
-	db %11100000
-	;19
-	db %11100100
-	db %11010000
-	db %11100000
-IncGradGBPalTable_02:: ; 211c (0:211c)
-	db %10010000
-	db %10000000
-	db %10010000
-
-	db %01000000
-	db %01000000
-DecGradGBPalTable_02:: ; 2121 (0:2121)
-	db %01000000
-
-	db %00000000
-	db %00000000
-	db %00000000
 
 Serial:: ; 2125 (0:2125)
 	push af
