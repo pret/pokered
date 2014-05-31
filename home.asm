@@ -908,75 +908,56 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	ld b, a
 	jp CopyVideoData
 
-Underground_Coll:: ; 172f (0:172f)
-	INCBIN "gfx/tilesets/underground.tilecoll"
-Overworld_Coll:: ; 1735 (0:1735)
-	INCBIN "gfx/tilesets/overworld.tilecoll"
+
+Underground_Coll::  INCBIN  "gfx/tilesets/underground.tilecoll"
+Overworld_Coll::    INCBIN  "gfx/tilesets/overworld.tilecoll"
 RedsHouse1_Coll::
-RedsHouse2_Coll:: ; 1749 (0:1749)
-	INCBIN "gfx/tilesets/reds_house.tilecoll"
-Mart_Coll
-Pokecenter_Coll:: ; 1753 (0:1753)
-	INCBIN "gfx/tilesets/pokecenter.tilecoll"
+RedsHouse2_Coll::   INCBIN  "gfx/tilesets/reds_house.tilecoll"
+Mart_Coll::
+Pokecenter_Coll::   INCBIN  "gfx/tilesets/pokecenter.tilecoll"
 Dojo_Coll::
-Gym_Coll:: ; 1759 (0:1759)
-	INCBIN "gfx/tilesets/gym.tilecoll"
-Forest_Coll:: ; 1765 (0:1765)
-	INCBIN "gfx/tilesets/forest.tilecoll"
-House_Coll:: ; 1775 (0:1775)
-	INCBIN "gfx/tilesets/house.tilecoll"
+Gym_Coll::          INCBIN  "gfx/tilesets/gym.tilecoll"
+Forest_Coll::       INCBIN  "gfx/tilesets/forest.tilecoll"
+House_Coll::        INCBIN  "gfx/tilesets/house.tilecoll"
 ForestGate_Coll::
 Museum_Coll::
-Gate_Coll:: ; 177f (0:177f)
-	INCBIN "gfx/tilesets/gate.tilecoll"
-Ship_Coll:: ; 178a (0:178a)
-	INCBIN "gfx/tilesets/ship.tilecoll"
-ShipPort_Coll:: ; 1795 (0:1795)
-	INCBIN "gfx/tilesets/ship_port.tilecoll"
-Cemetery_Coll:: ; 179a (0:179a)
-	INCBIN "gfx/tilesets/cemetery.tilecoll"
-Interior_Coll:: ; 17a2 (0:17a2)
-	INCBIN "gfx/tilesets/interior.tilecoll"
-Cavern_Coll:: ; 17ac (0:17ac)
-	INCBIN "gfx/tilesets/cavern.tilecoll"
-Lobby_Coll:: ; 17b8 (0:17b8)
-	INCBIN "gfx/tilesets/lobby.tilecoll"
-Mansion_Coll:: ; 17c0 (0:17c0)
-	INCBIN "gfx/tilesets/mansion.tilecoll"
-Lab_Coll:: ; 17ca (0:17ca)
-	INCBIN "gfx/tilesets/lab.tilecoll"
-Club_Coll:: ; 17d1 (0:17d1)
-	INCBIN "gfx/tilesets/club.tilecoll"
-Facility_Coll:: ; 17dd (0:17dd)
-	INCBIN "gfx/tilesets/facility.tilecoll"
-Plateau_Coll:: ; 17f0 (0:17f0)
-	INCBIN "gfx/tilesets/plateau.tilecoll"
+Gate_Coll::         INCBIN  "gfx/tilesets/gate.tilecoll"
+Ship_Coll::         INCBIN  "gfx/tilesets/ship.tilecoll"
+ShipPort_Coll::     INCBIN  "gfx/tilesets/ship_port.tilecoll"
+Cemetery_Coll::     INCBIN  "gfx/tilesets/cemetery.tilecoll"
+Interior_Coll::     INCBIN  "gfx/tilesets/interior.tilecoll"
+Cavern_Coll::       INCBIN  "gfx/tilesets/cavern.tilecoll"
+Lobby_Coll::        INCBIN  "gfx/tilesets/lobby.tilecoll"
+Mansion_Coll::      INCBIN  "gfx/tilesets/mansion.tilecoll"
+Lab_Coll::          INCBIN  "gfx/tilesets/lab.tilecoll"
+Club_Coll::         INCBIN  "gfx/tilesets/club.tilecoll"
+Facility_Coll::     INCBIN  "gfx/tilesets/facility.tilecoll"
+Plateau_Coll::      INCBIN  "gfx/tilesets/plateau.tilecoll"
 
-; does the same thing as FarCopyData at 009D
-; only difference is that it uses [$ff8b] instead of [wHPBarMaxHP] for a temp value
-; copy bc bytes of data from a:hl to de
-FarCopyData2:: ; 17f7 (0:17f7)
+
+FarCopyData2::
+; Identical to FarCopyData, but uses $ff8b
+; as temp space instead of wBuffer.
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 	call CopyData
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 	ret
 
-; does a far copy but the source is de and the destination is hl
-; copy bc bytes of data from a:de to hl
-FarCopyData3:: ; 180d (0:180d)
+FarCopyData3::
+; Copy bc bytes from a:de to hl.
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 	push hl
 	push de
 	push de
@@ -988,18 +969,18 @@ FarCopyData3:: ; 180d (0:180d)
 	pop hl
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 	ret
 
-; copies each source byte to the destination twice (next to each other)
-; copy bc source bytes from a:hl to de
-FarCopyDataDouble:: ; 182b (0:182b)
+FarCopyDataDouble::
+; Expand bc bytes of 1bpp image data
+; from a:hl to 2bpp data at de.
 	ld [$ff8b],a
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1012,212 +993,224 @@ FarCopyDataDouble:: ; 182b (0:182b)
 	jr nz,.loop
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC3RomBank],a
 	ret
 
-; copy (c * 16) bytes from b:de to hl during V-blank
-; transfers up to 128 bytes per V-blank
-CopyVideoData:: ; 1848 (0:1848)
-	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
+CopyVideoData::
+; Wait for the next VBlank, then copy c 2bpp
+; tiles from b:de to hl, 8 tiles at a time.
+; This takes c/8 frames.
+
+	ld a, [H_AUTOBGTRANSFERENABLED]
 	push af
-	xor a
-	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
-	ld a,[H_LOADEDROMBANK]
-	ld [$ff8b],a
-	ld a,b
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	ld a,e
-	ld [H_VBCOPYSRC],a
-	ld a,d
-	ld [H_VBCOPYSRC + 1],a
-	ld a,l
-	ld [H_VBCOPYDEST],a
-	ld a,h
-	ld [H_VBCOPYDEST + 1],a
+	xor a ; disable auto-transfer while copying
+	ld [H_AUTOBGTRANSFERENABLED], a
+
+	ld a, [H_LOADEDROMBANK]
+	ld [$ff8b], a
+
+	ld a, b
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+
+	ld a, e
+	ld [H_VBCOPYSRC], a
+	ld a, d
+	ld [H_VBCOPYSRC + 1], a
+
+	ld a, l
+	ld [H_VBCOPYDEST], a
+	ld a, h
+	ld [H_VBCOPYDEST + 1], a
+
 .loop
-	ld a,c
-	cp a,8 ; are there more than 128 bytes left to copy?
-	jr nc,.copyMaxSize ; only copy up to 128 bytes at a time
-.copyRemainder
-	ld [H_VBCOPYSIZE],a
-	call DelayFrame ; wait for V-blank handler to perform the copy
-	ld a,[$ff8b]
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld a, c
+	cp 8
+	jr nc, .keepgoing
+
+.done
+	ld [H_VBCOPYSIZE], a
+	call DelayFrame
+	ld a, [$ff8b]
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
-.copyMaxSize
-	ld a,8 ; 128 bytes
-	ld [H_VBCOPYSIZE],a
-	call DelayFrame ; wait for V-blank handler to perform the copy
-	ld a,c
-	sub a,8
-	ld c,a
+
+.keepgoing
+	ld a, 8
+	ld [H_VBCOPYSIZE], a
+	call DelayFrame
+	ld a, c
+	sub 8
+	ld c, a
 	jr .loop
 
-; copy (c * 8) source bytes from b:de to hl during V-blank
-; copies each source byte to the destination twice (next to each other)
-; transfers up to 64 source bytes per V-blank
-CopyVideoDataDouble:: ; 1886 (0:1886)
-	ld a,[H_AUTOBGTRANSFERENABLED] ; save auto-transfer enabled flag
+CopyVideoDataDouble::
+; Wait for the next VBlank, then copy c 1bpp
+; tiles from b:de to hl, 8 tiles at a time.
+; This takes c/8 frames.
+	ld a, [H_AUTOBGTRANSFERENABLED]
 	push af
-	xor a
-	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer while copying
-	ld a,[H_LOADEDROMBANK]
-	ld [$ff8b],a
-	ld a,b
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	ld a,e
-	ld [H_VBCOPYDOUBLESRC],a
-	ld a,d
-	ld [H_VBCOPYDOUBLESRC + 1],a
-	ld a,l
-	ld [H_VBCOPYDOUBLEDEST],a
-	ld a,h
-	ld [H_VBCOPYDOUBLEDEST + 1],a
+	xor a ; disable auto-transfer while copying
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld a, [H_LOADEDROMBANK]
+	ld [$ff8b], a
+
+	ld a, b
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
+
+	ld a, e
+	ld [H_VBCOPYDOUBLESRC], a
+	ld a, d
+	ld [H_VBCOPYDOUBLESRC + 1], a
+
+	ld a, l
+	ld [H_VBCOPYDOUBLEDEST], a
+	ld a, h
+	ld [H_VBCOPYDOUBLEDEST + 1], a
+
 .loop
-	ld a,c
-	cp a,8 ; are there more than 64 source bytes left to copy?
-	jr nc,.copyMaxSize ; only copy up to 64 source bytes at a time
-.copyRemainder
-	ld [H_VBCOPYDOUBLESIZE],a
-	call DelayFrame ; wait for V-blank handler to perform the copy
-	ld a,[$ff8b]
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld a, c
+	cp 8
+	jr nc, .keepgoing
+
+.done
+	ld [H_VBCOPYDOUBLESIZE], a
+	call DelayFrame
+	ld a, [$ff8b]
+	ld [H_LOADEDROMBANK], a
+	ld [MBC3RomBank], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED],a ; restore original auto-transfer enabled flag
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
-.copyMaxSize
-	ld a,8 ; 64 source bytes
-	ld [H_VBCOPYDOUBLESIZE],a
-	call DelayFrame ; wait for V-blank handler to perform the copy
-	ld a,c
-	sub a,8
-	ld c,a
+
+.keepgoing
+	ld a, 8
+	ld [H_VBCOPYDOUBLESIZE], a
+	call DelayFrame
+	ld a, c
+	sub 8
+	ld c, a
 	jr .loop
 
-; clears an area of the screen
-; INPUT:
-; hl = address of upper left corner of the area
-; b = height
-; c = width
-ClearScreenArea:: ; 18c4 (0:18c4)
-	ld   a,$7F ; blank tile
-	ld   de,20 ; screen width
-.loop
+ClearScreenArea::
+; Clear tilemap area cxb at hl.
+	ld a, $7f ; blank tile
+	ld de, 20 ; screen width
+.y
 	push hl
 	push bc
-.innerLoop
-	ld [hli],a
+.x
+	ld [hli], a
 	dec c
-	jr nz,.innerLoop
+	jr nz, .x
 	pop bc
 	pop hl
-	add hl,de
+	add hl, de
 	dec b
-	jr nz,.loop
+	jr nz, .y
 	ret
 
-; copies the screen tile buffer from WRAM to VRAM
-; copying is done in 3 chunks of 6 rows each
-; b: high byte of VRAM destination address ($98 or $9c for window tile map 0 or 1 resp.)
-CopyScreenTileBufferToVRAM:: ; 18d6 (0:18d6)
-	ld c, $6
-	ld hl, $0000
-	ld de, wTileMap
-	call InitScreenTileBufferTransferParameters
+CopyScreenTileBufferToVRAM::
+; Copy wTileMap to the BG Map starting at b * $100.
+; This is done in thirds of 6 rows, so it takes 3 frames.
+
+	ld c, 6
+
+	ld hl, $600 * 0
+	ld de, wTileMap + 20 * 6 * 0
+	call .setup
 	call DelayFrame
-	ld hl, $600
-	ld de, wTileMap + 20 * 6
-	call InitScreenTileBufferTransferParameters
+
+	ld hl, $600 * 1
+	ld de, wTileMap + 20 * 6 * 1
+	call .setup
 	call DelayFrame
-	ld hl, $c00
-	ld de, wTileMap + 20 * 12
-	call InitScreenTileBufferTransferParameters
+
+	ld hl, $600 * 2
+	ld de, wTileMap + 20 * 6 * 2
+	call .setup
 	jp DelayFrame
 
-InitScreenTileBufferTransferParameters:: ; 18fc (0:18fc)
+.setup
 	ld a, d
 	ld [H_VBCOPYBGSRC+1], a
 	call GetRowColAddressBgMap
 	ld a, l
-	ld [H_VBCOPYBGDEST], a ; $ffc3
+	ld [H_VBCOPYBGDEST], a
 	ld a, h
 	ld [H_VBCOPYBGDEST+1], a
 	ld a, c
-	ld [H_VBCOPYBGNUMROWS], a ; $ffc5
+	ld [H_VBCOPYBGNUMROWS], a
 	ld a, e
-	ld [H_VBCOPYBGSRC], a ; $ffc1
+	ld [H_VBCOPYBGSRC], a
 	ret
 
-ClearScreen:: ; 190f (0:190f)
-; clears all tiles in the tilemap,
-; then wait three frames
-	ld bc,$0168 ; tilemap size
+ClearScreen::
+; Clear wTileMap, then wait
+; for the bg map to update.
+	ld bc, 20 * 18
 	inc b
-	ld hl,wTileMap ; TILEMAP_START
-	ld a,$7F    ; $7F is blank tile
+	ld hl, wTileMap
+	ld a, $7f
 .loop
-	ld [hli],a
+	ld [hli], a
 	dec c
-	jr nz,.loop
+	jr nz, .loop
 	dec b
-	jr nz,.loop
+	jr nz, .loop
 	jp Delay3
 
-TextBoxBorder:: ; 1922 (0:1922)
-; draw a text box
-; upper-left corner at coordinates hl
-; height b
-; width c
 
-	; first row
+TextBoxBorder::
+; Draw a cxb text box at hl.
+
+	; top row
 	push hl
-	ld a,"┌"
-	ld [hli],a
-	inc a    ; horizontal border ─
+	ld a, "┌"
+	ld [hli], a
+	inc a ; ─
 	call NPlaceChar
-	inc a    ; upper-right border ┐
-	ld [hl],a
+	inc a ; ┐
+	ld [hl], a
+	pop hl
+
+	ld de, 20
+	add hl, de
 
 	; middle rows
-	pop hl
-	ld de,20
-	add hl,de ; skip the top row
-
-.PlaceRow
+.next
 	push hl
-	ld a,"│"
+	ld a, "│"
 	ld [hli],a
-	ld a," "
+	ld a, " "
 	call NPlaceChar
-	ld [hl],"│"
-
+	ld [hl], "│"
 	pop hl
-	ld de,20
-	add hl,de ; move to next row
+
+	ld de, 20
+	add hl, de
 	dec b
-	jr nz,.PlaceRow
+	jr nz, .next
 
 	; bottom row
-	ld a,"└"
-	ld [hli],a
-	ld a,"─"
+	ld a, "└"
+	ld [hli], a
+	ld a, "─"
 	call NPlaceChar
-	ld [hl],"┘"
+	ld [hl], "┘"
 	ret
-;
-NPlaceChar:: ; 194f (0:194f)
-; place a row of width c of identical characters
-	ld d,c
+
+NPlaceChar::
+; Place char a c times.
+	ld d, c
 .loop
-	ld [hli],a
+	ld [hli], a
 	dec d
-	jr nz,.loop
+	jr nz, .loop
 	ret
 
 PlaceString:: ; 1955 (0:1955)
