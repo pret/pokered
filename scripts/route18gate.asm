@@ -13,7 +13,7 @@ Route18GateScriptPointers: ; 49887 (12:5887)
 	dw Route18GateScript3
 
 Route18GateScript0: ; 4988f (12:588f)
-	call Func_49755
+	call Route16GateScript_49755
 	ret nz
 	ld hl, CoordsData_498cc
 	call ArePlayerCoordsInArray
@@ -88,7 +88,7 @@ Route18GateTextPointers: ; 4990d (12:590d)
 
 Route18GateText1: ; 49911 (12:5911)
 	db $08 ; asm
-	call Func_49755
+	call Route16GateScript_49755
 	jr z, .asm_3c84d ; 0x49915
 	ld hl, Route18GateText_4992d
 	call PrintText

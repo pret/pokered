@@ -7,7 +7,7 @@ Route16Script: ; 59933 (16:5933)
 	ld [W_ROUTE16CURSCRIPT], a
 	ret
 
-Func_59946: ; 59946 (16:5946)
+Route16Script_59946: ; 59946 (16:5946)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROUTE16CURSCRIPT], a
@@ -47,7 +47,7 @@ Route16Script0: ; 59959 (16:5959)
 Route16Script3: ; 5998f (16:598f)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
-	jp z, Func_59946
+	jp z, Route16Script_59946
 	call UpdateSprites
 	ld a, [wcf0b]
 	cp $2

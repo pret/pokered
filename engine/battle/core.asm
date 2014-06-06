@@ -6213,7 +6213,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 .asm_3ec4d
 	call DelayFrame
 	ld a, $30
-	call Predef ; indirect jump to Func_7096d (7096d (1c:496d))
+	call Predef ; indirect jump to BattleTransition (7096d (1c:496d))
 	callab Func_3ee58
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba

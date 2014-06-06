@@ -113,11 +113,12 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_5a5f),Func_5a5f
 	dbw BANK(DrawBadges), DrawBadges
 	dbw BANK(Func_410f3),Func_410f3
-	dbw BANK(Func_7096d),Func_7096d
+	dbw BANK(BattleTransition),BattleTransition
 	dbw BANK(Func_79dda),Func_79dda
 	dbw BANK(PlayIntro),PlayIntro
 	dbw BANK(Func_79869),Func_79869
-	dbw BANK(Func_70b5d),Func_70b5d
+	db BANK(BattleTransition_FlashScreen_)
+	dw BattleTransition_FlashScreen_
 	dbw BANK(Func_c586),Func_c586
 	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
 	dbw BANK(StatusScreen2),StatusScreen2 ; 38

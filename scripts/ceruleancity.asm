@@ -291,7 +291,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 .asm_4ca20 ; 0x196ad
 	ld hl, CeruleanCityText_196f3
 	call PrintText
-	ld bc, $e401
+	ld bc, (TM_28 << 8) + 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM28NoRoomText
