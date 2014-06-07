@@ -1,142 +1,298 @@
+ATTR_BLK: MACRO
+; This is a command macro.
+; Use ATTR_BLK_DATA for data sets.
+	db ($4 << 3) + ((\1 * 6) / 16 + 1)
+	db \1
+ENDM
+ATTR_BLK_DATA: MACRO
+	db \1 ; which regions are affected
+	db \2 + (\3 << 2) + (\4 << 4) ; palette for each region
+	db \5, \6, \7, \8 ; x1, y1, x2, y2
+ENDM
+
+PAL_SET: MACRO
+	db ($a << 3) + 1
+	dw \1, \2, \3, \4
+	ds 7
+ENDM
+
+PAL_TRN: MACRO
+	db ($b<< 3) + 1
+	ds 15
+ENDM
+
+MLT_REQ: MACRO
+	db ($11 << 3) + 1
+	db \1 - 1
+	ds 14
+ENDM
+
+CHR_TRN: MACRO
+	db ($13 << 3) + 1
+	db \1 + (\2 << 1)
+	ds 14
+ENDM
+
+PCT_TRN: MACRO
+	db ($14 << 3) + 1
+	ds 15
+ENDM
+
+MASK_EN: MACRO
+	db ($17 << 3) + 1
+	db \1
+	ds 14
+ENDM
+
+DATA_SND: MACRO
+	db ($f << 3) + 1
+	dw \1 ; address
+	db \2 ; bank
+	db \3 ; length (1-11)
+ENDM
+
 BlkPacket_WholeScreen: ; 7219e (1c:619e)
-	db $21,$01,$03,$00,$00,$00,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00
+	ATTR_BLK 1
+	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,17
+	ds 8
+
 	db $03,$00,$00,$13,$11,$00,$00
 
 BlkPacket_Battle: ; 721b5 (1c:61b5)
-	db $22,$05,$07,$0a,$00,$0c,$13,$11,$03,$05,$01,$00,$0a,$03,$03,$00
-	db $0a,$07,$13,$0a,$03,$0a,$00,$04,$08,$0b,$03,$0f,$0b,$00,$13,$06
-	db $03,$00,$00,$13,$0b,$00,$03,$00,$0c,$13,$11,$02,$03,$01,$00,$0a
-	db $03,$01,$03,$0a,$08,$13,$0a,$00,$03,$00,$04,$08,$0b,$02,$03,$0b
-	db $00,$13,$07,$03,$00
+	ATTR_BLK 5
+	ATTR_BLK_DATA %111, 2,2,0, 00,12, 19,17
+	ATTR_BLK_DATA %011, 1,1,0, 01,00, 10,03
+	ATTR_BLK_DATA %011, 0,0,0, 10,07, 19,10
+	ATTR_BLK_DATA %011, 2,2,0, 00,04, 08,11
+	ATTR_BLK_DATA %011, 3,3,0, 11,00, 19,06
+
+	db $03,$00,$00,$13,$0b,$00
+	db $03,$00,$0c,$13,$11,$02
+	db $03,$01,$00,$0a,$03,$01
+	db $03,$0a,$08,$13,$0a,$00
+	db $03,$00,$04,$08,$0b,$02
+	db $03,$0b,$00,$13,$07,$03
+	db $00
 
 BlkPacket_StatusScreen: ; 721fa (1c:61fa)
-	db $21,$01,$07,$05,$01,$00,$07,$06,$00,$00,$00,$00,$00,$00,$00,$00
-	db $02,$00,$00,$11,$00,$03,$01,$00,$07,$06,$01,$03,$01,$07,$13,$11
-	db $00,$03,$08,$00,$13,$06,$00,$00
+	ATTR_BLK 1
+	ATTR_BLK_DATA %111, 1,1,0, 01,00, 07,06
+	ds 8
+
+	db $02,$00,$00,$11,$00,$03
+	db $01,$00,$07,$06,$01,$03
+	db $01,$07,$13,$11,$00,$03
+	db $08,$00,$13,$06,$00,$00
 
 BlkPacket_Pokedex: ; 72222 (1c:6222)
-	db $21,$01,$07,$05,$01,$01,$08,$08,$00,$00,$00,$00,$00,$00,$00,$00
-	db $02,$00,$00,$11,$00,$01,$00,$01,$13,$00,$03,$01,$01,$08,$08,$01
-	db $03,$01,$09,$08,$11,$00,$03,$09,$01,$13,$11,$00,$00
+	ATTR_BLK 1
+	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08
+	ds 8
+
+	db $02,$00,$00,$11,$00,$01
+	db $00,$01,$13,$00,$03,$01
+	db $01,$08,$08,$01,$03,$01
+	db $09,$08,$11,$00,$03,$09
+	db $01,$13,$11,$00,$00
 
 BlkPacket_Slots: ; 7224f (1c:624f)
-	db $22,$05,$03,$05,$00,$00,$13,$0b,$03,$0a,$00,$04,$13,$09,$02,$0f
-	db $00,$06,$13,$07,$03,$00,$04,$04,$0f,$09,$03,$00,$00,$0c,$13,$11
-	db $03,$00,$00,$13,$0b,$01,$03,$00,$04,$13,$09,$02,$03,$00,$06,$13
-	db $07,$03,$03,$04,$04,$0f,$09,$00,$03,$00,$0c,$13,$11,$00,$00
+	ATTR_BLK 5
+	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,11
+	ATTR_BLK_DATA %011, 2,2,0, 00,04, 19,09
+	ATTR_BLK_DATA %010, 3,3,0, 00,06, 19,07
+	ATTR_BLK_DATA %011, 0,0,0, 04,04, 15,09
+	ATTR_BLK_DATA %011, 0,0,0, 00,12, 19,17
+
+	db $03,$00,$00,$13,$0b,$01
+	db $03,$00,$04,$13,$09,$02
+	db $03,$00,$06,$13,$07,$03
+	db $03,$04,$04,$0f,$09,$00
+	db $03,$00,$0c,$13,$11,$00
+	db $00
 
 BlkPacket_Titlescreen: ; 7228e (1c:628e)
-	db $22,$03,$03,$00,$00,$00,$13,$07,$02,$05,$00,$08,$13,$09,$03,$0a
-	db $00,$0a,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	db $03,$00,$00,$13,$07,$00,$03,$00,$08,$13,$09,$01,$03,$00,$0a,$13
-	db $11,$02,$00
+	ATTR_BLK 3
+	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07
+	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09
+	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17
+	ds 12
+
+	db $03,$00,$00,$13,$07,$00
+	db $03,$00,$08,$13,$09,$01
+	db $03,$00,$0a,$13,$11,$02
+	db $00
 
 BlkPacket_NidorinoIntro: ; 722c1 (1c:62c1)
-	db $22,$03,$03,$05,$00,$00,$13,$03,$03,$00,$00,$04,$13,$0d,$03,$05
-	db $00,$0e,$13,$11,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	db $03,$00,$00,$13,$03,$01,$03,$00,$04,$13,$0d,$00,$03,$00,$0e,$13
-	db $11,$01,$00
+	ATTR_BLK 3
+	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,03
+	ATTR_BLK_DATA %011, 0,0,0, 00,04, 19,13
+	ATTR_BLK_DATA %011, 1,1,0, 00,14, 19,17
+	ds 12
+
+	db $03,$00,$00,$13,$03,$01
+	db $03,$00,$04,$13,$0d,$00
+	db $03,$00,$0e,$13,$11,$01
+	db $00
 
 BlkPacket_PartyMenu: ; 722f4 (1c:62f4)
-	db $23,$07,$06,$10,$01,$00,$02,$0c,$02,$00,$05,$01,$0b,$01,$02,$00
-	db $05,$03,$0b,$03,$02,$00,$05,$05,$0b,$05,$02,$00,$05,$07,$0b,$07
-	db $02,$00,$05,$09,$0b,$09,$02,$00,$05,$0b,$0b,$0b,$00,$00,$00,$00
-	db $02,$00,$00,$11,$01,$03,$01,$00,$02,$0c,$00,$03,$01,$0d,$02,$11
-	db $01,$03,$03,$00,$13,$11,$01,$03,$0c,$00,$12,$01,$00,$03,$0c,$02
-	db $12,$03,$00,$03,$0c,$04,$12,$05,$00,$03,$0c,$06,$12,$07,$00,$03
-	db $0c,$08,$12,$09,$00,$03,$0c,$0a,$12,$0b,$00,$00
+	ATTR_BLK 7
+	ATTR_BLK_DATA %110, 0,0,1, 01,00, 02,12
+	ATTR_BLK_DATA %010, 0,0,0, 05,01, 11,01
+	ATTR_BLK_DATA %010, 0,0,0, 05,03, 11,03
+	ATTR_BLK_DATA %010, 0,0,0, 05,05, 11,05
+	ATTR_BLK_DATA %010, 0,0,0, 05,07, 11,07
+	ATTR_BLK_DATA %010, 0,0,0, 05,09, 11,09
+	ATTR_BLK_DATA %010, 0,0,0, 05,11, 11,11
+	ds 4
+
+	db $02,$00,$00,$11,$01,$03
+	db $01,$00,$02,$0c,$00,$03
+	db $01,$0d,$02,$11,$01,$03
+	db $03,$00,$13,$11,$01,$03
+	db $0c,$00,$12,$01,$00,$03
+	db $0c,$02,$12,$03,$00,$03
+	db $0c,$04,$12,$05,$00,$03
+	db $0c,$06,$12,$07,$00,$03
+	db $0c,$08,$12,$09,$00,$03
+	db $0c,$0a,$12,$0b,$00,$00
 
 BlkPacket_TrainerCard: ; 72360 (1c:6360)
-	db $24,$0a,$02,$00,$03,$0c,$04,$0d,$02,$05,$07,$0c,$08,$0d,$02,$0f
-	db $0b,$0c,$0c,$0d,$02,$0a,$10,$0b,$11,$0c,$02,$05,$0e,$0d,$0f,$0e
-	db $02,$0f,$10,$0d,$11,$0e,$02,$0a,$03,$0f,$04,$10,$02,$0f,$07,$0f
-	db $08,$10,$02,$0a,$0b,$0f,$0c,$10,$02,$05,$0f,$0f,$10,$10,$00,$00
-	db $03,$03,$0c,$04,$0d,$00,$03,$07,$0c,$08,$0d,$01,$03,$0b,$0c,$0c
-	db $0d,$03,$03,$10,$0b,$11,$0c,$02,$03,$0e,$0d,$0f,$0e,$01,$03,$10
-	db $0d,$11,$0e,$03,$03,$03,$0f,$04,$10,$02,$03,$07,$0f,$08,$10,$03
-	db $03,$0b,$0f,$0c,$10,$02,$03,$0f,$0f,$10,$10,$01,$00
+	ATTR_BLK 10
+	ATTR_BLK_DATA %010, 0,0,0, 03,12, 04,13
+	ATTR_BLK_DATA %010, 1,1,0, 07,12, 08,13
+	ATTR_BLK_DATA %010, 3,3,0, 11,12, 12,13
+	ATTR_BLK_DATA %010, 2,2,0, 16,11, 17,12
+	ATTR_BLK_DATA %010, 1,1,0, 14,13, 15,14
+	ATTR_BLK_DATA %010, 3,3,0, 16,13, 17,14
+	ATTR_BLK_DATA %010, 2,2,0, 03,15, 04,16
+	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16
+	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16
+	ATTR_BLK_DATA %010, 1,1,0, 15,15, 16,16
+	ds 2
+
+	db $03,$03,$0c,$04,$0d,$00
+	db $03,$07,$0c,$08,$0d,$01
+	db $03,$0b,$0c,$0c,$0d,$03
+	db $03,$10,$0b,$11,$0c,$02
+	db $03,$0e,$0d,$0f,$0e,$01
+	db $03,$10,$0d,$11,$0e,$03
+	db $03,$03,$0f,$04,$10,$02
+	db $03,$07,$0f,$08,$10,$03
+	db $03,$0b,$0f,$0c,$10,$02
+	db $03,$0f,$0f,$10,$10,$01
+	db $00
 
 BlkPacket_GameFreakIntro: ; 723dd (1c:63dd)
-	db $22,$03,$07,$05,$05,$0b,$07,$0d,$02,$0a,$08,$0b,$09,$0d,$03,$0f
-	db $0c,$0b,$0e,$0d,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	db $03,$00,$00,$13,$0a,$00,$03,$00,$0b,$04,$0d,$00,$03,$05,$0b,$07
-	db $0d,$01,$03,$08,$0b,$13,$0d,$00,$03,$00,$0e,$13,$11,$00,$03,$08
-	db $0b,$09,$0d,$02,$03,$0c,$0b,$0e,$0d,$03,$00
+	ATTR_BLK 3
+	ATTR_BLK_DATA %111, 1,1,0, 05,11, 07,13
+	ATTR_BLK_DATA %010, 2,2,0, 08,11, 09,13
+	ATTR_BLK_DATA %011, 3,3,0, 12,11, 14,13
+	ds 12
 
-PalPacket_Empty: ; 72428 (1c:6428)
-	db $51,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$00,$00,$13,$0a,$00
+	db $03,$00,$0b,$04,$0d,$00
+	db $03,$05,$0b,$07,$0d,$01
+	db $03,$08,$0b,$13,$0d,$00
+	db $03,$00,$0e,$13,$11,$00
+	db $03,$08,$0b,$09,$0d,$02
+	db $03,$0c,$0b,$0e,$0d,$03
+	db $00
 
-PalPacket_PartyMenu: ; 72438 (1c:6438)
-	db $51,PAL_MEWMON,$00,PAL_GREENBAR,$00,PAL_YELLOWBAR,$00,PAL_REDBAR,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_Black: ; 72448 (1c:6448)
-	db $51,PAL_BLACK,$00,PAL_BLACK,$00,PAL_BLACK,$00,PAL_BLACK,$00,$00,$00,$00,$00,$00,$00,$00
+PalPacket_Empty:          PAL_SET 0, 0, 0, 0
+PalPacket_PartyMenu:      PAL_SET PAL_MEWMON, PAL_GREENBAR, PAL_YELLOWBAR, PAL_REDBAR
+PalPacket_Black:          PAL_SET PAL_BLACK, PAL_BLACK, PAL_BLACK, PAL_BLACK
+PalPacket_TownMap:        PAL_SET PAL_TOWNMAP, 0, 0, 0
+PalPacket_Pokedex:        PAL_SET PAL_BROWNMON, 0, 0, 0
+PalPacket_Slots:          PAL_SET PAL_SLOTS1, PAL_SLOTS2, PAL_SLOTS3, PAL_SLOTS4
+PalPacket_Titlescreen:    PAL_SET PAL_LOGO2, PAL_LOGO1, PAL_MEWMON, PAL_PURPLEMON
+PalPacket_TrainerCard:    PAL_SET PAL_MEWMON, PAL_BADGE, PAL_REDMON, PAL_YELLOWMON
+PalPacket_Generic:        PAL_SET PAL_MEWMON, 0, 0, 0
+PalPacket_NidorinoIntro:  PAL_SET PAL_PURPLEMON, PAL_BLACK, 0, 0
+PalPacket_GameFreakIntro: PAL_SET PAL_GAMEFREAK, PAL_REDMON, PAL_VIRIDIAN, PAL_BLUEMON
 
-PalPacket_TownMap: ; 72458 (1c:6458)
-	db $51,PAL_TOWNMAP,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+PalTrnPacket:  PAL_TRN
+MltReq1Packet: MLT_REQ 1
+MltReq2Packet: MLT_REQ 2
+ChrTrnPacket:  CHR_TRN 0, 0
+PctTrnPacket:  PCT_TRN
 
-PalPacket_Pokedex: ; 72468 (1c:6468)
-	db $51,PAL_BROWNMON,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+MaskEnFreezePacket: MASK_EN 1
+MaskEnCancelPacket: MASK_EN 0
 
-PalPacket_Slots: ; 72478 (1c:6478)
-	db $51,PAL_SLOTS1,$00,PAL_SLOTS2,$00,PAL_SLOTS3,$00,PAL_SLOTS4,$00,$00,$00,$00,$00,$00,$00,$00
 
-PalPacket_Titlescreen: ; 72488 (1c:6488)
-	db $51,PAL_LOGO2,$00,PAL_LOGO1,$00,PAL_MEWMON,$00,PAL_PURPLEMON,$00,$00,$00,$00,$00,$00,$00,$00
+; These are DATA_SND packets containing SNES code.
+; This set of packets is found in several Japanese SGB-compatible titles.
+; It appears to be part of NCL's SGB devkit.
 
-PalPacket_TrainerCard: ; 72498 (1c:6498)
-	db $51,PAL_MEWMON,$00,PAL_BADGE,$00,PAL_REDMON,$00,PAL_YELLOWMON,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72548: DATA_SND $85d, $0, 11
+	db  $8C                 ; cpx #$8c (2)
+	db  $D0, $F4            ; bne -$0c
+	db  $60                 ; rts
+	ds  7
 
-PalPacket_Generic: ; 724a8 (1c:64a8)
-	db $51,PAL_MEWMON,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72558: DATA_SND $852, $0, 11
+	db  $A9, $E7            ; lda #$e7
+	db  $9F, $01, $C0, $7E  ; sta $7ec001, x
+	db  $E8                 ; inx
+	db  $E8                 ; inx
+	db  $E8                 ; inx
+	db  $E8                 ; inx
+	db  $E0                 ; cpx #$8c (1)
 
-PalPacket_NidorinoIntro: ; 724b8 (1c:64b8)
-	db $51,PAL_PURPLEMON,$00,PAL_BLACK,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72568: DATA_SND $847, $0, 11
+	db  $C4                 ; cmp #$c4 (2)
+	db  $D0, $16            ; bne +$16
+	db  $A5                 ; lda dp
+	db  $CB                 ; wai
+	db  $C9, $05            ; cmp #$05
+	db  $D0, $10            ; bne +$10
+	db  $A2, $28            ; ldx #$28
 
-PalPacket_GameFreakIntro: ; 724c8 (1c:64c8)
-	db $51,PAL_GAMEFREAK,$00,PAL_REDMON,$00,PAL_VIRIDIAN,$00,PAL_BLUEMON,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72578: DATA_SND $83c, $0, 11
+	db  $F0, $12            ; beq +$12
+	db  $A5                 ; lda dp
+	db  $C9, $C9            ; cmp #$c9
+	db  $C8                 ; iny
+	db  $D0, $1C            ; bne +$1c
+	db  $A5                 ; lda dp
+	db  $CA                 ; dex
+	db  $C9                 ; cmp #$c4 (1)
 
-PalPacket_724d8: ; 724d8 (1c:64d8)
-	db $59,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72588: DATA_SND $831, $0, 11
+	dbw $0C, $CAA5          ; tsb $caa5
+	db  $C9, $7E            ; cmp #$7e
+	db  $D0, $06            ; bne +$06
+	db  $A5                 ; lda dp
+	db  $CB                 ; wai
+	db  $C9, $7E            ; cmp #$7e
 
-PalPacket_724e8: ; 724e8 (1c:64e8)
-	db $89,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_72598: DATA_SND $826, $0, 11
+	db  $39                 ; bne +$39 (2)
+	dbw $CD, $C48           ; cmp $c48
+	db  $D0, $34            ; bne +$34
+	db  $A5                 ; lda dp
+	db  $C9, $C9            ; cmp #$c9
+	db  $80, $D0            ; bra -$30
 
-PalPacket_724f8: ; 724f8 (1c:64f8)
-	db $89,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+DataSnd_725a8: DATA_SND $81b, $0, 11
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	                        ; $820:
+	db  $A9,$01             ; lda #01
+	dbw $CD,$C4F            ; cmp $c4f
+	db  $D0                 ; bne +$39 (1)
 
-PalPacket_72508: ; 72508 (1c:6508)
-	db $99,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-
-PalPacket_72518: ; 72518 (1c:6518)
-	db $A1,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-
-PalPacket_72528: ; 72528 (1c:6528)
-	db $B9,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-
-PalPacket_72538: ; 72538 (1c:6538)
-	db $B9,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-
-PalPacket_72548: ; 72548 (1c:6548)
-	db $79,$5D,$08,$00,$0B,$8C,$D0,$F4,$60,$00,$00,$00,$00,$00,$00,$00
-
-PalPacket_72558: ; 72558 (1c:6558)
-	db $79,$52,$08,$00,$0B,$A9,$E7,$9F,$01,$C0,$7E,$E8,$E8,$E8,$E8,$E0
-
-PalPacket_72568: ; 72568 (1c:6568)
-	db $79,$47,$08,$00,$0B,$C4,$D0,$16,$A5,$CB,$C9,$05,$D0,$10,$A2,$28
-
-PalPacket_72578: ; 72578 (1c:6578)
-	db $79,$3C,$08,$00,$0B,$F0,$12,$A5,$C9,$C9,$C8,$D0,$1C,$A5,$CA,$C9
-
-PalPacket_72588: ; 72588 (1c:6588)
-	db $79,$31,$08,$00,$0B,$0C,$A5,$CA,$C9,$7E,$D0,$06,$A5,$CB,$C9,$7E
-
-PalPacket_72598: ; 72598 (1c:6598)
-	db $79,$26,$08,$00,$0B,$39,$CD,$48,$0C,$D0,$34,$A5,$C9,$C9,$80,$D0
-
-PalPacket_725a8: ; 725a8 (1c:65a8)
-	db $79,$1B,$08,$00,$0B,$EA,$EA,$EA,$EA,$EA,$A9,$01,$CD,$4F,$0C,$D0
-
-PalPacket_725b8: ; 725b8 (1c:65b8)
-	db $79,$10,$08,$00,$0B,$4C,$20,$08,$EA,$EA,$EA,$EA,$EA,$60,$EA,$EA
+DataSnd_725b8: DATA_SND $810, $0, 11
+	dbw $4C, $820           ; jmp $820
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $EA                 ; nop
+	db  $60                 ; rts
+	db  $EA                 ; nop
+	db  $EA                 ; nop

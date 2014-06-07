@@ -396,21 +396,21 @@ LoadSGBBorderAndPalettes: ; 7202b (1c:602b)
 	ei
 	ld a, $1
 	ld [wcf2d], a
-	ld de, PalPacket_72508
+	ld de, ChrTrnPacket
 	ld hl, SGBBorderGraphics
 	call Func_7210b
 	xor a
 	ld [wcf2d], a
-	ld de, PalPacket_72518
+	ld de, PctTrnPacket
 	ld hl, BorderPalettes
 	call Func_7210b
 	xor a
 	ld [wcf2d], a
-	ld de, PalPacket_724d8
+	ld de, PalTrnPacket
 	ld hl, SuperPalettes
 	call Func_7210b
 	call ClearVram
-	ld hl, PalPacket_72538
+	ld hl, MaskEnCancelPacket
 	jp SendSGBPacket
 
 Func_72075: ; 72075 (1c:6075)
@@ -431,18 +431,18 @@ Func_72075: ; 72075 (1c:6075)
 	ret
 
 PointerTable_72089: ; 72089 (1c:6089)
-	dw PalPacket_72528
-	dw PalPacket_72548
-	dw PalPacket_72558
-	dw PalPacket_72568
-	dw PalPacket_72578
-	dw PalPacket_72588
-	dw PalPacket_72598
-	dw PalPacket_725a8
-	dw PalPacket_725b8
+	dw MaskEnFreezePacket
+	dw DataSnd_72548
+	dw DataSnd_72558
+	dw DataSnd_72568
+	dw DataSnd_72578
+	dw DataSnd_72588
+	dw DataSnd_72598
+	dw DataSnd_725a8
+	dw DataSnd_725b8
 
 Func_7209b: ; 7209b (1c:609b)
-	ld hl, PalPacket_724f8
+	ld hl, MltReq2Packet
 	di
 	call SendSGBPacket
 	ld a, $1
@@ -493,7 +493,7 @@ Func_7209b: ; 7209b (1c:609b)
 	ret
 
 Func_72102: ; 72102 (1c:6102)
-	ld hl, PalPacket_724e8
+	ld hl, MltReq1Packet
 	call SendSGBPacket
 	jp Wait7000
 
