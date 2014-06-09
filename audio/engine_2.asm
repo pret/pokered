@@ -1,6 +1,6 @@
 ; The second of three duplicated sound engines.
 
-Func_21879:: ; 21879 (8:5879)
+Music8_UpdateMusic:: ; 21879 (8:5879)
 	ld c, CH0
 .loop
 	ld b, $0

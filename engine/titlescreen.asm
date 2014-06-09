@@ -17,7 +17,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, Bank(Func_7d8ea)
+	ld a, BANK(Music_TitleScreen)
 	ld [wc0ef], a
 	ld [wc0f0], a
 

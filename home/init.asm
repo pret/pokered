@@ -128,7 +128,7 @@ ClearVram:
 
 
 StopAllSounds::
-	ld a, Bank(Func_9876)
+	ld a, BANK(Music2_UpdateMusic)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	xor a

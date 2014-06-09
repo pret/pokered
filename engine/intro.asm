@@ -322,7 +322,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	ld c, $28
 	call DelayFrames
 .asm_418d0
-	ld a, Bank(Func_7d8ea)
+	ld a, BANK(Music_IntroBattle)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, MUSIC_INTRO_BATTLE

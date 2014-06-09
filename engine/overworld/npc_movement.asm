@@ -158,7 +158,7 @@ PointerTable_1a510: ; 1a510 (6:6510)
 	dw Func_1a56b
 
 Func_1a514: ; 1a514 (6:6514)
-	ld a, Bank(Func_9876)
+	ld a, BANK(Music_MuseumGuy)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, MUSIC_MUSEUM_GUY
@@ -215,7 +215,7 @@ PointerTable_1a57d: ; 1a57d (6:657d)
 	dw Func_1a56b
 
 Func_1a581: ; 1a581 (6:6581)
-	ld a, Bank(Func_9876)
+	ld a, BANK(Music_MuseumGuy)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, MUSIC_MUSEUM_GUY

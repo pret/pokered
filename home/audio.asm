@@ -30,7 +30,7 @@ asm_2324:: ; 2324 (0:2324)
 	ld b, a
 	ld a, d
 	and a
-	ld a, Bank(Func_7d8ea)
+	ld a, BANK(Music_BikeRiding)
 	jr nz, .asm_233e
 	ld [wc0ef], a
 .asm_233e
@@ -56,19 +56,19 @@ asm_2324:: ; 2324 (0:2324)
 Func_235f:: ; 235f (0:235f)
 	ld a, [wc0ef]
 	ld b, a
-	cp $2
+	cp BANK(Music2_UpdateMusic)
 	jr nz, .checkForBank08
 .bank02
-	ld hl, Func_9103
+	ld hl, Music2_UpdateMusic
 	jr .asm_2378
 .checkForBank08
-	cp $8
+	cp BANK(Music8_UpdateMusic)
 	jr nz, .bank1F
 .bank08
-	ld hl, Func_21879
+	ld hl, Music8_UpdateMusic
 	jr .asm_2378
 .bank1F
-	ld hl, Func_7d177
+	ld hl, Music1f_UpdateMusic
 .asm_2378
 	ld c, $6
 .asm_237a
@@ -147,14 +147,14 @@ PlaySound:: ; 23b1 (0:23b1)
 	ld a, [wc0ef]
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	cp $2
+	cp BANK(Func_9876)
 	jr nz, .checkForBank08
 .bank02
 	ld a, b
 	call Func_9876
 	jr .asm_240b
 .checkForBank08
-	cp $8
+	cp BANK(Func_22035)
 	jr nz, .bank1F
 .bank08
 	ld a, b

@@ -1,6 +1,6 @@
 ; The third of three duplicated sound engines.
 
-Func_7d177:: ; 7d177 (1f:5177)
+Music1f_UpdateMusic:: ; 7d177 (1f:5177)
 	ld c, CH0
 .loop
 	ld b, $0

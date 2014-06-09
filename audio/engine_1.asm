@@ -1,6 +1,6 @@
 ; The first of three duplicated sound engines.
 
-Func_9103:: ; 0x9103
+Music2_UpdateMusic:: ; 0x9103
 	ld c, CH0
 .loop
 	ld b, $0

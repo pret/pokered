@@ -56,20 +56,20 @@ VBlank::
 	ld [H_LOADEDROMBANK], a
 	ld [MBC3RomBank], a
 
-	cp BANK(Func_9103)
+	cp BANK(Music2_UpdateMusic)
 	jr nz, .notbank2
 .bank2
-	call Func_9103
+	call Music2_UpdateMusic
 	jr .afterMusic
 .notbank2
-	cp 8
+	cp BANK(Music8_UpdateMusic)
 	jr nz, .bank1F
 .bank8
 	call Func_2136e
-	call Func_21879
+	call Music8_UpdateMusic
 	jr .afterMusic
 .bank1F
-	call Func_7d177
+	call Music1f_UpdateMusic
 .afterMusic
 
 	callba Func_18dee ; keep track of time played
