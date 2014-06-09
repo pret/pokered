@@ -89,7 +89,7 @@ tileset: MACRO
 INDOOR  EQU 0
 CAVE    EQU 1
 OUTDOOR EQU 2
-	
+
 ; macro for two nibbles
 dn: MACRO
 	db (\1 << 4 | \2)
@@ -142,7 +142,7 @@ PREDEF: MACRO
 	ld a, (\1 - PredefPointers) / 3
 	call Predef
 	ENDM
-	
+
 PREDEF_JUMP: MACRO
 	ld a, (\1 - PredefPointers) / 3
 	jp Predef

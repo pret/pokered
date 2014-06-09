@@ -1,4 +1,4 @@
-Route14Mons: 
+Route14Mons:
 	db $0F
 	IF _RED || (_JAPAN && _BLUE)
 		db 24,ODDISH
@@ -12,7 +12,7 @@ Route14Mons:
 		db 28,PIDGEOTTO
 		db 30,PIDGEOTTO
 	ENDC
-	
+
 	IF _GREEN || (!_JAPAN && _BLUE)
 		db 24,BELLSPROUT
 		db 26,PIDGEY
@@ -25,7 +25,7 @@ Route14Mons:
 		db 28,PIDGEOTTO
 		db 30,PIDGEOTTO
 	ENDC
-	
+
 	IF _YELLOW
 		db 26,ODDISH
 		db 26,BELLSPROUT
@@ -38,6 +38,6 @@ Route14Mons:
 		db 27,VENONAT
 		db 30,VENOMOTH
 	ENDC
-	
+
 	db $00
 

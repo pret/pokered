@@ -1,4 +1,4 @@
-Route13Mons: 
+Route13Mons:
 	IF _RED || (_JAPAN && _BLUE)
 		db $14
 		db 24,ODDISH
@@ -13,7 +13,7 @@ Route13Mons:
 		db 30,GLOOM
 		db $00
 	ENDC
-	
+
 	IF _GREEN || (!_JAPAN && _BLUE)
 		db $14
 		db 24,BELLSPROUT
@@ -28,7 +28,7 @@ Route13Mons:
 		db 30,WEEPINBELL
 		db $00
 	ENDC
-	
+
 	IF _YELLOW
 		db $0F
 		db 25,ODDISH

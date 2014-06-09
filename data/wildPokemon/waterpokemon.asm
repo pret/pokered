@@ -1,4 +1,4 @@
-WaterMons: ; 
+WaterMons:
 	db $00
 
 	db $05

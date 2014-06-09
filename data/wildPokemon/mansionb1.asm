@@ -1,4 +1,4 @@
-MansionMonsB1: 
+MansionMonsB1:
 	db $0A
 	IF _RED
 		db 33,KOFFING
@@ -12,7 +12,7 @@ MansionMonsB1:
 		db 42,WEEZING
 		db 42,MUK
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 33,GRIMER
 		db 31,GRIMER
@@ -25,7 +25,7 @@ MansionMonsB1:
 		db 38,MAGMAR
 		db 42,WEEZING
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 33,GRIMER
 		db 31,GRIMER
@@ -38,7 +38,7 @@ MansionMonsB1:
 		db 38,MUK
 		db 42,WEEZING
 	ENDC
-	
+
 	IF _YELLOW
 		db 35,GRIMER
 		db 38,GRIMER
@@ -51,6 +51,6 @@ MansionMonsB1:
 		db 18,DITTO
 		db 12,DITTO
 	ENDC
-	
+
 	db $00
 

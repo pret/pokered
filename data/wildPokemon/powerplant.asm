@@ -1,7 +1,7 @@
-PowerPlantMons: 
+PowerPlantMons:
 	db $0A
 	IF !_YELLOW
-		
+	
 		db 21,VOLTORB
 		db 21,MAGNEMITE
 		db 20,PIKACHU
@@ -19,7 +19,7 @@ PowerPlantMons:
 			db 36,RAICHU
 		ENDC
 	ENDC
-	
+
 	IF _YELLOW
 		db 30,MAGNEMITE
 		db 35,MAGNEMITE
@@ -32,6 +32,6 @@ PowerPlantMons:
 		db 33,MUK
 		db 37,MUK
 	ENDC
-	
+
 	db $00
 

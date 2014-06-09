@@ -396,10 +396,10 @@ Music8_vibrato: ; 21ab6 (8:5ab6)
 	ld b, $0
 	ld hl, wc04e
 	add hl, bc
-	ld [hl], a ; store delay 
+	ld [hl], a ; store delay
 	ld hl, wc06e
 	add hl, bc
-	ld [hl], a ; store delay 
+	ld [hl], a ; store delay
 	call Music8_GetNextMusicByte
 	ld d, a
 	and $f0

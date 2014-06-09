@@ -1,6 +1,6 @@
-Route10Mons: 
+Route10Mons:
 	db $0F
-	
+
 	IF _RED
 		db 16,VOLTORB
 		db 16,SPEAROW
@@ -13,7 +13,7 @@ Route10Mons:
 		db 13,EKANS
 		db 17,EKANS
 	ENDC
-	
+
 	IF !_RED
 		db 16,VOLTORB
 		db 16,SPEAROW
@@ -26,7 +26,7 @@ Route10Mons:
 		db 13,SANDSHREW
 		db 17,SANDSHREW
 	ENDC
-	
+
 	IF _YELLOW
 		db 16,MAGNEMITE
 		db 18,RATTATA
@@ -39,6 +39,6 @@ Route10Mons:
 		db 16,MACHOP
 		db 18,MACHOP
 	ENDC
-	
+
 	db $00
 

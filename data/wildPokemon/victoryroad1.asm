@@ -1,4 +1,4 @@
-PlateauMons1: 
+PlateauMons1:
 	db $0F
 	IF !_YELLOW
 		db 24,MACHOP
@@ -25,6 +25,6 @@ PlateauMons1:
 		db 41,GRAVELER
 		db 47,GRAVELER
 	ENDC
-	
+
 	db $00
 

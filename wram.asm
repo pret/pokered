@@ -102,7 +102,7 @@ wSpriteStateData2:: ; c200
 ; holds info for 16 sprites with $10 bytes each
 ; player sprite is always sprite 0
 ; C2x0: walk animation counter (counting from $10 backwards when moving)
-; C2x1: 
+; C2x1:
 ; C2x2: Y displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
 ; C2x3: X displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
 ; C2x4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)

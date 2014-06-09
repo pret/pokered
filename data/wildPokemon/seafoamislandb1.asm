@@ -1,4 +1,4 @@
-IslandMonsB1: 
+IslandMonsB1:
 	db $0A
 	IF _RED
 		db 30,STARYU
@@ -12,7 +12,7 @@ IslandMonsB1:
 		db 38,DEWGONG
 		db 37,SEADRA
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 30,SHELLDER
 		db 30,KRABBY
@@ -25,7 +25,7 @@ IslandMonsB1:
 		db 38,DEWGONG
 		db 37,KINGLER
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 30,SHELLDER
 		db 30,KRABBY
@@ -38,7 +38,7 @@ IslandMonsB1:
 		db 38,DEWGONG
 		db 37,KINGLER
 	ENDC
-	
+
 	IF _YELLOW
 		db 27,ZUBAT
 		db 26,KRABBY
@@ -51,6 +51,6 @@ IslandMonsB1:
 		db 22,SEEL
 		db 26,SEEL
 	ENDC
-	
+
 	db $00
 

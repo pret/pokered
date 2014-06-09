@@ -1,4 +1,4 @@
-Route18Mons: 
+Route18Mons:
 	db $19
 	IF !_YELLOW
 		db 20,SPEAROW
@@ -12,7 +12,7 @@ Route18Mons:
 		db 27,FEAROW
 		db 29,FEAROW
 	ENDC
-	
+
 	IF _YELLOW
 		db 22,SPEAROW
 		db 22,DODUO
@@ -25,6 +25,6 @@ Route18Mons:
 		db 25,RATICATE
 		db 26,RATICATE
 	ENDC
-	
+
 	db $00
 

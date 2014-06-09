@@ -1,4 +1,4 @@
-Route23Mons: 
+Route23Mons:
 	db $0A
 	IF !_YELLOW
 		IF _RED
@@ -22,7 +22,7 @@ Route23Mons:
 		db 41,FEAROW
 		db 43,FEAROW
 	ENDC
-	
+
 	IF _YELLOW
 		db 41,NIDORINO
 		db 41,NIDORINA
@@ -35,6 +35,6 @@ Route23Mons:
 		db 41,PRIMEAPE
 		db 46,PRIMEAPE
 	ENDC
-	
+
 	db $00
 

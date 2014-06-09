@@ -53,5 +53,5 @@ Music_DefeatedGymLeader:: ; 202f4 (8:42f4)
 	dw Music_DefeatedGymLeader_Ch2
 	db CH2
 	dw Music_DefeatedGymLeader_Ch3
-	
+
 ; 202fd

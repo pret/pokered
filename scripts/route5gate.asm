@@ -59,7 +59,7 @@ Route5GateScript1: ; 1df94 (7:5f94)
 	ld [wJoyIgnore], a
 	ld [W_ROUTE5GATECURSCRIPT], a
 	ret
-	
+
 Route5GateTextPointers: ; 1dfa4 (7:5fa4)
 	dw Route5GateText1
 	dw Route5GateText2

@@ -72,7 +72,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	jp nz, Route22Script_5104e
 	ret
 
-.Route22RivalBattleCoords 
+.Route22RivalBattleCoords
 	db $04, $1D
 	db $05, $1D
 	db $FF

@@ -1,4 +1,4 @@
-IslandMonsB4: 
+IslandMonsB4:
 	db $0A
 	IF _RED
 		db 31,HORSEA
@@ -12,7 +12,7 @@ IslandMonsB4:
 		db 39,SLOWBRO
 		db 32,GOLBAT
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 31,KRABBY
 		db 31,STARYU
@@ -25,7 +25,7 @@ IslandMonsB4:
 		db 39,GOLDUCK
 		db 32,GOLBAT
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 31,KRABBY
 		db 31,STARYU
@@ -38,7 +38,7 @@ IslandMonsB4:
 		db 39,JYNX
 		db 32,GOLBAT
 	ENDC
-	
+
 	IF _YELLOW
 		db 36,GOLBAT
 		db 36,ZUBAT
@@ -63,6 +63,6 @@ IslandMonsB4:
 		db 30,STARYU
 		db 30,STARYU
 	ENDC
-	
+
 	db $00
 

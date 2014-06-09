@@ -1,6 +1,6 @@
-Route8Mons: 
+Route8Mons:
 	db $0F
-	
+
 	IF _RED
 		db 18,PIDGEY
 		db 18,MANKEY
@@ -13,7 +13,7 @@ Route8Mons:
 		db 15,GROWLITHE
 		db 18,GROWLITHE
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 18,PIDGEY
 		db 18,MEOWTH
@@ -26,7 +26,7 @@ Route8Mons:
 		db 15,VULPIX
 		db 18,VULPIX
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 18,PIDGEY
 		db 18,MEOWTH
@@ -39,7 +39,7 @@ Route8Mons:
 		db 15,GROWLITHE
 		db 18,GROWLITHE
 	ENDC
-	
+
 	IF _YELLOW
 		db 20,PIDGEY
 		db 22,PIDGEY
@@ -52,6 +52,6 @@ Route8Mons:
 		db 20,KADABRA
 		db 27,KADABRA
 	ENDC
-	
+
 	db $00
 

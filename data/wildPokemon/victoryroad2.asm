@@ -1,4 +1,4 @@
-PlateauMons2: 
+PlateauMons2:
 	db $0A
 	IF !_YELLOW
 		db 22,MACHOP
@@ -12,7 +12,7 @@ PlateauMons2:
 		db 40,MAROWAK
 		db 43,GRAVELER
 	ENDC
-	
+
 	IF _YELLOW
 		db 31,GEODUDE
 		db 36,GEODUDE
@@ -25,6 +25,6 @@ PlateauMons2:
 		db 39,MACHOKE
 		db 42,MACHOKE
 	ENDC
-	
+
 	db $00
 

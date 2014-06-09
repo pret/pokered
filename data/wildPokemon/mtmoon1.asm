@@ -1,4 +1,4 @@
-MoonMons1: 
+MoonMons1:
 	db $0A
 	IF !_YELLOW
 		db 8,ZUBAT

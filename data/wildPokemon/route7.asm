@@ -1,6 +1,6 @@
-Route7Mons: 
+Route7Mons:
 	db $0F
-	
+
 	IF _RED
 		db 19,PIDGEY
 		db 19,ODDISH
@@ -13,7 +13,7 @@ Route7Mons:
 		db 19,MANKEY
 		db 20,MANKEY
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 19,PIDGEY
 		db 19,BELLSPROUT
@@ -26,7 +26,7 @@ Route7Mons:
 		db 19,MEOWTH
 		db 20,MEOWTH
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 19,PIDGEY
 		db 19,ODDISH
@@ -39,7 +39,7 @@ Route7Mons:
 		db 19,MEOWTH
 		db 20,MEOWTH
 	ENDC
-	
+
 	IF _YELLOW
 		db 20,PIDGEY
 		db 22,PIDGEY
@@ -52,6 +52,6 @@ Route7Mons:
 		db 24,JIGGLYPUFF
 		db 24,JIGGLYPUFF
 	ENDC
-	
+
 	db $00
 

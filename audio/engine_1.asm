@@ -31,7 +31,7 @@ Music2_UpdateMusic:: ; 0x9103
 	ld a, c
 	inc c ; inc channel number
 	cp CH7
-	jr nz, .loop 
+	jr nz, .loop
 	ret
 
 ; this routine checks flags for music effects currently applied
@@ -389,7 +389,7 @@ Music2_vibrato: ; 0x9335
 	ld b, $0
 	ld hl, wc04e
 	add hl, bc
-	ld [hl], a ; store delay 
+	ld [hl], a ; store delay
 	ld hl, wc06e
 	add hl, bc
 	ld [hl], a ; store delay

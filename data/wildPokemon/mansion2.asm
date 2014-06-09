@@ -1,4 +1,4 @@
-MansionMons2: 
+MansionMons2:
 	db $0A
 	IF _RED
 		db 32,GROWLITHE
@@ -12,7 +12,7 @@ MansionMons2:
 		db 39,WEEZING
 		db 37,MUK
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 32,VULPIX
 		db 34,GRIMER
@@ -25,7 +25,7 @@ MansionMons2:
 		db 39,MUK
 		db 37,WEEZING
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 32,GROWLITHE
 		db 34,GRIMER
@@ -38,7 +38,7 @@ MansionMons2:
 		db 39,MUK
 		db 37,WEEZING
 	ENDC
-	
+
 	IF _YELLOW
 		db 37,RATTATA
 		db 37,RATICATE
@@ -51,6 +51,6 @@ MansionMons2:
 		db 35,MUK
 		db 38,MUK
 	ENDC
-	
+
 	db $00
 
