@@ -26,7 +26,7 @@ Func_7d177:: ; 7d177 (1f:5177)
 	ld [$ff1a], a
 	jr .nextChannel
 .applyAffects
-	call Music1f_Music2_ApplyMusicAffects
+	call Music1f_ApplyMusicAffects
 .nextChannel
 	ld a, c
 	inc c ; inc channel number
@@ -37,17 +37,18 @@ Func_7d177:: ; 7d177 (1f:5177)
 ; this routine checks flags for music effects currently applied
 ; to the channel and calls certain functions based on flags.
 ; known flags for wc02e:
+;	0: toggleperfectpitch has been used
 ;	1: call has been used
 ;	3: a toggle used only by this routine for vibrato
 ;	4: pitchbend flag
 ;	6: dutycycle flag
-Music1f_Music2_ApplyMusicAffects: ; 7d1ac (1f:51ac)
+Music1f_ApplyMusicAffects: ; 7d1ac (1f:51ac)
 	ld b, $0
 	ld hl, wc0b6 ; delay until next note
 	add hl, bc
 	ld a, [hl]
 	cp $1 ; if delay is 1, play next note
-	jp z, Music1f_Music2_PlayNextNote
+	jp z, Music1f_PlayNextNote
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
@@ -147,7 +148,7 @@ Music1f_Music2_ApplyMusicAffects: ; 7d1ac (1f:51ac)
 ; this routine executes all music commands that take up no time,
 ; like tempo changes, duty changes etc. and doesn't return
 ; until the first note is reached
-Music1f_Music2_PlayNextNote: ; 7d244 (1f:5244)
+Music1f_PlayNextNote: ; 7d244 (1f:5244)
 	ld hl, wc06e
 	add hl, bc
 	ld a, [hl]
@@ -328,7 +329,7 @@ Music1f_loopchannel: ; 7d31d (1f:531d)
 Music1f_notetype: ; 7d358 (1f:5358)
 	and $f0
 	cp $d0 ; is this command a notetype?
-	jp nz, Music1f_togglecall ; no
+	jp nz, Music1f_toggleperfectpitch ; no
 	ld a, d ; yes
 	and $f
 	ld b, $0
@@ -369,16 +370,16 @@ Music1f_notetype: ; 7d358 (1f:5358)
 .noiseChannel
 	jp Music1f_endchannel
 
-Music1f_togglecall: ; 7d397 (1f:5397)
+Music1f_toggleperfectpitch: ; 7d397 (1f:5397)
 	ld a, d
-	cp $e8 ; is this command an togglecall?
+	cp $e8 ; is this command a toggleperfectpitch?
 	jr nz, Music1f_vibrato ; no
 	ld b, $0 ; yes
 	ld hl, wc02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
-	ld [hl], a ; flip bit 0 of wc02e (toggle returning from call)
+	ld [hl], a ; flip bit 0 of wc02e
 	jp Music1f_endchannel
 
 Music1f_vibrato: ; 7d3a9 (1f:53a9)
@@ -461,7 +462,7 @@ Music1f_duty: ; 7d419 (1f:5419)
 
 Music1f_tempo: ; 7d42e (1f:542e)
 	cp $ed ; is this command a tempo?
-	jr nz, Music1f_unknownmusic0xee ; no
+	jr nz, Music1f_stereopanning ; no
 	ld a, c ; yes
 	cp CH4
 	jr nc, .sfxChannel
@@ -488,11 +489,11 @@ Music1f_tempo: ; 7d42e (1f:542e)
 .musicChannelDone
 	jp Music1f_endchannel
 
-Music1f_unknownmusic0xee: ; 7d46e (1f:546e)
-	cp $ee ; is this command an unknownmusic0xee?
+Music1f_stereopanning: ; 7d46e (1f:546e)
+	cp $ee ; is this command a stereopanning?
 	jr nz, Music1f_unknownmusic0xef ; no
 	call Music1f_GetNextMusicByte ; yes
-	ld [wc004], a ; store first param
+	ld [wc004], a ; store panning
 	jp Music1f_endchannel
 
 ; this appears to never be used
@@ -515,7 +516,7 @@ Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 
 Music1f_dutycycle: ; 7d49a (1f:549a)
 	cp $fc ; is this command a dutycycle?
-	jr nz, Music1f_stereopanning ; no
+	jr nz, Music1f_volume ; no
 	call Music1f_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc046
@@ -530,11 +531,11 @@ Music1f_dutycycle: ; 7d49a (1f:549a)
 	set 6, [hl] ; set duty flag
 	jp Music1f_endchannel
 
-Music1f_stereopanning: ; 7d4b8 (1f:54b8)
-	cp $f0 ; is this command a stereopanning?
+Music1f_volume: ; 7d4b8 (1f:54b8)
+	cp $f0 ; is this command a volume?
 	jr nz, Music1f_executemusic ; no
 	call Music1f_GetNextMusicByte ; yes
-	ld [$ff24], a ; store stereopanning
+	ld [$ff24], a ; store volume
 	jp Music1f_endchannel
 
 Music1f_executemusic: ; 7d4c4 (1f:54c4)
@@ -794,12 +795,12 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_7d663
-	inc e
-	jr nc, .asm_7d663
+	bit 0, [hl]   ; has toggleperfectpitch been used?
+	jr z, .skip2
+	inc e         ; if yes, increment the pitch by 1
+	jr nc, .skip2
 	inc d
-.asm_7d663
+.skip2
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
@@ -1254,7 +1255,7 @@ Func_7d8cc: ; 7d8cc (1f:58cc)
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, Unknown_7dba3
+	ld hl, Music1f_Pitches
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -1665,18 +1666,18 @@ Unknown_7db9b: ; 7db9b (1f:5b9b)
 	db $11, $22, $44, $88 ; channels 0-3
 	db $11, $22, $44, $88 ; channels 4-7
 
-Unknown_7dba3: ; 7dba3 (1f:5ba3)
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
+Music1f_Pitches: ; 7dba3 (1f:5ba3)
+	dw $F82C ; C_
+	dw $F89D ; C#
+	dw $F907 ; D_
+	dw $F96B ; D#
+	dw $F9CA ; E_
+	dw $FA23 ; F_
+	dw $FA77 ; F#
+	dw $FAC7 ; G_
+	dw $FB12 ; G#
+	dw $FB58 ; A_
+	dw $FB9B ; A#
+	dw $FBDA ; B_
 
 

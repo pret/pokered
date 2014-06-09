@@ -1,6 +1,6 @@
 Music_MeetJessieJames_Ch1: ; 8316d (20:716d)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
 	vibrato 8, 1, 4
 	notetype 12, 11, 2

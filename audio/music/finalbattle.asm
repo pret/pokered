@@ -1,9 +1,9 @@
 Music_FinalBattle_Ch1:: ; 233a6 (8:73a6)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 2
 	octave 3
 	note F#, 1

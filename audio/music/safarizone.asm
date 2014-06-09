@@ -1,8 +1,8 @@
 Music_SafariZone_Ch1:: ; bc2e (2:7c2e)
-	tempo 0, 132
-	stereopanning 119
+	tempo 132
+	volume 7, 7
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	duty 2
 	notetype 12, 9, 2
 	octave 3

@@ -1,10 +1,10 @@
 SFX_08_unused2_Ch1: ; 2232f (8:632f)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	vibrato 6, 2, 6
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 6, 11, 1
 	octave 3
 	note G#, 2

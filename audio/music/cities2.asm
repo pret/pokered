@@ -1,9 +1,9 @@
 Music_Cities2_Ch1:: ; b504 (2:7504)
-	tempo 0, 148
-	stereopanning 119
+	tempo 148
+	volume 7, 7
 	duty 3
 	vibrato 8, 3, 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 6
 	rest 8
 	octave 3

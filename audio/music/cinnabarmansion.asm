@@ -1,6 +1,6 @@
 Music_CinnabarMansion_Ch1:: ; 7ed0f (1f:6d0f)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	vibrato 11, 2, 5
 	duty 2
 
@@ -40,7 +40,7 @@ Music_CinnabarMansion_branch_7ed19::
 
 Music_CinnabarMansion_Ch2:: ; 7ed40 (1f:6d40)
 	duty 2
-	togglecall
+	toggleperfectpitch
 	vibrato 10, 2, 4
 	notetype 12, 12, 2
 

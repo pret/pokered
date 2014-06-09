@@ -1,15 +1,15 @@
 Music_MeetRival_branch_b119::
-	tempo 0, 100
+	tempo 100
 	loopchannel 0, Music_MeetRival_branch_b123
 
 Music_MeetRival_Ch1:: ; b120 (2:7120)
-	tempo 0, 112
+	tempo 112
 
 Music_MeetRival_branch_b123::
-	stereopanning 119
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	octave 4
 	note D_, 1
@@ -120,17 +120,17 @@ Music_MeetRival_branch_b140::
 	loopchannel 0, Music_MeetRival_branch_b140
 
 Music_MeetRival_branch_b19b::
-	tempo 0, 100
+	tempo 100
 	loopchannel 0, Music_MeetRival_branch_b1a5
 
 Music_MeetRival_branch_b1a2::
-	tempo 0, 112
+	tempo 112
 
 Music_MeetRival_branch_b1a5::
-	stereopanning 119
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	octave 3
 	note D_, 1

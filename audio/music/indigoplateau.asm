@@ -1,9 +1,9 @@
 Music_IndigoPlateau_Ch1:: ; a5f0 (2:65f0)
-	tempo 0, 132
-	stereopanning 119
+	tempo 132
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 2
 	octave 2
 	note A_, 8

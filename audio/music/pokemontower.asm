@@ -1,8 +1,8 @@
 Music_PokemonTower_Ch1:: ; 7f04a (1f:704a)
-	tempo 0, 152
-	stereopanning 119
+	tempo 152
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	vibrato 12, 2, 3
 	notetype 12, 8, 0
 	rest 4

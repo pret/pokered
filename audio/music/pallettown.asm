@@ -1,6 +1,6 @@
 Music_PalletTown_Ch1:: ; a7c5 (2:67c5)
-	tempo 0, 160
-	stereopanning 119
+	tempo 160
+	volume 7, 7
 	duty 2
 	notetype 12, 12, 3
 

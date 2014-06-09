@@ -1,9 +1,9 @@
 Music_Pokecenter_Ch1:: ; be56 (2:7e56)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
 	vibrato 10, 2, 2
-	togglecall
+	toggleperfectpitch
 
 Music_Pokecenter_branch_be61::
 	notetype 12, 10, 3

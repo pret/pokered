@@ -1,13 +1,13 @@
 Music_DefeatedTrainer_Ch1:: ; 23a53 (8:7a53)
-	tempo 0, 224
-	stereopanning 119
+	tempo 224
+	volume 7, 7
 	duty 2
-	togglecall
-	tempo 0, 224
+	toggleperfectpitch
+	tempo 224
 	notetype 4, 10, 2
 	octave 4
 	note D_, 2
-	tempo 0, 224
+	tempo 224
 	notetype 4, 10, 2
 	note D_, 2
 	note D_, 2
@@ -19,7 +19,7 @@ Music_DefeatedTrainer_Ch1:: ; 23a53 (8:7a53)
 	notetype 4, 11, 3
 	note F#, 12
 	duty 1
-	tempo 0, 224
+	tempo 224
 
 Music_DefeatedTrainer_branch_23a76::
 	notetype 4, 6, 3

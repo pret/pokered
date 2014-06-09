@@ -1,6 +1,6 @@
 Music_YellowIntro_Ch1: ; 7f65c (1f:765c)
-	tempo 0, 116
-	stereopanning 119
+	tempo 116
+	volume 7, 7
 	duty 3
 	vibrato 8, 1, 4
 	notetype 12, 11, 2

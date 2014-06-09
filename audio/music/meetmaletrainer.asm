@@ -1,9 +1,9 @@
 Music_MeetMaleTrainer_Ch1:: ; 7f77b (1f:777b)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	duty 3
 	vibrato 20, 3, 3
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 4
 	octave 3
 	note C#, 1

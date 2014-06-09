@@ -1,9 +1,9 @@
 Music_Routes4_Ch1:: ; a26a (2:626a)
-	tempo 0, 148
-	stereopanning 119
+	tempo 148
+	volume 7, 7
 	duty 3
 	vibrato 10, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 10, 2
 	octave 2
 	note G#, 4

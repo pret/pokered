@@ -1,10 +1,10 @@
 Music_JigglypuffSong_Ch1:: ; 7fb7d (1f:7b7d)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	vibrato 8, 2, 4
 	duty 2
 	dutycycle 165
-	togglecall
+	toggleperfectpitch
 	notetype 13, 6, 7
 	octave 4
 	note E_, 8

@@ -37,13 +37,14 @@ Func_9103:: ; 0x9103
 ; this routine checks flags for music effects currently applied
 ; to the channel and calls certain functions based on flags.
 ; known flags for wc02e:
+;	0: toggleperfectpitch has been used
 ;	1: call has been used
 ;	3: a toggle used only by this routine for vibrato
 ;	4: pitchbend flag
 ;	6: dutycycle flag
 Music2_ApplyMusicAffects: ; 0x9138
 	ld b, $0
-	ld hl, wc0b6 ; delay unitl next note
+	ld hl, wc0b6 ; delay until next note
 	add hl, bc
 	ld a, [hl]
 	cp $1 ; if the delay is 1, play next note
@@ -328,7 +329,7 @@ Music2_loopchannel: ; 0x92a9
 Music2_notetype: ; 0x92e4
 	and $f0
 	cp $d0 ; is this command a notetype?
-	jp nz, Music2_togglecall ; no
+	jp nz, Music2_toggleperfectpitch ; no
 	ld a, d ; yes
 	and $f
 	ld b, $0
@@ -369,16 +370,16 @@ Music2_notetype: ; 0x92e4
 .noiseChannel
 	jp Music2_endchannel
 
-Music2_togglecall: ; 0x9323
+Music2_toggleperfectpitch: ; 0x9323
 	ld a, d
-	cp $e8 ; is this command an togglecall?
+	cp $e8 ; is this command a toggleperfectpitch?
 	jr nz, Music2_vibrato ; no
 	ld b, $0 ; yes
 	ld hl, wc02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
-	ld [hl], a ; flip bit 0 of wc02e (toggle returning from call)
+	ld [hl], a ; flip bit 0 of wc02e
 	jp Music2_endchannel
 
 Music2_vibrato: ; 0x9335
@@ -461,7 +462,7 @@ Music2_duty: ; 0x93a5
 
 Music2_tempo: ; 0x93ba
 	cp $ed ; is this command a tempo?
-	jr nz, Music2_unknownmusic0xee ; no
+	jr nz, Music2_stereopanning ; no
 	ld a, c ; yes
 	cp CH4
 	jr nc, .sfxChannel
@@ -488,11 +489,11 @@ Music2_tempo: ; 0x93ba
 .musicChannelDone
 	jp Music2_endchannel
 
-Music2_unknownmusic0xee: ; 0x93fa
-	cp $ee ; is this command an unknownmusic0xee?
+Music2_stereopanning: ; 0x93fa
+	cp $ee ; is this command a stereopanning?
 	jr nz, Music2_unknownmusic0xef ; no
 	call Music2_GetNextMusicByte ; yes
-	ld [wc004], a ; store first param
+	ld [wc004], a ; store panning
 	jp Music2_endchannel
 
 ; this appears to never be used
@@ -515,7 +516,7 @@ Music2_unknownmusic0xef ; 0x9407
 
 Music2_dutycycle: ; 0x9426
 	cp $fc ; is this command a dutycycle?
-	jr nz, Music2_stereopanning ; no
+	jr nz, Music2_volume ; no
 	call Music2_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc046
@@ -530,11 +531,11 @@ Music2_dutycycle: ; 0x9426
 	set 6, [hl] ; set dutycycle flag
 	jp Music2_endchannel
 
-Music2_stereopanning: ; 0x9444
-	cp $f0 ; is this command a stereopanning?
+Music2_volume: ; 0x9444
+	cp $f0 ; is this command a volume?
 	jr nz, Music2_executemusic ; no
 	call Music2_GetNextMusicByte ; yes
-	ld [$ff24], a ; store stereopanning
+	ld [$ff24], a ; store volume
 	jp Music2_endchannel
 
 Music2_executemusic: ; 0x9450
@@ -794,12 +795,12 @@ Music2_notepitch: ; 0x9568
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_95ef
-	inc e
-	jr nc, .asm_95ef
+	bit 0, [hl]   ; has toggleperfectpitch been used?
+	jr z, .skip2
+	inc e         ; if yes, increment the pitch by 1
+	jr nc, .skip2
 	inc d
-.asm_95ef
+.skip2
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
@@ -1254,7 +1255,7 @@ Func_9858: ; 0x9858
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, Unknown_9b2f
+	ld hl, Music2_Pitches
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -1665,18 +1666,18 @@ Unknown_9b27: ; 0x9b27
 	db $11, $22, $44, $88 ; channels 0-3
 	db $11, $22, $44, $88 ; channels 4-7
 
-Unknown_9b2f: ; 0x9b2f
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
+Music2_Pitches: ; 0x9b2f
+	dw $F82C ; C_
+	dw $F89D ; C#
+	dw $F907 ; D_
+	dw $F96B ; D#
+	dw $F9CA ; E_
+	dw $FA23 ; F_
+	dw $FA77 ; F#
+	dw $FAC7 ; G_
+	dw $FB12 ; G#
+	dw $FB58 ; A_
+	dw $FB9B ; A#
+	dw $FBDA ; B_
 
 

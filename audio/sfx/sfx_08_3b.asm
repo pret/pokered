@@ -1,9 +1,9 @@
 SFX_08_3b_Ch1: ; 239c7 (8:79c7)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 5, 11, 4
 	octave 4
 	note D_, 4

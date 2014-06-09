@@ -1,9 +1,9 @@
 Music_Vermilion_Ch1:: ; b9eb (2:79eb)
-	tempo 0, 156
-	stereopanning 119
+	tempo 156
+	volume 7, 7
 	duty 3
 	vibrato 12, 3, 4
-	togglecall
+	toggleperfectpitch
 
 Music_Vermilion_branch_b9f6::
 	notetype 12, 11, 5

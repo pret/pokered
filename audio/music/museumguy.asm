@@ -1,8 +1,8 @@
 Music_MuseumGuy_Ch1:: ; adae (2:6dae)
-	tempo 0, 128
-	stereopanning 119
+	tempo 128
+	volume 7, 7
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 1
 	octave 3
 	note B_, 2

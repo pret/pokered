@@ -1,11 +1,11 @@
 Music_DefeatedWildMon_Ch1:: ; 23b74 (8:7b74)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	executemusic
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
-	tempo 0, 112
+	toggleperfectpitch
+	tempo 112
 	notetype 12, 11, 7
 	octave 3
 	note B_, 1

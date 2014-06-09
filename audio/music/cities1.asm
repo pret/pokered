@@ -1,12 +1,12 @@
 Music_Cities1_branch_aa6f::
-	tempo 0, 232
+	tempo 232
 	loopchannel 0, Music_Cities1_branch_aa79
 
 Music_Cities1_Ch1:: ; aa76 (2:6a76)
-	tempo 0, 144
+	tempo 144
 
 Music_Cities1_branch_aa79::
-	stereopanning 119
+	volume 7, 7
 	vibrato 8, 2, 4
 	duty 3
 
@@ -403,7 +403,7 @@ Music_Cities1_branch_ac00::
 
 Music_Cities1_Ch3:: ; ac32 (2:6c32)
 	notetype 12, 1, 1
-	togglecall
+	toggleperfectpitch
 
 Music_Cities1_branch_ac35::
 	vibrato 0, 0, 0

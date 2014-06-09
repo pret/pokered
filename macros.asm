@@ -247,7 +247,7 @@ octave: MACRO
 	db $E8 - \1
 ENDM
 
-togglecall: MACRO
+toggleperfectpitch: MACRO
 	db $E8
 ENDM
 
@@ -271,18 +271,18 @@ ENDM
 
 tempo: MACRO
 	db $ED
-	db \1
-	db \2
+	db \1 / $100
+	db \1 % $100
 ENDM
 
-unknownmusic0xee: MACRO
+stereopanning: MACRO
 	db $EE
 	db \1
 ENDM
 
-stereopanning: MACRO
+volume: MACRO
 	db $F0
-	db \1
+	db (\1 << 4) | \2
 ENDM
 
 executemusic: MACRO

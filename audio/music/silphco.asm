@@ -1,8 +1,8 @@
 Music_SilphCo_Ch1:: ; 7f243 (1f:7243)
-	tempo 0, 160
-	stereopanning 119
+	tempo 160
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	vibrato 8, 2, 2
 	notetype 6, 11, 3
 	octave 2
@@ -129,7 +129,7 @@ Music_SilphCo_branch_7f26d::
 	notetype 6, 11, 0
 	octave 3
 	note E_, 8
-	tempo 0, 124
+	tempo 124
 	notetype 6, 11, 3
 	octave 2
 	note B_, 2
@@ -320,29 +320,29 @@ Music_SilphCo_branch_7f26d::
 	note D_, 11
 	rest 4
 	rest 4
-	tempo 0, 128
+	tempo 128
 	rest 4
 	rest 4
-	tempo 0, 136
+	tempo 136
 	rest 4
 	rest 4
-	tempo 0, 144
+	tempo 144
 	rest 4
 	rest 4
-	tempo 0, 160
+	tempo 160
 	rest 4
 	rest 4
-	tempo 0, 192
+	tempo 192
 	rest 4
 	rest 4
-	tempo 1, 32
+	tempo 288
 	rest 4
 	rest 4
-	tempo 1, 160
+	tempo 416
 	rest 4
-	tempo 4, 0
+	tempo 1024
 	rest 4
-	tempo 0, 160
+	tempo 160
 	rest 4
 	notetype 6, 4, 3
 	octave 2

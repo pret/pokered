@@ -1,9 +1,9 @@
 SFX_1f_42_Ch1: ; 7ee74 (1f:6e74)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 5, 10, 4
 	octave 3
 	note A#, 4

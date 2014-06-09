@@ -1,7 +1,7 @@
 SFX_1f_41_Ch1: ; 7edda (1f:6dda)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	duty 2
 	notetype 5, 11, 1
 	octave 3

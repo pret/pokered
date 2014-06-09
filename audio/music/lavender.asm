@@ -1,8 +1,8 @@
 Music_Lavender_Ch1:: ; bb58 (2:7b58)
-	tempo 0, 152
-	stereopanning 119
+	tempo 152
+	volume 7, 7
 	duty 1
-	togglecall
+	toggleperfectpitch
 	vibrato 0, 8, 8
 	notetype 12, 8, 7
 	rest 16

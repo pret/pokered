@@ -1,6 +1,6 @@
 Music_TitleScreen_Ch1:: ; 7e4c0 (1f:64c0)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	vibrato 9, 3, 4
 	duty 3
 	notetype 12, 12, 1

@@ -1,10 +1,10 @@
 SFX_1f_3a_Ch1: ; 7e850 (1f:6850)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	vibrato 6, 2, 6
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 4, 11, 1
 	octave 3
 	note G#, 2

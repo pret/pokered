@@ -1,9 +1,9 @@
 Music_Gym_Ch1:: ; bcbb (2:7cbb)
-	tempo 0, 138
-	stereopanning 119
+	tempo 138
+	volume 7, 7
 	duty 3
 	vibrato 8, 2, 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 5
 	octave 3
 	note G_, 6

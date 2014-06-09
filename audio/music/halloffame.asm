@@ -1,9 +1,9 @@
 Music_HallOfFame_Ch1:: ; 7fbaf (1f:7baf)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	duty 3
 	vibrato 12, 2, 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	rest 16
 	rest 16

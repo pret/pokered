@@ -1,6 +1,6 @@
 Music_SurfingPikachu_Ch1: ; 82ce8 (20:6ce8)
-	tempo 0, 117
-	stereopanning 119
+	tempo 117
+	volume 7, 7
 	duty 3
 	vibrato 8, 1, 4
 	notetype 12, 11, 3

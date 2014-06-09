@@ -1,9 +1,9 @@
 Music_Routes3_Ch1:: ; 9fad (2:5fad)
-	tempo 0, 148
-	stereopanning 119
+	tempo 148
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 5
 	octave 3
 	note E_, 1

@@ -1,6 +1,6 @@
 Music_BikeRiding_Ch1:: ; 7dbbb (1f:5bbb)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
 	vibrato 8, 1, 4
 	notetype 12, 11, 5
@@ -47,7 +47,7 @@ Music_BikeRiding_branch_7dbc9::
 	note D_, 2
 	note E_, 2
 	note F_, 6
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	note E_, 2
 	note D_, 2
@@ -56,7 +56,7 @@ Music_BikeRiding_branch_7dbc9::
 	note F_, 2
 	note E_, 1
 	note F_, 1
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 5
 	note G_, 6
 	note G_, 6

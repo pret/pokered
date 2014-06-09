@@ -1,9 +1,9 @@
 Music_Credits_Ch1:: ; 7fc1f (1f:7c1f)
-	tempo 0, 140
-	stereopanning 119
+	tempo 140
+	volume 7, 7
 	duty 3
 	vibrato 8, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 5
 	octave 4
 	note E_, 6

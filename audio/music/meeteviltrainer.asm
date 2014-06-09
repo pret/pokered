@@ -1,8 +1,8 @@
 Music_MeetEvilTrainer_Ch1:: ; 7f69d (1f:769d)
-	tempo 0, 124
-	stereopanning 119
+	tempo 124
+	volume 7, 7
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 1
 	rest 4
 	octave 3

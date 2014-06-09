@@ -1,15 +1,15 @@
 Music_Dungeon1_Ch1:: ; 7ded1 (1f:5ed1)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	vibrato 10, 1, 4
 	notetype 12, 4, 13
 	rest 8
-	unknownmusic0xee 237
+	stereopanning 237
 	octave 4
 	note F#, 8
-	unknownmusic0xee 255
+	stereopanning 255
 
 Music_Dungeon1_branch_7dee5::
 	notetype 12, 11, 2

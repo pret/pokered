@@ -1,6 +1,6 @@
 Music_Routes2_Ch1:: ; 9db9 (2:5db9)
-	tempo 0, 152
-	stereopanning 119
+	tempo 152
+	volume 7, 7
 	vibrato 9, 2, 5
 	duty 1
 

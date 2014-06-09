@@ -1,9 +1,9 @@
 Music_WildBattle_Ch1:: ; 23099 (8:7099)
-	tempo 0, 104
-	stereopanning 119
+	tempo 104
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	octave 4
 	note C_, 1

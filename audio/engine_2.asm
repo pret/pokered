@@ -37,13 +37,14 @@ Func_21879:: ; 21879 (8:5879)
 ; this routine checks flags for music effects currently applied
 ; to the channel and calls certain functions based on flags.
 ; known flags for wc02e:
+;	0: toggleperfectpitch has been used
 ;	1: call has been used
 ;	3: a toggle used only by this routine for vibrato
 ;	4: pitchbend flag
 ;	6: dutycycle flag
 Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 	ld b, $0
-	ld hl, wc0b6 ; delay unitl next note
+	ld hl, wc0b6 ; delay until next note
 	add hl, bc
 	ld a, [hl]
 	cp $1 ; if the delay is 1, play next note
@@ -335,7 +336,7 @@ Music8_loopchannel: ; 21a2a (8:5a2a)
 Music8_notetype: ; 21a65 (8:5a65)
 	and $f0
 	cp $d0 ; is this command a notetype?
-	jp nz, Music8_togglecall ; no
+	jp nz, Music8_toggleperfectpitch ; no
 	ld a, d ; yes
 	and $f
 	ld b, $0
@@ -376,16 +377,16 @@ Music8_notetype: ; 21a65 (8:5a65)
 .noiseChannel
 	jp Music8_endchannel
 
-Music8_togglecall: ; 21aa4 (8:5aa4)
+Music8_toggleperfectpitch: ; 21aa4 (8:5aa4)
 	ld a, d
-	cp $e8 ; is this command an togglecall?
+	cp $e8 ; is this command a toggleperfectpitch?
 	jr nz, Music8_vibrato ; no
 	ld b, $0 ; yes
 	ld hl, wc02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
-	ld [hl], a ; flip bit 0 of wc02e (toggle returning from call)
+	ld [hl], a ; flip bit 0 of wc02e
 	jp Music8_endchannel
 
 Music8_vibrato: ; 21ab6 (8:5ab6)
@@ -468,7 +469,7 @@ Music8_duty: ; 21b26 (8:5b26)
 
 Music8_tempo: ; 21b3b (8:5b3b)
 	cp $ed ; is this command a tempo?
-	jr nz, Music8_unknownmusic0xee ; no
+	jr nz, Music8_stereopanning ; no
 	ld a, c ; yes
 	cp CH4
 	jr nc, .sfxChannel
@@ -495,11 +496,11 @@ Music8_tempo: ; 21b3b (8:5b3b)
 .musicChannelDone
 	jp Music8_endchannel
 
-Music8_unknownmusic0xee: ; 21b7b (8:5b7b)
-	cp $ee ; is this command an unknownmusic0xee?
+Music8_stereopanning: ; 21b7b (8:5b7b)
+	cp $ee ; is this command a stereopanning?
 	jr nz, Music8_unknownmusic0xef ; no
 	call Music8_GetNextMusicByte ; yes
-	ld [wc004], a ; store first param
+	ld [wc004], a ; store panning
 	jp Music8_endchannel
 
 ; this appears to never be used
@@ -522,7 +523,7 @@ Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 
 Music8_dutycycle: ; 21ba7 (8:5ba7)
 	cp $fc ; is this command a dutycycle?
-	jr nz, Music8_stereopanning ; no
+	jr nz, Music8_volume ; no
 	call Music8_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc046
@@ -537,11 +538,11 @@ Music8_dutycycle: ; 21ba7 (8:5ba7)
 	set 6, [hl] ; set dutycycle flag
 	jp Music8_endchannel
 
-Music8_stereopanning: ; 21bc5 (8:5bc5)
-	cp $f0 ; is this command a stereopanning?
+Music8_volume: ; 21bc5 (8:5bc5)
+	cp $f0 ; is this command a volume?
 	jr nz, Music8_executemusic ; no
 	call Music8_GetNextMusicByte ; yes
-	ld [$ff24], a
+	ld [$ff24], a ; store volume
 	jp Music8_endchannel
 
 Music8_executemusic: ; 21bd1 (8:5bd1)
@@ -801,12 +802,12 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
-	bit 0, [hl]
-	jr z, .asm_21d70
-	inc e
-	jr nc, .asm_21d70
+	bit 0, [hl]   ; has toggleperfectpitch been used?
+	jr z, .skip2
+	inc e         ; if yes, increment the pitch by 1
+	jr nc, .skip2
 	inc d
-.asm_21d70
+.skip2
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
@@ -1305,7 +1306,7 @@ Func_22017: ; 22017 (8:6017)
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, Unknown_222ee
+	ld hl, Music8_Pitches
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -1716,18 +1717,18 @@ Unknown_222e6: ; 222e6 (8:62e6)
 	db $11, $22, $44, $88 ; channels 0-3
 	db $11, $22, $44, $88 ; channels 4-7
 
-Unknown_222ee: ; 222ee (8:62ee)
-	dw $F82C
-	dw $F89D
-	dw $F907
-	dw $F96B
-	dw $F9CA
-	dw $FA23
-	dw $FA77
-	dw $FAC7
-	dw $FB12
-	dw $FB58
-	dw $FB9B
-	dw $FBDA
+Music8_Pitches: ; 222ee (8:62ee)
+	dw $F82C ; C_
+	dw $F89D ; C#
+	dw $F907 ; D_
+	dw $F96B ; D#
+	dw $F9CA ; E_
+	dw $FA23 ; F_
+	dw $FA77 ; F#
+	dw $FAC7 ; G_
+	dw $FB12 ; G#
+	dw $FB58 ; A_
+	dw $FB9B ; A#
+	dw $FBDA ; B_
 
 

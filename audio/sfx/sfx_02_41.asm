@@ -1,7 +1,7 @@
 SFX_02_41_Ch1: ; b2c8 (2:72c8)
 	executemusic
-	tempo 1, 0
-	stereopanning 119
+	tempo 256
+	volume 7, 7
 	duty 2
 	notetype 5, 11, 1
 	octave 3

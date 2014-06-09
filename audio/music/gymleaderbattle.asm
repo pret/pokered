@@ -1,9 +1,9 @@
 Music_GymLeaderBattle_Ch1:: ; 22370 (8:6370)
-	tempo 0, 104
-	stereopanning 119
+	tempo 104
+	volume 7, 7
 	duty 3
 	vibrato 8, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	rest 6
 	octave 3

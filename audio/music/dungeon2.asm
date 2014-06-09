@@ -1,8 +1,8 @@
 Music_Dungeon2_Ch1:: ; 7e887 (1f:6887)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	vibrato 10, 1, 4
 
 Music_Dungeon2_branch_7e892::

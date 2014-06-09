@@ -1,9 +1,9 @@
 Music_OaksLab_Ch1:: ; 7eeb9 (1f:6eb9)
-	tempo 0, 140
-	stereopanning 119
+	tempo 140
+	volume 7, 7
 	duty 3
 	vibrato 16, 1, 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 3
 	octave 2
 	note B_, 1

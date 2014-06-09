@@ -1,9 +1,9 @@
 Music_Cinnabar_Ch1:: ; b86d (2:786d)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 3
 	vibrato 12, 3, 4
-	togglecall
+	toggleperfectpitch
 
 Music_Cinnabar_branch_b878::
 	notetype 12, 11, 5

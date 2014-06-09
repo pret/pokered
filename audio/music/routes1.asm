@@ -1,9 +1,9 @@
 Music_Routes1_Ch1:: ; 9bde (2:5bde)
-	tempo 0, 152
-	stereopanning 119
+	tempo 152
+	volume 7, 7
 	vibrato 4, 2, 3
 	duty 2
-	togglecall
+	toggleperfectpitch
 
 Music_Routes1_branch_9be9::
 	notetype 12, 10, 1

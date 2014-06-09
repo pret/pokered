@@ -1,9 +1,9 @@
 Music_IntroBattle_Ch1:: ; 7f844 (1f:7844)
-	tempo 0, 98
-	stereopanning 119
+	tempo 98
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 1
 	rest 8
 	octave 2

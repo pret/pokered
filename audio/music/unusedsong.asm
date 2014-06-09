@@ -1,6 +1,6 @@
 Music_UnusedSong_Ch1:: ; a913 (2:6913)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	vibrato 5, 1, 6
 
 Music_UnusedSong_branch_a91b::
@@ -183,9 +183,9 @@ Music_UnusedSong_branch_a91b::
 
 
 Music_UnusedSong_Ch2:: ; a9cf (2:69cf)
-	tempo 0, 144
-	stereopanning 119
-	togglecall
+	tempo 144
+	volume 7, 7
+	toggleperfectpitch
 	vibrato 6, 1, 5
 
 Music_UnusedSong_branch_a9d8::

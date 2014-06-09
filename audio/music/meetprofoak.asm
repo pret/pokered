@@ -1,8 +1,8 @@
 Music_MeetProfOak_Ch1:: ; af59 (2:6f59)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 4
 	octave 3
 	note F#, 1

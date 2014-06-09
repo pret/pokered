@@ -1,8 +1,8 @@
 Music_Dungeon3_Ch1:: ; 7e9f1 (1f:69f1)
-	tempo 0, 160
-	stereopanning 119
+	tempo 160
+	volume 7, 7
 	duty 3
-	togglecall
+	toggleperfectpitch
 	vibrato 8, 1, 4
 
 Music_Dungeon3_branch_7e9fc::
@@ -243,7 +243,7 @@ Music_Dungeon3_branch_7eaf7::
 	endchannel
 
 Music_Dungeon3_branch_7eafc::
-	tempo 0, 168
+	tempo 168
 	octave 1
 	note A#, 1
 	note B_, 1
@@ -254,7 +254,7 @@ Music_Dungeon3_branch_7eafc::
 	note D#, 1
 	note E_, 1
 	note F_, 1
-	tempo 0, 176
+	tempo 176
 	octave 1
 	note A#, 1
 	note B_, 1
@@ -265,7 +265,7 @@ Music_Dungeon3_branch_7eafc::
 	note D#, 1
 	note E_, 1
 	note F_, 1
-	tempo 0, 184
+	tempo 184
 	octave 1
 	note A#, 1
 	note B_, 1
@@ -276,7 +276,7 @@ Music_Dungeon3_branch_7eafc::
 	note D#, 1
 	note E_, 1
 	note F_, 1
-	tempo 0, 192
+	tempo 192
 	octave 1
 	note A_, 1
 	note A#, 1
@@ -287,7 +287,7 @@ Music_Dungeon3_branch_7eafc::
 	note D_, 1
 	note D#, 1
 	note E_, 1
-	tempo 0, 200
+	tempo 200
 	octave 1
 	note G#, 1
 	note A_, 1
@@ -298,7 +298,7 @@ Music_Dungeon3_branch_7eafc::
 	note C#, 1
 	note D_, 1
 	note D#, 1
-	tempo 0, 208
+	tempo 208
 	octave 1
 	note G_, 1
 	note G#, 1
@@ -309,7 +309,7 @@ Music_Dungeon3_branch_7eafc::
 	note C_, 1
 	note C#, 1
 	note D_, 1
-	tempo 0, 216
+	tempo 216
 	octave 1
 	note F#, 1
 	note G_, 1
@@ -320,7 +320,7 @@ Music_Dungeon3_branch_7eafc::
 	octave 2
 	note C_, 1
 	note C#, 1
-	tempo 0, 224
+	tempo 224
 	octave 1
 	note F_, 1
 	note F#, 1
@@ -331,7 +331,7 @@ Music_Dungeon3_branch_7eafc::
 	note B_, 1
 	octave 2
 	note C_, 1
-	tempo 0, 160
+	tempo 160
 	endchannel
 
 

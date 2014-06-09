@@ -1,8 +1,8 @@
 Music_PkmnHealed_Ch1:: ; 9ba3 (2:5ba3)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	duty 2
-	togglecall
+	toggleperfectpitch
 	notetype 12, 8, 1
 	rest 2
 	pitchbend 0, 75

@@ -1,9 +1,9 @@
 Music_SSAnne_Ch1:: ; b3a7 (2:73a7)
-	tempo 0, 128
-	stereopanning 119
+	tempo 128
+	volume 7, 7
 	duty 1
 	vibrato 8, 3, 4
-	togglecall
+	toggleperfectpitch
 
 Music_SSAnne_branch_b3b2::
 	notetype 12, 10, 4

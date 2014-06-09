@@ -1,10 +1,10 @@
 Music_DefeatedGymLeader_Ch1:: ; 23cad (8:7cad)
-	tempo 0, 112
-	stereopanning 119
+	tempo 112
+	volume 7, 7
 	duty 3
 	vibrato 18, 3, 1
-	togglecall
-	tempo 0, 112
+	toggleperfectpitch
+	tempo 112
 	notetype 12, 10, 6
 	octave 4
 	note D_, 6

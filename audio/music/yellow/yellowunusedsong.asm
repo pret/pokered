@@ -1,6 +1,6 @@
 Music_YellowUnusedSong_Ch1: ; 82fbe (20:6fbe)
-	tempo 0, 140
-	stereopanning 119
+	tempo 140
+	volume 7, 7
 	duty 3
 	vibrato 8, 1, 4
 	notetype 8, 11, 2
