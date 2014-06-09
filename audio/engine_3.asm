@@ -883,7 +883,7 @@ Func_7d6bf: ; 7d6bf (1f:56bf)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Music1f_Channel3DutyPointers
+	ld hl, Music1f_WavePointers
 	add hl, de
 	ld e, [hl]
 	inc hl

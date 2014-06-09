@@ -50,7 +50,7 @@ INCLUDE "audio/sfx/sfx_02_11.asm"
 INCLUDE "audio/sfx/sfx_02_12.asm"
 INCLUDE "audio/sfx/sfx_02_13.asm"
 
-INCLUDE "audio/duty_1.asm"
+Music2_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/sfx_02_3f.asm"
 INCLUDE "audio/sfx/sfx_02_5e.asm"
@@ -149,7 +149,7 @@ INCLUDE "audio/sfx/sfx_08_11.asm"
 INCLUDE "audio/sfx/sfx_08_12.asm"
 INCLUDE "audio/sfx/sfx_08_13.asm"
 
-INCLUDE "audio/duty_2.asm"
+Music8_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/sfx_08_40.asm"
 INCLUDE "audio/sfx/sfx_08_3f.asm"
@@ -274,7 +274,7 @@ INCLUDE "audio/sfx/sfx_1f_11.asm"
 INCLUDE "audio/sfx/sfx_1f_12.asm"
 INCLUDE "audio/sfx/sfx_1f_13.asm"
 
-INCLUDE "audio/duty_3.asm"
+Music1f_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/sfx_1f_3f.asm"
 INCLUDE "audio/sfx/sfx_1f_56.asm"

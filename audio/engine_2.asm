@@ -890,7 +890,7 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Music8_Channel3DutyPointers
+	ld hl, Music8_WavePointers
 	add hl, de
 	ld e, [hl]
 	inc hl

@@ -883,7 +883,7 @@ Func_964b: ; 0x964b
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Music2_Channel3DutyPointers
+	ld hl, Music2_WavePointers
 	add hl, de
 	ld e, [hl]
 	inc hl
