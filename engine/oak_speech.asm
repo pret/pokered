@@ -131,7 +131,7 @@ Func_61bc: ; 61bc (1:61bc)
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,2
+	ld a, BANK(Music_PalletTown)
 	ld [wc0ef],a
 	ld [wc0f0],a
 	ld a,$A

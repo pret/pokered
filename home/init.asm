@@ -98,7 +98,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld a, $40 ; PREDEF_SGB_BORDER
 	call Predef
 
-	ld a, $1f
+	ld a, BANK(SFX_1f_67)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, $9c
