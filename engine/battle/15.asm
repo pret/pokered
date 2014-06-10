@@ -115,7 +115,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld d, $64
+	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
 	ld b, a

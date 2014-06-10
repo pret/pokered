@@ -352,7 +352,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call PlaceString
 	ld a, [wcfb9] ; level
 	push af
-	cp 100
+	cp MAX_LEVEL
 	jr z, .Level100 ; 0x12c20 $4
 	inc a
 	ld [wcfb9], a ; Increase temporarily if not 100
@@ -402,7 +402,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	jp ClearScreen
 .asm_12c86 ; This does some magic with lvl/exp?
 	ld a, [wcfb9] ; Load level
-	cp $64
+	cp MAX_LEVEL
 	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
 	inc a
 	ld d, a

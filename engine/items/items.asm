@@ -1214,7 +1214,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,33
 	add hl,bc ; hl now points to level
 	ld a,[hl] ; a = level
-	cp a,100
+	cp a, MAX_LEVEL
 	jr z,.vitaminNoEffect ; can't raise level above 100
 	inc a
 	ld [hl],a ; store incremented level
