@@ -628,38 +628,40 @@ SAVCheckRandomID: ;$7ad1
 	ld [$0000],a
 	ret
 
-Func_73b0d: ; 73b0d (1c:7b0d)
+SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld a, [wd5a2]
 	dec a
-	cp $32
+	cp NUM_HOF_TEAMS
 	jr nc, .asm_73b28
-	ld hl, $a598
-	ld bc, $60
+	ld hl, sHallOfFame
+	ld bc, HOF_TEAM
 	call AddNTimes
 	ld e, l
 	ld d, h
 	ld hl, wcc5b
-	ld bc, $60
-	jr CopyToSRAM0
-.asm_73b28
-	ld hl, $a5f8
-	ld de, $a598
-	ld bc, $1260
-	call CopyToSRAM0
-	ld hl, wcc5b
-	ld de, $b7f8
-	ld bc, $60
-	jr CopyToSRAM0
+	ld bc, HOF_TEAM
+	jr HallOfFame_Copy
 
-Func_73b3f: ; 73b3f (1c:7b3f)
-	ld hl, $a598
-	ld bc, $60
+.asm_73b28
+	ld hl, sHallOfFame + HOF_TEAM
+	ld de, sHallOfFame
+	ld bc, HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	call HallOfFame_Copy
+	ld hl, wcc5b
+	ld de, sHallOfFame + HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld bc, HOF_TEAM
+	jr HallOfFame_Copy
+
+LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
+	ld hl, sHallOfFame
+	ld bc, HOF_TEAM
 	ld a, [wWhichTrade] ; wWhichTrade
 	call AddNTimes
 	ld de, wcc5b
-	ld bc, $60
+	ld bc, HOF_TEAM
 	; fallthrough
-CopyToSRAM0: ; 73b51 (1c:7b51)
+
+HallOfFame_Copy: ; 73b51 (1c:7b51)
 	ld a, $a
 	ld [$0], a
 	ld a, $1

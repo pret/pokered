@@ -16,9 +16,9 @@ PKMNLeaguePC: ; 0x7657e
 	ld [wcd42], a
 	ld a, [wd5a2]
 	ld b, a
-	cp a, $33
+	cp NUM_HOF_TEAMS + 1
 	jr c, .first
-	ld b, $32
+	ld b, NUM_HOF_TEAMS
 	sub b
 	ld [wcd42], a
 .first
@@ -27,7 +27,7 @@ PKMNLeaguePC: ; 0x7657e
 	push bc
 	ld a, [wTrainerScreenX]
 	ld [wWhichTrade], a
-	callba Func_73b3f
+	callba LoadHallOfFameTeams
 	call Func_765e5
 	pop bc
 	jr c, .second
@@ -49,28 +49,28 @@ PKMNLeaguePC: ; 0x7657e
 	jp GBPalNormal
 
 Func_765e5: ; 765e5 (1d:65e5)
-	ld c, 6
-.third
+	ld c, PARTY_LENGTH
+.loop
 	push bc
 	call Func_76610
 	call WaitForTextScrollButtonPress
 	ld a, [hJoyHeld]
 	bit 1, a
-	jr nz, .fifth
-	ld hl, wcc6b
-	ld de, wcc5b
-	ld bc, $0050
+	jr nz, .exit
+	ld hl, wHallOfFame + HOF_MON
+	ld de, wHallOfFame
+	ld bc, HOF_TEAM - HOF_MON
 	call CopyData
 	pop bc
-	ld a, [wcc5b]
-	cp a, $FF
-	jr z, .fourth
+	ld a, [wHallOfFame + 0]
+	cp $ff
+	jr z, .done
 	dec c
-	jr nz, .third
-.fourth
+	jr nz, .loop
+.done
 	and a
 	ret
-.fifth
+.exit
 	pop bc
 	scf
 	ret
@@ -78,7 +78,7 @@ Func_765e5: ; 765e5 (1d:65e5)
 Func_76610: ; 76610 (1d:6610)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld a, [hli]
 	ld [wWhichTrade], a
 	ld [wcf91], a

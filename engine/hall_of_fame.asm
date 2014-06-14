@@ -1,7 +1,7 @@
 AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_70423
 	call ClearScreen
-	ld c, $64
+	ld c, 100
 	call DelayFrames
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
@@ -14,8 +14,8 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld hl, rLCDC ; $ff40
 	set 3, [hl]
 	xor a
-	ld hl, wcc5b
-	ld bc, $60
+	ld hl, wHallOfFame
+	ld bc, HOF_TEAM
 	call FillMemory
 	xor a
 	ld [wcfcb], a
@@ -49,7 +49,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld a, c
 	ld [wTrainerEngageDistance], a
 	ld hl, wPartyMon1Level ; wPartyMon1Level
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hl]
 	ld [wTrainerFacingDirection], a
@@ -66,7 +66,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld hl, Coord
 	ld de, HallOfFameText
 	call PlaceString
-	ld c, $b4
+	ld c, 180
 	call DelayFrames
 	call GBFadeOut2
 	pop bc
@@ -75,11 +75,11 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 .asm_70241
 	ld a, c
 	inc a
-	ld hl, wcc5b
-	ld bc, $10
+	ld hl, wHallOfFame
+	ld bc, HOF_MON
 	call AddNTimes
 	ld [hl], $ff
-	call Func_73b0d
+	call SaveHallOfFameTeams
 	xor a
 	ld [wWhichTrade], a ; wWhichTrade
 	inc a
@@ -283,8 +283,8 @@ DexRatingText: ; 703ff (1c:43ff)
 	db "@"
 
 Func_70404: ; 70404 (1c:4404)
-	ld hl, wcc5b
-	ld bc, $10
+	ld hl, wHallOfFame
+	ld bc, HOF_MON
 	ld a, [wTrainerEngageDistance]
 	call AddNTimes
 	ld a, [wWhichTrade] ; wWhichTrade

@@ -287,10 +287,13 @@ wTrainerHeaderFlagBit:: ; cc55
 
 wcc57:: ds 1
 wcc58:: ds 3
+
+wHallOfFame:: ; cc5b
 wcc5b:: ds 1
 wcc5c:: ds 1
 wcc5d:: ds 1
 wcc5e:: ds 13
+
 wcc6b:: ds 14
 wcc79:: ds 30
 wcc97:: ds 10
@@ -1066,7 +1069,7 @@ wPlayerName:: ; d158
 	ds 11
 
 wPartyCount::   ds 1 ; d163
-wPartySpecies:: ds 6 ; d164
+wPartySpecies:: ds PARTY_LENGTH ; d164
 wPartyEnd::     ds 1 ; d16a
 
 wPartyMons::
@@ -1077,16 +1080,16 @@ wPartyMon4:: party_struct wPartyMon4 ; d1ef
 wPartyMon5:: party_struct wPartyMon5 ; d21b
 wPartyMon6:: party_struct wPartyMon6 ; d247
 
-wPartyMonOT::    ds 11 * 6 ; d273
-wPartyMonNicks:: ds 11 * 6 ; d2b5
+wPartyMonOT::    ds 11 * PARTY_LENGTH ; d273
+wPartyMonNicks:: ds 11 * PARTY_LENGTH ; d2b5
 
 
 wPokedexOwned:: ; d2f7
-	flag_array 151
+	flag_array NUM_POKEMON
 wPokedexOwnedEnd::
 
 wPokedexSeen:: ; d30a
-	flag_array 151
+	flag_array NUM_POKEMON
 wPokedexSeenEnd::
 
 
@@ -1744,7 +1747,7 @@ W_GRASSMONS:: ; d888
 
 
 wEnemyPartyCount:: ds 1     ; d89c
-wEnemyPartyMons::  ds 6 + 1 ; d89d
+wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
 wEnemyMons:: ; d8a4
 wEnemyMon1:: party_struct wEnemyMon1
@@ -1754,8 +1757,8 @@ wEnemyMon4:: party_struct wEnemyMon4
 wEnemyMon5:: party_struct wEnemyMon5
 wEnemyMon6:: party_struct wEnemyMon6
 
-wEnemyMonOT::    ds 11 * 6 ; d9ac
-wEnemyMonNicks:: ds 11 * 6 ; d9ee
+wEnemyMonOT::    ds 11 * PARTY_LENGTH ; d9ac
+wEnemyMonNicks:: ds 11 * PARTY_LENGTH ; d9ee
 
 
 W_TRAINERHEADERPTR:: ; da30
@@ -1815,12 +1818,13 @@ wStack:: ; dfff
 	ds -$100
 
 
-SECTION "Sprite Buffers", SRAM
+SECTION "Sprite Buffers", SRAM, BANK[0]
 
-S_SPRITEBUFFER0:: ; a000
-	ds SPRITEBUFFERSIZE
-S_SPRITEBUFFER1:: ; a188
-	ds SPRITEBUFFERSIZE
-S_SPRITEBUFFER2:: ; a310
-	ds SPRITEBUFFERSIZE
+S_SPRITEBUFFER0:: ds SPRITEBUFFERSIZE ; a000
+S_SPRITEBUFFER1:: ds SPRITEBUFFERSIZE ; a188
+S_SPRITEBUFFER2:: ds SPRITEBUFFERSIZE ; a310
+
+	ds $100
+
+sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
 
