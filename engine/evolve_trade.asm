@@ -31,7 +31,7 @@ EvolveTradeMon: ; 17d7d (5:7d7d)
 	ret nz
 
 .ok
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	dec a
 	ld [wWhichPokemon], a ; wWhichPokemon
 	ld a, $1

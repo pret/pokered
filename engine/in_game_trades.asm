@@ -103,7 +103,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld a,$2
 	jr nz,.asm_c4bc2 ; 0x71c26 $75
 	ld a,[wWhichPokemon]
-	ld hl,W_PARTYMON1_LEVEL
+	ld hl,wPartyMon1Level
 	ld bc,$002c
 	call AddNTimes
 	ld a,[hl]
@@ -170,7 +170,7 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	ld [hli], a
 	ld a, [wcd34]
 	ld [hl], a
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld bc, $b
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
@@ -182,7 +182,7 @@ Func_71cc1: ; 71cc1 (1c:5cc1)
 	call Func_71d11
 	ld de, W_GRASSRATE ; W_GRASSRATE
 	call Func_71d11
-	ld hl, W_PARTYMON1_OTID ; W_PARTYMON1_OTID
+	ld hl, wPartyMon1OTID ; wPartyMon1OTID
 	ld bc, $2c
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
@@ -203,19 +203,19 @@ Func_71d11: ; 71d11 (1c:5d11)
 	ret
 
 Func_71d19: ; 71d19 (1c:5d19)
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld bc, $b
 	call Func_71d4f
 	ld hl, wcd29
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld bc, $b
 	call Func_71d4f
 	ld hl, String_71d59 ; $5d59
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1_OTID ; W_PARTYMON1_OTID
+	ld hl, wPartyMon1OTID ; wPartyMon1OTID
 	ld bc, $2c
 	call Func_71d4f
 	ld hl, wcd59
@@ -223,7 +223,7 @@ Func_71d19: ; 71d19 (1c:5d19)
 	jp CopyData
 
 Func_71d4f: ; 71d4f (1c:5d4f)
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	dec a
 	call AddNTimes
 	ld e, l

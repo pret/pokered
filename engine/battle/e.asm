@@ -2,10 +2,10 @@ Func_39680: ; 39680 (e:5680)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [wd060]
-	ld hl, W_PLAYERMONATK + 1
+	ld hl, wBattleMonAttack + 1
 	jr z, .asm_39691
 	ld a, [wd065]
-	ld hl, W_ENEMYMONATTACK + 1
+	ld hl, wEnemyMonAttack + 1
 .asm_39691
 	ld c, $4
 	ld b, a
@@ -31,10 +31,10 @@ Func_396a7: ; 396a7 (e:56a7)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, [wd061]
-	ld hl, W_PLAYERMONATK
+	ld hl, wBattleMonAttack
 	jr z, .asm_396b8
 	ld a, [wd066]
-	ld hl, W_ENEMYMONATTACK
+	ld hl, wEnemyMonAttack
 .asm_396b8
 	ld c, $4
 	ld b, a
@@ -63,7 +63,7 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 ; Load the enemy trainer's pic and scrolls it into
 ; the screen from the right.
 	xor a
-	ld [W_ENEMYMONID], a
+	ld [wEnemyMonSpecies2], a
 	ld b, $1
 	call GoPAL_SET
 	callab _LoadTrainerPic
@@ -166,7 +166,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	jp [hl]       ; execute modification function
 .loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
 	ld hl, wHPBarMaxHP  ; temp move selection array
-	ld de, W_ENEMYMONMOVES  ; enemy moves
+	ld de, wEnemyMonMoves  ; enemy moves
 	ld c, $4
 .loopDecrementEntries
 	ld a, [de]
@@ -188,7 +188,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	cp $5
 	jr nz, .loopUndoPartialIteration
 	ld hl, wHPBarMaxHP  ; temp move selection array
-	ld de, W_ENEMYMONMOVES  ; enemy moves
+	ld de, wEnemyMonMoves  ; enemy moves
 	ld c, $4
 .filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
 	ld a, [de]
@@ -212,7 +212,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	ld hl, wHPBarMaxHP    ; use created temporary array as move set
 	ret
 .useOriginalMoveSet
-	ld hl, W_ENEMYMONMOVES    ; use original move set
+	ld hl, wEnemyMonMoves    ; use original move set
 	ret
 
 AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
@@ -223,11 +223,11 @@ AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
 
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one
 AIMoveChoiceModification1: ; 397ab (e:57ab)
-	ld a, [W_PLAYERMONSTATUS]
+	ld a, [wBattleMonStatus]
 	and a
 	ret z       ; return if no status ailment on player's mon
 	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, W_ENEMYMONMOVES  ; enemy moves
+	ld de, wEnemyMonMoves  ; enemy moves
 	ld b, $5
 .nextMove
 	dec b
@@ -270,7 +270,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	cp $1
 	ret nz
 	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, W_ENEMYMONMOVES  ; enemy moves
+	ld de, wEnemyMonMoves  ; enemy moves
 	ld b, $5
 .nextMove
 	dec b
@@ -298,7 +298,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 ; encourages moves that are effective against the player's mon
 AIMoveChoiceModification3: ; 39817 (e:5817)
 	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, W_ENEMYMONMOVES  ; enemy moves
+	ld de, wEnemyMonMoves  ; enemy moves
 	ld b, $5
 .nextMove
 	dec b
@@ -328,7 +328,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	push bc
 	ld a, [W_ENEMYMOVETYPE]
 	ld d, a
-	ld hl, W_ENEMYMONMOVES  ; enemy moves
+	ld hl, wEnemyMonMoves  ; enemy moves
 	ld b, $5
 	ld c, $0
 .loopMoves
@@ -635,14 +635,14 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	cp $1
 	jr nz, .asm_39be6
 	ld hl, wEnemyPartyCount ; wEnemyPartyCount
-	ld de, W_ENEMYMON1OT ; wd9ac OT names of other player
+	ld de, wEnemyMonOT ; wd9ac OT names of other player
 	ld a, $6
 	jr .asm_39c18
 .asm_39be6
 	cp $4
 	jr nz, .calcAttackStat4
-	ld hl, W_NUMINPARTY ; W_NUMINPARTY
-	ld de, W_PARTYMON1OT ; wd273
+	ld hl, wPartyCount ; wPartyCount
+	ld de, wPartyMonOT ; wd273
 	ld a, $5
 	jr .asm_39c18
 .calcAttackStat4
@@ -681,13 +681,13 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 	ret
 
 Func_39c37: ; 39c37 (e:5c37)
-	ld hl, W_PARTYMON1 ; W_PARTYMON1
+	ld hl, wPartySpecies
 	ld a, [wcc49]
 	and a
 	jr z, .asm_39c4b
 	dec a
 	jr z, .asm_39c48
-	ld hl, wda81
+	ld hl, wBoxSpecies
 	jr .asm_39c4b
 .asm_39c48
 	ld hl, wEnemyPartyMons
@@ -791,8 +791,8 @@ ReadTrainer: ; 39c53 (e:5c53)
 	add hl,bc
 	ld a,[hli]
 	ld d,[hl]
-	ld hl,W_ENEMYMON1MOVE3
-	ld bc,W_ENEMYMON2MOVE3 - W_ENEMYMON1MOVE3
+	ld hl,wEnemyMon1Moves + 2
+	ld bc,wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	ld [hl],d
 	jr .FinishUp
@@ -821,13 +821,13 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr .FinishUp ; nope
 .GiveTeamMoves
 	ld a,[hl]
-	ld [W_ENEMYMON5MOVE3],a
+	ld [wEnemyMon5Moves + 2],a
 	jr .FinishUp
 .ChampionRival ; give moves to his team
 
 ; pidgeot
 	ld a,SKY_ATTACK
-	ld [W_ENEMYMON1MOVE3],a
+	ld [wEnemyMon1Moves + 2],a
 
 ; starter
 	ld a,[W_RIVALSTARTER]
@@ -840,7 +840,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld b,BLIZZARD ; must be squirtle
 .GiveStarterMove
 	ld a,b
-	ld [W_ENEMYMON6MOVE3],a
+	ld [wEnemyMon6Moves + 2],a
 .FinishUp ; XXX this needs documenting
 	xor a       ; clear D079-D07B
 	ld de,wd079
@@ -985,7 +985,7 @@ CooltrainerFAI: ; 3a601 (e:6601)
 
 BrockAI: ; 3a614 (e:6614)
 ; if his active monster has a status condition, use a full heal
-	ld a,[W_ENEMYMONSTATUS]
+	ld a,[wEnemyMonStatus]
 	and a
 	ret z
 	jp AIUseFullHeal
@@ -1094,23 +1094,23 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	ld a,FULL_RESTORE
 	ld [wcf05],a
 	ld de,wHPBarOldHP
-	ld hl,W_ENEMYMONCURHP + 1
+	ld hl,wEnemyMonHP + 1
 	ld a,[hld]
 	ld [de],a
 	inc de
 	ld a,[hl]
 	ld [de],a
 	inc de
-	ld hl,W_ENEMYMONMAXHP + 1
+	ld hl,wEnemyMonMaxHP + 1
 	ld a,[hld]
 	ld [de],a
 	inc de
 	ld [wHPBarMaxHP],a
-	ld [W_ENEMYMONCURHP + 1],a
+	ld [wEnemyMonHP + 1],a
 	ld a,[hl]
 	ld [de],a
 	ld [wHPBarMaxHP+1],a
-	ld [W_ENEMYMONCURHP],a
+	ld [wEnemyMonHP],a
 	jr Func_3a718
 
 AIUsePotion: ; 3a6ca (e:66ca)
@@ -1134,7 +1134,7 @@ AIUseHyperPotion: ; 3a6d6 (e:66d6)
 AIRecoverHP: ; 3a6da (e:66da)
 ; heal b HP and print "trainer used $(a) on pokemon!"
 	ld [wcf05],a
-	ld hl,W_ENEMYMONCURHP + 1
+	ld hl,wEnemyMonHP + 1
 	ld a,[hl]
 	ld [wHPBarOldHP],a
 	add b
@@ -1151,7 +1151,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 	inc hl
 	ld a,[hld]
 	ld b,a
-	ld de,W_ENEMYMONMAXHP + 1
+	ld de,wEnemyMonMaxHP + 1
 	ld a,[de]
 	dec de
 	ld [wHPBarMaxHP],a
@@ -1185,7 +1185,7 @@ Func_3a718: ; 3a718 (e:6718)
 Func_3a72a: ; 3a72a (e:672a)
 	ld a,[wEnemyPartyCount]
 	ld c,a
-	ld hl,W_ENEMYMON1HP
+	ld hl,wEnemyMon1HP
 
 	ld d,0 ; keep count of unfainted monsters
 
@@ -1215,13 +1215,13 @@ Func_3a74b: ; 3a74b (e:674b)
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
-	ld a,[W_ENEMYMONNUMBER]
-	ld hl,W_ENEMYMON1HP
-	ld bc,$2C
+	ld a,[wEnemyMonPartyPos]
+	ld hl,wEnemyMon1HP
+	ld bc,wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	ld d,h
 	ld e,l
-	ld hl,W_ENEMYMONCURHP
+	ld hl,wEnemyMonHP
 	ld bc,4
 	call CopyData
 
@@ -1252,13 +1252,13 @@ AIUseFullHeal: ; 3a786 (e:6786)
 
 AICureStatus: ; 3a791 (e:6791)
 ; cures the status of enemy's active pokemon
-	ld a,[W_ENEMYMONNUMBER]
-	ld hl,wd8a8
-	ld bc,$2C
+	ld a,[wEnemyMonPartyPos]
+	ld hl,wEnemyMon1Status
+	ld bc,wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	xor a
 	ld [hl],a ; clear status in enemy team roster
-	ld [W_ENEMYMONSTATUS],a ; clear status of active enemy
+	ld [wEnemyMonStatus],a ; clear status of active enemy
 	ld hl,W_ENEMYBATTSTATUS3
 	res 0,[hl]
 	ret
@@ -1286,7 +1286,7 @@ AIUseDireHit: ; 0x3a7c2 unused
 
 Func_3a7cf: ; 3a7cf (e:67cf)
 	ld [H_DIVISOR],a
-	ld hl,W_ENEMYMONMAXHP
+	ld hl,wEnemyMonMaxHP
 	ld a,[hli]
 	ld [H_DIVIDEND],a
 	ld a,[hl]
@@ -1297,7 +1297,7 @@ Func_3a7cf: ; 3a7cf (e:67cf)
 	ld c,a
 	ld a,[H_QUOTIENT + 2]
 	ld b,a
-	ld hl,W_ENEMYMONCURHP + 1
+	ld hl,wEnemyMonHP + 1
 	ld a,[hld]
 	ld e,a
 	ld a,[hl]
@@ -1388,8 +1388,8 @@ LoadPartyPokeballGfx: ; 3a85d (e:685d)
 
 SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 	call PlacePlayerHUDTiles
-	ld hl, W_PARTYMON1DATA
-	ld de, W_NUMINPARTY ; W_NUMINPARTY
+	ld hl, wPartyMon1
+	ld de, wPartyCount ; wPartyCount
 	call SetupPokeballs
 	ld a, $60
 	ld hl, W_BASECOORDX ; wd081
@@ -1537,8 +1537,8 @@ PlaceHUDTiles: ; 3a930 (e:6930)
 
 SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	call LoadPartyPokeballGfx
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
-	ld de, W_NUMINPARTY ; W_NUMINPARTY
+	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
+	ld de, wPartyCount ; wPartyCount
 	call SetupPokeballs
 	ld hl, W_BASECOORDX ; wd081
 	ld a, $50

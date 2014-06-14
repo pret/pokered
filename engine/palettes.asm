@@ -31,11 +31,11 @@ BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	ld bc, $10
 	call CopyData
 	ld a, [W_PLAYERBATTSTATUS3]
-	ld hl, W_PLAYERMONID
+	ld hl, wBattleMonSpecies
 	call DeterminePaletteID
 	ld b, a
 	ld a, [W_ENEMYBATTSTATUS3]
-	ld hl, W_ENEMYMONID
+	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	ld c, a
 	ld hl, wcf2e

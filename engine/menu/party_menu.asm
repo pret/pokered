@@ -32,7 +32,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	callba SendBlkPacket_PartyMenu ; loads some data to wcf2e
 	FuncCoord 3,0
 	ld hl,Coord
-	ld de,W_PARTYMON1
+	ld de,wPartySpecies
 	xor a
 	ld c,a
 	ld [$FF8C],a ; loop counter
@@ -46,7 +46,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld a,c
 	push hl
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
@@ -231,7 +231,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld l,a
 	push hl
 	ld a,[wcf06]
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	call PrintText

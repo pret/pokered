@@ -355,7 +355,7 @@ ContinueGame: ; 5db5 (1:5db5)
 	call PlaceString
 	FuncCoord 12, 9
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call PlaceString
 	FuncCoord 17, 11
 	ld hl, Coord
@@ -384,7 +384,7 @@ PrintSaveScreenText: ; 5def (1:5def)
 	ld de, SaveScreenInfoText
 	call PlaceString
 	ld hl, wTileMap + $34
-	ld de, W_PLAYERNAME
+	ld de, wPlayerName
 	call PlaceString
 	ld hl, wTileMap + $61
 	call Func_5e2f

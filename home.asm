@@ -383,11 +383,11 @@ PartyMenuInit:: ; 1420 (0:1420)
 	push af
 	ld [hli],a ; current menu item ID
 	inc hl
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	and a ; are there more than 0 pokemon in the party?
 	jr z,.storeMaxMenuItemID
 	dec a
-; if party is not empty, the max menu item ID is ([W_NUMINPARTY] - 1)
+; if party is not empty, the max menu item ID is ([wPartyCount] - 1)
 ; otherwise, it is 0
 .storeMaxMenuItemID
 	ld [hli],a ; max menu item ID
@@ -425,18 +425,18 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld [$ffd7],a
 	bit 1,b
 	jr nz,.noPokemonChosen
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	and a
 	jr z,.noPokemonChosen
 	ld a,[wCurrentMenuItem]
 	ld [wWhichPokemon],a
-	ld hl,W_PARTYMON1
+	ld hl,wPartySpecies
 	ld b,0
 	ld c,a
 	add hl,bc
 	ld a,[hl]
 	ld [wcf91],a
-	ld [wcfd9],a
+	ld [wBattleMonSpecies2],a
 	call BankswitchBack
 	and a
 	ret
@@ -617,7 +617,7 @@ GetMonHeader:: ; 1537 (0:1537)
 ; copy party pokemon's name to wcd6d
 GetPartyMonName2:: ; 15b4 (0:15b4)
 	ld a,[wWhichPokemon] ; index within party
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 
 ; this is called more often
 GetPartyMonName:: ; 15ba (0:15ba)
@@ -2055,12 +2055,12 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	call GetName
 	jr .storeChosenEntry
 .pokemonList
-	ld hl,W_NUMINPARTY
+	ld hl,wPartyCount
 	ld a,[wcf8b]
 	cp l ; is it a list of party pokemon or box pokemon?
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
-	ld hl, W_BOXMON1NAME ; box pokemon names
+	ld hl, wBoxMonNicks ; box pokemon names
 .getPokemonName
 	ld a,[wWhichPokemon]
 	call GetPartyMonName
@@ -2303,12 +2303,12 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	jr .placeNameString
 .pokemonPCMenu
 	push hl
-	ld hl,W_NUMINPARTY
+	ld hl,wPartyCount
 	ld a,[wcf8b]
 	cp l ; is it a list of party pokemon or box pokemon?
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
-	ld hl, W_BOXMON1NAME ; box pokemon names
+	ld hl, wBoxMonNicks ; box pokemon names
 .getPokemonName
 	ld a,[wWhichPokemon]
 	ld b,a
@@ -2348,7 +2348,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,[wd11e]
 	push af
 	push hl
-	ld hl,W_NUMINPARTY
+	ld hl,wPartyCount
 	ld a,[wcf8b]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld a,$00
@@ -3794,8 +3794,8 @@ NamePointers:: ; 375d (0:375d)
 	dw MoveNames
 	dw UnusedNames
 	dw ItemNames
-	dw W_PARTYMON1OT ; player's OT names list
-	dw W_ENEMYMON1OT ; enemy's OT names list
+	dw wPartyMonOT ; player's OT names list
+	dw wEnemyMonOT ; enemy's OT names list
 	dw TrainerNames
 
 GetName:: ; 376b (0:376b)

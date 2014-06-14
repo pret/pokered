@@ -1,12 +1,12 @@
 HealEffect_: ; 3b9ec (e:79ec)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld de, W_PLAYERMONCURHP ; wd015
-	ld hl, W_PLAYERMONMAXHP ; wd023
+	ld de, wBattleMonHP ; wd015
+	ld hl, wBattleMonMaxHP ; wd023
 	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr z, .asm_3ba03
-	ld de, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
-	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
+	ld de, wEnemyMonHP ; wEnemyMonHP
+	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
 	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 .asm_3ba03
 	ld b, a
@@ -25,11 +25,11 @@ HealEffect_: ; 3b9ec (e:79ec)
 	push af
 	ld c, $32
 	call DelayFrames
-	ld hl, W_PLAYERMONSTATUS ; W_PLAYERMONSTATUS
+	ld hl, wBattleMonStatus ; wBattleMonStatus
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ba25
-	ld hl, W_ENEMYMONSTATUS ; wcfe9
+	ld hl, wEnemyMonStatus ; wcfe9
 .asm_3ba25
 	ld a, [hl]
 	and a
@@ -120,15 +120,15 @@ RegainedHealthText: ; 3baac (e:7aac)
 	db "@"
 
 TransformEffect_: ; 3bab1 (e:7ab1)
-	ld hl, W_PLAYERMONID
-	ld de, wcfe5
+	ld hl, wBattleMonSpecies
+	ld de, wEnemyMonSpecies
 	ld bc, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
 	ld a, [W_ENEMYBATTSTATUS1] ; W_ENEMYBATTSTATUS1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3bad1
-	ld hl, wcfe5
-	ld de, W_PLAYERMONID
+	ld hl, wEnemyMonSpecies
+	ld de, wBattleMonSpecies
 	ld bc, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
 	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
 	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1

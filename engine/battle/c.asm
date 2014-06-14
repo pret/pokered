@@ -27,13 +27,13 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld [hl], a ; set the damage output to zero
 	dec a
 	ld [wd05e], a
-	ld hl, W_PLAYERMONSPEED + 1
-	ld de, W_ENEMYMONSPEED + 1
+	ld hl, wBattleMonSpeed + 1
+	ld de, wEnemyMonSpeed + 1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_33f72
-	ld hl, W_ENEMYMONSPEED + 1
-	ld de, W_PLAYERMONSPEED + 1
+	ld hl, wEnemyMonSpeed + 1
+	ld de, wBattleMonSpeed + 1
 .asm_33f72
 	ld a, [de]
 	dec de

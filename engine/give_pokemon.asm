@@ -2,7 +2,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	call EnableAutoTextBoxDrawing
 	xor a
 	ld [wccd3], a
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	cp $6
 	jr c, .asm_4fe01
 	ld a, [W_NUMINBOX] ; wda80
@@ -11,7 +11,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	xor a
 	ld [W_ENEMYBATTSTATUS3], a ; W_ENEMYBATTSTATUS3
 	ld a, [wcf91]
-	ld [W_ENEMYMONID], a
+	ld [wEnemyMonSpecies2], a
 	callab Func_3eb01
 	call SetPokedexOwnedFlag
 	callab Func_e7a4

@@ -7,7 +7,7 @@ Func_372d6: ; 372d6 (d:72d6)
 	call TextBoxBorder
 	FuncCoord 4, 5
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call PlaceString
 	FuncCoord 4, 10
 	ld hl, Coord

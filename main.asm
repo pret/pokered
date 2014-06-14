@@ -90,7 +90,7 @@ LoadMonData_:
 ; Return monster id at wcf91 and its data at wcf98.
 ; Also load base stats at W_MONHDEXNUM for convenience.
 
-	ld a, [W_DAYCAREMONDATA]
+	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
 	ld a, [wcc49]
 	cp 3
@@ -105,8 +105,8 @@ LoadMonData_:
 	ld [wd0b5], a ; input for GetMonHeader
 	call GetMonHeader
 
-	ld hl, W_PARTYMON1DATA
-	ld bc, 44
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wcc49]
 	cp 1
 	jr c, .getMonEntry
@@ -115,11 +115,11 @@ LoadMonData_:
 	jr z, .getMonEntry
 
 	cp 2
-	ld hl, W_BOXMON1DATA
-	ld bc, 33
+	ld hl, wBoxMons
+	ld bc, wBoxMon2 - wBoxMon1
 	jr z, .getMonEntry
 
-	ld hl, W_DAYCAREMONDATA
+	ld hl, wDayCareMon
 	jr .copyMonData
 
 .getMonEntry
@@ -472,7 +472,7 @@ TestBattle:
 	set 0, [hl]
 
 	; Reset the party.
-	ld hl, W_NUMINPARTY
+	ld hl, wPartyCount
 	xor a
 	ld [hli], a
 	dec a
@@ -1039,7 +1039,7 @@ DrawStartMenu: ; 710b (1:710b)
 	call PrintStartMenuItem
 	ld de,StartMenuItemText
 	call PrintStartMenuItem
-	ld de,W_PLAYERNAME ; player's name
+	ld de,wPlayerName ; player's name
 	call PrintStartMenuItem
 	ld a,[wd72e]
 	bit 6,a ; is the player using the link feature?
@@ -1756,7 +1756,7 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
+	ld hl, wPartyMon1Moves ; wPartyMon1Moves
 	ld bc, $2c
 	call AddNTimes
 	ld d, h
@@ -1830,7 +1830,7 @@ INCLUDE "engine/battle/1.asm"
 INCLUDE "engine/menu/players_pc.asm"
 
 _RemovePokemon: ; 7b68 (1:7b68)
-	ld hl, W_NUMINPARTY ; W_NUMINPARTY
+	ld hl, wPartyCount ; wPartyCount
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7b74
@@ -1852,12 +1852,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld [hli], a
 	inc a
 	jr nz, .asm_7b81
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld d, $5
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7b97
-	ld hl, W_BOXMON1OT
+	ld hl, wBoxMonOT
 	ld d, $13
 .asm_7b97
 	ld a, [wWhichPokemon] ; wWhichPokemon
@@ -1872,20 +1872,20 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld e, l
 	ld bc, $b
 	add hl, bc
-	ld bc, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld bc, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7bb8
-	ld bc, W_BOXMON1NAME
+	ld bc, wBoxMonNicks
 .asm_7bb8
 	call CopyDataUntil
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
-	ld bc, $2c
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7bcd
-	ld hl, W_BOXMON1DATA
-	ld bc, $21
+	ld hl, wBoxMons
+	ld bc, wBoxMon2 - wBoxMon1
 .asm_7bcd
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
@@ -1894,21 +1894,21 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7be4
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
-	ld bc, W_BOXMON1OT
+	ld bc, wBoxMonOT
 	jr .asm_7beb
 .asm_7be4
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	add hl, bc
-	ld bc, W_PARTYMON1OT ; wd273
+	ld bc, wPartyMonOT ; wd273
 .asm_7beb
 	call CopyDataUntil
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7bfa
-	ld hl, W_BOXMON1NAME
+	ld hl, wBoxMonNicks
 .asm_7bfa
 	ld bc, $b
 	ld a, [wWhichPokemon] ; wWhichPokemon
@@ -1921,7 +1921,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7c15
-	ld bc, wdee2
+	ld bc, wBoxMonNicksEnd
 .asm_7c15
 	jp CopyDataUntil
 
@@ -2448,7 +2448,7 @@ Func_c69c: ; c69c (3:469c)
 	ld a, [wd730]
 	add a
 	jp c, .asm_c74f
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	and a
 	jp z, .asm_c74f
 	call Func_c8de
@@ -2456,8 +2456,8 @@ Func_c69c: ; c69c (3:469c)
 	and $3
 	jp nz, .asm_c74f
 	ld [wWhichPokemon], a ; wWhichPokemon
-	ld hl, W_PARTYMON1_STATUS ; W_PARTYMON1_STATUS
-	ld de, W_PARTYMON1 ; W_PARTYMON1
+	ld hl, wPartyMon1Status ; wPartyMon1Status
+	ld de, wPartySpecies ; wPartySpecies
 .asm_c6be
 	ld a, [hl]
 	and $8
@@ -2489,7 +2489,7 @@ Func_c69c: ; c69c (3:469c)
 	ld [wd11e], a
 	push de
 	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	call GetPartyMonName
 	xor a
 	ld [wJoyIgnore], a
@@ -2515,8 +2515,8 @@ Func_c69c: ; c69c (3:469c)
 	pop hl
 	jr .asm_c6be
 .asm_c70e
-	ld hl, W_PARTYMON1_STATUS ; W_PARTYMON1_STATUS
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld hl, wPartyMon1Status ; wPartyMon1Status
+	ld a, [wPartyCount] ; wPartyCount
 	ld d, a
 	ld e, $0
 .asm_c717
@@ -2621,7 +2621,7 @@ Func_c8de: ; c8de (3:48de)
 	ld a, [W_DAYCARE_IN_USE]
 	and a
 	ret z
-	ld hl, wda6f
+	ld hl, wDayCareMonExp + 2
 	inc [hl]
 	ret nz
 	dec hl
@@ -3453,7 +3453,7 @@ Func_f2dd: ; f2dd (3:72dd)
 	ret
 
 _AddPokemonToParty: ; f2e5 (3:72e5)
-	ld de, W_NUMINPARTY ; W_NUMINPARTY
+	ld de, wPartyCount ; wPartyCount
 	ld a, [wcc49]
 	and $f
 	jr z, .asm_f2f2
@@ -3476,24 +3476,24 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	inc de
 	ld a, $ff
 	ld [de], a
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld a, [wcc49]
 	and $f
 	jr z, .asm_f315
-	ld hl, W_ENEMYMON1OT
+	ld hl, wEnemyMonOT
 .asm_f315
 	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-	ld hl, W_PLAYERNAME ; wd158
+	ld hl, wPlayerName ; wd158
 	ld bc, $b
 	call CopyData
 	ld a, [wcc49]
 	and a
 	jr nz, .asm_f33f
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
@@ -3502,15 +3502,15 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, $4e
 	call Predef ; indirect jump to Func_64eb (64eb (1:64eb))
 .asm_f33f
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMons
 	ld a, [wcc49]
 	and $f
 	jr z, .asm_f34c
-	ld hl, wEnemyMons ; wEnemyMon1Species
+	ld hl, wEnemyMons
 .asm_f34c
 	ld a, [$ffe4]
 	dec a
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld e, l
 	ld d, h
@@ -3589,20 +3589,20 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 .copyEnemyMonData
 	ld bc, $1b
 	add hl, bc
-	ld a, [W_ENEMYMONATKDEFIV] ; copy IVs from cur enemy mon
+	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
-	ld a, [W_ENEMYMONSPDSPCIV]
+	ld a, [wEnemyMonDVs + 1]
 	ld [hl], a
-	ld a, [W_ENEMYMONCURHP]    ; copy HP from cur enemy mon
+	ld a, [wEnemyMonHP]    ; copy HP from cur enemy mon
 	ld [de], a
 	inc de
-	ld a, [W_ENEMYMONCURHP+1]
+	ld a, [wEnemyMonHP+1]
 	ld [de], a
 	inc de
 	xor a
 	ld [de], a                 ; level (?)
 	inc de
-	ld a, [W_ENEMYMONSTATUS]   ; copy status ailments from cur enemy mon
+	ld a, [wEnemyMonStatus]   ; copy status ailments from cur enemy mon
 	ld [de], a
 	inc de
 .copyMonTypesAndMoves
@@ -3676,7 +3676,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	dec a
 	jr nz, .calcFreshStats
-	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
+	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
 	ld bc, $a
 	call CopyData          ; copy stats of cur enemy mon
 	pop hl
@@ -3724,7 +3724,7 @@ AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
 _AddEnemyMonToPlayerParty: ; f49d (3:749d)
-	ld hl, W_NUMINPARTY
+	ld hl, wPartyCount
 	ld a, [hl]
 	cp $6
 	scf
@@ -3737,33 +3737,33 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld a, [wcf91]
 	ld [hli], a      ; add mon as last list entry
 	ld [hl], $ff     ; write new sentinel
-	ld hl, W_PARTYMON1DATA
-	ld a, [W_NUMINPARTY]
+	ld hl, wPartyMons
+	ld a, [wPartyCount]
 	dec a
-	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld e, l
 	ld d, h
 	ld hl, wcf98
 	call CopyData    ; write new mon's data (from wcf98)
-	ld hl, W_PARTYMON1OT
-	ld a, [W_NUMINPARTY]
+	ld hl, wPartyMonOT
+	ld a, [wPartyCount]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-	ld hl, W_ENEMYMON1OT
+	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, $000b
 	call CopyData    ; write new mon's OT name (from an enemy mon)
-	ld hl, W_PARTYMON1NAME
-	ld a, [W_NUMINPARTY]
+	ld hl, wPartyMonNicks
+	ld a, [wPartyCount]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-	ld hl, W_ENEMYMON1NAME
+	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld bc, $000b
@@ -3792,7 +3792,7 @@ Func_f51e: ; f51e (3:751e)
 	cp $2
 	jr z, .checkPartyMonSlots
 	cp $3
-	ld hl, W_DAYCAREMONDATA
+	ld hl, wDayCareMon
 	jr z, .asm_f575
 	ld hl, W_NUMINBOX ; wda80
 	ld a, [hl]
@@ -3800,7 +3800,7 @@ Func_f51e: ; f51e (3:751e)
 	jr nz, .partyOrBoxNotFull
 	jr .boxFull
 .checkPartyMonSlots
-	ld hl, W_NUMINPARTY ; W_NUMINPARTY
+	ld hl, wPartyCount ; wPartyCount
 	ld a, [hl]
 	cp $6
 	jr nz, .partyOrBoxNotFull
@@ -3815,7 +3815,7 @@ Func_f51e: ; f51e (3:751e)
 	add hl, bc
 	ld a, [wcf95]
 	cp $2
-	ld a, [W_DAYCAREMONDATA]
+	ld a, [wDayCareMon]
 	jr z, .asm_f556
 	ld a, [wcf91]
 .asm_f556
@@ -3823,12 +3823,12 @@ Func_f51e: ; f51e (3:751e)
 	ld [hl], $ff         ; write new sentinel
 	ld a, [wcf95]
 	dec a
-	ld hl, W_PARTYMON1DATA ; W_PARTYMON1_NUM
-	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA ; $2c
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1 ; $2c
+	ld a, [wPartyCount] ; wPartyCount
 	jr nz, .skipToNewMonEntry
-	ld hl, W_BOXMON1DATA
-	ld bc, W_BOXMON2DATA - W_BOXMON1DATA ; $21
+	ld hl, wBoxMons
+	ld bc, wBoxMon2 - wBoxMon1 ; $21
 	ld a, [W_NUMINBOX] ; wda80
 .skipToNewMonEntry
 	dec a
@@ -3839,21 +3839,21 @@ Func_f51e: ; f51e (3:751e)
 	ld d, h
 	ld a, [wcf95]
 	and a
-	ld hl, W_BOXMON1DATA
-	ld bc, W_BOXMON2DATA - W_BOXMON1DATA ; $21
+	ld hl, wBoxMons
+	ld bc, wBoxMon2 - wBoxMon1 ; $21
 	jr z, .asm_f591
 	cp $2
-	ld hl, W_DAYCAREMONDATA
+	ld hl, wDayCareMon
 	jr z, .asm_f597
-	ld hl, W_PARTYMON1DATA ; W_PARTYMON1_NUM
-	ld bc, W_PARTYMON2DATA - W_PARTYMON1DATA ; $2c
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1 ; $2c
 .asm_f591
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
 .asm_f597
 	push hl
 	push de
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	call CopyData
 	pop de
 	pop hl
@@ -3862,7 +3862,7 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f5b4
 	cp $2
 	jr z, .asm_f5b4
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld a, [hl]
 	inc de
@@ -3875,10 +3875,10 @@ Func_f51e: ; f51e (3:751e)
 	ld de, W_DAYCAREMONOT
 	jr z, .asm_f5d3
 	dec a
-	ld hl, W_PARTYMON1OT ; wd273
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld hl, wPartyMonOT ; wd273
+	ld a, [wPartyCount] ; wPartyCount
 	jr nz, .asm_f5cd
-	ld hl, W_BOXMON1OT
+	ld hl, wBoxMonOT
 	ld a, [W_NUMINBOX] ; wda80
 .asm_f5cd
 	dec a
@@ -3886,14 +3886,14 @@ Func_f51e: ; f51e (3:751e)
 	ld d, h
 	ld e, l
 .asm_f5d3
-	ld hl, W_BOXMON1OT
+	ld hl, wBoxMonOT
 	ld a, [wcf95]
 	and a
 	jr z, .asm_f5e6
 	ld hl, W_DAYCAREMONOT
 	cp $2
 	jr z, .asm_f5ec
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 .asm_f5e6
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call SkipFixedLengthTextEntries
@@ -3905,10 +3905,10 @@ Func_f51e: ; f51e (3:751e)
 	ld de, W_DAYCAREMONNAME
 	jr z, .asm_f611
 	dec a
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld a, [wPartyCount] ; wPartyCount
 	jr nz, .asm_f60b
-	ld hl, W_BOXMON1NAME
+	ld hl, wBoxMonNicks
 	ld a, [W_NUMINBOX] ; wda80
 .asm_f60b
 	dec a
@@ -3916,14 +3916,14 @@ Func_f51e: ; f51e (3:751e)
 	ld d, h
 	ld e, l
 .asm_f611
-	ld hl, W_BOXMON1NAME
+	ld hl, wBoxMonNicks
 	ld a, [wcf95]
 	and a
 	jr z, .asm_f624
 	ld hl, W_DAYCAREMONNAME
 	cp $2
 	jr z, .asm_f62a
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 .asm_f624
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call SkipFixedLengthTextEntries
@@ -4037,8 +4037,8 @@ FlagAction:
 HealParty:
 ; Restore HP and PP.
 
-	ld hl, W_PARTYMON1
-	ld de, W_PARTYMON1_HP
+	ld hl, wPartySpecies
+	ld de, wPartyMon1HP
 .healmon
 	ld a, [hli]
 	cp $ff
@@ -4047,15 +4047,15 @@ HealParty:
 	push hl
 	push de
 
-	ld hl, $0003 ; status
+	ld hl, wPartyMon1Status - wPartyMon1HP
 	add hl, de
 	xor a
 	ld [hl], a
 
 	push de
-	ld b, $4 ; A Pokémon has 4 moves
+	ld b, NUM_MOVES ; A Pokémon has 4 moves
 .pp
-	ld hl, $0007 ; moves
+	ld hl, wPartyMon1Moves - wPartyMon1HP
 	add hl, de
 
 	ld a, [hl]
@@ -4063,7 +4063,7 @@ HealParty:
 	jr z, .nextmove
 
 	dec a
-	ld hl, $001c ; pp
+	ld hl, wPartyMon1PP - wPartyMon1HP
 	add hl, de
 
 	push hl
@@ -4096,7 +4096,7 @@ HealParty:
 	jr nz, .pp
 	pop de
 
-	ld hl, $0021 ; max hp - cur hp
+	ld hl, wPartyMon1MaxHP - wPartyMon1HP
 	add hl, de
 	ld a, [hli]
 	ld [de], a
@@ -4108,7 +4108,7 @@ HealParty:
 	pop hl
 
 	push hl
-	ld bc, $002c ; next mon
+	ld bc, wPartyMon2 - wPartyMon1
 	ld h, d
 	ld l, e
 	add hl, bc
@@ -4122,7 +4122,7 @@ HealParty:
 	ld [wWhichPokemon], a
 	ld [wd11e], a
 
-	ld a, [W_NUMINPARTY]
+	ld a, [wPartyCount]
 	ld b, a
 .ppup
 	push bc
@@ -4359,7 +4359,7 @@ InitializePlayerData:
 	ld a, $ff
 	ld [wd71b], a                 ; XXX what's this?
 
-	ld hl, W_NUMINPARTY
+	ld hl, wPartyCount
 	call InitializeEmptyList
 	ld hl, W_NUMINBOX
 	call InitializeEmptyList

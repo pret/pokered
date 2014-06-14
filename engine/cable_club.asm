@@ -63,7 +63,7 @@ Func_5345: ; 5345
 	ld a, b
 	or c
 	jr nz, .asm_537d
-	ld hl, W_PARTYMONEND
+	ld hl, wPartyMons - 1
 	ld de, wTileMapBackup + 10
 	ld bc, $0
 .asm_538d
@@ -191,7 +191,7 @@ Func_5345: ; 5345
 	or c
 	jr nz, .asm_5456
 	ld de, wTileMapBackup
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMons
 	ld c, $2
 .asm_546a
 	ld a, [de]
@@ -206,7 +206,7 @@ Func_5345: ; 5345
 	jr z, .asm_5489
 	push hl
 	push bc
-	ld b, $0
+	ld b, 0
 	dec a
 	ld c, a
 	add hl, bc
@@ -216,11 +216,11 @@ Func_5345: ; 5345
 	pop hl
 	jr .asm_546a
 .asm_5489
-	ld hl, W_PARTYMON6DATA + W_PARTYMON1_MOVE4PP - W_PARTYMON1DATA ; wd267
+	ld hl, wPartyMons + $fc ; wd267
 	dec c
 	jr nz, .asm_546a
 	ld de, wTileMapBackup + 200
-	ld hl, W_WATERRATE ; wEnemyMon1Species
+	ld hl, wEnemyMons
 	ld c, $2
 .asm_5497
 	ld a, [de]
@@ -245,7 +245,7 @@ Func_5345: ; 5345
 	pop hl
 	jr .asm_5497
 .asm_54b6
-	ld hl, wd9a0
+	ld hl, wEnemyMons + $fc
 	dec c
 	jr nz, .asm_5497
 	ld a, $ac
@@ -370,7 +370,7 @@ TradeCenter_SelectMon:
 	ld [hl], a
 	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [W_NUMINPARTY]
+	ld a, [wPartyCount]
 	dec a
 	cp b
 	jr nc, .asm_55dc ; 0x55cd $d
@@ -386,7 +386,7 @@ TradeCenter_SelectMon:
 	ld [wcc37], a
 	ld a, $91
 	ld [wMenuWatchedKeys], a
-	ld a, [W_NUMINPARTY]
+	ld a, [wPartyCount]
 	ld [wMaxMenuItem], a
 	ld a, $1
 	ld [wTopMenuItemY], a
@@ -550,7 +550,7 @@ TradeCenter_SelectMon:
 	jr z, .asm_574a ; 0x5758 $f0
 	ld a, $7f
 	ld [wTileMap + $141], a
-	ld a, [W_NUMINPARTY]
+	ld a, [wPartyCount]
 	dec a
 	ld [wCurrentMenuItem], a
 	jp .asm_55dc
@@ -629,13 +629,13 @@ Func_57f2:
 	ld c, $12
 	call Func_5ab3
 	ld hl, wTileMap + $5
-	ld de, W_PLAYERNAME
+	ld de, wPlayerName
 	call PlaceString
 	ld hl, wTileMap + $a5
 	ld de, W_GRASSRATE
 	call PlaceString
 	ld hl, wTileMap + $16
-	ld de, W_PARTYMON1
+	ld de, wPartySpecies
 	call Func_5827
 	ld hl, wTileMap + $b6
 	ld de, wEnemyPartyMons
@@ -678,7 +678,7 @@ TradeCenter_Trade:
 	ld c, $12
 	call Func_5ab3
 	ld a, [wWhichTrade]
-	ld hl, W_PARTYMON1
+	ld hl, wPartySpecies
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -740,12 +740,12 @@ TradeCenter_Trade:
 	jp Func_5a18
 .asm_58fd
 	ld a, [wWhichTrade]
-	ld hl, W_PARTYMON1OT ; OT names of player
+	ld hl, wPartyMonOT ; OT names of player
 	call SkipFixedLengthTextEntries
 	ld de, wTrainerScreenX
 	ld bc, $000b
 	call CopyData
-	ld hl, W_PARTYMON1_NUM
+	ld hl, wPartyMon1Species
 	ld a, [wWhichTrade]
 	ld bc, $002c
 	call AddNTimes
@@ -756,7 +756,7 @@ TradeCenter_Trade:
 	ld a, [hl]
 	ld [wcd4d], a
 	ld a, [wTrainerEngageDistance]
-	ld hl, W_ENEMYMON1OT ; OT names of other player
+	ld hl, wEnemyMonOT ; OT names of other player
 	call SkipFixedLengthTextEntries
 	ld de, wcd4e
 	ld bc, $000b
@@ -773,7 +773,7 @@ TradeCenter_Trade:
 	ld [wcd5a], a
 	ld a, [wWhichTrade]
 	ld [wWhichPokemon], a
-	ld hl, W_PARTYMON1
+	ld hl, wPartySpecies
 	ld b, $0
 	ld c, a
 	add hl, bc
@@ -799,7 +799,7 @@ TradeCenter_Trade:
 	ld bc, $002c
 	call CopyData
 	call AddEnemyMonToPlayerParty
-	ld a, [W_NUMINPARTY]
+	ld a, [wPartyCount]
 	dec a
 	ld [wWhichPokemon], a
 	ld a, $1

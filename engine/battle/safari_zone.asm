@@ -15,7 +15,7 @@ PrintSafariZoneBattleText: ; 4277 (1:4277)
 	ld hl, SafariZoneAngryText
 	jr nz, .asm_429f
 	push hl
-	ld a, [wcfe5]
+	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld a, [W_MONHCATCHRATE]

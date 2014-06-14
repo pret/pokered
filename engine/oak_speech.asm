@@ -5,7 +5,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	push af
 	ld a, [wd732]
 	push af
-	ld hl, W_PLAYERNAME ; wd158
+	ld hl, wPlayerName ; wd158
 	ld bc, $d8a
 	xor a
 	call FillMemory
@@ -23,7 +23,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	and a
 	call z, Func_5bff
 	ld hl, NintenText
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	ld bc, $b
 	call CopyData
 	ld hl, SonyText

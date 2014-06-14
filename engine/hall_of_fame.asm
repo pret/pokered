@@ -36,7 +36,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
-	ld hl, W_PARTYMON1 ; W_PARTYMON1
+	ld hl, wPartySpecies
 	ld c, $ff
 .asm_701fb
 	ld a, [hli]
@@ -48,7 +48,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld [wWhichTrade], a ; wWhichTrade
 	ld a, c
 	ld [wTrainerEngageDistance], a
-	ld hl, W_PARTYMON1_LEVEL ; W_PARTYMON1_LEVEL
+	ld hl, wPartyMon1Level ; wPartyMon1Level
 	ld bc, $2c
 	call AddNTimes
 	ld a, [hl]
@@ -105,7 +105,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wcf91], a
 	ld [wd0b5], a
-	ld [wcfd9], a
+	ld [wBattleMonSpecies2], a
 	ld [wcf1d], a
 	ld a, [wTrainerScreenY]
 	and a
@@ -152,7 +152,7 @@ Func_70278: ; 70278 (1c:4278)
 
 Func_702e1: ; 702e1 (1c:42e1)
 	ld a, [wTrainerEngageDistance]
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	call GetPartyMonName
 	call Func_702f0
 	jp Func_70404
@@ -232,7 +232,7 @@ Func_70377: ; 70377 (1c:4377)
 	call TextBoxBorder
 	FuncCoord 7, 2
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call PlaceString
 	FuncCoord 1, 6
 	ld hl, Coord

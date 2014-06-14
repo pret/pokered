@@ -11,7 +11,7 @@ DecrementPP: ; 68000 (1a:4000)
 	ret nz               ; if any of these statuses are true, don't decrement PP
 	bit 6, [hl]          ; check 6th bit status flag on W_PLAYERBATTSTATUS2
 	ret nz               ; and return if it is set
-	ld hl, W_PLAYERMONPP         ; PP of first move (in battle)
+	ld hl, wBattleMonPP  ; PP of first move (in battle)
 	call .DecrementPP
 
 	ld a, [W_PLAYERBATTSTATUS3]        ; load pokemon status bits?
@@ -26,7 +26,7 @@ DecrementPP: ; 68000 (1a:4000)
 	                     ; its opponent, which is *not* the same as its real PP as part of your
 	                     ; party.  So we return, and don't do that part.
 
-	ld hl, W_PARTYMON1_MOVE1PP         ; PP of first move (in party)
+	ld hl, wPartyMon1PP         ; PP of first move (in party)
 	ld a, [wPlayerMonNumber]        ; which mon in party is active
 	ld bc, $2C           ; XXX probably size of party pokemon's data structure
 	call AddNTimes       ; calculate address of the mon to modify

@@ -1,8 +1,61 @@
 
-INCLUDE "constants/wram_constants.asm"
+INCLUDE "constants.asm"
 
 flag_array: MACRO
 	ds ((\1) + 7) / 8
+ENDM
+
+box_struct_length EQU 25 + NUM_MOVES * 2
+box_struct: MACRO
+\1Species::    db
+\1HP::         dw
+\1BoxLevel::   db
+\1Status::     db
+\1Type::
+\1Type1::      db
+\1Type2::      db
+\1CatchRate::  db
+\1Moves::      ds NUM_MOVES
+\1OTID::       dw
+\1Exp::        ds 3
+\1HPExp::      dw
+\1AttackExp::  dw
+\1DefenseExp:: dw
+\1SpeedExp::   dw
+\1SpecialExp:: dw
+\1DVs::        ds 2
+\1PP::         ds NUM_MOVES
+ENDM
+
+party_struct: MACRO
+	box_struct \1
+\1Level::      db
+\1Stats::
+\1MaxHP::      dw
+\1Attack::     dw
+\1Defense::    dw
+\1Speed::      dw
+\1Special::    dw
+ENDM
+
+battle_struct: MACRO
+\1Species::    db
+\1HP::         dw
+\1BoxLevel::   db
+\1Status::     db
+\1Type::
+\1Type1::      db
+\1Type2::      db
+\1CatchRate::  db
+\1Moves::      ds NUM_MOVES
+\1DVs::        ds 2
+\1Level::      db
+\1MaxHP::      dw
+\1Attack::     dw
+\1Defense::    dw
+\1Speed::      dw
+\1Special::    dw
+\1PP::         ds NUM_MOVES
 ENDM
 
 
@@ -577,100 +630,53 @@ W_PLAYERMOVEACCURACY:: ; cfd6
 W_PLAYERMOVEMAXPP:: ; cfd7
 	ds 1
 
-W_ENEMYMONID:: ; cfd8
+
+wEnemyMonSpecies2:: ; cfd8
+	ds 1
+wBattleMonSpecies2:: ; cfd9
 	ds 1
 
-wcfd9:: ds 1
+wEnemyMonNick:: ds 11 ; cfda
 
-W_ENEMYMONNAME:: ; cfda
-	ds 11
+wEnemyMon:: ; cfe5
+; The wEnemyMon struct reaches past 0xcfff,
+; the end of wram bank 0 on cgb.
+; This has no significance on dmg, where wram
+; isn't banked (c000-dfff is contiguous).
+; However, recent versions of rgbds have replaced
+; dmg-style wram with cgb wram banks.
 
-wcfe5:: ds 1
+; Until this is fixed, this struct will have
+; to be declared manually.
 
-W_ENEMYMONCURHP:: ; cfe6
-; active opponent's hp (16 bits)
-	ds 2
-W_ENEMYMONNUMBER:: ; cfe8
-; active opponent's position in team (0 to 5)
-	ds 1
-W_ENEMYMONSTATUS:: ; cfe9
-; active opponent's status condition
-	ds 1
-W_ENEMYMONTYPES:: ; cfea
-W_ENEMYMONTYPE1:: ; cfea
-	ds 1
-W_ENEMYMONTYPE2:: ; cfeb
-	ds 1
-	ds 1
-W_ENEMYMONMOVES:: ; cfed
-	ds 4
-W_ENEMYMONATKDEFIV:: ; cff1
-	ds 1
-W_ENEMYMONSPDSPCIV:: ; cff2
-	ds 1
-W_ENEMYMONLEVEL:: ; cff3
-	ds 1
-W_ENEMYMONMAXHP:: ; cff4
-	ds 2
-W_ENEMYMONATTACK:: ; cff6
-	ds 2
-W_ENEMYMONDEFENSE:: ; cff8
-	ds 2
-W_ENEMYMONSPEED:: ; cffa
-	ds 2
-W_ENEMYMONSPECIAL:: ; cffc
-	ds 2
-
-W_ENEMYMONPP:: ; cffe
-; four moves (extends past $cfff)
-	ds 2
-
-
+wEnemyMonSpecies::   db
+wEnemyMonHP::        dw
+wEnemyMonPartyPos::
+wEnemyMonBoxLevel::  db
+wEnemyMonStatus::    db
+wEnemyMonType::
+wEnemyMonType1::     db
+wEnemyMonType2::     db
+wEnemyMonCatchRate:: db
+wEnemyMonMoves::     ds NUM_MOVES
+wEnemyMonDVs::       ds 2
+wEnemyMonLevel::     db
+wEnemyMonMaxHP::     dw
+wEnemyMonAttack::    dw
+wEnemyMonDefense::   dw
+wEnemyMonSpeed::     dw
+wEnemyMonSpecial::   dw
+wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
 SECTION "WRAM Bank 1", WRAMX, BANK[1]
-
-	ds 2 ; W_ENEMYMONPP
+                     ds 2 ; NUM_MOVES - 2
 
 wd002:: ds 5
 wd007:: ds 1
 wd008:: ds 1
 
-W_PLAYERMONNAME:: ; d009
-	ds 11
+wBattleMonNick:: ds 11 ; d009
+wBattleMon:: battle_struct wBattleMon ; d014
 
-W_PLAYERMONID:: ; d014
-	ds 1
-
-W_PLAYERMONCURHP:: ; d015
-	ds 2
-	ds 1
-W_PLAYERMONSTATUS:: ; d018
-; the status of the player’s current monster
-	ds 1
-W_PLAYERMONTYPES:: ; d019
-W_PLAYERMONTYPE1:: ; d019
-	ds 1
-W_PLAYERMONTYPE2:: ; d01a
-	ds 1
-	ds 1
-W_PLAYERMONMOVES:: ; d01c
-	ds 4
-W_PLAYERMONIVS:: ; d020
-; 4x 4 bit: atk, def, spd, spc
-	ds 2
-W_PLAYERMONLEVEL:: ; d022
-	ds 1
-W_PLAYERMONMAXHP:: ; d023
-	ds 2
-W_PLAYERMONATK:: ; d025
-	ds 2
-W_PLAYERMONDEF:: ; d027
-	ds 2
-W_PLAYERMONSPEED:: ; d029
-	ds 2
-W_PLAYERMONSPECIAL:: ; d02b
-	ds 2
-W_PLAYERMONPP:: ; d02d
-	ds 4
 
 W_TRAINERCLASS:: ; d031
 	ds 1
@@ -696,9 +702,8 @@ W_ISINBATTLE:: ; d057
 ; trainer battle, this is 2
 	ds 1
 
-W_PLAYERMONSALIVEFLAGS:: ; d058
-; 6 bit array, 1 if player mon is alive
-	ds 1
+wPartyAliveFlags:: ; d058
+	flag_array 6
 
 W_CUROPPONENT:: ; d059
 ; in a wild battle, this is the species of pokemon
@@ -1056,122 +1061,24 @@ wd153:: ds 3
 wd156:: ds 1
 wd157:: ds 1
 
-W_PLAYERNAME:: ; d158
+
+wPlayerName:: ; d158
 	ds 11
 
-W_NUMINPARTY:: ; d163
-	ds 1
-W_PARTYMON1:: ; d164
-	ds 1
-W_PARTYMON2:: ; d165
-	ds 1
-W_PARTYMON3:: ; d166
-	ds 1
-W_PARTYMON4:: ; d167
-	ds 1
-W_PARTYMON5:: ; d168
-	ds 1
-W_PARTYMON6:: ; d169
-	ds 1
-W_PARTYMONEND:: ; d16a
-	ds 1
+wPartyCount::   ds 1 ; d163
+wPartySpecies:: ds 6 ; d164
+wPartyEnd::     ds 1 ; d16a
 
-W_PARTYMON1DATA:: ; d16b
-W_PARTYMON1_NUM:: ; d16b
-	ds 1
-W_PARTYMON1_HP:: ; d16c
-	ds 2
-W_PARTYMON1_BOXLEVEL:: ; d16e
-	ds 1
-W_PARTYMON1_STATUS:: ; d16f
-	ds 1
-W_PARTYMON1_TYPE1:: ; d170
-	ds 1
-W_PARTYMON1_TYPE2:: ; d171
-	ds 1
-W_PARTYMON1_CRATE:: ; d172
-	ds 1
-W_PARTYMON1_MOVE1:: ; d173
-	ds 1
-W_PARTYMON1_MOVE2:: ; d174
-	ds 1
-W_PARTYMON1_MOVE3:: ; d175
-	ds 1
-W_PARTYMON1_MOVE4:: ; d176
-	ds 1
-W_PARTYMON1_OTID:: ; d177
-	ds 2
-W_PARTYMON1_EXP:: ; d179
-	ds 3
-W_PARTYMON1_EVHP:: ; d17c
-	ds 2
-W_PARTYMON1_EVATTACK:: ; d17e
-	ds 2
-W_PARTYMON1_EVDEFENSE:: ; d180
-	ds 2
-W_PARTYMON1_EVSPEED:: ; d182
-	ds 2
-W_PARTYMON1_EVSECIAL:: ; d184
-	ds 2
-W_PARTYMON1_IV:: ; d186
-	ds 2
-W_PARTYMON1_MOVE1PP:: ; d188
-	ds 1
-W_PARTYMON1_MOVE2PP:: ; d189
-	ds 1
-W_PARTYMON1_MOVE3PP:: ; d18a
-	ds 1
-W_PARTYMON1_MOVE4PP:: ; d18b
-	ds 1
-W_PARTYMON1_LEVEL:: ; d18c
-	ds 1
-W_PARTYMON1_MAXHP:: ; d18d
-	ds 2
-W_PARTYMON1_ATACK:: ; d18f
-	ds 2
-W_PARTYMON1_DEFENSE:: ; d191
-	ds 2
-W_PARTYMON1_SPEED:: ; d193
-	ds 2
-W_PARTYMON1_SPECIAL:: ; d195
-	ds 2
+wPartyMons::
+wPartyMon1:: party_struct wPartyMon1 ; d16b
+wPartyMon2:: party_struct wPartyMon2 ; d197
+wPartyMon3:: party_struct wPartyMon3 ; d1c3
+wPartyMon4:: party_struct wPartyMon4 ; d1ef
+wPartyMon5:: party_struct wPartyMon5 ; d21b
+wPartyMon6:: party_struct wPartyMon6 ; d247
 
-W_PARTYMON2DATA:: ; d197
-	ds 44
-W_PARTYMON3DATA:: ; d1c3
-	ds 44
-W_PARTYMON4DATA:: ; d1ef
-	ds 44
-W_PARTYMON5DATA:: ; d21b
-	ds 44
-W_PARTYMON6DATA:: ; d247
-	ds 44
-
-W_PARTYMON1OT:: ; d273
-	ds 11
-W_PARTYMON2OT:: ; d27e
-	ds 11
-W_PARTYMON3OT:: ; d289
-	ds 11
-W_PARTYMON4OT:: ; d294
-	ds 11
-W_PARTYMON5OT:: ; d29f
-	ds 11
-W_PARTYMON6OT:: ; d2aa
-	ds 11
-
-W_PARTYMON1NAME:: ; d2b5
-	ds 11
-W_PARTYMON2NAME:: ; d2c0
-	ds 11
-W_PARTYMON3NAME:: ; d2cb
-	ds 11
-W_PARTYMON4NAME:: ; d2d6
-	ds 11
-W_PARTYMON5NAME:: ; d2e1
-	ds 11
-W_PARTYMON6NAME:: ; d2ec
-	ds 11
+wPartyMonOT::    ds 11 * 6 ; d273
+wPartyMonNicks:: ds 11 * 6 ; d2b5
 
 
 wPokedexOwned:: ; d2f7
@@ -1835,69 +1742,21 @@ W_GRASSRATE:: ; d887
 W_GRASSMONS:: ; d888
 	ds 20
 
-wEnemyPartyCount:: ; d89c
-	ds 1
-wEnemyPartyMons:: ; d89d
-	ds 6
-	ds 1 ; end
 
+wEnemyPartyCount:: ds 1     ; d89c
+wEnemyPartyMons::  ds 6 + 1 ; d89d
 
-wEnemyMons::
+wEnemyMons:: ; d8a4
+wEnemyMon1:: party_struct wEnemyMon1
+wEnemyMon2:: party_struct wEnemyMon2
+wEnemyMon3:: party_struct wEnemyMon3
+wEnemyMon4:: party_struct wEnemyMon4
+wEnemyMon5:: party_struct wEnemyMon5
+wEnemyMon6:: party_struct wEnemyMon6
 
-wEnemyMon1:: ; d8a4
-wEnemyMon1Species:: ; d8a4
-	ds 1
-W_ENEMYMON1HP:: ; d8a5
-	ds 2
+wEnemyMonOT::    ds 11 * 6 ; d9ac
+wEnemyMonNicks:: ds 11 * 6 ; d9ee
 
-	ds 1
-
-wd8a8:: ds 4
-wd8ac:: ds 2
-
-W_ENEMYMON1MOVE3:: ; d8ae
-	ds 19
-wd8c1:: ds 4
-wd8c5:: ds 1
-wd8c6:: ds 20
-
-W_ENEMYMON2MOVE3:: ; d8da
-	ds 44
-W_ENEMYMON3MOVE3:: ; d906
-	ds 44
-W_ENEMYMON4MOVE3:: ; d932
-	ds 44
-W_ENEMYMON5MOVE3:: ; d95e
-	ds 44
-W_ENEMYMON6MOVE3:: ; d98a
-	ds 22
-wd9a0:: ds 12
-
-W_ENEMYMON1OT:: ; d9ac
-	ds 11
-W_ENEMYMON2OT:: ; d9b7
-	ds 11
-W_ENEMYMON3OT:: ; d9c2
-	ds 11
-W_ENEMYMON4OT:: ; d9cd
-	ds 11
-W_ENEMYMON5OT:: ; d9d8
-	ds 11
-W_ENEMYMON6OT:: ; d9e3
-	ds 11
-
-W_ENEMYMON1NAME:: ; d9ee
-	ds 11
-W_ENEMYMON2NAME:: ; d9f9
-	ds 11
-W_ENEMYMON3NAME:: ; da04
-	ds 11
-W_ENEMYMON4NAME:: ; da0f
-	ds 11
-W_ENEMYMON5NAME:: ; da1a
-	ds 11
-W_ENEMYMON6NAME:: ; da25
-	ds 11
 
 W_TRAINERHEADERPTR:: ; da30
 	ds 2
@@ -1927,50 +1786,29 @@ wda46:: ds 1
 W_NUMSAFARIBALLS:: ; da47
 	ds 1
 
+
 W_DAYCARE_IN_USE:: ; da48
 ; 0 if no pokemon is in the daycare
 ; 1 if pokemon is in the daycare
 	ds 1
 
-W_DAYCAREMONNAME:: ; da49
-	ds 11
+W_DAYCAREMONNAME:: ds 11 ; da49
+W_DAYCAREMONOT::   ds 11 ; da54
 
-W_DAYCAREMONOT:: ; da54
-	ds 11
-
-W_DAYCAREMONDATA:: ; da5f
-	ds 3
-wda62:: ds 5
-wda67:: ds 6
-wda6d:: ds 2
-wda6f:: ds 17
+wDayCareMon:: box_struct wDayCareMon ; da5f
 
 
-W_NUMINBOX:: ; da80
-; number of mons in current box
-	ds 1
-wda81::
-	ds 20
-	ds 1
+W_NUMINBOX::  ds 1 ; da80
+wBoxSpecies:: ds MONS_PER_BOX + 1
 
-W_BOXMON1DATA:: ; da96
-	ds 8
-wda9e:: ds 25
-W_BOXMON2DATA:: ; dab7
-	ds 33 * 19
+wBoxMons::
+wBoxMon1:: box_struct wBoxMon1 ; da96
+wBoxMon2:: ds box_struct_length * (MONS_PER_BOX + -1) ; dab7
 
-W_BOXMON1OT:: ; dd2a
-	ds 11
-W_BOXMON2OT:: ; dd35
-	ds 11 * 19
+wBoxMonOT::    ds 11 * MONS_PER_BOX ; dd2a
+wBoxMonNicks:: ds 11 * MONS_PER_BOX ; de06
+wBoxMonNicksEnd:: ; dee2
 
-W_BOXMON1NAME:: ; de06
-	ds 11
-W_BOXMON2NAME:: ; de11
-	ds 11 * 19
-
-wdee2::
-	ds 1
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff

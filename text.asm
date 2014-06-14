@@ -239,7 +239,7 @@ _AIBattleWithdrawText:: ; 880be (22:40be)
 	TX_RAM W_TRAINERNAME
 	text " with-"
 	line "drew @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text "!"
 	prompt
 
@@ -250,7 +250,7 @@ _AIBattleUseItemText:: ; 880d5 (22:40d5)
 	TX_RAM wcd6d
 	db $0
 	cont "on @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text "!"
 	prompt
 
@@ -1055,14 +1055,14 @@ _OutOfSafariBallsText:: ; 89639 (22:5639)
 
 _WildRanText:: ; 89666 (22:5666)
 	text "Wild @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "ran!"
 	prompt
 
 _EnemyRanText:: ; 89677 (22:5677)
 	text "Enemy @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "ran!"
 	prompt
@@ -1084,7 +1084,7 @@ _HurtByLeechSeedText:: ; 896b3 (22:56b3)
 
 _EnemyMonFaintedText:: ; 0x896c7
 	text "Enemy @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "fainted!"
 	prompt
@@ -1104,7 +1104,7 @@ _TrainerDefeatedText:: ; 896f9 (22:56f9)
 	prompt
 
 _PlayerMonFaintedText:: ; 8970c (22:570c)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	db $0
 	line "fainted!"
 	prompt
@@ -1138,7 +1138,7 @@ _TrainerAboutToUseText:: ; 89784 (22:5784)
 	text " is"
 	line "about to use"
 	cont"@"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text "!"
 
 	para "Will ", $52
@@ -1149,7 +1149,7 @@ _TrainerSentOutText:: ; 897b4 (22:57b4)
 	TX_RAM W_TRAINERNAME
 	text " sent"
 	line "out @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text "!"
 	done
 
@@ -1178,7 +1178,7 @@ _ItemsCantBeUsedHereText:: ; 89831 (22:5831)
 	prompt
 
 _AlreadyOutText:: ; 8984b (22:584b)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " is"
 	line "already out!"
 	prompt
@@ -1194,7 +1194,7 @@ _MoveDisabledText:: ; 8987b (22:587b)
 	prompt
 
 _NoMovesLeftText:: ; 89892 (22:5892)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " has no"
 	line "moves left!"
 	done
@@ -1207,7 +1207,7 @@ _MultiHitText:: ; 898aa (22:58aa)
 	prompt
 
 _ScaredText:: ; 898c7 (22:58c7)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " is too"
 	line "scared to move!"
 	prompt
@@ -1369,31 +1369,31 @@ _OHKOText:: ; 89ad8 (22:5ad8)
 	prompt
 
 _LoafingAroundText:: ; 89ae5 (22:5ae5)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " is"
 	line "loafing around."
 	prompt
 
 _BeganToNapText:: ; 89afd (22:5afd)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " began"
 	line "to nap!"
 	prompt
 
 _WontObeyText:: ; 89b10 (22:5b10)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " won't"
 	line "obey!"
 	prompt
 
 _TurnedAwayText:: ; 89b20 (22:5b20)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " turned"
 	line "away!"
 	prompt
 
 _IgnoredOrdersText:: ; 89b32 (22:5b32)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	db $0
 	line "ignored orders!"
 	prompt
@@ -1451,7 +1451,7 @@ _GrewLevelText:: ; 89c01 (22:5c01)
 
 _WildMonAppearedText:: ; 89c1d (22:5c1d)
 	text "Wild @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "appeared!"
 	prompt
@@ -1459,13 +1459,13 @@ _WildMonAppearedText:: ; 89c1d (22:5c1d)
 _HookedMonAttackedText:: ; 89c33 (22:5c33)
 	text "The hooked"
 	line "@"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	cont "attacked!"
 	prompt
 
 _EnemyAppearedText:: ; 89c4f (22:5c4f)
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "appeared!"
 	prompt
@@ -1501,12 +1501,12 @@ _EnemysWeakText:: ; 89cd6 (22:5cd6)
 	line "Get'm! @@"
 
 _PlayerMon1Text:: ; 89cf0 (22:5cf0)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text "!"
 	done
 
 _PlayerMon2Text:: ; 89cf6 (22:5cf6)
-	TX_RAM W_PLAYERMONNAME
+	TX_RAM wBattleMonNick
 	text " @@"
 
 _EnoughText:: ; 89cfd (22:5cfd)
@@ -1535,14 +1535,14 @@ _NotVeryEffectiveText:: ; 89d38 (22:5d38)
 
 _SafariZoneEatingText:: ; 89d53 (22:5d53)
 	text "Wild @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "is eating!"
 	prompt
 
 _SafariZoneAngryText:: ; 89d6a (22:5d6a)
 	text "Wild @"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	db $0
 	line "is angry!"
 	prompt
@@ -2736,7 +2736,7 @@ _SetToBoxText:: ; a418f (29:418f)
 	text "There's no more"
 	line "room for #MON!"
 	cont "@"
-	TX_RAM W_BOXMON1NAME
+	TX_RAM wBoxMonNicks
 	text " was"
 	cont "sent to #MON"
 	cont "BOX @"
@@ -2798,19 +2798,19 @@ _ItemUseBallText04:: ; a67b2 (29:67b2)
 _ItemUseBallText05:: ; a67cf (29:67cf)
 	text "All right!"
 	line "@"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text " was"
 	cont "caught!@@"
 
 _ItemUseBallText07:: ; a67ee (29:67ee)
-	TX_RAM W_BOXMON1NAME
+	TX_RAM wBoxMonNicks
 	text " was"
 	line "transferred to"
 	cont "BILL's PC!"
 	prompt
 
 _ItemUseBallText08:: ; a6810 (29:6810)
-	TX_RAM W_BOXMON1NAME
+	TX_RAM wBoxMonNicks
 	text " was"
 	line "transferred to"
 	cont "someone's PC!"
@@ -2820,7 +2820,7 @@ _ItemUseBallText06:: ; a6835 (29:6835)
 	text "New #DEX data"
 	line "will be added for"
 	cont "@"
-	TX_RAM W_ENEMYMONNAME
+	TX_RAM wEnemyMonNick
 	text "!@@"
 
 _SurfingGotOnText:: ; a685e (29:685e)

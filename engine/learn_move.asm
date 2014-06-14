@@ -1,7 +1,7 @@
 LearnMove: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wcd6d
 	ld de, wd036
@@ -9,7 +9,7 @@ LearnMove: ; 6e43 (1:6e43)
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
-	ld hl, W_PARTYMON1_MOVE1 ; W_PARTYMON1_MOVE1
+	ld hl, wPartyMon1Moves ; wPartyMon1Moves
 	ld bc, $2c
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes
@@ -63,12 +63,12 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	jp nz, PrintLearnedMove
 	ld h, d
 	ld l, e
-	ld de, W_PLAYERMONMOVES
+	ld de, wBattleMonMoves
 	ld bc, $4
 	call CopyData
 	ld bc, $11
 	add hl, bc
-	ld de, W_PLAYERMONPP ; W_PLAYERMONPP
+	ld de, wBattleMonPP ; wBattleMonPP
 	ld bc, $4
 	call CopyData
 	jp PrintLearnedMove

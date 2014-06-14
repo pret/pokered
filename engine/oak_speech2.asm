@@ -7,11 +7,11 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	jr z, .asm_697a
 	ld hl, DefaultNamesPlayerList ; $6af2
 	call Func_6ad6
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call Func_69ec
 	jr .asm_6999
 .asm_697a
-	ld hl, W_PLAYERNAME ; wd158
+	ld hl, wPlayerName ; wd158
 	xor a
 	ld [wd07d], a
 	call DisplayNamingScreen

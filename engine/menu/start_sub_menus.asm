@@ -8,7 +8,7 @@ StartMenu_Pokedex: ; 13095 (4:7095)
 	jp RedisplayStartMenu
 
 StartMenu_Pokemon: ; 130a9 (4:70a9)
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	and a
 	jp z,RedisplayStartMenu
 	xor a
@@ -86,7 +86,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	add hl,bc
 	jp .choseOutOfBattleMove
 .choseSwitch
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	cp a,2 ; is there more than one pokemon in the party?
 	jp c,StartMenu_Pokemon ; if not, no switching
 	call SwitchPartyMon_Stats
@@ -107,7 +107,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .choseOutOfBattleMove
 	push hl
 	ld a,[wWhichPokemon]
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	ld a,[hl]
@@ -138,7 +138,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call CheckIfInOutsideMap
 	jr z,.canFly
 	ld a,[wWhichPokemon]
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	ld hl,.cannotFlyHereText
 	call PrintText
@@ -211,7 +211,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call CheckIfInOutsideMap
 	jr z,.canTeleport
 	ld a,[wWhichPokemon]
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	ld hl,.cannotUseTeleportNowText
 	call PrintText
@@ -239,9 +239,9 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	TX_FAR _CannotFlyHereText
 	db "@"
 .softboiled
-	ld hl,W_PARTYMON1_MAXHP
+	ld hl,wPartyMon1MaxHP
 	ld a,[wWhichPokemon]
-	ld bc,44
+	ld bc,wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a,[hli]
 	ld [H_DIVIDEND],a
@@ -251,7 +251,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld [H_DIVISOR],a
 	ld b,2 ; number of bytes
 	call Divide
-	ld bc,-33
+	ld bc,wPartyMon1HP - wPartyMon1MaxHP
 	add hl,bc
 	ld a,[hld]
 	ld b,a
@@ -615,7 +615,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	call PlaceString
 	FuncCoord 7,2
 	ld hl,Coord
-	ld de,W_PLAYERNAME
+	ld de,wPlayerName
 	call PlaceString
 	FuncCoord 8,4
 	ld hl,Coord
@@ -788,7 +788,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld [wcc35], a
 	push hl
 	push de
-	ld hl, W_PARTYMON1 ; W_PARTYMON1
+	ld hl, wPartySpecies
 	ld d, h
 	ld e, l
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
@@ -809,15 +809,15 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld [hl], a
 	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld [de], a
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
-	ld bc, $2c
+	ld hl, wPartyMons
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call AddNTimes
 	push hl
 	ld de, wcc97
 	ld bc, $2c
 	call CopyData
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMons
 	ld bc, $2c
 	ld a, [wcc35]
 	call AddNTimes
@@ -829,14 +829,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wcc97
 	ld bc, $2c
 	call CopyData
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wcc97
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1OT ; wd273
+	ld hl, wPartyMonOT ; wd273
 	ld a, [wcc35]
 	call SkipFixedLengthTextEntries
 	pop de
@@ -847,14 +847,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wcc97
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wcc97
 	ld bc, $b
 	call CopyData
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wcc35]
 	call SkipFixedLengthTextEntries
 	pop de

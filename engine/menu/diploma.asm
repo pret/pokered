@@ -36,7 +36,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	jr nz, .asm_56715 ; 0x56725 $ee
 	FuncCoord 10, 4
 	ld hl, Coord
-	ld de, W_PLAYERNAME
+	ld de, wPlayerName
 	call PlaceString
 	callba Func_44dd
 	ld hl, wOAMBuffer + $01
@@ -68,7 +68,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	jp GBPalNormal
 
 Func_56777: ; 56777 (15:6777)
-	ld hl, W_PLAYERNAME
+	ld hl, wPlayerName
 	ld bc, $ff00
 .asm_5677d
 	ld a, [hli]

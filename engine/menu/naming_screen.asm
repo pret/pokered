@@ -67,7 +67,7 @@ Func_655c: ; 655c (1:655c)
 	ld a, [wcf4b]
 	cp $50
 	jr z, .asm_6594
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld bc, $b
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	call AddNTimes

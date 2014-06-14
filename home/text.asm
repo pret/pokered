@@ -142,7 +142,7 @@ Char00Text:: ; 0x19f4 “%d ERROR.”
 
 Char52:: ; 0x19f9 player’s name
 	push de
-	ld de,W_PLAYERNAME
+	ld de,wPlayerName
 	jr FinishDTE
 
 Char53:: ; 19ff (0:19ff) ; rival’s name
@@ -205,7 +205,7 @@ MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 	push de
 	and a
 	jr nz,.Enemy
-	ld de,W_PLAYERMONNAME ; player active monster name
+	ld de,wBattleMonNick ; player active monster name
 	jr FinishDTE
 
 .Enemy ; 1A40
@@ -215,7 +215,7 @@ MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 
 	ld h,b
 	ld l,c
-	ld de,W_ENEMYMONNAME ; enemy active monster name
+	ld de,wEnemyMonNick ; enemy active monster name
 
 FinishDTE:: ; 1a4b (0:1a4b)
 	call PlaceString

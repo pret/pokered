@@ -151,12 +151,12 @@ Func_4120b: ; 4120b (10:520b)
 	jp Bankswitch
 
 Func_41217: ; 41217 (10:5217)
-	ld hl, W_PLAYERNAME
+	ld hl, wPlayerName
 	ld de, wHPBarMaxHP
 	ld bc, $000b
 	call CopyData
 	ld hl, W_GRASSRATE
-	ld de, W_PLAYERNAME
+	ld de, wPlayerName
 	ld bc, $000b
 	call CopyData
 	ld hl, wHPBarMaxHP
@@ -427,7 +427,7 @@ Func_4142d: ; 4142d (10:542d)
 	call TextBoxBorder
 	FuncCoord 5, 14
 	ld hl, Coord
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call PlaceString
 	jp DelayFrame
 

@@ -298,7 +298,7 @@ Func_71868: ; 71868 (1c:5868)
 	push de
 	push bc
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld hl, W_PARTYMON1 ; W_PARTYMON1
+	ld hl, wPartySpecies
 	ld e, a
 	ld d, $0
 	add hl, de

@@ -4,12 +4,12 @@ LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	and a
 	jr nz, .asm_2bee7
 	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
-	ld de, W_ENEMYMONTYPE1 ; wcfea (aliases: W_ENEMYMONTYPES)
+	ld de, wEnemyMonType1 ; wcfea (aliases: wEnemyMonType)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_2bec8
 	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
-	ld de, W_PLAYERMONTYPE1 ; wd019 (aliases: W_PLAYERMONTYPES)
+	ld de, wBattleMonType1 ; wd019 (aliases: wBattleMonType)
 .asm_2bec8
 	ld a, [de]
 	cp GRASS

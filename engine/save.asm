@@ -54,7 +54,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 
 .Func_73652 ; 73652 (1c:7652)
 	ld hl, $a598
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	ld bc, $b
 	call CopyData
 	ld hl, $a5a3
@@ -110,7 +110,7 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	cp c
 	jp nz, SAVBadCheckSum
 	ld hl, $af2c
-	ld de, W_NUMINPARTY ; W_NUMINPARTY
+	ld de, wPartyCount ; wPartyCount
 	ld bc, $194
 	call CopyData
 	ld hl, $a5a3
@@ -201,7 +201,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, W_PLAYERNAME ; wd158
+	ld hl, wPlayerName ; wd158
 	ld de, $a598
 	ld bc, $b
 	call CopyData
@@ -254,7 +254,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, W_NUMINPARTY ; W_NUMINPARTY
+	ld hl, wPartyCount ; wPartyCount
 	ld de, $af2c
 	ld bc, $194
 	call CopyData

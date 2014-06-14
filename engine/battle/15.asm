@@ -1,11 +1,11 @@
 GainExperience: ; 5524f (15:524f)
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld a, [W_ISLINKBATTLE]
 	cp $4
 	ret z
 	call Func_5546c
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMons
 	xor a
-	ld [wWhichPokemon], a ; wWhichPokemon
+	ld [wWhichPokemon], a
 
 Func_5525f: ; 5525f (15:525f)
 	inc hl
@@ -13,8 +13,8 @@ Func_5525f: ; 5525f (15:525f)
 	or [hl]
 	jp z, Func_55436
 	push hl
-	ld hl, W_PLAYERMONSALIVEFLAGS
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld hl, wPartyAliveFlags
+	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, $2
 	ld a, $10 ; FlagActionPredef
@@ -56,26 +56,26 @@ Func_5525f: ; 5525f (15:525f)
 	jr .asm_55285
 .asm_552a1
 	xor a
-	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
-	ld [$ff97], a
+	ld [H_MULTIPLICAND], a
+	ld [H_MULTIPLICAND + 1], a
 	ld a, [wd008]
-	ld [$ff98], a
-	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
-	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLICAND + 2], a
+	ld a, [wEnemyMonLevel]
+	ld [H_MULTIPLIER], a
 	call Multiply
-	ld a, $7
-	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld b, $4
+	ld a, 7
+	ld [H_DIVISOR], a
+	ld b, 4
 	call Divide
 	ld hl, $fff2
 	add hl, de
 	ld b, [hl]
 	inc hl
-	ld a, [wPlayerID] ; wPlayerID
+	ld a, [wPlayerID]
 	cp b
 	jr nz, .asm_552d1
 	ld b, [hl]
-	ld a, [wPlayerID + 1] ; wd35a
+	ld a, [wPlayerID + 1]
 	cp b
 	ld a, $0
 	jr z, .asm_552d6
@@ -84,7 +84,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, $1
 .asm_552d6
 	ld [wcf4d], a
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	dec a
 	call nz, Func_5549f
 	inc hl
@@ -107,17 +107,17 @@ Func_5525f: ; 5525f (15:525f)
 .asm_552f8
 	inc hl
 	push hl
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $0
-	ld hl, W_PARTYMON1 ; W_PARTYMON1
+	ld b, 0
+	ld hl, wPartySpecies
 	add hl, bc
 	ld a, [hl]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
 	callab CalcExperience
-	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff96]
 	ld b, a
 	ld a, [$ff97]
 	ld c, a
@@ -140,8 +140,8 @@ Func_5525f: ; 5525f (15:525f)
 	dec hl
 .asm_5532e
 	push hl
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, GainedText
 	call PrintText
@@ -157,11 +157,11 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	cp d
 	jp z, Func_55436
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	push af
 	push hl
 	ld a, d
-	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld [W_CURENEMYLVL], a
 	ld [hl], a
 	ld bc, $ffdf
 	add hl, bc
@@ -198,12 +198,12 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
+	ld a, [wPlayerMonNumber]
 	ld b, a
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	cp b
 	jr nz, .asm_553f7
-	ld de, W_PLAYERMONCURHP ; wd015
+	ld de, wBattleMonHP
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -212,7 +212,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld bc, $1f
 	add hl, bc
 	push hl
-	ld de, W_PLAYERMONLEVEL ; W_PLAYERMONLEVEL
+	ld de, wBattleMonLevel ; wBattleMonLevel
 	ld bc, $b
 	call CopyData
 	pop hl
@@ -258,7 +258,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 
 Func_55436: ; 55436 (15:5436)
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	ld b, a
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	inc a
@@ -266,11 +266,11 @@ Func_55436: ; 55436 (15:5436)
 	jr z, .asm_55450
 	ld [wWhichPokemon], a ; wWhichPokemon
 	ld bc, $2c
-	ld hl, W_PARTYMON1_NUM ; W_PARTYMON1_NUM (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
 	call AddNTimes
 	jp Func_5525f
 .asm_55450
-	ld hl, W_PLAYERMONSALIVEFLAGS
+	ld hl, wPartyAliveFlags
 	xor a
 	ld [hl], a
 	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
@@ -287,7 +287,7 @@ Func_55436: ; 55436 (15:5436)
 	jp Predef
 
 Func_5546c: ; 5546c (15:546c)
-	ld a, [W_PLAYERMONSALIVEFLAGS]
+	ld a, [wPartyAliveFlags]
 	ld b, a
 	xor a
 	ld c, $8

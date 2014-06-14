@@ -24,7 +24,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld a, [wMusicHeaderPointer]
 	and a
 	jr nz, .asm_70464
-	ld a, [W_NUMINPARTY] ; W_NUMINPARTY
+	ld a, [wPartyCount] ; wPartyCount
 	ld b, a
 .asm_7046e
 	call Func_70503

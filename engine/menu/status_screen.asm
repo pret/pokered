@@ -143,15 +143,15 @@ StatusScreen: ; 12953 (4:6953)
 	jp SkipFixedLengthTextEntries
 
 OTPointers: ; 12a95 (4:6a95)
-	dw W_PARTYMON1OT
-	dw W_ENEMYMON1OT
-	dw W_BOXMON1OT
+	dw wPartyMonOT
+	dw wEnemyMonOT
+	dw wBoxMonOT
 	dw W_DAYCAREMONOT
 
 NamePointers2: ; 12a9d (4:6a9d)
-	dw W_PARTYMON1NAME
-	dw W_ENEMYMON1NAME
-	dw W_BOXMON1NAME
+	dw wPartyMonNicks
+	dw wEnemyMonNicks
+	dw wBoxMonNicks
 	dw W_DAYCAREMONNAME
 
 Type1Text: ; 12aa5 (4:6aa5)

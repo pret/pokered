@@ -1488,9 +1488,9 @@ AnimationBlinkMon: ; 7936f (1e:536f)
 
 AnimationFlashMonPic: ; 79389 (1e:5389)
 ; Flashes the mon's sprite on and off
-	ld a, [W_PLAYERMONID]
+	ld a, [wBattleMonSpecies]
 	ld [wHPBarMaxHP + 1], a
-	ld a, [wcfe5]
+	ld a, [wEnemyMonSpecies]
 	ld [wHPBarMaxHP], a
 	jp Func_79793
 
@@ -2117,9 +2117,9 @@ AnimationBoundUpAndDown: ; 7977a (1e:577a)
 AnimationTransformMon: ; 79787 (1e:5787)
 ; Redraws this mon's sprite as the back/front sprite of the opposing mon.
 ; Used in Transform.
-	ld a, [wcfe5]
+	ld a, [wEnemyMonSpecies]
 	ld [wHPBarMaxHP + 1], a
-	ld a, [W_PLAYERMONID]
+	ld a, [wBattleMonSpecies]
 	ld [wHPBarMaxHP], a
 
 Func_79793: ; 79793 (1e:5793)
@@ -2137,10 +2137,10 @@ Func_79793: ; 79793 (1e:5793)
 	call LoadFrontSpriteByMonIndex
 	jr .asm_797d3
 .asm_797b0
-	ld a, [wcfd9]
+	ld a, [wBattleMonSpecies2]
 	push af
 	ld a, [wHPBarMaxHP + 1]
-	ld [wcfd9], a
+	ld [wBattleMonSpecies2], a
 	ld [wd0b5], a
 	call GetMonHeader
 	ld a, $4
@@ -2150,7 +2150,7 @@ Func_79793: ; 79793 (1e:5793)
 	call Func_79820
 	call Func_79aae
 	pop af
-	ld [wcfd9], a
+	ld [wBattleMonSpecies2], a
 .asm_797d3
 	ld b, $1
 	jp GoPAL_SET
@@ -2291,10 +2291,10 @@ Func_7986f: ; 7986f (1e:586f)
 	ld a,[H_WHOSETURN]
 	and a
 	jr nz,.next
-	ld a,[W_PLAYERMONID] ; get number of current monster
+	ld a,[wBattleMonSpecies] ; get number of current monster
 	jr .Continue
 .next
-	ld a,[wcfe5]
+	ld a,[wEnemyMonSpecies]
 .Continue
 	push hl
 	call GetCryData

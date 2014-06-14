@@ -11,13 +11,13 @@ DrainHPEffect_: ; 783f (1:783f)
 	inc hl
 	inc [hl]
 .asm_784f
-	ld hl, W_PLAYERMONCURHP ; wd015
-	ld de, W_PLAYERMONMAXHP ; wd023
+	ld hl, wBattleMonHP ; wd015
+	ld de, wBattleMonMaxHP ; wd023
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_7861
-	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
-	ld de, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
+	ld hl, wEnemyMonHP ; wEnemyMonHP
+	ld de, wEnemyMonMaxHP ; wEnemyMonMaxHP
 
 Func_7861: ; 7861 (1:7861)
 	ld bc, wHPBarOldHP+1

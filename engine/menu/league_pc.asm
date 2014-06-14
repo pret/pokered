@@ -83,7 +83,7 @@ Func_76610: ; 76610 (1d:6610)
 	ld [wWhichTrade], a
 	ld [wcf91], a
 	ld [wd0b5], a
-	ld [wcfd9], a
+	ld [wBattleMonSpecies2], a
 	ld [wcf1d], a
 	ld a, [hli]
 	ld [wTrainerFacingDirection], a

@@ -8,7 +8,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	cp LAVENDER_HOUSE_1
 	jr c, .pokemonTower
 .notPokemonTower
-	ld a, [W_ENEMYMONID]
+	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText
 	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
@@ -31,7 +31,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 .pokemonTower
 	ld b, SILPH_SCOPE
 	call IsItemInBag
-	ld a, [W_ENEMYMONID]
+	ld a, [wEnemyMonSpecies2]
 	ld [wcf91], a
 	cp MAROWAK
 	jr z, .isMarowak
@@ -95,14 +95,14 @@ GhostCantBeIDdText: ; 58e54 (16:4e54)
 	db "@"
 
 SendOutMon: ; 58e59 (16:4e59)
-	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
+	ld hl, wEnemyMonHP ; wEnemyMonHP
 	ld a, [hli]
 	or [hl]
 	ld hl, GoText
 	jr z, .printText
 	xor a
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
-	ld hl, W_ENEMYMONCURHP ; W_ENEMYMONCURHP
+	ld hl, wEnemyMonHP ; wEnemyMonHP
 	ld a, [hli]
 	ld [wcce3], a
 	ld [$ff97], a
@@ -112,7 +112,7 @@ SendOutMon: ; 58e59 (16:4e59)
 	ld a, $19
 	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
 	call Multiply
-	ld hl, W_ENEMYMONMAXHP ; W_ENEMYMONMAXHP
+	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -173,7 +173,7 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	db $08 ; asm
 	push de
 	push bc
-	ld hl, W_ENEMYMONCURHP + 1
+	ld hl, wEnemyMonHP + 1
 	ld de, wcce4
 	ld b, [hl]
 	dec hl
@@ -188,7 +188,7 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	ld a, $19
 	ld [H_POWEROFTEN], a
 	call Multiply
-	ld hl, W_ENEMYMONMAXHP
+	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, [hl]
 	srl a

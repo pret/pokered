@@ -30,7 +30,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $1
 	ld [wcd6a], a
 	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, W_PARTYMON1NAME ; W_PARTYMON1NAME
+	ld hl, wPartyMonNicks ; wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wd730
 	set 6, [hl]

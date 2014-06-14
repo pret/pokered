@@ -5,7 +5,7 @@ CopyFixedLengthText: ; 42b1 (1:42b1)
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld hl, NintenText
-	ld de, W_PLAYERNAME ; wd158
+	ld de, wPlayerName ; wd158
 	call CopyFixedLengthText
 	ld hl, SonyText
 	ld de, W_RIVALNAME ; wd34a

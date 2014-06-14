@@ -170,16 +170,16 @@ GetBattleTransitionID_WildOrTrainer: ; 709e2 (1c:49e2)
 	ret
 
 GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
-	ld hl, W_PARTYMON1_HP
+	ld hl, wPartyMon1HP
 .faintedLoop
 	ld a, [hli]
 	or [hl]
 	jr nz, .notFainted
-	ld de, W_PARTYMON2DATA - (W_PARTYMON1DATA + 1)
+	ld de, wPartyMon2 - (wPartyMon1 + 1)
 	add hl, de
 	jr .faintedLoop
 .notFainted
-	ld de, W_PARTYMON1_LEVEL - (W_PARTYMON1_HP + 1)
+	ld de, wPartyMon1Level - (wPartyMon1HP + 1)
 	add hl, de
 	ld a, [hl]
 	add $3

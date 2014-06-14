@@ -109,7 +109,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[W_BATTLETYPE]
 	dec a
 	jr z,.UseBall
-	ld a,[W_NUMINPARTY]	;is Party full?
+	ld a,[wPartyCount]	;is Party full?
 	cp a,6
 	jr nz,.UseBall
 	ld a,[W_NUMINBOX]	;is Box full?
@@ -141,7 +141,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr nz,.notOldManBattle
 .oldManBattle
 	ld hl,W_GRASSRATE
-	ld de,W_PLAYERNAME
+	ld de,wPlayerName
 	ld bc,11
 	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
 	jp .BallSuccess	;$578b
@@ -149,7 +149,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[W_CURMAP]
 	cp a,POKEMONTOWER_6
 	jr nz,.loop
-	ld a,[W_ENEMYMONID]
+	ld a,[wEnemyMonSpecies2]
 	cp a,MAROWAK
 	ld b,$10
 	jp z,.next12
@@ -178,7 +178,7 @@ ItemUseBall: ; d687 (3:5687)
 ; Frozen/Asleep pokemon are relatively even easier to catch
 ; for Frozen/Asleep pokemon, any random number from 0-24 ensures a catch.
 ; for the others, a random number from 0-11 ensures a catch.
-	ld a,[W_ENEMYMONSTATUS]	;status ailments
+	ld a,[wEnemyMonStatus]	;status ailments
 	and a
 	jr z,.noAilments
 	and a, 1 << FRZ | SLP	;is frozen and/or asleep?
@@ -194,7 +194,7 @@ ItemUseBall: ; d687 (3:5687)
 	push bc		;save RANDOM number
 	xor a
 	ld [H_MULTIPLICAND],a
-	ld hl,W_ENEMYMONMAXHP
+	ld hl,wEnemyMonMaxHP
 	ld a,[hli]
 	ld [H_MULTIPLICAND + 1],a
 	ld a,[hl]
@@ -211,7 +211,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [H_DIVISOR],a
 	ld b,4		; number of bytes in dividend
 	call Divide
-	ld hl,W_ENEMYMONCURHP
+	ld hl,wEnemyMonHP
 	ld a,[hli]
 	ld b,a
 	ld a,[hl]
@@ -287,7 +287,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [H_DIVISOR],a
 	ld b,4
 	call Divide
-	ld a,[W_ENEMYMONSTATUS]	;status ailments
+	ld a,[wEnemyMonStatus]	;status ailments
 	and a
 	jr z,.next13
 	and a, 1 << FRZ | SLP
@@ -348,7 +348,7 @@ ItemUseBall: ; d687 (3:5687)
 	cp a,$63
 	ld hl,ItemUseBallText04
 	jp z,.printText0
-	ld hl,W_ENEMYMONCURHP	;current HP
+	ld hl,wEnemyMonHP	;current HP
 	ld a,[hli]
 	push af
 	ld a,[hli]
@@ -361,21 +361,21 @@ ItemUseBall: ; d687 (3:5687)
 	bit 3,[hl]
 	jr z,.next15
 	ld a,$4c
-	ld [W_ENEMYMONID],a
+	ld [wEnemyMonSpecies2],a
 	jr .next16
 .next15	;$5871
 	set 3,[hl]
 	ld hl,wcceb
-	ld a,[W_ENEMYMONATKDEFIV]
+	ld a,[wEnemyMonDVs]
 	ld [hli],a
-	ld a,[W_ENEMYMONSPDSPCIV]
+	ld a,[wEnemyMonDVs + 1]
 	ld [hl],a
 .next16	;$587e
 	ld a,[wcf91]
 	push af
-	ld a,[W_ENEMYMONID]
+	ld a,[wEnemyMonSpecies2]
 	ld [wcf91],a
-	ld a,[W_ENEMYMONLEVEL]
+	ld a,[wEnemyMonLevel]
 	ld [W_CURENEMYLVL],a
 	callab Func_3eb01
 	pop af
@@ -388,7 +388,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [hld],a
 	pop af
 	ld [hl],a
-	ld a,[wcfe5]	;enemy
+	ld a,[wEnemyMonSpecies]	;enemy
 	ld [wd11c],a
 	ld [wcf91],a
 	ld [wd11e],a
@@ -420,12 +420,12 @@ ItemUseBall: ; d687 (3:5687)
 	ld hl,ItemUseBallText06
 	call PrintText
 	call ClearSprites
-	ld a,[wcfe5]	;caught mon_ID
+	ld a,[wEnemyMonSpecies]	;caught mon_ID
 	ld [wd11e],a
 	ld a,$3d
 	call Predef
 .checkParty	;$58f4
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	cp a,6		;is party full?
 	jr z,.sendToBox
 	xor a
@@ -677,7 +677,7 @@ ItemUseVitamin: ; dab4 (3:5ab4)
 	jp nz,ItemUseNotTime
 
 ItemUseMedicine: ; dabb (3:5abb)
-	ld a,[W_NUMINPARTY]
+	ld a,[wPartyCount]
 	and a
 	jp z,.emptyParty
 	ld a,[wWhichPokemon]
@@ -707,8 +707,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call DisplayPartyMenu
 .getPartyMonDataAddress
 	jp c,.canceledItemUse
-	ld hl,W_PARTYMON1DATA
-	ld bc,44
+	ld hl,wPartyMons
+	ld bc,wPartyMon2 - wPartyMon1
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	ld a,[wWhichPokemon]
@@ -773,14 +773,14 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jp nz,.doneHealing
 ; if it is active in battle
 	xor a
-	ld [W_PLAYERMONSTATUS],a ; remove the status ailment in the in-battle pokemon data
+	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 	push hl
 	ld hl,W_PLAYERBATTSTATUS3
 	res 0,[hl] ; heal Toxic status
 	pop hl
 	ld bc,30
 	add hl,bc ; hl now points to party stats
-	ld de,W_PLAYERMONMAXHP
+	ld de,wBattleMonMaxHP
 	ld bc,10
 	call CopyData ; copy party stats to in-battle stat data
 	ld a,$28
@@ -821,7 +821,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.next
 	ld a,[wcf06]
 	ld c,a
-	ld hl,W_PLAYERMONSALIVEFLAGS
+	ld hl,wPartyAliveFlags
 	ld b,$01
 	ld a,$10
 	call Predef
@@ -890,9 +890,9 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push af
 	ld a,[hl]
 	push af
-	ld hl,W_PARTYMON1_MAXHP
+	ld hl,wPartyMon1MaxHP
 	ld a,[wWhichPokemon]
-	ld bc,44
+	ld bc,wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a,[hli]
 	ld [wHPBarMaxHP + 1],a
@@ -904,7 +904,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [H_DIVISOR],a
 	ld b,2 ; number of bytes
 	call Divide ; get 1/5 of max HP of pokemon that used Softboiled
-	ld bc,-33
+	ld bc,wPartyMon1HP - wPartyMon1MaxHP
 	add hl,bc ; hl now points to LSB of current HP of pokemon that used Softboiled
 ; subtract 1/5 of max HP from current HP of pokemon that used Softboiled
 	ld a,[H_QUOTIENT + 3]
@@ -1045,14 +1045,14 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr nz,.calculateHPBarCoords
 ; copy party HP to in-battle HP
 	ld a,[hli]
-	ld [W_PLAYERMONCURHP],a
+	ld [wBattleMonHP],a
 	ld a,[hld]
-	ld [W_PLAYERMONCURHP + 1],a
+	ld [wBattleMonHP + 1],a
 	ld a,[wcf91]
 	cp a,FULL_RESTORE
 	jr nz,.calculateHPBarCoords
 	xor a
-	ld [W_PLAYERMONSTATUS],a ; remove the status ailment in the in-battle pokemon data
+	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 .calculateHPBarCoords
 	ld hl,wOAMBuffer + $90
 	ld bc,2 * 20
@@ -1143,7 +1143,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call GetMonHeader
 	push de
 	ld a,d
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop de
 	pop hl
@@ -1634,20 +1634,20 @@ ItemUsePokeflute: ; e140 (3:6140)
 	xor a
 	ld [wWhichTrade],a ; initialize variable that indicates if any pokemon were woken up to zero
 	ld b,~SLP & $FF
-	ld hl,W_PARTYMON1_STATUS
+	ld hl,wPartyMon1Status
 	call WakeUpEntireParty
 	ld a,[W_ISINBATTLE]
 	dec a ; is it a trainer battle?
 	jr z,.skipWakingUpEnemyParty
 ; if it's a trainer battle
-	ld hl,wd8a8 ; enemy party pokemon 1 status
+	ld hl,wEnemyMon1Status
 	call WakeUpEntireParty
 .skipWakingUpEnemyParty
-	ld hl,W_PLAYERMONSTATUS
+	ld hl,wBattleMonStatus
 	ld a,[hl]
 	and b ; remove Sleep status
 	ld [hl],a
-	ld hl,W_ENEMYMONSTATUS
+	ld hl,wEnemyMonStatus
 	ld a,[hl]
 	and b ; remove Sleep status
 	ld [hl],a
@@ -1916,7 +1916,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,0
 	ld [wPlayerMoveListIndex],a
 	jr nz,.chooseMon
-	ld hl,W_PARTYMON1_MOVE1
+	ld hl,wPartyMon1Moves
 	ld bc,44
 	call GetSelectedMoveOffset
 	push hl
@@ -1958,10 +1958,10 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,[wPlayerMonNumber]
 	cp b ; is the pokemon whose PP was restored active in battle?
 	jr nz,.skipUpdatingInBattleData
-	ld hl,W_PARTYMON1_MOVE1PP
+	ld hl,wPartyMon1PP
 	ld bc,44
 	call AddNTimes
-	ld de,W_PLAYERMONPP
+	ld de,wBattleMonPP
 	ld bc,4
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
@@ -1980,7 +1980,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	xor a
 	ld [wcc49],a ; party pokemon
 	call GetMaxPP
-	ld hl,W_PARTYMON1_MOVE1
+	ld hl,wPartyMon1Moves
 	ld bc,44
 	call GetSelectedMoveOffset
 	ld bc,21
@@ -2030,7 +2030,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 ; loop through each move and restore PP
 .elixirLoop
 	push bc
-	ld hl,W_PARTYMON1_MOVE1
+	ld hl,wPartyMon1Moves
 	ld bc,44
 	call GetSelectedMoveOffset
 	ld a,[hl]
@@ -2156,7 +2156,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	call Predef ; check if the pokemon can learn the move
 	push bc
 	ld a,[wWhichPokemon]
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop bc
 	ld a,c
@@ -2315,7 +2315,7 @@ GotOffBicycleText: ; e5fc (3:65fc)
 ; 1: using a PP Up
 ; [wCurrentMenuItem] = index of move (when using a PP Up)
 RestoreBonusPP: ; e606 (3:6606)
-	ld hl,W_PARTYMON1_MOVE1
+	ld hl,wPartyMon1Moves
 	ld bc,44
 	ld a,[wWhichPokemon]
 	call AddNTimes
@@ -2411,20 +2411,20 @@ AddBonusPP: ; e642 (3:6642)
 GetMaxPP: ; e677 (3:6677)
 	ld a,[wcc49]
 	and a
-	ld hl,W_PARTYMON1_MOVE1
-	ld bc,44
+	ld hl,wPartyMon1Moves
+	ld bc,wPartyMon2 - wPartyMon1
 	jr z,.sourceWithMultipleMon
-	ld hl,wd8ac ; enemy party
+	ld hl,wEnemyMon1Moves
 	dec a
 	jr z,.sourceWithMultipleMon
-	ld hl,wda9e ; current box
-	ld bc,33
+	ld hl,wBoxMon1Moves
+	ld bc,wBoxMon2 - wBoxMon1
 	dec a
 	jr z,.sourceWithMultipleMon
-	ld hl,wda67 ; daycare
+	ld hl,wDayCareMonMoves
 	dec a
 	jr z,.sourceWithOneMon
-	ld hl,W_PLAYERMONMOVES ; player's in-battle pokemon
+	ld hl,wBattleMonMoves ; player's in-battle pokemon
 .sourceWithOneMon
 	call GetSelectedMoveOffset2
 	jr .next
@@ -2607,7 +2607,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	cp $ff
 	jr nz, .asm_e7b1
 	call GetMonHeader
-	ld hl, W_BOXMON1OT
+	ld hl, wBoxMonOT
 	ld bc, $b
 	ld a, [W_NUMINBOX] ; wda80
 	dec a
@@ -2637,14 +2637,14 @@ Func_e7a4: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e7db
 .asm_e7ee
-	ld hl, W_PLAYERNAME ; wd158
-	ld de, W_BOXMON1OT
+	ld hl, wPlayerName ; wd158
+	ld de, wBoxMonOT
 	ld bc, $b
 	call CopyData
 	ld a, [W_NUMINBOX] ; wda80
 	dec a
 	jr z, .asm_e82a
-	ld hl, W_BOXMON1NAME
+	ld hl, wBoxMonNicks
 	ld bc, $b
 	dec a
 	call AddNTimes
@@ -2671,7 +2671,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e817
 .asm_e82a
-	ld hl, W_BOXMON1NAME
+	ld hl, wBoxMonNicks
 	ld a, $2
 	ld [wd07d], a
 	ld a, $4e
@@ -2679,12 +2679,12 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld a, [W_NUMINBOX] ; wda80
 	dec a
 	jr z, .asm_e867
-	ld hl, W_BOXMON1DATA
-	ld bc, $21
+	ld hl, wBoxMons
+	ld bc, wBoxMon2 - wBoxMon1
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2695,7 +2695,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 .asm_e854
 	push bc
 	push hl
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	call CopyData
 	pop hl
 	ld d, h
@@ -2706,10 +2706,10 @@ Func_e7a4: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e854
 .asm_e867
-	ld a, [W_ENEMYMONLEVEL] ; W_ENEMYMONLEVEL
-	ld [W_ENEMYMONNUMBER], a ; W_ENEMYMONNUMBER
-	ld hl, wcfe5
-	ld de, W_BOXMON1DATA
+	ld a, [wEnemyMonLevel] ; wEnemyMonLevel
+	ld [wEnemyMonBoxLevel], a
+	ld hl, wEnemyMon
+	ld de, wBoxMon1
 	ld bc, $c
 	call CopyData
 	ld hl, wPlayerID ; wPlayerID
@@ -2740,13 +2740,13 @@ Func_e7a4: ; e7a4 (3:67a4)
 	inc de
 	dec b
 	jr nz, .asm_e89f
-	ld hl, W_ENEMYMONATKDEFIV
+	ld hl, wEnemyMonDVs
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld hl, W_ENEMYMONPP ; wcffe
+	ld hl, wEnemyMonPP ; wcffe
 	ld b, $4
 .asm_e8b1
 	ld a, [hli]

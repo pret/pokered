@@ -11,8 +11,8 @@ Func_525af: ; 525af (14:65af)
 	ld [hl], a
 	ld [wListScrollOffset], a ; wcc36
 	ld [wd05e], a
-	ld [W_PLAYERMONID], a
-	ld [W_PLAYERMONSALIVEFLAGS], a
+	ld [wBattleMonSpecies], a
+	ld [wPartyAliveFlags], a
 	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld [wd078], a
 	ld [wd35d], a
@@ -40,12 +40,12 @@ Func_525af: ; 525af (14:65af)
 	jp Bankswitch
 
 ParalyzeEffect_: ; 52601 (14:6601)
-	ld hl, W_ENEMYMONSTATUS ; wcfe9
+	ld hl, wEnemyMonStatus ; wcfe9
 	ld de, W_PLAYERMOVETYPE ; wcfd5
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, .asm_52613
-	ld hl, W_PLAYERMONSTATUS ; W_PLAYERMONSTATUS
+	ld hl, wBattleMonStatus ; wBattleMonStatus
 	ld de, W_ENEMYMOVETYPE ; wcfcf
 
 .asm_52613
