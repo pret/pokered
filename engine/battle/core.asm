@@ -6661,7 +6661,7 @@ Func_3eed3: ; 3eed3 (f:6ed3)
 PlayMoveAnimation: ; 3ef07 (f:6f07)
 	ld [W_ANIMATIONID],a
 	call Delay3
-	PREDEF_JUMP MoveAnimationPredef ; predef 8
+	predef_jump MoveAnimation
 
 InitBattle: ; 3ef12 (f:6f12)
 	ld a, [W_CUROPPONENT] ; wd059

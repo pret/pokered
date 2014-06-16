@@ -138,13 +138,23 @@ TX_BCD: MACRO
 	ENDM
 
 ; Predef macro.
-PREDEF: MACRO
-	ld a, (\1 - PredefPointers) / 3
+add_predef: MACRO
+\1Predef::
+	db BANK(\1)
+	dw \1
+	ENDM
+
+predef_id: MACRO
+	ld a, (\1Predef - PredefPointers) / 3
+	ENDM
+
+predef: MACRO
+	predef_id \1
 	call Predef
 	ENDM
 
-PREDEF_JUMP: MACRO
-	ld a, (\1 - PredefPointers) / 3
+predef_jump: MACRO
+	predef_id \1
 	jp Predef
 	ENDM
 

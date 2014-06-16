@@ -27,7 +27,7 @@ MomHealPokemon: ; 4818a (12:418a)
 	call PrintText
 	call GBFadeOut2
 	call ReloadMapData
-	PREDEF HealPartyPredef
+	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
 	ld [wc0ee], a
 	call PlaySound ; play sound?

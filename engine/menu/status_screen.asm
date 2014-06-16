@@ -59,7 +59,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; "TYPE1/"
 	FuncCoord 11,3
 	ld hl, Coord
-	PREDEF DrawHPBarPredef ; predef $5f
+	predef DrawHP ; predef $5f
 	ld hl, wcf25
 	call GetHealthBarColor
 	ld b, $3

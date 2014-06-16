@@ -95,8 +95,7 @@ rLCDC_DEFAULT EQU %11100011
 
 	ei
 
-	ld a, $40 ; PREDEF_SGB_BORDER
-	call Predef
+	predef LoadSGB
 
 	ld a, BANK(SFX_1f_67)
 	ld [wc0ef], a
@@ -108,8 +107,7 @@ rLCDC_DEFAULT EQU %11100011
 	dec a
 	ld [wcfcb], a
 
-	ld a, $32 ; PREDEF_INTRO
-	call Predef
+	predef PlayIntro
 
 	call DisableLCD
 	call ClearVram

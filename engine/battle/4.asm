@@ -15,7 +15,7 @@ Func_128ea: ; 128ea (4:68ea)
 	inc b
 	ret
 
-Func_128ef: ; 128ef (4:68ef)
+DrawHP: ; 128ef (4:68ef)
 	call GetPredefRegisters
 	ld a, $1
 	jr asm_128fb

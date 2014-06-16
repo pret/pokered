@@ -494,8 +494,7 @@ TestBattle:
 	ld a, RHYDON
 	ld [W_CUROPPONENT], a
 
-	ld a, $2c ; PREDEF_BATTLE
-	call Predef
+	predef InitOpponent
 
 	; When the battle ends,
 	; do it all again.
@@ -3259,6 +3258,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 ; adds missable object (items, leg. pokemon, etc.) to the map
 ; [wcc4d]: index of the missable object to be added (global index)
 ShowObject: ; f1c8 (3:71c8)
+ShowObject2:
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wcc4d]
 	ld c, a
@@ -4136,6 +4136,9 @@ HealParty:
 
 
 DivideBCDPredef::
+DivideBCDPredef2::
+DivideBCDPredef3::
+DivideBCDPredef4::
 	call GetPredefRegisters
 
 DivideBCD::
@@ -4347,6 +4350,7 @@ SubBCD::
 
 
 InitPlayerData:
+InitPlayerData2:
 
 	call Random
 	ld a, [hRandomSub]

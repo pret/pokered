@@ -21,7 +21,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	ld a, $18
 	ld [wSpriteStateData1 + $12], a ; make the nurse turn to face the machine
 	call Delay3
-	PREDEF HealPartyPredef
+	predef HealParty
 	callba AnimateHealingMachine ; do the healing machine animation
 	xor a
 	ld [wMusicHeaderPointer], a
