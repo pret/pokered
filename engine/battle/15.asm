@@ -246,7 +246,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wd0b5]
 	ld [wd11e], a
 	ld a, $1a
-	call Predef ; indirect jump to Func_3af5b (3af5b (e:6f5b))
+	call Predef
 	ld hl, wccd3
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld c, a

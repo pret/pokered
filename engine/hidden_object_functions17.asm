@@ -80,7 +80,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	FuncCoord 10, 11
 	ld hl, Coord
 	ld a, $2
-	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
+	call Predef
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	call Delay3

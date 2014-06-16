@@ -2675,7 +2675,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld a, $2
 	ld [wd07d], a
 	ld a, $4e
-	call Predef ; indirect jump to Func_64eb (64eb (1:64eb))
+	call Predef
 	ld a, [W_NUMINBOX] ; wda80
 	dec a
 	jr z, .asm_e867

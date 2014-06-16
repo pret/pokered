@@ -37,7 +37,7 @@ Route16Script0: ; 59959 (16:5959)
 	ld a, $21
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	call UpdateSprites
 	ld a, $3
 	ld [W_ROUTE16CURSCRIPT], a

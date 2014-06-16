@@ -33,7 +33,7 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	ld hl, wd72e
 	set 4, [hl]
 	ld a, $7
-	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	call Predef
 	call GBFadeOut2
 	call Delay3
 	call Delay3

@@ -152,7 +152,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 .asm_49e1f
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0

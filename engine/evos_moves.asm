@@ -153,7 +153,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld a, [wd0b5]
 	ld [wd11e], a
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
@@ -206,12 +206,12 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	call Func_3af5b
 	pop hl
 	ld a, $42
-	call Predef ; indirect jump to SetPartyMonTypes (5db5e (17:5b5e))
+	call Predef
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	call z, Func_3af52
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -362,7 +362,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	call GetMoveName
 	call CopyStringToCF4B
 	ld a, $1b
-	call Predef ; indirect jump to LearnMove (6e43 (1:6e43))
+	call Predef
 .asm_3afb1
 	ld a, [wcf91]
 	ld [wd11e], a

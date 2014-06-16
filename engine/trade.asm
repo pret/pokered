@@ -767,4 +767,4 @@ Func_41676: ; 41676 (10:5676)
 	xor a
 	ld [wcc5b], a
 	ld a, $8
-	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
+	jp Predef

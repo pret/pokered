@@ -15,7 +15,7 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	ld [wd11e], a
 	ld b, a
 	ld a, $1c
-	call Predef ; indirect jump to Func_f8a5 (f8a5 (3:78a5))
+	call Predef
 	pop de
 	pop hl
 	ld a, b

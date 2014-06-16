@@ -44,7 +44,7 @@ Func_137aa: ; 137aa (4:77aa)
 	xor a
 	ld [wccd4], a
 	ld a, $2a
-	call Predef ; indirect jump to Func_3ad1c (3ad1c (e:6d1c))
+	call Predef
 .asm_13813
 	xor a
 	ld [wd083], a
@@ -264,7 +264,7 @@ RecoilEffect_: ; 1392c (4:792c)
 .asm_13990
 	ld [wListMenuID], a ; wListMenuID
 	ld a, $48
-	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
+	call Predef
 	ld hl, HitWithRecoilText ; $799e
 	jp PrintText
 HitWithRecoilText: ; 1399e (4:799e)

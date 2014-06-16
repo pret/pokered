@@ -25,7 +25,7 @@ AgathaScript_76459: ; 76459 (1d:6459)
 	ld [wd09f], a
 	ld bc, $2
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 AgathaScript_76464: ; 76464 (1d:6464)
 	xor a

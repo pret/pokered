@@ -275,12 +275,12 @@ Func_4496: ; 4496 (1:4496)
 	ld a, $90
 	ld [$ffb0], a
 	ld d, 1 ; scroll out
-	callba TitleScroll ; indirect jump to TitleScroll (37258 (d:7258))
+	callba TitleScroll
 	ret
 
 Func_44c1: ; 44c1 (1:44c1)
 	ld d, 0 ; scroll in
-	callba TitleScroll ; indirect jump to TitleScroll (37258 (d:7258))
+	callba TitleScroll
 	xor a
 	ld [$ffb0], a
 	ret

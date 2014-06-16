@@ -25,7 +25,7 @@ BrunoScript_76302: ; 76302 (1d:6302)
 	ld [wd09f], a
 	ld bc, $2
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 BrunoScript_7630d: ; 7630d (1d:630d)
 	xor a

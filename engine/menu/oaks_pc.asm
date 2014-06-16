@@ -9,7 +9,7 @@ OpenOaksPC: ; 1e915 (7:6915)
 	and a
 	jr nz, .asm_1e932
 	ld a, $56
-	call Predef ; indirect jump to DisplayDexRating (44169 (11:4169))
+	call Predef
 .asm_1e932
 	ld hl, ClosedOaksPCText
 	call PrintText

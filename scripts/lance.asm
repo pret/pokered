@@ -35,7 +35,7 @@ LanceScript_5a2de: ; 5a2de (16:62de)
 
 LanceScript_5a2f0: ; 5a2f0 (16:62f0)
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 LanceScript_5a2f5: ; 5a2f5 (16:62f5)
 	xor a

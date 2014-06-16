@@ -274,9 +274,9 @@ Func_5345: ; 5345
 	ld hl, W_OPTIONS ; W_OPTIONS
 	res 7, [hl]
 	ld a, $2c
-	call Predef ; indirect jump to InitOpponent (3ef18 (f:6f18))
+	call Predef
 	ld a, $7
-	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	call Predef
 	jp Func_577d
 .asm_5506
 	ld c, BANK(Music_GameCorner)
@@ -886,7 +886,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	cp $5
 	ret nz
 	ld a, $4d
-	call Predef ; indirect jump to Func_5aaf (5aaf (1:5aaf))
+	call Predef
 	jp Init
 .asm_5a75
 	call Func_5317

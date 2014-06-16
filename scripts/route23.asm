@@ -19,11 +19,11 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	ld a, $7a
 	ld [wcc4d], a
 	ld a, $15
-	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
+	call Predef
 	ld a, $60
 	ld [wcc4d], a
 	ld a, $11
-	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	jp Predef
 
 Route23ScriptPointers: ; 51213 (14:5213)
 	dw Route23Script0

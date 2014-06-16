@@ -6,7 +6,7 @@ HandleLedges: ; 1a672 (6:6672)
 	and a ; OVERWORLD
 	ret nz
 	ld a, $35
-	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
+	call Predef
 	ld a, [wSpriteStateData1 + 9]
 	ld b, a
 	FuncCoord 8, 9

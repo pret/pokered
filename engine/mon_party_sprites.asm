@@ -378,7 +378,7 @@ Func_718c3: ; 718c3 (1c:58c3)
 GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 	ld [wd11e], a
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld a, [wd11e]
 	ld c, a
 	dec a

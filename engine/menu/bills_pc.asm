@@ -467,9 +467,9 @@ Func_2174b: ; 2174b (8:574b)
 .asm_217b0
 	ld [wcc49], a
 	ld a, $36
-	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
+	call Predef
 	ld a, $37
-	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
+	call Predef
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
 	call GoPAL_SET_CF1C

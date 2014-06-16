@@ -2533,12 +2533,12 @@ Func_c69c: ; c69c (3:469c)
 	jr z, .asm_c733
 	ld b, $2
 	ld a, $1f
-	call Predef ; indirect jump to Func_480eb (480eb (12:40eb))
+	call Predef
 	ld a, (SFX_02_43 - SFX_Headers_02) / 3
 	call PlaySound
 .asm_c733
 	ld a, $14
-	call Predef ; indirect jump to AnyPlayerPokemonAliveCheck (3ca83 (f:4a83))
+	call Predef
 	ld a, d
 	and a
 	jr nz, .asm_c74f
@@ -3379,7 +3379,7 @@ Func_f225: ; f225 (3:7225)
 	and $f0
 	ret z
 	ld a, $5a
-	call Predef ; indirect jump to Func_c60b (c60b (3:460b))
+	call Predef
 	ld a, [wd71c]
 	and a
 	jp nz, Func_f2dd
@@ -3500,7 +3500,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld a, $2
 	ld [wd07d], a
 	ld a, $4e
-	call Predef ; indirect jump to Func_64eb (64eb (1:64eb))
+	call Predef
 .asm_f33f
 	ld hl, wPartyMons
 	ld a, [wcc49]
@@ -3533,7 +3533,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	ld [wd11e], a
 	push de
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	pop de
 	ld a, [wd11e]
 	dec a
@@ -3636,7 +3636,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	xor a
 	ld [wHPBarMaxHP], a
 	ld a, $3e
-	call Predef ; indirect jump to WriteMonMoves (3afb8 (e:6fb8))
+	call Predef
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
 	inc de

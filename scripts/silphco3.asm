@@ -24,7 +24,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld [wd09f], a
 	ld bc, $404
 	ld a, $17
-	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	call Predef
 	pop af
 .asm_59f98
 	bit 1, a
@@ -33,7 +33,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld [wd09f], a
 	ld bc, $408
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 DataTable_59fa8: ; 59fa8 (16:5fa8)
 	db $04,$04,$04,$08,$FF

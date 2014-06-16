@@ -19,7 +19,7 @@ Lab4Script_75d38: ; 75d38 (1d:5d38)
 	ld [wd11e], a
 	ld b, a
 	ld a, $1c
-	call Predef ; indirect jump to Func_f8a5 (f8a5 (3:78a5))
+	call Predef
 	pop de
 	pop hl
 	ld a, b

@@ -174,7 +174,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	FuncCoord 1, 5
 	ld hl, Coord
 	ld a, $1
-	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	call Predef
 	xor a
 	ld [$ffb0], a
 	ld [rWY], a ; $ff4a
@@ -752,7 +752,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	push bc
 	ld [wListMenuID], a ; wListMenuID
 	ld a, $48
-	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
+	call Predef
 	pop bc
 	ret
 
@@ -1760,7 +1760,7 @@ Func_3cc91: ; 3cc91 (f:4c91)
 Func_3cca4: ; 3cca4 (f:4ca4)
 	call Func_3cd60
 	ld a, $4
-	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
+	call Predef
 	xor a
 	ld [$ffe1], a
 	ld hl, wcc2d
@@ -1792,7 +1792,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	FuncCoord 4, 11
 	ld hl, Coord
 	ld a, $2
-	call Predef ; indirect jump to Func_3f073 (3f073 (f:7073))
+	call Predef
 	ld a, [wcf91]
 	call PlayCry
 	call Func_3ee94
@@ -1810,7 +1810,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	ld [wcd6c], a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
-	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	call Predef
 	ld c, $4
 	call DelayFrames
 	call Func_3cd3a
@@ -1822,7 +1822,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $5
-	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	call Predef
 	call Delay3
 	call Func_3cd3a
 	ld a, $4c
@@ -1890,7 +1890,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	FuncCoord 10, 9
 	ld hl, Coord
 	ld a, $5f
-	call Predef ; indirect jump to Func_128ef (128ef (4:68ef))
+	call Predef
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wcf1d
@@ -2385,9 +2385,9 @@ Func_3d119: ; 3d119 (f:5119)
 	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
 	call ClearSprites
 	ld a, $36
-	call Predef ; indirect jump to StatusScreen (12953 (4:6953))
+	call Predef
 	ld a, $37
-	call Predef ; indirect jump to StatusScreen2 (12b57 (4:6b57))
+	call Predef
 	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 4, a
 	ld hl, AnimationSubstitute
@@ -2923,7 +2923,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	FuncCoord 2, 10
 	ld hl, Coord
 	ld a, $5d
-	call Predef ; indirect jump to Func_27d98 (27d98 (9:7d98))
+	call Predef
 .asm_3d54e
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -3873,7 +3873,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	call PrintText
 	ld b, $4
 	ld a, $24
-	call Predef ; indirect jump to Func_48125 (48125 (12:4125))
+	call Predef
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3dc3f
@@ -6148,12 +6148,12 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	xor a
 	ld [wHPBarMaxHP], a
 	ld a, $3e
-	call Predef ; indirect jump to WriteMonMoves (3afb8 (e:6fb8))
+	call Predef
 .asm_3ebca
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonSpecial + 1
 	ld a, $5e
-	call Predef ; indirect jump to LoadMovePPs (f473 (3:7473))
+	call Predef
 	ld hl, W_MONHBASESTATS
 	ld de, wd002
 	ld b, $5
@@ -6179,7 +6179,7 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -6213,7 +6213,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 .asm_3ec4d
 	call DelayFrame
 	ld a, $30
-	call Predef ; indirect jump to BattleTransition (7096d (1c:496d))
+	call Predef
 	callab Func_3ee58
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -6256,7 +6256,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
 	ld a, $3
-	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
+	call Predef
 	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
@@ -6307,7 +6307,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	FuncCoord 1, 5
 	ld hl, Coord
 	ld a, $1
-	jp Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	jp Predef
 
 Func_3ed02: ; 3ed02 (f:6d02)
 	callab Func_39680
@@ -6710,7 +6710,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	FuncCoord 12, 0
 	ld hl, Coord
 	ld a, $1
-	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	call Predef
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
 	ld a, $2
@@ -6766,7 +6766,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	FuncCoord 12, 0
 	ld hl, Coord
 	ld a, $1
-	call Predef ; indirect jump to Func_3f0c6 (3f0c6 (f:70c6))
+	call Predef
 
 Func_3efeb: ; 3efeb (f:6feb)
 	ld b, $0
@@ -6856,7 +6856,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld [wcd6c], a
 	ld bc, $303
 	ld a, $5
-	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	call Predef
 	ld c, $4
 	call DelayFrames
 	ld bc, $ffd7
@@ -6865,7 +6865,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld [wcd6c], a
 	ld bc, $505
 	ld a, $5
-	call Predef ; indirect jump to Func_79aba (79aba (1e:5aba))
+	call Predef
 	ld c, $5
 	call DelayFrames
 	ld bc, $ffd7
@@ -6943,7 +6943,7 @@ LoadMonBackSprite:
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
 	ld a, $3
-	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
+	call Predef
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ld hl, vSprites
@@ -8547,7 +8547,7 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	push de
 	push bc
 	ld a, $8
-	call Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
+	call Predef
 	pop bc
 	pop de
 	pop hl

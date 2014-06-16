@@ -53,7 +53,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	jr nz, .missableObjectsListLoop
 	ld [wcc4d], a   ; remove missable object
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	xor a
 	ld [wJoyIgnore], a
 	ld [wcf13], a
@@ -70,7 +70,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $43
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	ld a, $4
 	ld [wSpriteStateData1 + 9], a
 	ld a, $95

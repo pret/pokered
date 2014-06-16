@@ -24,7 +24,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld [wd09f], a
 	ld bc, $305
 	ld a, $17
-	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	call Predef
 	pop af
 .asm_51b9e
 	bit 5, a
@@ -34,7 +34,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld [wd09f], a
 	ld bc, $20a
 	ld a, $17
-	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	call Predef
 	pop af
 .asm_51bb1
 	bit 6, a
@@ -43,7 +43,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld [wd09f], a
 	ld bc, $60a
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 DataTable_51bc1: ; 51bc1 (14:5bc1)
 	db $03,$05,$02,$0A,$06,$0A,$FF
@@ -247,7 +247,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	ld a, $a7
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	call Func_2307
 	xor a
 	ld [wJoyIgnore], a

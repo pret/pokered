@@ -20,7 +20,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	ld [wd09f], a
 	ld bc, $503
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)
 	dw VictoryRoad3Script0
@@ -51,11 +51,11 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	ld a, $7a
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	ld a, $60
 	ld [wcc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
+	jp Predef
 
 .coordsData_449f9: ; 449f9 (11:49f9)
 	db $05,$03

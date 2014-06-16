@@ -53,7 +53,7 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	push af
 	ld [wd11e], a
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld a, [wd11e]
 	dec a
 	ld c, a

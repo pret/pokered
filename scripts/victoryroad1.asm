@@ -18,7 +18,7 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld [wd09f], a
 	ld bc, $604
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
 	dw VictoryRoad1Script0

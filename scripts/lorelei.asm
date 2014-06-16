@@ -26,7 +26,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 	ld [wd09f], a
 	ld bc, $2
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 LoreleiScript_761b6: ; 761b6 (1d:61b6)
 	xor a

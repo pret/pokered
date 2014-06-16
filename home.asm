@@ -276,7 +276,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld a, [wcf91]
 	ld [wd11e], a
 	ld a, $3a
-	call Predef ; indirect jump to IndexToPokedex (41010 (10:5010))
+	call Predef
 	ld hl, wd11e
 	ld a, [hl]
 	pop bc
@@ -2961,7 +2961,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld a, [hl]
 	ld [wcc4d], a               ; load corresponding missable object index and remove it
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 .skipRemoveSprite
 	ld hl, wd730
 	bit 4, [hl]
@@ -3049,7 +3049,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	ld a, $39
-	call Predef ; indirect jump to CheckEngagePlayer (5690f (15:690f))
+	call Predef
 	pop de
 	pop hl
 	ld a, [wTrainerSpriteOffset] ; wWhichTrade
@@ -4012,7 +4012,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	pop hl
 	call JoypadLowSensitivity
 	ld a, $2d
-	call Predef ; indirect jump to Func_5a5f (5a5f (1:5a5f))
+	call Predef
 	ld a, [$ffb5]
 	and A_BUTTON | B_BUTTON
 	jr z, .asm_3872

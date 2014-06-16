@@ -42,7 +42,7 @@ OakSpeech: ; 6115 (1:6115)
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
 	ld a,$18
-	call Predef ; indirect jump to InitializePlayerData
+	call Predef
 	ld hl,wNumBoxItems
 	ld a,POTION
 	ld [wcf91],a

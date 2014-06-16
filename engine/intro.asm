@@ -265,11 +265,11 @@ Func_4183f: ; 4183f (10:583f)
 Func_41842: ; 41842 (10:5842)
 	ld c, $0
 	ld a, $31
-	jp Predef ; indirect jump to Func_79dda
+	jp Predef
 
 Func_41849: ; 41849 (10:5849)
 	ld a, $33
-	call Predef ; indirect jump to Func_79869
+	call Predef
 	ld a, b
 	jp PlaySound
 

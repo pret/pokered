@@ -1228,7 +1228,7 @@ Func_791fc: ; 791fc (1e:51fc)
 
 Func_79209: ; 79209 (1e:5209)
 	ld a, $21
-	jp Predef ; indirect jump to Func_480ff (480ff (12:40ff))
+	jp Predef
 
 AnimationShakeScreen: ; 7920e (1e:520e)
 ; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
@@ -1236,7 +1236,7 @@ AnimationShakeScreen: ; 7920e (1e:520e)
 
 Func_79210: ; 79210 (1e:5210)
 	ld a, $24
-	jp Predef ; indirect jump to Func_48125 (48125 (12:4125))
+	jp Predef
 
 AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 ; Draws water droplets all over the screen and makes them
@@ -2144,7 +2144,7 @@ Func_79793: ; 79793 (1e:5793)
 	ld [wd0b5], a
 	call GetMonHeader
 	ld a, $4
-	call Predef ; indirect jump to LoadMonBackSprite (3f103 (f:7103))
+	call Predef
 	xor a
 	call Func_79842
 	call Func_79820

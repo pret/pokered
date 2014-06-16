@@ -23,7 +23,7 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	ld [wd09f], a
 	ld bc, $403
 	ld a, $17
-	jp Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	jp Predef
 
 DataTable_5653e: ; 5653e (15:653e)
 	db $04,$03,$FF

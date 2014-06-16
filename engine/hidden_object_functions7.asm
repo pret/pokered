@@ -294,7 +294,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	pop bc
 	ld [wd09f], a
 	ld a, $17
-	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	call Predef
 	ld hl, $ffdb
 	dec [hl]
 	jr nz, .asm_1eb0e

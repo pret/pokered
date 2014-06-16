@@ -422,7 +422,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld [hli], a
 	ld [hl], a
 	ld a, $4c
-	call Predef ; indirect jump to PrintEmotionBubble (17c47 (5:7c47))
+	call Predef
 	ld a, [wSpriteStateData1 + 2]
 	cp $4
 	jr nz, .asm_70833

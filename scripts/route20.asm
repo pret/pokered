@@ -51,12 +51,12 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 Route20Script_50d0c: ; 50d0c (14:4d0c)
 	ld [wcc4d], a
 	ld a, $15
-	jp Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
+	jp Predef
 
 Route20Script_50d14: ; 50d14 (14:4d14)
 	ld [wcc4d], a
 	ld a, $11
-	jp Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	jp Predef
 
 Route20ScriptPointers: ; 50d1c (14:4d1c)
 	dw CheckFightingMapTrainers

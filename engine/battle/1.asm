@@ -77,11 +77,11 @@ Func_7861: ; 7861 (1:7861)
 .asm_78aa
 	ld [wListMenuID], a ; wListMenuID
 	ld a, $48
-	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
+	call Predef
 	ld a, $0
-	call Predef ; indirect jump to Func_3cd60 (3cd60 (f:4d60))
+	call Predef
 	ld a, $49
-	call Predef ; indirect jump to Func_3cdec (3cdec (f:4dec))
+	call Predef
 	callab ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3

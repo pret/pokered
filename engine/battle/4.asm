@@ -44,7 +44,7 @@ asm_128fb: ; 128fb (4:68fb)
 	ld a, [wcfbb]
 	ld e, a
 	ld a, $26
-	call Predef ; indirect jump to UpdateHPBar_LoadRegisters (f9dc (3:79dc))
+	call Predef
 	ld a, $6
 	ld d, a
 	ld c, a

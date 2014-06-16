@@ -178,7 +178,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $23
 	ld [wcc4d], a
 	ld a, $15
-	call Predef ; indirect jump to AddMissableObject (f1c8 (3:71c8))
+	call Predef
 	ld hl, wd7eb
 	set 1, [hl]
 	set 7, [hl]

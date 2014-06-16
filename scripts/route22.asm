@@ -224,7 +224,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	xor a
 	ld [wcd50], a
 	ld a, $4c
-	call Predef ; indirect jump to PrintEmotionBubble (17c47 (5:7c47))
+	call Predef
 	ld a, [wd700]
 	and a
 	jr z, .skipYVisibilityTesta
@@ -356,7 +356,7 @@ Route22Script6: ; 51151 (14:5151)
 	ld a, $23
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	call Func_2307
 	ld hl, wd7eb
 	res 1, [hl]

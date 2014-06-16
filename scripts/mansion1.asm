@@ -44,7 +44,7 @@ Mansion1Script_4430b: ; 4430b (11:430b)
 	ld [wd09f], a
 asm_44310: ; 44310 (11:4310)
 	ld a, $17
-	call Predef ; indirect jump to Func_ee9e (ee9e (3:6e9e))
+	call Predef
 	ret
 
 Mansion1Script_Switches: ; 44316 (11:4316)

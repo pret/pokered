@@ -146,7 +146,7 @@ Func_1a4f4: ; 1a4f4 (6:64f4)
 	ld a, $0
 	ld [wcc4d], a
 	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	call Predef
 	ld hl, wd730
 	res 7, [hl]
 	ld hl, wd72e
