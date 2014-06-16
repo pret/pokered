@@ -182,7 +182,7 @@ TransferBgRows:: ; 1d9e (0:1d9e)
 	inc l
 	ld [hl], d
 
-i	ld a, 32 - (20 - 1)
+	ld a, 32 - (20 - 1)
 	add l
 	ld l, a
 	jr nc, .ok
