@@ -40,8 +40,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 
 Mansion2Script_5202f: ; 5202f (14:602f)
 	ld [wd09f], a
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 Mansion2Script_Switches: ; 52037 (14:6037)
 	ld a, [wSpriteStateData1 + 9]

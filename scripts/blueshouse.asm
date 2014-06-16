@@ -44,8 +44,7 @@ BluesHouseText1: ; 19b5d (6:5b5d)
 	jr nc, .BagFull
 	ld a,$29
 	ld [wcc4d],a
-	ld a,$11
-	call Predef ; hide table map object
+	predef HideObject ; hide table map object
 	ld hl,GotMapText
 	call PrintText
 	ld hl,wd74a

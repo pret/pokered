@@ -19,8 +19,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	ld a, $1d
 	ld [wd09f], a
 	ld bc, $503
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)
 	dw VictoryRoad3Script0
@@ -50,12 +49,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	jr nz, .asm_449fe
 	ld a, $7a
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $60
 	ld [wcc4d], a
-	ld a, $15
-	jp Predef
+	predef_jump ShowObject
 
 .coordsData_449f9: ; 449f9 (11:49f9)
 	db $05,$03

@@ -855,8 +855,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld hl,wd047
 	ld c,2
 	push bc
-	ld a,$B
-	call Predef
+	predef AddBCDPredef
 	pop bc
 	inc de
 	inc de
@@ -1178,8 +1177,7 @@ Func_3a718: ; 3a718 (e:6718)
 	ld hl,Coord
 	xor a
 	ld [wListMenuID],a
-	ld a,$48
-	call Predef
+	predef UpdateHPBar2
 	jp DecrementAICount
 
 Func_3a72a: ; 3a72a (e:672a)

@@ -20,8 +20,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
-	ld a, $62
-	call Predef ; call oak's aide script
+	predef OaksAideScript ; call oak's aide script
 	ldh a, [$db]
 	cp $1
 	jr nz, .asm_ad646 ; 0x5d606

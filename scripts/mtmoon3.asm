@@ -151,8 +151,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $6d
 .asm_49e1f
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
@@ -284,8 +283,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	call MtMoon3Script_49f69
 	ld a, $6d
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd7f6
 	set 6, [hl]
 	ld a, $4
@@ -314,8 +312,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	call MtMoon3Script_49f69
 	ld a, $6e
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd7f6
 	set 7, [hl]
 	ld a, $4

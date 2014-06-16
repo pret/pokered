@@ -73,6 +73,5 @@ SilphCoElevatorText1: ; 45835 (11:5835)
 	db $08 ; asm
 	call SilphCoElevatorScript_457f1
 	ld hl, SilphCoElevatorWarpMaps ; $5811
-	ld a, $61
-	call Predef
+	predef Func_1c9c6
 	jp TextScriptEnd

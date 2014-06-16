@@ -173,8 +173,7 @@ Func_3c04c: ; 3c04c (f:404c)
 	ld [$ffe1], a
 	FuncCoord 1, 5
 	ld hl, Coord
-	ld a, $1
-	call Predef
+	predef Func_3f0c6
 	xor a
 	ld [$ffb0], a
 	ld [rWY], a ; $ff4a
@@ -320,12 +319,10 @@ Func_3c1ad: ; 3c1ad (f:41ad)
 	ld b, $1
 	push bc
 	ld hl, wPartyAliveFlags
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld hl, wccf5
 	pop bc
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	call Func_3cba6
 	call LoadScreenTilesFromBuffer1
 	call Func_3cc91
@@ -751,8 +748,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 .playersTurn
 	push bc
 	ld [wListMenuID], a ; wListMenuID
-	ld a, $48
-	call Predef
+	predef UpdateHPBar2
 	pop bc
 	ret
 
@@ -996,8 +992,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld de, wPlayerMoney + 2 ; wd349
 	ld hl, wd07b
 	ld c, $3
-	ld a, $b ; AddBCDPredef
-	jp Predef
+	predef_jump AddBCDPredef
 
 MoneyForWinningText: ; 3c6e4 (f:46e4)
 	TX_FAR _MoneyForWinningText
@@ -1053,8 +1048,7 @@ Func_3c741: ; 3c741 (f:4741)
 	ld c, a
 	ld hl, wPartyAliveFlags ; clear fainted mon's alive flag
 	ld b, $0
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	res 2, [hl]   ; reset "attacking multiple times" flag
 	ld a, [wd083]
@@ -1153,12 +1147,10 @@ Func_3c7d8: ; 3c7d8 (f:47d8)
 	ld hl, wPartyAliveFlags
 	ld b, $1
 	push bc
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	pop bc
 	ld hl, wccf5
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	call Func_3cba6
 	call GBPalWhiteOut
 	call Func_3ee5b
@@ -1317,14 +1309,12 @@ EnemySendOut: ; 3c90e (f:490e)
 	ld c,a
 	ld b,1
 	push bc
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld hl,wccf5
 	xor a
 	ld [hl],a
 	pop bc
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 Func_3c92a: ; 3c92a (f:492a)
 	xor a
 	ld hl,wd065
@@ -1468,8 +1458,7 @@ Func_3c92a: ; 3c92a (f:492a)
 	ld [$FFE1],a
 	FuncCoord 15, 6
 	ld hl,Coord
-	ld a,2
-	call Predef
+	predef Func_3f073
 	ld a,[wEnemyMonSpecies2]
 	call PlayCry
 	call Func_3cdec
@@ -1759,8 +1748,7 @@ Func_3cc91: ; 3cc91 (f:4c91)
 
 Func_3cca4: ; 3cca4 (f:4ca4)
 	call Func_3cd60
-	ld a, $4
-	call Predef
+	predef LoadMonBackPic
 	xor a
 	ld [$ffe1], a
 	ld hl, wcc2d
@@ -1791,8 +1779,7 @@ Func_3cca4: ; 3cca4 (f:4ca4)
 	call PlayMoveAnimation
 	FuncCoord 4, 11
 	ld hl, Coord
-	ld a, $2
-	call Predef
+	predef Func_3f073
 	ld a, [wcf91]
 	call PlayCry
 	call Func_3ee94
@@ -1809,8 +1796,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	xor a
 	ld [wcd6c], a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
-	ld a, $5
-	call Predef
+	predef Func_79aba
 	ld c, $4
 	call DelayFrames
 	call Func_3cd3a
@@ -1821,8 +1807,7 @@ Func_3ccfa: ; 3ccfa (f:4cfa)
 	ld [wcd6c], a
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
-	ld a, $5
-	call Predef
+	predef Func_79aba
 	call Delay3
 	call Func_3cd3a
 	ld a, $4c
@@ -1889,8 +1874,7 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	ld [wcf91], a
 	FuncCoord 10, 9
 	ld hl, Coord
-	ld a, $5f
-	call Predef
+	predef DrawHP 
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld hl, wcf1d
@@ -2384,10 +2368,8 @@ Func_3d119: ; 3d119 (f:5119)
 	ld [wcc49], a
 	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
 	call ClearSprites
-	ld a, $36
-	call Predef
-	ld a, $37
-	call Predef
+	predef StatusScreen
+	predef StatusScreen2
 	ld a, [W_ENEMYBATTSTATUS2] ; W_ENEMYBATTSTATUS2
 	bit 4, a
 	ld hl, AnimationSubstitute
@@ -2440,12 +2422,10 @@ Func_3d1ba: ; 3d1ba (f:51ba)
 	ld b, $1
 	push bc
 	ld hl, wPartyAliveFlags
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	pop bc
 	ld hl, wccf5
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	call Func_3cba6
 	call Func_3cc91
 	call SaveScreenTilesToBuffer1
@@ -2922,8 +2902,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	call GetCurrentMove
 	FuncCoord 2, 10
 	ld hl, Coord
-	ld a, $5d
-	call Predef
+	predef Func_27d98
 .asm_3d54e
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -3872,8 +3851,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld hl, KeptGoingAndCrashedText ; $5c47
 	call PrintText
 	ld b, $4
-	ld a, $24
-	call Predef
+	predef Func_48125
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3dc3f
@@ -4799,8 +4777,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	ld hl,Coord
 	xor a
 	ld [wListMenuID],a
-	ld a,$48
-	call Predef ; animate the HP bar shortening
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -4919,8 +4896,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld hl,Coord
 	ld a,$01
 	ld [wListMenuID],a
-	ld a,$48
-	call Predef ; animate the HP bar shortening
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -6147,13 +6123,11 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	dec de
 	xor a
 	ld [wHPBarMaxHP], a
-	ld a, $3e
-	call Predef
+	predef WriteMonMoves
 .asm_3ebca
 	ld hl, wEnemyMonMoves
 	ld de, wEnemyMonSpecial + 1
-	ld a, $5e
-	call Predef
+	predef LoadMovePPs
 	ld hl, W_MONHBASESTATS
 	ld de, wd002
 	ld b, $5
@@ -6178,15 +6152,13 @@ Func_3eb01: ; 3eb01 (f:6b01)
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, $1
 	ld hl, wPokedexSeen ; wd30a
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld hl, wEnemyMonLevel ; wEnemyMonLevel
 	ld de, wcd23
 	ld bc, $b
@@ -6212,8 +6184,7 @@ Func_3ec32: ; 3ec32 (f:6c32)
 	call ClearScreen
 .asm_3ec4d
 	call DelayFrame
-	ld a, $30
-	call Predef
+	predef BattleTransition
 	callab Func_3ee58
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -6255,8 +6226,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 .asm_3ec9e
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
-	ld a, $3
-	call Predef
+	predef ScaleSpriteByTwo
 	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
@@ -6306,8 +6276,7 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld [$ffe1], a
 	FuncCoord 1, 5
 	ld hl, Coord
-	ld a, $1
-	jp Predef
+	predef_jump Func_3f0c6
 
 Func_3ed02: ; 3ed02 (f:6d02)
 	callab Func_39680
@@ -6709,8 +6678,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld [wAICount], a ; wccdf
 	FuncCoord 12, 0
 	ld hl, Coord
-	ld a, $1
-	call Predef
+	predef Func_3f0c6
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
 	ld a, $2
@@ -6765,8 +6733,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	ld [$ffe1], a
 	FuncCoord 12, 0
 	ld hl, Coord
-	ld a, $1
-	call Predef
+	predef Func_3f0c6
 
 Func_3efeb: ; 3efeb (f:6feb)
 	ld b, $0
@@ -6855,8 +6822,7 @@ Func_3f073: ; 3f073 (f:7073)
 	ld a, $1
 	ld [wcd6c], a
 	ld bc, $303
-	ld a, $5
-	call Predef
+	predef Func_79aba
 	ld c, $4
 	call DelayFrames
 	ld bc, $ffd7
@@ -6864,8 +6830,7 @@ Func_3f073: ; 3f073 (f:7073)
 	xor a
 	ld [wcd6c], a
 	ld bc, $505
-	ld a, $5
-	call Predef
+	predef Func_79aba
 	ld c, $5
 	call DelayFrames
 	ld bc, $ffd7
@@ -6942,8 +6907,7 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
-	ld a, $3
-	call Predef
+	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
 	ld hl, vSprites
@@ -8546,8 +8510,7 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	push hl
 	push de
 	push bc
-	ld a, $8
-	call Predef
+	predef MoveAnimation
 	pop bc
 	pop de
 	pop hl

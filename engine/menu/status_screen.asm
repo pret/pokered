@@ -84,8 +84,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld a, [W_MONHDEXNUM]
 	ld [wd11e], a
 	ld [wd0b5], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	FuncCoord 3,7
 	ld hl, Coord
 	ld de, wd11e
@@ -93,8 +92,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PrintNumber ; Pokémon no.
 	FuncCoord 11,10
 	ld hl, Coord
-	ld a, $4b
-	call Predef ; Prints the type (?)
+	predef Func_27d6b ; Prints the type (?)
 	ld hl, NamePointers2 ; $6a9d
 	call .unk_12a7e
 	ld d, h

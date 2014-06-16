@@ -55,8 +55,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	bit 2, a
 	jr nz, .asm_19810 ; 0x19804 $a
 	ld b, $3f
-	ld a, $1c
-	call Predef
+	predef IsItemInBag_ 
 	ld a, b
 	and a
 	ret nz
@@ -176,8 +175,7 @@ VermilionCityText3: ; 198b1 (6:58b1)
 	ld hl, SSAnneWelcomeText9
 	call PrintText
 	ld b, S_S__TICKET
-	ld a, $1c
-	call Predef
+	predef IsItemInBag_ 
 	ld a, b
 	and a
 	jr nz, .asm_0419b ; 0x198df

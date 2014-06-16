@@ -117,8 +117,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld hl, Coord
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
-	ld a, $4
-	call Predef
+	predef LoadMonBackPic
 .asm_702ab
 	ld b, $b
 	ld c, $0
@@ -179,8 +178,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld [wd0b5], a
 	FuncCoord 3, 9
 	ld hl, Coord
-	ld a, $4b
-	call Predef
+	predef Func_27d6b
 	ld a, [wWhichTrade] ; wWhichTrade
 	jp PlayCry
 
@@ -202,8 +200,7 @@ Func_7033e: ; 7033e (1c:433e)
 	ld de, RedPicBack ; $7e0a
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
-	ld a, $3
-	call Predef
+	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
@@ -212,14 +209,12 @@ Func_7036d: ; 7036d (1c:436d)
 	ld b, $0
 	FuncCoord 12, 5
 	ld hl, Coord
-	ld a, $31
-	jp Predef
+	predef_jump Func_79dda
 
 Func_70377: ; 70377 (1c:4377)
 	ld hl, wd747
 	set 3, [hl]
-	ld a, $56
-	call Predef
+	predef DisplayDexRating
 	FuncCoord 0, 4
 	ld hl, Coord
 	ld b, $6

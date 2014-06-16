@@ -98,8 +98,7 @@ OverworldLoopLessDelay::
 	and a
 	jp z,OverworldLoop
 .displayDialogue
-	ld a,$35
-	call Predef ; check what is in front of the player
+	predef Func_c586 ; check what is in front of the player
 	call UpdateSprites ; move sprites
 	ld a,[wFlags_0xcd60]
 	bit 2,a
@@ -117,8 +116,7 @@ OverworldLoopLessDelay::
 	ld a,$00
 	ld [wcc47],a
 	jr z,.changeMap
-	ld a,$52
-	call Predef
+	predef LoadSAV
 	ld a,[W_CURMAP]
 	ld [wd71a],a
 	call Func_62ce
@@ -301,8 +299,7 @@ OverworldLoopLessDelay::
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,CheckWarpsNoCollision
-	ld a,$13
-	call Predef ; decrement HP of poisoned pokemon
+	predef Func_c69c ; decrement HP of poisoned pokemon
 	ld a,[wd12d]
 	and a
 	jp nz,HandleBlackOut ; if all pokemon fainted
@@ -1070,8 +1067,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	and a
 	jr z,.extendRangeOverCounter
 ; if there are signs
-	ld a,$35
-	call Predef ; get the coordinates in front of the player in de
+	predef Func_c586 ; get the coordinates in front of the player in de
 	ld hl,wd4b1 ; start of sign coordinates
 	ld a,[wd4b0] ; number of signs in the map
 	ld b,a
@@ -1105,8 +1101,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	jr nz,.signLoop
 ; check if the player is front of a counter in a pokemon center, pokemart, etc. and if so, extend the range at which he can talk to the NPC
 .extendRangeOverCounter
-	ld a,$35
-	call Predef ; get the tile in front of the player in c
+	predef Func_c586 ; get the tile in front of the player in c
 	ld hl,W_TILESETTALKINGOVERTILES ; list of tiles that extend talking range (counter tiles)
 	ld b,$03
 	ld d,$20 ; talking range in pixels (long range)
@@ -1246,8 +1241,7 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 ; function that checks if the tile in front of the player is passable
 ; clears carry if it is, sets carry if not
 CheckTilePassable:: ; 0c10 (0:0c10)
-	ld a,$35
-	call Predef ; get tile in front of player
+	predef Func_c586 ; get tile in front of player
 	ld a,[wcfc6] ; tile in front of player
 	ld c,a
 	ld hl,W_TILESETCOLLISIONPTR ; pointer to list of passable tiles
@@ -1271,8 +1265,7 @@ CheckTilePassable:: ; 0c10 (0:0c10)
 ; sets carry if there is a collision and unsets carry if not
 CheckForJumpingAndTilePairCollisions:: ; 0c2a (0:0c2a)
 	push hl
-	ld a,$35
-	call Predef ; get the tile in front of the player
+	predef Func_c586 ; get the tile in front of the player
 	push de
 	push bc
 	callba HandleLedges ; check if the player is trying to jump a ledge
@@ -1920,8 +1913,7 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	ld hl,TilePairCollisionsWater
 	call CheckForJumpingAndTilePairCollisions
 	jr c,.collision
-	ld a,$35
-	call Predef ; get tile in front of player (puts it in c and [wcfc6])
+	predef Func_c586 ; get tile in front of player (puts it in c and [wcfc6])
 	ld a,[wcfc6] ; tile in front of player
 	cp a,$14 ; water tile
 	jr z,.noCollision ; keep surfing if it's a water tile
@@ -2274,8 +2266,7 @@ LoadMapHeader:: ; 107c (0:107c)
 	dec b
 	jp nz,.loadSpriteLoop
 .finishUp
-	ld a,$19
-	call Predef ; load tileset data
+	predef Func_c754 ; load tileset data
 	callab LoadWildData ; load wild pokemon data
 	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a,[W_CURMAPHEIGHT] ; map height in 4x4 tile blocks

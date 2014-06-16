@@ -466,10 +466,8 @@ Func_2174b: ; 2174b (8:574b)
 	ld a, $2
 .asm_217b0
 	ld [wcc49], a
-	ld a, $36
-	call Predef
-	ld a, $37
-	call Predef
+	predef StatusScreen
+	predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
 	call GoPAL_SET_CF1C

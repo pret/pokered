@@ -41,8 +41,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ret nz
 	ld a, $61
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd7f2
 	set 6, [hl]
 	xor a
@@ -70,8 +69,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	call Func_32f9
 	ld a, $62
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld c, $8
 	call DelayFrames
 	ld a, $2
@@ -165,12 +163,10 @@ BillsHouseText2: ; 1e874 (7:6874)
 	set 4, [hl]
 	ld a, $7
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $9
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 .asm_5491f ; 0x1e8a9
 	ld hl, BillsHouseText_1e8cb
 	call PrintText

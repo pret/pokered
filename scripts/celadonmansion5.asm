@@ -16,7 +16,6 @@ CeladonMansion5Text2: ; 1dd46 (7:5d46)
 	jr nc, .asm_24365 ; 0x1dd4d
 	ld a, $45
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 .asm_24365 ; 0x1dd59
 	jp TextScriptEnd

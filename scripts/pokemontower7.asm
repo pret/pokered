@@ -52,8 +52,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld a, [hli]
 	jr nz, .missableObjectsListLoop
 	ld [wcc4d], a   ; remove missable object
-	ld a, $11
-	call Predef
+	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	ld [wcf13], a
@@ -69,8 +68,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld [wJoyIgnore], a
 	ld a, $43
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $4
 	ld [wSpriteStateData1 + 9], a
 	ld a, $95
@@ -226,16 +224,13 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 	set 7, [hl]
 	ld a, $44
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $17
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $18
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $4
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

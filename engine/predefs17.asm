@@ -3,8 +3,7 @@
 StarterDex: ; 5c0dc (17:40dc)
 	ld a, %01001011 ; set starter flags
 	ld [wPokedexOwned], a ; wPokedexOwned
-	ld a, $3d
-	call Predef
+	predef ShowPokedexData
 	xor a ; unset starter flags
 	ld [wPokedexOwned], a ; wPokedexOwned
 	ret

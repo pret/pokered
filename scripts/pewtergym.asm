@@ -69,12 +69,10 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 
 	ld a, $4
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $22
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 
 	ld hl, wd7eb
 	res 0, [hl]

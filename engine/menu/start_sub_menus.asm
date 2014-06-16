@@ -1,6 +1,5 @@
 StartMenu_Pokedex: ; 13095 (4:7095)
-	ld a,$29
-	call Predef
+	predef ShowPokedexMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call Delay3
 	call LoadGBPal
@@ -98,10 +97,8 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call ClearSprites
 	xor a
 	ld [wcc49],a
-	ld a,$36
-	call Predef
-	ld a,$37
-	call Predef
+	predef StatusScreen
+	predef StatusScreen2
 	call ReloadMapData
 	jp StartMenu_Pokemon
 .choseOutOfBattleMove
@@ -155,8 +152,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .cut
 	bit 1,a ; does the player have the Cascade Badge?
 	jp z,.newBadgeRequired
-	ld a,$3c
-	call Predef
+	predef UsedCut
 	ld a,[wcd6a]
 	and a
 	jp z,.loop
@@ -181,8 +177,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .strength
 	bit 3,a ; does the player have the Rainbow Badge?
 	jp z,.newBadgeRequired
-	ld a,$5b
-	call Predef
+	predef PrintStrengthTxt
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .flash
@@ -515,8 +510,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	xor a
 	ld [$ffd7],a
 	call DrawTrainerInfo
-	ld a,$2e
-	call Predef ; draw badges
+	predef DrawBadges ; draw badges
 	ld b,$0d
 	call GoPAL_SET
 	call GBPalNormal
@@ -535,8 +529,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedPicFront
 	ld bc,(BANK(RedPicFront) << 8) | $01
-	ld a,$3b
-	call Predef
+	predef Predef3B
 	call DisableLCD
 	FuncCoord 0,2
 	ld hl,Coord
@@ -711,8 +704,7 @@ StartMenu_SaveReset: ; 135e3 (4:75e3)
 	ld a,[wd72e]
 	bit 6,a ; is the player using the link feature?
 	jp nz,Init
-	ld a,$3f
-	call Predef ; save the game
+	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	jp HoldTextDisplayOpen
 

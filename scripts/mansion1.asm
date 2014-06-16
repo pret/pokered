@@ -43,8 +43,7 @@ Mansion1Script_4430b: ; 4430b (11:430b)
 	ld a, $e
 	ld [wd09f], a
 asm_44310: ; 44310 (11:4310)
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	ret
 
 Mansion1Script_Switches: ; 44316 (11:4316)

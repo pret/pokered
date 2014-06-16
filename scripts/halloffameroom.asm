@@ -25,8 +25,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	push af
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $55
-	call Predef
+	predef HallOfFamePC
 	pop af
 	ld [wd358], a
 	ld hl, W_FLAGS_D733
@@ -101,8 +100,7 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld [wJoyIgnore], a
 	ld a, $8
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $2
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ret

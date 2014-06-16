@@ -20,8 +20,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
-	ld a, $62
-	call Predef ; call oak's aide script
+	predef OaksAideScript ; call oak's aide script
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_49689 ; 0x4967c $b

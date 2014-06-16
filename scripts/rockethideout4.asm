@@ -31,8 +31,7 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 .asm_45498
 	ld [wd09f], a
 	ld bc, $050c
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 	xor a
@@ -62,12 +61,10 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	call GBFadeIn1
 	ld a, $83
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $87
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	call UpdateSprites
 	call GBFadeOut1
 	xor a
@@ -222,8 +219,7 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	jr nz, .asm_455e9 ; 0x455dd $a
 	ld a, $88
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 .asm_455e9
 	jp TextScriptEnd
 

@@ -103,8 +103,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, wTrainerFacingDirection
 	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c ; SubBCDPredef
-	call Predef
+	predef SubBCDPredef
 	ld a, $13
 	ld [wd125], a
 	call DisplayTextBoxID
@@ -203,8 +202,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	set 1, [hl]
 	ld a, $34
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, ReceivedOldAmberText
 	jr .asm_52e0f ; 0x5c27e
 .BagFull

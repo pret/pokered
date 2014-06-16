@@ -87,8 +87,7 @@ PewterCityScript2: ; 192d3 (6:52d3)
 	ret nz
 	ld a, $3
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $3
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
@@ -99,8 +98,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	call Func_32fe
 	ld a, $3
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
@@ -153,8 +151,7 @@ PewterCityScript5: ; 19359 (6:5359)
 	ret nz
 	ld a, $4
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $6
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
@@ -165,8 +162,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	call Func_32fe
 	ld a, $4
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0

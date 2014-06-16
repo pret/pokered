@@ -5,15 +5,12 @@ Func_74872: ; 74872 (1d:4872)
 	call GBFadeIn1
 	ld a, $07
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $09
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $06
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call GBFadeOut1
 	ret

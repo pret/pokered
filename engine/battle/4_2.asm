@@ -36,15 +36,13 @@ Func_137aa: ; 137aa (4:77aa)
 	jr z, .asm_1380a
 	ld de, wPlayerMoney + 2 ; wd349
 	ld c, $3
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	ld hl, PickUpPayDayMoneyText
 	call PrintText
 .asm_1380a
 	xor a
 	ld [wccd4], a
-	ld a, $2a
-	call Predef
+	predef Func_3ad1c
 .asm_13813
 	xor a
 	ld [wd083], a
@@ -263,8 +261,7 @@ RecoilEffect_: ; 1392c (4:792c)
 	xor a
 .asm_13990
 	ld [wListMenuID], a ; wListMenuID
-	ld a, $48
-	call Predef
+	predef UpdateHPBar2
 	ld hl, HitWithRecoilText ; $799e
 	jp PrintText
 HitWithRecoilText: ; 1399e (4:799e)

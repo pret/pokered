@@ -101,8 +101,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ret nz
 	ld a, $38
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	call Func_2307

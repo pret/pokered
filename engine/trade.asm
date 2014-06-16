@@ -766,5 +766,4 @@ Func_41676: ; 41676 (10:5676)
 	ld [W_ANIMATIONID], a ; W_ANIMATIONID
 	xor a
 	ld [wcc5b], a
-	ld a, $8
-	jp Predef
+	predef_jump MoveAnimation

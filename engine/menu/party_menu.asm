@@ -93,8 +93,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	set 0,a
 	ld [$FFF6],a
 	add hl,bc
-	ld a,$60
-	call Predef ; draw HP bar and prints current / max HP
+	predef Func_128f6 ; draw HP bar and prints current / max HP
 	ld a,[$FFF6]
 	res 0,a
 	ld [$FFF6],a
@@ -103,8 +102,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	jr .printLevel
 .teachMoveMenu
 	push hl
-	ld a,$43
-	call Predef ; check if the pokemon can learn the move
+	predef CanLearnTM ; check if the pokemon can learn the move
 	pop hl
 	ld de,.ableToLearnMoveText
 	ld a,c

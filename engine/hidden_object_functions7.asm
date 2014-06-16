@@ -194,8 +194,7 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 
 CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
 	ld hl, wd79c
-	ld a, $10 ; FlagActionPredef
-	jp Predef
+	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
@@ -227,8 +226,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld c, a
 	ld b, $2
 	ld hl, wd79a
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld a, c
 	and a
 	ret nz
@@ -293,8 +291,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 .asm_1eb38
 	pop bc
 	ld [wd09f], a
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	ld hl, $ffdb
 	dec [hl]
 	jr nz, .asm_1eb0e

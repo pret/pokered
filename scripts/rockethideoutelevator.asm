@@ -68,8 +68,7 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 	jr z, .asm_8d8f0 ; 0x45773
 	call RocketHideoutElevatorScript_45741
 	ld hl, RocketHideoutElevatorWarpMaps ; $5759
-	ld a, $61
-	call Predef
+	predef Func_1c9c6
 	jr .asm_46c43 ; 0x45780
 .asm_8d8f0 ; 0x45782
 	ld hl, RocketHideoutElevatorText_4578b

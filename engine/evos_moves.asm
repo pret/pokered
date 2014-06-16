@@ -152,8 +152,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	push af
 	ld a, [wd0b5]
 	ld [wd11e], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
@@ -205,13 +204,11 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [wcc49], a
 	call Func_3af5b
 	pop hl
-	ld a, $42
-	call Predef
+	predef SetPartyMonTypes
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	call z, Func_3af52
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -361,8 +358,7 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B
-	ld a, $1b
-	call Predef
+	predef LearnMove
 .asm_3afb1
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -489,7 +485,6 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	ret
 
 Func_3b057: ; 3b057 (e:7057)
-	ld a, $10 ; FlagActionPredef
-	jp Predef
+	predef_jump FlagActionPredef
 
 INCLUDE "data/evos_moves.asm"

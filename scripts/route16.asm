@@ -36,8 +36,7 @@ Route16Script0: ; 59959 (16:5959)
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, $21
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call UpdateSprites
 	ld a, $3
 	ld [W_ROUTE16CURSCRIPT], a

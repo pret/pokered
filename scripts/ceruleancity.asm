@@ -10,8 +10,7 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ld a, $5
 	ld [wcc4d], a
-	ld a, $11
-	jp Predef
+	predef_jump HideObject
 
 CeruleanCityScriptPointers: ; 1949d (6:549d)
 	dw CeruleanCityScript0
@@ -91,8 +90,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 .asm_19535
 	ld a, $5
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld de, CeruleanCityMovement1
 	ld a, $1
 	ld [$ff8c], a
@@ -208,8 +206,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ret nz
 	ld a, $5
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	call Func_2307

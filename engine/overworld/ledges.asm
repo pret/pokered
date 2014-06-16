@@ -5,8 +5,7 @@ HandleLedges: ; 1a672 (6:6672)
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	and a ; OVERWORLD
 	ret nz
-	ld a, $35
-	call Predef
+	predef Func_c586
 	ld a, [wSpriteStateData1 + 9]
 	ld b, a
 	FuncCoord 8, 9

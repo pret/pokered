@@ -257,8 +257,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld hl,$FFA1
 	ld de,wPlayerCoins + 1
 	ld c,$02 ; how many bytes
-	ld a,$0C
-	call Predef ; subtract coins (BCD daa operations)
+	predef SubBCDPredef ; subtract coins (BCD daa operations)
 	jp PrintPrizePrice
 .BagFull
 	ld hl,PrizeRoomBagIsFullTextPtr

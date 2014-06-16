@@ -40,8 +40,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 .asm_5ca7f
 	ld [wd09f], a
 	ld bc, $202
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a

@@ -13,6 +13,5 @@ Route2HouseText2: ; 1def9 (7:5ef9)
 	db $08 ; asm
 	ld a, $1
 	ld [wWhichTrade], a
-	ld a, $54
-	call Predef
+	predef Predef54 
 	jp TextScriptEnd

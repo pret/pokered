@@ -22,8 +22,7 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	ld a, $20
 	ld [wd09f], a
 	ld bc, $603
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 DataTable_62134: ; 62134 (18:6134)
 	db $06,$03,$FF
@@ -80,8 +79,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	jr z, .asm_62181
 	push hl
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	pop hl
 	jr .asm_62170
 .asm_62181
@@ -92,8 +90,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	ret z
 	push hl
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	pop hl
 	jr .asm_62184
 

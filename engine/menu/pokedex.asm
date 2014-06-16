@@ -145,8 +145,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	call PlaySound ; play sound
 	jr .handleMenuInput
 .choseArea
-	ld a,$4a
-	call Predef ; display pokemon areas
+	predef LoadTownMap_Nest ; display pokemon areas
 	ld b,0
 	jr .exitSideMenu
 
@@ -392,8 +391,7 @@ IsPokemonBitSet: ; 402c2 (10:42c2)
 	dec a
 	ld c,a
 	ld b,2
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ret

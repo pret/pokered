@@ -76,12 +76,9 @@ Func_7861: ; 7861 (1:7861)
 	xor a
 .asm_78aa
 	ld [wListMenuID], a ; wListMenuID
-	ld a, $48
-	call Predef
-	ld a, $0
-	call Predef
-	ld a, $49
-	call Predef
+	predef UpdateHPBar2
+	predef Func_3cd60
+	predef Func_3cdec
 	callab ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3

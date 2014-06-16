@@ -268,8 +268,7 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	and a
 	jr z, .idZero
 	push bc
-	ld a, $3A
-	call Predef               ; turn Pokemon ID number into Pokedex number
+	predef IndexToPokedex               ; turn Pokemon ID number into Pokedex number
 	pop bc
 	ld a, [wd11e]
 .idZero

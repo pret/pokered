@@ -43,8 +43,7 @@ asm_128fb: ; 128fb (4:68fb)
 	ld d, a
 	ld a, [wcfbb]
 	ld e, a
-	ld a, $26
-	call Predef
+	predef HPBarLength
 	ld a, $6
 	ld d, a
 	ld c, a

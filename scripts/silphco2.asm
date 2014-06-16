@@ -23,8 +23,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0202
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_59d2e
 	bit 6, a
@@ -32,8 +31,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0502
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 DataTable_59d3e: ; 59d3e (16:5d3e)
 	db $02,$02,$05,$02,$FF

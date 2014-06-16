@@ -34,8 +34,7 @@ LanceScript_5a2de: ; 5a2de (16:62de)
 	ld bc, $603
 
 LanceScript_5a2f0: ; 5a2f0 (16:62f0)
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 LanceScript_5a2f5: ; 5a2f5 (16:62f5)
 	xor a

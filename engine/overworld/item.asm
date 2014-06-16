@@ -32,8 +32,7 @@ PickupItem:
 
 	ld a, [$ffdb]
 	ld [wcc4d], a
-	ld a, $11 ; HideObject
-	call Predef
+	predef HideObject
 	ld a, 1
 	ld [wcc3c], a
 	ld hl, FoundItemText

@@ -30,8 +30,7 @@ RocketHideout1Script_44be0: ; 44be0 (11:4be0)
 .asm_44c03
 	ld [wd09f], a
 	ld bc, $080c
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 RocketHideout1ScriptPointers: ; 44c0e (11:4c0e)
 	dw CheckFightingMapTrainers

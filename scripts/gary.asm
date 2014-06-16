@@ -122,8 +122,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	call MoveSprite
 	ld a, $d6
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $5
 	ld [W_GARYCURSCRIPT], a
 	ret
@@ -193,8 +192,7 @@ GaryScript8: ; 76083 (1d:6083)
 	ret nz
 	ld a, $d6
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $9
 	ld [W_GARYCURSCRIPT], a
 	ret

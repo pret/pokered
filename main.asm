@@ -49,8 +49,7 @@ Func_40b0::
 	ld [$ffa3], a
 	ld a, 2
 	ld [$ffa4], a
-	ld a, $d ; DivideBCDPredef
-	call Predef
+	predef DivideBCDPredef3
 	ld a, [$ffa2]
 	ld [wPlayerMoney], a
 	ld a, [$ffa2 + 1]
@@ -65,8 +64,7 @@ Func_40b0::
 	set 6, [hl]
 	ld a, %11111111
 	ld [wJoyIgnore], a
-	ld a, $7 ; HealParty
-	jp Predef
+	predef_jump HealParty
 
 
 MewPicFront:: INCBIN "pic/bmon/mew.pic"
@@ -520,8 +518,7 @@ INCLUDE "engine/oak_speech.asm"
 
 Func_62ce: ; 62ce (1:62ce)
 	call Func_62ff
-	ld a,$19
-	call Predef
+	predef Func_c754
 	ld hl,wd732
 	bit 2,[hl]
 	res 2,[hl]
@@ -714,8 +711,7 @@ SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
-	ld a,$0c
-	call Predef ; subtract total price from money
+	predef SubBCDPredef ; subtract total price from money
 	ld a,$13
 	ld [wd125],a
 	call DisplayTextBoxID ; redraw money text box
@@ -1927,22 +1923,19 @@ _RemovePokemon: ; 7b68 (1:7b68)
 Func_7c18: ; 7c18 (1:7c18)
 	ld hl, wd730
 	set 6, [hl]
-	ld a, $3d
-	call Predef
+	predef ShowPokedexData
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
 	ld c, $a
 	call DelayFrames
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, $1
 	ld hl, wPokedexSeen
-	ld a, $10
-	call Predef
+	predef FlagActionPredef
 	ld a, $1
 	ld [wcc3c], a
 	ret
@@ -2531,13 +2524,11 @@ Func_c69c: ; c69c (3:469c)
 	and a
 	jr z, .asm_c733
 	ld b, $2
-	ld a, $1f
-	call Predef
+	predef Func_480eb
 	ld a, (SFX_02_43 - SFX_Headers_02) / 3
 	call PlaySound
 .asm_c733
-	ld a, $14
-	call Predef
+	predef AnyPartyAlive
 	ld a, d
 	and a
 	jr nz, .asm_c74f
@@ -3137,8 +3128,7 @@ Func_f113: ; f113 (3:7113)
 	ld c, a
 	ld b, $1
 	ld hl, W_TOWNVISITEDFLAG   ; mark town as visited (for flying)
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 .notInTown
 	ld hl, MapHSPointers
 	ld a, [W_CURMAP] ; W_CURMAP
@@ -3378,8 +3368,7 @@ Func_f225: ; f225 (3:7225)
 	ld a, [hJoyHeld]
 	and $f0
 	ret z
-	ld a, $5a
-	call Predef
+	predef Func_c60b
 	ld a, [wd71c]
 	and a
 	jp nz, Func_f2dd
@@ -3499,8 +3488,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	call SkipFixedLengthTextEntries
 	ld a, $2
 	ld [wd07d], a
-	ld a, $4e
-	call Predef
+	predef AskName
 .asm_f33f
 	ld hl, wPartyMons
 	ld a, [wcc49]
@@ -3532,8 +3520,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [wcf91]
 	ld [wd11e], a
 	push de
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	pop de
 	ld a, [wd11e]
 	dec a
@@ -3635,8 +3622,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	dec de
 	xor a
 	ld [wHPBarMaxHP], a
-	ld a, $3e
-	call Predef
+	predef WriteMonMoves
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
 	inc de
@@ -3770,8 +3756,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a

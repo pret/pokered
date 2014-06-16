@@ -39,8 +39,7 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$2
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ld a,$4
@@ -112,8 +111,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$1
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld hl, ConnectCableText
 	call PrintText
 	ld a,[wWhichPokemon]
@@ -122,8 +120,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call Func_71cc1
-	ld a,$38
-	call Predef
+	predef Func_410e2
 	pop af
 	ld [W_CURENEMYLVL],a
 	pop af

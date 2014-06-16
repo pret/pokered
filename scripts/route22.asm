@@ -82,8 +82,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld [wcd4f], a
 	xor a
 	ld [wcd50], a
-	ld a, $4c
-	call Predef
+	predef EmotionBubble
 	ld a, [wd700]
 	and a
 	jr z, .asm_50f4e ; 0x50f44 $8
@@ -208,8 +207,7 @@ Route22Script3: ; 5102a (14:502a)
 	ld [wJoyIgnore], a
 	ld a, $22
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call Func_2307
 	ld hl, wd7eb
 	res 0, [hl]
@@ -223,8 +221,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	ld [wcd4f], a
 	xor a
 	ld [wcd50], a
-	ld a, $4c
-	call Predef
+	predef EmotionBubble
 	ld a, [wd700]
 	and a
 	jr z, .skipYVisibilityTesta
@@ -355,8 +352,7 @@ Route22Script6: ; 51151 (14:5151)
 	ld [wJoyIgnore], a
 	ld a, $23
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call Func_2307
 	ld hl, wd7eb
 	res 1, [hl]

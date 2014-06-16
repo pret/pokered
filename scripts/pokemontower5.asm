@@ -32,8 +32,7 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	ld [wJoyIgnore], a
 	ld hl, wd72e
 	set 4, [hl]
-	ld a, $7
-	call Predef
+	predef HealParty
 	call GBFadeOut2
 	call Delay3
 	call Delay3

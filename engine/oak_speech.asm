@@ -41,8 +41,7 @@ OakSpeech: ; 6115 (1:6115)
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 	call SetDefaultNames
-	ld a,$18
-	call Predef
+	predef InitPlayerData2
 	ld hl,wNumBoxItems
 	ld a,POTION
 	ld [wcf91],a
@@ -234,5 +233,4 @@ IntroPredef3B: ; 62a4 (1:62a4)
 .next
 	xor a
 	ld [$FFE1],a
-	ld a,1
-	jp Predef
+	predef_jump Func_3f0c6

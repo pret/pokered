@@ -326,8 +326,7 @@ ItemUseBall: ; d687 (3:5687)
 	push af
 	ld a,[wcf91]
 	push af
-	ld a,$08	;probably animations
-	call Predef
+	predef MoveAnimation
 	pop af
 	ld [wcf91],a
 	pop af
@@ -397,23 +396,20 @@ ItemUseBall: ; d687 (3:5687)
 	jr z,.printText1
 	ld hl,ItemUseBallText05
 	call PrintText
-	ld a,$3a	;convert order: Internal->Dex
-	call Predef
+	predef IndexToPokedex
 	ld a,[wd11e]
 	dec a
 	ld c,a
 	ld b,2
 	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
-	ld a,$10
-	call Predef	;check Dex flag (own already or not)
+	predef FlagActionPredef
 	ld a,c
 	push af
 	ld a,[wd11e]
 	dec a
 	ld c,a
 	ld b,1
-	ld a,$10	;set Dex_own_flag?
-	call Predef
+	predef FlagActionPredef
 	pop af
 	and a
 	jr nz,.checkParty
@@ -422,8 +418,7 @@ ItemUseBall: ; d687 (3:5687)
 	call ClearSprites
 	ld a,[wEnemyMonSpecies]	;caught mon_ID
 	ld [wd11e],a
-	ld a,$3d
-	call Predef
+	predef ShowPokedexData
 .checkParty	;$58f4
 	ld a,[wPartyCount]
 	cp a,6		;is party full?
@@ -627,8 +622,7 @@ SurfingNoPlaceToGetOffText: ; da51 (3:5a51)
 	db "@"
 
 ItemUsePokedex: ; da56 (3:5a56)
-	ld a,$29
-	jp Predef
+	predef_jump ShowPokedexMenu
 
 ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[W_ISINBATTLE]
@@ -783,8 +777,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,wBattleMonMaxHP
 	ld bc,10
 	call CopyData ; copy party stats to in-battle stat data
-	ld a,$28
-	call Predef
+	predef Func_3ed02
 	jp .doneHealing
 .healHP
 	inc hl ; hl = address of current HP
@@ -814,8 +807,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld c,a
 	ld hl,wccf5
 	ld b,$02
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld a,c
 	and a
 	jr z,.next
@@ -823,8 +815,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld c,a
 	ld hl,wPartyAliveFlags
 	ld b,$01
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 .next
 	pop bc
 	pop de
@@ -934,8 +925,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$fff6],a
 	ld a,$02
 	ld [wListMenuID],a
-	ld a,$48
-	call Predef ; animate HP bar decrease of pokemon that used Softboiled
+	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
 	ld a,[$fff6]
 	res 0,a
 	ld [$fff6],a
@@ -1085,8 +1075,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$fff6],a
 	ld a,$02
 	ld [wListMenuID],a
-	ld a,$48
-	call Predef ; animate the HP bar lengthening
+	predef UpdateHPBar2 ; animate the HP bar lengthening
 	ld a,[$fff6]
 	res 0,a
 	ld [$fff6],a
@@ -1285,8 +1274,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wcc49],a
-	ld a,$1a
-	call Predef ; learn level up move, if any
+	predef Func_3af5b ; learn level up move, if any
 	xor a
 	ld [wccd4],a
 	callab Func_3ad0e ; evolve pokemon, if appropriate
@@ -1356,8 +1344,7 @@ BaitRockCommon: ; df7f (3:5f7f)
 	ld a,$ff
 .noCarry
 	ld [hl],a
-	ld a,$08
-	call Predef ; do animation
+	predef MoveAnimation ; do animation
 	ld c,70
 	jp DelayFrames
 
@@ -2096,8 +2083,7 @@ ItemUseTMHM: ; e479 (3:6479)
 .skipAdding
 	inc a
 	ld [wd11e],a
-	ld a,$44
-	call Predef ; get move ID from TM/HM ID
+	predef TMToMove ; get move ID from TM/HM ID
 	ld a,[wd11e]
 	ld [wd0e0],a
 	call GetMoveName
@@ -2152,8 +2138,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	call GoPAL_SET_CF1C
 	jp LoadScreenTilesFromBuffer1 ; restore saved screen
 .checkIfAbleToLearnMove
-	ld a,$43
-	call Predef ; check if the pokemon can learn the move
+	predef CanLearnTM ; check if the pokemon can learn the move
 	push bc
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMonNicks
@@ -2171,8 +2156,7 @@ ItemUseTMHM: ; e479 (3:6479)
 .checkIfAlreadyLearnedMove
 	callab CheckIfMoveIsKnown ; check if the pokemon already knows the move
 	jr c,.chooseMon
-	ld a,$1b
-	call Predef ; teach move
+	predef LearnMove ; teach move
 	pop af
 	ld [wcf91],a
 	pop af
@@ -2232,8 +2216,7 @@ ThrowBallAtTrainerMon: ; e58b (3:658b)
 	call Delay3
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
-	ld a,$08
-	call Predef ; do animation
+	predef MoveAnimation ; do animation
 	ld hl,ThrowBallAtTrainerMonText1
 	call PrintText
 	ld hl,ThrowBallAtTrainerMonText2
@@ -2321,8 +2304,7 @@ RestoreBonusPP: ; e606 (3:6606)
 	call AddNTimes
 	push hl
 	ld de,wcd78 - 1
-	ld a,$5e
-	call Predef ; loads the normal max PP of each of the pokemon's moves to wcd78
+	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wcd78
 	pop hl
 	ld c,21
 	ld b,0
@@ -2574,8 +2556,7 @@ IsKeyItem_: ; e764 (3:6764)
 	ld c,a
 	ld hl,wHPBarMaxHP
 	ld b,$02 ; test bit
-	ld a,$10
-	call Predef ; bitfield operation function
+	predef FlagActionPredef ; bitfield operation function
 	ld a,c
 	and a
 	ret nz
@@ -2674,8 +2655,7 @@ Func_e7a4: ; e7a4 (3:67a4)
 	ld hl, wBoxMonNicks
 	ld a, $2
 	ld [wd07d], a
-	ld a, $4e
-	call Predef
+	predef AskName
 	ld a, [W_NUMINBOX] ; wda80
 	dec a
 	jr z, .asm_e867

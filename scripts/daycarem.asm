@@ -120,8 +120,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	push hl
 	push de
 	push bc
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	pop bc
 	pop de
 	pop hl
@@ -156,8 +155,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	inc hl
 	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c ; SubBCDPredef
-	call Predef
+	predef SubBCDPredef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $13
@@ -181,8 +179,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld e, l
 	ld a, $1
 	ld [wHPBarMaxHP], a
-	ld a, $3e
-	call Predef
+	predef WriteMonMoves
 	pop bc
 	pop af
 	ld hl, wPartyMon1HP

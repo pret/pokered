@@ -22,8 +22,7 @@ SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0602
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 SilphCo6Coords1: ; 1a1e3 (6:61e3)
 	db $06, $02

@@ -36,8 +36,7 @@ VictoryRoad2Script_517c9: ; 517c9 (14:57c9)
 
 VictoryRoad2Script_517e2: ; 517e2 (14:57e2)
 	ld [wd09f], a
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	ret
 
 VictoryRoad2ScriptPointers: ; 517eb (14:57eb)

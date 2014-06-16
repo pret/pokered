@@ -23,8 +23,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0602
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_19d48
 	bit 1, a
@@ -32,8 +31,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0406
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 SilphCo4Data19d58: ; 19d58 (6:5d58)
 	db $06, $02, $04, $06, $ff

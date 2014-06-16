@@ -23,8 +23,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $401
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_5d7f8
 	bit 1, a
@@ -33,8 +32,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $209
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_5d80b
 	bit 2, a
@@ -43,8 +41,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $509
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_5d81e
 	bit 3, a
@@ -52,8 +49,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $605
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 DataTable_5d82e: ; 5d82e (17:582e)
 	db $04,$01,$02,$09,$05,$09,$06,$05,$FF
@@ -167,8 +163,7 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 	jr nz, .asm_a14c3 ; 0x5d8be
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText
-	ld a, $7
-	call Predef
+	predef HealParty
 	call GBFadeOut2
 	call Delay3
 	call GBFadeIn2

@@ -34,8 +34,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	ld a, $2a
 	ld [wd09f], a
 	ld bc, $0208
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
@@ -97,8 +96,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ld [wJoyIgnore], a
 	ld a, $46
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd126
 	set 5, [hl]
 	set 6, [hl]
@@ -157,8 +155,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld hl, $ffa1
 	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c ; SubBCDPredef
-	call Predef
+	predef SubBCDPredef
 	xor a
 	ldh [$9f], a
 	ldh [$a0], a
@@ -167,8 +164,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
 	jr .asm_e2afd ; 0x48d0d
@@ -236,8 +232,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	ld hl, wd77e
 	set 2, [hl]
 	ld a, $1
@@ -319,8 +314,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	ld hl, wd77e
 	set 4, [hl]
 	ld hl, Received20CoinsText
@@ -373,8 +367,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	ld hl, wd77e
 	set 3, [hl]
 	ld hl, CeladonGameCornerText_48e8d
@@ -456,8 +449,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, $43
 	ld [wd09f], a
 	ld bc, $0208
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)

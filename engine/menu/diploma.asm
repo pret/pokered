@@ -14,8 +14,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call FarCopyData2
 	ld hl, wTileMap
 	ld bc, $1012
-	ld a, $27
-	call Predef
+	predef Func_5ab0
 	ld hl, DiplomaTextPointersAndCoords ; $6784
 	ld c, $5
 .asm_56715

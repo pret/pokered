@@ -28,12 +28,10 @@ SeafoamIslands1Script: ; 447e9 (11:47e9)
 .asm_44825
 	ld a, [wd079]
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, [wd07a]
 	ld [wcc4d], a
-	ld a, $15
-	jp Predef
+	predef_jump ShowObject
 .asm_4483b
 	ld a, $9f
 	ld [wd71d], a

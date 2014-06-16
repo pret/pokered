@@ -34,8 +34,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [$ffdb], a
 	ld a, $71
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	call Delay3
 	ld a, $2
 	ld [$ff8c], a
@@ -163,8 +162,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	ld [wJoyIgnore], a
 	ld a, $71
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call Func_2307
 	ld a, $4
 	ld [W_SSANNE2CURSCRIPT], a

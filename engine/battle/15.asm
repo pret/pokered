@@ -17,8 +17,7 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, $2
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld a, c
 	and a
 	pop hl
@@ -245,14 +244,12 @@ Func_5525f: ; 5525f (15:525f)
 	ld [wcc49], a
 	ld a, [wd0b5]
 	ld [wd11e], a
-	ld a, $1a
-	call Predef
+	predef Func_3af5b
 	ld hl, wccd3
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld c, a
 	ld b, $1
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	pop hl
 	pop af
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
@@ -277,14 +274,12 @@ Func_55436: ; 55436 (15:5436)
 	ld c, a
 	ld b, $1
 	push bc
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld hl, wccf5
 	xor a
 	ld [hl], a
 	pop bc
-	ld a, $10 ; FlagActionPredef
-	jp Predef
+	predef_jump FlagActionPredef
 
 Func_5546c: ; 5546c (15:546c)
 	ld a, [wPartyAliveFlags]

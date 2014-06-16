@@ -11,8 +11,7 @@ Route11GateUpstairsText1: ; 4945f (12:545f)
 	db $08 ; asm
 	xor a
 	ld [wWhichTrade], a
-	ld a, $54
-	call Predef
+	predef Predef54 
 asm_49469: ; 49469 (12:5469)
 	jp TextScriptEnd
 
@@ -32,8 +31,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
-	ld a, $62
-	call Predef ; call oak's aide script
+	predef OaksAideScript ; call oak's aide script
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1 ; 0x49494 $b

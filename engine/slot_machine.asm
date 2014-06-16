@@ -17,8 +17,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	xor a
 	ld [hli], a
 	ld [hl], $2
-	ld a, $4c
-	call Predef
+	predef EmotionBubble
 	call GBPalWhiteOutWithDelay3
 	call LoadSlotMachineTiles
 	call LoadFontTilePatterns
@@ -618,8 +617,7 @@ SlotMachine_37741: ; 37741 (d:7741)
 	ld [hli], a
 	ld de, wPlayerCoins + 1
 	ld c, $2
-	ld a, $c ; SubBCDPredef
-	call Predef
+	predef SubBCDPredef
 
 SlotMachine_37754: ; 37754 (d:7754)
 	ld hl, wTileMap + $19
@@ -660,8 +658,7 @@ SlotMachine_3776b: ; 3776b (d:776b)
 	ld hl, wcd47
 	ld de, wPlayerCoins + 1
 	ld c, $2
-	ld a, $b ; AddBCDPredef
-	call Predef
+	predef AddBCDPredef
 	call SlotMachine_37754
 	call SlotMachine_3775f
 	ld a, (SFX_1f_65 - SFX_Headers_1f) / 3

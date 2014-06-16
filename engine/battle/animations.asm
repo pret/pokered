@@ -831,11 +831,9 @@ DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
 ; if the subaninmation counter is between 8 and 11, shake the screen horizontally and vertically
 .shakeScreen
 	ld b,1
-	ld a,$24
-	call Predef ; shake horizontally
+	predef Func_48125 ; shake horizontally
 	ld b,1
-	ld a,$21
-	jp Predef ; shake vertically
+	predef_jump Func_480ff ; shake vertically
 
 FlashScreenEveryEightFrameBlocks: ; 78ff7 (1e:4ff7)
 	ld a,[W_SUBANIMCOUNTER]
@@ -1227,16 +1225,14 @@ Func_791fc: ; 791fc (1e:51fc)
 	ld b, $5
 
 Func_79209: ; 79209 (1e:5209)
-	ld a, $21
-	jp Predef
+	predef_jump Func_480ff
 
 AnimationShakeScreen: ; 7920e (1e:520e)
 ; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
 	ld b, $8
 
 Func_79210: ; 79210 (1e:5210)
-	ld a, $24
-	jp Predef
+	predef_jump Func_48125
 
 AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 ; Draws water droplets all over the screen and makes them
@@ -2143,8 +2139,7 @@ Func_79793: ; 79793 (1e:5793)
 	ld [wBattleMonSpecies2], a
 	ld [wd0b5], a
 	call GetMonHeader
-	ld a, $4
-	call Predef
+	predef LoadMonBackPic
 	xor a
 	call Func_79842
 	call Func_79820

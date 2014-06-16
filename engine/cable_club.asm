@@ -273,10 +273,8 @@ Func_5345: ; 5345
 	call Delay3
 	ld hl, W_OPTIONS ; W_OPTIONS
 	res 7, [hl]
-	ld a, $2c
-	call Predef
-	ld a, $7
-	call Predef
+	predef InitOpponent
+	predef HealParty
 	jp Func_577d
 .asm_5506
 	ld c, BANK(Music_GameCorner)
@@ -610,10 +608,8 @@ Func_57c7:
 Func_57d6:
 	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
-	ld a, $36
-	call Predef
-	ld a, $37
-	call Predef
+	predef StatusScreen
+	predef StatusScreen2
 	call GBPalNormal
 	call LoadTrainerInfoTextBoxTiles
 	call Func_57f2
@@ -827,12 +823,10 @@ TradeCenter_Trade:
 	ld a, [$ffaa]
 	cp $1
 	jr z, .asm_59d9 ; 0x59d0 $7
-	ld a, $38
-	call Predef
+	predef Func_410e2
 	jr .asm_59de ; 0x59d7 $5
 .asm_59d9
-	ld a, $2f
-	call Predef
+	predef Func_410f3
 .asm_59de
 	callab Func_3ad0e
 	call ClearScreen
@@ -847,8 +841,7 @@ TradeCenter_Trade:
 	ld hl, wTileMap + $119
 	ld de, TradeCompleted
 	call PlaceString
-	ld a, $50
-	call Predef
+	predef SaveSAVtoSRAM2
 	ld c, $32
 	call DelayFrames
 	xor a
@@ -885,8 +878,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	jr z, .asm_5a75
 	cp $5
 	ret nz
-	ld a, $4d
-	call Predef
+	predef Func_5aaf
 	jp Init
 .asm_5a75
 	call Func_5317

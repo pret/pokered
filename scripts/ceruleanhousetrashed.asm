@@ -10,8 +10,7 @@ CeruleanHouseTrashedTextPointers: ; 1d689 (7:5689)
 CeruleanHouseTrashedText1: ; 1d68f (7:568f)
 	db $08 ; asm
 	ld b, $e4
-	ld a, $1c
-	call Predef
+	predef IsItemInBag_ 
 	and b
 	jr z, .asm_f8734 ; 0x1d698
 	ld hl, CeruleanHouseTrashedText_1d6b0

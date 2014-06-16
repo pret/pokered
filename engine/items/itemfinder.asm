@@ -11,8 +11,7 @@ HiddenItemNear: ; 7481f (1d:481f)
 	ld hl, wd6f0
 	ld c, b
 	ld b, $2
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld a, c
 	pop hl
 	pop bc

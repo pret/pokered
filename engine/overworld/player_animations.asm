@@ -421,8 +421,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld a, $4c
-	call Predef
+	predef EmotionBubble
 	ld a, [wSpriteStateData1 + 2]
 	cp $4
 	jr nz, .asm_70833

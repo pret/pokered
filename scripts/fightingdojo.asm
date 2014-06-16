@@ -281,8 +281,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	; once Poké Ball is taken, hide sprite
 	ld a, $4a
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd7b1
 	set 6, [hl]
 	set 0, [hl]
@@ -323,8 +322,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	; once Poké Ball is taken, hide sprite
 	ld a, $4b
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 .done
 	jp TextScriptEnd
 

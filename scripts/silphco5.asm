@@ -23,8 +23,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0203
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_19f74
 	bit 1, a
@@ -33,8 +32,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0603
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	pop af
 .asm_19f87
 	bit 2, a
@@ -42,8 +40,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0507
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 	db $02, $03, $06, $03, $05, $07, $ff

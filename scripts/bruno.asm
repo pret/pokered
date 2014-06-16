@@ -24,8 +24,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 BrunoScript_76302: ; 76302 (1d:6302)
 	ld [wd09f], a
 	ld bc, $2
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 BrunoScript_7630d: ; 7630d (1d:630d)
 	xor a

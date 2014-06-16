@@ -66,6 +66,5 @@ CeladonMartElevatorText1: ; 4865e (12:465e)
 	db $08 ; asm
 	call CeladonMartElevatorScript_48631
 	ld hl, CeldaonMartElevatorWarpMaps ; $464a
-	ld a, $61
-	call Predef
+	predef Func_1c9c6
 	jp TextScriptEnd

@@ -9,8 +9,7 @@ MainMenu: ; 5af2 (1:5af2)
 	jr nc,.next0
 
 	; Predef 52 loads the save from SRAM to RAM
-	ld a,$52
-	call Predef
+	predef LoadSAV
 
 .next0
 	ld c,20

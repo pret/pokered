@@ -40,8 +40,7 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 	ret nz
 	ld a, $31
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld hl, wd72e
 	res 4, [hl]
 
@@ -68,12 +67,10 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 	ret nz
 	ld a, $31
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $2e
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 
 	ld a, $3
 	ld [W_OAKSLABCURSCRIPT], a
@@ -294,8 +291,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $2d
 .asm_1cd32
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call Delay3
 	ld a, [wWhichTrade]
 	ld [W_RIVALSTARTER], a
@@ -341,13 +337,11 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $1
 	swap a
 	ld [$ff95], a
-	ld a, $22
-	call Predef
+	predef Func_f929
 	ld a, [$ff95]
 	dec a
 	ld [$ff95], a
-	ld a, $20
-	call Predef
+	predef Func_f8ba
 	ld de, wcc97
 	ld a, $1
 	ld [$ff8c], a
@@ -410,8 +404,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	xor a
 	ld [$ff8d], a
 	call Func_34a6 ; face object
-	ld a, $7
-	call Predef
+	predef HealParty
 	ld hl, wd74b
 	set 3, [hl]
 
@@ -454,8 +447,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	jr nz, .asm_1ce8c ; 0x1ce72 $18
 	ld a, $2a
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	call Func_2307 ; reset to map music
@@ -498,8 +490,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	call OaksLabScript_1d02b
 	ld a, $2a
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, [wcd37]
 	ld [wd157], a
 	ld b, $0
@@ -558,12 +549,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call Delay3
 	ld a, $2f
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $30
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call OaksLabScript_1cefd
 	ld a, $1a
 	ld [$ff8c], a
@@ -583,12 +572,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	set 0, [hl]
 	ld a, $1
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $2
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, [wd157]
 	ld b, $0
 	ld c, a
@@ -616,16 +603,14 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	call Func_2307
 	ld a, $2a
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd7eb
 	set 0, [hl]
 	res 1, [hl]
 	set 7, [hl]
 	ld a, $22
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
 	xor a
@@ -846,8 +831,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld [hl], $c
 	ld hl, wd730
 	set 6, [hl]
-	ld a, $46
-	call Predef ; StarterDex
+	predef StarterDex  ; StarterDex
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
@@ -907,8 +891,7 @@ asm_1d1e3: ; 1d1e3 (7:51e3)
 	ld a, $2d
 asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $1
 	ld [wcc3c], a
 	ld hl, OaksLabMonEnergeticText
@@ -974,8 +957,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 	ld a, $1
 	ld [wcc3c], a
-	ld a, $56
-	call Predef
+	predef DisplayDexRating
 	jp .asm_0f042
 .asm_b28b0 ; 0x1d279
 	ld b,POKE_BALL

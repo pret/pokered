@@ -52,15 +52,13 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld a, [wcf91]
 	push af
 	ld [wd11e], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld hl, wPokedexOwned ; wPokedexOwned
 	ld b, $1
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	pop af
 	ld [wd11e], a
 	call GetMonName

@@ -3,8 +3,7 @@ AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
 	and $8
 	jr z, .done ; not able
 	ld b, COIN_CASE
-	ld a, $1c
-	call Predef ; IsItemInBag_
+	predef IsItemInBag_  ; IsItemInBag_
 	ld a, b
 	and a
 	ld b, $33 ; GameCornerCoinCaseText

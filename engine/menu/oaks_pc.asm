@@ -8,8 +8,7 @@ OpenOaksPC: ; 1e915 (7:6915)
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr nz, .asm_1e932
-	ld a, $56
-	call Predef
+	predef DisplayDexRating
 .asm_1e932
 	ld hl, ClosedOaksPCText
 	call PrintText

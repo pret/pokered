@@ -8,8 +8,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ret z
 	cp b
 	jr nz, .asm_5267a
-	ld a, $35
-	call Predef
+	predef Func_c586
 	ld a, [wcfc6]
 	cp $18
 	jr z, .asm_5269c
@@ -49,8 +48,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld a, $e
 .asm_526ca
 	ld [wd09f], a
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	ld hl, wd126
 	set 5, [hl]
 	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3

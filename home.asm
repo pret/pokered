@@ -275,8 +275,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	push af
 	ld a, [wcf91]
 	ld [wd11e], a
-	ld a, $3a
-	call Predef
+	predef IndexToPokedex
 	ld hl, wd11e
 	ld a, [hl]
 	pop bc
@@ -576,8 +575,7 @@ GetMonHeader:: ; 1537 (0:1537)
 	jr z,.specialID
 	cp a,MEW
 	jr z,.mew
-	ld a,$3a
-	call Predef   ; convert pokemon ID in [wd11e] to pokedex number
+	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a,[wd11e]
 	dec a
 	ld bc,28
@@ -1509,8 +1507,7 @@ PokeCenterSignText:: ; 24ef (0:24ef)
 Predef5CText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
 	db $08 ; asm
-	ld a, $5c
-	call Predef
+	predef PickupItem
 	jp TextScriptEnd
 
 
@@ -1862,8 +1859,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld de,wPlayerMoney + 2
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
-	ld a,$0b
-	call Predef ; add total price to money
+	predef AddBCDPredef ; add total price to money
 	ld a,$13
 	ld [wd125],a
 	call DisplayTextBoxID ; redraw money text box
@@ -2182,8 +2178,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld de,$ffa1
 	ld hl,$ff8d
 	push bc
-	ld a,$0b
-	call Predef ; add the individual price to the current sum
+	predef AddBCDPredef ; add the individual price to the current sum
 	pop bc
 	dec b
 	jr nz,.addLoop
@@ -2195,8 +2190,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld [$ffa3],a
 	ld a,$02
 	ld [$ffa4],a
-	ld a,$0d
-	call Predef ; halves the price
+	predef DivideBCDPredef3 ; halves the price
 ; store the halved price
 	ld a,[$ffa2]
 	ld [$ff9f],a
@@ -2843,8 +2837,7 @@ ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	ret
 
 TrainerFlagAction::
-	ld a, $10 ; FlagActionPredef
-	jp Predef
+	predef_jump FlagActionPredef
 
 ; direct talking to a trainer (rather than getting seen by one)
 TalkToTrainer:: ; 31cc (0:31cc)
@@ -2900,8 +2893,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld [wcd4f], a
 	xor a
 	ld [wcd50], a
-	ld a, $4c
-	call Predef
+	predef EmotionBubble
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	xor a
@@ -2960,8 +2952,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	inc hl
 	ld a, [hl]
 	ld [wcc4d], a               ; load corresponding missable object index and remove it
-	ld a, $11
-	call Predef
+	predef HideObject
 .skipRemoveSprite
 	ld hl, wd730
 	bit 4, [hl]
@@ -3048,8 +3039,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld a, [wcf13]
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
-	ld a, $39
-	call Predef
+	predef TrainerEngage
 	pop de
 	pop hl
 	ld a, [wTrainerSpriteOffset] ; wWhichTrade
@@ -3258,8 +3248,7 @@ IsItemInBag:: ; 3493 (0:3493)
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
 ; related to Pokémon Tower and ghosts
-	ld a,$1C
-	call Predef
+	predef IsItemInBag_ 
 	ld a,b
 	and a
 	ret
@@ -4011,8 +4000,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	call HandleDownArrowBlinkTiming
 	pop hl
 	call JoypadLowSensitivity
-	ld a, $2d
-	call Predef
+	predef Func_5a5f
 	ld a, [$ffb5]
 	and A_BUTTON | B_BUTTON
 	jr z, .asm_3872
@@ -5079,8 +5067,7 @@ GoPAL_SET:: ; 3def (0:3def)
 	ld a,[wcf1b]
 	and a
 	ret z
-	ld a,$45
-	jp Predef
+	predef_jump Func_71ddf
 
 GetHealthBarColor::
 ; Return at hl the palette of

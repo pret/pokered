@@ -177,8 +177,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 
 	ld a, $23
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld hl, wd7eb
 	set 1, [hl]
 	set 7, [hl]
@@ -293,8 +292,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	call GBFadeIn1
 	ld a, $32
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	call UpdateSprites
 	call Delay3
 	call GBFadeOut1

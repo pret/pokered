@@ -5,8 +5,7 @@ Func_42769: ; 42769 (10:6769)
 	call PlaceString
 	ld a,[wWhichTrade]
 	ld [wd11e],a
-	ld a,$3A
-	call Predef
+	predef IndexToPokedex
 	FuncCoord 9, 0
 	ld hl,Coord
 	ld de,wd11e
@@ -33,8 +32,7 @@ Func_427a7: ; 427a7 (10:67a7)
 	call PlaceString
 	ld a,[wTrainerEngageDistance]
 	ld [wd11e],a
-	ld a,$3A
-	call Predef
+	predef IndexToPokedex
 	FuncCoord 9, 10
 	ld hl,Coord
 	ld de,wd11e

@@ -86,8 +86,7 @@ Func_1a485: ; 1a485 (6:6485)
 	ld a, [wcca1]
 	ld [wcd38], a
 	ld [$ff95], a
-	ld a, $23
-	call Predef
+	predef Func_f9a0
 	call Func_3486
 	ld a, $2
 	ld [wcf10], a
@@ -145,8 +144,7 @@ Func_1a4f4: ; 1a4f4 (6:64f4)
 	ret nz
 	ld a, $0
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld hl, wd730
 	res 7, [hl]
 	ld hl, wd72e
@@ -175,8 +173,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld [wcd38], a
 	xor a
 	ld [wd12f], a
-	ld a, $4f
-	call Predef
+	predef PewterGuys
 	ld hl, wcc97
 	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
@@ -233,8 +230,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld [wcd38], a
 	ld a, $1
 	ld [wd12f], a
-	ld a, $4f
-	call Predef
+	predef PewterGuys
 	ld hl, wcc97
 	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList

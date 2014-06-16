@@ -56,8 +56,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	ld [wJoyIgnore],a
 	ld a,0
 	ld [wcc4d],a
-	ld a,$15
-	call Predef
+	predef ShowObject
 
 	; trigger the next script
 	ld a,2
@@ -78,12 +77,10 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld a,1
 	swap a
 	ld [$FF95],a
-	ld a,$22
-	call Predef
+	predef Func_f929
 	ld hl,$FF95
 	dec [hl]
-	ld a,$20
-	call Predef ; load Oak’s movement into wcc97
+	predef Func_f8ba ; load Oak’s movement into wcc97
 	ld de,wcc97
 	ld a,1 ; oak
 	ld [$FF8C],a
@@ -146,12 +143,10 @@ PalletTownScript5: ; 18f56 (6:4f56)
 	set 2,[hl]
 	ld a,$27
 	ld [wcc4d],a
-	ld a,$11
-	call Predef
+	predef HideObject
 	ld a,$28
 	ld [wcc4d],a
-	ld a,$15
-	jp Predef
+	predef_jump ShowObject
 .next
 	ld a,[wd74b]
 	bit 4,a
@@ -193,8 +188,7 @@ OakAppearsText: ; 18fb0 (6:4fb0)
 	xor a
 	ld [wcd4f],a
 	ld [wcd50],a
-	ld a,$4C
-	call Predef ; display ! over head
+	predef EmotionBubble ; display ! over head
 	ld a,4
 	ld [wd528],a
 	jp TextScriptEnd

@@ -21,24 +21,20 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	res 6, [hl]
 	ld a, $61
 	ld [wcc4d], a
-	ld a, $15
-	jp Predef
+	predef_jump ShowObject
 .asm_515ff
 	bit 4, [hl]
 	ret z
 	set 7, [hl]
 	ld a, $24
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $62
 	ld [wcc4d], a
-	ld a, $11
-	call Predef
+	predef HideObject
 	ld a, $63
 	ld [wcc4d], a
-	ld a, $15
-	jp Predef
+	predef_jump ShowObject
 
 Route25ScriptPointers: ; 51622 (14:5622)
 	dw CheckFightingMapTrainers

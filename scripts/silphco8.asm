@@ -22,8 +22,7 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $403
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 DataTable_5653e: ; 5653e (15:653e)
 	db $04,$03,$FF

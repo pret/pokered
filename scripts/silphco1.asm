@@ -9,8 +9,7 @@ SilphCo1Script: ; 5d44e (17:544e)
 	ret nz
 	ld a, $4c
 	ld [wcc4d], a
-	ld a, $15
-	jp Predef
+	predef_jump ShowObject
 
 SilphCo1TextPointers: ; 5d469 (17:5469)
 	dw SilphCo1Text1

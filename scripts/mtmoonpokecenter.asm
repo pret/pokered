@@ -55,8 +55,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld hl, wTrainerFacingDirection
 	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c ; SubBCDPredef
-	call Predef
+	predef SubBCDPredef
 	ld a, $13
 	ld [wd125], a
 	call DisplayTextBoxID

@@ -18,12 +18,10 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	res 6, [hl]
 	ld a, $7a
 	ld [wcc4d], a
-	ld a, $15
-	call Predef
+	predef ShowObject
 	ld a, $60
 	ld [wcc4d], a
-	ld a, $11
-	jp Predef
+	predef_jump HideObject
 
 Route23ScriptPointers: ; 51213 (14:5213)
 	dw Route23Script0
@@ -56,8 +54,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld [wWhichTrade], a
 	ld b, $2
 	ld hl, wd7ed
-	ld a, $10
-	call Predef
+	predef FlagActionPredef
 	ld a, c
 	and a
 	ret nz
@@ -198,8 +195,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld c, a
 	ld b, $2
 	ld hl, W_OBTAINEDBADGES
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld a, c
 	and a
 	jr nz, .asm_5136e
@@ -216,8 +212,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld c, a
 	ld b, $1
 	ld hl, wd7ed
-	ld a, $10 ; FlagActionPredef
-	call Predef
+	predef FlagActionPredef
 	ld a, $2
 	ld [W_ROUTE23CURSCRIPT], a
 	ret
