@@ -430,6 +430,7 @@ BattleTransition_OutwardSpiral_: ; 70af9 (1c:4af9)
 	ld [wd09f], a
 	jr .done2_
 
+FlashScreen:
 BattleTransition_FlashScreen_: ; 70b5d (1c:4b5d)
 	ld hl, BattleTransition_FlashScreenPalettes
 .loop

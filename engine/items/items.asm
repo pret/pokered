@@ -431,7 +431,7 @@ ItemUseBall: ; d687 (3:5687)
 	xor a
 	ld [wcc49],a
 	call ClearSprites
-	call AddPokemonToParty	;add mon to Party
+	call AddPartyMon	;add mon to Party
 	jr .End
 .sendToBox	;$5907
 	call ClearSprites

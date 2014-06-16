@@ -136,7 +136,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	call RemovePokemon
 	ld a,$80
 	ld [wcc49],a
-	call AddPokemonToParty
+	call AddPartyMon
 	call Func_71d19
 	callab EvolveTradeMon
 	call ClearScreen

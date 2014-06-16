@@ -71,7 +71,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, $ffde
 	ld de, wPlayerMoney + 2 ; wd349
 	ld c, $3
-	ld a, $c ; SubtractBCDPredef
+	ld a, $c ; SubBCDPredef
 	call Predef
 	ld a, $13
 	ld [wd125], a

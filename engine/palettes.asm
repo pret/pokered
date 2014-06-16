@@ -379,7 +379,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; else send 16 more bytes
 	jr .loop2
 
-LoadSGBBorderAndPalettes: ; 7202b (1c:602b)
+LoadSGB: ; 7202b (1c:602b)
 	xor a
 	ld [wcf1b], a
 	call Func_7209b

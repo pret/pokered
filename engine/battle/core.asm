@@ -241,7 +241,7 @@ Func_3c11e: ; 3c11e (f:411e)
 	call DelayFrames
 	call SaveScreenTilesToBuffer1
 .asm_3c14f
-	call AnyPlayerPokemonAliveCheck
+	call AnyPartyAlive
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut
@@ -774,7 +774,7 @@ HandleEnemyMonFainted: ; 3c525 (f:4525)
 	xor a
 	ld [wccf0], a
 	call FaintEnemyPokemon
-	call AnyPlayerPokemonAliveCheck
+	call AnyPartyAlive
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut
@@ -870,7 +870,7 @@ FaintEnemyPokemon ; 0x3c567
 	jr nz, .playermonnotfaint
 	call Func_3c741
 .playermonnotfaint
-	call AnyPlayerPokemonAliveCheck
+	call AnyPartyAlive
 	ld a, d
 	and a
 	ret z
@@ -1021,7 +1021,7 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	ld a, $1
 	ld [wccf0], a
 	call Func_3c741
-	call AnyPlayerPokemonAliveCheck     ; test if any more mons are alive
+	call AnyPartyAlive     ; test if any more mons are alive
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut
@@ -1492,7 +1492,7 @@ TrainerSentOutText: ; 3ca7e (f:4a7e)
 
 ; tests if the player has any pokemon that are not fainted
 ; sets d = 0 if all fainted, d != 0 if some mons are still alive
-AnyPlayerPokemonAliveCheck: ; 3ca83 (f:4a83)
+AnyPartyAlive: ; 3ca83 (f:4a83)
 	ld a, [wPartyCount] ; wPartyCount
 	ld e, a
 	xor a
@@ -6930,7 +6930,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	jr nz, .asm_3f0f4
 	ret
 
-LoadMonBackSprite:
+LoadMonBackPic:
 ; Assumes the monster's attributes have
 ; been loaded with GetMonHeader.
 	ld a, [wBattleMonSpecies2]

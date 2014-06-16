@@ -56,8 +56,7 @@ PredefPointers: ; 4fe79 (13:7e79)
 	dbw BANK(Func_3f0c6),Func_3f0c6
 	dbw BANK(Func_3f073),Func_3f073
 	dbw BANK(ScaleSpriteByTwo), ScaleSpriteByTwo
-	db BANK(LoadMonBackSprite) ; dbw macro gives an error for some reason
-	dw LoadMonBackSprite
+	dbw BANK(LoadMonBackPic), LoadMonBackPic
 	dbw BANK(Func_79aba),Func_79aba
 	dbw BANK(Func_f132),Func_f132
 HealPartyPredef: ; 4fe8e (13:7e8e)
@@ -66,32 +65,24 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(MoveAnimation),MoveAnimation; 08 play move animation
 	dbw BANK(DivideBCDPredef),DivideBCDPredef
 	dbw BANK(DivideBCDPredef),DivideBCDPredef
-	dbw BANK(AddBCDPredef),AddBCDPredef
-	db BANK(SubtractBCDPredef)
-	dw SubtractBCDPredef
+	dbw BANK(AddBCDPredef), AddBCDPredef
+	dbw BANK(SubBCDPredef), SubBCDPredef
 	dbw BANK(DivideBCDPredef),DivideBCDPredef
 	dbw BANK(DivideBCDPredef),DivideBCDPredef
-	db BANK(InitializePlayerData)
-	dw InitializePlayerData
+	dbw BANK(InitPlayerData), InitPlayerData
 	dbw BANK(FlagActionPredef),FlagActionPredef
-	db BANK(RemoveMissableObject)
-	dw RemoveMissableObject
-	db BANK(IsMissableObjectHidden)
-	dw IsMissableObjectHidden
+	dbw BANK(HideObject), HideObject
+	dbw BANK(IsObjectHidden), IsObjectHidden
 	dbw BANK(Func_c69c),Func_c69c
-	db BANK(AnyPlayerPokemonAliveCheck)
-	dw AnyPlayerPokemonAliveCheck
-	db BANK(AddMissableObject)
-	dw AddMissableObject
-	db BANK(AddMissableObject)
-	dw AddMissableObject
+	dbw BANK(AnyPartyAlive), AnyPartyAlive
+	dbw BANK(ShowObject), ShowObject
+	dbw BANK(ShowObject), ShowObject
 	dbw BANK(Func_ee9e),Func_ee9e
-	db BANK(InitializePlayerData)
-	dw InitializePlayerData
+	dbw BANK(InitPlayerData), InitPlayerData
 	dbw BANK(Func_c754),Func_c754
 	dbw BANK(Func_3af5b),Func_3af5b
 	dbw BANK(LearnMove),LearnMove
-	dbw BANK(IsItemInBag_),IsItemInBag_; 1C, used in Pokémon Tower
+	dbw BANK(IsItemInBag_),IsItemInBag_ ; 1C, used in Pokémon Tower
 	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
 	dbw BANK(Func_480eb),Func_480eb
@@ -101,12 +92,10 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_f9a0),Func_f9a0
 	dbw BANK(Func_48125),Func_48125
 	dbw BANK(UpdateHPBar),UpdateHPBar
-	db BANK(UpdateHPBar_LoadRegisters)
-	dw UpdateHPBar_LoadRegisters
+	dbw BANK(HPBarLength), HPBarLength
 	dbw BANK(Func_5ab0),Func_5ab0
 	dbw BANK(Func_3ed02),Func_3ed02
-	db BANK(DisplayPokedexMenu_)
-	dw DisplayPokedexMenu_
+	dbw BANK(ShowPokedexMenu), ShowPokedexMenu
 	dbw BANK(Func_3ad1c),Func_3ad1c
 	dbw BANK(SaveSAVtoSRAM0),SaveSAVtoSRAM0
 	dbw BANK(InitOpponent),InitOpponent
@@ -117,58 +106,46 @@ MoveAnimationPredef: ; 4fe91 (13:7e91)
 	dbw BANK(Func_79dda),Func_79dda
 	dbw BANK(PlayIntro),PlayIntro
 	dbw BANK(Func_79869),Func_79869
-	db BANK(BattleTransition_FlashScreen_)
-	dw BattleTransition_FlashScreen_
+	dbw BANK(FlashScreen), FlashScreen
 	dbw BANK(Func_c586),Func_c586
 	dbw BANK(StatusScreen),StatusScreen ; 37 0x12953
 	dbw BANK(StatusScreen2),StatusScreen2 ; 38
 	dbw BANK(Func_410e2),Func_410e2
-	db BANK(CheckEngagePlayer)
-	dw CheckEngagePlayer
+	dbw BANK(TrainerEngage), TrainerEngage
 	dbw BANK(IndexToPokedex),IndexToPokedex
 	dbw BANK(Predef3B),Predef3B; 3B display pic?
 	dbw BANK(UsedCut),UsedCut
 	dbw BANK(ShowPokedexData),ShowPokedexData
 	dbw BANK(WriteMonMoves),WriteMonMoves
 	dbw BANK(SaveSAV),SaveSAV
-	db BANK(LoadSGBBorderAndPalettes)
-	dw LoadSGBBorderAndPalettes
+	dbw BANK(LoadSGB), LoadSGB
 	dbw BANK(Func_f113),Func_f113
 	dbw BANK(SetPartyMonTypes),SetPartyMonTypes
-	db BANK(TestMonMoveCompatibility)
-	dw TestMonMoveCompatibility
+	dbw BANK(CanLearnTM), CanLearnTM
 	dbw BANK(TMToMove),TMToMove
 	dbw BANK(Func_71ddf),Func_71ddf
-	db BANK(DisplayStarterMonDex)
-	dw DisplayStarterMonDex; 46 load dex screen
-	db BANK(_AddPokemonToParty)
-	dw _AddPokemonToParty
+	dbw BANK(StarterDex), StarterDex ; 46
+	dbw BANK(_AddPartyMon), _AddPartyMon
 	dbw BANK(UpdateHPBar),UpdateHPBar
 	dbw BANK(Func_3cdec),Func_3cdec
 	dbw BANK(LoadTownMap_Nest),LoadTownMap_Nest
 	dbw BANK(Func_27d6b),Func_27d6b
-	db BANK(PrintEmotionBubble)
-	dw PrintEmotionBubble; 4C player exclamation
+	dbw BANK(EmotionBubble), EmotionBubble; 4C player exclamation
 	dbw BANK(Func_5aaf),Func_5aaf; return immediately
-	db BANK(AskForMonNickname)
-	dw AskForMonNickname
+	dbw BANK(AskName), AskName
 	dbw BANK(PewterGuys),PewterGuys
 	dbw BANK(SaveSAVtoSRAM2),SaveSAVtoSRAM2
 	dbw BANK(LoadSAVCheckSum2),LoadSAVCheckSum2
 	dbw BANK(LoadSAV),LoadSAV
 	dbw BANK(SaveSAVtoSRAM1),SaveSAVtoSRAM1
 	dbw BANK(Predef54),Predef54 ; 54 initiate trade
-	db BANK(HallOfFameComputer)
-	dw HallOfFameComputer
+	dbw BANK(HallOfFamePC), HallOfFamePC
 	dbw BANK(DisplayDexRating),DisplayDexRating
-	db $1E ; uses wrong bank number
-	dw _DoFlyOrTeleportAwayGraphics
-	db $1E ; uses wrong bank number
-	dw Func_70510
+	dbw $1E, _LeaveMapAnim ; wrong bank
+	dbw $1E, Func_70510 ; wrong bank
 	dbw BANK(Func_c5be),Func_c5be
 	dbw BANK(Func_c60b),Func_c60b
-	db BANK(PrintUsedStrengthText)
-	dw PrintUsedStrengthText
+	dbw BANK(PrintStrengthTxt), PrintStrengthTxt
 	dbw BANK(PickupItem),PickupItem
 	dbw BANK(Func_27d98),Func_27d98
 	dbw BANK(LoadMovePPs),LoadMovePPs

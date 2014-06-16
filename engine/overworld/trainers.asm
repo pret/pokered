@@ -159,7 +159,7 @@ Func_56903: ; 56903 (15:6903)
 	ret
 
 ; tests if this trainer is in the right position to engage the player and do so if she is.
-CheckEngagePlayer: ; 5690f (15:690f)
+TrainerEngage: ; 5690f (15:690f)
 	push hl
 	push de
 	ld a, [wTrainerSpriteOffset] ; wWhichTrade

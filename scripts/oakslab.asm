@@ -847,7 +847,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld hl, wd730
 	set 6, [hl]
 	ld a, $46
-	call Predef ; DisplayStarterMonDex
+	call Predef ; StarterDex
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
@@ -921,7 +921,7 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld [W_CURENEMYLVL], a
 	ld a, [wcf91]
 	ld [wd11e], a
-	call AddPokemonToParty
+	call AddPartyMon
 	ld hl, wd72e
 	set 3, [hl]
 	ld a, $fc

@@ -487,7 +487,7 @@ TestBattle:
 	xor a
 	ld [wcc49], a
 	ld [W_CURMAP], a
-	call AddPokemonToParty
+	call AddPartyMon
 
 	; Fight against a
 	; level 20 Rhydon.
@@ -686,7 +686,7 @@ SetIshiharaTeam: ; 64ca (1:64ca)
 	ld a, [de]
 	ld [W_CURENEMYLVL], a
 	inc de
-	call AddPokemonToParty
+	call AddPartyMon
 	jr .loop
 
 IshiharaTeam: ; 64df (1:64df)
@@ -2638,7 +2638,7 @@ Func_c8de: ; c8de (3:48de)
 
 INCLUDE "data/hide_show_data.asm"
 
-PrintUsedStrengthText: ; cd99 (3:4d99)
+PrintStrengthTxt: ; cd99 (3:4d99)
 	ld hl, wd728
 	set 0, [hl]
 	ld hl, UsedStrengthText
@@ -3231,7 +3231,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	jr .missableObjectsLoop
 
 ; tests if current sprite is a missable object that is hidden/has been removed
-IsMissableObjectHidden: ; f1a6 (3:71a6)
+IsObjectHidden: ; f1a6 (3:71a6)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	ld b, a
@@ -3258,7 +3258,7 @@ IsMissableObjectHidden: ; f1a6 (3:71a6)
 
 ; adds missable object (items, leg. pokemon, etc.) to the map
 ; [wcc4d]: index of the missable object to be added (global index)
-AddMissableObject: ; f1c8 (3:71c8)
+ShowObject: ; f1c8 (3:71c8)
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wcc4d]
 	ld c, a
@@ -3268,7 +3268,7 @@ AddMissableObject: ; f1c8 (3:71c8)
 
 ; removes missable object (items, leg. pokemon, etc.) from the map
 ; [wcc4d]: index of the missable object to be removed (global index)
-RemoveMissableObject: ; f1d7 (3:71d7)
+HideObject: ; f1d7 (3:71d7)
 	ld hl, W_MISSABLEOBJECTFLAGS
 	ld a, [wcc4d]
 	ld c, a
@@ -3452,7 +3452,7 @@ Func_f2dd: ; f2dd (3:72dd)
 	res 6, [hl]
 	ret
 
-_AddPokemonToParty: ; f2e5 (3:72e5)
+_AddPartyMon: ; f2e5 (3:72e5)
 	ld de, wPartyCount ; wPartyCount
 	ld a, [wcc49]
 	and $f
@@ -3668,7 +3668,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 	inc de
 	inc de
 	pop hl
-	call AddPokemonToParty_WriteMovePP
+	call AddPartyMon_WriteMovePP
 	inc de
 	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
 	ld [de], a
@@ -3694,7 +3694,7 @@ _AddPokemonToParty: ; f2e5 (3:72e5)
 LoadMovePPs: ; f473 (3:7473)
 	call GetPredefRegisters
 	; fallthrough
-AddPokemonToParty_WriteMovePP: ; f476 (3:7476)
+AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	ld b, $4
 .pploop
 	ld a, [hli]     ; read move ID
@@ -4286,7 +4286,7 @@ Func_f800: ; f800 (3:7800)
 	ld de, $ffa1
 	ld hl, $ffa4
 	push bc
-	call SubtractBCD
+	call SubBCD
 	pop bc
 	jr .asm_f803
 
@@ -4318,10 +4318,10 @@ AddBCD::
 	ret
 
 
-SubtractBCDPredef::
+SubBCDPredef::
 	call GetPredefRegisters
 
-SubtractBCD::
+SubBCD::
 	and a
 	ld b, c
 .sub
@@ -4346,7 +4346,7 @@ SubtractBCD::
 	ret
 
 
-InitializePlayerData:
+InitPlayerData:
 
 	call Random
 	ld a, [hRandomSub]

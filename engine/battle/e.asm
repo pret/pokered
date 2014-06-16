@@ -758,7 +758,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,1
 	ld [wcc49],a
 	push hl
-	call AddPokemonToParty
+	call AddPartyMon
 	pop hl
 	jr .LoopTrainerData
 .SpecialTrainer
@@ -775,7 +775,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,1
 	ld [wcc49],a
 	push hl
-	call AddPokemonToParty
+	call AddPartyMon
 	pop hl
 	jr .SpecialTrainer
 .AddLoneMove

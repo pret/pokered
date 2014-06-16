@@ -1,4 +1,4 @@
-HallOfFameComputer: ; 7405c (1d:405c)
+HallOfFamePC: ; 7405c (1d:405c)
 	callba AnimateHallOfFame
 	call ClearScreen
 	ld c, $64

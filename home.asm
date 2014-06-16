@@ -4146,11 +4146,11 @@ RemovePokemon:: ; 391f (0:391f)
 	ld b, BANK(_RemovePokemon)
 	jp Bankswitch
 
-AddPokemonToParty:: ; 3927 (0:3927)
+AddPartyMon:: ; 3927 (0:3927)
 	push hl
 	push de
 	push bc
-	callba _AddPokemonToParty
+	callba _AddPartyMon
 	pop bc
 	pop de
 	pop hl

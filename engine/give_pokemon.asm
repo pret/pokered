@@ -41,7 +41,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ret
 .asm_4fe01
 	call SetPokedexOwnedFlag
-	call AddPokemonToParty
+	call AddPartyMon
 	ld a, $1
 	ld [wcc3c], a
 	ld [wccd3], a

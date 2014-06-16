@@ -32,7 +32,7 @@ PickupItem:
 
 	ld a, [$ffdb]
 	ld [wcc4d], a
-	ld a, $11 ; RemoveMissableObject
+	ld a, $11 ; HideObject
 	call Predef
 	ld a, 1
 	ld [wcc3c], a

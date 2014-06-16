@@ -332,7 +332,7 @@ OverworldLoopLessDelay::
 	ld a,[W_CURMAP]
 	cp a,OAKS_LAB
 	jp z,.noFaintCheck
-	callab AnyPlayerPokemonAliveCheck ; check if all the player's pokemon fainted
+	callab AnyPartyAlive ; check if all the player's pokemon fainted
 	ld a,d
 	and a
 	jr z,.allPokemonFainted
@@ -507,7 +507,7 @@ WarpFound2:: ; 073c (0:073c)
 ; if it's a Silph Co. teleporter
 	ld hl,wd732
 	set 3,[hl]
-	call DoFlyOrTeleportAwayGraphics
+	call LeaveMapAnim
 	jr .skipMapChangeSound
 .notTeleporter
 	call PlayMapChangeSound
@@ -778,16 +778,16 @@ HandleFlyOrTeleportAway::
 	ld hl, wd732
 	set 2, [hl]
 	res 5, [hl]
-	call DoFlyOrTeleportAwayGraphics
+	call LeaveMapAnim
 	ld a, Bank(Func_62ce)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	call Func_62ce
 	jp Func_5d5f
 
-DoFlyOrTeleportAwayGraphics::
-	ld b, BANK(_DoFlyOrTeleportAwayGraphics)
-	ld hl, _DoFlyOrTeleportAwayGraphics
+LeaveMapAnim::
+	ld b, BANK(_LeaveMapAnim)
+	ld hl, _LeaveMapAnim
 	jp Bankswitch
 
 LoadPlayerSpriteGraphics::

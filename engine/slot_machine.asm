@@ -618,7 +618,7 @@ SlotMachine_37741: ; 37741 (d:7741)
 	ld [hli], a
 	ld de, wPlayerCoins + 1
 	ld c, $2
-	ld a, $c ; SubtractBCDPredef
+	ld a, $c ; SubBCDPredef
 	call Predef
 
 SlotMachine_37754: ; 37754 (d:7754)

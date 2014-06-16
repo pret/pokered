@@ -1,4 +1,4 @@
-AskForMonNickname: ; 64eb (1:64eb)
+AskName: ; 64eb (1:64eb)
 	call SaveScreenTilesToBuffer1
 	call GetPredefRegisters
 	push hl

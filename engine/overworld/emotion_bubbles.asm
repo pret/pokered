@@ -1,4 +1,4 @@
-PrintEmotionBubble: ; 17c47 (5:7c47)
+EmotionBubble: ; 17c47 (5:7c47)
 	ld a, [wcd50]
 	ld c, a
 	ld b, $0

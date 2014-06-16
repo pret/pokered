@@ -1,4 +1,4 @@
-DisplayPokedexMenu_: ; 40000 (10:4000)
+ShowPokedexMenu: ; 40000 (10:4000)
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites ; move sprites

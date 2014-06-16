@@ -89,7 +89,7 @@ Func_705aa: ; 705aa (1c:45aa)
 	ld [hl], a
 	jp Func_70755
 
-_DoFlyOrTeleportAwayGraphics: ; 705ba (1c:45ba)
+_LeaveMapAnim: ; 705ba (1c:45ba)
 	call Func_706ef
 	call Func_70787
 	ld a, b

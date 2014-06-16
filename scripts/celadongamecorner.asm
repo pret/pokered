@@ -157,7 +157,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld hl, $ffa1
 	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c ; SubtractBCDPredef
+	ld a, $c ; SubBCDPredef
 	call Predef
 	xor a
 	ldh [$9f], a

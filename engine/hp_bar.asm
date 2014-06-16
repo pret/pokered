@@ -1,9 +1,9 @@
-UpdateHPBar_LoadRegisters: ; f9dc (3:79dc)
+HPBarLength: ; f9dc (3:79dc)
 	call GetPredefRegisters
 
 ; calculates bc * 48 / de, the number of pixels the HP bar has
 ; the result is always at least 1
-UpdateHPBar_CalcNumberOfHPBarPixels: ; f9df (3:79df)
+GetHPBarLength: ; f9df (3:79df)
 	push hl
 	xor a
 	ld hl, H_MULTIPLICAND
@@ -254,12 +254,12 @@ UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	ld l, a
 	push hl
 	push de
-	call UpdateHPBar_CalcNumberOfHPBarPixels ; calc num pixels for old HP
+	call GetHPBarLength ; calc num pixels for old HP
 	ld a, e
 	pop de
 	pop bc
 	push af
-	call UpdateHPBar_CalcNumberOfHPBarPixels ; calc num pixels for new HP
+	call GetHPBarLength ; calc num pixels for new HP
 	pop af
 	ld d, e
 	ld e, a
