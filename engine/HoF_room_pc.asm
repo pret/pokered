@@ -16,8 +16,7 @@ HallOfFamePC: ; 7405c (1d:405c)
 	call FillMemory
 	ld hl, wTileMap
 	call Func_7417b
-	FuncCoord 0, 14
-	ld hl, Coord
+	hlCoord 0, 14
 	call Func_7417b
 	ld a, $c0
 	ld [rBGP], a ; $ff47
@@ -62,8 +61,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	ld a,[hl]
 	ld [wcf91],a
 	ld [wd0b5],a
-	FuncCoord 8, 6
-	ld hl,Coord
+	hlCoord 8, 6
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,vBGMap0 + $c
@@ -153,8 +151,7 @@ Func_7417b: ; 7417b (1d:417b)
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld bc, $c8 ; 10 rows of 20 tiles each
 	ld a, $7f ; blank white tile
 	jp FillMemory
@@ -164,8 +161,7 @@ Credits: ; 7418e (1d:418e)
 	push de
 .asm_74192
 	pop de
-	FuncCoord 9, 6
-	ld hl, Coord
+	hlCoord 9, 6
 	push hl
 	call FillMiddleOfScreenWithWhite
 	pop hl
@@ -241,12 +237,10 @@ Credits: ; 7418e (1d:418e)
 	ld hl, vChars2 + $600
 	ld bc, (BANK(TheEndGfx) << 8) + $0a
 	call CopyVideoData
-	FuncCoord 4, 8
-	ld hl, Coord
+	hlCoord 4, 8
 	ld de, TheEndTextString
 	call PlaceString
-	FuncCoord 4, 9
-	ld hl, Coord
+	hlCoord 4, 9
 	inc de
 	call PlaceString
 	jp Func_740ba

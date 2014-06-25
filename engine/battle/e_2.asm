@@ -85,12 +85,10 @@ HealEffect_: ; 3b9ec (e:79ec)
 	call BankswitchEtoF
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	FuncCoord 10, 9
-	ld hl, Coord
+	hlCoord 10, 9
 	ld a, $1
 	jr z, .asm_3ba83
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	xor a
 .asm_3ba83
 	ld [wListMenuID], a ; wListMenuID

@@ -99,8 +99,7 @@ Func_7beb4: ; 7beb4 (1e:7eb4)
 
 Func_7beb9: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
-	FuncCoord 7, 2
-	ld hl, Coord
+	hlCoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 asm_7bec2: ; 7bec2 (1e:7ec2)
 	ld a, $31
@@ -117,8 +116,7 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 7, 2
-	ld hl, Coord
+	hlCoord 7, 2
 	ld bc, $707
 	ld de, $d
 .asm_7bee3

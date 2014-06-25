@@ -67,12 +67,10 @@ Func_7861: ; 7861 (1:7861)
 .asm_789c
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	FuncCoord 10, 9
-	ld hl, Coord
+	hlCoord 10, 9
 	ld a, $1
 	jr z, .asm_78aa
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	xor a
 .asm_78aa
 	ld [wListMenuID], a ; wListMenuID

@@ -68,8 +68,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld [wd0b5],a    ; pic displayed is stored at this location
 	ld [wcf91],a
 	call GetMonHeader      ; this is also related to the pic
-	FuncCoord 6, 4
-	ld hl,Coord     ; position on tilemap the pic is displayed
+	hlCoord 6, 4     ; position on tilemap the pic is displayed
 	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
 	call MovePicLeft
 	ld hl,OakSpeechText2
@@ -143,8 +142,7 @@ Func_61bc: ; 61bc (1:61bc)
 	ld [$2000],a
 	ld c,$14
 	call DelayFrames
-	FuncCoord 6, 5
-	ld hl,Coord
+	hlCoord 6, 5
 	ld b,7
 	ld c,7
 	call ClearScreenArea
@@ -225,11 +223,9 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	pop bc
 	ld a,c
 	and a
-	FuncCoord 15, 1
-	ld hl,Coord
+	hlCoord 15, 1
 	jr nz,.next
-	FuncCoord 6, 4
-	ld hl,Coord
+	hlCoord 6, 4
 .next
 	xor a
 	ld [$FFE1],a

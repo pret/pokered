@@ -285,8 +285,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors: ; 132ed (4:72ed)
-	FuncCoord 0,1
-	ld hl,Coord
+	hlCoord 0, 1
 	ld bc,2 * 20 ; menu cursor positions are 2 rows apart
 	ld a,6 ; 6 menu cursor positions
 .loop
@@ -331,14 +330,10 @@ StartMenu_Item: ; 13302 (4:7302)
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)
 	ld a," "
-	FuncCoord 5,4
-	ld [Coord],a
-	FuncCoord 5,6
-	ld [Coord],a
-	FuncCoord 5,8
-	ld [Coord],a
-	FuncCoord 5,10
-	ld [Coord],a
+	Coorda 5, 4
+	Coorda 5, 6
+	Coorda 5, 8
+	Coorda 5, 10
 	call PlaceUnfilledArrowMenuCursor
 	xor a
 	ld [wcc35],a
@@ -531,12 +526,10 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld bc,(BANK(RedPicFront) << 8) | $01
 	predef Predef3B
 	call DisableLCD
-	FuncCoord 0,2
-	ld hl,Coord
+	hlCoord 0, 2
 	ld a," "
 	call TrainerInfo_DrawVerticalLine
-	FuncCoord 1,2
-	ld hl,Coord
+	hlCoord 1, 2
 	call TrainerInfo_DrawVerticalLine
 	ld hl,vChars2 + $70
 	ld de,vChars2
@@ -579,8 +572,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	dec a
 	ld [hli],a
 	ld [hl],1
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	call TrainerInfo_DrawTextBox
 	ld hl,wWhichTrade
 	ld a,16 + 1
@@ -588,35 +580,27 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	dec a
 	ld [hli],a
 	ld [hl],3
-	FuncCoord 1,10
-	ld hl,Coord
+	hlCoord 1, 10
 	call TrainerInfo_DrawTextBox
-	FuncCoord 0,10
-	ld hl,Coord
+	hlCoord 0, 10
 	ld a,$d7
 	call TrainerInfo_DrawVerticalLine
-	FuncCoord 19,10
-	ld hl,Coord
+	hlCoord 19, 10
 	call TrainerInfo_DrawVerticalLine
-	FuncCoord 6,9
-	ld hl,Coord
+	hlCoord 6, 9
 	ld de,TrainerInfo_BadgesText
 	call PlaceString
-	FuncCoord 2,2
-	ld hl,Coord
+	hlCoord 2, 2
 	ld de,TrainerInfo_NameMoneyTimeText
 	call PlaceString
-	FuncCoord 7,2
-	ld hl,Coord
+	hlCoord 7, 2
 	ld de,wPlayerName
 	call PlaceString
-	FuncCoord 8,4
-	ld hl,Coord
+	hlCoord 8, 4
 	ld de,wPlayerMoney
 	ld c,$e3
 	call PrintBCDNumber
-	FuncCoord 9,6
-	ld hl,Coord
+	hlCoord 9, 6
 	ld de,W_PLAYTIMEHOURS + 1 ; hours
 	ld bc,$4103
 	call PrintNumber

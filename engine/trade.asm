@@ -181,8 +181,7 @@ Func_41245: ; 41245 (10:5245)
 	ld [$ffae], a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 4, 0
-	ld hl, Coord
+	hlCoord 4, 0
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
@@ -227,8 +226,7 @@ Func_41298: ; 41298 (10:5298)
 	call DelayFrame
 	ld a, $8b
 	ld [rLCDC], a ; $ff40
-	FuncCoord 6, 2
-	ld hl, Coord
+	hlCoord 6, 2
 	ld b, $7
 	call Func_41842
 	call Func_41186
@@ -300,8 +298,7 @@ Func_41336: ; 41336 (10:5336)
 	ld a, $ac
 	call Func_41676
 	call Func_415c8
-	FuncCoord 4, 10
-	ld hl, Coord
+	hlCoord 4, 10
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
@@ -318,8 +315,7 @@ Func_41336: ; 41336 (10:5336)
 	ld a, [wTrainerEngageDistance]
 	call PlayCry
 	call Func_41181
-	FuncCoord 4, 10
-	ld hl, Coord
+	hlCoord 4, 10
 	ld bc, $80c
 	call ClearScreenArea
 	jp PrintTradeTakeCareText
@@ -406,8 +402,7 @@ Func_41411: ; 41411 (10:5411)
 
 Func_4142d: ; 4142d (10:542d)
 	call Func_41196
-	FuncCoord 11, 4
-	ld hl, Coord
+	hlCoord 11, 4
 	ld a, $5d
 	ld [hli], a
 	ld a, $5e
@@ -416,25 +411,21 @@ Func_4142d: ; 4142d (10:542d)
 	ld [hli], a
 	dec c
 	jr nz, .asm_4143a
-	FuncCoord 5, 3
-	ld hl, Coord
+	hlCoord 5, 3
 	ld b, $6
 	call Func_41842
-	FuncCoord 4, 12
-	ld hl, Coord
+	hlCoord 4, 12
 	ld b, $2
 	ld c, $7
 	call TextBoxBorder
-	FuncCoord 5, 14
-	ld hl, Coord
+	hlCoord 5, 14
 	ld de, wPlayerName ; wd158
 	call PlaceString
 	jp DelayFrame
 
 Func_4145c: ; 4145c (10:545c)
 	call Func_41196
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld a, $5e
 	ld c, $e
 .asm_41466
@@ -458,25 +449,21 @@ Func_4145c: ; 4145c (10:545c)
 	ld [hld], a
 	ld a, $5d
 	ld [hl], a
-	FuncCoord 7, 8
-	ld hl, Coord
+	hlCoord 7, 8
 	ld b, $6
 	call Func_41842
-	FuncCoord 6, 0
-	ld hl, Coord
+	hlCoord 6, 0
 	ld b, $2
 	ld c, $7
 	call TextBoxBorder
-	FuncCoord 7, 2
-	ld hl, Coord
+	hlCoord 7, 2
 	ld de, W_GRASSRATE ; W_GRASSRATE
 	call PlaceString
 	jp DelayFrame
 
 Func_4149f: ; 4149f (10:549f)
 	call Func_41196
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld a, $5e
 	ld c, $14
 .asm_414a9
@@ -487,8 +474,7 @@ Func_4149f: ; 4149f (10:549f)
 
 Func_414ae: ; 414ae (10:54ae)
 	push hl
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	call ScheduleRowRedrawHelper
 	pop hl
 	ld a, h
@@ -655,8 +641,7 @@ Func_415a4: ; 415a4 (10:55a4)
 	xor $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call GetMonHeader
-	FuncCoord 7, 2
-	ld hl, Coord
+	hlCoord 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
 	ld c, $a
 	jp DelayFrames

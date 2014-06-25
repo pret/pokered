@@ -68,8 +68,7 @@ ENDC
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call Func_4519
-	FuncCoord 2, 1
-	ld hl, Coord
+	hlCoord 2, 1
 	ld a, $80
 	ld de, $14
 	ld c, $6
@@ -85,8 +84,7 @@ ENDC
 	add hl, de
 	dec c
 	jr nz, .asm_434d
-	FuncCoord 2, 7
-	ld hl, Coord
+	hlCoord 2, 7
 	ld a, $31
 	ld b, $10
 .asm_4361
@@ -98,8 +96,7 @@ ENDC
 	ld hl, wOAMBuffer + $28
 	ld a, $74
 	ld [hl], a
-	FuncCoord 2, 17
-	ld hl, Coord
+	hlCoord 2, 17
 	ld de, .titlescreenTilemap ; $437f
 	ld b, $10
 .asm_4377
@@ -346,8 +343,7 @@ Func_4519: ; 4519 (1:4519)
 Func_4524: ; 4524 (1:4524)
 	ld [wcf91], a
 	ld [wd0b5], a
-	FuncCoord 5, 10
-	ld hl, Coord
+	hlCoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
@@ -366,8 +362,7 @@ LoadCopyrightTiles: ; 4541 (1:4541)
 	ld hl, vChars2 + $600
 	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
 	call CopyVideoData
-	FuncCoord 2, 7
-	ld hl, Coord
+	hlCoord 2, 7
 	ld de, CopyrightTextString ; $4556
 	jp PlaceString
 
@@ -381,8 +376,7 @@ INCLUDE "data/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
-	FuncCoord 7, 8
-	ld hl, Coord
+	hlCoord 7, 8
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

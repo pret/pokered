@@ -57,13 +57,11 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_702e1
 	ld c, $50
 	call DelayFrames
-	FuncCoord 2, 13
-	ld hl, Coord
+	hlCoord 2, 13
 	ld b, $3
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 4, 15
-	ld hl, Coord
+	hlCoord 4, 15
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
@@ -113,8 +111,7 @@ Func_70278: ; 70278 (1c:4278)
 	call Func_7033e
 	jr .asm_702ab
 .asm_7029d
-	FuncCoord 12, 5
-	ld hl, Coord
+	hlCoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
@@ -157,27 +154,22 @@ Func_702e1: ; 702e1 (1c:42e1)
 	jp Func_70404
 
 Func_702f0: ; 702f0 (1c:42f0)
-	FuncCoord 0, 2
-	ld hl, Coord
+	hlCoord 0, 2
 	ld b, $9
 	ld c, $a
 	call TextBoxBorder
-	FuncCoord 2, 6
-	ld hl, Coord
+	hlCoord 2, 6
 	ld de, HoFMonInfoText
 	call PlaceString
-	FuncCoord 1, 4
-	ld hl, Coord
+	hlCoord 1, 4
 	ld de, wcd6d
 	call PlaceString
 	ld a, [wTrainerFacingDirection]
-	FuncCoord 8, 7
-	ld hl, Coord
+	hlCoord 8, 7
 	call PrintLevelCommon
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wd0b5], a
-	FuncCoord 3, 9
-	ld hl, Coord
+	hlCoord 3, 9
 	predef Func_27d6b
 	ld a, [wWhichTrade] ; wWhichTrade
 	jp PlayCry
@@ -207,34 +199,28 @@ Func_7033e: ; 7033e (1c:433e)
 
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0
-	FuncCoord 12, 5
-	ld hl, Coord
+	hlCoord 12, 5
 	predef_jump Func_79dda
 
 Func_70377: ; 70377 (1c:4377)
 	ld hl, wd747
 	set 3, [hl]
 	predef DisplayDexRating
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
-	FuncCoord 5, 0
-	ld hl, Coord
+	hlCoord 5, 0
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
-	FuncCoord 7, 2
-	ld hl, Coord
+	hlCoord 7, 2
 	ld de, wPlayerName ; wd158
 	call PlaceString
-	FuncCoord 1, 6
-	ld hl, Coord
+	hlCoord 1, 6
 	ld de, HoFPlayTimeText
 	call PlaceString
-	FuncCoord 5, 7
-	ld hl, Coord
+	hlCoord 5, 7
 	ld de, W_PLAYTIMEHOURS + 1
 	ld bc, $103
 	call PrintNumber
@@ -243,12 +229,10 @@ Func_70377: ; 70377 (1c:4377)
 	ld de, W_PLAYTIMEMINUTES + 1
 	ld bc, $8102
 	call PrintNumber
-	FuncCoord 1, 9
-	ld hl, Coord
+	hlCoord 1, 9
 	ld de, HoFMoneyText
 	call PlaceString
-	FuncCoord 4, 10
-	ld hl, Coord
+	hlCoord 4, 10
 	ld de, wPlayerMoney ; wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber

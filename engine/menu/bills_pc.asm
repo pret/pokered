@@ -32,18 +32,15 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld a, [wd7f1]
 	bit 0, a
 	jr nz, .asm_21414
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld de, SomeonesPCText ; $548b
 	jr .asm_2141a
 .asm_21414
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld de, BillsPCText ; $5497
 .asm_2141a
 	call PlaceString
-	FuncCoord 2, 4
-	ld hl, Coord
+	hlCoord 2, 4
 	ld de, wPlayerName ; wd158
 	call PlaceString
 	ld l, c
@@ -53,8 +50,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld a, [wd74b]
 	bit 5, a
 	jr z, .asm_21462
-	FuncCoord 2, 6
-	ld hl, Coord
+	hlCoord 2, 6
 	ld de, OaksPCText ; $54a5
 	call PlaceString
 	ld a, [wd5a2]
@@ -62,24 +58,20 @@ Func_213c8:: ; 213c8 (8:53c8)
 	jr z, .asm_2145a
 	ld a, $4
 	ld [wMaxMenuItem], a ; wMaxMenuItem
-	FuncCoord 2, 8
-	ld hl, Coord
+	hlCoord 2, 8
 	ld de, PKMNLeaguePCText ; $54b2
 	call PlaceString
-	FuncCoord 2, 10
-	ld hl, Coord
+	hlCoord 2, 10
 	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_2145a
-	FuncCoord 2, 8
-	ld hl, Coord
+	hlCoord 2, 8
 	ld de, LogOffPCText ; $54ba
 	jr .asm_2146d
 .asm_21462
 	ld a, $2
 	ld [wMaxMenuItem], a ; wMaxMenuItem
-	FuncCoord 2, 6
-	ld hl, Coord
+	hlCoord 2, 6
 	ld de, LogOffPCText ; $54ba
 .asm_2146d
 	call PlaceString
@@ -146,8 +138,7 @@ BillsPCMenu:
 	ld b, $a
 	ld c, $c
 	call TextBoxBorder
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld de, BillsPCMenuText ; $56e1
 	call PlaceString
 	ld hl, wTopMenuItemY ; wTopMenuItemY
@@ -170,8 +161,7 @@ BillsPCMenu:
 	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld hl, WhatText
 	call PrintText
-	FuncCoord 9, 14
-	ld hl, Coord
+	hlCoord 9, 14
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
@@ -180,18 +170,15 @@ BillsPCMenu:
 	cp $9
 	jr c, .asm_2154f
 	sub $9
-	FuncCoord 17, 16
-	ld hl, Coord
+	hlCoord 17, 16
 	ld [hl], $f7
 	add $f6
 	jr .asm_21551
 .asm_2154f
 	add $f7
 .asm_21551
-	FuncCoord 18, 16
-	ld [Coord], a
-	FuncCoord 10, 16
-	ld hl, Coord
+	Coorda 18, 16
+	hlCoord 10, 16
 	ld de, BoxNoPCText ; $5713
 	call PlaceString
 	ld a, $1
@@ -405,8 +392,7 @@ HMMoveArray: ; 21745 (8:5745)
 	db $ff
 
 Func_2174b: ; 2174b (8:574b)
-	FuncCoord 9, 10
-	ld hl, Coord
+	hlCoord 9, 10
 	ld b, $6
 	ld c, $9
 	call TextBoxBorder
@@ -416,11 +402,9 @@ Func_2174b: ; 2174b (8:574b)
 	jr nz, .asm_21761
 	ld de, WithdrawPCText ; $57d3
 .asm_21761
-	FuncCoord 11, 12
-	ld hl, Coord
+	hlCoord 11, 12
 	call PlaceString
-	FuncCoord 11, 14
-	ld hl, Coord
+	hlCoord 11, 14
 	ld de, StatsCancelPCText ; $57dc
 	call PlaceString
 	ld hl, wTopMenuItemY ; wTopMenuItemY

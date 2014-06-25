@@ -8,8 +8,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld [wSpriteStateData2], a
 	jr .asm_4e4a
 .asm_4e41
-	FuncCoord 8, 9
-	ld a, [Coord]
+	aCoord 8, 9
 	ld [$ff93], a
 	cp $60
 	jr c, .asm_4e50

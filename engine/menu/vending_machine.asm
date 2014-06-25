@@ -17,18 +17,15 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld [wTopMenuItemX], a ; wTopMenuItemX
 	ld hl, wd730
 	set 6, [hl]
-	FuncCoord 0, 3
-	ld hl, Coord
+	hlCoord 0, 3
 	ld b, $8
 	ld c, $c
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 5
-	ld hl, Coord
+	hlCoord 2, 5
 	ld de, DrinkText
 	call PlaceString
-	FuncCoord 9, 6
-	ld hl, Coord
+	hlCoord 9, 6
 	ld de, DrinkPriceText
 	call PlaceString
 	ld hl, wd730

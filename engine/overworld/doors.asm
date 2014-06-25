@@ -10,8 +10,7 @@ HandleDoors: ; 1a609 (6:6609)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	FuncCoord 8, 9
-	ld a, [Coord]
+	aCoord 8, 9
 	ld b, a
 .asm_1a621
 	ld a, [hli]

@@ -13,8 +13,7 @@ AskName: ; 64eb (1:64eb)
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
-	FuncCoord 14, 7
-	ld hl, Coord
+	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
 	ld [wd125], a
@@ -94,8 +93,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba Func_7176c
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld b, $9
 	ld c, $12
 	call TextBoxBorder
@@ -341,8 +339,7 @@ PrintAlphabet: ; 676f (1:676f)
 	jr nz, .asm_677e
 	ld de, UpperCaseAlphabet ; $67d6
 .asm_677e
-	FuncCoord 2, 5
-	ld hl, Coord
+	hlCoord 2, 5
 	ld bc, $509
 .asm_6784
 	push bc
@@ -373,16 +370,13 @@ Func_680e: ; 680e (1:680e)
 	call CalcStringLength
 	ld a, c
 	ld [wHPBarMaxHP], a
-	FuncCoord 10, 2
-	ld hl, Coord
+	hlCoord 10, 2
 	ld bc, $10a
 	call ClearScreenArea
-	FuncCoord 10, 2
-	ld hl, Coord
+	hlCoord 10, 2
 	ld de, wcf4b
 	call PlaceString
-	FuncCoord 10, 3
-	ld hl, Coord
+	hlCoord 10, 3
 	ld a, [wd07d]
 	cp $2
 	jr nc, .asm_6835
@@ -419,8 +413,7 @@ Func_680e: ; 680e (1:680e)
 .asm_6867
 	ld c, a
 	ld b, $0
-	FuncCoord 10, 3
-	ld hl, Coord
+	hlCoord 10, 3
 	add hl, bc
 	ld [hl], $77
 	ret
@@ -468,8 +461,7 @@ CalcStringLength: ; 68eb (1:68eb)
 	jr .asm_68f0
 
 PrintNamingText: ; 68f8 (1:68f8)
-	FuncCoord 0, 1
-	ld hl, Coord
+	hlCoord 0, 1
 	ld a, [wd07d]
 	ld de, YourTextString ; $693f
 	and a
@@ -484,14 +476,12 @@ PrintNamingText: ; 68f8 (1:68f8)
 	pop af
 	ld [wd11e], a
 	call GetMonName
-	FuncCoord 4, 1
-	ld hl, Coord
+	hlCoord 4, 1
 	call PlaceString
 	ld hl, $1
 	add hl, bc
 	ld [hl], $c9
-	FuncCoord 1, 3
-	ld hl, Coord
+	hlCoord 1, 3
 	ld de, NicknameTextString ; $6953
 	jr .placeString
 .notNickname

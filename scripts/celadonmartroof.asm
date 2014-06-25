@@ -200,8 +200,7 @@ CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes

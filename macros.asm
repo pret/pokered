@@ -37,8 +37,38 @@ callab: MACRO
 
 ;\1 = X
 ;\2 = Y
-FuncCoord: MACRO
-Coord = $C3A0 + 20 * \2 + \1
+hlCoord: MACRO
+	ld hl, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+deCoord: MACRO
+	ld de, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+bcCoord: MACRO
+	ld bc, wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = X
+;\2 = Y
+aCoord: MACRO
+	ld a, [wTileMap + 20 * \2 + \1]
+	ENDM
+
+;\1 = X
+;\2 = Y
+Coorda: MACRO
+	ld [wTileMap + 20 * \2 + \1], a
+	ENDM
+
+;\1 = X
+;\2 = Y
+dwCoord: MACRO
+	dw wTileMap + 20 * \2 + \1
 	ENDM
 
 ;\1 = Map Width

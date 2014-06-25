@@ -5,8 +5,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	call LoadTextBoxTilePatterns
 	ld hl, ClearSaveDataText
 	call PrintText
-	FuncCoord 14, 7
-	ld hl, Coord
+	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $7
 	ld [wd12c], a

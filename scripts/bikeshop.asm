@@ -56,12 +56,10 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld c, $f
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld de, BikeShopMenuText
 	call PlaceString
-	FuncCoord 8, 3
-	ld hl, Coord
+	hlCoord 8, 3
 	ld de, BikeShopMenuPrice
 	call PlaceString
 	ld hl, BikeShopText_1d815

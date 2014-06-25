@@ -6,13 +6,11 @@ Func_5317: ; 5317 (1:5317)
 	call LoadFontTilePatterns
 	call LoadHpBarAndStatusTilePatterns
 	call LoadTrainerInfoTextBoxTiles
-	FuncCoord 3, 8
-	ld hl, Coord
+	hlCoord 3, 8
 	ld b, $2
 	ld c, $c
 	call Func_5ab3
-	FuncCoord 4, 10
-	ld hl, Coord
+	hlCoord 4, 10
 	ld de, PleaseWaitString ; $550f
 	call PlaceString
 	ld hl, W_NUMHITS ; wd074

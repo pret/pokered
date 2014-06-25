@@ -5,8 +5,7 @@ PrintBookshelfText: ; fb50 (3:7b50)
 	jr nz, .asm_fb7f
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	ld b, a
-	FuncCoord 8, 7
-	ld a, [Coord]
+	aCoord 8, 7
 	ld c, a
 	ld hl, BookshelfTileIDs ; $7b8b
 .asm_fb62

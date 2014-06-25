@@ -77,8 +77,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartTellSellPriceText
 	ld bc,$0e01
 	call PrintText
-	FuncCoord 14,7
-	ld hl,Coord
+	hlCoord 14, 7
 	ld bc,$080f
 	ld a,$14
 	ld [wd125],a
@@ -149,8 +148,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,PokemartTellBuyPriceText
 	call PrintText
-	FuncCoord 14,7
-	ld hl,Coord
+	hlCoord 14, 7
 	ld bc,$080f
 	ld a,$14
 	ld [wd125],a

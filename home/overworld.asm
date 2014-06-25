@@ -105,8 +105,7 @@ OverworldLoopLessDelay::
 	jr nz,.checkForOpponent
 	bit 0,a
 	jr nz,.checkForOpponent
-	FuncCoord 8, 9
-	ld a,[Coord]
+	aCoord 8, 9
 	ld [wcf0e],a
 	call DisplayTextID ; display either the start menu or the NPC/sign text
 	ld a,[wcc47]
@@ -670,8 +669,7 @@ CheckMapConnections:: ; 07ba (0:07ba)
 
 ; function to play a sound when changing maps
 PlayMapChangeSound:: ; 08c9 (0:08c9)
-	FuncCoord 8, 8
-	ld a,[Coord] ; upper left tile of the 4x4 square the player's sprite is standing on
+	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
 	ld a,(SFX_02_57 - SFX_Headers_02) / 3
@@ -1279,8 +1277,7 @@ CheckForJumpingAndTilePairCollisions:: ; 0c2a (0:0c2a)
 ; if not jumping
 
 Func_c44:: ; 0c44 (0:0c44)
-	FuncCoord 8, 9
-	ld a,[Coord] ; tile the player is on
+	aCoord 8, 9 ; tile the player is on
 	ld [wcf0e],a
 
 CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
@@ -1694,8 +1691,7 @@ MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 ; the portion of the map that was newly exposed due to the player's movement
 
 ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
-	FuncCoord 0, 0
-	ld hl,Coord
+	hlCoord 0, 0
 	call ScheduleRowRedrawHelper
 	ld a,[wd526]
 	ld [H_SCREENEDGEREDRAWADDR],a
@@ -1717,8 +1713,7 @@ ScheduleRowRedrawHelper:: ; 0ea6 (0:0ea6)
 	ret
 
 ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
-	FuncCoord 0,16
-	ld hl,Coord
+	hlCoord 0, 16
 	call ScheduleRowRedrawHelper
 	ld a,[wd526]
 	ld l,a
@@ -1737,8 +1732,7 @@ ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	ret
 
 ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
-	FuncCoord 18,0
-	ld hl,Coord
+	hlCoord 18, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wd526]
 	ld c,a
@@ -1776,8 +1770,7 @@ ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ret
 
 ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wd526]
 	ld [H_SCREENEDGEREDRAWADDR],a

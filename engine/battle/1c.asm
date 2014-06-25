@@ -2,8 +2,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
 	ld [rOBP1], a ; $ff49
 	call Func_7092a
-	FuncCoord 12, 0
-	ld hl, Coord
+	hlCoord 12, 0
 	ld bc, $707
 	call ClearScreenArea
 	call Delay3
@@ -287,8 +286,7 @@ BattleTransition_Spiral: ; 70a72 (1c:4a72)
 	call BattleTransition_InwardSpiral
 	jr .done
 .outwardSpiral
-	FuncCoord 10, 10
-	ld hl, Coord
+	hlCoord 10, 10
 	ld a, $3
 	ld [wd09f], a
 	ld a, l
@@ -457,28 +455,20 @@ BattleTransition_Shrink: ; 70b7f (1c:4b7f)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	FuncCoord 0, 7
-	ld hl, Coord
-	FuncCoord 0, 8
-	ld de, Coord
+	hlCoord 0, 7
+	deCoord 0, 8
 	ld bc, $ffd8
 	call BattleTransition_CopyTiles1
-	FuncCoord 0, 10
-	ld hl, Coord
-	FuncCoord 0, 9
-	ld de, Coord
+	hlCoord 0, 10
+	deCoord 0, 9
 	ld bc, $28
 	call BattleTransition_CopyTiles1
-	FuncCoord 8, 0
-	ld hl, Coord
-	FuncCoord 9, 0
-	ld de, Coord
+	hlCoord 8, 0
+	deCoord 9, 0
 	ld bc, $fffe
 	call BattleTransition_CopyTiles2
-	FuncCoord 11, 0
-	ld hl, Coord
-	FuncCoord 10, 0
-	ld de, Coord
+	hlCoord 11, 0
+	deCoord 10, 0
 	ld bc, $2
 	call BattleTransition_CopyTiles2
 	ld a, $1
@@ -499,25 +489,19 @@ BattleTransition_Split: ; 70bca (1c:4bca)
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
 	push bc
-	FuncCoord 0, 16
-	ld hl, Coord
-	FuncCoord 0, 17
-	ld de, Coord
+	hlCoord 0, 16
+	deCoord 0, 17
 	ld bc, $ffd8
 	call BattleTransition_CopyTiles1
-	FuncCoord 0, 1
-	ld hl, Coord
+	hlCoord 0, 1
 	ld de, wTileMap
 	ld bc, $28
 	call BattleTransition_CopyTiles1
-	FuncCoord 18, 0
-	ld hl, Coord
-	FuncCoord 19, 0
-	ld de, Coord
+	hlCoord 18, 0
+	deCoord 19, 0
 	ld bc, $fffe
 	call BattleTransition_CopyTiles2
-	FuncCoord 1, 0
-	ld hl, Coord
+	hlCoord 1, 0
 	ld de, wTileMap
 	ld bc, $2
 	call BattleTransition_CopyTiles2
@@ -615,8 +599,7 @@ BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
 	ld c, $12
 	ld hl, wTileMap
-	FuncCoord 1, 17
-	ld de, Coord
+	deCoord 1, 17
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
@@ -655,8 +638,7 @@ BattleTransition_VerticalStripes_: ; 70caa (1c:4caa)
 BattleTransition_HorizontalStripes: ; 70cb4 (1c:4cb4)
 	ld c, $14
 	ld hl, wTileMap
-	FuncCoord 19, 1
-	ld de, Coord
+	deCoord 19, 1
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
@@ -777,104 +759,84 @@ BattleTransition_Circle_Sub2: ; 70d50 (1c:4d50)
 BattleTransition_HalfCircle1: ; 70d61 (1c:4d61)
 	db $01
 	dw BattleTransition_CircleData1
-	FuncCoord 18, 6
-	dw Coord
+	dwCoord 18, 6
 
 	db $01
 	dw BattleTransition_CircleData2
-	FuncCoord 19, 3
-	dw Coord
+	dwCoord 19, 3
 
 	db $01
 	dw BattleTransition_CircleData3
-	FuncCoord 18, 0
-	dw Coord
+	dwCoord 18, 0
 
 	db $01
 	dw BattleTransition_CircleData4
-	FuncCoord 14, 0
-	dw Coord
+	dwCoord 14, 0
 
 	db $01
 	dw BattleTransition_CircleData5
-	FuncCoord 10, 0
-	dw Coord
+	dwCoord 10, 0
 
 	db $00
 	dw BattleTransition_CircleData5
-	FuncCoord 9, 0
-	dw Coord
+	dwCoord 9, 0
 
 	db $00
 	dw BattleTransition_CircleData4
-	FuncCoord 5, 0
-	dw Coord
+	dwCoord 5, 0
 
 	db $00
 	dw BattleTransition_CircleData3
-	FuncCoord 1, 0
-	dw Coord
+	dwCoord 1, 0
 
 	db $00
 	dw BattleTransition_CircleData2
-	FuncCoord 0, 3
-	dw Coord
+	dwCoord 0, 3
 
 	db $00
 	dw BattleTransition_CircleData1
-	FuncCoord 1, 6
-	dw Coord
+	dwCoord 1, 6
 
 BattleTransition_HalfCircle2: ; 70d93 (1c:4d93)
 	db $00
 	dw BattleTransition_CircleData1
-	FuncCoord 1, 11
-	dw Coord
+	dwCoord 1, 11
 
 	db $00
 	dw BattleTransition_CircleData2
-	FuncCoord 0, 14
-	dw Coord
+	dwCoord 0, 14
 
 	db $00
 	dw BattleTransition_CircleData3
-	FuncCoord 1, 17
-	dw Coord
+	dwCoord 1, 17
 
 	db $00
 	dw BattleTransition_CircleData4
-	FuncCoord 5, 17
-	dw Coord
+	dwCoord 5, 17
 
 	db $00
 	dw BattleTransition_CircleData5
-	FuncCoord 9, 17
-	dw Coord
+	dwCoord 9, 17
 
 	db $01
 	dw BattleTransition_CircleData5
-	FuncCoord 10, 17
-	dw Coord
+	dwCoord 10, 17
 
 	db $01
 	dw BattleTransition_CircleData4
-	FuncCoord 14, 17
-	dw Coord
+	dwCoord 14, 17
 
 	db $01
 	dw BattleTransition_CircleData3
-	FuncCoord 18, 17
-	dw Coord
+	dwCoord 18, 17
 
 	db $01
 	dw BattleTransition_CircleData2
-	FuncCoord 19, 14
-	dw Coord
+	dwCoord 19, 14
 
 	db $01
 	dw BattleTransition_CircleData1
-	FuncCoord 18, 11
-	dw Coord
+	dwCoord 18, 11
 
 BattleTransition_Circle_Sub3: ; 70dc5 (1c:4dc5)
 	push hl

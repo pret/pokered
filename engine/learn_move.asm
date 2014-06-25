@@ -76,8 +76,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 AbandonLearning: ; 6eda (1:6eda)
 	ld hl, AbandonLearningText
 	call PrintText
-	FuncCoord 14, 7
-	ld hl, Coord
+	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
 	ld [wd125], a
@@ -100,8 +99,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
-	FuncCoord 14, 7
-	ld hl, Coord
+	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
 	ld [wd125], a
@@ -122,13 +120,11 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
-	FuncCoord 4, 7
-	ld hl, Coord
+	hlCoord 4, 7
 	ld b, $4
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 6, 8
-	ld hl, Coord
+	hlCoord 6, 8
 	ld de, wd0e1
 	ld a, [$fff6]
 	set 2, a

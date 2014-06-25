@@ -11,8 +11,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	push af
 	ld b, $0
 	call Func_711c4
-	FuncCoord 1, 0
-	ld hl, Coord
+	hlCoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer
@@ -57,8 +56,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	inc de
 	cp $50
 	jr nz, .asm_70eac
-	FuncCoord 1, 0
-	ld hl, Coord
+	hlCoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer + $10
@@ -120,8 +118,7 @@ LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	push hl
 	call Func_711ef
 	call GetMonName
-	FuncCoord 1, 0
-	ld hl, Coord
+	hlCoord 1, 0
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -163,33 +160,28 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld b, $0
 	call Func_711c4
 	ld hl, wTrainerEngageDistance
-	FuncCoord 18, 0
-	ld de, Coord
+	deCoord 18, 0
 
 .townMapFlyLoop
 	ld a, $7f
 	ld [de], a
 	push hl
 	push hl
-	FuncCoord 3, 0
-	ld hl, Coord
+	hlCoord 3, 0
 	ld bc, $10f
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
 	ld b, $4
 	call Func_711c4
-	FuncCoord 3, 0
-	ld hl, Coord
+	hlCoord 3, 0
 	ld de, wcd6d
 	call PlaceString
 	ld c, $f
 	call DelayFrames
-	FuncCoord 18, 0
-	ld hl, Coord
+	hlCoord 18, 0
 	ld [hl], $ed
-	FuncCoord 19, 0
-	ld hl, Coord
+	hlCoord 19, 0
 	ld [hl], $ee
 	pop hl
 .asm_71004
@@ -228,8 +220,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld [hl], a
 	ret
 .asm_71042
-	FuncCoord 18, 0
-	ld de, Coord
+	deCoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
@@ -241,8 +232,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wTrainerEngageDistance
 	jp .townMapFlyLoop
 .asm_71058
-	FuncCoord 19, 0
-	ld de, Coord
+	deCoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
@@ -402,13 +392,11 @@ Func_711ef: ; 711ef (1c:51ef)
 	ld a, l
 	and a
 	jr nz, .asm_71236
-	FuncCoord 1, 7
-	ld hl, Coord
+	hlCoord 1, 7
 	ld b, $2
 	ld c, $f
 	call TextBoxBorder
-	FuncCoord 2, 9
-	ld hl, Coord
+	hlCoord 2, 9
 	ld de, AreaUnknownText
 	call PlaceString
 	jr .asm_7123e

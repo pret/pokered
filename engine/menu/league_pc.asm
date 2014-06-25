@@ -93,22 +93,18 @@ Func_76610: ; 76610 (1d:6610)
 	ld b, $0B
 	ld c, 0
 	call GoPAL_SET
-	FuncCoord 12, 5
-	ld hl, Coord
+	hlCoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	call GBPalNormal
-	FuncCoord 0, 13
-	ld hl, Coord
+	hlCoord 0, 13
 	ld b, 2
 	ld c, $12
 	call TextBoxBorder
-	FuncCoord 1, 15
-	ld hl, Coord
+	hlCoord 1, 15
 	ld de, HallOfFameNoText
 	call PlaceString
-	FuncCoord 16, 15
-	ld hl, Coord
+	hlCoord 16, 15
 	ld de, wcd42
 	ld bc, $0103
 	call PrintNumber

@@ -349,8 +349,7 @@ Func_70787: ; 70787 (1c:4787)
 	jr z, .asm_707a4
 	cp c
 	jr nz, .asm_7079e
-	FuncCoord 8, 9
-	ld a, [Coord]
+	aCoord 8, 9
 	cp [hl]
 	jr z, .asm_707a2
 .asm_7079e

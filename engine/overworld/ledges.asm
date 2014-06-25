@@ -8,8 +8,7 @@ HandleLedges: ; 1a672 (6:6672)
 	predef Func_c586
 	ld a, [wSpriteStateData1 + 9]
 	ld b, a
-	FuncCoord 8, 9
-	ld a, [Coord]
+	aCoord 8, 9
 	ld c, a
 	ld a, [wcfc6]
 	ld d, a

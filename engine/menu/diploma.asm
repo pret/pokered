@@ -33,8 +33,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	pop bc
 	dec c
 	jr nz, .asm_56715 ; 0x56725 $ee
-	FuncCoord 10, 4
-	ld hl, Coord
+	hlCoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
 	callba Func_44dd

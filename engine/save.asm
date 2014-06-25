@@ -151,12 +151,10 @@ SaveSAV: ;$770a
 	ret nz
 .save        ;$772d
 	call SaveSAVtoSRAM      ;$7848
-	FuncCoord 1,13
-	ld hl,Coord
+	hlCoord 1, 13
 	ld bc,$0412
 	call ClearScreenArea ; clear area 4x12 starting at 13,1
-	FuncCoord 1,14
-	ld hl,Coord
+	hlCoord 1, 14
 	ld de,NowSavingString
 	call PlaceString
 	ld c,$78
@@ -174,8 +172,7 @@ NowSavingString:
 
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
-	FuncCoord 0, 7
-	ld hl,Coord
+	hlCoord 0, 7
 	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
 	ld a,$14        ;one line shifting ($28 = 2 lines)
 	ld [wd125],a
@@ -435,16 +432,14 @@ Func_7393f: ; 7393f (1c:793f)
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
-	FuncCoord 11, 0
-	ld hl, Coord
+	hlCoord 11, 0
 	ld b, $c
 	ld c, $7
 	call TextBoxBorder
 	ld hl, $fff6
 	set 2, [hl]
 	ld de, BoxNames ; $79d9
-	FuncCoord 13, 1
-	ld hl, Coord
+	hlCoord 13, 1
 	call PlaceString
 	ld hl, $fff6
 	res 2, [hl]
@@ -453,23 +448,19 @@ Func_7393f: ; 7393f (1c:793f)
 	cp $9
 	jr c, .asm_739a6
 	sub $9
-	FuncCoord 8, 2
-	ld hl, Coord
+	hlCoord 8, 2
 	ld [hl], $f7
 	add $f6
 	jr .asm_739a8
 .asm_739a6
 	add $f7
 .asm_739a8
-	FuncCoord 9, 2
-	ld [Coord], a
-	FuncCoord 1, 2
-	ld hl, Coord
+	Coorda 9, 2
+	hlCoord 1, 2
 	ld de, BoxNoText
 	call PlaceString
 	call Func_73a84
-	FuncCoord 18, 1
-	ld hl, Coord
+	hlCoord 18, 1
 	ld de, wWhichTrade ; wWhichTrade
 	ld bc, $14
 	ld a, $c

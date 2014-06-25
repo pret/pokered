@@ -1,20 +1,16 @@
 Func_372d6: ; 372d6 (d:72d6)
 	call LoadTextBoxTilePatterns
-	FuncCoord 3, 4
-	ld hl, Coord
+	hlCoord 3, 4
 	ld b, $7
 	ld c, $c
 	call TextBoxBorder
-	FuncCoord 4, 5
-	ld hl, Coord
+	hlCoord 4, 5
 	ld de, wPlayerName ; wd158
 	call PlaceString
-	FuncCoord 4, 10
-	ld hl, Coord
+	hlCoord 4, 10
 	ld de, W_GRASSRATE ; W_GRASSRATE
 	call PlaceString
-	FuncCoord 9, 8
-	ld hl, Coord
+	hlCoord 9, 8
 	ld a, $69
 	ld [hli], a
 	ld [hl], $6a

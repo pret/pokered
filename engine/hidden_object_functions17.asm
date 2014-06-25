@@ -77,8 +77,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	call LoadMonFrontSprite
 	ld a, $80
 	ld [$ffe1], a
-	FuncCoord 10, 11
-	ld hl, Coord
+	hlCoord 10, 11
 	predef Func_3f073
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1

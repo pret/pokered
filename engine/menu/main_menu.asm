@@ -33,24 +33,20 @@ MainMenu: ; 5af2 (1:5af2)
 	ld a,[wd088]
 	cp a,1
 	jr z,.next1
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	ld b,6
 	ld c,13
 	call TextBoxBorder
-	FuncCoord 2,2
-	ld hl,Coord
+	hlCoord 2, 2
 	ld de,ContinueText
 	call PlaceString
 	jr .next2
 .next1
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	ld b,4
 	ld c,13
 	call TextBoxBorder
-	FuncCoord 2,2
-	ld hl,Coord
+	hlCoord 2, 2
 	ld de,NewGameText
 	call PlaceString
 .next2
@@ -142,14 +138,12 @@ LinkMenu: ; 5c0a (1:5c0a)
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
-	FuncCoord 5, 5
-	ld hl, Coord
+	hlCoord 5, 5
 	ld b, $6
 	ld c, $d
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 7, 7
-	ld hl, Coord
+	hlCoord 7, 7
 	ld de, TradeCenterText
 	call PlaceString
 	xor a
@@ -238,14 +232,11 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld c, d
 .asm_5ccc
 	ld a, b
-	FuncCoord 6, 7
-	ld [Coord], a
+	Coorda 6, 7
 	ld a, c
-	FuncCoord 6, 9
-	ld [Coord], a
+	Coorda 6, 9
 	ld a, d
-	FuncCoord 6, 11
-	ld [Coord], a
+	Coorda 6, 11
 	ld c, $28
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
@@ -343,27 +334,21 @@ TradeCenterText: ; 5d97 (1:5d97)
 ContinueGame: ; 5db5 (1:5db5)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 4, 7
-	ld hl, Coord
+	hlCoord 4, 7
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
-	FuncCoord 5, 9
-	ld hl, Coord
+	hlCoord 5, 9
 	ld de, SaveScreenInfoText
 	call PlaceString
-	FuncCoord 12, 9
-	ld hl, Coord
+	hlCoord 12, 9
 	ld de, wPlayerName ; wd158
 	call PlaceString
-	FuncCoord 17, 11
-	ld hl, Coord
+	hlCoord 17, 11
 	call Func_5e2f
-	FuncCoord 16, 13
-	ld hl, Coord
+	hlCoord 16, 13
 	call Func_5e42
-	FuncCoord 13, 15
-	ld hl, Coord
+	hlCoord 13, 15
 	call Func_5e55
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -433,35 +418,28 @@ SaveScreenInfoText: ; 5e6a (1:5e6a)
 	next "TIME@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	ld b,3
 	ld c,18
 	call TextBoxBorder
-	FuncCoord 0,5
-	ld hl,Coord
+	hlCoord 0, 5
 	ld b,3
 	ld c,18
 	call TextBoxBorder
-	FuncCoord 0,10
-	ld hl,Coord
+	hlCoord 0, 10
 	ld b,3
 	ld c,18
 	call TextBoxBorder
-	FuncCoord 1,1
-	ld hl,Coord
+	hlCoord 1, 1
 	ld de,TextSpeedOptionText
 	call PlaceString
-	FuncCoord 1,6
-	ld hl,Coord
+	hlCoord 1, 6
 	ld de,BattleAnimationOptionText
 	call PlaceString
-	FuncCoord 1,11
-	ld hl,Coord
+	hlCoord 1, 11
 	ld de,BattleStyleOptionText
 	call PlaceString
-	FuncCoord 2,16
-	ld hl,Coord
+	hlCoord 2, 16
 	ld de,OptionMenuCancelText
 	call PlaceString
 	xor a
@@ -655,8 +633,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	dec hl
 	ld a,[hl]
 	ld [wWhichTrade],a ; text speed cursor X coordinate
-	FuncCoord 0,3
-	ld hl,Coord
+	hlCoord 0, 3
 	call .placeUnfilledRightArrow
 	sla c
 	ld a,1 ; On
@@ -664,8 +641,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	ld a,10 ; Off
 .storeBattleAnimationCursorX
 	ld [wTrainerEngageDistance],a ; battle animation cursor X coordinate
-	FuncCoord 0,8
-	ld hl,Coord
+	hlCoord 0, 8
 	call .placeUnfilledRightArrow
 	sla c
 	ld a,1
@@ -673,12 +649,10 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	ld a,10
 .storeBattleStyleCursorX
 	ld [wTrainerFacingDirection],a ; battle style cursor X coordinate
-	FuncCoord 0,13
-	ld hl,Coord
+	hlCoord 0, 13
 	call .placeUnfilledRightArrow
 ; cursor in front of Cancel
-	FuncCoord 0,16
-	ld hl,Coord
+	hlCoord 0, 16
 	ld a,1
 .placeUnfilledRightArrow
 	ld e,a

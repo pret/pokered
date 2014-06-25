@@ -76,8 +76,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	cp $4F
 	jr nz,.next3
 	pop hl
-	FuncCoord 1, 16
-	ld hl,Coord
+	hlCoord 1, 16
 	push hl
 	jp Next19E8
 
@@ -270,14 +269,12 @@ Char58:: ; 1a95 (0:1a95)
 	cp 4
 	jp z,Next1AA2
 	ld a,$EE
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
 	ld a,$7F
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 Char57:: ; 1aad (0:1aad)
 	pop hl
 	ld de,Char58Text
@@ -290,67 +287,56 @@ Char58Text:: ; 1ab3 (0:1ab3)
 Char51:: ; 1ab4 (0:1ab4)
 	push de
 	ld a,$EE
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	FuncCoord 1, 13
-	ld hl,Coord
+	hlCoord 1, 13
 	ld bc,$0412
 	call ClearScreenArea
 	ld c,$14
 	call DelayFrames
 	pop de
-	FuncCoord 1, 14
-	ld hl,Coord
+	hlCoord 1, 14
 	jp Next19E8
 
 Char49:: ; 1ad5 (0:1ad5)
 	push de
 	ld a,$EE
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	FuncCoord 1, 10
-	ld hl,Coord
+	hlCoord 1, 10
 	ld bc,$0712
 	call ClearScreenArea
 	ld c,$14
 	call DelayFrames
 	pop de
 	pop hl
-	FuncCoord 1, 11
-	ld hl,Coord
+	hlCoord 1, 11
 	push hl
 	jp Next19E8
 
 Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 	call ProtectedDelay3
 	push de
 	call ManualTextScroll
 	pop de
 	ld a,$7F
-	FuncCoord 18, 16
-	ld [Coord],a
+	Coorda 18, 16
 	;fall through
 Char4C:: ; 1b0a (0:1b0a)
 	push de
 	call Next1B18
 	call Next1B18
-	FuncCoord 1, 16
-	ld hl,Coord
+	hlCoord 1, 16
 	pop de
 	jp Next19E8
 
 Next1B18:: ; 1b18 (0:1b18)
-	FuncCoord 0, 14
-	ld hl,Coord
-	FuncCoord 0, 13
-	ld de,Coord
+	hlCoord 0, 14
+	deCoord 0, 13
 	ld b,$3C
 .next
 	ld a,[hli]
@@ -358,8 +344,7 @@ Next1B18:: ; 1b18 (0:1b18)
 	inc de
 	dec b
 	jr nz,.next
-	FuncCoord 1, 16
-	ld hl,Coord
+	hlCoord 1, 16
 	ld a,$7F
 	ld b,$12
 .next2
@@ -514,8 +499,7 @@ TextCommand03:: ; 1bb7 (0:1bb7)
 ; (no arguments)
 TextCommand05:: ; 1bc5 (0:1bc5)
 	pop hl
-	FuncCoord 1, 16
-	ld bc,Coord ; address of second line of dialogue text box
+	bcCoord 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; blink arrow and wait for A or B to be pressed
@@ -526,14 +510,12 @@ TextCommand06:: ; 1bcc (0:1bcc)
 	cp a,$04
 	jp z,TextCommand0D
 	ld a,$ee ; down arrow
-	FuncCoord 18, 16
-	ld [Coord],a ; place down arrow in lower right corner of dialogue text box
+	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
 	call ManualTextScroll ; blink arrow and wait for A or B to be pressed
 	pop bc
 	ld a," "
-	FuncCoord 18, 16
-	ld [Coord],a ; overwrite down arrow with blank space
+	Coorda 18, 16 ; overwrite down arrow with blank space
 	pop hl
 	jp NextTextCommand
 
@@ -542,13 +524,11 @@ TextCommand06:: ; 1bcc (0:1bcc)
 ; (no arguments)
 TextCommand07:: ; 1be7 (0:1be7)
 	ld a," "
-	FuncCoord 18, 16
-	ld [Coord],a ; place blank space in lower right corner of dialogue text box
+	Coorda 18, 16 ; place blank space in lower right corner of dialogue text box
 	call Next1B18 ; scroll up text
 	call Next1B18
 	pop hl
-	FuncCoord 1, 16
-	ld bc,Coord ; address of second line of dialogue text box
+	bcCoord 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; execute asm inline

@@ -18,8 +18,7 @@ Func_137aa: ; 137aa (4:77aa)
 	jr z, .asm_137de
 	ld de, DrawText
 .asm_137de
-	FuncCoord 6, 8
-	ld hl, Coord
+	hlCoord 6, 8
 	call PlaceString
 	ld c, $c8
 	call DelayFrames
@@ -110,8 +109,7 @@ Func_13870: ; 13870 (4:7870)
 	jr z, .asm_13905
 	ld [wd0db], a
 .asm_1389e
-	FuncCoord 9, 9
-	ld hl, Coord
+	hlCoord 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
@@ -145,8 +143,7 @@ Func_13870: ; 13870 (4:7870)
 .asm_138d7
 	ld c, [hl]
 	ld hl, W_GRASSMONS ; wd888
-	FuncCoord 8, 9
-	ld a, [Coord]
+	aCoord 8, 9
 	cp $14
 	jr nz, .asm_138e5
 	ld hl, W_WATERMONS ; wd8a5 (aliases: wEnemyMon1HP)
@@ -250,14 +247,12 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [hli], a
 	ld [hl], a
 .asm_13982
-	FuncCoord 10, 9
-	ld hl, Coord
+	hlCoord 10, 9
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld a, $1
 	jr z, .asm_13990
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	xor a
 .asm_13990
 	ld [wListMenuID], a ; wListMenuID

@@ -1,53 +1,43 @@
 Func_42769: ; 42769 (10:6769)
-	FuncCoord 5,0
-	ld hl,Coord
+	hlCoord 5, 0
 	ld de,OTString67E5
 	call PlaceString
 	ld a,[wWhichTrade]
 	ld [wd11e],a
 	predef IndexToPokedex
-	FuncCoord 9, 0
-	ld hl,Coord
+	hlCoord 9, 0
 	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber
-	FuncCoord 5,2
-	ld hl,Coord
+	hlCoord 5, 2
 	ld de,wcf4b
 	call PlaceString
-	FuncCoord 8,4
-	ld hl,Coord
+	hlCoord 8, 4
 	ld de,wTrainerScreenX
 	call PlaceString
-	FuncCoord 8, 6
-	ld hl,Coord
+	hlCoord 8, 6
 	ld de,wcd4c
 	ld bc,$8205
 	jp PrintNumber
 
 Func_427a7: ; 427a7 (10:67a7)
-	FuncCoord 5,10
-	ld hl,Coord
+	hlCoord 5, 10
 	ld de,OTString67E5
 	call PlaceString
 	ld a,[wTrainerEngageDistance]
 	ld [wd11e],a
 	predef IndexToPokedex
-	FuncCoord 9, 10
-	ld hl,Coord
+	hlCoord 9, 10
 	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber
-	FuncCoord 5,12
-	ld hl,Coord
+	hlCoord 5, 12
 	ld de,wcd6d
 	call PlaceString
-	FuncCoord 8,14
-	ld hl,Coord
+	hlCoord 8, 14
 	ld de,wcd4e
 	call PlaceString
-	FuncCoord 8, 16
-	ld hl,Coord
+	hlCoord 8, 16
 	ld de,wcd59
 	ld bc,$8205
 	jp PrintNumber

@@ -76,15 +76,13 @@ Func_69ec: ; 69ec (1:69ec)
 	ld bc, $b
 	call CopyData
 	call Delay3
-	FuncCoord 12, 4
-	ld hl, Coord
+	hlCoord 12, 4
 	ld de, $67d
 	ld a, $ff
 	jr asm_6a19
 
 Func_6a12: ; 6a12 (1:6a12)
-	FuncCoord 5, 4
-	ld hl, Coord
+	hlCoord 5, 4
 	ld de, $67d
 	xor a
 asm_6a19: ; 6a19 (1:6a19)
@@ -161,13 +159,11 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	FuncCoord 3, 0
-	ld hl, Coord
+	hlCoord 3, 0
 	ld de, .namestring ; $6aa3
 	call PlaceString
 	pop de
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	call PlaceString
 	call UpdateSprites
 	xor a

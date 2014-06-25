@@ -101,8 +101,7 @@ Func_610c2: ; 610c2 (18:50c2)
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes

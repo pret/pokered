@@ -30,8 +30,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	jp z,.printMessage
 	call ErasePartyMenuCursors
 	callba SendBlkPacket_PartyMenu ; loads some data to wcf2e
-	FuncCoord 3,0
-	ld hl,Coord
+	hlCoord 3, 0
 	ld de,wPartySpecies
 	xor a
 	ld c,a

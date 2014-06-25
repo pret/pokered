@@ -204,8 +204,7 @@ Func_417f0: ; 417f0 (10:57f0)
 	jr asm_417fe
 
 Func_417f8: ; 417f8 (10:57f8)
-	FuncCoord 0, 4
-	ld hl, Coord
+	hlCoord 0, 4
 	ld bc, $c8
 asm_417fe: ; 417fe (10:57fe)
 	ld [hl], $0
@@ -259,8 +258,7 @@ Func_4180e: ; 4180e (10:580e)
 	ret
 
 Func_4183f: ; 4183f (10:583f)
-	FuncCoord 13, 7
-	ld hl, Coord
+	hlCoord 13, 7
 
 Func_41842: ; 41842 (10:5842)
 	ld c, $0
@@ -335,8 +333,7 @@ Func_418e9: ; 418e9 (10:58e9)
 	ld hl, wTileMap
 	ld c, $50
 	call Func_41807
-	FuncCoord 0, 14
-	ld hl, Coord
+	hlCoord 0, 14
 	ld c, $50
 	call Func_41807
 	ld hl, vBGMap1

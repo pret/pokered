@@ -26,8 +26,7 @@ Func_790c: ; 790c (1:790c)
 	ld c, $e
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 2, 2
-	ld hl, Coord
+	hlCoord 2, 2
 	ld de, PlayersPCMenuEntries ; $7af5
 	call PlaceString
 	ld hl, wTopMenuItemY ; wTopMenuItemY

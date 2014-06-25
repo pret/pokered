@@ -754,8 +754,7 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	cp a,1
 	ret nz
 .moveGhostMarowakLeft
-	FuncCoord 17,0
-	ld hl,Coord
+	hlCoord 17, 0
 	ld de,20
 	ld bc,$0707 ; 7 rows and 7 columns
 .loop
@@ -854,8 +853,7 @@ DoExplodeSpecialEffects: ; 79009 (1e:5009)
 	cp a,1 ; is it the end of the subanimation?
 	jr nz,FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
-	FuncCoord 1, 5
-	ld hl,Coord
+	hlCoord 1, 5
 	jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
@@ -1561,11 +1559,9 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 	call AnimationHideMonPic
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	FuncCoord 2, 5
-	ld hl, Coord
+	hlCoord 2, 5
 	jr z, .asm_79407
-	FuncCoord 11, 0
-	ld hl, Coord
+	hlCoord 11, 0
 .asm_79407
 	xor a
 	push hl
@@ -1676,16 +1672,12 @@ AnimationSquishMonPic: ; 794a1 (1e:54a1)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_794b1
-	FuncCoord 16, 0
-	ld hl, Coord
-	FuncCoord 14, 0
-	ld de, Coord
+	hlCoord 16, 0
+	deCoord 14, 0
 	jr .asm_794b7
 .asm_794b1
-	FuncCoord 5, 5
-	ld hl, Coord
-	FuncCoord 3, 5
-	ld de, Coord
+	hlCoord 5, 5
+	deCoord 3, 5
 .asm_794b7
 	push de
 	xor a
@@ -1889,12 +1881,10 @@ Func_795f8: ; 795f8 (1e:55f8)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_79602
-	FuncCoord 12, 0
-	ld hl, Coord
+	hlCoord 12, 0
 	jr .asm_79605
 .asm_79602
-	FuncCoord 0, 5
-	ld hl, Coord
+	hlCoord 0, 5
 .asm_79605
 	ld d, $8
 .asm_79607
@@ -2128,8 +2118,7 @@ Func_79793: ; 79793 (1e:5793)
 	xor a
 	ld [W_SPRITEFLIPPED], a
 	call GetMonHeader
-	FuncCoord 12, 0
-	ld hl, Coord
+	hlCoord 12, 0
 	call LoadFrontSpriteByMonIndex
 	jr .asm_797d3
 .asm_797b0
