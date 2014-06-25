@@ -215,7 +215,7 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	ld a,b
 	call UncompressSpriteFromDE
 	ld hl,S_SPRITEBUFFER1
-	ld de,$A000
+	ld de,S_SPRITEBUFFER0
 	ld bc,$310
 	call CopyData
 	ld de,vFrontPic
