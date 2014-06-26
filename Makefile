@@ -53,7 +53,7 @@ $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
 	rgbasm -h -o $@ $*.tx
 
 
-link    := rgblink -n $*.sym -m $*.map
+link    = rgblink -n $*.sym -m $*.map
 dmg_opt :=  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
 cgb_opt := -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
 
