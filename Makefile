@@ -32,7 +32,7 @@ compare:
 
 # Clear the default suffixes.
 .SUFFIXES:
-.SUFFIXES: .asm .tx .o .gbc
+.SUFFIXES: .asm .tx .o .gbc .png .2bpp .1bpp .pic
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
@@ -62,6 +62,7 @@ $(foreach obj, $(all_obj), \
 
 
 # Image files are added to a queue to reduce build time. They're converted when building parent objects.
+%.png:  ;
 %.2bpp: %.png  ; $(eval 2bppq += $<) @rm -f $@
 %.1bpp: %.png  ; $(eval 1bppq += $<) @rm -f $@
 %.pic:  %.2bpp ; $(eval picq  += $<) @rm -f $@
