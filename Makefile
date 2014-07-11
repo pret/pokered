@@ -1,14 +1,38 @@
+# Build Red/Blue. Yellow is WIP.
+roms := pokered.gbc pokeblue.gbc
+
+
+.PHONY: all clean red blue yellow compare
+
+all:    $(roms)
+red:    pokered.gbc
+blue:   pokeblue.gbc
+yellow: pokeyellow.gbc
+
+versions := red blue yellow
+
+
+# Header options for rgbfix.
+dmg_opt =  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
+cgb_opt = -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
+
+red_opt    = $(dmg_opt) -t "POKEMON RED"
+blue_opt   = $(dmg_opt) -t "POKEMON BLUE"
+yellow_opt = $(cgb_opt) -t "POKEMON YELLOW"
+
+
+
 # If your default python is 3, you may want to change this to python27.
 PYTHON := python
 
 # md5sum -c is used to compare rom hashes. The options may vary across platforms.
-MD5    := md5sum -c --quiet
+MD5 := md5sum -c --quiet
+compare:
+	@$(MD5) roms.md5
 
 # Clear the default suffixes.
 .SUFFIXES:
 .SUFFIXES: .asm .tx .o .gbc
-
-.PHONY: all clean red blue yellow compare
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
@@ -24,7 +48,6 @@ includes  := $(PYTHON) $(poketools)/scan_includes.py
 pre       := $(PYTHON) prequeue.py
 
 
-versions := red blue yellow
 
 # Collect file dependencies for objects in red/, blue/ and yellow/.
 # These aren't provided by rgbds by default, so we have to look for file includes ourselves.
@@ -36,21 +59,6 @@ $(foreach ver, $(versions), \
 $(foreach obj, $(all_obj), \
 	$(eval $(obj:.o=)_dep := $(shell $(includes) $(obj:.o=.asm))) \
 )
-
-
-# Build Red/Blue. Yellow is WIP.
-roms := pokered.gbc pokeblue.gbc
-
-all:    $(roms)
-red:    pokered.gbc
-blue:   pokeblue.gbc
-yellow: pokeyellow.gbc
-
-compare:
-	@$(MD5) roms.md5
-clean:
-	rm -f $(roms) $(all_obj)
-	find . \( -iname '*.tx' -o -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
 
 
 # Image files are added to a queue to reduce build time. They're converted when building parent objects.
@@ -77,19 +85,23 @@ $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
 
 
 # Link objects together to build a rom.
+
 # Make a symfile for debugging. rgblink will segfault if a mapfile isn't made too.
-link    = rgblink -n $*.sym -m $*.map
-dmg_opt =  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
-cgb_opt = -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
+link = rgblink -n $*.sym -m $*.map
 
 pokered.gbc: $(red_obj)
 	$(link) -o $@ $^
-	rgbfix $(dmg_opt) -t "POKEMON RED" $@
+	rgbfix $(red_opt) $@
 
 pokeblue.gbc: $(blue_obj)
 	$(link) -o $@ $^
-	rgbfix $(dmg_opt) -t "POKEMON BLUE" $@
+	rgbfix $(blue_opt) $@
 
 pokeyellow.gbc: $(yellow_obj)
 	$(link) -o $@ $^
-	rgbfix $(cgb_opt) -t "POKEMON YELLOW" $@
+	rgbfix $(yellow_opt) $@
+
+
+clean:
+	rm -f $(roms) $(all_obj)
+	find . \( -iname '*.tx' -o -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
