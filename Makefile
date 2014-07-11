@@ -1,12 +1,22 @@
+# If your default python is 3, you may want to change this to python27.
 PYTHON := python
+
+# md5sum -c is used to compare rom hashes. The options may vary across platforms.
 MD5    := md5sum -c --quiet
 
+# Clear the default suffixes.
 .SUFFIXES:
 .SUFFIXES: .asm .tx .o .gbc
+
 .PHONY: all clean red blue yellow compare
-.PRECIOUS: %.2bpp
+
+# Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
+# Suppress annoying intermediate file deletion messages.
+.PRECIOUS: %.2bpp
+
+# Filepath shortcuts to avoid overly long recipes.
 poketools := extras/pokemontools
 gfx       := $(PYTHON) $(poketools)/gfx.py
 pic       := $(PYTHON) $(poketools)/pic.py
@@ -16,6 +26,8 @@ pre       := $(PYTHON) prequeue.py
 
 versions := red blue yellow
 
+# Collect file dependencies for objects in red/, blue/ and yellow/.
+# These aren't provided by rgbds by default, so we have to look for file includes ourselves.
 $(foreach ver, $(versions), \
 	$(eval $(ver)_asm := $(shell find $(ver) -iname '*.asm')) \
 	$(eval $(ver)_obj := $($(ver)_asm:.asm=.o)) \
@@ -26,6 +38,7 @@ $(foreach obj, $(all_obj), \
 )
 
 
+# Build Red/Blue. Yellow is WIP.
 roms := pokered.gbc pokeblue.gbc
 
 all:    $(roms)
@@ -40,22 +53,34 @@ clean:
 	find . \( -iname '*.tx' -o -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
 
 
+# Image files are added to a queue to reduce build time. They're converted when building parent objects.
+%.2bpp: %.png  ; $(eval 2bppq += $<) @rm -f $@
+%.1bpp: %.png  ; $(eval 1bppq += $<) @rm -f $@
+%.pic:  %.2bpp ; $(eval picq  += $<) @rm -f $@
+
+# Source files are not fed directly into rgbasm.
+# A python preprocessor runs over them first, replacing ascii strings with correct character codes.
+# It spits out the new file with extension .tx.
+# The text preprocessor also uses a queue.
 %.asm: ;
-%.tx: %.asm
-	$(eval txq += $<)
-	@rm -f $@
+%.tx: %.asm ; $(eval txq += $<) @rm -f $@
 
 $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
+	@# The queue payloads are here.
+	@# These are made silent since there may be hundreds of targets.
 	@$(pre) $(txq);           $(eval txq   :=)
 	@$(gfx) 2bpp $(2bppq);    $(eval 2bppq :=)
 	@$(gfx) 1bpp $(1bppq);    $(eval 1bppq :=)
 	@$(pic) compress $(picq); $(eval picq  :=)
+	@# rgbasm -h for manual halt-nops.
 	rgbasm -h -o $@ $*.tx
 
 
+# Link objects together to build a rom.
+# Make a symfile for debugging. rgblink will segfault if a mapfile isn't made too.
 link    = rgblink -n $*.sym -m $*.map
-dmg_opt :=  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
-cgb_opt := -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
+dmg_opt =  -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
+cgb_opt = -cjsv -k 01 -l 0x33 -m 0x1b -p 0 -r 03
 
 pokered.gbc: $(red_obj)
 	$(link) -o $@ $^
@@ -68,14 +93,3 @@ pokeblue.gbc: $(blue_obj)
 pokeyellow.gbc: $(yellow_obj)
 	$(link) -o $@ $^
 	rgbfix $(cgb_opt) -t "POKEMON YELLOW" $@
-
-
-%.2bpp: %.png
-	$(eval 2bppq += $<)
-	@rm -f $@
-%.1bpp: %.png
-	$(eval 1bppq += $<)
-	@rm -f $@
-%.pic:  %.2bpp
-	$(eval picq  += $<)
-	@rm -f $@
