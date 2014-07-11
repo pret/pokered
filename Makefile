@@ -73,14 +73,14 @@ $(foreach obj, $(all_obj), \
 %.asm: ;
 %.tx: %.asm ; $(eval txq += $<) @rm -f $@
 
+# Assemble source files into objects.
+# Queue payloads are here. These are made silent since there may be hundreds of targets.
+# Use rgbasm -h to use halts without nops.
 $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
-	@# The queue payloads are here.
-	@# These are made silent since there may be hundreds of targets.
 	@$(pre) $(txq);           $(eval txq   :=)
 	@$(gfx) 2bpp $(2bppq);    $(eval 2bppq :=)
 	@$(gfx) 1bpp $(1bppq);    $(eval 1bppq :=)
 	@$(pic) compress $(picq); $(eval picq  :=)
-	@# rgbasm -h for manual halt-nops.
 	rgbasm -h -o $@ $*.tx
 
 
