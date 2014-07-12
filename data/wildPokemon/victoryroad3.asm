@@ -1,4 +1,4 @@
-PlateauMons3: 
+PlateauMons3:
 	db $0F
 	IF !_YELLOW
 		db 24,MACHOP
@@ -12,7 +12,7 @@ PlateauMons3:
 		db 42,MACHOKE
 		db 45,MACHOKE
 	ENDC
-	
+
 	IF _YELLOW
 		db 36,GEODUDE
 		db 44,GOLBAT
@@ -25,6 +25,6 @@ PlateauMons3:
 		db 47,GRAVELER
 		db 47,GRAVELER
 	ENDC
-	
+
 	db $00
 

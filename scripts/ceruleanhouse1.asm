@@ -13,6 +13,5 @@ CeruleanHouse1Text2: ; 1d702 (7:5702)
 	db $08 ; asm
 	ld a, $6
 	ld [wWhichTrade], a
-	ld a, $54
-	call Predef
+	predef Predef54 
 	jp TextScriptEnd

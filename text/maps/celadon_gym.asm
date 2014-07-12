@@ -64,7 +64,7 @@ _CeladonGymText9:: ; 9d481 (27:5481)
 _ReceivedTM21Text:: ; 9d50c (27:550c)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM21ExplanationText:: ; 9d520 (27:5520)

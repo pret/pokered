@@ -6,19 +6,19 @@ VermilionHouse2TextPointers: ; 56073 (15:6073)
 
 VermilionHouse2Text1: ; 56075 (15:6075)
 	db $08 ; asm
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 3, a
 	jr nz, .asm_03ef5
 	ld hl, VermilionHouse2Text_560b1
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_eb1b7
 	ld bc, (OLD_ROD << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d728
+	ld hl, wd728
 	set 3, [hl]
 	ld hl, VermilionHouse2Text_560b6
 	jr .asm_5dd95

@@ -7,11 +7,11 @@ CeladonGameCornerScript: ; 48bbd (12:4bbd)
 	jp CallFunctionInTable
 
 CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	call GenRandom
+	call Random
 	ld a, [$ffd3]
 	cp $7
 	jr nc, .asm_48be2
@@ -20,26 +20,25 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	srl a
 	srl a
 	srl a
-	ld [$cd05], a
+	ld [wcd05], a
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
-	ld hl, $d126
+	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [$d77e]
+	ld a, [wd77e]
 	bit 1, a
 	ret nz
 	ld a, $2a
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0208
-	ld a, $17
-	jp Predef
+	predef_jump Func_ee9e
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -57,7 +56,7 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	cp $ff
 	jp z, CeladonGameCornerScript_48c07
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $d
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
@@ -90,16 +89,15 @@ MovementData_48c63: ; 48c63 (12:4c63)
 	db $C0,$C0,$C0,$C0,$C0,$FF
 
 CeladonGameCornerScript2: ; 48c69 (12:4c69)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $46
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
-	ld hl, $d126
+	ld [wcc4d], a
+	predef HideObject
+	ld hl, wd126
 	set 5, [hl]
 	set 6, [hl]
 	ld a, $0
@@ -131,7 +129,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld hl, CeladonGameCornerText_48d22
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_c650b ; 0x48cba
 	ld b,COIN_CASE
@@ -155,20 +153,18 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld a, $10
 	ldh [$a0], a
 	ld hl, $ffa1
-	ld de, $d349
+	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c
-	call Predef
+	predef SubBCDPredef
 	xor a
 	ldh [$9f], a
 	ldh [$a0], a
 	ld a, $50
 	ldh [$a1], a
-	ld de, $d5a5
+	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
-	call Predef
+	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
 	jr .asm_e2afd ; 0x48d0d
@@ -218,7 +214,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	db $08 ; asm
-	ld a, [$d77e]
+	ld a, [wd77e]
 	bit 2, a
 	jr nz, .asm_d0957 ; 0x48d50
 	ld hl, CeladonGameCornerText_48d9c
@@ -233,15 +229,14 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ldh [$a0], a
 	ld a, $10
 	ldh [$a1], a
-	ld de, $d5a5
+	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
-	call Predef
-	ld hl, $d77e
+	predef AddBCDPredef
+	ld hl, wd77e
 	set 2, [hl]
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, Received10CoinsText
 	jr .asm_c7d1a ; 0x48d87
 .asm_d0957 ; 0x48d89
@@ -278,7 +273,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	db $08 ; asm
-	ld a, [$d77c]
+	ld a, [wd77c]
 	bit 1, a
 	ld hl, CeladonGameCornerText_48dca ; $4dca
 	jr z, .asm_be3fd ; 0x48dbf
@@ -301,7 +296,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	db $08 ; asm
-	ld a, [$d77e]
+	ld a, [wd77e]
 	bit 4, a
 	jr nz, .asm_ed8bc ; 0x48ddf
 	ld hl, CeladonGameCornerText_48e26
@@ -316,12 +311,11 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ldh [$a0], a
 	ld a, $20
 	ldh [$a1], a
-	ld de, $d5a5
+	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
-	call Predef
-	ld hl, $d77e
+	predef AddBCDPredef
+	ld hl, wd77e
 	set 4, [hl]
 	ld hl, Received20CoinsText
 	jr .asm_0ddc2 ; 0x48e11
@@ -355,7 +349,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	db $08 ; asm
-	ld a, [$d77e]
+	ld a, [wd77e]
 	bit 3, a
 	jr nz, .asm_ff080 ; 0x48e41
 	ld hl, CeladonGameCornerText_48e88 ; $4e88
@@ -370,12 +364,11 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ldh [$a0], a
 	ld a, $20
 	ldh [$a1], a
-	ld de, $d5a5
+	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
-	ld a, $b
-	call Predef
-	ld hl, $d77e
+	predef AddBCDPredef
+	ld hl, wd77e
 	set 3, [hl]
 	ld hl, CeladonGameCornerText_48e8d
 	jr .asm_78d65 ; 0x48e73
@@ -411,14 +404,14 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	db $08 ; asm
 	ld hl, CeladonGameCornerText_48ece
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -444,20 +437,19 @@ CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 CeladonGameCornerText12: ; 48edd (12:4edd)
 	db $08 ; asm
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, CeladonGameCornerText_48f09
 	call PrintText
 	call WaitForSoundToFinish
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, $d77e
+	ld hl, wd77e
 	set 1, [hl]
 	ld a, $43
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $0208
-	ld a, $17
-	call Predef
+	predef Func_ee9e
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)
@@ -473,46 +465,38 @@ CeladonGameCornerText_48f19: ; 48f19 (12:4f19)
 	db "@"
 
 CeladonGameCornerScript_48f1e: ; 48f1e (12:4f1e)
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
-	FuncCoord 11, 0 ; $c3ab
-	ld hl, Coord
+	hlCoord 11, 0
 	ld b, $5
 	ld c, $7
 	call TextBoxBorder
 	call UpdateSprites
-	FuncCoord 12, 1 ; $c3c0
-	ld hl, Coord
+	hlCoord 12, 1
 	ld b, $4
 	ld c, $7
 	call ClearScreenArea
-	FuncCoord 12, 2 ; $c3d4
-	ld hl, Coord
+	hlCoord 12, 2
 	ld de, GameCornerMoneyText
 	call PlaceString
-	FuncCoord 12, 3 ; $c3e8
-	ld hl, Coord
+	hlCoord 12, 3
 	ld de, GameCornerBlankText1
 	call PlaceString
-	FuncCoord 12, 3 ; $c3e8
-	ld hl, Coord
-	ld de, $d347
+	hlCoord 12, 3
+	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
-	FuncCoord 12, 4 ; $c3fc
-	ld hl, Coord
+	hlCoord 12, 4
 	ld de, GameCornerCoinText
 	call PlaceString
-	FuncCoord 12, 5 ; $c410
-	ld hl, Coord
+	hlCoord 12, 5
 	ld de, GameCornerBlankText2
 	call PlaceString
-	FuncCoord 15, 5 ; $c413
-	ld hl, Coord
-	ld de, $d5a4
+	hlCoord 15, 5
+	ld de, wPlayerCoins
 	ld c, $82
 	call PrintBCDNumber
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ret
 

@@ -1,4 +1,4 @@
-Route17Mons: 
+Route17Mons:
 	db $19
 	IF !_YELLOW
 		db 20,SPEAROW
@@ -12,7 +12,7 @@ Route17Mons:
 		db 25,FEAROW
 		db 27,FEAROW
 	ENDC
-	
+
 	IF _YELLOW
 		db 26,DODUO
 		db 27,FEAROW
@@ -25,6 +25,6 @@ Route17Mons:
 		db 32,PONYTA
 		db 29,DODRIO
 	ENDC
-	
+
 	db $00
 

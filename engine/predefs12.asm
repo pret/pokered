@@ -1,5 +1,5 @@
 Func_480eb: ; 480eb (12:40eb)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, [rBGP] ; $ff47
 	or b
 	ld [rBGP], a ; $ff47
@@ -11,9 +11,9 @@ Func_480eb: ; 480eb (12:40eb)
 	ret
 
 Func_480ff: ; 480ff (12:40ff)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, $1
-	ld [$d0a0], a
+	ld [wd0a0], a
 	xor a
 .asm_48108
 	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
@@ -23,7 +23,7 @@ Func_480ff: ; 480ff (12:40ff)
 	ld a, b
 	jr nz, .asm_48108
 	xor a
-	ld [$d0a0], a
+	ld [wd0a0], a
 	ret
 
 Func_48119: ; 48119 (12:4119)
@@ -35,7 +35,7 @@ Func_48119: ; 48119 (12:4119)
 	jp DelayFrames
 
 Func_48125: ; 48125 (12:4125)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	xor a
 .asm_48129
 	ld [$ff97], a

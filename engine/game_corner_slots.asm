@@ -10,7 +10,7 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 	ld a, [wTrainerSpriteOffset]
 	and a
 	ret z
-	ld a, [$cd05]
+	ld a, [wcd05]
 	ld b, a
 	ld a, [wTrainerFacingDirection]
 	inc a
@@ -21,9 +21,9 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 .asm_37e58
 	ld a, $fa
 .asm_37e5a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a, [H_LOADEDROMBANK]
-	ld [$cc5e], a
+	ld [wcc5e], a
 	call PromptUserToPlaySlots
 	ret
 .printOutOfOrder

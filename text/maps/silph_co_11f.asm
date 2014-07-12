@@ -22,7 +22,7 @@ _SilphCoPresidentText:: ; 84e9b (21:4e9b)
 _ReceivedSilphCoMasterBallText:: ; 84f63 (21:4f63)
 	text $52, " got a"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _SilphCo10Text_6231c:: ; 84f74 (21:4f74)

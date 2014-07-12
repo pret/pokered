@@ -1,8 +1,8 @@
 Museum1FScript: ; 5c0f7 (17:40f7)
 	ld a, $1
-	ld [$cf0c], a
+	ld [wcf0c], a
 	xor a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, Museum1FScriptPointers
 	ld a, [W_MUSEUM1FCURSCRIPT]
 	jp CallFunctionInTable
@@ -23,7 +23,7 @@ Museum1FScript0: ; 5c10d (17:410d)
 	ret nz
 .asm_5c120
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [$ff8c], a
 	jp DisplayTextID
@@ -54,14 +54,14 @@ Museum1FText1: ; 5c135 (17:4135)
 	cp $c
 	jp z, Museum1FScript_5c1f9
 .asm_d49e7
-	ld a, [$d754]
+	ld a, [wd754]
 	bit 0, a
 	jr nz, .asm_31a16
 	ld hl, Museum1FText_5c23d
 	call PrintText
 	jp asm_d1145
 .asm_b8709
-	ld a, [$d754]
+	ld a, [wd754]
 	bit 0, a
 	jr z, .asm_3ded4
 .asm_31a16
@@ -70,14 +70,14 @@ Museum1FText1: ; 5c135 (17:4135)
 	jp asm_d1145
 .asm_3ded4
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld hl, Museum1FText_5c21f
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_de133
 	xor a
@@ -93,20 +93,19 @@ Museum1FText1: ; 5c135 (17:4135)
 .asm_0f3e3
 	ld hl, Museum1FText_5c224
 	call PrintText
-	ld hl, $d754
+	ld hl, wd754
 	set 0, [hl]
 	xor a
-	ld [$cd3d], a
-	ld [$cd3e], a
+	ld [wWhichTrade], a
+	ld [wTrainerEngageDistance], a
 	ld a, $50
-	ld [$cd3f], a
-	ld hl, $cd3f
-	ld de, $d349
+	ld [wTrainerFacingDirection], a
+	ld hl, wTrainerFacingDirection
+	ld de, wPlayerMoney + 2
 	ld c, $3
-	ld a, $c
-	call Predef
+	predef SubBCDPredef
 	ld a, $13
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
@@ -116,9 +115,9 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, Museum1FText_5c21a ; $421a
 	call PrintText
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $80
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	call UpdateSprites
 	jr asm_d1145
@@ -131,7 +130,7 @@ Museum1FScript_5c1f9: ; 5c1f9 (17:41f9)
 	ld hl, Museum1FText_5c22e
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	cp $0
 	jr nz, .asm_d1144
 	ld hl, Museum1FText_5c233
@@ -191,7 +190,7 @@ Museum1FText_5c251: ; 5c251 (17:4251)
 
 Museum1FText3: ; 5c256 (17:4256)
 	db $08 ; asm
-	ld a, [$d754]
+	ld a, [wd754]
 	bit 1, a
 	jr nz, .asm_16599 ; 0x5c25c
 	ld hl, Museum1FText_5c28e
@@ -199,12 +198,11 @@ Museum1FText3: ; 5c256 (17:4256)
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d754
+	ld hl, wd754
 	set 1, [hl]
 	ld a, $34
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld hl, ReceivedOldAmberText
 	jr .asm_52e0f ; 0x5c27e
 .BagFull

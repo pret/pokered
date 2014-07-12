@@ -50,6 +50,7 @@ Dependencies are downloaded in the installer rather than the command line.
 Select the following packages:
 * make
 * git
+* gettext
 * python
 * python-setuptools
 
@@ -63,8 +64,7 @@ Then set up the repository. In the **Cygwin terminal**:
 	cd pokered
 	git submodule init
 	git submodule update
-	sudo easy_install pip
-	sudo pip install -r extras/requirements.txt
+	easy_install git://github.com/drj11/pypng.git@master#egg=pypng
 
 To build:
 

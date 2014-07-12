@@ -6,29 +6,27 @@ Func_5317: ; 5317 (1:5317)
 	call LoadFontTilePatterns
 	call LoadHpBarAndStatusTilePatterns
 	call LoadTrainerInfoTextBoxTiles
-	FuncCoord 3, 8 ; $c443
-	ld hl, Coord
+	hlCoord 3, 8
 	ld b, $2
 	ld c, $c
 	call Func_5ab3
-	FuncCoord 4, 10 ; $c46c
-	ld hl, Coord
+	hlCoord 4, 10
 	ld de, PleaseWaitString ; $550f
 	call PlaceString
-	ld hl, W_NUMHITS ; $d074
+	ld hl, W_NUMHITS ; wd074
 	xor a
 	ld [hli], a
 	ld [hl], $50
 
 Func_5345: ; 5345
-	ld hl, $d152
+	ld hl, wd152
 	ld a, $fd
 	ld b, $6
 .asm_534c
 	ld [hli], a
 	dec b
 	jr nz, .asm_534c
-	ld hl, $d141
+	ld hl, wd141
 	ld a, $fd
 	ld b, $7
 .asm_5357
@@ -37,7 +35,7 @@ Func_5345: ; 5345
 	jr nz, .asm_5357
 	ld b, $a
 .asm_535d
-	call GenRandom
+	call Random
 	cp $fd
 	jr nc, .asm_535d
 	ld [hli], a
@@ -54,7 +52,7 @@ Func_5345: ; 5345
 	ld [hli], a
 	dec b
 	jr nz, .asm_5373
-	ld hl, W_GRASSRATE ; $d887
+	ld hl, W_GRASSRATE ; W_GRASSRATE
 	ld bc, $1a9
 .asm_537d
 	xor a
@@ -63,8 +61,8 @@ Func_5345: ; 5345
 	ld a, b
 	or c
 	jr nz, .asm_537d
-	ld hl, W_PARTYMONEND ; $d16a
-	ld de, $c512
+	ld hl, wPartyMons - 1
+	ld de, wTileMapBackup + 10
 	ld bc, $0
 .asm_538d
 	inc c
@@ -114,20 +112,20 @@ Func_5345: ; 5345
 	call Delay3
 	ld a, $8
 	ld [rIE], a ; $ffff
-	ld hl, $d141
+	ld hl, wd141
 	ld de, wTileMapBackup2
 	ld bc, $11
 	call Func_216f
 	ld a, $fe
 	ld [de], a
-	ld hl, $d152
-	ld de, $d893
+	ld hl, wd152
+	ld de, wd893
 	ld bc, $1a8
 	call Func_216f
 	ld a, $fe
 	ld [de], a
 	ld hl, wTileMapBackup
-	ld de, $c5d0
+	ld de, wTileMapBackup + 200
 	ld bc, $c8
 	call Func_216f
 	ld a, $d
@@ -147,7 +145,7 @@ Func_5345: ; 5345
 	cp $fe
 	jr z, .asm_5415
 	dec hl
-	ld de, $d148
+	ld de, wd148
 	ld c, $a
 .asm_5427
 	ld a, [hli]
@@ -158,7 +156,7 @@ Func_5345: ; 5345
 	dec c
 	jr nz, .asm_5427
 .asm_5431
-	ld hl, $d896
+	ld hl, wd896
 .asm_5434
 	ld a, [hli]
 	and a
@@ -168,7 +166,7 @@ Func_5345: ; 5345
 	cp $fe
 	jr z, .asm_5434
 	dec hl
-	ld de, W_GRASSRATE ; $d887
+	ld de, W_GRASSRATE ; W_GRASSRATE
 	ld c, $b
 .asm_5446
 	ld a, [hli]
@@ -178,7 +176,7 @@ Func_5345: ; 5345
 	inc de
 	dec c
 	jr nz, .asm_5446
-	ld de, wEnemyPartyCount ; $d89c
+	ld de, wEnemyPartyCount ; wEnemyPartyCount
 	ld bc, $194
 .asm_5456
 	ld a, [hli]
@@ -191,7 +189,7 @@ Func_5345: ; 5345
 	or c
 	jr nz, .asm_5456
 	ld de, wTileMapBackup
-	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	ld hl, wPartyMons
 	ld c, $2
 .asm_546a
 	ld a, [de]
@@ -206,7 +204,7 @@ Func_5345: ; 5345
 	jr z, .asm_5489
 	push hl
 	push bc
-	ld b, $0
+	ld b, 0
 	dec a
 	ld c, a
 	add hl, bc
@@ -216,11 +214,11 @@ Func_5345: ; 5345
 	pop hl
 	jr .asm_546a
 .asm_5489
-	ld hl, W_PARTYMON6DATA + W_PARTYMON1_MOVE4PP - W_PARTYMON1DATA ; $d267
+	ld hl, wPartyMons + $fc ; wd267
 	dec c
 	jr nz, .asm_546a
-	ld de, $c5d0
-	ld hl, W_WATERRATE ; $d8a4
+	ld de, wTileMapBackup + 200
+	ld hl, wEnemyMons
 	ld c, $2
 .asm_5497
 	ld a, [de]
@@ -245,38 +243,36 @@ Func_5345: ; 5345
 	pop hl
 	jr .asm_5497
 .asm_54b6
-	ld hl, $d9a0
+	ld hl, wEnemyMons + $fc
 	dec c
 	jr nz, .asm_5497
 	ld a, $ac
-	ld [$cf8d], a
+	ld [wcf8d], a
 	ld a, $d9
-	ld [$cf8e], a
+	ld [wcf8e], a
 	xor a
-	ld [$cc38], a
+	ld [wcc38], a
 	ld a, $ff
 	call PlaySound
 	ld a, [$ffaa]
 	cp $2
 	ld c, $42
 	call z, DelayFrames
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $3
 	ld a, $32
-	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	jr nz, .asm_5506
 	ld a, $4
-	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	ld a, SONY1 + $c8
-	ld [W_CUROPPONENT], a ; $d059
+	ld [W_CUROPPONENT], a ; wd059
 	call ClearScreen
 	call Delay3
-	ld hl, W_OPTIONS ; $d355
+	ld hl, W_OPTIONS ; W_OPTIONS
 	res 7, [hl]
-	ld a, $2c
-	call Predef ; indirect jump to InitOpponent (3ef18 (f:6f18))
-	ld a, $7
-	call Predef ; indirect jump to HealParty (f6a5 (3:76a5))
+	predef InitOpponent
+	predef HealParty
 	jp Func_577d
 .asm_5506
 	ld c, BANK(Music_GameCorner)
@@ -290,7 +286,7 @@ PleaseWaitString: ; 550f (1:550f)
 Func_551c:
 	ld hl, PointerTable_5a5b ; $5a5b
 	ld b, $0
-	ld a, [$cc38]
+	ld a, [wcc38]
 	cp $ff
 	jp z, LoadTitlescreenGraphics
 	add a
@@ -307,31 +303,31 @@ TradeCenter_SelectMon:
 	call Func_57f2
 	call Func_57a2
 	xor a
-	ld hl, $cc3d
+	ld hl, wcc3d
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [$cc37], a
-	ld [$cc26], a
-	ld [$cc2a], a
-	ld [$cc34], a
+	ld [wcc37], a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	ld [wMenuJoypadPollCount], a
 	inc a
-	ld [$cc42], a
+	ld [wcc42], a
 	jp .asm_55dc
 .asm_5557
 	xor a
-	ld [$cc37], a
+	ld [wcc37], a
 	inc a
-	ld [$cc49], a
+	ld [wcc49], a
 	ld a, $a1
-	ld [$cc29], a
-	ld a, [$d89c]
-	ld [$cc28], a
+	ld [wMenuWatchedKeys], a
+	ld a, [wEnemyPartyCount]
+	ld [wMaxMenuItem], a
 	ld a, $9
-	ld [$cc24], a
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [$cc25], a
+	ld [wTopMenuItemX], a
 .asm_5574
 	ld hl, $fff6
 	set 1, [hl]
@@ -342,17 +338,17 @@ TradeCenter_SelectMon:
 	jp z, .asm_565b
 	bit 0, a
 	jr z, .asm_55b0 ; 0x5587 $27
-	ld a, [$cc28]
+	ld a, [wMaxMenuItem]
 	ld c, a
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	cp c
 	jr c, .asm_559a ; 0x5591 $7
-	ld a, [$cc28]
+	ld a, [wMaxMenuItem]
 	dec a
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 .asm_559a
 	ld a, $1
-	ld [$d11b], a
+	ld [wd11b], a
 	callab Func_39bd5
 	ld hl, wEnemyMons
 	call Func_57d6
@@ -361,20 +357,20 @@ TradeCenter_SelectMon:
 	bit 5, a
 	jr z, .asm_55d4 ; 0x55b2 $20
 	xor a
-	ld [$cc49], a
-	ld a, [$cc30]
+	ld [wcc49], a
+	ld a, [wMenuCursorLocation]
 	ld l, a
-	ld a, [$cc31]
+	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld a, [$cc27]
+	ld a, [wTileBehindCursor]
 	ld [hl], a
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [$d163]
+	ld a, [wPartyCount]
 	dec a
 	cp b
 	jr nc, .asm_55dc ; 0x55cd $d
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 	jr .asm_55dc ; 0x55d2 $8
 .asm_55d4
 	bit 7, a
@@ -382,17 +378,17 @@ TradeCenter_SelectMon:
 	jp .asm_572f
 .asm_55dc
 	xor a
-	ld [$cc49], a
-	ld [$cc37], a
+	ld [wcc49], a
+	ld [wcc37], a
 	ld a, $91
-	ld [$cc29], a
-	ld a, [$d163]
-	ld [$cc28], a
+	ld [wMenuWatchedKeys], a
+	ld a, [wPartyCount]
+	ld [wMaxMenuItem], a
 	ld a, $1
-	ld [$cc24], a
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [$cc25], a
-	ld hl, $c3b5
+	ld [wTopMenuItemX], a
+	ld hl, wTileMap + $15
 	ld bc, $0601
 	call ClearScreenArea
 .asm_5601
@@ -409,7 +405,7 @@ TradeCenter_SelectMon:
 	jr z, .asm_562e ; 0x5616 $16
 	jp .asm_5665
 	ld a, $4
-	ld [$d11b], a
+	ld [wd11b], a
 	callab Func_39bd5
 	call Func_57d6
 	jp .asm_565b
@@ -417,20 +413,20 @@ TradeCenter_SelectMon:
 	bit 4, a
 	jr z, .asm_5654 ; 0x5630 $22
 	ld a, $1
-	ld [$cc49], a
-	ld a, [$cc30]
+	ld [wcc49], a
+	ld a, [wMenuCursorLocation]
 	ld l, a
-	ld a, [$cc31]
+	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld a, [$cc27]
+	ld a, [wTileBehindCursor]
 	ld [hl], a
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [$d89c]
+	ld a, [wEnemyPartyCount]
 	dec a
 	cp b
 	jr nc, .asm_5651 ; 0x564c $3
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 .asm_5651
 	jp .asm_5557
 .asm_5654
@@ -438,43 +434,43 @@ TradeCenter_SelectMon:
 	jr z, .asm_565b ; 0x5656 $3
 	jp .asm_572f
 .asm_565b
-	ld a, [$cc49]
+	ld a, [wcc49]
 	and a
 	jp z, .asm_5601
 	jp .asm_5574
 .asm_5665
 	call SaveScreenTilesToBuffer1
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [$cc28]
+	ld a, [wMaxMenuItem]
 	ld c, a
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	cp c
 	jr c, .asm_5679 ; 0x5673 $4
-	ld a, [$cc28]
+	ld a, [wMaxMenuItem]
 	dec a
 .asm_5679
 	push af
-	ld hl, $c4b8
+	ld hl, wTileMap + $118
 	ld b, $2
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c4e2
+	ld hl, wTileMap + $142
 	ld de, .statsTrade
 	call PlaceString
 	xor a
-	ld [$cc26], a
-	ld [$cc2a], a
-	ld [$cc34], a
-	ld [$cc28], a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	ld [wMenuJoypadPollCount], a
+	ld [wMaxMenuItem], a
 	ld a, $10
-	ld [$cc24], a
+	ld [wTopMenuItemY], a
 .asm_569f
 	ld a, $7f
-	ld [$c4eb], a
+	ld [wTileMap + $14b], a
 	ld a, $13
-	ld [$cc29], a
+	ld [wMenuWatchedKeys], a
 	ld a, $1
-	ld [$cc25], a
+	ld [wTopMenuItemX], a
 	call HandleMenuInput
 	bit 4, a
 	jr nz, .asm_56c3 ; 0x56b3 $e
@@ -482,16 +478,16 @@ TradeCenter_SelectMon:
 	jr z, .asm_56df ; 0x56b7 $26
 .asm_56b9
 	pop af
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 	call LoadScreenTilesFromBuffer1
 	jp .asm_55dc
 .asm_56c3
 	ld a, $7f
-	ld [$c4e1], a
+	ld [wTileMap + $141], a
 	ld a, $23
-	ld [$cc29], a
+	ld [wMenuWatchedKeys], a
 	ld a, $b
-	ld [$cc25], a
+	ld [wTopMenuItemX], a
 	call HandleMenuInput
 	bit 5, a
 	jr nz, .asm_569f ; 0x56d7 $c6
@@ -500,9 +496,9 @@ TradeCenter_SelectMon:
 	jr .asm_56f9 ; 0x56dd $1a
 .asm_56df
 	pop af
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 	ld a, $4
-	ld [$d11b], a
+	ld [wd11b], a
 	callab Func_39bd5
 	call Func_57d6
 	call LoadScreenTilesFromBuffer1
@@ -510,37 +506,37 @@ TradeCenter_SelectMon:
 .asm_56f9
 	call PlaceUnfilledArrowMenuCursor
 	pop af
-	ld [$cc26], a
-	ld [$cd3d], a
-	ld [$cc42], a
+	ld [wCurrentMenuItem], a
+	ld [wWhichTrade], a
+	ld [wcc42], a
 	call Func_226e
-	ld a, [$cc3d]
+	ld a, [wcc3d]
 	cp $f
 	jp z, Func_551c
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	call Func_57c7
 	ld a, $1
-	ld [$cc38], a
+	ld [wcc38], a
 	jp Func_551c
 .statsTrade
 	db "STATS     TRADE@"
 .asm_572f
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [$cc28]
+	ld a, [wMaxMenuItem]
 	cp b
 	jp nz, .asm_565b
-	ld a, [$cc30]
+	ld a, [wMenuCursorLocation]
 	ld l, a
-	ld a, [$cc31]
+	ld a, [wMenuCursorLocation + 1]
 	ld h, a
 	ld a, $7f
 	ld [hl], a
 .asm_5745
 	ld a, $ed
-	ld [$c4e1], a
+	ld [wTileMap + $141], a
 .asm_574a
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	and a
 	jr z, .asm_574a ; 0x5750 $f8
@@ -549,32 +545,32 @@ TradeCenter_SelectMon:
 	bit 6, a
 	jr z, .asm_574a ; 0x5758 $f0
 	ld a, $7f
-	ld [$c4e1], a
-	ld a, [$d163]
+	ld [wTileMap + $141], a
+	ld a, [wPartyCount]
 	dec a
-	ld [$cc26], a
+	ld [wCurrentMenuItem], a
 	jp .asm_55dc
 .asm_5769
 	ld a, $ec
-	ld [$c4e1], a
+	ld [wTileMap + $141], a
 	ld a, $f
-	ld [$cc42], a
+	ld [wcc42], a
 	call Func_226e
-	ld a, [$cc3d]
+	ld a, [wcc3d]
 	cp $f
 	jr nz, .asm_5745 ; 0x577b $c8
 
 Func_577d: ; 577d (1:577d)
 	call GBPalWhiteOutWithDelay3
-	ld hl, $cfc4
+	ld hl, wcfc4
 	ld a, [hl]
 	push af
 	push hl
 	res 0, [hl]
 	xor a
-	ld [$d72d], a
+	ld [wd72d], a
 	dec a
-	ld [$d42f], a
+	ld [wd42f], a
 	call LoadMapData
 	callba Func_c335
 	pop hl
@@ -584,15 +580,15 @@ Func_577d: ; 577d (1:577d)
 	ret
 
 Func_57a2:
-	ld hl, $c4d7
+	ld hl, wTileMap + $137
 	ld a, $7e
 	ld bc, $0031
 	call FillMemory
-	ld hl, $c4cc
+	ld hl, wTileMap + $12c
 	ld b, $1
 	ld c, $9
 	call Func_5ab3
-	ld hl, $c4e2
+	ld hl, wTileMap + $142
 	ld de, CancelTextString
 	jp PlaceString
 
@@ -600,20 +596,18 @@ CancelTextString:
 	db "CANCEL@"
 
 Func_57c7:
-	ld a, [$cc3d]
-	ld hl, $c455
+	ld a, [wcc3d]
+	ld hl, wTileMap + $b5
 	ld bc, $0014
 	call AddNTimes
 	ld [hl], $ec
 	ret
 
 Func_57d6:
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
-	ld a, $36
-	call Predef
-	ld a, $37
-	call Predef
+	predef StatusScreen
+	predef StatusScreen2
 	call GBPalNormal
 	call LoadTrainerInfoTextBoxTiles
 	call Func_57f2
@@ -624,21 +618,21 @@ Func_57f2:
 	ld b, $6
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c440
+	ld hl, wTileMap + $a0
 	ld b, $6
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c3a5
-	ld de, W_PLAYERNAME
+	ld hl, wTileMap + $5
+	ld de, wPlayerName
 	call PlaceString
-	ld hl, $c445
-	ld de, $d887
+	ld hl, wTileMap + $a5
+	ld de, W_GRASSRATE
 	call PlaceString
-	ld hl, $c3b6
-	ld de, $d164
+	ld hl, wTileMap + $16
+	ld de, wPartySpecies
 	call Func_5827
-	ld hl, $c456
-	ld de, $d89d
+	ld hl, wTileMap + $b6
+	ld de, wEnemyPartyMons
 
 Func_5827:
 	ld c, $0
@@ -646,7 +640,7 @@ Func_5827:
 	ld a, [de]
 	cp $ff
 	ret z
-	ld [$d11e], a
+	ld [wd11e], a
 	push bc
 	push hl
 	push de
@@ -669,170 +663,168 @@ TradeCenter_Trade:
 	ld c, $64
 	call DelayFrames
 	xor a
-	ld [$cc43], a
-	ld [$cc3e], a
-	ld [$cc37], a
-	ld [$cc34], a
-	ld hl, $c490
+	ld [wcc43], a
+	ld [wcc3e], a
+	ld [wcc37], a
+	ld [wMenuJoypadPollCount], a
+	ld hl, wTileMap + $f0
 	ld b, $4
 	ld c, $12
 	call Func_5ab3
-	ld a, [$cd3d]
-	ld hl, $d164
+	ld a, [wWhichTrade]
+	ld hl, wPartySpecies
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMonName
-	ld hl, $cd6d
-	ld de, $cd3f
+	ld hl, wcd6d
+	ld de, wTrainerFacingDirection
 	ld bc, $000b
 	call CopyData
-	ld a, [$cd3e]
-	ld hl, $d89d
+	ld a, [wTrainerEngageDistance]
+	ld hl, wEnemyPartyMons
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMonName
 	ld hl, WillBeTradedText
-	ld bc, $c4b9
+	ld bc, wTileMap + $119
 	call TextCommandProcessor
 	call SaveScreenTilesToBuffer1
-	ld hl, $c436
+	ld hl, wTileMap + $96
 	ld bc, $080b
 	ld a, $5
-	ld [$d12c], a
+	ld [wd12c], a
 	ld a, $14
-	ld [$d125], a
+	ld [wd125], a
 	call DisplayTextBoxID
 	call LoadScreenTilesFromBuffer1
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .asm_58d9 ; 0x58b9 $1e
 	ld a, $1
-	ld [$cc42], a
-	ld hl, $c490
+	ld [wcc42], a
+	ld hl, wTileMap + $f0
 	ld b, $4
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c4b9
+	ld hl, wTileMap + $119
 	ld de, TradeCanceled
 	call PlaceString
 	call Func_226e
 	jp Func_5a18
 .asm_58d9
 	ld a, $2
-	ld [$cc42], a
+	ld [wcc42], a
 	call Func_226e
-	ld a, [$cc3d]
+	ld a, [wcc3d]
 	dec a
 	jr nz, .asm_58fd ; 0x58e5 $16
-	ld hl, $c490
+	ld hl, wTileMap + $f0
 	ld b, $4
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c4b9
+	ld hl, wTileMap + $119
 	ld de, TradeCanceled
 	call PlaceString
 	jp Func_5a18
 .asm_58fd
-	ld a, [$cd3d]
-	ld hl, W_PARTYMON1OT ; OT names of player
+	ld a, [wWhichTrade]
+	ld hl, wPartyMonOT ; OT names of player
 	call SkipFixedLengthTextEntries
-	ld de, $cd41
+	ld de, wTrainerScreenX
 	ld bc, $000b
 	call CopyData
-	ld hl, $d16b
-	ld a, [$cd3d]
+	ld hl, wPartyMon1Species
+	ld a, [wWhichTrade]
 	ld bc, $002c
 	call AddNTimes
 	ld bc, $000c
 	add hl, bc
 	ld a, [hli]
-	ld [$cd4c], a
+	ld [wcd4c], a
 	ld a, [hl]
-	ld [$cd4d], a
-	ld a, [$cd3e]
-	ld hl, W_ENEMYMON1OT ; OT names of other player
+	ld [wcd4d], a
+	ld a, [wTrainerEngageDistance]
+	ld hl, wEnemyMonOT ; OT names of other player
 	call SkipFixedLengthTextEntries
-	ld de, $cd4e
+	ld de, wcd4e
 	ld bc, $000b
 	call CopyData
 	ld hl, wEnemyMons
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld bc, $002c
 	call AddNTimes
 	ld bc, $000c
 	add hl, bc
 	ld a, [hli]
-	ld [$cd59], a
+	ld [wcd59], a
 	ld a, [hl]
-	ld [$cd5a], a
-	ld a, [$cd3d]
+	ld [wcd5a], a
+	ld a, [wWhichTrade]
 	ld [wWhichPokemon], a
-	ld hl, $d164
+	ld hl, wPartySpecies
 	ld b, $0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	xor a
-	ld [$cf95], a
+	ld [wcf95], a
 	call RemovePokemon
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld c, a
 	ld [wWhichPokemon], a
-	ld hl, $d89d
+	ld hl, wEnemyPartyMons
 	ld d, $0
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [$cf91], a
+	ld [wcf91], a
 	ld hl, wEnemyMons
 	ld a, c
 	ld bc, $002c
 	call AddNTimes
-	ld de, $cf98
+	ld de, wcf98
 	ld bc, $002c
 	call CopyData
 	call AddEnemyMonToPlayerParty
-	ld a, [$d163]
+	ld a, [wPartyCount]
 	dec a
 	ld [wWhichPokemon], a
 	ld a, $1
-	ld [$ccd4], a
-	ld a, [$cd3e]
-	ld hl, $d89d
+	ld [wccd4], a
+	ld a, [wTrainerEngageDistance]
+	ld hl, wEnemyPartyMons
 	ld b, $0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, $a
 	ld [wMusicHeaderPointer], a
 	ld a, $2
-	ld [$c0f0], a
+	ld [wc0f0], a
 	ld a, MUSIC_SAFARI_ZONE
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	ld c, $64
 	call DelayFrames
 	call ClearScreen
 	call LoadHpBarAndStatusTilePatterns
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 	ld a, [$ffaa]
 	cp $1
 	jr z, .asm_59d9 ; 0x59d0 $7
-	ld a, $38
-	call Predef
+	predef Func_410e2
 	jr .asm_59de ; 0x59d7 $5
 .asm_59d9
-	ld a, $2f
-	call Predef
+	predef Func_410f3
 .asm_59de
 	callab Func_3ad0e
 	call ClearScreen
@@ -840,26 +832,25 @@ TradeCenter_Trade:
 	call Func_226e
 	ld c, $28
 	call DelayFrames
-	ld hl, $c490
+	ld hl, wTileMap + $f0
 	ld b, $4
 	ld c, $12
 	call Func_5ab3
-	ld hl, $c4b9
+	ld hl, wTileMap + $119
 	ld de, TradeCompleted
 	call PlaceString
-	ld a, $50
-	call Predef
+	predef SaveSAVtoSRAM2
 	ld c, $32
 	call DelayFrames
 	xor a
-	ld [$cc38], a
+	ld [wcc38], a
 	jp Func_5345
 
 Func_5a18:
 	ld c, $64
 	call DelayFrames
 	xor a
-	ld [$cc38], a
+	ld [wcc38], a
 	jp Func_551c
 
 WillBeTradedText: ; 5a24 (1:5a24)
@@ -878,48 +869,47 @@ PointerTable_5a5b: ; 5a5b (1:5a5b)
 	dw TradeCenter_Trade
 
 Func_5a5f: ; 5a5f (1:5a5f)
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
 	cp $2
 	jr z, .asm_5a75
 	cp $3
 	jr z, .asm_5a75
 	cp $5
 	ret nz
-	ld a, $4d
-	call Predef ; indirect jump to Func_5aaf (5aaf (1:5aaf))
-	jp InitGame
+	predef Func_5aaf
+	jp Init
 .asm_5a75
 	call Func_5317
 	ld hl, Club_GFX
 	ld a, h
-	ld [$d52f], a
+	ld [W_TILESETGFXPTR + 1], a
 	ld a, l
-	ld [$d52e], a
+	ld [W_TILESETGFXPTR], a
 	ld a, Bank(Club_GFX)
-	ld [$d52b], a
+	ld [W_TILESETBANK], a
 	ld hl, Club_Coll
 	ld a, h
-	ld [$d531], a
+	ld [W_TILESETCOLLISIONPTR + 1], a
 	ld a, l
-	ld [$d530], a
+	ld [W_TILESETCOLLISIONPTR], a
 	xor a
-	ld [W_GRASSRATE], a ; $d887
+	ld [W_GRASSRATE], a ; W_GRASSRATE
 	inc a
-	ld [W_ISLINKBATTLE], a ; $d12b
+	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	ld [$ffb5], a
 	ld a, $a
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)
-	ld [$c0f0], a
+	ld [wc0f0], a
 	ld a, MUSIC_CELADON
-	ld [$c0ee], a
+	ld [wc0ee], a
 	jp PlaySound
 
 Func_5aaf: ; 5aaf (1:5aaf)
 	ret
 
 Func_5ab0:
-	call Load16BitRegisters
+	call GetPredefRegisters
 
 Func_5ab3: ; 5ab3 (1:5ab3)
 	push hl

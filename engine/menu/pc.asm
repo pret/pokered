@@ -74,7 +74,7 @@ BillsPC: ; 17ee4 (5:7ee4)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
 	call PlaySound    ;XXX: play sound or stop music
 	call WaitForSoundToFinish    ;XXX: wait for sound to be done
-	ld a, [$D7F1] ;has to do with having met Bill
+	ld a, [wd7f1] ;has to do with having met Bill
 	bit 0, a
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
 	ld hl, AccessedSomeonesPCText
@@ -86,7 +86,7 @@ BillsPC: ; 17ee4 (5:7ee4)
 	callba BillsPC_
 ReloadMainMenu: ; 17f06 (5:7f06)
 	xor a
-	ld [$CC3C], a
+	ld [wcc3c], a
 	call ReloadMapData
 	call UpdateSprites  ;XXX: moves sprites
 	jp PCMainMenu
@@ -117,7 +117,7 @@ AccessedMyPCText: ; 17f32 (5:7f32)
 
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
-	ld hl, wBagItems ; $d31e
+	ld hl, wBagItems ; wd31e
 	ld a, [$ffdb]
 	ld b, a
 	xor a
@@ -135,8 +135,8 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	jr .asm_17f40
 .asm_17f4f
 	ld a, $1
-	ld [$cf96], a
+	ld [wcf96], a
 	ld a, [$ffdc]
-	ld [wWhichPokemon], a ; $cf92
-	ld hl, wNumBagItems ; $d31d
+	ld [wWhichPokemon], a ; wWhichPokemon
+	ld hl, wNumBagItems ; wNumBagItems
 	jp RemoveItemFromInventory

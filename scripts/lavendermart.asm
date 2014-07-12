@@ -12,7 +12,7 @@ LavenderMartText2: ; 5c935 (17:4935)
 
 LavenderMartText3: ; 5c93a (17:493a)
 	db $08 ; asm
-	ld a, [$d7e0]
+	ld a, [wd7e0]
 	bit 7, a
 	jr nz, .asm_c88d4 ; 0x5c940
 	ld hl, LavenderMart_5c953

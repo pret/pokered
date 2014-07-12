@@ -1,4 +1,4 @@
-ZoneMonsCenter: 
+ZoneMonsCenter:
 	db $1E
 	IF _RED
 		db 22,NIDORAN_M
@@ -12,7 +12,7 @@ ZoneMonsCenter:
 		db 23,SCYTHER
 		db 23,CHANSEY
 	ENDC
-	
+
 	IF _GREEN || (!_JAPAN && _BLUE)
 		db 22,NIDORAN_F
 		db 25,RHYHORN
@@ -25,7 +25,7 @@ ZoneMonsCenter:
 		db 23,PINSIR
 		db 23,CHANSEY
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 22,NIDORAN_M
 		db 25,RHYHORN
@@ -38,7 +38,7 @@ ZoneMonsCenter:
 		db 23,SCYTHER
 		db 23,CHANSEY
 	ENDC
-	
+
 	IF _YELLOW
 		db 14,NIDORAN_M
 		db 36,NIDORAN_F
@@ -51,6 +51,6 @@ ZoneMonsCenter:
 		db 22,TANGELA
 		db 7,CHANSEY
 	ENDC
-	
+
 	db $00
 

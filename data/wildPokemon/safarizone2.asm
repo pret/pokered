@@ -1,4 +1,4 @@
-ZoneMons2: 
+ZoneMons2:
 	db $1E
 	IF !_YELLOW
 		IF _RED || (_JAPAN && _BLUE)
@@ -32,7 +32,7 @@ ZoneMons2:
 			db 28,PINSIR
 		ENDC
 	ENDC
-	
+
 	IF _YELLOW
 		db 36,NIDORAN_M
 		db 14,NIDORAN_F
@@ -45,6 +45,6 @@ ZoneMons2:
 		db 25,SCYTHER
 		db 15,PINSIR
 	ENDC
-	
+
 	db $00
 

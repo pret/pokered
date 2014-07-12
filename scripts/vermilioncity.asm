@@ -1,6 +1,6 @@
 VermilionCityScript: ; 197a1 (6:57a1)
 	call EnableAutoTextBoxDrawing
-	ld hl, $d126
+	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
 	push hl
@@ -14,14 +14,14 @@ VermilionCityScript: ; 197a1 (6:57a1)
 	jp CallFunctionInTable
 
 VermilionCityScript_197c0: ; 197c0 (6:57c0)
-	call GenRandom
+	call Random
 	ld a, [$ffd4]
 	and $e
-	ld [$d743], a
+	ld [wd743], a
 	ret
 
 VermilionCityScript_197cb: ; 197cb (6:57cb)
-	ld hl, $d803
+	ld hl, wd803
 	bit 2, [hl]
 	ret z
 	bit 3, [hl]
@@ -39,32 +39,31 @@ VermilionCityScriptPointers: ; 197dc (6:57dc)
 	dw VermilionCityScript4
 
 VermilionCityScript0: ; 197e6 (6:57e6)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	and a
 	ret nz
 	ld hl, CoordsData_19823
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld [$cf0d], a
+	ld [hJoyHeld], a
+	ld [wcf0d], a
 	ld a, $3
 	ld [$ff8c], a
 	call DisplayTextID
-	ld a, [$d803]
+	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_19810 ; 0x19804 $a
 	ld b, $3f
-	ld a, $1c
-	call Predef
+	predef IsItemInBag_ 
 	ld a, b
 	and a
 	ret nz
 .asm_19810
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $1
 	ld [W_VERMILIONCITYCURSCRIPT], a
@@ -84,30 +83,30 @@ VermilionCityScript4: ; 19826 (6:5826)
 
 VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $40
-	ld [$ccd3], a
-	ld [$ccd4], a
+	ld [wccd3], a
+	ld [wccd4], a
 	ld a, $2
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $3
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
 
 VermilionCityScript3: ; 1984e (6:584e)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [wJoyIgnore], a
+	ld [hJoyHeld], a
 	ld a, $0
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
 
 VermilionCityScript1: ; 1985f (6:585f)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld c, $a
@@ -137,7 +136,7 @@ VermilionCityText1: ; 19889 (6:5889)
 
 VermilionCityText2: ; 1988e (6:588e)
 	db $08 ; asm
-	ld a, [$d803]
+	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_359bd ; 0x19894
 	ld hl, VermilionCityText_198a7
@@ -159,10 +158,10 @@ VermilionCityText_198ac: ; 198ac (6:58ac)
 
 VermilionCityText3: ; 198b1 (6:58b1)
 	db $08 ; asm
-	ld a, [$d803]
+	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_3e0e9 ; 0x198b7
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $c
 	jr z, .asm_07af3 ; 0x198be
 	ld hl, VermilionCityCoords1
@@ -176,8 +175,7 @@ VermilionCityText3: ; 198b1 (6:58b1)
 	ld hl, SSAnneWelcomeText9
 	call PrintText
 	ld b, S_S__TICKET
-	ld a, $1c
-	call Predef
+	predef IsItemInBag_ 
 	ld a, b
 	and a
 	jr nz, .asm_0419b ; 0x198df

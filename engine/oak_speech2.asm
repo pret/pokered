@@ -2,20 +2,20 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Func_6a12
 	ld de, DefaultNamesPlayer ; $6aa8
 	call DisplayIntroNameTextBox
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr z, .asm_697a
 	ld hl, DefaultNamesPlayerList ; $6af2
 	call Func_6ad6
-	ld de, W_PLAYERNAME ; $d158
+	ld de, wPlayerName ; wd158
 	call Func_69ec
 	jr .asm_6999
 .asm_697a
-	ld hl, W_PLAYERNAME ; $d158
+	ld hl, wPlayerName ; wd158
 	xor a
-	ld [$d07d], a
+	ld [wd07d], a
 	call DisplayNamingScreen
-	ld a, [$cf4b]
+	ld a, [wcf4b]
 	cp $50
 	jr z, .asm_697a
 	call ClearScreen
@@ -35,20 +35,20 @@ LoadDefaultNamesRival: ; 69a4 (1:69a4)
 	call Func_6a12 ; 0x69a4 call 0x6a12
 	ld de, DefaultNamesRival
 	call DisplayIntroNameTextBox
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr z, .asm_69c1
 	ld hl, DefaultNamesRivalList
 	call Func_6ad6
-	ld de, W_RIVALNAME ; $d34a
+	ld de, W_RIVALNAME ; wd34a
 	call Func_69ec
 	jr .asm_69e1
 .asm_69c1
-	ld hl, W_RIVALNAME ; $d34a
+	ld hl, W_RIVALNAME ; wd34a
 	ld a, $1
-	ld [$d07d], a
+	ld [wd07d], a
 	call DisplayNamingScreen
-	ld a, [$cf4b]
+	ld a, [wcf4b]
 	cp $50
 	jr z, .asm_69c1
 	call ClearScreen
@@ -72,19 +72,17 @@ Func_69ec: ; 69ec (1:69ec)
 	ld c, $a
 	call DelayFrames
 	pop de
-	ld hl, $cd6d
+	ld hl, wcd6d
 	ld bc, $b
 	call CopyData
 	call Delay3
-	FuncCoord 12, 4 ; $c3fc
-	ld hl, Coord
+	hlCoord 12, 4
 	ld de, $67d
 	ld a, $ff
 	jr asm_6a19
 
 Func_6a12: ; 6a12 (1:6a12)
-	FuncCoord 5, 4 ; $c3f5
-	ld hl, Coord
+	hlCoord 5, 4
 	ld de, $67d
 	xor a
 asm_6a19: ; 6a19 (1:6a19)
@@ -161,25 +159,23 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	FuncCoord 3, 0 ; $c3a3
-	ld hl, Coord
+	hlCoord 3, 0
 	ld de, .namestring ; $6aa3
 	call PlaceString
 	pop de
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
+	hlCoord 2, 2
 	call PlaceString
 	call UpdateSprites
 	xor a
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wLastMenuItem], a ; wLastMenuItem
 	inc a
-	ld [wTopMenuItemX], a ; $cc25
-	ld [wMenuWatchedKeys], a ; $cc29
+	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
 	inc a
-	ld [wTopMenuItemY], a ; $cc24
+	ld [wTopMenuItemY], a ; wTopMenuItemY
 	inc a
-	ld [wMaxMenuItem], a ; $cc28
+	ld [wMaxMenuItem], a ; wMaxMenuItem
 	jp HandleMenuInput
 
 .namestring ; 6aa3 (1:6aa3)
@@ -235,7 +231,7 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 .asm_6ae7
 	ld h, d
 	ld l, e
-	ld de, $cd6d
+	ld de, wcd6d
 	ld bc, $14
 	jp CopyData
 IF _RED

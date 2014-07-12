@@ -1,4 +1,4 @@
-Route22Mons: 
+Route22Mons:
 	db $19
 	IF _RED || (_JAPAN && _BLUE)
 		db 3,RATTATA

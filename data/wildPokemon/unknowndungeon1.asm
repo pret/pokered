@@ -1,4 +1,4 @@
-DungeonMons1: 
+DungeonMons1:
 	db $0A
 	IF !_YELLOW
 		db 46,GOLBAT
@@ -22,7 +22,7 @@ DungeonMons1:
 		db 53,RAICHU
 		db 53,DITTO
 	ENDC
-	
+
 	IF _YELLOW
 		db 50,GOLBAT
 		db 55,GOLBAT
@@ -35,6 +35,6 @@ DungeonMons1:
 		db 55,DITTO
 		db 60,DITTO
 	ENDC
-	
+
 	db $00
 

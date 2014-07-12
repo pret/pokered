@@ -1,6 +1,6 @@
-Route9Mons: 
+Route9Mons:
 	db $0F
-	
+
 	IF _RED
 		db 16,RATTATA
 		db 16,SPEAROW
@@ -13,7 +13,7 @@ Route9Mons:
 		db 13,EKANS
 		db 17,EKANS
 	ENDC
-	
+
 	IF !_RED && !_YELLOW
 		db 16,RATTATA
 		db 16,SPEAROW
@@ -26,7 +26,7 @@ Route9Mons:
 		db 13,SANDSHREW
 		db 17,SANDSHREW
 	ENDC
-	
+
 	IF _YELLOW
 		db 16,NIDORAN_M
 		db 16,NIDORAN_F
@@ -39,6 +39,6 @@ Route9Mons:
 		db 20,RATICATE
 		db 19,FEAROW
 	ENDC
-	
+
 	db $00
 

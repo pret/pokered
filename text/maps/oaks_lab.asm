@@ -51,7 +51,7 @@ _OaksLabMonEnergeticText:: ; 94e80 (25:4e80)
 _OaksLabReceivedMonText:: ; 94ea0 (25:4ea0)
 	text $52, " received"
 	line "a @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!@@"
 
 _OaksLabLastMonText:: ; 94eb6 (25:4eb6)
@@ -240,7 +240,7 @@ _OaksLabRivalPickingMonText:: ; 95444 (25:5444)
 _OaksLabRivalReceivedMonText:: ; 95461 (25:5461)
 	text $53, " received"
 	line "a @"
-	TX_RAM $cd6d
+	TX_RAM wcd6d
 	text "!@@"
 
 _OaksLabRivalChallengeText:: ; 95477 (25:5477)

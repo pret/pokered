@@ -1,6 +1,6 @@
-TowerMons7: 
+TowerMons7:
 	db $0F
-	
+
 	IF !_YELLOW
 		db 21,GASTLY
 		db 22,GASTLY
@@ -14,7 +14,7 @@ TowerMons7:
 		db 30,HAUNTER
 
 	ENDC
-	
+
 	IF _YELLOW
 		db 24,GASTLY
 		db 25,GASTLY
@@ -27,6 +27,6 @@ TowerMons7:
 		db 24,HAUNTER
 		db 29,HAUNTER
 	ENDC
-	
+
 	db $00
 

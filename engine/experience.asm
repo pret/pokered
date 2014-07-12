@@ -1,13 +1,13 @@
 Func_58f43: ; 58f43 (16:4f43)
-	ld a, [$cf98]
-	ld [$d0b5], a
+	ld a, [wcf98]
+	ld [wd0b5], a
 	call GetMonHeader
 	ld d, $1
 .asm_58f4e
 	inc d
 	call CalcExperience
 	push hl
-	ld hl, $cfa8
+	ld hl, wcfa8
 	ld a, [$ff98]
 	ld c, a
 	ld a, [hld]

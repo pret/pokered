@@ -1,7 +1,7 @@
 PrintNotebookText: ; 52996 (14:6996)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld a, [wTrainerSpriteOffset]
 	jp PrintPredefTextID
 
@@ -92,7 +92,7 @@ FightingDojoText: ; 52a2a (14:6a2a)
 	db "@"
 
 PrintIndigoPlateauHQText: ; 52a2f (14:6a2f)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ret nz
 	call EnableAutoTextBoxDrawing

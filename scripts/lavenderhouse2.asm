@@ -15,7 +15,7 @@ LavenderHouse2Text1: ; 1d9b6 (7:59b6)
 
 LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 	db $08 ; asm
-	ld a, [$d7e0]
+	ld a, [wd7e0]
 	bit 7, a
 	jr nz, .asm_65711 ; 0x1d9c9
 	ld hl, LavenderHouse2Text_1d9dc

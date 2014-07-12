@@ -1,18 +1,16 @@
 HandleLedges: ; 1a672 (6:6672)
-	ld a, [$d736]
+	ld a, [wd736]
 	bit 6, a
 	ret nz
-	ld a, [W_CURMAPTILESET] ; $d367
+	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	and a ; OVERWORLD
 	ret nz
-	ld a, $35
-	call Predef ; indirect jump to Func_c586 (c586 (3:4586))
-	ld a, [$c109]
+	predef Func_c586
+	ld a, [wSpriteStateData1 + 9]
 	ld b, a
-	FuncCoord 8, 9 ; $c45c
-	ld a, [Coord]
+	aCoord 8, 9
 	ld c, a
-	ld a, [$cfc6]
+	ld a, [wcfc6]
 	ld d, a
 	ld hl, LedgeTiles ; $66cf
 .asm_1a691
@@ -38,19 +36,19 @@ HandleLedges: ; 1a672 (6:6672)
 	inc hl
 	jr .asm_1a691
 .asm_1a6a9
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff
-	ld [wJoypadForbiddenButtonsMask], a
-	ld hl, $d736
+	ld [wJoyIgnore], a
+	ld hl, wd736
 	set 6, [hl]
 	call Func_3486
 	ld a, e
-	ld [$ccd3], a
-	ld [$ccd4], a
+	ld [wccd3], a
+	ld [wccd4], a
 	ld a, $2
-	ld [$cd38], a
+	ld [wcd38], a
 	call LoadHoppingShadowOAM
 	ld a, (SFX_02_4e - SFX_Headers_02) / 3
 	call PlaySound
@@ -69,7 +67,7 @@ LedgeTiles: ; 1a6cf (6:66cf)
 	db $FF
 
 LoadHoppingShadowOAM: ; 1a6f0 (6:66f0)
-	ld hl, $8ff0
+	ld hl, vChars1 + $7f0
 	ld de, LedgeHoppingShadow ; $6708
 	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
 	call CopyVideoDataDouble

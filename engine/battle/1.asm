@@ -1,5 +1,5 @@
 DrainHPEffect_: ; 783f (1:783f)
-	ld hl, W_DAMAGE ; $d0d7
+	ld hl, W_DAMAGE ; W_DAMAGE
 	ld a, [hl]
 	srl a ; divide damage by 2
 	ld [hli], a
@@ -11,13 +11,13 @@ DrainHPEffect_: ; 783f (1:783f)
 	inc hl
 	inc [hl]
 .asm_784f
-	ld hl, W_PLAYERMONCURHP ; $d015
-	ld de, W_PLAYERMONMAXHP ; $d023
+	ld hl, wBattleMonHP ; wd015
+	ld de, wBattleMonMaxHP ; wd023
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_7861
-	ld hl, W_ENEMYMONCURHP ; $cfe6
-	ld de, W_ENEMYMONMAXHP ; $cff4
+	ld hl, wEnemyMonHP ; wEnemyMonHP
+	ld de, wEnemyMonMaxHP ; wEnemyMonMaxHP
 
 Func_7861: ; 7861 (1:7861)
 	ld bc, wHPBarOldHP+1
@@ -33,12 +33,12 @@ Func_7861: ; 7861 (1:7861)
 	ld a, [de]
 	dec bc
 	ld [bc], a
-	ld a, [$d0d8]
+	ld a, [wd0d8]
 	ld b, [hl]
 	add b
 	ld [hld], a
 	ld [wHPBarNewHP], a
-	ld a, [W_DAMAGE] ; $d0d7
+	ld a, [W_DAMAGE] ; W_DAMAGE
 	ld b, [hl]
 	adc b
 	ld [hli], a
@@ -67,28 +67,23 @@ Func_7861: ; 7861 (1:7861)
 .asm_789c
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	FuncCoord 10, 9 ; $c45e
-	ld hl, Coord
+	hlCoord 10, 9
 	ld a, $1
 	jr z, .asm_78aa
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
+	hlCoord 2, 2
 	xor a
 .asm_78aa
-	ld [wListMenuID], a ; $cf94
-	ld a, $48
-	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
-	ld a, $0
-	call Predef ; indirect jump to Func_3cd60 (3cd60 (f:4d60))
-	ld a, $49
-	call Predef ; indirect jump to Func_3cdec (3cdec (f:4dec))
+	ld [wListMenuID], a ; wListMenuID
+	predef UpdateHPBar2
+	predef Func_3cd60
+	predef Func_3cdec
 	callab ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld a, [W_PLAYERMOVEEFFECT] ; $cfd3
+	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	jr z, .asm_78d2
-	ld a, [W_ENEMYMOVEEFFECT] ; $cfcd
+	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
 .asm_78d2
 	cp DREAM_EATER_EFFECT
 	jr nz, .asm_78d9

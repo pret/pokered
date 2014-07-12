@@ -5,21 +5,21 @@ CopyFixedLengthText: ; 42b1 (1:42b1)
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld hl, NintenText
-	ld de, W_PLAYERNAME ; $d158
+	ld de, wPlayerName ; wd158
 	call CopyFixedLengthText
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; $d34a
+	ld de, W_RIVALNAME ; wd34a
 	call CopyFixedLengthText
 	xor a
 	ld [$ffb0], a
-	ld [$d358], a
-	ld hl, $d732
+	ld [wd358], a
+	ld hl, wd732
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, Bank(Func_7d8ea)
-	ld [$c0ef], a
-	ld [$c0f0], a
+	ld a, BANK(Music_TitleScreen)
+	ld [wc0ef], a
+	ld [wc0f0], a
 
 LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call GBPalWhiteOut
@@ -36,40 +36,39 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call DisableLCD
 	call LoadFontTilePatterns
 	ld hl, NintendoCopyrightLogoGraphics ; $60c8
-	ld de, $9410
+	ld de, vTitleLogo2 + $100
 	ld bc, $50
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics ; $61f8
-	ld de, $9460
+	ld de, vTitleLogo2 + $100 + $50
 	ld bc, $90
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics ; $5380
-	ld de, $8800
+	ld de, vTitleLogo
 	ld bc, $600
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; first chunk
 	ld hl, PokemonLogoGraphics+$600 ; $5980
-	ld de, $9310
+	ld de, vTitleLogo2
 	ld bc, $100
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
 IF _RED
-	ld de,$9600 ; where to put redgreenversion.2bpp in the VRAM
-	ld bc,$50 ; how big that file is
+	ld de,vChars2 + $600
+	ld bc,$50
 ENDC
 IF _BLUE
-	ld de,$9610 ; where to put blueversion.2bpp in the VRAM
-	ld bc,$40 ; how big that file is
+	ld de,vChars2 + $600 + $10
+	ld bc,$50 - $10
 ENDC
 
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call Func_4519
-	FuncCoord 2, 1 ; $c3b6
-	ld hl, Coord
+	hlCoord 2, 1
 	ld a, $80
 	ld de, $14
 	ld c, $6
@@ -85,8 +84,7 @@ ENDC
 	add hl, de
 	dec c
 	jr nz, .asm_434d
-	FuncCoord 2, 7 ; $c42e
-	ld hl, Coord
+	hlCoord 2, 7
 	ld a, $31
 	ld b, $10
 .asm_4361
@@ -95,11 +93,10 @@ ENDC
 	dec b
 	jr nz, .asm_4361
 	call Func_44dd
-	ld hl, $c328
+	ld hl, wOAMBuffer + $28
 	ld a, $74
 	ld [hl], a
-	FuncCoord 2, 17 ; $c4f6
-	ld hl, Coord
+	hlCoord 2, 17
 	ld de, .titlescreenTilemap ; $437f
 	ld b, $10
 .asm_4377
@@ -124,7 +121,7 @@ IF _BLUE
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	call Func_4524
 	ld a, $9b
 	call Func_4533
@@ -206,10 +203,10 @@ ENDC
 	call Delay3
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	xor a
-	ld [$cc5b], a
+	ld [wcc5b], a
 .asm_443b
 	ld c, $c8
 	call CheckForUserInterruption
@@ -222,11 +219,11 @@ ENDC
 	call Func_4496
 	jr .asm_443b
 .asm_4459
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
 	ld [$ffb0], a
 	inc a
@@ -238,7 +235,7 @@ ENDC
 	call Func_4533
 	call Delay3
 	call LoadGBPal
-	ld a, [H_CURRENTPRESSEDBUTTONS]
+	ld a, [hJoyHeld]
 	ld b, a
 	and $46
 	cp $46
@@ -256,14 +253,14 @@ Func_4496: ; 4496 (1:4496)
 
 .new
 ; Generate a new TitleMon.
-	call GenRandom
+	call Random
 	and $f
 	ld c, a
 	ld b, 0
 	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
-	ld hl, wWhichTrade ; $cd3d
+	ld hl, wWhichTrade ; wWhichTrade
 
 ; Can't be the same as before.
 	cp [hl]
@@ -275,12 +272,12 @@ Func_4496: ; 4496 (1:4496)
 	ld a, $90
 	ld [$ffb0], a
 	ld d, 1 ; scroll out
-	callba TitleScroll ; indirect jump to TitleScroll (37258 (d:7258))
+	callba TitleScroll
 	ret
 
 Func_44c1: ; 44c1 (1:44c1)
 	ld d, 0 ; scroll in
-	callba TitleScroll ; indirect jump to TitleScroll (37258 (d:7258))
+	callba TitleScroll
 	xor a
 	ld [$ffb0], a
 	ret
@@ -302,13 +299,13 @@ Func_44cf: ; 44cf (1:44cf)
 
 Func_44dd: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics ; $66a8
-	ld de, $8000
+	ld de, vSprites
 	ld bc, $230
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
-	call CleanLCD_OAM
+	call ClearSprites
 	xor a
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld hl, wOAMBuffer
 	ld de, $605a
 	ld b, $7
@@ -322,10 +319,10 @@ Func_44dd: ; 44dd (1:44dd)
 	ld [hli], a
 	add $8
 	ld e, a
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld [hli], a
 	inc a
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	inc hl
 	dec c
 	jr nz, .asm_44fd
@@ -338,16 +335,15 @@ Func_44dd: ; 44dd (1:44dd)
 	ret
 
 Func_4519: ; 4519 (1:4519)
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld bc, $800
 	ld a, $7f
 	jp FillMemory
 
 Func_4524: ; 4524 (1:4524)
-	ld [$cf91], a
-	ld [$d0b5], a
-	FuncCoord 5, 10 ; $c46d
-	ld hl, Coord
+	ld [wcf91], a
+	ld [wd0b5], a
+	hlCoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
@@ -363,11 +359,10 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics ; $60c8
-	ld hl, $9600
+	ld hl, vChars2 + $600
 	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
 	call CopyVideoData
-	FuncCoord 2, 7 ; $c42e
-	ld hl, Coord
+	hlCoord 2, 7
 	ld de, CopyrightTextString ; $4556
 	jp PlaceString
 
@@ -381,8 +376,7 @@ INCLUDE "data/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
-	FuncCoord 7, 8 ; $c447
-	ld hl, Coord
+	hlCoord 7, 8
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

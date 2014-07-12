@@ -1,6 +1,6 @@
-Route24Mons: 
+Route24Mons:
 	db $19
-	
+
 	IF _RED
 		db 7,WEEDLE
 		db 8,KAKUNA
@@ -13,7 +13,7 @@ Route24Mons:
 		db 8,ABRA
 		db 12,ABRA
 	ENDC
-	
+
 	IF _GREEN || !_JAPAN && _BLUE
 		db 7,CATERPIE
 		db 8,METAPOD
@@ -26,7 +26,7 @@ Route24Mons:
 		db 8,ABRA
 		db 12,ABRA
 	ENDC
-	
+
 	IF _JAPAN && _BLUE
 		db 7,CATERPIE
 		db 8,METAPOD
@@ -39,7 +39,7 @@ Route24Mons:
 		db 8,ABRA
 		db 12,ABRA
 	ENDC
-	
+
 	IF _YELLOW
 		db 12,ODDISH
 		db 12,BELLSPROUT
@@ -52,6 +52,6 @@ Route24Mons:
 		db 17,PIDGEY
 		db 17,PIDGEOTTO
 	ENDC
-	
+
 	db $00
 

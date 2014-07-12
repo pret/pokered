@@ -1,9 +1,9 @@
 Func_71ddf: ; 71ddf (1c:5ddf)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, b
 	cp $ff
 	jr nz, .asm_71dea
-	ld a, [$cf1c]
+	ld a, [wcf1c]
 .asm_71dea
 	cp $fc
 	jp z, Func_71fc2
@@ -27,23 +27,23 @@ SendPalPacket_Black: ; 71dff (1c:5dff)
 ; uses PalPacket_Empty to build a packet based on mon IDs and health color
 BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	ld hl, PalPacket_Empty
-	ld de, $cf2d
+	ld de, wcf2d
 	ld bc, $10
 	call CopyData
 	ld a, [W_PLAYERBATTSTATUS3]
-	ld hl, W_PLAYERMONID
+	ld hl, wBattleMonSpecies
 	call DeterminePaletteID
 	ld b, a
 	ld a, [W_ENEMYBATTSTATUS3]
-	ld hl, W_ENEMYMONID
+	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	ld c, a
-	ld hl, $cf2e
-	ld a, [$cf1d]
+	ld hl, wcf2e
+	ld a, [wcf1d]
 	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
-	ld a, [$cf1e]
+	ld a, [wcf1e]
 	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
@@ -52,10 +52,10 @@ BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	inc hl
 	ld a, c
 	ld [hl], a
-	ld hl, $cf2d
+	ld hl, wcf2d
 	ld de, BlkPacket_Battle
 	ld a, $1
-	ld [$cf1c], a
+	ld [wcf1c], a
 	ret
 
 SendPalPacket_TownMap: ; 71e48 (1c:5e48)
@@ -66,42 +66,42 @@ SendPalPacket_TownMap: ; 71e48 (1c:5e48)
 ; uses PalPacket_Empty to build a packet based the mon ID
 BuildStatusScreenPalPacket: ; 71e4f (1c:5e4f)
 	ld hl, PalPacket_Empty
-	ld de, $cf2d
+	ld de, wcf2d
 	ld bc, $10
 	call CopyData
-	ld a, [$cf91]
+	ld a, [wcf91]
 	cp VICTREEBEL + 1
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
 	call DeterminePaletteIDOutOfBattle
 	push af
-	ld hl, $cf2e
-	ld a, [$cf25]
+	ld hl, wcf2e
+	ld a, [wcf25]
 	add $1f
 	ld [hli], a
 	inc hl
 	pop af
 	ld [hl], a
-	ld hl, $cf2d
+	ld hl, wcf2d
 	ld de, BlkPacket_StatusScreen
 	ret
 
 SendPalPacket_PartyMenu: ; 71e7b (1c:5e7b)
 	ld hl, PalPacket_PartyMenu
-	ld de, $cf2e
+	ld de, wcf2e
 	ret
 
 SendPalPacket_Pokedex: ; 71e82 (1c:5e82)
 	ld hl, PalPacket_Pokedex
-	ld de, $cf2d
+	ld de, wcf2d
 	ld bc, $10
 	call CopyData
-	ld a, [$cf91]
+	ld a, [wcf91]
 	call DeterminePaletteIDOutOfBattle
-	ld hl, $cf30
+	ld hl, wcf30
 	ld [hl], a
-	ld hl, $cf2d
+	ld hl, wcf2d
 	ld de, BlkPacket_Pokedex
 	ret
 
@@ -130,13 +130,13 @@ SendPalPacket_GameFreakIntro: ; 71ebb (1c:5ebb)
 	ld hl, PalPacket_GameFreakIntro
 	ld de, BlkPacket_GameFreakIntro
 	ld a, $8
-	ld [$cf1c], a
+	ld [wcf1c], a
 	ret
 
 ; uses PalPacket_Empty to build a packet based on the current map
 BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	ld hl, PalPacket_Empty
-	ld de, $cf2d
+	ld de, wcf2d
 	ld bc, $10
 	call CopyData
 	ld a, [W_CURMAPTILESET]
@@ -163,11 +163,11 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	ld a, PAL_ROUTE - 1
 .town
 	inc a ; a town's pallete ID is its map ID + 1
-	ld hl, $cf2e
+	ld hl, wcf2e
 	ld [hld], a
 	ld de, BlkPacket_WholeScreen
 	ld a, $9
-	ld [$cf1c], a
+	ld [wcf1c], a
 	ret
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
@@ -184,7 +184,7 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 SendPokemonPalette_WholeScreen: ; 71f17 (1c:5f17)
 	push bc
 	ld hl, PalPacket_Empty
-	ld de, $cf2d
+	ld de, wcf2d
 	ld bc, $10
 	call CopyData
 	pop bc
@@ -192,21 +192,21 @@ SendPokemonPalette_WholeScreen: ; 71f17 (1c:5f17)
 	and a
 	ld a, $1e
 	jr nz, .asm_71f31
-	ld a, [$cf1d]
+	ld a, [wcf1d]
 	call DeterminePaletteIDOutOfBattle
 .asm_71f31
-	ld [$cf2e], a
-	ld hl, $cf2d
+	ld [wcf2e], a
+	ld hl, wcf2d
 	ld de, BlkPacket_WholeScreen
 	ret
 
 BuildTrainerCardPalPacket: ; 71f3b (1c:5f3b)
 	ld hl, BlkPacket_TrainerCard
-	ld de, $cc5b
+	ld de, wcc5b
 	ld bc, $40
 	call CopyData
 	ld de, LoopCounts_71f8f
-	ld hl, $cc5d
+	ld hl, wcc5d
 	ld a, [W_OBTAINEDBADGES]
 	ld c, $8
 .asm_71f52
@@ -235,7 +235,7 @@ BuildTrainerCardPalPacket: ; 71f3b (1c:5f3b)
 	dec c
 	jr nz, .asm_71f52
 	ld hl, PalPacket_TrainerCard
-	ld de, $cc5b
+	ld de, wcc5b
 	ret
 
 PointerTable_71f73: ; 71f73 (1c:5f73)
@@ -264,14 +264,13 @@ DeterminePaletteID: ; 71f97 (1c:5f97)
 	ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
-	ld [$D11E], a
+	ld [wd11e], a
 	and a
 	jr z, .idZero
 	push bc
-	ld a, $3A
-	call Predef               ; turn Pokemon ID number into Pokedex number
+	predef IndexToPokedex               ; turn Pokemon ID number into Pokedex number
 	pop bc
-	ld a, [$D11E]
+	ld a, [wd11e]
 .idZero
 	ld e, a
 	ld d, $00
@@ -282,13 +281,13 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 
 SendBlkPacket_PartyMenu: ; 71fb6 (1c:5fb6)
 	ld hl, BlkPacket_PartyMenu ; $62f4
-	ld de, $cf2e
+	ld de, wcf2e
 	ld bc, $30
 	jp CopyData
 
 Func_71fc2: ; 71fc2 (1c:5fc2)
-	ld hl, $cf1f
-	ld a, [$cf2d]
+	ld hl, wcf1f
+	ld a, [wcf2d]
 	ld e, a
 	ld d, $0
 	add hl, de
@@ -304,9 +303,9 @@ Func_71fc2: ; 71fc2 (1c:5fc2)
 	ld e, $f
 .asm_71fdb
 	push de
-	ld hl, $cf37
+	ld hl, wcf37
 	ld bc, $6
-	ld a, [$cf2d]
+	ld a, [wcf2d]
 	call AddNTimes
 	pop de
 	ld [hl], e
@@ -379,14 +378,14 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; else send 16 more bytes
 	jr .loop2
 
-LoadSGBBorderAndPalettes: ; 7202b (1c:602b)
+LoadSGB: ; 7202b (1c:602b)
 	xor a
-	ld [$cf1b], a
+	ld [wcf1b], a
 	call Func_7209b
 	ret nc
 	ld a, $1
-	ld [$cf1b], a
-	ld a, [$cf1a]
+	ld [wcf1b], a
+	ld a, [wGBC]
 	and a
 	jr z, .asm_7203f
 	ret
@@ -395,22 +394,22 @@ LoadSGBBorderAndPalettes: ; 7202b (1c:602b)
 	call Func_72075
 	ei
 	ld a, $1
-	ld [$cf2d], a
-	ld de, PalPacket_72508
+	ld [wcf2d], a
+	ld de, ChrTrnPacket
 	ld hl, SGBBorderGraphics
 	call Func_7210b
 	xor a
-	ld [$cf2d], a
-	ld de, PalPacket_72518
+	ld [wcf2d], a
+	ld de, PctTrnPacket
 	ld hl, BorderPalettes
 	call Func_7210b
 	xor a
-	ld [$cf2d], a
-	ld de, PalPacket_724d8
+	ld [wcf2d], a
+	ld de, PalTrnPacket
 	ld hl, SuperPalettes
 	call Func_7210b
-	call ZeroVram
-	ld hl, PalPacket_72538
+	call ClearVram
+	ld hl, MaskEnCancelPacket
 	jp SendSGBPacket
 
 Func_72075: ; 72075 (1c:6075)
@@ -431,18 +430,18 @@ Func_72075: ; 72075 (1c:6075)
 	ret
 
 PointerTable_72089: ; 72089 (1c:6089)
-	dw PalPacket_72528
-	dw PalPacket_72548
-	dw PalPacket_72558
-	dw PalPacket_72568
-	dw PalPacket_72578
-	dw PalPacket_72588
-	dw PalPacket_72598
-	dw PalPacket_725a8
-	dw PalPacket_725b8
+	dw MaskEnFreezePacket
+	dw DataSnd_72548
+	dw DataSnd_72558
+	dw DataSnd_72568
+	dw DataSnd_72578
+	dw DataSnd_72588
+	dw DataSnd_72598
+	dw DataSnd_725a8
+	dw DataSnd_725b8
 
 Func_7209b: ; 7209b (1c:609b)
-	ld hl, PalPacket_724f8
+	ld hl, MltReq2Packet
 	di
 	call SendSGBPacket
 	ld a, $1
@@ -493,7 +492,7 @@ Func_7209b: ; 7209b (1c:609b)
 	ret
 
 Func_72102: ; 72102 (1c:6102)
-	ld hl, PalPacket_724e8
+	ld hl, MltReq1Packet
 	call SendSGBPacket
 	jp Wait7000
 
@@ -503,8 +502,8 @@ Func_7210b: ; 7210b (1c:610b)
 	call DisableLCD
 	ld a, $e4
 	ld [rBGP], a ; $ff47
-	ld de, $8800
-	ld a, [$cf2d]
+	ld de, vChars1
+	ld a, [wcf2d]
 	and a
 	jr z, .asm_72122
 	call Func_72188
@@ -513,7 +512,7 @@ Func_7210b: ; 7210b (1c:610b)
 	ld bc, $1000
 	call CopyData
 .asm_72128
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld de, $c
 	ld a, $80
 	ld c, $d
@@ -551,7 +550,7 @@ Wait7000: ; 7214a (1c:614a)
 	ret
 
 Func_72156: ; 72156 (1c:6156)
-	ld a, [$cf1a]
+	ld a, [wGBC]
 	and a
 	jr z, .asm_72165
 	push de

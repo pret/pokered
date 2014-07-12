@@ -1,92 +1,92 @@
 Music_IntroBattle_Ch1:: ; 7f844 (1f:7844)
-	tempo 0, 98
-	stereopanning 119
+	tempo 98
+	volume 7, 7
 	duty 3
 	vibrato 6, 3, 4
-	togglecall
+	toggleperfectpitch
 	notetype 12, 11, 1
 	rest 8
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note D_, 4
+	D_ 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note D#, 4
+	D# 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note D_, 4
+	D_ 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 10, 0
-	note A#, 4
+	A# 4
 	notetype 12, 11, 1
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note D_, 4
+	D_ 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 2, 9
 	octave 3
-	note G_, 4
+	G_ 4
 	notetype 12, 11, 0
-	note A_, 8
+	A_ 8
 	octave 2
-	note A_, 8
+	A_ 8
 	notetype 12, 11, 7
 	octave 3
-	note F_, 8
+	F_ 8
 	notetype 12, 4, 15
 	octave 2
-	note F_, 8
+	F_ 8
 	notetype 12, 11, 1
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note D_, 4
-	notetype 12, 11, 1
-	octave 2
-	note A_, 2
-	note A_, 2
-	notetype 12, 11, 4
-	octave 3
-	note D#, 4
+	D_ 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note F_, 4
+	D# 4
 	notetype 12, 11, 1
 	octave 2
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	notetype 12, 11, 4
 	octave 3
-	note G_, 4
+	F_ 4
+	notetype 12, 11, 1
+	octave 2
+	A_ 2
+	A_ 2
+	notetype 12, 11, 4
+	octave 3
+	G_ 4
 	notetype 12, 11, 0
-	note F#, 16
+	F# 16
 	notetype 12, 11, 1
 	octave 4
-	note D_, 16
+	D_ 16
 	endchannel
 
 
@@ -96,72 +96,72 @@ Music_IntroBattle_Ch2:: ; 7f8bc (1f:78bc)
 	notetype 12, 12, 2
 	rest 8
 	octave 3
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A_, 4
+	A_ 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A#, 4
+	A# 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A_, 4
+	A_ 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 11, 7
-	note C#, 4
+	C# 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A_, 4
+	A_ 4
 	notetype 12, 12, 2
 	octave 3
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 7
 	octave 4
-	note C#, 4
-	note D_, 8
+	C# 4
+	D_ 8
 	octave 3
-	note D_, 8
+	D_ 8
 	octave 4
-	note C_, 8
+	C_ 8
 	octave 3
-	note C_, 8
+	C_ 8
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A_, 4
+	A_ 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
-	note A#, 4
+	A# 4
 	notetype 12, 12, 2
-	note D_, 2
-	note D_, 2
-	notetype 12, 12, 5
-	octave 4
-	note C_, 4
-	notetype 12, 12, 2
-	octave 3
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	notetype 12, 12, 5
 	octave 4
-	note C#, 4
+	C_ 4
+	notetype 12, 12, 2
+	octave 3
+	D_ 2
+	D_ 2
+	notetype 12, 12, 5
+	octave 4
+	C# 4
 	notetype 12, 2, 15
-	note D_, 16
+	D_ 16
 	notetype 12, 12, 1
 	octave 5
-	note D_, 16
+	D_ 16
 	endchannel
 
 
@@ -169,161 +169,161 @@ Music_IntroBattle_Ch3:: ; 7f91d (1f:791d)
 	notetype 12, 1, 0
 	rest 8
 	octave 4
-	note D_, 1
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note F#, 4
-	note D_, 1
+	F# 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A#, 4
-	note A_, 8
-	note D_, 8
-	note A#, 8
-	note D_, 8
-	note D_, 1
+	A# 4
+	A_ 8
+	D_ 8
+	A# 8
+	D_ 8
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A_, 4
-	note D_, 1
+	A_ 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A#, 4
-	note D_, 1
+	A# 4
+	D_ 1
 	rest 1
-	note D_, 1
+	D_ 1
 	rest 1
-	note A#, 4
-	note A_, 16
-	note D_, 1
+	A# 4
+	A_ 16
+	D_ 1
 	rest 15
 	endchannel
 
 
 Music_IntroBattle_Ch4:: ; 7f95b (1f:795b)
 	dspeed 6
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare2
-	dnote 1, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 16, mutedsnare2
-	dnote 16, mutedsnare2
-	dnote 16, mutedsnare2
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare2
-	dnote 1, mutedsnare2
-	dnote 1, mutedsnare2
-	dnote 1, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare4
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 1, mutedsnare3
-	dnote 4, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 8, mutedsnare2
-	dnote 4, mutedsnare2
-	dnote 16, mutedsnare2
-	dnote 16, mutedsnare2
-	dnote 2, mutedsnare2
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 1
+	mutedsnare2 1
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 16
+	mutedsnare2 16
+	mutedsnare2 16
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 1
+	mutedsnare2 1
+	mutedsnare2 1
+	mutedsnare2 1
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare4 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare3 1
+	mutedsnare2 4
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 8
+	mutedsnare2 4
+	mutedsnare2 16
+	mutedsnare2 16
+	mutedsnare2 2
 	rest 16
 	rest 14
 	endchannel

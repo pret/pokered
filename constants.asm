@@ -3,9 +3,11 @@ INCLUDE "version.asm"
 INCLUDE "macros.asm"
 
 INCLUDE "hram.asm"
+INCLUDE "vram.asm"
 
 INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/oam_constants.asm"
+INCLUDE "constants/misc_constants.asm"
 
 INCLUDE "constants/wram_constants.asm"
 

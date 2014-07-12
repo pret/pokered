@@ -1,6 +1,6 @@
-TunnelMonsB1: 
+TunnelMonsB1:
 	db $0F
-	
+
 	IF !_YELLOW
 		db 16,ZUBAT
 		db 17,ZUBAT
@@ -18,7 +18,7 @@ TunnelMonsB1:
 		db 13,ONIX
 		db 15,ONIX
 	ENDC
-	
+
 	IF _YELLOW
 		db 15,ZUBAT
 		db 16,GEODUDE
@@ -31,6 +31,6 @@ TunnelMonsB1:
 		db 19,MACHOP
 		db 21,MACHOP
 	ENDC
-	
+
 	db $00
 

@@ -1,5 +1,5 @@
 Func_27d6b: ; 27d6b (9:7d6b)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
 	call GetMonHeader
 	pop hl
@@ -26,9 +26,9 @@ asm_27d8c: ; 27d8c (9:7d8c)
 	jp FillMemory
 
 Func_27d98: ; 27d98 (9:7d98)
-	call Load16BitRegisters
+	call GetPredefRegisters
 	push hl
-	ld a, [W_PLAYERMOVETYPE] ; $cfd5
+	ld a, [W_PLAYERMOVETYPE] ; wcfd5
 asm_27d9f: ; 27d9f (9:7d9f)
 	add a
 	ld hl, TypeNamePointers ; $7dae
@@ -54,7 +54,7 @@ SaveTrainerName: ; 27e4a (9:7e4a)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld de,$CD6D
+	ld de,wcd6d
 .CopyCharacter
 	ld a,[hli]
 	ld [de],a
@@ -157,11 +157,11 @@ CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
 
 FocusEnergyEffect_: ; 27f86 (9:7f86)
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_27f91
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_27f91
 	bit 2, [hl] ; is mon already using focus energy?
 	jr nz, .asm_27fa5

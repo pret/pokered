@@ -1,4 +1,4 @@
-; subanimations 
+; subanimations
 
 
 ; special effects, prefaced with "SE" for "Special Effect"

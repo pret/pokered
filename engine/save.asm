@@ -13,7 +13,7 @@ LoadSAV: ; 735e8 (1c:75e8)
 	ld a, $2 ; good checksum
 	jr .goodsum
 .badsum
-	ld hl, $d730
+	ld hl, wd730
 	push hl
 	set 6, [hl]
 	ld hl, FileDataDestroyedText
@@ -24,7 +24,7 @@ LoadSAV: ; 735e8 (1c:75e8)
 	res 6, [hl]
 	ld a, $1 ; bad checksum
 .goodsum
-	ld [$d088], a ; checksum flag
+	ld [wd088], a ; checksum flag
 	ret
 
 FileDataDestroyedText: ; 7361e (1c:761e)
@@ -54,14 +54,14 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 
 .Func_73652 ; 73652 (1c:7652)
 	ld hl, $a598
-	ld de, W_PLAYERNAME ; $d158
+	ld de, wPlayerName ; wd158
 	ld bc, $b
 	call CopyData
 	ld hl, $a5a3
-	ld de, wPokedexOwned ; $d2f7
+	ld de, wPokedexOwned ; wPokedexOwned
 	ld bc, $789
 	call CopyData
-	ld hl, W_CURMAPTILESET ; $d367
+	ld hl, W_CURMAPTILESET ; W_CURMAPTILESET
 	set 7, [hl]
 	ld hl, $ad2c
 	ld de, wSpriteStateData1
@@ -70,7 +70,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld a, [$b522]
 	ld [$ffd7], a
 	ld hl, $b0c0
-	ld de, W_NUMINBOX ; $da80
+	ld de, W_NUMINBOX ; wda80
 	ld bc, $462
 	call CopyData
 	and a
@@ -90,7 +90,7 @@ LoadSAVCheckSum1: ; 73690 (1c:7690)
 	cp c
 	jr nz, SAVBadCheckSum
 	ld hl, $b0c0
-	ld de, W_NUMINBOX ; $da80
+	ld de, W_NUMINBOX ; wda80
 	ld bc, $462
 	call CopyData
 	and a
@@ -110,11 +110,11 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	cp c
 	jp nz, SAVBadCheckSum
 	ld hl, $af2c
-	ld de, W_NUMINPARTY ; $d163
+	ld de, wPartyCount ; wPartyCount
 	ld bc, $194
 	call CopyData
 	ld hl, $a5a3
-	ld de, wPokedexOwned ; $d2f7
+	ld de, wPokedexOwned ; wPokedexOwned
 	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	and a
@@ -140,7 +140,7 @@ SaveSAV: ;$770a
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
 	ret nz
-	ld a,[$d088]
+	ld a,[wd088]
 	dec a
 	jr z,.save
 	call SAVCheckRandomID
@@ -151,12 +151,10 @@ SaveSAV: ;$770a
 	ret nz
 .save        ;$772d
 	call SaveSAVtoSRAM      ;$7848
-	FuncCoord 1,13
-	ld hl,Coord
+	hlCoord 1, 13
 	ld bc,$0412
 	call ClearScreenArea ; clear area 4x12 starting at 13,1
-	FuncCoord 1,14
-	ld hl,Coord
+	hlCoord 1, 14
 	ld de,NowSavingString
 	call PlaceString
 	ld c,$78
@@ -174,13 +172,12 @@ NowSavingString:
 
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
-	FuncCoord 0, 7
-	ld hl,Coord
+	hlCoord 0, 7
 	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
 	ld a,$14        ;one line shifting ($28 = 2 lines)
-	ld [$d125],a
+	ld [wd125],a
 	call DisplayTextBoxID      ;handle Yes/No KeyPress
-	ld a,[$cc26]
+	ld a,[wCurrentMenuItem]
 	ret
 
 WouldYouLikeToSaveText: ; 0x7377d
@@ -201,11 +198,11 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, W_PLAYERNAME ; $d158
+	ld hl, wPlayerName ; wd158
 	ld de, $a598
 	ld bc, $b
 	call CopyData
-	ld hl, wPokedexOwned ; $d2f7
+	ld hl, wPokedexOwned ; wPokedexOwned
 	ld de, $a5a3
 	ld bc, $789
 	call CopyData
@@ -213,7 +210,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld de, $ad2c
 	ld bc, $200
 	call CopyData
-	ld hl, W_NUMINBOX ; $da80
+	ld hl, W_NUMINBOX ; wda80
 	ld de, $b0c0
 	ld bc, $462
 	call CopyData
@@ -235,7 +232,7 @@ SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, W_NUMINBOX ; $da80
+	ld hl, W_NUMINBOX ; wda80
 	ld de, $b0c0
 	ld bc, $462
 	call CopyData
@@ -254,7 +251,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld a, $1
 	ld [$6000], a
 	ld [$4000], a
-	ld hl, W_NUMINPARTY ; $d163
+	ld hl, wPartyCount ; wPartyCount
 	ld de, $af2c
 	ld bc, $194
 	call CopyData
@@ -273,7 +270,7 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 
 SaveSAVtoSRAM: ; 73848 (1c:7848)
 	ld a, $2
-	ld [$d088], a
+	ld [wd088], a
 	call SaveSAVtoSRAM0
 	call SaveSAVtoSRAM1
 	jp SaveSAVtoSRAM2
@@ -312,7 +309,7 @@ Func_73863: ; 73863 (1c:7863)
 
 Func_7387b: ; 7387b (1c:787b)
 	ld hl, PointerTable_73895 ; $7895
-	ld a, [$d5a0]
+	ld a, [wd5a0]
 	and $7f
 	cp $6
 	ld b, $2
@@ -341,10 +338,10 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	ld hl, WhenYouChangeBoxText
 	call PrintText
 	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	ret nz
-	ld hl, $d5a0
+	ld hl, wd5a0
 	bit 7, [hl]
 	call z, Func_73a29
 	call Func_7393f
@@ -359,16 +356,16 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	call Func_7387b
 	ld e, l
 	ld d, h
-	ld hl, W_NUMINBOX ; $da80
+	ld hl, W_NUMINBOX ; wda80
 	call Func_7390e
-	ld a, [wCurrentMenuItem] ; $cc26
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	set 7, a
-	ld [$d5a0], a
+	ld [wd5a0], a
 	call Func_7387b
-	ld de, W_NUMINBOX ; $da80
+	ld de, W_NUMINBOX ; wda80
 	call Func_7390e
-	ld hl, W_MAPTEXTPTR ; $d36c
-	ld de, wWhichTrade ; $cd3d
+	ld hl, W_MAPTEXTPTR ; wd36c
+	ld de, wWhichTrade ; wWhichTrade
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -376,7 +373,7 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	ld [de], a
 	call Func_3f05
 	call SaveSAVtoSRAM
-	ld hl, wWhichTrade ; $cd3d
+	ld hl, wWhichTrade ; wWhichTrade
 	call Func_3f0f
 	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
@@ -416,61 +413,55 @@ Func_7393f: ; 7393f (1c:793f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; $cc29
+	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
 	ld a, $b
-	ld [wMaxMenuItem], a ; $cc28
+	ld [wMaxMenuItem], a ; wMaxMenuItem
 	ld a, $1
-	ld [wTopMenuItemY], a ; $cc24
+	ld [wTopMenuItemY], a ; wTopMenuItemY
 	ld a, $c
-	ld [wTopMenuItemX], a ; $cc25
+	ld [wTopMenuItemX], a ; wTopMenuItemX
 	xor a
-	ld [$cc37], a
-	ld a, [$d5a0]
+	ld [wcc37], a
+	ld a, [wd5a0]
 	and $7f
-	ld [wCurrentMenuItem], a ; $cc26
-	ld [wLastMenuItem], a ; $cc2a
+	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wLastMenuItem], a ; wLastMenuItem
 	ld hl, wTileMap
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
-	FuncCoord 11, 0 ; $c3ab
-	ld hl, Coord
+	hlCoord 11, 0
 	ld b, $c
 	ld c, $7
 	call TextBoxBorder
 	ld hl, $fff6
 	set 2, [hl]
 	ld de, BoxNames ; $79d9
-	FuncCoord 13, 1 ; $c3c1
-	ld hl, Coord
+	hlCoord 13, 1
 	call PlaceString
 	ld hl, $fff6
 	res 2, [hl]
-	ld a, [$d5a0]
+	ld a, [wd5a0]
 	and $7f
 	cp $9
 	jr c, .asm_739a6
 	sub $9
-	FuncCoord 8, 2 ; $c3d0
-	ld hl, Coord
+	hlCoord 8, 2
 	ld [hl], $f7
 	add $f6
 	jr .asm_739a8
 .asm_739a6
 	add $f7
 .asm_739a8
-	FuncCoord 9, 2 ; $c3d1
-	ld [Coord], a
-	FuncCoord 1, 2 ; $c3c9
-	ld hl, Coord
+	Coorda 9, 2
+	hlCoord 1, 2
 	ld de, BoxNoText
 	call PlaceString
 	call Func_73a84
-	FuncCoord 18, 1 ; $c3c6
-	ld hl, Coord
-	ld de, wWhichTrade ; $cd3d
+	hlCoord 18, 1
+	ld de, wWhichTrade ; wWhichTrade
 	ld bc, $14
 	ld a, $c
 .asm_739c2
@@ -554,7 +545,7 @@ Func_73a7f: ; 73a7f (1c:7a7f)
 	ret
 
 Func_73a84: ; 73a84 (1c:7a84)
-	ld hl, wWhichTrade ; $cd3d
+	ld hl, wWhichTrade ; wWhichTrade
 	push hl
 	ld a, $a
 	ld [$0], a
@@ -570,12 +561,12 @@ Func_73a84: ; 73a84 (1c:7a84)
 	ld [$6000], a
 	ld [$0], a
 	pop hl
-	ld a, [$d5a0]
+	ld a, [wd5a0]
 	and $7f
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [W_NUMINBOX] ; $da80
+	ld a, [W_NUMINBOX] ; wda80
 	ld [hl], a
 	ret
 
@@ -597,7 +588,7 @@ Func_73ab8: ; 73ab8 (1c:7ab8)
 SAVCheckRandomID: ;$7ad1
 ;checks if Sav file is the same by checking player's name 1st letter ($a598)
 ; and the two random numbers generated at game beginning
-;(which are stored at $d359-d35a)
+;(which are stored at wPlayerID)
 	ld a,$0a
 	ld [$0000],a
 	ld a,$01
@@ -617,10 +608,10 @@ SAVCheckRandomID: ;$7ad1
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld a,[$d359]
+	ld a,[wPlayerID]
 	cp l
 	jr nz,.next
-	ld a,[$d35a]
+	ld a,[wPlayerID + 1]
 	cp h
 .next
 	ld a,$00
@@ -628,38 +619,40 @@ SAVCheckRandomID: ;$7ad1
 	ld [$0000],a
 	ret
 
-Func_73b0d: ; 73b0d (1c:7b0d)
-	ld a, [$d5a2]
+SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
+	ld a, [wd5a2]
 	dec a
-	cp $32
+	cp NUM_HOF_TEAMS
 	jr nc, .asm_73b28
-	ld hl, $a598
-	ld bc, $60
+	ld hl, sHallOfFame
+	ld bc, HOF_TEAM
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, $cc5b
-	ld bc, $60
-	jr CopyToSRAM0
-.asm_73b28
-	ld hl, $a5f8
-	ld de, $a598
-	ld bc, $1260
-	call CopyToSRAM0
-	ld hl, $cc5b
-	ld de, $b7f8
-	ld bc, $60
-	jr CopyToSRAM0
+	ld hl, wcc5b
+	ld bc, HOF_TEAM
+	jr HallOfFame_Copy
 
-Func_73b3f: ; 73b3f (1c:7b3f)
-	ld hl, $a598
-	ld bc, $60
-	ld a, [wWhichTrade] ; $cd3d
+.asm_73b28
+	ld hl, sHallOfFame + HOF_TEAM
+	ld de, sHallOfFame
+	ld bc, HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	call HallOfFame_Copy
+	ld hl, wcc5b
+	ld de, sHallOfFame + HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld bc, HOF_TEAM
+	jr HallOfFame_Copy
+
+LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
+	ld hl, sHallOfFame
+	ld bc, HOF_TEAM
+	ld a, [wWhichTrade] ; wWhichTrade
 	call AddNTimes
-	ld de, $cc5b
-	ld bc, $60
+	ld de, wcc5b
+	ld bc, HOF_TEAM
 	; fallthrough
-CopyToSRAM0: ; 73b51 (1c:7b51)
+
+HallOfFame_Copy: ; 73b51 (1c:7b51)
 	ld a, $a
 	ld [$0], a
 	ld a, $1

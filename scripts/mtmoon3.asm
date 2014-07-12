@@ -5,17 +5,17 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 	ld a, [W_MTMOON3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MTMOON3CURSCRIPT], a
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	bit 1, a
 	ret z
 	ld hl, CoordsData_49d37
 	call ArePlayerCoordsInArray
 	jr nc, .asm_49d31 ; 0x49d29 $6
-	ld hl, $d72e
+	ld hl, wd72e
 	set 4, [hl]
 	ret
 .asm_49d31
-	ld hl, $d72e
+	ld hl, wd72e
 	res 4, [hl]
 	ret
 
@@ -40,7 +40,7 @@ CoordsData_49d37: ; 49d37 (12:5d37)
 
 MtMoon3Script_49d58: ; 49d58 (12:5d58)
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
 	ret
@@ -54,37 +54,37 @@ MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 	dw MtMoon3Script5
 
 MtMoon3Script0: ; 49d6f (12:5d6f)
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	bit 1, a
 	jp nz, MtMoon3Script_49d91
-	ld a, [W_YCOORD] ; $d361
+	ld a, [W_YCOORD] ; wd361
 	cp $8
 	jp nz, MtMoon3Script_49d91
-	ld a, [W_XCOORD] ; $d362
+	ld a, [W_XCOORD] ; wd362
 	cp $d
 	jp nz, MtMoon3Script_49d91
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp DisplayTextID
 
 MtMoon3Script_49d91: ; 49d91 (12:5d91)
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	and $c0
 	jp z, CheckFightingMapTrainers
 	ret
 
 MtMoon3Script3: ; 49d9a (12:5d9a)
-	ld a, [W_ISINBATTLE] ; $d057
+	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, MtMoon3Script_49d58
 	call UpdateSprites
 	call Delay3
-	ld hl, $d7f6
+	ld hl, wd7f6
 	set 1, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -132,17 +132,17 @@ MovementData_49df9: ; 49df9 (12:5df9)
 	db $40,$FF
 
 MtMoon3Script5: ; 49dfb (12:5dfb)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	bit 6, a
 	jr z, .asm_49e1d
 	ld a, $6e
@@ -150,11 +150,10 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 .asm_49e1d
 	ld a, $6d
 .asm_49e1f
-	ld [$cc4d], a
-	ld a, $11
-	call Predef ; indirect jump to RemoveMissableObject (f1d7 (3:71d7))
+	ld [wcc4d], a
+	predef HideObject
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -176,7 +175,7 @@ MtMoon3TrainerHeaders: ; 49e48 (12:5e48)
 MtMoon3TrainerHeader0: ; 49e48 (12:5e48)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f6 ; flag's byte
+	dw wd7f6 ; flag's byte
 	dw MtMoon3BattleText2 ; 0x5f9f TextBeforeBattle
 	dw MtMoon3AfterBattleText2 ; 0x5fa9 TextAfterBattle
 	dw MtMoon3EndBattleText2 ; 0x5fa4 TextEndBattle
@@ -185,7 +184,7 @@ MtMoon3TrainerHeader0: ; 49e48 (12:5e48)
 MtMoon3TrainerHeader2: ; 49e54 (12:5e54)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f6 ; flag's byte
+	dw wd7f6 ; flag's byte
 	dw MtMoon3BattleText3 ; 0x5fae TextBeforeBattle
 	dw MtMoon3AfterBattleText3 ; 0x5fb8 TextAfterBattle
 	dw MtMoon3EndBattleText3 ; 0x5fb3 TextEndBattle
@@ -194,7 +193,7 @@ MtMoon3TrainerHeader2: ; 49e54 (12:5e54)
 MtMoon3TrainerHeader3: ; 49e60 (12:5e60)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f6 ; flag's byte
+	dw wd7f6 ; flag's byte
 	dw MtMoon3BattleText4 ; 0x5fbd TextBeforeBattle
 	dw MtMoon3AfterBattleText4 ; 0x5fc7 TextAfterBattle
 	dw MtMoon3EndBattleText4 ; 0x5fc2 TextEndBattle
@@ -203,7 +202,7 @@ MtMoon3TrainerHeader3: ; 49e60 (12:5e60)
 MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw $d7f6 ; flag's byte
+	dw wd7f6 ; flag's byte
 	dw MtMoon3BattleText5 ; 0x5fcc TextBeforeBattle
 	dw MtMoon3AfterBattleText5 ; 0x5fd6 TextAfterBattle
 	dw MtMoon3EndBattleText5 ; 0x5fd1 TextEndBattle
@@ -213,7 +212,7 @@ MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 
 MtMoon3Text1: ; 49e79 (12:5e79)
 	db $08 ; asm
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	bit 1, a
 	jr z, .asm_be1e0 ; 0x49e7f
 	and $c0
@@ -224,14 +223,14 @@ MtMoon3Text1: ; 49e79 (12:5e79)
 .asm_be1e0 ; 0x49e8d
 	ld hl, MtMoon3Text_49f85
 	call PrintText
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, MtMoon3Text_49f8a
 	ld de, MtMoon3Text_49f8a
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [$cf13], a
+	ld [wcf13], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
@@ -271,11 +270,11 @@ MtMoon3Text5: ; 49edf (12:5edf)
 MtMoon3Text6: ; 49ee9 (12:5ee9)
 	db $08 ; asm
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, MtMoon3Text_49f24
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_1fa5e ; 0x49efc
 	ld bc,(DOME_FOSSIL << 8) | 1
@@ -283,10 +282,9 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
 	ld a, $6d
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
-	ld hl, $d7f6
+	ld [wcc4d], a
+	predef HideObject
+	ld hl, wd7f6
 	set 6, [hl]
 	ld a, $4
 	ld [W_MTMOON3CURSCRIPT], a
@@ -301,11 +299,11 @@ MtMoon3Text_49f24: ; 49f24 (12:5f24)
 MtMoon3Text7: ; 49f29 (12:5f29)
 	db $08 ; asm
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, MtMoon3Text_49f64
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_8e988 ; 0x49f3c
 	ld bc, (HELIX_FOSSIL << 8) | 1
@@ -313,10 +311,9 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
 	ld a, $6e
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
-	ld hl, $d7f6
+	ld [wcc4d], a
+	predef HideObject
+	ld hl, wd7f6
 	set 7, [hl]
 	ld a, $4
 	ld [W_MTMOON3CURSCRIPT], a

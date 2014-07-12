@@ -1,18 +1,18 @@
 Func_79e96: ; 79e96 (1e:5e96)
-	ld a, [$cd4d]
+	ld a, [wcd4d]
 	cp $52
 	jr z, .asm_79ec8
 	ld c, $8
 .asm_79e9f
 	push bc
-	ld hl, $c391
+	ld hl, wOAMBuffer + $91
 	ld a, $1
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $2
 	call Func_79339
-	ld hl, $c399
+	ld hl, wOAMBuffer + $99
 	ld a, $ff
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $2
 	call Func_79339
 	ld a, [rOBP1] ; $ff49
@@ -33,9 +33,9 @@ Func_79e96: ; 79e96 (1e:5e96)
 	ld c, $8
 	call Func_79eed
 	call Func_79f30
-	ld hl, $c390
+	ld hl, wOAMBuffer + $90
 	ld a, $2
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $4
 	call Func_79352
 	pop bc
@@ -45,24 +45,24 @@ Func_79e96: ; 79e96 (1e:5e96)
 
 Func_79eed: ; 79eed (1e:5eed)
 	push bc
-	ld hl, $c391
+	ld hl, wOAMBuffer + $91
 	ld a, $1
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $1
 	call Func_79339
-	ld hl, $c395
+	ld hl, wOAMBuffer + $95
 	ld a, $2
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $1
 	call Func_79339
-	ld hl, $c399
+	ld hl, wOAMBuffer + $99
 	ld a, $fe
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $1
 	call Func_79339
-	ld hl, $c39d
+	ld hl, wOAMBuffer + $9d
 	ld a, $ff
-	ld [$d08a], a
+	ld [wd08a], a
 	ld c, $1
 	call Func_79339
 	ld a, [rOBP1] ; $ff49
@@ -75,15 +75,15 @@ Func_79eed: ; 79eed (1e:5eed)
 	ret
 
 Func_79f30: ; 79f30 (1e:5f30)
-	ld hl, $c390
-	ld de, $cee9
+	ld hl, wOAMBuffer + $90
+	ld de, wHPBarMaxHP
 	ld bc, $8
 	call CopyData
-	ld hl, $c398
-	ld de, $c390
+	ld hl, wOAMBuffer + $98
+	ld de, wOAMBuffer + $90
 	ld bc, $8
 	call CopyData
-	ld hl, $cee9
-	ld de, $c398
+	ld hl, wHPBarMaxHP
+	ld de, wOAMBuffer + $98
 	ld bc, $8
 	jp CopyData

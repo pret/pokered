@@ -22,7 +22,7 @@ Route22GateScript0: ; 1e6a4 (7:66a4)
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	ld a, $1
 	ld [$ff8c], a
 	jp DisplayTextID
@@ -34,19 +34,19 @@ Route22GateScriptCoords: ; 1e6b5 (7:66b5)
 
 Route22GateScript_1e6ba: ; 1e6ba (7:66ba)
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $80
-	ld [$ccd3], a
-	ld [$c109], a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wccd3], a
+	ld [wSpriteStateData1 + 9], a
+	ld [wJoyIgnore], a
 	jp Func_3486
 
 Route22GateScript1: ; 1e6cd (7:66cd)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE22GATECURSCRIPT], a

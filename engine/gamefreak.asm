@@ -4,15 +4,15 @@ LoadShootingStarGraphics: ; 70000 (1c:4000)
 	ld a, $a4
 	ld [rOBP1], a ; $ff49
 	ld de, AnimationTileset2 + $30 ; $471e ; star tile (top left quadrant)
-	ld hl, $8a00
+	ld hl, vChars1 + $200
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	call CopyVideoData
 	ld de, AnimationTileset2 + $130 ; $481e ; star tile (bottom left quadrant)
-	ld hl, $8a10
+	ld hl, vChars1 + $210
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	call CopyVideoData
 	ld de, FallingStar ; $4190
-	ld hl, $8a20
+	ld hl, vChars1 + $220
 	ld bc, (BANK(FallingStar) << 8) + $01
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData ; $4140
@@ -85,7 +85,7 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	dec a
 	jr nz, .asm_70098
 	xor a
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 	ld hl, PointerTable_700f2 ; $40f2
 	ld c, $6
 .asm_700af
@@ -110,15 +110,15 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	inc hl
 	dec c
 	jr nz, .asm_700ba
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	cp $18
 	jr z, .asm_700d5
 	add $6
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a ; wWhichTrade
 .asm_700d5
 	call Func_7011f
 	push af
-	ld hl, $c310
+	ld hl, wOAMBuffer + $10
 	ld de, wOAMBuffer
 	ld bc, $50
 	call CopyData
@@ -173,8 +173,8 @@ OAMData_7011e: ; 7011e (1c:411e)
 Func_7011f: ; 7011f (1c:411f)
 	ld b, $8
 .asm_70121
-	ld hl, $c35c
-	ld a, [wWhichTrade] ; $cd3d
+	ld hl, wOAMBuffer + $5c
+	ld a, [wWhichTrade] ; wWhichTrade
 	ld de, $fffc
 	ld c, a
 .asm_7012b

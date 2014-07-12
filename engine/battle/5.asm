@@ -1,13 +1,13 @@
 SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld c, 50
 	call DelayFrames
-	ld hl, W_PLAYERMONMAXHP
+	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
 	ld a, [$fff3]  ;whose turn?
 	and a
 	jr z, .notEnemy
-	ld hl, W_ENEMYMONMAXHP
+	ld hl, wEnemyMonMaxHP
 	ld de, wEnemySubstituteHP
 	ld bc, W_ENEMYBATTSTATUS2
 .notEnemy
@@ -42,7 +42,7 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld h, b
 	ld l, c
 	set 4, [hl]    ;set bit 4 of flags, user now has substitute
-	ld a, [$d355]  ;load options
+	ld a, [W_OPTIONS]  ;load options
 	bit 7, a       ;battle animation is enabled?
 	ld hl, Func_3fba8    ; $7ba8 ;animation enabled: 0F:7BA8
 	ld b, BANK(Func_3fba8)

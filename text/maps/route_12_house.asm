@@ -18,7 +18,7 @@ _Route12HouseText_564c5:: ; 8ca00 (23:4a00)
 
 	para $52, " received"
 	line "a @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _Route12HouseText_564ca:: ; 8ca4f (23:4a4f)

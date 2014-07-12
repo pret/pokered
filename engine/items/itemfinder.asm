@@ -4,15 +4,14 @@ HiddenItemNear: ; 7481f (1d:481f)
 .asm_74824
 	ld de, $0003
 	ld a, [W_CURMAP]
-	call IsInArrayCummulativeCount
+	call IsInRestOfArray
 	ret nc ; return if current map has no hidden items
 	push bc
 	push hl
-	ld hl, $d6f0
+	ld hl, wd6f0
 	ld c, b
 	ld b, $2
-	ld a, $10
-	call Predef ; indirect jump to HandleBitArray (f666 (3:7666))
+	predef FlagActionPredef
 	ld a, c
 	pop hl
 	pop bc

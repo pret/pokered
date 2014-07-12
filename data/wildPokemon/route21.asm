@@ -1,4 +1,4 @@
-Route21Mons: 
+Route21Mons:
 	db $19
 	IF !_YELLOW
 		db 21,RATTATA
@@ -12,7 +12,7 @@ Route21Mons:
 		db 30,TANGELA
 		db 32,TANGELA
 	ENDC
-	
+
 	IF _YELLOW
 		db 15,PIDGEY
 		db 13,RATTATA
@@ -25,7 +25,7 @@ Route21Mons:
 		db 19,PIDGEOTTO
 		db 15,PIDGEOTTO
 	ENDC
-	
+
 	db $05
 	db 5,TENTACOOL
 	db 10,TENTACOOL

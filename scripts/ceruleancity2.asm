@@ -4,16 +4,13 @@ Func_74872: ; 74872 (1d:4872)
 ; the screen then fades out, he disappears, and fades back in
 	call GBFadeIn1
 	ld a, $07
-	ld [$CC4D], a
-	ld a, $15
-	call Predef
+	ld [wcc4d], a
+	predef ShowObject
 	ld a, $09
-	ld [$CC4D], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld a, $06
-	ld [$CC4D], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	call GBFadeOut1
 	ret

@@ -6,7 +6,7 @@ FuchsiaHouse3TextPointers: ; 5617f (15:617f)
 
 FuchsiaHouse3Text1: ; 56181 (15:6181)
 	db $08 ; asm
-	ld a, [$d728]
+	ld a, [wd728]
 	bit 4, a
 	jr nz, .after
 
@@ -14,7 +14,7 @@ FuchsiaHouse3Text1: ; 56181 (15:6181)
 	call PrintText
 
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
 
@@ -22,7 +22,7 @@ FuchsiaHouse3Text1: ; 56181 (15:6181)
 	call GiveItem
 	jr nc, .full
 
-	ld hl, $d728
+	ld hl, wd728
 	set 4, [hl]
 
 	ld hl, FuchsiaHouse3Text_561c2

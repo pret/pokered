@@ -10,7 +10,7 @@ _TM18PreReceiveText:: ; 9c814 (27:4814)
 _ReceivedTM18Text:: ; 9c85a (27:485a)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM18ExplanationText:: ; 9c86e (27:486e)

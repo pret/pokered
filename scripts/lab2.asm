@@ -21,6 +21,5 @@ Lab2Text3: ; 75c37 (1d:5c37)
 	ld a, $8
 	ld [wWhichTrade], a
 asm_78552: ; 75c3d (1d:5c3d)
-	ld a, $54
-	call Predef
+	predef Predef54 
 	jp TextScriptEnd

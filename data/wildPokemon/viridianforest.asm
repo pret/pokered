@@ -1,4 +1,4 @@
-ForestMons: ; 
+ForestMons:
 	IF !_YELLOW
 		db $08
 		IF _RED
@@ -21,11 +21,11 @@ ForestMons: ;
 			db 4,KAKUNA
 			db 3,WEEDLE
 		ENDC
-		
+	
 		db 3,PIKACHU
 		db 5,PIKACHU
 	ENDC
-	
+
 	IF _YELLOW
 		db $19
 		db 3,CATERPIE

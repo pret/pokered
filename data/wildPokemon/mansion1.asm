@@ -1,4 +1,4 @@
-MansionMons1: 
+MansionMons1:
 	db $0A
 	IF _RED
 		db 32,KOFFING
@@ -12,7 +12,7 @@ MansionMons1:
 		db 37,WEEZING
 		db 39,MUK
 	ENDC
-	
+
 	IF _GREEN || _BLUE
 		db 32,GRIMER
 		db 30,GRIMER
@@ -25,7 +25,7 @@ MansionMons1:
 		db 37,MUK
 		db 39,WEEZING
 	ENDC
-	
+
 	IF _YELLOW
 		db 34,RATTATA
 		db 34,RATICATE
@@ -38,6 +38,6 @@ MansionMons1:
 		db 34,GROWLITHE
 		db 38,GROWLITHE
 	ENDC
-	
+
 	db $00
 

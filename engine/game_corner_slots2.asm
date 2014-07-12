@@ -1,10 +1,9 @@
 AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
-	ld a, [$c102]
+	ld a, [wSpriteStateData1 + 2]
 	and $8
 	jr z, .done ; not able
 	ld b, COIN_CASE
-	ld a, $1c
-	call Predef ; IsItemInBag_
+	predef IsItemInBag_  ; IsItemInBag_
 	ld a, b
 	and a
 	ld b, $33 ; GameCornerCoinCaseText
@@ -20,7 +19,7 @@ AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
 	call PrintPredefTextID
 	xor a
 .done
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ret
 
 GameCornerCoinCaseText: ; 2ff32 (b:7f32)

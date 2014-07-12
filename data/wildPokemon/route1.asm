@@ -1,4 +1,4 @@
-Route1Mons: 
+Route1Mons:
 	db $19
 	IF !_YELLOW
 		db 3,PIDGEY

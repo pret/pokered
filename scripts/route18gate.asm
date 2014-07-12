@@ -1,5 +1,5 @@
 Route18GateScript: ; 49876 (12:5876)
-	ld hl, $d732
+	ld hl, wd732
 	res 5, [hl]
 	call EnableAutoTextBoxDrawing
 	ld a, [W_ROUTE18GATECURSCRIPT]
@@ -13,7 +13,7 @@ Route18GateScriptPointers: ; 49887 (12:5887)
 	dw Route18GateScript3
 
 Route18GateScript0: ; 4988f (12:588f)
-	call Func_49755
+	call Route16GateScript_49755
 	ret nz
 	ld hl, CoordsData_498cc
 	call ArePlayerCoordsInArray
@@ -22,17 +22,17 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
-	ld a, [$cd3d]
+	ld [hJoyHeld], a
+	ld a, [wWhichTrade]
 	cp $1
 	jr z, .asm_498c6 ; 0x498a9 $1b
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	ld b, $0
 	ld c, a
 	ld a, $40
-	ld hl, $ccd3
+	ld hl, wccd3
 	call FillMemory
 	call Func_3486
 	ld a, $1
@@ -51,32 +51,32 @@ CoordsData_498cc: ; 498cc (12:58cc)
 	db $FF
 
 Route18GateScript1: ; 498d5 (12:58d5)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 Route18GateScript2: ; 498df (12:58df)
 	ld a, $1
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $10
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	ld a, $3
 	ld [W_ROUTE18GATECURSCRIPT], a
 	ret
 
 Route18GateScript3: ; 498f9 (12:58f9)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
-	ld hl, $d730
+	ld [wJoyIgnore], a
+	ld hl, wd730
 	res 7, [hl]
 	ld a, $0
 	ld [W_ROUTE18GATECURSCRIPT], a
@@ -88,7 +88,7 @@ Route18GateTextPointers: ; 4990d (12:590d)
 
 Route18GateText1: ; 49911 (12:5911)
 	db $08 ; asm
-	call Func_49755
+	call Route16GateScript_49755
 	jr z, .asm_3c84d ; 0x49915
 	ld hl, Route18GateText_4992d
 	call PrintText

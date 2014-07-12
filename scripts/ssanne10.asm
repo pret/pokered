@@ -29,7 +29,7 @@ SSAnne10TrainerHeaders: ; 61d84 (18:5d84)
 SSAnne10TrainerHeader0: ; 61d84 (18:5d84)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText1 ; 0x5e16 TextBeforeBattle
 	dw SSAnne10AfterBattleText1 ; 0x5e20 TextAfterBattle
 	dw SSAnne10EndBattleText1 ; 0x5e1b TextEndBattle
@@ -38,7 +38,7 @@ SSAnne10TrainerHeader0: ; 61d84 (18:5d84)
 SSAnne10TrainerHeader1: ; 61d90 (18:5d90)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText2 ; 0x5e25 TextBeforeBattle
 	dw SSAnne10AfterBattleText2 ; 0x5e2f TextAfterBattle
 	dw SSAnne10EndBattleText2 ; 0x5e2a TextEndBattle
@@ -47,7 +47,7 @@ SSAnne10TrainerHeader1: ; 61d90 (18:5d90)
 SSAnne10TrainerHeader2: ; 61d9c (18:5d9c)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText3 ; 0x5e34 TextBeforeBattle
 	dw SSAnne10AfterBattleText3 ; 0x5e3e TextAfterBattle
 	dw SSAnne10EndBattleText3 ; 0x5e39 TextEndBattle
@@ -56,7 +56,7 @@ SSAnne10TrainerHeader2: ; 61d9c (18:5d9c)
 SSAnne10TrainerHeader3: ; 61da8 (18:5da8)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText4 ; 0x5e43 TextBeforeBattle
 	dw SSAnne10AfterBattleText4 ; 0x5e4d TextAfterBattle
 	dw SSAnne10EndBattleText4 ; 0x5e48 TextEndBattle
@@ -65,7 +65,7 @@ SSAnne10TrainerHeader3: ; 61da8 (18:5da8)
 SSAnne10TrainerHeader4: ; 61db4 (18:5db4)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText5 ; 0x5e52 TextBeforeBattle
 	dw SSAnne10AfterBattleText5 ; 0x5e5c TextAfterBattle
 	dw SSAnne10EndBattleText5 ; 0x5e57 TextEndBattle
@@ -74,7 +74,7 @@ SSAnne10TrainerHeader4: ; 61db4 (18:5db4)
 SSAnne10TrainerHeader5: ; 61dc0 (18:5dc0)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw $d809 ; flag's byte
+	dw wd809 ; flag's byte
 	dw SSAnne10BattleText6 ; 0x5e61 TextBeforeBattle
 	dw SSAnne10AfterBattleText6 ; 0x5e6b TextAfterBattle
 	dw SSAnne10EndBattleText6 ; 0x5e66 TextEndBattle

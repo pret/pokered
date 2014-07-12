@@ -12,7 +12,7 @@ _Route24Text_51515:: ; 92755 (24:6755)
 _Route24Text_5151a:: ; 92779 (24:6779)
 	text $52, " received"
 	line "a @"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _Route24Text_51521:: ; 9278f (24:678f)

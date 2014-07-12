@@ -2,15 +2,14 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld a, $e4
 	ld [rOBP1], a ; $ff49
 	call Func_7092a
-	FuncCoord 12, 0 ; $c3ac
-	ld hl, Coord
+	hlCoord 12, 0
 	ld bc, $707
 	call ClearScreenArea
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, $91
-	ld [$cee9], a
+	ld [wHPBarMaxHP], a
 	ld a, $1
 	ld [H_WHOSETURN], a ; $fff3
 	callab Func_79793
@@ -24,7 +23,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	sla a
 	ld [rOBP1], a ; $ff49
 	jr nz, .asm_708f6
-	call CleanLCD_OAM
+	call ClearSprites
 	call Func_7092a
 	ld b, $e4
 .asm_7090d
@@ -42,30 +41,30 @@ Func_708ca: ; 708ca (1c:48ca)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_7092a: ; 7092a (1c:492a)
-	ld de, $9000
-	ld hl, $8000
-	ld bc, $31
+	ld de, vFrontPic
+	ld hl, vSprites
+	ld bc, 7 * 7
 	call CopyVideoData
 	ld a, $10
-	ld [W_BASECOORDY], a ; $d082
+	ld [W_BASECOORDY], a ; wd082
 	ld a, $70
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	ld hl, wOAMBuffer
 	ld bc, $606
 	ld d, $8
 .asm_70948
 	push bc
-	ld a, [W_BASECOORDY] ; $d082
+	ld a, [W_BASECOORDY] ; wd082
 	ld e, a
 .asm_7094d
 	ld a, e
 	add $8
 	ld e, a
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	ld [hli], a
 	ld a, d
 	ld [hli], a
@@ -75,44 +74,44 @@ Func_7092a: ; 7092a (1c:492a)
 	dec c
 	jr nz, .asm_7094d
 	inc d
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	add $8
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	pop bc
 	dec b
 	jr nz, .asm_70948
 	ret
 
-Func_7096d: ; 7096d (1c:496d)
+BattleTransition: ; 7096d (1c:496d)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
 	ld [$ffb0], a
 	dec a
-	ld [$cfcb], a
+	ld [wcfcb], a
 	call DelayFrame
-	ld hl, $c102
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld hl, wSpriteStateData1 + 2
+	ld a, [H_DOWNARROWBLINKCNT2]
 	ld c, a
 	ld b, $0
 	ld de, $10
-.asm_70989
+.loop1
 	ld a, [hl]
 	cp $ff
-	jr z, .asm_7098f
+	jr z, .skip1
 	inc b
-.asm_7098f
+.skip1
 	add hl, de
 	dec c
-	jr nz, .asm_70989
-	ld hl, $c310
+	jr nz, .loop1
+	ld hl, wOAMBuffer + $10
 	ld c, $9
-.asm_70998
+.loop2
 	ld a, b
 	swap a
 	cp l
-	jr z, .asm_709a9
+	jr z, .skip2
 	push hl
 	push bc
 	ld bc, $10
@@ -120,22 +119,22 @@ Func_7096d: ; 7096d (1c:496d)
 	call FillMemory
 	pop bc
 	pop hl
-.asm_709a9
+.skip2
 	ld de, $10
 	add hl, de
 	dec c
-	jr nz, .asm_70998
+	jr nz, .loop2
 	call Delay3
 	call LoadBattleTransitionTile
 	ld bc, $0
-	ld a, [W_ISLINKBATTLE] ; $d12b
+	ld a, [W_ISLINKBATTLE]
 	cp $4
-	jr z, .asm_709c9
-	call Func_709e2
-	call Func_709ef
-	call Func_70a19
-.asm_709c9
-	ld hl, PointerTable_709d2 ; $49d2
+	jr z, .linkBattle
+	call GetBattleTransitionID_WildOrTrainer
+	call GetBattleTransitionID_CompareLevels
+	call GetBattleTransitionID_IsDungeonMap
+.linkBattle
+	ld hl, BattleTransitions
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -143,94 +142,105 @@ Func_7096d: ; 7096d (1c:496d)
 	ld l, a
 	jp [hl]
 
-PointerTable_709d2: ; 709d2 (1c:49d2)
-	dw Func_70d24
-	dw Func_70a72
-	dw Func_70ce4
-	dw Func_70a72
-	dw Func_70cb4
-	dw Func_70b7f
-	dw Func_70c7e
-	dw Func_70bca
+; the three GetBattleTransitionID functions set the first
+; three bits of c, which determines what transition animation
+; to play at the beginning of a battle
+; bit 0: set if trainer battle
+; bit 1: set if enemy is at least 3 levels higher than player
+; bit 2: set if dungeon map
+BattleTransitions: ; 709d2 (1c:49d2)
+	dw BattleTransition_DoubleCircle      ; %000
+	dw BattleTransition_Spiral            ; %001
+	dw BattleTransition_Circle            ; %010
+	dw BattleTransition_Spiral            ; %011
+	dw BattleTransition_HorizontalStripes ; %100
+	dw BattleTransition_Shrink            ; %101
+	dw BattleTransition_VerticalStripes   ; %110
+	dw BattleTransition_Split             ; %111
 
-Func_709e2: ; 709e2 (1c:49e2)
-	ld a, [W_CUROPPONENT] ; $d059
+GetBattleTransitionID_WildOrTrainer: ; 709e2 (1c:49e2)
+	ld a, [W_CUROPPONENT]
 	cp $c8
-	jr nc, .asm_709ec
+	jr nc, .trainer
 	res 0, c
 	ret
-.asm_709ec
+.trainer
 	set 0, c
 	ret
 
-Func_709ef: ; 709ef (1c:49ef)
-	ld hl, W_PARTYMON1_HP ; $d16c
-.asm_709f2
+GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
+	ld hl, wPartyMon1HP
+.faintedLoop
 	ld a, [hli]
 	or [hl]
-	jr nz, .asm_709fc
-	ld de, $2b
+	jr nz, .notFainted
+	ld de, wPartyMon2 - (wPartyMon1 + 1)
 	add hl, de
-	jr .asm_709f2
-.asm_709fc
-	ld de, $1f
+	jr .faintedLoop
+.notFainted
+	ld de, wPartyMon1Level - (wPartyMon1HP + 1)
 	add hl, de
 	ld a, [hl]
 	add $3
 	ld e, a
-	ld a, [W_CURENEMYLVL] ; $d127
+	ld a, [W_CURENEMYLVL]
 	sub e
-	jr nc, .asm_70a12
+	jr nc, .highLevelEnemy
 	res 1, c
 	ld a, $1
-	ld [$cd47], a
+	ld [wcd47], a
 	ret
-.asm_70a12
+.highLevelEnemy
 	set 1, c
 	xor a
-	ld [$cd47], a
+	ld [wcd47], a
 	ret
 
-Func_70a19: ; 70a19 (1c:4a19)
-	ld a, [W_CURMAP] ; $d35e
+; fails to recognize VICTORY_ROAD_2, VICTORY_ROAD_3, all ROCKET_HIDEOUT maps,
+; MANSION_1, SEAFOAM_ISLANDS_[2-5], POWER_PLANT, DIGLETTS_CAVE
+; and SILPH_CO_[9-11]F as dungeon maps
+GetBattleTransitionID_IsDungeonMap: ; 70a19 (1c:4a19)
+	ld a, [W_CURMAP]
 	ld e, a
-	ld hl, MapIDList_70a3f ; $4a3f
-.asm_70a20
+	ld hl, DungeonMaps1
+.loop1
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_70a2b
+	jr z, .noMatch1
 	cp e
-	jr nz, .asm_70a20
-.asm_70a28
+	jr nz, .loop1
+.match
 	set 2, c
 	ret
-.asm_70a2b
-	ld hl, MapIDList_70a44 ; $4a44
-.asm_70a2e
+.noMatch1
+	ld hl, DungeonMaps2
+.loop2
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_70a3c
+	jr z, .noMatch2
 	ld d, a
 	ld a, [hli]
 	cp e
-	jr c, .asm_70a2e
+	jr c, .loop2
 	ld a, e
 	cp d
-	jr nc, .asm_70a28
-.asm_70a3c
+	jr nc, .match
+.noMatch2
 	res 2, c
 	ret
 
-; Func_70a19 checks if W_CURMAP is equal to one of these maps
-MapIDList_70a3f: ; 70a3f (1c:4a3f)
+; GetBattleTransitionID_IsDungeonMap checks if W_CURMAP
+; is equal to one of these maps
+DungeonMaps1: ; 70a3f (1c:4a3f)
 	db VIRIDIAN_FOREST
 	db ROCK_TUNNEL_1
 	db SEAFOAM_ISLANDS_1
 	db ROCK_TUNNEL_2
 	db $FF
 
-; Func_70a19 checks if W_CURMAP is in between or equal to each pair of maps
-MapIDList_70a44: ; 70a44 (1c:4a44)
+; GetBattleTransitionID_IsDungeonMap checks if W_CURMAP
+; is in between or equal to each pair of maps
+DungeonMaps2: ; 70a44 (1c:4a44)
 	; all MT_MOON maps
 	db MT_MOON_1
 	db MT_MOON_3
@@ -243,282 +253,274 @@ MapIDList_70a44: ; 70a44 (1c:4a44)
 	db LAVENDER_POKECENTER
 	db LAVENDER_HOUSE_2
 
-	; all SILPH_CO, MANSION, SAFARI_ZONE, and UNKNOWN_DUNGEON maps,
+	; SILPH_CO_[2-8]F, MANSION[2-4], SAFARI_ZONE, and UNKNOWN_DUNGEON maps,
 	; except for SILPH_CO_1F
 	db SILPH_CO_2F
 	db UNKNOWN_DUNGEON_1
 	db $FF
 
 LoadBattleTransitionTile: ; 70a4d (1c:4a4d)
-	ld hl, $8ff0
-	ld de, BattleTransitionTile ; $4a59
+	ld hl, vChars1 + $7f0
+	ld de, BattleTransitionTile
 	ld bc, (BANK(BattleTransitionTile) << 8) + $01
 	jp CopyVideoData
 
 BattleTransitionTile: ; 70a59 (1c:4a59)
 	INCBIN "gfx/battle_transition.2bpp"
 
-Func_70a69: ; 70a69 (1c:4a69)
+BattleTransition_BlackScreen: ; 70a69 (1c:4a69)
 	ld a, $ff
 	ld [rBGP], a ; $ff47
 	ld [rOBP0], a ; $ff48
 	ld [rOBP1], a ; $ff49
 	ret
 
-Func_70a72: ; 70a72 (1c:4a72)
-	ld a, [$cd47]
+; for non-dungeon trainer battles
+; called regardless of mon levels, but does an
+; outward spiral if enemy is at least 3 levels
+; higher than player and does an inward spiral otherwise
+BattleTransition_Spiral: ; 70a72 (1c:4a72)
+	ld a, [wcd47]
 	and a
-	jr z, .asm_70a7d
-	call Func_70aaa
-	jr .asm_70a9f
-.asm_70a7d
-	FuncCoord 10, 10 ; $c472
-	ld hl, Coord
+	jr z, .outwardSpiral
+	call BattleTransition_InwardSpiral
+	jr .done
+.outwardSpiral
+	hlCoord 10, 10
 	ld a, $3
-	ld [$d09f], a
+	ld [wd09f], a
 	ld a, l
-	ld [$d09b], a
+	ld [wd09b], a
 	ld a, h
-	ld [$d09a], a
+	ld [wd09a], a
 	ld b, $78
-.asm_70a8f
+.loop1
 	ld c, $3
-.asm_70a91
+.loop2
 	push bc
-	call Func_70af9
+	call BattleTransition_OutwardSpiral_
 	pop bc
 	dec c
-	jr nz, .asm_70a91
+	jr nz, .loop2
 	call DelayFrame
 	dec b
-	jr nz, .asm_70a8f
-.asm_70a9f
-	call Func_70a69
+	jr nz, .loop1
+.done
+	call BattleTransition_BlackScreen
 	xor a
-	ld [$d09b], a
-	ld [$d09a], a
+	ld [wd09b], a
+	ld [wd09a], a
 	ret
 
-Func_70aaa: ; 70aaa (1c:4aaa)
+BattleTransition_InwardSpiral: ; 70aaa (1c:4aaa)
 	ld a, $7
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a
 	ld hl, wTileMap
 	ld c, $11
 	ld de, $14
-	call Func_70ae0
+	call BattleTransition_InwardSpiral_
 	inc c
-	jr .asm_70ac3
-.asm_70abd
+	jr .skip
+.loop
 	ld de, $14
-	call Func_70ae0
-.asm_70ac3
+	call BattleTransition_InwardSpiral_
+.skip
 	inc c
 	ld de, $1
-	call Func_70ae0
+	call BattleTransition_InwardSpiral_
 	dec c
 	dec c
 	ld de, $ffec
-	call Func_70ae0
+	call BattleTransition_InwardSpiral_
 	inc c
-	ld de, rIE ; $ffff
-	call Func_70ae0
+	ld de, rIE
+	call BattleTransition_InwardSpiral_
 	dec c
 	dec c
 	ld a, c
 	and a
-	jr nz, .asm_70abd
+	jr nz, .loop
 	ret
 
-Func_70ae0: ; 70ae0 (1c:4ae0)
+BattleTransition_InwardSpiral_: ; 70ae0 (1c:4ae0)
 	push bc
-.asm_70ae1
+.loop
 	ld [hl], $ff
 	add hl, de
 	push bc
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade]
 	dec a
-	jr nz, .asm_70af0
-	call Func_70d19
+	jr nz, .skip
+	call BattleTransition_TransferDelay3
 	ld a, $7
-.asm_70af0
-	ld [wWhichTrade], a ; $cd3d
+.skip
+	ld [wWhichTrade], a
 	pop bc
 	dec c
-	jr nz, .asm_70ae1
+	jr nz, .loop
 	pop bc
 	ret
 
-Func_70af9: ; 70af9 (1c:4af9)
+BattleTransition_OutwardSpiral_: ; 70af9 (1c:4af9)
 	ld bc, $ffec
 	ld de, $14
-	ld a, [$d09b]
+	ld a, [wd09b]
 	ld l, a
-	ld a, [$d09a]
+	ld a, [wd09a]
 	ld h, a
-	ld a, [$d09f]
+	ld a, [wd09f]
 	cp $0
-	jr z, .asm_70b25
+	jr z, .zero
 	cp $1
-	jr z, .asm_70b2f
+	jr z, .one
 	cp $2
-	jr z, .asm_70b39
+	jr z, .two
 	cp $3
-	jr z, .asm_70b43
-.asm_70b1a
+	jr z, .three
+.done1
 	ld [hl], $ff
-.asm_70b1c
+.done2_
 	ld a, l
-	ld [$d09b], a
+	ld [wd09b], a
 	ld a, h
-	ld [$d09a], a
+	ld [wd09a], a
 	ret
-.asm_70b25
+.zero
 	dec hl
 	ld a, [hl]
 	cp $ff
-	jr nz, .asm_70b4d
+	jr nz, .done2
 	inc hl
 	add hl, bc
-	jr .asm_70b1a
-.asm_70b2f
+	jr .done1
+.one
 	add hl, de
 	ld a, [hl]
 	cp $ff
-	jr nz, .asm_70b4d
+	jr nz, .done2
 	add hl, bc
 	dec hl
-	jr .asm_70b1a
-.asm_70b39
+	jr .done1
+.two
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jr nz, .asm_70b4d
+	jr nz, .done2
 	dec hl
 	add hl, de
-	jr .asm_70b1a
-.asm_70b43
+	jr .done1
+.three
 	add hl, bc
 	ld a, [hl]
 	cp $ff
-	jr nz, .asm_70b4d
+	jr nz, .done2
 	add hl, de
 	inc hl
-	jr .asm_70b1a
-.asm_70b4d
+	jr .done1
+.done2
 	ld [hl], $ff
-	ld a, [$d09f]
+	ld a, [wd09f]
 	inc a
 	cp $4
-	jr nz, .asm_70b58
+	jr nz, .skip
 	xor a
-.asm_70b58
-	ld [$d09f], a
-	jr .asm_70b1c
+.skip
+	ld [wd09f], a
+	jr .done2_
 
-Func_70b5d: ; 70b5d (1c:4b5d)
-	ld hl, DataTable_70b72 ; $4b72
-.asm_70b60
+FlashScreen:
+BattleTransition_FlashScreen_: ; 70b5d (1c:4b5d)
+	ld hl, BattleTransition_FlashScreenPalettes
+.loop
 	ld a, [hli]
 	cp $1
-	jr z, .asm_70b6e
-	ld [rBGP], a ; $ff47
+	jr z, .done
+	ld [rBGP], a
 	ld c, $2
 	call DelayFrames
-	jr .asm_70b60
-.asm_70b6e
+	jr .loop
+.done
 	dec b
-	jr nz, Func_70b5d
+	jr nz, BattleTransition_FlashScreen_
 	ret
 
-DataTable_70b72: ; 70b72 (1c:4b72)
+BattleTransition_FlashScreenPalettes: ; 70b72 (1c:4b72)
 	db $F9,$FE,$FF,$FE,$F9,$E4,$90,$40,$00,$40,$90,$E4
 	db $01 ; terminator
 
-Func_70b7f: ; 70b7f (1c:4b7f)
+; used for low level trainer dungeon battles
+BattleTransition_Shrink: ; 70b7f (1c:4b7f)
 	ld c, $9
-.asm_70b81
+.loop
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 0, 7 ; $c42c
-	ld hl, Coord
-	FuncCoord 0, 8 ; $c440
-	ld de, Coord
+	ld [H_AUTOBGTRANSFERENABLED], a
+	hlCoord 0, 7
+	deCoord 0, 8
 	ld bc, $ffd8
-	call Func_70c12
-	FuncCoord 0, 10 ; $c468
-	ld hl, Coord
-	FuncCoord 0, 9 ; $c454
-	ld de, Coord
+	call BattleTransition_CopyTiles1
+	hlCoord 0, 10
+	deCoord 0, 9
 	ld bc, $28
-	call Func_70c12
-	FuncCoord 8, 0 ; $c3a8
-	ld hl, Coord
-	FuncCoord 9, 0 ; $c3a9
-	ld de, Coord
+	call BattleTransition_CopyTiles1
+	hlCoord 8, 0
+	deCoord 9, 0
 	ld bc, $fffe
-	call Func_70c3f
-	FuncCoord 11, 0 ; $c3ab
-	ld hl, Coord
-	FuncCoord 10, 0 ; $c3aa
-	ld de, Coord
+	call BattleTransition_CopyTiles2
+	hlCoord 11, 0
+	deCoord 10, 0
 	ld bc, $2
-	call Func_70c3f
+	call BattleTransition_CopyTiles2
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld c, $6
 	call DelayFrames
 	pop bc
 	dec c
-	jr nz, .asm_70b81
-	call Func_70a69
+	jr nz, .loop
+	call BattleTransition_BlackScreen
 	ld c, $a
 	jp DelayFrames
 
-Func_70bca: ; 70bca (1c:4bca)
+; used for high level trainer dungeon battles
+BattleTransition_Split: ; 70bca (1c:4bca)
 	ld c, $9
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-.asm_70bcf
+	ld [H_AUTOBGTRANSFERENABLED], a
+.loop
 	push bc
-	FuncCoord 0, 16 ; $c4e0
-	ld hl, Coord
-	FuncCoord 0, 17 ; $c4f4
-	ld de, Coord
+	hlCoord 0, 16
+	deCoord 0, 17
 	ld bc, $ffd8
-	call Func_70c12
-	FuncCoord 0, 1 ; $c3b4
-	ld hl, Coord
+	call BattleTransition_CopyTiles1
+	hlCoord 0, 1
 	ld de, wTileMap
 	ld bc, $28
-	call Func_70c12
-	FuncCoord 18, 0 ; $c3b2
-	ld hl, Coord
-	FuncCoord 19, 0 ; $c3b3
-	ld de, Coord
+	call BattleTransition_CopyTiles1
+	hlCoord 18, 0
+	deCoord 19, 0
 	ld bc, $fffe
-	call Func_70c3f
-	FuncCoord 1, 0 ; $c3a1
-	ld hl, Coord
+	call BattleTransition_CopyTiles2
+	hlCoord 1, 0
 	ld de, wTileMap
 	ld bc, $2
-	call Func_70c3f
-	call Func_70d19
+	call BattleTransition_CopyTiles2
+	call BattleTransition_TransferDelay3
 	call Delay3
 	pop bc
 	dec c
-	jr nz, .asm_70bcf
-	call Func_70a69
+	jr nz, .loop
+	call BattleTransition_BlackScreen
 	ld c, $a
 	jp DelayFrames
 
-Func_70c12: ; 70c12 (1c:4c12)
+BattleTransition_CopyTiles1: ; 70c12 (1c:4c12)
 	ld a, c
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a
 	ld a, b
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld c, $8
-.asm_70c1c
+.loop1
 	push bc
 	push hl
 	push de
@@ -526,89 +528,89 @@ Func_70c12: ; 70c12 (1c:4c12)
 	call CopyData
 	pop hl
 	pop de
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade]
 	ld c, a
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld b, a
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .asm_70c1c
+	jr nz, .loop1
 	ld l, e
 	ld h, d
 	ld a, $ff
 	ld c, $14
-.asm_70c3a
+.loop2
 	ld [hli], a
 	dec c
-	jr nz, .asm_70c3a
+	jr nz, .loop2
 	ret
 
-Func_70c3f: ; 70c3f (1c:4c3f)
+BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 	ld a, c
-	ld [wWhichTrade], a ; $cd3d
+	ld [wWhichTrade], a
 	ld a, b
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld c, $9
-.asm_70c49
+.loop1
 	push bc
 	push hl
 	push de
 	ld c, $12
-.asm_70c4e
+.loop2
 	ld a, [hl]
 	ld [de], a
 	ld a, e
 	add $14
-	jr nc, .asm_70c56
+	jr nc, .noCarry1
 	inc d
-.asm_70c56
+.noCarry1
 	ld e, a
 	ld a, l
 	add $14
-	jr nc, .asm_70c5d
+	jr nc, .noCarry2
 	inc h
-.asm_70c5d
+.noCarry2
 	ld l, a
 	dec c
-	jr nz, .asm_70c4e
+	jr nz, .loop2
 	pop hl
 	pop de
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade]
 	ld c, a
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	ld b, a
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .asm_70c49
+	jr nz, .loop1
 	ld l, e
 	ld h, d
 	ld de, $14
 	ld c, $12
-.asm_70c77
+.loop3
 	ld [hl], $ff
 	add hl, de
 	dec c
-	jr nz, .asm_70c77
+	jr nz, .loop3
 	ret
 
-Func_70c7e: ; 70c7e (1c:4c7e)
+; used for high level wild dungeon battles
+BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
 	ld c, $12
 	ld hl, wTileMap
-	FuncCoord 1, 17 ; $c4f5
-	ld de, Coord
+	deCoord 1, 17
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-.asm_70c89
+	ld [H_AUTOBGTRANSFERENABLED], a
+.loop
 	push bc
 	push hl
 	push de
 	push de
-	call Func_70caa
+	call BattleTransition_VerticalStripes_
 	pop hl
-	call Func_70caa
-	call Func_70d19
+	call BattleTransition_VerticalStripes_
+	call BattleTransition_TransferDelay3
 	pop hl
 	ld bc, $ffec
 	add hl, bc
@@ -619,109 +621,115 @@ Func_70c7e: ; 70c7e (1c:4c7e)
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .asm_70c89
-	jp Func_70a69
+	jr nz, .loop
+	jp BattleTransition_BlackScreen
 
-Func_70caa: ; 70caa (1c:4caa)
+BattleTransition_VerticalStripes_: ; 70caa (1c:4caa)
 	ld c, $a
-.asm_70cac
+.loop
 	ld [hl], $ff
 	inc hl
 	inc hl
 	dec c
-	jr nz, .asm_70cac
+	jr nz, .loop
 	ret
 
-Func_70cb4: ; 70cb4 (1c:4cb4)
+; used for low level wild dungeon battles
+BattleTransition_HorizontalStripes: ; 70cb4 (1c:4cb4)
 	ld c, $14
 	ld hl, wTileMap
-	FuncCoord 19, 1 ; $c3c7
-	ld de, Coord
+	deCoord 19, 1
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-.asm_70cbf
+	ld [H_AUTOBGTRANSFERENABLED], a
+.loop
 	push bc
 	push hl
 	push de
 	push de
-	call Func_70cd8
+	call BattleTransition_HorizontalStripes_
 	pop hl
-	call Func_70cd8
-	call Func_70d19
+	call BattleTransition_HorizontalStripes_
+	call BattleTransition_TransferDelay3
 	pop de
 	pop hl
 	pop bc
 	inc hl
 	dec de
 	dec c
-	jr nz, .asm_70cbf
-	jp Func_70a69
+	jr nz, .loop
+	jp BattleTransition_BlackScreen
 
-Func_70cd8: ; 70cd8 (1c:4cd8)
+BattleTransition_HorizontalStripes_: ; 70cd8 (1c:4cd8)
 	ld c, $9
 	ld de, $28
-.asm_70cdd
+.loop
 	ld [hl], $ff
 	add hl, de
 	dec c
-	jr nz, .asm_70cdd
+	jr nz, .loop
 	ret
 
-Func_70ce4: ; 70ce4 (1c:4ce4)
-	call Func_70cfd
+; used for high level wild non-dungeon battles
+; makes one full circle around the screen
+; by animating each half circle one at a time
+BattleTransition_Circle: ; 70ce4 (1c:4ce4)
+	call BattleTransition_FlashScreen
 	ld bc, $000a
-	ld hl, Unknown_70d61
-	call Func_70d06
+	ld hl, BattleTransition_HalfCircle1
+	call BattleTransition_Circle_Sub1
 	ld c, $a
 	ld b, $1
-	ld hl, Unknown_70d93
-	call Func_70d06
-	jp Func_70a69
+	ld hl, BattleTransition_HalfCircle2
+	call BattleTransition_Circle_Sub1
+	jp BattleTransition_BlackScreen
 
-Func_70cfd: ; 70cfd (1c:4cfd)
+BattleTransition_FlashScreen: ; 70cfd (1c:4cfd)
 	ld b, $3
-	call Func_70b5d
+	call BattleTransition_FlashScreen_
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-Func_70d06: ; 70d06 (1c:4d06)
+BattleTransition_Circle_Sub1: ; 70d06 (1c:4d06)
 	push bc
 	push hl
 	ld a, b
-	call Func_70d50
+	call BattleTransition_Circle_Sub2
 	pop hl
 	ld bc, $0005
 	add hl, bc
-	call Func_70d19
+	call BattleTransition_TransferDelay3
 	pop bc
 	dec c
-	jr nz, Func_70d06
+	jr nz, BattleTransition_Circle_Sub1
 	ret
 
-Func_70d19: ; 70d19 (1c:4d19)
+BattleTransition_TransferDelay3: ; 70d19 (1c:4d19)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-Func_70d24: ; 70d24 (1c:4d24)
-	call Func_70cfd
+; used for low level wild non-dungeon battles
+; makes two half circles around the screen
+; by animating both half circles at the same time
+BattleTransition_DoubleCircle: ; 70d24 (1c:4d24)
+	call BattleTransition_FlashScreen
 	ld c, $a
-	ld hl, Unknown_70d61 ; $4d61
-	ld de, Unknown_70d93 ; $4d93
-.asm_70d2f
+	ld hl, BattleTransition_HalfCircle1
+	ld de, BattleTransition_HalfCircle2
+.loop
 	push bc
 	push hl
 	push de
 	push de
 	xor a
-	call Func_70d50
+	call BattleTransition_Circle_Sub2
 	pop hl
 	ld a, $1
-	call Func_70d50
+	call BattleTransition_Circle_Sub2
 	pop hl
 	ld bc, $5
 	add hl, bc
@@ -729,16 +737,16 @@ Func_70d24: ; 70d24 (1c:4d24)
 	ld d, h
 	pop hl
 	add hl, bc
-	call Func_70d19
+	call BattleTransition_TransferDelay3
 	pop bc
 	dec c
-	jr nz, .asm_70d2f
-	jp Func_70a69
+	jr nz, .loop
+	jp BattleTransition_BlackScreen
 
-Func_70d50: ; 70d50 (1c:4d50)
-	ld [wWhichTrade], a ; $cd3d
+BattleTransition_Circle_Sub2: ; 70d50 (1c:4d50)
+	ld [wWhichTrade], a
 	ld a, [hli]
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -746,166 +754,146 @@ Func_70d50: ; 70d50 (1c:4d50)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp Func_70dc5
+	jp BattleTransition_Circle_Sub3
 
-Unknown_70d61: ; 70d61 (1c:4d61)
+BattleTransition_HalfCircle1: ; 70d61 (1c:4d61)
 	db $01
-	dw Unknown_70dfe
-	FuncCoord 18, 6
-	dw Coord
-
-	db $01
-	dw Unknown_70e04
-	FuncCoord 19, 3
-	dw Coord
+	dw BattleTransition_CircleData1
+	dwCoord 18, 6
 
 	db $01
-	dw Unknown_70e0e
-	FuncCoord 18, 0
-	dw Coord
+	dw BattleTransition_CircleData2
+	dwCoord 19, 3
 
 	db $01
-	dw Unknown_70e20
-	FuncCoord 14, 0
-	dw Coord
+	dw BattleTransition_CircleData3
+	dwCoord 18, 0
 
 	db $01
-	dw Unknown_70e2e
-	FuncCoord 10, 0
-	dw Coord
-
-	db $00
-	dw Unknown_70e2e
-	FuncCoord 9, 0
-	dw Coord
-
-	db $00
-	dw Unknown_70e20
-	FuncCoord 5, 0
-	dw Coord
-
-	db $00
-	dw Unknown_70e0e
-	FuncCoord 1, 0
-	dw Coord
-
-	db $00
-	dw Unknown_70e04
-	FuncCoord 0, 3
-	dw Coord
-
-	db $00
-	dw Unknown_70dfe
-	FuncCoord 1, 6
-	dw Coord
-
-Unknown_70d93: ; 70d93 (1c:4d93)
-	db $00
-	dw Unknown_70dfe
-	FuncCoord 1, 11
-	dw Coord
-
-	db $00
-	dw Unknown_70e04
-	FuncCoord 0, 14
-	dw Coord
-
-	db $00
-	dw Unknown_70e0e
-	FuncCoord 1, 17
-	dw Coord
-
-	db $00
-	dw Unknown_70e20
-	FuncCoord 5, 17
-	dw Coord
-
-	db $00
-	dw Unknown_70e2e
-	FuncCoord 9, 17
-	dw Coord
+	dw BattleTransition_CircleData4
+	dwCoord 14, 0
 
 	db $01
-	dw Unknown_70e2e
-	FuncCoord 10, 17
-	dw Coord
+	dw BattleTransition_CircleData5
+	dwCoord 10, 0
+
+	db $00
+	dw BattleTransition_CircleData5
+	dwCoord 9, 0
+
+	db $00
+	dw BattleTransition_CircleData4
+	dwCoord 5, 0
+
+	db $00
+	dw BattleTransition_CircleData3
+	dwCoord 1, 0
+
+	db $00
+	dw BattleTransition_CircleData2
+	dwCoord 0, 3
+
+	db $00
+	dw BattleTransition_CircleData1
+	dwCoord 1, 6
+
+BattleTransition_HalfCircle2: ; 70d93 (1c:4d93)
+	db $00
+	dw BattleTransition_CircleData1
+	dwCoord 1, 11
+
+	db $00
+	dw BattleTransition_CircleData2
+	dwCoord 0, 14
+
+	db $00
+	dw BattleTransition_CircleData3
+	dwCoord 1, 17
+
+	db $00
+	dw BattleTransition_CircleData4
+	dwCoord 5, 17
+
+	db $00
+	dw BattleTransition_CircleData5
+	dwCoord 9, 17
 
 	db $01
-	dw Unknown_70e20
-	FuncCoord 14, 17
-	dw Coord
+	dw BattleTransition_CircleData5
+	dwCoord 10, 17
 
 	db $01
-	dw Unknown_70e0e
-	FuncCoord 18, 17
-	dw Coord
+	dw BattleTransition_CircleData4
+	dwCoord 14, 17
 
 	db $01
-	dw Unknown_70e04
-	FuncCoord 19, 14
-	dw Coord
+	dw BattleTransition_CircleData3
+	dwCoord 18, 17
 
 	db $01
-	dw Unknown_70dfe
-	FuncCoord 18, 11
-	dw Coord
+	dw BattleTransition_CircleData2
+	dwCoord 19, 14
 
-Func_70dc5: ; 70dc5 (1c:4dc5)
+	db $01
+	dw BattleTransition_CircleData1
+	dwCoord 18, 11
+
+BattleTransition_Circle_Sub3: ; 70dc5 (1c:4dc5)
 	push hl
 	ld a, [de]
 	ld c, a
 	inc de
-.asm_70dc9
+.loop1
 	ld [hl], $ff
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	and a
-	jr z, .asm_70dd4
+	jr z, .skip1
 	inc hl
-	jr .asm_70dd5
-.asm_70dd4
+	jr .skip2
+.skip1
 	dec hl
-.asm_70dd5
+.skip2
 	dec c
-	jr nz, .asm_70dc9
+	jr nz, .loop1
 	pop hl
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade]
 	and a
 	ld bc, $14
-	jr z, .asm_70de5
+	jr z, .skip3
 	ld bc, $ffec
-.asm_70de5
+.skip3
 	add hl, bc
 	ld a, [de]
 	inc de
 	cp $ff
 	ret z
 	and a
-	jr z, Func_70dc5
+	jr z, BattleTransition_Circle_Sub3
 	ld c, a
-.asm_70def
-	ld a, [$cd3e]
+.loop2
+	ld a, [wTrainerEngageDistance]
 	and a
-	jr z, .asm_70df8
+	jr z, .skip4
 	dec hl
-	jr .asm_70df9
-.asm_70df8
+	jr .skip5
+.skip4
 	inc hl
-.asm_70df9
+.skip5
 	dec c
-	jr nz, .asm_70def
-	jr Func_70dc5
+	jr nz, .loop2
+	jr BattleTransition_Circle_Sub3
 
-Unknown_70dfe: ; 70dfe (1c:4dfe)
+BattleTransition_CircleData1: ; 70dfe (1c:4dfe)
 	db $02,$03,$05,$04,$09,$FF
 
-Unknown_70e04: ; 70e04 (1c:4e04)
+BattleTransition_CircleData2: ; 70e04 (1c:4e04)
 	db $01,$01,$02,$02,$04,$02,$04,$02,$03,$FF
 
-Unknown_70e0e: ; 70e0e (1c:4e0e)
+BattleTransition_CircleData3: ; 70e0e (1c:4e0e)
 	db $02,$01,$03,$01,$04,$01,$04,$01,$04,$01,$03,$01,$02,$01,$01,$01,$01,$FF
 
-Unknown_70e20: ; 70e20 (1c:4e20)
+BattleTransition_CircleData4: ; 70e20 (1c:4e20)
 	db $04,$01,$04,$00,$03,$01,$03,$00,$02,$01,$02,$00,$01,$FF
 
-Unknown_70e2e: ; 70e2e (1c:4e2e)
+BattleTransition_CircleData5: ; 70e2e (1c:4e2e)
 	db $04,$00,$03,$00,$03,$00,$02,$00,$02,$00,$01,$00,$01,$00,$01,$FF

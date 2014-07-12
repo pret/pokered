@@ -1,11 +1,11 @@
 OaksLabScript: ; 1cb0e (7:4b0e)
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 6, a
 	call nz, OaksLabScript_1d076
 	ld a, $1
-	ld [$cf0c], a
+	ld [wcf0c], a
 	xor a
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, OaksLabScriptPointers
 	ld a, [W_OAKSLABCURSCRIPT]
 	jp CallFunctionInTable
@@ -32,17 +32,16 @@ OaksLabScriptPointers: ; 1cb28 (7:4b28)
 	dw OaksLabScript18
 
 OaksLabScript0: ; 1cb4e (7:4b4e)
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 7, a
 	ret z
-	ld a, [$cf10]
+	ld a, [wcf10]
 	and a
 	ret nz
 	ld a, $31
-	ld [$cc4d], a
-	ld a, $15
-	call Predef
-	ld hl, $d72e
+	ld [wcc4d], a
+	predef ShowObject
+	ld hl, wd72e
 	res 4, [hl]
 
 	ld a, $1
@@ -63,17 +62,15 @@ OakEntryMovement: ; 1cb7e (7:4b7e)
 	db $40,$40,$40,$FF
 
 OaksLabScript2: ; 1cb82 (7:4b82)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $31
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld a, $2e
-	ld [$cc4d], a
-	ld a, $15
-	call Predef
+	ld [wcc4d], a
+	predef ShowObject
 
 	ld a, $3
 	ld [W_OAKSLABCURSCRIPT], a
@@ -81,11 +78,11 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 
 OaksLabScript3: ; 1cba2 (7:4ba2)
 	call Delay3
-	ld hl, $ccd3
+	ld hl, wccd3
 	ld de, PlayerEntryMovementRLE
 	call DecodeRLEList
 	dec a
-	ld [$cd38], a
+	ld [wcd38], a
 	call Func_3486
 	ld a, $1
 	ld [$ff8c], a
@@ -106,12 +103,12 @@ PlayerEntryMovementRLE: ; 1cbcf (7:4bcf)
 	db $40, $8, $ff
 
 OaksLabScript4: ; 1cbd2 (7:4bd2)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
-	ld hl, $d747
+	ld hl, wd747
 	set 0, [hl]
-	ld hl, $d74b
+	ld hl, wd74b
 	set 0, [hl]
 	ld a, $1
 	ld [$ff8c], a
@@ -129,7 +126,7 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 
 OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $11
 	ld [$ff8c], a
 	call DisplayTextID
@@ -145,10 +142,10 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $14
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d74b
+	ld hl, wd74b
 	set 1, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $6
 	ld [W_OAKSLABCURSCRIPT], a
@@ -173,19 +170,19 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$cd38], a
+	ld [wcd38], a
 	ld a, $40
-	ld [$ccd3], a
+	ld [wccd3], a
 	call Func_3486
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 
 	ld a, $7
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
 
 OaksLabScript7: ; 1cc72 (7:4c72)
-	ld a, [$cd38]
+	ld a, [wcd38]
 	and a
 	ret nz
 	call Delay3
@@ -267,11 +264,11 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	ret
 
 OaksLabScript9: ; 1cd00 (7:4d00)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $1
 	ld [$ff8c], a
 	ld a, $4
@@ -280,7 +277,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $d
 	ld [$ff8c], a
 	call DisplayTextID
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	cp $2
 	jr nz, .asm_1cd28 ; 0x1cd22 $4
 	ld a, $2b
@@ -293,14 +290,13 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 .asm_1cd30
 	ld a, $2d
 .asm_1cd32
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	call Delay3
-	ld a, [$cd3d]
+	ld a, [wWhichTrade]
 	ld [W_RIVALSTARTER], a
-	ld [$cf91], a
-	ld [$d11e], a
+	ld [wcf91], a
+	ld [wd11e], a
 	call GetMonName
 	ld a, $1
 	ld [$ff8c], a
@@ -310,10 +306,10 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $e
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d74b
+	ld hl, wd74b
 	set 2, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $a
 	ld [W_OAKSLABCURSCRIPT], a
@@ -329,7 +325,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld [$ff8d], a
 	call Func_34a6 ; face object
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic ; play music
@@ -341,14 +337,12 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $1
 	swap a
 	ld [$ff95], a
-	ld a, $22
-	call Predef
+	predef Func_f929
 	ld a, [$ff95]
 	dec a
 	ld [$ff95], a
-	ld a, $20
-	call Predef
-	ld de, $cc97
+	predef Func_f8ba
+	ld de, wcc97
 	ld a, $1
 	ld [$ff8c], a
 	call MoveSprite
@@ -358,7 +352,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ret
 
 OaksLabScript11: ; 1cdb9 (7:4db9)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 
@@ -380,39 +374,38 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 .done
 	ld [W_TRAINERNO], a
 	ld a, $1
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32ef
 	ld hl, OaksLabText_1d3be
 	ld de, OaksLabText_1d3c3
 	call PreBattleSaveRegisters
-	ld hl, $d72d
+	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 	ld a, $c
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
 
 OaksLabScript12: ; 1ce03 (7:4e03)
 	ld a, $f0
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
-	ld [$d528], a
+	ld [wd528], a
 	call UpdateSprites
 	ld a, $1
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f9
 	ld a, $1
 	ld [$ff8c], a
 	xor a
 	ld [$ff8d], a
 	call Func_34a6 ; face object
-	ld a, $7
-	call Predef
-	ld hl, $d74b
+	predef HealParty
+	ld hl, wd74b
 	set 3, [hl]
 
 	ld a, $d
@@ -439,7 +432,7 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 .asm_1ce5b
 	ld a, $80
 .asm_1ce5d
-	ld [$cc5b], a
+	ld [wcc5b], a
 
 	ld a, $e
 	ld [W_OAKSLABCURSCRIPT], a
@@ -449,47 +442,46 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	db $E0,$00,$00,$00,$00,$00,$FF
 
 OaksLabScript14: ; 1ce6d (7:4e6d)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	jr nz, .asm_1ce8c ; 0x1ce72 $18
 	ld a, $2a
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call Func_2307 ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .done ; 0x1ce8a $23
 .asm_1ce8c
-	ld a, [$cf0f]
+	ld a, [wcf0f]
 	cp $5
 	jr nz, .asm_1cea8 ; 0x1ce91 $15
 	ld a, [W_XCOORD]
 	cp $4
 	jr nz, .asm_1cea1 ; 0x1ce98 $7
 	ld a, $c
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	jr .done ; 0x1ce9f $e
 .asm_1cea1
 	ld a, $8
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 	jr .done ; 0x1cea6 $7
 .asm_1cea8
 	cp $4
 	ret nz
 	xor a
-	ld [$c109], a
+	ld [wSpriteStateData1 + 9], a
 .done
 	ret
 
 OaksLabScript15: ; 1ceb0 (7:4eb0)
 	xor a
-	ld [H_CURRENTPRESSEDBUTTONS], a
+	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $15
@@ -497,20 +489,19 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	call DisplayTextID
 	call OaksLabScript_1d02b
 	ld a, $2a
-	ld [$cc4d], a
-	ld a, $15
-	call Predef
-	ld a, [$cd37]
-	ld [$d157], a
+	ld [wcc4d], a
+	predef ShowObject
+	ld a, [wcd37]
+	ld [wd157], a
 	ld b, $0
 	ld c, a
-	ld hl, $cc97
+	ld hl, wcc97
 	ld a, $40
 	call FillMemory
 	ld [hl], $ff
 	ld a, $1
 	ld [$ff8c], a
-	ld de, $cc97
+	ld de, wcc97
 	call MoveSprite
 
 	ld a, $10
@@ -530,13 +521,13 @@ OaksLabScript_1cefd ; 1cefd (7:4efd)
 	jp Func_34a6 ; face object
 
 OaksLabScript16: ; 1cf12 (7:4f12)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	call EnableAutoTextBoxDrawing
 	call Func_2307
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	call OaksLabScript_1cefd
 	ld a, $16
 	ld [$ff8c], a
@@ -557,13 +548,11 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call DisplayTextID
 	call Delay3
 	ld a, $2f
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld a, $30
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	call OaksLabScript_1cefd
 	ld a, $1a
 	ld [$ff8c], a
@@ -577,32 +566,30 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $1b
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, $d74b
+	ld hl, wd74b
 	set 5, [hl]
-	ld hl, $d74e
+	ld hl, wd74e
 	set 0, [hl]
 	ld a, $1
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld a, $2
-	ld [$cc4d], a
-	ld a, $15
-	call Predef
-	ld a, [$d157]
+	ld [wcc4d], a
+	predef ShowObject
+	ld a, [wd157]
 	ld b, $0
 	ld c, a
-	ld hl, $cc97
+	ld hl, wcc97
 	xor a
 	call FillMemory
 	ld [hl], $ff
 	ld a, $ff
-	ld [$c0ee], a
+	ld [wc0ee], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
 	ld [$ff8c], a
-	ld de, $cc97
+	ld de, wcc97
 	call MoveSprite
 
 	ld a, $11
@@ -610,26 +597,24 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ret
 
 OaksLabScript17: ; 1cfd4 (7:4fd4)
-	ld a, [$d730]
+	ld a, [wd730]
 	bit 0, a
 	ret nz
 	call Func_2307
 	ld a, $2a
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
-	ld hl, $d7eb
+	ld [wcc4d], a
+	predef HideObject
+	ld hl, wd7eb
 	set 0, [hl]
 	res 1, [hl]
 	set 7, [hl]
 	ld a, $22
-	ld [$cc4d], a
-	ld a, $15
-	call Predef
+	ld [wcc4d], a
+	predef ShowObject
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
 	xor a
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
@@ -651,11 +636,11 @@ OaksLabScript_1d00a: ; 1d00a (7:500a)
 	inc c
 	jr .asm_1d010 ; 0x1d01a $f4
 .GotParcel
-	ld hl, $d31d
+	ld hl, wNumBagItems
 	ld a, c
 	ld [wWhichPokemon], a
 	ld a, $1
-	ld [$cf96], a
+	ld [wcf96], a
 	jp RemoveItemFromInventory
 
 OaksLabScript_1d02b: ; 1d02b (7:502b)
@@ -667,7 +652,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	cp $3
 	jr nz, .asm_1d045 ; 0x1d038 $b
 	ld a, $4
-	ld [$cd37], a
+	ld [wcd37], a
 	ld a, $30
 	ld b, $b
 	jr .asm_1d068 ; 0x1d043 $23
@@ -675,13 +660,13 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	cp $1
 	jr nz, .asm_1d054 ; 0x1d047 $b
 	ld a, $2
-	ld [$cd37], a
+	ld [wcd37], a
 	ld a, $30
 	ld b, $9
 	jr .asm_1d068 ; 0x1d052 $14
 .asm_1d054
 	ld a, $3
-	ld [$cd37], a
+	ld [wcd37], a
 	ld b, $a
 	ld a, [W_XCOORD]
 	cp $4
@@ -695,7 +680,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld a, b
 	ld [$ffed], a
 	ld a, $1
-	ld [$cf13], a
+	ld [wcf13], a
 	call Func_32f9
 	ret
 
@@ -750,7 +735,7 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
 	db $08 ; asm
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 0, a
 	jr nz, .asm_1d0de ; 0x1d0d4
 	ld hl, OaksLabGaryText1
@@ -784,9 +769,9 @@ OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
 	db $8
 	ld a, STARTER2
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld a, $3
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, STARTER1
 	ld b, $2
 	jr OaksLabScript_1d133 ; 0x1d111 $20
@@ -795,9 +780,9 @@ OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
 	db $8
 	ld a, STARTER3
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld a, $4
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, STARTER2
 	ld b, $3
 	jr OaksLabScript_1d133 ; 0x1d122 $f
@@ -806,18 +791,18 @@ OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
 	db $8
 	ld a, STARTER1
-	ld [$cd3d], a
+	ld [wWhichTrade], a
 	ld a, $2
-	ld [$cd3e], a
+	ld [wTrainerEngageDistance], a
 	ld a, STARTER3
 	ld b, $4
 
 OaksLabScript_1d133: ; 1d133 (7:5133)
-	ld [$cf91], a
-	ld [$d11e], a
+	ld [wcf91], a
+	ld [wd11e], a
 	ld a, b
-	ld [$cf13], a
-	ld a, [$d74b]
+	ld [wcf13], a
+	ld a, [wd74b]
 	bit 2, a
 	jp nz, OaksLabScript_1d22d
 	bit 1, a
@@ -844,16 +829,15 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld [$ff8b], a
 	call Func_34fc
 	ld [hl], $c
-	ld hl, $d730
+	ld hl, wd730
 	set 6, [hl]
-	ld a, $46
-	call Predef ; DisplayStarterMonDex
-	ld hl, $d730
+	predef StarterDex  ; StarterDex
+	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
 	ld c, $a
 	call DelayFrames
-	ld a, [$cf13]
+	ld a, [wcf13]
 	cp $2
 	jr z, OaksLabLookAtCharmander
 	cp $3
@@ -884,16 +868,16 @@ OaksLabBulbasaurText: ; 1d1ae (7:51ae)
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	call YesNoChoice ; yes/no menu
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, OaksLabMonChoiceEnd
-	ld a, [$cf91]
-	ld [$d717], a
-	ld [$d11e], a
+	ld a, [wcf91]
+	ld [W_PLAYERSTARTER], a
+	ld [wd11e], a
 	call GetMonName
-	ld a, [$cf13]
+	ld a, [wcf13]
 	cp $2
 	jr nz, asm_1d1db ; 0x1d1d5 $4
 	ld a, $2b
@@ -906,26 +890,25 @@ asm_1d1db: ; 1d1db (7:51db)
 asm_1d1e3: ; 1d1e3 (7:51e3)
 	ld a, $2d
 asm_1d1e5: ; 1d1e5 (7:51e5)
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 	ld a, $1
-	ld [$cc3c], a
+	ld [wcc3c], a
 	ld hl, OaksLabMonEnergeticText
 	call PrintText
 	ld hl, OaksLabReceivedMonText
 	call PrintText
 	xor a
-	ld [$cc49], a
+	ld [wcc49], a
 	ld a, $5
-	ld [$d127], a
-	ld a, [$cf91]
-	ld [$d11e], a
-	call AddPokemonToParty
-	ld hl, $d72e
+	ld [W_CURENEMYLVL], a
+	ld a, [wcf91]
+	ld [wd11e], a
+	call AddPartyMon
+	ld hl, wd72e
 	set 3, [hl]
 	ld a, $fc
-	ld [wJoypadForbiddenButtonsMask], a
+	ld [wJoyIgnore], a
 	ld a, $8
 	ld [W_OAKSLABCURSCRIPT], a
 OaksLabMonChoiceEnd: ; 1d21f (7:521f)
@@ -957,39 +940,38 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
 	db $08 ; asm
-	ld a, [$d747]
+	ld a, [wd747]
 	bit 6, a
 	jr nz, .asm_50e81 ; 0x1d24e
-	ld hl, $d2f7
+	ld hl, wPokedexOwned
 	ld b, $13
 	call CountSetBits
-	ld a, [$d11e]
+	ld a, [wd11e]
 	cp $2
 	jr c, .asm_b28b0 ; 0x1d25d
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 5, a
 	jr z, .asm_b28b0 ; 0x1d264
 .asm_50e81 ; 0x1d266
 	ld hl, OaksLabText_1d31d
 	call PrintText
 	ld a, $1
-	ld [$cc3c], a
-	ld a, $56
-	call Predef
+	ld [wcc3c], a
+	predef DisplayDexRating
 	jp .asm_0f042
 .asm_b28b0 ; 0x1d279
 	ld b,POKE_BALL
 	call IsItemInBag
 	jr nz, .asm_17c30 ; 0x1d27e
-	ld a, [$d7eb]
+	ld a, [wd7eb]
 	bit 5, a
 	jr nz, .asm_f1adc ; 0x1d285
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 5, a
 	jr nz, .asm_333a2 ; 0x1d28c
 	bit 3, a
 	jr nz, .asm_76269 ; 0x1d290
-	ld a, [$d72e]
+	ld a, [wd72e]
 	bit 3, a
 	jr nz, .asm_4a5e0 ; 0x1d297
 	ld hl, OaksLabText_1d2f0
@@ -1018,7 +1000,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 	jr .asm_0f042 ; 0x1d2ce
 .asm_f1adc ; 0x1d2d0
-	ld hl, $d74b
+	ld hl, wd74b
 	bit 4, [hl]
 	set 4, [hl]
 	jr nz, .asm_17c30 ; 0x1d2d7

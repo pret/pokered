@@ -1,4 +1,4 @@
-; [$D07D] = menu type / message ID
+; [wd07d] = menu type / message ID
 ; if less than $F0, it is a menu type
 ; menu types:
 ; 00: normal pokemon menu (e.g. Start menu)
@@ -25,18 +25,17 @@ DrawPartyMenu_: ; 12cd2 (4:6cd2)
 	callba Func_71791 ; load pokemon icon graphics
 
 RedrawPartyMenu_: ; 12ce3 (4:6ce3)
-	ld a,[$D07D]
+	ld a,[wd07d]
 	cp a,$04
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	callba SendBlkPacket_PartyMenu ; loads some data to $cf2e
-	FuncCoord 3,0
-	ld hl,Coord
-	ld de,W_PARTYMON1
+	callba SendBlkPacket_PartyMenu ; loads some data to wcf2e
+	hlCoord 3, 0
+	ld de,wPartySpecies
 	xor a
 	ld c,a
 	ld [$FF8C],a ; loop counter
-	ld [$CF2D],a
+	ld [wcf2d],a
 .loop
 	ld a,[de]
 	cp a,$FF ; reached the terminator?
@@ -46,7 +45,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld a,c
 	push hl
-	ld hl,W_PARTYMON1NAME
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
@@ -58,7 +57,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call LoadMonData
 	pop hl
 	push hl
-	ld a,[$CC35]
+	ld a,[wcc35]
 	and a ; is the player swapping pokemon positions?
 	jr z,.skipUnfilledRightArrow
 ; if the player is swapping pokemon positions
@@ -76,7 +75,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	inc hl
 	inc hl
 .skipUnfilledRightArrow
-	ld a,[$D07D] ; menu type
+	ld a,[wd07d] ; menu type
 	cp a,$03
 	jr z,.teachMoveMenu
 	cp a,$05
@@ -84,7 +83,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld bc,14 ; 14 columns to the right
 	add hl,bc
-	ld de,$CF9C
+	ld de,wcf9c
 	call PrintStatusCondition
 	pop hl
 	push hl
@@ -93,8 +92,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	set 0,a
 	ld [$FFF6],a
 	add hl,bc
-	ld a,$60
-	call Predef ; draw HP bar and prints current / max HP
+	predef Func_128f6 ; draw HP bar and prints current / max HP
 	ld a,[$FFF6]
 	res 0,a
 	ld [$FFF6],a
@@ -103,8 +101,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	jr .printLevel
 .teachMoveMenu
 	push hl
-	ld a,$43
-	call Predef ; check if the pokemon can learn the move
+	predef CanLearnTM ; check if the pokemon can learn the move
 	pop hl
 	ld de,.ableToLearnMoveText
 	ld a,c
@@ -137,25 +134,25 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld hl,EvosMovesPointerTable
 	ld b,0
-	ld a,[$CF98] ; pokemon ID
+	ld a,[wcf98] ; pokemon ID
 	dec a
 	add a
 	rl b
 	ld c,a
 	add hl,bc
-	ld de,$CD6D
+	ld de,wcd6d
 	ld a,BANK(EvosMovesPointerTable)
 	ld bc,2
 	call FarCopyData
-	ld hl,$CD6D
+	ld hl,wcd6d
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld de,$CD6D
+	ld de,wcd6d
 	ld a,BANK(EvosMovesPointerTable)
 	ld bc,13
 	call FarCopyData
-	ld hl,$CD6D
+	ld hl,wcd6d
 	ld de,.notAbleToEvolveText
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop
@@ -170,7 +167,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	dec hl
 	dec hl
 	ld b,[hl]
-	ld a,[$D156] ; evolution stone item ID
+	ld a,[wd156] ; evolution stone item ID
 	inc hl
 	inc hl
 	inc hl
@@ -194,12 +191,12 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld b,$0A
 	call GoPAL_SET
 .printMessage
-	ld hl,$D730
+	ld hl,wd730
 	ld a,[hl]
 	push af
 	push hl
 	set 6,[hl] ; turn off letter printing delay
-	ld a,[$D07D] ; message ID
+	ld a,[wd07d] ; message ID
 	cp a,$F0
 	jr nc,.printItemUseMessage
 	add a
@@ -230,8 +227,8 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld h,[hl]
 	ld l,a
 	push hl
-	ld a,[$CF06]
-	ld hl,W_PARTYMON1NAME
+	ld a,[wcf06]
+	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	call PrintText
@@ -315,14 +312,14 @@ RareCandyText: ; 12ec0 (4:6ec0)
 	db "@"
 
 SetPartyMenuHealthBarColor: ; 12ec7 (4:6ec7)
-	ld hl, $cf1f
-	ld a, [$cf2d]
+	ld hl, wcf1f
+	ld a, [wcf2d]
 	ld c, a
 	ld b, $0
 	add hl, bc
 	call GetHealthBarColor
 	ld b, $fc
 	call GoPAL_SET
-	ld hl, $cf2d
+	ld hl, wcf2d
 	inc [hl]
 	ret

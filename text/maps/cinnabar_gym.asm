@@ -44,7 +44,7 @@ _BlaineBadgeText:: ; a0946 (28:4946)
 _ReceivedTM38Text:: ; a09a8 (28:49a8)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM38ExplanationText:: ; a09bc (28:49bc)

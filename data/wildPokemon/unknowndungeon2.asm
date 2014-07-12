@@ -1,4 +1,4 @@
-DungeonMons2: 
+DungeonMons2:
 	db $0F
 	IF !_YELLOW
 		db 51,DODRIO
@@ -17,7 +17,7 @@ DungeonMons2:
 		db 55,DITTO
 		db 60,DITTO
 	ENDC
-	
+
 	IF _YELLOW
 		db 52,GOLBAT
 		db 57,GOLBAT
@@ -30,6 +30,6 @@ DungeonMons2:
 		db 60,RHYDON
 		db 58,RHYDON
 	ENDC
-	
+
 	db $00
 

@@ -1,107 +1,107 @@
 Music_Routes1_Ch1:: ; 9bde (2:5bde)
-	tempo 0, 152
-	stereopanning 119
+	tempo 152
+	volume 7, 7
 	vibrato 4, 2, 3
 	duty 2
-	togglecall
+	toggleperfectpitch
 
 Music_Routes1_branch_9be9::
 	notetype 12, 10, 1
 	rest 4
 	octave 4
-	note D_, 2
-	note D_, 6
-	note D_, 2
-	note D_, 6
-	note D_, 2
-	note D_, 1
-	note C#, 1
+	D_ 2
+	D_ 6
+	D_ 2
+	D_ 6
+	D_ 2
+	D_ 1
+	C# 1
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note C#, 1
+	C# 1
 	octave 3
-	note A_, 2
-	note A_, 2
-	note A_, 6
+	A_ 2
+	A_ 2
+	A_ 6
 	octave 4
-	note C#, 2
-	note C#, 6
-	note C#, 2
-	note C#, 4
+	C# 2
+	C# 6
+	C# 2
+	C# 4
 	octave 3
-	note A_, 2
+	A_ 2
 	octave 4
-	note C#, 2
+	C# 2
 	octave 3
-	note B_, 2
+	B_ 2
 	octave 4
-	note C#, 4
+	C# 4
 	octave 3
-	note A_, 2
-	note A_, 6
+	A_ 2
+	A_ 6
 	octave 4
-	note D_, 2
-	note D_, 6
-	note D_, 2
-	note D_, 6
-	note D_, 2
-	note D_, 1
-	note E_, 1
-	note D_, 1
-	note C#, 1
+	D_ 2
+	D_ 6
+	D_ 2
+	D_ 6
+	D_ 2
+	D_ 1
+	E_ 1
+	D_ 1
+	C# 1
 	octave 3
-	note B_, 2
-	note A_, 2
-	note A_, 6
+	B_ 2
+	A_ 2
+	A_ 6
 	octave 4
-	note C#, 2
-	note C#, 6
+	C# 2
+	C# 6
 	octave 3
-	note A_, 2
+	A_ 2
 	octave 4
-	note E_, 2
+	E_ 2
 	octave 3
-	note A_, 2
+	A_ 2
 	notetype 12, 10, 2
 	octave 4
-	note G_, 4
-	note E_, 4
-	note F#, 2
+	G_ 4
+	E_ 4
+	F# 2
 	notetype 12, 10, 1
 	octave 3
-	note A_, 2
-	note A_, 6
-	note A_, 2
-	note F#, 2
-	note A_, 4
-	note B_, 2
+	A_ 2
+	A_ 6
+	A_ 2
+	F# 2
+	A_ 4
+	B_ 2
 	octave 4
-	note C#, 2
+	C# 2
 	octave 3
-	note B_, 4
-	note A_, 2
-	note F#, 2
-	note A_, 4
-	note G_, 2
-	note E_, 2
-	note C#, 4
-	note A_, 2
+	B_ 4
+	A_ 2
+	F# 2
+	A_ 4
+	G_ 2
+	E_ 2
+	C# 4
+	A_ 2
 	octave 4
-	note D_, 2
+	D_ 2
 	octave 3
-	note A_, 4
-	note B_, 2
-	note G_, 2
-	note B_, 4
+	A_ 4
+	B_ 2
+	G_ 2
+	B_ 4
 	octave 4
-	note D_, 2
-	note E_, 2
-	note C#, 2
-	note D_, 2
+	D_ 2
+	E_ 2
+	C# 2
+	D_ 2
 	octave 3
-	note A_, 2
-	note A_, 2
+	A_ 2
+	A_ 2
 	loopchannel 0, Music_Routes1_branch_9be9
 	endchannel
 
@@ -119,117 +119,117 @@ Music_Routes1_branch_9c53::
 
 Music_Routes1_branch_9c65::
 	octave 4
-	note D_, 1
-	note E_, 1
-	note F#, 2
-	note F#, 2
-	note F#, 2
-	note D_, 1
-	note E_, 1
-	note F#, 2
-	note F#, 2
-	note F#, 2
-	note D_, 1
-	note E_, 1
-	note F#, 2
-	note F#, 2
-	note G_, 3
-	note F#, 1
-	note E_, 6
+	D_ 1
+	E_ 1
+	F# 2
+	F# 2
+	F# 2
+	D_ 1
+	E_ 1
+	F# 2
+	F# 2
+	F# 2
+	D_ 1
+	E_ 1
+	F# 2
+	F# 2
+	G_ 3
+	F# 1
+	E_ 6
 	endchannel
 
 Music_Routes1_branch_9c78::
-	note C#, 1
-	note D_, 1
-	note E_, 2
-	note E_, 2
-	note E_, 2
-	note C#, 1
-	note D_, 1
-	note E_, 2
-	note E_, 2
-	note E_, 2
-	note C#, 1
-	note D_, 1
-	note E_, 2
-	note E_, 2
-	note F#, 1
-	note E_, 1
-	note E_, 1
-	note F#, 1
-	note D_, 4
-	note F#, 2
+	C# 1
+	D_ 1
+	E_ 2
+	E_ 2
+	E_ 2
+	C# 1
+	D_ 1
+	E_ 2
+	E_ 2
+	E_ 2
+	C# 1
+	D_ 1
+	E_ 2
+	E_ 2
+	F# 1
+	E_ 1
+	E_ 1
+	F# 1
+	D_ 4
+	F# 2
 	endchannel
 
 Music_Routes1_branch_9c8d::
-	note C#, 1
-	note D_, 1
-	note E_, 2
-	note G_, 2
-	note F#, 2
-	note E_, 2
-	note D_, 2
-	note C#, 2
+	C# 1
+	D_ 1
+	E_ 2
+	G_ 2
+	F# 2
+	E_ 2
+	D_ 2
+	C# 2
 	octave 3
-	note B_, 2
+	B_ 2
 	octave 4
-	note C#, 2
+	C# 2
 	notetype 12, 13, 2
-	note B_, 4
+	B_ 4
 	notetype 6, 13, 1
 	octave 3
-	note B_, 1
+	B_ 1
 	octave 4
-	note C#, 1
+	C# 1
 	notetype 12, 13, 1
 	octave 3
-	note B_, 1
-	note A_, 1
+	B_ 1
+	A_ 1
 	octave 4
-	note C#, 1
-	note D_, 6
+	C# 1
+	D_ 6
 	notetype 12, 13, 2
-	note F#, 1
-	note G_, 1
-	note A_, 2
-	note A_, 2
-	note F#, 2
-	note D_, 2
+	F# 1
+	G_ 1
+	A_ 2
+	A_ 2
+	F# 2
+	D_ 2
 	octave 5
-	note D_, 2
-	note C#, 2
+	D_ 2
+	C# 2
 	octave 4
-	note B_, 2
+	B_ 2
 	octave 5
-	note C#, 2
+	C# 2
 	octave 4
-	note A_, 2
-	note F#, 2
-	note D_, 3
-	note F#, 1
-	note E_, 6
-	note F#, 1
-	note G_, 1
-	note A_, 2
-	note A_, 2
-	note F#, 2
-	note A_, 2
+	A_ 2
+	F# 2
+	D_ 3
+	F# 1
+	E_ 6
+	F# 1
+	G_ 1
+	A_ 2
+	A_ 2
+	F# 2
+	A_ 2
 	octave 5
-	note D_, 2
-	note C#, 2
+	D_ 2
+	C# 2
 	octave 4
-	note B_, 3
-	note G_, 1
-	note A_, 2
+	B_ 3
+	G_ 1
+	A_ 2
 	octave 5
-	note D_, 2
-	note C#, 2
-	note E_, 2
-	note D_, 2
+	D_ 2
+	C# 2
+	E_ 2
+	D_ 2
 	notetype 12, 13, 1
 	octave 4
-	note D_, 2
-	note D_, 2
+	D_ 2
+	D_ 2
 	endchannel
 	endchannel
 
@@ -241,70 +241,70 @@ Music_Routes1_Ch3:: ; 9cd8 (2:5cd8)
 Music_Routes1_branch_9cdd::
 	rest 2
 	octave 4
-	note D_, 4
-	note C#, 4
+	D_ 4
+	C# 4
 	octave 3
-	note B_, 4
-	note A_, 4
+	B_ 4
+	A_ 4
 	octave 4
-	note D_, 4
+	D_ 4
 	octave 3
-	note A_, 4
-	note B_, 4
-	note A_, 4
+	A_ 4
+	B_ 4
+	A_ 4
 	octave 4
-	note C#, 4
+	C# 4
 	octave 3
-	note A_, 4
-	note B_, 4
+	A_ 4
+	B_ 4
 	octave 4
-	note C_, 4
-	note C#, 4
+	C_ 4
+	C# 4
 	octave 3
-	note A_, 4
+	A_ 4
 	octave 4
-	note D_, 4
+	D_ 4
 	octave 3
-	note A_, 4
+	A_ 4
 	octave 4
-	note D_, 4
-	note C#, 4
+	D_ 4
+	C# 4
 	octave 3
-	note B_, 4
-	note A_, 4
+	B_ 4
+	A_ 4
 	octave 4
-	note D_, 4
+	D_ 4
 	octave 3
-	note A_, 4
-	note B_, 4
-	note A_, 4
+	A_ 4
+	B_ 4
+	A_ 4
 	octave 4
-	note C#, 4
+	C# 4
 	octave 3
-	note B_, 4
-	note A_, 4
-	note B_, 4
+	B_ 4
+	A_ 4
+	B_ 4
 	octave 4
-	note C#, 4
+	C# 4
 	octave 3
-	note A_, 4
+	A_ 4
 	octave 4
-	note D_, 4
+	D_ 4
 	octave 3
-	note A_, 4
+	A_ 4
 	octave 4
-	note D_, 8
+	D_ 8
 	octave 3
-	note G_, 8
-	note A_, 8
+	G_ 8
+	A_ 8
 	octave 4
-	note C#, 8
-	note D_, 8
+	C# 8
+	D_ 8
 	octave 3
-	note G_, 8
-	note A_, 8
+	G_ 8
+	A_ 8
 	octave 4
-	note D_, 6
+	D_ 6
 	loopchannel 0, Music_Routes1_branch_9cdd
 	endchannel
 
@@ -312,94 +312,94 @@ Music_Routes1_branch_9cdd::
 Music_Routes1_Ch4:: ; 9d24 (2:5d24)
 	dspeed 12
 	rest 4
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 4
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
+	mutedsnare1 2
 	rest 2
-	dnote 2, mutedsnare1
-	dnote 2, mutedsnare1
+	mutedsnare1 2
+	mutedsnare1 2
 	loopchannel 0, Music_Routes1_Ch4
 	endchannel
 ; 0x9db9

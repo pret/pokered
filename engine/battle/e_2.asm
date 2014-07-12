@@ -1,13 +1,13 @@
 HealEffect_: ; 3b9ec (e:79ec)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld de, W_PLAYERMONCURHP ; $d015
-	ld hl, W_PLAYERMONMAXHP ; $d023
-	ld a, [W_PLAYERMOVENUM] ; $cfd2
+	ld de, wBattleMonHP ; wd015
+	ld hl, wBattleMonMaxHP ; wd023
+	ld a, [W_PLAYERMOVENUM] ; wcfd2
 	jr z, .asm_3ba03
-	ld de, W_ENEMYMONCURHP ; $cfe6
-	ld hl, W_ENEMYMONMAXHP ; $cff4
-	ld a, [W_ENEMYMOVENUM] ; $cfcc
+	ld de, wEnemyMonHP ; wEnemyMonHP
+	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
+	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 .asm_3ba03
 	ld b, a
 	ld a, [de]
@@ -25,11 +25,11 @@ HealEffect_: ; 3b9ec (e:79ec)
 	push af
 	ld c, $32
 	call DelayFrames
-	ld hl, W_PLAYERMONSTATUS ; $d018
+	ld hl, wBattleMonStatus ; wBattleMonStatus
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3ba25
-	ld hl, W_ENEMYMONSTATUS ; $cfe9
+	ld hl, wEnemyMonStatus ; wcfe9
 .asm_3ba25
 	ld a, [hl]
 	and a
@@ -85,17 +85,14 @@ HealEffect_: ; 3b9ec (e:79ec)
 	call BankswitchEtoF
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	FuncCoord 10, 9 ; $c45e
-	ld hl, Coord
+	hlCoord 10, 9
 	ld a, $1
 	jr z, .asm_3ba83
-	FuncCoord 2, 2 ; $c3ca
-	ld hl, Coord
+	hlCoord 2, 2
 	xor a
 .asm_3ba83
-	ld [wListMenuID], a ; $cf94
-	ld a, $48
-	call Predef ; indirect jump to UpdateHPBar (fa1d (3:7a1d))
+	ld [wListMenuID], a ; wListMenuID
+	predef UpdateHPBar2
 	ld hl, Func_3cd5a ; $4d5a
 	call BankswitchEtoF
 	ld hl, RegainedHealthText ; $7aac
@@ -120,36 +117,36 @@ RegainedHealthText: ; 3baac (e:7aac)
 	db "@"
 
 TransformEffect_: ; 3bab1 (e:7ab1)
-	ld hl, W_PLAYERMONID
-	ld de, $cfe5
-	ld bc, W_ENEMYBATTSTATUS3 ; $d069
-	ld a, [W_ENEMYBATTSTATUS1] ; $d067
+	ld hl, wBattleMonSpecies
+	ld de, wEnemyMonSpecies
+	ld bc, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
+	ld a, [W_ENEMYBATTSTATUS1] ; W_ENEMYBATTSTATUS1
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr nz, .asm_3bad1
-	ld hl, $cfe5
-	ld de, W_PLAYERMONID
-	ld bc, W_PLAYERBATTSTATUS3 ; $d064
-	ld [wPlayerMoveListIndex], a ; $cc2e
-	ld a, [W_PLAYERBATTSTATUS1] ; $d062
+	ld hl, wEnemyMonSpecies
+	ld de, wBattleMonSpecies
+	ld bc, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
+	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
+	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
 .asm_3bad1
 	bit 6, a ; is mon invulnerable to typical attacks? (fly/dig)
 	jp nz, Func_3bb8c
 	push hl
 	push de
 	push bc
-	ld hl, W_PLAYERBATTSTATUS2 ; $d063
+	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bae4
-	ld hl, W_ENEMYBATTSTATUS2 ; $d068
+	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_3bae4
 	bit 4, [hl]
 	push af
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
-	ld a, [W_OPTIONS] ; $d355
+	ld a, [W_OPTIONS] ; W_OPTIONS
 	add a
 	ld hl, Func_3fba8 ; $7ba8
 	ld b, BANK(Func_3fba8)
@@ -185,10 +182,10 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	and a
 	jr z, .asm_3bb32
 	ld a, [de]
-	ld [$cceb], a
+	ld [wcceb], a
 	inc de
 	ld a, [de]
-	ld [$ccec], a
+	ld [wccec], a
 	dec de
 .asm_3bb32
 	ld a, [hli]
@@ -227,13 +224,13 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 .asm_3bb5d
 	pop hl
 	ld a, [hl]
-	ld [$d11e], a
+	ld [wd11e], a
 	call GetMonName
-	ld hl, $cd26
-	ld de, $cd12
+	ld hl, wcd26
+	ld de, wcd12
 	call Func_3bb7d
-	ld hl, wEnemyMonStatMods ; $cd2e
-	ld de, wPlayerMonStatMods ; $cd1a
+	ld hl, wEnemyMonStatMods ; wcd2e
+	ld de, wPlayerMonStatMods ; wcd1a
 	call Func_3bb7d
 	ld hl, TransformedText ; $7b92
 	jp PrintText
@@ -259,13 +256,13 @@ TransformedText: ; 3bb92 (e:7b92)
 	db "@"
 
 ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
-	ld hl, W_PLAYERBATTSTATUS3 ; $d064
-	ld de, W_PLAYERMOVEEFFECT ; $cfd3
+	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
+	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jr z, .asm_3bba8
-	ld hl, W_ENEMYBATTSTATUS3 ; $d069
-	ld de, W_ENEMYMOVEEFFECT ; $cfcd
+	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
 .asm_3bba8
 	ld a, [de]
 	cp LIGHT_SCREEN_EFFECT

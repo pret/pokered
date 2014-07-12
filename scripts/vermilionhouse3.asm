@@ -8,6 +8,5 @@ VermilionHouse3Text1: ; 19c17 (6:5c17)
 	db $08 ; asm
 	ld a, $4
 	ld [wWhichTrade], a
-	ld a, $54
-	call Predef
+	predef Predef54 
 	jp TextScriptEnd

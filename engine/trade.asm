@@ -1,27 +1,27 @@
 Func_410e2: ; 410e2 (10:50e2)
-	ld a, [wWhichTrade] ; $cd3d
-	ld [$cd5e], a
+	ld a, [wWhichTrade] ; wWhichTrade
+	ld [wcd5e], a
 	ld a, [wTrainerEngageDistance]
-	ld [$cd5f], a
+	ld [wcd5f], a
 	ld de, PointerIDs_41138 ; $5138
 	jr Func_41102
 
 Func_410f3: ; 410f3 (10:50f3)
 	ld a, [wTrainerEngageDistance]
-	ld [$cd5e], a
+	ld [wcd5e], a
 	ld a, [wTrainerSpriteOffset]
-	ld [$cd5f], a
+	ld [wcd5f], a
 	ld de, PointerIDs_41149
 
 Func_41102: ; 41102 (10:5102)
-	ld a, [W_OPTIONS] ; $d355
+	ld a, [W_OPTIONS] ; W_OPTIONS
 	push af
 	ld a, [$ffaf]
 	push af
 	ld a, [$ffae]
 	push af
 	xor a
-	ld [W_OPTIONS], a ; $d355
+	ld [W_OPTIONS], a ; W_OPTIONS
 	ld [$ffaf], a
 	ld [$ffae], a
 	push de
@@ -49,7 +49,7 @@ Func_41102: ; 41102 (10:5102)
 	pop af
 	ld [$ffaf], a
 	pop af
-	ld [W_OPTIONS], a ; $d355
+	ld [W_OPTIONS], a ; W_OPTIONS
 	ret
 
 ; these bytes refer to the $00th through $10th pointer of PointerTable_4115f
@@ -104,25 +104,25 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call Func_41196
 	call DisableLCD
 	ld hl, TradingAnimationGraphics ; $69be
-	ld de, $9310
+	ld de, vChars2 + $310
 	ld bc, $310
 	ld a, BANK(TradingAnimationGraphics)
 	call FarCopyData2
 	ld hl, TradingAnimationGraphics2 ; $6cce
-	ld de, $87c0
+	ld de, vSprites + $7c0
 	ld bc, $40
 	ld a, BANK(TradingAnimationGraphics2)
 	call FarCopyData2
-	ld hl, $9800
+	ld hl, vBGMap0
 	ld bc, $800
 	ld a, $7f
 	call FillMemory
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $ff
-	ld [$cfcb], a
-	ld hl, $d730
+	ld [wcfcb], a
+	ld hl, wd730
 	set 6, [hl]
-	ld a, [$cf1b]
+	ld a, [wcf1b]
 	and a
 	ld a, $e4
 	jr z, .asm_411e5
@@ -132,15 +132,15 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call EnableLCD
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [wWhichTrade] ; $cd3d
-	ld [$d11e], a
+	ld a, [wWhichTrade] ; wWhichTrade
+	ld [wd11e], a
 	call GetMonName
-	ld hl, $cd6d
-	ld de, $cf4b
+	ld hl, wcd6d
+	ld de, wcf4b
 	ld bc, $b
 	call CopyData
-	ld a, [$cd3e]
-	ld [$d11e], a
+	ld a, [wTrainerEngageDistance]
+	ld [wd11e], a
 	jp GetMonName
 
 Func_4120b: ; 4120b (10:520b)
@@ -151,12 +151,12 @@ Func_4120b: ; 4120b (10:520b)
 	jp Bankswitch
 
 Func_41217: ; 41217 (10:5217)
-	ld hl, W_PLAYERNAME
+	ld hl, wPlayerName
 	ld de, wHPBarMaxHP
 	ld bc, $000b
 	call CopyData
 	ld hl, W_GRASSRATE
-	ld de, W_PLAYERNAME
+	ld de, wPlayerName
 	ld bc, $000b
 	call CopyData
 	ld hl, wHPBarMaxHP
@@ -167,7 +167,7 @@ Func_41217: ; 41217 (10:5217)
 Func_4123b: ; 4123b (10:523b)
 	xor a
 	call LoadGBPal
-	ld hl, $d730
+	ld hl, wd730
 	res 6, [hl]
 	ret
 
@@ -181,8 +181,7 @@ Func_41245: ; 41245 (10:5245)
 	ld [$ffae], a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	FuncCoord 4, 0 ; $c3a4
-	ld hl, Coord
+	hlCoord 4, 0
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
@@ -190,7 +189,7 @@ Func_41245: ; 41245 (10:5245)
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call ClearScreen
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	call Func_415a4
 	ld a, $7e
 .asm_41273
@@ -208,7 +207,7 @@ Func_41245: ; 41245 (10:5245)
 	call Func_41676
 	ld a, $aa
 	call Func_41676
-	ld a, [wWhichTrade] ; $cd3d
+	ld a, [wWhichTrade] ; wWhichTrade
 	call PlayCry
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -220,15 +219,14 @@ Func_41298: ; 41298 (10:5298)
 	call CopyScreenTileBufferToVRAM
 	ld b, $8
 	call GoPAL_SET
-	ld hl, $9c8c
+	ld hl, vBGMap1 + $8c
 	call Func_414ae
 	ld a, $a0
 	ld [$ffae], a
 	call DelayFrame
 	ld a, $8b
 	ld [rLCDC], a ; $ff40
-	FuncCoord 6, 2 ; $c3ce
-	ld hl, Coord
+	hlCoord 6, 2
 	ld b, $7
 	call Func_41842
 	call Func_41186
@@ -251,18 +249,18 @@ Func_412d2: ; 412d2 (10:52d2)
 	ld a, $e4
 	ld [rOBP0], a ; $ff48
 	xor a
-	ld [$d09f], a
+	ld [wd09f], a
 	ld bc, $2060
 .asm_412e7
 	push bc
 	xor a
 	ld de, UnknownOAM_4132e ; $532e
 	call WriteOAMBlock
-	ld a, [$d09f]
+	ld a, [wd09f]
 	xor $1
-	ld [$d09f], a
+	ld [wd09f], a
 	add $7e
-	ld hl, $c302
+	ld hl, wOAMBuffer + $02
 	ld de, $4
 	ld c, e
 .asm_41300
@@ -281,7 +279,7 @@ Func_412d2: ; 412d2 (10:52d2)
 	call PlaySound
 	jr .asm_412e7
 .asm_41318
-	call CleanLCD_OAM
+	call ClearSprites
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
@@ -300,8 +298,7 @@ Func_41336: ; 41336 (10:5336)
 	ld a, $ac
 	call Func_41676
 	call Func_415c8
-	FuncCoord 4, 10 ; $c46c
-	ld hl, Coord
+	hlCoord 4, 10
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
@@ -309,17 +306,16 @@ Func_41336: ; 41336 (10:5336)
 	call Func_41186
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	call Func_415a4
 	ld a, $ad
 	call Func_41676
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [$cd3e]
+	ld a, [wTrainerEngageDistance]
 	call PlayCry
 	call Func_41181
-	FuncCoord 4, 10 ; $c46c
-	ld hl, Coord
+	hlCoord 4, 10
 	ld bc, $80c
 	call ClearScreenArea
 	jp PrintTradeTakeCareText
@@ -327,20 +323,20 @@ Func_41336: ; 41336 (10:5336)
 Func_41376: ; 41376 (10:5376)
 	call Func_41411
 	ld a, $1
-	ld [$d08a], a
+	ld [wd08a], a
 	ld a, $e4
 	ld [rOBP0], a ; $ff48
 	ld a, $54
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	ld a, $1c
-	ld [W_BASECOORDY], a ; $d082
-	ld a, [$cd5e]
-	ld [$cd5d], a
+	ld [W_BASECOORDY], a ; wd082
+	ld a, [wcd5e]
+	ld [wcd5d], a
 	call Func_41505
 	call Func_4142d
 	call Func_41186
 	call Func_4149f
-	ld hl, $9c8c
+	ld hl, vBGMap1 + $8c
 	call Func_414ae
 	ld b, $6
 	call Func_414c5
@@ -355,23 +351,23 @@ Func_41376: ; 41376 (10:5376)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Func_41525
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_413c6: ; 413c6 (10:53c6)
 	call Func_41411
 	xor a
-	ld [$d08a], a
+	ld [wd08a], a
 	ld a, $64
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	ld a, $44
-	ld [W_BASECOORDY], a ; $d082
-	ld a, [$cd5f]
-	ld [$cd5d], a
+	ld [W_BASECOORDY], a ; wd082
+	ld a, [wcd5f]
+	ld [wcd5d], a
 	call Func_41505
 	call Func_4145c
 	call Func_41186
 	call Func_4149f
-	ld hl, $9c94
+	ld hl, vBGMap1 + $94
 	call Func_414ae
 	call Func_41525
 	ld b, $6
@@ -386,7 +382,7 @@ Func_413c6: ; 413c6 (10:53c6)
 	call Func_414c5
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	jp CleanLCD_OAM
+	jp ClearSprites
 
 Func_41411: ; 41411 (10:5411)
 	ld a, $1
@@ -406,8 +402,7 @@ Func_41411: ; 41411 (10:5411)
 
 Func_4142d: ; 4142d (10:542d)
 	call Func_41196
-	FuncCoord 11, 4 ; $c3fb
-	ld hl, Coord
+	hlCoord 11, 4
 	ld a, $5d
 	ld [hli], a
 	ld a, $5e
@@ -416,25 +411,21 @@ Func_4142d: ; 4142d (10:542d)
 	ld [hli], a
 	dec c
 	jr nz, .asm_4143a
-	FuncCoord 5, 3 ; $c3e1
-	ld hl, Coord
+	hlCoord 5, 3
 	ld b, $6
 	call Func_41842
-	FuncCoord 4, 12 ; $c494
-	ld hl, Coord
+	hlCoord 4, 12
 	ld b, $2
 	ld c, $7
 	call TextBoxBorder
-	FuncCoord 5, 14 ; $c4bd
-	ld hl, Coord
-	ld de, W_PLAYERNAME ; $d158
+	hlCoord 5, 14
+	ld de, wPlayerName ; wd158
 	call PlaceString
 	jp DelayFrame
 
 Func_4145c: ; 4145c (10:545c)
 	call Func_41196
-	FuncCoord 0, 4 ; $c3f0
-	ld hl, Coord
+	hlCoord 0, 4
 	ld a, $5e
 	ld c, $e
 .asm_41466
@@ -458,25 +449,21 @@ Func_4145c: ; 4145c (10:545c)
 	ld [hld], a
 	ld a, $5d
 	ld [hl], a
-	FuncCoord 7, 8 ; $c447
-	ld hl, Coord
+	hlCoord 7, 8
 	ld b, $6
 	call Func_41842
-	FuncCoord 6, 0 ; $c3a6
-	ld hl, Coord
+	hlCoord 6, 0
 	ld b, $2
 	ld c, $7
 	call TextBoxBorder
-	FuncCoord 7, 2 ; $c3cf
-	ld hl, Coord
-	ld de, W_GRASSRATE ; $d887
+	hlCoord 7, 2
+	ld de, W_GRASSRATE ; W_GRASSRATE
 	call PlaceString
 	jp DelayFrame
 
 Func_4149f: ; 4149f (10:549f)
 	call Func_41196
-	FuncCoord 0, 4 ; $c3f0
-	ld hl, Coord
+	hlCoord 0, 4
 	ld a, $5e
 	ld c, $14
 .asm_414a9
@@ -487,12 +474,11 @@ Func_4149f: ; 4149f (10:549f)
 
 Func_414ae: ; 414ae (10:54ae)
 	push hl
-	FuncCoord 0, 4 ; $c3f0
-	ld hl, Coord
+	hlCoord 0, 4
 	call ScheduleRowRedrawHelper
 	pop hl
 	ld a, h
-	ld [$ffd2], a
+	ld [H_SCREENEDGEREDRAWADDR + 1], a
 	ld a, l
 	ld [H_SCREENEDGEREDRAWADDR], a ; $ffd1
 	ld a, $2
@@ -501,7 +487,7 @@ Func_414ae: ; 414ae (10:54ae)
 	jp DelayFrames
 
 Func_414c5: ; 414c5 (10:54c5)
-	ld a, [$d08a]
+	ld a, [wd08a]
 	ld e, a
 	ld d, $8
 .asm_414cb
@@ -531,7 +517,7 @@ Func_414e8: ; 414e8 (10:54e8)
 	ld a, [rBGP] ; $ff47
 	xor $3c
 	ld [rBGP], a ; $ff47
-	ld hl, $c302
+	ld hl, wOAMBuffer + $02
 	ld de, $4
 	ld c, $14
 .asm_414f9
@@ -554,10 +540,10 @@ Func_41510: ; 41510 (10:5510)
 	ld hl, wOAMBuffer
 	ld c, $14
 .asm_41515
-	ld a, [W_BASECOORDY] ; $d082
+	ld a, [W_BASECOORDY] ; wd082
 	add [hl]
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; $d081
+	ld a, [W_BASECOORDX] ; wd081
 	add [hl]
 	ld [hli], a
 	inc hl
@@ -567,7 +553,7 @@ Func_41510: ; 41510 (10:5510)
 	ret
 
 Func_41525: ; 41525 (10:5525)
-	ld a, [$d08a]
+	ld a, [wd08a]
 	and a
 	jr z, .asm_41536
 	ld bc, $400
@@ -580,9 +566,9 @@ Func_41525: ; 41525 (10:5525)
 	ld bc, $fc00
 .asm_4153f
 	ld a, b
-	ld [W_BASECOORDX], a ; $d081
+	ld [W_BASECOORDX], a ; wd081
 	ld a, c
-	ld [W_BASECOORDY], a ; $d082
+	ld [W_BASECOORDY], a ; wd082
 	ld d, $4
 .asm_41549
 	call Func_41510
@@ -645,9 +631,9 @@ UnknownOAM_4159c: ; 4159c (10:559c)
 	db $39,$70,$38,$70
 
 Func_415a4: ; 415a4 (10:55a4)
-	ld [$cf91], a
-	ld [$d0b5], a
-	ld [$cf1d], a
+	ld [wcf91], a
+	ld [wd0b5], a
+	ld [wcf1d], a
 	ld b, $b
 	ld c, $0
 	call GoPAL_SET
@@ -655,8 +641,7 @@ Func_415a4: ; 415a4 (10:55a4)
 	xor $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call GetMonHeader
-	FuncCoord 7, 2 ; $c3cf
-	ld hl, Coord
+	hlCoord 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
 	ld c, $a
 	jp DelayFrames
@@ -763,8 +748,7 @@ TradeforText: ; 41671 (10:5671)
 	db "@"
 
 Func_41676: ; 41676 (10:5676)
-	ld [W_ANIMATIONID], a ; $d07c
+	ld [W_ANIMATIONID], a ; W_ANIMATIONID
 	xor a
-	ld [$cc5b], a
-	ld a, $8
-	jp Predef ; indirect jump to MoveAnimation (78d5e (1e:4d5e))
+	ld [wcc5b], a
+	predef_jump MoveAnimation

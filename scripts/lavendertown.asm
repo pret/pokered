@@ -17,7 +17,7 @@ LavenderTownText1: ; 44120 (11:4120)
 	ld hl, LavenderTownText_4413c
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, LavenderTownText_44146
 	jr nz, .asm_40831 ; 0x44131

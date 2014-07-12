@@ -9,7 +9,7 @@ _TM35PreReceiveText:: ; a0f09 (28:4f09)
 _ReceivedTM35Text:: ; a0f48 (28:4f48)
 	text $52, " received "
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM35ExplanationText:: ; a0f5d (28:4f5d)

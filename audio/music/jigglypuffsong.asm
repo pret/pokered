@@ -1,23 +1,23 @@
 Music_JigglypuffSong_Ch1:: ; 7fb7d (1f:7b7d)
-	tempo 0, 144
-	stereopanning 119
+	tempo 144
+	volume 7, 7
 	vibrato 8, 2, 4
 	duty 2
 	dutycycle 165
-	togglecall
+	toggleperfectpitch
 	notetype 13, 6, 7
 	octave 4
-	note E_, 8
+	E_ 8
 	notetype 12, 6, 7
-	note B_, 2
-	note G#, 6
-	note F#, 8
-	note G#, 2
-	note A_, 6
-	note G#, 8
-	note F#, 4
-	note G#, 4
-	note E_, 10
+	B_ 2
+	G# 6
+	F# 8
+	G# 2
+	A_ 6
+	G# 8
+	F# 4
+	G# 4
+	E_ 10
 	endchannel
 
 
@@ -27,15 +27,15 @@ Music_JigglypuffSong_Ch2:: ; 7fb9a (1f:7b9a)
 	dutycycle 10
 	notetype 12, 10, 7
 	octave 4
-	note E_, 8
-	note B_, 2
-	note G#, 6
-	note F#, 8
-	note G#, 2
-	note A_, 6
-	note G#, 8
-	note F#, 4
-	note G#, 4
-	note E_, 10
+	E_ 8
+	B_ 2
+	G# 6
+	F# 8
+	G# 2
+	A_ 6
+	G# 8
+	F# 4
+	G# 4
+	E_ 10
 	endchannel
 ; 0x7fbaf

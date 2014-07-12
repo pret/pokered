@@ -1,5 +1,5 @@
 SFX_08_PokeFlute_Ch1: ; 22322 (8:6322)
-	tempo 1, 0
+	tempo 256
 
 
 SFX_08_PokeFlute_Ch2: ; 22325 (8:6325)

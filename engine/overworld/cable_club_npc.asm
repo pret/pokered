@@ -1,7 +1,7 @@
 CableClubNPC: ; 71c5 (1:71c5)
 	ld hl, CableClubNPCText1
 	call PrintText
-	ld a, [$d74b]
+	ld a, [wd74b]
 	bit 5, a
 	jp nz, Func_71e1
 	ld c, $3c
@@ -12,9 +12,9 @@ CableClubNPC: ; 71c5 (1:71c5)
 
 Func_71e1: ; 71e1 (1:71e1)
 	ld a, $1
-	ld [$cc34], a
+	ld [wMenuJoypadPollCount], a
 	ld a, $5a
-	ld [$cc47], a
+	ld [wcc47], a
 .asm_71eb
 	ld a, [$ffaa]
 	cp $2
@@ -29,9 +29,9 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld [$ffad], a
 	ld a, $80
 	ld [$ff02], a
-	ld a, [$cc47]
+	ld a, [wcc47]
 	dec a
-	ld [$cc47], a
+	ld [wcc47], a
 	jr z, .asm_7287 ; 0x720b $7a
 	ld a, $1
 	ld [$ff01], a
@@ -48,11 +48,11 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld hl, CableClubNPCText2
 	call PrintText
 	xor a
-	ld [$cc34], a
+	ld [wMenuJoypadPollCount], a
 	call YesNoChoice
 	ld a, $1
-	ld [$cc34], a
-	ld a, [$cc26]
+	ld [wMenuJoypadPollCount], a
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_728f ; 0x723e $4f
 	callab SaveSAVtoSRAM
@@ -61,15 +61,15 @@ Func_71e1: ; 71e1 (1:71e1)
 	call PlaySoundWaitForCurrent
 	ld hl, CableClubNPCText3
 	call PrintText
-	ld hl, $cc47
+	ld hl, wcc47
 	ld a, $3
 	ld [hli], a
 	xor a
 	ld [hl], a
 	ld [$ffa9], a
-	ld [$cc42], a
+	ld [wcc42], a
 	call Func_227f
-	ld hl, $cc47
+	ld hl, wcc47
 	ld a, [hli]
 	inc a
 	jr nz, Func_72a8 ; 0x726b $3b
@@ -98,13 +98,13 @@ Func_71e1: ; 71e1 (1:71e1)
 
 Func_7298: ; 7298 (1:7298)
 	xor a
-	ld hl, $cc47
+	ld hl, wcc47
 	ld [hli], a
 	ld [hl], a
-	ld hl, $d72e
+	ld hl, wd72e
 	res 6, [hl]
 	xor a
-	ld [$cc34], a
+	ld [wMenuJoypadPollCount], a
 	ret
 
 Func_72a8: ; 72a8 (1:72a8)

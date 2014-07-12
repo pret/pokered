@@ -8,7 +8,7 @@ Route12GateUpstairsTextPointers: ; 49563 (12:5563)
 
 Route12GateUpstairsText1: ; 49569 (12:5569)
 	db $08 ; asm
-	ld a, [$d7d7]
+	ld a, [wd7d7]
 	rrca
 	jr c, .asm_0ad3c ; 0x4956e
 	ld hl, TM39PreReceiveText
@@ -18,7 +18,7 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 	jr nc, .BagFull
 	ld hl, ReceivedTM39Text
 	call PrintText
-	ld hl, $d7d7
+	ld hl, wd7d7
 	set 0, [hl]
 	jr .asm_4ba56 ; 0x49589
 .BagFull
@@ -66,7 +66,7 @@ Route12GateUpstairsText_495c4: ; 495c4 (12:55c4)
 	db "@"
 
 Route12GateUpstairsScript_495c9: ; 495c9 (12:55c9)
-	ld a, [$c109]
+	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	jr z, .asm_495d4 ; 0x495ce $4
 	ld a, $1
@@ -75,5 +75,5 @@ Route12GateUpstairsScript_495c9: ; 495c9 (12:55c9)
 	call PrintText
 	xor a
 .asm_495d8
-	ld [$cc3c], a
+	ld [wcc3c], a
 	jp TextScriptEnd

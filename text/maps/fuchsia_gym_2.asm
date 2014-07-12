@@ -27,7 +27,7 @@ _UnnamedText_75590:: ; a0069 (28:4069)
 _ReceivedTM06Text:: ; a00eb (28:40eb)
 	text $52, " received"
 	line "@"
-	TX_RAM $cf4b
+	TX_RAM wcf4b
 	text "!@@"
 
 _TM06ExplanationText:: ; a00ff (28:40ff)

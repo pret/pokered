@@ -2,13 +2,13 @@ OaksAideScript ; 0x59035
 	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_59086 ; 0x59042 $42
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [$d11e]
+	ld a, [wd11e]
 	ld [$ffdd], a
 	ld b, a
 	ld a, [$ffdb]

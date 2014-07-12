@@ -27,7 +27,7 @@ CeladonDinerText4: ; 4916e (12:516e)
 
 CeladonDinerText5: ; 49173 (12:5173)
 	db $08 ; asm
-	ld a, [$d783]
+	ld a, [wd783]
 	bit 0, a
 	jr nz, .asm_eb14d ; 0x49179
 	ld hl, CeladonDinerText_491a7
@@ -35,7 +35,7 @@ CeladonDinerText5: ; 49173 (12:5173)
 	ld bc, (COIN_CASE << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, $d783
+	ld hl, wd783
 	set 0, [hl]
 	ld hl, ReceivedCoinCaseText
 	call PrintText

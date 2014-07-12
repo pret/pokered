@@ -15,8 +15,7 @@ CeladonMansion5Text2: ; 1dd46 (7:5d46)
 	call GivePokemon
 	jr nc, .asm_24365 ; 0x1dd4d
 	ld a, $45
-	ld [$cc4d], a
-	ld a, $11
-	call Predef
+	ld [wcc4d], a
+	predef HideObject
 .asm_24365 ; 0x1dd59
 	jp TextScriptEnd

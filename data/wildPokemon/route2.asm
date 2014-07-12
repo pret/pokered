@@ -1,6 +1,6 @@
-Route2Mons: 
+Route2Mons:
 	db $19
-	
+
 	IF !_YELLOW
 		db 3,RATTATA
 		db 3,PIDGEY

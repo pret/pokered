@@ -10,24 +10,24 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld a, $1
 	ld [$ff8c], a
 	call Func_34ae
-	ld hl, $d72d
+	ld hl, wd72d
 	bit 0, [hl]
 	set 0, [hl]
 	ret nz
-	ld hl, $c214
+	ld hl, wSpriteStateData2 + $14
 	ld a, $8
 	ld [hli], a
 	ld a, $a
 	ld [hl], a
 	ld a, $8
-	ld [$c119], a
+	ld [wSpriteStateData1 + $19], a
 	ld a, [$ffaa]
 	cp $2
 	ret z
 	ld a, $7
-	ld [$c215], a
+	ld [wSpriteStateData2 + $15], a
 	ld a, $c
-	ld [$c119], a
+	ld [wSpriteStateData1 + $19], a
 	ret
 
 BattleCenterMTextPointers: ; 4fd4c (13:7d4c)

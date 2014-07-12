@@ -135,7 +135,7 @@ FuchsiaCityLaprasText: ; 19aef (6:5aef)
 
 FuchsiaCityText24: ; 19af4 (6:5af4)
 	db $08 ; asm
-	ld a, [$d7f6]
+	ld a, [wd7f6]
 	bit 6, a
 	jr nz, .asm_3b4e8 ; 0x19afa
 	bit 7, a

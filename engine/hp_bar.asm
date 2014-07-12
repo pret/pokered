@@ -1,9 +1,9 @@
-UpdateHPBar_LoadRegisters: ; f9dc (3:79dc)
-	call Load16BitRegisters
+HPBarLength: ; f9dc (3:79dc)
+	call GetPredefRegisters
 
 ; calculates bc * 48 / de, the number of pixels the HP bar has
 ; the result is always at least 1
-UpdateHPBar_CalcNumberOfHPBarPixels: ; f9df (3:79df)
+GetHPBarLength: ; f9df (3:79df)
 	push hl
 	xor a
 	ld hl, H_MULTIPLICAND
@@ -46,6 +46,7 @@ UpdateHPBar_CalcNumberOfHPBarPixels: ; f9df (3:79df)
 
 ; predef $48
 UpdateHPBar: ; fa1d (3:7a1d)
+UpdateHPBar2:
 	push hl
 	ld hl, wHPBarOldHP
 	ld a, [hli]
@@ -72,7 +73,7 @@ UpdateHPBar: ; fa1d (3:7a1d)
 	ld a, $1
 .HPdecrease
 	ld [wHPBarDelta], a
-	call Load16BitRegisters
+	call GetPredefRegisters
 	ld a, [wHPBarNewHP]
 	ld e, a
 	ld a, [wHPBarNewHP+1]
@@ -202,13 +203,13 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	push af
 	push de
-	ld a, [wListMenuID] ; $cf94
+	ld a, [wListMenuID] ; wListMenuID
 	and a
 	jr z, .asm_fb2d
 	ld a, [wHPBarOldHP]
-	ld [$cef1], a
+	ld [wcef1], a
 	ld a, [wHPBarOldHP+1]
-	ld [$cef0], a
+	ld [wcef0], a
 	push hl
 	ld a, [$fff6]
 	bit 0, a
@@ -225,7 +226,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	ld [hli], a
 	ld [hli], a
 	pop hl
-	ld de, $cef0
+	ld de, wcef0
 	ld bc, $203
 	call PrintNumber
 	call DelayFrame
@@ -254,12 +255,12 @@ UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	ld l, a
 	push hl
 	push de
-	call UpdateHPBar_CalcNumberOfHPBarPixels ; calc num pixels for old HP
+	call GetHPBarLength ; calc num pixels for old HP
 	ld a, e
 	pop de
 	pop bc
 	push af
-	call UpdateHPBar_CalcNumberOfHPBarPixels ; calc num pixels for new HP
+	call GetHPBarLength ; calc num pixels for new HP
 	pop af
 	ld d, e
 	ld e, a

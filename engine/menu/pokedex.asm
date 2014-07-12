@@ -1,4 +1,4 @@
-DisplayPokedexMenu_: ; 40000 (10:4000)
+ShowPokedexMenu: ; 40000 (10:4000)
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites ; move sprites
@@ -9,7 +9,7 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	ld [wListScrollOffset],a
 	ld [wLastMenuItem],a
 	inc a
-	ld [$d11e],a
+	ld [wd11e],a
 	ld [$ffb7],a
 .setUpGraphics
 	ld b,$08
@@ -22,7 +22,7 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	xor a
 	ld [hli],a ; top menu item X
 	inc a
-	ld [$cc37],a
+	ld [wcc37],a
 	inc hl
 	inc hl
 	ld a,6
@@ -32,12 +32,12 @@ DisplayPokedexMenu_: ; 40000 (10:4000)
 	jr c,.goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
 	xor a
-	ld [$cc37],a
+	ld [wcc37],a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	ld [$ffb7],a
-	ld [$cd3a],a
-	ld [$cd3b],a
+	ld [wcd3a],a
+	ld [wcd3b],a
 	pop af
 	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3
@@ -68,10 +68,10 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	push af
 	add b
 	inc a
-	ld [$d11e],a
-	ld a,[$d11e]
+	ld [wd11e],a
+	ld a,[wd11e]
 	push af
-	ld a,[$cd3d]
+	ld a,[wWhichTrade]
 	push af
 	ld hl,wPokedexSeen
 	call IsPokemonBitSet
@@ -91,7 +91,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ld [hli],a ; menu watched keys (A button and B button)
 	xor a
 	ld [hli],a ; old menu item ID
-	ld [$cc37],a
+	ld [wcc37],a
 .handleMenuInput
 	call HandleMenuInput
 	bit 1,a ; was the B button pressed?
@@ -108,9 +108,9 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ld b,1
 .exitSideMenu
 	pop af
-	ld [$cd3d],a
+	ld [wWhichTrade],a
 	pop af
-	ld [$d11e],a
+	ld [wd11e],a
 	pop af
 	ld [wListScrollOffset],a
 	pop af
@@ -118,8 +118,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	pop af
 	ld [wCurrentMenuItem],a
 	push bc
-	FuncCoord 0,3
-	ld hl,Coord
+	hlCoord 0, 3
 	ld de,20
 	ld bc,$7f0d ; 13 blank tiles
 	call DrawTileLine ; cover up the menu cursor in the pokemon list
@@ -127,8 +126,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ret
 .buttonBPressed
 	push bc
-	FuncCoord 15,10
-	ld hl,Coord
+	hlCoord 15, 10
 	ld de,20
 	ld bc,$7f07 ; 7 blank tiles
 	call DrawTileLine ; cover up the menu cursor in the side menu
@@ -140,13 +138,12 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	jr .exitSideMenu
 ; play pokemon cry
 .choseCry
-	ld a,[$d11e]
+	ld a,[wd11e]
 	call GetCryData ; get cry data
 	call PlaySound ; play sound
 	jr .handleMenuInput
 .choseArea
-	ld a,$4a
-	call Predef ; display pokemon areas
+	predef LoadTownMap_Nest ; display pokemon areas
 	ld b,0
 	jr .exitSideMenu
 
@@ -156,53 +153,43 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 ; draw the horizontal line separating the seen and owned amounts from the menu
-	FuncCoord 15,8
-	ld hl,Coord
+	hlCoord 15, 8
 	ld a,$7a ; horizontal line tile
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
-	FuncCoord 14,0
-	ld hl,Coord
+	hlCoord 14, 0
 	ld [hl],$71 ; vertical line tile
-	FuncCoord 14,1
-	ld hl,Coord
+	hlCoord 14, 1
 	call DrawPokedexVerticalLine
-	FuncCoord 14,9
-	ld hl,Coord
+	hlCoord 14, 9
 	call DrawPokedexVerticalLine
 	ld hl,wPokedexSeen
 	ld b,wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
-	ld de,$d11e
-	FuncCoord 16,3
-	ld hl,Coord
+	ld de,wd11e
+	hlCoord 16, 3
 	ld bc,$0103
 	call PrintNumber ; print number of seen pokemon
 	ld hl,wPokedexOwned
 	ld b,wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld de,$d11e
-	FuncCoord 16,6
-	ld hl,Coord
+	ld de,wd11e
+	hlCoord 16, 6
 	ld bc,$0103
 	call PrintNumber ; print number of owned pokemon
-	FuncCoord 16,2
-	ld hl,Coord
+	hlCoord 16, 2
 	ld de,PokedexSeenText
 	call PlaceString
-	FuncCoord 16,5
-	ld hl,Coord
+	hlCoord 16, 5
 	ld de,PokedexOwnText
 	call PlaceString
-	FuncCoord 1,1
-	ld hl,Coord
+	hlCoord 1, 1
 	ld de,PokedexContentsText
 	call PlaceString
-	FuncCoord 16,10
-	ld hl,Coord
+	hlCoord 16, 10
 	ld de,PokedexMenuItemsText
 	call PlaceString
 ; find the highest pokedex number among the pokemon the player has seen
@@ -220,20 +207,18 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	jr .maxSeenPokemonLoop
 .storeMaxSeenPokemon
 	ld a,b
-	ld [$cd3d],a ; max seen pokemon
+	ld [wWhichTrade],a ; max seen pokemon
 .loop
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
-	FuncCoord 4,2
-	ld hl,Coord
+	hlCoord 4, 2
 	ld bc,$0e0a
 	call ClearScreenArea
-	FuncCoord 1,3
-	ld hl,Coord
+	hlCoord 1, 3
 	ld a,[wListScrollOffset]
-	ld [$d11e],a
+	ld [wd11e],a
 	ld d,7
-	ld a,[$cd3d]
+	ld a,[wWhichTrade]
 	cp a,7
 	jr nc,.printPokemonLoop
 	ld d,a
@@ -242,15 +227,15 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 ; loop to print pokemon pokedex numbers and names
 ; if the player has owned the pokemon, it puts a pokeball beside the name
 .printPokemonLoop
-	ld a,[$d11e]
+	ld a,[wd11e]
 	inc a
-	ld [$d11e],a
+	ld [wd11e],a
 	push af
 	push de
 	push hl
 	ld de,-20
 	add hl,de
-	ld de,$d11e
+	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber ; print the pokedex number
 	ld de,20
@@ -285,7 +270,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	add hl,bc
 	pop de
 	pop af
-	ld [$d11e],a
+	ld [wd11e],a
 	dec d
 	jr nz,.printPokemonLoop
 	ld a,01
@@ -309,7 +294,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	bit 7,a ; was Down pressed?
 	jr z,.checkIfRightPressed
 .downPressed ; scroll down one row
-	ld a,[$cd3d]
+	ld a,[wWhichTrade]
 	cp a,7
 	jp c,.loop
 	sub a,7
@@ -324,7 +309,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	bit 4,a ; was Right pressed?
 	jr z,.checkIfLeftPressed
 .rightPressed ; scroll down 7 rows
-	ld a,[$cd3d]
+	ld a,[wWhichTrade]
 	cp a,7
 	jp c,.loop
 	sub a,6
@@ -385,15 +370,14 @@ PokedexMenuItemsText: ; 402af (10:42af)
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
-; [$d11e] = pokedex number
+; [wd11e] = pokedex number
 ; hl = address of bit field
 IsPokemonBitSet: ; 402c2 (10:42c2)
-	ld a,[$d11e]
+	ld a,[wd11e]
 	dec a
 	ld c,a
 	ld b,2
-	ld a,$10
-	call Predef
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ret
@@ -407,67 +391,56 @@ ShowPokedexData: ; 402d1 (10:42d1)
 
 ; function to display pokedex data from inside the pokedex
 ShowPokedexDataInternal: ; 402e2 (10:42e2)
-	ld hl,$d72c
+	ld hl,wd72c
 	set 1,[hl]
 	ld a,$33 ; 3/7 volume
 	ld [$ff24],a
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
-	ld a,[$d11e] ; pokemon ID
-	ld [$cf91],a
+	ld a,[wd11e] ; pokemon ID
+	ld [wcf91],a
 	push af
 	ld b,04
 	call GoPAL_SET
 	pop af
-	ld [$d11e],a
+	ld [wd11e],a
 	ld a,[$ffd7]
 	push af
 	xor a
 	ld [$ffd7],a
-	FuncCoord 0,0
-	ld hl,Coord
+	hlCoord 0, 0
 	ld de,1
 	ld bc,$6414
 	call DrawTileLine ; draw top border
-	FuncCoord 0,17
-	ld hl,Coord
+	hlCoord 0, 17
 	ld b,$6f
 	call DrawTileLine ; draw bottom border
-	FuncCoord 0,1
-	ld hl,Coord
+	hlCoord 0, 1
 	ld de,20
 	ld bc,$6610
 	call DrawTileLine ; draw left border
-	FuncCoord 19,1
-	ld hl,Coord
+	hlCoord 19, 1
 	ld b,$67
 	call DrawTileLine ; draw right border
-	FuncCoord 0,0
 	ld a,$63 ; upper left corner tile
-	ld [Coord],a
-	FuncCoord 19,0
+	Coorda 0, 0
 	ld a,$65 ; upper right corner tile
-	ld [Coord],a
-	FuncCoord 0,17
+	Coorda 19, 0
 	ld a,$6c ; lower left corner tile
-	ld [Coord],a
-	FuncCoord 19,17
+	Coorda 0, 17
 	ld a,$6e ; lower right corner tile
-	ld [Coord],a
-	FuncCoord 0,9
-	ld hl,Coord
+	Coorda 19, 17
+	hlCoord 0, 9
 	ld de,PokedexDataDividerLine
 	call PlaceString ; draw horizontal divider line
-	FuncCoord 9,6
-	ld hl,Coord
+	hlCoord 9, 6
 	ld de,HeightWeightText
 	call PlaceString
 	call GetMonName
-	FuncCoord 9,2
-	ld hl,Coord
+	hlCoord 9, 2
 	call PlaceString
 	ld hl,PokedexEntryPointers
-	ld a,[$d11e]
+	ld a,[wd11e]
 	dec a
 	ld e,a
 	ld d,0
@@ -476,30 +449,28 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld a,[hli]
 	ld e,a
 	ld d,[hl] ; de = address of pokedex entry
-	FuncCoord 9,4
-	ld hl,Coord
+	hlCoord 9, 4
 	call PlaceString ; print species name
 	ld h,b
 	ld l,c
 	push de
-	ld a,[$d11e]
+	ld a,[wd11e]
 	push af
 	call IndexToPokedex
-	FuncCoord 2,8
-	ld hl,Coord
+	hlCoord 2, 8
 	ld a, "№"
 	ld [hli],a
 	ld a,$f2
 	ld [hli],a
-	ld de,$d11e
+	ld de,wd11e
 	ld bc,$8103
 	call PrintNumber ; print pokedex number
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
 	pop af
-	ld [$d11e],a
-	ld a,[$cf91]
-	ld [$d0b5],a
+	ld [wd11e],a
+	ld a,[wcf91]
+	ld [wd0b5],a
 	pop de
 	push af
 	push bc
@@ -508,10 +479,9 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call Delay3
 	call GBPalNormal
 	call GetMonHeader ; load pokemon picture location
-	FuncCoord 1,1
-	ld hl,Coord
+	hlCoord 1, 1
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
-	ld a,[$cf91]
+	ld a,[wcf91]
 	call PlayCry ; play pokemon cry
 	pop hl
 	pop de
@@ -522,16 +492,14 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	jp z,.waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
 	inc de ; de = address of feet (height)
 	ld a,[de] ; reads feet, but a is overwritten without being used
-	FuncCoord 12,6
-	ld hl,Coord
+	hlCoord 12, 6
 	ld bc,$0102
 	call PrintNumber ; print feet (height)
 	ld a,$60 ; feet symbol tile (one tick)
 	ld [hl],a
 	inc de
 	inc de ; de = address of inches (height)
-	FuncCoord 15,6
-	ld hl,Coord
+	hlCoord 15, 6
 	ld bc,$8102
 	call PrintNumber ; print inches (height)
 	ld a,$61 ; inches symbol tile (two ticks)
@@ -552,13 +520,11 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	dec de
 	ld a,[de] ; a = lower byte of weight
 	ld [hl],a ; store lower byte of weight in [$ff8c]
-	FuncCoord 11,8
 	ld de,$ff8b
-	ld hl,Coord
+	hlCoord 11, 8
 	ld bc,$0205 ; no leading zeroes, right-aligned, 2 bytes, 5 digits
 	call PrintNumber ; print weight
-	FuncCoord 14,8
-	ld hl,Coord
+	hlCoord 14, 8
 	ld a,[$ff8c]
 	sub a,10
 	ld a,[$ff8b]
@@ -576,15 +542,14 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [$ff8b],a ; restore original value of [$ff8b]
 	pop hl
 	inc hl ; hl = address of pokedex description text
-	FuncCoord 1,11
-	ld bc,Coord
+	bcCoord 1, 11
 	ld a,2
 	ld [$fff4],a
 	call TextCommandProcessor ; print pokedex description text
 	xor a
 	ld [$fff4],a
 .waitForButtonPress
-	call GetJoypadStateLowSensitivity
+	call JoypadLowSensitivity
 	ld a,[$ffb5]
 	and a,%00000011 ; A button and B button
 	jr z,.waitForButtonPress
@@ -595,7 +560,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call GoPAL_SET_CF1C
 	call LoadTextBoxTilePatterns
 	call GBPalNormal
-	ld hl,$d72c
+	ld hl,wd72c
 	res 1,[hl]
 	ld a,$77 ; max volume
 	ld [$ff24],a
@@ -637,10 +602,10 @@ DrawTileLine: ; 40474 (10:4474)
 INCLUDE "data/pokedex_entries.asm"
 
 PokedexToIndex: ; 40ff9 (10:4ff9)
-	; converts the Pokédex number at $D11E to an index
+	; converts the Pokédex number at wd11e to an index
 	push bc
 	push hl
-	ld a,[$D11E]
+	ld a,[wd11e]
 	ld b,a
 	ld c,0
 	ld hl,PokedexOrder
@@ -652,23 +617,23 @@ PokedexToIndex: ; 40ff9 (10:4ff9)
 	jr nz,.loop
 
 	ld a,c
-	ld [$D11E],a
+	ld [wd11e],a
 	pop hl
 	pop bc
 	ret
 
 IndexToPokedex: ; 41010 (10:5010)
-	; converts the indexédex number at $D11E to a Pokédex number
+	; converts the indexédex number at wd11e to a Pokédex number
 	push bc
 	push hl
-	ld a,[$D11E]
+	ld a,[wd11e]
 	dec a
 	ld hl,PokedexOrder
 	ld b,0
 	ld c,a
 	add hl,bc
 	ld a,[hl]
-	ld [$D11E],a
+	ld [wd11e],a
 	pop hl
 	pop bc
 	ret

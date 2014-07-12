@@ -1,23 +1,22 @@
-HallOfFameComputer: ; 7405c (1d:405c)
+HallOfFamePC: ; 7405c (1d:405c)
 	callba AnimateHallOfFame
 	call ClearScreen
 	ld c, $64
 	call DelayFrames
 	call DisableLCD
-	ld hl, $8800
-	ld bc, $400
+	ld hl, vFont
+	ld bc, $800 / 2
 	call Func_74171
-	ld hl, $9600
-	ld bc, $100
+	ld hl, vChars2 + $600
+	ld bc, $200 / 2
 	call Func_74171
-	ld hl, $97e0
+	ld hl, vChars2 + $7e0
 	ld bc, $10
 	ld a, $ff
 	call FillMemory
 	ld hl, wTileMap
 	call Func_7417b
-	FuncCoord 0, 14 ; $c4b8
-	ld hl, Coord
+	hlCoord 0, 14
 	call Func_7417b
 	ld a, $c0
 	ld [rBGP], a ; $ff47
@@ -30,8 +29,8 @@ HallOfFameComputer: ; 7405c (1d:405c)
 	ld c, $80
 	call DelayFrames
 	xor a
-	ld [wWhichTrade], a ; $cd3d
-	ld [$cd3e], a
+	ld [wWhichTrade], a ; wWhichTrade
+	ld [wTrainerEngageDistance], a
 	jp Credits
 
 Func_740ba: ; 740ba (1d:40ba)
@@ -53,29 +52,28 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call FillMiddleOfScreenWithWhite
 
 	; display the next monster from CreditsMons
-	ld hl,$CD3E
+	ld hl,wTrainerEngageDistance
 	ld c,[hl] ; how many monsters have we displayed so far?
 	inc [hl]
 	ld b,0
 	ld hl,CreditsMons
 	add hl,bc ; go that far in the list of monsters and get the next one
 	ld a,[hl]
-	ld [$CF91],a
-	ld [$D0B5],a
-	FuncCoord 8, 6 ; $c420
-	ld hl,Coord
+	ld [wcf91],a
+	ld [wd0b5],a
+	hlCoord 8, 6
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
-	ld hl,$980C
+	ld hl,vBGMap0 + $c
 	call Func_74164
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call LoadScreenTilesFromBuffer1
-	ld hl,$9800
+	ld hl,vBGMap0
 	call Func_74164
 	ld a,$A7
 	ld [$FF4B],a
-	ld hl,$9C00
+	ld hl,vBGMap1
 	call Func_74164
 	call FillMiddleOfScreenWithWhite
 	ld a,$FC
@@ -153,8 +151,7 @@ Func_7417b: ; 7417b (1d:417b)
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
-	FuncCoord 0, 4 ; $c3f0
-	ld hl, Coord
+	hlCoord 0, 4
 	ld bc, $c8 ; 10 rows of 20 tiles each
 	ld a, $7f ; blank white tile
 	jp FillMemory
@@ -164,8 +161,7 @@ Credits: ; 7418e (1d:418e)
 	push de
 .asm_74192
 	pop de
-	FuncCoord 9, 6 ; $c421
-	ld hl, Coord
+	hlCoord 9, 6
 	push hl
 	call FillMiddleOfScreenWithWhite
 	pop hl
@@ -238,20 +234,19 @@ Credits: ; 7418e (1d:418e)
 	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx
-	ld hl, $9600
+	ld hl, vChars2 + $600
 	ld bc, (BANK(TheEndGfx) << 8) + $0a
 	call CopyVideoData
-	FuncCoord 4, 8 ; $c444
-	ld hl, Coord
-	ld de, UnnamedText_74229 ; $4229
+	hlCoord 4, 8
+	ld de, TheEndTextString
 	call PlaceString
-	FuncCoord 4, 9 ; $c458
-	ld hl, Coord
+	hlCoord 4, 9
 	inc de
 	call PlaceString
 	jp Func_740ba
 
-UnnamedText_74229: ; 74229 (1d:4229)
+TheEndTextString: ; 74229 (1d:4229)
+; "T H E  E N D"
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
@@ -260,4 +255,4 @@ INCLUDE "data/credits_order.asm"
 INCLUDE "text/credits_text.asm"
 
 TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
-	INCBIN "gfx/theend.w40.interleave.2bpp"
+	INCBIN "gfx/theend.interleave.2bpp"
