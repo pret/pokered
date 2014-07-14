@@ -90,17 +90,9 @@ $(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
 # Make a symfile for debugging. rgblink will segfault if a mapfile isn't made too.
 link = rgblink -n $*.sym -m $*.map
 
-pokered.gbc: $(red_obj)
+poke%.gbc: $$(%_obj)
 	$(link) -o $@ $^
-	rgbfix $(red_opt) $@
-
-pokeblue.gbc: $(blue_obj)
-	$(link) -o $@ $^
-	rgbfix $(blue_opt) $@
-
-pokeyellow.gbc: $(yellow_obj)
-	$(link) -o $@ $^
-	rgbfix $(yellow_opt) $@
+	rgbfix $($*_opt) $@
 
 
 clean:
