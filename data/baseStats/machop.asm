@@ -9,7 +9,7 @@ db FIGHTING ; species type 1
 db FIGHTING ; species type 2
 db 180 ; catch rate
 db 88 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/machop.pic",0,1 ; 55, sprite dimensions
 dw MachopPicFront
 dw MachopPicBack
 ; attacks known at lvl 0

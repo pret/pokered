@@ -9,7 +9,7 @@ db NORMAL ; species type 1
 db FLYING ; species type 2
 db 190 ; catch rate
 db 96 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/doduo.pic",0,1 ; 55, sprite dimensions
 dw DoduoPicFront
 dw DoduoPicBack
 ; attacks known at lvl 0

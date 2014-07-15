@@ -9,7 +9,7 @@ db FIRE ; species type 1
 db FIRE ; species type 2
 db 45 ; catch rate
 db 198 ; base exp yield
-db $66 ; sprite dimensions
+INCBIN "pic/bmon/flareon.pic",0,1 ; 66, sprite dimensions
 dw FlareonPicFront
 dw FlareonPicBack
 ; attacks known at lvl 0

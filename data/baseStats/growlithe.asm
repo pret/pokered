@@ -9,7 +9,7 @@ db FIRE ; species type 1
 db FIRE ; species type 2
 db 190 ; catch rate
 db 91 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/growlithe.pic",0,1 ; 55, sprite dimensions
 dw GrowlithePicFront
 dw GrowlithePicBack
 ; attacks known at lvl 0

@@ -9,7 +9,7 @@ db NORMAL ; species type 1
 db FLYING ; species type 2
 db 90 ; catch rate
 db 162 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/fearow.pic",0,1 ; 77, sprite dimensions
 dw FearowPicFront
 dw FearowPicBack
 ; attacks known at lvl 0

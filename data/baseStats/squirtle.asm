@@ -9,7 +9,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate
 db 66 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/squirtle.pic",0,1 ; 55, sprite dimensions
 dw SquirtlePicFront
 dw SquirtlePicBack
 ; attacks known at lvl 0
