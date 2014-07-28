@@ -17,7 +17,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld [wSpriteStateData1 + 2], a
 	ret
 .asm_4e50
-	call Func_4c70
+	call DetectCollisionBetweenSprites
 	ld h, $c1
 	ld a, [wWalkCounter] ; wcfc5
 	and a
@@ -604,16 +604,16 @@ CanWalkOntoTile: ; 516e (1:516e)
 	jr nc, .impassable ; don't walk off screen
 	push de
 	push bc
-	call Func_4c70
+	call DetectCollisionBetweenSprites
 	pop bc
 	pop de
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $c
 	ld l, a
-	ld a, [hl]         ; c1xc (forbidden directions flags(?))
+	ld a, [hl]         ; c1xc (directions in which sprite collision would occur)
 	and b              ; check against chosen direction (1,2,4 or 8)
-	jr nz, .impassable ; direction forbidden, don't go there
+	jr nz, .impassable ; collision between sprites, don't go there
 	ld h, $c2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
