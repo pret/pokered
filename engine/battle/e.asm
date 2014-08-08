@@ -587,7 +587,7 @@ Func_39b87: ; 39b87 (e:5b87)
 	jr z, .asm_39bc1
 	push hl
 	ld [wd0b5], a
-	ld a, $2c
+	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [W_LISTTYPE], a

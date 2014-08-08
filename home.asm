@@ -2044,7 +2044,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 .skipGettingQuantity
 	ld a,[wcf91]
 	ld [wd0b5],a
-	ld a,$01
+	ld a,BANK(ItemNames)
 	ld [wPredefBank],a
 	call GetName
 	jr .storeChosenEntry
@@ -3782,7 +3782,7 @@ GetName:: ; 376b (0:376b)
 ; returns pointer to name in de
 	ld a,[wd0b5]
 	ld [wd11e],a
-	cp a,$C4        ;it's TM/HM
+	cp HM_01
 	jp nc,GetMachineName
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3858,8 +3858,8 @@ GetItemPrice:: ; 37df (0:37df)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [wListMenuID] ; wListMenuID
-	cp $1
-	ld a, $1 ; hardcoded Bank
+	cp MOVESLISTMENU
+	ld a, BANK(ItemPrices)
 	jr nz, .asm_37ed
 	ld a, $f ; hardcoded Bank
 .asm_37ed

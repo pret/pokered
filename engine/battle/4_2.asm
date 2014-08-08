@@ -391,7 +391,7 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
 	ld [W_LISTTYPE], a
-	ld a, $e
+	ld a, BANK(TrainerNames)
 	ld [wPredefBank], a
 	call GetName
 	ld hl, wcd6d

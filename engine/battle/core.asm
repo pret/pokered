@@ -2184,7 +2184,9 @@ asm_3d00e: ; 3d00e (f:500e)
 	jr Func_3d03c
 
 OldManItemList: ; 3d02d (f:502d)
-	db $01, POKE_BALL, 50, $ff
+	db 1 ; # items
+	db POKE_BALL, 50
+	db -1
 
 Func_3d031
 	ld hl, wNumBagItems ; wNumBagItems
@@ -5471,7 +5473,7 @@ asm_3e70b: ; 3e70b (f:670b)
 	res 6, [hl] ; no longer invulnerable to typcial attacks
 	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
 	ld [wd0b5], a
-	ld a, $2c
+	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [W_LISTTYPE], a
@@ -5950,10 +5952,11 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	call AddNTimes
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, $2c
+
+	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
-	ld a, $2
-	ld [W_LISTTYPE], a ; list type 2 = move name
+	ld a, MOVE_NAME
+	ld [W_LISTTYPE], a
 	call GetName
 	ld de, wcd6d
 	jp CopyStringToCF4B
