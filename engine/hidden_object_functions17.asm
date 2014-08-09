@@ -64,7 +64,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call Delay3
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call SaveScreenTilesToBuffer1
 	ld a, $11
 	ld [wd125], a
@@ -83,7 +83,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	call LoadScreenTilesFromBuffer1
 	call Delay3
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ret
 
 PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)

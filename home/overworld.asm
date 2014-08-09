@@ -766,7 +766,7 @@ HandleFlyOrTeleportAway::
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [wcf0b], a
+	ld [wBattleResult], a
 	ld [wd700], a
 	ld [W_ISINBATTLE], a
 	ld [wd35d], a

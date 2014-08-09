@@ -32,6 +32,11 @@ H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
 H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
 
+; these values are copied to SCX, SCY, and WY during V-blank
+hVBlankSCX EQU $FFAE
+hVBlankSCY EQU $FFAF
+hVBlankWY EQU $FFB0
+
 hJoyHeldLast     EQU $FFB1
 hJoyReleased  EQU $FFB2
 hJoyPressed   EQU $FFB3

@@ -417,7 +417,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld [wcc2b],a
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
-	ld a,[wcc35]
+	ld a,[wMenuItemToSwap]
 	and a
 	jp nz,.swappingPokemon
 	pop af
@@ -449,7 +449,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 .cancelSwap ; if the B button was pressed
 	callba ErasePartyMenuCursors
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
 	call RedrawPartyMenu
 	jr HandlePartyMenuInput
@@ -1155,10 +1155,10 @@ Serial:: ; 2125 (0:2125)
 	ld a, [$ffaa]
 	inc a
 	jr z, .asm_2142
-	ld a, [$ff01]
+	ld a, [rSB]
 	ld [$ffad], a
 	ld a, [$ffac]
-	ld [$ff01], a
+	ld [rSB], a
 	ld a, [$ffaa]
 	cp $2
 	jr z, .asm_2162
@@ -1166,13 +1166,13 @@ Serial:: ; 2125 (0:2125)
 	ld [$ff02], a
 	jr .asm_2162
 .asm_2142
-	ld a, [$ff01]
+	ld a, [rSB]
 	ld [$ffad], a
 	ld [$ffaa], a
 	cp $2
 	jr z, .asm_215f
 	xor a
-	ld [$ff01], a
+	ld [rSB], a
 	ld a, $3
 	ld [rDIV], a ; $ff04
 .asm_2153
@@ -1184,7 +1184,7 @@ Serial:: ; 2125 (0:2125)
 	jr .asm_2162
 .asm_215f
 	xor a
-	ld [$ff01], a
+	ld [rSB], a
 .asm_2162
 	ld a, $1
 	ld [$ffa9], a
@@ -1445,7 +1445,7 @@ Func_22ed:: ; 22ed (0:22ed)
 
 Func_22fa:: ; 22fa (0:22fa)
 	ld a, $2
-	ld [$ff01], a
+	ld [rSB], a
 	xor a
 	ld [$ffad], a
 	ld a, $80
@@ -1697,7 +1697,7 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
-	ld [$ffb0],a ; move the window off the screen
+	ld [hVBlankWY],a ; move the window off the screen
 	call DelayFrame
 	call LoadGBPal
 	xor a
@@ -1919,13 +1919,13 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld a,$01 ; hardcoded bank
 	jr .bankswitch
 .specialBattleType ; Old Man battle
-	ld a, Bank(OldManItemList)
+	ld a, Bank(DisplayBattleMenu)
 .bankswitch
 	call BankswitchHome
 	ld hl,wd730
 	set 6,[hl] ; turn off letter printing delay
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wd12a],a
 	ld a,[wcf8b]
 	ld l,a
@@ -2206,11 +2206,11 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	jp .waitForKeyPressLoop
 .buttonAPressed ; the player chose to make the transaction
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ret
 .buttonBPressed ; the player chose to cancel the transaction
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld a,$ff
 	ret
 
@@ -2232,7 +2232,7 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 	res 6,[hl]
 	call BankswitchBack
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	scf
 	ret
 
@@ -2400,7 +2400,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	inc c
 	push bc
 	inc c
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; is an item being swapped?
 	jr z,.nextListEntry
 	sla a
@@ -2610,7 +2610,7 @@ ChooseFlyDestination:: ; 30a9 (0:30a9)
 	ld hl, LoadTownMap_Fly
 	jp Bankswitch
 
-; causes the text box to close waithout waiting for a button press after displaying text
+; causes the text box to close without waiting for a button press after displaying text
 DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 	ld a,$01
 	ld [wcc3c],a
@@ -3095,7 +3095,7 @@ Func_3381:: ; 3381 (0:3381)
 	jp WaitForSoundToFinish
 
 Func_33b7:: ; 33b7 (0:33b7)
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_33c6
 	ld a, [W_PBSTOREDREGISTERH]

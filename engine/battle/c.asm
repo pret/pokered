@@ -26,7 +26,7 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld [hli], a
 	ld [hl], a ; set the damage output to zero
 	dec a
-	ld [wd05e], a
+	ld [wCriticalHitOrOHKO], a
 	ld hl, wBattleMonSpeed + 1
 	ld de, wEnemyMonSpeed + 1
 	ld a, [H_WHOSETURN] ; $fff3
@@ -50,7 +50,7 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld [hli], a
 	ld [hl], a
 	ld a, $2
-	ld [wd05e], a
+	ld [wCriticalHitOrOHKO], a
 	ret
 .asm_33f8a
 	ld a, $1

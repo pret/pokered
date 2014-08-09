@@ -38,7 +38,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, b
 	and a
 	jr z, .noSilphScope
-	callab Func_3eb01
+	callab LoadEnemyMonData
 	jr .notPokemonTower
 .noSilphScope
 	ld hl, EnemyAppearedText
@@ -54,7 +54,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	call PrintText
 	ld hl, UnveiledGhostText
 	call PrintText
-	callab Func_3eb01
+	callab LoadEnemyMonData
 	callab Func_708ca
 	ld hl, WildMonAppearedText
 	call PrintText
@@ -94,25 +94,25 @@ GhostCantBeIDdText: ; 58e54 (16:4e54)
 	TX_FAR _GhostCantBeIDdText
 	db "@"
 
-SendOutMon: ; 58e59 (16:4e59)
-	ld hl, wEnemyMonHP ; wEnemyMonHP
+PrintSendOutMonMessage: ; 58e59 (16:4e59)
+	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
 	ld hl, GoText
 	jr z, .printText
 	xor a
-	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
-	ld hl, wEnemyMonHP ; wEnemyMonHP
+	ld [H_MULTIPLICAND], a
+	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wcce3], a
-	ld [$ff97], a
+	ld [H_MULTIPLICAND + 1], a
 	ld a, [hl]
 	ld [wcce4], a
-	ld [$ff98], a
-	ld a, $19
-	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_MULTIPLICAND + 2], a
+	ld a, 25
+	ld [H_MULTIPLIER], a
 	call Multiply
-	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
+	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -121,19 +121,19 @@ SendOutMon: ; 58e59 (16:4e59)
 	rr b
 	ld a, b
 	ld b, $4
-	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [H_DIVISOR], a ; enemy mon max HP divided by 4
 	call Divide
-	ld a, [$ff98]
-	ld hl, GoText
-	cp $46
+	ld a, [H_QUOTIENT + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
+	ld hl, GoText ; 70% or greater
+	cp 70
 	jr nc, .printText
-	ld hl, DoItText
-	cp $28
+	ld hl, DoItText ; 40% - 69%
+	cp 40
 	jr nc, .printText
-	ld hl, GetmText
-	cp $a
+	ld hl, GetmText ; 10% - 39%
+	cp 10
 	jr nc, .printText
-	ld hl, EnemysWeakText
+	ld hl, EnemysWeakText ; 0% - 9%
 .printText
 	jp PrintText
 

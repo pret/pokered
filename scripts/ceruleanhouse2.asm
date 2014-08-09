@@ -27,7 +27,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld [wcf8c], a
 	xor a
 	ld [wcf93], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID

@@ -171,8 +171,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jp z, LoadTextBoxTilePatterns
-	ld hl, Func_3ee5b
-	ld b, BANK(Func_3ee5b)
+	ld hl, LoadHudTilePatterns
+	ld b, BANK(LoadHudTilePatterns)
 	jp Bankswitch
 
 .unknownPointerTable_665e: ; 665e (1:665e)

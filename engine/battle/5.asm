@@ -53,8 +53,8 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	call Bankswitch           ;jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
-	ld hl, Func_3cd5a
-	ld b, BANK(Func_3cd5a)
+	ld hl, DrawHUDsAndHPBars
+	ld b, BANK(DrawHUDsAndHPBars)
 	jp Bankswitch
 .alreadyHasSubstitute
 	ld hl, HasSubstituteText

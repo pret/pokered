@@ -75,8 +75,8 @@ Func_7861: ; 7861 (1:7861)
 .asm_78aa
 	ld [wListMenuID], a ; wListMenuID
 	predef UpdateHPBar2
-	predef Func_3cd60
-	predef Func_3cdec
+	predef DrawPlayerHUDAndHPBar
+	predef DrawEnemyHUDAndHPBar
 	callab ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText ; $78dc
 	ld a, [H_WHOSETURN] ; $fff3

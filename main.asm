@@ -22,7 +22,7 @@ INCLUDE "data/facing.asm"
 Func_40b0::
 ; Reset player status on blackout.
 	xor a
-	ld [wcf0b], a
+	ld [wBattleResult], a
 	ld [wd700], a
 	ld [W_ISINBATTLE], a
 	ld [wd35d], a
@@ -821,7 +821,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	pop hl
 	inc a
 	jp z,DisplayListMenuIDLoop ; ignore attempts to swap the Cancel menu item
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; has the first item to swap already been chosen?
 	jr nz,.swapItems
 ; if not, set the currently selected item as the first item
@@ -830,7 +830,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld b,a
 	ld a,[wListScrollOffset] ; index of top (visible) menu item within the list
 	add b
-	ld [wcc35],a ; ID of item chosen for swapping (counts from 1)
+	ld [wMenuItemToSwap],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
 	call DelayFrames
 	jp DisplayListMenuIDLoop
@@ -841,11 +841,11 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld a,[wListScrollOffset]
 	add b
 	ld b,a
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	cp b ; is the currently selected item the same as the first item to swap?
 	jp z,DisplayListMenuIDLoop ; ignore attempts to swap an item with itself
 	dec a
-	ld [wcc35],a ; ID of item chosen for swapping (counts from 1)
+	ld [wMenuItemToSwap],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
 	call DelayFrames
 	push hl
@@ -865,7 +865,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld c,a
 	ld b,0
 	add hl,bc ; hl = address of currently selected item entry
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	add a
 	add e
 	ld e,a
@@ -892,7 +892,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld a,[$ff95]
 	ld [de],a ; put second item ID in first item slot
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
 	jp DisplayListMenuIDLoop
@@ -944,7 +944,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld [wCurrentMenuItem],a
 .done
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
 	jp DisplayListMenuIDLoop
@@ -1059,7 +1059,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ld b,$9c ; window background address
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
-	ld [$ffb0],a ; put the window on the screen
+	ld [hVBlankWY],a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable continuous WRAM to VRAM transfer each V-blank
@@ -2019,7 +2019,7 @@ INCLUDE "data/map_header_banks.asm"
 
 Func_c335: ; c335 (3:4335)
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld [rWY], a ; $ff4a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -3978,7 +3978,7 @@ Func_f51e: ; f51e (3:751e)
 	add $2
 	ld [wcc49], a
 	call LoadMonData
-	callba Func_58f43
+	callba CalcLevelFromExperience
 	ld a, d
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	pop hl

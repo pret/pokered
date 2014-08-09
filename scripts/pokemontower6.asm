@@ -57,7 +57,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_60b82
 	ld hl, wd768

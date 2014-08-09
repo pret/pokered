@@ -32,7 +32,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	inc [hl]
 .asm_701eb
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -86,7 +86,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_70377
 	call Func_70423
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, rLCDC ; $ff40
 	res 3, [hl]
 	ret

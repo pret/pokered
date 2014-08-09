@@ -1,28 +1,30 @@
-Func_58f43: ; 58f43 (16:4f43)
+; calculates the level a mon should be based on its current exp
+CalcLevelFromExperience: ; 58f43 (16:4f43)
 	ld a, [wcf98]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld d, $1
-.asm_58f4e
-	inc d
+	ld d, $1 ; init level to 1
+.loop
+	inc d ; increment level
 	call CalcExperience
 	push hl
-	ld hl, wcfa8
-	ld a, [$ff98]
+	ld hl, wcfa8 ; current exp
+; compare exp needed for level d with current exp
+	ld a, [H_MULTIPLICAND + 2]
 	ld c, a
 	ld a, [hld]
 	sub c
-	ld a, [$ff97]
+	ld a, [H_MULTIPLICAND + 1]
 	ld c, a
 	ld a, [hld]
 	sbc c
-	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [H_MULTIPLICAND]
 	ld c, a
 	ld a, [hl]
 	sbc c
 	pop hl
-	jr nc, .asm_58f4e
-	dec d
+	jr nc, .loop ; if exp needed for level d is not greater than exp, try the next level
+	dec d ; since the exp was too high on the last loop iteration, go back to the previous value and return
 	ret
 
 ; calculates the amount of experience needed for level d
