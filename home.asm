@@ -1,133 +1,21 @@
-; The rst vectors are unused.
-SECTION "rst00", ROM0[$00]
-	rst $38
-SECTION "rst08", ROM0[$08]
-	rst $38
-SECTION "rst10", ROM0[$10]
-	rst $38
-SECTION "rst18", ROM0[$18]
-	rst $38
-SECTION "rst20", ROM0[$20]
-	rst $38
-SECTION "rst28", ROM0[$28]
-	rst $38
-SECTION "rst30", ROM0[$30]
-	rst $38
-SECTION "rst38", ROM0[$38]
-	rst $38
-
-; interrupts
-SECTION "vblank", ROM0[$40]
-	jp VBlank
-SECTION "lcdc",   ROM0[$48]
-	rst $38
-SECTION "timer",  ROM0[$50]
-	jp Timer
-SECTION "serial", ROM0[$58]
-	jp Serial
-SECTION "joypad", ROM0[$60]
-	reti
-
+INCLUDE "home/hardcoded/rst.asm"
+INCLUDE "home/hardcoded/interrupt.asm"
 
 SECTION "bank0",ROM0[$61]
 
-DisableLCD::
-	xor a
-	ld [rIF], a
-	ld a, [rIE]
-	ld b, a
-	res 0, a
-	ld [rIE], a
-
-.wait
-	ld a, [rLY]
-	cp LY_VBLANK
-	jr nz, .wait
-
-	ld a, [rLCDC]
-	and $ff ^ rLCDC_ENABLE_MASK
-	ld [rLCDC], a
-	ld a, b
-	ld [rIE], a
-	ret
-
-EnableLCD::
-	ld a, [rLCDC]
-	set rLCDC_ENABLE, a
-	ld [rLCDC], a
-	ret
-
-ClearSprites::
-	xor a
-	ld hl, wOAMBuffer
-	ld b, 40 * 4
-.loop
-	ld [hli], a
-	dec b
-	jr nz, .loop
-	ret
-
-HideSprites::
-	ld a, 160
-	ld hl, wOAMBuffer
-	ld de, 4
-	ld b, 40
-.loop
-	ld [hl], a
-	add hl, de
-	dec b
-	jr nz, .loop
-	ret
-
-FarCopyData::
-; Copy bc bytes from a:hl to de.
-	ld [wBuffer], a
-	ld a, [H_LOADEDROMBANK]
-	push af
-	ld a, [wBuffer]
-	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
-	call CopyData
-	pop af
-	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
-	ret
-
-CopyData::
-; Copy bc bytes from hl to de.
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec bc
-	ld a, c
-	or b
-	jr nz, CopyData
-	ret
-
+INCLUDE "home/basic/lcd.asm"
+INCLUDE "home/basic/sprites.asm"
+INCLUDE "home/basic/copy.asm"
 
 SECTION "Entry", ROM0[$100]
-	nop
-	jp Start
 
+INCLUDE "home/hardcoded/entry.asm"
 
 SECTION "Start", ROM0[$150]
 
-Start::
-	cp GBC
-	jr z, .gbc
-	xor a
-	jr .ok
-.gbc
-	ld a, 0
-.ok
-	ld [wGBC], a
-	jp Init
-
-
+INCLUDE "home/basic/start.asm"
 INCLUDE "home/joypad.asm"
-
 INCLUDE "data/map_header_pointers.asm"
-
 INCLUDE "home/overworld.asm"
 
 ; this is used to check if the player wants to interrupt the opening sequence at several points
