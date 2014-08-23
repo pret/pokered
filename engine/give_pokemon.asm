@@ -3,10 +3,10 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	xor a
 	ld [wccd3], a
 	ld a, [wPartyCount] ; wPartyCount
-	cp $6
+	cp PARTY_LENGTH
 	jr c, .asm_4fe01
 	ld a, [W_NUMINBOX] ; wda80
-	cp $14
+	cp MONS_PER_BOX
 	jr nc, .asm_4fdf9
 	xor a
 	ld [W_ENEMYBATTSTATUS3], a ; W_ENEMYBATTSTATUS3
@@ -18,18 +18,18 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld hl, wcf4b
 	ld a, [wd5a0]
 	and $7f
-	cp $9
+	cp 9
 	jr c, .asm_4fdec
-	sub $9
-	ld [hl], $f7
+	sub 9
+	ld [hl], "1"
 	inc hl
-	add $f6
+	add "0"
 	jr .asm_4fdee
 .asm_4fdec
-	add $f7
+	add "1"
 .asm_4fdee
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], "@"
 	ld hl, SetToBoxText
 	call PrintText
 	scf

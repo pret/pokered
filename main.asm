@@ -3419,7 +3419,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 .asm_f2f2
 	ld a, [de]
 	inc a
-	cp $7
+	cp PARTY_LENGTH + 1
 	ret nc
 	ld [de], a
 	ld a, [de]
@@ -3681,7 +3681,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wPartyCount
 	ld a, [hl]
-	cp $6
+	cp PARTY_LENGTH
 	scf
 	ret z            ; party full, return failure
 	inc a
@@ -3750,13 +3750,13 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f575
 	ld hl, W_NUMINBOX ; wda80
 	ld a, [hl]
-	cp $14
+	cp MONS_PER_BOX
 	jr nz, .partyOrBoxNotFull
 	jr .boxFull
 .checkPartyMonSlots
 	ld hl, wPartyCount ; wPartyCount
 	ld a, [hl]
-	cp $6
+	cp PARTY_LENGTH
 	jr nz, .partyOrBoxNotFull
 .boxFull
 	scf
@@ -3899,7 +3899,7 @@ Func_f51e: ; f51e (3:751e)
 	ld a, d
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	pop hl
-	ld bc, $21
+	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld [hli], a
 	ld d, h

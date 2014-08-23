@@ -445,15 +445,15 @@ Func_7393f: ; 7393f (1c:793f)
 	res 2, [hl]
 	ld a, [wd5a0]
 	and $7f
-	cp $9
+	cp 9
 	jr c, .asm_739a6
-	sub $9
+	sub 9
 	hlCoord 8, 2
-	ld [hl], $f7
-	add $f6
+	ld [hl], "1"
+	add "0"
 	jr .asm_739a8
 .asm_739a6
-	add $f7
+	add "1"
 .asm_739a8
 	Coorda 9, 2
 	hlCoord 1, 2

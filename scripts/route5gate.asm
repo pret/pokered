@@ -27,11 +27,11 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1df82 ; 0x1df70 $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Route5GateScript_1df43
 	ld a, $1
@@ -39,7 +39,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ret
 .asm_1df82
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]
@@ -74,7 +74,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	bit 6, a
 	jr nz, .asm_88856 ; 0x1dfb0 $2c
 	callba RemoveGuardDrink
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
 	ld hl, Route5GateText2

@@ -1407,14 +1407,14 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	ld [hl], $20
 	ld a, $f8
 	ld [wTrainerEngageDistance], a
-	ld hl, wOAMBuffer + $18
+	ld hl, wOAMBuffer + PARTY_LENGTH * 4
 	jp Func_3a8e1
 
 SetupPokeballs: ; 0x3a8a6
 	ld a, [de]
 	push af
 	ld de, wBuffer
-	ld c, $6 ; max num of partymons
+	ld c, PARTY_LENGTH
 	ld a, $34 ; empty pokeball
 .emptyloop
 	ld [de], a
@@ -1462,7 +1462,7 @@ PickPokeball: ; 3a8c2 (e:68c2)
 
 Func_3a8e1: ; 3a8e1 (e:68e1)
 	ld de, wHPBarMaxHP
-	ld c, $6
+	ld c, PARTY_LENGTH
 .asm_3a8e6
 	ld a, [W_BASECOORDY] ; wd082
 	ld [hli], a
