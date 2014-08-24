@@ -26,7 +26,7 @@ DayCareMText1: ; 56254 (15:6254)
 	xor a
 	ld [wcfcb], a
 	ld [wd07d], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
@@ -65,7 +65,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, $3
 	ld [wcc49], a
 	call LoadMonData
-	callab Func_58f43
+	callab CalcLevelFromExperience
 	ld a, d
 	cp $64
 	jr c, .asm_56315

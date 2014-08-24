@@ -523,7 +523,7 @@ PrintJustAMomentText1:: ; 5824 (8:5825)
 	cp $c
 	ret nz
 	ld a, [W_CURMAP]
-	cp $ef
+	cp BATTLE_CENTER
 	ld a, $2
 	jr z, .asm_2183a
 	inc a
@@ -541,7 +541,7 @@ PrintJustAMomentText2:: ; 5845 (8:5845)
 	cp $8
 	ret nz
 	ld a, [W_CURMAP]
-	cp $ef
+	cp BATTLE_CENTER
 	ld a, $2
 	jr z, .asm_2185a
 	inc a

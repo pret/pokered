@@ -25,7 +25,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [rIE], a
 	ld [$ff43], a
 	ld [$ff42], a
-	ld [$ff01], a
+	ld [rSB], a
 	ld [$ff02], a
 	ld [$ff4b], a
 	ld [$ff4a], a
@@ -74,7 +74,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [rIE], a
 
 	ld a, 144 ; move the window off-screen
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld [rWY], a
 	ld a, 7
 	ld [rWX], a

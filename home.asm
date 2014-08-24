@@ -49,28 +49,10 @@ INCLUDE "home/vblank.asm"
 INCLUDE "home/fade.asm"
 
 INCLUDE "home/interrupt/serial.asm"
-
 INCLUDE "home/unknown/unknown-216f.asm"
-
 INCLUDE "home/interrupt/timer.asm"
-
 INCLUDE "home/audio.asm"
-
-UpdateSprites:: ; 2429 (0:2429)
-	ld a, [wcfcb]
-	dec a
-	ret nz
-	ld a, [H_LOADEDROMBANK]
-	push af
-	ld a, Bank(_UpdateSprites)
-	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
-	call _UpdateSprites
-	pop af
-	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
-	ret
-
+INCLUDE "home/utilities/sprites2.asm"
 INCLUDE "data/mart_inventories.asm"
 
 TextScriptEndingChar:: ; 24d6 (0:24d6)

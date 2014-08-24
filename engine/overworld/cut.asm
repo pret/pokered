@@ -38,14 +38,14 @@ asm_ef82: ; ef82 (3:6f82)
 	call ClearSprites
 	call Func_3dbe
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
@@ -63,7 +63,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call UpdateSprites
 	jp Func_eedc
 

@@ -93,7 +93,7 @@ HealEffect_: ; 3b9ec (e:79ec)
 .asm_3ba83
 	ld [wListMenuID], a ; wListMenuID
 	predef UpdateHPBar2
-	ld hl, Func_3cd5a ; $4d5a
+	ld hl, DrawHUDsAndHPBars ; $4d5a
 	call BankswitchEtoF
 	ld hl, RegainedHealthText ; $7aac
 	jp PrintText
@@ -226,8 +226,8 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld a, [hl]
 	ld [wd11e], a
 	call GetMonName
-	ld hl, wcd26
-	ld de, wcd12
+	ld hl, wEnemyMonUnmodifiedAttack
+	ld de, wPlayerMonUnmodifiedAttack
 	call Func_3bb7d
 	ld hl, wEnemyMonStatMods ; wcd2e
 	ld de, wPlayerMonStatMods ; wcd1a

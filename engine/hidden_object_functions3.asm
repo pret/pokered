@@ -119,7 +119,7 @@ TownMapText: ; fc12 (3:7c12)
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call LoadFontTilePatterns

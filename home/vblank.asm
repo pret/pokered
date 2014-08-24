@@ -8,15 +8,15 @@ VBlank::
 	ld a, [H_LOADEDROMBANK]
 	ld [wd122], a
 
-	ld a, [$ffae]
+	ld a, [hVBlankSCX]
 	ld [rSCX], a
-	ld a, [$ffaf]
+	ld a, [hVBlankSCY]
 	ld [rSCY], a
 
 	ld a, [wd0a0]
 	and a
 	jr nz, .ok
-	ld a, [$ffb0]
+	ld a, [hVBlankWY]
 	ld [rWY], a
 .ok
 

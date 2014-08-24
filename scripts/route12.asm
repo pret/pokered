@@ -47,7 +47,7 @@ Route12Script3: ; 5964c (16:564c)
 	cp $ff
 	jr z, Route12Script_59606
 	call UpdateSprites
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_59664
 	ld a, $e

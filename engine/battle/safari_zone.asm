@@ -1,5 +1,5 @@
 PrintSafariZoneBattleText: ; 4277 (1:4277)
-	ld hl, wcce9
+	ld hl, wSafariBaitFactor
 	ld a, [hl]
 	and a
 	jr z, .asm_4284
@@ -19,7 +19,7 @@ PrintSafariZoneBattleText: ; 4277 (1:4277)
 	ld [wd0b5], a
 	call GetMonHeader
 	ld a, [W_MONHCATCHRATE]
-	ld [wd007], a
+	ld [wEnemyMonCatchRate], a
 	pop hl
 .asm_429f
 	push hl

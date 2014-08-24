@@ -51,7 +51,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	xor a
 	ld [wd07d], a
 	ld [wcfcb], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3

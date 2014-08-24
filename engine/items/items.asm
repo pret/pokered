@@ -237,7 +237,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [H_QUOTIENT + 3],a
 .next9	;$5776
 	pop bc
-	ld a,[wd007]	;enemy: Catch Rate
+	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	cp b
 	jr c,.next10
 	ld a,[H_QUOTIENT + 2]
@@ -256,7 +256,7 @@ ItemUseBall: ; d687 (3:5687)
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld [H_MULTIPLICAND + 1],a
-	ld a,[wd007]	;enemy: Catch Rate
+	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	ld [H_MULTIPLICAND + 2],a
 	ld a,100
 	ld [H_MULTIPLIER],a
@@ -376,7 +376,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wcf91],a
 	ld a,[wEnemyMonLevel]
 	ld [W_CURENEMYLVL],a
-	callab Func_3eb01
+	callab LoadEnemyMonData
 	pop af
 	ld [wcf91],a
 	pop hl
@@ -647,7 +647,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait for sound to end
-	callab Func_3ad0e ; try to evolve pokemon
+	callab TryEvolvingMon ; try to evolve pokemon
 	ld a,[wd121]
 	and a
 	jr z,.noEffect
@@ -805,7 +805,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push bc
 	ld a,[wcf06]
 	ld c,a
-	ld hl,wccf5
+	ld hl,wPartyFoughtCurrentEnemyFlags
 	ld b,$02
 	predef FlagActionPredef
 	ld a,c
@@ -813,7 +813,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.next
 	ld a,[wcf06]
 	ld c,a
-	ld hl,wPartyAliveFlags
+	ld hl,wPartyGainExpFlags
 	ld b,$01
 	predef FlagActionPredef
 .next
@@ -1273,10 +1273,10 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wcc49],a
-	predef Func_3af5b ; learn level up move, if any
+	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
 	ld [wccd4],a
-	callab Func_3ad0e ; evolve pokemon, if appropriate
+	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
 	ld [wcfcb],a
 	pop af
@@ -1303,17 +1303,17 @@ VitaminText: ; df2e (3:5f2e)
 ItemUseBait: ; df52 (3:5f52)
 	ld hl,ThrewBaitText
 	call PrintText
-	ld hl,wd007 ; catch rate
+	ld hl,wEnemyMonCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a,BAIT_ANIM
-	ld hl,wcce9 ; bait factor
-	ld de,wcce8 ; escape factor
+	ld hl,wSafariBaitFactor ; bait factor
+	ld de,wSafariEscapeFactor ; escape factor
 	jr BaitRockCommon
 
 ItemUseRock: ; df67 (3:5f67)
 	ld hl,ThrewRockText
 	call PrintText
-	ld hl,wd007 ; catch rate
+	ld hl,wEnemyMonCatchRate ; catch rate
 	ld a,[hl]
 	add a ; double catch rate
 	jr nc,.noCarry
@@ -1321,8 +1321,8 @@ ItemUseRock: ; df67 (3:5f67)
 .noCarry
 	ld [hl],a
 	ld a,ROCK_ANIM
-	ld hl,wcce8 ; escape factor
-	ld de,wcce9 ; bait factor
+	ld hl,wSafariEscapeFactor ; escape factor
+	ld de,wSafariBaitFactor ; bait factor
 
 BaitRockCommon: ; df7f (3:5f7f)
 	ld [W_ANIMATIONID],a
@@ -1383,7 +1383,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	ld [W_NUMSAFARIBALLS],a
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	inc a
-	ld [wd078],a
+	ld [wEscapedFromBattle],a
 	ld [wcd6a],a ; item used
 	ld a,[wd152]
 	and a ; using Dig?
@@ -1517,7 +1517,7 @@ ItemUsePokedoll: ; e0cd (3:60cd)
 	dec a
 	jp nz,ItemUseNotTime
 	ld a,$01
-	ld [wd078],a
+	ld [wEscapedFromBattle],a
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseGuardSpec: ; e0dc (3:60dc)

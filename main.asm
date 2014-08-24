@@ -22,7 +22,7 @@ INCLUDE "data/facing.asm"
 Func_40b0::
 ; Reset player status on blackout.
 	xor a
-	ld [wcf0b], a
+	ld [wBattleResult], a
 	ld [wd700], a
 	ld [W_ISINBATTLE], a
 	ld [wd35d], a
@@ -222,8 +222,16 @@ UpdateNonPlayerSprite:
 .unequal
 	jp Func_4ed1
 
-
-Func_4c70:
+; This detects if the current sprite (whose offset is at H_CURRENTSPRITEOFFSET)
+; is going to collide with another sprite by looping over the other sprites.
+; The current sprite's offset will be labelled with i (e.g. $c1i0).
+; The loop sprite's offset will labelled with j (e.g. $c1j0).
+;
+; Note that the Y coordinate of the sprite (in [$c1k4]) is one of the following
+; 9 values when the sprite is aligned with the grid: $fc, $0c, $1c, $2c, ..., $7c.
+; The reason that 4 is added below to the coordinate is to make it align with a
+; multiple of $10 to make comparisons easier.
+DetectCollisionBetweenSprites:
 	nop
 
 	ld h, wSpriteStateData1 / $100
@@ -231,195 +239,250 @@ Func_4c70:
 	add wSpriteStateData1 % $100
 	ld l, a
 
-	ld a, [hl]
-	and a
-	ret z
+	ld a, [hl] ; a = [$c1i0] (picture) (0 if slot is unused)
+	and a ; is this sprite slot slot used?
+	ret z ; return if not used
 
 	ld a, l
 	add 3
 	ld l, a
 
-	ld a, [hli]
-	call Func_4d72
+	ld a, [hli] ; a = [$c1i3] (delta Y) (-1, 0, or 1)
+	call SetSpriteCollisionValues
 
-	ld a, [hli]
-	add 4
+	ld a, [hli] ; a = [$C1i4] (Y screen coordinate)
+	add 4 ; align with multiple of $10
+
+; The effect of the following 3 lines is to
+; add 7 to a if moving south or
+; subtract 7 from a if moving north.
 	add b
 	and $f0
 	or c
-	ld [$ff90], a
 
-	ld a, [hli]
-	call Func_4d72
+	ld [$ff90], a ; store Y coordinate adjusted for direction of movement
 
-	ld a, [hl]
+	ld a, [hli] ; a = [$c1i5] (delta X) (-1, 0, or 1)
+	call SetSpriteCollisionValues
+	ld a, [hl] ; a = [$C1i6] (X screen coordinate)
+
+; The effect of the following 3 lines is to
+; add 7 to a if moving east or
+; subtract 7 from a if moving west.
 	add b
 	and $f0
 	or c
-	ld [$ff91], a
+
+	ld [$ff91], a ; store X coordinate adjusted for direction of movement
 
 	ld a, l
 	add 7
 	ld l, a
 
 	xor a
-	ld [hld], a
-	ld [hld], a
+	ld [hld], a ; zero [$c1id] XXX what's [$c1id] for?
+	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
+
 	ld a, [$ff91]
-	ld [hld], a
+	ld [hld], a ; [$c1ib] = adjusted X coordiate
 	ld a, [$ff90]
-	ld [hl], a
-	xor a
+	ld [hl], a ; [$c1ia] = adjusted Y coordinate
+
+	xor a ; zero the loop counter
 
 .loop
-	ld [$ff8f], a
+	ld [$ff8f], a ; store loop counter
 	swap a
 	ld e, a
 	ld a, [H_CURRENTSPRITEOFFSET]
-	cp e
-	jp z, .next
+	cp e ; does the loop sprite match the current sprite?
+	jp z, .next ; go to the next sprite if they match
 
 	ld d, h
-	ld a, [de]
-	and a
-	jp z, .next
+	ld a, [de] ; a = [$c1j0] (picture) (0 if slot is unused)
+	and a ; is this sprite slot slot used?
+	jp z, .next ; go the next sprite if not used
 
 	inc e
 	inc e
-	ld a, [de]
+	ld a, [de] ; a = [$c1j2] ($ff means the sprite is offscreen)
 	inc a
-	jp z, .next
+	jp z, .next ; go the next sprite if offscreen
 
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add 10
 	ld l, a
-	inc e
 
-	ld a, [de]
-	call Func_4d72
 	inc e
+	ld a, [de] ; a = [$c1j3] (delta Y)
+	call SetSpriteCollisionValues
 
-	ld a, [de]
-	add 4
+	inc e
+	ld a, [de] ; a = [$C1j4] (Y screen coordinate)
+	add 4 ; align with multiple of $10
+
+; The effect of the following 3 lines is to
+; add 7 to a if moving south or
+; subtract 7 from a if moving north.
 	add b
 	and $f0
 	or c
-	sub [hl]
-	jr nc, .asm_4cd4
+
+	sub [hl] ; subtract the adjusted Y coordinate of sprite i ([$c1ia]) from that of sprite j
+
+; calculate the absolute value of the difference to get the distance
+	jr nc, .noCarry1
 	cpl
 	inc a
-.asm_4cd4
-	ld [$ff90], a
+.noCarry1
+	ld [$ff90], a ; store the distance between the two sprites' adjusted Y values
 
+; Use the carry flag set by the above subtraction to determine which sprite's
+; Y coordinate is larger. This information is used later to set [$c1ic],
+; which stores which direction the collision occurred in.
+; The following 5 lines set the lowest 2 bits of c, which are later shifted left by 2.
+; If sprite i's Y is larger, set lowest 2 bits of c to 10.
+; If sprite j's Y is larger or both are equal, set lowest 2 bits of c to 01.
 	push af
 	rl c
 	pop af
 	ccf
 	rl c
-	ld b, 7
-	ld a, [hl]
-	and $f
-	jr z, .asm_4ce6
-	ld b, 9
-.asm_4ce6
-	ld a, [$ff90]
-	sub b
-	ld [$ff92], a
-	ld a, b
-	ld [$ff90], a
-	jr c, .asm_4d01
 
+; If sprite i's delta Y is 0, then b = 7, else b = 9.
+	ld b, 7
+	ld a, [hl] ; a = [$c1ia] (adjusted Y coordinate)
+	and $f
+	jr z, .next1
+	ld b, 9
+
+.next1
+	ld a, [$ff90] ; a = distance between adjusted Y coordinates
+	sub b
+	ld [$ff92], a ; store distance adjusted using sprite i's direction
+	ld a, b
+	ld [$ff90], a ; store 7 or 9 depending on sprite i's delta Y
+	jr c, .checkXDistance
+
+; If sprite j's delta Y is 0, then b = 7, else b = 9.
 	ld b, 7
 	dec e
-	ld a, [de]
+	ld a, [de] ; a = [$c1j3] (delta Y)
 	inc e
 	and a
-	jr z, .asm_4cfa
+	jr z, .next2
 	ld b, 9
-.asm_4cfa
-	ld a, [$ff92]
-	sub b
-	jr z, .asm_4d01
-	jr nc, .next
 
-.asm_4d01
+.next2
+	ld a, [$ff92] ; a = distance adjusted using sprite i's direction
+	sub b ; adjust distance using sprite j's direction
+	jr z, .checkXDistance
+	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
+
+.checkXDistance
 	inc e
 	inc l
-	ld a, [de]
+	ld a, [de] ; a = [$c1j5] (delta X)
 
 	push bc
-	call Func_4d72
+
+	call SetSpriteCollisionValues
 	inc e
-	ld a, [de]
+	ld a, [de] ; a = [$c1j6] (X screen coordinate)
+
+; The effect of the following 3 lines is to
+; add 7 to a if moving east or
+; subtract 7 from a if moving west.
 	add b
 	and $f0
 	or c
+
 	pop bc
 
-	sub [hl]
-	jr nc, .asm_4d14
+	sub [hl] ; subtract the adjusted X coordinate of sprite i ([$c1ib]) from that of sprite j
+
+; calculate the absolute value of the difference to get the distance
+	jr nc, .noCarry2
 	cpl
 	inc a
-.asm_4d14
-	ld [$ff91], a
+.noCarry2
+	ld [$ff91], a ; store the distance between the two sprites' adjusted X values
 
+; Use the carry flag set by the above subtraction to determine which sprite's
+; X coordinate is larger. This information is used later to set [$c1ic],
+; which stores which direction the collision occurred in.
+; The following 5 lines set the lowest 2 bits of c.
+; If sprite i's X is larger, set lowest 2 bits of c to 10.
+; If sprite j's X is larger or both are equal, set lowest 2 bits of c to 01.
 	push af
 	rl c
 	pop af
 	ccf
 	rl c
+
+; If sprite i's delta X is 0, then b = 7, else b = 9.
 	ld b, 7
-	ld a, [hl]
+	ld a, [hl] ; a = [$c1ib] (adjusted X coordinate)
 	and $f
-	jr z, .asm_4d26
+	jr z, .next3
 	ld b, 9
-.asm_4d26
-	ld a, [$ff91]
+
+.next3
+	ld a, [$ff91] ; a = distance between adjusted X coordinates
 	sub b
-	ld [$ff92], a
+	ld [$ff92], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ld [$ff91], a
-	jr c, .asm_4d41
+	ld [$ff91], a ; store 7 or 9 depending on sprite i's delta X
+	jr c, .collision
+
+; If sprite j's delta X is 0, then b = 7, else b = 9.
 	ld b, 7
 	dec e
-	ld a, [de]
+	ld a, [de] ; a = [$c1j5] (delta X)
 	inc e
 	and a
-	jr z, .asm_4d3a
+	jr z, .next4
 	ld b, 9
-.asm_4d3a
-	ld a, [$ff92]
-	sub b
-	jr z, .asm_4d41
-	jr nc, .next
 
-.asm_4d41
-	ld a, [$ff91]
+.next4
+	ld a, [$ff92] ; a = distance adjusted using sprite i's direction
+	sub b ; adjust distance using sprite j's direction
+	jr z, .collision
+	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
+
+.collision
+	ld a, [$ff91] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
-	ld a, [$ff90]
+	ld a, [$ff90] ; a = 7 or 9 depending on sprite i's delta Y
 	inc l
+
+; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
+; (note that normally if delta X isn't 0, then delta Y must be 0 and vice versa)
 	cp b
-	jr c, .asm_4d4e
-	ld b, 12
-	jr .asm_4d50
-.asm_4d4e
-	ld b, 3
-.asm_4d50
-	ld a, c
-	and b
-	or [hl]
-	ld [hl], a
-	ld a, c
+	jr c, .next5
+	ld b, %1100
+	jr .next6
+.next5
+	ld b, %0011
+
+.next6
+	ld a, c ; c has 2 bits set (one of bits 0-1 is set for the X axis and one of bits 2-3 for the Y axis)
+	and b ; we select either the bit in bits 0-1 or bits 2-3 based on the calculation immediately above
+	or [hl] ; or with existing collision direction bits in [$c1ic]
+	ld [hl], a ; store new value
+	ld a, c ; useless code because a is overwritten before being used again
+
+; set bit in [$c1ie] or [$c1if] to indicate which sprite the collision occurred with
 	inc l
 	inc l
-	ld a, [$ff8f]
-	ld de, DiagonalLines
+	ld a, [$ff8f] ; a = loop counter
+	ld de, SpriteCollisionBitTable
 	add a
 	add e
 	ld e, a
-	jr nc, .asm_4d62
+	jr nc, .noCarry3
 	inc d
-.asm_4d62
+.noCarry3
 	ld a, [de]
 	or [hl]
 	ld [hli], a
@@ -429,13 +492,18 @@ Func_4c70:
 	ld [hl], a
 
 .next
-	ld a, [$ff8f]
+	ld a, [$ff8f] ; a = loop counter
 	inc a
 	cp $10
 	jp nz, .loop
 	ret
 
-Func_4d72:
+; takes delta X or delta Y in a
+; b = delta X/Y
+; c = 0 if delta X/Y is 0
+; c = 7 if delta X/Y is 1
+; c = 9 if delta X/Y is -1
+SetSpriteCollisionValues:
 	and a
 	ld b, 0
 	ld c, 0
@@ -450,8 +518,23 @@ Func_4d72:
 .done
 	ret
 
-DiagonalLines: INCBIN "gfx/diagonal_lines.2bpp"
-
+SpriteCollisionBitTable:
+	db %00000000,%00000001
+	db %00000000,%00000010
+	db %00000000,%00000100
+	db %00000000,%00001000
+	db %00000000,%00010000
+	db %00000000,%00100000
+	db %00000000,%01000000
+	db %00000000,%10000000
+	db %00000001,%00000000
+	db %00000010,%00000000
+	db %00000100,%00000000
+	db %00001000,%00000000
+	db %00010000,%00000000
+	db %00100000,%00000000
+	db %01000000,%00000000
+	db %10000000,%00000000
 
 TestBattle:
 	ret
@@ -738,7 +821,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	pop hl
 	inc a
 	jp z,DisplayListMenuIDLoop ; ignore attempts to swap the Cancel menu item
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; has the first item to swap already been chosen?
 	jr nz,.swapItems
 ; if not, set the currently selected item as the first item
@@ -747,7 +830,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld b,a
 	ld a,[wListScrollOffset] ; index of top (visible) menu item within the list
 	add b
-	ld [wcc35],a ; ID of item chosen for swapping (counts from 1)
+	ld [wMenuItemToSwap],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
 	call DelayFrames
 	jp DisplayListMenuIDLoop
@@ -758,11 +841,11 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld a,[wListScrollOffset]
 	add b
 	ld b,a
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	cp b ; is the currently selected item the same as the first item to swap?
 	jp z,DisplayListMenuIDLoop ; ignore attempts to swap an item with itself
 	dec a
-	ld [wcc35],a ; ID of item chosen for swapping (counts from 1)
+	ld [wMenuItemToSwap],a ; ID of item chosen for swapping (counts from 1)
 	ld c,20
 	call DelayFrames
 	push hl
@@ -782,7 +865,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld c,a
 	ld b,0
 	add hl,bc ; hl = address of currently selected item entry
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	add a
 	add e
 	ld e,a
@@ -809,7 +892,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld a,[$ff95]
 	ld [de],a ; put second item ID in first item slot
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
 	jp DisplayListMenuIDLoop
@@ -861,7 +944,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld [wCurrentMenuItem],a
 .done
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	pop de
 	pop hl
 	jp DisplayListMenuIDLoop
@@ -976,7 +1059,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ld b,$9c ; window background address
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
-	ld [$ffb0],a ; put the window on the screen
+	ld [hVBlankWY],a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable continuous WRAM to VRAM transfer each V-blank
@@ -1936,7 +2019,7 @@ INCLUDE "data/map_header_banks.asm"
 
 Func_c335: ; c335 (3:4335)
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld [rWY], a ; $ff4a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -3895,7 +3978,7 @@ Func_f51e: ; f51e (3:751e)
 	add $2
 	ld [wcc49], a
 	call LoadMonData
-	callba Func_58f43
+	callba CalcLevelFromExperience
 	ld a, d
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	pop hl
