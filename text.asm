@@ -1551,7 +1551,7 @@ _SafariZoneAngryText:: ; 89d6a (22:5d6a)
 _PickUpPayDayMoneyText:: ; 89d80 (22:5d80)
 	text $52, " picked up"
 	line "¥@"
-	TX_BCD wcce5, $c3
+	TX_BCD wTotalPayDayMoney, $c3
 	text "!"
 	prompt
 

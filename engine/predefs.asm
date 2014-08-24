@@ -52,7 +52,7 @@ GetPredefPointer:
 PredefPointers:: ; 4fe79 (13:7e79)
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
-	add_predef Func_3cd60
+	add_predef DrawPlayerHUDAndHPBar
 	add_predef Func_3f0c6
 	add_predef Func_3f073
 	add_predef ScaleSpriteByTwo
@@ -78,7 +78,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef Func_ee9e
 	add_predef InitPlayerData2
 	add_predef Func_c754
-	add_predef Func_3af5b
+	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef IsItemInBag_ ; 1C, used in Pokémon Tower
 	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
@@ -94,7 +94,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef Func_5ab0
 	add_predef Func_3ed02
 	add_predef ShowPokedexMenu
-	add_predef Func_3ad1c
+	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0
 	add_predef InitOpponent
 	add_predef Func_5a5f
@@ -125,7 +125,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef StarterDex ; 46
 	add_predef _AddPartyMon
 	add_predef UpdateHPBar2
-	add_predef Func_3cdec
+	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
 	add_predef Func_27d6b
 	add_predef EmotionBubble; 4C player exclamation

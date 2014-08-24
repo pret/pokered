@@ -24,7 +24,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld a, $ff
 	ld [$ffaa], a
 	ld a, $2
-	ld [$ff01], a
+	ld [rSB], a
 	xor a
 	ld [$ffad], a
 	ld a, $80
@@ -34,7 +34,7 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld [wcc47], a
 	jr z, .asm_7287 ; 0x720b $7a
 	ld a, $1
-	ld [$ff01], a
+	ld [rSB], a
 	ld a, $81
 	ld [$ff02], a
 	call DelayFrame
@@ -148,7 +148,7 @@ Func_72d7: ; 72d7 (1:72d7)
 	ld a, $ff
 	ld [$ffaa], a
 	ld a, $2
-	ld [$ff01], a
+	ld [rSB], a
 	xor a
 	ld [$ffad], a
 	ld a, $80

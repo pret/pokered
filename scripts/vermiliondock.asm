@@ -106,10 +106,10 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	jr nz, .asm_1dbfa ; 0x1dc22 $d6
 	xor a
 	ld [$ff4a], a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call VermilionDock_1dc94
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld a, $1
 	ld [wcfcb], a
 	pop hl

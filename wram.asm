@@ -247,7 +247,9 @@ wMenuJoypadPollCount:: ; cc34
 ; how many times should HandleMenuInput poll the joypad state before it returns?
 	ds 1
 
-wcc35:: ds 1
+wMenuItemToSwap:: ; cc35
+; id of menu item selected for swapping (counts from 1) (0 means that no menu item has been selected for swapping)
+	ds 1
 
 wListScrollOffset:: ; cc36
 ; offset of the current top menu item from the beginning of the list
@@ -336,10 +338,18 @@ wEnemyMoveListIndex:: ; cce2
 
 wcce3:: ds 1
 wcce4:: ds 1
-wcce5:: ds 2
-wcce7:: ds 1
-wcce8:: ds 1
-wcce9:: ds 2
+
+wTotalPayDayMoney:: ; cce5
+; total amount of money made using Pay Day during the current battle
+	ds 3
+
+wSafariEscapeFactor:: ; cce8
+	ds 1
+wSafariBaitFactor:: ; cce9
+	ds 1;
+
+	ds 1
+
 wcceb:: ds 1
 wccec:: ds 1
 wcced:: ds 1
@@ -350,16 +360,38 @@ wccf1:: ds 1
 wccf2:: ds 1
 wccf3:: ds 1
 wccf4:: ds 1
-wccf5:: ds 1
+
+wPartyFoughtCurrentEnemyFlags::
+; flags that indicate which party members have fought the current enemy mon
+	flag_array 6
+
 wccf6:: ds 1
 wccf7:: ds 14
 wcd05:: ds 1
 wcd06:: ds 9
-wcd0f:: ds 1
-wcd10:: ds 1
-wcd11:: ds 1
-wcd12:: ds 1
-wcd13:: ds 7
+
+wPlayerMonUnmodifiedLevel:: ; cd0f 
+	ds 0
+wcd0f:: ; overload, used in in-game trade code
+	ds 1
+wPlayerMonUnmodifiedMaxHP:: ; cd10
+	ds 0
+wcd10:: ; overload, used in in-game trade code
+	ds 1
+wcd11:: ; overload, used in in-game trade code
+	ds 1
+wPlayerMonUnmodifiedAttack:: ; cd12
+	ds 0
+wcd12:: ; overload, used in in-game trade code
+	ds 1
+wcd13:: ; overload, used in in-game trade code (to store name string)
+	ds 1
+wPlayerMonUnmodifiedDefense:: ; cd14
+	ds 2
+wPlayerMonUnmodifiedSpeed:: ; cd16
+	ds 2
+wPlayerMonUnmodifiedSpecial:: ; cd18
+	ds 2
 
 ; stat modifiers for the player's current pokemon
 ; value can range from 1 - 13 ($1 to $D)
@@ -381,9 +413,20 @@ wPlayerMonEvasionMod:: ; cd1f
 
 	ds 3
 
-wcd23:: ds 3
-wcd26:: ds 3
-wcd29:: ds 4
+wEnemyMonUnmodifiedLevel:: ; cd23
+	ds 1
+wEnemyMonUnmodifiedMaxHP:: ; cd24
+	ds 2
+wEnemyMonUnmodifiedAttack:: ; cd26
+	ds 2
+wEnemyMonUnmodifiedDefense:: ; cd28
+	ds 1
+wcd29:: ; overload, used in in-game trade code
+	ds 1
+wEnemyMonUnmodifiedSpeed:: ; cd2a
+	ds 2
+wEnemyMonUnmodifiedSpecial:: ; cd2c
+	ds 1
 
 wEngagedTrainerClass:: ; cd2d
 	ds 1
@@ -505,7 +548,11 @@ wAnimSoundID:: ; cf07
 wcf08:: ds 1
 wcf09:: ds 1
 wcf0a:: ds 1
-wcf0b:: ds 1
+wBattleResult:: ; cf0b
+; $00 - win
+; $01 - lose
+; $02 - draw
+	ds 1
 wcf0c:: ds 1
 wcf0d:: ds 1
 wcf0e:: ds 1
@@ -660,7 +707,7 @@ wEnemyMonStatus::    db
 wEnemyMonType::
 wEnemyMonType1::     db
 wEnemyMonType2::     db
-wEnemyMonCatchRate:: db
+wEnemyMonCatchRate_NotReferenced:: db
 wEnemyMonMoves::     ds NUM_MOVES
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
@@ -673,9 +720,9 @@ wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
 SECTION "WRAM Bank 1", WRAMX, BANK[1]
                      ds 2 ; NUM_MOVES - 2
 
-wd002:: ds 5
-wd007:: ds 1
-wd008:: ds 1
+wEnemyMonBaseStats:: ds 5
+wEnemyMonCatchRate:: ds 1
+wEnemyMonBaseExp:: ds 1
 
 wBattleMonNick:: ds 11 ; d009
 wBattleMon:: battle_struct wBattleMon ; d014
@@ -705,7 +752,8 @@ W_ISINBATTLE:: ; d057
 ; trainer battle, this is 2
 	ds 1
 
-wPartyAliveFlags:: ; d058
+wPartyGainExpFlags:: ; d058
+; flags that indicate which party members should be be given exp when GainExperience is called
 	flag_array 6
 
 W_CUROPPONENT:: ; d059
@@ -730,7 +778,12 @@ W_TRAINERNO:: ; d05d
 ; which instance of [youngster, lass, etc] is this?
 	ds 1
 
-wd05e:: ds 1
+wCriticalHitOrOHKO:: ; d05e
+; $00 = normal attack
+; $01 = critical hit
+; $02 = successful OHKO
+; $ff = failed OHKO
+	ds 1
 
 W_MOVEMISSED:: ; d05f
 	ds 1
@@ -776,7 +829,10 @@ W_ENEMYBATTSTATUS2:: ; d068
 W_ENEMYBATTSTATUS3:: ; d069
 	ds 1
 
-wd06a:: ds 1
+wPlayerNumAttacksLeft::
+; when the player is attacking multiple times, the number of attacks left
+	ds 1
+
 wd06b:: ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
@@ -786,7 +842,10 @@ W_PLAYERDISABLEDMOVE:: ; d06d
 
 	ds 1
 
-wd06f:: ds 1
+wEnemyNumAttacksLeft::
+; when the player is attacking multiple times, the number of attacks left
+	ds 1
+
 wd070:: ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
@@ -801,7 +860,11 @@ W_NUMHITS:: ; d074
 	ds 1
 
 wd075:: ds 3
-wd078:: ds 1
+
+wEscapedFromBattle::
+; non-zero when an item or move that allows escape from battle was used
+	ds 1
+
 wd079:: ds 1
 wd07a:: ds 1
 wd07b:: ds 1
@@ -1016,7 +1079,11 @@ wd11c:: ds 1
 wd11d:: ds 1
 wd11e:: ds 1
 wd11f:: ds 1
-wd120:: ds 1
+
+wNumRunAttempts::
+; number of times the player has tried to run from battle
+	ds 1
+
 wd121:: ds 1
 wd122:: ds 2
 wd124:: ds 1

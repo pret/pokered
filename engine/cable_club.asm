@@ -826,7 +826,7 @@ TradeCenter_Trade:
 .asm_59d9
 	predef Func_410f3
 .asm_59de
-	callab Func_3ad0e
+	callab TryEvolvingMon
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
 	call Func_226e

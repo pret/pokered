@@ -11,14 +11,14 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	and a
 	jp z,RedisplayStartMenu
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
 	ld [wcfcb],a
 	call DisplayPartyMenu
 	jr .checkIfPokemonChosen
 .loop
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
 	call GoBackToPartyMenu
 .checkIfPokemonChosen
@@ -336,7 +336,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	Coorda 5, 10
 	call PlaceUnfilledArrowMenuCursor
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld a,[wcf91]
 	cp a,BICYCLE
 	jp z,.useOrTossItem
@@ -738,17 +738,17 @@ SwitchPartyMon_OAM: ; 13625 (4:7625)
 	jp PlaySound
 
 SwitchPartyMon_Stats: ; 13653 (4:7653)
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	and a
 	jr nz, .asm_13661
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	inc a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ret
 .asm_13661
 	xor a
 	ld [wd07d], a
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	dec a
 	ld b, a
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
@@ -756,12 +756,12 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	cp b
 	jr nz, .asm_1367b
 	xor a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld [wd07d], a
 	ret
 .asm_1367b
 	ld a, b
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	push hl
 	push de
 	ld hl, wPartySpecies
@@ -773,7 +773,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	jr nc, .asm_1368e
 	inc h
 .asm_1368e
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	add e
 	ld e, a
 	jr nc, .asm_13696
@@ -795,7 +795,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	call CopyData
 	ld hl, wPartyMons
 	ld bc, $2c
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call AddNTimes
 	pop de
 	push hl
@@ -813,7 +813,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonOT ; wd273
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
@@ -831,7 +831,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonNicks ; wPartyMonNicks
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
@@ -841,10 +841,10 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wcc97
 	ld bc, $b
 	call CopyData
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	ld [wWhichTrade], a ; wWhichTrade
 	xor a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld [wd07d], a
 	pop de
 	pop hl

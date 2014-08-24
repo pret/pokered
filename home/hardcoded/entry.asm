@@ -1,0 +1,2 @@
+	nop
+	jp Start

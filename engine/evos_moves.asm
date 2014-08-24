@@ -1,45 +1,49 @@
-Func_3ad0e: ; 3ad0e (e:6d0e)
+; try to evolve the mon in [wWhichPokemon]
+TryEvolvingMon: ; 3ad0e (e:6d0e)
 	ld hl, wccd3
 	xor a
 	ld [hl], a
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, $1
-	call Func_3b057
+	call Evolution_FlagAction
 
-Func_3ad1c: ; 3ad1c (e:6d1c)
+; this is only called after battle
+; it is supposed to do level up evolutions, though there is a bug that allows item evolutions to occur
+EvolutionAfterBattle: ; 3ad1c (e:6d1c)
 	ld a, [$ffd7]
 	push af
 	xor a
 	ld [wd121], a
 	dec a
-	ld [wWhichPokemon], a ; wWhichPokemon
+	ld [wWhichPokemon], a
 	push hl
 	push bc
 	push de
-	ld hl, wPartyCount ; wPartyCount
+	ld hl, wPartyCount
 	push hl
-asm_3ad2e: ; 3ad2e (e:6d2e)
-	ld hl, wWhichPokemon ; wWhichPokemon
+
+Evolution_PartyMonLoop: ; loop over party mons
+	ld hl, wWhichPokemon
 	inc [hl]
 	pop hl
 	inc hl
 	ld a, [hl]
-	cp $ff
-	jp z, Func_3aede
+	cp $ff ; have we reached the end of the party?
+	jp z, .done
 	ld [wHPBarMaxHP], a
 	push hl
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	ld c, a
 	ld hl, wccd3
 	ld b, $2
-	call Func_3b057
+	call Evolution_FlagAction
 	ld a, c
-	and a
-	jp z, asm_3ad2e
+	and a ; is the mon's bit set?
+	jp z, Evolution_PartyMonLoop ; if not, go to the next mon
 	ld a, [wHPBarMaxHP]
 	dec a
-	ld b, $0
+	ld b, 0
 	ld hl, EvosMovesPointerTable
 	add a
 	rl b
@@ -58,56 +62,57 @@ asm_3ad2e: ; 3ad2e (e:6d2e)
 	ld [wcf91], a
 	pop hl
 
-Func_3ad71: ; 3ad71 (e:6d71)
+.evoEntryLoop ; loop over evolution entries
 	ld a, [hli]
-	and a
-	jr z, asm_3ad2e
-	ld b, a
-	cp $3
-	jr z, .asm_3ad91
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
-	cp $32
-	jr z, asm_3ad2e
+	and a ; have we reached the end of the evolution data?
+	jr z, Evolution_PartyMonLoop
+	ld b, a ; evolution type
+	cp EV_TRADE
+	jr z, .checkTradeEvo
+; not trade evolution
+	ld a, [W_ISLINKBATTLE]
+	cp $32 ; in a trade?
+	jr z, Evolution_PartyMonLoop ; if so, go the next mon
 	ld a, b
-	cp $2
-	jr z, .asm_3ada4
+	cp EV_ITEM
+	jr z, .checkItemEvo
 	ld a, [wccd4]
 	and a
-	jr nz, asm_3ad2e
+	jr nz, Evolution_PartyMonLoop
 	ld a, b
-	cp $1
-	jr z, .asm_3adad
-.asm_3ad91
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
-	cp $32
-	jp nz, Func_3aed9
-	ld a, [hli]
+	cp EV_LEVEL
+	jr z, .checkLevel
+.checkTradeEvo
+	ld a, [W_ISLINKBATTLE]
+	cp $32 ; in a trade?
+	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
+	ld a, [hli] ; level requirement
 	ld b, a
 	ld a, [wcfb9]
-	cp b
-	jp c, asm_3ad2e
+	cp b ; is the mon's level greater than the evolution requirement?
+	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .asm_3adb6
-.asm_3ada4
+.checkItemEvo
 	ld a, [hli]
-	ld b, a
-	ld a, [wcf91]
-	cp b
-	jp nz, Func_3aed9
-.asm_3adad
-	ld a, [hli]
+	ld b, a ; evolution item
+	ld a, [wcf91] ; this is supposed to be the last item used, but it is also used to hold species numbers
+	cp b ; was the evolution item in this entry used?
+	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
+.checkLevel
+	ld a, [hli] ; level requirement
 	ld b, a
 	ld a, [wcfb9]
-	cp b
-	jp c, Func_3aeda
+	cp b ; is the mon's level greater than the evolution requirement?
+	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
 .asm_3adb6
-	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld [W_CURENEMYLVL], a
 	ld a, $1
 	ld [wd121], a
 	push hl
 	ld a, [hl]
 	ld [wHPBarMaxHP + 1], a
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	call CopyStringToCF4B
 	ld hl, IsEvolvingText
@@ -115,17 +120,17 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld c, $32
 	call DelayFrames
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMap
 	ld bc, $c14
 	call ClearScreenArea
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $ff
 	ld [wcfcb], a
 	call ClearSprites
 	callab Func_7bde9
-	jp c, Func_3af2e
+	jp c, CancelledEvolution
 	ld hl, EvolvedText
 	call PrintText
 	pop hl
@@ -147,7 +152,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld c, $28
 	call DelayFrames
 	call ClearScreen
-	call Func_3aef7
+	call RenameEvolvedMon
 	ld a, [wd11e]
 	push af
 	ld a, [wd0b5]
@@ -168,15 +173,15 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld de, wcfba
 	ld b, $1
 	call CalcStats
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
-	ld bc, $2c
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld e, l
 	ld d, h
 	push hl
 	push bc
-	ld bc, $22
+	ld bc, wPartyMon1MaxHP - wPartyMon1
 	add hl, bc
 	ld a, [hli]
 	ld b, a
@@ -202,23 +207,23 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [wd11e], a
 	xor a
 	ld [wcc49], a
-	call Func_3af5b
+	call LearnMoveFromLevelUp
 	pop hl
 	predef SetPartyMonTypes
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
-	call z, Func_3af52
+	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
 	ld c, a
 	ld b, $1
-	ld hl, wPokedexOwned ; wPokedexOwned
+	ld hl, wPokedexOwned
 	push bc
-	call Func_3b057
+	call Evolution_FlagAction
 	pop bc
-	ld hl, wPokedexSeen ; wd30a
-	call Func_3b057
+	ld hl, wPokedexSeen
+	call Evolution_FlagAction
 	pop de
 	pop hl
 	ld a, [wcf98]
@@ -226,25 +231,25 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	push hl
 	ld l, e
 	ld h, d
-	jr Func_3aeda
+	jr .nextEvoEntry2
 
-Func_3aed9: ; 3aed9 (e:6ed9)
+.nextEvoEntry1
 	inc hl
 
-Func_3aeda: ; 3aeda (e:6eda)
+.nextEvoEntry2
 	inc hl
-	jp Func_3ad71
+	jp .evoEntryLoop
 
-Func_3aede: ; 3aede (e:6ede)
+.done
 	pop de
 	pop bc
 	pop hl
 	pop af
 	ld [$ffd7], a
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld a, [W_ISLINKBATTLE]
 	cp $32
 	ret z
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
 	ret nz
 	ld a, [wd121]
@@ -252,7 +257,9 @@ Func_3aede: ; 3aede (e:6ede)
 	call nz, Func_2307
 	ret
 
-Func_3aef7: ; 3aef7 (e:6ef7)
+; checks if the evolved mon's name is different from the standard name (i.e. it has a nickname)
+; if so, rename it to is evolved form's standard name
+RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	ld a, [wd0b5]
 	push af
 	ld a, [W_MONHDEXNUM]
@@ -262,17 +269,17 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	ld [wd0b5], a
 	ld hl, wcd6d
 	ld de, wcf4b
-.asm_3af0e
+.compareNamesLoop
 	ld a, [de]
 	inc de
 	cp [hl]
 	inc hl
 	ret nz
 	cp $50
-	jr nz, .asm_3af0e
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	jr nz, .compareNamesLoop
+	ld a, [wWhichPokemon]
 	ld bc, $b
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld hl, wPartyMonNicks
 	call AddNTimes
 	push hl
 	call GetName
@@ -280,13 +287,13 @@ Func_3aef7: ; 3aef7 (e:6ef7)
 	pop de
 	jp CopyData
 
-Func_3af2e: ; 3af2e (e:6f2e)
+CancelledEvolution: ; 3af2e (e:6f2e)
 	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearScreen
 	pop hl
-	call Func_3af52
-	jp asm_3ad2e
+	call Evolution_ReloadTilesetTilePatterns
+	jp Evolution_PartyMonLoop
 
 EvolvedText: ; 3af3e (e:6f3e)
 	TX_FAR _EvolvedText
@@ -304,18 +311,18 @@ IsEvolvingText: ; 3af4d (e:6f4d)
 	TX_FAR _IsEvolvingText
 	db "@"
 
-Func_3af52: ; 3af52 (e:6f52)
+Evolution_ReloadTilesetTilePatterns: ; 3af52 (e:6f52)
 	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
-	cp $32
-	ret z
+	cp $32 ; in a trade?
+	ret z ; if so, return
 	jp ReloadTilesetTilePatterns
 
-Func_3af5b: ; 3af5b (e:6f5b)
+LearnMoveFromLevelUp: ; 3af5b (e:6f5b)
 	ld hl, EvosMovesPointerTable
-	ld a, [wd11e]
+	ld a, [wd11e] ; species
 	ld [wcf91], a
 	dec a
-	ld bc, $0
+	ld bc, 0
 	ld hl, EvosMovesPointerTable
 	add a
 	rl b
@@ -324,42 +331,45 @@ Func_3af5b: ; 3af5b (e:6f5b)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.asm_3af73
+.skipEvolutionDataLoop ; loop to skip past the evolution data, which comes before the move data
 	ld a, [hli]
-	and a
-	jr nz, .asm_3af73
-.asm_3af77
+	and a ; have we reached the end of the evolution data?
+	jr nz, .skipEvolutionDataLoop ; if not, jump back up
+.learnSetLoop ; loop over the learn set until we reach a move that is learnt at the current level or the end of the list
 	ld a, [hli]
-	and a
-	jr z, .asm_3afb1
-	ld b, a
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
-	cp b
-	ld a, [hli]
-	jr nz, .asm_3af77
-	ld d, a
+	and a ; have we reached the end of the learn set?
+	jr z, .done ; if we've reached the end of the learn set, jump
+	ld b, a ; level the move is learnt at
+	ld a, [W_CURENEMYLVL]
+	cp b ; is the move learnt at the mon's current level?
+	ld a, [hli] ; move ID
+	jr nz, .learnSetLoop
+	ld d, a ; ID of move to learn
 	ld a, [wcc49]
 	and a
-	jr nz, .asm_3af96
-	ld hl, wPartyMon1Moves ; wPartyMon1Moves
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld bc, $2c
+	jr nz, .next
+; if [wcc49] is 0, get the address of the mon's current moves
+; there is no reason to make this conditional because the code wouldn't work properly without doing this
+; every call to this function sets [wcc49] to 0
+	ld hl, wPartyMon1Moves
+	ld a, [wWhichPokemon]
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
-.asm_3af96
+.next
 	ld b, $4
-.asm_3af98
+.checkCurrentMovesLoop ; check if the move to learn is already known
 	ld a, [hli]
 	cp d
-	jr z, .asm_3afb1
+	jr z, .done ; if already known, jump
 	dec b
-	jr nz, .asm_3af98
+	jr nz, .checkCurrentMovesLoop
 	ld a, d
 	ld [wd0e0], a
 	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B
 	predef LearnMove
-.asm_3afb1
+.done
 	ld a, [wcf91]
 	ld [wd11e], a
 	ret
@@ -484,7 +494,7 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	jr nz, .asm_3b050
 	ret
 
-Func_3b057: ; 3b057 (e:7057)
+Evolution_FlagAction: ; 3b057 (e:7057)
 	predef_jump FlagActionPredef
 
 INCLUDE "data/evos_moves.asm"
