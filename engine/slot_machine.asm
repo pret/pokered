@@ -797,7 +797,7 @@ SlotMachine_3784e: ; 3784e (d:784e)
 SlotMachine_37882: ; 37882 (d:7882)
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and $1
 	ret z
 	ld hl, wTrainerSpriteOffset

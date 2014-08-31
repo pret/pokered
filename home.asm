@@ -102,34 +102,34 @@ Start::
 
 
 INCLUDE "home/joypad.asm"
-
 INCLUDE "data/map_header_pointers.asm"
-
 INCLUDE "home/overworld.asm"
 
-; this is used to check if the player wants to interrupt the opening sequence at several points
-; XXX is this used anywhere else?
-; INPUT:
-; c = number of frames to wait
-; sets carry if Up+Select+B, Start, or A is pressed within c frames
-; unsets carry otherwise
+
 CheckForUserInterruption:: ; 12f8 (0:12f8)
+; Return carry if Up+Select+B, Start or A are pressed in c frames.
+; Used only in the intro and title screen.
 	call DelayFrame
+
 	push bc
 	call JoypadLowSensitivity
 	pop bc
-	ld a,[hJoyHeld] ; currently pressed buttons
-	cp a,%01000110 ; Up, Select button, B button
-	jr z,.setCarry ; if all three keys are pressed
-	ld a,[$ffb5] ; either newly pressed buttons or currently pressed buttons at low sampling rate
-	and a,%00001001 ; Start button, A button
-	jr nz,.setCarry ; if either key is pressed
+
+	ld a, [hJoyHeld]
+	cp D_UP + SELECT + B_BUTTON
+	jr z, .input
+
+	ld a, [hJoy5]
+	and START | A_BUTTON
+	jr nz, .input
+
 	dec c
-	jr nz,CheckForUserInterruption
-.unsetCarry
+	jr nz, CheckForUserInterruption
+
 	and a
 	ret
-.setCarry
+
+.input
 	scf
 	ret
 
@@ -1347,7 +1347,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
 	ld a,1
-	ld [$ffb7],a ; joypad state update flag
+	ld [hJoy7],a ; joypad state update flag
 	ld a,[W_BATTLETYPE]
 	and a ; is it the Old Man battle?
 	jr nz,.specialBattleType
@@ -1501,7 +1501,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,[wCurrentMenuItem]
 	ld [wd12d],a
 	xor a
-	ld [$ffb7],a ; joypad state update flag
+	ld [hJoy7],a ; joypad state update flag
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -1662,7 +1662,7 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 	ld [wd12e],a
 	ld [wcc37],a
 	xor a
-	ld [$ffb7],a
+	ld [hJoy7],a
 	ld hl,wd730
 	res 6,[hl]
 	call BankswitchBack
@@ -3347,29 +3347,29 @@ CopyString:: ; 3829 (0:3829)
 	ret
 
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
-; OUTPUT: [$ffb5] = pressed buttons in usual format
-; there are two flags that control its functionality, [$ffb6] and [$ffb7]
+; OUTPUT: [hJoy5] = pressed buttons in usual format
+; there are two flags that control its functionality, [hJoy6] and [hJoy7]
 ; there are esentially three modes of operation
 ; 1. Get newly pressed buttons only
-;    ([$ffb7] == 0, [$ffb6] == any)
-;    Just copies [hJoyPressed] to [$ffb5].
+;    ([hJoy7] == 0, [hJoy6] == any)
+;    Just copies [hJoyPressed] to [hJoy5].
 ; 2. Get currently pressed buttons at low sample rate with delay
-;    ([$ffb7] == 1, [$ffb6] != 0)
+;    ([hJoy7] == 1, [hJoy6] != 0)
 ;    If the user holds down buttons for more than half a second,
 ;    report buttons as being pressed up to 12 times per second thereafter.
 ;    If the user holds down buttons for less than half a second,
 ;    report only one button press.
 ; 3. Same as 2, but report no buttons as pressed if A or B is held down.
-;    ([$ffb7] == 1, [$ffb6] == 0)
+;    ([hJoy7] == 1, [hJoy6] == 0)
 JoypadLowSensitivity:: ; 3831 (0:3831)
 	call Joypad
-	ld a,[$ffb7] ; flag
+	ld a,[hJoy7] ; flag
 	and a ; get all currently pressed buttons or only newly pressed buttons?
 	ld a,[hJoyPressed] ; newly pressed buttons
 	jr z,.storeButtonState
 	ld a,[hJoyHeld] ; all currently pressed buttons
 .storeButtonState
-	ld [$ffb5],a
+	ld [hJoy5],a
 	ld a,[hJoyPressed] ; newly pressed buttons
 	and a ; have any buttons been newly pressed since last check?
 	jr z,.noNewlyPressedButtons
@@ -3383,18 +3383,18 @@ JoypadLowSensitivity:: ; 3831 (0:3831)
 	jr z,.delayOver
 .delayNotOver
 	xor a
-	ld [$ffb5],a ; report no buttons as pressed
+	ld [hJoy5],a ; report no buttons as pressed
 	ret
 .delayOver
-; if [$ffb6] = 0 and A or B is pressed, report no buttons as pressed
+; if [hJoy6] = 0 and A or B is pressed, report no buttons as pressed
 	ld a,[hJoyHeld]
 	and a,%00000011 ; A and B buttons
 	jr z,.setShortDelay
-	ld a,[$ffb6] ; flag
+	ld a,[hJoy6] ; flag
 	and a
 	jr nz,.setShortDelay
 	xor a
-	ld [$ffb5],a
+	ld [hJoy5],a
 .setShortDelay
 	ld a,5 ; 1/12 of a second delay
 	ld [H_FRAMECOUNTER],a
@@ -3421,7 +3421,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	pop hl
 	call JoypadLowSensitivity
 	predef Func_5a5f
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and A_BUTTON | B_BUTTON
 	jr z, .asm_3872
 	pop af
@@ -3888,7 +3888,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 .getJoypadState
 	pop hl
 	call JoypadLowSensitivity
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	and a ; was a key pressed?
 	jr nz,.keyPressed
 	push hl
@@ -3911,7 +3911,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 .keyPressed
 	xor a
 	ld [wcc4b],a
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	ld b,a
 	bit 6,a ; pressed Up key?
 	jr z,.checkIfDownPressed
@@ -3953,7 +3953,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	and b ; does the menu care about any of the pressed keys?
 	jp z,.loop1
 .checkIfAButtonOrBButtonPressed
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	and a,%00000011 ; pressed A button or B button?
 	jr z,.skipPlayingSound
 .AButtonOrBButtonPressed
@@ -3971,7 +3971,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld [H_DOWNARROWBLINKCNT1],a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled],a ; disable menu wrapping
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	ret
 .noWrappingAround
 	ld a,[wcc37]
