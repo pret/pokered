@@ -11,6 +11,9 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+percent EQUS "* $ff / 100"
+
+
 homecall: MACRO
 	ld a, [H_LOADEDROMBANK]
 	push af
