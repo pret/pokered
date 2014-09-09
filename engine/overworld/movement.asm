@@ -1,22 +1,25 @@
 UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [wSpriteStateData2]
 	and a
-	jr z, .asm_4e41
+	jr z, .checkIfTextBoxInFrontOfSprite
 	cp $ff
-	jr z, .asm_4e4a
+	jr z, .disableSprite
 	dec a
 	ld [wSpriteStateData2], a
-	jr .asm_4e4a
-.asm_4e41
+	jr .disableSprite
+; check if a text box is in front of the sprite by checking if the lower left
+; background tile the sprite is standing on is greater than $5F, which is
+; the maximum number for map tiles
+.checkIfTextBoxInFrontOfSprite
 	aCoord 8, 9
 	ld [$ff93], a
 	cp $60
-	jr c, .asm_4e50
-.asm_4e4a
+	jr c, .lowerLeftTileIsMapTile
+.disableSprite
 	ld a, $ff
 	ld [wSpriteStateData1 + 2], a
 	ret
-.asm_4e50
+.lowerLeftTileIsMapTile
 	call DetectCollisionBetweenSprites
 	ld h, $c1
 	ld a, [wWalkCounter] ; wcfc5

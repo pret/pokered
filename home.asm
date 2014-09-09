@@ -1936,7 +1936,8 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld a,$0d ; list menu text box ID
 	ld [wd125],a
 	call DisplayTextBoxID ; draw the menu text box
-	call UpdateSprites ; move sprites
+	call UpdateSprites ; disable sprites behind the text box
+; the code up to .skipMovingSprites appears to be useless
 	hlCoord 4, 2 ; coordinates of upper left corner of menu text box
 	ld de,$090e ; height and width of menu text box
 	ld a,[wListMenuID]
