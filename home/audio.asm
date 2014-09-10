@@ -1,4 +1,4 @@
-Func_2307:: ; 2307 (0:2307)
+PlayDefaultMusic:: ; 2307 (0:2307)
 	call WaitForSoundToFinish
 	xor a
 	ld c, a

@@ -61,7 +61,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld hl, wd730
 	res 6, [hl]
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call Delay3
 	jp GBPalNormal
 

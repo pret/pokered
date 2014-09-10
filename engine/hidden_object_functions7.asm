@@ -357,7 +357,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, (SFX_02_3a - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	call Func_2307
+	call PlayDefaultMusic
 	ld hl, wd7f2
 	set 3, [hl]
 	ret

@@ -88,7 +88,7 @@ PickUpPayDayMoneyText: ; 1386b (4:786b)
 	db "@"
 
 Func_13870: ; 13870 (4:7870)
-	ld a, [wcc57]
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wd736]

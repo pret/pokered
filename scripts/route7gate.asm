@@ -13,12 +13,12 @@ Route7GateScript_1e111: ; 1e111 (7:6111)
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $20
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
-	ld [wcd3b], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
 	ret
 
 Route7GateScript0: ; 1e128 (7:6128)
@@ -57,7 +57,7 @@ CoordsData_1e167: ; 1e167 (7:6167)
 	db $ff
 
 Route7GateScript1: ; 1e16c (7:616c)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

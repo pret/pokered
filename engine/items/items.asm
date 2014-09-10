@@ -517,7 +517,7 @@ ItemUseBicycle: ; d977 (3:5977)
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wd700],a ; change player state to walking
-	call Func_2307 ; play walking music
+	call PlayDefaultMusic ; play walking music
 	ld hl,GotOffBicycleText
 	jr .printText
 .tryToGetOnBike
@@ -529,7 +529,7 @@ ItemUseBicycle: ; d977 (3:5977)
 	inc a
 	ld [wd700],a ; change player state to bicycling
 	ld hl,GotOnBicycleText
-	call Func_2307 ; play bike riding music
+	call PlayDefaultMusic ; play bike riding music
 .printText
 	jp PrintText
 
@@ -551,7 +551,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	set 7,[hl]
 	ld a,2
 	ld [wd700],a ; change player state to surfing
-	call Func_2307 ; play surfing music
+	call PlayDefaultMusic ; play surfing music
 	ld hl,SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -589,28 +589,28 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld [wd700],a ; change player state to walking
 	dec a
 	ld [wJoyIgnore],a
-	call Func_2307 ; play walking music
+	call PlayDefaultMusic ; play walking music
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
 	ld a,[wd52a] ; direction the player is going
 	bit 3,a
-	ld b,%01000000 ; Up key
+	ld b,D_UP
 	jr nz,.storeSimulatedButtonPress
 	bit 2,a
-	ld b,%10000000 ; Down key
+	ld b,D_DOWN
 	jr nz,.storeSimulatedButtonPress
 	bit 1,a
-	ld b,%00100000 ; Left key
+	ld b,D_LEFT
 	jr nz,.storeSimulatedButtonPress
-	ld b,%00010000 ; Right key
+	ld b,D_RIGHT
 .storeSimulatedButtonPress
 	ld a,b
-	ld [wccd3],a ; base address of simulated button presses
+	ld [wSimulatedJoypadStatesEnd],a
 	xor a
-	ld [wcd39],a
+	ld [wWastedByteCD39],a
 	inc a
-	ld [wcd38],a ; index of current simulated button press
+	ld [wSimulatedJoypadStatesIndex],a
 	ret
 
 SurfingGotOnText: ; da4c (3:5a4c)
@@ -1727,7 +1727,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	ld a,[wc028]
 	cp a,$b8
 	jr z,.musicWaitLoop
-	call Func_2307 ; start playing normal music again
+	call PlayDefaultMusic ; start playing normal music again
 .done
 	jp TextScriptEnd ; end text
 

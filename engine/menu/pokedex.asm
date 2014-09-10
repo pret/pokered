@@ -36,8 +36,8 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	ld [$ffb7],a
-	ld [wcd3a],a
-	ld [wcd3b],a
+	ld [wWastedByteCD3A],a
+	ld [wOverrideSimulatedJoypadStatesMask],a
 	pop af
 	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3

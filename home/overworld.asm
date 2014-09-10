@@ -362,7 +362,7 @@ NewBattle:: ; 0683 (0:0683)
 
 ; function to make bikes twice as fast as walking
 BikeSpeedup:: ; 06a0 (0:06a0)
-	ld a,[wcc57]
+	ld a,[wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a,[W_CURMAP]
@@ -520,7 +520,7 @@ WarpFound2:: ; 073c (0:073c)
 	ld [wd35d],a
 .done
 	ld hl,wd736
-	set 0,[hl]
+	set 0,[hl] ; have the player's sprite step out from the door (if there is one)
 	call Func_12da
 	jp EnterMap
 
@@ -1203,9 +1203,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	bit 6,a ; is the player jumping?
 	jr nz,.noCollision
 ; if not jumping a ledge
-	ld a,[wcd38]
+	ld a,[wSimulatedJoypadStatesIndex]
 	and a
-	jr nz,.noCollision
+	jr nz,.noCollision ; no collisions when the player's movements are being controlled by the game
 	ld a,[wd52a] ; the direction that the player is trying to go in
 	ld d,a
 	ld a,[wSpriteStateData1 + 12] ; the player sprite's collision data (bit field) (set in the sprite movement code)
@@ -1835,28 +1835,27 @@ JoypadOverworld:: ; 0f4d (0:0f4d)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_17 ; Cycling Road
 	jr nz,.notForcedDownwards
-	ld a,[hJoyHeld] ; current joypad state
-	and a,%11110011 ; bit mask for all directions and A/B
+	ld a,[hJoyHeld]
+	and a,D_DOWN | D_UP | D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON
 	jr nz,.notForcedDownwards
-	ld a,%10000000 ; down pressed
+	ld a,D_DOWN
 	ld [hJoyHeld],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
 .notForcedDownwards
 	ld a,[wd730]
 	bit 7,a
 	ret z
 ; if simulating button presses
-	ld a,[hJoyHeld] ; current joypad state
+	ld a,[hJoyHeld]
 	ld b,a
-	ld a,[wcd3b] ; bit mask for button presses that override simulated ones
+	ld a,[wOverrideSimulatedJoypadStatesMask] ; bit mask for button presses that override simulated ones
 	and b
 	ret nz ; return if the simulated button presses are overridden
-	ld hl,wcd38 ; index of current simulated button press
+	ld hl,wSimulatedJoypadStatesIndex
 	dec [hl]
 	ld a,[hl]
 	cp a,$ff
 	jr z,.doneSimulating ; if the end of the simulated button presses has been reached
-	ld hl,wccd3 ; base address of simulated button presses
-; add offset to base address
+	ld hl,wSimulatedJoypadStatesEnd
 	add l
 	ld l,a
 	jr nc,.noCarry
@@ -1872,9 +1871,9 @@ JoypadOverworld:: ; 0f4d (0:0f4d)
 ; if done simulating button presses
 .doneSimulating
 	xor a
-	ld [wcd3a],a
-	ld [wcd38],a
-	ld [wccd3],a
+	ld [wWastedByteCD3A],a
+	ld [wSimulatedJoypadStatesIndex],a
+	ld [wSimulatedJoypadStatesEnd],a
 	ld [wJoyIgnore],a
 	ld [hJoyHeld],a
 	ld hl,wd736
@@ -1944,7 +1943,7 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	xor a
 	ld [wd700],a
 	call LoadPlayerSpriteGraphics
-	call Func_2307
+	call PlayDefaultMusic
 	jr .noCollision
 .checkIfVermilionDockTileset
 	ld a, [W_CURMAPTILESET] ; tileset
@@ -1957,16 +1956,16 @@ RunMapScript:: ; 101b (0:101b)
 	push hl
 	push de
 	push bc
-	callba Func_f225 ; check if the player is pushing a boulder
+	callba TryPushingBoulder
 	ld a,[wFlags_0xcd60]
-	bit 1,a ; is the player pushing a boulder?
+	bit 1,a ; play boulder dust animation
 	jr z,.afterBoulderEffect
-	callba Func_f2b5 ; displays dust effect when pushing a boulder
+	callba DoBoulderDustAnimation
 .afterBoulderEffect
 	pop bc
 	pop de
 	pop hl
-	call Func_310e
+	call RunNPCMovementScript
 	ld a,[W_CURMAP] ; current map number
 	call SwitchToMapRomBank ; change to the ROM bank the map's data is in
 	ld hl,W_MAPSCRIPTPTR
@@ -2400,4 +2399,4 @@ ForceBikeOrSurf:: ; 12ed (0:12ed)
 	ld b, BANK(RedSprite)
 	ld hl, LoadPlayerSpriteGraphics
 	call Bankswitch
-	jp Func_2307 ; update map/player state?
+	jp PlayDefaultMusic ; update map/player state?

@@ -160,7 +160,7 @@ SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, b
 	ld [$ff8d], a
-	jp Func_34a6
+	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE

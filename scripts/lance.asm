@@ -99,12 +99,12 @@ LanceScript2: ; 5a349 (16:6349)
 LanceScript_5a35b: ; 5a35b (16:635b)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEList_5a379
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LANCECURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -118,7 +118,7 @@ RLEList_5a379: ; 5a379 (16:6379)
 	db $FF
 
 LanceScript3: ; 5a382 (16:6382)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

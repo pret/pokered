@@ -33,7 +33,7 @@ AskName: ; 64eb (1:64eb)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jr nz, .asm_653e
-	call Func_3e08
+	call ReloadMapSpriteTilePatterns
 .asm_653e
 	call LoadScreenTilesFromBuffer1
 	pop hl
@@ -61,7 +61,7 @@ Func_655c: ; 655c (1:655c)
 	ld [wd07d], a
 	call DisplayNamingScreen
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wcf4b]
 	cp $50

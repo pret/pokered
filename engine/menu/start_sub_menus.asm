@@ -25,7 +25,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jr nc,.chosePokemon
 .exitMenu
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
@@ -273,7 +273,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	TX_FAR _NotHealthyEnoughText
 	db "@"
 .goBackToMap
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl,.newBadgeRequiredText
@@ -413,7 +413,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	cp a,$02
 	jp z,.partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	pop af
 	ld [wcfcb],a
 	jp StartMenu_Item
@@ -790,7 +790,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call AddNTimes
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $2c
 	call CopyData
 	ld hl, wPartyMons
@@ -802,14 +802,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $2c
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $2c
 	call CopyData
 	ld hl, wPartyMonOT ; wd273
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonOT ; wd273
@@ -820,14 +820,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonNicks ; wPartyMonNicks
@@ -838,7 +838,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld a, [wMenuItemToSwap]

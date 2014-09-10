@@ -26,9 +26,9 @@ Func_40b0::
 	ld [wd700], a
 	ld [W_ISINBATTLE], a
 	ld [wd35d], a
-	ld [wcf10], a
+	ld [wNPCMovementScriptFunctionNum], a
 	ld [hJoyHeld], a
-	ld [wcc57], a
+	ld [wNPCMovementScriptPointerTableNum], a
 	ld [wFlags_0xcd60], a
 
 	ld [$ff9f], a
@@ -213,7 +213,7 @@ UpdateNonPlayerSprite:
 	dec a
 	swap a
 	ld [$ff93], a  ; $10 * sprite#
-	ld a, [wcf17] ; some sprite offset?
+	ld a, [wNPCMovementScriptSpriteOffset] ; some sprite offset?
 	ld b, a
 	ld a, [H_CURRENTSPRITEOFFSET]
 	cp b
@@ -2247,7 +2247,7 @@ Func_c49d: ; c49d (3:449d)
 	push hl
 	push de
 	push bc
-	callba HandleDoors
+	callba IsPlayerStandingOnDoor
 	jr c, .asm_c4c8
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	add a
@@ -3388,70 +3388,71 @@ MissableObjectFlagAction:
 	ld c, a
 	ret
 
-Func_f225: ; f225 (3:7225)
+TryPushingBoulder: ; f225 (3:7225)
 	ld a, [wd728]
-	bit 0, a
+	bit 0, a ; using Strength?
 	ret z
 	ld a, [wFlags_0xcd60]
-	bit 1, a
+	bit 1, a ; has boulder dust animation from previous push played yet?
 	ret nz
 	xor a
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [$ff8c], a
 	call IsSpriteInFrontOfPlayer
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [$ff8c]
 	ld [wd718], a
 	and a
-	jp z, Func_f2dd
+	jp z, ResetBoulderPushFlags
 	ld hl, wSpriteStateData1 + 1
 	ld d, $0
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [$ff8c]
 	swap a
 	ld e, a
 	add hl, de
 	res 7, [hl]
 	call GetSpriteMovementByte2Pointer
 	ld a, [hl]
-	cp $10
-	jp nz, Func_f2dd
+	cp BOULDER_MOVEMENT_BYTE_2
+	jp nz, ResetBoulderPushFlags
 	ld hl, wFlags_0xcd60
 	bit 6, [hl]
-	set 6, [hl]
-	ret z
+	set 6, [hl] ; indicate that the player has tried pushing
+	ret z ; the player must try pushing twice before the boulder will move
 	ld a, [hJoyHeld]
 	and $f0
 	ret z
 	predef Func_c60b
 	ld a, [wd71c]
 	and a
-	jp nz, Func_f2dd
+	jp nz, ResetBoulderPushFlags
 	ld a, [hJoyHeld]
 	ld b, a
-	ld a, [wSpriteStateData1 + 9]
-	cp $4
-	jr z, .asm_f289
-	cp $8
-	jr z, .asm_f291
-	cp $c
-	jr z, .asm_f299
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
+	jr z, .pushBoulderUp
+	cp SPRITE_FACING_LEFT
+	jr z, .pushBoulderLeft
+	cp SPRITE_FACING_RIGHT
+	jr z, .pushBoulderRight
+.pushBoulderDown
 	bit 7, b
 	ret z
-	ld de, MovementData_f2af
-	jr .asm_f29f
-.asm_f289
+	ld de, PushBoulderDownMovementData
+	jr .done
+.pushBoulderUp
 	bit 6, b
 	ret z
-	ld de, MovementData_f2ad
-	jr .asm_f29f
-.asm_f291
+	ld de, PushBoulderUpMovementData
+	jr .done
+.pushBoulderLeft
 	bit 5, b
 	ret z
-	ld de, MovementData_f2b1
-	jr .asm_f29f
-.asm_f299
+	ld de, PushBoulderLeftMovementData
+	jr .done
+.pushBoulderRight
 	bit 4, b
 	ret z
-	ld de, MovementData_f2b3
-.asm_f29f
+	ld de, PushBoulderRightMovementData
+.done
 	call MoveSprite
 	ld a, (SFX_02_53 - SFX_Headers_02) / 3
 	call PlaySound
@@ -3459,26 +3460,26 @@ Func_f225: ; f225 (3:7225)
 	set 1, [hl]
 	ret
 
-MovementData_f2ad: ; f2ad (3:72ad)
-	db $40,$FF
+PushBoulderUpMovementData: ; f2ad (3:72ad)
+	db NPC_MOVEMENT_UP,$FF
 
-MovementData_f2af: ; f2af (3:72af)
-	db $00,$FF
+PushBoulderDownMovementData: ; f2af (3:72af)
+	db NPC_MOVEMENT_DOWN,$FF
 
-MovementData_f2b1: ; f2b1 (3:72b1)
-	db $80,$FF
+PushBoulderLeftMovementData: ; f2b1 (3:72b1)
+	db NPC_MOVEMENT_LEFT,$FF
 
-MovementData_f2b3: ; f2b3 (3:72b3)
-	db $C0,$FF
+PushBoulderRightMovementData: ; f2b3 (3:72b3)
+	db NPC_MOVEMENT_RIGHT,$FF
 
-Func_f2b5: ; f2b5 (3:72b5)
+DoBoulderDustAnimation: ; f2b5 (3:72b5)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	callab Func_79f54
+	callab AnimateBoulderDust
 	call DiscardButtonPresses
 	ld [wJoyIgnore], a
-	call Func_f2dd
+	call ResetBoulderPushFlags
 	set 7, [hl]
 	ld a, [wd718]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
@@ -3487,7 +3488,7 @@ Func_f2b5: ; f2b5 (3:72b5)
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	jp PlaySound
 
-Func_f2dd: ; f2dd (3:72dd)
+ResetBoulderPushFlags: ; f2dd (3:72dd)
 	ld hl, wFlags_0xcd60
 	res 1, [hl]
 	res 6, [hl]
@@ -4460,20 +4461,19 @@ IsItemInBag_: ; f8a5 (3:78a5)
 	ld b, $0
 	ret
 
-Func_f8ba: ; f8ba (3:78ba)
+FindPathToPlayer: ; f8ba (3:78ba)
 	xor a
 	ld hl, $ff97
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wcc97
+	ld hl, wNPCMovementDirections2
 	ld de, $0
-
-Func_f8c8: ; f8c8 (3:78c8)
-	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+.loop
+	ld a, [$ff99]
 	ld b, a
-	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff95] ; Y distance in steps
 	call CalcDifference
 	ld d, a
 	and a
@@ -4484,7 +4484,7 @@ Func_f8c8: ; f8c8 (3:78c8)
 .asm_f8da
 	ld a, [$ff9a]
 	ld b, a
-	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [$ff96] ; X distance in steps
 	call CalcDifference
 	ld e, a
 	and a
@@ -4495,17 +4495,17 @@ Func_f8c8: ; f8c8 (3:78c8)
 .asm_f8ec
 	ld a, [$ff98]
 	cp $3
-	jr z, .asm_f926
+	jr z, .done
 	ld a, e
 	cp d
 	jr c, .asm_f90a
 	ld a, [$ff9d]
 	bit 1, a
 	jr nz, .asm_f900
-	ld d, $c0
+	ld d, NPC_MOVEMENT_RIGHT
 	jr .asm_f902
 .asm_f900
-	ld d, $80
+	ld d, NPC_MOVEMENT_LEFT
 .asm_f902
 	ld a, [$ff9a]
 	add $1
@@ -4515,91 +4515,93 @@ Func_f8c8: ; f8c8 (3:78c8)
 	ld a, [$ff9d]
 	bit 0, a
 	jr nz, .asm_f914
-	ld d, $0
+	ld d, NPC_MOVEMENT_DOWN
 	jr .asm_f916
 .asm_f914
-	ld d, $40
+	ld d, NPC_MOVEMENT_UP
 .asm_f916
-	ld a, [H_REMAINDER] ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [$ff99]
 	add $1
-	ld [H_REMAINDER], a ; $ff99 (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [$ff99], a
 .asm_f91c
 	ld a, d
 	ld [hli], a
 	ld a, [$ff97]
 	inc a
 	ld [$ff97], a
-	jp Func_f8c8
-.asm_f926
+	jp .loop
+.done
 	ld [hl], $ff
 	ret
 
-Func_f929: ; f929 (3:7929)
+CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	xor a
 	ld [$ff9d], a
-	ld a, [wSpriteStateData1 + 4]
+	ld a, [wSpriteStateData1 + 4] ; player's sprite screen Y position in pixels
 	ld d, a
-	ld a, [wSpriteStateData1 + 6]
+	ld a, [wSpriteStateData1 + 6] ; player's sprite screen X position in pixels
 	ld e, a
 	ld hl, wSpriteStateData1
-	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [$ff95] ; sprite offset
 	add l
 	add $4
 	ld l, a
-	jr nc, .asm_f940
+	jr nc, .noCarry
 	inc h
-.asm_f940
+.noCarry
 	ld a, d
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; NPC sprite screen Y position in pixels
 	call CalcDifference
-	jr nc, .asm_f953
+	jr nc, .NPCSouthOfOrAlignedWithPlayer
+.NPCNorthOfPlayer
 	push hl
 	ld hl, $ff9d
 	bit 0, [hl]
 	set 0, [hl]
 	pop hl
-	jr .asm_f95c
-.asm_f953
+	jr .divideYDistance
+.NPCSouthOfOrAlignedWithPlayer
 	push hl
 	ld hl, $ff9d
 	bit 0, [hl]
 	res 0, [hl]
 	pop hl
-.asm_f95c
+.divideYDistance
 	push hl
 	ld hl, $ffe5
 	ld [hli], a
-	ld a, $10
+	ld a, 16
 	ld [hli], a
-	call Func_366b
-	ld a, [hl]
-	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	call DivideBytes ; divide Y absolute distance by 16
+	ld a, [hl] ; quotient
+	ld [$ff95], a
 	pop hl
 	inc hl
 	ld b, e
-	ld a, [hl]
+	ld a, [hl] ; NPC sprite screen X position in pixels
 	call CalcDifference
-	jr nc, .asm_f97e
+	jr nc, .NPCEastOfOrAlignedWithPlayer
+.NPCWestOfPlayer
 	push hl
 	ld hl, $ff9d
 	bit 1, [hl]
 	set 1, [hl]
 	pop hl
-	jr .asm_f987
-.asm_f97e
+	jr .divideXDistance
+.NPCEastOfOrAlignedWithPlayer
 	push hl
 	ld hl, $ff9d
 	bit 1, [hl]
 	res 1, [hl]
 	pop hl
-.asm_f987
+.divideXDistance
 	ld [$ffe5], a
-	ld a, $10
+	ld a, 16
 	ld [$ffe6], a
-	call Func_366b
-	ld a, [$ffe7]
-	ld [H_NUMTOPRINT], a ; $ff96 (aliases: H_MULTIPLICAND)
+	call DivideBytes ; divide X absolute distance by 16
+	ld a, [$ffe7] ; quotient
+	ld [$ff96], a
 	ld a, [$ff9b]
 	and a
 	ret z
@@ -4609,47 +4611,51 @@ Func_f929: ; f929 (3:7929)
 	ld [$ff9d], a
 	ret
 
-Func_f9a0: ; f9a0 (3:79a0)
+ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
 	ld a, [$ff95]
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	dec a
-	ld de, wccd3
-	ld hl, wcc97
+	ld de, wSimulatedJoypadStatesEnd
+	ld hl, wNPCMovementDirections2
 	add l
 	ld l, a
-	jr nc, .asm_f9b1
+	jr nc, .loop
 	inc h
-.asm_f9b1
+.loop
 	ld a, [hld]
-	call Func_f9bf
+	call ConvertNPCMovementDirectionToJoypadMask
 	ld [de], a
 	inc de
 	ld a, [$ff95]
 	dec a
 	ld [$ff95], a
-	jr nz, .asm_f9b1
+	jr nz, .loop
 	ret
 
-Func_f9bf: ; f9bf (3:79bf)
+ConvertNPCMovementDirectionToJoypadMask: ; f9bf (3:79bf)
 	push hl
 	ld b, a
-	ld hl, DataTable_f9d2
-.asm_f9c4
+	ld hl, NPCMovementDirectionsToJoypadMasksTable
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f9d0
+	jr z, .done
 	cp b
-	jr z, .asm_f9cf
+	jr z, .loadJoypadMask
 	inc hl
-	jr .asm_f9c4
-.asm_f9cf
+	jr .loop
+.loadJoypadMask
 	ld a, [hl]
-.asm_f9d0
+.done
 	pop hl
 	ret
 
-DataTable_f9d2: ; f9d2 (3:79d2)
-	db $40, $40, $00, $80, $80, $20, $c0, $10, $ff
+NPCMovementDirectionsToJoypadMasksTable: ; f9d2 (3:79d2)
+	db NPC_MOVEMENT_UP, D_UP
+	db NPC_MOVEMENT_DOWN, D_DOWN
+	db NPC_MOVEMENT_LEFT, D_LEFT
+	db NPC_MOVEMENT_RIGHT, D_RIGHT
+	db $ff
 
 Func_f9db: ; f9db (3:79db)
 	ret

@@ -14,23 +14,23 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	call Delay3
 	ld hl, wd730
 	set 7, [hl]
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld a, $40
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld a, $3
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
-	ld [wcd3b], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
 	dec a
 	ld [wJoyIgnore], a
 	ret
 .asm_1db8d
 	bit 5, [hl]
 	ret nz
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld [wJoyIgnore], a

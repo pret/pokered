@@ -287,8 +287,16 @@ wTrainerHeaderFlagBit:: ; cc55
 
 	ds 1
 
-wcc57:: ds 1
-wcc58:: ds 3
+wNPCMovementScriptPointerTableNum:: ; cc57
+; which NPC movement script pointer is being used
+; 0 if an NPC movement script is not running
+	ds 1
+
+wNPCMovementScriptBank:: ; cc58
+; ROM bank of current NPC movement script
+	ds 1
+
+	ds 2
 
 wHallOfFame:: ; cc5b
 wcc5b:: ds 1
@@ -298,11 +306,22 @@ wcc5e:: ds 13
 
 wcc6b:: ds 14
 wcc79:: ds 30
-wcc97:: ds 10
+
+wNPCMovementDirections2:: ; cc97
+
+wSwitchPartyMonTempBuffer:: ; cc97
+; temporary buffer when swapping party mon data
+	ds 10
+
 wcca1:: ds 49
 
 wRLEByteCount:: ; ccd2
 	ds 1
+
+wSimulatedJoypadStatesEnd:: ; ccd3
+; this is the end of the joypad states
+; the list starts above this address and extends downwards in memory until here
+; overloaded with below labels
 
 wccd3:: ds 1
 wccd4:: ds 1
@@ -452,11 +471,30 @@ wEnemyMonEvasionMod:: ; cd33
 	ds 1
 
 wcd34:: ds 3
+
+wNPCMovementDirections2Index:: ; cd37
+
 wcd37:: ds 1
-wcd38:: ds 1
-wcd39:: ds 1
-wcd3a:: ds 1
-wcd3b:: ds 2
+
+wSimulatedJoypadStatesIndex:: ; cd38
+; the next simulated joypad state is at wSimulatedJoypadStatesEnd plus this value minus 1
+; 0 if the joypad state is not being simulated
+	ds 1
+
+wWastedByteCD39:: ; cd39
+; written to but nothing ever reads it
+	ds 1
+
+wWastedByteCD3A:: ; cd3a
+; written to but nothing ever reads it
+	ds 1
+
+wOverrideSimulatedJoypadStatesMask:: ; cd3b
+; mask indicating which real button presses can override simulated ones
+; XXX is it ever not 0?
+	ds 1
+
+	ds 1
 
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
@@ -499,6 +537,8 @@ wcd5f:: ds 1
 
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
+; bit 1: boulder dust animation (from using Strength) pending
+; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 	ds 1
 
 	ds 9
@@ -557,7 +597,12 @@ wcf0c:: ds 1
 wcf0d:: ds 1
 wcf0e:: ds 1
 wcf0f:: ds 1
-wcf10:: ds 1
+
+wNPCMovementScriptFunctionNum:: ; cf10
+; which script function within the pointer table indicated by
+; wNPCMovementScriptPointerTableNum
+	ds 1
+
 wcf11:: ds 1
 
 wPredefParentBank:: ; cf12
@@ -571,7 +616,10 @@ wCurSpriteMovement2:: ; cf14
 
 	ds 2
 
-wcf17:: ds 1
+wNPCMovementScriptSpriteOffset:: ; cf17
+; sprite offset of sprite being controlled by NPC movement script
+	ds 1
+
 wcf18:: ds 2
 
 wGBC:: ; cf1a
@@ -1657,12 +1705,24 @@ wd71c:: ds 1
 wd71d:: ds 1
 wd71e:: ds 1
 wd71f:: ds 9
-wd728:: ds 2
+
+wd728::
+; bit 0: using Strength outside of battle
+	ds 1
+
+	ds 1
+
 wd72a:: ds 2
 wd72c:: ds 1
 wd72d:: ds 1
 wd72e:: ds 2
-wd730:: ds 2
+
+wd730::
+; bit 7: set if joypad states are being simulated in the overworld
+	ds 1
+
+	ds 1
+
 wd732:: ds 1
 
 W_FLAGS_D733:: ; d733
@@ -1670,7 +1730,11 @@ W_FLAGS_D733:: ; d733
 	ds 1
 
 wd734:: ds 2
-wd736:: ds 1
+
+wd736:: ; d736
+; bit 0: check if the player is standing on a door and make him walk down a step if so
+	ds 1
+
 wd737:: ds 4
 wd73b:: ds 1
 wd73c:: ds 3

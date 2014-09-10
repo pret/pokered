@@ -42,7 +42,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	ld a, $1
 	ld [wcfcb], a
 	call GoPAL_SET_CF1C
-	call Func_3e08
+	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
 .skip
 	call LoadScreenTilesFromBuffer2

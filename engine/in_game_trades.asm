@@ -150,7 +150,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 
 Func_71ca2: ; 71ca2 (1c:5ca2)
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call Delay3

@@ -211,7 +211,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -244,7 +244,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	ld a, $a7
 	ld [wcc4d], a
 	predef HideObject
-	call Func_2307
+	call PlayDefaultMusic
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo7Text_51c10
@@ -323,7 +323,7 @@ SilphCo7Text1:
 	ld bc, (LAPRAS << 8) | 15
 	call GivePokemon
 	jr nc, .done
-	ld a, [wccd3]
+	ld a, [wSimulatedJoypadStatesEnd]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing

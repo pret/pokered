@@ -48,7 +48,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -67,7 +67,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 
 .asm_5cde4
 	ld a, $f0

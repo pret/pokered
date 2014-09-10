@@ -30,7 +30,7 @@ DayCareMText1: ; 56254 (15:6254)
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
 	ld hl, DayCareMText_56437

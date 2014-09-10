@@ -85,7 +85,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [$ff8c], a
 	ld a, $5
 	ld [$ff8b], a
-	call Func_3500
+	call GetPointerWithinSpriteStateData2
 	ld [hl], $19
 .asm_19535
 	ld a, $5
@@ -117,7 +117,7 @@ CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld [$ff8c],a
 	xor a
 	ld [$ff8d],a
-	jp Func_34a6 ; face object
+	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1: ; 19567 (6:5567)
 	ld a, [wd730]
@@ -209,7 +209,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $0
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret

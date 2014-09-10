@@ -43,12 +43,12 @@ HandleLedges: ; 1a672 (6:6672)
 	ld [wJoyIgnore], a
 	ld hl, wd736
 	set 6, [hl]
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld a, e
-	ld [wccd3], a
-	ld [wccd4], a
+	ld [wSimulatedJoypadStatesEnd], a
+	ld [wSimulatedJoypadStatesEnd + 1], a
 	ld a, $2
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	call LoadHoppingShadowOAM
 	ld a, (SFX_02_4e - SFX_Headers_02) / 3
 	call PlaySound

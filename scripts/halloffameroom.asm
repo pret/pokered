@@ -62,12 +62,12 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement5a528
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ret
@@ -77,7 +77,7 @@ RLEMovement5a528: ; 5a528 (16:6528)
 	db $ff
 
 HallofFameRoomScript1: ; 5a52b (16:652b)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $1
@@ -87,7 +87,7 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	call SetSpriteMovementBytesToFF
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a

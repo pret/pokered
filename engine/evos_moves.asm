@@ -254,7 +254,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ret nz
 	ld a, [wd121]
 	and a
-	call nz, Func_2307
+	call nz, PlayDefaultMusic
 	ret
 
 ; checks if the evolved mon's name is different from the standard name (i.e. it has a nickname)

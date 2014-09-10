@@ -1411,50 +1411,50 @@ Func_79329: ; 79329 (1e:5329)
 	ld [hli], a
 	ret
 
-Func_79337: ; 79337 (1e:5337)
+AdjustOAMBlockXPos: ; 79337 (1e:5337)
 	ld l, e
 	ld h, d
 
-Func_79339: ; 79339 (1e:5339)
+AdjustOAMBlockXPos2: ; 79339 (1e:5339)
 	ld de, $4
-.asm_7933c
+.loop
 	ld a, [wd08a]
 	ld b, a
 	ld a, [hl]
 	add b
 	cp $a8
-	jr c, .asm_7934a
+	jr c, .skipPuttingEntryOffScreen
 	dec hl
 	ld a, $a0
 	ld [hli], a
-.asm_7934a
+.skipPuttingEntryOffScreen
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_7933c
+	jr nz, .loop
 	ret
 
-Func_79350: ; 79350 (1e:5350)
+AdjustOAMBlockYPos: ; 79350 (1e:5350)
 	ld l, e
 	ld h, d
 
-Func_79352: ; 79352 (1e:5352)
+AdjustOAMBlockYPos2: ; 79352 (1e:5352)
 	ld de, $4
-.asm_79355
+.loop
 	ld a, [wd08a]
 	ld b, a
 	ld a, [hl]
 	add b
 	cp $70
-	jr c, .asm_79363
+	jr c, .skipSettingPreviousEntrysAttribute
 	dec hl
-	ld a, $a0
+	ld a, $a0 ; bug, sets previous OAM entry's attribute
 	ld [hli], a
-.asm_79363
+.skipSettingPreviousEntrysAttribute
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_79355
+	jr nz, .loop
 	ret
 
 AnimationBlinkEnemyMon: ; 79369 (1e:5369)

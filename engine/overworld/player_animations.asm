@@ -34,7 +34,7 @@ Func_70510: ; 70510 (1c:4510)
 	ld hl, wcd48
 	call Func_70730
 .asm_70558
-	call Func_2307
+	call PlayDefaultMusic
 .asm_7055b
 	jp Func_70772
 .asm_7055e

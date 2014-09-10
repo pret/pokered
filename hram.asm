@@ -14,6 +14,9 @@ hSoftReset EQU $FF8A
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
 
+H_SPRITEDATAOFFSET EQU $FF8B
+H_SPRITEINDEX      EQU $FF8C
+
 ; Note: the following multiplication and division addresses are used for multiple purposes
 ; and so they overlap with each other
 

@@ -38,7 +38,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	call Func_3442
 	cp $ff
 	jp z, CheckFightingMapTrainers
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld hl, wd736
 	set 7, [hl]
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
@@ -121,7 +121,7 @@ ViridianGymArrowMovement12: ; 74968 (1d:4968)
 	db $20,$0C,$FF
 
 ViridianGymScript4: ; 7496b (1d:496b)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jr nz, .asm_74980
 	xor a

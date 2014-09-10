@@ -84,10 +84,10 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
 	add_predef Func_480eb
-	add_predef Func_f8ba
+	add_predef FindPathToPlayer
 	add_predef Func_480ff
-	add_predef Func_f929
-	add_predef Func_f9a0
+	add_predef CalcPositionOfPlayerRelativeToNPC
+	add_predef ConvertNPCMovementDirectionsToJoypadMasks
 	add_predef Func_48125
 	add_predef UpdateHPBar
 	add_predef HPBarLength

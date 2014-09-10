@@ -61,7 +61,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
 	ld c, $30
 	call DelayFrames
-	call Func_2307
+	call PlayDefaultMusic
 	jp TextScriptEnd
 
 PewterPokecenterText5: ; 5c603 (17:4603)

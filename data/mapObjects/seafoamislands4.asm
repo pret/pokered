@@ -13,10 +13,10 @@ SeafoamIslands4Object: ; 0x466a6 (size=96)
 	db $0 ; signs
 
 	db $6 ; people
-	db SPRITE_BOULDER, $e + 4, $5 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $f + 4, $3 + 4, $ff, $10, $2 ; person
-	db SPRITE_BOULDER, $e + 4, $8 + 4, $ff, $10, $3 ; person
-	db SPRITE_BOULDER, $e + 4, $9 + 4, $ff, $10, $4 ; person
+	db SPRITE_BOULDER, $e + 4, $5 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $1 ; person
+	db SPRITE_BOULDER, $f + 4, $3 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $2 ; person
+	db SPRITE_BOULDER, $e + 4, $8 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $3 ; person
+	db SPRITE_BOULDER, $e + 4, $9 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $4 ; person
 	db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $ff, $5 ; person
 	db SPRITE_BOULDER, $6 + 4, $13 + 4, $ff, $ff, $6 ; person
 

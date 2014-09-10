@@ -34,15 +34,15 @@ Route22GateScriptCoords: ; 1e6b5 (7:66b5)
 
 Route22GateScript_1e6ba: ; 1e6ba (7:66ba)
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $80
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
-	jp Func_3486
+	jp StartSimulatingJoypadStates
 
 Route22GateScript1: ; 1e6cd (7:66cd)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a

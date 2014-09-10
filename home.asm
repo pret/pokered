@@ -256,6 +256,7 @@ LoadMonData:: ; 1372 (0:1372)
 	jp Bankswitch
 
 ; writes c to wd0dc+b
+; XXX unused?
 Func_137a:: ; 137a (0:137a)
 	ld hl, wd0dc
 	ld e, b
@@ -538,6 +539,7 @@ PrintLevelCommon:: ; 1523 (0:1523)
 	ld b,$41 ; no leading zeroes, left-aligned, one byte
 	jp PrintNumber
 
+; XXX unused?
 Func_152e:: ; 152e (0:152e)
 	ld hl,wd0dc
 	ld c,a
@@ -1627,7 +1629,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	push hl
 	push de
 	push bc
-	callba Func_13074 ; update the graphics of the sprite the player is talking to (to face the right direction)
+	callba UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
 	ld hl,W_MAPSPRITEDATA ; NPC text entries
@@ -2686,7 +2688,7 @@ DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ret
 
 Func_30fd:: ; 30fd (0:30fd)
-	ld a, [wcc57]
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wd736]
@@ -2696,46 +2698,46 @@ Func_30fd:: ; 30fd (0:30fd)
 	and $80
 	ret
 
-Func_310e:: ; 310e (0:310e)
+RunNPCMovementScript:: ; 310e (0:310e)
 	ld hl, wd736
 	bit 0, [hl]
 	res 0, [hl]
-	jr nz, .asm_3146
-	ld a, [wcc57]
+	jr nz, .playerStepOutFromDoor
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret z
 	dec a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
-	ld hl, .pointerTable_3140
+	ld hl, .NPCMovementScriptPointerTables
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [wcc58]
+	ld a, [wNPCMovementScriptBank]
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	ld a, [wcf10]
+	ld a, [wNPCMovementScriptFunctionNum]
 	call CallFunctionInTable
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-.pointerTable_3140
-	dw PointerTable_1a442
-	dw PointerTable_1a510
-	dw PointerTable_1a57d
-.asm_3146
-	ld b, BANK(Func_1a3e0)
-	ld hl, Func_1a3e0
+.NPCMovementScriptPointerTables
+	dw ProfOakMovementScriptPointerTable
+	dw PewterMuseumGuyMovementScriptPointerTable
+	dw PewterGymGuyMovementScriptPointerTable
+.playerStepOutFromDoor
+	ld b, BANK(PlayerStepOutFromDoor)
+	ld hl, PlayerStepOutFromDoor
 	jp Bankswitch
 
-Func_314e:: ; 314e (0:314e)
-	ld b, BANK(Func_1a41d)
-	ld hl, Func_1a41d
+EndNPCMovementScript:: ; 314e (0:314e)
+	ld b, BANK(_EndNPCMovementScript)
+	ld hl, _EndNPCMovementScript
 	jp Bankswitch
 
 Func_3156:: ; 3156 (0:3156)
@@ -2978,22 +2980,22 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ret
 
-Func_32ef:: ; 32ef (0:32ef)
-	ld hl, Func_567f9
+GetSpritePosition1:: ; 32ef (0:32ef)
+	ld hl, _GetSpritePosition1
 	jr asm_3301
 
-Func_32f4:: ; 32f4 (0:32f4)
-	ld hl, Func_56819
+GetSpritePosition2:: ; 32f4 (0:32f4)
+	ld hl, _GetSpritePosition2
 	jr asm_3301 ; 0x32f7 $8
 
-Func_32f9:: ; 32f9 (0:32f9)
-	ld hl, Func_5683d
+SetSpritePosition1:: ; 32f9 (0:32f9)
+	ld hl, _SetSpritePosition1
 	jr asm_3301
 
-Func_32fe:: ; 32fe (0:32fe)
-	ld hl, Func_5685d
+SetSpritePosition2:: ; 32fe (0:32fe)
+	ld hl, _SetSpritePosition2
 asm_3301:: ; 3301 (0:3301)
-	ld b, BANK(Func_567f9) ; BANK(Func_56819), BANK(Func_5683d), BANK(Func_5685d)
+	ld b, BANK(_GetSpritePosition1) ; BANK(_GetSpritePosition2), BANK(_SetSpritePosition1), BANK(_SetSpritePosition2)
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers:: ; 3306 (0:3306)
@@ -3187,10 +3189,10 @@ Func_3442:: ; 3442 (0:3442)
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ret
 .asm_345b
 	inc hl
@@ -3225,10 +3227,10 @@ FuncTX_PokemonCenterPC:: ; 347f (0:347f)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
-Func_3486:: ; 3486 (0:3486)
+StartSimulatingJoypadStates:: ; 3486 (0:3486)
 	xor a
-	ld [wcd3b], a
-	ld [wSpriteStateData2 + $06], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
+	ld [wSpriteStateData2 + $06], a ; player's sprite movement byte 1
 	ld hl, wd730
 	set 7, [hl]
 	ret
@@ -3249,21 +3251,21 @@ DisplayPokedex:: ; 349b (0:349b)
 	ld hl, Func_7c18
 	jp Bankswitch
 
-Func_34a6:: ; 34a6 (0:34a6)
-	call Func_34ae
+SetSpriteFacingDirectionAndDelay:: ; 34a6 (0:34a6)
+	call SetSpriteFacingDirection
 	ld c, $6
 	jp DelayFrames
 
-Func_34ae:: ; 34ae (0:34ae)
+SetSpriteFacingDirection:: ; 34ae (0:34ae)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
-	call Func_34fc
+	ld [H_SPRITEDATAOFFSET], a
+	call GetPointerWithinSpriteStateData1
 	ld a, [$ff8d]
 	ld [hl], a
 	ret
 
-Func_34b9:: ; 34b9 (0:34b9)
-	ld de, $fff9
+SetSpriteImageIndexAfterSettingFacingDirection:: ; 34b9 (0:34b9)
+	ld de, -7
 	add hl, de
 	ld [hl], a
 	ret
@@ -3332,16 +3334,17 @@ CheckBoulderCoords:: ; 34e4 (0:34e4)
 	pop hl
 	jp CheckCoords
 
-Func_34fc:: ; 34fc (0:34fc)
+GetPointerWithinSpriteStateData1:: ; 34fc (0:34fc)
 	ld h, $c1
-	jr asm_3502
+	jr _GetPointerWithinSpriteStateData
 
-Func_3500:: ; 3500 (0:3500)
+GetPointerWithinSpriteStateData2:: ; 3500 (0:3500)
 	ld h, $c2
-asm_3502:: ; 3502 (0:3502)
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+
+_GetPointerWithinSpriteStateData:
+	ld a, [H_SPRITEDATAOFFSET]
 	ld b, a
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_SPRITEINDEX]
 	swap a
 	add b
 	ld l, a
@@ -3402,7 +3405,7 @@ SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 ; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
 GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
-	ld a,[$FF8C] ; the sprite to move
+	ld a,[H_SPRITEINDEX] ; the sprite to move
 	swap a
 	add a,6
 	ld l,a
@@ -3591,30 +3594,31 @@ MoveSprite_:: ; 363d (0:363d)
 	set 0,[hl]
 	pop hl
 	xor a
-	ld [wcd3b],a
-	ld [wccd3],a
+	ld [wOverrideSimulatedJoypadStatesMask],a
+	ld [wSimulatedJoypadStatesEnd],a
 	dec a
 	ld [wJoyIgnore],a
-	ld [wcd3a],a
+	ld [wWastedByteCD3A],a
 	ret
 
-Func_366b:: ; 366b (0:366b)
+; divides [$ffe5] by [$ffe6] and stores the quotient in [$ffe7]
+DivideBytes:: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
 	xor a
 	ld [hld], a
 	ld a, [hld]
 	and a
-	jr z, .asm_367e
+	jr z, .done
 	ld a, [hli]
-.asm_3676
+.loop
 	sub [hl]
-	jr c, .asm_367e
+	jr c, .done
 	inc hl
 	inc [hl]
 	dec hl
-	jr .asm_3676
-.asm_367e
+	jr .loop
+.done
 	pop hl
 	ret
 
@@ -5008,11 +5012,11 @@ IsInRestOfArray::
 	ret
 
 
-Func_3dbe:: ; 3dbe (0:3dbe)
+RestoreScreenTilesAndReloadTilePatterns:: ; 3dbe (0:3dbe)
 	call ClearSprites
 	ld a, $1
 	ld [wcfcb], a
-	call Func_3e08
+	call ReloadMapSpriteTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
 	call GoPAL_SET_CF1C
@@ -5068,14 +5072,16 @@ GetHealthBarColor::
 	ld [hl], d
 	ret
 
-Func_3e08:: ; 3e08 (0:3e08)
+; Copy the current map's sprites' tile patterns to VRAM again after they have
+; been overwritten by other tile patterns.
+ReloadMapSpriteTilePatterns:: ; 3e08 (0:3e08)
 	ld hl, wcfc4
 	ld a, [hl]
 	push af
 	res 0, [hl]
 	push hl
 	xor a
-	ld [W_SPRITESETID], a ; W_SPRITESETID
+	ld [W_SPRITESETID], a
 	call DisableLCD
 	callba InitMapSprites
 	call EnableLCD

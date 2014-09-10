@@ -55,7 +55,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c

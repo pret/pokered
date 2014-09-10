@@ -23,9 +23,9 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, ITEM | $8, FULL_HEAL
 	db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, ITEM | $9, TM_05
 	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, ITEM | $a, GUARD_SPEC_
-	db SPRITE_BOULDER, $e + 4, $4 + 4, $ff, $10, $b ; person
-	db SPRITE_BOULDER, $5 + 4, $5 + 4, $ff, $10, $c ; person
-	db SPRITE_BOULDER, $10 + 4, $17 + 4, $ff, $10, $d ; person
+	db SPRITE_BOULDER, $e + 4, $4 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $b ; person
+	db SPRITE_BOULDER, $5 + 4, $5 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $c ; person
+	db SPRITE_BOULDER, $10 + 4, $17 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $d ; person
 
 	; warp-to
 	EVENT_DISP VICTORY_ROAD_2_WIDTH, $8, $0 ; VICTORY_ROAD_1

@@ -168,8 +168,8 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld hl, wd730
 	res 0, [hl]
 	xor a
-	ld [wcd38], a
-	ld [wcd3a], a
+	ld [wSimulatedJoypadStatesIndex], a
+	ld [wWastedByteCD3A], a
 	ret
 .asm_4f4b
 	cp $fe
@@ -493,6 +493,8 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	cp b
 	jr c, .spriteInvisible  ; right of screen region
 .skipXVisibilityTest
+; make the sprite invisible if a text box is in front of it
+; $5F is the maximum number for map tiles
 	call getTileSpriteStandsOn
 	ld d, $60
 	ld a, [hli]
@@ -719,8 +721,8 @@ Func_5236: ; 5236 (1:5236)
 	bit 7, [hl]
 	set 7, [hl]
 	jp z, Func_52a6
-	ld hl, wcc97
-	ld a, [wcd37]
+	ld hl, wNPCMovementDirections2
+	ld a, [wNPCMovementDirections2Index]
 	add l
 	ld l, a
 	jr nc, .asm_5251
@@ -773,13 +775,13 @@ Func_5236: ; 5236 (1:5236)
 	ret nz
 	ld a, $8
 	ld [wcf18], a
-	ld hl, wcd37
+	ld hl, wNPCMovementDirections2Index
 	inc [hl]
 	ret
 
 Func_52a6: ; 52a6 (1:52a6)
 	xor a
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	ld a, $8
 	ld [wcf18], a
 	jp Func_52c3

@@ -121,14 +121,14 @@ SafariZoneEntranceScript_752a3: ; 752a3 (1d:52a3)
 	push af
 	ld b, $0
 	ld a, c
-	ld [wcd38], a
-	ld hl, wccd3
+	ld [wSimulatedJoypadStatesIndex], a
+	ld hl, wSimulatedJoypadStatesEnd
 	pop af
 	call FillMemory
-	jp Func_3486
+	jp StartSimulatingJoypadStates
 
 SafariZoneEntranceScript_752b4: ; 752b4 (1d:52b4)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret
 
