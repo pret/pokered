@@ -112,7 +112,7 @@ Mansion2Text5: ; 52087 (14:6087)
 	and a
 	jr nz, .asm_520b9 ; 0x52095 $22
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd126
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7

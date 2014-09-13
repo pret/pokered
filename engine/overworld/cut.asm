@@ -6,13 +6,13 @@ UsedCut: ; ef54 (3:6f54)
 	jr z, .asm_ef6b
 	cp GYM
 	jr nz, .asm_ef77
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
 	jr asm_ef82
 .asm_ef6b
 	dec a
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	cp $3d ; cut tree
 	jr z, asm_ef82
 	cp $52 ; grass
@@ -52,14 +52,14 @@ asm_ef82: ; ef82 (3:6f82)
 	ld hl, wd730
 	res 6, [hl]
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call AnimateCutTree
 	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
 	call Func_eedc
 	callba Func_79e96
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
@@ -178,7 +178,7 @@ Func_f09f: ; f09f (3:709f)
 	ld c, a
 	ld b, $0
 	ld d, $0
-	ld hl, wd35f
+	ld hl, wCurrentTileBlockMapViewPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

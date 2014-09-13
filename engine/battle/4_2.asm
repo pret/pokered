@@ -71,7 +71,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	call WaitForSoundToFinish
 	call GBPalWhiteOut
 	ld a, $ff
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ret
 
 YouWinText: ; 13853 (4:7853)
@@ -94,7 +94,7 @@ Func_13870: ; 13870 (4:7870)
 	ld a, [wd736]
 	and a
 	ret nz
-	callab Func_c49d
+	callab IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .asm_13888
 .asm_13884
 	ld a, $1

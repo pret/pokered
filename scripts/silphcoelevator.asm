@@ -9,13 +9,13 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	res 7, [hl]
 	call nz, SilphCoElevatorScript_45827
 	xor a
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	inc a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
-	ld hl, wd3af
+	ld hl, wWarpEntries
 	ld a, [wd73b]
 	ld b, a
 	ld a, [wd73c]

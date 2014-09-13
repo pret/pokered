@@ -1,7 +1,7 @@
 PromptUserToPlaySlots: ; 3730e (d:730e)
 	call SaveScreenTilesToBuffer2
 	ld a, BANK(DisplayTextIDInit)
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	ld b, a
 	ld hl, DisplayTextIDInit
 	call Bankswitch
@@ -12,7 +12,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	and a
 	jr nz, .skip
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld hl, wcd4f
 	xor a
 	ld [hli], a
@@ -40,7 +40,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	ld [W_SUBANIMSUBENTRYADDR], a
 	call GBPalWhiteOutWithDelay3
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call GoPAL_SET_CF1C
 	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
@@ -221,7 +221,7 @@ SlotMachine_374ad: ; 374ad (d:74ad)
 	call SlotMachine_374fb
 	call SlotMachine_37517
 	ret c
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	xor $1
 	inc a
 	ld c, a

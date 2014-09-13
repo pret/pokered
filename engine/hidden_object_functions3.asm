@@ -114,7 +114,7 @@ TownMapText: ; fc12 (3:7c12)
 	db $06
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd730
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3

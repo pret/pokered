@@ -203,7 +203,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartThankYouText
 	call PrintText
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call UpdateSprites ; move sprites
 	ld a,[wd07e]
 	ld [wListScrollOffset],a

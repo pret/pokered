@@ -1,6 +1,6 @@
 DisplayTownMap: ; 70e3e (1c:4e3e)
 	call LoadTownMap
-	ld hl, wcfcb
+	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
@@ -111,7 +111,7 @@ TownMapCursor: ; 70f40 (1c:4f40)
 
 LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	call LoadTownMap
-	ld hl, wcfcb
+	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
@@ -148,7 +148,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
 	call Func_71070
-	ld hl, wcfcb
+	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
@@ -206,7 +206,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld a, (SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, [hl]
-	ld [wd71a], a
+	ld [wDestinationMap], a
 	ld hl, wd732
 	set 3, [hl]
 	inc hl

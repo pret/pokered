@@ -17,7 +17,7 @@ DisplayLinkBattleVersusTextBox: ; 372d6 (d:72d6)
 	ld [hli], a
 	ld [hl], $6a
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	callab SetupPlayerAndEnemyPokeballs
 	ld c, 150
 	jp DelayFrames

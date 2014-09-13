@@ -88,7 +88,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	xor a
 	ld [wd07d],a
 	dec a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	push af
 	call Func_71ca2

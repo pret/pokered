@@ -130,8 +130,8 @@ SeafoamIslands5Script3: ; 46860 (11:6860)
 
 SeaFoamIslands5Script_46872: ; 46872 (11:6872)
 	xor a
-	ld [wd700], a
-	ld [wd11a], a
+	ld [wWalkBikeSurfState], a
+	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
 
 SeafoamIslands5TextPointers: ; 4687c (11:687c)

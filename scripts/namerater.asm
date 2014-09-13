@@ -50,7 +50,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	call PrintText
 	xor a
 	ld [wd07d], a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af

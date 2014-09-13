@@ -83,7 +83,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	xor a
 	ld [wcd50], a
 	predef EmotionBubble
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_50f4e ; 0x50f44 $8
 	ld a, $ff
@@ -222,7 +222,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	xor a
 	ld [wcd50], a
 	predef EmotionBubble
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .skipYVisibilityTesta
 	ld a, $ff

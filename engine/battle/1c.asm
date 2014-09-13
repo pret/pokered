@@ -89,7 +89,7 @@ BattleTransition: ; 7096d (1c:496d)
 	xor a
 	ld [hVBlankWY], a
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call DelayFrame
 	ld hl, wSpriteStateData1 + 2
 	ld a, [H_DOWNARROWBLINKCNT2]

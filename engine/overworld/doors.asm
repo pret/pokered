@@ -1,5 +1,5 @@
-; returns whether the player is standing on a door in carry
-IsPlayerStandingOnDoor: ; 1a609 (6:6609)
+; returns whether the player is standing on a door tile in carry
+IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	push de
 	ld hl, DoorTileIDPointers ; $662c
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET

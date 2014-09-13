@@ -61,7 +61,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 
 .asm_449fe
 	ld a, $c2
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ld hl, .coordsData_449f9 ; $49f9
 	call Func_46981
 	ld a, [wWhichTrade] ; wWhichTrade

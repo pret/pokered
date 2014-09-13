@@ -119,10 +119,10 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call FillMemory
 	call ClearSprites
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld hl, wd730
 	set 6, [hl]
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, $e4
 	jr z, .asm_411e5

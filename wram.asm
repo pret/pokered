@@ -260,7 +260,11 @@ wcc37:: ds 1
 wcc38:: ds 2
 wcc3a:: ds 1
 wcc3b:: ds 1
-wcc3c:: ds 1
+
+wDoNotWaitForButtonPressAfterDisplayingText:: ; cc3c
+; if non-zero, skip waiting for a button press after displaying text in DisplayTextID
+	ds 1
+
 wcc3d:: ds 1
 wcc3e:: ds 4
 wcc42:: ds 1
@@ -496,17 +500,40 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wFlyAnimUsingCoordList:: ; cd3d
+
+wPlayerSpinInPlaceAnimFrameDelay:: ; cd3d
+
+wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: ; cd3d
+
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 ;	ds 1
 
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
+
+wFlyAnimCounter:: ; cd3e
+
+wPlayerSpinInPlaceAnimFrameDelayDelta:: ; cd3e
+
+wPlayerSpinWhileMovingUpOrDownAnimMaxY:: ; cd3e
+
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wFlyAnimBirdSpriteImageIndex:: ; cd3f
+
+wPlayerSpinInPlaceAnimFrameDelayEndValue:: ; cd3f
+
+wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: ; cd3f
+
 wTrainerFacingDirection:: ; cd3f
 wcd3f::
 	ds 1
+
+wPlayerSpinInPlaceAnimSoundID:: ; cd40
+
 wTrainerScreenY:: ; cd40
 	ds 1
 wTrainerScreenX:: ; cd41
@@ -593,7 +620,11 @@ wBattleResult:: ; cf0b
 ; $01 - lose
 ; $02 - draw
 	ds 1
-wcf0c:: ds 1
+
+wAutoTextBoxDrawingControl:: ; cf0c
+; bit 0: if set, DisplayTextID automatically draws a text box
+	ds 1
+
 wcf0d:: ds 1
 wcf0e:: ds 1
 wcf0f:: ds 1
@@ -608,7 +639,7 @@ wcf11:: ds 1
 wPredefParentBank:: ; cf12
 	ds 1
 
-wcf13:: ds 1
+wSpriteIndex:: ds 1
 
 wCurSpriteMovement2:: ; cf14
 ; movement byte 2 of current sprite
@@ -625,7 +656,10 @@ wcf18:: ds 2
 wGBC:: ; cf1a
 	ds 1
 
-wcf1b:: ds 1
+wOnSGB:: ; cf1b
+; if running on SGB, it's 1, else it's 0
+	ds 1
+
 wcf1c:: ds 1
 wcf1d:: ds 1
 wcf1e:: ds 1
@@ -692,7 +726,9 @@ wWalkCounter:: ; cfc5
 ; walk animation counter
 	ds 1
 
-wcfc6:: ds 1
+wTileInFrontOfPlayer:: ; cfc6
+; background tile number in front of the player (either 1 or 2 steps ahead)
+	ds 1
 
 wMusicHeaderPointer:: ; cfc7
 ; (the current music channel address - $4000) / 3
@@ -701,7 +737,10 @@ wMusicHeaderPointer:: ; cfc7
 wcfc8:: ds 1
 wcfc9:: ds 1
 wcfca:: ds 1
-wcfcb:: ds 1
+
+wUpdateSpritesEnabled:: ; cfcb
+; $01 enables UpdateSprites; anything else disables it
+	ds 1
 
 W_ENEMYMOVENUM:: ; cfcc
 	ds 1
@@ -1121,7 +1160,11 @@ wd0dc:: ds 4
 wd0e0:: ds 1
 wd0e1:: ds 56
 wd119:: ds 1
-wd11a:: ds 1
+
+wWalkBikeSurfStateCopy:: ; d11a
+; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
+	ds 1
+
 wd11b:: ds 1
 wd11c:: ds 1
 wd11d:: ds 1
@@ -1158,8 +1201,14 @@ wd132:: ds 1
 wd133:: ds 6
 wd139:: ds 1
 wd13a:: ds 1
-wd13b:: ds 1
-wd13c:: ds 1
+
+wStepCounter:: ; d13b
+; counts down once every step
+	ds 1
+
+wNumberOfNoRandomBattleStepsLeft:: ; d13c
+; after a battle, you have at least 3 steps before a random battle can occur
+	ds 1
 
 W_PRIZE1:: ; d13d
 	ds 1
@@ -1246,13 +1295,18 @@ wPlayerID:: ; d359
 
 wd35b:: ds 1
 wd35c:: ds 1
-wd35d:: ds 1
+
+wMapPalOffset:: ; d35d
+; offset subtracted from FadePal4 to get the background and object palettes for the current map
+; normally, it is 0. it is 6 when Flash is needed, causing FadePal2 to be used instead of FadePal4
+	ds 1
 
 W_CURMAP:: ; d35e
 	ds 1
 
-wd35f:: ds 1
-wd360:: ds 1
+wCurrentTileBlockMapViewPointer:: ; d35f
+; pointer to the upper left corner of the current view in the tile block map
+	ds 2
 
 W_YCOORD:: ; d361
 ; player’s position on the current map
@@ -1364,26 +1418,42 @@ W_SPRITESETID:: ; d3a8
 wd3a9:: ds 1
 wd3aa:: ds 3
 wd3ad:: ds 1
-wd3ae:: ds 1
-wd3af:: ds 128
-wd42f:: ds 129
+
+wNumberOfWarps:: ; d3ae
+; number of warps in current map
+	ds 1
+
+wWarpEntries:: ; d3af
+; current map warp entries
+	ds 128
+
+wDestinationWarpID:: ; d42f
+; if $ff, the player's coordinates are not updated when entering the map
+	ds 1
+
+	ds 128
+
 wd4b0:: ds 1
 wd4b1:: ds 32
 wd4d1:: ds 16
 
 W_NUMSPRITES:: ; d4e1
 ; number of sprites on the current map
-; two bytes per sprite (movement byte 2 , text ID)
 	ds 1
 
-wd4e2:: ds 1
-wd4e3:: ds 1
+; these two variables track the X and Y offset in blocks from the last special warp used
+; they don't seem to be used for anything
+wYOffsetSinceLastSpecialWarp:: ; d4e2
+	ds 1
+wXOffsetSinceLastSpecialWarp:: ; d4e3
+	ds 1
 
 W_MAPSPRITEDATA:: ; d4e4
-; two bytes per sprite (trainer class/item ID , trainer set ID)
+; two bytes per sprite (movement byte 2, text ID)
 	ds 32
 
 W_MAPSPRITEEXTRADATA:: ; d504
+; two bytes per sprite (trainer class/item ID, trainer set ID)
 	ds 32
 
 wd524:: ds 1
@@ -1661,7 +1731,14 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 
 wd6f0:: ds 14
 wd6fe:: ds 2
-wd700:: ds 11
+
+wWalkBikeSurfState:: ; d700
+; $00 = walking
+; $01 = biking
+; $02 = surfing
+	ds 1
+
+	ds 10
 
 W_TOWNVISITEDFLAG:: ; d70b
 	flag_array 13
@@ -1684,7 +1761,8 @@ W_ENEMYMONORTRAINERCLASS:: ; d713
 ; trainer classes start at $c8
 	ds 1
 
-wd714:: ds 1
+wPlayerJumpingYScreenCoordsIndex:: ; d714
+	ds 1
 
 W_RIVALSTARTER:: ; d715
 	ds 1
@@ -1694,16 +1772,32 @@ W_RIVALSTARTER:: ; d715
 W_PLAYERSTARTER:: ; d717
 	ds 1
 
-wd718:: ds 1
+wBoulderSpriteIndex:: ; d718
+; sprite index of the boulder the player is trying to push
+	ds 1
 
 wLastBlackoutMap:: ; d719
 	ds 1
 
-wd71a:: ds 1
+wDestinationMap:: ; d71a
+; destination map (for certain types of special warps, not ordinary walking)
+	ds 1
+
 wd71b:: ds 1
-wd71c:: ds 1
-wd71d:: ds 1
-wd71e:: ds 1
+
+wTileInFrontOfBoulderAndBoulderCollisionResult:: ; d71c
+; used to store the tile in front of the boulder when trying to push a boulder
+; also used to store the result of the collision check ($ff for a collision and $00 for no collision)
+	ds 1
+
+wDungeonWarpDestinationMap:: ; d71d
+; destination map for dungeon warps
+	ds 1
+
+wWhichDungeonWarp:: ; d71e
+; which dungeon warp within the source map was used
+	ds 1
+
 wd71f:: ds 9
 
 wd728::
@@ -1713,7 +1807,11 @@ wd728::
 	ds 1
 
 wd72a:: ds 2
-wd72c:: ds 1
+
+wd72c:: ; d72c
+; bit 0: if not set, the 3 minimum steps between random battles have passed
+	ds 1
+
 wd72d:: ds 1
 wd72e:: ds 2
 
@@ -1723,16 +1821,31 @@ wd730::
 
 	ds 1
 
-wd732:: ds 1
+wd732:: ; d732
+; bit 0: play time being counted
+; bit 1: remnant of debug mode? not set by the game code.
+; if it is set
+; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
+; 2. does not have the player start in floor two of the playyer's house (instead sending them to [wLastMap])
+; 3. allows wild battles to be avoided by holding down B
+; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
+; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
+; bit 4: jumped into hole (Pokemon Mansion, Seafoam Islands, Victory Road) or went down waterfall (Seafoam Islands), so the target warp is a "dungeon warp"
+; bit 5: currently being forced to ride bike (cycling road)
+; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
+	ds 1
 
 W_FLAGS_D733:: ; d733
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
+; bit 7: used fly out of battle
 	ds 1
 
 wd734:: ds 2
 
 wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
+; bit 2: standing on a warp
+; bit 6: jumping down a ledge
 	ds 1
 
 wd737:: ds 4

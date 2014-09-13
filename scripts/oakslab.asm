@@ -3,9 +3,9 @@ OaksLabScript: ; 1cb0e (7:4b0e)
 	bit 6, a
 	call nz, OaksLabScript_1d076
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabScriptPointers
 	ld a, [W_OAKSLABCURSCRIPT]
 	jp CallFunctionInTable
@@ -374,7 +374,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 .done
 	ld [W_TRAINERNO], a
 	ld a, $1
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call GetSpritePosition1
 	ld hl, OaksLabText_1d3be
 	ld de, OaksLabText_1d3c3
@@ -397,7 +397,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [wd528], a
 	call UpdateSprites
 	ld a, $1
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -680,7 +680,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld a, b
 	ld [$ffed], a
 	ld a, $1
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ret
 
@@ -801,7 +801,7 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [wcf91], a
 	ld [wd11e], a
 	ld a, b
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld a, [wd74b]
 	bit 2, a
 	jp nz, OaksLabScript_1d22d
@@ -837,7 +837,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	call ReloadMapData
 	ld c, $a
 	call DelayFrames
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $2
 	jr z, OaksLabLookAtCharmander
 	cp $3
@@ -868,7 +868,7 @@ OaksLabBulbasaurText: ; 1d1ae (7:51ae)
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call YesNoChoice ; yes/no menu
 	ld a, [wCurrentMenuItem]
 	and a
@@ -877,7 +877,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	ld [W_PLAYERSTARTER], a
 	ld [wd11e], a
 	call GetMonName
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $2
 	jr nz, asm_1d1db ; 0x1d1d5 $4
 	ld a, $2b
@@ -893,7 +893,7 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabMonEnergeticText
 	call PrintText
 	ld hl, OaksLabReceivedMonText
@@ -956,7 +956,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld hl, OaksLabText_1d31d
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
 	jp .asm_0f042
 .asm_b28b0 ; 0x1d279

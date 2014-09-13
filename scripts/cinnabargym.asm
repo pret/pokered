@@ -187,13 +187,13 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 
 CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $1
 	jr z, .asm_758d4
 	ld a, $2

@@ -68,7 +68,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld a, $11
 	ld [$ffee], a
 	ld a, $3
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $3
 	ld [$ff8c], a
@@ -94,7 +94,7 @@ PewterCityScript2: ; 192d3 (6:52d3)
 
 PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $3
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, $3
 	ld [wcc4d], a
@@ -132,7 +132,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld a, $10
 	ld [$ffee], a
 	ld a, $5
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $5
 	ld [$ff8c], a
@@ -158,7 +158,7 @@ PewterCityScript5: ; 19359 (6:5359)
 
 PewterCityScript6: ; 1936f (6:536f)
 	ld a, $5
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, $4
 	ld [wcc4d], a
@@ -216,7 +216,7 @@ PewterCityText3: ; 193b1 (6:53b1)
 	ldh a, [$b8]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $1
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -280,7 +280,7 @@ PewterCityText5: ; 19436 (6:5436)
 	ldh a, [$b8]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $4
 	ld [W_PEWTERCITYCURSCRIPT], a

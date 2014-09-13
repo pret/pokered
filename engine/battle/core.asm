@@ -139,7 +139,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld [$ffd7], a
 	ld [hVBlankSCY], a
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -6247,7 +6247,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	ld [wMenuJoypadPollCount], a
 	callab DisplayLinkBattleVersusTextBox
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call ClearScreen
 .next
 	call DelayFrame
@@ -6256,7 +6256,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
 	call ClearScreen
 	xor a
@@ -6729,16 +6729,16 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	bit 1, a
 	jr z, .asm_3ef2f
 	ld a, [hJoyHeld]
-	bit 1, a
+	bit 1, a ; B button pressed?
 	ret nz
 .asm_3ef2f
-	ld a, [wd13c]
+	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz
 	callab Func_13870
 	ret nz
 asm_3ef3d: ; 3ef3d (f:6f3d)
-	ld a, [wd35d]
+	ld a, [wMapPalOffset]
 	push af
 	ld hl, wd358
 	ld a, [hl]
@@ -6849,7 +6849,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	pop af
 	ld [wd358], a
 	pop af
-	ld [wd35d], a
+	ld [wMapPalOffset], a
 	ld a, [wd0d4]
 	ld [$ffd7], a
 	scf

@@ -171,7 +171,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld de, Route24Text_5152b
 	call PreBattleSaveRegisters
 	ld a, [$ff8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

@@ -13,7 +13,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	xor a
 	ld [wMenuItemToSwap],a
 	ld [wd07d],a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	jr .checkIfPokemonChosen
 .loop
@@ -184,7 +184,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	bit 0,a ; does the player have the Boulder Badge?
 	jp z,.newBadgeRequired
 	xor a
-	ld [wd35d],a
+	ld [wMapPalOffset],a
 	ld hl,.flashLightsAreaText
 	call PrintText
 	call GBPalWhiteOutWithDelay3
@@ -406,7 +406,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp z,ItemMenuLoop
 	jp CloseStartMenu
 .useItem_partyMenu
-	ld a,[wcfcb]
+	ld a,[wUpdateSpritesEnabled]
 	push af
 	call UseItem
 	ld a,[wcd6a]
@@ -415,11 +415,11 @@ StartMenu_Item: ; 13302 (4:7302)
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	pop af
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	jp StartMenu_Item
 .partyMenuNotDisplayed
 	pop af
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	jp ItemMenuLoop
 .tossItem
 	call IsKeyItem

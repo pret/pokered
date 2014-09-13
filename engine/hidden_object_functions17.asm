@@ -89,7 +89,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, [wWhichTrade]
 	call PrintPredefTextID
 	ret

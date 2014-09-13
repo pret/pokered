@@ -1,10 +1,10 @@
 AnimateBoulderDust: ; 79f54 (1e:5f54)
 	ld a, $1
 	ld [wcd50], a ; select the boulder dust offsets
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	push af
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, %11100100
 	ld [rOBP1], a
 	call LoadSmokeTileFourTimes
@@ -26,7 +26,7 @@ AnimateBoulderDust: ; 79f54 (1e:5f54)
 	dec c
 	jr nz, .loop
 	pop af
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	jp LoadPlayerSpriteGraphics
 
 GetMoveBoulderDustFunctionPointer: ; 79f92 (1e:5f92)

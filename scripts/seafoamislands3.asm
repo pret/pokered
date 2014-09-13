@@ -32,7 +32,7 @@ SeafoamIslands3Script: ; 46451 (11:6451)
 	predef_jump ShowObject
 .asm_4649e
 	ld a, $a1
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam3HolesCoords
 	jp Func_46981
 

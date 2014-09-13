@@ -128,7 +128,7 @@ CeruleanGymText1: ; 5c771 (17:4771)
 	ld de, CeruleanGymText_5c7d8
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $2

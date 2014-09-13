@@ -106,7 +106,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	and a
 	jr nz, .asm_4438c ; 0x44368 $22
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd126
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText

@@ -22,10 +22,10 @@ AskName: ; 64eb (1:64eb)
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr nz, .asm_654c
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	push af
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	push hl
 	ld a, $2
 	ld [wd07d], a
@@ -38,7 +38,7 @@ AskName: ; 64eb (1:64eb)
 	call LoadScreenTilesFromBuffer1
 	pop hl
 	pop af
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, [wcf4b]
 	cp $50
 	ret nz
@@ -56,7 +56,7 @@ DoYouWantToNicknameText: ; 0x6557
 Func_655c: ; 655c (1:655c)
 	ld hl, wHPBarMaxHP
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, $2
 	ld [wd07d], a
 	call DisplayNamingScreen

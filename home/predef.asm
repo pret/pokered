@@ -7,7 +7,7 @@ Predef::
 	ld [wPredefID], a
 
 	; A hack for LoadDestinationWarpPosition.
-	; See Func_c754 (predef $19).
+	; See LoadTilesetHeader (predef $19).
 	ld a, [H_LOADEDROMBANK]
 	ld [wPredefParentBank], a
 

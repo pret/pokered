@@ -182,11 +182,11 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	call GBFadeIn1
+	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
 	call UpdateSprites
 	call Delay3
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	ld hl, wd838
 	set 7, [hl]
 	xor a
@@ -223,7 +223,7 @@ SilphCo11Script4: ; 62293 (18:6293)
 	ld de, SilphCo10Text_62330 ; $6330
 	call PreBattleSaveRegisters
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

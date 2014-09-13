@@ -2,13 +2,13 @@ PrepareOAMData:
 ; Determine OAM data for currently visible
 ; sprites and write it to wOAMBuffer.
 
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	dec a
 	jr z, .asm_4b1e
 
 	cp 0 - 1
 	ret nz
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	jp HideSprites
 
 .asm_4b1e

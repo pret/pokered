@@ -179,7 +179,7 @@ CeladonGymText1: ; 48a11 (12:4a11)
 	ld de, CeladonGymText_48a63
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4

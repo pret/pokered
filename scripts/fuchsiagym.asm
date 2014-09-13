@@ -168,7 +168,7 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	ld de, UnnamedText_75586
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5

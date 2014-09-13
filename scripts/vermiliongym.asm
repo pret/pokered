@@ -158,7 +158,7 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	ld de, ReceivedThunderbadgeText
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3

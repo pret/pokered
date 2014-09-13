@@ -181,7 +181,7 @@ OpenPokemonCenterPC: ; 62516 (18:6516)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	ld a, $1f ; PredefText1f
 	jp PrintPredefTextID
 

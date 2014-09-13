@@ -180,7 +180,7 @@ SaffronGymText1: ; 5d118 (17:5118)
 	ld de, SaffronGymText_5d167
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $6

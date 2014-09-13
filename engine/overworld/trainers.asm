@@ -1,7 +1,7 @@
 _GetSpritePosition1: ; 567f9 (15:67f9)
 	ld hl, wSpriteStateData1
 	ld de, $4
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [hli]
@@ -20,7 +20,7 @@ _GetSpritePosition1: ; 567f9 (15:67f9)
 _GetSpritePosition2: ; 56819 (15:6819)
 	ld hl, wSpriteStateData1
 	ld de, $4
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
@@ -39,7 +39,7 @@ _GetSpritePosition2: ; 56819 (15:6819)
 _SetSpritePosition1: ; 5683d (15:683d)
 	ld hl, wSpriteStateData1
 	ld de, $4
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [$ffeb] ; c1x4 (screen Y pos)
@@ -58,7 +58,7 @@ _SetSpritePosition1: ; 5683d (15:683d)
 _SetSpritePosition2: ; 5685d (15:685d)
 	ld hl, wSpriteStateData1
 	ld de, $0004
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [wd130]
@@ -75,7 +75,7 @@ _SetSpritePosition2: ; 5685d (15:685d)
 	ret
 
 TrainerWalkUpToPlayer: ; 56881 (15:6881)
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	call ReadTrainerScreenPosition
@@ -143,7 +143,7 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld de, wNPCMovementDirections2
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	jp MoveSprite_
 

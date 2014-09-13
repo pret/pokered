@@ -517,7 +517,7 @@ Func_78e01: ; 78e01 (1e:4e01)
 	ret
 
 Func_78e23: ; 78e23 (1e:4e23)
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, $e4
 	jr z, .asm_78e47
@@ -1091,7 +1091,7 @@ CallWithTurnFlipped: ; 79155 (1e:5155)
 AnimationFlashScreenLong: ; 79165 (1e:5165)
 	ld a,3 ; cycle through the palettes 3 times
 	ld [wd08a],a
-	ld a,[wcf1b] ; running on SGB?
+	ld a,[wOnSGB] ; running on SGB?
 	and a
 	ld hl,FlashScreenLongMonochrome
 	jr z,.loop
@@ -1211,7 +1211,7 @@ Func_791f9: ; 791f9 (1e:51f9)
 	ld bc, $4040
 
 Func_791fc: ; 791fc (1e:51fc)
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, b
 	jr z, .asm_79204

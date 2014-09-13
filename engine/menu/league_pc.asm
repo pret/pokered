@@ -4,14 +4,14 @@ PKMNLeaguePC: ; 0x7657e
 	ld hl, wd730
 	set 6, [hl]
 	push hl
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	push af
 	ld a, [$ffD7]
 	push af
 	xor a
 	ld [$ffD7], a
 	ld [W_SPRITEFLIPPED], a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld [wTrainerScreenX], a
 	ld [wcd42], a
 	ld a, [wd5a2]
@@ -40,7 +40,7 @@ PKMNLeaguePC: ; 0x7657e
 	pop af
 	ld [$ffD7], a
 	pop af
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	pop hl
 	res 6, [hl]
 	call GBPalWhiteOutWithDelay3

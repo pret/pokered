@@ -11,10 +11,10 @@ EmotionBubble: ; 17c47 (5:7c47)
 	ld hl, vChars1 + $780
 	ld bc, (BANK(EmotionBubblesPointerTable) << 8) + $04
 	call CopyVideoData
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	push af
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, [wd736]
 	bit 6, a
 	ld hl, wOAMBuffer + $8f
@@ -51,7 +51,7 @@ EmotionBubble: ; 17c47 (5:7c47)
 	ld c, $3c
 	call DelayFrames
 	pop af
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call DelayFrame
 	jp UpdateSprites
 

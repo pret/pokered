@@ -507,8 +507,8 @@ ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld a,[wd700]
-	ld [wd11a],a
+	ld a,[wWalkBikeSurfState]
+	ld [wWalkBikeSurfStateCopy],a
 	cp a,2 ; is the player surfing?
 	jp z,ItemUseNotTime
 	dec a ; is player already bicycling?
@@ -516,7 +516,7 @@ ItemUseBicycle: ; d977 (3:5977)
 .getOffBike
 	call ItemUseReloadOverworldData
 	xor a
-	ld [wd700],a ; change player state to walking
+	ld [wWalkBikeSurfState],a ; change player state to walking
 	call PlayDefaultMusic ; play walking music
 	ld hl,GotOffBicycleText
 	jr .printText
@@ -527,7 +527,7 @@ ItemUseBicycle: ; d977 (3:5977)
 	xor a ; no keys pressed
 	ld [hJoyHeld],a ; current joypad state
 	inc a
-	ld [wd700],a ; change player state to bicycling
+	ld [wWalkBikeSurfState],a ; change player state to bicycling
 	ld hl,GotOnBicycleText
 	call PlayDefaultMusic ; play bike riding music
 .printText
@@ -535,8 +535,8 @@ ItemUseBicycle: ; d977 (3:5977)
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard: ; d9b4 (3:59b4)
-	ld a,[wd700]
-	ld [wd11a],a
+	ld a,[wWalkBikeSurfState]
+	ld [wWalkBikeSurfStateCopy],a
 	cp a,2 ; is the player already surfing?
 	jr z,.tryToStopSurfing
 .tryToSurf
@@ -550,7 +550,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld hl,wd730
 	set 7,[hl]
 	ld a,2
-	ld [wd700],a ; change player state to surfing
+	ld [wWalkBikeSurfState],a ; change player state to surfing
 	call PlayDefaultMusic ; play surfing music
 	ld hl,SurfingGotOnText
 	jp PrintText
@@ -570,7 +570,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl now points to passable tiles
-	ld a,[wcfc6] ; tile in front of the player
+	ld a,[wTileInFrontOfPlayer] ; tile in front of the player
 	ld b,a
 .passableTileLoop
 	ld a,[hli]
@@ -586,7 +586,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld hl,wd730
 	set 7,[hl]
 	xor a
-	ld [wd700],a ; change player state to walking
+	ld [wWalkBikeSurfState],a ; change player state to walking
 	dec a
 	ld [wJoyIgnore],a
 	call PlayDefaultMusic ; play walking music
@@ -636,7 +636,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,$05 ; evolution stone party menu
 	ld [wd07d],a
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	pop bc
 	jr c,.canceledItemUse
@@ -681,7 +681,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,$01
 	ld [wd07d],a ; item use party menu
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,[wd152]
 	and a ; using Softboiled?
 	jr z,.notUsingSoftboiled
@@ -1096,7 +1096,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	dec a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call RedrawPartyMenu ; redraws the party menu and displays the message
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -1278,7 +1278,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wccd4],a
 	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	pop af
 	ld [wcf91],a
 	pop af
@@ -1424,8 +1424,8 @@ ItemUseXAccuracy: ; e013 (3:6013)
 ItemUseCardKey: ; e022 (3:6022)
 	xor a
 	ld [wd71f],a
-	call Func_c586
-	ld a,[Func_c586] ; $4586
+	call GetTileAndCoordsInFrontOfPlayer
+	ld a,[GetTileAndCoordsInFrontOfPlayer] ; $4586
 	cp a,$18
 	jr nz,.next0
 	ld hl,CardKeyTable1
@@ -1796,7 +1796,7 @@ RodResponse: ; e28d (3:628d)
 	ld [W_CUROPPONENT], a
 
 .next
-	ld hl, wd700
+	ld hl, wWalkBikeSurfState
 	ld a, [hl] ; store the value in a
 	push af
 	push hl
@@ -1818,7 +1818,7 @@ FishingInit: ; e2b4 (3:62b4)
 .notInBattle
 	call IsNextTileShoreOrWater
 	ret c
-	ld a,[wd700]
+	ld a,[wWalkBikeSurfState]
 	cp a,2 ; Surfing?
 	jr z,.surfing
 	call ItemUseReloadOverworldData
@@ -1877,7 +1877,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld [wWhichTrade],a
 .chooseMon
 	xor a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,$01 ; item use party menu
 	ld [wd07d],a
 	call DisplayPartyMenu
@@ -2117,7 +2117,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld bc,14
 	call CopyData
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,$03 ; teach TM/HM party menu
 	ld [wd07d],a
 	call DisplayPartyMenu
@@ -2744,7 +2744,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 	jr nc, .notShoreOrWater
 	ld a, [W_CURMAPTILESET]
 	cp SHIP_PORT ; Vermilion Dock tileset
-	ld a, [wcfc6] ; tile in front of player
+	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
 	cp $48 ; eastern shore tile in Safari Zone
 	jr z, .shoreOrWater

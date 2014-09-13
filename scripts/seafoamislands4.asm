@@ -33,7 +33,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	jr .asm_465ed ; 0x465da $11
 .asm_465dc
 	ld a, $a2
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call Func_46981
 	ld a, [wd732]

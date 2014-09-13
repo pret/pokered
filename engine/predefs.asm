@@ -71,19 +71,19 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef FlagActionPredef
 	add_predef HideObject
 	add_predef IsObjectHidden
-	add_predef Func_c69c
+	add_predef ApplyOutOfBattlePoisonDamage
 	add_predef AnyPartyAlive
 	add_predef ShowObject
 	add_predef ShowObject2
 	add_predef Func_ee9e
 	add_predef InitPlayerData2
-	add_predef Func_c754
+	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef IsItemInBag_ ; 1C, used in Pokémon Tower
 	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
-	add_predef Func_480eb
+	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
 	add_predef Func_480ff
 	add_predef CalcPositionOfPlayerRelativeToNPC
@@ -105,7 +105,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef PlayIntro
 	add_predef Func_79869
 	add_predef FlashScreen
-	add_predef Func_c586
+	add_predef GetTileAndCoordsInFrontOfPlayer
 	add_predef StatusScreen
 	add_predef StatusScreen2
 	add_predef Func_410e2
@@ -140,9 +140,9 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
 	dbw $1E, _LeaveMapAnim ; wrong bank
-	dbw $1E, Func_70510 ; wrong bank
-	add_predef Func_c5be
-	add_predef Func_c60b
+	dbw $1E, EnterMapAnim ; wrong bank
+	add_predef GetTileTwoStepsInFrontOfPlayer
+	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt
 	add_predef PickupItem
 	add_predef Func_27d98

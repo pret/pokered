@@ -1,13 +1,13 @@
 Func_46981: ; 46981 (11:6981)
 	xor a
-	ld [wd71e], a
+	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
 	bit 4, a
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wWhichTrade] ; wWhichTrade
-	ld [wd71e], a
+	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
 	ld hl, wd732

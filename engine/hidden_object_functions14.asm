@@ -1,7 +1,7 @@
 PrintNotebookText: ; 52996 (14:6996)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, [wTrainerSpriteOffset]
 	jp PrintPredefTextID
 

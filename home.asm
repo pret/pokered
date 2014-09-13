@@ -173,7 +173,7 @@ LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld b,0
 	add hl,bc
 	ld bc,4
-	ld de,wd35f
+	ld de,wCurrentTileBlockMapViewPointer
 	call CopyData
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -1464,7 +1464,7 @@ INCLUDE "home/audio.asm"
 
 
 UpdateSprites:: ; 2429 (0:2429)
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	dec a
 	ret nz
 	ld a, [H_LOADEDROMBANK]
@@ -1607,18 +1607,18 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld l,a ; hl = map text pointer
 	ld d,$00
 	ld a,[$ff8c] ; text ID
-	ld [wcf13],a
+	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
-	cp a,$d3 ; safari game over
+	cp a,$d3
 	jp z,DisplaySafariGameOverText
-	cp a,$d0 ; fainted
+	cp a,$d0
 	jp z,DisplayPokemonFaintedText
-	cp a,$d1 ; blacked out
+	cp a,$d1
 	jp z,DisplayPlayerBlackedOutText
-	cp a,$d2 ; repel wore off
+	cp a,$d2
 	jp z,DisplayRepelWoreOffText
-	ld a,[W_NUMSPRITES] ; number of sprites
+	ld a,[W_NUMSPRITES]
 	ld e,a
 	ld a,[$ff8c] ; sprite ID
 	cp e
@@ -1678,7 +1678,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jr AfterDisplayingTextID
 .notSpecialCase
 	call Func_3c59 ; display the text
-	ld a,[wcc3c]
+	ld a,[wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz,HoldTextDisplayOpen
 
@@ -1723,13 +1723,13 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld hl,wcfc4
 	res 0,[hl]
 	ld a,[wd732]
-	bit 3,a
+	bit 3,a ; used fly warp
 	call z,LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	jp UpdateSprites ; move sprites
+	jp UpdateSprites
 
 DisplayPokemartDialogue:: ; 2a2e (0:2a2e)
 	push hl
@@ -1757,7 +1757,7 @@ PokemartGreetingText:: ; 2a55 (0:2a55)
 
 LoadItemList:: ; 2a5a (0:2a5a)
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,h
 	ld [wd128],a
 	ld a,l
@@ -1805,7 +1805,7 @@ DisplayPlayerBlackedOutText:: ; 2aa9 (0:2aa9)
 	ld hl,PlayerBlackedOutText
 	call PrintText
 	ld a,[wd732]
-	res 5,a
+	res 5,a ; reset forced to use bike bit
 	ld [wd732],a
 	jp HoldTextDisplayOpen
 
@@ -2616,7 +2616,7 @@ ChooseFlyDestination:: ; 30a9 (0:30a9)
 ; causes the text box to close without waiting for a button press after displaying text
 DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 	ld a,$01
-	ld [wcc3c],a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a
 	ret
 
 ; uses an item
@@ -2872,11 +2872,11 @@ TalkToTrainer:: ; 31cc (0:31cc)
 ; checks if any trainers are seeing the player and wanting to fight
 CheckFightingMapTrainers:: ; 3219 (0:3219)
 	call CheckForEngagingTrainers
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $ff
 	jr nz, .trainerEngaging
 	xor a
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
@@ -2900,7 +2900,7 @@ Func_324c:: ; 324c (0:324c)
 	and $1
 	ret nz
 	ld [wJoyIgnore], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 
@@ -2939,7 +2939,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	call IsInArray              ; search for sprite ID
 	inc hl
 	ld a, [hl]
@@ -3006,7 +3006,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 .trainerLoop
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
 	ld a, [de]
-	ld [wcf13], a                     ; store trainer flag's bit
+	ld [wSpriteIndex], a                     ; store trainer flag's bit
 	ld [wTrainerHeaderFlagBit], a
 	cp $ff
 	ret z
@@ -3028,7 +3028,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld a, [hl]                       ; read trainer engage distance
 	pop hl
 	ld [wTrainerEngageDistance], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	predef TrainerEngage
@@ -3059,11 +3059,11 @@ PreBattleSaveRegisters:: ; 3354 (0:3354)
 	ret
 
 ; loads data of some trainer on the current map and plays pre-battle music
-; [wcf13]: sprite ID of trainer who is engaged
+; [wSpriteIndex]: sprite ID of trainer who is engaged
 EngageMapTrainer:: ; 336a (0:336a)
 	ld hl, W_MAPSPRITEEXTRADATA
 	ld d, $0
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	dec a
 	add a
 	ld e, a
@@ -4708,9 +4708,9 @@ DisableAutoTextBoxDrawing:: ; 3c3f (0:3c3f)
 	ld a,$01
 
 AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
-	ld [wcf0c],a ; control text box drawing
+	ld [wAutoTextBoxDrawingControl],a
 	xor a
-	ld [wcc3c],a ; make DisplayTextID wait for button press
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a ; make DisplayTextID wait for button press
 	ret
 
 PrintText:: ; 3c49 (0:3c49)
@@ -5015,7 +5015,7 @@ IsInRestOfArray::
 RestoreScreenTilesAndReloadTilePatterns:: ; 3dbe (0:3dbe)
 	call ClearSprites
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call ReloadMapSpriteTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
@@ -5052,7 +5052,7 @@ GBPalWhiteOut::
 GoPAL_SET_CF1C:: ; 3ded (0:3ded)
 	ld b,$ff
 GoPAL_SET:: ; 3def (0:3def)
-	ld a,[wcf1b]
+	ld a,[wOnSGB]
 	and a
 	ret z
 	predef_jump Func_71ddf

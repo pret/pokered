@@ -2,8 +2,8 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 	ld a,$04 ; hardcoded Bank, not sure what's it refers to
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a ; ROM bank 4
-	ld a,[wd700] ; walking/biking/surfing
-	ld [wd11a],a
+	ld a,[wWalkBikeSurfState] ; walking/biking/surfing
+	ld [wWalkBikeSurfStateCopy],a
 	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
 	call PlaySound
 

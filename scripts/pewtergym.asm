@@ -128,7 +128,7 @@ PewterGymText1: ; 5c44e (17:444e)
 	ld de, PewterGymText_5c4bc
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1

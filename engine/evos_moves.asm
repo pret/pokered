@@ -127,7 +127,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
 	callab Func_7bde9
 	jp c, CancelledEvolution

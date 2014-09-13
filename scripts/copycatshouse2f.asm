@@ -16,7 +16,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	bit 0, a
 	jr nz, .asm_7ccf3 ; 0x5cc88
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CopycatsHouse2FText_5ccd4
 	call PrintText
 	ld b, POKE_DOLL

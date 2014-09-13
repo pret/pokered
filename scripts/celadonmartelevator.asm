@@ -9,13 +9,13 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	res 7, [hl]
 	call nz, CeladonMartElevatorScript_48654
 	xor a
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	inc a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
-	ld hl, wd3af
+	ld hl, wWarpEntries
 	ld a, [wd73b]
 	ld b, a
 	ld a, [wd73c]

@@ -149,7 +149,7 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	ld de, FightingDojoText_5ce93
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3

@@ -8,8 +8,8 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ret z
 	cp b
 	jr nz, .asm_5267a
-	predef Func_c586
-	ld a, [wcfc6]
+	predef GetTileAndCoordsInFrontOfPlayer
+	ld a, [wTileInFrontOfPlayer]
 	cp $18
 	jr z, .asm_5269c
 	cp $24

@@ -83,7 +83,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld a, $9c
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $3
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ld hl, wd790
@@ -152,7 +152,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld l, a
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
 
@@ -334,7 +334,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	jp PrintPredefTextID
 .asm_1eb8b
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $2e
 	call PrintPredefTextID
 	ld c, $20
@@ -363,7 +363,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ret
 .asm_1ebd2
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $2f
 	call PrintPredefTextID
 	ret

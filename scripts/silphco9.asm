@@ -164,9 +164,9 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText
 	predef HealParty
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call Delay3
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld hl, SilphCo9Text_5d8ea
 	call PrintText
 	jr .asm_b6e28 ; 0x5d8da

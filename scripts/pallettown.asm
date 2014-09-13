@@ -109,7 +109,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,1
-	ld [wcf13],a
+	ld [wSpriteIndex],a
 	xor a
 	ld [wNPCMovementScriptFunctionNum],a
 	ld a,1
@@ -171,7 +171,7 @@ PalletTownText1: ; 18f96 (6:4f96)
 	and a
 	jr nz,.next
 	ld a,1
-	ld [wcc3c],a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a
 	ld hl,OakAppearsText
 	jr .done
 .next

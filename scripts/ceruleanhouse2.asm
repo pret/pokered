@@ -1,8 +1,8 @@
 CeruleanHouse2Script: ; 74e09 (1d:4e09)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	dec a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 CeruleanHouse2TextPointers: ; 74e13 (1d:4e13)

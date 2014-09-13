@@ -19,13 +19,13 @@ SECTION "bank1",ROMX,BANK[$1]
 
 INCLUDE "data/facing.asm"
 
-Func_40b0::
+ResetStatusAndHalveMoneyOnBlackout::
 ; Reset player status on blackout.
 	xor a
 	ld [wBattleResult], a
-	ld [wd700], a
+	ld [wWalkBikeSurfState], a
 	ld [W_ISINBATTLE], a
-	ld [wd35d], a
+	ld [wMapPalOffset], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld [hJoyHeld], a
 	ld [wNPCMovementScriptPointerTableNum], a
@@ -578,7 +578,7 @@ TestBattle:
 	; When the battle ends,
 	; do it all again.
 	ld a, 1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jr .loop
 
@@ -597,19 +597,20 @@ INCLUDE "engine/menu/main_menu.asm"
 
 INCLUDE "engine/oak_speech.asm"
 
-Func_62ce: ; 62ce (1:62ce)
-	call Func_62ff
-	predef Func_c754
+SpecialWarpIn: ; 62ce (1:62ce)
+	call LoadSpecialWarpData
+	predef LoadTilesetHeader
 	ld hl,wd732
-	bit 2,[hl]
+	bit 2,[hl] ; dungeon warp or fly warp?
 	res 2,[hl]
 	jr z,.next
-	ld a,[wd71a]
+; if dungeon warp or fly warp
+	ld a,[wDestinationMap]
 	jr .next2
 .next
 	bit 1,[hl]
 	jr z,.next3
-	call Func_64ea
+	call EmptyFunc
 .next3
 	ld a,0
 .next2
@@ -620,125 +621,128 @@ Func_62ce: ; 62ce (1:62ce)
 	ld a,b
 .next4
 	ld hl,wd732
-	bit 4,[hl]
+	bit 4,[hl] ; dungeon warp?
 	ret nz
+; if not dungeon warp
 	ld [wLastMap],a
 	ret
 
-Func_62ff: ; 62ff (1:62ff)
+; gets the map ID, tile block map view pointer, tileset, and coordinates
+LoadSpecialWarpData: ; 62ff (1:62ff)
 	ld a, [wd72d]
 	cp BATTLE_CENTER
-	jr nz, .asm_6314
-	ld hl, BattleCenterSpec1 ; $6428
+	jr nz, .notBattleCenter
+	ld hl, BattleCenterSpec1
 	ld a, [$ffaa]
 	cp $2
-	jr z, .asm_6334
-	ld hl, BattleCenterSpec2 ; $6430
-	jr .asm_6334
-.asm_6314
+	jr z, .copyWarpData
+	ld hl, BattleCenterSpec2
+	jr .copyWarpData
+.notBattleCenter
 	cp TRADE_CENTER
-	jr nz, .asm_6326
-	ld hl, TradeCenterSpec1 ; $6438
+	jr nz, .notTradeCenter
+	ld hl, TradeCenterSpec1
 	ld a, [$ffaa]
 	cp $2
-	jr z, .asm_6334
-	ld hl, TradeCenterSpec2 ; $6440
-	jr .asm_6334
-.asm_6326
+	jr z, .copyWarpData
+	ld hl, TradeCenterSpec2
+	jr .copyWarpData
+.notTradeCenter
 	ld a, [wd732]
 	bit 1, a
-	jr nz, .asm_6346
+	jr nz, .notFirstMap
 	bit 2, a
-	jr nz, .asm_6346
-	ld hl, FirstMapSpec ; $6420
-.asm_6334
-	ld de, W_CURMAP ; W_CURMAP
+	jr nz, .notFirstMap
+	ld hl, FirstMapSpec
+.copyWarpData
+	ld de, W_CURMAP
 	ld c, $7
-.asm_6339
+.copyWarpDataLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_6339
+	jr nz, .copyWarpDataLoop
 	ld a, [hli]
-	ld [W_CURMAPTILESET], a ; W_CURMAPTILESET
+	ld [W_CURMAPTILESET], a
 	xor a
-	jr .asm_63b3
-.asm_6346
+	jr .done
+.notFirstMap
 	ld a, [wLastMap]
 	ld hl, wd732
-	bit 4, [hl]
-	jr nz, .asm_635b
-	bit 6, [hl]
+	bit 4, [hl] ; used dungeon warp (jumped down hole/waterfall)?
+	jr nz, .usedDunegonWarp
+	bit 6, [hl] ; return to last pokemon center (or player's house)?
 	res 6, [hl]
-	jr z, .asm_638e
+	jr z, .otherDestination
+; return to last pokemon center or player's house
 	ld a, [wLastBlackoutMap]
-	jr .asm_6391
-.asm_635b
+	jr .usedFlyWarp
+.usedDunegonWarp
 	ld hl, wd72d
 	res 4, [hl]
-	ld a, [wd71d]
+	ld a, [wDungeonWarpDestinationMap]
 	ld b, a
-	ld [W_CURMAP], a ; W_CURMAP
-	ld a, [wd71e]
+	ld [W_CURMAP], a
+	ld a, [wWhichDungeonWarp]
 	ld c, a
-	ld hl, DungeonWarpList ; $63bf
+	ld hl, DungeonWarpList
 	ld de, $0
 	ld a, $6
 	ld [wd12f], a
-.asm_6376
+.dungeonWarpListLoop
 	ld a, [hli]
 	cp b
-	jr z, .asm_637d
+	jr z, .matchedDungeonWarpDestinationMap
 	inc hl
-	jr .asm_6381
-.asm_637d
+	jr .nextDungeonWarp
+.matchedDungeonWarpDestinationMap
 	ld a, [hli]
 	cp c
-	jr z, .asm_6388
-.asm_6381
+	jr z, .matchedDungeonWarpID
+.nextDungeonWarp
 	ld a, [wd12f]
 	add e
 	ld e, a
-	jr .asm_6376
-.asm_6388
-	ld hl, DungeonWarpData ; $63d8
+	jr .dungeonWarpListLoop
+.matchedDungeonWarpID
+	ld hl, DungeonWarpData
 	add hl, de
-	jr .asm_63a4
-.asm_638e
-	ld a, [wd71a]
-.asm_6391
+	jr .copyWarpData2
+.otherDestination
+	ld a, [wDestinationMap]
+.usedFlyWarp
 	ld b, a
-	ld [W_CURMAP], a ; W_CURMAP
-	ld hl, FlyWarpDataPtr ; $6448
-.asm_6398
+	ld [W_CURMAP], a
+	ld hl, FlyWarpDataPtr
+.flyWarpDataPtrLoop
 	ld a, [hli]
 	inc hl
 	cp b
-	jr z, .asm_63a1
+	jr z, .foundFlyWarpMatch
 	inc hl
 	inc hl
-	jr .asm_6398
-.asm_63a1
+	jr .flyWarpDataPtrLoop
+.foundFlyWarpMatch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.asm_63a4
-	ld de, wd35f
+.copyWarpData2
+	ld de, wCurrentTileBlockMapViewPointer
 	ld c, $6
-.asm_63a9
+.copyWarpDataLoop2
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_63a9
-	xor a
-	ld [W_CURMAPTILESET], a ; W_CURMAPTILESET
-.asm_63b3
-	ld [wd4e2], a
-	ld [wd4e3], a
-	ld a, $ff
-	ld [wd42f], a
+	jr nz, .copyWarpDataLoop2
+	xor a ; OVERWORLD
+	ld [W_CURMAPTILESET], a
+.done
+	ld [wYOffsetSinceLastSpecialWarp], a
+	ld [wXOffsetSinceLastSpecialWarp], a
+	ld a, $ff ; the player's coordinates have already been updated using a special warp, so don't use any of the normal warps
+	ld [wDestinationWarpID], a
 	ret
 
 INCLUDE "data/special_warps.asm"
@@ -774,7 +778,7 @@ IshiharaTeam: ; 64df (1:64df)
 	db ARTICUNO,57
 	db $FF
 
-Func_64ea: ; 64ea (1:64ea)
+EmptyFunc: ; 64ea (1:64ea)
 	ret
 
 INCLUDE "engine/menu/naming_screen.asm"
@@ -989,7 +993,7 @@ SafariZoneRestHouses:
 DisplayTextIDInit: ; 7096 (1:7096)
 	xor a
 	ld [wListMenuID],a
-	ld a,[wcf0c]
+	ld a,[wAutoTextBoxDrawingControl]
 	bit 0,a
 	jr nz,.skipDrawingTextBoxBorder
 	ld a,[$ff8c] ; text ID (or sprite ID)
@@ -2005,7 +2009,7 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld hl, wPokedexSeen
 	predef FlagActionPredef
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 
@@ -2023,7 +2027,7 @@ Func_c335: ; c335 (3:4335)
 	ld [rWY], a ; $ff4a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld [wd13b], a
+	ld [wStepCounter], a
 	ld [W_LONEATTACKNO], a ; W_GYMLEADERNO
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
@@ -2038,36 +2042,37 @@ Func_c335: ; c335 (3:4335)
 	call FillMemory
 	ret
 
-Func_c35f: ; c35f (3:435f)
-	ld a, [wd3ae]
+; only used for setting bit 2 of wd736 upon entering a new map
+IsPlayerStandingOnWarp: ; c35f (3:435f)
+	ld a, [wNumberOfWarps]
 	and a
 	ret z
 	ld c, a
-	ld hl, wd3af
-.asm_c368
-	ld a, [W_YCOORD] ; wd361
+	ld hl, wWarpEntries
+.loop
+	ld a, [W_YCOORD]
 	cp [hl]
-	jr nz, .asm_c383
+	jr nz, .nextWarp1
 	inc hl
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	cp [hl]
-	jr nz, .asm_c384
+	jr nz, .nextWarp2
 	inc hl
-	ld a, [hli]
-	ld [wd42f], a
-	ld a, [hl]
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld a, [hli] ; target warp
+	ld [wDestinationWarpID], a
+	ld a, [hl] ; target map
+	ld [$ff8b], a
 	ld hl, wd736
-	set 2, [hl]
+	set 2, [hl] ; standing on warp flag
 	ret
-.asm_c383
+.nextWarp1
 	inc hl
-.asm_c384
+.nextWarp2
 	inc hl
 	inc hl
 	inc hl
 	dec c
-	jr nz, .asm_c368
+	jr nz, .loop
 	ret
 
 CheckForceBikeOrSurf: ; c38b (3:438b)
@@ -2107,8 +2112,8 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 	ld hl, wd732
 	set 5, [hl]
 	ld a, $1
-	ld [wd700], a
-	ld [wd11a], a
+	ld [wWalkBikeSurfState], a
+	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
 .incorrectMap
 	inc hl
@@ -2117,30 +2122,30 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 	jr .loop
 .forceSurfing
 	ld a, $2
-	ld [wd700], a
-	ld [wd11a], a
+	ld [wWalkBikeSurfState], a
+	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
 
 INCLUDE "data/force_bike_surf.asm"
 
-Func_c3ff: ; c3ff (3:43ff)
+IsPlayerFacingEdgeOfMap: ; c3ff (3:43ff)
 	push hl
 	push de
 	push bc
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
 	srl a
 	ld c, a
 	ld b, $0
-	ld hl, PointerTable_c422 ; $4422
+	ld hl, .functionPointerTable
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [W_YCOORD] ; wd361
+	ld a, [W_YCOORD]
 	ld b, a
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld c, a
-	ld de, .asm_c41e ; $441e
+	ld de, .asm_c41e
 	push de
 	jp [hl]
 .asm_c41e
@@ -2149,34 +2154,34 @@ Func_c3ff: ; c3ff (3:43ff)
 	pop hl
 	ret
 
-PointerTable_c422: ; c422 (3:4422)
-	dw .asm_c42a
-	dw .asm_4434
-	dw .asm_443A
-	dw .asm_4440
+.functionPointerTable
+	dw .facingDown
+	dw .facingUp
+	dw .facingLeft
+	dw .facingRight
 
-.asm_c42a
-	ld a, [W_CURMAPHEIGHT] ; wd368
+.facingDown
+	ld a, [W_CURMAPHEIGHT]
 	add a
 	dec a
 	cp b
 	jr z, .setCarry
 	jr .resetCarry
 
-.asm_4434
+.facingUp
 	ld a, b
 	and a
 	jr z, .setCarry
 	jr .resetCarry
 
-.asm_443A
+.facingLeft
 	ld a, c
 	and a
 	jr z, .setCarry
 	jr .resetCarry
 
-.asm_4440
-	ld a, [W_CURMAPWIDTH] ; wd369
+.facingRight
+	ld a, [W_CURMAPWIDTH]
 	add a
 	dec a
 	cp c
@@ -2189,71 +2194,71 @@ PointerTable_c422: ; c422 (3:4422)
 	scf
 	ret
 
-Func_c44e: ; c44e (3:444e)
+IsWarpTileInFrontOfPlayer: ; c44e (3:444e)
 	push hl
 	push de
 	push bc
-	call Func_c589
-	ld a, [W_CURMAP] ; W_CURMAP
+	call _GetTileAndCoordsInFrontOfPlayer
+	ld a, [W_CURMAP]
 	cp SS_ANNE_5
 	jr z, .ssAnne5
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
 	srl a
 	ld c, a
-	ld b, $0
-	ld hl, .pointerTable_c477 ; $4477
+	ld b, 0
+	ld hl, .warpTileListPointers
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	ld de, $1
 	call IsInArray
-.asm_c473
+.done
 	pop bc
 	pop de
 	pop hl
 	ret
 
-.pointerTable_c477: ; c477 (3:4477)
-	dw .arrayData_c47f
-	dw .arrayData_c487
-	dw .arrayData_c48a
-	dw .arrayData_c48d
+.warpTileListPointers: ; c477 (3:4477)
+	dw .facingDownWarpTiles
+	dw .facingUpWarpTiles
+	dw .facingLeftWarpTiles
+	dw .facingRightWarpTiles
 
-.arrayData_c47f
+.facingDownWarpTiles
 	db $01,$12,$17,$3D,$04,$18,$33,$FF
 
-.arrayData_c487
+.facingUpWarpTiles
 	db $01,$5C,$FF
 
-.arrayData_c48a
+.facingLeftWarpTiles
 	db $1A,$4B,$FF
 
-.arrayData_c48d
+.facingRightWarpTiles
 	db $0F,$4E,$FF
 
 .ssAnne5
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	cp $15
-	jr nz, .asm_c49a
+	jr nz, .notSSAnne5Warp
 	scf
-	jr .asm_c473
-.asm_c49a
+	jr .done
+.notSSAnne5Warp
 	and a
-	jr .asm_c473
+	jr .done
 
-Func_c49d: ; c49d (3:449d)
+IsPlayerStandingOnDoorTileOrWarpTile: ; c49d (3:449d)
 	push hl
 	push de
 	push bc
-	callba IsPlayerStandingOnDoor
-	jr c, .asm_c4c8
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	callba IsPlayerStandingOnDoorTile
+	jr c, .done
+	ld a, [W_CURMAPTILESET]
 	add a
 	ld c, a
 	ld b, $0
-	ld hl, WarpTileIDPointers ; $44cc
+	ld hl, WarpTileIDPointers
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -2261,10 +2266,10 @@ Func_c49d: ; c49d (3:449d)
 	ld de, $1
 	aCoord 8, 9
 	call IsInArray
-	jr nc, .asm_c4c8
+	jr nc, .done
 	ld hl, wd736
 	res 2, [hl]
-.asm_c4c8
+.done
 	pop bc
 	pop de
 	pop hl
@@ -2310,223 +2315,237 @@ SafariSteps: ; c579 (3:4579)
 SafariBallText: ; c57e (3:457e)
 	db "BALL×× @"
 
-Func_c586: ; c586 (3:4586)
+GetTileAndCoordsInFrontOfPlayer: ; c586 (3:4586)
 	call GetPredefRegisters
 
-Func_c589: ; c589 (3:4589)
-	ld a, [W_YCOORD] ; wd361
+_GetTileAndCoordsInFrontOfPlayer: ; c589 (3:4589)
+	ld a, [W_YCOORD]
 	ld d, a
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld e, a
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	and a
-	jr nz, .asm_c59d
+	jr nz, .notFacingDown
+; facing down
 	aCoord 8, 11
 	inc d
-	jr .asm_c5b9
-.asm_c59d
-	cp $4
-	jr nz, .asm_c5a7
+	jr .storeTile
+.notFacingDown
+	cp SPRITE_FACING_UP
+	jr nz, .notFacingUp
+; facing up
 	aCoord 8, 7
 	dec d
-	jr .asm_c5b9
-.asm_c5a7
-	cp $8
-	jr nz, .asm_c5b1
+	jr .storeTile
+.notFacingUp
+	cp SPRITE_FACING_LEFT
+	jr nz, .notFacingLeft
+; facing left
 	aCoord 6, 9
 	dec e
-	jr .asm_c5b9
-.asm_c5b1
-	cp $c
-	jr nz, .asm_c5b9
+	jr .storeTile
+.notFacingLeft
+	cp SPRITE_FACING_RIGHT
+	jr nz, .storeTile
+; facing right
 	aCoord 10, 9
 	inc e
-.asm_c5b9
+.storeTile
 	ld c, a
-	ld [wcfc6], a
+	ld [wTileInFrontOfPlayer], a
 	ret
 
-Func_c5be: ; c5be (3:45be)
+GetTileTwoStepsInFrontOfPlayer: ; c5be (3:45be)
 	xor a
 	ld [$ffdb], a
-	ld hl, W_YCOORD ; wd361
+	ld hl, W_YCOORD
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	and a
-	jr nz, .asm_c5d8
+	jr nz, .notFacingDown
+; facing down
 	ld hl, $ffdb
 	set 0, [hl]
 	aCoord 8, 13
 	inc d
-	jr .asm_c603
-.asm_c5d8
-	cp $4
-	jr nz, .asm_c5e7
+	jr .storeTile
+.notFacingDown
+	cp SPRITE_FACING_UP
+	jr nz, .notFacingUp
+; facing up
 	ld hl, $ffdb
 	set 1, [hl]
 	aCoord 8, 5
 	dec d
-	jr .asm_c603
-.asm_c5e7
-	cp $8
-	jr nz, .asm_c5f6
+	jr .storeTile
+.notFacingUp
+	cp SPRITE_FACING_LEFT
+	jr nz, .notFacingLeft
+; facing left
 	ld hl, $ffdb
 	set 2, [hl]
 	aCoord 4, 9
 	dec e
-	jr .asm_c603
-.asm_c5f6
-	cp $c
-	jr nz, .asm_c603
+	jr .storeTile
+.notFacingLeft
+	cp SPRITE_FACING_RIGHT
+	jr nz, .storeTile
+; facing right
 	ld hl, $ffdb
 	set 3, [hl]
 	aCoord 12, 9
 	inc e
-.asm_c603
+.storeTile
 	ld c, a
-	ld [wd71c], a
-	ld [wcfc6], a
+	ld [wTileInFrontOfBoulderAndBoulderCollisionResult], a
+	ld [wTileInFrontOfPlayer], a
 	ret
 
-Func_c60b: ; c60b (3:460b)
-	call Func_c5be
+CheckForCollisionWhenPushingBoulder: ; c60b (3:460b)
+	call GetTileTwoStepsInFrontOfPlayer
 	ld hl, W_TILESETCOLLISIONPTR
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.asm_c614
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_c632
+	jr z, .done ; if the tile two steps ahead is not passable
 	cp c
-	jr nz, .asm_c614
-	ld hl, $c7e
-	call Func_c44
+	jr nz, .loop
+	ld hl, TilePairCollisionsLand
+	call CheckForTilePairCollisions2
 	ld a, $ff
-	jr c, .asm_c632
-	ld a, [wd71c]
-	cp $15
+	jr c, .done ; if there is an elevation difference between the current tile and the one two steps ahead
+	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
+	cp $15 ; stairs tile
 	ld a, $ff
-	jr z, .asm_c632
-	call Func_c636
-.asm_c632
-	ld [wd71c], a
+	jr z, .done ; if the tile two steps ahead is stairs
+	call CheckForBoulderCollisionWithSprites
+.done
+	ld [wTileInFrontOfBoulderAndBoulderCollisionResult], a
 	ret
 
-Func_c636: ; c636 (3:4636)
-	ld a, [wd718]
+; sets a to $ff if there is a collision and $00 if there is no collision
+CheckForBoulderCollisionWithSprites: ; c636 (3:4636)
+	ld a, [wBoulderSpriteIndex]
 	dec a
 	swap a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	ld hl, wSpriteStateData2 + $14
 	add hl, de
-	ld a, [hli]
+	ld a, [hli] ; map Y position
 	ld [$ffdc], a
-	ld a, [hl]
+	ld a, [hl] ; map X position
 	ld [$ffdd], a
-	ld a, [W_NUMSPRITES] ; W_NUMSPRITES
+	ld a, [W_NUMSPRITES]
 	ld c, a
 	ld de, $f
 	ld hl, wSpriteStateData2 + $14
 	ld a, [$ffdb]
-	and $3
-	jr z, .asm_c678
-.asm_c659
+	and $3 ; facing up or down?
+	jr z, .pushingHorizontallyLoop
+.pushingVerticallyLoop
 	inc hl
 	ld a, [$ffdd]
 	cp [hl]
-	jr nz, .asm_c672
+	jr nz, .nextSprite1 ; if X coordinates don't match
 	dec hl
 	ld a, [hli]
 	ld b, a
 	ld a, [$ffdb]
 	rrca
-	jr c, .asm_c66c
+	jr c, .pushingDown
+; pushing up
 	ld a, [$ffdc]
 	dec a
-	jr .asm_c66f
-.asm_c66c
+	jr .compareYCoords
+.pushingDown
 	ld a, [$ffdc]
 	inc a
-.asm_c66f
+.compareYCoords
 	cp b
-	jr z, .asm_c697
-.asm_c672
+	jr z, .failure
+.nextSprite1
 	dec c
-	jr z, .asm_c69a
+	jr z, .success
 	add hl, de
-	jr .asm_c659
-.asm_c678
+	jr .pushingVerticallyLoop
+.pushingHorizontallyLoop
 	ld a, [hli]
 	ld b, a
 	ld a, [$ffdc]
 	cp b
-	jr nz, .asm_c691
+	jr nz, .nextSprite2
 	ld b, [hl]
 	ld a, [$ffdb]
 	bit 2, a
-	jr nz, .asm_c68b
+	jr nz, .pushingLeft
+; pushing right
 	ld a, [$ffdd]
 	inc a
-	jr .asm_c68e
-.asm_c68b
+	jr .compareXCoords
+.pushingLeft
 	ld a, [$ffdd]
 	dec a
-.asm_c68e
+.compareXCoords
 	cp b
-	jr z, .asm_c697
-.asm_c691
+	jr z, .failure
+.nextSprite2
 	dec c
-	jr z, .asm_c69a
+	jr z, .success
 	add hl, de
-	jr .asm_c678
-.asm_c697
+	jr .pushingHorizontallyLoop
+.failure
 	ld a, $ff
 	ret
-.asm_c69a
+.success
 	xor a
 	ret
 
-Func_c69c: ; c69c (3:469c)
+ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	ld a, [wd730]
 	add a
-	jp c, .asm_c74f
-	ld a, [wPartyCount] ; wPartyCount
+	jp c, .noBlackOut
+	ld a, [wPartyCount]
 	and a
-	jp z, .asm_c74f
-	call Func_c8de
-	ld a, [wd13b]
-	and $3
-	jp nz, .asm_c74f
-	ld [wWhichPokemon], a ; wWhichPokemon
-	ld hl, wPartyMon1Status ; wPartyMon1Status
-	ld de, wPartySpecies ; wPartySpecies
-.asm_c6be
+	jp z, .noBlackOut
+	call IncrementDayCareMonExp
+	ld a, [wStepCounter]
+	and $3 ; is the counter a multiple of 4?
+	jp nz, .noBlackOut ; only apply poison damage every fourth step
+	ld [wWhichPokemon], a
+	ld hl, wPartyMon1Status
+	ld de, wPartySpecies
+.applyDamageLoop
 	ld a, [hl]
-	and $8
-	jr z, .asm_c6fd
+	and (1 << PSN)
+	jr z, .nextMon2 ; not poisoned
 	dec hl
 	dec hl
 	ld a, [hld]
 	ld b, a
 	ld a, [hli]
 	or b
-	jr z, .asm_c6fb
+	jr z, .nextMon ; already fainted
+; subtract 1 from HP
 	ld a, [hl]
 	dec a
 	ld [hld], a
 	inc a
-	jr nz, .asm_c6d5
+	jr nz, .noBorrow
+; borrow 1 from upper byte of HP
 	dec [hl]
 	inc hl
-	jr .asm_c6fb
-.asm_c6d5
+	jr .nextMon
+.noBorrow
 	ld a, [hli]
 	or [hl]
-	jr nz, .asm_c6fb
+	jr nz, .nextMon ; didn't faint from damage
+; the mon fainted from the damage
 	push hl
 	inc hl
 	inc hl
@@ -2534,134 +2553,134 @@ Func_c69c: ; c69c (3:469c)
 	ld a, [de]
 	ld [wd11e], a
 	push de
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	xor a
 	ld [wJoyIgnore], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [$ff8c], a
 	call DisplayTextID
 	pop de
 	pop hl
-.asm_c6fb
+.nextMon
 	inc hl
 	inc hl
-.asm_c6fd
+.nextMon2
 	inc de
 	ld a, [de]
 	inc a
-	jr z, .asm_c70e
-	ld bc, $2c
+	jr z, .applyDamageLoopDone
+	ld bc, wPartyMon2 - wPartyMon1
 	add hl, bc
 	push hl
-	ld hl, wWhichPokemon ; wWhichPokemon
+	ld hl, wWhichPokemon
 	inc [hl]
 	pop hl
-	jr .asm_c6be
-.asm_c70e
-	ld hl, wPartyMon1Status ; wPartyMon1Status
-	ld a, [wPartyCount] ; wPartyCount
+	jr .applyDamageLoop
+.applyDamageLoopDone
+	ld hl, wPartyMon1Status
+	ld a, [wPartyCount]
 	ld d, a
-	ld e, $0
-.asm_c717
+	ld e, 0
+.countPoisonedLoop
 	ld a, [hl]
-	and $8
+	and (1 << PSN)
 	or e
 	ld e, a
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	add hl, bc
 	dec d
-	jr nz, .asm_c717
+	jr nz, .countPoisonedLoop
 	ld a, e
-	and a
-	jr z, .asm_c733
+	and a ; are any party members poisoned?
+	jr z, .skipPoisonEffectAndSound
 	ld b, $2
-	predef Func_480eb
+	predef ChangeBGPalColor0_4Frames ; change BG white to dark grey for 4 frames
 	ld a, (SFX_02_43 - SFX_Headers_02) / 3
 	call PlaySound
-.asm_c733
+.skipPoisonEffectAndSound
 	predef AnyPartyAlive
 	ld a, d
 	and a
-	jr nz, .asm_c74f
+	jr nz, .noBlackOut
 	call EnableAutoTextBoxDrawing
 	ld a, $d1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, wd72e
 	set 5, [hl]
 	ld a, $ff
-	jr .asm_c750
-.asm_c74f
+	jr .done
+.noBlackOut
 	xor a
-.asm_c750
+.done
 	ld [wd12d], a
 	ret
 
-Func_c754: ; c754 (3:4754)
+LoadTilesetHeader: ; c754 (3:4754)
 	call GetPredefRegisters
 	push hl
-	ld d, $0
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld d, 0
+	ld a, [W_CURMAPTILESET]
 	add a
 	add a
 	ld b, a
 	add a
-	add b
-	jr nc, .asm_c765
+	add b ; a = tileset * 12
+	jr nc, .noCarry
 	inc d
-.asm_c765
+.noCarry
 	ld e, a
 	ld hl, Tilesets
 	add hl, de
 	ld de, W_TILESETBANK
 	ld c, $b
-.asm_c76f
+.copyTilesetHeaderLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_c76f
+	jr nz, .copyTilesetHeaderLoop
 	ld a, [hl]
 	ld [$ffd7], a
 	xor a
 	ld [$ffd8], a
 	pop hl
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_CURMAPTILESET]
 	push hl
 	push de
-	ld hl, DungeonTilesets ; $47b2
+	ld hl, DungeonTilesets
 	ld de, $1
 	call IsInArray
 	pop de
 	pop hl
 	jr c, .asm_c797
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_CURMAPTILESET]
 	ld b, a
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+	ld a, [$ff8b]
 	cp b
-	jr z, .asm_c7b1
+	jr z, .done
 .asm_c797
-	ld a, [wd42f]
+	ld a, [wDestinationWarpID]
 	cp $ff
-	jr z, .asm_c7b1
+	jr z, .done
 	call LoadDestinationWarpPosition
-	ld a, [W_YCOORD] ; wd361
+	ld a, [W_YCOORD]
 	and $1
-	ld [W_YBLOCKCOORD], a ; wd363
-	ld a, [W_XCOORD] ; wd362
+	ld [W_YBLOCKCOORD], a
+	ld a, [W_XCOORD]
 	and $1
-	ld [W_XBLOCKCOORD], a ; wd364
-.asm_c7b1
+	ld [W_XBLOCKCOORD], a
+.done
 	ret
 
 INCLUDE "data/dungeon_tilesets.asm"
 
 INCLUDE "data/tileset_headers.asm"
 
-Func_c8de: ; c8de (3:48de)
+IncrementDayCareMonExp: ; c8de (3:48de)
 	ld a, [W_DAYCARE_IN_USE]
 	and a
 	ret z
@@ -3073,9 +3092,9 @@ Func_ee9e: ; ee9e (3:6e9e)
 	add hl, bc
 	ld a, [wd09f]
 	ld [hl], a
-	ld a, [wd35f]
+	ld a, [wCurrentTileBlockMapViewPointer]
 	ld c, a
-	ld a, [wd360]
+	ld a, [wCurrentTileBlockMapViewPointer + 1]
 	ld b, a
 	call Func_ef4e
 	ret c
@@ -3399,7 +3418,7 @@ TryPushingBoulder: ; f225 (3:7225)
 	ld [$ff8c], a
 	call IsSpriteInFrontOfPlayer
 	ld a, [$ff8c]
-	ld [wd718], a
+	ld [wBoulderSpriteIndex], a
 	and a
 	jp z, ResetBoulderPushFlags
 	ld hl, wSpriteStateData1 + 1
@@ -3420,9 +3439,9 @@ TryPushingBoulder: ; f225 (3:7225)
 	ld a, [hJoyHeld]
 	and $f0
 	ret z
-	predef Func_c60b
-	ld a, [wd71c]
-	and a
+	predef CheckForCollisionWhenPushingBoulder
+	ld a, [wTileInFrontOfBoulderAndBoulderCollisionResult]
+	and a ; was there a collision?
 	jp nz, ResetBoulderPushFlags
 	ld a, [hJoyHeld]
 	ld b, a
@@ -3481,8 +3500,8 @@ DoBoulderDustAnimation: ; f2b5 (3:72b5)
 	ld [wJoyIgnore], a
 	call ResetBoulderPushFlags
 	set 7, [hl]
-	ld a, [wd718]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld a, [wBoulderSpriteIndex]
+	ld [H_SPRITEINDEX], a
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3

@@ -286,16 +286,16 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ViridianGymText_74ad9
 	call PrintText
-	call GBFadeIn1
+	call GBFadeOutToBlack
 	ld a, $32
 	ld [wcc4d], a
 	predef HideObject
 	call UpdateSprites
 	call Delay3
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	jr .asm_6dff7 ; 0x74a9e
 .asm_6de66 ; 0x74aa0
 	ld hl, ViridianGymText_74ace
@@ -307,7 +307,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	ld de, ViridianGymText_74ad3
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $8

@@ -1,8 +1,8 @@
 Museum1FScript: ; 5c0f7 (17:40f7)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Museum1FScriptPointers
 	ld a, [W_MUSEUM1FCURSCRIPT]
 	jp CallFunctionInTable

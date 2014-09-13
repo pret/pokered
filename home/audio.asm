@@ -17,7 +17,7 @@ Func_2312:: ; 2312 (0:2312)
 	ld c, $8
 	ld d, c
 asm_2324:: ; 2324 (0:2324)
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_2343
 	cp $2

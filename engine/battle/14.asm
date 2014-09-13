@@ -15,7 +15,7 @@ Func_525af: ; 525af (14:65af)
 	ld [wPartyGainExpFlags], a
 	ld [wPlayerMonNumber], a ; wPlayerMonNumber
 	ld [wEscapedFromBattle], a
-	ld [wd35d], a
+	ld [wMapPalOffset], a
 	ld hl, wcf1d
 	ld [hli], a
 	ld [hl], a

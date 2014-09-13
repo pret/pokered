@@ -570,13 +570,13 @@ Func_577d: ; 577d (1:577d)
 	xor a
 	ld [wd72d], a
 	dec a
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	call LoadMapData
 	callba Func_c335
 	pop hl
 	pop af
 	ld [hl], a
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ret
 
 Func_57a2:

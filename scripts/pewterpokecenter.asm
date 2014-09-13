@@ -18,7 +18,7 @@ PewterPokecenterText2: ; 5c596 (17:4596)
 PewterPokecenterText3: ; 5c59b (17:459b)
 	db $8
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, PewterPokecenterText5
 	call PrintText
 	ld a, $ff

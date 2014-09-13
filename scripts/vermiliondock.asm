@@ -5,7 +5,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	jr nz, .asm_1db8d ; 0x1db5a $31
 	bit 0, [hl]
 	ret z
-	ld a, [wd42f]
+	ld a, [wDestinationWarpID]
 	cp $1
 	ret nz
 	bit 2, [hl]
@@ -75,7 +75,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld d, $0
 	ld e, $8
 .asm_1dbfa
@@ -111,14 +111,14 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, $90
 	ld [hVBlankWY], a
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	pop hl
 	pop bc
 	ld [hl], b
 	dec hl
 	ld [hl], c
 	call LoadPlayerSpriteGraphics
-	ld hl, wd3ae
+	ld hl, wNumberOfWarps
 	dec [hl]
 	ret
 

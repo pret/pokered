@@ -64,7 +64,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_19512 ; 0x19508 $8
 	ld a, $ff
@@ -279,7 +279,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	ld de, CeruleanCityText_196ee
 	call PreBattleSaveRegisters
 	ld a, [$ff8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4
@@ -296,7 +296,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	jr .Done
 .Success
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ReceivedTM28Text
 	call PrintText
 	callba Func_74872

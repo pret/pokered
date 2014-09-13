@@ -105,7 +105,7 @@ rLCDC_DEFAULT EQU %11100011
 	xor a
 	ld [$ffbc], a
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 
 	predef PlayIntro
 

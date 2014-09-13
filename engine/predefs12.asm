@@ -1,13 +1,14 @@
-Func_480eb: ; 480eb (12:40eb)
+; b = new colour for BG colour 0 (usually white) for 4 frames
+ChangeBGPalColor0_4Frames: ; 480eb (12:40eb)
 	call GetPredefRegisters
-	ld a, [rBGP] ; $ff47
+	ld a, [rBGP]
 	or b
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	ld c, $4
 	call DelayFrames
-	ld a, [rBGP] ; $ff47
-	and $fc
-	ld [rBGP], a ; $ff47
+	ld a, [rBGP]
+	and %11111100
+	ld [rBGP], a
 	ret
 
 Func_480ff: ; 480ff (12:40ff)

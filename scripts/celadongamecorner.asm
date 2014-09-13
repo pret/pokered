@@ -236,7 +236,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, wd77e
 	set 2, [hl]
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Received10CoinsText
 	jr .asm_c7d1a ; 0x48d87
 .asm_d0957 ; 0x48d89
@@ -411,7 +411,7 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	ld de, CeladonGameCornerText_48ed3
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -437,7 +437,7 @@ CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 CeladonGameCornerText12: ; 48edd (12:4edd)
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
 	call PrintText
 	call WaitForSoundToFinish

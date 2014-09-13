@@ -58,7 +58,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	ld a, $a
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
-	call GBFadeIn1
+	call GBFadeOutToBlack
 	ld a, $83
 	ld [wcc4d], a
 	predef HideObject
@@ -66,7 +66,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	ld [wcc4d], a
 	predef ShowObject
 	call UpdateSprites
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, wd126
@@ -132,7 +132,7 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	ld de, RocketHideout4Text_4557f
 	call PreBattleSaveRegisters
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

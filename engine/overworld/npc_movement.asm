@@ -1,7 +1,7 @@
 PlayerStepOutFromDoor: ; 1a3e0 (6:63e0)
 	ld hl, wd730
 	res 1, [hl]
-	call IsPlayerStandingOnDoor
+	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
 	ld a, $fc
 	ld [wJoyIgnore], a
@@ -62,7 +62,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	ld a, $80
 	call FillMemory
 	ld [hl], $ff
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld de, wNPCMovementDirections2
 	call MoveSprite
@@ -100,18 +100,18 @@ Func_1a4a1: ; 1a4a1 (6:64a1)
 Func_1a4a6: ; 1a4a6 (6:64a6)
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEList_1a4e9
+	ld de, RLEList_PlayerWalkToLab
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld hl, wNPCMovementDirections2
-	ld de, RLEList_1a4dc
+	ld de, RLEList_ProfOakWalkToLab
 	call DecodeRLEList
 	ld hl, wd72e
 	res 7, [hl]
@@ -121,7 +121,7 @@ Func_1a4a6: ; 1a4a6 (6:64a6)
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
 
-RLEList_1a4dc: ; 1a4dc (6:64dc)
+RLEList_ProfOakWalkToLab: ; 1a4dc (6:64dc)
 	db $00, $05
 	db $80, $01
 	db $00, $05
@@ -130,7 +130,7 @@ RLEList_1a4dc: ; 1a4dc (6:64dc)
 	db $E0, $01
 	db $FF
 
-RLEList_1a4e9: ; 1a4e9 (6:64e9)
+RLEList_PlayerWalkToLab: ; 1a4e9 (6:64e9)
 	db D_UP, $02
 	db D_RIGHT, $03
 	db D_DOWN, $05
@@ -162,7 +162,7 @@ Func_1a514: ; 1a514 (6:6514)
 	ld a, MUSIC_MUSEUM_GUY
 	ld [wc0ee], a
 	call PlaySound
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	call StartSimulatingJoypadStates
@@ -218,7 +218,7 @@ Func_1a581: ; 1a581 (6:6581)
 	ld a, MUSIC_MUSEUM_GUY
 	ld [wc0ee], a
 	call PlaySound
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	xor a
@@ -276,7 +276,7 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 	ret z
 	jr .loop
 .notRival
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp SetSpriteMovementBytesToFF
 
