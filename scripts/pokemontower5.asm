@@ -9,7 +9,7 @@ PokemonTower5Script: ; 60932 (18:4932)
 
 PokemonTower5ScriptPointers: ; 60945 (18:4945)
 	dw PokemonTower5Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 PokemonTower5Script0: ; 6094b (18:494b)

@@ -16,11 +16,11 @@ homecall: MACRO
 	push af
 	ld a, BANK(\1)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call \1
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	ENDM
 
 callba: MACRO

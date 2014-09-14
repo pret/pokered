@@ -17,11 +17,11 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld a, $1d
 	ld [wd09f], a
 	ld bc, $604
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
 	dw VictoryRoad1Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 VictoryRoad1Script0: ; 5da40 (17:5a40)

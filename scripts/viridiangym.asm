@@ -24,7 +24,7 @@ ViridianGymScript_748d6: ; 748d6 (1d:48d6)
 
 ViridianGymScriptPointers: ; 748e1 (1d:48e1)
 	dw ViridianGymScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw ViridianGymScript3
 	dw ViridianGymScript4
@@ -35,7 +35,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	ld a, [W_XCOORD] ; wd362
 	ld c, a
 	ld hl, ViridianGymArrowTilePlayerMovement
-	call Func_3442
+	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	call StartSimulatingJoypadStates
@@ -305,7 +305,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	set 7, [hl]
 	ld hl, ViridianGymText_74ad3
 	ld de, ViridianGymText_74ad3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

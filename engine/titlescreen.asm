@@ -26,7 +26,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	xor a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [$ffae], a
 	ld a, $40
 	ld [$ffaf], a

@@ -22,14 +22,14 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $403
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_5653e: ; 5653e (15:653e)
 	db $04,$03,$FF
 
 SilphCo8Script_56541: ; 56541 (15:6541)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -53,7 +53,7 @@ SilphCo8Script_56541: ; 56541 (15:6541)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_5654d
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -73,7 +73,7 @@ SilphCo8Script_5656d: ; 5656d (15:656d)
 
 SilphCo8ScriptPointers: ; 56577 (15:6577)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo8TextPointers: ; 5657d (15:657d)

@@ -34,7 +34,7 @@ Mansion3Script_52204: ; 52204 (14:6204)
 
 Mansion3ScriptPointers: ; 52235 (14:6235)
 	dw Mansion3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Mansion3Script0: ; 5223b (14:623b)

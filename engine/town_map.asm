@@ -64,7 +64,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	ld bc, $10
 	call CopyData
 .asm_70ec8
-	call Func_716c6
+	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
 	ld a, [$ffb5]
 	ld b, a
@@ -77,9 +77,9 @@ Func_70e92: ; 70e92 (1c:4e92)
 	bit 7, b
 	jr nz, .asm_70f01
 	xor a
-	ld [wd09b], a
+	ld [wTownMapSpriteBlinkingEnabled], a
 	ld [$ffb7], a
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	ld [wTownMapSpriteBlinkingCounter], a
 	call Func_711ab
 	pop hl
 	pop af
@@ -213,7 +213,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	set 7, [hl]
 .asm_71037
 	xor a
-	ld [wd09b], a
+	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOutWithDelay3
 	pop hl
 	pop af
@@ -319,9 +319,9 @@ LoadTownMap: ; 7109b (1c:509b)
 	call Delay3
 	call GBPalNormal
 	xor a
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	ld [wTownMapSpriteBlinkingCounter], a
 	inc a
-	ld [wd09b], a
+	ld [wTownMapSpriteBlinkingEnabled], a
 	ret
 
 CompressedMap: ; 71100 (1c:5100)
@@ -330,7 +330,7 @@ CompressedMap: ; 71100 (1c:5100)
 
 Func_711ab: ; 711ab (1c:51ab)
 	xor a
-	ld [wd09b], a
+	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOut
 	call ClearScreen
 	call ClearSprites
@@ -570,29 +570,30 @@ INCLUDE "text/map_names.asm"
 MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
 
-Func_716c6: ; 716c6 (1c:56c6)
-	ld a, [W_SUBANIMTRANSFORM] ; W_SUBANIMTRANSFORM
+TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
+	ld a, [wTownMapSpriteBlinkingCounter]
 	inc a
-	cp $19
-	jr z, .asm_716e1
-	cp $32
-	jr nz, .asm_716f1
+	cp 25
+	jr z, .hideSprites
+	cp 50
+	jr nz, .done
+; show sprites when the counter reaches 50
 	ld hl, wTileMapBackup
 	ld de, wOAMBuffer
 	ld bc, $90
 	call CopyData
 	xor a
-	jr .asm_716f1
-.asm_716e1
+	jr .done
+.hideSprites
 	ld hl, wOAMBuffer
 	ld b, $24
 	ld de, $4
-.asm_716e9
+.hideSpritesLoop
 	ld [hl], $a0
 	add hl, de
 	dec b
-	jr nz, .asm_716e9
-	ld a, $19
-.asm_716f1
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	jr nz, .hideSpritesLoop
+	ld a, 25
+.done
+	ld [wTownMapSpriteBlinkingCounter], a
 	jp DelayFrame

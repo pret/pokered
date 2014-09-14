@@ -16,7 +16,7 @@ PokemonTower6Script_60b02: ; 60b02 (18:4b02)
 
 PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
 	dw PokemonTower6Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw PokemonTower6Script3
 	dw PokemonTower6Script4

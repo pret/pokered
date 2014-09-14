@@ -376,9 +376,9 @@ UpdateMovingBgTiles::
 ; Animate water and flower
 ; tiles in the overworld.
 
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	and a
-	ret z
+	ret z ; no animations if indoors (or if a menu set this to 0)
 
 	ld a, [$ffd8]
 	inc a
@@ -412,9 +412,10 @@ UpdateMovingBgTiles::
 	dec c
 	jr nz, .left
 .done
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	rrca
 	ret nc
+; if in a cave, no flower animations
 	xor a
 	ld [$ffd8], a
 	ret

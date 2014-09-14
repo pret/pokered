@@ -16,7 +16,7 @@ PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 
 PokemonTower7ScriptPointers: ; 60d23 (18:4d23)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw PokemonTower7Script2
 	dw PokemonTower7Script3
 	dw PokemonTower7Script4

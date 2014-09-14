@@ -404,10 +404,10 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call GoPAL_SET
 	pop af
 	ld [wd11e],a
-	ld a,[$ffd7]
+	ld a,[hTilesetType]
 	push af
 	xor a
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	hlCoord 0, 0
 	ld de,1
 	ld bc,$6414
@@ -554,7 +554,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	and a,%00000011 ; A button and B button
 	jr z,.waitForButtonPress
 	pop af
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	call GBPalWhiteOut
 	call ClearScreen
 	call GoPAL_SET_CF1C

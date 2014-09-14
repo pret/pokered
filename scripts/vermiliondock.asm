@@ -66,7 +66,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld [$ff49], a
 	ld a, $58
 	ld [wTrainerEngageDistance], a
-	ld hl, wd526
+	ld hl, wMapViewVRAMPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -82,9 +82,9 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld hl, $0002
 	add hl, bc
 	ld a, l
-	ld [wd526], a
+	ld [wMapViewVRAMPointer], a
 	ld a, h
-	ld [wd527], a
+	ld [wMapViewVRAMPointer + 1], a
 	push hl
 	push de
 	call ScheduleEastColumnRedraw

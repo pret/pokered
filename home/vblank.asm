@@ -29,7 +29,7 @@ VBlank::
 	call $ff80 ; hOAMDMA
 	ld a, Bank(PrepareOAMData)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call PrepareOAMData
 
 	; VBlank-sensitive operations end.
@@ -54,7 +54,7 @@ VBlank::
 
 	ld a, [wc0ef] ; music ROM bank
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	cp BANK(Music2_UpdateMusic)
 	jr nz, .notbank2
@@ -72,7 +72,7 @@ VBlank::
 	call Music1f_UpdateMusic
 .afterMusic
 
-	callba Func_18dee ; keep track of time played
+	callba TrackPlayTime ; keep track of time played
 
 	ld a, [$fff9]
 	and a
@@ -80,7 +80,7 @@ VBlank::
 
 	ld a, [wd122]
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	pop hl
 	pop de

@@ -9,7 +9,7 @@ MtMoon1Script: ; 499c8 (12:59c8)
 
 MtMoon1ScriptPointers: ; 499db (12:59db)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 MtMoon1TextPointers: ; 499e1 (12:59e1)

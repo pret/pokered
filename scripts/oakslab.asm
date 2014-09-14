@@ -378,7 +378,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	call GetSpritePosition1
 	ld hl, OaksLabText_1d3be
 	ld de, OaksLabText_1d3c3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]

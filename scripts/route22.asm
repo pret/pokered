@@ -128,7 +128,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText1
 	ld de, Route22Text_511bc
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a
 	ld hl, StarterMons_50faf ; $4faf
@@ -270,7 +270,7 @@ Route22Script4: ; 51087 (14:5087)
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText2 ; $51cb
 	ld de, Route22Text_511d0 ; $51d0
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; wd059
 	ld hl, StarterMons_510d9 ; $50d9

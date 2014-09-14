@@ -25,7 +25,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 .asm_761ab
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 LoreleiScript_761b6: ; 761b6 (1d:61b6)
 	xor a
@@ -34,7 +34,7 @@ LoreleiScript_761b6: ; 761b6 (1d:61b6)
 
 LoreleiScriptPointers: ; 761bb (1d:61bb)
 	dw LoreleiScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw LoreleiScript2
 	dw LoreleiScript3
 	dw LoreleiScript4

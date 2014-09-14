@@ -60,7 +60,7 @@ SafariZoneCheckSteps: ; 1e997 (7:6997)
 	ld [wSafariSteps + 1], a ; wd70e
 asm_1e9ab: ; 1e9ab (7:69ab)
 	xor a
-	ld [wda46], a
+	ld [wSafariZoneGameOver], a
 	ret
 asm_1e9b0: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
@@ -89,7 +89,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld hl, wd790
 	set 6, [hl]
 	ld a, $1
-	ld [wda46], a
+	ld [wSafariZoneGameOver], a
 	ret
 
 PrintSafariGameOverText: ; 1e9ed (7:69ed)
@@ -291,7 +291,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 .asm_1eb38
 	pop bc
 	ld [wd09f], a
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	ld hl, $ffdb
 	dec [hl]
 	jr nz, .asm_1eb0e

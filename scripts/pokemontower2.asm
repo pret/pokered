@@ -130,7 +130,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 	set 7, [hl]
 	ld hl, PokemonTower2Text_60632
 	ld de, PokemonTower2Text_60637 ; XXX $4637
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a
 

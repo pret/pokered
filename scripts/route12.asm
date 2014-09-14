@@ -16,7 +16,7 @@ Route12Script_59606: ; 59606 (16:5606)
 
 Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route12Script3
 

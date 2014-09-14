@@ -24,7 +24,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 BrunoScript_76302: ; 76302 (1d:6302)
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 BrunoScript_7630d: ; 7630d (1d:630d)
 	xor a
@@ -33,7 +33,7 @@ BrunoScript_7630d: ; 7630d (1d:630d)
 
 BrunoScriptPointers: ; 76312 (1d:6312)
 	dw BrunoScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw BrunoScript2
 	dw BrunoScript3
 	dw BrunoScript4

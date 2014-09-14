@@ -16,7 +16,7 @@ FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
 
 FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
 	dw FightingDojoScript1
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw FightingDojoScript3
 
@@ -147,7 +147,7 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	set 7, [hl]
 	ld hl, FightingDojoText_5ce93
 	ld de, FightingDojoText_5ce93
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

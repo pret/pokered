@@ -38,7 +38,7 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 
 Route25ScriptPointers: ; 51622 (14:5622)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route25TextPointers: ; 51628 (14:5628)

@@ -61,11 +61,11 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld a, Bank(WriteDMACodeToHRAM)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM
 
 	xor a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [$ff41], a
 	ld [$ffae], a
 	ld [$ffaf], a

@@ -500,15 +500,18 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wChangeBoxSavedMapTextPointer:: ; cd3d
+
 wFlyAnimUsingCoordList:: ; cd3d
 
 wPlayerSpinInPlaceAnimFrameDelay:: ; cd3d
 
 wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: ; cd3d
 
+wHiddenObjectFunctionArgument:: ; cd3d
+
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
-;	ds 1
 
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
@@ -519,6 +522,8 @@ wPlayerSpinInPlaceAnimFrameDelayDelta:: ; cd3e
 
 wPlayerSpinWhileMovingUpOrDownAnimMaxY:: ; cd3e
 
+wHiddenObjectFunctionRomBank:: ; cd3e
+
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 
@@ -528,14 +533,21 @@ wPlayerSpinInPlaceAnimFrameDelayEndValue:: ; cd3f
 
 wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: ; cd3f
 
+wHiddenObjectIndex:: ; cd3f
+
 wTrainerFacingDirection:: ; cd3f
 wcd3f::
 	ds 1
 
 wPlayerSpinInPlaceAnimSoundID:: ; cd40
 
+wHiddenObjectY:: ; cd40
+
 wTrainerScreenY:: ; cd40
 	ds 1
+
+wHiddenObjectX:: ; cd40
+
 wTrainerScreenX:: ; cd41
 	ds 1
 
@@ -992,6 +1004,8 @@ W_NUMFBTILES:: ; d089
 
 wd08a:: ds 1
 
+wTownMapSpriteBlinkingCounter:: ; d08b
+
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
 ; 01: flip horizontally and vertically
@@ -1000,18 +1014,15 @@ W_SUBANIMTRANSFORM:: ; d08b
 ; 04: reverse the subanimation
 	ds 1
 
-W_PBSTOREDREGISTERH:: ; d08c
-	ds 1
-W_PBSTOREDREGISTERL:: ; d08d
-	ds 1
-W_PBSTOREDREGISTERD:: ; d08e
-	ds 1
-W_PBSTOREDREGISTERE:: ; d08f
-	ds 1
+wEndBattleWinTextPointer:: ; d08c
+	ds 2
+
+wEndBattleLoseTextPointer:: ; d08e
+	ds 2
 
 	ds 2
 
-W_PBSTOREDROMBANK:: ; d092
+wEndBattleTextRomBank:: ; d092
 	ds 1
 
 	ds 1
@@ -1026,6 +1037,11 @@ W_SUBANIMSUBENTRYADDR:: ; d096
 	ds 2
 
 wd09a:: ds 1
+
+wTownMapSpriteBlinkingEnabled:: ; d09b
+; non-zero when enabled. causes nest locations to blink on and off.
+; the town selection cursor will blink regardless of what this value is
+
 wd09b:: ds 1
 
 W_FBDESTADDR:: ; d09c
@@ -1043,6 +1059,8 @@ W_FBMODE:: ; d09e
 ; for 2bpp sprites, pairs of two consecutive bytes (i.e. pairs of consecutive rows of sprite data)
 ; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
+
+wNewTileBlockID:: ; d09f
 
 wd09f:: ds 1
 wd0a0:: ds 1
@@ -1200,7 +1218,11 @@ wd131:: ds 1
 wd132:: ds 1
 wd133:: ds 6
 wd139:: ds 1
-wd13a:: ds 1
+
+wIgnoreInputCounter:: ; d13a
+; counts downward each frame
+; when it hits 0, bit 5 (ignore input bit) of wd730 is reset
+	ds 1
 
 wStepCounter:: ; d13b
 ; counts down once every step
@@ -1458,8 +1480,11 @@ W_MAPSPRITEEXTRADATA:: ; d504
 
 wd524:: ds 1
 wd525:: ds 1
-wd526:: ds 1
-wd527:: ds 1
+
+wMapViewVRAMPointer:: ; d526
+; the address of the upper left corner of the visible portion of the BG tile map in VRAM
+	ds 2
+
 wd528:: ds 1
 wd529:: ds 1
 wd52a:: ds 1
@@ -1816,6 +1841,9 @@ wd72d:: ds 1
 wd72e:: ds 2
 
 wd730::
+; bit 0: NPC sprite being moved by script
+; bit 5: ignore joypad input
+; bit 6: print text with no delay between each letter
 ; bit 7: set if joypad states are being simulated in the overworld
 	ds 1
 
@@ -1844,6 +1872,7 @@ wd734:: ds 2
 
 wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
+; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
 ; bit 6: jumping down a ledge
 	ds 1
@@ -1851,8 +1880,15 @@ wd736:: ; d736
 wd737:: ds 4
 wd73b:: ds 1
 wd73c:: ds 3
-wd73f:: ds 1
-wd740:: ds 3
+
+wCardKeyDoorY:: ; d73f
+	ds 1
+
+wCardKeyDoorX:: ; d740
+	ds 1
+
+	ds 2
+
 wd743:: ds 1
 wd744:: ds 3
 wd747:: ds 3
@@ -2028,7 +2064,8 @@ W_PLAYTIMESECONDS:: ; da44
 W_PLAYTIMEFRAMES:: ; da45
 	ds 1
 
-wda46:: ds 1
+wSafariZoneGameOver:: ; da46
+	ds 1
 
 W_NUMSAFARIBALLS:: ; da47
 	ds 1

@@ -34,7 +34,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	ld a, $2a
 	ld [wd09f], a
 	ld bc, $0208
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
@@ -409,7 +409,7 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	set 7, [hl]
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
@@ -449,7 +449,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, $43
 	ld [wd09f], a
 	ld bc, $0208
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)

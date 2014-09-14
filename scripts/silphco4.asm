@@ -23,7 +23,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0602
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_19d48
 	bit 1, a
@@ -31,14 +31,14 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0406
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 SilphCo4Data19d58: ; 19d58 (6:5d58)
 	db $06, $02, $04, $06, $ff
 
 SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -62,7 +62,7 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_19d69 ; 0x19d7c $eb
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -87,7 +87,7 @@ SilphCo4Script_19d89: ; 19d89 (6:5d89)
 
 SilphCo4ScriptPointers: ; 19d9a (6:5d9a)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo4TextPointers: ; 19da0 (6:5da0)

@@ -16,7 +16,7 @@ Route24Script_513c0: ; 513c0 (14:53c0)
 
 Route24ScriptPointers: ; 513cb (14:53cb)
 	dw Route24Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route24Script3
 	dw Route24Script4
@@ -169,7 +169,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	set 7, [hl]
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [$ff8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

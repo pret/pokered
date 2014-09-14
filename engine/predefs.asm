@@ -58,7 +58,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef ScaleSpriteByTwo
 	add_predef LoadMonBackPic
 	add_predef Func_79aba
-	add_predef Func_f132
+	add_predef LoadMissableObjects
 	add_predef HealParty
 	add_predef MoveAnimation; 08 play move animation
 	add_predef DivideBCDPredef
@@ -75,13 +75,13 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef AnyPartyAlive
 	add_predef ShowObject
 	add_predef ShowObject2
-	add_predef Func_ee9e
+	add_predef ReplaceTileBlock
 	add_predef InitPlayerData2
 	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef IsItemInBag_ ; 1C, used in Pokémon Tower
-	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
+	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
@@ -117,7 +117,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef WriteMonMoves
 	add_predef SaveSAV
 	add_predef LoadSGB
-	add_predef Func_f113
+	add_predef MarkTownVisitedAndLoadMissableObjects
 	add_predef SetPartyMonTypes
 	add_predef CanLearnTM
 	add_predef TMToMove

@@ -9,7 +9,7 @@ Route3Script: ; 554f8 (15:54f8)
 
 Route3ScriptPointers: ; 5550b (15:550b)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route3TextPointers: ; 55511 (15:5511)

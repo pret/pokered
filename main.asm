@@ -2021,12 +2021,12 @@ INCLUDE "data/map_songs.asm"
 
 INCLUDE "data/map_header_banks.asm"
 
-Func_c335: ; c335 (3:4335)
+ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld a, $90
 	ld [hVBlankWY], a
-	ld [rWY], a ; $ff4a
+	ld [rWY], a
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [wStepCounter], a
 	ld [W_LONEATTACKNO], a ; W_GYMLEADERNO
 	ld [hJoyPressed], a
@@ -2034,10 +2034,10 @@ Func_c335: ; c335 (3:4335)
 	ld [hJoyHeld], a
 	ld [wcd6a], a
 	ld [wd5a3], a
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 	ld bc, $1e
 	call FillMemory
 	ret
@@ -2509,7 +2509,7 @@ CheckForBoulderCollisionWithSprites: ; c636 (3:4636)
 ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	ld a, [wd730]
 	add a
-	jp c, .noBlackOut
+	jp c, .noBlackOut ; no black out if joypad states are being simulated
 	ld a, [wPartyCount]
 	and a
 	jp z, .noBlackOut
@@ -2644,7 +2644,7 @@ LoadTilesetHeader: ; c754 (3:4754)
 	dec c
 	jr nz, .copyTilesetHeaderLoop
 	ld a, [hl]
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	xor a
 	ld [$ffd8], a
 	pop hl
@@ -3068,10 +3068,14 @@ DrawBadges: ; ea03 (3:6a03)
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
 	INCBIN "gfx/badges.2bpp"
 
-Func_ee9e: ; ee9e (3:6e9e)
+; replaces a tile block with the one specified in [wNewTileBlockID]
+; and redraws the map view if necessary
+; b = Y
+; c = X
+ReplaceTileBlock: ; ee9e (3:6e9e)
 	call GetPredefRegisters
 	ld hl, wOverworldMap
-	ld a, [W_CURMAPWIDTH] ; wd369
+	ld a, [W_CURMAPWIDTH]
 	add $6
 	ld e, a
 	ld d, $0
@@ -3083,21 +3087,22 @@ Func_ee9e: ; ee9e (3:6e9e)
 	ld e, a
 	ld a, b
 	and a
-	jr z, .asm_eebb
-.asm_eeb7
+	jr z, .addX
+; add width * Y
+.addWidthYTimesLoop
 	add hl, de
 	dec b
-	jr nz, .asm_eeb7
-.asm_eebb
-	add hl, bc
-	ld a, [wd09f]
+	jr nz, .addWidthYTimesLoop
+.addX
+	add hl, bc ; add X
+	ld a, [wNewTileBlockID]
 	ld [hl], a
 	ld a, [wCurrentTileBlockMapViewPointer]
 	ld c, a
 	ld a, [wCurrentTileBlockMapViewPointer + 1]
 	ld b, a
-	call Func_ef4e
-	ret c
+	call CompareHLWithBC
+	ret c ; return if the replaced tile block is below the map view in memory
 	push hl
 	ld l, e
 	ld h, $0
@@ -3108,27 +3113,27 @@ Func_ee9e: ; ee9e (3:6e9e)
 	add hl, de
 	add hl, bc
 	pop bc
-	call Func_ef4e
-	ret c
+	call CompareHLWithBC
+	ret c ; return if the replaced tile block is above the map view in memory
 
-Func_eedc: ; eedc (3:6edc)
+RedrawMapView: ; eedc (3:6edc)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	inc a
 	ret z
-	ld a, [H_AUTOBGTRANSFERENABLED] ; $ffba
+	ld a, [H_AUTOBGTRANSFERENABLED]
 	push af
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	push af
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld [$ffd7], a
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
 	call GoPAL_SET_CF1C
-	ld hl, wd526
+	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, $ffc0
+	ld de, -2 * 32
 	add hl, de
 	ld a, h
 	and $3
@@ -3137,21 +3142,21 @@ Func_eedc: ; eedc (3:6edc)
 	ld [wHPBarMaxHP], a
 	ld a, h
 	ld [wHPBarMaxHP + 1], a
-	ld a, $2
+	ld a, 2
 	ld [$ffbe], a
-	ld c, $9
-.asm_ef0f
+	ld c, 9 ; number of rows of 2x2 tiles (this covers the whole screen)
+.redrawRowLoop
 	push bc
 	push hl
 	push hl
-	ld hl, wOAMBuffer + $78
-	ld de, $14
+	ld hl, wTileMap - 2 * 20
+	ld de, 20
 	ld a, [$ffbe]
 .asm_ef1a
 	add hl, de
 	dec a
 	jr nz, .asm_ef1a
-	call ScheduleRowRedrawHelper
+	call CopyToScreenEdgeTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
@@ -3163,11 +3168,11 @@ Func_eedc: ; eedc (3:6edc)
 	or $98
 	dec c
 	jr nz, .asm_ef28
-	ld [$ffd2], a
+	ld [H_SCREENEDGEREDRAWADDR + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a ; $ffd1
-	ld a, $2
-	ld [H_SCREENEDGEREDRAW], a ; $ffd0
+	ld [H_SCREENEDGEREDRAWADDR], a
+	ld a, REDRAWROW
+	ld [H_SCREENEDGEREDRAW], a
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]
@@ -3175,14 +3180,14 @@ Func_eedc: ; eedc (3:6edc)
 	pop hl
 	pop bc
 	dec c
-	jr nz, .asm_ef0f
+	jr nz, .redrawRowLoop
 	pop af
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-Func_ef4e: ; ef4e (3:6f4e)
+CompareHLWithBC: ; ef4e (3:6f4e)
 	ld a, h
 	sub b
 	ret nz
@@ -3192,8 +3197,8 @@ Func_ef4e: ; ef4e (3:6f4e)
 
 INCLUDE "engine/overworld/cut.asm"
 
-Func_f113: ; f113 (3:7113)
-	ld a, [W_CURMAP] ; W_CURMAP
+MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
+	ld a, [W_CURMAP]
 	cp ROUTE_1
 	jr nc, .notInTown
 	ld c, a
@@ -3202,15 +3207,16 @@ Func_f113: ; f113 (3:7113)
 	predef FlagActionPredef
 .notInTown
 	ld hl, MapHSPointers
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	ld b, $0
 	ld c, a
 	add hl, bc
 	add hl, bc
 	ld a, [hli]                ; load missable objects pointer in hl
 	ld h, [hl]
+	; fall through
 
-Func_f132: ; f132 (3:7132)
+LoadMissableObjects: ; f132 (3:7132)
 	ld l, a
 	push hl
 	ld de, MapHS00             ; calculate difference between out pointer and the base pointer

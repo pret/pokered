@@ -186,7 +186,7 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 	set 7, [hl]
 	ld hl, SSAnneRivalDefeatedText
 	ld de, SSAnneRivalWonText
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 
 SSAnneRivalBeforeBattleText: ; 61500 (18:5500)

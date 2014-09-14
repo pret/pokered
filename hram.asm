@@ -17,6 +17,9 @@ H_DOWNARROWBLINKCNT2 EQU $FF8C
 H_SPRITEDATAOFFSET EQU $FF8B
 H_SPRITEINDEX      EQU $FF8C
 
+; DisplayTextID's argument
+hSpriteIndexOrTextID EQU $FF8C
+
 ; Note: the following multiplication and division addresses are used for multiple purposes
 ; and so they overlap with each other
 
@@ -119,6 +122,12 @@ H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
 ; So, by setting it to a nonzero value and waiting for it to become 0 again,
 ; you can detect that the V-blank handler has run since then.
 H_VBLANKOCCURRED EQU $FFD6
+
+; 00 = indoor
+; 01 = cave
+; 02 = outdoor
+; this is often set to 00 in order to turn off water and flower BG tile animations
+hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 

@@ -9,7 +9,7 @@ Route13Script: ; 5581e (15:581e)
 
 Route13ScriptPointers: ; 55831 (15:5831)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route13TextPointers: ; 55837 (15:5837)

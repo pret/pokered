@@ -572,7 +572,7 @@ Func_577d: ; 577d (1:577d)
 	dec a
 	ld [wDestinationWarpID], a
 	call LoadMapData
-	callba Func_c335
+	callba ClearVariablesAfterLoadingMapData
 	pop hl
 	pop af
 	ld [hl], a

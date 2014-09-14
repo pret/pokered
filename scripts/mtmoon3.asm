@@ -47,7 +47,7 @@ MtMoon3Script_49d58: ; 49d58 (12:5d58)
 
 MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 	dw MtMoon3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw MtMoon3Script3
 	dw MtMoon3Script4
@@ -228,7 +228,7 @@ MtMoon3Text1: ; 49e79 (12:5e79)
 	set 7, [hl]
 	ld hl, MtMoon3Text_49f8a
 	ld de, MtMoon3Text_49f8a
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

@@ -9,7 +9,7 @@ RockTunnel1Script: ; 444dc (11:44dc)
 
 RockTunnel1ScriptPointers: ; 444ef (11:44ef)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 RockTunnel1TextPointers: ; 444f5 (11:44f5)

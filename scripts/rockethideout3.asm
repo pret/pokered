@@ -9,7 +9,7 @@ RocketHideout3Script: ; 45225 (11:5225)
 
 RocketHideout3ScriptPointers: ; 45238 (11:5238)
 	dw RocketHideout3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout3Script3
 
@@ -19,7 +19,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	ld a, [W_XCOORD]
 	ld c, a
 	ld hl, RocketHideout3ArrowTilePlayerMovement
-	call Func_3442
+	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	ld hl, wd736

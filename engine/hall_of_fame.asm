@@ -19,7 +19,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call FillMemory
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [W_SPRITEFLIPPED], a
 	ld [wd358], a
 	ld [wTrainerScreenY], a

@@ -2,26 +2,16 @@
 
 GBC EQU $11
 
-; MBC3
-MBC3SRamEnable EQU $0000
-MBC3RomBank    EQU $2000
-MBC3SRamBank   EQU $4000
-MBC3LatchClock EQU $6000
-MBC3RTC        EQU $a000
+; MBC1
+MBC1SRamEnable      EQU $0000
+MBC1RomBank         EQU $2000
+MBC1SRamBank        EQU $4000
+MBC1SRamBankingMode EQU $6000
 
 SRAM_DISABLE EQU $00
 SRAM_ENABLE  EQU $0a
 
 NUM_SRAM_BANKS EQU 4
-
-RTC_S  EQU $08 ; Seconds   0-59 (0-3Bh)
-RTC_M  EQU $09 ; Minutes   0-59 (0-3Bh)
-RTC_H  EQU $0a ; Hours     0-23 (0-17h)
-RTC_DL EQU $0b ; Lower 8 bits of Day Counter (0-FFh)
-RTC_DH EQU $0c ; Upper 1 bit of Day Counter, Carry Bit, Halt Flag
-        ; Bit 0  Most significant bit of Day Counter (Bit 8)
-        ; Bit 6  Halt (0=Active, 1=Stop Timer)
-        ; Bit 7  Day Counter Carry Bit (1=Counter Overflow)
 
 ; interrupt flags
 VBLANK   EQU 0

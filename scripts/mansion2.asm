@@ -40,7 +40,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 
 Mansion2Script_5202f: ; 5202f (14:602f)
 	ld [wd09f], a
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 Mansion2Script_Switches: ; 52037 (14:6037)
 	ld a, [wSpriteStateData1 + 9]
@@ -54,7 +54,7 @@ Mansion2Script_Switches: ; 52037 (14:6037)
 
 Mansion2ScriptPointers: ; 52047 (14:6047)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Mansion2TextPointers: ; 5204d (14:604d)

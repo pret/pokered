@@ -138,7 +138,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	callab EvolveTradeMon
 	call ClearScreen
 	call Func_71ca2
-	callba Func_eedc
+	callba RedrawMapView
 	and a
 	ld a,$3
 	jr .asm_ee803 ; 0x71c9b $1

@@ -31,7 +31,7 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 .asm_45498
 	ld [wd09f], a
 	ld bc, $050c
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 	xor a
@@ -42,7 +42,7 @@ RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 
 RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout4Script3
 
@@ -130,7 +130,7 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	set 7, [hl]
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

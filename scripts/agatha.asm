@@ -24,7 +24,7 @@ AgathaScript_76443: ; 76443 (1d:6443)
 AgathaScript_76459: ; 76459 (1d:6459)
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 AgathaScript_76464: ; 76464 (1d:6464)
 	xor a
@@ -33,7 +33,7 @@ AgathaScript_76464: ; 76464 (1d:6464)
 
 AgathaScriptPointers: ; 76469 (1d:6469)
 	dw AgathaScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw AgathaScript2
 	dw AgathaScript3
 	dw AgathaScript4

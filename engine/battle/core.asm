@@ -136,7 +136,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld [hVBlankWY], a
 	ld [rWY], a
 	xor a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [hVBlankSCY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
@@ -1015,7 +1015,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	call ScrollTrainerPicAfterBattle
 	ld c, $28
 	call DelayFrames
-	call Func_3381
+	call PrintEndBattleText
 	ld hl, MoneyForWinningText
 	call PrintText
 	ld de, wPlayerMoney + 2
@@ -6263,7 +6263,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hVBlankWY], a
 	ld [rWY], a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld hl, wd060
 	ld [hli], a
 	ld [hli], a
@@ -6851,7 +6851,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	pop af
 	ld [wMapPalOffset], a
 	ld a, [wd0d4]
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	scf
 	ret
 .emptyString

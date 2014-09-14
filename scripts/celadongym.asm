@@ -31,7 +31,7 @@ CeladonGymText_48943: ; 48943 (12:4943)
 
 CeladonGymScriptPointers: ; 4894e (12:494e)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw CeladonGymScript3
 
@@ -177,7 +177,7 @@ CeladonGymText1: ; 48a11 (12:4a11)
 	set 7, [hl]
 	ld hl, CeladonGymText_48a63
 	ld de, CeladonGymText_48a63
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

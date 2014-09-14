@@ -9,7 +9,7 @@ UnknownDungeon3Script: ; 45ef0 (11:5ef0)
 
 UnknownDungeon3ScriptPointers: ; 45f03 (11:5f03)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 UnknownDungeon3TextPointers: ; 45f09 (11:5f09)

@@ -9,7 +9,7 @@ RockTunnel2Script: ; 45feb (11:5feb)
 
 RockTunnel2ScriptPointers: ; 45ffe (11:5ffe)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 RockTunnel2TextPointers: ; 46004 (11:6004)

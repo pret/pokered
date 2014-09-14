@@ -9,7 +9,7 @@ RocketHideout2Script: ; 44e27 (11:4e27)
 
 RocketHideout2ScriptPointers: ; 44e3a (11:4e3a)
 	dw RocketHideout2Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout2Script3
 
@@ -19,7 +19,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 	ld a, [W_XCOORD]
 	ld c, a
 	ld hl, RocketHideout2ArrowTilePlayerMovement
-	call Func_3442
+	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	ld hl, wd736

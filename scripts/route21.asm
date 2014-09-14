@@ -9,7 +9,7 @@ Route21Script: ; 55eeb (15:5eeb)
 
 Route21ScriptPointers: ; 55efe (15:5efe)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route21TextPointers: ; 55f04 (15:5f04)

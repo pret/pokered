@@ -10,7 +10,7 @@ EnterMap::
 	ld a, $ff
 	ld [wJoyIgnore], a
 	call LoadMapData
-	callba Func_c335 ; initialize map variables
+	callba ClearVariablesAfterLoadingMapData
 	ld hl, wd72c
 	bit 0, [hl] ; has the player already made 3 steps since the last battle?
 	jr z, .skipGivingThreeStepsOfNoRandomBattles
@@ -20,14 +20,14 @@ EnterMap::
 	ld hl, wd72e
 	bit 5, [hl] ; did a battle happen immediately before this?
 	res 5, [hl] ; unset the "battle just happened" flag
-	call z, Func_12e7
+	call z, ResetUsingStrengthOutOfBattleBit
 	call nz, MapEntryAfterBattle
 	ld hl, wd732
 	ld a, [hl]
 	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jr z, .didNotEnterUsingFlyWarpOrDungeonWarp
 	res 3, [hl]
-	callba EnterMapAnim ; display fly/teleport in graphical effect
+	callba EnterMapAnim
 	call UpdateSprites
 .didNotEnterUsingFlyWarpOrDungeonWarp
 	callba CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
@@ -53,7 +53,7 @@ OverworldLoopLessDelay::
 	jp nz,.moveAhead ; if the player sprite has not yet completed the walking animation
 	call JoypadOverworld ; get joypad state (which is possibly simulated)
 	callba SafariZoneCheck
-	ld a,[wda46]
+	ld a,[wSafariZoneGameOver]
 	and a
 	jp nz,WarpFound2
 	ld hl,wd72d
@@ -78,7 +78,7 @@ OverworldLoopLessDelay::
 	jr z,.startButtonNotPressed
 ; if START is pressed
 	xor a
-	ld [$ff8c],a ; the $2920 ID for the start menu is 0
+	ld [hSpriteIndexOrTextID],a ; start menu text ID
 	jp .displayDialogue
 .startButtonNotPressed
 	bit 0,a ; A button
@@ -87,14 +87,14 @@ OverworldLoopLessDelay::
 	ld a,[wd730]
 	bit 2,a
 	jp nz,.noDirectionButtonsPressed
-	call Func_30fd
+	call IsPlayerCharacterBeingControlledByGame
 	jr nz,.checkForOpponent
-	call Func_3eb5 ; check for hidden items, PC's, etc.
+	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
 	ld a,[$ffeb]
 	and a
-	jp z,OverworldLoop
-	call IsSpriteOrSignInFrontOfPlayer ; check for sign or sprite in front of the player
-	ld a,[$ff8c] ; $2920 ID for NPC/sign text, if any
+	jp z,OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
+	call IsSpriteOrSignInFrontOfPlayer
+	ld a,[hSpriteIndexOrTextID]
 	and a
 	jp z,OverworldLoop
 .displayDialogue
@@ -293,7 +293,7 @@ OverworldLoopLessDelay::
 	bit 7,a ; in the safari zone?
 	jr z,.notSafariZone
 	callba SafariZoneCheckSteps
-	ld a,[wda46]
+	ld a,[wSafariZoneGameOver]
 	and a
 	jp nz,WarpFound2
 .notSafariZone
@@ -350,8 +350,8 @@ NewBattle:: ; 0683 (0:0683)
 	ld a,[wd72d]
 	bit 4,a
 	jr nz,.noBattle
-	call Func_30fd
-	jr nz,.noBattle
+	call IsPlayerCharacterBeingControlledByGame
+	jr nz,.noBattle ; no battle if the player character is under the game's control
 	ld a,[wd72e]
 	bit 4,a
 	jr nz,.noBattle
@@ -523,7 +523,7 @@ WarpFound2:: ; 073c (0:073c)
 .done
 	ld hl,wd736
 	set 0,[hl] ; have the player's sprite step out from the door (if there is one)
-	call Func_12da
+	call IgnoreInputForHalfSecond
 	jp EnterMap
 
 ContinueCheckWarpsNoCollisionLoop:: ; 07b5 (0:07b5)
@@ -747,7 +747,7 @@ HandleBlackOut::
 	res 5, [hl]
 	ld a, Bank(ResetStatusAndHalveMoneyOnBlackout) ; also Bank(SpecialWarpIn) and Bank(SpecialEnterMap)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call ResetStatusAndHalveMoneyOnBlackout
 	call SpecialWarpIn
 	call Func_2312
@@ -798,7 +798,7 @@ LoadPlayerSpriteGraphics::
 	dec a
 	jr z, .ridingBike
 
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	and a
 	jr nz, .determineGraphics
 	jr .startWalking
@@ -1058,11 +1058,11 @@ LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	ret
 
 ; function to check if there is a sign or sprite in front of the player
-; if so, it is stored in [$FF8C]
-; if not, [$FF8C] is set to 0
+; if so, it is stored in [hSpriteIndexOrTextID]
+; if not, [hSpriteIndexOrTextID] is set to 0
 IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	xor a
-	ld [$ff8c],a
+	ld [hSpriteIndexOrTextID],a
 	ld a,[wd4b0] ; number of signs in the map
 	and a
 	jr z,.extendRangeOverCounter
@@ -1092,7 +1092,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	dec c
 	add hl,bc
 	ld a,[hl]
-	ld [$ff8c],a ; store sign text ID
+	ld [hSpriteIndexOrTextID],a ; store sign text ID
 	pop bc
 	pop hl
 	ret
@@ -1113,7 +1113,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	jr nz,.counterTilesLoop
 
 ; part of the above function, but sometimes its called on its own, when signs are irrelevant
-; the caller must zero [$FF8C]
+; the caller must zero [hSpriteIndexOrTextID]
 IsSpriteInFrontOfPlayer:: ; 0b6b (0:0b6b)
 	ld d,$10 ; talking range in pixels (normal range)
 IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
@@ -1195,7 +1195,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld l,a
 	set 7,[hl]
 	ld a,e
-	ld [$ff8c],a ; store sprite ID
+	ld [hSpriteIndexOrTextID],a
 	ret
 
 ; function to check if the player will jump down a ledge and check if the tile ahead is passable (when not surfing)
@@ -1214,9 +1214,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	and d ; check if a sprite is in the direction the player is trying to go
 	jr nz,.collision
 	xor a
-	ld [$ff8c],a
+	ld [hSpriteIndexOrTextID],a
 	call IsSpriteInFrontOfPlayer ; check for sprite collisions again? when does the above check fail to detect a sprite collision?
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	and a ; was there a sprite collision?
 	jr nz,.collision
 ; if no sprite collision
@@ -1467,7 +1467,7 @@ AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	cp a,$01
 	jr nz,.checkIfMovingWest
 ; moving east
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	ld e,a
 	and a,$e0
 	ld d,a
@@ -1475,13 +1475,13 @@ AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	add a,$02
 	and a,$1f
 	or d
-	ld [wd526],a
+	ld [wMapViewVRAMPointer],a
 	jr .adjustXCoordWithinBlock
 .checkIfMovingWest
 	cp a,$ff
 	jr nz,.checkIfMovingSouth
 ; moving west
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	ld e,a
 	and a,$e0
 	ld d,a
@@ -1489,36 +1489,36 @@ AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	sub a,$02
 	and a,$1f
 	or d
-	ld [wd526],a
+	ld [wMapViewVRAMPointer],a
 	jr .adjustXCoordWithinBlock
 .checkIfMovingSouth
 	ld a,b
 	cp a,$01
 	jr nz,.checkIfMovingNorth
 ; moving south
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	add a,$40
-	ld [wd526],a
+	ld [wMapViewVRAMPointer],a
 	jr nc,.adjustXCoordWithinBlock
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	inc a
 	and a,$03
 	or a,$98
-	ld [wd527],a
+	ld [wMapViewVRAMPointer + 1],a
 	jr .adjustXCoordWithinBlock
 .checkIfMovingNorth
 	cp a,$ff
 	jr nz,.adjustXCoordWithinBlock
 ; moving north
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	sub a,$40
-	ld [wd526],a
+	ld [wMapViewVRAMPointer],a
 	jr nc,.adjustXCoordWithinBlock
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	dec a
 	and a,$03
 	or a,$98
-	ld [wd527],a
+	ld [wMapViewVRAMPointer + 1],a
 .adjustXCoordWithinBlock
 	ld a,c
 	and a
@@ -1694,18 +1694,18 @@ MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 
 ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 	hlCoord 0, 0
-	call ScheduleRowRedrawHelper
-	ld a,[wd526]
+	call CopyToScreenEdgeTiles
+	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	ld [H_SCREENEDGEREDRAWADDR + 1],a
 	ld a,REDRAWROW
 	ld [H_SCREENEDGEREDRAW],a
 	ret
 
-ScheduleRowRedrawHelper:: ; 0ea6 (0:0ea6)
+CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
-	ld c,$28
+	ld c,2 * 20
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1716,10 +1716,10 @@ ScheduleRowRedrawHelper:: ; 0ea6 (0:0ea6)
 
 ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	hlCoord 0, 16
-	call ScheduleRowRedrawHelper
-	ld a,[wd526]
+	call CopyToScreenEdgeTiles
+	ld a,[wMapViewVRAMPointer]
 	ld l,a
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	ld h,a
 	ld bc,$0200
 	add hl,bc
@@ -1736,7 +1736,7 @@ ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 	hlCoord 18, 0
 	call ScheduleColumnRedrawHelper
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	ld c,a
 	and a,$e0
 	ld b,a
@@ -1745,7 +1745,7 @@ ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 	and a,$1f
 	or b
 	ld [H_SCREENEDGEREDRAWADDR],a
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	ld [H_SCREENEDGEREDRAWADDR + 1],a
 	ld a,REDRAWCOL
 	ld [H_SCREENEDGEREDRAW],a
@@ -1774,9 +1774,9 @@ ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
 	hlCoord 0, 0
 	call ScheduleColumnRedrawHelper
-	ld a,[wd526]
+	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
-	ld a,[wd527]
+	ld a,[wMapViewVRAMPointer + 1]
 	ld [H_SCREENEDGEREDRAWADDR + 1],a
 	ld a,REDRAWCOL
 	ld [H_SCREENEDGEREDRAW],a
@@ -2013,7 +2013,7 @@ LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 
 ; function to load data from the map header
 LoadMapHeader:: ; 107c (0:107c)
-	callba Func_f113
+	callba MarkTownVisitedAndLoadMissableObjects
 	ld a,[W_CURMAPTILESET]
 	ld [wd119],a
 	ld a,[W_CURMAP]
@@ -2307,9 +2307,9 @@ LoadMapData:: ; 1241 (0:1241)
 	push af
 	call DisableLCD
 	ld a,$98
-	ld [wd527],a
+	ld [wMapViewVRAMPointer + 1],a
 	xor a
-	ld [wd526],a
+	ld [wMapViewVRAMPointer],a
 	ld [$ffaf],a
 	ld [$ffae],a
 	ld [wWalkCounter],a
@@ -2383,16 +2383,16 @@ SwitchToMapRomBank:: ; 12bc (0:12bc)
 	pop hl
 	ret
 
-Func_12da:: ; 12da (0:12da)
-	ld a, $1e
-	ld [wd13a], a
+IgnoreInputForHalfSecond: ; 12da (0:12da)
+	ld a, 30
+	ld [wIgnoreInputCounter], a
 	ld hl, wd730
 	ld a, [hl]
 	or $26
-	ld [hl], a
+	ld [hl], a ; set ignore input bit
 	ret
 
-Func_12e7:: ; 12e7 (0:12e7)
+ResetUsingStrengthOutOfBattleBit: ; 12e7 (0:12e7)
 	ld hl, wd728
 	res 0, [hl]
 	ret

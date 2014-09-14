@@ -34,7 +34,7 @@ LanceScript_5a2de: ; 5a2de (16:62de)
 	ld bc, $603
 
 LanceScript_5a2f0: ; 5a2f0 (16:62f0)
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 LanceScript_5a2f5: ; 5a2f5 (16:62f5)
 	xor a
@@ -43,7 +43,7 @@ LanceScript_5a2f5: ; 5a2f5 (16:62f5)
 
 LanceScriptPointers: ; 5a2fa (16:62fa)
 	dw LanceScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw LanceScript2
 	dw LanceScript3
 	dw LanceScript4

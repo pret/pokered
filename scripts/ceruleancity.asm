@@ -133,7 +133,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	set 7, [hl]
 	ld hl, CeruleanCityText_1966d
 	ld de, CeruleanCityText_19672
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a
 
@@ -277,7 +277,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	set 7, [hl]
 	ld hl, CeruleanCityText_196ee
 	ld de, CeruleanCityText_196ee
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [$ff8c]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer

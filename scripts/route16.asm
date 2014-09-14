@@ -16,7 +16,7 @@ Route16Script_59946: ; 59946 (16:5946)
 
 Route16ScriptPointers: ; 59951 (16:5951)
 	dw Route16Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route16Script3
 

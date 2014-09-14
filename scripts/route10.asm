@@ -9,7 +9,7 @@ Route10Script: ; 59336 (16:5336)
 
 Route10ScriptPointers: ; 59349 (16:5349)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route10TextPointers: ; 5934f (16:534f)

@@ -475,7 +475,7 @@ Func_4149f: ; 4149f (10:549f)
 Func_414ae: ; 414ae (10:54ae)
 	push hl
 	hlCoord 0, 4
-	call ScheduleRowRedrawHelper
+	call CopyToScreenEdgeTiles
 	pop hl
 	ld a, h
 	ld [H_SCREENEDGEREDRAWADDR + 1], a

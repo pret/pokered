@@ -1,5 +1,5 @@
 Func_525af: ; 525af (14:65af)
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	ld [wd0d4], a
 	xor a
 	ld [wcd6a], a

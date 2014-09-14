@@ -56,7 +56,7 @@ Mansion4Script_Switches: ; 52420 (14:6420)
 
 Mansion4ScriptPointers: ; 52430 (14:6430)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Mansion4TextPointers: ; 52436 (14:6436)

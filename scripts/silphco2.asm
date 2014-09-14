@@ -23,7 +23,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0202
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_59d2e
 	bit 6, a
@@ -31,14 +31,14 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $0502
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_59d3e: ; 59d3e (16:5d3e)
 	db $02,$02,$05,$02,$FF
 
 SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -62,7 +62,7 @@ SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_59d4f
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -87,7 +87,7 @@ SilphCo2Script_59d6f: ; 59d6f (16:5d6f)
 
 SilphCo2ScriptPointers: ; 59d80 (16:5d80)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo2TextPointers: ; 59d86 (16:5d86)

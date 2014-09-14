@@ -23,7 +23,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0203
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_19f74
 	bit 1, a
@@ -32,7 +32,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0603
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_19f87
 	bit 2, a
@@ -40,7 +40,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0507
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 SilphCo5Coords: ; 19f97 (6:5f97) ; coords?
 	db $02, $03, $06, $03, $05, $07, $ff
@@ -65,7 +65,7 @@ SilphCo5Script_19f9e: ; 19f9e (6:5f9e)
 
 SilphCo5ScriptPointers: ; 19fb6 (6:5fb6)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo5TextPointers: ; 19fbc (6:5fbc)

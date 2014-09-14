@@ -63,7 +63,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	set 7, [hl]
 	ld hl, GaryText_760f9
 	ld de, GaryText_760fe
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY3 + $c8
 	ld [W_CUROPPONENT], a
 

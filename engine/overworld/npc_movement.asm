@@ -260,12 +260,11 @@ RLEList_PewterGymGuy: ; 1a5da (6:65da)
 	db $C0, $03
 	db $FF
 
-; XXX why would this function want to return on POKEMONTOWER_7?
-Func_1a5e7: ; 1a5e7 (6:65e7)
-	ld a, [W_CURMAP] ; W_CURMAP
+FreezeEnemyTrainerSprite: ; 1a5e7 (6:65e7)
+	ld a, [W_CURMAP]
 	cp POKEMONTOWER_7
-	ret z
-	ld hl, RivalIDs ; $6605
+	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't freeze them
+	ld hl, RivalIDs
 	ld a, [wEngagedTrainerClass]
 	ld b, a
 .loop
@@ -273,11 +272,11 @@ Func_1a5e7: ; 1a5e7 (6:65e7)
 	cp $ff
 	jr z, .notRival
 	cp b
-	ret z
+	ret z ; the rival leaves after battling, so don't freeze him
 	jr .loop
 .notRival
 	ld a, [wSpriteIndex]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_SPRITEINDEX], a
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs: ; 1a605 (6:6605)

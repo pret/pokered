@@ -56,7 +56,7 @@ asm_ef82: ; ef82 (3:6f82)
 	call AnimateCutTree
 	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
-	call Func_eedc
+	call RedrawMapView
 	callba Func_79e96
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
@@ -65,7 +65,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $90
 	ld [hVBlankWY], a
 	call UpdateSprites
-	jp Func_eedc
+	jp RedrawMapView
 
 UsedCutText: ; eff2 (3:6ff2)
 	TX_FAR _UsedCutText

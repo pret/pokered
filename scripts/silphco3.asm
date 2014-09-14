@@ -23,7 +23,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $404
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_59f98
 	bit 1, a
@@ -31,7 +31,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $408
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_59fa8: ; 59fa8 (16:5fa8)
 	db $04,$04,$04,$08,$FF
@@ -51,7 +51,7 @@ SilphCo3Script_59fad: ; 59fad (16:5fad)
 
 SilphCo3ScriptPointers: ; 59fbe (16:5fbe)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo3TextPointers: ; 59fc4 (16:5fc4)
