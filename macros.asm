@@ -14,6 +14,17 @@ dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 percent EQUS "* $ff / 100"
 
 
+; Constant enumeration is useful for monsters, items, moves, etc.
+const_def: MACRO
+const_value = 0
+ENDM
+
+const: MACRO
+\1 EQU const_value
+const_value = const_value + 1
+ENDM
+
+
 homecall: MACRO
 	ld a, [H_LOADEDROMBANK]
 	push af
