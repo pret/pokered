@@ -1,20 +1,11 @@
-if !def(_RED)
-_RED    EQU 0
+check_ver: MACRO
+if !def(\1)
+\1 EQU 0
 endc
+ENDM
 
-if !def(_BLUE)
-_BLUE   EQU 0
-endc
-
-if !def(_JAPAN)
-_JAPAN  EQU 0
-endc
-
-if !def(_GREEN)
-_GREEN  EQU 0
-endc
-
-if !def(_YELLOW)
-_YELLOW EQU 0
-endc
-
+	check_ver _RED
+	check_ver _BLUE
+	check_ver _JAPAN
+	check_ver _GREEN
+	check_ver _YELLOW
