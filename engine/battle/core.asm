@@ -7062,16 +7062,16 @@ PoisonEffect: ; 3f24f (f:724f)
 	dec de
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld b, $c7
+	ld b, ANIM_C7
 	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
 	ld a, [de]
 	ld de, W_PLAYERTOXICCOUNTER ; wd06c
 	jr nz, .asm_3f2b0
-	ld b, $a9
+	ld b, ANIM_A9
 	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYTOXICCOUNTER ; wd071
 .asm_3f2b0
-	cp $5c
+	cp TOXIC
 	jr nz, .asm_3f2bd
 	set 0, [hl]
 	xor a
@@ -7173,14 +7173,14 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
 	call Func_3ed27  ;quarter speed of affected monster
-	ld a, $a9
+	ld a, ANIM_A9
 	call Func_3fbb9  ;animation
 	jp PrintMayNotAttackText    ;print paralysis text
 .burn
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call Func_3ed64
-	ld a, $a9
+	ld a, ANIM_A9
 	call Func_3fbb9  ;animation
 	ld hl, BurnedText
 	jp PrintText
@@ -7188,7 +7188,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	call Func_3f9cf  ;resets bit 5 of the D063/D068 flags
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
-	ld a, $a9
+	ld a, ANIM_A9
 	call Func_3fbb9  ;animation
 	ld hl, FrozenText
 	jp PrintText
@@ -7726,7 +7726,7 @@ BideEffect: ; 3f6e5 (f:76e5)
 	inc a
 	ld [bc], a
 	ld a, [H_WHOSETURN]
-	add $ae
+	add XSTATITEM_ANIM
 	jp Func_3fb96
 
 ThrashPetalDanceEffect: ; 3f717 (f:7717)
@@ -7745,7 +7745,7 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	inc a
 	ld [de], a
 	ld a, [H_WHOSETURN] ; $fff3
-	add $b0
+	add ANIM_B0
 	jp Func_3fb96
 
 SwitchAndTeleportEffect: ; 3f739 (f:7739)
@@ -7941,11 +7941,11 @@ ChargeEffect: ; 3f88c (f:788c)
 	ld de, W_PLAYERMOVEEFFECT ; wcfd3
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
-	ld b, $ae
+	ld b, XSTATITEM_ANIM
 	jr z, .asm_3f8a1
 	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
 	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
-	ld b, $af
+	ld b, ANIM_AF
 .asm_3f8a1
 	set 4, [hl]
 	ld a, [de]
@@ -7953,13 +7953,13 @@ ChargeEffect: ; 3f88c (f:788c)
 	cp FLY_EFFECT
 	jr nz, .asm_3f8ad
 	set 6, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
-	ld b, $64
+	ld b, TELEPORT
 .asm_3f8ad
 	ld a, [de]
 	cp DIG
 	jr nz, .asm_3f8b6
 	set 6, [hl] ; mon is now invulnerable to typical attacks (fly/dig)
-	ld b, $c0
+	ld b, ANIM_C0
 .asm_3f8b6
 	xor a
 	ld [wcc5b], a
