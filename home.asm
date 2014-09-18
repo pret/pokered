@@ -169,62 +169,75 @@ LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld [$2000],a
 	ret
 
-; INPUT:
-; c: if nonzero, show at least a sliver of health
-; d = number of HP bar sections (normally 6)
-; e = health (in eighths of bar sections) (normally out of 48)
+
 DrawHPBar:: ; 1336 (0:1336)
+; Draw an HP bar d tiles long, and fill it to e pixels.
+; If c is nonzero, show at least a sliver regardless.
+; The right end of the bar changes with [wListMenuID].
+
 	push hl
 	push de
 	push bc
-	ld a,$71 ; left of HP bar tile 1
-	ld [hli],a
-	ld a,$62 ; left of HP bar tile 2
-	ld [hli],a
+
+	; Left
+	ld a, $71 ; "HP:"
+	ld [hli], a
+	ld a, $62
+	ld [hli], a
+
 	push hl
-	ld a,$63 ; empty bar section tile
-.drawEmptyBarLoop
+
+	; Middle
+	ld a, $63 ; empty
+.draw
 	ld [hli],a
 	dec d
-	jr nz,.drawEmptyBarLoop
+	jr nz, .draw
+
+	; Right
 	ld a,[wListMenuID]
-	dec a ; what should the right of HP bar tile be?
-	ld a,$6d ; right of HP bar tile, in status screen and battles
-	jr z,.writeTile
-	dec a ; right of HP bar tile, in pokemon menu
-.writeTile
+	dec a
+	ld a, $6d ; status screen and battle
+	jr z, .ok
+	dec a ; pokemon menu
+.ok
 	ld [hl],a
+
 	pop hl
-	ld a,e
-	and a ; is there enough health to show up on the HP bar?
-	jr nz,.loop ; if so, draw the HP bar
-	ld a,c
-	and a ; should a sliver of health be shown no matter what?
-	jr z,.done
-	ld e,1 ; if so, fill one eighth of a bar section
-; loop to draw every full bar section
-.loop
-	ld a,e
-	sub a,8
-	jr c,.drawPartialBarSection
-	ld e,a
-	ld a,$6b ; filled bar section tile
-	ld [hli],a
-	ld a,e
+
+	ld a, e
 	and a
-	jr z,.done
-	jr .loop
-; draws a partial bar section at the end (if necessary)
-; there are 7 possible partial bar sections from 1/8 to 7/8 full
-.drawPartialBarSection
-	ld a,$63 ; empty bar section tile
-	add e ; add e to get the appropriate partial bar section tile
-	ld [hl],a ; write the tile
+	jr nz, .fill
+
+	; If c iz nonzero, draw a pixel anyway.
+	ld a, c
+	and a
+	jr z, .done
+	ld e, 1
+
+.fill
+	ld a, e
+	sub 8
+	jr c, .partial
+	ld e, a
+	ld a, $6b ; full
+	ld [hli], a
+	ld a, e
+	and a
+	jr z, .done
+	jr .fill
+
+.partial
+	; Fill remaining pixels at the end if necessary.
+	ld a, $63 ; empty
+	add e
+	ld [hl], a
 .done
 	pop bc
 	pop de
 	pop hl
 	ret
+
 
 ; loads pokemon data from one of multiple sources to wcf98
 ; loads base stats to W_MONHDEXNUM
@@ -240,22 +253,22 @@ DrawHPBar:: ; 1336 (0:1336)
 ; wcf98 = base address of pokemon data
 ; W_MONHDEXNUM = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
-	ld hl,LoadMonData_
-	ld b,BANK(LoadMonData_)
+	ld hl, LoadMonData_
+	ld b, BANK(LoadMonData_)
 	jp Bankswitch
 
 ; writes c to wd0dc+b
 Func_137a:: ; 137a (0:137a)
 	ld hl, wd0dc
 	ld e, b
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld a, c
 	ld [hl], a
 	ret
 
 LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
-	ld a, $1
+	ld a, 1
 	ld [W_SPRITEFLIPPED], a
 
 LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
@@ -271,9 +284,9 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [hl], b
 	and a
 	pop hl
-	jr z, .invalidDexNumber  ; dex #0 invalid
+	jr z, .invalidDexNumber ; dex #0 invalid
 	cp NUM_POKEMON + 1
-	jr c, .validDexNumber    ; dex >#151 invalid
+	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
 	ld a, RHYDON ; $1
 	ld [wcf91], a
@@ -298,40 +311,43 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [$2000], a
 	ret
 
-; plays the cry of a pokemon
-; INPUT:
-; a = pokemon ID
-PlayCry:: ; 13d0 (0:13d0)
-	call GetCryData
-	call PlaySound ; play cry
-	jp WaitForSoundToFinish ; wait for sound to be done playing
 
-; gets a pokemon's cry data
-; INPUT:
-; a = pokemon ID
+PlayCry:: ; 13d0 (0:13d0)
+; Play monster a's cry.
+	call GetCryData
+	call PlaySound
+	jp WaitForSoundToFinish
+
 GetCryData:: ; 13d9 (0:13d9)
+; Load cry data for monster a.
 	dec a
-	ld c,a
-	ld b,0
-	ld hl,CryData
-	add hl,bc
-	add hl,bc
-	add hl,bc
-	ld a,Bank(CryData)
+	ld c, a
+	ld b, 0
+	ld hl, CryData
+	add hl, bc
+	add hl, bc
+	add hl, bc
+
+	ld a, Bank(CryData)
 	call BankswitchHome
-	ld a,[hli]
-	ld b,a
-	ld a,[hli]
-	ld [wc0f1],a
-	ld a,[hl]
-	ld [wc0f2],a
+	ld a, [hli]
+	ld b, a ; cry id
+	ld a, [hli]
+	ld [wc0f1], a
+	ld a, [hl]
+	ld [wc0f2], a
 	call BankswitchBack
-	ld a,b ; a = cryID
-	ld c,$14 ; base sound ID for pokemon cries
-	rlca
-	add b ; a = cryID * 3
-	add c ; a = $14 + cryID * 3
+
+	; Cry headers have 3 channels,
+	; and start from index $14,
+	; so add 3 times the cry id.
+	ld a, b
+	ld c, $14
+	rlca ; * 2
+	add b
+	add c
 	ret
+
 
 DisplayPartyMenu:: ; 13fc (0:13fc)
 	ld a,[$ffd7]
@@ -354,42 +370,42 @@ GoBackToPartyMenu:: ; 1411 (0:1411)
 	jp HandlePartyMenuInput
 
 PartyMenuInit:: ; 1420 (0:1420)
-	ld a,$01
+	ld a, 1 ; hardcoded bank
 	call BankswitchHome
 	call LoadHpBarAndStatusTilePatterns
-	ld hl,wd730
-	set 6,[hl] ; turn off letter printing delay
+	ld hl, wd730
+	set 6, [hl] ; turn off letter printing delay
 	xor a
-	ld [wcc49],a
-	ld [wcc37],a
-	ld hl,wTopMenuItemY
+	ld [wcc49], a
+	ld [wcc37], a
+	ld hl, wTopMenuItemY
 	inc a
-	ld [hli],a ; top menu item Y
+	ld [hli], a ; top menu item Y
 	xor a
-	ld [hli],a ; top menu item X
-	ld a,[wcc2b]
+	ld [hli], a ; top menu item X
+	ld a, [wcc2b]
 	push af
-	ld [hli],a ; current menu item ID
+	ld [hli], a ; current menu item ID
 	inc hl
-	ld a,[wPartyCount]
+	ld a, [wPartyCount]
 	and a ; are there more than 0 pokemon in the party?
-	jr z,.storeMaxMenuItemID
+	jr z, .storeMaxMenuItemID
 	dec a
 ; if party is not empty, the max menu item ID is ([wPartyCount] - 1)
 ; otherwise, it is 0
 .storeMaxMenuItemID
-	ld [hli],a ; max menu item ID
-	ld a,[wd11f]
+	ld [hli], a ; max menu item ID
+	ld a, [wd11f]
 	and a
-	ld a,%00000011 ; A button and B button
-	jr z,.next
+	ld a, A_BUTTON + B_BUTTON
+	jr z, .next
 	xor a
-	ld [wd11f],a
+	ld [wd11f], a
 	inc a
 .next
-	ld [hli],a ; menu watched keys
+	ld [hli], a ; menu watched keys
 	pop af
-	ld [hl],a ; old menu item ID
+	ld [hl], a ; old menu item ID
 	ret
 
 HandlePartyMenuInput:: ; 145a (0:145a)
@@ -672,7 +688,7 @@ PrintBCDNumber:: ; 15cd (0:15cd)
 	ret
 
 PrintBCDDigit:: ; 1604 (0:1604)
-	and a,%00001111
+	and $f
 	and a
 	jr z,.zeroDigit
 .nonzeroDigit
@@ -1403,7 +1419,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld [wTopMenuItemY],a
 	ld a,5
 	ld [wTopMenuItemX],a
-	ld a,%00000111 ; A button, B button, Select button
+	ld a,A_BUTTON | B_BUTTON | SELECT
 	ld [wMenuWatchedKeys],a
 	ld c,10
 	call DelayFrames
@@ -1827,7 +1843,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld bc,20 + 8 ; 1 row down and 8 columns right
 	add hl,bc
 	ld a,"×"
-	ldi [hl],a
+	ld [hli],a
 	ld a,[wd11e]
 	push af
 	ld a,[de]
@@ -2653,8 +2669,8 @@ FuncTX_ItemStoragePC:: ; 3460 (0:3460)
 
 FuncTX_BillsPC:: ; 346a (0:346a)
 	call SaveScreenTilesToBuffer2
-	ld b, BANK(Func_214c2)
-	ld hl, Func_214c2
+	ld b, BANK(BillsPC_)
+	ld hl, BillsPC_
 	jr bankswitchAndContinue
 
 FuncTX_SlotMachine:: ; 3474 (0:3474)
@@ -3064,65 +3080,63 @@ Func_366b:: ; 366b (0:366b)
 	pop hl
 	ret
 
-; copies the tile patterns for letters and numbers into VRAM
-LoadFontTilePatterns:: ; 3680 (0:3680)
-	ld a,[rLCDC]
-	bit 7,a ; is the LCD enabled?
-	jr nz,.lcdEnabled
-.lcdDisabled
-	ld hl,FontGraphics
-	ld de,vFont
-	ld bc,$400
-	ld a,BANK(FontGraphics)
+
+LoadFontTilePatterns::
+	ld a, [rLCDC]
+	bit 7, a ; is the LCD enabled?
+	jr nz, .on
+.off
+	ld hl, FontGraphics
+	ld de, vFont
+	ld bc, $400
+	ld a, BANK(FontGraphics)
 	jp FarCopyDataDouble ; if LCD is off, transfer all at once
-.lcdEnabled
-	ld de,FontGraphics
-	ld hl,vFont
-	ld bc,(BANK(FontGraphics) << 8 | $80)
+.on
+	ld de, FontGraphics
+	ld hl, vFont
+	ld bc, BANK(FontGraphics) << 8 | $80
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
-; copies the text box tile patterns into VRAM
-LoadTextBoxTilePatterns:: ; 36a0 (0:36a0)
-	ld a,[rLCDC]
-	bit 7,a ; is the LCD enabled?
-	jr nz,.lcdEnabled
-.lcdDisabled
-	ld hl,TextBoxGraphics
-	ld de,vChars2 + $600
-	ld bc,$200
-	ld a,BANK(TextBoxGraphics)
+LoadTextBoxTilePatterns::
+	ld a, [rLCDC]
+	bit 7, a ; is the LCD enabled?
+	jr nz, .on
+.off
+	ld hl, TextBoxGraphics
+	ld de, vChars2 + $600
+	ld bc, $200
+	ld a, BANK(TextBoxGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
-.lcdEnabled
-	ld de,TextBoxGraphics
-	ld hl,vChars2 + $600
-	ld bc,(BANK(TextBoxGraphics) << 8 | $20)
+.on
+	ld de, TextBoxGraphics
+	ld hl, vChars2 + $600
+	ld bc, BANK(TextBoxGraphics) << 8 | $20
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
-; copies HP bar and status display tile patterns into VRAM
-LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
-	ld a,[rLCDC]
-	bit 7,a ; is the LCD enabled?
-	jr nz,.lcdEnabled
-.lcdDisabled
-	ld hl,HpBarAndStatusGraphics
-	ld de,vChars2 + $620
-	ld bc,$1e0
-	ld a,BANK(HpBarAndStatusGraphics)
+LoadHpBarAndStatusTilePatterns::
+	ld a, [rLCDC]
+	bit 7, a ; is the LCD enabled?
+	jr nz, .on
+.off
+	ld hl, HpBarAndStatusGraphics
+	ld de, vChars2 + $620
+	ld bc, $1e0
+	ld a, BANK(HpBarAndStatusGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
-.lcdEnabled
-	ld de,HpBarAndStatusGraphics
-	ld hl,vChars2 + $620
-	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
+.on
+	ld de, HpBarAndStatusGraphics
+	ld hl, vChars2 + $620
+	ld bc, BANK(HpBarAndStatusGraphics) << 8 | $1e
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
-;Fills memory range with the specified byte.
-;input registers a = fill_byte, bc = length, hl = address
-FillMemory:: ; 36e0 (0:36e0)
+
+FillMemory::
+; Fill bc bytes at hl with a.
 	push de
 	ld d, a
 .loop
 	ld a, d
-	ldi [hl], a
+	ld [hli], a
 	dec bc
 	ld a, b
 	or c
@@ -3130,14 +3144,15 @@ FillMemory:: ; 36e0 (0:36e0)
 	pop de
 	ret
 
-; loads sprite that de points to
-; bank of sprite is given in a
+
 UncompressSpriteFromDE:: ; 36eb (0:36eb)
+; Decompress pic at a:de.
 	ld hl, W_SPRITEINPUTPTR
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	jp UncompressSpriteData
+
 
 SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
 	ld hl, wTileMap
@@ -3229,8 +3244,12 @@ GetName:: ; 376b (0:376b)
 ; returns pointer to name in de
 	ld a,[wd0b5]
 	ld [wd11e],a
+
+	; TM names are separate from item names.
+	; BUG: This applies to all names instead of just items.
 	cp HM_01
-	jp nc,GetMachineName
+	jp nc, GetMachineName
+
 	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl
@@ -3400,7 +3419,7 @@ JoypadLowSensitivity:: ; 3831 (0:3831)
 .delayOver
 ; if [hJoy6] = 0 and A or B is pressed, report no buttons as pressed
 	ld a,[hJoyHeld]
-	and a,%00000011 ; A and B buttons
+	and A_BUTTON | B_BUTTON
 	jr z,.setShortDelay
 	ld a,[hJoy6] ; flag
 	and a
@@ -3513,7 +3532,7 @@ PrintLetterDelay:: ; 38d3 (0:38d3)
 	bit 0,a
 	jr z,.waitOneFrame
 	ld a,[W_OPTIONS]
-	and a,$0f
+	and $f
 	ld [H_FRAMECOUNTER],a
 	jr .checkButtons
 .waitOneFrame
@@ -3966,7 +3985,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	jp z,.loop1
 .checkIfAButtonOrBButtonPressed
 	ld a,[hJoy5]
-	and a,%00000011 ; pressed A button or B button?
+	and A_BUTTON | B_BUTTON
 	jr z,.skipPlayingSound
 .AButtonOrBButtonPressed
 	push hl
@@ -3996,14 +4015,14 @@ PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
 	ld hl,wTileMap
-	ld bc,20 ; screen width
+	ld bc,SCREEN_WIDTH
 .topMenuItemLoop
 	add hl,bc
 	dec a
 	jr nz,.topMenuItemLoop
 .adjustForXCoord
 	ld a,[wTopMenuItemX]
-	ld b,$00
+	ld b,0
 	ld c,a
 	add hl,bc
 	push hl
@@ -4156,7 +4175,7 @@ AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
 	ret
 
 PrintText:: ; 3c49 (0:3c49)
-; given a pointer in hl, print the text there
+; Print text hl at (1, 14).
 	push hl
 	ld a,1
 	ld [wd125],a
@@ -4168,256 +4187,244 @@ Func_3c59:: ; 3c59 (0:3c59)
 	bcCoord 1, 14
 	jp TextCommandProcessor
 
-; converts a big-endian binary number into decimal and prints it
-; INPUT:
-; b = flags and number of bytes
-; bit 7: if set, print leading zeroes
-;        if unset, do not print leading zeroes
-; bit 6: if set, left-align the string (do not pad empty digits with spaces)
-;        if unset, right-align the string
-; bits 4-5: unused
-; bits 0-3: number of bytes (only 1 - 3 bytes supported)
-; c = number of decimal digits
-; de = address of the number (big-endian)
-PrintNumber:: ; 3c5f (0:3c5f)
+
+PrintNumber:: ; 3c5f
+; Print the c-digit, b-byte value at de.
+; Allows 2 to 7 digits. For 1-digit numbers, add
+; the value to char "0" instead of calling PrintNumber.
+; Flags LEADING_ZEROES and LEFT_ALIGN can be given
+; in bits 7 and 6 of b respectively.
+LEADING_ZEROES EQU 7
+LEFT_ALIGN     EQU 6
+
 	push bc
 	xor a
-	ld [H_PASTLEADINGZEROES],a
-	ld [H_NUMTOPRINT],a
-	ld [H_NUMTOPRINT + 1],a
-	ld a,b
-	and a,%00001111
-	cp a,1
-	jr z,.oneByte
-	cp a,2
-	jr z,.twoBytes
-.threeBytes
-	ld a,[de]
-	ld [H_NUMTOPRINT],a
+	ld [H_PASTLEADINGZEROES], a
+	ld [H_NUMTOPRINT], a
+	ld [H_NUMTOPRINT + 1], a
+	ld a, b
+	and $f
+	cp 1
+	jr z, .byte
+	cp 2
+	jr z, .word
+.long
+	ld a, [de]
+	ld [H_NUMTOPRINT], a
 	inc de
-	ld a,[de]
-	ld [H_NUMTOPRINT + 1],a
+	ld a, [de]
+	ld [H_NUMTOPRINT + 1], a
 	inc de
-	ld a,[de]
-	ld [H_NUMTOPRINT + 2],a
-	jr .checkNumDigits
-.twoBytes
-	ld a,[de]
-	ld [H_NUMTOPRINT + 1],a
+	ld a, [de]
+	ld [H_NUMTOPRINT + 2], a
+	jr .start
+
+.word
+	ld a, [de]
+	ld [H_NUMTOPRINT + 1], a
 	inc de
-	ld a,[de]
-	ld [H_NUMTOPRINT + 2],a
-	jr .checkNumDigits
-.oneByte
-	ld a,[de]
-	ld [H_NUMTOPRINT + 2],a
-.checkNumDigits
+	ld a, [de]
+	ld [H_NUMTOPRINT + 2], a
+	jr .start
+
+.byte
+	ld a, [de]
+	ld [H_NUMTOPRINT + 2], a
+
+.start
 	push de
-	ld d,b
-	ld a,c
-	ld b,a
+
+	ld d, b
+	ld a, c
+	ld b, a
 	xor a
-	ld c,a
-	ld a,b ; a = number of decimal digits
-	cp a,2
-	jr z,.tensPlace
-	cp a,3
-	jr z,.hundredsPlace
-	cp a,4
-	jr z,.thousandsPlace
-	cp a,5
-	jr z,.tenThousandsPlace
-	cp a,6
-	jr z,.hundredThousandsPlace
-.millionsPlace
-	ld a,1000000 >> 16
-	ld [H_POWEROFTEN],a
-	ld a,(1000000 >> 8) & $FF
-	ld [H_POWEROFTEN + 1],a
-	ld a,1000000 & $FF
-	ld [H_POWEROFTEN + 2],a
-	call PrintNumber_PrintDigit
-	call PrintNumber_AdvancePointer
-.hundredThousandsPlace
-	ld a,100000 >> 16
-	ld [H_POWEROFTEN],a
-	ld a,(100000 >> 8) & $FF
-	ld [H_POWEROFTEN + 1],a
-	ld a,100000 & $FF
-	ld [H_POWEROFTEN + 2],a
-	call PrintNumber_PrintDigit
-	call PrintNumber_AdvancePointer
-.tenThousandsPlace
-	xor a
-	ld [H_POWEROFTEN],a
-	ld a,10000 >> 8
-	ld [H_POWEROFTEN + 1],a
-	ld a,10000 & $FF
-	ld [H_POWEROFTEN + 2],a
-	call PrintNumber_PrintDigit
-	call PrintNumber_AdvancePointer
-.thousandsPlace
-	xor a
-	ld [H_POWEROFTEN],a
-	ld a,1000 >> 8
-	ld [H_POWEROFTEN + 1],a
-	ld a,1000 & $FF
-	ld [H_POWEROFTEN + 2],a
-	call PrintNumber_PrintDigit
-	call PrintNumber_AdvancePointer
-.hundredsPlace
-	xor a
-	ld [H_POWEROFTEN],a
-	xor a
-	ld [H_POWEROFTEN + 1],a
-	ld a,100
-	ld [H_POWEROFTEN + 2],a
-	call PrintNumber_PrintDigit
-	call PrintNumber_AdvancePointer
-.tensPlace
-	ld c,00
-	ld a,[H_NUMTOPRINT + 2]
-.loop
-	cp a,10
-	jr c,.underflow
-	sub a,10
+	ld c, a
+	ld a, b
+
+	cp 2
+	jr z, .tens
+	cp 3
+	jr z, .hundreds
+	cp 4
+	jr z, .thousands
+	cp 5
+	jr z, .ten_thousands
+	cp 6
+	jr z, .hundred_thousands
+
+print_digit: macro
+
+if (\1) / $10000
+	ld a, \1 / $10000 % $100
+else	xor a
+endc
+	ld [H_POWEROFTEN + 0], a
+
+if (\1) / $100
+	ld a, \1 / $100   % $100
+else	xor a
+endc
+	ld [H_POWEROFTEN + 1], a
+
+	ld a, \1 / $1     % $100
+	ld [H_POWEROFTEN + 2], a
+
+	call .PrintDigit
+	call .NextDigit
+endm
+
+.millions          print_digit 1000000
+.hundred_thousands print_digit 100000
+.ten_thousands     print_digit 10000
+.thousands         print_digit 1000
+.hundreds          print_digit 100
+
+.tens
+	ld c, 0
+	ld a, [H_NUMTOPRINT + 2]
+.mod
+	cp 10
+	jr c, .ok
+	sub 10
 	inc c
-	jr .loop
-.underflow
-	ld b,a
-	ld a,[H_PASTLEADINGZEROES]
+	jr .mod
+.ok
+
+	ld b, a
+	ld a, [H_PASTLEADINGZEROES]
 	or c
-	ld [H_PASTLEADINGZEROES],a
-	jr nz,.pastLeadingZeroes
-	call PrintNumber_PrintLeadingZero
-	jr .advancePointer
-.pastLeadingZeroes
-	ld a,"0"
+	ld [H_PASTLEADINGZEROES], a
+	jr nz, .past
+	call .PrintLeadingZero
+	jr .next
+.past
+	ld a, "0"
 	add c
-	ld [hl],a
-.advancePointer
-	call PrintNumber_AdvancePointer
-.onesPlace
-	ld a,"0"
+	ld [hl], a
+.next
+
+	call .NextDigit
+.ones
+	ld a, "0"
 	add b
-	ld [hli],a
+	ld [hli], a
 	pop de
 	dec de
 	pop bc
 	ret
 
-; prints a decimal digit
-; This works by repeatedely subtracting a power of ten until the number becomes negative.
-; The number of subtractions it took in order to make the number negative is the digit for the current number place.
-; The last value that the number had before becoming negative is kept as the new value of the number.
-; A more succinct description is that the number is divided by a power of ten
-; and the quotient becomes the digit while the remainder is stored as the new value of the number.
-PrintNumber_PrintDigit:: ; 3d25 (0:3d25)
-	ld c,0 ; counts number of loop iterations to determine the decimal digit
+.PrintDigit:
+; Divide by the current decimal place.
+; Print the quotient, and keep the modulus.
+	ld c, 0
 .loop
-	ld a,[H_POWEROFTEN]
-	ld b,a
-	ld a,[H_NUMTOPRINT]
-	ld [H_SAVEDNUMTOPRINT],a
+	ld a, [H_POWEROFTEN]
+	ld b, a
+	ld a, [H_NUMTOPRINT]
+	ld [H_SAVEDNUMTOPRINT], a
 	cp b
-	jr c,.underflow0
+	jr c, .underflow0
 	sub b
-	ld [H_NUMTOPRINT],a
-	ld a,[H_POWEROFTEN + 1]
-	ld b,a
-	ld a,[H_NUMTOPRINT + 1]
-	ld [H_SAVEDNUMTOPRINT + 1],a
+	ld [H_NUMTOPRINT], a
+	ld a, [H_POWEROFTEN + 1]
+	ld b, a
+	ld a, [H_NUMTOPRINT + 1]
+	ld [H_SAVEDNUMTOPRINT + 1], a
 	cp b
-	jr nc,.noBorrowForByte1
-.byte1BorrowFromByte0
-	ld a,[H_NUMTOPRINT]
-	or a,0
-	jr z,.underflow1
+	jr nc, .noborrow1
+
+	ld a, [H_NUMTOPRINT]
+	or 0
+	jr z, .underflow1
 	dec a
-	ld [H_NUMTOPRINT],a
-	ld a,[H_NUMTOPRINT + 1]
-.noBorrowForByte1
+	ld [H_NUMTOPRINT], a
+	ld a, [H_NUMTOPRINT + 1]
+.noborrow1
+
 	sub b
-	ld [H_NUMTOPRINT + 1],a
-	ld a,[H_POWEROFTEN + 2]
-	ld b,a
-	ld a,[H_NUMTOPRINT + 2]
-	ld [H_SAVEDNUMTOPRINT + 2],a
+	ld [H_NUMTOPRINT + 1], a
+	ld a, [H_POWEROFTEN + 2]
+	ld b, a
+	ld a, [H_NUMTOPRINT + 2]
+	ld [H_SAVEDNUMTOPRINT + 2], a
 	cp b
-	jr nc,.noBorrowForByte2
-.byte2BorrowFromByte1
-	ld a,[H_NUMTOPRINT + 1]
+	jr nc, .noborrow2
+
+	ld a, [H_NUMTOPRINT + 1]
 	and a
-	jr nz,.finishByte2BorrowFromByte1
-.byte2BorrowFromByte0
-	ld a,[H_NUMTOPRINT]
+	jr nz, .borrowed
+
+	ld a, [H_NUMTOPRINT]
 	and a
-	jr z,.underflow2
+	jr z, .underflow2
 	dec a
-	ld [H_NUMTOPRINT],a
+	ld [H_NUMTOPRINT], a
 	xor a
-.finishByte2BorrowFromByte1
+.borrowed
+
 	dec a
-	ld [H_NUMTOPRINT + 1],a
-	ld a,[H_NUMTOPRINT + 2]
-.noBorrowForByte2
+	ld [H_NUMTOPRINT + 1], a
+	ld a, [H_NUMTOPRINT + 2]
+.noborrow2
 	sub b
-	ld [H_NUMTOPRINT + 2],a
+	ld [H_NUMTOPRINT + 2], a
 	inc c
 	jr .loop
+
 .underflow2
-	ld a,[H_SAVEDNUMTOPRINT + 1]
-	ld [H_NUMTOPRINT + 1],a
+	ld a, [H_SAVEDNUMTOPRINT + 1]
+	ld [H_NUMTOPRINT + 1], a
 .underflow1
-	ld a,[H_SAVEDNUMTOPRINT]
-	ld [H_NUMTOPRINT],a
+	ld a, [H_SAVEDNUMTOPRINT]
+	ld [H_NUMTOPRINT], a
 .underflow0
-	ld a,[H_PASTLEADINGZEROES]
+	ld a, [H_PASTLEADINGZEROES]
 	or c
-	jr z,PrintNumber_PrintLeadingZero
-	ld a,"0"
+	jr z, .PrintLeadingZero
+
+	ld a, "0"
 	add c
-	ld [hl],a
-	ld [H_PASTLEADINGZEROES],a
+	ld [hl], a
+	ld [H_PASTLEADINGZEROES], a
 	ret
 
-; prints a leading zero unless they are turned off in the flags
-PrintNumber_PrintLeadingZero:: ; 3d83 (0:3d83)
-	bit 7,d ; print leading zeroes?
+.PrintLeadingZero:
+	bit LEADING_ZEROES, d
 	ret z
-	ld [hl],"0"
+	ld [hl], "0"
 	ret
 
-; increments the pointer unless leading zeroes are not being printed,
-; the number is left-aligned, and no nonzero digits have been printed yet
-PrintNumber_AdvancePointer:: ; 3d89 (0:3d89)
-	bit 7,d ; print leading zeroes?
-	jr nz,.incrementPointer
-	bit 6,d ; left alignment or right alignment?
-	jr z,.incrementPointer
-	ld a,[H_PASTLEADINGZEROES]
+.NextDigit:
+; Increment unless the number is left-aligned,
+; leading zeroes are not printed, and no digits
+; have been printed yet.
+	bit LEADING_ZEROES, d
+	jr nz, .inc
+	bit LEFT_ALIGN, d
+	jr z, .inc
+	ld a, [H_PASTLEADINGZEROES]
 	and a
 	ret z
-.incrementPointer
+.inc
 	inc hl
 	ret
 
-; calls a function from a table of function pointers
-; INPUT:
-; a = index within table
-; hl = address of function pointer table
-CallFunctionInTable:: ; 3d97 (0:3d97)
+
+CallFunctionInTable::
+JumpTable::
+; Call function a in jumptable hl.
+; de is not preserved.
 	push hl
 	push de
 	push bc
 	add a
-	ld d,0
-	ld e,a
-	add hl,de
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	ld de,.returnAddress
+	ld d, 0
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, .returnAddress
 	push de
 	jp [hl]
 .returnAddress
@@ -4570,7 +4577,7 @@ Random::
 	push de
 	push bc
 	callba Random_
-	ld a,[hRandomAdd]
+	ld a, [hRandomAdd]
 	pop bc
 	pop de
 	pop hl
@@ -4623,95 +4630,95 @@ Func_3eb5:: ; 3eb5 (0:3eb5)
 
 PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	ld hl, PointerTable_3f22
+	ld hl, TextPredefs
 	call Func_3f0f
 	ld hl, wcf11
 	set 0, [hl]
 	call DisplayTextID
 
 Func_3f05:: ; 3f05 (0:3f05)
-	ld hl, W_MAPTEXTPTR ; wd36c
+	ld hl, W_MAPTEXTPTR
 	ld a, [$ffec]
 	ld [hli], a
-	ld a, [$ffed]
+	ld a, [$ffec + 1]
 	ld [hl], a
 	ret
 
 Func_3f0f:: ; 3f0f (0:3f0f)
-	ld a, [W_MAPTEXTPTR] ; wd36c
+	ld a, [W_MAPTEXTPTR]
 	ld [$ffec], a
 	ld a, [W_MAPTEXTPTR + 1]
-	ld [$ffed], a
+	ld [$ffec + 1], a
 	ld a, l
-	ld [W_MAPTEXTPTR], a ; wd36c
+	ld [W_MAPTEXTPTR], a
 	ld a, h
 	ld [W_MAPTEXTPTR + 1], a
 	ret
 
-PointerTable_3f22:: ; 3f22 (0:3f22)
-	dw CardKeySuccessText                   ; id = 01
-	dw CardKeyFailText                      ; id = 02
-	dw RedBedroomPC                         ; id = 03
-	dw RedBedroomSNESText                   ; id = 04
-	dw PushStartText                        ; id = 05
-	dw SaveOptionText                       ; id = 06
-	dw StrengthsAndWeaknessesText           ; id = 07
-	dw OakLabEmailText                      ; id = 08
-	dw AerodactylFossilText                 ; id = 09
-	dw Route15UpstairsBinocularsText        ; id = 0A
-	dw KabutopsFossilText                   ; id = 0B
-	dw GymStatueText1                       ; id = 0C
-	dw GymStatueText2                       ; id = 0D
-	dw BookcaseText                         ; id = 0E
-	dw ViridianCityPokecenterBenchGuyText   ; id = 0F
-	dw PewterCityPokecenterBenchGuyText     ; id = 10
-	dw CeruleanCityPokecenterBenchGuyText   ; id = 11
-	dw LavenderCityPokecenterBenchGuyText   ; id = 12
-	dw VermilionCityPokecenterBenchGuyText  ; id = 13
-	dw CeladonCityPokecenterBenchGuyText    ; id = 14
-	dw CeladonCityHotelText                 ; id = 15
-	dw FuchsiaCityPokecenterBenchGuyText    ; id = 16
-	dw CinnabarIslandPokecenterBenchGuyText ; id = 17
-	dw SaffronCityPokecenterBenchGuyText    ; id = 18
-	dw MtMoonPokecenterBenchGuyText         ; id = 19
-	dw RockTunnelPokecenterBenchGuyText     ; id = 1A
-	dw UnusedBenchGuyText1                  ; id = 1B
-	dw UnusedBenchGuyText2                  ; id = 1C
-	dw UnusedBenchGuyText3                  ; id = 1D
-	dw TerminatorText_62508                 ; id = 1E
-	dw PredefText1f                         ; id = 1F
-	dw ViridianSchoolNotebook               ; id = 20
-	dw ViridianSchoolBlackboard             ; id = 21
-	dw JustAMomentText                      ; id = 22
-	dw PredefText23                         ; id = 23
-	dw FoundHiddenItemText                  ; id = 24
-	dw HiddenItemBagFullText                ; id = 25
-	dw VermilionGymTrashText                ; id = 26
-	dw IndigoPlateauHQText                  ; id = 27
-	dw GameCornerOutOfOrderText             ; id = 28
-	dw GameCornerOutToLunchText             ; id = 29
-	dw GameCornerSomeonesKeysText           ; id = 2A
-	dw FoundHiddenCoinsText                 ; id = 2B
-	dw DroppedHiddenCoinsText               ; id = 2C
-	dw BillsHouseMonitorText                ; id = 2D
-	dw BillsHouseInitiatedText              ; id = 2E
-	dw BillsHousePokemonList                ; id = 2F
-	dw MagazinesText                        ; id = 30
-	dw CinnabarGymQuiz                      ; id = 31
-	dw GameCornerNoCoinsText                ; id = 32
-	dw GameCornerCoinCaseText               ; id = 33
-	dw LinkCableHelp                        ; id = 34
-	dw TMNotebook                           ; id = 35
-	dw FightingDojoText                     ; id = 36
-	dw FightingDojoText_52a10               ; id = 37
-	dw FightingDojoText_52a1d               ; id = 38
-	dw NewBicycleText                       ; id = 39
-	dw IndigoPlateauStatues                 ; id = 3A
-	dw VermilionGymTrashSuccesText1         ; id = 3B
-	dw VermilionGymTrashSuccesText2         ; id = 3C
-	dw VermilionGymTrashSuccesText3         ; id = 3D
-	dw VermilionGymTrashFailText            ; id = 3E
-	dw TownMapText                          ; id = 3F
-	dw BookOrSculptureText                  ; id = 40
-	dw ElevatorText                         ; id = 41
-	dw PokemonStuffText                     ; id = 42
+TextPredefs::
+	dw CardKeySuccessText                   ; 01
+	dw CardKeyFailText                      ; 02
+	dw RedBedroomPC                         ; 03
+	dw RedBedroomSNESText                   ; 04
+	dw PushStartText                        ; 05
+	dw SaveOptionText                       ; 06
+	dw StrengthsAndWeaknessesText           ; 07
+	dw OakLabEmailText                      ; 08
+	dw AerodactylFossilText                 ; 09
+	dw Route15UpstairsBinocularsText        ; 0A
+	dw KabutopsFossilText                   ; 0B
+	dw GymStatueText1                       ; 0C
+	dw GymStatueText2                       ; 0D
+	dw BookcaseText                         ; 0E
+	dw ViridianCityPokecenterBenchGuyText   ; 0F
+	dw PewterCityPokecenterBenchGuyText     ; 10
+	dw CeruleanCityPokecenterBenchGuyText   ; 11
+	dw LavenderCityPokecenterBenchGuyText   ; 12
+	dw VermilionCityPokecenterBenchGuyText  ; 13
+	dw CeladonCityPokecenterBenchGuyText    ; 14
+	dw CeladonCityHotelText                 ; 15
+	dw FuchsiaCityPokecenterBenchGuyText    ; 16
+	dw CinnabarIslandPokecenterBenchGuyText ; 17
+	dw SaffronCityPokecenterBenchGuyText    ; 18
+	dw MtMoonPokecenterBenchGuyText         ; 19
+	dw RockTunnelPokecenterBenchGuyText     ; 1A
+	dw UnusedBenchGuyText1                  ; 1B
+	dw UnusedBenchGuyText2                  ; 1C
+	dw UnusedBenchGuyText3                  ; 1D
+	dw TerminatorText_62508                 ; 1E
+	dw PredefText1f                         ; 1F
+	dw ViridianSchoolNotebook               ; 20
+	dw ViridianSchoolBlackboard             ; 21
+	dw JustAMomentText                      ; 22
+	dw PredefText23                         ; 23
+	dw FoundHiddenItemText                  ; 24
+	dw HiddenItemBagFullText                ; 25
+	dw VermilionGymTrashText                ; 26
+	dw IndigoPlateauHQText                  ; 27
+	dw GameCornerOutOfOrderText             ; 28
+	dw GameCornerOutToLunchText             ; 29
+	dw GameCornerSomeonesKeysText           ; 2A
+	dw FoundHiddenCoinsText                 ; 2B
+	dw DroppedHiddenCoinsText               ; 2C
+	dw BillsHouseMonitorText                ; 2D
+	dw BillsHouseInitiatedText              ; 2E
+	dw BillsHousePokemonList                ; 2F
+	dw MagazinesText                        ; 30
+	dw CinnabarGymQuiz                      ; 31
+	dw GameCornerNoCoinsText                ; 32
+	dw GameCornerCoinCaseText               ; 33
+	dw LinkCableHelp                        ; 34
+	dw TMNotebook                           ; 35
+	dw FightingDojoText                     ; 36
+	dw FightingDojoText_52a10               ; 37
+	dw FightingDojoText_52a1d               ; 38
+	dw NewBicycleText                       ; 39
+	dw IndigoPlateauStatues                 ; 3A
+	dw VermilionGymTrashSuccesText1         ; 3B
+	dw VermilionGymTrashSuccesText2         ; 3C
+	dw VermilionGymTrashSuccesText3         ; 3D
+	dw VermilionGymTrashFailText            ; 3E
+	dw TownMapText                          ; 3F
+	dw BookOrSculptureText                  ; 40
+	dw ElevatorText                         ; 41
+	dw PokemonStuffText                     ; 42
