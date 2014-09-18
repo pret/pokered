@@ -203,6 +203,24 @@ predef_jump: MACRO
 	ENDM
 
 
+add_tx_pre: MACRO
+\1_id:: dw \1
+ENDM
+
+tx_pre_id: MACRO
+	ld a, (\1_id - TextPredefs) / 2
+ENDM
+
+tx_pre: MACRO
+	tx_pre_id \1
+	call PrintPredefTextID
+ENDM
+
+tx_pre_jump: MACRO
+	tx_pre_id \1
+	jp PrintPredefTextID
+ENDM
+
 
 ;1_channel	EQU $00
 ;2_channels	EQU $40
