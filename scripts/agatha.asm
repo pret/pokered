@@ -24,7 +24,7 @@ AgathaScript_76443: ; 76443 (1d:6443)
 AgathaScript_76459: ; 76459 (1d:6459)
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 AgathaScript_76464: ; 76464 (1d:6464)
 	xor a
@@ -33,7 +33,7 @@ AgathaScript_76464: ; 76464 (1d:6464)
 
 AgathaScriptPointers: ; 76469 (1d:6469)
 	dw AgathaScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw AgathaScript2
 	dw AgathaScript3
 	dw AgathaScript4
@@ -41,8 +41,8 @@ AgathaScriptPointers: ; 76469 (1d:6469)
 AgathaScript4: ; 76473 (1d:6473)
 	ret
 asm_76474: ; 76474 (1d:6474)
-	ld hl, wccd3
-	ld a, $40
+	ld hl, wSimulatedJoypadStatesEnd
+	ld a, D_UP
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -50,8 +50,8 @@ asm_76474: ; 76474 (1d:6474)
 	ld [hli], a
 	ld [hl], a
 	ld a, $6
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_AGATHACURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -64,8 +64,8 @@ AgathaScript0: ; 76490 (1d:6490)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [wccd3], a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesEnd], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr c, .asm_764b4
@@ -77,11 +77,11 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $40
-	ld [wccd3], a
+	ld a, D_UP
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_AGATHACURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -95,7 +95,7 @@ CoordsData_764d1: ; 764d1 (1d:64d1)
 	db $FF
 
 AgathaScript3: ; 764da (1d:64da)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

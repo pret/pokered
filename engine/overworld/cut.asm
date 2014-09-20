@@ -6,13 +6,13 @@ UsedCut: ; ef54 (3:6f54)
 	jr z, .asm_ef6b
 	cp GYM
 	jr nz, .asm_ef77
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
 	jr asm_ef82
 .asm_ef6b
 	dec a
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	cp $3d ; cut tree
 	jr z, asm_ef82
 	cp $52 ; grass
@@ -36,36 +36,36 @@ asm_ef82: ; ef82 (3:6f82)
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
 	ld hl, wd730
 	res 6, [hl]
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call AnimateCutTree
 	ld de, CutTreeBlockSwaps ; $7100
 	call Func_f09f
-	call Func_eedc
+	call RedrawMapView
 	callba Func_79e96
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call UpdateSprites
-	jp Func_eedc
+	jp RedrawMapView
 
 UsedCutText: ; eff2 (3:6ff2)
 	TX_FAR _UsedCutText
@@ -87,17 +87,17 @@ AnimateCutTree: ; eff7 (3:6ff7)
 	ld hl, vChars1 + $7e0
 	ld bc, (BANK(Overworld_GFX) << 8) + $02
 	call CopyVideoData
-	jr asm_f055
+	jr WriteCutTreeBoulderDustAnimationOAMBlock
 .asm_f020
 	ld hl, vChars1 + $7c0
-	call LoadCutTreeOAM
+	call LoadCutTreeAnimationTilePattern
 	ld hl, vChars1 + $7d0
-	call LoadCutTreeOAM
+	call LoadCutTreeAnimationTilePattern
 	ld hl, vChars1 + $7e0
-	call LoadCutTreeOAM
+	call LoadCutTreeAnimationTilePattern
 	ld hl, vChars1 + $7f0
-	call LoadCutTreeOAM
-	call asm_f055
+	call LoadCutTreeAnimationTilePattern
+	call WriteCutTreeBoulderDustAnimationOAMBlock
 	ld hl, wOAMBuffer + $93
 	ld de, $4
 	ld a, $30
@@ -110,26 +110,27 @@ AnimateCutTree: ; eff7 (3:6ff7)
 	jr nz, .asm_f044
 	ret
 
-LoadCutTreeOAM: ; f04c (3:704c)
+LoadCutTreeAnimationTilePattern: ; f04c (3:704c)
 	ld de, AnimationTileset2 + $60 ; $474e ; tile depicting a leaf
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	jp CopyVideoData
-asm_f055: ; f055 (3:7055)
-	call Func_f068
+
+WriteCutTreeBoulderDustAnimationOAMBlock: ; f055 (3:7055)
+	call GetCutTreeBoulderDustAnimationOffsets
 	ld a, $9
-	ld de, CutTreeOAM ; $7060
+	ld de, CutTreeBoulderDustAnimationTilesAndAttributes
 	jp WriteOAMBlock
 
-CutTreeOAM: ; f060 (3:7060)
+CutTreeBoulderDustAnimationTilesAndAttributes: ; f060 (3:7060)
 	db $FC,$10,$FD,$10
 	db $FE,$10,$FF,$10
 
-Func_f068: ; f068 (3:7068)
+GetCutTreeBoulderDustAnimationOffsets: ; f068 (3:7068)
 	ld hl, wSpriteStateData1 + 4
-	ld a, [hli]
+	ld a, [hli] ; player's sprite screen Y position
 	ld b, a
 	inc hl
-	ld a, [hli]
+	ld a, [hli] ; player's sprite screen X position
 	ld c, a ; bc holds ypos/xpos of player's sprite
 	inc hl
 	inc hl
@@ -139,9 +140,9 @@ Func_f068: ; f068 (3:7068)
 	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
 	ld a, [wcd50]
 	and a
-	ld hl, CutTreeAnimationOffsets ; $708f
+	ld hl, CutTreeAnimationOffsets
 	jr z, .asm_f084
-	ld hl, CutTreeAnimationOffsets2 ; $7097
+	ld hl, BoulderDustAnimationOffsets
 .asm_f084
 	add hl, de
 	ld e, [hl]
@@ -162,8 +163,7 @@ CutTreeAnimationOffsets: ; f08f (3:708f)
 	db -8, 20 ; player is facing left
 	db 24, 20 ; player is facing right
 
-CutTreeAnimationOffsets2: ; f097 (3:7097)
-; Not sure if these ever get used. CutTreeAnimationOffsets only seems to be used.
+BoulderDustAnimationOffsets: ; f097 (3:7097)
 ; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
 ; These offsets represent 2 blocks away from the player
 	db  8,  52 ; player is facing down
@@ -178,7 +178,7 @@ Func_f09f: ; f09f (3:709f)
 	ld c, a
 	ld b, $0
 	ld d, $0
-	ld hl, wd35f
+	ld hl, wCurrentTileBlockMapViewPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

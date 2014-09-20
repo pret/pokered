@@ -1,9 +1,9 @@
-Func_567f9: ; 567f9 (15:67f9)
+_GetSpritePosition1: ; 567f9 (15:67f9)
 	ld hl, wSpriteStateData1
 	ld de, $4
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Func_56903
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
+	call GetSpriteDataPointer
 	ld a, [hli]
 	ld [$ffeb], a
 	inc hl
@@ -17,50 +17,50 @@ Func_567f9: ; 567f9 (15:67f9)
 	ld [$ffee], a
 	ret
 
-Func_56819: ; 56819 (15:6819)
+_GetSpritePosition2: ; 56819 (15:6819)
 	ld hl, wSpriteStateData1
-	ld de, $0004
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Func_56903
-	ld a, [hli]
+	ld de, $4
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
+	call GetSpriteDataPointer
+	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [wd130], a
 	inc hl
-	ld a, [hl]
+	ld a, [hl] ; c1x6 (screen X pos)
 	ld [wd131], a
-	ld de, $00fe
+	ld de, $104 - $6
 	add hl, de
-	ld a, [hli]
+	ld a, [hli] ; c2x4 (map Y pos)
 	ld [wd132], a
-	ld a, [hl]
+	ld a, [hl] ; c2x5 (map X pos)
 	ld [wd133], a
 	ret
 
-Func_5683d: ; 5683d (15:683d)
+_SetSpritePosition1: ; 5683d (15:683d)
 	ld hl, wSpriteStateData1
 	ld de, $4
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Func_56903
-	ld a, [$ffeb]
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
+	call GetSpriteDataPointer
+	ld a, [$ffeb] ; c1x4 (screen Y pos)
 	ld [hli], a
 	inc hl
-	ld a, [$ffec]
+	ld a, [$ffec] ; c1x6 (screen X pos)
 	ld [hl], a
-	ld de, $fe
+	ld de, $104 - $6
 	add hl, de
-	ld a, [$ffed]
+	ld a, [$ffed] ; c2x4 (map Y pos)
 	ld [hli], a
-	ld a, [$ffee]
+	ld a, [$ffee] ; c2x5 (map X pos)
 	ld [hl], a
 	ret
 
-Func_5685d: ; 5685d (15:685d)
+_SetSpritePosition2: ; 5685d (15:685d)
 	ld hl, wSpriteStateData1
 	ld de, $0004
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	call Func_56903
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
+	call GetSpriteDataPointer
 	ld a, [wd130]
 	ld [hli], a
 	inc hl
@@ -75,7 +75,7 @@ Func_5685d: ; 5685d (15:685d)
 	ret
 
 TrainerWalkUpToPlayer: ; 56881 (15:6881)
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	call ReadTrainerScreenPosition
@@ -139,18 +139,20 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld b, $0
 	ld a, $80           ; a = direction to go to
 .writeWalkScript
-	ld hl, wcc97
-	ld de, wcc97
+	ld hl, wNPCMovementDirections2
+	ld de, wNPCMovementDirections2
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
 	jp MoveSprite_
 
-Func_56903: ; 56903 (15:6903)
+; input: de = offset within sprite entry
+; output: de = pointer to sprite data
+GetSpriteDataPointer: ; 56903 (15:6903)
 	push de
 	add hl, de
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_SPRITEINDEX]
 	swap a
 	ld d, $0
 	ld e, a

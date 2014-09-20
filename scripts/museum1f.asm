@@ -1,8 +1,8 @@
 Museum1FScript: ; 5c0f7 (17:40f7)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Museum1FScriptPointers
 	ld a, [W_MUSEUM1FCURSCRIPT]
 	jp CallFunctionInTable
@@ -115,10 +115,10 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, Museum1FText_5c21a ; $421a
 	call PrintText
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $80
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	call UpdateSprites
 	jr asm_d1145
 .asm_0b094

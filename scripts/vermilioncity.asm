@@ -61,10 +61,10 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ret nz
 .asm_19810
 	ld a, $40
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
@@ -85,17 +85,17 @@ VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $40
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld [wccd4], a
 	ld a, $2
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
 
 VermilionCityScript3: ; 1984e (6:584e)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a
@@ -106,7 +106,7 @@ VermilionCityScript3: ; 1984e (6:584e)
 	ret
 
 VermilionCityScript1: ; 1985f (6:585f)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld c, $a

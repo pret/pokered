@@ -32,11 +32,11 @@ FileDataDestroyedText: ; 7361e (1c:761e)
 	db "@"
 
 LoadSAVCheckSum: ; 73623 (1c:7623)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
 	ld hl, $a598 ; hero name located in SRAM
 	ld bc, $f8b ; but here checks the full SAV
 	call SAVCheckSum
@@ -58,30 +58,30 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld bc, $b
 	call CopyData
 	ld hl, $a5a3
-	ld de, wPokedexOwned ; wPokedexOwned
+	ld de, wPokedexOwned
 	ld bc, $789
 	call CopyData
-	ld hl, W_CURMAPTILESET ; W_CURMAPTILESET
+	ld hl, W_CURMAPTILESET
 	set 7, [hl]
 	ld hl, $ad2c
 	ld de, wSpriteStateData1
 	ld bc, $200
 	call CopyData
 	ld a, [$b522]
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld hl, $b0c0
-	ld de, W_NUMINBOX ; wda80
-	ld bc, $462
+	ld de, W_NUMINBOX
+	ld bc, wBoxMonNicksEnd - W_NUMINBOX
 	call CopyData
 	and a
 	jp SAVGoodChecksum
 
 LoadSAVCheckSum1: ; 73690 (1c:7690)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
 	ld hl, $a598 ; hero name located in SRAM
 	ld bc, $f8b  ; but here checks the full SAV
 	call SAVCheckSum
@@ -90,18 +90,18 @@ LoadSAVCheckSum1: ; 73690 (1c:7690)
 	cp c
 	jr nz, SAVBadCheckSum
 	ld hl, $b0c0
-	ld de, W_NUMINBOX ; wda80
-	ld bc, $462
+	ld de, W_NUMINBOX
+	ld bc, wBoxMonNicksEnd - W_NUMINBOX
 	call CopyData
 	and a
 	jp SAVGoodChecksum
 
 LoadSAVCheckSum2: ; 736bd (1c:76bd)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
 	ld hl, $a598 ; hero name located in SRAM
 	ld bc, $f8b  ; but here checks the full SAV
 	call SAVCheckSum
@@ -125,8 +125,8 @@ SAVBadCheckSum: ; 736f7 (1c:76f7)
 
 SAVGoodChecksum: ; 736f8 (1c:76f8)
 	ld a, $0
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 Func_73701: ; 0x73701
@@ -193,67 +193,67 @@ OlderFileWillBeErasedText: ; 73787 (1c:7787)
 	db "@"
 
 SaveSAVtoSRAM0: ; 7378c (1c:778c)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
-	ld hl, wPlayerName ; wd158
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
+	ld hl, wPlayerName
 	ld de, $a598
 	ld bc, $b
 	call CopyData
-	ld hl, wPokedexOwned ; wPokedexOwned
+	ld hl, wPokedexOwned
 	ld de, $a5a3
-	ld bc, $789
+	ld bc, W_NUMINBOX - wPokedexOwned
 	call CopyData
-	ld hl, wSpriteStateData1 ; OAM?
+	ld hl, wSpriteStateData1
 	ld de, $ad2c
 	ld bc, $200
 	call CopyData
-	ld hl, W_NUMINBOX ; wda80
+	ld hl, W_NUMINBOX
 	ld de, $b0c0
-	ld bc, $462
+	ld bc, wBoxMonNicksEnd - W_NUMINBOX
 	call CopyData
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	ld [$b522], a
 	ld hl, $a598
 	ld bc, $f8b
 	call SAVCheckSum
 	ld [$b523], a
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 ; stored pokémon
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
-	ld hl, W_NUMINBOX ; wda80
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
+	ld hl, W_NUMINBOX
 	ld de, $b0c0
-	ld bc, $462
+	ld bc, wBoxMonNicksEnd - W_NUMINBOX
 	call CopyData
 	ld hl, $a598
 	ld bc, $f8b
 	call SAVCheckSum
 	ld [$b523], a
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 SaveSAVtoSRAM2: ; 7380f (1c:780f)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
-	ld [$4000], a
-	ld hl, wPartyCount ; wPartyCount
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
+	ld hl, wPartyCount
 	ld de, $af2c
-	ld bc, $194
+	ld bc, wPokedexOwned - wPartyCount
 	call CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, $a5a3
@@ -264,8 +264,8 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	call SAVCheckSum
 	ld [$b523], a
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 SaveSAVtoSRAM: ; 73848 (1c:7848)
@@ -334,13 +334,13 @@ PointerTable_73895: ; 73895 (1c:7895)
 	dw $B188
 	dw $B5EA
 
-Func_738a1:: ; 738a1 (1c:78a1)
+ChangeBox:: ; 738a1 (1c:78a1)
 	ld hl, WhenYouChangeBoxText
 	call PrintText
 	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	and a
-	ret nz
+	ret nz ; return if No was chosen
 	ld hl, wd5a0
 	bit 7, [hl]
 	call z, Func_73a29
@@ -356,25 +356,25 @@ Func_738a1:: ; 738a1 (1c:78a1)
 	call Func_7387b
 	ld e, l
 	ld d, h
-	ld hl, W_NUMINBOX ; wda80
+	ld hl, W_NUMINBOX
 	call Func_7390e
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	set 7, a
 	ld [wd5a0], a
 	call Func_7387b
-	ld de, W_NUMINBOX ; wda80
+	ld de, W_NUMINBOX
 	call Func_7390e
-	ld hl, W_MAPTEXTPTR ; wd36c
-	ld de, wWhichTrade ; wWhichTrade
+	ld hl, W_MAPTEXTPTR
+	ld de, wChangeBoxSavedMapTextPointer
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hl]
 	ld [de], a
-	call Func_3f05
+	call RestoreMapTextPointer
 	call SaveSAVtoSRAM
-	ld hl, wWhichTrade ; wWhichTrade
-	call Func_3f0f
+	ld hl, wChangeBoxSavedMapTextPointer
+	call SetMapTextPointer
 	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -386,12 +386,12 @@ WhenYouChangeBoxText: ; 73909 (1c:7909)
 
 Func_7390e: ; 7390e (1c:790e)
 	push hl
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
+	ld [MBC1SRamBankingMode], a
 	ld a, b
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	ld bc, $462
 	call CopyData
 	pop hl
@@ -405,8 +405,8 @@ Func_7390e: ; 7390e (1c:790e)
 	ld [$ba4c], a
 	call Func_73863
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 Func_7393f: ; 7393f (1c:793f)
@@ -502,19 +502,19 @@ BoxNoText: ; 73a21 (1c:7a21)
 	db "BOX No.@"
 
 Func_73a29: ; 73a29 (1c:7a29)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
+	ld [MBC1SRamBankingMode], a
 	ld a, $2
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call Func_73a4b
 	ld a, $3
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call Func_73a4b
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 Func_73a4b: ; 73a4b (1c:7a4b)
@@ -547,19 +547,19 @@ Func_73a7f: ; 73a7f (1c:7a7f)
 Func_73a84: ; 73a84 (1c:7a84)
 	ld hl, wWhichTrade ; wWhichTrade
 	push hl
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
+	ld [MBC1SRamBankingMode], a
 	ld a, $2
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call Func_73ab8
 	ld a, $3
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call Func_73ab8
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	pop hl
 	ld a, [wd5a0]
 	and $7f
@@ -592,8 +592,8 @@ SAVCheckRandomID: ;$7ad1
 	ld a,$0a
 	ld [$0000],a
 	ld a,$01
-	ld [$6000],a
-	ld [$4000],a
+	ld [MBC1SRamBankingMode],a
+	ld [MBC1SRamBank],a
 	ld a,[$a598]
 	and a
 	jr z,.next
@@ -615,7 +615,7 @@ SAVCheckRandomID: ;$7ad1
 	cp h
 .next
 	ld a,$00
-	ld [$6000],a
+	ld [MBC1SRamBankingMode],a
 	ld [$0000],a
 	ret
 
@@ -653,23 +653,23 @@ LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	; fallthrough
 
 HallOfFame_Copy: ; 73b51 (1c:7b51)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
+	ld [MBC1SRamBankingMode], a
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call CopyData
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 Func_73b6a: ; 73b6a (1c:7b6a)
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	ld a, $1
-	ld [$6000], a
+	ld [MBC1SRamBankingMode], a
 	xor a
 	call PadSRAM_FF
 	ld a, $1
@@ -679,12 +679,12 @@ Func_73b6a: ; 73b6a (1c:7b6a)
 	ld a, $3
 	call PadSRAM_FF
 	xor a
-	ld [$6000], a
-	ld [$0], a
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
 	ret
 
 PadSRAM_FF: ; 73b8f (1c:7b8f)
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	ld hl, $a000
 	ld bc, $2000
 	ld a, $ff

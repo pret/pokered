@@ -9,13 +9,13 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 	res 7, [hl]
 	call nz, RocketHideoutElevatorScript_4575f
 	xor a
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	inc a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 RocketHideoutElevatorScript_4572c: ; 4572c (11:572c)
-	ld hl, wd3af
+	ld hl, wWarpEntries
 	ld a, [wd73b]
 	ld b, a
 	ld a, [wd73c]

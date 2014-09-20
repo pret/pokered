@@ -16,7 +16,7 @@ PokemonTower6Script_60b02: ; 60b02 (18:4b02)
 
 PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
 	dw PokemonTower6Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw PokemonTower6Script3
 	dw PokemonTower6Script4
@@ -57,7 +57,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_60b82
 	ld hl, wd768
@@ -73,12 +73,12 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ret
 .asm_60b82
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $10
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
-	ld [wcd3b], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $3
@@ -87,7 +87,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ret
 
 PokemonTower6Script3: ; 60ba1 (18:4ba1)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

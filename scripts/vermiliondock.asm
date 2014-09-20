@@ -5,7 +5,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	jr nz, .asm_1db8d ; 0x1db5a $31
 	bit 0, [hl]
 	ret z
-	ld a, [wd42f]
+	ld a, [wDestinationWarpID]
 	cp $1
 	ret nz
 	bit 2, [hl]
@@ -14,23 +14,23 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	call Delay3
 	ld hl, wd730
 	set 7, [hl]
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld a, $40
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld a, $3
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
-	ld [wcd3b], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
 	dec a
 	ld [wJoyIgnore], a
 	ret
 .asm_1db8d
 	bit 5, [hl]
 	ret nz
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld [wJoyIgnore], a
@@ -66,7 +66,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld [$ff49], a
 	ld a, $58
 	ld [wTrainerEngageDistance], a
-	ld hl, wd526
+	ld hl, wMapViewVRAMPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -75,16 +75,16 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld d, $0
 	ld e, $8
 .asm_1dbfa
 	ld hl, $0002
 	add hl, bc
 	ld a, l
-	ld [wd526], a
+	ld [wMapViewVRAMPointer], a
 	ld a, h
-	ld [wd527], a
+	ld [wMapViewVRAMPointer + 1], a
 	push hl
 	push de
 	call ScheduleEastColumnRedraw
@@ -106,19 +106,19 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	jr nz, .asm_1dbfa ; 0x1dc22 $d6
 	xor a
 	ld [$ff4a], a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call VermilionDock_1dc94
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	pop hl
 	pop bc
 	ld [hl], b
 	dec hl
 	ld [hl], c
 	call LoadPlayerSpriteGraphics
-	ld hl, wd3ae
+	ld hl, wNumberOfWarps
 	dec [hl]
 	ret
 

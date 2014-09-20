@@ -1,8 +1,8 @@
 PewterGuys: ; 37ca1 (d:7ca1)
-	ld hl, wccd3
-	ld a, [wcd38]
-	dec a
-	ld [wcd38], a
+	ld hl, wSimulatedJoypadStatesEnd
+	ld a, [wSimulatedJoypadStatesIndex]
+	dec a ; this decrement causes it to overwrite the last byte before $FF in the list
+	ld [wSimulatedJoypadStatesIndex], a
 	ld d, 0
 	ld e, a
 	add hl, de
@@ -37,9 +37,9 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ret z
 	ld [de], a
 	inc de
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	inc a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	jr .asm_37cd2
 .asm_37ce1
 	inc hl

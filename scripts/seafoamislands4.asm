@@ -33,7 +33,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	jr .asm_465ed ; 0x465da $11
 .asm_465dc
 	ld a, $a2
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call Func_46981
 	ld a, [wd732]
@@ -66,12 +66,12 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	ld a, [W_XCOORD]
 	cp $f
 	ret nz
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement46632
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld hl, W_FLAGS_D733
 	set 2, [hl]
 	ld a, $1
@@ -85,7 +85,7 @@ RLEMovement46632: ; 46632 (11:6632)
 	db $ff
 
 SeafoamIslands4Script1: ; 46639 (11:6639)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $0
@@ -108,10 +108,10 @@ SeafoamIslands4Script2: ; 46644 (11:6644)
 .asm_4665e
 	ld de, RLEData_46688
 .asm_46661
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
 	ld hl, wd730
@@ -130,7 +130,7 @@ RLEData_46688: ; 46688 (11:6688)
 	db $80,$06,$10,$02,$80,$04,$FF
 
 SeafoamIslands4Script3: ; 4668f (11:668f)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $0

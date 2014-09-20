@@ -9,7 +9,7 @@ Route17Script: ; 55b7a (15:5b7a)
 
 Route17ScriptPointers: ; 55b8d (15:5b8d)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route17TextPointers: ; 55b93 (15:5b93)

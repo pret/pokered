@@ -31,7 +31,7 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld b, a
 	ld a, [hl]
 	ld c, a
-	ld hl, wd3af
+	ld hl, wWarpEntries
 	call Func_1ca0d
 
 Func_1ca0d: ; 1ca0d (7:4a0d)

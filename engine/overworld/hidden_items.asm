@@ -12,7 +12,7 @@ HiddenItems: ; 76688 (1d:6688)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, [wWhichTrade] ; item ID
 	ld [wd11e], a
 	call GetItemName
@@ -42,7 +42,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 .BagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, HiddenItemBagFullText
 	call PrintText
 	jp TextScriptEnd

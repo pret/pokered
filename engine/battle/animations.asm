@@ -517,7 +517,7 @@ Func_78e01: ; 78e01 (1e:4e01)
 	ret
 
 Func_78e23: ; 78e23 (1e:4e23)
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, $e4
 	jr z, .asm_78e47
@@ -1091,7 +1091,7 @@ CallWithTurnFlipped: ; 79155 (1e:5155)
 AnimationFlashScreenLong: ; 79165 (1e:5165)
 	ld a,3 ; cycle through the palettes 3 times
 	ld [wd08a],a
-	ld a,[wcf1b] ; running on SGB?
+	ld a,[wOnSGB] ; running on SGB?
 	and a
 	ld hl,FlashScreenLongMonochrome
 	jr z,.loop
@@ -1211,7 +1211,7 @@ Func_791f9: ; 791f9 (1e:51f9)
 	ld bc, $4040
 
 Func_791fc: ; 791fc (1e:51fc)
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, b
 	jr z, .asm_79204
@@ -1411,50 +1411,50 @@ Func_79329: ; 79329 (1e:5329)
 	ld [hli], a
 	ret
 
-Func_79337: ; 79337 (1e:5337)
+AdjustOAMBlockXPos: ; 79337 (1e:5337)
 	ld l, e
 	ld h, d
 
-Func_79339: ; 79339 (1e:5339)
+AdjustOAMBlockXPos2: ; 79339 (1e:5339)
 	ld de, $4
-.asm_7933c
+.loop
 	ld a, [wd08a]
 	ld b, a
 	ld a, [hl]
 	add b
 	cp $a8
-	jr c, .asm_7934a
+	jr c, .skipPuttingEntryOffScreen
 	dec hl
 	ld a, $a0
 	ld [hli], a
-.asm_7934a
+.skipPuttingEntryOffScreen
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_7933c
+	jr nz, .loop
 	ret
 
-Func_79350: ; 79350 (1e:5350)
+AdjustOAMBlockYPos: ; 79350 (1e:5350)
 	ld l, e
 	ld h, d
 
-Func_79352: ; 79352 (1e:5352)
+AdjustOAMBlockYPos2: ; 79352 (1e:5352)
 	ld de, $4
-.asm_79355
+.loop
 	ld a, [wd08a]
 	ld b, a
 	ld a, [hl]
 	add b
 	cp $70
-	jr c, .asm_79363
+	jr c, .skipSettingPreviousEntrysAttribute
 	dec hl
-	ld a, $a0
+	ld a, $a0 ; bug, sets previous OAM entry's attribute
 	ld [hli], a
-.asm_79363
+.skipSettingPreviousEntrysAttribute
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_79355
+	jr nz, .loop
 	ret
 
 AnimationBlinkEnemyMon: ; 79369 (1e:5369)
@@ -1962,7 +1962,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld d, $80
 	ld e, $8f
 	ld c, $ff
@@ -1984,7 +1984,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	dec c
 	jr nz, .asm_7967f
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call SaveScreenTilesToBuffer2
 	call ClearScreen
 	ld a, $1
@@ -2744,11 +2744,11 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld hl, vBGMap0
 	call Func_79e0d
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, vBGMap0 + $320
 	call Func_79e0d
 	ld a, $38
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call Func_792fd
 	ld hl, vBGMap0
 	call Func_79e0d
@@ -2759,11 +2759,11 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	call AnimationShowMonPic
 	call ClearSprites
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, vBGMap1
 	call Func_79e0d
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	call SaveScreenTilesToBuffer1
 	ld hl, vBGMap0
 	call Func_79e0d

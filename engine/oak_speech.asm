@@ -49,10 +49,10 @@ OakSpeech: ; 6115 (1:6115)
 	ld [wcf96],a
 	call AddItemToInventory  ; give one potion
 	ld a,[W_ANIMATIONID]
-	ld [wd71a],a
-	call Func_62ce
+	ld [wDestinationMap],a
+	call SpecialWarpIn
 	xor a
-	ld [$FFD7],a
+	ld [hTilesetType],a
 	ld a,[wd732]
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Func_61bc ; easter egg: skip the intro
@@ -62,7 +62,7 @@ OakSpeech: ; 6115 (1:6115)
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
 	call PrintText      ; prints text box
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call ClearScreen
 	ld a,NIDORINO
 	ld [wd0b5],a    ; pic displayed is stored at this location
@@ -73,7 +73,7 @@ OakSpeech: ; 6115 (1:6115)
 	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
@@ -82,7 +82,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld hl,IntroducePlayerText
 	call PrintText
 	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,Rival1Pic
 	ld bc,(Bank(Rival1Pic) << 8) | $00
@@ -93,12 +93,12 @@ OakSpeech: ; 6115 (1:6115)
 	call LoadDefaultNamesRival
 
 Func_61bc: ; 61bc (1:61bc)
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld a,[wd72d]
 	and a
 	jr nz,.next
@@ -148,10 +148,10 @@ Func_61bc: ; 61bc (1:61bc)
 	call ClearScreenArea
 	call LoadTextBoxTilePatterns
 	ld a,1
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld c,$32
 	call DelayFrames
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1: ; 6253 (1:6253)
 	TX_FAR _OakSpeechText1

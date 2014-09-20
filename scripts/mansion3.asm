@@ -34,13 +34,13 @@ Mansion3Script_52204: ; 52204 (14:6204)
 
 Mansion3ScriptPointers: ; 52235 (14:6235)
 	dw Mansion3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Mansion3Script0: ; 5223b (14:623b)
 	ld hl, CoordsData_52254
 	call Mansion3Script_5225b
-	ld a, [wd71e]
+	ld a, [wWhichDungeonWarp]
 	and a
 	jp z, CheckFightingMapTrainers
 	cp $3
@@ -48,7 +48,7 @@ Mansion3Script0: ; 5223b (14:623b)
 	jr nz, .asm_52250
 	ld a, $d6
 .asm_52250
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ret
 
 CoordsData_52254: ; 52254 (14:6254)
@@ -59,14 +59,14 @@ CoordsData_52254: ; 52254 (14:6254)
 
 Mansion3Script_5225b: ; 5225b (14:625b)
 	xor a
-	ld [wd71e], a
+	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
 	bit 4, a
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, [wWhichTrade] ; wWhichTrade
-	ld [wd71e], a
+	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
 	ld hl, wd732

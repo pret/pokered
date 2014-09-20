@@ -1,22 +1,23 @@
 ; prints text for bookshelves in buildings without sign events
 PrintBookshelfText: ; fb50 (3:7b50)
-	ld a, [wSpriteStateData1 + 9]
-	cp $4
-	jr nz, .asm_fb7f
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
+	jr nz, .noMatch
+; facing up
+	ld a, [W_CURMAPTILESET]
 	ld b, a
 	aCoord 8, 7
 	ld c, a
-	ld hl, BookshelfTileIDs ; $7b8b
-.asm_fb62
+	ld hl, BookshelfTileIDs
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_fb7f
+	jr z, .noMatch
 	cp b
-	jr nz, .asm_fb7b
+	jr nz, .nextBookshelfEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .asm_fb7c
+	jr nz, .nextBookshelfEntry2
 	ld a, [hl]
 	push af
 	call EnableAutoTextBoxDrawing
@@ -25,12 +26,12 @@ PrintBookshelfText: ; fb50 (3:7b50)
 	xor a
 	ld [$ffdb], a
 	ret
-.asm_fb7b
+.nextBookshelfEntry1
 	inc hl
-.asm_fb7c
+.nextBookshelfEntry2
 	inc hl
-	jr .asm_fb62
-.asm_fb7f
+	jr .loop
+.noMatch
 	ld a, $ff
 	ld [$ffdb], a
 	ld b, BANK(PrintCardKeyText)
@@ -114,12 +115,12 @@ TownMapText: ; fc12 (3:7c12)
 	db $06
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd730
 	set 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call LoadFontTilePatterns

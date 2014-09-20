@@ -42,18 +42,18 @@ CoordsData_19277: ; 19277 (6:5277)
 	db $ff
 
 PewterCityScript1: ; 19280 (6:5280)
-	ld a, [wcc57]
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, $3
-	ld [$ff8c], a
-	ld a, $4
+	ld [H_SPRITEINDEX], a
+	ld a, SPRITE_FACING_UP
 	ld [$ff8d], a
-	call Func_34a6
-	ld a, $34
+	call SetSpriteFacingDirectionAndDelay
+	ld a, ($3 << 4) | SPRITE_FACING_UP
 	ld [$ff8d], a
-	call Func_34b9
-	call Func_2307
+	call SetSpriteImageIndexAfterSettingFacingDirection
+	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
@@ -68,8 +68,8 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld a, $11
 	ld [$ffee], a
 	ld a, $3
-	ld [wcf13], a
-	call Func_32f9
+	ld [wSpriteIndex], a
+	call SetSpritePosition1
 	ld a, $3
 	ld [$ff8c], a
 	ld de, MovementData_PewterMuseumGuyExit ; $52ce
@@ -94,8 +94,8 @@ PewterCityScript2: ; 192d3 (6:52d3)
 
 PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $3
-	ld [wcf13], a
-	call Func_32fe
+	ld [wSpriteIndex], a
+	call SetSpritePosition2
 	ld a, $3
 	ld [wcc4d], a
 	predef ShowObject
@@ -106,18 +106,18 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ret
 
 PewterCityScript4: ; 19305 (6:5305)
-	ld a, [wcc57]
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, $5
 	ld [$ff8c], a
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [$ff8d], a
-	call Func_34a6
-	ld a, $18
+	call SetSpriteFacingDirectionAndDelay
+	ld a, ($1 << 4) | SPRITE_FACING_LEFT
 	ld [$ff8d], a
-	call Func_34b9
-	call Func_2307
+	call SetSpriteImageIndexAfterSettingFacingDirection
+	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
@@ -132,8 +132,8 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld a, $10
 	ld [$ffee], a
 	ld a, $5
-	ld [wcf13], a
-	call Func_32f9
+	ld [wSpriteIndex], a
+	call SetSpritePosition1
 	ld a, $5
 	ld [$ff8c], a
 	ld de, MovementData_PewterGymGuyExit
@@ -158,8 +158,8 @@ PewterCityScript5: ; 19359 (6:5359)
 
 PewterCityScript6: ; 1936f (6:536f)
 	ld a, $5
-	ld [wcf13], a
-	call Func_32fe
+	ld [wSpriteIndex], a
+	call SetSpritePosition2
 	ld a, $4
 	ld [wcc4d], a
 	predef ShowObject
@@ -210,14 +210,14 @@ PewterCityText3: ; 193b1 (6:53b1)
 	xor a
 	ldh [$b3], a
 	ldh [$b4], a
-	ld [wcf10], a
+	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
-	ld [wcc57], a
+	ld [wNPCMovementScriptPointerTableNum], a
 	ldh a, [$b8]
-	ld [wcc58], a
+	ld [wNPCMovementScriptBank], a
 	ld a, $3
-	ld [wcf13], a
-	call Func_32f4
+	ld [wSpriteIndex], a
+	call GetSpritePosition2
 	ld a, $1
 	ld [W_PEWTERCITYCURSCRIPT], a
 .asm_ac429 ; 0x193ee
@@ -274,14 +274,14 @@ PewterCityText5: ; 19436 (6:5436)
 	call PrintText
 	xor a
 	ldh [$b4], a
-	ld [wcf10], a
+	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
-	ld [wcc57], a
+	ld [wNPCMovementScriptPointerTableNum], a
 	ldh a, [$b8]
-	ld [wcc58], a
+	ld [wNPCMovementScriptBank], a
 	ld a, $5
-	ld [wcf13], a
-	call Func_32f4
+	ld [wSpriteIndex], a
+	call GetSpritePosition2
 	ld a, $4
 	ld [W_PEWTERCITYCURSCRIPT], a
 	jp TextScriptEnd

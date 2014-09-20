@@ -22,10 +22,10 @@ AskName: ; 64eb (1:64eb)
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	jr nz, .asm_654c
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	push af
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	push hl
 	ld a, $2
 	ld [wd07d], a
@@ -33,12 +33,12 @@ AskName: ; 64eb (1:64eb)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jr nz, .asm_653e
-	call Func_3e08
+	call ReloadMapSpriteTilePatterns
 .asm_653e
 	call LoadScreenTilesFromBuffer1
 	pop hl
 	pop af
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, [wcf4b]
 	cp $50
 	ret nz
@@ -56,12 +56,12 @@ DoYouWantToNicknameText: ; 0x6557
 Func_655c: ; 655c (1:655c)
 	ld hl, wHPBarMaxHP
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld a, $2
 	ld [wd07d], a
 	call DisplayNamingScreen
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wcf4b]
 	cp $50
@@ -171,8 +171,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jp z, LoadTextBoxTilePatterns
-	ld hl, Func_3ee5b
-	ld b, BANK(Func_3ee5b)
+	ld hl, LoadHudTilePatterns
+	ld b, BANK(LoadHudTilePatterns)
 	jp Bankswitch
 
 .unknownPointerTable_665e: ; 665e (1:665e)

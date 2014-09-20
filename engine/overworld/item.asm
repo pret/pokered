@@ -34,7 +34,7 @@ PickupItem:
 	ld [wcc4d], a
 	predef HideObject
 	ld a, 1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, FoundItemText
 	jr .print
 

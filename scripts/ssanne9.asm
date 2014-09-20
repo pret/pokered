@@ -1,8 +1,8 @@
 SSAnne9Script: ; 61b4b (18:5b4b)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, SSAnne9TrainerHeaders
 	ld de, SSAnne9ScriptPointers
 	ld a, [W_SSANNE9CURSCRIPT]
@@ -12,7 +12,7 @@ SSAnne9Script: ; 61b4b (18:5b4b)
 
 SSAnne9ScriptPointers: ; 61b64 (18:5b64)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SSAnne9TextPointers: ; 61b6a (18:5b6a)

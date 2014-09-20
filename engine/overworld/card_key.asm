@@ -2,18 +2,18 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld hl, SilphCoMapList
 	ld a, [W_CURMAP]
 	ld b, a
-.asm_5267a
+.silphCoMapListLoop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr nz, .asm_5267a
-	predef Func_c586
-	ld a, [wcfc6]
+	jr nz, .silphCoMapListLoop
+	predef GetTileAndCoordsInFrontOfPlayer
+	ld a, [wTileInFrontOfPlayer]
 	cp $18
-	jr z, .asm_5269c
+	jr z, .cardKeyDoorInFrontOfPlayer
 	cp $24
-	jr z, .asm_5269c
+	jr z, .cardKeyDoorInFrontOfPlayer
 	ld b, a
 	ld a, [W_CURMAP]
 	cp SILPH_CO_11F
@@ -21,41 +21,41 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld a, b
 	cp $5e
 	ret nz
-.asm_5269c
+.cardKeyDoorInFrontOfPlayer
 	ld b, CARD_KEY
 	call IsItemInBag
-	jr z, .asm_526dc
-	call Func_526fd
+	jr z, .noCardKey
+	call GetCoordsInFrontOfPlayer
 	push de
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call PrintPredefTextID
 	pop de
 	srl d
 	ld a, d
 	ld b, a
-	ld [wd73f], a
+	ld [wCardKeyDoorY], a
 	srl e
 	ld a, e
 	ld c, a
-	ld [wd740], a
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld [wCardKeyDoorX], a
+	ld a, [W_CURMAP]
 	cp SILPH_CO_11F
-	jr nz, .asm_526c8
+	jr nz, .notSilphCo11F
 	ld a, $3
-	jr .asm_526ca
-.asm_526c8
+	jr .replaceCardKeyDoorTileBlock
+.notSilphCo11F
 	ld a, $e
-.asm_526ca
+.replaceCardKeyDoorTileBlock
 	ld [wd09f], a
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	ld hl, wd126
 	set 5, [hl]
 	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3
 	jp PlaySound
-.asm_526dc
+.noCardKey
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp PrintPredefTextID
 
 SilphCoMapList: ; 526e3 (14:66e3)
@@ -81,26 +81,32 @@ CardKeyFailText: ; 526f8 (14:66f8)
 	TX_FAR _CardKeyFailText
 	db "@"
 
-Func_526fd: ; 526fd (14:66fd)
-	ld a, [W_YCOORD] ; wd361
+; d = Y
+; e = X
+GetCoordsInFrontOfPlayer: ; 526fd (14:66fd)
+	ld a, [W_YCOORD]
 	ld d, a
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld e, a
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	and a
-	jr nz, .asm_5270d
+	jr nz, .notFacingDown
+; facing down
 	inc d
 	ret
-.asm_5270d
-	cp $4
-	jr nz, .asm_52713
+.notFacingDown
+	cp SPRITE_FACING_UP
+	jr nz, .notFacingUp
+; facing up
 	dec d
 	ret
-.asm_52713
-	cp $8
-	jr nz, .asm_52719
+.notFacingUp
+	cp SPRITE_FACING_LEFT
+	jr nz, .notFacingLeft
+; facing left
 	dec e
 	ret
-.asm_52719
+.notFacingLeft
+; facing right
 	inc e
 	ret

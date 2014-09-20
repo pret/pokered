@@ -9,7 +9,7 @@ ViridianForestScript: ; 6110d (18:510d)
 
 ViridianForestScriptPointers: ; 61120 (18:5120)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 ViridianForestTextPointers: ; 61126 (18:5126)

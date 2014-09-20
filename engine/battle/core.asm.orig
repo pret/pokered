@@ -2221,66 +2221,65 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .throwSafariBallWasSelected
 	ld a, SAFARI_BALL
 	ld [wcf91], a
-	jr UseBagItem
-
+	jr .useItem
 .upperLeftMenuItemWasNotSelected ; a menu item other than the upper left item was selected
 	cp $2
-	jp nz, PartyMenuOrRockOrRun
-
+	jp nz, .partyMenuOrRockOrRunWasSelected
 ; either the bag (normal battle) or bait (safari battle) was selected
 	ld a, [W_ISLINKBATTLE]
 	cp $4
 	jr nz, .notLinkBattle
-
 ; can't use items in link battles
-	ld hl, ItemsCantBeUsedHereText
+	ld hl, .itemsCantBeUsedHereText
 	call PrintText
 	jp DisplayBattleMenu
-
 .notLinkBattle
 	call SaveScreenTilesToBuffer2
 	ld a, [W_BATTLETYPE]
 	cp $2 ; is it a safari battle?
-	jr nz, BagWasSelected
-
+	jr nz, .bagWasSelected
 ; bait was selected
 	ld a, SAFARI_BAIT
 	ld [wcf91], a
-	jr UseBagItem
-
-BagWasSelected:
+	jr .useItem
+.bagWasSelected
 	call LoadScreenTilesFromBuffer1
 	ld a, [W_BATTLETYPE]
 	and a ; is it a normal battle?
 	jr nz, .next
-
 ; normal battle
 	call DrawHUDsAndHPBars
 .next
 	ld a, [W_BATTLETYPE]
 	dec a ; is it the old man tutorial?
-	jr nz, DisplayPlayerBag ; no, it is a normal battle
-	ld hl, OldManItemList
+	jr nz, .getPlayerBagPointer ; no, it is a normal battle
+	ld hl, .oldManItemList
 	ld a, l
 	ld [wcf8b], a
 	ld a, h
 	ld [wcf8c], a
-	jr DisplayBagMenu
+<<<<<<< HEAD
+	jr Func_3d03c
 
-OldManItemList:
+OldManItemList: ; 3d02d (f:502d)
 	db 1 ; # items
 	db POKE_BALL, 50
 	db -1
 
-DisplayPlayerBag:
-	; get the pointer to player's bag when in a normal battle
+Func_3d031
+	ld hl, wNumBagItems ; wNumBagItems
+=======
+	jr .displayBagMenu
+.oldManItemList
+	db $01, POKE_BALL, 50, $ff
+.getPlayerBagPointer ; get the pointer to player's bag when in a normal battle
 	ld hl, wNumBagItems
+>>>>>>> yama/master
 	ld a, l
 	ld [wcf8b], a
 	ld a, h
 	ld [wcf8c], a
-
-DisplayBagMenu:
+.displayBagMenu
 	xor a
 	ld [wcf93], a
 	ld a, ITEMLISTMENU
@@ -2294,9 +2293,7 @@ DisplayBagMenu:
 	ld [wcc37], a
 	ld [wMenuItemToSwap], a
 	jp c, DisplayBattleMenu ; go back to battle menu if an item was not selected
-
-UseBagItem:
-	; either use an item from the bag or use a safari zone item
+.useItem ; either use an item from the bag or use a safari zone item
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetItemName
@@ -2311,11 +2308,9 @@ UseBagItem:
 	ld a, [W_BATTLETYPE]
 	cp $2 ; is it a safari battle?
 	jr z, .checkIfMonCaptured
-
 	ld a, [wcd6a]
 	and a ; was the item used successfully?
-	jp z, BagWasSelected ; if not, go back to the bag menu
-
+	jp z, .bagWasSelected ; if not, go back to the bag menu
 	ld a, [W_PLAYERBATTSTATUS1]
 	bit 5, a ; is the player using a multi-turn move like wrap?
 	jr z, .checkIfMonCaptured
@@ -2324,12 +2319,10 @@ UseBagItem:
 	jr nz, .checkIfMonCaptured
 	ld hl, W_PLAYERBATTSTATUS1
 	res 5, [hl] ; not using multi-turn move any more
-
 .checkIfMonCaptured
 	ld a, [wd11c]
 	and a ; was the enemy mon captured with a ball?
 	jr nz, .returnAfterCapturingMon
-
 	ld a, [W_BATTLETYPE]
 	cp $2 ; is it a safari battle?
 	jr z, .returnAfterUsingItem_NoCapture
@@ -2338,11 +2331,9 @@ UseBagItem:
 	call DrawHUDsAndHPBars
 	call Delay3
 .returnAfterUsingItem_NoCapture
-
 	call GBPalNormal
 	and a ; reset carry
 	ret
-
 .returnAfterCapturingMon
 	call GBPalNormal
 	xor a
@@ -2352,11 +2343,11 @@ UseBagItem:
 	scf ; set carry
 	ret
 
-ItemsCantBeUsedHereText:
+.itemsCantBeUsedHereText
 	TX_FAR _ItemsCantBeUsedHereText
 	db "@"
 
-PartyMenuOrRockOrRun:
+.partyMenuOrRockOrRunWasSelected
 	dec a ; was Run selected?
 	jp nz, BattleMenu_RunWasSelected
 ; party menu or rock was selected
@@ -2367,7 +2358,7 @@ PartyMenuOrRockOrRun:
 ; safari battle
 	ld a, SAFARI_ROCK
 	ld [wcf91], a
-	jp UseBagItem
+	jp .useItem
 .partyMenuWasSelected
 	call LoadScreenTilesFromBuffer1
 	xor a
@@ -7225,14 +7216,25 @@ PoisonEffect: ; 3f24f (f:724f)
 	dec de
 	ld a, [H_WHOSETURN]
 	and a
+<<<<<<< HEAD
 	ld b, ANIM_C7
+	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
+=======
+	ld b, $c7
 	ld hl, W_PLAYERBATTSTATUS3
+>>>>>>> yama/master
 	ld a, [de]
 	ld de, W_PLAYERTOXICCOUNTER
 	jr nz, .asm_3f2b0
+<<<<<<< HEAD
 	ld b, ANIM_A9
+	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
+	ld de, W_ENEMYTOXICCOUNTER ; wd071
+=======
+	ld b, $a9
 	ld hl, W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYTOXICCOUNTER
+>>>>>>> yama/master
 .asm_3f2b0
 	cp TOXIC
 	jr nz, .asm_3f2bd
@@ -7335,15 +7337,25 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	jr z, .freeze
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
-	call QuarterSpeedDueToParalysis  ;quarter speed of affected monster
+<<<<<<< HEAD
+	call Func_3ed27  ;quarter speed of affected monster
 	ld a, ANIM_A9
+=======
+	call QuarterSpeedDueToParalysis  ;quarter speed of affected monster
+	ld a, $a9
+>>>>>>> yama/master
 	call Func_3fbb9  ;animation
 	jp PrintMayNotAttackText    ;print paralysis text
 .burn
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
-	call HalveAttackDueToBurn
+<<<<<<< HEAD
+	call Func_3ed64
 	ld a, ANIM_A9
+=======
+	call HalveAttackDueToBurn
+	ld a, $a9
+>>>>>>> yama/master
 	call Func_3fbb9  ;animation
 	ld hl, BurnedText
 	jp PrintText
@@ -7907,8 +7919,13 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	inc a
 	inc a
 	ld [de], a
-	ld a, [H_WHOSETURN]
+<<<<<<< HEAD
+	ld a, [H_WHOSETURN] ; $fff3
 	add ANIM_B0
+=======
+	ld a, [H_WHOSETURN]
+	add $b0
+>>>>>>> yama/master
 	jp Func_3fb96
 
 SwitchAndTeleportEffect: ; 3f739 (f:7739)
@@ -8106,9 +8123,15 @@ ChargeEffect: ; 3f88c (f:788c)
 	and a
 	ld b, XSTATITEM_ANIM
 	jr z, .asm_3f8a1
+<<<<<<< HEAD
+	ld hl, W_ENEMYBATTSTATUS1 ; W_ENEMYBATTSTATUS1
+	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
+	ld b, ANIM_AF
+=======
 	ld hl, W_ENEMYBATTSTATUS1
 	ld de, W_ENEMYMOVEEFFECT
-	ld b, ANIM_AF
+	ld b, $af
+>>>>>>> yama/master
 .asm_3f8a1
 	set 4, [hl]
 	ld a, [de]

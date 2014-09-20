@@ -320,7 +320,7 @@ Func_21673: ; 21673 (8:5673)
 	jp Func_214e8
 
 Func_216b3: ; 216b3 (8:56b3)
-	callba Func_738a1
+	callba ChangeBox
 	jp Func_214e8
 
 Func_216be: ; 216be (8:56be)

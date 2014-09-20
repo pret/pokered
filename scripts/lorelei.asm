@@ -25,7 +25,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 .asm_761ab
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 LoreleiScript_761b6: ; 761b6 (1d:61b6)
 	xor a
@@ -34,7 +34,7 @@ LoreleiScript_761b6: ; 761b6 (1d:61b6)
 
 LoreleiScriptPointers: ; 761bb (1d:61bb)
 	dw LoreleiScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw LoreleiScript2
 	dw LoreleiScript3
 	dw LoreleiScript4
@@ -42,8 +42,8 @@ LoreleiScriptPointers: ; 761bb (1d:61bb)
 LoreleiScript4: ; 761c5 (1d:61c5)
 	ret
 asm_761c6: ; 761c6 (1d:61c6)
-	ld hl, wccd3
-	ld a, $40
+	ld hl, wSimulatedJoypadStatesEnd
+	ld a, D_UP
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -51,8 +51,8 @@ asm_761c6: ; 761c6 (1d:61c6)
 	ld [hli], a
 	ld [hl], a
 	ld a, $6
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -64,8 +64,8 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [wccd3], a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesEnd], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr c, .asm_76206
@@ -77,11 +77,11 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $40
-	ld [wccd3], a
+	ld a, D_UP
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -95,7 +95,7 @@ CoordsData_76223: ; 76223 (1d:6223)
 	db $FF
 
 LoreleiScript3: ; 7622c (1d:622c)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

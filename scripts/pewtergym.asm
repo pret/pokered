@@ -31,7 +31,7 @@ PewterGymScript_5c3bf: ; 5c3bf (17:43bf)
 
 PewterGymScriptPointers: ; 5c3ca (17:43ca)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw PewterGymScript3
 
@@ -126,9 +126,9 @@ PewterGymText1: ; 5c44e (17:444e)
 	set 7, [hl]
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1

@@ -6,11 +6,11 @@ FarCopyData2::
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 	call CopyData
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 	ret
 
 FarCopyData3::
@@ -20,7 +20,7 @@ FarCopyData3::
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 	push hl
 	push de
 	push de
@@ -32,7 +32,7 @@ FarCopyData3::
 	pop hl
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 	ret
 
 FarCopyDataDouble::
@@ -43,7 +43,7 @@ FarCopyDataDouble::
 	push af
 	ld a,[$ff8b]
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -56,7 +56,7 @@ FarCopyDataDouble::
 	jr nz,.loop
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [MBC3RomBank],a
+	ld [MBC1RomBank],a
 	ret
 
 CopyVideoData::
@@ -74,7 +74,7 @@ CopyVideoData::
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	ld a, e
 	ld [H_VBCOPYSRC], a
@@ -96,7 +96,7 @@ CopyVideoData::
 	call DelayFrame
 	ld a, [$ff8b]
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	pop af
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
@@ -123,7 +123,7 @@ CopyVideoDataDouble::
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	ld a, e
 	ld [H_VBCOPYDOUBLESRC], a
@@ -145,7 +145,7 @@ CopyVideoDataDouble::
 	call DelayFrame
 	ld a, [$ff8b]
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	pop af
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret

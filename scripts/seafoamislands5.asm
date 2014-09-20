@@ -44,10 +44,10 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 .asm_467e6
 	ld a, $1
 .asm_467e8
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $40
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	ld hl, W_FLAGS_D733
 	res 2, [hl]
 	ld a, $1
@@ -62,7 +62,7 @@ CoordsData_467fe: ; 467fe (11:67fe)
 	db $FF
 
 SeafoamIslands5Script1: ; 46807 (11:6807)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a
@@ -89,11 +89,11 @@ SeafoamIslands5Script2: ; 46816 (11:6816)
 .asm_46837
 	ld de, RLEMovementData_46852
 .asm_4683a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 .asm_46849
 	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
@@ -117,7 +117,7 @@ RLEMovementData_46859: ; 46859 (11:6859)
 	db $FF
 
 SeafoamIslands5Script3: ; 46860 (11:6860)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	ld b, a
 	cp $1
 	call z, SeaFoamIslands5Script_46872
@@ -130,8 +130,8 @@ SeafoamIslands5Script3: ; 46860 (11:6860)
 
 SeaFoamIslands5Script_46872: ; 46872 (11:6872)
 	xor a
-	ld [wd700], a
-	ld [wd11a], a
+	ld [wWalkBikeSurfState], a
+	ld [wWalkBikeSurfStateCopy], a
 	jp ForceBikeOrSurf
 
 SeafoamIslands5TextPointers: ; 4687c (11:687c)

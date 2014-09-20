@@ -1,7 +1,7 @@
 PewterMartScript: ; 74cad (1d:4cad)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	ret
 
 PewterMartTextPointers: ; 74cb6 (1d:4cb6)

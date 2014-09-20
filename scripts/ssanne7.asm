@@ -64,7 +64,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
 	jr z, .asm_61910 ; 0x61915 $f9
-	call Func_2307
+	call PlayDefaultMusic
 	ld hl, wd803
 	set 1, [hl]
 	ld hl, wd72d

@@ -16,10 +16,10 @@ VictoryRoad3Object: ; 0x44acd (size=106)
 	db SPRITE_LASS, $3 + 4, $d + 4, $ff, $d3, TRAINER | $4, COOLTRAINER_F + $C8, $3
 	db SPRITE_BALL, $5 + 4, $1a + 4, $ff, $ff, ITEM | $5, MAX_REVIVE
 	db SPRITE_BALL, $7 + 4, $7 + 4, $ff, $ff, ITEM | $6, TM_47
-	db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, $10, $7 ; person
-	db SPRITE_BOULDER, $c + 4, $d + 4, $ff, $10, $8 ; person
-	db SPRITE_BOULDER, $a + 4, $18 + 4, $ff, $10, $9 ; person
-	db SPRITE_BOULDER, $f + 4, $16 + 4, $ff, $10, $a ; person
+	db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $7 ; person
+	db SPRITE_BOULDER, $c + 4, $d + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $8 ; person
+	db SPRITE_BOULDER, $a + 4, $18 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $9 ; person
+	db SPRITE_BOULDER, $f + 4, $16 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $a ; person
 
 	; warp-to
 	EVENT_DISP VICTORY_ROAD_3_WIDTH, $7, $17 ; VICTORY_ROAD_2

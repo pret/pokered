@@ -77,9 +77,15 @@ Func_70e92: ; 70e92 (1c:4e92)
 	bit 7, b
 	jr nz, .asm_70f01
 	xor a
-	ld [wTownMapSpriteBlinkingEnabled], a
+<<<<<<< HEAD
+	ld [wd09b], a
 	ld [hJoy7], a
+	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+=======
+	ld [wTownMapSpriteBlinkingEnabled], a
+	ld [$ffb7], a
 	ld [wTownMapSpriteBlinkingCounter], a
+>>>>>>> yama/master
 	call Func_711ab
 	pop hl
 	pop af

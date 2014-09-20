@@ -173,13 +173,13 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wcf0a],a
 .skipSettingFlag2
 	ld a,(SFX_02_5a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	call WaitForSoundToFinish ; wait until sound is done playing
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	ld hl,PokemartBoughtItemText
 	call PrintText
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
-	call LoadScreenTilesFromBuffer1 ; restore save screen
+	call LoadScreenTilesFromBuffer1
 	ld a,$13
 	ld [wd125],a
 	call DisplayTextBoxID ; draw money text box
@@ -203,7 +203,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartThankYouText
 	call PrintText
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call UpdateSprites ; move sprites
 	ld a,[wd07e]
 	ld [wListScrollOffset],a

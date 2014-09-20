@@ -31,7 +31,7 @@ CeruleanGymScript_5c6ed: ; 5c6ed (17:46ed)
 
 CeruleanGymScriptPointers: ; 5c6f8 (17:46f8)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw CeruleanGymScript3
 
@@ -126,9 +126,9 @@ CeruleanGymText1: ; 5c771 (17:4771)
 	set 7, [hl]
 	ld hl, CeruleanGymText_5c7d8
 	ld de, CeruleanGymText_5c7d8
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $2

@@ -1,8 +1,8 @@
 CeruleanHouse2Script: ; 74e09 (1d:4e09)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	dec a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 CeruleanHouse2TextPointers: ; 74e13 (1d:4e13)
@@ -27,7 +27,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld [wcf8c], a
 	xor a
 	ld [wcf93], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID

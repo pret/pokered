@@ -1,23 +1,26 @@
 UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [wSpriteStateData2]
 	and a
-	jr z, .asm_4e41
+	jr z, .checkIfTextBoxInFrontOfSprite
 	cp $ff
-	jr z, .asm_4e4a
+	jr z, .disableSprite
 	dec a
 	ld [wSpriteStateData2], a
-	jr .asm_4e4a
-.asm_4e41
+	jr .disableSprite
+; check if a text box is in front of the sprite by checking if the lower left
+; background tile the sprite is standing on is greater than $5F, which is
+; the maximum number for map tiles
+.checkIfTextBoxInFrontOfSprite
 	aCoord 8, 9
 	ld [$ff93], a
 	cp $60
-	jr c, .asm_4e50
-.asm_4e4a
+	jr c, .lowerLeftTileIsMapTile
+.disableSprite
 	ld a, $ff
 	ld [wSpriteStateData1 + 2], a
 	ret
-.asm_4e50
-	call Func_4c70
+.lowerLeftTileIsMapTile
+	call DetectCollisionBetweenSprites
 	ld h, $c1
 	ld a, [wWalkCounter] ; wcfc5
 	and a
@@ -165,8 +168,8 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	ld hl, wd730
 	res 0, [hl]
 	xor a
-	ld [wcd38], a
-	ld [wcd3a], a
+	ld [wSimulatedJoypadStatesIndex], a
+	ld [wWastedByteCD3A], a
 	ret
 .asm_4f4b
 	cp $fe
@@ -490,6 +493,8 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	cp b
 	jr c, .spriteInvisible  ; right of screen region
 .skipXVisibilityTest
+; make the sprite invisible if a text box is in front of it
+; $5F is the maximum number for map tiles
 	call getTileSpriteStandsOn
 	ld d, $60
 	ld a, [hli]
@@ -604,16 +609,16 @@ CanWalkOntoTile: ; 516e (1:516e)
 	jr nc, .impassable ; don't walk off screen
 	push de
 	push bc
-	call Func_4c70
+	call DetectCollisionBetweenSprites
 	pop bc
 	pop de
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $c
 	ld l, a
-	ld a, [hl]         ; c1xc (forbidden directions flags(?))
+	ld a, [hl]         ; c1xc (directions in which sprite collision would occur)
 	and b              ; check against chosen direction (1,2,4 or 8)
-	jr nz, .impassable ; direction forbidden, don't go there
+	jr nz, .impassable ; collision between sprites, don't go there
 	ld h, $c2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
@@ -716,8 +721,8 @@ Func_5236: ; 5236 (1:5236)
 	bit 7, [hl]
 	set 7, [hl]
 	jp z, Func_52a6
-	ld hl, wcc97
-	ld a, [wcd37]
+	ld hl, wNPCMovementDirections2
+	ld a, [wNPCMovementDirections2Index]
 	add l
 	ld l, a
 	jr nc, .asm_5251
@@ -770,13 +775,13 @@ Func_5236: ; 5236 (1:5236)
 	ret nz
 	ld a, $8
 	ld [wcf18], a
-	ld hl, wcd37
+	ld hl, wNPCMovementDirections2Index
 	inc [hl]
 	ret
 
 Func_52a6: ; 52a6 (1:52a6)
 	xor a
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	ld a, $8
 	ld [wcf18], a
 	jp Func_52c3

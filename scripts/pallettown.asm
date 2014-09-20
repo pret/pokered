@@ -68,7 +68,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld [$FF8C],a
 	ld a,4
 	ld [$FF8D],a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a,1
 	ld [W_YCOORD],a
@@ -77,11 +77,11 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld a,1
 	swap a
 	ld [$FF95],a
-	predef Func_f929
+	predef CalcPositionOfPlayerRelativeToNPC
 	ld hl,$FF95
 	dec [hl]
-	predef Func_f8ba ; load Oak’s movement into wcc97
-	ld de,wcc97
+	predef FindPathToPlayer ; load Oak’s movement into wNPCMovementDirections2
+	ld de,wNPCMovementDirections2
 	ld a,1 ; oak
 	ld [$FF8C],a
 	call MoveSprite
@@ -109,13 +109,13 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,1
-	ld [wcf13],a
+	ld [wSpriteIndex],a
 	xor a
-	ld [wcf10],a
+	ld [wNPCMovementScriptFunctionNum],a
 	ld a,1
-	ld [wcc57],a
+	ld [wNPCMovementScriptPointerTableNum],a
 	ld a,[H_LOADEDROMBANK]
-	ld [wcc58],a
+	ld [wNPCMovementScriptBank],a
 
 	; trigger the next script
 	ld a,4
@@ -123,7 +123,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ret
 
 PalletTownScript4: ; 18f4b (6:4f4b)
-	ld a,[wcc57]
+	ld a,[wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 
@@ -171,7 +171,7 @@ PalletTownText1: ; 18f96 (6:4f96)
 	and a
 	jr nz,.next
 	ld a,1
-	ld [wcc3c],a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a
 	ld hl,OakAppearsText
 	jr .done
 .next

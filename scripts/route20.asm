@@ -58,7 +58,7 @@ Route20Script_50d14: ; 50d14 (14:4d14)
 
 Route20ScriptPointers: ; 50d1c (14:4d1c)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route20TextPointers: ; 50d22 (14:4d22)

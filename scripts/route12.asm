@@ -16,7 +16,7 @@ Route12Script_59606: ; 59606 (16:5606)
 
 Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route12Script3
 
@@ -47,7 +47,7 @@ Route12Script3: ; 5964c (16:564c)
 	cp $ff
 	jr z, Route12Script_59606
 	call UpdateSprites
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_59664
 	ld a, $e

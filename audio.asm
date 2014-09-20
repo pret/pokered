@@ -563,7 +563,7 @@ Func_7d13b:: ; 7d13b (1f:513b)
 	ld a, [hli]
 	ld c, [hl]
 	call PlayMusic
-	jp Func_2307
+	jp PlayDefaultMusic
 
 PokedexRatingSfxPointers: ; 7d162 (1f:5162)
 	db (SFX_1f_51 - SFX_Headers_1f) / 3, BANK(SFX_1f_51)

@@ -1,26 +1,27 @@
-HandleDoors: ; 1a609 (6:6609)
+; returns whether the player is standing on a door tile in carry
+IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	push de
 	ld hl, DoorTileIDPointers ; $662c
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	ld de, $3
 	call IsInArray
 	pop de
-	jr nc, .asm_1a62a
+	jr nc, .notStandingOnDoor
 	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	aCoord 8, 9
+	aCoord 8, 9 ; a = lower left background tile under player's sprite
 	ld b, a
-.asm_1a621
+.loop
 	ld a, [hli]
 	and a
-	jr z, .asm_1a62a
+	jr z, .notStandingOnDoor
 	cp b
-	jr nz, .asm_1a621
+	jr nz, .loop
 	scf
 	ret
-.asm_1a62a
+.notStandingOnDoor
 	and a
 	ret
 

@@ -12,7 +12,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld [W_ENEMYBATTSTATUS3], a ; W_ENEMYBATTSTATUS3
 	ld a, [wcf91]
 	ld [wEnemyMonSpecies2], a
-	callab Func_3eb01
+	callab LoadEnemyMonData
 	call SetPokedexOwnedFlag
 	callab Func_e7a4
 	ld hl, wcf4b
@@ -43,7 +43,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	call SetPokedexOwnedFlag
 	call AddPartyMon
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld [wccd3], a
 	scf
 	ret

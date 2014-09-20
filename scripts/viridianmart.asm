@@ -30,12 +30,12 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ld a, $4
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement1d4bb
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [W_VIRIDIANMARKETCURSCRIPT], a
 	ret
@@ -46,7 +46,7 @@ RLEMovement1d4bb: ; 1d4bb (7:54bb)
 	db $ff
 
 ViridianMartScript1: ; 1d4c0 (7:54c0)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

@@ -38,10 +38,10 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	cp $b9
 	jr z, .asm_7bf57
 	call UpdateSprites
-	jp Func_2307
+	jp PlayDefaultMusic
 
 Func_7bf64: ; 7bf64 (1e:7f64)
-	ld hl, wd527
+	ld hl, wMapViewVRAMPointer + 1
 	ld a, [hld]
 	push af
 	ld a, [hl]

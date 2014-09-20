@@ -16,7 +16,7 @@ FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
 
 FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
 	dw FightingDojoScript1
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw FightingDojoScript3
 
@@ -48,7 +48,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -67,7 +67,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 
 .asm_5cde4
 	ld a, $f0
@@ -147,9 +147,9 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	set 7, [hl]
 	ld hl, FightingDojoText_5ce93
 	ld de, FightingDojoText_5ce93
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3

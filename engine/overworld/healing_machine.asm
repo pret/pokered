@@ -3,7 +3,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld hl, vChars0 + $7c0
 	ld bc, (BANK(PokeCenterFlashingMonitorAndHealBall) << 8) + $03
 	call CopyVideoData
-	ld hl, wcfcb
+	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff

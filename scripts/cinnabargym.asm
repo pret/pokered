@@ -187,13 +187,13 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 
 CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $1
 	jr z, .asm_758d4
 	ld a, $2
@@ -224,7 +224,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	call PrintText
 	ld hl, BlaineEndBattleText
 	ld de, BlaineEndBattleText
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, $7
 	ld [W_GYMLEADERNO], a
 	jp CinnabarGymScript_758b7
@@ -267,7 +267,7 @@ CinnabarGymText2: ; 75939 (1d:5939)
 	call PrintText
 	ld hl, CinnabarGymText_75964
 	ld de, CinnabarGymText_75964 ; $5964 XXX
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_46bb4 ; 0x75956
 	ld hl, CinnabarGymText_75969
@@ -296,7 +296,7 @@ CinnabarGymText3: ; 7596e (1d:596e)
 	call PrintText
 	ld hl, CinnabarGymText_75999
 	ld de, CinnabarGymText_75999 ; $5999 XXX
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_4b406 ; 0x7598b
 	ld hl, CinnabarGymText_7599e
@@ -325,7 +325,7 @@ CinnabarGymText4: ; 759a3 (1d:59a3)
 	call PrintText
 	ld hl, CinnabarGymText_759ce
 	ld de, CinnabarGymText_759ce ; $59ce XXX
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_c0673 ; 0x759c0
 	ld hl, CinnabarGymText_759d3
@@ -354,7 +354,7 @@ CinnabarGymText5: ; 759d8 (1d:59d8)
 	call PrintText
 	ld hl, CinnabarGymText_75a03
 	ld de, CinnabarGymText_75a03 ; $5a03 XXX
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_5cfd7 ; 0x759f5
 	ld hl, CinnabarGymText_75a08
@@ -383,7 +383,7 @@ CinnabarGymText6: ; 75a0d (1d:5a0d)
 	call PrintText
 	ld hl, CinnabarGymText_75a38
 	ld de, CinnabarGymText_75a38
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_776b4 ; 0x75a2a
 	ld hl, CinnabarGymText_75a3d
@@ -412,7 +412,7 @@ CinnabarGymText7: ; 75a42 (1d:5a42)
 	call PrintText
 	ld hl, CinnabarGymText_75a6d
 	ld de, CinnabarGymText_75a6d
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_2f755 ; 0x75a5f
 	ld hl, CinnabarGymText_75a72
@@ -441,7 +441,7 @@ CinnabarGymText8: ; 75a77 (1d:5a77)
 	call PrintText
 	ld hl, CinnabarGymText_75aa2
 	ld de, CinnabarGymText_75aa2 ; $5aa2 XXX
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp CinnabarGymScript_758b7
 .asm_d87be ; 0x75a94
 	ld hl, CinnabarGymText_75aa7

@@ -9,7 +9,7 @@ PowerPlantScript: ; 1e2c6 (7:62c6)
 
 PowerPlantScriptPointers: ; 1e2d9 (7:62d9)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 PowerPlantTextPointers: ; 1e2df (7:62df)

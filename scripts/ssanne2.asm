@@ -79,7 +79,7 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	ld [$ff8d], a
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	jp Func_34a6
+	jp SetSpriteFacingDirectionAndDelay
 
 SSAnne2Script1: ; 61430 (18:5430)
 	ld a, [wd730]
@@ -163,7 +163,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	ld a, $71
 	ld [wcc4d], a
 	predef HideObject
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $4
 	ld [W_SSANNE2CURSCRIPT], a
 	ret
@@ -186,7 +186,7 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 	set 7, [hl]
 	ld hl, SSAnneRivalDefeatedText
 	ld de, SSAnneRivalWonText
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 
 SSAnneRivalBeforeBattleText: ; 61500 (18:5500)

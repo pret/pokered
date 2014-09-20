@@ -11,21 +11,21 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	and a
 	jp z,RedisplayStartMenu
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	jr .checkIfPokemonChosen
 .loop
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
 	call GoBackToPartyMenu
 .checkIfPokemonChosen
 	jr nc,.chosePokemon
 .exitMenu
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
@@ -184,7 +184,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	bit 0,a ; does the player have the Boulder Badge?
 	jp z,.newBadgeRequired
 	xor a
-	ld [wd35d],a
+	ld [wMapPalOffset],a
 	ld hl,.flashLightsAreaText
 	call PrintText
 	call GBPalWhiteOutWithDelay3
@@ -273,7 +273,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	TX_FAR _NotHealthyEnoughText
 	db "@"
 .goBackToMap
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl,.newBadgeRequiredText
@@ -336,7 +336,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	Coorda 5, 10
 	call PlaceUnfilledArrowMenuCursor
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld a,[wcf91]
 	cp a,BICYCLE
 	jp z,.useOrTossItem
@@ -406,20 +406,20 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp z,ItemMenuLoop
 	jp CloseStartMenu
 .useItem_partyMenu
-	ld a,[wcfcb]
+	ld a,[wUpdateSpritesEnabled]
 	push af
 	call UseItem
 	ld a,[wcd6a]
 	cp a,$02
 	jp z,.partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	pop af
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	jp StartMenu_Item
 .partyMenuNotDisplayed
 	pop af
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	jp ItemMenuLoop
 .tossItem
 	call IsKeyItem
@@ -500,10 +500,10 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites ; move sprites
-	ld a,[$ffd7]
+	ld a,[hTilesetType]
 	push af
 	xor a
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
 	ld b,$0d
@@ -517,7 +517,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	call ReloadMapData
 	call LoadGBPal
 	pop af
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	jp RedisplayStartMenu
 
 ; loads tile patterns and draws everything except for gym leader faces / badges
@@ -738,17 +738,17 @@ SwitchPartyMon_OAM: ; 13625 (4:7625)
 	jp PlaySound
 
 SwitchPartyMon_Stats: ; 13653 (4:7653)
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	and a
 	jr nz, .asm_13661
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	inc a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ret
 .asm_13661
 	xor a
 	ld [wd07d], a
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	dec a
 	ld b, a
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
@@ -756,12 +756,12 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	cp b
 	jr nz, .asm_1367b
 	xor a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld [wd07d], a
 	ret
 .asm_1367b
 	ld a, b
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	push hl
 	push de
 	ld hl, wPartySpecies
@@ -773,7 +773,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	jr nc, .asm_1368e
 	inc h
 .asm_1368e
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	add e
 	ld e, a
 	jr nc, .asm_13696
@@ -790,61 +790,61 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call AddNTimes
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $2c
 	call CopyData
 	ld hl, wPartyMons
 	ld bc, $2c
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call AddNTimes
 	pop de
 	push hl
 	ld bc, $2c
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $2c
 	call CopyData
 	ld hl, wPartyMonOT ; wd273
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonOT ; wd273
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, $b
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	call SkipFixedLengthTextEntries
 	push hl
-	ld de, wcc97
+	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMonNicks ; wPartyMonNicks
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
 	ld bc, $b
 	call CopyData
 	pop de
-	ld hl, wcc97
+	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
-	ld a, [wcc35]
+	ld a, [wMenuItemToSwap]
 	ld [wWhichTrade], a ; wWhichTrade
 	xor a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	ld [wd07d], a
 	pop de
 	pop hl

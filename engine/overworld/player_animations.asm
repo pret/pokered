@@ -1,66 +1,67 @@
-Func_70510: ; 70510 (1c:4510)
-	call Func_706ef
+EnterMapAnim: ; 70510 (1c:4510)
+	call InitFacingDirectionBuffer
 	ld a, $ec
-	ld [wSpriteStateData1 + 4], a
+	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
 	call Delay3
 	push hl
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld hl, W_FLAGS_D733
-	bit 7, [hl]
+	bit 7, [hl] ; used fly out of battle?
 	res 7, [hl]
-	jr nz, .asm_70568
+	jr nz, .flyAnimation
 	ld a, (SFX_02_4c - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, wd732
-	bit 4, [hl]
+	bit 4, [hl] ; used dungeon warp?
 	res 4, [hl]
 	pop hl
-	jr nz, .asm_7055e
-	call Func_705aa
+	jr nz, .dungeonWarpAnimation
+	call PlayerSpinWhileMovingDown
 	ld a, (SFX_02_4f - SFX_Headers_02) / 3
 	call PlaySound
-	call Func_70787
+	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
-	jr nz, .asm_7055b
-	ld hl, wWhichTrade ; wWhichTrade
+	jr nz, .done
+; if the player is not standing on a warp pad or hole
+	ld hl, wPlayerSpinInPlaceAnimFrameDelay
 	xor a
-	ld [hli], a
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelay
 	inc a
-	ld [hli], a
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayDelta
 	ld a, $8
-	ld [hli], a
-	ld [hl], $ff
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
+	ld [hl], $ff ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wcd48
-	call Func_70730
-.asm_70558
-	call Func_2307
-.asm_7055b
-	jp Func_70772
-.asm_7055e
-	ld c, $32
+	call PlayerSpinInPlace
+.restoreDefaultMusic
+	call PlayDefaultMusic
+.done
+	jp RestoreFacingDirectionAndYScreenPos
+.dungeonWarpAnimation
+	ld c, 50
 	call DelayFrames
-	call Func_705aa
-	jr .asm_7055b
-.asm_70568
+	call PlayerSpinWhileMovingDown
+	jr .done
+.flyAnimation
 	pop hl
-	ld de, BirdSprite ; $4d80
+	ld de, BirdSprite
 	ld hl, vNPCSprites
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
-	call Func_706d7
+	call LoadBirdSpriteGraphics
 	ld a, (SFX_02_50 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, wWhichTrade ; wWhichTrade
-	xor a
-	ld [hli], a
-	ld a, $c
-	ld [hli], a
-	ld [hl], $8
+	ld hl, wFlyAnimUsingCoordList
+	xor a ; is using coord list
+	ld [hli], a ; wFlyAnimUsingCoordList
+	ld a, 12
+	ld [hli], a ; wFlyAnimCounter
+	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing right)
 	ld de, FlyAnimationEnterScreenCoords ; $4592
-	call Func_706ae
+	call DoFlyAnimation
 	call LoadPlayerSpriteGraphics
-	jr .asm_70558
+	jr .restoreDefaultMusic
 
 FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
 ; y, x pairs
@@ -79,90 +80,92 @@ FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
 	db $3C, $48
 	db $3C, $40
 
-Func_705aa: ; 705aa (1c:45aa)
-	ld hl, wWhichTrade ; wWhichTrade
+PlayerSpinWhileMovingDown: ; 705aa (1c:45aa)
+	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, $10
-	ld [hli], a
+	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, $3c
-	ld [hli], a
-	call Func_7077f
-	ld [hl], a
-	jp Func_70755
+	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
+	call GetPlayerTeleportAnimFrameDelay
+	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
+	jp PlayerSpinWhileMovingUpOrDown
 
 _LeaveMapAnim: ; 705ba (1c:45ba)
-	call Func_706ef
-	call Func_70787
+	call InitFacingDirectionBuffer
+	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
-	jr z, .asm_705ef
+	jr z, .playerNotStandingOnWarpPadOrHole
 	dec a
-	jp nz, Func_7067d
-.asm_705c8
+	jp nz, LeaveMapThroughHoleAnim
+.spinWhileMovingUp
 	ld a, (SFX_02_4b - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, wWhichTrade ; wWhichTrade
-	ld a, $f0
-	ld [hli], a
+	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
+	ld a, -$10
+	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, $ec
-	ld [hli], a
-	call Func_7077f
-	ld [hl], a
-	call Func_70755
-	call Func_70787
+	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimMaxY
+	call GetPlayerTeleportAnimFrameDelay
+	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
+	call PlayerSpinWhileMovingUpOrDown
+	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	dec a
-	jr z, .asm_705e9
-	ld c, $a
+	jr z, .playerStandingOnWarpPad
+; if not standing on a warp pad, there is an extra delay
+	ld c, 10
 	call DelayFrames
-.asm_705e9
-	call GBFadeOut2
-	jp Func_70772
-.asm_705ef
+.playerStandingOnWarpPad
+	call GBFadeOutToWhite
+	jp RestoreFacingDirectionAndYScreenPos
+.playerNotStandingOnWarpPadOrHole
 	ld a, $4
 	call StopMusic
 	ld a, [wd732]
-	bit 6, a
-	jr z, .asm_70610
-	ld hl, wWhichTrade ; wWhichTrade
-	ld a, $10
-	ld [hli], a
-	ld a, $ff
-	ld [hli], a
+	bit 6, a ; is the last used pokemon center the destination?
+	jr z, .flyAnimation
+; if going to the last used pokemon center
+	ld hl, wPlayerSpinInPlaceAnimFrameDelay
+	ld a, 16
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelay
+	ld a, -1
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayDelta
 	xor a
-	ld [hli], a
-	ld [hl], $a1
+	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
+	ld [hl], $a1 ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wcd48
-	call Func_70730
-	jr .asm_705c8
-.asm_70610
-	call Func_706d7
-	ld hl, wWhichTrade ; wWhichTrade
-	ld a, $ff
-	ld [hli], a
-	ld a, $8
-	ld [hli], a
-	ld [hl], $c
-	call Func_706ae
+	call PlayerSpinInPlace
+	jr .spinWhileMovingUp
+.flyAnimation
+	call LoadBirdSpriteGraphics
+	ld hl, wFlyAnimUsingCoordList
+	ld a, $ff ; is not using coord list (flap in place)
+	ld [hli], a ; wFlyAnimUsingCoordList
+	ld a, 8
+	ld [hli], a ; wFlyAnimCounter
+	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex
+	call DoFlyAnimation
 	ld a, (SFX_02_50 - SFX_Headers_02) / 3
 	call PlaySound
-	ld hl, wWhichTrade ; wWhichTrade
-	xor a
-	ld [hli], a
+	ld hl, wFlyAnimUsingCoordList
+	xor a ; is using coord list
+	ld [hli], a ; wFlyAnimUsingCoordList
 	ld a, $c
-	ld [hli], a
-	ld [hl], $c
+	ld [hli], a ; wFlyAnimCounter
+	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex (facing right)
 	ld de, FlyAnimationScreenCoords1 ; $464f
-	call Func_706ae
-	ld c, $28
+	call DoFlyAnimation
+	ld c, 40
 	call DelayFrames
-	ld hl, wTrainerEngageDistance
-	ld a, $b
-	ld [hli], a
-	ld [hl], $8
+	ld hl, wFlyAnimCounter
+	ld a, 11
+	ld [hli], a ; wFlyAnimCounter
+	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing left)
 	ld de, FlyAnimationScreenCoords2 ; $4667
-	call Func_706ae
-	call GBFadeOut2
-	jp Func_70772
+	call DoFlyAnimation
+	call GBFadeOutToWhite
+	jp RestoreFacingDirectionAndYScreenPos
 
 FlyAnimationScreenCoords1: ; 7064f (1c:464f)
 ; y, x pairs
@@ -198,33 +201,35 @@ FlyAnimationScreenCoords2: ; 70667 (1c:4667)
 
 	db $F0, $00
 
-Func_7067d: ; 7067d (1c:467d)
+LeaveMapThroughHoleAnim: ; 7067d (1c:467d)
 	ld a, $ff
-	ld [wcfcb], a
-	ld a, [wOAMBuffer + $02]
-	ld [wOAMBuffer + $0a], a
-	ld a, [wOAMBuffer + $06]
-	ld [wOAMBuffer + $0e], a
+	ld [wUpdateSpritesEnabled], a ; disable UpdateSprites
+	; shift upper half of player's sprite down 8 pixels and hide lower half
+	ld a, [wOAMBuffer + 0 * 4 + 2]
+	ld [wOAMBuffer + 2 * 4 + 2], a
+	ld a, [wOAMBuffer + 1 * 4 + 2]
+	ld [wOAMBuffer + 3 * 4 + 2], a
 	ld a, $a0
-	ld [wOAMBuffer], a
-	ld [wOAMBuffer + $04], a
-	ld c, $2
+	ld [wOAMBuffer + 0 * 4], a
+	ld [wOAMBuffer + 1 * 4], a
+	ld c, 2
 	call DelayFrames
+	; hide lower half of player's sprite
 	ld a, $a0
-	ld [wOAMBuffer + $08], a
-	ld [wOAMBuffer + $0c], a
-	call GBFadeOut2
+	ld [wOAMBuffer + 2 * 4], a
+	ld [wOAMBuffer + 3 * 4], a
+	call GBFadeOutToWhite
 	ld a, $1
-	ld [wcfcb], a
-	jp Func_70772
+	ld [wUpdateSpritesEnabled], a ; enable UpdateSprites
+	jp RestoreFacingDirectionAndYScreenPos
 
-Func_706ae: ; 706ae (1c:46ae)
-	ld a, [wTrainerFacingDirection]
-	xor $1
-	ld [wTrainerFacingDirection], a
+DoFlyAnimation: ; 706ae (1c:46ae)
+	ld a, [wFlyAnimBirdSpriteImageIndex]
+	xor $1 ; make the bird flap its wings
+	ld [wFlyAnimBirdSpriteImageIndex], a
 	ld [wSpriteStateData1 + 2], a
 	call Delay3
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wFlyAnimUsingCoordList]
 	cp $ff
 	jr z, .asm_706cd
 	ld hl, wSpriteStateData1 + 4
@@ -236,13 +241,13 @@ Func_706ae: ; 706ae (1c:46ae)
 	inc de
 	ld [hl], a
 .asm_706cd
-	ld a, [wTrainerEngageDistance]
+	ld a, [wFlyAnimCounter]
 	dec a
-	ld [wTrainerEngageDistance], a
-	jr nz, Func_706ae
+	ld [wFlyAnimCounter], a
+	jr nz, DoFlyAnimation
 	ret
 
-Func_706d7: ; 706d7 (1c:46d7)
+LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
 	ld de, BirdSprite ; $4d80
 	ld hl, vNPCSprites
 	ld bc, (BANK(BirdSprite) << 8) + $0c
@@ -252,32 +257,32 @@ Func_706d7: ; 706d7 (1c:46d7)
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	jp CopyVideoData
 
-Func_706ef: ; 706ef (1c:46ef)
-	ld a, [wSpriteStateData1 + 2]
+InitFacingDirectionBuffer: ; 706ef (1c:46ef)
+	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
 	ld [wcd50], a
-	ld a, [wSpriteStateData1 + 4]
+	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
 	ld [wcd4f], a
-	ld hl, PlayerSpinningFacingOrder ; $4713
+	ld hl, PlayerSpinningFacingOrder
 	ld de, wcd48
 	ld bc, $4
 	call CopyData
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
 	ld hl, wcd48
-.asm_7070d
+.loop
 	cp [hl]
 	inc hl
-	jr nz, .asm_7070d
+	jr nz, .loop
 	dec hl
 	ret
 
 PlayerSpinningFacingOrder: ; 70713 (1c:4713)
 ; The order of the direction the player's sprite is facing when teleporting
 ; away. Creates a spinning effect.
-	db $00, $08, $04, $0C ; down, left, up, right
+	db SPRITE_FACING_DOWN, SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT
 
-Func_70717: ; 70717 (1c:4717)
+SpinPlayerSprite: ; 70717 (1c:4717)
 	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpriteStateData1 + 2], a ; player's sprite facing direction (image index is locked to standing images)
 	push hl
 	ld hl, wcd48
 	ld de, wcd47
@@ -288,84 +293,85 @@ Func_70717: ; 70717 (1c:4717)
 	pop hl
 	ret
 
-Func_70730: ; 70730 (1c:4730)
-	call Func_70717
-	ld a, [wWhichTrade] ; wWhichTrade
+PlayerSpinInPlace: ; 70730 (1c:4730)
+	call SpinPlayerSprite
+	ld a, [wPlayerSpinInPlaceAnimFrameDelay]
 	ld c, a
 	and $3
 	jr nz, .asm_70743
-	ld a, [wTrainerScreenY]
+	ld a, [wPlayerSpinInPlaceAnimSoundID]
 	cp $ff
 	call nz, PlaySound
 .asm_70743
-	ld a, [wTrainerEngageDistance]
+	ld a, [wPlayerSpinInPlaceAnimFrameDelayDelta]
 	add c
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wPlayerSpinInPlaceAnimFrameDelay], a
 	ld c, a
-	ld a, [wTrainerFacingDirection]
+	ld a, [wPlayerSpinInPlaceAnimFrameDelayEndValue]
 	cp c
 	ret z
 	call DelayFrames
-	jr Func_70730
+	jr PlayerSpinInPlace
 
-Func_70755: ; 70755 (1c:4755)
-	call Func_70717
-	ld a, [wWhichTrade] ; wWhichTrade
+PlayerSpinWhileMovingUpOrDown: ; 70755 (1c:4755)
+	call SpinPlayerSprite
+	ld a, [wPlayerSpinWhileMovingUpOrDownAnimDeltaY]
 	ld c, a
-	ld a, [wSpriteStateData1 + 4]
+	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
 	add c
 	ld [wSpriteStateData1 + 4], a
 	ld c, a
-	ld a, [wTrainerEngageDistance]
+	ld a, [wPlayerSpinWhileMovingUpOrDownAnimMaxY]
 	cp c
 	ret z
-	ld a, [wTrainerFacingDirection]
+	ld a, [wPlayerSpinWhileMovingUpOrDownAnimFrameDelay]
 	ld c, a
 	call DelayFrames
-	jr Func_70755
+	jr PlayerSpinWhileMovingUpOrDown
 
-Func_70772: ; 70772 (1c:4772)
+RestoreFacingDirectionAndYScreenPos: ; 70772 (1c:4772)
 	ld a, [wcd4f]
 	ld [wSpriteStateData1 + 4], a
 	ld a, [wcd50]
 	ld [wSpriteStateData1 + 2], a
 	ret
 
-Func_7077f: ; 7077f (1c:477f)
-	ld a, [wcf1b]
+; if SGB, 2 frames, else 3 frames
+GetPlayerTeleportAnimFrameDelay: ; 7077f (1c:477f)
+	ld a, [wOnSGB]
 	xor $1
 	inc a
 	inc a
 	ret
 
-Func_70787: ; 70787 (1c:4787)
+IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	ld b, 0
-	ld hl, DataTable_707a9 ; $47a9
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld hl, .warpPadAndHoleData
+	ld a, [W_CURMAPTILESET]
 	ld c, a
-.asm_70790
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_707a4
+	jr z, .done
 	cp c
-	jr nz, .asm_7079e
+	jr nz, .nextEntry
 	aCoord 8, 9
 	cp [hl]
-	jr z, .asm_707a2
-.asm_7079e
+	jr z, .foundMatch
+.nextEntry
 	inc hl
 	inc hl
-	jr .asm_70790
-.asm_707a2
+	jr .loop
+.foundMatch
 	inc hl
 	ld b, [hl]
-.asm_707a4
+.done
 	ld a, b
 	ld [wcd5b], a
 	ret
 
 ; format: db tileset id, tile id, value to be put in wcd5b
-DataTable_707a9: ; 707a9 (1c:47a9)
+.warpPadAndHoleData: ; 707a9 (1c:47a9)
 	db FACILITY, $20, 1 ; warp pad
 	db FACILITY, $11, 2 ; hole
 	db CAVERN,   $22, 2 ; hole
@@ -454,7 +460,7 @@ ItsABiteText: ; 70851 (1c:4851)
 	db "@"
 
 FishingRodGfxProperties: ; 70856 (1c:4856)
-; specicies how the fishing rod should be drawn on the screen
+; specifies how the fishing rod should be drawn on the screen
 ; first byte = screen y coordinate
 ; second byte = screen x coordinate
 ; third byte = tile number
@@ -482,21 +488,21 @@ RedFishingTiles: ; 70866 (1c:4866)
 	dw vNPCSprites2 + $7d0
 
 _HandleMidJump: ; 7087e (1c:487e)
-	ld a, [wd714]
+	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a
 	cp $10
-	jr nc, .asm_70895
-	ld [wd714], a
-	ld b, $0
-	ld hl, PlayerJumpingYScreenCoords ; $48ba
+	jr nc, .finishedJump
+	ld [wPlayerJumpingYScreenCoordsIndex], a
+	ld b, 0
+	ld hl, PlayerJumpingYScreenCoords
 	add hl, bc
 	ld a, [hl]
 	ld [wSpriteStateData1 + 4], a ; player's sprite y coordinate
 	ret
-.asm_70895
-	ld a, [wWalkCounter] ; wcfc5
-	cp $0
+.finishedJump
+	ld a, [wWalkCounter]
+	cp 0
 	ret nz
 	call UpdateSprites
 	call Delay3
@@ -504,11 +510,11 @@ _HandleMidJump: ; 7087e (1c:487e)
 	ld [hJoyHeld], a
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
-	ld [wd714], a
+	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld hl, wd736
-	res 6, [hl]
+	res 6, [hl] ; not jumping down a ledge any more
 	ld hl, wd730
-	res 7, [hl]
+	res 7, [hl] ; not simulating joypad states any more
 	xor a
 	ld [wJoyIgnore], a
 	ret

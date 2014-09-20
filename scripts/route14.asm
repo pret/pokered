@@ -9,7 +9,7 @@ Route14Script: ; 559d3 (15:59d3)
 
 Route14ScriptPointers: ; 559e6 (15:59e6)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route14TextPointers: ; 559ec (15:59ec)

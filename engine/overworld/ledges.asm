@@ -1,54 +1,54 @@
 HandleLedges: ; 1a672 (6:6672)
 	ld a, [wd736]
-	bit 6, a
+	bit 6, a ; already jumping down ledge
 	ret nz
 	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
 	and a ; OVERWORLD
 	ret nz
-	predef Func_c586
+	predef GetTileAndCoordsInFrontOfPlayer
 	ld a, [wSpriteStateData1 + 9]
 	ld b, a
 	aCoord 8, 9
 	ld c, a
-	ld a, [wcfc6]
+	ld a, [wTileInFrontOfPlayer]
 	ld d, a
-	ld hl, LedgeTiles ; $66cf
-.asm_1a691
+	ld hl, LedgeTiles
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr nz, .asm_1a6a4
+	jr nz, .nextLedgeTile1
 	ld a, [hli]
 	cp c
-	jr nz, .asm_1a6a5
+	jr nz, .nextLedgeTile2
 	ld a, [hli]
 	cp d
-	jr nz, .asm_1a6a6
+	jr nz, .nextLedgeTile3
 	ld a, [hl]
 	ld e, a
-	jr .asm_1a6a9
-.asm_1a6a4
+	jr .foundMatch
+.nextLedgeTile1
 	inc hl
-.asm_1a6a5
+.nextLedgeTile2
 	inc hl
-.asm_1a6a6
+.nextLedgeTile3
 	inc hl
-	jr .asm_1a691
-.asm_1a6a9
+	jr .loop
+.foundMatch
 	ld a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wd736
-	set 6, [hl]
-	call Func_3486
+	set 6, [hl] ; jumping down ledge
+	call StartSimulatingJoypadStates
 	ld a, e
-	ld [wccd3], a
-	ld [wccd4], a
+	ld [wSimulatedJoypadStatesEnd], a
+	ld [wSimulatedJoypadStatesEnd + 1], a
 	ld a, $2
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	call LoadHoppingShadowOAM
 	ld a, (SFX_02_4e - SFX_Headers_02) / 3
 	call PlaySound
@@ -56,24 +56,24 @@ HandleLedges: ; 1a672 (6:6672)
 
 	; (player direction) (tile player standing on) (ledge tile) (input required)
 LedgeTiles: ; 1a6cf (6:66cf)
-	db $00,$2C,$37,$80
-	db $00,$39,$36,$80
-	db $00,$39,$37,$80
-	db $08,$2C,$27,$20
-	db $08,$39,$27,$20
-	db $0C,$2C,$0D,$10
-	db $0C,$2C,$1D,$10
-	db $0C,$39,$0D,$10
+	db SPRITE_FACING_DOWN, $2C,$37,D_DOWN
+	db SPRITE_FACING_DOWN, $39,$36,D_DOWN
+	db SPRITE_FACING_DOWN, $39,$37,D_DOWN
+	db SPRITE_FACING_LEFT, $2C,$27,D_LEFT
+	db SPRITE_FACING_LEFT, $39,$27,D_LEFT
+	db SPRITE_FACING_RIGHT,$2C,$0D,D_RIGHT
+	db SPRITE_FACING_RIGHT,$2C,$1D,D_RIGHT
+	db SPRITE_FACING_RIGHT,$39,$0D,D_RIGHT
 	db $FF
 
 LoadHoppingShadowOAM: ; 1a6f0 (6:66f0)
 	ld hl, vChars1 + $7f0
-	ld de, LedgeHoppingShadow ; $6708
+	ld de, LedgeHoppingShadow
 	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
 	call CopyVideoDataDouble
 	ld a, $9
 	ld bc, $5448 ; b, c = y, x coordinates of shadow
-	ld de, LedgeHoppingShadowOAM ; $6710
+	ld de, LedgeHoppingShadowOAM
 	call WriteOAMBlock
 	ret
 

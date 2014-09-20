@@ -1203,11 +1203,11 @@ Func_3a72a: ; 3a72a (e:672a)
 
 	ld a,d ; how many available monsters are there?
 	cp 2 ; don't bother if only 1 or 2
-	jp nc,Func_3a74b
+	jp nc,SwitchEnemyMon
 	and a
 	ret
 
-Func_3a74b: ; 3a74b (e:674b)
+SwitchEnemyMon: ; 3a74b (e:674b)
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 

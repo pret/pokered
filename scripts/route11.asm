@@ -9,7 +9,7 @@ Route11Script: ; 5944c (16:544c)
 
 Route11ScriptPointers: ; 5945f (16:545f)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route11TextPointers: ; 59465 (16:5465)

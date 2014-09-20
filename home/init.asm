@@ -25,7 +25,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [rIE], a
 	ld [$ff43], a
 	ld [$ff42], a
-	ld [$ff01], a
+	ld [rSB], a
 	ld [$ff02], a
 	ld [$ff4b], a
 	ld [$ff4a], a
@@ -61,11 +61,11 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld a, Bank(WriteDMACodeToHRAM)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM
 
 	xor a
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld [$ff41], a
 	ld [$ffae], a
 	ld [$ffaf], a
@@ -74,7 +74,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [rIE], a
 
 	ld a, 144 ; move the window off-screen
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld [rWY], a
 	ld a, 7
 	ld [rWX], a
@@ -105,7 +105,7 @@ rLCDC_DEFAULT EQU %11100011
 	xor a
 	ld [$ffbc], a
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 
 	predef PlayIntro
 

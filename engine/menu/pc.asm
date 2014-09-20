@@ -86,7 +86,7 @@ BillsPC: ; 17ee4 (5:7ee4)
 	callba BillsPC_
 ReloadMainMenu: ; 17f06 (5:7f06)
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call ReloadMapData
 	call UpdateSprites  ;XXX: moves sprites
 	jp PCMainMenu

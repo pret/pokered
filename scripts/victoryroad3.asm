@@ -19,11 +19,11 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	ld a, $1d
 	ld [wd09f], a
 	ld bc, $503
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)
 	dw VictoryRoad3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 VictoryRoad3Script0: ; 449b7 (11:49b7)
@@ -61,7 +61,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 
 .asm_449fe
 	ld a, $c2
-	ld [wd71d], a
+	ld [wDungeonWarpDestinationMap], a
 	ld hl, .coordsData_449f9 ; $49f9
 	call Func_46981
 	ld a, [wWhichTrade] ; wWhichTrade

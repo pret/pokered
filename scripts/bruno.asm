@@ -24,7 +24,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 BrunoScript_76302: ; 76302 (1d:6302)
 	ld [wd09f], a
 	ld bc, $2
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 BrunoScript_7630d: ; 7630d (1d:630d)
 	xor a
@@ -33,7 +33,7 @@ BrunoScript_7630d: ; 7630d (1d:630d)
 
 BrunoScriptPointers: ; 76312 (1d:6312)
 	dw BrunoScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw BrunoScript2
 	dw BrunoScript3
 	dw BrunoScript4
@@ -41,8 +41,8 @@ BrunoScriptPointers: ; 76312 (1d:6312)
 BrunoScript4: ; 7631c (1d:631c)
 	ret
 asm_7631d: ; 7631d (1d:631d)
-	ld hl, wccd3
-	ld a, $40
+	ld hl, wSimulatedJoypadStatesEnd
+	ld a, D_UP
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -50,8 +50,8 @@ asm_7631d: ; 7631d (1d:631d)
 	ld [hli], a
 	ld [hl], a
 	ld a, $6
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -64,8 +64,8 @@ BrunoScript0: ; 76339 (1d:6339)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [wccd3], a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesEnd], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	cp $3
 	jr c, .asm_7635d
@@ -77,11 +77,11 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld a, $40
-	ld [wccd3], a
+	ld a, D_UP
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -95,7 +95,7 @@ CoordsData_7637a: ; 7637a (1d:637a)
 	db $FF
 
 BrunoScript3: ; 76383 (1d:6383)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

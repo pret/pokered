@@ -9,7 +9,7 @@ Route18Script: ; 59ac7 (16:5ac7)
 
 Route18ScriptPointers: ; 59ada (16:5ada)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route18TextPointers: ; 59ae0 (16:5ae0)

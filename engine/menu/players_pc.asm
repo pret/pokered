@@ -78,7 +78,7 @@ Func_796d: ; 796d (1:796d)
 	ld hl, wd730
 	res 6, [hl]
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
 Func_7995: ; 7995 (1:7995)

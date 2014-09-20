@@ -29,12 +29,12 @@ GaryScript0: ; 75f47 (1d:5f47)
 GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement75f63
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $2
 	ld [W_GARYCURSCRIPT], a
 	ret
@@ -46,7 +46,7 @@ RLEMovement75f63: ; 75f63 (1d:5f63)
 	db $ff
 
 GaryScript2: ; 75f6a (1d:5f6a)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -63,7 +63,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	set 7, [hl]
 	ld hl, GaryText_760f9
 	ld de, GaryText_760fe
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY3 + $c8
 	ld [W_CUROPPONENT], a
 
@@ -140,12 +140,12 @@ GaryScript5: ; 7601a (1d:601a)
 	ld [$ff8c], a
 	ld a, $8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $2
 	ld [$ff8c], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $3
 	ld [$ff8c], a
 	call GaryScript_760c8
@@ -158,7 +158,7 @@ GaryScript6: ; 76047 (1d:6047)
 	ld [$ff8c], a
 	ld a, $c
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $4
 	ld [$ff8c], a
 	call GaryScript_760c8
@@ -171,7 +171,7 @@ GaryScript7: ; 7605f (1d:605f)
 	ld [$ff8c], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $5
 	ld [$ff8c], a
 	call GaryScript_760c8
@@ -200,12 +200,12 @@ GaryScript8: ; 76083 (1d:6083)
 GaryScript9: ; 76099 (1d:6099)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement760b4
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $a
 	ld [W_GARYCURSCRIPT], a
 	ret
@@ -216,7 +216,7 @@ RLEMovement760b4 ; 760b4 (1d:60b4)
 	db $ff
 
 GaryScript10: ; 760b9 (1d:60b9)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a

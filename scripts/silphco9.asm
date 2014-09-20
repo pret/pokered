@@ -23,7 +23,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $401
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_5d7f8
 	bit 1, a
@@ -32,7 +32,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $209
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_5d80b
 	bit 2, a
@@ -41,7 +41,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $509
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_5d81e
 	bit 3, a
@@ -49,14 +49,14 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $605
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_5d82e: ; 5d82e (17:582e)
 	db $04,$01,$02,$09,$05,$09,$06,$05,$FF
 
 SilphCo9Script_5d837: ; 5d837 (17:5837)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -80,7 +80,7 @@ SilphCo9Script_5d837: ; 5d837 (17:5837)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_5d843
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -117,7 +117,7 @@ SilphCo9Script_5d863: ; 5d863 (17:5863)
 
 SilphCo9ScriptPointers: ; 5d885 (17:5885)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo9TextPointers: ; 5d88b (17:588b)
@@ -164,9 +164,9 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText
 	predef HealParty
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call Delay3
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld hl, SilphCo9Text_5d8ea
 	call PrintText
 	jr .asm_b6e28 ; 0x5d8da

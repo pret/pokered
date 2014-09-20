@@ -21,7 +21,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	ld hl, PartyMonSpeeds
 	add hl, bc
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	xor $1
 	add [hl]
 	ld c, a

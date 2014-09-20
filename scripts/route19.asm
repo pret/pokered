@@ -9,7 +9,7 @@ Route19Script: ; 55d44 (15:5d44)
 
 Route19ScriptPointers: ; 55d57 (15:5d57)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route19TextPointers: ; 55d5d (15:5d5d)

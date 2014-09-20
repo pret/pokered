@@ -35,9 +35,15 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	ld [wcc37],a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
+<<<<<<< HEAD
 	ld [hJoy7],a
+	ld [wcd3a],a
+	ld [wcd3b],a
+=======
+	ld [$ffb7],a
 	ld [wWastedByteCD3A],a
 	ld [wOverrideSimulatedJoypadStatesMask],a
+>>>>>>> yama/master
 	pop af
 	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3

@@ -88,7 +88,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	xor a
 	ld [wd07d],a
 	dec a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	push af
 	call Func_71ca2
@@ -138,7 +138,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 	callab EvolveTradeMon
 	call ClearScreen
 	call Func_71ca2
-	callba Func_eedc
+	callba RedrawMapView
 	and a
 	ld a,$3
 	jr .asm_ee803 ; 0x71c9b $1
@@ -150,7 +150,7 @@ Func_71c07: ; 71c07 (1c:5c07)
 
 Func_71ca2: ; 71ca2 (1c:5ca2)
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call Delay3

@@ -43,7 +43,7 @@ Mansion1Script_4430b: ; 4430b (11:430b)
 	ld a, $e
 	ld [wd09f], a
 asm_44310: ; 44310 (11:4310)
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	ret
 
 Mansion1Script_Switches: ; 44316 (11:4316)
@@ -58,7 +58,7 @@ Mansion1Script_Switches: ; 44316 (11:4316)
 
 Mansion1ScriptPointers: ; 44326 (11:4326)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Mansion1TextPointers: ; 4432c (11:432c)
@@ -106,7 +106,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	and a
 	jr nz, .asm_4438c ; 0x44368 $22
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd126
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText

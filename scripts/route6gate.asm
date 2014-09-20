@@ -43,7 +43,7 @@ CoordsData_1e08c: ; 1e08c (7:608c)
 	db $02,$04,$FF
 
 Route6GateScript1: ; 1e091 (7:6091)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -56,12 +56,12 @@ Route6GateScript_1e0a1: ; 1e0a1 (7:60a1)
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $80
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wSpriteStateData2 + $06], a
-	ld [wcd3b], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
 	ret
 
 Route6GateTextPointers: ; 1e0b8 (7:60b8)

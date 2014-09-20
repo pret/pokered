@@ -70,7 +70,7 @@ PrintBenchGuyText: ; 6245d (18:645d)
 	ld a, [hl]
 	jp PrintPredefTextID
 
-; format: db map id, 08, text id of PointerTable_3f22
+; format: db map id, 08, text id of PredefTextIDPointerTable
 PokeCenterMapIDList: ; 6247e (18:647e)
 	db VIRIDIAN_POKECENTER,$08,$0F
 	db PEWTER_POKECENTER,$08,$10
@@ -181,7 +181,7 @@ OpenPokemonCenterPC: ; 62516 (18:6516)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	ld a, $1f ; PredefText1f
 	jp PrintPredefTextID
 

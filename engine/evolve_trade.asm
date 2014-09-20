@@ -38,7 +38,7 @@ EvolveTradeMon: ; 17d7d (5:7d7d)
 	ld [wccd4], a
 	ld a, $32
 	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
-	callab Func_3ad0e
+	callab TryEvolvingMon
 	xor a
 	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
-	jp Func_2307
+	jp PlayDefaultMusic

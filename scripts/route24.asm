@@ -16,7 +16,7 @@ Route24Script_513c0: ; 513c0 (14:53c0)
 
 Route24ScriptPointers: ; 513cb (14:53cb)
 	dw Route24Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route24Script3
 	dw Route24Script4
@@ -38,10 +38,10 @@ Route24Script0: ; 513d5 (14:53d5)
 	res 1, [hl]
 	ret z
 	ld a, $80
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $4
 	ld [W_ROUTE24CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -51,7 +51,7 @@ CoordsData_5140e: ; 5140e (14:540e)
 	db $0F,$0A,$FF
 
 Route24Script4: ; 51411 (14:5411)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -169,9 +169,9 @@ Route24Text1: ; 514a4 (14:54a4)
 	set 7, [hl]
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [$ff8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

@@ -36,12 +36,12 @@ VictoryRoad2Script_517c9: ; 517c9 (14:57c9)
 
 VictoryRoad2Script_517e2: ; 517e2 (14:57e2)
 	ld [wd09f], a
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	ret
 
 VictoryRoad2ScriptPointers: ; 517eb (14:57eb)
 	dw VictoryRoad2Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 VictoryRoad2Script0: ; 517f1 (14:57f1)

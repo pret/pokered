@@ -22,7 +22,7 @@ SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	ld a, $5f
 	ld [wd09f], a
 	ld bc, $0602
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 SilphCo6Coords1: ; 1a1e3 (6:61e3)
 	db $06, $02
@@ -38,7 +38,7 @@ SilphCo6Script_1a1e6: ; 1a1e6 (6:61e6)
 
 SilphCo6ScriptPointers: ; 1a1f0 (6:61f0)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo6TextPointers: ; 1a1f6 (6:61f6)

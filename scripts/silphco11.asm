@@ -22,14 +22,14 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	ld a, $20
 	ld [wd09f], a
 	ld bc, $603
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_62134: ; 62134 (18:6134)
 	db $06,$03,$FF
 
 SilphCo11Script_62137: ; 62137 (18:6137)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -53,7 +53,7 @@ SilphCo11Script_62137: ; 62137 (18:6137)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_62143
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -116,7 +116,7 @@ SilphCo11Script_621c8: ; 621c8 (18:61c8)
 
 SilphCo11ScriptPointers: ; 621cf (18:61cf)
 	dw SilphCo11Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw SilphCo11Script3
 	dw SilphCo11Script4
@@ -160,7 +160,7 @@ SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, b
 	ld [$ff8d], a
-	jp Func_34a6
+	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
@@ -182,11 +182,11 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	call GBFadeIn1
+	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
 	call UpdateSprites
 	call Delay3
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	ld hl, wd838
 	set 7, [hl]
 	xor a
@@ -221,9 +221,9 @@ SilphCo11Script4: ; 62293 (18:6293)
 	set 7, [hl]
 	ld hl, SilphCo10Text_62330 ; $6330
 	ld de, SilphCo10Text_62330 ; $6330
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

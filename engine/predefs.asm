@@ -52,13 +52,13 @@ GetPredefPointer:
 PredefPointers:: ; 4fe79 (13:7e79)
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
-	add_predef Func_3cd60
+	add_predef DrawPlayerHUDAndHPBar
 	add_predef Func_3f0c6
 	add_predef Func_3f073
 	add_predef ScaleSpriteByTwo
 	add_predef LoadMonBackPic
 	add_predef Func_79aba
-	add_predef Func_f132
+	add_predef LoadMissableObjects
 	add_predef HealParty
 	add_predef MoveAnimation; 08 play move animation
 	add_predef DivideBCDPredef
@@ -71,30 +71,30 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef FlagActionPredef
 	add_predef HideObject
 	add_predef IsObjectHidden
-	add_predef Func_c69c
+	add_predef ApplyOutOfBattlePoisonDamage
 	add_predef AnyPartyAlive
 	add_predef ShowObject
 	add_predef ShowObject2
-	add_predef Func_ee9e
+	add_predef ReplaceTileBlock
 	add_predef InitPlayerData2
-	add_predef Func_c754
-	add_predef Func_3af5b
+	add_predef LoadTilesetHeader
+	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef IsItemInBag_ ; 1C, used in Pokémon Tower
-	dbw $03,Func_3eb5 ; for these two, the bank number is actually 0
+	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
-	add_predef Func_480eb
-	add_predef Func_f8ba
+	add_predef ChangeBGPalColor0_4Frames
+	add_predef FindPathToPlayer
 	add_predef Func_480ff
-	add_predef Func_f929
-	add_predef Func_f9a0
+	add_predef CalcPositionOfPlayerRelativeToNPC
+	add_predef ConvertNPCMovementDirectionsToJoypadMasks
 	add_predef Func_48125
 	add_predef UpdateHPBar
 	add_predef HPBarLength
 	add_predef Func_5ab0
 	add_predef Func_3ed02
 	add_predef ShowPokedexMenu
-	add_predef Func_3ad1c
+	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0
 	add_predef InitOpponent
 	add_predef Func_5a5f
@@ -105,7 +105,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef PlayIntro
 	add_predef Func_79869
 	add_predef FlashScreen
-	add_predef Func_c586
+	add_predef GetTileAndCoordsInFrontOfPlayer
 	add_predef StatusScreen
 	add_predef StatusScreen2
 	add_predef Func_410e2
@@ -117,7 +117,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef WriteMonMoves
 	add_predef SaveSAV
 	add_predef LoadSGB
-	add_predef Func_f113
+	add_predef MarkTownVisitedAndLoadMissableObjects
 	add_predef SetPartyMonTypes
 	add_predef CanLearnTM
 	add_predef TMToMove
@@ -125,7 +125,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef StarterDex ; 46
 	add_predef _AddPartyMon
 	add_predef UpdateHPBar2
-	add_predef Func_3cdec
+	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
 	add_predef Func_27d6b
 	add_predef EmotionBubble; 4C player exclamation
@@ -140,9 +140,9 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
 	dbw $1E, _LeaveMapAnim ; wrong bank
-	dbw $1E, Func_70510 ; wrong bank
-	add_predef Func_c5be
-	add_predef Func_c60b
+	dbw $1E, EnterMapAnim ; wrong bank
+	add_predef GetTileTwoStepsInFrontOfPlayer
+	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt
 	add_predef PickupItem
 	add_predef Func_27d98

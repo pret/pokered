@@ -230,7 +230,7 @@ CeladonMartRoofText2: ; 4856c (12:456c)
 	and a
 	jr z, .asm_914b9 ; 0x48574
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonMartRoofText4
 	call PrintText
 	call YesNoChoice

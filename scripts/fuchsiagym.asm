@@ -32,7 +32,7 @@ FuchsiaGymScript_75477: ; 75477 (1d:5477)
 
 FuchsiaGymScriptPointers: ; 75482 (1d:5482)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw FuchsiaGymScript3
 
@@ -166,9 +166,9 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	set 7, [hl]
 	ld hl, UnnamedText_75586
 	ld de, UnnamedText_75586
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5

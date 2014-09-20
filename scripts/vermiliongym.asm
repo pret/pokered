@@ -40,7 +40,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 .asm_5ca7f
 	ld [wd09f], a
 	ld bc, $202
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
@@ -51,7 +51,7 @@ VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 
 VermilionGymScriptPointers: ; 5ca95 (17:4a95)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw VermilionGymScript3
 
@@ -156,9 +156,9 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	set 7, [hl]
 	ld hl, ReceivedThunderbadgeText
 	ld de, ReceivedThunderbadgeText
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3

@@ -16,7 +16,7 @@ PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 
 PokemonTower7ScriptPointers: ; 60d23 (18:4d23)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw PokemonTower7Script2
 	dw PokemonTower7Script3
 	dw PokemonTower7Script4
@@ -30,7 +30,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	call EndTrainerBattle
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	call PokemonTower7Script_60db6
@@ -44,7 +44,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	bit 0, a
 	ret nz
 	ld hl, W_MISSABLEOBJECTLIST
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld b, a
 .missableObjectsListLoop
 	ld a, [hli]
@@ -55,7 +55,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ld [wda38], a
 	ld a, $0
@@ -74,7 +74,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $95
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
 	ld [wLastMap], a
 	ld hl, wd72d
@@ -86,7 +86,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 
 PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld hl, CoordsData_60de3 ; $4de3
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	dec a
 	swap a
 	ld d, $0
@@ -106,7 +106,7 @@ PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp MoveSprite
 .asm_60dde

@@ -5,11 +5,11 @@ FarCopyData::
 	push af
 	ld a, [wBuffer]
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call CopyData
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	ret
 
 CopyData::

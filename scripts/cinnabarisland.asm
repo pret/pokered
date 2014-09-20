@@ -32,10 +32,10 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [wcd38], a
-	ld a, $80
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	ld a, D_DOWN
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	xor a
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
@@ -44,7 +44,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ret
 
 CinnabarIslandScript1: ; 1ca73 (7:4a73)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3

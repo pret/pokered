@@ -28,13 +28,13 @@ Route18GateScript0: ; 4988f (12:588f)
 	jr z, .asm_498c6 ; 0x498a9 $1b
 	ld a, [wWhichTrade]
 	dec a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld b, $0
 	ld c, a
 	ld a, $40
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	call FillMemory
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [W_ROUTE18GATECURSCRIPT], a
 	ret
@@ -51,7 +51,7 @@ CoordsData_498cc: ; 498cc (12:58cc)
 	db $FF
 
 Route18GateScript1: ; 498d5 (12:58d5)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $f0
@@ -62,16 +62,16 @@ Route18GateScript2: ; 498df (12:58df)
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $10
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_ROUTE18GATECURSCRIPT], a
 	ret
 
 Route18GateScript3: ; 498f9 (12:58f9)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a

@@ -13,8 +13,8 @@ SeafoamIslands2Object: ; 0x46376 (size=72)
 	db $0 ; signs
 
 	db $2 ; people
-	db SPRITE_BOULDER, $6 + 4, $11 + 4, $ff, $10, $1 ; person
-	db SPRITE_BOULDER, $6 + 4, $16 + 4, $ff, $10, $2 ; person
+	db SPRITE_BOULDER, $6 + 4, $11 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $1 ; person
+	db SPRITE_BOULDER, $6 + 4, $16 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $2 ; person
 
 	; warp-to
 	EVENT_DISP SEAFOAM_ISLANDS_2_WIDTH, $2, $4 ; SEAFOAM_ISLANDS_3

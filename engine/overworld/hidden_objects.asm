@@ -1,20 +1,21 @@
 Func_46981: ; 46981 (11:6981)
 	xor a
-	ld [wd71e], a
+	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
 	bit 4, a
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade] ; wWhichTrade
-	ld [wd71e], a
+	ld a, [wWhichTrade]
+	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
 	ld hl, wd732
 	set 4, [hl]
 	ret
 
-Func_469a0: ; 469a0 (11:69a0)
+; if a hidden object was found, stores $00 in [$ffee], else stores $ff
+CheckForHiddenObject: ; 469a0 (11:69a0)
 	ld hl, $ffeb
 	xor a
 	ld [hli], a
@@ -22,107 +23,110 @@ Func_469a0: ; 469a0 (11:69a0)
 	ld [hli], a
 	ld [hl], a
 	ld de, $0
-	ld hl, HiddenObjectMaps ; $6a40
-.asm_469ae
+	ld hl, HiddenObjectMaps
+.hiddenMapLoop
 	ld a, [hli]
 	ld b, a
 	cp $ff
-	jr z, .asm_469fc
-	ld a, [W_CURMAP] ; W_CURMAP
+	jr z, .noMatch
+	ld a, [W_CURMAP]
 	cp b
-	jr z, .asm_469be
+	jr z, .foundMatchingMap
 	inc de
 	inc de
-	jr .asm_469ae
-.asm_469be
-	ld hl, HiddenObjectPointers ; $6a96
+	jr .hiddenMapLoop
+.foundMatchingMap
+	ld hl, HiddenObjectPointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wHiddenObjectFunctionArgument
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	pop hl
-.asm_469ce
+.hiddenObjectLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_469fc
-	ld [wTrainerScreenY], a
+	jr z, .noMatch
+	ld [wHiddenObjectY], a
 	ld b, a
 	ld a, [hli]
-	ld [wTrainerScreenX], a
+	ld [wHiddenObjectX], a
 	ld c, a
-	call Func_46a01
+	call CheckIfCoordsInFrontOfPlayerMatch
 	ld a, [$ffea]
 	and a
-	jr z, .asm_469f0
+	jr z, .foundMatchingObject
 	inc hl
 	inc hl
 	inc hl
 	inc hl
 	push hl
-	ld hl, wTrainerFacingDirection
+	ld hl, wHiddenObjectIndex
 	inc [hl]
 	pop hl
-	jr .asm_469ce
-.asm_469f0
+	jr .hiddenObjectLoop
+.foundMatchingObject
 	ld a, [hli]
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wHiddenObjectFunctionArgument], a
 	ld a, [hli]
-	ld [wTrainerEngageDistance], a
+	ld [wHiddenObjectFunctionRomBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ret
-.asm_469fc
+.noMatch
 	ld a, $ff
 	ld [$ffee], a
 	ret
 
-Func_46a01: ; 46a01 (11:6a01)
-	ld a, [wSpriteStateData1 + 9]
-	cp $4
-	jr z, .asm_46a16
-	cp $8
-	jr z, .asm_46a25
-	cp $c
-	jr z, .asm_46a2b
-	ld a, [W_YCOORD] ; wd361
+; checks if the coordinates in front of the player's sprite match Y in b and X in c
+; [$ffea] = $00 if they match, $ff if they don't match
+CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
+	jr z, .facingUp
+	cp SPRITE_FACING_LEFT
+	jr z, .facingLeft
+	cp SPRITE_FACING_RIGHT
+	jr z, .facingRight
+; facing down
+	ld a, [W_YCOORD]
 	inc a
-	jr .asm_46a1a
-.asm_46a16
-	ld a, [W_YCOORD] ; wd361
+	jr .upDownCommon
+.facingUp
+	ld a, [W_YCOORD]
 	dec a
-.asm_46a1a
+.upDownCommon
 	cp b
-	jr nz, .asm_46a3b
-	ld a, [W_XCOORD] ; wd362
+	jr nz, .didNotMatch
+	ld a, [W_XCOORD]
 	cp c
-	jr nz, .asm_46a3b
-	jr .asm_46a38
-.asm_46a25
-	ld a, [W_XCOORD] ; wd362
+	jr nz, .didNotMatch
+	jr .matched
+.facingLeft
+	ld a, [W_XCOORD]
 	dec a
-	jr .asm_46a2f
-.asm_46a2b
-	ld a, [W_XCOORD] ; wd362
+	jr .leftRightCommon
+.facingRight
+	ld a, [W_XCOORD]
 	inc a
-.asm_46a2f
+.leftRightCommon
 	cp c
-	jr nz, .asm_46a3b
-	ld a, [W_YCOORD] ; wd361
+	jr nz, .didNotMatch
+	ld a, [W_YCOORD]
 	cp b
-	jr nz, .asm_46a3b
-.asm_46a38
+	jr nz, .didNotMatch
+.matched
 	xor a
-	jr .asm_46a3d
-.asm_46a3b
+	jr .done
+.didNotMatch
 	ld a, $ff
-.asm_46a3d
+.done
 	ld [$ffea], a
 	ret
 

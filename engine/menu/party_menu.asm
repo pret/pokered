@@ -57,7 +57,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call LoadMonData
 	pop hl
 	push hl
-	ld a,[wcc35]
+	ld a,[wMenuItemToSwap]
 	and a ; is the player swapping pokemon positions?
 	jr z,.skipUnfilledRightArrow
 ; if the player is swapping pokemon positions

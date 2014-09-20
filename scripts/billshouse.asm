@@ -57,7 +57,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld a, $c
 	ld [$ffeb], a
 	ld a, $40
@@ -66,7 +66,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld [$ffed], a
 	ld a, $5
 	ld [$ffee], a
-	call Func_32f9
+	call SetSpritePosition1
 	ld a, $62
 	ld [wcc4d], a
 	predef ShowObject

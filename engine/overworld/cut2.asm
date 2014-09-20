@@ -9,12 +9,12 @@ Func_79e96: ; 79e96 (1e:5e96)
 	ld a, $1
 	ld [wd08a], a
 	ld c, $2
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $99
 	ld a, $ff
 	ld [wd08a], a
 	ld c, $2
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld a, [rOBP1] ; $ff49
 	xor $64
 	ld [rOBP1], a ; $ff49
@@ -37,7 +37,7 @@ Func_79e96: ; 79e96 (1e:5e96)
 	ld a, $2
 	ld [wd08a], a
 	ld c, $4
-	call Func_79352
+	call AdjustOAMBlockYPos2
 	pop bc
 	dec c
 	jr nz, .asm_79eca
@@ -49,22 +49,22 @@ Func_79eed: ; 79eed (1e:5eed)
 	ld a, $1
 	ld [wd08a], a
 	ld c, $1
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $95
 	ld a, $2
 	ld [wd08a], a
 	ld c, $1
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $99
 	ld a, $fe
 	ld [wd08a], a
 	ld c, $1
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $9d
 	ld a, $ff
 	ld [wd08a], a
 	ld c, $1
-	call Func_79339
+	call AdjustOAMBlockXPos2
 	ld a, [rOBP1] ; $ff49
 	xor $64
 	ld [rOBP1], a ; $ff49

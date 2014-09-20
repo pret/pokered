@@ -1,21 +1,21 @@
 Func_525af: ; 525af (14:65af)
-	ld a, [$ffd7]
+	ld a, [hTilesetType]
 	ld [wd0d4], a
 	xor a
 	ld [wcd6a], a
-	ld [wcf0b], a
+	ld [wBattleResult], a
 	ld hl, wcc2b
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld [wListScrollOffset], a ; wcc36
-	ld [wd05e], a
+	ld [wCriticalHitOrOHKO], a
 	ld [wBattleMonSpecies], a
-	ld [wPartyAliveFlags], a
+	ld [wPartyGainExpFlags], a
 	ld [wPlayerMonNumber], a ; wPlayerMonNumber
-	ld [wd078], a
-	ld [wd35d], a
+	ld [wEscapedFromBattle], a
+	ld [wMapPalOffset], a
 	ld hl, wcf1d
 	ld [hli], a
 	ld [hl], a
@@ -73,7 +73,7 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	and a
 	jr nz, .asm_52659
 	set 6, [hl]
-	callab Func_3ed27
+	callab QuarterSpeedDueToParalysis
 	ld c, $1e
 	call DelayFrames
 	callab Func_3fba8

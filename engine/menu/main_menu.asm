@@ -111,16 +111,16 @@ MainMenu: ; 5af2 (1:5af2)
 	call DelayFrames
 	ld a,[wd5a2]
 	and a
-	jp z,Func_5d5f
+	jp z,SpecialEnterMap
 	ld a,[W_CURMAP] ; map ID
 	cp a,HALL_OF_FAME
-	jp nz,Func_5d5f
+	jp nz,SpecialEnterMap
 	xor a
-	ld [wd71a],a
+	ld [wDestinationMap],a
 	ld hl,wd732
-	set 2,[hl]
-	call Func_62ce
-	jp Func_5d5f
+	set 2,[hl] ; fly warp or dungeon warp
+	call SpecialWarpIn
+	jp SpecialEnterMap
 Func_5bff: ; 5bff (1:5bff)
 	ld a,1
 	ld [wd358],a
@@ -247,7 +247,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	cp $2
 	jr z, .asm_5d2d
 	xor a
-	ld [wd700], a
+	ld [wWalkBikeSurfState], a
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
 	ld a, TRADE_CENTER
@@ -262,8 +262,8 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld hl, wd732
 	res 1, [hl]
 	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
-	ld [wd71a], a
-	call Func_62ce
+	ld [wDestinationMap], a
+	call SpecialWarpIn
 	ld c, $14
 	call DelayFrames
 	xor a
@@ -272,7 +272,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	inc a
 	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
 	ld [wcc47], a
-	jr Func_5d5f
+	jr SpecialEnterMap
 .asm_5d2d
 	xor a
 	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
@@ -303,16 +303,17 @@ Func_5d52: ; 5d52 (1:5d52)
 	ld c, $14
 	call DelayFrames
 
-Func_5d5f: ; 5d5f (1:5d5f)
+; enter map after using a special warp or loading the game from the main menu
+SpecialEnterMap: ; 5d5f (1:5d5f)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
 	ld [hJoy5], a
 	ld [wd72d], a
 	ld hl, wd732
-	set 0, [hl]
+	set 0, [hl] ; count play time
 	call ResetPlayerSpriteData
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	ld a, [wcc47]
 	and a

@@ -34,7 +34,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	ld a, $2a
 	ld [wd09f], a
 	ld bc, $0208
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
@@ -236,7 +236,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, wd77e
 	set 2, [hl]
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Received10CoinsText
 	jr .asm_c7d1a ; 0x48d87
 .asm_d0957 ; 0x48d89
@@ -409,9 +409,9 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	set 7, [hl]
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
@@ -437,7 +437,7 @@ CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 CeladonGameCornerText12: ; 48edd (12:4edd)
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
 	call PrintText
 	call WaitForSoundToFinish
@@ -449,7 +449,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, $43
 	ld [wd09f], a
 	ld bc, $0208
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)

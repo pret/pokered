@@ -31,7 +31,7 @@ SaffronGymText_5d048: ; 5d048 (17:5048)
 
 SaffronGymScriptPointers: ; 5d053 (17:5053)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw SaffronGymScript3
 
@@ -178,9 +178,9 @@ SaffronGymText1: ; 5d118 (17:5118)
 	set 7, [hl]
 	ld hl, SaffronGymText_5d167
 	ld de, SaffronGymText_5d167
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $6

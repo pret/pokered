@@ -22,7 +22,7 @@ SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $405
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_5a173: ; 5a173 (16:6173)
 	db $04,$05,$FF
@@ -37,7 +37,7 @@ SilphCo10Text_5a176: ; 5a176 (16:6176)
 
 SilphCo10ScriptPointers: ; 5a180 (16:6180)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SilphCo10TextPointers: ; 5a186 (16:6186)

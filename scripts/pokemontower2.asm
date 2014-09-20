@@ -46,7 +46,7 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [$ff8c], a
 	ld a, b
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
@@ -104,7 +104,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $0
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -130,7 +130,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 	set 7, [hl]
 	ld hl, PokemonTower2Text_60632
 	ld de, PokemonTower2Text_60637 ; XXX $4637
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a
 

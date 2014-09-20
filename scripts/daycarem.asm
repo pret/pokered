@@ -24,13 +24,13 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareMText_56414
 	call PrintText
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld [wd07d], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
 	ld hl, DayCareMText_56437
@@ -65,7 +65,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, $3
 	ld [wcc49], a
 	call LoadMonData
-	callab Func_58f43
+	callab CalcLevelFromExperience
 	ld a, d
 	cp MAX_LEVEL
 	jr c, .asm_56315

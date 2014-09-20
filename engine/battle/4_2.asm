@@ -1,76 +1,77 @@
-Func_137aa: ; 137aa (4:77aa)
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+EndOfBattle: ; 137aa (4:77aa)
+	ld a, [W_ISLINKBATTLE]
 	cp $4
-	jr nz, .asm_137eb
+	jr nz, .notLinkBattle
+; link battle
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld a, [wEnemyMonStatus] ; wcfe9
+	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearScreen
-	callab Func_372d6
-	ld a, [wcf0b]
+	callab DisplayLinkBattleVersusTextBox
+	ld a, [wBattleResult]
 	cp $1
 	ld de, YouWinText
-	jr c, .asm_137de
+	jr c, .placeWinOrLoseString
 	ld de, YouLoseText
-	jr z, .asm_137de
+	jr z, .placeWinOrLoseString
 	ld de, DrawText
-.asm_137de
+.placeWinOrLoseString
 	hlCoord 6, 8
 	call PlaceString
 	ld c, $c8
 	call DelayFrames
-	jr .asm_1380a
-.asm_137eb
-	ld a, [wcf0b]
+	jr .evolution
+.notLinkBattle
+	ld a, [wBattleResult]
 	and a
-	jr nz, .asm_13813
-	ld hl, wcce5
+	jr nz, .resetVariables
+	ld hl, wTotalPayDayMoney
 	ld a, [hli]
 	or [hl]
 	inc hl
 	or [hl]
-	jr z, .asm_1380a
-	ld de, wPlayerMoney + 2 ; wd349
+	jr z, .evolution ; if pay day money is 0, jump
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef AddBCDPredef
 	ld hl, PickUpPayDayMoneyText
 	call PrintText
-.asm_1380a
+.evolution
 	xor a
 	ld [wccd4], a
-	predef Func_3ad1c
-.asm_13813
+	predef EvolutionAfterBattle
+.resetVariables
 	xor a
 	ld [wd083], a
 	ld [wc02a], a
-	ld [W_ISINBATTLE], a ; W_ISINBATTLE
-	ld [W_BATTLETYPE], a ; wd05a
-	ld [W_MOVEMISSED], a ; W_MOVEMISSED
-	ld [W_CUROPPONENT], a ; wd059
+	ld [W_ISINBATTLE], a
+	ld [W_BATTLETYPE], a
+	ld [W_MOVEMISSED], a
+	ld [W_CUROPPONENT], a
 	ld [wd11f], a
-	ld [wd120], a
-	ld [wd078], a
+	ld [wNumRunAttempts], a
+	ld [wEscapedFromBattle], a
 	ld hl, wcc2b
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [wListScrollOffset], a ; wcc36
+	ld [wListScrollOffset], a
 	ld hl, wd060
 	ld b, $18
-.asm_1383e
+.loop
 	ld [hli], a
 	dec b
-	jr nz, .asm_1383e
+	jr nz, .loop
 	ld hl, wd72c
 	set 0, [hl]
 	call WaitForSoundToFinish
 	call GBPalWhiteOut
 	ld a, $ff
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ret
 
 YouWinText: ; 13853 (4:7853)
@@ -87,13 +88,13 @@ PickUpPayDayMoneyText: ; 1386b (4:786b)
 	db "@"
 
 Func_13870: ; 13870 (4:7870)
-	ld a, [wcc57]
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wd736]
 	and a
 	ret nz
-	callab Func_c49d
+	callab IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .asm_13888
 .asm_13884
 	ld a, $1
@@ -307,7 +308,7 @@ HazeEffect_: ; 139da (4:79da)
 	ld hl, wcd12
 	ld de, wBattleMonAttack
 	call Func_13a4a
-	ld hl, wcd26
+	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wEnemyMonAttack
 	call Func_13a4a
 	ld hl, wEnemyMonStatus

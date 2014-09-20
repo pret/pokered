@@ -9,7 +9,7 @@ Route4Script: ; 55658 (15:5658)
 
 Route4ScriptPointers: ; 5566b (15:566b)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route4TextPointers: ; 55671 (15:5671)

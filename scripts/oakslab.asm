@@ -3,9 +3,9 @@ OaksLabScript: ; 1cb0e (7:4b0e)
 	bit 6, a
 	call nz, OaksLabScript_1d076
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabScriptPointers
 	ld a, [W_OAKSLABCURSCRIPT]
 	jp CallFunctionInTable
@@ -35,7 +35,7 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 	ld a, [wd74b]
 	bit 7, a
 	ret z
-	ld a, [wcf10]
+	ld a, [wNPCMovementScriptFunctionNum]
 	and a
 	ret nz
 	ld a, $31
@@ -50,7 +50,7 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 
 OaksLabScript1: ; 1cb6e (7:4b6e)
 	ld a, $8
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld de, OakEntryMovement
 	call MoveSprite
 
@@ -78,22 +78,22 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 
 OaksLabScript3: ; 1cba2 (7:4ba2)
 	call Delay3
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	ld de, PlayerEntryMovementRLE
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 
 	ld a, $4
 	ld [W_OAKSLABCURSCRIPT], a
@@ -103,7 +103,7 @@ PlayerEntryMovementRLE: ; 1cbcf (7:4bcf)
 	db $40, $8, $ff
 
 OaksLabScript4: ; 1cbd2 (7:4bd2)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld hl, wd747
@@ -111,14 +111,14 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld hl, wd74b
 	set 0, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
 	ld hl, W_FLAGS_D733
 	res 1, [hl]
-	call Func_2307
+	call PlayDefaultMusic
 
 	ld a, $5
 	ld [W_OAKSLABCURSCRIPT], a
@@ -156,24 +156,24 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	cp $6
 	ret nz
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
 	ld a, $c
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $40
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	ld a, $8
 	ld [wd528], a
 
@@ -182,7 +182,7 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ret
 
 OaksLabScript7: ; 1cc72 (7:4c72)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -231,10 +231,10 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	jr nz, .asm_1ccf3 ; 0x1cccd $24
 	push hl
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $4
 	ld [$ff8b], a
-	call Func_34fc
+	call GetPointerWithinSpriteStateData1
 	push hl
 	ld [hl], $4c
 	inc hl
@@ -256,7 +256,7 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 
 .asm_1ccf3
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 
 	ld a, $9
@@ -270,10 +270,10 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $fc
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $d
 	ld [$ff8c], a
 	call DisplayTextID
@@ -299,10 +299,10 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld [wd11e], a
 	call GetMonName
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $e
 	ld [$ff8c], a
 	call DisplayTextID
@@ -320,10 +320,10 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	cp $6
 	ret nz
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $8
 	ld [wd528], a
 	ld c, BANK(Music_MeetRival)
@@ -337,14 +337,14 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld a, $1
 	swap a
 	ld [$ff95], a
-	predef Func_f929
+	predef CalcPositionOfPlayerRelativeToNPC
 	ld a, [$ff95]
 	dec a
 	ld [$ff95], a
-	predef Func_f8ba
-	ld de, wcc97
+	predef FindPathToPlayer
+	ld de, wNPCMovementDirections2
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 
 	ld a, $b
@@ -374,11 +374,11 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 .done
 	ld [W_TRAINERNO], a
 	ld a, $1
-	ld [wcf13], a
-	call Func_32ef
+	ld [wSpriteIndex], a
+	call GetSpritePosition1
 	ld hl, OaksLabText_1d3be
 	ld de, OaksLabText_1d3c3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
@@ -397,13 +397,13 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [wd528], a
 	call UpdateSprites
 	ld a, $1
-	ld [wcf13], a
-	call Func_32f9
+	ld [wSpriteIndex], a
+	call SetSpritePosition1
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
 	ld hl, wd74b
 	set 3, [hl]
@@ -420,7 +420,7 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	call DisplayTextID
 	callba Music_RivalAlternateStart
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld de, .RivalExitMovement
 	call MoveSprite
 	ld a, [W_XCOORD]
@@ -450,7 +450,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	call Func_2307 ; reset to map music
+	call PlayDefaultMusic ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .done ; 0x1ce8a $23
@@ -491,17 +491,17 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld a, $2a
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, [wcd37]
+	ld a, [wNPCMovementDirections2Index]
 	ld [wd157], a
 	ld b, $0
 	ld c, a
-	ld hl, wcc97
+	ld hl, wNPCMovementDirections2
 	ld a, $40
 	call FillMemory
 	ld [hl], $ff
 	ld a, $1
-	ld [$ff8c], a
-	ld de, wcc97
+	ld [H_SPRITEINDEX], a
+	ld de, wNPCMovementDirections2
 	call MoveSprite
 
 	ld a, $10
@@ -510,22 +510,22 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 
 OaksLabScript_1cefd ; 1cefd (7:4efd)
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $8
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a
 	ld [$ff8d], a
-	jp Func_34a6 ; face object
+	jp SetSpriteFacingDirectionAndDelay
 
 OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
 	call EnableAutoTextBoxDrawing
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $fc
 	ld [wJoyIgnore], a
 	call OaksLabScript_1cefd
@@ -558,10 +558,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $c
 	ld [$ff8d], a
-	call Func_34a6 ; face object
+	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a, $1b
 	ld [$ff8c], a
@@ -579,7 +579,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, [wd157]
 	ld b, $0
 	ld c, a
-	ld hl, wcc97
+	ld hl, wNPCMovementDirections2
 	xor a
 	call FillMemory
 	ld [hl], $ff
@@ -588,8 +588,8 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
-	ld [$ff8c], a
-	ld de, wcc97
+	ld [H_SPRITEINDEX], a
+	ld de, wNPCMovementDirections2
 	call MoveSprite
 
 	ld a, $11
@@ -600,7 +600,7 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $2a
 	ld [wcc4d], a
 	predef HideObject
@@ -652,7 +652,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	cp $3
 	jr nz, .asm_1d045 ; 0x1d038 $b
 	ld a, $4
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, $b
 	jr .asm_1d068 ; 0x1d043 $23
@@ -660,13 +660,13 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	cp $1
 	jr nz, .asm_1d054 ; 0x1d047 $b
 	ld a, $2
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, $9
 	jr .asm_1d068 ; 0x1d052 $14
 .asm_1d054
 	ld a, $3
-	ld [wcd37], a
+	ld [wNPCMovementDirections2Index], a
 	ld b, $a
 	ld a, [W_XCOORD]
 	cp $4
@@ -680,8 +680,8 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld a, b
 	ld [$ffed], a
 	ld a, $1
-	ld [wcf13], a
-	call Func_32f9
+	ld [wSpriteIndex], a
+	call SetSpritePosition1
 	ret
 
 OaksLabScript_1d076: ; 1d076 (7:5076)
@@ -801,7 +801,7 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [wcf91], a
 	ld [wd11e], a
 	ld a, b
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld a, [wd74b]
 	bit 2, a
 	jp nz, OaksLabScript_1d22d
@@ -817,17 +817,17 @@ OaksLabText39: ; 1d152 (7:5152)
 
 OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $9
 	ld [$ff8b], a
-	call Func_34fc
+	call GetPointerWithinSpriteStateData1
 	ld [hl], $0
 	; manually fixed some disassembler issues around here
 	ld a, $1
-	ld [$FF8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $9
 	ld [$ff8b], a
-	call Func_34fc
+	call GetPointerWithinSpriteStateData1
 	ld [hl], $c
 	ld hl, wd730
 	set 6, [hl]
@@ -837,7 +837,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	call ReloadMapData
 	ld c, $a
 	call DelayFrames
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $2
 	jr z, OaksLabLookAtCharmander
 	cp $3
@@ -868,7 +868,7 @@ OaksLabBulbasaurText: ; 1d1ae (7:51ae)
 OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call YesNoChoice ; yes/no menu
 	ld a, [wCurrentMenuItem]
 	and a
@@ -877,7 +877,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	ld [W_PLAYERSTARTER], a
 	ld [wd11e], a
 	call GetMonName
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $2
 	jr nz, asm_1d1db ; 0x1d1d5 $4
 	ld a, $2b
@@ -893,7 +893,7 @@ asm_1d1e5: ; 1d1e5 (7:51e5)
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, OaksLabMonEnergeticText
 	call PrintText
 	ld hl, OaksLabReceivedMonText
@@ -924,10 +924,10 @@ OaksLabReceivedMonText: ; 1d227 (7:5227)
 
 OaksLabScript_1d22d: ; 1d22d (7:522d)
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, $9
 	ld [$ff8b], a
-	call Func_34fc
+	call GetPointerWithinSpriteStateData1
 	ld [hl], $0
 	ld hl, OaksLabLastMonText
 	call PrintText
@@ -956,7 +956,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld hl, OaksLabText_1d31d
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
 	jp .asm_0f042
 .asm_b28b0 ; 0x1d279

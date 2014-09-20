@@ -60,7 +60,7 @@ SafariZoneCheckSteps: ; 1e997 (7:6997)
 	ld [wSafariSteps + 1], a ; wd70e
 asm_1e9ab: ; 1e9ab (7:69ab)
 	xor a
-	ld [wda46], a
+	ld [wSafariZoneGameOver], a
 	ret
 asm_1e9b0: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
@@ -83,13 +83,13 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld a, $9c
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $3
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ld hl, wd790
 	set 6, [hl]
 	ld a, $1
-	ld [wda46], a
+	ld [wSafariZoneGameOver], a
 	ret
 
 PrintSafariGameOverText: ; 1e9ed (7:69ed)
@@ -152,7 +152,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld l, a
 	call PrintText
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
 
@@ -291,7 +291,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 .asm_1eb38
 	pop bc
 	ld [wd09f], a
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	ld hl, $ffdb
 	dec [hl]
 	jr nz, .asm_1eb0e
@@ -334,7 +334,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	jp PrintPredefTextID
 .asm_1eb8b
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $2e
 	call PrintPredefTextID
 	ld c, $20
@@ -357,13 +357,13 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, (SFX_02_3a - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	call Func_2307
+	call PlayDefaultMusic
 	ld hl, wd7f2
 	set 3, [hl]
 	ret
 .asm_1ebd2
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $2f
 	call PrintPredefTextID
 	ret

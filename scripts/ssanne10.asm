@@ -9,7 +9,7 @@ SSAnne10Script: ; 61d55 (18:5d55)
 
 SSAnne10ScriptPointers: ; 61d68 (18:5d68)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 SSAnne10TextPointers: ; 61d6e (18:5d6e)

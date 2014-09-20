@@ -108,7 +108,7 @@ ViridianCityScript2: ; 1908f (6:508f)
 	ret
 
 ViridianCityScript3: ; 190c1 (6:50c1)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -117,11 +117,11 @@ ViridianCityScript3: ; 190c1 (6:50c1)
 	ret
 
 ViridianCityScript_190cf: ; 190cf (6:50cf)
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $80
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a

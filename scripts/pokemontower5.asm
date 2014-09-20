@@ -9,7 +9,7 @@ PokemonTower5Script: ; 60932 (18:4932)
 
 PokemonTower5ScriptPointers: ; 60945 (18:4945)
 	dw PokemonTower5Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 PokemonTower5Script0: ; 6094b (18:494b)
@@ -33,10 +33,10 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	ld hl, wd72e
 	set 4, [hl]
 	predef HealParty
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call Delay3
 	call Delay3
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld a, $7
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID

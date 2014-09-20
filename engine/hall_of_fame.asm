@@ -18,8 +18,8 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld bc, HOF_TEAM
 	call FillMemory
 	xor a
-	ld [wcfcb], a
-	ld [$ffd7], a
+	ld [wUpdateSpritesEnabled], a
+	ld [hTilesetType], a
 	ld [W_SPRITEFLIPPED], a
 	ld [wd358], a
 	ld [wTrainerScreenY], a
@@ -32,7 +32,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	inc [hl]
 .asm_701eb
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -66,7 +66,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call PlaceString
 	ld c, 180
 	call DelayFrames
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	pop bc
 	pop hl
 	jr .asm_701fb
@@ -86,7 +86,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_70377
 	call Func_70423
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld hl, rLCDC ; $ff40
 	res 3, [hl]
 	ret
@@ -125,7 +125,7 @@ Func_70278: ; 70278 (1c:4278)
 	call Func_7036d
 	ld d, $a0
 	ld e, $4
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	jr z, .asm_702c7
 	sla e
@@ -282,4 +282,4 @@ Func_70423: ; 70423 (1c:4423)
 	ld [wcfc9], a
 	ld a, $ff
 	ld [wMusicHeaderPointer], a
-	jp GBFadeOut2
+	jp GBFadeOutToWhite

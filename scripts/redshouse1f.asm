@@ -25,7 +25,7 @@ MomWakeUpText: ; 48185 (12:4185)
 MomHealPokemon: ; 4818a (12:418a)
 	ld hl, MomHealText1
 	call PrintText
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call ReloadMapData
 	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
@@ -38,7 +38,7 @@ MomHealPokemon: ; 4818a (12:418a)
 	ld a, [wd35b]
 	ld [wc0ee], a
 	call PlaySound
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld hl, MomHealText2
 	jp PrintText
 

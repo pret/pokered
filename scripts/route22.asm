@@ -45,7 +45,7 @@ Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
 	call MoveSprite
 	ld a, $c
 	ld [$ff8d], a
-	jp Func_34a6
+	jp SetSpriteFacingDirectionAndDelay
 
 Route22RivalMovementData: ; 50efb (14:4efb)
 	db $C0,$C0,$C0,$C0,$FF ; move right 4 times
@@ -83,7 +83,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	xor a
 	ld [wcd50], a
 	predef EmotionBubble
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_50f4e ; 0x50f44 $8
 	ld a, $ff
@@ -117,7 +117,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld [$ff8d], a
 	ld a, $1
 	ld [$ff8c], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $1
@@ -128,7 +128,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText1
 	ld de, Route22Text_511bc
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a
 	ld hl, StarterMons_50faf ; $4faf
@@ -158,7 +158,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld [$ff8d], a
 	ld a, $1
 	ld [$ff8c], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd7eb
@@ -208,7 +208,7 @@ Route22Script3: ; 5102a (14:502a)
 	ld a, $22
 	ld [wcc4d], a
 	predef HideObject
-	call Func_2307
+	call PlayDefaultMusic
 	ld hl, wd7eb
 	res 0, [hl]
 	res 7, [hl]
@@ -222,7 +222,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	xor a
 	ld [wcd50], a
 	predef EmotionBubble
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .skipYVisibilityTesta
 	ld a, $ff
@@ -259,7 +259,7 @@ Route22Script4: ; 51087 (14:5087)
 	ld a, $c
 .asm_510a8
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $2
@@ -270,7 +270,7 @@ Route22Script4: ; 51087 (14:5087)
 	set 7, [hl]
 	ld hl, Route22RivalDefeatedText2 ; $51cb
 	ld de, Route22Text_511d0 ; $51d0
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; wd059
 	ld hl, StarterMons_510d9 ; $50d9
@@ -303,7 +303,7 @@ Route22Script5: ; 510df (14:50df)
 	ld a, $c
 .asm_51102
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd7eb
@@ -353,7 +353,7 @@ Route22Script6: ; 51151 (14:5151)
 	ld a, $23
 	ld [wcc4d], a
 	predef HideObject
-	call Func_2307
+	call PlayDefaultMusic
 	ld hl, wd7eb
 	res 1, [hl]
 	res 7, [hl]

@@ -119,10 +119,10 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call FillMemory
 	call ClearSprites
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld hl, wd730
 	set 6, [hl]
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, $e4
 	jr z, .asm_411e5
@@ -175,7 +175,7 @@ Func_41245: ; 41245 (10:5245)
 	ld a, $ab
 	ld [rLCDC], a ; $ff40
 	ld a, $50
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld a, $86
 	ld [rWX], a ; $ff4b
 	ld [$ffae], a
@@ -397,7 +397,7 @@ Func_41411: ; 41411 (10:5411)
 	xor a
 	ld [$ffae], a
 	ld a, $90
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ret
 
 Func_4142d: ; 4142d (10:542d)
@@ -475,7 +475,7 @@ Func_4149f: ; 4149f (10:549f)
 Func_414ae: ; 414ae (10:54ae)
 	push hl
 	hlCoord 0, 4
-	call ScheduleRowRedrawHelper
+	call CopyToScreenEdgeTiles
 	pop hl
 	ld a, h
 	ld [H_SCREENEDGEREDRAWADDR + 1], a
@@ -655,7 +655,7 @@ Func_415c8: ; 415c8 (10:55c8)
 	ld a, $7
 	ld [rWX], a ; $ff4b
 	xor a
-	ld [$ffb0], a
+	ld [hVBlankWY], a
 	ld a, $90
 	ld [$ffae], a
 	ret

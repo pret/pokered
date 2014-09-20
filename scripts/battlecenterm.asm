@@ -9,7 +9,7 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld [$ff8d], a
 	ld a, $1
 	ld [$ff8c], a
-	call Func_34ae
+	call SetSpriteFacingDirection
 	ld hl, wd72d
 	bit 0, [hl]
 	set 0, [hl]

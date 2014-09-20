@@ -75,5 +75,5 @@ Route12GateUpstairsScript_495c9: ; 495c9 (12:55c9)
 	call PrintText
 	xor a
 .asm_495d8
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd

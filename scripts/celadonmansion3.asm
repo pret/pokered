@@ -51,7 +51,7 @@ DirectorText: ; 487b2 (12:47b2)
 	db $8 ; asm
 	callab DisplayDiploma
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd
 
 GameFreakPCText1: ; 487eb (12:47eb)

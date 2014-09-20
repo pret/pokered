@@ -162,7 +162,7 @@ LoadDestinationWarpPosition:: ; 1313 (0:1313)
 	ld b,0
 	add hl,bc
 	ld bc,4
-	ld de,wd35f
+	ld de,wCurrentTileBlockMapViewPointer
 	call CopyData
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -257,8 +257,9 @@ LoadMonData:: ; 1372 (0:1372)
 	ld b, BANK(LoadMonData_)
 	jp Bankswitch
 
-; writes c to wd0dc+b
+
 Func_137a:: ; 137a (0:137a)
+; Write c to [wd0dc + b]. Unused.
 	ld hl, wd0dc
 	ld e, b
 	ld d, 0
@@ -350,10 +351,10 @@ GetCryData:: ; 13d9 (0:13d9)
 
 
 DisplayPartyMenu:: ; 13fc (0:13fc)
-	ld a,[$ffd7]
+	ld a,[hTilesetType]
 	push af
 	xor a
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call PartyMenuInit
@@ -361,10 +362,10 @@ DisplayPartyMenu:: ; 13fc (0:13fc)
 	jp HandlePartyMenuInput
 
 GoBackToPartyMenu:: ; 1411 (0:1411)
-	ld a,[$ffd7]
+	ld a,[hTilesetType]
 	push af
 	xor a
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	call PartyMenuInit
 	call RedrawPartyMenu
 	jp HandlePartyMenuInput
@@ -422,11 +423,11 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld [wcc2b],a
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
-	ld a,[wcc35]
+	ld a,[wMenuItemToSwap]
 	and a
 	jp nz,.swappingPokemon
 	pop af
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	bit 1,b
 	jr nz,.noPokemonChosen
 	ld a,[wPartyCount]
@@ -454,7 +455,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 .cancelSwap ; if the B button was pressed
 	callba ErasePartyMenuCursors
 	xor a
-	ld [wcc35],a
+	ld [wMenuItemToSwap],a
 	ld [wd07d],a
 	call RedrawPartyMenu
 	jr HandlePartyMenuInput
@@ -544,6 +545,7 @@ PrintLevelCommon:: ; 1523 (0:1523)
 	jp PrintNumber
 
 Func_152e:: ; 152e (0:152e)
+; Unused.
 	ld hl,wd0dc
 	ld c,a
 	ld b,0
@@ -925,7 +927,7 @@ INCLUDE "home/audio.asm"
 
 
 UpdateSprites:: ; 2429 (0:2429)
-	ld a, [wcfcb]
+	ld a, [wUpdateSpritesEnabled]
 	dec a
 	ret nz
 	ld a, [H_LOADEDROMBANK]
@@ -1068,18 +1070,18 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld l,a ; hl = map text pointer
 	ld d,$00
 	ld a,[$ff8c] ; text ID
-	ld [wcf13],a
+	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
-	cp a,$d3 ; safari game over
+	cp a,$d3
 	jp z,DisplaySafariGameOverText
-	cp a,$d0 ; fainted
+	cp a,$d0
 	jp z,DisplayPokemonFaintedText
-	cp a,$d1 ; blacked out
+	cp a,$d1
 	jp z,DisplayPlayerBlackedOutText
-	cp a,$d2 ; repel wore off
+	cp a,$d2
 	jp z,DisplayRepelWoreOffText
-	ld a,[W_NUMSPRITES] ; number of sprites
+	ld a,[W_NUMSPRITES]
 	ld e,a
 	ld a,[$ff8c] ; sprite ID
 	cp e
@@ -1090,7 +1092,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	push hl
 	push de
 	push bc
-	callba Func_13074 ; update the graphics of the sprite the player is talking to (to face the right direction)
+	callba UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
 	ld hl,W_MAPSPRITEDATA ; NPC text entries
@@ -1139,7 +1141,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jr AfterDisplayingTextID
 .notSpecialCase
 	call Func_3c59 ; display the text
-	ld a,[wcc3c]
+	ld a,[wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz,HoldTextDisplayOpen
 
@@ -1160,7 +1162,7 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
-	ld [$ffb0],a ; move the window off the screen
+	ld [hVBlankWY],a ; move the window off the screen
 	call DelayFrame
 	call LoadGBPal
 	xor a
@@ -1184,13 +1186,13 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld hl,wcfc4
 	res 0,[hl]
 	ld a,[wd732]
-	bit 3,a
+	bit 3,a ; used fly warp
 	call z,LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	jp UpdateSprites ; move sprites
+	jp UpdateSprites
 
 DisplayPokemartDialogue:: ; 2a2e (0:2a2e)
 	push hl
@@ -1218,7 +1220,7 @@ PokemartGreetingText:: ; 2a55 (0:2a55)
 
 LoadItemList:: ; 2a5a (0:2a5a)
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,h
 	ld [wd128],a
 	ld a,l
@@ -1266,7 +1268,7 @@ DisplayPlayerBlackedOutText:: ; 2aa9 (0:2aa9)
 	ld hl,PlayerBlackedOutText
 	call PrintText
 	ld a,[wd732]
-	res 5,a
+	res 5,a ; reset forced to use bike bit
 	ld [wd732],a
 	jp HoldTextDisplayOpen
 
@@ -1382,13 +1384,13 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld a,$01 ; hardcoded bank
 	jr .bankswitch
 .specialBattleType ; Old Man battle
-	ld a, Bank(OldManItemList)
+	ld a, Bank(DisplayBattleMenu)
 .bankswitch
 	call BankswitchHome
 	ld hl,wd730
 	set 6,[hl] ; turn off letter printing delay
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wd12a],a
 	ld a,[wcf8b]
 	ld l,a
@@ -1399,7 +1401,8 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld a,$0d ; list menu text box ID
 	ld [wd125],a
 	call DisplayTextBoxID ; draw the menu text box
-	call UpdateSprites ; move sprites
+	call UpdateSprites ; disable sprites behind the text box
+; the code up to .skipMovingSprites appears to be useless
 	hlCoord 4, 2 ; coordinates of upper left corner of menu text box
 	ld de,$090e ; height and width of menu text box
 	ld a,[wListMenuID]
@@ -1669,11 +1672,11 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	jp .waitForKeyPressLoop
 .buttonAPressed ; the player chose to make the transaction
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ret
 .buttonBPressed ; the player chose to cancel the transaction
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld a,$ff
 	ret
 
@@ -1695,7 +1698,7 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 	res 6,[hl]
 	call BankswitchBack
 	xor a
-	ld [wcc35],a ; 0 means no item is currently being swapped
+	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	scf
 	ret
 
@@ -1863,7 +1866,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	inc c
 	push bc
 	inc c
-	ld a,[wcc35] ; ID of item chosen for swapping (counts from 1)
+	ld a,[wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; is an item being swapped?
 	jr z,.nextListEntry
 	sla a
@@ -2073,10 +2076,10 @@ ChooseFlyDestination:: ; 30a9 (0:30a9)
 	ld hl, LoadTownMap_Fly
 	jp Bankswitch
 
-; causes the text box to close waithout waiting for a button press after displaying text
+; causes the text box to close without waiting for a button press after displaying text
 DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 	ld a,$01
-	ld [wcc3c],a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a
 	ret
 
 ; uses an item
@@ -2147,60 +2150,62 @@ DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ld [$2000],a
 	ret
 
-Func_30fd:: ; 30fd (0:30fd)
-	ld a, [wcc57]
+; not zero if an NPC movement script is running, the player character is
+; automatically stepping down from a door, or joypad states are being simulated
+IsPlayerCharacterBeingControlledByGame:: ; 30fd (0:30fd)
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wd736]
-	bit 1, a
+	bit 1, a ; currently stepping down from door bit
 	ret nz
 	ld a, [wd730]
 	and $80
 	ret
 
-Func_310e:: ; 310e (0:310e)
+RunNPCMovementScript:: ; 310e (0:310e)
 	ld hl, wd736
 	bit 0, [hl]
 	res 0, [hl]
-	jr nz, .asm_3146
-	ld a, [wcc57]
+	jr nz, .playerStepOutFromDoor
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret z
 	dec a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
-	ld hl, .pointerTable_3140
+	ld hl, .NPCMovementScriptPointerTables
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [wcc58]
+	ld a, [wNPCMovementScriptBank]
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	ld a, [wcf10]
+	ld a, [wNPCMovementScriptFunctionNum]
 	call CallFunctionInTable
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
 	ret
-.pointerTable_3140
-	dw PointerTable_1a442
-	dw PointerTable_1a510
-	dw PointerTable_1a57d
-.asm_3146
-	ld b, BANK(Func_1a3e0)
-	ld hl, Func_1a3e0
+.NPCMovementScriptPointerTables
+	dw ProfOakMovementScriptPointerTable
+	dw PewterMuseumGuyMovementScriptPointerTable
+	dw PewterGymGuyMovementScriptPointerTable
+.playerStepOutFromDoor
+	ld b, BANK(PlayerStepOutFromDoor)
+	ld hl, PlayerStepOutFromDoor
 	jp Bankswitch
 
-Func_314e:: ; 314e (0:314e)
-	ld b, BANK(Func_1a41d)
-	ld hl, Func_1a41d
+EndNPCMovementScript:: ; 314e (0:314e)
+	ld b, BANK(_EndNPCMovementScript)
+	ld hl, _EndNPCMovementScript
 	jp Bankswitch
 
-Func_3156:: ; 3156 (0:3156)
+EmptyFunc2:: ; 3156 (0:3156)
 	ret
 
 ; stores hl in [W_TRAINERHEADERPTR]
@@ -2291,7 +2296,6 @@ ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 TrainerFlagAction::
 	predef_jump FlagActionPredef
 
-; direct talking to a trainer (rather than getting seen by one)
 TalkToTrainer:: ; 31cc (0:31cc)
 	call StoreTrainerHeaderPointer
 	xor a
@@ -2318,25 +2322,26 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	ld a, $8
 	call ReadTrainerHeaderInfo     ; read end battle text
 	pop de
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld hl, W_FLAGS_D733
 	set 4, [hl]                    ; activate map script index override (index is set below)
 	ld hl, wFlags_0xcd60
-	bit 0, [hl]                    ; test if player is already being engaged by another trainer
+	bit 0, [hl]                    ; test if player is already engaging the trainer (because the trainer saw the player)
 	ret nz
+; if the player talked to the trainer of his own volition
 	call EngageMapTrainer
 	ld hl, W_CURMAPSCRIPT
-	inc [hl]      ; progress map script index (assuming it was 0 before) to start pre-battle routines
-	jp Func_325d
+	inc [hl]      ; increment map script index before StartTrainerBattle increments it again (next script function is usually EndTrainerBattle)
+	jp StartTrainerBattle
 
 ; checks if any trainers are seeing the player and wanting to fight
 CheckFightingMapTrainers:: ; 3219 (0:3219)
 	call CheckForEngagingTrainers
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	cp $ff
 	jr nz, .trainerEngaging
 	xor a
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
@@ -2352,19 +2357,21 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ldh [$b4], a
 	call TrainerWalkUpToPlayer_Bank0
 	ld hl, W_CURMAPSCRIPT
-	inc [hl]      ; progress to battle phase 1 (engaging)
+	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
 
-Func_324c:: ; 324c (0:324c)
+; display the before battle text after the enemy trainer has walked up to the player's sprite
+DisplayEnemyTrainerTextAndStartBattle:: ; 324c (0:324c)
 	ld a, [wd730]
 	and $1
-	ret nz
+	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
-	ld a, [wcf13]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld a, [wSpriteIndex]
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
+	; fall through
 
-Func_325d:: ; 325d (0:325d)
+StartTrainerBattle:: ; 325d (0:325d)
 	xor a
 	ld [wJoyIgnore], a
 	call InitBattleEnemyParameters
@@ -2374,7 +2381,7 @@ Func_325d:: ; 325d (0:325d)
 	ld hl, wd72e
 	set 1, [hl]
 	ld hl, W_CURMAPSCRIPT
-	inc [hl]        ; progress to battle phase 2 (battling)
+	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
 
 EndTrainerBattle:: ; 3275 (0:3275)
@@ -2399,7 +2406,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	call IsInArray              ; search for sprite ID
 	inc hl
 	ld a, [hl]
@@ -2440,22 +2447,22 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ret
 
-Func_32ef:: ; 32ef (0:32ef)
-	ld hl, Func_567f9
+GetSpritePosition1:: ; 32ef (0:32ef)
+	ld hl, _GetSpritePosition1
 	jr asm_3301
 
-Func_32f4:: ; 32f4 (0:32f4)
-	ld hl, Func_56819
+GetSpritePosition2:: ; 32f4 (0:32f4)
+	ld hl, _GetSpritePosition2
 	jr asm_3301 ; 0x32f7 $8
 
-Func_32f9:: ; 32f9 (0:32f9)
-	ld hl, Func_5683d
+SetSpritePosition1:: ; 32f9 (0:32f9)
+	ld hl, _SetSpritePosition1
 	jr asm_3301
 
-Func_32fe:: ; 32fe (0:32fe)
-	ld hl, Func_5685d
+SetSpritePosition2:: ; 32fe (0:32fe)
+	ld hl, _SetSpritePosition2
 asm_3301:: ; 3301 (0:3301)
-	ld b, BANK(Func_567f9) ; BANK(Func_56819), BANK(Func_5683d), BANK(Func_5685d)
+	ld b, BANK(_GetSpritePosition1) ; BANK(_GetSpritePosition2), BANK(_SetSpritePosition1), BANK(_SetSpritePosition2)
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers:: ; 3306 (0:3306)
@@ -2466,7 +2473,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 .trainerLoop
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
 	ld a, [de]
-	ld [wcf13], a                     ; store trainer flag's bit
+	ld [wSpriteIndex], a                     ; store trainer flag's bit
 	ld [wTrainerHeaderFlagBit], a
 	cp $ff
 	ret z
@@ -2488,7 +2495,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld a, [hl]                       ; read trainer engage distance
 	pop hl
 	ld [wTrainerEngageDistance], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	predef TrainerEngage
@@ -2504,26 +2511,27 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld e, l
 	jr .trainerLoop
 
-; saves loaded rom bank and hl as well as de registers
-PreBattleSaveRegisters:: ; 3354 (0:3354)
+; hl = text if the player wins
+; de = text if the player loses
+SaveEndBattleTextPointers:: ; 3354 (0:3354)
 	ld a, [H_LOADEDROMBANK]
-	ld [W_PBSTOREDROMBANK], a
+	ld [wEndBattleTextRomBank], a
 	ld a, h
-	ld [W_PBSTOREDREGISTERH], a
+	ld [wEndBattleWinTextPointer], a
 	ld a, l
-	ld [W_PBSTOREDREGISTERL], a
+	ld [wEndBattleWinTextPointer + 1], a
 	ld a, d
-	ld [W_PBSTOREDREGISTERD], a
+	ld [wEndBattleLoseTextPointer], a
 	ld a, e
-	ld [W_PBSTOREDREGISTERE], a
+	ld [wEndBattleLoseTextPointer + 1], a
 	ret
 
 ; loads data of some trainer on the current map and plays pre-battle music
-; [wcf13]: sprite ID of trainer who is engaged
+; [wSpriteIndex]: sprite ID of trainer who is engaged
 EngageMapTrainer:: ; 336a (0:336a)
 	ld hl, W_MAPSPRITEEXTRADATA
 	ld d, $0
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	dec a
 	add a
 	ld e, a
@@ -2534,7 +2542,7 @@ EngageMapTrainer:: ; 336a (0:336a)
 	ld [wEnemyMonAttackMod], a ; wcd2e
 	jp PlayTrainerMusic
 
-Func_3381:: ; 3381 (0:3381)
+PrintEndBattleText:: ; 3381 (0:3381)
 	push hl
 	ld hl, wd72d
 	bit 7, [hl]
@@ -2543,45 +2551,45 @@ Func_3381:: ; 3381 (0:3381)
 	ret z
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [W_PBSTOREDROMBANK]
+	ld a, [wEndBattleTextRomBank]
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	push hl
 	callba SaveTrainerName
-	ld hl, TrainerNameText
+	ld hl, TrainerEndBattleText
 	call PrintText
 	pop hl
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
-	callba Func_1a5e7
+	ld [MBC1RomBank], a
+	callba FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
 
-Func_33b7:: ; 33b7 (0:33b7)
-	ld a, [wcf0b]
+GetSavedEndBattleTextPointer:: ; 33b7 (0:33b7)
+	ld a, [wBattleResult]
 	and a
-	jr nz, .asm_33c6
-	ld a, [W_PBSTOREDREGISTERH]
+; won battle
+	jr nz, .lostBattle
+	ld a, [wEndBattleWinTextPointer]
 	ld h, a
-	ld a, [W_PBSTOREDREGISTERL]
+	ld a, [wEndBattleWinTextPointer + 1]
 	ld l, a
 	ret
-.asm_33c6
-	ld a, [W_PBSTOREDREGISTERD]
+.lostBattle
+	ld a, [wEndBattleLoseTextPointer]
 	ld h, a
-	ld a, [W_PBSTOREDREGISTERE]
+	ld a, [wEndBattleLoseTextPointer + 1]
 	ld l, a
 	ret
 
-TrainerNameText:: ; 33cf (0:33cf)
+TrainerEndBattleText:: ; 33cf (0:33cf)
 	TX_FAR _TrainerNameText
 	db $08
-
-Func_33d4:: ; 33d4 (0:33d4)
-	call Func_33b7
+	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
 	jp TextScriptEnd
 
+; XXX unused?
 Func_33dd:: ; 33dd (0:33dd)
 	ld a, [wFlags_0xcd60]
 	bit 0, a
@@ -2637,29 +2645,33 @@ PlayTrainerMusic:: ; 33e8 (0:33e8)
 
 INCLUDE "data/trainer_types.asm"
 
-Func_3442:: ; 3442 (0:3442)
+; checks if the player's coordinates match an arrow movement tile's coordinates
+; and if so, decodes the RLE movement data
+; b = player Y
+; c = player X
+DecodeArrowMovementRLE:: ; 3442 (0:3442)
 	ld a, [hli]
 	cp $ff
-	ret z
+	ret z ; no match in the list
 	cp b
-	jr nz, .asm_345b
+	jr nz, .nextArrowMovementTileEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .asm_345c
+	jr nz, .nextArrowMovementTileEntry2
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld hl, wccd3
+	ld hl, wSimulatedJoypadStatesEnd
 	call DecodeRLEList
 	dec a
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ret
-.asm_345b
+.nextArrowMovementTileEntry1
 	inc hl
-.asm_345c
+.nextArrowMovementTileEntry2
 	inc hl
 	inc hl
-	jr Func_3442
+	jr DecodeArrowMovementRLE
 
 FuncTX_ItemStoragePC:: ; 3460 (0:3460)
 	call SaveScreenTilesToBuffer2
@@ -2687,10 +2699,10 @@ FuncTX_PokemonCenterPC:: ; 347f (0:347f)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
 
-Func_3486:: ; 3486 (0:3486)
+StartSimulatingJoypadStates:: ; 3486 (0:3486)
 	xor a
-	ld [wcd3b], a
-	ld [wSpriteStateData2 + $06], a
+	ld [wOverrideSimulatedJoypadStatesMask], a
+	ld [wSpriteStateData2 + $06], a ; player's sprite movement byte 1
 	ld hl, wd730
 	set 7, [hl]
 	ret
@@ -2711,21 +2723,21 @@ DisplayPokedex:: ; 349b (0:349b)
 	ld hl, Func_7c18
 	jp Bankswitch
 
-Func_34a6:: ; 34a6 (0:34a6)
-	call Func_34ae
+SetSpriteFacingDirectionAndDelay:: ; 34a6 (0:34a6)
+	call SetSpriteFacingDirection
 	ld c, $6
 	jp DelayFrames
 
-Func_34ae:: ; 34ae (0:34ae)
+SetSpriteFacingDirection:: ; 34ae (0:34ae)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
-	call Func_34fc
+	ld [H_SPRITEDATAOFFSET], a
+	call GetPointerWithinSpriteStateData1
 	ld a, [$ff8d]
 	ld [hl], a
 	ret
 
-Func_34b9:: ; 34b9 (0:34b9)
-	ld de, $fff9
+SetSpriteImageIndexAfterSettingFacingDirection:: ; 34b9 (0:34b9)
+	ld de, -7
 	add hl, de
 	ld [hl], a
 	ret
@@ -2773,14 +2785,14 @@ CheckCoords:: ; 34c7 (0:34c7)
 ; tests if a boulder's coordinates are in a specified array
 ; INPUT:
 ; hl = address of array
-; ff8c = which boulder to check? XXX
+; [H_SPRITEINDEX] = index of boulder sprite
 ; OUTPUT:
 ; [wWhichTrade] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
 	ld hl, wSpriteStateData2 + $04
-	ld a, [$ff8c]
+	ld a, [H_SPRITEINDEX]
 	swap a
 	ld d, $0
 	ld e, a
@@ -2794,16 +2806,17 @@ CheckBoulderCoords:: ; 34e4 (0:34e4)
 	pop hl
 	jp CheckCoords
 
-Func_34fc:: ; 34fc (0:34fc)
+GetPointerWithinSpriteStateData1:: ; 34fc (0:34fc)
 	ld h, $c1
-	jr asm_3502
+	jr _GetPointerWithinSpriteStateData
 
-Func_3500:: ; 3500 (0:3500)
+GetPointerWithinSpriteStateData2:: ; 3500 (0:3500)
 	ld h, $c2
-asm_3502:: ; 3502 (0:3502)
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+
+_GetPointerWithinSpriteStateData:
+	ld a, [H_SPRITEDATAOFFSET]
 	ld b, a
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_SPRITEINDEX]
 	swap a
 	add b
 	ld l, a
@@ -2864,7 +2877,7 @@ SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 ; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
 GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
-	ld a,[$FF8C] ; the sprite to move
+	ld a,[H_SPRITEINDEX] ; the sprite to move
 	swap a
 	add a,6
 	ld l,a
@@ -3053,30 +3066,31 @@ MoveSprite_:: ; 363d (0:363d)
 	set 0,[hl]
 	pop hl
 	xor a
-	ld [wcd3b],a
-	ld [wccd3],a
+	ld [wOverrideSimulatedJoypadStatesMask],a
+	ld [wSimulatedJoypadStatesEnd],a
 	dec a
 	ld [wJoyIgnore],a
-	ld [wcd3a],a
+	ld [wWastedByteCD3A],a
 	ret
 
-Func_366b:: ; 366b (0:366b)
+; divides [$ffe5] by [$ffe6] and stores the quotient in [$ffe7]
+DivideBytes:: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
 	xor a
 	ld [hld], a
 	ld a, [hld]
 	and a
-	jr z, .asm_367e
+	jr z, .done
 	ld a, [hli]
-.asm_3676
+.loop
 	sub [hl]
-	jr c, .asm_367e
+	jr c, .done
 	inc hl
 	inc [hl]
 	dec hl
-	jr .asm_3676
-.asm_367e
+	jr .loop
+.done
 	pop hl
 	ret
 
@@ -3432,21 +3446,21 @@ JoypadLowSensitivity:: ; 3831 (0:3831)
 	ret
 
 WaitForTextScrollButtonPress:: ; 3865 (0:3865)
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+	ld a, [H_DOWNARROWBLINKCNT1]
 	push af
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_DOWNARROWBLINKCNT2]
 	push af
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-.asm_3872
+	ld [H_DOWNARROWBLINKCNT2], a
+.loop
 	push hl
-	ld a, [wd09b]
+	ld a, [wTownMapSpriteBlinkingEnabled]
 	and a
-	jr z, .asm_387c
-	call Func_716c6
-.asm_387c
+	jr z, .skipAnimation
+	call TownMapSpriteBlinkingAnimation
+.skipAnimation
 	hlCoord 18, 16
 	call HandleDownArrowBlinkTiming
 	pop hl
@@ -3454,16 +3468,16 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	predef Func_5a5f
 	ld a, [hJoy5]
 	and A_BUTTON | B_BUTTON
-	jr z, .asm_3872
+	jr z, .loop
 	pop af
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	pop af
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ret
 
-; (unlass in link battle) waits for A or B being pressed and outputs the scrolling sound effect
+; (unless in link battle) waits for A or B being pressed and outputs the scrolling sound effect
 ManualTextScroll:: ; 3898 (0:3898)
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld a, [W_ISLINKBATTLE]
 	cp $4
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
@@ -4169,9 +4183,9 @@ DisableAutoTextBoxDrawing:: ; 3c3f (0:3c3f)
 	ld a,$01
 
 AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
-	ld [wcf0c],a ; control text box drawing
+	ld [wAutoTextBoxDrawingControl],a
 	xor a
-	ld [wcc3c],a ; make DisplayTextID wait for button press
+	ld [wDoNotWaitForButtonPressAfterDisplayingText],a ; make DisplayTextID wait for button press
 	ret
 
 PrintText:: ; 3c49 (0:3c49)
@@ -4461,11 +4475,11 @@ IsInRestOfArray::
 	ret
 
 
-Func_3dbe:: ; 3dbe (0:3dbe)
+RestoreScreenTilesAndReloadTilePatterns:: ; 3dbe (0:3dbe)
 	call ClearSprites
 	ld a, $1
-	ld [wcfcb], a
-	call Func_3e08
+	ld [wUpdateSpritesEnabled], a
+	call ReloadMapSpriteTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
 	call GoPAL_SET_CF1C
@@ -4501,7 +4515,7 @@ GBPalWhiteOut::
 GoPAL_SET_CF1C:: ; 3ded (0:3ded)
 	ld b,$ff
 GoPAL_SET:: ; 3def (0:3def)
-	ld a,[wcf1b]
+	ld a,[wOnSGB]
 	and a
 	ret z
 	predef_jump Func_71ddf
@@ -4521,14 +4535,16 @@ GetHealthBarColor::
 	ld [hl], d
 	ret
 
-Func_3e08:: ; 3e08 (0:3e08)
+; Copy the current map's sprites' tile patterns to VRAM again after they have
+; been overwritten by other tile patterns.
+ReloadMapSpriteTilePatterns:: ; 3e08 (0:3e08)
 	ld hl, wcfc4
 	ld a, [hl]
 	push af
 	res 0, [hl]
 	push hl
 	xor a
-	ld [W_SPRITESETID], a ; W_SPRITESETID
+	ld [W_SPRITESETID], a
 	call DisableLCD
 	callba InitMapSprites
 	call EnableLCD
@@ -4592,51 +4608,52 @@ Func_3ead:: ; 3ead (0:3ead)
 	ld hl, CinnabarGymQuiz_1eb0a
 	jp Bankswitch
 
-Func_3eb5:: ; 3eb5 (0:3eb5)
+CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [hJoyHeld]
-	bit 0, a
-	jr z, .asm_3eea
-	ld a, Bank(Func_469a0)
-	ld [$2000], a
+	bit 0, a ; A button
+	jr z, .nothingFound
+; A button is pressed
+	ld a, Bank(CheckForHiddenObject)
+	ld [MBC1RomBank], a
 	ld [H_LOADEDROMBANK], a
-	call Func_469a0
+	call CheckForHiddenObject
 	ld a, [$ffee]
 	and a
-	jr nz, .asm_3edd
-	ld a, [wTrainerEngageDistance]
-	ld [$2000], a
+	jr nz, .hiddenObjectNotFound
+	ld a, [wHiddenObjectFunctionRomBank]
+	ld [MBC1RomBank], a
 	ld [H_LOADEDROMBANK], a
-	ld de, .asm_3eda
+	ld de, .returnAddress
 	push de
 	jp [hl]
-.asm_3eda
+.returnAddress
 	xor a
-	jr .asm_3eec
-.asm_3edd
+	jr .done
+.hiddenObjectNotFound
 	callba PrintBookshelfText
 	ld a, [$ffdb]
 	and a
-	jr z, .asm_3eec
-.asm_3eea
+	jr z, .done
+.nothingFound
 	ld a, $ff
-.asm_3eec
+.done
 	ld [$ffeb], a
 	pop af
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	ld [H_LOADEDROMBANK], a
 	ret
 
 PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld hl, TextPredefs
-	call Func_3f0f
+	call SetMapTextPointer
 	ld hl, wcf11
 	set 0, [hl]
 	call DisplayTextID
 
-Func_3f05:: ; 3f05 (0:3f05)
+RestoreMapTextPointer:: ; 3f05 (0:3f05)
 	ld hl, W_MAPTEXTPTR
 	ld a, [$ffec]
 	ld [hli], a
@@ -4644,7 +4661,7 @@ Func_3f05:: ; 3f05 (0:3f05)
 	ld [hl], a
 	ret
 
-Func_3f0f:: ; 3f0f (0:3f0f)
+SetMapTextPointer:: ; 3f0f (0:3f0f)
 	ld a, [W_MAPTEXTPTR]
 	ld [$ffec], a
 	ld a, [W_MAPTEXTPTR + 1]

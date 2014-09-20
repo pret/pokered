@@ -9,7 +9,7 @@ PokemonTower4Script: ; 607f6 (18:47f6)
 
 PokemonTower4ScriptPointers: ; 60809 (18:4809)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 PokemonTower4TextPointers: ; 6080f (18:480f)

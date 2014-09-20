@@ -23,7 +23,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $305
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_51b9e
 	bit 5, a
@@ -32,7 +32,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $20a
-	predef Func_ee9e
+	predef ReplaceTileBlock
 	pop af
 .asm_51bb1
 	bit 6, a
@@ -40,14 +40,14 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld a, $54
 	ld [wd09f], a
 	ld bc, $60a
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_51bc1: ; 51bc1 (14:5bc1)
 	db $03,$05,$02,$0A,$06,$0A,$FF
 
 SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -71,7 +71,7 @@ SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_51bd4
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -110,7 +110,7 @@ SilphCo7Text_51c10: ; 51c10 (14:5c10)
 
 SilphCo7ScriptPointers: ; 51c17 (14:5c17)
 	dw SilphCo7Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw SilphCo7Script3
 	dw SilphCo7Script4
@@ -177,7 +177,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	set 7, [hl]
 	ld hl, SilphCo7Text14 ; $5ec8
 	ld de, SilphCo7Text_51ecd ; $5ecd
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a ; wd059
 	ld a, [W_RIVALSTARTER] ; wd715
@@ -211,7 +211,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, $4
 	ld [$ff8d], a
-	call Func_34a6
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
@@ -244,7 +244,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	ld a, $a7
 	ld [wcc4d], a
 	predef HideObject
-	call Func_2307
+	call PlayDefaultMusic
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo7Text_51c10
@@ -323,7 +323,7 @@ SilphCo7Text1:
 	ld bc, (LAPRAS << 8) | 15
 	call GivePokemon
 	jr nc, .done
-	ld a, [wccd3]
+	ld a, [wSimulatedJoypadStatesEnd]
 	and a
 	call z, WaitForTextScrollButtonPress
 	call EnableAutoTextBoxDrawing

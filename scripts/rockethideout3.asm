@@ -9,7 +9,7 @@ RocketHideout3Script: ; 45225 (11:5225)
 
 RocketHideout3ScriptPointers: ; 45238 (11:5238)
 	dw RocketHideout3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout3Script3
 
@@ -19,12 +19,12 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	ld a, [W_XCOORD]
 	ld c, a
 	ld hl, RocketHideout3ArrowTilePlayerMovement
-	call Func_3442
+	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
 	ld hl, wd736
 	set 7, [hl]
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $ff
@@ -136,7 +136,7 @@ RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
 	db $FF
 
 RocketHideout3Script3 ; 452e4 (11:452e4)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jp nz, LoadSpinnerArrowTiles
 	xor a
