@@ -525,9 +525,9 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld [wcc79], a
 	ld b, $e4
 	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
-	cp $aa
+	cp ANIM_AA
 	jr c, .asm_78e3f
-	cp $ae
+	cp ANIM_AD + 1
 	jr nc, .asm_78e3f
 	ld b, $f0
 .asm_78e3f
@@ -697,13 +697,13 @@ AnimationIdSpecialEffects: ; 78ef5 (1e:4ef5)
 	db ROCK_SLIDE
 	dw DoRockSlideSpecialEffects
 
-	db $AA
+	db ANIM_AA
 	dw Func_79041
 
-	db $AB
+	db ANIM_AB
 	dw Func_7904c
 
-	db $AC
+	db ANIM_AC
 	dw Func_7907c
 
 	db TOSS_ANIM
@@ -2855,10 +2855,10 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 
 .PokeBallAnimations: ; 79e50 (1e:5e50)
 ; sequence of animations that make up the Poké Ball toss
-	db POOF_ANIM,HIDEPIC_ANIM,$C2,POOF_ANIM,SHOWPIC_ANIM
+	db POOF_ANIM,HIDEPIC_ANIM,SHAKE_ANIM,POOF_ANIM,SHOWPIC_ANIM
 
 .BlockBall ; 5E55
-	ld a,$C1
+	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
 	call PlayAnimation
 	ld a,(SFX_08_43 - SFX_Headers_08) / 3

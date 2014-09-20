@@ -6,7 +6,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld [hl], $ff
 	push hl
 	ld a, $1
-	ld [$ffb7], a
+	ld [hJoy7], a
 	ld a, [W_CURMAP] ; W_CURMAP
 	push af
 	ld b, $0
@@ -66,7 +66,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 .asm_70ec8
 	call Func_716c6
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	ld b, a
 	and $c3
 	jr z, .asm_70ec8
@@ -78,7 +78,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	jr nz, .asm_70f01
 	xor a
 	ld [wd09b], a
-	ld [$ffb7], a
+	ld [hJoy7], a
 	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
 	call Func_711ab
 	pop hl
@@ -188,7 +188,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	ld b, a
 	pop hl
 	and $c3

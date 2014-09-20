@@ -537,7 +537,7 @@ TradeCenter_SelectMon:
 	ld [wTileMap + $141], a
 .asm_574a
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and a
 	jr z, .asm_574a ; 0x5750 $f8
 	bit 0, a
@@ -896,7 +896,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [W_GRASSRATE], a ; W_GRASSRATE
 	inc a
 	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
-	ld [$ffb5], a
+	ld [hJoy5], a
 	ld a, $a
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)

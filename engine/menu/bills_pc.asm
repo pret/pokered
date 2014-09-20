@@ -88,25 +88,13 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ret
 
-SomeonesPCText: ; 2148b (8:548b)
-	db "SOMEONE's PC@"
+SomeonesPCText:   db "SOMEONE's PC@"
+BillsPCText:      db "BILL's PC@"
+PlayersPCText:    db "'s PC@"
+OaksPCText:       db "PROF.OAK's PC@"
+PKMNLeaguePCText: db $4a, "LEAGUE@"
+LogOffPCText:     db "LOG OFF@"
 
-BillsPCText: ; 21497 (8:5497)
-	db "BILL's PC@"
-
-PlayersPCText: ; 214a0 (8:54a0)
-	db "'s PC@"
-
-OaksPCText: ; 214a5 (8:54a5)
-	db "PROF.OAK's PC@"
-
-PKMNLeaguePCText: ; 214b2 (8:54b2)
-	db $4a,"LEAGUE@"
-
-LogOffPCText: ; 214ba (8:54ba)
-	db "LOG OFF@"
-
-Func_214c2:: ; 214c2 (8:54c2)
 BillsPC_:: ; 0x214c2
 	ld hl, wd730
 	set 6, [hl]
@@ -167,15 +155,15 @@ BillsPCMenu:
 	call TextBoxBorder
 	ld a, [wd5a0]
 	and $7f
-	cp $9
+	cp 9
 	jr c, .asm_2154f
-	sub $9
+	sub 9
 	hlCoord 17, 16
-	ld [hl], $f7
-	add $f6
+	ld [hl], "1"
+	add "0"
 	jr .asm_21551
 .asm_2154f
-	add $f7
+	add "1"
 .asm_21551
 	Coorda 18, 16
 	hlCoord 10, 16
@@ -227,7 +215,7 @@ BillsPCDeposit:
 	jp BillsPCMenu
 .asm_215bb
 	ld a, [W_NUMINBOX] ; wda80
-	cp $14
+	cp MONS_PER_BOX
 	jr nz, .asm_215cb
 	ld hl, BoxFullText ; $5802
 	call PrintText
@@ -251,15 +239,15 @@ BillsPCDeposit:
 	ld hl, wWhichTrade ; wWhichTrade
 	ld a, [wd5a0]
 	and $7f
-	cp $9
+	cp 9
 	jr c, .asm_2160a
-	sub $9
-	ld [hl], $f7
+	sub 9
+	ld [hl], "1"
 	inc hl
-	add $f6
+	add "0"
 	jr .asm_2160c
 .asm_2160a
-	add $f7
+	add "1"
 .asm_2160c
 	ld [hli], a
 	ld [hl], $50
@@ -276,7 +264,7 @@ Func_21618: ; 21618 (8:5618)
 	jp Func_214e8
 .asm_21627
 	ld a, [wPartyCount] ; wPartyCount
-	cp $6
+	cp PARTY_LENGTH
 	jr nz, .asm_21637
 	ld hl, CantTakeMonText ; $5811
 	call PrintText
@@ -353,7 +341,12 @@ Func_216be: ; 216be (8:56be)
 	ret
 
 BillsPCMenuText: ; 216e1 (8:56e1)
-	db "WITHDRAW ",$4a,$4e,"DEPOSIT ",$4a,$4e,"RELEASE ",$4a,$4e,"CHANGE BOX",$4e,"SEE YA!@"
+	db   "WITHDRAW ", $4a
+	next "DEPOSIT ",  $4a
+	next "RELEASE ",  $4a
+	next "CHANGE BOX"
+	next "SEE YA!"
+	db "@"
 
 BoxNoPCText: ; 21713 (8:5713)
 	db "BOX No.@"
@@ -389,7 +382,7 @@ HMMoveArray: ; 21745 (8:5745)
 	db SURF
 	db STRENGTH
 	db FLASH
-	db $ff
+	db -1
 
 Func_2174b: ; 2174b (8:574b)
 	hlCoord 9, 10
@@ -458,14 +451,11 @@ Func_2174b: ; 2174b (8:574b)
 	call LoadGBPal
 	jr .asm_2178f
 
-DepositPCText: ; 217cb (8:57cb)
-	db "DEPOSIT@"
-
-WithdrawPCText: ; 217d3 (8:57d3)
-	db "WITHDRAW@"
-
-StatsCancelPCText: ; 217dc (8:57dc)
-	db "STATS",$4e,"CANCEL@"
+DepositPCText:  db "DEPOSIT@"
+WithdrawPCText: db "WITHDRAW@"
+StatsCancelPCText:
+	db   "STATS"
+	next "CANCEL@"
 
 SwitchOnText: ; 0x217e9
 	TX_FAR _SwitchOnText
@@ -523,7 +513,7 @@ PrintJustAMomentText1:: ; 5824 (8:5825)
 	cp $c
 	ret nz
 	ld a, [W_CURMAP]
-	cp $ef
+	cp BATTLE_CENTER
 	ld a, $2
 	jr z, .asm_2183a
 	inc a
@@ -541,7 +531,7 @@ PrintJustAMomentText2:: ; 5845 (8:5845)
 	cp $8
 	ret nz
 	ld a, [W_CURMAP]
-	cp $ef
+	cp BATTLE_CENTER
 	ld a, $2
 	jr z, .asm_2185a
 	inc a

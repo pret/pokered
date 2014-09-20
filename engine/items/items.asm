@@ -110,10 +110,10 @@ ItemUseBall: ; d687 (3:5687)
 	dec a
 	jr z,.UseBall
 	ld a,[wPartyCount]	;is Party full?
-	cp a,6
+	cp a,PARTY_LENGTH
 	jr nz,.UseBall
 	ld a,[W_NUMINBOX]	;is Box full?
-	cp a,20
+	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
 .UseBall	;$56a7
 ;ok, you can use a ball
@@ -421,7 +421,7 @@ ItemUseBall: ; d687 (3:5687)
 	predef ShowPokedexData
 .checkParty	;$58f4
 	ld a,[wPartyCount]
-	cp a,6		;is party full?
+	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
 	xor a
 	ld [wcc49],a

@@ -307,7 +307,7 @@ Func_5d5f: ; 5d5f (1:5d5f)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [$ffb5], a
+	ld [hJoy5], a
 	ld [wd72d], a
 	ld hl, wd732
 	set 0, [hl]
@@ -461,7 +461,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
 	call JoypadLowSensitivity
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	ld b,a
 	and a,%11111011 ; any key besides select pressed?
 	jr z,.getJoypadStateLoop

@@ -67,9 +67,9 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	call LoadMonData
 	callab Func_58f43
 	ld a, d
-	cp $64
+	cp MAX_LEVEL
 	jr c, .asm_56315
-	ld d, $64
+	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld hl, wDayCareMonExp
 	ld a, [H_NUMTOPRINT]
@@ -78,7 +78,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld [hli], a
 	ld a, [$ff98]
 	ld [hl], a
-	ld d, $64
+	ld d, MAX_LEVEL
 
 .asm_56315
 	xor a
@@ -100,7 +100,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 .asm_56333
 	call PrintText
 	ld a, [wPartyCount]
-	cp $6
+	cp PARTY_LENGTH
 	ld hl, DayCareMText_56440
 	jp z, .asm_56403
 	ld de, wTrainerFacingDirection

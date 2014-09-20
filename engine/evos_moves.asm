@@ -135,7 +135,7 @@ Func_3ad71: ; 3ad71 (e:6d71)
 	ld [wHPBarMaxHP + 1], a
 	ld a, MONSTER_NAME
 	ld [W_LISTTYPE], a
-	ld a, $e
+	ld a, BANK(TrainerNames) ; bank is not used for monster names
 	ld [wPredefBank], a
 	call GetName
 	push hl

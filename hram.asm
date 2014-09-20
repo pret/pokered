@@ -1,8 +1,8 @@
 
-H_SPRITEWIDTH           EQU $FF8B ; in bytes
+H_SPRITEWIDTH            EQU $FF8B ; in tiles
 H_SPRITEINTERLACECOUNTER EQU $FF8B
-H_SPRITEHEIGHT          EQU $FF8C ; in bytes
-H_SPRITEOFFSET          EQU $FF8D
+H_SPRITEHEIGHT           EQU $FF8C ; in tiles
+H_SPRITEOFFSET           EQU $FF8D
 
 hSoftReset EQU $FF8A
 ; Initialized to 16.
@@ -14,28 +14,31 @@ hSoftReset EQU $FF8A
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
 
-; Note: the following multiplication and division addresses are used for multiple purposes
-; and so they overlap with each other
+; Multiplcation and division variables are meant
+; to overlap for back-to-back usage. Big endian.
 
-H_MULTIPLICAND EQU $FF96 ; 3 bytes, big endian order
+H_MULTIPLICAND EQU $FF96 ; 3 bytes
 H_MULTIPLIER   EQU $FF99 ; 1 byte
-H_PRODUCT      EQU $FF95 ; 4 bytes, big endian order
+H_PRODUCT      EQU $FF95 ; 4 bytes
 
-H_DIVIDEND     EQU $FF95 ; 4 bytes, big endian order
+H_DIVIDEND     EQU $FF95 ; 4 bytes
 H_DIVISOR      EQU $FF99 ; 1 byte
-H_QUOTIENT     EQU $FF95 ; 4 bytes, big endian order
+H_QUOTIENT     EQU $FF95 ; 4 bytes
 H_REMAINDER    EQU $FF99 ; 1 byte
 
-; used to convert numbers to decimal
-H_PASTLEADINGZEROES EQU $FF95 ; flag to indicate that a nonzero digit has been printed
-H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
-H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
-H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
+; PrintNumber (big endian).
+H_PASTLEADINGZEROES EQU $FF95 ; last char printed
+H_NUMTOPRINT        EQU $FF96 ; 3 bytes
+H_POWEROFTEN        EQU $FF99 ; 3 bytes
+H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
 
-hJoyHeldLast     EQU $FFB1
-hJoyReleased  EQU $FFB2
-hJoyPressed   EQU $FFB3
-hJoyHeld EQU $FFB4
+hJoyHeldLast EQU $FFB1
+hJoyReleased EQU $FFB2
+hJoyPressed  EQU $FFB3
+hJoyHeld     EQU $FFB4
+hJoy5        EQU $FFB5
+hJoy6        EQU $FFB6
+hJoy7        EQU $FFB7
 
 H_LOADEDROMBANK     EQU $FFB8
 

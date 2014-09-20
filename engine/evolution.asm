@@ -140,7 +140,7 @@ asm_7befa: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	pop bc
 	and $2
 	jr nz, .asm_7bf0d

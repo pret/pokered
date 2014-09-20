@@ -203,9 +203,9 @@ Func_41245: ; 41245 (10:5245)
 	and a
 	jr nz, .asm_41273
 	call Delay50
-	ld a, $ad
+	ld a, ANIM_AD
 	call Func_41676
-	ld a, $aa
+	ld a, ANIM_AA
 	call Func_41676
 	ld a, [wWhichTrade] ; wWhichTrade
 	call PlayCry
@@ -242,9 +242,9 @@ Func_41298: ; 41298 (10:5298)
 	ret
 
 Func_412d2: ; 412d2 (10:52d2)
-	ld a, $ab
+	ld a, ANIM_AB
 	call Func_41676
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld a, $e4
 	ld [rOBP0], a ; $ff48
@@ -295,7 +295,7 @@ UnknownOAM_4132e: ; 4132e (10:532e)
 	db $7E,$40,$7E,$60
 
 Func_41336: ; 41336 (10:5336)
-	ld a, $ac
+	ld a, ANIM_AC
 	call Func_41676
 	call Func_415c8
 	hlCoord 4, 10
@@ -308,7 +308,7 @@ Func_41336: ; 41336 (10:5336)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [wTrainerEngageDistance]
 	call Func_415a4
-	ld a, $ad
+	ld a, ANIM_AD
 	call Func_41676
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
