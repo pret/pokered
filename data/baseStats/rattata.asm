@@ -9,7 +9,7 @@ db NORMAL ; species type 1
 db NORMAL ; species type 2
 db 255 ; catch rate
 db 57 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/rattata.pic",0,1 ; 55, sprite dimensions
 dw RattataPicFront
 dw RattataPicBack
 ; attacks known at lvl 0

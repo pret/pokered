@@ -9,7 +9,7 @@ db WATER ; species type 1
 db PSYCHIC ; species type 2
 db 60 ; catch rate
 db 207 ; base exp yield
-db $66 ; sprite dimensions
+INCBIN "pic/bmon/starmie.pic",0,1 ; 66, sprite dimensions
 dw StarmiePicFront
 dw StarmiePicBack
 ; attacks known at lvl 0

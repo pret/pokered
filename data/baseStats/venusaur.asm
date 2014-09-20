@@ -9,7 +9,7 @@ db GRASS ; species type 1
 db POISON ; species type 2
 db 45 ; catch rate
 db 208 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/venusaur.pic",0,1 ; 77, sprite dimensions
 dw VenusaurPicFront
 dw VenusaurPicBack
 ; attacks known at lvl 0

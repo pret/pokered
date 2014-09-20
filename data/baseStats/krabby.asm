@@ -9,7 +9,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 225 ; catch rate
 db 115 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/krabby.pic",0,1 ; 55, sprite dimensions
 dw KrabbyPicFront
 dw KrabbyPicBack
 ; attacks known at lvl 0

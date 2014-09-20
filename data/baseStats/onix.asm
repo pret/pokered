@@ -9,7 +9,7 @@ db ROCK ; species type 1
 db GROUND ; species type 2
 db 45 ; catch rate
 db 108 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/onix.pic",0,1 ; 77, sprite dimensions
 dw OnixPicFront
 dw OnixPicBack
 ; attacks known at lvl 0
