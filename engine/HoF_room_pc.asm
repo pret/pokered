@@ -92,7 +92,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	dec c
 	jr nz,.next2
 	xor a
-	ld [hVBlankWY],a
+	ld [hWY],a
 	ld a,$C0
 	ld [$FF47],a
 	ret

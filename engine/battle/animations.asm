@@ -1962,7 +1962,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld d, $80
 	ld e, $8f
 	ld c, $ff
@@ -1984,7 +1984,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	dec c
 	jr nz, .asm_7967f
 	xor a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	call SaveScreenTilesToBuffer2
 	call ClearScreen
 	ld a, $1
@@ -2744,11 +2744,11 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld hl, vBGMap0
 	call Func_79e0d
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld hl, vBGMap0 + $320
 	call Func_79e0d
 	ld a, $38
-	ld [hVBlankWY], a
+	ld [hWY], a
 	call Func_792fd
 	ld hl, vBGMap0
 	call Func_79e0d
@@ -2759,11 +2759,11 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	call AnimationShowMonPic
 	call ClearSprites
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld hl, vBGMap1
 	call Func_79e0d
 	xor a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	call SaveScreenTilesToBuffer1
 	ld hl, vBGMap0
 	call Func_79e0d

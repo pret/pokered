@@ -1162,7 +1162,7 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,$90
-	ld [hVBlankWY],a ; move the window off the screen
+	ld [hWY],a ; move the window off the screen
 	call DelayFrame
 	call LoadGBPal
 	xor a

@@ -1063,7 +1063,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ld b,$9c ; window background address
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
-	ld [hVBlankWY],a ; put the window on the screen
+	ld [hWY],a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable continuous WRAM to VRAM transfer each V-blank
@@ -2023,7 +2023,7 @@ INCLUDE "data/map_header_banks.asm"
 
 ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld [rWY], a
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a

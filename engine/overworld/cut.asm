@@ -38,14 +38,14 @@ asm_ef82: ; ef82 (3:6f82)
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
@@ -63,7 +63,7 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, (SFX_02_56 - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	call UpdateSprites
 	jp RedrawMapView
 

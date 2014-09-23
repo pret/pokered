@@ -87,7 +87,7 @@ BattleTransition: ; 7096d (1c:496d)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 	call DelayFrame

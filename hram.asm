@@ -39,9 +39,9 @@ H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
 
 ; these values are copied to SCX, SCY, and WY during V-blank
-hVBlankSCX EQU $FFAE
-hVBlankSCY EQU $FFAF
-hVBlankWY EQU $FFB0
+hSCX EQU $FFAE
+hSCY EQU $FFAF
+hWY  EQU $FFB0
 
 hJoyHeldLast EQU $FFB1
 hJoyReleased EQU $FFB2

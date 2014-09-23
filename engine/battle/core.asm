@@ -133,11 +133,11 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	jr nz, .copyRowLoop
 	call EnableLCD
 	ld a, $90
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld [rWY], a
 	xor a
 	ld [hTilesetType], a
-	ld [hVBlankSCY], a
+	ld [hSCY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 	call Delay3
@@ -146,7 +146,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld b, $70
 	ld c, $90
 	ld a, c
-	ld [hVBlankSCX], a
+	ld [hSCX], a
 	call DelayFrame
 	ld a, %11100100 ; inverted palette for silhouette effect
 	ld [rBGP], a
@@ -163,7 +163,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
 	call SlidePlayerHeadLeft
 	ld a, c
-	ld [hVBlankSCX], a
+	ld [hSCX], a
 	dec c
 	dec c
 	jr nz, .slideSilhouettesLoop
@@ -174,7 +174,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	hlCoord 1, 5
 	predef Func_3f0c6
 	xor a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld [rWY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -6283,7 +6283,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	call ClearScreen
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld [rWY], a
 	ld [hTilesetType], a
 	ld hl, wd060

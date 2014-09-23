@@ -74,7 +74,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [rIE], a
 
 	ld a, 144 ; move the window off-screen
-	ld [hVBlankWY], a
+	ld [hWY], a
 	ld [rWY], a
 	ld a, 7
 	ld [rWX], a
