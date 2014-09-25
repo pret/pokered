@@ -12,16 +12,16 @@ SeafoamIslands3Script: ; 46451 (11:6451)
 	cp $1
 	jr nz, .asm_4647c ; 0x4646c $e
 	set 0, [hl]
-	ld a, $db
+	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_1
 	ld [wd079], a
-	ld a, $df
+	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_3
 	ld [wd07a], a
 	jr .asm_46488 ; 0x4647a $c
 .asm_4647c
 	set 1, [hl]
-	ld a, $dc
+	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_2
 	ld [wd079], a
-	ld a, $e0
+	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_4
 	ld [wd07a], a
 .asm_46488
 	ld a, [wd079]

@@ -66,7 +66,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, $43
+	ld a, HS_POKEMONTOWER_7_MR_FUJI
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $4
@@ -222,13 +222,13 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 	set 7, [hl]
 	ld hl, wd769
 	set 7, [hl]
-	ld a, $44
+	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, $17
+	ld a, HS_SAFFRON_CITY_E
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $18
+	ld a, HS_SAFFRON_CITY_F
 	ld [wcc4d], a
 	predef ShowObject
 	ld a, $4

@@ -99,7 +99,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $38
+	ld a, HS_POKEMONTOWER_2_RIVAL
 	ld [wcc4d], a
 	predef HideObject
 	xor a

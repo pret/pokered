@@ -94,7 +94,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $46
+	ld a, HS_GAME_CORNER_ROCKET
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd126

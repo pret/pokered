@@ -42,7 +42,7 @@ BluesHouseText1: ; 19b5d (6:5b5d)
 	ld bc,(TOWN_MAP << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld a,$29
+	ld a,HS_TOWN_MAP
 	ld [wcc4d],a
 	predef HideObject ; hide table map object
 	ld hl,GotMapText

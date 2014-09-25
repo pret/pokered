@@ -7,7 +7,7 @@ SilphCo1Script: ; 5d44e (17:544e)
 	bit 7, [hl]
 	set 7, [hl]
 	ret nz
-	ld a, $4c
+	ld a, HS_SILPH_CO_1F_1
 	ld [wcc4d], a
 	predef_jump ShowObject
 

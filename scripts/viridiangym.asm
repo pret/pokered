@@ -175,7 +175,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	or %00000011
 	ld [wd752], a
 
-	ld a, $23
+	ld a, HS_ROUTE_22_RIVAL_2
 	ld [wcc4d], a
 	predef ShowObject
 	ld hl, wd7eb
@@ -290,7 +290,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	ld hl, ViridianGymText_74ad9
 	call PrintText
 	call GBFadeOutToBlack
-	ld a, $32
+	ld a, HS_VIRIDIAN_GYM_GIOVANNI
 	ld [wcc4d], a
 	predef HideObject
 	call UpdateSprites

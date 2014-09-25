@@ -16,10 +16,10 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	ld hl, wd813
 	res 0, [hl]
 	res 6, [hl]
-	ld a, $7a
+	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, $60
+	ld a, HS_VICTORY_ROAD_2_BOULDER
 	ld [wcc4d], a
 	predef_jump HideObject
 
