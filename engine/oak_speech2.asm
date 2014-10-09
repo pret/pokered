@@ -213,6 +213,22 @@ DefaultNamesRival: ; 6abe (1:6abe)
 	db   "@"
 ENDC
 
+IF _YELLOW
+DefaultNamesPlayer:
+	db   "NEW NAME"
+	next "YELLOW"
+	next "ASH"
+	next "JACK"
+	db   "@"
+
+DefaultNamesRival:
+	db   "NEW NAME"
+	next "BLUE"
+	next "GARY"
+	next "JOHN"
+	db   "@"
+ENDC
+
 Func_6ad6: ; 6ad6 (1:6ad6)
 	ld b, a
 	ld c, $0
@@ -245,6 +261,12 @@ DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "NEW NAME@BLUE@GARY@JOHN@"
 DefaultNamesRivalList: ; 6b08 (1:6b08)
 	db "NEW NAME@RED@ASH@JACK@"
+ENDC
+IF _YELLOW
+DefaultNamesPlayerList:
+	db "NEW NAME@YELLOW@ASH@JACK@"
+DefaultNamesRivalList:
+	db "NEW NAME@BLUE@GARY@JOHN@"
 ENDC
 
 TextTerminator_6b20: ; 6b20 (1:6b20)
