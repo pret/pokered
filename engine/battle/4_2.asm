@@ -110,31 +110,36 @@ Func_13870: ; 13870 (4:7870)
 	jr z, .asm_13905
 	ld [wd0db], a
 .asm_1389e
+; determine if wild pokémon can appear where we’re standing.
+; are we standing in grass/water?
 	hlCoord 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
-	ld a, [W_GRASSRATE] ; W_GRASSRATE
-	jr z, .asm_138c4
-	ld a, $14
+	ld a, [W_GRASSRATE]
+	jr z, .CanEncounter
+	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
-	ld a, [W_WATERRATE] ; wEnemyMon1Species
-	jr z, .asm_138c4
-	ld a, [W_CURMAP] ; W_CURMAP
-	cp REDS_HOUSE_1F
-	jr c, .asm_13912
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_WATERRATE]
+	jr z, .CanEncounter
+; even if not in grass/water, standing anywhere we can encounter pokémon
+; so long as the map is “indoor” and has wild pokémon defined.
+; …as long as it’s not Viridian Forest or Safari Zone.
+	ld a, [W_CURMAP]
+	cp REDS_HOUSE_1F ; is this an indoor map?
+	jr c, .CantEncounter
+	ld a, [W_CURMAPTILESET]
 	cp FOREST ; Viridian Forest/Safari Zone
-	jr z, .asm_13912
-	ld a, [W_GRASSRATE] ; W_GRASSRATE
-.asm_138c4
+	jr z, .CantEncounter
+	ld a, [W_GRASSRATE]
+.CanEncounter
 	ld b, a
 	ld a, [hRandomAdd]
 	cp b
-	jr nc, .asm_13912
+	jr nc, .CantEncounter
 	ld a, [hRandomSub]
 	ld b, a
-	ld hl, WildMonEncounterSlotChances ; $7918
+	ld hl, WildMonEncounterSlotChances
 .asm_138d0
 	ld a, [hli]
 	cp b
@@ -143,27 +148,27 @@ Func_13870: ; 13870 (4:7870)
 	jr .asm_138d0
 .asm_138d7
 	ld c, [hl]
-	ld hl, W_GRASSMONS ; wd888
+	ld hl, W_GRASSMONS
 	aCoord 8, 9
 	cp $14
 	jr nz, .asm_138e5
-	ld hl, W_WATERMONS ; wd8a5 (aliases: wEnemyMon1HP)
+	ld hl, W_WATERMONS
 .asm_138e5
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
-	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld [W_CURENEMYLVL], a
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
 	ld a, [wd0db]
 	and a
 	jr z, .asm_13916
-	ld a, [wPartyMon1Level] ; wPartyMon1Level
+	ld a, [wPartyMon1Level]
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	cp b
-	jr c, .asm_13912
+	jr c, .CantEncounter
 	jr .asm_13916
 .asm_13905
 	ld [wd0db], a
@@ -171,7 +176,7 @@ Func_13870: ; 13870 (4:7870)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
-.asm_13912
+.CantEncounter
 	ld a, $1
 	and a
 	ret
