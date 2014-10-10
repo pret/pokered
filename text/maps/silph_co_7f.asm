@@ -79,7 +79,11 @@ _SilphCo7Text_51e4b::
 	done
 
 _SilphCo7BattleText1:: ; 846ff (21:46ff)
+IF DEF(_YELLOW)
+	text "Aha! I smell a"
+ELSE
 	text "Oh ho! I smell a"
+ENDC
 	line "little rat!"
 	done
 
@@ -167,7 +171,11 @@ _SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
 	done
 
 _SilphCo7Text_51ec8:: ; 8494a (21:494a)
+IF DEF(_YELLOW)
+	text "Oh-oh!"
+ELSE
 	text "Oh ho!"
+ENDC
 	line "So, you are ready"
 	cont "for BOSS ROCKET!"
 	prompt

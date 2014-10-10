@@ -38,12 +38,23 @@ ViridianMartParcelQuestText:: ; 95c79 (25:5c79)
 	line "OAK's PARCEL!@@"
 
 _ViridianMartText2:: ; 95cd5 (25:5cd5)
+IF DEF(_YELLOW)
+	text "This shop sells a"
+	line "lot of PARLYZ"
+	cont "HEALs."
+ELSE
 	text "This shop sells"
 	line "many ANTIDOTEs."
+ENDC
 	done
 
 _ViridianMartText3:: ; 95cf6 (25:5cf6)
+IF DEF(_YELLOW)
+	text "The shop finally"
+	line "has some POTIONs"
+	cont "in stock."
+ELSE
 	text "No! POTIONs are"
 	line "all sold out."
+ENDC
 	done
-

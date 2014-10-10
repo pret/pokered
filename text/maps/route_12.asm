@@ -109,7 +109,11 @@ _Route12EndBattleText6:: ; 90318 (24:4318)
 _Route12AfterBattleText6:: ; 90329 (24:4329)
 	text "It's all right."
 	line "Losing doesn't"
+IF DEF(_YELLOW)
+	cont "bug me anymore."
+ELSE
 	cont "bug me any more."
+ENDC
 	done
 
 _Route12BattleText7:: ; 90358 (24:4358)

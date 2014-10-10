@@ -47,6 +47,10 @@ _SilphCo5AfterBattleText3:: ; 82a43 (20:6a43)
 _SilphCo5BattleText4:: ; 82a81 (20:6a81)
 	text "Whaaat? There"
 	line "shouldn't be any"
+IF DEF(_YELLOW)
+	cont "children here!"
+ELSE
 	cont "children here?"
+ENDC
 	done
 

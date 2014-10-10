@@ -59,9 +59,15 @@ _Route22RivalBeforeBattleText2:: ; 92450 (24:6450)
 	line "the BADGEs too?"
 	cont "That's cool!"
 
+IF DEF(_YELLOW)
+	para "Then I'll whip"
+	line "you, ", $52, ", as"
+	cont "a warmup for"
+ELSE
 	para "Then I'll whip you"
 	line $52, " as a"
 	cont "warm up for"
+ENDC
 	cont "#MON LEAGUE!"
 
 	para "Come on!"

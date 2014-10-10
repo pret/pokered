@@ -19,7 +19,11 @@ _Route16BattleText2:: ; 910d7 (24:50d7)
 	done
 
 _Route16EndBattleText2:: ; 910f1 (24:50f1)
+IF DEF(_YELLOW)
+	text "Knock-"
+ELSE
 	text "Knock"
+ENDC
 	line "out!"
 	prompt
 

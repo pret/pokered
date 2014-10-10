@@ -66,8 +66,13 @@ _Route3BattleText4:: ; 8d924 (23:5924)
 
 _Route3EndBattleText4:: ; 8d944 (23:5944)
 	text "If I"
+IF DEF(_YELLOW)
+	line "had new #MON,"
+	cont "I would've won!"
+ELSE
 	line "had new #MON I"
 	cont "would've won!"
+ENDC
 	prompt
 
 _Route3AfterBattleText4:: ; 8d966 (23:5966)

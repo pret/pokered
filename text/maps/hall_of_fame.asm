@@ -1,6 +1,10 @@
 _HallofFameRoomText1:: ; 85fb5 (21:5fb5)
 	text "OAK: Er-hem!"
+IF DEF(_YELLOW)
+	line "Congratulations,"
+ELSE
 	line "Congratulations"
+ENDC
 	cont $52, "!"
 
 	para "This floor is the"

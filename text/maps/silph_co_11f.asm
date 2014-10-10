@@ -58,7 +58,11 @@ _SilphCo11Text2:: ; 8502f (21:502f)
 	done
 
 _SilphCo11Text3:: ; 85075 (21:5075)
+IF DEF(_YELLOW)
+	text "Ah, ", $52, "!"
+ELSE
 	text "Ah ", $52, "!"
+ENDC
 	line "So we meet again!"
 
 	para "The PRESIDENT and"
@@ -70,7 +74,11 @@ _SilphCo11Text3:: ; 85075 (21:5075)
 	line "out of grown-up"
 	cont "matters..."
 
+IF DEF(_YELLOW)
+	para "or, experience a"
+ELSE
 	para "Or, experience a"
+ENDC
 	line "world of pain!"
 	done
 

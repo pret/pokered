@@ -1,5 +1,9 @@
 _SSAnne9Text_61bf2:: ; 81799 (20:5799)
+IF DEF(_YELLOW)
+	text "In all my travels,"
+ELSE
 	text "In all my travels"
+ENDC
 	line "I've never seen"
 	cont "any #MON sleep"
 	cont "like this one!"

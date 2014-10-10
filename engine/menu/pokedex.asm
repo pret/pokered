@@ -366,6 +366,9 @@ PokedexMenuItemsText: ; 402af (10:42af)
 	db   "DATA"
 	next "CRY"
 	next "AREA"
+IF _YELLOW
+	next "PRNT"
+ENDC
 	next "QUIT@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields

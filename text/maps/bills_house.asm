@@ -1,3 +1,10 @@
+IF DEF(_YELLOW)
+_BillsHouseDontLeaveText::
+	text "Whoa, don't go"
+	line "anywhere, wait!"
+	done
+ENDC
+
 _BillsHouseText_1e865:: ; 8d267 (23:5267)
 	text "Hiya! I'm a"
 	line "#MON..."

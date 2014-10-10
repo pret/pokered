@@ -115,6 +115,9 @@ _MtMoon1AfterBattleText8:: ; 80901 (20:4901)
 
 _MtMoon1Text14:: ; 8093a (20:493a)
 	text "Beware! ZUBAT is"
+IF DEF(_YELLOW)
+	line "a bloodsucker!"
+ELSE
 	line "a blood sucker!"
+ENDC
 	done
-

@@ -133,7 +133,11 @@ _Route17AfterBattleText9:: ; 915dd (24:55dd)
 	done
 
 _Route17BattleText10:: ; 91600 (24:5600)
+IF DEF(_YELLOW)
+	text "Get lost, kid!"
+ELSE
 	text "Get lost kid!"
+ENDC
 	line "I'm bushed!"
 	done
 

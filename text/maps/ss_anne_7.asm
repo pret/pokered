@@ -27,7 +27,11 @@ _ReceivingHM01Text:: ; 81347 (20:5347)
 	para "Teach it to your"
 	line "#MON and you"
 	cont "can see it CUT"
+IF DEF(_YELLOW)
+	cont "anytime!"
+ELSE
 	cont "any time!"
+ENDC
 	prompt
 
 _ReceivedHM01Text:: ; 8140d (20:540d)
@@ -40,7 +44,11 @@ _SSAnne7Text_61932:: ; 8141c (20:541c)
 	text "CAPTAIN: Whew!"
 
 	para "Now that I'm not"
+IF DEF(_YELLOW)
+	line "sick anymore, I"
+ELSE
 	line "sick any more, I"
+ENDC
 	cont "guess it's time."
 	done
 

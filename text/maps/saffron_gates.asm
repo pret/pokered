@@ -3,7 +3,11 @@ _SaffronGateText_1dfe7:: ; 8aa5c (22:6a5c)
 	line "Gee, I'm thirsty,"
 	cont "though!"
 
+IF DEF(_YELLOW)
+	para "Oh, wait there,"
+ELSE
 	para "Oh wait there,"
+ENDC
 	line "the road's closed."
 	done
 
@@ -18,7 +22,11 @@ _SaffronGateText_8aaa9:: ; 8aaa9 (22:6aa9)
 _SaffronGateText_1dff1:: ; 8aaef (22:6aef)
 	db $0
 	para "..."
+IF DEF(_YELLOW)
+	line "Glug, glug..."
+ELSE
 	line "Glug glug..."
+ENDC
 	cont "..."
 	cont "Gulp..."
 	cont "If you want to go"

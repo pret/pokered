@@ -47,7 +47,11 @@ _SSAnne6Text_61807:: ; 81203 (20:5203)
 	prompt
 
 _SSAnne6Text_6180c:: ; 81233 (20:5233)
+IF DEF(_YELLOW)
+	text "Salade de Salmon!"
+ELSE
 	text "Salmon du Salad!"
+ENDC
 
 	para "Les guests may"
 	line "gripe it's fish"

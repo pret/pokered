@@ -29,11 +29,19 @@ _DaisyUseMapText::
 	done
 
 _BluesHouseText2::
+IF DEF(_YELLOW)
+	text "Spending time"
+	line "with your #MON"
+	cont "makes them more"
+	cont "friendly to you."
+	done
+ELSE
 	text "#MON are living"
 	line "things! If they"
 	cont "get tired, give"
 	cont "them a rest!"
 	done
+ENDC
 
 _BluesHouseText3::
 	text "It's a big map!"

@@ -4,6 +4,14 @@ _SchoolText1:: ; 95d15 (25:5d15)
 	cont "my notes."
 	done
 
+IF DEF(_YELLOW)
+_SchoolText3::
+	text "Sis says #MON"
+	line "will become tame"
+	cont "if you treat them"
+	cont "nicely."
+ENDC
+
 _SchoolText2:: ; 95d40 (25:5d40)
 	text "Okay!"
 
@@ -11,4 +19,3 @@ _SchoolText2:: ; 95d40 (25:5d40)
 	line "the blackboard"
 	cont "carefully!"
 	done
-

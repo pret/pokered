@@ -33,7 +33,11 @@ _Route10AfterBattleText2:: ; 8e6f5 (23:66f5)
 	done
 
 _Route10BattleText3:: ; 8e71c (23:671c)
+IF DEF(_YELLOW)
+	text "Hi, kid, want to"
+ELSE
 	text "Hi kid, want to"
+ENDC
 	line "see my #MON?"
 	done
 

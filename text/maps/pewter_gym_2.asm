@@ -3,6 +3,23 @@ _PewterGymText_5c4a3:: ; 98000 (26:4000)
 	line "kinds of trainers"
 	cont "in the world!"
 
+IF DEF(_YELLOW)
+	para "Some raise #MON"
+	line "for fights. Some"
+	cont "see them as pets."
+
+	para "I'm in training to"
+	line "become a #MON"
+	cont "breeder."
+
+	para "If you take your"
+	line "#MON training"
+	cont "seriously, go"
+	cont "visit the GYM in"
+	cont "CERULEAN and test"
+	cont "your abilities!"
+	done
+ELSE
 	para "You appear to be"
 	line "very gifted as a"
 	cont "#MON trainer!"
@@ -11,6 +28,7 @@ _PewterGymText_5c4a3:: ; 98000 (26:4000)
 	line "CERULEAN and test"
 	cont "your abilities!"
 	done
+ENDC
 
 _TM34PreReceiveText:: ; 98092 (26:4092)
 	text "Wait! Take this"
@@ -72,7 +90,11 @@ _PewterGymText_5c4c1:: ; 98232 (26:4232)
 
 	para "The technique"
 	line "FLASH can now be"
+IF DEF(_YELLOW)
+	cont "used anytime!"
+ELSE
 	cont "used any time!"
+ENDC
 	prompt
 
 _PewterGymBattleText1:: ; 982ae (26:42ae)
@@ -141,3 +163,18 @@ _PewterGymText_5c529:: ; 9849f (26:449f)
 	cont "champ material!"
 	done
 
+IF DEF(_YELLOW)
+_PewterGymGuyText::
+	text "All right! Let's"
+	line "get happening!"
+
+	para "It will be tough"
+	line "for your PIKACHU"
+	cont "at this GYM!"
+
+	para "Electric attacks"
+	line "are harmless to"
+	cont "BROCK's ground-"
+	cont "type #MON."
+	done
+ENDC

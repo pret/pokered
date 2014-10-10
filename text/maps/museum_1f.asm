@@ -72,7 +72,11 @@ _Museum1FText_5c28e:: ; 966b4 (25:66b4)
 	para "But, my colleagues"
 	line "just ignore me!"
 
+IF DEF(_YELLOW)
+	para "So, I have a favor"
+ELSE
 	para "So I have a favor"
+ENDC
 	line "to ask!"
 
 	para "Take this to a"

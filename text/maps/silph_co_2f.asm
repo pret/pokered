@@ -72,7 +72,11 @@ _SilphCo2EndBattleText3:: ; 8260f (20:660f)
 	prompt
 
 _SilphCo2AfterBattleText3:: ; 82617 (20:6617)
+IF DEF(_YELLOW)
+	text "Diamond-shaped"
+ELSE
 	text "Diamond shaped"
+ENDC
 	line "tiles are"
 	cont "teleport blocks!"
 

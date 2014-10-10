@@ -1,3 +1,38 @@
+IF DEF(_YELLOW)
+_Route6BattleText1::
+	text "I'm doing this"
+	line "out of love."
+	cont "Leave me alone!"
+	done
+
+_Route6EndBattleText1::
+	text "No,"
+	line "this can't be..."
+	prompt
+
+_Route6AfterBattleText1::
+	text "My love will leave"
+	line "me in disgust."
+	done
+
+_Route6BattleText2::
+	text "I'm training for"
+	line "my love. Don't"
+	cont "bother me!"
+	done
+
+_Route6EndBattleText2::
+	text "My"
+	line "textbook never..."
+	prompt
+
+_Route6AfterBattleText2::
+	text "Now I understand,"
+	line "#MON isn't"
+	cont "about calculated"
+	cont "numbers."
+	done
+ELSE
 _Route6BattleText1:: ; 8dc38 (23:5c38)
 	text "Who's there?"
 	line "Quit listening in"
@@ -24,6 +59,7 @@ _Route6EndBattleText2:: ; 8dcb3 (23:5cb3)
 	text "Ugh!"
 	line "I hate losing!"
 	prompt
+ENDC
 
 _Route6BattleText3:: ; 8dcc8 (23:5cc8)
 	text "There aren't many"

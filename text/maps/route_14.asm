@@ -10,7 +10,11 @@ _Route14EndBattleText1:: ; 9083f (24:483f)
 	prompt
 
 _Route14AfterBattleText1:: ; 90851 (24:4851)
+IF DEF(_YELLOW)
+	text "You have some HMs,"
+ELSE
 	text "You have some HMs"
+ENDC
 	line "right? #MON"
 	cont "can't ever forget"
 	cont "those moves."

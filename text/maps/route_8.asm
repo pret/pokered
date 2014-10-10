@@ -104,7 +104,11 @@ _Route8EndBattleText7:: ; 8e116 (23:6116)
 	prompt
 
 _Route8AfterBattleText7:: ; 8e12a (23:612a)
+if DEF(_YELLOW)
+	text "SAFFRON's gate-"
+ELSE
 	text "SAFFRON's gate"
+ENDC
 	line "keeper won't let"
 	cont "us through."
 	cont "He's so mean!"

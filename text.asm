@@ -166,6 +166,13 @@ _OaksAideNoRoomText:: ; 802ec (20:42ec)
 	text "."
 	done
 
+IF DEF(_YELLOW)
+_NurseChanseyText::
+	text "CHANSEY: Chaaan"
+	line "sey!
+	done
+ENDC
+
 INCLUDE "text/maps/viridian_forest.asm"
 INCLUDE "text/maps/mt_moon_1f.asm"
 INCLUDE "text/maps/mt_moon_b1f.asm"
@@ -573,6 +580,12 @@ _CinnabarGymQuizIntroText:: ; 887b7 (22:47b7)
 	line "Here we go!"
 	prompt
 
+IF DEF(_YELLOW)
+	text "#MON Quiz!"
+	line "Test your skill!"
+	done
+ENDC
+
 _CinnabarQuizQuestionsText1:: ; 8886d (22:486d)
 	text "CATERPIE evolves"
 	line "into BUTTERFREE?"
@@ -833,6 +846,16 @@ _KabutopsFossilText:: ; 88fd5 (22:4fd5)
 	line "A primitive and"
 	cont "rare #MON."
 	done
+
+IF DEF(_YELLOW)
+_FanClubPicture1Text::
+	text "My cute RAPIDASH."
+	done
+
+_FanClubPicture2Text::
+	text "My beloved FEAROW."
+	done
+ENDC
 
 _LinkCableHelpText1:: ; 89001 (22:5001)
 	text "TRAINER TIPS"
@@ -1171,6 +1194,12 @@ _NoRunningText:: ; 897f1 (22:57f1)
 _GotAwayText:: ; 8981f (22:581f)
 	text "Got away safely!"
 	prompt
+
+IF DEF(_YELLOW)
+_RunAwayText::
+	text "Hurry, get away!"
+	prompt
+ENDC
 
 _ItemsCantBeUsedHereText:: ; 89831 (22:5831)
 	text "Items can't be"
@@ -1565,6 +1594,13 @@ _WhichFloorText:: ; 89dad (22:5dad)
 	line "you want? "
 	done
 
+IF DEF(_YELLOW)
+_SleepingPikachuText1::
+	text "There isn't any"
+	line "response..."
+	prompt
+ENDC
+
 _PartyMenuNormalText:: ; 89dc8 (22:5dc8)
 	text "Choose a #MON."
 	done
@@ -1580,7 +1616,11 @@ _PartyMenuBattleText:: ; 89df1 (22:5df1)
 	done
 
 _PartyMenuUseTMText:: ; 89e08 (22:5e08)
+IF DEF(_YELLOW)
+	text "Teach to which"
+ELSE
 	text "Use TM on which"
+ENDC
 	line "#MON?"
 	done
 
@@ -1752,6 +1792,13 @@ _AccessedHoFPCText:: ; 8a0f4 (22:60f4)
 	line "OF FAME List."
 	prompt
 
+IF DEF(_YELLOW)
+_SleepingPikachuText2::
+	text "There isn't any"
+	line "response..."
+	prompt
+ENDC
+
 _SwitchOnText:: ; 0x8a131
 	text "Switch on!"
 	prompt
@@ -1804,6 +1851,14 @@ _CantTakeMonText:: ; 0x8a1f6
 	para "Deposit #MON"
 	line "first."
 	prompt
+
+IF DEF(_YELLOW)
+_PikachuUnhappyText::
+	TX_RAM $cd6d
+	text "looks"
+	line "unhappy about it!"
+	prompt
+ENDC
 
 _ReleaseWhichMonText:: ; 0x8a228
 	text "Release which"
@@ -1926,6 +1981,111 @@ _WillBeTradedText:: ; 8a677 (22:6677)
 	cont "be traded."
 	done
 
+IF DEF(_YELLOW)
+_Colosseum3MonsText::
+	text "You need 3 #MON"
+	line "to fight!"
+	prompt
+
+_ColosseumMewText::
+	text "Sorry, MEW can't"
+	line "attend!"
+	prompt
+
+_ColosseumDifferentMonsText::
+	text "Your #MON must"
+	line "all be different!"
+	prompt
+
+_ColosseumMaxL55Text::
+	text "No #MON can"
+	line "exceed L55!"
+	prompt
+
+_ColosseumMinL50Text::
+	text "All #MON must"
+	line "be at least L50!"
+	prompt
+
+_ColosseumTotalL155Text::
+	text "Your total levels"
+	line "exceed 155!"
+	prompt
+
+_ColosseumMaxL30Text::
+	text "No #MON can"
+	line "exceed L30!"
+	prompt
+
+_ColosseumMinL25Text::
+	text "All #MON must"
+	line "be at least L25!"
+	prompt
+
+_ColosseumTotalL80Text::
+	text "Your total levels"
+	line "exceed 80!"
+	prompt
+
+_ColosseumMaxL20Text::
+	text "No #MON can"
+	line "exceed L20!"
+	prompt
+
+_ColosseumMinL15Text::
+	text "All #MON must"
+	line "be at least L15!"
+	prompt
+
+_ColosseumTotalL50Text::
+	text "Your total levels"
+	line "exceed 50!"
+	prompt
+
+_ColosseumHeightText::
+	TX_RAM $CD6D
+	text " is over"
+	line "6′8″ tall!"
+	prompt
+
+_ColosseumWeightText::
+	TX_RAM $CD6D
+	text " weighs"
+	line "over 44 pounds!"
+	prompt
+
+_ColosseumEvolvedText::
+	TX_RAM $CD6D
+	text " is an"
+	line "evolved #MON!"
+	prompt
+
+_ColosseumIneligibleText::
+	text "Your opponent is"
+	line "ineligible."
+	prompt
+
+_ColosseumWhereToText::
+	text "Where would you"
+	line "like to go?"
+	prompt
+
+_ColosseumPleaseWaitText::
+	text "OK, please wait"
+	line "just a moment."
+	prompt
+
+_ColosseumCanceledText::
+	text "The link was"
+	line "canceled."
+	prompt
+
+_ColosseumVersionText::
+	text "The game versions"
+	line "don't match."
+	prompt
+ENDC
+
 _Char00Text:: ; 8a696 (22:6696)
 	TX_NUM $FF8C,1,2
 	text " ERROR."
@@ -1933,6 +2093,13 @@ _Char00Text:: ; 8a696 (22:6696)
 
 _Char55Text:: ; 8a6a3 (22:66a3)
 	text $4B,"@@"
+
+IF DEF(_YELLOW)
+_NoPokemonText::
+	text "There are no"
+	line "#MON here!"
+	prompt
+ENDC
 
 INCLUDE "text/maps/digletts_cave_route_2_entrance.asm"
 INCLUDE "text/maps/viridian_forest_exit.asm"
@@ -1968,6 +2135,9 @@ INCLUDE "text/maps/route_16_gate_upstairs.asm"
 INCLUDE "text/maps/route_16_house.asm"
 INCLUDE "text/maps/route_18_gate.asm"
 INCLUDE "text/maps/route_18_gate_upstairs.asm"
+IF DEF(_YELLOW)
+INCLUDE "text/maps/surf_house.asm"
+ENDC
 INCLUDE "text/maps/pokemon_league_gate.asm"
 INCLUDE "text/maps/victory_road_2f.asm"
 INCLUDE "text/maps/bills_house.asm"

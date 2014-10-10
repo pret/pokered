@@ -1,3 +1,26 @@
+IF DEF(_YELLOW)
+_MtMoonJessieJamesText1::
+	text "Stop right there!@@"
+
+_MtMoonJessieJamesText2::
+	text "That fossil is"
+	line "TEAM ROCKET's!"
+
+	para "Surrender now, or"
+	line "prepare to fight!"
+	done
+
+_MtMoonJessieJamesText3::
+	text "A"
+	line "brat beat us?"
+	prompt
+
+_MtMoonJessieJamesText4::
+	text "TEAM ROCKET, blast"
+	line "off at the speed"
+	cont "of light!@@"
+ENDC
+
 _MtMoon3Text_49f24:: ; 8095e (20:495e)
 	text "You want the"
 	line "DOME FOSSIL?"
@@ -120,4 +143,3 @@ _MtMoon3AfterBattleText5:: ; 80c46 (20:4c46)
 	line "here long before"
 	cont "people came."
 	done
-

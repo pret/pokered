@@ -1,3 +1,28 @@
+IF DEF(_YELLOW)
+_RocketHideoutJessieJamesText1::
+	text "Not another step,"
+	line "brat!@@"
+
+_RocketHideoutJessieJamesText2::
+	text "How dare you"
+	line "humiliate us at"
+	cont "MT.MOON!"
+
+	para "It's payback time,"
+	line "you brat!"
+	done
+
+_RocketHideoutJessieJamesText3::
+	text "Such"
+	line "a dreadful twerp!"
+	prompt
+
+_RocketHideoutJessieJamesText4::
+	text "Looks like TEAM"
+	line "ROCKET's blasting"
+	cont "off again!@@"
+ENDC
+
 _RocketHideout4Text_4557a:: ; 8223e (20:623e)
 	text "So! I must say, I"
 	line "am impressed you"

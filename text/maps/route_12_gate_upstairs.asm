@@ -5,7 +5,11 @@ _TM39PreReceiveText:: ; 8c86b (23:486b)
 
 	para "You can have this"
 	line "TM. I don't need"
+IF DEF(_YELLOW)
+	cont "it anymore..."
+ELSE
 	cont "it any more..."
+ENDC
 	prompt
 
 _ReceivedTM39Text:: ; 8c8c6 (23:48c6)

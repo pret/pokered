@@ -38,7 +38,11 @@ _ViridianGymText_74ad9:: ; 95f2b (25:5f2b)
 	cont "of #MON!"
 
 	para "Let us meet again"
+IF DEF(_YELLOW)
+	line "someday!"
+ELSE
 	line "some day!"
+ENDC
 	cont "Farewell!@@"
 
 _ViridianGymText12:: ; 95fcc (25:5fcc)
@@ -205,7 +209,11 @@ _ViridianGymEndBattleText8:: ; 96403 (25:6403)
 	prompt
 
 _ViridianGymAfterBattleText8:: ; 96412 (25:6412)
+IF DEF(_YELLOW)
+	text "You can go on to"
+ELSE
 	text "You can go onto"
+ENDC
 	line "#MON LEAGUE"
 	cont "only by defeating"
 	cont "our GYM LEADER!"

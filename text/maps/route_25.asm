@@ -1,3 +1,33 @@
+IF DEF(_YELLOW)
+_Route25DamianText1::
+	text "I'm not good at"
+	line "raising #MON."
+
+	para "I should release"
+	line "my CHARMANDER"
+	cont "because I haven't"
+	cont "raised it well..."
+
+	para "If you promise me"
+	line "you'll care for"
+	cont "it, it's yours."
+	done
+
+_Route25DamianText2::
+	text "Take good care of"
+	line "my CHARMANDER!@@"
+
+_Route25DamianText3::
+	text "Oh... I'd better"
+	line "release it then."
+	done
+
+_Route25DamianText4::
+	text "How's CHARMANDER"
+	line "doing?"
+	done
+ENDC
+
 _Route25BattleText1:: ; 9421e (25:421e)
 	text "Local trainers"
 	line "come here to"
@@ -56,8 +86,13 @@ _Route25BattleText4:: ; 94369 (25:4369)
 	done
 
 _Route25EndBattleText4:: ; 94385 (25:4385)
+IF DEF(_YELLOW)
+	text "I'm in"
+	line "a slump!"
+ELSE
 	text "I was in"
 	line "bad condition!"
+ENDC
 	prompt
 
 _Route25AfterBattleText4:: ; 9439e (25:439e)

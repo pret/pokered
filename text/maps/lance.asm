@@ -1,6 +1,10 @@
 _LanceBeforeBattleText:: ; 85d3c (21:5d3c)
 	text "Ah! I heard about"
+IF DEF(_YELLOW)
+	line "you, ", $52, "!"
+ELSE
 	line "you ", $52, "!"
+ENDC
 
 	para "I lead the ELITE"
 	line "FOUR! You can"
