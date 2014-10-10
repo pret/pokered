@@ -24,7 +24,7 @@ _AgathaBeforeBattleText:: ; 8686b (21:686b)
 
 _AgathaEndBattleText:: ; 86970 (21:6970)
 IF DEF(_YELLOW)
-	text "Woo-hoo!
+	text "Woo-hoo!"
 ELSE
 	text "Oh ho!"
 ENDC
