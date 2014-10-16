@@ -80,7 +80,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
-	add_predef IsItemInBag_ ; 1C, used in Pokémon Tower
+	add_predef IsItemInBag_
 	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; for these two, the bank number is actually 0
 	dbw $03,GiveItem
 	add_predef ChangeBGPalColor0_4Frames
