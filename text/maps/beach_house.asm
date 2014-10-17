@@ -1,4 +1,4 @@
-SurfinDudeText1::
+_SurfinDudeText1::
 	text "Whoa!"
 
 	para "Your PIKACHU knows"
@@ -12,25 +12,25 @@ SurfinDudeText1::
 	para "Give it a go?"
 	done
 
-SurfinDudeText2::
+_SurfinDudeText2::
 	text "Come SURF anytime,"
 	line "my friend!"
 	done
 
-SurfinDudeText3::
+_SurfinDudeText3::
 	text "Wanna go SURF?"
 	done
 
-SurfinDudeText4::
+_SurfinDudeText4::
 	text "Dogs and burgers"
 	line "on special today!"
 	done
 
-BeachHousePikachuText::
+_BeachHousePikachuText::
 	text "PIKACHU: Pikaa."
 	done
 
-BeachHouseSign1Text1::
+_BeachHouseSign1Text1::
 	text "SURFIN' DUDE's"
 	line "scribbles..."
 
@@ -39,12 +39,12 @@ BeachHouseSign1Text1::
 	cont "hit the groove!"
 	done
 
-BeachHouseSign1Text2::
+_BeachHouseSign1Text2::
 	text "30 years of waves!"
 	line "SURFIN' DUDE"
 	done
 
-BeachHouseSign2Text1::
+_BeachHouseSign2Text1::
 	text "SURFING TIP 1!"
 
 	para "After flips, line"
@@ -53,12 +53,12 @@ BeachHouseSign2Text1::
 	cont "effect!"
 	done
 
-BeachHouseSign2Text2::
+_BeachHouseSign2Text2::
 	text "SUMMER BEACH HOUSE"
 	line "#MON welcome!"
 	done
 
-BeachHouseSign3Text1::
+_BeachHouseSign3Text1::
 	text "SURFING TIP 2!"
 
 	para "Pulling flips in"
@@ -66,23 +66,27 @@ BeachHouseSign3Text1::
 	cont "rad!"
 	done
 
-BeachHouseSign3Text2::
+_BeachHouseSign3Text2::
 	text "The sea unites"
 	line "all in surfdom!"
 	done
 
-BeachHousePrinterText1::
+_BeachHousePrinterText1::
+	text "It's some sort of"
+	line "a machine...@@"
+
+_BeachHousePrinterText2::
 	text "SUMMER BEACH HOUSE"
 	line "PRINTER, it says.@@"
 
-BeachHousePrinterText2::
+_BeachHousePrinterText3::
 	text "The Hi.Score is"
 	line "shown."
 
 	para "PRINT it out?"
 	done
 
-BeachHousePrinterText3::
+_BeachHousePrinterText4::
 	text "SUMMER BEACH HOUSE"
 	line "PRINTER, it says."
 
@@ -92,8 +96,8 @@ BeachHousePrinterText3::
 	para "PRINT it out?"
 	done
 
-BeachHousePrinterText4::
+_BeachHousePrinterText5::
 	text "PRINT completed.@@"
 
-BeachHousePrinterText5::
+_BeachHousePrinterText6::
 	text "PRINT error!@@"

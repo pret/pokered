@@ -5715,6 +5715,9 @@ CeladonHotelBlocks: INCBIN "maps/celadonhotel.blk"
 
 INCLUDE "data/mapHeaders/mtmoonpokecenter.asm"
 INCLUDE "scripts/mtmoonpokecenter.asm"
+IF DEF(_YELLOW)
+INCLUDE "scripts/beach_house.asm"
+ENDC
 INCLUDE "data/mapObjects/mtmoonpokecenter.asm"
 
 INCLUDE "data/mapHeaders/rocktunnelpokecenter.asm"

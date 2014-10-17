@@ -2136,7 +2136,7 @@ INCLUDE "text/maps/route_16_house.asm"
 INCLUDE "text/maps/route_18_gate.asm"
 INCLUDE "text/maps/route_18_gate_upstairs.asm"
 IF DEF(_YELLOW)
-INCLUDE "text/maps/surf_house.asm"
+INCLUDE "text/maps/beach_house.asm"
 ENDC
 INCLUDE "text/maps/pokemon_league_gate.asm"
 INCLUDE "text/maps/victory_road_2f.asm"
