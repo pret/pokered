@@ -367,10 +367,10 @@ AnimationTileset2: ; 786ee (1e:46ee)
 	INCBIN "gfx/attack_anim_2.2bpp"
 
 SlotMachineTiles2: ; 78bde (1e:4bde)
-IF _RED
+IF DEF(_RED)
 	INCBIN "gfx/red/slotmachine2.2bpp"
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	INCBIN "gfx/blue/slotmachine2.2bpp"
 ENDC
 

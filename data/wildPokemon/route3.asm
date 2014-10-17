@@ -1,18 +1,6 @@
 Route3Mons:
 	db $14
-	IF !_YELLOW
-		db 6,PIDGEY
-		db 5,SPEAROW
-		db 7,PIDGEY
-		db 6,SPEAROW
-		db 7,SPEAROW
-		db 8,PIDGEY
-		db 8,SPEAROW
-		db 3,JIGGLYPUFF
-		db 5,JIGGLYPUFF
-		db 7,JIGGLYPUFF
-	ENDC
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 8,SPEAROW
 		db 9,SPEAROW
 		db 9,MANKEY
@@ -23,6 +11,17 @@ Route3Mons:
 		db 12,RATTATA
 		db 11,SPEAROW
 		db 12,SPEAROW
+	ELSE
+		db 6,PIDGEY
+		db 5,SPEAROW
+		db 7,PIDGEY
+		db 6,SPEAROW
+		db 7,SPEAROW
+		db 8,PIDGEY
+		db 8,SPEAROW
+		db 3,JIGGLYPUFF
+		db 5,JIGGLYPUFF
+		db 7,JIGGLYPUFF
 	ENDC
 	db $00
 

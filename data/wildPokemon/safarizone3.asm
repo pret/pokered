@@ -1,6 +1,6 @@
 ZoneMons3:
 	db $1E
-	IF _RED
+	IF DEF(_RED)
 		db 25,NIDORAN_M
 		db 26,DODUO
 		db 23,VENONAT
@@ -13,7 +13,7 @@ ZoneMons3:
 		db 28,KANGASKHAN
 	ENDC
 
-	IF _GREEN || (!_JAPAN && _BLUE)
+	IF DEF(_GREEN) || (!DEF(_JAPAN) && DEF(_BLUE))
 		db 25,NIDORAN_F
 		db 26,DODUO
 		db 23,VENONAT
@@ -26,7 +26,7 @@ ZoneMons3:
 		db 28,KANGASKHAN
 	ENDC
 
-	IF _JAPAN && _BLUE
+	IF DEF(_JAPAN) && DEF(_BLUE)
 		db 25,NIDORAN_M
 		db 26,DODUO
 		db 23,VENONAT
@@ -39,7 +39,7 @@ ZoneMons3:
 		db 28,LICKITUNG
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 29,NIDORAN_M
 		db 21,NIDORAN_F
 		db 22,EXEGGCUTE

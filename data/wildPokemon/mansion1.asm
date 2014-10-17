@@ -1,6 +1,6 @@
 MansionMons1:
 	db $0A
-	IF _RED
+	IF DEF(_RED)
 		db 32,KOFFING
 		db 30,KOFFING
 		db 34,PONYTA
@@ -13,7 +13,7 @@ MansionMons1:
 		db 39,MUK
 	ENDC
 
-	IF _GREEN || _BLUE
+	IF DEF(_GREEN) || DEF(_BLUE)
 		db 32,GRIMER
 		db 30,GRIMER
 		db 34,PONYTA
@@ -26,7 +26,7 @@ MansionMons1:
 		db 39,WEEZING
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 34,RATTATA
 		db 34,RATICATE
 		db 23,GRIMER

@@ -1,6 +1,6 @@
 MansionMonsB1:
 	db $0A
-	IF _RED
+	IF DEF(_RED)
 		db 33,KOFFING
 		db 31,KOFFING
 		db 35,GROWLITHE
@@ -13,7 +13,7 @@ MansionMonsB1:
 		db 42,MUK
 	ENDC
 
-	IF _GREEN || !_JAPAN && _BLUE
+	IF DEF(_GREEN) || !DEF(_JAPAN) && DEF(_BLUE)
 		db 33,GRIMER
 		db 31,GRIMER
 		db 35,VULPIX
@@ -26,7 +26,7 @@ MansionMonsB1:
 		db 42,WEEZING
 	ENDC
 
-	IF _JAPAN && _BLUE
+	IF DEF(_JAPAN) && DEF(_BLUE)
 		db 33,GRIMER
 		db 31,GRIMER
 		db 35,GROWLITHE
@@ -39,7 +39,7 @@ MansionMonsB1:
 		db 42,WEEZING
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 35,GRIMER
 		db 38,GRIMER
 		db 37,RATICATE
@@ -53,4 +53,3 @@ MansionMonsB1:
 	ENDC
 
 	db $00
-

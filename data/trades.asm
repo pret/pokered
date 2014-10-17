@@ -1,6 +1,6 @@
 TradeMons: ; 71b7b (1c:5b7b)
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
-IF _YELLOW
+IF DEF(_YELLOW)
 	db LICKITUNG, DUGTRIO,   0,"GURIO@@@@@@"
 	db CLEFAIRY,  MR_MIME,   0,"MILES@@@@@@"
 	db BUTTERFREE,BEEDRILL,  2,"STINGER@@@@"

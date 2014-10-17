@@ -15,13 +15,12 @@ dw VenomothPicBack
 ; attacks known at lvl 0
 db TACKLE
 db DISABLE
-IF !_YELLOW
-	db POISONPOWDER
-	db LEECH_LIFE
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db SUPERSONIC
 	db CONFUSION
+ELSE
+	db POISONPOWDER
+	db LEECH_LIFE
 ENDC
 db 0 ; growth rate
 ; learnset

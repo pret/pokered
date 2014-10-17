@@ -1,11 +1,10 @@
 Route19Object: ; 0x54e9a (size=87)
 	db $43 ; border block
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db $1 ; warps
 		db $9, $5, $0, $f8 ; SURF_HOUSE
-	ENDC
-	IF !_YELLOW
+	ELSE
 		db $0 ; warps
 	ENDC
 
@@ -25,6 +24,6 @@ Route19Object: ; 0x54e9a (size=87)
 	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, BEAUTY + $C8, $e
 
 	; warp-to
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		EVENT_DISP ROUTE_19_WIDTH, $9, $5 ; SURF_HOUSE
 	ENDC

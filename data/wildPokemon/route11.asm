@@ -1,7 +1,7 @@
 Route11Mons:
 	db $0F
 
-	IF _RED
+	IF DEF(_RED)
 		db 14,EKANS
 		db 15,SPEAROW
 		db 12,EKANS
@@ -14,7 +14,7 @@ Route11Mons:
 		db 15,DROWZEE
 	ENDC
 
-	IF _GREEN || _BLUE
+	IF DEF(_GREEN) || DEF(_BLUE)
 		db 14,SANDSHREW
 		db 15,SPEAROW
 		db 12,SANDSHREW
@@ -27,7 +27,7 @@ Route11Mons:
 		db 15,DROWZEE
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 16,PIDGEY
 		db 15,RATTATA
 		db 18,PIDGEY

@@ -1,5 +1,5 @@
 PrizeMonLevelDictionary: ; 5298a (14:698a)
-IF _RED
+IF DEF(_RED)
 	db ABRA,9
 	db CLEFAIRY,8
 	db NIDORINA,17
@@ -8,7 +8,7 @@ IF _RED
 	db SCYTHER,25
 	db PORYGON,26
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	db ABRA,6
 	db CLEFAIRY,12
 	db NIDORINO,17

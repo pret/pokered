@@ -1,6 +1,6 @@
 Route22Mons:
 	db $19
-	IF _RED || (_JAPAN && _BLUE)
+	IF DEF(_RED) || (DEF(_JAPAN) && DEF(_BLUE))
 		db 3,RATTATA
 		db 3,NIDORAN_M
 		db 4,RATTATA
@@ -12,7 +12,7 @@ Route22Mons:
 		db 3,NIDORAN_F
 		db 4,NIDORAN_F
 	ENDC
-	IF _GREEN || (!_JAPAN && _BLUE)
+	IF DEF(_GREEN) || (!DEF(_JAPAN) && DEF(_BLUE))
 		db 3,RATTATA
 		db 3,NIDORAN_F
 		db 4,RATTATA
@@ -24,7 +24,7 @@ Route22Mons:
 		db 3,NIDORAN_M
 		db 4,NIDORAN_M
 	ENDC
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 2,NIDORAN_M
 		db 2,NIDORAN_F
 		db 3,MANKEY

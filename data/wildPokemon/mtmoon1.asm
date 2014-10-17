@@ -1,18 +1,6 @@
 MoonMons1:
 	db $0A
-	IF !_YELLOW
-		db 8,ZUBAT
-		db 7,ZUBAT
-		db 9,ZUBAT
-		db 8,GEODUDE
-		db 6,ZUBAT
-		db 10,ZUBAT
-		db 10,GEODUDE
-		db 8,PARAS
-		db 11,ZUBAT
-		db 8,CLEFAIRY
-	ENDC
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 8,ZUBAT
 		db 9,ZUBAT
 		db 10,GEODUDE
@@ -23,6 +11,17 @@ MoonMons1:
 		db 11,ZUBAT
 		db 12,SANDSHREW
 		db 11,CLEFAIRY
+	ELSE
+		db 8,ZUBAT
+		db 7,ZUBAT
+		db 9,ZUBAT
+		db 8,GEODUDE
+		db 6,ZUBAT
+		db 10,ZUBAT
+		db 10,GEODUDE
+		db 8,PARAS
+		db 11,ZUBAT
+		db 8,CLEFAIRY
 	ENDC
 	db $00
 

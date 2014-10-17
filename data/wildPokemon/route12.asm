@@ -1,7 +1,7 @@
 Route12Mons:
 	db $0F
 
-	IF _RED || (_JAPAN && _BLUE)
+	IF DEF(_RED) || (DEF(_JAPAN) && DEF(_BLUE))
 		db 24,ODDISH
 		db 25,PIDGEY
 		db 23,PIDGEY
@@ -15,7 +15,7 @@ Route12Mons:
 		db $00
 	ENDC
 
-	IF _GREEN || (!_JAPAN && _BLUE)
+	IF DEF(_GREEN) || (!DEF(_JAPAN) && DEF(_BLUE))
 		db 24,BELLSPROUT
 		db 25,PIDGEY
 		db 23,PIDGEY
@@ -29,7 +29,7 @@ Route12Mons:
 		db $00
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 25,ODDISH
 		db 25,BELLSPROUT
 		db 28,PIDGEY

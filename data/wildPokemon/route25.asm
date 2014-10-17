@@ -1,7 +1,7 @@
 Route25Mons:
 	db $0F
 
-	IF _RED
+	IF DEF(_RED)
 		db 8,WEEDLE
 		db 9,KAKUNA
 		db 13,PIDGEY
@@ -14,7 +14,7 @@ Route25Mons:
 		db 8,CATERPIE
 	ENDC
 
-	IF _GREEN || !_JAPAN && _BLUE
+	IF DEF(_GREEN) || !DEF(_JAPAN) && DEF(_BLUE)
 		db 8,CATERPIE
 		db 9,METAPOD
 		db 13,PIDGEY
@@ -27,7 +27,7 @@ Route25Mons:
 		db 8,WEEDLE
 	ENDC
 
-	IF _JAPAN && _BLUE
+	IF DEF(_JAPAN) && DEF(_BLUE)
 		db 8,CATERPIE
 		db 9,METAPOD
 		db 13,PIDGEY
@@ -40,7 +40,7 @@ Route25Mons:
 		db 8,WEEDLE
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 12,ODDISH
 	db 12,BELLSPROUT
 	db 13,PIDGEY

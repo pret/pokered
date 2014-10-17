@@ -1,6 +1,6 @@
 IslandMonsB3:
 	db $0A
-	IF _RED
+	IF DEF(_RED)
 		db 31,SLOWPOKE
 		db 31,SEEL
 		db 33,SLOWPOKE
@@ -13,7 +13,7 @@ IslandMonsB3:
 		db 37,DEWGONG
 	ENDC
 
-	IF _GREEN || !_JAPAN && _BLUE
+	IF DEF(_GREEN) || !DEF(_JAPAN) && DEF(_BLUE)
 		db 31,PSYDUCK
 		db 31,SEEL
 		db 33,PSYDUCK
@@ -26,7 +26,7 @@ IslandMonsB3:
 		db 37,DEWGONG
 	ENDC
 
-	IF _JAPAN && _BLUE
+	IF DEF(_JAPAN) && DEF(_BLUE)
 		db 31,HORSEA
 		db 31,SEEL
 		db 33,HORSEA
@@ -39,7 +39,7 @@ IslandMonsB3:
 		db 37,DEWGONG
 	ENDC
 
-	IF _YELLOW
+	IF DEF(_YELLOW)
 		db 27,GOLBAT
 		db 36,ZUBAT
 		db 29,KRABBY

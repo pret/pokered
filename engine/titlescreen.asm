@@ -56,11 +56,11 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
-IF _RED
+IF DEF(_RED)
 	ld de,vChars2 + $600
 	ld bc,$50
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	ld de,vChars2 + $600 + $10
 	ld bc,$50 - $10
 ENDC
@@ -114,10 +114,10 @@ ENDC
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-IF _RED
+IF DEF(_RED)
 	ld a,CHARMANDER ; which Pokemon to show first on the title screen
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
@@ -382,9 +382,9 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
-IF _RED
+IF DEF(_RED)
 	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
 ENDC

@@ -1,3 +1,4 @@
+IF !DEF(YELLOW)
 LoneMoves: ; 39d22 (e:5d22)
 ; these are used for gym leaders.
 ; this is not automatic! you have to write the number you want to W_LONEATTACKNO
@@ -31,12 +32,14 @@ TeamMoves: ; 39d32 (e:5d32)
 	db LANCE,BARRIER
 	db $FF
 
-if _YELLOW
-; different format from above.
+ELSE
+; yellow has its own format.
 
 ; entry ≔ trainerclass, trainerid, moveset+, 0
 ; moveset ≔ partymon, partymon'smove, moveid
 
+LoneMoves:
+TeamMoves:
 	db BUG_CATCHER,$f
 	db 2,2,TACKLE
 	db 2,3,STRING_SHOT

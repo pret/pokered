@@ -1,5 +1,3 @@
-INCLUDE "version.asm"
-
 INCLUDE "macros.asm"
 
 INCLUDE "hram.asm"

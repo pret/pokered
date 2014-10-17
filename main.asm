@@ -6414,10 +6414,10 @@ SECTION "bank1A",ROMX,BANK[$1A]
 INCLUDE "engine/battle/1a.asm"
 
 Version_GFX:
-IF _RED
+IF DEF(_RED)
 	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
 ENDC
 

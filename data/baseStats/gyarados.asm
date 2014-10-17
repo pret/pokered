@@ -13,17 +13,16 @@ INCBIN "pic/bmon/gyarados.pic",0,1 ; 77, sprite dimensions
 dw GyaradosPicFront
 dw GyaradosPicBack
 ; attacks known at lvl 0
-IF !_YELLOW
-db BITE
-db DRAGON_RAGE
-db LEER
-db HYDRO_PUMP
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 db TACKLE
 db 0
 db 0
 db 0
+ELSE
+db BITE
+db DRAGON_RAGE
+db LEER
+db HYDRO_PUMP
 ENDC
 db 5 ; growth rate
 ; learnset

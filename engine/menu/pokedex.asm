@@ -366,7 +366,7 @@ PokedexMenuItemsText: ; 402af (10:42af)
 	db   "DATA"
 	next "CRY"
 	next "AREA"
-IF _YELLOW
+IF DEF(_YELLOW)
 	next "PRNT"
 ENDC
 	next "QUIT@"
