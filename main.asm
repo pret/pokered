@@ -6635,3 +6635,13 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
+
+IF DEF(_YELLOW)
+SECTION "bank3C",ROMX[$314],BANK[$3C]
+
+BeachHouse_GFX:
+	INCBIN "gfx/tilesets/beachhouse.2bpp"
+
+BeachHouse_Block:
+	INCBIN "gfx/blocksets/beachhouse.bst"
+ENDC

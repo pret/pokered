@@ -22,3 +22,6 @@ Lab_Coll::          INCBIN  "gfx/tilesets/lab.tilecoll"
 Club_Coll::         INCBIN  "gfx/tilesets/club.tilecoll"
 Facility_Coll::     INCBIN  "gfx/tilesets/facility.tilecoll"
 Plateau_Coll::      INCBIN  "gfx/tilesets/plateau.tilecoll"
+IF DEF(_YELLOW)
+BeachHouse_Coll::   INCBIN  "gfx/tilesets/beachhouse.tilecoll"
+ENDC
