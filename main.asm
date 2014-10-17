@@ -5965,7 +5965,11 @@ Route17Blocks: INCBIN "maps/route17.blk"
 
 INCLUDE "data/mapHeaders/route19.asm"
 INCLUDE "data/mapObjects/route19.asm"
+IF DEF(_YELLOW)
+Route19Blocks: INCBIN "maps/route19-yellow.blk"
+ELSE
 Route19Blocks: INCBIN "maps/route19.blk"
+ENDC
 
 INCLUDE "data/mapHeaders/route21.asm"
 INCLUDE "data/mapObjects/route21.asm"

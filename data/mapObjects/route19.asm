@@ -3,17 +3,26 @@ Route19Object: ; 0x54e9a (size=87)
 
 	IF DEF(_YELLOW)
 		db $1 ; warps
-		db $9, $5, $0, $f8 ; SURF_HOUSE
+		db $9, $5, $0, $f8 ; BEACH_HOUSE
 	ELSE
 		db $0 ; warps
 	ENDC
 
 	db $1 ; signs
+IF DEF(_YELLOW)
+	db $b,$b,$b
+ELSE
 	db $9, $b, $b ; Route19Text11
+ENDC
 
 	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $8 + 4, $ff, $d2, TRAINER | $1, SWIMMER + $C8, $2
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $d + 4, $ff, $d2, TRAINER | $2, SWIMMER + $C8, $3
+IF DEF(_YELLOW)
+	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $9 + 4, $ff, $d3, TRAINER | 1, SWIMMER + $C8, 2
+	db SPRITE_BLACK_HAIR_BOY_1, $9 + 4, $c + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
+ELSE
+	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $8 + 4, $ff, $d2, TRAINER | 1, SWIMMER + $C8, 2
+	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $d + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
+ENDC
 	db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, TRAINER | $3, SWIMMER + $C8, $4
 	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, TRAINER | $4, SWIMMER + $C8, $5
 	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, TRAINER | $5, SWIMMER + $C8, $6
@@ -25,5 +34,5 @@ Route19Object: ; 0x54e9a (size=87)
 
 	; warp-to
 	IF DEF(_YELLOW)
-		EVENT_DISP ROUTE_19_WIDTH, $9, $5 ; SURF_HOUSE
+		EVENT_DISP ROUTE_19_WIDTH, $9, $5 ; BEACH_HOUSE
 	ENDC
