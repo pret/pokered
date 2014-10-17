@@ -111,7 +111,7 @@ BeachHouseSign2Text:
 
 BeachHouseSign3Text:
 	db 8
-	ld hl,$62f4
+	ld hl,.BeachHouseSign3Text2
 	ld a,[$d471]
 	bit 6,a
 	jr z,.next
