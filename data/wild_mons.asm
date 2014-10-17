@@ -247,7 +247,7 @@ WildDataPointers: ; ceeb (3:4eeb)
 	dw NoMons
 	dw NoMons
 	dw NoMons
-	IF DEF(_YELLOW)
+	IF DEF(_OPTION_BEACH_HOUSE)
 		dw NoMons
 	ENDC
 	dw $FFFF

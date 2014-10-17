@@ -5059,6 +5059,12 @@ INCLUDE "data/mapHeaders/billshouse.asm"
 INCLUDE "scripts/billshouse.asm"
 INCLUDE "data/mapObjects/billshouse.asm"
 BillsHouseBlocks: INCBIN "maps/billshouse.blk"
+IF DEF(_OPTION_BEACH_HOUSE)
+INCLUDE "data/mapHeaders/beach_house.asm"
+INCLUDE "scripts/beach_house.asm"
+BeachHouseBlockdata: INCBIN "maps/beach_house.blk"
+INCLUDE "data/mapObjects/beach_house.asm"
+ENDC
 
 INCLUDE "engine/menu/oaks_pc.asm"
 
@@ -5715,12 +5721,6 @@ CeladonHotelBlocks: INCBIN "maps/celadonhotel.blk"
 
 INCLUDE "data/mapHeaders/mtmoonpokecenter.asm"
 INCLUDE "scripts/mtmoonpokecenter.asm"
-IF DEF(_OPTION_BEACH_HOUSE)
-INCLUDE "data/mapHeaders/beach_house.asm"
-INCLUDE "scripts/beach_house.asm"
-BeachHouseBlockdata: INCBIN "maps/beach_house.blk"
-INCLUDE "data/mapObjects/beach_house.asm"
-ENDC
 INCLUDE "data/mapObjects/mtmoonpokecenter.asm"
 
 INCLUDE "data/mapHeaders/rocktunnelpokecenter.asm"

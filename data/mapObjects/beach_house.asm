@@ -7,7 +7,7 @@ BeachHouseObjects: ; 0xf23a4
 
 	db 4 ; signs
 	db 0,3,3
-	db 0,7,4,
+	db 0,7,4
 	db 0,$b,5
 	db 1,$d,6
 
