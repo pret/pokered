@@ -17,7 +17,7 @@ SurfinDudeText:
 	jr nz,.next
 	ld hl,.SurfinDudeText4
 	call PrintText
-	jr .xf2271
+	jr .done
 .next
 	ld hl,$d492
 	bit 0,[hl]
@@ -29,8 +29,8 @@ SurfinDudeText:
 	ld hl,.SurfinDudeText3
 .next3
 	call PrintText
-	call $35ef
-	ld a,[$cc26]
+	call YesNoChoice
+	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.xf226b
 	ld a,1
@@ -40,11 +40,11 @@ SurfinDudeText:
 	call $3e84
 	ld hl,$d492
 	set 1,[hl]
-	jr .xf2271
+	jr .done
 .xf226b
 	ld hl,.SurfinDudeText2
 	call PrintText
-.xf2271
+.done
 	jp TextScriptEnd
 
 .SurfinDudeText1
@@ -151,8 +151,8 @@ BeachHouseSign4Text:
 	ld [$cc3c],a
 	ld hl,.BeachHousePrinterText3
 	call PrintText
-	call $35ef
-	ld a,[$cc26]
+	call YesNoChoice
+	ld a,[wCurrentMenuItem]
 	and a
 	jp z,$63d0 ; 0xf23d0
 	call $36ec
