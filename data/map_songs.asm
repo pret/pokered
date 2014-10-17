@@ -247,3 +247,6 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_GYM, BANK(Music_Gym) ; Lorelei
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; Bruno
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; Agatha
+IF DEF(_OPTION_BEACH_HOUSE)
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; BeachHouse
+ENDC

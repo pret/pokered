@@ -1,7 +1,7 @@
 Route19Object: ; 0x54e9a (size=87)
 	db $43 ; border block
 
-	IF DEF(_YELLOW)
+	IF DEF(_OPTION_BEACH_HOUSE)
 		db $1 ; warps
 		db $9, $5, $0, BEACH_HOUSE
 	ELSE
@@ -9,14 +9,14 @@ Route19Object: ; 0x54e9a (size=87)
 	ENDC
 
 	db $1 ; signs
-IF DEF(_YELLOW)
+IF DEF(_OPTION_BEACH_HOUSE)
 	db $b,$b,$b
 ELSE
 	db $9, $b, $b ; Route19Text11
 ENDC
 
 	db $a ; people
-IF DEF(_YELLOW)
+IF DEF(_OPTION_BEACH_HOUSE)
 	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $9 + 4, $ff, $d3, TRAINER | 1, SWIMMER + $C8, 2
 	db SPRITE_BLACK_HAIR_BOY_1, $9 + 4, $c + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
 ELSE
@@ -33,6 +33,6 @@ ENDC
 	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, BEAUTY + $C8, $e
 
 	; warp-to
-	IF DEF(_YELLOW)
+	IF DEF(_OPTION_BEACH_HOUSE)
 		EVENT_DISP ROUTE_19_WIDTH, $9, $5 ; BEACH_HOUSE
 	ENDC

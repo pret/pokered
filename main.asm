@@ -5715,8 +5715,11 @@ CeladonHotelBlocks: INCBIN "maps/celadonhotel.blk"
 
 INCLUDE "data/mapHeaders/mtmoonpokecenter.asm"
 INCLUDE "scripts/mtmoonpokecenter.asm"
-IF DEF(_YELLOW)
+IF DEF(_OPTION_BEACH_HOUSE)
+INCLUDE "data/mapHeaders/beach_house.asm"
 INCLUDE "scripts/beach_house.asm"
+BeachHouseBlockdata: INCBIN "maps/beach_house.blk"
+INCLUDE "data/mapObjects/beach_house.asm"
 ENDC
 INCLUDE "data/mapObjects/mtmoonpokecenter.asm"
 
@@ -5965,7 +5968,7 @@ Route17Blocks: INCBIN "maps/route17.blk"
 
 INCLUDE "data/mapHeaders/route19.asm"
 INCLUDE "data/mapObjects/route19.asm"
-IF DEF(_YELLOW)
+IF DEF(_OPTION_BEACH_HOUSE)
 Route19Blocks: INCBIN "maps/route19-yellow.blk"
 ELSE
 Route19Blocks: INCBIN "maps/route19.blk"
@@ -6636,8 +6639,8 @@ INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
 
-IF DEF(_YELLOW)
-SECTION "bank3C",ROMX[$314],BANK[$3C]
+IF DEF(_OPTION_BEACH_HOUSE)
+SECTION "bank3C",ROMX[$4314],BANK[$3C]
 
 BeachHouse_GFX:
 	INCBIN "gfx/tilesets/beachhouse.2bpp"

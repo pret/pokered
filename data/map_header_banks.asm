@@ -248,3 +248,6 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Lorelei_h)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
+IF DEF(_OPTION_BEACH_HOUSE)
+	db BANK(BeachHouse_h)
+ENDC
