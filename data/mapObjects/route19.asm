@@ -3,7 +3,7 @@ Route19Object: ; 0x54e9a (size=87)
 
 	IF DEF(_YELLOW)
 		db $1 ; warps
-		db $9, $5, $0, $f8 ; BEACH_HOUSE
+		db $9, $5, $0, BEACH_HOUSE
 	ELSE
 		db $0 ; warps
 	ENDC
