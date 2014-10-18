@@ -510,6 +510,9 @@ wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: ; cd3d
 
 wHiddenObjectFunctionArgument:: ; cd3d
 
+wSubtrahend:: ; cd3d
+; subtract (BCD) wSubtrahend, wSubtrahend+1, wSubtrahend+2
+
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
