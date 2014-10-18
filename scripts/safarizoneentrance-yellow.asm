@@ -137,38 +137,37 @@ SafariZoneEntranceAutoWalk:
 	jp StartSimulatingJoypadStates
 
 .xf2077
-	ld hl,$d346
+	ld hl,wPlayerMoney
 	ld de,$ff9f
 	ld bc,3
-	call $1b
+	call $b1 ; yellow $00b1
 	xor a
 	ld [$ffa2],a
 	ld [$ffa3],a
-	ld a,$17
+	ld a,$17 ; ¥17 per safari ball
 	ld [$ffa4],a
-	ld a,$d
-	call $3eb4
+	predef DivideBCDPredef3
 	ld a,[$ffa4]
 	call .xf211e
 	pop af
 	ld hl,$d346
 	xor a
 	ld bc,3
-	call $166e
+	call FillMemory
 	ld hl,.OhAllRightText
-	call $3c46
+	call Func_3c59
 	ld a,$13
 	ld a,[$d124]
-	call $3010
+	call DisplayTextBoxID
 	ld hl,.CantGive30BallsText
 	call PrintText
 	pop af
 	inc a
 	jr z,.xf20bd
-	cp $1d
+	cp 29
 	jr c,.xf20bf
 .xf20bd
-	ld a,$1d
+	ld a,29
 .xf20bf
 	ld hl,$1f6
 	and a
