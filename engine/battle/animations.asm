@@ -373,6 +373,9 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/slotmachine2.2bpp"
 ENDC
+INF DEF(_YELLOW)
+	INCBIN "gfx/yellow/slotmachine2.2bpp"
+ENDC
 
 MoveAnimation: ; 78d5e (1e:4d5e)
 	push hl

@@ -868,3 +868,6 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/slotmachine1.2bpp"
 ENDC
+IF DEF(_YELLOW)
+	INCBIN "gfx/yellow/slotmachine1.2bpp"
+ENDC
