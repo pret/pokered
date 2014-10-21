@@ -241,7 +241,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $a7
+	ld a, HS_SILPH_CO_7F_RIVAL
 	ld [wcc4d], a
 	predef HideObject
 	call PlayDefaultMusic

@@ -34,7 +34,7 @@ Route12Script0: ; 59619 (16:5619)
 	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
-	ld a, $1d
+	ld a, HS_ROUTE_12_SNORLAX
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $3

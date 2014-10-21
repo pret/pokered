@@ -54,7 +54,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	call DisplayTextID
 	ld a,$FF
 	ld [wJoyIgnore],a
-	ld a,0
+	ld a,HS_PALLET_TOWN_OAK
 	ld [wcc4d],a
 	predef ShowObject
 
@@ -141,10 +141,10 @@ PalletTownScript5: ; 18f56 (6:4f56)
 	jr nz,.next
 	ld hl,wd74a
 	set 2,[hl]
-	ld a,$27
+	ld a,HS_DAISY_SITTING
 	ld [wcc4d],a
 	predef HideObject
-	ld a,$28
+	ld a,HS_DAISY_WALKING
 	ld [wcc4d],a
 	predef_jump ShowObject
 .next

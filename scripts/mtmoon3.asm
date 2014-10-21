@@ -145,10 +145,10 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, [wd7f6]
 	bit 6, a
 	jr z, .asm_49e1d
-	ld a, $6e
+	ld a, HS_MT_MOON_3_FOSSIL_2
 	jr .asm_49e1f
 .asm_49e1d
-	ld a, $6d
+	ld a, HS_MT_MOON_3_FOSSIL_1
 .asm_49e1f
 	ld [wcc4d], a
 	predef HideObject
@@ -281,7 +281,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
-	ld a, $6d
+	ld a, HS_MT_MOON_3_FOSSIL_1
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7f6
@@ -310,7 +310,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
-	ld a, $6e
+	ld a, HS_MT_MOON_3_FOSSIL_2
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7f6

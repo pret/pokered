@@ -200,7 +200,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	jr nc, .BagFull
 	ld hl, wd754
 	set 1, [hl]
-	ld a, $34
+	ld a, HS_OLD_AMBER
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText

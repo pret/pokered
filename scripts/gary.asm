@@ -120,7 +120,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld a, $2
 	ld [$ff8c], a
 	call MoveSprite
-	ld a, $d6
+	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wcc4d], a
 	predef ShowObject
 	ld a, $5
@@ -190,7 +190,7 @@ GaryScript8: ; 76083 (1d:6083)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $d6
+	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $9

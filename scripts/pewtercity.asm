@@ -85,7 +85,7 @@ PewterCityScript2: ; 192d3 (6:52d3)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $3
+	ld a, HS_MUSEUM_GUY
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $3
@@ -96,7 +96,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ld a, $3
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
-	ld a, $3
+	ld a, HS_MUSEUM_GUY
 	ld [wcc4d], a
 	predef ShowObject
 	xor a
@@ -149,7 +149,7 @@ PewterCityScript5: ; 19359 (6:5359)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $4
+	ld a, HS_GYM_GUY
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $6
@@ -160,7 +160,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	ld a, $5
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
-	ld a, $4
+	ld a, HS_GYM_GUY
 	ld [wcc4d], a
 	predef ShowObject
 	xor a

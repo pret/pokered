@@ -31,20 +31,26 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	jr .asm_50cdc
 
 .MissableObjectIDs: ; 50ce8 (14:4ce8)
-	db $D9,$DA,$DB,$DC,$DF,$E0,$FF
+	db HS_SEAFOAM_ISLANDS_2_BOULDER_1
+	db HS_SEAFOAM_ISLANDS_2_BOULDER_2
+	db HS_SEAFOAM_ISLANDS_3_BOULDER_1
+	db HS_SEAFOAM_ISLANDS_3_BOULDER_2
+	db HS_SEAFOAM_ISLANDS_4_BOULDER_3
+	db HS_SEAFOAM_ISLANDS_4_BOULDER_4
+	db $FF
 
 .asm_50cef
 	ld a, [wd881]
 	and $3
 	cp $3
 	ret z
-	ld a, $dd
+	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_1
 	call Route20Script_50d0c
-	ld a, $de
+	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_2
 	call Route20Script_50d0c
-	ld a, $e1
+	ld a, HS_SEAFOAM_ISLANDS_5_BOULDER_1
 	call Route20Script_50d14
-	ld a, $e2
+	ld a, HS_SEAFOAM_ISLANDS_5_BOULDER_2
 	call Route20Script_50d14
 	ret
 

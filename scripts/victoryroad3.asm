@@ -47,10 +47,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	bit 6, [hl]
 	set 6, [hl]
 	jr nz, .asm_449fe
-	ld a, $7a
+	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $60
+	ld a, HS_VICTORY_ROAD_2_BOULDER
 	ld [wcc4d], a
 	predef_jump ShowObject
 

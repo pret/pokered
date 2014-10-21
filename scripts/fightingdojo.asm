@@ -279,7 +279,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	jr nc, .done
 
 	; once Poké Ball is taken, hide sprite
-	ld a, $4a
+	ld a, HS_FIGHTING_DOJO_GIFT_1
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7b1
@@ -320,7 +320,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	set 0, [hl]
 
 	; once Poké Ball is taken, hide sprite
-	ld a, $4b
+	ld a, HS_FIGHTING_DOJO_GIFT_2
 	ld [wcc4d], a
 	predef HideObject
 .done

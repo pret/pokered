@@ -67,10 +67,10 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld hl, wd72a
 	set 0, [hl]
 
-	ld a, $4
+	ld a, HS_GYM_GUY
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $22
+	ld a, HS_ROUTE_22_RIVAL_1
 	ld [wcc4d], a
 	predef HideObject
 

@@ -205,7 +205,7 @@ Route22Script3: ; 5102a (14:502a)
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $22
+	ld a, HS_ROUTE_22_RIVAL_1
 	ld [wcc4d], a
 	predef HideObject
 	call PlayDefaultMusic
@@ -350,7 +350,7 @@ Route22Script6: ; 51151 (14:5151)
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $23
+	ld a, HS_ROUTE_22_RIVAL_2
 	ld [wcc4d], a
 	predef HideObject
 	call PlayDefaultMusic

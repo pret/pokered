@@ -59,10 +59,10 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	ld [H_SPRITEHEIGHT], a
 	call DisplayTextID
 	call GBFadeOutToBlack
-	ld a, $83
+	ld a, HS_ROCKET_HIDEOUT_4_GIOVANNI
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $87
+	ld a, HS_ROCKET_HIDEOUT_4_ITEM_4
 	ld [wcc4d], a
 	predef ShowObject
 	call UpdateSprites
@@ -217,7 +217,7 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	bit 6, [hl]
 	set 6, [hl]
 	jr nz, .asm_455e9 ; 0x455dd $a
-	ld a, $88
+	ld a, HS_ROCKET_HIDEOUT_4_ITEM_5
 	ld [wcc4d], a
 	predef ShowObject
 .asm_455e9
