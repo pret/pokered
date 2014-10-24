@@ -19,7 +19,11 @@ _CeruleanHouse2Text_74e7c:: ; 9913a (26:513a)
 	done
 
 _CeruleanHouse2Text_74e81:: ; 99170 (26:5170)
+IF DEF(_YELLOW)
+	text "Come visit me any-"
+ELSE
 	text "Come visit me any"
+ENDC
 	line "time you wish."
 	done
 
@@ -29,7 +33,11 @@ _CeruleanHouse2Text_74e96:: ; 99192 (26:5192)
 	cont "a little bit."
 
 	para "It also lets you"
+IF DEF(_YELLOW)
+	line "use FLASH any-"
+ELSE
 	line "use FLASH any"
+ENDC
 	cont "time you desire."
 	prompt
 

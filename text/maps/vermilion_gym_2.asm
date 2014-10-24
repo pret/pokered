@@ -16,7 +16,11 @@ _VermilionGymText_5cb77:: ; 9c069 (27:4069)
 	cont "#MON's SPEED!"
 
 	para "It also lets your"
+IF DEF(_YELLOW)
+	line "#MON FLY any-"
+ELSE
 	line "#MON FLY any"
+ENDC
 	cont "time, kid!"
 
 	para "You're special,"

@@ -1,3 +1,29 @@
+IF DEF(_YELLOW)
+_PokemonTowerJessieJamesText1::
+	text "Stop right there!@@"
+
+_PokemonTowerJessieJamesText2::
+	text "Grampa here wanted"
+	line "to complain, so"
+	cont "we're setting him"
+	cont "straight."
+
+	para "So render yourself"
+	line "invisible, or"
+	cont "prepare to fight!"
+	done
+
+_PokemonTowerJessieJamesText3::
+	text "You"
+	line "will regret this!"
+	prompt
+
+_PokemonTowerJessieJamesText4::
+	text "Looks like TEAM"
+	line "ROCKET's blasting"
+	cont "off again!@@"
+ENDC
+
 _PokemonTower7Text_60ec4:: ; 99c1a (26:5c1a)
 	text "MR.FUJI: Heh? You"
 	line "came to save me?"

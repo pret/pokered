@@ -3305,12 +3305,20 @@ _Thanks2Text:: ; a8209 (2a:4209)
 	done
 
 _AfterTrade2Text:: ; a8212 (2a:4212)
+IF DEF(_YELLOW)
+	text "Hello there! Your"
+	line "old @"
+	TX_RAM wcd13
+	db " is"
+	cont "magnificent!"
+ELSE
 	text "The @"
 	TX_RAM wcd13
 	text " you"
 	line "traded to me"
 
 	para "went and evolved!"
+ENDC
 	done
 
 _WannaTrade3Text:: ; a8240 (2a:4240)
@@ -3340,7 +3348,11 @@ _WrongMon3Text:: ; a8284 (2a:4284)
 	done
 
 _Thanks3Text:: ; a82bc (2a:42bc)
+IF DEF(_YELLOW)
+	text "Thanks, pal!"
+ELSE
 	text "Thanks pal!"
+ENDC
 	done
 
 _AfterTrade3Text:: ; a82c9 (2a:42c9)

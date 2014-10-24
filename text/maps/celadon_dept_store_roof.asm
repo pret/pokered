@@ -50,10 +50,14 @@ _CeladonMartRoofText_4850f:: ; 9cca5 (27:4ca5)
 	para "@"
 	TX_RAM wcf4b
 	text " contains"
+IF DEF(_YELLOW)
+	line "ROCK SLIDE!@@"
+ELSE
 	line "ROCK SLIDE!"
 
 	para "It can spook the"
 	line "target sometimes!@@"
+ENDC
 
 _CeladonMartRoofText_48515:: ; 9cce6 (27:4ce6)
 	text "Yay!"

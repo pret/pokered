@@ -1,7 +1,16 @@
 _CeladonMart4Text2:: ; 9cad4 (27:4ad4)
 	text "I'm getting a"
+IF DEF(_YELLOW)
+	line "gift for COPYCAT"
+	cont "in CERULEAN CITY."
+
+	para "It's got to be a"
+	line "# DOLL. They"
+	cont "are trendy!"
+ELSE
 	line "# DOLL for my"
 	cont "girl friend!"
+ENDC
 	done
 
 _CeladonMart4Text3:: ; 9cafd (27:4afd)

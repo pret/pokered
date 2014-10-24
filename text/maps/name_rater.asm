@@ -43,7 +43,11 @@ _NameRaterText_1dac7:: ; 9a404 (26:6404)
 	done
 
 _NameRaterText_1dacc:: ; 9a44c (26:644c)
+IF DEF(_YELLOW)
+	text "Fine! Come any-"
+ELSE
 	text "Fine! Come any"
+ENDC
 	line "time you like!"
 	done
 

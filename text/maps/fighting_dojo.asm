@@ -114,13 +114,21 @@ _FightingDojoAfterBattleText4:: ; a1b1a (28:5b1a)
 
 _WantHitmonleeText:: ; a1b4a (28:5b4a)
 	text "You want the"
+IF DEF(_YELLOW)
+	line "hard-kicking"
+ELSE
 	line "hard kicking"
+ENDC
 	cont "HITMONLEE?"
 	done
 
 _WantHitmonchanText:: ; a1b70 (28:5b70)
 	text "You want the"
+IF DEF(_YELLOW)
+	line "piston-punching"
+ELSE
 	line "piston punching"
+ENDC
 	cont "HITMONCHAN?"
 	done
 

@@ -120,6 +120,15 @@ _CeruleanCityText5:: ; a50ba (29:50ba)
 	done
 
 _CeruleanCityText6:: ; a50f6 (29:50f6)
+IF DEF(_YELLOW)
+	text "These poor people"
+	line "here were robbed."
+
+	para "We're positive"
+	line "that TEAM ROCKET"
+	cont "is behind this"
+	cont "terrible deed."
+ELSE
 	text "The people here"
 	line "were robbed."
 
@@ -127,31 +136,57 @@ _CeruleanCityText6:: ; a50f6 (29:50f6)
 	line "TEAM ROCKET is"
 	cont "behind this most"
 	cont "heinous crime!"
+ENDC
 
 	para "Even our POLICE"
+IF DEF(_YELLOW)
+	line "FORCE has trouble"
+ELSE
 	line "force has trouble"
+ENDC
 	cont "with the ROCKETs!"
 	done
 
 _CeruleanCityText_19730:: ; a5188 (29:5188)
+IF DEF(_YELLOW)
+	text "OK! ELECTRODE!"
+ELSE
 	text "OK! SLOWBRO!"
+ENDC
 	line "Use SONICBOOM!"
+IF DEF(_YELLOW)
+	cont "Please ELECTRODE,"
+ELSE
 	cont "Come on, SLOWBRO"
+ENDC
 	cont "pay attention!"
 	done
 
 _CeruleanCityText_19735:: ; a51c5 (29:51c5)
+IF DEF(_YELLOW)
+	text "ELECTRODE, TACKLE!"
+ELSE
 	text "SLOWBRO punch!"
+ENDC
 	line "No! You blew it"
 	cont "again!"
 	done
 
 _CeruleanCityText_1973a:: ; a51ec (29:51ec)
+IF DEF(_YELLOW)
+	text "ELECTRODE, SWIFT!"
+ELSE
 	text "SLOWBRO, WITHDRAW!"
+ENDC
 	line "No! That's wrong!"
 
+IF DEF(_YELLOW)
+	para "Training #MON"
+	line "is difficult!"
+ELSE
 	para "It's so hard to"
 	line "control #MON!"
+ENDC
 
 	para "Your #MON's"
 	line "obedience depends"
@@ -160,22 +195,38 @@ _CeruleanCityText_1973a:: ; a51ec (29:51ec)
 	done
 
 _CeruleanCityText_1976f:: ; a526b (29:526b)
+IF DEF(_YELLOW)
+	text "ELECTRODE took a"
+ELSE
 	text "SLOWBRO took a"
+ENDC
 	line "snooze..."
 	done
 
 _CeruleanCityText_19774:: ; a5285 (29:5285)
+IF DEF(_YELLOW)
+	text "ELECTRODE is"
+ELSE
 	text "SLOWBRO is"
+ENDC
 	line "loafing around..."
 	done
 
 _CeruleanCityText_19779:: ; a52a3 (29:52a3)
+IF DEF(_YELLOW)
+	text "ELECTRODE turned"
+ELSE
 	text "SLOWBRO turned"
+ENDC
 	line "away..."
 	done
 
 _CeruleanCityText_1977e:: ; a52bb (29:52bb)
+IF DEF(_YELLOW)
+	text "ELECTRODE"
+ELSE
 	text "SLOWBRO"
+ENDC
 	line "ignored orders..."
 	done
 

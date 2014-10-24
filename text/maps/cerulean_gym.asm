@@ -2,6 +2,11 @@ _CeruleanGymText_5c7be:: ; 989c1 (26:49c1)
 	text "Hi, you're a new"
 	line "face!"
 
+IF DEF(_YELLOW)
+	para "What's your policy"
+	line "on #MON? What"
+	cont "is your approach?"
+ELSE
 	para "Trainers who want"
 	line "to turn pro have"
 	cont "to have a policy"
@@ -10,11 +15,21 @@ _CeruleanGymText_5c7be:: ; 989c1 (26:49c1)
 	para "What is your"
 	line "approach when you"
 	cont "catch #MON?"
+ENDC
 
 	para "My policy is an"
 	line "all-out offensive"
 	cont "with water-type"
 	cont "#MON!"
+
+IF DEF(_YELLOW)
+	para "MISTY, the world-"
+	line "famous beauty, is"
+	cont "your host!"
+
+	para "Are you ready,"
+	line "sweetie?"
+ENDC
 	done
 
 _CeruleanGymText_5c7c3:: ; 98a7b (26:4a7b)
@@ -35,7 +50,11 @@ _CeruleanGymText_5c7c8:: ; 98ab0 (26:4ab0)
 
 	para "There's more, you"
 	line "can now use CUT"
+IF DEF(_YELLOW)
+	cont "anytime!"
+ELSE
 	cont "any time!"
+ENDC
 
 	para "You can CUT down"
 	line "small bushes to"
@@ -55,8 +74,13 @@ _CeruleanGymText_5c7d3:: ; 98b90 (26:4b90)
 	done
 
 _CeruleanGymText_5c7d8:: ; 98bb0 (26:4bb0)
+IF DEF(_YELLOW)
+	text "I can't"
+	line "believe I lost!"
+ELSE
 	text "Wow!"
 	line "You're too much!"
+ENDC
 
 	para "All right!"
 
@@ -125,7 +149,11 @@ _CeruleanGymText_5c82f:: ; 98db0 (26:4db0)
 	text "You beat MISTY!"
 	line "What'd I tell ya?"
 
+IF DEF(_YELLOW)
+	para "You and me, kid,"
+ELSE
 	para "You and me kid,"
+ENDC
 	line "we make a pretty"
 	cont "darn good team!"
 	done

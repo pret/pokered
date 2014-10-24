@@ -13,7 +13,11 @@ _CinnabarIslandText1:: ; a61e6 (29:61e6)
 _CinnabarIslandText2:: ; a622a (29:622a)
 	text "Scientists conduct"
 	line "experiments in"
+IF DEF(_YELLOW)
+	cont "the burned-out"
+ELSE
 	cont "the burned out"
+ENDC
 	cont "building."
 	done
 
