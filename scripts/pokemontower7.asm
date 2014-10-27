@@ -14,7 +14,7 @@ PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-PokemonTower7ScriptPointers: ; 60d23 (18:4d23)
+PokemonTower7ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw PokemonTower7Script2
@@ -164,7 +164,7 @@ PokemonTower7TextPointers: ; 60e3f (18:4e3f)
 	dw PokemonTower7Text1
 	dw PokemonTower7Text2
 	dw PokemonTower7Text3
-	dw PokemonTower7Text4
+	dw PokemonTower7FujiText
 
 PokemonTower7TrainerHeaders: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
@@ -214,9 +214,9 @@ PokemonTower7Text3: ; 60e80 (18:4e80)
 	call TalkToTrainer
 	jp TextScriptEnd
 
-PokemonTower7Text4: ; 60e8a (18:4e8a)
-	db $08 ; asm
-	ld hl, PokemonTower7Text_60ec4
+PokemonTower7FujiText:
+	db 8 ; asm
+	ld hl, TowerRescueFujiText
 	call PrintText
 	ld hl, wd7e0
 	set 7, [hl]
@@ -236,8 +236,8 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 	ld [W_CURMAPSCRIPT], a
 	jp TextScriptEnd
 
-PokemonTower7Text_60ec4: ; 60ec4 (18:4ec4)
-	TX_FAR _PokemonTower7Text_60ec4
+TowerRescueFujiText:
+	TX_FAR _TowerRescueFujiText
 	db "@"
 
 PokemonTower7BattleText1: ; 60ec9 (18:4ec9)
