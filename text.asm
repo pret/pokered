@@ -169,7 +169,7 @@ _OaksAideNoRoomText:: ; 802ec (20:42ec)
 IF DEF(_YELLOW)
 _NurseChanseyText::
 	text "CHANSEY: Chaaan"
-	line "sey!
+	line "sey!"
 	done
 ENDC
 
