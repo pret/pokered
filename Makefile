@@ -38,7 +38,7 @@ compare:
 
 # Clear the default suffixes.
 .SUFFIXES:
-.SUFFIXES: .asm .tx .o .gbc .png .2bpp .1bpp .pic
+.SUFFIXES: .asm .o .gbc .png .2bpp .1bpp .pic
 
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
@@ -73,22 +73,14 @@ $(foreach obj, $(all_obj), \
 %.1bpp: %.png  ; $(eval 1bppq += $<) @rm -f $@
 %.pic:  %.2bpp ; $(eval picq  += $<) @rm -f $@
 
-# Source files are not fed directly into rgbasm.
-# A python preprocessor runs over them first, replacing ascii strings with correct character codes.
-# It spits out the new file with extension .tx.
-# The text preprocessor also uses a queue.
-%.asm: ;
-%.tx: %.asm ; $(eval txq += $<) @rm -f $@
-
 # Assemble source files into objects.
 # Queue payloads are here. These are made silent since there may be hundreds of targets.
 # Use rgbasm -h to use halts without nops.
-$(all_obj): $$*.tx $$(patsubst %.asm, %.tx, $$($$*_dep))
-	@$(pre) $(txq);           $(eval txq   :=)
+$(all_obj): $$*.asm $$($$*_dep)
 	@$(gfx) 2bpp $(2bppq);    $(eval 2bppq :=)
 	@$(gfx) 1bpp $(1bppq);    $(eval 1bppq :=)
 	@$(pic) compress $(picq); $(eval picq  :=)
-	rgbasm -h -o $@ $*.tx
+	rgbasm -h -o $@ $*.asm
 
 
 # Link objects together to build a rom.
@@ -103,4 +95,4 @@ poke%.gbc: $$(%_obj)
 
 clean:
 	rm -f $(roms) $(all_obj)
-	find . \( -iname '*.tx' -o -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +

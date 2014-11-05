@@ -15,9 +15,6 @@
 *.map
 *.sym
 
-# generated
-*.tx
-
 # converted image data
 *.2bpp
 *.1bpp
