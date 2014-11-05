@@ -466,17 +466,17 @@ dutycycle: MACRO
 ENDM
 
 ;format: callchannel address
-;callchannel: MACRO
-;	db $FD
-;	dw \1
-;ENDM
+callchannel: MACRO
+	db $FD
+	dw \1
+ENDM
 
 ;format: loopchannel count, address
-;loopchannel: MACRO
-;	db $FE
-;	db \1
-;	dw \2
-;ENDM
+loopchannel: MACRO
+	db $FE
+	db \1
+	dw \2
+ENDM
 
 endchannel: MACRO
 	db $FF
