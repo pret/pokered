@@ -51,7 +51,6 @@ poketools := extras/pokemontools
 gfx       := $(PYTHON) $(poketools)/gfx.py
 pic       := $(PYTHON) $(poketools)/pic.py
 includes  := $(PYTHON) $(poketools)/scan_includes.py
-pre       := $(PYTHON) prequeue.py
 
 
 
