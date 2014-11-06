@@ -62,7 +62,7 @@ Then set up the repository. In the **Cygwin terminal**:
 	cd pokered
 	git submodule init
 	git submodule update
-	easy_install git://github.com/drj11/pypng.git@master#egg=pypng
+	easy_install pypng
 
 To build:
 
