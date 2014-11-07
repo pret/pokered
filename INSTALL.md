@@ -36,8 +36,11 @@ To build them individually:
 
 # OS X
 
-Download and install **Command Line Tools for Xcode**.
-Then open a terminal and follow the Linux instructions.
+In the shell, run:
+
+	xcode-select --install
+
+Then follow the Linux instructions.
 
 
 # Windows
