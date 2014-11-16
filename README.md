@@ -13,8 +13,7 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 ## See also
 
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
-* irc: **nucleus.kafuka.org** [**#skeetendo**][irc]
+* irc: **irc.freenode.net** [**#pret**][irc]
 
 [pokecrystal]: https://github.com/kanzure/pokecrystal
-[irc]: https://kiwiirc.com/client/irc.nolimitzone.com/?#skeetendo
-
+[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
