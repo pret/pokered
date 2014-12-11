@@ -31,7 +31,7 @@ Func_27d98: ; 27d98 (9:7d98)
 	ld a, [W_PLAYERMOVETYPE] ; wcfd5
 asm_27d9f: ; 27d9f (9:7d9f)
 	add a
-	ld hl, TypeNamePointers ; $7dae
+	ld hl, TypeNames
 	ld e, a
 	ld d, $0
 	add hl, de
