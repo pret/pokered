@@ -93,5 +93,5 @@ poke%.gbc: $$(%_obj)
 
 
 clean:
-	rm -f $(roms) $(all_obj)
+	rm -f $(roms) $(all_obj) poke*.sym
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
