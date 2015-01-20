@@ -7182,29 +7182,31 @@ SleepEffect: ; 3f1fc (f:71fc)
 
 .asm_3f20e
 	ld a, [bc]
-	bit 5, a ; does the mon need to recharge? (hyper beam)
-	res 5, a ; mon no longer needs to recharge
+	bit 5, a ; does the target need to recharge? (hyper beam)
+	res 5, a ; target no longer needs to recharge
 	ld [bc], a
-	jr nz, .asm_3f231
+	jr nz, .asm_3f231 ; if the target had to recharge, all hit tests will be skipped
+					  ; including the event where the target already has another status
 	ld a, [de]
 	ld b, a
 	and $7
-	jr z, .asm_3f222
+	jr z, .asm_3f222 ; can't affect a mon that is already asleep
 	ld hl, AlreadyAsleepText
 	jp PrintText
 .asm_3f222
 	ld a, b
 	and a
-	jr nz, .asm_3f242
+	jr nz, .asm_3f242 ; can't affect a mon that is already statused
 	push de
-	call MoveHitTest
+	call MoveHitTest ; apply accuracy tests
 	pop de
 	ld a, [W_MOVEMISSED]
 	and a
 	jr nz, .asm_3f242
 .asm_3f231
+; set target's sleep counter to a random number between 1 and 7
 	call BattleRandom
-	and $7
+	and $7 
 	jr z, .asm_3f231
 	ld [de], a
 	call Func_3fb89
@@ -7231,16 +7233,16 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld de, W_ENEMYMOVEEFFECT
 .asm_3f260
 	call CheckTargetSubstitute
-	jr nz, .asm_3f2d3
+	jr nz, .asm_3f2d3 ; can't posion a substitute target
 	ld a, [hli]
 	ld b, a
 	and a
-	jr nz, .asm_3f2d3
+	jr nz, .asm_3f2d3 ; miss if target is already statused
 	ld a, [hli]
-	cp $3
+	cp $3 ; can't posion a poison-type target
 	jr z, .asm_3f2d3
 	ld a, [hld]
-	cp $3
+	cp $3 ; can't posion a poison-type target
 	jr z, .asm_3f2d3
 	ld a, [de]
 	cp POISON_SIDE_EFFECT1
@@ -7251,7 +7253,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	jr z, .asm_3f290
 	push hl
 	push de
-	call MoveHitTest
+	call MoveHitTest ; apply accuracy tests
 	pop de
 	pop hl
 	ld a, [W_MOVEMISSED]
@@ -7259,12 +7261,12 @@ PoisonEffect: ; 3f24f (f:724f)
 	jr nz, .asm_3f2d7
 	jr .asm_3f295
 .asm_3f290
-	call BattleRandom
-	cp b
+	call BattleRandom 
+	cp b ; was side effect successful?
 	ret nc
 .asm_3f295
 	dec hl
-	set 3, [hl]
+	set 3, [hl] ; mon is now poisoned
 	push de
 	dec de
 	ld a, [H_WHOSETURN]
@@ -7279,8 +7281,8 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld de, W_ENEMYTOXICCOUNTER
 .asm_3f2b0
 	cp TOXIC
-	jr nz, .asm_3f2bd
-	set 0, [hl]
+	jr nz, .asm_3f2bd ; done if move is not Toxic
+	set 0, [hl] ; else set Toxic battstatus
 	xor a
 	ld [de], a
 	ld hl, BadlyPoisonedText
@@ -7342,65 +7344,64 @@ ExplodeEffect: ; 3f2f1 (f:72f1)
 FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	xor a
 	ld [wcc5b], a
-	call CheckTargetSubstitute         ;test bit 4 of d063/d068 flags [target has substitute flag]
-	ret nz             ;return if they have a substitute, can't effect them
-	ld a, [$fff3]  ;whose turn?
+	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
+	ret nz ; return if they have a substitute, can't effect them
+	ld a, [$fff3]  
 	and a
 	jp nz, opponentAttacker
 	ld a, [wEnemyMonStatus]
 	and a
-	jp nz, CheckDefrost
-	;opponent has no existing status
+	jp nz, CheckDefrost ; can't inflict status if opponent is already statused
 	ld a, [W_PLAYERMOVETYPE]
 	ld b, a
 	ld a, [wEnemyMonType1]
-	cp b
-	ret z  ;return if they match [can't freeze an ice type etc.]
+	cp b ; do target type 1 and move type match?
+	ret z  ; return if they match (an ice move can't freeze an ice-type, body slam can't paralyze a normal-type, etc.)
 	ld a, [wEnemyMonType2]
-	cp b
-	ret z  ;return..
+	cp b ; do target type 2 and move type match?
+	ret z  ; return if they match
 	ld a, [W_PLAYERMOVEEFFECT]
-	cp a, 7         ;10% status effects are 04, 05, 06 so 07 will set carry for those
-	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
-	jr c, .next1  ;branch ahead if this is a 10% chance effect..
-	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
-	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
+	cp a, 7 ; 10% status effects are 04, 05, 06 so 07 will set carry for those
+	ld b, $1a ; 0x1A/0x100 or 26/256 = 10.2%~ chance
+	jr c, .next1 ; branch ahead if this is a 10% chance effect..
+	ld b, $4d ; else use 0x4D/0x100 or 77/256 = 30.1%~ chance
+	sub a, $1e ; subtract $1E to map to equivalent 10% chance effects
 .next1
-	push af     ;push effect...
-	call BattleRandom  ;get random 8bit value for probability test
-	cp b        ;success?
-	pop bc      ;...pop effect into C
-	ret nc      ;do nothing if random value is >= 1A or 4D [no status applied]
-	            ;the test passed
-	ld a, b     ;what type of effect is this?
+	push af     
+	call BattleRandom ; get random 8bit value for probability test
+	cp b
+	pop bc     
+	ret nc ; do nothing if random value is >= 1A or 4D [no status applied]
+	ld a, b ; what type of effect is this?
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
+; .paralyze	
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
-	call QuarterSpeedDueToParalysis  ;quarter speed of affected monster
+	call QuarterSpeedDueToParalysis ; quarter speed of affected mon
 	ld a, ANIM_A9
-	call Func_3fbb9  ;animation
-	jp PrintMayNotAttackText    ;print paralysis text
+	call Func_3fbb9 ; play animation
+	jp PrintMayNotAttackText ; print paralysis text
 .burn
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
-	call HalveAttackDueToBurn
+	call HalveAttackDueToBurn ; halve attack of affected mon
 	ld a, ANIM_A9
-	call Func_3fbb9  ;animation
+	call Func_3fbb9 ; animation
 	ld hl, BurnedText
 	jp PrintText
 .freeze
-	call Func_3f9cf  ;resets bit 5 of the D063/D068 flags
+	call Func_3f9cf ; resets hyper beam (recharge) condition from both players
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
 	ld a, ANIM_A9
-	call Func_3fbb9  ;animation
+	call Func_3fbb9 ; animation
 	ld hl, FrozenText
 	jp PrintText
 opponentAttacker: ; 3f382 (f:7382)
-	ld a, [wBattleMonStatus]  ;this appears to the same as above with addresses swapped for opponent
+	ld a, [wBattleMonStatus] ; mostly same as above with addresses swapped for opponent
 	and a
 	jp nz, CheckDefrost
 	ld a, [W_ENEMYMOVETYPE]
@@ -7439,6 +7440,7 @@ opponentAttacker: ; 3f382 (f:7382)
 	ld hl, BurnedText
 	jp PrintText
 .freeze
+; hyper beam bits aren't reseted for opponent's side
 	ld a, 1 << FRZ
 	ld [wBattleMonStatus], a
 	ld hl, FrozenText
@@ -7453,28 +7455,27 @@ FrozenText: ; 3f3dd (f:73dd)
 	db "@"
 
 CheckDefrost: ; 3f3e2 (f:73e2)
-	and a, 1 << FRZ			;are they frozen?
-	ret z				;return if so
-						;not frozen
-	ld a, [$fff3]	;whose turn?
+; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
+	and a, 1 << FRZ	; are they frozen?
+	ret z ; return if so
+	ld a, [$fff3]	
 	and a
 	jr nz, .opponent
 	;player [attacker]
 	ld a, [W_PLAYERMOVETYPE]
 	sub a, FIRE
-	ret nz		;return if it isn't fire
-				;type is fire
-	ld [wEnemyMonStatus], a		;set opponent status to 00 ["defrost" a frozen monster]
+	ret nz ; return if type of move used isn't fire
+	ld [wEnemyMonStatus], a	; set opponent status to 00 ["defrost" a frozen monster]
 	ld hl, wEnemyMon1Status
 	ld a, [wEnemyMonPartyPos]
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	xor a
-	ld [hl], a			;clear status in roster
+	ld [hl], a ; clear status in roster
 	ld hl, FireDefrostedText
 	jr .common
 .opponent
-	ld a, [W_ENEMYMOVETYPE]		;same as above with addresses swapped
+	ld a, [W_ENEMYMOVETYPE]	; same as above with addresses swapped
 	sub a, FIRE
 	ret nz
 	ld [wBattleMonStatus], a
@@ -7505,29 +7506,29 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	sub $a
 	cp $8
 	jr c, .asm_3f442
-	sub $28
+	sub $28 ; map +2 effects to equivalent +1 effect
 .asm_3f442
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld b, [hl]
-	inc b
+	inc b ; increment corresponding stat mod
 	ld a, $d
-	cp b
+	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, Func_3f522
 	ld a, [de]
-	cp $12
+	cp $12 ; is it a +2 effect?
 	jr c, .asm_3f45a
-	inc b
+	inc b ; if so, increment stat mod again
 	ld a, $d
-	cp b
+	cp b ; unless it's already +6
 	jr nc, .asm_3f45a
 	ld b, a
 .asm_3f45a
 	ld [hl], b
 	ld a, c
 	cp $4
-	jr nc, asm_3f4ca
+	jr nc, asm_3f4ca ; jump if mod affected is evasion/accuracy
 	push hl
 	ld hl, wBattleMonAttack + 1
 	ld de, wcd12
@@ -7540,21 +7541,22 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	push bc
 	sla c
 	ld b, $0
-	add hl, bc
+	add hl, bc ; hl = modified stat
 	ld a, c
 	add e
 	ld e, a
 	jr nc, .asm_3f47e
-	inc d
+	inc d ; de = unmodified (original) stat
 .asm_3f47e
 	pop bc
 	ld a, [hld]
-	sub $e7
+	sub $e7 ; check if stat is already 999
 	jr nz, .asm_3f48a
 	ld a, [hl]
 	sbc $3
 	jp z, Func_3f520
-.asm_3f48a
+.asm_3f48a ; recalculate affected stat
+		   ; paralysis and burn penalties, as well as badge boosts are ignored
 	push hl
 	push bc
 	ld hl, StatModifierRatios
@@ -7579,6 +7581,7 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	ld b, $4
 	call Divide
 	pop hl
+; cap at 999	
 	ld a, [$ff98]
 	sub $e7
 	ld a, [$ff97]
@@ -7612,13 +7615,13 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .asm_3f4f9
-	bit 4, [hl]
+	bit 4, [hl] ; substitute
 	push af
 	push bc
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	push de
-	call nz, Bankswitch
+	call nz, Bankswitch ; play Minimize animation unless there's Substitute involved
 	pop de
 .asm_3f4f9
 	call Func_3fba8
@@ -7635,11 +7638,14 @@ asm_3f4ca: ; 3f4ca (f:74ca)
 .asm_3f50e
 	ld a, [H_WHOSETURN]
 	and a
-	call z, ApplyBadgeStatBoosts
+	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
+								 ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsRoseText
 	call PrintText
-	call QuarterSpeedDueToParalysis
-	jp HalveAttackDueToBurn
+
+; these shouldn't be here	
+	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
+	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
 
 Func_3f520: ; 3f520 (f:7520)
 	pop hl
@@ -7686,25 +7692,25 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	cp $4
 	jr z, .asm_3f572
 	call BattleRandom
-	cp $40
+	cp $40 ; 1/4 chance to miss by wildmon
 	jp c, Func_3f65a
 .asm_3f572
-	call CheckTargetSubstitute
+	call CheckTargetSubstitute ; can't hit through substitute
 	jp nz, Func_3f65a
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	jr c, .asm_3f58a
 	call BattleRandom
-	cp SPLASH_EFFECT
+	cp $55 ; 85/256 chance for side effects
 	jp nc, Func_3f650
 	ld a, [de]
-	sub ATTACK_DOWN_SIDE_EFFECT
+	sub ATTACK_DOWN_SIDE_EFFECT ; map each stat to 0-3
 	jr .asm_3f5a9
-.asm_3f58a
+.asm_3f58a ; non-side effects only
 	push hl
 	push de
 	push bc
-	call MoveHitTest
+	call MoveHitTest ; apply accuracy tests
 	pop bc
 	pop de
 	pop hl
@@ -7712,33 +7718,33 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	and a
 	jp nz, Func_3f65a
 	ld a, [bc]
-	bit 6, a
+	bit 6, a ; fly/dig
 	jp nz, Func_3f65a
 	ld a, [de]
 	sub $12
 	cp $8
 	jr c, .asm_3f5a9
-	sub $28
+	sub $28 ; map +2 effects to corresponding +1 effect
 .asm_3f5a9
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld b, [hl]
-	dec b
-	jp z, Func_3f650
+	dec b ; dec corresponding stat mod
+	jp z, Func_3f650 ; if stat mod is 1 (-6), can't lower anymore
 	ld a, [de]
 	cp $24
 	jr c, .asm_3f5bf
 	cp $44
 	jr nc, .asm_3f5bf
-	dec b
+	dec b ; stat down 2 effects only (dec mod again)
 	jr nz, .asm_3f5bf
-	inc b
+	inc b ; increment mod to 1 (-6) if it would become 0 (-7)
 .asm_3f5bf
-	ld [hl], b
+	ld [hl], b ; save modified mod 
 	ld a, c
-	cp $4
-	jr nc, asm_3f62c
+	cp $4 
+	jr nc, asm_3f62c ; jump for evasion/accuracy
 	push hl
 	push de
 	ld hl, wEnemyMonAttack + 1
@@ -7752,21 +7758,23 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	push bc
 	sla c
 	ld b, $0
-	add hl, bc
+	add hl, bc ; hl = modified stat
 	ld a, c
 	add e
 	ld e, a
 	jr nc, .asm_3f5e4
-	inc d
+	inc d ; de = unmodified stat
 .asm_3f5e4
 	pop bc
 	ld a, [hld]
-	sub $1
+	sub $1 ; can't lower stat below 1 (-6)
 	jr nz, .asm_3f5ef
 	ld a, [hl]
 	and a
 	jp z, Func_3f64d
 .asm_3f5ef
+; recalculate affected stat
+; paralysis and burn penalties, as well as badge boosts are ignored
 	push hl
 	push bc
 	ld hl, StatModifierRatios
@@ -7820,9 +7828,14 @@ asm_3f62c: ; 3f62c (f:762c)
 .asm_3f63b
 	ld a, [H_WHOSETURN]
 	and a
-	call nz, ApplyBadgeStatBoosts
+	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
+								  ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsFellText
 	call PrintText
+	
+; These where probably added given that a stat-down move affecting speed or attack will override 
+; the stat penalties from paralysis and burn respectively.
+; But they are always called regardless of the stat affected by the stat-down move.  	
 	call QuarterSpeedDueToParalysis
 	jp HalveAttackDueToBurn
 
@@ -7931,7 +7944,7 @@ BideEffect: ; 3f6e5 (f:76e5)
 	and $1
 	inc a
 	inc a
-	ld [bc], a
+	ld [bc], a ; set Bide counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add XSTATITEM_ANIM
 	jp Func_3fb96
@@ -7947,10 +7960,10 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 .asm_3f728
 	set 1, [hl] ; mon is now using thrash/petal dance
 	call BattleRandom
-	and $1
+	and $1 
 	inc a
 	inc a
-	ld [de], a
+	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add ANIM_B0
 	jp Func_3fb96
