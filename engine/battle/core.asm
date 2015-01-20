@@ -7503,10 +7503,10 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	ld de, W_ENEMYMOVEEFFECT
 .statModifierUpEffect
 	ld a, [de]
-	sub $a
+	sub ATTACK_UP1_EFFECT 
 	cp $8
 	jr c, .incrementStatMod
-	sub $28 ; map +2 effects to equivalent +1 effect
+	sub ATTACK_UP2_EFFECT - ATTACK_UP1_EFFECT ; map +2 effects to equivalent +1 effect
 .incrementStatMod
 	ld c, a
 	ld b, $0
@@ -7517,7 +7517,7 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	cp b ; can't raise stat past +6 ($d or 13)
 	jp c, Func_3f522
 	ld a, [de]
-	cp $12 ; is it a +2 effect?
+	cp ATTACK_UP1_EFFECT + $8 ; is it a +2 effect?
 	jr c, .ok
 	inc b ; if so, increment stat mod again
 	ld a, $d
@@ -7721,10 +7721,10 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	bit 6, a ; fly/dig
 	jp nz, MoveMissed
 	ld a, [de]
-	sub $12
+	sub ATTACK_DOWN1_EFFECT 
 	cp $8
 	jr c, .decrementStatMod
-	sub $28 ; map +2 effects to corresponding +1 effect
+	sub ATTACK_DOWN2_EFFECT - ATTACK_DOWN1_EFFECT ; map +2 effects to corresponding +1 effect
 .decrementStatMod
 	ld c, a
 	ld b, $0
