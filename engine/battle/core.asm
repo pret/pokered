@@ -7382,14 +7382,14 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld [wEnemyMonStatus], a
 	call QuarterSpeedDueToParalysis ; quarter speed of affected mon
 	ld a, ANIM_A9
-	call PlayAnimation 
+	call PlayBattleAnimatiom 
 	jp PrintMayNotAttackText ; print paralysis text
 .burn
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call HalveAttackDueToBurn ; halve attack of affected mon
 	ld a, ANIM_A9
-	call PlayAnimation 
+	call PlayBattleAnimatiom 
 	ld hl, BurnedText
 	jp PrintText
 .freeze
@@ -7397,7 +7397,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
 	ld a, ANIM_A9
-	call PlayAnimation 
+	call PlayBattleAnimatiom 
 	ld hl, FrozenText
 	jp PrintText
 opponentAttacker: ; 3f382 (f:7382)
@@ -7744,7 +7744,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	ld [hl], b ; save modified mod 
 	ld a, c
 	cp $4 
-	jr nc, UpdateStatDone ; jump for evasion/accuracy
+	jr nc, UpdateStat2Done ; jump for evasion/accuracy
 	push hl
 	push de
 	ld hl, wEnemyMonAttack + 1
@@ -7803,19 +7803,19 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	ld b, a
 	ld a, [$ff97]
 	or b
-	jp nz, UpdateStat
+	jp nz, UpdateStat2
 	ld [$ff97], a
 	ld a, $1
 	ld [$ff98], a
 
-UpdateStat: ; 3f624 (f:7624)
+UpdateStat2: ; 3f624 (f:7624)
 	ld a, [$ff97]
 	ld [hli], a
 	ld a, [$ff98]
 	ld [hl], a
 	pop de
 	pop hl
-UpdateStatDone: ; 3f62c (f:762c)
+UpdateStat2Done: ; 3f62c (f:762c)
 	ld b, c
 	inc b
 	push de
@@ -8057,7 +8057,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	jp Func_3fb4e
 .asm_3f7e4
 	push af
-	call PlayAnimation
+	call PlayBattleAnimatiom
 	ld c, $14
 	call DelayFrames
 	pop af
@@ -8185,7 +8185,7 @@ ChargeEffect: ; 3f88c (f:788c)
 	xor a
 	ld [wcc5b], a
 	ld a, b
-	call PlayAnimation
+	call PlayBattleAnimatiom
 	ld a, [de]
 	ld [wWhichTrade], a
 	ld hl, ChargeMoveEffectText
@@ -8660,7 +8660,7 @@ Func_3fba8: ; 3fba8 (f:7ba8)
 	and a
 	ret z
 
-PlayAnimation: ; 3fbb9 (f:7bb9)
+PlayBattleAnimatiom: ; 3fbb9 (f:7bb9)
 	ld [W_ANIMATIONID], a
 
 Func_3fbbc: ; 3fbbc (f:7bbc)
