@@ -71,7 +71,7 @@ AlwaysHappenSideEffects: ; 3c030 (f:4030)
 	db -1
 SpecialEffects: ; 3c03b (f:403b)
 ; Effects from arrays 2, 4, and 5B, minus Twineedle and Rage.
-; Includes all effects that do not need to be called at the end of 
+; Includes all effects that do not need to be called at the end of
 ; ExecutePlayerMove (or ExecuteEnemyMove), because they have already been handled
 	db DRAIN_HP_EFFECT
 	db EXPLODE_EFFECT
@@ -512,7 +512,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ret nz ; if so, return
 	ld a, b
 	and a
-	jp z, HandlePlayerMonFainted 
+	jp z, HandlePlayerMonFainted
 .AIActionUsedEnemyFirst
 	call HandlePoisonBurnLeechSeed
 	jp z, HandleEnemyMonFainted
@@ -1595,7 +1595,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	call StringCmp
 	jr nc, .canEscape ; jump if player speed greater than enemy speed
 	xor a
-	ld [H_MULTIPLICAND], a 
+	ld [H_MULTIPLICAND], a
 	ld a, 32
 	ld [H_MULTIPLIER], a
 	call Multiply ; multiply player speed by 32
@@ -1914,7 +1914,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld a, [wcf98]
 	ld [wcf91], a
 	hlCoord 10, 9
-	predef DrawHP 
+	predef DrawHP
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wcf1d
@@ -3160,19 +3160,19 @@ PlayerCanExecuteMove: ; 3d6b0 (f:56b0)
 	ld hl,ResidualEffects1
 	ld de,1
 	call IsInArray
-	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests 
-						; unless executed as part of their exclusive effect functions 
+	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests
+						; unless executed as part of their exclusive effect functions
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SpecialEffectsCont
 	ld de,1
 	call IsInArray
-	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything 
+	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything
 CalcMoveDamage: ; 3d6dc (f:56dc)
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SetDamageEffects
 	ld de,1
-	call IsInArray 
-	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation 
+	call IsInArray
+	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
 	call HandleCounterMove
 	jr z,asm_3d705
@@ -3191,14 +3191,14 @@ asm_3d705
 	ld a,[W_PLAYERMOVEEFFECT]
 	sub a,7 ; Explosion effect
 	jr z,asm_3d71e ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
-	jr asm_3d74b 
+	jr asm_3d74b
 asm_3d714
 	ld a,[W_PLAYERMOVEEFFECT]
 	and a
 	ld a,4
 	jr z,asm_3d71e
 	ld a,5
-asm_3d71e 
+asm_3d71e
 	push af
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
@@ -3258,7 +3258,7 @@ MirrorMoveCheck
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,EXPLODE_EFFECT ; even if Explosion or Selfdestruct missed, its effect still needs to be activated
 	jr z,.notDone
-	jp ExecutePlayerMoveDone ; otherwise, we're done if the move missed 
+	jp ExecutePlayerMoveDone ; otherwise, we're done if the move missed
 .moveDidNotMiss
 	call ApplyAttackToEnemyPokemon
 	call PrintCriticalOHKOText
@@ -3284,13 +3284,13 @@ MirrorMoveCheck
 	ld a,[wPlayerNumAttacksLeft]
 	dec a
 	ld [wPlayerNumAttacksLeft],a
-	jp nz,asm_3d714 ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
+	jp nz,asm_3d714 ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints.
 					; damage calculation and accuracy tests only happen for the first hit
 	res 2,[hl]
 	ld hl,MultiHitText
 	call PrintText
 	xor a
-	ld [W_NUMHITS],a 
+	ld [W_NUMHITS],a
 .executeOtherEffects
 	ld a,[W_PLAYERMOVEEFFECT]
 	and a
@@ -3573,7 +3573,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,wPlayerNumAttacksLeft
 	dec [hl] ; did Trashing About counter hit 0?
 	ld hl,CalcMoveDamage ; skip DecrementPP
-	jp nz,.returnToHL 
+	jp nz,.returnToHL
 	push hl
 	ld hl,W_PLAYERBATTSTATUS1
 	res 1,[hl] ; no longer trashing about
@@ -4212,7 +4212,7 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	jr z, .physicalAttackCritCheck
 ; if the enemy has used Reflect, double the enemy's defense
 	sla c
-	rl b	
+	rl b
 .physicalAttackCritCheck
 	ld hl, wBattleMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4244,7 +4244,7 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	sla c
 	rl b
 ; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
-; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen 	
+; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
 	ld hl, wBattleMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4277,7 +4277,7 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	rr c
 	srl b
 	rr c
-; defensive stat can actually end up as 0, leading to a division by 0 freeze during damage calculation	
+; defensive stat can actually end up as 0, leading to a division by 0 freeze during damage calculation
 ; hl /= 4 (scale player's offensive stat)
 	srl h
 	rr l
@@ -4356,7 +4356,7 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 	sla c
 	rl b
 ; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
-; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen 
+; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
 	ld hl, wEnemyMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4389,7 +4389,7 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 	rr c
 	srl b
 	rr c
-; defensive stat can actually end up as 0, leading to a division by 0 freeze during damage calculation		
+; defensive stat can actually end up as 0, leading to a division by 0 freeze during damage calculation
 ; hl /= 4 (scale enemy's offensive stat)
 	srl h
 	rr l
@@ -4611,7 +4611,7 @@ CalculateDamage: ; 3df65 (f:5f65)
 	ld [hld], a
 	jr nc, .done
 	inc [hl]
-	
+
 .done
 ; minimum damage is 1
 	ld a, 1
@@ -4713,9 +4713,9 @@ HighCriticalMoves: ; 3e08e (f:608e)
 
 ; function to determine if Counter hits and if so, how much damage it does
 HandleCounterMove: ; 3e093 (f:6093)
-; The variables checked by Counter are updated whenever the cursor points to a new move in the battle selection menu. 
-; This is irrelevant for the opponent's side outside of link battles, since the move selection is controlled by the AI. 
-; However, in the scenario where the player switches out and the opponent uses Counter, 
+; The variables checked by Counter are updated whenever the cursor points to a new move in the battle selection menu.
+; This is irrelevant for the opponent's side outside of link battles, since the move selection is controlled by the AI.
+; However, in the scenario where the player switches out and the opponent uses Counter,
 ; the outcome may be affected by the player's actions in the move selection menu prior to switching the Pokemon.
 ; This might also lead to desync glitches in link battles.
 
@@ -4756,7 +4756,7 @@ HandleCounterMove: ; 3e093 (f:6093)
 	ld a,[hli]
 	or [hl]
 	ret z ; If we made it here, Counter still misses if the last move used in battle did no damage to its target.
-		  ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself 
+		  ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself
 		  ; if the conditions meet, even though 99% of the times damage will come from the target.
 ; if it did damage, double it
 	ld a,[hl]
@@ -4812,7 +4812,7 @@ ApplyAttackToEnemyPokemon: ; 3e0df (f:60df)
 	ld a,[hl]
 	ld b,a ; Seismic Toss deals damage equal to the user's level
 	ld a,[W_PLAYERMOVENUM]
-	cp a,SEISMIC_TOSS 
+	cp a,SEISMIC_TOSS
 	jr z,.storeDamage
 	cp a,NIGHT_SHADE
 	jr z,.storeDamage
@@ -6747,11 +6747,11 @@ BattleRandom:
 HandleExplodingAnimation: ; 3eed3 (f:6ed3)
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wEnemyMonType1 ; wcfea 
+	ld hl, wEnemyMonType1 ; wcfea
 	ld de, W_ENEMYBATTSTATUS1
 	ld a, [W_PLAYERMOVENUM]
 	jr z, .asm_3eeea
-	ld hl, wBattleMonType1 ; wd019 
+	ld hl, wBattleMonType1 ; wd019
 	ld de, W_ENEMYBATTSTATUS1
 	ld a, [W_ENEMYMOVENUM]
 .asm_3eeea
@@ -7206,7 +7206,7 @@ SleepEffect: ; 3f1fc (f:71fc)
 .setSleepCounter
 ; set target's sleep counter to a random number between 1 and 7
 	call BattleRandom
-	and $7 
+	and $7
 	jr z, .setSleepCounter
 	ld [de], a
 	call Func_3fb89
@@ -7261,7 +7261,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	jr nz, .didntAffect
 	jr .inflictPoison
 .sideEffectTest
-	call BattleRandom 
+	call BattleRandom
 	cp b ; was side effect successful?
 	ret nc
 .inflictPoison
@@ -7346,7 +7346,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld [wcc5b], a
 	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz ; return if they have a substitute, can't effect them
-	ld a, [$fff3]  
+	ld a, [$fff3]
 	and a
 	jp nz, opponentAttacker
 	ld a, [wEnemyMonStatus]
@@ -7367,29 +7367,29 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld b, $4d ; else use 0x4D/0x100 or 77/256 = 30.1%~ chance
 	sub a, $1e ; subtract $1E to map to equivalent 10% chance effects
 .next1
-	push af     
+	push af
 	call BattleRandom ; get random 8bit value for probability test
 	cp b
-	pop bc     
+	pop bc
 	ret nc ; do nothing if random value is >= 1A or 4D [no status applied]
 	ld a, b ; what type of effect is this?
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
-; .paralyze	
+; .paralyze
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
 	call QuarterSpeedDueToParalysis ; quarter speed of affected mon
 	ld a, ANIM_A9
-	call PlayBattleAnimatiom 
+	call PlayBattleAnimation
 	jp PrintMayNotAttackText ; print paralysis text
 .burn
 	ld a, 1 << BRN
 	ld [wEnemyMonStatus], a
 	call HalveAttackDueToBurn ; halve attack of affected mon
 	ld a, ANIM_A9
-	call PlayBattleAnimatiom 
+	call PlayBattleAnimation
 	ld hl, BurnedText
 	jp PrintText
 .freeze
@@ -7397,7 +7397,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld a, 1 << FRZ
 	ld [wEnemyMonStatus], a
 	ld a, ANIM_A9
-	call PlayBattleAnimatiom 
+	call PlayBattleAnimation
 	ld hl, FrozenText
 	jp PrintText
 opponentAttacker: ; 3f382 (f:7382)
@@ -7458,7 +7458,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
 	and a, 1 << FRZ	; are they frozen?
 	ret z ; return if so
-	ld a, [$fff3]	
+	ld a, [$fff3]
 	and a
 	jr nz, .opponent
 	;player [attacker]
@@ -7503,7 +7503,7 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	ld de, W_ENEMYMOVEEFFECT
 .statModifierUpEffect
 	ld a, [de]
-	sub ATTACK_UP1_EFFECT 
+	sub ATTACK_UP1_EFFECT
 	cp $8
 	jr c, .incrementStatMod
 	sub ATTACK_UP2_EFFECT - ATTACK_UP1_EFFECT ; map +2 effects to equivalent +1 effect
@@ -7581,7 +7581,7 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	ld b, $4
 	call Divide
 	pop hl
-; cap at 999	
+; cap at 999
 	ld a, [$ff98]
 	sub $e7
 	ld a, [$ff97]
@@ -7643,7 +7643,7 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	ld hl, MonsStatsRoseText
 	call PrintText
 
-; these shouldn't be here	
+; these shouldn't be here
 	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
 	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
 
@@ -7721,7 +7721,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	bit 6, a ; fly/dig
 	jp nz, MoveMissed
 	ld a, [de]
-	sub ATTACK_DOWN1_EFFECT 
+	sub ATTACK_DOWN1_EFFECT
 	cp $8
 	jr c, .decrementStatMod
 	sub ATTACK_DOWN2_EFFECT - ATTACK_DOWN1_EFFECT ; map +2 effects to corresponding +1 effect
@@ -7741,9 +7741,9 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	jr nz, .ok
 	inc b ; increment mod to 1 (-6) if it would become 0 (-7)
 .ok
-	ld [hl], b ; save modified mod 
+	ld [hl], b ; save modified mod
 	ld a, c
-	cp $4 
+	cp $4
 	jr nc, UpdateStat2Done ; jump for evasion/accuracy
 	push hl
 	push de
@@ -7832,10 +7832,10 @@ UpdateStat2Done: ; 3f62c (f:762c)
 								  ; even to those not affected by the stat-up move (will be boosted further)
 	ld hl, MonsStatsFellText
 	call PrintText
-	
-; These where probably added given that a stat-down move affecting speed or attack will override 
+
+; These where probably added given that a stat-down move affecting speed or attack will override
 ; the stat penalties from paralysis and burn respectively.
-; But they are always called regardless of the stat affected by the stat-down move.  	
+; But they are always called regardless of the stat affected by the stat-down move.
 	call QuarterSpeedDueToParalysis
 	jp HalveAttackDueToBurn
 
@@ -7960,7 +7960,7 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 .thrashPetalDanceEffect
 	set 1, [hl] ; mon is now using thrash/petal dance
 	call BattleRandom
-	and $1 
+	and $1
 	inc a
 	inc a
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
@@ -8057,7 +8057,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	jp Func_3fb4e
 .asm_3f7e4
 	push af
-	call PlayBattleAnimatiom
+	call PlayBattleAnimation
 	ld c, $14
 	call DelayFrames
 	pop af
@@ -8109,14 +8109,14 @@ TwoToFiveAttacksEffect: ; 3f811 (f:7811)
 	cp ATTACK_TWICE_EFFECT
 	ld a, $2 ; number of hits it's always 2 for ATTACK_TWICE_EFFECT
 	jr z, .saveNumberOfHits
-; for TWO_TO_FIVE_ATTACKS_EFFECT 3/8 chance for 2 and 3 hits, and 1/8 chance for 4 and 5 hits	
-	call BattleRandom
-	and $3 
-	cp $2 
-	jr c, .asm_3f851 
+; for TWO_TO_FIVE_ATTACKS_EFFECT 3/8 chance for 2 and 3 hits, and 1/8 chance for 4 and 5 hits
 	call BattleRandom
 	and $3
-.asm_3f851 
+	cp $2
+	jr c, .asm_3f851
+	call BattleRandom
+	and $3
+.asm_3f851
 	inc a
 	inc a
 .saveNumberOfHits
@@ -8185,7 +8185,7 @@ ChargeEffect: ; 3f88c (f:788c)
 	xor a
 	ld [wcc5b], a
 	ld a, b
-	call PlayBattleAnimatiom
+	call PlayBattleAnimation
 	ld a, [de]
 	ld [wWhichTrade], a
 	ld hl, ChargeMoveEffectText
@@ -8660,7 +8660,7 @@ Func_3fba8: ; 3fba8 (f:7ba8)
 	and a
 	ret z
 
-PlayBattleAnimatiom: ; 3fbb9 (f:7bb9)
+PlayBattleAnimation: ; 3fbb9 (f:7bb9)
 	ld [W_ANIMATIONID], a
 
 Func_3fbbc: ; 3fbbc (f:7bbc)

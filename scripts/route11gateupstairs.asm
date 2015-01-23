@@ -11,7 +11,7 @@ Route11GateUpstairsText1: ; 4945f (12:545f)
 	db $08 ; asm
 	xor a
 	ld [wWhichTrade], a
-	predef Predef54 
+	predef Predef54
 asm_49469: ; 49469 (12:5469)
 	jp TextScriptEnd
 

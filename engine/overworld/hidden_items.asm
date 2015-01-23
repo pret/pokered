@@ -53,7 +53,7 @@ HiddenItemBagFullText: ; 76794 (1d:6794)
 
 HiddenCoins: ; 76799 (1d:6799)
 	ld b, COIN_CASE
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	ld a, b
 	and a
 	ret z

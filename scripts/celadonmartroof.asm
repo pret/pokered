@@ -14,7 +14,7 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	push de
 	ld [wd11e], a
 	ld b, a
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	pop de
 	pop hl
 	ld a, b

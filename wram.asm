@@ -393,7 +393,7 @@ wccf7:: ds 14
 wcd05:: ds 1
 wcd06:: ds 9
 
-wPlayerMonUnmodifiedLevel:: ; cd0f 
+wPlayerMonUnmodifiedLevel:: ; cd0f
 	ds 0
 wcd0f:: ; overload, used in in-game trade code
 	ds 1

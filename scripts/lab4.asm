@@ -20,7 +20,7 @@ Lab4Script_75d38: ; 75d38 (1d:5d38)
 	push de
 	ld [wd11e], a
 	ld b, a
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	pop de
 	pop hl
 	ld a, b
@@ -108,7 +108,7 @@ Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
 	ld a, $3
 	ld [wWhichTrade], a
-	predef Predef54 
+	predef Predef54
 	jp TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)

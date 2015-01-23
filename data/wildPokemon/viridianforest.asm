@@ -33,7 +33,7 @@ ForestMons:
 			db 4,KAKUNA
 			db 3,WEEDLE
 		ENDC
-	
+
 		db 3,PIKACHU
 		db 5,PIKACHU
 	ENDC
