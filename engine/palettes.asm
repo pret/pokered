@@ -381,7 +381,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 LoadSGB: ; 7202b (1c:602b)
 	xor a
 	ld [wOnSGB], a
-	call Func_7209b
+	call CheckSGB
 	ret nc
 	ld a, $1
 	ld [wOnSGB], a
@@ -440,7 +440,7 @@ PointerTable_72089: ; 72089 (1c:6089)
 	dw DataSnd_725a8
 	dw DataSnd_725b8
 
-Func_7209b: ; 7209b (1c:609b)
+CheckSGB: ; 7209b (1c:609b)
 	ld hl, MltReq2Packet
 	di
 	call SendSGBPacket
@@ -536,8 +536,7 @@ Func_7210b: ; 7210b (1c:610b)
 	ret
 
 Wait7000: ; 7214a (1c:614a)
-; each loop takes about 10 cycles so this routine actually loops through 70000
-; cycles.
+; Each loop takes 9 cycles so this routine actually waits 63000 cycles.
 	ld de, 7000
 .loop
 	nop

@@ -58,7 +58,7 @@ hSCX EQU $FFAE
 hSCY EQU $FFAF
 hWY  EQU $FFB0
 
-hJoyHeldLast EQU $FFB1
+hJoyLast     EQU $FFB1
 hJoyReleased EQU $FFB2
 hJoyPressed  EQU $FFB3
 hJoyHeld     EQU $FFB4
