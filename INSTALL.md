@@ -57,7 +57,7 @@ Select the following packages:
 * python
 * python-setuptools
 
-The latest version of **rgbds** is  [**0.2.0**](https://github.com/bentley/rgbds/releases/download/v0.2.0/rgbds-0.2.0-win32.zip). To install, put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
+The latest version of **rgbds** is  [**0.2.2**](https://github.com/bentley/rgbds/releases/download/v0.2.2/rgbds-0.2.2-win32.zip). To install, put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
 
 Then set up the repository. In the **Cygwin terminal**:
 
