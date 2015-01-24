@@ -1,5 +1,8 @@
 GetMachinePrice: ; 7bf86 (1e:7f86)
-	ld a, [wcf91]
+; Input:  [wcf91] = Item Id of a TM
+; Output: Stores the 2-byte TM price in [H_DOWNARROWBLINKCNT1] and [H_DOWNARROWBLINKCNT2]
+;         as a BCD
+	ld a, [wcf91] ; a contains TM item id
 	sub TM_01
 	ret c
 	ld d, a
@@ -8,11 +11,11 @@ GetMachinePrice: ; 7bf86 (1e:7f86)
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl]
+	ld a, [hl] ; a contains byte whose high or low nybble is the TM price (in thousands)
 	srl d
-	jr nc, .asm_7bf9d
+	jr nc, .highNybbleIsPrice ; is TM id odd?
 	swap a
-.asm_7bf9d
+.highNybbleIsPrice
 	and $f0
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	xor a

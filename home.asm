@@ -3335,6 +3335,8 @@ GetName:: ; 376b (0:376b)
 	ret
 
 GetItemPrice:: ; 37df (0:37df)
+; Stores item's price as BCD in [H_DOWNARROWBLINKCNT1] and [[H_DOWNARROWBLINKCNT2]
+; Input: [wcf91] = item id
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, [wListMenuID] ; wListMenuID
@@ -3349,9 +3351,9 @@ GetItemPrice:: ; 37df (0:37df)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcf91]
+	ld a, [wcf91] ; a contains item id
 	cp HM_01
-	jr nc, .asm_3812
+	jr nc, .getTMPrice
 	ld bc, $3
 .asm_3802
 	add hl, bc
@@ -3365,7 +3367,7 @@ GetItemPrice:: ; 37df (0:37df)
 	ld a, [hl]
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	jr .asm_381c
-.asm_3812
+.getTMPrice
 	ld a, Bank(GetMachinePrice)
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
