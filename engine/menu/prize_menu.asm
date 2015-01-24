@@ -6,7 +6,7 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	jp PrintText
 .havingCoinCase
 	ld hl,wd730
-	set 6,[hl]
+	set 6,[hl] ; disable letter-printing delay
 	ld hl,ExchangeCoinsForPrizesTextPtr
 	call PrintText
 ; the following are the menu settings
