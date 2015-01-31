@@ -379,8 +379,8 @@ wcced:: ds 1
 wccee:: ds 1
 wccef:: ds 1
 wccf0:: ds 1
-wccf1:: ds 1
-wccf2:: ds 1
+wPlayerUsedMove:: ds 1
+wEnemyUsedMove:: ds 1
 wccf3:: ds 1
 wccf4:: ds 1
 
@@ -935,7 +935,8 @@ wPlayerNumAttacksLeft::
 ; when the player is attacking multiple times, the number of attacks left
 	ds 1
 
-wd06b:: ds 1
+W_PLAYERCONFUSEDCOUNTER:: ; wd06b
+	ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
@@ -945,10 +946,11 @@ W_PLAYERDISABLEDMOVE:: ; d06d
 	ds 1
 
 wEnemyNumAttacksLeft::
-; when the player is attacking multiple times, the number of attacks left
+; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
-wd070:: ds 1
+W_ENEMYCONFUSEDCOUNTER:: ; wd070
+	ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
