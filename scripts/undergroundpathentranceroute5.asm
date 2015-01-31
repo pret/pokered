@@ -13,6 +13,6 @@ UndergroundPathEntranceRoute5Text1: ; 5d6b2 (17:56b2)
 	db $08 ; asm
 	ld a, $9
 	ld [wWhichTrade], a
-	predef Predef54 
+	predef Predef54
 	ld hl, UndergroundPathEntranceRoute5_5d6af
 	ret

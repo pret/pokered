@@ -133,7 +133,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayDelta
 	xor a
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
-	ld [hl], $a1 ; wPlayerSpinInPlaceAnimSoundID
+	ld [hl], (SFX_02_4d - SFX_Headers_02) / 3 ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wcd48
 	call PlayerSpinInPlace
 	jr .spinWhileMovingUp

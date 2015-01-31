@@ -2712,7 +2712,7 @@ IsItemInBag:: ; 3493 (0:3493)
 ; set zero flag if item isn't in player's bag
 ; else reset zero flag
 ; related to Pokémon Tower and ghosts
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	ld a,b
 	and a
 	ret
