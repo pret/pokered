@@ -1,5 +1,5 @@
 DrainHPEffect_: ; 783f (1:783f)
-	ld hl, W_DAMAGE ; W_DAMAGE
+	ld hl, W_DAMAGE 
 	ld a, [hl]
 	srl a ; divide damage by 2
 	ld [hli], a
@@ -16,8 +16,8 @@ DrainHPEffect_: ; 783f (1:783f)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, Func_7861
-	ld hl, wEnemyMonHP ; wEnemyMonHP
-	ld de, wEnemyMonMaxHP ; wEnemyMonMaxHP
+	ld hl, wEnemyMonHP 
+	ld de, wEnemyMonMaxHP 
 
 Func_7861: ; 7861 (1:7861)
 	ld bc, wHPBarOldHP+1
@@ -38,7 +38,7 @@ Func_7861: ; 7861 (1:7861)
 	add b
 	ld [hld], a
 	ld [wHPBarNewHP], a
-	ld a, [W_DAMAGE] ; W_DAMAGE
+	ld a, [W_DAMAGE] 
 	ld b, [hl]
 	adc b
 	ld [hli], a
@@ -83,7 +83,7 @@ Func_7861: ; 7861 (1:7861)
 	and a
 	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
 	jr z, .asm_78d2
-	ld a, [W_ENEMYMOVEEFFECT] ; W_ENEMYMOVEEFFECT
+	ld a, [W_ENEMYMOVEEFFECT] 
 .asm_78d2
 	cp DREAM_EATER_EFFECT
 	jr nz, .asm_78d9

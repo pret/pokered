@@ -357,13 +357,13 @@ ItemUseBall: ; d687 (3:5687)
 	push af		;...and status ailments
 	push hl
 	ld hl,W_ENEMYBATTSTATUS3
-	bit 3,[hl]
+	bit Transformed,[hl]
 	jr z,.next15
 	ld a,$4c
 	ld [wEnemyMonSpecies2],a
 	jr .next16
 .next15	;$5871
-	set 3,[hl]
+	set Transformed,[hl]
 	ld hl,wcceb
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
@@ -770,7 +770,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 	push hl
 	ld hl,W_PLAYERBATTSTATUS3
-	res 0,[hl] ; heal Toxic status
+	res BadlyPoisoned,[hl] ; heal Toxic status
 	pop hl
 	ld bc,30
 	add hl,bc ; hl now points to party stats
@@ -1407,7 +1407,7 @@ ItemUseRepelCommon: ; e005 (3:6005)
 	and a
 	jp nz,ItemUseNotTime
 	ld a,b
-	ld [wd0db],a
+	ld [wRepelRemainingSteps],a
 	jp PrintItemUseTextAndRemoveItem
 
 ; handles X Accuracy item
@@ -1416,7 +1416,7 @@ ItemUseXAccuracy: ; e013 (3:6013)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 0,[hl] ; X Accuracy bit
+	set UsingXAccuracy,[hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
@@ -1525,7 +1525,7 @@ ItemUseGuardSpec: ; e0dc (3:60dc)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 1,[hl] ; Mist bit
+	set ProtectedByMist,[hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseSuperRepel: ; e0eb (3:60eb)
@@ -1541,7 +1541,7 @@ ItemUseDireHit: ; e0f5 (3:60f5)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 2,[hl] ; Focus Energy bit
+	set GettingPumped,[hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseXStat: ; e104 (3:6104)

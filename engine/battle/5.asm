@@ -12,7 +12,7 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld bc, W_ENEMYBATTSTATUS2
 .notEnemy
 	ld a, [bc]                    ;load flags
-	bit 4, a                      ;user already has substitute?
+	bit HasSubstituteUp, a        ;user already has substitute?
 	jr nz, .alreadyHasSubstitute  ;skip this code if so
 	                              ;user doesn't have a substitute [yet]
 	push bc
@@ -41,13 +41,13 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld [hl], d   ;store low byte HP
 	ld h, b
 	ld l, c
-	set 4, [hl]    ;set bit 4 of flags, user now has substitute
-	ld a, [W_OPTIONS]  ;load options
-	bit 7, a       ;battle animation is enabled?
-	ld hl, Func_3fba8    ; $7ba8 ;animation enabled: 0F:7BA8
+	set HasSubstituteUp, [hl] ;set bit 4 of flags, user now has substitute
+	ld a, [W_OPTIONS]         ;load options
+	bit 7, a                  ;battle animation is enabled?
+	ld hl, Func_3fba8         ;animation enabled: 0F:7BA8
 	ld b, BANK(Func_3fba8)
 	jr z, .animationEnabled
-	ld hl, AnimationSubstitute   ;animation disabled: 1E:56E0
+	ld hl, AnimationSubstitute ;animation disabled: 1E:56E0
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
 	call Bankswitch           ;jump to routine depending on animation setting

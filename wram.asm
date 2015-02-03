@@ -348,7 +348,8 @@ wPlayerSelectedMove:: ; ccdc
 wEnemySelectedMove:: ; ccdd
 	ds 1
 
-wccde:: ds 1
+wLinkBattleRNCount:: ; ccde
+	ds 1
 
 wAICount:: ; ccdf
 ; number of times remaining that AI action can occur
@@ -1178,7 +1179,10 @@ W_DAMAGE:: ; d0d7
 	ds 1
 
 wd0d8:: ds 3
-wd0db:: ds 1
+
+wRepelRemainingSteps:: ; wd0db
+    ds 1
+	
 wd0dc:: ds 4
 wd0e0:: ds 1
 wd0e1:: ds 56
