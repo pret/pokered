@@ -13,7 +13,7 @@ Func_525af: ; 525af (14:65af)
 	ld [wCriticalHitOrOHKO], a
 	ld [wBattleMonSpecies], a
 	ld [wPartyGainExpFlags], a
-	ld [wPlayerMonNumber], a ; wPlayerMonNumber
+	ld [wPlayerMonNumber], a 
 	ld [wEscapedFromBattle], a
 	ld [wMapPalOffset], a
 	ld hl, wcf1d
@@ -27,7 +27,7 @@ Func_525af: ; 525af (14:65af)
 	jr nz, .asm_525e1
 	inc a
 	ld [wccd9], a
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP] 
 	cp SAFARI_ZONE_EAST
 	jr c, .asm_525f9
 	cp SAFARI_ZONE_REST_HOUSE_1
@@ -45,7 +45,7 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	jp z, .asm_52613
-	ld hl, wBattleMonStatus ; wBattleMonStatus
+	ld hl, wBattleMonStatus 
 	ld de, W_ENEMYMOVETYPE ; wcfcf
 
 .asm_52613
@@ -69,10 +69,10 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	push hl
 	callab MoveHitTest
 	pop hl
-	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
+	ld a, [W_MOVEMISSED] 
 	and a
 	jr nz, .asm_52659
-	set 6, [hl]
+	set PAR, [hl]
 	callab QuarterSpeedDueToParalysis
 	ld c, $1e
 	call DelayFrames

@@ -18,9 +18,9 @@ LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	ld a, [de]
 	cp GRASS
 	jr z, .asm_2bee7
-	bit 7, [hl]
+	bit Seeded, [hl]
 	jr nz, .asm_2bee7
-	set 7, [hl]
+	set Seeded, [hl]
 	callab Func_3fba8
 	ld hl, WasSeededText ; $7ef2
 	jp PrintText

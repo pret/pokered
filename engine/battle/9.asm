@@ -163,9 +163,9 @@ FocusEnergyEffect_: ; 27f86 (9:7f86)
 	jr z, .asm_27f91
 	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_27f91
-	bit 2, [hl] ; is mon already using focus energy?
+	bit GettingPumped, [hl] ; is mon already using focus energy?
 	jr nz, .asm_27fa5
-	set 2, [hl] ; mon is now using focus energy
+	set GettingPumped, [hl] ; mon is now using focus energy
 	callab Func_3fba8
 	ld hl, GettingPumpedText ; $7fb2
 	jp PrintText

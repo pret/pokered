@@ -130,7 +130,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
 	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
 .asm_3bad1
-	bit 6, a ; is mon invulnerable to typical attacks? (fly/dig)
+	bit Invulnerable, a ; is mon invulnerable to typical attacks? (fly/dig)
 	jp nz, Func_3bb8c
 	push hl
 	push de
@@ -141,7 +141,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	jr z, .asm_3bae4
 	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
 .asm_3bae4
-	bit 4, [hl]
+	bit HasSubstituteUp, [hl]
 	push af
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
@@ -161,7 +161,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	call nz, Bankswitch
 	pop bc
 	ld a, [bc]
-	set 3, a
+	set Transformed, a
 	ld [bc], a
 	pop de
 	pop hl
@@ -267,15 +267,15 @@ ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
 	ld a, [de]
 	cp LIGHT_SCREEN_EFFECT
 	jr nz, .reflect
-	bit 1, [hl] ; is mon already protected by light screen?
+	bit HasLightScreenUp, [hl] ; is mon already protected by light screen?
 	jr nz, .moveFailed
-	set 1, [hl] ; mon is now protected by light screen
+	set HasLightScreenUp, [hl] ; mon is now protected by light screen
 	ld hl, LightScreenProtectedText ; $7bd7
 	jr .asm_3bbc1
 .reflect
-	bit 2, [hl] ; is mon already protected by reflect?
+	bit HasReflectUp, [hl] ; is mon already protected by reflect?
 	jr nz, .moveFailed
-	set 2, [hl] ; mon is now protected by reflect
+	set HasReflectUp, [hl] ; mon is now protected by reflect
 	ld hl, ReflectGainedArmorText ; $7bdc
 .asm_3bbc1
 	push hl

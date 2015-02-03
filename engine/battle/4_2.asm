@@ -103,15 +103,15 @@ Func_13870: ; 13870 (4:7870)
 .asm_13888
 	callab Func_128d8
 	jr z, .asm_13884
-	ld a, [wd0db]
+	ld a, [wRepelRemainingSteps]
 	and a
 	jr z, .asm_1389e
 	dec a
-	jr z, .asm_13905
-	ld [wd0db], a
+	jr z, .lastRepelStep
+	ld [wRepelRemainingSteps], a
 .asm_1389e
-; determine if wild pokémon can appear where we’re standing.
-; are we standing in grass/water?
+; determine if wild pokémon can appear in the half-block we’re standing	
+; is the bottom right tile (9,9) of the half-block are we standing a grass/water tile?
 	hlCoord 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
@@ -133,6 +133,7 @@ Func_13870: ; 13870 (4:7870)
 	jr z, .CantEncounter
 	ld a, [W_GRASSRATE]
 .CanEncounter
+; weigh encounter chance to a random number to determine if there will be an encounter
 	ld b, a
 	ld a, [hRandomAdd]
 	cp b
@@ -140,20 +141,23 @@ Func_13870: ; 13870 (4:7870)
 	ld a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
-.asm_138d0
+.determineEncounterSlot
 	ld a, [hli]
 	cp b
-	jr nc, .asm_138d7
+	jr nc, .gotEncounterSlot
 	inc hl
-	jr .asm_138d0
-.asm_138d7
+	jr .determineEncounterSlot
+.gotEncounterSlot
+; determine which wild pokémon (grass or water) can appear in the half-block we’re standing
 	ld c, [hl]
 	ld hl, W_GRASSMONS
-	aCoord 8, 9
-	cp $14
-	jr nz, .asm_138e5
+	aCoord 8, 9	
+	cp $14 ; is the bottom left tile (8,9) of the half-block are we standing a water tile?	
+	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, W_WATERMONS
-.asm_138e5
+; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
+; "left shore" half-blocks (such as the one in the east coast of Cinnabar), load grass encounters.	
+.gotWildEncounterType
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
@@ -161,17 +165,17 @@ Func_13870: ; 13870 (4:7870)
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
-	ld a, [wd0db]
+	ld a, [wRepelRemainingSteps]
 	and a
-	jr z, .asm_13916
+	jr z, .willEncounter
 	ld a, [wPartyMon1Level]
 	ld b, a
 	ld a, [W_CURENEMYLVL]
 	cp b
 	jr c, .CantEncounter
-	jr .asm_13916
-.asm_13905
-	ld [wd0db], a
+	jr .willEncounter
+.lastRepelStep
+	ld [wRepelRemainingSteps], a
 	ld a, $d2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call EnableAutoTextBoxDrawing
@@ -180,7 +184,7 @@ Func_13870: ; 13870 (4:7870)
 	ld a, $1
 	and a
 	ret
-.asm_13916
+.willEncounter
 	xor a
 	ret
 
@@ -282,7 +286,7 @@ ConversionEffect_: ; 139a3 (4:79a3)
 	pop de
 	ld a, [W_PLAYERBATTSTATUS1]
 .asm_139b8
-	bit 6, a ; is mon immune to typical attacks (dig/fly)
+	bit Invulnerable, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText
 	ld a, [hli]
 	ld [de], a
@@ -340,22 +344,22 @@ HazeEffect_: ; 139da (4:79da)
 	ld [hli], a
 	ld [hl], a
 	ld hl, W_PLAYERBATTSTATUS1
-	call Func_13a37
+	call CureStatuses
 	ld hl, W_ENEMYBATTSTATUS1
-	call Func_13a37
+	call CureStatuses
 	ld hl, Func_3fba8
 	call Func_139d5
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
-Func_13a37: ; 13a37 (4:7a37)
-	res 7, [hl]
-	inc hl
+CureStatuses: ; 13a37 (4:7a37)
+	res Confused, [hl]
+	inc hl ; BATTSTATUS2
 	ld a, [hl]
-	and $78
-	ld [hli], a
+	and (1 << UsingRage) | (1 << NeedsToRecharge) | (1 << HasSubstituteUp) | (1 << 3) ; clear all but these from BATTSTATUS2
+	ld [hli], a ; BATTSTATUS3
 	ld a, [hl]
-	and $f8
+	and %11110000 | (1 << Transformed) ; clear Bad Poison, Reflect and Light Screen statuses
 	ld [hl], a
 	ret
 
@@ -382,8 +386,8 @@ StatusChangesEliminatedText: ; 13a53 (4:7a53)
 	db "@"
 
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE ; W_GRASSRATE
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld hl, W_GRASSRATE 
+	ld a, [W_ISLINKBATTLE] 
 	and a
 	jr nz, .rival
 	ld hl, W_RIVALNAME ; wd34a
