@@ -435,145 +435,145 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 ; trainer pic pointers and base money.
 ; money received after battle = base money × level of highest-level enemy mon
 	dw YoungsterPic
-	db 0,$15,0
+	money 1500
 
 	dw BugCatcherPic
-	db 0,$10,0
+	money 1000
 
 	dw LassPic
-	db 0,$15,0
+	money 1500
 
 	dw SailorPic
-	db 0,$30,0
+	money 3000
 
 	dw JrTrainerMPic
-	db 0,$20,0
+	money 2000
 
 	dw JrTrainerFPic
-	db 0,$20,0
+	money 2000
 
 	dw PokemaniacPic
-	db 0,$50,0
+	money 5000
 
 	dw SuperNerdPic
-	db 0,$25,0
+	money 2500
 
 	dw HikerPic
-	db 0,$35,0
+	money 3500
 
 	dw BikerPic
-	db 0,$20,0
+	money 2000
 
 	dw BurglarPic
-	db 0,$90,0
+	money 9000
 
 	dw EngineerPic
-	db 0,$50,0
+	money 5000
 
 	dw JugglerPic
-	db 0,$35,0
+	money 3500
 
 	dw FisherPic
-	db 0,$35,0
+	money 3500
 
 	dw SwimmerPic
-	db 0,$05,0
+	money 500
 
 	dw CueBallPic
-	db 0,$25,0
+	money 2500
 
 	dw GamblerPic
-	db 0,$70,0
+	money 7000
 
 	dw BeautyPic
-	db 0,$70,0
+	money 7000
 
 	dw PsychicPic
-	db 0,$10,0
+	money 1000
 
 	dw RockerPic
-	db 0,$25,0
+	money 2500
 
 	dw JugglerPic
-	db 0,$35,0
+	money 3500
 
 	dw TamerPic
-	db 0,$40,0
+	money 4000
 
 	dw BirdKeeperPic
-	db 0,$25,0
+	money 2500
 
 	dw BlackbeltPic
-	db 0,$25,0
+	money 2500
 
 	dw Rival1Pic
-	db 0,$35,0
+	money 3500
 
 	dw ProfOakPic
-	db 0,$99,0
+	money 9900
 
 	dw ChiefPic
-	db 0,$30,0
+	money 3000
 
 	dw ScientistPic
-	db 0,$50,0
+	money 5000
 
 	dw GiovanniPic
-	db 0,$99,0
+	money 9900
 
 	dw RocketPic
-	db 0,$30,0
+	money 3000
 
 	dw CooltrainerMPic
-	db 0,$35,0
+	money 3500
 
 	dw CooltrainerFPic
-	db 0,$35,0
+	money 3500
 
 	dw BrunoPic
-	db 0,$99,0
+	money 9900
 
 	dw BrockPic
-	db 0,$99,0
+	money 9900
 
 	dw MistyPic
-	db 0,$99,0
+	money 9900
 
 	dw LtSurgePic
-	db 0,$99,0
+	money 9900
 
 	dw ErikaPic
-	db 0,$99,0
+	money 9900
 
 	dw KogaPic
-	db 0,$99,0
+	money 9900
 
 	dw BlainePic
-	db 0,$99,0
+	money 9900
 
 	dw SabrinaPic
-	db 0,$99,0
+	money 9900
 
 	dw GentlemanPic
-	db 0,$70,0
+	money 7000
 
 	dw Rival2Pic
-	db 0,$65,0
+	money 6500
 
 	dw Rival3Pic
-	db 0,$99,0
+	money 9900
 
 	dw LoreleiPic
-	db 0,$99,0
+	money 9900
 
 	dw ChannelerPic
-	db 0,$30,0
+	money 3000
 
 	dw AgathaPic
-	db 0,$99,0
+	money 9900
 
 	dw LancePic
-	db 0,$99,0
+	money 9900
 
 INCLUDE "text/trainer_names.asm"
 

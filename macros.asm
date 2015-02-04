@@ -49,6 +49,20 @@ callab: MACRO
 	call Bankswitch
 	ENDM
 
+bcd2: MACRO
+    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+    dn ((\1) / 10) % 10, (\1) % 10
+    ENDM
+
+bcd3: MACRO
+    dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
+    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+    dn ((\1) / 10) % 10, (\1) % 10
+    ENDM
+
+coins equs "bcd2"
+money equs "bcd3"
+
 ;\1 = X
 ;\2 = Y
 hlCoord: MACRO

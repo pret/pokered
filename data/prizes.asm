@@ -21,16 +21,17 @@ IF DEF(_BLUE)
 	db NIDORINO
 ENDC
 	db "@"
+
 PrizeMenuMon1Cost: ; 5285d (14:685d)
 IF DEF(_RED)
-	db $01,$80
-	db $05,$00
+	coins 180
+	coins 500
 ENDC
 IF DEF(_BLUE)
-	db $01,$20
-	db $07,$50
+	coins 120
+	coins 750
 ENDC
-	db $12,$00
+	coins 1200
 	db "@"
 
 PrizeMenuMon2Entries: ; 52864 (14:6864)
@@ -44,16 +45,17 @@ IF DEF(_BLUE)
 ENDC
 	db PORYGON
 	db "@"
+
 PrizeMenuMon2Cost: ; 52868 (14:6868)
 IF DEF(_RED)
-	db $28,$00
-	db $55,$00
-	db $99,$99
+	coins 2800
+	coins 5500
+	coins 9999
 ENDC
 IF DEF(_BLUE)
-	db $25,$00
-	db $46,$00
-	db $65,$00
+	coins 2500
+	coins 4600
+	coins 6500
 ENDC
 	db "@"
 
@@ -62,8 +64,9 @@ PrizeMenuTMsEntries: ; 5286f (14:686f)
 	db TM_15
 	db TM_50
 	db "@"
+
 PrizeMenuTMsCost: ; 52873 (14:6873)
-	db $33,$00 ; 3300 Coins
-	db $55,$00 ; 5500 Coins
-	db $77,$00 ; 7700 Coins
+	coins 3300
+	coins 5500
+	coins 7700
 	db "@"
