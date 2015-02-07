@@ -25,16 +25,15 @@ SuperRodData: ; e919 (3:6919)
 	dbw ROUTE_25, FishingGroup3
 	dbw CERULEAN_GYM, FishingGroup3
 	dbw VERMILION_DOCK, FishingGroup4
-;XXX syntax errors on the rest?
-	dbw $A1, FishingGroup8 ; SEAFOAM_ISLANDS_4
-	dbw $A2, FishingGroup8 ; SEAFOAM_ISLANDS_5
+	dbw SEAFOAM_ISLANDS_4, FishingGroup8
+	dbw SEAFOAM_ISLANDS_5, FishingGroup8
 	dbw SAFARI_ZONE_EAST, FishingGroup6
-	dbw $DA, FishingGroup6 ; SAFARI_ZONE_NORTH
+	dbw SAFARI_ZONE_NORTH, FishingGroup6
 	dbw SAFARI_ZONE_WEST, FishingGroup6
-	dbw $DC, FishingGroup6 ; SAFARI_ZONE_CENTER
-	dbw $E2, FishingGroup9 ; UNKNOWN_DUNGEON_2
-	dbw $E3, FishingGroup9 ; UNKNOWN_DUNGEON_3
-	dbw $E4, FishingGroup9 ; UNKNOWN_DUNGEON_1
+	dbw SAFARI_ZONE_CENTER, FishingGroup6
+	dbw UNKNOWN_DUNGEON_2, FishingGroup9
+	dbw UNKNOWN_DUNGEON_3, FishingGroup9
+	dbw UNKNOWN_DUNGEON_1, FishingGroup9
 	db $FF
 
 ; fishing groups

@@ -71,7 +71,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	predef HideObject
 	ld a, $4
 	ld [wSpriteStateData1 + 9], a
-	ld a, $95
+	ld a, LAVENDER_HOUSE_1
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
 	ld [wDestinationWarpID], a

@@ -80,7 +80,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	call DisplayTextID
 	xor a
 	ld [wd528], a
-	ld a, $9c
+	ld a, SAFARI_ZONE_ENTRANCE
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $3
 	ld [wDestinationWarpID], a
