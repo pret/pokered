@@ -1096,7 +1096,9 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wd083], a
 	call WaitForSoundToFinish
 .skipWaitForSound
-	ld hl, wEnemyNumHits
+; bug? if the player mon faints while the enemy mon is using bide,
+; the accumulated damage is overwritten. xxx what values can [wd083] have here?
+	ld hl, wEnemyBideAccumulatedDamage
 	ld [hli], a
 	ld [hl], a
 	ld [wBattleMonStatus], a
