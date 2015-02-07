@@ -91,17 +91,17 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef Func_48125
 	add_predef UpdateHPBar
 	add_predef HPBarLength
-	add_predef Func_5ab0
+	add_predef Diploma_TextBoxBorder
 	add_predef Func_3ed02
 	add_predef ShowPokedexMenu
 	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0
 	add_predef InitOpponent
-	add_predef Func_5a5f
+	add_predef CableClub_Run
 	add_predef DrawBadges
 	add_predef Func_410f3
 	add_predef BattleTransition
-	add_predef Func_79dda
+	add_predef CopyTileIDsFromList
 	add_predef PlayIntro
 	add_predef Func_79869
 	add_predef FlashScreen
@@ -129,14 +129,14 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef LoadTownMap_Nest
 	add_predef Func_27d6b
 	add_predef EmotionBubble; 4C player exclamation
-	add_predef Func_5aaf; return immediately
+	add_predef EmptyFunc3; return immediately
 	add_predef AskName
 	add_predef PewterGuys
 	add_predef SaveSAVtoSRAM2
 	add_predef LoadSAVCheckSum2
 	add_predef LoadSAV
 	add_predef SaveSAVtoSRAM1
-	add_predef Predef54 ; 54 initiate trade
+	add_predef DoInGameTradeDialogue ; 54 initiate trade
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
 	dbw $1E, _LeaveMapAnim ; wrong bank

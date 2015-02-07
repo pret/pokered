@@ -7,7 +7,7 @@ PlayIntro: ; 41682 (10:5682)
 	call PlayIntroScene
 	call GBFadeOutToWhite
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearSprites
 	call DelayFrame
@@ -21,7 +21,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld [rOBP0], a
 	ld [rOBP1], a
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld b, $3
 	call Func_4183f
 	ld a, 0
@@ -229,7 +229,7 @@ Func_4180e: ; 4180e (10:580e)
 	jr z, .asm_4181d
 	cp $1
 	jr z, .asm_4182d
-	ld a, [$ffae]
+	ld a, [hSCX]
 	dec a
 	dec a
 	jr .asm_41831
@@ -243,11 +243,11 @@ Func_4180e: ; 4180e (10:580e)
 	call Func_417ae
 	pop de
 .asm_4182d
-	ld a, [$ffae]
+	ld a, [hSCX]
 	inc a
 	inc a
 .asm_41831
-	ld [$ffae], a
+	ld [hSCX], a
 	push de
 	ld c, $2
 	call CheckForUserInterruption
@@ -260,9 +260,9 @@ Func_4180e: ; 4180e (10:580e)
 Func_4183f: ; 4183f (10:583f)
 	hlCoord 13, 7
 
-Func_41842: ; 41842 (10:5842)
+CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
 	ld c, $0
-	predef_jump Func_79dda
+	predef_jump CopyTileIDsFromList
 
 Func_41849: ; 41849 (10:5849)
 	predef Func_79869

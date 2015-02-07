@@ -108,7 +108,7 @@ Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
 	ld a, $3
 	ld [wWhichTrade], a
-	predef Predef54
+	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)

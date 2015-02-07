@@ -70,9 +70,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp EV_TRADE
 	jr z, .checkTradeEvo
 ; not trade evolution
-	ld a, [W_ISLINKBATTLE]
-	cp $32 ; in a trade?
-	jr z, Evolution_PartyMonLoop ; if so, go the next mon
+	ld a, [wLinkState]
+	cp LINK_STATE_TRADING
+	jr z, Evolution_PartyMonLoop ; if trading, go the next mon
 	ld a, b
 	cp EV_ITEM
 	jr z, .checkItemEvo
@@ -83,9 +83,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp EV_LEVEL
 	jr z, .checkLevel
 .checkTradeEvo
-	ld a, [W_ISLINKBATTLE]
-	cp $32 ; in a trade?
-	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
+	ld a, [wLinkState]
+	cp LINK_STATE_TRADING
+	jp nz, .nextEvoEntry1 ; if not trading, go to the next evolution entry
 	ld a, [hli] ; level requirement
 	ld b, a
 	ld a, [wcfb9]
@@ -246,8 +246,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	pop hl
 	pop af
 	ld [hTilesetType], a
-	ld a, [W_ISLINKBATTLE]
-	cp $32
+	ld a, [wLinkState]
+	cp LINK_STATE_TRADING
 	ret z
 	ld a, [W_ISINBATTLE]
 	and a
@@ -312,9 +312,9 @@ IsEvolvingText: ; 3af4d (e:6f4d)
 	db "@"
 
 Evolution_ReloadTilesetTilePatterns: ; 3af52 (e:6f52)
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
-	cp $32 ; in a trade?
-	ret z ; if so, return
+	ld a, [wLinkState]
+	cp LINK_STATE_TRADING
+	ret z
 	jp ReloadTilesetTilePatterns
 
 LearnMoveFromLevelUp: ; 3af5b (e:6f5b)

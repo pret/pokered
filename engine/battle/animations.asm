@@ -528,9 +528,9 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld [wcc79], a
 	ld b, $e4
 	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
-	cp ANIM_AA
+	cp TRADE_BALL_DROP_ANIM
 	jr c, .asm_78e3f
-	cp ANIM_AD + 1
+	cp TRADE_BALL_POOF_ANIM + 1
 	jr nc, .asm_78e3f
 	ld b, $f0
 .asm_78e3f
@@ -700,13 +700,13 @@ AnimationIdSpecialEffects: ; 78ef5 (1e:4ef5)
 	db ROCK_SLIDE
 	dw DoRockSlideSpecialEffects
 
-	db ANIM_AA
+	db TRADE_BALL_DROP_ANIM
 	dw Func_79041
 
-	db ANIM_AB
+	db TRADE_BALL_SHAKE_ANIM
 	dw Func_7904c
 
-	db ANIM_AC
+	db TRADE_BALL_TILT_ANIM
 	dw Func_7907c
 
 	db TOSS_ANIM
@@ -960,9 +960,9 @@ Func_7907c ; 507C
 	ld c,5
 	call DelayFrames
 	pop bc
-	ld a,[$ffae] ; background scroll X
+	ld a,[hSCX] ; background scroll X
 	sub a,8 ; scroll to the left
-	ld [$ffae],a
+	ld [hSCX],a
 	pop de
 	jr .loop
 
@@ -1307,9 +1307,9 @@ AnimationSlideMonUp: ; 7927a (1e:527a)
 AnimationSlideMonDown: ; 79297 (1e:5297)
 ; Slides the mon's sprite down out of the screen.
 	xor a
-	call Func_79842
+	call GetTileIDList
 .asm_7929b
-	call Func_79820
+	call GetMonSpriteTileMapPointerFromRowCount
 	push bc
 	push de
 	call Func_79aae
@@ -1498,8 +1498,8 @@ AnimationFlashEnemyMonPic: ; 79398 (1e:5398)
 
 AnimationShowMonPic: ; 7939e (1e:539e)
 	xor a
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	jp Delay3
 
@@ -1533,7 +1533,7 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	push af
 	push hl
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	call Delay3
@@ -1541,7 +1541,7 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	ld bc, $0709
 	call ClearScreenArea
 	pop af
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	call Delay3
@@ -1568,7 +1568,7 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 .asm_79407
 	xor a
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	ld c, $3
@@ -1863,8 +1863,8 @@ AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 	call AnimationHideMonPic
 	pop af
 	push af
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	ld c, $8
 	call DelayFrames
@@ -2133,8 +2133,8 @@ Func_79793: ; 79793 (1e:5793)
 	call GetMonHeader
 	predef LoadMonBackPic
 	xor a
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	pop af
 	ld [wBattleMonSpecies2], a
@@ -2194,37 +2194,46 @@ Func_7980c: ; 7980c (1e:580c)
 	pop hl
 	ret
 
-Func_79820: ; 79820 (1e:5820)
+; puts the tile map destination address of a mon sprite in hl, given the row count in b
+; The usual row count is 7, but it may be smaller when sliding a mon sprite in/out,
+; in order to show only a portion of the mon sprite.
+GetMonSpriteTileMapPointerFromRowCount: ; 79820 (1e:5820)
 	push de
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	jr nz, .asm_7982a
-	ld a, $65
-	jr .asm_7982c
-.asm_7982a
-	ld a, $c
-.asm_7982c
+	jr nz, .enemyTurn
+	ld a, 20 * 5 + 1
+	jr .next
+.enemyTurn
+	ld a, 12
+.next
 	ld hl, wTileMap
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
-	ld a, $7
+	ld a, 7
 	sub b
 	and a
-	jr z, .asm_79840
-	ld de, $14
-.asm_7983c
+	jr z, .done
+	ld de, 20
+.loop
 	add hl, de
 	dec a
-	jr nz, .asm_7983c
-.asm_79840
+	jr nz, .loop
+.done
 	pop de
 	ret
 
-Func_79842: ; 79842 (1e:5842)
-	ld hl, PointerTable_79aea ; $5aea
+; Input:
+; a = tile ID list index
+; Output:
+; de = tile ID list pointer
+; b = number of rows
+; c = number of columns
+GetTileIDList: ; 79842 (1e:5842)
+	ld hl, TileIDListPointerTable
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	add hl, de
 	add hl, de
@@ -2486,13 +2495,14 @@ MoveSoundTable: ; 798bc (1e:58bc)
 	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$80
 
 Func_79aae: ; 79aae (1e:5aae)
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, $31
+	ld a, $31 ; base tile ID of player mon sprite
 	jr z, .asm_79ab6
-	xor a
+; enemy turn
+	xor a ; base tile ID of enemy mon sprite
 .asm_79ab6
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [hBaseTileID], a
 	jr asm_79acb
 
 Func_79aba: ; 79aba (1e:5aba)
@@ -2506,34 +2516,36 @@ Func_79aba: ; 79aba (1e:5aba)
 	ld de, Unknown_79b1b ; $5b1b
 asm_79acb: ; 79acb (1e:5acb)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 
-Func_79ace: ; 79ace (1e:5ace)
+; b = number of rows
+; c = number of columns
+CopyTileIDs: ; 79ace (1e:5ace)
 	push hl
-.asm_79acf
+.rowLoop
 	push bc
 	push hl
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+	ld a, [hBaseTileID]
 	ld b, a
-.asm_79ad4
+.columnLoop
 	ld a, [de]
 	add b
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .asm_79ad4
+	jr nz, .columnLoop
 	pop hl
-	ld bc, $14
+	ld bc, 20
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_79acf
+	jr nz, .rowLoop
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	pop hl
 	ret
 
-PointerTable_79aea: ; 79aea (1e:5aea)
+TileIDListPointerTable: ; 79aea (1e:5aea)
 	dw Unknown_79b24
 	db $77
 	dw Unknown_79b55
@@ -2552,34 +2564,79 @@ PointerTable_79aea: ; 79aea (1e:5aea)
 	db $3C
 
 Unknown_79b02: ; 79b02 (1e:5b02)
-	db $31,$38,$46,$54,$5B,$32,$39,$47,$55,$5C,$34,$3B,$49,$57,$5E,$36,$3D,$4B,$59,$60,$37,$3E,$4C,$5A,$61
+	db $31,$38,$46,$54,$5B
+	db $32,$39,$47,$55,$5C
+	db $34,$3B,$49,$57,$5E
+	db $36,$3D,$4B,$59,$60
+	db $37,$3E,$4C,$5A,$61
 
 Unknown_79b1b: ; 79b1b (1e:5b1b)
-	db $31,$46,$5B,$34,$49,$5E,$37,$4C,$61
+	db $31,$46,$5B
+	db $34,$49,$5E
+	db $37,$4C,$61
 
 Unknown_79b24: ; 79b24 (1e:5b24)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$02,$09,$10,$17,$1E,$25,$2C,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F,$06,$0D,$14,$1B,$22,$29,$30
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $01,$08,$0F,$16,$1D,$24,$2B
+	db $02,$09,$10,$17,$1E,$25,$2C
+	db $03,$0A,$11,$18,$1F,$26,$2D
+	db $04,$0B,$12,$19,$20,$27,$2E
+	db $05,$0C,$13,$1A,$21,$28,$2F
+	db $06,$0D,$14,$1B,$22,$29,$30
 
 Unknown_79b55: ; 79b55 (1e:5b55)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $01,$08,$0F,$16,$1D,$24,$2B
+	db $03,$0A,$11,$18,$1F,$26,$2D
+	db $04,$0B,$12,$19,$20,$27,$2E
+	db $05,$0C,$13,$1A,$21,$28,$2F
 
 Unknown_79b78: ; 79b78 (1e:5b78)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$02,$09,$10,$17,$1E,$25,$2C,$04,$0B,$12,$19,$20,$27,$2E
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $02,$09,$10,$17,$1E,$25,$2C
+	db $04,$0B,$12,$19,$20,$27,$2E
 
 Unknown_79b8d: ; 79b8d (1e:5b8d)
-	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$19,$00,$02,$06,$0B,$10,$14,$1A,$00,$00,$07,$0C,$11,$15,$1B,$00,$03,$08,$0D,$12,$16,$1C,$00,$04,$09,$0E,$13,$17,$1D,$1F,$05,$0A,$0F,$01,$18,$1E,$20
+	db $00,$00,$00,$00,$00,$00,$00
+	db $00,$00,$00,$00,$00,$19,$00
+	db $02,$06,$0B,$10,$14,$1A,$00
+	db $00,$07,$0C,$11,$15,$1B,$00
+	db $03,$08,$0D,$12,$16,$1C,$00
+	db $04,$09,$0E,$13,$17,$1D,$1F
+	db $05,$0A,$0F,$01,$18,$1E,$20
 
 Unknown_79bbe: ; 79bbe (1e:5bbe)
-	db $00,$00,$00,$30,$00,$37,$00,$00,$00,$2B,$31,$34,$38,$3D,$21,$26,$2C,$01,$35,$39,$3E,$22,$27,$2D,$32,$36,$01,$00,$23,$28,$2E,$33,$01,$3A,$00,$24,$29,$2F,$01,$01,$3B,$00,$25,$2A,$01,$01,$01,$3C,$00
+	db $00,$00,$00,$30,$00,$37,$00
+	db $00,$00,$2B,$31,$34,$38,$3D
+	db $21,$26,$2C,$01,$35,$39,$3E
+	db $22,$27,$2D,$32,$36,$01,$00
+	db $23,$28,$2E,$33,$01,$3A,$00
+	db $24,$29,$2F,$01,$01,$3B,$00
+	db $25,$2A,$01,$01,$01,$3C,$00
 
 Unknown_79bef: ; 79bef (1e:5bef)
-	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$47,$4D,$00,$00,$00,$00,$00,$48,$4E,$52,$56,$5B,$3F,$43,$49,$4F,$53,$57,$5C,$40,$44,$4A,$50,$54,$58,$00,$41,$45,$4B,$51,$4C,$59,$5D,$42,$46,$4C,$4C,$55,$5A,$5E
+	db $00,$00,$00,$00,$00,$00,$00
+	db $00,$00,$47,$4D,$00,$00,$00
+	db $00,$00,$48,$4E,$52,$56,$5B
+	db $3F,$43,$49,$4F,$53,$57,$5C
+	db $40,$44,$4A,$50,$54,$58,$00
+	db $41,$45,$4B,$51,$4C,$59,$5D
+	db $42,$46,$4C,$4C,$55,$5A,$5E
 
 Unknown_79c20: ; 79c20 (1e:5c20)
-	db $31,$32,$32,$32,$32,$33,$34,$35,$36,$36,$37,$38,$34,$39,$3A,$3A,$3B,$38,$3C,$3D,$3E,$3E,$3F,$40,$41,$42,$43,$43,$44,$45,$46,$47,$43,$48,$49,$4A,$41,$43,$4B,$4C,$4D,$4E,$4F,$50,$50,$50,$51,$52
+	db $31,$32,$32,$32,$32,$33
+	db $34,$35,$36,$36,$37,$38
+	db $34,$39,$3A,$3A,$3B,$38
+	db $3C,$3D,$3E,$3E,$3F,$40
+	db $41,$42,$43,$43,$44,$45
+	db $46,$47,$43,$48,$49,$4A
+	db $41,$43,$4B,$4C,$4D,$4E
+	db $4F,$50,$50,$50,$51,$52
 
 Unknown_79c50: ; 79c50 (1e:5c50)
-	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
+	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53
+	db $43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54
+	db $43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
 
 AnimationLeavesFalling: ; 79c74 (1e:5c74)
 ; Makes leaves float down from the top of the screen. This is used
@@ -2743,7 +2800,7 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld bc, 7 * 7
 	call CopyVideoData
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld hl, vBGMap0
 	call Func_79e0d
 	ld a, $90
@@ -2776,34 +2833,36 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld hl, vBGMap1
 	jp Func_79e0d
 
-Func_79dda: ; 79dda (1e:5dda)
+; b = tile ID list index
+; c = base tile ID
+CopyTileIDsFromList: ; 79dda (1e:5dda)
 	call GetPredefRegisters
 	ld a, c
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [hBaseTileID], a
 	ld a, b
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
-	jp Func_79ace
+	jp CopyTileIDs
 
 Func_79de9: ; 79de9 (1e:5de9)
-	ld a, [$ffae]
+	ld a, [hSCX]
 	ld [wTrainerSpriteOffset], a
 .asm_79dee
 	ld a, [wTrainerSpriteOffset]
 	add d
-	ld [$ffae], a
+	ld [hSCX], a
 	ld c, $2
 	call DelayFrames
 	ld a, [wTrainerSpriteOffset]
 	sub d
-	ld [$ffae], a
+	ld [hSCX], a
 	ld c, $2
 	call DelayFrames
 	dec e
 	jr nz, .asm_79dee
 	ld a, [wTrainerSpriteOffset]
-	ld [$ffae], a
+	ld [hSCX], a
 	ret
 
 Func_79e0d: ; 79e0d (1e:5e0d)

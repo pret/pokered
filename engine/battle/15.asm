@@ -1,6 +1,6 @@
 GainExperience: ; 5524f (15:524f)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
 	call DivideExpDataByNumMonsGainingExp
 	ld hl, wPartyMon1
@@ -226,8 +226,8 @@ GainExperience: ; 5524f (15:524f)
 	ld a, [W_PLAYERBATTSTATUS3]
 	bit 3, a ; is the mon transformed?
 	jr nz, .recalcStatChanges
-; the mon is transformed, so copy transformed data
-	ld de, wcd0f
+; the mon is not transformed, so update the unmodified stats
+	ld de, wPlayerMonUnmodifiedLevel
 	ld bc, $b
 	call CopyData
 .recalcStatChanges

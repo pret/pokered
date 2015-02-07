@@ -382,7 +382,7 @@ GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 	ld c, a
 	dec a
 	srl a
-	ld hl, MonPartyData ; $590d
+	ld hl, MonPartyData
 	ld e, a
 	ld d, $0
 	add hl, de

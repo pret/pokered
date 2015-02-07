@@ -99,7 +99,7 @@ SpecialEffectsCont: ; 3c049 (f:4049)
 SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	call LoadPlayerBackPic
 	ld a, $1 ; the usual text box at the bottom of the screen
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlCoord 1, 5
 	ld bc, $307
@@ -240,7 +240,7 @@ StartBattle: ; 3c11e (f:411e)
 	jr .findFirstAliveEnemyMonLoop
 .foundFirstAliveEnemyMon
 	ld a, d
-	ld [wcc3e], a
+	ld [wSerialExchangeNybbleReceiveData], a
 	ld a, [W_ISINBATTLE]
 	dec a ; is it a trainer battle?
 	call nz, EnemySendOutFirstMon ; if it is a trainer battle, send out enemy mon
@@ -345,8 +345,8 @@ StartBattle: ; 3c11e (f:411e)
 ; wild mon or link battle enemy ran from battle
 EnemyRan: ; 3c202 (f:4202)
 	call LoadScreenTilesFromBuffer1
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ld hl, WildRanText
 	jr nz, .printText
 ; link battle
@@ -431,11 +431,11 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jr nz, MainInBattleLoop ; if the player didn't select a move, jump
 .selectEnemyMove
 	call SelectEnemyMove
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .noLinkBattle
 ; link battle
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	cp $f
 	jp z, EnemyRan
 	cp $e
@@ -838,7 +838,7 @@ FaintEnemyPokemon ; 0x3c567
 	ld hl, W_PLAYERBATTSTATUS1
 	res AttackingMultipleTimes, [hl]
 	xor a
-	ld [W_NUMHITS], a
+	ld [wPlayerNumHits], a
 	ld hl, wd065 ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -976,12 +976,12 @@ ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	ld e, $30
 	call GetBattleHealthBarColor
 	callab DrawEnemyPokeballs
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 ; link battle
 	call LinkBattleExchangeData
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	cp $f
 	ret z
 	call LoadScreenTilesFromBuffer1
@@ -1009,14 +1009,14 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 .notrival
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ld a, b
 	call nz, PlayBattleVictoryMusic
 	ld hl, TrainerDefeatedText
 	call PrintText
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ret z
 	call ScrollTrainerPicAfterBattle
 	ld c, $28
@@ -1096,7 +1096,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wd083], a
 	call WaitForSoundToFinish
 .skipWaitForSound
-	ld hl, wcd05
+	ld hl, wEnemyNumHits
 	ld [hli], a
 	ld [hl], a
 	ld [wBattleMonStatus], a
@@ -1136,7 +1136,7 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 	hlCoord 13, 9
 	ld bc, $a0e
 	ld a, $14 ; yes/no text box
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wd12e]
 	cp $2 ; did the player choose NO?
@@ -1169,8 +1169,8 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 .monChosen
 	call HasMonFainted
 	jr z, .goBackToPartyMenu ; if mon fainted, you have to choose another
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 	inc a
 	ld [wcd6a], a
@@ -1204,8 +1204,8 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 ; called when player is out of usable mons.
 ; prints approriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut: ; 3c837 (f:4837)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .notSony1Battle
 	ld a, [W_CUROPPONENT]
 	cp $c8 + SONY1
@@ -1225,8 +1225,8 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld b, $0
 	call GoPAL_SET
 	ld hl, PlayerBlackedOutText2
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .noLinkBattle
 	ld hl, LinkBattleLostText
 .noLinkBattle
@@ -1385,10 +1385,10 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call SlideTrainerPicOffScreen
 	call PrintEmptyString
 	call SaveScreenTilesToBuffer1
-	ld a,[W_ISLINKBATTLE]
-	cp 4
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz,.next
-	ld a,[wcc3e]
+	ld a,[wSerialExchangeNybbleReceiveData]
 	sub 4
 	ld [wWhichPokemon],a
 	jr .next3
@@ -1442,8 +1442,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[wPartyCount]
 	dec a
 	jr z,.next4
-	ld a,[W_ISLINKBATTLE]
-	cp 4
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z,.next4
 	ld a,[W_OPTIONS]
 	bit 6,a
@@ -1453,7 +1453,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	hlCoord 0, 7
 	ld bc,$0801
 	ld a,$14
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld a,[wCurrentMenuItem]
 	and a
@@ -1572,8 +1572,8 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld a, [W_BATTLETYPE]
 	cp $2
 	jp z, .canEscape ; jump if it's a safari battle
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jp z, .canEscape
 	ld a, [W_ISINBATTLE]
 	dec a
@@ -1654,8 +1654,8 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	and a ; reset carry
 	ret
 .canEscape
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ld a, $2
 	jr nz, .playSound
 ; link battle
@@ -1666,7 +1666,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld [wPlayerMoveListIndex], a
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	cp $f
 	ld a, $2
 	jr z, .playSound
@@ -2082,7 +2082,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jr nz, .menuselected
 	ld a, $1b ; regular menu id
 .menuselected
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [W_BATTLETYPE]
 	dec a
@@ -2234,8 +2234,8 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jp nz, PartyMenuOrRockOrRun
 
 ; either the bag (normal battle) or bait (safari battle) was selected
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 
 ; can't use items in link battles
@@ -2401,7 +2401,7 @@ PartyMenuOrRockOrRun:
 	jr .checkIfPartyMonWasSelected
 .partyMonWasSelected
 	ld a, $c ; switch/stats/cancel menu
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wTopMenuItemY
 	ld a, $c
@@ -2620,8 +2620,8 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	dec a
 	ld b, $c3
 	jr z, .matchedkeyspicked
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
 	ld a, [W_FLAGS_D733]
 	bit 0, a
@@ -2974,14 +2974,14 @@ TypeText: ; 3d55f (f:555f)
 	db "TYPE@"
 
 SelectEnemyMove: ; 3d564 (f:5564)
-	ld a, [W_ISLINKBATTLE]
+	ld a, [wLinkState]
 	sub $4
 	jr nz, .noLinkBattle
 ; link battle
 	call SaveScreenTilesToBuffer1
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	cp $e
 	jp z, .asm_3d601
 	cp $d
@@ -3068,7 +3068,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 ; this appears to exchange data with the other gameboy during link battles
 LinkBattleExchangeData: ; 3d605 (f:5605)
 	ld a, $ff
-	ld [wcc3e], a
+	ld [wSerialExchangeNybbleReceiveData], a
 	ld a, [wPlayerMoveListIndex]
 	cp $f ; is the player running from battle?
 	jr z, .asm_3d630
@@ -3091,24 +3091,24 @@ LinkBattleExchangeData: ; 3d605 (f:5605)
 .asm_3d62f
 	ld a, b
 .asm_3d630
-	ld [wcc42], a
+	ld [wSerialExchangeNybbleSendData], a
 	callab PrintWaitingText
 .asm_3d63b
-	call Func_22c3
+	call Serial_ExchangeNybble
 	call DelayFrame
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
 	jr z, .asm_3d63b
 	ld b, $a
 .asm_3d649
 	call DelayFrame
-	call Func_22c3
+	call Serial_ExchangeNybble
 	dec b
 	jr nz, .asm_3d649
 	ld b, $a
 .asm_3d654
 	call DelayFrame
-	call Func_22ed
+	call Serial_SendZeroByte
 	dec b
 	jr nz, .asm_3d654
 	ret
@@ -3296,7 +3296,7 @@ MirrorMoveCheck
 	ld hl,MultiHitText
 	call PrintText
 	xor a
-	ld [W_NUMHITS],a
+	ld [wPlayerNumHits],a
 .executeOtherEffects
 	ld a,[W_PLAYERMOVEEFFECT]
 	and a
@@ -3529,7 +3529,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[hli]
 	ld b,a
 	ld c,[hl]
-	ld hl,wd075
+	ld hl,wPlayerBideAccumulatedDamage + 1
 	ld a,[hl]
 	add c ; acumulate damage taken
 	ld [hld],a
@@ -3548,7 +3548,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	call PrintText
 	ld a,1
 	ld [W_PLAYERMOVEPOWER],a
-	ld hl,wd075
+	ld hl,wPlayerBideAccumulatedDamage + 1
 	ld a,[hld]
 	add a
 	ld b,a
@@ -3998,8 +3998,8 @@ OHKOText: ; 3dc83 (f:5c83)
 CheckForDisobedience: ; 3dc88 (f:5c88)
 	xor a
 	ld [wcced], a
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .checkIfMonIsTraded
 	ld a, $1
 	and a
@@ -4424,8 +4424,8 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 GetEnemyMonStat: ; 3df1c (f:5f1c)
 	push de
 	push bc
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 	ld hl, wEnemyMon1Stats
 	dec c
@@ -5627,11 +5627,11 @@ ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	jp z, ExecuteEnemyMoveDone
 	call PrintGhostText
 	jp z, ExecuteEnemyMoveDone
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .executeEnemyMove
 	ld b, $1
-	ld a, [wcc3e]
+	ld a, [wSerialExchangeNybbleReceiveData]
 	cp $e
 	jr z, .executeEnemyMove
 	cp $4
@@ -5819,7 +5819,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	ld hl, HitXTimesText
 	call PrintText
 	xor a
-	ld [wcd05], a
+	ld [wEnemyNumHits], a
 .asm_3e873
 	ld a, [W_ENEMYMOVEEFFECT]
 	and a
@@ -6028,7 +6028,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld hl, wcd06
+	ld hl, wEnemyBideAccumulatedDamage + 1
 	ld a, [hl]
 	add c
 	ld [hld], a
@@ -6047,7 +6047,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	call PrintText
 	ld a, $1
 	ld [W_ENEMYMOVEPOWER], a
-	ld hl, wcd06
+	ld hl, wEnemyBideAccumulatedDamage + 1
 	ld a, [hld]
 	add a
 	ld b, a
@@ -6152,8 +6152,8 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	jp CopyStringToCF4B
 
 LoadEnemyMonData: ; 3eb01 (f:6b01)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jp z, LoadEnemyMonFromParty
 	ld a, [wEnemyMonSpecies2]
 	ld [wEnemyMonSpecies], a
@@ -6312,8 +6312,8 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 
 ; calls BattleTransition to show the battle transition animation and initializes some battle variables
 DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .next
 ; link battle
 	xor a
@@ -6616,8 +6616,8 @@ CalculateModifiedStat: ; 3eda5 (f:6da5)
 	ret
 
 ApplyBadgeStatBoosts: ; 3ee19 (f:6e19)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
 	ld a, [W_OBTAINEDBADGES]
 	ld b, a
@@ -6706,19 +6706,19 @@ PrintEmptyString: ; 3ee94 (f:6e94)
 BattleRandom:
 ; Link battles use a shared PRNG.
 
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jp nz, Random
 
 	push hl
 	push bc
-	ld a, [wLinkBattleRNCount]
+	ld a, [wLinkBattleRandomNumberListIndex]
 	ld c, a
 	ld b, 0
-	ld hl, wd148
+	ld hl, wLinkBattleRandomNumberList
 	add hl, bc
 	inc a
-	ld [wLinkBattleRNCount], a
+	ld [wLinkBattleRandomNumberListIndex], a
 	cp 9
 	ld a, [hl]
 	pop bc
@@ -6732,8 +6732,9 @@ BattleRandom:
 	
 ; point to seed 0 so we pick the first number the next time	
 	xor a
-	ld [wLinkBattleRNCount], a 
-	ld hl, wd148
+	ld [wLinkBattleRandomNumberListIndex], a
+
+	ld hl, wLinkBattleRandomNumberList
 	ld b, 9
 .loop
 	ld a, [hl]
@@ -6939,7 +6940,7 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	ld e, a
 	ld a, [wd034]
 	ld d, a ; de contains pointer to trainer pic
-	ld a, [W_ISLINKBATTLE]
+	ld a, [wLinkState]
 	and a
 	ld a, Bank(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
 	jr z, .loadSprite
@@ -7698,8 +7699,8 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	ld hl, wPlayerMonStatMods
 	ld de, W_ENEMYMOVEEFFECT
 	ld bc, W_PLAYERBATTSTATUS1
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .statModifierDownEffect
 	call BattleRandom
 	cp $40 ; 1/4 chance to miss by in regular battle
@@ -7934,13 +7935,13 @@ StatModifierRatios: ; 3f6cb (f:76cb)
 
 BideEffect: ; 3f6e5 (f:76e5)
 	ld hl, W_PLAYERBATTSTATUS1
-	ld de, W_NUMHITS
+	ld de, wPlayerBideAccumulatedDamage
 	ld bc, wPlayerNumAttacksLeft
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .bideEffect
 	ld hl, W_ENEMYBATTSTATUS1
-	ld de, wcd05
+	ld de, wEnemyBideAccumulatedDamage
 	ld bc, wEnemyNumAttacksLeft
 .bideEffect
 	set StoringEnergy, [hl] ; mon is now using bide
@@ -8096,13 +8097,13 @@ WasBlownAwayText: ; 3f80c (f:780c)
 TwoToFiveAttacksEffect: ; 3f811 (f:7811)
 	ld hl, W_PLAYERBATTSTATUS1
 	ld de, wPlayerNumAttacksLeft
-	ld bc, W_NUMHITS
+	ld bc, wPlayerNumHits
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .twoToFiveAttacksEffect
 	ld hl, W_ENEMYBATTSTATUS1
 	ld de, wEnemyNumAttacksLeft
-	ld bc, wcd05
+	ld bc, wEnemyNumHits
 .twoToFiveAttacksEffect
 	bit AttackingMultipleTimes, [hl] ; is mon attacking multiple times?
 	ret nz
@@ -8394,8 +8395,8 @@ MimicEffect: ; 3f9ed (f:79ed)
 	ld hl, wBattleMonMoves
 	ld a, [W_PLAYERBATTSTATUS1]
 	jr nz, .asm_3fa13
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .asm_3fa3a
 	ld hl, wEnemyMonMoves
 	ld a, [W_ENEMYBATTSTATUS1]
@@ -8500,8 +8501,8 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	and a
 	ld hl, wBattleMonPP
 	jr nz, .asm_3facf
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	pop hl
 	jr nz, .asm_3fae1
 	push hl
@@ -8629,7 +8630,7 @@ ParalyzedMayNotAttackText: ; 3fb74 (f:7b74)
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
 	ld hl, W_ENEMYBATTSTATUS2
-	ld a, [$fff3]   
+	ld a, [H_WHOSETURN]   
 	and a
 	jr z, .next1
 	ld hl, W_PLAYERBATTSTATUS2

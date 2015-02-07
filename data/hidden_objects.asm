@@ -177,19 +177,19 @@ HiddenObjectPointers: ; 46a96 (11:6a96)
 ; format: y-coord, x-coord, text id/item id, object routine
 BattleCenterHiddenObjects: ; 46b40 (11:6b40)
 	db $04,$05,$d0
-	db BANK(PrintJustAMomentText2)
-	dw PrintJustAMomentText2
+	db BANK(CableClubRightGameboy)
+	dw CableClubRightGameboy
 	db $04,$04,$d0
-	db BANK(PrintJustAMomentText1)
-	dw PrintJustAMomentText1
+	db BANK(CableClubLeftGameboy)
+	dw CableClubLeftGameboy
 	db $FF
 TradeCenterHiddenObjects: ; 46b4d (11:6b4d)
 	db $04,$05,$d0
-	db BANK(PrintJustAMomentText2)
-	dw PrintJustAMomentText2
+	db BANK(CableClubRightGameboy)
+	dw CableClubRightGameboy
 	db $04,$04,$d0
-	db BANK(PrintJustAMomentText1)
-	dw PrintJustAMomentText1
+	db BANK(CableClubLeftGameboy)
+	dw CableClubLeftGameboy
 	db $FF
 RedsHouse2FHiddenObjects: ; 46b5a (11:6b5a)
 	db $01,$00,$04

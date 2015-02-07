@@ -1,5 +1,5 @@
 CeruleanPokecenterScript: ; 5c645 (17:4645)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 CeruleanPokecenterTextPointers: ; 5c64b (17:464b)

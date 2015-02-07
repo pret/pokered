@@ -1,5 +1,5 @@
 RockTunnelPokecenterScript: ; 493ba (12:53ba)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 RockTunnelPokecenterTextPointers: ; 493c0 (12:53c0)

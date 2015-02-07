@@ -1,6 +1,6 @@
 EndOfBattle: ; 137aa (4:77aa)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 ; link battle
 	ld a, [wEnemyMonPartyPos]
@@ -110,7 +110,7 @@ Func_13870: ; 13870 (4:7870)
 	jr z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
 .asm_1389e
-; determine if wild pok√©mon can appear in the half-block we‚Äôre standing	
+; determine if wild pokÈmon can appear in the half-block weíre standing	
 ; is the bottom right tile (9,9) of the half-block are we standing a grass/water tile?
 	hlCoord 9, 9
 	ld c, [hl]
@@ -122,9 +122,9 @@ Func_13870: ; 13870 (4:7870)
 	cp c
 	ld a, [W_WATERRATE]
 	jr z, .CanEncounter
-; even if not in grass/water, standing anywhere we can encounter pok√©mon
-; so long as the map is ‚Äúindoor‚Äù and has wild pok√©mon defined.
-; ‚Ä¶as long as it‚Äôs not Viridian Forest or Safari Zone.
+; even if not in grass/water, standing anywhere we can encounter pokÈmon
+; so long as the map is ìindoorî and has wild pokÈmon defined.
+; Öas long as itís not Viridian Forest or Safari Zone.
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F ; is this an indoor map?
 	jr c, .CantEncounter
@@ -148,7 +148,7 @@ Func_13870: ; 13870 (4:7870)
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
-; determine which wild pok√©mon (grass or water) can appear in the half-block we‚Äôre standing
+; determine which wild pokÈmon (grass or water) can appear in the half-block weíre standing
 	ld c, [hl]
 	ld hl, W_GRASSMONS
 	aCoord 8, 9	
@@ -314,7 +314,7 @@ HazeEffect_: ; 139da (4:79da)
 	call Func_13a43
 	ld hl, wEnemyMonAttackMod
 	call Func_13a43
-	ld hl, wcd12
+	ld hl, wPlayerMonUnmodifiedAttack
 	ld de, wBattleMonAttack
 	call Func_13a4a
 	ld hl, wEnemyMonUnmodifiedAttack
@@ -386,8 +386,8 @@ StatusChangesEliminatedText: ; 13a53 (4:7a53)
 	db "@"
 
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE 
-	ld a, [W_ISLINKBATTLE] 
+	ld hl, W_GRASSRATE
+	ld a, [wLinkState]
 	and a
 	jr nz, .rival
 	ld hl, W_RIVALNAME ; wd34a

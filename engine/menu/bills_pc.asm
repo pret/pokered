@@ -508,48 +508,48 @@ MonWasReleasedText: ; 0x21820
 	TX_FAR _MonWasReleasedText
 	db "@"
 
-PrintJustAMomentText1:: ; 5824 (8:5825)
-	ld a, [$ffaa]
-	cp $1
+CableClubLeftGameboy:: ; 5824 (8:5825)
+	ld a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
 	ret z
-	ld a, [wSpriteStateData1 + 9]
-	cp $c
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_RIGHT
 	ret nz
 	ld a, [W_CURMAP]
 	cp BATTLE_CENTER
-	ld a, $2
+	ld a, LINK_STATE_START_TRADE
 	jr z, .asm_2183a
-	inc a
+	inc a ; LINK_STATE_START_BATTLE
 .asm_2183a
-	ld [W_ISLINKBATTLE], a
+	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
-	ld a, $22
+	ld a, $22 ; JustAMomentText
 	jp PrintPredefTextID
 
-PrintJustAMomentText2:: ; 5845 (8:5845)
-	ld a, [$ffaa]
-	cp $2
+CableClubRightGameboy:: ; 5845 (8:5845)
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	ret z
-	ld a, [wSpriteStateData1 + 9]
-	cp $8
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_LEFT
 	ret nz
 	ld a, [W_CURMAP]
 	cp BATTLE_CENTER
-	ld a, $2
+	ld a, LINK_STATE_START_TRADE
 	jr z, .asm_2185a
-	inc a
+	inc a ; LINK_STATE_START_BATTLE
 .asm_2185a
-	ld [W_ISLINKBATTLE], a
+	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
-	ld a, $22
+	ld a, $22 ; JustAMomentText
 	jp PrintPredefTextID
 
 JustAMomentText:: ; 21865 (8:5865)
 	TX_FAR _JustAMomentText
 	db "@"
 
-	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $23

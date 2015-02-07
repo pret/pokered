@@ -79,7 +79,7 @@ AbandonLearning: ; 6eda (1:6eda)
 	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a
@@ -102,7 +102,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	pop hl
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem

@@ -175,10 +175,10 @@ NUM_ATTACKS EQU const_value + -1
 	const STATUS_AFFECTED_ANIM
 	const ANIM_A8
 	const ANIM_A9
-	const ANIM_AA
-	const ANIM_AB
-	const ANIM_AC
-	const ANIM_AD
+	const TRADE_BALL_DROP_ANIM
+	const TRADE_BALL_SHAKE_ANIM
+	const TRADE_BALL_TILT_ANIM
+	const TRADE_BALL_POOF_ANIM
 	const XSTATITEM_ANIM ; use X Attack/Defense/Speed/Special
 	const ANIM_AF
 	const ANIM_B0

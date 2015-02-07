@@ -700,7 +700,7 @@ Func_39c37: ; 39c37 (e:5c37)
 ReadTrainer: ; 39c53 (e:5c53)
 
 ; don't change any moves in a link battle
-	ld a,[W_ISLINKBATTLE]
+	ld a,[wLinkState]
 	and a
 	ret nz
 
@@ -872,8 +872,8 @@ TrainerAI: ; 3a52e (e:652e)
 	ld a,[W_ISINBATTLE]
 	dec a
 	ret z ; if not a trainer, we're done here
-	ld a,[W_ISLINKBATTLE]
-	cp 4
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
 	ret z
 	ld a,[W_TRAINERCLASS] ; what trainer class is this?
 	dec a
@@ -1230,8 +1230,8 @@ SwitchEnemyMon: ; 3a74b (e:674b)
 	xor a
 	ld [wd11d],a
 
-	ld a,[W_ISLINKBATTLE]
-	cp 4
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
 	ret z
 	scf
 	ret

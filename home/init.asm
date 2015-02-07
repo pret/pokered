@@ -26,7 +26,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [$ff43], a
 	ld [$ff42], a
 	ld [rSB], a
-	ld [$ff02], a
+	ld [rSC], a
 	ld [$ff4b], a
 	ld [$ff4a], a
 	ld [$ff06], a
@@ -67,8 +67,8 @@ rLCDC_DEFAULT EQU %11100011
 	xor a
 	ld [hTilesetType], a
 	ld [$ff41], a
-	ld [$ffae], a
-	ld [$ffaf], a
+	ld [hSCX], a
+	ld [hSCY], a
 	ld [$ff0f], a
 	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
 	ld [rIE], a
@@ -79,8 +79,8 @@ rLCDC_DEFAULT EQU %11100011
 	ld a, 7
 	ld [rWX], a
 
-	ld a, $ff
-	ld [$ffaa], a
+	ld a, CONNECTION_NOT_ESTABLISHED
+	ld [hSerialConnectionStatus], a
 
 	ld h, vBGMap0 / $100
 	call ClearBgMap

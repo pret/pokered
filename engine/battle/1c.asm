@@ -127,8 +127,8 @@ BattleTransition: ; 7096d (1c:496d)
 	call Delay3
 	call LoadBattleTransitionTile
 	ld bc, $0
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .linkBattle
 	call GetBattleTransitionID_WildOrTrainer
 	call GetBattleTransitionID_CompareLevels

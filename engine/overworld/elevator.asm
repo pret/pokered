@@ -6,7 +6,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	call Delay3
 	ld a, $ff
 	call PlaySound
-	ld a, [$ffaf]
+	ld a, [hSCY]
 	ld d, a
 	ld e, $1
 	; number of times to play collision sfx
@@ -16,7 +16,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	xor $fe
 	ld e, a
 	add d
-	ld [$ffaf], a
+	ld [hSCY], a
 	push bc
 	ld c, BANK(SFX_02_5b)
 	ld a, (SFX_02_5b - SFX_Headers_02) / 3
@@ -27,7 +27,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	dec b
 	jr nz, .asm_7bf30
 	ld a, d
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld a, $ff
 	call PlaySound
 	ld c, BANK(SFX_02_5f)

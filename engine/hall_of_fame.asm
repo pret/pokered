@@ -97,9 +97,9 @@ HallOfFameText: ; 7026b (1c:426b)
 Func_70278: ; 70278 (1c:4278)
 	call ClearScreen
 	ld a, $d0
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld a, $c0
-	ld [$ffae], a
+	ld [hSCX], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wcf91], a
 	ld [wd0b5], a
@@ -132,16 +132,16 @@ Func_70278: ; 70278 (1c:4278)
 .asm_702c7
 	call .asm_702d5
 	xor a
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld c, a
 	call Func_7036d
 	ld d, $0
 	ld e, $fc
 .asm_702d5
 	call DelayFrame
-	ld a, [$ffae]
+	ld a, [hSCX]
 	add e
-	ld [$ffae], a
+	ld [hSCX], a
 	cp d
 	jr nz, .asm_702d5
 	ret
@@ -200,7 +200,7 @@ Func_7033e: ; 7033e (1c:433e)
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0
 	hlCoord 12, 5
-	predef_jump Func_79dda
+	predef_jump CopyTileIDsFromList
 
 Func_70377: ; 70377 (1c:4377)
 	ld hl, wd747

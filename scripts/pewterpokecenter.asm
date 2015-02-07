@@ -1,5 +1,5 @@
 PewterPokecenterScript: ; 5c587 (17:4587)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 PewterPokecenterTextPointers: ; 5c58d (17:458d)

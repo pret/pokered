@@ -10,6 +10,8 @@ hSoftReset EQU $FF8A
 ; presses the reset sequence (A+B+SEL+START).
 ; Soft reset when 0 is reached.
 
+hBaseTileID EQU $FF8B
+
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
@@ -37,6 +39,19 @@ H_PASTLEADINGZEROES EQU $FF95 ; last char printed
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes
 H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
+
+hSerialReceivedNewData EQU $FFA9
+
+; $01 = using external clock
+; $02 = using internal clock
+; $ff = establishing connection
+hSerialConnectionStatus EQU $FFAA
+
+hSerialIgnoringInitialData EQU $FFAB
+
+hSerialSendData EQU $FFAC
+
+hSerialReceiveData EQU $FFAD
 
 ; these values are copied to SCX, SCY, and WY during V-blank
 hSCX EQU $FFAE

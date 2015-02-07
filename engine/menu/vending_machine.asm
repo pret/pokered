@@ -2,7 +2,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
 	ld [wCurrentMenuItem], a ; wCurrentMenuItem
@@ -70,7 +70,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld c, $3
 	predef SubBCDPredef
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	jp DisplayTextBoxID
 .BagFull
 	ld hl, VendingMachineText6

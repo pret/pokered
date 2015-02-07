@@ -175,7 +175,7 @@ SaveSAVConfirm: ; 73768 (1c:7768)
 	hlCoord 0, 7
 	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
 	ld a,$14        ;one line shifting ($28 = 2 lines)
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID      ;handle Yes/No KeyPress
 	ld a,[wCurrentMenuItem]
 	ret

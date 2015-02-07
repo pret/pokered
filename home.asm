@@ -1326,7 +1326,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld c,3 ; length of money in bytes
 	predef AddBCDPredef ; add total price to money
 	ld a,$13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
@@ -1399,7 +1399,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld a,[hl]
 	ld [wd12a],a ; [wd12a] = number of list entries
 	ld a,$0d ; list menu text box ID
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
@@ -2136,7 +2136,7 @@ IsKeyItem:: ; 30d9 (0:30d9)
 
 ; function to draw various text boxes
 ; INPUT:
-; [wd125] = text box ID
+; [wTextBoxID] = text box ID
 DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -2898,7 +2898,7 @@ GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 
 GetTrainerInformation:: ; 3566 (0:3566)
 	call GetTrainerName
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld a, [wLinkState]
 	and a
 	jr nz, .linkBattle
 	ld a, Bank(TrainerPicAndMoneyPointers)
@@ -2997,34 +2997,34 @@ YesNoChoice:: ; 35ec (0:35ec)
 
 Func_35f4:: ; 35f4 (0:35f4)
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call InitYesNoTextBoxParameters
 	jp DisplayTextBoxID
 
 InitYesNoTextBoxParameters:: ; 35ff (0:35ff)
-	xor a
-	ld [wd12c], a
+	xor a ; YES_NO_MENU
+	ld [wTwoOptionMenuID], a
 	hlCoord 14, 7
 	ld bc, $80f
 	ret
 
 YesNoChoicePokeCenter:: ; 360a (0:360a)
 	call SaveScreenTilesToBuffer1
-	ld a, $6
-	ld [wd12c], a
+	ld a, HEAL_CANCEL_MENU
+	ld [wTwoOptionMenuID], a
 	hlCoord 11, 6
 	ld bc, $80c
 	jr DisplayYesNoChoice
 
 Func_361a:: ; 361a (0:361a)
 	call SaveScreenTilesToBuffer1
-	ld a, $3
-	ld [wd12c], a
+	ld a, WIDE_YES_NO_MENU
+	ld [wTwoOptionMenuID], a
 	hlCoord 12, 7
 	ld bc, $080d
 DisplayYesNoChoice:: ; 3628 (0:3628)
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
 
@@ -3467,7 +3467,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	call HandleDownArrowBlinkTiming
 	pop hl
 	call JoypadLowSensitivity
-	predef Func_5a5f
+	predef CableClub_Run
 	ld a, [hJoy5]
 	and A_BUTTON | B_BUTTON
 	jr z, .loop
@@ -3479,8 +3479,8 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 
 ; (unless in link battle) waits for A or B being pressed and outputs the scrolling sound effect
 ManualTextScroll:: ; 3898 (0:3898)
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
 	ld a, (SFX_02_40 - SFX_Headers_02) / 3
@@ -4194,7 +4194,7 @@ PrintText:: ; 3c49 (0:3c49)
 ; Print text hl at (1, 14).
 	push hl
 	ld a,1
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call UpdateSprites
 	call Delay3

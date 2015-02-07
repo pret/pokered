@@ -148,7 +148,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	TX_FAR SafariZoneEntranceText_9e6e4 ; 0x9e6e4
 	db $8
 	ld a, $13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
@@ -178,7 +178,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld c,3
 	predef SubBCDPredef
 	ld a,$13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,.MakePaymentText
 	call PrintText

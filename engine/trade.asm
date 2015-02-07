@@ -1,29 +1,29 @@
 Func_410e2: ; 410e2 (10:50e2)
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wTradedPlayerMonSpecies]
 	ld [wcd5e], a
-	ld a, [wTrainerEngageDistance]
+	ld a, [wTradedEnemyMonSpecies]
 	ld [wcd5f], a
-	ld de, PointerIDs_41138 ; $5138
+	ld de, PointerIDs_41138
 	jr Func_41102
 
 Func_410f3: ; 410f3 (10:50f3)
-	ld a, [wTrainerEngageDistance]
+	ld a, [wTradedEnemyMonSpecies]
 	ld [wcd5e], a
 	ld a, [wTrainerSpriteOffset]
 	ld [wcd5f], a
 	ld de, PointerIDs_41149
 
 Func_41102: ; 41102 (10:5102)
-	ld a, [W_OPTIONS] ; W_OPTIONS
+	ld a, [W_OPTIONS]
 	push af
-	ld a, [$ffaf]
+	ld a, [hSCY]
 	push af
-	ld a, [$ffae]
+	ld a, [hSCX]
 	push af
 	xor a
-	ld [W_OPTIONS], a ; W_OPTIONS
-	ld [$ffaf], a
-	ld [$ffae], a
+	ld [W_OPTIONS], a
+	ld [hSCY], a
+	ld [hSCX], a
 	push de
 .asm_41115
 	pop de
@@ -32,7 +32,7 @@ Func_41102: ; 41102 (10:5102)
 	jr z, .asm_4112d
 	inc de
 	push de
-	ld hl, PointerTable_4115f ; $515f
+	ld hl, PointerTable_4115f
 	add a
 	ld c, a
 	ld b, $0
@@ -40,16 +40,16 @@ Func_41102: ; 41102 (10:5102)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, .asm_41115 ; $5115
+	ld de, .asm_41115
 	push de
 	jp [hl]
 .asm_4112d
 	pop af
-	ld [$ffae], a
+	ld [hSCX], a
 	pop af
-	ld [$ffaf], a
+	ld [hSCY], a
 	pop af
-	ld [W_OPTIONS], a ; W_OPTIONS
+	ld [W_OPTIONS], a
 	ret
 
 ; these bytes refer to the $00th through $10th pointer of PointerTable_4115f
@@ -61,13 +61,13 @@ PointerIDs_41149: ; 41149 (10:5149)
 
 PointerTable_4115f: ; 4115f (10:515f)
 	dw LoadTradingGFXAndMonNames
-	dw Func_41245
-	dw Func_41298
-	dw Func_412d2
-	dw Func_41336
+	dw Trade_ShowPlayerMon
+	dw Trade_DrawOpenEndOfLinkCable
+	dw Trade_AnimateBallEnteringLinkCable
+	dw Trade_ShowEnemyMon
 	dw Func_41376
 	dw Func_413c6
-	dw Func_41181
+	dw Trade_Delay100
 	dw Func_415c8
 	dw PrintTradeWentToText
 	dw PrintTradeForSendsText
@@ -76,46 +76,46 @@ PointerTable_4115f: ; 4115f (10:515f)
 	dw PrintTradeWillTradeText
 	dw Func_4123b
 	dw Func_415df
-	dw Func_41217
+	dw Trade_SwapNames
 
-Func_41181: ; 41181 (10:5181)
-	ld c, $64
+Trade_Delay100: ; 41181 (10:5181)
+	ld c, 100
 	jp DelayFrames
 
-Func_41186: ; 41186 (10:5186)
+Trade_CopyTileMapToVRAM: ; 41186 (10:5186)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-Delay50: ; 41191 (10:5191)
-	ld c, $50
+Trade_Delay80: ; 41191 (10:5191)
+	ld c, 80
 	jp DelayFrames
 
-Func_41196: ; 41196 (10:5196)
+Trade_ClearTileMap: ; 41196 (10:5196)
 	ld hl, wTileMap
-	ld bc, $168
-	ld a, $7f
+	ld bc, 20 * 18
+	ld a, " "
 	jp FillMemory
 
 LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
-	call Func_41196
+	call Trade_ClearTileMap
 	call DisableLCD
-	ld hl, TradingAnimationGraphics ; $69be
+	ld hl, TradingAnimationGraphics
 	ld de, vChars2 + $310
 	ld bc, $310
 	ld a, BANK(TradingAnimationGraphics)
 	call FarCopyData2
-	ld hl, TradingAnimationGraphics2 ; $6cce
+	ld hl, TradingAnimationGraphics2
 	ld de, vSprites + $7c0
 	ld bc, $40
 	ld a, BANK(TradingAnimationGraphics2)
 	call FarCopyData2
 	ld hl, vBGMap0
 	ld bc, $800
-	ld a, $7f
+	ld a, " "
 	call FillMemory
 	call ClearSprites
 	ld a, $ff
@@ -128,40 +128,40 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	jr z, .asm_411e5
 	ld a, $f0
 .asm_411e5
-	ld [rOBP0], a ; $ff48
+	ld [rOBP0], a
 	call EnableLCD
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld a, [wTradedPlayerMonSpecies]
 	ld [wd11e], a
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wcf4b
 	ld bc, $b
 	call CopyData
-	ld a, [wTrainerEngageDistance]
+	ld a, [wTradedEnemyMonSpecies]
 	ld [wd11e], a
 	jp GetMonName
 
 Func_4120b: ; 4120b (10:520b)
-	ld a, $d0
-	ld [rOBP1], a ; $ff49
+	ld a, %11010000
+	ld [rOBP1], a
 	ld b, BANK(Func_7176c)
 	ld hl, Func_7176c
 	jp Bankswitch
 
-Func_41217: ; 41217 (10:5217)
+Trade_SwapNames: ; 41217 (10:5217)
 	ld hl, wPlayerName
-	ld de, wHPBarMaxHP
-	ld bc, $000b
+	ld de, wBuffer
+	ld bc, 11
 	call CopyData
-	ld hl, W_GRASSRATE
+	ld hl, wLinkEnemyTrainerName
 	ld de, wPlayerName
-	ld bc, $000b
+	ld bc, 11
 	call CopyData
-	ld hl, wHPBarMaxHP
-	ld de, W_GRASSRATE
-	ld bc, $000b
+	ld hl, wBuffer
+	ld de, wLinkEnemyTrainerName
+	ld bc, 11
 	jp CopyData
 
 Func_4123b: ; 4123b (10:523b)
@@ -171,90 +171,90 @@ Func_4123b: ; 4123b (10:523b)
 	res 6, [hl]
 	ret
 
-Func_41245: ; 41245 (10:5245)
-	ld a, $ab
-	ld [rLCDC], a ; $ff40
+Trade_ShowPlayerMon: ; 41245 (10:5245)
+	ld a, %10101011
+	ld [rLCDC], a
 	ld a, $50
 	ld [hWY], a
 	ld a, $86
-	ld [rWX], a ; $ff4b
-	ld [$ffae], a
+	ld [rWX], a
+	ld [hSCX], a
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	hlCoord 4, 0
-	ld b, $6
-	ld c, $a
+	ld b, 6
+	ld c, 10
 	call TextBoxBorder
-	call Func_42769
+	call Trade_PrintPlayerMonInfoText
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call ClearScreen
-	ld a, [wWhichTrade] ; wWhichTrade
-	call Func_415a4
+	ld a, [wTradedPlayerMonSpecies]
+	call Trade_LoadMonSprite
 	ld a, $7e
-.asm_41273
+.slideScreenLoop
 	push af
 	call DelayFrame
 	pop af
-	ld [rWX], a ; $ff4b
-	ld [$ffae], a
+	ld [rWX], a
+	ld [hSCX], a
 	dec a
 	dec a
 	and a
-	jr nz, .asm_41273
-	call Delay50
-	ld a, ANIM_AD
-	call Func_41676
-	ld a, ANIM_AA
-	call Func_41676
-	ld a, [wWhichTrade] ; wWhichTrade
+	jr nz, .slideScreenLoop
+	call Trade_Delay80
+	ld a, TRADE_BALL_POOF_ANIM
+	call Trade_ShowAnimation
+	ld a, TRADE_BALL_DROP_ANIM
+	call Trade_ShowAnimation
+	ld a, [wTradedPlayerMonSpecies]
 	call PlayCry
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-Func_41298: ; 41298 (10:5298)
-	call Func_41196
+Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
+	call Trade_ClearTileMap
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	ld b, $8
 	call GoPAL_SET
 	ld hl, vBGMap1 + $8c
-	call Func_414ae
+	call Trade_RedrawRows4And5
 	ld a, $a0
-	ld [$ffae], a
+	ld [hSCX], a
 	call DelayFrame
-	ld a, $8b
-	ld [rLCDC], a ; $ff40
+	ld a, %10001011
+	ld [rLCDC], a
 	hlCoord 6, 2
-	ld b, $7
-	call Func_41842
-	call Func_41186
+	ld b, $7 ; open end of link cable tile ID list index
+	call CopyTileIDsFromList_ZeroBaseTileID
+	call Trade_CopyTileMapToVRAM
 	ld a, (SFX_02_3d - SFX_Headers_02) / 3
 	call PlaySound
-	ld c, $14
-.asm_412c8
-	ld a, [$ffae]
-	add $4
-	ld [$ffae], a
+	ld c, 20
+.loop
+	ld a, [hSCX]
+	add 4
+	ld [hSCX], a
 	dec c
-	jr nz, .asm_412c8
+	jr nz, .loop
 	ret
 
-Func_412d2: ; 412d2 (10:52d2)
-	ld a, ANIM_AB
-	call Func_41676
+Trade_AnimateBallEnteringLinkCable: ; 412d2 (10:52d2)
+	ld a, TRADE_BALL_SHAKE_ANIM
+	call Trade_ShowAnimation
 	ld c, 10
 	call DelayFrames
-	ld a, $e4
-	ld [rOBP0], a ; $ff48
+	ld a, %11100100
+	ld [rOBP0], a
 	xor a
 	ld [wd09f], a
 	ld bc, $2060
-.asm_412e7
+.moveBallInsideLinkCableLoop
 	push bc
 	xor a
-	ld de, UnknownOAM_4132e ; $532e
+	ld de, Trade_BallInsideLinkCableOAM
 	call WriteOAMBlock
 	ld a, [wd09f]
 	xor $1
@@ -263,58 +263,58 @@ Func_412d2: ; 412d2 (10:52d2)
 	ld hl, wOAMBuffer + $02
 	ld de, $4
 	ld c, e
-.asm_41300
+.cycleSpriteFramesLoop
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_41300
+	jr nz, .cycleSpriteFramesLoop
 	call Delay3
 	pop bc
 	ld a, c
 	add $4
 	ld c, a
 	cp $a0
-	jr nc, .asm_41318
+	jr nc, .ballSpriteReachedEdgeOfScreen
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
-	jr .asm_412e7
-.asm_41318
+	jr .moveBallInsideLinkCableLoop
+.ballSpriteReachedEdgeOfScreen
 	call ClearSprites
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-UnknownOAM_4132e: ; 4132e (10:532e)
+Trade_BallInsideLinkCableOAM: ; 4132e (10:532e)
 	db $7E,$00,$7E,$20
 	db $7E,$40,$7E,$60
 
-Func_41336: ; 41336 (10:5336)
-	ld a, ANIM_AC
-	call Func_41676
+Trade_ShowEnemyMon: ; 41336 (10:5336)
+	ld a, TRADE_BALL_TILT_ANIM
+	call Trade_ShowAnimation
 	call Func_415c8
 	hlCoord 4, 10
-	ld b, $6
-	ld c, $a
+	ld b, 6
+	ld c, 10
 	call TextBoxBorder
-	call Func_427a7
-	call Func_41186
+	call Trade_PrintEnemyMonInfoText
+	call Trade_CopyTileMapToVRAM
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [wTrainerEngageDistance]
-	call Func_415a4
-	ld a, ANIM_AD
-	call Func_41676
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld a, [wTradedEnemyMonSpecies]
+	call Trade_LoadMonSprite
+	ld a, TRADE_BALL_POOF_ANIM
+	call Trade_ShowAnimation
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, [wTrainerEngageDistance]
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld a, [wTradedEnemyMonSpecies]
 	call PlayCry
-	call Func_41181
+	call Trade_Delay100
 	hlCoord 4, 10
 	ld bc, $80c
 	call ClearScreenArea
@@ -325,23 +325,23 @@ Func_41376: ; 41376 (10:5376)
 	ld a, $1
 	ld [wd08a], a
 	ld a, $e4
-	ld [rOBP0], a ; $ff48
+	ld [rOBP0], a
 	ld a, $54
-	ld [W_BASECOORDX], a ; wd081
+	ld [W_BASECOORDX], a
 	ld a, $1c
-	ld [W_BASECOORDY], a ; wd082
+	ld [W_BASECOORDY], a
 	ld a, [wcd5e]
 	ld [wcd5d], a
 	call Func_41505
 	call Func_4142d
-	call Func_41186
+	call Trade_CopyTileMapToVRAM
 	call Func_4149f
 	ld hl, vBGMap1 + $8c
-	call Func_414ae
+	call Trade_RedrawRows4And5
 	ld b, $6
 	call Func_414c5
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_4149f
 	ld b, $4
 	call Func_414c5
@@ -349,7 +349,7 @@ Func_41376: ; 41376 (10:5376)
 	ld b, $6
 	call Func_414c5
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_41525
 	jp ClearSprites
 
@@ -358,22 +358,22 @@ Func_413c6: ; 413c6 (10:53c6)
 	xor a
 	ld [wd08a], a
 	ld a, $64
-	ld [W_BASECOORDX], a ; wd081
+	ld [W_BASECOORDX], a
 	ld a, $44
-	ld [W_BASECOORDY], a ; wd082
+	ld [W_BASECOORDY], a
 	ld a, [wcd5f]
 	ld [wcd5d], a
 	call Func_41505
 	call Func_4145c
-	call Func_41186
+	call Trade_CopyTileMapToVRAM
 	call Func_4149f
 	ld hl, vBGMap1 + $94
-	call Func_414ae
+	call Trade_RedrawRows4And5
 	call Func_41525
 	ld b, $6
 	call Func_414c5
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_4149f
 	ld b, $4
 	call Func_414c5
@@ -381,27 +381,27 @@ Func_413c6: ; 413c6 (10:53c6)
 	ld b, $6
 	call Func_414c5
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	jp ClearSprites
 
 Func_41411: ; 41411 (10:5411)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Func_4120b
 	call DelayFrame
-	ld a, $ab
-	ld [rLCDC], a ; $ff40
+	ld a, %10101011
+	ld [rLCDC], a
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld a, $90
 	ld [hWY], a
 	ret
 
 Func_4142d: ; 4142d (10:542d)
-	call Func_41196
+	call Trade_ClearTileMap
 	hlCoord 11, 4
 	ld a, $5d
 	ld [hli], a
@@ -413,18 +413,18 @@ Func_4142d: ; 4142d (10:542d)
 	jr nz, .asm_4143a
 	hlCoord 5, 3
 	ld b, $6
-	call Func_41842
+	call CopyTileIDsFromList_ZeroBaseTileID
 	hlCoord 4, 12
-	ld b, $2
-	ld c, $7
+	ld b, 2
+	ld c, 7
 	call TextBoxBorder
 	hlCoord 5, 14
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	call PlaceString
 	jp DelayFrame
 
 Func_4145c: ; 4145c (10:545c)
-	call Func_41196
+	call Trade_ClearTileMap
 	hlCoord 0, 4
 	ld a, $5e
 	ld c, $e
@@ -451,18 +451,18 @@ Func_4145c: ; 4145c (10:545c)
 	ld [hl], a
 	hlCoord 7, 8
 	ld b, $6
-	call Func_41842
+	call CopyTileIDsFromList_ZeroBaseTileID
 	hlCoord 6, 0
 	ld b, $2
 	ld c, $7
 	call TextBoxBorder
 	hlCoord 7, 2
-	ld de, W_GRASSRATE ; W_GRASSRATE
+	ld de, wLinkEnemyTrainerName
 	call PlaceString
 	jp DelayFrame
 
 Func_4149f: ; 4149f (10:549f)
-	call Func_41196
+	call Trade_ClearTileMap
 	hlCoord 0, 4
 	ld a, $5e
 	ld c, $14
@@ -472,7 +472,7 @@ Func_4149f: ; 4149f (10:549f)
 	jr nz, .asm_414a9
 	ret
 
-Func_414ae: ; 414ae (10:54ae)
+Trade_RedrawRows4And5: ; 414ae (10:54ae)
 	push hl
 	hlCoord 0, 4
 	call CopyToScreenEdgeTiles
@@ -480,10 +480,10 @@ Func_414ae: ; 414ae (10:54ae)
 	ld a, h
 	ld [H_SCREENEDGEREDRAWADDR + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a ; $ffd1
-	ld a, $2
-	ld [H_SCREENEDGEREDRAW], a ; $ffd0
-	ld c, $a
+	ld [H_SCREENEDGEREDRAWADDR], a
+	ld a, REDRAWROW
+	ld [H_SCREENEDGEREDRAW], a
+	ld c, 10
 	jp DelayFrames
 
 Func_414c5: ; 414c5 (10:54c5)
@@ -494,14 +494,14 @@ Func_414c5: ; 414c5 (10:54c5)
 	ld a, e
 	dec a
 	jr z, .asm_414d5
-	ld a, [$ffae]
+	ld a, [hSCX]
 	sub $2
 	jr .asm_414d9
 .asm_414d5
-	ld a, [$ffae]
+	ld a, [hSCX]
 	add $2
 .asm_414d9
-	ld [$ffae], a
+	ld [hSCX], a
 	call DelayFrame
 	dec d
 	jr nz, .asm_414cb
@@ -514,9 +514,9 @@ Func_414e8: ; 414e8 (10:54e8)
 	push de
 	push bc
 	push hl
-	ld a, [rBGP] ; $ff47
+	ld a, [rBGP]
 	xor $3c
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	ld hl, wOAMBuffer + $02
 	ld de, $4
 	ld c, $14
@@ -540,10 +540,10 @@ Func_41510: ; 41510 (10:5510)
 	ld hl, wOAMBuffer
 	ld c, $14
 .asm_41515
-	ld a, [W_BASECOORDY] ; wd082
+	ld a, [W_BASECOORDY]
 	add [hl]
 	ld [hli], a
-	ld a, [W_BASECOORDX] ; wd081
+	ld a, [W_BASECOORDX]
 	add [hl]
 	ld [hli], a
 	inc hl
@@ -566,9 +566,9 @@ Func_41525: ; 41525 (10:5525)
 	ld bc, $fc00
 .asm_4153f
 	ld a, b
-	ld [W_BASECOORDX], a ; wd081
+	ld [W_BASECOORDX], a
 	ld a, c
-	ld [W_BASECOORDY], a ; wd082
+	ld [W_BASECOORDY], a
 	ld d, $4
 .asm_41549
 	call Func_41510
@@ -580,7 +580,7 @@ Func_41525: ; 41525 (10:5525)
 	ret
 
 Func_41558: ; 41558 (10:5558)
-	ld hl, OAMPointers_41574 ; $5574
+	ld hl, OAMPointers_41574
 	ld c, $4
 	xor a
 .asm_4155e
@@ -630,58 +630,59 @@ UnknownOAM_4159c: ; 4159c (10:559c)
 	db $3B,$70,$3A,$70
 	db $39,$70,$38,$70
 
-Func_415a4: ; 415a4 (10:55a4)
+; a = species
+Trade_LoadMonSprite: ; 415a4 (10:55a4)
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wcf1d], a
 	ld b, $b
 	ld c, $0
 	call GoPAL_SET
-	ld a, [H_AUTOBGTRANSFERENABLED] ; $ffba
+	ld a, [H_AUTOBGTRANSFERENABLED]
 	xor $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call GetMonHeader
 	hlCoord 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
-	ld c, $a
+	ld c, 10
 	jp DelayFrames
 
 Func_415c8: ; 415c8 (10:55c8)
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
-	ld a, $e3
-	ld [rLCDC], a ; $ff40
+	ld a, %11100011
+	ld [rLCDC], a
 	ld a, $7
-	ld [rWX], a ; $ff4b
+	ld [rWX], a
 	xor a
 	ld [hWY], a
 	ld a, $90
-	ld [$ffae], a
+	ld [hSCX], a
 	ret
 
 Func_415df: ; 415df (10:55df)
-	ld c, $32
+	ld c, 50
 	call DelayFrames
-.asm_415e4
+.loop
 	call DelayFrame
-	ld a, [rWX] ; $ff4b
+	ld a, [rWX]
 	inc a
 	inc a
-	ld [rWX], a ; $ff4b
+	ld [rWX], a
 	cp $a1
-	jr nz, .asm_415e4
-	call Func_41196
-	ld c, $a
+	jr nz, .loop
+	call Trade_ClearTileMap
+	ld c, 10
 	call DelayFrames
 	ld a, $7
-	ld [rWX], a ; $ff4b
+	ld [rWX], a
 	ret
 
 PrintTradeWentToText: ; 415fe (10:55fe)
 	ld hl, TradeWentToText
 	call PrintText
-	ld c, $c8
+	ld c, 200
 	call DelayFrames
 	jp Func_415df
 
@@ -692,10 +693,10 @@ TradeWentToText: ; 4160c (10:560c)
 PrintTradeForSendsText: ; 41611 (10:5611)
 	ld hl, TradeForText
 	call PrintText
-	call Delay50
+	call Trade_Delay80
 	ld hl, TradeSendsText
 	call PrintText
-	jp Delay50
+	jp Trade_Delay80
 
 TradeForText: ; 41623 (10:5623)
 	TX_FAR _TradeForText
@@ -708,10 +709,10 @@ TradeSendsText: ; 41628 (10:5628)
 PrintTradeFarewellText: ; 4162d (10:562d)
 	ld hl, TradeWavesFarewellText
 	call PrintText
-	call Delay50
+	call Trade_Delay80
 	ld hl, TradeTransferredText
 	call PrintText
-	call Delay50
+	call Trade_Delay80
 	jp Func_415df
 
 TradeWavesFarewellText: ; 41642 (10:5642)
@@ -725,7 +726,7 @@ TradeTransferredText: ; 41647 (10:5647)
 PrintTradeTakeCareText: ; 4164c (10:564c)
 	ld hl, TradeTakeCareText
 	call PrintText
-	jp Delay50
+	jp Trade_Delay80
 
 TradeTakeCareText: ; 41655 (10:5655)
 	TX_FAR _TradeTakeCareText
@@ -734,10 +735,10 @@ TradeTakeCareText: ; 41655 (10:5655)
 PrintTradeWillTradeText: ; 4165a (10:565a)
 	ld hl, TradeWillTradeText
 	call PrintText
-	call Delay50
+	call Trade_Delay80
 	ld hl, TradeforText
 	call PrintText
-	jp Delay50
+	jp Trade_Delay80
 
 TradeWillTradeText: ; 4166c (10:566c)
 	TX_FAR _TradeWillTradeText
@@ -747,8 +748,8 @@ TradeforText: ; 41671 (10:5671)
 	TX_FAR _TradeforText
 	db "@"
 
-Func_41676: ; 41676 (10:5676)
-	ld [W_ANIMATIONID], a ; W_ANIMATIONID
+Trade_ShowAnimation: ; 41676 (10:5676)
+	ld [W_ANIMATIONID], a
 	xor a
 	ld [wcc5b], a
 	predef_jump MoveAnimation

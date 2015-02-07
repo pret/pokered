@@ -2,7 +2,7 @@
 	ld hl,.ForJust500Text
 	call PrintText
 	ld a,$13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
@@ -49,7 +49,7 @@
 	call $3736
 	call $373e
 	ld a,$13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,.MakePaymentText
 	call PrintText

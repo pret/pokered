@@ -1,5 +1,5 @@
 LavenderPokecenterScript: ; 5c8da (17:48da)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 LavenderPokecenterTextPointers: ; 5c8e0 (17:48e0)

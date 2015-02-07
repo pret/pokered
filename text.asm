@@ -1231,7 +1231,7 @@ _NoMovesLeftText:: ; 89892 (22:5892)
 _MultiHitText:: ; 898aa (22:58aa)
 	text "Hit the enemy"
 	line "@"
-	TX_NUM W_NUMHITS,1,1
+	TX_NUM wPlayerNumHits,1,1
 	text " times!"
 	prompt
 
@@ -1450,7 +1450,7 @@ _MirrorMoveFailedText:: ; 89b96 (22:5b96)
 
 _HitXTimesText:: ; 89baf (22:5baf)
 	text "Hit @"
-	TX_NUM wcd05, 1, 1
+	TX_NUM wEnemyNumHits, 1, 1
 	text " times!"
 	prompt
 
@@ -1973,7 +1973,7 @@ _HisNameIsText:: ; 8a64a (22:664a)
 	prompt
 
 _WillBeTradedText:: ; 8a677 (22:6677)
-	TX_RAM wTrainerFacingDirection
+	TX_RAM wNameOfPlayerMonToBeTraded
 	text " and"
 	line "@"
 	TX_RAM wcd6d
@@ -2787,19 +2787,19 @@ _PokemonCenterFarewellText:: ; a2910 (28:6910)
 	line "you again!"
 	done
 
-_CableClubNPCText7:: ; a292b (28:692b)
+_CableClubNPCAreaReservedFor2FriendsLinkedByCableText:: ; a292b (28:692b)
 	text "This area is"
 	line "reserved for 2"
 	cont "friends who are"
 	cont "linked by cable."
 	done
 
-_CableClubNPCText1:: ; a2969 (28:6969)
+_CableClubNPCWelcomeText:: ; a2969 (28:6969)
 	text "Welcome to the"
 	line "Cable Club!"
 	done
 
-_CableClubNPCText2:: ; a2985 (28:6985)
+_CableClubNPCPleaseApplyHereHaveToSaveText:: ; a2985 (28:6985)
 	text "Please apply here."
 
 	para "Before opening"
@@ -2807,10 +2807,10 @@ _CableClubNPCText2:: ; a2985 (28:6985)
 	cont "to save the game."
 	done
 
-_CableClubNPCText3:: ; a29cc (28:69cc)
+_CableClubNPCPleaseWaitText:: ; a29cc (28:69cc)
 	text "Please wait.@@"
 
-_CableClubNPCText4:: ; a29db (28:69db)
+_CableClubNPCLinkClosedBecauseOfInactivityText:: ; a29db (28:69db)
 	text "The link has been"
 	line "closed because of"
 	cont "inactivity."
@@ -2823,11 +2823,11 @@ _CableClubNPCText4:: ; a29db (28:69db)
 
 SECTION "Text 10", ROMX, BANK[TEXT_10]
 
-_CableClubNPCText5:: ; a4000 (29:4000)
+_CableClubNPCPleaseComeAgainText:: ; a4000 (29:4000)
 	text "Please come again!"
 	done
 
-_CableClubNPCText6:: ; a4014 (29:4014)
+_CableClubNPCMakingPreparationsText:: ; a4014 (29:4014)
 	text "We're making"
 	line "preparations."
 	cont "Please wait."
@@ -3229,21 +3229,21 @@ _ConnectCableText:: ; a809a (2a:409a)
 _TradedForText:: ; a80bc (2a:40bc)
 	text $52, " traded"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text " for"
 	cont "@"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text "!@@"
 
 _WannaTrade1Text:: ; a80d8 (2a:40d8)
 	text "I'm looking for"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text "! Wanna"
 
 	para "trade one for"
 	line "@"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text "? "
 	done
 
@@ -3255,7 +3255,7 @@ _NoTrade1Text:: ; a810b (2a:410b)
 _WrongMon1Text:: ; a811d (2a:411d)
 	text "What? That's not"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text "!"
 
 	para "If you get one,"
@@ -3269,7 +3269,7 @@ _Thanks1Text:: ; a8155 (2a:4155)
 _AfterTrade1Text:: ; a8162 (2a:4162)
 	text "Isn't my old"
 	line "@"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text " great?"
 	done
 
@@ -3278,10 +3278,10 @@ _WannaTrade2Text:: ; a817c (2a:417c)
 	line "you want to trade"
 
 	para "your @"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	db $0
 	line "for @"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text "?"
 	done
 
@@ -3293,7 +3293,7 @@ _NoTrade2Text:: ; a81b5 (2a:41b5)
 _WrongMon2Text:: ; a81d3 (2a:41d3)
 	text "Hmmm? This isn't"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text "."
 
 	para "Think of me when"
@@ -3313,7 +3313,7 @@ IF DEF(_YELLOW)
 	cont "magnificent!"
 ELSE
 	text "The @"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text " you"
 	line "traded to me"
 
@@ -3324,12 +3324,12 @@ ENDC
 _WannaTrade3Text:: ; a8240 (2a:4240)
 	text "Hi! Do you have"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text "?"
 
 	para "Want to trade it"
 	line "for @"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text "?"
 	done
 
@@ -3340,7 +3340,7 @@ _NoTrade3Text:: ; a8274 (2a:4274)
 _WrongMon3Text:: ; a8284 (2a:4284)
 	text "...This is no"
 	line "@"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text "."
 
 	para "If you get one,"
@@ -3358,11 +3358,11 @@ ENDC
 _AfterTrade3Text:: ; a82c9 (2a:42c9)
 	text "How is my old"
 	line "@"
-	TX_RAM wPlayerMonAccuracyMod
+	TX_RAM wInGameTradeReceiveMonName
 	text "?"
 
 	para "My @"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	text " is"
 	line "doing great!"
 	done

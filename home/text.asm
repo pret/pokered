@@ -265,8 +265,8 @@ Char5F:: ; 1a91 (0:1a91)
 	ret
 
 Char58:: ; 1a95 (0:1a95)
-	ld a,[W_ISLINKBATTLE]
-	cp 4
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
 	jp z,Next1AA2
 	ld a,$EE
 	Coorda 18, 16
@@ -506,8 +506,8 @@ TextCommand05:: ; 1bc5 (0:1bc5)
 ; 06
 ; (no arguments)
 TextCommand06:: ; 1bcc (0:1bcc)
-	ld a,[W_ISLINKBATTLE]
-	cp a,$04
+	ld a,[wLinkState]
+	cp a,LINK_STATE_BATTLING
 	jp z,TextCommand0D
 	ld a,$ee ; down arrow
 	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box

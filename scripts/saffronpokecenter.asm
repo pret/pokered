@@ -1,5 +1,5 @@
 SaffronPokecenterScript: ; 5d535 (17:5535)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 SaffronPokecenterTextPointers: ; 5d53b (17:553b)

@@ -1,5 +1,5 @@
 ViridianPokeCenterScript: ; 4425d (11:425d)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 ViridianPokecenterTextPointers: ; 44263 (11:4263)

@@ -10,7 +10,7 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 	ld a, [wTrainerSpriteOffset]
 	and a
 	ret z
-	ld a, [wcd05]
+	ld a, [wUnknownSlotVar]
 	ld b, a
 	ld a, [wTrainerFacingDirection]
 	inc a

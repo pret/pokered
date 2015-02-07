@@ -70,7 +70,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	jp asm_d1145
 .asm_3ded4
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
 	ld [hJoyHeld], a
@@ -105,7 +105,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld c, $3
 	predef SubBCDPredef
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent

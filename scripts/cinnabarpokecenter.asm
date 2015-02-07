@@ -1,5 +1,5 @@
 CinnabarPokecenterScript: ; 75e2c (1d:5e2c)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 CinnabarPokecenterTextPointers: ; 75e32 (1d:5e32)

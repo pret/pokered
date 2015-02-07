@@ -1,5 +1,5 @@
 CeladonPokecenterScript: ; 488b8 (12:48b8)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 CeladonPokecenterTextPointers: ; 488be (12:48be)

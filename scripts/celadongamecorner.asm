@@ -20,7 +20,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	srl a
 	srl a
 	srl a
-	ld [wcd05], a
+	ld [wUnknownSlotVar], a
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)

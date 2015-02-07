@@ -1,5 +1,5 @@
 MtMoonPokecenterScript: ; 492cf (12:52cf)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 MtMoonPokecenterTextPointers: ; 492d5 (12:52d5)
@@ -29,7 +29,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld hl, MtMoonPokecenterText_4935c
 	call PrintText
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
@@ -57,7 +57,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld c, $3
 	predef SubBCDPredef
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wd7c6
 	set 7, [hl]

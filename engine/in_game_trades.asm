@@ -1,4 +1,4 @@
-Predef54: ; 71ad9 (1c:5ad9)
+DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 ; trigger the trade offer/action specified by wWhichTrade
 	call SaveScreenTilesToBuffer2
 	ld hl,TradeMons
@@ -8,15 +8,15 @@ Predef54: ; 71ad9 (1c:5ad9)
 	sub b
 	sub b
 	ld c,a
-	ld b,$0
+	ld b,0
 	add hl,bc
 	ld a,[hli]
-	ld [wcd0f],a
+	ld [wInGameTradeGiveMonSpecies],a
 	ld a,[hli]
-	ld [wcd34],a
+	ld [wInGameTradeReceiveMonSpecies],a
 	ld a,[hli]
 	push af
-	ld de,wcd29
+	ld de,wInGameTradeMonNick
 	ld bc,$000b
 	call CopyData
 	pop af
@@ -26,16 +26,16 @@ Predef54: ; 71ad9 (1c:5ad9)
 	add hl,hl
 	add hl,de
 	ld a,[hli]
-	ld [wcd10],a
+	ld [wInGameTradeTextPointerTablePointer],a
 	ld a,[hl]
-	ld [wcd11],a
-	ld a,[wcd0f]
-	ld de,wcd13
-	call Func_71b6a
-	ld a,[wcd34]
-	ld de,wPlayerMonAccuracyMod
-	call Func_71b6a
-	ld hl,wd737
+	ld [wInGameTradeTextPointerTablePointer + 1],a
+	ld a,[wInGameTradeGiveMonSpecies]
+	ld de,wInGameTradeGiveMonName
+	call InGameTrade_GetMonName
+	ld a,[wInGameTradeReceiveMonSpecies]
+	ld de,wInGameTradeReceiveMonName
+	call InGameTrade_GetMonName
+	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$2
@@ -43,28 +43,29 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld a,c
 	and a
 	ld a,$4
-	ld [wcd12],a
-	jr nz,.asm_99bca ; 0x71b36 $20
+	ld [wInGameTradeTextPointerTableIndex],a
+	jr nz,.printText
+; if the trade hasn't been done yet
 	xor a
-	ld [wcd12],a
-	call .asm_99bca
+	ld [wInGameTradeTextPointerTableIndex],a
+	call .printText
 	ld a,$1
-	ld [wcd12],a
+	ld [wInGameTradeTextPointerTableIndex],a
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
 	and a
-	jr nz,.asm_99bca ; 0x71b4b $b
-	call Func_71c07
-	jr c,.asm_99bca ; 0x71b50 $6
+	jr nz,.printText
+	call InGameTrade_DoTrade
+	jr c,.printText
 	ld hl, TradedForText
 	call PrintText
-.asm_99bca ; 0x71b58
-	ld hl,wcd12
-	ld a,[hld]
+.printText
+	ld hl,wInGameTradeTextPointerTableIndex
+	ld a,[hld] ; wInGameTradeTextPointerTableIndex
 	ld e,a
-	ld d,$0
-	ld a,[hld]
-	ld l,[hl]
+	ld d,0
+	ld a,[hld] ; wInGameTradeTextPointerTablePointer + 1
+	ld l,[hl] ; wInGameTradeTextPointerTablePointer
 	ld h,a
 	add hl,de
 	add hl,de
@@ -73,7 +74,8 @@ Predef54: ; 71ad9 (1c:5ad9)
 	ld l,a
 	jp PrintText
 
-Func_71b6a: ; 71b6a (1c:5b6a)
+; copies name of species a to hl
+InGameTrade_GetMonName: ; 71b6a (1c:5b6a)
 	push de
 	ld [wd11e],a
 	call GetMonName
@@ -84,30 +86,30 @@ Func_71b6a: ; 71b6a (1c:5b6a)
 
 INCLUDE "data/trades.asm"
 
-Func_71c07: ; 71c07 (1c:5c07)
+InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	xor a
 	ld [wd07d],a
 	dec a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	push af
-	call Func_71ca2
+	call InGameTrade_RestoreScreen
 	pop af
 	ld a,$1
-	jp c,.asm_c4bc2
-	ld a,[wcd0f]
+	jp c,.tradeFailed ; jump if the player didn't select a pokemon
+	ld a,[wInGameTradeGiveMonSpecies]
 	ld b,a
 	ld a,[wcf91]
 	cp b
 	ld a,$2
-	jr nz,.asm_c4bc2 ; 0x71c26 $75
+	jr nz,.tradeFailed ; jump if the selected mon's species is not the required one
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMon1Level
 	ld bc,$002c
 	call AddNTimes
 	ld a,[hl]
 	ld [W_CURENEMYLVL],a
-	ld hl,wd737
+	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
 	ld b,$1
@@ -119,13 +121,13 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld a,[W_CURENEMYLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
-	call Func_71cc1
+	call InGameTrade_PrepareTradeData
 	predef Func_410e2
 	pop af
 	ld [W_CURENEMYLVL],a
 	pop af
 	ld [wWhichPokemon],a
-	ld a,[wcd34]
+	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
 	ld [wcc49],a
@@ -134,64 +136,64 @@ Func_71c07: ; 71c07 (1c:5c07)
 	ld a,$80
 	ld [wcc49],a
 	call AddPartyMon
-	call Func_71d19
+	call InGameTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
 	call ClearScreen
-	call Func_71ca2
+	call InGameTrade_RestoreScreen
 	callba RedrawMapView
 	and a
 	ld a,$3
-	jr .asm_ee803 ; 0x71c9b $1
-.asm_c4bc2 ; 0x71c9d
+	jr .tradeSucceeded
+.tradeFailed
 	scf
-.asm_ee803 ; 0x71c9e
-	ld [wcd12],a
+.tradeSucceeded
+	ld [wInGameTradeTextPointerTableIndex],a
 	ret
 
-Func_71ca2: ; 71ca2 (1c:5ca2)
+InGameTrade_RestoreScreen: ; 71ca2 (1c:5ca2)
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 	call LoadGBPal
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld b, BANK(LoadWildData)
 	ld hl, LoadWildData
 	jp Bankswitch
 
-Func_71cc1: ; 71cc1 (1c:5cc1)
-	ld hl, wWhichTrade ; wWhichTrade
-	ld a, [wcd0f]
-	ld [hli], a
-	ld a, [wcd34]
-	ld [hl], a
-	ld hl, wPartyMonOT ; wd273
+InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
+	ld hl, wTradedPlayerMonSpecies
+	ld a, [wInGameTradeGiveMonSpecies]
+	ld [hli], a ; wTradedPlayerMonSpecies
+	ld a, [wInGameTradeReceiveMonSpecies]
+	ld [hl], a ; wTradedEnemyMonSpecies
+	ld hl, wPartyMonOT
 	ld bc, $b
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	call AddNTimes
-	ld de, wTrainerScreenX
+	ld de, wTradedPlayerMonOT
 	ld bc, $b
-	call Func_71d11
-	ld hl, String_71d59 ; $5d59
+	call InGameTrade_CopyData
+	ld hl, InGameTrade_TrainerString
 	ld de, wcd4e
-	call Func_71d11
-	ld de, W_GRASSRATE ; W_GRASSRATE
-	call Func_71d11
-	ld hl, wPartyMon1OTID ; wPartyMon1OTID
-	ld bc, $2c
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	call InGameTrade_CopyData
+	ld de, W_GRASSRATE
+	call InGameTrade_CopyData
+	ld hl, wPartyMon1OTID
+	ld bc, wPartyMon2 - wPartyMon1
+	ld a, [wWhichPokemon]
 	call AddNTimes
-	ld de, wcd4c
+	ld de, wTradedPlayerMonOTID
 	ld bc, $2
-	call Func_71d11
+	call InGameTrade_CopyData
 	call Random
 	ld hl, hRandomAdd
-	ld de, wcd59
+	ld de, wTradedEnemyMonOTID
 	jp CopyData
 
-Func_71d11: ; 71d11 (1c:5d11)
+InGameTrade_CopyData: ; 71d11 (1c:5d11)
 	push hl
 	push bc
 	call CopyData
@@ -199,35 +201,37 @@ Func_71d11: ; 71d11 (1c:5d11)
 	pop hl
 	ret
 
-Func_71d19: ; 71d19 (1c:5d19)
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
+	ld hl, wPartyMonNicks
 	ld bc, $b
-	call Func_71d4f
-	ld hl, wcd29
-	ld bc, $b
-	call CopyData
-	ld hl, wPartyMonOT ; wd273
-	ld bc, $b
-	call Func_71d4f
-	ld hl, String_71d59 ; $5d59
+	call InGameTrade_GetReceivedMonPointer
+	ld hl, wInGameTradeMonNick
 	ld bc, $b
 	call CopyData
-	ld hl, wPartyMon1OTID ; wPartyMon1OTID
-	ld bc, $2c
-	call Func_71d4f
-	ld hl, wcd59
+	ld hl, wPartyMonOT
+	ld bc, $b
+	call InGameTrade_GetReceivedMonPointer
+	ld hl, InGameTrade_TrainerString
+	ld bc, $b
+	call CopyData
+	ld hl, wPartyMon1OTID
+	ld bc, wPartyMon2 - wPartyMon1
+	call InGameTrade_GetReceivedMonPointer
+	ld hl, wTradedEnemyMonOTID
 	ld bc, $2
 	jp CopyData
 
-Func_71d4f: ; 71d4f (1c:5d4f)
-	ld a, [wPartyCount] ; wPartyCount
+; the received mon's index is (partyCount - 1),
+; so this adds bc to hl (partyCount - 1) times and moves the result to de
+InGameTrade_GetReceivedMonPointer: ; 71d4f (1c:5d4f)
+	ld a, [wPartyCount]
 	dec a
 	call AddNTimes
 	ld e, l
 	ld d, h
 	ret
 
-String_71d59: ; 71d59 (1c:5d59)
+InGameTrade_TrainerString: ; 71d59 (1c:5d59)
 	; "TRAINER@@@@@@@@@@"
 	db $5d, "@@@@@@@@@@"
 

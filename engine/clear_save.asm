@@ -7,10 +7,10 @@ Func_1c98a: ; 1c98a (7:498a)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $7
-	ld [wd12c], a
+	ld a, NO_YES_MENU
+	ld [wTwoOptionMenuID], a
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
 	and a

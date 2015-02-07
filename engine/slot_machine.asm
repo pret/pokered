@@ -135,10 +135,10 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	call PrintText
 	ld hl, wTileMap + $fe
 	ld bc, $0d0f
-	xor a
-	ld [wd12c], a
+	xor a ; YES_NO_MENU
+	ld [wTwoOptionMenuID], a
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem]
 	and a

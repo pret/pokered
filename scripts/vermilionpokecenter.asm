@@ -1,5 +1,5 @@
 VermilionPokecenterScript: ; 5c98f (17:498f)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 VermilionPokecenterTextPointers: ; 5c995 (17:4995)

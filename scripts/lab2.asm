@@ -21,5 +21,5 @@ Lab2Text3: ; 75c37 (1d:5c37)
 	ld a, $8
 	ld [wWhichTrade], a
 asm_78552: ; 75c3d (1d:5c3d)
-	predef Predef54
+	predef DoInGameTradeDialogue
 	jp TextScriptEnd

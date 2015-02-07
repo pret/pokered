@@ -9,7 +9,7 @@ DisplayLinkBattleVersusTextBox: ; 372d6 (d:72d6)
 	ld de, wPlayerName
 	call PlaceString
 	hlCoord 4, 10
-	ld de, W_GRASSRATE ; enemy name
+	ld de, wLinkEnemyTrainerName
 	call PlaceString
 ; place bold "VS" tiles between the names
 	hlCoord 9, 8

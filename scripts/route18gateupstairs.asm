@@ -10,7 +10,7 @@ Route18GateUpstairsText1: ; 4997e (12:597e)
 	db $08 ; asm
 	ld a, $5
 	ld [wWhichTrade], a
-	predef Predef54
+	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
 Route18GateUpstairsText2: ; 4998c (12:598c)

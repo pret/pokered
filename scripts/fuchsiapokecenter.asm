@@ -1,5 +1,5 @@
 FuchsiaPokecenterScript: ; 75063 (1d:5063)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 FuchsiaPokecenterTextPointers: ; 75069 (1d:5069)

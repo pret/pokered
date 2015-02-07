@@ -2098,7 +2098,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	hlCoord 14, 7
 	ld bc,$080f
 	ld a,$14
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wCurrentMenuItem]
 	and a
@@ -2489,7 +2489,7 @@ TossItem_: ; e6f1 (3:66f1)
 	hlCoord 14, 7
 	ld bc,$080f
 	ld a,$14
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
 	cp a,2

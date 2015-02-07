@@ -16,7 +16,7 @@ AskName: ; 64eb (1:64eb)
 	hlCoord 14, 7
 	ld bc, $80f
 	ld a, $14
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	pop hl
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem

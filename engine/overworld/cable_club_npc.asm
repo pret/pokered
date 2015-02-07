@@ -1,51 +1,51 @@
 CableClubNPC: ; 71c5 (1:71c5)
-	ld hl, CableClubNPCText1
+	ld hl, CableClubNPCWelcomeText
 	call PrintText
 	ld a, [wd74b]
-	bit 5, a
-	jp nz, Func_71e1
+	bit 5, a ; received pokedex?
+	jp nz, .receivedPokedex
+; if the player hasn't received the pokedex
 	ld c, $3c
 	call DelayFrames
-	ld hl, CableClubNPCText6
+	ld hl, CableClubNPCMakingPreparationsText
 	call PrintText
 	jp Func_7298
-
-Func_71e1: ; 71e1 (1:71e1)
+.receivedPokedex
 	ld a, $1
 	ld [wMenuJoypadPollCount], a
-	ld a, $5a
-	ld [wcc47], a
-.asm_71eb
-	ld a, [$ffaa]
-	cp $2
-	jr z, .asm_721a ; 0x71ef $29
-	cp $1
-	jr z, .asm_721a ; 0x71f3 $25
-	ld a, $ff
-	ld [$ffaa], a
-	ld a, $2
+	ld a, 90
+	ld [wLinkTimeoutCounter], a
+.establishConnectionLoop
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr z, .establishedConnection
+	cp USING_EXTERNAL_CLOCK
+	jr z, .establishedConnection
+	ld a, CONNECTION_NOT_ESTABLISHED
+	ld [hSerialConnectionStatus], a
+	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
 	ld [rSB], a
 	xor a
-	ld [$ffad], a
-	ld a, $80
-	ld [$ff02], a
-	ld a, [wcc47]
+	ld [hSerialReceiveData], a
+	ld a, START_TRANSFER_EXTERNAL_CLOCK
+	ld [rSC], a
+	ld a, [wLinkTimeoutCounter]
 	dec a
-	ld [wcc47], a
-	jr z, .asm_7287 ; 0x720b $7a
-	ld a, $1
+	ld [wLinkTimeoutCounter], a
+	jr z, .failedToEstablishConnection
+	ld a, ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK
 	ld [rSB], a
-	ld a, $81
-	ld [$ff02], a
+	ld a, START_TRANSFER_INTERNAL_CLOCK
+	ld [rSC], a
 	call DelayFrame
-	jr .asm_71eb ; 0x7218 $d1
-.asm_721a
-	call Func_22ed
+	jr .establishConnectionLoop
+.establishedConnection
+	call Serial_SendZeroByte
 	call DelayFrame
-	call Func_22ed
-	ld c, $32
+	call Serial_SendZeroByte
+	ld c, 50
 	call DelayFrames
-	ld hl, CableClubNPCText2
+	ld hl, CableClubNPCPleaseApplyHereHaveToSaveText
 	call PrintText
 	xor a
 	ld [wMenuJoypadPollCount], a
@@ -54,22 +54,22 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld [wMenuJoypadPollCount], a
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_728f ; 0x723e $4f
+	jr nz, .choseNo
 	callab SaveSAVtoSRAM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_5d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld hl, CableClubNPCText3
+	ld hl, CableClubNPCPleaseWaitText
 	call PrintText
-	ld hl, wcc47
+	ld hl, wUnknownSerialCounter
 	ld a, $3
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld [$ffa9], a
-	ld [wcc42], a
-	call Func_227f
-	ld hl, wcc47
+	ld [hSerialReceivedNewData], a
+	ld [wSerialExchangeNybbleSendData], a
+	call Serial_SyncAndExchangeNybble
+	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a
 	jr nz, Func_72a8 ; 0x726b $3b
@@ -79,26 +79,26 @@ Func_71e1: ; 71e1 (1:71e1)
 	ld b, $a
 .asm_7273
 	call DelayFrame
-	call Func_22ed
+	call Serial_SendZeroByte
 	dec b
 	jr nz, .asm_7273 ; 0x727a $f7
-	call Func_72d7
-	ld hl, CableClubNPCText4
+	call CloseLinkConnection
+	ld hl, CableClubNPCLinkClosedBecauseOfInactivityText
 	call PrintText
 	jr Func_7298 ; 0x7285 $11
-.asm_7287
-	ld hl, CableClubNPCText7
+.failedToEstablishConnection
+	ld hl, CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	call PrintText
 	jr Func_7298 ; 0x728d $9
-.asm_728f
-	call Func_72d7
-	ld hl, CableClubNPCText5
+.choseNo
+	call CloseLinkConnection
+	ld hl, CableClubNPCPleaseComeAgainText
 	call PrintText
 	; fall through
 
 Func_7298: ; 7298 (1:7298)
 	xor a
-	ld hl, wcc47
+	ld hl, wUnknownSerialCounter
 	ld [hli], a
 	ld [hl], a
 	ld hl, wd72e
@@ -115,42 +115,42 @@ Func_72a8: ; 72a8 (1:72a8)
 	ld b, BANK(LinkMenu)
 	jp Bankswitch
 
-CableClubNPCText7: ; 72b3 (1:72b3)
-	TX_FAR _CableClubNPCText7
+CableClubNPCAreaReservedFor2FriendsLinkedByCableText: ; 72b3 (1:72b3)
+	TX_FAR _CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	db "@"
 
-CableClubNPCText1: ; 72b8 (1:72b8)
-	TX_FAR _CableClubNPCText1
+CableClubNPCWelcomeText: ; 72b8 (1:72b8)
+	TX_FAR _CableClubNPCWelcomeText
 	db "@"
 
-CableClubNPCText2: ; 72bd (1:72bd)
-	TX_FAR _CableClubNPCText2
+CableClubNPCPleaseApplyHereHaveToSaveText: ; 72bd (1:72bd)
+	TX_FAR _CableClubNPCPleaseApplyHereHaveToSaveText
 	db "@"
 
-CableClubNPCText3: ; 72c2 (1:72c2)
-	TX_FAR _CableClubNPCText3
+CableClubNPCPleaseWaitText: ; 72c2 (1:72c2)
+	TX_FAR _CableClubNPCPleaseWaitText
 	db $a, "@"
 
-CableClubNPCText4: ; 72c8 (1:72c8)
-	TX_FAR _CableClubNPCText4
+CableClubNPCLinkClosedBecauseOfInactivityText: ; 72c8 (1:72c8)
+	TX_FAR _CableClubNPCLinkClosedBecauseOfInactivityText
 	db "@"
 
-CableClubNPCText5: ; 72cd (1:72cd)
-	TX_FAR _CableClubNPCText5
+CableClubNPCPleaseComeAgainText: ; 72cd (1:72cd)
+	TX_FAR _CableClubNPCPleaseComeAgainText
 	db "@"
 
-CableClubNPCText6: ; 72d2 (1:72d2)
-	TX_FAR _CableClubNPCText6
+CableClubNPCMakingPreparationsText: ; 72d2 (1:72d2)
+	TX_FAR _CableClubNPCMakingPreparationsText
 	db "@"
 
-Func_72d7: ; 72d7 (1:72d7)
+CloseLinkConnection: ; 72d7 (1:72d7)
 	call Delay3
-	ld a, $ff
-	ld [$ffaa], a
-	ld a, $2
+	ld a, CONNECTION_NOT_ESTABLISHED
+	ld [hSerialConnectionStatus], a
+	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
 	ld [rSB], a
 	xor a
-	ld [$ffad], a
-	ld a, $80
-	ld [$ff02], a
+	ld [hSerialReceiveData], a
+	ld a, START_TRANSFER_EXTERNAL_CLOCK
+	ld [rSC], a
 	ret

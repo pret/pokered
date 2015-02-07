@@ -3,151 +3,156 @@ Serial:: ; 2125 (0:2125)
 	push bc
 	push de
 	push hl
-	ld a, [$ffaa]
+	ld a, [hSerialConnectionStatus]
 	inc a
-	jr z, .asm_2142
-	ld a, [$ff01]
-	ld [$ffad], a
-	ld a, [$ffac]
-	ld [$ff01], a
-	ld a, [$ffaa]
-	cp $2
-	jr z, .asm_2162
-	ld a, $80
-	ld [$ff02], a
-	jr .asm_2162
-.asm_2142
-	ld a, [$ff01]
-	ld [$ffad], a
-	ld [$ffaa], a
-	cp $2
-	jr z, .asm_215f
+	jr z, .connectionNotYetEstablished
+	ld a, [rSB]
+	ld [hSerialReceiveData], a
+	ld a, [hSerialSendData]
+	ld [rSB], a
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr z, .done
+; using external clock
+	ld a, START_TRANSFER_EXTERNAL_CLOCK
+	ld [rSC], a
+	jr .done
+.connectionNotYetEstablished
+	ld a, [rSB]
+	ld [hSerialReceiveData], a
+	ld [hSerialConnectionStatus], a
+	cp USING_INTERNAL_CLOCK
+	jr z, .usingInternalClock
+; using external clock
 	xor a
-	ld [$ff01], a
+	ld [rSB], a
 	ld a, $3
-	ld [rDIV], a ; $ff04
-.asm_2153
-	ld a, [rDIV] ; $ff04
+	ld [rDIV], a
+.waitLoop
+	ld a, [rDIV]
 	bit 7, a
-	jr nz, .asm_2153
-	ld a, $80
-	ld [$ff02], a
-	jr .asm_2162
-.asm_215f
+	jr nz, .waitLoop
+	ld a, START_TRANSFER_EXTERNAL_CLOCK
+	ld [rSC], a
+	jr .done
+.usingInternalClock
 	xor a
-	ld [$ff01], a
-.asm_2162
+	ld [rSB], a
+.done
 	ld a, $1
-	ld [$ffa9], a
-	ld a, $fe
-	ld [$ffac], a
+	ld [hSerialReceivedNewData], a
+	ld a, SERIAL_NO_DATA_BYTE
+	ld [hSerialSendData], a
 	pop hl
 	pop de
 	pop bc
 	pop af
 	reti
 
-Func_216f:: ; 216f (0:216f)
-	ld a, $1
-	ld [$ffab], a
-.asm_2173
+; hl = send data
+; de = receive data
+; bc = length of data
+Serial_ExchangeBytes:: ; 216f (0:216f)
+	ld a, 1
+	ld [hSerialIgnoringInitialData], a
+.loop
 	ld a, [hl]
-	ld [$ffac], a
-	call Func_219a
+	ld [hSerialSendData], a
+	call Serial_ExchangeByte
 	push bc
 	ld b, a
 	inc hl
-	ld a, $30
-.asm_217e
+	ld a, 48
+.waitLoop
 	dec a
-	jr nz, .asm_217e
-	ld a, [$ffab]
+	jr nz, .waitLoop
+	ld a, [hSerialIgnoringInitialData]
 	and a
 	ld a, b
 	pop bc
-	jr z, .asm_2192
+	jr z, .storeReceivedByte
 	dec hl
-	cp $fd
-	jr nz, .asm_2173
+	cp SERIAL_PREAMBLE_BYTE
+	jr nz, .loop
 	xor a
-	ld [$ffab], a
-	jr .asm_2173
-.asm_2192
+	ld [hSerialIgnoringInitialData], a
+	jr .loop
+.storeReceivedByte
 	ld [de], a
 	inc de
 	dec bc
 	ld a, b
 	or c
-	jr nz, .asm_2173
+	jr nz, .loop
 	ret
 
-Func_219a:: ; 219a (0:219a)
+Serial_ExchangeByte:: ; 219a (0:219a)
 	xor a
-	ld [$ffa9], a
-	ld a, [$ffaa]
-	cp $2
+	ld [hSerialReceivedNewData], a
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	jr nz, .asm_21a7
-	ld a, $81
-	ld [$ff02], a
+	ld a, START_TRANSFER_INTERNAL_CLOCK
+	ld [rSC], a
 .asm_21a7
-	ld a, [$ffa9]
+	ld a, [hSerialReceivedNewData]
 	and a
 	jr nz, .asm_21f1
-	ld a, [$ffaa]
-	cp $1
+	ld a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
 	jr nz, .asm_21cc
-	call Func_2237
+	call IsUnknownCounterZero
 	jr z, .asm_21cc
-	call Func_2231
+	call WaitLoop_15Iterations
 	push hl
-	ld hl, wcc48
+	ld hl, wUnknownSerialCounter + 1
 	inc [hl]
 	jr nz, .asm_21c3
 	dec hl
 	inc [hl]
 .asm_21c3
 	pop hl
-	call Func_2237
+	call IsUnknownCounterZero
 	jr nz, .asm_21a7
-	jp Func_223f
+	jp SetUnknownCounterToFFFF
 .asm_21cc
-	ld a, [rIE] ; $ffff
-	and $f
-	cp $8
+	ld a, [rIE]
+	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	cp (1 << SERIAL)
 	jr nz, .asm_21a7
-	ld a, [W_NUMHITS] ; wd074
+	ld a, [wUnknownSerialCounter2]
 	dec a
-	ld [W_NUMHITS], a ; wd074
+	ld [wUnknownSerialCounter2], a
 	jr nz, .asm_21a7
-	ld a, [wd075]
+	ld a, [wUnknownSerialCounter2 + 1]
 	dec a
-	ld [wd075], a
+	ld [wUnknownSerialCounter2 + 1], a
 	jr nz, .asm_21a7
-	ld a, [$ffaa]
-	cp $1
+	ld a, [hSerialConnectionStatus]
+	cp USING_EXTERNAL_CLOCK
 	jr z, .asm_21f1
-	ld a, $ff
-.asm_21ee
+	ld a, 255
+.waitLoop
 	dec a
-	jr nz, .asm_21ee
+	jr nz, .waitLoop
 .asm_21f1
 	xor a
-	ld [$ffa9], a
-	ld a, [rIE] ; $ffff
-	and $f
-	sub $8
+	ld [hSerialReceivedNewData], a
+	ld a, [rIE]
+	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	sub (1 << SERIAL)
 	jr nz, .asm_2204
-	ld [W_NUMHITS], a ; wd074
+	ld [wUnknownSerialCounter2], a
 	ld a, $50
-	ld [wd075], a
+	ld [wUnknownSerialCounter2 + 1], a
 .asm_2204
-	ld a, [$ffad]
-	cp $fe
+	ld a, [hSerialReceiveData]
+	cp SERIAL_NO_DATA_BYTE
 	ret nz
-	call Func_2237
+	call IsUnknownCounterZero
 	jr z, .asm_221f
 	push hl
-	ld hl, wcc48
+	ld hl, wUnknownSerialCounter + 1
 	ld a, [hl]
 	dec a
 	ld [hld], a
@@ -156,149 +161,153 @@ Func_219a:: ; 219a (0:219a)
 	dec [hl]
 .asm_2219
 	pop hl
-	call Func_2237
-	jr z, Func_223f
+	call IsUnknownCounterZero
+	jr z, SetUnknownCounterToFFFF
 .asm_221f
-	ld a, [rIE] ; $ffff
-	and $f
-	cp $8
-	ld a, $fe
+	ld a, [rIE]
+	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
+	cp (1 << SERIAL)
+	ld a, SERIAL_NO_DATA_BYTE
 	ret z
 	ld a, [hl]
-	ld [$ffac], a
+	ld [hSerialSendData], a
 	call DelayFrame
-	jp Func_219a
+	jp Serial_ExchangeByte
 
-Func_2231:: ; 2231 (0:2231)
-	ld a, $f
-.asm_2233
+WaitLoop_15Iterations:: ; 2231 (0:2231)
+	ld a, 15
+.waitLoop
 	dec a
-	jr nz, .asm_2233
+	jr nz, .waitLoop
 	ret
 
-Func_2237:: ; 2237 (0:2237)
+IsUnknownCounterZero:: ; 2237 (0:2237)
 	push hl
-	ld hl, wcc47
+	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	or [hl]
 	pop hl
 	ret
 
-Func_223f:: ; 223f (0:223f)
+; a is always 0 when this is called
+SetUnknownCounterToFFFF:: ; 223f (0:223f)
 	dec a
-	ld [wcc47], a
-	ld [wcc48], a
+	ld [wUnknownSerialCounter], a
+	ld [wUnknownSerialCounter + 1], a
 	ret
 
-Func_2247:: ; 2247 (0:2247)
-	ld hl, wcc42
-	ld de, wcc3d
-	ld c, $2
-	ld a, $1
-	ld [$ffab], a
-.asm_2253
+; This is used to exchange the button press and selected menu item on the link menu.
+; The data is sent thrice and read twice to increase reliability.
+Serial_ExchangeLinkMenuSelection:: ; 2247 (0:2247)
+	ld hl, wLinkMenuSelectionSendBuffer
+	ld de, wLinkMenuSelectionReceiveBuffer
+	ld c, 2 ; number of bytes to save
+	ld a, 1
+	ld [hSerialIgnoringInitialData], a
+.loop
 	call DelayFrame
 	ld a, [hl]
-	ld [$ffac], a
-	call Func_219a
+	ld [hSerialSendData], a
+	call Serial_ExchangeByte
 	ld b, a
 	inc hl
-	ld a, [$ffab]
+	ld a, [hSerialIgnoringInitialData]
 	and a
-	ld a, $0
-	ld [$ffab], a
-	jr nz, .asm_2253
+	ld a, 0
+	ld [hSerialIgnoringInitialData], a
+	jr nz, .loop
 	ld a, b
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_2253
+	jr nz, .loop
 	ret
 
-Func_226e:: ; 226e (0:226e)
+Serial_PrintWaitingTextAndSyncAndExchangeByte:: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
 	callab PrintWaitingText
-	call Func_227f
+	call Serial_SyncAndExchangeNybble
 	jp LoadScreenTilesFromBuffer1
 
-Func_227f:: ; 227f (0:227f)
+Serial_SyncAndExchangeNybble:: ; 227f (0:227f)
 	ld a, $ff
-	ld [wcc3e], a
-.asm_2284
-	call Func_22c3
+	ld [wSerialExchangeNybbleReceiveData], a
+.loop1
+	call Serial_ExchangeNybble
 	call DelayFrame
-	call Func_2237
-	jr z, .asm_22a0
+	call IsUnknownCounterZero
+	jr z, .next1
 	push hl
-	ld hl, wcc48
+	ld hl, wUnknownSerialCounter + 1
 	dec [hl]
-	jr nz, .asm_229f
+	jr nz, .next2
 	dec hl
 	dec [hl]
-	jr nz, .asm_229f
+	jr nz, .next2
 	pop hl
 	xor a
-	jp Func_223f
-.asm_229f
+	jp SetUnknownCounterToFFFF
+.next2
 	pop hl
-.asm_22a0
-	ld a, [wcc3e]
+.next1
+	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
-	jr z, .asm_2284
-	ld b, $a
-.asm_22a8
+	jr z, .loop1
+	ld b, 10
+.loop2
 	call DelayFrame
-	call Func_22c3
+	call Serial_ExchangeNybble
 	dec b
-	jr nz, .asm_22a8
-	ld b, $a
-.asm_22b3
+	jr nz, .loop2
+	ld b, 10
+.loop3
 	call DelayFrame
-	call Func_22ed
+	call Serial_SendZeroByte
 	dec b
-	jr nz, .asm_22b3
-	ld a, [wcc3e]
-	ld [wcc3d], a
+	jr nz, .loop3
+	ld a, [wSerialExchangeNybbleReceiveData]
+	ld [wSerialSyncAndExchangeNybbleReceiveData], a
 	ret
 
-Func_22c3:: ; 22c3 (0:22c3)
-	call asm_22d7
-	ld a, [wcc42]
+; exchange one byte with value of $f or less
+Serial_ExchangeNybble:: ; 22c3 (0:22c3)
+	call .doExchange
+	ld a, [wSerialExchangeNybbleSendData]
 	add $60
-	ld [$ffac], a
-	ld a, [$ffaa]
-	cp $2
-	jr nz, asm_22d7
-	ld a, $81
-	ld [$ff02], a
-asm_22d7:: ; 22d7 (0:22d7)
-	ld a, [$ffad]
-	ld [wcc3d], a
+	ld [hSerialSendData], a
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr nz, .doExchange
+	ld a, START_TRANSFER_INTERNAL_CLOCK
+	ld [rSC], a
+.doExchange
+	ld a, [hSerialReceiveData]
+	ld [wSerialExchangeNybbleTempReceiveData], a
 	and $f0
 	cp $60
 	ret nz
 	xor a
-	ld [$ffad], a
-	ld a, [wcc3d]
+	ld [hSerialReceiveData], a
+	ld a, [wSerialExchangeNybbleTempReceiveData]
 	and $f
-	ld [wcc3e], a
+	ld [wSerialExchangeNybbleReceiveData], a
 	ret
 
-Func_22ed:: ; 22ed (0:22ed)
+Serial_SendZeroByte:: ; 22ed (0:22ed)
 	xor a
-	ld [$ffac], a
-	ld a, [$ffaa]
-	cp $2
+	ld [hSerialSendData], a
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	ret nz
-	ld a, $81
-	ld [$ff02], a
+	ld a, START_TRANSFER_INTERNAL_CLOCK
+	ld [rSC], a
 	ret
 
-Func_22fa:: ; 22fa (0:22fa)
-	ld a, $2
-	ld [$ff01], a
+Serial_TryEstablishingExternallyClockedConnection:: ; 22fa (0:22fa)
+	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
+	ld [rSB], a
 	xor a
-	ld [$ffad], a
-	ld a, $80
-	ld [$ff02], a
+	ld [hSerialReceiveData], a
+	ld a, START_TRANSFER_EXTERNAL_CLOCK
+	ld [rSC], a
 	ret

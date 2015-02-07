@@ -167,7 +167,7 @@ PrintWaitingText:
 	call TextBoxBorder
 	jr .asm_4c1a
 .asm_4c17
-	call Func_5ab3
+	call CableClub_TextBoxBorder
 .asm_4c1a
 	hlCoord 4, 11
 	ld de, WaitingText
@@ -633,8 +633,8 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	cp BATTLE_CENTER
 	jr nz, .notBattleCenter
 	ld hl, BattleCenterSpec1
-	ld a, [$ffaa]
-	cp $2
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK ; which gameboy is clocking determines who is on the left and who is on the right
 	jr z, .copyWarpData
 	ld hl, BattleCenterSpec2
 	jr .copyWarpData
@@ -642,8 +642,8 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	cp TRADE_CENTER
 	jr nz, .notTradeCenter
 	ld hl, TradeCenterSpec1
-	ld a, [$ffaa]
-	cp $2
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	jr z, .copyWarpData
 	ld hl, TradeCenterSpec2
 	jr .copyWarpData
@@ -798,7 +798,7 @@ SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	ld c,3 ; length of money in bytes
 	predef SubBCDPredef ; subtract total price from money
 	ld a,$13
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
 	and a
 	ret
@@ -1164,12 +1164,10 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 INCLUDE "engine/overworld/cable_club_npc.asm"
 
 ; function to draw various text boxes
-; INPUT:
-; [wd125] = text box ID
 DisplayTextBoxID_: ; 72ea (1:72ea)
-	ld a,[wd125] ; a = text box ID
+	ld a,[wTextBoxID]
 	cp a,$14
-	jp z,DisplayYesNoTextBox
+	jp z,DisplayTwoOptionMenu
 	ld c,a
 	ld hl,TextBoxFunctionTable
 	ld de,3
@@ -1437,7 +1435,7 @@ Func_74ba: ; 74ba (1:74ba)
 	ld hl, wd730
 	set 6, [hl]
 	ld a, $f
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlCoord 13, 1
 	ld b, $1
@@ -1456,12 +1454,12 @@ CurrencyString: ; 74e2 (1:74e2)
 
 Func_74ea: ; 74ea (1:74ea)
 	ld a, [wd730]
-	set 6, a
+	set 6, a ; no printing delay
 	ld [wd730], a
 	xor a
 	ld [wd12d], a
 	ld a, $e
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, $3
 	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
@@ -1476,7 +1474,7 @@ Func_74ea: ; 74ea (1:74ea)
 	ld [wLastMenuItem], a ; wLastMenuItem
 	ld [wcc37], a
 	ld a, [wd730]
-	res 6, a
+	res 6, a ; turn on the printing delay
 	ld [wd730], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
@@ -1505,46 +1503,50 @@ Func_74ea: ; 74ea (1:74ea)
 	scf
 	ret
 
-DisplayYesNoTextBox: ; 7559 (1:7559)
+; displays a menu with two options to choose from
+; b = Y of upper left corner of text region
+; c = X of upper left corner of text region
+; hl = address where the text box border should be drawn
+DisplayTwoOptionMenu: ; 7559 (1:7559)
 	push hl
 	ld a, [wd730]
-	set 6, a
+	set 6, a ; no printing delay
 	ld [wd730], a
 	xor a
 	ld [wd12d], a
 	ld [wd12e], a
-	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
 	ld a, $1
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, b
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, c
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	xor a
-	ld [wLastMenuItem], a ; wLastMenuItem
+	ld [wLastMenuItem], a
 	ld [wcc37], a
 	push hl
-	ld hl, wd12c
-	bit 7, [hl]
+	ld hl, wTwoOptionMenuID
+	bit 7, [hl] ; select second menu item by default?
 	res 7, [hl]
-	jr z, .asm_758d
+	jr z, .storeCurrentMenuItem
 	inc a
-.asm_758d
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+.storeCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	pop hl
 	push hl
 	push hl
-	call Func_763e
-	ld a, [wd12c]
-	ld hl, MenuStrings ; $7671
+	call TwoOptionMenu_SaveScreenTiles
+	ld a, [wTwoOptionMenuID]
+	ld hl, TwoOptionMenuStrings
 	ld e, a
 	ld d, $0
 	ld a, $5
-.loop
+.menuStringLoop
 	add hl, de
 	dec a
-	jr nz, .loop
+	jr nz, .menuStringLoop
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -1553,22 +1555,22 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	ld d, h
 	pop hl
 	push de
-	ld a, [wd12c]
-	cp $5
-	jr nz, .asm_75b9
-	call Func_5ab3
-	jr .asm_75bc
-.asm_75b9
+	ld a, [wTwoOptionMenuID]
+	cp TRADE_CANCEL_MENU
+	jr nz, .notTradeCancelMenu
+	call CableClub_TextBoxBorder
+	jr .afterTextBoxBorder
+.notTradeCancelMenu
 	call TextBoxBorder
-.asm_75bc
+.afterTextBoxBorder
 	call UpdateSprites
 	pop hl
 	ld a, [hli]
-	and a
-	ld bc, $16
-	jr z, .asm_75ca
-	ld bc, $2a
-.asm_75ca
+	and a ; put blank line before first menu item?
+	ld bc, 20 + 2
+	jr z, .noBlankLine
+	ld bc, 2 * 20 + 2
+.noBlankLine
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -1577,61 +1579,69 @@ DisplayYesNoTextBox: ; 7559 (1:7559)
 	add hl, bc
 	call PlaceString
 	ld hl, wd730
-	res 6, [hl]
-	ld a, [wd12c]
-	cp $7
-	jr nz, .asm_7603
+	res 6, [hl] ; turn on the printing delay
+	ld a, [wTwoOptionMenuID]
+	cp NO_YES_MENU
+	jr nz, .notNoYesMenu
+; No/Yes menu
+; this menu type ignores the B button
+; it only seems to be used when confirming the deletion of a save file
 	xor a
-	ld [wd12c], a
+	ld [wTwoOptionMenuID], a
 	ld a, [wFlags_0xcd60]
 	push af
 	push hl
 	ld hl, wFlags_0xcd60
 	bit 5, [hl]
-	set 5, [hl]
+	set 5, [hl] ; don't play sound when A or B is pressed in menu
 	pop hl
-.asm_75f0
+.noYesMenuInputLoop
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_75f0
+	bit 1, a ; A button pressed?
+	jr nz, .noYesMenuInputLoop ; try again if A was not pressed
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
 	ld a, (SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound
-	jr .asm_760f
-.asm_7603
+	jr .pressedAButton
+.notNoYesMenu
 	xor a
-	ld [wd12c], a
+	ld [wTwoOptionMenuID], a
 	call HandleMenuInput
 	pop hl
-	bit 1, a
-	jr nz, .asm_7627
-.asm_760f
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	bit 1, a ; A button pressed?
+	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
+.pressedAButton
+	ld a, [wCurrentMenuItem]
 	ld [wd12d], a
 	and a
-	jr nz, .asm_7627
+	jr nz, .choseSecondMenuItem
+; chose first menu item
 	ld a, $1
 	ld [wd12e], a
-	ld c, $f
+	ld c, 15
 	call DelayFrames
-	call Func_7656
+	call TwoOptionMenu_RestoreScreenTiles
 	and a
 	ret
-.asm_7627
+.choseSecondMenuItem
 	ld a, $1
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld [wd12d], a
 	ld a, $2
 	ld [wd12e], a
-	ld c, $f
+	ld c, 15
 	call DelayFrames
-	call Func_7656
+	call TwoOptionMenu_RestoreScreenTiles
 	scf
 	ret
 
-Func_763e: ; 763e (1:763e)
+; Some of the wider/taller two option menus will not have the screen areas
+; they cover be fully saved/restored by the two functions below.
+; The bottom and right edges of the menu may remain after the function returns.
+
+TwoOptionMenu_SaveScreenTiles: ; 763e (1:763e)
 	ld de, wHPBarMaxHP
 	ld bc, $506
 .asm_7644
@@ -1641,7 +1651,7 @@ Func_763e: ; 763e (1:763e)
 	dec c
 	jr nz, .asm_7644
 	push bc
-	ld bc, $e
+	ld bc, 14
 	add hl, bc
 	pop bc
 	ld c, $6
@@ -1649,7 +1659,7 @@ Func_763e: ; 763e (1:763e)
 	jr nz, .asm_7644
 	ret
 
-Func_7656: ; 7656 (1:7656)
+TwoOptionMenu_RestoreScreenTiles: ; 7656 (1:7656)
 	ld de, wHPBarMaxHP
 	ld bc, $506
 .asm_765c
@@ -1668,7 +1678,12 @@ Func_7656: ; 7656 (1:7656)
 	call UpdateSprites
 	ret
 
-MenuStrings: ; 7671 (1:7671)
+; Format:
+; 00: byte width
+; 01: byte height
+; 02: byte put blank line before first menu item
+; 03: word text pointer
+TwoOptionMenuStrings: ; 7671 (1:7671)
 	db 4,3,0
 	dw .YesNoMenu
 	db 6,3,0
