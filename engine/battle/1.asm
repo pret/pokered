@@ -6,26 +6,28 @@ DrainHPEffect_: ; 783f (1:783f)
 	ld a, [hl]
 	rr a
 	ld [hld], a
-	or [hl]
-	jr nz, .asm_784f
+	or [hl] ; is damage 0?
+	jr nz, .getAttackerHP
+; if damage is 0, increase to 1 so that the attacker gains at least 1 HP
 	inc hl
 	inc [hl]
-.asm_784f
-	ld hl, wBattleMonHP ; wd015
-	ld de, wBattleMonMaxHP ; wd023
-	ld a, [H_WHOSETURN] ; $fff3
+.getAttackerHP
+	ld hl, wBattleMonHP
+	ld de, wBattleMonMaxHP
+	ld a, [H_WHOSETURN]
 	and a
-	jp z, Func_7861
+	jp z, .addDamageToAttackerHP
 	ld hl, wEnemyMonHP 
 	ld de, wEnemyMonMaxHP 
-
-Func_7861: ; 7861 (1:7861)
+.addDamageToAttackerHP
 	ld bc, wHPBarOldHP+1
+; copy current HP to wHPBarOldHP
 	ld a, [hli]
 	ld [bc], a
 	ld a, [hl]
 	dec bc
 	ld [bc], a
+; copy max HP to wHPBarMaxHP
 	ld a, [de]
 	dec bc
 	ld [bc], a
@@ -33,7 +35,8 @@ Func_7861: ; 7861 (1:7861)
 	ld a, [de]
 	dec bc
 	ld [bc], a
-	ld a, [wd0d8]
+; add damage to attacker's HP and copy new HP to wHPBarNewHP
+	ld a, [W_DAMAGE + 1]
 	ld b, [hl]
 	add b
 	ld [hld], a
@@ -43,7 +46,8 @@ Func_7861: ; 7861 (1:7861)
 	adc b
 	ld [hli], a
 	ld [wHPBarNewHP+1], a
-	jr c, .asm_7890
+	jr c, .capToMaxHP ; if HP > 65,535, cap to max HP
+; compare HP with max HP
 	ld a, [hld]
 	ld b, a
 	ld a, [de]
@@ -54,8 +58,8 @@ Func_7861: ; 7861 (1:7861)
 	ld a, [de]
 	inc de
 	sbc b
-	jr nc, .asm_789c
-.asm_7890
+	jr nc, .next
+.capToMaxHP
 	ld a, [de]
 	ld [hld], a
 	ld [wHPBarNewHP], a
@@ -64,31 +68,31 @@ Func_7861: ; 7861 (1:7861)
 	ld [hli], a
 	ld [wHPBarNewHP+1], a
 	inc de
-.asm_789c
-	ld a, [H_WHOSETURN] ; $fff3
+.next
+	ld a, [H_WHOSETURN]
 	and a
 	hlCoord 10, 9
 	ld a, $1
-	jr z, .asm_78aa
+	jr z, .next2
 	hlCoord 2, 2
 	xor a
-.asm_78aa
-	ld [wListMenuID], a ; wListMenuID
+.next2
+	ld [wListMenuID], a
 	predef UpdateHPBar2
 	predef DrawPlayerHUDAndHPBar
 	predef DrawEnemyHUDAndHPBar
 	callab ReadPlayerMonCurHPAndStatus
-	ld hl, SuckedHealthText ; $78dc
-	ld a, [H_WHOSETURN] ; $fff3
+	ld hl, SuckedHealthText
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_PLAYERMOVEEFFECT] ; wcfd3
-	jr z, .asm_78d2
+	ld a, [W_PLAYERMOVEEFFECT]
+	jr z, .next3
 	ld a, [W_ENEMYMOVEEFFECT] 
-.asm_78d2
+.next3
 	cp DREAM_EATER_EFFECT
-	jr nz, .asm_78d9
+	jr nz, .printText
 	ld hl, DreamWasEatenText
-.asm_78d9
+.printText
 	jp PrintText
 
 SuckedHealthText: ; 78dc (1:78dc)

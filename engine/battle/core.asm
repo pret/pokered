@@ -3554,7 +3554,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[hld]
 	add a
 	ld b,a
-	ld [wd0d8],a
+	ld [W_DAMAGE + 1],a
 	ld a,[hl]
 	rl a ; double the damage
 	ld [W_DAMAGE],a
@@ -6053,7 +6053,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld a, [hld]
 	add a
 	ld b, a
-	ld [wd0d8], a
+	ld [W_DAMAGE + 1], a
 	ld a, [hl]
 	rl a
 	ld [W_DAMAGE], a

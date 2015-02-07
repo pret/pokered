@@ -1269,9 +1269,9 @@ W_MONHPADDING:: ; d0d7
 
 
 W_DAMAGE:: ; d0d7
-	ds 1
+	ds 2
 
-wd0d8:: ds 3
+ds 2
 
 wRepelRemainingSteps:: ; wd0db
     ds 1
