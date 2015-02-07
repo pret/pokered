@@ -1,32 +1,19 @@
 # Linux
 
-Dependencies:
-
 	sudo apt-get install make gcc bison git python python-setuptools
-	sudo easy_install pip
-
-The assembler used is [**rgbds**](https://github.com/bentley/rgbds).
+	sudo easy_install pypng
 
 	git clone git://github.com/bentley/rgbds.git
 	cd rgbds
-	sudo mkdir -p /usr/local/man/man{1,7}
 	sudo make install
 	cd ..
-	rm -rf rgbds
 
-Set up the repository.
-
-	git clone git://github.com/iimarckus/pokered.git
+	git clone --recursive git://github.com/iimarckus/pokered.git
 	cd pokered
-	git submodule init
-	git submodule update
-	sudo pip install -r extras/requirements.txt
 
 To build **pokered.gbc** and **pokeblue.gbc**:
 
 	make
-
-This should take about 10 seconds. Subsequent builds are faster.
 
 To build them individually:
 
@@ -34,40 +21,37 @@ To build them individually:
 	make blue
 
 
-# OS X
+# Mac
 
 In the shell, run:
 
 	xcode-select --install
+	sudo easy_install pypng
 
-Then follow the Linux instructions.
+	git clone git://github.com/bentley/rgbds.git
+	cd rgbds
+	sudo make install
+	cd ..
+
+	git clone --recursive git://github.com/iimarckus/pokered.git
+	cd pokered
+
+	make
 
 
 # Windows
 
-It's recommended that you use a virtual machine running Linux or OS X.
+To build on Windows, use [**Cygwin**](http://cygwin.com/install.html) (32-bit).
 
-If you insist on Windows, use [**Cygwin**](http://cygwin.com/install.html) (32-bit).
+In the installer, select the following packages: `make` `git` `gettext` `python` `python-setuptools`
 
-Dependencies are downloaded in the installer rather than the command line.
-Select the following packages:
-* make
-* git
-* gettext
-* python
-* python-setuptools
+Then get the most recent version of [**rgbds**](https://github.com/bentley/rgbds/releases/).
+Put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
 
-The latest version of **rgbds** is  [**0.2.2**](https://github.com/bentley/rgbds/releases/download/v0.2.2/rgbds-0.2.2-win32.zip). To install, put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
+In the **Cygwin terminal**:
 
-Then set up the repository. In the **Cygwin terminal**:
-
-	git clone git://github.com/iimarckus/pokered.git
-	cd pokered
-	git submodule init
-	git submodule update
 	easy_install pypng
-
-To build:
+	git clone --recursive git://github.com/iimarckus/pokered.git
+	cd pokered
 
 	make
-
