@@ -223,7 +223,7 @@ Serial_ExchangeLinkMenuSelection:: ; 2247 (0:2247)
 	jr nz, .loop
 	ret
 
-Serial_PrintWaitingTextAndSyncAndExchangeByte:: ; 226e (0:226e)
+Serial_PrintWaitingTextAndSyncAndExchangeNybble:: ; 226e (0:226e)
 	call SaveScreenTilesToBuffer1
 	callab PrintWaitingText
 	call Serial_SyncAndExchangeNybble
@@ -269,7 +269,6 @@ Serial_SyncAndExchangeNybble:: ; 227f (0:227f)
 	ld [wSerialSyncAndExchangeNybbleReceiveData], a
 	ret
 
-; exchange one byte with value of $f or less
 Serial_ExchangeNybble:: ; 22c3 (0:22c3)
 	call .doExchange
 	ld a, [wSerialExchangeNybbleSendData]

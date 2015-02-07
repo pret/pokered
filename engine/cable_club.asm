@@ -523,7 +523,7 @@ TradeCenter_SelectMon:
 	ld [wCurrentMenuItem], a
 	ld [wTradingWhichPlayerMon], a
 	ld [wSerialExchangeNybbleSendData], a
-	call Serial_PrintWaitingTextAndSyncAndExchangeByte
+	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
 	cp $f
 	jp z, CallCurrentTradeCenterFunction ; go back to the beginning of the trade selection menu if the other person cancelled
@@ -570,7 +570,7 @@ TradeCenter_SelectMon:
 	Coorda 1, 16
 	ld a, $f
 	ld [wSerialExchangeNybbleSendData], a
-	call Serial_PrintWaitingTextAndSyncAndExchangeByte
+	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
 	cp $f ; did the other person choose Cancel too?
 	jr nz, .cancelMenuItem_Loop
@@ -733,12 +733,12 @@ TradeCenter_Trade:
 	hlCoord 1, 14
 	ld de, TradeCanceled
 	call PlaceString
-	call Serial_PrintWaitingTextAndSyncAndExchangeByte
+	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	jp .tradeCancelled
 .tradeConfirmed
 	ld a, $2
 	ld [wSerialExchangeNybbleSendData], a
-	call Serial_PrintWaitingTextAndSyncAndExchangeByte
+	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
 	dec a ; did the other person cancel?
 	jr nz, .doTrade
@@ -848,7 +848,7 @@ TradeCenter_Trade:
 	callab TryEvolvingMon
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
-	call Serial_PrintWaitingTextAndSyncAndExchangeByte
+	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 40
 	call DelayFrames
 	hlCoord 0, 12
