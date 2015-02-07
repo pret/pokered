@@ -2,7 +2,7 @@ AskName: ; 64eb (1:64eb)
 	call SaveScreenTilesToBuffer1
 	call GetPredefRegisters
 	push hl
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	dec a
 	ld hl, wTileMap
 	ld b, $4
@@ -15,11 +15,11 @@ AskName: ; 64eb (1:64eb)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	pop hl
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_654c
 	ld a, [wUpdateSpritesEnabled]
@@ -30,7 +30,7 @@ AskName: ; 64eb (1:64eb)
 	ld a, $2
 	ld [wd07d], a
 	call DisplayNamingScreen
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
 	jr nz, .asm_653e
 	call ReloadMapSpriteTilePatterns
@@ -66,9 +66,9 @@ Func_655c: ; 655c (1:655c)
 	ld a, [wcf4b]
 	cp $50
 	jr z, .asm_6594
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld hl, wPartyMonNicks
 	ld bc, $b
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld e, l
 	ld d, h
@@ -99,22 +99,22 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call TextBoxBorder
 	call PrintNamingText
 	ld a, $3
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [wTopMenuItemX], a ; wTopMenuItemX
-	ld [wLastMenuItem], a ; wLastMenuItem
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wTopMenuItemX], a
+	ld [wLastMenuItem], a
+	ld [wCurrentMenuItem], a
 	ld a, $ff
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wMenuWatchedKeys], a
 	ld a, $7
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $50
 	ld [wcf4b], a
 	xor a
 	ld hl, wHPBarMaxHP + 1
 	ld [hli], a
 	ld [hli], a
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	ld [W_SUBANIMTRANSFORM], a
 .asm_65ed
 	call PrintAlphabet
 	call GBPalNormal
@@ -126,16 +126,16 @@ DisplayNamingScreen: ; 6596 (1:6596)
 .asm_65fc
 	call PlaceMenuCursor
 .asm_65ff
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	push af
 	callba AnimatePartyMon_ForceSpeed1
 	pop af
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
 	ld a, [hJoyPressed]
 	and a
 	jr z, .asm_65ff
-	ld hl, .unknownPointerTable_665e ; $665e
+	ld hl, .unknownPointerTable_665e
 .asm_661a
 	sla a
 	jr c, .asm_6624
@@ -165,10 +165,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GoPAL_SET_CF1C
 	call GBPalNormal
 	xor a
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	ld [W_SUBANIMTRANSFORM], a
 	ld hl, wd730
 	res 6, [hl]
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
 	jp z, LoadTextBoxTilePatterns
 	ld hl, LoadHudTilePatterns
@@ -207,21 +207,21 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld [wHPBarMaxHP + 1], a
 	ret
 .asm_6692
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp $5
 	jr nz, .asm_66a0
-	ld a, [wTopMenuItemX] ; wTopMenuItemX
+	ld a, [wTopMenuItemX]
 	cp $11
 	jr z, .asm_668c
 .asm_66a0
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp $6
 	jr nz, .asm_66ae
-	ld a, [wTopMenuItemX] ; wTopMenuItemX
+	ld a, [wTopMenuItemX]
 	cp $1
 	jr z, .asm_667e
 .asm_66ae
-	ld hl, wMenuCursorLocation ; wMenuCursorLocation
+	ld hl, wMenuCursorLocation
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -270,10 +270,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld [hl], $50
 	ret
 .asm_6702
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp $6
 	ret z
-	ld a, [wTopMenuItemX] ; wTopMenuItemX
+	ld a, [wTopMenuItemX]
 	cp $11
 	jp z, .asm_6714
 	inc a
@@ -283,10 +283,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, $1
 	jr .asm_6755
 .asm_6718
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp $6
 	ret z
-	ld a, [wTopMenuItemX] ; wTopMenuItemX
+	ld a, [wTopMenuItemX]
 	dec a
 	jp z, .asm_6728
 	dec a
@@ -295,30 +295,30 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, $11
 	jr .asm_6755
 .asm_672c
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	dec a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	and a
 	ret nz
 	ld a, $6
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld a, $1
 	jr .asm_6755
 .asm_673e
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	inc a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	cp $7
 	jr nz, .asm_6750
 	ld a, $1
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	jr .asm_6755
 .asm_6750
 	cp $6
 	ret nz
 	ld a, $1
 .asm_6755
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
 LoadEDTile: ; 675b (1:675b)
@@ -402,9 +402,9 @@ Func_680e: ; 680e (1:680e)
 	jr nz, .asm_6867
 	call EraseMenuCursor
 	ld a, $11
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	ld a, $5
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld a, [wd07d]
 	cp $2
 	ld a, $9
@@ -463,10 +463,10 @@ CalcStringLength: ; 68eb (1:68eb)
 PrintNamingText: ; 68f8 (1:68f8)
 	hlCoord 0, 1
 	ld a, [wd07d]
-	ld de, YourTextString ; $693f
+	ld de, YourTextString
 	and a
 	jr z, .notNickname
-	ld de, RivalsTextString ; $6945
+	ld de, RivalsTextString
 	dec a
 	jr z, .notNickname
 	ld a, [wcf91]
@@ -482,13 +482,13 @@ PrintNamingText: ; 68f8 (1:68f8)
 	add hl, bc
 	ld [hl], $c9
 	hlCoord 1, 3
-	ld de, NicknameTextString ; $6953
+	ld de, NicknameTextString
 	jr .placeString
 .notNickname
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld de, NameTextString ; $694d
+	ld de, NameTextString
 .placeString
 	jp PlaceString
 

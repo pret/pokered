@@ -29,8 +29,8 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
-	call SaveScreenTilesToBuffer1 ; save screen
-	ld a,$04
+	call SaveScreenTilesToBuffer1
+	ld a,FIELD_MOVE_MON_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; display pokemon menu options
 	ld hl,wWhichTrade
@@ -341,7 +341,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	cp a,BICYCLE
 	jp z,.useOrTossItem
 .notBicycle1
-	ld a,$06 ; use/toss menu
+	ld a,USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,wTopMenuItemY

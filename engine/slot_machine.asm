@@ -137,7 +137,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld bc, $0d0f
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem]

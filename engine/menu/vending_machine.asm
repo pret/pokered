@@ -1,20 +1,20 @@
 VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText1
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld [wLastMenuItem], a ; wLastMenuItem
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wMenuWatchedKeys], a
 	ld a, $3
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $5
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
 	hlCoord 0, 3
@@ -33,7 +33,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	call HandleMenuInput
 	bit 1, a
 	jr nz, .asm_74f93
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp $3
 	jr z, .asm_74f93
 	xor a
@@ -66,10 +66,10 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText5
 	call PrintText
 	ld hl, $ffde
-	ld de, wPlayerMoney + 2 ; wd349
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	jp DisplayTextBoxID
 .BagFull

@@ -173,10 +173,10 @@ NowSavingString:
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
 	hlCoord 0, 7
-	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
-	ld a,$14        ;one line shifting ($28 = 2 lines)
+	ld bc,$0801
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
-	call DisplayTextBoxID      ;handle Yes/No KeyPress
+	call DisplayTextBoxID ; yes/no menu
 	ld a,[wCurrentMenuItem]
 	ret
 

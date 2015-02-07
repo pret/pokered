@@ -1,7 +1,7 @@
 LearnMove: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wcd6d
 	ld de, wd036
@@ -9,9 +9,9 @@ LearnMove: ; 6e43 (1:6e43)
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
-	ld hl, wPartyMon1Moves ; wPartyMon1Moves
+	ld hl, wPartyMon1Moves
 	ld bc, $2c
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -43,7 +43,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	push hl
 	push de
 	dec a
-	ld hl, Moves ; $4000
+	ld hl, Moves
 	ld bc, $6
 	call AddNTimes
 	ld de, wHPBarMaxHP
@@ -53,12 +53,12 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	pop de
 	pop hl
 	ld [hl], a
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
 	jp z, PrintLearnedMove
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	ld b, a
-	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
+	ld a, [wPlayerMonNumber]
 	cp b
 	jp nz, PrintLearnedMove
 	ld h, d
@@ -68,7 +68,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	call CopyData
 	ld bc, $11
 	add hl, bc
-	ld de, wBattleMonPP ; wBattleMonPP
+	ld de, wBattleMonPP
 	ld bc, $4
 	call CopyData
 	jp PrintLearnedMove
@@ -78,10 +78,10 @@ AbandonLearning: ; 6eda (1:6eda)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	call DisplayTextBoxID ; yes/no menu
+	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
@@ -101,11 +101,11 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID
+	call DisplayTextBoxID ; yes/no menu
 	pop hl
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	rra
 	ret c
 	ld bc, $fffc
@@ -133,7 +133,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, [$fff6]
 	res 2, a
 	ld [$fff6], a
-	ld hl, wTopMenuItemY ; wTopMenuItemY
+	ld hl, wTopMenuItemY
 	ld a, $8
 	ld [hli], a
 	ld a, $5
@@ -158,7 +158,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	bit 1, a
 	jr nz, .asm_6fab
 	push hl
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
 	add hl, bc

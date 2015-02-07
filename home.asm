@@ -1325,7 +1325,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
 	predef AddBCDPredef ; add total price to money
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
@@ -1398,7 +1398,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld h,a ; hl = address of the list
 	ld a,[hl]
 	ld [wd12a],a ; [wd12a] = number of list entries
-	ld a,$0d ; list menu text box ID
+	ld a,LIST_MENU_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
@@ -2996,7 +2996,7 @@ YesNoChoice:: ; 35ec (0:35ec)
 	jr DisplayYesNoChoice
 
 Func_35f4:: ; 35f4 (0:35f4)
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call InitYesNoTextBoxParameters
 	jp DisplayTextBoxID
@@ -3023,7 +3023,7 @@ Func_361a:: ; 361a (0:361a)
 	hlCoord 12, 7
 	ld bc, $080d
 DisplayYesNoChoice:: ; 3628 (0:3628)
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	jp LoadScreenTilesFromBuffer1
@@ -4193,7 +4193,7 @@ AutoTextBoxDrawingCommon:: ; 3c41 (0:3c41)
 PrintText:: ; 3c49 (0:3c49)
 ; Print text hl at (1, 14).
 	push hl
-	ld a,1
+	ld a,MESSAGE_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call UpdateSprites

@@ -11,10 +11,10 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wPlayerMonNumber],a
 	inc a
 	ld [wcf93],a
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
-	ld a,$15
+	ld a,BUY_SELL_QUIT_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; do buy/sell/quit menu
 	ld hl,wd128 ; pointer to this pokemart's inventory
@@ -45,7 +45,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call SaveScreenTilesToBuffer1 ; save screen
 .sellMenuLoop
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wNumBagItems
@@ -79,7 +79,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
@@ -119,7 +119,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call SaveScreenTilesToBuffer1 ; save screen
 .buyMenuLoop
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wStringBuffer2 + 11
@@ -150,7 +150,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
@@ -180,7 +180,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
 	call LoadScreenTilesFromBuffer1
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,PokemartAnythingElseText

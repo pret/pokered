@@ -9,10 +9,10 @@ Func_1c98a: ; 1c98a (7:498a)
 	ld bc, $80f
 	ld a, NO_YES_MENU
 	ld [wTwoOptionMenuID], a
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	and a
 	jp z, Init
 	callba Func_73b6a

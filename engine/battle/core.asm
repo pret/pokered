@@ -98,7 +98,7 @@ SpecialEffectsCont: ; 3c049 (f:4049)
 
 SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	call LoadPlayerBackPic
-	ld a, $1 ; the usual text box at the bottom of the screen
+	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlCoord 1, 5
@@ -1137,7 +1137,7 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 .displayYesNoBox
 	hlCoord 13, 9
 	ld bc, $a0e
-	ld a, $14 ; yes/no text box
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wd12e]
@@ -1454,7 +1454,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call PrintText
 	hlCoord 0, 7
 	ld bc,$0801
-	ld a,$14
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld a,[wCurrentMenuItem]
@@ -2080,9 +2080,9 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .nonstandardbattle
 	ld a, [W_BATTLETYPE]
 	cp $2 ; safari
-	ld a, $b ; safari menu id
+	ld a, BATTLE_MENU_TEMPLATE
 	jr nz, .menuselected
-	ld a, $1b ; regular menu id
+	ld a, SAFARI_BATTLE_MENU_TEMPLATE
 .menuselected
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -2402,7 +2402,7 @@ PartyMenuOrRockOrRun:
 	call GoBackToPartyMenu
 	jr .checkIfPartyMonWasSelected
 .partyMonWasSelected
-	ld a, $c ; switch/stats/cancel menu
+	ld a, SWITCH_STATS_CANCEL_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wTopMenuItemY

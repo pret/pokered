@@ -716,7 +716,7 @@ TradeCenter_Trade:
 	ld bc, $080b
 	ld a, TRADE_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call LoadScreenTilesFromBuffer1
