@@ -126,7 +126,7 @@ LoadMonData_:
 
 .copyMonData
 	ld de, wcf98
-	ld bc, 44
+	ld bc, wPartyMon2 - wPartyMon1
 	jp CopyData
 
 

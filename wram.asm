@@ -824,6 +824,7 @@ wcfbc:: ds 2
 wcfbe:: ds 2
 wcfc0:: ds 2
 wcfc2:: ds 2
+
 wcfc4:: ds 1
 
 wWalkCounter:: ; cfc5

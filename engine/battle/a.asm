@@ -21,7 +21,7 @@ LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	bit Seeded, [hl]
 	jr nz, .asm_2bee7
 	set Seeded, [hl]
-	callab Func_3fba8
+	callab PlayCurrentMoveAnimation
 	ld hl, WasSeededText ; $7ef2
 	jp PrintText
 .asm_2bee7

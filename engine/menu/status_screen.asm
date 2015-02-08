@@ -82,7 +82,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld bc, $8103 ; Zero-padded, 3
 	call PrintNumber ; Pokémon no.
 	hlCoord 11, 10
-	predef Func_27d6b ; Prints the type (?)
+	predef PrintMonType
 	ld hl, NamePointers2 ; $6a9d
 	call .unk_12a7e
 	ld d, h

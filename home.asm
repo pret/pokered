@@ -4046,7 +4046,7 @@ PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	and a ; was the previous menu id 0?
 	jr z,.checkForArrow1
 	push af
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	bit 1,a ; is the menu double spaced?
 	jr z,.doubleSpaced1
 	ld bc,20
@@ -4072,7 +4072,7 @@ PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	and a
 	jr z,.checkForArrow2
 	push af
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	bit 1,a ; is the menu double spaced?
 	jr z,.doubleSpaced2
 	ld bc,20

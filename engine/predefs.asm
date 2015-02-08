@@ -127,7 +127,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
-	add_predef Func_27d6b
+	add_predef PrintMonType
 	add_predef EmotionBubble; 4C player exclamation
 	add_predef EmptyFunc3; return immediately
 	add_predef AskName
@@ -145,7 +145,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt
 	add_predef PickupItem
-	add_predef Func_27d98
+	add_predef PrintMoveType
 	add_predef LoadMovePPs
 	add_predef DrawHP ; 5F
 	add_predef Func_128f6

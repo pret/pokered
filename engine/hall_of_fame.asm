@@ -170,7 +170,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wd0b5], a
 	hlCoord 3, 9
-	predef Func_27d6b
+	predef PrintMonType
 	ld a, [wWhichTrade] ; wWhichTrade
 	jp PlayCry
 

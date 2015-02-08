@@ -346,10 +346,10 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call z, Func_73a29
 	call Func_7393f
 	call UpdateSprites
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	bit 1, a
 	ret nz
@@ -436,12 +436,12 @@ Func_7393f: ; 7393f (1c:793f)
 	ld b, $c
 	ld c, $7
 	call TextBoxBorder
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 2, [hl]
 	ld de, BoxNames ; $79d9
 	hlCoord 13, 1
 	call PlaceString
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 2, [hl]
 	ld a, [wd5a0]
 	and $7f

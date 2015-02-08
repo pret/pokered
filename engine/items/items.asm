@@ -919,15 +919,15 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	set 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$02
 	ld [wListMenuID],a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	res 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	pop af
 	ld b,a ; store heal amount (1/5 of max HP)
 	ld hl,wHPBarOldHP + 1
@@ -1069,15 +1069,15 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.playStatusAilmentCuringSound
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
 	call PlaySoundWaitForCurrent ; play sound
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	set 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$02
 	ld [wListMenuID],a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	res 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$f7 ; revived message
 	ld [wd07d],a
 	ld a,[wcf91]

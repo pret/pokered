@@ -48,7 +48,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld [wc0ee], a
 	call PlaySound
 	ld d, $28
-	call Func_704f3
+	call FlashSprite8Times
 .asm_704a2
 	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
@@ -74,16 +74,17 @@ PokeCenterOAMData: ; 704d7 (1c:44d7)
 	db $35,$30,$7D,$10
 	db $35,$38,$7D,$30
 
-Func_704f3: ; 704f3 (1c:44f3)
-	ld b, $8
-.asm_704f5
-	ld a, [rOBP1] ; $ff49
+; d = value to xor with palette
+FlashSprite8Times: ; 704f3 (1c:44f3)
+	ld b, 8
+.loop
+	ld a, [rOBP1]
 	xor d
-	ld [rOBP1], a ; $ff49
-	ld c, $a
+	ld [rOBP1], a
+	ld c, 10
 	call DelayFrames
 	dec b
-	jr nz, .asm_704f5
+	jr nz, .loop
 	ret
 
 Func_70503: ; 70503 (1c:4503)

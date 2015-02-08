@@ -8,7 +8,7 @@ MistEffect_: ; 33f2b (c:7f2b)
 	bit ProtectedByMist, [hl] ; is mon protected by mist?
 	jr nz, .asm_33f4a
 	set ProtectedByMist, [hl] ; mon is now protected by mist
-	callab Func_3fba8
+	callab PlayCurrentMoveAnimation
 	ld hl, ShroudedInMistText
 	jp PrintText
 .asm_33f4a

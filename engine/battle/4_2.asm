@@ -87,7 +87,9 @@ PickUpPayDayMoneyText: ; 1386b (4:786b)
 	TX_FAR _PickUpPayDayMoneyText
 	db "@"
 
-Func_13870: ; 13870 (4:7870)
+; try to initiate a wild pokemon encounter
+; returns success in Z
+TryDoWildEncounter: ; 13870 (4:7870)
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
@@ -95,14 +97,14 @@ Func_13870: ; 13870 (4:7870)
 	and a
 	ret nz
 	callab IsPlayerStandingOnDoorTileOrWarpTile
-	jr nc, .asm_13888
-.asm_13884
+	jr nc, .notStandingOnDoorOrWarpTile
+.CantEncounter
 	ld a, $1
 	and a
 	ret
-.asm_13888
-	callab Func_128d8
-	jr z, .asm_13884
+.notStandingOnDoorOrWarpTile
+	callab IsPlayerJustOutsideMap
+	jr z, .CantEncounter
 	ld a, [wRepelRemainingSteps]
 	and a
 	jr z, .asm_1389e
@@ -110,8 +112,8 @@ Func_13870: ; 13870 (4:7870)
 	jr z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
 .asm_1389e
-; determine if wild pokémon can appear in the half-block we’re standing	
-; is the bottom right tile (9,9) of the half-block are we standing a grass/water tile?
+; determine if wild pokémon can appear in the half-block we’re standing in	
+; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	hlCoord 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
@@ -127,17 +129,17 @@ Func_13870: ; 13870 (4:7870)
 ; …as long as it’s not Viridian Forest or Safari Zone.
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F ; is this an indoor map?
-	jr c, .CantEncounter
+	jr c, .CantEncounter2
 	ld a, [W_CURMAPTILESET]
 	cp FOREST ; Viridian Forest/Safari Zone
-	jr z, .CantEncounter
+	jr z, .CantEncounter2
 	ld a, [W_GRASSRATE]
 .CanEncounter
-; weigh encounter chance to a random number to determine if there will be an encounter
+; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
 	ld a, [hRandomAdd]
 	cp b
-	jr nc, .CantEncounter
+	jr nc, .CantEncounter2
 	ld a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
@@ -148,15 +150,15 @@ Func_13870: ; 13870 (4:7870)
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
-; determine which wild pokémon (grass or water) can appear in the half-block we’re standing
+; determine which wild pokémon (grass or water) can appear in the half-block we’re standing in
 	ld c, [hl]
 	ld hl, W_GRASSMONS
 	aCoord 8, 9	
-	cp $14 ; is the bottom left tile (8,9) of the half-block are we standing a water tile?	
+	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?	
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
 	ld hl, W_WATERMONS
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
-; "left shore" half-blocks (such as the one in the east coast of Cinnabar), load grass encounters.	
+; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.	
 .gotWildEncounterType
 	ld b, $0
 	add hl, bc
@@ -172,15 +174,15 @@ Func_13870: ; 13870 (4:7870)
 	ld b, a
 	ld a, [W_CURENEMYLVL]
 	cp b
-	jr c, .CantEncounter
+	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
 	jr .willEncounter
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
 	ld a, $d2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
-.CantEncounter
+.CantEncounter2
 	ld a, $1
 	and a
 	ret
@@ -293,8 +295,8 @@ ConversionEffect_: ; 139a3 (4:79a3)
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld hl, Func_3fba8
-	call Func_139d5
+	ld hl, PlayCurrentMoveAnimation
+	call CallBankF
 	ld hl, ConvertedTypeText
 	jp PrintText
 
@@ -304,22 +306,22 @@ ConvertedTypeText: ; 139cd (4:79cd)
 
 PrintButItFailedText: ; 139d2 (4:79d2)
 	ld hl, PrintButItFailedText_
-Func_139d5: ; 139d5 (4:79d5)
+CallBankF: ; 139d5 (4:79d5)
 	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
 HazeEffect_: ; 139da (4:79da)
 	ld a, $7
 	ld hl, wPlayerMonAttackMod
-	call Func_13a43
+	call ResetStatMods
 	ld hl, wEnemyMonAttackMod
-	call Func_13a43
+	call ResetStatMods
 	ld hl, wPlayerMonUnmodifiedAttack
 	ld de, wBattleMonAttack
-	call Func_13a4a
+	call ResetStats
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wEnemyMonAttack
-	call Func_13a4a
+	call ResetStats
 	ld hl, wEnemyMonStatus
 	ld de, wEnemySelectedMove
 	ld a, [H_WHOSETURN]
@@ -347,8 +349,8 @@ HazeEffect_: ; 139da (4:79da)
 	call CureStatuses
 	ld hl, W_ENEMYBATTSTATUS1
 	call CureStatuses
-	ld hl, Func_3fba8
-	call Func_139d5
+	ld hl, PlayCurrentMoveAnimation
+	call CallBankF
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
@@ -363,7 +365,7 @@ CureStatuses: ; 13a37 (4:7a37)
 	ld [hl], a
 	ret
 
-Func_13a43: ; 13a43 (4:7a43)
+ResetStatMods: ; 13a43 (4:7a43)
 	ld b, $8
 .loop
 	ld [hli], a
@@ -371,7 +373,7 @@ Func_13a43: ; 13a43 (4:7a43)
 	jr nz, .loop
 	ret
 
-Func_13a4a: ; 13a4a (4:7a4a)
+ResetStats: ; 13a4a (4:7a4a)
 	ld b, $8
 .loop
 	ld a, [hli]

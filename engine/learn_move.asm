@@ -126,13 +126,13 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call TextBoxBorder
 	hlCoord 6, 8
 	ld de, wd0e1
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	set 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	call PlaceString
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	res 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	ld hl, wTopMenuItemY
 	ld a, $8
 	ld [hli], a
@@ -146,10 +146,10 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, $3
 	ld [hli], a
 	ld [hl], $0
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	push af
 	call LoadScreenTilesFromBuffer1

@@ -2541,13 +2541,13 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 
 .writemoves
 	ld de, wd0e1
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	set 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	call PlaceString
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	res 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	ret
 
 .regularmenu
@@ -2666,10 +2666,10 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	call AddNTimes
 	ld [hl], $ec
 .select
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	bit 6, a
 	jp nz, CursorUp ; up
@@ -2959,7 +2959,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	call PrintNumber
 	call GetCurrentMove 
 	hlCoord 2, 10
-	predef Func_27d98
+	predef PrintMoveType
 .moveDisabled
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -6814,7 +6814,7 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz
-	callab Func_13870
+	callab TryDoWildEncounter
 	ret nz
 asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [wMapPalOffset]
@@ -6823,7 +6823,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [hl]
 	push af
 	res 1, [hl]
-	callab Func_525af
+	callab InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
 	sub $c8
 	jp c, InitWildBattle
@@ -7637,7 +7637,7 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	call nz, Bankswitch ; play Minimize animation unless there's Substitute involved
 	pop de
 .asm_3f4f9
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .applyBadgeBoostsAndStatusPenalties
@@ -8451,7 +8451,7 @@ MimicEffect: ; 3f9ed (f:79ed)
 	ld [hl], a
 	ld [wd11e], a
 	call GetMoveName
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
 	jp PrintText
 .asm_3fa74
@@ -8467,7 +8467,7 @@ LeechSeedEffect: ; 3fa7c (f:7a7c)
 	jp Bankswitch
 
 SplashEffect: ; 3fa84 (f:7a84)
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	jp PrintNoEffectText
 
 DisableEffect: ; 3fa8a (f:7a8a)
@@ -8662,15 +8662,15 @@ Func_3fb96: ; 3fb96 (f:7b96)
 	ld [wcc5b], a
 	jp Func_3fbbc
 
-Func_3fba8: ; 3fba8 (f:7ba8)
+PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
 	xor a
 	ld [wcc5b], a
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
-	jr z, .asm_3fbb7
+	jr z, .notEnemyTurn
 	ld a, [W_ENEMYMOVENUM]
-.asm_3fbb7
+.notEnemyTurn
 	and a
 	ret z
 
