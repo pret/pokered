@@ -55,7 +55,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld de, Type1Text
 	call PlaceString ; "TYPE1/"
 	hlCoord 11, 3
-	predef DrawHP ; predef $5f
+	predef DrawHP
 	ld hl, wcf25
 	call GetHealthBarColor
 	ld b, $3

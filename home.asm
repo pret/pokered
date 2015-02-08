@@ -173,7 +173,7 @@ LoadDestinationWarpPosition:: ; 1313 (0:1313)
 DrawHPBar:: ; 1336 (0:1336)
 ; Draw an HP bar d tiles long, and fill it to e pixels.
 ; If c is nonzero, show at least a sliver regardless.
-; The right end of the bar changes with [wListMenuID].
+; The right end of the bar changes with [wHPBarType].
 
 	push hl
 	push de
@@ -195,7 +195,7 @@ DrawHPBar:: ; 1336 (0:1336)
 	jr nz, .draw
 
 	; Right
-	ld a,[wListMenuID]
+	ld a,[wHPBarType]
 	dec a
 	ld a, $6d ; status screen and battle
 	jr z, .ok

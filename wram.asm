@@ -803,6 +803,12 @@ wWhichPokemon:: ; cf92
 
 wcf93:: ds 1
 
+wHPBarType:: ; cf94
+; type of HP bar
+; $00 = enemy HUD in battle
+; $01 = player HUD in battle / status screen
+; $02 = party menu
+
 wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1

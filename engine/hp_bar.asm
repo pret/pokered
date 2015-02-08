@@ -203,7 +203,7 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	push af
 	push de
-	ld a, [wListMenuID] ; wListMenuID
+	ld a, [wHPBarType]
 	and a
 	jr z, .asm_fb2d
 	ld a, [wHPBarOldHP]

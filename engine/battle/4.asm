@@ -18,27 +18,28 @@ IsPlayerJustOutsideMap: ; 128d8 (4:68d8)
 DrawHP: ; 128ef (4:68ef)
 	call GetPredefRegisters
 	ld a, $1
-	jr asm_128fb
+	jr DrawHP_
 
-Func_128f6: ; 128f6 (4:68f6)
+DrawHP2: ; 128f6 (4:68f6)
 	call GetPredefRegisters
 	ld a, $2
-asm_128fb: ; 128fb (4:68fb)
-	ld [wListMenuID], a
+
+DrawHP_: ; 128fb (4:68fb)
+	ld [wHPBarType], a
 	push hl
 	ld a, [wLoadedMonHP]
 	ld b, a
 	ld a, [wLoadedMonHP + 1]
 	ld c, a
 	or b
-	jr nz, .asm_12913
+	jr nz, .nonzeroHP
 	xor a
 	ld c, a
 	ld e, a
 	ld a, $6
 	ld d, a
-	jp DrawHPBarAndFraction
-.asm_12913
+	jp .drawHPBarAndPrintFraction
+.nonzeroHP
 	ld a, [wLoadedMonMaxHP]
 	ld d, a
 	ld a, [wLoadedMonMaxHP + 1]
@@ -47,8 +48,7 @@ asm_128fb: ; 128fb (4:68fb)
 	ld a, $6
 	ld d, a
 	ld c, a
-
-DrawHPBarAndFraction: ; 12924 (4:6924)
+.drawHPBarAndPrintFraction
 	pop hl
 	push de
 	push hl
@@ -59,10 +59,10 @@ DrawHPBarAndFraction: ; 12924 (4:6924)
 	bit 0, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
-	jr .printHPFraction
+	jr .printFraction
 .printFractionBelowBar
 	ld bc, SCREEN_WIDTH + 1 ; below bar
-.printHPFraction
+.printFraction
 	add hl, bc
 	ld de, wLoadedMonHP
 	ld bc, $203

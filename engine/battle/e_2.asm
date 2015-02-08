@@ -91,7 +91,7 @@ HealEffect_: ; 3b9ec (e:79ec)
 	hlCoord 2, 2
 	xor a
 .asm_3ba83
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	predef UpdateHPBar2
 	ld hl, DrawHUDsAndHPBars
 	call BankswitchEtoF

@@ -1,4 +1,4 @@
-Func_1c98a: ; 1c98a (7:498a)
+DoClearSaveDialogue: ; 1c98a (7:498a)
 	call ClearScreen
 	call GoPAL_SET_CF1C
 	call LoadFontTilePatterns
@@ -15,7 +15,7 @@ Func_1c98a: ; 1c98a (7:498a)
 	ld a, [wCurrentMenuItem]
 	and a
 	jp z, Init
-	callba Func_73b6a
+	callba ClearSAV
 	jp Init
 
 ClearSaveDataText: ; 1c9c1 (7:49c1)

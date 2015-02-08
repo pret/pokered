@@ -665,7 +665,7 @@ HallOfFame_Copy: ; 73b51 (1c:7b51)
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73b6a: ; 73b6a (1c:7b6a)
+ClearSAV: ; 73b6a (1c:7b6a)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1

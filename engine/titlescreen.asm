@@ -237,14 +237,14 @@ ENDC
 	call LoadGBPal
 	ld a, [hJoyHeld]
 	ld b, a
-	and $46
-	cp $46
-	jp z, Func_448e
+	and D_UP | SELECT | B_BUTTON
+	cp D_UP | SELECT | B_BUTTON
+	jp z, .doClearSaveDialogue
 	jp MainMenu
 
-Func_448e: ; 448e (1:448e)
-	ld b, BANK(Func_1c98a)
-	ld hl, Func_1c98a
+.doClearSaveDialogue
+	ld b, BANK(DoClearSaveDialogue)
+	ld hl, DoClearSaveDialogue
 	jp Bankswitch
 
 Func_4496: ; 4496 (1:4496)

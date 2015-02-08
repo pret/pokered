@@ -207,16 +207,16 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
 RecoilEffect_: ; 1392c (4:792c)
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_PLAYERMOVENUM] ; wcfd2
-	ld hl, wBattleMonMaxHP ; wd023
+	ld a, [W_PLAYERMOVENUM]
+	ld hl, wBattleMonMaxHP
 	jr z, .asm_1393d
-	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
-	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
+	ld a, [W_ENEMYMOVENUM]
+	ld hl, wEnemyMonMaxHP
 .asm_1393d
 	ld d, a
-	ld a, [W_DAMAGE] ; W_DAMAGE
+	ld a, [W_DAMAGE]
 	ld b, a
 	ld a, [W_DAMAGE + 1]
 	ld c, a
@@ -260,16 +260,16 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [hl], a
 .asm_13982
 	hlCoord 10, 9
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
 	ld a, $1
 	jr z, .asm_13990
 	hlCoord 2, 2
 	xor a
 .asm_13990
-	ld [wListMenuID], a ; wListMenuID
+	ld [wHPBarType], a
 	predef UpdateHPBar2
-	ld hl, HitWithRecoilText ; $799e
+	ld hl, HitWithRecoilText
 	jp PrintText
 HitWithRecoilText: ; 1399e (4:799e)
 	TX_FAR _HitWithRecoilText
@@ -392,8 +392,8 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	ld a, [wLinkState]
 	and a
 	jr nz, .rival
-	ld hl, W_RIVALNAME ; wd34a
-	ld a, [W_TRAINERCLASS] ; wd031
+	ld hl, W_RIVALNAME
+	ld a, [W_TRAINERCLASS]
 	cp SONY1
 	jr z, .rival
 	cp SONY2

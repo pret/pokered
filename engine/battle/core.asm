@@ -768,7 +768,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	xor a
 .playersTurn
 	push bc
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	predef UpdateHPBar2
 	pop bc
 	ret
@@ -2029,7 +2029,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	ld c, a
 .drawHPBar
 	xor a
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	hlCoord 2, 2
 	call DrawHPBar
 	ld a, $1
@@ -4899,7 +4899,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	ld [wHPBarNewHP],a
 	hlCoord 2, 2
 	xor a
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp DrawHUDsAndHPBars
@@ -5017,7 +5017,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld [wHPBarMaxHP],a
 	hlCoord 10, 9
 	ld a,$01
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
 	jp DrawHUDsAndHPBars

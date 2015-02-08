@@ -77,7 +77,7 @@ DrainHPEffect_: ; 783f (1:783f)
 	hlCoord 2, 2
 	xor a
 .next2
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	predef UpdateHPBar2
 	predef DrawPlayerHUDAndHPBar
 	predef DrawEnemyHUDAndHPBar

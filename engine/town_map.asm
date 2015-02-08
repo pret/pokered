@@ -364,10 +364,10 @@ Func_711c4: ; 711c4 (1c:51c4)
 	jp CopyData
 
 Func_711ef: ; 711ef (1c:51ef)
-	callba Func_e9cb
+	callba FindWildLocationsOfMon
 	call Func_712d9
 	ld hl, wOAMBuffer
-	ld de, wHPBarMaxHP
+	ld de, wBuffer
 .asm_71200
 	ld a, [de]
 	cp $ff

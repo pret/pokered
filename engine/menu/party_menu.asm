@@ -92,7 +92,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	set 0,a
 	ld [hFlags_0xFFF6],a
 	add hl,bc
-	predef Func_128f6 ; draw HP bar and prints current / max HP
+	predef DrawHP2 ; draw HP bar and prints current / max HP
 	ld a,[hFlags_0xFFF6]
 	res 0,a
 	ld [hFlags_0xFFF6],a

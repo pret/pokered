@@ -430,7 +430,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr .End
 .sendToBox	;$5907
 	call ClearSprites
-	call Func_e7a4
+	call SendNewMonToBox
 	ld hl,ItemUseBallText07
 	ld a,[wd7f1]
 	bit 0,a		;already met Bill?
@@ -923,7 +923,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	set 0,a
 	ld [hFlags_0xFFF6],a
 	ld a,$02
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
 	ld a,[hFlags_0xFFF6]
 	res 0,a
@@ -1073,7 +1073,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	set 0,a
 	ld [hFlags_0xFFF6],a
 	ld a,$02
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
 	ld a,[hFlags_0xFFF6]
 	res 0,a
@@ -1090,7 +1090,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -1102,7 +1102,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [H_AUTOBGTRANSFERENABLED],a
 	ld c,50
 	call DelayFrames
-	call WaitForTextScrollButtonPress ; wait for a button press
+	call WaitForTextScrollButtonPress
 	jr .done
 .canceledItemUse
 	xor a
@@ -1118,7 +1118,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[W_ISINBATTLE]
 	and a
 	ret nz
-	jp ReloadMapData ; restore saved screen
+	jp ReloadMapData
 .useVitamin
 	push hl
 	ld a,[hl]
@@ -2567,7 +2567,7 @@ IsKeyItem_: ; e764 (3:6764)
 
 INCLUDE "data/key_items.asm"
 
-Func_e7a4: ; e7a4 (3:67a4)
+SendNewMonToBox: ; e7a4 (3:67a4)
 	ld de, W_NUMINBOX ; wda80
 	ld a, [de]
 	inc a
@@ -2818,49 +2818,51 @@ ItemUseReloadOverworldData: ; e9c5 (3:69c5)
 	call LoadCurrentMapView
 	jp UpdateSprites
 
-Func_e9cb: ; e9cb (3:69cb)
-	ld hl, WildDataPointers ; $4eeb
-	ld de, wHPBarMaxHP
+; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
+; this is used by the pokedex to display locations the mon can be found on the map.
+FindWildLocationsOfMon: ; e9cb (3:69cb)
+	ld hl, WildDataPointers
+	ld de, wBuffer
 	ld c, $0
-.asm_e9d3
+.loop
 	inc hl
 	ld a, [hld]
 	inc a
-	jr z, .asm_e9ec
+	jr z, .done
 	push hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [hli]
 	and a
-	call nz, Func_e9f0
+	call nz, CheckMapForMon ; land
 	ld a, [hli]
 	and a
-	call nz, Func_e9f0
+	call nz, CheckMapForMon ; water
 	pop hl
 	inc hl
 	inc hl
 	inc c
-	jr .asm_e9d3
-.asm_e9ec
-	ld a, $ff
+	jr .loop
+.done
+	ld a, $ff ; list terminator
 	ld [de], a
 	ret
 
-Func_e9f0: ; e9f0 (3:69f0)
+CheckMapForMon: ; e9f0 (3:69f0)
 	inc hl
 	ld b, $a
-.asm_e9f3
+.loop
 	ld a, [wd11e]
 	cp [hl]
-	jr nz, .asm_e9fc
+	jr nz, .nextEntry
 	ld a, c
 	ld [de], a
 	inc de
-.asm_e9fc
+.nextEntry
 	inc hl
 	inc hl
 	dec b
-	jr nz, .asm_e9f3
+	jr nz, .loop
 	dec hl
 	ret

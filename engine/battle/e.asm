@@ -1174,7 +1174,7 @@ Func_3a718: ; 3a718 (e:6718)
 	call AIPrintItemUse_
 	hlCoord 2, 2
 	xor a
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2
 	jp DecrementAICount
 
