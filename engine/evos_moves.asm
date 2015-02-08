@@ -364,7 +364,7 @@ LearnMoveFromLevelUp: ; 3af5b (e:6f5b)
 	dec b
 	jr nz, .checkCurrentMovesLoop
 	ld a, d
-	ld [wd0e0], a
+	ld [wMoveNum], a
 	ld [wd11e], a
 	call GetMoveName
 	call CopyStringToCF4B

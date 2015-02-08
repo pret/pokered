@@ -2084,7 +2084,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld [wd11e],a
 	predef TMToMove ; get move ID from TM/HM ID
 	ld a,[wd11e]
-	ld [wd0e0],a
+	ld [wMoveNum],a
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
 	pop af

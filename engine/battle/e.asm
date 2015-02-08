@@ -577,14 +577,15 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 
 INCLUDE "text/trainer_names.asm"
 
-Func_39b87: ; 39b87 (e:5b87)
-	ld hl, wd0dc
-	ld de, wd0e1
+; formats a string at wMovesString that lists the moves at wMoves
+FormatMovesString: ; 39b87 (e:5b87)
+	ld hl, wMoves
+	ld de, wMovesString
 	ld b, $0
-.asm_39b8f
+.printMoveNameLoop
 	ld a, [hli]
-	and a
-	jr z, .asm_39bc1
+	and a ; end of move list?
+	jr z, .printDashLoop ; print dashes when no moves are left
 	push hl
 	ld [wd0b5], a
 	ld a, BANK(MoveNames)
@@ -593,38 +594,38 @@ Func_39b87: ; 39b87 (e:5b87)
 	ld [W_LISTTYPE], a
 	call GetName
 	ld hl, wcd6d
-.asm_39ba7
+.copyNameLoop
 	ld a, [hli]
 	cp $50
-	jr z, .asm_39bb0
+	jr z, .doneCopyingName
 	ld [de], a
 	inc de
-	jr .asm_39ba7
-.asm_39bb0
+	jr .copyNameLoop
+.doneCopyingName
 	ld a, b
 	ld [wcd6c], a
 	inc b
-	ld a, $4e
+	ld a, $4e ; line break
 	ld [de], a
 	inc de
 	pop hl
 	ld a, b
-	cp $4
-	jr z, .asm_39bd1
-	jr .asm_39b8f
-.asm_39bc1
+	cp NUM_MOVES
+	jr z, .done
+	jr .printMoveNameLoop
+.printDashLoop
 	ld a, "-"
 	ld [de], a
 	inc de
 	inc b
 	ld a, b
-	cp $4
-	jr z, .asm_39bd1
-	ld a, $4e
+	cp NUM_MOVES
+	jr z, .done
+	ld a, $4e ; line break
 	ld [de], a
 	inc de
-	jr .asm_39bc1
-.asm_39bd1
+	jr .printDashLoop
+.done
 	ld a, "@"
 	ld [de], a
 	ret

@@ -2533,14 +2533,14 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	jr .regularmenu
 
 .loadmoves
-	ld de, wd0dc
-	ld bc, $4
+	ld de, wMoves
+	ld bc, NUM_MOVES
 	call CopyData
-	callab Func_39b87
+	callab FormatMovesString
 	ret
 
 .writemoves
-	ld de, wd0e1
+	ld de, wMovesString
 	ld a, [hFlags_0xFFF6]
 	set 2, a
 	ld [hFlags_0xFFF6], a

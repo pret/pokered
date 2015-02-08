@@ -233,13 +233,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [hTilesetType], a
 	ld [$ffba], a
 	ld bc, $0005
-	ld hl, wd0dc
+	ld hl, wMoves
 	call FillMemory
 	ld hl, wLoadedMonMoves
-	ld de, wd0dc
-	ld bc, $0004
+	ld de, wMoves
+	ld bc, NUM_MOVES
 	call CopyData
-	callab Func_39b87
+	callab FormatMovesString
 	hlCoord 9, 2
 	ld bc, $050a
 	call ClearScreenArea ; Clear under name
@@ -250,7 +250,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld c, $12
 	call TextBoxBorder ; Draw move container
 	hlCoord 2, 9
-	ld de, wd0e1
+	ld de, wMovesString
 	call PlaceString ; Print moves
 	ld a, [wcd6c]
 	inc a

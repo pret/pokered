@@ -1,12 +1,12 @@
-; checks if the mon in wWhichPokemon already knows the move in wd0e0
+; checks if the mon in [wWhichPokemon] already knows the move in [wMoveNum]
 CheckIfMoveIsKnown: ; 2fe18 (b:7e18)
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
-	ld a, [wd0e0]
+	ld a, [wMoveNum]
 	ld b, a
-	ld c, $4 ; nubmer of moves
+	ld c, NUM_MOVES
 .loop
 	ld a, [hli]
 	cp b

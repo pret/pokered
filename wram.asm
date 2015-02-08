@@ -1275,10 +1275,17 @@ ds 2
 
 wRepelRemainingSteps:: ; wd0db
     ds 1
-	
-wd0dc:: ds 4
-wd0e0:: ds 1
-wd0e1:: ds 56
+
+wMoves:: ; wd0dc
+; list of moves for FormatMovesString
+	ds 4
+
+wMoveNum:: ; d0e0
+	ds 1
+
+wMovesString:: ; d0e1
+	ds 56
+
 wd119:: ds 1
 
 wWalkBikeSurfStateCopy:: ; d11a

@@ -259,8 +259,8 @@ LoadMonData:: ; 1372 (0:1372)
 
 
 Func_137a:: ; 137a (0:137a)
-; Write c to [wd0dc + b]. Unused.
-	ld hl, wd0dc
+; Write c to [wMoves + b]. Unused.
+	ld hl, wMoves
 	ld e, b
 	ld d, 0
 	add hl, de
@@ -546,7 +546,7 @@ PrintLevelCommon:: ; 1523 (0:1523)
 
 Func_152e:: ; 152e (0:152e)
 ; Unused.
-	ld hl,wd0dc
+	ld hl,wMoves
 	ld c,a
 	ld b,0
 	add hl,bc
