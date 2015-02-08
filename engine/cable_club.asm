@@ -578,7 +578,7 @@ TradeCenter_SelectMon:
 
 ReturnToCableClubRoom: ; 577d (1:577d)
 	call GBPalWhiteOutWithDelay3
-	ld hl, wcfc4
+	ld hl, wCharRAMInUseForText
 	ld a, [hl]
 	push af
 	push hl
@@ -808,7 +808,7 @@ TradeCenter_Trade:
 	ld a, c
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld de, wcf98
+	ld de, wLoadedMon
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call CopyData
 	call AddEnemyMonToPlayerParty

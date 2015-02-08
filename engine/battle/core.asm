@@ -1899,23 +1899,23 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	call CenterMonName
 	call PlaceString
 	ld hl, wBattleMonSpecies
-	ld de, wcf98
+	ld de, wLoadedMon
 	ld bc, $c
 	call CopyData
 	ld hl, wBattleMonLevel
-	ld de, wcfb9
+	ld de, wLoadedMonLevel
 	ld bc, $b
 	call CopyData
 	hlCoord 14, 8
 	push hl
 	inc hl
-	ld de, wcf9c
+	ld de, wLoadedMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
 	jr nz, .asm_3cdae
 	call PrintLevel
 .asm_3cdae
-	ld a, [wcf98]
+	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
 	hlCoord 10, 9
 	predef DrawHP
@@ -1965,7 +1965,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	pop hl
 	jr nz, .skipPrintLevel ; if the mon has a status condition, skip printing the level
 	ld a, [wEnemyMonLevel]
-	ld [wcfb9], a
+	ld [wLoadedMonLevel], a
 	call PrintLevel
 .skipPrintLevel
 	ld hl, wEnemyMonHP
@@ -2270,9 +2270,9 @@ BagWasSelected:
 	jr nz, DisplayPlayerBag ; no, it is a normal battle
 	ld hl, OldManItemList
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	jr DisplayBagMenu
 
 OldManItemList:
@@ -2284,9 +2284,9 @@ DisplayPlayerBag:
 	; get the pointer to player's bag when in a normal battle
 	ld hl, wNumBagItems
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 
 DisplayBagMenu:
 	xor a
@@ -4451,7 +4451,7 @@ GetEnemyMonStat: ; 3df1c (f:5f1c)
 	ld [wd0b5], a
 	call GetMonHeader
 	ld hl, wEnemyMonDVs
-	ld de, wcfaf
+	ld de, wLoadedMonSpeedExp
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -4459,7 +4459,7 @@ GetEnemyMonStat: ; 3df1c (f:5f1c)
 	ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, wcfa4
+	ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
 	call CalcStat
 	pop de
 	ret

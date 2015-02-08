@@ -85,7 +85,7 @@ LoadMonData_:
 ;  1: enemymon
 ;  2: boxmon
 ;  3: daycaremon
-; Return monster id at wcf91 and its data at wcf98.
+; Return monster id at wcf91 and its data at wLoadedMon.
 ; Also load base stats at W_MONHDEXNUM for convenience.
 
 	ld a, [wDayCareMonSpecies]
@@ -125,7 +125,7 @@ LoadMonData_:
 	call AddNTimes
 
 .copyMonData
-	ld de, wcf98
+	ld de, wLoadedMon
 	ld bc, wPartyMon2 - wPartyMon1
 	jp CopyData
 
@@ -808,7 +808,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -854,7 +854,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	call DelayFrames
 	push hl
 	push de
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -916,7 +916,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jr .done
 .combineItemSlots
 	ld [hl],a ; put the sum in the second item slot
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -1022,7 +1022,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 .drawTextBoxBorder
 	call TextBoxBorder
 .skipDrawingTextBoxBorder
-	ld hl,wcfc4
+	ld hl,wCharRAMInUseForText
 	set 0,[hl]
 	ld hl,wFlags_0xcd60
 	bit 4,[hl]
@@ -3823,8 +3823,8 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wcf98
-	call CopyData    ; write new mon's data (from wcf98)
+	ld hl, wLoadedMon
+	call CopyData    ; write new mon's data (from wLoadedMon)
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	dec a

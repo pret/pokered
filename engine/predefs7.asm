@@ -3,9 +3,9 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	call PrintText
 	ld hl, wStringBuffer2 + 11
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	ld a, [wListScrollOffset] ; wcc36
 	push af
 	xor a

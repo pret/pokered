@@ -786,12 +786,15 @@ wStringBuffer2:: ; cf70
 wStringBuffer3:: ; cf81
 	ds 9 + 1
 
-wcf8b:: ds 1
-wcf8c:: ds 1
+wList:: ; cf8b
+	ds 2
+
 wcf8d:: ds 1
 wcf8e:: ds 1
-wcf8f:: ds 1
-wcf90:: ds 1
+
+wItemPrices:: ; cf8f
+	ds 2
+
 wcf91:: ds 1
 
 wWhichPokemon:: ; cf92
@@ -807,25 +810,15 @@ wListMenuID:: ; cf94
 wcf95:: ds 1
 wcf96:: ds 1
 wcf97:: ds 1
-wcf98:: ds 1
-wcf99:: ds 1
-wcf9a:: ds 1
-wcf9b:: ds 1
-wcf9c:: ds 4
-wcfa0:: ds 4
-wcfa4:: ds 2
-wcfa6:: ds 2
-wcfa8:: ds 7
-wcfaf:: ds 10
-wcfb9:: ds 1
-wcfba:: ds 1
-wcfbb:: ds 1
-wcfbc:: ds 2
-wcfbe:: ds 2
-wcfc0:: ds 2
-wcfc2:: ds 2
 
-wcfc4:: ds 1
+; LoadMonData copies mon data here
+wLoadedMon:: party_struct wLoadedMon ; cf98
+
+wCharRAMInUseForText:: ; cfc4
+; bit 0: the space in VRAM that is used to store walking tile patterns for
+;        the player and NPCs is in use for text tile patterns. this means
+;        that movement must be disabled.
+	ds 1
 
 wWalkCounter:: ; cfc5
 ; walk animation counter

@@ -1,6 +1,6 @@
 ; calculates the level a mon should be based on its current exp
 CalcLevelFromExperience: ; 58f43 (16:4f43)
-	ld a, [wcf98]
+	ld a, [wLoadedMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld d, $1 ; init level to 1
@@ -8,7 +8,7 @@ CalcLevelFromExperience: ; 58f43 (16:4f43)
 	inc d ; increment level
 	call CalcExperience
 	push hl
-	ld hl, wcfa8 ; current exp
+	ld hl, wLoadedMonExp + 2 ; current exp
 ; compare exp needed for level d with current exp
 	ld a, [H_MULTIPLICAND + 2]
 	ld c, a

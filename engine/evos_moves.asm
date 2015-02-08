@@ -88,7 +88,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp nz, .nextEvoEntry1 ; if not trading, go to the next evolution entry
 	ld a, [hli] ; level requirement
 	ld b, a
-	ld a, [wcfb9]
+	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .asm_3adb6
@@ -101,7 +101,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .checkLevel
 	ld a, [hli] ; level requirement
 	ld b, a
-	ld a, [wcfb9]
+	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
 .asm_3adb6
@@ -136,7 +136,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	pop hl
 	ld a, [hl]
 	ld [wd0b5], a
-	ld [wcf98], a
+	ld [wLoadedMonSpecies], a
 	ld [wHPBarMaxHP + 1], a
 	ld a, MONSTER_NAME
 	ld [W_LISTTYPE], a
@@ -169,8 +169,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [W_MONHDEXNUM], a
 	pop af
 	ld [wd11e], a
-	ld hl, wcfa8
-	ld de, wcfba
+	ld hl, wLoadedMonHPExp - 1
+	ld de, wLoadedMonStats
 	ld b, $1
 	call CalcStats
 	ld a, [wWhichPokemon]
@@ -186,14 +186,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld hl, wcfbb
+	ld hl, wLoadedMonMaxHP + 1
 	ld a, [hld]
 	sub c
 	ld c, a
 	ld a, [hl]
 	sbc b
 	ld b, a
-	ld hl, wcf9a
+	ld hl, wLoadedMonHP + 1
 	ld a, [hl]
 	add c
 	ld [hld], a
@@ -226,7 +226,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call Evolution_FlagAction
 	pop de
 	pop hl
-	ld a, [wcf98]
+	ld a, [wLoadedMonSpecies]
 	ld [hl], a
 	push hl
 	ld l, e

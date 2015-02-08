@@ -325,9 +325,9 @@ Func_216b3: ; 216b3 (8:56b3)
 
 Func_216be: ; 216be (8:56be)
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	xor a
 	ld [wcf93], a
 	ld [wListMenuID], a ; wListMenuID

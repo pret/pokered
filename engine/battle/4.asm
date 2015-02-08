@@ -26,9 +26,9 @@ Func_128f6: ; 128f6 (4:68f6)
 asm_128fb: ; 128fb (4:68fb)
 	ld [wListMenuID], a
 	push hl
-	ld a, [wcf99]
+	ld a, [wLoadedMonHP]
 	ld b, a
-	ld a, [wcf9a]
+	ld a, [wLoadedMonHP + 1]
 	ld c, a
 	or b
 	jr nz, .asm_12913
@@ -39,9 +39,9 @@ asm_128fb: ; 128fb (4:68fb)
 	ld d, a
 	jp DrawHPBarAndFraction
 .asm_12913
-	ld a, [wcfba]
+	ld a, [wLoadedMonMaxHP]
 	ld d, a
-	ld a, [wcfbb]
+	ld a, [wLoadedMonMaxHP + 1]
 	ld e, a
 	predef HPBarLength
 	ld a, $6
@@ -64,12 +64,12 @@ DrawHPBarAndFraction: ; 12924 (4:6924)
 	ld bc, SCREEN_WIDTH + 1 ; below bar
 .printHPFraction
 	add hl, bc
-	ld de, wcf99
+	ld de, wLoadedMonHP
 	ld bc, $203
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, wcfba
+	ld de, wLoadedMonMaxHP
 	ld bc, $203
 	call PrintNumber
 	pop hl

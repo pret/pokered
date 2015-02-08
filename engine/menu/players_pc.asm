@@ -97,9 +97,9 @@ Func_79ab: ; 79ab (1:79ab)
 	call PrintText
 	ld hl, wNumBagItems ; wNumBagItems
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	xor a
 	ld [wcf93], a
 	ld a, $3
@@ -151,9 +151,9 @@ Func_7a28: ; 7a28 (1:7a28)
 	call PrintText
 	ld hl, wNumBoxItems ; wNumBoxItems
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	xor a
 	ld [wcf93], a
 	ld a, $3
@@ -205,9 +205,9 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	call PrintText
 	ld hl, wNumBoxItems ; wNumBoxItems
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	xor a
 	ld [wcf93], a
 	ld a, $3

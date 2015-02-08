@@ -83,7 +83,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld bc,14 ; 14 columns to the right
 	add hl,bc
-	ld de,wcf9c
+	ld de,wLoadedMonStatus
 	call PrintStatusCondition
 	pop hl
 	push hl
@@ -134,7 +134,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld hl,EvosMovesPointerTable
 	ld b,0
-	ld a,[wcf98] ; pokemon ID
+	ld a,[wLoadedMonSpecies]
 	dec a
 	add a
 	rl b

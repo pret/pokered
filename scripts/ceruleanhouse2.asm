@@ -22,9 +22,9 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	call LoadItemList
 	ld hl, wStringBuffer2 + 11
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	xor a
 	ld [wcf93], a
 	ld [wMenuItemToSwap], a

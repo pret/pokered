@@ -308,10 +308,10 @@ StartMenu_Item: ; 13302 (4:7302)
 	jr .exitMenu
 .notInCableClubRoom
 	ld bc,wNumBagItems
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,c
 	ld [hli],a
-	ld [hl],b ; store item bag pointer at wcf8b (for DisplayListMenuID)
+	ld [hl],b ; store item bag pointer at wList (for DisplayListMenuID)
 	xor a
 	ld [wcf93],a
 	ld a,ITEMLISTMENU

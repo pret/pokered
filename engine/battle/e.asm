@@ -665,18 +665,18 @@ Func_39bd5: ; 39bd5 (e:5bd5)
 .asm_39c18
 	ld [W_LISTTYPE], a
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	ld a, e
 	ld [wcf8d], a
 	ld a, d
 	ld [wcf8e], a
-	ld bc, ItemPrices ; $4608
+	ld bc, ItemPrices
 	ld a, c
-	ld [wcf8f], a
+	ld [wItemPrices], a
 	ld a, b
-	ld [wcf90], a
+	ld [wItemPrices + 1], a
 	ret
 
 Func_39c37: ; 39c37 (e:5c37)

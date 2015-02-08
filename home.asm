@@ -239,7 +239,7 @@ DrawHPBar:: ; 1336 (0:1336)
 	ret
 
 
-; loads pokemon data from one of multiple sources to wcf98
+; loads pokemon data from one of multiple sources to wLoadedMon
 ; loads base stats to W_MONHDEXNUM
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
@@ -250,7 +250,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; 03: daycare
 ; OUTPUT:
 ; [wcf91] = pokemon ID
-; wcf98 = base address of pokemon data
+; wLoadedMon = base address of pokemon data
 ; W_MONHDEXNUM = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
 	ld hl, LoadMonData_
@@ -515,12 +515,12 @@ PrintStatusConditionNotFainted ; 14f6
 ; function to print pokemon level, leaving off the ":L" if the level is at least 100
 ; INPUT:
 ; hl = destination address
-; [wcfb9] = level
+; [wLoadedMonLevel] = level
 PrintLevel:: ; 150b (0:150b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,2 ; number of digits
-	ld a,[wcfb9] ; level
+	ld a,[wLoadedMonLevel] ; level
 	cp a,100
 	jr c,PrintLevelCommon
 ; if level at least 100, write over the ":L" tile
@@ -531,12 +531,12 @@ PrintLevel:: ; 150b (0:150b)
 ; prints the level without leaving off ":L" regardless of level
 ; INPUT:
 ; hl = destination address
-; [wcfb9] = level
+; [wLoadedMonLevel] = level
 PrintLevelFull:: ; 151b (0:151b)
 	ld a,$6e ; ":L" tile ID
 	ld [hli],a
 	ld c,3 ; number of digits
-	ld a,[wcfb9] ; level
+	ld a,[wLoadedMonLevel] ; level
 
 PrintLevelCommon:: ; 1523 (0:1523)
 	ld [wd11e],a
@@ -1183,7 +1183,7 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
-	ld hl,wcfc4
+	ld hl,wCharRAMInUseForText
 	res 0,[hl]
 	ld a,[wd732]
 	bit 3,a ; used fly warp
@@ -1372,7 +1372,7 @@ AddItemToInventory:: ; 2bcf (0:2bcf)
 
 ; INPUT:
 ; [wListMenuID] = list menu ID
-; [wcf8b] = address of the list (2 bytes)
+; [wList] = address of the list (2 bytes)
 DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
@@ -1392,9 +1392,9 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wd12a],a
-	ld a,[wcf8b]
+	ld a,[wList]
 	ld l,a
-	ld a,[wcf8c]
+	ld a,[wList + 1]
 	ld h,a ; hl = address of the list
 	ld a,[hl]
 	ld [wd12a],a ; [wd12a] = number of list entries
@@ -1485,9 +1485,9 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 ; if it's an item menu
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
-	ld a,[wcf8b]
+	ld a,[wList]
 	ld l,a
-	ld a,[wcf8c]
+	ld a,[wList + 1]
 	ld h,a
 	inc hl ; hl = beginning of list entries
 	ld b,0
@@ -1516,7 +1516,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	jr .storeChosenEntry
 .pokemonList
 	ld hl,wPartyCount
-	ld a,[wcf8b]
+	ld a,[wList]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1707,9 +1707,9 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld b,$09
 	ld c,$0e
 	call ClearScreenArea
-	ld a,[wcf8b]
+	ld a,[wList]
 	ld e,a
-	ld a,[wcf8c]
+	ld a,[wList + 1]
 	ld d,a
 	inc de ; de = beginning of list entries
 	ld a,[wListScrollOffset]
@@ -1753,7 +1753,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 .pokemonPCMenu
 	push hl
 	ld hl,wPartyCount
-	ld a,[wcf8b]
+	ld a,[wList]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1798,7 +1798,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	push af
 	push hl
 	ld hl,wPartyCount
-	ld a,[wcf8b]
+	ld a,[wList]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld a,$00
 	jr z,.next
@@ -1819,8 +1819,8 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z,.skipCopyingLevel
 .copyLevel
-	ld a,[wcf9b]
-	ld [wcfb9],a
+	ld a,[wLoadedMonBoxLevel]
+	ld [wLoadedMonLevel],a
 .skipCopyingLevel
 	pop hl
 	ld bc,$001c
@@ -3335,11 +3335,11 @@ GetName:: ; 376b (0:376b)
 	ret
 
 GetItemPrice:: ; 37df (0:37df)
-; Stores item's price as BCD in [H_DOWNARROWBLINKCNT1] and [[H_DOWNARROWBLINKCNT2]
+; Stores item's price as BCD at hItemPrice (3 bytes)
 ; Input: [wcf91] = item id
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, [wListMenuID] ; wListMenuID
+	ld a, [wListMenuID]
 	cp MOVESLISTMENU
 	ld a, BANK(ItemPrices)
 	jr nz, .asm_37ed
@@ -3347,7 +3347,7 @@ GetItemPrice:: ; 37df (0:37df)
 .asm_37ed
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
-	ld hl, wcf8f
+	ld hl, wItemPrices
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -3361,11 +3361,11 @@ GetItemPrice:: ; 37df (0:37df)
 	jr nz, .asm_3802
 	dec hl
 	ld a, [hld]
-	ld [$ff8d], a
+	ld [hItemPrice + 2], a
 	ld a, [hld]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [hItemPrice + 1], a
 	ld a, [hl]
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [hItemPrice], a
 	jr .asm_381c
 .getTMPrice
 	ld a, Bank(GetMachinePrice)
@@ -3373,7 +3373,7 @@ GetItemPrice:: ; 37df (0:37df)
 	ld [$2000], a
 	call GetMachinePrice
 .asm_381c
-	ld de, H_DOWNARROWBLINKCNT1 ; $ff8b
+	ld de, hItemPrice
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [$2000], a
@@ -4540,7 +4540,7 @@ GetHealthBarColor::
 ; Copy the current map's sprites' tile patterns to VRAM again after they have
 ; been overwritten by other tile patterns.
 ReloadMapSpriteTilePatterns:: ; 3e08 (0:3e08)
-	ld hl, wcfc4
+	ld hl, wCharRAMInUseForText
 	ld a, [hl]
 	push af
 	res 0, [hl]
