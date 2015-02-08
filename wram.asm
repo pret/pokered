@@ -979,8 +979,13 @@ wCriticalHitOrOHKO:: ; d05e
 W_MOVEMISSED:: ; d05f
 	ds 1
 
-wd060:: ds 1
-wd061:: ds 1
+wPlayerStatsToDouble:: ; d060
+; always 0
+	ds 1
+
+wPlayerStatsToHalve:: ; d061
+; always 0
+	ds 1
 
 W_PLAYERBATTSTATUS1:: ; d062
 ; bit 0 - bide
@@ -1010,8 +1015,13 @@ W_PLAYERBATTSTATUS3:: ; d064
 ; bit 3 - tranformed
 	ds 1
 
-wd065:: ds 1
-wd066:: ds 1
+wEnemyStatsToDouble:: ; d065
+; always 0
+	ds 1
+
+wEnemyStatsToHalve:: ; d066
+; always 0
+	ds 1
 
 W_ENEMYBATTSTATUS1:: ; d067
 	ds 1
@@ -1213,7 +1223,7 @@ W_SPRITEDECODETABLE1PTR:: ; d0b3
 
 wd0b5:: ds 1
 
-W_LISTTYPE:: ; d0b6
+wNameListType:: ; d0b6
 	ds 1
 
 wPredefBank:: ; d0b7

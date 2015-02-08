@@ -60,7 +60,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	ld [hli], a
 	ld [hl], a
 	ld [wListScrollOffset], a
-	ld hl, wd060
+	ld hl, wPlayerStatsToDouble
 	ld b, $18
 .loop
 	ld [hli], a
@@ -402,7 +402,7 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	jr z, .rival
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	ld a, BANK(TrainerNames)
 	ld [wPredefBank], a
 	call GetName

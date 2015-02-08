@@ -1931,7 +1931,7 @@ GetItemName:: ; 2fcf (0:2fcf)
 
 	ld [wd0b5],a
 	ld a,ITEM_NAME
-	ld [W_LISTTYPE],a
+	ld [wNameListType],a
 	ld a,BANK(ItemNames)
 	ld [wPredefBank],a
 	call GetName
@@ -2028,7 +2028,7 @@ HMMoves:: ; 3052 (0:3052)
 GetMoveName:: ; 3058 (0:3058)
 	push hl
 	ld a,MOVE_NAME
-	ld [W_LISTTYPE],a
+	ld [wNameListType],a
 	ld a,[wd11e]
 	ld [wd0b5],a
 	ld a,BANK(MoveNames)
@@ -3252,7 +3252,7 @@ NamePointers:: ; 375d (0:375d)
 GetName:: ; 376b (0:376b)
 ; arguments:
 ; [wd0b5] = which name
-; [wd0b6] = which list (W_LISTTYPE)
+; [wNameListType] = which list
 ; [wPredefBank] = bank of list
 ;
 ; returns pointer to name in de
@@ -3269,7 +3269,7 @@ GetName:: ; 376b (0:376b)
 	push hl
 	push bc
 	push de
-	ld a,[W_LISTTYPE]    ;List3759_entrySelector
+	ld a,[wNameListType]    ;List3759_entrySelector
 	dec a
 	jr nz,.otherEntries
 	;1 = MON_NAMES
@@ -3284,7 +3284,7 @@ GetName:: ; 376b (0:376b)
 	ld a,[wPredefBank]
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
-	ld a,[W_LISTTYPE]    ;VariousNames' entryID
+	ld a,[wNameListType]    ;VariousNames' entryID
 	dec a
 	add a
 	ld d,0

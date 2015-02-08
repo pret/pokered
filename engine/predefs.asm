@@ -92,7 +92,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef UpdateHPBar
 	add_predef HPBarLength
 	add_predef Diploma_TextBoxBorder
-	add_predef Func_3ed02
+	add_predef DoubleOrHalveSelectedStats
 	add_predef ShowPokedexMenu
 	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0

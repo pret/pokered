@@ -96,7 +96,7 @@ LoadMonData_:
 
 	ld a, [wWhichPokemon]
 	ld e, a
-	callab Func_39c37 ; get pokemon ID
+	callab GetMonSpecies
 
 .GetMonHeader
 	ld a, [wcf91]

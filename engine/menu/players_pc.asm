@@ -2,7 +2,7 @@ PlayerPC: ; 78e6 (1:78e6)
 	ld hl, wd730
 	set 6, [hl]
 	ld a, ITEM_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wcc2c], a

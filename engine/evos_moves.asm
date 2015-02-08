@@ -139,7 +139,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld [wLoadedMonSpecies], a
 	ld [wHPBarMaxHP + 1], a
 	ld a, MONSTER_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	ld a, BANK(TrainerNames) ; bank is not used for monster names
 	ld [wPredefBank], a
 	call GetName

@@ -777,7 +777,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,wBattleMonMaxHP
 	ld bc,10
 	call CopyData ; copy party stats to in-battle stat data
-	predef Func_3ed02
+	predef DoubleOrHalveSelectedStats
 	jp .doneHealing
 .healHP
 	inc hl ; hl = address of current HP

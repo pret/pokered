@@ -839,7 +839,7 @@ FaintEnemyPokemon ; 0x3c567
 	res AttackingMultipleTimes, [hl]
 	xor a
 	ld [wPlayerNumHits], a
-	ld hl, wd065 ; clear enemy statuses
+	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1366,7 +1366,7 @@ EnemySendOut: ; 3c90e (f:490e)
 ; don't change wPartyGainExpFlags or wPartyFoughtCurrentEnemyFlags
 EnemySendOutFirstMon: ; 3c92a (f:492a)
 	xor a
-	ld hl,wd065 ; clear enemy statuses
+	ld hl,wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
@@ -1815,7 +1815,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
-	ld hl, wd060
+	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -5671,7 +5671,7 @@ EnemyCanExecuteChargingMove: ; 3e70b (f:670b)
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
 	call CopyStringToCF4B
@@ -6148,7 +6148,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
 	jp CopyStringToCF4B
@@ -6339,7 +6339,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	ld [hWY], a
 	ld [rWY], a
 	ld [hTilesetType], a
-	ld hl, wd060
+	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -6423,10 +6423,11 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	hlCoord 1, 5
 	predef_jump Func_3f0c6
 
-Func_3ed02: ; 3ed02 (f:6d02)
-	callab Func_39680
-	ld hl, Func_396a7
-	ld b, BANK(Func_396a7)
+; does nothing since no stats are ever selected (barring glitches)
+DoubleOrHalveSelectedStats: ; 3ed02 (f:6d02)
+	callab DoubleSelectedStats
+	ld hl, HalveSelectedStats
+	ld b, BANK(HalveSelectedStats)
 	jp Bankswitch
 
 ScrollTrainerPicAfterBattle: ; 3ed12 (f:6d12)

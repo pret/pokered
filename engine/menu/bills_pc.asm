@@ -101,7 +101,7 @@ BillsPC_:: ; 0x214c2
 	xor a
 	ld [wccd3], a
 	inc a               ; MONSTER_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call LoadHpBarAndStatusTilePatterns
 	ld a, [wListScrollOffset]
 	push af
@@ -332,7 +332,7 @@ Func_216be: ; 216be (8:56be)
 	ld [wcf93], a
 	ld [wListMenuID], a
 	inc a                ; MONSTER_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	ld a, [wcc2b]
 	ld [wCurrentMenuItem], a
 	call DisplayListMenuID
