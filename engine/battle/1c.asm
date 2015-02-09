@@ -1,4 +1,5 @@
-DoGhostMarowakRevelationAnimation: ; 708ca (1c:48ca)
+MarowakAnim: ; 708ca (1c:48ca)
+; animate the ghost being unveiled as a Marowak
 	ld a, $e4
 	ld [rOBP1], a
 	call CopyMonPicFromBGToSpriteVRAM ; cover the BG ghost pic with a sprite ghost pic that looks the same

@@ -578,7 +578,7 @@ TradeCenter_SelectMon:
 
 ReturnToCableClubRoom: ; 577d (1:577d)
 	call GBPalWhiteOutWithDelay3
-	ld hl, wCharRAMInUseForText
+	ld hl, wFontLoaded
 	ld a, [hl]
 	push af
 	push hl

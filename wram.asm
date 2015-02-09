@@ -820,10 +820,11 @@ wcf97:: ds 1
 ; LoadMonData copies mon data here
 wLoadedMon:: party_struct wLoadedMon ; cf98
 
-wCharRAMInUseForText:: ; cfc4
-; bit 0: the space in VRAM that is used to store walking tile patterns for
-;        the player and NPCs is in use for text tile patterns. this means
-;        that movement must be disabled.
+wFontLoaded:: ; cfc4
+; bit 0: The space in VRAM that is used to store walk animation tile patterns
+;        for the player and NPCs is in use for font tile patterns.
+;        This means that NPC movement must be disabled.
+; The other bits are unused.
 	ds 1
 
 wWalkCounter:: ; cfc5

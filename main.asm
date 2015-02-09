@@ -1022,7 +1022,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 .drawTextBoxBorder
 	call TextBoxBorder
 .skipDrawingTextBoxBorder
-	ld hl,wCharRAMInUseForText
+	ld hl,wFontLoaded
 	set 0,[hl]
 	ld hl,wFlags_0xcd60
 	bit 4,[hl]

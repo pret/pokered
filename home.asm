@@ -1183,7 +1183,7 @@ CloseTextDisplay:: ; 29e8 (0:29e8)
 	ld [H_LOADEDROMBANK],a
 	ld [$2000],a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
-	ld hl,wCharRAMInUseForText
+	ld hl,wFontLoaded
 	res 0,[hl]
 	ld a,[wd732]
 	bit 3,a ; used fly warp
@@ -4540,7 +4540,7 @@ GetHealthBarColor::
 ; Copy the current map's sprites' tile patterns to VRAM again after they have
 ; been overwritten by other tile patterns.
 ReloadMapSpriteTilePatterns:: ; 3e08 (0:3e08)
-	ld hl, wCharRAMInUseForText
+	ld hl, wFontLoaded
 	ld a, [hl]
 	push af
 	res 0, [hl]
