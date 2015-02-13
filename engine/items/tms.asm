@@ -1,11 +1,11 @@
-; tests if mon [wcf91] can learn move [wd0e0]
+; tests if mon [wcf91] can learn move [wMoveNum]
 CanLearnTM: ; 1373e (4:773e)
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
 	ld hl, W_MONHLEARNSET
 	push hl
-	ld a, [wd0e0]
+	ld a, [wMoveNum]
 	ld b, a
 	ld c, $0
 	ld hl, TechnicalMachines

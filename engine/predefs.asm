@@ -92,7 +92,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef UpdateHPBar
 	add_predef HPBarLength
 	add_predef Diploma_TextBoxBorder
-	add_predef Func_3ed02
+	add_predef DoubleOrHalveSelectedStats
 	add_predef ShowPokedexMenu
 	add_predef EvolutionAfterBattle
 	add_predef SaveSAVtoSRAM0
@@ -127,7 +127,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
-	add_predef Func_27d6b
+	add_predef PrintMonType
 	add_predef EmotionBubble; 4C player exclamation
 	add_predef EmptyFunc3; return immediately
 	add_predef AskName
@@ -145,9 +145,9 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt
 	add_predef PickupItem
-	add_predef Func_27d98
+	add_predef PrintMoveType
 	add_predef LoadMovePPs
 	add_predef DrawHP ; 5F
-	add_predef Func_128f6
+	add_predef DrawHP2
 	add_predef Func_1c9c6
 	add_predef OaksAideScript

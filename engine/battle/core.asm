@@ -98,7 +98,7 @@ SpecialEffectsCont: ; 3c049 (f:4049)
 
 SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	call LoadPlayerBackPic
-	ld a, $1 ; the usual text box at the bottom of the screen
+	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlCoord 1, 5
@@ -768,7 +768,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 	xor a
 .playersTurn
 	push bc
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	predef UpdateHPBar2
 	pop bc
 	ret
@@ -839,7 +839,7 @@ FaintEnemyPokemon ; 0x3c567
 	res AttackingMultipleTimes, [hl]
 	xor a
 	ld [wPlayerNumHits], a
-	ld hl, wd065 ; clear enemy statuses
+	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1137,7 +1137,7 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 .displayYesNoBox
 	hlCoord 13, 9
 	ld bc, $a0e
-	ld a, $14 ; yes/no text box
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wd12e]
@@ -1366,7 +1366,7 @@ EnemySendOut: ; 3c90e (f:490e)
 ; don't change wPartyGainExpFlags or wPartyFoughtCurrentEnemyFlags
 EnemySendOutFirstMon: ; 3c92a (f:492a)
 	xor a
-	ld hl,wd065 ; clear enemy statuses
+	ld hl,wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
@@ -1454,7 +1454,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call PrintText
 	hlCoord 0, 7
 	ld bc,$0801
-	ld a,$14
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld a,[wCurrentMenuItem]
@@ -1815,7 +1815,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
-	ld hl, wd060
+	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1899,23 +1899,23 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	call CenterMonName
 	call PlaceString
 	ld hl, wBattleMonSpecies
-	ld de, wcf98
+	ld de, wLoadedMon
 	ld bc, $c
 	call CopyData
 	ld hl, wBattleMonLevel
-	ld de, wcfb9
+	ld de, wLoadedMonLevel
 	ld bc, $b
 	call CopyData
 	hlCoord 14, 8
 	push hl
 	inc hl
-	ld de, wcf9c
+	ld de, wLoadedMonStatus
 	call PrintStatusConditionNotFainted
 	pop hl
 	jr nz, .asm_3cdae
 	call PrintLevel
 .asm_3cdae
-	ld a, [wcf98]
+	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
 	hlCoord 10, 9
 	predef DrawHP
@@ -1965,7 +1965,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	pop hl
 	jr nz, .skipPrintLevel ; if the mon has a status condition, skip printing the level
 	ld a, [wEnemyMonLevel]
-	ld [wcfb9], a
+	ld [wLoadedMonLevel], a
 	call PrintLevel
 .skipPrintLevel
 	ld hl, wEnemyMonHP
@@ -2029,7 +2029,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	ld c, a
 .drawHPBar
 	xor a
-	ld [wListMenuID], a
+	ld [wHPBarType], a
 	hlCoord 2, 2
 	call DrawHPBar
 	ld a, $1
@@ -2080,9 +2080,9 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .nonstandardbattle
 	ld a, [W_BATTLETYPE]
 	cp $2 ; safari
-	ld a, $b ; safari menu id
+	ld a, BATTLE_MENU_TEMPLATE
 	jr nz, .menuselected
-	ld a, $1b ; regular menu id
+	ld a, SAFARI_BATTLE_MENU_TEMPLATE
 .menuselected
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -2270,9 +2270,9 @@ BagWasSelected:
 	jr nz, DisplayPlayerBag ; no, it is a normal battle
 	ld hl, OldManItemList
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	jr DisplayBagMenu
 
 OldManItemList:
@@ -2284,9 +2284,9 @@ DisplayPlayerBag:
 	; get the pointer to player's bag when in a normal battle
 	ld hl, wNumBagItems
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 
 DisplayBagMenu:
 	xor a
@@ -2402,7 +2402,7 @@ PartyMenuOrRockOrRun:
 	call GoBackToPartyMenu
 	jr .checkIfPartyMonWasSelected
 .partyMonWasSelected
-	ld a, $c ; switch/stats/cancel menu
+	ld a, SWITCH_STATS_CANCEL_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wTopMenuItemY
@@ -2533,21 +2533,21 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	jr .regularmenu
 
 .loadmoves
-	ld de, wd0dc
-	ld bc, $4
+	ld de, wMoves
+	ld bc, NUM_MOVES
 	call CopyData
-	callab Func_39b87
+	callab FormatMovesString
 	ret
 
 .writemoves
-	ld de, wd0e1
-	ld a, [$fff6]
+	ld de, wMovesString
+	ld a, [hFlags_0xFFF6]
 	set 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	call PlaceString
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	res 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	ret
 
 .regularmenu
@@ -2666,10 +2666,10 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	call AddNTimes
 	ld [hl], $ec
 .select
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	bit 6, a
 	jp nz, CursorUp ; up
@@ -2959,7 +2959,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	call PrintNumber
 	call GetCurrentMove 
 	hlCoord 2, 10
-	predef Func_27d98
+	predef PrintMoveType
 .moveDisabled
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -3554,7 +3554,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[hld]
 	add a
 	ld b,a
-	ld [wd0d8],a
+	ld [W_DAMAGE + 1],a
 	ld a,[hl]
 	rl a ; double the damage
 	ld [W_DAMAGE],a
@@ -4451,7 +4451,7 @@ GetEnemyMonStat: ; 3df1c (f:5f1c)
 	ld [wd0b5], a
 	call GetMonHeader
 	ld hl, wEnemyMonDVs
-	ld de, wcfaf
+	ld de, wLoadedMonSpeedExp
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -4459,7 +4459,7 @@ GetEnemyMonStat: ; 3df1c (f:5f1c)
 	ld [de], a
 	pop bc
 	ld b, $0
-	ld hl, wcfa4
+	ld hl, wLoadedMonSpeedExp - $b ; this base address makes CalcStat look in [wLoadedMonSpeedExp] for DVs
 	call CalcStat
 	pop de
 	ret
@@ -4899,7 +4899,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	ld [wHPBarNewHP],a
 	hlCoord 2, 2
 	xor a
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp DrawHUDsAndHPBars
@@ -5017,7 +5017,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld [wHPBarMaxHP],a
 	hlCoord 10, 9
 	ld a,$01
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
 	jp DrawHUDsAndHPBars
@@ -5671,7 +5671,7 @@ EnemyCanExecuteChargingMove: ; 3e70b (f:670b)
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
 	call CopyStringToCF4B
@@ -6053,7 +6053,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld a, [hld]
 	add a
 	ld b, a
-	ld [wd0d8], a
+	ld [W_DAMAGE + 1], a
 	ld a, [hl]
 	rl a
 	ld [W_DAMAGE], a
@@ -6148,7 +6148,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call GetName
 	ld de, wcd6d
 	jp CopyStringToCF4B
@@ -6339,7 +6339,7 @@ DoBattleTransitionAndInitBattleVariables: ; 3ec32 (f:6c32)
 	ld [hWY], a
 	ld [rWY], a
 	ld [hTilesetType], a
-	ld hl, wd060
+	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -6423,10 +6423,11 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	hlCoord 1, 5
 	predef_jump Func_3f0c6
 
-Func_3ed02: ; 3ed02 (f:6d02)
-	callab Func_39680
-	ld hl, Func_396a7
-	ld b, BANK(Func_396a7)
+; does nothing since no stats are ever selected (barring glitches)
+DoubleOrHalveSelectedStats: ; 3ed02 (f:6d02)
+	callab DoubleSelectedStats
+	ld hl, HalveSelectedStats
+	ld b, BANK(HalveSelectedStats)
 	jp Bankswitch
 
 ScrollTrainerPicAfterBattle: ; 3ed12 (f:6d12)
@@ -6814,7 +6815,7 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz
-	callab Func_13870
+	callab TryDoWildEncounter
 	ret nz
 asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [wMapPalOffset]
@@ -6823,7 +6824,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [hl]
 	push af
 	res 1, [hl]
-	callab Func_525af
+	callab InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
 	sub $c8
 	jp c, InitWildBattle
@@ -7637,7 +7638,7 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	call nz, Bankswitch ; play Minimize animation unless there's Substitute involved
 	pop de
 .asm_3f4f9
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .applyBadgeBoostsAndStatusPenalties
@@ -8451,7 +8452,7 @@ MimicEffect: ; 3f9ed (f:79ed)
 	ld [hl], a
 	ld [wd11e], a
 	call GetMoveName
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	ld hl, MimicLearnedMoveText
 	jp PrintText
 .asm_3fa74
@@ -8467,7 +8468,7 @@ LeechSeedEffect: ; 3fa7c (f:7a7c)
 	jp Bankswitch
 
 SplashEffect: ; 3fa84 (f:7a84)
-	call Func_3fba8
+	call PlayCurrentMoveAnimation
 	jp PrintNoEffectText
 
 DisableEffect: ; 3fa8a (f:7a8a)
@@ -8662,15 +8663,15 @@ Func_3fb96: ; 3fb96 (f:7b96)
 	ld [wcc5b], a
 	jp Func_3fbbc
 
-Func_3fba8: ; 3fba8 (f:7ba8)
+PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
 	xor a
 	ld [wcc5b], a
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
-	jr z, .asm_3fbb7
+	jr z, .notEnemyTurn
 	ld a, [W_ENEMYMOVENUM]
-.asm_3fbb7
+.notEnemyTurn
 	and a
 	ret z
 

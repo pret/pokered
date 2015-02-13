@@ -12,6 +12,8 @@ hSoftReset EQU $FF8A
 
 hBaseTileID EQU $FF8B
 
+hItemPrice EQU $FF8B
+
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
@@ -150,6 +152,10 @@ hTilesetType EQU $FFD7
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+
+; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
+; bit 1: menu is double spaced
+hFlags_0xFFF6 EQU $FFF6
 
 hJoyInput EQU $FFF8
 

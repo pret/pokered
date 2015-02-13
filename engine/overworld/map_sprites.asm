@@ -159,7 +159,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	ld l,e
 	pop de
 	ld b,a
-	ld a,[wcfc4]
+	ld a,[wFontLoaded]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.skipFirstLoad ; if so, skip loading data into the lower half
 	ld a,b
@@ -180,7 +180,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	jr nc,.noCarry3
 	inc d
 .noCarry3
-	ld a,[wcfc4]
+	ld a,[wFontLoaded]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadWhileLCDOn
 	pop af
@@ -264,7 +264,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	cp a,$f0 ; does the map have 2 sprite sets?
 	call nc,GetSplitMapSpriteSetID ; if so, choose the appropriate one
 	ld b,a ; b = spriteSetID
-	ld a,[wcfc4]
+	ld a,[wFontLoaded]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadSpriteSet ; if so, forcibly reload the sprite set
 	ld a,[W_SPRITESETID]

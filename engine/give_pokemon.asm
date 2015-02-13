@@ -14,7 +14,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld [wEnemyMonSpecies2], a
 	callab LoadEnemyMonData
 	call SetPokedexOwnedFlag
-	callab Func_e7a4
+	callab SendNewMonToBox
 	ld hl, wcf4b
 	ld a, [wd5a0]
 	and $7f

@@ -3,26 +3,26 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	call PrintText
 	ld hl, wStringBuffer2 + 11
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
-	ld a, [wListScrollOffset] ; wcc36
+	ld [wList + 1], a
+	ld a, [wListScrollOffset]
 	push af
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld [wListScrollOffset], a ; wcc36
+	ld [wCurrentMenuItem], a
+	ld [wListScrollOffset], a
 	ld [wcf93], a
 	ld a, $4
-	ld [wListMenuID], a ; wListMenuID
+	ld [wListMenuID], a
 	call DisplayListMenuID
 	pop bc
 	ld a, b
-	ld [wListScrollOffset], a ; wcc36
+	ld [wListScrollOffset], a
 	ret c
 	ld hl, wd126
 	set 7, [hl]
 	ld hl, wcc5b
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	add a
 	ld d, $0
 	ld e, a

@@ -55,7 +55,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld hl, UnveiledGhostText
 	call PrintText
 	callab LoadEnemyMonData
-	callab Func_708ca
+	callab MarowakAnim
 	ld hl, WildMonAppearedText
 	call PrintText
 

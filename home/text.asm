@@ -62,7 +62,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	cp $4E
 	jr nz,.next
 	ld bc,$0028
-	ld a,[$FFF6]
+	ld a,[hFlags_0xFFF6]
 	bit 2,a
 	jr z,.next2
 	ld bc,$14

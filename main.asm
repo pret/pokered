@@ -85,7 +85,7 @@ LoadMonData_:
 ;  1: enemymon
 ;  2: boxmon
 ;  3: daycaremon
-; Return monster id at wcf91 and its data at wcf98.
+; Return monster id at wcf91 and its data at wLoadedMon.
 ; Also load base stats at W_MONHDEXNUM for convenience.
 
 	ld a, [wDayCareMonSpecies]
@@ -96,7 +96,7 @@ LoadMonData_:
 
 	ld a, [wWhichPokemon]
 	ld e, a
-	callab Func_39c37 ; get pokemon ID
+	callab GetMonSpecies
 
 .GetMonHeader
 	ld a, [wcf91]
@@ -125,8 +125,8 @@ LoadMonData_:
 	call AddNTimes
 
 .copyMonData
-	ld de, wcf98
-	ld bc, 44
+	ld de, wLoadedMon
+	ld bc, wPartyMon2 - wPartyMon1
 	jp CopyData
 
 
@@ -797,7 +797,7 @@ SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	ld hl,$ffa1 ; total price of items
 	ld c,3 ; length of money in bytes
 	predef SubBCDPredef ; subtract total price from money
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
 	and a
@@ -808,7 +808,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -854,7 +854,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	call DelayFrames
 	push hl
 	push de
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -916,7 +916,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jr .done
 .combineItemSlots
 	ld [hl],a ; put the sum in the second item slot
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -1022,7 +1022,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 .drawTextBoxBorder
 	call TextBoxBorder
 .skipDrawingTextBoxBorder
-	ld hl,wcfc4
+	ld hl,wFontLoaded
 	set 0,[hl]
 	ld hl,wFlags_0xcd60
 	bit 4,[hl]
@@ -1166,7 +1166,7 @@ INCLUDE "engine/overworld/cable_club_npc.asm"
 ; function to draw various text boxes
 DisplayTextBoxID_: ; 72ea (1:72ea)
 	ld a,[wTextBoxID]
-	cp a,$14
+	cp a,TWO_OPTION_MENU
 	jp z,DisplayTwoOptionMenu
 	ld c,a
 	ld hl,TextBoxFunctionTable
@@ -1294,9 +1294,9 @@ GetAddressOfScreenCoords: ; 7375 (1:7375)
 ; 00: text box ID
 ; 01-02: function address
 TextBoxFunctionTable: ; 7387 (1:7387)
-	dbw $13, Func_74ba
-	dbw $15, Func_74ea
-	dbw $04, Func_76e1
+	dbw MONEY_BOX, DisplayMoneyBox
+	dbw BUY_SELL_QUIT_MENU, DoBuySellQuitMenu
+	dbw FIELD_MOVE_MON_MENU, DisplayFieldMoveMonMenu
 	db $ff ; terminator
 
 ; Format:
@@ -1306,12 +1306,12 @@ TextBoxFunctionTable: ; 7387 (1:7387)
 ; 03: column of lower right corner
 ; 04: row of lower right corner
 TextBoxCoordTable: ; 7391 (1:7391)
-	db $01,  0, 12, 19, 17
-	db $03,  0,  0, 19, 14
-	db $07,  0,  0, 11,  6
-	db $0d,  4,  2, 19, 12
-	db $10,  7,  0, 19, 17
-	db $11,  6,  4, 14, 13
+	db MESSAGE_BOX,       0, 12, 19, 17
+	db $03,               0,  0, 19, 14
+	db $07,               0,  0, 11,  6
+	db LIST_MENU_BOX,     4,  2, 19, 12
+	db $10,               7,  0, 19, 17
+	db MON_SPRITE_POPUP,  6,  4, 14, 13
 	db $ff ; terminator
 
 ; Format:
@@ -1325,57 +1325,57 @@ TextBoxCoordTable: ; 7391 (1:7391)
 ; 08: row of beginning of text
 ; table of window positions and corresponding text [key, start column, start row, end column, end row, text pointer [2 bytes], text column, text row]
 TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
-	db $05 ; text box ID
+	db JP_MOCHIMONO_MENU_TEMPLATE
 	db 0,0,14,17   ; text box coordinates
 	dw JapaneseMochimonoText
 	db 3,0   ; text coordinates
 
-	db $06 ; text box ID
+	db USE_TOSS_MENU_TEMPLATE
 	db 13,10,19,14 ; text box coordinates
 	dw UseTossText
 	db 15,11 ; text coordinates
 
-	db $08 ; text box ID
+	db JP_SAVE_MESSAGE_MENU_TEMPLATE
 	db 0,0,7,5     ; text box coordinates
 	dw JapaneseSaveMessageText
 	db 2,2   ; text coordinates
 
-	db $09 ; text box ID
+	db JP_SPEED_OPTIONS_MENU_TEMPLATE
 	db 0,6,5,10    ; text box coordinates
 	dw JapaneseSpeedOptionsText
 	db 2,7   ; text coordinates
 
-	db $0b ; text box ID
+	db BATTLE_MENU_TEMPLATE
 	db 8,12,19,17  ; text box coordinates
 	dw BattleMenuText
 	db 10,14 ; text coordinates
 
-	db $1b ; text box ID
+	db SAFARI_BATTLE_MENU_TEMPLATE
 	db 0,12,19,17  ; text box coordinates
 	dw SafariZoneBattleMenuText
 	db 2,14  ; text coordinates
 
-	db $0c ; text box ID
+	db SWITCH_STATS_CANCEL_MENU_TEMPLATE
 	db 11,11,19,17 ; text box coordinates
 	dw SwitchStatsCancelText
 	db 13,12 ; text coordinates
 
-	db $0e ; text box ID
+	db BUY_SELL_QUIT_MENU_TEMPLATE
 	db 0,0,10,6    ; text box coordinates
 	dw BuySellQuitText
 	db 2,1   ; text coordinates
 
-	db $0f ; text box ID
+	db MONEY_BOX_TEMPLATE
 	db 11,0,19,2   ; text box coordinates
 	dw MoneyText
 	db 13,0  ; text coordinates
 
-	db $12 ; text box ID
+	db JP_AH_MENU_TEMPLATE
 	db 7,6,11,10   ; text box coordinates
 	dw JapaneseAhText
 	db 8,8   ; text coordinates
 
-	db $1a ; text box ID
+	db JP_POKEDEX_MENU_TEMPLATE
 	db 11,8,19,17  ; text box coordinates
 	dw JapanesePokedexMenu
 	db 12,10 ; text coordinates
@@ -1431,10 +1431,10 @@ JapanesePokedexMenu: ; 74a1 (1:74a1)
 	next "ぶんぷをみる"
 	next "キャンセル@"
 
-Func_74ba: ; 74ba (1:74ba)
+DisplayMoneyBox: ; 74ba (1:74ba)
 	ld hl, wd730
 	set 6, [hl]
-	ld a, $f
+	ld a, MONEY_BOX_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlCoord 13, 1
@@ -1442,7 +1442,7 @@ Func_74ba: ; 74ba (1:74ba)
 	ld c, $6
 	call ClearScreenArea
 	hlCoord 12, 1
-	ld de, wPlayerMoney ; wPlayerMoney
+	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
 	ld hl, wd730
@@ -1452,53 +1452,53 @@ Func_74ba: ; 74ba (1:74ba)
 CurrencyString: ; 74e2 (1:74e2)
 	db "      ¥@"
 
-Func_74ea: ; 74ea (1:74ea)
+DoBuySellQuitMenu: ; 74ea (1:74ea)
 	ld a, [wd730]
 	set 6, a ; no printing delay
 	ld [wd730], a
 	xor a
 	ld [wd12d], a
-	ld a, $e
+	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld a, A_BUTTON | B_BUTTON
+	ld [wMenuWatchedKeys], a
 	ld a, $2
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $1
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld [wLastMenuItem], a ; wLastMenuItem
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld [wcc37], a
 	ld a, [wd730]
 	res 6, a ; turn on the printing delay
 	ld [wd730], a
 	call HandleMenuInput
 	call PlaceUnfilledArrowMenuCursor
-	bit 0, a
-	jr nz, .asm_7539
-	bit 1, a
-	jr z, .asm_7539
+	bit 0, a ; was A pressed?
+	jr nz, .pressedA
+	bit 1, a ; was B pressed? (always true since only A/B are watched)
+	jr z, .pressedA
 	ld a, $2
 	ld [wd12e], a
-	jr .asm_754c
-.asm_7539
+	jr .quit
+.pressedA
 	ld a, $1
 	ld [wd12e], a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld [wd12d], a
 	ld b, a
-	ld a, [wMaxMenuItem] ; wMaxMenuItem
+	ld a, [wMaxMenuItem]
 	cp b
-	jr z, .asm_754c
+	jr z, .quit
 	ret
-.asm_754c
+.quit
 	ld a, $2
 	ld [wd12e], a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld [wd12d], a
 	scf
 	ret
@@ -1716,9 +1716,9 @@ TwoOptionMenuStrings: ; 7671 (1:7671)
 .HealCancelMenu ; 76d5 (1:36d5)
 	db "HEAL",$4E,"CANCEL@"
 
-Func_76e1: ; 76e1 (1:36e1)
+DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	xor a
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1737,7 +1737,7 @@ Func_76e1: ; 76e1 (1:36e1)
 	ld a, $c
 	ld [$fff7], a
 	hlCoord 13, 12
-	ld de, PokemonMenuEntries ; $77c2
+	ld de, PokemonMenuEntries
 	jp PlaceString
 .asm_770f
 	push af
@@ -1778,10 +1778,10 @@ Func_76e1: ; 76e1 (1:36e1)
 	jr nz, .asm_7747
 	xor a
 	ld [wTrainerScreenX], a
-	ld de, wWhichTrade ; wWhichTrade
+	ld de, wWhichTrade
 .asm_7752
 	push hl
-	ld hl, FieldMoveNames ; $778d
+	ld hl, FieldMoveNames
 	ld a, [de]
 	and a
 	jr z, .asm_7776
@@ -1817,7 +1817,7 @@ Func_76e1: ; 76e1 (1:36e1)
 	ld e, a
 	ld d, $0
 	add hl, de
-	ld de, PokemonMenuEntries ; $77c2
+	ld de, PokemonMenuEntries
 	jp PlaceString
 
 FieldMoveNames: ; 778d (1:778d)
@@ -1837,14 +1837,14 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 	next "CANCEL@"
 
 GetMonFieldMoves: ; 77d6 (1:77d6)
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMon1Moves ; wPartyMon1Moves
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Moves
 	ld bc, $2c
 	call AddNTimes
 	ld d, h
 	ld e, l
 	ld c, $5
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 .asm_77e9
 	push hl
 .asm_77ea
@@ -1855,7 +1855,7 @@ GetMonFieldMoves: ; 77d6 (1:77d6)
 	jr z, .asm_7821
 	ld b, a
 	inc de ; go to next move
-	ld hl, FieldMoveDisplayData ; $7823
+	ld hl, FieldMoveDisplayData
 .asm_77f6
 	ld a, [hli]
 	cp $ff
@@ -3823,8 +3823,8 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wcf98
-	call CopyData    ; write new mon's data (from wcf98)
+	ld hl, wLoadedMon
+	call CopyData    ; write new mon's data (from wLoadedMon)
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	dec a

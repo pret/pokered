@@ -173,10 +173,10 @@ NowSavingString:
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
 	hlCoord 0, 7
-	ld bc,$0801     ;arrow's coordinates |b = Y|c = X|
-	ld a,$14        ;one line shifting ($28 = 2 lines)
+	ld bc,$0801
+	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
-	call DisplayTextBoxID      ;handle Yes/No KeyPress
+	call DisplayTextBoxID ; yes/no menu
 	ld a,[wCurrentMenuItem]
 	ret
 
@@ -346,10 +346,10 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call z, Func_73a29
 	call Func_7393f
 	call UpdateSprites
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	bit 1, a
 	ret nz
@@ -436,12 +436,12 @@ Func_7393f: ; 7393f (1c:793f)
 	ld b, $c
 	ld c, $7
 	call TextBoxBorder
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 2, [hl]
 	ld de, BoxNames ; $79d9
 	hlCoord 13, 1
 	call PlaceString
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 2, [hl]
 	ld a, [wd5a0]
 	and $7f
@@ -665,7 +665,7 @@ HallOfFame_Copy: ; 73b51 (1c:7b51)
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73b6a: ; 73b6a (1c:7b6a)
+ClearSAV: ; 73b6a (1c:7b6a)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1

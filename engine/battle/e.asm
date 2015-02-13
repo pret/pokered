@@ -1,24 +1,25 @@
-Func_39680: ; 39680 (e:5680)
-	ld a, [H_WHOSETURN] ; $fff3
+; does nothing since no stats are ever selected (barring glitches)
+DoubleSelectedStats: ; 39680 (e:5680)
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, [wd060]
+	ld a, [wPlayerStatsToDouble]
 	ld hl, wBattleMonAttack + 1
-	jr z, .asm_39691
-	ld a, [wd065]
+	jr z, .notEnemyTurn
+	ld a, [wEnemyStatsToDouble]
 	ld hl, wEnemyMonAttack + 1
-.asm_39691
-	ld c, $4
+.notEnemyTurn
+	ld c, 4
 	ld b, a
-.asm_39694
+.loop
 	srl b
-	call c, Func_3969f
+	call c, .doubleStat
 	inc hl
 	inc hl
 	dec c
 	ret z
-	jr .asm_39694
+	jr .loop
 
-Func_3969f: ; 3969f (e:569f)
+.doubleStat
 	ld a, [hl]
 	add a
 	ld [hld], a
@@ -27,35 +28,36 @@ Func_3969f: ; 3969f (e:569f)
 	ld [hli], a
 	ret
 
-Func_396a7: ; 396a7 (e:56a7)
-	ld a, [H_WHOSETURN] ; $fff3
+; does nothing since no stats are ever selected (barring glitches)
+HalveSelectedStats: ; 396a7 (e:56a7)
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, [wd061]
+	ld a, [wPlayerStatsToHalve]
 	ld hl, wBattleMonAttack
-	jr z, .asm_396b8
-	ld a, [wd066]
+	jr z, .notEnemyTurn
+	ld a, [wEnemyStatsToHalve]
 	ld hl, wEnemyMonAttack
-.asm_396b8
-	ld c, $4
+.notEnemyTurn
+	ld c, 4
 	ld b, a
-.asm_396bb
+.loop
 	srl b
-	call c, Func_396c6
+	call c, .halveStat
 	inc hl
 	inc hl
 	dec c
 	ret z
-	jr .asm_396bb
+	jr .loop
 
-Func_396c6: ; 396c6 (e:56c6)
+.halveStat
 	ld a, [hl]
 	srl a
 	ld [hli], a
 	rr [hl]
 	or [hl]
-	jr nz, .asm_396d1
-	ld [hl], $1
-.asm_396d1
+	jr nz, .nonzeroStat
+	ld [hl], 1
+.nonzeroStat
 	dec hl
 	ret
 
@@ -69,41 +71,42 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 	callab _LoadTrainerPic
 	hlCoord 19, 0
 	ld c, $0
-.asm_396e9
+.scrollLoop
 	inc c
 	ld a, c
-	cp $7
+	cp 7
 	ret z
 	ld d, $0
 	push bc
 	push hl
-.asm_396f2
-	call Func_39707
+.drawTrainerPicLoop
+	call DrawTrainerPicColumn
 	inc hl
-	ld a, $7
+	ld a, 7
 	add d
 	ld d, a
 	dec c
-	jr nz, .asm_396f2
-	ld c, $4
+	jr nz, .drawTrainerPicLoop
+	ld c, 4
 	call DelayFrames
 	pop hl
 	pop bc
 	dec hl
-	jr .asm_396e9
+	jr .scrollLoop
 
-Func_39707: ; 39707 (e:5707)
+; write one 7-tile column of the trainer pic to the tilemap
+DrawTrainerPicColumn: ; 39707 (e:5707)
 	push hl
 	push de
 	push bc
-	ld e, $7
-.asm_3970c
+	ld e, 7
+.loop
 	ld [hl], d
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	inc d
 	dec e
-	jr nz, .asm_3970c
+	jr nz, .loop
 	pop bc
 	pop de
 	pop hl
@@ -577,121 +580,124 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 
 INCLUDE "text/trainer_names.asm"
 
-Func_39b87: ; 39b87 (e:5b87)
-	ld hl, wd0dc
-	ld de, wd0e1
+; formats a string at wMovesString that lists the moves at wMoves
+FormatMovesString: ; 39b87 (e:5b87)
+	ld hl, wMoves
+	ld de, wMovesString
 	ld b, $0
-.asm_39b8f
+.printMoveNameLoop
 	ld a, [hli]
-	and a
-	jr z, .asm_39bc1
+	and a ; end of move list?
+	jr z, .printDashLoop ; print dashes when no moves are left
 	push hl
 	ld [wd0b5], a
 	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	call GetName
 	ld hl, wcd6d
-.asm_39ba7
+.copyNameLoop
 	ld a, [hli]
 	cp $50
-	jr z, .asm_39bb0
+	jr z, .doneCopyingName
 	ld [de], a
 	inc de
-	jr .asm_39ba7
-.asm_39bb0
+	jr .copyNameLoop
+.doneCopyingName
 	ld a, b
 	ld [wcd6c], a
 	inc b
-	ld a, $4e
+	ld a, $4e ; line break
 	ld [de], a
 	inc de
 	pop hl
 	ld a, b
-	cp $4
-	jr z, .asm_39bd1
-	jr .asm_39b8f
-.asm_39bc1
+	cp NUM_MOVES
+	jr z, .done
+	jr .printMoveNameLoop
+.printDashLoop
 	ld a, "-"
 	ld [de], a
 	inc de
 	inc b
 	ld a, b
-	cp $4
-	jr z, .asm_39bd1
-	ld a, $4e
+	cp NUM_MOVES
+	jr z, .done
+	ld a, $4e ; line break
 	ld [de], a
 	inc de
-	jr .asm_39bc1
-.asm_39bd1
+	jr .printDashLoop
+.done
 	ld a, "@"
 	ld [de], a
 	ret
 
+; XXX this is called in a few places, but it doesn't appear to do anything useful
 Func_39bd5: ; 39bd5 (e:5bd5)
 	ld a, [wd11b]
 	cp $1
 	jr nz, .asm_39be6
-	ld hl, wEnemyPartyCount ; wEnemyPartyCount
-	ld de, wEnemyMonOT ; wd9ac OT names of other player
-	ld a, $6
+	ld hl, wEnemyPartyCount
+	ld de, wEnemyMonOT
+	ld a, ENEMYOT_NAME
 	jr .asm_39c18
 .asm_39be6
 	cp $4
 	jr nz, .calcAttackStat4
-	ld hl, wPartyCount ; wPartyCount
-	ld de, wPartyMonOT ; wd273
-	ld a, $5
+	ld hl, wPartyCount
+	ld de, wPartyMonOT
+	ld a, PLAYEROT_NAME
 	jr .asm_39c18
 .calcAttackStat4
 	cp $5
 	jr nz, .asm_39c02
 	ld hl, wStringBuffer2 + 11
-	ld de, MonsterNames ; $421e
-	ld a, $1
+	ld de, MonsterNames
+	ld a, MONSTER_NAME
 	jr .asm_39c18
 .asm_39c02
 	cp $2
 	jr nz, .asm_39c10
-	ld hl, wNumBagItems ; wNumBagItems
-	ld de, ItemNames ; $472b
-	ld a, $4
+	ld hl, wNumBagItems
+	ld de, ItemNames
+	ld a, ITEM_NAME
 	jr .asm_39c18
 .asm_39c10
 	ld hl, wStringBuffer2 + 11
-	ld de, ItemNames ; $472b
+	ld de, ItemNames
 	ld a, ITEM_NAME
 .asm_39c18
-	ld [W_LISTTYPE], a
+	ld [wNameListType], a
 	ld a, l
-	ld [wcf8b], a
+	ld [wList], a
 	ld a, h
-	ld [wcf8c], a
+	ld [wList + 1], a
 	ld a, e
 	ld [wcf8d], a
 	ld a, d
 	ld [wcf8e], a
-	ld bc, ItemPrices ; $4608
+	ld bc, ItemPrices
 	ld a, c
-	ld [wcf8f], a
+	ld [wItemPrices], a
 	ld a, b
-	ld [wcf90], a
+	ld [wItemPrices + 1], a
 	ret
 
-Func_39c37: ; 39c37 (e:5c37)
+; get species of mon e in list [wcc49] for LoadMonData
+GetMonSpecies: ; 39c37 (e:5c37)
 	ld hl, wPartySpecies
 	ld a, [wcc49]
 	and a
-	jr z, .asm_39c4b
+	jr z, .getSpecies
 	dec a
-	jr z, .asm_39c48
+	jr z, .enemyParty
 	ld hl, wBoxSpecies
-	jr .asm_39c4b
-.asm_39c48
+	jr .getSpecies
+.enemyParty
 	ld hl, wEnemyPartyMons
-.asm_39c4b
-	ld d, $0
+.getSpecies
+	ld d, 0
 	add hl, de
 	ld a, [hl]
 	ld [wcf91], a
@@ -954,7 +960,7 @@ TrainerAIPointers: ; 3a55c (e:655c)
 JugglerAI: ; 3a5e9 (e:65e9)
 	cp $40
 	ret nc
-	jp Func_3a72a
+	jp AISwitchIfEnoughMons
 
 BlackbeltAI: ; 3a5ef (e:65ef)
 	cp $20
@@ -974,12 +980,12 @@ CooltrainerMAI: ; 3a5fb (e:65fb)
 CooltrainerFAI: ; 3a601 (e:6601)
 	cp $40
 	ld a,$A
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	jp c,AIUseHyperPotion
 	ld a,5
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
-	jp Func_3a72a
+	jp AISwitchIfEnoughMons
 
 BrockAI: ; 3a614 (e:6614)
 ; if his active monster has a status condition, use a full heal
@@ -1002,7 +1008,7 @@ ErikaAI: ; 3a628 (e:6628)
 	cp $80
 	ret nc
 	ld a,$A
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseSuperPotion
 
@@ -1020,7 +1026,7 @@ SabrinaAI: ; 3a640 (e:6640)
 	cp $40
 	ret nc
 	ld a,$A
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseHyperPotion
 
@@ -1028,7 +1034,7 @@ Sony2AI: ; 3a64c (e:664c)
 	cp $20
 	ret nc
 	ld a,5
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUsePotion
 
@@ -1036,7 +1042,7 @@ Sony3AI: ; 3a658 (e:6658)
 	cp $20
 	ret nc
 	ld a,5
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseFullRestore
 
@@ -1044,7 +1050,7 @@ LoreleiAI: ; 3a664 (e:6664)
 	cp $80
 	ret nc
 	ld a,5
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseSuperPotion
 
@@ -1055,11 +1061,11 @@ BrunoAI: ; 3a670 (e:6670)
 
 AgathaAI: ; 3a676 (e:6676)
 	cp $14
-	jp c,Func_3a72a
+	jp c,AISwitchIfEnoughMons
 	cp $80
 	ret nc
 	ld a,4
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseSuperPotion
 
@@ -1067,7 +1073,7 @@ LanceAI: ; 3a687 (e:6687)
 	cp $80
 	ret nc
 	ld a,5
-	call Func_3a7cf
+	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUseHyperPotion
 
@@ -1109,7 +1115,7 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	ld [de],a
 	ld [wHPBarMaxHP+1],a
 	ld [wEnemyMonHP],a
-	jr Func_3a718
+	jr AIPrintItemUseAndUpdateHPBar
 
 AIUsePotion: ; 3a6ca (e:66ca)
 ; enemy trainer heals his monster with a potion
@@ -1159,7 +1165,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 	ld a,[de]
 	ld [wHPBarMaxHP+1],a
 	sbc b
-	jr nc,Func_3a718
+	jr nc,AIPrintItemUseAndUpdateHPBar
 	inc de
 	ld a,[de]
 	dec de
@@ -1170,15 +1176,16 @@ AIRecoverHP: ; 3a6da (e:66da)
 	ld [wHPBarNewHP+1],a
 	; fallthrough
 
-Func_3a718: ; 3a718 (e:6718)
+AIPrintItemUseAndUpdateHPBar: ; 3a718 (e:6718)
 	call AIPrintItemUse_
 	hlCoord 2, 2
 	xor a
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2
 	jp DecrementAICount
 
-Func_3a72a: ; 3a72a (e:672a)
+AISwitchIfEnoughMons: ; 3a72a (e:672a)
+; enemy trainer switches if there are 3 or more unfainted mons in party
 	ld a,[wEnemyPartyCount]
 	ld c,a
 	ld hl,wEnemyMon1HP
@@ -1280,7 +1287,8 @@ AIUseDireHit: ; 0x3a7c2 unused
 	ld a,DIRE_HIT
 	jp AIPrintItemUse
 
-Func_3a7cf: ; 3a7cf (e:67cf)
+AICheckIfHPBelowFraction: ; 3a7cf (e:67cf)
+; return carry if enemy trainer's current HP is below 1 / a of the maximum
 	ld [H_DIVISOR],a
 	ld hl,wEnemyMonMaxHP
 	ld a,[hli]
@@ -1394,7 +1402,7 @@ SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 	ld a, $8
 	ld [wTrainerEngageDistance], a
 	ld hl, wOAMBuffer
-	jp Func_3a8e1
+	jp WritePokeballOAMData
 
 SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	call PlaceEnemyHUDTiles
@@ -1408,7 +1416,7 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	ld a, $f8
 	ld [wTrainerEngageDistance], a
 	ld hl, wOAMBuffer + PARTY_LENGTH * 4
-	jp Func_3a8e1
+	jp WritePokeballOAMData
 
 SetupPokeballs: ; 0x3a8a6
 	ld a, [de]
@@ -1420,7 +1428,7 @@ SetupPokeballs: ; 0x3a8a6
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .emptyloop ; 0x3a8b2 $fb
+	jr nz, .emptyloop
 	pop af
 	ld de, wBuffer
 .monloop
@@ -1460,10 +1468,10 @@ PickPokeball: ; 3a8c2 (e:68c2)
 	add hl, bc
 	ret
 
-Func_3a8e1: ; 3a8e1 (e:68e1)
-	ld de, wHPBarMaxHP
+WritePokeballOAMData: ; 3a8e1 (e:68e1)
+	ld de, wBuffer
 	ld c, PARTY_LENGTH
-.asm_3a8e6
+.loop
 	ld a, [W_BASECOORDY] ; wd082
 	ld [hli], a
 	ld a, [W_BASECOORDX] ; wd081
@@ -1479,7 +1487,7 @@ Func_3a8e1: ; 3a8e1 (e:68e1)
 	ld [W_BASECOORDX], a ; wd081
 	inc de
 	dec c
-	jr nz, .asm_3a8e6
+	jr nz, .loop
 	ret
 
 PlacePlayerHUDTiles: ; 3a902 (e:6902)
@@ -1541,7 +1549,7 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	ld a, $8
 	ld [wTrainerEngageDistance], a
 	ld hl, wOAMBuffer
-	call Func_3a8e1
+	call WritePokeballOAMData
 	ld hl, wEnemyMons ; wEnemyMon1Species
 	ld de, wEnemyPartyCount ; wEnemyPartyCount
 	call SetupPokeballs
@@ -1550,7 +1558,7 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	ld [hli], a
 	ld [hl], $68
 	ld hl, wOAMBuffer + $18
-	jp Func_3a8e1
+	jp WritePokeballOAMData
 
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
 PokeballTileGraphics:: ; 3a97e (e:697e)

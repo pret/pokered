@@ -1,14 +1,14 @@
-Func_128d8: ; 128d8 (4:68d8)
-	ld a, [W_YCOORD] ; wd361
+; returns whether the player is one tile outside the map in Z
+IsPlayerJustOutsideMap: ; 128d8 (4:68d8)
+	ld a, [W_YCOORD]
 	ld b, a
-	ld a, [W_CURMAPHEIGHT] ; wd368
-	call Func_128ea
+	ld a, [W_CURMAPHEIGHT]
+	call .compareCoordWithMapDimension
 	ret z
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld b, a
-	ld a, [W_CURMAPWIDTH] ; wd369
-
-Func_128ea: ; 128ea (4:68ea)
+	ld a, [W_CURMAPWIDTH]
+.compareCoordWithMapDimension
 	add a
 	cp b
 	ret z
@@ -18,58 +18,58 @@ Func_128ea: ; 128ea (4:68ea)
 DrawHP: ; 128ef (4:68ef)
 	call GetPredefRegisters
 	ld a, $1
-	jr asm_128fb
+	jr DrawHP_
 
-Func_128f6: ; 128f6 (4:68f6)
+DrawHP2: ; 128f6 (4:68f6)
 	call GetPredefRegisters
 	ld a, $2
-asm_128fb: ; 128fb (4:68fb)
-	ld [wListMenuID], a ; wListMenuID
+
+DrawHP_: ; 128fb (4:68fb)
+	ld [wHPBarType], a
 	push hl
-	ld a, [wcf99]
+	ld a, [wLoadedMonHP]
 	ld b, a
-	ld a, [wcf9a]
+	ld a, [wLoadedMonHP + 1]
 	ld c, a
 	or b
-	jr nz, .asm_12913
+	jr nz, .nonzeroHP
 	xor a
 	ld c, a
 	ld e, a
 	ld a, $6
 	ld d, a
-	jp Func_12924
-.asm_12913
-	ld a, [wcfba]
+	jp .drawHPBarAndPrintFraction
+.nonzeroHP
+	ld a, [wLoadedMonMaxHP]
 	ld d, a
-	ld a, [wcfbb]
+	ld a, [wLoadedMonMaxHP + 1]
 	ld e, a
 	predef HPBarLength
 	ld a, $6
 	ld d, a
 	ld c, a
-
-Func_12924: ; 12924 (4:6924)
+.drawHPBarAndPrintFraction
 	pop hl
 	push de
 	push hl
 	push hl
 	call DrawHPBar
 	pop hl
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	bit 0, a
-	jr z, .asm_12937
-	ld bc, $9
-	jr .asm_1293a
-.asm_12937
-	ld bc, $15
-.asm_1293a
+	jr z, .printFractionBelowBar
+	ld bc, $9 ; right of bar
+	jr .printFraction
+.printFractionBelowBar
+	ld bc, SCREEN_WIDTH + 1 ; below bar
+.printFraction
 	add hl, bc
-	ld de, wcf99
+	ld de, wLoadedMonHP
 	ld bc, $203
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, wcfba
+	ld de, wLoadedMonMaxHP
 	ld bc, $203
 	call PrintNumber
 	pop hl

@@ -338,10 +338,10 @@ TradeCenter_SelectMon:
 	ld a, 1
 	ld [wTopMenuItemX], a
 .enemyMonMenu_HandleInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	and a
 	jp z, .getNewInput
@@ -403,10 +403,10 @@ TradeCenter_SelectMon:
 	ld bc, $0601
 	call ClearScreenArea
 .playerMonMenu_HandleInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	and a ; was anything pressed?
 	jr nz, .playerMonMenu_SomethingPressed
@@ -578,7 +578,7 @@ TradeCenter_SelectMon:
 
 ReturnToCableClubRoom: ; 577d (1:577d)
 	call GBPalWhiteOutWithDelay3
-	ld hl, wcfc4
+	ld hl, wFontLoaded
 	ld a, [hl]
 	push af
 	push hl
@@ -716,7 +716,7 @@ TradeCenter_Trade:
 	ld bc, $080b
 	ld a, TRADE_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call LoadScreenTilesFromBuffer1
@@ -808,7 +808,7 @@ TradeCenter_Trade:
 	ld a, c
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld de, wcf98
+	ld de, wLoadedMon
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call CopyData
 	call AddEnemyMonToPlayerParty

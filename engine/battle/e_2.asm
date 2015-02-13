@@ -1,13 +1,13 @@
 HealEffect_: ; 3b9ec (e:79ec)
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	ld de, wBattleMonHP ; wd015
-	ld hl, wBattleMonMaxHP ; wd023
-	ld a, [W_PLAYERMOVENUM] ; wcfd2
+	ld de, wBattleMonHP
+	ld hl, wBattleMonMaxHP
+	ld a, [W_PLAYERMOVENUM]
 	jr z, .asm_3ba03
-	ld de, wEnemyMonHP ; wEnemyMonHP
-	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
-	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
+	ld de, wEnemyMonHP
+	ld hl, wEnemyMonMaxHP
+	ld a, [W_ENEMYMOVENUM]
 .asm_3ba03
 	ld b, a
 	ld a, [de]
@@ -16,27 +16,27 @@ HealEffect_: ; 3b9ec (e:79ec)
 	inc hl
 	ld a, [de]
 	sbc [hl]
-	jp z, Func_3ba97
+	jp z, .failed
 	ld a, b
 	cp REST
 	jr nz, .asm_3ba37
 	push hl
 	push de
 	push af
-	ld c, $32
+	ld c, 50
 	call DelayFrames
-	ld hl, wBattleMonStatus ; wBattleMonStatus
-	ld a, [H_WHOSETURN] ; $fff3
+	ld hl, wBattleMonStatus
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3ba25
-	ld hl, wEnemyMonStatus ; wcfe9
+	ld hl, wEnemyMonStatus
 .asm_3ba25
 	ld a, [hl]
 	and a
 	ld [hl], 2 ; Number of turns from Rest
-	ld hl, StartedSleepingEffect ; $7aa2
+	ld hl, StartedSleepingEffect
 	jr z, .asm_3ba31
-	ld hl, FellAsleepBecameHealthyText ; $7aa7
+	ld hl, FellAsleepBecameHealthyText
 .asm_3ba31
 	call PrintText
 	pop af
@@ -81,9 +81,9 @@ HealEffect_: ; 3b9ec (e:79ec)
 	ld [de], a
 	ld [wHPBarNewHP], a
 .asm_3ba6f
-	ld hl, Func_3fba8 ; $7ba8
+	ld hl, PlayCurrentMoveAnimation
 	call BankswitchEtoF
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
 	hlCoord 10, 9
 	ld a, $1
@@ -91,15 +91,14 @@ HealEffect_: ; 3b9ec (e:79ec)
 	hlCoord 2, 2
 	xor a
 .asm_3ba83
-	ld [wListMenuID], a ; wListMenuID
+	ld [wHPBarType], a
 	predef UpdateHPBar2
-	ld hl, DrawHUDsAndHPBars ; $4d5a
+	ld hl, DrawHUDsAndHPBars
 	call BankswitchEtoF
-	ld hl, RegainedHealthText ; $7aac
+	ld hl, RegainedHealthText
 	jp PrintText
-
-Func_3ba97: ; 3ba97 (e:7a97)
-	ld c, $32
+.failed
+	ld c, 50
 	call DelayFrames
 	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
@@ -119,37 +118,37 @@ RegainedHealthText: ; 3baac (e:7aac)
 TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, wBattleMonSpecies
 	ld de, wEnemyMonSpecies
-	ld bc, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
-	ld a, [W_ENEMYBATTSTATUS1] ; W_ENEMYBATTSTATUS1
-	ld a, [H_WHOSETURN] ; $fff3
+	ld bc, W_ENEMYBATTSTATUS3
+	ld a, [W_ENEMYBATTSTATUS1]
+	ld a, [H_WHOSETURN]
 	and a
 	jr nz, .asm_3bad1
 	ld hl, wEnemyMonSpecies
 	ld de, wBattleMonSpecies
-	ld bc, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
-	ld [wPlayerMoveListIndex], a ; wPlayerMoveListIndex
-	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
+	ld bc, W_PLAYERBATTSTATUS3
+	ld [wPlayerMoveListIndex], a
+	ld a, [W_PLAYERBATTSTATUS1]
 .asm_3bad1
 	bit Invulnerable, a ; is mon invulnerable to typical attacks? (fly/dig)
-	jp nz, Func_3bb8c
+	jp nz, .failed
 	push hl
 	push de
 	push bc
-	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
-	ld a, [H_WHOSETURN] ; $fff3
+	ld hl, W_PLAYERBATTSTATUS2
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3bae4
-	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
+	ld hl, W_ENEMYBATTSTATUS2
 .asm_3bae4
 	bit HasSubstituteUp, [hl]
 	push af
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
-	ld a, [W_OPTIONS] ; W_OPTIONS
+	ld a, [W_OPTIONS]
 	add a
-	ld hl, Func_3fba8 ; $7ba8
-	ld b, BANK(Func_3fba8)
+	ld hl, PlayCurrentMoveAnimation
+	ld b, BANK(PlayCurrentMoveAnimation)
 	jr nc, .asm_3baff
 	ld hl, AnimationTransformMon
 	ld b, BANK(AnimationTransformMon)
@@ -178,7 +177,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	inc bc
 	inc bc
 	call CopyData
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3bb32
 	ld a, [de]
@@ -228,15 +227,15 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	call GetMonName
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	call Func_3bb7d
-	ld hl, wEnemyMonStatMods ; wcd2e
-	ld de, wPlayerMonStatMods ; wcd1a
-	call Func_3bb7d
-	ld hl, TransformedText ; $7b92
+	call .copyBasedOnTurn
+	ld hl, wEnemyMonStatMods
+	ld de, wPlayerMonStatMods
+	call .copyBasedOnTurn
+	ld hl, TransformedText
 	jp PrintText
 
-Func_3bb7d: ; 3bb7d (e:7b7d)
-	ld a, [H_WHOSETURN] ; $fff3
+.copyBasedOnTurn
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3bb86
 	push hl
@@ -247,8 +246,8 @@ Func_3bb7d: ; 3bb7d (e:7b7d)
 	ld bc, $8
 	jp CopyData
 
-Func_3bb8c: ; 3bb8c (e:7b8c)
-	ld hl, PrintButItFailedText_ ; $7b53
+.failed
+	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
 
 TransformedText: ; 3bb92 (e:7b92)
@@ -256,13 +255,13 @@ TransformedText: ; 3bb92 (e:7b92)
 	db "@"
 
 ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
-	ld hl, W_PLAYERBATTSTATUS3 ; W_PLAYERBATTSTATUS3
-	ld de, W_PLAYERMOVEEFFECT ; wcfd3
-	ld a, [H_WHOSETURN] ; $fff3
+	ld hl, W_PLAYERBATTSTATUS3
+	ld de, W_PLAYERMOVEEFFECT
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3bba8
-	ld hl, W_ENEMYBATTSTATUS3 ; W_ENEMYBATTSTATUS3
-	ld de, W_ENEMYMOVEEFFECT ; W_ENEMYMOVEEFFECT
+	ld hl, W_ENEMYBATTSTATUS3
+	ld de, W_ENEMYMOVEEFFECT
 .asm_3bba8
 	ld a, [de]
 	cp LIGHT_SCREEN_EFFECT
@@ -270,23 +269,23 @@ ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
 	bit HasLightScreenUp, [hl] ; is mon already protected by light screen?
 	jr nz, .moveFailed
 	set HasLightScreenUp, [hl] ; mon is now protected by light screen
-	ld hl, LightScreenProtectedText ; $7bd7
+	ld hl, LightScreenProtectedText
 	jr .asm_3bbc1
 .reflect
 	bit HasReflectUp, [hl] ; is mon already protected by reflect?
 	jr nz, .moveFailed
 	set HasReflectUp, [hl] ; mon is now protected by reflect
-	ld hl, ReflectGainedArmorText ; $7bdc
+	ld hl, ReflectGainedArmorText
 .asm_3bbc1
 	push hl
-	ld hl, Func_3fba8 ; $7ba8
+	ld hl, PlayCurrentMoveAnimation
 	call BankswitchEtoF
 	pop hl
 	jp PrintText
 .moveFailed
 	ld c, $32
 	call DelayFrames
-	ld hl, PrintButItFailedText_ ; $7b53
+	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
 
 LightScreenProtectedText: ; 3bbd7 (e:7bd7)

@@ -83,19 +83,19 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld bc,14 ; 14 columns to the right
 	add hl,bc
-	ld de,wcf9c
+	ld de,wLoadedMonStatus
 	call PrintStatusCondition
 	pop hl
 	push hl
 	ld bc,20 + 1 ; down 1 row and right 1 column
-	ld a,[$FFF6]
+	ld a,[hFlags_0xFFF6]
 	set 0,a
-	ld [$FFF6],a
+	ld [hFlags_0xFFF6],a
 	add hl,bc
-	predef Func_128f6 ; draw HP bar and prints current / max HP
-	ld a,[$FFF6]
+	predef DrawHP2 ; draw HP bar and prints current / max HP
+	ld a,[hFlags_0xFFF6]
 	res 0,a
-	ld [$FFF6],a
+	ld [hFlags_0xFFF6],a
 	call SetPartyMenuHealthBarColor ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
@@ -134,7 +134,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push hl
 	ld hl,EvosMovesPointerTable
 	ld b,0
-	ld a,[wcf98] ; pokemon ID
+	ld a,[wLoadedMonSpecies]
 	dec a
 	add a
 	rl b

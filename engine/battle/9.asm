@@ -1,35 +1,43 @@
-Func_27d6b: ; 27d6b (9:7d6b)
+; [wd0b5] = pokemon ID
+; hl = dest addr
+PrintMonType: ; 27d6b (9:7d6b)
 	call GetPredefRegisters
 	push hl
 	call GetMonHeader
 	pop hl
 	push hl
 	ld a, [W_MONHTYPE1]
-	call Func_27d89
+	call PrintType
 	ld a, [W_MONHTYPE1]
 	ld b, a
 	ld a, [W_MONHTYPE2]
 	cp b
 	pop hl
-	jr z, asm_27d8c
-	ld bc, $28
+	jr z, EraseType2Text
+	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 
-Func_27d89: ; 27d89 (9:7d89)
+; a = type
+; hl = dest addr
+PrintType: ; 27d89 (9:7d89)
 	push hl
-	jr asm_27d9f
-asm_27d8c: ; 27d8c (9:7d8c)
-	ld a, $7f
+	jr PrintType_
+
+; erase "TYPE2/" if the mon only has 1 type
+EraseType2Text: ; 27d8c (9:7d8c)
+	ld a, " "
 	ld bc, $13
 	add hl, bc
 	ld bc, $6
 	jp FillMemory
 
-Func_27d98: ; 27d98 (9:7d98)
+PrintMoveType: ; 27d98 (9:7d98)
 	call GetPredefRegisters
 	push hl
-	ld a, [W_PLAYERMOVETYPE] ; wcfd5
-asm_27d9f: ; 27d9f (9:7d9f)
+	ld a, [W_PLAYERMOVETYPE]
+; fall through
+
+PrintType_: ; 27d9f (9:7d9f)
 	add a
 	ld hl, TypeNames
 	ld e, a
@@ -157,19 +165,19 @@ CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
 
 FocusEnergyEffect_: ; 27f86 (9:7f86)
-	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
-	ld a, [H_WHOSETURN] ; $fff3
+	ld hl, W_PLAYERBATTSTATUS2
+	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_27f91
-	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
-.asm_27f91
+	jr z, .notEnemy
+	ld hl, W_ENEMYBATTSTATUS2
+.notEnemy
 	bit GettingPumped, [hl] ; is mon already using focus energy?
-	jr nz, .asm_27fa5
+	jr nz, .alreadyUsing
 	set GettingPumped, [hl] ; mon is now using focus energy
-	callab Func_3fba8
-	ld hl, GettingPumpedText ; $7fb2
+	callab PlayCurrentMoveAnimation
+	ld hl, GettingPumpedText
 	jp PrintText
-.asm_27fa5
+.alreadyUsing
 	ld c, $32
 	call DelayFrames
 	ld hl, PrintButItFailedText_

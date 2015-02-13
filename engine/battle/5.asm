@@ -4,7 +4,7 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, W_PLAYERBATTSTATUS2
-	ld a, [$fff3]  ;whose turn?
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyMonMaxHP
@@ -23,8 +23,8 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	srl a
 	rr b
 	push de
-	ld de, $fff2  ;subtract 8 to point to [current hp] instead of [max hp]
-	add hl, de    ;HL -= 8
+	ld de, wBattleMonHP - wBattleMonMaxHP
+	add hl, de    ; point hl to current HP
 	pop de
 	ld a, b
 	ld [de], a    ;save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
@@ -44,8 +44,8 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	set HasSubstituteUp, [hl] ;set bit 4 of flags, user now has substitute
 	ld a, [W_OPTIONS]         ;load options
 	bit 7, a                  ;battle animation is enabled?
-	ld hl, Func_3fba8         ;animation enabled: 0F:7BA8
-	ld b, BANK(Func_3fba8)
+	ld hl, PlayCurrentMoveAnimation         ;animation enabled: 0F:7BA8
+	ld b, BANK(PlayCurrentMoveAnimation)
 	jr z, .animationEnabled
 	ld hl, AnimationSubstitute ;animation disabled: 1E:56E0
 	ld b, BANK(AnimationSubstitute)

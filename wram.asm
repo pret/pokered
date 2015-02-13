@@ -786,12 +786,15 @@ wStringBuffer2:: ; cf70
 wStringBuffer3:: ; cf81
 	ds 9 + 1
 
-wcf8b:: ds 1
-wcf8c:: ds 1
+wList:: ; cf8b
+	ds 2
+
 wcf8d:: ds 1
 wcf8e:: ds 1
-wcf8f:: ds 1
-wcf90:: ds 1
+
+wItemPrices:: ; cf8f
+	ds 2
+
 wcf91:: ds 1
 
 wWhichPokemon:: ; cf92
@@ -800,6 +803,12 @@ wWhichPokemon:: ; cf92
 
 wcf93:: ds 1
 
+wHPBarType:: ; cf94
+; type of HP bar
+; $00 = enemy HUD in battle
+; $01 = player HUD in battle / status screen
+; $02 = party menu
+
 wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1
@@ -807,24 +816,16 @@ wListMenuID:: ; cf94
 wcf95:: ds 1
 wcf96:: ds 1
 wcf97:: ds 1
-wcf98:: ds 1
-wcf99:: ds 1
-wcf9a:: ds 1
-wcf9b:: ds 1
-wcf9c:: ds 4
-wcfa0:: ds 4
-wcfa4:: ds 2
-wcfa6:: ds 2
-wcfa8:: ds 7
-wcfaf:: ds 10
-wcfb9:: ds 1
-wcfba:: ds 1
-wcfbb:: ds 1
-wcfbc:: ds 2
-wcfbe:: ds 2
-wcfc0:: ds 2
-wcfc2:: ds 2
-wcfc4:: ds 1
+
+; LoadMonData copies mon data here
+wLoadedMon:: party_struct wLoadedMon ; cf98
+
+wFontLoaded:: ; cfc4
+; bit 0: The space in VRAM that is used to store walk animation tile patterns
+;        for the player and NPCs is in use for font tile patterns.
+;        This means that NPC movement must be disabled.
+; The other bits are unused.
+	ds 1
 
 wWalkCounter:: ; cfc5
 ; walk animation counter
@@ -979,8 +980,13 @@ wCriticalHitOrOHKO:: ; d05e
 W_MOVEMISSED:: ; d05f
 	ds 1
 
-wd060:: ds 1
-wd061:: ds 1
+wPlayerStatsToDouble:: ; d060
+; always 0
+	ds 1
+
+wPlayerStatsToHalve:: ; d061
+; always 0
+	ds 1
 
 W_PLAYERBATTSTATUS1:: ; d062
 ; bit 0 - bide
@@ -1010,8 +1016,13 @@ W_PLAYERBATTSTATUS3:: ; d064
 ; bit 3 - tranformed
 	ds 1
 
-wd065:: ds 1
-wd066:: ds 1
+wEnemyStatsToDouble:: ; d065
+; always 0
+	ds 1
+
+wEnemyStatsToHalve:: ; d066
+; always 0
+	ds 1
 
 W_ENEMYBATTSTATUS1:: ; d067
 	ds 1
@@ -1213,7 +1224,7 @@ W_SPRITEDECODETABLE1PTR:: ; d0b3
 
 wd0b5:: ds 1
 
-W_LISTTYPE:: ; d0b6
+wNameListType:: ; d0b6
 	ds 1
 
 wPredefBank:: ; d0b7
@@ -1269,16 +1280,23 @@ W_MONHPADDING:: ; d0d7
 
 
 W_DAMAGE:: ; d0d7
-	ds 1
+	ds 2
 
-wd0d8:: ds 3
+ds 2
 
 wRepelRemainingSteps:: ; wd0db
     ds 1
-	
-wd0dc:: ds 4
-wd0e0:: ds 1
-wd0e1:: ds 56
+
+wMoves:: ; wd0dc
+; list of moves for FormatMovesString
+	ds 4
+
+wMoveNum:: ; d0e0
+	ds 1
+
+wMovesString:: ; d0e1
+	ds 56
+
 wd119:: ds 1
 
 wWalkBikeSurfStateCopy:: ; d11a

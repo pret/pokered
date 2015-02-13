@@ -1,7 +1,7 @@
 LearnMove: ; 6e43 (1:6e43)
 	call SaveScreenTilesToBuffer1
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wcd6d
 	ld de, wd036
@@ -9,9 +9,9 @@ LearnMove: ; 6e43 (1:6e43)
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
-	ld hl, wPartyMon1Moves ; wPartyMon1Moves
+	ld hl, wPartyMon1Moves
 	ld bc, $2c
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -36,14 +36,14 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	pop de
 	pop hl
 .asm_6e8b
-	ld a, [wd0e0]
+	ld a, [wMoveNum]
 	ld [hl], a
 	ld bc, $15
 	add hl, bc
 	push hl
 	push de
 	dec a
-	ld hl, Moves ; $4000
+	ld hl, Moves
 	ld bc, $6
 	call AddNTimes
 	ld de, wHPBarMaxHP
@@ -53,22 +53,22 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	pop de
 	pop hl
 	ld [hl], a
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	and a
 	jp z, PrintLearnedMove
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	ld b, a
-	ld a, [wPlayerMonNumber] ; wPlayerMonNumber
+	ld a, [wPlayerMonNumber]
 	cp b
 	jp nz, PrintLearnedMove
 	ld h, d
 	ld l, e
 	ld de, wBattleMonMoves
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	ld bc, $11
 	add hl, bc
-	ld de, wBattleMonPP ; wBattleMonPP
+	ld de, wBattleMonPP
 	ld bc, $4
 	call CopyData
 	jp PrintLearnedMove
@@ -78,10 +78,10 @@ AbandonLearning: ; 6eda (1:6eda)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	call DisplayTextBoxID ; yes/no menu
+	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
@@ -101,20 +101,20 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call PrintText
 	hlCoord 14, 7
 	ld bc, $80f
-	ld a, $14
+	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID
+	call DisplayTextBoxID ; yes/no menu
 	pop hl
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	rra
 	ret c
 	ld bc, $fffc
 	add hl, bc
 	push hl
-	ld de, wd0dc
-	ld bc, $4
+	ld de, wMoves
+	ld bc, NUM_MOVES
 	call CopyData
-	callab Func_39b87
+	callab FormatMovesString
 	pop hl
 .asm_6f39
 	push hl
@@ -125,15 +125,15 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld c, $e
 	call TextBoxBorder
 	hlCoord 6, 8
-	ld de, wd0e1
-	ld a, [$fff6]
+	ld de, wMovesString
+	ld a, [hFlags_0xFFF6]
 	set 2, a
-	ld [$fff6], a
+	ld [hFlags_0xFFF6], a
 	call PlaceString
-	ld a, [$fff6]
+	ld a, [hFlags_0xFFF6]
 	res 2, a
-	ld [$fff6], a
-	ld hl, wTopMenuItemY ; wTopMenuItemY
+	ld [hFlags_0xFFF6], a
+	ld hl, wTopMenuItemY
 	ld a, $8
 	ld [hli], a
 	ld a, $5
@@ -146,10 +146,10 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, $3
 	ld [hli], a
 	ld [hl], $0
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, $fff6
+	ld hl, hFlags_0xFFF6
 	res 1, [hl]
 	push af
 	call LoadScreenTilesFromBuffer1
@@ -158,7 +158,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	bit 1, a
 	jr nz, .asm_6fab
 	push hl
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0
 	add hl, bc

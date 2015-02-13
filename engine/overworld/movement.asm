@@ -52,7 +52,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	jr .asm_4eab
 .asm_4e86
 	ld [wSpriteStateData1 + 9], a
-	ld a, [wcfc4]
+	ld a, [wFontLoaded]
 	bit 0, a
 	jr nz, .asm_4e7d
 .asm_4e90
@@ -130,7 +130,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	bit 7, a
 	jp nz, InitializeSpriteFacingDirection  ; c1x1 >= $80
 	ld b, a
-	ld a, [wcfc4]
+	ld a, [wFontLoaded]
 	bit 0, a
 	jp nz, notYetMoving
 	ld a, b
