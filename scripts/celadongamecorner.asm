@@ -1,26 +1,26 @@
 CeladonGameCornerScript: ; 48bbd (12:4bbd)
-	call CeladonGameCornerScript_48bcf
+	call InitialiseUnknownSlotVar
 	call CeladonGameCornerScript_48bec
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGameCornerScriptPointers
 	ld a, [W_CELADONGAMECORNERCURSCRIPT]
 	jp CallFunctionInTable
 
-CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
+InitialiseUnknownSlotVar: ; 48bcf (12:4bcf)
 	ld hl, wd126
 	bit 6, [hl]
 	res 6, [hl]
-	ret z
+	ret z ; run only once
 	call Random
-	ld a, [$ffd3]
+	ld a, [hRandomAdd] ; redundant
 	cp $7
-	jr nc, .asm_48be2
+	jr nc, .EightOrLess
 	ld a, $8
-.asm_48be2
+.EightOrLess
 	srl a
 	srl a
 	srl a
-	ld [wUnknownSlotVar], a
+	ld [wUnknownSlotVar], a ; 1/8 chance
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
