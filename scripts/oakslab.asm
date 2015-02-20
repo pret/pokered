@@ -944,7 +944,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	bit 6, a
 	jr nz, .asm_50e81 ; 0x1d24e
 	ld hl, wPokedexOwned
-	ld b, $13
+	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wd11e]
 	cp $2
