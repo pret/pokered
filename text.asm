@@ -1552,7 +1552,7 @@ _ComeBackText:: ; 89d15 (22:5d15)
 	line "Come back!"
 	done
 
-_SupperEffectiveText:: ; 89d22 (22:5d22)
+_SuperEffectiveText:: ; 89d22 (22:5d22)
 	text "It's super"
 	line "effective!"
 	prompt
