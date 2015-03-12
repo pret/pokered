@@ -65,7 +65,7 @@ VBlank::
 	cp BANK(Music8_UpdateMusic)
 	jr nz, .bank1F
 .bank8
-	call Func_2136e
+	call Music_DoLowHealthAlarm
 	call Music8_UpdateMusic
 	jr .afterMusic
 .bank1F

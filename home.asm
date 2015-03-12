@@ -3223,7 +3223,7 @@ PlaySoundWaitForCurrent:: ; 3740 (0:3740)
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish:: ; 3748 (0:3748)
-	ld a, [wd083]
+	ld a, [wLowHealthAlarm]
 	and $80
 	ret nz
 	push hl

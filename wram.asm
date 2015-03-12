@@ -1091,7 +1091,9 @@ W_BASECOORDX:: ; d081
 W_BASECOORDY:: ; d082
 	ds 1
 
-wd083:: ds 1
+; low health alarm counter/enable
+; high bit = enable, others = timer to cycle frequencies
+wLowHealthAlarm:: ds 1 ; d083
 
 W_FBTILECOUNTER:: ; d084
 ; counts how many tiles of the current frame block have been drawn

@@ -162,7 +162,7 @@ Music8_PlayNextNote: ; 21946 (8:5946)
 	ld a, c
 	cp CH4
 	jr nz, .beginChecks
-	ld a, [wd083]
+	ld a, [wLowHealthAlarm] ;low health alarm enabled?
 	bit 7, a
 	ret nz
 .beginChecks
@@ -931,7 +931,7 @@ Func_21e19: ; 21e19 (8:5e19)
 	ld a, c
 	cp CH4
 	jr nz, .asm_21e2e
-	ld a, [wd083]
+	ld a, [wLowHealthAlarm]
 	bit 7, a
 	jr z, .asm_21e2e
 	xor a

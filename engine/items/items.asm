@@ -858,7 +858,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jp .cureStatusAilment
 .notFullHP ; if the pokemon's current HP doesn't equal its max HP
 	xor a
-	ld [wd083],a
+	ld [wLowHealthAlarm],a ;disable low health alarm
 	ld [wc02a],a
 	push hl
 	push de
@@ -1645,7 +1645,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 ; if some pokemon were asleep
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld a,[wd083]
+	ld a,[wLowHealthAlarm]
 	and a,$80
 	jr nz,.skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
