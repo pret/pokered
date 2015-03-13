@@ -92,7 +92,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GoPAL_SET
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	callba Func_7176c
+	callba LoadMonPartySpriteTilePatterns
 	hlCoord 0, 4
 	ld b, $9
 	ld c, $12
@@ -114,7 +114,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld hl, wHPBarMaxHP + 1
 	ld [hli], a
 	ld [hli], a
-	ld [W_SUBANIMTRANSFORM], a
+	ld [wPartyMonAnimCounter], a
 .asm_65ed
 	call PrintAlphabet
 	call GBPalNormal
@@ -472,7 +472,7 @@ PrintNamingText: ; 68f8 (1:68f8)
 	ld a, [wcf91]
 	ld [wcd5d], a
 	push af
-	callba Func_71882
+	callba WriteMonPartySpriteOAMByMonID
 	pop af
 	ld [wd11e], a
 	call GetMonName

@@ -146,8 +146,8 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 Func_4120b: ; 4120b (10:520b)
 	ld a, %11010000
 	ld [rOBP1], a
-	ld b, BANK(Func_7176c)
-	ld hl, Func_7176c
+	ld b, BANK(LoadMonPartySpriteTilePatterns)
+	ld hl, LoadMonPartySpriteTilePatterns
 	jp Bankswitch
 
 Trade_SwapNames: ; 41217 (10:5217)
@@ -533,7 +533,7 @@ Func_414e8: ; 414e8 (10:54e8)
 	ret
 
 Func_41505: ; 41505 (10:5505)
-	callba Func_71882
+	callba WriteMonPartySpriteOAMByMonID
 	call Func_41558
 
 Func_41510: ; 41510 (10:5510)

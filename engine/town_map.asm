@@ -444,12 +444,14 @@ Func_71279: ; 71279 (1c:5279)
 	ld c, l
 	pop hl
 
-Func_71281: ; 71281 (1c:5281)
+WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
+; Writes 4 OAM blocks for a helix mon party sprite, since is does not have
+; a vertical line of symmetry.
 	ld de, $202
-.asm_71284
+.loop
 	push de
 	push bc
-.asm_71286
+.innerLoop
 	ld a, b
 	ld [hli], a
 	ld a, c
@@ -465,24 +467,28 @@ Func_71281: ; 71281 (1c:5281)
 	add c
 	ld c, a
 	dec e
-	jr nz, .asm_71286
+	jr nz, .innerLoop
 	pop bc
 	pop de
 	ld a, $8
 	add b
 	ld b, a
 	dec d
-	jr nz, .asm_71284
+	jr nz, .loop
 	ret
 
-Func_712a6: ; 712a6 (1c:52a6)
+WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
+; Writes 4 OAM blocks for a mon party sprite other than a helix. All the
+; sprites other than the helix one have a vertical line of symmetry which allows
+; the X-flip OAM bit to be used so that only 2 rather than 4 tile patterns are
+; needed.
 	xor a
 	ld [wcd5c], a
 	ld de, $202
-.asm_712ad
+.loop
 	push de
 	push bc
-.asm_712af
+.innerLoop
 	ld a, b
 	ld [hli], a
 	ld a, c
@@ -498,7 +504,7 @@ Func_712a6: ; 712a6 (1c:52a6)
 	add c
 	ld c, a
 	dec e
-	jr nz, .asm_712af
+	jr nz, .innerLoop
 	pop bc
 	pop de
 	push hl
@@ -510,7 +516,7 @@ Func_712a6: ; 712a6 (1c:52a6)
 	add b
 	ld b, a
 	dec d
-	jr nz, .asm_712ad
+	jr nz, .loop
 	ret
 
 Func_712d9: ; 712d9 (1c:52d9)
