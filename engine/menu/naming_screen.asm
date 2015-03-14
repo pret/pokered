@@ -92,7 +92,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GoPAL_SET
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	callba LoadMonPartySpriteTilePatterns
+	callba LoadMonPartySpriteGfx
 	hlCoord 0, 4
 	ld b, $9
 	ld c, $12

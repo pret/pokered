@@ -22,7 +22,7 @@ DrawPartyMenu_: ; 12cd2 (4:6cd2)
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	call UpdateSprites ; move sprites
-	callba LoadMonPartySpriteTilePatternsWithLCDDisabled ; load pokemon icon graphics
+	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
 RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,[wd07d]

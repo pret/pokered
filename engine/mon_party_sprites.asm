@@ -88,12 +88,12 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 PartyMonSpeeds: ; 71769 (1c:5769)
 	db $05,$10,$20
 
-LoadMonPartySpriteTilePatterns: ; 7176c (1c:576c)
+LoadMonPartySpriteGfx: ; 7176c (1c:576c)
 ; Load mon party sprite tile patterns into VRAM during V-blank.
 	ld hl, MonPartySpritePointers
 	ld a, $1c
 
-LoadAnimSpriteTilePatterns: ; 71771 (1c:5771)
+LoadAnimSpriteGfx: ; 71771 (1c:5771)
 ; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
 ; of an array of structures that contain arguments for CopyVideoData and a is
 ; the number of structures in the array.
@@ -125,7 +125,7 @@ LoadAnimSpriteTilePatterns: ; 71771 (1c:5771)
 	jr nz, .loop
 	ret
 
-LoadMonPartySpriteTilePatternsWithLCDDisabled: ; 71791 (1c:5791)
+LoadMonPartySpriteGfxWithLCDDisabled: ; 71791 (1c:5791)
 ; Load mon party sprite tile patterns into VRAM immediately by disabling the
 ; LCD.
 	call DisableLCD
@@ -332,6 +332,10 @@ WriteMonPartySpriteOAMByMonID: ; 71882 (1c:5882)
 	jr WriteMonPartySpriteOAM
 
 UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
+; This function is unused and doesn't appear to do anything useful. It looks
+; like it may have been intended to load the tile patterns and OAM data for
+; the mon party sprite associated with the mon ID in a.
+; However, its calculations are off and it loads garbage data.
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
