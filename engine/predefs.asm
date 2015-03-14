@@ -99,7 +99,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef InitOpponent
 	add_predef CableClub_Run
 	add_predef DrawBadges
-	add_predef Func_410f3
+	add_predef ExternalClockTradeAnim
 	add_predef BattleTransition
 	add_predef CopyTileIDsFromList
 	add_predef PlayIntro
@@ -108,7 +108,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef GetTileAndCoordsInFrontOfPlayer
 	add_predef StatusScreen
 	add_predef StatusScreen2
-	add_predef Func_410e2
+	add_predef InternalClockTradeAnim
 	add_predef TrainerEngage
 	add_predef IndexToPokedex
 	add_predef Predef3B; 3B display pic?

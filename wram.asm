@@ -658,9 +658,17 @@ wTradedEnemyMonOTID:: ; cd59
 
 wcd5b:: ds 1
 wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
+
+wMonPartySpriteSpecies:: ; cd5d
+	ds 1
+
+wLeftGBMonSpecies:: ; cd5e
+; in the trade animation, the mon that leaves the left gameboy
+	ds 1
+
+wRightGBMonSpecies:: ; cd5f
+; in the trade animation, the mon that leaves the right gameboy
+	ds 1
 
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
@@ -1113,6 +1121,9 @@ wd088:: ds 1
 W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
+
+wTradedMonMovingRight:: ; d08a
+; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
 
 wd08a:: ds 1
 

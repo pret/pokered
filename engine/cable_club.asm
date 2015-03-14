@@ -840,10 +840,10 @@ TradeCenter_Trade:
 	ld a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .usingExternalClock
-	predef Func_410e2
+	predef InternalClockTradeAnim
 	jr .tradeCompleted
 .usingExternalClock
-	predef Func_410f3
+	predef ExternalClockTradeAnim
 .tradeCompleted
 	callab TryEvolvingMon
 	call ClearScreen

@@ -322,11 +322,12 @@ WriteMonPartySpriteOAMByPartyIndex: ; 71868 (1c:5868)
 	pop hl
 	ret
 
-WriteMonPartySpriteOAMByMonID: ; 71882 (1c:5882)
-; Write OAM blocks for mon ID in [wcd5d].
+WriteMonPartySpriteOAMBySpecies: ; 71882 (1c:5882)
+; Write OAM blocks for the party sprite of the species in
+; [wMonPartySpriteSpecies].
 	xor a
 	ld [hPartyMonIndex], a
-	ld a, [wcd5d]
+	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
 	ld [wcd5b], a
 	jr WriteMonPartySpriteOAM
@@ -334,7 +335,7 @@ WriteMonPartySpriteOAMByMonID: ; 71882 (1c:5882)
 UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
 ; This function is unused and doesn't appear to do anything useful. It looks
 ; like it may have been intended to load the tile patterns and OAM data for
-; the mon party sprite associated with the mon ID in a.
+; the mon party sprite associated with the species in [wcf91].
 ; However, its calculations are off and it loads garbage data.
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
@@ -346,8 +347,8 @@ UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
 	ld hl, vSprites + $40
 	call .LoadTilePatterns
 	xor a
-	ld [wcd5d], a
-	jr WriteMonPartySpriteOAMByMonID
+	ld [wMonPartySpriteSpecies], a
+	jr WriteMonPartySpriteOAMBySpecies
 
 .LoadTilePatterns ; 718ac (1c:58ac)
 	push hl
