@@ -122,7 +122,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
-	predef Func_410e2
+	predef InternalClockTradeAnim
 	pop af
 	ld [W_CURENEMYLVL],a
 	pop af

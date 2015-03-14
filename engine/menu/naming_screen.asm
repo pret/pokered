@@ -470,9 +470,9 @@ PrintNamingText: ; 68f8 (1:68f8)
 	dec a
 	jr z, .notNickname
 	ld a, [wcf91]
-	ld [wcd5d], a
+	ld [wMonPartySpriteSpecies], a
 	push af
-	callba WriteMonPartySpriteOAMByMonID
+	callba WriteMonPartySpriteOAMBySpecies
 	pop af
 	ld [wd11e], a
 	call GetMonName
