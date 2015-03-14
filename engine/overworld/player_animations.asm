@@ -389,7 +389,7 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles ; $4866
-	call Func_71771
+	call LoadAnimSpriteGfx
 	ld a, [wSpriteStateData1 + 2]
 	ld c, a
 	ld b, $0

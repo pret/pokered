@@ -1118,6 +1118,8 @@ wd08a:: ds 1
 
 wTownMapSpriteBlinkingCounter:: ; d08b
 
+wPartyMonAnimCounter:: ; d08b
+
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
 ; 01: flip horizontally and vertically

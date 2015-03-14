@@ -24,6 +24,8 @@ H_SPRITEINDEX      EQU $FF8C
 ; DisplayTextID's argument
 hSpriteIndexOrTextID EQU $FF8C
 
+hPartyMonIndex EQU $FF8C
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
