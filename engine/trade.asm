@@ -13,7 +13,7 @@ ExternalClockTradeAnim: ; 410f3 (10:50f3)
 ; Externally clocked link cable trades use this.
 	ld a, [wTradedEnemyMonSpecies]
 	ld [wLeftGBMonSpecies], a
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wTradedPlayerMonSpecies]
 	ld [wRightGBMonSpecies], a
 	ld de, ExternalClockTradeFuncSequence
 
@@ -259,7 +259,7 @@ Trade_ShowPlayerMon: ; 41245 (10:5245)
 	ld a, TRADE_BALL_POOF_ANIM
 	call Trade_ShowAnimation
 	ld a, TRADE_BALL_DROP_ANIM
-	call Trade_ShowAnimation
+	call Trade_ShowAnimation ; clears mon pic
 	ld a, [wTradedPlayerMonSpecies]
 	call PlayCry
 	xor a
@@ -272,8 +272,12 @@ Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
 	call CopyScreenTileBufferToVRAM
 	ld b, $8
 	call GoPAL_SET
+
+; This function call is pointless. It just copies blank tiles to VRAM that was
+; already filled with blank tiles.
 	ld hl, vBGMap1 + $8c
 	call Trade_CopyCableTilesOffScreen
+
 	ld a, $a0
 	ld [hSCX], a
 	call DelayFrame
@@ -754,7 +758,10 @@ Trade_ShowClearedWindow: ; 415c8 (10:55c8)
 	ret
 
 Trade_SlideTextBoxOffScreen: ; 415df (10:55df)
-; Slides the window right until it's off screen.
+; Slides the window right until it's off screen. The window usually just has
+; a text box at the bottom when this is called. However, when this is called
+; after Trade_ShowEnemyMon in the external clock sequence, there is a mon pic
+; above the text box and it is also scrolled off the screen.
 	ld c, 50
 	call DelayFrames
 .loop
