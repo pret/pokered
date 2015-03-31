@@ -3188,30 +3188,30 @@ PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
 	call HandleCounterMove
-	jr z,handleIfMoveMissed
+	jr z,handleIfPlayerMoveMissed
 	call GetDamageVarsForPlayerAttack
 	call CalculateDamage
-	jp z,asm_3d74b ; for moves with 0 BP, skip any further damage calculation and, for now, skip MoveHitTest
+	jp z,playerCheckIfFlyOrChargeEffect ; for moves with 0 BP, skip any further damage calculation and, for now, skip MoveHitTest
 	               ; for these moves, accuracy tests will only occur if they are called as part of the effect itself
 	call AdjustDamageForMoveType
 	call RandomizeDamage
 .moveHitTest
 	call MoveHitTest
-handleIfMoveMissed
+handleIfPlayerMoveMissed
 	ld a,[W_MOVEMISSED]
 	and a
-	jr z,asm_3d714
+	jr z,getPlayerAnimationType
 	ld a,[W_PLAYERMOVEEFFECT]
 	sub a,EXPLODE_EFFECT 
-	jr z,asm_3d71e ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
-	jr asm_3d74b
-asm_3d714
+	jr z,playPlayerMoveAnimation ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
+	jr playerCheckIfFlyOrChargeEffect
+getPlayerAnimationType
 	ld a,[W_PLAYERMOVEEFFECT]
 	and a
-	ld a,4
-	jr z,asm_3d71e
-	ld a,5
-asm_3d71e
+	ld a,4 ; move has no effect other than dealing damage
+	jr z,playPlayerMoveAnimation
+	ld a,5 ; move has effect
+playPlayerMoveAnimation
 	push af
 	ld a,[W_PLAYERBATTSTATUS2]
 	bit 4,a
@@ -3230,7 +3230,7 @@ asm_3d71e
 	ld b,BANK(Func_79771)
 	call nz,Bankswitch
 	jr MirrorMoveCheck
-asm_3d74b
+playerCheckIfFlyOrChargeEffect
 	ld c,$1E
 	call DelayFrames
 	ld a,[W_PLAYERMOVEEFFECT]
@@ -3297,8 +3297,8 @@ MirrorMoveCheck
 	ld a,[wPlayerNumAttacksLeft]
 	dec a
 	ld [wPlayerNumAttacksLeft],a
-	jp nz,asm_3d714 ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
-	                ; damage calculation and accuracy tests only happen for the first hit
+	jp nz,getPlayerAnimationType ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
+	                             ; damage calculation and accuracy tests only happen for the first hit
 	res AttackingMultipleTimes,[hl] ; clear attacking multiple times status when all attacks are over
 	ld hl,MultiHitText
 	call PrintText
@@ -3573,7 +3573,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld [hl],a
 	ld a,BIDE
 	ld [W_PLAYERMOVENUM],a
-	ld hl,handleIfMoveMissed ; skip damage calculation, DecrementPP and MoveHitTest
+	ld hl,handleIfPlayerMoveMissed ; skip damage calculation, DecrementPP and MoveHitTest
 	jp .returnToHL
 
 .ThrashingAboutCheck
@@ -3607,7 +3607,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[wPlayerNumAttacksLeft]
 	dec a ; did multi-turn move end?
 	ld [wPlayerNumAttacksLeft],a
-	ld hl,asm_3d714 ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	ld hl,getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit), 
 	                ; DecrementPP and MoveHitTest
 	jp nz,.returnToHL
 	jp .returnToHL
@@ -3783,7 +3783,7 @@ MonName1Text: ; 3dafb (f:5afb)
 	ld hl, Used2Text
 	ret nz
 	ld a, [wd11e]
-	cp DOUBLESLAP
+	cp 3
 	ld hl, Used2Text
 	ret c
 	ld hl, Used1Text
@@ -3922,7 +3922,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	; if you get here, the mon used jump kick or hi jump kick and missed
 	ld hl, W_DAMAGE ; since the move missed, W_DAMAGE will always contain 0 at this point.
 	                ; Thus, recoil damage will always be equal to 1 
-					; even if it was intended to be potential damage/8.
+	                ; even if it was intended to be potential damage/8.
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -5639,6 +5639,7 @@ RandomizeDamage: ; 3e687 (f:6687)
 	ld [hl], a
 	ret
 
+; for more detailed commentary, see equivalent function for player side (ExecutePlayerMove)
 ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	ld a, [wEnemySelectedMove]
 	inc a
@@ -5711,42 +5712,42 @@ EnemyCalcMoveDamage: ; 3e750 (f:6750)
 	ld hl, SetDamageEffects
 	ld de, $1
 	call IsInArray
-	jp c, Func_3e77f
+	jp c, EnemyMoveHitTest
 	call CriticalHitTest
 	call HandleCounterMove
-	jr z, asm_3e782
+	jr z, handleIfEnemyMoveMissed
 	call SwapPlayerAndEnemyLevels
 	call GetDamageVarsForEnemyAttack
 	call SwapPlayerAndEnemyLevels
 	call CalculateDamage
-	jp z, Func_3e7d1
+	jp z, EnemyCheckIfFlyOrChargeEffect
 	call AdjustDamageForMoveType
 	call RandomizeDamage
 
-Func_3e77f: ; 3e77f (f:677f)
+EnemyMoveHitTest: ; 3e77f (f:677f)
 	call MoveHitTest
-asm_3e782: ; 3e782 (f:6782)
+handleIfEnemyMoveMissed: ; 3e782 (f:6782)
 	ld a, [W_MOVEMISSED]
 	and a
 	jr z, .asm_3e791
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp EXPLODE_EFFECT
 	jr z, asm_3e7a0
-	jr Func_3e7d1
+	jr EnemyCheckIfFlyOrChargeEffect
 .asm_3e791
 	call SwapPlayerAndEnemyLevels
 
-Func_3e794: ; 3e794 (f:6794)
+GetEnemyAnimationType: ; 3e794 (f:6794)
 	ld a, [W_ENEMYMOVEEFFECT]
 	and a
 	ld a, $1
-	jr z, asm_3e7a4
+	jr z, playEnemyMoveAnimation
 	ld a, $2
-	jr asm_3e7a4
+	jr playEnemyMoveAnimation
 asm_3e7a0: ; 3e7a0 (f:67a0)
 	call SwapPlayerAndEnemyLevels
 	xor a
-asm_3e7a4: ; 3e7a4 (f:67a4)
+playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 	push af
 	ld a, [W_ENEMYBATTSTATUS2]
 	bit HasSubstituteUp, a ; does mon have a substitute?
@@ -5764,24 +5765,24 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	ld hl, Func_79771
 	ld b, BANK(Func_79771)
 	call nz, Bankswitch ; slide the substitute's sprite out
-	jr asm_3e7ef
+	jr EnemyCheckIfMirrorMoveEffect
 
-Func_3e7d1: ; 3e7d1 (f:67d1)
+EnemyCheckIfFlyOrChargeEffect: ; 3e7d1 (f:67d1)
 	call SwapPlayerAndEnemyLevels
 	ld c, $1e
 	call DelayFrames
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp FLY_EFFECT
-	jr z, .asm_3e7e6
+	jr z, .playAnim
 	cp CHARGE_EFFECT
-	jr z, .asm_3e7e6
-	jr asm_3e7ef
-.asm_3e7e6
+	jr z, .playAnim
+	jr EnemyCheckIfMirrorMoveEffect
+.playAnim
 	xor a
 	ld [wAnimationType], a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
-asm_3e7ef: ; 3e7ef (f:67ef)
+EnemyCheckIfMirrorMoveEffect: ; 3e7ef (f:67ef)
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp MIRROR_MOVE_EFFECT
 	jr nz, .notMirrorMoveEffect
@@ -5832,7 +5833,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	ld hl, wEnemyNumAttacksLeft
 	dec [hl]
 	pop hl
-	jp nz, Func_3e794
+	jp nz, GetEnemyAnimationType
 	res AttackingMultipleTimes, [hl] ; mon is no longer hitting multiple times
 	ld hl, HitXTimesText
 	call PrintText
@@ -6084,7 +6085,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld a, BIDE
 	ld [W_ENEMYMOVENUM], a
 	call SwapPlayerAndEnemyLevels
-	ld hl, asm_3e782
+	ld hl, handleIfEnemyMoveMissed
 	jp .enemyReturnToHL
 .checkIfThrashingAbout
 	bit ThrashingAbout, [hl] ; is mon using thrash or petal dance?
@@ -6115,7 +6116,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
 	dec [hl]
-	ld hl, Func_3e794
+	ld hl, GetEnemyAnimationType
 	jp nz, .enemyReturnToHL
 	jp .enemyReturnToHL
 .checkIfUsingRage
@@ -6971,6 +6972,7 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	ld c, a
 	jp LoadUncompressedSpriteData
 
+; unreferenced
 Func_3f069: ; 3f069 (f:7069)
 	xor a
 	ld [wc0f1], a
@@ -7046,6 +7048,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	dec b
 	jr nz, .asm_3f0de
 	ret
+	
 .asm_3f0ed
 	push bc
 	ld b, $0
@@ -7069,7 +7072,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	jr nz, .asm_3f0f4
 	ret
 
-LoadMonBackPic:
+LoadMonBackPic: ; 3f103 (f:7103)
 ; Assumes the monster's attributes have
 ; been loaded with GetMonHeader.
 	ld a, [wBattleMonSpecies2]
@@ -7239,7 +7242,7 @@ SleepEffect: ; 3f1fc (f:71fc)
 	and $7
 	jr z, .setSleepCounter
 	ld [de], a
-	call StoreCurrentMoveAnimationIDAndType
+	call PlayCurrentMoveAnimation2
 	ld hl, FellAsleepText
 	jp PrintText
 .didntAffect
@@ -7325,10 +7328,10 @@ PoisonEffect: ; 3f24f (f:724f)
 	cp POISON_EFFECT
 	jr z, .asm_3f2cd
 	ld a, b
-	call StoreAnimationIDAndType
+	call PlayBattleAnimation2
 	jp PrintText
 .asm_3f2cd
-	call StoreCurrentMoveAnimationIDAndType
+	call PlayCurrentMoveAnimation2
 	jp PrintText
 .noEffect
 	ld a, [de]
@@ -7584,7 +7587,7 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	jr nz, .recalculateStat
 	ld a, [hl]
 	sbc 999 / $100
-	jp z, Func_3f520
+	jp z, RestoreOriginalStatModifier
 .recalculateStat ; recalculate affected stat
                  ; paralysis and burn penalties, as well as badge boosts are ignored
 	push hl
@@ -7677,7 +7680,7 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	call QuarterSpeedDueToParalysis ; apply speed penalty to the player whose turn is not, if it's paralyzed
 	jp HalveAttackDueToBurn ; apply attack penalty to the player whose turn is not, if it's burned
 
-Func_3f520: ; 3f520 (f:7520)
+RestoreOriginalStatModifier: ; 3f520 (f:7520)
 	pop hl
 	dec [hl]
 
@@ -7854,7 +7857,7 @@ UpdateLoweredStatDone: ; 3f62c (f:762c)
 	ld a, [de]
 	cp $44
 	jr nc, .ApplyBadgeBoostsAndStatusPenalties
-	call StoreCurrentMoveAnimationIDAndType
+	call PlayCurrentMoveAnimation2
 .ApplyBadgeBoostsAndStatusPenalties
 	ld a, [H_WHOSETURN]
 	and a
@@ -7977,7 +7980,7 @@ BideEffect: ; 3f6e5 (f:76e5)
 	ld [bc], a ; set Bide counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add XSTATITEM_ANIM
-	jp StoreAnimationIDAndType
+	jp PlayBattleAnimation2
 
 ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld hl, W_PLAYERBATTSTATUS1
@@ -7996,7 +7999,7 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add ANIM_B0
-	jp StoreAnimationIDAndType
+	jp PlayBattleAnimation2
 
 SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [H_WHOSETURN]
@@ -8345,7 +8348,7 @@ ConfusionSideEffectSuccess: ; 3f96f (f:796f)
 	ld [bc], a ; confusion status will last 2-5 turns
 	pop af
 	cp CONFUSION_SIDE_EFFECT
-	call nz, StoreCurrentMoveAnimationIDAndType
+	call nz, PlayCurrentMoveAnimation2
 	ld hl, BecameConfusedText
 	jp PrintText
 
@@ -8550,7 +8553,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	swap c
 	add c
 	ld [de], a
-	call StoreCurrentMoveAnimationIDAndType
+	call PlayCurrentMoveAnimation2
 	ld hl, wccee
 	ld a, [H_WHOSETURN]
 	and a
@@ -8658,18 +8661,20 @@ CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	pop hl
 	ret
 
-StoreCurrentMoveAnimationIDAndType: ; 3fb89 (f:7b89)
+PlayCurrentMoveAnimation2: ; 3fb89 (f:7b89)
 ; animation at MOVENUM will be played unless MOVENUM is 0
+; plays wAnimationType 3 or 6
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
-	jr z, .asm_3fb94
+	jr z, .notEnemyTurn
 	ld a, [W_ENEMYMOVENUM]
-.asm_3fb94
+.notEnemyTurn
 	and a
 	ret z
 
-StoreAnimationIDAndType: ; 3fb96 (f:7b96)
+PlayBattleAnimation2: ; 3fb96 (f:7b96)
+; play animation ID at a and animation type 6 or 3
 	ld [W_ANIMATIONID], a
 	ld a, [H_WHOSETURN]
 	and a
@@ -8681,6 +8686,8 @@ StoreAnimationIDAndType: ; 3fb96 (f:7b96)
 	jp PlayBattleAnimationGotID
 
 PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
+; animation at MOVENUM will be played unless MOVENUM is 0
+; resets wAnimationType
 	xor a
 	ld [wAnimationType], a
 	ld a, [H_WHOSETURN]
@@ -8693,9 +8700,11 @@ PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
 	ret z
 
 PlayBattleAnimation: ; 3fbb9 (f:7bb9)
+; play animation ID at a and predefined animation type
 	ld [W_ANIMATIONID], a
 
 PlayBattleAnimationGotID: ; 3fbbc (f:7bbc)
+; play animation at W_ANIMATIONID
 	push hl
 	push de
 	push bc

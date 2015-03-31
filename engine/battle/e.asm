@@ -273,7 +273,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	ld a, [wAILayer2Encouragement]
 	cp $1 
 	ret nz
-	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
 .nextMove
@@ -303,7 +303,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
 AIMoveChoiceModification3: ; 39817 (e:5817)
-	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, $5
 .nextMove
