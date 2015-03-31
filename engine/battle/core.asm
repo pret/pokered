@@ -875,7 +875,7 @@ FaintEnemyPokemon ; 0x3c567
 	call WaitForSoundToFinish
 	jr .sfxplayed
 .wild_win
-	call Func_3c643
+	call EndLowHealthAlarm
 	ld a, MUSIC_DEFEATED_WILD_MON
 	call PlayBattleVictoryMusic
 .sfxplayed
@@ -946,7 +946,7 @@ EnemyMonFaintedText: ; 0x3c63e
 	TX_FAR _EnemyMonFaintedText
 	db "@"
 
-Func_3c643: ; 3c643 (f:4643)
+EndLowHealthAlarm: ; 3c643 (f:4643)
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	ld [wc02a], a
@@ -996,7 +996,7 @@ ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	ret
 
 TrainerBattleVictory: ; 3c696 (f:4696)
-	call Func_3c643
+	call EndLowHealthAlarm
 	ld b, MUSIC_DEFEATED_GYM_LEADER
 	ld a, [W_GYMLEADERNO]
 	and a
@@ -3188,7 +3188,7 @@ PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
 	call HandleCounterMove
-	jr z,asm_3d705
+	jr z,handleIfMoveMissed
 	call GetDamageVarsForPlayerAttack
 	call CalculateDamage
 	jp z,asm_3d74b ; for moves with 0 BP, skip any further damage calculation and, for now, skip MoveHitTest
@@ -3197,7 +3197,7 @@ PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	call RandomizeDamage
 .moveHitTest
 	call MoveHitTest
-asm_3d705
+handleIfMoveMissed
 	ld a,[W_MOVEMISSED]
 	and a
 	jr z,asm_3d714
@@ -3573,7 +3573,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld [hl],a
 	ld a,BIDE
 	ld [W_PLAYERMOVENUM],a
-	ld hl,asm_3d705 ; skip damage calculation, DecrementPP and MoveHitTest
+	ld hl,handleIfMoveMissed ; skip damage calculation, DecrementPP and MoveHitTest
 	jp .returnToHL
 
 .ThrashingAboutCheck
@@ -4481,7 +4481,7 @@ CalculateDamage: ; 3df65 (f:5f65)
 ;	d: base power
 ;	e: level
 
-	ld a, [$fff3] ; whose turn?
+	ld a, [H_WHOSETURN] ; whose turn?
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .effect
@@ -4504,7 +4504,7 @@ CalculateDamage: ; 3df65 (f:5f65)
 
 ; Calculate OHKO damage based on remaining HP.
 	cp a, OHKO_EFFECT
-	jp z, Func_3e016
+	jp z, JumpToOHKOMoveEffect
 
 ; Don't calculate damage for moves that don't do any.
 	ld a, d ; base power
@@ -4636,7 +4636,7 @@ CalculateDamage: ; 3df65 (f:5f65)
 	and a
 	ret
 
-Func_3e016: ; 3e016 (f:6016)
+JumpToOHKOMoveEffect: ; 3e016 (f:6016)
 	call JumpMoveEffect
 	ld a, [W_MOVEMISSED]
 	dec a
@@ -5066,7 +5066,7 @@ AttackSubstitute: ; 3e25e (f:625e)
 ; the Substitute had before being attacked.
 	ld h,b
 	ld l,c
-	res 4,[hl] ; unset the substitute bit
+	res HasSubstituteUp,[hl] ; unset the substitute bit
 	ld hl,SubstituteBrokeText
 	call PrintText
 ; flip whose turn it is for the next function call
@@ -7096,14 +7096,14 @@ JumpMoveEffect: ; 3f132 (f:7132)
 	ret
 
 _JumpMoveEffect: ; 3f138 (f:7138)
-	ld a, [$fff3]  ;whose turn?
+	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVEEFFECT]
 	jr z, .next1
 	ld a, [W_ENEMYMOVEEFFECT]
 .next1
-	dec a         ;subtract 1, there is no special effect for 00
-	add a         ;x2, 16bit pointers
+	dec a ; subtract 1, there is no special effect for 00
+	add a ; x2, 16bit pointers
 	ld hl, MoveEffectPointerTable
 	ld b, 0
 	ld c, a
@@ -7111,7 +7111,7 @@ _JumpMoveEffect: ; 3f138 (f:7138)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]       ;jump to special effect handler
+	jp [hl] ; jump to special effect handler
 
 MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw SleepEffect               ; unused effect
@@ -7376,7 +7376,7 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld [wcc5b], a
 	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz ; return if they have a substitute, can't effect them
-	ld a, [$fff3]
+	ld a, [H_WHOSETURN]
 	and a
 	jp nz, opponentAttacker
 	ld a, [wEnemyMonStatus]
@@ -7488,7 +7488,7 @@ CheckDefrost: ; 3f3e2 (f:73e2)
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
 	and a, 1 << FRZ	; are they frozen?
 	ret z ; return if so
-	ld a, [$fff3]
+	ld a, [H_WHOSETURN]
 	and a
 	jr nz, .opponent
 	;player [attacker]
@@ -7885,7 +7885,7 @@ MoveMissed: ; 3f65a (f:765a)
 	ld a, [de]
 	cp $44
 	ret nc
-	jp Func_3fb4e
+	jp ConditionalPrintButItFailed
 
 MonsStatsFellText: ; 3f661 (f:7661)
 	TX_FAR _MonsStatsFellText
@@ -8084,7 +8084,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [W_ENEMYMOVENUM]
 	cp TELEPORT
 	jp nz, PrintText
-	jp Func_3fb4e
+	jp ConditionalPrintButItFailed
 .asm_3f7e4
 	push af
 	call PlayBattleAnimation
@@ -8358,7 +8358,7 @@ ConfusionEffectFailed: ; 3f9a6 (f:79a6)
 	ret z
 	ld c, $32
 	call DelayFrames
-	jp Func_3fb4e
+	jp ConditionalPrintButItFailed
 
 ParalyzeEffect: ; 3f9b1 (f:79b1)
 	ld hl, ParalyzeEffect_
@@ -8613,10 +8613,10 @@ NoEffectText: ; 3fb49 (f:7b49)
 	TX_FAR _NoEffectText
 	db "@"
 
-Func_3fb4e: ; 3fb4e (f:7b4e)
+ConditionalPrintButItFailed: ; 3fb4e (f:7b4e)
 	ld a, [wMoveDidntMiss]
 	and a
-	ret nz
+	ret nz ; return if the side effect failed, yet the attack was successful
 
 PrintButItFailedText_: ; 3fb53 (f:7b53)
 	ld hl, ButItFailedText
