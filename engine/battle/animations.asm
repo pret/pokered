@@ -407,7 +407,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 	ld c,30
 	call DelayFrames
 .next4
-	call Func_78dbd ; reload pic and flash the pic in and out (to show damage)
+	call PlayApplyingAttackAnimation ; reload pic and flash the pic in and out (to show damage)
 .AnimationFinished
 	call WaitForSoundToFinish
 	xor a
@@ -445,7 +445,9 @@ ShareMoveAnimations: ; 78da6 (1e:4da6)
 	ld [W_ANIMATIONID],a
 	ret
 
-Func_78dbd: ; 78dbd (1e:4dbd)
+PlayApplyingAttackAnimation: ; 78dbd (1e:4dbd)
+; Generic animation that shows after the move's individual animation
+; Different animation depending on whether the move has an additional effect and on whose turn it is
 	ld a,[wAnimationType]
 	and a
 	ret z
@@ -453,48 +455,48 @@ Func_78dbd: ; 78dbd (1e:4dbd)
 	add a
 	ld c,a
 	ld b,0
-	ld hl,PointerTable_78dcf
+	ld hl,AnimationTypePointerTable
 	add hl,bc
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
 	jp [hl]
 
-PointerTable_78dcf: ; 78dcf (1e:4dcf)
-	dw Func_78ddb
-	dw Func_78de3
-	dw Func_78deb
-	dw Func_78df0
-	dw Func_78df6
-	dw Func_78dfe
+AnimationTypePointerTable: ; 78dcf (1e:4dcf)
+	dw ShakeScreenVertically ; enemy mon has used a non-damaging move
+	dw ShakeScreenHorizontallyHeavy ; enemy mon has used a damaging move with a side effect
+	dw ShakeScreenHorizontallySlow ; enemy mon has used a damaging move without a side effect
+	dw BlinkEnemyMonSprite ; player mon has used a non-damaging move
+	dw ShakeScreenHorizontallyLight ; player mon has used a damaging move with a side effect
+	dw ShakeScreenHorizontallySlow2 ; player mon has used a damaging move without a side effect
 
-Func_78ddb: ; 78ddb (1e:4ddb)
+ShakeScreenVertically: ; 78ddb (1e:4ddb) 
 	call PlayApplyingAttackSound
 	ld b, $8
-	jp Func_79209
+	jp AnimationShakeScreenVertically
 
-Func_78de3: ; 78de3 (1e:4de3)
+ShakeScreenHorizontallyHeavy: ; 78de3 (1e:4de3) 
 	call PlayApplyingAttackSound
 	ld b, $8
-	jp Func_79210
+	jp AnimationShakeScreenHorizontallyFast 
 
-Func_78deb: ; 78deb (1e:4deb)
+ShakeScreenHorizontallySlow: ; 78deb (1e:4deb) 
 	ld bc, $602
-	jr Func_78e01
+	jr AnimationShakeScreenHorizontallySlow 
 
-Func_78df0: ; 78df0 (1e:4df0)
+BlinkEnemyMonSprite: ; 78df0 (1e:4df0) 
 	call PlayApplyingAttackSound
 	jp AnimationBlinkEnemyMon
 
-Func_78df6: ; 78df6 (1e:4df6)
+ShakeScreenHorizontallyLight: ; 78df6 (1e:4df6) 
 	call PlayApplyingAttackSound
 	ld b, $2
-	jp Func_79210
+	jp AnimationShakeScreenHorizontallyFast
 
-Func_78dfe: ; 78dfe (1e:4dfe)
+ShakeScreenHorizontallySlow2: ; 78dfe (1e:4dfe) 
 	ld bc, $302
 
-Func_78e01: ; 78e01 (1e:4e01)
+AnimationShakeScreenHorizontallySlow: ; 78e01 (1e:4e01)
 	push bc
 	push bc
 .asm_78e03
@@ -516,7 +518,7 @@ Func_78e01: ; 78e01 (1e:4e01)
 	jr nz, .asm_78e11
 	pop bc
 	dec c
-	jr nz, Func_78e01
+	jr nz, AnimationShakeScreenHorizontallySlow
 	ret
 
 Func_78e23: ; 78e23 (1e:4e23)
@@ -1225,14 +1227,14 @@ Func_791fc: ; 791fc (1e:51fc)
 
 	ld b, $5
 
-Func_79209: ; 79209 (1e:5209)
+AnimationShakeScreenVertically: ; 79209 (1e:5209)
 	predef_jump Func_480ff
 
 AnimationShakeScreen: ; 7920e (1e:520e)
 ; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
 	ld b, $8
 
-Func_79210: ; 79210 (1e:5210)
+AnimationShakeScreenHorizontallyFast: ; 79210 (1e:5210)
 	predef_jump Func_48125
 
 AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
