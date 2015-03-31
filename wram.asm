@@ -378,7 +378,11 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 
 wccd3:: ds 1
 wccd4:: ds 1
-wccd5:: ds 2
+
+; if [ccd5] != 1, the second AI layer is not applied
+wAILayer2Encouragement:: ; ccd5
+	ds 1
+	ds 1
 
 ; current HP of player and enemy substitutes
 wPlayerSubstituteHP:: ; ccd7
@@ -425,7 +429,7 @@ wSafariBaitFactor:: ; cce9
 
 wcceb:: ds 1
 wccec:: ds 1
-wcced:: ds 1
+wMonIsDisobedient:: ds 1
 wccee:: ds 1
 wccef:: ds 1
 wccf0:: ds 1

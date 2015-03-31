@@ -991,7 +991,7 @@ ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	xor a
 	ld [W_ENEMYMOVENUM], a
 	ld [wcd6a], a
-	ld [wccd5], a
+	ld [wAILayer2Encouragement], a
 	inc a ; reset Z flag
 	ret
 
@@ -3128,7 +3128,7 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	jp z, ExecutePlayerMoveDone ; for selected move = FF, skip most of player's turn
 	xor a
 	ld [W_MOVEMISSED], a
-	ld [wcced], a
+	ld [wMonIsDisobedient], a
 	ld [wMoveDidntMiss], a
 	ld a, $a
 	ld [wDamageMultipliers], a
@@ -3251,7 +3251,7 @@ MirrorMoveCheck
 	call MirrorMoveCopyMove
 	jp z,ExecutePlayerMoveDone
 	xor a
-	ld [wcced],a
+	ld [wMonIsDisobedient],a
 	jp CheckIfPlayerNeedsToChargeUp ; if Mirror Move was successful go back to damage calculation for copied move
 .metronomeCheck
 	cp a,METRONOME_EFFECT
@@ -3778,7 +3778,7 @@ MonName1Text: ; 3dafb (f:5afb)
 	ld [hl], a
 	ld [wd11e], a
 	call Func_3db85
-	ld a, [wcced]
+	ld a, [wMonIsDisobedient]
 	and a
 	ld hl, Used2Text
 	ret nz
@@ -3799,7 +3799,7 @@ Used2Text: ; 3db34 (f:5b34)
 	db $08 ; asm
 
 PrintInsteadText: ; 3db39 (f:5b39)
-	ld a, [wcced]
+	ld a, [wMonIsDisobedient]
 	and a
 	jr z, PrintCF4BText
 	ld hl, InsteadText
@@ -4007,7 +4007,7 @@ OHKOText: ; 3dc83 (f:5c83)
 ; stores whether the mon will use a move in Z flag
 CheckForDisobedience: ; 3dc88 (f:5c88)
 	xor a
-	ld [wcced], a
+	ld [wMonIsDisobedient], a
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .checkIfMonIsTraded
@@ -4148,7 +4148,7 @@ CheckForDisobedience: ; 3dc88 (f:5c88)
 	cp b
 	jr z, .monDoesNothing ; mon will not use move if only one move has remaining PP
 	ld a, $1
-	ld [wcced], a
+	ld [wMonIsDisobedient], a
 	ld a, [wMaxMenuItem]
 	ld b, a
 	ld a, [wCurrentMenuItem]
@@ -5655,7 +5655,7 @@ ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	cp $4
 	ret nc
 .executeEnemyMove
-	ld hl, wccd5
+	ld hl, wAILayer2Encouragement
 	inc [hl]
 	xor a
 	ld [W_MOVEMISSED], a
@@ -5693,7 +5693,7 @@ EnemyCanExecuteChargingMove: ; 3e70b (f:670b)
 	call CopyStringToCF4B
 EnemyCanExecuteMove: ; 3e72b (f:672b)
 	xor a
-	ld [wcced], a
+	ld [wMonIsDisobedient], a
 	call PrintMonName1Text
 	ld a, [W_ENEMYMOVEEFFECT]
 	ld hl, ResidualEffects1

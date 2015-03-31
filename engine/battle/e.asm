@@ -227,17 +227,17 @@ AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
 AIMoveChoiceModification1: ; 397ab (e:57ab)
 	ld a, [wBattleMonStatus]
 	and a
-	ret z       ; return if no status ailment on player's mon
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ret z ; return if no status ailment on player's mon
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	ld a, [W_ENEMYMOVEPOWER]
@@ -255,32 +255,34 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	pop hl
 	jr nc, .nextMove
 	ld a, [hl]
-	add $5       ; discourage move
+	add $5 ; heavily discourage move
 	ld [hl], a
 	jr .nextMove
 
 StatusAilmentMoveEffects ; 57e2
-	db $01 ; some sleep effect?
+	db $01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
 	db $FF
 
-; slightly encourage moves with specific effects
+; slightly encourage moves with specific effects.
+; in particular, stat-modifying moves and other move effects
+; that fall in-bewteen
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
-	ld a, [wccd5]
-	cp $1
+	ld a, [wAILayer2Encouragement]
+	cp $1 
 	ret nz
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	ld a, [W_ENEMYMOVEEFFECT]
@@ -294,21 +296,23 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	jr c, .preferMove
 	jr .nextMove
 .preferMove
-	dec [hl]       ; slighly encourage this move
+	dec [hl] ; sligthly encourage this move
 	jr .nextMove
 
-; encourages moves that are effective against the player's mon
+; encourages moves that are effective against the player's mon (even if non-damaging).
+; discourage damaging moves that are ineffective or not very effective against the player's mon,
+; unless there's no damaging move that deals at least neutral damage
 AIMoveChoiceModification3: ; 39817 (e:5817)
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld de, wEnemyMonMoves ; enemy moves
 	ld b, $5
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	push hl
@@ -322,9 +326,9 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	cp $10
 	jr z, .nextMove
 	jr c, .notEffectiveMove
-	dec [hl]       ; slighly encourage this move
+	dec [hl] ; sligthly encourage this move
 	jr .nextMove
-.notEffectiveMove  ; discourages non-effective moves if better moves are available
+.notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
 	push de
 	push bc
@@ -342,17 +346,17 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	call ReadMove
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp SUPER_FANG_EFFECT
-	jr z, .betterMoveFound      ; Super Fang is considered to be a better move
+	jr z, .betterMoveFound ; Super Fang is considered to be a better move
 	cp SPECIAL_DAMAGE_EFFECT
-	jr z, .betterMoveFound      ; any special damage moves are considered to be better moves
+	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
 	cp FLY_EFFECT
-	jr z, .betterMoveFound      ; Fly is considered to be a better move
+	jr z, .betterMoveFound ; Fly is considered to be a better move
 	ld a, [W_ENEMYMOVETYPE]
 	cp d
 	jr z, .loopMoves
 	ld a, [W_ENEMYMOVEPOWER]
 	and a
-	jr nz, .betterMoveFound      ; damaging moves of a different type are considered to be better moves
+	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
 	jr .loopMoves
 .betterMoveFound
 	ld c, a
@@ -363,7 +367,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	pop hl
 	and a
 	jr z, .nextMove
-	inc [hl]       ; slighly discourage this move
+	inc [hl] ; sligthly discourage this move
 	jr .nextMove
 AIMoveChoiceModification4: ; 39883 (e:5883)
 	ret
