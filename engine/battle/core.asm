@@ -454,7 +454,8 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	cp METRONOME ; a MIRROR MOVE check is missing, might lead to a desync in link battles when combined with multi-turn moves
+	cp METRONOME ; a MIRROR MOVE check is missing, might lead to a desync in link battles
+	             ; when combined with multi-turn moves
 	jr nz, .asm_3c2dd
 	ld [wPlayerSelectedMove], a
 .asm_3c2dd
@@ -1640,7 +1641,8 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld b, a
 	ld a, [H_QUOTIENT + 3]
 	cp b
-	jr nc, .canEscape ; if the random value was less than or equal to the quotient plus 30 times the number of attempts, the player can escape
+	jr nc, .canEscape ; if the random value was less than or equal to the quotient 
+	                  ; plus 30 times the number of attempts, the player can escape
 ; can't escape
 	ld a, $1
 	ld [wcd6a], a
@@ -2046,8 +2048,10 @@ GetBattleHealthBarColor: ; 3ce90 (f:4e90)
 	jp GoPAL_SET
 
 ; center's mon's name on the battle screen
-; if the name is 1 or 2 letters long, it is printed 2 spaces more to the right than usual (i.e. for names longer than 4 letters)
-; if the name is 3 or 4 letters long, it is printed 1 space more to the right than usual (i.e. for names longer than 4 letters)
+; if the name is 1 or 2 letters long, it is printed 2 spaces more to the right than usual
+; (i.e. for names longer than 4 letters)
+; if the name is 3 or 4 letters long, it is printed 1 space more to the right than usual
+; (i.e. for names longer than 4 letters)
 CenterMonName: ; 3ce9c (f:4e9c)
 	push de
 	inc hl
@@ -2204,7 +2208,8 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	ld [wcc2d], a
 	jr z, .handleMenuSelection
 ; not Safari battle
-; swap the IDs of the item menu and party menu (this is probably because they swapped the positions of these menu items in first generation English versions)
+; swap the IDs of the item menu and party menu (this is probably because they swapped the positions
+; of these menu items in first generation English versions)
 	cp $1 ; was the item menu selected?
 	jr nz, .notItemMenu
 ; item menu was selected
@@ -3155,8 +3160,8 @@ CheckIfPlayerNeedsToChargeUp: ; 3d69a (f:569a)
 PlayerCanExecuteChargingMove: ; 3d6a9 (f:56a9)
 	ld hl,W_PLAYERBATTSTATUS1
 	res ChargingUp,[hl] ; reset charging up and invulnerability statuses if mon was charging up for an attack
-	           ; being fully paralyzed or hurting oneself in confusion removes charging up status
-	           ; resulting in the Pokemon being invulnerable for the whole battle
+	                    ; being fully paralyzed or hurting oneself in confusion removes charging up status
+	                    ; resulting in the Pokemon being invulnerable for the whole battle
 	res Invulnerable,[hl]
 PlayerCanExecuteMove: ; 3d6b0 (f:56b0)
 	call PrintMonName1Text
@@ -3307,9 +3312,9 @@ MirrorMoveCheck
 	ld de,1
 	call IsInArray
 	call nc,JumpMoveEffect ; move effects not included in SpecialEffects or in either of the ResidualEffect arrays,
-	                       ; which are the effects not covered yet. Rage's effect will be executed for a second time (although it's irrelevant). 
-	                       ; Includes side effects that only need to be called if the target didn't faint.
-	                       ; Responsible for executing Twineedle's second effect (poison)
+	; which are the effects not covered yet. Rage effect will be executed for a second time (though it's irrelevant).
+	; Includes side effects that only need to be called if the target didn't faint.
+	; Responsible for executing Twineedle's second side effect (poison).
 	jp ExecutePlayerMoveDone
 
 MultiHitText: ; 3d805 (f:5805)
@@ -3602,7 +3607,8 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[wPlayerNumAttacksLeft]
 	dec a ; did multi-turn move end?
 	ld [wPlayerNumAttacksLeft],a
-	ld hl,asm_3d714 ; if it didn't, skip damage calculation (deal damage equal to last hit), DecrementPP and MoveHitTest
+	ld hl,asm_3d714 ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	                ; DecrementPP and MoveHitTest
 	jp nz,.returnToHL
 	jp .returnToHL
 
@@ -3734,7 +3740,8 @@ HandleSelfConfusionDamage: ; 3daad (f:5aad)
 	xor a
 	ld [hl], a
 	call GetDamageVarsForPlayerAttack
-	call CalculateDamage ; ignores AdjustDamageForMoveType (type-less damage), RandomizeDamage, and MoveHitTest (always hits)
+	call CalculateDamage ; ignores AdjustDamageForMoveType (type-less damage), RandomizeDamage,
+	                     ; and MoveHitTest (always hits)
 	pop af
 	pop hl
 	ld [hl], a
@@ -3914,7 +3921,8 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 
 	; if you get here, the mon used jump kick or hi jump kick and missed
 	ld hl, W_DAMAGE ; since the move missed, W_DAMAGE will always contain 0 at this point.
-	                ; Thus, recoil damage will always be equal to 1 even if it was intended to be potential damage/8.
+	                ; Thus, recoil damage will always be equal to 1 
+					; even if it was intended to be potential damage/8.
 	ld a, [hli]
 	ld b, [hl]
 	srl a
@@ -4296,7 +4304,8 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	jr nz, .next
 	inc l ; if the player's offensive stat is 0, bump it up to 1
 .next
-	ld b, l ; b = player's offensive stat (possibly scaled) (c already contains enemy's defensive stat (possibly scaled))
+	ld b, l ; b = player's offensive stat (possibly scaled)
+	        ; (c already contains enemy's defensive stat (possibly scaled))
 	ld a, [wBattleMonLevel]
 	ld e, a ; e = level
 	ld a, [wCriticalHitOrOHKO]
@@ -4408,7 +4417,8 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 	jr nz, .next
 	inc l ; if the enemy's offensive stat is 0, bump it up to 1
 .next
-	ld b, l ; b = enemy's offensive stat (possibly scaled) (c already contains player's defensive stat (possibly scaled))
+	ld b, l ; b = enemy's offensive stat (possibly scaled)
+	        ; (c already contains player's defensive stat (possibly scaled))
 	ld a, [wEnemyMonLevel]
 	ld e, a
 	ld a, [wCriticalHitOrOHKO]
@@ -5025,8 +5035,10 @@ ApplyAttackToPlayerPokemonDone
 AttackSubstitute: ; 3e25e (f:625e)
 ; Unlike the two ApplyAttackToPokemon functions, Attack Substitute is shared by player and enemy.
 ; Self-confusion damage as well as Hi-Jump Kick and Jump Kick recoil cause a momentary turn swap before being applied.
-; If the user has a Substitute up and would take damage because of that, damage will be applied to the other player's Substitute.
-; Normal recoil such as from Double-Edge isn't affected by this glitch, because this function is never called in that case.
+; If the user has a Substitute up and would take damage because of that, 
+; damage will be applied to the other player's Substitute.
+; Normal recoil such as from Double-Edge isn't affected by this glitch, 
+; because this function is never called in that case.
 
 	ld hl,SubstituteTookDamageText
 	call PrintText
@@ -5050,7 +5062,8 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld [de],a
 	ret nc
 .substituteBroke
-; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP the Substitute had before being attacked.
+; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP 
+; the Substitute had before being attacked.
 	ld h,b
 	ld l,c
 	res 4,[hl] ; unset the substitute bit
@@ -5536,7 +5549,8 @@ CalcHitChance: ; 3e624 (f:6624)
 .next
 	ld a,$0e
 	sub c
-	ld c,a ; c = 14 - EVASIONMOD (this "reflects" the value over 7, so that an increase in the target's evasion decreases the hit chance instead of increasing the hit chance)
+	ld c,a ; c = 14 - EVASIONMOD (this "reflects" the value over 7, so that an increase in the target's evasion
+	       ; decreases the hit chance instead of increasing the hit chance)
 ; zero the high bytes of the multiplicand
 	xor a
 	ld [H_MULTIPLICAND],a
@@ -5545,7 +5559,8 @@ CalcHitChance: ; 3e624 (f:6624)
 	ld [H_MULTIPLICAND + 2],a ; set multiplicand to move accuracy
 	push hl
 	ld d,$02 ; loop has two iterations
-; loop to do the calculations, the first iteration multiplies by the accuracy ratio and the second iteration multiplies by the evasion ratio
+; loop to do the calculations, the first iteration multiplies by the accuracy ratio and
+; the second iteration multiplies by the evasion ratio
 .loop
 	push bc
 	ld hl, StatModifierRatios  ; $76cb ; stat modifier ratios
@@ -5559,7 +5574,8 @@ CalcHitChance: ; 3e624 (f:6624)
 	ld [H_MULTIPLIER],a ; set multiplier to the numerator of the ratio
 	call Multiply
 	ld a,[hl]
-	ld [H_DIVISOR],a ; set divisor to the the denominator of the ratio (the dividend is the product of the previous multiplication)
+	ld [H_DIVISOR],a ; set divisor to the the denominator of the ratio
+	                 ; (the dividend is the product of the previous multiplication)
 	ld b,$04 ; number of bytes in the dividend
 	call Divide
 	ld a,[H_QUOTIENT + 3]
