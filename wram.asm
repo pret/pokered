@@ -351,6 +351,7 @@ wNPCMovementScriptBank:: ; cc58
 	ds 2
 
 wHallOfFame:: ; cc5b
+wBoostExpByExpAll:: ; cc5b
 wcc5b:: ds 1
 wcc5c:: ds 1
 wcc5d:: ds 1
@@ -431,7 +432,7 @@ wccf0:: ds 1
 wPlayerUsedMove:: ds 1
 wEnemyUsedMove:: ds 1
 wccf3:: ds 1
-wccf4:: ds 1
+wMoveDidntMiss:: ds 1
 
 wPartyFoughtCurrentEnemyFlags::
 ; flags that indicate which party members have fought the current enemy mon
@@ -783,7 +784,9 @@ wcf30:: ds 7
 wcf37:: ds 20
 wcf4b:: ds 1
 wcf4c:: ds 1
-wcf4d:: ds 18
+wGainBoostedExp:: ; cf4d
+    ds 1
+	ds 17
 
 wGymCityName:: ; cf5f
 wStringBuffer1:: ; cf5f
@@ -967,7 +970,14 @@ W_BATTLETYPE:: ; d05a
 ; in safari battle, this is 2
 	ds 1
 
-wd05b:: ds 1
+wDamageMultipliers:: ; d05b
+; bits 0-6: Effectiveness
+   ;  $0 = immune
+   ;  $5 = not very effective
+   ;  $a = neutral
+   ; $14 = super-effective
+; bit 7: STAB
+    ds 1
 
 W_LONEATTACKNO:: ; d05c
 ; which entry in LoneAttacks to use

@@ -919,7 +919,7 @@ FaintEnemyPokemon ; 0x3c567
 ; if exp all is in the bag, this will be only be half of the stat exp and normal exp, due to the above loop
 .giveExpToMonsThatFought
 	xor a
-	ld [wcc5b], a
+	ld [wBoostExpByExpAll], a
 	callab GainExperience
 	pop af
 	ret z ; return if no exp all
@@ -928,7 +928,7 @@ FaintEnemyPokemon ; 0x3c567
 ; now, set the gain exp flag for every party member
 ; half of the total stat exp and normal exp will divided evenly amongst every party member
 	ld a, $1
-	ld [wcc5b], a
+	ld [wBoostExpByExpAll], a
 	ld a, [wPartyCount]
 	ld b, 0
 .gainExpFlagsLoop
@@ -1811,8 +1811,8 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld hl, wcc2d
 	ld [hli], a
 	ld [hl], a
-	ld [wcc5b], a
-	ld [wd05b], a
+	ld [wBoostExpByExpAll], a
+	ld [wDamageMultipliers], a
 	ld [W_PLAYERMOVENUM], a
 	ld hl, wPlayerUsedMove
 	ld [hli], a
@@ -3129,9 +3129,9 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	xor a
 	ld [W_MOVEMISSED], a
 	ld [wcced], a
-	ld [wccf4], a
+	ld [wMoveDidntMiss], a
 	ld a, $a
-	ld [wd05b], a
+	ld [wDamageMultipliers], a
 	ld a, [wcd6a]
 	and a
 	jp nz, ExecutePlayerMoveDone
@@ -3277,7 +3277,7 @@ MirrorMoveCheck
 	call PrintCriticalOHKOText
 	callab DisplayEffectiveness
 	ld a,1
-	ld [wccf4],a
+	ld [wMoveDidntMiss],a
 .notDone
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,AlwaysHappenSideEffects
@@ -3901,7 +3901,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld de, W_ENEMYMOVEEFFECT
 .playersTurn
 	ld hl, DoesntAffectMonText
-	ld a, [wd05b]
+	ld a, [wDamageMultipliers]
 	and $7f
 	jr z, .gotTextToPrint
 	ld hl, AttackMissedText
@@ -5306,7 +5306,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld [W_DAMAGE],a
 	ld a,l
 	ld [W_DAMAGE + 1],a
-	ld hl,wd05b
+	ld hl,wDamageMultipliers
 	set 7,[hl]
 .skipSameTypeAttackBonus
 	ld a,[wd11e]
@@ -5329,13 +5329,13 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	push hl
 	push bc
 	inc hl
-	ld a,[wd05b]
+	ld a,[wDamageMultipliers]
 	and a,$80
 	ld b,a
 	ld a,[hl] ; a = damage multiplier
 	ld [H_MULTIPLIER],a
 	add b
-	ld [wd05b],a
+	ld [wDamageMultipliers],a
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld hl,W_DAMAGE
@@ -5659,9 +5659,9 @@ ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	inc [hl]
 	xor a
 	ld [W_MOVEMISSED], a
-	ld [wccf4], a
+	ld [wMoveDidntMiss], a
 	ld a, $a
-	ld [wd05b], a
+	ld [wDamageMultipliers], a
 	call CheckEnemyStatusConditions
 	jr nz, .enemyHasNoSpecialConditions
 	jp [hl]
@@ -5812,7 +5812,7 @@ asm_3e7ef: ; 3e7ef (f:67ef)
 	call PrintCriticalOHKOText
 	callab DisplayEffectiveness
 	ld a, 1
-	ld [wccf4], a
+	ld [wMoveDidntMiss], a
 .asm_3e83e
 	ld a, [W_ENEMYMOVEEFFECT]
 	ld hl, AlwaysHappenSideEffects
@@ -8614,7 +8614,7 @@ NoEffectText: ; 3fb49 (f:7b49)
 	db "@"
 
 Func_3fb4e: ; 3fb4e (f:7b4e)
-	ld a, [wccf4]
+	ld a, [wMoveDidntMiss]
 	and a
 	ret nz
 

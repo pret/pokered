@@ -2931,7 +2931,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 
 Func_79e6a: ; 79e6a (1e:5e6a)
 	call WaitForSoundToFinish
-	ld a, [wd05b]
+	ld a, [wDamageMultipliers]
 	and $7f
 	ret z
 	cp $a
