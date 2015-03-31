@@ -352,6 +352,9 @@ wNPCMovementScriptBank:: ; cc58
 
 wHallOfFame:: ; cc5b
 wBoostExpByExpAll:: ; cc5b
+wAnimationType:: ; cc5b
+; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
+
 wcc5b:: ds 1
 wcc5c:: ds 1
 wcc5d:: ds 1

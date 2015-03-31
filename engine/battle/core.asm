@@ -582,7 +582,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 .poisoned
 	call PrintText
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a,BURN_PSN_ANIM
 	call PlayMoveAnimation   ; play burn/poison animation
 	pop hl
@@ -603,7 +603,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	xor $1
 	ld [H_WHOSETURN], a
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a,ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
@@ -3219,7 +3219,7 @@ asm_3d71e
 	ld b,BANK(Func_79747)
 	call nz,Bankswitch
 	pop af
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,[W_PLAYERMOVENUM]
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
@@ -3241,7 +3241,7 @@ asm_3d74b
 	jr MirrorMoveCheck
 .playAnim
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 MirrorMoveCheck
@@ -3386,7 +3386,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	jr z,.WakeUp ; if the number of turns hit 0, wake up
 ; fast asleep
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,SLP_ANIM - 1
 	call PlayMoveAnimation
 	ld hl,FastAsleepText
@@ -3470,7 +3470,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,IsConfusedText
 	call PrintText
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,CONF_ANIM - 1
 	call PlayMoveAnimation
 	call BattleRandom
@@ -3519,7 +3519,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 
 .FlyOrChargeEffect
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .NotFlyOrChargeEffect
@@ -3751,7 +3751,7 @@ HandleSelfConfusionDamage: ; 3daad (f:5aad)
 	pop af
 	ld [hl], a
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	inc a
 	ld [H_WHOSETURN], a
 	call PlayMoveAnimation
@@ -5198,7 +5198,7 @@ ReloadMoveData: ; 3e329 (f:6329)
 ; function that picks a random move for metronome
 MetronomePickMove: ; 3e348 (f:6348)
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld a,METRONOME
 	call PlayMoveAnimation ; play Metronome's animation
 ; values for player turn
@@ -5754,7 +5754,7 @@ asm_3e7a4: ; 3e7a4 (f:67a4)
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
 	pop af
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a, [W_ENEMYMOVENUM]
 	call PlayMoveAnimation
 	call HandleExplodingAnimation
@@ -5778,7 +5778,7 @@ Func_3e7d1: ; 3e7d1 (f:67d1)
 	jr asm_3e7ef
 .asm_3e7e6
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a,STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 asm_3e7ef: ; 3e7ef (f:67ef)
@@ -5870,7 +5870,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld hl, FastAsleepText
 	call PrintText
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a,SLP_ANIM
 	call PlayMoveAnimation
 	jr .next1
@@ -5946,7 +5946,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld hl, IsConfusedText
 	call PrintText
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a,CONF_ANIM
 	call PlayMoveAnimation
 	call BattleRandom
@@ -5989,7 +5989,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	pop af
 	ld [hl], a
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld [H_WHOSETURN], a
 	ld a, POUND
 	call PlayMoveAnimation
@@ -6030,7 +6030,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	jr .notFlyOrChargeEffect
 .flyOrChargeEffect
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a, STATUS_AFFECTED_ANIM
 	call PlayMoveAnimation
 .notFlyOrChargeEffect
@@ -6803,7 +6803,7 @@ HandleExplodingAnimation: ; 3eed3 (f:6ed3)
 	and a
 	ret nz
 	ld a, 5
-	ld [wcc5b], a
+	ld [wAnimationType], a
 
 PlayMoveAnimation: ; 3ef07 (f:6f07)
 	ld [W_ANIMATIONID],a
@@ -7239,7 +7239,7 @@ SleepEffect: ; 3f1fc (f:71fc)
 	and $7
 	jr z, .setSleepCounter
 	ld [de], a
-	call Func_3fb89
+	call StoreCurrentMoveAnimationIDAndType
 	ld hl, FellAsleepText
 	jp PrintText
 .didntAffect
@@ -7325,10 +7325,10 @@ PoisonEffect: ; 3f24f (f:724f)
 	cp POISON_EFFECT
 	jr z, .asm_3f2cd
 	ld a, b
-	call Func_3fb96
+	call StoreAnimationIDAndType
 	jp PrintText
 .asm_3f2cd
-	call Func_3fb89
+	call StoreCurrentMoveAnimationIDAndType
 	jp PrintText
 .noEffect
 	ld a, [de]
@@ -7373,7 +7373,7 @@ ExplodeEffect: ; 3f2f1 (f:72f1)
 
 FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz ; return if they have a substitute, can't effect them
 	ld a, [H_WHOSETURN]
@@ -7854,7 +7854,7 @@ UpdateLoweredStatDone: ; 3f62c (f:762c)
 	ld a, [de]
 	cp $44
 	jr nc, .ApplyBadgeBoostsAndStatusPenalties
-	call Func_3fb89
+	call StoreCurrentMoveAnimationIDAndType
 .ApplyBadgeBoostsAndStatusPenalties
 	ld a, [H_WHOSETURN]
 	and a
@@ -7977,7 +7977,7 @@ BideEffect: ; 3f6e5 (f:76e5)
 	ld [bc], a ; set Bide counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add XSTATITEM_ANIM
-	jp Func_3fb96
+	jp StoreAnimationIDAndType
 
 ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld hl, W_PLAYERBATTSTATUS1
@@ -7996,7 +7996,7 @@ ThrashPetalDanceEffect: ; 3f717 (f:7717)
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
 	ld a, [H_WHOSETURN]
 	add ANIM_B0
-	jp Func_3fb96
+	jp StoreAnimationIDAndType
 
 SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [H_WHOSETURN]
@@ -8030,7 +8030,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 .asm_3f76e
 	call ReadPlayerMonCurHPAndStatus
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld a, [W_PLAYERMOVENUM]
@@ -8072,7 +8072,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 .asm_3f7c1
 	call ReadPlayerMonCurHPAndStatus
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld a, [W_ENEMYMOVENUM]
@@ -8213,7 +8213,7 @@ ChargeEffect: ; 3f88c (f:788c)
 	ld b, ANIM_C0
 .notDigOrFly
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a, b
 	call PlayBattleAnimation
 	ld a, [de]
@@ -8345,7 +8345,7 @@ ConfusionSideEffectSuccess: ; 3f96f (f:796f)
 	ld [bc], a ; confusion status will last 2-5 turns
 	pop af
 	cp CONFUSION_SIDE_EFFECT
-	call nz, Func_3fb89
+	call nz, StoreCurrentMoveAnimationIDAndType
 	ld hl, BecameConfusedText
 	jp PrintText
 
@@ -8550,7 +8550,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	swap c
 	add c
 	ld [de], a
-	call Func_3fb89
+	call StoreCurrentMoveAnimationIDAndType
 	ld hl, wccee
 	ld a, [H_WHOSETURN]
 	and a
@@ -8658,7 +8658,8 @@ CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	pop hl
 	ret
 
-Func_3fb89: ; 3fb89 (f:7b89)
+StoreCurrentMoveAnimationIDAndType: ; 3fb89 (f:7b89)
+; animation at MOVENUM will be played unless MOVENUM is 0
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
@@ -8668,20 +8669,20 @@ Func_3fb89: ; 3fb89 (f:7b89)
 	and a
 	ret z
 
-Func_3fb96: ; 3fb96 (f:7b96)
+StoreAnimationIDAndType: ; 3fb96 (f:7b96)
 	ld [W_ANIMATIONID], a
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, $6
-	jr z, .asm_3fba2
+	jr z, .storeAnimationType
 	ld a, $3
-.asm_3fba2
-	ld [wcc5b], a
-	jp Func_3fbbc
+.storeAnimationType
+	ld [wAnimationType], a
+	jp PlayBattleAnimationGotID
 
 PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
@@ -8694,7 +8695,7 @@ PlayCurrentMoveAnimation: ; 3fba8 (f:7ba8)
 PlayBattleAnimation: ; 3fbb9 (f:7bb9)
 	ld [W_ANIMATIONID], a
 
-Func_3fbbc: ; 3fbbc (f:7bbc)
+PlayBattleAnimationGotID: ; 3fbbc (f:7bbc)
 	push hl
 	push de
 	push bc

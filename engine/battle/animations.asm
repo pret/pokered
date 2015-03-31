@@ -446,7 +446,7 @@ ShareMoveAnimations: ; 78da6 (1e:4da6)
 	ret
 
 Func_78dbd: ; 78dbd (1e:4dbd)
-	ld a,[wcc5b]
+	ld a,[wAnimationType]
 	and a
 	ret z
 	dec a
@@ -469,12 +469,12 @@ PointerTable_78dcf: ; 78dcf (1e:4dcf)
 	dw Func_78dfe
 
 Func_78ddb: ; 78ddb (1e:4ddb)
-	call Func_79e6a
+	call PlayApplyingAttackSound
 	ld b, $8
 	jp Func_79209
 
 Func_78de3: ; 78de3 (1e:4de3)
-	call Func_79e6a
+	call PlayApplyingAttackSound
 	ld b, $8
 	jp Func_79210
 
@@ -483,11 +483,11 @@ Func_78deb: ; 78deb (1e:4deb)
 	jr Func_78e01
 
 Func_78df0: ; 78df0 (1e:4df0)
-	call Func_79e6a
+	call PlayApplyingAttackSound
 	jp AnimationBlinkEnemyMon
 
 Func_78df6: ; 78df6 (1e:4df6)
-	call Func_79e6a
+	call PlayApplyingAttackSound
 	ld b, $2
 	jp Func_79210
 
@@ -2929,7 +2929,9 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld [W_ANIMATIONID],a
 	jp PlayAnimation
 
-Func_79e6a: ; 79e6a (1e:5e6a)
+PlayApplyingAttackSound: ; 79e6a (1e:5e6a)
+; play a different sound depending if move is not very effective, neutral, or super-effective
+; don't play any sound at all if move is ineffective
 	call WaitForSoundToFinish
 	ld a, [wDamageMultipliers]
 	and $7f
