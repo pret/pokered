@@ -1907,7 +1907,7 @@ FieldMoveDisplayData: ; 7823 (1:7823)
 	db $ff ; list terminator
 
 
-INCLUDE "engine/battle/1.asm"
+INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
 
 INCLUDE "engine/menu/players_pc.asm"
 
@@ -4755,7 +4755,7 @@ PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
 
-INCLUDE "engine/battle/4.asm"
+INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
 
@@ -4766,7 +4766,12 @@ ShrinkPic2::  INCBIN "pic/trainer/shrink2.pic"
 INCLUDE "engine/turn_sprite.asm"
 INCLUDE "engine/menu/start_sub_menus.asm"
 INCLUDE "engine/items/tms.asm"
-INCLUDE "engine/battle/4_2.asm"
+INCLUDE "engine/battle/end_of_battle.asm"
+INCLUDE "engine/battle/wild_encounters.asm"
+INCLUDE "engine/battle/moveEffects/recoil_effect.asm"
+INCLUDE "engine/battle/moveEffects/conversion_effect.asm"
+INCLUDE "engine/battle/moveEffects/haze_effect.asm"
+INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
 
 

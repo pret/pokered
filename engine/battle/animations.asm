@@ -407,7 +407,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 	ld c,30
 	call DelayFrames
 .next4
-	call PlayApplyingAttackAnimation ; reload pic and flash the pic in and out (to show damage)
+	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .AnimationFinished
 	call WaitForSoundToFinish
 	xor a
@@ -463,37 +463,37 @@ PlayApplyingAttackAnimation: ; 78dbd (1e:4dbd)
 	jp [hl]
 
 AnimationTypePointerTable: ; 78dcf (1e:4dcf)
-	dw ShakeScreenVertically ; enemy mon has used a non-damaging move
+	dw ShakeScreenVertically ; enemy mon has used a damaging move without a side effect
 	dw ShakeScreenHorizontallyHeavy ; enemy mon has used a damaging move with a side effect
-	dw ShakeScreenHorizontallySlow ; enemy mon has used a damaging move without a side effect
-	dw BlinkEnemyMonSprite ; player mon has used a non-damaging move
+	dw ShakeScreenHorizontallySlow ; enemy mon has used a non-damaging move
+	dw BlinkEnemyMonSprite ; player mon has used a damaging move without a side effect
 	dw ShakeScreenHorizontallyLight ; player mon has used a damaging move with a side effect
-	dw ShakeScreenHorizontallySlow2 ; player mon has used a damaging move without a side effect
+	dw ShakeScreenHorizontallySlow2 ; player mon has used a non-damaging move
 
-ShakeScreenVertically: ; 78ddb (1e:4ddb) 
+ShakeScreenVertically: ; 78ddb (1e:4ddb)
 	call PlayApplyingAttackSound
 	ld b, $8
 	jp AnimationShakeScreenVertically
 
-ShakeScreenHorizontallyHeavy: ; 78de3 (1e:4de3) 
+ShakeScreenHorizontallyHeavy: ; 78de3 (1e:4de3)
 	call PlayApplyingAttackSound
 	ld b, $8
-	jp AnimationShakeScreenHorizontallyFast 
+	jp AnimationShakeScreenHorizontallyFast
 
-ShakeScreenHorizontallySlow: ; 78deb (1e:4deb) 
+ShakeScreenHorizontallySlow: ; 78deb (1e:4deb)
 	ld bc, $602
-	jr AnimationShakeScreenHorizontallySlow 
+	jr AnimationShakeScreenHorizontallySlow
 
-BlinkEnemyMonSprite: ; 78df0 (1e:4df0) 
+BlinkEnemyMonSprite: ; 78df0 (1e:4df0)
 	call PlayApplyingAttackSound
 	jp AnimationBlinkEnemyMon
 
-ShakeScreenHorizontallyLight: ; 78df6 (1e:4df6) 
+ShakeScreenHorizontallyLight: ; 78df6 (1e:4df6)
 	call PlayApplyingAttackSound
 	ld b, $2
 	jp AnimationShakeScreenHorizontallyFast
 
-ShakeScreenHorizontallySlow2: ; 78dfe (1e:4dfe) 
+ShakeScreenHorizontallySlow2: ; 78dfe (1e:4dfe)
 	ld bc, $302
 
 AnimationShakeScreenHorizontallySlow: ; 78e01 (1e:4e01)

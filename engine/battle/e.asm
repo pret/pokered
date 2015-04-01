@@ -335,7 +335,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	ld a, [W_ENEMYMOVETYPE]
 	ld d, a
 	ld hl, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ld b, NUM_MOVES + 1
 	ld c, $0
 .loopMoves
 	dec b
