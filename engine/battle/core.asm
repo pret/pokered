@@ -8369,8 +8369,8 @@ ParalyzeEffect: ; 3f9b1 (f:79b1)
 	jp Bankswitch
 
 SubstituteEffect: ; 3f9b9 (f:79b9)
-	ld hl, SubstituteEffectHandler
-	ld b, BANK(SubstituteEffectHandler)
+	ld hl, SubstituteEffect_
+	ld b, BANK(SubstituteEffect_)
 	jp Bankswitch
 
 HyperBeamEffect: ; 3f9c1 (f:79c1)

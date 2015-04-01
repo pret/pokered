@@ -4825,7 +4825,7 @@ INCLUDE "engine/load_pokedex_tiles.asm"
 INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/evolve_trade.asm"
-INCLUDE "engine/battle/5.asm"
+INCLUDE "engine/battle/moveEffects/substitute_effect.asm"
 INCLUDE "engine/menu/pc.asm"
 
 
@@ -5154,7 +5154,9 @@ TangelaPicBack::      INCBIN "pic/monback/tangelab.pic"
 
 
 SECTION "Battle (bank 9)", ROMX, BANK[$9]
-INCLUDE "engine/battle/9.asm"
+INCLUDE "engine/battle/print_type.asm"
+INCLUDE "engine/battle/save_trainer_name.asm"
+INCLUDE "engine/battle/moveEffects/focus_energy_effect.asm"
 
 
 SECTION "Pics 2", ROMX, BANK[PICS_2]
@@ -5226,7 +5228,7 @@ MoltresPicBack::      INCBIN "pic/monback/moltresb.pic"
 
 
 SECTION "Battle (bank A)", ROMX, BANK[$A]
-INCLUDE "engine/battle/a.asm"
+INCLUDE "engine/battle/moveEffects/leech_seed_effect.asm"
 
 
 SECTION "Pics 3", ROMX, BANK[PICS_3]
