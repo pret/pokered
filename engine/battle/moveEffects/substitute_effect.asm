@@ -1,4 +1,4 @@
-SubstituteEffectHandler: ; 17dad (5:7dad)
+SubstituteEffect_: ; 17dad (5:7dad)
 	ld c, 50
 	call DelayFrames
 	ld hl, wBattleMonMaxHP

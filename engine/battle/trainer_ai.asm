@@ -1,117 +1,3 @@
-; does nothing since no stats are ever selected (barring glitches)
-DoubleSelectedStats: ; 39680 (e:5680)
-	ld a, [H_WHOSETURN]
-	and a
-	ld a, [wPlayerStatsToDouble]
-	ld hl, wBattleMonAttack + 1
-	jr z, .notEnemyTurn
-	ld a, [wEnemyStatsToDouble]
-	ld hl, wEnemyMonAttack + 1
-.notEnemyTurn
-	ld c, 4
-	ld b, a
-.loop
-	srl b
-	call c, .doubleStat
-	inc hl
-	inc hl
-	dec c
-	ret z
-	jr .loop
-
-.doubleStat
-	ld a, [hl]
-	add a
-	ld [hld], a
-	ld a, [hl]
-	rl a
-	ld [hli], a
-	ret
-
-; does nothing since no stats are ever selected (barring glitches)
-HalveSelectedStats: ; 396a7 (e:56a7)
-	ld a, [H_WHOSETURN]
-	and a
-	ld a, [wPlayerStatsToHalve]
-	ld hl, wBattleMonAttack
-	jr z, .notEnemyTurn
-	ld a, [wEnemyStatsToHalve]
-	ld hl, wEnemyMonAttack
-.notEnemyTurn
-	ld c, 4
-	ld b, a
-.loop
-	srl b
-	call c, .halveStat
-	inc hl
-	inc hl
-	dec c
-	ret z
-	jr .loop
-
-.halveStat
-	ld a, [hl]
-	srl a
-	ld [hli], a
-	rr [hl]
-	or [hl]
-	jr nz, .nonzeroStat
-	ld [hl], 1
-.nonzeroStat
-	dec hl
-	ret
-
-_ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
-; Load the enemy trainer's pic and scrolls it into
-; the screen from the right.
-	xor a
-	ld [wEnemyMonSpecies2], a
-	ld b, $1
-	call GoPAL_SET
-	callab _LoadTrainerPic
-	hlCoord 19, 0
-	ld c, $0
-.scrollLoop
-	inc c
-	ld a, c
-	cp 7
-	ret z
-	ld d, $0
-	push bc
-	push hl
-.drawTrainerPicLoop
-	call DrawTrainerPicColumn
-	inc hl
-	ld a, 7
-	add d
-	ld d, a
-	dec c
-	jr nz, .drawTrainerPicLoop
-	ld c, 4
-	call DelayFrames
-	pop hl
-	pop bc
-	dec hl
-	jr .scrollLoop
-
-; write one 7-tile column of the trainer pic to the tilemap
-DrawTrainerPicColumn: ; 39707 (e:5707)
-	push hl
-	push de
-	push bc
-	ld e, 7
-.loop
-	ld [hl], d
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	inc d
-	dec e
-	jr nz, .loop
-	pop bc
-	pop de
-	pop hl
-	ret
-
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
@@ -227,17 +113,17 @@ AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
 AIMoveChoiceModification1: ; 397ab (e:57ab)
 	ld a, [wBattleMonStatus]
 	and a
-	ret z       ; return if no status ailment on player's mon
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ret z ; return if no status ailment on player's mon
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	ld a, [W_ENEMYMOVEPOWER]
@@ -255,32 +141,34 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	pop hl
 	jr nc, .nextMove
 	ld a, [hl]
-	add $5       ; discourage move
+	add $5 ; heavily discourage move
 	ld [hl], a
 	jr .nextMove
 
 StatusAilmentMoveEffects ; 57e2
-	db $01 ; some sleep effect?
+	db $01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
 	db $FF
 
-; slightly encourage moves with specific effects
+; slightly encourage moves with specific effects.
+; in particular, stat-modifying moves and other move effects
+; that fall in-bewteen
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
-	ld a, [wccd5]
-	cp $1
+	ld a, [wAILayer2Encouragement]
+	cp $1 
 	ret nz
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
+	ld de, wEnemyMonMoves ; enemy moves
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	ld a, [W_ENEMYMOVEEFFECT]
@@ -294,21 +182,23 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	jr c, .preferMove
 	jr .nextMove
 .preferMove
-	dec [hl]       ; slighly encourage this move
+	dec [hl] ; sligthly encourage this move
 	jr .nextMove
 
-; encourages moves that are effective against the player's mon
+; encourages moves that are effective against the player's mon (even if non-damaging).
+; discourage damaging moves that are ineffective or not very effective against the player's mon,
+; unless there's no damaging move that deals at least neutral damage
 AIMoveChoiceModification3: ; 39817 (e:5817)
-	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
-	ld de, wEnemyMonMoves  ; enemy moves
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
+	ld de, wEnemyMonMoves ; enemy moves
 	ld b, $5
 .nextMove
 	dec b
-	ret z         ; processed all 4 moves
+	ret z ; processed all 4 moves
 	inc hl
 	ld a, [de]
 	and a
-	ret z         ; no more moves in move set
+	ret z ; no more moves in move set
 	inc de
 	call ReadMove
 	push hl
@@ -322,16 +212,16 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	cp $10
 	jr z, .nextMove
 	jr c, .notEffectiveMove
-	dec [hl]       ; slighly encourage this move
+	dec [hl] ; sligthly encourage this move
 	jr .nextMove
-.notEffectiveMove  ; discourages non-effective moves if better moves are available
+.notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
 	push de
 	push bc
 	ld a, [W_ENEMYMOVETYPE]
 	ld d, a
 	ld hl, wEnemyMonMoves  ; enemy moves
-	ld b, $5
+	ld b, NUM_MOVES + 1
 	ld c, $0
 .loopMoves
 	dec b
@@ -342,17 +232,17 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	call ReadMove
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp SUPER_FANG_EFFECT
-	jr z, .betterMoveFound      ; Super Fang is considered to be a better move
+	jr z, .betterMoveFound ; Super Fang is considered to be a better move
 	cp SPECIAL_DAMAGE_EFFECT
-	jr z, .betterMoveFound      ; any special damage moves are considered to be better moves
+	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
 	cp FLY_EFFECT
-	jr z, .betterMoveFound      ; Fly is considered to be a better move
+	jr z, .betterMoveFound ; Fly is considered to be a better move
 	ld a, [W_ENEMYMOVETYPE]
 	cp d
 	jr z, .loopMoves
 	ld a, [W_ENEMYMOVEPOWER]
 	and a
-	jr nz, .betterMoveFound      ; damaging moves of a different type are considered to be better moves
+	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
 	jr .loopMoves
 .betterMoveFound
 	ld c, a
@@ -363,7 +253,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	pop hl
 	and a
 	jr z, .nextMove
-	inc [hl]       ; slighly discourage this move
+	inc [hl] ; sligthly discourage this move
 	jr .nextMove
 AIMoveChoiceModification4: ; 39883 (e:5883)
 	ret
@@ -434,439 +324,13 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,0    ; AGATHA
 	db 1,3,0  ; LANCE
 
-TrainerPicAndMoneyPointers: ; 39914 (e:5914)
-; trainer pic pointers and base money.
-; money received after battle = base money × level of highest-level enemy mon
-	dw YoungsterPic
-	money 1500
+INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
+	
+INCLUDE "text/trainer_names.asm"	
 
-	dw BugCatcherPic
-	money 1000
+INCLUDE "engine/battle/bank_e_misc.asm"
 
-	dw LassPic
-	money 1500
-
-	dw SailorPic
-	money 3000
-
-	dw JrTrainerMPic
-	money 2000
-
-	dw JrTrainerFPic
-	money 2000
-
-	dw PokemaniacPic
-	money 5000
-
-	dw SuperNerdPic
-	money 2500
-
-	dw HikerPic
-	money 3500
-
-	dw BikerPic
-	money 2000
-
-	dw BurglarPic
-	money 9000
-
-	dw EngineerPic
-	money 5000
-
-	dw JugglerPic
-	money 3500
-
-	dw FisherPic
-	money 3500
-
-	dw SwimmerPic
-	money 500
-
-	dw CueBallPic
-	money 2500
-
-	dw GamblerPic
-	money 7000
-
-	dw BeautyPic
-	money 7000
-
-	dw PsychicPic
-	money 1000
-
-	dw RockerPic
-	money 2500
-
-	dw JugglerPic
-	money 3500
-
-	dw TamerPic
-	money 4000
-
-	dw BirdKeeperPic
-	money 2500
-
-	dw BlackbeltPic
-	money 2500
-
-	dw Rival1Pic
-	money 3500
-
-	dw ProfOakPic
-	money 9900
-
-	dw ChiefPic
-	money 3000
-
-	dw ScientistPic
-	money 5000
-
-	dw GiovanniPic
-	money 9900
-
-	dw RocketPic
-	money 3000
-
-	dw CooltrainerMPic
-	money 3500
-
-	dw CooltrainerFPic
-	money 3500
-
-	dw BrunoPic
-	money 9900
-
-	dw BrockPic
-	money 9900
-
-	dw MistyPic
-	money 9900
-
-	dw LtSurgePic
-	money 9900
-
-	dw ErikaPic
-	money 9900
-
-	dw KogaPic
-	money 9900
-
-	dw BlainePic
-	money 9900
-
-	dw SabrinaPic
-	money 9900
-
-	dw GentlemanPic
-	money 7000
-
-	dw Rival2Pic
-	money 6500
-
-	dw Rival3Pic
-	money 9900
-
-	dw LoreleiPic
-	money 9900
-
-	dw ChannelerPic
-	money 3000
-
-	dw AgathaPic
-	money 9900
-
-	dw LancePic
-	money 9900
-
-INCLUDE "text/trainer_names.asm"
-
-; formats a string at wMovesString that lists the moves at wMoves
-FormatMovesString: ; 39b87 (e:5b87)
-	ld hl, wMoves
-	ld de, wMovesString
-	ld b, $0
-.printMoveNameLoop
-	ld a, [hli]
-	and a ; end of move list?
-	jr z, .printDashLoop ; print dashes when no moves are left
-	push hl
-	ld [wd0b5], a
-	ld a, BANK(MoveNames)
-	ld [wPredefBank], a
-	ld a, MOVE_NAME
-	ld [wNameListType], a
-	call GetName
-	ld hl, wcd6d
-.copyNameLoop
-	ld a, [hli]
-	cp $50
-	jr z, .doneCopyingName
-	ld [de], a
-	inc de
-	jr .copyNameLoop
-.doneCopyingName
-	ld a, b
-	ld [wcd6c], a
-	inc b
-	ld a, $4e ; line break
-	ld [de], a
-	inc de
-	pop hl
-	ld a, b
-	cp NUM_MOVES
-	jr z, .done
-	jr .printMoveNameLoop
-.printDashLoop
-	ld a, "-"
-	ld [de], a
-	inc de
-	inc b
-	ld a, b
-	cp NUM_MOVES
-	jr z, .done
-	ld a, $4e ; line break
-	ld [de], a
-	inc de
-	jr .printDashLoop
-.done
-	ld a, "@"
-	ld [de], a
-	ret
-
-; XXX this is called in a few places, but it doesn't appear to do anything useful
-Func_39bd5: ; 39bd5 (e:5bd5)
-	ld a, [wd11b]
-	cp $1
-	jr nz, .asm_39be6
-	ld hl, wEnemyPartyCount
-	ld de, wEnemyMonOT
-	ld a, ENEMYOT_NAME
-	jr .asm_39c18
-.asm_39be6
-	cp $4
-	jr nz, .calcAttackStat4
-	ld hl, wPartyCount
-	ld de, wPartyMonOT
-	ld a, PLAYEROT_NAME
-	jr .asm_39c18
-.calcAttackStat4
-	cp $5
-	jr nz, .asm_39c02
-	ld hl, wStringBuffer2 + 11
-	ld de, MonsterNames
-	ld a, MONSTER_NAME
-	jr .asm_39c18
-.asm_39c02
-	cp $2
-	jr nz, .asm_39c10
-	ld hl, wNumBagItems
-	ld de, ItemNames
-	ld a, ITEM_NAME
-	jr .asm_39c18
-.asm_39c10
-	ld hl, wStringBuffer2 + 11
-	ld de, ItemNames
-	ld a, ITEM_NAME
-.asm_39c18
-	ld [wNameListType], a
-	ld a, l
-	ld [wList], a
-	ld a, h
-	ld [wList + 1], a
-	ld a, e
-	ld [wcf8d], a
-	ld a, d
-	ld [wcf8e], a
-	ld bc, ItemPrices
-	ld a, c
-	ld [wItemPrices], a
-	ld a, b
-	ld [wItemPrices + 1], a
-	ret
-
-; get species of mon e in list [wcc49] for LoadMonData
-GetMonSpecies: ; 39c37 (e:5c37)
-	ld hl, wPartySpecies
-	ld a, [wcc49]
-	and a
-	jr z, .getSpecies
-	dec a
-	jr z, .enemyParty
-	ld hl, wBoxSpecies
-	jr .getSpecies
-.enemyParty
-	ld hl, wEnemyPartyMons
-.getSpecies
-	ld d, 0
-	add hl, de
-	ld a, [hl]
-	ld [wcf91], a
-	ret
-
-ReadTrainer: ; 39c53 (e:5c53)
-
-; don't change any moves in a link battle
-	ld a,[wLinkState]
-	and a
-	ret nz
-
-; set [wEnemyPartyCount] to 0, [wEnemyPartyMons] to FF
-; XXX first is total enemy pokemon?
-; XXX second is species of first pokemon?
-	ld hl,wEnemyPartyCount
-	xor a
-	ld [hli],a
-	dec a
-	ld [hl],a
-
-; get the pointer to trainer data for this class
-	ld a,[W_CUROPPONENT]
-	sub $C9 ; convert value from pokemon to trainer
-	add a,a
-	ld hl,TrainerDataPointers
-	ld c,a
-	ld b,0
-	add hl,bc ; hl points to trainer class
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	ld a,[W_TRAINERNO]
-	ld b,a
-; At this point b contains the trainer number,
-; and hl points to the trainer class.
-; Our next task is to iterate through the trainers,
-; decrementing b each time, until we get to the right one.
-.outer
-	dec b
-	jr z,.IterateTrainer
-.inner
-	ld a,[hli]
-	and a
-	jr nz,.inner
-	jr .outer
-
-; if the first byte of trainer data is FF,
-; - each pokemon has a specific level
-;      (as opposed to the whole team being of the same level)
-; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
-; else the first byte is the level of every pokemon on the team
-.IterateTrainer
-	ld a,[hli]
-	cp $FF ; is the trainer special?
-	jr z,.SpecialTrainer ; if so, check for special moves
-	ld [W_CURENEMYLVL],a
-.LoopTrainerData
-	ld a,[hli]
-	and a ; have we reached the end of the trainer data?
-	jr z,.FinishUp
-	ld [wcf91],a ; write species somewhere (XXX why?)
-	ld a,1
-	ld [wcc49],a
-	push hl
-	call AddPartyMon
-	pop hl
-	jr .LoopTrainerData
-.SpecialTrainer
-; if this code is being run:
-; - each pokemon has a specific level
-;      (as opposed to the whole team being of the same level)
-; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
-	ld a,[hli]
-	and a ; have we reached the end of the trainer data?
-	jr z,.AddLoneMove
-	ld [W_CURENEMYLVL],a
-	ld a,[hli]
-	ld [wcf91],a
-	ld a,1
-	ld [wcc49],a
-	push hl
-	call AddPartyMon
-	pop hl
-	jr .SpecialTrainer
-.AddLoneMove
-; does the trainer have a single monster with a different move
-	ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
-	and a
-	jr z,.AddTeamMove
-	dec a
-	add a,a
-	ld c,a
-	ld b,0
-	ld hl,LoneMoves
-	add hl,bc
-	ld a,[hli]
-	ld d,[hl]
-	ld hl,wEnemyMon1Moves + 2
-	ld bc,wEnemyMon2 - wEnemyMon1
-	call AddNTimes
-	ld [hl],d
-	jr .FinishUp
-.AddTeamMove
-; check if our trainer's team has special moves
-
-; get trainer class number
-	ld a,[W_CUROPPONENT]
-	sub $C8
-	ld b,a
-	ld hl,TeamMoves
-
-; iterate through entries in TeamMoves, checking each for our trainer class
-.IterateTeamMoves
-	ld a,[hli]
-	cp b
-	jr z,.GiveTeamMoves ; is there a match?
-	inc hl ; if not, go to the next entry
-	inc a
-	jr nz,.IterateTeamMoves
-
-	; no matches found. is this trainer champion rival?
-	ld a,b
-	cp SONY3
-	jr z,.ChampionRival
-	jr .FinishUp ; nope
-.GiveTeamMoves
-	ld a,[hl]
-	ld [wEnemyMon5Moves + 2],a
-	jr .FinishUp
-.ChampionRival ; give moves to his team
-
-; pidgeot
-	ld a,SKY_ATTACK
-	ld [wEnemyMon1Moves + 2],a
-
-; starter
-	ld a,[W_RIVALSTARTER]
-	cp STARTER3
-	ld b,MEGA_DRAIN
-	jr z,.GiveStarterMove
-	cp STARTER1
-	ld b,FIRE_BLAST
-	jr z,.GiveStarterMove
-	ld b,BLIZZARD ; must be squirtle
-.GiveStarterMove
-	ld a,b
-	ld [wEnemyMon6Moves + 2],a
-.FinishUp ; XXX this needs documenting
-	xor a       ; clear D079-D07B
-	ld de,wd079
-	ld [de],a
-	inc de
-	ld [de],a
-	inc de
-	ld [de],a
-	ld a,[W_CURENEMYLVL]
-	ld b,a
-.LastLoop
-	ld hl,wd047
-	ld c,2
-	push bc
-	predef AddBCDPredef
-	pop bc
-	inc de
-	inc de
-	dec b
-	jr nz,.LastLoop
-	ret
+INCLUDE "engine/battle/read_trainer_party.asm"
 
 INCLUDE "data/trainer_moves.asm"
 
@@ -1371,195 +835,3 @@ AIPrintItemUse_: ; 3a835 (e:6835)
 AIBattleUseItemText: ; 3a844 (e:6844)
 	TX_FAR _AIBattleUseItemText
 	db "@"
-
-DrawAllPokeballs: ; 3a849 (e:6849)
-	call LoadPartyPokeballGfx
-	call SetupOwnPartyPokeballs
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
-	dec a
-	ret z ; return if wild pokémon
-	jp SetupEnemyPartyPokeballs
-
-DrawEnemyPokeballs: ; 0x3a857
-	call LoadPartyPokeballGfx
-	jp SetupEnemyPartyPokeballs
-
-LoadPartyPokeballGfx: ; 3a85d (e:685d)
-	ld de, PokeballTileGraphics ; $697e
-	ld hl, vSprites + $310
-	ld bc, (BANK(PokeballTileGraphics) << 8) + $04
-	jp CopyVideoData
-
-SetupOwnPartyPokeballs: ; 3a869 (e:6869)
-	call PlacePlayerHUDTiles
-	ld hl, wPartyMon1
-	ld de, wPartyCount ; wPartyCount
-	call SetupPokeballs
-	ld a, $60
-	ld hl, W_BASECOORDX ; wd081
-	ld [hli], a
-	ld [hl], a
-	ld a, $8
-	ld [wTrainerEngageDistance], a
-	ld hl, wOAMBuffer
-	jp WritePokeballOAMData
-
-SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
-	call PlaceEnemyHUDTiles
-	ld hl, wEnemyMons
-	ld de, wEnemyPartyCount ; wEnemyPartyCount
-	call SetupPokeballs
-	ld hl, W_BASECOORDX ; wd081
-	ld a, $48
-	ld [hli], a
-	ld [hl], $20
-	ld a, $f8
-	ld [wTrainerEngageDistance], a
-	ld hl, wOAMBuffer + PARTY_LENGTH * 4
-	jp WritePokeballOAMData
-
-SetupPokeballs: ; 0x3a8a6
-	ld a, [de]
-	push af
-	ld de, wBuffer
-	ld c, PARTY_LENGTH
-	ld a, $34 ; empty pokeball
-.emptyloop
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .emptyloop
-	pop af
-	ld de, wBuffer
-.monloop
-	push af
-	call PickPokeball
-	inc de
-	pop af
-	dec a
-	jr nz, .monloop
-	ret
-
-PickPokeball: ; 3a8c2 (e:68c2)
-	inc hl
-	ld a, [hli]
-	and a
-	jr nz, .alive
-	ld a, [hl]
-	and a
-	ld b, $33 ; crossed ball (fainted)
-	jr z, .done_fainted
-.alive
-	inc hl
-	inc hl
-	ld a, [hl] ; status
-	and a
-	ld b, $32 ; black ball (status)
-	jr nz, .done
-	dec b ; regular ball
-	jr .done
-.done_fainted
-	inc hl
-	inc hl
-.done
-	ld a, b
-	ld [de], a
-	ld bc, $0028 ; rest of mon struct
-	add hl, bc
-	ret
-
-WritePokeballOAMData: ; 3a8e1 (e:68e1)
-	ld de, wBuffer
-	ld c, PARTY_LENGTH
-.loop
-	ld a, [W_BASECOORDY] ; wd082
-	ld [hli], a
-	ld a, [W_BASECOORDX] ; wd081
-	ld [hli], a
-	ld a, [de]
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, [W_BASECOORDX] ; wd081
-	ld b, a
-	ld a, [wTrainerEngageDistance]
-	add b
-	ld [W_BASECOORDX], a ; wd081
-	inc de
-	dec c
-	jr nz, .loop
-	ret
-
-PlacePlayerHUDTiles: ; 3a902 (e:6902)
-	ld hl, PlayerBattleHUDGraphicsTiles ; $6916
-	ld de, wTrainerFacingDirection
-	ld bc, $3
-	call CopyData
-	hlCoord 18, 10
-	ld de, rIE ; $ffff
-	jr PlaceHUDTiles
-
-PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
-; The tile numbers for specific parts of the battle display for the player's pokemon
-	db $73 ; unused ($73 is hardcoded into the routine that uses these bytes)
-	db $77 ; lower-right corner tile of the HUD
-	db $6F ; lower-left triangle tile of the HUD
-
-PlaceEnemyHUDTiles: ; 3a919 (e:6919)
-	ld hl, EnemyBattleHUDGraphicsTiles ; $692d
-	ld de, wTrainerFacingDirection
-	ld bc, $3
-	call CopyData
-	hlCoord 1, 2
-	ld de, $1
-	jr PlaceHUDTiles
-
-EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
-; The tile numbers for specific parts of the battle display for the enemy
-	db $73 ; unused ($73 is hardcoded in the routine that uses these bytes)
-	db $74 ; lower-left corner tile of the HUD
-	db $78 ; lower-right triangle tile of the HUD
-
-PlaceHUDTiles: ; 3a930 (e:6930)
-	ld [hl], $73
-	ld bc, $14
-	add hl, bc
-	ld a, [wTrainerScreenY]
-	ld [hl], a
-	ld a, $8
-.asm_3a93c
-	add hl, de
-	ld [hl], $76
-	dec a
-	jr nz, .asm_3a93c
-	add hl, de
-	ld a, [wTrainerScreenX]
-	ld [hl], a
-	ret
-
-SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
-	call LoadPartyPokeballGfx
-	ld hl, wPartyMon1Species ; wPartyMon1Species (aliases: wPartyMon1)
-	ld de, wPartyCount ; wPartyCount
-	call SetupPokeballs
-	ld hl, W_BASECOORDX ; wd081
-	ld a, $50
-	ld [hli], a
-	ld [hl], $40
-	ld a, $8
-	ld [wTrainerEngageDistance], a
-	ld hl, wOAMBuffer
-	call WritePokeballOAMData
-	ld hl, wEnemyMons ; wEnemyMon1Species
-	ld de, wEnemyPartyCount ; wEnemyPartyCount
-	call SetupPokeballs
-	ld hl, W_BASECOORDX ; wd081
-	ld a, $50
-	ld [hli], a
-	ld [hl], $68
-	ld hl, wOAMBuffer + $18
-	jp WritePokeballOAMData
-
-; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
-PokeballTileGraphics:: ; 3a97e (e:697e)
-	INCBIN "gfx/pokeball.2bpp"

@@ -320,8 +320,8 @@ ItemUseBall: ; d687 (3:5687)
 	ld [W_ANIMATIONID],a
 	xor a
 	ld [$fff3],a
-	ld [wcc5b],a
-	ld [wd05b],a
+	ld [wAnimationType],a
+	ld [wDamageMultipliers],a
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]

@@ -82,7 +82,7 @@ GainExperience: ; 5524f (15:524f)
 	call BoostExp ; traded mon exp boost
 	ld a, $1
 .next
-	ld [wcf4d], a
+	ld [wGainBoostedExp], a
 	ld a, [W_ISINBATTLE]
 	dec a ; is it a trainer battle?
 	call nz, BoostExp ; if so, boost exp
@@ -342,12 +342,12 @@ BoostExp: ; 5549f (15:549f)
 GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
 	db $08 ; asm
-	ld a, [wcc5b]
+	ld a, [wBoostExpByExpAll]
 	ld hl, WithExpAllText
 	and a
 	ret nz
 	ld hl, ExpPointsText
-	ld a, [wcf4d]
+	ld a, [wGainBoostedExp]
 	and a
 	ret z
 	ld hl, BoostedText
