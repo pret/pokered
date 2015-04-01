@@ -5307,7 +5307,7 @@ FossilKabutopsPic::   INCBIN "pic/bmon/fossilkabutops.pic"
 
 SECTION "Battle (bank B)", ROMX, BANK[$B]
 
-INCLUDE "engine/battle/b.asm"
+INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
 BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
@@ -5315,7 +5315,8 @@ CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
 
 INCLUDE "engine/items/tmhm.asm"
-INCLUDE "engine/battle/b_2.asm"
+INCLUDE "engine/battle/scale_sprites.asm"
+INCLUDE "engine/battle/moveEffects/pay_day_effect.asm"
 INCLUDE "engine/game_corner_slots2.asm"
 
 
@@ -5385,7 +5386,8 @@ OldManPic::            INCBIN "pic/trainer/oldman.pic"
 
 
 SECTION "Battle (bank C)", ROMX, BANK[$C]
-INCLUDE "engine/battle/c.asm"
+INCLUDE "engine/battle/moveEffects/mist_effect.asm"
+INCLUDE "engine/battle/moveEffects/one_hit_ko_effect.asm"
 
 
 SECTION "Pics 5", ROMX, BANK[PICS_5]
@@ -5449,7 +5451,7 @@ VictreebelPicBack::    INCBIN "pic/monback/victreebelb.pic"
 SECTION "Battle (bank D)", ROMX, BANK[$D]
 
 INCLUDE "engine/titlescreen2.asm"
-INCLUDE "engine/battle/d.asm"
+INCLUDE "engine/battle/link_battle_versus_text.asm"
 INCLUDE "engine/slot_machine.asm"
 INCLUDE "engine/overworld/pewter_guys.asm"
 INCLUDE "engine/multiply_divide.asm"
