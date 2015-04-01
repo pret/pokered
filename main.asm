@@ -6014,7 +6014,7 @@ DayCareMBlocks: INCBIN "maps/daycarem.blk"
 
 FuchsiaHouse3Blocks: INCBIN "maps/fuchsiahouse3.blk"
 
-INCLUDE "engine/battle/15.asm"
+INCLUDE "engine/battle/experience.asm"
 
 INCLUDE "scripts/route2.asm"
 INCLUDE "scripts/route3.asm"
@@ -6094,7 +6094,7 @@ Route18Blocks: INCBIN "maps/route18.blk"
 
 	INCBIN "maps/unusedblocks58d7d.blk"
 
-INCLUDE "engine/battle/16.asm"
+INCLUDE "engine/battle/common_text.asm"
 
 INCLUDE "engine/experience.asm"
 
@@ -6451,7 +6451,7 @@ Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 
 SECTION "bank1A",ROMX,BANK[$1A]
 
-INCLUDE "engine/battle/1a.asm"
+INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:
 IF DEF(_RED)
@@ -6508,7 +6508,8 @@ INCLUDE "engine/gamefreak.asm"
 INCLUDE "engine/hall_of_fame.asm"
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"
-INCLUDE "engine/battle/1c.asm"
+INCLUDE "engine/battle/ghost_marowak_anim.asm"
+INCLUDE "engine/battle/battle_transitions.asm"
 INCLUDE "engine/town_map.asm"
 INCLUDE "engine/mon_party_sprites.asm"
 INCLUDE "engine/in_game_trades.asm"
