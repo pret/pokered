@@ -5,13 +5,13 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld a, [W_ENEMYBATTSTATUS1]
 	ld a, [H_WHOSETURN]
 	and a
-	jr nz, .asm_3bad1
+	jr nz, .hitTest
 	ld hl, wEnemyMonSpecies
 	ld de, wBattleMonSpecies
 	ld bc, W_PLAYERBATTSTATUS3
 	ld [wPlayerMoveListIndex], a
 	ld a, [W_PLAYERBATTSTATUS1]
-.asm_3bad1
+.hitTest
 	bit Invulnerable, a ; is mon invulnerable to typical attacks? (fly/dig)
 	jp nz, .failed
 	push hl
@@ -20,10 +20,11 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_3bae4
+	jr z, .transformEffect
 	ld hl, W_ENEMYBATTSTATUS2
-.asm_3bae4
-	bit HasSubstituteUp, [hl]
+.transformEffect
+; animation(s) played are different if target has Substitute up
+	bit HasSubstituteUp, [hl] 
 	push af
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
@@ -32,10 +33,10 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	add a
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)
-	jr nc, .asm_3baff
+	jr nc, .gotAnimToPlay
 	ld hl, AnimationTransformMon
 	ld b, BANK(AnimationTransformMon)
-.asm_3baff
+.gotAnimToPlay
 	call Bankswitch
 	ld hl, Func_79771
 	ld b, BANK(Func_79771)
@@ -43,15 +44,18 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	call nz, Bankswitch
 	pop bc
 	ld a, [bc]
-	set Transformed, a
+	set Transformed, a ; mon is now Transformed
 	ld [bc], a
 	pop de
 	pop hl
 	push hl
-	ld a, [hl]
+; transform user into opposing Pokemon	
+; species
+	ld a, [hl] 
 	ld [de], a
+; type 1, type 2, catch rate, and moves	
 	ld bc, $5
-	add hl, bc
+	add hl, bc 
 	inc de
 	inc de
 	inc de
@@ -62,20 +66,23 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	call CopyData
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_3bb32
+	jr z, .next
+; save enemy mon DVs in wcceb/wccec (enemy turn only)
 	ld a, [de]
 	ld [wcceb], a
 	inc de
 	ld a, [de]
 	ld [wccec], a
 	dec de
-.asm_3bb32
+.next
+; DVs
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
+; Attack, Defense, Speed, and Special stats	
 	inc hl
 	inc hl
 	inc hl
@@ -84,48 +91,51 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	inc de
 	ld bc, $8
 	call CopyData
-	ld bc, $ffef
-	add hl, bc
-	ld b, $4
-.asm_3bb4a
+	ld bc, wBattleMonMoves - wBattleMonPP 
+	add hl, bc ; ld hl, wBattleMonMoves
+	ld b, NUM_MOVES
+.copyPPLoop
+; 5 PP for all moves
 	ld a, [hli]
 	and a
-	jr z, .asm_3bb57
+	jr z, .lessThanFourMoves
 	ld a, $5
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_3bb4a
-	jr .asm_3bb5d
-.asm_3bb57
+	jr nz, .copyPPLoop
+	jr .copyStats
+.lessThanFourMoves
+; 0 PP for blank moves
 	xor a
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .asm_3bb57
-.asm_3bb5d
+	jr nz, .lessThanFourMoves
+.copyStats
+; original (unmodified) stats and stat mods
 	pop hl
 	ld a, [hl]
 	ld [wd11e], a
 	call GetMonName
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	call .copyBasedOnTurn
+	call .copyBasedOnTurn ; original (unmodified) stats
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMonStatMods
-	call .copyBasedOnTurn
+	call .copyBasedOnTurn ; stat mods
 	ld hl, TransformedText
 	jp PrintText
 
 .copyBasedOnTurn
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_3bb86
+	jr z, .gotStatsOrModsToCopy
 	push hl
 	ld h, d
 	ld l, e
 	pop de
-.asm_3bb86
+.gotStatsOrModsToCopy
 	ld bc, $8
 	jp CopyData
 
