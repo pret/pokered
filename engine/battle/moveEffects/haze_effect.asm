@@ -33,7 +33,7 @@ HazeEffect_: ; 139da (4:79da)
 	xor a
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [W_ENEMYDISABLEDMOVE], a
-	ld hl, wccee
+	ld hl, wPlayerDisabledMoveNumber
 	ld [hli], a
 	ld [hl], a
 	ld hl, W_PLAYERBATTSTATUS1
