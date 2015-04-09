@@ -2908,7 +2908,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $5
 	call AddNTimes
-	ld de, wd033
+	ld de, wTrainerPicPointer
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -2922,7 +2922,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld [de], a
 	jp BankswitchBack
 .linkBattle
-	ld hl, wd033
+	ld hl, wTrainerPicPointer
 	ld de, RedPicFront
 	ld [hl], e
 	inc hl

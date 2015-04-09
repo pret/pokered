@@ -1023,10 +1023,11 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld c, $28
 	call DelayFrames
 	call PrintEndBattleText
+; win money	
 	ld hl, MoneyForWinningText
 	call PrintText
 	ld de, wPlayerMoney + 2
-	ld hl, wd07b
+	ld hl, wAmountMoneyWon + 2
 	ld c, $3
 	predef_jump AddBCDPredef
 
@@ -6959,9 +6960,9 @@ InitBattle_Common: ; 3efeb (f:6feb)
 
 _LoadTrainerPic: ; 3f04b (f:704b)
 ; wd033-wd034 contain pointer to pic
-	ld a, [wd033]
+	ld a, [wTrainerPicPointer] ; wd033
 	ld e, a
-	ld a, [wd034]
+	ld a, [wTrainerPicPointer + 1] ; wd034
 	ld d, a ; de contains pointer to trainer pic
 	ld a, [wLinkState]
 	and a

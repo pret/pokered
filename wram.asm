@@ -949,8 +949,9 @@ W_TRAINERCLASS:: ; d031
 
 	ds 1
 
-wd033:: ds 1
-wd034:: ds 2
+wTrainerPicPointer:: ; wd033
+	ds 2
+	ds 1
 wd036:: ds 16
 wd046:: ds 1
 wd047:: ds 1
@@ -1103,15 +1104,16 @@ wPlayerBideAccumulatedDamage:: ; d074
 wUnknownSerialCounter2:: ; d075
 ; 2 bytes
 
-ds 4
+	ds 4
 
 wEscapedFromBattle::
 ; non-zero when an item or move that allows escape from battle was used
 	ds 1
 
-wd079:: ds 1
+wd079:: 
+wAmountMoneyWon:: ds 1 ; wd079 - wd07b
 wd07a:: ds 1
-wd07b:: ds 1
+	ds 1
 
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation

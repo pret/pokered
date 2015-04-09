@@ -141,9 +141,10 @@ ReadTrainer: ; 39c53 (e:5c53)
 .GiveStarterMove
 	ld a,b
 	ld [wEnemyMon6Moves + 2],a
-.FinishUp ; XXX this needs documenting
-	xor a       ; clear D079-D07B
-	ld de,wd079
+.FinishUp
+; clear wAmountMoneyWon addresses
+	xor a       
+	ld de,wAmountMoneyWon
 	ld [de],a
 	inc de
 	ld [de],a
@@ -152,13 +153,14 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[W_CURENEMYLVL]
 	ld b,a
 .LastLoop
+; update wAmountMoneyWon addresses (money to win) based on enemy's level
 	ld hl,wd047
-	ld c,2
+	ld c,2 ; wAmountMoneyWon is a 3-byte number
 	push bc
 	predef AddBCDPredef
 	pop bc
 	inc de
 	inc de
 	dec b
-	jr nz,.LastLoop
+	jr nz,.LastLoop ; repeat W_CURENEMYLVL times
 	ret
