@@ -3509,7 +3509,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
 	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)	
-	and a, (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Invulnerable) | (1 << Confused) 
+	and $ff ^ ((1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << ChargingUp) | (1 << UsingTrappingMove)) 
 	ld [hl],a
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,FLY_EFFECT
@@ -3585,12 +3585,12 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,ThrashingAboutText
 	call PrintText
 	ld hl,wPlayerNumAttacksLeft
-	dec [hl] ; did Trashing About counter hit 0?
+	dec [hl] ; did Thrashing About counter hit 0?
 	ld hl,PlayerCalcMoveDamage ; skip DecrementPP
 	jp nz,.returnToHL 
 	push hl
 	ld hl,W_PLAYERBATTSTATUS1
-	res ThrashingAbout,[hl] ; no longer trashing about
+	res ThrashingAbout,[hl] ; no longer thrashing about
 	set Confused,[hl] ; confused
 	call BattleRandom
 	and a,3
@@ -6023,7 +6023,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld hl, W_ENEMYBATTSTATUS1
 	ld a, [hl]
 	; clear bide, thrashing about, charging up, and multi-turn moves such as warp	
-	and (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Invulnerable) | (1 << Confused)  
+	and $ff ^ ((1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << ChargingUp) | (1 << UsingTrappingMove))
 	ld [hl], a
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp FLY_EFFECT
@@ -6097,7 +6097,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld hl, ThrashingAboutText
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
-	dec [hl] ; did Trashing About counter hit 0?
+	dec [hl] ; did Thrashing About counter hit 0?
 	ld hl, EnemyCalcMoveDamage ; skip DecrementPP
 	jp nz, .enemyReturnToHL
 	push hl

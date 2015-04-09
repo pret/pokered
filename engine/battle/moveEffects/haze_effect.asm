@@ -51,7 +51,7 @@ CureVolatileStatuses: ; 13a37 (4:7a37)
 	inc hl ; BATTSTATUS2
 	ld a, [hl]
 	; clear UsingXAccuracy, ProtectedByMist, GettingPumped, and Seeded statuses
-	and (1 << UsingRage) | (1 << NeedsToRecharge) | (1 << HasSubstituteUp) | (1 << 3) 
+	and $ff ^((1 << UsingXAccuracy) | (1 << ProtectedByMist) | (1 << GettingPumped) | (1 << Seeded)) 
 	ld [hli], a ; BATTSTATUS3
 	ld a, [hl]
 	and %11110000 | (1 << Transformed) ; clear Bad Poison, Reflect and Light Screen statuses
