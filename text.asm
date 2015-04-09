@@ -1114,7 +1114,7 @@ _EnemyMonFaintedText:: ; 0x896c7
 
 _MoneyForWinningText:: ; 896dd (22:56dd)
 	text $52, " got ¥@"
-	TX_BCD wd079, $c3
+	TX_BCD wAmountMoneyWon, $c3
 	db $0
 	line "for winning!"
 	prompt

@@ -3,10 +3,10 @@ ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
 	ld de, W_PLAYERMOVEEFFECT
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_3bba8
+	jr z, .reflectLightScreenEffect
 	ld hl, W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYMOVEEFFECT
-.asm_3bba8
+.reflectLightScreenEffect
 	ld a, [de]
 	cp LIGHT_SCREEN_EFFECT
 	jr nz, .reflect
@@ -14,13 +14,13 @@ ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
 	jr nz, .moveFailed
 	set HasLightScreenUp, [hl] ; mon is now protected by light screen
 	ld hl, LightScreenProtectedText
-	jr .asm_3bbc1
+	jr .playAnim
 .reflect
 	bit HasReflectUp, [hl] ; is mon already protected by reflect?
 	jr nz, .moveFailed
 	set HasReflectUp, [hl] ; mon is now protected by reflect
 	ld hl, ReflectGainedArmorText
-.asm_3bbc1
+.playAnim
 	push hl
 	ld hl, PlayCurrentMoveAnimation
 	call BankswitchEtoF

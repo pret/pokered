@@ -11,46 +11,48 @@ SubstituteEffect_: ; 17dad (5:7dad)
 	ld de, wEnemySubstituteHP
 	ld bc, W_ENEMYBATTSTATUS2
 .notEnemy
-	ld a, [bc]                    ;load flags
-	bit HasSubstituteUp, a        ;user already has substitute?
-	jr nz, .alreadyHasSubstitute  ;skip this code if so
-	                              ;user doesn't have a substitute [yet]
+	ld a, [bc] 
+	bit HasSubstituteUp, a ; user already has substitute?
+	jr nz, .alreadyHasSubstitute 
+; quarter health to remove from user
+; assumes max HP is 1023 or lower	
 	push bc
-	ld a, [hli]  ;load max hp
+	ld a, [hli]
 	ld b, [hl]
-	srl a        ;max hp / 4, [quarter health to remove from user]
+	srl a 
 	rr b
 	srl a
-	rr b
+	rr b ; max hp / 4
 	push de
 	ld de, wBattleMonHP - wBattleMonMaxHP
-	add hl, de    ; point hl to current HP
+	add hl, de ; point hl to current HP low byte
 	pop de
-	ld a, b
-	ld [de], a    ;save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
-	ld a, [hld]   ;load current hp
-	sub b         ;subtract [max hp / 4]
-	ld d, a       ;save low byte result in D
+	ld a, b 
+	ld [de], a ; save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
+	ld a, [hld]
+; subtract [max hp / 4] to current HP	
+	sub b 
+	ld d, a
 	ld a, [hl]
-	sbc a, 0      ;borrow from high byte if needed
+	sbc 0 
 	pop bc
-	jr c, .notEnoughHP  ;underflow means user would be left with negative health
-                        ;bug: note since it only brances on carry, it will possibly leave user with 0HP
+	jr c, .notEnoughHP ; underflow means user would be left with negative health
+                           ; bug: since it only brances on carry, it will possibly leave user with 0 HP
 .userHasZeroOrMoreHP
-	ldi [hl], a  ;store high byte HP
-	ld [hl], d   ;store low byte HP
+	ldi [hl], a ; save resulting HP after substraction into current HP
+	ld [hl], d   
 	ld h, b
 	ld l, c
-	set HasSubstituteUp, [hl] ;set bit 4 of flags, user now has substitute
-	ld a, [W_OPTIONS]         ;load options
-	bit 7, a                  ;battle animation is enabled?
-	ld hl, PlayCurrentMoveAnimation         ;animation enabled: 0F:7BA8
+	set HasSubstituteUp, [hl] 
+	ld a, [W_OPTIONS]         
+	bit 7, a ; battle animation is enabled?
+	ld hl, PlayCurrentMoveAnimation         
 	ld b, BANK(PlayCurrentMoveAnimation)
 	jr z, .animationEnabled
-	ld hl, AnimationSubstitute ;animation disabled: 1E:56E0
+	ld hl, AnimationSubstitute 
 	ld b, BANK(AnimationSubstitute)
 .animationEnabled
-	call Bankswitch           ;jump to routine depending on animation setting
+	call Bankswitch ; jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
 	ld hl, DrawHUDsAndHPBars

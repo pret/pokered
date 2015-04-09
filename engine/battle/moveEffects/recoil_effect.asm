@@ -3,10 +3,10 @@ RecoilEffect_: ; 1392c (4:792c)
 	and a
 	ld a, [W_PLAYERMOVENUM]
 	ld hl, wBattleMonMaxHP
-	jr z, .asm_1393d
+	jr z, .recoilEffect
 	ld a, [W_ENEMYMOVENUM]
 	ld hl, wEnemyMonMaxHP
-.asm_1393d
+.recoilEffect
 	ld d, a
 	ld a, [W_DAMAGE]
 	ld b, a
@@ -15,22 +15,23 @@ RecoilEffect_: ; 1392c (4:792c)
 	srl b
 	rr c
 	ld a, d
-	cp STRUGGLE
-	jr z, .asm_13953
+	cp STRUGGLE ; struggle deals 50% recoil damage
+	jr z, .gotRecoilDamage
 	srl b
 	rr c
-.asm_13953
+.gotRecoilDamage
 	ld a, b
 	or c
-	jr nz, .asm_13958
-	inc c
-.asm_13958
+	jr nz, .updateHP
+	inc c ; minimum recoil damage is 1
+.updateHP
+; substract HP from user due to the recoil damage
 	ld a, [hli]
 	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
 	ld [wHPBarMaxHP], a
 	push bc
-	ld bc, $fff2
+	ld bc, wBattleMonHP - wBattleMonMaxHP
 	add hl, bc
 	pop bc
 	ld a, [hl]
@@ -43,22 +44,23 @@ RecoilEffect_: ; 1392c (4:792c)
 	sbc b
 	ld [hl], a
 	ld [wHPBarNewHP+1], a
-	jr nc, .asm_13982
-	xor a
+	jr nc, .getHPBarCoords
+; if recoil damage is higher than the Pokemon's HP, set its HP to 0
+	xor a 
 	ld [hli], a
 	ld [hl], a
 	ld hl, wHPBarNewHP
 	ld [hli], a
 	ld [hl], a
-.asm_13982
+.getHPBarCoords
 	hlCoord 10, 9
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, $1
-	jr z, .asm_13990
+	jr z, .updateHPBar
 	hlCoord 2, 2
 	xor a
-.asm_13990
+.updateHPBar
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	ld hl, HitWithRecoilText

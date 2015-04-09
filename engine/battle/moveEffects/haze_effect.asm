@@ -1,9 +1,11 @@
 HazeEffect_: ; 139da (4:79da)
 	ld a, $7
+; store 7 on every stat mod	
 	ld hl, wPlayerMonAttackMod
 	call ResetStatMods
 	ld hl, wEnemyMonAttackMod
 	call ResetStatMods
+; copy unmodified stats to battle stats	
 	ld hl, wPlayerMonUnmodifiedAttack
 	ld de, wBattleMonAttack
 	call ResetStats
@@ -14,39 +16,42 @@ HazeEffect_: ; 139da (4:79da)
 	ld de, wEnemySelectedMove
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_13a09
+	jr z, .cureStatuses
 	ld hl, wBattleMonStatus
-	dec de
+	dec de ; wPlayerSelectedMove
 
-.asm_13a09
+.cureStatuses
 	ld a, [hl]
 	ld [hl], $0
-	and $27
-	jr z, .asm_13a13
+	and SLP | (1 << FRZ)
+	jr z, .cureVolatileStatuses
+; prevent the Pokemon from executing a move if it was asleep or frozen	
 	ld a, $ff
 	ld [de], a
 
-.asm_13a13
+.cureVolatileStatuses
 	xor a
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [W_ENEMYDISABLEDMOVE], a
-	ld hl, wccee
+	ld hl, wPlayerDisabledMoveNumber
 	ld [hli], a
 	ld [hl], a
 	ld hl, W_PLAYERBATTSTATUS1
-	call CureStatuses
+	call CureVolatileStatuses
 	ld hl, W_ENEMYBATTSTATUS1
-	call CureStatuses
+	call CureVolatileStatuses
 	ld hl, PlayCurrentMoveAnimation
 	call CallBankF
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
-CureStatuses: ; 13a37 (4:7a37)
+CureVolatileStatuses: ; 13a37 (4:7a37)
+; only cures statuses of the Pokemon not using Haze
 	res Confused, [hl]
 	inc hl ; BATTSTATUS2
 	ld a, [hl]
-	and (1 << UsingRage) | (1 << NeedsToRecharge) | (1 << HasSubstituteUp) | (1 << 3) ; clear all but these from BATTSTATUS2
+	; clear UsingXAccuracy, ProtectedByMist, GettingPumped, and Seeded statuses
+	and $ff ^((1 << UsingXAccuracy) | (1 << ProtectedByMist) | (1 << GettingPumped) | (1 << Seeded)) 
 	ld [hli], a ; BATTSTATUS3
 	ld a, [hl]
 	and %11110000 | (1 << Transformed) ; clear Bad Poison, Reflect and Light Screen statuses
@@ -56,7 +61,7 @@ CureStatuses: ; 13a37 (4:7a37)
 ResetStatMods: ; 13a43 (4:7a43)
 	ld b, $8
 .loop
-	ld [hli], a
+	ld [hli], a 
 	dec b
 	jr nz, .loop
 	ret

@@ -432,16 +432,22 @@ wSafariBaitFactor:: ; cce9
 
 wcceb:: ds 1
 wccec:: ds 1
-wMonIsDisobedient:: ds 1
-wccee:: ds 1
-wccef:: ds 1
-wccf0:: ds 1
-wPlayerUsedMove:: ds 1
-wEnemyUsedMove:: ds 1
-wccf3:: ds 1
-wMoveDidntMiss:: ds 1
 
-wPartyFoughtCurrentEnemyFlags::
+wMonIsDisobedient:: ds 1 ; cced
+
+wPlayerDisabledMoveNumber:: ds 1 ; ccee 
+wEnemyDisabledMoveNumber:: ds 1 ; ccef
+
+wccf0:: ds 1
+
+wPlayerUsedMove:: ds 1 ; ccf1
+wEnemyUsedMove:: ds 1 ; ccf2
+
+wccf3:: ds 1
+
+wMoveDidntMiss:: ds 1 ; ccf4
+
+wPartyFoughtCurrentEnemyFlags:: ; ccf5
 ; flags that indicate which party members have fought the current enemy mon
 	flag_array 6
 
@@ -943,8 +949,9 @@ W_TRAINERCLASS:: ; d031
 
 	ds 1
 
-wd033:: ds 1
-wd034:: ds 2
+wTrainerPicPointer:: ; wd033
+	ds 2
+	ds 1
 wd036:: ds 16
 wd046:: ds 1
 wd047:: ds 1
@@ -1066,11 +1073,13 @@ W_PLAYERCONFUSEDCOUNTER:: ; wd06b
 W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
 W_PLAYERDISABLEDMOVE:: ; d06d
+; high nibble: which move is disabled (1-4)
+; low nibble: disable turns left
 	ds 1
 
 	ds 1
 
-wEnemyNumAttacksLeft::
+wEnemyNumAttacksLeft:: ; d06f
 ; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
@@ -1080,6 +1089,8 @@ W_ENEMYCONFUSEDCOUNTER:: ; wd070
 W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
 W_ENEMYDISABLEDMOVE:: ; d072
+; high nibble: which move is disabled (1-4)
+; low nibble: disable turns left
 	ds 1
 
 	ds 1
@@ -1093,15 +1104,16 @@ wPlayerBideAccumulatedDamage:: ; d074
 wUnknownSerialCounter2:: ; d075
 ; 2 bytes
 
-ds 4
+	ds 4
 
 wEscapedFromBattle::
 ; non-zero when an item or move that allows escape from battle was used
 	ds 1
 
-wd079:: ds 1
+wd079:: 
+wAmountMoneyWon:: ds 1 ; wd079 - wd07b
 wd07a:: ds 1
-wd07b:: ds 1
+	ds 1
 
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
