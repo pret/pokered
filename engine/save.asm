@@ -604,7 +604,7 @@ SAVCheckRandomID: ;$7ad1
 	ld a,[S_SAVEDMAINDATACHECKSUM]
 	cp c
 	jr nz,.next
-	ld hl,S_SAVEDPLAYERID
+	ld hl,S_SAVEDMAINDATA + 98 ; player ID
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
