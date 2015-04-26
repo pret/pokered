@@ -19,8 +19,6 @@ S_SAVEDCURBOXDATA:: ds wBoxMonNicksEnd - W_NUMINBOX ; b0c0
 S_SAVEDhTilesetType:: ds 1 ; b522
 S_SAVEDMAINDATACHECKSUM:: ds 1 ; b523
 
-S_SAVEDPLAYERID EQU S_SAVEDMAINDATA + (wPlayerID - wPokedexOwned) ; a605
-
 SECTION "Saved Boxes", SRAM, BANK[2] ; pointers used for bank 3 too
 
 S_BOXLENGTH EQU wBoxMonNicksEnd - W_NUMINBOX ; $462
