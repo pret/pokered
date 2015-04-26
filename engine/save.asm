@@ -327,12 +327,12 @@ Func_7387b: ; 7387b (1c:787b)
 	ret
 
 PointerTable_73895: ; 73895 (1c:7895)
-	dw $A000
-	dw $A462
-	dw $A8C4
-	dw $AD26
-	dw $B188
-	dw $B5EA
+	dw S_SAVEDBOX1
+	dw S_SAVEDBOX2
+	dw S_SAVEDBOX3
+	dw S_SAVEDBOX4
+	dw S_SAVEDBOX5
+	dw S_SAVEDBOX6
 
 ChangeBox:: ; 738a1 (1c:78a1)
 	ld hl, WhenYouChangeBoxText
