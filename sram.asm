@@ -12,11 +12,11 @@ SECTION "Save Data", SRAM, BANK[1]
 
 SECTION "Save Data Start", SRAM1[$a598]
 S_SAVEDPLAYERNAME:: ds 11 ; a598
-S_SAVEDMAINDATA:: ds wPartyCount - wPlayerName ; a5a3
-S_SAVEDSPRITEDATA:: ds W_NUMINBOX - wPokedexOwned ; ad2c
-S_SAVEDPARTYDATA:: ds wOAMBuffer - wSpriteStateData1 ; af2c
-S_SAVEDCURBOXDATA:: ds wPokedexOwned - wPartyCount ; b0c0
-S_SAVEDhTilesetType:: ds wBoxMonNicksEnd - W_NUMINBOX ; b522
+S_SAVEDMAINDATA:: ds W_NUMINBOX - wPokedexOwned ; a5a3
+S_SAVEDSPRITEDATA:: ds wOAMBuffer - wSpriteStateData1 ; ad2c
+S_SAVEDPARTYDATA:: ds wPokedexOwned - wPartyCount ; af2c
+S_SAVEDCURBOXDATA:: ds wBoxMonNicksEnd - W_NUMINBOX ; b0c0
+S_SAVEDhTilesetType:: ds 1 ; b522
 S_SAVEDMAINDATACHECKSUM:: ds 1 ; b523
 
 S_SAVEDPLAYERID EQU S_SAVEDMAINDATA + (wPlayerID - wPokedexOwned) ; a605
