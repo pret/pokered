@@ -808,7 +808,7 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	ld a,[hl]
 	push af
 	push hl
-	ld a,$AF
+	ld a,ANIM_AF
 	ld [hli],a
 	ld [hl],b
 	callab StatModifierUpEffect
