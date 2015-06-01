@@ -138,29 +138,29 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	call Has9990Coins
 	jr nc, .asm_31338 ; 0x48cc6
 	xor a
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $10
-	ldh [$a0], a
+	ld [$ffa0], a
 	call HasEnoughMoney
 	jr nc, .asm_b6ef0 ; 0x48cd4
 	ld hl, CeladonGameCornerText_48d31 ; $4d31
 	jr .asm_e2afd ; 0x48cd9
 .asm_b6ef0 ; 0x48cdb
 	xor a
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $10
-	ldh [$a0], a
+	ld [$fa0], a
 	ld hl, $ffa1
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $50
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -225,10 +225,10 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	call Has9990Coins
 	jr nc, .asm_98546 ; 0x48d62
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $10
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -307,10 +307,10 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	call Has9990Coins
 	jr nc, .asm_f17c3 ; 0x48df1
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $20
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -360,10 +360,10 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	call Has9990Coins
 	jr z, .asm_9505a ; 0x48e53
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $20
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -415,9 +415,9 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ldh [$b4], a
-	ldh [$b3], a
-	ldh [$b2], a
+	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld a, $1
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
 	jp TextScriptEnd

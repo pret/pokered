@@ -39,7 +39,7 @@ SSAnne6Text7: ; 617e3 (18:57e3)
 	db $08 ; asm
 	ld hl, SSAnne6Text_61807
 	call PrintText
-	ldh a, [$d3]
+	ld a, [hRandomAdd]
 	bit 7, a
 	jr z, .asm_93eb1 ; 0x617ee
 	ld hl, SSAnne6Text_6180c

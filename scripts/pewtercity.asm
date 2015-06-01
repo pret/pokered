@@ -208,12 +208,12 @@ PewterCityText3: ; 193b1 (6:53b1)
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
-	ldh [$b3], a
-	ldh [$b4], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
@@ -273,11 +273,11 @@ PewterCityText5: ; 19436 (6:5436)
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a
