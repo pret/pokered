@@ -23,7 +23,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
 .asm_1389e
-; determine if wild pokémon can appear in the half-block we’re standing in	
+; determine if wild pokemon can appear in the half-block we're standing in	
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	hlCoord 9, 9
 	ld c, [hl]
@@ -35,9 +35,9 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	cp c
 	ld a, [W_WATERRATE]
 	jr z, .CanEncounter
-; even if not in grass/water, standing anywhere we can encounter pokémon
-; so long as the map is “indoor” and has wild pokémon defined.
-; …as long as it’s not Viridian Forest or Safari Zone.
+; even if not in grass/water, standing anywhere we can encounter pokemon
+; so long as the map is "indoor" and has wild pokemon defined.
+; ...as long as it's not Viridian Forest or Safari Zone.
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F ; is this an indoor map?
 	jr c, .CantEncounter2
@@ -61,7 +61,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	inc hl
 	jr .determineEncounterSlot
 .gotEncounterSlot
-; determine which wild pokémon (grass or water) can appear in the half-block we’re standing in
+; determine which wild pokemon (grass or water) can appear in the half-block we're standing in
 	ld c, [hl]
 	ld hl, W_GRASSMONS
 	aCoord 8, 9	
