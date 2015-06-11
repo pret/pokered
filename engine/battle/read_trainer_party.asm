@@ -143,7 +143,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [wEnemyMon6Moves + 2],a
 .FinishUp
 ; clear wAmountMoneyWon addresses
-	xor a       
+	xor a
 	ld de,wAmountMoneyWon
 	ld [de],a
 	inc de

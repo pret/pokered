@@ -46,7 +46,7 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [wHPBarNewHP+1], a
 	jr nc, .getHPBarCoords
 ; if recoil damage is higher than the Pokemon's HP, set its HP to 0
-	xor a 
+	xor a
 	ld [hli], a
 	ld [hl], a
 	ld hl, wHPBarNewHP

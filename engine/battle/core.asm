@@ -1023,7 +1023,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld c, $28
 	call DelayFrames
 	call PrintEndBattleText
-; win money	
+; win money
 	ld hl, MoneyForWinningText
 	call PrintText
 	ld de, wPlayerMoney + 2
@@ -1642,7 +1642,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld b, a
 	ld a, [H_QUOTIENT + 3]
 	cp b
-	jr nc, .canEscape ; if the random value was less than or equal to the quotient 
+	jr nc, .canEscape ; if the random value was less than or equal to the quotient
 	                  ; plus 30 times the number of attempts, the player can escape
 ; can't escape
 	ld a, $1
@@ -2930,8 +2930,8 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld c, a
 	ld b, $0 ; which item in the menu is the cursor pointing to? (0-3)
 	add hl, bc ; point to the item (move) in memory
-	ld a, [hl] 
-	ld [wPlayerSelectedMove], a ; update wPlayerSelectedMove even if the move 
+	ld a, [hl]
+	ld [wPlayerSelectedMove], a ; update wPlayerSelectedMove even if the move
 	                            ; isn't actually selected (just pointed to by the cursor)
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
@@ -2947,7 +2947,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld a, [hl]
 	and $3f
 	ld [wcd6d], a
-; print TYPE/<type> and <curPP>/<maxPP>	
+; print TYPE/<type> and <curPP>/<maxPP>
 	hlCoord 1, 9
 	ld de, TypeText
 	call PlaceString
@@ -2963,7 +2963,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld de, wd11e
 	ld bc, $102
 	call PrintNumber
-	call GetCurrentMove 
+	call GetCurrentMove
 	hlCoord 2, 10
 	predef PrintMoveType
 .moveDisabled
@@ -3174,13 +3174,13 @@ PlayerCanExecuteMove: ; 3d6b0 (f:56b0)
 	ld hl,ResidualEffects1
 	ld de,1
 	call IsInArray
-	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests 
-	                    ; unless executed as part of their exclusive effect functions 
+	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests
+	                    ; unless executed as part of their exclusive effect functions
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SpecialEffectsCont
 	ld de,1
 	call IsInArray
-	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything 
+	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything
 PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SetDamageEffects
@@ -3203,7 +3203,7 @@ handleIfPlayerMoveMissed
 	and a
 	jr z,getPlayerAnimationType
 	ld a,[W_PLAYERMOVEEFFECT]
-	sub a,EXPLODE_EFFECT 
+	sub a,EXPLODE_EFFECT
 	jr z,playPlayerMoveAnimation ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
 	jr playerCheckIfFlyOrChargeEffect
 getPlayerAnimationType
@@ -3298,7 +3298,7 @@ MirrorMoveCheck
 	ld a,[wPlayerNumAttacksLeft]
 	dec a
 	ld [wPlayerNumAttacksLeft],a
-	jp nz,getPlayerAnimationType ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
+	jp nz,getPlayerAnimationType ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints.
 	                             ; damage calculation and accuracy tests only happen for the first hit
 	res AttackingMultipleTimes,[hl] ; clear attacking multiple times status when all attacks are over
 	ld hl,MultiHitText
@@ -3509,8 +3509,8 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 .MonHurtItselfOrFullyParalysed
 	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
-	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)	
-	and $ff ^ ((1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << ChargingUp) | (1 << UsingTrappingMove)) 
+	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
+	and $ff ^ ((1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << ChargingUp) | (1 << UsingTrappingMove))
 	ld [hl],a
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,FLY_EFFECT
@@ -3588,7 +3588,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,wPlayerNumAttacksLeft
 	dec [hl] ; did Thrashing About counter hit 0?
 	ld hl,PlayerCalcMoveDamage ; skip DecrementPP
-	jp nz,.returnToHL 
+	jp nz,.returnToHL
 	push hl
 	ld hl,W_PLAYERBATTSTATUS1
 	res ThrashingAbout,[hl] ; no longer thrashing about
@@ -3609,7 +3609,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[wPlayerNumAttacksLeft]
 	dec a ; did multi-turn move end?
 	ld [wPlayerNumAttacksLeft],a
-	ld hl,getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	ld hl,getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                ; DecrementPP and MoveHitTest
 	jp nz,.returnToHL
 	jp .returnToHL
@@ -3706,7 +3706,7 @@ PrintMoveIsDisabledText: ; 3da88 (f:5a88)
 	ld de, W_ENEMYBATTSTATUS1
 .removeChargingUp
 	ld a, [de]
-	res ChargingUp, a ; end the pokemon's 
+	res ChargingUp, a ; end the pokemon's
 	ld [de], a
 	ld a, [hl]
 	ld [wd11e], a
@@ -3923,7 +3923,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 
 	; if you get here, the mon used jump kick or hi jump kick and missed
 	ld hl, W_DAMAGE ; since the move missed, W_DAMAGE will always contain 0 at this point.
-	                ; Thus, recoil damage will always be equal to 1 
+	                ; Thus, recoil damage will always be equal to 1
 	                ; even if it was intended to be potential damage/8.
 	ld a, [hli]
 	ld b, [hl]
@@ -4776,7 +4776,7 @@ HandleCounterMove: ; 3e093 (f:6093)
 	ld a,[hli]
 	or [hl]
 	ret z ; If we made it here, Counter still misses if the last move used in battle did no damage to its target.
-	      ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself 
+	      ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself
 	      ; if the conditions meet, even though 99% of the times damage will come from the target.
 ; if it did damage, double it
 	ld a,[hl]
@@ -5037,9 +5037,9 @@ ApplyAttackToPlayerPokemonDone
 AttackSubstitute: ; 3e25e (f:625e)
 ; Unlike the two ApplyAttackToPokemon functions, Attack Substitute is shared by player and enemy.
 ; Self-confusion damage as well as Hi-Jump Kick and Jump Kick recoil cause a momentary turn swap before being applied.
-; If the user has a Substitute up and would take damage because of that, 
+; If the user has a Substitute up and would take damage because of that,
 ; damage will be applied to the other player's Substitute.
-; Normal recoil such as from Double-Edge isn't affected by this glitch, 
+; Normal recoil such as from Double-Edge isn't affected by this glitch,
 ; because this function is never called in that case.
 
 	ld hl,SubstituteTookDamageText
@@ -5064,7 +5064,7 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld [de],a
 	ret nc
 .substituteBroke
-; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP 
+; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP
 ; the Substitute had before being attacked.
 	ld h,b
 	ld l,c
@@ -6023,7 +6023,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 .monHurtItselfOrFullyParalysed
 	ld hl, W_ENEMYBATTSTATUS1
 	ld a, [hl]
-	; clear bide, thrashing about, charging up, and multi-turn moves such as warp	
+	; clear bide, thrashing about, charging up, and multi-turn moves such as warp
 	and $ff ^ ((1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << ChargingUp) | (1 << UsingTrappingMove))
 	ld [hl], a
 	ld a, [W_ENEMYMOVEEFFECT]
@@ -6119,7 +6119,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
 	dec [hl] ; did multi-turn move end?
-	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                             ; DecrementPP and MoveHitTest
 	jp nz, .enemyReturnToHL
 	jp .enemyReturnToHL
@@ -6753,8 +6753,8 @@ BattleRandom:
 	push hl
 	push bc
 	push af
-	
-; point to seed 0 so we pick the first number the next time	
+
+; point to seed 0 so we pick the first number the next time
 	xor a
 	ld [wLinkBattleRandomNumberListIndex], a
 
@@ -6763,11 +6763,11 @@ BattleRandom:
 .loop
 	ld a, [hl]
 	ld c, a
-; multiply by 5	
+; multiply by 5
 	add a
 	add a
 	add c
-; add 1	
+; add 1
 	inc a
 	ld [hli], a
 	dec b
@@ -7052,7 +7052,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	dec b
 	jr nz, .asm_3f0de
 	ret
-	
+
 .asm_3f0ed
 	push bc
 	ld b, $0
@@ -7604,17 +7604,17 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_MULTIPLICAND], a 
+	ld [H_MULTIPLICAND], a
 	ld a, [de]
 	ld [H_MULTIPLICAND + 1], a
 	inc de
 	ld a, [de]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, [hli]
-	ld [H_MULTIPLIER], a 
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
-	ld [H_DIVISOR], a 
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
 	pop hl
@@ -7822,17 +7822,17 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_MULTIPLICAND], a 
+	ld [H_MULTIPLICAND], a
 	ld a, [de]
 	ld [H_MULTIPLICAND + 1], a
 	inc de
 	ld a, [de]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, [hli]
-	ld [H_MULTIPLIER], a 
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
-	ld [H_DIVISOR], a 
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
 	pop hl
@@ -8287,8 +8287,8 @@ TrappingEffect: ; 3f917 (f:7917)
 .trappingEffect
 	bit UsingTrappingMove, [hl]
 	ret nz
-	call ClearHyperBeam ; since this effect is called before testing whether the move will hit, 
-                        ; the target won't need to recharge even if the trapping move missed 	
+	call ClearHyperBeam ; since this effect is called before testing whether the move will hit,
+                        ; the target won't need to recharge even if the trapping move missed
 	set UsingTrappingMove, [hl] ; mon is now using a trapping move
 	call BattleRandom ; 3/8 chance for 2 and 3 attacks, and 1/8 chance for 4 and 5 attacks
 	and $3
@@ -8346,7 +8346,7 @@ ConfusionSideEffectSuccess: ; 3f96f (f:796f)
 	set Confused, [hl] ; mon is now confused
 	push af
 	call BattleRandom
-	and $3 
+	and $3
 	inc a
 	inc a
 	ld [bc], a ; confusion status will last 2-5 turns
@@ -8527,12 +8527,12 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	ld a, [H_WHOSETURN]
 	and a
 	ld hl, wBattleMonPP
-	jr nz, .enemyTurn 
+	jr nz, .enemyTurn
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	pop hl ; wEnemyMonMoves
 	jr nz, .playerTurnNotLinkBattle
-; .playerTurnLinkBattle	
+; .playerTurnLinkBattle
 	push hl
 	ld hl, wEnemyMonPP
 .enemyTurn
@@ -8557,7 +8557,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	and $7
 	inc a ; 1-8 turns disabled
 	inc c ; move 1-4 will be disabled
-	swap c 
+	swap c
 	add c ; map disabled move to high nibble of W_ENEMYDISABLEDMOVE / W_PLAYERDISABLEDMOVE
 	ld [de], a
 	call PlayCurrentMoveAnimation2
@@ -8568,7 +8568,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	inc hl ; wEnemyDisabledMoveNumber
 .printDisableText
 	ld a, [wd11e] ; move number
-	ld [hl], a  
+	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText
 	jp PrintText
@@ -8659,12 +8659,12 @@ ParalyzedMayNotAttackText: ; 3fb74 (f:7b74)
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
 	ld hl, W_ENEMYBATTSTATUS2
-	ld a, [H_WHOSETURN]   
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .next1
 	ld hl, W_PLAYERBATTSTATUS2
 .next1
-	bit HasSubstituteUp, [hl]         
+	bit HasSubstituteUp, [hl]
 	pop hl
 	ret
 

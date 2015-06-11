@@ -1,20 +1,20 @@
 LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	callab MoveHitTest
-	ld a, [W_MOVEMISSED] 
+	ld a, [W_MOVEMISSED]
 	and a
 	jr nz, .moveMissed
-	ld hl, W_ENEMYBATTSTATUS2 
-	ld de, wEnemyMonType1 
-	ld a, [H_WHOSETURN] 
+	ld hl, W_ENEMYBATTSTATUS2
+	ld de, wEnemyMonType1
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .leechSeedEffect
-	ld hl, W_PLAYERBATTSTATUS2 
-	ld de, wBattleMonType1 
+	ld hl, W_PLAYERBATTSTATUS2
+	ld de, wBattleMonType1
 .leechSeedEffect
 ; miss if the target is grass-type or already seeded
 	ld a, [de]
 	cp GRASS
-	jr z, .moveMissed 
+	jr z, .moveMissed
 	inc de
 	ld a, [de]
 	cp GRASS

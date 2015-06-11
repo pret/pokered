@@ -157,7 +157,7 @@ StatusAilmentMoveEffects ; 57e2
 ; that fall in-bewteen
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	ld a, [wAILayer2Encouragement]
-	cp $1 
+	cp $1
 	ret nz
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
@@ -325,8 +325,8 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,3,0  ; LANCE
 
 INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
-	
-INCLUDE "text/trainer_names.asm"	
+
+INCLUDE "text/trainer_names.asm"
 
 INCLUDE "engine/battle/bank_e_misc.asm"
 

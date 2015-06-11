@@ -468,7 +468,7 @@ ds 10
 
 wInGameTradeGiveMonSpecies:: ; cd0f
 
-wPlayerMonUnmodifiedLevel:: ; cd0f 
+wPlayerMonUnmodifiedLevel:: ; cd0f
 	ds 1
 
 wInGameTradeTextPointerTablePointer:: ; cd10

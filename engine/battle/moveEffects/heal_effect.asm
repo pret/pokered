@@ -76,7 +76,7 @@ HealEffect_: ; 3b9ec (e:79ec)
 	ld a, [de]
 	sbc [hl]
 	jr c, .playAnim
-; copy max HP to current HP if an overflow ocurred	
+; copy max HP to current HP if an overflow ocurred
 	ld a, [hli]
 	ld [de], a
 	ld [wHPBarNewHP+1], a

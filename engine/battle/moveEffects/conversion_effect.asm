@@ -13,7 +13,7 @@ ConversionEffect_: ; 139a3 (4:79a3)
 .conversionEffect
 	bit Invulnerable, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText
-; copy target's types to user	
+; copy target's types to user
 	ld a, [hli]
 	ld [de], a
 	inc de

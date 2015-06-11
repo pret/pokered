@@ -24,7 +24,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, W_ENEMYBATTSTATUS2
 .transformEffect
 ; animation(s) played are different if target has Substitute up
-	bit HasSubstituteUp, [hl] 
+	bit HasSubstituteUp, [hl]
 	push af
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
@@ -49,13 +49,13 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	pop de
 	pop hl
 	push hl
-; transform user into opposing Pokemon	
+; transform user into opposing Pokemon
 ; species
-	ld a, [hl] 
+	ld a, [hl]
 	ld [de], a
-; type 1, type 2, catch rate, and moves	
+; type 1, type 2, catch rate, and moves
 	ld bc, $5
-	add hl, bc 
+	add hl, bc
 	inc de
 	inc de
 	inc de
@@ -82,7 +82,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld a, [hli]
 	ld [de], a
 	inc de
-; Attack, Defense, Speed, and Special stats	
+; Attack, Defense, Speed, and Special stats
 	inc hl
 	inc hl
 	inc hl
@@ -91,7 +91,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	inc de
 	ld bc, $8
 	call CopyData
-	ld bc, wBattleMonMoves - wBattleMonPP 
+	ld bc, wBattleMonMoves - wBattleMonPP
 	add hl, bc ; ld hl, wBattleMonMoves
 	ld b, NUM_MOVES
 .copyPPLoop
