@@ -25,7 +25,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	call PlaySound
 	ld c, $20
 	call DelayFrames
-	ld hl, Unknown_5c608 ; $4608
+	ld hl, JigglypuffFacingDirections
 	ld de, wTrainerFacingDirection
 	ld bc, $0004
 	call CopyData
@@ -68,8 +68,11 @@ PewterPokecenterText5: ; 5c603 (17:4603)
 	TX_FAR _PewterPokecenterText5
 	db "@"
 
-Unknown_5c608: ; 5c608 (17:4608)
-	db $30, $38, $34, $3c
+JigglypuffFacingDirections: ; 5c608 (17:4608)
+	db $30 | SPRITE_FACING_DOWN
+	db $30 | SPRITE_FACING_LEFT
+	db $30 | SPRITE_FACING_UP
+	db $30 | SPRITE_FACING_RIGHT
 
 PewterPokecenterText4: ; 5c60c (17:460c)
 	db $f6
