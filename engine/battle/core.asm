@@ -3766,6 +3766,9 @@ PrintMonName1Text: ; 3daf5 (f:5af5)
 	ld hl, MonName1Text
 	jp PrintText
 
+; this function wastes time calling DetermineExclamationPointTextNum
+; and choosing between Used1Text and Used2Text, even though
+; those text strings are identical and both continue at PrintInsteadText
 MonName1Text: ; 3dafb (f:5afb)
 	TX_FAR _MonName1Text
 	db $08 ; asm
@@ -3779,7 +3782,7 @@ MonName1Text: ; 3dafb (f:5afb)
 .asm_3db11
 	ld [hl], a
 	ld [wd11e], a
-	call Func_3db85
+	call DetermineExclamationPointTextNum
 	ld a, [wMonIsDisobedient]
 	and a
 	ld hl, Used2Text
@@ -3799,27 +3802,29 @@ Used1Text: ; 3db2d (f:5b2d)
 Used2Text: ; 3db34 (f:5b34)
 	TX_FAR _Used2Text
 	db $08 ; asm
+	; fall through
 
 PrintInsteadText: ; 3db39 (f:5b39)
 	ld a, [wMonIsDisobedient]
 	and a
-	jr z, PrintCF4BText
+	jr z, PrintMoveName
 	ld hl, InsteadText
 	ret
 
 InsteadText: ; 3db43 (f:5b43)
 	TX_FAR _InsteadText
 	db $08 ; asm
+	; fall through
 
-PrintCF4BText: ; 3db48 (f:5b48)
-	ld hl, CF4BText
+PrintMoveName: ; 3db48 (f:5b48)
+	ld hl, _PrintMoveName
 	ret
 
-CF4BText: ; 3db4c (f:5b4c)
+_PrintMoveName: ; 3db4c (f:5b4c)
 	TX_FAR _CF4BText
 	db $08 ; asm
 	ld hl, ExclamationPointPointerTable
-	ld a, [wd11e]
+	ld a, [wd11e] ; exclamation point num
 	add a
 	push bc
 	ld b, $0
@@ -3858,29 +3863,34 @@ ExclamationPoint5Text: ; 3db80 (f:5b80)
 	TX_FAR _ExclamationPoint5Text
 	db "@"
 
-Func_3db85: ; 3db85 (f:5b85)
+; this function does nothing useful
+; if the move being used is in set [1-4] from ExclamationPointMoveSets,
+; use ExclamationPoint[1-4]Text
+; otherwise, use ExclamationPoint5Text
+; but all five text strings are identical 
+DetermineExclamationPointTextNum: ; 3db85 (f:5b85)
 	push bc
-	ld a, [wd11e] ; move number
+	ld a, [wd11e] ; move ID
 	ld c, a
 	ld b, $0
-	ld hl, UnknownMovesList_3dba3
-.asm_3db8f
+	ld hl, ExclamationPointMoveSets
+.loop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_3db9d
+	jr z, .done
 	cp c
-	jr z, .asm_3db9d
+	jr z, .done
 	and a
-	jr nz, .asm_3db8f
+	jr nz, .loop
 	inc b
-	jr .asm_3db8f
-.asm_3db9d
+	jr .loop
+.done
 	ld a, b
-	ld [wd11e], a
+	ld [wd11e], a ; exclamation point num
 	pop bc
 	ret
 
-UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
+ExclamationPointMoveSets: ; 3dba3 (f:5ba3)
 	db SWORDS_DANCE, GROWTH
 	db $00
 	db RECOVER, BIDE, SELFDESTRUCT, AMNESIA
