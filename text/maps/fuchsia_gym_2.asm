@@ -1,4 +1,4 @@
-_UnnamedText_7558b:: ; a0000 (28:4000)
+_KogaExplainToxicText:: ; a0000 (28:4000)
 	text "When afflicted by"
 	line "TOXIC, #MON"
 	cont "suffer more and"
@@ -9,7 +9,7 @@ _UnnamedText_7558b:: ; a0000 (28:4000)
 	line "terrorize foes!"
 	done
 
-_UnnamedText_75590:: ; a0069 (28:4069)
+_FuchsiaGymText9:: ; a0069 (28:4069)
 	text "Now that you have"
 	line "the SOULBADGE,"
 	cont "the DEFENSE of"
@@ -169,7 +169,7 @@ _FuchsiaGymAfterBattleText6:: ; a0483 (28:4483)
 	cont "choose?"
 	done
 
-_UnnamedText_7564e:: ; a04d2 (28:44d2)
+_FuchsiaGymText_7564e:: ; a04d2 (28:44d2)
 	text "Yo! Champ in"
 	line "making!"
 
@@ -186,7 +186,7 @@ _UnnamedText_7564e:: ; a04d2 (28:44d2)
 	cont "to reach him!"
 	done
 
-_UnnamedText_75653:: ; a0574 (28:4574)
+_FuchsiaGymText_75653:: ; a0574 (28:4574)
 	text "It's amazing how"
 	line "ninja can terrify"
 	cont "even now!"

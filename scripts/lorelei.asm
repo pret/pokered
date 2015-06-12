@@ -115,7 +115,7 @@ LoreleiScript2: ; 7623f (1d:623f)
 
 LoreleiTextPointers: ; 76251 (1d:6251)
 	dw LoreleiText1
-	dw LoreleiText2
+	dw LoreleiDontRunAwayText
 
 LoreleiTrainerHeaders: ; 76255 (1d:6255)
 LoreleiTrainerHeader0: ; 76255 (1d:6255)
@@ -147,6 +147,6 @@ LoreleiAfterBattleText: ; 76276 (1d:6276)
 	TX_FAR _LoreleiAfterBattleText
 	db "@"
 
-LoreleiText2: ; 7627b (1d:627b)
-	TX_FAR _LoreleiText2
+LoreleiDontRunAwayText: ; 7627b (1d:627b)
+	TX_FAR _LoreleiDontRunAwayText
 	db "@"

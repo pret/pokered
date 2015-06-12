@@ -116,7 +116,7 @@ BrunoScript2: ; 76396 (1d:6396)
 
 BrunoTextPointers: ; 763a8 (1d:63a8)
 	dw BrunoText1
-	dw BrunoText2
+	dw BrunoDontRunAwayText
 
 BrunoTrainerHeaders: ; 763ac (1d:63ac)
 BrunoTrainerHeader0: ; 763ac (1d:63ac)
@@ -148,6 +148,6 @@ BrunoAfterBattleText: ; 763cd (1d:63cd)
 	TX_FAR _BrunoAfterBattleText
 	db "@"
 
-BrunoText2: ; 763d2 (1d:63d2)
-	TX_FAR _UnnamedText_763d2
+BrunoDontRunAwayText: ; 763d2 (1d:63d2)
+	TX_FAR _BrunoDontRunAwayText
 	db "@"

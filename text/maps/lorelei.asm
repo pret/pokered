@@ -36,7 +36,7 @@ _LoreleiAfterBattleText:: ; 866d3 (21:66d3)
 	cont "LEAGUE power!"
 	done
 
-_LoreleiText2:: ; 86729 (21:6729)
+_LoreleiDontRunAwayText:: ; 86729 (21:6729)
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

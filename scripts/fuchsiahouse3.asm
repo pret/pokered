@@ -52,7 +52,7 @@ FuchsiaHouse3Text_561c2: ; 561c2 (15:61c2)
 	db $0B
 	db "@"
 
-UnnamedText_561c8: ; 561c8
+UnusedText_561c8: ; 561c8
 	para "つり こそ"
 	line "おとこの ロマン だ!"
 

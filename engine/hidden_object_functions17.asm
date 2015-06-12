@@ -435,11 +435,13 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
+; unused
 VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 	TX_FAR _VermilionGymTrashSuccesText2
 	db "@"
 
-UnnamedText_5dee0: ; 5dee0 (17:5ee0)
+; unused
+VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 	db $08 ; asm
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3

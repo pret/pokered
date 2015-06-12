@@ -155,17 +155,17 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	call DisableWaitingAfterTextDisplay
 	jr .asm_e84c6 ; 0x75546
 .asm_adc3b ; 0x75548
-	ld hl, UnnamedText_7558b
+	ld hl, KogaExplainToxicText
 	call PrintText
 	jr .asm_e84c6 ; 0x7554e
 .asm_181b6 ; 0x75550
-	ld hl, UnnamedText_75581
+	ld hl, KogaBeforeBattleText
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, UnnamedText_75586
-	ld de, UnnamedText_75586
+	ld hl, KogaAfterBattleText
+	ld de, KogaAfterBattleText
 	call SaveEndBattleTextPointers
 	ldh a, [$8c]
 	ld [wSpriteIndex], a
@@ -180,20 +180,20 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 .asm_e84c6 ; 0x7557e
 	jp TextScriptEnd
 
-UnnamedText_75581: ; 75581 (1d:5581)
-	TX_FAR _UnnamedText_75581
+KogaBeforeBattleText: ; 75581 (1d:5581)
+	TX_FAR _KogaBeforeBattleText
 	db "@"
 
-UnnamedText_75586: ; 75586 (1d:5586)
-	TX_FAR _UnnamedText_75586
+KogaAfterBattleText: ; 75586 (1d:5586)
+	TX_FAR _KogaAfterBattleText
 	db "@"
 
-UnnamedText_7558b: ; 7558b (1d:558b)
-	TX_FAR _UnnamedText_7558b
+KogaExplainToxicText: ; 7558b (1d:558b)
+	TX_FAR _KogaExplainToxicText
 	db "@"
 
 FuchsiaGymText9: ; 75590 (1d:5590)
-	TX_FAR _UnnamedText_75590
+	TX_FAR _FuchsiaGymText9
 	db "@"
 
 FuchsiaGymText10: ; 75595 (1d:5595)
@@ -320,17 +320,17 @@ FuchsiaGymText8: ; 7563a (1d:563a)
 	db $08 ; asm
 	ld a, [wd792]
 	bit 1, a
-	ld hl, UnnamedText_75653
+	ld hl, FuchsiaGymText_75653
 	jr nz, .asm_50671 ; 0x75643
-	ld hl, UnnamedText_7564e
+	ld hl, FuchsiaGymText_7564e
 .asm_50671 ; 0x75648
 	call PrintText
 	jp TextScriptEnd
 
-UnnamedText_7564e: ; 7564e (1d:564e)
-	TX_FAR _UnnamedText_7564e
+FuchsiaGymText_7564e: ; 7564e (1d:564e)
+	TX_FAR _FuchsiaGymText_7564e
 	db "@"
 
-UnnamedText_75653: ; 75653 (1d:5653)
-	TX_FAR _UnnamedText_75653
+FuchsiaGymText_75653: ; 75653 (1d:5653)
+	TX_FAR _FuchsiaGymText_75653
 	db "@"

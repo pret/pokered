@@ -119,7 +119,7 @@ AgathaScript2: ; 764ed (1d:64ed)
 
 AgathaTextPointers: ; 76505 (1d:6505)
 	dw AgathaText1
-	dw AgathaText2
+	dw AgathaDontRunAwayText
 
 AgathaTrainerHeaders: ; 76509 (1d:6509)
 AgathaTrainerHeader0: ; 76509 (1d:6509)
@@ -151,6 +151,6 @@ AgathaAfterBattleText: ; 7652a (1d:652a)
 	TX_FAR _AgathaAfterBattleText
 	db "@"
 
-AgathaText2: ; 7652f (1d:652f)
-	TX_FAR _AgathaText2
+AgathaDontRunAwayText: ; 7652f (1d:652f)
+	TX_FAR _AgathaDontRunAwayText
 	db "@"
