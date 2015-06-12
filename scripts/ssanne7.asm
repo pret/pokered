@@ -48,13 +48,13 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	TX_FAR _SSAnne7RubText
 	db $8
 	ld a, [wc0ef]
-	cp $1f
+	cp BANK(Music1f_UpdateMusic)
 	ld [wc0f0], a
 	jr nz, .asm_61908 ; 0x618f9 $d
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
-	ld a, Bank(Func_9876)
+	ld a, Bank(Music_PkmnHealed)
 	ld [wc0ef], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED
