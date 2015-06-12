@@ -78,7 +78,7 @@ BuildStatusScreenPalPacket: ; 71e4f (1c:5e4f)
 	push af
 	ld hl, wcf2e
 	ld a, [wcf25]
-	add $1f
+	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
 	pop af
