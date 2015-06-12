@@ -3769,6 +3769,8 @@ PrintMonName1Text: ; 3daf5 (f:5af5)
 ; this function wastes time calling DetermineExclamationPointTextNum
 ; and choosing between Used1Text and Used2Text, even though
 ; those text strings are identical and both continue at PrintInsteadText
+; this likely had to do with Japanese grammar that got translated,
+; but the functionality didn't get removed
 MonName1Text: ; 3dafb (f:5afb)
 	TX_FAR _MonName1Text
 	db $08 ; asm
@@ -3868,6 +3870,8 @@ ExclamationPoint5Text: ; 3db80 (f:5b80)
 ; use ExclamationPoint[1-4]Text
 ; otherwise, use ExclamationPoint5Text
 ; but all five text strings are identical 
+; this likely had to do with Japanese grammar that got translated,
+; but the functionality didn't get removed
 DetermineExclamationPointTextNum: ; 3db85 (f:5b85)
 	push bc
 	ld a, [wd11e] ; move ID
