@@ -38,4 +38,3 @@ Music_JigglypuffSong_Ch2:: ; 7fb9a (1f:7b9a)
 	G# 4
 	E_ 10
 	endchannel
-; 0x7fbaf

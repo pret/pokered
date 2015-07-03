@@ -679,4 +679,3 @@ Music_Routes4_branch_a4a8::
 	mutedsnare2 2
 	mutedsnare2 2
 	loopchannel 0, Music_Routes4_branch_a4a8
-; 0xa5f0

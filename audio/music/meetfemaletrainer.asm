@@ -116,4 +116,3 @@ Music_MeetFemaleTrainer_branch_7f770::
 	F# 1
 	rest 1
 	endchannel
-; 0x7f77b

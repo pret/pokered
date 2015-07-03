@@ -421,4 +421,3 @@ Music_MeetProfOak_branch_b101::
 	rest 1
 	loopchannel 2, Music_MeetProfOak_branch_b101
 	loopchannel 0, Music_MeetProfOak_branch_b0bc
-; 0xb119

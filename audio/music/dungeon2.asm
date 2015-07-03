@@ -315,4 +315,3 @@ Music_Dungeon2_branch_7e9dd::
 	snare9 4
 	snare7 4
 	loopchannel 0, Music_Dungeon2_branch_7e9dd
-; 0x7e9f1

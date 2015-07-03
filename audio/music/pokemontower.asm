@@ -456,4 +456,3 @@ Music_PokemonTower_branch_7f1a2::
 	D# 1
 	rest 1
 	loopchannel 0, Music_PokemonTower_branch_7f1a2
-; 0x7f243

@@ -22,4 +22,3 @@ SFX_02_34_Ch3: ; 9040 (2:5040)
 	unknownnoise0x20 14, 210, 86
 	unknownnoise0x20 8, 209, 102
 	endchannel
-; 0x904d

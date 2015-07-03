@@ -333,4 +333,3 @@ Music_Surfing_branch_7fb03::
 	D_ 2
 	E_ 2
 	loopchannel 0, Music_Surfing_branch_7fb03
-; 0x7fb7d

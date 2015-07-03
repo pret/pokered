@@ -264,4 +264,3 @@ Music_DefeatedTrainer_branch_23b24::
 	octave 4
 	A_ 3
 	loopchannel 0, Music_DefeatedTrainer_branch_23b24
-; 0x23b74

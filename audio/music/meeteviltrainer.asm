@@ -78,4 +78,3 @@ Music_MeetEvilTrainer_branch_7f6ee::
 	rest 3
 	A# 4
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6ee
-; 0x7f6f9

@@ -141,7 +141,7 @@ Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 .done
 	ld d, a
 	ld b, $3
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], d
 	ret
 
@@ -245,7 +245,7 @@ Music8_endchannel: ; 21967 (8:5967)
 	ld a, c
 	cp CH4
 	jr z, .asm_219e6
-	call Func_21e6d
+	call Music8_21e6d
 	ret c
 .asm_219e6
 	ld a, [wc005]
@@ -438,7 +438,7 @@ Music8_pitchbend: ; 21aee (8:5aee)
 	ld b, a
 	ld a, d
 	and $f
-	call Func_22017
+	call Music8_22017
 	ld b, $0
 	ld hl, wc0a6
 	add hl, bc
@@ -509,7 +509,7 @@ Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	jr nz, Music8_dutycycle ; no
 	call Music8_GetNextMusicByte ; yes
 	push bc
-	call Func_22035
+	call Music8_22035
 	pop bc
 	ld a, [wc003]
 	and a
@@ -586,12 +586,12 @@ Music8_unknownsfx0x20: ; 21bf3
 	or d
 	ld d, a
 	ld b, $1
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], d
 	call Music8_GetNextMusicByte
 	ld d, a
 	ld b, $2
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], d
 	call Music8_GetNextMusicByte
 	ld e, a
@@ -605,10 +605,10 @@ Music8_unknownsfx0x20: ; 21bf3
 .sfxNoiseChannel
 	ld d, a
 	push de
-	call Func_21daa
-	call Func_21d79
+	call Music8_21daa
+	call Music8_21d79
 	pop de
-	call Func_21dcc
+	call Music8_21dcc
 	ret
 
 Music8_unknownsfx0x10: ; 21c40 (8:5c40)
@@ -658,7 +658,7 @@ asm_21c7e
 	and a
 	jr nz, .asm_21c89
 	ld a, d
-	call Func_22035
+	call Music8_22035
 .asm_21c89
 	pop bc
 	pop de
@@ -675,7 +675,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	add hl, bc
 	ld a, [hl]
 	ld l, b
-	call Func_22006
+	call Music8_22006
 	ld a, c
 	cp CH4
 	jr nc, .sfxChannel
@@ -689,7 +689,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	ld e, $0
 	cp CH7
 	jr z, .skip ; if noise channel
-	call Func_21e2f
+	call Music8_21e2f
 	ld a, [wc0ea]
 	ld d, a
 	ld a, [wc0eb]
@@ -700,7 +700,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	ld hl, wc0ce
 	add hl, bc
 	ld l, [hl]
-	call Func_22006
+	call Music8_22006
 	ld e, l
 	ld d, h
 	ld hl, wc0ce
@@ -751,7 +751,7 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	jr .done
 .notSfxChannel3
 	ld b, $2
-	call Func_21ff7
+	call Music8_21ff7
 	ld a, $8
 	ld [hli], a
 	inc hl
@@ -765,13 +765,13 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld hl, wc0d6
 	add hl, bc
 	ld b, [hl]
-	call Func_22017
+	call Music8_22017
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
 	bit 4, [hl]
 	jr z, .asm_21d39
-	call Func_21f4e
+	call Music8_21f4e
 .asm_21d39
 	push de
 	ld a, c
@@ -794,10 +794,10 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	add hl, bc
 	ld d, [hl]
 	ld b, $2
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], d
-	call Func_21daa
-	call Func_21d79
+	call Music8_21daa
+	call Music8_21d79
 	pop de
 	ld b, $0
 	ld hl, wc02e
@@ -811,10 +811,10 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
-	call Func_21dcc
+	call Music8_21dcc
 	ret
 
-Func_21d79: ; 21d79 (8:5d79)
+Music8_21d79: ; 21d79 (8:5d79)
 	ld b, $0
 	ld hl, Unknown_222e6
 	add hl, bc
@@ -848,7 +848,7 @@ Func_21d79: ; 21d79 (8:5d79)
 	ld [$ff25], a
 	ret
 
-Func_21daa: ; 21daa (8:5daa)
+Music8_21daa: ; 21daa (8:5daa)
 	ld b, $0
 	ld hl, wc0b6
 	add hl, bc
@@ -868,11 +868,11 @@ Func_21daa: ; 21daa (8:5daa)
 	ld d, a
 .channel3
 	ld b, $1
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], d
 	ret
 
-Func_21dcc: ; 21dcc (8:5dcc)
+Music8_21dcc: ; 21dcc (8:5dcc)
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -916,18 +916,18 @@ Func_21dcc: ; 21dcc (8:5dcc)
 	and $c7
 	ld d, a
 	ld b, $3
-	call Func_21ff7
+	call Music8_21ff7
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	ld a, c
 	cp CH4
 	jr c, .musicChannel
-	call Func_21e56
+	call Music8_21e56
 .musicChannel
 	ret
 
-Func_21e19: ; 21e19 (8:5e19)
+Music8_21e19: ; 21e19 (8:5e19)
 	ld a, c
 	cp CH4
 	jr nz, .asm_21e2e
@@ -941,10 +941,10 @@ Func_21e19: ; 21e19 (8:5e19)
 .asm_21e2e
 	ret
 
-Func_21e2f: ; 21e2f (8:5e2f)
-	call Func_21e8b
+Music8_21e2f: ; 21e2f (8:5e2f)
+	call Music8_21e8b
 	jr c, .asm_21e39
-	call Func_21e9f
+	call Music8_21e9f
 	jr nc, .asm_21e4c
 .asm_21e39
 	ld d, $0
@@ -965,10 +965,10 @@ Func_21e2f: ; 21e2f (8:5e2f)
 .asm_21e55
 	ret
 
-Func_21e56: ; 21e56 (8:5e56)
-	call Func_21e8b
+Music8_21e56: ; 21e56 (8:5e56)
+	call Music8_21e8b
 	jr c, .asm_21e60
-	call Func_21e9f
+	call Music8_21e9f
 	jr nc, .asm_21e6c
 .asm_21e60
 	ld a, [wc0f1]
@@ -984,8 +984,8 @@ Func_21e56: ; 21e56 (8:5e56)
 .asm_21e6c
 	ret
 
-Func_21e6d: ; 21e6d (8:5e6d)
-	call Func_21e8b
+Music8_21e6d: ; 21e6d (8:5e6d)
+	call Music8_21e8b
 	jr nc, .asm_21e88
 	ld hl, wc006
 	ld e, c
@@ -1007,7 +1007,7 @@ Func_21e6d: ; 21e6d (8:5e6d)
 	ccf
 	ret
 
-Func_21e8b: ; 21e8b (8:5e8b)
+Music8_21e8b: ; 21e8b (8:5e8b)
 	ld a, [wc02a]
 	cp $14
 	jr nc, .asm_21e94
@@ -1024,7 +1024,7 @@ Func_21e8b: ; 21e8b (8:5e8b)
 	scf
 	ret
 
-Func_21e9f: ; 21e9f (8:5e9f)
+Music8_21e9f: ; 21e9f (8:5e9f)
 	ld a, [wc02d]
 	ld b, a
 	ld a, [wc02a]
@@ -1134,7 +1134,7 @@ Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	add hl, bc
 	ld [hl], d
 	ld b, $3
-	call Func_21ff7
+	call Music8_21ff7
 	ld a, e
 	ld [hli], a
 	ld [hl], d
@@ -1146,7 +1146,7 @@ Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	res 5, [hl]
 	ret
 
-Func_21f4e: ; 21f4e (8:5f4e)
+Music8_21f4e: ; 21f4e (8:5f4e)
 	ld hl, wc096
 	add hl, bc
 	ld [hl], d
@@ -1246,7 +1246,7 @@ Music8_ApplyDutyCycle: ; 21fcc (8:5fcc)
 	and $c0
 	ld d, a
 	ld b, $1
-	call Func_21ff7
+	call Music8_21ff7
 	ld a, [hl]
 	and $3f
 	or d
@@ -1271,7 +1271,7 @@ Music8_GetNextMusicByte: ; 21fe4 (8:5fe4)
 	ld [hl], d
 	ret
 
-Func_21ff7: ; 21ff7 (8:5ff7)
+Music8_21ff7: ; 21ff7 (8:5ff7)
 	ld a, c
 	ld hl, Unknown_222d6
 	add l
@@ -1285,7 +1285,7 @@ Func_21ff7: ; 21ff7 (8:5ff7)
 	ld h, $ff
 	ret
 
-Func_22006: ; 22006 (8:6006)
+Music8_22006: ; 22006 (8:6006)
 	ld h, $0
 .loop
 	srl a
@@ -1300,7 +1300,7 @@ Func_22006: ; 22006 (8:6006)
 .done
 	ret
 
-Func_22017: ; 22017 (8:6017)
+Music8_22017: ; 22017 (8:6017)
 	ld h, $0
 	ld l, a
 	add hl, hl
@@ -1325,16 +1325,16 @@ Func_22017: ; 22017 (8:6017)
 	ld d, a
 	ret
 
-Func_22035:: ; 22035 (8:6035)
+Music8_22035:: ; 22035 (8:6035)
 	ld [wc001], a
 	cp $ff
-	jp z, Func_221f3
+	jp z, Music8_221f3
 	cp $e9
-	jp z, Func_2210d
-	jp c, Func_2210d
+	jp z, Music8_2210d
+	jp c, Music8_2210d
 	cp $fe
 	jr z, .asm_2204c
-	jp nc, Func_2210d
+	jp nc, Music8_2210d
 .asm_2204c
 	xor a
 	ld [wc000], a
@@ -1406,9 +1406,9 @@ Func_22035:: ; 22035 (8:6035)
 	ld [$ff1a], a
 	ld a, $77
 	ld [$ff24], a
-	jp Func_2224e
+	jp Music8_2224e
 
-Func_2210d: ; 2210d (8:610d)
+Music8_2210d: ; 2210d (8:610d)
 	ld l, a
 	ld e, a
 	ld h, $0
@@ -1555,11 +1555,11 @@ Func_2210d: ; 2210d (8:610d)
 .asm_221ea
 	ld a, c
 	and a
-	jp z, Func_2224e
+	jp z, Music8_2224e
 	dec c
 	jp .asm_22126
 
-Func_221f3: ; 221f3 (8:61f3)
+Music8_221f3: ; 221f3 (8:61f3)
 	ld a, $80
 	ld [$ff26], a
 	ld [$ff1a], a
@@ -1607,7 +1607,7 @@ FillMusicRAM8: ; 22248 (8:6248)
 	jr nz, .loop
 	ret
 
-Func_2224e: ; 2224e (8:624e)
+Music8_2224e: ; 2224e (8:624e)
 	ld a, [wc001]
 	ld l, a
 	ld e, a

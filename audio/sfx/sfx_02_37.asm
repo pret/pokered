@@ -23,4 +23,3 @@ SFX_02_37_Ch3: ; 87b0 (2:47b0)
 	unknownnoise0x20 15, 215, 60
 	unknownnoise0x20 8, 193, 44
 	endchannel
-; 0x87bd

@@ -156,5 +156,3 @@ Music_MeetMaleTrainer:: ; 7c2f4 (1f:42f4)
 	dw Music_MeetMaleTrainer_Ch2
 	db CH2
 	dw Music_MeetMaleTrainer_Ch3
-
-; 0x7c2fd

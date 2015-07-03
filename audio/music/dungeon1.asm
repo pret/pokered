@@ -673,4 +673,3 @@ Music_Dungeon1_branch_7e202::
 	snare8 4
 	snare9 4
 	endchannel
-; 0x7e20b

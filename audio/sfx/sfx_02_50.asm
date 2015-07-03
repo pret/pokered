@@ -16,4 +16,3 @@ SFX_02_50_Ch1: ; 85ee (2:45ee)
 	unknownnoise0x20 2, 65, 18
 	unknownnoise0x20 2, 0, 0
 	endchannel
-; 0x861f

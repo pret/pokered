@@ -188,4 +188,3 @@ Music_MeetMaleTrainer_branch_7f7ea::
 	D# 1
 	rest 1
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f7ea
-; 0x7f844

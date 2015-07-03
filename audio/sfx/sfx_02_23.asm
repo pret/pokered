@@ -27,4 +27,3 @@ SFX_02_23_Ch3: ; 8927 (2:4927)
 	unknownnoise0x20 8, 183, 92
 	unknownnoise0x20 15, 194, 93
 	endchannel
-; 0x8937

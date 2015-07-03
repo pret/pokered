@@ -29,4 +29,3 @@ SFX_02_unused_Ch3: ; 8719 (2:4719)
 	unknownnoise0x20 12, 125, 76
 	unknownnoise0x20 15, 211, 76
 	endchannel
-; 0x872f

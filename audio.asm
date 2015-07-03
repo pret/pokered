@@ -443,7 +443,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 	ld [wcfc9], a
 	ld a, $ff
 	ld [wMusicHeaderPointer], a
-	ld c, $64
+	ld c, 100
 	call DelayFrames
 	ld c, BANK(Music_Cities1)
 	ld a, MUSIC_CITIES1
@@ -557,7 +557,7 @@ Music8_OverwriteChannelPointer: ; 2231d (8:631d)
 
 SECTION "Audio Engine 3", ROMX, BANK[AUDIO_3]
 
-Func_7d13b:: ; 7d13b (1f:513b)
+PlayPokedexRatingSfx:: ; 7d13b (1f:513b)
 	ld a, [$ffdc]
 	ld c, $0
 	ld hl, OwnedMonValues

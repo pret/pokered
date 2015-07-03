@@ -409,4 +409,3 @@ Music_Celadon_branch_b7c1::
 	F# 2
 	E_ 2
 	loopchannel 0, Music_Celadon_branch_b7c1
-; 0xb86d

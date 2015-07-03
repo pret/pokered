@@ -1855,4 +1855,3 @@ Music_TrainerBattle_branch_22d9c::
 	D_ 2
 	C_ 2
 	loopchannel 0, Music_TrainerBattle_branch_22d9c
-; 0x23099

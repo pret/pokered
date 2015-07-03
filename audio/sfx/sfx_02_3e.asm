@@ -7,4 +7,3 @@ SFX_02_3e_Ch1: ; 84d9 (2:44d9)
 	unknownsfx0x20 15, 242, 0, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x84ee

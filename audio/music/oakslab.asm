@@ -391,4 +391,3 @@ Music_OaksLab_branch_7ef5c::
 	E_ 1
 	rest 3
 	loopchannel 0, Music_OaksLab_branch_7ef5c
-; 0x7f04a

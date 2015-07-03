@@ -336,4 +336,3 @@ Music_SSAnne_Ch3:: ; b4cb (2:74cb)
 	G# 8
 	B_ 8
 	loopchannel 0, Music_SSAnne_Ch3
-; 0xb504

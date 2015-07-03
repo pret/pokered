@@ -19,4 +19,3 @@ SFX_02_14_Ch3: ; 89a5 (2:49a5)
 	unknownnoise0x20 14, 148, 44
 	unknownnoise0x20 8, 129, 28
 	endchannel
-; 0x89af

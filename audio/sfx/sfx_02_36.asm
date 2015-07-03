@@ -22,4 +22,3 @@ SFX_02_36_Ch3: ; 90b9 (2:50b9)
 	unknownnoise0x20 1, 162, 57
 	unknownnoise0x20 8, 145, 73
 	endchannel
-; 0x90c6

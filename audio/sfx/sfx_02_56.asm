@@ -5,4 +5,3 @@ SFX_02_56_Ch1: ; 83e1 (2:43e1)
 	unknownnoise0x20 8, 244, 85
 	unknownnoise0x20 8, 241, 68
 	endchannel
-; 0x83f1

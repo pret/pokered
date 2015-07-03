@@ -754,4 +754,3 @@ Music_Dungeon3_Ch4:: ; 7ece4 (1f:6ce4)
 	rest 16
 	rest 10
 	endchannel
-; 0x7ed0f

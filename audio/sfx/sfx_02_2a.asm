@@ -19,4 +19,3 @@ SFX_02_2a_Ch3: ; 8ce6 (2:4ce6)
 	unknownnoise0x20 4, 230, 60
 	unknownnoise0x20 15, 242, 76
 	endchannel
-; 0x8cf0

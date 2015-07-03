@@ -6,4 +6,3 @@ SFX_02_3c_Ch1: ; 840a (2:440a)
 	unknownsfx0x20 8, 226, 0, 2
 	unknownsfx0x10 8
 	endchannel
-; 0x841b

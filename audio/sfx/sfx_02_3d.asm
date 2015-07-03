@@ -5,4 +5,3 @@ SFX_02_3d_Ch1: ; 84b7 (2:44b7)
 	unknownsfx0x20 15, 242, 80, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x84c6

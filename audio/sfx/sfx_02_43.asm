@@ -6,4 +6,3 @@ SFX_02_43_Ch1: ; 84c6 (2:44c6)
 	unknownsfx0x20 15, 243, 0, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x84d9

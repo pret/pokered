@@ -675,4 +675,3 @@ Music_TitleScreen_branch_7e842::
 	snare2 1
 	rest 3
 	endchannel
-; 0x7e850

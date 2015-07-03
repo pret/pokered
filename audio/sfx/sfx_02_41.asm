@@ -75,4 +75,3 @@ SFX_02_41_Ch3: ; b2f7 (2:72f7)
 	F_ 2
 	rest 2
 	endchannel
-; 0xb316

@@ -28,4 +28,3 @@ SFX_02_17_Ch3: ; 88e4 (2:48e4)
 	unknownnoise0x20 12, 182, 76
 	unknownnoise0x20 15, 162, 92
 	endchannel
-; 0x88f1

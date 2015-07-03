@@ -141,7 +141,7 @@ Music1f_ApplyMusicAffects: ; 7d1ac (1f:51ac)
 .done
 	ld d, a
 	ld b, $3
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], d
 	ret
 
@@ -238,7 +238,7 @@ Music1f_endchannel: ; 7d25a (1f:525a)
 	ld a, c
 	cp CH4
 	jr z, .asm_7d2d9
-	call Func_7d73b
+	call Music1f_7d73b
 	ret c
 .asm_7d2d9
 	ld a, [wc005]
@@ -431,7 +431,7 @@ Music1f_pitchbend: ; 7d3e1 (1f:53e1)
 	ld b, a
 	ld a, d
 	and $f
-	call Func_7d8cc
+	call Music1f_7d8cc
 	ld b, $0
 	ld hl, wc0a6
 	add hl, bc
@@ -502,7 +502,7 @@ Music1f_unknownmusic0xef: ; 7d47b (1f:547b)
 	jr nz, Music1f_dutycycle ; no
 	call Music1f_GetNextMusicByte ; yes
 	push bc
-	call Func_7d8ea
+	call Music1f_7d8ea
 	pop bc
 	ld a, [wc003]
 	and a
@@ -579,12 +579,12 @@ Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	or d
 	ld d, a
 	ld b, $1
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], d
 	call Music1f_GetNextMusicByte
 	ld d, a
 	ld b, $2
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], d
 	call Music1f_GetNextMusicByte
 	ld e, a
@@ -598,13 +598,13 @@ Music1f_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 .sfxNoiseChannel
 	ld d, a
 	push de
-	call Func_7d69d
-	call Func_7d66c
+	call Music1f_7d69d
+	call Music1f_7d66c
 	pop de
-	call Func_7d6bf
+	call Music1f_7d6bf
 	ret
 
-Music1f_unknownsfx0x10 ; 7d533 (1f:5533)
+Music1f_unknownsfx0x10: ; 7d533 (1f:5533)
 	ld a, c
 	cp CH4
 	jr c, Music1f_note ; if not a sfx
@@ -651,7 +651,7 @@ asm_7d571
 	and a
 	jr nz, .asm_7d57c
 	ld a, d
-	call Func_7d8ea
+	call Music1f_7d8ea
 .asm_7d57c
 	pop bc
 	pop de
@@ -668,7 +668,7 @@ Music1f_notelength: ; 7d57e (1f:557e)
 	add hl, bc
 	ld a, [hl]
 	ld l, b
-	call Func_7d8bb
+	call Music1f_7d8bb
 	ld a, c
 	cp CH4
 	jr nc, .sfxChannel
@@ -682,7 +682,7 @@ Music1f_notelength: ; 7d57e (1f:557e)
 	ld e, $0
 	cp CH7
 	jr z, .skip ; if noise channel
-	call Func_7d707
+	call Music1f_7d707
 	ld a, [wc0ea]
 	ld d, a
 	ld a, [wc0eb]
@@ -693,7 +693,7 @@ Music1f_notelength: ; 7d57e (1f:557e)
 	ld hl, wc0ce
 	add hl, bc
 	ld l, [hl]
-	call Func_7d8bb
+	call Music1f_7d8bb
 	ld e, l
 	ld d, h
 	ld hl, wc0ce
@@ -744,7 +744,7 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	jr .quit
 .notSfxChannel3
 	ld b, $2
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld a, $8
 	ld [hli], a
 	inc hl
@@ -758,13 +758,13 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	ld hl, wc0d6
 	add hl, bc
 	ld b, [hl]
-	call Func_7d8cc
+	call Music1f_7d8cc
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
 	bit 4, [hl]
 	jr z, .asm_7d62c
-	call Func_7d803
+	call Music1f_7d803
 .asm_7d62c
 	push de
 	ld a, c
@@ -787,10 +787,10 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	add hl, bc
 	ld d, [hl]
 	ld b, $2
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], d
-	call Func_7d69d
-	call Func_7d66c
+	call Music1f_7d69d
+	call Music1f_7d66c
 	pop de
 	ld b, $0
 	ld hl, wc02e
@@ -804,10 +804,10 @@ Music1f_notepitch: ; 7d5dc (1f:55dc)
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
-	call Func_7d6bf
+	call Music1f_7d6bf
 	ret
 
-Func_7d66c: ; 7d66c (1f:566c)
+Music1f_7d66c: ; 7d66c (1f:566c)
 	ld b, $0
 	ld hl, Unknown_7db9b
 	add hl, bc
@@ -841,7 +841,7 @@ Func_7d66c: ; 7d66c (1f:566c)
 	ld [$ff25], a
 	ret
 
-Func_7d69d: ; 7d69d (1f:569d)
+Music1f_7d69d: ; 7d69d (1f:569d)
 	ld b, $0
 	ld hl, wc0b6
 	add hl, bc
@@ -861,11 +861,11 @@ Func_7d69d: ; 7d69d (1f:569d)
 	ld d, a
 .channel3
 	ld b, $1
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], d
 	ret
 
-Func_7d6bf: ; 7d6bf (1f:56bf)
+Music1f_7d6bf: ; 7d6bf (1f:56bf)
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -909,15 +909,15 @@ Func_7d6bf: ; 7d6bf (1f:56bf)
 	and $c7
 	ld d, a
 	ld b, $3
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	call Func_7d729
+	call Music1f_7d729
 	ret
 
-Func_7d707: ; 7d707 (1f:5707)
-	call Func_7d759
+Music1f_7d707: ; 7d707 (1f:5707)
+	call Music1f_7d759
 	jr nc, .asm_7d71f
 	ld d, $0
 	ld a, [wc0f2]
@@ -937,8 +937,8 @@ Func_7d707: ; 7d707 (1f:5707)
 .asm_7d728
 	ret
 
-Func_7d729: ; 7d729 (1f:5729)
-	call Func_7d759
+Music1f_7d729: ; 7d729 (1f:5729)
+	call Music1f_7d759
 	jr nc, .asm_7d73a
 	ld a, [wc0f1]
 	add e
@@ -953,8 +953,8 @@ Func_7d729: ; 7d729 (1f:5729)
 .asm_7d73a
 	ret
 
-Func_7d73b: ; 7d73b (1f:573b)
-	call Func_7d759
+Music1f_7d73b: ; 7d73b (1f:573b)
+	call Music1f_7d759
 	jr nc, .asm_7d756
 	ld hl, wc006
 	ld e, c
@@ -976,7 +976,7 @@ Func_7d73b: ; 7d73b (1f:573b)
 	ccf
 	ret
 
-Func_7d759: ; 7d759 (1f:5759)
+Music1f_7d759: ; 7d759 (1f:5759)
 	ld a, [wc02a]
 	cp $14
 	jr nc, .asm_7d762
@@ -1083,7 +1083,7 @@ Music1f_ApplyPitchBend: ; 7d76d (1f:576d)
 	add hl, bc
 	ld [hl], d
 	ld b, $3
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld a, e
 	ld [hli], a
 	ld [hl], d
@@ -1095,7 +1095,7 @@ Music1f_ApplyPitchBend: ; 7d76d (1f:576d)
 	res 5, [hl]
 	ret
 
-Func_7d803: ; 7d803 (1f:5803)
+Music1f_7d803: ; 7d803 (1f:5803)
 	ld hl, wc096
 	add hl, bc
 	ld [hl], d
@@ -1195,7 +1195,7 @@ Music1f_ApplyDutyCycle: ; 7d881 (1f:5881)
 	and $c0
 	ld d, a
 	ld b, $1
-	call Func_7d8ac
+	call Music1f_7d8ac
 	ld a, [hl]
 	and $3f
 	or d
@@ -1220,7 +1220,7 @@ Music1f_GetNextMusicByte: ; 7d899 (1f:5899)
 	ld [hl], d
 	ret
 
-Func_7d8ac: ; 7d8ac (1f:58ac)
+Music1f_7d8ac: ; 7d8ac (1f:58ac)
 	ld a, c
 	ld hl, Unknown_7db8b
 	add l
@@ -1234,7 +1234,7 @@ Func_7d8ac: ; 7d8ac (1f:58ac)
 	ld h, $ff
 	ret
 
-Func_7d8bb: ; 7d8bb (1f:58bb)
+Music1f_7d8bb: ; 7d8bb (1f:58bb)
 	ld h, $0
 .loop
 	srl a
@@ -1249,7 +1249,7 @@ Func_7d8bb: ; 7d8bb (1f:58bb)
 .done
 	ret
 
-Func_7d8cc: ; 7d8cc (1f:58cc)
+Music1f_7d8cc: ; 7d8cc (1f:58cc)
 	ld h, $0
 	ld l, a
 	add hl, hl
@@ -1274,16 +1274,16 @@ Func_7d8cc: ; 7d8cc (1f:58cc)
 	ld d, a
 	ret
 
-Func_7d8ea:: ; 7d8ea (1f:58ea)
+Music1f_7d8ea:: ; 7d8ea (1f:58ea)
 	ld [wc001], a
 	cp $ff
-	jp z, Func_7daa8
+	jp z, Music1f_7daa8
 	cp $c2
-	jp z, Func_7d9c2
-	jp c, Func_7d9c2
+	jp z, Music1f_7d9c2
+	jp c, Music1f_7d9c2
 	cp $fe
 	jr z, .asm_7d901
-	jp nc, Func_7d9c2
+	jp nc, Music1f_7d9c2
 .asm_7d901
 	xor a
 	ld [wc000], a
@@ -1355,9 +1355,9 @@ Func_7d8ea:: ; 7d8ea (1f:58ea)
 	ld [$ff1a], a
 	ld a, $77
 	ld [$ff24], a
-	jp Func_7db03
+	jp Music1f_7db03
 
-Func_7d9c2: ; 7d9c2 (1f:59c2)
+Music1f_7d9c2: ; 7d9c2 (1f:59c2)
 	ld l, a
 	ld e, a
 	ld h, $0
@@ -1504,11 +1504,11 @@ Func_7d9c2: ; 7d9c2 (1f:59c2)
 .asm_7da9f
 	ld a, c
 	and a
-	jp z, Func_7db03
+	jp z, Music1f_7db03
 	dec c
 	jp .asm_7d9db
 
-Func_7daa8: ; 7daa8 (1f:5aa8)
+Music1f_7daa8: ; 7daa8 (1f:5aa8)
 	ld a, $80
 	ld [$ff26], a
 	ld [$ff1a], a
@@ -1556,7 +1556,7 @@ FillMusicRAM1f: ; 7dafd (1f:5afd)
 	jr nz, .loop
 	ret
 
-Func_7db03: ; 7db03 (1f:5b03)
+Music1f_7db03: ; 7db03 (1f:5b03)
 	ld a, [wc001]
 	ld l, a
 	ld e, a

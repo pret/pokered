@@ -4,4 +4,3 @@ SFX_02_4d_Ch1: ; 85cb (2:45cb)
 	unknownsfx0x20 15, 210, 0, 5
 	unknownsfx0x10 8
 	endchannel
-; 0x85d6

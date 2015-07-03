@@ -10,4 +10,3 @@ SFX_02_55_Ch1: ; 86ab (2:46ab)
 	unknownsfx0x20 15, 226, 0, 7
 	unknownsfx0x10 8
 	endchannel
-; 0x86c8

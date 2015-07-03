@@ -31,4 +31,3 @@ SFX_02_38_Ch3: ; 8803 (2:4803)
 	unknownnoise0x20 12, 183, 76
 	unknownnoise0x20 15, 162, 92
 	endchannel
-; 0x8813

@@ -22,4 +22,3 @@ SFX_02_15_Ch3: ; 8bbd (2:4bbd)
 	unknownnoise0x20 3, 130, 28
 	unknownnoise0x20 8, 113, 44
 	endchannel
-; 0x8bca

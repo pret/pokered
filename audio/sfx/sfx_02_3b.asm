@@ -67,4 +67,3 @@ SFX_02_3b_Ch3: ; b34d (2:734d)
 	rest 1
 	A_ 8
 	endchannel
-; 0xb362

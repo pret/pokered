@@ -11,4 +11,3 @@ SFX_02_5a_Ch2: ; 8438 (2:4438)
 	unknownsfx0x20 4, 145, 193, 6
 	unknownsfx0x20 8, 162, 161, 7
 	endchannel
-; 0x8447

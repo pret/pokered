@@ -482,4 +482,3 @@ Music_YellowIntro_Ch3:: ; 7f749 (1f:7749)
 	E_ 1
 	rest 15
 	endchannel
-; 0x7f860
