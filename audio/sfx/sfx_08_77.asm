@@ -7,4 +7,3 @@ SFX_08_77_Ch1: ; 20412 (8:4412)
 	unknownsfx0x20 10, 225, 224, 7
 	unknownsfx0x20 1, 0, 0, 0
 	endchannel
-; 0x2042d

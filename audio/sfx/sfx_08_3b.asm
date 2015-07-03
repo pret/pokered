@@ -67,4 +67,3 @@ SFX_08_3b_Ch3: ; 239fe (8:79fe)
 	rest 1
 	A_ 8
 	endchannel
-; 0x23a13

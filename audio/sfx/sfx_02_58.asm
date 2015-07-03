@@ -9,4 +9,3 @@ SFX_02_58_Ch2: ; 83ff (2:43ff)
 	unknownsfx0x20 2, 8, 0, 0
 	unknownsfx0x20 8, 177, 65, 7
 	endchannel
-; 0x840a

@@ -307,4 +307,3 @@ Music_MeetJessieJames_branch_83235::
 	rest 1
 	loopchannel 0, Music_MeetJessieJames_branch_83235
 	endchannel
-; 0x832ba

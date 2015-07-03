@@ -16,4 +16,3 @@ SFX_1f_2d_Ch2: ; 7cd2a (1f:4d2a)
 
 SFX_1f_2d_Ch3: ; 7cd3c (1f:4d3c)
 	endchannel
-; 0x7cd3d

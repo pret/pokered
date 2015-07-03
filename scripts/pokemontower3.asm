@@ -23,44 +23,44 @@ PokemonTower3TrainerHeader0: ; 606ed (18:46ed)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd765 ; flag's byte
-	dw PokemonTower3BattleText1 ; 0x4730 TextBeforeBattle
-	dw PokemonTower3AfterBattleText1 ; 0x473a TextAfterBattle
-	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
-	dw PokemonTower3EndBattleText1 ; 0x4735 TextEndBattle
+	dw PokemonTower3BattleText1 ; TextBeforeBattle
+	dw PokemonTower3AfterBattleText1 ; TextAfterBattle
+	dw PokemonTower3EndBattleText1 ; TextEndBattle
+	dw PokemonTower3EndBattleText1 ; TextEndBattle
 
 PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd765 ; flag's byte
-	dw PokemonTower3BattleText2 ; 0x473f TextBeforeBattle
-	dw PokemonTower3AfterBattleText2 ; 0x4749 TextAfterBattle
-	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
-	dw PokemonTower3EndBattleText2 ; 0x4744 TextEndBattle
+	dw PokemonTower3BattleText2 ; TextBeforeBattle
+	dw PokemonTower3AfterBattleText2 ; TextAfterBattle
+	dw PokemonTower3EndBattleText2 ; TextEndBattle
+	dw PokemonTower3EndBattleText2 ; TextEndBattle
 
 PokemonTower3TrainerHeader2: ; 60705 (18:4705)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd765 ; flag's byte
-	dw PokemonTower3BattleText3 ; 0x474e TextBeforeBattle
-	dw PokemonTower3AfterBattleText3 ; 0x4758 TextAfterBattle
-	dw PokemonTower3EndBattleText3 ; 0x4753 TextEndBattle
-	dw PokemonTower3EndBattleText3 ; 0x4753 TextEndBattle
+	dw PokemonTower3BattleText3 ; TextBeforeBattle
+	dw PokemonTower3AfterBattleText3 ; TextAfterBattle
+	dw PokemonTower3EndBattleText3 ; TextEndBattle
+	dw PokemonTower3EndBattleText3 ; TextEndBattle
 	db $ff
 
 PokemonTower3Text1: ; 60712 (18:4712)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower3Text2: ; 6071c (18:471c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower3Text3: ; 60726 (18:4726)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

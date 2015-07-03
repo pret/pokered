@@ -12,7 +12,7 @@ FocusEnergyEffect_: ; 27f86 (9:7f86)
 	ld hl, GettingPumpedText
 	jp PrintText
 .alreadyUsing
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld hl, PrintButItFailedText_
 	ld b, BANK(PrintButItFailedText_)

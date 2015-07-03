@@ -6,4 +6,3 @@ SFX_08_3c_Ch1: ; 203dd (8:43dd)
 	unknownsfx0x20 8, 226, 0, 2
 	unknownsfx0x10 8
 	endchannel
-; 0x203ee

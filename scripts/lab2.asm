@@ -11,15 +11,15 @@ Lab2Text1: ; 75c2a (1d:5c2a)
 	db "@"
 
 Lab2Text2: ; 75c2f (1d:5c2f)
-	db $8
+	TX_ASM
 	ld a, $7
 	ld [wWhichTrade], a
-	jr asm_78552 ; 0x75c35 $6
+	jr Lab2DoTrade
 
 Lab2Text3: ; 75c37 (1d:5c37)
-	db $8
+	TX_ASM
 	ld a, $8
 	ld [wWhichTrade], a
-asm_78552: ; 75c3d (1d:5c3d)
+Lab2DoTrade: ; 75c3d (1d:5c3d)
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd

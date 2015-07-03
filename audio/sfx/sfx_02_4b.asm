@@ -8,4 +8,3 @@ SFX_02_4b_Ch1: ; 8595 (2:4595)
 	unknownsfx0x20 15, 23, 0, 7
 	unknownsfx0x10 8
 	endchannel
-; 0x85b0

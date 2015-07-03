@@ -8,18 +8,18 @@ CeruleanHouseTrashedTextPointers: ; 1d689 (7:5689)
 	dw CeruleanHouseTrashedText3
 
 CeruleanHouseTrashedText1: ; 1d68f (7:568f)
-	db $08 ; asm
+	TX_ASM
 	ld b, $e4
 	predef IsItemInBag_
 	and b
-	jr z, .asm_f8734 ; 0x1d698
+	jr z, .asm_f8734
 	ld hl, CeruleanHouseTrashedText_1d6b0
 	call PrintText
-	jr .asm_8dfe9 ; 0x1d6a0
-.asm_f8734 ; 0x1d6a2
+	jr .asm_8dfe9
+.asm_f8734
 	ld hl, CeruleanHouseTrashedText_1d6ab
 	call PrintText
-.asm_8dfe9 ; 0x1d6a8
+.asm_8dfe9
 	jp TextScriptEnd
 
 CeruleanHouseTrashedText_1d6ab: ; 1d6ab (7:56ab)

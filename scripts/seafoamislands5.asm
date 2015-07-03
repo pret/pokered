@@ -146,15 +146,15 @@ SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd882 ; flag's byte
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextBeforeBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextAfterBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
+	dw SeafoamIslands5BattleText2 ; TextBeforeBattle
+	dw SeafoamIslands5BattleText2 ; TextAfterBattle
+	dw SeafoamIslands5BattleText2 ; TextEndBattle
+	dw SeafoamIslands5BattleText2 ; TextEndBattle
 
 	db $ff
 
 SeafoamIslands5Text3: ; 46893 (11:6893)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SeafoamIslands5TrainerHeader0
 	call TalkToTrainer
 	ld a, $4
@@ -163,7 +163,7 @@ SeafoamIslands5Text3: ; 46893 (11:6893)
 
 SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
 	TX_FAR _SeafoamIslands5BattleText2
-	db $8
+	TX_ASM
 	ld a, ARTICUNO
 	call PlayCry
 	call WaitForSoundToFinish

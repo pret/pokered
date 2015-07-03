@@ -6,4 +6,3 @@ SFX_1f_05_Ch1: ; 7c30d (1f:430d)
 	unknownnoise0x20 3, 130, 51
 	unknownnoise0x20 2, 129, 50
 	endchannel
-; 0x7c320

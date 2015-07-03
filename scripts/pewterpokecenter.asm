@@ -16,16 +16,16 @@ PewterPokecenterText2: ; 5c596 (17:4596)
 	db "@"
 
 PewterPokecenterText3: ; 5c59b (17:459b)
-	db $8
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, PewterPokecenterText5
 	call PrintText
 	ld a, $ff
 	call PlaySound
-	ld c, $20
+	ld c, 32
 	call DelayFrames
-	ld hl, Unknown_5c608 ; $4608
+	ld hl, JigglypuffFacingDirections
 	ld de, wTrainerFacingDirection
 	ld bc, $0004
 	call CopyData
@@ -34,7 +34,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 .asm_5c5c3
 	cp [hl]
 	inc hl
-	jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
+	jr nz, .asm_5c5c3
 	dec hl
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
@@ -52,14 +52,14 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	ld a, [wTrainerEngageDistance]
 	ld [wcd42], a
 	pop hl
-	ld c, $18
+	ld c, 24
 	call DelayFrames
 	ld a, [wc026]
 	ld b, a
 	ld a, [wc027]
 	or b
-	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
-	ld c, $30
+	jr nz, .asm_5c5d1
+	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic
 	jp TextScriptEnd
@@ -68,8 +68,11 @@ PewterPokecenterText5: ; 5c603 (17:4603)
 	TX_FAR _PewterPokecenterText5
 	db "@"
 
-Unknown_5c608: ; 5c608 (17:4608)
-	db $30, $38, $34, $3c
+JigglypuffFacingDirections: ; 5c608 (17:4608)
+	db $30 | SPRITE_FACING_DOWN
+	db $30 | SPRITE_FACING_LEFT
+	db $30 | SPRITE_FACING_UP
+	db $30 | SPRITE_FACING_RIGHT
 
 PewterPokecenterText4: ; 5c60c (17:460c)
 	db $f6

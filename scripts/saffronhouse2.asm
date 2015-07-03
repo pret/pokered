@@ -5,10 +5,10 @@ SaffronHouse2TextPointers: ; 1de3f (7:5e3f)
 	dw SaffronHouse2Text1
 
 SaffronHouse2Text1: ; 1de41 (7:5e41)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7bd]
 	bit 0, a
-	jr nz, .asm_9e72b ; 0x1de47
+	jr nz, .asm_9e72b
 	ld hl, TM29PreReceiveText
 	call PrintText
 	ld bc,(TM_29 << 8) | 1
@@ -18,15 +18,15 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	call PrintText
 	ld hl, wd7bd
 	set 0, [hl]
-	jr .asm_fe4e1 ; 0x1de62
+	jr .asm_fe4e1
 .BagFull
 	ld hl, TM29NoRoomText
 	call PrintText
-	jr .asm_fe4e1 ; 0x1de6a
-.asm_9e72b ; 0x1de6c
+	jr .asm_fe4e1
+.asm_9e72b
 	ld hl, TM29ExplanationText
 	call PrintText
-.asm_fe4e1 ; 0x1de72
+.asm_fe4e1
 	jp TextScriptEnd
 
 TM29PreReceiveText: ; 1de75 (7:5e75)

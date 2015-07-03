@@ -4,7 +4,7 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	ld a, [H_WHOSETURN]
 	and a
 	jp z, .next
-	ld hl, wBattleMonStatus 
+	ld hl, wBattleMonStatus
 	ld de, W_ENEMYMOVETYPE
 .next
 	ld a, [hl]
@@ -28,7 +28,7 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	push hl
 	callab MoveHitTest
 	pop hl
-	ld a, [W_MOVEMISSED] 
+	ld a, [W_MOVEMISSED]
 	and a
 	jr nz, .didntAffect
 	set PAR, [hl]

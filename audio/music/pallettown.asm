@@ -312,4 +312,3 @@ Music_PalletTown_branch_a8e3::
 	F# 8
 	loopchannel 0, Music_PalletTown_branch_a8e3
 	endchannel
-; 0xa913

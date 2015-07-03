@@ -40,29 +40,29 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 SafariZoneCheck: ; 1e988 (7:6988)
 	ld hl, wd790
 	bit 7, [hl]
-	jr z, asm_1e9ab
-	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
+	jr z, SafariZoneGameOver
+	ld a, [W_NUMSAFARIBALLS]
 	and a
-	jr z, asm_1e9b0
-	jr asm_1e9ab
+	jr z, SafariZoneGameStillGoing
+	jr SafariZoneGameOver
 
 SafariZoneCheckSteps: ; 1e997 (7:6997)
-	ld a, [wSafariSteps] ; wd70d
+	ld a, [wSafariSteps]
 	ld b, a
-	ld a, [wSafariSteps + 1] ; wd70e
+	ld a, [wSafariSteps + 1]
 	ld c, a
 	or b
-	jr z, asm_1e9b0
+	jr z, SafariZoneGameStillGoing
 	dec bc
 	ld a, b
-	ld [wSafariSteps], a ; wd70d
+	ld [wSafariSteps], a
 	ld a, c
-	ld [wSafariSteps + 1], a ; wd70e
-asm_1e9ab: ; 1e9ab (7:69ab)
+	ld [wSafariSteps + 1], a
+SafariZoneGameOver: ; 1e9ab (7:69ab)
 	xor a
 	ld [wSafariZoneGameOver], a
 	ret
-asm_1e9b0: ; 1e9b0 (7:69b0)
+SafariZoneGameStillGoing: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
 	xor a
 	ld [wMusicHeaderPointer], a
@@ -76,12 +76,12 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	cp $b9
 	jr nz, .asm_1e9c2
 	ld a, $d3
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	xor a
 	ld [wd528], a
 	ld a, SAFARI_ZONE_ENTRANCE
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
@@ -99,8 +99,8 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 	jp PrintText
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
-	db $08 ; asm
-	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
+	TX_ASM
+	ld a, [W_NUMSAFARIBALLS]
 	and a
 	jr z, .asm_1ea04
 	ld hl, TimesUpText
@@ -127,10 +127,10 @@ PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 	jp PrintPredefTextID
 
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
-	db $08 ; asm
+	TX_ASM
 	xor a
 	ld [wda38], a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	push af
 	and $f
 	ld [$ffdb], a
@@ -200,7 +200,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call YesNoChoice
 	ld a, [$ffdc]
 	ld c, a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	cp c
 	jr nz, .asm_1eab8
 	ld hl, wd126
@@ -267,7 +267,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, CinnabarGymGateCoords ; $6b48
+	ld hl, CinnabarGymGateCoords
 	add hl, de
 	ld a, [hli]
 	ld b, [hl]
@@ -337,22 +337,22 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $2e
 	call PrintPredefTextID
-	ld c, $20
+	ld c, 32
 	call DelayFrames
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld c, $50
+	ld c, 80
 	call DelayFrames
 	ld a, (SFX_02_48 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld c, $30
+	ld c, 48
 	call DelayFrames
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld c, $20
+	ld c, 32
 	call DelayFrames
 	ld a, (SFX_02_3a - SFX_Headers_02) / 3
 	call PlaySound
@@ -375,21 +375,21 @@ BillsHouseMonitorText: ; 1ebdd (7:6bdd)
 BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	TX_FAR _BillsHouseInitiatedText
 	db $06
-	db $08 ; asm
+	TX_ASM
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
-	ld c, $10
+	ld c, 16
 	call DelayFrames
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld c, $3c
+	ld c, 60
 	call DelayFrames
 	jp TextScriptEnd
 
 BillsHousePokemonList: ; 1ec05 (7:6c05)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
 	call PrintText

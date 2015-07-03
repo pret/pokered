@@ -45,4 +45,3 @@ SFX_08_76_Ch3: ; 20980 (8:4980)
 	unknownnoise0x20 1, 209, 41
 	loopchannel 26, SFX_08_76_Ch3
 	endchannel
-; 0x2098b

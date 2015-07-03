@@ -45,4 +45,3 @@ Music_PkmnHealed_Ch3:: ; 9bd2 (2:5bd2)
 	E_ 6
 	rest 2
 	endchannel
-; 0x9bde

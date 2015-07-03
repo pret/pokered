@@ -20,4 +20,3 @@ SFX_02_54_Ch2: ; 868c (2:468c)
 	unknownsfx0x20 15, 240, 130, 4
 	unknownsfx0x20 15, 242, 130, 4
 	endchannel
-; 0x86ab

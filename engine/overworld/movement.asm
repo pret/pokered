@@ -22,7 +22,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 .lowerLeftTileIsMapTile
 	call DetectCollisionBetweenSprites
 	ld h, $c1
-	ld a, [wWalkCounter] ; wcfc5
+	ld a, [wWalkCounter]
 	and a
 	jr nz, .asm_4e90
 	ld a, [wd528]
@@ -108,7 +108,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	swap a
 	dec a
 	add a
-	ld hl, W_MAPSPRITEDATA ; wd4e4
+	ld hl, W_MAPSPRITEDATA
 	add l
 	ld l, a
 	ld a, [hl]        ; read movement byte 2
@@ -138,7 +138,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	jp z, UpdateSpriteMovementDelay  ; c1x1 == 2
 	cp $3
 	jp z, UpdateSpriteInWalkingAnimation  ; c1x1 == 3
-	ld a, [wWalkCounter] ; wcfc5
+	ld a, [wWalkCounter]
 	and a
 	ret nz           ; don't do anything yet if player is currently moving (redundant, already tested in CheckSpriteAvailability)
 	call InitializeSpriteScreenPosition
@@ -212,7 +212,7 @@ Func_4ed1: ; 4ed1 (1:4ed1)
 	cp $2
 	jr z, .moveRight   ; movement byte 2 = $2 only allows left or right
 .moveUp
-	ld de, -2*20 ; $ffd8
+	ld de, -2*20
 	add hl, de         ; move tile pointer two rows up
 	ld de, $ff00
 	ld bc, $804
@@ -440,7 +440,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [W_YCOORD] ; wd361
+	ld a, [W_YCOORD]
 	ld b, a
 	ld a, [hl]      ; c2x4 (Y position + 4)
 	sub b           ; relative to player position
@@ -449,7 +449,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	dec h
 	ld [hli], a     ; c1x4 (screen Y position)
 	inc h
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld b, a
 	ld a, [hli]     ; c2x6 (X position + 4)
 	sub b           ; relative to player position
@@ -475,7 +475,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	add $4
 	ld l, a
 	ld b, [hl]      ; c2x4: Y pos (+4)
-	ld a, [W_YCOORD] ; wd361
+	ld a, [W_YCOORD]
 	cp b
 	jr z, .skipYVisibilityTest
 	jr nc, .spriteInvisible ; above screen region
@@ -485,7 +485,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .skipYVisibilityTest
 	inc l
 	ld b, [hl]      ; c2x5: X pos (+4)
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	cp b
 	jr z, .skipXVisibilityTest
 	jr nc, .spriteInvisible ; left of screen region
@@ -503,7 +503,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	ld a, [hld]
 	cp d
 	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom right tile)
-	ld bc, -20 ; $ffec
+	ld bc, -20
 	add hl, bc              ; go back one row of tiles
 	ld a, [hli]
 	cp d
@@ -521,7 +521,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	jr .done
 .spriteVisible
 	ld c, a
-	ld a, [wWalkCounter] ; wcfc5
+	ld a, [wWalkCounter]
 	and a
 	jr nz, .done           ; if player is currently walking, we're done
 	call UpdateSpriteImage

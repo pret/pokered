@@ -8,7 +8,7 @@ PewterHouse1TextPointers: ; 1d5f6 (7:55f6)
 
 PewterHouse1Text1: ; 1d5fc (7:55fc)
 	TX_FAR _PewterHouse1Text1
-	db $08 ; asm
+	TX_ASM
 	ld a, NIDORAN_M
 	call PlayCry
 	call WaitForSoundToFinish

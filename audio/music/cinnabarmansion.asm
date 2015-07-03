@@ -170,4 +170,3 @@ Music_CinnabarMansion_branch_7edb5::
 	rest 8
 	cymbal3 8
 	loopchannel 0, Music_CinnabarMansion_branch_7edb5
-; 0x7edda

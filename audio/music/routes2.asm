@@ -423,4 +423,3 @@ Music_Routes2_Ch4:: ; 9f08 (2:5f08)
 	rest 3
 	loopchannel 0, Music_Routes2_Ch4
 	endchannel
-; 0x9fad

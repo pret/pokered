@@ -26,60 +26,60 @@ Route6TrainerHeader0: ; 590d7 (16:50d7)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText1 ; 0x512a TextBeforeBattle
-	dw Route6AfterBattleText1 ; 0x5134 TextAfterBattle
-	dw Route6EndBattleText1 ; 0x512f TextEndBattle
-	dw Route6EndBattleText1 ; 0x512f TextEndBattle
+	dw Route6BattleText1 ; TextBeforeBattle
+	dw Route6AfterBattleText1 ; TextAfterBattle
+	dw Route6EndBattleText1 ; TextEndBattle
+	dw Route6EndBattleText1 ; TextEndBattle
 
 Route6TrainerHeader1: ; 590e3 (16:50e3)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText2 ; 0x5143 TextBeforeBattle
-	dw Route6AfterBattleText1 ; 0x5134 TextAfterBattle
-	dw Route6EndBattleText2 ; 0x5148 TextEndBattle
-	dw Route6EndBattleText2 ; 0x5148 TextEndBattle
+	dw Route6BattleText2 ; TextBeforeBattle
+	dw Route6AfterBattleText1 ; TextAfterBattle
+	dw Route6EndBattleText2 ; TextEndBattle
+	dw Route6EndBattleText2 ; TextEndBattle
 
 Route6TrainerHeader2: ; 590ef (16:50ef)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText3 ; 0x5157 TextBeforeBattle
-	dw Route6AfterBattleText3 ; 0x5161 TextAfterBattle
-	dw Route6EndBattleText3 ; 0x515c TextEndBattle
-	dw Route6EndBattleText3 ; 0x515c TextEndBattle
+	dw Route6BattleText3 ; TextBeforeBattle
+	dw Route6AfterBattleText3 ; TextAfterBattle
+	dw Route6EndBattleText3 ; TextEndBattle
+	dw Route6EndBattleText3 ; TextEndBattle
 
 Route6TrainerHeader3: ; 590fb (16:50fb)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText4 ; 0x5170 TextBeforeBattle
-	dw Route6AfterBattleText4 ; 0x517a TextAfterBattle
-	dw Route6EndBattleText4 ; 0x5175 TextEndBattle
-	dw Route6EndBattleText4 ; 0x5175 TextEndBattle
+	dw Route6BattleText4 ; TextBeforeBattle
+	dw Route6AfterBattleText4 ; TextAfterBattle
+	dw Route6EndBattleText4 ; TextEndBattle
+	dw Route6EndBattleText4 ; TextEndBattle
 
 Route6TrainerHeader4: ; 59107 (16:5107)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText5 ; 0x5189 TextBeforeBattle
-	dw Route6AfterBattleText5 ; 0x5193 TextAfterBattle
-	dw Route6EndBattleText5 ; 0x518e TextEndBattle
-	dw Route6EndBattleText5 ; 0x518e TextEndBattle
+	dw Route6BattleText5 ; TextBeforeBattle
+	dw Route6AfterBattleText5 ; TextAfterBattle
+	dw Route6EndBattleText5 ; TextEndBattle
+	dw Route6EndBattleText5 ; TextEndBattle
 
 Route6TrainerHeader5: ; 59113 (16:5113)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c9 ; flag's byte
-	dw Route6BattleText6 ; 0x51a2 TextBeforeBattle
-	dw Route6AfterBattleText6 ; 0x51ac TextAfterBattle
-	dw Route6EndBattleText6 ; 0x51a7 TextEndBattle
-	dw Route6EndBattleText6 ; 0x51a7 TextEndBattle
+	dw Route6BattleText6 ; TextBeforeBattle
+	dw Route6AfterBattleText6 ; TextAfterBattle
+	dw Route6EndBattleText6 ; TextEndBattle
+	dw Route6EndBattleText6 ; TextEndBattle
 
 	db $ff
 
 Route6Text1: ; 59120 (16:5120)
-	db $8
+	TX_ASM
 	ld hl, Route6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -97,7 +97,7 @@ Route6AfterBattleText1: ; 59134 (16:5134)
 	db "@"
 
 Route6Text2: ; 59139 (16:5139)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route6TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -111,7 +111,7 @@ Route6EndBattleText2: ; 59148 (16:5148)
 	db "@"
 
 Route6Text3: ; 5914d (16:514d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -129,7 +129,7 @@ Route6AfterBattleText3: ; 59161 (16:5161)
 	db "@"
 
 Route6Text4: ; 59166 (16:5166)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route6TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -147,7 +147,7 @@ Route6AfterBattleText4: ; 5917a (16:517a)
 	db "@"
 
 Route6Text5: ; 5917f (16:517f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route6TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -165,7 +165,7 @@ Route6AfterBattleText5: ; 59193 (16:5193)
 	db "@"
 
 Route6Text6: ; 59198 (16:5198)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route6TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd

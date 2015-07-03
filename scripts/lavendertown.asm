@@ -13,16 +13,16 @@ LavenderTownTextPointers: ; 4410e (11:410e)
 	dw LavenderTownText9
 
 LavenderTownText1: ; 44120 (11:4120)
-	db $08 ; asm
+	TX_ASM
 	ld hl, LavenderTownText_4413c
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, LavenderTownText_44146
-	jr nz, .asm_40831 ; 0x44131
+	jr nz, .asm_40831
 	ld hl, LavenderTownText_44141
-.asm_40831 ; 0x44136
+.asm_40831
 	call PrintText
 	jp TextScriptEnd
 

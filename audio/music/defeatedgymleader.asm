@@ -605,4 +605,3 @@ Music_DefeatedGymLeader_branch_23e65::
 	G_ 2
 	E_ 2
 	loopchannel 0, Music_DefeatedGymLeader_branch_23e65
-; 0x23f52

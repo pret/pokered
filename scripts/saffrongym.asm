@@ -12,8 +12,8 @@ SaffronGymScript: ; 5d00d (17:500d)
 	ret
 
 .extra
-	ld hl, Gym6CityName ; $5033
-	ld de, Gym6LeaderName ; $5040
+	ld hl, Gym6CityName
+	ld de, Gym6LeaderName
 	jp LoadGymLeaderAndCityName
 
 Gym6CityName: ; 5d033 (17:5033)
@@ -36,7 +36,7 @@ SaffronGymScriptPointers: ; 5d053 (17:5053)
 	dw SaffronGymScript3
 
 SaffronGymScript3: ; 5d05b (17:505b)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, SaffronGymText_5d048
 	ld a, $f0
@@ -44,7 +44,7 @@ SaffronGymScript3: ; 5d05b (17:505b)
 
 SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd7b3
 	set 1, [hl]
@@ -52,14 +52,14 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd7b3
 	set 0, [hl]
 	jr .asm_5d091
 .BagFull
 	ld a, $c
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 .asm_5d091
 	ld hl, W_OBTAINEDBADGES
@@ -95,82 +95,82 @@ SaffronGymTrainerHeader0: ; 5d0c3 (17:50c3)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText1 ; 0x51f0 TextBeforeBattle
-	dw SaffronGymAfterBattleText1 ; 0x51fa TextAfterBattle
-	dw SaffronGymEndBattleText1 ; 0x51f5 TextEndBattle
-	dw SaffronGymEndBattleText1 ; 0x51f5 TextEndBattle
+	dw SaffronGymBattleText1 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText1 ; TextAfterBattle
+	dw SaffronGymEndBattleText1 ; TextEndBattle
+	dw SaffronGymEndBattleText1 ; TextEndBattle
 
 SaffronGymTrainerHeader1: ; 5d0cf (17:50cf)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText2 ; 0x51ff TextBeforeBattle
-	dw SaffronGymAfterBattleText2 ; 0x5209 TextAfterBattle
-	dw SaffronGymEndBattleText2 ; 0x5204 TextEndBattle
-	dw SaffronGymEndBattleText2 ; 0x5204 TextEndBattle
+	dw SaffronGymBattleText2 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText2 ; TextAfterBattle
+	dw SaffronGymEndBattleText2 ; TextEndBattle
+	dw SaffronGymEndBattleText2 ; TextEndBattle
 
 SaffronGymTrainerHeader2: ; 5d0db (17:50db)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText3 ; 0x520e TextBeforeBattle
-	dw SaffronGymAfterBattleText3 ; 0x5218 TextAfterBattle
-	dw SaffronGymEndBattleText3 ; 0x5213 TextEndBattle
-	dw SaffronGymEndBattleText3 ; 0x5213 TextEndBattle
+	dw SaffronGymBattleText3 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText3 ; TextAfterBattle
+	dw SaffronGymEndBattleText3 ; TextEndBattle
+	dw SaffronGymEndBattleText3 ; TextEndBattle
 
 SaffronGymTrainerHeader3: ; 5d0e7 (17:50e7)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText4 ; 0x521d TextBeforeBattle
-	dw SaffronGymAfterBattleText4 ; 0x5227 TextAfterBattle
-	dw SaffronGymEndBattleText4 ; 0x5222 TextEndBattle
-	dw SaffronGymEndBattleText4 ; 0x5222 TextEndBattle
+	dw SaffronGymBattleText4 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText4 ; TextAfterBattle
+	dw SaffronGymEndBattleText4 ; TextEndBattle
+	dw SaffronGymEndBattleText4 ; TextEndBattle
 
 SaffronGymTrainerHeader4: ; 5d0f3 (17:50f3)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText5 ; 0x522c TextBeforeBattle
-	dw SaffronGymAfterBattleText5 ; 0x5236 TextAfterBattle
-	dw SaffronGymEndBattleText5 ; 0x5231 TextEndBattle
-	dw SaffronGymEndBattleText5 ; 0x5231 TextEndBattle
+	dw SaffronGymBattleText5 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText5 ; TextAfterBattle
+	dw SaffronGymEndBattleText5 ; TextEndBattle
+	dw SaffronGymEndBattleText5 ; TextEndBattle
 
 SaffronGymTrainerHeader5: ; 5d0ff (17:50ff)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText6 ; 0x523b TextBeforeBattle
-	dw SaffronGymAfterBattleText6 ; 0x5245 TextAfterBattle
-	dw SaffronGymEndBattleText6 ; 0x5240 TextEndBattle
-	dw SaffronGymEndBattleText6 ; 0x5240 TextEndBattle
+	dw SaffronGymBattleText6 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText6 ; TextAfterBattle
+	dw SaffronGymEndBattleText6 ; TextEndBattle
+	dw SaffronGymEndBattleText6 ; TextEndBattle
 
 SaffronGymTrainerHeader6: ; 5d10b (17:510b)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b3 ; flag's byte
-	dw SaffronGymBattleText7 ; 0x524a TextBeforeBattle
-	dw SaffronGymAfterBattleText7 ; 0x5254 TextAfterBattle
-	dw SaffronGymEndBattleText7 ; 0x524f TextEndBattle
-	dw SaffronGymEndBattleText7 ; 0x524f TextEndBattle
+	dw SaffronGymBattleText7 ; TextBeforeBattle
+	dw SaffronGymAfterBattleText7 ; TextAfterBattle
+	dw SaffronGymEndBattleText7 ; TextEndBattle
+	dw SaffronGymEndBattleText7 ; TextEndBattle
 
 	db $ff
 
 SaffronGymText1: ; 5d118 (17:5118)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b3]
 	bit 1, a
-	jr z, .asm_e3544 ; 0x5d11e
+	jr z, .asm_5d134
 	bit 0, a
-	jr nz, .asm_8d2f6 ; 0x5d122
+	jr nz, .asm_5d12c
 	call z, SaffronGymText_5d068
 	call DisableWaitingAfterTextDisplay
-	jr .asm_34c2c ; 0x5d12a
-.asm_8d2f6 ; 0x5d12c
+	jr .asm_5d15f
+.asm_5d12c
 	ld hl, SaffronGymText_5d16e
 	call PrintText
-	jr .asm_34c2c ; 0x5d132
-.asm_e3544 ; 0x5d134
+	jr .asm_5d15f
+.asm_5d134
 	ld hl, SaffronGymText_5d162
 	call PrintText
 	ld hl, wd72d
@@ -179,7 +179,7 @@ SaffronGymText1: ; 5d118 (17:5118)
 	ld hl, SaffronGymText_5d167
 	ld de, SaffronGymText_5d167
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -187,7 +187,7 @@ SaffronGymText1: ; 5d118 (17:5118)
 	ld [W_GYMLEADERNO], a
 	ld a, $3
 	ld [W_SAFFRONGYMCURSCRIPT], a
-.asm_34c2c ; 0x5d15f
+.asm_5d15f
 	jp TextScriptEnd
 
 SaffronGymText_5d162: ; 5d162 (17:5162)
@@ -195,7 +195,7 @@ SaffronGymText_5d162: ; 5d162 (17:5162)
 	db "@"
 
 SaffronGymText_5d167: ; 5d167 (17:5167)
-	TX_FAR _SaffronGymText_5d167 ; 0xa1c73
+	TX_FAR _SaffronGymText_5d167
 	db $11 ; play same sound as red giving oak parcel
 	db $6 ; wait for keypress
 	db "@"
@@ -219,59 +219,59 @@ SaffronGymText12: ; 5d182 (17:5182)
 	db "@"
 
 SaffronGymText2: ; 5d187 (17:5187)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText3: ; 5d191 (17:5191)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText4: ; 5d19b (17:519b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText5: ; 5d1a5 (17:51a5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText6: ; 5d1af (17:51af)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText7: ; 5d1b9 (17:51b9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText8: ; 5d1c3 (17:51c3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText9: ; 5d1cd (17:51cd)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b3]
 	bit 1, a
-	jr nz, .asm_13f3c ; 0x5d1d3
+	jr nz, .asm_5d1dd
 	ld hl, SaffronGymText_5d1e6
 	call PrintText
-	jr .asm_e9907 ; 0x5d1db
-.asm_13f3c ; 0x5d1dd
+	jr .asm_5d1e3
+.asm_5d1dd
 	ld hl, SaffronGymText_5d1eb
 	call PrintText
-.asm_e9907 ; 0x5d1e3
+.asm_5d1e3
 	jp TextScriptEnd
 
 SaffronGymText_5d1e6: ; 5d1e6 (17:51e6)

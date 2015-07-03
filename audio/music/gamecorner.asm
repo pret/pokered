@@ -625,4 +625,3 @@ Music_GameCorner_branch_7e4ab::
 	A_ 1
 	rest 1
 	endchannel
-; 0x7e4c0

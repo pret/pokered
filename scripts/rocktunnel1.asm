@@ -27,101 +27,101 @@ RockTunnel1TrainerHeader1: ; 44505 (11:4505)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText1 ; 0x4588 TextBeforeBattle
-	dw RockTunnel1AfterBattleText1 ; 0x4592 TextAfterBattle
-	dw RockTunnel1EndBattleText1 ; 0x458d TextEndBattle
-	dw RockTunnel1EndBattleText1 ; 0x458d TextEndBattle
+	dw RockTunnel1BattleText1 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText1 ; TextAfterBattle
+	dw RockTunnel1EndBattleText1 ; TextEndBattle
+	dw RockTunnel1EndBattleText1 ; TextEndBattle
 
 RockTunnel1TrainerHeader2: ; 44511 (11:4511)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText2 ; 0x4597 TextBeforeBattle
-	dw RockTunnel1AfterBattleText2 ; 0x45a1 TextAfterBattle
-	dw RockTunnel1EndBattleText2 ; 0x459c TextEndBattle
-	dw RockTunnel1EndBattleText2 ; 0x459c TextEndBattle
+	dw RockTunnel1BattleText2 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText2 ; TextAfterBattle
+	dw RockTunnel1EndBattleText2 ; TextEndBattle
+	dw RockTunnel1EndBattleText2 ; TextEndBattle
 
 RockTunnel1TrainerHeader3: ; 4451d (11:451d)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText3 ; 0x45a6 TextBeforeBattle
-	dw RockTunnel1AfterBattleText3 ; 0x45b0 TextAfterBattle
-	dw RockTunnel1EndBattleText3 ; 0x45ab TextEndBattle
-	dw RockTunnel1EndBattleText3 ; 0x45ab TextEndBattle
+	dw RockTunnel1BattleText3 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText3 ; TextAfterBattle
+	dw RockTunnel1EndBattleText3 ; TextEndBattle
+	dw RockTunnel1EndBattleText3 ; TextEndBattle
 
 RockTunnel1TrainerHeader4: ; 44529 (11:4529)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText4 ; 0x45b5 TextBeforeBattle
-	dw RockTunnel1AfterBattleText4 ; 0x45bf TextAfterBattle
-	dw RockTunnel1EndBattleText4 ; 0x45ba TextEndBattle
-	dw RockTunnel1EndBattleText4 ; 0x45ba TextEndBattle
+	dw RockTunnel1BattleText4 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText4 ; TextAfterBattle
+	dw RockTunnel1EndBattleText4 ; TextEndBattle
+	dw RockTunnel1EndBattleText4 ; TextEndBattle
 
 RockTunnel1TrainerHeader5: ; 44535 (11:4535)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText5 ; 0x45c4 TextBeforeBattle
-	dw RockTunnel1AfterBattleText5 ; 0x45ce TextAfterBattle
-	dw RockTunnel1EndBattleText5 ; 0x45c9 TextEndBattle
-	dw RockTunnel1EndBattleText5 ; 0x45c9 TextEndBattle
+	dw RockTunnel1BattleText5 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText5 ; TextAfterBattle
+	dw RockTunnel1EndBattleText5 ; TextEndBattle
+	dw RockTunnel1EndBattleText5 ; TextEndBattle
 
 RockTunnel1TrainerHeader6: ; 44541 (11:4541)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText6 ; 0x45d3 TextBeforeBattle
-	dw RockTunnel1AfterBattleText6 ; 0x45dd TextAfterBattle
-	dw RockTunnel1EndBattleText6 ; 0x45d8 TextEndBattle
-	dw RockTunnel1EndBattleText6 ; 0x45d8 TextEndBattle
+	dw RockTunnel1BattleText6 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText6 ; TextAfterBattle
+	dw RockTunnel1EndBattleText6 ; TextEndBattle
+	dw RockTunnel1EndBattleText6 ; TextEndBattle
 
 RockTunnel1TrainerHeader7: ; 4454d (11:454d)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7d2 ; flag's byte
-	dw RockTunnel1BattleText7 ; 0x45e2 TextBeforeBattle
-	dw RockTunnel1AfterBattleText7 ; 0x45ec TextAfterBattle
-	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
-	dw RockTunnel1EndBattleText7 ; 0x45e7 TextEndBattle
+	dw RockTunnel1BattleText7 ; TextBeforeBattle
+	dw RockTunnel1AfterBattleText7 ; TextAfterBattle
+	dw RockTunnel1EndBattleText7 ; TextEndBattle
+	dw RockTunnel1EndBattleText7 ; TextEndBattle
 
 	db $ff
 
 RockTunnel1Text1: ; 4455a (11:455a)
-	db $8
-	ld hl, RockTunnel1TrainerHeader1 ; $4505
-	jr asm_0c916 ; 0x4455e $22
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader1
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text2: ; 44560 (11:4560)
-	db $8
-	ld hl, RockTunnel1TrainerHeader2 ; $4511
-	jr asm_0c916 ; 0x44564 $1c
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader2
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text3: ; 44566 (11:4566)
-	db $8
-	ld hl, RockTunnel1TrainerHeader3 ; $451d
-	jr asm_0c916 ; 0x4456a $16
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader3
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text4: ; 4456c (11:456c)
-	db $8
-	ld hl, RockTunnel1TrainerHeader4 ; $4529
-	jr asm_0c916 ; 0x44570 $10
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader4
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text5: ; 44572 (11:4572)
-	db $8
-	ld hl, RockTunnel1TrainerHeader5 ; $4535
-	jr asm_0c916 ; 0x44576 $a
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader5
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text6: ; 44578 (11:4578)
-	db $8
-	ld hl, RockTunnel1TrainerHeader6 ; $4541
-	jr asm_0c916 ; 0x4457c $4
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader6
+	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text7: ; 4457e (11:457e)
-	db $8
-	ld hl, RockTunnel1TrainerHeader7 ; $454d
-asm_0c916: ; 44582 (11:4582)
+	TX_ASM
+	ld hl, RockTunnel1TrainerHeader7
+RockTunnel1TalkToTrainer: ; 44582 (11:4582)
 	call TalkToTrainer
 	jp TextScriptEnd
 

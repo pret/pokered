@@ -52,9 +52,9 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld b, $3c ; number of times to play the "brrrrr" sound
-.playDeliverySound ; 0x74f63
-	ld c, $2
+	ld b, 60 ; number of times to play the "brrrrr" sound
+.playDeliverySound
+	ld c, 2
 	call DelayFrames
 	push bc
 	ld a, (SFX_02_53 - SFX_Headers_02) / 3

@@ -513,4 +513,3 @@ Music_Routes3_branch_a17a::
 	mutedsnare3 1
 	mutedsnare3 1
 	loopchannel 0, Music_Routes3_branch_a17a
-; 0xa26a

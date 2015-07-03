@@ -102,58 +102,58 @@ SilphCo2TrainerHeader0: ; 59d90 (16:5d90)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd825 ; flag's byte
-	dw SilphCo2BattleText1 ; 0x5e2a TextBeforeBattle
-	dw SilphCo2AfterBattleText1 ; 0x5e34 TextAfterBattle
-	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
-	dw SilphCo2EndBattleText1 ; 0x5e2f TextEndBattle
+	dw SilphCo2BattleText1 ; TextBeforeBattle
+	dw SilphCo2AfterBattleText1 ; TextAfterBattle
+	dw SilphCo2EndBattleText1 ; TextEndBattle
+	dw SilphCo2EndBattleText1 ; TextEndBattle
 
 SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd825 ; flag's byte
-	dw SilphCo2BattleText2 ; 0x5e39 TextBeforeBattle
-	dw SilphCo2AfterBattleText2 ; 0x5e43 TextAfterBattle
-	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
-	dw SilphCo2EndBattleText2 ; 0x5e3e TextEndBattle
+	dw SilphCo2BattleText2 ; TextBeforeBattle
+	dw SilphCo2AfterBattleText2 ; TextAfterBattle
+	dw SilphCo2EndBattleText2 ; TextEndBattle
+	dw SilphCo2EndBattleText2 ; TextEndBattle
 
 SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd825 ; flag's byte
-	dw SilphCo2BattleText3 ; 0x5e48 TextBeforeBattle
-	dw SilphCo2AfterBattleText3 ; 0x5e52 TextAfterBattle
-	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
-	dw SilphCo2EndBattleText3 ; 0x5e4d TextEndBattle
+	dw SilphCo2BattleText3 ; TextBeforeBattle
+	dw SilphCo2AfterBattleText3 ; TextAfterBattle
+	dw SilphCo2EndBattleText3 ; TextEndBattle
+	dw SilphCo2EndBattleText3 ; TextEndBattle
 
 SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd825 ; flag's byte
-	dw SilphCo2BattleText4 ; 0x5e57 TextBeforeBattle
-	dw SilphCo2AfterBattleText4 ; 0x5e61 TextAfterBattle
-	dw SilphCo2EndBattleText4 ; 0x5e5c TextEndBattle
-	dw SilphCo2EndBattleText4 ; 0x5e5c TextEndBattle
+	dw SilphCo2BattleText4 ; TextBeforeBattle
+	dw SilphCo2AfterBattleText4 ; TextAfterBattle
+	dw SilphCo2EndBattleText4 ; TextEndBattle
+	dw SilphCo2EndBattleText4 ; TextEndBattle
 
 	db $ff
 
 SilphCo2Text1: ; 59dc1 (16:5dc1)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd826]
 	bit 7, a
-	jr nz, asm_b8a0d ; 0x59dc7
+	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
 	call PrintText
 	ld bc, (TM_36 << 8) | 1
 	call GiveItem
 	ld hl, TM36NoRoomText
-	jr nc, asm_2c1e0 ; 0x59dd8
+	jr nc, .asm_59de7
 	ld hl, wd826
 	set 7, [hl]
 	ld hl, ReceivedTM36Text
-	jr asm_2c1e0 ; 0x59de2
-asm_b8a0d ; 0x59de4
+	jr .asm_59de7
+.asm_59de4
 	ld hl, TM36ExplanationText
-asm_2c1e0 ; 0x59de7
+.asm_59de7
 	call PrintText
 	jp TextScriptEnd
 
@@ -174,25 +174,25 @@ TM36NoRoomText: ; 59dfd (16:5dfd)
 	db "@"
 
 SilphCo2Text2: ; 59e02 (16:5e02)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text3: ; 59e0c (16:5e0c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text4: ; 59e16 (16:5e16)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text5: ; 59e20 (16:5e20)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd

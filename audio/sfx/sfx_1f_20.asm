@@ -27,4 +27,3 @@ SFX_1f_20_Ch2: ; 7cb5a (1f:4b5a)
 
 SFX_1f_20_Ch3: ; 7cb80 (1f:4b80)
 	endchannel
-; 0x7cb81

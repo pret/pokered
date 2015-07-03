@@ -4,4 +4,3 @@ SFX_08_51_Ch1: ; 204fe (8:44fe)
 	unknownnoise0x20 8, 244, 34
 	unknownnoise0x20 15, 242, 33
 	endchannel
-; 0x2050b

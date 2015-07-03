@@ -31,143 +31,143 @@ Route15TrainerHeader0: ; 597df (16:57df)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText1 ; 0x5898 TextBeforeBattle
-	dw Route15AfterBattleText1 ; 0x58a2 TextAfterBattle
-	dw Route15EndBattleText1 ; 0x589d TextEndBattle
-	dw Route15EndBattleText1 ; 0x589d TextEndBattle
+	dw Route15BattleText1 ; TextBeforeBattle
+	dw Route15AfterBattleText1 ; TextAfterBattle
+	dw Route15EndBattleText1 ; TextEndBattle
+	dw Route15EndBattleText1 ; TextEndBattle
 
 Route15TrainerHeader1: ; 597eb (16:57eb)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText2 ; 0x58a7 TextBeforeBattle
-	dw Route15AfterBattleText2 ; 0x58b1 TextAfterBattle
-	dw Route15EndBattleText2 ; 0x58ac TextEndBattle
-	dw Route15EndBattleText2 ; 0x58ac TextEndBattle
+	dw Route15BattleText2 ; TextBeforeBattle
+	dw Route15AfterBattleText2 ; TextAfterBattle
+	dw Route15EndBattleText2 ; TextEndBattle
+	dw Route15EndBattleText2 ; TextEndBattle
 
 Route15TrainerHeader2: ; 597f7 (16:57f7)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText3 ; 0x58b6 TextBeforeBattle
-	dw Route15AfterBattleText3 ; 0x58c0 TextAfterBattle
-	dw Route15EndBattleText3 ; 0x58bb TextEndBattle
-	dw Route15EndBattleText3 ; 0x58bb TextEndBattle
+	dw Route15BattleText3 ; TextBeforeBattle
+	dw Route15AfterBattleText3 ; TextAfterBattle
+	dw Route15EndBattleText3 ; TextEndBattle
+	dw Route15EndBattleText3 ; TextEndBattle
 
 Route15TrainerHeader3: ; 59803 (16:5803)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText4 ; 0x58c5 TextBeforeBattle
-	dw Route15AfterBattleText4 ; 0x58cf TextAfterBattle
-	dw Route15EndBattleText4 ; 0x58ca TextEndBattle
-	dw Route15EndBattleText4 ; 0x58ca TextEndBattle
+	dw Route15BattleText4 ; TextBeforeBattle
+	dw Route15AfterBattleText4 ; TextAfterBattle
+	dw Route15EndBattleText4 ; TextEndBattle
+	dw Route15EndBattleText4 ; TextEndBattle
 
 Route15TrainerHeader4: ; 5980f (16:580f)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText5 ; 0x58d4 TextBeforeBattle
-	dw Route15AfterBattleText5 ; 0x58de TextAfterBattle
-	dw Route15EndBattleText5 ; 0x58d9 TextEndBattle
-	dw Route15EndBattleText5 ; 0x58d9 TextEndBattle
+	dw Route15BattleText5 ; TextBeforeBattle
+	dw Route15AfterBattleText5 ; TextAfterBattle
+	dw Route15EndBattleText5 ; TextEndBattle
+	dw Route15EndBattleText5 ; TextEndBattle
 
 Route15TrainerHeader5: ; 5981b (16:581b)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText6 ; 0x58e3 TextBeforeBattle
-	dw Route15AfterBattleText6 ; 0x58ed TextAfterBattle
-	dw Route15EndBattleText6 ; 0x58e8 TextEndBattle
-	dw Route15EndBattleText6 ; 0x58e8 TextEndBattle
+	dw Route15BattleText6 ; TextBeforeBattle
+	dw Route15AfterBattleText6 ; TextAfterBattle
+	dw Route15EndBattleText6 ; TextEndBattle
+	dw Route15EndBattleText6 ; TextEndBattle
 
 Route15TrainerHeader6: ; 59827 (16:5827)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText7 ; 0x58f2 TextBeforeBattle
-	dw Route15AfterBattleText7 ; 0x58fc TextAfterBattle
-	dw Route15EndBattleText7 ; 0x58f7 TextEndBattle
-	dw Route15EndBattleText7 ; 0x58f7 TextEndBattle
+	dw Route15BattleText7 ; TextBeforeBattle
+	dw Route15AfterBattleText7 ; TextAfterBattle
+	dw Route15EndBattleText7 ; TextEndBattle
+	dw Route15EndBattleText7 ; TextEndBattle
 
 Route15TrainerHeader7: ; 59833 (16:5833)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText8 ; 0x5901 TextBeforeBattle
-	dw Route15AfterBattleText8 ; 0x590b TextAfterBattle
-	dw Route15EndBattleText8 ; 0x5906 TextEndBattle
-	dw Route15EndBattleText8 ; 0x5906 TextEndBattle
+	dw Route15BattleText8 ; TextBeforeBattle
+	dw Route15AfterBattleText8 ; TextAfterBattle
+	dw Route15EndBattleText8 ; TextEndBattle
+	dw Route15EndBattleText8 ; TextEndBattle
 
 Route15TrainerHeader8: ; 5983f (16:583f)
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText9 ; 0x5910 TextBeforeBattle
-	dw Route15AfterBattleText9 ; 0x591a TextAfterBattle
-	dw Route15EndBattleText9 ; 0x5915 TextEndBattle
-	dw Route15EndBattleText9 ; 0x5915 TextEndBattle
+	dw Route15BattleText9 ; TextBeforeBattle
+	dw Route15AfterBattleText9 ; TextAfterBattle
+	dw Route15EndBattleText9 ; TextEndBattle
+	dw Route15EndBattleText9 ; TextEndBattle
 
 Route15TrainerHeader9: ; 5984b (16:584b)
 	db $a ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7dd ; flag's byte
-	dw Route15BattleText10 ; 0x591f TextBeforeBattle
-	dw Route15AfterBattleText10 ; 0x5929 TextAfterBattle
-	dw Route15EndBattleText10 ; 0x5924 TextEndBattle
-	dw Route15EndBattleText10 ; 0x5924 TextEndBattle
+	dw Route15BattleText10 ; TextBeforeBattle
+	dw Route15AfterBattleText10 ; TextAfterBattle
+	dw Route15EndBattleText10 ; TextEndBattle
+	dw Route15EndBattleText10 ; TextEndBattle
 
 	db $ff
 
 Route15Text1: ; 59858 (16:5858)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader0
-	jr asm_33cb7 ; 0x5985c $34
+	jr Route15TalkToTrainer
 
 Route15Text2: ; 5985e (16:585e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader1
-	jr asm_33cb7 ; 0x59862 $2e
+	jr Route15TalkToTrainer
 
 Route15Text3: ; 59864 (16:5864)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader2
-	jr asm_33cb7 ; 0x59868 $28
+	jr Route15TalkToTrainer
 
 Route15Text4: ; 5986a (16:586a)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader3
-	jr asm_33cb7 ; 0x5986e $22
+	jr Route15TalkToTrainer
 
 Route15Text5: ; 59870 (16:5870)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader4
-	jr asm_33cb7 ; 0x59874 $1c
+	jr Route15TalkToTrainer
 
 Route15Text6: ; 59876 (16:5876)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader5
-	jr asm_33cb7 ; 0x5987a $16
+	jr Route15TalkToTrainer
 
 Route15Text7: ; 5987c (16:587c)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader6
-	jr asm_33cb7 ; 0x59880 $10
+	jr Route15TalkToTrainer
 
 Route15Text8: ; 59882 (16:5882)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader7
-	jr asm_33cb7 ; 0x59886 $a
+	jr Route15TalkToTrainer
 
 Route15Text9: ; 59888 (16:5888)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader8
-	jr asm_33cb7 ; 0x5988c $4
+	jr Route15TalkToTrainer
 
 Route15Text10: ; 5988e (16:588e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader9
-asm_33cb7: ; 59892 (16:5892)
+Route15TalkToTrainer: ; 59892 (16:5892)
 	call TalkToTrainer
 	jp TextScriptEnd
 

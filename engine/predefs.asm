@@ -53,11 +53,11 @@ PredefPointers:: ; 4fe79 (13:7e79)
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
 	add_predef DrawPlayerHUDAndHPBar
-	add_predef Func_3f0c6
-	add_predef Func_3f073
+	add_predef CopyUncompressedPicToTilemap
+	add_predef AnimateSendingOutMon
 	add_predef ScaleSpriteByTwo
 	add_predef LoadMonBackPic
-	add_predef Func_79aba
+	add_predef CopyGrowingMonTiles
 	add_predef LoadMissableObjects
 	add_predef HealParty
 	add_predef MoveAnimation; 08 play move animation
@@ -103,7 +103,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef BattleTransition
 	add_predef CopyTileIDsFromList
 	add_predef PlayIntro
-	add_predef Func_79869
+	add_predef GetMoveSoundB
 	add_predef FlashScreen
 	add_predef GetTileAndCoordsInFrontOfPlayer
 	add_predef StatusScreen

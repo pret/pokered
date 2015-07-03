@@ -93,33 +93,33 @@ RocketHideout4TrainerHeader0: ; 45515 (11:5515)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd81b ; flag's byte
-	dw RocketHideout4BattleText2 ; 0x5593 TextBeforeBattle
-	dw RocketHideout4AfterBattleText2 ; 0x559d TextAfterBattle
-	dw RocketHideout4EndBattleText2 ; 0x5598 TextEndBattle
-	dw RocketHideout4EndBattleText2 ; 0x5598 TextEndBattle
+	dw RocketHideout4BattleText2 ; TextBeforeBattle
+	dw RocketHideout4AfterBattleText2 ; TextAfterBattle
+	dw RocketHideout4EndBattleText2 ; TextEndBattle
+	dw RocketHideout4EndBattleText2 ; TextEndBattle
 
 RocketHideout4TrainerHeader2: ; 45521 (11:5521)
 	db $3 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd81b ; flag's byte
-	dw RocketHideout4BattleText3 ; 0x55ac TextBeforeBattle
-	dw RocketHideout4AfterBattleText3 ; 0x55b6 TextAfterBattle
-	dw RocketHideout4EndBattleText3 ; 0x55b1 TextEndBattle
-	dw RocketHideout4EndBattleText3 ; 0x55b1 TextEndBattle
+	dw RocketHideout4BattleText3 ; TextBeforeBattle
+	dw RocketHideout4AfterBattleText3 ; TextAfterBattle
+	dw RocketHideout4EndBattleText3 ; TextEndBattle
+	dw RocketHideout4EndBattleText3 ; TextEndBattle
 
 RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd81b ; flag's byte
-	dw RocketHideout4BattleText4 ; 0x55c5 TextBeforeBattle
-	dw RocketHideout4AfterBattleText4 ; 0x55cf TextAfterBattle
-	dw RocketHideout4EndBattleText4 ; 0x55ca TextEndBattle
-	dw RocketHideout4EndBattleText4 ; 0x55ca TextEndBattle
+	dw RocketHideout4BattleText4 ; TextBeforeBattle
+	dw RocketHideout4AfterBattleText4 ; TextAfterBattle
+	dw RocketHideout4EndBattleText4 ; TextEndBattle
+	dw RocketHideout4EndBattleText4 ; TextEndBattle
 
 	db $ff
 
 RocketHideout4Text1: ; 4553a (11:553a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd81b]
 	bit 7, a
 	jp nz, .asm_545571
@@ -131,20 +131,20 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
-	jr .asm_209f0 ; 0x4556f
+	jr .asm_209f0
 .asm_545571
 	ld hl, RocketHideout4Text10
 	call PrintText
-.asm_209f0 ; 0x45577
+.asm_209f0
 	jp TextScriptEnd
 
 RocketHideout4Text_4557a: ; 4557a (11:557a)
@@ -160,7 +160,7 @@ RocketHideout4Text10: ; 45584 (11:5584)
 	db "@"
 
 RocketHideout4Text2: ; 45589 (11:5589)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -178,7 +178,7 @@ RocketHideout4AfterBattleText2: ; 4559d (11:559d)
 	db "@"
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -196,7 +196,7 @@ RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
 	db "@"
 
 RocketHideout4Text4: ; 455bb (11:55bb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -210,13 +210,13 @@ RocketHideout4EndBattleText4: ; 455ca (11:55ca)
 	db "@"
 
 RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
-	db $8
-	ld hl, RocketHideout4Text_455ec ; $55ec
+	TX_ASM
+	ld hl, RocketHideout4Text_455ec
 	call PrintText
 	ld hl, wd81b
 	bit 6, [hl]
 	set 6, [hl]
-	jr nz, .asm_455e9 ; 0x455dd $a
+	jr nz, .asm_455e9
 	ld a, HS_ROCKET_HIDEOUT_4_ITEM_5
 	ld [wcc4d], a
 	predef ShowObject

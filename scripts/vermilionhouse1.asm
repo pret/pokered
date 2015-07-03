@@ -13,7 +13,7 @@ VermilionHouse1Text1: ; 1db06 (7:5b06)
 
 VermilionHouse1Text2: ; 1db0b (7:5b0b)
 	TX_FAR _VermilionHouse1Text2
-	db $08 ; asm
+	TX_ASM
 	ld a, PIDGEY
 	call PlayCry
 	call WaitForSoundToFinish

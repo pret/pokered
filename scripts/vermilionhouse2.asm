@@ -5,7 +5,7 @@ VermilionHouse2TextPointers: ; 56073 (15:6073)
 	dw VermilionHouse2Text1
 
 VermilionHouse2Text1: ; 56075 (15:6075)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd728]
 	bit 3, a
 	jr nz, .asm_03ef5
@@ -39,9 +39,9 @@ VermilionHouse2Text_560b1: ; 560b1 (15:60b1)
 	db "@"
 
 VermilionHouse2Text_560b6: ; 560b6 (15:60b6)
-	TX_FAR _VermilionHouse2Text_560b6 ; 0x9c554
+	TX_FAR _VermilionHouse2Text_560b6
 	db $0B
-	TX_FAR _VermilionHouse2Text_560bb ; 0x9c5a4
+	TX_FAR _VermilionHouse2Text_560bb
 	db "@"
 
 VermilionHouse2Text_560c0: ; 560c0 (15:60c0)

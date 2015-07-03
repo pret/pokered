@@ -10,4 +10,3 @@ SFX_08_72_Ch2: ; 20880 (8:4880)
 	duty 3
 	unknownsfx0x20 8, 241, 1, 7
 	endchannel
-; 0x20887

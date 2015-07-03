@@ -324,4 +324,3 @@ Music_YellowUnusedSong_branch_830c3::
 	snare3 4
 	snare3 4
 	loopchannel 0, Music_YellowUnusedSong_branch_830c3
-; 0x8316d

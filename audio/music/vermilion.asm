@@ -321,4 +321,3 @@ Music_Vermilion_branch_bb3f::
 	triangle1 1
 	triangle1 1
 	endchannel
-; 0xbb58

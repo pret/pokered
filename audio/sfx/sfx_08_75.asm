@@ -27,4 +27,3 @@ SFX_08_75_Ch2: ; 208f0 (8:48f0)
 	octave 5
 	G# 8
 	endchannel
-; 0x20902

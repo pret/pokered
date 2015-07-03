@@ -19,4 +19,3 @@ SFX_02_5e_Ch1: ; 83ca (2:43ca)
 	G_ 8
 	rest 12
 	endchannel
-; 0x83e1

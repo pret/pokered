@@ -67,4 +67,3 @@ SFX_1f_3b_Ch3: ; 7ee5f (1f:6e5f)
 	rest 1
 	A_ 8
 	endchannel
-; 0x7ee74

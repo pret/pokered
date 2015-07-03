@@ -357,7 +357,7 @@ BoxNoPCText: ; 21713 (8:5713)
 Func_2171b:: ; 2171b (8:571b)
 	ld hl, wPartyMon1Moves
 	ld bc, wPartyMon2 - wPartyMon1
-	jr .asm_21729 ; 0x21721 $6
+	jr .asm_21729
 	ld hl, wBoxMon1Moves
 	ld bc, wBoxMon2 - wBoxMon1
 .asm_21729
@@ -375,7 +375,7 @@ Func_2171b:: ; 2171b (8:571b)
 	pop hl
 	ret c
 	dec b
-	jr nz, .asm_21731 ; 0x21741 $ee
+	jr nz, .asm_21731
 	and a
 	ret
 

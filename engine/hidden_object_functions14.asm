@@ -11,7 +11,7 @@ TMNotebook: ; 529a4 (14:69a4)
 	db "@"
 
 ViridianSchoolNotebook: ; 529aa (14:69aa)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianSchoolNotebookText1
 	call PrintText
 	call TurnPageSchoolNotebook

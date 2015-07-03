@@ -2,16 +2,16 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, wd730
 	set 6, [hl]
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wMenuWatchedKeys], a
 	ld a, [wcd37]
 	dec a
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $2
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	ld a, [wcd37]
 	dec a
 	ld bc, $2
@@ -30,7 +30,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	bit 1, a
 	jr nz, .asm_610a7
 	ld hl, wcc5b
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -55,7 +55,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	ld hl, LabFossil_610ae
 	call PrintText
 	call YesNoChoice
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_610a7
 	ld hl, LabFossil_610b3

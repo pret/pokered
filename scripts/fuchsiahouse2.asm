@@ -9,36 +9,36 @@ FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
 	dw FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd78e]
 	bit 0, a
-	jr nz, .subtract ; 0x750c8
+	jr nz, .subtract
 	ld b,GOLD_TEETH
 	call IsItemInBag
-	jr nz, .asm_3f30f ; 0x750cf
+	jr nz, .asm_3f30f
 	ld a, [wd78e]
 	bit 1, a
-	jr nz, .asm_60cba ; 0x750d6
+	jr nz, .asm_60cba
 	ld hl, WardenGibberishText1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, WardenGibberishText3
-	jr nz, .asm_61238 ; 0x750e8
+	jr nz, .asm_61238
 	ld hl, WardenGibberishText2
-.asm_61238 ; 0x750ed
+.asm_61238
 	call PrintText
-	jr .asm_52039 ; 0x750f0
-.asm_3f30f ; 0x750f2
+	jr .asm_52039
+.asm_3f30f
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
 	ld hl, wd78e
 	set 1, [hl]
-.asm_60cba ; 0x75109
+.asm_60cba
 	ld hl, WardenThankYouText
 	call PrintText
 	ld bc,(HM_04 << 8) | 1
@@ -48,15 +48,15 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	call PrintText
 	ld hl, wd78e
 	set 0, [hl]
-	jr .asm_52039 ; 0x75122
-.subtract ; 0x75124
+	jr .asm_52039
+.subtract
 	ld hl, HM04ExplanationText
 	call PrintText
-	jr .asm_52039 ; 0x7512a
+	jr .asm_52039
 .BagFull
 	ld hl, HM04NoRoomText
 	call PrintText
-.asm_52039 ; 0x75132
+.asm_52039
 	jp TextScriptEnd
 
 WardenGibberishText1: ; 75135 (1d:5135)
@@ -97,13 +97,13 @@ HM04NoRoomText: ; 7515e (1d:515e)
 
 FuchsiaHouse2Text5: ; 75163 (1d:5163)
 FuchsiaHouse2Text4: ; 75163 (1d:5163)
-	db $08 ; asm
-	ldh a, [$8c]
+	TX_ASM
+	ld a, [H_SPRITEINDEX]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
-	jr nz, .asm_4c9a2 ; 0x7516b
+	jr nz, .asm_4c9a2
 	ld hl, FuchsiaHouse2Text_75176
-.asm_4c9a2 ; 0x75170
+.asm_4c9a2
 	call PrintText
 	jp TextScriptEnd
 

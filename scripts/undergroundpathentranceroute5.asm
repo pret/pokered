@@ -10,7 +10,7 @@ UndergroundPathEntranceRoute5TextPointers: ; 5d6b0 (17:56b0)
 	dw UndergroundPathEntranceRoute5Text1
 
 UndergroundPathEntranceRoute5Text1: ; 5d6b2 (17:56b2)
-	db $08 ; asm
+	TX_ASM
 	ld a, $9
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

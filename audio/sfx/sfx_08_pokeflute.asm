@@ -12,4 +12,3 @@ SFX_08_PokeFlute_Ch2: ; 22325 (8:6325)
 	rest 5
 	rest 5
 	endchannel
-; 0x2232f

@@ -38,19 +38,19 @@ CalcExperience: ; 58f6a (16:4f6a)
 	add hl, bc
 	call CalcDSquared
 	ld a, d
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [H_DIVISOR], a ; $ff99
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
-	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
+	ld a, [H_MULTIPLICAND] ; (aliases: H_NUMTOPRINT)
 	push af
 	ld a, [H_MULTIPLICAND+1]
 	push af
@@ -59,9 +59,9 @@ CalcExperience: ; 58f6a (16:4f6a)
 	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
-	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
+	ld a, [H_MULTIPLICAND] ; (aliases: H_NUMTOPRINT)
 	push af
 	ld a, [H_MULTIPLICAND+1]
 	push af
@@ -70,7 +70,7 @@ CalcExperience: ; 58f6a (16:4f6a)
 	ld a, [hli]
 	push af
 	xor a
-	ld [H_MULTIPLICAND], a ; $ff96
+	ld [H_MULTIPLICAND], a
 	ld [H_MULTIPLICAND+1], a
 	ld a, d
 	ld [H_MULTIPLICAND+2], a
@@ -85,9 +85,9 @@ CalcExperience: ; 58f6a (16:4f6a)
 	ld a, [H_MULTIPLICAND+1]
 	sbc b
 	ld [H_MULTIPLICAND+1], a
-	ld a, [H_MULTIPLICAND] ; $ff96
+	ld a, [H_MULTIPLICAND]
 	sbc b
-	ld [H_MULTIPLICAND], a ; $ff96
+	ld [H_MULTIPLICAND], a
 	pop af
 	and $80
 	jr nz, .subtractSquaredTerm ; check sign
@@ -135,11 +135,11 @@ CalcExperience: ; 58f6a (16:4f6a)
 ; calculates d*d
 CalcDSquared: ; 59010 (16:5010)
 	xor a
-	ld [H_MULTIPLICAND], a ; $ff96 (aliases: H_NUMTOPRINT)
+	ld [H_MULTIPLICAND], a ; (aliases: H_NUMTOPRINT)
 	ld [H_MULTIPLICAND+1], a
 	ld a, d
 	ld [H_MULTIPLICAND+2], a
-	ld [H_MULTIPLIER], a ; $ff99 (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
+	ld [H_MULTIPLIER], a ; (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
 	jp Multiply
 
 ; each entry has the following scheme:

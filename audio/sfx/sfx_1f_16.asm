@@ -15,4 +15,3 @@ SFX_1f_16_Ch2: ; 7cb90 (1f:4b90)
 
 SFX_1f_16_Ch3: ; 7cb9e (1f:4b9e)
 	endchannel
-; 0x7cb9f

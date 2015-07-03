@@ -22,7 +22,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	pop af
 	ld l,a
 	ld h,$0
-	ld de,InGameTradeTextPointers ; $5d64
+	ld de,InGameTradeTextPointers
 	add hl,hl
 	add hl,de
 	ld a,[hli]

@@ -124,59 +124,59 @@ CeladonGameCornerText1: ; 48ca4 (12:4ca4)
 	db "@"
 
 CeladonGameCornerText2: ; 48ca9 (12:4ca9)
-	db $08 ; asm
+	TX_ASM
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d22
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_c650b ; 0x48cba
+	jr nz, .asm_48d0f
 	ld b,COIN_CASE
 	call IsItemInBag
-	jr z, .asm_ed086 ; 0x48cc1
+	jr z, .asm_48d19
 	call Has9990Coins
-	jr nc, .asm_31338 ; 0x48cc6
+	jr nc, .asm_48d14
 	xor a
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $10
-	ldh [$a0], a
+	ld [$ffa0], a
 	call HasEnoughMoney
-	jr nc, .asm_b6ef0 ; 0x48cd4
-	ld hl, CeladonGameCornerText_48d31 ; $4d31
-	jr .asm_e2afd ; 0x48cd9
-.asm_b6ef0 ; 0x48cdb
+	jr nc, .asm_48cdb
+	ld hl, CeladonGameCornerText_48d31
+	jr .asm_48d1c
+.asm_48cdb
 	xor a
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $10
-	ldh [$a0], a
+	ld [$ffa0], a
 	ld hl, $ffa1
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $50
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
 	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d27
-	jr .asm_e2afd ; 0x48d0d
-.asm_c650b ; 0x48d0f
+	jr .asm_48d1c
+.asm_48d0f
 	ld hl, CeladonGameCornerText_48d2c
-	jr .asm_e2afd ; 0x48d12
-.asm_31338 ; 0x48d14
+	jr .asm_48d1c
+.asm_48d14
 	ld hl, CeladonGameCornerText_48d36
-	jr .asm_e2afd ; 0x48d17
-.asm_ed086 ; 0x48d19
+	jr .asm_48d1c
+.asm_48d19
 	ld hl, CeladonGameCornerText_48d3b
-.asm_e2afd ; 0x48d1c
+.asm_48d1c
 	call PrintText
 	jp TextScriptEnd
 
@@ -213,22 +213,22 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 	db "@"
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 2, a
-	jr nz, .asm_d0957 ; 0x48d50
+	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
 	call PrintText
 	ld b, COIN_CASE
 	call IsItemInBag
-	jr z, .asm_5aef9 ; 0x48d5d
+	jr z, .asm_48d93
 	call Has9990Coins
-	jr nc, .asm_98546 ; 0x48d62
+	jr nc, .asm_48d8e
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $10
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -238,16 +238,16 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Received10CoinsText
-	jr .asm_c7d1a ; 0x48d87
-.asm_d0957 ; 0x48d89
+	jr .asm_48d96
+.asm_48d89
 	ld hl, CeladonGameCornerText_48dac
-	jr .asm_c7d1a ; 0x48d8c
-.asm_98546 ; 0x48d8e
+	jr .asm_48d96
+.asm_48d8e
 	ld hl, CeladonGameCornerText_48da7
-	jr .asm_c7d1a ; 0x48d91
-.asm_5aef9 ; 0x48d93
+	jr .asm_48d96
+.asm_48d93
 	ld hl, CeladonGameCornerText_48f19
-.asm_c7d1a ; 0x48d96
+.asm_48d96
 	call PrintText
 	jp TextScriptEnd
 
@@ -272,13 +272,13 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 	db "@"
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77c]
 	bit 1, a
-	ld hl, CeladonGameCornerText_48dca ; $4dca
-	jr z, .asm_be3fd ; 0x48dbf
-	ld hl, CeladonGameCornerText_48dcf ; $4dcf
-.asm_be3fd ; 0x48dc4
+	ld hl, CeladonGameCornerText_48dca
+	jr z, .asm_48dc4
+	ld hl, CeladonGameCornerText_48dcf
+.asm_48dc4
 	call PrintText
 	jp TextScriptEnd
 
@@ -295,22 +295,22 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 	db "@"
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 4, a
-	jr nz, .asm_ed8bc ; 0x48ddf
+	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
 	call PrintText
 	ld b, COIN_CASE
 	call IsItemInBag
-	jr z, .asm_df794 ; 0x48dec
+	jr z, .asm_48e1d
 	call Has9990Coins
-	jr nc, .asm_f17c3 ; 0x48df1
+	jr nc, .asm_48e18
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $20
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -318,16 +318,16 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld hl, wd77e
 	set 4, [hl]
 	ld hl, Received20CoinsText
-	jr .asm_0ddc2 ; 0x48e11
-.asm_ed8bc ; 0x48e13
+	jr .asm_48e20
+.asm_48e13
 	ld hl, CeladonGameCornerText_48e36
-	jr .asm_0ddc2 ; 0x48e16
-.asm_f17c3 ; 0x48e18
+	jr .asm_48e20
+.asm_48e18
 	ld hl, CeladonGameCornerText_48e31
-	jr .asm_0ddc2 ; 0x48e1b
-.asm_df794 ; 0x48e1d
+	jr .asm_48e20
+.asm_48e1d
 	ld hl, CeladonGameCornerText_48f19
-.asm_0ddc2 ; 0x48e20
+.asm_48e20
 	call PrintText
 	jp TextScriptEnd
 
@@ -348,22 +348,22 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 	db "@"
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 3, a
-	jr nz, .asm_ff080 ; 0x48e41
-	ld hl, CeladonGameCornerText_48e88 ; $4e88
+	jr nz, .asm_48e75
+	ld hl, CeladonGameCornerText_48e88
 	call PrintText
 	ld b,COIN_CASE
 	call IsItemInBag
-	jr z, .asm_4fb0c ; 0x48e4e
+	jr z, .asm_48e7f
 	call Has9990Coins
-	jr z, .asm_9505a ; 0x48e53
+	jr z, .asm_48e7a
 	xor a
-	ldh [$9f], a
-	ldh [$a0], a
+	ld [$ff9f], a
+	ld [$ffa0], a
 	ld a, $20
-	ldh [$a1], a
+	ld [$ffa1], a
 	ld de, wPlayerCoins + 1
 	ld hl, $ffa1
 	ld c, $2
@@ -371,16 +371,16 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld hl, wd77e
 	set 3, [hl]
 	ld hl, CeladonGameCornerText_48e8d
-	jr .asm_78d65 ; 0x48e73
-.asm_ff080 ; 0x48e75
+	jr .asm_48e82
+.asm_48e75
 	ld hl, CeladonGameCornerText_48e98
-	jr .asm_78d65 ; 0x48e78
-.asm_9505a ; 0x48e7a
+	jr .asm_48e82
+.asm_48e7a
 	ld hl, CeladonGameCornerText_48e93
-	jr .asm_78d65 ; 0x48e7d
-.asm_4fb0c ; 0x48e7f
+	jr .asm_48e82
+.asm_48e7f
 	ld hl, CeladonGameCornerText_48f19
-.asm_78d65 ; 0x48e82
+.asm_48e82
 	call PrintText
 	jp TextScriptEnd
 
@@ -389,7 +389,7 @@ CeladonGameCornerText_48e88: ; 48e88 (12:4e88)
 	db "@"
 
 CeladonGameCornerText_48e8d: ; 48e8d (12:4e8d)
-	TX_FAR _CeladonGameCornerText_48e8d ; 0x9dceb
+	TX_FAR _CeladonGameCornerText_48e8d
 	db $0B, "@"
 
 CeladonGameCornerText_48e93: ; 48e93 (12:4e93)
@@ -401,7 +401,7 @@ CeladonGameCornerText_48e98: ; 48e98 (12:4e98)
 	db "@"
 
 CeladonGameCornerText11: ; 48e9d (12:4e9d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGameCornerText_48ece
 	call PrintText
 	ld hl, wd72d
@@ -410,14 +410,14 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ldh [$b4], a
-	ldh [$b3], a
-	ldh [$b2], a
+	ld [hJoyHeld], a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
 	ld a, $1
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
 	jp TextScriptEnd
@@ -435,7 +435,7 @@ CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 	db "@"
 
 CeladonGameCornerText12: ; 48edd (12:4edd)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
@@ -453,8 +453,8 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	jp TextScriptEnd
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)
-	TX_FAR _CeladonGameCornerText_48f09 ; 0x9ddb0
-	db $8
+	TX_FAR _CeladonGameCornerText_48f09
+	TX_ASM
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish

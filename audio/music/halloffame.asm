@@ -94,4 +94,3 @@ Music_HallOfFame_branch_7fbfe::
 	E_ 4
 	G_ 4
 	loopchannel 0, Music_HallOfFame_Ch3
-; 0x7fc1f

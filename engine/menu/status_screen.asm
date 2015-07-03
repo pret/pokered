@@ -67,7 +67,7 @@ StatusScreen: ; 12953 (4:6953)
 	call LoadMonData
 	ld a, [wcc49]
 	cp $2 ; 2 means we're in a PC box
-	jr c, .DontRecalculate ; 0x1295b $14
+	jr c, .DontRecalculate
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
 	ld [W_CURENEMYLVL], a
@@ -82,17 +82,17 @@ StatusScreen: ; 12953 (4:6953)
 	ld [$ff24], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call UpdateSprites ; move sprites (?)
+	call UpdateSprites
 	call LoadHpBarAndStatusTilePatterns
-	ld de, BattleHudTiles1  ; $6080 ; source
+	ld de, BattleHudTiles1  ; source
 	ld hl, vChars2 + $6d0 ; dest
 	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
-	ld de, BattleHudTiles2 ; $6098
+	ld de, BattleHudTiles2
 	ld hl, vChars2 + $780
 	ld bc, (BANK(BattleHudTiles2) << 8) + $01
 	call CopyVideoDataDouble ; │
-	ld de, BattleHudTiles3 ; $60b0
+	ld de, BattleHudTiles3
 	ld hl, vChars2 + $760
 	ld bc, (BANK(BattleHudTiles3) << 8) + $02
 	call CopyVideoDataDouble ; ─┘
@@ -127,7 +127,7 @@ StatusScreen: ; 12953 (4:6953)
 	hlCoord 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
-	jr nz, .StatusWritten ; 0x129fc $9
+	jr nz, .StatusWritten
 	hlCoord 16, 6
 	ld de, OKText
 	call PlaceString ; "OK"
@@ -147,14 +147,14 @@ StatusScreen: ; 12953 (4:6953)
 	call PrintNumber ; Pokémon no.
 	hlCoord 11, 10
 	predef PrintMonType
-	ld hl, NamePointers2 ; $6a9d
-	call .unk_12a7e
+	ld hl, NamePointers2
+	call .asm_12a7e
 	ld d, h
 	ld e, l
 	hlCoord 9, 1
 	call PlaceString ; Pokémon name
-	ld hl, OTPointers ; $6a95
-	call .unk_12a7e
+	ld hl, OTPointers
+	call .asm_12a7e
 	ld d, h
 	ld e, l
 	hlCoord 12, 16
@@ -175,7 +175,7 @@ StatusScreen: ; 12953 (4:6953)
 	pop af
 	ld [hTilesetType], a
 	ret
-.unk_12a7e ; 0x12a7e ; I don't know what this does, iterates over pointers?
+.asm_12a7e ;  I don't know what this does, iterates over pointers?
 	ld a, [wcc49]
 	add a
 	ld c, a
@@ -221,20 +221,20 @@ OKText: ; 12ac4 (4:6ac4)
 	db "OK@"
 
 ; Draws a line starting from hl high b and wide c
-DrawLineBox ; 0x12ac7
+DrawLineBox: ; 0x12ac7
 	ld de, $0014 ; New line
 .PrintVerticalLine
 	ld [hl], $78 ; │
 	add hl, de
 	dec b
-	jr nz, .PrintVerticalLine ; 0x12ace $fa
+	jr nz, .PrintVerticalLine
 	ld [hl], $77 ; ┘
 	dec hl
 .PrintHorizLine
 	ld [hl], $76 ; ─
 	dec hl
 	dec c
-	jr nz, .PrintHorizLine ; 0x12ad7 $fa
+	jr nz, .PrintHorizLine
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
@@ -244,14 +244,14 @@ PTile: ; 12adc (4:6adc) ; This is a single 1bpp "P" tile
 PrintStatsBox: ; 12ae4 (4:6ae4)
 	ld a, d
 	and a ; a is 0 from the status screen
-	jr nz, .DifferentBox ; 0x12ae6 $12
+	jr nz, .DifferentBox
 	hlCoord 0, 8
 	ld b, $8
 	ld c, $8
 	call TextBoxBorder ; Draws the box
 	hlCoord 1, 9 ; Start printing stats from here
 	ld bc, $0019 ; Number offset
-	jr .PrintStats ; 0x12af8 $10
+	jr .PrintStats
 .DifferentBox
 	hlCoord 9, 2
 	ld b, $8
@@ -328,7 +328,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call Func_12ccb ; Print "PP"
 	ld a, b
 	and a
-	jr z, .InitPP ; 0x12bb3 $6
+	jr z, .InitPP
 	ld c, a
 	ld a, "-"
 	call Func_12ccb ; Fill the rest with --
@@ -339,7 +339,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 .PrintPP ; 12bc3
 	ld a, [hli]
 	and a
-	jr z, .PPDone ; 0x12bc5 $4a
+	jr z, .PPDone
 	push bc
 	push hl
 	push de
@@ -382,7 +382,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	inc b
 	ld a, b
 	cp $4
-	jr nz, .PrintPP ; 0x12c0f $b2
+	jr nz, .PrintPP
 .PPDone
 	hlCoord 9, 3
 	ld de, EXPPointsText
@@ -390,7 +390,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld a, [wLoadedMonLevel] ; level
 	push af
 	cp MAX_LEVEL
-	jr z, .Level100 ; 0x12c20 $4
+	jr z, .Level100
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
@@ -434,7 +434,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 .asm_12c86 ; This does some magic with lvl/exp?
 	ld a, [wLoadedMonLevel] ; Load level
 	cp MAX_LEVEL
-	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
+	jr z, .asm_12ca7  ; If 100
 	inc a
 	ld d, a
 	callab CalcExperience

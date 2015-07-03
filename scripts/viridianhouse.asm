@@ -16,7 +16,7 @@ ViridianHouseText2: ; 1d59a (7:559a)
 	db "@"
 
 ViridianHouseText3: ; 1d59f (7:559f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianHouseText_1d5b1
 	call PrintText
 	ld a, SPEAROW

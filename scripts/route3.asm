@@ -29,73 +29,73 @@ Route3TrainerHeader0: ; 55525 (15:5525)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText1 ; 0x5595 TextBeforeBattle
-	dw Route3AfterBattleText1 ; 0x559f TextAfterBattle
-	dw Route3EndBattleText1 ; 0x559a TextEndBattle
-	dw Route3EndBattleText1 ; 0x559a TextEndBattle
+	dw Route3BattleText1 ; TextBeforeBattle
+	dw Route3AfterBattleText1 ; TextAfterBattle
+	dw Route3EndBattleText1 ; TextEndBattle
+	dw Route3EndBattleText1 ; TextEndBattle
 
 Route3TrainerHeader2: ; 55531 (15:5531)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText2 ; 0x55ae TextBeforeBattle
-	dw Route3AfterBattleText2 ; 0x55b8 TextAfterBattle
-	dw Route3EndBattleText2 ; 0x55b3 TextEndBattle
-	dw Route3EndBattleText2 ; 0x55b3 TextEndBattle
+	dw Route3BattleText2 ; TextBeforeBattle
+	dw Route3AfterBattleText2 ; TextAfterBattle
+	dw Route3EndBattleText2 ; TextEndBattle
+	dw Route3EndBattleText2 ; TextEndBattle
 
 Route3TrainerHeader3: ; 5553d (15:553d)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText3 ; 0x55c7 TextBeforeBattle
-	dw Route3AfterBattleText3 ; 0x55d1 TextAfterBattle
-	dw Route3EndBattleText3 ; 0x55cc TextEndBattle
-	dw Route3EndBattleText3 ; 0x55cc TextEndBattle
+	dw Route3BattleText3 ; TextBeforeBattle
+	dw Route3AfterBattleText3 ; TextAfterBattle
+	dw Route3EndBattleText3 ; TextEndBattle
+	dw Route3EndBattleText3 ; TextEndBattle
 
 Route3TrainerHeader4: ; 55549 (15:5549)
 	db $5 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText4 ; 0x55e0 TextBeforeBattle
-	dw Route3AfterBattleText4 ; 0x55ea TextAfterBattle
-	dw Route3EndBattleText4 ; 0x55e5 TextEndBattle
-	dw Route3EndBattleText4 ; 0x55e5 TextEndBattle
+	dw Route3BattleText4 ; TextBeforeBattle
+	dw Route3AfterBattleText4 ; TextAfterBattle
+	dw Route3EndBattleText4 ; TextEndBattle
+	dw Route3EndBattleText4 ; TextEndBattle
 
 Route3TrainerHeader5: ; 55555 (15:5555)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText5 ; 0x55f9 TextBeforeBattle
-	dw Route3AfterBattleText5 ; 0x5603 TextAfterBattle
-	dw Route3EndBattleText5 ; 0x55fe TextEndBattle
-	dw Route3EndBattleText5 ; 0x55fe TextEndBattle
+	dw Route3BattleText5 ; TextBeforeBattle
+	dw Route3AfterBattleText5 ; TextAfterBattle
+	dw Route3EndBattleText5 ; TextEndBattle
+	dw Route3EndBattleText5 ; TextEndBattle
 
 Route3TrainerHeader6: ; 55561 (15:5561)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText6 ; 0x5612 TextBeforeBattle
-	dw Route3AfterBattleText6 ; 0x561c TextAfterBattle
-	dw Route3EndBattleText6 ; 0x5617 TextEndBattle
-	dw Route3EndBattleText6 ; 0x5617 TextEndBattle
+	dw Route3BattleText6 ; TextBeforeBattle
+	dw Route3AfterBattleText6 ; TextAfterBattle
+	dw Route3EndBattleText6 ; TextEndBattle
+	dw Route3EndBattleText6 ; TextEndBattle
 
 Route3TrainerHeader7: ; 5556d (15:556d)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText7 ; 0x562b TextBeforeBattle
-	dw Route3AfterBattleText7 ; 0x5635 TextAfterBattle
-	dw Route3EndBattleText7 ; 0x5630 TextEndBattle
-	dw Route3EndBattleText7 ; 0x5630 TextEndBattle
+	dw Route3BattleText7 ; TextBeforeBattle
+	dw Route3AfterBattleText7 ; TextAfterBattle
+	dw Route3EndBattleText7 ; TextEndBattle
+	dw Route3EndBattleText7 ; TextEndBattle
 
 Route3TrainerHeader8: ; 55579 (15:5579)
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7c3 ; flag's byte
-	dw Route3BattleText8 ; 0x5644 TextBeforeBattle
-	dw Route3AfterBattleText8 ; 0x564e TextAfterBattle
-	dw Route3EndBattleText8 ; 0x5649 TextEndBattle
-	dw Route3EndBattleText8 ; 0x5649 TextEndBattle
+	dw Route3BattleText8 ; TextBeforeBattle
+	dw Route3AfterBattleText8 ; TextAfterBattle
+	dw Route3EndBattleText8 ; TextEndBattle
+	dw Route3EndBattleText8 ; TextEndBattle
 
 	db $ff
 
@@ -104,7 +104,7 @@ Route3Text1: ; 55586 (15:5586)
 	db "@"
 
 Route3Text2: ; 5558b (15:558b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -122,7 +122,7 @@ Route3AfterBattleText1: ; 5559f (15:559f)
 	db "@"
 
 Route3Text3: ; 555a4 (15:55a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -140,7 +140,7 @@ Route3AfterBattleText2: ; 555b8 (15:55b8)
 	db "@"
 
 Route3Text4: ; 555bd (15:55bd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -158,7 +158,7 @@ Route3AfterBattleText3: ; 555d1 (15:55d1)
 	db "@"
 
 Route3Text5: ; 555d6 (15:55d6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -176,7 +176,7 @@ Route3AfterBattleText4: ; 555ea (15:55ea)
 	db "@"
 
 Route3Text6: ; 555ef (15:55ef)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -194,7 +194,7 @@ Route3AfterBattleText5: ; 55603 (15:5603)
 	db "@"
 
 Route3Text7: ; 55608 (15:5608)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -212,7 +212,7 @@ Route3AfterBattleText6: ; 5561c (15:561c)
 	db "@"
 
 Route3Text8: ; 55621 (15:5621)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -230,7 +230,7 @@ Route3AfterBattleText7: ; 55635 (15:5635)
 	db "@"
 
 Route3Text9: ; 5563a (15:563a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -22,7 +22,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 	db "@"
 
 MtMoonPokecenterText4: ; 492ec (12:52ec)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7c6]
 	add a
 	jp c, .asm_49353
@@ -35,18 +35,18 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .asm_4934e
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $5
-	ldh [$a0], a
+	ld [$ffa0], a
 	call HasEnoughMoney
-	jr nc, .asm_faa09 ; 0x49317
+	jr nc, .asm_faa09
 	ld hl, MtMoonPokecenterText_49366
-	jr .asm_49356 ; 0x4931c
-.asm_faa09 ; 0x4931e
+	jr .asm_49356
+.asm_faa09
 	ld bc,(MAGIKARP << 8) | 5
 	call GivePokemon
-	jr nc, .asm_49359 ; 0x49324
+	jr nc, .asm_49359
 	xor a
 	ld [wWhichTrade], a
 	ld [wTrainerFacingDirection], a
@@ -61,15 +61,15 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	call DisplayTextBoxID
 	ld hl, wd7c6
 	set 7, [hl]
-	jr .asm_49359 ; 0x4934c
-.asm_4934e ; 0x4934e
+	jr .asm_49359
+.asm_4934e
 	ld hl, MtMoonPokecenterText_49361
-	jr .asm_49356 ; 0x49351
-.asm_49353 ; 0x49353
+	jr .asm_49356
+.asm_49353
 	ld hl, MtMoonPokecenterText_4936b
-.asm_49356 ; 0x49356
+.asm_49356
 	call PrintText
-.asm_49359 ; 0x49359
+.asm_49359
 	jp TextScriptEnd
 
 MtMoonPokecenterText_4935c: ; 4935c (12:535c)

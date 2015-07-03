@@ -6,11 +6,11 @@ Route16HouseTextPointers: ; 1e5fb (7:65fb)
 	dw Route16HouseText2
 
 Route16HouseText1: ; 1e5ff (7:65ff)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 6, a
 	ld hl, HM02ExplanationText
-	jr nz, .asm_13616 ; 0x1e608
+	jr nz, .asm_13616
 	ld hl, Route16HouseText3
 	call PrintText
 	ld bc, (HM_02 << 8) | 1
@@ -19,10 +19,10 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 	ld hl, wd7e0
 	set 6, [hl]
 	ld hl, ReceivedHM02Text
-	jr .asm_13616 ; 0x1e620
+	jr .asm_13616
 .BagFull
 	ld hl, HM02NoRoomText
-.asm_13616 ; 0x1e625
+.asm_13616
 	call PrintText
 	jp TextScriptEnd
 
@@ -43,7 +43,7 @@ HM02NoRoomText: ; 1e63b (7:663b)
 	db "@"
 
 Route16HouseText2: ; 1e640 (7:6640)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16HouseText_1e652
 	call PrintText
 	ld a, FEAROW

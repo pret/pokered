@@ -20,7 +20,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ret nz
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
-	jr nz, .asm_1901e ; 0x19016 $6
+	jr nz, .asm_1901e
 	ld hl, wd74c
 	set 0, [hl]
 	ret
@@ -149,16 +149,16 @@ ViridianCityText1: ; 19102 (6:5102)
 	db "@"
 
 ViridianCityText2: ; 19107 (6:5107)
-	db $08 ; asm
+	TX_ASM
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	ld hl, ViridianCityText_19127
-	jr z, .asm_ae9fe ; 0x19110
+	jr z, .asm_ae9fe
 	ld a, [wd751]
 	bit 1, a
-	jr nz, .asm_ae9fe ; 0x19117
+	jr nz, .asm_ae9fe
 	ld hl, ViridianCityText_19122
-.asm_ae9fe ; 0x1911c
+.asm_ae9fe
 	call PrintText
 	jp TextScriptEnd
 
@@ -171,20 +171,20 @@ ViridianCityText_19127: ; 19127 (6:5127)
 	db "@"
 
 ViridianCityText3: ; 1912c (6:512c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_1914d
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_6dfea ; 0x1913a
+	jr nz, .asm_6dfea
 	ld hl, ViridianCityText_19157
 	call PrintText
-	jr .asm_d611f ; 0x19142
-.asm_6dfea ; 0x19144
+	jr .asm_d611f
+.asm_6dfea
 	ld hl, ViridianCityText_19152
 	call PrintText
-.asm_d611f ; 0x1914a
+.asm_d611f
 	jp TextScriptEnd
 
 ViridianCityText_1914d: ; 1914d (6:514d)
@@ -200,17 +200,17 @@ ViridianCityText_19157: ; 19157 (6:5157)
 	db "@"
 
 ViridianCityText4: ; 1915c (6:515c)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd74b]
 	bit 5, a
-	jr nz, .asm_83894 ; 0x19162
+	jr nz, .asm_83894
 	ld hl, ViridianCityText_19175
 	call PrintText
-	jr .asm_700a6 ; 0x1916a
-.asm_83894 ; 0x1916c
+	jr .asm_700a6
+.asm_83894
 	ld hl, ViridianCityText_1917a
 	call PrintText
-.asm_700a6 ; 0x19172
+.asm_700a6
 	jp TextScriptEnd
 
 ViridianCityText_19175: ; 19175 (6:5175)
@@ -222,7 +222,7 @@ ViridianCityText_1917a: ; 1917a (6:517a)
 	db "@"
 
 ViridianCityText5: ; 1917f (6:517f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_19191
 	call PrintText
 	call ViridianCityScript_190cf
@@ -235,10 +235,10 @@ ViridianCityText_19191: ; 19191 (6:5191)
 	db "@"
 
 ViridianCityText6: ; 19196 (6:5196)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd74c]
 	bit 1, a
-	jr nz, .asm_4e5a0 ; 0x1919c
+	jr nz, .asm_4e5a0
 	ld hl, ViridianCityText_191ca
 	call PrintText
 	ld bc, (TM_42 << 8) | 1
@@ -248,15 +248,15 @@ ViridianCityText6: ; 19196 (6:5196)
 	call PrintText
 	ld hl, wd74c
 	set 1, [hl]
-	jr .asm_3c73c ; 0x191b7
+	jr .asm_3c73c
 .BagFull
 	ld hl, TM42NoRoomText
 	call PrintText
-	jr .asm_3c73c ; 0x191bf
-.asm_4e5a0 ; 0x191c1
+	jr .asm_3c73c
+.asm_4e5a0
 	ld hl, TM42Explanation
 	call PrintText
-.asm_3c73c ; 0x191c7
+.asm_3c73c
 	jp TextScriptEnd
 
 ViridianCityText_191ca: ; 191ca (6:51ca)
@@ -276,24 +276,24 @@ TM42NoRoomText: ; 191da (6:51da)
 	db "@"
 
 ViridianCityText7: ; 191df (6:51df)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_1920a
 	call PrintText
-	ld c, $2
+	ld c, 2
 	call DelayFrames
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .asm_42f68 ; 0x191f2
+	jr z, .asm_42f68
 	ld hl, ViridianCityText_1920f
 	call PrintText
 	ld a, $1
 	ld [W_VIRIDIANCITYCURSCRIPT], a
-	jr .asm_2413a ; 0x191ff
-.asm_42f68 ; 0x19201
+	jr .asm_2413a
+.asm_42f68
 	ld hl, ViridianCityText_19214
 	call PrintText
-.asm_2413a ; 0x19207
+.asm_2413a
 	jp TextScriptEnd
 
 ViridianCityText_1920a: ; 1920a (6:520a)

@@ -109,4 +109,3 @@ Music_SafariZone_branch_bca5::
 	A_ 2
 	rest 2
 	endchannel
-; 0xbcbb

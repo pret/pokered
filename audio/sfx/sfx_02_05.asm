@@ -6,4 +6,3 @@ SFX_02_05_Ch1: ; 830d (2:430d)
 	unknownnoise0x20 3, 130, 51
 	unknownnoise0x20 2, 129, 50
 	endchannel
-; 0x8320

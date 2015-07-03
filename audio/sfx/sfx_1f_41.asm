@@ -75,4 +75,3 @@ SFX_1f_41_Ch3: ; 7ee09 (1f:6e09)
 	F_ 2
 	rest 2
 	endchannel
-; 0x7ee28

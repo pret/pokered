@@ -16,4 +16,3 @@ SFX_08_69_Ch2: ; 20695 (8:4695)
 	unknownnoise0x20 12, 245, 156
 	unknownnoise0x20 15, 244, 172
 	endchannel
-; 0x206a9

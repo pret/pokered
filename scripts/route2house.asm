@@ -10,7 +10,7 @@ Route2HouseText1: ; 1def4 (7:5ef4)
 	db "@"
 
 Route2HouseText2: ; 1def9 (7:5ef9)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

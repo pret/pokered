@@ -8,4 +8,3 @@ SFX_02_53_Ch1: ; 8654 (2:4654)
 	unknownnoise0x20 8, 244, 85
 	unknownnoise0x20 8, 241, 68
 	endchannel
-; 0x866d

@@ -9,10 +9,10 @@ Lab3TextPointers: ; 75c8a (1d:5c8a)
 	dw Lab3Text5
 
 Lab3Text1: ; 75c94 (1d:5c94)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7a1]
 	bit 7, a
-	jr nz, .asm_e551a ; 0x75c9a
+	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
 	call PrintText
 	ld bc, (TM_35 << 8) | 1
@@ -22,15 +22,15 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	call PrintText
 	ld hl, wd7a1
 	set 7, [hl]
-	jr .asm_eb896 ; 0x75cb5
+	jr .asm_eb896
 .BagFull
 	ld hl, TM35NoRoomText
 	call PrintText
-	jr .asm_eb896 ; 0x75cbd
-.asm_e551a ; 0x75cbf
+	jr .asm_eb896
+.asm_e551a
 	ld hl, TM35ExplanationText
 	call PrintText
-.asm_eb896 ; 0x75cc5
+.asm_eb896
 	jp TextScriptEnd
 
 TM35PreReceiveText: ; 75cc8 (1d:5cc8)

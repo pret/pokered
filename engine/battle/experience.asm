@@ -341,7 +341,7 @@ BoostExp: ; 5549f (15:549f)
 
 GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
-	db $08 ; asm
+	TX_ASM
 	ld a, [wBoostExpByExpAll]
 	ld hl, WithExpAllText
 	and a
@@ -355,7 +355,7 @@ GainedText: ; 554b2 (15:54b2)
 
 WithExpAllText: ; 554cb (15:54cb)
 	TX_FAR _WithExpAllText
-	db $08 ; asm
+	TX_ASM
 	ld hl, ExpPointsText
 	ret
 

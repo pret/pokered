@@ -27,4 +27,3 @@ SFX_02_20_Ch2: ; 8ae5 (2:4ae5)
 
 SFX_02_20_Ch3: ; 8b0b (2:4b0b)
 	endchannel
-; 0x8b0c

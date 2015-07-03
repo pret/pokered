@@ -9,15 +9,15 @@ DecrementPP: ; 68000 (1a:4000)
 	                     ; W_PLAYERBATTSTATUS2 status flags later
 	and a, (1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << AttackingMultipleTimes)
 	ret nz               ; if any of these statuses are true, don't decrement PP
-	bit UsingRage, [hl]         
+	bit UsingRage, [hl]
 	ret nz               ; don't decrement PP either if Pokemon is using Rage
 	ld hl, wBattleMonPP  ; PP of first move (in battle)
-	
-; decrement PP in the battle struct	
-	call .DecrementPP    
-	
-; decrement PP in the party struct	
-	ld a, [W_PLAYERBATTSTATUS3]        
+
+; decrement PP in the battle struct
+	call .DecrementPP
+
+; decrement PP in the party struct
+	ld a, [W_PLAYERBATTSTATUS3]
 	bit Transformed, a
 	ret nz               ; Return if transformed. Pokemon Red stores the "current pokemon's" PP
 	                     ; separately from the "Pokemon in your party's" PP.  This is
@@ -31,7 +31,7 @@ DecrementPP: ; 68000 (1a:4000)
 
 	ld hl, wPartyMon1PP  ; PP of first move (in party)
 	ld a, [wPlayerMonNumber] ; which mon in party is active
-	ld bc, wPartyMon2 - wPartyMon1 
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes       ; calculate address of the mon to modify
 .DecrementPP
 	ld a, [wPlayerMoveListIndex] ; which move (0, 1, 2, 3) did we use?

@@ -25,7 +25,7 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld [hJoyHeld], a
 	ld a, [wWhichTrade]
 	cp $1
-	jr z, .asm_498c6 ; 0x498a9 $1b
+	jr z, .asm_498c6
 	ld a, [wWhichTrade]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -87,16 +87,16 @@ Route18GateTextPointers: ; 4990d (12:590d)
 	dw Route18GateText2
 
 Route18GateText1: ; 49911 (12:5911)
-	db $08 ; asm
+	TX_ASM
 	call Route16GateScript_49755
-	jr z, .asm_3c84d ; 0x49915
+	jr z, .asm_3c84d
 	ld hl, Route18GateText_4992d
 	call PrintText
-	jr .asm_a8410 ; 0x4991d
-.asm_3c84d ; 0x4991f
+	jr .asm_a8410
+.asm_3c84d
 	ld hl, Route18GateText_49928
 	call PrintText
-.asm_a8410 ; 0x49925
+.asm_a8410
 	jp TextScriptEnd
 
 Route18GateText_49928: ; 49928 (12:5928)

@@ -30,7 +30,7 @@ MomHealPokemon: ; 4818a (12:418a)
 	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
 	ld [wc0ee], a
-	call PlaySound ; play sound?
+	call PlaySound
 .next
 	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED

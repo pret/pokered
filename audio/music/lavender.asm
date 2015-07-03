@@ -197,4 +197,3 @@ Music_Lavender_branch_bc26::
 	triangle2 8
 	triangle2 8
 	loopchannel 0, Music_Lavender_branch_bc26
-; 0xbc2e

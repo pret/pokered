@@ -1,7 +1,7 @@
 DisplayStartMenu:: ; 2acd (0:2acd)
-	ld a,$04 ; hardcoded Bank, not sure what's it refers to
+	ld a,BANK(StartMenu_Pokedex)
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; ROM bank 4
+	ld [MBC1RomBank],a
 	ld a,[wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy],a
 	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
@@ -10,7 +10,7 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 RedisplayStartMenu:: ; 2adf (0:2adf)
 	callba DrawStartMenu
 	callba PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 .loop
 	call HandleMenuInput
 	ld b,a

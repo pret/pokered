@@ -16,7 +16,7 @@ CopycatsHouse1FText2: ; 75ed1 (1d:5ed1)
 
 CopycatsHouse1FText3: ; 75ed6 (1d:5ed6)
 	TX_FAR _CopycatsHouse1FText3
-	db $8
+	TX_ASM
 	ld a, CHANSEY
 	call PlayCry
 	jp TextScriptEnd

@@ -33,105 +33,105 @@ MtMoon1TrainerHeader0: ; 499fd (12:59fd)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText2 ; 0x5a98 TextBeforeBattle
-	dw MtMoon1AfterBattleText2 ; 0x5aa2 TextAfterBattle
-	dw MtMoon1EndBattleText2 ; 0x5a9d TextEndBattle
-	dw MtMoon1EndBattleText2 ; 0x5a9d TextEndBattle
+	dw MtMoon1BattleText2 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText2 ; TextAfterBattle
+	dw MtMoon1EndBattleText2 ; TextEndBattle
+	dw MtMoon1EndBattleText2 ; TextEndBattle
 
 MtMoon1TrainerHeader2: ; 49a09 (12:5a09)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText3 ; 0x5aa7 TextBeforeBattle
-	dw MtMoon1AfterBattleText3 ; 0x5ab1 TextAfterBattle
-	dw MtMoon1EndBattleText3 ; 0x5aac TextEndBattle
-	dw MtMoon1EndBattleText3 ; 0x5aac TextEndBattle
+	dw MtMoon1BattleText3 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText3 ; TextAfterBattle
+	dw MtMoon1EndBattleText3 ; TextEndBattle
+	dw MtMoon1EndBattleText3 ; TextEndBattle
 
 MtMoon1TrainerHeader3: ; 49a15 (12:5a15)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText4 ; 0x5ab6 TextBeforeBattle
-	dw MtMoon1AfterBattleText4 ; 0x5ac0 TextAfterBattle
-	dw MtMoon1EndBattleText4 ; 0x5abb TextEndBattle
-	dw MtMoon1EndBattleText4 ; 0x5abb TextEndBattle
+	dw MtMoon1BattleText4 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText4 ; TextAfterBattle
+	dw MtMoon1EndBattleText4 ; TextEndBattle
+	dw MtMoon1EndBattleText4 ; TextEndBattle
 
 MtMoon1TrainerHeader4: ; 49a21 (12:5a21)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText5 ; 0x5ac5 TextBeforeBattle
-	dw MtMoon1AfterBattleText5 ; 0x5acf TextAfterBattle
-	dw MtMoon1EndBattleText5 ; 0x5aca TextEndBattle
-	dw MtMoon1EndBattleText5 ; 0x5aca TextEndBattle
+	dw MtMoon1BattleText5 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText5 ; TextAfterBattle
+	dw MtMoon1EndBattleText5 ; TextEndBattle
+	dw MtMoon1EndBattleText5 ; TextEndBattle
 
 MtMoon1TrainerHeader5: ; 49a2d (12:5a2d)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText6 ; 0x5ad4 TextBeforeBattle
-	dw MtMoon1AfterBattleText6 ; 0x5ade TextAfterBattle
-	dw MtMoon1EndBattleText6 ; 0x5ad9 TextEndBattle
-	dw MtMoon1EndBattleText6 ; 0x5ad9 TextEndBattle
+	dw MtMoon1BattleText6 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText6 ; TextAfterBattle
+	dw MtMoon1EndBattleText6 ; TextEndBattle
+	dw MtMoon1EndBattleText6 ; TextEndBattle
 
 MtMoon1TrainerHeader6: ; 49a39 (12:5a39)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText7 ; 0x5ae3 TextBeforeBattle
-	dw MtMoon1AfterBattleText7 ; 0x5aed TextAfterBattle
-	dw MtMoon1EndBattleText7 ; 0x5ae8 TextEndBattle
-	dw MtMoon1EndBattleText7 ; 0x5ae8 TextEndBattle
+	dw MtMoon1BattleText7 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText7 ; TextAfterBattle
+	dw MtMoon1EndBattleText7 ; TextEndBattle
+	dw MtMoon1EndBattleText7 ; TextEndBattle
 
 MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f5 ; flag's byte
-	dw MtMoon1BattleText8 ; 0x5af2 TextBeforeBattle
-	dw MtMoon1AfterBattleText8 ; 0x5afc TextAfterBattle
-	dw MtMoon1EndBattleText8 ; 0x5af7 TextEndBattle
-	dw MtMoon1EndBattleText8 ; 0x5af7 TextEndBattle
+	dw MtMoon1BattleText8 ; TextBeforeBattle
+	dw MtMoon1AfterBattleText8 ; TextAfterBattle
+	dw MtMoon1EndBattleText8 ; TextEndBattle
+	dw MtMoon1EndBattleText8 ; TextEndBattle
 
 	db $ff
 
 MtMoon1Text1: ; 49a52 (12:5a52)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text2: ; 49a5c (12:5a5c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text3: ; 49a66 (12:5a66)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text4: ; 49a70 (12:5a70)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text5: ; 49a7a (12:5a7a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text6: ; 49a84 (12:5a84)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text7: ; 49a8e (12:5a8e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd

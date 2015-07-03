@@ -59,4 +59,3 @@ SFX_08_46_Ch3: ; 23a44 (8:7a44)
 	G_ 2
 	G# 4
 	endchannel
-; 0x23a53

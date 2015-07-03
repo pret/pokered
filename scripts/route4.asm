@@ -25,10 +25,10 @@ Route4TrainerHeader0: ; 5567d (15:567d)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7c5 ; flag's byte
-	dw Route4BattleText1 ; 0x5699 TextBeforeBattle
-	dw Route4AfterBattleText1 ; 0x56a3 TextAfterBattle
-	dw Route4EndBattleText1 ; 0x569e TextEndBattle
-	dw Route4EndBattleText1 ; 0x569e TextEndBattle
+	dw Route4BattleText1 ; TextBeforeBattle
+	dw Route4AfterBattleText1 ; TextAfterBattle
+	dw Route4EndBattleText1 ; TextEndBattle
+	dw Route4EndBattleText1 ; TextEndBattle
 
 	db $ff
 
@@ -37,7 +37,7 @@ Route4Text1: ; 5568a (15:568a)
 	db "@"
 
 Route4Text2: ; 5568f (15:568f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd

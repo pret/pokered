@@ -33,7 +33,7 @@ DisplayDexRating: ; 44169 (11:4169)
 	call PrintText
 	pop hl
 	call PrintText
-	callba Func_7d13b
+	callba PlayPokedexRatingSfx
 	jp WaitForTextScrollButtonPress ; wait for button press
 .label3
 	ld de, wcc5b

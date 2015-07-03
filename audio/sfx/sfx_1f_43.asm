@@ -6,4 +6,3 @@ SFX_1f_43_Ch1: ; 7c49f (1f:449f)
 	unknownsfx0x20 15, 243, 0, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x7c4b2

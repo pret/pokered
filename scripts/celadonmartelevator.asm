@@ -32,9 +32,9 @@ CeladonMartElevatorScript_4862a: ; 4862a (12:462a)
 	ret
 
 CeladonMartElevatorScript_48631: ; 48631 (12:4631)
-	ld hl, CeladonMartElavatorFloors ; $4643
+	ld hl, CeladonMartElavatorFloors
 	call LoadItemList
-	ld hl, CeldaonMartElevatorWarpMaps ; $464a
+	ld hl, CeldaonMartElevatorWarpMaps
 	ld de, wcc5b
 	ld bc, $000a
 	jp CopyData
@@ -63,8 +63,8 @@ CeladonMartElevatorTextPointers: ; 4865c (12:465c)
 	dw CeladonMartElevatorText1
 
 CeladonMartElevatorText1: ; 4865e (12:465e)
-	db $08 ; asm
+	TX_ASM
 	call CeladonMartElevatorScript_48631
-	ld hl, CeldaonMartElevatorWarpMaps ; $464a
+	ld hl, CeldaonMartElevatorWarpMaps
 	predef Func_1c9c6
 	jp TextScriptEnd

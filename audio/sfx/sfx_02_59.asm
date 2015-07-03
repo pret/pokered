@@ -9,4 +9,3 @@ SFX_02_59_Ch2: ; 8422 (2:4422)
 	unknownsfx0x20 1, 8, 0, 0
 	unknownsfx0x20 4, 161, 97, 7
 	endchannel
-; 0x842d

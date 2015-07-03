@@ -28,12 +28,12 @@ Route16Script0: ; 59959 (16:5959)
 	res 0, [hl]
 	jp z, CheckFightingMapTrainers
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, SNORLAX
-	ld [W_CUROPPONENT], a ; wd059
+	ld [W_CUROPPONENT], a
 	ld a, 30
-	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld [W_CURENEMYLVL], a
 	ld a, HS_ROUTE_16_SNORLAX
 	ld [wcc4d], a
 	predef HideObject
@@ -44,7 +44,7 @@ Route16Script0: ; 59959 (16:5959)
 	ret
 
 Route16Script3: ; 5998f (16:598f)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, Route16Script_59946
 	call UpdateSprites
@@ -52,7 +52,7 @@ Route16Script3: ; 5998f (16:598f)
 	cp $2
 	jr z, .asm_599a8
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 .asm_599a8
 	ld hl, wd7e0
@@ -81,60 +81,60 @@ Route16TrainerHeader0: ; 599cf (16:59cf)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText1 ; 0x5a22 TextBeforeBattle
-	dw Route16AfterBattleText1 ; 0x5a2c TextAfterBattle
-	dw Route16EndBattleText1 ; 0x5a27 TextEndBattle
-	dw Route16EndBattleText1 ; 0x5a27 TextEndBattle
+	dw Route16BattleText1 ; TextBeforeBattle
+	dw Route16AfterBattleText1 ; TextAfterBattle
+	dw Route16EndBattleText1 ; TextEndBattle
+	dw Route16EndBattleText1 ; TextEndBattle
 
 Route16TrainerHeader1: ; 599db (16:59db)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText2 ; 0x5a3b TextBeforeBattle
-	dw Route16AfterBattleText2 ; 0x5a45 TextAfterBattle
-	dw Route16EndBattleText2 ; 0x5a40 TextEndBattle
-	dw Route16EndBattleText2 ; 0x5a40 TextEndBattle
+	dw Route16BattleText2 ; TextBeforeBattle
+	dw Route16AfterBattleText2 ; TextAfterBattle
+	dw Route16EndBattleText2 ; TextEndBattle
+	dw Route16EndBattleText2 ; TextEndBattle
 
 Route16TrainerHeader2: ; 599e7 (16:59e7)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText3 ; 0x5a54 TextBeforeBattle
-	dw Route16AfterBattleText3 ; 0x5a5e TextAfterBattle
-	dw Route16EndBattleText3 ; 0x5a59 TextEndBattle
-	dw Route16EndBattleText3 ; 0x5a59 TextEndBattle
+	dw Route16BattleText3 ; TextBeforeBattle
+	dw Route16AfterBattleText3 ; TextAfterBattle
+	dw Route16EndBattleText3 ; TextEndBattle
+	dw Route16EndBattleText3 ; TextEndBattle
 
 Route16TrainerHeader3: ; 599f3 (16:59f3)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText4 ; 0x5a6d TextBeforeBattle
-	dw Route16AfterBattleText4 ; 0x5a77 TextAfterBattle
-	dw Route16EndBattleText4 ; 0x5a72 TextEndBattle
-	dw Route16EndBattleText4 ; 0x5a72 TextEndBattle
+	dw Route16BattleText4 ; TextBeforeBattle
+	dw Route16AfterBattleText4 ; TextAfterBattle
+	dw Route16EndBattleText4 ; TextEndBattle
+	dw Route16EndBattleText4 ; TextEndBattle
 
 Route16TrainerHeader4: ; 599ff (16:59ff)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText5 ; 0x5a86 TextBeforeBattle
-	dw Route16AfterBattleText5 ; 0x5a90 TextAfterBattle
-	dw Route16EndBattleText5 ; 0x5a8b TextEndBattle
-	dw Route16EndBattleText5 ; 0x5a8b TextEndBattle
+	dw Route16BattleText5 ; TextBeforeBattle
+	dw Route16AfterBattleText5 ; TextAfterBattle
+	dw Route16EndBattleText5 ; TextEndBattle
+	dw Route16EndBattleText5 ; TextEndBattle
 
 Route16TrainerHeader5: ; 59a0b (16:5a0b)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7df ; flag's byte
-	dw Route16BattleText6 ; 0x5a9f TextBeforeBattle
-	dw Route16AfterBattleText6 ; 0x5aa9 TextAfterBattle
-	dw Route16EndBattleText6 ; 0x5aa4 TextEndBattle
-	dw Route16EndBattleText6 ; 0x5aa4 TextEndBattle
+	dw Route16BattleText6 ; TextBeforeBattle
+	dw Route16AfterBattleText6 ; TextAfterBattle
+	dw Route16EndBattleText6 ; TextEndBattle
+	dw Route16EndBattleText6 ; TextEndBattle
 
 	db $ff
 
 Route16Text1: ; 59a18 (16:5a18)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -152,7 +152,7 @@ Route16AfterBattleText1: ; 59a2c (16:5a2c)
 	db "@"
 
 Route16Text2: ; 59a31 (16:5a31)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -170,7 +170,7 @@ Route16AfterBattleText2: ; 59a45 (16:5a45)
 	db "@"
 
 Route16Text3: ; 59a4a (16:5a4a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -188,7 +188,7 @@ Route16AfterBattleText3: ; 59a5e (16:5a5e)
 	db "@"
 
 Route16Text4: ; 59a63 (16:5a63)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -206,7 +206,7 @@ Route16AfterBattleText4: ; 59a77 (16:5a77)
 	db "@"
 
 Route16Text5: ; 59a7c (16:5a7c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -224,7 +224,7 @@ Route16AfterBattleText5: ; 59a90 (16:5a90)
 	db "@"
 
 Route16Text6: ; 59a95 (16:5a95)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -16,4 +16,3 @@ SFX_1f_50_Ch1: ; 7c5cb (1f:45cb)
 	unknownnoise0x20 2, 65, 18
 	unknownnoise0x20 2, 0, 0
 	endchannel
-; 0x7c5fc

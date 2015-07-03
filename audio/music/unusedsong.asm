@@ -336,4 +336,3 @@ Music_UnusedSong_branch_a9d8::
 	rest 6
 	loopchannel 0, Music_UnusedSong_branch_a9d8
 	endchannel
-; 0xaa6f

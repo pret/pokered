@@ -688,4 +688,3 @@ Music_SurfingPikachu_branch_82ea0::
 	D# 1
 	rest 1
 	loopchannel 0, Music_SurfingPikachu_branch_82ea0
-; 0x82fbe

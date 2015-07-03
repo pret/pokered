@@ -1342,4 +1342,3 @@ Music_FinalBattle_branch_2396c::
 	octave 5
 	E_ 2
 	endchannel
-; 0x2397d

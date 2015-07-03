@@ -1,8 +1,8 @@
 PrintBeginningBattleText: ; 58d99 (16:4d99)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	dec a
 	jr nz, .trainerBattle
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	cp POKEMONTOWER_3
 	jr c, .notPokemonTower
 	cp LAVENDER_HOUSE_1
@@ -11,7 +11,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText
-	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
+	ld a, [W_MOVEMISSED]
 	and a
 	jr z, .notFishing
 	ld hl, HookedMonAttackedText
@@ -19,7 +19,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	jr .wildBattle
 .trainerBattle
 	call .playSFX
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	ld hl, TrainerWantsToFightText
 .wildBattle
@@ -139,22 +139,22 @@ PrintSendOutMonMessage: ; 58e59 (16:4e59)
 
 GoText: ; 58eae (16:4eae)
 	TX_FAR _GoText
-	db $08 ; asm
+	TX_ASM
 	jr PrintPlayerMon1Text
 
 DoItText: ; 58eb5 (16:4eb5)
 	TX_FAR _DoItText
-	db $08 ; asm
+	TX_ASM
 	jr PrintPlayerMon1Text
 
 GetmText: ; 58ebc (16:4ebc)
 	TX_FAR _GetmText
-	db $08 ; asm
+	TX_ASM
 	jr PrintPlayerMon1Text
 
 EnemysWeakText: ; 58ec3 (16:4ec3)
 	TX_FAR _EnemysWeakText
-	db $08 ; asm
+	TX_ASM
 
 PrintPlayerMon1Text:
 	ld hl, PlayerMon1Text
@@ -170,7 +170,7 @@ RetreatMon: ; 58ed1 (16:4ed1)
 
 PlayerMon2Text: ; 58ed7 (16:4ed7)
 	TX_FAR _PlayerMon2Text
-	db $08 ; asm
+	TX_ASM
 	push de
 	push bc
 	ld hl, wEnemyMonHP + 1
@@ -216,17 +216,17 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 
 EnoughText: ; 58f25 (16:4f25)
 	TX_FAR _EnoughText
-	db $08 ; asm
+	TX_ASM
 	jr PrintComeBackText
 
 OKExclamationText: ; 58f2c (16:4f2c)
 	TX_FAR _OKExclamationText
-	db $08 ; asm
+	TX_ASM
 	jr PrintComeBackText
 
 GoodText: ; 58f33 (16:4f33)
 	TX_FAR _GoodText
-	db $08 ; asm
+	TX_ASM
 	jr PrintComeBackText
 
 PrintComeBackText: ; 58f3a (16:4f3a)

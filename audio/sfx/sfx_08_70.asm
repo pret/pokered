@@ -30,4 +30,3 @@ SFX_08_70_Ch3: ; 20834 (8:4834)
 	unknownnoise0x20 15, 207, 16
 	unknownnoise0x20 15, 194, 16
 	endchannel
-; 0x20847

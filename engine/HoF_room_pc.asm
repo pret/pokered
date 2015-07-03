@@ -1,7 +1,7 @@
 HallOfFamePC: ; 7405c (1d:405c)
 	callba AnimateHallOfFame
 	call ClearScreen
-	ld c, $64
+	ld c, 100
 	call DelayFrames
 	call DisableLCD
 	ld hl, vFont
@@ -19,27 +19,27 @@ HallOfFamePC: ; 7405c (1d:405c)
 	hlCoord 0, 14
 	call Func_7417b
 	ld a, $c0
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	call EnableLCD
 	ld a, $ff
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_Credits)
 	ld a, MUSIC_CREDITS
 	call PlayMusic
-	ld c, $80
+	ld c, 128
 	call DelayFrames
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	ld [wTrainerEngageDistance], a
 	jp Credits
 
 Func_740ba: ; 740ba (1d:40ba)
-	ld hl, DataTable_74160 ; $4160
+	ld hl, DataTable_74160
 	ld b, $4
 .asm_740bf
 	ld a, [hli]
-	ld [rBGP], a ; $ff47
-	ld c, $5
+	ld [rBGP], a
+	ld c, 5
 	call DelayFrames
 	dec b
 	jr nz, .asm_740bf
@@ -116,7 +116,7 @@ Func_74152: ; 74152 (1d:4152)
 	cp l
 	jr nz, Func_74152
 	ld a, h
-	ld [rSCX], a ; $ff43
+	ld [rSCX], a
 .asm_7415a
 	ld a, [$ff44]
 	cp h
@@ -128,11 +128,11 @@ DataTable_74160: ; 74160 (1d:4160)
 
 Func_74164: ; 74164 (1d:4164)
 	ld a, l
-	ld [H_AUTOBGTRANSFERDEST], a ; $ffbc
+	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
 	ld [$ffbd], a
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
 Func_74171: ; 74171 (1d:4171)
@@ -157,7 +157,7 @@ FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	jp FillMemory
 
 Credits: ; 7418e (1d:418e)
-	ld de, CreditsOrder ; $4243
+	ld de, CreditsOrder
 	push de
 .asm_74192
 	pop de
@@ -183,7 +183,7 @@ Credits: ; 7418e (1d:418e)
 	jr z, .showTheEnd
 	push hl
 	push hl
-	ld hl, CreditsTextPointers ; $42c3
+	ld hl, CreditsTextPointers
 	add a
 	ld c, a
 	ld b, $0
@@ -205,20 +205,20 @@ Credits: ; 7418e (1d:418e)
 	jr .asm_7419b
 .asm_741d5
 	call Func_740ba
-	ld c, $5a
+	ld c, 90
 	jr .asm_741de
 .asm_741dc
-	ld c, $6e
+	ld c, 110
 .asm_741de
 	call DelayFrames
 	call DisplayCreditsMon
 	jr .asm_74192
 .asm_741e6
 	call Func_740ba
-	ld c, $78
+	ld c, 120
 	jr .asm_741ef
 .asm_741ed
-	ld c, $8c
+	ld c, 140
 .asm_741ef
 	call DelayFrames
 	jr .asm_74192
@@ -229,7 +229,7 @@ Credits: ; 7418e (1d:418e)
 	pop de
 	jr .asm_7419b
 .showTheEnd
-	ld c, $10
+	ld c, 16
 	call DelayFrames
 	call FillMiddleOfScreenWithWhite
 	pop de

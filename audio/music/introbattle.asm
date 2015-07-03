@@ -327,4 +327,3 @@ Music_IntroBattle_Ch4:: ; 7f95b (1f:795b)
 	rest 16
 	rest 14
 	endchannel
-; 0x7fa19

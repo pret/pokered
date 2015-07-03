@@ -4,4 +4,3 @@ SFX_08_53_Ch1: ; 20519 (8:4519)
 	unknownnoise0x20 6, 242, 35
 	unknownnoise0x20 15, 242, 34
 	endchannel
-; 0x20526

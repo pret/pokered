@@ -655,4 +655,3 @@ Music_Cities1_branch_ad6e::
 	triangle2 2
 	triangle2 2
 	endchannel
-; 0xad77

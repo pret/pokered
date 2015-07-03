@@ -1,6 +1,6 @@
 SSAnne5Script: ; 616ae (18:56ae)
 	call EnableAutoTextBoxDrawing
-	ld hl, SSAnne5TrainerHeader0 ; $56d1
+	ld hl, SSAnne5TrainerHeader0
 	ld de, SSAnne5ScriptPointers
 	ld a, [W_SSANNE5CURSCRIPT]
 	call ExecuteCurMapScriptInTable
@@ -24,19 +24,19 @@ SSAnne5TrainerHeader0: ; 616d1 (18:56d1)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7ff ; flag's byte
-	dw SSAnne5BattleText1 ; 0x5703 TextBeforeBattle
-	dw SSAnne5AfterBattleText1 ; 0x570d TextAfterBattle
-	dw SSAnne5EndBattleText1 ; 0x5708 TextEndBattle
-	dw SSAnne5EndBattleText1 ; 0x5708 TextEndBattle
+	dw SSAnne5BattleText1 ; TextBeforeBattle
+	dw SSAnne5AfterBattleText1 ; TextAfterBattle
+	dw SSAnne5EndBattleText1 ; TextEndBattle
+	dw SSAnne5EndBattleText1 ; TextEndBattle
 
 SSAnne5TrainerHeader1: ; 616dd (18:56dd)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7ff ; flag's byte
-	dw SSAnne5BattleText2 ; 0x571c TextBeforeBattle
-	dw SSAnne5AfterBattleText2 ; 0x5726 TextAfterBattle
-	dw SSAnne5EndBattleText2 ; 0x5721 TextEndBattle
-	dw SSAnne5EndBattleText2 ; 0x5721 TextEndBattle
+	dw SSAnne5BattleText2 ; TextBeforeBattle
+	dw SSAnne5AfterBattleText2 ; TextAfterBattle
+	dw SSAnne5EndBattleText2 ; TextEndBattle
+	dw SSAnne5EndBattleText2 ; TextEndBattle
 
 	db $ff
 
@@ -53,7 +53,7 @@ SSAnne5Text3: ; 616f4 (18:56f4)
 	db "@"
 
 SSAnne5Text4: ; 616f9 (18:56f9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -71,7 +71,7 @@ SSAnne5AfterBattleText1: ; 6170d (18:570d)
 	db "@"
 
 SSAnne5Text5: ; 61712 (18:5712)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd

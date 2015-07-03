@@ -26,4 +26,3 @@ SFX_08_6a_Ch3: ; 206db (8:46db)
 	unknownnoise0x20 15, 195, 50
 	loopchannel 2, SFX_08_6a_Ch3
 	endchannel
-; 0x206ec

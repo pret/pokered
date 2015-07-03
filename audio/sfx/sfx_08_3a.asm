@@ -61,4 +61,3 @@ SFX_08_3a_Ch3: ; 239b0 (8:79b0)
 	rest 1
 	A_ 8
 	endchannel
-; 0x239c7

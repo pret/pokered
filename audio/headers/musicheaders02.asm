@@ -182,5 +182,3 @@ Music_IndigoPlateau:: ; 82f1 (2:42f1)
 	dw Music_IndigoPlateau_Ch3
 	db CH3
 	dw Music_IndigoPlateau_Ch4
-
-; 0x82fd

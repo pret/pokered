@@ -12,8 +12,8 @@ PewterGymScript: ; 5c387 (17:4387)
 	ret
 
 PewterGymScript_5c3a4: ; 5c3a4 (17:43a4)
-	ld hl, Gym1CityName ; $43ad
-	ld de, Gym1LeaderName ; $43b9
+	ld hl, Gym1CityName
+	ld de, Gym1LeaderName
 	jp LoadGymLeaderAndCityName
 
 Gym1CityName: ; 5c3ad (17:43ad)
@@ -36,7 +36,7 @@ PewterGymScriptPointers: ; 5c3ca (17:43ca)
 	dw PewterGymScript3
 
 PewterGymScript3: ; 5c3d2 (17:43d2)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
@@ -44,7 +44,7 @@ PewterGymScript3: ; 5c3d2 (17:43d2)
 
 PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd755
 	set 7, [hl]
@@ -52,14 +52,14 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd755
 	set 6, [hl]
 	jr .asm_5c408
 .BagFull
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 .asm_5c408
 	ld hl, W_OBTAINEDBADGES
@@ -97,28 +97,28 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 	db $2 ; flag's bit
 	db ($5 << 4) ; trainer's view range
 	dw wd755 ; flag's byte
-	dw PewterGymBattleText1 ; 0x44d0 TextBeforeBattle
-	dw PewterGymAfterBattleText1 ; 0x44da TextAfterBattle
-	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
-	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
+	dw PewterGymBattleText1 ; TextBeforeBattle
+	dw PewterGymAfterBattleText1 ; TextAfterBattle
+	dw PewterGymEndBattleText1 ; TextEndBattle
+	dw PewterGymEndBattleText1 ; TextEndBattle
 
 	db $ff
 
 PewterGymText1: ; 5c44e (17:444e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd755]
 	bit 7, a
-	jr z, .asm_4a735 ; 0x5c454
+	jr z, .asm_5c46a
 	bit 6, a
-	jr nz, .asm_ff7d0 ; 0x5c458
+	jr nz, .asm_5c462
 	call z, PewterGymScript_5c3df
 	call DisableWaitingAfterTextDisplay
-	jr .asm_e0ffb ; 0x5c460
-.asm_ff7d0 ; 0x5c462
+	jr .asm_5c49b
+.asm_5c462
 	ld hl, PewterGymText_5c4a3
 	call PrintText
-	jr .asm_e0ffb ; 0x5c468
-.asm_4a735 ; 0x5c46a
+	jr .asm_5c49b
+.asm_5c46a
 	ld hl, PewterGymText_5c49e
 	call PrintText
 	ld hl, wd72d
@@ -127,18 +127,18 @@ PewterGymText1: ; 5c44e (17:444e)
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1
 	ld [W_GYMLEADERNO], a
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_PEWTERGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
-.asm_e0ffb ; 0x5c49b
+.asm_5c49b
 	jp TextScriptEnd
 
 PewterGymText_5c49e: ; 5c49e (17:449e)
@@ -170,7 +170,7 @@ PewterGymText_5c4bc: ; 5c4bc (17:44bc)
 	db "@"
 
 PewterGymText2: ; 5c4c6 (17:44c6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -188,30 +188,30 @@ PewterGymAfterBattleText1: ; 5c4da (17:44da)
 	db "@"
 
 PewterGymText3: ; 5c4df (17:44df)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd72a]
 	bit 0, a
-	jr nz, .asm_71369 ; 0x5c4e5
+	jr nz, .asm_5c50c
 	ld hl, PewterGymText_5c515
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_6123a ; 0x5c4f4
+	jr nz, .asm_5c4fe
 	ld hl, PewterGymText_5c51a
 	call PrintText
-	jr .asm_d1578 ; 0x5c4fc
-.asm_6123a ; 0x5c4fe
+	jr .asm_5c504
+.asm_5c4fe
 	ld hl, PewterGymText_5c524
 	call PrintText
-.asm_d1578 ; 0x5c504
+.asm_5c504
 	ld hl, PewterGymText_5c51f
 	call PrintText
-	jr .asm_07013 ; 0x5c50a
-.asm_71369 ; 0x5c50c
+	jr .asm_5c512
+.asm_5c50c
 	ld hl, PewterGymText_5c529
 	call PrintText
-.asm_07013 ; 0x5c512
+.asm_5c512
 	jp TextScriptEnd
 
 PewterGymText_5c515: ; 5c515 (17:4515)

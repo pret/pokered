@@ -7,7 +7,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld hl, wd730
 	set 6, [hl]
 	call DisableLCD
-	ld hl, CircleTile ; $7d88
+	ld hl, CircleTile
 	ld de, vChars2 + $700
 	ld bc, $0010
 	ld a, BANK(CircleTile)
@@ -15,7 +15,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld hl, wTileMap
 	ld bc, $1012
 	predef Diploma_TextBoxBorder
-	ld hl, DiplomaTextPointersAndCoords ; $6784
+	ld hl, DiplomaTextPointersAndCoords
 	ld c, $5
 .asm_56715
 	push bc
@@ -32,7 +32,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	inc hl
 	pop bc
 	dec c
-	jr nz, .asm_56715 ; 0x56725 $ee
+	jr nz, .asm_56715
 	hlCoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
@@ -48,7 +48,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld [hli], a
 	inc hl
 	dec c
-	jr nz, .asm_5673e ; 0x56747 $f5
+	jr nz, .asm_5673e
 	call EnableLCD
 	callba LoadTrainerInfoTextBoxTiles
 	ld b, $8
@@ -73,7 +73,7 @@ Func_56777: ; 56777 (15:6777)
 	cp $50
 	ret z
 	dec c
-	jr .asm_5677d ; 0x56782 $f9
+	jr .asm_5677d
 
 DiplomaTextPointersAndCoords: ; 56784 (15:6784)
 	dw DiplomaText

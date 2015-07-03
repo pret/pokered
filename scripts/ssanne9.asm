@@ -35,66 +35,66 @@ SSAnne9TrainerHeader0: ; 61b84 (18:5b84)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd807 ; flag's byte
-	dw SSAnne9BattleText1 ; 0x5c51 TextBeforeBattle
-	dw SSAnne9AfterBattleText1 ; 0x5c5b TextAfterBattle
-	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
-	dw SSAnne9EndBattleText1 ; 0x5c56 TextEndBattle
+	dw SSAnne9BattleText1 ; TextBeforeBattle
+	dw SSAnne9AfterBattleText1 ; TextAfterBattle
+	dw SSAnne9EndBattleText1 ; TextEndBattle
+	dw SSAnne9EndBattleText1 ; TextEndBattle
 
 SSAnne9TrainerHeader1: ; 61b90 (18:5b90)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd807 ; flag's byte
-	dw SSAnne9BattleText2 ; 0x5c60 TextBeforeBattle
-	dw SSAnne9AfterBattleText2 ; 0x5c6a TextAfterBattle
-	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
-	dw SSAnne9EndBattleText2 ; 0x5c65 TextEndBattle
+	dw SSAnne9BattleText2 ; TextBeforeBattle
+	dw SSAnne9AfterBattleText2 ; TextAfterBattle
+	dw SSAnne9EndBattleText2 ; TextEndBattle
+	dw SSAnne9EndBattleText2 ; TextEndBattle
 
 SSAnne9TrainerHeader2: ; 61b9c (18:5b9c)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd807 ; flag's byte
-	dw SSAnne9BattleText3 ; 0x5c6f TextBeforeBattle
-	dw SSAnne9AfterBattleText3 ; 0x5c79 TextAfterBattle
-	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
-	dw SSAnne9EndBattleText3 ; 0x5c74 TextEndBattle
+	dw SSAnne9BattleText3 ; TextBeforeBattle
+	dw SSAnne9AfterBattleText3 ; TextAfterBattle
+	dw SSAnne9EndBattleText3 ; TextEndBattle
+	dw SSAnne9EndBattleText3 ; TextEndBattle
 
 SSAnne9TrainerHeader3: ; 61ba8 (18:5ba8)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd807 ; flag's byte
-	dw SSAnne9BattleText4 ; 0x5c7e TextBeforeBattle
-	dw SSAnne9AfterBattleText4 ; 0x5c88 TextAfterBattle
-	dw SSAnne9EndBattleText4 ; 0x5c83 TextEndBattle
-	dw SSAnne9EndBattleText4 ; 0x5c83 TextEndBattle
+	dw SSAnne9BattleText4 ; TextBeforeBattle
+	dw SSAnne9AfterBattleText4 ; TextAfterBattle
+	dw SSAnne9EndBattleText4 ; TextEndBattle
+	dw SSAnne9EndBattleText4 ; TextEndBattle
 
 	db $ff
 
 SSAnne9Text1: ; 61bb5 (18:5bb5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne9Text2: ; 61bbf (18:5bbf)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne9Text3: ; 61bc9 (18:5bc9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne9Text4: ; 61bd3 (18:5bd3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne9Text5: ; 61bdd (18:5bdd)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, SSAnne9Text_61bf2
 	call PrintText
@@ -108,7 +108,7 @@ SSAnne9Text_61bf2: ; 61bf2 (18:5bf2)
 	db "@"
 
 SSAnne9Text7: ; 61bf7 (18:5bf7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c01
 	call PrintText
 	jp TextScriptEnd
@@ -118,7 +118,7 @@ SSAnne9Text_61c01: ; 61c01 (18:5c01)
 	db "@"
 
 SSAnne9Text8: ; 61c06 (18:5c06)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c10
 	call PrintText
 	jp TextScriptEnd
@@ -128,7 +128,7 @@ SSAnne9Text_61c10: ; 61c10 (18:5c10)
 	db "@"
 
 SSAnne9Text10: ; 61c15 (18:5c15)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c1f
 	call PrintText
 	jp TextScriptEnd
@@ -138,7 +138,7 @@ SSAnne9Text_61c1f: ; 61c1f (18:5c1f)
 	db "@"
 
 SSAnne9Text11: ; 61c24 (18:5c24)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c2e
 	call PrintText
 	jp TextScriptEnd
@@ -148,7 +148,7 @@ SSAnne9Text_61c2e: ; 61c2e (18:5c2e)
 	db "@"
 
 SSAnne9Text12: ; 61c33 (18:5c33)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c3d
 	call PrintText
 	jp TextScriptEnd
@@ -158,7 +158,7 @@ SSAnne9Text_61c3d: ; 61c3d (18:5c3d)
 	db "@"
 
 SSAnne9Text13: ; 61c42 (18:5c42)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne9Text_61c4c
 	call PrintText
 	jp TextScriptEnd

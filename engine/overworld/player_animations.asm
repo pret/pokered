@@ -58,7 +58,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	ld a, 12
 	ld [hli], a ; wFlyAnimCounter
 	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing right)
-	ld de, FlyAnimationEnterScreenCoords ; $4592
+	ld de, FlyAnimationEnterScreenCoords
 	call DoFlyAnimation
 	call LoadPlayerSpriteGraphics
 	jr .restoreDefaultMusic
@@ -154,7 +154,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	ld a, $c
 	ld [hli], a ; wFlyAnimCounter
 	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex (facing right)
-	ld de, FlyAnimationScreenCoords1 ; $464f
+	ld de, FlyAnimationScreenCoords1
 	call DoFlyAnimation
 	ld c, 40
 	call DelayFrames
@@ -162,7 +162,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	ld a, 11
 	ld [hli], a ; wFlyAnimCounter
 	ld [hl], $8 ; wFlyAnimBirdSpriteImageIndex (facing left)
-	ld de, FlyAnimationScreenCoords2 ; $4667
+	ld de, FlyAnimationScreenCoords2
 	call DoFlyAnimation
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
@@ -248,11 +248,11 @@ DoFlyAnimation: ; 706ae (1c:46ae)
 	ret
 
 LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
-	ld de, BirdSprite ; $4d80
+	ld de, BirdSprite
 	ld hl, vNPCSprites
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
-	ld de, BirdSprite + $c0 ; $4e40 ; moving amination sprite
+	ld de, BirdSprite + $c0 ; moving amination sprite
 	ld hl, vNPCSprites2
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	jp CopyVideoData
@@ -379,28 +379,28 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	db $FF
 
 Func_707b6: ; 707b6 (1c:47b6)
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld hl, wd736
 	set 6, [hl]
-	ld de, RedSprite ; $4180
+	ld de, RedSprite
 	ld hl, vNPCSprites
 	ld bc, (BANK(RedSprite) << 8) + $0c
 	call CopyVideoData
 	ld a, $4
-	ld hl, RedFishingTiles ; $4866
+	ld hl, RedFishingTiles
 	call LoadAnimSpriteGfx
 	ld a, [wSpriteStateData1 + 2]
 	ld c, a
 	ld b, $0
-	ld hl, FishingRodGfxProperties ; $4856
+	ld hl, FishingRodGfxProperties
 	add hl, bc
 	ld de, wOAMBuffer + $9c
 	ld bc, $4
 	call CopyData
-	ld c, $64
+	ld c, 100
 	call DelayFrames
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	and a
 	ld hl, NoNibbleText
 	jr z, .asm_70836

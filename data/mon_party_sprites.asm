@@ -13,8 +13,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_SNAKE, SPRITE_SNAKE			;Ekans/Arbok
 	dn SPRITE_FAIRY, SPRITE_FAIRY			;Pikachu/Raichu
 	dn SPRITE_MON, SPRITE_MON				;Sandshrew/Sandslash
-	dn SPRITE_MON, SPRITE_MON				;Nidoran?/Nidorina
-	dn SPRITE_MON, SPRITE_MON				;Nidoqueen/Nidoran?
+	dn SPRITE_MON, SPRITE_MON				;NidoranF/Nidorina
+	dn SPRITE_MON, SPRITE_MON				;Nidoqueen/NidoranM
 	dn SPRITE_MON, SPRITE_MON				;Nidorino/Nidoking
 	dn SPRITE_FAIRY, SPRITE_FAIRY			;Clefairy/Clefable
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Vulpix/Ninetales

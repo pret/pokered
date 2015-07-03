@@ -7,24 +7,24 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 	dw Route1Text3
 
 Route1Text1: ; 1cab8 (7:4ab8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, wd7bf
 	bit 0, [hl]
 	set 0, [hl]
-	jr nz, .asm_02840 ; 0x1cac0
+	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
 	call PrintText
 	ld bc, (POTION << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, Route1Text_1cae8 ; $4ae8
-	jr .asm_46d43 ; 0x1cad3
+	ld hl, Route1Text_1cae8
+	jr .asm_1cadd
 .BagFull
-	ld hl, Route1Text_1caf3 ; $4af3
-	jr .asm_46d43 ; 0x1cad8
-.asm_02840 ; 0x1cada
-	ld hl, Route1Text_1caee ; $4aee
-.asm_46d43 ; 0x1cadd
+	ld hl, Route1Text_1caf3
+	jr .asm_1cadd
+.asm_1cada
+	ld hl, Route1Text_1caee
+.asm_1cadd
 	call PrintText
 	jp TextScriptEnd
 

@@ -25,4 +25,3 @@ SFX_08_67_Ch3: ; 2064a (8:464a)
 	unknownnoise0x20 3, 161, 17
 	loopchannel 10, SFX_08_67_Ch3
 	endchannel
-; 0x20655

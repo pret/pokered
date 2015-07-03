@@ -15,4 +15,3 @@ SFX_02_16_Ch2: ; 8b1b (2:4b1b)
 
 SFX_02_16_Ch3: ; 8b29 (2:4b29)
 	endchannel
-; 0x8b2a

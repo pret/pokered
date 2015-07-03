@@ -736,4 +736,3 @@ Music_WildBattle_branch_232d8::
 	C# 2
 	G# 2
 	loopchannel 0, Music_WildBattle_branch_232d8
-; 0x233a6

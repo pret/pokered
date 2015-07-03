@@ -1,8 +1,8 @@
 ; returns whether the player is standing on a door tile in carry
 IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	push de
-	ld hl, DoorTileIDPointers ; $662c
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld hl, DoorTileIDPointers
+	ld a, [W_CURMAPTILESET]
 	ld de, $3
 	call IsInArray
 	pop de

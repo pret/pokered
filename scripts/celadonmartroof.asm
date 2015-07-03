@@ -5,7 +5,7 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	xor a
 	ld [wcd37], a
 	ld de, wcc5b
-	ld hl, CeladonMartRoofDrinkList ; $4408
+	ld hl, CeladonMartRoofDrinkList
 .asm_483e2
 	ld a, [hli]
 	and a
@@ -42,19 +42,19 @@ CeladonMartRoofDrinkList: ; 48408 (12:4408)
 CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld hl, wd730
 	set 6, [hl]
-	ld hl, CeladonMartRoofText_484ee ; $44ee
+	ld hl, CeladonMartRoofText_484ee
 	call PrintText
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wMenuWatchedKeys], a
 	ld a, [wcd37]
 	dec a
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $2
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $1
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	ld a, [wcd37]
 	dec a
 	ld bc, $2
@@ -73,7 +73,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	bit 1, a
 	ret nz
 	ld hl, wcc5b
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -86,7 +86,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld a, [wd778]
 	bit 6, a
 	jr nz, .asm_484e0
-	ld hl, CeladonMartRoofText_48515 ; $4515
+	ld hl, CeladonMartRoofText_48515
 	call PrintText
 	call RemoveItemByIDBank12
 	ld bc, (TM_49 << 8) | 1
@@ -101,13 +101,13 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld a, [wd778]
 	bit 5, a
 	jr nz, .asm_484e0
-	ld hl, CeladonMartRoofText_48504 ; $4504
+	ld hl, CeladonMartRoofText_48504
 	call PrintText
 	call RemoveItemByIDBank12
 	ld bc, (TM_48 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, CeladonMartRoofText_4850a ; $450a
+	ld hl, CeladonMartRoofText_4850a
 	call PrintText
 	ld hl, wd778
 	set 5, [hl]
@@ -116,22 +116,22 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld a, [wd778]
 	bit 4, a
 	jr nz, .asm_484e0
-	ld hl, CeladonMartRoofText_484f3 ; $44f3
+	ld hl, CeladonMartRoofText_484f3
 	call PrintText
 	call RemoveItemByIDBank12
 	ld bc, (TM_13 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, CeladonMartRoofText_484f9 ; $44f9
+	ld hl, CeladonMartRoofText_484f9
 	call PrintText
 	ld hl, wd778
 	set 4, [hl]
 	ret
 .BagFull
-	ld hl, CeladonMartRoofText_48526 ; $4526
+	ld hl, CeladonMartRoofText_48526
 	jp PrintText
 .asm_484e0
-	ld hl, CeladonMartRoofText_4852c ; $452c
+	ld hl, CeladonMartRoofText_4852c
 	jp PrintText
 
 RemoveItemByIDBank12: ; 484e6 (12:44e6)
@@ -224,11 +224,11 @@ CeladonMartRoofText1: ; 48567 (12:4567)
 	db "@"
 
 CeladonMartRoofText2: ; 4856c (12:456c)
-	db $08 ; asm
+	TX_ASM
 	call CeladonMartRoofScript_483d8
 	ld a, [wcd37]
 	and a
-	jr z, .asm_914b9 ; 0x48574
+	jr z, .asm_4858f
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonMartRoofText4
@@ -236,13 +236,13 @@ CeladonMartRoofText2: ; 4856c (12:456c)
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_05aa4 ; 0x48588
+	jr nz, .asm_48595
 	call CeladonMartRoofScript_4840c
-	jr .asm_05aa4 ; 0x4858d
-.asm_914b9 ; 0x4858f
+	jr .asm_48595
+.asm_4858f
 	ld hl, CeladonMartRoofText3
 	call PrintText
-.asm_05aa4 ; 0x48595
+.asm_48595
 	jp TextScriptEnd
 
 CeladonMartRoofText3: ; 48598 (12:4598)

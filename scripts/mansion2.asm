@@ -69,15 +69,15 @@ Mansion2TrainerHeader0: ; 52057 (14:6057)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd847 ; flag's byte
-	dw Mansion2BattleText1 ; 0x606e TextBeforeBattle
-	dw Mansion2AfterBattleText1 ; 0x6078 TextAfterBattle
-	dw Mansion2EndBattleText1 ; 0x6073 TextEndBattle
-	dw Mansion2EndBattleText1 ; 0x6073 TextEndBattle
+	dw Mansion2BattleText1 ; TextBeforeBattle
+	dw Mansion2AfterBattleText1 ; TextAfterBattle
+	dw Mansion2EndBattleText1 ; TextEndBattle
+	dw Mansion2EndBattleText1 ; TextEndBattle
 
 	db $ff
 
 Mansion2Text1: ; 52064 (14:6064)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -104,13 +104,13 @@ Mansion2Text4: ; 52082 (14:6082)
 
 Mansion3Text6: ; 52087 (14:6087)
 Mansion2Text5: ; 52087 (14:6087)
-	db $8
+	TX_ASM
 	ld hl, Mansion2Text_520c2
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_520b9 ; 0x52095 $22
+	jr nz, .asm_520b9
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd126
@@ -122,9 +122,9 @@ Mansion2Text5: ; 52087 (14:6087)
 	ld hl, wd796
 	bit 0, [hl]
 	set 0, [hl]
-	jr z, .asm_520bf ; 0x520b3 $a
+	jr z, .asm_520bf
 	res 0, [hl]
-	jr .asm_520bf ; 0x520b7 $6
+	jr .asm_520bf
 .asm_520b9
 	ld hl, Mansion2Text_520cc
 	call PrintText

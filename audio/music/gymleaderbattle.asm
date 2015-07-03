@@ -1398,4 +1398,3 @@ Music_GymLeaderBattle_branch_227b1::
 	octave 4
 	G_ 6
 	loopchannel 0, Music_GymLeaderBattle_branch_227b1
-; 0x22919

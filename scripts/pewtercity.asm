@@ -72,7 +72,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	call SetSpritePosition1
 	ld a, $3
 	ld [$ff8c], a
-	ld de, MovementData_PewterMuseumGuyExit ; $52ce
+	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -194,33 +194,33 @@ PewterCityText2: ; 193ac (6:53ac)
 	db "@"
 
 PewterCityText3: ; 193b1 (6:53b1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_f46a9 ; 0x193bf
+	jr nz, .asm_193c9
 	ld hl, PewterCityText_193f6
 	call PrintText
-	jr .asm_ac429 ; 0x193c7
-.asm_f46a9 ; 0x193c9
+	jr .asm_193ee
+.asm_193c9
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
-	ldh [$b3], a
-	ldh [$b4], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $1
 	ld [W_PEWTERCITYCURSCRIPT], a
-.asm_ac429 ; 0x193ee
+.asm_193ee
 	jp TextScriptEnd
 
 PewterCityText_193f1: ; 193f1 (6:53f1)
@@ -240,20 +240,20 @@ PewterCityText13: ; 19400 (6:5400)
 	db "@"
 
 PewterCityText4: ; 19405 (6:5405)
-	db $8
+	TX_ASM
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
-	jr nz, .asm_e4603
+	jr nz, .asm_1941e
 	ld hl, PewterCityText_1942c
 	call PrintText
-	jr .asm_e4604 ; 0x1941c $6
-.asm_e4603
+	jr .asm_19424
+.asm_1941e
 	ld hl, PewterCityText_19431
 	call PrintText
-.asm_e4604 ; 0x19424
+.asm_19424
 	jp TextScriptEnd
 
 PewterCityText_19427: ; 19427 (6:5427)
@@ -269,15 +269,15 @@ PewterCityText_19431: ; 19431 (6:5431)
 	db "@"
 
 PewterCityText5: ; 19436 (6:5436)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a

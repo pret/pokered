@@ -319,4 +319,3 @@ Music_IndigoPlateau_branch_a7a8::
 	mutedsnare3 1
 	mutedsnare3 1
 	endchannel
-; 0xa7c5

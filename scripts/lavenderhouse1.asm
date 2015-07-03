@@ -11,17 +11,17 @@ LavenderHouse1TextPointers: ; 1d8ac (7:58ac)
 	dw LavenderHouse1Text6
 
 LavenderHouse1Text1: ; 1d8b8 (7:58b8)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 7, a
-	jr nz, .asm_72e5d ; 0x1d8be
+	jr nz, .asm_72e5d
 	ld hl, LavenderHouse1Text_1d8d1
 	call PrintText
-	jr .asm_6957f ; 0x1d8c6
-.asm_72e5d ; 0x1d8c8
+	jr .asm_6957f
+.asm_72e5d
 	ld hl, LavenderHouse1Text_1d8d6
 	call PrintText
-.asm_6957f ; 0x1d8ce
+.asm_6957f
 	jp TextScriptEnd
 
 LavenderHouse1Text_1d8d1: ; 1d8d1 (7:58d1)
@@ -33,17 +33,17 @@ LavenderHouse1Text_1d8d6: ; 1d8d6 (7:58d6)
 	db "@"
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 7, a
-	jr nz, .asm_06470 ; 0x1d8e1
+	jr nz, .asm_06470
 	ld hl, LavenderHouse1Text_1d8f4
 	call PrintText
-	jr .asm_3d208 ; 0x1d8e9
-.asm_06470 ; 0x1d8eb
+	jr .asm_3d208
+.asm_06470
 	ld hl, LavenderHouse1Text_1d8f9
 	call PrintText
-.asm_3d208 ; 0x1d8f1
+.asm_3d208
 	jp TextScriptEnd
 
 LavenderHouse1Text_1d8f4: ; 1d8f4 (7:58f4)
@@ -56,23 +56,23 @@ LavenderHouse1Text_1d8f9: ; 1d8f9 (7:58f9)
 
 LavenderHouse1Text3: ; 1d8fe (7:58fe)
 	TX_FAR _LavenderHouse1Text3
-	db $8
+	TX_ASM
 	ld a, PSYDUCK
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 1d90b (7:590b)
 	TX_FAR _LavenderHouse1Text4
-	db $8
+	TX_ASM
 	ld a, NIDORINO
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text5: ; 1d918 (7:5918)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd76c]
 	bit 0, a
-	jr nz, .asm_15ac2 ; 0x1d91e
+	jr nz, .asm_15ac2
 	ld hl, LavenderHouse1Text_1d94c
 	call PrintText
 	ld bc, (POKE_FLUTE << 8) | 1
@@ -82,15 +82,15 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 	call PrintText
 	ld hl, wd76c
 	set 0, [hl]
-	jr .asm_da749 ; 0x1d939
+	jr .asm_da749
 .BagFull
 	ld hl, FluteNoRoomText
 	call PrintText
-	jr .asm_da749 ; 0x1d941
-.asm_15ac2 ; 0x1d943
+	jr .asm_da749
+.asm_15ac2
 	ld hl, MrFujiAfterFluteText
 	call PrintText
-.asm_da749 ; 0x1d949
+.asm_da749
 	jp TextScriptEnd
 
 LavenderHouse1Text_1d94c: ; 1d94c (7:594c)

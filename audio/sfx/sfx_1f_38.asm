@@ -31,4 +31,3 @@ SFX_1f_38_Ch3: ; 7c878 (1f:4878)
 	unknownnoise0x20 12, 183, 76
 	unknownnoise0x20 15, 162, 92
 	endchannel
-; 0x7c888

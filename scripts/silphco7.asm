@@ -13,7 +13,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_51bc1 ; $5bc1
+	ld hl, DataTable_51bc1
 	call SilphCo7Text_51bc8
 	call SilphCo7Text_51bf4
 	ld a, [wd830]
@@ -136,20 +136,20 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wcf0d], a
 	cp $1
 	jr z, .asm_51c6c
 	inc de
 .asm_51c6c
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call MoveSprite
 	ld a, $3
 	jp SilphCo7Text_51c10
@@ -169,18 +169,18 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, SilphCo7Text14 ; $5ec8
-	ld de, SilphCo7Text_51ecd ; $5ecd
+	ld hl, SilphCo7Text14
+	ld de, SilphCo7Text_51ecd
 	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
-	ld [W_CUROPPONENT], a ; wd059
-	ld a, [W_RIVALSTARTER] ; wd715
+	ld [W_CUROPPONENT], a
+	ld a, [W_RIVALSTARTER]
 	cp STARTER2
 	jr nz, .asm_51cb6
 	ld a, $7
@@ -193,12 +193,12 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 .asm_51cbe
 	ld a, $9
 .asm_51cc0
-	ld [W_TRAINERNO], a ; wd05d
+	ld [W_TRAINERNO], a
 	ld a, $4
 	jp SilphCo7Text_51c10
 
 SilphCo7Script4: ; 51cc8 (14:5cc8)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, SilphCo7Text_51c0c
 	ld a, $f0
@@ -208,12 +208,12 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, $4
 	ld [wd528], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	ld a, $4
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wc0ee], a
@@ -226,7 +226,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call MoveSprite
 	ld a, $5
 	jp SilphCo7Text_51c10
@@ -271,43 +271,43 @@ SilphCo7TrainerHeader0: ; 51d5d (14:5d5d)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd82f ; flag's byte
-	dw SilphCo7BattleText1 ; 0x5e5a TextBeforeBattle
-	dw SilphCo7AfterBattleText1 ; 0x5e64 TextAfterBattle
-	dw SilphCo7EndBattleText1 ; 0x5e5f TextEndBattle
-	dw SilphCo7EndBattleText1 ; 0x5e5f TextEndBattle
+	dw SilphCo7BattleText1 ; TextBeforeBattle
+	dw SilphCo7AfterBattleText1 ; TextAfterBattle
+	dw SilphCo7EndBattleText1 ; TextEndBattle
+	dw SilphCo7EndBattleText1 ; TextEndBattle
 
 SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd82f ; flag's byte
-	dw SilphCo7BattleText2 ; 0x5e73 TextBeforeBattle
-	dw SilphCo7AfterBattleText2 ; 0x5e7d TextAfterBattle
-	dw SilphCo7EndBattleText2 ; 0x5e78 TextEndBattle
-	dw SilphCo7EndBattleText2 ; 0x5e78 TextEndBattle
+	dw SilphCo7BattleText2 ; TextBeforeBattle
+	dw SilphCo7AfterBattleText2 ; TextAfterBattle
+	dw SilphCo7EndBattleText2 ; TextEndBattle
+	dw SilphCo7EndBattleText2 ; TextEndBattle
 
 SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd82f ; flag's byte
-	dw SilphCo7BattleText3 ; 0x5e8c TextBeforeBattle
-	dw SilphCo7AfterBattleText3 ; 0x5e96 TextAfterBattle
-	dw SilphCo7EndBattleText3 ; 0x5e91 TextEndBattle
-	dw SilphCo7EndBattleText3 ; 0x5e91 TextEndBattle
+	dw SilphCo7BattleText3 ; TextBeforeBattle
+	dw SilphCo7AfterBattleText3 ; TextAfterBattle
+	dw SilphCo7EndBattleText3 ; TextEndBattle
+	dw SilphCo7EndBattleText3 ; TextEndBattle
 
 SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd82f ; flag's byte
-	dw SilphCo7BattleText4 ; 0x5ea5 TextBeforeBattle
-	dw SilphCo7AfterBattleText4 ; 0x5eaf TextAfterBattle
-	dw SilphCo7EndBattleText4 ; 0x5eaa TextEndBattle
-	dw SilphCo7EndBattleText4 ; 0x5eaa TextEndBattle
+	dw SilphCo7BattleText4 ; TextBeforeBattle
+	dw SilphCo7AfterBattleText4 ; TextAfterBattle
+	dw SilphCo7EndBattleText4 ; TextEndBattle
+	dw SilphCo7EndBattleText4 ; TextEndBattle
 
 	db $ff
 
 SilphCo7Text1:
 ; lapras guy
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
@@ -355,7 +355,7 @@ SilphCo7Text1:
 	db "@"
 
 SilphCo7Text2:
-	db $8
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -377,7 +377,7 @@ SilphCo7Text2:
 	db "@"
 
 SilphCo7Text3:
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -399,7 +399,7 @@ SilphCo7Text3:
 	db "@"
 
 SilphCo7Text4:
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -421,7 +421,7 @@ SilphCo7Text4:
 	db "@"
 
 SilphCo7Text5: ; 51e50 (14:5e50)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -439,7 +439,7 @@ SilphCo7AfterBattleText1: ; 51e64 (14:5e64)
 	db "@"
 
 SilphCo7Text6: ; 51e69 (14:5e69)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -457,7 +457,7 @@ SilphCo7AfterBattleText2: ; 51e7d (14:5e7d)
 	db "@"
 
 SilphCo7Text7: ; 51e82 (14:5e82)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -475,7 +475,7 @@ SilphCo7AfterBattleText3: ; 51e96 (14:5e96)
 	db "@"
 
 SilphCo7Text8: ; 51e9b (14:5e9b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -493,7 +493,7 @@ SilphCo7AfterBattleText4: ; 51eaf (14:5eaf)
 	db "@"
 
 SilphCo7Text9: ; 51eb4 (14:5eb4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7Text_51ebe
 	call PrintText
 	jp TextScriptEnd

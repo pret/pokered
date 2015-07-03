@@ -12,4 +12,3 @@ SFX_1f_67_Ch1: ; 7c72d (1f:472d)
 	unknownsfx0x20 15, 18, 224, 7
 	unknownsfx0x10 8
 	endchannel
-; 0x7c758

@@ -402,4 +402,3 @@ Music_Routes1_Ch4:: ; 9d24 (2:5d24)
 	mutedsnare1 2
 	loopchannel 0, Music_Routes1_Ch4
 	endchannel
-; 0x9db9

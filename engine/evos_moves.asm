@@ -117,7 +117,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call CopyStringToCF4B
 	ld hl, IsEvolvingText
 	call PrintText
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -129,7 +129,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
-	callab Func_7bde9
+	callab EvolveMon
 	jp c, CancelledEvolution
 	ld hl, EvolvedText
 	call PrintText
@@ -149,7 +149,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, (SFX_02_3b - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	ld c, $28
+	ld c, 40
 	call DelayFrames
 	call ClearScreen
 	call RenameEvolvedMon
@@ -407,13 +407,13 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	and a
 	jp z, .done       ; end of list
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	cp b
 	jp c, .done       ; mon level < move level (assumption: learnset is sorted by level)
 	ld a, [wHPBarMaxHP]
 	and a
 	jr z, .skipMinLevelCheck
-	ld a, [wWhichTrade] ; wWhichTrade (min move level)
+	ld a, [wWhichTrade] ; min move level)
 	cp b
 	jr nc, .nextMove2 ; min level >= move level
 .skipMinLevelCheck

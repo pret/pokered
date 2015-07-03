@@ -21,7 +21,7 @@ SSAnne2Script4: ; 613bd (18:53bd)
 	ret
 
 SSAnne2Script0: ; 613be (18:53be)
-	ld hl, CoordsData_61411 ; $5411
+	ld hl, CoordsData_61411
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
@@ -45,9 +45,9 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [wJoyIgnore], a
 	ld a, [$ffdb]
 	cp $2
-	jr nz, .asm_61400 ; 0x613f9 $5
+	jr nz, .asm_61400
 	ld de, MovementData_6140c
-	jr .asm_61403 ; 0x613fe $3
+	jr .asm_61403
 .asm_61400
 	ld de, MovementData_6140d
 .asm_61403
@@ -66,7 +66,7 @@ CoordsData_61411: ; 61411 (18:5411)
 	db $08,$24,$08,$25,$FF
 
 SSAnne2Script_61416: ; 61416 (18:5416)
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	cp $25
 	jr nz, .asm_61426
 	ld a, $2
@@ -78,7 +78,7 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 .asm_61427
 	ld [$ff8d], a
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SSAnne2Script1: ; 61430 (18:5430)
@@ -98,12 +98,12 @@ SSAnne2Script1: ; 61430 (18:5430)
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
-	jr nz, .NotSquirtle ; 0x61451 $4
+	jr nz, .NotSquirtle
 	ld a, $1
 	jr .done
 .NotSquirtle
 	cp STARTER3
-	jr nz, .Charmander ; 0x61459 $4
+	jr nz, .Charmander
 	ld a, $2
 	jr .done
 .Charmander
@@ -131,9 +131,9 @@ SSAnne2Script2: ; 6146d (18:546d)
 	call SetSpriteMovementBytesToFF
 	ld a, [W_XCOORD]
 	cp $25
-	jr nz, .asm_61497 ; 0x61490 $5
+	jr nz, .asm_61497
 	ld de, MovementData_614b9
-	jr .asm_6149a ; 0x61495 $3
+	jr .asm_6149a
 .asm_61497
 	ld de, MovementData_614b7
 .asm_6149a
@@ -178,7 +178,7 @@ SSAnne2Text1: ; 614e1 (18:54e1)
 	db "@"
 
 SSAnne2Text2: ; 614e6 (18:54e6)
-	db $8
+	TX_ASM
 	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
 	ld hl, wd72d

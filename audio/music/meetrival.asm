@@ -394,4 +394,3 @@ Music_MeetRival_branch_b2b5::
 	G_ 1
 	rest 1
 	loopchannel 0, Music_MeetRival_branch_b24b
-; 0xb2c8

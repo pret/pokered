@@ -48,18 +48,18 @@ FossilsList: ; 75d68 (1d:5d68)
 	db $00
 
 Lab4Text1: ; 75d6c (1d:5d6c)
-	db $8
+	TX_ASM
 	ld a, [wd7a3]
 	bit 0, a
-	jr nz, .asm_75d96 ; 0x75d72 $22
+	jr nz, .asm_75d96
 	ld hl, Lab4Text_75dc6
 	call PrintText
 	call Lab4Script_75d38
 	ld a, [wcd37]
 	and a
-	jr z, .asm_75d8d ; 0x75d81 $a
+	jr z, .asm_75d8d
 	callba GiveFossilToCinnabarLab
-	jr .asm_75d93 ; 0x75d8b $6
+	jr .asm_75d93
 .asm_75d8d
 	ld hl, Lab4Text_75dcb
 	call PrintText
@@ -67,10 +67,10 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	jp TextScriptEnd
 .asm_75d96
 	bit 1, a
-	jr z, .asm_75da2 ; 0x75d98 $8
+	jr z, .asm_75da2
 	ld hl, Lab4Text_75dd0
 	call PrintText
-	jr .asm_75d93 ; 0x75da0 $f1
+	jr .asm_75d93
 .asm_75da2
 	call LoadFossilItemAndMonNameBank1D
 	ld hl, Lab4Text_75dd5
@@ -81,12 +81,12 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	ld b, a
 	ld c, 30
 	call GivePokemon
-	jr nc, .asm_75d93 ; 0x75db9 $d8
+	jr nc, .asm_75d93
 	ld hl, wd7a3
 	res 0, [hl]
 	res 1, [hl]
 	res 2, [hl]
-	jr .asm_75d93 ; 0x75dc4 $cd
+	jr .asm_75d93
 
 Lab4Text_75dc6: ; 75dc6 (1d:5dc6)
 	TX_FAR _Lab4Text_75dc6
@@ -105,7 +105,7 @@ Lab4Text_75dd5: ; 75dd5 (1d:5dd5)
 	db "@"
 
 Lab4Text2: ; 75dda (1d:5dda)
-	db $08 ; asm
+	TX_ASM
 	ld a, $3
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

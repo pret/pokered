@@ -44,10 +44,10 @@ CeladonCityText4: ; 19999 (6:5999)
 	db "@"
 
 CeladonCityText5: ; 1999e (6:599e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd777]
 	bit 0, a
-	jr nz, .asm_7053f ; 0x199a4
+	jr nz, .asm_7053f
 	ld hl, TM41PreText
 	call PrintText
 	ld bc, (TM_41 << 8) | 1
@@ -62,7 +62,7 @@ CeladonCityText5: ; 1999e (6:599e)
 	ld hl, wd777
 	set 0, [hl]
 	jr .Done
-.asm_7053f ; 0x199c9
+.asm_7053f
 	ld hl, TM41ExplanationText
 	call PrintText
 .Done
@@ -90,7 +90,7 @@ CeladonCityText6: ; 199e7 (6:59e7)
 
 CeladonCityText7: ; 199ec (6:59ec)
 	TX_FAR _CeladonCityText7
-	db $08 ; asm
+	TX_ASM
 	ld a, POLIWRATH
 	call PlayCry
 	jp TextScriptEnd

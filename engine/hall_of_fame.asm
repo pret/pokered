@@ -11,7 +11,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld a, $7f
 	call FillMemory
 	call EnableLCD
-	ld hl, rLCDC ; $ff40
+	ld hl, rLCDC
 	set 3, [hl]
 	xor a
 	ld hl, wHallOfFame
@@ -24,7 +24,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld [wd358], a
 	ld [wTrainerScreenY], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wd5a2
 	ld a, [hl]
 	inc a
@@ -45,17 +45,17 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	inc c
 	push hl
 	push bc
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	ld a, c
 	ld [wTrainerEngageDistance], a
-	ld hl, wPartyMon1Level ; wPartyMon1Level
+	ld hl, wPartyMon1Level
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hl]
 	ld [wTrainerFacingDirection], a
 	call Func_70278
 	call Func_702e1
-	ld c, $50
+	ld c, 80
 	call DelayFrames
 	hlCoord 2, 13
 	ld b, $3
@@ -79,15 +79,15 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld [hl], $ff
 	call SaveHallOfFameTeams
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	inc a
 	ld [wTrainerScreenY], a
 	call Func_70278
-	call Func_70377
+	call HoFDisplayPlayerStats
 	call Func_70423
 	xor a
 	ld [hWY], a
-	ld hl, rLCDC ; $ff40
+	ld hl, rLCDC
 	res 3, [hl]
 	ret
 
@@ -100,7 +100,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld [hSCY], a
 	ld a, $c0
 	ld [hSCX], a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
@@ -108,7 +108,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld a, [wTrainerScreenY]
 	and a
 	jr z, .asm_7029d
-	call Func_7033e
+	call HoFLoadPlayerPics
 	jr .asm_702ab
 .asm_7029d
 	hlCoord 12, 5
@@ -120,7 +120,7 @@ Func_70278: ; 70278 (1c:4278)
 	ld c, $0
 	call GoPAL_SET
 	ld a, $e4
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	ld c, $31
 	call Func_7036d
 	ld d, $a0
@@ -148,7 +148,7 @@ Func_70278: ; 70278 (1c:4278)
 
 Func_702e1: ; 702e1 (1c:42e1)
 	ld a, [wTrainerEngageDistance]
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	call Func_702f0
 	jp Func_70404
@@ -167,11 +167,11 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld a, [wTrainerFacingDirection]
 	hlCoord 8, 7
 	call PrintLevelCommon
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wd0b5], a
 	hlCoord 3, 9
 	predef PrintMonType
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)
@@ -179,8 +179,8 @@ HoFMonInfoText: ; 70329 (1c:4329)
 	next "TYPE1/"
 	next "TYPE2/@"
 
-Func_7033e: ; 7033e (1c:433e)
-	ld de, RedPicFront ; $6ede
+HoFLoadPlayerPics: ; 7033e (1c:433e)
+	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
 	ld hl, S_SPRITEBUFFER1
@@ -189,7 +189,7 @@ Func_7033e: ; 7033e (1c:433e)
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
-	ld de, RedPicBack ; $7e0a
+	ld de, RedPicBack
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
 	predef ScaleSpriteByTwo
@@ -202,7 +202,7 @@ Func_7036d: ; 7036d (1c:436d)
 	hlCoord 12, 5
 	predef_jump CopyTileIDsFromList
 
-Func_70377: ; 70377 (1c:4377)
+HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	ld hl, wd747
 	set 3, [hl]
 	predef DisplayDexRating
@@ -215,7 +215,7 @@ Func_70377: ; 70377 (1c:4377)
 	ld c, $9
 	call TextBoxBorder
 	hlCoord 7, 2
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	call PlaceString
 	hlCoord 1, 6
 	ld de, HoFPlayTimeText
@@ -233,18 +233,18 @@ Func_70377: ; 70377 (1c:4377)
 	ld de, HoFMoneyText
 	call PlaceString
 	hlCoord 4, 10
-	ld de, wPlayerMoney ; wPlayerMoney
+	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
 	ld hl, DexSeenOwnedText
-	call Func_703e2
+	call HoFPrintTextAndDelay
 	ld hl, DexRatingText
-	call Func_703e2
+	call HoFPrintTextAndDelay
 	ld hl, wcc5d
 
-Func_703e2: ; 703e2 (1c:43e2)
+HoFPrintTextAndDelay: ; 703e2 (1c:43e2)
 	call PrintText
-	ld c, $78
+	ld c, 120
 	jp DelayFrames
 
 HoFPlayTimeText: ; 703ea (1c:43ea)
@@ -266,7 +266,7 @@ Func_70404: ; 70404 (1c:4404)
 	ld bc, HOF_MON
 	ld a, [wTrainerEngageDistance]
 	call AddNTimes
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [hli], a
 	ld a, [wTrainerFacingDirection]
 	ld [hli], a

@@ -300,4 +300,3 @@ Music_DefeatedWildMon_branch_23c21::
 	octave 4
 	D# 4
 	loopchannel 0, Music_DefeatedWildMon_branch_23c21
-; 0x23cad

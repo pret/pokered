@@ -58,36 +58,36 @@ SilphCo6TrainerHeader0: ; 1a20a (6:620a)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd82d ; flag's byte
-	dw SilphCo6BattleText2 ; 0x62ba TextBeforeBattle
-	dw SilphCo6AfterBattleText2 ; 0x62c4 TextAfterBattle
-	dw SilphCo6EndBattleText2 ; 0x62bf TextEndBattle
-	dw SilphCo6EndBattleText2 ; 0x62bf TextEndBattle
+	dw SilphCo6BattleText2 ; TextBeforeBattle
+	dw SilphCo6AfterBattleText2 ; TextAfterBattle
+	dw SilphCo6EndBattleText2 ; TextEndBattle
+	dw SilphCo6EndBattleText2 ; TextEndBattle
 
 SilphCo6TrainerHeader2: ; 1a216 (6:6216)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd82d ; flag's byte
-	dw SilphCo6BattleText3 ; 0x62d3 TextBeforeBattle
-	dw SilphCo6AfterBattleText3 ; 0x62dd TextAfterBattle
-	dw SilphCo6EndBattleText3 ; 0x62d8 TextEndBattle
-	dw SilphCo6EndBattleText3 ; 0x62d8 TextEndBattle
+	dw SilphCo6BattleText3 ; TextBeforeBattle
+	dw SilphCo6AfterBattleText3 ; TextAfterBattle
+	dw SilphCo6EndBattleText3 ; TextEndBattle
+	dw SilphCo6EndBattleText3 ; TextEndBattle
 
 SilphCo6TrainerHeader3: ; 1a222 (6:6222)
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd82d ; flag's byte
-	dw SilphCo6BattleText4 ; 0x62ec TextBeforeBattle
-	dw SilphCo6AfterBattleText4 ; 0x62f6 TextAfterBattle
-	dw SilphCo6EndBattleText4 ; 0x62f1 TextEndBattle
-	dw SilphCo6EndBattleText4 ; 0x62f1 TextEndBattle
+	dw SilphCo6BattleText4 ; TextBeforeBattle
+	dw SilphCo6AfterBattleText4 ; TextAfterBattle
+	dw SilphCo6EndBattleText4 ; TextEndBattle
+	dw SilphCo6EndBattleText4 ; TextEndBattle
 
 	db $ff
 
 SilphCo6Script_1a22f: ; 1a22f (6:622f)
 	ld a, [wd838]
 	bit 7, a
-	jr nz, .asm_1a238 ; 0x1a234 $2
-	jr .asm_1a23a ; 0x1a236 $2
+	jr nz, .asm_1a238
+	jr .asm_1a23a
 .asm_1a238
 	ld h, d
 	ld l, e
@@ -95,7 +95,7 @@ SilphCo6Script_1a22f: ; 1a22f (6:622f)
 	jp PrintText
 
 SilphCo6Text1: ; 1a23d (6:623d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6Text_1a24a
 	ld de, SilphCo6Text_1a24f
 	call SilphCo6Script_1a22f
@@ -110,7 +110,7 @@ SilphCo6Text_1a24f: ; 1a24f (6:624f)
 	db "@"
 
 SilphCo6Text2: ; 1a254 (6:6254)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6Text_1a261
 	ld de, SilphCo6Text_1a266
 	call SilphCo6Script_1a22f
@@ -125,7 +125,7 @@ SilphCo6Text_1a266: ; 1a266 (6:6266)
 	db "@"
 
 SilphCo6Text3: ; 1a26b (6:626b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6Text_1a278
 	ld de, SilphCo6Text_1a27d
 	call SilphCo6Script_1a22f
@@ -140,7 +140,7 @@ SilphCo6Text_1a27d: ; 1a27d (6:627d)
 	db "@"
 
 SilphCo6Text4: ; 1a282 (6:6282)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6Text_1a28f
 	ld de, SilphCo6Text_1a294
 	call SilphCo6Script_1a22f
@@ -155,7 +155,7 @@ SilphCo6Text_1a294: ; 1a294 (6:6294)
 	db "@"
 
 SilphCo6Text5: ; 1a299 (6:6299)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6Text_1a2a6
 	ld de, SilphCo6Text_1a2ab
 	call SilphCo6Script_1a22f
@@ -170,7 +170,7 @@ SilphCo6Text_1a2ab: ; 1a2ab (6:62ab)
 	db "@"
 
 SilphCo6Text6: ; 1a2b0 (6:62b0)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -188,7 +188,7 @@ SilphCo6AfterBattleText2: ; 1a2c4 (6:62c4)
 	db "@"
 
 SilphCo6Text7: ; 1a2c9 (6:62c9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -206,7 +206,7 @@ SilphCo6AfterBattleText3: ; 1a2dd (6:62dd)
 	db "@"
 
 SilphCo6Text8: ; 1a2e2 (6:62e2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo6TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd

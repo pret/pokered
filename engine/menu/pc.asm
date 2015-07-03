@@ -1,13 +1,13 @@
 ActivatePC: ; 17e2c (5:7e2c)
-	call SaveScreenTilesToBuffer2  ;XXX: copy background from wTileMap to wTileMapBackup2
+	call SaveScreenTilesToBuffer2
 	ld a, (SFX_02_45 - SFX_Headers_02) / 3
-	call PlaySound  ;XXX: play sound or stop music
+	call PlaySound
 	ld hl, TurnedOnPC1Text
 	call PrintText
-	call WaitForSoundToFinish  ;XXX: wait for sound to be done
+	call WaitForSoundToFinish
 	ld hl, wFlags_0xcd60
 	set 3, [hl]
-	call LoadScreenTilesFromBuffer2  ;XXX: restore saved screen
+	call LoadScreenTilesFromBuffer2
 	call Delay3
 PCMainMenu: ; 17e48 (5:7e48)
 	callba Func_213c8
@@ -52,28 +52,28 @@ PCMainMenu: ; 17e48 (5:7e48)
 	res 5, [hl]
 	set 3, [hl]
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
-	call PlaySound  ;XXX: play sound or stop music
-	call WaitForSoundToFinish  ;XXX: wait for sound to be done
+	call PlaySound
+	call WaitForSoundToFinish
 	ld hl, AccessedMyPCText
 	call PrintText
 	callba PlayerPC
 	jr ReloadMainMenu
 OaksPC: ; 17ec0 (5:7ec0)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
-	call PlaySound  ;XXX: play sound or stop music
-	call WaitForSoundToFinish  ;XXX: wait for sound to be done
+	call PlaySound
+	call WaitForSoundToFinish
 	callba OpenOaksPC
 	jr ReloadMainMenu
 PKMNLeague: ; 17ed2 (5:7ed2)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
-	call PlaySound  ;XXX: play sound or stop music
-	call WaitForSoundToFinish  ;XXX: wait for sound to be done
+	call PlaySound
+	call WaitForSoundToFinish
 	callba PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC: ; 17ee4 (5:7ee4)
 	ld a, (SFX_02_47 - SFX_Headers_02) / 3
-	call PlaySound    ;XXX: play sound or stop music
-	call WaitForSoundToFinish    ;XXX: wait for sound to be done
+	call PlaySound
+	call WaitForSoundToFinish
 	ld a, [wd7f1] ;has to do with having met Bill
 	bit 0, a
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
@@ -88,12 +88,12 @@ ReloadMainMenu: ; 17f06 (5:7f06)
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call ReloadMapData
-	call UpdateSprites  ;XXX: moves sprites
+	call UpdateSprites
 	jp PCMainMenu
 LogOff: ; 17f13 (5:7f13)
 	ld a, (SFX_02_46 - SFX_Headers_02) / 3
-	call PlaySound  ;XXX: play sound or stop music
-	call WaitForSoundToFinish  ;XXX: wait for sound to be done
+	call PlaySound
+	call WaitForSoundToFinish
 	ld hl, wFlags_0xcd60
 	res 3, [hl]
 	res 5, [hl]
@@ -117,7 +117,7 @@ AccessedMyPCText: ; 17f32 (5:7f32)
 
 ; removes one of the specified item ID [$FFdb] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
-	ld hl, wBagItems ; wd31e
+	ld hl, wBagItems
 	ld a, [$ffdb]
 	ld b, a
 	xor a
@@ -137,6 +137,6 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	ld a, $1
 	ld [wcf96], a
 	ld a, [$ffdc]
-	ld [wWhichPokemon], a ; wWhichPokemon
-	ld hl, wNumBagItems ; wNumBagItems
+	ld [wWhichPokemon], a
+	ld hl, wNumBagItems
 	jp RemoveItemFromInventory

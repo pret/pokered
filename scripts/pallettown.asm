@@ -35,7 +35,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	ld a, BANK(Music_MeetProfOak)
 	ld c,a ; song bank
 	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
-	call PlayMusic ; plays music
+	call PlayMusic
 	ld a,$FC
 	ld [wJoyIgnore],a
 	ld hl,wd74b

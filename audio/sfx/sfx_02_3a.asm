@@ -45,4 +45,3 @@ SFX_02_3a_Ch3: ; ad9e (2:6d9e)
 	B_ 2
 	rest 2
 	endchannel
-; 0xadae

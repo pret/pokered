@@ -7,24 +7,24 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 	dw BikeShopText3
 
 BikeShopText1: ; 1d745 (7:5745)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75f]
 	bit 0, a
-	jr z, .asm_260d4 ; 0x1d74b
+	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
 	call PrintText
 	jp .Done
-.asm_260d4 ; 0x1d756
+.asm_260d4
 	ld b, BIKE_VOUCHER
 	call IsItemInBag
-	jr z, .asm_41190 ; 0x1d75b
+	jr z, .asm_41190
 	ld hl, BikeShopText_1d81f
 	call PrintText
 	ld bc, (BICYCLE << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
 	ld hl, wd75f
 	set 0, [hl]
@@ -35,7 +35,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld hl, BikeShopText_1d834
 	call PrintText
 	jr .Done
-.asm_41190 ; 0x1d78c
+.asm_41190
 	ld hl, BikeShopText_1d810
 	call PrintText
 	xor a
@@ -66,15 +66,15 @@ BikeShopText1: ; 1d745 (7:5745)
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_b7579 ; 0x1d7dc
+	jr nz, .asm_b7579
 	ld hl, wd730
 	res 6, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_b7579 ; 0x1d7e7
+	jr nz, .asm_b7579
 	ld hl, BikeShopText_1d81a
 	call PrintText
-.asm_b7579 ; 0x1d7ef
+.asm_b7579
 	ld hl, BikeShopText_1d82a
 	call PrintText
 .Done
@@ -104,7 +104,7 @@ BikeShopText_1d81f: ; 1d81f (7:581f)
 	db "@"
 
 BikeShopText_1d824: ; 1d824 (7:5824)
-	TX_FAR _BikeShopText_1d824 ; 0x98eb2
+	TX_FAR _BikeShopText_1d824
 	db $11, "@"
 
 BikeShopText_1d82a: ; 1d82a (7:582a)
@@ -120,7 +120,7 @@ BikeShopText_1d834: ; 1d834 (7:5834)
 	db "@"
 
 BikeShopText2: ; 1d839 (7:5839)
-	db $08 ; asm
+	TX_ASM
 	ld hl, BikeShopText_1d843
 	call PrintText
 	jp TextScriptEnd
@@ -130,13 +130,13 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 	db "@"
 
 BikeShopText3: ; 1d848 (7:5848)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75f]
 	bit 0, a
 	ld hl, BikeShopText_1d861
-	jr nz, .asm_34d2d ; 0x1d851
+	jr nz, .asm_34d2d
 	ld hl, BikeShopText_1d85c
-.asm_34d2d ; 0x1d856
+.asm_34d2d
 	call PrintText
 	jp TextScriptEnd
 

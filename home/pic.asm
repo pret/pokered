@@ -6,7 +6,7 @@ UncompressSpriteData:: ; 24fd (0:24fd)
 	push af
 	ld a, b
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	ld a, $a
 	ld [$0], a
 	xor a
@@ -14,7 +14,7 @@ UncompressSpriteData:: ; 24fd (0:24fd)
 	call _UncompressSpriteData
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	ret
 
 ; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop
@@ -31,7 +31,7 @@ _UncompressSpriteData:: ; 251a (0:251a)
 	xor a
 	ld [W_SPRITECURPOSX], a
 	ld [W_SPRITECURPOSY], a
-	ld [W_SPRITELOADFLAGS], a ; wd0a8
+	ld [W_SPRITELOADFLAGS], a
 	call ReadNextInputByte    ; first byte of input determines sprite width (high nybble) and height (low nybble) in tiles (8x8 pixels)
 	ld b, a
 	and $f
@@ -57,13 +57,13 @@ _UncompressSpriteData:: ; 251a (0:251a)
 ; note that this is an endless loop which is terminated during a call to MoveToNextBufferPosition by manipulating the stack
 UncompressSpriteDataLoop:: ; 2556 (0:2556)
 	ld hl, S_SPRITEBUFFER1
-	ld a, [W_SPRITELOADFLAGS]  ; wd0a8
+	ld a, [W_SPRITELOADFLAGS]
 	bit 0, a
 	jr z, .useSpriteBuffer1    ; check which buffer to use
 	ld hl, S_SPRITEBUFFER2
 .useSpriteBuffer1
 	call StoreSpriteOutputPointer
-	ld a, [W_SPRITELOADFLAGS]  ; wd0a8
+	ld a, [W_SPRITELOADFLAGS]
 	bit 1, a
 	jr z, .startDecompression  ; check if last iteration
 	call ReadNextInputBit      ; if last chunk, read 1-2 bit unpacking mode
@@ -195,12 +195,12 @@ MoveToNextBufferPosition:: ; 25d8 (0:25d8)
 	pop hl
 	xor a
 	ld [W_SPRITECURPOSX], a
-	ld a, [W_SPRITELOADFLAGS] ; wd0a8
+	ld a, [W_SPRITELOADFLAGS]
 	bit 1, a
 	jr nz, .done            ; test if there is one more sprite to go
 	xor $1
 	set 1, a
-	ld [W_SPRITELOADFLAGS], a ; wd0a8
+	ld [W_SPRITELOADFLAGS], a
 	jp UncompressSpriteDataLoop
 .done
 	jp UnpackSprite
@@ -539,7 +539,7 @@ ReverseNybble:: ; 2837 (0:2837)
 
 ; resets sprite buffer pointers to buffer 1 and 2, depending on W_SPRITELOADFLAGS
 ResetSpriteBufferPointers:: ; 2841 (0:2841)
-	ld a, [W_SPRITELOADFLAGS] ; wd0a8
+	ld a, [W_SPRITELOADFLAGS]
 	bit 0, a
 	jr nz, .buffer2Selected
 	ld de, S_SPRITEBUFFER1

@@ -18,7 +18,7 @@ LoadSAV: ; 735e8 (1c:75e8)
 	set 6, [hl]
 	ld hl, FileDataDestroyedText
 	call PrintText
-	ld c, $64
+	ld c, 100
 	call DelayFrames
 	pop hl
 	res 6, [hl]
@@ -54,7 +54,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 
 .Func_73652 ; 73652 (1c:7652)
 	ld hl, $a598
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	ld bc, $b
 	call CopyData
 	ld hl, $a5a3
@@ -110,11 +110,11 @@ LoadSAVCheckSum2: ; 736bd (1c:76bd)
 	cp c
 	jp nz, SAVBadCheckSum
 	ld hl, $af2c
-	ld de, wPartyCount ; wPartyCount
+	ld de, wPartyCount
 	ld bc, $194
 	call CopyData
 	ld hl, $a5a3
-	ld de, wPokedexOwned ; wPokedexOwned
+	ld de, wPokedexOwned
 	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	and a
@@ -129,12 +129,12 @@ SAVGoodChecksum: ; 736f8 (1c:76f8)
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73701: ; 0x73701
+Func_73701: ; 73701 (1c:7701)
 	call LoadSAVCheckSum
 	call LoadSAVCheckSum1
 	jp LoadSAVCheckSum2
 
-SaveSAV: ;$770a
+SaveSAV: ; 7370a (1c:770a)
 	callba PrintSaveScreenText
 	ld hl,WouldYouLikeToSaveText
 	call SaveSAVConfirm
@@ -149,22 +149,22 @@ SaveSAV: ;$770a
 	call SaveSAVConfirm
 	and a
 	ret nz
-.save        ;$772d
-	call SaveSAVtoSRAM      ;$7848
+.save
+	call SaveSAVtoSRAM
 	hlCoord 1, 13
 	ld bc,$0412
 	call ClearScreenArea ; clear area 4x12 starting at 13,1
 	hlCoord 1, 14
 	ld de,NowSavingString
 	call PlaceString
-	ld c,$78
+	ld c,120
 	call DelayFrames
 	ld hl,GameSavedText
 	call PrintText
 	ld a, (SFX_02_5d - SFX_Headers_02) / 3 ;sound for saved game
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	ld c,$1e
+	ld c,30
 	jp DelayFrames
 
 NowSavingString:
@@ -308,7 +308,7 @@ Func_73863: ; 73863 (1c:7863)
 	ret
 
 Func_7387b: ; 7387b (1c:787b)
-	ld hl, PointerTable_73895 ; $7895
+	ld hl, PointerTable_73895
 	ld a, [wd5a0]
 	and $7f
 	cp $6
@@ -411,21 +411,21 @@ Func_7390e: ; 7390e (1c:790e)
 
 Func_7393f: ; 7393f (1c:793f)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $3
-	ld [wMenuWatchedKeys], a ; wMenuWatchedKeys
+	ld [wMenuWatchedKeys], a
 	ld a, $b
-	ld [wMaxMenuItem], a ; wMaxMenuItem
+	ld [wMaxMenuItem], a
 	ld a, $1
-	ld [wTopMenuItemY], a ; wTopMenuItemY
+	ld [wTopMenuItemY], a
 	ld a, $c
-	ld [wTopMenuItemX], a ; wTopMenuItemX
+	ld [wTopMenuItemX], a
 	xor a
 	ld [wcc37], a
 	ld a, [wd5a0]
 	and $7f
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-	ld [wLastMenuItem], a ; wLastMenuItem
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld hl, wTileMap
 	ld b, $2
 	ld c, $9
@@ -438,7 +438,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call TextBoxBorder
 	ld hl, hFlags_0xFFF6
 	set 2, [hl]
-	ld de, BoxNames ; $79d9
+	ld de, BoxNames
 	hlCoord 13, 1
 	call PlaceString
 	ld hl, hFlags_0xFFF6
@@ -461,7 +461,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call PlaceString
 	call Func_73a84
 	hlCoord 18, 1
-	ld de, wWhichTrade ; wWhichTrade
+	ld de, wWhichTrade
 	ld bc, $14
 	ld a, $c
 .asm_739c2
@@ -477,7 +477,7 @@ Func_7393f: ; 7393f (1c:793f)
 	dec a
 	jr nz, .asm_739c2
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
 ChooseABoxText: ; 739d4 (1c:79d4)
@@ -545,7 +545,7 @@ Func_73a7f: ; 73a7f (1c:7a7f)
 	ret
 
 Func_73a84: ; 73a84 (1c:7a84)
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 	push hl
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
@@ -566,7 +566,7 @@ Func_73a84: ; 73a84 (1c:7a84)
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	ld [hl], a
 	ret
 
@@ -585,7 +585,7 @@ Func_73ab8: ; 73ab8 (1c:7ab8)
 	ld [hli], a
 	ret
 
-SAVCheckRandomID: ;$7ad1
+SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 ;checks if Sav file is the same by checking player's name 1st letter ($a598)
 ; and the two random numbers generated at game beginning
 ;(which are stored at wPlayerID)
@@ -646,7 +646,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	call AddNTimes
 	ld de, wcc5b
 	ld bc, HOF_TEAM

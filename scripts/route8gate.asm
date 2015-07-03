@@ -34,7 +34,7 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
-	jr nz, .asm_1e220 ; 0x1e20e $10
+	jr nz, .asm_1e220
 	ld a, $2
 	ld [$ff8c], a
 	call DisplayTextID

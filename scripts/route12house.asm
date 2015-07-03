@@ -5,7 +5,7 @@ Route12HouseTextPointers: ; 56482 (15:6482)
 	dw Route12HouseText1
 
 Route12HouseText1: ; 56484 (15:6484)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd728]
 	bit 5, a
 	jr nz, .asm_b4cad
@@ -27,7 +27,7 @@ Route12HouseText1: ; 56484 (15:6484)
 	jr .asm_df984
 .asm_a2d76
 	ld hl, Route12HouseText_564cf
-	jr .asm_df984 ; 0x564b5
+	jr .asm_df984
 .asm_b4cad
 	ld hl, Route12HouseText_564d4
 .asm_df984
@@ -39,9 +39,9 @@ Route12HouseText_564c0: ; 564c0 (15:64c0)
 	db "@"
 
 Route12HouseText_564c5: ; 564c5 (15:64c5)
-	TX_FAR _Route12HouseText_564c5 ; 0x8ca00
+	TX_FAR _Route12HouseText_564c5
 	db $0B
-	TX_FAR _Route12HouseText_564ca ; 0x8ca4f
+	TX_FAR _Route12HouseText_564ca
 	db "@"
 
 Route12HouseText_564cf: ; 564cf (15:64cf)

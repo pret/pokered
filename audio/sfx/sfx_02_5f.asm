@@ -7,4 +7,3 @@ SFX_02_5f_Ch1: ; 86c8 (2:46c8)
 	unknownsfx0x20 15, 68, 0, 7
 	unknownsfx0x20 15, 36, 0, 7
 	endchannel
-; 0x86e3

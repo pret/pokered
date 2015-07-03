@@ -19,4 +19,3 @@ SFX_08_6f_Ch3: ; 207ef (8:47ef)
 	unknownnoise0x20 4, 242, 68
 	loopchannel 9, SFX_08_6f_Ch3
 	endchannel
-; 0x207fa

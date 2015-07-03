@@ -32,9 +32,9 @@ SilphCoElevatorScript_457ea: ; 457ea (11:57ea)
 	ret
 
 SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
-	ld hl, SilphCoElavatorFloors ; $5804
+	ld hl, SilphCoElavatorFloors
 	call LoadItemList
-	ld hl, SilphCoElevatorWarpMaps ; $5811
+	ld hl, SilphCoElevatorWarpMaps
 	ld de, wcc5b
 	ld bc, $16
 	call CopyData
@@ -70,8 +70,8 @@ SilphCoElevatorTextPointers: ; 45833 (11:5833)
 	dw SilphCoElevatorText1
 
 SilphCoElevatorText1: ; 45835 (11:5835)
-	db $08 ; asm
+	TX_ASM
 	call SilphCoElevatorScript_457f1
-	ld hl, SilphCoElevatorWarpMaps ; $5811
+	ld hl, SilphCoElevatorWarpMaps
 	predef Func_1c9c6
 	jp TextScriptEnd

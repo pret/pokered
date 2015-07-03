@@ -13,7 +13,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_5d82e ; $582e
+	ld hl, DataTable_5d82e
 	call SilphCo9Script_5d837
 	call SilphCo9Script_5d863
 	ld a, [wd834]
@@ -131,36 +131,36 @@ SilphCo9TrainerHeader0: ; 5d893 (17:5893)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd833 ; flag's byte
-	dw SilphCo9BattleText1 ; 0x5912 TextBeforeBattle
-	dw SilphCo9AfterBattleText1 ; 0x591c TextAfterBattle
-	dw SilphCo9EndBattleText1 ; 0x5917 TextEndBattle
-	dw SilphCo9EndBattleText1 ; 0x5917 TextEndBattle
+	dw SilphCo9BattleText1 ; TextBeforeBattle
+	dw SilphCo9AfterBattleText1 ; TextAfterBattle
+	dw SilphCo9EndBattleText1 ; TextEndBattle
+	dw SilphCo9EndBattleText1 ; TextEndBattle
 
 SilphCo9TrainerHeader1: ; 5d89f (17:589f)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd833 ; flag's byte
-	dw SilphCo9BattleText2 ; 0x5921 TextBeforeBattle
-	dw SilphCo9AfterBattleText2 ; 0x592b TextAfterBattle
-	dw SilphCo9EndBattleText2 ; 0x5926 TextEndBattle
-	dw SilphCo9EndBattleText2 ; 0x5926 TextEndBattle
+	dw SilphCo9BattleText2 ; TextBeforeBattle
+	dw SilphCo9AfterBattleText2 ; TextAfterBattle
+	dw SilphCo9EndBattleText2 ; TextEndBattle
+	dw SilphCo9EndBattleText2 ; TextEndBattle
 
 SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd833 ; flag's byte
-	dw SilphCo9BattleText3 ; 0x5930 TextBeforeBattle
-	dw SilphCo9AfterBattleText3 ; 0x593a TextAfterBattle
-	dw SilphCo9EndBattleText3 ; 0x5935 TextEndBattle
-	dw SilphCo9EndBattleText3 ; 0x5935 TextEndBattle
+	dw SilphCo9BattleText3 ; TextBeforeBattle
+	dw SilphCo9AfterBattleText3 ; TextAfterBattle
+	dw SilphCo9EndBattleText3 ; TextEndBattle
+	dw SilphCo9EndBattleText3 ; TextEndBattle
 
 	db $ff
 
 SilphCo9Text1: ; 5d8b8 (17:58b8)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
-	jr nz, .asm_a14c3 ; 0x5d8be
+	jr nz, .asm_5d8dc
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText
 	predef HealParty
@@ -169,11 +169,11 @@ SilphCo9Text1: ; 5d8b8 (17:58b8)
 	call GBFadeInFromWhite
 	ld hl, SilphCo9Text_5d8ea
 	call PrintText
-	jr .asm_b6e28 ; 0x5d8da
-.asm_a14c3 ; 0x5d8dc
+	jr .asm_5d8e2
+.asm_5d8dc
 	ld hl, SilphCo9Text_5d8ef
 	call PrintText
-.asm_b6e28 ; 0x5d8e2
+.asm_5d8e2
 	jp TextScriptEnd
 
 SilphCo9Text_5d8e5: ; 5d8e5 (17:58e5)
@@ -189,19 +189,19 @@ SilphCo9Text_5d8ef: ; 5d8ef (17:58ef)
 	db "@"
 
 SilphCo9Text2: ; 5d8f4 (17:58f4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo9TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo9Text3: ; 5d8fe (17:58fe)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo9TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo9Text4: ; 5d908 (17:5908)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo9TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

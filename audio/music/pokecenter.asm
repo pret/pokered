@@ -373,4 +373,3 @@ Music_Pokecenter_branch_bfeb::
 	F# 2
 	A_ 2
 	endchannel
-; 0xbff4

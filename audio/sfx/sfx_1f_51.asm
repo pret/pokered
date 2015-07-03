@@ -16,4 +16,3 @@ SFX_1f_51_Ch2: ; 7c613 (1f:4613)
 	unknownsfx0x20 15, 240, 1, 4
 	unknownsfx0x20 1, 0, 0, 0
 	endchannel
-; 0x7c626

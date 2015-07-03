@@ -355,4 +355,3 @@ Music_Gym_branch_be4d::
 	F_ 2
 	A# 2
 	endchannel
-; 0xbe56

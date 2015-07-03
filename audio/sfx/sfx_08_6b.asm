@@ -19,4 +19,3 @@ SFX_08_6b_Ch2: ; 2070b (8:470b)
 	loopchannel 5, SFX_08_6b_Ch2
 	unknownnoise0x20 8, 129, 18
 	endchannel
-; 0x20722

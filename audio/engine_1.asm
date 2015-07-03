@@ -141,14 +141,14 @@ Music2_ApplyMusicAffects: ; 0x9138
 .done
 	ld d, a
 	ld b, $3
-	call Func_9838
+	call Music2_9838
 	ld [hl], d
 	ret
 
 ; this routine executes all music commands that take up no time,
 ; like tempo changes, duty changes etc. and doesn't return
 ; until the first note is reached
-Music2_PlayNextNote ; 0x91d0
+Music2_PlayNextNote: ; 0x91d0
 	ld hl, wc06e
 	add hl, bc
 	ld a, [hl]
@@ -238,7 +238,7 @@ Music2_endchannel: ; 0x91e6
 	ld a, c
 	cp CH4
 	jr z, .asm_9265
-	call Func_96c7
+	call Music2_96c7
 	ret c
 .asm_9265
 	ld a, [wc005]
@@ -431,7 +431,7 @@ Music2_pitchbend: ; 0x936d
 	ld b, a
 	ld a, d
 	and $f
-	call Func_9858
+	call Music2_9858
 	ld b, $0
 	ld hl, wc0a6
 	add hl, bc
@@ -497,12 +497,12 @@ Music2_stereopanning: ; 0x93fa
 	jp Music2_endchannel
 
 ; this appears to never be used
-Music2_unknownmusic0xef ; 0x9407
+Music2_unknownmusic0xef: ; 0x9407
 	cp $ef ; is this command an unknownmusic0xef?
 	jr nz, Music2_dutycycle ; no
 	call Music2_GetNextMusicByte ; yes
 	push bc
-	call Func_9876
+	call Music2_9876
 	pop bc
 	ld a, [wc003]
 	and a
@@ -579,12 +579,12 @@ Music2_unknownsfx0x20: ; 0x9472
 	or d
 	ld d, a
 	ld b, $1
-	call Func_9838
+	call Music2_9838
 	ld [hl], d
 	call Music2_GetNextMusicByte
 	ld d, a
 	ld b, $2
-	call Func_9838
+	call Music2_9838
 	ld [hl], d
 	call Music2_GetNextMusicByte
 	ld e, a
@@ -598,10 +598,10 @@ Music2_unknownsfx0x20: ; 0x9472
 .sfxNoiseChannel
 	ld d, a
 	push de
-	call Func_9629
-	call Func_95f8
+	call Music2_9629
+	call Music2_95f8
 	pop de
-	call Func_964b
+	call Music2_964b
 	ret
 
 Music2_unknownsfx0x10:
@@ -651,7 +651,7 @@ asm_94fd
 	and a
 	jr nz, .asm_9508
 	ld a, d
-	call Func_9876
+	call Music2_9876
 .asm_9508
 	pop bc
 	pop de
@@ -668,7 +668,7 @@ Music2_notelength: ; 0x950a
 	add hl, bc
 	ld a, [hl]
 	ld l, b
-	call Func_9847
+	call Music2_9847
 	ld a, c
 	cp CH4
 	jr nc, .sfxChannel
@@ -682,7 +682,7 @@ Music2_notelength: ; 0x950a
 	ld e, $0
 	cp CH7
 	jr z, .skip ; if noise channel
-	call Func_9693
+	call Music2_9693
 	ld a, [wc0ea]
 	ld d, a
 	ld a, [wc0eb]
@@ -693,7 +693,7 @@ Music2_notelength: ; 0x950a
 	ld hl, wc0ce
 	add hl, bc
 	ld l, [hl]
-	call Func_9847
+	call Music2_9847
 	ld e, l
 	ld d, h
 	ld hl, wc0ce
@@ -744,7 +744,7 @@ Music2_notepitch: ; 0x9568
 	jr .done
 .notSfxChannel3
 	ld b, $2
-	call Func_9838
+	call Music2_9838
 	ld a, $8
 	ld [hli], a
 	inc hl
@@ -758,13 +758,13 @@ Music2_notepitch: ; 0x9568
 	ld hl, wc0d6
 	add hl, bc
 	ld b, [hl]
-	call Func_9858
+	call Music2_9858
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
 	bit 4, [hl]
 	jr z, .asm_95b8
-	call Func_978f
+	call Music2_978f
 .asm_95b8
 	push de
 	ld a, c
@@ -787,10 +787,10 @@ Music2_notepitch: ; 0x9568
 	add hl, bc
 	ld d, [hl]
 	ld b, $2
-	call Func_9838
+	call Music2_9838
 	ld [hl], d
-	call Func_9629
-	call Func_95f8
+	call Music2_9629
+	call Music2_95f8
 	pop de
 	ld b, $0
 	ld hl, wc02e
@@ -804,10 +804,10 @@ Music2_notepitch: ; 0x9568
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
-	call Func_964b
+	call Music2_964b
 	ret
 
-Func_95f8: ; 0x95f8
+Music2_95f8: ; 0x95f8
 	ld b, $0
 	ld hl, Unknown_9b27
 	add hl, bc
@@ -841,7 +841,7 @@ Func_95f8: ; 0x95f8
 	ld [$ff25], a
 	ret
 
-Func_9629: ; 0x9629
+Music2_9629: ; 0x9629
 	ld b, $0
 	ld hl, wc0b6
 	add hl, bc
@@ -861,11 +861,11 @@ Func_9629: ; 0x9629
 	ld d, a
 .channel3
 	ld b, $1
-	call Func_9838
+	call Music2_9838
 	ld [hl], d
 	ret
 
-Func_964b: ; 0x964b
+Music2_964b: ; 0x964b
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -909,15 +909,15 @@ Func_964b: ; 0x964b
 	and $c7
 	ld d, a
 	ld b, $3
-	call Func_9838
+	call Music2_9838
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	call Func_96b5
+	call Music2_96b5
 	ret
 
-Func_9693: ; 0x9693
-	call Func_96e5
+Music2_9693: ; 0x9693
+	call Music2_96e5
 	jr nc, .asm_96ab
 	ld d, $0
 	ld a, [wc0f2]
@@ -937,8 +937,8 @@ Func_9693: ; 0x9693
 .asm_96b4
 	ret
 
-Func_96b5: ; 0x96b5
-	call Func_96e5
+Music2_96b5: ; 0x96b5
+	call Music2_96e5
 	jr nc, .asm_96c6
 	ld a, [wc0f1]
 	add e
@@ -953,8 +953,8 @@ Func_96b5: ; 0x96b5
 .asm_96c6
 	ret
 
-Func_96c7: ; 0x96c7
-	call Func_96e5
+Music2_96c7: ; 0x96c7
+	call Music2_96e5
 	jr nc, .asm_96e2
 	ld hl, wc006
 	ld e, c
@@ -976,7 +976,7 @@ Func_96c7: ; 0x96c7
 	ccf
 	ret
 
-Func_96e5: ; 0x96e5
+Music2_96e5: ; 0x96e5
 	ld a, [wc02a]
 	cp $14
 	jr nc, .asm_96ee
@@ -1083,7 +1083,7 @@ Music2_ApplyPitchBend: ; 0x96f9
 	add hl, bc
 	ld [hl], d
 	ld b, $3
-	call Func_9838
+	call Music2_9838
 	ld a, e
 	ld [hli], a
 	ld [hl], d
@@ -1095,7 +1095,7 @@ Music2_ApplyPitchBend: ; 0x96f9
 	res 5, [hl]
 	ret
 
-Func_978f: ; 0x978f
+Music2_978f: ; 0x978f
 	ld hl, wc096
 	add hl, bc
 	ld [hl], d
@@ -1195,7 +1195,7 @@ Music2_ApplyDutyCycle: ; 0x980d
 	and $c0
 	ld d, a
 	ld b, $1
-	call Func_9838
+	call Music2_9838
 	ld a, [hl]
 	and $3f
 	or d
@@ -1220,7 +1220,7 @@ Music2_GetNextMusicByte: ; 0x9825
 	ld [hl], d
 	ret
 
-Func_9838: ; 0x9838
+Music2_9838: ; 0x9838
 	ld a, c
 	ld hl, Unknown_9b17
 	add l
@@ -1234,7 +1234,7 @@ Func_9838: ; 0x9838
 	ld h, $ff
 	ret
 
-Func_9847: ; 0x9847
+Music2_9847: ; 0x9847
 	ld h, $0
 .loop
 	srl a
@@ -1249,7 +1249,7 @@ Func_9847: ; 0x9847
 .done
 	ret
 
-Func_9858: ; 0x9858
+Music2_9858: ; 0x9858
 	ld h, $0
 	ld l, a
 	add hl, hl
@@ -1274,16 +1274,16 @@ Func_9858: ; 0x9858
 	ld d, a
 	ret
 
-Func_9876:: ; 0x9876
+Music2_9876:: ; 0x9876
 	ld [wc001], a
 	cp $ff
-	jp z, Func_9a34
+	jp z, Music2_9a34
 	cp $b9
-	jp z, Func_994e
-	jp c, Func_994e
+	jp z, Music2_994e
+	jp c, Music2_994e
 	cp $fe
 	jr z, .asm_988d
-	jp nc, Func_994e
+	jp nc, Music2_994e
 .asm_988d
 	xor a
 	ld [wc000], a
@@ -1355,9 +1355,9 @@ Func_9876:: ; 0x9876
 	ld [$ff1a], a
 	ld a, $77
 	ld [$ff24], a
-	jp Func_9a8f
+	jp Music2_9a8f
 
-Func_994e: ; 0x994e
+Music2_994e: ; 0x994e
 	ld l, a
 	ld e, a
 	ld h, $0
@@ -1504,11 +1504,11 @@ Func_994e: ; 0x994e
 .asm_9a2b
 	ld a, c
 	and a
-	jp z, Func_9a8f
+	jp z, Music2_9a8f
 	dec c
 	jp .asm_9967
 
-Func_9a34: ; 0x9a34
+Music2_9a34: ; 0x9a34
 	ld a, $80
 	ld [$ff26], a
 	ld [$ff1a], a
@@ -1556,7 +1556,7 @@ FillMusicRAM2: ; 0x9a89
 	jr nz, .loop
 	ret
 
-Func_9a8f: ; 0x9a8f
+Music2_9a8f: ; 0x9a8f
 	ld a, [wc001]
 	ld l, a
 	ld e, a

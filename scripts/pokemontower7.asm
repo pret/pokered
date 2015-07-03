@@ -24,14 +24,14 @@ PokemonTower7ScriptPointers:
 PokemonTower7Script2: ; 60d23 (18:4d23)
 	ld hl, wFlags_0xcd60
 	res 0, [hl]
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, PokemonTower7Script_60d18
 	call EndTrainerBattle
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	call PokemonTower7Script_60db6
 	ld a, $3
@@ -72,7 +72,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $4
 	ld [wSpriteStateData1 + 9], a
 	ld a, LAVENDER_HOUSE_1
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, $1
 	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
@@ -85,16 +85,16 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ret
 
 PokemonTower7Script_60db6: ; 60db6 (18:4db6)
-	ld hl, CoordsData_60de3 ; $4de3
+	ld hl, CoordsData_60de3
 	ld a, [wSpriteIndex]
 	dec a
 	swap a
 	ld d, $0
 	ld e, a
 	add hl, de
-	ld a, [W_YCOORD] ; wd361
+	ld a, [W_YCOORD]
 	ld b, a
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	ld c, a
 .asm_60dcb
 	ld a, [hli]
@@ -107,7 +107,7 @@ PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld d, [hl]
 	ld e, a
 	ld a, [wSpriteIndex]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp MoveSprite
 .asm_60dde
 	inc hl
@@ -171,45 +171,45 @@ PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd769 ; flag's byte
-	dw PokemonTower7BattleText1 ; 0x4ec9 TextBeforeBattle
-	dw PokemonTower7AfterBattleText1 ; 0x4ed3 TextAfterBattle
-	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
-	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
+	dw PokemonTower7BattleText1 ; TextBeforeBattle
+	dw PokemonTower7AfterBattleText1 ; TextAfterBattle
+	dw PokemonTower7EndBattleText1 ; TextEndBattle
+	dw PokemonTower7EndBattleText1 ; TextEndBattle
 
 PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd769 ; flag's byte
-	dw PokemonTower7BattleText2 ; 0x4ed8 TextBeforeBattle
-	dw PokemonTower7AfterBattleText2 ; 0x4ee2 TextAfterBattle
-	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
-	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
+	dw PokemonTower7BattleText2 ; TextBeforeBattle
+	dw PokemonTower7AfterBattleText2 ; TextAfterBattle
+	dw PokemonTower7EndBattleText2 ; TextEndBattle
+	dw PokemonTower7EndBattleText2 ; TextEndBattle
 
 PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd769 ; flag's byte
-	dw PokemonTower7BattleText3 ; 0x4ee7 TextBeforeBattle
-	dw PokemonTower7AfterBattleText3 ; 0x4ef1 TextAfterBattle
-	dw PokemonTower7EndBattleText3 ; 0x4eec TextEndBattle
-	dw PokemonTower7EndBattleText3 ; 0x4eec TextEndBattle
+	dw PokemonTower7BattleText3 ; TextBeforeBattle
+	dw PokemonTower7AfterBattleText3 ; TextAfterBattle
+	dw PokemonTower7EndBattleText3 ; TextEndBattle
+	dw PokemonTower7EndBattleText3 ; TextEndBattle
 
 	db $ff
 
 PokemonTower7Text1: ; 60e6c (18:4e6c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text2: ; 60e76 (18:4e76)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text3: ; 60e80 (18:4e80)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

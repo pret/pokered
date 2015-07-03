@@ -10,12 +10,12 @@ CeladonMansion5Text1: ; 1dd41 (7:5d41)
 	db "@"
 
 CeladonMansion5Text2: ; 1dd46 (7:5d46)
-	db $08 ; asm
+	TX_ASM
 	ld bc,(EEVEE << 8) | 25
 	call GivePokemon
-	jr nc, .asm_24365 ; 0x1dd4d
+	jr nc, .asm_24365
 	ld a, HS_CELADON_MANSION_5_GIFT
 	ld [wcc4d], a
 	predef HideObject
-.asm_24365 ; 0x1dd59
+.asm_24365
 	jp TextScriptEnd

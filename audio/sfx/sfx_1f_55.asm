@@ -10,4 +10,3 @@ SFX_1f_55_Ch1: ; 7c688 (1f:4688)
 	unknownsfx0x20 15, 226, 0, 7
 	unknownsfx0x10 8
 	endchannel
-; 0x7c6a5

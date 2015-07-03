@@ -20,4 +20,3 @@ SFX_1f_1a_Ch3: ; 7ca6f (1f:4a6f)
 	unknownnoise0x20 15, 215, 156
 	unknownnoise0x20 15, 242, 172
 	endchannel
-; 0x7ca82

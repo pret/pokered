@@ -14,16 +14,16 @@ GymStatues: ; 62419 (18:6419)
 	cp $ff
 	ret z
 	cp b
-	jr z, .asm_62433 ; 0x6242e $3
+	jr z, .asm_62433
 	inc hl
-	jr .asm_62429 ; 0x62431 $f6
+	jr .asm_62429
 .asm_62433
 	ld b, [hl]
 	ld a, [wd72a]
 	and b
 	cp b
 	ld a, $d
-	jr z, .asm_6243f ; 0x6243b $2
+	jr z, .asm_6243f
 	ld a, $c
 .asm_6243f
 	jp PrintPredefTextID
@@ -139,11 +139,11 @@ CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
 	db "@"
 
 SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
-	db $8 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SaffronCityPokecenterBenchGuyText2
-	jr nz, .asm_624f2 ; 0x624ed $3
+	jr nz, .asm_624f2
 	ld hl, SaffronCityPokecenterBenchGuyText1
 .asm_624f2
 	call PrintText

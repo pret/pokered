@@ -57,4 +57,3 @@ SFX_1f_42_Ch3: ; 7eeaf (1f:6eaf)
 	F_ 4
 	D# 8
 	endchannel
-; 0x7eeb9

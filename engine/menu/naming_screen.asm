@@ -195,7 +195,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 
 .asm_667e
 	pop de
-	ld de, .asm_65ed ; $65ed
+	ld de, .asm_65ed
 	push de
 .asm_6683
 	ld a, [wHPBarOldHP]
@@ -231,10 +231,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call CalcStringLength
 	ld a, [wHPBarNewHP]
 	cp $e5
-	ld de, Dakutens ; $6885
+	ld de, Dakutens
 	jr z, .asm_66e3
 	cp $e4
-	ld de, Handakutens ; $68d6
+	ld de, Handakutens
 	jr z, .asm_66e3
 	ld a, [wd07d]
 	cp $2
@@ -332,12 +332,12 @@ ED_Tile: ; 6767 (1:6767)
 
 PrintAlphabet: ; 676f (1:676f)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wHPBarOldHP]
 	and a
-	ld de, LowerCaseAlphabet ; $679e
+	ld de, LowerCaseAlphabet
 	jr nz, .asm_677e
-	ld de, UpperCaseAlphabet ; $67d6
+	ld de, UpperCaseAlphabet
 .asm_677e
 	hlCoord 2, 5
 	ld bc, $509
@@ -357,7 +357,7 @@ PrintAlphabet: ; 676f (1:676f)
 	jr nz, .asm_6784
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
 LowerCaseAlphabet: ; 679e (1:679e)

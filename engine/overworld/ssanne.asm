@@ -84,7 +84,7 @@ LoadSmokeTileFourTimes: ; 79fc0 (1e:5fc0)
 	ret
 
 LoadSmokeTile: ; 79fd4 (1e:5fd4)
-	ld de, SSAnneSmokePuffTile ; $5fdd
+	ld de, SSAnneSmokePuffTile
 	ld bc, (BANK(SSAnneSmokePuffTile) << 8) + $01
 	jp CopyVideoData
 

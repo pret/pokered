@@ -24,7 +24,7 @@ WriterText: ; 487ad (12:47ad)
 	db "@"
 
 DirectorText: ; 487b2 (12:47b2)
-	db $08 ; asm
+	TX_ASM
 
 	; check pokédex
 	ld hl, wPokedexOwned
@@ -48,7 +48,7 @@ DirectorText: ; 487b2 (12:47b2)
 .CompletedDexText
 	TX_FAR _CompletedDexText
 	db $6
-	db $8 ; asm
+	TX_ASM
 	callab DisplayDiploma
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

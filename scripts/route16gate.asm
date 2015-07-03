@@ -25,7 +25,7 @@ Route16GateScript0: ; 496d7 (12:56d7)
 	ld [hJoyHeld], a
 	ld a, [wWhichTrade]
 	cp $1
-	jr z, .asm_4970e ; 0x496f1 $1b
+	jr z, .asm_4970e
 	ld a, [wWhichTrade]
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -92,16 +92,16 @@ Route16GateTextPointers: ; 4975a (12:575a)
 	dw Route16GateText3
 
 Route16GateText1: ; 49760 (12:5760)
-	db $08 ; asm
+	TX_ASM
 	call Route16GateScript_49755
-	jr z, .asm_0bdf3 ; 0x49764
+	jr z, .asm_0bdf3
 	ld hl, Route16GateText_4977c
 	call PrintText
-	jr .asm_56c9d ; 0x4976c
-.asm_0bdf3 ; 0x4976e
+	jr .asm_56c9d
+.asm_0bdf3
 	ld hl, Route16GateText_49777
 	call PrintText
-.asm_56c9d ; 0x49774
+.asm_56c9d
 	jp TextScriptEnd
 
 Route16GateText_49777: ; 49777 (12:5777)

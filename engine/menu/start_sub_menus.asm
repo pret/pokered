@@ -325,7 +325,7 @@ StartMenu_Item: ; 13302 (4:7302)
 .exitMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	jp RedisplayStartMenu
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)
@@ -499,7 +499,7 @@ UsableItems_CloseMenu: ; 13459 (4:7459)
 StartMenu_TrainerInfo: ; 13460 (4:7460)
 	call GBPalWhiteOut
 	call ClearScreen
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	ld a,[hTilesetType]
 	push af
 	xor a
@@ -535,25 +535,25 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,vChars2
 	ld bc,$70 * 4
 	call CopyData
-	ld hl,TrainerInfoTextBoxTileGraphics ; $7b98 ; trainer info text box tile patterns
+	ld hl,TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
 	ld de,vChars2 + $770
 	ld bc,$0080
 	push bc
 	call TrainerInfo_FarCopyData
-	ld hl,BlankLeaderNames ; $7c28
+	ld hl,BlankLeaderNames
 	ld de,vChars2 + $600
 	ld bc,$0170
 	call TrainerInfo_FarCopyData
 	pop bc
-	ld hl,BadgeNumbersTileGraphics  ; $7d98 ; badge number tile patterns
+	ld hl,BadgeNumbersTileGraphics  ; badge number tile patterns
 	ld de,vChars1 + $580
 	call TrainerInfo_FarCopyData
-	ld hl,GymLeaderFaceAndBadgeTileGraphics  ; $6a9e ; gym leader face and badge tile patterns
+	ld hl,GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
 	ld de,vChars2 + $200
 	ld bc,$0400
 	ld a,$03
 	call FarCopyData2
-	ld hl,TextBoxGraphics ; $6288
+	ld hl,TextBoxGraphics
 	ld de,$00d0
 	add hl,de ; hl = colon tile pattern
 	ld de,vChars1 + $560
@@ -562,7 +562,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	push bc
 	call FarCopyData2
 	pop bc
-	ld hl,TrainerInfoTextBoxTileGraphics + $80  ; $7c18 ; background tile pattern
+	ld hl,TrainerInfoTextBoxTileGraphics + $80  ; background tile pattern
 	ld de,vChars1 + $570
 	call TrainerInfo_FarCopyData
 	call EnableLCD
@@ -705,9 +705,9 @@ StartMenu_Option: ; 135f6 (4:75f6)
 
 SwitchPartyMon: ; 13613 (4:7613)
 	call SwitchPartyMon_Stats
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	call SwitchPartyMon_OAM
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	call SwitchPartyMon_OAM
 	jp RedrawPartyMenu_
 
@@ -741,7 +741,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [wMenuItemToSwap]
 	and a
 	jr nz, .asm_13661
-	ld a, [wWhichPokemon] ; wWhichPokemon
+	ld a, [wWhichPokemon]
 	inc a
 	ld [wMenuItemToSwap], a
 	ret
@@ -751,8 +751,8 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [wMenuItemToSwap]
 	dec a
 	ld b, a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
-	ld [wWhichTrade], a ; wWhichTrade
+	ld a, [wCurrentMenuItem]
+	ld [wWhichTrade], a
 	cp b
 	jr nz, .asm_1367b
 	xor a
@@ -767,7 +767,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wPartySpecies
 	ld d, h
 	ld e, l
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	add l
 	ld l, a
 	jr nc, .asm_1368e
@@ -780,14 +780,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	inc d
 .asm_13696
 	ld a, [hl]
-	ld [H_DIVIDEND], a ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [H_DIVIDEND], a ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld a, [de]
 	ld [hl], a
-	ld a, [H_DIVIDEND] ; $ff95 (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [H_DIVIDEND] ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
 	ld [de], a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	call AddNTimes
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
@@ -805,14 +805,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $2c
 	call CopyData
-	ld hl, wPartyMonOT ; wd273
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld hl, wPartyMonOT
+	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
-	ld hl, wPartyMonOT ; wd273
+	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
@@ -823,14 +823,14 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld hl, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
-	ld hl, wPartyMonNicks ; wPartyMonNicks
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld hl, wPartyMonNicks
+	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
 	ld bc, $b
 	call CopyData
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
@@ -842,7 +842,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld a, [wMenuItemToSwap]
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wd07d], a

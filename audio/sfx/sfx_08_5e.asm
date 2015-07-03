@@ -14,4 +14,3 @@ SFX_08_5e_Ch2: ; 205a4 (8:45a4)
 	unknownnoise0x20 0, 209, 34
 	unknownnoise0x20 6, 161, 50
 	endchannel
-; 0x205b1

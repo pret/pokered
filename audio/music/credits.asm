@@ -818,4 +818,3 @@ Music_Credits_branch_7ffed::
 	A_ 1
 	rest 3
 	endchannel
-; 0x7fffa

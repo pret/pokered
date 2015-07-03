@@ -1,11 +1,11 @@
 HazeEffect_: ; 139da (4:79da)
 	ld a, $7
-; store 7 on every stat mod	
+; store 7 on every stat mod
 	ld hl, wPlayerMonAttackMod
 	call ResetStatMods
 	ld hl, wEnemyMonAttackMod
 	call ResetStatMods
-; copy unmodified stats to battle stats	
+; copy unmodified stats to battle stats
 	ld hl, wPlayerMonUnmodifiedAttack
 	ld de, wBattleMonAttack
 	call ResetStats
@@ -25,7 +25,7 @@ HazeEffect_: ; 139da (4:79da)
 	ld [hl], $0
 	and SLP | (1 << FRZ)
 	jr z, .cureVolatileStatuses
-; prevent the Pokemon from executing a move if it was asleep or frozen	
+; prevent the Pokemon from executing a move if it was asleep or frozen
 	ld a, $ff
 	ld [de], a
 
@@ -51,7 +51,7 @@ CureVolatileStatuses: ; 13a37 (4:7a37)
 	inc hl ; BATTSTATUS2
 	ld a, [hl]
 	; clear UsingXAccuracy, ProtectedByMist, GettingPumped, and Seeded statuses
-	and $ff ^((1 << UsingXAccuracy) | (1 << ProtectedByMist) | (1 << GettingPumped) | (1 << Seeded)) 
+	and $ff ^((1 << UsingXAccuracy) | (1 << ProtectedByMist) | (1 << GettingPumped) | (1 << Seeded))
 	ld [hli], a ; BATTSTATUS3
 	ld a, [hl]
 	and %11110000 | (1 << Transformed) ; clear Bad Poison, Reflect and Light Screen statuses
@@ -61,7 +61,7 @@ CureVolatileStatuses: ; 13a37 (4:7a37)
 ResetStatMods: ; 13a43 (4:7a43)
 	ld b, $8
 .loop
-	ld [hli], a 
+	ld [hli], a
 	dec b
 	jr nz, .loop
 	ret

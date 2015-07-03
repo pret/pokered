@@ -194,17 +194,17 @@ OaksLabScript7: ; 1cc72 (7:4c72)
 OaksLabScript8: ; 1cc80 (7:4c80)
 	ld a, [W_PLAYERSTARTER]
 	cp STARTER1
-	jr z, .Charmander ; 0x1cc85 $6
+	jr z, .Charmander
 	cp STARTER2
-	jr z, .Squirtle ; 0x1cc89 $1d
-	jr .Bulbasaur ; 0x1cc8b $38
+	jr z, .Squirtle
+	jr .Bulbasaur
 .Charmander
 	ld de, .MiddleBallMovement1
 	ld a, [W_YCOORD]
 	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3 ; 0x1cc95 $5c
+	jr z, .asm_1ccf3
 	ld de, .MiddleBallMovement2
-	jr .asm_1ccf3 ; 0x1cc9a $57
+	jr .asm_1ccf3
 
 .MiddleBallMovement1
 	db 0,0,$C0,$C0,$C0,$40,$FF
@@ -215,9 +215,9 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	ld de, .RightBallMovement1
 	ld a, [W_YCOORD]
 	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3 ; 0x1ccb0 $41
+	jr z, .asm_1ccf3
 	ld de, .RightBallMovement2
-	jr .asm_1ccf3 ; 0x1ccb5 $3c
+	jr .asm_1ccf3
 
 .RightBallMovement1
 	db 0,0,$C0,$C0,$C0,$C0,$40,$FF
@@ -228,7 +228,7 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	ld de, .LeftBallMovement1
 	ld a, [W_XCOORD]
 	cp $9 ; is the player standing to the right of the table?
-	jr nz, .asm_1ccf3 ; 0x1cccd $24
+	jr nz, .asm_1ccf3
 	push hl
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -247,7 +247,7 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	ld [hl], $9
 	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
-	jr .asm_1ccf3 ; 0x1cced $4
+	jr .asm_1ccf3
 
 .LeftBallMovement1
 	db $00,$C0 ; not yet terminated!
@@ -279,14 +279,14 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	call DisplayTextID
 	ld a, [wTrainerEngageDistance]
 	cp $2
-	jr nz, .asm_1cd28 ; 0x1cd22 $4
+	jr nz, .asm_1cd28
 	ld a, HS_STARTER_BALL_1
-	jr .asm_1cd32 ; 0x1cd26 $a
+	jr .asm_1cd32
 .asm_1cd28
 	cp $3
-	jr nz, .asm_1cd30 ; 0x1cd2a $4
+	jr nz, .asm_1cd30
 	ld a, HS_STARTER_BALL_2
-	jr .asm_1cd32 ; 0x1cd2e $2
+	jr .asm_1cd32
 .asm_1cd30
 	ld a, HS_STARTER_BALL_3
 .asm_1cd32
@@ -328,7 +328,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld [wd528], a
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
-	call PlayMusic ; play music
+	call PlayMusic
 	ld a, $f
 	ld [$ff8c], a
 	call DisplayTextID
@@ -361,14 +361,14 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
-	jr nz, .NotSquirtle ; 0x1cdc9 $4
+	jr nz, .NotSquirtle
 	ld a, $1
-	jr .done ; 0x1cdcd $a
+	jr .done
 .NotSquirtle
 	cp STARTER3
-	jr nz, .Charmander ; 0x1cdd1 $4
+	jr nz, .Charmander
 	ld a, $2
-	jr .done ; 0x1cdd5 $2
+	jr .done
 .Charmander
 	ld a, $3
 .done
@@ -413,7 +413,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ret
 
 OaksLabScript13: ; 1ce32 (7:4e32)
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	ld a, $10
 	ld [$ff8c], a
@@ -426,9 +426,9 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, [W_XCOORD]
 	cp $4
 	; move left or right depending on where the player is standing
-	jr nz, .asm_1ce5b ; 0x1ce55 $4
+	jr nz, .asm_1ce5b
 	ld a, $c0
-	jr .asm_1ce5d ; 0x1ce59 $2
+	jr .asm_1ce5d
 .asm_1ce5b
 	ld a, $80
 .asm_1ce5d
@@ -444,7 +444,7 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, [wd730]
 	bit 0, a
-	jr nz, .asm_1ce8c ; 0x1ce72 $18
+	jr nz, .asm_1ce8c
 	ld a, HS_OAKS_LAB_RIVAL
 	ld [wcc4d], a
 	predef HideObject
@@ -453,21 +453,21 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	call PlayDefaultMusic ; reset to map music
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
-	jr .done ; 0x1ce8a $23
+	jr .done
 .asm_1ce8c
 	ld a, [wcf0f]
 	cp $5
-	jr nz, .asm_1cea8 ; 0x1ce91 $15
+	jr nz, .asm_1cea8
 	ld a, [W_XCOORD]
 	cp $4
-	jr nz, .asm_1cea1 ; 0x1ce98 $7
+	jr nz, .asm_1cea1
 	ld a, $c
 	ld [wSpriteStateData1 + 9], a
-	jr .done ; 0x1ce9f $e
+	jr .done
 .asm_1cea1
 	ld a, $8
 	ld [wSpriteStateData1 + 9], a
-	jr .done ; 0x1cea6 $7
+	jr .done
 .asm_1cea8
 	cp $4
 	ret nz
@@ -508,7 +508,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
 
-OaksLabScript_1cefd ; 1cefd (7:4efd)
+OaksLabScript_1cefd: ; 1cefd (7:4efd)
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, $4
@@ -631,10 +631,10 @@ OaksLabScript_1d00a: ; 1d00a (7:500a)
 	cp $ff
 	ret z
 	cp OAKS_PARCEL
-	jr z, .GotParcel ; 0x1d016 $4
+	jr z, .GotParcel
 	inc hl
 	inc c
-	jr .asm_1d010 ; 0x1d01a $f4
+	jr .asm_1d010
 .GotParcel
 	ld hl, wNumBagItems
 	ld a, c
@@ -650,29 +650,29 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ld [$ffee], a
 	ld a, [W_YCOORD]
 	cp $3
-	jr nz, .asm_1d045 ; 0x1d038 $b
+	jr nz, .asm_1d045
 	ld a, $4
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, $b
-	jr .asm_1d068 ; 0x1d043 $23
+	jr .asm_1d068
 .asm_1d045
 	cp $1
-	jr nz, .asm_1d054 ; 0x1d047 $b
+	jr nz, .asm_1d054
 	ld a, $2
 	ld [wNPCMovementDirections2Index], a
 	ld a, $30
 	ld b, $9
-	jr .asm_1d068 ; 0x1d052 $14
+	jr .asm_1d068
 .asm_1d054
 	ld a, $3
 	ld [wNPCMovementDirections2Index], a
 	ld b, $a
 	ld a, [W_XCOORD]
 	cp $4
-	jr nz, .asm_1d066 ; 0x1d060 $4
+	jr nz, .asm_1d066
 	ld a, $40
-	jr .asm_1d068 ; 0x1d064 $2
+	jr .asm_1d068
 .asm_1d066
 	ld a, $20
 .asm_1d068
@@ -685,7 +685,7 @@ OaksLabScript_1d02b: ; 1d02b (7:502b)
 	ret
 
 OaksLabScript_1d076: ; 1d076 (7:5076)
-	ld hl, OaksLabTextPointers + $36 ; $50b8 ; starts at OaksLabText28
+	ld hl, OaksLabTextPointers + $36 ; starts at OaksLabText28
 	ld a, l
 	ld [W_MAPTEXTPTR], a
 	ld a, h
@@ -734,23 +734,23 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd74b]
 	bit 0, a
-	jr nz, .asm_1d0de ; 0x1d0d4
+	jr nz, .asm_1d0de
 	ld hl, OaksLabGaryText1
 	call PrintText
-	jr .asm_1d0f0 ; 0x1d0dc
-.asm_1d0de ; 0x1d0de
+	jr .asm_1d0f0
+.asm_1d0de
 	bit 2, a
-	jr nz, .asm_1d0ea ; 0x1d0e0
+	jr nz, .asm_1d0ea
 	ld hl, OaksLabText40
 	call PrintText
-	jr .asm_1d0f0 ; 0x1d0e8
-.asm_1d0ea ; 0x1d0ea
+	jr .asm_1d0f0
+.asm_1d0ea
 	ld hl, OaksLabText41
 	call PrintText
-.asm_1d0f0 ; 0x1d0f0
+.asm_1d0f0
 	jp TextScriptEnd
 
 OaksLabGaryText1: ; 1d0f3 (7:50f3)
@@ -767,29 +767,29 @@ OaksLabText41: ; 1d0fd (7:50fd)
 
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
-	db $8
+	TX_ASM
 	ld a, STARTER2
 	ld [wWhichTrade], a
 	ld a, $3
 	ld [wTrainerEngageDistance], a
 	ld a, STARTER1
 	ld b, $2
-	jr OaksLabScript_1d133 ; 0x1d111 $20
+	jr OaksLabScript_1d133
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
-	db $8
+	TX_ASM
 	ld a, STARTER3
 	ld [wWhichTrade], a
 	ld a, $4
 	ld [wTrainerEngageDistance], a
 	ld a, STARTER2
 	ld b, $3
-	jr OaksLabScript_1d133 ; 0x1d122 $f
+	jr OaksLabScript_1d133
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
-	db $8
+	TX_ASM
 	ld a, STARTER1
 	ld [wWhichTrade], a
 	ld a, $2
@@ -806,7 +806,7 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	bit 2, a
 	jp nz, OaksLabScript_1d22d
 	bit 1, a
-	jr nz, OaksLabScript_1d157 ; 0x1d147 $e
+	jr nz, OaksLabScript_1d157
 	ld hl, OaksLabText39
 	call PrintText
 	jp TextScriptEnd
@@ -822,7 +822,6 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld [$ff8b], a
 	call GetPointerWithinSpriteStateData1
 	ld [hl], $0
-	; manually fixed some disassembler issues around here
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, $9
@@ -835,7 +834,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld a, [wSpriteIndex]
 	cp $2
@@ -844,7 +843,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	jr z, OaksLabLookAtSquirtle
 	jr OaksLabLookAtBulbasaur
 
-OaksLabLookAtCharmander ; 0x1d195
+OaksLabLookAtCharmander: ; 1d195 (7:5195)
 	ld hl, OaksLabCharmanderText
 	jr OaksLabMonChoiceMenu
 OaksLabCharmanderText: ; 1d19a (7:519a)
@@ -879,17 +878,17 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call GetMonName
 	ld a, [wSpriteIndex]
 	cp $2
-	jr nz, asm_1d1db ; 0x1d1d5 $4
+	jr nz, .asm_1d1db
 	ld a, HS_STARTER_BALL_1
-	jr asm_1d1e5 ; 0x1d1d9 $a
-asm_1d1db: ; 1d1db (7:51db)
+	jr .asm_1d1e5
+.asm_1d1db
 	cp $3
-	jr nz, asm_1d1e3 ; 0x1d1dd $4
+	jr nz, .asm_1d1e3
 	ld a, HS_STARTER_BALL_2
-	jr asm_1d1e5 ; 0x1d1e1 $2
-asm_1d1e3: ; 1d1e3 (7:51e3)
+	jr .asm_1d1e5
+.asm_1d1e3
 	ld a, HS_STARTER_BALL_3
-asm_1d1e5: ; 1d1e5 (7:51e5)
+.asm_1d1e5
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $1
@@ -939,80 +938,80 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd747]
 	bit 6, a
-	jr nz, .asm_50e81 ; 0x1d24e
+	jr nz, .asm_1d266
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wd11e]
 	cp $2
-	jr c, .asm_b28b0 ; 0x1d25d
+	jr c, .asm_1d279
 	ld a, [wd74b]
 	bit 5, a
-	jr z, .asm_b28b0 ; 0x1d264
-.asm_50e81 ; 0x1d266
+	jr z, .asm_1d279
+.asm_1d266
 	ld hl, OaksLabText_1d31d
 	call PrintText
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	predef DisplayDexRating
-	jp .asm_0f042
-.asm_b28b0 ; 0x1d279
+	jp .asm_1d2ed
+.asm_1d279
 	ld b,POKE_BALL
 	call IsItemInBag
-	jr nz, .asm_17c30 ; 0x1d27e
+	jr nz, .asm_1d2e7
 	ld a, [wd7eb]
 	bit 5, a
-	jr nz, .asm_f1adc ; 0x1d285
+	jr nz, .asm_1d2d0
 	ld a, [wd74b]
 	bit 5, a
-	jr nz, .asm_333a2 ; 0x1d28c
+	jr nz, .asm_1d2c8
 	bit 3, a
-	jr nz, .asm_76269 ; 0x1d290
+	jr nz, .asm_1d2a9
 	ld a, [wd72e]
 	bit 3, a
-	jr nz, .asm_4a5e0 ; 0x1d297
+	jr nz, .asm_1d2a1
 	ld hl, OaksLabText_1d2f0
 	call PrintText
-	jr .asm_0f042 ; 0x1d29f
-.asm_4a5e0 ; 0x1d2a1
+	jr .asm_1d2ed
+.asm_1d2a1
 	ld hl, OaksLabText_1d2f5
 	call PrintText
-	jr .asm_0f042 ; 0x1d2a7
-.asm_76269 ; 0x1d2a9
+	jr .asm_1d2ed
+.asm_1d2a9
 	ld b, OAKS_PARCEL
 	call IsItemInBag
-	jr nz, .asm_a8fcf ; 0x1d2ae
+	jr nz, .asm_1d2b8
 	ld hl, OaksLabText_1d2fa
 	call PrintText
-	jr .asm_0f042 ; 0x1d2b6
-.asm_a8fcf ; 0x1d2b8
+	jr .asm_1d2ed
+.asm_1d2b8
 	ld hl, OaksLabDeliverParcelText
 	call PrintText
 	call OaksLabScript_1d00a
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
-	jr .asm_0f042 ; 0x1d2c6
-.asm_333a2 ; 0x1d2c8
+	jr .asm_1d2ed
+.asm_1d2c8
 	ld hl, OaksLabAroundWorldText
 	call PrintText
-	jr .asm_0f042 ; 0x1d2ce
-.asm_f1adc ; 0x1d2d0
+	jr .asm_1d2ed
+.asm_1d2d0
 	ld hl, wd74b
 	bit 4, [hl]
 	set 4, [hl]
-	jr nz, .asm_17c30 ; 0x1d2d7
+	jr nz, .asm_1d2e7
 	ld bc, (POKE_BALL << 8) | 5
 	call GiveItem
 	ld hl, OaksLabGivePokeballsText
 	call PrintText
-	jr .asm_0f042 ; 0x1d2e5
-.asm_17c30 ; 0x1d2e7
+	jr .asm_1d2ed
+.asm_1d2e7
 	ld hl, OaksLabPleaseVisitText
 	call PrintText
-.asm_0f042 ; 0x1d2ed
+.asm_1d2ed
 	jp TextScriptEnd
 
 OaksLabText_1d2f0: ; 1d2f0 (7:52f0)
@@ -1055,7 +1054,7 @@ OaksLabText34: ; 1d322 (7:5322)
 OaksLabText33: ; 1d322 (7:5322)
 OaksLabText7: ; 1d322 (7:5322)
 OaksLabText6: ; 1d322 (7:5322)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d32c
 	call PrintText
 	jp TextScriptEnd
@@ -1071,7 +1070,7 @@ OaksLabText8: ; 1d331 (7:5331)
 
 OaksLabText36: ; 1d336 (7:5336)
 OaksLabText9: ; 1d336 (7:5336)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d340
 	call PrintText
 	jp TextScriptEnd
@@ -1081,7 +1080,7 @@ OaksLabText_1d340: ; 1d340 (7:5340)
 	db "@"
 
 OaksLabText17: ; 1d345 (7:5345)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalWaitingText
 	call PrintText
 	jp TextScriptEnd
@@ -1091,7 +1090,7 @@ OaksLabRivalWaitingText: ; 1d34f (7:534f)
 	db "@"
 
 OaksLabText18: ; 1d354 (7:5354)
-	db $8
+	TX_ASM
 	ld hl, OaksLabChooseMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1101,7 +1100,7 @@ OaksLabChooseMonText: ; 1d35e (7:535e)
 	db "@"
 
 OaksLabText19: ; 1d363 (7:5363)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalInterjectionText
 	call PrintText
 	jp TextScriptEnd
@@ -1111,7 +1110,7 @@ OaksLabRivalInterjectionText: ; 1d36d (7:536d)
 	db "@"
 
 OaksLabText20: ; 1d372 (7:5372)
-	db $8
+	TX_ASM
 	ld hl, OaksLabBePatientText
 	call PrintText
 	jp TextScriptEnd
@@ -1121,7 +1120,7 @@ OaksLabBePatientText: ; 1d37c (7:537c)
 	db "@"
 
 OaksLabText12: ; 1d381 (7:5381)
-	db $8
+	TX_ASM
 	ld hl, OaksLabLeavingText
 	call PrintText
 	jp TextScriptEnd
@@ -1131,7 +1130,7 @@ OaksLabLeavingText: ; 1d38b (7:538b)
 	db "@"
 
 OaksLabText13: ; 1d390 (7:5390)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalPickingMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1141,7 +1140,7 @@ OaksLabRivalPickingMonText: ; 1d39a (7:539a)
 	db "@"
 
 OaksLabText14: ; 1d39f (7:539f)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1151,7 +1150,7 @@ OaksLabRivalReceivedMonText: ; 1d3a9 (7:53a9)
 	db $11, "@"
 
 OaksLabText15: ; 1d3af (7:53af)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalChallengeText
 	call PrintText
 	jp TextScriptEnd
@@ -1169,7 +1168,7 @@ OaksLabText_1d3c3: ; 1d3c3 (7:53c3)
 	db "@"
 
 OaksLabText16: ; 1d3c8 (7:53c8)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalToughenUpText
 	call PrintText
 	jp TextScriptEnd
@@ -1210,7 +1209,7 @@ OaksLabText38: ; 1d3fb (7:53fb)
 OaksLabText37: ; 1d3fb (7:53fb)
 OaksLabText11: ; 1d3fb (7:53fb)
 OaksLabText10: ; 1d3fb (7:53fb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d405
 	call PrintText
 	jp TextScriptEnd

@@ -35,7 +35,7 @@ Route7GateScript0: ; 1e128 (7:6128)
 	callba RemoveGuardDrink
 	ld a, [$ffdb]
 	and a
-	jr nz, .asm_1e15a ; 0x1e148 $10
+	jr nz, .asm_1e15a
 	ld a, $2
 	ld [$ff8c], a
 	call DisplayTextID

@@ -70,12 +70,12 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
-	jr nz, .NotSquirtle ; 0x75f9f $4
+	jr nz, .NotSquirtle
 	ld a, $1
 	jr .done
 .NotSquirtle
 	cp STARTER3
-	jr nz, .Charmander ; 0x75fa7 $4
+	jr nz, .Charmander
 	ld a, $2
 	jr .done
 .Charmander
@@ -93,7 +93,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, GaryScript_75f29
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	ld hl, wd867
 	set 1, [hl]
 	ld a, $f0
@@ -210,7 +210,7 @@ GaryScript9: ; 76099 (1d:6099)
 	ld [W_GARYCURSCRIPT], a
 	ret
 
-RLEMovement760b4 ; 760b4 (1d:60b4)
+RLEMovement760b4: ; 760b4 (1d:60b4)
 	db $40,4
 	db $20,1
 	db $ff
@@ -225,7 +225,7 @@ GaryScript10: ; 760b9 (1d:60b9)
 	ld [W_GARYCURSCRIPT], a
 	ret
 
-GaryScript_760c8 ; 760c8 (1d:60c8)
+GaryScript_760c8: ; 760c8 (1d:60c8)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	call DisplayTextID
@@ -241,13 +241,13 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 	dw GaryText5
 
 GaryText1: ; 760e0 (1d:60e0)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd867]
 	bit 1, a
 	ld hl, GaryText_760f4
-	jr z, .asm_17e9f ; 0x760e9
+	jr z, .asm_17e9f
 	ld hl, GaryText_76103
-.asm_17e9f ; 0x760ee
+.asm_17e9f
 	call PrintText
 	jp TextScriptEnd
 
@@ -272,7 +272,7 @@ GaryText2: ; 76108 (1d:6108)
 	db "@"
 
 GaryText3: ; 7610d (1d:610d)
-	db $8
+	TX_ASM
 	ld a, [W_PLAYERSTARTER]
 	ld [wd11e], a
 	call GetMonName

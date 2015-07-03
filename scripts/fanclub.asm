@@ -24,7 +24,7 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 
 FanClubText1:
 ; pikachu fan
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd771]
 	bit 7, a
 	jr nz, .mineisbetter
@@ -51,7 +51,7 @@ FanClubText1:
 
 FanClubText2:
 ; seel fan
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd771]
 	bit 6, a
 	jr nz, .mineisbetter
@@ -78,7 +78,7 @@ FanClubText2:
 
 FanClubText3:
 ; pikachu
-	db $8
+	TX_ASM
 	ld hl, .text
 	call PrintText
 	ld a, PIKACHU
@@ -92,7 +92,7 @@ FanClubText3:
 
 FanClubText4:
 ; seel
-	db $08 ; asm
+	TX_ASM
 	ld hl, .text
 	call PrintText
 	ld a, SEEL
@@ -106,7 +106,7 @@ FanClubText4:
 
 FanClubText5:
 ; chair
-	db $08 ; asm
+	TX_ASM
 	call FanClubBikeInBag
 	jr nz, .nothingleft
 

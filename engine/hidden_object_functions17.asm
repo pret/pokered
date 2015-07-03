@@ -61,7 +61,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon interal id number
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
 	ld [hWY], a
@@ -78,7 +78,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld a, $80
 	ld [$ffe1], a
 	hlCoord 10, 11
-	predef Func_3f073
+	predef AnimateSendingOutMon
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	call Delay3
@@ -95,7 +95,7 @@ PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	ret
 
 LinkCableHelp: ; 5dc29 (17:5c29)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
 	call PrintText
@@ -125,10 +125,10 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_5dc93 ; 0x5dc74 $1d
+	jr nz, .asm_5dc93
 	ld a, [wCurrentMenuItem]
 	cp $3
-	jr z, .asm_5dc93 ; 0x5dc7b $16
+	jr z, .asm_5dc93
 	ld hl, wd730
 	res 6, [hl]
 	ld hl, LinkCableInfoTexts
@@ -179,7 +179,7 @@ LinkCableInfoText3: ; 5dce8 (17:5ce8)
 	db "@"
 
 ViridianSchoolBlackboard: ; 5dced (17:5ced)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
@@ -316,7 +316,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
@@ -345,7 +345,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld hl, wd773
 	set 1, [hl]
 
-	ld hl, GymTrashCans ; $5e7d
+	ld hl, GymTrashCans
 	ld a, [wcd5b]
 	; * 5
 	ld b, a
@@ -428,19 +428,21 @@ GymTrashCans: ; 5de7d (17:5e7d)
 
 VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
+; unused
 VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 	TX_FAR _VermilionGymTrashSuccesText2
 	db "@"
 
-UnnamedText_5dee0: ; 5dee0 (17:5ee0)
-	db $08 ; asm
+; unused
+VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
@@ -449,7 +451,7 @@ UnnamedText_5dee0: ; 5dee0 (17:5ee0)
 
 VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
@@ -458,7 +460,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 
 VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound

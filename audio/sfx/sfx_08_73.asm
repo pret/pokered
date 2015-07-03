@@ -16,4 +16,3 @@ SFX_08_73_Ch2: ; 2089e (8:489e)
 	unknownsfx0x20 6, 225, 144, 6
 	unknownsfx0x20 8, 225, 16, 7
 	endchannel
-; 0x208b5

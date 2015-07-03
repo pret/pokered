@@ -42,7 +42,7 @@ _AgathaAfterBattleText:: ; 86998 (21:6998)
 	cont "along now, child!"
 	done
 
-_AgathaText2:: ; 869fd (21:69fd)
+_AgathaDontRunAwayText:: ; 869fd (21:69fd)
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

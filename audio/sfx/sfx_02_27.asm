@@ -28,4 +28,3 @@ SFX_02_27_Ch3: ; 8d94 (2:4d94)
 	unknownnoise0x20 8, 179, 76
 	unknownnoise0x20 8, 161, 92
 	endchannel
-; 0x8da7

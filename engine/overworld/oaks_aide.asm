@@ -1,10 +1,10 @@
-OaksAideScript ; 0x59035
+OaksAideScript: ; 0x59035
 	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_59086 ; 0x59042 $42
+	jr nz, .asm_59086
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
@@ -13,8 +13,8 @@ OaksAideScript ; 0x59035
 	ld b, a
 	ld a, [$ffdb]
 	cp b
-	jr z, .asm_59059 ; 0x59055 $2
-	jr nc, .asm_5907c ; 0x59057 $23
+	jr z, .asm_59059
+	jr nc, .asm_5907c
 .asm_59059
 	ld hl, OaksAideHereYouGoText
 	call PrintText
@@ -26,17 +26,17 @@ OaksAideScript ; 0x59035
 	ld hl, OaksAideGotItemText
 	call PrintText
 	ld a, $1
-	jr .asm_5908e ; 0x59071 $1b
+	jr .asm_5908e
 .BagFull
 	ld hl, OaksAideNoRoomText
 	call PrintText
 	xor a
-	jr .asm_5908e ; 0x5907a $12
+	jr .asm_5908e
 .asm_5907c
 	ld hl, OaksAideUhOhText
 	call PrintText
 	ld a, $80
-	jr .asm_5908e ; 0x59084 $8
+	jr .asm_5908e
 .asm_59086
 	ld hl, OaksAideComeBackText
 	call PrintText

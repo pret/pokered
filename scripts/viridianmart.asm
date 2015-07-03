@@ -8,11 +8,11 @@ ViridianMartScript: ; 1d46e (7:546e)
 ViridianMartScript_1d47d: ; 1d47d (7:547d)
 	ld a, [wd74e]
 	bit 0, a
-	jr nz, .asm_1d489 ; 0x1d482 $5
-	ld hl, ViridianMartTextPointers ; $54e0
-	jr .asm_1d48c ; 0x1d487 $3
+	jr nz, .asm_1d489
+	ld hl, ViridianMartTextPointers
+	jr .asm_1d48c
 .asm_1d489
-	ld hl, ViridianMartTextPointers + $a ; $54ea ; starts at ViridianMartText6
+	ld hl, ViridianMartTextPointers + $a ; starts at ViridianMartText6
 .asm_1d48c
 	ld a, l
 	ld [W_MAPTEXTPTR], a

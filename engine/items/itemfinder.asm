@@ -22,23 +22,23 @@ HiddenItemNear: ; 7481f (1d:481f)
 	inc hl
 	ld e, [hl]
 	inc hl
-	jr nz, .asm_74824 ; 0x74845 $dd
+	jr nz, .asm_74824
 	ld a, [W_YCOORD]
 	call Func_7486b
 	cp d
-	jr nc, .asm_74824 ; 0x7484e $d4
+	jr nc, .asm_74824
 	ld a, [W_YCOORD]
 	add $4
 	cp d
-	jr c, .asm_74824 ; 0x74856 $cc
+	jr c, .asm_74824
 	ld a, [W_XCOORD]
 	call Func_7486b
 	cp e
-	jr nc, .asm_74824 ; 0x7485f $c3
+	jr nc, .asm_74824
 	ld a, [W_XCOORD]
 	add $5
 	cp e
-	jr c, .asm_74824 ; 0x74867 $bb
+	jr c, .asm_74824
 	scf
 	ret
 

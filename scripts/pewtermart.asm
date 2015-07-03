@@ -10,7 +10,7 @@ PewterMartTextPointers: ; 74cb6 (1d:4cb6)
 	dw PewterMartText3
 
 PewterMartText2: ; 74cbc (1d:4cbc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterMartText_74cc6
 	call PrintText
 	jp TextScriptEnd
@@ -20,7 +20,7 @@ PewterMartText_74cc6: ; 74cc6 (1d:4cc6)
 	db "@"
 
 PewterMartText3: ; 74ccb (1d:4ccb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterMartText_74cd5
 	call PrintText
 	jp TextScriptEnd

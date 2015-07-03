@@ -45,4 +45,3 @@ SFX_1f_3a_Ch3: ; 7e877 (1f:6877)
 	B_ 2
 	rest 2
 	endchannel
-; 0x7e887

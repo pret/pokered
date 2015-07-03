@@ -335,4 +335,3 @@ Music_MuseumGuy_branch_aee1::
 	mutedsnare3 1
 	mutedsnare3 1
 	loopchannel 0, Music_MuseumGuy_branch_aee1
-; 0xaf59

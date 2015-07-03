@@ -5,4 +5,3 @@ SFX_02_44_Ch1: ; 84ee (2:44ee)
 	unknownsfx0x20 15, 242, 80, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x84fd

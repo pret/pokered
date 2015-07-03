@@ -22,4 +22,3 @@ SFX_02_33_Ch3: ; 900d (2:500d)
 	unknownnoise0x20 8, 196, 69
 	unknownnoise0x20 8, 177, 68
 	endchannel
-; 0x901a

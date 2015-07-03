@@ -21,4 +21,3 @@ SFX_1f_22_Ch3: ; 7ca4a (1f:4a4a)
 	unknownnoise0x20 2, 97, 33
 	unknownnoise0x20 8, 97, 17
 	endchannel
-; 0x7ca54

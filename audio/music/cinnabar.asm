@@ -352,4 +352,3 @@ Music_Cinnabar_branch_b93f::
 	C_ 1
 	rest 1
 	loopchannel 0, Music_Cinnabar_branch_b93f
-; 0xb9eb

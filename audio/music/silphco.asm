@@ -998,4 +998,3 @@ Music_SilphCo_branch_7f5c9::
 	E_ 4
 	F_ 4
 	loopchannel 0, Music_SilphCo_branch_7f5c9
-; 0x7f69d

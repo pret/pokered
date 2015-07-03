@@ -19,4 +19,3 @@ SFX_08_14_Ch3: ; 20c4d (8:4c4d)
 	unknownnoise0x20 14, 148, 44
 	unknownnoise0x20 8, 129, 28
 	endchannel
-; 0x20c57

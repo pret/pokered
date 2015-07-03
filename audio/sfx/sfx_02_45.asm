@@ -11,4 +11,3 @@ SFX_02_45_Ch1: ; 84fd (2:44fd)
 	unknownsfx0x20 3, 161, 192, 7
 	unknownsfx0x20 8, 161, 0, 7
 	endchannel
-; 0x8528

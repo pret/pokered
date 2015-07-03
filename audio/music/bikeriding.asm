@@ -702,4 +702,3 @@ Music_BikeRiding_branch_7dec2::
 	triangle3 1
 	triangle3 1
 	endchannel
-; 0x7ded1

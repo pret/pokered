@@ -414,4 +414,3 @@ Music_Cities2_branch_b64c::
 	E_ 2
 	G# 2
 	loopchannel 0, Music_Cities2_branch_b64c
-; 0xb6c7

@@ -8,4 +8,3 @@ SFX_02_48_Ch1: ; 854e (2:454e)
 	unknownsfx0x20 15, 23, 0, 4
 	unknownsfx0x10 8
 	endchannel
-; 0x8569

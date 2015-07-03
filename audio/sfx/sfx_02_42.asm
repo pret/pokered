@@ -57,4 +57,3 @@ SFX_02_42_Ch3: ; b39d (2:739d)
 	F_ 4
 	D# 8
 	endchannel
-; 0xb3a7

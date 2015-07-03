@@ -28,7 +28,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [wSpriteStateData1 + 9], a
 	ld a, [wWhichTrade]
 	cp $1
-	jr z, .asm_7520f ; 0x75207 $6
+	jr z, .asm_7520f
 	ld a, $2
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
@@ -77,7 +77,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld hl, wd790
 	bit 6, [hl]
 	res 6, [hl]
-	jr z, .asm_7527f ; 0x7525a $23
+	jr z, .asm_7527f
 	res 7, [hl]
 	call UpdateSprites
 	ld a, $f0
@@ -92,7 +92,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	call SafariZoneEntranceAutoWalk
 	ld a, $4
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	jr .asm_75286 ; 0x7527d $7
+	jr .asm_75286
 .asm_7527f
 	ld a, $5
 	ld [$ff8c], a
@@ -145,8 +145,8 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText4
-	TX_FAR SafariZoneEntranceText_9e6e4 ; 0x9e6e4
-	db $8
+	TX_FAR SafariZoneEntranceText_9e6e4
+	TX_ASM
 	ld a, $13
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
@@ -225,12 +225,12 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText5
-	TX_FAR SafariZoneEntranceText_9e814 ; 0x9e814
-	db $8
+	TX_FAR SafariZoneEntranceText_9e814
+	TX_ASM
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
 	and a
-	jr nz, .asm_7539c ; 0x7537b $1f
+	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
 	call PrintText
 	xor a
@@ -243,7 +243,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	res 7, [hl]
 	ld a, $0
 	ld [wcf0d], a
-	jr .asm_753b3 ; 0x7539a $17
+	jr .asm_753b3
 .asm_7539c
 	ld hl, .SafariZoneEntranceText_753c0
 	call PrintText
@@ -272,7 +272,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText2
-	db $08 ; asm
+	TX_ASM
 	ld hl,.FirstTimeQuestionText
 	call PrintText
 	call YesNoChoice
