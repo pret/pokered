@@ -11,4 +11,3 @@ SFX_08_44_Ch1: ; 2045d (8:445d)
 	unknownnoise0x20 2, 49, 17
 	unknownnoise0x20 8, 65, 51
 	endchannel
-; 0x2047f

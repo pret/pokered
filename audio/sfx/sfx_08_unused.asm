@@ -29,4 +29,3 @@ SFX_08_unused_Ch3: ; 209c1 (8:49c1)
 	unknownnoise0x20 12, 125, 76
 	unknownnoise0x20 15, 211, 76
 	endchannel
-; 0x209d7

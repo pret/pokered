@@ -19,4 +19,3 @@ SFX_08_68_Ch3: ; 20673 (8:4673)
 	unknownnoise0x20 1, 209, 41
 	loopchannel 6, SFX_08_68_Ch3
 	endchannel
-; 0x2067e

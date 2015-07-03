@@ -12,4 +12,3 @@ SFX_1f_66_Ch2: ; 7c71e (1f:471e)
 	unknownsfx0x20 2, 193, 65, 7
 	unknownsfx0x20 15, 209, 129, 7
 	endchannel
-; 0x7c72d

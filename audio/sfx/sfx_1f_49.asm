@@ -6,4 +6,3 @@ SFX_1f_49_Ch1: ; 7c546 (1f:4546)
 	unknownsfx0x20 4, 241, 128, 7
 	unknownsfx0x20 4, 0, 0, 0
 	endchannel
-; 0x7c55d

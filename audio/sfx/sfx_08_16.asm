@@ -15,4 +15,3 @@ SFX_08_16_Ch2: ; 20dc3 (8:4dc3)
 
 SFX_08_16_Ch3: ; 20dd1 (8:4dd1)
 	endchannel
-; 0x20dd2

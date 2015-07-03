@@ -36,4 +36,3 @@ SFX_08_32_Ch3: ; 210c1 (8:50c1)
 	unknownnoise0x20 5, 146, 26
 	unknownnoise0x20 8, 129, 24
 	endchannel
-; 0x210dd

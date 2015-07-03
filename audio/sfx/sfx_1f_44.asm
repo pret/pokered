@@ -5,4 +5,3 @@ SFX_1f_44_Ch1: ; 7c4c7 (1f:44c7)
 	unknownsfx0x20 15, 242, 80, 6
 	unknownsfx0x10 8
 	endchannel
-; 0x7c4d6

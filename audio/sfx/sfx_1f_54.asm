@@ -20,4 +20,3 @@ SFX_1f_54_Ch2: ; 7c669 (1f:4669)
 	unknownsfx0x20 15, 240, 130, 4
 	unknownsfx0x20 15, 242, 130, 4
 	endchannel
-; 0x7c688

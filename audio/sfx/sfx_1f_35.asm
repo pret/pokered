@@ -25,4 +25,3 @@ SFX_1f_35_Ch2: ; 7d0e5 (1f:50e5)
 
 SFX_1f_35_Ch3: ; 7d107 (1f:5107)
 	endchannel
-; 0x7d108

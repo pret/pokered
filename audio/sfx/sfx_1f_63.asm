@@ -5,4 +5,3 @@ SFX_1f_63_Ch1: ; 7c6e5 (1f:46e5)
 	unknownnoise0x20 3, 192, 34
 	unknownnoise0x20 15, 210, 36
 	endchannel
-; 0x7c6f5

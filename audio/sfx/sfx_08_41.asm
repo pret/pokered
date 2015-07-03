@@ -9,4 +9,3 @@ SFX_08_41_Ch2: ; 20436 (8:4436)
 	duty 2
 	unknownsfx0x20 15, 194, 130, 7
 	endchannel
-; 0x2043d

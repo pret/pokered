@@ -12,4 +12,3 @@ SFX_1f_45_Ch1: ; 7c4d6 (1f:44d6)
 	unknownsfx0x20 3, 129, 192, 7
 	unknownsfx0x20 3, 129, 0, 7
 	endchannel
-; 0x7c505

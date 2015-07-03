@@ -8,4 +8,3 @@ SFX_1f_48_Ch1: ; 7c52b (1f:452b)
 	unknownsfx0x20 15, 23, 0, 4
 	unknownsfx0x10 8
 	endchannel
-; 0x7c546

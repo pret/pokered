@@ -8,4 +8,3 @@ SFX_08_55_Ch1: ; 20533 (8:4533)
 	unknownnoise0x20 12, 145, 16
 	unknownnoise0x20 8, 242, 65
 	endchannel
-; 0x2054c

@@ -17,4 +17,3 @@ SFX_08_19_Ch2: ; 20cf0 (8:4cf0)
 
 SFX_08_19_Ch3: ; 20d02 (8:4d02)
 	endchannel
-; 0x20d03

@@ -19,4 +19,3 @@ SFX_1f_28_Ch3: ; 7ce3a (1f:4e3a)
 	unknownnoise0x20 14, 196, 60
 	unknownnoise0x20 8, 209, 44
 	endchannel
-; 0x7ce44

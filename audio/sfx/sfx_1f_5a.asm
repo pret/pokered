@@ -11,4 +11,3 @@ SFX_1f_5a_Ch2: ; 7c421 (1f:4421)
 	unknownsfx0x20 4, 145, 193, 6
 	unknownsfx0x20 8, 162, 161, 7
 	endchannel
-; 0x7c430

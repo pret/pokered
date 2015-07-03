@@ -17,4 +17,3 @@ SFX_1f_19_Ch2: ; 7cabd (1f:4abd)
 
 SFX_1f_19_Ch3: ; 7cacf (1f:4acf)
 	endchannel
-; 0x7cad0

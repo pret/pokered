@@ -29,4 +29,3 @@ SFX_1f_30_Ch3: ; 7cf64 (1f:4f64)
 	unknownnoise0x20 8, 196, 108
 	unknownnoise0x20 15, 179, 92
 	endchannel
-; 0x7cf74

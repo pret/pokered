@@ -22,4 +22,3 @@ SFX_08_33_Ch3: ; 212b5 (8:52b5)
 	unknownnoise0x20 8, 196, 69
 	unknownnoise0x20 8, 177, 68
 	endchannel
-; 0x212c2

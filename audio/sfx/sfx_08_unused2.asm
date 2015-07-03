@@ -54,4 +54,3 @@ SFX_08_unused2_Ch3: ; 22359 (8:6359)
 	B_ 4
 	rest 4
 	endchannel
-; 0x22370

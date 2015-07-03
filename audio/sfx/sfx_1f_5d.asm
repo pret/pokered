@@ -34,4 +34,3 @@ ELSE
 	unknownsfx0x20 15, 210, 225, 7
 ENDC
 	endchannel
-; 0x7c490

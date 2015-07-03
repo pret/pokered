@@ -13,4 +13,3 @@ SFX_08_45_Ch2: ; 20490 (8:4490)
 	unknownsfx0x20 15, 146, 0, 6
 	unknownsfx0x20 15, 146, 130, 7
 	endchannel
-; 0x2049b

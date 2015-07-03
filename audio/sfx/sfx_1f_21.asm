@@ -38,4 +38,3 @@ SFX_1f_21_Ch3: ; 7cbed (1f:4bed)
 	unknownnoise0x20 9, 194, 44
 	unknownnoise0x20 4, 161, 60
 	endchannel
-; 0x7cc0c

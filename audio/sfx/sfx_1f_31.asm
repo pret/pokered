@@ -27,4 +27,3 @@ SFX_1f_31_Ch3: ; 7cff3 (1f:4ff3)
 	unknownnoise0x20 1, 178, 91
 	unknownnoise0x20 15, 194, 76
 	endchannel
-; 0x7d003

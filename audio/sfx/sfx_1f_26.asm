@@ -22,4 +22,3 @@ SFX_1f_26_Ch3: ; 7cdc6 (1f:4dc6)
 	unknownnoise0x20 3, 194, 108
 	unknownnoise0x20 8, 209, 92
 	endchannel
-; 0x7cdd3

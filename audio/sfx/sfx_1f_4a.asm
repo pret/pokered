@@ -7,4 +7,3 @@ SFX_1f_4a_Ch1: ; 7c55d (1f:455d)
 	unknownsfx0x10 8
 	unknownsfx0x20 1, 0, 0, 0
 	endchannel
-; 0x7c572

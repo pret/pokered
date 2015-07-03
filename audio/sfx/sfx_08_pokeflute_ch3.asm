@@ -11,4 +11,3 @@ SFX_08_PokeFlute_Ch3: ; 2049b (8:449b)
 	octave 6
 	C_ 13
 	endchannel
-; 0x204aa

@@ -8,4 +8,3 @@ SFX_1f_53_Ch1: ; 7c631 (1f:4631)
 	unknownnoise0x20 8, 244, 85
 	unknownnoise0x20 8, 241, 68
 	endchannel
-; 0x7c64a

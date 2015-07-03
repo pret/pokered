@@ -22,4 +22,3 @@ SFX_08_36_Ch3: ; 21361 (8:5361)
 	unknownnoise0x20 1, 162, 57
 	unknownnoise0x20 8, 145, 73
 	endchannel
-; 0x2136e

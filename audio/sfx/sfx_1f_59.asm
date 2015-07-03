@@ -9,4 +9,3 @@ SFX_1f_59_Ch2: ; 7c40b (1f:440b)
 	unknownsfx0x20 1, 8, 0, 0
 	unknownsfx0x20 4, 161, 97, 7
 	endchannel
-; 0x7c416
