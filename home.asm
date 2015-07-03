@@ -2354,7 +2354,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
 	ld hl, W_CURMAPSCRIPT
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)

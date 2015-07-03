@@ -57,13 +57,13 @@ _UncompressSpriteData:: ; 251a (0:251a)
 ; note that this is an endless loop which is terminated during a call to MoveToNextBufferPosition by manipulating the stack
 UncompressSpriteDataLoop:: ; 2556 (0:2556)
 	ld hl, S_SPRITEBUFFER1
-	ld a, [W_SPRITELOADFLAGS] 
+	ld a, [W_SPRITELOADFLAGS]
 	bit 0, a
 	jr z, .useSpriteBuffer1    ; check which buffer to use
 	ld hl, S_SPRITEBUFFER2
 .useSpriteBuffer1
 	call StoreSpriteOutputPointer
-	ld a, [W_SPRITELOADFLAGS] 
+	ld a, [W_SPRITELOADFLAGS]
 	bit 1, a
 	jr z, .startDecompression  ; check if last iteration
 	call ReadNextInputBit      ; if last chunk, read 1-2 bit unpacking mode

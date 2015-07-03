@@ -157,14 +157,14 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	ld hl, ReceivedThunderbadgeText
 	ld de, ReceivedThunderbadgeText
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
 	ld [W_GYMLEADERNO], a
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

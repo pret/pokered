@@ -131,12 +131,12 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

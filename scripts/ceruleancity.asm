@@ -344,7 +344,7 @@ CeruleanCityText6: ; 19707 (6:5707)
 
 CeruleanCityText7: ; 1970c (6:570c)
 	TX_ASM
-	ldh a, [$d3]
+	ld a, [hRandomAdd]
 	cp $b4
 	jr c, .asm_e9fc9
 	ld hl, CeruleanCityText_19730

@@ -24,7 +24,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
 	ld hl, wd75f
 	set 0, [hl]

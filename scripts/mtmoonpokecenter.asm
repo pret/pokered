@@ -35,10 +35,10 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .asm_4934e
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [$ff9f], a
+	ld [$ffa1], a
 	ld a, $5
-	ldh [$a0], a
+	ld [$ffa0], a
 	call HasEnoughMoney
 	jr nc, .asm_faa09
 	ld hl, MtMoonPokecenterText_49366

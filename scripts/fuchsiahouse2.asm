@@ -34,7 +34,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
 	ld hl, wd78e
 	set 1, [hl]
@@ -98,7 +98,7 @@ HM04NoRoomText: ; 7515e (1d:515e)
 FuchsiaHouse2Text5: ; 75163 (1d:5163)
 FuchsiaHouse2Text4: ; 75163 (1d:5163)
 	TX_ASM
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
 	jr nz, .asm_4c9a2

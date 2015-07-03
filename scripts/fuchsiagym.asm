@@ -167,14 +167,14 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	ld hl, KogaAfterBattleText
 	ld de, KogaAfterBattleText
 	call SaveEndBattleTextPointers
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5
 	ld [W_GYMLEADERNO], a
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_FUCHSIAGYMCURSCRIPT], a
 .asm_e84c6

@@ -30,7 +30,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	ld hl, ReceivedTM31Text
 	call PrintText
 	ld a, POKE_DOLL
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
 	ld hl, wd7af
 	set 0, [hl]
