@@ -83,44 +83,44 @@ SSAnne10TrainerHeader5: ; 61dc0 (18:5dc0)
 	db $ff
 
 SSAnne10Text1: ; 61dcd (18:5dcd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text2: ; 61dd7 (18:5dd7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text3: ; 61de1 (18:5de1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text4: ; 61deb (18:5deb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text5: ; 61df5 (18:5df5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text6: ; 61dff (18:5dff)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne10TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text8: ; 61e09 (18:5e09)
 	TX_FAR _SSAnne10Text8
-	db $08 ; asm
+	TX_ASM
 	ld a, MACHOKE
 	call PlayCry
 	jp TextScriptEnd

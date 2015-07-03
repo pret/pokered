@@ -7,7 +7,7 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 	dw BikeShopText3
 
 BikeShopText1: ; 1d745 (7:5745)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75f]
 	bit 0, a
 	jr z, .asm_260d4
@@ -120,7 +120,7 @@ BikeShopText_1d834: ; 1d834 (7:5834)
 	db "@"
 
 BikeShopText2: ; 1d839 (7:5839)
-	db $08 ; asm
+	TX_ASM
 	ld hl, BikeShopText_1d843
 	call PrintText
 	jp TextScriptEnd
@@ -130,7 +130,7 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 	db "@"
 
 BikeShopText3: ; 1d848 (7:5848)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75f]
 	bit 0, a
 	ld hl, BikeShopText_1d861

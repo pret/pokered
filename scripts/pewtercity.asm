@@ -194,7 +194,7 @@ PewterCityText2: ; 193ac (6:53ac)
 	db "@"
 
 PewterCityText3: ; 193b1 (6:53b1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
@@ -240,7 +240,7 @@ PewterCityText13: ; 19400 (6:5400)
 	db "@"
 
 PewterCityText4: ; 19405 (6:5405)
-	db $8
+	TX_ASM
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
@@ -269,7 +269,7 @@ PewterCityText_19431: ; 19431 (6:5431)
 	db "@"
 
 PewterCityText5: ; 19436 (6:5436)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a

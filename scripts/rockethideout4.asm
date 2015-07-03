@@ -119,7 +119,7 @@ RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 	db $ff
 
 RocketHideout4Text1: ; 4553a (11:553a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd81b]
 	bit 7, a
 	jp nz, .asm_545571
@@ -160,7 +160,7 @@ RocketHideout4Text10: ; 45584 (11:5584)
 	db "@"
 
 RocketHideout4Text2: ; 45589 (11:5589)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -178,7 +178,7 @@ RocketHideout4AfterBattleText2: ; 4559d (11:559d)
 	db "@"
 
 RocketHideout4Text3: ; 455a2 (11:55a2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -196,7 +196,7 @@ RocketHideout4AfterBattleText3: ; 455b6 (11:55b6)
 	db "@"
 
 RocketHideout4Text4: ; 455bb (11:55bb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout4TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -210,7 +210,7 @@ RocketHideout4EndBattleText4: ; 455ca (11:55ca)
 	db "@"
 
 RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
-	db $8
+	TX_ASM
 	ld hl, RocketHideout4Text_455ec
 	call PrintText
 	ld hl, wd81b

@@ -456,7 +456,7 @@ SlotMachine_37588: ; 37588 (d:7588)
 	jp .loop
 
 SlotsMachineText_37665: ; 37665 (d:7665)
-	db $08 ; asm
+	TX_ASM
 	push bc
 	call SlotMachine_37728
 	ld hl, LinedUpText

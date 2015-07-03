@@ -95,38 +95,38 @@ RocketHideout1TrainerHeader5: ; 44c52 (11:4c52)
 	db $ff
 
 RocketHideout1Text1: ; 44c5f (11:4c5f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text2: ; 44c69 (11:4c69)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text3: ; 44c73 (11:4c73)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text4: ; 44c7d (11:4c7d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text5: ; 44c87 (11:4c87)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout1TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1EndBattleText6: ; 44c91 (11:4c91)
 	TX_FAR _RocketHideout1EndBattleText6
-	db $8
+	TX_ASM
 	ld hl, wd815
 	set 5, [hl]
 	ld hl, RocketHideout1Text_44c9f

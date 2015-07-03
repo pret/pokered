@@ -2726,7 +2726,7 @@ PrintStrengthTxt: ; cd99 (3:4d99)
 
 UsedStrengthText: ; cdaa (3:4daa)
 	TX_FAR _UsedStrengthText
-	db $08 ; asm
+	TX_ASM
 	ld a, [wcf91]
 	call PlayCry
 	call Delay3

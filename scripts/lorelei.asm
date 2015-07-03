@@ -132,7 +132,7 @@ LoreleiTrainerHeader0: ; 76255 (1d:6255)
 	db $ff
 
 LoreleiText1: ; 76262 (1d:6262)
-	db $08 ; asm
+	TX_ASM
 	ld hl, LoreleiTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd

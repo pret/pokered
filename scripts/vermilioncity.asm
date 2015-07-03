@@ -135,7 +135,7 @@ VermilionCityText1: ; 19889 (6:5889)
 	db "@"
 
 VermilionCityText2: ; 1988e (6:588e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_1989e
@@ -157,7 +157,7 @@ VermilionCityText_198ac: ; 198ac (6:58ac)
 	db "@"
 
 VermilionCityText3: ; 198b1 (6:58b1)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_198f6
@@ -225,7 +225,7 @@ VermilionCityText4: ; 1991d (6:591d)
 
 VermilionCityText5: ; 19922 (6:5922)
 	TX_FAR _VermilionCityText5
-	db $08 ; asm
+	TX_ASM
 	ld a, MACHOP
 	call PlayCry
 	call WaitForSoundToFinish

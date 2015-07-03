@@ -9,7 +9,7 @@ CeruleanHouse2TextPointers: ; 74e13 (1d:4e13)
 	dw CeruleanHouse2Text1
 
 CeruleanHouse2Text1: ; 74e15 (1d:4e15)
-	db $8
+	TX_ASM
 	ld hl, CeruleanHouse2Text_74e77
 	call PrintText
 	xor a

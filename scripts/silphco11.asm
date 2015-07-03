@@ -302,7 +302,7 @@ SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 	db $ff
 
 SilphCo11Text1: ; 622dc (18:62dc)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 5, a
 	jp nz, .asm_62308
@@ -359,7 +359,7 @@ SilphCo11Text6: ; 62335 (18:6335)
 	db "@"
 
 SilphCo11Text4: ; 6233a (18:633a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo11TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -377,7 +377,7 @@ SilphCo11AfterBattleText1: ; 6234e (18:634e)
 	db "@"
 
 SilphCo11Text5: ; 62353 (18:6353)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo11TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -395,7 +395,7 @@ SilphCo11AfterBattleText2: ; 62367 (18:6367)
 	db "@"
 
 SilphCo10Text_6236c: ; 6236c (18:636c)
-	db $8
+	TX_ASM
 	ld hl, SilphCo10Text_6237b
 	call PrintText
 	ld a, PORYGON

@@ -275,7 +275,7 @@ ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 	db $ff
 
 ViridianGymText1: ; 74a69 (1d:4a69)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd751]
 	bit 1, a
 	jr z, .asm_6de66
@@ -346,7 +346,7 @@ ViridianGymText14: ; 74aee (1d:4aee)
 	db "@"
 
 ViridianGymText2: ; 74af3 (1d:4af3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -364,7 +364,7 @@ ViridianGymAfterBattleText1: ; 74b07 (1d:4b07)
 	db "@"
 
 ViridianGymText3: ; 74b0c (1d:4b0c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -382,7 +382,7 @@ ViridianGymAfterBattleText2: ; 74b20 (1d:4b20)
 	db "@"
 
 ViridianGymText4: ; 74b25 (1d:4b25)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -400,7 +400,7 @@ ViridianGymAfterBattleText3: ; 74b39 (1d:4b39)
 	db "@"
 
 ViridianGymText5: ; 74b3e (1d:4b3e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -418,7 +418,7 @@ ViridianGymAfterBattleText4: ; 74b52 (1d:4b52)
 	db "@"
 
 ViridianGymText6: ; 74b57 (1d:4b57)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -436,7 +436,7 @@ ViridianGymAfterBattleText5: ; 74b6b (1d:4b6b)
 	db "@"
 
 ViridianGymText7: ; 74b70 (1d:4b70)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -454,7 +454,7 @@ ViridianGymAfterBattleText6: ; 74b84 (1d:4b84)
 	db "@"
 
 ViridianGymText8: ; 74b89 (1d:4b89)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -472,7 +472,7 @@ ViridianGymAfterBattleText7: ; 74b9d (1d:4b9d)
 	db "@"
 
 ViridianGymText9: ; 74ba2 (1d:4ba2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianGymTrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -490,7 +490,7 @@ ViridianGymAfterBattleText8: ; 74bb6 (1d:4bb6)
 	db "@"
 
 ViridianGymText10: ; 74bbb (1d:4bbb)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd751]
 	bit 1, a
 	jr nz, .asm_1abd1

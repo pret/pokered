@@ -234,7 +234,7 @@ CeruleanCityTextPointers: ; 1962d (6:562d)
 	dw CeruleanCityText17
 
 CeruleanCityText1: ; 1964f (6:564f)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75a] ; rival battle flag
 	bit 0, a
 	; do pre-battle text
@@ -266,7 +266,7 @@ CeruleanCityText_19677: ; 19677 (6:5677)
 	db "@"
 
 CeruleanCityText2: ; 1967c (6:567c)
-	db $8
+	TX_ASM
 	ld a, [wd75b]
 	bit 7, a
 	jr nz, .asm_4ca20
@@ -343,7 +343,7 @@ CeruleanCityText6: ; 19707 (6:5707)
 	db "@"
 
 CeruleanCityText7: ; 1970c (6:570c)
-	db $08 ; asm
+	TX_ASM
 	ldh a, [$d3]
 	cp $b4
 	jr c, .asm_e9fc9
@@ -375,7 +375,7 @@ CeruleanCityText_1973a: ; 1973a (6:573a)
 	db "@"
 
 CeruleanCityText8: ; 1973f (6:573f)
-	db $08 ; asm
+	TX_ASM
 	ld a, [hRandomAdd]
 	cp $b4
 	jr c, .asm_e28da

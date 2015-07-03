@@ -119,47 +119,47 @@ InitVoltorbBattle: ; 1e368 (7:6368)
 	jp TextScriptEnd
 
 PowerPlantText1: ; 1e374 (7:6374)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader0
 	jr InitVoltorbBattle
 
 PowerPlantText2: ; 1e37a (7:637a)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader1
 	jr InitVoltorbBattle
 
 PowerPlantText3: ; 1e380 (7:6380)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader2
 	jr InitVoltorbBattle
 
 PowerPlantText4: ; 1e386 (7:6386)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader3
 	jr InitVoltorbBattle
 
 PowerPlantText5: ; 1e38c (7:638c)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader4
 	jr InitVoltorbBattle
 
 PowerPlantText6: ; 1e392 (7:6392)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader5
 	jr InitVoltorbBattle
 
 PowerPlantText7: ; 1e398 (7:6398)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader6
 	jr InitVoltorbBattle
 
 PowerPlantText8: ; 1e39e (7:639e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader7
 	jr InitVoltorbBattle
 
 PowerPlantText9: ; 1e3a4 (7:63a4)
-	db $8 ; asm
+	TX_ASM
 	ld hl, PowerPlantTrainerHeader8
 	jr InitVoltorbBattle
 
@@ -169,7 +169,7 @@ VoltorbBattleText: ; 1e3aa (7:63aa)
 
 ZapdosBattleText: ; 1e3af (7:63af)
 	TX_FAR _ZapdosBattleText
-	db $8
+	TX_ASM
 	ld a, ZAPDOS
 	call PlayCry
 	call WaitForSoundToFinish

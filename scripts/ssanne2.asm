@@ -178,7 +178,7 @@ SSAnne2Text1: ; 614e1 (18:54e1)
 	db "@"
 
 SSAnne2Text2: ; 614e6 (18:54e6)
-	db $8
+	TX_ASM
 	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
 	ld hl, wd72d

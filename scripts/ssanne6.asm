@@ -36,7 +36,7 @@ SSAnne6Text6: ; 617de (18:57de)
 	db "@"
 
 SSAnne6Text7: ; 617e3 (18:57e3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne6Text_61807
 	call PrintText
 	ldh a, [$d3]

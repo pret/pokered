@@ -8,7 +8,7 @@ CeruleanHouseTrashedTextPointers: ; 1d689 (7:5689)
 	dw CeruleanHouseTrashedText3
 
 CeruleanHouseTrashedText1: ; 1d68f (7:568f)
-	db $08 ; asm
+	TX_ASM
 	ld b, $e4
 	predef IsItemInBag_
 	and b

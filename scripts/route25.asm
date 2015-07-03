@@ -139,55 +139,55 @@ Route25TrainerHeader9: ; 5169e (14:569e)
 	db $ff
 
 Route25Text1: ; 516ab (14:56ab)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text2: ; 516b5 (14:56b5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text3: ; 516bf (14:56bf)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text4: ; 516c9 (14:56c9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text5: ; 516d3 (14:56d3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text6: ; 516dd (14:56dd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text7: ; 516e7 (14:56e7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text8: ; 516f1 (14:56f1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text9: ; 516fb (14:56fb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route25TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd

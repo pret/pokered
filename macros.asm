@@ -195,6 +195,10 @@ TX_BCD: MACRO
 	db \2
 	ENDM
 
+TX_ASM: MACRO
+	db $08
+	ENDM
+
 ; Predef macro.
 add_predef: MACRO
 \1Predef::

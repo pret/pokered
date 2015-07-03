@@ -82,7 +82,7 @@ SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
 	db $ff
 
 SilphCo3Text1: ; 59fe5 (16:5fe5)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SilphCo3Text_59ffe
@@ -101,7 +101,7 @@ SilphCo3Text_59ffe: ; 59ffe (16:5ffe)
 	db "@"
 
 SilphCo3Text2: ; 5a003 (16:6003)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -119,7 +119,7 @@ SilphCo3AfterBattleText1: ; 5a017 (16:6017)
 	db "@"
 
 SilphCo3Text3: ; 5a01c (16:601c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd

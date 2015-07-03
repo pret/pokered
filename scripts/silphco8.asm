@@ -113,7 +113,7 @@ SilphCo8TrainerHeader2: ; 5659d (15:659d)
 	db $ff
 
 SilphCo8Text1: ; 565aa (15:65aa)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SilphCo8Text_565c3
@@ -132,19 +132,19 @@ SilphCo8Text_565c3: ; 565c3 (15:65c3)
 	db "@"
 
 SilphCo8Text2: ; 565c8 (15:65c8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo8Text3: ; 565d2 (15:65d2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo8Text4: ; 565dc (15:65dc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

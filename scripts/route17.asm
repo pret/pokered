@@ -124,7 +124,7 @@ Route17TrainerHeader9: ; 55c1f (15:5c1f)
 	db $ff
 
 Route17Text1: ; 55c2c (15:5c2c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -142,7 +142,7 @@ Route17AfterBattleText1: ; 55c40 (15:5c40)
 	db "@"
 
 Route17Text2: ; 55c45 (15:5c45)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -160,7 +160,7 @@ Route17AfterBattleText2: ; 55c59 (15:5c59)
 	db "@"
 
 Route17Text3: ; 55c5e (15:5c5e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -178,7 +178,7 @@ Route17AfterBattleText3: ; 55c72 (15:5c72)
 	db "@"
 
 Route17Text4: ; 55c77 (15:5c77)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -196,7 +196,7 @@ Route17AfterBattleText4: ; 55c8b (15:5c8b)
 	db "@"
 
 Route17Text5: ; 55c90 (15:5c90)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -214,7 +214,7 @@ Route17AfterBattleText5: ; 55ca4 (15:5ca4)
 	db "@"
 
 Route17Text6: ; 55ca9 (15:5ca9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -232,7 +232,7 @@ Route17AfterBattleText6: ; 55cbd (15:5cbd)
 	db "@"
 
 Route17Text7: ; 55cc2 (15:5cc2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -250,7 +250,7 @@ Route17AfterBattleText7: ; 55cd6 (15:5cd6)
 	db "@"
 
 Route17Text8: ; 55cdb (15:5cdb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -268,7 +268,7 @@ Route17AfterBattleText8: ; 55cef (15:5cef)
 	db "@"
 
 Route17Text9: ; 55cf4 (15:5cf4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -286,7 +286,7 @@ Route17AfterBattleText9: ; 55d08 (15:5d08)
 	db "@"
 
 Route17Text10: ; 55d0d (15:5d0d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route17TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd

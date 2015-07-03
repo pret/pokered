@@ -145,7 +145,7 @@ FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 	db $ff
 
 FuchsiaGymText1: ; 75534 (1d:5534)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd792]
 	bit 1, a
 	jr z, .asm_181b6
@@ -209,7 +209,7 @@ FuchsiaGymText11: ; 7559f (1d:559f)
 	db "@"
 
 FuchsiaGymText2: ; 755a4 (1d:55a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -227,7 +227,7 @@ FuchsiaGymAfterBattleText1: ; 755b8 (1d:55b8)
 	db "@"
 
 FuchsiaGymText3: ; 755bd (1d:55bd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -245,7 +245,7 @@ FuchsiaGymAfterBattleText2: ; 755d1 (1d:55d1)
 	db "@"
 
 FuchsiaGymText4: ; 755d6 (1d:55d6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -263,7 +263,7 @@ FuchsiaGymAfterBattleText3: ; 755ea (1d:55ea)
 	db "@"
 
 FuchsiaGymText5: ; 755ef (1d:55ef)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -281,7 +281,7 @@ FuchsiaGymAfterBattleText4: ; 75603 (1d:5603)
 	db "@"
 
 FuchsiaGymText6: ; 75608 (1d:5608)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -299,7 +299,7 @@ FuchsiaGymAfterBattleText5: ; 7561c (1d:561c)
 	db "@"
 
 FuchsiaGymText7: ; 75621 (1d:5621)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -317,7 +317,7 @@ FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 	db "@"
 
 FuchsiaGymText8: ; 7563a (1d:563a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd792]
 	bit 1, a
 	ld hl, FuchsiaGymText_75653

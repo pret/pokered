@@ -92,13 +92,13 @@ Mansion4TrainerHeader2: ; 52454 (14:6454)
 	db $ff
 
 Mansion4Text1: ; 52461 (14:6461)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion4Text2: ; 5246b (14:646b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

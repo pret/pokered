@@ -115,7 +115,7 @@ PokemonTower2TextPointers: ; 605db (18:45db)
 	dw PokemonTower2Text2
 
 PokemonTower2Text1: ; 605df (18:45df)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd764]
 	bit 7, a
 	jr z, .asm_16f24

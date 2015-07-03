@@ -175,61 +175,61 @@ Route20TrainerHeader10: ; 50da6 (14:4da6)
 	db $ff
 
 Route20Text1: ; 50db3 (14:4db3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text2: ; 50dbd (14:4dbd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text3: ; 50dc7 (14:4dc7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text4: ; 50dd1 (14:4dd1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text5: ; 50ddb (14:4ddb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text6: ; 50de5 (14:4de5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text7: ; 50def (14:4def)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text8: ; 50df9 (14:4df9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text9: ; 50e03 (14:4e03)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text10: ; 50e0d (14:4e0d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route20TrainerHeader10
 	call TalkToTrainer
 	jp TextScriptEnd

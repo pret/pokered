@@ -113,13 +113,13 @@ Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 	db $ff
 
 Mansion3Text1: ; 522af (14:62af)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion3Text2: ; 522b9 (14:62b9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

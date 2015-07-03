@@ -130,25 +130,25 @@ VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
 	db $ff
 
 VictoryRoad3Text1: ; 44a69 (11:4a69)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text2: ; 44a73 (11:4a73)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text3: ; 44a7d (11:4a7d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text4: ; 44a87 (11:4a87)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -119,61 +119,61 @@ Route19TrainerHeader9: ; 55ddf (15:5ddf)
 	db $ff
 
 Route19Text1: ; 55dec (15:5dec)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text2: ; 55df6 (15:5df6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text3: ; 55e00 (15:5e00)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text4: ; 55e0a (15:5e0a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text5: ; 55e14 (15:5e14)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text6: ; 55e1e (15:5e1e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text7: ; 55e28 (15:5e28)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text8: ; 55e32 (15:5e32)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text9: ; 55e3c (15:5e3c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route19Text10: ; 55e46 (15:5e46)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route19TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd

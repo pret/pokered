@@ -108,55 +108,55 @@ Route21TrainerHeader8: ; 55f76 (15:5f76)
 	db $ff
 
 Route21Text1: ; 55f83 (15:5f83)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text2: ; 55f8d (15:5f8d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text3: ; 55f97 (15:5f97)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text4: ; 55fa1 (15:5fa1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text5: ; 55fab (15:5fab)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text6: ; 55fb5 (15:5fb5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text7: ; 55fbf (15:5fbf)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text8: ; 55fc9 (15:5fc9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text9: ; 55fd3 (15:5fd3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route21TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd

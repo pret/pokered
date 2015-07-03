@@ -16,7 +16,7 @@ PewterPokecenterText2: ; 5c596 (17:4596)
 	db "@"
 
 PewterPokecenterText3: ; 5c59b (17:459b)
-	db $8
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, PewterPokecenterText5

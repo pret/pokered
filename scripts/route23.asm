@@ -146,43 +146,43 @@ Route23TextPointers: ; 512f7 (14:52f7)
 	dw Route23Text8
 
 Route23Text1: ; 51307 (14:5307)
-	db $08 ; asm
+	TX_ASM
 	ld a, $6
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text2: ; 51310 (14:5310)
-	db $08 ; asm
+	TX_ASM
 	ld a, $5
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text3: ; 51319 (14:5319)
-	db $08 ; asm
+	TX_ASM
 	ld a, $4
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text4: ; 51322 (14:5322)
-	db $08 ; asm
+	TX_ASM
 	ld a, $3
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text5: ; 5132b (14:532b)
-	db $08 ; asm
+	TX_ASM
 	ld a, $2
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text6: ; 51334 (14:5334)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text7: ; 5133d (14:533d)
-	db $8
+	TX_ASM
 	ld a, $0
 	call Route23Script_51346
 	jp TextScriptEnd
@@ -223,7 +223,7 @@ Route23Script_51388: ; 51388 (14:5388)
 
 VictoryRoadGuardText1: ; 5138e (14:538e)
 	TX_FAR _VictoryRoadGuardText1
-	db $08 ; asm
+	TX_ASM
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish

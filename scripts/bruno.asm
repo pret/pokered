@@ -132,7 +132,7 @@ BrunoTrainerHeader0: ; 763ac (1d:63ac)
 	db $ff
 
 BrunoText1: ; 763b9 (1d:63b9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, BrunoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd

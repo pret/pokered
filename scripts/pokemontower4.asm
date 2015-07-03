@@ -51,19 +51,19 @@ PokemonTower4TrainerHeader2: ; 60833 (18:4833)
 	db $ff
 
 PokemonTower4Text1: ; 60840 (18:4840)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower4Text2: ; 6084a (18:484a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower4Text3: ; 60854 (18:4854)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

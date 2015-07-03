@@ -16,7 +16,7 @@ SSAnne7TextPointers: ; 618a7 (18:58a7)
 	dw SSAnne7Text3
 
 SSAnne7Text1: ; 618ad (18:58ad)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd803]
 	bit 0, a
 	jr nz, .asm_797c4
@@ -46,7 +46,7 @@ SSAnne7Text1: ; 618ad (18:58ad)
 
 SSAnne7RubText: ; 618ec (18:58ec)
 	TX_FAR _SSAnne7RubText
-	db $8
+	TX_ASM
 	ld a, [wc0ef]
 	cp BANK(Music1f_UpdateMusic)
 	ld [wc0f0], a

@@ -11,7 +11,7 @@ LavenderHouse1TextPointers: ; 1d8ac (7:58ac)
 	dw LavenderHouse1Text6
 
 LavenderHouse1Text1: ; 1d8b8 (7:58b8)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 7, a
 	jr nz, .asm_72e5d
@@ -33,7 +33,7 @@ LavenderHouse1Text_1d8d6: ; 1d8d6 (7:58d6)
 	db "@"
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 7, a
 	jr nz, .asm_06470
@@ -56,20 +56,20 @@ LavenderHouse1Text_1d8f9: ; 1d8f9 (7:58f9)
 
 LavenderHouse1Text3: ; 1d8fe (7:58fe)
 	TX_FAR _LavenderHouse1Text3
-	db $8
+	TX_ASM
 	ld a, PSYDUCK
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 1d90b (7:590b)
 	TX_FAR _LavenderHouse1Text4
-	db $8
+	TX_ASM
 	ld a, NIDORINO
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text5: ; 1d918 (7:5918)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd76c]
 	bit 0, a
 	jr nz, .asm_15ac2

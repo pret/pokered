@@ -130,7 +130,7 @@ SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 	db $ff
 
 SilphCo4Text1: ; 19dd3 (6:5dd3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo4Text_19de0
 	ld de, SilphCo4Text_19de5
 	call SilphCo6Script_1a22f
@@ -145,7 +145,7 @@ SilphCo4Text_19de5: ; 19de5 (6:5de5)
 	db "@"
 
 SilphCo4Text2: ; 19dea (6:5dea)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -163,7 +163,7 @@ SilphCo4AfterBattleText2: ; 19dfe (6:5dfe)
 	db "@"
 
 SilphCo4Text3: ; 19e03 (6:5e03)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -181,7 +181,7 @@ SilphCo4AfterBattleText3: ; 19e17 (6:5e17)
 	db "@"
 
 SilphCo4Text4: ; 19e1c (6:5e1c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo4TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd

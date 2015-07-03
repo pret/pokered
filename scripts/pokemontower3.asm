@@ -48,19 +48,19 @@ PokemonTower3TrainerHeader2: ; 60705 (18:4705)
 	db $ff
 
 PokemonTower3Text1: ; 60712 (18:4712)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower3Text2: ; 6071c (18:471c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower3Text3: ; 60726 (18:4726)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

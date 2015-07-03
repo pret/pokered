@@ -120,52 +120,52 @@ Route15TrainerHeader9: ; 5984b (16:584b)
 	db $ff
 
 Route15Text1: ; 59858 (16:5858)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader0
 	jr Route15TalkToTrainer
 
 Route15Text2: ; 5985e (16:585e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader1
 	jr Route15TalkToTrainer
 
 Route15Text3: ; 59864 (16:5864)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader2
 	jr Route15TalkToTrainer
 
 Route15Text4: ; 5986a (16:586a)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader3
 	jr Route15TalkToTrainer
 
 Route15Text5: ; 59870 (16:5870)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader4
 	jr Route15TalkToTrainer
 
 Route15Text6: ; 59876 (16:5876)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader5
 	jr Route15TalkToTrainer
 
 Route15Text7: ; 5987c (16:587c)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader6
 	jr Route15TalkToTrainer
 
 Route15Text8: ; 59882 (16:5882)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader7
 	jr Route15TalkToTrainer
 
 Route15Text9: ; 59888 (16:5888)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader8
 	jr Route15TalkToTrainer
 
 Route15Text10: ; 5988e (16:588e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader9
 Route15TalkToTrainer: ; 59892 (16:5892)
 	call TalkToTrainer

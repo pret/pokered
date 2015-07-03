@@ -44,7 +44,7 @@ CeladonCityText4: ; 19999 (6:5999)
 	db "@"
 
 CeladonCityText5: ; 1999e (6:599e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd777]
 	bit 0, a
 	jr nz, .asm_7053f
@@ -90,7 +90,7 @@ CeladonCityText6: ; 199e7 (6:59e7)
 
 CeladonCityText7: ; 199ec (6:59ec)
 	TX_FAR _CeladonCityText7
-	db $08 ; asm
+	TX_ASM
 	ld a, POLIWRATH
 	call PlayCry
 	jp TextScriptEnd

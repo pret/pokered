@@ -143,44 +143,44 @@ VictoryRoad2TrainerHeader6: ; 51871 (14:5871)
 	db $ff
 
 VictoryRoad2Text1: ; 5187e (14:587e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text2: ; 51888 (14:5888)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text3: ; 51892 (14:5892)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text4: ; 5189c (14:589c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text5: ; 518a6 (14:58a6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text6: ; 518b0 (14:58b0)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad2TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2BattleText6: ; 518ba (14:58ba)
 	TX_FAR _VictoryRoad2BattleText6
-	db $8
+	TX_ASM
 	ld a, MOLTRES
 	call PlayCry
 	call WaitForSoundToFinish

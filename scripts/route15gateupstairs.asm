@@ -6,7 +6,7 @@ Route15GateUpstairsTextPointers: ; 4964d (12:564d)
 	dw Route15GateUpstairsText2
 
 Route15GateUpstairsText1: ; 49651 (12:5651)
-	db $8
+	TX_ASM
 	ld a, [wd7dd]
 	bit 0, a
 	jr nz, .asm_49683
@@ -37,7 +37,7 @@ Route15GateUpstairsText_4968c: ; 4968c (12:568c)
 	db "@"
 
 Route15GateUpstairsText2: ; 49691 (12:5691)
-	db $8
+	TX_ASM
 	ld hl, Route15GateUpstairsText_49698
 	jp Route12GateUpstairsScript_495c9
 

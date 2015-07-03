@@ -50,7 +50,7 @@ Route18TrainerHeader2: ; 59b02 (16:5b02)
 	db $ff
 
 Route18Text1: ; 59b0f (16:5b0f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route18TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -68,7 +68,7 @@ Route18AfterBattleText1: ; 59b23 (16:5b23)
 	db "@"
 
 Route18Text2: ; 59b28 (16:5b28)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route18TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -86,7 +86,7 @@ Route18AfterBattleText2: ; 59b3c (16:5b3c)
 	db "@"
 
 Route18Text3: ; 59b41 (16:5b41)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route18TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

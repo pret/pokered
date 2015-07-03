@@ -23,7 +23,7 @@ INCLUDE "data/hidden_item_coords.asm"
 
 FoundHiddenItemText: ; 7675b (1d:675b)
 	TX_FAR _FoundHiddenItemText
-	db $8
+	TX_ASM
 	ld a, [wWhichTrade] ; item ID
 	ld b, a
 	ld c, 1

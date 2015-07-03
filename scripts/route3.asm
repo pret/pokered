@@ -104,7 +104,7 @@ Route3Text1: ; 55586 (15:5586)
 	db "@"
 
 Route3Text2: ; 5558b (15:558b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -122,7 +122,7 @@ Route3AfterBattleText1: ; 5559f (15:559f)
 	db "@"
 
 Route3Text3: ; 555a4 (15:55a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -140,7 +140,7 @@ Route3AfterBattleText2: ; 555b8 (15:55b8)
 	db "@"
 
 Route3Text4: ; 555bd (15:55bd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -158,7 +158,7 @@ Route3AfterBattleText3: ; 555d1 (15:55d1)
 	db "@"
 
 Route3Text5: ; 555d6 (15:55d6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -176,7 +176,7 @@ Route3AfterBattleText4: ; 555ea (15:55ea)
 	db "@"
 
 Route3Text6: ; 555ef (15:55ef)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -194,7 +194,7 @@ Route3AfterBattleText5: ; 55603 (15:5603)
 	db "@"
 
 Route3Text7: ; 55608 (15:5608)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -212,7 +212,7 @@ Route3AfterBattleText6: ; 5561c (15:561c)
 	db "@"
 
 Route3Text8: ; 55621 (15:5621)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -230,7 +230,7 @@ Route3AfterBattleText7: ; 55635 (15:5635)
 	db "@"
 
 Route3Text9: ; 5563a (15:563a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route3TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd

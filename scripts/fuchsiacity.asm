@@ -74,7 +74,7 @@ FuchsiaCityText18: ; 19a8b (6:5a8b)
 	db "@"
 
 FuchsiaCityText19: ; 19a90 (6:5a90)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaCityChanseyText
 	call PrintText
 	ld a, CHANSEY
@@ -86,7 +86,7 @@ FuchsiaCityChanseyText: ; 19a9f (6:5a9f)
 	db "@"
 
 FuchsiaCityText20: ; 19aa4 (6:5aa4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaCityVoltorbText
 	call PrintText
 	ld a, VOLTORB
@@ -98,7 +98,7 @@ FuchsiaCityVoltorbText: ; 19ab3 (6:5ab3)
 	db "@"
 
 FuchsiaCityText21: ; 19ab8 (6:5ab8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
 	ld a, KANGASKHAN
@@ -110,7 +110,7 @@ FuchsiaCityKangaskhanText: ; 19ac7 (6:5ac7)
 	db "@"
 
 FuchsiaCityText22: ; 19acc (6:5acc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
 	ld a, SLOWPOKE
@@ -122,7 +122,7 @@ FuchsiaCitySlowpokeText: ; 19adb (6:5adb)
 	db "@"
 
 FuchsiaCityText23: ; 19ae0 (6:5ae0)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FuchsiaCityLaprasText
 	call PrintText
 	ld a, LAPRAS
@@ -134,7 +134,7 @@ FuchsiaCityLaprasText: ; 19aef (6:5aef)
 	db "@"
 
 FuchsiaCityText24: ; 19af4 (6:5af4)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7f6]
 	bit 6, a
 	jr nz, .asm_3b4e8

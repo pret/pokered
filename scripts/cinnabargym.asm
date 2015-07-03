@@ -206,7 +206,7 @@ CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 	jp TextScriptEnd
 
 CinnabarGymText1: ; 758df (1d:58df)
-	db $8
+	TX_ASM
 	ld a, [wd79a]
 	bit 1, a
 	jr z, .asm_d9332
@@ -258,7 +258,7 @@ TM38NoRoomText: ; 75934 (1d:5934)
 	db "@"
 
 CinnabarGymText2: ; 75939 (1d:5939)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 2, a
@@ -287,7 +287,7 @@ CinnabarGymText_75969: ; 75969 (1d:5969)
 	db "@"
 
 CinnabarGymText3: ; 7596e (1d:596e)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 3, a
@@ -316,7 +316,7 @@ CinnabarGymText_7599e: ; 7599e (1d:599e)
 	db "@"
 
 CinnabarGymText4: ; 759a3 (1d:59a3)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 4, a
@@ -345,7 +345,7 @@ CinnabarGymText_759d3: ; 759d3 (1d:59d3)
 	db "@"
 
 CinnabarGymText5: ; 759d8 (1d:59d8)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 5, a
@@ -374,7 +374,7 @@ CinnabarGymText_75a08: ; 75a08 (1d:5a08)
 	db "@"
 
 CinnabarGymText6: ; 75a0d (1d:5a0d)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 6, a
@@ -403,7 +403,7 @@ CinnabarGymText_75a3d: ; 75a3d (1d:5a3d)
 	db "@"
 
 CinnabarGymText7: ; 75a42 (1d:5a42)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79a]
 	bit 7, a
@@ -432,7 +432,7 @@ CinnabarGymText_75a72: ; 75a72 (1d:5a72)
 	db "@"
 
 CinnabarGymText8: ; 75a77 (1d:5a77)
-	db $08 ; asm
+	TX_ASM
 	call CinnabarGymScript_757a0
 	ld a, [wd79b]
 	bit 0, a
@@ -461,7 +461,7 @@ CinnabarGymText_75aa7: ; 75aa7 (1d:5aa7)
 	db "@"
 
 CinnabarGymText9: ; 75aac (1d:5aac)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd79a]
 	bit 1, a
 	jr nz, .asm_627d9

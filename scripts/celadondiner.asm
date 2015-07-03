@@ -26,7 +26,7 @@ CeladonDinerText4: ; 4916e (12:516e)
 	db "@"
 
 CeladonDinerText5: ; 49173 (12:5173)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd783]
 	bit 0, a
 	jr nz, .asm_eb14d

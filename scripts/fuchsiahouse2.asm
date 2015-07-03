@@ -9,7 +9,7 @@ FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
 	dw FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd78e]
 	bit 0, a
 	jr nz, .subtract
@@ -97,7 +97,7 @@ HM04NoRoomText: ; 7515e (1d:515e)
 
 FuchsiaHouse2Text5: ; 75163 (1d:5163)
 FuchsiaHouse2Text4: ; 75163 (1d:5163)
-	db $08 ; asm
+	TX_ASM
 	ldh a, [$8c]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b

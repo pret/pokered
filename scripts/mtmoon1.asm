@@ -95,43 +95,43 @@ MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
 	db $ff
 
 MtMoon1Text1: ; 49a52 (12:5a52)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text2: ; 49a5c (12:5a5c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text3: ; 49a66 (12:5a66)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text4: ; 49a70 (12:5a70)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text5: ; 49a7a (12:5a7a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text6: ; 49a84 (12:5a84)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon1Text7: ; 49a8e (12:5a8e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon1TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd

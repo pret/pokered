@@ -5,7 +5,7 @@ DayCareMTextPointers: ; 56252 (15:6252)
 	dw DayCareMText1
 
 DayCareMText1: ; 56254 (15:6254)
-	db $8
+	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld a, [W_DAYCARE_IN_USE]
 	and a

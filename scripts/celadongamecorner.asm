@@ -124,7 +124,7 @@ CeladonGameCornerText1: ; 48ca4 (12:4ca4)
 	db "@"
 
 CeladonGameCornerText2: ; 48ca9 (12:4ca9)
-	db $08 ; asm
+	TX_ASM
 	call CeladonGameCornerScript_48f1e
 	ld hl, CeladonGameCornerText_48d22
 	call PrintText
@@ -213,7 +213,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 	db "@"
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 2, a
 	jr nz, .asm_48d89
@@ -272,7 +272,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 	db "@"
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77c]
 	bit 1, a
 	ld hl, CeladonGameCornerText_48dca
@@ -295,7 +295,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 	db "@"
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 4, a
 	jr nz, .asm_48e13
@@ -348,7 +348,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 	db "@"
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77e]
 	bit 3, a
 	jr nz, .asm_48e75
@@ -401,7 +401,7 @@ CeladonGameCornerText_48e98: ; 48e98 (12:4e98)
 	db "@"
 
 CeladonGameCornerText11: ; 48e9d (12:4e9d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGameCornerText_48ece
 	call PrintText
 	ld hl, wd72d
@@ -435,7 +435,7 @@ CeladonGameCornerText13: ; 48ed8 (12:4ed8)
 	db "@"
 
 CeladonGameCornerText12: ; 48edd (12:4edd)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonGameCornerText_48f09
@@ -454,7 +454,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)
 	TX_FAR _CeladonGameCornerText_48f09
-	db $8
+	TX_ASM
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish

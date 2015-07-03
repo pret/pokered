@@ -154,7 +154,7 @@ SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
 	db $ff
 
 SeafoamIslands5Text3: ; 46893 (11:6893)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SeafoamIslands5TrainerHeader0
 	call TalkToTrainer
 	ld a, $4
@@ -163,7 +163,7 @@ SeafoamIslands5Text3: ; 46893 (11:6893)
 
 SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
 	TX_FAR _SeafoamIslands5BattleText2
-	db $8
+	TX_ASM
 	ld a, ARTICUNO
 	call PlayCry
 	call WaitForSoundToFinish

@@ -37,7 +37,7 @@ Route4Text1: ; 5568a (15:568a)
 	db "@"
 
 Route4Text2: ; 5568f (15:568f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd

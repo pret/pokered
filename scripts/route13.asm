@@ -121,7 +121,7 @@ Route13TrainerHeader10: ; 558bd (15:58bd)
 	db $ff
 
 Route13Text1: ; 558ca (15:58ca)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -139,7 +139,7 @@ Route13AfterBattleText2: ; 558de (15:58de)
 	db "@"
 
 Route13Text2: ; 558e3 (15:58e3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -157,7 +157,7 @@ Route13AfterBattleText3: ; 558f7 (15:58f7)
 	db "@"
 
 Route13Text3: ; 558fc (15:58fc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -175,7 +175,7 @@ Route13AfterBattleText4: ; 55910 (15:5910)
 	db "@"
 
 Route13Text4: ; 55915 (15:5915)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -193,7 +193,7 @@ Route13AfterBattleText5: ; 55929 (15:5929)
 	db "@"
 
 Route13Text5: ; 5592e (15:592e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -211,7 +211,7 @@ Route13AfterBattleText6: ; 55942 (15:5942)
 	db "@"
 
 Route13Text6: ; 55947 (15:5947)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -229,7 +229,7 @@ Route13AfterBattleText7: ; 5595b (15:595b)
 	db "@"
 
 Route13Text7: ; 55960 (15:5960)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -247,7 +247,7 @@ Route13AfterBattleText8: ; 55974 (15:5974)
 	db "@"
 
 Route13Text8: ; 55979 (15:5979)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -265,7 +265,7 @@ Route13AfterBattleText9: ; 5598d (15:598d)
 	db "@"
 
 Route13Text9: ; 55992 (15:5992)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -283,7 +283,7 @@ Route13AfterBattleText10: ; 559a6 (15:59a6)
 	db "@"
 
 Route13Text10: ; 559ab (15:59ab)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route13TrainerHeader10
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -135,7 +135,7 @@ AgathaTrainerHeader0: ; 76509 (1d:6509)
 	db $ff
 
 AgathaText1: ; 76516 (1d:6516)
-	db $08 ; asm
+	TX_ASM
 	ld hl, AgathaTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd

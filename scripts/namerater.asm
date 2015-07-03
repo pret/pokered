@@ -41,7 +41,7 @@ NameRaterTextPointers: ; 1da54 (7:5a54)
 	dw NameRaterText1
 
 NameRaterText1: ; 1da56 (7:5a56)
-	db $8
+	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld hl, NameRaterText_1dab3
 	call NameRaterScript_1da15

@@ -13,7 +13,7 @@ LavenderTownTextPointers: ; 4410e (11:410e)
 	dw LavenderTownText9
 
 LavenderTownText1: ; 44120 (11:4120)
-	db $08 ; asm
+	TX_ASM
 	ld hl, LavenderTownText_4413c
 	call PrintText
 	call YesNoChoice

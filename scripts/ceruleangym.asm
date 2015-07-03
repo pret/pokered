@@ -105,7 +105,7 @@ CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 	db $ff
 
 CeruleanGymText1: ; 5c771 (17:4771)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75e]
 	bit 7, a
 	jr z, .asm_5c78d
@@ -166,7 +166,7 @@ CeruleanGymText_5c7d8: ; 5c7d8 (17:47d8)
 	db $11, $6, "@"
 
 CeruleanGymText2: ; 5c7df (17:47df)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeruleanGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -184,7 +184,7 @@ CeruleanGymAfterBattleText1: ; 5c7f3 (17:47f3)
 	db "@"
 
 CeruleanGymText3: ; 5c7f8 (17:47f8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeruleanGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -202,7 +202,7 @@ CeruleanGymAfterBattleText2: ; 5c80c (17:480c)
 	db "@"
 
 CeruleanGymText4: ; 5c811 (17:4811)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd75e]
 	bit 7, a
 	jr nz, .asm_5c821

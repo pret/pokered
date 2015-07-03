@@ -146,7 +146,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 
 .SafariZoneEntranceText4
 	TX_FAR SafariZoneEntranceText_9e6e4
-	db $8
+	TX_ASM
 	ld a, $13
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
@@ -226,7 +226,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 
 .SafariZoneEntranceText5
 	TX_FAR SafariZoneEntranceText_9e814
-	db $8
+	TX_ASM
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
 	and a
@@ -272,7 +272,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText2
-	db $08 ; asm
+	TX_ASM
 	ld hl,.FirstTimeQuestionText
 	call PrintText
 	call YesNoChoice

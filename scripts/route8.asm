@@ -109,7 +109,7 @@ Route8TrainerHeader8: ; 59243 (16:5243)
 	db $ff
 
 Route8Text1: ; 59250 (16:5250)
-	db $8
+	TX_ASM
 	ld hl, Route8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -127,7 +127,7 @@ Route8AfterBattleText1: ; 59264 (16:5264)
 	db "@"
 
 Route8Text2: ; 59269 (16:5269)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -145,7 +145,7 @@ Route8AfterBattleText2: ; 5927d (16:527d)
 	db "@"
 
 Route8Text3: ; 59282 (16:5282)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -163,7 +163,7 @@ Route8AfterBattleText3: ; 59296 (16:5296)
 	db "@"
 
 Route8Text4: ; 5929b (16:529b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -181,7 +181,7 @@ Route8AfterBattleText4: ; 592af (16:52af)
 	db "@"
 
 Route8Text5: ; 592b4 (16:52b4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -199,7 +199,7 @@ Route8AfterBattleText5: ; 592c8 (16:52c8)
 	db "@"
 
 Route8Text6: ; 592cd (16:52cd)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -217,7 +217,7 @@ Route8AfterBattleText6: ; 592e1 (16:52e1)
 	db "@"
 
 Route8Text7: ; 592e6 (16:52e6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -235,7 +235,7 @@ Route8AfterBattleText7: ; 592fa (16:52fa)
 	db "@"
 
 Route8Text8: ; 592ff (16:52ff)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -253,7 +253,7 @@ Route8AfterBattleText8: ; 59313 (16:5313)
 	db "@"
 
 Route8Text9: ; 59318 (16:5318)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route8TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd

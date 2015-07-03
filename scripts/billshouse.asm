@@ -115,7 +115,7 @@ BillsHouseText4: ; 1e83c (7:683c)
 	db $fd
 
 BillsHouseText1: ; 1e83d (7:683d)
-	db $8
+	TX_ASM
 	ld hl, BillsHouseText_1e865
 	call PrintText
 	call YesNoChoice
@@ -148,7 +148,7 @@ BillsHouseText_1e86f: ; 1e86f (7:686f)
 	db "@"
 
 BillsHouseText2: ; 1e874 (7:6874)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7f2]
 	bit 4, a
 	jr nz, .asm_1e8a9
@@ -194,7 +194,7 @@ BillsHouseText_1e8cb: ; 1e8cb (7:68cb)
 	db "@"
 
 BillsHouseText3: ; 1e8d0 (7:68d0)
-	db $08 ; asm
+	TX_ASM
 	ld hl, BillsHouseText_1e8da
 	call PrintText
 	jp TextScriptEnd

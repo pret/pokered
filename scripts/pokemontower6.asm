@@ -136,25 +136,25 @@ PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
 	db $ff
 
 PokemonTower6Text1: ; 60be4 (18:4be4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text2: ; 60bee (18:4bee)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower6TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text3: ; 60bf8 (18:4bf8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text7: ; 60c02 (18:4c02)
-	db $8
+	TX_ASM
 	ld hl, PokemonTower2Text_60c1f
 	call PrintText
 	ld a, MAROWAK

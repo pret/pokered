@@ -211,7 +211,7 @@ MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 	db $ff
 
 MtMoon3Text1: ; 49e79 (12:5e79)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7f6]
 	bit 1, a
 	jr z, .asm_49e8d
@@ -244,31 +244,31 @@ MtMoon3Text1: ; 49e79 (12:5e79)
 	jp TextScriptEnd
 
 MtMoon3Text2: ; 49ec1 (12:5ec1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text3: ; 49ecb (12:5ecb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text4: ; 49ed5 (12:5ed5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text5: ; 49edf (12:5edf)
-	db $08 ; asm
+	TX_ASM
 	ld hl, MtMoon3TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text6: ; 49ee9 (12:5ee9)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f24
@@ -297,7 +297,7 @@ MtMoon3Text_49f24: ; 49f24 (12:5f24)
 	db "@"
 
 MtMoon3Text7: ; 49f29 (12:5f29)
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f64

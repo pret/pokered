@@ -224,7 +224,7 @@ CeladonMartRoofText1: ; 48567 (12:4567)
 	db "@"
 
 CeladonMartRoofText2: ; 4856c (12:456c)
-	db $08 ; asm
+	TX_ASM
 	call CeladonMartRoofScript_483d8
 	ld a, [wcd37]
 	and a

@@ -77,7 +77,7 @@ Mansion2TrainerHeader0: ; 52057 (14:6057)
 	db $ff
 
 Mansion2Text1: ; 52064 (14:6064)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -104,7 +104,7 @@ Mansion2Text4: ; 52082 (14:6082)
 
 Mansion3Text6: ; 52087 (14:6087)
 Mansion2Text5: ; 52087 (14:6087)
-	db $8
+	TX_ASM
 	ld hl, Mansion2Text_520c2
 	call PrintText
 	call YesNoChoice

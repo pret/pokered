@@ -92,7 +92,7 @@ Route16GateTextPointers: ; 4975a (12:575a)
 	dw Route16GateText3
 
 Route16GateText1: ; 49760 (12:5760)
-	db $08 ; asm
+	TX_ASM
 	call Route16GateScript_49755
 	jr z, .asm_0bdf3
 	ld hl, Route16GateText_4977c

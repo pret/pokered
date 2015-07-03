@@ -9,7 +9,7 @@ Lab3TextPointers: ; 75c8a (1d:5c8a)
 	dw Lab3Text5
 
 Lab3Text1: ; 75c94 (1d:5c94)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7a1]
 	bit 7, a
 	jr nz, .asm_e551a

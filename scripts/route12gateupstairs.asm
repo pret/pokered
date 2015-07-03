@@ -7,7 +7,7 @@ Route12GateUpstairsTextPointers: ; 49563 (12:5563)
 	dw Route12GateUpstairsText3
 
 Route12GateUpstairsText1: ; 49569 (12:5569)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7d7]
 	rrca
 	jr c, .asm_0ad3c
@@ -48,7 +48,7 @@ TM39NoRoomText: ; 495ac (12:55ac)
 	db "@"
 
 Route12GateUpstairsText2: ; 495b1 (12:55b1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12GateUpstairsText_495b8
 	jp Route12GateUpstairsScript_495c9
 
@@ -57,7 +57,7 @@ Route12GateUpstairsText_495b8: ; 495b8 (12:55b8)
 	db "@"
 
 Route12GateUpstairsText3: ; 495bd (12:55bd)
-	db $8
+	TX_ASM
 	ld hl, Route12GateUpstairsText_495c4
 	jp Route12GateUpstairsScript_495c9
 

@@ -197,19 +197,19 @@ PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	db $ff
 
 PokemonTower7Text1: ; 60e6c (18:4e6c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text2: ; 60e76 (18:4e76)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text3: ; 60e80 (18:4e80)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -65,32 +65,32 @@ SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
 	db $ff
 
 SSAnne8Text1: ; 619d6 (18:59d6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text2: ; 619e0 (18:59e0)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text3: ; 619ea (18:59ea)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text4: ; 619f4 (18:59f4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text8: ; 619fe (18:59fe)
 	TX_FAR _SSAnne8Text8
-	db $08 ; asm
+	TX_ASM
 	ld a, WIGGLYTUFF
 	call PlayCry
 	jp TextScriptEnd

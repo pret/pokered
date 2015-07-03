@@ -241,7 +241,7 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 	dw GaryText5
 
 GaryText1: ; 760e0 (1d:60e0)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd867]
 	bit 1, a
 	ld hl, GaryText_760f4
@@ -272,7 +272,7 @@ GaryText2: ; 76108 (1d:6108)
 	db "@"
 
 GaryText3: ; 7610d (1d:610d)
-	db $8
+	TX_ASM
 	ld a, [W_PLAYERSTARTER]
 	ld [wd11e], a
 	call GetMonName

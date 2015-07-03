@@ -175,7 +175,7 @@ RocketHideout3TrainerHeader2: ; 4530e (11:530e)
 	db $ff
 
 RocketHideout3Text1: ; 4531b (11:531b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -193,7 +193,7 @@ RocketHideout3AfterBattleTxt2: ; 4532f (11:532f)
 	db "@"
 
 RocketHideout3Text2: ; 45334 (11:5334)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RocketHideout3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd

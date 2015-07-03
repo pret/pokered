@@ -21,7 +21,7 @@ CeladonMart3TextPointers: ; 48228 (12:4228)
 	dw CeladonMart3Text17
 
 CeladonMart3Text1: ; 4824a (12:424a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd778]
 	bit 7, a
 	jr nz, .asm_a5463

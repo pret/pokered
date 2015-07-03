@@ -119,7 +119,7 @@ Route11TrainerHeader9: ; 594e7 (16:54e7)
 	db $ff
 
 Route11Text1: ; 594f4 (16:54f4)
-	db $8
+	TX_ASM
 	ld hl, Route11TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -137,7 +137,7 @@ Route11AfterBattleText1: ; 59508 (16:5508)
 	db "@"
 
 Route11Text2: ; 5950d (16:550d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -155,7 +155,7 @@ Route11AfterBattleText2: ; 59521 (16:5521)
 	db "@"
 
 Route11Text3: ; 59526 (16:5526)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -173,7 +173,7 @@ Route11AfterBattleText3: ; 5953a (16:553a)
 	db "@"
 
 Route11Text4: ; 5953f (16:553f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -191,7 +191,7 @@ Route11AfterBattleText4: ; 59553 (16:5553)
 	db "@"
 
 Route11Text5: ; 59558 (16:5558)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -209,7 +209,7 @@ Route11AfterBattleText5: ; 5956c (16:556c)
 	db "@"
 
 Route11Text6: ; 59571 (16:5571)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -227,7 +227,7 @@ Route11AfterBattleText6: ; 59585 (16:5585)
 	db "@"
 
 Route11Text7: ; 5958a (16:558a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -245,7 +245,7 @@ Route11AfterBattleText7: ; 5959e (16:559e)
 	db "@"
 
 Route11Text8: ; 595a3 (16:55a3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -263,7 +263,7 @@ Route11AfterBattleText8: ; 595b7 (16:55b7)
 	db "@"
 
 Route11Text9: ; 595bc (16:55bc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -281,7 +281,7 @@ Route11AfterBattleText9: ; 595d0 (16:55d0)
 	db "@"
 
 Route11Text10: ; 595d5 (16:55d5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route11TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd

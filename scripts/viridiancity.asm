@@ -149,7 +149,7 @@ ViridianCityText1: ; 19102 (6:5102)
 	db "@"
 
 ViridianCityText2: ; 19107 (6:5107)
-	db $08 ; asm
+	TX_ASM
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	ld hl, ViridianCityText_19127
@@ -171,7 +171,7 @@ ViridianCityText_19127: ; 19127 (6:5127)
 	db "@"
 
 ViridianCityText3: ; 1912c (6:512c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_1914d
 	call PrintText
 	call YesNoChoice
@@ -200,7 +200,7 @@ ViridianCityText_19157: ; 19157 (6:5157)
 	db "@"
 
 ViridianCityText4: ; 1915c (6:515c)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd74b]
 	bit 5, a
 	jr nz, .asm_83894
@@ -222,7 +222,7 @@ ViridianCityText_1917a: ; 1917a (6:517a)
 	db "@"
 
 ViridianCityText5: ; 1917f (6:517f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_19191
 	call PrintText
 	call ViridianCityScript_190cf
@@ -235,7 +235,7 @@ ViridianCityText_19191: ; 19191 (6:5191)
 	db "@"
 
 ViridianCityText6: ; 19196 (6:5196)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd74c]
 	bit 1, a
 	jr nz, .asm_4e5a0
@@ -276,7 +276,7 @@ TM42NoRoomText: ; 191da (6:51da)
 	db "@"
 
 ViridianCityText7: ; 191df (6:51df)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianCityText_1920a
 	call PrintText
 	ld c, 2

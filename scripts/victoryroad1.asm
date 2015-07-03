@@ -71,13 +71,13 @@ VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
 	db $ff
 
 VictoryRoad1Text1: ; 5da86 (17:5a86)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad1Text2: ; 5da90 (17:5a90)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VictoryRoad1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -95,7 +95,7 @@ PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	ret
 
 LinkCableHelp: ; 5dc29 (17:5c29)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
 	call PrintText
@@ -179,7 +179,7 @@ LinkCableInfoText3: ; 5dce8 (17:5ce8)
 	db "@"
 
 ViridianSchoolBlackboard: ; 5dced (17:5ced)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
@@ -428,7 +428,7 @@ GymTrashCans: ; 5de7d (17:5e7d)
 
 VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
@@ -442,7 +442,7 @@ VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 
 ; unused
 VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
@@ -451,7 +451,7 @@ VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 
 VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
@@ -460,7 +460,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 
 VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound

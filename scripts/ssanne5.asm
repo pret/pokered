@@ -53,7 +53,7 @@ SSAnne5Text3: ; 616f4 (18:56f4)
 	db "@"
 
 SSAnne5Text4: ; 616f9 (18:56f9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -71,7 +71,7 @@ SSAnne5AfterBattleText1: ; 6170d (18:570d)
 	db "@"
 
 SSAnne5Text5: ; 61712 (18:5712)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd

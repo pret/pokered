@@ -3773,7 +3773,7 @@ PrintMonName1Text: ; 3daf5 (f:5af5)
 ; but the functionality didn't get removed
 MonName1Text: ; 3dafb (f:5afb)
 	TX_FAR _MonName1Text
-	db $08 ; asm
+	TX_ASM
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
@@ -3798,12 +3798,12 @@ MonName1Text: ; 3dafb (f:5afb)
 
 Used1Text: ; 3db2d (f:5b2d)
 	TX_FAR _Used1Text
-	db $08 ; asm
+	TX_ASM
 	jr PrintInsteadText
 
 Used2Text: ; 3db34 (f:5b34)
 	TX_FAR _Used2Text
-	db $08 ; asm
+	TX_ASM
 	; fall through
 
 PrintInsteadText: ; 3db39 (f:5b39)
@@ -3815,7 +3815,7 @@ PrintInsteadText: ; 3db39 (f:5b39)
 
 InsteadText: ; 3db43 (f:5b43)
 	TX_FAR _InsteadText
-	db $08 ; asm
+	TX_ASM
 	; fall through
 
 PrintMoveName: ; 3db48 (f:5b48)
@@ -3824,7 +3824,7 @@ PrintMoveName: ; 3db48 (f:5b48)
 
 _PrintMoveName: ; 3db4c (f:5b4c)
 	TX_FAR _CF4BText
-	db $08 ; asm
+	TX_ASM
 	ld hl, ExclamationPointPointerTable
 	ld a, [wd11e] ; exclamation point num
 	add a
@@ -7710,7 +7710,7 @@ PrintNothingHappenedText: ; 3f522 (f:7522)
 
 MonsStatsRoseText: ; 3f528 (f:7528)
 	TX_FAR _MonsStatsRoseText
-	db $08 ; asm
+	TX_ASM
 	ld hl, GreatlyRoseText
 	ld a, [H_WHOSETURN]
 	and a
@@ -7912,7 +7912,7 @@ MoveMissed: ; 3f65a (f:765a)
 
 MonsStatsFellText: ; 3f661 (f:7661)
 	TX_FAR _MonsStatsFellText
-	db $08 ; asm
+	TX_ASM
 	ld hl, FellText
 	ld a, [H_WHOSETURN]
 	and a
@@ -8246,7 +8246,7 @@ ChargeEffect: ; 3f88c (f:788c)
 
 ChargeMoveEffectText: ; 3f8c8 (f:78c8)
 	TX_FAR _ChargeMoveEffectText
-	db $08 ; asm
+	TX_ASM
 	ld a, [wWhichTrade]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText

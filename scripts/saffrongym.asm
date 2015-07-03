@@ -157,7 +157,7 @@ SaffronGymTrainerHeader6: ; 5d10b (17:510b)
 	db $ff
 
 SaffronGymText1: ; 5d118 (17:5118)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b3]
 	bit 1, a
 	jr z, .asm_5d134
@@ -219,49 +219,49 @@ SaffronGymText12: ; 5d182 (17:5182)
 	db "@"
 
 SaffronGymText2: ; 5d187 (17:5187)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText3: ; 5d191 (17:5191)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText4: ; 5d19b (17:519b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText5: ; 5d1a5 (17:51a5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText6: ; 5d1af (17:51af)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText7: ; 5d1b9 (17:51b9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText8: ; 5d1c3 (17:51c3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SaffronGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SaffronGymText9: ; 5d1cd (17:51cd)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b3]
 	bit 1, a
 	jr nz, .asm_5d1dd

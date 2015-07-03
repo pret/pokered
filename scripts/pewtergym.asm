@@ -105,7 +105,7 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 	db $ff
 
 PewterGymText1: ; 5c44e (17:444e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd755]
 	bit 7, a
 	jr z, .asm_5c46a
@@ -170,7 +170,7 @@ PewterGymText_5c4bc: ; 5c4bc (17:44bc)
 	db "@"
 
 PewterGymText2: ; 5c4c6 (17:44c6)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -188,7 +188,7 @@ PewterGymAfterBattleText1: ; 5c4da (17:44da)
 	db "@"
 
 PewterGymText3: ; 5c4df (17:44df)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd72a]
 	bit 0, a
 	jr nz, .asm_5c50c

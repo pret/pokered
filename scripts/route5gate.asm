@@ -69,7 +69,7 @@ Route8GateText1: ; 1dfaa (7:5faa)
 Route7GateText1: ; 1dfaa (7:5faa)
 Route6GateText1: ; 1dfaa (7:5faa)
 Route5GateText1: ; 1dfaa (7:5faa)
-	db $8
+	TX_ASM
 	ld a, [wd728]
 	bit 6, a
 	jr nz, .asm_88856

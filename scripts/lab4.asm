@@ -48,7 +48,7 @@ FossilsList: ; 75d68 (1d:5d68)
 	db $00
 
 Lab4Text1: ; 75d6c (1d:5d6c)
-	db $8
+	TX_ASM
 	ld a, [wd7a3]
 	bit 0, a
 	jr nz, .asm_75d96
@@ -105,7 +105,7 @@ Lab4Text_75dd5: ; 75dd5 (1d:5dd5)
 	db "@"
 
 Lab4Text2: ; 75dda (1d:5dda)
-	db $08 ; asm
+	TX_ASM
 	ld a, $3
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

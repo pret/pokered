@@ -22,7 +22,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 	db "@"
 
 MtMoonPokecenterText4: ; 492ec (12:52ec)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7c6]
 	add a
 	jp c, .asm_49353

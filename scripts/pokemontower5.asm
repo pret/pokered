@@ -104,7 +104,7 @@ PokemonTower5Text1: ; 609da (18:49da)
 	db "@"
 
 PokemonTower5Text2: ; 609df (18:49df)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -122,7 +122,7 @@ PokemonTower5AfterBattleText1: ; 609f3 (18:49f3)
 	db "@"
 
 PokemonTower5Text3: ; 609f8 (18:49f8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -140,7 +140,7 @@ PokemonTower5AfterBattleText2: ; 60a0c (18:4a0c)
 	db "@"
 
 PokemonTower5Text4: ; 60a11 (18:4a11)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower5TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -158,7 +158,7 @@ PokemonTower5AfterBattleText3: ; 60a25 (18:4a25)
 	db "@"
 
 PokemonTower5Text5: ; 60a2a (18:4a2a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonTower5TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd

@@ -87,7 +87,7 @@ Route18GateTextPointers: ; 4990d (12:590d)
 	dw Route18GateText2
 
 Route18GateText1: ; 49911 (12:5911)
-	db $08 ; asm
+	TX_ASM
 	call Route16GateScript_49755
 	jr z, .asm_3c84d
 	ld hl, Route18GateText_4992d

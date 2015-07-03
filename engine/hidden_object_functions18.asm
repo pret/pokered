@@ -139,7 +139,7 @@ CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
 	db "@"
 
 SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
-	db $8 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SaffronCityPokecenterBenchGuyText2

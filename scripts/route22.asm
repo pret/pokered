@@ -367,7 +367,7 @@ Route22TextPointers: ; 51175 (14:5175)
 	dw Route22FrontGateText
 
 Route22Text1: ; 5117b (14:517b)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7eb]
 	bit 5, a
 	jr z, .asm_5118b
@@ -381,7 +381,7 @@ Route22Text1: ; 5117b (14:517b)
 	jp TextScriptEnd
 
 Route22Text2: ; 51194 (14:5194)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7eb]
 	bit 6, a
 	jr z, .asm_511a4

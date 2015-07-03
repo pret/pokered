@@ -135,7 +135,7 @@ VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 	db $ff
 
 VermilionGymText1: ; 5cb1d (17:4b1d)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd773]
 	bit 7, a
 	jr z, .asm_5cb39
@@ -198,7 +198,7 @@ ReceivedThunderbadgeText: ; 5cb8b (17:4b8b)
 	db "@"
 
 VermilionGymText2: ; 5cb90 (17:4b90)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VermilionGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -216,7 +216,7 @@ VermilionGymAfterBattleText1: ; 5cba4 (17:4ba4)
 	db "@"
 
 VermilionGymText3: ; 5cba9 (17:4ba9)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VermilionGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -234,7 +234,7 @@ VermilionGymAfterBattleText2: ; 5cbbd (17:4bbd)
 	db "@"
 
 VermilionGymText4: ; 5cbc2 (17:4bc2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, VermilionGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -252,7 +252,7 @@ VermilionGymAfterBattleText3: ; 5cbd6 (17:4bd6)
 	db "@"
 
 VermilionGymText5: ; 5cbdb (17:4bdb)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd72a]
 	bit 2, a
 	jr nz, .asm_5cbeb

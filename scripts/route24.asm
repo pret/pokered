@@ -147,7 +147,7 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 	db $ff
 
 Route24Text1: ; 514a4 (14:54a4)
-	db $8
+	TX_ASM
 	ld hl, wd7f0
 	res 1, [hl]
 	ld a, [wd7ef]
@@ -218,37 +218,37 @@ Route24Text_51530: ; 51530 (14:5530)
 	db "@"
 
 Route24Text2: ; 51535 (14:5535)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text3: ; 5153f (14:553f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text4: ; 51549 (14:5549)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text5: ; 51553 (14:5553)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text6: ; 5155d (14:555d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text7: ; 51567 (14:5567)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route24TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd

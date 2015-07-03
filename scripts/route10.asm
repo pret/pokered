@@ -82,7 +82,7 @@ Route10TrainerHeader5: ; 5939f (16:539f)
 	db $ff
 
 Route10Text1: ; 593ac (16:53ac)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -100,7 +100,7 @@ Route10AfterBattleText1: ; 593c0 (16:53c0)
 	db "@"
 
 Route10Text2: ; 593c5 (16:53c5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -118,7 +118,7 @@ Route10AfterBattleText2: ; 593d9 (16:53d9)
 	db "@"
 
 Route10Text3: ; 593de (16:53de)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -136,7 +136,7 @@ Route10AfterBattleText3: ; 593f2 (16:53f2)
 	db "@"
 
 Route10Text4: ; 593f7 (16:53f7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -154,7 +154,7 @@ Route10AfterBattleText4: ; 5940b (16:540b)
 	db "@"
 
 Route10Text5: ; 59410 (16:5410)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -172,7 +172,7 @@ Route10AfterBattleText5: ; 59424 (16:5424)
 	db "@"
 
 Route10Text6: ; 59429 (16:5429)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route10TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd

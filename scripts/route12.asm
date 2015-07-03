@@ -157,7 +157,7 @@ Route12Text14: ; 596f0 (16:56f0)
 	db "@"
 
 Route12Text2: ; 596f5 (16:56f5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -175,7 +175,7 @@ Route12AfterBattleText1: ; 59709 (16:5709)
 	db "@"
 
 Route12Text3: ; 5970e (16:570e)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -193,7 +193,7 @@ Route12AfterBattleText2: ; 59722 (16:5722)
 	db "@"
 
 Route12Text4: ; 59727 (16:5727)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -211,7 +211,7 @@ Route12AfterBattleText3: ; 5973b (16:573b)
 	db "@"
 
 Route12Text5: ; 59740 (16:5740)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -229,7 +229,7 @@ Route12AfterBattleText4: ; 59754 (16:5754)
 	db "@"
 
 Route12Text6: ; 59759 (16:5759)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -247,7 +247,7 @@ Route12AfterBattleText5: ; 5976d (16:576d)
 	db "@"
 
 Route12Text7: ; 59772 (16:5772)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -265,7 +265,7 @@ Route12AfterBattleText6: ; 59786 (16:5786)
 	db "@"
 
 Route12Text8: ; 5978b (16:578b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route12TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd

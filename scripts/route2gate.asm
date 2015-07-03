@@ -6,7 +6,7 @@ Route2GateTextPointers: ; 5d5d7 (17:55d7)
 	dw Route2GateText2
 
 Route2GateText1: ; 5d5db (17:55db)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7c2]
 	bit 0, a
 	jr nz, .asm_5d60d

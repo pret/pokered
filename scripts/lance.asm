@@ -144,7 +144,7 @@ LanceTrainerHeader0: ; 5a397 (16:6397)
 	db $ff
 
 LanceText1: ; 5a3a4 (16:63a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, LanceTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -159,7 +159,7 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText
-	db $8
+	TX_ASM
 	ld hl, wd866
 	set 6, [hl]
 	jp TextScriptEnd

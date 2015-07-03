@@ -11,7 +11,7 @@ LavenderMartText2: ; 5c935 (17:4935)
 	db "@"
 
 LavenderMartText3: ; 5c93a (17:493a)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 7, a
 	jr nz, .asm_c88d4

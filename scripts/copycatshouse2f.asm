@@ -11,7 +11,7 @@ CopycatsHouse2FTextPointers: ; 5cc74 (17:4c74)
 	dw CopycatsHouse2FText7
 
 CopycatsHouse2FText1: ; 5cc82 (17:4c82)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7af]
 	bit 0, a
 	jr nz, .asm_7ccf3
@@ -83,7 +83,7 @@ CopycatsHouse2FText6: ; 5ccfe (17:4cfe)
 	db "@"
 
 CopycatsHouse2FText7: ; 5cd03 (17:4d03)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	ld hl, CopycatsHouse2FText_5cd1c

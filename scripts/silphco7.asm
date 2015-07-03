@@ -307,7 +307,7 @@ SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
 
 SilphCo7Text1:
 ; lapras guy
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
@@ -355,7 +355,7 @@ SilphCo7Text1:
 	db "@"
 
 SilphCo7Text2:
-	db $8
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -377,7 +377,7 @@ SilphCo7Text2:
 	db "@"
 
 SilphCo7Text3:
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -399,7 +399,7 @@ SilphCo7Text3:
 	db "@"
 
 SilphCo7Text4:
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a ; saved silph?
 	jr nz, .savedsilph
@@ -421,7 +421,7 @@ SilphCo7Text4:
 	db "@"
 
 SilphCo7Text5: ; 51e50 (14:5e50)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -439,7 +439,7 @@ SilphCo7AfterBattleText1: ; 51e64 (14:5e64)
 	db "@"
 
 SilphCo7Text6: ; 51e69 (14:5e69)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -457,7 +457,7 @@ SilphCo7AfterBattleText2: ; 51e7d (14:5e7d)
 	db "@"
 
 SilphCo7Text7: ; 51e82 (14:5e82)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -475,7 +475,7 @@ SilphCo7AfterBattleText3: ; 51e96 (14:5e96)
 	db "@"
 
 SilphCo7Text8: ; 51e9b (14:5e9b)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -493,7 +493,7 @@ SilphCo7AfterBattleText4: ; 51eaf (14:5eaf)
 	db "@"
 
 SilphCo7Text9: ; 51eb4 (14:5eb4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo7Text_51ebe
 	call PrintText
 	jp TextScriptEnd

@@ -134,7 +134,7 @@ FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 	db $ff
 
 FightingDojoText1: ; 5ce44 (17:4e44)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b1]
 	bit 0, a
 	jp nz, .continue1
@@ -183,7 +183,7 @@ FightingDojoText_5ce9d: ; 5ce9d (17:4e9d)
 	db "@"
 
 FightingDojoText2: ; 5cea2 (17:4ea2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FightingDojoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -201,7 +201,7 @@ FightingDojoAfterBattleText1: ; 5ceb6 (17:4eb6)
 	db "@"
 
 FightingDojoText3: ; 5cebb (17:4ebb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FightingDojoTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -219,7 +219,7 @@ FightingDojoAfterBattleText2: ; 5cecf (17:4ecf)
 	db "@"
 
 FightingDojoText4: ; 5ced4 (17:4ed4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FightingDojoTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -237,7 +237,7 @@ FightingDojoAfterBattleText3: ; 5cee8 (17:4ee8)
 	db "@"
 
 FightingDojoText5: ; 5ceed (17:4eed)
-	db $08 ; asm
+	TX_ASM
 	ld hl, FightingDojoTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -256,7 +256,7 @@ FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 
 FightingDojoText6: ; 5cf06 (17:4f06)
 ; Hitmonlee Poké Ball
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b1]
 	and %11000000
 	jr z, .GetMon
@@ -294,7 +294,7 @@ WantHitmonleeText: ; 5cf49 (17:4f49)
 
 FightingDojoText7: ; 5cf4e (17:4f4e)
 ; Hitmonchan Poké Ball
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7b1]
 	and %11000000
 	jr z, .GetMon

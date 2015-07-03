@@ -89,37 +89,37 @@ RockTunnel1TrainerHeader7: ; 4454d (11:454d)
 	db $ff
 
 RockTunnel1Text1: ; 4455a (11:455a)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader1
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text2: ; 44560 (11:4560)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader2
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text3: ; 44566 (11:4566)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader3
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text4: ; 4456c (11:456c)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader4
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text5: ; 44572 (11:4572)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader5
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text6: ; 44578 (11:4578)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader6
 	jr RockTunnel1TalkToTrainer
 
 RockTunnel1Text7: ; 4457e (11:457e)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader7
 RockTunnel1TalkToTrainer: ; 44582 (11:4582)
 	call TalkToTrainer

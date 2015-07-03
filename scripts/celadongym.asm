@@ -156,7 +156,7 @@ CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 	db $ff
 
 CeladonGymText1: ; 48a11 (12:4a11)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd77c]
 	bit 1, a
 	jr z, .asm_48a2d
@@ -217,7 +217,7 @@ TM21NoRoomText: ; 48a7c (12:4a7c)
 	db "@"
 
 CeladonGymText2: ; 48a81 (12:4a81)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -235,7 +235,7 @@ CeladonGymAfterBattleText2: ; 48a95 (12:4a95)
 	db "@"
 
 CeladonGymText3: ; 48a9a (12:4a9a)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -253,7 +253,7 @@ CeladonGymAfterBattleText3: ; 48aae (12:4aae)
 	db "@"
 
 CeladonGymText4: ; 48ab3 (12:4ab3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -271,7 +271,7 @@ CeladonGymAfterBattleText4: ; 48ac7 (12:4ac7)
 	db "@"
 
 CeladonGymText5: ; 48acc (12:4acc)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -289,7 +289,7 @@ CeladonGymAfterBattleText5: ; 48ae0 (12:4ae0)
 	db "@"
 
 CeladonGymText6: ; 48ae5 (12:4ae5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -307,7 +307,7 @@ CeladonGymAfterBattleText6: ; 48af9 (12:4af9)
 	db "@"
 
 CeladonGymText7: ; 48afe (12:4afe)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -325,7 +325,7 @@ CeladonGymAfterBattleText7: ; 48b12 (12:4b12)
 	db "@"
 
 CeladonGymText8: ; 48b17 (12:4b17)
-	db $08 ; asm
+	TX_ASM
 	ld hl, CeladonGymTrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd

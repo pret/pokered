@@ -39,7 +39,7 @@ Museum1FTextPointers: ; 5c12b (17:412b)
 	dw Museum1FText5
 
 Museum1FText1: ; 5c135 (17:4135)
-	db $8
+	TX_ASM
 	ld a, [W_YCOORD]
 	cp $4
 	jr nz, .asm_8774b
@@ -179,7 +179,7 @@ Museum1FText_5c242: ; 5c242 (17:4242)
 	db "@"
 
 Museum1FText2: ; 5c247 (17:4247)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Museum1FText_5c251
 	call PrintText
 	jp TextScriptEnd
@@ -189,7 +189,7 @@ Museum1FText_5c251: ; 5c251 (17:4251)
 	db "@"
 
 Museum1FText3: ; 5c256 (17:4256)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd754]
 	bit 1, a
 	jr nz, .asm_5c285
@@ -231,7 +231,7 @@ Museum1FText_5c29e: ; 5c29e (17:429e)
 	db "@"
 
 Museum1FText4: ; 5c2a3 (17:42a3)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Museum1FText_5c2ad
 	call PrintText
 	jp TextScriptEnd
@@ -241,7 +241,7 @@ Museum1FText_5c2ad: ; 5c2ad (17:42ad)
 	db "@"
 
 Museum1FText5: ; 5c2b2 (17:42b2)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Museum1FText_5c2bc
 	call PrintText
 	jp TextScriptEnd

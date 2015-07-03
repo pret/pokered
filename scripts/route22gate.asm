@@ -57,7 +57,7 @@ Route22GateTextPointers: ; 1e6df (7:66df)
 	dw Route22GateText1
 
 Route22GateText1: ; 1e6e1 (7:66e1)
-	db $8
+	TX_ASM
 	ld a, [W_OBTAINEDBADGES]
 	bit 0, a
 	jr nz, .asm_1e6f6
@@ -76,7 +76,7 @@ Route22GateText1: ; 1e6e1 (7:66e1)
 
 Route22GateText_1e704: ; 1e704 (7:6704)
 	TX_FAR _Route22GateText_1e704
-	db $8
+	TX_ASM
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish

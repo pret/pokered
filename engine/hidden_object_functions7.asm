@@ -99,7 +99,7 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 	jp PrintText
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
-	db $08 ; asm
+	TX_ASM
 	ld a, [W_NUMSAFARIBALLS]
 	and a
 	jr z, .asm_1ea04
@@ -127,7 +127,7 @@ PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 	jp PrintPredefTextID
 
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
-	db $08 ; asm
+	TX_ASM
 	xor a
 	ld [wda38], a
 	ld a, [wWhichTrade]
@@ -375,7 +375,7 @@ BillsHouseMonitorText: ; 1ebdd (7:6bdd)
 BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	TX_FAR _BillsHouseInitiatedText
 	db $06
-	db $08 ; asm
+	TX_ASM
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
@@ -389,7 +389,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	jp TextScriptEnd
 
 BillsHousePokemonList: ; 1ec05 (7:6c05)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
 	call PrintText

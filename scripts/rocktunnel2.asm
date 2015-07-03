@@ -98,49 +98,49 @@ RockTunnel2TrainerHeader8: ; 46068 (11:6068)
 	db $ff
 
 RockTunnel2Text1: ; 46075 (11:6075)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text2: ; 4607f (11:607f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text3: ; 46089 (11:6089)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text4: ; 46093 (11:6093)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text5: ; 4609d (11:609d)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text6: ; 460a7 (11:60a7)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text7: ; 460b1 (11:60b1)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RockTunnel2Text8: ; 460bb (11:60bb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, RockTunnel2TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd

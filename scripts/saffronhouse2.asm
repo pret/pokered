@@ -5,7 +5,7 @@ SaffronHouse2TextPointers: ; 1de3f (7:5e3f)
 	dw SaffronHouse2Text1
 
 SaffronHouse2Text1: ; 1de41 (7:5e41)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7bd]
 	bit 0, a
 	jr nz, .asm_9e72b

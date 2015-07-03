@@ -6,7 +6,7 @@ Route16HouseTextPointers: ; 1e5fb (7:65fb)
 	dw Route16HouseText2
 
 Route16HouseText1: ; 1e5ff (7:65ff)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd7e0]
 	bit 6, a
 	ld hl, HM02ExplanationText
@@ -43,7 +43,7 @@ HM02NoRoomText: ; 1e63b (7:663b)
 	db "@"
 
 Route16HouseText2: ; 1e640 (7:6640)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route16HouseText_1e652
 	call PrintText
 	ld a, FEAROW

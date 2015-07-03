@@ -137,7 +137,7 @@ SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 	db $ff
 
 SilphCo2Text1: ; 59dc1 (16:5dc1)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd826]
 	bit 7, a
 	jr nz, .asm_59de4
@@ -174,25 +174,25 @@ TM36NoRoomText: ; 59dfd (16:5dfd)
 	db "@"
 
 SilphCo2Text2: ; 59e02 (16:5e02)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text3: ; 59e0c (16:5e0c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text4: ; 59e16 (16:5e16)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo2Text5: ; 59e20 (16:5e20)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo2TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd

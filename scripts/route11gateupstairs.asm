@@ -8,7 +8,7 @@ Route11GateUpstairsTextPointers: ; 49457 (12:5457)
 	dw Route11GateUpstairsText4
 
 Route11GateUpstairsText1: ; 4945f (12:545f)
-	db $08 ; asm
+	TX_ASM
 	xor a
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
@@ -16,7 +16,7 @@ Route11GateUpstairsScriptEnd: ; 49469 (12:5469)
 	jp TextScriptEnd
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
-	db $8
+	TX_ASM
 	ld a, [wd7d6]
 	add a
 	jr c, .asm_4949b
@@ -48,7 +48,7 @@ Route11GateUpstairsText_494a3: ; 494a3 (12:54a3)
 	db "@"
 
 Route11GateUpstairsText3: ; 494a8 (12:54a8)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wSpriteStateData1 + 9]
 	cp $4
 	jp nz, Route12GateUpstairsScript_495c9
@@ -70,7 +70,7 @@ BinocularsNoSnorlaxText:
 	db "@"
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
-	db $8
+	TX_ASM
 	ld hl, Route11GateUpstairsText_494d5
 	jp Route12GateUpstairsScript_495c9
 

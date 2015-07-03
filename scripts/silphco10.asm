@@ -70,19 +70,19 @@ SilphCo10TrainerHeader1: ; 5a19e (16:619e)
 	db $ff
 
 SilphCo10Text1: ; 5a1ab (16:61ab)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo10TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo10Text2: ; 5a1b5 (16:61b5)
-	db $08 ; asm
+	TX_ASM
 	ld hl, SilphCo10TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo10Text3: ; 5a1bf (16:61bf)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SilphCo10Text_5a1d8

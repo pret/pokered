@@ -7,7 +7,7 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 	dw Route1Text3
 
 Route1Text1: ; 1cab8 (7:4ab8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, wd7bf
 	bit 0, [hl]
 	set 0, [hl]
