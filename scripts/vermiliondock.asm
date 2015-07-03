@@ -2,7 +2,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	call EnableAutoTextBoxDrawing
 	ld hl, wd803
 	bit 4, [hl]
-	jr nz, .asm_1db8d ; 0x1db5a $31
+	jr nz, .asm_1db8d
 	bit 0, [hl]
 	ret z
 	ld a, [wDestinationWarpID]
@@ -49,7 +49,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	callba LoadSmokeTileFourTimes
 	xor a
 	ld [wSpriteStateData1 + 2], a
-	ld c, $78
+	ld c, 120
 	call DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
@@ -97,13 +97,13 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 .asm_1dc16
 	call VermilionDock_1dc7c
 	dec c
-	jr nz, .asm_1dc16 ; 0x1dc1a $fa
+	jr nz, .asm_1dc16
 	inc d
 	dec b
-	jr nz, .asm_1dc11 ; 0x1dc1e $f1
+	jr nz, .asm_1dc11
 	pop bc
 	dec e
-	jr nz, .asm_1dbfa ; 0x1dc22 $d6
+	jr nz, .asm_1dbfa
 	xor a
 	ld [$ff4a], a
 	ld [hWY], a
@@ -135,7 +135,7 @@ VermilionDock_1dc42: ; 1dc42 (7:5c42)
 	inc [hl]
 	add hl, de
 	dec c
-	jr nz, .asm_1dc50 ; 0x1dc54 $fa
+	jr nz, .asm_1dc50
 	pop de
 	pop bc
 	ret
@@ -169,13 +169,13 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 .asm_1dc86
 	ld a, [$ff44]
 	cp l
-	jr nz, .asm_1dc86 ; 0x1dc89 $fb
+	jr nz, .asm_1dc86
 	ld a, h
 	ld [$ff43], a
 .asm_1dc8e
 	ld a, [$ff44]
 	cp h
-	jr z, .asm_1dc8e ; 0x1dc91 $fb
+	jr z, .asm_1dc8e
 	ret
 
 VermilionDock_1dc94: ; 1dc94 (7:5c94)
@@ -195,7 +195,7 @@ VermilionDock_1dc94: ; 1dc94 (7:5c94)
 	ld [hl], a
 	ld a, (SFX_02_54 - SFX_Headers_02) / 3
 	call PlaySound
-	ld c, $78
+	ld c, 120
 	call DelayFrames
 	ret
 

@@ -137,24 +137,24 @@ FuchsiaCityText24: ; 19af4 (6:5af4)
 	db $08 ; asm
 	ld a, [wd7f6]
 	bit 6, a
-	jr nz, .asm_3b4e8 ; 0x19afa
+	jr nz, .asm_3b4e8
 	bit 7, a
-	jr nz, .asm_667d5 ; 0x19afe
+	jr nz, .asm_667d5
 	ld hl, FuchsiaCityText_19b2a
 	call PrintText
-	jr .asm_4343f ; 0x19b06
-.asm_3b4e8 ; 0x19b08
+	jr .asm_4343f
+.asm_3b4e8
 	ld hl, FuchsiaCityOmanyteText
 	call PrintText
 	ld a, OMANYTE
-	jr .asm_81556 ; 0x19b10
-.asm_667d5 ; 0x19b12
+	jr .asm_81556
+.asm_667d5
 	ld hl, FuchsiaCityKabutoText
 	call PrintText
 	ld a, KABUTO
-.asm_81556 ; 0x19b1a
+.asm_81556
 	call DisplayPokedex
-.asm_4343f ; 0x19b1d
+.asm_4343f
 	jp TextScriptEnd
 
 FuchsiaCityOmanyteText: ; 19b20 (6:5b20)

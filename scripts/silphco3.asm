@@ -13,7 +13,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_59fa8 ; $5fa8
+	ld hl, DataTable_59fa8
 	call SilphCo2Script_59d43
 	call SilphCo3Script_59fad
 	ld a, [wd828]
@@ -65,19 +65,19 @@ SilphCo3TrainerHeader0: ; 59fcc (16:5fcc)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd827 ; flag's byte
-	dw SilphCo3BattleText1 ; 0x600d TextBeforeBattle
-	dw SilphCo3AfterBattleText1 ; 0x6017 TextAfterBattle
-	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
-	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
+	dw SilphCo3BattleText1 ; TextBeforeBattle
+	dw SilphCo3AfterBattleText1 ; TextAfterBattle
+	dw SilphCo3EndBattleText1 ; TextEndBattle
+	dw SilphCo3EndBattleText1 ; TextEndBattle
 
 SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd827 ; flag's byte
-	dw SilphCo3BattleText2 ; 0x6026 TextBeforeBattle
-	dw SilphCo3AfterBattleText2 ; 0x6030 TextAfterBattle
-	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
-	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
+	dw SilphCo3BattleText2 ; TextBeforeBattle
+	dw SilphCo3AfterBattleText2 ; TextAfterBattle
+	dw SilphCo3EndBattleText2 ; TextEndBattle
+	dw SilphCo3EndBattleText2 ; TextEndBattle
 
 	db $ff
 
@@ -86,9 +86,9 @@ SilphCo3Text1: ; 59fe5 (16:5fe5)
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SilphCo3Text_59ffe
-	jr nz, asm_8c56f ; 0x59fee
+	jr nz, .asm_59fee
 	ld hl, SilphCo3Text_59ff9
-asm_8c56f ; 0x59ff3
+.asm_59fee
 	call PrintText
 	jp TextScriptEnd
 

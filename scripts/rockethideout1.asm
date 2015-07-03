@@ -51,46 +51,46 @@ RocketHideout1TrainerHeader0: ; 44c22 (11:4c22)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd815 ; flag's byte
-	dw RocketHideout1BattleText2 ; 0x4ca1 TextBeforeBattle
-	dw RocketHideout1AfterBattleTxt2 ; 0x4cab TextAfterBattle
-	dw RocketHideout1EndBattleText2 ; 0x4ca6 TextEndBattle
-	dw RocketHideout1EndBattleText2 ; 0x4ca6 TextEndBattle
+	dw RocketHideout1BattleText2 ; TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt2 ; TextAfterBattle
+	dw RocketHideout1EndBattleText2 ; TextEndBattle
+	dw RocketHideout1EndBattleText2 ; TextEndBattle
 
 RocketHideout1TrainerHeader2: ; 44c2e (11:4c2e)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd815 ; flag's byte
-	dw RocketHideout1BattleText3 ; 0x4cb0 TextBeforeBattle
-	dw RocketHideout1AfterBattleTxt3 ; 0x4cba TextAfterBattle
-	dw RocketHideout1EndBattleText3 ; 0x4cb5 TextEndBattle
-	dw RocketHideout1EndBattleText3 ; 0x4cb5 TextEndBattle
+	dw RocketHideout1BattleText3 ; TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt3 ; TextAfterBattle
+	dw RocketHideout1EndBattleText3 ; TextEndBattle
+	dw RocketHideout1EndBattleText3 ; TextEndBattle
 
 RocketHideout1TrainerHeader3: ; 44c3a (11:4c3a)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd815 ; flag's byte
-	dw RocketHideout1BattleText4 ; 0x4cbf TextBeforeBattle
-	dw RocketHideout1AfterBattleTxt4 ; 0x4cc9 TextAfterBattle
-	dw RocketHideout1EndBattleText4 ; 0x4cc4 TextEndBattle
-	dw RocketHideout1EndBattleText4 ; 0x4cc4 TextEndBattle
+	dw RocketHideout1BattleText4 ; TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt4 ; TextAfterBattle
+	dw RocketHideout1EndBattleText4 ; TextEndBattle
+	dw RocketHideout1EndBattleText4 ; TextEndBattle
 
 RocketHideout1TrainerHeader4: ; 44c46 (11:4c46)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd815 ; flag's byte
-	dw RocketHideout1BattleText5 ; 0x4cce TextBeforeBattle
-	dw RocketHideout1AfterBattleTxt5 ; 0x4cd8 TextAfterBattle
-	dw RocketHideout1EndBattleText5 ; 0x4cd3 TextEndBattle
-	dw RocketHideout1EndBattleText5 ; 0x4cd3 TextEndBattle
+	dw RocketHideout1BattleText5 ; TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt5 ; TextAfterBattle
+	dw RocketHideout1EndBattleText5 ; TextEndBattle
+	dw RocketHideout1EndBattleText5 ; TextEndBattle
 
 RocketHideout1TrainerHeader5: ; 44c52 (11:4c52)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd815 ; flag's byte
-	dw RocketHideout1BattleText6 ; 0x4cdd TextBeforeBattle
-	dw RocketHideout1AfterBattleTxt6 ; 0x4ce2 TextAfterBattle
-	dw RocketHideout1EndBattleText6 ; 0x4c91 TextEndBattle
-	dw RocketHideout1EndBattleText6 ; 0x4c91 TextEndBattle
+	dw RocketHideout1BattleText6 ; TextBeforeBattle
+	dw RocketHideout1AfterBattleTxt6 ; TextAfterBattle
+	dw RocketHideout1EndBattleText6 ; TextEndBattle
+	dw RocketHideout1EndBattleText6 ; TextEndBattle
 
 	db $ff
 

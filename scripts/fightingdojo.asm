@@ -99,37 +99,37 @@ FightingDojoTrainerHeader0: ; 5ce13 (17:4e13)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7b1 ; flag's byte
-	dw FightingDojoBattleText1 ; 0x4eac TextBeforeBattle
-	dw FightingDojoAfterBattleText1 ; 0x4eb6 TextAfterBattle
-	dw FightingDojoEndBattleText1 ; 0x4eb1 TextEndBattle
-	dw FightingDojoEndBattleText1 ; 0x4eb1 TextEndBattle
+	dw FightingDojoBattleText1 ; TextBeforeBattle
+	dw FightingDojoAfterBattleText1 ; TextAfterBattle
+	dw FightingDojoEndBattleText1 ; TextEndBattle
+	dw FightingDojoEndBattleText1 ; TextEndBattle
 
 FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7b1 ; flag's byte
-	dw FightingDojoBattleText2 ; 0x4ec5 TextBeforeBattle
-	dw FightingDojoAfterBattleText2 ; 0x4ecf TextAfterBattle
-	dw FightingDojoEndBattleText2 ; 0x4eca TextEndBattle
-	dw FightingDojoEndBattleText2 ; 0x4eca TextEndBattle
+	dw FightingDojoBattleText2 ; TextBeforeBattle
+	dw FightingDojoAfterBattleText2 ; TextAfterBattle
+	dw FightingDojoEndBattleText2 ; TextEndBattle
+	dw FightingDojoEndBattleText2 ; TextEndBattle
 
 FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b1 ; flag's byte
-	dw FightingDojoBattleText3 ; 0x4ede TextBeforeBattle
-	dw FightingDojoAfterBattleText3 ; 0x4ee8 TextAfterBattle
-	dw FightingDojoEndBattleText3 ; 0x4ee3 TextEndBattle
-	dw FightingDojoEndBattleText3 ; 0x4ee3 TextEndBattle
+	dw FightingDojoBattleText3 ; TextBeforeBattle
+	dw FightingDojoAfterBattleText3 ; TextAfterBattle
+	dw FightingDojoEndBattleText3 ; TextEndBattle
+	dw FightingDojoEndBattleText3 ; TextEndBattle
 
 FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7b1 ; flag's byte
-	dw FightingDojoBattleText4 ; 0x4ef7 TextBeforeBattle
-	dw FightingDojoAfterBattleText4 ; 0x4f01 TextAfterBattle
-	dw FightingDojoEndBattleText4 ; 0x4efc TextEndBattle
-	dw FightingDojoEndBattleText4 ; 0x4efc TextEndBattle
+	dw FightingDojoBattleText4 ; TextBeforeBattle
+	dw FightingDojoAfterBattleText4 ; TextAfterBattle
+	dw FightingDojoEndBattleText4 ; TextEndBattle
+	dw FightingDojoEndBattleText4 ; TextEndBattle
 
 	db $ff
 
@@ -155,15 +155,15 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	ld a, $3
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
-	jr .asm_9dba4 ; 0x5ce7b
-.continue1 ; 0x5ce7d
+	jr .asm_9dba4
+.continue1
 	ld hl, FightingDojoText_5ce9d
 	call PrintText
-	jr .asm_9dba4 ; 0x5ce83
-.continue2 ; 0x5ce85f
+	jr .asm_9dba4
+.continue2
 	ld hl, FightingDojoText8
 	call PrintText
-.asm_9dba4 ; 0x5ce8b
+.asm_9dba4
 	jp TextScriptEnd
 
 FightingDojoText_5ce8e: ; 5ce8e (17:4e8e)

@@ -146,10 +146,10 @@ SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd882 ; flag's byte
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextBeforeBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextAfterBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
-	dw SeafoamIslands5BattleText2 ; 0x68a2 TextEndBattle
+	dw SeafoamIslands5BattleText2 ; TextBeforeBattle
+	dw SeafoamIslands5BattleText2 ; TextAfterBattle
+	dw SeafoamIslands5BattleText2 ; TextEndBattle
+	dw SeafoamIslands5BattleText2 ; TextEndBattle
 
 	db $ff
 

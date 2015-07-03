@@ -38,7 +38,7 @@ Route16GateUpstairsText_4983b: ; 4983b (12:583b)
 
 Route16GateUpstairsText4: ; 49840 (12:5840)
 	db $8
-	ld hl, Route16GateUpstairsText_49847 ; $5847
+	ld hl, Route16GateUpstairsText_49847
 	jp Route12GateUpstairsScript_495c9
 
 Route16GateUpstairsText_49847: ; 49847 (12:5847)

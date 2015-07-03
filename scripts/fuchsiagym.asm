@@ -37,14 +37,14 @@ FuchsiaGymScriptPointers: ; 75482 (1d:5482)
 	dw FuchsiaGymScript3
 
 FuchsiaGymScript3: ; 7548a (1d:548a)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, FuchsiaGymScript_75477
 	ld a, $f0
 	ld [wJoyIgnore], a
 FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd792
 	set 1, [hl]
@@ -52,14 +52,14 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd792
 	set 0, [hl]
 	jr .asm_754c0
 .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 .asm_754c0
 	ld hl, W_OBTAINEDBADGES
@@ -92,55 +92,55 @@ FuchsiaGymTrainerHeader0: ; 754eb (1d:54eb)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText1 ; 0x55ae TextBeforeBattle
-	dw FuchsiaGymAfterBattleText1 ; 0x55b8 TextAfterBattle
-	dw FuchsiaGymEndBattleText1 ; 0x55b3 TextEndBattle
-	dw FuchsiaGymEndBattleText1 ; 0x55b3 TextEndBattle
+	dw FuchsiaGymBattleText1 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText1 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText1 ; TextEndBattle
+	dw FuchsiaGymEndBattleText1 ; TextEndBattle
 
 FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText2 ; 0x55c7 TextBeforeBattle
-	dw FuchsiaGymAfterBattleText2 ; 0x55d1 TextAfterBattle
-	dw FuchsiaGymEndBattleText2 ; 0x55cc TextEndBattle
-	dw FuchsiaGymEndBattleText2 ; 0x55cc TextEndBattle
+	dw FuchsiaGymBattleText2 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText2 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText2 ; TextEndBattle
+	dw FuchsiaGymEndBattleText2 ; TextEndBattle
 
 FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText3 ; 0x55e0 TextBeforeBattle
-	dw FuchsiaGymAfterBattleText3 ; 0x55ea TextAfterBattle
-	dw FuchsiaGymEndBattleText3 ; 0x55e5 TextEndBattle
-	dw FuchsiaGymEndBattleText3 ; 0x55e5 TextEndBattle
+	dw FuchsiaGymBattleText3 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText3 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText3 ; TextEndBattle
+	dw FuchsiaGymEndBattleText3 ; TextEndBattle
 
 FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
 	db $5 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText4 ; 0x55f9 TextBeforeBattle
-	dw FuchsiaGymAfterBattleText4 ; 0x5603 TextAfterBattle
-	dw FuchsiaGymEndBattleText4 ; 0x55fe TextEndBattle
-	dw FuchsiaGymEndBattleText4 ; 0x55fe TextEndBattle
+	dw FuchsiaGymBattleText4 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText4 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText4 ; TextEndBattle
+	dw FuchsiaGymEndBattleText4 ; TextEndBattle
 
 FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText5 ; 0x5612 TextBeforeBattle
-	dw FuchsiaGymAfterBattleText5 ; 0x561c TextAfterBattle
-	dw FuchsiaGymEndBattleText5 ; 0x5617 TextEndBattle
-	dw FuchsiaGymEndBattleText5 ; 0x5617 TextEndBattle
+	dw FuchsiaGymBattleText5 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText5 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText5 ; TextEndBattle
+	dw FuchsiaGymEndBattleText5 ; TextEndBattle
 
 FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd792 ; flag's byte
-	dw FuchsiaGymBattleText6 ; 0x562b TextBeforeBattle
-	dw FuchsiaGymAfterBattleText6 ; 0x5635 TextAfterBattle
-	dw FuchsiaGymEndBattleText6 ; 0x5630 TextEndBattle
-	dw FuchsiaGymEndBattleText6 ; 0x5630 TextEndBattle
+	dw FuchsiaGymBattleText6 ; TextBeforeBattle
+	dw FuchsiaGymAfterBattleText6 ; TextAfterBattle
+	dw FuchsiaGymEndBattleText6 ; TextEndBattle
+	dw FuchsiaGymEndBattleText6 ; TextEndBattle
 
 	db $ff
 
@@ -148,17 +148,17 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	db $08 ; asm
 	ld a, [wd792]
 	bit 1, a
-	jr z, .asm_181b6 ; 0x7553a
+	jr z, .asm_181b6
 	bit 0, a
-	jr nz, .asm_adc3b ; 0x7553e
+	jr nz, .asm_adc3b
 	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
-	jr .asm_e84c6 ; 0x75546
-.asm_adc3b ; 0x75548
+	jr .asm_e84c6
+.asm_adc3b
 	ld hl, KogaExplainToxicText
 	call PrintText
-	jr .asm_e84c6 ; 0x7554e
-.asm_181b6 ; 0x75550
+	jr .asm_e84c6
+.asm_181b6
 	ld hl, KogaBeforeBattleText
 	call PrintText
 	ld hl, wd72d
@@ -177,7 +177,7 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	ldh [$b4], a
 	ld a, $3
 	ld [W_FUCHSIAGYMCURSCRIPT], a
-.asm_e84c6 ; 0x7557e
+.asm_e84c6
 	jp TextScriptEnd
 
 KogaBeforeBattleText: ; 75581 (1d:5581)
@@ -321,9 +321,9 @@ FuchsiaGymText8: ; 7563a (1d:563a)
 	ld a, [wd792]
 	bit 1, a
 	ld hl, FuchsiaGymText_75653
-	jr nz, .asm_50671 ; 0x75643
+	jr nz, .asm_50671
 	ld hl, FuchsiaGymText_7564e
-.asm_50671 ; 0x75648
+.asm_50671
 	call PrintText
 	jp TextScriptEnd
 

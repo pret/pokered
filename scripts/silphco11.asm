@@ -13,7 +13,7 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_62134 ; $6134
+	ld hl, DataTable_62134
 	call SilphCo11Script_62137
 	call SilphCo11Script_62163
 	ld a, [wd838]
@@ -72,7 +72,7 @@ SilphCo11Script_62163: ; 62163 (18:6163)
 	ret
 
 SilphCo11Script_6216d: ; 6216d (18:616d)
-	ld hl, MissableObjectIDs_6219b ; $619b
+	ld hl, MissableObjectIDs_6219b
 .asm_62170
 	ld a, [hli]
 	cp $ff
@@ -83,7 +83,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	pop hl
 	jr .asm_62170
 .asm_62181
-	ld hl, MissableObjectIDs_62194 ; $6194
+	ld hl, MissableObjectIDs_62194
 .asm_62184
 	ld a, [hli]
 	cp $ff
@@ -167,20 +167,20 @@ SilphCo11Script0: ; 621db (18:61db)
 	ld a, [wd838]
 	bit 7, a
 	ret nz
-	ld hl, CoordsData_62211 ; $6211
+	ld hl, CoordsData_62211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wcf0d], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_62216
 	call MoveSprite
@@ -198,13 +198,13 @@ MovementData_62216: ; 62216 (18:6216)
 SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [wd528], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	ld a, b
 	ld [$ff8d], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, SilphCo11Script_621c4
 	ld a, [wcf0d]
@@ -221,7 +221,7 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
@@ -239,7 +239,7 @@ SilphCo11Script3: ; 6226a (18:626a)
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wcf0d]
 	cp $1
@@ -260,10 +260,10 @@ SilphCo11Script4: ; 62293 (18:6293)
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, SilphCo10Text_62330 ; $6330
-	ld de, SilphCo10Text_62330 ; $6330
+	ld hl, SilphCo10Text_62330
+	ld de, SilphCo10Text_62330
 	call SaveEndBattleTextPointers
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [H_DOWNARROWBLINKCNT2]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -285,19 +285,19 @@ SilphCo11TrainerHeader0: ; 622c3 (18:62c3)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd837 ; flag's byte
-	dw SilphCo11BattleText1 ; 0x6344 TextBeforeBattle
-	dw SilphCo11AfterBattleText1 ; 0x634e TextAfterBattle
-	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
-	dw SilphCo11EndBattleText1 ; 0x6349 TextEndBattle
+	dw SilphCo11BattleText1 ; TextBeforeBattle
+	dw SilphCo11AfterBattleText1 ; TextAfterBattle
+	dw SilphCo11EndBattleText1 ; TextEndBattle
+	dw SilphCo11EndBattleText1 ; TextEndBattle
 
 SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd837 ; flag's byte
-	dw SilphCo11BattleText2 ; 0x635d TextBeforeBattle
-	dw SilphCo11AfterBattleText2 ; 0x6367 TextAfterBattle
-	dw SilphCo11EndBattleText2 ; 0x6362 TextEndBattle
-	dw SilphCo11EndBattleText2 ; 0x6362 TextEndBattle
+	dw SilphCo11BattleText2 ; TextBeforeBattle
+	dw SilphCo11AfterBattleText2 ; TextAfterBattle
+	dw SilphCo11EndBattleText2 ; TextEndBattle
+	dw SilphCo11EndBattleText2 ; TextEndBattle
 
 	db $ff
 
@@ -315,15 +315,15 @@ SilphCo11Text1: ; 622dc (18:62dc)
 	call PrintText
 	ld hl, wd838
 	set 5, [hl]
-	jr .asm_fd405 ; 0x622fe
+	jr .asm_6230e
 .BagFull
 	ld hl, SilphCoMasterBallNoRoomText
 	call PrintText
-	jr .asm_fd405 ; 0x62306
-.asm_62308 ; 0x62308
+	jr .asm_6230e
+.asm_62308
 	ld hl, SilphCo10Text_6231c
 	call PrintText
-.asm_fd405 ; 0x6230e
+.asm_6230e
 	jp TextScriptEnd
 
 SilphCoPresidentText: ; 62311 (18:6311)

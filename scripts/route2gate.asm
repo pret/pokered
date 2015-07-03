@@ -9,13 +9,13 @@ Route2GateText1: ; 5d5db (17:55db)
 	db $08 ; asm
 	ld a, [wd7c2]
 	bit 0, a
-	jr nz, .asm_6592c ; 0x5d5e1
+	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
 	ldh [$db], a
 	ld a, HM_05 ; oak's aide reward
 	ldh [$dc], a
 	ld [wd11e], a
-	call GetItemName ; $2fcf
+	call GetItemName
 	ld hl, wcd6d
 	ld de, wcc5b
 	ld bc, $000d
@@ -23,13 +23,13 @@ Route2GateText1: ; 5d5db (17:55db)
 	predef OaksAideScript ; call oak's aide script
 	ldh a, [$db]
 	cp $1
-	jr nz, .asm_ad646 ; 0x5d606
+	jr nz, .asm_5d613
 	ld hl, wd7c2
 	set 0, [hl]
-.asm_6592c ; 0x5d60d
+.asm_5d60d
 	ld hl, Route2GateText_5d616
 	call PrintText
-.asm_ad646 ; 0x5d613
+.asm_5d613
 	jp TextScriptEnd
 
 Route2GateText_5d616: ; 5d616 (17:5616)

@@ -29,7 +29,7 @@ Route23ScriptPointers: ; 51213 (14:5213)
 	dw Route23Script2
 
 Route23Script0: ; 51219 (14:5219)
-	ld hl, YCoordsData_51255 ; $5255
+	ld hl, YCoordsData_51255
 	ld a, [W_YCOORD]
 	ld b, a
 	ld e, $0
@@ -41,9 +41,9 @@ Route23Script0: ; 51219 (14:5219)
 	inc e
 	dec c
 	cp b
-	jr nz, .asm_51224 ; 0x5122b $f7
+	jr nz, .asm_51224
 	cp $23
-	jr nz, .asm_51237 ; 0x5122f $6
+	jr nz, .asm_51237
 	ld a, [W_XCOORD]
 	cp $e
 	ret nc
@@ -68,8 +68,8 @@ YCoordsData_51255: ; 51255 (14:5255)
 	db $23,$38,$55,$60,$69,$77,$88,$FF
 
 Route23Script_5125d: ; 5125d (14:525d)
-	ld hl, BadgeTextPointers ; $5276
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld hl, BadgeTextPointers
+	ld a, [wWhichTrade]
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -188,9 +188,9 @@ Route23Text7: ; 5133d (14:533d)
 	jp TextScriptEnd
 
 Route23Script_51346: ; 51346 (14:5346)
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	call Route23Script_5125d
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	inc a
 	ld c, a
 	ld b, $2
@@ -208,7 +208,7 @@ Route23Script_51346: ; 51346 (14:5346)
 .asm_5136e
 	ld hl, VictoryRoadGuardText2
 	call PrintText
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld c, a
 	ld b, $1
 	ld hl, wd7ed

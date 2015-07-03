@@ -41,17 +41,17 @@ SSAnne6Text7: ; 617e3 (18:57e3)
 	call PrintText
 	ldh a, [$d3]
 	bit 7, a
-	jr z, .asm_93eb1 ; 0x617ee
+	jr z, .asm_93eb1
 	ld hl, SSAnne6Text_6180c
-	jr .asm_63292 ; 0x617f3
-.asm_93eb1 ; 0x617f5
+	jr .asm_63292
+.asm_93eb1
 	bit 4, a
-	jr z, .asm_7436c ; 0x617f7
+	jr z, .asm_7436c
 	ld hl, SSAnne6Text_61811
-	jr .asm_63292 ; 0x617fc
-.asm_7436c ; 0x617fe
+	jr .asm_63292
+.asm_7436c
 	ld hl, SSAnne6Text_61816
-.asm_63292 ; 0x61801
+.asm_63292
 	call PrintText
 	jp TextScriptEnd
 

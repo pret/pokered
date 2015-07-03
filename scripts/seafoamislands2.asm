@@ -3,20 +3,20 @@ SeafoamIslands2Script: ; 46315 (11:6315)
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
-	jr z, .asm_46362 ; 0x4631f $41
+	jr z, .asm_46362
 	ld hl, Seafoam2HolesCoords
 	call CheckBoulderCoords
 	ret nc
 	ld hl, wd87f
 	ld a, [wWhichTrade]
 	cp $1
-	jr nz, .asm_46340 ; 0x46330 $e
+	jr nz, .asm_46340
 	set 0, [hl]
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_1
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_1
 	ld [wd07a], a
-	jr .asm_4634c ; 0x4633e $c
+	jr .asm_4634c
 .asm_46340
 	set 1, [hl]
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_2

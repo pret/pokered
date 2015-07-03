@@ -31,7 +31,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jr c, .asm_74e60 ; 0x74e49 $15
+	jr c, .asm_74e60
 	ld hl, TextPointers_74e86
 	ld a, [wcf91]
 	sub $15
@@ -43,7 +43,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jr .asm_74e23 ; 0x74e5e $c3
+	jr .asm_74e23
 .asm_74e60
 	xor a
 	ld [wListScrollOffset], a

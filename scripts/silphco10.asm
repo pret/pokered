@@ -13,7 +13,7 @@ SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_5a173 ; $6173
+	ld hl, DataTable_5a173
 	call SilphCo2Script_59d43
 	call SilphCo10Text_5a176
 	ld a, [wd836]
@@ -53,19 +53,19 @@ SilphCo10TrainerHeader0: ; 5a192 (16:6192)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd835 ; flag's byte
-	dw SilphCo10BattleText1 ; 0x61dd TextBeforeBattle
-	dw SilphCo10AfterBattleText1 ; 0x61e7 TextAfterBattle
-	dw SilphCo10EndBattleText1 ; 0x61e2 TextEndBattle
-	dw SilphCo10EndBattleText1 ; 0x61e2 TextEndBattle
+	dw SilphCo10BattleText1 ; TextBeforeBattle
+	dw SilphCo10AfterBattleText1 ; TextAfterBattle
+	dw SilphCo10EndBattleText1 ; TextEndBattle
+	dw SilphCo10EndBattleText1 ; TextEndBattle
 
 SilphCo10TrainerHeader1: ; 5a19e (16:619e)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd835 ; flag's byte
-	dw SilphCo10BattleText2 ; 0x61ec TextBeforeBattle
-	dw SilphCo10AfterBattleText2 ; 0x61f6 TextAfterBattle
-	dw SilphCo10EndBattleText2 ; 0x61f1 TextEndBattle
-	dw SilphCo10EndBattleText2 ; 0x61f1 TextEndBattle
+	dw SilphCo10BattleText2 ; TextBeforeBattle
+	dw SilphCo10AfterBattleText2 ; TextAfterBattle
+	dw SilphCo10EndBattleText2 ; TextEndBattle
+	dw SilphCo10EndBattleText2 ; TextEndBattle
 
 	db $ff
 

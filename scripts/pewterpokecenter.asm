@@ -23,7 +23,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	call PrintText
 	ld a, $ff
 	call PlaySound
-	ld c, $20
+	ld c, 32
 	call DelayFrames
 	ld hl, JigglypuffFacingDirections
 	ld de, wTrainerFacingDirection
@@ -34,7 +34,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 .asm_5c5c3
 	cp [hl]
 	inc hl
-	jr nz, .asm_5c5c3 ; 0x5c5c5 $fc
+	jr nz, .asm_5c5c3
 	dec hl
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
@@ -52,14 +52,14 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	ld a, [wTrainerEngageDistance]
 	ld [wcd42], a
 	pop hl
-	ld c, $18
+	ld c, 24
 	call DelayFrames
 	ld a, [wc026]
 	ld b, a
 	ld a, [wc027]
 	or b
-	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
-	ld c, $30
+	jr nz, .asm_5c5d1
+	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic
 	jp TextScriptEnd

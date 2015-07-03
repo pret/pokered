@@ -17,7 +17,7 @@ Museum1FScript0: ; 5c10d (17:410d)
 	ret nz
 	ld a, [W_XCOORD]
 	cp $9
-	jr z, .asm_5c120 ; 0x5c118 $6
+	jr z, .asm_5c120
 	ld a, [W_XCOORD]
 	cp $a
 	ret nz
@@ -59,7 +59,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	jr nz, .asm_31a16
 	ld hl, Museum1FText_5c23d
 	call PrintText
-	jp asm_d1145
+	jp Museum1FScriptEnd
 .asm_b8709
 	ld a, [wd754]
 	bit 0, a
@@ -67,7 +67,7 @@ Museum1FText1: ; 5c135 (17:4135)
 .asm_31a16
 	ld hl, Museum1FText_5c242
 	call PrintText
-	jp asm_d1145
+	jp Museum1FScriptEnd
 .asm_3ded4
 	ld a, $13
 	ld [wTextBoxID], a
@@ -112,7 +112,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	call WaitForSoundToFinish
 	jr .asm_0b094
 .asm_de133
-	ld hl, Museum1FText_5c21a ; $421a
+	ld hl, Museum1FText_5c21a
 	call PrintText
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -120,11 +120,11 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	call UpdateSprites
-	jr asm_d1145
+	jr Museum1FScriptEnd
 .asm_0b094
 	ld a, $1
 	ld [W_MUSEUM1FCURSCRIPT], a
-	jr asm_d1145
+	jr Museum1FScriptEnd
 
 Museum1FScript_5c1f9: ; 5c1f9 (17:41f9)
 	ld hl, Museum1FText_5c22e
@@ -135,11 +135,11 @@ Museum1FScript_5c1f9: ; 5c1f9 (17:41f9)
 	jr nz, .asm_d1144
 	ld hl, Museum1FText_5c233
 	call PrintText
-	jr asm_d1145
+	jr Museum1FScriptEnd
 .asm_d1144
 	ld hl, Museum1FText_5c238
 	call PrintText
-asm_d1145: ; 5c217 (17:4217)
+Museum1FScriptEnd: ; 5c217 (17:4217)
 	jp TextScriptEnd
 
 Museum1FText_5c21a: ; 5c21a (17:421a)
@@ -192,7 +192,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	db $08 ; asm
 	ld a, [wd754]
 	bit 1, a
-	jr nz, .asm_16599 ; 0x5c25c
+	jr nz, .asm_5c285
 	ld hl, Museum1FText_5c28e
 	call PrintText
 	ld bc, (OLD_AMBER << 8) | 1
@@ -204,13 +204,13 @@ Museum1FText3: ; 5c256 (17:4256)
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText
-	jr .asm_52e0f ; 0x5c27e
+	jr .asm_5c288
 .BagFull
 	ld hl, Museum1FText_5c29e
-	jr .asm_52e0f ; 0x5c283
-.asm_16599 ; 0x5c285
+	jr .asm_5c288
+.asm_5c285
 	ld hl, Museum1FText_5c299
-.asm_52e0f ; 0x5c288
+.asm_5c288
 	call PrintText
 	jp TextScriptEnd
 

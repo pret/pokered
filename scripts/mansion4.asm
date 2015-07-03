@@ -51,7 +51,7 @@ Mansion4Script_Switches: ; 52420 (14:6420)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp DisplayTextID
 
 Mansion4ScriptPointers: ; 52430 (14:6430)
@@ -75,19 +75,19 @@ Mansion4TrainerHeader0: ; 52448 (14:6448)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd84b ; flag's byte
-	dw Mansion4BattleText1 ; 0x6475 TextBeforeBattle
-	dw Mansion4AfterBattleText1 ; 0x647f TextAfterBattle
-	dw Mansion4EndBattleText1 ; 0x647a TextEndBattle
-	dw Mansion4EndBattleText1 ; 0x647a TextEndBattle
+	dw Mansion4BattleText1 ; TextBeforeBattle
+	dw Mansion4AfterBattleText1 ; TextAfterBattle
+	dw Mansion4EndBattleText1 ; TextEndBattle
+	dw Mansion4EndBattleText1 ; TextEndBattle
 
 Mansion4TrainerHeader2: ; 52454 (14:6454)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd84b ; flag's byte
-	dw Mansion4BattleText2 ; 0x6484 TextBeforeBattle
-	dw Mansion4AfterBattleText2 ; 0x648e TextAfterBattle
-	dw Mansion4EndBattleText2 ; 0x6489 TextEndBattle
-	dw Mansion4EndBattleText2 ; 0x6489 TextEndBattle
+	dw Mansion4BattleText2 ; TextBeforeBattle
+	dw Mansion4AfterBattleText2 ; TextAfterBattle
+	dw Mansion4EndBattleText2 ; TextEndBattle
+	dw Mansion4EndBattleText2 ; TextEndBattle
 
 	db $ff
 

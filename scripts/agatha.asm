@@ -40,7 +40,8 @@ AgathaScriptPointers: ; 76469 (1d:6469)
 
 AgathaScript4: ; 76473 (1d:6473)
 	ret
-asm_76474: ; 76474 (1d:6474)
+
+AgathaScript_76474: ; 76474 (1d:6474)
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
 	ld [hli], a
@@ -66,16 +67,16 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	cp $3
 	jr c, .asm_764b4
 	ld hl, wd865
 	bit 6, [hl]
 	set 6, [hl]
-	jr z, asm_76474
+	jr z, AgathaScript_76474
 .asm_764b4
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -107,11 +108,11 @@ AgathaScript3: ; 764da (1d:64da)
 
 AgathaScript2: ; 764ed (1d:64ed)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, AgathaScript_76464
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, $1
 	ld [W_GARYCURSCRIPT], a
@@ -126,10 +127,10 @@ AgathaTrainerHeader0: ; 76509 (1d:6509)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd865 ; flag's byte
-	dw AgathaBeforeBattleText ; 0x6520 TextBeforeBattle
-	dw AgathaAfterBattleText ; 0x652a TextAfterBattle
-	dw AgathaEndBattleText ; 0x6525 TextEndBattle
-	dw AgathaEndBattleText ; 0x6525 TextEndBattle
+	dw AgathaBeforeBattleText ; TextBeforeBattle
+	dw AgathaAfterBattleText ; TextAfterBattle
+	dw AgathaEndBattleText ; TextEndBattle
+	dw AgathaEndBattleText ; TextEndBattle
 
 	db $ff
 

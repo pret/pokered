@@ -55,7 +55,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld c, 600 / 5
 	call DelayFrames
 	dec b
-	jr nz, .asm_5a4ff ; 0x5a505 $f8
+	jr nz, .asm_5a4ff
 	call WaitForTextScrollButtonPress
 	jp Init
 

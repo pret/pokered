@@ -17,8 +17,8 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 	ret
 
 VermilionGymScript_5ca4c: ; 5ca4c (17:4a4c)
-	ld hl, Gym3CityName ; $4a55
-	ld de, Gym3LeaderName ; $4a64
+	ld hl, Gym3CityName
+	ld de, Gym3LeaderName
 	jp LoadGymLeaderAndCityName
 
 Gym3CityName: ; 5ca55 (17:4a55)
@@ -56,7 +56,7 @@ VermilionGymScriptPointers: ; 5ca95 (17:4a95)
 	dw VermilionGymScript3
 
 VermilionGymScript3: ; 5ca9d (17:4a9d)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, VermilionGymScript_5ca8a
 	ld a, $f0
@@ -64,7 +64,7 @@ VermilionGymScript3: ; 5ca9d (17:4a9d)
 
 VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd773
 	set 7, [hl]
@@ -72,14 +72,14 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld hl, wd773
 	set 6, [hl]
 	jr .asm_5cad3
 .BagFull
 	ld a, $8
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 .asm_5cad3
 	ld hl, W_OBTAINEDBADGES
@@ -109,28 +109,28 @@ VermilionGymTrainerHeader0: ; 5caf8 (17:4af8)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd773 ; flag's byte
-	dw VermilionGymBattleText1 ; 0x4b9a TextBeforeBattle
-	dw VermilionGymAfterBattleText1 ; 0x4ba4 TextAfterBattle
-	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
-	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
+	dw VermilionGymBattleText1 ; TextBeforeBattle
+	dw VermilionGymAfterBattleText1 ; TextAfterBattle
+	dw VermilionGymEndBattleText1 ; TextEndBattle
+	dw VermilionGymEndBattleText1 ; TextEndBattle
 
 VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd773 ; flag's byte
-	dw VermilionGymBattleText2 ; 0x4bb3 TextBeforeBattle
-	dw VermilionGymAfterBattleText2 ; 0x4bbd TextAfterBattle
-	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
-	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
+	dw VermilionGymBattleText2 ; TextBeforeBattle
+	dw VermilionGymAfterBattleText2 ; TextAfterBattle
+	dw VermilionGymEndBattleText2 ; TextEndBattle
+	dw VermilionGymEndBattleText2 ; TextEndBattle
 
 VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd773 ; flag's byte
-	dw VermilionGymBattleText3 ; 0x4bcc TextBeforeBattle
-	dw VermilionGymAfterBattleText3 ; 0x4bd6 TextAfterBattle
-	dw VermilionGymEndBattleText3 ; 0x4bd1 TextEndBattle
-	dw VermilionGymEndBattleText3 ; 0x4bd1 TextEndBattle
+	dw VermilionGymBattleText3 ; TextBeforeBattle
+	dw VermilionGymAfterBattleText3 ; TextAfterBattle
+	dw VermilionGymEndBattleText3 ; TextEndBattle
+	dw VermilionGymEndBattleText3 ; TextEndBattle
 
 	db $ff
 
@@ -138,17 +138,17 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	db $08 ; asm
 	ld a, [wd773]
 	bit 7, a
-	jr z, .asm_7cc29 ; 0x5cb23
+	jr z, .asm_5cb39
 	bit 6, a
-	jr nz, .asm_41203 ; 0x5cb27
+	jr nz, .asm_5cb31
 	call z, VermilionGymScript_5caaa
 	call DisableWaitingAfterTextDisplay
-	jr .asm_23621 ; 0x5cb2f
-.asm_41203 ; 0x5cb31
+	jr .asm_5cb6a
+.asm_5cb31
 	ld hl, VermilionGymText_5cb72
 	call PrintText
-	jr .asm_23621 ; 0x5cb37
-.asm_7cc29 ; 0x5cb39
+	jr .asm_5cb6a
+.asm_5cb39
 	ld hl, VermilionGymText_5cb6d
 	call PrintText
 	ld hl, wd72d
@@ -168,7 +168,7 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	ld a, $3
 	ld [W_VERMILIONGYMCURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
-.asm_23621 ; 0x5cb6a
+.asm_5cb6a
 	jp TextScriptEnd
 
 VermilionGymText_5cb6d: ; 5cb6d (17:4b6d)
@@ -255,14 +255,14 @@ VermilionGymText5: ; 5cbdb (17:4bdb)
 	db $08 ; asm
 	ld a, [wd72a]
 	bit 2, a
-	jr nz, .asm_13b67 ; 0x5cbe1
+	jr nz, .asm_5cbeb
 	ld hl, VermilionGymText_5cbf4
 	call PrintText
-	jr .asm_c2b38 ; 0x5cbe9
-.asm_13b67 ; 0x5cbeb
+	jr .asm_5cbf1
+.asm_5cbeb
 	ld hl, VermilionGymText_5cbf9
 	call PrintText
-.asm_c2b38 ; 0x5cbf1
+.asm_5cbf1
 	jp TextScriptEnd
 
 VermilionGymText_5cbf4: ; 5cbf4 (17:4bf4)

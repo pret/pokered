@@ -32,9 +32,9 @@ RocketHideoutElevatorScript_4573a: ; 4573a (11:573a)
 	ret
 
 RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
-	ld hl, RocketHideoutElavatorFloors ; $5754
+	ld hl, RocketHideoutElavatorFloors
 	call LoadItemList
-	ld hl, RocketHideoutElevatorWarpMaps ; $5759
+	ld hl, RocketHideoutElevatorWarpMaps
 	ld de, wcc5b
 	ld bc, $0006
 	call CopyData
@@ -65,17 +65,17 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 	db $08 ; asm
 	ld b, LIFT_KEY
 	call IsItemInBag
-	jr z, .asm_8d8f0 ; 0x45773
+	jr z, .asm_45782
 	call RocketHideoutElevatorScript_45741
-	ld hl, RocketHideoutElevatorWarpMaps ; $5759
+	ld hl, RocketHideoutElevatorWarpMaps
 	predef Func_1c9c6
-	jr .asm_46c43 ; 0x45780
-.asm_8d8f0 ; 0x45782
+	jr .asm_45788
+.asm_45782
 	ld hl, RocketHideoutElevatorText_4578b
 	call PrintText
-.asm_46c43 ; 0x45788
+.asm_45788
 	jp TextScriptEnd
 
 RocketHideoutElevatorText_4578b: ; 4578b (11:578b)
-	TX_FAR _RocketElevatorText_4578b ; 0x82438
+	TX_FAR _RocketElevatorText_4578b
 	db $d, "@"

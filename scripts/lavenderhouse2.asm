@@ -17,14 +17,14 @@ LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 	db $08 ; asm
 	ld a, [wd7e0]
 	bit 7, a
-	jr nz, .asm_65711 ; 0x1d9c9
+	jr nz, .asm_65711
 	ld hl, LavenderHouse2Text_1d9dc
 	call PrintText
-	jr .asm_64be1 ; 0x1d9d1
-.asm_65711 ; 0x1d9d3
+	jr .asm_64be1
+.asm_65711
 	ld hl, LavenderHouse2Text_1d9e1
 	call PrintText
-.asm_64be1 ; 0x1d9d9
+.asm_64be1
 	jp TextScriptEnd
 
 LavenderHouse2Text_1d9dc: ; 1d9dc (7:59dc)

@@ -24,28 +24,28 @@ Route18TrainerHeader0: ; 59aea (16:5aea)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7e3 ; flag's byte
-	dw Route18BattleText1 ; 0x5b19 TextBeforeBattle
-	dw Route18AfterBattleText1 ; 0x5b23 TextAfterBattle
-	dw Route18EndBattleText1 ; 0x5b1e TextEndBattle
-	dw Route18EndBattleText1 ; 0x5b1e TextEndBattle
+	dw Route18BattleText1 ; TextBeforeBattle
+	dw Route18AfterBattleText1 ; TextAfterBattle
+	dw Route18EndBattleText1 ; TextEndBattle
+	dw Route18EndBattleText1 ; TextEndBattle
 
 Route18TrainerHeader1: ; 59af6 (16:5af6)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7e3 ; flag's byte
-	dw Route18BattleText2 ; 0x5b32 TextBeforeBattle
-	dw Route18AfterBattleText2 ; 0x5b3c TextAfterBattle
-	dw Route18EndBattleText2 ; 0x5b37 TextEndBattle
-	dw Route18EndBattleText2 ; 0x5b37 TextEndBattle
+	dw Route18BattleText2 ; TextBeforeBattle
+	dw Route18AfterBattleText2 ; TextAfterBattle
+	dw Route18EndBattleText2 ; TextEndBattle
+	dw Route18EndBattleText2 ; TextEndBattle
 
 Route18TrainerHeader2: ; 59b02 (16:5b02)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7e3 ; flag's byte
-	dw Route18BattleText3 ; 0x5b4b TextBeforeBattle
-	dw Route18AfterBattleText3 ; 0x5b55 TextAfterBattle
-	dw Route18EndBattleText3 ; 0x5b50 TextEndBattle
-	dw Route18EndBattleText3 ; 0x5b50 TextEndBattle
+	dw Route18BattleText3 ; TextBeforeBattle
+	dw Route18AfterBattleText3 ; TextAfterBattle
+	dw Route18EndBattleText3 ; TextEndBattle
+	dw Route18EndBattleText3 ; TextEndBattle
 
 	db $ff
 

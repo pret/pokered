@@ -3,20 +3,20 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
-	jr z, .asm_465dc ; 0x46597 $43
+	jr z, .asm_465dc
 	ld hl, Seafoam4HolesCoords
 	call CheckBoulderCoords
 	ret nc
 	ld hl, wd881
 	ld a, [wWhichTrade]
 	cp $1
-	jr nz, .asm_465b8 ; 0x465a8 $e
+	jr nz, .asm_465b8
 	set 0, [hl]
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_1
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_5_BOULDER_1
 	ld [wd07a], a
-	jr .asm_465c4 ; 0x465b6 $c
+	jr .asm_465c4
 .asm_465b8
 	set 1, [hl]
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_2
@@ -30,7 +30,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld a, [wd07a]
 	ld [wcc4d], a
 	predef ShowObject
-	jr .asm_465ed ; 0x465da $11
+	jr .asm_465ed
 .asm_465dc
 	ld a, $a2
 	ld [wDungeonWarpDestinationMap], a

@@ -19,7 +19,7 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	db $08 ; asm
 	ld a, [wd803]
 	bit 0, a
-	jr nz, .asm_797c4 ; 0x618b3
+	jr nz, .asm_797c4
 	ld hl, SSAnne7RubText
 	call PrintText
 	ld hl, ReceivingHM01Text
@@ -31,17 +31,17 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	call PrintText
 	ld hl, wd803
 	set 0, [hl]
-	jr .asm_0faf5 ; 0x618d4
+	jr .asm_0faf5
 .BagFull
 	ld hl, HM01NoRoomText
 	call PrintText
 	ld hl, wd72d
 	set 5, [hl]
-	jr .asm_0faf5 ; 0x618e1
-.asm_797c4 ; 0x618e3
+	jr .asm_0faf5
+.asm_797c4
 	ld hl, SSAnne7Text_61932
 	call PrintText
-.asm_0faf5 ; 0x618e9
+.asm_0faf5
 	jp TextScriptEnd
 
 SSAnne7RubText: ; 618ec (18:58ec)
@@ -50,7 +50,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	ld a, [wc0ef]
 	cp BANK(Music1f_UpdateMusic)
 	ld [wc0f0], a
-	jr nz, .asm_61908 ; 0x618f9 $d
+	jr nz, .asm_61908
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
@@ -63,7 +63,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 .asm_61910
 	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
-	jr z, .asm_61910 ; 0x61915 $f9
+	jr z, .asm_61910
 	call PlayDefaultMusic
 	ld hl, wd803
 	set 1, [hl]

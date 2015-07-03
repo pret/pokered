@@ -45,11 +45,11 @@ VictoryRoad2ScriptPointers: ; 517eb (14:57eb)
 	dw EndTrainerBattle
 
 VictoryRoad2Script0: ; 517f1 (14:57f1)
-	ld hl, CoordsData_51816 ; $5816
+	ld hl, CoordsData_51816
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, wd7ee
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	cp $2
 	jr z, .asm_5180b
 	bit 0, [hl]
@@ -90,55 +90,55 @@ VictoryRoad2TrainerHeader0: ; 51835 (14:5835)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText1 ; 0x58ca TextBeforeBattle
-	dw VictoryRoad2AfterBattleText1 ; 0x58d4 TextAfterBattle
-	dw VictoryRoad2EndBattleText1 ; 0x58cf TextEndBattle
-	dw VictoryRoad2EndBattleText1 ; 0x58cf TextEndBattle
+	dw VictoryRoad2BattleText1 ; TextBeforeBattle
+	dw VictoryRoad2AfterBattleText1 ; TextAfterBattle
+	dw VictoryRoad2EndBattleText1 ; TextEndBattle
+	dw VictoryRoad2EndBattleText1 ; TextEndBattle
 
 VictoryRoad2TrainerHeader2: ; 51841 (14:5841)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText2 ; 0x58d9 TextBeforeBattle
-	dw VictoryRoad2AfterBattleText2 ; 0x58e3 TextAfterBattle
-	dw VictoryRoad2EndBattleText2 ; 0x58de TextEndBattle
-	dw VictoryRoad2EndBattleText2 ; 0x58de TextEndBattle
+	dw VictoryRoad2BattleText2 ; TextBeforeBattle
+	dw VictoryRoad2AfterBattleText2 ; TextAfterBattle
+	dw VictoryRoad2EndBattleText2 ; TextEndBattle
+	dw VictoryRoad2EndBattleText2 ; TextEndBattle
 
 VictoryRoad2TrainerHeader3: ; 5184d (14:584d)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText3 ; 0x58e8 TextBeforeBattle
-	dw VictoryRoad2AfterBattleText3 ; 0x58f2 TextAfterBattle
-	dw VictoryRoad2EndBattleText3 ; 0x58ed TextEndBattle
-	dw VictoryRoad2EndBattleText3 ; 0x58ed TextEndBattle
+	dw VictoryRoad2BattleText3 ; TextBeforeBattle
+	dw VictoryRoad2AfterBattleText3 ; TextAfterBattle
+	dw VictoryRoad2EndBattleText3 ; TextEndBattle
+	dw VictoryRoad2EndBattleText3 ; TextEndBattle
 
 VictoryRoad2TrainerHeader4: ; 51859 (14:5859)
 	db $4 ; flag's bit
 	db ($1 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText4 ; 0x58f7 TextBeforeBattle
-	dw VictoryRoad2AfterBattleText4 ; 0x5901 TextAfterBattle
-	dw VictoryRoad2EndBattleText4 ; 0x58fc TextEndBattle
-	dw VictoryRoad2EndBattleText4 ; 0x58fc TextEndBattle
+	dw VictoryRoad2BattleText4 ; TextBeforeBattle
+	dw VictoryRoad2AfterBattleText4 ; TextAfterBattle
+	dw VictoryRoad2EndBattleText4 ; TextEndBattle
+	dw VictoryRoad2EndBattleText4 ; TextEndBattle
 
 VictoryRoad2TrainerHeader5: ; 51865 (14:5865)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText5 ; 0x5906 TextBeforeBattle
-	dw VictoryRoad2AfterBattleText5 ; 0x5910 TextAfterBattle
-	dw VictoryRoad2EndBattleText5 ; 0x590b TextEndBattle
-	dw VictoryRoad2EndBattleText5 ; 0x590b TextEndBattle
+	dw VictoryRoad2BattleText5 ; TextBeforeBattle
+	dw VictoryRoad2AfterBattleText5 ; TextAfterBattle
+	dw VictoryRoad2EndBattleText5 ; TextEndBattle
+	dw VictoryRoad2EndBattleText5 ; TextEndBattle
 
 VictoryRoad2TrainerHeader6: ; 51871 (14:5871)
 	db $6 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd7ee ; flag's byte
-	dw VictoryRoad2BattleText6 ; 0x58ba TextBeforeBattle
-	dw VictoryRoad2BattleText6 ; 0x58ba TextAfterBattle
-	dw VictoryRoad2BattleText6 ; 0x58ba TextEndBattle
-	dw VictoryRoad2BattleText6 ; 0x58ba TextEndBattle
+	dw VictoryRoad2BattleText6 ; TextBeforeBattle
+	dw VictoryRoad2BattleText6 ; TextAfterBattle
+	dw VictoryRoad2BattleText6 ; TextEndBattle
+	dw VictoryRoad2BattleText6 ; TextEndBattle
 
 	db $ff
 

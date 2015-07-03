@@ -13,7 +13,7 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_5653e ; $653e
+	ld hl, DataTable_5653e
 	call SilphCo8Script_56541
 	call SilphCo8Script_5656d
 	ld a, [wd832]
@@ -87,28 +87,28 @@ SilphCo8TrainerHeader0: ; 56585 (15:6585)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd831 ; flag's byte
-	dw SilphCo8BattleText1 ; 0x65e6 TextBeforeBattle
-	dw SilphCo8AfterBattleText1 ; 0x65f0 TextAfterBattle
-	dw SilphCo8EndBattleText1 ; 0x65eb TextEndBattle
-	dw SilphCo8EndBattleText1 ; 0x65eb TextEndBattle
+	dw SilphCo8BattleText1 ; TextBeforeBattle
+	dw SilphCo8AfterBattleText1 ; TextAfterBattle
+	dw SilphCo8EndBattleText1 ; TextEndBattle
+	dw SilphCo8EndBattleText1 ; TextEndBattle
 
 SilphCo8TrainerHeader1: ; 56591 (15:6591)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd831 ; flag's byte
-	dw SilphCo8BattleText2 ; 0x65f5 TextBeforeBattle
-	dw SilphCo8AfterBattleText2 ; 0x65ff TextAfterBattle
-	dw SilphCo8EndBattleText2 ; 0x65fa TextEndBattle
-	dw SilphCo8EndBattleText2 ; 0x65fa TextEndBattle
+	dw SilphCo8BattleText2 ; TextBeforeBattle
+	dw SilphCo8AfterBattleText2 ; TextAfterBattle
+	dw SilphCo8EndBattleText2 ; TextEndBattle
+	dw SilphCo8EndBattleText2 ; TextEndBattle
 
 SilphCo8TrainerHeader2: ; 5659d (15:659d)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd831 ; flag's byte
-	dw SilphCo8BattleText3 ; 0x6604 TextBeforeBattle
-	dw SilphCo8AfterBattleText3 ; 0x660e TextAfterBattle
-	dw SilphCo8EndBattleText3 ; 0x6609 TextEndBattle
-	dw SilphCo8EndBattleText3 ; 0x6609 TextEndBattle
+	dw SilphCo8BattleText3 ; TextBeforeBattle
+	dw SilphCo8AfterBattleText3 ; TextAfterBattle
+	dw SilphCo8EndBattleText3 ; TextEndBattle
+	dw SilphCo8EndBattleText3 ; TextEndBattle
 
 	db $ff
 
@@ -117,9 +117,9 @@ SilphCo8Text1: ; 565aa (15:65aa)
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SilphCo8Text_565c3
-	jr nz, asm_a468f ; 0x565b3
+	jr nz, .asm_565b8
 	ld hl, SilphCo8Text_565be
-asm_a468f ; 0x565b8
+.asm_565b8
 	call PrintText
 	jp TextScriptEnd
 

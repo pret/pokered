@@ -49,19 +49,19 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 .asm_19d69
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_19d85 ; 0x19d6c $17
+	jr z, .asm_19d85
 	push hl
 	ld hl, $ffe0
 	inc [hl]
 	pop hl
 	cp b
-	jr z, .asm_19d7a ; 0x19d75 $3
+	jr z, .asm_19d7a
 	inc hl
-	jr .asm_19d69 ; 0x19d78 $ef
+	jr .asm_19d69
 .asm_19d7a
 	ld a, [hli]
 	cp c
-	jr nz, .asm_19d69 ; 0x19d7c $eb
+	jr nz, .asm_19d69
 	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
@@ -78,7 +78,7 @@ SilphCo4Script_19d89: ; 19d89 (6:5d89)
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_19d97 ; 0x19d92 $3
+	jr nz, .asm_19d97
 	set 0, [hl]
 	ret
 .asm_19d97
@@ -104,28 +104,28 @@ SilphCo4TrainerHeader0: ; 19dae (6:5dae)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd829 ; flag's byte
-	dw SilphCo4BattleText2 ; 0x5df4 TextBeforeBattle
-	dw SilphCo4AfterBattleText2 ; 0x5dfe TextAfterBattle
-	dw SilphCo4EndBattleText2 ; 0x5df9 TextEndBattle
-	dw SilphCo4EndBattleText2 ; 0x5df9 TextEndBattle
+	dw SilphCo4BattleText2 ; TextBeforeBattle
+	dw SilphCo4AfterBattleText2 ; TextAfterBattle
+	dw SilphCo4EndBattleText2 ; TextEndBattle
+	dw SilphCo4EndBattleText2 ; TextEndBattle
 
 SilphCo4TrainerHeader2: ; 19dba (6:5dba)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd829 ; flag's byte
-	dw SilphCo4BattleText3 ; 0x5e0d TextBeforeBattle
-	dw SilphCo4AfterBattleText3 ; 0x5e17 TextAfterBattle
-	dw SilphCo4EndBattleText3 ; 0x5e12 TextEndBattle
-	dw SilphCo4EndBattleText3 ; 0x5e12 TextEndBattle
+	dw SilphCo4BattleText3 ; TextBeforeBattle
+	dw SilphCo4AfterBattleText3 ; TextAfterBattle
+	dw SilphCo4EndBattleText3 ; TextEndBattle
+	dw SilphCo4EndBattleText3 ; TextEndBattle
 
 SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd829 ; flag's byte
-	dw SilphCo4BattleText4 ; 0x5e26 TextBeforeBattle
-	dw SilphCo4AfterBattleText4 ; 0x5e30 TextAfterBattle
-	dw SilphCo4EndBattleText4 ; 0x5e2b TextEndBattle
-	dw SilphCo4EndBattleText4 ; 0x5e2b TextEndBattle
+	dw SilphCo4BattleText4 ; TextBeforeBattle
+	dw SilphCo4AfterBattleText4 ; TextAfterBattle
+	dw SilphCo4EndBattleText4 ; TextEndBattle
+	dw SilphCo4EndBattleText4 ; TextEndBattle
 
 	db $ff
 

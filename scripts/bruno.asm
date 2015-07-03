@@ -40,7 +40,8 @@ BrunoScriptPointers: ; 76312 (1d:6312)
 
 BrunoScript4: ; 7631c (1d:631c)
 	ret
-asm_7631d: ; 7631d (1d:631d)
+
+BrunoScript_7631d: ; 7631d (1d:631d)
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
 	ld [hli], a
@@ -66,16 +67,16 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	cp $3
 	jr c, .asm_7635d
 	ld hl, wd864
 	bit 6, [hl]
 	set 6, [hl]
-	jr z, asm_7631d
+	jr z, BrunoScript_7631d
 .asm_7635d
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
@@ -107,11 +108,11 @@ BrunoScript3: ; 76383 (1d:6383)
 
 BrunoScript2: ; 76396 (1d:6396)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, BrunoScript_7630d
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp DisplayTextID
 
 BrunoTextPointers: ; 763a8 (1d:63a8)
@@ -123,10 +124,10 @@ BrunoTrainerHeader0: ; 763ac (1d:63ac)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd864 ; flag's byte
-	dw BrunoBeforeBattleText ; 0x63c3 TextBeforeBattle
-	dw BrunoAfterBattleText ; 0x63cd TextAfterBattle
-	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
-	dw BrunoEndBattleText ; 0x63c8 TextEndBattle
+	dw BrunoBeforeBattleText ; TextBeforeBattle
+	dw BrunoAfterBattleText ; TextAfterBattle
+	dw BrunoEndBattleText ; TextEndBattle
+	dw BrunoEndBattleText ; TextEndBattle
 
 	db $ff
 

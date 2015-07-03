@@ -48,7 +48,7 @@ FuchsiaHouse3Text_561bd: ; 561bd (15:61bd)
 	db "@"
 
 FuchsiaHouse3Text_561c2: ; 561c2 (15:61c2)
-	TX_FAR _FuchsiaHouse3Text_561c2 ; 0xa06e8
+	TX_FAR _FuchsiaHouse3Text_561c2
 	db $0B
 	db "@"
 

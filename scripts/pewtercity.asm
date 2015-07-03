@@ -72,7 +72,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	call SetSpritePosition1
 	ld a, $3
 	ld [$ff8c], a
-	ld de, MovementData_PewterMuseumGuyExit ; $52ce
+	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -200,11 +200,11 @@ PewterCityText3: ; 193b1 (6:53b1)
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_f46a9 ; 0x193bf
+	jr nz, .asm_193c9
 	ld hl, PewterCityText_193f6
 	call PrintText
-	jr .asm_ac429 ; 0x193c7
-.asm_f46a9 ; 0x193c9
+	jr .asm_193ee
+.asm_193c9
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
@@ -220,7 +220,7 @@ PewterCityText3: ; 193b1 (6:53b1)
 	call GetSpritePosition2
 	ld a, $1
 	ld [W_PEWTERCITYCURSCRIPT], a
-.asm_ac429 ; 0x193ee
+.asm_193ee
 	jp TextScriptEnd
 
 PewterCityText_193f1: ; 193f1 (6:53f1)
@@ -246,14 +246,14 @@ PewterCityText4: ; 19405 (6:5405)
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
-	jr nz, .asm_e4603
+	jr nz, .asm_1941e
 	ld hl, PewterCityText_1942c
 	call PrintText
-	jr .asm_e4604 ; 0x1941c $6
-.asm_e4603
+	jr .asm_19424
+.asm_1941e
 	ld hl, PewterCityText_19431
 	call PrintText
-.asm_e4604 ; 0x19424
+.asm_19424
 	jp TextScriptEnd
 
 PewterCityText_19427: ; 19427 (6:5427)

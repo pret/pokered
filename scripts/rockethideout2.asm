@@ -321,17 +321,17 @@ LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
 	ld a, [wSpriteStateData1 + 2]
 	srl a
 	srl a
-	ld hl, SpinnerPlayerFacingDirections ; $5083
+	ld hl, SpinnerPlayerFacingDirections
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
 	ld [wSpriteStateData1 + 2], a
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_CURMAPTILESET]
 	cp FACILITY
-	ld hl, FacilitySpinnerArrows ; $5023
+	ld hl, FacilitySpinnerArrows
 	jr z, .asm_44ff6
-	ld hl, GymSpinnerArrows ; $5053
+	ld hl, GymSpinnerArrows
 .asm_44ff6
 	ld a, [wSimulatedJoypadStatesIndex]
 	bit 0, a
@@ -429,10 +429,10 @@ RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
 	db $1 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd817 ; flag's byte
-	dw RocketHideout2BattleText2 ; 0x50e8 TextBeforeBattle
-	dw RocketHideout2AfterBattleTxt2 ; 0x50f2 TextAfterBattle
-	dw RocketHideout2EndBattleText2 ; 0x50ed TextEndBattle
-	dw RocketHideout2EndBattleText2 ; 0x50ed TextEndBattle
+	dw RocketHideout2BattleText2 ; TextBeforeBattle
+	dw RocketHideout2AfterBattleTxt2 ; TextAfterBattle
+	dw RocketHideout2EndBattleText2 ; TextEndBattle
+	dw RocketHideout2EndBattleText2 ; TextEndBattle
 
 	db $ff
 

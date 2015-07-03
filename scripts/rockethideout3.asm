@@ -135,7 +135,7 @@ RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
 	db $40,$01
 	db $FF
 
-RocketHideout3Script3 ; 452e4 (11:452e4)
+RocketHideout3Script3: ; 452e4 (11:452e4)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jp nz, LoadSpinnerArrowTiles
@@ -158,19 +158,19 @@ RocketHideout3TrainerHeader0: ; 45302 (11:5302)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd819 ; flag's byte
-	dw RocketHideout3BattleText2 ; 0x5325 TextBeforeBattle
-	dw RocketHideout3AfterBattleTxt2 ; 0x532f TextAfterBattle
-	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
-	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
+	dw RocketHideout3BattleText2 ; TextBeforeBattle
+	dw RocketHideout3AfterBattleTxt2 ; TextAfterBattle
+	dw RocketHideout3EndBattleText2 ; TextEndBattle
+	dw RocketHideout3EndBattleText2 ; TextEndBattle
 
 RocketHideout3TrainerHeader2: ; 4530e (11:530e)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd819 ; flag's byte
-	dw RocketHideout3BattleTxt ; 0x533e TextBeforeBattle
-	dw RocketHideout3AfterBattleText3 ; 0x5348 TextAfterBattle
-	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
-	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
+	dw RocketHideout3BattleTxt ; TextBeforeBattle
+	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
+	dw RocketHideout3EndBattleText3 ; TextEndBattle
+	dw RocketHideout3EndBattleText3 ; TextEndBattle
 
 	db $ff
 

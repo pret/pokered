@@ -65,7 +65,7 @@ Mansion3Script_5225b: ; 5225b (14:625b)
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
@@ -80,7 +80,7 @@ Mansion3Script_Switches: ; 5227a (14:627a)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	jp DisplayTextID
 
 Mansion3TextPointers: ; 5228a (14:628a)
@@ -96,19 +96,19 @@ Mansion3TrainerHeader0: ; 52296 (14:6296)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd849 ; flag's byte
-	dw Mansion3BattleText1 ; 0x62c3 TextBeforeBattle
-	dw Mansion3AfterBattleText1 ; 0x62cd TextAfterBattle
-	dw Mansion3EndBattleText1 ; 0x62c8 TextEndBattle
-	dw Mansion3EndBattleText1 ; 0x62c8 TextEndBattle
+	dw Mansion3BattleText1 ; TextBeforeBattle
+	dw Mansion3AfterBattleText1 ; TextAfterBattle
+	dw Mansion3EndBattleText1 ; TextEndBattle
+	dw Mansion3EndBattleText1 ; TextEndBattle
 
 Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd849 ; flag's byte
-	dw Mansion3BattleText2 ; 0x62d2 TextBeforeBattle
-	dw Mansion3AfterBattleText2 ; 0x62dc TextAfterBattle
-	dw Mansion3EndBattleText2 ; 0x62d7 TextEndBattle
-	dw Mansion3EndBattleText2 ; 0x62d7 TextEndBattle
+	dw Mansion3BattleText2 ; TextBeforeBattle
+	dw Mansion3AfterBattleText2 ; TextAfterBattle
+	dw Mansion3EndBattleText2 ; TextEndBattle
+	dw Mansion3EndBattleText2 ; TextEndBattle
 
 	db $ff
 

@@ -59,82 +59,82 @@ Route25TrainerHeader0: ; 5163e (14:563e)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText1 ; 0x5705 TextBeforeBattle
-	dw Route25AfterBattleText1 ; 0x570f TextAfterBattle
-	dw Route25EndBattleText1 ; 0x570a TextEndBattle
-	dw Route25EndBattleText1 ; 0x570a TextEndBattle
+	dw Route25BattleText1 ; TextBeforeBattle
+	dw Route25AfterBattleText1 ; TextAfterBattle
+	dw Route25EndBattleText1 ; TextEndBattle
+	dw Route25EndBattleText1 ; TextEndBattle
 
 Route25TrainerHeader2: ; 5164a (14:564a)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText2 ; 0x5714 TextBeforeBattle
-	dw Route25AfterBattleText2 ; 0x571e TextAfterBattle
-	dw Route25EndBattleText2 ; 0x5719 TextEndBattle
-	dw Route25EndBattleText2 ; 0x5719 TextEndBattle
+	dw Route25BattleText2 ; TextBeforeBattle
+	dw Route25AfterBattleText2 ; TextAfterBattle
+	dw Route25EndBattleText2 ; TextEndBattle
+	dw Route25EndBattleText2 ; TextEndBattle
 
 Route25TrainerHeader3: ; 51656 (14:5656)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText3 ; 0x5723 TextBeforeBattle
-	dw Route25AfterBattleText3 ; 0x572d TextAfterBattle
-	dw Route25EndBattleText3 ; 0x5728 TextEndBattle
-	dw Route25EndBattleText3 ; 0x5728 TextEndBattle
+	dw Route25BattleText3 ; TextBeforeBattle
+	dw Route25AfterBattleText3 ; TextAfterBattle
+	dw Route25EndBattleText3 ; TextEndBattle
+	dw Route25EndBattleText3 ; TextEndBattle
 
 Route25TrainerHeader4: ; 51662 (14:5662)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText4 ; 0x5732 TextBeforeBattle
-	dw Route25AfterBattleText4 ; 0x573c TextAfterBattle
-	dw Route25EndBattleText4 ; 0x5737 TextEndBattle
-	dw Route25EndBattleText4 ; 0x5737 TextEndBattle
+	dw Route25BattleText4 ; TextBeforeBattle
+	dw Route25AfterBattleText4 ; TextAfterBattle
+	dw Route25EndBattleText4 ; TextEndBattle
+	dw Route25EndBattleText4 ; TextEndBattle
 
 Route25TrainerHeader5: ; 5166e (14:566e)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText5 ; 0x5741 TextBeforeBattle
-	dw Route25AfterBattleText5 ; 0x574b TextAfterBattle
-	dw Route25EndBattleText5 ; 0x5746 TextEndBattle
-	dw Route25EndBattleText5 ; 0x5746 TextEndBattle
+	dw Route25BattleText5 ; TextBeforeBattle
+	dw Route25AfterBattleText5 ; TextAfterBattle
+	dw Route25EndBattleText5 ; TextEndBattle
+	dw Route25EndBattleText5 ; TextEndBattle
 
 Route25TrainerHeader6: ; 5167a (14:567a)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText6 ; 0x5750 TextBeforeBattle
-	dw Route25AfterBattleText6 ; 0x575a TextAfterBattle
-	dw Route25EndBattleText6 ; 0x5755 TextEndBattle
-	dw Route25EndBattleText6 ; 0x5755 TextEndBattle
+	dw Route25BattleText6 ; TextBeforeBattle
+	dw Route25AfterBattleText6 ; TextAfterBattle
+	dw Route25EndBattleText6 ; TextEndBattle
+	dw Route25EndBattleText6 ; TextEndBattle
 
 Route25TrainerHeader7: ; 51686 (14:5686)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText7 ; 0x575f TextBeforeBattle
-	dw Route25AfterBattleText7 ; 0x5769 TextAfterBattle
-	dw Route25EndBattleText7 ; 0x5764 TextEndBattle
-	dw Route25EndBattleText7 ; 0x5764 TextEndBattle
+	dw Route25BattleText7 ; TextBeforeBattle
+	dw Route25AfterBattleText7 ; TextAfterBattle
+	dw Route25EndBattleText7 ; TextEndBattle
+	dw Route25EndBattleText7 ; TextEndBattle
 
 Route25TrainerHeader8: ; 51692 (14:5692)
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText8 ; 0x576e TextBeforeBattle
-	dw Route25AfterBattleText8 ; 0x5778 TextAfterBattle
-	dw Route25EndBattleText8 ; 0x5773 TextEndBattle
-	dw Route25EndBattleText8 ; 0x5773 TextEndBattle
+	dw Route25BattleText8 ; TextBeforeBattle
+	dw Route25AfterBattleText8 ; TextAfterBattle
+	dw Route25EndBattleText8 ; TextEndBattle
+	dw Route25EndBattleText8 ; TextEndBattle
 
 Route25TrainerHeader9: ; 5169e (14:569e)
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
 	dw wd7f1 ; flag's byte
-	dw Route25BattleText9 ; 0x577d TextBeforeBattle
-	dw Route25AfterBattleText9 ; 0x5787 TextAfterBattle
-	dw Route25EndBattleText9 ; 0x5782 TextEndBattle
-	dw Route25EndBattleText9 ; 0x5782 TextEndBattle
+	dw Route25BattleText9 ; TextBeforeBattle
+	dw Route25AfterBattleText9 ; TextAfterBattle
+	dw Route25EndBattleText9 ; TextEndBattle
+	dw Route25EndBattleText9 ; TextEndBattle
 
 	db $ff
 
