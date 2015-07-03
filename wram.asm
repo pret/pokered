@@ -953,7 +953,7 @@ W_TRAINERCLASS:: ; d031
 
 	ds 1
 
-wTrainerPicPointer:: ; wd033
+wTrainerPicPointer:: ; d033
 	ds 2
 	ds 1
 wd036:: ds 16 ; used as a temporary buffer to print "XXX learned YYY"
@@ -1071,7 +1071,7 @@ wPlayerNumAttacksLeft::
 ; when the player is attacking multiple times, the number of attacks left
 	ds 1
 
-W_PLAYERCONFUSEDCOUNTER:: ; wd06b
+W_PLAYERCONFUSEDCOUNTER:: ; d06b
 	ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
@@ -1087,7 +1087,7 @@ wEnemyNumAttacksLeft:: ; d06f
 ; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
-W_ENEMYCONFUSEDCOUNTER:: ; wd070
+W_ENEMYCONFUSEDCOUNTER:: ; d070
 	ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
@@ -1332,10 +1332,10 @@ W_DAMAGE:: ; d0d7
 
 ds 2
 
-wRepelRemainingSteps:: ; wd0db
+wRepelRemainingSteps:: ; d0db
     ds 1
 
-wMoves:: ; wd0dc
+wMoves:: ; d0dc
 ; list of moves for FormatMovesString
 	ds 4
 

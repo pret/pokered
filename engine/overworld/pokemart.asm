@@ -1,7 +1,7 @@
 DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,[wListScrollOffset]
 	ld [wd07e],a
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	xor a
 	ld [wcf0a],a ; flag that is set if something is sold or bought
 .loop
@@ -36,7 +36,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wcf93],a
 	ld a,$02
 	ld [wd11b],a
-	callab Func_39bd5
+	callab InitList
 	ld a,[wNumBagItems]
 	and a
 	jp z,.bagEmpty
@@ -113,7 +113,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wcf93],a
 	ld a,$03
 	ld [wd11b],a
-	callab Func_39bd5
+	callab InitList
 	ld hl,PokemartBuyingGreetingText
 	call PrintText
 	call SaveScreenTilesToBuffer1 ; save screen
@@ -204,7 +204,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	ld a,[wd07e]
 	ld [wListScrollOffset],a
 	ret

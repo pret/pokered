@@ -23,12 +23,12 @@ LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	jr nz, .moveMissed
 	set Seeded, [hl]
 	callab PlayCurrentMoveAnimation
-	ld hl, WasSeededText ; $7ef2
+	ld hl, WasSeededText
 	jp PrintText
 .moveMissed
-	ld c, $32
+	ld c, 50
 	call DelayFrames
-	ld hl, EvadedAttackText ; $7ef7
+	ld hl, EvadedAttackText
 	jp PrintText
 
 WasSeededText: ; 2bef2 (a:7ef2)

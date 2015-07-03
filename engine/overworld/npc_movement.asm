@@ -52,7 +52,7 @@ ProfOakMovementScriptPointerTable: ; 1a442 (6:6442)
 	dw Func_1a4f4
 
 Func_1a44c: ; 1a44c (6:644c)
-	ld a, [W_XCOORD] ; wd362
+	ld a, [W_XCOORD]
 	sub $a
 	ld [wcca1], a
 	jr z, .asm_1a475
@@ -63,7 +63,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 	ld a, $1

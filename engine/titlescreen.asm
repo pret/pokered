@@ -5,10 +5,10 @@ CopyFixedLengthText: ; 42b1 (1:42b1)
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld hl, NintenText
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	call CopyFixedLengthText
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; wd34a
+	ld de, W_RIVALNAME
 	call CopyFixedLengthText
 	xor a
 	ld [hWY], a
@@ -24,7 +24,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	xor a
 	ld [hTilesetType], a
 	ld [hSCX], a
@@ -35,27 +35,27 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
-	ld hl, NintendoCopyrightLogoGraphics ; $60c8
+	ld hl, NintendoCopyrightLogoGraphics
 	ld de, vTitleLogo2 + $100
 	ld bc, $50
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
-	ld hl, GamefreakLogoGraphics ; $61f8
+	ld hl, GamefreakLogoGraphics
 	ld de, vTitleLogo2 + $100 + $50
 	ld bc, $90
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
-	ld hl, PokemonLogoGraphics ; $5380
+	ld hl, PokemonLogoGraphics
 	ld de, vTitleLogo
 	ld bc, $600
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; first chunk
-	ld hl, PokemonLogoGraphics+$600 ; $5980
+	ld hl, PokemonLogoGraphics+$600
 	ld de, vTitleLogo2
 	ld bc, $100
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
-	ld hl, Version_GFX ; $402f
+	ld hl, Version_GFX
 IF DEF(_RED)
 	ld de,vChars2 + $600
 	ld bc,$50
@@ -97,7 +97,7 @@ ENDC
 	ld a, $74
 	ld [hl], a
 	hlCoord 2, 17
-	ld de, .titlescreenTilemap ; $437f
+	ld de, .titlescreenTilemap
 	ld b, $10
 .asm_4377
 	ld a, [de]
@@ -121,7 +121,7 @@ IF DEF(_BLUE)
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	call Func_4524
 	ld a, $9b
 	call Func_4533
@@ -135,9 +135,9 @@ ENDC
 	call GoPAL_SET
 	call GBPalNormal
 	ld a, $e4
-	ld [rOBP0], a ; $ff48
+	ld [rOBP0], a
 	ld bc, $ffaf ; background scroll Y
-	ld hl, .TitleScreenPokemonLogoYScrolls ; $43db
+	ld hl, .TitleScreenPokemonLogoYScrolls
 .asm_43c6
 	ld a, [hli]
 	and a
@@ -176,7 +176,7 @@ ENDC
 	ret
 .asm_43f4
 	call LoadScreenTilesFromBuffer1
-	ld c, $24
+	ld c, 36
 	call DelayFrames
 	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
 	call PlaySound
@@ -219,7 +219,7 @@ ENDC
 	call Func_4496
 	jr .asm_443b
 .asm_4459
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
@@ -227,7 +227,7 @@ ENDC
 	xor a
 	ld [hWY], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
 	ld a, $98
 	call Func_4533
@@ -260,7 +260,7 @@ Func_4496: ; 4496 (1:4496)
 	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 
 ; Can't be the same as before.
 	cp [hl]
@@ -289,7 +289,7 @@ Func_44cf: ; 44cf (1:44cf)
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a ; $ff43
+	ld [rSCX], a
 
 .wait2
 	ld a, [$ff44] ; rLY
@@ -298,14 +298,14 @@ Func_44cf: ; 44cf (1:44cf)
 	ret
 
 Func_44dd: ; 44dd (1:44dd)
-	ld hl, PlayerCharacterTitleGraphics ; $66a8
+	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
 	ld bc, $230
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
 	call ClearSprites
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	ld hl, wOAMBuffer
 	ld de, $605a
 	ld b, $7
@@ -319,10 +319,10 @@ Func_44dd: ; 44dd (1:44dd)
 	ld [hli], a
 	add $8
 	ld e, a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [hli], a
 	inc a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	inc hl
 	dec c
 	jr nz, .asm_44fd
@@ -358,12 +358,12 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 	call LoadTextBoxTilePatterns
 
 LoadCopyrightTiles: ; 4541 (1:4541)
-	ld de, NintendoCopyrightLogoGraphics ; $60c8
+	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
 	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
 	call CopyVideoData
 	hlCoord 2, 7
-	ld de, CopyrightTextString ; $4556
+	ld de, CopyrightTextString
 	jp PlaceString
 
 CopyrightTextString: ; 4556 (1:4556)

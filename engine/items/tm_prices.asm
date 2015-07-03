@@ -6,7 +6,7 @@ GetMachinePrice: ; 7bf86 (1e:7f86)
 	sub TM_01
 	ret c
 	ld d, a
-	ld hl, TechnicalMachinePrices ; $7fa7
+	ld hl, TechnicalMachinePrices
 	srl a
 	ld c, a
 	ld b, 0
@@ -17,9 +17,9 @@ GetMachinePrice: ; 7bf86 (1e:7f86)
 	swap a
 .highNybbleIsPrice
 	and $f0
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [H_DOWNARROWBLINKCNT1], a
 	ld [$ff8d], a
 	ret
 

@@ -21,7 +21,7 @@ EndOfBattle: ; 137aa (4:77aa)
 .placeWinOrLoseString
 	hlCoord 6, 8
 	call PlaceString
-	ld c, $c8
+	ld c, 200
 	call DelayFrames
 	jr .evolution
 .notLinkBattle

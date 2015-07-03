@@ -1,7 +1,7 @@
 ShowPokedexMenu: ; 40000 (10:4000)
 	call GBPalWhiteOut
 	call ClearScreen
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 	ld a,[wListScrollOffset]
 	push af
 	xor a
@@ -140,7 +140,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 .choseCry
 	ld a,[wd11e]
 	call GetCryData ; get cry data
-	call PlaySound ; play sound
+	call PlaySound
 	jr .handleMenuInput
 .choseArea
 	predef LoadTownMap_Nest ; display pokemon areas

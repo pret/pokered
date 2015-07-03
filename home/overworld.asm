@@ -257,7 +257,7 @@ OverworldLoopLessDelay::
 	jr z,.noSpinning
 	callba LoadSpinnerArrowTiles ; spin while moving
 .noSpinning
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 .moveAhead2
 	ld hl,wFlags_0xcd60
 	res 2,[hl]
@@ -335,7 +335,7 @@ OverworldLoopLessDelay::
 	and a
 	jr z,.allPokemonFainted
 .noFaintCheck
-	ld c,$0a
+	ld c,10
 	call DelayFrames
 	jp EnterMap
 .allPokemonFainted
@@ -778,7 +778,7 @@ HandleFlyWarpOrDungeonWarp::
 	call LeaveMapAnim
 	ld a, Bank(SpecialWarpIn)
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	call SpecialWarpIn
 	jp SpecialEnterMap
 
@@ -1358,7 +1358,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	push af
 	ld a,[W_TILESETBANK] ; tile data ROM bank
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; switch to ROM bank that contains tile data
+	ld [MBC1RomBank],a ; switch to ROM bank that contains tile data
 	ld a,[wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
 	ld e,a
 	ld a,[wCurrentTileBlockMapViewPointer + 1]
@@ -1440,7 +1440,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	jr nz,.rowLoop2
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; restore previous ROM bank
+	ld [MBC1RomBank],a ; restore previous ROM bank
 	ret
 
 AdvancePlayerSprite:: ; 0d27 (0:0d27)
@@ -1981,7 +1981,7 @@ RunMapScript:: ; 101b (0:101b)
 	ret
 
 LoadWalkingPlayerSpriteGraphics:: ; 104d (0:104d)
-	ld de,RedSprite ; $4180
+	ld de,RedSprite
 	ld hl,vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
@@ -2276,7 +2276,7 @@ LoadMapHeader:: ; 107c (0:107c)
 	push af
 	ld a, BANK(MapSongBanks)
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	ld hl, MapSongBanks
 	add hl,bc
 	add hl,bc
@@ -2286,7 +2286,7 @@ LoadMapHeader:: ; 107c (0:107c)
 	ld [wd35c],a ; music 2
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	ret
 
 ; function to copy map connection data from ROM to WRAM
@@ -2359,7 +2359,7 @@ LoadMapData:: ; 1241 (0:1241)
 .restoreRomBank
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	ret
 
 ; function to switch to the ROM bank that a map is stored in
@@ -2378,7 +2378,7 @@ SwitchToMapRomBank:: ; 12bc (0:12bc)
 	call BankswitchBack
 	ld a,[$ffe8]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; switch to map ROM bank
+	ld [MBC1RomBank],a ; switch to map ROM bank
 	pop bc
 	pop hl
 	ret

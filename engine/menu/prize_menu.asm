@@ -79,7 +79,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	inc hl
 	push hl
 	ld hl,W_PRIZE1
-	call CopyString      ; XXX what does this do
+	call CopyString
 	pop hl
 	ld a,[hli]
 	ld h,[hl]
@@ -152,7 +152,7 @@ PrintPrizePrice: ; 5287a (14:687a)
 	ld b,$01
 	ld c,$07
 	call TextBoxBorder
-	call UpdateSprites      ; XXX save OAM?
+	call UpdateSprites
 	hlCoord 12, 0
 	ld de,.CoinText
 	call PlaceString

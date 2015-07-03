@@ -52,7 +52,7 @@ MainMenu: ; 5af2 (1:5af2)
 .next2
 	ld hl,wd730
 	res 6,[hl]
-	call UpdateSprites ; OAM?
+	call UpdateSprites
 	xor a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
@@ -208,7 +208,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld a, b
 	ld [wLinkMenuSelectionSendBuffer], a
 	and $3
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 .doneChoosingMenuSelection
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
@@ -261,14 +261,14 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [wd72d], a
 	ld hl, PleaseWaitText
 	call PrintText
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld hl, wd732
 	res 1, [hl]
 	ld a, [W_ANIMATIONID]
 	ld [wDestinationMap], a
 	call SpecialWarpIn
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	xor a
 	ld [wMenuJoypadPollCount], a
@@ -304,7 +304,7 @@ Func_5d52: ; 5d52 (1:5d52)
 	ld hl, wd732
 	res 1, [hl]
 	call OakSpeech
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 
 ; enter map after using a special warp or loading the game from the main menu
@@ -338,7 +338,7 @@ TradeCenterText: ; 5d97 (1:5d97)
 
 ContinueGame: ; 5db5 (1:5db5)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	hlCoord 4, 7
 	ld b, $8
 	ld c, $e
@@ -347,7 +347,7 @@ ContinueGame: ; 5db5 (1:5db5)
 	ld de, SaveScreenInfoText
 	call PlaceString
 	hlCoord 12, 9
-	ld de, wPlayerName ; wd158
+	ld de, wPlayerName
 	call PlaceString
 	hlCoord 17, 11
 	call Func_5e2f
@@ -356,8 +356,8 @@ ContinueGame: ; 5db5 (1:5db5)
 	hlCoord 13, 15
 	call Func_5e55
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld c, $1e
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld c, 30
 	jp DelayFrames
 
 PrintSaveScreenText: ; 5def (1:5def)
@@ -383,7 +383,7 @@ PrintSaveScreenText: ; 5def (1:5def)
 	call Func_5e55
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld c, $1e
+	ld c, 30
 	jp DelayFrames
 
 Func_5e2f: ; 5e2f (1:5e2f)
@@ -398,7 +398,7 @@ Func_5e2f: ; 5e2f (1:5e2f)
 
 Func_5e42: ; 5e42 (1:5e42)
 	push hl
-	ld hl, wPokedexOwned ; wPokedexOwned
+	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	pop hl
@@ -481,7 +481,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	jr nz,.loop
 .exitMenu
 	ld a,(SFX_02_40 - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	call PlaySound
 	ret
 .eraseOldMenuCursor
 	ld [wTopMenuItemX],a

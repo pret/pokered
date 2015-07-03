@@ -77,7 +77,7 @@ _SetSpritePosition2: ; 5685d (15:685d)
 TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	ld a, [wSpriteIndex]
 	swap a
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+	ld [wTrainerSpriteOffset], a
 	call ReadTrainerScreenPosition
 	ld a, [wTrainerFacingDirection]
 	and a
@@ -164,7 +164,7 @@ GetSpriteDataPointer: ; 56903 (15:6903)
 TrainerEngage: ; 5690f (15:690f)
 	push hl
 	push de
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $2
 	ld d, $0
 	ld e, a
@@ -175,7 +175,7 @@ TrainerEngage: ; 5690f (15:690f)
 	jr nz, .spriteOnScreen ; test if sprite is on screen
 	jp .noEngage
 .spriteOnScreen
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $9
 	ld d, $0
 	ld e, a
@@ -218,7 +218,7 @@ TrainerEngage: ; 5690f (15:690f)
 	jp .noEngage
 .engage
 	call CheckPlayerIsInFrontOfSprite
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	and a
 	jr z, .noEngage
 	ld hl, wFlags_0xcd60
@@ -226,14 +226,14 @@ TrainerEngage: ; 5690f (15:690f)
 	call EngageMapTrainer
 	ld a, $ff
 .noEngage: ; 56988 (15:6988)
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+	ld [wTrainerSpriteOffset], a
 	pop de
 	pop hl
 	ret
 
 ; reads trainer's Y position to wTrainerScreenY and X position to wTrainerScreenX
 ReadTrainerScreenPosition: ; 5698e (15:698e)
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $4
 	ld d, $0
 	ld e, a
@@ -241,7 +241,7 @@ ReadTrainerScreenPosition: ; 5698e (15:698e)
 	add hl, de
 	ld a, [hl]
 	ld [wTrainerScreenY], a
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $6
 	ld d, $0
 	ld e, a
@@ -291,10 +291,10 @@ CheckSpriteCanSeePlayer: ; 569af (15:69af)
 
 ; tests if the player is in front of the sprite (rather than behind it)
 CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	cp POWER_PLANT
-	jp z, .engage       ; XXX not sure why bypass this for power plant (maybe to get voltorb fake items to work?)
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work
+	ld a, [wTrainerSpriteOffset]
 	add $4
 	ld d, $0
 	ld e, a
@@ -306,7 +306,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ld a, $c
 .notOnTopmostTile
 	ld [wTrainerScreenY], a
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $6
 	ld d, $0
 	ld e, a
@@ -345,5 +345,5 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 .noEngage
 	xor a
 .done
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+	ld [wTrainerSpriteOffset], a
 	ret

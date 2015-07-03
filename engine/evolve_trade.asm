@@ -31,9 +31,9 @@ EvolveTradeMon: ; 17d7d (5:7d7d)
 	ret nz
 
 .ok
-	ld a, [wPartyCount] ; wPartyCount
+	ld a, [wPartyCount]
 	dec a
-	ld [wWhichPokemon], a ; wWhichPokemon
+	ld [wWhichPokemon], a
 	ld a, $1
 	ld [wccd4], a
 	ld a, LINK_STATE_TRADING

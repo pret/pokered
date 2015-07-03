@@ -7,7 +7,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	push hl
 	ld a, $1
 	ld [hJoy7], a
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	push af
 	ld b, $0
 	call Func_711c4
@@ -19,11 +19,11 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld bc, $10
 	call CopyData
 	ld hl, vSprites + $40
-	ld de, TownMapCursor ; $4f40
+	ld de, TownMapCursor
 	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	pop af
 	jr Func_70e92
 
@@ -31,8 +31,8 @@ Func_70e7e: ; 70e7e (1c:4e7e)
 	ld hl, wTileMap
 	ld bc, $114
 	call ClearScreenArea
-	ld hl, TownMapOrder ; $4f11
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld hl, TownMapOrder
+	ld a, [wWhichTrade]
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -86,22 +86,22 @@ Func_70e92: ; 70e92 (1c:4e92)
 	ld [hl], a
 	ret
 .asm_70ef2
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	inc a
 	cp $2f
 	jr nz, .asm_70efb
 	xor a
 .asm_70efb
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	jp Func_70e7e
 .asm_70f01
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	dec a
 	cp $ff
 	jr nz, .asm_70f0b
 	ld a, $2e
 .asm_70f0b
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	jp Func_70e7e
 
 INCLUDE "data/town_map_order.asm"
@@ -139,11 +139,11 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
-	ld de, BirdSprite ; $4d80
+	ld de, BirdSprite
 	ld hl, vSprites + $40
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
-	ld de, TownMapUpArrow ; $5093
+	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
 	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
@@ -156,7 +156,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wTileMap
 	ld de, ToText
 	call PlaceString
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	ld b, $0
 	call Func_711c4
 	ld hl, wTrainerEngageDistance
@@ -177,7 +177,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	hlCoord 3, 0
 	ld de, wcd6d
 	call PlaceString
-	ld c, $f
+	ld c, 15
 	call DelayFrames
 	hlCoord 18, 0
 	ld [hl], $ed
@@ -248,7 +248,7 @@ ToText: ; 7106d (1c:506d)
 	db "To@"
 
 Func_71070: ; 71070 (1c:5070)
-	ld hl, wWhichTrade ; wWhichTrade
+	ld hl, wWhichTrade
 	ld [hl], $ff
 	inc hl
 	ld a, [W_TOWNVISITEDFLAG]
@@ -283,18 +283,18 @@ LoadTownMap: ; 7109b (1c:509b)
 	ld c, $12
 	call TextBoxBorder
 	call DisableLCD
-	ld hl, WorldMapTileGraphics ; $65a8
+	ld hl, WorldMapTileGraphics
 	ld de, vChars2 + $600
 	ld bc, $100
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
-	ld hl, MonNestIcon ; $56be
+	ld hl, MonNestIcon
 	ld de, vSprites + $40
 	ld bc, $8
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
 	ld hl, wTileMap
-	ld de, CompressedMap ; $5100
+	ld de, CompressedMap
 .asm_710d3
 	ld a, [de]
 	and a
@@ -401,7 +401,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	call PlaceString
 	jr .asm_7123e
 .asm_71236
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	ld b, $0
 	call Func_711c4
 .asm_7123e
@@ -545,7 +545,7 @@ Func_712f1: ; 712f1 (1c:52f1)
 	cp REDS_HOUSE_1F
 	jr c, .asm_71304
 	ld bc, $4
-	ld hl, InternalMapEntries ; $5382
+	ld hl, InternalMapEntries
 .asm_712fb
 	cp [hl]
 	jr c, .asm_71301
@@ -555,7 +555,7 @@ Func_712f1: ; 712f1 (1c:52f1)
 	inc hl
 	jr .asm_7130d
 .asm_71304
-	ld hl, ExternalMapEntries ; $5313
+	ld hl, ExternalMapEntries
 	ld c, a
 	ld b, $0
 	add hl, bc

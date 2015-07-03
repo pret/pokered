@@ -1,4 +1,4 @@
-Func_7bde9: ; 7bde9 (1e:7de9)
+EvolveMon: ; 7bde9 (1e:7de9)
 	push hl
 	push de
 	push bc
@@ -13,17 +13,17 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [wc0ee], a
 	call PlaySound
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, (SFX_08_3c - SFX_Headers_08) / 3
 	call PlaySound
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a
 	ld a, [wHPBarMaxHP]
 	ld [wcf1d], a
 	ld c, $0
-	call Func_7beb4
+	call EvolutionSetWholeScreenPalette
 	ld a, [wHPBarMaxHP + 1]
 	ld [wcf91], a
 	ld [wd0b5], a
@@ -37,23 +37,23 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld [wd0b5], a
 	call Func_7beb9
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wHPBarMaxHP]
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
-	ld c, $50
+	ld c, 80
 	call DelayFrames
 	ld c, $1
-	call Func_7beb4
+	call EvolutionSetWholeScreenPalette
 	ld bc, $110
 .asm_7be63
 	push bc
-	call asm_7befa
+	call Func_7befa
 	jr c, .asm_7bea9
-	call asm_7bec2
+	call Func_7bec2
 	pop bc
 	inc b
 	dec c
@@ -73,7 +73,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld a, [wcf1d]
 	call PlayCry
 	ld c, $0
-	call Func_7beb4
+	call EvolutionSetWholeScreenPalette
 	pop af
 	ld [wd0b5], a
 	pop af
@@ -93,7 +93,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	ld a, [wHPBarMaxHP]
 	jr .asm_7be81
 
-Func_7beb4: ; 7beb4 (1e:7eb4)
+EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
 	ld b, $b
 	jp GoPAL_SET
 
@@ -101,7 +101,8 @@ Func_7beb9: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
 	hlCoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
-asm_7bec2: ; 7bec2 (1e:7ec2)
+
+Func_7bec2: ; 7bec2 (1e:7ec2)
 	ld a, $31
 	ld [wHPBarOldHP], a
 	call Func_7bed6
@@ -109,13 +110,13 @@ asm_7bec2: ; 7bec2 (1e:7ec2)
 	ld [wHPBarOldHP], a
 	call Func_7bed6
 	dec b
-	jr nz, asm_7bec2
+	jr nz, Func_7bec2
 	ret
 
 Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	hlCoord 7, 2
 	ld bc, $707
 	ld de, $d
@@ -132,11 +133,12 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	dec b
 	jr nz, .asm_7bee3
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	pop bc
 	ret
-asm_7befa: ; 7befa (1e:7efa)
+
+Func_7befa: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
@@ -146,7 +148,7 @@ asm_7befa: ; 7befa (1e:7efa)
 	jr nz, .asm_7bf0d
 .asm_7bf08
 	dec c
-	jr nz, asm_7befa
+	jr nz, Func_7befa
 	and a
 	ret
 .asm_7bf0d

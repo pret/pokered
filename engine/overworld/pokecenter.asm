@@ -43,7 +43,7 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 .done
 	ld hl, PokemonCenterFarewellText
 	call PrintText
-	jp UpdateSprites ; move sprites
+	jp UpdateSprites
 
 PokemonCenterWelcomeText: ; 705d (1:705d)
 	TX_FAR _PokemonCenterWelcomeText

@@ -2,7 +2,7 @@
 ; In the Colosseum, it starts a battle. In the Trade Centre, it displays the trade selection screen.
 ; Before doing either action, it swaps random numbers, trainer names and party data with the other gameboy.
 CableClub_DoBattleOrTrade: ; 5317 (1:5317)
-	ld c, $50
+	ld c, 80
 	call DelayFrames
 	call ClearScreen
 	call UpdateSprites
@@ -359,7 +359,7 @@ TradeCenter_SelectMon:
 .displayEnemyMonStats
 	ld a, $1
 	ld [wd11b], a
-	callab Func_39bd5
+	callab InitList
 	ld hl, wEnemyMons
 	call TradeCenter_DisplayStats
 	jp .getNewInput
@@ -418,7 +418,7 @@ TradeCenter_SelectMon:
 ; unreachable code
 	ld a, $4
 	ld [wd11b], a
-	callab Func_39bd5
+	callab InitList
 	call TradeCenter_DisplayStats
 	jp .getNewInput
 .playerMonMenu_ANotPressed
@@ -513,7 +513,7 @@ TradeCenter_SelectMon:
 	ld [wCurrentMenuItem], a
 	ld a, $4
 	ld [wd11b], a
-	callab Func_39bd5
+	callab InitList
 	call TradeCenter_DisplayStats
 	call LoadScreenTilesFromBuffer1
 	jp .playerMonMenu

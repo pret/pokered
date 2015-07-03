@@ -4,19 +4,19 @@ PlayDefaultMusic:: ; 2307 (0:2307)
 	ld c, a
 	ld d, a
 	ld [wcfca], a
-	jr asm_2324
+	jr Func_2324
 
 Func_2312:: ; 2312 (0:2312)
 	ld c, $a
 	ld d, $0
 	ld a, [wd72e]
 	bit 5, a
-	jr z, asm_2324
+	jr z, Func_2324
 	xor a
 	ld [wcfca], a
 	ld c, $8
 	ld d, c
-asm_2324:: ; 2324 (0:2324)
+Func_2324:: ; 2324 (0:2324)
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_2343
@@ -146,27 +146,27 @@ PlaySound:: ; 23b1 (0:23b1)
 	ld [$ffb9], a
 	ld a, [wc0ef]
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
-	cp BANK(Func_9876)
+	ld [MBC1RomBank], a
+	cp BANK(Music2_9876)
 	jr nz, .checkForBank08
 .bank02
 	ld a, b
-	call Func_9876
+	call Music2_9876
 	jr .asm_240b
 .checkForBank08
-	cp BANK(Func_22035)
+	cp BANK(Music8_22035)
 	jr nz, .bank1F
 .bank08
 	ld a, b
-	call Func_22035
+	call Music8_22035
 	jr .asm_240b
 .bank1F
 	ld a, b
-	call Func_7d8ea
+	call Music1f_7d8ea
 .asm_240b
 	ld a, [$ffb9]
 	ld [H_LOADEDROMBANK], a
-	ld [$2000], a
+	ld [MBC1RomBank], a
 	jr .asm_2425
 .asm_2414
 	ld a, b

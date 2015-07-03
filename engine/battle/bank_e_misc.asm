@@ -52,40 +52,40 @@ FormatMovesString: ; 39b87 (e:5b87)
 	ret
 
 ; XXX this is called in a few places, but it doesn't appear to do anything useful
-Func_39bd5: ; 39bd5 (e:5bd5)
+InitList: ; 39bd5 (e:5bd5)
 	ld a, [wd11b]
 	cp $1
-	jr nz, .asm_39be6
+	jr nz, .notEnemy
 	ld hl, wEnemyPartyCount
 	ld de, wEnemyMonOT
 	ld a, ENEMYOT_NAME
-	jr .asm_39c18
-.asm_39be6
+	jr .done
+.notEnemy
 	cp $4
-	jr nz, .calcAttackStat4
+	jr nz, .notPlayer
 	ld hl, wPartyCount
 	ld de, wPartyMonOT
 	ld a, PLAYEROT_NAME
-	jr .asm_39c18
-.calcAttackStat4
+	jr .done
+.notPlayer
 	cp $5
-	jr nz, .asm_39c02
+	jr nz, .notMonster
 	ld hl, wStringBuffer2 + 11
 	ld de, MonsterNames
 	ld a, MONSTER_NAME
-	jr .asm_39c18
-.asm_39c02
+	jr .done
+.notMonster
 	cp $2
-	jr nz, .asm_39c10
+	jr nz, .notBag
 	ld hl, wNumBagItems
 	ld de, ItemNames
 	ld a, ITEM_NAME
-	jr .asm_39c18
-.asm_39c10
+	jr .done
+.notBag
 	ld hl, wStringBuffer2 + 11
 	ld de, ItemNames
 	ld a, ITEM_NAME
-.asm_39c18
+.done
 	ld [wNameListType], a
 	ld a, l
 	ld [wList], a

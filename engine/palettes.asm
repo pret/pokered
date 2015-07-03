@@ -280,7 +280,7 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ret
 
 SendBlkPacket_PartyMenu: ; 71fb6 (1c:5fb6)
-	ld hl, BlkPacket_PartyMenu ; $62f4
+	ld hl, BlkPacket_PartyMenu
 	ld de, wcf2e
 	ld bc, $30
 	jp CopyData
@@ -501,7 +501,7 @@ Func_7210b: ; 7210b (1c:610b)
 	push de
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	ld de, vChars1
 	ld a, [wcf2d]
 	and a
@@ -527,11 +527,11 @@ Func_7210b: ; 7210b (1c:610b)
 	dec c
 	jr nz, .asm_72132
 	ld a, $e3
-	ld [rLCDC], a ; $ff40
+	ld [rLCDC], a
 	pop hl
 	call SendSGBPacket
 	xor a
-	ld [rBGP], a ; $ff47
+	ld [rBGP], a
 	ei
 	ret
 

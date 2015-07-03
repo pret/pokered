@@ -10,7 +10,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld d, a
 	ld e, $1
 	; number of times to play collision sfx
-	ld b, $64
+	ld b, 100
 .asm_7bf30
 	ld a, e
 	xor $fe
@@ -22,7 +22,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld a, (SFX_02_5b - SFX_Headers_02) / 3
 	call PlayMusic
 	pop bc
-	ld c, $2
+	ld c, 2
 	call DelayFrames
 	dec b
 	jr nz, .asm_7bf30

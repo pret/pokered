@@ -128,7 +128,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	jr nz, .skip2
 	ld hl, OutOfCoinsSlotMachineText
 	call PrintText
-	ld c, $3c
+	ld c, 60
 	jp DelayFrames
 .skip2
 	ld hl, OneMoreGoSlotMachineText
@@ -202,13 +202,13 @@ SlotMachine_37480: ; 37480 (d:7480)
 	ret
 
 SlotMachine_374ad: ; 374ad (d:74ad)
-	ld c, $14
+	ld c, 20
 .loop1
 	push bc
 	call SlotMachine_37813
 	call SlotMachine_37823
 	call SlotMachine_37833
-	ld c, $2
+	ld c, 2
 	call DelayFrames
 	pop bc
 	dec c
@@ -437,7 +437,7 @@ SlotMachine_37588: ; 37588 (d:7588)
 	ld a, [$ff47]
 	xor $40
 	ld [$ff47], a
-	ld c, $5
+	ld c, 5
 	call DelayFrames
 	dec b
 	jr nz, .asm_37638
@@ -674,7 +674,7 @@ SlotMachine_3776b: ; 3776b (d:776b)
 	ld [W_SUBANIMTRANSFORM], a
 	ld a, [wTrainerScreenX]
 	cp $7
-	ld c, $8
+	ld c, 8
 	jr nc, .skip2
 	srl c
 .skip2

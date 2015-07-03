@@ -61,7 +61,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon interal id number
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
 	ld [hWY], a
@@ -78,7 +78,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld a, $80
 	ld [$ffe1], a
 	hlCoord 10, 11
-	predef Func_3f073
+	predef AnimateSendingOutMon
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	call Delay3
@@ -125,10 +125,10 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_5dc93 ; 0x5dc74 $1d
+	jr nz, .asm_5dc93
 	ld a, [wCurrentMenuItem]
 	cp $3
-	jr z, .asm_5dc93 ; 0x5dc7b $16
+	jr z, .asm_5dc93
 	ld hl, wd730
 	res 6, [hl]
 	ld hl, LinkCableInfoTexts
@@ -316,7 +316,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
@@ -345,7 +345,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld hl, wd773
 	set 1, [hl]
 
-	ld hl, GymTrashCans ; $5e7d
+	ld hl, GymTrashCans
 	ld a, [wcd5b]
 	; * 5
 	ld b, a

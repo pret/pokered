@@ -15,9 +15,9 @@ Func_79e96: ; 79e96 (1e:5e96)
 	ld [wd08a], a
 	ld c, $2
 	call AdjustOAMBlockXPos2
-	ld a, [rOBP1] ; $ff49
+	ld a, [rOBP1]
 	xor $64
-	ld [rOBP1], a ; $ff49
+	ld [rOBP1], a
 	call DelayFrame
 	pop bc
 	dec c
@@ -65,9 +65,9 @@ Func_79eed: ; 79eed (1e:5eed)
 	ld [wd08a], a
 	ld c, $1
 	call AdjustOAMBlockXPos2
-	ld a, [rOBP1] ; $ff49
+	ld a, [rOBP1]
 	xor $64
-	ld [rOBP1], a ; $ff49
+	ld [rOBP1], a
 	call DelayFrame
 	pop bc
 	dec c

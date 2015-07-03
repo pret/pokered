@@ -662,7 +662,7 @@ Trade_AnimMonMoveVertical: ; 41525 (10:5525)
 .loop
 	call Trade_AddOffsetsToOAMCoords
 	call Trade_AnimCircledMon
-	ld c, $8
+	ld c, 8
 	call DelayFrames
 	dec d
 	jr nz, .loop

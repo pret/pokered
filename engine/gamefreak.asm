@@ -1,25 +1,25 @@
 LoadShootingStarGraphics: ; 70000 (1c:4000)
 	ld a, $f9
-	ld [rOBP0], a ; $ff48
+	ld [rOBP0], a
 	ld a, $a4
-	ld [rOBP1], a ; $ff49
-	ld de, AnimationTileset2 + $30 ; $471e ; star tile (top left quadrant)
+	ld [rOBP1], a
+	ld de, AnimationTileset2 + $30 ; star tile (top left quadrant)
 	ld hl, vChars1 + $200
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	call CopyVideoData
-	ld de, AnimationTileset2 + $130 ; $481e ; star tile (bottom left quadrant)
+	ld de, AnimationTileset2 + $130 ; star tile (bottom left quadrant)
 	ld hl, vChars1 + $210
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	call CopyVideoData
-	ld de, FallingStar ; $4190
+	ld de, FallingStar
 	ld hl, vChars1 + $220
 	ld bc, (BANK(FallingStar) << 8) + $01
 	call CopyVideoData
-	ld hl, GameFreakLogoOAMData ; $4140
+	ld hl, GameFreakLogoOAMData
 	ld de, wOAMBuffer + $60
 	ld bc, $40
 	call CopyData
-	ld hl, GameFreakShootingStarOAMData ; $4180
+	ld hl, GameFreakShootingStarOAMData
 	ld de, wOAMBuffer
 	ld bc, $10
 	jp CopyData
@@ -66,7 +66,7 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	jr nz, .asm_7007b
 	ld b, $3
 .asm_70083
-	ld hl, rOBP0 ; $ff48
+	ld hl, rOBP0
 	rrc [hl]
 	rrc [hl]
 	ld c, $a
@@ -78,15 +78,15 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	ld a, $18
 .asm_70098
 	push af
-	ld hl, OAMData_700ee ; $40ee
+	ld hl, OAMData_700ee
 	ld bc, $4
 	call CopyData
 	pop af
 	dec a
 	jr nz, .asm_70098
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
-	ld hl, PointerTable_700f2 ; $40f2
+	ld [wWhichTrade], a
+	ld hl, PointerTable_700f2
 	ld c, $6
 .asm_700af
 	ld a, [hli]
@@ -110,11 +110,11 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	inc hl
 	dec c
 	jr nz, .asm_700ba
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	cp $18
 	jr z, .asm_700d5
 	add $6
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 .asm_700d5
 	call Func_7011f
 	push af
@@ -174,7 +174,7 @@ Func_7011f: ; 7011f (1c:411f)
 	ld b, $8
 .asm_70121
 	ld hl, wOAMBuffer + $5c
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	ld de, $fffc
 	ld c, a
 .asm_7012b
@@ -182,9 +182,9 @@ Func_7011f: ; 7011f (1c:411f)
 	add hl, de
 	dec c
 	jr nz, .asm_7012b
-	ld a, [rOBP1] ; $ff49
+	ld a, [rOBP1]
 	xor $a0
-	ld [rOBP1], a ; $ff49
+	ld [rOBP1], a
 	ld c, $3
 	call CheckForUserInterruption
 	ret c

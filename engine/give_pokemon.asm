@@ -2,14 +2,14 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	call EnableAutoTextBoxDrawing
 	xor a
 	ld [wccd3], a
-	ld a, [wPartyCount] ; wPartyCount
+	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr c, .asm_4fe01
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	cp MONS_PER_BOX
 	jr nc, .asm_4fdf9
 	xor a
-	ld [W_ENEMYBATTSTATUS3], a ; W_ENEMYBATTSTATUS3
+	ld [W_ENEMYBATTSTATUS3], a
 	ld a, [wcf91]
 	ld [wEnemyMonSpecies2], a
 	callab LoadEnemyMonData
@@ -56,7 +56,7 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld hl, wPokedexOwned ; wPokedexOwned
+	ld hl, wPokedexOwned
 	ld b, $1
 	predef FlagActionPredef
 	pop af

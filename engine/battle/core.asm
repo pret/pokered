@@ -177,7 +177,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld a, $31
 	ld [$ffe1], a
 	hlCoord 1, 5
-	predef Func_3f0c6
+	predef CopyUncompressedPicToTilemap
 	xor a
 	ld [hWY], a
 	ld [rWY], a
@@ -620,7 +620,7 @@ HandlePoisonBurnLeechSeed: ; 3c3bd (f:43bd)
 	or [hl]
 	ret nz          ; test if fainted
 	call DrawHUDsAndHPBars
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	xor a
 	ret
@@ -823,7 +823,7 @@ HandleEnemyMonFainted: ; 3c525 (f:4525)
 	ld [wcd6a], a
 	jp MainInBattleLoop
 
-FaintEnemyPokemon ; 0x3c567
+FaintEnemyPokemon: ; 0x3c567
 	call ReadPlayerMonCurHPAndStatus
 	ld a, [W_ISINBATTLE]
 	dec a
@@ -1020,7 +1020,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	cp LINK_STATE_BATTLING
 	ret z
 	call ScrollTrainerPicAfterBattle
-	ld c, $28
+	ld c, 40
 	call DelayFrames
 	call PrintEndBattleText
 ; win money
@@ -1218,7 +1218,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld bc, $815
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
-	ld c, $28
+	ld c, 40
 	call DelayFrames
 	ld hl, Sony1WinText
 	call PrintText
@@ -1506,7 +1506,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,$CF
 	ld [$FFE1],a
 	hlCoord 15, 6
-	predef Func_3f073
+	predef AnimateSendingOutMon
 	ld a,[wEnemyMonSpecies2]
 	call PlayCry
 	call DrawEnemyHUDAndHPBar
@@ -1836,7 +1836,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	hlCoord 4, 11
-	predef Func_3f073
+	predef AnimateSendingOutMon
 	ld a, [wcf91]
 	call PlayCry
 	call PrintEmptyString
@@ -1852,8 +1852,8 @@ AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	xor a
 	ld [wcd6c], a
 	ld [H_DOWNARROWBLINKCNT1], a
-	predef Func_79aba
-	ld c, $4
+	predef CopyGrowingMonTiles
+	ld c, 4
 	call DelayFrames
 	call .clearScreenArea
 	hlCoord 4, 9
@@ -1862,7 +1862,7 @@ AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	ld [wcd6c], a
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a
-	predef Func_79aba
+	predef CopyGrowingMonTiles
 	call Delay3
 	call .clearScreenArea
 	ld a, $4c
@@ -2110,12 +2110,12 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 ; the following simulates the keystrokes by drawing menus on screen
 	hlCoord 9, 14
 	ld [hl], "▶"
-	ld c, $50
+	ld c, 80
 	call DelayFrames
 	ld [hl], $7f
 	hlCoord 9, 16
 	ld [hl], "▶"
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld [hl], $ec
 	ld a, $2 ; select the "ITEM" menu
@@ -2490,7 +2490,7 @@ PartyMenuOrRockOrRun:
 
 SwitchPlayerMon: ; 3d1ba (f:51ba)
 	callab RetreatMon
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	call AnimateRetreatingPlayerMon
 	ld a, [wWhichPokemon]
@@ -2815,7 +2815,7 @@ AnyMoveToSelect: ; 3d3f5 (f:53f5)
 .asm_3d423
 	ld hl, NoMovesLeftText
 	call PrintText
-	ld c, $3c
+	ld c, 60
 	call DelayFrames
 	xor a
 	ret
@@ -3232,7 +3232,7 @@ playPlayerMoveAnimation
 	call nz,Bankswitch
 	jr MirrorMoveCheck
 playerCheckIfFlyOrChargeEffect
-	ld c,$1E
+	ld c,30
 	call DelayFrames
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,FLY_EFFECT
@@ -3869,7 +3869,7 @@ ExclamationPoint5Text: ; 3db80 (f:5b80)
 ; if the move being used is in set [1-4] from ExclamationPointMoveSets,
 ; use ExclamationPoint[1-4]Text
 ; otherwise, use ExclamationPoint5Text
-; but all five text strings are identical 
+; but all five text strings are identical
 ; this likely had to do with Japanese grammar that got translated,
 ; but the functionality didn't get removed
 DetermineExclamationPointTextNum: ; 3db85 (f:5b85)
@@ -4004,7 +4004,7 @@ PrintCriticalOHKOText: ; 3dc5c (f:5c5c)
 	xor a
 	ld [wCriticalHitOrOHKO], a
 .done
-	ld c, $14
+	ld c, 20
 	jp DelayFrames
 
 CriticalOHKOTextPointers: ; 3dc7a (f:5c7a)
@@ -4691,7 +4691,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 	jr z, .calcCriticalHitProbability
 	ld hl, W_ENEMYMOVEPOWER
 	ld de, W_ENEMYBATTSTATUS2
-.calcCriticalHitProbability      ; 0x3e04f
+.calcCriticalHitProbability
 	ld a, [hld]                  ; read base power from RAM
 	and a
 	ret z                        ; do nothing if zero
@@ -5579,7 +5579,7 @@ CalcHitChance: ; 3e624 (f:6624)
 ; the second iteration multiplies by the evasion ratio
 .loop
 	push bc
-	ld hl, StatModifierRatios  ; $76cb ; stat modifier ratios
+	ld hl, StatModifierRatios  ; stat modifier ratios
 	dec b
 	sla b
 	ld c,b
@@ -5785,7 +5785,7 @@ playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 
 EnemyCheckIfFlyOrChargeEffect: ; 3e7d1 (f:67d1)
 	call SwapPlayerAndEnemyLevels
-	ld c, $1e
+	ld c, 30
 	call DelayFrames
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp FLY_EFFECT
@@ -6456,7 +6456,7 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	ld a, $31
 	ld [$ffe1], a
 	hlCoord 1, 5
-	predef_jump Func_3f0c6
+	predef_jump CopyUncompressedPicToTilemap
 
 ; does nothing since no stats are ever selected (barring glitches)
 DoubleOrHalveSelectedStats: ; 3ed02 (f:6d02)
@@ -6796,11 +6796,11 @@ BattleRandom:
 HandleExplodingAnimation: ; 3eed3 (f:6ed3)
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wEnemyMonType1 ; wcfea
+	ld hl, wEnemyMonType1
 	ld de, W_ENEMYBATTSTATUS1
 	ld a, [W_PLAYERMOVENUM]
 	jr z, .asm_3eeea
-	ld hl, wBattleMonType1 ; wd019
+	ld hl, wBattleMonType1
 	ld de, W_ENEMYBATTSTATUS1
 	ld a, [W_ENEMYMOVENUM]
 .asm_3eeea
@@ -6832,14 +6832,15 @@ PlayMoveAnimation: ; 3ef07 (f:6f07)
 InitBattle: ; 3ef12 (f:6f12)
 	ld a, [W_CUROPPONENT]
 	and a
-	jr z, asm_3ef23
+	jr z, DetermineWildOpponent
 
 InitOpponent: ; 3ef18 (f:6f18)
 	ld a, [W_CUROPPONENT]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
-	jr asm_3ef3d
-asm_3ef23: ; 3ef23 (f:6f23)
+	jr InitBattleCommon
+
+DetermineWildOpponent: ; 3ef23 (f:6f23)
 	ld a, [wd732]
 	bit 1, a
 	jr z, .asm_3ef2f
@@ -6852,7 +6853,7 @@ asm_3ef23: ; 3ef23 (f:6f23)
 	ret nz
 	callab TryDoWildEncounter
 	ret nz
-asm_3ef3d: ; 3ef3d (f:6f3d)
+InitBattleCommon: ; 3ef3d (f:6f3d)
 	ld a, [wMapPalOffset]
 	push af
 	ld hl, wd358
@@ -6874,7 +6875,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	dec a
 	ld [wAICount], a
 	hlCoord 12, 0
-	predef Func_3f0c6
+	predef CopyUncompressedPicToTilemap
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
 	ld a, $2
@@ -6928,7 +6929,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	ld [W_TRAINERCLASS], a
 	ld [$ffe1], a
 	hlCoord 12, 0
-	predef Func_3f0c6
+	predef CopyUncompressedPicToTilemap
 
 ; common code that executes after init battle code specific to trainer or wild battles
 InitBattle_Common: ; 3efeb (f:6feb)
@@ -6974,9 +6975,9 @@ InitBattle_Common: ; 3efeb (f:6feb)
 
 _LoadTrainerPic: ; 3f04b (f:704b)
 ; wd033-wd034 contain pointer to pic
-	ld a, [wTrainerPicPointer] ; wd033
+	ld a, [wTrainerPicPointer]
 	ld e, a
-	ld a, [wTrainerPicPointer + 1] ; wd034
+	ld a, [wTrainerPicPointer + 1]
 	ld d, a ; de contains pointer to trainer pic
 	ld a, [wLinkState]
 	and a
@@ -6991,13 +6992,14 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	jp LoadUncompressedSpriteData
 
 ; unreferenced
-Func_3f069: ; 3f069 (f:7069)
+ResetCryModifiers: ; 3f069 (f:7069)
 	xor a
 	ld [wc0f1], a
 	ld [wc0f2], a
 	jp PlaySound
 
-Func_3f073: ; 3f073 (f:7073)
+; animtes the mon "growing" out of the pokeball
+AnimateSendingOutMon: ; 3f073 (f:7073)
 	ld a, [wPredefRegisters]
 	ld h, a
 	ld a, [wPredefRegisters + 1]
@@ -7016,16 +7018,16 @@ Func_3f073: ; 3f073 (f:7073)
 	ld a, $1
 	ld [wcd6c], a
 	ld bc, $303
-	predef Func_79aba
-	ld c, $4
+	predef CopyGrowingMonTiles
+	ld c, 4
 	call DelayFrames
 	ld bc, -41
 	add hl, bc
 	xor a
 	ld [wcd6c], a
 	ld bc, $505
-	predef Func_79aba
-	ld c, $5
+	predef CopyGrowingMonTiles
+	ld c, 5
 	call DelayFrames
 	ld bc, -41
 	jr .asm_3f0bf
@@ -7035,15 +7037,15 @@ Func_3f073: ; 3f073 (f:7073)
 	add hl, bc
 	ld a, [H_DOWNARROWBLINKCNT1]
 	add $31
-	jr asm_3f0d0
+	jr CopyUncompressedPicToHL
 
-Func_3f0c6: ; 3f0c6 (f:70c6)
+CopyUncompressedPicToTilemap: ; 3f0c6 (f:70c6)
 	ld a, [wPredefRegisters]
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
 	ld a, [$ffe1]
-asm_3f0d0: ; 3f0d0 (f:70d0)
+CopyUncompressedPicToHL: ; 3f0d0 (f:70d0)
 	ld bc, $707
 	ld de, $14
 	push af
@@ -7356,7 +7358,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	cp POISON_EFFECT
 	ret nz
 .didntAffect
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	jp PrintDidntAffectText
 
@@ -7652,7 +7654,7 @@ UpdateStat: ; 3f4c3 (f:74c3)
 UpdateStatDone: ; 3f4ca (f:74ca)
 	ld b, c
 	inc b
-	call Func_3f688
+	call PrintStatText
 	ld hl, W_PLAYERBATTSTATUS2
 	ld de, W_PLAYERMOVENUM
 	ld bc, wccf7
@@ -7822,7 +7824,7 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	jr nz, .recalculateStat
 	ld a, [hl]
 	and a
-	jp z, Func_3f64d
+	jp z, CantLowerAnymore_Pop
 .recalculateStat
 ; recalculate affected stat
 ; paralysis and burn penalties, as well as badge boosts are ignored
@@ -7870,7 +7872,7 @@ UpdateLoweredStatDone: ; 3f62c (f:762c)
 	ld b, c
 	inc b
 	push de
-	call Func_3f688
+	call PrintStatText
 	pop de
 	ld a, [de]
 	cp $44
@@ -7890,7 +7892,7 @@ UpdateLoweredStatDone: ; 3f62c (f:762c)
 	call QuarterSpeedDueToParalysis
 	jp HalveAttackDueToBurn
 
-Func_3f64d: ; 3f64d (f:764d)
+CantLowerAnymore_Pop: ; 3f64d (f:764d)
 	pop de
 	pop hl
 	inc [hl]
@@ -7933,7 +7935,7 @@ FellText: ; 3f683 (f:7683)
 	TX_FAR _FellText
 	db "@"
 
-Func_3f688: ; 3f688 (f:7688)
+PrintStatText: ; 3f688 (f:7688)
 	ld hl, StatsTextStrings
 	ld c, $50
 .asm_3f68d
@@ -8042,7 +8044,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	srl b
 	cp b
 	jr nc, .asm_3f76e
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld a, [W_PLAYERMOVENUM]
 	cp TELEPORT
@@ -8057,7 +8059,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [W_PLAYERMOVENUM]
 	jr .asm_3f7e4
 .asm_3f77e
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld hl, IsUnaffectedText
 	ld a, [W_PLAYERMOVENUM]
@@ -8084,7 +8086,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	srl b
 	cp b
 	jr nc, .asm_3f7c1
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld a, [W_ENEMYMOVENUM]
 	cp TELEPORT
@@ -8099,7 +8101,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 	ld a, [W_ENEMYMOVENUM]
 	jr .asm_3f7e4
 .asm_3f7d1
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	ld hl, IsUnaffectedText
 	ld a, [W_ENEMYMOVENUM]
@@ -8109,7 +8111,7 @@ SwitchAndTeleportEffect: ; 3f739 (f:7739)
 .asm_3f7e4
 	push af
 	call PlayBattleAnimation
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	pop af
 	ld hl, RanFromBattleText
@@ -8377,7 +8379,7 @@ BecameConfusedText: ; 3f9a1 (f:79a1)
 ConfusionEffectFailed: ; 3f9a6 (f:79a6)
 	cp CONFUSION_SIDE_EFFECT
 	ret z
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	jp ConditionalPrintButItFailed
 
@@ -8424,7 +8426,7 @@ RageEffect: ; 3f9df (f:79df)
 	ret
 
 MimicEffect: ; 3f9ed (f:79ed)
-	ld c, $32
+	ld c, 50
 	call DelayFrames
 	call MoveHitTest
 	ld a, [W_MOVEMISSED]

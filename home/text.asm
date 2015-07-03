@@ -293,7 +293,7 @@ Char51:: ; 1ab4 (0:1ab4)
 	hlCoord 1, 13
 	ld bc,$0412
 	call ClearScreenArea
-	ld c,$14
+	ld c,20
 	call DelayFrames
 	pop de
 	hlCoord 1, 14
@@ -308,7 +308,7 @@ Char49:: ; 1ad5 (0:1ad5)
 	hlCoord 1, 10
 	ld bc,$0712
 	call ClearScreenArea
-	ld c,$14
+	ld c,20
 	call DelayFrames
 	pop de
 	pop hl
@@ -690,7 +690,7 @@ TextCommand17:: ; 1ca3 (0:1ca3)
 	ld d,a
 	ld a,[hli]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	push hl
 	ld l,e
 	ld h,d
@@ -698,7 +698,7 @@ TextCommand17:: ; 1ca3 (0:1ca3)
 	pop hl
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	jp NextTextCommand
 
 TextCommandJumpTable:: ; 1cc1 (0:1cc1)
