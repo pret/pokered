@@ -215,7 +215,7 @@ PokemonTower7Text3: ; 60e80 (18:4e80)
 	jp TextScriptEnd
 
 PokemonTower7FujiText:
-	db 8 ; asm
+	TX_ASM
 	ld hl, TowerRescueFujiText
 	call PrintText
 	ld hl, wd7e0

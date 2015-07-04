@@ -11,7 +11,7 @@ BeachHouseTextPointers:
 	dw BeachHouseSign4Text
 
 SurfinDudeText:
-	db 8
+	TX_ASM
 	ld a,[$d471]
 	bit 6,a
 	jr nz,.next
@@ -61,7 +61,7 @@ SurfinDudeText:
 	db "@"
 
 BeachHousePikachuText:
-	db 8
+	TX_ASM
 	ld hl,.BeachHousePikachuText
 	call PrintText
 	ld a,PIKACHU
@@ -74,7 +74,7 @@ BeachHousePikachuText:
 	db "@"
 
 BeachHouseSign1Text:
-	db 8
+	TX_ASM
 	ld hl,.BeachHouseSign1Text2
 	ld a,[$d471]
 	bit 6,a
@@ -92,7 +92,7 @@ BeachHouseSign1Text:
 	db "@"
 
 BeachHouseSign2Text:
-	db 8
+	TX_ASM
 	ld hl,.BeachHouseSign2Text2
 	ld a,[$d471]
 	bit 6,a
@@ -110,7 +110,7 @@ BeachHouseSign2Text:
 	db "@"
 
 BeachHouseSign3Text:
-	db 8
+	TX_ASM
 	ld hl,.BeachHouseSign3Text2
 	ld a,[$d471]
 	bit 6,a
@@ -128,7 +128,7 @@ BeachHouseSign3Text:
 	db "@"
 
 BeachHouseSign4Text:
-	db 8
+	TX_ASM
 	ld a,1
 	ld [$cc3c],a
 	ld a,[$d471]

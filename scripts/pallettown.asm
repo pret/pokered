@@ -166,7 +166,7 @@ PalletTownTextPointers: ; 18f88 (6:4f88)
 	dw PalletTownText7
 
 PalletTownText1: ; 18f96 (6:4f96)
-	db 8
+	TX_ASM
 	ld a,[wcf0d]
 	and a
 	jr nz,.next
@@ -182,7 +182,7 @@ PalletTownText1: ; 18f96 (6:4f96)
 
 OakAppearsText: ; 18fb0 (6:4fb0)
 	TX_FAR _OakAppearsText
-	db 8
+	TX_ASM
 	ld c,10
 	call DelayFrames
 	xor a
