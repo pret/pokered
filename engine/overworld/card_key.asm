@@ -27,7 +27,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	jr z, .noCardKey
 	call GetCoordsInFrontOfPlayer
 	push de
-	ld a, $1
+	tx_pre_id CardKeySuccessText
 	ld [H_DOWNARROWBLINKCNT2], a
 	call PrintPredefTextID
 	pop de
@@ -54,7 +54,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3
 	jp PlaySound
 .noCardKey
-	ld a, $2
+	tx_pre_id CardKeyFailText
 	ld [H_DOWNARROWBLINKCNT2], a
 	jp PrintPredefTextID
 

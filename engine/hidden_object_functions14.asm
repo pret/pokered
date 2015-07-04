@@ -66,8 +66,7 @@ ViridianSchoolNotebookText4: ; 52a03 (14:6a03)
 
 PrintFightingDojoText2: ; 52a08 (14:6a08)
 	call EnableAutoTextBoxDrawing
-	ld a, $37
-	jp PrintPredefTextID
+	tx_pre_jump FightingDojoText_52a10
 
 FightingDojoText_52a10: ; 52a10 (14:6a10)
 	TX_FAR _FightingDojoText_52a10
@@ -75,8 +74,7 @@ FightingDojoText_52a10: ; 52a10 (14:6a10)
 
 PrintFightingDojoText3: ; 52a15 (14:6a15)
 	call EnableAutoTextBoxDrawing
-	ld a, $38
-	jp PrintPredefTextID
+	tx_pre_jump FightingDojoText_52a1d
 
 FightingDojoText_52a1d: ; 52a1d (14:6a1d)
 	TX_FAR _FightingDojoText_52a1d
@@ -84,8 +82,7 @@ FightingDojoText_52a1d: ; 52a1d (14:6a1d)
 
 PrintFightingDojoText: ; 52a22 (14:6a22)
 	call EnableAutoTextBoxDrawing
-	ld a, $36
-	jp PrintPredefTextID
+	tx_pre_jump FightingDojoText
 
 FightingDojoText: ; 52a2a (14:6a2a)
 	TX_FAR _FightingDojoText
@@ -93,11 +90,10 @@ FightingDojoText: ; 52a2a (14:6a2a)
 
 PrintIndigoPlateauHQText: ; 52a2f (14:6a2f)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $27
-	jp PrintPredefTextID
+	tx_pre_jump IndigoPlateauHQText
 
 IndigoPlateauHQText: ; 52a3d (14:6a3d)
 	TX_FAR _IndigoPlateauHQText

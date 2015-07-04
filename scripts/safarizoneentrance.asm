@@ -24,7 +24,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [wJoyIgnore], a
 	xor a
 	ld [hJoyHeld], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + 9], a
 	ld a, [wWhichTrade]
 	cp $1
@@ -247,7 +247,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 .asm_7539c
 	ld hl, .SafariZoneEntranceText_753c0
 	call PrintText
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [wSpriteStateData1 + 9], a
 	ld a, $40
 	ld c, $1

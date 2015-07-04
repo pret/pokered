@@ -30,7 +30,7 @@ Route16GateUpstairsText_4982f: ; 4982f (12:582f)
 Route16GateUpstairsText3: ; 49834 (12:5834)
 	TX_ASM
 	ld hl, Route16GateUpstairsText_4983b
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route16GateUpstairsText_4983b: ; 4983b (12:583b)
 	TX_FAR _Route16GateUpstairsText_4983b
@@ -39,7 +39,7 @@ Route16GateUpstairsText_4983b: ; 4983b (12:583b)
 Route16GateUpstairsText4: ; 49840 (12:5840)
 	TX_ASM
 	ld hl, Route16GateUpstairsText_49847
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route16GateUpstairsText_49847: ; 49847 (12:5847)
 	TX_FAR _Route16GateUpstairsText_49847

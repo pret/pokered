@@ -19,14 +19,14 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld [hli], a
 	ld a, $a
 	ld [hl], a
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [wSpriteStateData1 + $19], a
 	ld a, [$ffaa]
 	cp $2
 	ret z
 	ld a, $7
 	ld [wSpriteStateData2 + $15], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + $19], a
 	ret
 

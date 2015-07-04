@@ -4679,7 +4679,7 @@ SetMapTextPointer:: ; 3f0f (0:3f0f)
 TextPredefs::
 	add_tx_pre CardKeySuccessText                   ; 01
 	add_tx_pre CardKeyFailText                      ; 02
-	add_tx_pre RedBedroomPC                         ; 03
+	add_tx_pre RedBedroomPCText                     ; 03
 	add_tx_pre RedBedroomSNESText                   ; 04
 	add_tx_pre PushStartText                        ; 05
 	add_tx_pre SaveOptionText                       ; 06
@@ -4703,17 +4703,17 @@ TextPredefs::
 	add_tx_pre SaffronCityPokecenterBenchGuyText    ; 18
 	add_tx_pre MtMoonPokecenterBenchGuyText         ; 19
 	add_tx_pre RockTunnelPokecenterBenchGuyText     ; 1A
-	add_tx_pre UnusedBenchGuyText1                  ; 1B
-	add_tx_pre UnusedBenchGuyText2                  ; 1C
-	add_tx_pre UnusedBenchGuyText3                  ; 1D
-	add_tx_pre TerminatorText_62508                 ; 1E
-	add_tx_pre PredefText1f                         ; 1F
+	add_tx_pre UnusedBenchGuyText1                  ; 1B XXX unused
+	add_tx_pre UnusedBenchGuyText2                  ; 1C XXX unused
+	add_tx_pre UnusedBenchGuyText3                  ; 1D XXX unused
+	add_tx_pre UnusedPredefText                     ; 1E XXX unused
+	add_tx_pre PokemonCenterPCText                  ; 1F
 	add_tx_pre ViridianSchoolNotebook               ; 20
 	add_tx_pre ViridianSchoolBlackboard             ; 21
 	add_tx_pre JustAMomentText                      ; 22
-	add_tx_pre PredefText23                         ; 23
+	add_tx_pre OpenBillsPCText                      ; 23
 	add_tx_pre FoundHiddenItemText                  ; 24
-	add_tx_pre HiddenItemBagFullText                ; 25
+	add_tx_pre HiddenItemBagFullText                ; 25 XXX unused
 	add_tx_pre VermilionGymTrashText                ; 26
 	add_tx_pre IndigoPlateauHQText                  ; 27
 	add_tx_pre GameCornerOutOfOrderText             ; 28
@@ -4736,7 +4736,7 @@ TextPredefs::
 	add_tx_pre NewBicycleText                       ; 39
 	add_tx_pre IndigoPlateauStatues                 ; 3A
 	add_tx_pre VermilionGymTrashSuccesText1         ; 3B
-	add_tx_pre VermilionGymTrashSuccesText2         ; 3C
+	add_tx_pre VermilionGymTrashSuccesText2         ; 3C XXX unused
 	add_tx_pre VermilionGymTrashSuccesText3         ; 3D
 	add_tx_pre VermilionGymTrashFailText            ; 3E
 	add_tx_pre TownMapText                          ; 3F

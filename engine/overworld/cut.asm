@@ -185,26 +185,26 @@ Func_f09f: ; f09f (3:709f)
 	add hl, bc
 	ld a, [wSpriteStateData1 + 9]
 	and a
-	jr z, .asm_f0c7
-	cp $4
-	jr z, .asm_f0cf
-	cp $8
-	jr z, .asm_f0d7
+	jr z, .down
+	cp SPRITE_FACING_UP
+	jr z, .up
+	cp SPRITE_FACING_LEFT
+	jr z, .left
 	ld a, [W_XBLOCKCOORD]
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0ec
-.asm_f0c7
+.down
 	ld a, [W_YBLOCKCOORD]
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0df
-.asm_f0cf
+.up
 	ld a, [W_YBLOCKCOORD]
 	and a
 	jr z, .asm_f0e1
 	jr .asm_f0e0
-.asm_f0d7
+.left
 	ld a, [W_XBLOCKCOORD]
 	and a
 	jr z, .asm_f0e6

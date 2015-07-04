@@ -52,11 +52,11 @@ MomHealText2: ; 481c1 (12:41c1)
 RedsHouse1FText2: ; 0x481c6 TV
 	TX_ASM
 	ld a,[wSpriteStateData1 + 9]
-	cp 4
+	cp SPRITE_FACING_UP
 	ld hl,TVWrongSideText
-	jr nz,.done ; if player is not facing up
+	jr nz,.notUp
 	ld hl,StandByMeText
-.done
+.notUp
 	call PrintText
 	jp TextScriptEnd
 

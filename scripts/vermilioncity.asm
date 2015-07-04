@@ -40,7 +40,7 @@ VermilionCityScriptPointers: ; 197dc (6:57dc)
 
 VermilionCityScript0: ; 197e6 (6:57e6)
 	ld a, [wSpriteStateData1 + 9]
-	and a
+	and a ; cp SPRITE_FACING_DOWN
 	ret nz
 	ld hl, CoordsData_19823
 	call ArePlayerCoordsInArray
@@ -54,7 +54,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld a, [wd803]
 	bit 2, a
 	jr nz, .asm_19810
-	ld b, $3f
+	ld b, S_S__TICKET
 	predef IsItemInBag_
 	ld a, b
 	and a
@@ -162,7 +162,7 @@ VermilionCityText3: ; 198b1 (6:58b1)
 	bit 2, a
 	jr nz, .asm_198f6
 	ld a, [wSpriteStateData1 + 9]
-	cp $c
+	cp SPRITE_FACING_RIGHT
 	jr z, .asm_198c8
 	ld hl, VermilionCityCoords1
 	call ArePlayerCoordsInArray

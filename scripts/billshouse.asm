@@ -17,11 +17,11 @@ BillsHouseScript0: ; 1e782 (7:6782)
 
 BillsHouseScript1: ; 1e783 (7:6783)
 	ld a, [wSpriteStateData1 + 9]
-	and a
+	and a ; cp SPRITE_FACING_DOWN
 	ld de, MovementData_1e79c
-	jr nz, .asm_1e78f
+	jr nz, .notDown
 	ld de, MovementData_1e7a0
-.asm_1e78f
+.notDown
 	ld a, $1
 	ld [$ff8c], a
 	call MoveSprite
@@ -32,6 +32,7 @@ BillsHouseScript1: ; 1e783 (7:6783)
 MovementData_1e79c: ; 1e79c (7:679c)
 	db $40,$40,$40,$FF
 
+; make Bill walk around the player
 MovementData_1e7a0: ; 1e7a0 (7:67a0)
 	db $C0,$40,$40,$80,$40,$FF
 

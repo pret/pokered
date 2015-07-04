@@ -39,7 +39,7 @@ Route15GateUpstairsText_4968c: ; 4968c (12:568c)
 Route15GateUpstairsText2: ; 49691 (12:5691)
 	TX_ASM
 	ld hl, Route15GateUpstairsText_49698
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route15GateUpstairsText_49698: ; 49698 (12:5698)
 	TX_FAR _Route15GateUpstairsText_49698

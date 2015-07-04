@@ -233,10 +233,10 @@ ViridianPokecenterHiddenObjects: ; 46b93 (11:6b93)
 ViridianMartHiddenObjects: ; 46ba0 (11:6ba0)
 	db $FF
 ViridianSchoolHiddenObjects: ; 46ba1 (11:6ba1)
-	db $04,$03,$20 ; ViridianSchoolNotebook
+	db $04,$03,(ViridianSchoolNotebook_id - TextPredefs) / 2 + 1
 	db Bank(PrintNotebookText)
 	dw PrintNotebookText
-	db $00,$03,$21 ; ViridianSchoolBlackboard
+	db $00,$03,(ViridianSchoolBlackboard_id - TextPredefs) / 2 + 1
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
 	db $FF
@@ -743,13 +743,13 @@ LavenderHouse1HiddenObjects: ; 46fc2 (11:6fc2)
 	dw PrintMagazinesText
 	db $FF
 CeladonMansion5HiddenObjects: ; 46fd5 (11:6fd5)
-	db $00,$03,$34 ; LinkCableHelp
+	db $00,$03,(LinkCableHelp_id - TextPredefs) / 2 + 1
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
-	db $00,$04,$34 ; LinkCableHelp
+	db $00,$04,(LinkCableHelp_id - TextPredefs) / 2 + 1
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
-	db $04,$03,$35 ; TMNotebook
+	db $04,$03,(TMNotebook_id - TextPredefs) / 2 + 1
 	db Bank(PrintNotebookText)
 	dw PrintNotebookText
 	db $FF

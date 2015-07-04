@@ -6,13 +6,13 @@ AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
 	predef IsItemInBag_  ; IsItemInBag_
 	ld a, b
 	and a
-	ld b, $33 ; GameCornerCoinCaseText
+	ld b, (GameCornerCoinCaseText_id - TextPredefs) / 2 + 1
 	jr z, .printCoinCaseRequired
 	ld hl, wPlayerCoins
 	ld a, [hli]
 	or [hl]
 	jr nz, .done ; able to play
-	ld b, $32 ; GameCornerNoCoinsText
+	ld b, (GameCornerNoCoinsText_id - TextPredefs) / 2 + 1
 .printCoinCaseRequired
 	call EnableAutoTextBoxDrawing
 	ld a, b

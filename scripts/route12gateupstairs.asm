@@ -50,7 +50,7 @@ TM39NoRoomText: ; 495ac (12:55ac)
 Route12GateUpstairsText2: ; 495b1 (12:55b1)
 	TX_ASM
 	ld hl, Route12GateUpstairsText_495b8
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495b8: ; 495b8 (12:55b8)
 	TX_FAR _Route12GateUpstairsText_495b8
@@ -59,21 +59,21 @@ Route12GateUpstairsText_495b8: ; 495b8 (12:55b8)
 Route12GateUpstairsText3: ; 495bd (12:55bd)
 	TX_ASM
 	ld hl, Route12GateUpstairsText_495c4
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495c4: ; 495c4 (12:55c4)
 	TX_FAR _Route12GateUpstairsText_495c4
 	db "@"
 
-Route12GateUpstairsScript_495c9: ; 495c9 (12:55c9)
+GateUpstairsScript_PrintIfFacingUp: ; 495c9 (12:55c9)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
-	jr z, .asm_495d4
+	cp SPRITE_FACING_UP
+	jr z, .up
 	ld a, $1
-	jr .asm_495d8
-.asm_495d4
+	jr .done
+.up
 	call PrintText
 	xor a
-.asm_495d8
+.done
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd

@@ -97,7 +97,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,[wd730]
 	bit 0,a
 	ret nz
-	xor a
+	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpriteStateData1 + 9],a
 	ld a,1
 	ld [wcf0d],a

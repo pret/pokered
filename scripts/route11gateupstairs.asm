@@ -50,8 +50,8 @@ Route11GateUpstairsText_494a3: ; 494a3 (12:54a3)
 Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	TX_ASM
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
-	jp nz, Route12GateUpstairsScript_495c9
+	cp SPRITE_FACING_UP
+	jp nz, GateUpstairsScript_PrintIfFacingUp
 	ld a, [wd7d8]
 	bit 7, a ; fought snorlax?
 	ld hl, BinocularsSnorlaxText
@@ -72,7 +72,7 @@ BinocularsNoSnorlaxText:
 Route11GateUpstairsText4: ; 494ce (12:54ce)
 	TX_ASM
 	ld hl, Route11GateUpstairsText_494d5
-	jp Route12GateUpstairsScript_495c9
+	jp GateUpstairsScript_PrintIfFacingUp
 
 Route11GateUpstairsText_494d5: ; 494d5 (12:54d5)
 	TX_FAR _Route11GateUpstairsText_494d5

@@ -454,6 +454,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, $12
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .done
+; make the player keep facing the rival as he walks away
 .asm_1ce8c
 	ld a, [wcf0f]
 	cp $5
@@ -461,17 +462,17 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, [W_XCOORD]
 	cp $4
 	jr nz, .asm_1cea1
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + 9], a
 	jr .done
 .asm_1cea1
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [wSpriteStateData1 + 9], a
 	jr .done
 .asm_1cea8
 	cp $4
 	ret nz
-	xor a
+	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpriteStateData1 + 9], a
 .done
 	ret

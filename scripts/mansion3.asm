@@ -75,7 +75,7 @@ Mansion3Script_5225b: ; 5225b (14:625b)
 
 Mansion3Script_Switches: ; 5227a (14:627a)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	xor a
 	ld [hJoyHeld], a

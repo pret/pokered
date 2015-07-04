@@ -27,34 +27,34 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	jr nz, .asm_4e90
 	ld a, [wd528]
 	bit 2, a
-	jr z, .asm_4e65
-	xor a
-	jr .asm_4e86
-.asm_4e65
+	jr z, .notDown
+	xor a ; ld a, SPRITE_FACING_DOWN
+	jr .done
+.notDown
 	bit 3, a
-	jr z, .asm_4e6d
-	ld a, $4
-	jr .asm_4e86
-.asm_4e6d
+	jr z, .notUp
+	ld a, SPRITE_FACING_UP
+	jr .done
+.notUp
 	bit 1, a
-	jr z, .asm_4e75
-	ld a, $8
-	jr .asm_4e86
-.asm_4e75
+	jr z, .notLeft
+	ld a, SPRITE_FACING_LEFT
+	jr .done
+.notLeft
 	bit 0, a
-	jr z, .asm_4e7d
-	ld a, $c
-	jr .asm_4e86
-.asm_4e7d
+	jr z, .notRight
+	ld a, SPRITE_FACING_RIGHT
+	jr .done
+.notRight
 	xor a
 	ld [wSpriteStateData1 + 7], a
 	ld [wSpriteStateData1 + 8], a
 	jr .asm_4eab
-.asm_4e86
+.done
 	ld [wSpriteStateData1 + 9], a
 	ld a, [wFontLoaded]
 	bit 0, a
-	jr nz, .asm_4e7d
+	jr nz, .notRight
 .asm_4e90
 	ld a, [wd736]
 	bit 7, a

@@ -1,31 +1,31 @@
 GymStatues: ; 62419 (18:6419)
-; if in a gym and have the corresponding badge, a = $D and jp PrintPredefTextID
-; if in a gym and don’t have the corresponding badge, a = $C and jp PrintPredefTextID
+; if in a gym and have the corresponding badge, a = GymStatueText2_id and jp PrintPredefTextID
+; if in a gym and don’t have the corresponding badge, a = GymStatueText1_id and jp PrintPredefTextID
 ; else ret
 	call EnableAutoTextBoxDrawing
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	ld hl, .BadgeFlags
 	ld a, [W_CURMAP]
 	ld b, a
-.asm_62429
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .asm_62433
+	jr z, .match
 	inc hl
-	jr .asm_62429
-.asm_62433
+	jr .loop
+.match
 	ld b, [hl]
 	ld a, [wd72a]
 	and b
 	cp b
-	ld a, $d
-	jr z, .asm_6243f
-	ld a, $c
-.asm_6243f
+	tx_pre_id GymStatueText2
+	jr z, .haveBadge
+	tx_pre_id GymStatueText1
+.haveBadge
 	jp PrintPredefTextID
 
 .BadgeFlags: ; 62442 (18:6442)
@@ -49,41 +49,53 @@ GymStatueText2: ; 62458 (18:6458)
 
 PrintBenchGuyText: ; 6245d (18:645d)
 	call EnableAutoTextBoxDrawing
-	ld hl, PokeCenterMapIDList
+	ld hl, BenchGuyTextPointers
 	ld a, [W_CURMAP]
 	ld b, a
-.asm_62467
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .asm_62472
+	jr z, .match
 	inc hl
 	inc hl
-	jr .asm_62467
-.asm_62472
+	jr .loop
+.match
 	ld a, [hli]
 	ld b, a
 	ld a, [wSpriteStateData1 + 9]
 	cp b
-	jr nz, .asm_62467
+	jr nz, .loop ; player isn't facing left at the bench guy
 	ld a, [hl]
 	jp PrintPredefTextID
 
-; format: db map id, 08, text id of PredefTextIDPointerTable
-PokeCenterMapIDList: ; 6247e (18:647e)
-	db VIRIDIAN_POKECENTER,$08,$0F
-	db PEWTER_POKECENTER,$08,$10
-	db CERULEAN_POKECENTER,$08,$11
-	db LAVENDER_POKECENTER,$08,$12
-	db VERMILION_POKECENTER,$08,$13
-	db CELADON_POKECENTER,$08,$14
-	db CELADON_HOTEL,$08,$15
-	db FUCHSIA_POKECENTER,$08,$16
-	db CINNABAR_POKECENTER,$08,$17
-	db SAFFRON_POKECENTER,$08,$18
-	db MT_MOON_POKECENTER,$08,$19
-	db ROCK_TUNNEL_POKECENTER,$08,$1A
+; format: db map id, player sprite facing direction, text id of PredefTextIDPointerTable
+BenchGuyTextPointers: ; 6247e (18:647e)
+	db VIRIDIAN_POKECENTER,   SPRITE_FACING_LEFT
+	db (ViridianCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db PEWTER_POKECENTER,     SPRITE_FACING_LEFT
+	db (PewterCityPokecenterBenchGuyText_id     - TextPredefs) / 2 + 1
+	db CERULEAN_POKECENTER,   SPRITE_FACING_LEFT
+	db (CeruleanCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db LAVENDER_POKECENTER,   SPRITE_FACING_LEFT
+	db (LavenderCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db VERMILION_POKECENTER,  SPRITE_FACING_LEFT
+	db (VermilionCityPokecenterBenchGuyText_id  - TextPredefs) / 2 + 1
+	db CELADON_POKECENTER,    SPRITE_FACING_LEFT
+	db (CeladonCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db CELADON_HOTEL,         SPRITE_FACING_LEFT
+	db (CeladonCityHotelText_id                 - TextPredefs) / 2 + 1
+	db FUCHSIA_POKECENTER,    SPRITE_FACING_LEFT
+	db (FuchsiaCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db CINNABAR_POKECENTER,   SPRITE_FACING_LEFT
+	db (CinnabarIslandPokecenterBenchGuyText_id - TextPredefs) / 2 + 1
+	db SAFFRON_POKECENTER,    SPRITE_FACING_LEFT
+	db (SaffronCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db MT_MOON_POKECENTER,    SPRITE_FACING_LEFT
+	db (MtMoonPokecenterBenchGuyText_id         - TextPredefs) / 2 + 1
+	db ROCK_TUNNEL_POKECENTER,SPRITE_FACING_LEFT
+	db (RockTunnelPokecenterBenchGuyText_id     - TextPredefs) / 2 + 1
 	db $FF
 
 ViridianCityPokecenterBenchGuyText: ; 624a3 (18:64a3)
@@ -163,13 +175,12 @@ CeladonCityHotelText: ; 62502 (18:6502)
 
 	ret
 
-TerminatorText_62508: ; 62508 (18:6508)
+UnusedPredefText: ; 62508 (18:6508)
 	db "@"
 
 PrintBookcaseText: ; 6509 (18:6509)
 	call EnableAutoTextBoxDrawing
-	ld a, $e ; BookcaseText
-	jp PrintPredefTextID
+	tx_pre_jump BookcaseText
 
 BookcaseText: ; 62511 (18:6511)
 	TX_FAR _BookcaseText
@@ -177,13 +188,12 @@ BookcaseText: ; 62511 (18:6511)
 
 OpenPokemonCenterPC: ; 62516 (18:6516)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4 ; check to see if player is facing up
+	cp SPRITE_FACING_UP ; check to see if player is facing up
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [wAutoTextBoxDrawingControl], a
-	ld a, $1f ; PredefText1f
-	jp PrintPredefTextID
+	tx_pre_jump PokemonCenterPCText
 
-PredefText1f: ; 62529 (18:6529)
+PokemonCenterPCText: ; 62529 (18:6529)
 	db $F9 ; FuncTX_PokemonCenterPC

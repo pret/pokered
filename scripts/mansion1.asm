@@ -48,7 +48,7 @@ Mansion1ReplaceBlock: ; 44310 (11:4310)
 
 Mansion1Script_Switches: ; 44316 (11:4316)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	xor a
 	ld [hJoyHeld], a

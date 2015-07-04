@@ -85,11 +85,11 @@ CopycatsHouse2FText6: ; 5ccfe (17:4cfe)
 CopycatsHouse2FText7: ; 5cd03 (17:4d03)
 	TX_ASM
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ld hl, CopycatsHouse2FText_5cd1c
-	jr nz, .asm_399a4
+	jr nz, .notUp
 	ld hl, CopycatsHouse2FText_5cd17
-.asm_399a4
+.notUp
 	call PrintText
 	jp TextScriptEnd
 

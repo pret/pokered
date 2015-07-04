@@ -16,8 +16,7 @@ HiddenItems: ; 76688 (1d:6688)
 	ld a, [wWhichTrade] ; item ID
 	ld [wd11e], a
 	call GetItemName
-	ld a, $24
-	jp PrintPredefTextID
+	tx_pre_jump FoundHiddenItemText
 
 INCLUDE "data/hidden_item_coords.asm"
 
@@ -112,10 +111,10 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld a, [wPlayerCoins + 1]
 	cp $99
 	jr nz, .RoomInCoinCase
-	ld a, $2c
+	tx_pre_id DroppedHiddenCoinsText
 	jr .done
 .RoomInCoinCase
-	ld a, $2b
+	tx_pre_id FoundHiddenCoinsText
 .done
 	jp PrintPredefTextID
 

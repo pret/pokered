@@ -1,7 +1,6 @@
 PrintNewBikeText: ; 1e94b (7:694b)
 	call EnableAutoTextBoxDrawing
-	ld a, $39
-	jp PrintPredefTextID
+	tx_pre_jump NewBicycleText
 
 NewBicycleText: ; 1e953 (7:6953)
 	TX_FAR _NewBicycleText
@@ -9,8 +8,7 @@ NewBicycleText: ; 1e953 (7:6953)
 
 DisplayOakLabLeftPoster: ; 1e958 (7:6958)
 	call EnableAutoTextBoxDrawing
-	ld a, $05 ; PushStartText
-	jp PrintPredefTextID
+	tx_pre_jump PushStartText
 
 PushStartText: ; 1e960 (7:6960)
 	TX_FAR _PushStartText
@@ -23,10 +21,10 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	call CountSetBits
 	ld a, [wd11e]
 	cp $2
-	ld a, $6 ; SaveOptionText
-	jr c, .asm_1e97b
-	ld a, $7 ; StrengthsAndWeaknessesText
-.asm_1e97b
+	tx_pre_id SaveOptionText
+	jr c, .ownThreeOrMoreMon
+	tx_pre_id StrengthsAndWeaknessesText
+.ownThreeOrMoreMon
 	jp PrintPredefTextID
 
 SaveOptionText: ; 1e97e (7:697e)
@@ -120,11 +118,10 @@ GameOverText: ; 1ea12 (7:6a12)
 
 PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $31
-	jp PrintPredefTextID
+	tx_pre_jump CinnabarGymQuiz
 
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	TX_ASM
@@ -309,8 +306,7 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 
 PrintMagazinesText: ; 1eb60 (7:6b60)
 	call EnableAutoTextBoxDrawing
-	ld a, $30
-	call PrintPredefTextID
+	tx_pre MagazinesText
 	ret
 
 MagazinesText: ; 1eb69 (7:6b69)
@@ -320,7 +316,7 @@ MagazinesText: ; 1eb69 (7:6b69)
 BillsHousePC: ; 1eb6e (7:6b6e)
 	call EnableAutoTextBoxDrawing
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	ld a, [wd7f2]
 	bit 7, a
@@ -330,13 +326,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	bit 6, a
 	jr nz, .asm_1eb8b
 .asm_1eb86
-	ld a, $2d
-	jp PrintPredefTextID
+	tx_pre_jump BillsHouseMonitorText
 .asm_1eb8b
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, $2e
-	call PrintPredefTextID
+	tx_pre BillsHouseInitiatedText
 	ld c, 32
 	call DelayFrames
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
@@ -364,8 +358,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 .asm_1ebd2
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, $2f
-	call PrintPredefTextID
+	tx_pre BillsHousePokemonList
 	ret
 
 BillsHouseMonitorText: ; 1ebdd (7:6bdd)
@@ -459,11 +452,10 @@ BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 
 DisplayOakLabEmailText: ; 1ecaf (7:6caf)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $8 ; OakLabEmailText
-	jp PrintPredefTextID
+	tx_pre_jump OakLabEmailText
 
 OakLabEmailText: ; 1ecbd (7:6cbd)
 	TX_FAR _OakLabEmailText

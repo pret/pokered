@@ -27,13 +27,13 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 	call PromptUserToPlaySlots
 	ret
 .printOutOfOrder
-	ld a, $28
+	tx_pre_id GameCornerOutOfOrderText
 	jr .printText
 .printOutToLunch
-	ld a, $29
+	tx_pre_id GameCornerOutToLunchText
 	jr .printText
 .printSomeonesKeys
-	ld a, $2a
+	tx_pre_id GameCornerSomeonesKeysText
 .printText
 	push af
 	call EnableAutoTextBoxDrawing
