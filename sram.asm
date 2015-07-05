@@ -12,34 +12,34 @@ sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
 SECTION "Save Data", SRAM, BANK[1]
 	ds $598
 
-S_SAVEDPLAYERNAME:: ds 11 ; a598
-S_SAVEDMAINDATA:: ds W_NUMINBOX - wPokedexOwned ; a5a3
-S_SAVEDSPRITEDATA:: ds $200 ; wOAMBuffer - wSpriteStateData1 ; ad2c
-S_SAVEDPARTYDATA:: ds wPokedexOwned - wPartyCount ; af2c
-S_SAVEDCURBOXDATA:: ds wBoxMonNicksEnd - W_NUMINBOX ; b0c0
-S_SAVEDhTilesetType:: ds 1 ; b522
-S_SAVEDMAINDATACHECKSUM:: ds 1 ; b523
+sPlayerName::  ds 11 ; a598
+sMainData::    ds W_NUMINBOX - wPokedexOwned ; a5a3
+sSpriteData::  ds $200 ; wOAMBuffer - wSpriteStateData1 ; ad2c
+sPartyData::   ds wPokedexOwned - wPartyCount ; af2c
+sCurBoxData::  ds wBoxMonNicksEnd - W_NUMINBOX ; b0c0
+sTilesetType:: ds 1 ; b522
+sMainDataCheckSum:: ds 1 ; b523
 
 
 SECTION "Saved Boxes 1", SRAM, BANK[2]
 
-S_SAVEDBOX1:: ds wBoxMonNicksEnd - W_NUMINBOX ; a000
-S_SAVEDBOX2:: ds wBoxMonNicksEnd - W_NUMINBOX ; a462
-S_SAVEDBOX3:: ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
-S_SAVEDBOX4:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
-S_SAVEDBOX5:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
-S_SAVEDBOX6:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
-S_SAVEDBOXES1CHECKSUM:: ds 1 ; ba4c
-S_SAVEDBOXES1CHECKSUM2:: ds 6 ; ba4d
+sBox1:: ds wBoxMonNicksEnd - W_NUMINBOX ; a000
+sBox2:: ds wBoxMonNicksEnd - W_NUMINBOX ; a462
+sBox3:: ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
+sBox4:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
+sBox5:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
+sBox6:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
+sBoxes1CheckSum:: ds 1 ; ba4c
+sBoxes1CheckSum2:: ds 6 ; ba4d
 
 
 SECTION "Saved Boxes 2", SRAM, BANK[3]
 
-S_SAVEDBOX7::  ds wBoxMonNicksEnd - W_NUMINBOX ; a000
-S_SAVEDBOX8::  ds wBoxMonNicksEnd - W_NUMINBOX ; a462
-S_SAVEDBOX9::  ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
-S_SAVEDBOX10:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
-S_SAVEDBOX11:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
-S_SAVEDBOX12:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
-S_SAVEDBOXES2CHECKSUM:: ds 1 ; ba4c
-S_SAVEDBOXES2CHECKSUM2:: ds 6 ; ba4d
+sBox7::  ds wBoxMonNicksEnd - W_NUMINBOX ; a000
+sBox8::  ds wBoxMonNicksEnd - W_NUMINBOX ; a462
+sBox9::  ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
+sBox10:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
+sBox11:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
+sBox12:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
+sBoxes2CheckSum:: ds 1 ; ba4c
+sBoxes2CheckSum2:: ds 6 ; ba4d
