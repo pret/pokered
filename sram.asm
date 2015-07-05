@@ -1,0 +1,45 @@
+SECTION "Sprite Buffers", SRAM, BANK[0]
+
+S_SPRITEBUFFER0:: ds SPRITEBUFFERSIZE ; a000
+S_SPRITEBUFFER1:: ds SPRITEBUFFERSIZE ; a188
+S_SPRITEBUFFER2:: ds SPRITEBUFFERSIZE ; a310
+
+	ds $100
+
+sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
+
+
+SECTION "Save Data", SRAM, BANK[1]
+	ds $598
+
+S_SAVEDPLAYERNAME:: ds 11 ; a598
+S_SAVEDMAINDATA:: ds W_NUMINBOX - wPokedexOwned ; a5a3
+S_SAVEDSPRITEDATA:: ds $200 ; wOAMBuffer - wSpriteStateData1 ; ad2c
+S_SAVEDPARTYDATA:: ds wPokedexOwned - wPartyCount ; af2c
+S_SAVEDCURBOXDATA:: ds wBoxMonNicksEnd - W_NUMINBOX ; b0c0
+S_SAVEDhTilesetType:: ds 1 ; b522
+S_SAVEDMAINDATACHECKSUM:: ds 1 ; b523
+
+
+SECTION "Saved Boxes 1", SRAM, BANK[2]
+
+S_SAVEDBOX1:: ds wBoxMonNicksEnd - W_NUMINBOX ; a000
+S_SAVEDBOX2:: ds wBoxMonNicksEnd - W_NUMINBOX ; a462
+S_SAVEDBOX3:: ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
+S_SAVEDBOX4:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
+S_SAVEDBOX5:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
+S_SAVEDBOX6:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
+S_SAVEDBOXES1CHECKSUM:: ds 1 ; ba4c
+S_SAVEDBOXES1CHECKSUM2:: ds 6 ; ba4d
+
+
+SECTION "Saved Boxes 2", SRAM, BANK[3]
+
+S_SAVEDBOX7::  ds wBoxMonNicksEnd - W_NUMINBOX ; a000
+S_SAVEDBOX8::  ds wBoxMonNicksEnd - W_NUMINBOX ; a462
+S_SAVEDBOX9::  ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
+S_SAVEDBOX10:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
+S_SAVEDBOX11:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
+S_SAVEDBOX12:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
+S_SAVEDBOXES2CHECKSUM:: ds 1 ; ba4c
+S_SAVEDBOXES2CHECKSUM2:: ds 6 ; ba4d
