@@ -848,7 +848,7 @@ FaintEnemyPokemon: ; 0x3c567
 	ld [hl], a
 	ld [W_ENEMYDISABLEDMOVE], a
 	ld [wEnemyDisabledMoveNumber], a
-	ld [wccf3], a
+	ld [wEnemyMonMinimized], a
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
@@ -1376,7 +1376,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld [hl],a
 	ld [W_ENEMYDISABLEDMOVE],a
 	ld [wEnemyDisabledMoveNumber],a
-	ld [wccf3],a
+	ld [wEnemyMonMinimized],a
 	ld hl,wPlayerUsedMove
 	ld [hli],a
 	ld [hl],a
@@ -1826,7 +1826,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld [hl], a
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [wPlayerDisabledMoveNumber], a
-	ld [wccf7], a
+	ld [wPlayerMonMinimized], a
 	ld b, $1
 	call GoPAL_SET
 	ld hl, W_ENEMYBATTSTATUS1
@@ -2448,7 +2448,7 @@ PartyMenuOrRockOrRun:
 	ld hl, AnimationSubstitute
 	jr nz, .doEnemyMonAnimation
 ; enemy mon doesn't have substitute
-	ld a, [wccf3]
+	ld a, [wEnemyMonMinimized]
 	and a ; has the enemy mon used Minimise?
 	ld hl, AnimationMinimizeMon
 	jr nz, .doEnemyMonAnimation
@@ -3215,9 +3215,9 @@ getPlayerAnimationType
 playPlayerMoveAnimation
 	push af
 	ld a,[W_PLAYERBATTSTATUS2]
-	bit 4,a
-	ld hl,Func_79747
-	ld b,BANK(Func_79747)
+	bit HasSubstituteUp,a
+	ld hl,HideSubstituteShowMonAnim
+	ld b,BANK(HideSubstituteShowMonAnim)
 	call nz,Bankswitch
 	pop af
 	ld [wAnimationType],a
@@ -3226,9 +3226,9 @@ playPlayerMoveAnimation
 	call HandleExplodingAnimation
 	call DrawPlayerHUDAndHPBar
 	ld a,[W_PLAYERBATTSTATUS2]
-	bit 4,a
-	ld hl,Func_79771
-	ld b,BANK(Func_79771)
+	bit HasSubstituteUp,a
+	ld hl,ReshowSubstituteAnim
+	ld b,BANK(ReshowSubstituteAnim)
 	call nz,Bankswitch
 	jr MirrorMoveCheck
 playerCheckIfFlyOrChargeEffect
@@ -5089,7 +5089,7 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld a,[H_WHOSETURN]
 	xor a,$01
 	ld [H_WHOSETURN],a
-	callab Func_79747 ; animate the substitute breaking
+	callab HideSubstituteShowMonAnim ; animate the substitute breaking
 ; flip the turn back to the way it was
 	ld a,[H_WHOSETURN]
 	xor a,$01
@@ -5767,8 +5767,8 @@ playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 	push af
 	ld a, [W_ENEMYBATTSTATUS2]
 	bit HasSubstituteUp, a ; does mon have a substitute?
-	ld hl, Func_79747
-	ld b, BANK(Func_79747)
+	ld hl, HideSubstituteShowMonAnim
+	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	pop af
 	ld [wAnimationType], a
@@ -5778,8 +5778,8 @@ playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 	call DrawEnemyHUDAndHPBar
 	ld a, [W_ENEMYBATTSTATUS2]
 	bit HasSubstituteUp, a ; does mon have a substitute?
-	ld hl, Func_79771
-	ld b, BANK(Func_79771)
+	ld hl, ReshowSubstituteAnim
+	ld b, BANK(ReshowSubstituteAnim)
 	call nz, Bankswitch ; slide the substitute's sprite out
 	jr EnemyCheckIfMirrorMoveEffect
 
@@ -7657,24 +7657,26 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	call PrintStatText
 	ld hl, W_PLAYERBATTSTATUS2
 	ld de, W_PLAYERMOVENUM
-	ld bc, wccf7
+	ld bc, wPlayerMonMinimized
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3f4e6
 	ld hl, W_ENEMYBATTSTATUS2
 	ld de, W_ENEMYMOVENUM
-	ld bc, wccf3
+	ld bc, wEnemyMonMinimized
 .asm_3f4e6
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .asm_3f4f9
-	bit HasSubstituteUp, [hl] ; substitute
+ ; if a substitute is up, slide off the substitute and show the mon pic before
+ ; playing the minimize animation
+	bit HasSubstituteUp, [hl]
 	push af
 	push bc
-	ld hl, Func_79747
-	ld b, BANK(Func_79747)
+	ld hl, HideSubstituteShowMonAnim
+	ld b, BANK(HideSubstituteShowMonAnim)
 	push de
-	call nz, Bankswitch ; play Minimize animation unless there's Substitute involved
+	call nz, Bankswitch
 	pop de
 .asm_3f4f9
 	call PlayCurrentMoveAnimation
@@ -7684,8 +7686,8 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	pop bc
 	ld a, $1
 	ld [bc], a
-	ld hl, Func_79771
-	ld b, BANK(Func_79771)
+	ld hl, ReshowSubstituteAnim
+	ld b, BANK(ReshowSubstituteAnim)
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties
