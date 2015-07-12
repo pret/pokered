@@ -85,10 +85,10 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	dbw $03,GiveItem
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
-	add_predef Func_480ff
+	add_predef PredefShakeScreenVertically
 	add_predef CalcPositionOfPlayerRelativeToNPC
 	add_predef ConvertNPCMovementDirectionsToJoypadMasks
-	add_predef Func_48125
+	add_predef PredefShakeScreenHorizontally
 	add_predef UpdateHPBar
 	add_predef HPBarLength
 	add_predef Diploma_TextBoxBorder

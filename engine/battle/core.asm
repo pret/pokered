@@ -3958,7 +3958,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld hl, KeptGoingAndCrashedText
 	call PrintText
 	ld b, $4
-	predef Func_48125
+	predef PredefShakeScreenHorizontally
 	ld a, [H_WHOSETURN]
 	and a
 	jr nz, .enemyTurn

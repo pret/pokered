@@ -1223,7 +1223,7 @@ W_FBMODE:: ; d09e
 wNewTileBlockID:: ; d09f
 
 wd09f:: ds 1 ; used with predef ReplaceTileBlock
-wd0a0:: ds 1 ; used in VBlank and ChangeBGPalColor0_4Frames
+wDisableVBlankWYUpdate:: ds 1 ; if non-zero, don't update WY during V-blank
 
 W_SPRITECURPOSX:: ; d0a1
 	ds 1
