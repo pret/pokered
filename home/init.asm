@@ -101,9 +101,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, $9c
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	xor a
-	ld [$ffbc], a
+	ld [H_AUTOBGTRANSFERDEST], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 

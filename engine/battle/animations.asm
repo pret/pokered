@@ -2871,7 +2871,7 @@ Func_79de9: ; 79de9 (1e:5de9)
 
 Func_79e0d: ; 79e0d (1e:5e0d)
 	ld a, h
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	jp Delay3

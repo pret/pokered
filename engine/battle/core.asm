@@ -6943,12 +6943,12 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	call SaveScreenTilesToBuffer1
 	call ClearScreen
 	ld a, $98
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	ld a, $9c
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	call LoadScreenTilesFromBuffer1
 	hlCoord 9, 7
 	ld bc, $50a
