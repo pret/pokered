@@ -49,7 +49,7 @@ DayCareMText1: ; 56254 (15:6254)
 	ld [W_DAYCARE_IN_USE], a
 	ld a, $3
 	ld [wcf95], a
-	call Func_3a68
+	call MoveMon
 	xor a
 	ld [wcf95], a
 	call RemovePokemon
@@ -158,14 +158,14 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	predef SubBCDPredef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareMText_5644f
 	call PrintText
 	ld a, $2
 	ld [wcf95], a
-	call Func_3a68
+	call MoveMon
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
 	ld a, [wPartyCount]

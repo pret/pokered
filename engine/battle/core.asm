@@ -1142,8 +1142,8 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, [wd12e]
-	cp $2 ; did the player choose NO?
+	ld a, [wMenuExitMethod]
+	cp CHOSE_SECOND_ITEM ; did the player choose NO?
 	jr z, .tryRunning ; if the player chose NO, try running
 	and a ; reset carry
 	ret
@@ -2296,7 +2296,7 @@ DisplayPlayerBag:
 
 DisplayBagMenu:
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	ld a, [wcc2c]

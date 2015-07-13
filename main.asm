@@ -1457,7 +1457,7 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	set 6, a ; no printing delay
 	ld [wd730], a
 	xor a
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -1482,24 +1482,24 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	jr nz, .pressedA
 	bit 1, a ; was B pressed? (always true since only A/B are watched)
 	jr z, .pressedA
-	ld a, $2
-	ld [wd12e], a
+	ld a, CANCELLED_MENU
+	ld [wMenuExitMethod], a
 	jr .quit
 .pressedA
-	ld a, $1
-	ld [wd12e], a
+	ld a, CHOSE_MENU_ITEM
+	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	ld b, a
 	ld a, [wMaxMenuItem]
 	cp b
 	jr z, .quit
 	ret
 .quit
-	ld a, $2
-	ld [wd12e], a
+	ld a, CANCELLED_MENU
+	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	scf
 	ret
 
@@ -1512,9 +1512,12 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	ld a, [wd730]
 	set 6, a ; no printing delay
 	ld [wd730], a
+
+; pointless because both values are overwritten before they are read
 	xor a
-	ld [wd12d], a
-	ld [wd12e], a
+	ld [wChosenMenuItem], a
+	ld [wMenuExitMethod], a
+
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $1
@@ -1614,23 +1617,23 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
 .pressedAButton
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	and a
 	jr nz, .choseSecondMenuItem
 ; chose first menu item
-	ld a, $1
-	ld [wd12e], a
+	ld a, CHOSE_FIRST_ITEM
+	ld [wMenuExitMethod], a
 	ld c, 15
 	call DelayFrames
 	call TwoOptionMenu_RestoreScreenTiles
 	and a
 	ret
 .choseSecondMenuItem
-	ld a, $1
+	ld a, 1
 	ld [wCurrentMenuItem], a
-	ld [wd12d], a
-	ld a, $2
-	ld [wd12e], a
+	ld [wChosenMenuItem], a
+	ld a, CHOSE_SECOND_ITEM
+	ld [wMenuExitMethod], a
 	ld c, 15
 	call DelayFrames
 	call TwoOptionMenu_RestoreScreenTiles
@@ -2631,7 +2634,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 .noBlackOut
 	xor a
 .done
-	ld [wd12d], a
+	ld [wOutOfBattleBlackout], a
 	ret
 
 LoadTilesetHeader: ; c754 (3:4754)
@@ -2777,10 +2780,10 @@ CyclingIsFunText: ; cdff (3:4dff)
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
-; [wcf96] = item quantity
+; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory_: ; ce04 (3:4e04)
-	ld a,[wcf96] ; a = item quantity
+	ld a,[wItemQuantity] ; a = item quantity
 	push af
 	push bc
 	push de
@@ -2827,12 +2830,12 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	add hl,bc ; hl = address to store the item
 	ld a,[wcf91]
 	ld [hli],a ; store item ID
-	ld a,[wcf96]
+	ld a,[wItemQuantity]
 	ld [hli],a ; store item quantity
 	ld [hl],$ff ; store terminator
 	jp .success
 .increaseItemQuantity ; increase the quantity of an item already in the inventory
-	ld a,[wcf96]
+	ld a,[wItemQuantity]
 	ld b,a ; b = quantity to add
 	ld a,[hl] ; a = existing item quantity
 	add b ; a = new item quantity
@@ -2841,7 +2844,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 ; if the new quantity is greater than or equal to 100,
 ; try to max out the current slot and add the rest in a new slot
 	sub a,99
-	ld [wcf96],a ; a = amount left over (to put in the new slot)
+	ld [wItemQuantity],a ; a = amount left over (to put in the new slot)
 	ld a,d
 	and a ; is there room for a new item slot?
 	jr z,.increaseItemQuantityFailed
@@ -2864,14 +2867,14 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	pop bc
 	pop bc
 	ld a,b
-	ld [wcf96],a ; restore the initial value from when the function was called
+	ld [wItemQuantity],a ; restore the initial value from when the function was called
 	ret
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
-; [wcf96] = quantity to remove
+; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory_: ; ce74 (3:4e74)
 	push hl
 	inc hl
@@ -2883,12 +2886,12 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	inc h
 .noCarry
 	inc hl
-	ld a,[wcf96] ; quantity being removed
+	ld a,[wItemQuantity] ; quantity being removed
 	ld e,a
 	ld a,[hl] ; a = current quantity
 	sub e
 	ld [hld],a ; store new quantity
-	ld [wcf97],a
+	ld [wMaxItemQuantity],a
 	and a
 	jr nz,.skipMovingUpSlots
 ; if the remaining quantity is 0,
@@ -2909,7 +2912,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	ld [wListScrollOffset],a
 	ld [wCurrentMenuItem],a
 	ld [wcc2c],a
-	ld [wd07e],a
+	ld [wSavedListScrollOffset],a
 	pop hl
 	ld a,[hl] ; a = number of items in inventory
 	dec a ; decrement the number of items
@@ -3863,7 +3866,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	and a
 	ret                  ; return success
 
-MoveMon: ; f51e (3:751e)
+_MoveMon: ; f51e (3:751e)
 	ld a, [wcf95]
 	and a
 	jr z, .checkPartyMonSlots

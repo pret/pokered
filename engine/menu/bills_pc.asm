@@ -231,7 +231,7 @@ BillsPCDeposit:
 	call PlaySoundWaitForCurrent
 	ld a, $1
 	ld [wcf95], a
-	call Func_3a68
+	call MoveMon
 	xor a
 	ld [wcf95], a
 	call RemovePokemon
@@ -283,7 +283,7 @@ Func_21618: ; 21618 (8:5618)
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [wcf95], a
-	call Func_3a68
+	call MoveMon
 	ld a, $1
 	ld [wcf95], a
 	call RemovePokemon
@@ -329,7 +329,7 @@ Func_216be: ; 216be (8:56be)
 	ld a, h
 	ld [wList + 1], a
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld [wListMenuID], a
 	inc a                ; MONSTER_NAME
 	ld [wNameListType], a

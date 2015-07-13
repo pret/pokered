@@ -26,6 +26,8 @@ hSpriteIndexOrTextID EQU $FF8C
 
 hPartyMonIndex EQU $FF8C
 
+hHalveItemPrices EQU $FF8E
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 

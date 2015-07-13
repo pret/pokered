@@ -450,7 +450,7 @@ ItemUseBall: ; d687 (3:5687)
 	ret nz
 	ld hl,wNumBagItems
 	inc a
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 ItemUseBallText00: ; d937 (3:5937)
 ;"It dodged the thrown ball!"
@@ -655,7 +655,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [wWhichPokemon],a
 	ld hl,wNumBagItems
 	ld a,1 ; remove 1 stone
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 .noEffect
 	call ItemUseNoEffect
@@ -2193,7 +2193,7 @@ PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 RemoveUsedItem: ; e571 (3:6571)
 	ld hl,wNumBagItems
 	ld a,1 ; one item
-	ld [wcf96],a ; store quantity
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 
 ItemUseNoEffect: ; e57c (3:657c)
@@ -2464,7 +2464,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
 ; [wWhichPokemon] = index of item within inventory
-; [wcf96] = quantity to toss
+; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem_: ; e6f1 (3:66f1)
@@ -2475,7 +2475,7 @@ TossItem_: ; e6f1 (3:66f1)
 	jr c,.tooImportantToToss
 	push hl
 	call IsKeyItem_
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	pop hl
 	and a
 	jr nz,.tooImportantToToss
@@ -2491,11 +2491,11 @@ TossItem_: ; e6f1 (3:66f1)
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
-	ld a,[wd12e]
-	cp a,2
+	ld a,[wMenuExitMethod]
+	cp a,CHOSE_SECOND_ITEM
 	pop hl
 	scf
-	ret z
+	ret z ; return if the player chose No
 ; if the player chose Yes
 	push hl
 	ld a,[wWhichPokemon]
@@ -2533,12 +2533,12 @@ TooImportantToTossText: ; e75f (3:675f)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wd124] = result
+; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
 IsKeyItem_: ; e764 (3:6764)
 	ld a,$01
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ld a,[wcf91]
 	cp a,HM_01 ; is the item an HM or TM?
 	jr nc,.checkIfItemIsHM
@@ -2562,7 +2562,7 @@ IsKeyItem_: ; e764 (3:6764)
 	call IsItemHM
 	ret c
 	xor a
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ret
 
 INCLUDE "data/key_items.asm"

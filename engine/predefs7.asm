@@ -11,7 +11,7 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, $4
 	ld [wListMenuID], a
 	call DisplayListMenuID

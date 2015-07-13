@@ -313,7 +313,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld [hli],a
 	ld [hl],b ; store item bag pointer at wList (for DisplayListMenuID)
 	xor a
-	ld [wcf93],a
+	ld [wPrintItemPrices],a
 	ld a,ITEMLISTMENU
 	ld [wListMenuID],a
 	ld a,[wcc2c]
@@ -423,7 +423,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp ItemMenuLoop
 .tossItem
 	call IsKeyItem
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	and a
 	jr nz,.skipAskingQuantity
 	ld a,[wcf91]

@@ -101,15 +101,15 @@ Func_79ab: ; 79ab (1:79ab)
 	ld a, h
 	ld [wList + 1], a
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, $3
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
 	ld a, $1
-	ld [wcf96], a
-	ld a, [wd124]
+	ld [wItemQuantity], a
+	ld a, [wIsKeyItem]
 	and a
 	jr nz, .asm_79e7
 	ld hl, DepositHowManyText
@@ -155,15 +155,15 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld a, h
 	ld [wList + 1], a
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, $3
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jp c, Func_790c
 	call IsKeyItem
 	ld a, $1
-	ld [wcf96], a
-	ld a, [wd124]
+	ld [wItemQuantity], a
+	ld a, [wIsKeyItem]
 	and a
 	jr nz, .asm_7a64
 	ld hl, WithdrawHowManyText
@@ -209,7 +209,7 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	ld a, h
 	ld [wList + 1], a
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, $3
 	ld [wListMenuID], a
 	push hl
@@ -220,8 +220,8 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	call IsKeyItem
 	pop hl
 	ld a, $1
-	ld [wcf96], a
-	ld a, [wd124]
+	ld [wItemQuantity], a
+	ld a, [wIsKeyItem]
 	and a
 	jr nz, .asm_7aef
 	ld a, [wcf91]

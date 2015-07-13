@@ -26,7 +26,7 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	ld a, h
 	ld [wList + 1], a
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld [wMenuItemToSwap], a
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a

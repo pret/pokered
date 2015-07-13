@@ -58,6 +58,14 @@ TRADE_CANCEL_MENU EQU 5
 HEAL_CANCEL_MENU  EQU 6
 NO_YES_MENU       EQU 7
 
+; menu exit method constants for list menus and the buy/sell/quit menu
+CHOSE_MENU_ITEM   EQU 1 ; pressed A
+CANCELLED_MENU    EQU 2 ; pressed B
+
+; menu exit method constants for two-option menus
+CHOSE_FIRST_ITEM  EQU 1
+CHOSE_SECOND_ITEM EQU 2
+
 ; serial
 
 ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK EQU $01

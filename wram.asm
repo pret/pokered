@@ -746,7 +746,13 @@ wAnimSoundID:: ; cf07
 
 wcf08:: ds 1 ; used as a storage value for the bank to return to after a BankswitchHome (bankswitch in homebank)
 wcf09:: ds 1 ; used as a temp storage value for the bank to switch to
-wcf0a:: ds 1 ; used as flags for Poke Mart
+
+wBoughtOrSoldItemInMart:: ; cf0a
+; 0 = nothing bought or sold in pokemart
+; 1 = bought or sold something in pokemart
+; this value is not used for anything
+	ds 1
+
 wBattleResult:: ; cf0b
 ; $00 - win
 ; $01 - lose
@@ -831,7 +837,9 @@ wWhichPokemon:: ; cf92
 ; which pokemon you selected
 	ds 1
 
-wcf93:: ds 1 ; used with lists
+wPrintItemPrices:: ; cf93
+; if non-zero, then print item prices when displaying lists
+	ds 1
 
 wHPBarType:: ; cf94
 ; type of HP bar
@@ -844,8 +852,12 @@ wListMenuID:: ; cf94
 	ds 1
 
 wcf95:: ds 1 ; used with RemovePokemon (BoxMons, Daycare, Trades, etc.)
-wcf96:: ds 1 ; used with removing items
-wcf97:: ds 1 ; used with printing item quantities?
+
+wItemQuantity:: ; cf96
+	ds 1
+
+wMaxItemQuantity:: ; cf97
+	ds 1
 
 ; LoadMonData copies mon data here
 wLoadedMon:: party_struct wLoadedMon ; cf98
@@ -1126,7 +1138,13 @@ W_ANIMATIONID:: ; d07c
 	ds 1
 
 wd07d:: ds 1 ; used with naming functions and party display type
-wd07e:: ds 3 ; used with mart and inventory
+
+wSavedListScrollOffset:: ; d07e
+; used by the pokemart code to save the existing value of wListScrollOffset
+; so that it can be restored when the player is done with the pokemart NPC
+	ds 1
+
+	ds 2
 
 ; base coordinates of frame block
 W_BASECOORDX:: ; d081
@@ -1353,7 +1371,10 @@ wWalkBikeSurfStateCopy:: ; d11a
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
 	ds 1
 
-wd11b:: ds 1 ; used with mart text box and cable club
+wInitListType:: ; d11b
+; the type of list for InitList to init
+	ds 1
+
 wd11c:: ds 1 ; temp storage value for catching pokemon
 wd11d:: ds 1 ; used with battle switchout and testing if the enemy mon fainted
 wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
@@ -1365,7 +1386,7 @@ wNumRunAttempts::
 
 wd121:: ds 1 ; used with evolving pokemon
 wd122:: ds 2 ; saved ROM bank number for vblank
-wd124:: ds 1 ; used as an output value when determining if an item is a key item
+wIsKeyItem:: ds 1 ; d124
 
 wTextBoxID:: ; d125
 	ds 1
@@ -1375,16 +1396,35 @@ wd126:: ds 1 ; not exactly sure what this is used for, but it seems to be used a
 W_CURENEMYLVL:: ; d127
 	ds 1
 
-wd128:: ds 1 ; used as a pointer to displaying Poke Mart inventory, also used to store the pointer of LoadItemList (pointer to item list initially in hl)
-wd129:: ds 1 ; second half of above mentioned pointer
+wItemListPointer:: ; d128
+; pointer to list of items terminated by $FF
+	ds 2
+
 wd12a:: ds 1 ; Number of list entries for displaying a list
 
 wLinkState:: ; d12b
 	ds 1
 
-wTwoOptionMenuID:: ds 1
-wd12d:: ds 1 ; used with item menus and pokemart menu, also used with testing if all Pokemon Fainted?
-wd12e:: ds 1 ; used as an output value to determine if A or B was pressed in a yes/no box
+wTwoOptionMenuID:: ; d12c
+	ds 1
+
+wChosenMenuItem:: ; d12d
+; the id of the menu item the player ultimately chose
+
+wOutOfBattleBlackout:: ; d12d
+; non-zero when the whole party has fainted due to out-of-battle poison damage
+	ds 1
+
+wMenuExitMethod:: ; d12e
+; the way the user exited a menu
+; for list menus and the buy/sell/quit menu:
+; $01 = the user pressed A to choose a menu item
+; $02 = the user pressed B to cancel
+; for two-option menus:
+; $01 = the user pressed A with the first menu item selected
+; $02 = the user pressed B or pressed A with the second menu item selected
+	ds 1
+
 wd12f:: ds 1 ; used in some coordinatestuff, npc pathstuff, and game corner prize stuff
 wd130:: ds 1 ; saved value of screen Y coord of trainer sprite
 wd131:: ds 1 ; saved value of screen X coord of trainer sprite

@@ -53,29 +53,29 @@ FormatMovesString: ; 39b87 (e:5b87)
 
 ; XXX this is called in a few places, but it doesn't appear to do anything useful
 InitList: ; 39bd5 (e:5bd5)
-	ld a, [wd11b]
-	cp $1
+	ld a, [wInitListType]
+	cp INIT_ENEMYOT_LIST
 	jr nz, .notEnemy
 	ld hl, wEnemyPartyCount
 	ld de, wEnemyMonOT
 	ld a, ENEMYOT_NAME
 	jr .done
 .notEnemy
-	cp $4
+	cp INIT_PLAYEROT_LIST
 	jr nz, .notPlayer
 	ld hl, wPartyCount
 	ld de, wPartyMonOT
 	ld a, PLAYEROT_NAME
 	jr .done
 .notPlayer
-	cp $5
+	cp INIT_MON_LIST
 	jr nz, .notMonster
 	ld hl, wStringBuffer2 + 11
 	ld de, MonsterNames
 	ld a, MONSTER_NAME
 	jr .done
 .notMonster
-	cp $2
+	cp INIT_BAG_ITEM_LIST
 	jr nz, .notBag
 	ld hl, wNumBagItems
 	ld de, ItemNames
