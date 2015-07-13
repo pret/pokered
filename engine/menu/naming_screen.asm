@@ -27,8 +27,8 @@ AskName: ; 64eb (1:64eb)
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	push hl
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [W_ISINBATTLE]
 	and a
@@ -53,12 +53,12 @@ DoYouWantToNicknameText: ; 0x6557
 	TX_FAR _DoYouWantToNicknameText
 	db "@"
 
-Func_655c: ; 655c (1:655c)
+DisplayNameRaterScreen: ; 655c (1:655c)
 	ld hl, wHPBarMaxHP
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
@@ -236,8 +236,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	cp $e4
 	ld de, Handakutens
 	jr z, .asm_66e3
-	ld a, [wd07d]
-	cp $2
+	ld a, [wNamingScreenType]
+	cp NAME_MON_SCREEN
 	jr nc, .checkMonNameLength
 	ld a, [wHPBarMaxHP]
 	cp $7 ; max length of player/rival names
@@ -377,8 +377,8 @@ Func_680e: ; 680e (1:680e)
 	ld de, wcf4b
 	call PlaceString
 	hlCoord 10, 3
-	ld a, [wd07d]
-	cp $2
+	ld a, [wNamingScreenType]
+	cp NAME_MON_SCREEN
 	jr nc, .asm_6835
 	ld b, $7
 	jr .asm_6837
@@ -390,8 +390,8 @@ Func_680e: ; 680e (1:680e)
 	ld [hli], a
 	dec b
 	jr nz, .asm_6839
-	ld a, [wd07d]
-	cp $2
+	ld a, [wNamingScreenType]
+	cp NAME_MON_SCREEN
 	ld a, [wHPBarMaxHP]
 	jr nc, .asm_684b
 	cp $7
@@ -405,8 +405,8 @@ Func_680e: ; 680e (1:680e)
 	ld [wTopMenuItemX], a
 	ld a, $5
 	ld [wCurrentMenuItem], a
-	ld a, [wd07d]
-	cp $2
+	ld a, [wNamingScreenType]
+	cp NAME_MON_SCREEN
 	ld a, $9
 	jr nc, .asm_6867
 	ld a, $6
@@ -462,7 +462,7 @@ CalcStringLength: ; 68eb (1:68eb)
 
 PrintNamingText: ; 68f8 (1:68f8)
 	hlCoord 0, 1
-	ld a, [wd07d]
+	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
 	jr z, .notNickname

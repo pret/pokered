@@ -336,14 +336,14 @@ LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld d,0
 	add hl,de
 	ld a,[hli]
-	ld [wd07d],a ; number of tiles
+	ld [wTempTilesetNumTiles],a ; number of tiles
 	ld a,[hli]
 	ld e,a
 	ld a,[hl]
 	ld d,a ; de = address of tileset
 	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	ld a,[wd07d]
+	ld a,[wTempTilesetNumTiles]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
 

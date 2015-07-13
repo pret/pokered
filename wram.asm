@@ -1232,7 +1232,13 @@ W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
 
-wd07d:: ds 1 ; used with naming functions and party display type
+wNamingScreenType:: ; d07d
+
+wPartyMenuTypeOrMessageID:: ; d07d
+
+wTempTilesetNumTiles:: ; d07d
+; temporary storage for the number of tiles in a tileset
+	ds 1
 
 wSavedListScrollOffset:: ; d07e
 ; used by the pokemart code to save the existing value of wListScrollOffset

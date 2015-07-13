@@ -456,7 +456,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	callba ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap],a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	call RedrawPartyMenu
 	jr HandlePartyMenuInput
 .handleSwap

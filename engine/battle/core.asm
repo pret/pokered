@@ -1162,8 +1162,8 @@ UseNextMonText: ; 3c7d3 (f:47d3)
 ; choose next player mon to send out
 ; stores whether enemy mon has no HP left in Z flag
 ChooseNextMon: ; 3c7d8 (f:47d8)
-	ld a, $2
-	ld [wd07d], a
+	ld a, BATTLE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	call DisplayPartyMenu
 .checkIfMonChosen
 	jr nc, .monChosen
@@ -1462,8 +1462,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.next4
-	ld a,2
-	ld [wd07d],a
+	ld a,BATTLE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 .next9
 	ld a,1
@@ -2384,8 +2384,8 @@ PartyMenuOrRockOrRun:
 	jp UseBagItem
 .partyMenuWasSelected
 	call LoadScreenTilesFromBuffer1
-	xor a
-	ld [wd07d], a
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 .checkIfPartyMonWasSelected
@@ -2403,8 +2403,8 @@ PartyMenuOrRockOrRun:
 	ld bc, $81
 	ld a, $7f
 	call FillMemory
-	xor a
-	ld [wd07d], a
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	call GoBackToPartyMenu
 	jr .checkIfPartyMonWasSelected
 .partyMonWasSelected

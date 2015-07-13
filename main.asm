@@ -3582,8 +3582,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	predef AskName
 .asm_f33f
 	ld hl, wPartyMons

@@ -25,7 +25,7 @@ DayCareMText1: ; 56254 (15:6254)
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af

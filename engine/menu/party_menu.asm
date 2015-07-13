@@ -1,4 +1,4 @@
-; [wd07d] = menu type / message ID
+; [wPartyMenuTypeOrMessageID] = menu type / message ID
 ; if less than $F0, it is a menu type
 ; menu types:
 ; 00: normal pokemon menu (e.g. Start menu)
@@ -25,11 +25,11 @@ DrawPartyMenu_: ; 12cd2 (4:6cd2)
 	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
 RedrawPartyMenu_: ; 12ce3 (4:6ce3)
-	ld a,[wd07d]
-	cp a,$04
+	ld a,[wPartyMenuTypeOrMessageID]
+	cp a,SWAP_MONS_PARTY_MENU
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	callba SendBlkPacket_PartyMenu ; loads some data to wcf2e
+	callba SendBlkPacket_PartyMenu
 	hlCoord 3, 0
 	ld de,wPartySpecies
 	xor a
@@ -75,10 +75,10 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	inc hl
 	inc hl
 .skipUnfilledRightArrow
-	ld a,[wd07d] ; menu type
-	cp a,$03
+	ld a,[wPartyMenuTypeOrMessageID] ; menu type
+	cp a,TMHM_PARTY_MENU
 	jr z,.teachMoveMenu
-	cp a,$05
+	cp a,EVO_STONE_PARTY_MENU
 	jr z,.evolutionStoneMenu
 	push hl
 	ld bc,14 ; 14 columns to the right
@@ -196,7 +196,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	push af
 	push hl
 	set 6,[hl] ; turn off letter printing delay
-	ld a,[wd07d] ; message ID
+	ld a,[wPartyMenuTypeOrMessageID] ; message ID
 	cp a,$F0
 	jr nc,.printItemUseMessage
 	add a

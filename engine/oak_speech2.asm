@@ -12,8 +12,8 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	jr .asm_6999
 .asm_697a
 	ld hl, wPlayerName
-	xor a
-	ld [wd07d], a
+	xor a ; NAME_PLAYER_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp $50
@@ -45,8 +45,8 @@ LoadDefaultNamesRival: ; 69a4 (1:69a4)
 	jr .asm_69e1
 .asm_69c1
 	ld hl, W_RIVALNAME
-	ld a, $1
-	ld [wd07d], a
+	ld a, NAME_RIVAL_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp $50
