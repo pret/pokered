@@ -3928,7 +3928,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
-	ld [wPartyMonAnimCounter],a ; counter for pokemon shaking animation
+	ld [wAnimCounter],a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
 .loop2

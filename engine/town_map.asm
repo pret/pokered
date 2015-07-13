@@ -79,7 +79,7 @@ Func_70e92: ; 70e92 (1c:4e92)
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	ld [hJoy7], a
-	ld [wTownMapSpriteBlinkingCounter], a
+	ld [wAnimCounter], a
 	call Func_711ab
 	pop hl
 	pop af
@@ -319,7 +319,7 @@ LoadTownMap: ; 7109b (1c:509b)
 	call Delay3
 	call GBPalNormal
 	xor a
-	ld [wTownMapSpriteBlinkingCounter], a
+	ld [wAnimCounter], a
 	inc a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	ret
@@ -577,7 +577,7 @@ MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
 
 TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
-	ld a, [wTownMapSpriteBlinkingCounter]
+	ld a, [wAnimCounter]
 	inc a
 	cp 25
 	jr z, .hideSprites
@@ -601,5 +601,5 @@ TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
 	jr nz, .hideSpritesLoop
 	ld a, 25
 .done
-	ld [wTownMapSpriteBlinkingCounter], a
+	ld [wAnimCounter], a
 	jp DelayFrame

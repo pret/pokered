@@ -114,7 +114,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld hl, wHPBarMaxHP + 1
 	ld [hli], a
 	ld [hli], a
-	ld [wPartyMonAnimCounter], a
+	ld [wAnimCounter], a
 .asm_65ed
 	call PrintAlphabet
 	call GBPalNormal

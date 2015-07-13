@@ -56,7 +56,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call Delay3
 	call GBPalNormal
 	ld a, $90
-	ld [$ff48], a
+	ld [rOBP0], a
 	call WaitForTextScrollButtonPress
 	ld hl, wd730
 	res 6, [hl]

@@ -1,5 +1,5 @@
 StartSlotMachine: ; 37e2d (d:7e2d)
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wHiddenObjectFunctionArgument]
 	cp $fd
 	jr z, .printOutOfOrder
 	cp $fe
@@ -7,23 +7,23 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 	cp $ff
 	jr z, .printSomeonesKeys
 	callba AbleToPlaySlotsCheck
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wHiddenObjectFunctionArgument]
 	and a
 	ret z
-	ld a, [wUnknownSlotVar]
+	ld a, [wLuckySlotHiddenObjectIndex]
 	ld b, a
-	ld a, [wTrainerFacingDirection]
+	ld a, [wHiddenObjectIndex]
 	inc a
 	cp b
-	jr z, .asm_37e58
-	ld a, $fd
-	jr .asm_37e5a
-.asm_37e58
-	ld a, $fa
-.asm_37e5a
-	ld [wcc5b], a
+	jr z, .match
+	ld a, 253
+	jr .next
+.match
+	ld a, 250
+.next
+	ld [wSlotMachineSevenAndBarModeChance], a
 	ld a, [H_LOADEDROMBANK]
-	ld [wcc5e], a
+	ld [wSlotMachineSavedROMBank], a
 	call PromptUserToPlaySlots
 	ret
 .printOutOfOrder

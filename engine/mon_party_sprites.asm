@@ -27,7 +27,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	add a
 	ld b, a
-	ld a, [wPartyMonAnimCounter]
+	ld a, [wAnimCounter]
 	and a
 	jr z, .resetSprites
 	cp c
@@ -38,7 +38,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	jr nz, .skipResetTimer
 	xor a ; reset timer
 .skipResetTimer
-	ld [wPartyMonAnimCounter], a
+	ld [wAnimCounter], a
 	jp DelayFrame
 .resetSprites
 	push bc

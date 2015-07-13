@@ -12,7 +12,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	res 6, [hl]
 	ret z
 	call Random
-	ld a, [$ffd3]
+	ld a, [hRandomAdd]
 	cp $7
 	jr nc, .asm_48be2
 	ld a, $8
@@ -20,7 +20,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	srl a
 	srl a
 	srl a
-	ld [wUnknownSlotVar], a
+	ld [wLuckySlotHiddenObjectIndex], a
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)

@@ -2645,16 +2645,16 @@ Unknown_79c50: ; 79c50 (1e:5c50)
 AnimationLeavesFalling: ; 79c74 (1e:5c74)
 ; Makes leaves float down from the top of the screen. This is used
 ; in Razor Leaf's animation.
-	ld a, [$ff48]
+	ld a, [rOBP0]
 	push af
 	ld a, [wcc79]
-	ld [$ff48], a
+	ld [rOBP0], a
 	ld d, $37
 	ld a, $3
 	ld [W_SUBANIMTRANSFORM], a
 	call Func_79c97
 	pop af
-	ld [$ff48], a
+	ld [rOBP0], a
 	ret
 
 AnimationPetalsFalling: ; 79c8a (1e:5c8a)

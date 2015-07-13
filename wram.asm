@@ -357,6 +357,13 @@ wNPCMovementScriptBank:: ; cc58
 
 	ds 2
 
+wSlotMachineSevenAndBarModeChance:: ; cc5b
+; If a random number greater than this value is generated, then the player is
+; allowed to have three 7 symbols or bar symbols line up.
+; So, this value is actually the chance of NOT entering that mode.
+; If the slot is lucky, it equals 250, giving a 5/256 (~2%) chance.
+; Otherwise, it equals 253, giving a 2/256 (~0.8%) chance.
+
 wHallOfFame:: ; cc5b
 wBoostExpByExpAll:: ; cc5b
 wAnimationType:: ; cc5b
@@ -365,7 +372,12 @@ wAnimationType:: ; cc5b
 wcc5b:: ds 1 ; these upcoming values below are miscellaneous storage values
 wcc5c:: ds 1 ; used in pokedex evaluation as well
 wcc5d:: ds 1 ; used in pokedex evaluation
-wcc5e:: ds 13 ; as well as used as miscellaneous storage value, this is also used for the game corner slots
+
+wSlotMachineSavedROMBank:: ; cc5e
+; ROM back to return to when the player is done with the slot machine
+	ds 1
+
+	ds 12
 
 wcc6b:: ds 14 ; doesn't seem to be used for anything, probably just more storage
 wcc79:: ds 30 ; used in battle animations
@@ -463,7 +475,7 @@ wPlayerMonMinimized:: ds 1 ; ccf7
 
 ds 13
 
-wUnknownSlotVar:: ; cd05
+wLuckySlotHiddenObjectIndex:: ; cd05
 
 wEnemyNumHits:: ; cd05
 ; number of hits by enemy in attacks like Double Slap, etc.
@@ -588,6 +600,10 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wStoppingWhichSlotMachineWheel:: ; cd3d
+; which wheel the player is trying to stop
+; 0 = none, 1 = wheel 1, 2 = wheel 2, 3 or greater = wheel 3
+
 wTradedPlayerMonSpecies:: ; cd3d
 
 wTradingWhichPlayerMon:: ; cd3d
@@ -611,6 +627,8 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wSlotMachineWheel1Offset:: ; cd3e
+
 wTradedEnemyMonSpecies:: ; cd3e
 
 wTradingWhichEnemyMon:: ; cd3e
@@ -626,6 +644,8 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 
+wSlotMachineWheel2Offset:: ; cd3f
+
 wNameOfPlayerMonToBeTraded:: ; cd3f
 
 wFlyAnimBirdSpriteImageIndex:: ; cd3f
@@ -640,6 +660,8 @@ wTrainerFacingDirection:: ; cd3f
 wcd3f:: ; used with daycare text for money amount
 	ds 1
 
+wSlotMachineWheel3Offset:: ; cd40
+
 wPlayerSpinInPlaceAnimSoundID:: ; cd40
 
 wHiddenObjectY:: ; cd40
@@ -651,30 +673,89 @@ wTradedPlayerMonOT:: ; cd41
 
 wHiddenObjectX:: ; cd41
 
+wSlotMachineWinningSymbol:: ; cd42
+; the OAM tile number of the upper left corner of the winning symbol minus 2
+
+wSlotMachineWheel1BottomTile:: ; cd41
+
 wTrainerScreenX:: ; cd41
 	ds 1
 ; a lot of the uses for these values use more than the said address
 
+wSlotMachineWheel1MiddleTile:: ; cd42
+
 wcd42:: ds 1 ; used in pewter center script, printing field mon moves, slot machines and HoF PC
+
+wSlotMachineWheel1TopTile:: ; cd43
+
 wcd43:: ds 1 ; slot machine stuff and GetMonFieldMoves
-wcd44:: ds 1 ; just slot machine
-wcd45:: ds 1 ; slot machine...
-wcd46:: ds 1 ; slot machine...
+
+wSlotMachineWheel2BottomTile:: ; cd44
+	ds 1
+
+wSlotMachineWheel2MiddleTile:: ; cd45
+	ds 1
+
+wTempCoins1:: ; cd46
+; 2 bytes
+; temporary variable used to add payout amount to the player's coins
+
+wSlotMachineWheel2TopTile:: ; cd46
+	ds 1
+
+wSlotMachineWheel3BottomTile:: ; cd47
+
 wcd47:: ds 1 ; used in slot machine and spinning player sprite
+
+wSlotMachineWheel3MiddleTile:: ; cd48
+
 wcd48:: ds 1 ; same as above
+
+wSlotMachineWheel3TopTile:: ; cd49
+
 wcd49:: ds 1 ; used in slot machine, displaying the gym leaders/badges on the trainer card, and displaying the town map
-wcd4a:: ds 1 ; probably used in one of the above mentioned functions
-wcd4b:: ds 1 ; same as above
+
+wTempCoins2:: ; cd4a
+; 2 bytes
+; temporary variable used to subtract the bet amount from the player's coins
+
+wPayoutCoins:: ; cd4a
+; 2 bytes
+	ds 1
+
+wcd4b:: ; cd4b
+; used in player animations
+	ds 1
 
 wTradedPlayerMonOTID:: ; cd4c
 
-wcd4c:: ds 1 ; slot machine and probably other above stuff
+wSlotMachineFlags:: ; cd4c
+; These flags are set randomly and control when the wheels stop.
+; bit 6: allow the player to win in general
+; bit 7: allow the player to win with 7 or bar (plus the effect of bit 6)
+	ds 1
+
+wSlotMachineWheel1SlipCounter:: ; cd4d
+; wheel 1 can "slip" while this is non-zero
+
 wcd4d:: ds 1 ; used with cut and slot machine
+
+wSlotMachineWheel2SlipCounter:: ; cd4e
+; wheel 2 can "slip" while this is non-zero
 
 wTradedEnemyMonOT:: ; cd4e
 
 wcd4e:: ds 1 ; used with in-game trades and slot machine
+
+wSlotMachineRerollCounter:: ; cd4f
+; The remaining number of times wheel 3 will roll down a symbol until a match is
+; found, when winning is enabled. It's initialized to 4 each bet.
+
 wcd4f:: ds 1 ; used with in-game trades, emotion bubbles, and player animations
+
+wSlotMachineBet:: ; cd50
+; how many coins the player bet on the slot machine (1 to 3)
+
 wcd50:: ds 9 ; used with in-game trades, emotion bubbles, and player and miscellaneous sprite animations
 
 wTradedEnemyMonOTID:: ; cd59
@@ -1194,9 +1275,8 @@ wTradedMonMovingRight:: ; d08a
 
 wd08a:: ds 1 ; used with sprites and displaying the option menu on the main menu screen?
 
-wTownMapSpriteBlinkingCounter:: ; d08b
-
-wPartyMonAnimCounter:: ; d08b
+wAnimCounter:: ; d08b
+; generic counter variable for various animations
 
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
@@ -1222,6 +1302,13 @@ wEndBattleTextRomBank:: ; d092
 W_SUBANIMADDRPTR:: ; d094
 ; the address _of the address_ of the current subanimation entry
 	ds 2
+
+wSlotMachineAllowMatchesCounter:: ; d096
+; If non-zero, the allow matches flag is always set.
+; There is a 1/256 (~0.4%) chance that this value will be set to 60, which is
+; the only way it can increase. Winning certain payout amounts will decrement it
+; or zero it.
+
 W_SUBANIMSUBENTRYADDR:: ; d096
 ; the address of the current subentry of the current subanimation
 	ds 2
