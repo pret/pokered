@@ -131,7 +131,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld [wcf91],a
 	xor a
 	ld [wcc49],a
-	ld [wcf95],a
+	ld [wRemoveMonFromBox],a
 	call RemovePokemon
 	ld a,$80
 	ld [wcc49],a

@@ -3599,8 +3599,8 @@ CopyDataUntil:: ; 3913 (0:3913)
 
 ; Function to remove a pokemon from the party or the current box.
 ; wWhichPokemon determines the pokemon.
-; [wcf95] == 0 specifies the party.
-; [wcf95] != 0 specifies the current box.
+; [wRemoveMonFromBox] == 0 specifies the party.
+; [wRemoveMonFromBox] != 0 specifies the current box.
 RemovePokemon:: ; 391f (0:391f)
 	ld hl, _RemovePokemon
 	ld b, BANK(_RemovePokemon)

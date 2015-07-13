@@ -1916,7 +1916,7 @@ INCLUDE "engine/menu/players_pc.asm"
 
 _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, wPartyCount
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7b74
 	ld hl, W_NUMINBOX
@@ -1939,7 +1939,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr nz, .asm_7b81
 	ld hl, wPartyMonOT
 	ld d, $5
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7b97
 	ld hl, wBoxMonOT
@@ -1958,7 +1958,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld bc, $b
 	add hl, bc
 	ld bc, wPartyMonNicks
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bb8
 	ld bc, wBoxMonNicks
@@ -1966,7 +1966,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	call CopyDataUntil
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bcd
 	ld hl, wBoxMons
@@ -1976,7 +1976,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7be4
 	ld bc, wBoxMon2 - wBoxMon1
@@ -1990,7 +1990,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7beb
 	call CopyDataUntil
 	ld hl, wPartyMonNicks
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
@@ -2003,7 +2003,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld bc, $b
 	add hl, bc
 	ld bc, wPokedexOwned
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7c15
 	ld bc, wBoxMonNicksEnd
@@ -3867,12 +3867,12 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ret                  ; return success
 
 _MoveMon: ; f51e (3:751e)
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .checkPartyMonSlots
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .checkPartyMonSlots
-	cp $3
+	cp PARTY_TO_DAYCARE
 	ld hl, wDayCareMon
 	jr z, .asm_f575
 	ld hl, W_NUMINBOX
@@ -3892,17 +3892,17 @@ _MoveMon: ; f51e (3:751e)
 	inc a
 	ld [hl], a           ; increment number of mons in party/box
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
-	ld a, [wcf95]
-	cp $2
+	ld a, [wMoveMonType]
+	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
 	jr z, .asm_f556
 	ld a, [wcf91]
 .asm_f556
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
@@ -3918,12 +3918,12 @@ _MoveMon: ; f51e (3:751e)
 	push hl
 	ld e, l
 	ld d, h
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1 ; $21
 	jr z, .asm_f591
-	cp $2
+	cp DAYCARE_TO_PARTY
 	ld hl, wDayCareMon
 	jr z, .asm_f597
 	ld hl, wPartyMons
@@ -3938,10 +3938,10 @@ _MoveMon: ; f51e (3:751e)
 	call CopyData
 	pop de
 	pop hl
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f5b4
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f5b4
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
@@ -3951,8 +3951,8 @@ _MoveMon: ; f51e (3:751e)
 	inc de
 	ld [de], a
 .asm_f5b4
-	ld a, [wcf95]
-	cp $3
+	ld a, [wMoveMonType]
+	cp PARTY_TO_DAYCARE
 	ld de, W_DAYCAREMONOT
 	jr z, .asm_f5d3
 	dec a
@@ -3968,11 +3968,11 @@ _MoveMon: ; f51e (3:751e)
 	ld e, l
 .asm_f5d3
 	ld hl, wBoxMonOT
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f5e6
 	ld hl, W_DAYCAREMONOT
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f5ec
 	ld hl, wPartyMonOT
 .asm_f5e6
@@ -3981,8 +3981,8 @@ _MoveMon: ; f51e (3:751e)
 .asm_f5ec
 	ld bc, $b
 	call CopyData
-	ld a, [wcf95]
-	cp $3
+	ld a, [wMoveMonType]
+	cp PARTY_TO_DAYCARE
 	ld de, W_DAYCAREMONNAME
 	jr z, .asm_f611
 	dec a
@@ -3998,11 +3998,11 @@ _MoveMon: ; f51e (3:751e)
 	ld e, l
 .asm_f611
 	ld hl, wBoxMonNicks
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f624
 	ld hl, W_DAYCAREMONNAME
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f62a
 	ld hl, wPartyMonNicks
 .asm_f624
@@ -4012,10 +4012,10 @@ _MoveMon: ; f51e (3:751e)
 	ld bc, $b
 	call CopyData
 	pop hl
-	ld a, [wcf95]
-	cp $1
+	ld a, [wMoveMonType]
+	cp PARTY_TO_BOX
 	jr z, .asm_f664
-	cp $3
+	cp PARTY_TO_DAYCARE
 	jr z, .asm_f664
 	push hl
 	srl a

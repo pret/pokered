@@ -793,7 +793,7 @@ TradeCenter_Trade:
 	ld a, [hl]
 	ld [wTradedPlayerMonSpecies], a
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wTradingWhichEnemyMon]
 	ld c, a

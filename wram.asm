@@ -851,7 +851,16 @@ wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1
 
-wcf95:: ds 1 ; used with RemovePokemon (BoxMons, Daycare, Trades, etc.)
+wRemoveMonFromBox:: ; cf95
+; if non-zero, RemovePokemon will remove the mon from the current box,
+; else it will remove the mon from the party
+
+wMoveMonType:: ; cf95
+; 0 = move from box to party
+; 1 = move from party to box
+; 2 = move from daycare to party
+; 3 = move from party to daycare
+	ds 1
 
 wItemQuantity:: ; cf96
 	ds 1

@@ -229,11 +229,11 @@ BillsPCDeposit:
 	ld a, [wcf91]
 	call GetCryData
 	call PlaySoundWaitForCurrent
-	ld a, $1
-	ld [wcf95], a
+	ld a, PARTY_TO_BOX
+	ld [wMoveMonType], a
 	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld hl, wWhichTrade
@@ -281,11 +281,11 @@ Func_21618: ; 21618 (8:5618)
 	ld a, [wcf91]
 	call GetCryData
 	call PlaySoundWaitForCurrent
-	xor a
-	ld [wcf95], a
+	xor a ; BOX_TO_PARTY
+	ld [wMoveMonType], a
 	call MoveMon
-	ld a, $1
-	ld [wcf95], a
+	ld a, 1
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld hl, MonIsTakenOutText
@@ -310,7 +310,7 @@ Func_21673: ; 21673 (8:5673)
 	and a
 	jr nz, .asm_21682
 	inc a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld a, [wcf91]
