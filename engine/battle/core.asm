@@ -2305,7 +2305,7 @@ DisplayBagMenu:
 	ld a, [wCurrentMenuItem]
 	ld [wcc2c], a
 	ld a, $0
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuItemToSwap], a
 	jp c, DisplayBattleMenu ; go back to battle menu if an item was not selected
 

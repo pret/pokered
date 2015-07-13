@@ -266,7 +266,12 @@ wListScrollOffset:: ; cc36
 ; keeps track of what section of the list is on screen
 	ds 1
 
-wcc37:: ds 1 ; menu related thing, used in pokedex and dialog boxes
+wMenuWatchMovingOutOfBounds:: ; cc37
+; If non-zero, then when wrapping is disabled and the player tries to go past
+; the top or bottom of the menu, return from HandleMenuInput. This is useful for
+; menus that have too many items to display at once on the screen because it
+; allows the caller to scroll the entire menu up or down when this happens.
+	ds 1
 
 wTradeCenterPointerTableIndex:: ; cc38
 	ds 1
@@ -1409,7 +1414,9 @@ wItemListPointer:: ; d128
 ; pointer to list of items terminated by $FF
 	ds 2
 
-wd12a:: ds 1 ; Number of list entries for displaying a list
+wListCount::
+; number of entries in a list
+	ds 1
 
 wLinkState:: ; d12b
 	ds 1

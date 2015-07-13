@@ -378,7 +378,7 @@ PartyMenuInit:: ; 1420 (0:1420)
 	set 6, [hl] ; turn off letter printing delay
 	xor a
 	ld [wcc49], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wTopMenuItemY
 	inc a
 	ld [hli], a ; top menu item Y
@@ -1391,13 +1391,13 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	set 6,[hl] ; turn off letter printing delay
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
-	ld [wd12a],a
+	ld [wListCount],a
 	ld a,[wList]
 	ld l,a
 	ld a,[wList + 1]
 	ld h,a ; hl = address of the list
-	ld a,[hl]
-	ld [wd12a],a ; [wd12a] = number of list entries
+	ld a,[hl] ; the first byte is the number of entries in the list
+	ld [wListCount],a
 	ld a,LIST_MENU_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw the menu text box
@@ -1411,8 +1411,8 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	call UpdateSprites
 .skipMovingSprites
 	ld a,1 ; max menu item ID is 1 if the list has less than 2 entries
-	ld [wcc37],a
-	ld a,[wd12a]
+	ld [wMenuWatchMovingOutOfBounds],a
+	ld a,[wListCount]
 	cp a,2 ; does the list have less than 2 entries?
 	jr c,.setMenuVariables
 	ld a,2 ; max menu item ID is 2 if the list has at least 2 entries
@@ -1468,13 +1468,13 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld [wChosenMenuItem],a 
 
 	xor a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	ld a,[wCurrentMenuItem]
 	ld c,a
 	ld a,[wListScrollOffset]
 	add c
 	ld c,a
-	ld a,[wd12a] ; number of list entries
+	ld a,[wListCount]
 	and a ; is the list empty?
 	jp z,ExitListMenu ; if so, exit the menu
 	dec a
@@ -1552,7 +1552,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,[hl]
 	add a,3
 	ld b,a
-	ld a,[wd12a] ; number of list entries
+	ld a,[wListCount]
 	cp b ; will going down scroll past the Cancel button?
 	jp c,DisplayListMenuIDLoop
 	inc [hl] ; if not, go down
@@ -1694,7 +1694,7 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 	ld [wChosenMenuItem],a
 	ld a,CANCELLED_MENU
 	ld [wMenuExitMethod],a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	xor a
 	ld [hJoy7],a
 	ld hl,wd730
@@ -4026,7 +4026,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld a,[hJoy5]
 	ret
 .noWrappingAround
-	ld a,[wcc37]
+	ld a,[wMenuWatchMovingOutOfBounds]
 	and a ; should we return if the user tried to go past the top or bottom?
 	jr z,.checkOtherKeys
 	jr .checkIfAButtonOrBButtonPressed

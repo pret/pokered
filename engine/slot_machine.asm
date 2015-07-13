@@ -78,7 +78,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wTileMap + $ea
 	ld b, $5
 	ld c, $4

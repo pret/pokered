@@ -317,7 +317,7 @@ TradeCenter_SelectMon:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuJoypadPollCount], a
@@ -326,7 +326,7 @@ TradeCenter_SelectMon:
 	jp .playerMonMenu
 .enemyMonMenu
 	xor a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	inc a
 	ld [wWhichTradeMonSelectionMenu], a
 	ld a, D_DOWN | D_LEFT | A_BUTTON
@@ -390,7 +390,7 @@ TradeCenter_SelectMon:
 .playerMonMenu
 	xor a ; player mon menu
 	ld [wWhichTradeMonSelectionMenu], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, D_DOWN | D_RIGHT | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, [wPartyCount]
@@ -682,7 +682,7 @@ TradeCenter_Trade:
 	xor a
 	ld [wSerialExchangeNybbleSendData + 1], a ; unnecessary
 	ld [wSerialExchangeNybbleReceiveData], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuJoypadPollCount], a
 	hlCoord 0, 12
 	ld b, 4

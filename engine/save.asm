@@ -421,7 +421,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld a, $c
 	ld [wTopMenuItemX], a
 	xor a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wd5a0]
 	and $7f
 	ld [wCurrentMenuItem], a

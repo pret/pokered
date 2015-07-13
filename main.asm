@@ -922,7 +922,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld l,a
 	dec [hl] ; decrease the number of items
 	ld a,[hl]
-	ld [wd12a],a ; update number of items variable
+	ld [wListCount],a ; update number of items variable
 	cp a,1
 	jr nz,.skipSettingMaxMenuItemID
 	ld [wMaxMenuItem],a ; if the number of items is only one now, update the max menu item ID
@@ -1094,7 +1094,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	xor a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
 	hlCoord 12, 2
@@ -1472,7 +1472,7 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wd730]
 	res 6, a ; turn on the printing delay
 	ld [wd730], a
@@ -1528,7 +1528,7 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	push hl
 	ld hl, wTwoOptionMenuID
 	bit 7, [hl] ; select second menu item by default?
@@ -2917,7 +2917,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	ld a,[hl] ; a = number of items in inventory
 	dec a ; decrement the number of items
 	ld [hl],a ; store new number of items
-	ld [wd12a],a
+	ld [wListCount],a
 	cp a,2
 	jr c,.done
 	ld [wMaxMenuItem],a
