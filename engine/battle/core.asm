@@ -117,7 +117,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	or c
 	jr nz, .clearBackgroundLoop
 ; copy the work RAM tile map to VRAM
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld de, vBGMap0
 	ld b, 18 ; number of rows
 .copyRowLoop
@@ -855,7 +855,7 @@ FaintEnemyPokemon: ; 0x3c567
 	hlCoord 12, 5
 	deCoord 12, 6
 	call SlideDownFaintedMonPic
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $40b
 	call ClearScreenArea
 	ld a, [W_ISINBATTLE]
@@ -1214,7 +1214,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	ld a, [W_CUROPPONENT]
 	cp $c8 + SONY1
 	jr nz, .notSony1Battle
-	ld hl, wTileMap  ; sony 1 battle
+	hlCoord 0, 0  ; sony 1 battle
 	ld bc, $815
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
@@ -1489,7 +1489,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call LoadScreenTilesFromBuffer1
 .next4
 	call ClearSprites
-	ld hl,wTileMap
+	hlCoord 0, 0
 	ld bc,$040B
 	call ClearScreenArea
 	ld b,1
@@ -1952,7 +1952,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $40c
 	call ClearScreenArea
 	callab PlaceEnemyHUDTiles

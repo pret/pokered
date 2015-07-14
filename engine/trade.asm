@@ -148,7 +148,7 @@ Trade_Delay80: ; 41191 (10:5191)
 	jp DelayFrames
 
 Trade_ClearTileMap: ; 41196 (10:5196)
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, 20 * 18
 	ld a, " "
 	jp FillMemory

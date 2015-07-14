@@ -1276,7 +1276,7 @@ GetTextBoxIDText: ; 7367 (1:7367)
 ; hl = address of upper left corner of text box
 GetAddressOfScreenCoords: ; 7375 (1:7375)
 	push bc
-	ld hl,wTileMap
+	hlCoord 0, 0
 	ld bc,20
 .loop ; loop to add d rows to the base address
 	ld a,d
@@ -2298,7 +2298,7 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ret c
 	cp UNKNOWN_DUNGEON_2
 	ret nc
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $3
 	ld c, $7
 	call TextBoxBorder

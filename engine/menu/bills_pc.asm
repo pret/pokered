@@ -11,17 +11,17 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld a, [wd5a2]
 	and a
 	jr nz, .asm_213f3
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $8
 	ld c, $e
 	jr .asm_213fa
 .asm_213ea
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $6
 	ld c, $e
 	jr .asm_213fa
 .asm_213f3
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $a
 	ld c, $e
 .asm_213fa
@@ -122,7 +122,7 @@ BillsPCMenu:
 	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $a
 	ld c, $c
 	call TextBoxBorder

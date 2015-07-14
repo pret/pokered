@@ -330,7 +330,7 @@ PlayShootingStar: ; 4188a (10:588a)
 
 Func_418e9: ; 418e9 (10:58e9)
 	call Func_417f0
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld c, $50
 	call Func_41807
 	hlCoord 0, 14

@@ -109,11 +109,11 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 .asm_5c51
 	ld hl, wd730
 	set 6, [hl]
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
-	ld hl, wTileMap + $2a
+	hlCoord 2, 2
 	ld de, HowToLinkText
 	call PlaceString
 	ld hl, LinkCableHelpText2
@@ -193,13 +193,13 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 .asm_5dd15
 	ld hl, wd730
 	set 6, [hl]
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $060a
 	call TextBoxBorder
-	ld hl, wTileMap + $29
+	hlCoord 1, 2
 	ld de, StatusAilmentText1
 	call PlaceString
-	ld hl, wTileMap + $2e
+	hlCoord 6, 2
 	ld de, StatusAilmentText2
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2

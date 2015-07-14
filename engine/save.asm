@@ -426,7 +426,7 @@ Func_7393f: ; 7393f (1c:793f)
 	and $7f
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder

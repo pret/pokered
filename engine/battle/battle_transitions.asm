@@ -231,7 +231,7 @@ BattleTransition_Spiral: ; 70a72 (1c:4a72)
 BattleTransition_InwardSpiral: ; 70aaa (1c:4aaa)
 	ld a, $7
 	ld [wWhichTrade], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld c, $11
 	ld de, $14
 	call BattleTransition_InwardSpiral_
@@ -410,7 +410,7 @@ BattleTransition_Split: ; 70bca (1c:4bca)
 	ld bc, $ffd8
 	call BattleTransition_CopyTiles1
 	hlCoord 0, 1
-	ld de, wTileMap
+	deCoord 0, 0
 	ld bc, $28
 	call BattleTransition_CopyTiles1
 	hlCoord 18, 0
@@ -418,7 +418,7 @@ BattleTransition_Split: ; 70bca (1c:4bca)
 	ld bc, $fffe
 	call BattleTransition_CopyTiles2
 	hlCoord 1, 0
-	ld de, wTileMap
+	deCoord 0, 0
 	ld bc, $2
 	call BattleTransition_CopyTiles2
 	call BattleTransition_TransferDelay3
@@ -514,7 +514,7 @@ BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 ; used for high level wild dungeon battles
 BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
 	ld c, $12
-	ld hl, wTileMap
+	hlCoord 0, 0
 	deCoord 1, 17
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -553,7 +553,7 @@ BattleTransition_VerticalStripes_: ; 70caa (1c:4caa)
 ; used for low level wild dungeon battles
 BattleTransition_HorizontalStripes: ; 70cb4 (1c:4cb4)
 	ld c, $14
-	ld hl, wTileMap
+	hlCoord 0, 0
 	deCoord 19, 1
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a

@@ -51,7 +51,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $4
 	ld c, $f
 	call TextBoxBorder

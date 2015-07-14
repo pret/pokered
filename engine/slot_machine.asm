@@ -133,7 +133,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
-	ld hl, wTileMap + $fe
+	hlCoord 14, 12
 	ld bc, $0d0f
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
@@ -836,7 +836,7 @@ LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
-	ld de, wTileMap
+	deCoord 0, 0
 	ld bc, $00f0
 	call CopyData
 	call EnableLCD

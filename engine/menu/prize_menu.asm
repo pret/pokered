@@ -21,12 +21,12 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	ld [wTopMenuItemY],a
 	ld a,$01
 	ld [wTopMenuItemX],a
-	call PrintPrizePrice ; 687A
+	call PrintPrizePrice
 	hlCoord 0, 2
 	ld b,$08
 	ld c,$10
 	call TextBoxBorder
-	call GetPrizeMenuId ;678E
+	call GetPrizeMenuId
 	call UpdateSprites
 	ld hl,WhichPrizeTextPtr
 	call PrintText
@@ -36,7 +36,7 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	ld a,[wCurrentMenuItem]
 	cp a,$03 ; "NO,THANKS" choice
 	jr z,.NoChoice
-	call HandlePrizeChoice ; 14:68C6
+	call HandlePrizeChoice
 .NoChoice
 	ld hl,wd730
 	res 6,[hl]
@@ -106,7 +106,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	hlCoord 2, 8
 	call PlaceString
 	jr .putNoThanksText
-.putMonName ; 14:67EC
+.putMonName
 	ld a,[W_PRIZE1]
 	ld [wd11e],a
 	call GetMonName
@@ -122,7 +122,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	call GetMonName
 	hlCoord 2, 8
 	call PlaceString
-.putNoThanksText ; 14:6819
+.putNoThanksText
 	hlCoord 2, 10
 	ld de,NoThanksText
 	call PlaceString
@@ -135,7 +135,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld c,(1 << 7 | 2)
 ; Function $15CD displays BCD value (same routine
 ; used by text-command $02)
-	call PrintBCDNumber ; Print_BCD
+	call PrintBCDNumber
 	ld de,wd143
 	hlCoord 13, 7
 	ld c,(%1 << 7 | 2)
@@ -165,10 +165,10 @@ PrintPrizePrice: ; 5287a (14:687a)
 	call PrintBCDNumber
 	ret
 
-.CoinText ; 14:68A5
+.CoinText
 	db "COIN@"
 
-.SixSpacesText ; 14:68AA
+.SixSpacesText
 	db "      @"
 
 LoadCoinsToSubtract: ; 528b1 (14:68b1)
@@ -200,9 +200,9 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	jr nz,.GetMonName
 	call GetItemName
 	jr .GivePrize
-.GetMonName ; 14:68E3
+.GetMonName
 	call GetMonName
-.GivePrize ; 14:68E6
+.GivePrize
 	ld hl,SoYouWantPrizeTextPtr
 	call PrintText
 	call YesNoChoice ; yes/no textbox
@@ -219,14 +219,14 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld b,a
 	ld a,1
 	ld c,a
-	call GiveItem ; GiveItem
+	call GiveItem
 	jr nc,.BagFull
 	jr .SubtractCoins
-.GiveMon ; 14:6912
+.GiveMon
 	ld a,[wd11e]
 	ld [wcf91],a
 	push af
-	call GetPrizeMonLevel ; 14:6977
+	call GetPrizeMonLevel
 	ld c,a
 	pop af
 	ld b,a
@@ -237,7 +237,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	call z,WaitForTextScrollButtonPress
 	pop af
 	ret nc
-.SubtractCoins ; 14:692C
+.SubtractCoins
 	call LoadCoinsToSubtract
 	ld hl,$FFA1
 	ld de,wPlayerCoins + 1
@@ -247,10 +247,10 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 .BagFull
 	ld hl,PrizeRoomBagIsFullTextPtr
 	jp PrintText
-.NotEnoughCoins ; 14:6945
+.NotEnoughCoins
 	ld hl,SorryNeedMoreCoinsText
 	jp PrintText
-.PrintOhFineThen ; 14:694B
+.PrintOhFineThen
 	ld hl,OhFineThenTextPtr
 	jp PrintText
 
@@ -286,13 +286,13 @@ GetPrizeMonLevel: ; 52977 (14:6977)
 	ld a,[wcf91]
 	ld b,a
 	ld hl,PrizeMonLevelDictionary
-.loop ; 14:697E
+.loop
 	ld a,[hli]
 	cp b
 	jr z,.matchFound
 	inc hl
 	jr .loop
-.matchFound ; 14:6985
+.matchFound
 	ld a,[hl]
 	ld [W_CURENEMYLVL],a
 	ret

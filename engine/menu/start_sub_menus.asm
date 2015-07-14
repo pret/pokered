@@ -713,7 +713,7 @@ SwitchPartyMon: ; 13613 (4:7613)
 
 SwitchPartyMon_OAM: ; 13625 (4:7625)
 	push af
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $28
 	call AddNTimes
 	ld c, $28

@@ -63,7 +63,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	dec l
 	ld b, l
 	ld c, $c
-	ld hl, wTileMap
+	hlCoord 0, 0
 	call TextBoxBorder
 	call UpdateSprites
 	call CeladonMartRoofScript_48532

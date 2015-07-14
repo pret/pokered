@@ -46,3 +46,4 @@ TownMapOrder: ; 70f11 (1c:4f11)
 	db VICTORY_ROAD_3
 	db INDIGO_PLATEAU
 	db POWER_PLANT
+TownMapOrderEnd:

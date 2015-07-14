@@ -184,17 +184,17 @@ CopyScreenTileBufferToVRAM::
 	ld c, 6
 
 	ld hl, $600 * 0
-	ld de, wTileMap + 20 * 6 * 0
+	deCoord 0, 6 * 0
 	call .setup
 	call DelayFrame
 
 	ld hl, $600 * 1
-	ld de, wTileMap + 20 * 6 * 1
+	deCoord 0, 6 * 1
 	call .setup
 	call DelayFrame
 
 	ld hl, $600 * 2
-	ld de, wTileMap + 20 * 6 * 2
+	deCoord 0, 6 * 2
 	call .setup
 	jp DelayFrame
 
@@ -217,7 +217,7 @@ ClearScreen::
 ; for the bg map to update.
 	ld bc, 20 * 18
 	inc b
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld a, $7f
 .loop
 	ld [hli], a

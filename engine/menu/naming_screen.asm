@@ -4,7 +4,7 @@ AskName: ; 64eb (1:64eb)
 	push hl
 	ld a, [W_ISINBATTLE]
 	dec a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $4
 	ld c, $b
 	call z, ClearScreenArea ; only if in wild batle

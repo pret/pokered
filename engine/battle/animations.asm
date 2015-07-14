@@ -2184,7 +2184,7 @@ Func_7980c: ; 7980c (1e:580c)
 	push bc
 	ld e, a
 	ld d, $0
-	ld hl, wTileMap
+	hlCoord 0, 0
 	add hl, de
 	ld bc, $707
 	call ClearScreenArea
@@ -2206,7 +2206,7 @@ GetMonSpriteTileMapPointerFromRowCount: ; 79820 (1e:5820)
 .enemyTurn
 	ld a, 12
 .next
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld e, a
 	ld d, 0
 	add hl, de

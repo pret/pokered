@@ -363,23 +363,23 @@ ContinueGame: ; 5db5 (1:5db5)
 PrintSaveScreenText: ; 5def (1:5def)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wTileMap + $4
+	hlCoord 4, 0
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	ld hl, wTileMap + $2d
+	hlCoord 5, 2
 	ld de, SaveScreenInfoText
 	call PlaceString
-	ld hl, wTileMap + $34
+	hlCoord 12, 2
 	ld de, wPlayerName
 	call PlaceString
-	ld hl, wTileMap + $61
+	hlCoord 17, 4
 	call Func_5e2f
-	ld hl, wTileMap + $88
+	hlCoord 16, 6
 	call Func_5e42
-	ld hl, wTileMap + $ad
+	hlCoord 13, 8
 	call Func_5e55
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a

@@ -121,7 +121,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call DelayFrames
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $c14
 	call ClearScreenArea
 	ld a, $1

@@ -107,7 +107,7 @@ BookOrSculptureText: ; fbe8 (3:7be8)
 	ld a, [W_CURMAPTILESET]
 	cp MANSION ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
-	ld a, [wTileMap + $80]
+	aCoord 8, 6
 	cp $38
 	jr nz, .asm_fbfd
 	ld hl, DiglettSculptureText

@@ -3171,7 +3171,7 @@ UncompressSpriteFromDE:: ; 36eb (0:36eb)
 
 
 SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld de, wTileMapBackup2
 	ld bc, $168
 	call CopyData
@@ -3188,13 +3188,13 @@ LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMapBackup2
-	ld de, wTileMap
+	deCoord 0, 0
 	ld bc, $168
 	call CopyData
 	ret
 
 SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld de, wTileMapBackup
 	ld bc, $168
 	jp CopyData
@@ -3203,7 +3203,7 @@ LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMapBackup
-	ld de, wTileMap
+	deCoord 0, 0
 	ld bc, $168
 	call CopyData
 	ld a, $1
@@ -4032,7 +4032,7 @@ PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	ld a,[wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
-	ld hl,wTileMap
+	hlCoord 0, 0
 	ld bc,SCREEN_WIDTH
 .topMenuItemLoop
 	add hl,bc

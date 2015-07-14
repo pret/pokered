@@ -21,7 +21,7 @@ Func_790c: ; 790c (1:790c)
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder

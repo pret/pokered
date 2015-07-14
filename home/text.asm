@@ -207,7 +207,7 @@ MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 	ld de,wBattleMonNick ; player active monster name
 	jr FinishDTE
 
-.Enemy ; 1A40
+.Enemy
 	; print “Enemy ”
 	ld de,Char5AText
 	call PlaceString

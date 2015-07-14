@@ -20,7 +20,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	dec l
 	ld b, l
 	ld c, $d
-	ld hl, wTileMap
+	hlCoord 0, 0
 	call TextBoxBorder
 	call UpdateSprites
 	call Func_610c2

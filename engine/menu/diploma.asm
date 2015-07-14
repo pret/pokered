@@ -12,7 +12,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld bc, $0010
 	ld a, BANK(CircleTile)
 	call FarCopyData2
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $1012
 	predef Diploma_TextBoxBorder
 	ld hl, DiplomaTextPointersAndCoords
@@ -77,15 +77,15 @@ Func_56777: ; 56777 (15:6777)
 
 DiplomaTextPointersAndCoords: ; 56784 (15:6784)
 	dw DiplomaText
-	dw wTileMap + $2d
+	dwCoord 5, 2
 	dw DiplomaPlayer
-	dw wTileMap + $53
+	dwCoord 3, 4
 	dw DiplomaEmptyText
-	dw wTileMap + $5f
+	dwCoord 15, 4
 	dw DiplomaCongrats
-	dw wTileMap + $7a
+	dwCoord 2, 6
 	dw DiplomaGameFreak
-	dw wTileMap + $149
+	dwCoord 9, 16
 
 DiplomaText:
 	db $70,"Diploma",$70,"@"
