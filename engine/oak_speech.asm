@@ -46,7 +46,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld a,POTION
 	ld [wcf91],a
 	ld a,1
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	call AddItemToInventory  ; give one potion
 	ld a,[W_ANIMATIONID]
 	ld [wDestinationMap],a

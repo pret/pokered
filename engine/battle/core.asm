@@ -848,7 +848,7 @@ FaintEnemyPokemon: ; 0x3c567
 	ld [hl], a
 	ld [W_ENEMYDISABLEDMOVE], a
 	ld [wEnemyDisabledMoveNumber], a
-	ld [wccf3], a
+	ld [wEnemyMonMinimized], a
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
@@ -1142,8 +1142,8 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, [wd12e]
-	cp $2 ; did the player choose NO?
+	ld a, [wMenuExitMethod]
+	cp CHOSE_SECOND_ITEM ; did the player choose NO?
 	jr z, .tryRunning ; if the player chose NO, try running
 	and a ; reset carry
 	ret
@@ -1162,8 +1162,8 @@ UseNextMonText: ; 3c7d3 (f:47d3)
 ; choose next player mon to send out
 ; stores whether enemy mon has no HP left in Z flag
 ChooseNextMon: ; 3c7d8 (f:47d8)
-	ld a, $2
-	ld [wd07d], a
+	ld a, BATTLE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	call DisplayPartyMenu
 .checkIfMonChosen
 	jr nc, .monChosen
@@ -1376,7 +1376,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld [hl],a
 	ld [W_ENEMYDISABLEDMOVE],a
 	ld [wEnemyDisabledMoveNumber],a
-	ld [wccf3],a
+	ld [wEnemyMonMinimized],a
 	ld hl,wPlayerUsedMove
 	ld [hli],a
 	ld [hl],a
@@ -1462,8 +1462,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.next4
-	ld a,2
-	ld [wd07d],a
+	ld a,BATTLE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 .next9
 	ld a,1
@@ -1826,7 +1826,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld [hl], a
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [wPlayerDisabledMoveNumber], a
-	ld [wccf7], a
+	ld [wPlayerMonMinimized], a
 	ld b, $1
 	call GoPAL_SET
 	ld hl, W_ENEMYBATTSTATUS1
@@ -2296,7 +2296,7 @@ DisplayPlayerBag:
 
 DisplayBagMenu:
 	xor a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	ld a, [wcc2c]
@@ -2305,7 +2305,7 @@ DisplayBagMenu:
 	ld a, [wCurrentMenuItem]
 	ld [wcc2c], a
 	ld a, $0
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuItemToSwap], a
 	jp c, DisplayBattleMenu ; go back to battle menu if an item was not selected
 
@@ -2384,8 +2384,8 @@ PartyMenuOrRockOrRun:
 	jp UseBagItem
 .partyMenuWasSelected
 	call LoadScreenTilesFromBuffer1
-	xor a
-	ld [wd07d], a
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 .checkIfPartyMonWasSelected
@@ -2403,8 +2403,8 @@ PartyMenuOrRockOrRun:
 	ld bc, $81
 	ld a, $7f
 	call FillMemory
-	xor a
-	ld [wd07d], a
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID], a
 	call GoBackToPartyMenu
 	jr .checkIfPartyMonWasSelected
 .partyMonWasSelected
@@ -2448,7 +2448,7 @@ PartyMenuOrRockOrRun:
 	ld hl, AnimationSubstitute
 	jr nz, .doEnemyMonAnimation
 ; enemy mon doesn't have substitute
-	ld a, [wccf3]
+	ld a, [wEnemyMonMinimized]
 	and a ; has the enemy mon used Minimise?
 	ld hl, AnimationMinimizeMon
 	jr nz, .doEnemyMonAnimation
@@ -3215,9 +3215,9 @@ getPlayerAnimationType
 playPlayerMoveAnimation
 	push af
 	ld a,[W_PLAYERBATTSTATUS2]
-	bit 4,a
-	ld hl,Func_79747
-	ld b,BANK(Func_79747)
+	bit HasSubstituteUp,a
+	ld hl,HideSubstituteShowMonAnim
+	ld b,BANK(HideSubstituteShowMonAnim)
 	call nz,Bankswitch
 	pop af
 	ld [wAnimationType],a
@@ -3226,9 +3226,9 @@ playPlayerMoveAnimation
 	call HandleExplodingAnimation
 	call DrawPlayerHUDAndHPBar
 	ld a,[W_PLAYERBATTSTATUS2]
-	bit 4,a
-	ld hl,Func_79771
-	ld b,BANK(Func_79771)
+	bit HasSubstituteUp,a
+	ld hl,ReshowSubstituteAnim
+	ld b,BANK(ReshowSubstituteAnim)
 	call nz,Bankswitch
 	jr MirrorMoveCheck
 playerCheckIfFlyOrChargeEffect
@@ -3958,7 +3958,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld hl, KeptGoingAndCrashedText
 	call PrintText
 	ld b, $4
-	predef Func_48125
+	predef PredefShakeScreenHorizontally
 	ld a, [H_WHOSETURN]
 	and a
 	jr nz, .enemyTurn
@@ -5089,7 +5089,7 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld a,[H_WHOSETURN]
 	xor a,$01
 	ld [H_WHOSETURN],a
-	callab Func_79747 ; animate the substitute breaking
+	callab HideSubstituteShowMonAnim ; animate the substitute breaking
 ; flip the turn back to the way it was
 	ld a,[H_WHOSETURN]
 	xor a,$01
@@ -5767,8 +5767,8 @@ playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 	push af
 	ld a, [W_ENEMYBATTSTATUS2]
 	bit HasSubstituteUp, a ; does mon have a substitute?
-	ld hl, Func_79747
-	ld b, BANK(Func_79747)
+	ld hl, HideSubstituteShowMonAnim
+	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
 	pop af
 	ld [wAnimationType], a
@@ -5778,8 +5778,8 @@ playEnemyMoveAnimation: ; 3e7a4 (f:67a4)
 	call DrawEnemyHUDAndHPBar
 	ld a, [W_ENEMYBATTSTATUS2]
 	bit HasSubstituteUp, a ; does mon have a substitute?
-	ld hl, Func_79771
-	ld b, BANK(Func_79771)
+	ld hl, ReshowSubstituteAnim
+	ld b, BANK(ReshowSubstituteAnim)
 	call nz, Bankswitch ; slide the substitute's sprite out
 	jr EnemyCheckIfMirrorMoveEffect
 
@@ -6943,12 +6943,12 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	call SaveScreenTilesToBuffer1
 	call ClearScreen
 	ld a, $98
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	ld a, $9c
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	call LoadScreenTilesFromBuffer1
 	hlCoord 9, 7
 	ld bc, $50a
@@ -7657,24 +7657,26 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	call PrintStatText
 	ld hl, W_PLAYERBATTSTATUS2
 	ld de, W_PLAYERMOVENUM
-	ld bc, wccf7
+	ld bc, wPlayerMonMinimized
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3f4e6
 	ld hl, W_ENEMYBATTSTATUS2
 	ld de, W_ENEMYMOVENUM
-	ld bc, wccf3
+	ld bc, wEnemyMonMinimized
 .asm_3f4e6
 	ld a, [de]
 	cp MINIMIZE
 	jr nz, .asm_3f4f9
-	bit HasSubstituteUp, [hl] ; substitute
+ ; if a substitute is up, slide off the substitute and show the mon pic before
+ ; playing the minimize animation
+	bit HasSubstituteUp, [hl]
 	push af
 	push bc
-	ld hl, Func_79747
-	ld b, BANK(Func_79747)
+	ld hl, HideSubstituteShowMonAnim
+	ld b, BANK(HideSubstituteShowMonAnim)
 	push de
-	call nz, Bankswitch ; play Minimize animation unless there's Substitute involved
+	call nz, Bankswitch
 	pop de
 .asm_3f4f9
 	call PlayCurrentMoveAnimation
@@ -7684,8 +7686,8 @@ UpdateStatDone: ; 3f4ca (f:74ca)
 	pop bc
 	ld a, $1
 	ld [bc], a
-	ld hl, Func_79771
-	ld b, BANK(Func_79771)
+	ld hl, ReshowSubstituteAnim
+	ld b, BANK(ReshowSubstituteAnim)
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties

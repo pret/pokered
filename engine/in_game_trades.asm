@@ -87,8 +87,8 @@ InGameTrade_GetMonName: ; 71b6a (1c:5b6a)
 INCLUDE "data/trades.asm"
 
 InGameTrade_DoTrade: ; 71c07 (1c:5c07)
-	xor a
-	ld [wd07d],a
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	dec a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -131,7 +131,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld [wcf91],a
 	xor a
 	ld [wcc49],a
-	ld [wcf95],a
+	ld [wRemoveMonFromBox],a
 	call RemovePokemon
 	ld a,$80
 	ld [wcc49],a

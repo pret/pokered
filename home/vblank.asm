@@ -13,7 +13,7 @@ VBlank::
 	ld a, [hSCY]
 	ld [rSCY], a
 
-	ld a, [wd0a0]
+	ld a, [wDisableVBlankWYUpdate]
 	and a
 	jr nz, .ok
 	ld a, [hWY]

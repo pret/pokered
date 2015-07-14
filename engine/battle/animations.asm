@@ -336,14 +336,14 @@ LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld d,0
 	add hl,de
 	ld a,[hli]
-	ld [wd07d],a ; number of tiles
+	ld [wTempTilesetNumTiles],a ; number of tiles
 	ld a,[hli]
 	ld e,a
 	ld a,[hl]
 	ld d,a ; de = address of tileset
 	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	ld a,[wd07d]
+	ld a,[wTempTilesetNumTiles]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
 
@@ -835,9 +835,9 @@ DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
 ; if the subaninmation counter is between 8 and 11, shake the screen horizontally and vertically
 .shakeScreen
 	ld b,1
-	predef Func_48125 ; shake horizontally
+	predef PredefShakeScreenHorizontally ; shake horizontally
 	ld b,1
-	predef_jump Func_480ff ; shake vertically
+	predef_jump PredefShakeScreenVertically ; shake vertically
 
 FlashScreenEveryEightFrameBlocks: ; 78ff7 (1e:4ff7)
 	ld a,[W_SUBANIMCOUNTER]
@@ -1225,14 +1225,14 @@ SetAnimationBGPalette: ; 791fc (1e:51fc)
 	ld b, $5
 
 AnimationShakeScreenVertically: ; 79209 (1e:5209)
-	predef_jump Func_480ff
+	predef_jump PredefShakeScreenVertically
 
 AnimationShakeScreen: ; 7920e (1e:520e)
 ; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
 	ld b, $8
 
 AnimationShakeScreenHorizontallyFast: ; 79210 (1e:5210)
-	predef_jump Func_48125
+	predef_jump PredefShakeScreenHorizontally
 
 AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 ; Draws water droplets all over the screen and makes them
@@ -1292,12 +1292,12 @@ AnimationSlideMonUp: ; 7927a (1e:527a)
 	ld c, $7
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wTileMap + $79
-	ld de, wTileMap + $65
+	hlCoord 1, 6
+	deCoord 1, 5
 	ld a, $30
 	jr z, .asm_79291
-	ld hl, wTileMap + $20
-	ld de, wTileMap + $c
+	hlCoord 12, 1
+	deCoord 12, 0
 	ld a, $ff
 .asm_79291
 	ld [wd09f], a
@@ -1345,16 +1345,16 @@ _AnimationSlideMonUp: ; 792bf (1e:52bf)
 	call CopyData
 	pop de
 	pop hl
-	ld bc, $0028
+	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop bc
 	dec b
 	jr nz, .asm_792c4
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wTileMap + $dd
+	hlCoord 1, 11
 	jr z, .asm_792e2
-	ld hl, wTileMap + $84
+	hlCoord 12, 6
 .asm_792e2
 	ld a, [wd09f]
 	inc a
@@ -1513,11 +1513,11 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 ; The mon's sprite disappears after this animation.
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wTileMap + $64
-	ld de, wTileMap + $66
+	hlCoord 0, 5
+	deCoord 2, 5
 	jr z, .asm_793c2
-	ld hl, wTileMap + $b
-	ld de, wTileMap + $d
+	hlCoord 11, 0
+	deCoord 13, 0
 
 .asm_793c2
 	xor a
@@ -2061,23 +2061,24 @@ CopySlowbroSpriteData: ; 7973f (1e:573f)
 	ld a, BANK(SlowbroSprite)
 	jp FarCopyData2
 
-Func_79747: ; 79747 (1e:5747)
+HideSubstituteShowMonAnim: ; 79747 (1e:5747)
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, wccf7
+	ld hl, wPlayerMonMinimized
 	ld a, [W_PLAYERBATTSTATUS2]
-	jr z, .asm_79758
-	ld hl, wccf3
+	jr z, .next1
+	ld hl, wEnemyMonMinimized
 	ld a, [W_ENEMYBATTSTATUS2]
-.asm_79758
+.next1
 	push hl
-	bit 4, a
-	jr nz, .asm_79762
+; if the substitute broke, slide it down, else slide it offscreen horizontally
+	bit HasSubstituteUp, a
+	jr nz, .substituteStillUp
 	call AnimationSlideMonDown
-	jr .asm_79765
-.asm_79762
+	jr .next2
+.substituteStillUp
 	call AnimationSlideMonOut
-.asm_79765
+.next2
 	pop hl
 	ld a, [hl]
 	and a
@@ -2085,7 +2086,7 @@ Func_79747: ; 79747 (1e:5747)
 	call AnimationFlashMonPic
 	jp AnimationShowMonPic
 
-Func_79771: ; 79771 (1e:5771)
+ReshowSubstituteAnim: ; 79771 (1e:5771)
 	call AnimationSlideMonOut
 	call AnimationSubstitute
 	jp AnimationShowMonPic
@@ -2644,16 +2645,16 @@ Unknown_79c50: ; 79c50 (1e:5c50)
 AnimationLeavesFalling: ; 79c74 (1e:5c74)
 ; Makes leaves float down from the top of the screen. This is used
 ; in Razor Leaf's animation.
-	ld a, [$ff48]
+	ld a, [rOBP0]
 	push af
 	ld a, [wcc79]
-	ld [$ff48], a
+	ld [rOBP0], a
 	ld d, $37
 	ld a, $3
 	ld [W_SUBANIMTRANSFORM], a
 	call Func_79c97
 	pop af
-	ld [$ff48], a
+	ld [rOBP0], a
 	ret
 
 AnimationPetalsFalling: ; 79c8a (1e:5c8a)
@@ -2870,7 +2871,7 @@ Func_79de9: ; 79de9 (1e:5de9)
 
 Func_79e0d: ; 79e0d (1e:5e0d)
 	ld a, h
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	jp Delay3

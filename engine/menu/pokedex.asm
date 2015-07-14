@@ -22,7 +22,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	xor a
 	ld [hli],a ; top menu item X
 	inc a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	inc hl
 	inc hl
 	ld a,6
@@ -32,7 +32,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	jr c,.goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
 	xor a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	ld [hJoy7],a
@@ -91,7 +91,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ld [hli],a ; menu watched keys (A button and B button)
 	xor a
 	ld [hli],a ; old menu item ID
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 .handleMenuInput
 	call HandleMenuInput
 	bit 1,a ; was the B button pressed?

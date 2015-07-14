@@ -641,7 +641,7 @@ OaksLabScript_1d00a: ; 1d00a (7:500a)
 	ld a, c
 	ld [wWhichPokemon], a
 	ld a, $1
-	ld [wcf96], a
+	ld [wItemQuantity], a
 	jp RemoveItemFromInventory
 
 OaksLabScript_1d02b: ; 1d02b (7:502b)

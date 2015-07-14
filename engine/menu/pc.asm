@@ -135,7 +135,7 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	jr .asm_17f40
 .asm_17f4f
 	ld a, $1
-	ld [wcf96], a
+	ld [wItemQuantity], a
 	ld a, [$ffdc]
 	ld [wWhichPokemon], a
 	ld hl, wNumBagItems

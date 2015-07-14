@@ -10,13 +10,13 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .skip
+	jr nz, .done ; if player chose No
 	dec a
 	ld [wUpdateSpritesEnabled], a
-	ld hl, wcd4f
+	ld hl, wSlotMachineRerollCounter
 	xor a
 	ld [hli], a
-	ld [hl], $2
+	ld [hl], SMILE_BUBBLE
 	predef EmotionBubble
 	call GBPalWhiteOutWithDelay3
 	call LoadSlotMachineTiles
@@ -25,30 +25,30 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call GoPAL_SET
 	call GBPalNormal
 	ld a, $e4
-	ld [$ff48], a
+	ld [rOBP0], a
 	ld hl, wd730
 	set 6, [hl]
 	xor a
-	ld [W_SUBANIMSUBENTRYADDR], a
-	ld hl, wTrainerSpriteOffset
+	ld [wSlotMachineAllowMatchesCounter], a
+	ld hl, wStoppingWhichSlotMachineWheel
 	ld bc, $0014
 	call FillMemory
 	call MainSlotMachineLoop
 	ld hl, wd730
 	res 6, [hl]
 	xor a
-	ld [W_SUBANIMSUBENTRYADDR], a
+	ld [wSlotMachineAllowMatchesCounter], a
 	call GBPalWhiteOutWithDelay3
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	call GoPAL_SET_CF1C
 	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
-.skip
+.done
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 	call GBPalNormal
-	ld a, [wcc5e]
+	ld a, [wSlotMachineSavedROMBank]
 	push af
 	jp CloseTextDisplay
 
@@ -57,43 +57,43 @@ PlaySlotMachineText: ; 37390 (d:7390)
 	db "@"
 
 MainSlotMachineLoop: ; 37395 (d:7395)
-	call SlotMachine_37754
+	call SlotMachine_PrintCreditCoins
 	xor a
-	ld hl, wcd4a
+	ld hl, wPayoutCoins
 	ld [hli], a
 	ld [hl], a
-	call SlotMachine_3775f
+	call SlotMachine_PrintPayoutCoins
 	ld hl, BetHowManySlotMachineText
 	call PrintText
 	call SaveScreenTilesToBuffer1
 .loop
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $2
+	ld a, 2
 	ld [wMaxMenuItem], a
-	ld a, $c
+	ld a, 12
 	ld [wTopMenuItemY], a
-	ld a, $f
+	ld a, 15
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
-	ld hl, wTileMap + $ea
-	ld b, $5
-	ld c, $4
+	ld [wMenuWatchMovingOutOfBounds], a
+	hlCoord 14, 11
+	ld b, 5
+	ld c, 4
 	call TextBoxBorder
-	ld hl, wTileMap + $100
+	hlCoord 16, 12
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
-	and $2
+	and B_BUTTON
 	jp nz, LoadScreenTilesFromBuffer1
 	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, $3
+	ld a, 3
 	sub b
-	ld [wcd50], a
+	ld [wSlotMachineBet], a
 	ld hl, wPlayerCoins
 	ld c, a
 	ld a, [hli]
@@ -107,11 +107,11 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	jr .loop
 .skip1
 	call LoadScreenTilesFromBuffer1
-	call SlotMachine_37741
-	call SlotMachine_377d5
-	call SlotMachine_37480
-	ld a, $4
-	ld hl, wcd4d
+	call SlotMachine_SubtractBetFromPlayerCoins
+	call SlotMachine_LightBalls
+	call SlotMachine_SetFlags
+	ld a, 4
+	ld hl, wSlotMachineWheel1SlipCounter
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
@@ -120,8 +120,8 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	call PlaySound
 	ld hl, StartSlotMachineText
 	call PrintText
-	call SlotMachine_374ad
-	call SlotMachine_37588
+	call SlotMachine_SpinWheels
+	call SlotMachine_CheckForMatches
 	ld hl, wPlayerCoins
 	ld a, [hli]
 	or [hl]
@@ -143,7 +143,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld a, [wCurrentMenuItem]
 	and a
 	ret nz
-	call SlotMachine_377ce
+	call SlotMachine_PutOutLitBalls
 	jp MainSlotMachineLoop
 
 CoinMultiplierSlotMachineText: ; 3745e (d:745e)
@@ -171,55 +171,55 @@ OneMoreGoSlotMachineText: ; 3747b (d:747b)
 	TX_FAR _OneMoreGoSlotMachineText
 	db "@"
 
-SlotMachine_37480: ; 37480 (d:7480)
-	ld hl, wcd4c
+SlotMachine_SetFlags: ; 37480 (d:7480)
+	ld hl, wSlotMachineFlags
 	bit 7, [hl]
 	ret nz
-	ld a, [W_SUBANIMSUBENTRYADDR]
+	ld a, [wSlotMachineAllowMatchesCounter]
 	and a
-	jr nz, .skip1
+	jr nz, .allowMatches
 	call Random
 	and a
-	jr z, .skip2
+	jr z, .setAllowMatchesCounter ; 1/256 (~0.4%) chance
 	ld b, a
-	ld a, [wcc5b]
+	ld a, [wSlotMachineSevenAndBarModeChance]
 	cp b
-	jr c, .skip3
-	ld a, $d2
+	jr c, .allowSevenAndBarMatches
+	ld a, 210
 	cp b
-	jr c, .skip1
-	ld [hl], $0
+	jr c, .allowMatches ; 55/256 (~21.5%) chance
+	ld [hl], 0
 	ret
-.skip1
+.allowMatches
 	set 6, [hl]
 	ret
-.skip2
-	ld a, $3c
-	ld [W_SUBANIMSUBENTRYADDR], a
+.setAllowMatchesCounter
+	ld a, 60
+	ld [wSlotMachineAllowMatchesCounter], a
 	ret
-.skip3
+.allowSevenAndBarMatches
 	set 7, [hl]
 	ret
 
-SlotMachine_374ad: ; 374ad (d:74ad)
+SlotMachine_SpinWheels: ; 374ad (d:74ad)
 	ld c, 20
 .loop1
 	push bc
-	call SlotMachine_37813
-	call SlotMachine_37823
-	call SlotMachine_37833
+	call SlotMachine_AnimWheel1
+	call SlotMachine_AnimWheel2
+	call SlotMachine_AnimWheel3
 	ld c, 2
 	call DelayFrames
 	pop bc
 	dec c
 	jr nz, .loop1
 	xor a
-	ld [wTrainerSpriteOffset], a
+	ld [wStoppingWhichSlotMachineWheel], a
 .loop2
-	call SlotMachine_37882
-	call SlotMachine_374df
-	call SlotMachine_374fb
-	call SlotMachine_37517
+	call SlotMachine_HandleInputWhileWheelsSpin
+	call SlotMachine_StopOrAnimWheel1
+	call SlotMachine_StopOrAnimWheel2
+	call SlotMachine_StopOrAnimWheel3
 	ret c
 	ld a, [wOnSGB]
 	xor $1
@@ -228,194 +228,214 @@ SlotMachine_374ad: ; 374ad (d:74ad)
 	call DelayFrames
 	jr .loop2
 
-SlotMachine_374df: ; 374df (d:74df)
-	ld a, [wTrainerSpriteOffset]
-	cp $1
-	jr c, .skip
-	ld de, wTrainerEngageDistance
+; Note that the wheels can only stop when a symbol is centred in the wheel
+; and thus 3 full symbols rather than 2 full symbols and 2 half symbols are
+; visible. The 3 functions below ensure this by checking if the wheel offset
+; is even before stopping the wheel.
+
+SlotMachine_StopOrAnimWheel1: ; 374df (d:74df)
+	ld a, [wStoppingWhichSlotMachineWheel]
+	cp 1
+	jr c, .animWheel
+	ld de, wSlotMachineWheel1Offset
 	ld a, [de]
 	rra
-	jr nc, .skip
-	ld hl, wcd4d
+	jr nc, .animWheel ; check that a symbol is centred in the wheel
+	ld hl, wSlotMachineWheel1SlipCounter
 	ld a, [hl]
 	and a
 	ret z
 	dec [hl]
-	call SlotMachine_3752c
+	call SlotMachine_StopWheel1Early
 	ret nz
-.skip
-	jp SlotMachine_37813
+.animWheel
+	jp SlotMachine_AnimWheel1
 
-SlotMachine_374fb: ; 374fb (d:74fb)
-	ld a, [wTrainerSpriteOffset]
-	cp $2
-	jr c, .skip
-	ld de, wTrainerFacingDirection
+SlotMachine_StopOrAnimWheel2: ; 374fb (d:74fb)
+	ld a, [wStoppingWhichSlotMachineWheel]
+	cp 2
+	jr c, .animWheel
+	ld de, wSlotMachineWheel2Offset
 	ld a, [de]
 	rra
-	jr nc, .skip
-	ld hl, wcd4e
+	jr nc, .animWheel ; check that a symbol is centred in the wheel
+	ld hl, wSlotMachineWheel2SlipCounter
 	ld a, [hl]
 	and a
 	ret z
 	dec [hl]
-	call SlotMachine_37552
+	call SlotMachine_StopWheel2Early
 	ret z
-.skip
-	jp SlotMachine_37823
+.animWheel
+	jp SlotMachine_AnimWheel2
 
-SlotMachine_37517: ; 37517 (d:7517)
-	ld a, [wTrainerSpriteOffset]
-	cp $3
-	jr c, .skip
-	ld de, wTrainerScreenY
+SlotMachine_StopOrAnimWheel3: ; 37517 (d:7517)
+	ld a, [wStoppingWhichSlotMachineWheel]
+	cp 3
+	jr c, .animWheel
+	ld de, wSlotMachineWheel3Offset
 	ld a, [de]
 	rra
-	jr nc, .skip
+	jr nc, .animWheel ; check that a symbol is centred in the wheel
+; wheel 3 stops as soon as possible
 	scf
 	ret
-.skip
-	call SlotMachine_37833
+.animWheel
+	call SlotMachine_AnimWheel3
 	and a
 	ret
 
-SlotMachine_3752c: ; 3752c (d:752c)
-	call SlotMachine_GetWheelOneTile
-	ld hl, wTrainerScreenX
-	ld a, [wcd4c]
+SlotMachine_StopWheel1Early: ; 3752c (d:752c)
+	call SlotMachine_GetWheel1Tiles
+	ld hl, wSlotMachineWheel1BottomTile
+	ld a, [wSlotMachineFlags]
 	and $80
-	jr nz, .skip1
+	jr nz, .sevenAndBarMode
+; Stop early if the middle symbol is not a cherry.
 	inc hl
 	ld a, [hl]
-	cp $a
-	jr nz, .skip2
+	cp SLOTSCHERRY >> 8
+	jr nz, .stopWheel
 	ret
-.skip1
+; It looks like this was intended to make the wheel stop when a 7 symbol was
+; visible, but it has a bug and so the wheel stops randomly.
+.sevenAndBarMode
 	ld c, $3
 .loop
 	ld a, [hli]
-	cp $2
-	jr c, .skip2
+	cp SLOTS7 >> 8
+	jr c, .stopWheel ; condition never true
 	dec c
 	jr nz, .loop
 	ret
-.skip2
+.stopWheel
 	inc a
-	ld hl, wcd4d
-	ld [hl], $0
+	ld hl, wSlotMachineWheel1SlipCounter
+	ld [hl], 0
 	ret
 
-SlotMachine_37552: ; 37552 (d:7552)
-	call SlotMachine_GetWheelTwoTile
-	ld a, [wcd4c]
+SlotMachine_StopWheel2Early: ; 37552 (d:7552)
+	call SlotMachine_GetWheel2Tiles
+	ld a, [wSlotMachineFlags]
 	and $80
-	jr nz, .skip1
-	call SlotMachine_3756e
+	jr nz, .sevenAndBarMode
+; Stop early if any symbols are lined up in the first two wheels.
+	call SlotMachine_FindWheel1Wheel2Matches
 	ret nz
-	jr .skip2
-.skip1
-	call SlotMachine_3756e
+	jr .stopWheel
+; Stop early if two 7 symbols or two bar symbols are lined up in the first two
+; wheels OR if no symbols are lined up and the bottom symbol in wheel 2 is a
+; 7 symbol or bar symbol. The second part could be a bug or a way to reduce the
+; player's odds.
+.sevenAndBarMode
+	call SlotMachine_FindWheel1Wheel2Matches
 	ld a, [de]
-	cp $7
+	cp (SLOTSBAR >> 8) + 1
 	ret nc
-.skip2
+.stopWheel
 	xor a
-	ld [wcd4e], a
+	ld [wSlotMachineWheel2SlipCounter], a
 	ret
 
-SlotMachine_3756e: ; 3756e (d:756e)
-	ld hl, wTrainerScreenX
-	ld de, wcd44
+SlotMachine_FindWheel1Wheel2Matches: ; 3756e (d:756e)
+; return whether wheel 1 and wheel 2's current positions allow a match (given
+; that wheel 3 stops in a good position) in Z
+	ld hl, wSlotMachineWheel1BottomTile
+	ld de, wSlotMachineWheel2BottomTile
 	ld a, [de]
-	cp [hl]
+	cp [hl] ; wheel 1 bottom, wheel 2 bottom
 	ret z
 	inc de
 	ld a, [de]
-	cp [hl]
+	cp [hl] ; wheel 1 bottom, wheel 2 middle
 	ret z
 	inc hl
-	cp [hl]
+	cp [hl] ; wheel 1 middle, wheel 2 middle
 	ret z
 	inc hl
-	cp [hl]
+	cp [hl] ; wheel 1 top, wheel 2 middle
 	ret z
 	inc de
 	ld a, [de]
-	cp [hl]
+	cp [hl] ; wheel 1 top, wheel 2 top
 	ret z
 	dec de
 	dec de
 	ret
 
-SlotMachine_37588: ; 37588 (d:7588)
-	call SlotMachine_GetWheelThreeTile
-	ld a, [wcd50]
-	cp $2
-	jr z, .skip1
-	cp $1
-	jr z, .skip2
-	ld hl, wTrainerScreenX
-	ld de, wcd45
-	ld bc, wcd49
+SlotMachine_CheckForMatches: ; 37588 (d:7588)
+	call SlotMachine_GetWheel3Tiles
+	ld a, [wSlotMachineBet]
+	cp 2
+	jr z, .checkMatchesFor2CoinBet
+	cp 1
+	jr z, .checkMatchFor1CoinBet
+; 3 coin bet allows diagonal matches (plus the matches for 1/2 coin bets)
+	ld hl, wSlotMachineWheel1BottomTile
+	ld de, wSlotMachineWheel2MiddleTile
+	ld bc, wSlotMachineWheel3TopTile
 	call SlotMachine_CheckForMatch
-	jp z, .skip5
-	ld hl, wcd43
-	ld de, wcd45
-	ld bc, wcd47
+	jp z, .foundMatch
+	ld hl, wSlotMachineWheel1TopTile
+	ld de, wSlotMachineWheel2MiddleTile
+	ld bc, wSlotMachineWheel3BottomTile
 	call SlotMachine_CheckForMatch
-	jr z, .skip5
-.skip1
-	ld hl, wcd43
-	ld de, wcd46
-	ld bc, wcd49
+	jr z, .foundMatch
+; 2 coin bet allows top/bottom horizontal matches (plus the match for a 1 coin bet)
+.checkMatchesFor2CoinBet
+	ld hl, wSlotMachineWheel1TopTile
+	ld de, wSlotMachineWheel2TopTile
+	ld bc, wSlotMachineWheel3TopTile
 	call SlotMachine_CheckForMatch
-	jr z, .skip5
-	ld hl, wTrainerScreenX
-	ld de, wcd44
-	ld bc, wcd47
+	jr z, .foundMatch
+	ld hl, wSlotMachineWheel1BottomTile
+	ld de, wSlotMachineWheel2BottomTile
+	ld bc, wSlotMachineWheel3BottomTile
 	call SlotMachine_CheckForMatch
-	jr z, .skip5
-.skip2
-	ld hl, wcd42
-	ld de, wcd45
-	ld bc, wcd48
+	jr z, .foundMatch
+; 1 coin bet only allows a middle horizontal match
+.checkMatchFor1CoinBet
+	ld hl, wSlotMachineWheel1MiddleTile
+	ld de, wSlotMachineWheel2MiddleTile
+	ld bc, wSlotMachineWheel3MiddleTile
 	call SlotMachine_CheckForMatch
-	jr z, .skip5
-	ld a, [wcd4c]
+	jr z, .foundMatch
+	ld a, [wSlotMachineFlags]
 	and $c0
-	jr z, .skip3
-	ld hl, wcd4f
+	jr z, .noMatch
+	ld hl, wSlotMachineRerollCounter
 	dec [hl]
-	jr nz, .skip4
-.skip3
+	jr nz, .rollWheel3DownByOneSymbol
+.noMatch
 	ld hl, NotThisTimeText
 	call PrintText
-.loop
+.done
 	xor a
 	ld [wc002], a
 	ret
-.skip4
-	call SlotMachine_37833
+.rollWheel3DownByOneSymbol
+	call SlotMachine_AnimWheel3
 	call DelayFrame
-	call SlotMachine_37833
+	call SlotMachine_AnimWheel3
 	call DelayFrame
-	jp SlotMachine_37588
-.skip5
-	ld a, [wcd4c]
+	jp SlotMachine_CheckForMatches
+.foundMatch
+	ld a, [wSlotMachineFlags]
 	and $c0
-	jr z, .skip4
+	jr z, .rollWheel3DownByOneSymbol ; roll wheel if player isn't allowed to win
 	and $80
-	jr nz, .skip6
+	jr nz, .acceptMatch
+; if 7/bar matches aren't enabled and the match was a 7/bar symbol, roll wheel
 	ld a, [hl]
-	cp $7
-	jr c, .skip4
-.skip6
+	cp (SLOTSBAR >> 8) + 1
+	jr c, .rollWheel3DownByOneSymbol
+.acceptMatch
 	ld a, [hl]
 	sub $2
-	ld [wTrainerScreenX], a
+	ld [wSlotMachineWinningSymbol], a
 	ld hl, SlotRewardPointers
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hli]
 	ld e, a
@@ -426,39 +446,39 @@ SlotMachine_37588: ; 37588 (d:7588)
 	ld h, [hl]
 	ld l, a
 	ld de, wcf4b
-	ld bc, $0004
+	ld bc, 4
 	call CopyData
 	pop hl
-	ld de, .asm_37638
+	ld de, .flashScreenLoop
 	push de
 	jp [hl]
 
-.asm_37638
-	ld a, [$ff47]
+.flashScreenLoop
+	ld a, [rBGP]
 	xor $40
-	ld [$ff47], a
+	ld [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
-	jr nz, .asm_37638
-	ld hl, wcd4a
+	jr nz, .flashScreenLoop
+	ld hl, wPayoutCoins
 	ld [hl], d
 	inc hl
 	ld [hl], e
-	call SlotMachine_3775f
-	ld hl, SlotsMachineText_37665
+	call SlotMachine_PrintPayoutCoins
+	ld hl, SymbolLinedUpSlotMachineText
 	call PrintText
 	call WaitForTextScrollButtonPress
-	call SlotMachine_3776b
-	call SlotMachine_3775f
+	call SlotMachine_PayCoinsToPlayer
+	call SlotMachine_PrintPayoutCoins
 	ld a, $e4
-	ld [$ff48], a
-	jp .loop
+	ld [rOBP0], a
+	jp .done
 
-SlotsMachineText_37665: ; 37665 (d:7665)
+SymbolLinedUpSlotMachineText: ; 37665 (d:7665)
 	TX_ASM
 	push bc
-	call SlotMachine_37728
+	call SlotMachine_PrintWinningSymbol
 	ld hl, LinedUpText
 	pop bc
 	inc bc
@@ -510,28 +530,28 @@ SlotMachine_CheckForMatch: ; 376a2 (d:76a2)
 	cp [hl]
 	ret
 
-SlotMachine_GetWheelThreeTile: ; 376a8 (d:76a8)
-	ld de, wcd47
+SlotMachine_GetWheel3Tiles: ; 376a8 (d:76a8)
+	ld de, wSlotMachineWheel3BottomTile
 	ld hl, SlotMachineWheel3
-	ld a, [wTrainerScreenY]
-	call SlotMachine_GetWheelTile
+	ld a, [wSlotMachineWheel3Offset]
+	call SlotMachine_GetWheelTiles
 
-SlotMachine_GetWheelTwoTile: ; 376b4 (d:76b4)
-	ld de, wcd44
+SlotMachine_GetWheel2Tiles: ; 376b4 (d:76b4)
+	ld de, wSlotMachineWheel2BottomTile
 	ld hl, SlotMachineWheel2
-	ld a, [wTrainerFacingDirection]
-	call SlotMachine_GetWheelTile
+	ld a, [wSlotMachineWheel2Offset]
+	call SlotMachine_GetWheelTiles
 
-SlotMachine_GetWheelOneTile: ; 376c0 (d:76c0)
-	ld de, wTrainerScreenX
+SlotMachine_GetWheel1Tiles: ; 376c0 (d:76c0)
+	ld de, wSlotMachineWheel1BottomTile
 	ld hl, SlotMachineWheel1
-	ld a, [wTrainerEngageDistance]
+	ld a, [wSlotMachineWheel1Offset]
 
-SlotMachine_GetWheelTile: ; 376c9 (d:76c9)
+SlotMachine_GetWheelTiles: ; 376c9 (d:76c9)
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
-	ld c, $3
+	ld c, 3
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -542,7 +562,7 @@ SlotMachine_GetWheelTile: ; 376c9 (d:76c9)
 	ret
 
 SlotReward8Func: ; 376d7 (d:76d7)
-	ld hl, W_SUBANIMSUBENTRYADDR
+	ld hl, wSlotMachineAllowMatchesCounter
 	ld a, [hl]
 	and a
 	jr z, .skip
@@ -553,7 +573,7 @@ SlotReward8Func: ; 376d7 (d:76d7)
 	ret
 
 SlotReward15Func: ; 376e5 (d:76e5)
-	ld hl, W_SUBANIMSUBENTRYADDR
+	ld hl, wSlotMachineAllowMatchesCounter
 	ld a, [hl]
 	and a
 	jr z, .skip
@@ -567,7 +587,7 @@ SlotReward100Func: ; 376f3 (d:76f3)
 	ld a, (SFX_1f_42 - SFX_Headers_1f) / 3
 	call PlaySound
 	xor a
-	ld [wcd4c], a
+	ld [wSlotMachineFlags], a
 	ld b, $8
 	ld de, 100
 	ret
@@ -581,9 +601,9 @@ SlotReward300Func: ; 37702 (d:7702)
 	cp $80
 	ld a, $0
 	jr c, .skip
-	ld [wcd4c], a
+	ld [wSlotMachineFlags], a
 .skip
-	ld [W_SUBANIMSUBENTRYADDR], a
+	ld [wSlotMachineAllowMatchesCounter], a
 	ld b, $14
 	ld de, 300
 	ret
@@ -592,26 +612,27 @@ YeahText: ; 37722 (d:7722)
 	TX_FAR _YeahText
 	db $0a, "@"
 
-SlotMachine_37728: ; 37728 (d:7728)
-	ld hl, wTileMap + $11a
-	ld a, [wTrainerScreenX]
+SlotMachine_PrintWinningSymbol: ; 37728 (d:7728)
+; prints winning symbol and down arrow in text box
+	hlCoord 2, 14
+	ld a, [wSlotMachineWinningSymbol]
 	add $25
 	ld [hli], a
 	inc a
 	ld [hld], a
 	inc a
-	ld de, $ffec
+	ld de, -SCREEN_WIDTH
 	add hl, de
 	ld [hli], a
 	inc a
 	ld [hl], a
-	ld hl, wTileMap + $152
-	ld [hl], $ee
+	hlCoord 18, 16
+	ld [hl], $ee ; down arrow
 	ret
 
-SlotMachine_37741: ; 37741 (d:7741)
-	ld hl, wcd4b
-	ld a, [wcd50]
+SlotMachine_SubtractBetFromPlayerCoins: ; 37741 (d:7741)
+	ld hl, wTempCoins2 + 1
+	ld a, [wSlotMachineBet]
 	ld [hld], a
 	xor a
 	ld [hli], a
@@ -619,136 +640,143 @@ SlotMachine_37741: ; 37741 (d:7741)
 	ld c, $2
 	predef SubBCDPredef
 
-SlotMachine_37754: ; 37754 (d:7754)
-	ld hl, wTileMap + $19
+SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
+	hlCoord 5, 1
 	ld de, wPlayerCoins
 	ld c, $2
 	jp PrintBCDNumber
 
-SlotMachine_3775f: ; 3775f (d:775f)
-	ld hl, wTileMap + $1f
-	ld de, wcd4a
-	ld bc, $8204
+SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
+	hlCoord 11, 1
+	ld de, wPayoutCoins
+	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
 	jp PrintNumber
 
-SlotMachine_3776b: ; 3776b (d:776b)
+SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)
 	ld a, $1
 	ld [wc002], a
 	call WaitForSoundToFinish
-	ld hl, wcd46
+
+; Put 1 in the temp coins variable. This value is added to the player's coins
+; repeatedly so the player can watch the value go up 1 coin at a time.
+	ld hl, wTempCoins1
 	xor a
 	ld [hli], a
 	inc a
 	ld [hl], a
-	ld a, $5
-	ld [W_SUBANIMTRANSFORM], a
+
+	ld a, 5
+	ld [wAnimCounter], a
+
+; Subtract 1 from the payout amount and add 1 to the player's coins each
+; iteration until the payout amount reaches 0.
 .loop
-	ld a, [wcd4b]
+	ld a, [wPayoutCoins + 1]
 	ld l, a
-	ld a, [wcd4a]
+	ld a, [wPayoutCoins]
 	ld h, a
 	or l
 	ret z
-	ld de, $ffff
+	ld de, -1
 	add hl, de
 	ld a, l
-	ld [wcd4b], a
+	ld [wPayoutCoins + 1], a
 	ld a, h
-	ld [wcd4a], a
-	ld hl, wcd47
+	ld [wPayoutCoins], a
+	ld hl, wTempCoins1 + 1
 	ld de, wPlayerCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	call SlotMachine_37754
-	call SlotMachine_3775f
+	call SlotMachine_PrintCreditCoins
+	call SlotMachine_PrintPayoutCoins
 	ld a, (SFX_1f_65 - SFX_Headers_1f) / 3
 	call PlaySound
-	ld a, [W_SUBANIMTRANSFORM]
+	ld a, [wAnimCounter]
 	dec a
 	jr nz, .skip1
-	ld a, [$ff48]
-	xor $40
-	ld [$ff48], a
-	ld a, $5
+	ld a, [rOBP0]
+	xor $40 ; make the slot wheel symbols flash
+	ld [rOBP0], a
+	ld a, 5
 .skip1
-	ld [W_SUBANIMTRANSFORM], a
-	ld a, [wTrainerScreenX]
-	cp $7
+	ld [wAnimCounter], a
+	ld a, [wSlotMachineWinningSymbol]
+	cp (SLOTSBAR >> 8) + 1
 	ld c, 8
 	jr nc, .skip2
-	srl c
+	srl c ; c = 4 (make the the coins transfer faster if the symbol was 7 or bar)
 .skip2
 	call DelayFrames
 	jr .loop
 
-SlotMachine_377ce: ; 377ce (d:77ce)
+SlotMachine_PutOutLitBalls: ; 377ce (d:77ce)
 	ld a, $23
 	ld [wd08a], a
-	jr SlotMachine_377e3
+	jr SlotMachine_UpdateThreeCoinBallTiles
 
-SlotMachine_377d5: ; 377d5 (d:77d5)
+SlotMachine_LightBalls: ; 377d5 (d:77d5)
 	ld a, $14
 	ld [wd08a], a
-	ld a, [wcd50]
+	ld a, [wSlotMachineBet]
 	dec a
-	jr z, SlotMachine_377fb
+	jr z, SlotMachine_UpdateOneCoinBallTiles
 	dec a
-	jr z, SlotMachine_377ef
+	jr z, SlotMachine_UpdateTwoCoinBallTiles
 
-SlotMachine_377e3: ; 377e3 (d:77e3)
-	ld hl, wTileMap + $2b
-	call SlotMachine_377fe
-	ld hl, wTileMap + $cb
-	call SlotMachine_377fe
+SlotMachine_UpdateThreeCoinBallTiles: ; 377e3 (d:77e3)
+	hlCoord 3, 2
+	call SlotMachine_UpdateBallTiles
+	hlCoord 3, 10
+	call SlotMachine_UpdateBallTiles
 
-SlotMachine_377ef: ; 377ef (d:77ef)
-	ld hl, wTileMap + $53
-	call SlotMachine_377fe
-	ld hl, wTileMap + $a3
-	call SlotMachine_377fe
+SlotMachine_UpdateTwoCoinBallTiles: ; 377ef (d:77ef)
+	hlCoord 3, 4
+	call SlotMachine_UpdateBallTiles
+	hlCoord 3, 8
+	call SlotMachine_UpdateBallTiles
 
-SlotMachine_377fb: ; 377fb (d:77fb)
-	ld hl, wTileMap + $7b
+SlotMachine_UpdateOneCoinBallTiles: ; 377fb (d:77fb)
+	hlCoord 3, 6
 
-SlotMachine_377fe: ; 377fe (d:77fe)
+SlotMachine_UpdateBallTiles: ; 377fe (d:77fe)
 	ld a, [wd08a]
 	ld [hl], a
-	ld bc, $000d
+	ld bc, 13
 	add hl, bc
 	ld [hl], a
-	ld bc, $0007
+	ld bc, 7
 	add hl, bc
 	inc a
 	ld [hl], a
-	ld bc, $000d
+	ld bc, 13
 	add hl, bc
 	ld [hl], a
 	ret
 
-SlotMachine_37813: ; 37813 (d:7813)
+SlotMachine_AnimWheel1: ; 37813 (d:7813)
 	ld bc, SlotMachineWheel1
-	ld de, wTrainerEngageDistance
+	ld de, wSlotMachineWheel1Offset
 	ld hl, wOAMBuffer
 	ld a, $30
 	ld [W_BASECOORDX], a
-	jr SlotMachine_37841
+	jr SlotMachine_AnimWheel
 
-SlotMachine_37823: ; 37823 (d:7823)
+SlotMachine_AnimWheel2: ; 37823 (d:7823)
 	ld bc, SlotMachineWheel2
-	ld de, wTrainerFacingDirection
+	ld de, wSlotMachineWheel2Offset
 	ld hl, wOAMBuffer + $30
 	ld a, $50
 	ld [W_BASECOORDX], a
-	jr SlotMachine_37841
+	jr SlotMachine_AnimWheel
 
-SlotMachine_37833: ; 37833 (d:7833)
+SlotMachine_AnimWheel3: ; 37833 (d:7833)
 	ld bc, SlotMachineWheel3
-	ld de, wTrainerScreenY
+	ld de, wSlotMachineWheel3Offset
 	ld hl, wOAMBuffer + $60
 	ld a, $70
 	ld [W_BASECOORDX], a
 
-SlotMachine_37841: ; 37841 (d:7841)
+SlotMachine_AnimWheel: ; 37841 (d:7841)
 	ld a, $58
 	ld [W_BASECOORDY], a
 	push de
@@ -756,10 +784,9 @@ SlotMachine_37841: ; 37841 (d:7841)
 	ld d, b
 	add c
 	ld e, a
-	jr nc, SlotMachine_3784e
+	jr nc, .loop
 	inc d
-
-SlotMachine_3784e: ; 3784e (d:784e)
+.loop
 	ld a, [W_BASECOORDY]
 	ld [hli], a
 	ld a, [W_BASECOORDX]
@@ -783,30 +810,30 @@ SlotMachine_3784e: ; 3784e (d:784e)
 	sub $8
 	ld [W_BASECOORDY], a
 	cp $28
-	jr nz, SlotMachine_3784e
+	jr nz, .loop
 	pop de
 	ld a, [de]
-	inc a
-	cp $1e
+	inc a ; advance the offset so that the wheel animates
+	cp 30
 	jr nz, .skip
-	xor a
+	xor a ; wrap around to 0 when the offset reaches 30
 .skip
 	ld [de], a
 	ret
 
-SlotMachine_37882: ; 37882 (d:7882)
+SlotMachine_HandleInputWhileWheelsSpin: ; 37882 (d:7882)
 	call DelayFrame
 	call JoypadLowSensitivity
 	ld a, [hJoy5]
-	and $1
+	and A_BUTTON
 	ret z
-	ld hl, wTrainerSpriteOffset
+	ld hl, wStoppingWhichSlotMachineWheel
 	ld a, [hl]
 	dec a
-	ld de, wcd4d
+	ld de, wSlotMachineWheel1SlipCounter
 	jr z, .skip
 	dec a
-	ld de, wcd4e
+	ld de, wSlotMachineWheel2SlipCounter
 	jr z, .skip
 .loop
 	inc [hl]
@@ -845,19 +872,12 @@ LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	call SlotMachine_37813
-	call SlotMachine_37823
-	jp SlotMachine_37833
+	call SlotMachine_AnimWheel1
+	call SlotMachine_AnimWheel2
+	jp SlotMachine_AnimWheel3
 
 SlotMachineMap: ; 378f5 (d:78f5)
 	INCBIN "gfx/tilemaps/slotmachine.map"
-
-SLOTS7		EQU $0200
-SLOTSBAR	EQU $0604
-SLOTSCHERRY	EQU $0A08
-SLOTSFISH	EQU $0E0C
-SLOTSBIRD	EQU $1210
-SLOTSMOUSE	EQU $1614
 
 INCLUDE "data/slot_machine_wheels.asm"
 

@@ -25,7 +25,7 @@ DayCareMText1: ; 56254 (15:6254)
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
@@ -45,13 +45,13 @@ DayCareMText1: ; 56254 (15:6254)
 	call GetPartyMonName
 	ld hl, DayCareMText_56419
 	call PrintText
-	ld a, $1
+	ld a, 1
 	ld [W_DAYCARE_IN_USE], a
-	ld a, $3
-	ld [wcf95], a
-	call Func_3a68
+	ld a, PARTY_TO_DAYCARE
+	ld [wMoveMonType], a
+	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
@@ -158,26 +158,26 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	predef SubBCDPredef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareMText_5644f
 	call PrintText
-	ld a, $2
-	ld [wcf95], a
-	call Func_3a68
+	ld a, DAYCARE_TO_PARTY
+	ld [wMoveMonType], a
+	call MoveMon
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
 	ld a, [wPartyCount]
 	dec a
 	push af
-	ld bc, $002c
+	ld bc, wPartyMon2 - wPartyMon1
 	push bc
 	ld hl, wPartyMon1Moves
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, $1
+	ld a, 1
 	ld [wHPBarMaxHP], a
 	predef WriteMonMoves
 	pop bc
@@ -186,7 +186,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, $0021
+	ld bc, wPartyMon1MaxHP - wPartyMon1HP
 	add hl, bc
 	ld a, [hli]
 	ld [de], a

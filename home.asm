@@ -378,7 +378,7 @@ PartyMenuInit:: ; 1420 (0:1420)
 	set 6, [hl] ; turn off letter printing delay
 	xor a
 	ld [wcc49], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wTopMenuItemY
 	inc a
 	ld [hli], a ; top menu item Y
@@ -456,7 +456,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	callba ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap],a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	call RedrawPartyMenu
 	jr HandlePartyMenuInput
 .handleSwap
@@ -1201,8 +1201,8 @@ DisplayPokemartDialogue:: ; 2a2e (0:2a2e)
 	pop hl
 	inc hl
 	call LoadItemList
-	ld a,$02
-	ld [wListMenuID],a ; selects between subtypes of menus
+	ld a,PRICEDITEMLISTMENU
+	ld [wListMenuID],a
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,Bank(DisplayPokemartDialogue_)
@@ -1219,12 +1219,12 @@ PokemartGreetingText:: ; 2a55 (0:2a55)
 	db "@"
 
 LoadItemList:: ; 2a5a (0:2a5a)
-	ld a,$01
+	ld a,1
 	ld [wUpdateSpritesEnabled],a
 	ld a,h
-	ld [wd128],a
+	ld [wItemListPointer],a
 	ld a,l
-	ld [wd129],a
+	ld [wItemListPointer + 1],a
 	ld de,wStringBuffer2 + 11
 .loop
 	ld a,[hli]
@@ -1336,7 +1336,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 ; INPUT:
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
-; [wcf96] = quantity to remove
+; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory:: ; 2bbb (0:2bbb)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -1353,7 +1353,7 @@ RemoveItemFromInventory:: ; 2bbb (0:2bbb)
 ; INPUT:
 ; HL = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
-; [wcf96] = item quantity
+; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory:: ; 2bcf (0:2bcf)
 	push bc
@@ -1391,13 +1391,13 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	set 6,[hl] ; turn off letter printing delay
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
-	ld [wd12a],a
+	ld [wListCount],a
 	ld a,[wList]
 	ld l,a
 	ld a,[wList + 1]
 	ld h,a ; hl = address of the list
-	ld a,[hl]
-	ld [wd12a],a ; [wd12a] = number of list entries
+	ld a,[hl] ; the first byte is the number of entries in the list
+	ld [wListCount],a
 	ld a,LIST_MENU_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw the menu text box
@@ -1411,8 +1411,8 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	call UpdateSprites
 .skipMovingSprites
 	ld a,1 ; max menu item ID is 1 if the list has less than 2 entries
-	ld [wcc37],a
-	ld a,[wd12a]
+	ld [wMenuWatchMovingOutOfBounds],a
+	ld a,[wListCount]
 	cp a,2 ; does the list have less than 2 entries?
 	jr c,.setMenuVariables
 	ld a,2 ; max menu item ID is 2 if the list has at least 2 entries
@@ -1461,17 +1461,20 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 .buttonAPressed
 	ld a,[wCurrentMenuItem]
 	call PlaceUnfilledArrowMenuCursor
+
+; pointless because both values are overwritten before they are read
 	ld a,$01
-	ld [wd12e],a
-	ld [wd12d],a
+	ld [wMenuExitMethod],a
+	ld [wChosenMenuItem],a 
+
 	xor a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	ld a,[wCurrentMenuItem]
 	ld c,a
 	ld a,[wListScrollOffset]
 	add c
 	ld c,a
-	ld a,[wd12a] ; number of list entries
+	ld a,[wListCount]
 	and a ; is the list empty?
 	jp z,ExitListMenu ; if so, exit the menu
 	dec a
@@ -1506,7 +1509,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 ; if it's an item menu
 	inc hl
 	ld a,[hl] ; a = item quantity
-	ld [wcf97],a
+	ld [wMaxItemQuantity],a
 .skipGettingQuantity
 	ld a,[wcf91]
 	ld [wd0b5],a
@@ -1527,10 +1530,10 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 .storeChosenEntry ; store the menu entry that the player chose and return
 	ld de,wcd6d
 	call CopyStringToCF4B ; copy name to wcf4b
-	ld a,$01
-	ld [wd12e],a
+	ld a,CHOSE_MENU_ITEM
+	ld [wMenuExitMethod],a
 	ld a,[wCurrentMenuItem]
-	ld [wd12d],a
+	ld [wChosenMenuItem],a
 	xor a
 	ld [hJoy7],a ; joypad state update flag
 	ld hl,wd730
@@ -1549,7 +1552,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,[hl]
 	add a,3
 	ld b,a
-	ld a,[wd12a] ; number of list entries
+	ld a,[wListCount]
 	cp b ; will going down scroll past the Cancel button?
 	jp c,DisplayListMenuIDLoop
 	inc [hl] ; if not, go down
@@ -1584,7 +1587,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld de,InitialQuantityText
 	call PlaceString
 	xor a
-	ld [wcf96],a ; initialize current quantity to 0
+	ld [wItemQuantity],a ; initialize current quantity to 0
 	jp .incrementQuantity
 .waitForKeyPressLoop
 	call JoypadLowSensitivity
@@ -1599,10 +1602,10 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	jr nz,.decrementQuantity
 	jr .waitForKeyPressLoop
 .incrementQuantity
-	ld a,[wcf97] ; max quantity
+	ld a,[wMaxItemQuantity]
 	inc a
 	ld b,a
-	ld hl,wcf96 ; current quantity
+	ld hl,wItemQuantity ; current quantity
 	inc [hl]
 	ld a,[hl]
 	cp b
@@ -1612,11 +1615,11 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld [hl],a
 	jr .handleNewQuantity
 .decrementQuantity
-	ld hl,wcf96 ; current quantity
+	ld hl,wItemQuantity ; current quantity
 	dec [hl]
 	jr nz,.handleNewQuantity
 ; wrap to the max quantity if the player goes below 1
-	ld a,[wcf97] ; max quantity
+	ld a,[wMaxItemQuantity]
 	ld [hl],a
 .handleNewQuantity
 	hlCoord 17, 10
@@ -1625,7 +1628,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	jr nz,.printQuantity
 .printPrice
 	ld c,$03
-	ld a,[wcf96]
+	ld a,[wItemQuantity]
 	ld b,a
 	ld hl,$ff9f ; total price
 ; initialize total price to 0
@@ -1641,7 +1644,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	pop bc
 	dec b
 	jr nz,.addLoop
-	ld a,[$ff8e]
+	ld a,[hHalveItemPrices]
 	and a ; should the price be halved (for selling items)?
 	jr z,.skipHalvingPrice
 	xor a
@@ -1666,7 +1669,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	call PrintBCDNumber
 	hlCoord 9, 10
 .printQuantity
-	ld de,wcf96 ; current quantity
+	ld de,wItemQuantity ; current quantity
 	ld bc,$8102 ; print leading zeroes, 1 byte, 2 digits
 	call PrintNumber
 	jp .waitForKeyPressLoop
@@ -1688,10 +1691,10 @@ SpacesBetweenQuantityAndPriceText:: ; 2e34 (0:2e34)
 
 ExitListMenu:: ; 2e3b (0:2e3b)
 	ld a,[wCurrentMenuItem]
-	ld [wd12d],a
-	ld a,$02
-	ld [wd12e],a
-	ld [wcc37],a
+	ld [wChosenMenuItem],a
+	ld a,CANCELLED_MENU
+	ld [wMenuExitMethod],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	xor a
 	ld [hJoy7],a
 	ld hl,wd730
@@ -1775,7 +1778,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	call PlaceString
 	pop de
 	pop hl
-	ld a,[wcf93]
+	ld a,[wPrintItemPrices]
 	and a ; should prices be printed?
 	jr z,.skipPrintingItemPrice
 .printItemPrice
@@ -1839,7 +1842,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,[wd11e]
 	ld [wcf91],a
 	call IsKeyItem ; check if item is unsellable
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	and a ; is the item unsellable?
 	jr nz,.skipPrintingItemQuantity ; if so, don't print the quantity
 	push hl
@@ -1850,7 +1853,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,[wd11e]
 	push af
 	ld a,[de]
-	ld [wcf97],a
+	ld [wMaxItemQuantity],a
 	push de
 	ld de,wd11e
 	ld [de],a
@@ -2101,7 +2104,7 @@ UseItem:: ; 30bc (0:30bc)
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
 ; [wWhichPokemon] = index of item within inventory
-; [wcf96] = quantity to toss
+; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem:: ; 30c4 (0:30c4)
@@ -2121,7 +2124,7 @@ TossItem:: ; 30c4 (0:30c4)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wd124] = result
+; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
 IsKeyItem:: ; 30d9 (0:30d9)
@@ -3596,8 +3599,8 @@ CopyDataUntil:: ; 3913 (0:3913)
 
 ; Function to remove a pokemon from the party or the current box.
 ; wWhichPokemon determines the pokemon.
-; [wcf95] == 0 specifies the party.
-; [wcf95] != 0 specifies the current box.
+; [wRemoveMonFromBox] == 0 specifies the party.
+; [wRemoveMonFromBox] != 0 specifies the current box.
 RemovePokemon:: ; 391f (0:391f)
 	ld hl, _RemovePokemon
 	ld b, BANK(_RemovePokemon)
@@ -3826,13 +3829,13 @@ AddEnemyMonToPlayerParty:: ; 3a53 (0:3a53)
 	ld [MBC1RomBank], a
 	ret
 
-Func_3a68:: ; 3a68 (0:3a68)
+MoveMon:: ; 3a68 (0:3a68)
 	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a, BANK(MoveMon)
+	ld a, BANK(_MoveMon)
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	call MoveMon
+	call _MoveMon
 	pop bc
 	ld a, b
 	ld [H_LOADEDROMBANK], a
@@ -3925,7 +3928,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
-	ld [wPartyMonAnimCounter],a ; counter for pokemon shaking animation
+	ld [wAnimCounter],a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
 .loop2
@@ -4023,7 +4026,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld a,[hJoy5]
 	ret
 .noWrappingAround
-	ld a,[wcc37]
+	ld a,[wMenuWatchMovingOutOfBounds]
 	and a ; should we return if the user tried to go past the top or bottom?
 	jr z,.checkOtherKeys
 	jr .checkIfAButtonOrBButtonPressed
@@ -4568,7 +4571,7 @@ GiveItem::
 	ld [wd11e], a
 	ld [wcf91], a
 	ld a, c
-	ld [wcf96], a
+	ld [wItemQuantity], a
 	ld hl,wNumBagItems
 	call AddItemToInventory
 	ret nc

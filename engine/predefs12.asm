@@ -11,55 +11,61 @@ ChangeBGPalColor0_4Frames: ; 480eb (12:40eb)
 	ld [rBGP], a
 	ret
 
-Func_480ff: ; 480ff (12:40ff)
+PredefShakeScreenVertically: ; 480ff (12:40ff)
+; Moves the window down and then back in a sequence of progressively smaller
+; numbers of pixels, starting at b.
 	call GetPredefRegisters
-	ld a, $1
-	ld [wd0a0], a
+	ld a, 1
+	ld [wDisableVBlankWYUpdate], a
 	xor a
-.asm_48108
-	ld [H_NUMTOPRINT], a ; (aliases: H_MULTIPLICAND)
-	call Func_48119
-	call Func_48119
+.loop
+	ld [$ff96], a
+	call .MutateWY
+	call .MutateWY
 	dec b
 	ld a, b
-	jr nz, .asm_48108
+	jr nz, .loop
 	xor a
-	ld [wd0a0], a
+	ld [wDisableVBlankWYUpdate], a
 	ret
 
-Func_48119: ; 48119 (12:4119)
-	ld a, [H_NUMTOPRINT] ; (aliases: H_MULTIPLICAND)
+.MutateWY ; 48119 (12:4119)
+	ld a, [$ff96]
 	xor b
-	ld [H_NUMTOPRINT], a ; (aliases: H_MULTIPLICAND)
+	ld [$ff96], a
 	ld [rWY], a
 	ld c, 3
 	jp DelayFrames
 
-Func_48125: ; 48125 (12:4125)
+PredefShakeScreenHorizontally: ; 48125 (12:4125)
+; Moves the window right and then back in a sequence of progressively smaller
+; numbers of pixels, starting at b.
 	call GetPredefRegisters
 	xor a
-.asm_48129
+.loop
 	ld [$ff97], a
-	call Func_4813f
+	call .MutateWX
 	ld c, 1
 	call DelayFrames
-	call Func_4813f
+	call .MutateWX
 	dec b
 	ld a, b
-	jr nz, .asm_48129
-	ld a, $7
+	jr nz, .loop
+
+; restore normal WX
+	ld a, 7
 	ld [rWX], a
 	ret
 
-Func_4813f: ; 4813f (12:413f)
+.MutateWX ; 4813f (12:413f)
 	ld a, [$ff97]
 	xor b
 	ld [$ff97], a
 	bit 7, a
-	jr z, .asm_48149
-	xor a
-.asm_48149
-	add $7
+	jr z, .skipZeroing
+	xor a ; zero a if it's negative
+.skipZeroing
+	add 7
 	ld [rWX], a
 	ld c, 4
 	jp DelayFrames

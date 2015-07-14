@@ -49,7 +49,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	ld hl, NameRaterText_1dab8
 	call PrintText
 	xor a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
@@ -68,7 +68,7 @@ NameRaterText1: ; 1da56 (7:5a56)
 	jr nz, .asm_1daae
 	ld hl, NameRaterText_1dac2
 	call PrintText
-	callba Func_655c
+	callba DisplayNameRaterScreen
 	jr c, .asm_1daae
 	ld hl, NameRaterText_1dac7
 .asm_1daa8

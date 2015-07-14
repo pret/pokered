@@ -77,7 +77,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call Func_74164
 	call FillMiddleOfScreenWithWhite
 	ld a,$FC
-	ld [$FF47],a
+	ld [rBGP],a
 	ld bc,7
 .next
 	call Func_74140
@@ -94,7 +94,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	xor a
 	ld [hWY],a
 	ld a,$C0
-	ld [$FF47],a
+	ld [rBGP],a
 	ret
 
 INCLUDE "data/credit_mons.asm"
@@ -133,7 +133,7 @@ Func_74164: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3

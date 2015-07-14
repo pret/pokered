@@ -27,7 +27,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	add a
 	ld b, a
-	ld a, [wPartyMonAnimCounter]
+	ld a, [wAnimCounter]
 	and a
 	jr z, .resetSprites
 	cp c
@@ -38,7 +38,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	jr nz, .skipResetTimer
 	xor a ; reset timer
 .skipResetTimer
-	ld [wPartyMonAnimCounter], a
+	ld [wAnimCounter], a
 	jp DelayFrame
 .resetSprites
 	push bc
@@ -315,7 +315,7 @@ WriteMonPartySpriteOAMByPartyIndex: ; 71868 (1c:5868)
 	add hl, de
 	ld a, [hl]
 	call GetPartyMonSpriteID
-	ld [wcd5b], a
+	ld [wOAMBaseTile], a
 	call WriteMonPartySpriteOAM
 	pop bc
 	pop de
@@ -329,7 +329,7 @@ WriteMonPartySpriteOAMBySpecies: ; 71882 (1c:5882)
 	ld [hPartyMonIndex], a
 	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
-	ld [wcd5b], a
+	ld [wOAMBaseTile], a
 	jr WriteMonPartySpriteOAM
 
 UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)

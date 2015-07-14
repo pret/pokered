@@ -31,8 +31,8 @@ rLCDC_DEFAULT EQU %11100011
 	ld [$ff4a], a
 	ld [$ff06], a
 	ld [$ff07], a
-	ld [$ff47], a
-	ld [$ff48], a
+	ld [rBGP], a
+	ld [rOBP0], a
 	ld [$ff49], a
 
 	ld a, rLCDC_ENABLE_MASK
@@ -101,9 +101,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, $9c
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	xor a
-	ld [$ffbc], a
+	ld [H_AUTOBGTRANSFERDEST], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 

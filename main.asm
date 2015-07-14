@@ -922,7 +922,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	ld l,a
 	dec [hl] ; decrease the number of items
 	ld a,[hl]
-	ld [wd12a],a ; update number of items variable
+	ld [wListCount],a ; update number of items variable
 	cp a,1
 	jr nz,.skipSettingMaxMenuItemID
 	ld [wMaxMenuItem],a ; if the number of items is only one now, update the max menu item ID
@@ -1094,7 +1094,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	xor a
-	ld [wcc37],a
+	ld [wMenuWatchMovingOutOfBounds],a
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
 	hlCoord 12, 2
@@ -1457,7 +1457,7 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	set 6, a ; no printing delay
 	ld [wd730], a
 	xor a
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	ld a, BUY_SELL_QUIT_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -1472,7 +1472,7 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wd730]
 	res 6, a ; turn on the printing delay
 	ld [wd730], a
@@ -1482,24 +1482,24 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 	jr nz, .pressedA
 	bit 1, a ; was B pressed? (always true since only A/B are watched)
 	jr z, .pressedA
-	ld a, $2
-	ld [wd12e], a
+	ld a, CANCELLED_MENU
+	ld [wMenuExitMethod], a
 	jr .quit
 .pressedA
-	ld a, $1
-	ld [wd12e], a
+	ld a, CHOSE_MENU_ITEM
+	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	ld b, a
 	ld a, [wMaxMenuItem]
 	cp b
 	jr z, .quit
 	ret
 .quit
-	ld a, $2
-	ld [wd12e], a
+	ld a, CANCELLED_MENU
+	ld [wMenuExitMethod], a
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	scf
 	ret
 
@@ -1512,9 +1512,12 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	ld a, [wd730]
 	set 6, a ; no printing delay
 	ld [wd730], a
+
+; pointless because both values are overwritten before they are read
 	xor a
-	ld [wd12d], a
-	ld [wd12e], a
+	ld [wChosenMenuItem], a
+	ld [wMenuExitMethod], a
+
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $1
@@ -1525,7 +1528,7 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wLastMenuItem], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	push hl
 	ld hl, wTwoOptionMenuID
 	bit 7, [hl] ; select second menu item by default?
@@ -1614,23 +1617,23 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
 .pressedAButton
 	ld a, [wCurrentMenuItem]
-	ld [wd12d], a
+	ld [wChosenMenuItem], a
 	and a
 	jr nz, .choseSecondMenuItem
 ; chose first menu item
-	ld a, $1
-	ld [wd12e], a
+	ld a, CHOSE_FIRST_ITEM
+	ld [wMenuExitMethod], a
 	ld c, 15
 	call DelayFrames
 	call TwoOptionMenu_RestoreScreenTiles
 	and a
 	ret
 .choseSecondMenuItem
-	ld a, $1
+	ld a, 1
 	ld [wCurrentMenuItem], a
-	ld [wd12d], a
-	ld a, $2
-	ld [wd12e], a
+	ld [wChosenMenuItem], a
+	ld a, CHOSE_SECOND_ITEM
+	ld [wMenuExitMethod], a
 	ld c, 15
 	call DelayFrames
 	call TwoOptionMenu_RestoreScreenTiles
@@ -1913,7 +1916,7 @@ INCLUDE "engine/menu/players_pc.asm"
 
 _RemovePokemon: ; 7b68 (1:7b68)
 	ld hl, wPartyCount
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7b74
 	ld hl, W_NUMINBOX
@@ -1936,7 +1939,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr nz, .asm_7b81
 	ld hl, wPartyMonOT
 	ld d, $5
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7b97
 	ld hl, wBoxMonOT
@@ -1955,7 +1958,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld bc, $b
 	add hl, bc
 	ld bc, wPartyMonNicks
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bb8
 	ld bc, wBoxMonNicks
@@ -1963,7 +1966,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	call CopyDataUntil
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bcd
 	ld hl, wBoxMons
@@ -1973,7 +1976,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7be4
 	ld bc, wBoxMon2 - wBoxMon1
@@ -1987,7 +1990,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7beb
 	call CopyDataUntil
 	ld hl, wPartyMonNicks
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
@@ -2000,7 +2003,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld bc, $b
 	add hl, bc
 	ld bc, wPokedexOwned
-	ld a, [wcf95]
+	ld a, [wRemoveMonFromBox]
 	and a
 	jr z, .asm_7c15
 	ld bc, wBoxMonNicksEnd
@@ -2631,7 +2634,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 .noBlackOut
 	xor a
 .done
-	ld [wd12d], a
+	ld [wOutOfBattleBlackout], a
 	ret
 
 LoadTilesetHeader: ; c754 (3:4754)
@@ -2777,10 +2780,10 @@ CyclingIsFunText: ; cdff (3:4dff)
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
-; [wcf96] = item quantity
+; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory_: ; ce04 (3:4e04)
-	ld a,[wcf96] ; a = item quantity
+	ld a,[wItemQuantity] ; a = item quantity
 	push af
 	push bc
 	push de
@@ -2827,12 +2830,12 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	add hl,bc ; hl = address to store the item
 	ld a,[wcf91]
 	ld [hli],a ; store item ID
-	ld a,[wcf96]
+	ld a,[wItemQuantity]
 	ld [hli],a ; store item quantity
 	ld [hl],$ff ; store terminator
 	jp .success
 .increaseItemQuantity ; increase the quantity of an item already in the inventory
-	ld a,[wcf96]
+	ld a,[wItemQuantity]
 	ld b,a ; b = quantity to add
 	ld a,[hl] ; a = existing item quantity
 	add b ; a = new item quantity
@@ -2841,7 +2844,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 ; if the new quantity is greater than or equal to 100,
 ; try to max out the current slot and add the rest in a new slot
 	sub a,99
-	ld [wcf96],a ; a = amount left over (to put in the new slot)
+	ld [wItemQuantity],a ; a = amount left over (to put in the new slot)
 	ld a,d
 	and a ; is there room for a new item slot?
 	jr z,.increaseItemQuantityFailed
@@ -2864,14 +2867,14 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	pop bc
 	pop bc
 	ld a,b
-	ld [wcf96],a ; restore the initial value from when the function was called
+	ld [wItemQuantity],a ; restore the initial value from when the function was called
 	ret
 
 ; function to remove an item (in varying quantities) from the player's bag or PC box
 ; INPUT:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
-; [wcf96] = quantity to remove
+; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory_: ; ce74 (3:4e74)
 	push hl
 	inc hl
@@ -2883,12 +2886,12 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	inc h
 .noCarry
 	inc hl
-	ld a,[wcf96] ; quantity being removed
+	ld a,[wItemQuantity] ; quantity being removed
 	ld e,a
 	ld a,[hl] ; a = current quantity
 	sub e
 	ld [hld],a ; store new quantity
-	ld [wcf97],a
+	ld [wMaxItemQuantity],a
 	and a
 	jr nz,.skipMovingUpSlots
 ; if the remaining quantity is 0,
@@ -2909,12 +2912,12 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	ld [wListScrollOffset],a
 	ld [wCurrentMenuItem],a
 	ld [wcc2c],a
-	ld [wd07e],a
+	ld [wSavedListScrollOffset],a
 	pop hl
 	ld a,[hl] ; a = number of items in inventory
 	dec a ; decrement the number of items
 	ld [hl],a ; store new number of items
-	ld [wd12a],a
+	ld [wListCount],a
 	cp a,2
 	jr c,.done
 	ld [wMaxMenuItem],a
@@ -3579,8 +3582,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [$ffe4]
 	dec a
 	call SkipFixedLengthTextEntries
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	predef AskName
 .asm_f33f
 	ld hl, wPartyMons
@@ -3863,13 +3866,13 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	and a
 	ret                  ; return success
 
-MoveMon: ; f51e (3:751e)
-	ld a, [wcf95]
+_MoveMon: ; f51e (3:751e)
+	ld a, [wMoveMonType]
 	and a
 	jr z, .checkPartyMonSlots
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .checkPartyMonSlots
-	cp $3
+	cp PARTY_TO_DAYCARE
 	ld hl, wDayCareMon
 	jr z, .asm_f575
 	ld hl, W_NUMINBOX
@@ -3889,17 +3892,17 @@ MoveMon: ; f51e (3:751e)
 	inc a
 	ld [hl], a           ; increment number of mons in party/box
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
-	ld a, [wcf95]
-	cp $2
+	ld a, [wMoveMonType]
+	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
 	jr z, .asm_f556
 	ld a, [wcf91]
 .asm_f556
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
@@ -3915,12 +3918,12 @@ MoveMon: ; f51e (3:751e)
 	push hl
 	ld e, l
 	ld d, h
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1 ; $21
 	jr z, .asm_f591
-	cp $2
+	cp DAYCARE_TO_PARTY
 	ld hl, wDayCareMon
 	jr z, .asm_f597
 	ld hl, wPartyMons
@@ -3935,10 +3938,10 @@ MoveMon: ; f51e (3:751e)
 	call CopyData
 	pop de
 	pop hl
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f5b4
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f5b4
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
@@ -3948,8 +3951,8 @@ MoveMon: ; f51e (3:751e)
 	inc de
 	ld [de], a
 .asm_f5b4
-	ld a, [wcf95]
-	cp $3
+	ld a, [wMoveMonType]
+	cp PARTY_TO_DAYCARE
 	ld de, W_DAYCAREMONOT
 	jr z, .asm_f5d3
 	dec a
@@ -3965,11 +3968,11 @@ MoveMon: ; f51e (3:751e)
 	ld e, l
 .asm_f5d3
 	ld hl, wBoxMonOT
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f5e6
 	ld hl, W_DAYCAREMONOT
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f5ec
 	ld hl, wPartyMonOT
 .asm_f5e6
@@ -3978,8 +3981,8 @@ MoveMon: ; f51e (3:751e)
 .asm_f5ec
 	ld bc, $b
 	call CopyData
-	ld a, [wcf95]
-	cp $3
+	ld a, [wMoveMonType]
+	cp PARTY_TO_DAYCARE
 	ld de, W_DAYCAREMONNAME
 	jr z, .asm_f611
 	dec a
@@ -3995,11 +3998,11 @@ MoveMon: ; f51e (3:751e)
 	ld e, l
 .asm_f611
 	ld hl, wBoxMonNicks
-	ld a, [wcf95]
+	ld a, [wMoveMonType]
 	and a
 	jr z, .asm_f624
 	ld hl, W_DAYCAREMONNAME
-	cp $2
+	cp DAYCARE_TO_PARTY
 	jr z, .asm_f62a
 	ld hl, wPartyMonNicks
 .asm_f624
@@ -4009,10 +4012,10 @@ MoveMon: ; f51e (3:751e)
 	ld bc, $b
 	call CopyData
 	pop hl
-	ld a, [wcf95]
-	cp $1
+	ld a, [wMoveMonType]
+	cp PARTY_TO_BOX
 	jr z, .asm_f664
-	cp $3
+	cp PARTY_TO_DAYCARE
 	jr z, .asm_f664
 	push hl
 	srl a

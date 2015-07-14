@@ -317,7 +317,7 @@ TradeCenter_SelectMon:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuJoypadPollCount], a
@@ -326,7 +326,7 @@ TradeCenter_SelectMon:
 	jp .playerMonMenu
 .enemyMonMenu
 	xor a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	inc a
 	ld [wWhichTradeMonSelectionMenu], a
 	ld a, D_DOWN | D_LEFT | A_BUTTON
@@ -357,9 +357,9 @@ TradeCenter_SelectMon:
 	dec a
 	ld [wCurrentMenuItem], a
 .displayEnemyMonStats
-	ld a, $1
-	ld [wd11b], a
-	callab InitList
+	ld a, INIT_ENEMYOT_LIST
+	ld [wInitListType], a
+	callab InitList ; the list isn't used
 	ld hl, wEnemyMons
 	call TradeCenter_DisplayStats
 	jp .getNewInput
@@ -390,7 +390,7 @@ TradeCenter_SelectMon:
 .playerMonMenu
 	xor a ; player mon menu
 	ld [wWhichTradeMonSelectionMenu], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, D_DOWN | D_RIGHT | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, [wPartyCount]
@@ -416,9 +416,9 @@ TradeCenter_SelectMon:
 	jr z, .playerMonMenu_ANotPressed
 	jp .chosePlayerMon ; jump if A button pressed
 ; unreachable code
-	ld a, $4
-	ld [wd11b], a
-	callab InitList
+	ld a, INIT_PLAYEROT_LIST
+	ld [wInitListType], a
+	callab InitList ; the list isn't used
 	call TradeCenter_DisplayStats
 	jp .getNewInput
 .playerMonMenu_ANotPressed
@@ -511,9 +511,9 @@ TradeCenter_SelectMon:
 .displayPlayerMonStats
 	pop af
 	ld [wCurrentMenuItem], a
-	ld a, $4
-	ld [wd11b], a
-	callab InitList
+	ld a, INIT_PLAYEROT_LIST
+	ld [wInitListType], a
+	callab InitList ; the list isn't used
 	call TradeCenter_DisplayStats
 	call LoadScreenTilesFromBuffer1
 	jp .playerMonMenu
@@ -682,7 +682,7 @@ TradeCenter_Trade:
 	xor a
 	ld [wSerialExchangeNybbleSendData + 1], a ; unnecessary
 	ld [wSerialExchangeNybbleReceiveData], a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuJoypadPollCount], a
 	hlCoord 0, 12
 	ld b, 4
@@ -793,7 +793,7 @@ TradeCenter_Trade:
 	ld a, [hl]
 	ld [wTradedPlayerMonSpecies], a
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wTradingWhichEnemyMon]
 	ld c, a
