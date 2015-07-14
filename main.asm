@@ -1719,86 +1719,101 @@ TwoOptionMenuStrings: ; 7671 (1:7671)
 .HealCancelMenu ; 76d5 (1:36d5)
 	db "HEAL",$4E,"CANCEL@"
 
-DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
+DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	xor a
-	ld hl, wWhichTrade
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], $c
+	ld hl, wFieldMoves
+	ld [hli], a ; wFieldMoves
+	ld [hli], a ; wFieldMoves + 1
+	ld [hli], a ; wFieldMoves + 2
+	ld [hli], a ; wFieldMoves + 3
+	ld [hli], a ; wNumFieldMoves
+	ld [hl], 12 ; wFieldMovesLeftmostXCoord
 	call GetMonFieldMoves
-	ld a, [wTrainerScreenX]
+	ld a, [wNumFieldMoves]
 	and a
-	jr nz, .asm_770f
+	jr nz, .fieldMovesExist
+
+; no field moves
 	hlCoord 11, 11
-	ld b, $5
-	ld c, $7
+	ld b, 5
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
-	ld a, $c
-	ld [$fff7], a
+	ld a, 12
+	ld [hFieldMoveMonMenuTopMenuItemX], a
 	hlCoord 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
-.asm_770f
+
+.fieldMovesExist
 	push af
+
+; Calculate the text box position and dimensions based on the leftmost X coord
+; of the field move names before adjusting for the number of field moves.
 	hlCoord 0, 11
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	dec a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
-	ld b, $5
-	ld a, $12
+	ld b, 5
+	ld a, 18
 	sub e
 	ld c, a
 	pop af
+
+; For each field move, move the top of the text box up 2 rows while the leaving
+; the bottom of the text box at the bottom of the screen.
 	ld de, -SCREEN_WIDTH * 2
-.asm_7725
+.textBoxHeightLoop
 	add hl, de
 	inc b
 	inc b
 	dec a
-	jr nz, .asm_7725
+	jr nz, .textBoxHeightLoop
+
+; Make space for an extra blank row above the top field move.
 	ld de, -SCREEN_WIDTH
 	add hl, de
 	inc b
+
 	call TextBoxBorder
 	call UpdateSprites
+
+; Calculate the position of the first field move name to print.
 	hlCoord 0, 12
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld de, -SCREEN_WIDTH * 2
-	ld a, [wTrainerScreenX]
-.asm_7747
+	ld a, [wNumFieldMoves]
+.calcFirstFieldMoveYLoop
 	add hl, de
 	dec a
-	jr nz, .asm_7747
+	jr nz, .calcFirstFieldMoveYLoop
+
 	xor a
-	ld [wTrainerScreenX], a
-	ld de, wWhichTrade
-.asm_7752
+	ld [wNumFieldMoves], a
+	ld de, wFieldMoves
+.printNamesLoop
 	push hl
 	ld hl, FieldMoveNames
 	ld a, [de]
 	and a
-	jr z, .asm_7776
+	jr z, .donePrintingNames
 	inc de
-	ld b, a
-.asm_775c
+	ld b, a ; index of name
+.skipNamesLoop ; skip past names before the name we want
 	dec b
-	jr z, .asm_7766
-.asm_775f
+	jr z, .reachedName
+.skipNameLoop ; skip past current name
 	ld a, [hli]
-	cp $50
-	jr nz, .asm_775f
-	jr .asm_775c
-.asm_7766
+	cp "@"
+	jr nz, .skipNameLoop
+	jr .skipNamesLoop
+.reachedName
 	ld b, h
 	ld c, l
 	pop hl
@@ -1809,16 +1824,17 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
-	jr .asm_7752
-.asm_7776
+	jr .printNamesLoop
+
+.donePrintingNames
 	pop hl
-	ld a, [wcd42]
-	ld [$fff7], a
+	ld a, [wFieldMovesLeftmostXCoord]
+	ld [hFieldMoveMonMenuTopMenuItemX], a
 	hlCoord 0, 12
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld de, PokemonMenuEntries
 	jp PlaceString
@@ -1842,59 +1858,58 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld c, $5
-	ld hl, wWhichTrade
-.asm_77e9
+	ld c, NUM_MOVES + 1
+	ld hl, wFieldMoves
+.loop
 	push hl
-.asm_77ea
+.nextMove
 	dec c
-	jr z, .asm_7821
-	ld a, [de] ; de is RAM address of move
+	jr z, .done
+	ld a, [de] ; move ID
 	and a
-	jr z, .asm_7821
+	jr z, .done
 	ld b, a
-	inc de ; go to next move
+	inc de
 	ld hl, FieldMoveDisplayData
-.asm_77f6
+.fieldMoveLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_77ea
+	jr z, .nextMove ; if the move is not a field move
 	cp b
-	jr z, .asm_7802
+	jr z, .foundFieldMove
 	inc hl
 	inc hl
-	jr .asm_77f6
-.asm_7802
+	jr .fieldMoveLoop
+.foundFieldMove
 	ld a, b
-	ld [wcd43], a
-	ld a, [hli]
-	ld b, [hl]
+	ld [wLastFieldMoveID], a
+	ld a, [hli] ; field move name index
+	ld b, [hl] ; field move leftmost X coordinate
 	pop hl
-	ld [hli], a
-	ld a, [wTrainerScreenX]
+	ld [hli], a ; store name index in wFieldMoves
+	ld a, [wNumFieldMoves]
 	inc a
-	ld [wTrainerScreenX], a
-	ld a, [wcd42]
+	ld [wNumFieldMoves], a
+	ld a, [wFieldMovesLeftmostXCoord]
 	cp b
-	jr c, .asm_781b
+	jr c, .skipUpdatingLeftmostXCoord
 	ld a, b
-	ld [wcd42], a
-.asm_781b
-	ld a, [wcd43]
+	ld [wFieldMovesLeftmostXCoord], a
+.skipUpdatingLeftmostXCoord
+	ld a, [wLastFieldMoveID]
 	ld b, a
-	jr .asm_77e9
-.asm_7821
+	jr .loop
+.done
 	pop hl
 	ret
 
-; Format: [Move id], [list priority], [leftmost tile]
+; Format: [Move id], [name index], [leftmost tile]
 ; Move id = id of move
-; List priority = lower number means higher priority when field moves are displayed
-;                 these priorities must be unique
+; Name index = index of name in FieldMoveNames
 ; Leftmost tile = -1 + tile column in which the first letter of the move's name should be displayed
 ;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
 FieldMoveDisplayData: ; 7823 (1:7823)

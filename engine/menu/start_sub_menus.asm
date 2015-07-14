@@ -33,14 +33,14 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld a,FIELD_MOVE_MON_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; display pokemon menu options
-	ld hl,wWhichTrade
+	ld hl,wFieldMoves
 	ld bc,$020c ; max menu item ID, top menu item Y
 	ld e,5
 .adjustMenuVariablesLoop
 	dec e
 	jr z,.storeMenuVariables
 	ld a,[hli]
-	and a
+	and a ; end of field moves?
 	jr z,.storeMenuVariables
 	inc b
 	dec c
@@ -50,7 +50,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld hl,wTopMenuItemY
 	ld a,c
 	ld [hli],a ; top menu item Y
-	ld a,[$fff7]
+	ld a,[hFieldMoveMonMenuTopMenuItemX]
 	ld [hli],a ; top menu item X
 	xor a
 	ld [hli],a ; current menu item ID

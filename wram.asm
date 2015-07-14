@@ -601,6 +601,10 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wFieldMoves:: ; cd3d
+; 4 bytes
+; the current mon's field moves
+
 wBadgeNumberTile:: ; cd3d
 ; tile ID of the badge number being drawn
 
@@ -695,8 +699,10 @@ wTradedPlayerMonOT:: ; cd41
 
 wHiddenObjectX:: ; cd41
 
-wSlotMachineWinningSymbol:: ; cd42
+wSlotMachineWinningSymbol:: ; cd41
 ; the OAM tile number of the upper left corner of the winning symbol minus 2
+
+wNumFieldMoves:: ; cd41
 
 wSlotMachineWheel1BottomTile:: ; cd41
 
@@ -706,11 +712,15 @@ wTrainerScreenX:: ; cd41
 
 wSlotMachineWheel1MiddleTile:: ; cd42
 
+wFieldMovesLeftmostXCoord:: ; cd42
+
 wcd42:: ds 1 ; used in pewter center script, printing field mon moves, slot machines and HoF PC
 
-wSlotMachineWheel1TopTile:: ; cd43
+wLastFieldMoveID:: ; cd43
+; unused
 
-wcd43:: ds 1 ; slot machine stuff and GetMonFieldMoves
+wSlotMachineWheel1TopTile:: ; cd43
+	ds 1
 
 wSlotMachineWheel2BottomTile:: ; cd44
 	ds 1
