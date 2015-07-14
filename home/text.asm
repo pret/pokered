@@ -576,7 +576,7 @@ TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
 	call Joypad
 	ld a,[hJoyHeld]
-	and a,%00000011 ; A and B buttons
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay
 	ld c,30
 	call DelayFrames
@@ -654,7 +654,7 @@ TextCommand0C:: ; 1c78 (0:1c78)
 	call Joypad
 	pop de
 	ld a,[hJoyHeld] ; joypad state
-	and a,%00000011 ; is A or B button pressed?
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay ; if so, skip the delay
 	ld c,10
 	call DelayFrames

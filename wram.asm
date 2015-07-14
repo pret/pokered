@@ -399,7 +399,8 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 ; overloaded with below labels
 
 wccd3:: ds 1 ; used in battle, pokemon, PC and game corner stuff
-wccd4:: ds 1 ; used in evolving pokemon and has a direct reference for simulated joypad stuff in vermillion and seafoam
+wForceEvolution::
+wccd4:: ds 1 ; has a direct reference for simulated joypad stuff in vermillion and seafoam
 
 ; if [ccd5] != 1, the second AI layer is not applied
 wAILayer2Encouragement:: ; ccd5

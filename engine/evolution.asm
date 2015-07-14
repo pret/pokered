@@ -27,7 +27,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld a, [wHPBarMaxHP + 1]
 	ld [wcf91], a
 	ld [wd0b5], a
-	call Func_7beb9
+	call Evolution_LoadPic
 	ld de, vFrontPic
 	ld hl, vBackPic
 	ld bc, 7 * 7
@@ -35,7 +35,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld a, [wHPBarMaxHP]
 	ld [wcf91], a
 	ld [wd0b5], a
-	call Func_7beb9
+	call Evolution_LoadPic
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wHPBarMaxHP]
@@ -51,8 +51,8 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld bc, $110
 .asm_7be63
 	push bc
-	call Func_7befa
-	jr c, .asm_7bea9
+	call Evolution_CheckForCancel
+	jr c, .evolutionCancelled
 	call Func_7bec2
 	pop bc
 	inc b
@@ -65,7 +65,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld [wHPBarOldHP], a
 	call Func_7bed6
 	ld a, [wHPBarMaxHP + 1]
-.asm_7be81
+.afterCancellation
 	ld [wcf1d], a
 	ld a, $ff
 	ld [wc0ee], a
@@ -86,18 +86,18 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ret z
 	scf
 	ret
-.asm_7bea9
+.evolutionCancelled
 	pop bc
 	ld a, $1
 	ld [wHPBarOldHP + 1], a
 	ld a, [wHPBarMaxHP]
-	jr .asm_7be81
+	jr .afterCancellation
 
 EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
 	ld b, $b
 	jp GoPAL_SET
 
-Func_7beb9: ; 7beb9 (1e:7eb9)
+Evolution_LoadPic: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
 	hlCoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
@@ -138,22 +138,22 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	pop bc
 	ret
 
-Func_7befa: ; 7befa (1e:7efa)
+Evolution_CheckForCancel: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
 	ld a, [hJoy5]
 	pop bc
-	and $2
-	jr nz, .asm_7bf0d
-.asm_7bf08
+	and B_BUTTON
+	jr nz, .pressedB
+.notAllowedToCancel
 	dec c
-	jr nz, Func_7befa
+	jr nz, Evolution_CheckForCancel
 	and a
 	ret
-.asm_7bf0d
-	ld a, [wccd4]
+.pressedB
+	ld a, [wForceEvolution]
 	and a
-	jr nz, .asm_7bf08
+	jr nz, .notAllowedToCancel
 	scf
 	ret

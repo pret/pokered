@@ -554,7 +554,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 .waitForButtonPress
 	call JoypadLowSensitivity
 	ld a,[hJoy5]
-	and a,%00000011 ; A button and B button
+	and a,A_BUTTON | B_BUTTON
 	jr z,.waitForButtonPress
 	pop af
 	ld [hTilesetType],a

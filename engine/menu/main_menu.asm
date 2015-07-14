@@ -90,7 +90,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call ContinueGame
 	ld hl,wd126
 	set 5,[hl]
-.next6
+.inputLoop
 	xor a
 	ld [hJoyPressed],a
 	ld [hJoyReleased],a
@@ -98,11 +98,11 @@ MainMenu: ; 5af2 (1:5af2)
 	call Joypad
 	ld a,[hJoyHeld]
 	bit 0,a
-	jr nz,.next5
+	jr nz,.pressedA
 	bit 1,a
-	jp nz,.next0
-	jr .next6
-.next5
+	jp nz,.next0 ; pressedB
+	jr .inputLoop
+.pressedA
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld a,4
@@ -121,6 +121,7 @@ MainMenu: ; 5af2 (1:5af2)
 	set 2,[hl] ; fly warp or dungeon warp
 	call SpecialWarpIn
 	jp SpecialEnterMap
+
 Func_5bff: ; 5bff (1:5bff)
 	ld a,1
 	ld [wd358],a
@@ -468,7 +469,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call JoypadLowSensitivity
 	ld a,[hJoy5]
 	ld b,a
-	and a,%11111011 ; any key besides select pressed?
+	and a,A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
 	jr z,.getJoypadStateLoop
 	bit 1,b ; B button pressed?
 	jr nz,.exitMenu

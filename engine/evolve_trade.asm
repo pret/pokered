@@ -35,7 +35,7 @@ EvolveTradeMon: ; 17d7d (5:7d7d)
 	dec a
 	ld [wWhichPokemon], a
 	ld a, $1
-	ld [wccd4], a
+	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a
 	callab TryEvolvingMon

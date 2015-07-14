@@ -21,7 +21,7 @@ AskName: ; 64eb (1:64eb)
 	pop hl
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_654c
+	jr nz, .declinedNickname
 	ld a, [wUpdateSpritesEnabled]
 	push af
 	xor a
@@ -32,9 +32,9 @@ AskName: ; 64eb (1:64eb)
 	call DisplayNamingScreen
 	ld a, [W_ISINBATTLE]
 	and a
-	jr nz, .asm_653e
+	jr nz, .inBattle
 	call ReloadMapSpriteTilePatterns
-.asm_653e
+.inBattle
 	call LoadScreenTilesFromBuffer1
 	pop hl
 	pop af
@@ -42,11 +42,11 @@ AskName: ; 64eb (1:64eb)
 	ld a, [wcf4b]
 	cp $50
 	ret nz
-.asm_654c
+.declinedNickname
 	ld d, h
 	ld e, l
 	ld hl, wcd6d
-	ld bc, $000b
+	ld bc, 11
 	jp CopyData
 
 DoYouWantToNicknameText: ; 0x6557
@@ -65,7 +65,7 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	call LoadGBPal
 	ld a, [wcf4b]
 	cp $50
-	jr z, .asm_6594
+	jr z, .playerCancelled
 	ld hl, wPartyMonNicks
 	ld bc, $b
 	ld a, [wWhichPokemon]
@@ -73,11 +73,11 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	ld e, l
 	ld d, h
 	ld hl, wHPBarMaxHP
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	and a
 	ret
-.asm_6594
+.playerCancelled
 	scf
 	ret
 
@@ -115,17 +115,17 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld [hli], a
 	ld [hli], a
 	ld [wAnimCounter], a
-.asm_65ed
+.selectReturnPoint
 	call PrintAlphabet
 	call GBPalNormal
-.asm_65f3
+.ABStartReturnPoint
 	ld a, [wHPBarMaxHP + 1]
 	and a
-	jr nz, .asm_662d
-	call Func_680e
-.asm_65fc
+	jr nz, .submitNickname
+	call PrintNicknameAndUnderscores
+.dPadReturnPoint
 	call PlaceMenuCursor
-.asm_65ff
+.inputLoop
 	ld a, [wCurrentMenuItem]
 	push af
 	callba AnimatePartyMon_ForceSpeed1
@@ -134,17 +134,17 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call JoypadLowSensitivity
 	ld a, [hJoyPressed]
 	and a
-	jr z, .asm_65ff
-	ld hl, .unknownPointerTable_665e
-.asm_661a
+	jr z, .inputLoop
+	ld hl, .namingScreenButtonFunctions
+.checkForPressedButton
 	sla a
-	jr c, .asm_6624
+	jr c, .foundPressedButton
 	inc hl
 	inc hl
 	inc hl
 	inc hl
-	jr .asm_661a
-.asm_6624
+	jr .checkForPressedButton
+.foundPressedButton
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -154,10 +154,11 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld l, a
 	push de
 	jp [hl]
-.asm_662d
+
+.submitNickname
 	pop de
 	ld hl, wcf4b
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
@@ -175,52 +176,54 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld b, BANK(LoadHudTilePatterns)
 	jp Bankswitch
 
-.unknownPointerTable_665e: ; 665e (1:665e)
-	dw .asm_65fc
-	dw .asm_673e
-	dw .asm_65fc
-	dw .asm_672c
-	dw .asm_65fc
-	dw .asm_6718
-	dw .asm_65fc
-	dw .asm_6702
-	dw .asm_65f3
-	dw .asm_668c
-	dw .asm_65ed
-	dw .asm_6683
-	dw .asm_65f3
-	dw .deleteLetter
-	dw .asm_65f3
-	dw .asm_6692
+.namingScreenButtonFunctions
+	dw .dPadReturnPoint
+	dw .pressedDown
+	dw .dPadReturnPoint
+	dw .pressedUp
+	dw .dPadReturnPoint
+	dw .pressedLeft
+	dw .dPadReturnPoint
+	dw .pressedRight
+	dw .ABStartReturnPoint
+	dw .pressedStart
+	dw .selectReturnPoint
+	dw .pressedSelect
+	dw .ABStartReturnPoint
+	dw .pressedB
+	dw .ABStartReturnPoint
+	dw .pressedA
 
-.asm_667e
+.pressedA_changedCase
 	pop de
-	ld de, .asm_65ed
+	ld de, .selectReturnPoint
 	push de
-.asm_6683
+.pressedSelect
 	ld a, [wHPBarOldHP]
 	xor $1
 	ld [wHPBarOldHP], a
 	ret
-.asm_668c
+
+.pressedStart
 	ld a, $1
 	ld [wHPBarMaxHP + 1], a
 	ret
-.asm_6692
+
+.pressedA
 	ld a, [wCurrentMenuItem]
-	cp $5
-	jr nz, .asm_66a0
+	cp $5 ; "ED" row
+	jr nz, .didNotPressED
 	ld a, [wTopMenuItemX]
-	cp $11
-	jr z, .asm_668c
-.asm_66a0
+	cp $11 ; "ED" column
+	jr z, .pressedStart
+.didNotPressED
 	ld a, [wCurrentMenuItem]
-	cp $6
-	jr nz, .asm_66ae
+	cp $6 ; case swtich row
+	jr nz, .didNotPressCaseSwtich
 	ld a, [wTopMenuItemX]
-	cp $1
-	jr z, .asm_667e
-.asm_66ae
+	cp $1 ; case switch column
+	jr z, .pressedA_changedCase
+.didNotPressCaseSwtich
 	ld hl, wMenuCursorLocation
 	ld a, [hli]
 	ld h, [hl]
@@ -232,10 +235,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [wHPBarNewHP]
 	cp $e5
 	ld de, Dakutens
-	jr z, .asm_66e3
+	jr z, .dakutensAndHandakutens
 	cp $e4
 	ld de, Handakutens
-	jr z, .asm_66e3
+	jr z, .dakutensAndHandakutens
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nc, .checkMonNameLength
@@ -248,9 +251,10 @@ DisplayNamingScreen: ; 6596 (1:6596)
 .checkNameLength
 	jr c, .addLetter
 	ret
-.asm_66e3
+
+.dakutensAndHandakutens
 	push hl
-	call Func_6871
+	call DakutensAndHandakutens
 	pop hl
 	ret nc
 	dec hl
@@ -261,7 +265,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, (SFX_02_40 - SFX_Headers_02) / 3
 	call PlaySound
 	ret
-.deleteLetter
+.pressedB
 	ld a, [wHPBarMaxHP]
 	and a
 	ret z
@@ -269,55 +273,55 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	dec hl
 	ld [hl], $50
 	ret
-.asm_6702
+.pressedRight
 	ld a, [wCurrentMenuItem]
 	cp $6
-	ret z
+	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
-	cp $11
-	jp z, .asm_6714
+	cp $11 ; max
+	jp z, .wrapToFirstColumn
 	inc a
 	inc a
-	jr .asm_6755
-.asm_6714
+	jr .done
+.wrapToFirstColumn
 	ld a, $1
-	jr .asm_6755
-.asm_6718
+	jr .done
+.pressedLeft
 	ld a, [wCurrentMenuItem]
 	cp $6
-	ret z
+	ret z ; can't scroll right on bottom row
 	ld a, [wTopMenuItemX]
 	dec a
-	jp z, .asm_6728
+	jp z, .wrapToLastColumn
 	dec a
-	jr .asm_6755
-.asm_6728
-	ld a, $11
-	jr .asm_6755
-.asm_672c
+	jr .done
+.wrapToLastColumn
+	ld a, $11 ; max
+	jr .done
+.pressedUp
 	ld a, [wCurrentMenuItem]
 	dec a
 	ld [wCurrentMenuItem], a
 	and a
 	ret nz
-	ld a, $6
+	ld a, $6 ; wrap to bottom row
 	ld [wCurrentMenuItem], a
-	ld a, $1
-	jr .asm_6755
-.asm_673e
+	ld a, $1 ; force left column
+	jr .done
+.pressedDown
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld [wCurrentMenuItem], a
 	cp $7
-	jr nz, .asm_6750
+	jr nz, .wrapToTopRow
 	ld a, $1
 	ld [wCurrentMenuItem], a
-	jr .asm_6755
-.asm_6750
+	jr .done
+.wrapToTopRow
 	cp $6
 	ret nz
 	ld a, $1
-.asm_6755
+.done
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
@@ -336,25 +340,25 @@ PrintAlphabet: ; 676f (1:676f)
 	ld a, [wHPBarOldHP]
 	and a
 	ld de, LowerCaseAlphabet
-	jr nz, .asm_677e
+	jr nz, .lowercase
 	ld de, UpperCaseAlphabet
-.asm_677e
+.lowercase
 	hlCoord 2, 5
-	ld bc, $509
-.asm_6784
+	ld bc, $509 ; 5 rows, 9 columns
+.outerLoop
 	push bc
-.asm_6785
+.innerLoop
 	ld a, [de]
 	ld [hli], a
 	inc hl
 	inc de
 	dec c
-	jr nz, .asm_6785
-	ld bc, $16
+	jr nz, .innerLoop
+	ld bc, SCREEN_WIDTH + 2
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_6784
+	jr nz, .outerLoop
 	call PlaceString
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -366,7 +370,7 @@ LowerCaseAlphabet: ; 679e (1:679e)
 UpperCaseAlphabet: ; 67d6 (1:67d6)
 	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥lower case@"
 
-Func_680e: ; 680e (1:680e)
+PrintNicknameAndUnderscores: ; 680e (1:680e)
 	call CalcStringLength
 	ld a, c
 	ld [wHPBarMaxHP], a
@@ -379,46 +383,48 @@ Func_680e: ; 680e (1:680e)
 	hlCoord 10, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	jr nc, .asm_6835
-	ld b, $7
-	jr .asm_6837
-.asm_6835
-	ld b, $a
-.asm_6837
-	ld a, $76
-.asm_6839
+	jr nc, .pokemon1
+	ld b, 7 ; player or rival max name length
+	jr .playerOrRival1
+.pokemon1
+	ld b, 10 ; pokemon max name length
+.playerOrRival1
+	ld a, $76 ; underscore tile id
+.placeUnderscoreLoop
 	ld [hli], a
 	dec b
-	jr nz, .asm_6839
+	jr nz, .placeUnderscoreLoop
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	ld a, [wHPBarMaxHP]
-	jr nc, .asm_684b
-	cp $7
-	jr .asm_684d
-.asm_684b
-	cp $a
-.asm_684d
-	jr nz, .asm_6867
+	jr nc, .pokemon2
+	cp 7 ; player or rival max name length
+	jr .playerOrRival2
+.pokemon2
+	cp 10 ; pokemon max name length
+.playerOrRival2
+	jr nz, .emptySpacesRemaining
+	; when all spaces are filled, force the cursor onto the ED tile
 	call EraseMenuCursor
-	ld a, $11
+	ld a, $11 ; "ED" x coord
 	ld [wTopMenuItemX], a
-	ld a, $5
+	ld a, $5 ; "ED" y corrd
 	ld [wCurrentMenuItem], a
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	ld a, $9
-	jr nc, .asm_6867
-	ld a, $6
-.asm_6867
+	ld a, 9 ; keep the last underscore raised
+	jr nc, .pokemon3
+	ld a, 6 ; keep the last underscore raised
+.pokemon3
+.emptySpacesRemaining
 	ld c, a
 	ld b, $0
 	hlCoord 10, 3
 	add hl, bc
-	ld [hl], $77
+	ld [hl], $77 ; raised underscore tile id
 	ret
 
-Func_6871: ; 6871 (1:6871)
+DakutensAndHandakutens: ; 6871 (1:6871)
 	push de
 	call CalcStringLength
 	dec hl
@@ -452,13 +458,13 @@ Handakutens: ; 68d6 (1:68d6)
 CalcStringLength: ; 68eb (1:68eb)
 	ld hl, wcf4b
 	ld c, $0
-.asm_68f0
+.loop
 	ld a, [hl]
 	cp $50
 	ret z
 	inc hl
 	inc c
-	jr .asm_68f0
+	jr .loop
 
 PrintNamingText: ; 68f8 (1:68f8)
 	hlCoord 0, 1

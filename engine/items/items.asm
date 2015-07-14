@@ -643,7 +643,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,b
 	ld [wcf91],a
 	ld a,$01
-	ld [wccd4],a
+	ld [wForceEvolution],a
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -1275,7 +1275,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wcc49],a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
-	ld [wccd4],a
+	ld [wForceEvolution],a
 	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a

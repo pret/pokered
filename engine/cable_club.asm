@@ -816,7 +816,7 @@ TradeCenter_Trade:
 	dec a
 	ld [wWhichPokemon], a
 	ld a, $1
-	ld [wccd4], a
+	ld [wForceEvolution], a
 	ld a, [wTradingWhichEnemyMon]
 	ld hl, wEnemyPartyMons
 	ld b, 0

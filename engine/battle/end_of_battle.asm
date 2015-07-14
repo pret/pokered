@@ -41,7 +41,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	call PrintText
 .evolution
 	xor a
-	ld [wccd4], a
+	ld [wForceEvolution], a
 	predef EvolutionAfterBattle
 .resetVariables
 	xor a

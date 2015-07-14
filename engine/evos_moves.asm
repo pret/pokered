@@ -76,7 +76,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, b
 	cp EV_ITEM
 	jr z, .checkItemEvo
-	ld a, [wccd4]
+	ld a, [wForceEvolution]
 	and a
 	jr nz, Evolution_PartyMonLoop
 	ld a, b
