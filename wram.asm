@@ -600,6 +600,8 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wWhichTownMapLocation:: ; cd3d
+
 wStoppingWhichSlotMachineWheel:: ; cd3d
 ; which wheel the player is trying to stop
 ; 0 = none, 1 = wheel 1, 2 = wheel 2, 3 or greater = wheel 3
@@ -626,6 +628,9 @@ wWhichTrade:: ; cd3d
 
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
+
+wFlyLocationsList:: ; cd3e
+; 11 bytes plus $ff sentinel values at each end
 
 wSlotMachineWheel1Offset:: ; cd3e
 
@@ -761,6 +766,8 @@ wcd50:: ds 9 ; used with in-game trades, emotion bubbles, and player and miscell
 wTradedEnemyMonOTID:: ; cd59
 	ds 2
 
+wOAMBaseTile:: ; cd5b
+
 wcd5b:: ds 1 ; used in some sprite stuff, town map and surge gym trash cans
 wcd5c:: ds 1 ; used in town map
 
@@ -807,6 +814,10 @@ wTileMapBackup2:: ; cd81
 
 wBuffer:: ; cee9
 ; Temporary storage area of 30 bytes.
+
+wTownMapCoords:: ; cee9
+; lower nybble is x, upper nybble is y
+
 wHPBarMaxHP:: ; cee9
 	ds 2
 wHPBarOldHP:: ; ceeb

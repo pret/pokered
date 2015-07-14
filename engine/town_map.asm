@@ -10,7 +10,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld a, [W_CURMAP]
 	push af
 	ld b, $0
-	call Func_711c4
+	call DrawPlayerOrBirdSprite ; player sprite
 	hlCoord 1, 0
 	ld de, wcd6d
 	call PlaceString
@@ -23,39 +23,37 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	ld bc, (BANK(TownMapCursor) << 8) + $04
 	call CopyVideoDataDouble
 	xor a
-	ld [wWhichTrade], a
+	ld [wWhichTownMapLocation], a
 	pop af
-	jr Func_70e92
-
-Func_70e7e: ; 70e7e (1c:4e7e)
+	jr .next
+.changeSelectedLocation
 	ld hl, wTileMap
 	ld bc, $114
 	call ClearScreenArea
 	ld hl, TownMapOrder
-	ld a, [wWhichTrade]
+	ld a, [wWhichTownMapLocation]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
-
-Func_70e92: ; 70e92 (1c:4e92)
-	ld de, wHPBarMaxHP
-	call Func_712f1
+.next
+	ld de, wTownMapCoords
+	call LoadTownMapEntry
 	ld a, [de]
 	push hl
-	call Func_71258
+	call TownMapCoordsToOAMCoords
 	ld a, $4
-	ld [wcd5b], a
+	ld [wOAMBaseTile], a
 	ld hl, wOAMBuffer + $10
-	call Func_71279
+	call WriteTownMapSpriteOAM ; town map cursor sprite
 	pop hl
 	ld de, wcd6d
-.asm_70eac
+.copyMapName
 	ld a, [hli]
 	ld [de], a
 	inc de
 	cp $50
-	jr nz, .asm_70eac
+	jr nz, .copyMapName
 	hlCoord 1, 0
 	ld de, wcd6d
 	call PlaceString
@@ -63,46 +61,46 @@ Func_70e92: ; 70e92 (1c:4e92)
 	ld de, wTileMapBackup + 16
 	ld bc, $10
 	call CopyData
-.asm_70ec8
+.inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
 	ld a, [hJoy5]
 	ld b, a
-	and $c3
-	jr z, .asm_70ec8
+	and D_UP | D_DOWN | A_BUTTON | B_BUTTON
+	jr z, .inputLoop
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	bit 6, b
-	jr nz, .asm_70ef2
+	jr nz, .pressedUp
 	bit 7, b
-	jr nz, .asm_70f01
+	jr nz, .pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	ld [hJoy7], a
 	ld [wAnimCounter], a
-	call Func_711ab
+	call TownMapCleanUp
 	pop hl
 	pop af
 	ld [hl], a
 	ret
-.asm_70ef2
-	ld a, [wWhichTrade]
+.pressedUp
+	ld a, [wWhichTownMapLocation]
 	inc a
-	cp $2f
-	jr nz, .asm_70efb
-	xor a
-.asm_70efb
-	ld [wWhichTrade], a
-	jp Func_70e7e
-.asm_70f01
-	ld a, [wWhichTrade]
+	cp NUM_TOWN_MAP_LOCATIONS
+	jr nz, .skipWrapping1
+	xor a ; wrap to 0
+.skipWrapping1
+	ld [wWhichTownMapLocation], a
+	jp .changeSelectedLocation
+.pressedDown
+	ld a, [wWhichTownMapLocation]
 	dec a
-	cp $ff
-	jr nz, .asm_70f0b
-	ld a, $2e
-.asm_70f0b
-	ld [wWhichTrade], a
-	jp Func_70e7e
+	cp -1
+	jr nz, .skipWrapping2
+	ld a, NUM_TOWN_MAP_LOCATIONS - 1 ; wrap to last location
+.skipWrapping2
+	ld [wWhichTownMapLocation], a
+	jp .changeSelectedLocation
 
 INCLUDE "data/town_map_order.asm"
 
@@ -125,7 +123,7 @@ LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	ld de, MonsNestText
 	call PlaceString
 	call WaitForTextScrollButtonPress
-	call Func_711ab
+	call TownMapCleanUp
 	pop hl
 	pop af
 	ld [hl], a
@@ -147,7 +145,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, vChars1 + $6d0
 	ld bc, (BANK(TownMapUpArrow) << 8) + $01
 	call CopyVideoDataDouble
-	call Func_71070
+	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
@@ -158,10 +156,9 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call PlaceString
 	ld a, [W_CURMAP]
 	ld b, $0
-	call Func_711c4
-	ld hl, wTrainerEngageDistance
+	call DrawPlayerOrBirdSprite
+	ld hl, wFlyLocationsList
 	deCoord 18, 0
-
 .townMapFlyLoop
 	ld a, $7f
 	ld [de], a
@@ -173,7 +170,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	pop hl
 	ld a, [hl]
 	ld b, $4
-	call Func_711c4
+	call DrawPlayerOrBirdSprite ; draw bird sprite
 	hlCoord 3, 0
 	ld de, wcd6d
 	call PlaceString
@@ -184,25 +181,25 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	hlCoord 19, 0
 	ld [hl], $ee
 	pop hl
-.asm_71004
+.inputLoop
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
 	ld a, [hJoy5]
 	ld b, a
 	pop hl
-	and $c3
-	jr z, .asm_71004
+	and D_UP | D_DOWN | A_BUTTON | B_BUTTON
+	jr z, .inputLoop
 	bit 0, b
-	jr nz, .asm_71026
+	jr nz, .pressedA
 	ld a, (SFX_02_3c - SFX_Headers_02) / 3
 	call PlaySound
 	bit 6, b
-	jr nz, .asm_71042
+	jr nz, .pressedUp
 	bit 7, b
-	jr nz, .asm_71058
-	jr .asm_71037
-.asm_71026
+	jr nz, .pressedDown
+	jr .pressedB
+.pressedA
 	ld a, (SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySound
 	ld a, [hl]
@@ -211,7 +208,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	set 3, [hl]
 	inc hl
 	set 7, [hl]
-.asm_71037
+.pressedB
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOutWithDelay3
@@ -219,55 +216,55 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	pop af
 	ld [hl], a
 	ret
-.asm_71042
+.pressedUp
 	deCoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jr z, .asm_71052
+	jr z, .wrapToStartOfList
 	cp $fe
-	jr z, .asm_71042
+	jr z, .pressedUp ; skip past unvisited towns
 	jp .townMapFlyLoop
-.asm_71052
-	ld hl, wTrainerEngageDistance
+.wrapToStartOfList
+	ld hl, wFlyLocationsList
 	jp .townMapFlyLoop
-.asm_71058
+.pressedDown
 	deCoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
-	jr z, .asm_71068
+	jr z, .wrapToEndOfList
 	cp $fe
-	jr z, .asm_71058
+	jr z, .pressedDown ; skip past unvisited towns
 	jp .townMapFlyLoop
-.asm_71068
-	ld hl, wcd49
-	jr .asm_71058
+.wrapToEndOfList
+	ld hl, wFlyLocationsList + 11
+	jr .pressedDown
 
 ToText: ; 7106d (1c:506d)
 	db "To@"
 
-Func_71070: ; 71070 (1c:5070)
-	ld hl, wWhichTrade
+BuildFlyLocationsList: ; 71070 (1c:5070)
+	ld hl, wFlyLocationsList - 1
 	ld [hl], $ff
 	inc hl
 	ld a, [W_TOWNVISITEDFLAG]
 	ld e, a
 	ld a, [W_TOWNVISITEDFLAG + 1]
 	ld d, a
-	ld bc, $b
-.asm_71081
+	ld bc, 11 ; number of towns
+.loop
 	srl d
 	rr e
-	ld a, $fe
-	jr nc, .asm_7108a
-	ld a, b
-.asm_7108a
+	ld a, $fe ; store $fe if the town hasn't been visited
+	jr nc, .next
+	ld a, b ; store the map number of the town if it has been visited
+.next
 	ld [hl], a
 	inc hl
 	inc b
 	dec c
-	jr nz, .asm_71081
+	jr nz, .loop
 	ld [hl], $ff
 	ret
 
@@ -295,10 +292,10 @@ LoadTownMap: ; 7109b (1c:509b)
 	call FarCopyDataDouble
 	ld hl, wTileMap
 	ld de, CompressedMap
-.asm_710d3
+.loop
 	ld a, [de]
 	and a
-	jr z, .asm_710e9
+	jr z, .done
 	ld b, a
 	and $f
 	ld c, a
@@ -306,13 +303,13 @@ LoadTownMap: ; 7109b (1c:509b)
 	swap a
 	and $f
 	add $60
-.asm_710e2
+.writeRunLoop ; write one run of the RLE data
 	ld [hli], a
 	dec c
-	jr nz, .asm_710e2
+	jr nz, .writeRunLoop
 	inc de
-	jr .asm_710d3
-.asm_710e9
+	jr .loop
+.done
 	call EnableLCD
 	ld b, $2
 	call GoPAL_SET
@@ -328,7 +325,8 @@ CompressedMap: ; 71100 (1c:5100)
 ; you can decompress this file with the redrle program in the extras/ dir
 	INCBIN "gfx/town_map.rle"
 
-Func_711ab: ; 711ab (1c:51ab)
+TownMapCleanUp: ; 711ab (1c:51ab)
+; clear town map graphics data and load usual graphics data
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
 	call GBPalWhiteOut
@@ -339,17 +337,19 @@ Func_711ab: ; 711ab (1c:51ab)
 	call UpdateSprites
 	jp GoPAL_SET_CF1C
 
-Func_711c4: ; 711c4 (1c:51c4)
+DrawPlayerOrBirdSprite: ; 711c4 (1c:51c4)
+; a = map number
+; b = OAM base tile
 	push af
 	ld a, b
-	ld [wcd5b], a
+	ld [wOAMBaseTile], a
 	pop af
-	ld de, wHPBarMaxHP
-	call Func_712f1
+	ld de, wTownMapCoords
+	call LoadTownMapEntry
 	ld a, [de]
 	push hl
-	call Func_71258
-	call Func_7126d
+	call TownMapCoordsToOAMCoords
+	call WritePlayerOrBirdSpriteOAM
 	pop hl
 	ld de, wcd6d
 .asm_711dc
@@ -365,33 +365,34 @@ Func_711c4: ; 711c4 (1c:51c4)
 
 Func_711ef: ; 711ef (1c:51ef)
 	callba FindWildLocationsOfMon
-	call Func_712d9
+	call ZeroOutDuplicatesInList
 	ld hl, wOAMBuffer
-	ld de, wBuffer
-.asm_71200
+	ld de, wTownMapCoords
+.loop
 	ld a, [de]
 	cp $ff
-	jr z, .asm_7121d
+	jr z, .loopDone
 	and a
-	jr z, .asm_7121a
+	jr z, .nextEntry
 	push hl
-	call Func_712f1
+	call LoadTownMapEntry
 	pop hl
 	ld a, [de]
-	cp $19
-	jr z, .asm_7121a
-	call Func_71258
+	cp $19 ; Cerulean Cave's coordinates
+	jr z, .nextEntry ; skip Cerulean Cave
+	call TownMapCoordsToOAMCoords
 	ld a, $4
 	ld [hli], a
 	xor a
 	ld [hli], a
-.asm_7121a
+.nextEntry
 	inc de
-	jr .asm_71200
-.asm_7121d
+	jr .loop
+.loopDone
 	ld a, l
-	and a
-	jr nz, .asm_71236
+	and a ; were any OAM entries written?
+	jr nz, .drawPlayerSprite
+; if no OAM entries were written, print area unknown text
 	hlCoord 1, 7
 	ld b, $2
 	ld c, $f
@@ -399,12 +400,12 @@ Func_711ef: ; 711ef (1c:51ef)
 	hlCoord 2, 9
 	ld de, AreaUnknownText
 	call PlaceString
-	jr .asm_7123e
-.asm_71236
+	jr .done
+.drawPlayerSprite
 	ld a, [W_CURMAP]
 	ld b, $0
-	call Func_711c4
-.asm_7123e
+	call DrawPlayerOrBirdSprite
+.done
 	ld hl, wOAMBuffer
 	ld de, wTileMapBackup
 	ld bc, $a0
@@ -413,39 +414,41 @@ Func_711ef: ; 711ef (1c:51ef)
 AreaUnknownText: ; 7124a (1c:524a)
 	db " AREA UNKNOWN@"
 
-Func_71258: ; 71258 (1c:5258)
+TownMapCoordsToOAMCoords: ; 71258 (1c:5258)
+; in: lower nybble of a = x, upper nybble of a = y
+; out: b and [hl] = (y * 8) + 24, c and [hl+1] = (x * 8) + 24
 	push af
 	and $f0
 	srl a
-	add $18
+	add 24
 	ld b, a
 	ld [hli], a
 	pop af
 	and $f
 	swap a
 	srl a
-	add $18
+	add 24
 	ld c, a
 	ld [hli], a
 	ret
 
-Func_7126d: ; 7126d (1c:526d)
-	ld a, [wcd5b]
+WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
+	ld a, [wOAMBaseTile]
 	and a
-	ld hl, wOAMBuffer + $90
-	jr z, Func_71279
-	ld hl, wOAMBuffer + $80
+	ld hl, wOAMBuffer + $90 ; for player sprite
+	jr z, WriteTownMapSpriteOAM
+	ld hl, wOAMBuffer + $80 ; for bird sprite
 
-Func_71279: ; 71279 (1c:5279)
+WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	push hl
 	ld hl, $fcfc
-	add hl, bc
+	add hl, bc ; subtract 4 from c (X coord) and 3 from b (Y coord)
 	ld b, h
 	ld c, l
 	pop hl
 
 WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
-; Writes 4 OAM blocks for a helix mon party sprite, since is does not have
+; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
 	ld de, $202
 .loop
@@ -456,10 +459,10 @@ WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	ld a, [wcd5b]
+	ld a, [wOAMBaseTile]
 	ld [hli], a
 	inc a
-	ld [wcd5b], a
+	ld [wOAMBaseTile], a
 	xor a
 	ld [hli], a
 	inc d
@@ -493,7 +496,7 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 	ld [hli], a
 	ld a, c
 	ld [hli], a
-	ld a, [wcd5b]
+	ld a, [wOAMBaseTile]
 	ld [hli], a
 	ld a, [wcd5c]
 	ld [hli], a
@@ -508,7 +511,7 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 	pop bc
 	pop de
 	push hl
-	ld hl, wcd5b
+	ld hl, wOAMBaseTile
 	inc [hl]
 	inc [hl]
 	pop hl
@@ -519,9 +522,10 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 	jr nz, .loop
 	ret
 
-Func_712d9: ; 712d9 (1c:52d9)
-	ld de, wHPBarMaxHP
-.asm_712dc
+ZeroOutDuplicatesInList: ; 712d9 (1c:52d9)
+; replace duplicate bytes in the list of wild pokemon locations with 0
+	ld de, wBuffer
+.loop
 	ld a, [de]
 	inc de
 	cp $ff
@@ -529,39 +533,41 @@ Func_712d9: ; 712d9 (1c:52d9)
 	ld c, a
 	ld l, e
 	ld h, d
-.asm_712e4
+.zeroDuplicatesLoop
 	ld a, [hl]
 	cp $ff
-	jr z, .asm_712dc
+	jr z, .loop
 	cp c
-	jr nz, .asm_712ee
+	jr nz, .skipZeroing
 	xor a
 	ld [hl], a
-.asm_712ee
+.skipZeroing
 	inc hl
-	jr .asm_712e4
+	jr .zeroDuplicatesLoop
 
-Func_712f1: ; 712f1 (1c:52f1)
+LoadTownMapEntry: ; 712f1 (1c:52f1)
+; in: a = map number
+; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
 	cp REDS_HOUSE_1F
-	jr c, .asm_71304
-	ld bc, $4
+	jr c, .external
+	ld bc, 4
 	ld hl, InternalMapEntries
-.asm_712fb
+.loop
 	cp [hl]
-	jr c, .asm_71301
+	jr c, .foundEntry
 	add hl, bc
-	jr .asm_712fb
-.asm_71301
+	jr .loop
+.foundEntry
 	inc hl
-	jr .asm_7130d
-.asm_71304
+	jr .readEntry
+.external
 	ld hl, ExternalMapEntries
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc
-.asm_7130d
+.readEntry
 	ld a, [hli]
 	ld [de], a
 	ld a, [hli]
