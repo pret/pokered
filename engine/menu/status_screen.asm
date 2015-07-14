@@ -280,7 +280,7 @@ PrintStat
 	push hl
 	call PrintNumber
 	pop hl
-	ld de, $0028
+	ld de, SCREEN_WIDTH * 2
 	add hl, de
 	ret
 
@@ -323,15 +323,15 @@ StatusScreen2: ; 12b57 (4:6b57)
 	sub c
 	ld b, a ; Number of moves ?
 	hlCoord 11, 10
-	ld de, $0028
-	ld a, $72
-	call Func_12ccb ; Print "PP"
+	ld de, SCREEN_WIDTH * 2
+	ld a, $72 ; special P tile id
+	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
 	jr z, .InitPP
 	ld c, a
 	ld a, "-"
-	call Func_12ccb ; Fill the rest with --
+	call StatusScreen_PrintPP ; Fill the rest with --
 .InitPP ; 12bbb
 	ld hl, wLoadedMonMoves
 	deCoord 14, 10
@@ -373,7 +373,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld bc, $0102
 	call PrintNumber
 	pop hl
-	ld de, $0028
+	ld de, SCREEN_WIDTH * 2
 	add hl, de
 	ld d, h
 	ld e, l
@@ -411,9 +411,9 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld bc, $0307
 	call PrintNumber
 	hlCoord 9, 0
-	call Func_12cc3
+	call StatusScreen_ClearName
 	hlCoord 9, 1
-	call Func_12cc3
+	call StatusScreen_ClearName
 	ld a, [W_MONHDEXNUM]
 	ld [wd11e], a
 	call GetMonName
@@ -463,15 +463,16 @@ EXPPointsText: ; 12caf (4:6caf)
 LevelUpText: ; 12cba (4:6cba)
 	db "LEVEL UP@"
 
-Func_12cc3: ; 12cc3 (4:6cc3)
-	ld bc, $a
-	ld a, $7f
+StatusScreen_ClearName: ; 12cc3 (4:6cc3)
+	ld bc, 10
+	ld a, " "
 	jp FillMemory
 
-Func_12ccb: ; 12ccb (4:6ccb)
+StatusScreen_PrintPP: ; 12ccb (4:6ccb)
+; print PP or -- c times, going down two rows each time
 	ld [hli], a
 	ld [hld], a
 	add hl, de
 	dec c
-	jr nz, Func_12ccb
+	jr nz, StatusScreen_PrintPP
 	ret

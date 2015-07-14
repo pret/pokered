@@ -70,7 +70,7 @@ ENDC
 	call Func_4519
 	hlCoord 2, 1
 	ld a, $80
-	ld de, $14
+	ld de, SCREEN_WIDTH
 	ld c, $6
 .asm_434d
 	ld b, $10

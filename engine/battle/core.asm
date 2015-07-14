@@ -7047,7 +7047,7 @@ CopyUncompressedPicToTilemap: ; 3f0c6 (f:70c6)
 	ld a, [$ffe1]
 CopyUncompressedPicToHL: ; 3f0d0 (f:70d0)
 	ld bc, $707
-	ld de, $14
+	ld de, SCREEN_WIDTH
 	push af
 	ld a, [W_SPRITEFLIPPED]
 	and a

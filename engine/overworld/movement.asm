@@ -690,8 +690,8 @@ getTileSpriteStandsOn: ; 5207 (1:5207)
 	ld a, [hl]      ; c1x6: screen Y position
 	srl a
 	srl a
-	srl a           ; screen X tile
-	add $14         ; screen X tile + 20
+	srl a            ; screen X tile
+	add SCREEN_WIDTH ; screen X tile + 20
 	ld d, $0
 	ld e, a
 	hlCoord 0, 0

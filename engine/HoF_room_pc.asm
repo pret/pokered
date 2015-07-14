@@ -202,7 +202,7 @@ Credits: ; 7418e (1d:418e)
 	add hl, bc
 	call PlaceString
 	pop hl
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
 	jr .asm_7419b

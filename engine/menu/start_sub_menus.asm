@@ -714,10 +714,10 @@ SwitchPartyMon: ; 13613 (4:7613)
 SwitchPartyMon_OAM: ; 13625 (4:7625)
 	push af
 	hlCoord 0, 0
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
-	ld c, $28
-	ld a, $7f
+	ld c, SCREEN_WIDTH * 2
+	ld a, " "
 .asm_13633
 	ld [hli], a
 	dec c

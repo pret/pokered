@@ -1753,7 +1753,7 @@ ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 
 ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ld de,wScreenEdgeTiles
-	ld c,$12
+	ld c,SCREEN_HEIGHT
 .loop
 	ld a,[hli]
 	ld [de],a

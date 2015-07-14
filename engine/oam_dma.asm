@@ -19,7 +19,8 @@ DMARoutine:
 
 	; wait for DMA to finish
 	ld a, $28
-.wait	dec a
+.wait
+	dec a
 	jr nz, .wait
 	ret
 DMARoutineEnd:

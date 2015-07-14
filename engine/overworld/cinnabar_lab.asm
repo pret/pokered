@@ -103,7 +103,7 @@ Func_610c2: ; 610c2 (18:50c2)
 	call GetItemName
 	hlCoord 2, 2
 	ld a, [$ffdb]
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wcd6d
 	call PlaceString

@@ -3176,7 +3176,7 @@ UncompressSpriteFromDE:: ; 36eb (0:36eb)
 SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
 	hlCoord 0, 0
 	ld de, wTileMapBackup2
-	ld bc, $168
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ret
 
@@ -3199,7 +3199,7 @@ LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
 	hlCoord 0, 0
 	ld de, wTileMapBackup
-	ld bc, $168
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	jp CopyData
 
 LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
@@ -3207,7 +3207,7 @@ LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMapBackup
 	deCoord 0, 0
-	ld bc, $168
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a

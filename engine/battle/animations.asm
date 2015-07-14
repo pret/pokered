@@ -1712,9 +1712,9 @@ _AnimationSquishMonPic: ; 794d4 (1e:54d4)
 	call Func_79862
 	inc hl
 .asm_794eb
-	ld [hl], $7f
+	ld [hl], " "
 	pop hl
-	ld de, $14
+	ld de, SCREEN_WIDTH
 	add hl, de
 	pop bc
 	dec c

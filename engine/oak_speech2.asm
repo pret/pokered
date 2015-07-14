@@ -250,6 +250,7 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 	ld de, wcd6d
 	ld bc, $14
 	jp CopyData
+
 IF DEF(_RED)
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "NEW NAME@RED@ASH@JACK@"

@@ -462,7 +462,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call Func_73a84
 	hlCoord 18, 1
 	ld de, wWhichTrade
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	ld a, $c
 .asm_739c2
 	push af

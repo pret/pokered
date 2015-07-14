@@ -148,7 +148,7 @@ EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
 
 PlaceHUDTiles: ; 3a930 (e:6930)
 	ld [hl], $73
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	ld a, [wTrainerScreenY]
 	ld [hl], a

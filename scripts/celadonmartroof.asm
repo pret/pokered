@@ -202,7 +202,7 @@ CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	call GetItemName
 	hlCoord 2, 2
 	ld a, [$ffdb]
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wcd6d
 	call PlaceString

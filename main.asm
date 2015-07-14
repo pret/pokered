@@ -1157,7 +1157,7 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 	push hl
 	call PlaceString
 	pop hl
-	ld de,$28
+	ld de,SCREEN_WIDTH * 2
 	add hl,de
 	ret
 
@@ -1755,14 +1755,14 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	sub e
 	ld c, a
 	pop af
-	ld de, $ffd8
+	ld de, -SCREEN_WIDTH * 2
 .asm_7725
 	add hl, de
 	inc b
 	inc b
 	dec a
 	jr nz, .asm_7725
-	ld de, $ffec
+	ld de, -SCREEN_WIDTH
 	add hl, de
 	inc b
 	call TextBoxBorder
@@ -1773,7 +1773,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	ld e, a
 	ld d, $0
 	add hl, de
-	ld de, $ffd8
+	ld de, -SCREEN_WIDTH * 2
 	ld a, [wTrainerScreenX]
 .asm_7747
 	add hl, de
@@ -1806,7 +1806,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	ld d, b
 	ld e, c
 	call PlaceString
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
 	jr .asm_7752
@@ -4031,7 +4031,7 @@ _MoveMon: ; f51e (3:751e)
 	ld [hli], a
 	ld d, h
 	ld e, l
-	ld bc, $ffee
+	ld bc, -18
 	add hl, bc
 	ld b, $1
 	call CalcStats
