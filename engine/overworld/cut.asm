@@ -73,7 +73,7 @@ UsedCutText: ; eff2 (3:6ff2)
 
 AnimateCutTree: ; eff7 (3:6ff7)
 	xor a
-	ld [wcd50], a
+	ld [wWhichAnimationOffsets], a
 	ld a, $e4
 	ld [rOBP1], a
 	ld a, [wcd4d]
@@ -138,7 +138,7 @@ GetCutTreeBoulderDustAnimationOffsets: ; f068 (3:7068)
 	srl a
 	ld e, a
 	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
-	ld a, [wcd50]
+	ld a, [wWhichAnimationOffsets]
 	and a
 	ld hl, CutTreeAnimationOffsets
 	jr z, .asm_f084

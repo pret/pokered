@@ -186,9 +186,9 @@ OakAppearsText: ; 18fb0 (6:4fb0)
 	ld c,10
 	call DelayFrames
 	xor a
-	ld [wcd4f],a
-	ld [wcd50],a
-	predef EmotionBubble ; display ! over head
+	ld [wEmotionBubbleSpriteIndex],a ; player's sprite
+	ld [wWhichEmotionBubble],a ; EXCLAMATION_BUBBLE
+	predef EmotionBubble
 	ld a,4
 	ld [wd528],a
 	jp TextScriptEnd

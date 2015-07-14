@@ -601,6 +601,14 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wBadgeNumberTile:: ; cd3d
+; tile ID of the badge number being drawn
+
+wRodResponse:: ; cd3d
+; 0 = no bite
+; 1 = bite
+; 2 = no fish on map
+
 wWhichTownMapLocation:: ; cd3d
 
 wStoppingWhichSlotMachineWheel:: ; cd3d
@@ -630,6 +638,9 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wBadgeNameTile:: ; cd3e
+; first tile ID of the name being drawn
+
 wFlyLocationsList:: ; cd3e
 ; 11 bytes plus $ff sentinel values at each end
 
@@ -649,6 +660,11 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wBadgeOrFaceTiles:: ; cd3f
+; 8 bytes
+; a list of the first tile IDs of each badge or face (depending on whether the
+; badge is owned) to be drawn on the trainer screen
 
 wSlotMachineWheel2Offset:: ; cd3f
 
@@ -709,17 +725,27 @@ wTempCoins1:: ; cd46
 wSlotMachineWheel2TopTile:: ; cd46
 	ds 1
 
-wSlotMachineWheel3BottomTile:: ; cd47
+wBattleTransitionSpiralDirection:: ; cd47
+; 0 = outward, 1 = inward
 
-wcd47:: ds 1 ; used in slot machine and spinning player sprite
+wSlotMachineWheel3BottomTile:: ; cd47
+	ds 1
 
 wSlotMachineWheel3MiddleTile:: ; cd48
 
-wcd48:: ds 1 ; same as above
+wFacingDirectionList:: ; cd48
+; 4 bytes (also, the byte before the start of the list (cd47) is used a temp
+;          variable when the list is rotated)
+; used when spinning the player's sprite
+	ds 1
 
 wSlotMachineWheel3TopTile:: ; cd49
 
-wcd49:: ds 1 ; used in slot machine, displaying the gym leaders/badges on the trainer card, and displaying the town map
+wTempObtainedBadgesBooleans::
+; 8 bytes
+; temporary list created when displaying the badges on the trainer screen
+; one byte for each badge; 0 = not obtained, 1 = obtained
+	ds 1
 
 wTempCoins2:: ; cd4a
 ; 2 bytes
@@ -727,11 +753,7 @@ wTempCoins2:: ; cd4a
 
 wPayoutCoins:: ; cd4a
 ; 2 bytes
-	ds 1
-
-wcd4b:: ; cd4b
-; used in player animations
-	ds 1
+	ds 2
 
 wTradedPlayerMonOTID:: ; cd4c
 
@@ -750,19 +772,28 @@ wSlotMachineWheel2SlipCounter:: ; cd4e
 ; wheel 2 can "slip" while this is non-zero
 
 wTradedEnemyMonOT:: ; cd4e
+	ds 1
 
-wcd4e:: ds 1 ; used with in-game trades and slot machine
+wSavedPlayerScreenY:: ; cd4f
 
 wSlotMachineRerollCounter:: ; cd4f
 ; The remaining number of times wheel 3 will roll down a symbol until a match is
 ; found, when winning is enabled. It's initialized to 4 each bet.
 
-wcd4f:: ds 1 ; used with in-game trades, emotion bubbles, and player animations
+wEmotionBubbleSpriteIndex:: ; cd4f
+; the index of the sprite the emotion bubble is to be displayed above
+	ds 1
+
+wWhichEmotionBubble:: ; cd50
 
 wSlotMachineBet:: ; cd50
 ; how many coins the player bet on the slot machine (1 to 3)
 
-wcd50:: ds 9 ; used with in-game trades, emotion bubbles, and player and miscellaneous sprite animations
+wSavedPlayerFacingDirection:: ; cd50
+
+wWhichAnimationOffsets:: ; cd50
+; 0 = cut animation, 1 = boulder dust animation
+	ds 9
 
 wTradedEnemyMonOTID:: ; cd59
 	ds 2
@@ -2219,7 +2250,7 @@ wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
 ; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
-; bit 6: jumping down a ledge
+; bit 6: jumping down a ledge / fishing animation
 	ds 1
 
 wCompletedInGameTradeFlags:: ; d737

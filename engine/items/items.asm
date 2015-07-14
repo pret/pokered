@@ -1783,7 +1783,7 @@ SuperRodCode: ; e283 (3:6283)
 	call ReadSuperRodData
 	ld a, e
 RodResponse: ; e28d (3:628d)
-	ld [wWhichTrade], a
+	ld [wRodResponse], a
 
 	dec a ; is there a bite?
 	jr nz, .next
@@ -1801,7 +1801,7 @@ RodResponse: ; e28d (3:628d)
 	push af
 	push hl
 	ld [hl], 0
-	callba Func_707b6
+	callba FishingAnim
 	pop hl
 	pop af
 	ld [hl], a

@@ -2973,20 +2973,20 @@ DrawBadges: ; ea03 (3:6a03)
 ; Instead of removing relevant code, the name graphics were erased.
 
 ; Tile ids for face/badge graphics.
-	ld de, wTrainerFacingDirection
+	ld de, wBadgeOrFaceTiles
 	ld hl, .FaceBadgeTiles
 	ld bc, 8
 	call CopyData
 
 ; Booleans for each badge.
-	ld hl, wcd49
+	ld hl, wTempObtainedBadgesBooleans
 	ld bc, 8
 	xor a
 	call FillMemory
 
 ; Alter these based on owned badges.
-	ld de, wcd49
-	ld hl, wTrainerFacingDirection
+	ld de, wTempObtainedBadgesBooleans
+	ld hl, wBadgeOrFaceTiles
 	ld a, [W_OBTAINEDBADGES]
 	ld b, a
 	ld c, 8
@@ -3005,17 +3005,17 @@ DrawBadges: ; ea03 (3:6a03)
 	jr nz, .CheckBadge
 
 ; Draw two rows of badges.
-	ld hl, wWhichTrade
+	ld hl, wBadgeNumberTile
 	ld a, $d8 ; [1]
 	ld [hli], a
 	ld [hl], $60 ; First name
 
 	hlCoord 2, 11
-	ld de, wcd49
+	ld de, wTempObtainedBadgesBooleans
 	call .DrawBadgeRow
 
 	hlCoord 2, 14
-	ld de, wcd49 + 4
+	ld de, wTempObtainedBadgesBooleans + 4
 ;	call .DrawBadgeRow
 ;	ret
 
@@ -3028,15 +3028,15 @@ DrawBadges: ; ea03 (3:6a03)
 	push hl
 
 ; Badge no.
-	ld a, [wWhichTrade]
+	ld a, [wBadgeNumberTile]
 	ld [hli], a
 	inc a
-	ld [wWhichTrade], a
+	ld [wBadgeNumberTile], a
 
 ; Names aren't printed if the badge is owned.
 	ld a, [de]
 	and a
-	ld a, [wTrainerEngageDistance]
+	ld a, [wBadgeNameTile]
 	jr nz, .SkipName
 	call .PlaceTiles
 	jr .PlaceBadge
@@ -3047,18 +3047,18 @@ DrawBadges: ; ea03 (3:6a03)
 	inc hl
 
 .PlaceBadge
-	ld [wTrainerEngageDistance], a
-	ld de, 20 - 1
+	ld [wBadgeNameTile], a
+	ld de, SCREEN_WIDTH - 1
 	add hl, de
-	ld a, [wTrainerFacingDirection]
+	ld a, [wBadgeOrFaceTiles]
 	call .PlaceTiles
 	add hl, de
 	call .PlaceTiles
 
 ; Shift badge array back one byte.
 	push bc
-	ld hl, wTrainerFacingDirection + 1
-	ld de, wTrainerFacingDirection
+	ld hl, wBadgeOrFaceTiles + 1
+	ld de, wBadgeOrFaceTiles
 	ld bc, 8
 	call CopyData
 	pop bc

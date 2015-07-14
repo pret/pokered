@@ -2350,9 +2350,9 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 .trainerEngaging
 	ld hl, W_FLAGS_D733
 	set 3, [hl]
-	ld [wcd4f], a
-	xor a
-	ld [wcd50], a
+	ld [wEmotionBubbleSpriteIndex], a
+	xor a ; EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
 	predef EmotionBubble
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a

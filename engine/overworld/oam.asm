@@ -144,10 +144,14 @@ PrepareOAMData:
 	ld de, $4
 	ld b, $a0
 	ld a, [wd736]
-	bit 6, a
+	bit 6, a ; jumping down ledge or fishing animation?
 	ld a, $a0
 	jr z, .clear
+
+; Don't clear the last 4 entries because they are used for the shadow in the
+; jumping down ledge animation and the rod in the fishing animation.
 	ld a, $90
+
 .clear
 	cp l
 	ret z

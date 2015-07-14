@@ -1,6 +1,6 @@
 AnimateBoulderDust: ; 79f54 (1e:5f54)
 	ld a, $1
-	ld [wcd50], a ; select the boulder dust offsets
+	ld [wWhichAnimationOffsets], a ; select the boulder dust offsets
 	ld a, [wUpdateSpritesEnabled]
 	push af
 	ld a, $ff
