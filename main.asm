@@ -218,9 +218,9 @@ UpdateNonPlayerSprite:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	cp b
 	jr nz, .unequal
-	jp Func_5236
+	jp DoScriptedNPCMovement
 .unequal
-	jp Func_4ed1
+	jp UpdateNPCSprite
 
 ; This detects if the current sprite (whose offset is at H_CURRENTSPRITEOFFSET)
 ; is going to collide with another sprite by looping over the other sprites.

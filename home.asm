@@ -3043,8 +3043,8 @@ CalcDifference:: ; 3633 (0:3633)
 	ret
 
 MoveSprite:: ; 363a (0:363a)
-; move the sprite [$FF8C] with the movement pointed to by de
-; actually only copies the movement data to wcc5b for later
+; move the sprite [H_SPRITEINDEX] with the movement pointed to by de
+; actually only copies the movement data to wNPCMovementDirections for later
 	call SetSpriteMovementBytesToFF
 MoveSprite_:: ; 363d (0:363d)
 	push hl
@@ -3052,7 +3052,7 @@ MoveSprite_:: ; 363d (0:363d)
 	call GetSpriteMovementByte1Pointer
 	xor a
 	ld [hl],a
-	ld hl,wcc5b
+	ld hl,wNPCMovementDirections
 	ld c,0
 
 .loop

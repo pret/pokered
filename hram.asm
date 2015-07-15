@@ -28,6 +28,17 @@ hPartyMonIndex EQU $FF8C
 
 hHalveItemPrices EQU $FF8E
 
+hSpriteDataOffset2 EQU $FF8F
+
+hOAMBufferOffset EQU $FF90
+
+hSpriteScreenX EQU $FF91
+hSpriteScreenY EQU $FF92
+
+hTilePlayerStandingOn EQU $FF93
+
+hSpritePriority EQU $FF94
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
@@ -154,6 +165,10 @@ H_VBLANKOCCURRED EQU $FFD6
 hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hSpriteVRAMSlotAndFacing EQU $FFE9
+
+hSpriteAnimFrameCounter EQU $FFEA
 
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 

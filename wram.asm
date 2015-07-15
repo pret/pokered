@@ -369,6 +369,8 @@ wBoostExpByExpAll:: ; cc5b
 wAnimationType:: ; cc5b
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
 
+wNPCMovementDirections:: ; cc5b
+
 wcc5b:: ds 1 ; these upcoming values below are miscellaneous storage values
 wcc5c:: ds 1 ; used in pokedex evaluation as well
 wcc5d:: ds 1 ; used in pokedex evaluation
@@ -1092,7 +1094,10 @@ wcfc9:: ds 1 ; also used with audio
 wcfca:: ds 1 ; also used with audio too
 
 wUpdateSpritesEnabled:: ; cfcb
-; $01 enables UpdateSprites; anything else disables it
+; $00 = causes sprites to be hidden and the value to change to $ff
+; $01 = enabled
+; $ff = disabled
+; other values aren't used
 	ds 1
 
 W_ENEMYMOVENUM:: ; cfcc
@@ -2291,13 +2296,16 @@ wd72c:: ; d72c
 
 wd72d:: ds 1 ; misc temp flags? (in some scripts, bit 6 and 7 set after a special battle (e.g. gym leaders) has been won)
              ; also used as a start menu flag
-wd72e:: ds 2 ; more temp misc flags, used with npc movement, main menu and other stuff
+
+wd72e::
+; bit 7: set if scripted NPC movement has been initialised
+	ds 2 ; more temp misc flags, used with npc movement, main menu and other stuff
 
 wd730::
 ; bit 0: NPC sprite being moved by script
 ; bit 5: ignore joypad input
 ; bit 6: print text with no delay between each letter
-; bit 7: set if joypad states are being simulated in the overworld
+; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
 	ds 1
 
 	ds 1
@@ -2328,6 +2336,7 @@ wd736:: ; d736
 ; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
 ; bit 6: jumping down a ledge / fishing animation
+; bit 7: player sprite spinning due to spin tiles (Rocket hidehout / Viridian Gym)
 	ds 1
 
 wCompletedInGameTradeFlags:: ; d737

@@ -63,7 +63,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 	ld a, $1
