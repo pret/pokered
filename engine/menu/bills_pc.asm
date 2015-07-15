@@ -2,13 +2,13 @@ Func_213c8:: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call SaveScreenTilesToBuffer2
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .asm_213f3
 	ld a, [wd74b]
 	bit 5, a
 	jr z, .asm_213ea
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .asm_213f3
 	hlCoord 0, 0
@@ -53,7 +53,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	hlCoord 2, 6
 	ld de, OaksPCText
 	call PlaceString
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr z, .asm_2145a
 	ld a, $4

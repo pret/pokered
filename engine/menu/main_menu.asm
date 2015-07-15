@@ -109,7 +109,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [wd52a],a
 	ld c,10
 	call DelayFrames
-	ld a,[wd5a2]
+	ld a,[wNumHoFTeams]
 	and a
 	jp z,SpecialEnterMap
 	ld a,[W_CURMAP] ; map ID
@@ -124,14 +124,14 @@ MainMenu: ; 5af2 (1:5af2)
 
 Func_5bff: ; 5bff (1:5bff)
 	ld a,1
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ld a,3
 	ld [W_OPTIONS],a
 	ret
 
 LinkMenu: ; 5c0a (1:5c0a)
 	xor a
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd72e
 	set 6, [hl]
 	ld hl, TextTerminator_6b20
@@ -452,7 +452,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	inc a
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ld [wTrainerScreenY],a
 	ld a,3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY],a

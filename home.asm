@@ -3538,18 +3538,18 @@ Divide:: ; 38b9 (0:38b9)
 
 ; This function is used to wait a short period after printing a letter to the
 ; screen unless the player presses the A/B button or the delay is turned off
-; through the [wd730] or [wd358] flags.
+; through the [wd730] or [wLetterPrintingDelayFlags] flags.
 PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[wd730]
 	bit 6,a
 	ret nz
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	bit 1,a
 	ret z
 	push hl
 	push de
 	push bc
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	bit 0,a
 	jr z,.waitOneFrame
 	ld a,[W_OPTIONS]

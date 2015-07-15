@@ -620,9 +620,9 @@ SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 	ret
 
 SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	dec a
-	cp NUM_HOF_TEAMS
+	cp HOF_TEAM_CAPACITY
 	jr nc, .asm_73b28
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
@@ -636,10 +636,10 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 .asm_73b28
 	ld hl, sHallOfFame + HOF_TEAM
 	ld de, sHallOfFame
-	ld bc, HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	call HallOfFame_Copy
 	ld hl, wcc5b
-	ld de, sHallOfFame + HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 

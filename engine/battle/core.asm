@@ -6856,7 +6856,7 @@ DetermineWildOpponent: ; 3ef23 (f:6f23)
 InitBattleCommon: ; 3ef3d (f:6f3d)
 	ld a, [wMapPalOffset]
 	push af
-	ld hl, wd358
+	ld hl, wLetterPrintingDelayFlags
 	ld a, [hl]
 	push af
 	res 1, [hl]
@@ -6963,7 +6963,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	call StartBattle
 	callab EndOfBattle
 	pop af
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	pop af
 	ld [wMapPalOffset], a
 	ld a, [wd0d4]

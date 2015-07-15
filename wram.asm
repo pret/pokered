@@ -601,6 +601,8 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wHoFMonSpecies:: ; cd3d
+
 wFieldMoves:: ; cd3d
 ; 4 bytes
 ; the current mon's field moves
@@ -642,6 +644,11 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wHoFPartyMonIndex:: ; cd3e
+
+wNumCreditsMonsDisplayed:: ; cd3e
+; the number of credits mons that have been displayed so far
+
 wBadgeNameTile:: ; cd3e
 ; first tile ID of the name being drawn
 
@@ -665,6 +672,8 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 
+wHoFMonLevel:: ; cd3f
+
 wBadgeOrFaceTiles:: ; cd3f
 ; 8 bytes
 ; a list of the first tile IDs of each badge or face (depending on whether the
@@ -685,6 +694,11 @@ wHiddenObjectIndex:: ; cd3f
 wTrainerFacingDirection:: ; cd3f
 wcd3f:: ; used with daycare text for money amount
 	ds 1
+
+wHoFMonOrPlayer:: ; cd40
+; show mon or show player?
+; 0 = mon
+; 1 = player
 
 wSlotMachineWheel3Offset:: ; cd40
 
@@ -709,6 +723,8 @@ wSlotMachineWheel1BottomTile:: ; cd41
 wTrainerScreenX:: ; cd41
 	ds 1
 ; a lot of the uses for these values use more than the said address
+
+wHoFTeamNo:: ; cd42
 
 wSlotMachineWheel1MiddleTile:: ; cd42
 
@@ -776,7 +792,10 @@ wSlotMachineFlags:: ; cd4c
 wSlotMachineWheel1SlipCounter:: ; cd4d
 ; wheel 1 can "slip" while this is non-zero
 
-wcd4d:: ds 1 ; used with cut and slot machine
+wCutTile:: ; cd4d
+; $3d = tree tile
+; $52 = grass tile
+	ds 1
 
 wSlotMachineWheel2SlipCounter:: ; cd4e
 ; wheel 2 can "slip" while this is non-zero
@@ -1695,7 +1714,12 @@ W_OBTAINEDBADGES:: ; d356
 
 	ds 1
 
-wd358:: ds 1 ; bit 0 set = no delay when printing text (W_OPTIONS is still checked though)
+wLetterPrintingDelayFlags:: ; d358
+; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
+;        the delay has been disabled entirely through bit 1 of this variable
+;        or bit 6 of wd730.
+; bit 1: If 0, no delay.
+	ds 1
 
 wPlayerID:: ; d359
 	ds 2
@@ -1904,7 +1928,11 @@ wBoxItems:: ; d53b
 	ds 1 ; end
 
 wd5a0:: ds 2 ; current box number
-wd5a2:: ds 1 ; number of HOF teams
+
+wNumHoFTeams:: ; d5a2
+; number of HOF teams
+	ds 1
+
 wd5a3:: ds 1 ; unused? (written to when loading map data)
 
 wPlayerCoins:: ; d5a4

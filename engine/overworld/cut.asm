@@ -26,7 +26,7 @@ UsedCut: ; ef54 (3:6f54)
 	db "@"
 
 .asm_ef82
-	ld [wcd4d], a
+	ld [wCutTile], a
 	ld a, $1
 	ld [wcd6a], a
 	ld a, [wWhichPokemon]
@@ -76,7 +76,7 @@ AnimateCutTree: ; eff7 (3:6ff7)
 	ld [wWhichAnimationOffsets], a
 	ld a, $e4
 	ld [rOBP1], a
-	ld a, [wcd4d]
+	ld a, [wCutTile]
 	cp $52
 	jr z, .asm_f020
 	ld de, Overworld_GFX + $2d0 ; cuttable tree sprite top row

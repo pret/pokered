@@ -1973,7 +1973,7 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	push hl
 .asm_79680
 	call Func_796ae
-	ld a, [$ff44]
+	ld a, [rLY]
 	cp e
 	jr nz, .asm_79680
 	pop hl

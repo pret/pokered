@@ -13,30 +13,32 @@ PKMNLeaguePC: ; 0x7657e
 	ld [W_SPRITEFLIPPED], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wTrainerScreenX], a
-	ld [wcd42], a
-	ld a, [wd5a2]
+	ld [wHoFTeamNo], a
+	ld a, [wNumHoFTeams]
 	ld b, a
-	cp NUM_HOF_TEAMS + 1
-	jr c, .first
-	ld b, NUM_HOF_TEAMS
+	cp HOF_TEAM_CAPACITY + 1
+	jr c, .loop
+; If the total number of hall of fame teams is greater than the storage
+; capacity, then calculate the number of the first team that is still recorded.
+	ld b, HOF_TEAM_CAPACITY
 	sub b
-	ld [wcd42], a
-.first
-	ld hl, wcd42
+	ld [wHoFTeamNo], a
+.loop
+	ld hl, wHoFTeamNo
 	inc [hl]
 	push bc
 	ld a, [wTrainerScreenX]
-	ld [wWhichTrade], a
+	ld [wHoFMonSpecies], a
 	callba LoadHallOfFameTeams
-	call Func_765e5
+	call LeaguePCShowTeam
 	pop bc
-	jr c, .second
+	jr c, .doneShowingTeams
 	ld hl, wTrainerScreenX
 	inc [hl]
 	ld a, [hl]
 	cp b
-	jr nz, .first
-.second
+	jr nz, .loop
+.doneShowingTeams
 	pop af
 	ld [hTilesetType], a
 	pop af
@@ -48,11 +50,11 @@ PKMNLeaguePC: ; 0x7657e
 	call GoPAL_SET_CF1C
 	jp GBPalNormal
 
-Func_765e5: ; 765e5 (1d:65e5)
+LeaguePCShowTeam: ; 765e5 (1d:65e5)
 	ld c, PARTY_LENGTH
 .loop
 	push bc
-	call Func_76610
+	call LeaguePCShowMon
 	call WaitForTextScrollButtonPress
 	ld a, [hJoyHeld]
 	bit 1, a
@@ -75,18 +77,18 @@ Func_765e5: ; 765e5 (1d:65e5)
 	scf
 	ret
 
-Func_76610: ; 76610 (1d:6610)
+LeaguePCShowMon: ; 76610 (1d:6610)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	ld hl, wHallOfFame
 	ld a, [hli]
-	ld [wWhichTrade], a
+	ld [wHoFMonSpecies], a
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
 	ld [wcf1d], a
 	ld a, [hli]
-	ld [wTrainerFacingDirection], a
+	ld [wHoFMonLevel], a
 	ld de, wcd6d
 	ld bc, $000B
 	call CopyData
@@ -105,11 +107,11 @@ Func_76610: ; 76610 (1d:6610)
 	ld de, HallOfFameNoText
 	call PlaceString
 	hlCoord 16, 15
-	ld de, wcd42
+	ld de, wHoFTeamNo
 	ld bc, $0103
 	call PrintNumber
-	ld b, BANK(Func_702f0)
-	ld hl, Func_702f0
+	ld b, BANK(HoFDisplayMonInfo)
+	ld hl, HoFDisplayMonInfo
 	jp Bankswitch
 
 HallOfFameNoText: ; 76670 (1d:6670)
