@@ -153,7 +153,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	bit 1,a ; does the player have the Cascade Badge?
 	jp z,.newBadgeRequired
 	predef UsedCut
-	ld a,[wcd6a]
+	ld a,[wActionResultOrTookBattleTurn]
 	and a
 	jp z,.loop
 	jp CloseTextDisplay
@@ -169,7 +169,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld [wcf91],a
 	ld [wd152],a
 	call UseItem
-	ld a,[wcd6a]
+	ld a,[wActionResultOrTookBattleTurn]
 	and a
 	jp z,.loop
 	call GBPalWhiteOutWithDelay3
@@ -197,7 +197,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld [wcf91],a
 	ld [wd152],a
 	call UseItem
-	ld a,[wcd6a]
+	ld a,[wActionResultOrTookBattleTurn]
 	and a
 	jp z,.loop
 	call GBPalWhiteOutWithDelay3
@@ -308,10 +308,10 @@ StartMenu_Item: ; 13302 (4:7302)
 	jr .exitMenu
 .notInCableClubRoom
 	ld bc,wNumBagItems
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,c
 	ld [hli],a
-	ld [hl],b ; store item bag pointer at wList (for DisplayListMenuID)
+	ld [hl],b ; store item bag pointer in wListPointer (for DisplayListMenuID)
 	xor a
 	ld [wPrintItemPrices],a
 	ld a,ITEMLISTMENU
@@ -401,7 +401,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	xor a
 	ld [wd152],a
 	call UseItem
-	ld a,[wcd6a]
+	ld a,[wActionResultOrTookBattleTurn]
 	and a
 	jp z,ItemMenuLoop
 	jp CloseStartMenu
@@ -409,7 +409,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld a,[wUpdateSpritesEnabled]
 	push af
 	call UseItem
-	ld a,[wcd6a]
+	ld a,[wActionResultOrTookBattleTurn]
 	cp a,$02
 	jp z,.partyMenuNotDisplayed
 	call GBPalWhiteOutWithDelay3

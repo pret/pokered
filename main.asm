@@ -808,7 +808,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -854,7 +854,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	call DelayFrames
 	push hl
 	push de
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -916,7 +916,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jr .done
 .combineItemSlots
 	ld [hl],a ; put the sum in the second item slot
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -2065,7 +2065,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
 	ld [hJoyHeld], a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld [wd5a3], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
@@ -3810,7 +3810,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	pop bc
 	pop de
 	pop hl
-	ld a, [wcd72] ; sixth move byte = pp
+	ld a, [wcd6d + 5] ; PP is byte 5 of move data
 .empty
 	inc de
 	ld [de], a
@@ -4167,12 +4167,12 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, $0006
+	ld bc, 6
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, [wcd72] ; default pp
+	ld a, [wcd6d + 5] ; PP is byte 5 of move data
 
 	pop bc
 	pop de

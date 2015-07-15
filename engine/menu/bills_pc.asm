@@ -325,9 +325,9 @@ Func_216b3: ; 216b3 (8:56b3)
 
 Func_216be: ; 216be (8:56be)
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
 	ld [wListMenuID], a

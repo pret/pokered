@@ -316,7 +316,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	hlCoord 2, 9
 	ld de, wMovesString
 	call PlaceString ; Print moves
-	ld a, [wcd6c]
+	ld a, [wNumMovesMinusOne]
 	inc a
 	ld c, a
 	ld a, $4
@@ -335,7 +335,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 .InitPP ; 12bbb
 	ld hl, wLoadedMonMoves
 	deCoord 14, 10
-	ld b, $0
+	ld b, 0
 .PrintPP ; 12bc3
 	ld a, [hli]
 	and a
@@ -356,15 +356,15 @@ StatusScreen2: ; 12b57 (4:6b57)
 	pop de
 	pop hl
 	push hl
-	ld bc, $0014
+	ld bc, wPartyMon1PP - wPartyMon1Moves - 1
 	add hl, bc
 	ld a, [hl]
 	and $3f
-	ld [wcd71], a
+	ld [wStatusScreenCurrentPP], a
 	ld h, d
 	ld l, e
 	push hl
-	ld de, wcd71
+	ld de, wStatusScreenCurrentPP
 	ld bc, $0102
 	call PrintNumber
 	ld a, "/"

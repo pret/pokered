@@ -2,7 +2,7 @@ InitBattleVariables: ; 525af (14:65af)
 	ld a, [hTilesetType]
 	ld [wd0d4], a
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld [wBattleResult], a
 	ld hl, wcc2b
 	ld [hli], a

@@ -1055,7 +1055,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	callba DisplayTextIDInit ; initialization
-	ld hl,wcf11
+	ld hl,wTextPredefFlag
 	bit 0,[hl]
 	res 0,[hl]
 	jr nz,.skipSwitchToMapBank
@@ -1225,7 +1225,7 @@ LoadItemList:: ; 2a5a (0:2a5a)
 	ld [wItemListPointer],a
 	ld a,l
 	ld [wItemListPointer + 1],a
-	ld de,wStringBuffer2 + 11
+	ld de,wItemList
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1372,7 +1372,7 @@ AddItemToInventory:: ; 2bcf (0:2bcf)
 
 ; INPUT:
 ; [wListMenuID] = list menu ID
-; [wList] = address of the list (2 bytes)
+; [wListPointer] = address of the list (2 bytes)
 DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
@@ -1392,9 +1392,9 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wListCount],a
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a ; hl = address of the list
 	ld a,[hl] ; the first byte is the number of entries in the list
 	ld [wListCount],a
@@ -1488,9 +1488,9 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 ; if it's an item menu
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a
 	inc hl ; hl = beginning of list entries
 	ld b,0
@@ -1519,7 +1519,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	jr .storeChosenEntry
 .pokemonList
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1710,9 +1710,9 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld b,$09
 	ld c,$0e
 	call ClearScreenArea
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld e,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld d,a
 	inc de ; de = beginning of list entries
 	ld a,[wListScrollOffset]
@@ -1756,7 +1756,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 .pokemonPCMenu
 	push hl
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1801,7 +1801,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	push af
 	push hl
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld a,$00
 	jr z,.next
@@ -1914,7 +1914,7 @@ GetMonName:: ; 2f9e (0:2f9e)
 	push de
 	ld bc,10
 	call CopyData
-	ld hl,wcd77
+	ld hl,wcd6d + 10
 	ld [hl], "@"
 	pop de
 	pop af
@@ -2090,7 +2090,7 @@ DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wcd6a] = success
+; [wActionResultOrTookBattleTurn] = success
 ; 00: unsucessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
@@ -2960,17 +2960,17 @@ HasEnoughCoins::
 BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a
 ; Only use this when in the home bank!
-	ld [wcf09],a
+	ld [wBankswitchHomeTemp],a
 	ld a,[H_LOADEDROMBANK]
-	ld [wcf08],a
-	ld a,[wcf09]
+	ld [wBankswitchHomeSavedROMBank],a
+	ld a,[wBankswitchHomeTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
 
 BankswitchBack:: ; 35cd (0:35cd)
 ; returns from BankswitchHome
-	ld a,[wcf08]
+	ld a,[wBankswitchHomeSavedROMBank]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
@@ -4656,7 +4656,7 @@ PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
-	ld hl, wcf11
+	ld hl, wTextPredefFlag
 	set 0, [hl]
 	call DisplayTextID
 

@@ -20,11 +20,11 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	call PrintText
 	ld hl, BadgeItemList
 	call LoadItemList
-	ld hl, wStringBuffer2 + 11
+	ld hl, wItemList
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
 	ld [wMenuItemToSwap], a

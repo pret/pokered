@@ -1,6 +1,6 @@
 UsedCut: ; ef54 (3:6f54)
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
 	ld a, [W_CURMAPTILESET]
 	and a ; OVERWORLD
 	jr z, .asm_ef6b
@@ -28,7 +28,7 @@ UsedCut: ; ef54 (3:6f54)
 .asm_ef82
 	ld [wCutTile], a
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a ; used cut
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName

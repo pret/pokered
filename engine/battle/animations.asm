@@ -2500,27 +2500,29 @@ CopyPicTiles: ; 79aae (1e:5aae)
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, $31 ; base tile ID of player mon sprite
-	jr z, .asm_79ab6
+	jr z, .next
 ; enemy turn
 	xor a ; base tile ID of enemy mon sprite
-.asm_79ab6
+.next
 	ld [hBaseTileID], a
-	jr asm_79acb
+	jr CopyTileIDs_NoBGTransfer
 
-; copy the tiles used when a mon is being sent out
-; and "growing" out of the pokeball
-CopyGrowingMonTiles: ; 79aba (1e:5aba)
+; copy the tiles used when a mon is being sent out of or into a pokeball
+CopyDownscaledMonTiles: ; 79aba (1e:5aba)
 	call GetPredefRegisters
-	ld a, [wcd6c]
+	ld a, [wDownscaledMonSize]
 	and a
-	jr nz, .asm_79ac8
-	ld de, Unknown_79b02 ; 5x5
-	jr asm_79acb
-.asm_79ac8
-	ld de, Unknown_79b1b ; 3x3
-asm_79acb: ; 79acb (1e:5acb)
+	jr nz, .smallerSize
+	ld de, DownscaledMonTiles_5x5
+	jr CopyTileIDs_NoBGTransfer
+.smallerSize
+	ld de, DownscaledMonTiles_3x3
+; fall through
+
+CopyTileIDs_NoBGTransfer: ; 79acb (1e:5acb)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
+; fall through
 
 ; b = number of rows
 ; c = number of columns
@@ -2567,14 +2569,14 @@ TileIDListPointerTable: ; 79aea (1e:5aea)
 	dw Unknown_79c50
 	db $3C
 
-Unknown_79b02: ; 79b02 (1e:5b02)
+DownscaledMonTiles_5x5: ; 79b02 (1e:5b02)
 	db $31,$38,$46,$54,$5B
 	db $32,$39,$47,$55,$5C
 	db $34,$3B,$49,$57,$5E
 	db $36,$3D,$4B,$59,$60
 	db $37,$3E,$4C,$5A,$61
 
-Unknown_79b1b: ; 79b1b (1e:5b1b)
+DownscaledMonTiles_3x3: ; 79b1b (1e:5b1b)
 	db $31,$46,$5B
 	db $34,$49,$5E
 	db $37,$4C,$61
