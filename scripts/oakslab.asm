@@ -333,14 +333,14 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$ff9b], a
+	ld [hNPCPlayerRelativePosPerspective], a
 	ld a, $1
 	swap a
-	ld [$ff95], a
+	ld [hNPCSpriteOffset], a
 	predef CalcPositionOfPlayerRelativeToNPC
-	ld a, [$ff95]
+	ld a, [hNPCPlayerYDistance]
 	dec a
-	ld [$ff95], a
+	ld [hNPCPlayerYDistance], a
 	predef FindPathToPlayer
 	ld de, wNPCMovementDirections2
 	ld a, $1

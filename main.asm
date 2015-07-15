@@ -4521,72 +4521,75 @@ IsItemInBag_: ; f8a5 (3:78a5)
 
 FindPathToPlayer: ; f8ba (3:78ba)
 	xor a
-	ld hl, $ff97
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	ld hl, hFindPathNumSteps
+	ld [hli], a ; hFindPathNumSteps
+	ld [hli], a ; hFindPathFlags
+	ld [hli], a ; hFindPathYProgress
+	ld [hl], a  ; hFindPathXProgress
 	ld hl, wNPCMovementDirections2
 	ld de, $0
 .loop
-	ld a, [$ff99]
+	ld a, [hFindPathYProgress]
 	ld b, a
-	ld a, [$ff95] ; Y distance in steps
+	ld a, [hNPCPlayerYDistance] ; Y distance in steps
 	call CalcDifference
 	ld d, a
 	and a
 	jr nz, .asm_f8da
-	ld a, [$ff98]
-	set 0, a
-	ld [$ff98], a
+	ld a, [hFindPathFlags]
+	set 0, a ; current end of path matches the player's Y coordinate
+	ld [hFindPathFlags], a
 .asm_f8da
-	ld a, [$ff9a]
+	ld a, [hFindPathXProgress]
 	ld b, a
-	ld a, [$ff96] ; X distance in steps
+	ld a, [hNPCPlayerXDistance] ; X distance in steps
 	call CalcDifference
 	ld e, a
 	and a
 	jr nz, .asm_f8ec
-	ld a, [$ff98]
-	set 1, a
-	ld [$ff98], a
+	ld a, [hFindPathFlags]
+	set 1, a ; current end of path matches the player's X coordinate
+	ld [hFindPathFlags], a
 .asm_f8ec
-	ld a, [$ff98]
-	cp $3
+	ld a, [hFindPathFlags]
+	cp $3 ; has the end of the path reached the player's position?
 	jr z, .done
+; Compare whether the X distance between the player and the current of the path
+; is greater or if the Y distance is. Then, try to reduce whichever is greater.
 	ld a, e
 	cp d
-	jr c, .asm_f90a
-	ld a, [$ff9d]
+	jr c, .yDistanceGreater
+; x distance is greater
+	ld a, [hNPCPlayerRelativePosFlags]
 	bit 1, a
-	jr nz, .asm_f900
+	jr nz, .playerIsLeftOfNPC
 	ld d, NPC_MOVEMENT_RIGHT
-	jr .asm_f902
-.asm_f900
+	jr .next1
+.playerIsLeftOfNPC
 	ld d, NPC_MOVEMENT_LEFT
-.asm_f902
-	ld a, [$ff9a]
-	add $1
-	ld [$ff9a], a
-	jr .asm_f91c
-.asm_f90a
-	ld a, [$ff9d]
+.next1
+	ld a, [hFindPathXProgress]
+	add 1
+	ld [hFindPathXProgress], a
+	jr .storeDirection
+.yDistanceGreater
+	ld a, [hNPCPlayerRelativePosFlags]
 	bit 0, a
-	jr nz, .asm_f914
+	jr nz, .playerIsAboveNPC
 	ld d, NPC_MOVEMENT_DOWN
-	jr .asm_f916
-.asm_f914
+	jr .next2
+.playerIsAboveNPC
 	ld d, NPC_MOVEMENT_UP
-.asm_f916
-	ld a, [$ff99]
-	add $1
-	ld [$ff99], a
-.asm_f91c
+.next2
+	ld a, [hFindPathYProgress]
+	add 1
+	ld [hFindPathYProgress], a
+.storeDirection
 	ld a, d
 	ld [hli], a
-	ld a, [$ff97]
+	ld a, [hFindPathNumSteps]
 	inc a
-	ld [$ff97], a
+	ld [hFindPathNumSteps], a
 	jp .loop
 .done
 	ld [hl], $ff
@@ -4594,13 +4597,13 @@ FindPathToPlayer: ; f8ba (3:78ba)
 
 CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	xor a
-	ld [$ff9d], a
+	ld [hNPCPlayerRelativePosFlags], a
 	ld a, [wSpriteStateData1 + 4] ; player's sprite screen Y position in pixels
 	ld d, a
 	ld a, [wSpriteStateData1 + 6] ; player's sprite screen X position in pixels
 	ld e, a
 	ld hl, wSpriteStateData1
-	ld a, [$ff95] ; sprite offset
+	ld a, [hNPCSpriteOffset]
 	add l
 	add $4
 	ld l, a
@@ -4614,26 +4617,26 @@ CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	jr nc, .NPCSouthOfOrAlignedWithPlayer
 .NPCNorthOfPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 0, [hl]
 	set 0, [hl]
 	pop hl
 	jr .divideYDistance
 .NPCSouthOfOrAlignedWithPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 0, [hl]
 	res 0, [hl]
 	pop hl
 .divideYDistance
 	push hl
-	ld hl, $ffe5
+	ld hl, hDividend2
 	ld [hli], a
 	ld a, 16
 	ld [hli], a
 	call DivideBytes ; divide Y absolute distance by 16
 	ld a, [hl] ; quotient
-	ld [$ff95], a
+	ld [hNPCPlayerYDistance], a
 	pop hl
 	inc hl
 	ld b, e
@@ -4642,35 +4645,35 @@ CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	jr nc, .NPCEastOfOrAlignedWithPlayer
 .NPCWestOfPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 1, [hl]
 	set 1, [hl]
 	pop hl
 	jr .divideXDistance
 .NPCEastOfOrAlignedWithPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 1, [hl]
 	res 1, [hl]
 	pop hl
 .divideXDistance
-	ld [$ffe5], a
+	ld [hDividend2], a
 	ld a, 16
-	ld [$ffe6], a
+	ld [hDivisor2], a
 	call DivideBytes ; divide X absolute distance by 16
-	ld a, [$ffe7] ; quotient
-	ld [$ff96], a
-	ld a, [$ff9b]
+	ld a, [hQuotient2]
+	ld [hNPCPlayerXDistance], a
+	ld a, [hNPCPlayerRelativePosPerspective]
 	and a
 	ret z
-	ld a, [$ff9d]
+	ld a, [hNPCPlayerRelativePosFlags]
 	cpl
 	and $3
-	ld [$ff9d], a
+	ld [hNPCPlayerRelativePosFlags], a
 	ret
 
 ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
-	ld a, [$ff95]
+	ld a, [hNPCMovementDirections2Index]
 	ld [wNPCMovementDirections2Index], a
 	dec a
 	ld de, wSimulatedJoypadStatesEnd
@@ -4684,9 +4687,9 @@ ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
 	call ConvertNPCMovementDirectionToJoypadMask
 	ld [de], a
 	inc de
-	ld a, [$ff95]
+	ld a, [hNPCMovementDirections2Index]
 	dec a
-	ld [$ff95], a
+	ld [hNPCMovementDirections2Index], a
 	jr nz, .loop
 	ret
 

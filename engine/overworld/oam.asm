@@ -16,10 +16,10 @@ PrepareOAMData:
 	ld [hOAMBufferOffset], a
 
 .spriteLoop
-	ld [hSpriteDataOffset2], a
+	ld [hSpriteOffset2], a
 
 	ld d, wSpriteStateData1 / $100
-	ld a, [hSpriteDataOffset2]
+	ld a, [hSpriteOffset2]
 	ld e, a
 	ld a, [de] ; c1x0
 	and a
@@ -139,7 +139,7 @@ PrepareOAMData:
 	ld [hOAMBufferOffset], a
 
 .nextSprite
-	ld a, [hSpriteDataOffset2]
+	ld a, [hSpriteOffset2]
 	add $10
 	cp $100 % $100
 	jp nz, .spriteLoop

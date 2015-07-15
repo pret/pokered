@@ -188,7 +188,7 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	call LoadDEPlusA ; a = [wNPCMovementDirections + $fe] (?)
 	jr .determineDirection
 .randomMovement
-	call getTileSpriteStandsOn
+	call GetTileSpriteStandsOn
 	call Random
 .determineDirection
 	ld b, a
@@ -504,7 +504,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .skipXVisibilityTest
 ; make the sprite invisible if a text box is in front of it
 ; $5F is the maximum number for map tiles
-	call getTileSpriteStandsOn
+	call GetTileSpriteStandsOn
 	ld d, $60
 	ld a, [hli]
 	cp d
@@ -685,7 +685,7 @@ CanWalkOntoTile: ; 516e (1:516e)
 ; calculates the tile pointer pointing to the tile the current sprite stancs on
 ; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
 ; hl: output pointer
-getTileSpriteStandsOn: ; 5207 (1:5207)
+GetTileSpriteStandsOn: ; 5207 (1:5207)
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
@@ -724,6 +724,10 @@ LoadDEPlusA: ; 522f (1:522f)
 	ret
 
 DoScriptedNPCMovement: ; 5236 (1:5236)
+; This is an alternative method of scripting an NPC's movement and is only used
+; a few times in the game. It is used when the NPC and player must walk together
+; in sync, such as when the player is following the NPC somewhere. An NPC can't
+; be moved in sync with the player using the other method.
 	ld a, [wd730]
 	bit 7, a
 	ret z
@@ -740,28 +744,28 @@ DoScriptedNPCMovement: ; 5236 (1:5236)
 .noCarry
 	ld a, [hl]
 ; check if moving up
-	cp $40
+	cp NPC_MOVEMENT_UP
 	jr nz, .checkIfMovingDown
 	call GetSpriteScreenYPointer
 	ld c, SPRITE_FACING_UP
 	ld a, -2
 	jr .move
 .checkIfMovingDown
-	cp $0
+	cp NPC_MOVEMENT_DOWN
 	jr nz, .checkIfMovingLeft
 	call GetSpriteScreenYPointer
 	ld c, SPRITE_FACING_DOWN
 	ld a, 2
 	jr .move
 .checkIfMovingLeft
-	cp $80
+	cp NPC_MOVEMENT_LEFT
 	jr nz, .checkIfMovingRight
 	call GetSpriteScreenXPointer
 	ld c, SPRITE_FACING_LEFT
 	ld a, -2
 	jr .move
 .checkIfMovingRight
-	cp $c0
+	cp NPC_MOVEMENT_RIGHT
 	jr nz, .noMatch
 	call GetSpriteScreenXPointer
 	ld c, SPRITE_FACING_RIGHT
@@ -781,11 +785,11 @@ DoScriptedNPCMovement: ; 5236 (1:5236)
 	ld a, c
 	ld [hl], a ; facing direction
 	call AnimScriptedNPCMovement
-	ld hl, wcf18
+	ld hl, wScriptedNPCWalkCounter
 	dec [hl]
 	ret nz
-	ld a, $8
-	ld [wcf18], a
+	ld a, 8
+	ld [wScriptedNPCWalkCounter], a
 	ld hl, wNPCMovementDirections2Index
 	inc [hl]
 	ret
@@ -793,8 +797,8 @@ DoScriptedNPCMovement: ; 5236 (1:5236)
 InitScriptedNPCMovement: ; 52a6 (1:52a6)
 	xor a
 	ld [wNPCMovementDirections2Index], a
-	ld a, $8
-	ld [wcf18], a
+	ld a, 8
+	ld [wScriptedNPCWalkCounter], a
 	jp AnimScriptedNPCMovement
 
 GetSpriteScreenYPointer: ; 52b2 (1:52b2)

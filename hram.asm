@@ -28,7 +28,7 @@ hPartyMonIndex EQU $FF8C
 
 hHalveItemPrices EQU $FF8E
 
-hSpriteDataOffset2 EQU $FF8F
+hSpriteOffset2 EQU $FF8F
 
 hOAMBufferOffset EQU $FF90
 
@@ -38,6 +38,11 @@ hSpriteScreenY EQU $FF92
 hTilePlayerStandingOn EQU $FF93
 
 hSpritePriority EQU $FF94
+
+hNPCMovementDirections2Index EQU $FF95
+
+; CalcPositionOfPlayerRelativeToNPC
+hNPCSpriteOffset EQU $FF95
 
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
@@ -56,6 +61,33 @@ H_PASTLEADINGZEROES EQU $FF95 ; last char printed
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes
 H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
+
+; distance in steps between NPC and player
+hNPCPlayerYDistance EQU $FF95
+hNPCPlayerXDistance EQU $FF96
+
+hFindPathNumSteps EQU $FF97
+
+; bit 0: set when the end of the path's Y coordinate matches the target's
+; bit 1: set when the end of the path's X coordinate matches the target's
+; When both bits are set, the end of the path is at the target's position
+; (i.e. the path has been found).
+hFindPathFlags EQU $FF98
+
+hFindPathYProgress EQU $FF99
+hFindPathXProgress EQU $FF9A
+
+; 0 = from player to NPC
+; 1 = from NPC to player
+hNPCPlayerRelativePosPerspective EQU $FF9B
+
+; bit 0:
+; 0 = target is to the south or aligned
+; 1 = target is to the north
+; bit 1:
+; 0 = target is to the east or aligned
+; 1 = target is to the west
+hNPCPlayerRelativePosFlags EQU $FF9D
 
 hSerialReceivedNewData EQU $FFA9
 
@@ -165,6 +197,10 @@ H_VBLANKOCCURRED EQU $FFD6
 hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hDividend2 EQU $FFE5
+hDivisor2  EQU $FFE6
+hQuotient2 EQU $FFE7
 
 hSpriteVRAMSlotAndFacing EQU $FFE9
 

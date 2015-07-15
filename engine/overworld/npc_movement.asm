@@ -44,22 +44,25 @@ _EndNPCMovementScript: ; 1a41d (6:641d)
 	ld [wSimulatedJoypadStatesEnd], a
 	ret
 
-ProfOakMovementScriptPointerTable: ; 1a442 (6:6442)
-	dw Func_1a44c
-	dw Func_1a485
-	dw Func_1a4a1
-	dw Func_1a4a6
-	dw Func_1a4f4
+PalletMovementScriptPointerTable: ; 1a442 (6:6442)
+	dw PalletMovementScript_OakMoveLeft
+	dw PalletMovementScript_PlayerMoveLeft
+	dw PalletMovementScript_WaitAndWalkToLab
+	dw PalletMovementScript_WalkToLab
+	dw PalletMovementScript_Done
 
-Func_1a44c: ; 1a44c (6:644c)
+PalletMovementScript_OakMoveLeft: ; 1a44c (6:644c)
 	ld a, [W_XCOORD]
 	sub $a
-	ld [wcca1], a
-	jr z, .asm_1a475
-	ld b, $0
+	ld [wNumStepsToTake], a
+	jr z, .playerOnLeftTile
+; The player is on the right tile of the northern path out of Pallet Town and
+; Prof. Oak is below.
+; Make Prof. Oak step to the left.
+	ld b, 0
 	ld c, a
 	ld hl, wNPCMovementDirections2
-	ld a, $80
+	ld a, NPC_MOVEMENT_LEFT
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
@@ -68,36 +71,39 @@ Func_1a44c: ; 1a44c (6:644c)
 	call MoveSprite
 	ld a, $1
 	ld [wNPCMovementScriptFunctionNum], a
-	jr .asm_1a47a
-.asm_1a475
+	jr .done
+; The player is on the left tile of the northern path out of Pallet Town and
+; Prof. Oak is below.
+; Prof. Oak is already on the right tile.
+.playerOnLeftTile
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
-.asm_1a47a
+.done
 	ld hl, W_FLAGS_D733
 	set 1, [hl]
 	ld a, $fc
 	ld [wJoyIgnore], a
 	ret
 
-Func_1a485: ; 1a485 (6:6485)
+PalletMovementScript_PlayerMoveLeft: ; 1a485 (6:6485)
 	ld a, [wd730]
-	bit 0, a
-	ret nz
-	ld a, [wcca1]
+	bit 0, a ; is an NPC being moved by a script?
+	ret nz ; return if Oak is still moving
+	ld a, [wNumStepsToTake]
 	ld [wSimulatedJoypadStatesIndex], a
-	ld [$ff95], a
+	ld [hNPCMovementDirections2Index], a
 	predef ConvertNPCMovementDirectionsToJoypadMasks
 	call StartSimulatingJoypadStates
 	ld a, $2
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
 
-Func_1a4a1: ; 1a4a1 (6:64a1)
+PalletMovementScript_WaitAndWalkToLab: ; 1a4a1 (6:64a1)
 	ld a, [wSimulatedJoypadStatesIndex]
-	and a
+	and a ; is the player done moving left yet?
 	ret nz
 
-Func_1a4a6: ; 1a4a6 (6:64a6)
+PalletMovementScript_WalkToLab: ; 1a4a6 (6:64a6)
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ld a, [wSpriteIndex]
@@ -122,12 +128,12 @@ Func_1a4a6: ; 1a4a6 (6:64a6)
 	ret
 
 RLEList_ProfOakWalkToLab: ; 1a4dc (6:64dc)
-	db $00, $05
-	db $80, $01
-	db $00, $05
-	db $C0, $03
-	db $40, $01
-	db $E0, $01
+	db NPC_MOVEMENT_DOWN, $05
+	db NPC_MOVEMENT_LEFT, $01
+	db NPC_MOVEMENT_DOWN, $05
+	db NPC_MOVEMENT_RIGHT, $03
+	db NPC_MOVEMENT_UP, $01
+	db $E0, $01 ; stand still
 	db $FF
 
 RLEList_PlayerWalkToLab: ; 1a4e9 (6:64e9)
@@ -138,7 +144,7 @@ RLEList_PlayerWalkToLab: ; 1a4e9 (6:64e9)
 	db D_DOWN, $06
 	db $FF
 
-Func_1a4f4: ; 1a4f4 (6:64f4)
+PalletMovementScript_Done: ; 1a4f4 (6:64f4)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -152,10 +158,10 @@ Func_1a4f4: ; 1a4f4 (6:64f4)
 	jp EndNPCMovementScript
 
 PewterMuseumGuyMovementScriptPointerTable: ; 1a510 (6:6510)
-	dw Func_1a514
-	dw PewterMovementScriptDone
+	dw PewterMovementScript_WalkToMuseum
+	dw PewterMovementScript_Done
 
-Func_1a514: ; 1a514 (6:6514)
+PewterMovementScript_WalkToMuseum: ; 1a514 (6:6514)
 	ld a, BANK(Music_MuseumGuy)
 	ld [wc0ef], a
 	ld [wc0f0], a
@@ -191,13 +197,13 @@ RLEList_PewterMuseumPlayer: ; 1a559 (6:6559)
 	db $FF
 
 RLEList_PewterMuseumGuy: ; 1a562 (6:6562)
-	db $40, $06
-	db $80, $0D
-	db $40, $03
-	db $80, $01
+	db NPC_MOVEMENT_UP, $06
+	db NPC_MOVEMENT_LEFT, $0D
+	db NPC_MOVEMENT_UP, $03
+	db NPC_MOVEMENT_LEFT, $01
 	db $FF
 
-PewterMovementScriptDone: ; 1a56b (6:656b)
+PewterMovementScript_Done: ; 1a56b (6:656b)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -208,10 +214,10 @@ PewterMovementScriptDone: ; 1a56b (6:656b)
 	jp EndNPCMovementScript
 
 PewterGymGuyMovementScriptPointerTable: ; 1a57d (6:657d)
-	dw Func_1a581
-	dw PewterMovementScriptDone
+	dw PewterMovementScript_WalkToGym
+	dw PewterMovementScript_Done
 
-Func_1a581: ; 1a581 (6:6581)
+PewterMovementScript_WalkToGym: ; 1a581 (6:6581)
 	ld a, BANK(Music_MuseumGuy)
 	ld [wc0ef], a
 	ld [wc0f0], a
@@ -252,12 +258,12 @@ RLEList_PewterGymPlayer: ; 1a5cd (6:65cd)
 	db $FF
 
 RLEList_PewterGymGuy: ; 1a5da (6:65da)
-	db $00, $02
-	db $80, $0F
-	db $40, $05
-	db $80, $0B
-	db $00, $05
-	db $C0, $03
+	db NPC_MOVEMENT_DOWN, $02
+	db NPC_MOVEMENT_LEFT, $0F
+	db NPC_MOVEMENT_UP, $05
+	db NPC_MOVEMENT_LEFT, $0B
+	db NPC_MOVEMENT_DOWN, $05
+	db NPC_MOVEMENT_RIGHT, $03
 	db $FF
 
 FreezeEnemyTrainerSprite: ; 1a5e7 (6:65e7)

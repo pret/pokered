@@ -390,7 +390,9 @@ wSwitchPartyMonTempBuffer:: ; cc97
 ; temporary buffer when swapping party mon data
 	ds 10
 
-wcca1:: ds 49 ; used in overworld npc movement
+wNumStepsToTake:: ; cca1
+; used in Pallet Town scripted movement
+	ds 49
 
 wRLEByteCount:: ; ccd2
 	ds 1
@@ -988,7 +990,10 @@ wNPCMovementScriptSpriteOffset:: ; cf17
 ; sprite offset of sprite being controlled by NPC movement script
 	ds 1
 
-wcf18:: ds 2 ; used with overworld movement
+wScriptedNPCWalkCounter:: ; cf18
+	ds 1
+
+	ds 1
 
 wGBC:: ; cf1a
 	ds 1
