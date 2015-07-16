@@ -28,6 +28,25 @@ hPartyMonIndex EQU $FF8C
 
 hHalveItemPrices EQU $FF8E
 
+hSpriteOffset2 EQU $FF8F
+
+hOAMBufferOffset EQU $FF90
+
+hSpriteScreenX EQU $FF91
+hSpriteScreenY EQU $FF92
+
+hTilePlayerStandingOn EQU $FF93
+
+hSpritePriority EQU $FF94
+
+hNPCMovementDirections2Index EQU $FF95
+
+; CalcPositionOfPlayerRelativeToNPC
+hNPCSpriteOffset EQU $FF95
+
+; temp value used when swapping bytes
+hSwapTemp EQU $FF95
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
@@ -45,6 +64,33 @@ H_PASTLEADINGZEROES EQU $FF95 ; last char printed
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes
 H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
+
+; distance in steps between NPC and player
+hNPCPlayerYDistance EQU $FF95
+hNPCPlayerXDistance EQU $FF96
+
+hFindPathNumSteps EQU $FF97
+
+; bit 0: set when the end of the path's Y coordinate matches the target's
+; bit 1: set when the end of the path's X coordinate matches the target's
+; When both bits are set, the end of the path is at the target's position
+; (i.e. the path has been found).
+hFindPathFlags EQU $FF98
+
+hFindPathYProgress EQU $FF99
+hFindPathXProgress EQU $FF9A
+
+; 0 = from player to NPC
+; 1 = from NPC to player
+hNPCPlayerRelativePosPerspective EQU $FF9B
+
+; bit 0:
+; 0 = target is to the south or aligned
+; 1 = target is to the north
+; bit 1:
+; 0 = target is to the east or aligned
+; 1 = target is to the west
+hNPCPlayerRelativePosFlags EQU $FF9D
 
 hSerialReceivedNewData EQU $FFA9
 
@@ -155,11 +201,23 @@ hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
+hNewPartyLength EQU $FFE4
+
+hDividend2 EQU $FFE5
+hDivisor2  EQU $FFE6
+hQuotient2 EQU $FFE7
+
+hSpriteVRAMSlotAndFacing EQU $FFE9
+
+hSpriteAnimFrameCounter EQU $FFEA
+
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced
 hFlags_0xFFF6 EQU $FFF6
+
+hFieldMoveMonMenuTopMenuItemX EQU $FFF7
 
 hJoyInput EQU $FFF8
 

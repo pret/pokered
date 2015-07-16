@@ -24,7 +24,7 @@ FormatMovesString: ; 39b87 (e:5b87)
 	jr .copyNameLoop
 .doneCopyingName
 	ld a, b
-	ld [wcd6c], a
+	ld [wNumMovesMinusOne], a
 	inc b
 	ld a, $4e ; line break
 	ld [de], a
@@ -70,7 +70,7 @@ InitList: ; 39bd5 (e:5bd5)
 .notPlayer
 	cp INIT_MON_LIST
 	jr nz, .notMonster
-	ld hl, wStringBuffer2 + 11
+	ld hl, wItemList
 	ld de, MonsterNames
 	ld a, MONSTER_NAME
 	jr .done
@@ -82,15 +82,15 @@ InitList: ; 39bd5 (e:5bd5)
 	ld a, ITEM_NAME
 	jr .done
 .notBag
-	ld hl, wStringBuffer2 + 11
+	ld hl, wItemList
 	ld de, ItemNames
 	ld a, ITEM_NAME
 .done
 	ld [wNameListType], a
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 	ld a, e
 	ld [wcf8d], a
 	ld a, d
@@ -102,10 +102,10 @@ InitList: ; 39bd5 (e:5bd5)
 	ld [wItemPrices + 1], a
 	ret
 
-; get species of mon e in list [wcc49] for LoadMonData
+; get species of mon e in list [wMonDataLocation] for LoadMonData
 GetMonSpecies: ; 39c37 (e:5c37)
 	ld hl, wPartySpecies
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and a
 	jr z, .getSpecies
 	dec a

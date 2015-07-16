@@ -134,18 +134,18 @@ TryingToLearn: ; 6f07 (1:6f07)
 	res 2, a
 	ld [hFlags_0xFFF6], a
 	ld hl, wTopMenuItemY
-	ld a, $8
-	ld [hli], a
-	ld a, $5
-	ld [hli], a
+	ld a, 8
+	ld [hli], a ; wTopMenuItemY
+	ld a, 5
+	ld [hli], a ; wTopMenuItemX
 	xor a
-	ld [hli], a
+	ld [hli], a ; wCurrentMenuItem
 	inc hl
-	ld a, [wcd6c]
-	ld [hli], a
-	ld a, $3
-	ld [hli], a
-	ld [hl], $0
+	ld a, [wNumMovesMinusOne]
+	ld [hli], a ; wMaxMenuItem
+	ld a, A_BUTTON | B_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
+	ld [hl], 0 ; wLastMenuItem
 	ld hl, hFlags_0xFFF6
 	set 1, [hl]
 	call HandleMenuInput

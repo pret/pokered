@@ -57,9 +57,9 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wNumBagItems
 	ld a,l
-	ld [wList],a
+	ld [wListPointer],a
 	ld a,h
-	ld [wList + 1],a
+	ld [wListPointer + 1],a
 	xor a
 	ld [wPrintItemPrices],a
 	ld [wCurrentMenuItem],a
@@ -136,11 +136,11 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
-	ld hl,wStringBuffer2 + 11
+	ld hl,wItemList
 	ld a,l
-	ld [wList],a
+	ld [wListPointer],a
 	ld a,h
-	ld [wList + 1],a
+	ld [wListPointer + 1],a
 	xor a
 	ld [wCurrentMenuItem],a
 	inc a

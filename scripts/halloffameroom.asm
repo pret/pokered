@@ -21,13 +21,13 @@ HallofFameRoomScript3: ; 5a4ba (16:64ba)
 
 HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	call Delay3
-	ld a, [wd358]
+	ld a, [wLetterPrintingDelayFlags]
 	push af
 	xor a
 	ld [wJoyIgnore], a
 	predef HallOfFamePC
 	pop af
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	ld hl, W_FLAGS_D733
 	res 1, [hl]
 	inc hl

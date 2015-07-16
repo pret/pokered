@@ -10,7 +10,7 @@ ActivatePC: ; 17e2c (5:7e2c)
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 PCMainMenu: ; 17e48 (5:7e48)
-	callba Func_213c8
+	callba DisplayPCMainMenu
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call HandleMenuInput

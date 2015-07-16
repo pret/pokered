@@ -104,12 +104,12 @@ GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
 	jr nc, .highLevelEnemy
 	res 1, c
 	ld a, $1
-	ld [wcd47], a
+	ld [wBattleTransitionSpiralDirection], a
 	ret
 .highLevelEnemy
 	set 1, c
 	xor a
-	ld [wcd47], a
+	ld [wBattleTransitionSpiralDirection], a
 	ret
 
 ; fails to recognize VICTORY_ROAD_2, VICTORY_ROAD_3, all ROCKET_HIDEOUT maps,
@@ -196,7 +196,7 @@ BattleTransition_BlackScreen: ; 70a69 (1c:4a69)
 ; outward spiral if enemy is at least 3 levels
 ; higher than player and does an inward spiral otherwise
 BattleTransition_Spiral: ; 70a72 (1c:4a72)
-	ld a, [wcd47]
+	ld a, [wBattleTransitionSpiralDirection]
 	and a
 	jr z, .outwardSpiral
 	call BattleTransition_InwardSpiral

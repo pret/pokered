@@ -27,7 +27,7 @@ rLCDC_DEFAULT EQU %11100011
 	ld [$ff42], a
 	ld [rSB], a
 	ld [rSC], a
-	ld [$ff4b], a
+	ld [rWX], a
 	ld [$ff4a], a
 	ld [$ff06], a
 	ld [$ff07], a

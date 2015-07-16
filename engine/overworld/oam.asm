@@ -4,25 +4,26 @@ PrepareOAMData:
 
 	ld a, [wUpdateSpritesEnabled]
 	dec a
-	jr z, .asm_4b1e
+	jr z, .updateEnabled
 
 	cp 0 - 1
 	ret nz
 	ld [wUpdateSpritesEnabled], a
 	jp HideSprites
 
-.asm_4b1e
+.updateEnabled
 	xor a
-	ld [$ff90], a
-.asm_4b21
-	ld [$ff8f], a
+	ld [hOAMBufferOffset], a
+
+.spriteLoop
+	ld [hSpriteOffset2], a
 
 	ld d, wSpriteStateData1 / $100
-	ld a, [$ff8f]
+	ld a, [hSpriteOffset2]
 	ld e, a
 	ld a, [de] ; c1x0
 	and a
-	jp z, .asm_4bad
+	jp z, .nextSprite
 
 	inc e
 	inc e
@@ -31,21 +32,25 @@ PrepareOAMData:
 	cp $ff ; off-screen (don't draw)
 	jr nz, .visible
 
-	call Func_4bd1
-	jr .asm_4bad
+	call GetSpriteScreenXY
+	jr .nextSprite
 
 .visible
-	cp $a0
+	cp $a0 ; is the sprite unchanging like an item ball or boulder?
 	jr c, .usefacing
+
+; unchanging
 	and $f
-	add $10
-	jr .asm_4b48
+	add $10 ; skip to the second half of the table which doesn't account for facing direction
+	jr .next
 
 .usefacing
 	and $f
-.asm_4b48
+
+.next
 	ld l, a
 
+; get sprite priority
 	push de
 	inc d
 	ld a, e
@@ -53,15 +58,15 @@ PrepareOAMData:
 	ld e, a
 	ld a, [de] ; c2x7
 	and $80
-	ld [$ff94], a ; temp store sprite priority
+	ld [hSpritePriority], a ; temp store sprite priority
 	pop de
 
+; read the entry from the table
 	ld h, 0
 	ld bc, SpriteFacingAndAnimationTable
 	add hl, hl
 	add hl, hl
 	add hl, bc
-
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -70,24 +75,25 @@ PrepareOAMData:
 	ld h, [hl]
 	ld l, a
 
-	call Func_4bd1
+	call GetSpriteScreenXY
 
-	ld a, [$ff90]
+	ld a, [hOAMBufferOffset]
 	ld e, a
 	ld d, wOAMBuffer / $100
-.tile
-	ld a, [$ff92]            ; temp for sprite Y position
+
+.tileLoop
+	ld a, [hSpriteScreenY]   ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
 	add [hl]                 ; add Y offset from table
 	ld [de], a               ; write new sprite OAM Y position
 	inc hl
-	ld a, [$ff91]            ; temp for sprite X position
+	ld a, [hSpriteScreenX]   ; temp for sprite X position
 	add $8                   ; X=8 is left of screen (X=0 is invisible)
 	add [hl]                 ; add X offset from table
 	inc e
 	ld [de], a               ; write new sprite OAM X position
 	inc e
-	ld a, [bc]               ; read pattern number offset (accomodates orientation (offset 0,4 or 8) and animation (offset 0 or $80))
+	ld a, [bc]               ; read pattern number offset (accommodates orientation (offset 0,4 or 8) and animation (offset 0 or $80))
 	inc bc
 	push bc
 	ld b, a
@@ -99,55 +105,60 @@ PrepareOAMData:
 	; Sprites $a and $b have one face (and therefore 4 tiles instead of 12).
 	; As a result, sprite $b's tile offset is less than normal.
 	cp $b
-	jr nz, .offset
+	jr nz, .notFourTileSprite
 	ld a, $a * 12 + 4
-	jr .gotoffset
+	jr .next2
 
-.offset
+.notFourTileSprite
 	; a *= 12
 	sla a
 	sla a
 	ld c, a
 	sla a
 	add c
-.gotoffset
-	add b ; which frame
+
+.next2
+	add b ; add the tile offset from the table (based on frame and facing direction)
 	pop bc
 	ld [de], a ; tile id
 	inc hl
 	inc e
 	ld a, [hl]
-	bit 1, a ; sprite priority
-	jr z, .fg
-	ld a, [$ff94] ; facing priority
+	bit 1, a ; is the tile allowed to set the sprite priority bit?
+	jr z, .skipPriority
+	ld a, [hSpritePriority]
 	or [hl]
-.fg
+.skipPriority
 	inc hl
 	ld [de], a
 	inc e
 	bit 0, a ; OAMFLAG_ENDOFDATA
-	jr z, .tile
+	jr z, .tileLoop
 
 	ld a, e
-	ld [$ff90], a
+	ld [hOAMBufferOffset], a
 
-.asm_4bad
-	ld a, [$ff8f]
+.nextSprite
+	ld a, [hSpriteOffset2]
 	add $10
 	cp $100 % $100
-	jp nz, .asm_4b21
+	jp nz, .spriteLoop
 
 	; Clear unused OAM.
-	ld a, [$ff90]
+	ld a, [hOAMBufferOffset]
 	ld l, a
 	ld h, wOAMBuffer / $100
 	ld de, $4
 	ld b, $a0
 	ld a, [wd736]
-	bit 6, a
+	bit 6, a ; jumping down ledge or fishing animation?
 	ld a, $a0
 	jr z, .clear
+
+; Don't clear the last 4 entries because they are used for the shadow in the
+; jumping down ledge animation and the rod in the fishing animation.
 	ld a, $90
+
 .clear
 	cp l
 	ret z
@@ -155,24 +166,24 @@ PrepareOAMData:
 	add hl, de
 	jr .clear
 
-Func_4bd1: ; 4bd1 (1:4bd1)
+GetSpriteScreenXY: ; 4bd1 (1:4bd1)
 	inc e
 	inc e
 	ld a, [de] ; c1x4
-	ld [$ff92], a
+	ld [hSpriteScreenY], a
 	inc e
 	inc e
 	ld a, [de] ; c1x6
-	ld [$ff91], a
-	ld a, $4
+	ld [hSpriteScreenX], a
+	ld a, 4
 	add e
 	ld e, a
-	ld a, [$ff92]
-	add $4
+	ld a, [hSpriteScreenY]
+	add 4
 	and $f0
 	ld [de], a ; c1xa (y)
 	inc e
-	ld a, [$ff91]
+	ld a, [hSpriteScreenX]
 	and $f0
 	ld [de], a  ; c1xb (x)
 	ret

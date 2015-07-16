@@ -1,6 +1,6 @@
 UsedCut: ; ef54 (3:6f54)
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
 	ld a, [W_CURMAPTILESET]
 	and a ; OVERWORLD
 	jr z, .asm_ef6b
@@ -26,9 +26,9 @@ UsedCut: ; ef54 (3:6f54)
 	db "@"
 
 .asm_ef82
-	ld [wcd4d], a
+	ld [wCutTile], a
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a ; used cut
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -73,10 +73,10 @@ UsedCutText: ; eff2 (3:6ff2)
 
 AnimateCutTree: ; eff7 (3:6ff7)
 	xor a
-	ld [wcd50], a
+	ld [wWhichAnimationOffsets], a
 	ld a, $e4
 	ld [rOBP1], a
-	ld a, [wcd4d]
+	ld a, [wCutTile]
 	cp $52
 	jr z, .asm_f020
 	ld de, Overworld_GFX + $2d0 ; cuttable tree sprite top row
@@ -138,7 +138,7 @@ GetCutTreeBoulderDustAnimationOffsets: ; f068 (3:7068)
 	srl a
 	ld e, a
 	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
-	ld a, [wcd50]
+	ld a, [wWhichAnimationOffsets]
 	and a
 	ld hl, CutTreeAnimationOffsets
 	jr z, .asm_f084

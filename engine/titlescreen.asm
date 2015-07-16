@@ -12,7 +12,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	call CopyFixedLengthText
 	xor a
 	ld [hWY], a
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd732
 	ld [hli], a
 	ld [hli], a
@@ -284,7 +284,7 @@ Func_44c1: ; 44c1 (1:44c1)
 
 Func_44cf: ; 44cf (1:44cf)
 .wait
-	ld a, [$ff44] ; rLY
+	ld a, [rLY]
 	cp l
 	jr nz, .wait
 
@@ -292,7 +292,7 @@ Func_44cf: ; 44cf (1:44cf)
 	ld [rSCX], a
 
 .wait2
-	ld a, [$ff44] ; rLY
+	ld a, [rLY]
 	cp h
 	jr z, .wait2
 	ret

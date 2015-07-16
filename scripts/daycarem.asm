@@ -35,11 +35,11 @@ DayCareMText1: ; 56254 (15:6254)
 	pop af
 	ld hl, DayCareMText_56437
 	jp c, DayCareMScript_56409
-	callab Func_2171b
+	callab KnowsHMMove
 	ld hl, DayCareMText_5644a
 	jp c, DayCareMScript_56409
 	xor a
-	ld [wcc2b], a
+	ld [wPartyAndBillsPCSavedMenuItem], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -62,8 +62,8 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	xor a
 	ld hl, W_DAYCAREMONNAME
 	call GetPartyMonName
-	ld a, $3
-	ld [wcc49], a
+	ld a, DAYCARE_DATA
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callab CalcLevelFromExperience
 	ld a, d

@@ -57,7 +57,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef AnimateSendingOutMon
 	add_predef ScaleSpriteByTwo
 	add_predef LoadMonBackPic
-	add_predef CopyGrowingMonTiles
+	add_predef CopyDownscaledMonTiles
 	add_predef LoadMissableObjects
 	add_predef HealParty
 	add_predef MoveAnimation; 08 play move animation

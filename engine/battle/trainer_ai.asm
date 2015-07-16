@@ -559,7 +559,7 @@ AIPlayRestoringSFX: ; 3a69b (e:669b)
 AIUseFullRestore: ; 3a6a0 (e:66a0)
 	call AICureStatus
 	ld a,FULL_RESTORE
-	ld [wcf05],a
+	ld [wAIItem],a
 	ld de,wHPBarOldHP
 	ld hl,wEnemyMonHP + 1
 	ld a,[hld]
@@ -600,7 +600,7 @@ AIUseHyperPotion: ; 3a6d6 (e:66d6)
 
 AIRecoverHP: ; 3a6da (e:66da)
 ; heal b HP and print "trainer used $(a) on pokemon!"
-	ld [wcf05],a
+	ld [wAIItem],a
 	ld hl,wEnemyMonHP + 1
 	ld a,[hl]
 	ld [wHPBarOldHP],a
@@ -797,7 +797,7 @@ AIUseXSpecial: ; 3a804 (e:6804)
 	; fallthrough
 
 AIIncreaseStat: ; 3a808 (e:6808)
-	ld [wcf05],a
+	ld [wAIItem],a
 	push bc
 	call AIPrintItemUse_
 	pop bc
@@ -819,13 +819,13 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	jp DecrementAICount
 
 AIPrintItemUse: ; 3a82c (e:682c)
-	ld [wcf05],a
+	ld [wAIItem],a
 	call AIPrintItemUse_
 	jp DecrementAICount
 
 AIPrintItemUse_: ; 3a835 (e:6835)
-; print "x used [wcf05] on z!"
-	ld a,[wcf05]
+; print "x used [wAIItem] on z!"
+	ld a,[wAIItem]
 	ld [wd11e],a
 	call GetItemName
 	ld hl, AIBattleUseItemText

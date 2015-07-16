@@ -227,7 +227,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld h,[hl]
 	ld l,a
 	push hl
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl

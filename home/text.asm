@@ -368,13 +368,13 @@ ProtectedDelay3:: ; 1b3a (0:1b3a)
 	ret
 
 TextCommandProcessor:: ; 1b40 (0:1b40)
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	push af
 	set 1,a
 	ld e,a
 	ld a,[$fff4]
 	xor e
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ld a,c
 	ld [wcc3a],a
 	ld a,b
@@ -385,7 +385,7 @@ NextTextCommand:: ; 1b55 (0:1b55)
 	cp a, "@" ; terminator
 	jr nz,.doTextCommand
 	pop af
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ret
 .doTextCommand
 	push hl

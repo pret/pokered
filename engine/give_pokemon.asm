@@ -16,7 +16,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	call SetPokedexOwnedFlag
 	callab SendNewMonToBox
 	ld hl, wcf4b
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
 	jr c, .asm_4fdec

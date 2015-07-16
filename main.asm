@@ -80,7 +80,7 @@ SonyText:   db "SONY@"
 
 
 LoadMonData_:
-; Load monster [wWhichPokemon] from list [wcc49]:
+; Load monster [wWhichPokemon] from list [wMonDataLocation]:
 ;  0: partymon
 ;  1: enemymon
 ;  2: boxmon
@@ -90,8 +90,8 @@ LoadMonData_:
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
-	ld a, [wcc49]
-	cp 3
+	ld a, [wMonDataLocation]
+	cp DAYCARE_DATA
 	jr z, .GetMonHeader
 
 	ld a, [wWhichPokemon]
@@ -105,8 +105,8 @@ LoadMonData_:
 
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wcc49]
-	cp 1
+	ld a, [wMonDataLocation]
+	cp ENEMY_PARTY_DATA
 	jr c, .getMonEntry
 
 	ld hl, wEnemyMons
@@ -218,9 +218,9 @@ UpdateNonPlayerSprite:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	cp b
 	jr nz, .unequal
-	jp Func_5236
+	jp DoScriptedNPCMovement
 .unequal
-	jp Func_4ed1
+	jp UpdateNPCSprite
 
 ; This detects if the current sprite (whose offset is at H_CURRENTSPRITEOFFSET)
 ; is going to collide with another sprite by looping over the other sprites.
@@ -564,7 +564,7 @@ TestBattle:
 	ld a, 20
 	ld [W_CURENEMYLVL], a
 	xor a
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	ld [W_CURMAP], a
 	call AddPartyMon
 
@@ -808,7 +808,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
 	push hl
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -854,7 +854,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	call DelayFrames
 	push hl
 	push de
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -916,7 +916,7 @@ HandleItemListSwapping: ; 6b44 (1:6b44)
 	jr .done
 .combineItemSlots
 	ld [hl],a ; put the sum in the second item slot
-	ld hl,wList
+	ld hl,wListPointer
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -1090,7 +1090,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld [wTopMenuItemY],a ; Y position of first menu choice
 	ld a,$0b
 	ld [wTopMenuItemX],a ; X position of first menu choice
-	ld a,[wcc2d] ; remembered menu selection from last time
+	ld a,[wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	xor a
@@ -1719,86 +1719,101 @@ TwoOptionMenuStrings: ; 7671 (1:7671)
 .HealCancelMenu ; 76d5 (1:36d5)
 	db "HEAL",$4E,"CANCEL@"
 
-DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
+DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	xor a
-	ld hl, wWhichTrade
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], $c
+	ld hl, wFieldMoves
+	ld [hli], a ; wFieldMoves
+	ld [hli], a ; wFieldMoves + 1
+	ld [hli], a ; wFieldMoves + 2
+	ld [hli], a ; wFieldMoves + 3
+	ld [hli], a ; wNumFieldMoves
+	ld [hl], 12 ; wFieldMovesLeftmostXCoord
 	call GetMonFieldMoves
-	ld a, [wTrainerScreenX]
+	ld a, [wNumFieldMoves]
 	and a
-	jr nz, .asm_770f
+	jr nz, .fieldMovesExist
+
+; no field moves
 	hlCoord 11, 11
-	ld b, $5
-	ld c, $7
+	ld b, 5
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
-	ld a, $c
-	ld [$fff7], a
+	ld a, 12
+	ld [hFieldMoveMonMenuTopMenuItemX], a
 	hlCoord 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
-.asm_770f
+
+.fieldMovesExist
 	push af
+
+; Calculate the text box position and dimensions based on the leftmost X coord
+; of the field move names before adjusting for the number of field moves.
 	hlCoord 0, 11
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	dec a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
-	ld b, $5
-	ld a, $12
+	ld b, 5
+	ld a, 18
 	sub e
 	ld c, a
 	pop af
+
+; For each field move, move the top of the text box up 2 rows while the leaving
+; the bottom of the text box at the bottom of the screen.
 	ld de, -SCREEN_WIDTH * 2
-.asm_7725
+.textBoxHeightLoop
 	add hl, de
 	inc b
 	inc b
 	dec a
-	jr nz, .asm_7725
+	jr nz, .textBoxHeightLoop
+
+; Make space for an extra blank row above the top field move.
 	ld de, -SCREEN_WIDTH
 	add hl, de
 	inc b
+
 	call TextBoxBorder
 	call UpdateSprites
+
+; Calculate the position of the first field move name to print.
 	hlCoord 0, 12
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld de, -SCREEN_WIDTH * 2
-	ld a, [wTrainerScreenX]
-.asm_7747
+	ld a, [wNumFieldMoves]
+.calcFirstFieldMoveYLoop
 	add hl, de
 	dec a
-	jr nz, .asm_7747
+	jr nz, .calcFirstFieldMoveYLoop
+
 	xor a
-	ld [wTrainerScreenX], a
-	ld de, wWhichTrade
-.asm_7752
+	ld [wNumFieldMoves], a
+	ld de, wFieldMoves
+.printNamesLoop
 	push hl
 	ld hl, FieldMoveNames
 	ld a, [de]
 	and a
-	jr z, .asm_7776
+	jr z, .donePrintingNames
 	inc de
-	ld b, a
-.asm_775c
+	ld b, a ; index of name
+.skipNamesLoop ; skip past names before the name we want
 	dec b
-	jr z, .asm_7766
-.asm_775f
+	jr z, .reachedName
+.skipNameLoop ; skip past current name
 	ld a, [hli]
-	cp $50
-	jr nz, .asm_775f
-	jr .asm_775c
-.asm_7766
+	cp "@"
+	jr nz, .skipNameLoop
+	jr .skipNamesLoop
+.reachedName
 	ld b, h
 	ld c, l
 	pop hl
@@ -1809,16 +1824,17 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
-	jr .asm_7752
-.asm_7776
+	jr .printNamesLoop
+
+.donePrintingNames
 	pop hl
-	ld a, [wcd42]
-	ld [$fff7], a
+	ld a, [wFieldMovesLeftmostXCoord]
+	ld [hFieldMoveMonMenuTopMenuItemX], a
 	hlCoord 0, 12
-	ld a, [wcd42]
+	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld de, PokemonMenuEntries
 	jp PlaceString
@@ -1842,59 +1858,58 @@ PokemonMenuEntries: ; 77c2 (1:77c2)
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld c, $5
-	ld hl, wWhichTrade
-.asm_77e9
+	ld c, NUM_MOVES + 1
+	ld hl, wFieldMoves
+.loop
 	push hl
-.asm_77ea
+.nextMove
 	dec c
-	jr z, .asm_7821
-	ld a, [de] ; de is RAM address of move
+	jr z, .done
+	ld a, [de] ; move ID
 	and a
-	jr z, .asm_7821
+	jr z, .done
 	ld b, a
-	inc de ; go to next move
+	inc de
 	ld hl, FieldMoveDisplayData
-.asm_77f6
+.fieldMoveLoop
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_77ea
+	jr z, .nextMove ; if the move is not a field move
 	cp b
-	jr z, .asm_7802
+	jr z, .foundFieldMove
 	inc hl
 	inc hl
-	jr .asm_77f6
-.asm_7802
+	jr .fieldMoveLoop
+.foundFieldMove
 	ld a, b
-	ld [wcd43], a
-	ld a, [hli]
-	ld b, [hl]
+	ld [wLastFieldMoveID], a
+	ld a, [hli] ; field move name index
+	ld b, [hl] ; field move leftmost X coordinate
 	pop hl
-	ld [hli], a
-	ld a, [wTrainerScreenX]
+	ld [hli], a ; store name index in wFieldMoves
+	ld a, [wNumFieldMoves]
 	inc a
-	ld [wTrainerScreenX], a
-	ld a, [wcd42]
+	ld [wNumFieldMoves], a
+	ld a, [wFieldMovesLeftmostXCoord]
 	cp b
-	jr c, .asm_781b
+	jr c, .skipUpdatingLeftmostXCoord
 	ld a, b
-	ld [wcd42], a
-.asm_781b
-	ld a, [wcd43]
+	ld [wFieldMovesLeftmostXCoord], a
+.skipUpdatingLeftmostXCoord
+	ld a, [wLastFieldMoveID]
 	ld b, a
-	jr .asm_77e9
-.asm_7821
+	jr .loop
+.done
 	pop hl
 	ret
 
-; Format: [Move id], [list priority], [leftmost tile]
+; Format: [Move id], [name index], [leftmost tile]
 ; Move id = id of move
-; List priority = lower number means higher priority when field moves are displayed
-;                 these priorities must be unique
+; Name index = index of name in FieldMoveNames
 ; Leftmost tile = -1 + tile column in which the first letter of the move's name should be displayed
 ;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
 FieldMoveDisplayData: ; 7823 (1:7823)
@@ -2050,7 +2065,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
 	ld [hJoyHeld], a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld [wd5a3], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
@@ -2911,7 +2926,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	xor a
 	ld [wListScrollOffset],a
 	ld [wCurrentMenuItem],a
-	ld [wcc2c],a
+	ld [wBagSavedMenuItem],a
 	ld [wSavedListScrollOffset],a
 	pop hl
 	ld a,[hl] ; a = number of items in inventory
@@ -2973,20 +2988,20 @@ DrawBadges: ; ea03 (3:6a03)
 ; Instead of removing relevant code, the name graphics were erased.
 
 ; Tile ids for face/badge graphics.
-	ld de, wTrainerFacingDirection
+	ld de, wBadgeOrFaceTiles
 	ld hl, .FaceBadgeTiles
 	ld bc, 8
 	call CopyData
 
 ; Booleans for each badge.
-	ld hl, wcd49
+	ld hl, wTempObtainedBadgesBooleans
 	ld bc, 8
 	xor a
 	call FillMemory
 
 ; Alter these based on owned badges.
-	ld de, wcd49
-	ld hl, wTrainerFacingDirection
+	ld de, wTempObtainedBadgesBooleans
+	ld hl, wBadgeOrFaceTiles
 	ld a, [W_OBTAINEDBADGES]
 	ld b, a
 	ld c, 8
@@ -3005,17 +3020,17 @@ DrawBadges: ; ea03 (3:6a03)
 	jr nz, .CheckBadge
 
 ; Draw two rows of badges.
-	ld hl, wWhichTrade
+	ld hl, wBadgeNumberTile
 	ld a, $d8 ; [1]
 	ld [hli], a
 	ld [hl], $60 ; First name
 
 	hlCoord 2, 11
-	ld de, wcd49
+	ld de, wTempObtainedBadgesBooleans
 	call .DrawBadgeRow
 
 	hlCoord 2, 14
-	ld de, wcd49 + 4
+	ld de, wTempObtainedBadgesBooleans + 4
 ;	call .DrawBadgeRow
 ;	ret
 
@@ -3028,15 +3043,15 @@ DrawBadges: ; ea03 (3:6a03)
 	push hl
 
 ; Badge no.
-	ld a, [wWhichTrade]
+	ld a, [wBadgeNumberTile]
 	ld [hli], a
 	inc a
-	ld [wWhichTrade], a
+	ld [wBadgeNumberTile], a
 
 ; Names aren't printed if the badge is owned.
 	ld a, [de]
 	and a
-	ld a, [wTrainerEngageDistance]
+	ld a, [wBadgeNameTile]
 	jr nz, .SkipName
 	call .PlaceTiles
 	jr .PlaceBadge
@@ -3047,18 +3062,18 @@ DrawBadges: ; ea03 (3:6a03)
 	inc hl
 
 .PlaceBadge
-	ld [wTrainerEngageDistance], a
-	ld de, 20 - 1
+	ld [wBadgeNameTile], a
+	ld de, SCREEN_WIDTH - 1
 	add hl, de
-	ld a, [wTrainerFacingDirection]
+	ld a, [wBadgeOrFaceTiles]
 	call .PlaceTiles
 	add hl, de
 	call .PlaceTiles
 
 ; Shift badge array back one byte.
 	push bc
-	ld hl, wTrainerFacingDirection + 1
-	ld de, wTrainerFacingDirection
+	ld hl, wBadgeOrFaceTiles + 1
+	ld de, wBadgeOrFaceTiles
 	ld bc, 8
 	call CopyData
 	pop bc
@@ -3538,36 +3553,40 @@ ResetBoulderPushFlags: ; f2dd (3:72dd)
 	ret
 
 _AddPartyMon: ; f2e5 (3:72e5)
+; Adds a new mon to the player's or enemy's party.
+; [wMonDataLocation] is used in an unusual way in this function.
+; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
+; If the entire value is 0, then the player is allowed to name the mon.
 	ld de, wPartyCount
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f2f2
+	jr z, .next
 	ld de, wEnemyPartyCount
-.asm_f2f2
+.next
 	ld a, [de]
 	inc a
 	cp PARTY_LENGTH + 1
-	ret nc
+	ret nc ; return if the party is already full
 	ld [de], a
 	ld a, [de]
-	ld [$ffe4], a
+	ld [hNewPartyLength], a
 	add e
 	ld e, a
-	jr nc, .asm_f300
+	jr nc, .noCarry
 	inc d
-.asm_f300
+.noCarry
 	ld a, [wcf91]
-	ld [de], a
+	ld [de], a ; write species of new mon in party list
 	inc de
-	ld a, $ff
+	ld a, $ff ; terminator
 	ld [de], a
 	ld hl, wPartyMonOT
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f315
+	jr z, .next2
 	ld hl, wEnemyMonOT
-.asm_f315
-	ld a, [$ffe4]
+.next2
+	ld a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
@@ -3575,24 +3594,24 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld hl, wPlayerName
 	ld bc, $b
 	call CopyData
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and a
-	jr nz, .asm_f33f
+	jr nz, .skipNaming
 	ld hl, wPartyMonNicks
-	ld a, [$ffe4]
+	ld a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
-.asm_f33f
+.skipNaming
 	ld hl, wPartyMons
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f34c
+	jr z, .next3
 	ld hl, wEnemyMons
-.asm_f34c
-	ld a, [$ffe4]
+.next3
+	ld a, [hNewPartyLength]
 	dec a
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -3604,15 +3623,17 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	call GetMonHeader
 	ld hl, W_MONHEADER
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; species
 	inc de
 	pop hl
 	push hl
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
 	ld a, $98     ; set enemy trainer mon IVs to fixed average values
 	ld b, $88
-	jr nz, .writeFreshMonData
+	jr nz, .next4
+
+; If the mon is being added to the player's party, update the pokedex.
 	ld a, [wcf91]
 	ld [wd11e], a
 	push de
@@ -3635,24 +3656,29 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	pop bc
 	ld hl, wPokedexSeen
 	call FlagAction
+
 	pop hl
 	push hl
+
 	ld a, [W_ISINBATTLE]
-	and a
+	and a ; is this a wild mon caught in battle?
 	jr nz, .copyEnemyMonData
+
+; Not wild.
 	call Random ; generate random IVs
 	ld b, a
 	call Random
-.writeFreshMonData ; f3b3
+
+.next4
 	push bc
-	ld bc, $1b
+	ld bc, wPartyMon1DVs - wPartyMon1
 	add hl, bc
 	pop bc
 	ld [hli], a
 	ld [hl], b         ; write IVs
-	ld bc, $fff4
+	ld bc, (wPartyMon1HPExp - 1) - (wPartyMon1DVs + 1)
 	add hl, bc
-	ld a, $1
+	ld a, 1
 	ld c, a
 	xor a
 	ld b, a
@@ -3664,13 +3690,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld [de], a
 	inc de
 	xor a
-	ld [de], a         ; level (?)
+	ld [de], a         ; box level
 	inc de
 	ld [de], a         ; status ailments
 	inc de
 	jr .copyMonTypesAndMoves
 .copyEnemyMonData
-	ld bc, $1b
+	ld bc, wPartyMon1DVs - wPartyMon1
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
@@ -3683,7 +3709,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld [de], a
 	inc de
 	xor a
-	ld [de], a                 ; level (?)
+	ld [de], a                ; box level
 	inc de
 	ld a, [wEnemyMonStatus]   ; copy status ailments from cur enemy mon
 	ld [de], a
@@ -3696,7 +3722,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [hli]       ; type 2
 	ld [de], a
 	inc de
-	ld a, [hli]       ; unused (?)
+	ld a, [hli]       ; catch rate (held item in gen 2)
 	ld [de], a
 	ld hl, W_MONHMOVES
 	ld a, [hli]
@@ -3795,7 +3821,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	pop bc
 	pop de
 	pop hl
-	ld a, [wcd72] ; sixth move byte = pp
+	ld a, [wcd6d + 5] ; PP is byte 5 of move data
 .empty
 	inc de
 	ld [de], a
@@ -4020,7 +4046,7 @@ _MoveMon: ; f51e (3:751e)
 	push hl
 	srl a
 	add $2
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callba CalcLevelFromExperience
 	ld a, d
@@ -4152,12 +4178,12 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, $0006
+	ld bc, 6
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, [wcd72] ; default pp
+	ld a, [wcd6d + 5] ; PP is byte 5 of move data
 
 	pop bc
 	pop de
@@ -4462,7 +4488,7 @@ START_MONEY EQU $3000
 	inc hl
 	ld [hl], a
 
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 
 	ld hl, W_OBTAINEDBADGES
 	ld [hli], a
@@ -4506,72 +4532,75 @@ IsItemInBag_: ; f8a5 (3:78a5)
 
 FindPathToPlayer: ; f8ba (3:78ba)
 	xor a
-	ld hl, $ff97
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	ld hl, hFindPathNumSteps
+	ld [hli], a ; hFindPathNumSteps
+	ld [hli], a ; hFindPathFlags
+	ld [hli], a ; hFindPathYProgress
+	ld [hl], a  ; hFindPathXProgress
 	ld hl, wNPCMovementDirections2
 	ld de, $0
 .loop
-	ld a, [$ff99]
+	ld a, [hFindPathYProgress]
 	ld b, a
-	ld a, [$ff95] ; Y distance in steps
+	ld a, [hNPCPlayerYDistance] ; Y distance in steps
 	call CalcDifference
 	ld d, a
 	and a
 	jr nz, .asm_f8da
-	ld a, [$ff98]
-	set 0, a
-	ld [$ff98], a
+	ld a, [hFindPathFlags]
+	set 0, a ; current end of path matches the player's Y coordinate
+	ld [hFindPathFlags], a
 .asm_f8da
-	ld a, [$ff9a]
+	ld a, [hFindPathXProgress]
 	ld b, a
-	ld a, [$ff96] ; X distance in steps
+	ld a, [hNPCPlayerXDistance] ; X distance in steps
 	call CalcDifference
 	ld e, a
 	and a
 	jr nz, .asm_f8ec
-	ld a, [$ff98]
-	set 1, a
-	ld [$ff98], a
+	ld a, [hFindPathFlags]
+	set 1, a ; current end of path matches the player's X coordinate
+	ld [hFindPathFlags], a
 .asm_f8ec
-	ld a, [$ff98]
-	cp $3
+	ld a, [hFindPathFlags]
+	cp $3 ; has the end of the path reached the player's position?
 	jr z, .done
+; Compare whether the X distance between the player and the current of the path
+; is greater or if the Y distance is. Then, try to reduce whichever is greater.
 	ld a, e
 	cp d
-	jr c, .asm_f90a
-	ld a, [$ff9d]
+	jr c, .yDistanceGreater
+; x distance is greater
+	ld a, [hNPCPlayerRelativePosFlags]
 	bit 1, a
-	jr nz, .asm_f900
+	jr nz, .playerIsLeftOfNPC
 	ld d, NPC_MOVEMENT_RIGHT
-	jr .asm_f902
-.asm_f900
+	jr .next1
+.playerIsLeftOfNPC
 	ld d, NPC_MOVEMENT_LEFT
-.asm_f902
-	ld a, [$ff9a]
-	add $1
-	ld [$ff9a], a
-	jr .asm_f91c
-.asm_f90a
-	ld a, [$ff9d]
+.next1
+	ld a, [hFindPathXProgress]
+	add 1
+	ld [hFindPathXProgress], a
+	jr .storeDirection
+.yDistanceGreater
+	ld a, [hNPCPlayerRelativePosFlags]
 	bit 0, a
-	jr nz, .asm_f914
+	jr nz, .playerIsAboveNPC
 	ld d, NPC_MOVEMENT_DOWN
-	jr .asm_f916
-.asm_f914
+	jr .next2
+.playerIsAboveNPC
 	ld d, NPC_MOVEMENT_UP
-.asm_f916
-	ld a, [$ff99]
-	add $1
-	ld [$ff99], a
-.asm_f91c
+.next2
+	ld a, [hFindPathYProgress]
+	add 1
+	ld [hFindPathYProgress], a
+.storeDirection
 	ld a, d
 	ld [hli], a
-	ld a, [$ff97]
+	ld a, [hFindPathNumSteps]
 	inc a
-	ld [$ff97], a
+	ld [hFindPathNumSteps], a
 	jp .loop
 .done
 	ld [hl], $ff
@@ -4579,13 +4608,13 @@ FindPathToPlayer: ; f8ba (3:78ba)
 
 CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	xor a
-	ld [$ff9d], a
+	ld [hNPCPlayerRelativePosFlags], a
 	ld a, [wSpriteStateData1 + 4] ; player's sprite screen Y position in pixels
 	ld d, a
 	ld a, [wSpriteStateData1 + 6] ; player's sprite screen X position in pixels
 	ld e, a
 	ld hl, wSpriteStateData1
-	ld a, [$ff95] ; sprite offset
+	ld a, [hNPCSpriteOffset]
 	add l
 	add $4
 	ld l, a
@@ -4599,26 +4628,26 @@ CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	jr nc, .NPCSouthOfOrAlignedWithPlayer
 .NPCNorthOfPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 0, [hl]
 	set 0, [hl]
 	pop hl
 	jr .divideYDistance
 .NPCSouthOfOrAlignedWithPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 0, [hl]
 	res 0, [hl]
 	pop hl
 .divideYDistance
 	push hl
-	ld hl, $ffe5
+	ld hl, hDividend2
 	ld [hli], a
 	ld a, 16
 	ld [hli], a
 	call DivideBytes ; divide Y absolute distance by 16
 	ld a, [hl] ; quotient
-	ld [$ff95], a
+	ld [hNPCPlayerYDistance], a
 	pop hl
 	inc hl
 	ld b, e
@@ -4627,35 +4656,35 @@ CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	jr nc, .NPCEastOfOrAlignedWithPlayer
 .NPCWestOfPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 1, [hl]
 	set 1, [hl]
 	pop hl
 	jr .divideXDistance
 .NPCEastOfOrAlignedWithPlayer
 	push hl
-	ld hl, $ff9d
+	ld hl, hNPCPlayerRelativePosFlags
 	bit 1, [hl]
 	res 1, [hl]
 	pop hl
 .divideXDistance
-	ld [$ffe5], a
+	ld [hDividend2], a
 	ld a, 16
-	ld [$ffe6], a
+	ld [hDivisor2], a
 	call DivideBytes ; divide X absolute distance by 16
-	ld a, [$ffe7] ; quotient
-	ld [$ff96], a
-	ld a, [$ff9b]
+	ld a, [hQuotient2]
+	ld [hNPCPlayerXDistance], a
+	ld a, [hNPCPlayerRelativePosPerspective]
 	and a
 	ret z
-	ld a, [$ff9d]
+	ld a, [hNPCPlayerRelativePosFlags]
 	cpl
 	and $3
-	ld [$ff9d], a
+	ld [hNPCPlayerRelativePosFlags], a
 	ret
 
 ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
-	ld a, [$ff95]
+	ld a, [hNPCMovementDirections2Index]
 	ld [wNPCMovementDirections2Index], a
 	dec a
 	ld de, wSimulatedJoypadStatesEnd
@@ -4669,9 +4698,9 @@ ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
 	call ConvertNPCMovementDirectionToJoypadMask
 	ld [de], a
 	inc de
-	ld a, [$ff95]
+	ld a, [hNPCMovementDirections2Index]
 	dec a
-	ld [$ff95], a
+	ld [hNPCMovementDirections2Index], a
 	jr nz, .loop
 	ret
 
