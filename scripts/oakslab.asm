@@ -898,9 +898,9 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
 	ld hl, OaksLabReceivedMonText
 	call PrintText
-	xor a
-	ld [wcc49], a
-	ld a, $5
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
+	ld a, 5
 	ld [W_CURENEMYLVL], a
 	ld a, [wcf91]
 	ld [wd11e], a

@@ -243,7 +243,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; loads base stats to W_MONHDEXNUM
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
-; [wcc49] = source
+; [wMonDataLocation] = source
 ; 00: player's party
 ; 01: enemy's party
 ; 02: current box
@@ -376,15 +376,15 @@ PartyMenuInit:: ; 1420 (0:1420)
 	call LoadHpBarAndStatusTilePatterns
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wTopMenuItemY
 	inc a
 	ld [hli], a ; top menu item Y
 	xor a
 	ld [hli], a ; top menu item X
-	ld a, [wcc2b]
+	ld a, [wPartyAndBillsPCSavedMenuItem]
 	push af
 	ld [hli], a ; current menu item ID
 	inc hl
@@ -420,7 +420,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	xor a
 	ld [wd09b],a
 	ld a,[wCurrentMenuItem]
-	ld [wcc2b],a
+	ld [wPartyAndBillsPCSavedMenuItem],a
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
 	ld a,[wMenuItemToSwap]
@@ -1803,11 +1803,11 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld hl,wPartyCount
 	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
-	ld a,$00
+	ld a,PLAYER_PARTY_DATA
 	jr z,.next
-	ld a,$02
+	ld a,BOX_DATA
 .next
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	ld hl,wWhichPokemon
 	ld a,[hl]
 	ld b,a
@@ -1818,7 +1818,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	add b
 	ld [hl],a
 	call LoadMonData ; load pokemon info
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z,.skipCopyingLevel
 .copyLevel
@@ -2751,7 +2751,7 @@ SetSpriteImageIndexAfterSettingFacingDirection:: ; 34b9 (0:34b9)
 ; INPUT:
 ; hl = address of array
 ; OUTPUT:
-; [wWhichTrade] = if there is match, the matching array index
+; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 	ld a,[W_YCOORD]
@@ -2762,13 +2762,13 @@ ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 
 CheckCoords:: ; 34c7 (0:34c7)
 	xor a
-	ld [wWhichTrade],a
+	ld [wCoordIndex],a
 .loop
 	ld a,[hli]
 	cp a,$ff ; reached terminator?
 	jr z,.notInArray
 	push hl
-	ld hl,wWhichTrade
+	ld hl,wCoordIndex
 	inc [hl]
 	pop hl
 .compareYCoord
@@ -2792,7 +2792,7 @@ CheckCoords:: ; 34c7 (0:34c7)
 ; hl = address of array
 ; [H_SPRITEINDEX] = index of boulder sprite
 ; OUTPUT:
-; [wWhichTrade] = if there is match, the matching array index
+; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
@@ -4586,8 +4586,8 @@ GivePokemon::
 	ld [wcf91], a
 	ld a, c
 	ld [W_CURENEMYLVL], a
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld b, BANK(_GivePokemon)
 	ld hl, _GivePokemon
 	jp Bankswitch

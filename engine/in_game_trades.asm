@@ -130,11 +130,11 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
-	ld [wcc49],a
+	ld [wMonDataLocation],a ; not used
 	ld [wRemoveMonFromBox],a
 	call RemovePokemon
-	ld a,$80
-	ld [wcc49],a
+	ld a,$80 ; prevent the player from naming the mon
+	ld [wMonDataLocation],a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon

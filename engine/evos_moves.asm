@@ -55,8 +55,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	push hl
 	ld a, [wcf91]
 	push af
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	call LoadMonData
 	pop af
 	ld [wcf91], a
@@ -206,7 +206,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd0b5]
 	ld [wd11e], a
 	xor a
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LearnMoveFromLevelUp
 	pop hl
 	predef SetPartyMonTypes
@@ -345,12 +345,13 @@ LearnMoveFromLevelUp: ; 3af5b (e:6f5b)
 	ld a, [hli] ; move ID
 	jr nz, .learnSetLoop
 	ld d, a ; ID of move to learn
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and a
 	jr nz, .next
-; if [wcc49] is 0, get the address of the mon's current moves
-; there is no reason to make this conditional because the code wouldn't work properly without doing this
-; every call to this function sets [wcc49] to 0
+; If [wMonDataLocation] is 0 (PLAYER_PARTY_DATA), get the address of the mon's
+; current moves in party data. Every call to this function sets
+; [wMonDataLocation] to 0 because other data locations are not supported.
+; If it is not 0, this function will not work properly.
 	ld hl, wPartyMon1Moves
 	ld a, [wWhichPokemon]
 	ld bc, wPartyMon2 - wPartyMon1

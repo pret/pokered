@@ -109,6 +109,14 @@ NAME_PLAYER_SCREEN EQU 0
 NAME_RIVAL_SCREEN  EQU 1
 NAME_MON_SCREEN    EQU 2
 
+; mon data locations
+; Note that some values are not supported by all functions that use these values.
+PLAYER_PARTY_DATA EQU 0
+ENEMY_PARTY_DATA  EQU 1
+BOX_DATA          EQU 2
+DAYCARE_DATA      EQU 3
+BATTLE_MON_DATA   EQU 4
+
 ; serial
 
 ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK EQU $01

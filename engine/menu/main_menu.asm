@@ -16,7 +16,7 @@ MainMenu: ; 5af2 (1:5af2)
 	call DelayFrames
 	xor a ; LINK_STATE_NONE
 	ld [wLinkState],a
-	ld hl,wcc2b
+	ld hl,wPartyAndBillsPCSavedMenuItem
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
@@ -457,7 +457,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld a,3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY],a
 	call SetCursorPositionsFromOptions
-	ld a,[wWhichTrade] ; text speed cursor X coordinate
+	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	ld [wTopMenuItemX],a
 	ld a,$01
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable auto background transfer
@@ -507,7 +507,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .downPressed
 	cp a,16
 	ld b,-13
-	ld hl,wWhichTrade
+	ld hl,wOptionsTextSpeedCursorX
 	jr z,.updateMenuVariables
 	ld b,5
 	cp a,3
@@ -522,7 +522,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .upPressed
 	cp a,8
 	ld b,-5
-	ld hl,wWhichTrade
+	ld hl,wOptionsTextSpeedCursorX
 	jr z,.updateMenuVariables
 	cp a,13
 	inc hl
@@ -541,17 +541,17 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call PlaceUnfilledArrowMenuCursor
 	jp .loop
 .cursorInBattleAnimation
-	ld a,[wTrainerEngageDistance] ; battle animation cursor X coordinate
+	ld a,[wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
 	xor a,$0b ; toggle between 1 and 10
-	ld [wTrainerEngageDistance],a
+	ld [wOptionsBattleAnimCursorX],a
 	jp .eraseOldMenuCursor
 .cursorInBattleStyle
-	ld a,[wTrainerFacingDirection] ; battle style cursor X coordinate
+	ld a,[wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
 	xor a,$0b ; toggle between 1 and 10
-	ld [wTrainerFacingDirection],a
+	ld [wOptionsBattleStyleCursorX],a
 	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
-	ld a,[wWhichTrade] ; text speed cursor X coordinate
+	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	cp a,1
 	jr z,.updateTextSpeedXCoord
 	cp a,7
@@ -562,7 +562,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	sub a,7
 	jr .updateTextSpeedXCoord
 .pressedRightInTextSpeed
-	ld a,[wWhichTrade] ; text speed cursor X coordinate
+	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	cp a,14
 	jr z,.updateTextSpeedXCoord
 	cp a,7
@@ -572,7 +572,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 .fromFastToMedium
 	add a,6
 .updateTextSpeedXCoord
-	ld [wWhichTrade],a ; text speed cursor X coordinate
+	ld [wOptionsTextSpeedCursorX],a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText: ; 5fc0 (1:5fc0)
@@ -593,7 +593,7 @@ OptionMenuCancelText: ; 6018 (1:6018)
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions: ; 601f (1:601f)
 	ld hl,TextSpeedOptionData
-	ld a,[wWhichTrade] ; text speed cursor X coordinate
+	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	ld c,a
 .loop
 	ld a,[hli]
@@ -604,7 +604,7 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 .textSpeedMatchFound
 	ld a,[hl]
 	ld d,a
-	ld a,[wTrainerEngageDistance] ; battle animation cursor X coordinate
+	ld a,[wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
 	dec a
 	jr z,.battleAnimationOn
 .battleAnimationOff
@@ -613,7 +613,7 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 .battleAnimationOn
 	res 7,d
 .checkBattleStyle
-	ld a,[wTrainerFacingDirection] ; battle style cursor X coordinate
+	ld a,[wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
 	dec a
 	jr z,.battleStyleShift
 .battleStyleSet
@@ -638,7 +638,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	pop bc
 	dec hl
 	ld a,[hl]
-	ld [wWhichTrade],a ; text speed cursor X coordinate
+	ld [wOptionsTextSpeedCursorX],a ; text speed cursor X coordinate
 	hlCoord 0, 3
 	call .placeUnfilledRightArrow
 	sla c
@@ -646,7 +646,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	jr nc,.storeBattleAnimationCursorX
 	ld a,10 ; Off
 .storeBattleAnimationCursorX
-	ld [wTrainerEngageDistance],a ; battle animation cursor X coordinate
+	ld [wOptionsBattleAnimCursorX],a ; battle animation cursor X coordinate
 	hlCoord 0, 8
 	call .placeUnfilledRightArrow
 	sla c
@@ -654,7 +654,7 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 	jr nc,.storeBattleStyleCursorX
 	ld a,10
 .storeBattleStyleCursorX
-	ld [wTrainerFacingDirection],a ; battle style cursor X coordinate
+	ld [wOptionsBattleStyleCursorX],a ; battle style cursor X coordinate
 	hlCoord 0, 13
 	call .placeUnfilledRightArrow
 ; cursor in front of Cancel

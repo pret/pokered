@@ -423,8 +423,8 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wPartyCount]
 	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call ClearSprites
 	call AddPartyMon	;add mon to Party
 	jr .End
@@ -1265,14 +1265,14 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wWhichPokemon],a
 	ld a,e
 	ld [wd11e],a
-	xor a
-	ld [wcc49],a ; load from player's party
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call LoadMonData
 	ld d,$01
 	callab PrintStatsBox ; display new stats text box
 	call WaitForTextScrollButtonPress ; wait for button press
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
 	ld [wForceEvolution],a
@@ -1963,8 +1963,8 @@ ItemUsePPRestore: ; e31e (3:631e)
 ; unsets zero flag if PP was restored, sets zero flag if not
 ; however, this is bugged for Max Ethers and Max Elixirs (see below)
 .restorePP
-	xor a
-	ld [wcc49],a ; party pokemon
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call GetMaxPP
 	ld hl,wPartyMon1Moves
 	ld bc,44
@@ -2379,7 +2379,7 @@ AddBonusPP: ; e642 (3:6642)
 ; gets max PP of a pokemon's move (including PP from PP Ups)
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
-; [wcc49] = pokemon source
+; [wMonDataLocation] = pokemon source
 ; 00: player's party
 ; 01: enemy's party
 ; 02: current box
@@ -2389,7 +2389,7 @@ AddBonusPP: ; e642 (3:6642)
 ; OUTPUT:
 ; [wd11e] = max PP
 GetMaxPP: ; e677 (3:6677)
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	and a
 	ld hl,wPartyMon1Moves
 	ld bc,wPartyMon2 - wPartyMon1
@@ -2426,7 +2426,7 @@ GetMaxPP: ; e677 (3:6677)
 	pop hl
 	push bc
 	ld bc,21 ; PP offset if not player's in-battle pokemon data
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	cp a,4 ; player's in-battle pokemon?
 	jr nz,.addPPOffset
 	ld bc,17 ; PP offset if player's in-battle pokemon data

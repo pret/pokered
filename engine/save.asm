@@ -309,7 +309,7 @@ Func_73863: ; 73863 (1c:7863)
 
 Func_7387b: ; 7387b (1c:787b)
 	ld hl, PointerTable_73895
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp NUM_BOXES / 2
 	ld b, $2
@@ -341,7 +341,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	ld a, [wCurrentMenuItem]
 	and a
 	ret nz ; return if No was chosen
-	ld hl, wd5a0
+	ld hl, wCurrentBoxNum
 	bit 7, [hl]
 	call z, Func_73a29
 	call Func_7393f
@@ -360,7 +360,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call Func_7390e
 	ld a, [wCurrentMenuItem]
 	set 7, a
-	ld [wd5a0], a
+	ld [wCurrentBoxNum], a
 	call Func_7387b
 	ld de, W_NUMINBOX
 	call Func_7390e
@@ -422,7 +422,7 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
@@ -443,7 +443,7 @@ Func_7393f: ; 7393f (1c:793f)
 	call PlaceString
 	ld hl, hFlags_0xFFF6
 	res 2, [hl]
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
 	jr c, .asm_739a6
@@ -561,7 +561,7 @@ Func_73a84: ; 73a84 (1c:7a84)
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	pop hl
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	ld c, a
 	ld b, $0

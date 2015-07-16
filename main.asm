@@ -80,7 +80,7 @@ SonyText:   db "SONY@"
 
 
 LoadMonData_:
-; Load monster [wWhichPokemon] from list [wcc49]:
+; Load monster [wWhichPokemon] from list [wMonDataLocation]:
 ;  0: partymon
 ;  1: enemymon
 ;  2: boxmon
@@ -90,8 +90,8 @@ LoadMonData_:
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
-	ld a, [wcc49]
-	cp 3
+	ld a, [wMonDataLocation]
+	cp DAYCARE_DATA
 	jr z, .GetMonHeader
 
 	ld a, [wWhichPokemon]
@@ -105,8 +105,8 @@ LoadMonData_:
 
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
-	ld a, [wcc49]
-	cp 1
+	ld a, [wMonDataLocation]
+	cp ENEMY_PARTY_DATA
 	jr c, .getMonEntry
 
 	ld hl, wEnemyMons
@@ -564,7 +564,7 @@ TestBattle:
 	ld a, 20
 	ld [W_CURENEMYLVL], a
 	xor a
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	ld [W_CURMAP], a
 	call AddPartyMon
 
@@ -1090,7 +1090,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld [wTopMenuItemY],a ; Y position of first menu choice
 	ld a,$0b
 	ld [wTopMenuItemX],a ; X position of first menu choice
-	ld a,[wcc2d] ; remembered menu selection from last time
+	ld a,[wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
 	xor a
@@ -2926,7 +2926,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 	xor a
 	ld [wListScrollOffset],a
 	ld [wCurrentMenuItem],a
-	ld [wcc2c],a
+	ld [wBagSavedMenuItem],a
 	ld [wSavedListScrollOffset],a
 	pop hl
 	ld a,[hl] ; a = number of items in inventory
@@ -3553,36 +3553,40 @@ ResetBoulderPushFlags: ; f2dd (3:72dd)
 	ret
 
 _AddPartyMon: ; f2e5 (3:72e5)
+; Adds a new mon to the player's or enemy's party.
+; [wMonDataLocation] is used in an unusual way in this function.
+; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
+; If the entire value is 0, then the player is allowed to name the mon.
 	ld de, wPartyCount
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f2f2
+	jr z, .next
 	ld de, wEnemyPartyCount
-.asm_f2f2
+.next
 	ld a, [de]
 	inc a
 	cp PARTY_LENGTH + 1
-	ret nc
+	ret nc ; return if the party is already full
 	ld [de], a
 	ld a, [de]
-	ld [$ffe4], a
+	ld [hNewPartyLength], a
 	add e
 	ld e, a
-	jr nc, .asm_f300
+	jr nc, .noCarry
 	inc d
-.asm_f300
+.noCarry
 	ld a, [wcf91]
-	ld [de], a
+	ld [de], a ; write species of new mon in party list
 	inc de
-	ld a, $ff
+	ld a, $ff ; terminator
 	ld [de], a
 	ld hl, wPartyMonOT
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f315
+	jr z, .next2
 	ld hl, wEnemyMonOT
-.asm_f315
-	ld a, [$ffe4]
+.next2
+	ld a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
@@ -3590,24 +3594,24 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld hl, wPlayerName
 	ld bc, $b
 	call CopyData
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and a
-	jr nz, .asm_f33f
+	jr nz, .skipNaming
 	ld hl, wPartyMonNicks
-	ld a, [$ffe4]
+	ld a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
-.asm_f33f
+.skipNaming
 	ld hl, wPartyMons
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
-	jr z, .asm_f34c
+	jr z, .next3
 	ld hl, wEnemyMons
-.asm_f34c
-	ld a, [$ffe4]
+.next3
+	ld a, [hNewPartyLength]
 	dec a
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -3619,15 +3623,17 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	call GetMonHeader
 	ld hl, W_MONHEADER
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; species
 	inc de
 	pop hl
 	push hl
-	ld a, [wcc49]
+	ld a, [wMonDataLocation]
 	and $f
 	ld a, $98     ; set enemy trainer mon IVs to fixed average values
 	ld b, $88
-	jr nz, .writeFreshMonData
+	jr nz, .next4
+
+; If the mon is being added to the player's party, update the pokedex.
 	ld a, [wcf91]
 	ld [wd11e], a
 	push de
@@ -3650,24 +3656,29 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	pop bc
 	ld hl, wPokedexSeen
 	call FlagAction
+
 	pop hl
 	push hl
+
 	ld a, [W_ISINBATTLE]
-	and a
+	and a ; is this a wild mon caught in battle?
 	jr nz, .copyEnemyMonData
+
+; Not wild.
 	call Random ; generate random IVs
 	ld b, a
 	call Random
-.writeFreshMonData ; f3b3
+
+.next4
 	push bc
-	ld bc, $1b
+	ld bc, wPartyMon1DVs - wPartyMon1
 	add hl, bc
 	pop bc
 	ld [hli], a
 	ld [hl], b         ; write IVs
-	ld bc, $fff4
+	ld bc, (wPartyMon1HPExp - 1) - (wPartyMon1DVs + 1)
 	add hl, bc
-	ld a, $1
+	ld a, 1
 	ld c, a
 	xor a
 	ld b, a
@@ -3679,13 +3690,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld [de], a
 	inc de
 	xor a
-	ld [de], a         ; level (?)
+	ld [de], a         ; box level
 	inc de
 	ld [de], a         ; status ailments
 	inc de
 	jr .copyMonTypesAndMoves
 .copyEnemyMonData
-	ld bc, $1b
+	ld bc, wPartyMon1DVs - wPartyMon1
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
@@ -3698,7 +3709,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld [de], a
 	inc de
 	xor a
-	ld [de], a                 ; level (?)
+	ld [de], a                ; box level
 	inc de
 	ld a, [wEnemyMonStatus]   ; copy status ailments from cur enemy mon
 	ld [de], a
@@ -3711,7 +3722,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [hli]       ; type 2
 	ld [de], a
 	inc de
-	ld a, [hli]       ; unused (?)
+	ld a, [hli]       ; catch rate (held item in gen 2)
 	ld [de], a
 	ld hl, W_MONHMOVES
 	ld a, [hli]
@@ -4035,7 +4046,7 @@ _MoveMon: ; f51e (3:751e)
 	push hl
 	srl a
 	add $2
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callba CalcLevelFromExperience
 	ld a, d
@@ -4477,7 +4488,7 @@ START_MONEY EQU $3000
 	inc hl
 	ld [hl], a
 
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 
 	ld hl, W_OBTAINEDBADGES
 	ld [hli], a

@@ -65,9 +65,10 @@ DrawHP_: ; 128fb (4:68fb)
 ; Predef 0x37
 StatusScreen: ; 12953 (4:6953)
 	call LoadMonData
-	ld a, [wcc49]
-	cp $2 ; 2 means we're in a PC box
+	ld a, [wMonDataLocation]
+	cp BOX_DATA
 	jr c, .DontRecalculate
+; mon is in a box or daycare
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
 	ld [W_CURENEMYLVL], a
@@ -148,13 +149,13 @@ StatusScreen: ; 12953 (4:6953)
 	hlCoord 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
-	call .asm_12a7e
+	call .GetStringPointer
 	ld d, h
 	ld e, l
 	hlCoord 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
-	call .asm_12a7e
+	call .GetStringPointer
 	ld d, h
 	ld e, l
 	hlCoord 12, 16
@@ -175,17 +176,18 @@ StatusScreen: ; 12953 (4:6953)
 	pop af
 	ld [hTilesetType], a
 	ret
-.asm_12a7e ;  I don't know what this does, iterates over pointers?
-	ld a, [wcc49]
+
+.GetStringPointer
+	ld a, [wMonDataLocation]
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcc49]
-	cp $3
+	ld a, [wMonDataLocation]
+	cp DAYCARE_DATA
 	ret z
 	ld a, [wWhichPokemon]
 	jp SkipFixedLengthTextEntries

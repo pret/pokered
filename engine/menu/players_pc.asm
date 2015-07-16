@@ -5,18 +5,19 @@ PlayerPC: ; 78e6 (1:78e6)
 	ld [wNameListType], a
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [wcc2c], a
-	ld [wccd3], a
+	ld [wBagSavedMenuItem], a
+	ld [wParentMenuItem], a
 	ld a, [wFlags_0xcd60]
-	bit 3, a
-	jr nz, Func_790c
+	bit 3, a ; accessing player's PC through another PC?
+	jr nz, PlayerPCMenu
+; accessing it directly
 	ld a, (SFX_02_45 - SFX_Headers_02) / 3
 	call PlaySound
 	ld hl, TurnedOnPC2Text
 	call PrintText
 
-Func_790c: ; 790c (1:790c)
-	ld a, [wccd3]
+PlayerPCMenu: ; 790c (1:790c)
+	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
@@ -30,69 +31,69 @@ Func_790c: ; 790c (1:790c)
 	ld de, PlayersPCMenuEntries
 	call PlaceString
 	ld hl, wTopMenuItemY
-	ld a, $2
-	ld [hli], a
+	ld a, 2
+	ld [hli], a ; wTopMenuItemY
 	dec a
-	ld [hli], a
+	ld [hli], a ; wTopMenuItemX
 	inc hl
 	inc hl
-	ld a, $3
-	ld [hli], a
-	ld a, $3
-	ld [hli], a
+	ld a, 3
+	ld [hli], a ; wMaxMenuItem
+	ld a, A_BUTTON | B_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hl], a
 	ld hl, wListScrollOffset
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; wListScrollOffset
+	ld [hl], a ; wMenuWatchMovingOutOfBounds
 	ld [wPlayerMonNumber], a
 	ld hl, WhatDoYouWantText
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jp nz, Func_796d
+	jp nz, ExitPlayerPC
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [wCurrentMenuItem]
-	ld [wccd3], a
+	ld [wParentMenuItem], a
 	and a
-	jp z, Func_7a12
+	jp z, PlayerPCWithdraw
 	dec a
-	jp z, Func_7995
+	jp z, PlayerPCDeposit
 	dec a
-	jp z, Func_7a8f
+	jp z, PlayerPCToss
 
-Func_796d: ; 796d (1:796d)
+ExitPlayerPC: ; 796d (1:796d)
 	ld a, [wFlags_0xcd60]
-	bit 3, a
-	jr nz, .asm_797c
+	bit 3, a ; accessing player's PC through another PC?
+	jr nz, .next
+; accessing it directly
 	ld a, (SFX_02_46 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-.asm_797c
+.next
 	ld hl, wFlags_0xcd60
 	res 5, [hl]
 	call LoadScreenTilesFromBuffer2
 	xor a
 	ld [wListScrollOffset], a
-	ld [wcc2c], a
+	ld [wBagSavedMenuItem], a
 	ld hl, wd730
 	res 6, [hl]
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-Func_7995: ; 7995 (1:7995)
+PlayerPCDeposit: ; 7995 (1:7995)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld a, [wNumBagItems]
 	and a
-	jr nz, Func_79ab
+	jr nz, .loop
 	ld hl, NothingToDepositText
 	call PrintText
-	jp Func_790c
-
-Func_79ab: ; 79ab (1:79ab)
+	jp PlayerPCMenu
+.loop
 	ld hl, WhatToDepositText
 	call PrintText
 	ld hl, wNumBagItems
@@ -102,29 +103,30 @@ Func_79ab: ; 79ab (1:79ab)
 	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
-	ld a, $3
+	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jp c, Func_790c
+	jp c, PlayerPCMenu
 	call IsKeyItem
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .asm_79e7
+	jr nz, .next
+; if it's not a key item, there can be more than one of the item
 	ld hl, DepositHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, Func_79ab
-.asm_79e7
+	jp z, .loop
+.next
 	ld hl, wNumBoxItems
 	call AddItemToInventory
-	jr c, .asm_79f8
+	jr c, .roomAvailable
 	ld hl, NoRoomToStoreText
 	call PrintText
-	jp Func_79ab
-.asm_79f8
+	jp .loop
+.roomAvailable
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
@@ -133,20 +135,19 @@ Func_79ab: ; 79ab (1:79ab)
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
 	call PrintText
-	jp Func_79ab
+	jp .loop
 
-Func_7a12: ; 7a12 (1:7a12)
+PlayerPCWithdraw: ; 7a12 (1:7a12)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld a, [wNumBoxItems]
 	and a
-	jr nz, Func_7a28
+	jr nz, .loop
 	ld hl, NothingStoredText
 	call PrintText
-	jp Func_790c
-
-Func_7a28: ; 7a28 (1:7a28)
+	jp PlayerPCMenu
+.loop
 	ld hl, WhatToWithdrawText
 	call PrintText
 	ld hl, wNumBoxItems
@@ -156,29 +157,30 @@ Func_7a28: ; 7a28 (1:7a28)
 	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
-	ld a, $3
+	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
-	jp c, Func_790c
+	jp c, PlayerPCMenu
 	call IsKeyItem
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .asm_7a64
+	jr nz, .next
+; if it's not a key item, there can be more than one of the item
 	ld hl, WithdrawHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	cp $ff
-	jp z, Func_7a28
-.asm_7a64
+	jp z, .loop
+.next
 	ld hl, wNumBagItems
 	call AddItemToInventory
-	jr c, .asm_7a75
+	jr c, .roomAvailable
 	ld hl, CantCarryMoreText
 	call PrintText
-	jp Func_7a28
-.asm_7a75
+	jp .loop
+.roomAvailable
 	ld hl, wNumBoxItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
@@ -187,20 +189,19 @@ Func_7a28: ; 7a28 (1:7a28)
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText
 	call PrintText
-	jp Func_7a28
+	jp .loop
 
-Func_7a8f: ; 7a8f (1:7a8f)
+PlayerPCToss: ; 7a8f (1:7a8f)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld a, [wNumBoxItems]
 	and a
-	jr nz, Func_7aa5
+	jr nz, .loop
 	ld hl, NothingStoredText
 	call PrintText
-	jp Func_790c
-
-Func_7aa5: ; 7aa5 (1:7aa5)
+	jp PlayerPCMenu
+.loop
 	ld hl, WhatToTossText
 	call PrintText
 	ld hl, wNumBoxItems
@@ -210,33 +211,34 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
-	ld a, $3
+	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
 	push hl
 	call DisplayListMenuID
 	pop hl
-	jp c, Func_790c
+	jp c, PlayerPCMenu
 	push hl
 	call IsKeyItem
 	pop hl
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantity], a
 	ld a, [wIsKeyItem]
 	and a
-	jr nz, .asm_7aef
+	jr nz, .next
 	ld a, [wcf91]
 	call IsItemHM
-	jr c, .asm_7aef
+	jr c, .next
+; if it's not a key item, there can be more than one of the item
 	push hl
 	ld hl, TossHowManyText
 	call PrintText
 	call DisplayChooseQuantityMenu
 	pop hl
 	cp $ff
-	jp z, Func_7aa5
-.asm_7aef
-	call TossItem
-	jp Func_7aa5
+	jp z, .loop
+.next
+	call TossItem ; disallows tossing key items
+	jp .loop
 
 PlayersPCMenuEntries: ; 7af5 (1:7af5)
 	db   "WITHDRAW ITEM"

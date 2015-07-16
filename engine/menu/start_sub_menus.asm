@@ -81,22 +81,22 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp z,.choseStats
 	ld c,a
 	ld b,0
-	ld hl,wWhichTrade
+	ld hl,wFieldMoves
 	add hl,bc
 	jp .choseOutOfBattleMove
 .choseSwitch
 	ld a,[wPartyCount]
 	cp a,2 ; is there more than one pokemon in the party?
 	jp c,StartMenu_Pokemon ; if not, no switching
-	call SwitchPartyMon_Stats
+	call SwitchPartyMon_InitVarOrSwapData ; init [wMenuItemToSwap]
 	ld a,SWAP_MONS_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID],a
 	call GoBackToPartyMenu
 	jp .checkIfPokemonChosen
 .choseStats
 	call ClearSprites
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	predef StatusScreen
 	predef StatusScreen2
 	call ReloadMapData
@@ -256,14 +256,14 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld a,[H_QUOTIENT + 2]
 	sbc b
 	jp nc,.notHealthyEnough
-	ld a,[wcc2b]
+	ld a,[wPartyAndBillsPCSavedMenuItem]
 	push af
 	ld a,POTION
 	ld [wcf91],a
 	ld [wd152],a
 	call UseItem
 	pop af
-	ld [wcc2b],a
+	ld [wPartyAndBillsPCSavedMenuItem],a
 	jp .loop
 .notHealthyEnough ; if current HP is less than 1/5 of max HP
 	ld hl,.notHealthyEnoughText
@@ -316,11 +316,11 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld [wPrintItemPrices],a
 	ld a,ITEMLISTMENU
 	ld [wListMenuID],a
-	ld a,[wcc2c]
+	ld a,[wBagSavedMenuItem]
 	ld [wCurrentMenuItem],a
 	call DisplayListMenuID
 	ld a,[wCurrentMenuItem]
-	ld [wcc2c],a
+	ld [wBagSavedMenuItem],a
 	jr nc,.choseItem
 .exitMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
@@ -566,7 +566,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,vChars1 + $570
 	call TrainerInfo_FarCopyData
 	call EnableLCD
-	ld hl,wWhichTrade
+	ld hl,wTrainerInfoTextBoxWidthPlus1
 	ld a,18 + 1
 	ld [hli],a
 	dec a
@@ -574,7 +574,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld [hl],1
 	hlCoord 0, 0
 	call TrainerInfo_DrawTextBox
-	ld hl,wWhichTrade
+	ld hl,wTrainerInfoTextBoxWidthPlus1
 	ld a,16 + 1
 	ld [hli],a
 	dec a
@@ -627,15 +627,15 @@ TrainerInfo_BadgesText: ; 13597 (4:7597)
 ; height is always 6
 ; INPUT:
 ; hl = destination address
-; [wWhichTrade] = width + 1
-; [wTrainerEngageDistance] = width
-; [wTrainerFacingDirection] = distance from the end of a text box row to the start of the next
+; [wTrainerInfoTextBoxWidthPlus1] = width
+; [wTrainerInfoTextBoxWidth] = width - 1
+; [wTrainerInfoTextBoxNextRowOffset] = distance from the end of a text box row to the start of the next
 TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	ld a,$79 ; upper left corner tile ID
 	ld de,$7a7b ; top edge and upper right corner tile ID's
 	call TrainerInfo_DrawHorizontalEdge ; draw top edge
 	call TrainerInfo_NextTextBoxRow
-	ld a,[wWhichTrade] ; width of the text box plus one
+	ld a,[wTrainerInfoTextBoxWidthPlus1]
 	ld e,a
 	ld d,0
 	ld c,6 ; height of the text box
@@ -651,7 +651,7 @@ TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 
 TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ld [hli],a ; place left corner tile
-	ld a,[wTrainerEngageDistance] ; width of the text box
+	ld a,[wTrainerInfoTextBoxWidth]
 	ld c,a
 	ld a,d
 .loop
@@ -663,7 +663,7 @@ TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ret
 
 TrainerInfo_NextTextBoxRow: ; 135d0 (4:75d0)
-	ld a,[wTrainerFacingDirection] ; distance to the start of the next row
+	ld a,[wTrainerInfoTextBoxNextRowOffset] ; distance to the start of the next row
 .loop
 	inc hl
 	dec a
@@ -704,62 +704,65 @@ StartMenu_Option: ; 135f6 (4:75f6)
 	jp RedisplayStartMenu
 
 SwitchPartyMon: ; 13613 (4:7613)
-	call SwitchPartyMon_Stats
-	ld a, [wWhichTrade]
-	call SwitchPartyMon_OAM
+	call SwitchPartyMon_InitVarOrSwapData ; swap data
+	ld a, [wSwappedMenuItem]
+	call SwitchPartyMon_ClearGfx
 	ld a, [wCurrentMenuItem]
-	call SwitchPartyMon_OAM
+	call SwitchPartyMon_ClearGfx
 	jp RedrawPartyMenu_
 
-SwitchPartyMon_OAM: ; 13625 (4:7625)
+SwitchPartyMon_ClearGfx: ; 13625 (4:7625)
 	push af
 	hlCoord 0, 0
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld c, SCREEN_WIDTH * 2
 	ld a, " "
-.asm_13633
+.clearMonBGLoop ; clear the mon's row in the party menu
 	ld [hli], a
 	dec c
-	jr nz, .asm_13633
+	jr nz, .clearMonBGLoop
 	pop af
 	ld hl, wOAMBuffer
 	ld bc, $10
 	call AddNTimes
 	ld de, $4
 	ld c, e
-.asm_13645
+.clearMonOAMLoop
 	ld [hl], $a0
 	add hl, de
 	dec c
-	jr nz, .asm_13645
+	jr nz, .clearMonOAMLoop
 	call WaitForSoundToFinish
 	ld a, (SFX_02_58 - SFX_Headers_02) / 3
 	jp PlaySound
 
-SwitchPartyMon_Stats: ; 13653 (4:7653)
+SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)
+; This is used to initialise [wMenuItemToSwap] and to actually swap the data.
 	ld a, [wMenuItemToSwap]
-	and a
-	jr nz, .asm_13661
+	and a ; has [wMenuItemToSwap] been initialised yet?
+	jr nz, .pickedMonsToSwap
+; If not, initialise [wMenuItemToSwap] so that it matches the current mon.
 	ld a, [wWhichPokemon]
-	inc a
+	inc a ; [wMenuItemToSwap] counts from 1
 	ld [wMenuItemToSwap], a
 	ret
-.asm_13661
+.pickedMonsToSwap
 	xor a
 	ld [wPartyMenuTypeOrMessageID], a
 	ld a, [wMenuItemToSwap]
 	dec a
 	ld b, a
 	ld a, [wCurrentMenuItem]
-	ld [wWhichTrade], a
-	cp b
-	jr nz, .asm_1367b
+	ld [wSwappedMenuItem], a
+	cp b ; swapping a mon with itself?
+	jr nz, .swappingDifferentMons
+; can't swap a mon with itself
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a
 	ret
-.asm_1367b
+.swappingDifferentMons
 	ld a, b
 	ld [wMenuItemToSwap], a
 	push hl
@@ -770,20 +773,20 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld a, [wCurrentMenuItem]
 	add l
 	ld l, a
-	jr nc, .asm_1368e
+	jr nc, .noCarry
 	inc h
-.asm_1368e
+.noCarry
 	ld a, [wMenuItemToSwap]
 	add e
 	ld e, a
-	jr nc, .asm_13696
+	jr nc, .noCarry2
 	inc d
-.asm_13696
+.noCarry2
 	ld a, [hl]
-	ld [H_DIVIDEND], a ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [hSwapTemp], a
 	ld a, [de]
 	ld [hl], a
-	ld a, [H_DIVIDEND] ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [hSwapTemp]
 	ld [de], a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1
@@ -791,19 +794,19 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	call AddNTimes
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call CopyData
 	ld hl, wPartyMons
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wMenuItemToSwap]
 	call AddNTimes
 	pop de
 	push hl
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wCurrentMenuItem]
@@ -842,7 +845,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld bc, $b
 	call CopyData
 	ld a, [wMenuItemToSwap]
-	ld [wWhichTrade], a
+	ld [wSwappedMenuItem], a
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a

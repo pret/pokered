@@ -44,6 +44,9 @@ hNPCMovementDirections2Index EQU $FF95
 ; CalcPositionOfPlayerRelativeToNPC
 hNPCSpriteOffset EQU $FF95
 
+; temp value used when swapping bytes
+hSwapTemp EQU $FF95
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
@@ -197,6 +200,8 @@ H_VBLANKOCCURRED EQU $FFD6
 hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hNewPartyLength EQU $FFE4
 
 hDividend2 EQU $FFE5
 hDivisor2  EQU $FFE6

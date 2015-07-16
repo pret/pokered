@@ -1809,7 +1809,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	predef LoadMonBackPic
 	xor a
 	ld [$ffe1], a
-	ld hl, wcc2d
+	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
 	ld [wBoostExpByExpAll], a
@@ -2123,7 +2123,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .oldManName
 	db "OLD MAN@"
 .handleBattleMenuInput
-	ld a, [wcc2d]
+	ld a, [wBattleAndStartSavedMenuItem]
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	sub 2 ; check if the cursor is in the left column
@@ -2206,7 +2206,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	ld a, [W_BATTLETYPE]
 	cp $2 ; is it a Safari battle?
 	ld a, [wCurrentMenuItem]
-	ld [wcc2d], a
+	ld [wBattleAndStartSavedMenuItem], a
 	jr z, .handleMenuSelection
 ; not Safari battle
 ; swap the IDs of the item menu and party menu (this is probably because they swapped the positions
@@ -2299,11 +2299,11 @@ DisplayBagMenu:
 	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [wcc2c]
+	ld a, [wBagSavedMenuItem]
 	ld [wCurrentMenuItem], a
 	call DisplayListMenuID
 	ld a, [wCurrentMenuItem]
-	ld [wcc2c], a
+	ld [wBagSavedMenuItem], a
 	ld a, $0
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuItemToSwap], a
@@ -2435,8 +2435,8 @@ PartyMenuOrRockOrRun:
 	and a ; was Switch selected?
 	jr z, .switchMon ; if so, jump
 ; Stats was selected
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld hl, wPartyMon1
 	call ClearSprites
 ; display the two status screens
@@ -2935,8 +2935,8 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	                            ; isn't actually selected (just pointed to by the cursor)
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
-	ld a, $4
-	ld [wcc49], a
+	ld a, BATTLE_MON_DATA
+	ld [wMonDataLocation], a
 	callab GetMaxPP
 	ld hl, wCurrentMenuItem
 	ld c, [hl]
@@ -8243,14 +8243,14 @@ ChargeEffect: ; 3f88c (f:788c)
 	ld a, b
 	call PlayBattleAnimation
 	ld a, [de]
-	ld [wWhichTrade], a
+	ld [wChargeMoveNum], a
 	ld hl, ChargeMoveEffectText
 	jp PrintText
 
 ChargeMoveEffectText: ; 3f8c8 (f:78c8)
 	TX_FAR _ChargeMoveEffectText
 	TX_ASM
-	ld a, [wWhichTrade]
+	ld a, [wChargeMoveNum]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText
 	jr z, .asm_3f8f8

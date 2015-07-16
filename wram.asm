@@ -236,15 +236,32 @@ wLastMenuItem:: ; cc2a
 ; id of previously selected menu item
 	ds 1
 
-; group these 3 addresses together because of an ld a,[hli]
-wcc2b:: ds 1 ; used in party menu
-wcc2c:: ds 1 ; used in item related menus (inventory, pc)
-wcc2d:: ds 1 ; also used in inventory, supposed to save an item id
+wPartyAndBillsPCSavedMenuItem:: ; cc2b
+; It is mainly used by the party menu to remember the cursor position while the
+; menu isn't active.
+; It is also used to remember the cursor position of mon lists (for the
+; withdraw/deposit/release actions) in Bill's PC so that it doesn't get lost
+; when you choose a mon from the list and a sub-menu is shown. It's reset when
+; you return to the main Bill's PC menu.
+	ds 1
+
+wBagSavedMenuItem:: ; cc2c
+; It is used by the bag list to remember the cursor position while the menu
+; isn't active.
+	ds 1
+
+wBattleAndStartSavedMenuItem:: ; cc2d
+; It is used by the start menu to remember the cursor position while the menu
+; isn't active.
+; The battle menu uses it so that the cursor position doesn't get lost when
+; a sub-menu is shown. It's reset at the start of each battle.
+	ds 1
 
 wPlayerMoveListIndex:: ; cc2e
 	ds 1
 
 wPlayerMonNumber:: ; cc2f
+; index in party of currently battling mon
 	ds 1
 
 wMenuCursorLocation:: ; cc30
@@ -326,7 +343,17 @@ wWhichTradeMonSelectionMenu:: ; cc49
 ; $00 = player mons
 ; $01 = enemy mons
 
-wcc49:: ds 1 ; used in some pokemon related stuff (some kind of species storage byte)
+wMonDataLocation:: ; cc49
+; 0 = player's party
+; 1 = enemy party
+; 2 = current box
+; 3 = daycare
+; 4 = in-battle mon
+;
+; AddPartyMon uses it slightly differently.
+; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
+; If the entire value is 0, then the player is allowed to name the mon.
+	ds 1
 
 wMenuWrappingEnabled:: ; cc4a
 ; set to 1 if you can go from the bottom to the top or top to bottom of a menu
@@ -401,6 +428,8 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 ; this is the end of the joypad states
 ; the list starts above this address and extends downwards in memory until here
 ; overloaded with below labels
+
+wParentMenuItem:: ; ccd3
 
 wccd3:: ds 1 ; used in battle, pokemon, PC and game corner stuff
 wForceEvolution::
@@ -605,6 +634,18 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wChargeMoveNum:: ; cd3d
+
+wCoordIndex:: ; cd3d
+
+wOptionsTextSpeedCursorX:: ; cd3d
+
+wBoxNumString:: ; cd3d
+
+wTrainerInfoTextBoxWidthPlus1:: ; cd3d
+
+wSwappedMenuItem:: ; cd3d
+
 wHoFMonSpecies:: ; cd3d
 
 wFieldMoves:: ; cd3d
@@ -648,6 +689,10 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wOptionsBattleAnimCursorX:: ; cd3e
+
+wTrainerInfoTextBoxWidth:: ; cd3e
+
 wHoFPartyMonIndex:: ; cd3e
 
 wNumCreditsMonsDisplayed:: ; cd3e
@@ -675,6 +720,10 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wOptionsBattleStyleCursorX:: ; cd3f
+
+wTrainerInfoTextBoxNextRowOffset:: ; cd3f
 
 wHoFMonLevel:: ; cd3f
 
@@ -850,6 +899,7 @@ wRightGBMonSpecies:: ; cd5f
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 3: using generic PC
 ; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 	ds 1
@@ -1976,7 +2026,8 @@ wBoxItems:: ; d53b
 	ds 50 * 2
 	ds 1 ; end
 
-wd5a0:: ds 2 ; current box number
+wCurrentBoxNum:: ; d5a0
+	ds 2
 
 wNumHoFTeams:: ; d5a2
 ; number of HOF teams
