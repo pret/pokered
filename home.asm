@@ -1630,15 +1630,15 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld c,$03
 	ld a,[wItemQuantity]
 	ld b,a
-	ld hl,$ff9f ; total price
+	ld hl,hMoney ; total price
 ; initialize total price to 0
 	xor a
 	ld [hli],a
 	ld [hli],a
 	ld [hl],a
 .addLoop ; loop to multiply the individual price by the quantity to get the total price
-	ld de,$ffa1
-	ld hl,$ff8d
+	ld de,hMoney + 2
+	ld hl,hItemPrice + 2
 	push bc
 	predef AddBCDPredef ; add the individual price to the current sum
 	pop bc
@@ -1648,23 +1648,23 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	and a ; should the price be halved (for selling items)?
 	jr z,.skipHalvingPrice
 	xor a
-	ld [$ffa2],a
-	ld [$ffa3],a
+	ld [hDivideBCDDivisor],a
+	ld [hDivideBCDDivisor + 1],a
 	ld a,$02
-	ld [$ffa4],a
+	ld [hDivideBCDDivisor + 2],a
 	predef DivideBCDPredef3 ; halves the price
 ; store the halved price
-	ld a,[$ffa2]
-	ld [$ff9f],a
-	ld a,[$ffa3]
-	ld [$ffa0],a
-	ld a,[$ffa4]
-	ld [$ffa1],a
+	ld a,[hDivideBCDQuotient]
+	ld [hMoney],a
+	ld a,[hDivideBCDQuotient + 1]
+	ld [hMoney + 1],a
+	ld a,[hDivideBCDQuotient + 2]
+	ld [hMoney + 2],a
 .skipHalvingPrice
 	hlCoord 12, 10
 	ld de,SpacesBetweenQuantityAndPriceText
 	call PlaceString
-	ld de,$ff9f ; total price
+	ld de,hMoney ; total price
 	ld c,$a3
 	call PrintBCDNumber
 	hlCoord 9, 10
@@ -2942,17 +2942,17 @@ GetTrainerName:: ; 359e (0:359e)
 
 HasEnoughMoney::
 ; Check if the player has at least as much
-; money as the 3-byte BCD value at $ff9f.
+; money as the 3-byte BCD value at hMoney.
 	ld de, wPlayerMoney
-	ld hl, $ff9f
+	ld hl, hMoney
 	ld c, 3
 	jp StringCmp
 
 HasEnoughCoins::
 ; Check if the player has at least as many
-; coins as the 2-byte BCD value at $ffa0.
+; coins as the 2-byte BCD value at hCoins.
 	ld de, wPlayerCoins
-	ld hl, $ffa0
+	ld hl, hCoins
 	ld c, 2
 	jp StringCmp
 

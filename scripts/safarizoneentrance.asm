@@ -155,11 +155,11 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	and a
 	jp nz,.PleaseComeAgain
 	xor a
-	ld [$ff9f],a
+	ld [hMoney],a
 	ld a,$05
-	ld [$ffa0],a
+	ld [hMoney + 1],a
 	ld a,$00
-	ld [$ffa1],a
+	ld [hMoney + 2],a
 	call HasEnoughMoney
 	jr nc,.success
 	ld hl,.NotEnoughMoneyText

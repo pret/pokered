@@ -37,10 +37,10 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	cp 3 ; chose Cancel?
 	jr z, .notThirsty
 	xor a
-	ld [$ff9f], a
-	ld [$ffa1], a
+	ld [hMoney], a
+	ld [hMoney + 2], a
 	ld a, $2
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, VendingMachineText4
