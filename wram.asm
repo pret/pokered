@@ -634,6 +634,9 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wMoveDownSmallStarsOAMCount:: ; cd3d
+; the number of small stars OAM entries to move down
+
 wChargeMoveNum:: ; cd3d
 
 wCoordIndex:: ; cd3d

@@ -28,67 +28,78 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	call LoadShootingStarGraphics
 	ld a, (SFX_1f_67 - SFX_Headers_1f) / 3
 	call PlaySound
+
+; Move the big star down and left across the screen.
 	ld hl, wOAMBuffer
 	ld bc, $a004
-.asm_70052
+.bigStarLoop
 	push hl
 	push bc
-.asm_70054
-	ld a, [hl]
-	add $4
+.bigStarInnerLoop
+	ld a, [hl] ; Y
+	add 4
 	ld [hli], a
-	ld a, [hl]
-	add $fc
+	ld a, [hl] ; X
+	add -4
 	ld [hli], a
 	inc hl
 	inc hl
 	dec c
-	jr nz, .asm_70054
-	ld c, $1
+	jr nz, .bigStarInnerLoop
+	ld c, 1
 	call CheckForUserInterruption
 	pop bc
 	pop hl
 	ret c
 	ld a, [hl]
-	cp $50
-	jr nz, .asm_70070
-	jr .asm_70052
-.asm_70070
+	cp 80
+	jr nz, .next
+	jr .bigStarLoop
+.next
 	cp b
-	jr nz, .asm_70052
+	jr nz, .bigStarLoop
+
+; Clear big star OAM.
 	ld hl, wOAMBuffer
-	ld c, $4
-	ld de, $4
-.asm_7007b
-	ld [hl], $a0
+	ld c, 4
+	ld de, 4
+.clearOAMLoop
+	ld [hl], 160
 	add hl, de
 	dec c
-	jr nz, .asm_7007b
-	ld b, $3
-.asm_70083
+	jr nz, .clearOAMLoop
+
+; Make Gamefreak logo flash.
+	ld b, 3
+.flashLogoLoop
 	ld hl, rOBP0
 	rrc [hl]
 	rrc [hl]
-	ld c, $a
+	ld c, 10
 	call CheckForUserInterruption
 	ret c
 	dec b
-	jr nz, .asm_70083
+	jr nz, .flashLogoLoop
+
+; Copy 24 instances of the small stars OAM data.
+; Note that their coordinates put them off-screen.
 	ld de, wOAMBuffer
-	ld a, $18
-.asm_70098
+	ld a, 24
+.initSmallStarsOAMLoop
 	push af
-	ld hl, OAMData_700ee
-	ld bc, $4
+	ld hl, SmallStarsOAM
+	ld bc, 4
 	call CopyData
 	pop af
 	dec a
-	jr nz, .asm_70098
+	jr nz, .initSmallStarsOAMLoop
+
+; Animate the small stars falling from the Gamefreak logo.
 	xor a
-	ld [wWhichTrade], a
-	ld hl, PointerTable_700f2
-	ld c, $6
-.asm_700af
+	ld [wMoveDownSmallStarsOAMCount], a
+	ld hl, SmallStarsWaveCoordsPointerTable
+	ld c, 6
+.smallStarsLoop
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -96,100 +107,109 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	push bc
 	push hl
 	ld hl, wOAMBuffer + $50
-	ld c, $4
-.asm_700ba
+	ld c, 4
+.smallStarsInnerLoop ; introduce new wave of 4 small stars OAM entries
 	ld a, [de]
 	cp $ff
-	jr z, .asm_700d5
-	ld [hli], a
+	jr z, .next2
+	ld [hli], a ; Y
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; X
 	inc de
 	inc hl
 	inc hl
 	dec c
-	jr nz, .asm_700ba
-	ld a, [wWhichTrade]
-	cp $18
-	jr z, .asm_700d5
-	add $6
-	ld [wWhichTrade], a
-.asm_700d5
-	call Func_7011f
+	jr nz, .smallStarsInnerLoop
+	ld a, [wMoveDownSmallStarsOAMCount]
+	cp 24
+	jr z, .next2
+	add 6 ; should be 4, but the extra 2 aren't visible on screen
+	ld [wMoveDownSmallStarsOAMCount], a
+.next2
+	call MoveDownSmallStars
 	push af
+
+; shift the existing OAM entries down to make room for the next wave
 	ld hl, wOAMBuffer + $10
 	ld de, wOAMBuffer
 	ld bc, $50
 	call CopyData
+
 	pop af
 	pop hl
 	pop bc
 	ret c
 	dec c
-	jr nz, .asm_700af
+	jr nz, .smallStarsLoop
 	and a
 	ret
 
-OAMData_700ee: ; 700ee (1c:40ee)
+SmallStarsOAM: ; 700ee (1c:40ee)
 	db $00,$00,$A2,$90
 
-PointerTable_700f2: ; 700f2 (1c:40f2)
-	dw OAMData_700fe
-	dw OAMData_70106
-	dw OAMData_7010e
-	dw OAMData_70116
-	dw OAMData_7011e
-	dw OAMData_7011e
+SmallStarsWaveCoordsPointerTable: ; 700f2 (1c:40f2)
+	dw SmallStarsWave1Coords
+	dw SmallStarsWave2Coords
+	dw SmallStarsWave3Coords
+	dw SmallStarsWave4Coords
+	dw SmallStarsEmptyWave
+	dw SmallStarsEmptyWave
 
-; each entry is only half of an OAM tile
-OAMData_700fe: ; 700fe (1c:40fe)
+; The stars that fall from the Gamefreak logo come in 4 waves of 4 OAM entries.
+; These arrays contain the Y and X coordinates of each OAM entry.
+
+SmallStarsWave1Coords: ; 700fe (1c:40fe)
 	db $68,$30
 	db $68,$40
 	db $68,$58
 	db $68,$78
 
-OAMData_70106: ; 70106 (1c:4106)
+SmallStarsWave2Coords: ; 70106 (1c:4106)
 	db $68,$38
 	db $68,$48
 	db $68,$60
 	db $68,$70
 
-OAMData_7010e: ; 7010e (1c:410e)
+SmallStarsWave3Coords: ; 7010e (1c:410e)
 	db $68,$34
 	db $68,$4C
 	db $68,$54
 	db $68,$64
 
-OAMData_70116: ; 70116 (1c:4116)
+SmallStarsWave4Coords: ; 70116 (1c:4116)
 	db $68,$3C
 	db $68,$5C
 	db $68,$6C
 	db $68,$74
 
-OAMData_7011e: ; 7011e (1c:411e)
+SmallStarsEmptyWave: ; 7011e (1c:411e)
 	db $FF
 
-Func_7011f: ; 7011f (1c:411f)
-	ld b, $8
-.asm_70121
+MoveDownSmallStars: ; 7011f (1c:411f)
+	ld b, 8
+.loop
 	ld hl, wOAMBuffer + $5c
-	ld a, [wWhichTrade]
-	ld de, $fffc
+	ld a, [wMoveDownSmallStarsOAMCount]
+	ld de, -4
 	ld c, a
-.asm_7012b
-	inc [hl]
+.innerLoop
+	inc [hl] ; Y
 	add hl, de
 	dec c
-	jr nz, .asm_7012b
+	jr nz, .innerLoop
+
+; Toggle the palette so that the lower star in the small stars tile blinks in
+; and out.
 	ld a, [rOBP1]
-	xor $a0
+	xor %10100000
 	ld [rOBP1], a
-	ld c, $3
+
+	ld c, 3
 	call CheckForUserInterruption
 	ret c
 	dec b
-	jr nz, .asm_70121
+	jr nz, .loop
 	ret
 
 GameFreakLogoOAMData: ; 70140 (1c:4140)
