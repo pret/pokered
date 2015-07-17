@@ -37,12 +37,12 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 
 SafariZoneCheck: ; 1e988 (7:6988)
 	ld hl, wd790
-	bit 7, [hl]
-	jr z, SafariZoneGameOver
+	bit 7, [hl]; if we are not in the Safari Zone,
+	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [W_NUMSAFARIBALLS]
 	and a
-	jr z, SafariZoneGameStillGoing
-	jr SafariZoneGameOver
+	jr z, SafariZoneGameOver
+	jr SafariZoneGameStillGoing
 
 SafariZoneCheckSteps: ; 1e997 (7:6997)
 	ld a, [wSafariSteps]
@@ -50,17 +50,18 @@ SafariZoneCheckSteps: ; 1e997 (7:6997)
 	ld a, [wSafariSteps + 1]
 	ld c, a
 	or b
-	jr z, SafariZoneGameStillGoing
+	jr z, SafariZoneGameOver
 	dec bc
 	ld a, b
 	ld [wSafariSteps], a
 	ld a, c
 	ld [wSafariSteps + 1], a
-SafariZoneGameOver: ; 1e9ab (7:69ab)
+SafariZoneGameStillGoing: ; 1e9ab (7:69ab)
 	xor a
 	ld [wSafariZoneGameOver], a
 	ret
-SafariZoneGameStillGoing: ; 1e9b0 (7:69b0)
+
+SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
 	xor a
 	ld [wMusicHeaderPointer], a
