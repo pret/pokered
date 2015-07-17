@@ -145,7 +145,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	call TextBoxBorder
 	call UpdateSprites
 	hlCoord 7, 7
-	ld de, TradeCenterText
+	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
 	ld [wcd37], a
@@ -255,9 +255,9 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [wWalkBikeSurfState], a ; start walking
 	ld a, [wCurrentMenuItem]
 	and a
-	ld a, TRADE_CENTER
+	ld a, COLOSSEUM
 	jr nz, .next
-	ld a, BATTLE_CENTER
+	ld a, TRADE_CENTER
 .next
 	ld [wd72d], a
 	ld hl, PleaseWaitText
@@ -332,7 +332,7 @@ NewGameText: ; 5d87 (1:5d87)
 	db "NEW GAME", $4e
 	db "OPTION@"
 
-TradeCenterText: ; 5d97 (1:5d97)
+CableClubOptionsText: ; 5d97 (1:5d97)
 	db "TRADE CENTER", $4e
 	db "COLOSSEUM",    $4e
 	db "CANCEL@"

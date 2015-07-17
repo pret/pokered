@@ -239,8 +239,8 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw SilphCoElevator_h
 	dw SilphCo2_h ; unused
 	dw SilphCo2_h ; unused
-	dw BattleCenterM_h
-	dw TradeCenterM_h
+	dw TradeCenter_h
+	dw Colosseum_h
 	dw SilphCo2_h ; unused
 	dw SilphCo2_h ; unused
 	dw SilphCo2_h ; unused

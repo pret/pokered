@@ -1,5 +1,5 @@
-; performs the appropriate action when the player uses the gameboy on the table in the Colosseum or Trade Centre
-; In the Colosseum, it starts a battle. In the Trade Centre, it displays the trade selection screen.
+; performs the appropriate action when the player uses the gameboy on the table in the Colosseum or Trade Center
+; In the Colosseum, it starts a battle. In the Trade Center, it displays the trade selection screen.
 ; Before doing either action, it swaps random numbers, trainer names and party data with the other gameboy.
 CableClub_DoBattleOrTrade: ; 5317 (1:5317)
 	ld c, 80

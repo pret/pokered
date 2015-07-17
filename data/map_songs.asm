@@ -238,8 +238,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCoElevator
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
-	db MUSIC_CELADON, BANK(Music_Celadon) ; BattleCenterM
-	db MUSIC_CELADON, BANK(Music_Celadon) ; TradeCenterM
+	db MUSIC_CELADON, BANK(Music_Celadon) ; TradeCenter
+	db MUSIC_CELADON, BANK(Music_Celadon) ; Colosseum
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)

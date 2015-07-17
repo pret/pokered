@@ -2494,11 +2494,11 @@ _DreamWasEatenText:: ; 94aec (25:4aec)
 	line "dream was eaten!"
 	prompt
 
-_BattleCenterMText1:: ; 94b01 (25:4b01)
+_TradeCenterText1:: ; 94b01 (25:4b01)
 	text "!"
 	done
 
-_TradeCenterMText1:: ; 94b04 (25:4b04)
+_ColosseumText1:: ; 94b04 (25:4b04)
 	text "!"
 	done
 

@@ -239,8 +239,8 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(SilphCoElevator_h)
 	db $11
 	db $11
-	db BANK(BattleCenterM_h)
-	db BANK(TradeCenterM_h)
+	db BANK(TradeCenter_h)
+	db BANK(Colosseum_h)
 	db $11
 	db $11
 	db $11

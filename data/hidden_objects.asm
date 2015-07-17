@@ -28,8 +28,8 @@ HiddenObjectMaps: ; 46a40 (11:6a40)
 	db SAFFRON_GYM
 	db MT_MOON_POKECENTER
 	db ROCK_TUNNEL_POKECENTER
-	db BATTLE_CENTER
 	db TRADE_CENTER
+	db COLOSSEUM
 	db VIRIDIAN_FOREST
 	db MT_MOON_3
 	db INDIGO_PLATEAU
@@ -117,8 +117,8 @@ HiddenObjectPointers: ; 46a96 (11:6a96)
 	dw SaffronGymHiddenObjects
 	dw MtMoonPokecenterHiddenObjects
 	dw RockTunnelPokecenterHiddenObjects
-	dw BattleCenterHiddenObjects
 	dw TradeCenterHiddenObjects
+	dw ColosseumHiddenObjects
 	dw ViridianForestHiddenObjects
 	dw MtMoon3HiddenObjects
 	dw IndigoPlateauHiddenObjects
@@ -175,7 +175,7 @@ HiddenObjectPointers: ; 46a96 (11:6a96)
 	dw Route4HiddenObjects
 
 ; format: y-coord, x-coord, text id/item id, object routine
-BattleCenterHiddenObjects: ; 46b40 (11:6b40)
+TradeCenterHiddenObjects: ; 46b40 (11:6b40)
 	db $04,$05,$d0
 	db BANK(CableClubRightGameboy)
 	dw CableClubRightGameboy
@@ -183,7 +183,7 @@ BattleCenterHiddenObjects: ; 46b40 (11:6b40)
 	db BANK(CableClubLeftGameboy)
 	dw CableClubLeftGameboy
 	db $FF
-TradeCenterHiddenObjects: ; 46b4d (11:6b4d)
+ColosseumHiddenObjects: ; 46b4d (11:6b4d)
 	db $04,$05,$d0
 	db BANK(CableClubRightGameboy)
 	dw CableClubRightGameboy

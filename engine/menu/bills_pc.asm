@@ -516,7 +516,7 @@ CableClubLeftGameboy:: ; 5824 (8:5825)
 	cp SPRITE_FACING_RIGHT
 	ret nz
 	ld a, [W_CURMAP]
-	cp BATTLE_CENTER
+	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .asm_2183a
 	inc a ; LINK_STATE_START_BATTLE
@@ -533,7 +533,7 @@ CableClubRightGameboy:: ; 5845 (8:5845)
 	cp SPRITE_FACING_LEFT
 	ret nz
 	ld a, [W_CURMAP]
-	cp BATTLE_CENTER
+	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .asm_2185a
 	inc a ; LINK_STATE_START_BATTLE

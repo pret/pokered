@@ -1,4 +1,4 @@
-BattleCenterMScript: ; 4fd10 (13:7d10)
+TradeCenterScript: ; 4fd10 (13:7d10)
 	call EnableAutoTextBoxDrawing
 	ld a, [$ffaa]
 	cp $2
@@ -30,9 +30,9 @@ BattleCenterMScript: ; 4fd10 (13:7d10)
 	ld [wSpriteStateData1 + $19], a
 	ret
 
-BattleCenterMTextPointers: ; 4fd4c (13:7d4c)
-	dw BattleCenterMText1
+TradeCenterTextPointers: ; 4fd4c (13:7d4c)
+	dw TradeCenterText1
 
-BattleCenterMText1: ; 4fd4e (13:7d4e)
-	TX_FAR _BattleCenterMText1
+TradeCenterText1: ; 4fd4e (13:7d4e)
+	TX_FAR _TradeCenterText1
 	db "@"

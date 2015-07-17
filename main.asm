@@ -630,24 +630,24 @@ SpecialWarpIn: ; 62ce (1:62ce)
 ; gets the map ID, tile block map view pointer, tileset, and coordinates
 LoadSpecialWarpData: ; 62ff (1:62ff)
 	ld a, [wd72d]
-	cp BATTLE_CENTER
-	jr nz, .notBattleCenter
-	ld hl, BattleCenterSpec1
-	ld a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK ; which gameboy is clocking determines who is on the left and who is on the right
-	jr z, .copyWarpData
-	ld hl, BattleCenterSpec2
-	jr .copyWarpData
-.notBattleCenter
 	cp TRADE_CENTER
 	jr nz, .notTradeCenter
 	ld hl, TradeCenterSpec1
 	ld a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK
+	cp USING_INTERNAL_CLOCK ; which gameboy is clocking determines who is on the left and who is on the right
 	jr z, .copyWarpData
 	ld hl, TradeCenterSpec2
 	jr .copyWarpData
 .notTradeCenter
+	cp COLOSSEUM
+	jr nz, .notColosseum
+	ld hl, ColosseumSpec1
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr z, .copyWarpData
+	ld hl, ColosseumSpec2
+	jr .copyWarpData
+.notColosseum
 	ld a, [wd732]
 	bit 1, a
 	jr nz, .notFirstMap
@@ -5872,15 +5872,15 @@ ChannelerPic::     INCBIN "pic/trainer/channeler.pic"
 AgathaPic::        INCBIN "pic/trainer/agatha.pic"
 LancePic::         INCBIN "pic/trainer/lance.pic"
 
-INCLUDE "data/mapHeaders/battlecenterm.asm"
-INCLUDE "scripts/battlecenterm.asm"
-INCLUDE "data/mapObjects/battlecenterm.asm"
-BattleCenterMBlocks: INCBIN "maps/battlecenterm.blk"
+INCLUDE "data/mapHeaders/tradecenter.asm"
+INCLUDE "scripts/tradecenter.asm"
+INCLUDE "data/mapObjects/tradecenter.asm"
+TradeCenterBlocks: INCBIN "maps/tradecenter.blk"
 
-INCLUDE "data/mapHeaders/tradecenterm.asm"
-INCLUDE "scripts/tradecenterm.asm"
-INCLUDE "data/mapObjects/tradecenterm.asm"
-TradeCenterMBlocks: INCBIN "maps/tradecenterm.blk"
+INCLUDE "data/mapHeaders/colosseum.asm"
+INCLUDE "scripts/colosseum.asm"
+INCLUDE "data/mapObjects/colosseum.asm"
+ColosseumBlocks: INCBIN "maps/colosseum.blk"
 
 INCLUDE "engine/give_pokemon.asm"
 
