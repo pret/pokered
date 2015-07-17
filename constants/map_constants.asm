@@ -1,251 +1,253 @@
-PALLET_TOWN     EQU $00
-VIRIDIAN_CITY   EQU $01
-PEWTER_CITY     EQU $02
-CERULEAN_CITY   EQU $03
-LAVENDER_TOWN   EQU $04
-VERMILION_CITY  EQU $05
-CELADON_CITY    EQU $06
-FUCHSIA_CITY    EQU $07
-CINNABAR_ISLAND EQU $08
-INDIGO_PLATEAU  EQU $09
-SAFFRON_CITY    EQU $0A
-; unused        EQU $0B
-ROUTE_1         EQU $0C
-ROUTE_2         EQU $0D
-ROUTE_3         EQU $0E
-ROUTE_4         EQU $0F
-ROUTE_5         EQU $10
-ROUTE_6         EQU $11
-ROUTE_7         EQU $12
-ROUTE_8         EQU $13
-ROUTE_9         EQU $14
-ROUTE_10        EQU $15
-ROUTE_11        EQU $16
-ROUTE_12        EQU $17
-ROUTE_13        EQU $18
-ROUTE_14        EQU $19
-ROUTE_15        EQU $1A
-ROUTE_16        EQU $1B
-ROUTE_17        EQU $1C
-ROUTE_18        EQU $1D
-ROUTE_19        EQU $1E
-ROUTE_20        EQU $1F
-ROUTE_21        EQU $20
-ROUTE_22        EQU $21
-ROUTE_23        EQU $22
-ROUTE_24        EQU $23
-ROUTE_25        EQU $24
-REDS_HOUSE_1F EQU $25
-REDS_HOUSE_2F EQU $26
-BLUES_HOUSE EQU $27
-OAKS_LAB EQU $28
-VIRIDIAN_POKECENTER EQU $29
-VIRIDIAN_MART EQU $2A
-VIRIDIAN_SCHOOL EQU $2B
-VIRIDIAN_HOUSE EQU $2C
-VIRIDIAN_GYM EQU $2D
-DIGLETTS_CAVE_EXIT EQU $2E
-VIRIDIAN_FOREST_EXIT EQU $2F
-ROUTE_2_HOUSE EQU $30
-ROUTE_2_GATE EQU $31
-VIRIDIAN_FOREST_ENTRANCE EQU $32
-VIRIDIAN_FOREST EQU $33
-MUSEUM_1F EQU $34
-MUSEUM_2F EQU $35
-PEWTER_GYM EQU $36
-PEWTER_HOUSE_1 EQU $37
-PEWTER_MART EQU $38
-PEWTER_HOUSE_2 EQU $39
-PEWTER_POKECENTER EQU $3A
-MT_MOON_1 EQU $3B
-MT_MOON_2 EQU $3C
-MT_MOON_3 EQU $3D
-TRASHED_HOUSE EQU $3E
-CERULEAN_HOUSE EQU $3F
-CERULEAN_POKECENTER EQU $40
-CERULEAN_GYM EQU $41
-BIKE_SHOP EQU $42
-CERULEAN_MART EQU $43
-MT_MOON_POKECENTER EQU $44
-;copy of TRASHED_HOUSE EQU $45
-ROUTE_5_GATE EQU $46
-PATH_ENTRANCE_ROUTE_5 EQU $47
-DAYCAREM EQU $48
-ROUTE_6_GATE EQU $49
-PATH_ENTRANCE_ROUTE_6 EQU $4A
-;copy of PATH_ENTRANCE_ROUTE_6 EQU $4B
-ROUTE_7_GATE EQU $4C
-PATH_ENTRANCE_ROUTE_7 EQU $4D
-;copy of PATH_ENTRANCE_ROUTE_7 EQU $4E
-ROUTE_8_GATE EQU $4F
-PATH_ENTRANCE_ROUTE_8 EQU $50
-ROCK_TUNNEL_POKECENTER EQU $51
-ROCK_TUNNEL_1 EQU $52
-POWER_PLANT EQU $53
-ROUTE_11_GATE_1F EQU $54
-DIGLETTS_CAVE_ENTRANCE EQU $55
-ROUTE_11_GATE_2F EQU $56
-ROUTE_12_GATE_1F EQU $57
-BILLS_HOUSE EQU $58
-VERMILION_POKECENTER EQU $59
-POKEMON_FAN_CLUB EQU $5A
-VERMILION_MART EQU $5B
-VERMILION_GYM EQU $5C
-VERMILION_HOUSE_1 EQU $5D
-VERMILION_DOCK EQU $5E
-SS_ANNE_1 EQU $5F
-SS_ANNE_2 EQU $60
-SS_ANNE_3 EQU $61
-SS_ANNE_4 EQU $62
-SS_ANNE_5 EQU $63
-SS_ANNE_6 EQU $64
-SS_ANNE_7 EQU $65
-SS_ANNE_8 EQU $66
-SS_ANNE_9 EQU $67
-SS_ANNE_10 EQU $68
-;EQU $69
-;EQU $6A
-;EQU $6B
-VICTORY_ROAD_1 EQU $6C
-;EQU $6D
-;EQU $6E
-;EQU $6F
-;EQU $70
-LANCES_ROOM EQU $71
-;EQU $72
-;EQU $73
-;EQU $74
-;EQU $75
-HALL_OF_FAME EQU $76
-UNDERGROUND_PATH_NS EQU $77
-CHAMPIONS_ROOM EQU $78
-UNDERGROUND_PATH_WE EQU $79
-CELADON_MART_1 EQU $7A
-CELADON_MART_2 EQU $7B
-CELADON_MART_3 EQU $7C
-CELADON_MART_4 EQU $7D
-CELADON_MART_ROOF EQU $7E
-CELADON_MART_ELEVATOR EQU $7F
-CELADON_MANSION_1 EQU $80
-CELADON_MANSION_2 EQU $81
-CELADON_MANSION_3 EQU $82
-CELADON_MANSION_4 EQU $83
-CELADON_MANSION_5 EQU $84
-CELADON_POKECENTER EQU $85
-CELADON_GYM EQU $86
-GAME_CORNER EQU $87
-CELADON_MART_5 EQU $88
-CELADON_PRIZE_ROOM EQU $89
-CELADON_DINER EQU $8A
-CELADON_HOUSE EQU $8B
-CELADON_HOTEL EQU $8C
-LAVENDER_POKECENTER EQU $8D
-POKEMONTOWER_1 EQU $8E
-POKEMONTOWER_2 EQU $8F
-POKEMONTOWER_3 EQU $90
-POKEMONTOWER_4 EQU $91
-POKEMONTOWER_5 EQU $92
-POKEMONTOWER_6 EQU $93
-POKEMONTOWER_7 EQU $94
-LAVENDER_HOUSE_1 EQU $95
-LAVENDER_MART EQU $96
-LAVENDER_HOUSE_2 EQU $97
-FUCHSIA_MART EQU $98
-FUCHSIA_HOUSE_1 EQU $99
-FUCHSIA_POKECENTER EQU $9A
-FUCHSIA_HOUSE_2 EQU $9B
-SAFARI_ZONE_ENTRANCE EQU $9C
-FUCHSIA_GYM EQU $9D
-FUCHSIA_MEETING_ROOM EQU $9E
-SEAFOAM_ISLANDS_2 EQU $9F
-SEAFOAM_ISLANDS_3 EQU $A0
-SEAFOAM_ISLANDS_4 EQU $A1
-SEAFOAM_ISLANDS_5 EQU $A2
-VERMILION_HOUSE_2 EQU $A3
-FUCHSIA_HOUSE_3 EQU $A4
-MANSION_1 EQU $A5
-CINNABAR_GYM EQU $A6
-CINNABAR_LAB_1 EQU $A7
-CINNABAR_LAB_2 EQU $A8
-CINNABAR_LAB_3 EQU $A9
-CINNABAR_LAB_4 EQU $AA
-CINNABAR_POKECENTER EQU $AB
-CINNABAR_MART EQU $AC
-;copy of CINNABAR_MART EQU $AD
-INDIGO_PLATEAU_LOBBY EQU $AE
-COPYCATS_HOUSE_1F EQU $AF
-COPYCATS_HOUSE_2F EQU $B0
-FIGHTING_DOJO EQU $B1
-SAFFRON_GYM EQU $B2
-SAFFRON_HOUSE_1 EQU $B3
-SAFFRON_MART EQU $B4
-SILPH_CO_1F EQU $B5
-SAFFRON_POKECENTER EQU $B6
-SAFFRON_HOUSE_2 EQU $B7
-ROUTE_15_GATE_1F EQU $B8
-ROUTE_15_GATE_2F EQU $B9
-ROUTE_16_GATE_1F EQU $BA
-ROUTE_16_GATE_2F EQU $BB
-ROUTE_16_HOUSE EQU $BC
-ROUTE_12_HOUSE EQU $BD
-ROUTE_18_GATE_1F EQU $BE
-ROUTE_18_GATE_2F EQU $BF
-SEAFOAM_ISLANDS_1 EQU $C0
-ROUTE_22_GATE EQU $C1
-VICTORY_ROAD_2 EQU $C2
-ROUTE_12_GATE_2F EQU $C3
-VERMILION_HOUSE_3 EQU $C4
-DIGLETTS_CAVE EQU $C5
-VICTORY_ROAD_3 EQU $C6
-ROCKET_HIDEOUT_1 EQU $C7
-ROCKET_HIDEOUT_2 EQU $C8
-ROCKET_HIDEOUT_3 EQU $C9
-ROCKET_HIDEOUT_4 EQU $CA
-ROCKET_HIDEOUT_ELEVATOR EQU $CB
-;EQU $CC
-;EQU $CD
-;EQU $CE
-SILPH_CO_2F EQU $CF
-SILPH_CO_3F EQU $D0
-SILPH_CO_4F EQU $D1
-SILPH_CO_5F EQU $D2
-SILPH_CO_6F EQU $D3
-SILPH_CO_7F EQU $D4
-SILPH_CO_8F EQU $D5
-MANSION_2 EQU $D6
-MANSION_3 EQU $D7
-MANSION_4 EQU $D8
-SAFARI_ZONE_EAST EQU $D9
-SAFARI_ZONE_NORTH EQU $DA
-SAFARI_ZONE_WEST EQU $DB
-SAFARI_ZONE_CENTER EQU $DC
-SAFARI_ZONE_REST_HOUSE_1 EQU $DD
-SAFARI_ZONE_SECRET_HOUSE EQU $DE
-SAFARI_ZONE_REST_HOUSE_2 EQU $DF
-SAFARI_ZONE_REST_HOUSE_3 EQU $E0
-SAFARI_ZONE_REST_HOUSE_4 EQU $E1
-UNKNOWN_DUNGEON_2 EQU $E2
-UNKNOWN_DUNGEON_3 EQU $E3
-UNKNOWN_DUNGEON_1 EQU $E4
-NAME_RATERS_HOUSE EQU $E5
-CERULEAN_HOUSE_3 EQU $E6
-;EQU $E7
-ROCK_TUNNEL_2 EQU $E8
-SILPH_CO_9F EQU $E9
-SILPH_CO_10F EQU $EA
-SILPH_CO_11F EQU $EB
-SILPH_CO_ELEVATOR EQU $EC
-;EQU $ED
-;EQU $EE
-TRADE_CENTER EQU $EF
-COLOSSEUM EQU $F0
-;EQU $F1
-;EQU $F2
-;EQU $F3
-;EQU $F4
-LORELEIS_ROOM EQU $F5
-BRUNOS_ROOM EQU $F6
-AGATHAS_ROOM EQU $F7
+const_value = 0
+
+	const PALLET_TOWN                ; $00
+	const VIRIDIAN_CITY              ; $01
+	const PEWTER_CITY                ; $02
+	const CERULEAN_CITY              ; $03
+	const LAVENDER_TOWN              ; $04
+	const VERMILION_CITY             ; $05
+	const CELADON_CITY               ; $06
+	const FUCHSIA_CITY               ; $07
+	const CINNABAR_ISLAND            ; $08
+	const INDIGO_PLATEAU             ; $09
+	const SAFFRON_CITY               ; $0A
+	const UNUSED_MAP_0B              ; $0B
+	const ROUTE_1                    ; $0C
+	const ROUTE_2                    ; $0D
+	const ROUTE_3                    ; $0E
+	const ROUTE_4                    ; $0F
+	const ROUTE_5                    ; $10
+	const ROUTE_6                    ; $11
+	const ROUTE_7                    ; $12
+	const ROUTE_8                    ; $13
+	const ROUTE_9                    ; $14
+	const ROUTE_10                   ; $15
+	const ROUTE_11                   ; $16
+	const ROUTE_12                   ; $17
+	const ROUTE_13                   ; $18
+	const ROUTE_14                   ; $19
+	const ROUTE_15                   ; $1A
+	const ROUTE_16                   ; $1B
+	const ROUTE_17                   ; $1C
+	const ROUTE_18                   ; $1D
+	const ROUTE_19                   ; $1E
+	const ROUTE_20                   ; $1F
+	const ROUTE_21                   ; $20
+	const ROUTE_22                   ; $21
+	const ROUTE_23                   ; $22
+	const ROUTE_24                   ; $23
+	const ROUTE_25                   ; $24
+	const REDS_HOUSE_1F              ; $25
+	const REDS_HOUSE_2F              ; $26
+	const BLUES_HOUSE                ; $27
+	const OAKS_LAB                   ; $28
+	const VIRIDIAN_POKECENTER        ; $29
+	const VIRIDIAN_MART              ; $2A
+	const VIRIDIAN_SCHOOL            ; $2B
+	const VIRIDIAN_HOUSE             ; $2C
+	const VIRIDIAN_GYM               ; $2D
+	const DIGLETTS_CAVE_EXIT         ; $2E
+	const VIRIDIAN_FOREST_EXIT       ; $2F
+	const ROUTE_2_HOUSE              ; $30
+	const ROUTE_2_GATE               ; $31
+	const VIRIDIAN_FOREST_ENTRANCE   ; $32
+	const VIRIDIAN_FOREST            ; $33
+	const MUSEUM_1F                  ; $34
+	const MUSEUM_2F                  ; $35
+	const PEWTER_GYM                 ; $36
+	const PEWTER_HOUSE_1             ; $37
+	const PEWTER_MART                ; $38
+	const PEWTER_HOUSE_2             ; $39
+	const PEWTER_POKECENTER          ; $3A
+	const MT_MOON_1                  ; $3B
+	const MT_MOON_2                  ; $3C
+	const MT_MOON_3                  ; $3D
+	const TRASHED_HOUSE              ; $3E
+	const CERULEAN_HOUSE             ; $3F
+	const CERULEAN_POKECENTER        ; $40
+	const CERULEAN_GYM               ; $41
+	const BIKE_SHOP                  ; $42
+	const CERULEAN_MART              ; $43
+	const MT_MOON_POKECENTER         ; $44
+	const TRASHED_HOUSE_COPY         ; $45
+	const ROUTE_5_GATE               ; $46
+	const PATH_ENTRANCE_ROUTE_5      ; $47
+	const DAYCAREM                   ; $48
+	const ROUTE_6_GATE               ; $49
+	const PATH_ENTRANCE_ROUTE_6      ; $4A
+	const PATH_ENTRANCE_ROUTE_6_COPY ; $4B
+	const ROUTE_7_GATE               ; $4C
+	const PATH_ENTRANCE_ROUTE_7      ; $4D
+	const PATH_ENTRANCE_ROUTE_7_COPY ; $4E
+	const ROUTE_8_GATE               ; $4F
+	const PATH_ENTRANCE_ROUTE_8      ; $50
+	const ROCK_TUNNEL_POKECENTER     ; $51
+	const ROCK_TUNNEL_1              ; $52
+	const POWER_PLANT                ; $53
+	const ROUTE_11_GATE_1F           ; $54
+	const DIGLETTS_CAVE_ENTRANCE     ; $55
+	const ROUTE_11_GATE_2F           ; $56
+	const ROUTE_12_GATE_1F           ; $57
+	const BILLS_HOUSE                ; $58
+	const VERMILION_POKECENTER       ; $59
+	const POKEMON_FAN_CLUB           ; $5A
+	const VERMILION_MART             ; $5B
+	const VERMILION_GYM              ; $5C
+	const VERMILION_HOUSE_1          ; $5D
+	const VERMILION_DOCK             ; $5E
+	const SS_ANNE_1                  ; $5F
+	const SS_ANNE_2                  ; $60
+	const SS_ANNE_3                  ; $61
+	const SS_ANNE_4                  ; $62
+	const SS_ANNE_5                  ; $63
+	const SS_ANNE_6                  ; $64
+	const SS_ANNE_7                  ; $65
+	const SS_ANNE_8                  ; $66
+	const SS_ANNE_9                  ; $67
+	const SS_ANNE_10                 ; $68
+	const UNUSED_MAP_69              ; $69
+	const UNUSED_MAP_6A              ; $6A
+	const UNUSED_MAP_6B              ; $6B
+	const VICTORY_ROAD_1             ; $6C
+	const UNUSED_MAP_6D              ; $6D
+	const UNUSED_MAP_6E              ; $6E
+	const UNUSED_MAP_6F              ; $6F
+	const UNUSED_MAP_70              ; $70
+	const LANCES_ROOM                ; $71
+	const UNUSED_MAP_72              ; $72
+	const UNUSED_MAP_73              ; $73
+	const UNUSED_MAP_74              ; $74
+	const UNUSED_MAP_75              ; $75
+	const HALL_OF_FAME               ; $76
+	const UNDERGROUND_PATH_NS        ; $77
+	const CHAMPIONS_ROOM             ; $78
+	const UNDERGROUND_PATH_WE        ; $79
+	const CELADON_MART_1             ; $7A
+	const CELADON_MART_2             ; $7B
+	const CELADON_MART_3             ; $7C
+	const CELADON_MART_4             ; $7D
+	const CELADON_MART_ROOF          ; $7E
+	const CELADON_MART_ELEVATOR      ; $7F
+	const CELADON_MANSION_1          ; $80
+	const CELADON_MANSION_2          ; $81
+	const CELADON_MANSION_3          ; $82
+	const CELADON_MANSION_4          ; $83
+	const CELADON_MANSION_5          ; $84
+	const CELADON_POKECENTER         ; $85
+	const CELADON_GYM                ; $86
+	const GAME_CORNER                ; $87
+	const CELADON_MART_5             ; $88
+	const CELADON_PRIZE_ROOM         ; $89
+	const CELADON_DINER              ; $8A
+	const CELADON_HOUSE              ; $8B
+	const CELADON_HOTEL              ; $8C
+	const LAVENDER_POKECENTER        ; $8D
+	const POKEMONTOWER_1             ; $8E
+	const POKEMONTOWER_2             ; $8F
+	const POKEMONTOWER_3             ; $90
+	const POKEMONTOWER_4             ; $91
+	const POKEMONTOWER_5             ; $92
+	const POKEMONTOWER_6             ; $93
+	const POKEMONTOWER_7             ; $94
+	const LAVENDER_HOUSE_1           ; $95
+	const LAVENDER_MART              ; $96
+	const LAVENDER_HOUSE_2           ; $97
+	const FUCHSIA_MART               ; $98
+	const FUCHSIA_HOUSE_1            ; $99
+	const FUCHSIA_POKECENTER         ; $9A
+	const FUCHSIA_HOUSE_2            ; $9B
+	const SAFARI_ZONE_ENTRANCE       ; $9C
+	const FUCHSIA_GYM                ; $9D
+	const FUCHSIA_MEETING_ROOM       ; $9E
+	const SEAFOAM_ISLANDS_2          ; $9F
+	const SEAFOAM_ISLANDS_3          ; $A0
+	const SEAFOAM_ISLANDS_4          ; $A1
+	const SEAFOAM_ISLANDS_5          ; $A2
+	const VERMILION_HOUSE_2          ; $A3
+	const FUCHSIA_HOUSE_3            ; $A4
+	const MANSION_1                  ; $A5
+	const CINNABAR_GYM               ; $A6
+	const CINNABAR_LAB_1             ; $A7
+	const CINNABAR_LAB_2             ; $A8
+	const CINNABAR_LAB_3             ; $A9
+	const CINNABAR_LAB_4             ; $AA
+	const CINNABAR_POKECENTER        ; $AB
+	const CINNABAR_MART              ; $AC
+	const CINNABAR_MART_COPY         ; $AD
+	const INDIGO_PLATEAU_LOBBY       ; $AE
+	const COPYCATS_HOUSE_1F          ; $AF
+	const COPYCATS_HOUSE_2F          ; $B0
+	const FIGHTING_DOJO              ; $B1
+	const SAFFRON_GYM                ; $B2
+	const SAFFRON_HOUSE_1            ; $B3
+	const SAFFRON_MART               ; $B4
+	const SILPH_CO_1F                ; $B5
+	const SAFFRON_POKECENTER         ; $B6
+	const SAFFRON_HOUSE_2            ; $B7
+	const ROUTE_15_GATE_1F           ; $B8
+	const ROUTE_15_GATE_2F           ; $B9
+	const ROUTE_16_GATE_1F           ; $BA
+	const ROUTE_16_GATE_2F           ; $BB
+	const ROUTE_16_HOUSE             ; $BC
+	const ROUTE_12_HOUSE             ; $BD
+	const ROUTE_18_GATE_1F           ; $BE
+	const ROUTE_18_GATE_2F           ; $BF
+	const SEAFOAM_ISLANDS_1          ; $C0
+	const ROUTE_22_GATE              ; $C1
+	const VICTORY_ROAD_2             ; $C2
+	const ROUTE_12_GATE_2F           ; $C3
+	const VERMILION_HOUSE_3          ; $C4
+	const DIGLETTS_CAVE              ; $C5
+	const VICTORY_ROAD_3             ; $C6
+	const ROCKET_HIDEOUT_1           ; $C7
+	const ROCKET_HIDEOUT_2           ; $C8
+	const ROCKET_HIDEOUT_3           ; $C9
+	const ROCKET_HIDEOUT_4           ; $CA
+	const ROCKET_HIDEOUT_ELEVATOR    ; $CB
+	const UNUSED_MAP_CC              ; $CC
+	const UNUSED_MAP_CD              ; $CD
+	const UNUSED_MAP_CE              ; $CE
+	const SILPH_CO_2F                ; $CF
+	const SILPH_CO_3F                ; $D0
+	const SILPH_CO_4F                ; $D1
+	const SILPH_CO_5F                ; $D2
+	const SILPH_CO_6F                ; $D3
+	const SILPH_CO_7F                ; $D4
+	const SILPH_CO_8F                ; $D5
+	const MANSION_2                  ; $D6
+	const MANSION_3                  ; $D7
+	const MANSION_4                  ; $D8
+	const SAFARI_ZONE_EAST           ; $D9
+	const SAFARI_ZONE_NORTH          ; $DA
+	const SAFARI_ZONE_WEST           ; $DB
+	const SAFARI_ZONE_CENTER         ; $DC
+	const SAFARI_ZONE_REST_HOUSE_1   ; $DD
+	const SAFARI_ZONE_SECRET_HOUSE   ; $DE
+	const SAFARI_ZONE_REST_HOUSE_2   ; $DF
+	const SAFARI_ZONE_REST_HOUSE_3   ; $E0
+	const SAFARI_ZONE_REST_HOUSE_4   ; $E1
+	const UNKNOWN_DUNGEON_2          ; $E2
+	const UNKNOWN_DUNGEON_3          ; $E3
+	const UNKNOWN_DUNGEON_1          ; $E4
+	const NAME_RATERS_HOUSE          ; $E5
+	const CERULEAN_HOUSE_3           ; $E6
+	const UNUSED_MAP_E7              ; $E7
+	const ROCK_TUNNEL_2              ; $E8
+	const SILPH_CO_9F                ; $E9
+	const SILPH_CO_10F               ; $EA
+	const SILPH_CO_11F               ; $EB
+	const SILPH_CO_ELEVATOR          ; $EC
+	const UNUSED_MAP_ED              ; $ED
+	const UNUSED_MAP_EE              ; $EE
+	const TRADE_CENTER               ; $EF
+	const COLOSSEUM                  ; $F0
+	const UNUSED_MAP_F1              ; $F1
+	const UNUSED_MAP_F2              ; $F2
+	const UNUSED_MAP_F3              ; $F3
+	const UNUSED_MAP_F4              ; $F4
+	const LORELEIS_ROOM              ; $F5
+	const BRUNOS_ROOM                ; $F6
+	const AGATHAS_ROOM               ; $F7
 IF DEF(_OPTION_BEACH_HOUSE)
-BEACH_HOUSE EQU $F8
+	const BEACH_HOUSE                ; $F8
 ENDC

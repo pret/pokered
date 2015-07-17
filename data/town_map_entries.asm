@@ -38,64 +38,64 @@ ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $B,$0,Route25Name
 
 InternalMapEntries: ; 71382 (1c:5382)
-	IMAP $29,$2,$B,PalletTownName
-	IMAP $2E,$2,$8,ViridianCityName
-	IMAP $33,$2,$6,Route2Name
-	IMAP $34,$2,$4,ViridianForestName
-	IMAP $3B,$2,$3,PewterCityName
-	IMAP $3E,$6,$2,MountMoonName
-	IMAP $44,$A,$2,CeruleanCityName
-	IMAP $45,$5,$2,Route4Name
-	IMAP $46,$A,$2,CeruleanCityName
-	IMAP $49,$A,$4,Route5Name
-	IMAP $4C,$A,$6,Route6Name
-	IMAP $4F,$9,$5,Route7Name
-	IMAP $51,$B,$5,Route8Name
-	IMAP $53,$E,$3,RockTunnelName
-	IMAP $54,$F,$4,PowerPlantName
-	IMAP $57,$D,$9,Route11Name
-	IMAP $58,$E,$7,Route12Name
-	IMAP $59,$C,$0,SeaCottageName
-	IMAP $5F,$A,$9,VermilionCityName
-	IMAP $69,$9,$A,SSAnneName
-	IMAP $6D,$0,$4,VictoryRoadName
-	IMAP $77,$0,$2,PokemonLeagueName
-	IMAP $78,$A,$5,UndergroundPathName
-	IMAP $79,$0,$2,PokemonLeagueName
-	IMAP $7A,$A,$5,UndergroundPathName
-	IMAP $8D,$7,$5,CeladonCityName
-	IMAP $8E,$E,$5,LavenderTownName
-	IMAP $95,$F,$5,PokemonTowerName
-	IMAP $98,$E,$5,LavenderTownName
-	IMAP $9C,$8,$D,FuchsiaCityName
-	IMAP $9D,$8,$C,SafariZoneName
-	IMAP $9F,$8,$D,FuchsiaCityName
-	IMAP $A3,$5,$F,SeafoamIslandsName
-	IMAP $A4,$A,$9,VermilionCityName
-	IMAP $A5,$8,$D,FuchsiaCityName
-	IMAP $A6,$2,$F,PokemonMansionName
-	IMAP $AE,$2,$F,CinnabarIslandName
-	IMAP $AF,$0,$2,IndigoPlateauName
-	IMAP $B8,$A,$5,SaffronCityName
-	IMAP $BA,$9,$D,Route15Name
-	IMAP $BD,$4,$5,Route16Name
-	IMAP $BE,$E,$A,Route12Name
-	IMAP $C0,$7,$D,Route18Name
-	IMAP $C1,$5,$F,SeafoamIslandsName
-	IMAP $C2,$0,$7,Route22Name
-	IMAP $C3,$0,$4,VictoryRoadName
-	IMAP $C4,$E,$7,Route12Name
-	IMAP $C5,$A,$9,VermilionCityName
-	IMAP $C6,$3,$4,DiglettsCaveName
-	IMAP $C7,$0,$4,VictoryRoadName
-	IMAP $CF,$7,$5,RocketHQName
-	IMAP $D6,$A,$5,SilphCoName
-	IMAP $D9,$2,$F,PokemonMansionName
-	IMAP $E2,$8,$C,SafariZoneName
-	IMAP $E5,$9,$1,CeruleanCaveName
-	IMAP $E6,$E,$5,LavenderTownName
-	IMAP $E7,$A,$2,CeruleanCityName
-	IMAP $E9,$E,$3,RockTunnelName
-	IMAP $ED,$A,$5,SilphCoName
-	IMAP $F8,$0,$2,PokemonLeagueName
+	IMAP OAKS_LAB,                  $2,$B,PalletTownName
+	IMAP VIRIDIAN_GYM,              $2,$8,ViridianCityName
+	IMAP VIRIDIAN_FOREST_ENTRANCE,  $2,$6,Route2Name
+	IMAP VIRIDIAN_FOREST,           $2,$4,ViridianForestName
+	IMAP PEWTER_POKECENTER,         $2,$3,PewterCityName
+	IMAP MT_MOON_3,                 $6,$2,MountMoonName
+	IMAP CERULEAN_MART,             $A,$2,CeruleanCityName
+	IMAP MT_MOON_POKECENTER,        $5,$2,Route4Name
+	IMAP TRASHED_HOUSE_COPY,        $A,$2,CeruleanCityName
+	IMAP DAYCAREM,                  $A,$4,Route5Name
+	IMAP PATH_ENTRANCE_ROUTE_6_COPY,$A,$6,Route6Name
+	IMAP PATH_ENTRANCE_ROUTE_7_COPY,$9,$5,Route7Name
+	IMAP PATH_ENTRANCE_ROUTE_8,     $B,$5,Route8Name
+	IMAP ROCK_TUNNEL_1,             $E,$3,RockTunnelName
+	IMAP POWER_PLANT,               $F,$4,PowerPlantName
+	IMAP ROUTE_11_GATE_2F,          $D,$9,Route11Name
+	IMAP ROUTE_12_GATE_1F,          $E,$7,Route12Name
+	IMAP BILLS_HOUSE,               $C,$0,SeaCottageName
+	IMAP VERMILION_DOCK,            $A,$9,VermilionCityName
+	IMAP SS_ANNE_10,                $9,$A,SSAnneName
+	IMAP VICTORY_ROAD_1,            $0,$4,VictoryRoadName
+	IMAP HALL_OF_FAME,              $0,$2,PokemonLeagueName
+	IMAP UNDERGROUND_PATH_NS,       $A,$5,UndergroundPathName
+	IMAP CHAMPIONS_ROOM,            $0,$2,PokemonLeagueName
+	IMAP UNDERGROUND_PATH_WE,       $A,$5,UndergroundPathName
+	IMAP CELADON_HOTEL,             $7,$5,CeladonCityName
+	IMAP LAVENDER_POKECENTER,       $E,$5,LavenderTownName
+	IMAP POKEMONTOWER_7,            $F,$5,PokemonTowerName
+	IMAP LAVENDER_HOUSE_2,          $E,$5,LavenderTownName
+	IMAP FUCHSIA_HOUSE_2,           $8,$D,FuchsiaCityName
+	IMAP SAFARI_ZONE_ENTRANCE,      $8,$C,SafariZoneName
+	IMAP FUCHSIA_MEETING_ROOM,      $8,$D,FuchsiaCityName
+	IMAP SEAFOAM_ISLANDS_5,         $5,$F,SeafoamIslandsName
+	IMAP VERMILION_HOUSE_2,         $A,$9,VermilionCityName
+	IMAP FUCHSIA_HOUSE_3,           $8,$D,FuchsiaCityName
+	IMAP MANSION_1,                 $2,$F,PokemonMansionName
+	IMAP CINNABAR_MART_COPY,        $2,$F,CinnabarIslandName
+	IMAP INDIGO_PLATEAU_LOBBY,      $0,$2,IndigoPlateauName
+	IMAP SAFFRON_HOUSE_2,           $A,$5,SaffronCityName
+	IMAP ROUTE_15_GATE_2F,          $9,$D,Route15Name
+	IMAP ROUTE_16_HOUSE,            $4,$5,Route16Name
+	IMAP ROUTE_12_HOUSE,            $E,$A,Route12Name
+	IMAP ROUTE_18_GATE_2F,          $7,$D,Route18Name
+	IMAP SEAFOAM_ISLANDS_1,         $5,$F,SeafoamIslandsName
+	IMAP ROUTE_22_GATE,             $0,$7,Route22Name
+	IMAP VICTORY_ROAD_2,            $0,$4,VictoryRoadName
+	IMAP ROUTE_12_GATE_2F,          $E,$7,Route12Name
+	IMAP VERMILION_HOUSE_3,         $A,$9,VermilionCityName
+	IMAP DIGLETTS_CAVE,             $3,$4,DiglettsCaveName
+	IMAP VICTORY_ROAD_3,            $0,$4,VictoryRoadName
+	IMAP UNUSED_MAP_CE,             $7,$5,RocketHQName
+	IMAP SILPH_CO_8F,               $A,$5,SilphCoName
+	IMAP MANSION_4,                 $2,$F,PokemonMansionName
+	IMAP SAFARI_ZONE_REST_HOUSE_4,  $8,$C,SafariZoneName
+	IMAP UNKNOWN_DUNGEON_1,         $9,$1,CeruleanCaveName
+	IMAP NAME_RATERS_HOUSE,         $E,$5,LavenderTownName
+	IMAP CERULEAN_HOUSE_3,          $A,$2,CeruleanCityName
+	IMAP ROCK_TUNNEL_2,             $E,$3,RockTunnelName
+	IMAP SILPH_CO_ELEVATOR,         $A,$5,SilphCoName
+	IMAP AGATHAS_ROOM,              $0,$2,PokemonLeagueName
 	db $FF

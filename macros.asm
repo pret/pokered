@@ -130,7 +130,7 @@ IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 	; nybble: y-coordinate
 	; nybble: x-coordinate
 	; word  : pointer to map name
-	db \1
+	db \1 + 1
 	db \2 + \3 << 4
 	dw \4
 	ENDM
