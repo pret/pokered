@@ -130,11 +130,11 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
-	ld [wcc49],a
+	ld [wMonDataLocation],a ; not used
 	ld [wRemoveMonFromBox],a
 	call RemovePokemon
-	ld a,$80
-	ld [wcc49],a
+	ld a,$80 ; prevent the player from naming the mon
+	ld [wMonDataLocation],a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
@@ -177,9 +177,9 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld bc, $b
 	call InGameTrade_CopyData
 	ld hl, InGameTrade_TrainerString
-	ld de, wcd4e
+	ld de, wTradedEnemyMonOT
 	call InGameTrade_CopyData
-	ld de, W_GRASSRATE
+	ld de, wLinkEnemyTrainerName
 	call InGameTrade_CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1

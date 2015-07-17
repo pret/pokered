@@ -1,5 +1,5 @@
 EnterMapAnim: ; 70510 (1c:4510)
-	call InitFacingDirectionBuffer
+	call InitFacingDirectionList
 	ld a, $ec
 	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
 	call Delay3
@@ -32,7 +32,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	ld a, $8
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
 	ld [hl], $ff ; wPlayerSpinInPlaceAnimSoundID
-	ld hl, wcd48
+	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
 .restoreDefaultMusic
 	call PlayDefaultMusic
@@ -91,7 +91,7 @@ PlayerSpinWhileMovingDown: ; 705aa (1c:45aa)
 	jp PlayerSpinWhileMovingUpOrDown
 
 _LeaveMapAnim: ; 705ba (1c:45ba)
-	call InitFacingDirectionBuffer
+	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
 	and a
@@ -134,7 +134,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	xor a
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
 	ld [hl], (SFX_02_4d - SFX_Headers_02) / 3 ; wPlayerSpinInPlaceAnimSoundID
-	ld hl, wcd48
+	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
 	jr .spinWhileMovingUp
 .flyAnimation
@@ -214,7 +214,7 @@ LeaveMapThroughHoleAnim: ; 7067d (1c:467d)
 	ld [wOAMBuffer + 1 * 4], a
 	ld c, 2
 	call DelayFrames
-	; hide lower half of player's sprite
+	; hide upper half of player's sprite
 	ld a, $a0
 	ld [wOAMBuffer + 2 * 4], a
 	ld [wOAMBuffer + 3 * 4], a
@@ -231,7 +231,7 @@ DoFlyAnimation: ; 706ae (1c:46ae)
 	call Delay3
 	ld a, [wFlyAnimUsingCoordList]
 	cp $ff
-	jr z, .asm_706cd
+	jr z, .skipCopyingCoords ; if the bird is flapping its wings in place
 	ld hl, wSpriteStateData1 + 4
 	ld a, [de]
 	inc de
@@ -240,7 +240,7 @@ DoFlyAnimation: ; 706ae (1c:46ae)
 	ld a, [de]
 	inc de
 	ld [hl], a
-.asm_706cd
+.skipCopyingCoords
 	ld a, [wFlyAnimCounter]
 	dec a
 	ld [wFlyAnimCounter], a
@@ -252,22 +252,23 @@ LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
 	ld hl, vNPCSprites
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	call CopyVideoData
-	ld de, BirdSprite + $c0 ; moving amination sprite
+	ld de, BirdSprite + $c0 ; moving animation sprite
 	ld hl, vNPCSprites2
 	ld bc, (BANK(BirdSprite) << 8) + $0c
 	jp CopyVideoData
 
-InitFacingDirectionBuffer: ; 706ef (1c:46ef)
+InitFacingDirectionList: ; 706ef (1c:46ef)
 	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
-	ld [wcd50], a
+	ld [wSavedPlayerFacingDirection], a
 	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
-	ld [wcd4f], a
+	ld [wSavedPlayerScreenY], a
 	ld hl, PlayerSpinningFacingOrder
-	ld de, wcd48
-	ld bc, $4
+	ld de, wFacingDirectionList
+	ld bc, 4
 	call CopyData
 	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
-	ld hl, wcd48
+	ld hl, wFacingDirectionList
+; find the place in the list that matches the current facing direction
 .loop
 	cp [hl]
 	inc hl
@@ -281,15 +282,16 @@ PlayerSpinningFacingOrder: ; 70713 (1c:4713)
 	db SPRITE_FACING_DOWN, SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT
 
 SpinPlayerSprite: ; 70717 (1c:4717)
+; copy the current value from the list into the sprite data and rotate the list
 	ld a, [hl]
 	ld [wSpriteStateData1 + 2], a ; player's sprite facing direction (image index is locked to standing images)
 	push hl
-	ld hl, wcd48
-	ld de, wcd47
-	ld bc, $4
+	ld hl, wFacingDirectionList
+	ld de, wFacingDirectionList - 1
+	ld bc, 4
 	call CopyData
-	ld a, [wcd47]
-	ld [wcd4b], a
+	ld a, [wFacingDirectionList - 1]
+	ld [wFacingDirectionList + 3], a
 	pop hl
 	ret
 
@@ -298,11 +300,12 @@ PlayerSpinInPlace: ; 70730 (1c:4730)
 	ld a, [wPlayerSpinInPlaceAnimFrameDelay]
 	ld c, a
 	and $3
-	jr nz, .asm_70743
+	jr nz, .skipPlayingSound
+; when the last delay was a multiple of 4, play a sound if there is one
 	ld a, [wPlayerSpinInPlaceAnimSoundID]
 	cp $ff
 	call nz, PlaySound
-.asm_70743
+.skipPlayingSound
 	ld a, [wPlayerSpinInPlaceAnimFrameDelayDelta]
 	add c
 	ld [wPlayerSpinInPlaceAnimFrameDelay], a
@@ -330,9 +333,9 @@ PlayerSpinWhileMovingUpOrDown: ; 70755 (1c:4755)
 	jr PlayerSpinWhileMovingUpOrDown
 
 RestoreFacingDirectionAndYScreenPos: ; 70772 (1c:4772)
-	ld a, [wcd4f]
+	ld a, [wSavedPlayerScreenY]
 	ld [wSpriteStateData1 + 4], a
-	ld a, [wcd50]
+	ld a, [wSavedPlayerFacingDirection]
 	ld [wSpriteStateData1 + 2], a
 	ret
 
@@ -378,11 +381,11 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	db INTERIOR, $55, 1 ; warp pad
 	db $FF
 
-Func_707b6: ; 707b6 (1c:47b6)
+FishingAnim: ; 707b6 (1c:47b6)
 	ld c, 10
 	call DelayFrames
 	ld hl, wd736
-	set 6, [hl]
+	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
 	ld hl, vNPCSprites
 	ld bc, (BANK(RedSprite) << 8) + $0c
@@ -393,55 +396,67 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld a, [wSpriteStateData1 + 2]
 	ld c, a
 	ld b, $0
-	ld hl, FishingRodGfxProperties
+	ld hl, FishingRodOAM
 	add hl, bc
 	ld de, wOAMBuffer + $9c
 	ld bc, $4
 	call CopyData
 	ld c, 100
 	call DelayFrames
-	ld a, [wWhichTrade]
+	ld a, [wRodResponse]
 	and a
 	ld hl, NoNibbleText
-	jr z, .asm_70836
+	jr z, .done
 	cp $2
 	ld hl, NothingHereText
-	jr z, .asm_70836
-	ld b, $a
-.asm_707fe
-	ld hl, wSpriteStateData1 + 4
-	call Func_70842
+	jr z, .done
+
+; there was a bite
+
+; shake the player's sprite vertically
+	ld b, 10
+.loop
+	ld hl, wSpriteStateData1 + 4 ; player's sprite Y screen position
+	call .ShakePlayerSprite
 	ld hl, wOAMBuffer + $9c
-	call Func_70842
+	call .ShakePlayerSprite
 	call Delay3
 	dec b
-	jr nz, .asm_707fe
-	ld a, [wSpriteStateData1 + 2]
-	cp $4
-	jr nz, .asm_7081c
+	jr nz, .loop
+
+; If the player is facing up, hide the fishing rod so it doesn't overlap with
+; the exclamation bubble that will be shown next.
+	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
+	jr nz, .skipHidingFishingRod
 	ld a, $a0
 	ld [wOAMBuffer + $9c], a
-.asm_7081c
-	ld hl, wcd4f
+
+.skipHidingFishingRod
+	ld hl, wEmotionBubbleSpriteIndex
 	xor a
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; player's sprite
+	ld [hl], a ; EXCLAMATION_BUBBLE
 	predef EmotionBubble
-	ld a, [wSpriteStateData1 + 2]
-	cp $4
-	jr nz, .asm_70833
+
+; If the player is facing up, unhide the fishing rod.
+	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	cp SPRITE_FACING_UP
+	jr nz, .skipUnhidingFishingRod
 	ld a, $44
 	ld [wOAMBuffer + $9c], a
-.asm_70833
+
+.skipUnhidingFishingRod
 	ld hl, ItsABiteText
-.asm_70836
+
+.done
 	call PrintText
 	ld hl, wd736
-	res 6, [hl]
+	res 6, [hl] ; unreserve the last 4 OAM entries
 	call LoadFontTilePatterns
 	ret
 
-Func_70842: ; 70842 (1c:4842)
+.ShakePlayerSprite
 	ld a, [hl]
 	xor $1
 	ld [hl], a
@@ -459,7 +474,7 @@ ItsABiteText: ; 70851 (1c:4851)
 	TX_FAR _ItsABiteText
 	db "@"
 
-FishingRodGfxProperties: ; 70856 (1c:4856)
+FishingRodOAM: ; 70856 (1c:4856)
 ; specifies how the fishing rod should be drawn on the screen
 ; first byte = screen y coordinate
 ; second byte = screen x coordinate

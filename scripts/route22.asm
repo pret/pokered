@@ -79,9 +79,9 @@ Route22Script0: ; 50f00 (14:4f00)
 
 .firstRivalBattle
 	ld a, $1
-	ld [wcd4f], a
-	xor a
-	ld [wcd50], a
+	ld [wEmotionBubbleSpriteIndex], a
+	xor a ; EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
 	predef EmotionBubble
 	ld a, [wWalkBikeSurfState]
 	and a
@@ -218,9 +218,9 @@ Route22Script3: ; 5102a (14:502a)
 
 Route22Script_5104e: ; 5104e (14:504e)
 	ld a, $2
-	ld [wcd4f], a
-	xor a
-	ld [wcd50], a
+	ld [wEmotionBubbleSpriteIndex], a
+	xor a ; EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
 	predef EmotionBubble
 	ld a, [wWalkBikeSurfState]
 	and a

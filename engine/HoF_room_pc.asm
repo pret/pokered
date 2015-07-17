@@ -6,10 +6,10 @@ HallOfFamePC: ; 7405c (1d:405c)
 	call DisableLCD
 	ld hl, vFont
 	ld bc, $800 / 2
-	call Func_74171
+	call ZeroMemory
 	ld hl, vChars2 + $600
 	ld bc, $200 / 2
-	call Func_74171
+	call ZeroMemory
 	ld hl, vChars2 + $7e0
 	ld bc, $10
 	ld a, $ff
@@ -30,12 +30,12 @@ HallOfFamePC: ; 7405c (1d:405c)
 	call DelayFrames
 	xor a
 	ld [wWhichTrade], a
-	ld [wTrainerEngageDistance], a
+	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
 
-Func_740ba: ; 740ba (1d:40ba)
+FadeInCreditsText: ; 740ba (1d:40ba)
 	ld hl, HoFGBPalettes
-	ld b, $4
+	ld b, 4
 .asm_740bf
 	ld a, [hli]
 	ld [rBGP], a
@@ -52,7 +52,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call FillMiddleOfScreenWithWhite
 
 	; display the next monster from CreditsMons
-	ld hl,wTrainerEngageDistance
+	ld hl,wNumCreditsMonsDisplayed
 	ld c,[hl] ; how many monsters have we displayed so far?
 	inc [hl]
 	ld b,0
@@ -65,62 +65,69 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,vBGMap0 + $c
-	call Func_74164
+	call CopyTileMapToVRAM
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call LoadScreenTilesFromBuffer1
 	ld hl,vBGMap0
-	call Func_74164
+	call CopyTileMapToVRAM
 	ld a,$A7
-	ld [$FF4B],a
+	ld [rWX],a
 	ld hl,vBGMap1
-	call Func_74164
+	call CopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
-	ld a,$FC
+	ld a,%11111100 ; make the mon a black silhouette 
 	ld [rBGP],a
+
+; scroll the mon left by one tile 7 times
 	ld bc,7
-.next
-	call Func_74140
+.scrollLoop1
+	call ScrollCreditsMonLeft
 	dec c
-	jr nz,.next
-	ld c,$14
-.next2
-	call Func_74140
-	ld a,[$FF4B]
+	jr nz,.scrollLoop1
+
+; scroll the mon left by one tile 20 times
+; This time, we have to move the window left too in order to hide the text that
+; is wrapping around to the right side of the screen. 
+	ld c,20
+.scrollLoop2
+	call ScrollCreditsMonLeft
+	ld a,[rWX]
 	sub 8
-	ld [$FF4B],a
+	ld [rWX],a
 	dec c
-	jr nz,.next2
+	jr nz,.scrollLoop2
+
 	xor a
 	ld [hWY],a
-	ld a,$C0
+	ld a,%11000000
 	ld [rBGP],a
 	ret
 
 INCLUDE "data/credit_mons.asm"
 
-Func_74140: ; 74140 (1d:4140)
+ScrollCreditsMonLeft: ; 74140 (1d:4140)
 	ld h, b
 	ld l, $20
-	call Func_74152
+	call ScrollCreditsMonLeft_SetSCX
 	ld h, $0
 	ld l, $70
-	call Func_74152
+	call ScrollCreditsMonLeft_SetSCX
 	ld a, b
 	add $8
 	ld b, a
 	ret
 
-Func_74152: ; 74152 (1d:4152)
-	ld a, [$ff44]
+ScrollCreditsMonLeft_SetSCX: ; 74152 (1d:4152)
+	ld a, [rLY]
 	cp l
-	jr nz, Func_74152
+	jr nz, ScrollCreditsMonLeft_SetSCX
 	ld a, h
 	ld [rSCX], a
-.asm_7415a
-	ld a, [$ff44]
+.loop
+	ld a, [rLY]
 	cp h
-	jr z, .asm_7415a
+	jr z, .loop
 	ret
 
 HoFGBPalettes: ; 74160 (1d:4160)
@@ -129,7 +136,7 @@ HoFGBPalettes: ; 74160 (1d:4160)
 	db %11100000
 	db %11110000
 
-Func_74164: ; 74164 (1d:4164)
+CopyTileMapToVRAM: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
@@ -138,14 +145,15 @@ Func_74164: ; 74164 (1d:4164)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-Func_74171: ; 74171 (1d:4171)
-	ld [hl], $0
+ZeroMemory: ; 74171 (1d:4171)
+; zero bc bytes at hl
+	ld [hl], 0
 	inc hl
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, Func_74171
+	jr nz, ZeroMemory
 	ret
 
 FillFourRowsWithBlack: ; 7417b (1d:417b)
@@ -162,26 +170,26 @@ FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 Credits: ; 7418e (1d:418e)
 	ld de, CreditsOrder
 	push de
-.asm_74192
+.nextCreditsScreen
 	pop de
 	hlCoord 9, 6
 	push hl
 	call FillMiddleOfScreenWithWhite
 	pop hl
-.asm_7419b
+.nextCreditsCommand
 	ld a, [de]
 	inc de
 	push de
 	cp $ff
-	jr z, .asm_741d5
+	jr z, .fadeInTextAndShowMon
 	cp $fe
-	jr z, .asm_741dc
+	jr z, .showTextAndShowMon
 	cp $fd
-	jr z, .asm_741e6
+	jr z, .fadeInText
 	cp $fc
-	jr z, .asm_741ed
+	jr z, .showText
 	cp $fb
-	jr z, .asm_741f4
+	jr z, .showCopyrightText
 	cp $fa
 	jr z, .showTheEnd
 	push hl
@@ -189,7 +197,7 @@ Credits: ; 7418e (1d:418e)
 	ld hl, CreditsTextPointers
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld e, [hl]
 	inc hl
@@ -205,32 +213,32 @@ Credits: ; 7418e (1d:418e)
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop de
-	jr .asm_7419b
-.asm_741d5
-	call Func_740ba
+	jr .nextCreditsCommand
+.fadeInTextAndShowMon
+	call FadeInCreditsText
 	ld c, 90
-	jr .asm_741de
-.asm_741dc
+	jr .next1
+.showTextAndShowMon
 	ld c, 110
-.asm_741de
+.next1
 	call DelayFrames
 	call DisplayCreditsMon
-	jr .asm_74192
-.asm_741e6
-	call Func_740ba
+	jr .nextCreditsScreen
+.fadeInText
+	call FadeInCreditsText
 	ld c, 120
-	jr .asm_741ef
-.asm_741ed
+	jr .next2
+.showText
 	ld c, 140
-.asm_741ef
+.next2
 	call DelayFrames
-	jr .asm_74192
-.asm_741f4
+	jr .nextCreditsScreen
+.showCopyrightText
 	push de
 	callba LoadCopyrightTiles
 	pop de
 	pop de
-	jr .asm_7419b
+	jr .nextCreditsCommand
 .showTheEnd
 	ld c, 16
 	call DelayFrames
@@ -246,7 +254,7 @@ Credits: ; 7418e (1d:418e)
 	hlCoord 4, 9
 	inc de
 	call PlaceString
-	jp Func_740ba
+	jp FadeInCreditsText
 
 TheEndTextString: ; 74229 (1d:4229)
 ; "T H E  E N D"

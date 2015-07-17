@@ -333,14 +333,14 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $1
-	ld [$ff9b], a
+	ld [hNPCPlayerRelativePosPerspective], a
 	ld a, $1
 	swap a
-	ld [$ff95], a
+	ld [hNPCSpriteOffset], a
 	predef CalcPositionOfPlayerRelativeToNPC
-	ld a, [$ff95]
+	ld a, [hNPCPlayerYDistance]
 	dec a
-	ld [$ff95], a
+	ld [hNPCPlayerYDistance], a
 	predef FindPathToPlayer
 	ld de, wNPCMovementDirections2
 	ld a, $1
@@ -898,9 +898,9 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	call PrintText
 	ld hl, OaksLabReceivedMonText
 	call PrintText
-	xor a
-	ld [wcc49], a
-	ld a, $5
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
+	ld a, 5
 	ld [W_CURENEMYLVL], a
 	ld a, [wcf91]
 	ld [wd11e], a

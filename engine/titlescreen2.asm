@@ -69,7 +69,7 @@ _TitleScroll: ; 3726a (d:726a)
 
 .ScrollBetween ; 37292 (d:7292)
 .wait
-	ld a, [$ff44] ; rLY
+	ld a, [rLY] ; rLY
 	cp l
 	jr nz, .wait
 
@@ -77,7 +77,7 @@ _TitleScroll: ; 3726a (d:726a)
 	ld [rSCX], a
 
 .wait2
-	ld a, [$ff44] ; rLY
+	ld a, [rLY] ; rLY
 	cp h
 	jr z, .wait2
 	ret

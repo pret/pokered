@@ -243,7 +243,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; loads base stats to W_MONHDEXNUM
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
-; [wcc49] = source
+; [wMonDataLocation] = source
 ; 00: player's party
 ; 01: enemy's party
 ; 02: current box
@@ -376,15 +376,15 @@ PartyMenuInit:: ; 1420 (0:1420)
 	call LoadHpBarAndStatusTilePatterns
 	ld hl, wd730
 	set 6, [hl] ; turn off letter printing delay
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wTopMenuItemY
 	inc a
 	ld [hli], a ; top menu item Y
 	xor a
 	ld [hli], a ; top menu item X
-	ld a, [wcc2b]
+	ld a, [wPartyAndBillsPCSavedMenuItem]
 	push af
 	ld [hli], a ; current menu item ID
 	inc hl
@@ -420,7 +420,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	xor a
 	ld [wd09b],a
 	ld a,[wCurrentMenuItem]
-	ld [wcc2b],a
+	ld [wPartyAndBillsPCSavedMenuItem],a
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
 	ld a,[wMenuItemToSwap]
@@ -1055,7 +1055,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	callba DisplayTextIDInit ; initialization
-	ld hl,wcf11
+	ld hl,wTextPredefFlag
 	bit 0,[hl]
 	res 0,[hl]
 	jr nz,.skipSwitchToMapBank
@@ -1225,7 +1225,7 @@ LoadItemList:: ; 2a5a (0:2a5a)
 	ld [wItemListPointer],a
 	ld a,l
 	ld [wItemListPointer + 1],a
-	ld de,wStringBuffer2 + 11
+	ld de,wItemList
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1372,7 +1372,7 @@ AddItemToInventory:: ; 2bcf (0:2bcf)
 
 ; INPUT:
 ; [wListMenuID] = list menu ID
-; [wList] = address of the list (2 bytes)
+; [wListPointer] = address of the list (2 bytes)
 DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
@@ -1392,9 +1392,9 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wListCount],a
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a ; hl = address of the list
 	ld a,[hl] ; the first byte is the number of entries in the list
 	ld [wListCount],a
@@ -1488,9 +1488,9 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 ; if it's an item menu
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a
 	inc hl ; hl = beginning of list entries
 	ld b,0
@@ -1519,7 +1519,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	jr .storeChosenEntry
 .pokemonList
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1710,9 +1710,9 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld b,$09
 	ld c,$0e
 	call ClearScreenArea
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld e,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld d,a
 	inc de ; de = beginning of list entries
 	ld a,[wListScrollOffset]
@@ -1756,7 +1756,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 .pokemonPCMenu
 	push hl
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -1801,13 +1801,13 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	push af
 	push hl
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
-	ld a,$00
+	ld a,PLAYER_PARTY_DATA
 	jr z,.next
-	ld a,$02
+	ld a,BOX_DATA
 .next
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	ld hl,wWhichPokemon
 	ld a,[hl]
 	ld b,a
@@ -1818,7 +1818,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	add b
 	ld [hl],a
 	call LoadMonData ; load pokemon info
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z,.skipCopyingLevel
 .copyLevel
@@ -1914,7 +1914,7 @@ GetMonName:: ; 2f9e (0:2f9e)
 	push de
 	ld bc,10
 	call CopyData
-	ld hl,wcd77
+	ld hl,wcd6d + 10
 	ld [hl], "@"
 	pop de
 	pop af
@@ -2090,7 +2090,7 @@ DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wcd6a] = success
+; [wActionResultOrTookBattleTurn] = success
 ; 00: unsucessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
@@ -2195,7 +2195,7 @@ RunNPCMovementScript:: ; 310e (0:310e)
 	ld [MBC1RomBank], a
 	ret
 .NPCMovementScriptPointerTables
-	dw ProfOakMovementScriptPointerTable
+	dw PalletMovementScriptPointerTable
 	dw PewterMuseumGuyMovementScriptPointerTable
 	dw PewterGymGuyMovementScriptPointerTable
 .playerStepOutFromDoor
@@ -2350,9 +2350,9 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 .trainerEngaging
 	ld hl, W_FLAGS_D733
 	set 3, [hl]
-	ld [wcd4f], a
-	xor a
-	ld [wcd50], a
+	ld [wEmotionBubbleSpriteIndex], a
+	xor a ; EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
 	predef EmotionBubble
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -2751,7 +2751,7 @@ SetSpriteImageIndexAfterSettingFacingDirection:: ; 34b9 (0:34b9)
 ; INPUT:
 ; hl = address of array
 ; OUTPUT:
-; [wWhichTrade] = if there is match, the matching array index
+; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 	ld a,[W_YCOORD]
@@ -2762,13 +2762,13 @@ ArePlayerCoordsInArray:: ; 34bf (0:34bf)
 
 CheckCoords:: ; 34c7 (0:34c7)
 	xor a
-	ld [wWhichTrade],a
+	ld [wCoordIndex],a
 .loop
 	ld a,[hli]
 	cp a,$ff ; reached terminator?
 	jr z,.notInArray
 	push hl
-	ld hl,wWhichTrade
+	ld hl,wCoordIndex
 	inc [hl]
 	pop hl
 .compareYCoord
@@ -2792,7 +2792,7 @@ CheckCoords:: ; 34c7 (0:34c7)
 ; hl = address of array
 ; [H_SPRITEINDEX] = index of boulder sprite
 ; OUTPUT:
-; [wWhichTrade] = if there is match, the matching array index
+; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords:: ; 34e4 (0:34e4)
 	push hl
@@ -2960,17 +2960,17 @@ HasEnoughCoins::
 BankswitchHome:: ; 35bc (0:35bc)
 ; switches to bank # in a
 ; Only use this when in the home bank!
-	ld [wcf09],a
+	ld [wBankswitchHomeTemp],a
 	ld a,[H_LOADEDROMBANK]
-	ld [wcf08],a
-	ld a,[wcf09]
+	ld [wBankswitchHomeSavedROMBank],a
+	ld a,[wBankswitchHomeTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
 
 BankswitchBack:: ; 35cd (0:35cd)
 ; returns from BankswitchHome
-	ld a,[wcf08]
+	ld a,[wBankswitchHomeSavedROMBank]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
@@ -3043,8 +3043,8 @@ CalcDifference:: ; 3633 (0:3633)
 	ret
 
 MoveSprite:: ; 363a (0:363a)
-; move the sprite [$FF8C] with the movement pointed to by de
-; actually only copies the movement data to wcc5b for later
+; move the sprite [H_SPRITEINDEX] with the movement pointed to by de
+; actually only copies the movement data to wNPCMovementDirections for later
 	call SetSpriteMovementBytesToFF
 MoveSprite_:: ; 363d (0:363d)
 	push hl
@@ -3052,7 +3052,7 @@ MoveSprite_:: ; 363d (0:363d)
 	call GetSpriteMovementByte1Pointer
 	xor a
 	ld [hl],a
-	ld hl,wcc5b
+	ld hl,wNPCMovementDirections
 	ld c,0
 
 .loop
@@ -3078,7 +3078,7 @@ MoveSprite_:: ; 363d (0:363d)
 	ld [wWastedByteCD3A],a
 	ret
 
-; divides [$ffe5] by [$ffe6] and stores the quotient in [$ffe7]
+; divides [hDividend2] by [hDivisor2] and stores the quotient in [hQuotient2]
 DivideBytes:: ; 366b (0:366b)
 	push hl
 	ld hl, $ffe7
@@ -3538,18 +3538,18 @@ Divide:: ; 38b9 (0:38b9)
 
 ; This function is used to wait a short period after printing a letter to the
 ; screen unless the player presses the A/B button or the delay is turned off
-; through the [wd730] or [wd358] flags.
+; through the [wd730] or [wLetterPrintingDelayFlags] flags.
 PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[wd730]
 	bit 6,a
 	ret nz
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	bit 1,a
 	ret z
 	push hl
 	push de
 	push bc
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	bit 0,a
 	jr z,.waitOneFrame
 	ld a,[W_OPTIONS]
@@ -4586,8 +4586,8 @@ GivePokemon::
 	ld [wcf91], a
 	ld a, c
 	ld [W_CURENEMYLVL], a
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld b, BANK(_GivePokemon)
 	ld hl, _GivePokemon
 	jp Bankswitch
@@ -4656,7 +4656,7 @@ PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	ld [H_DOWNARROWBLINKCNT2], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
-	ld hl, wcf11
+	ld hl, wTextPredefFlag
 	set 0, [hl]
 	call DisplayTextID
 

@@ -1,5 +1,5 @@
 Func_79e96: ; 79e96 (1e:5e96)
-	ld a, [wcd4d]
+	ld a, [wCutTile]
 	cp $52
 	jr z, .asm_79ec8
 	ld c, $8

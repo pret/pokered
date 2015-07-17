@@ -225,7 +225,7 @@ StartBattle: ; 3c11e (f:411e)
 	xor a
 	ld [wPartyGainExpFlags], a
 	ld [wPartyFoughtCurrentEnemyFlags], a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	inc a
 	ld [wd11d], a
 	ld hl, wEnemyMon1HP
@@ -260,7 +260,7 @@ StartBattle: ; 3c11e (f:411e)
 .displaySafariZoneBattleMenu
 	call DisplayBattleMenu
 	ret c ; return if the player ran from battle
-	ld a, [wcd6a]
+	ld a, [wActionResultOrTookBattleTurn]
 	and a ; was the item used successfully?
 	jr z, .displaySafariZoneBattleMenu ; if not, display the menu again; XXX does this ever jump?
 	ld a, [W_NUMSAFARIBALLS]
@@ -415,8 +415,8 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld [wPlayerSelectedMove], a
 	jr .selectEnemyMove
 .selectPlayerMove
-	ld a, [wcd6a]
-	and a
+	ld a, [wActionResultOrTookBattleTurn]
+	and a ; has the player already used the turn (e.g. by using an item, trying to run or switching pokemon)
 	jr nz, .selectEnemyMove
 	ld [wMoveMenuType], a
 	inc a
@@ -816,11 +816,11 @@ HandleEnemyMonFainted: ; 3c525 (f:4525)
 	call ChooseNextMon
 .skipReplacingBattleMon
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	call ReplaceFaintedEnemyMon
 	jp z, EnemyRan
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	jp MainInBattleLoop
 
 FaintEnemyPokemon: ; 0x3c567
@@ -990,7 +990,7 @@ ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	call EnemySendOut
 	xor a
 	ld [W_ENEMYMOVENUM], a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld [wAILayer2Encouragement], a
 	inc a ; reset Z flag
 	ret
@@ -1075,11 +1075,11 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 	jp nz, MainInBattleLoop ; if the enemy mon has more than 0 HP, go back to battle loop
 ; the enemy mon has 0 HP
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	call ReplaceFaintedEnemyMon
 	jp z, EnemyRan ; if enemy ran from battle rather than sending out another mon, jump
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	jp MainInBattleLoop
 
 ; resets flags, slides mon's pic down, plays cry, and prints fainted message
@@ -1177,11 +1177,11 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
 	inc a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	call LinkBattleExchangeData
 .notLinkBattle
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	call ClearSprites
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
@@ -1646,7 +1646,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	                  ; plus 30 times the number of attempts, the player can escape
 ; can't escape
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a ; you lose your turn when you can't escape
 	ld hl, CantEscapeText
 	jr .printCantEscapeOrNoRunningText
 .trainerBattle
@@ -1666,7 +1666,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 ; link battle
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld a, $f
 	ld [wPlayerMoveListIndex], a
 	call LinkBattleExchangeData
@@ -1809,7 +1809,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	predef LoadMonBackPic
 	xor a
 	ld [$ffe1], a
-	ld hl, wcc2d
+	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
 	ld [wBoostExpByExpAll], a
@@ -1842,7 +1842,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1
 
-; show 2 stages of the player getting smaller before disappearing
+; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	hlCoord 1, 5
 	ld bc, $707
@@ -1850,19 +1850,19 @@ AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	hlCoord 3, 7
 	ld bc, $505
 	xor a
-	ld [wcd6c], a
+	ld [wDownscaledMonSize], a
 	ld [H_DOWNARROWBLINKCNT1], a
-	predef CopyGrowingMonTiles
+	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
 	call .clearScreenArea
 	hlCoord 4, 9
 	ld bc, $303
 	ld a, $1
-	ld [wcd6c], a
+	ld [wDownscaledMonSize], a
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a
-	predef CopyGrowingMonTiles
+	predef CopyDownscaledMonTiles
 	call Delay3
 	call .clearScreenArea
 	ld a, $4c
@@ -2123,7 +2123,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .oldManName
 	db "OLD MAN@"
 .handleBattleMenuInput
-	ld a, [wcc2d]
+	ld a, [wBattleAndStartSavedMenuItem]
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	sub 2 ; check if the cursor is in the left column
@@ -2206,7 +2206,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	ld a, [W_BATTLETYPE]
 	cp $2 ; is it a Safari battle?
 	ld a, [wCurrentMenuItem]
-	ld [wcc2d], a
+	ld [wBattleAndStartSavedMenuItem], a
 	jr z, .handleMenuSelection
 ; not Safari battle
 ; swap the IDs of the item menu and party menu (this is probably because they swapped the positions
@@ -2276,9 +2276,9 @@ BagWasSelected:
 	jr nz, DisplayPlayerBag ; no, it is a normal battle
 	ld hl, OldManItemList
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 	jr DisplayBagMenu
 
 OldManItemList:
@@ -2290,20 +2290,20 @@ DisplayPlayerBag:
 	; get the pointer to player's bag when in a normal battle
 	ld hl, wNumBagItems
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 
 DisplayBagMenu:
 	xor a
 	ld [wPrintItemPrices], a
 	ld a, ITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [wcc2c]
+	ld a, [wBagSavedMenuItem]
 	ld [wCurrentMenuItem], a
 	call DisplayListMenuID
 	ld a, [wCurrentMenuItem]
-	ld [wcc2c], a
+	ld [wBagSavedMenuItem], a
 	ld a, $0
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuItemToSwap], a
@@ -2326,7 +2326,7 @@ UseBagItem:
 	cp $2 ; is it a safari battle?
 	jr z, .checkIfMonCaptured
 
-	ld a, [wcd6a]
+	ld a, [wActionResultOrTookBattleTurn]
 	and a ; was the item used successfully?
 	jp z, BagWasSelected ; if not, go back to the bag menu
 
@@ -2435,8 +2435,8 @@ PartyMenuOrRockOrRun:
 	and a ; was Switch selected?
 	jr z, .switchMon ; if so, jump
 ; Stats was selected
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld hl, wPartyMon1
 	call ClearSprites
 ; display the two status screens
@@ -2479,7 +2479,7 @@ PartyMenuOrRockOrRun:
 	call HasMonFainted
 	jp z, .partyMonDeselected ; can't switch to fainted mon
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	call GBPalWhiteOut
 	call ClearSprites
 	call LoadHudTilePatterns
@@ -2525,9 +2525,9 @@ BattleMenu_RunWasSelected: ; 3d1fa (f:51fa)
 	ld a, $0
 	ld [wd11f], a
 	ret c
-	ld a, [wcd6a]
+	ld a, [wActionResultOrTookBattleTurn]
 	and a
-	ret nz
+	ret nz ; return if the player couldn't escape
 	jp DisplayBattleMenu
 
 MoveSelectionMenu: ; 3d219 (f:5219)
@@ -2604,9 +2604,9 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, $7
 .menuset
 	ld hl, wTopMenuItemY
-	ld [hli], a
+	ld [hli], a ; wTopMenuItemY
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; wTopMenuItemX
 	ld a, [wMoveMenuType]
 	cp $1
 	jr z, .selectedmoveknown
@@ -2615,30 +2615,30 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, [wPlayerMoveListIndex]
 	inc a
 .selectedmoveknown
-	ld [hli], a
+	ld [hli], a ; wCurrentMenuItem
 	inc hl ; wTileBehindCursor untouched
-	ld a, [wcd6c]
+	ld a, [wNumMovesMinusOne]
 	inc a
 	inc a
-	ld [hli], a
+	ld [hli], a ; wMaxMenuItem
 	ld a, [wMoveMenuType]
 	dec a
-	ld b, $c1 ; can't use B
+	ld b, D_UP | D_DOWN | A_BUTTON
 	jr z, .matchedkeyspicked
 	dec a
-	ld b, $c3
+	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON
 	jr z, .matchedkeyspicked
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
 	ld a, [W_FLAGS_D733]
 	bit 0, a
-	ld b, $c7
+	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
 	ld b, $ff
 .matchedkeyspicked
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; wMenuWatchedKeys
 	ld a, [wMoveMenuType]
 	cp $1
 	jr z, .movelistindex1
@@ -2759,7 +2759,7 @@ CursorUp: ; 3d3c9 (f:53c9)
 	and a
 	jp nz, SelectMenuItem
 	call EraseMenuCursor
-	ld a, [wcd6c]
+	ld a, [wNumMovesMinusOne]
 	inc a
 	ld [wCurrentMenuItem], a
 	jp SelectMenuItem
@@ -2767,7 +2767,7 @@ CursorUp: ; 3d3c9 (f:53c9)
 CursorDown: ; 3d3dd (f:53dd)
 	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [wcd6c]
+	ld a, [wNumMovesMinusOne]
 	inc a
 	inc a
 	cp b
@@ -2935,8 +2935,8 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	                            ; isn't actually selected (just pointed to by the cursor)
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
-	ld a, $4
-	ld [wcc49], a
+	ld a, BATTLE_MON_DATA
+	ld [wMonDataLocation], a
 	callab GetMaxPP
 	ld hl, wCurrentMenuItem
 	ld c, [hl]
@@ -2983,7 +2983,7 @@ TypeText: ; 3d55f (f:555f)
 
 SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [wLinkState]
-	sub $4
+	sub LINK_STATE_BATTLING
 	jr nz, .noLinkBattle
 ; link battle
 	call SaveScreenTilesToBuffer1
@@ -3079,46 +3079,47 @@ LinkBattleExchangeData: ; 3d605 (f:5605)
 	ld [wSerialExchangeNybbleReceiveData], a
 	ld a, [wPlayerMoveListIndex]
 	cp $f ; is the player running from battle?
-	jr z, .asm_3d630
-	ld a, [wcd6a]
-	and a
-	jr nz, .asm_3d629
+	jr z, .doExchange
+	ld a, [wActionResultOrTookBattleTurn]
+	and a ; is the player switching in another mon?
+	jr nz, .switching
+; the player used a move
 	ld a, [wPlayerSelectedMove]
 	cp STRUGGLE
 	ld b, $e
-	jr z, .asm_3d62f
+	jr z, .next
 	dec b
 	inc a
-	jr z, .asm_3d62f
+	jr z, .next
 	ld a, [wPlayerMoveListIndex]
-	jr .asm_3d630
-.asm_3d629
+	jr .doExchange
+.switching
 	ld a, [wWhichPokemon]
-	add $4
+	add 4
 	ld b, a
-.asm_3d62f
+.next
 	ld a, b
-.asm_3d630
+.doExchange
 	ld [wSerialExchangeNybbleSendData], a
 	callab PrintWaitingText
-.asm_3d63b
+.syncLoop1
 	call Serial_ExchangeNybble
 	call DelayFrame
 	ld a, [wSerialExchangeNybbleReceiveData]
 	inc a
-	jr z, .asm_3d63b
-	ld b, $a
-.asm_3d649
+	jr z, .syncLoop1
+	ld b, 10
+.syncLoop2
 	call DelayFrame
 	call Serial_ExchangeNybble
 	dec b
-	jr nz, .asm_3d649
-	ld b, $a
-.asm_3d654
+	jr nz, .syncLoop2
+	ld b, 10
+.syncLoop3
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
-	jr nz, .asm_3d654
+	jr nz, .syncLoop3
 	ret
 
 ExecutePlayerMove: ; 3d65e (f:565e)
@@ -3133,8 +3134,8 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	ld [wMoveDidntMiss], a
 	ld a, $a
 	ld [wDamageMultipliers], a
-	ld a, [wcd6a]
-	and a
+	ld a, [wActionResultOrTookBattleTurn]
+	and a ; has the player already used the turn (e.g. by using an item, trying to run or switching pokemon)
 	jp nz, ExecutePlayerMoveDone
 	call PrintGhostText
 	jp z, ExecutePlayerMoveDone
@@ -3324,7 +3325,7 @@ MultiHitText: ; 3d805 (f:5805)
 
 ExecutePlayerMoveDone: ; 3d80a (f:580a)
 	xor a
-	ld [wcd6a],a
+	ld [wActionResultOrTookBattleTurn],a
 	ld b,1
 	ret
 
@@ -6856,7 +6857,7 @@ DetermineWildOpponent: ; 3ef23 (f:6f23)
 InitBattleCommon: ; 3ef3d (f:6f3d)
 	ld a, [wMapPalOffset]
 	push af
-	ld hl, wd358
+	ld hl, wLetterPrintingDelayFlags
 	ld a, [hl]
 	push af
 	res 1, [hl]
@@ -6963,7 +6964,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	call StartBattle
 	callab EndOfBattle
 	pop af
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	pop af
 	ld [wMapPalOffset], a
 	ld a, [wd0d4]
@@ -6998,7 +6999,7 @@ ResetCryModifiers: ; 3f069 (f:7069)
 	ld [wc0f2], a
 	jp PlaySound
 
-; animtes the mon "growing" out of the pokeball
+; animates the mon "growing" out of the pokeball
 AnimateSendingOutMon: ; 3f073 (f:7073)
 	ld a, [wPredefRegisters]
 	ld h, a
@@ -7016,17 +7017,17 @@ AnimateSendingOutMon: ; 3f073 (f:7073)
 	ld bc, -41
 	add hl, bc
 	ld a, $1
-	ld [wcd6c], a
+	ld [wDownscaledMonSize], a
 	ld bc, $303
-	predef CopyGrowingMonTiles
+	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
 	ld bc, -41
 	add hl, bc
 	xor a
-	ld [wcd6c], a
+	ld [wDownscaledMonSize], a
 	ld bc, $505
-	predef CopyGrowingMonTiles
+	predef CopyDownscaledMonTiles
 	ld c, 5
 	call DelayFrames
 	ld bc, -41
@@ -8242,14 +8243,14 @@ ChargeEffect: ; 3f88c (f:788c)
 	ld a, b
 	call PlayBattleAnimation
 	ld a, [de]
-	ld [wWhichTrade], a
+	ld [wChargeMoveNum], a
 	ld hl, ChargeMoveEffectText
 	jp PrintText
 
 ChargeMoveEffectText: ; 3f8c8 (f:78c8)
 	TX_FAR _ChargeMoveEffectText
 	TX_ASM
-	ld a, [wWhichTrade]
+	ld a, [wChargeMoveNum]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText
 	jr z, .asm_3f8f8
