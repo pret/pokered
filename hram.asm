@@ -201,6 +201,9 @@ hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
+hVendingMachineItem  EQU $FFDB
+hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
+
 hNewPartyLength EQU $FFE4
 
 hDividend2 EQU $FFE5

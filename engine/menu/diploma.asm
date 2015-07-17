@@ -36,19 +36,23 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	hlCoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
-	callba Func_44dd
+	callba DrawPlayerCharacter
+
+; Move the player 33 pixels right and set the priority bit so he appears
+; behind the background layer.
 	ld hl, wOAMBuffer + $01
 	ld bc, $8028
-.asm_5673e
-	ld a, [hl]
-	add $21
+.adjustPlayerGfxLoop
+	ld a, [hl] ; X
+	add 33
 	ld [hli], a
 	inc hl
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; attributes
 	inc hl
 	dec c
-	jr nz, .asm_5673e
+	jr nz, .adjustPlayerGfxLoop
+
 	call EnableLCD
 	callba LoadTrainerInfoTextBoxTiles
 	ld b, $8
@@ -65,15 +69,17 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call Delay3
 	jp GBPalNormal
 
-Func_56777: ; 56777 (15:6777)
+UnusedPlayerNameLengthFunc: ; 56777 (15:6777)
+; Unused function that does a calculation involving the length of the player's
+; name.
 	ld hl, wPlayerName
 	ld bc, $ff00
-.asm_5677d
+.loop
 	ld a, [hli]
-	cp $50
+	cp "@"
 	ret z
 	dec c
-	jr .asm_5677d
+	jr .loop
 
 DiplomaTextPointersAndCoords: ; 56784 (15:6784)
 	dw DiplomaText

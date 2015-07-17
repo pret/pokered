@@ -87,9 +87,9 @@ TitleBallYTable: ; 372a0 (d:72a0)
 ; This is really two 0-terminated lists. Initiated with an index of 1.
 	db 0, $71, $6f, $6e, $6d, $6c, $6d, $6e, $6f, $71, $74, 0
 
-Func_372ac: ; 372ac (d:72ac)
+TitleScreenAnimateBallIfStarterOut: ; 372ac (d:72ac)
 ; Animate the TitleBall if a starter just got scrolled out.
-	ld a, [wWhichTrade]
+	ld a, [wTitleMonSpecies]
 	cp STARTER1
 	jr z, .ok
 	cp STARTER2

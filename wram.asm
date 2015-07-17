@@ -634,6 +634,10 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wTitleMonSpecies:: ; cd3d
+
+wPlayerCharacterOAMTile:: ; cd3d
+
 wMoveDownSmallStarsOAMCount:: ; cd3d
 ; the number of small stars OAM entries to move down
 
