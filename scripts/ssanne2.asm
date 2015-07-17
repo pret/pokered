@@ -57,13 +57,18 @@ SSAnne2Script0: ; 613be (18:53be)
 	ret
 
 MovementData_6140c: ; 6140c (18:540c)
-	db $00
+	db NPC_MOVEMENT_DOWN
 
 MovementData_6140d: ; 6140d (18:540d)
-	db $00,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 CoordsData_61411: ; 61411 (18:5411)
-	db $08,$24,$08,$25,$FF
+	db $08,$24
+	db $08,$25
+	db $FF
 
 SSAnne2Script_61416: ; 61416 (18:5416)
 	ld a, [W_XCOORD]
@@ -71,7 +76,7 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	jr nz, .asm_61426
 	ld a, $2
 	ld [wd528], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	jr .asm_61427
 .asm_61426
 	xor a
@@ -149,10 +154,15 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ret
 
 MovementData_614b7: ; 614b7 (18:54b7)
-	db $C0,$00
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
 
 MovementData_614b9: ; 614b9 (18:54b9)
-	db $00,$00,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 SSAnne2Script3: ; 614be (18:54be)
 	ld a, [wd730]

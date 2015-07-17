@@ -111,10 +111,10 @@ LanceScript_5a35b: ; 5a35b (16:635b)
 	ret
 
 RLEList_5a379: ; 5a379 (16:6379)
-	db $40, $0C
-	db $20, $0C
-	db $80, $07
-	db $20, $06
+	db D_UP, $0C
+	db D_LEFT, $0C
+	db D_DOWN, $07
+	db D_LEFT, $06
 	db $FF
 
 LanceScript3: ; 5a382 (16:6382)

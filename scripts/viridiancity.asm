@@ -120,7 +120,7 @@ ViridianCityScript_190cf: ; 190cf (6:50cf)
 	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $80
+	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpriteStateData1 + 9], a

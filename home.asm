@@ -3064,7 +3064,7 @@ MoveSprite_:: ; 363d (0:363d)
 	jr nz,.loop
 
 	ld a,c
-	ld [wcf0f],a ; number of steps taken
+	ld [wNPCNumScriptedSteps],a ; number of steps taken
 
 	pop bc
 	ld hl,wd730

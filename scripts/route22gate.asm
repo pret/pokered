@@ -35,7 +35,7 @@ Route22GateScriptCoords: ; 1e6b5 (7:66b5)
 Route22GateScript_1e6ba: ; 1e6ba (7:66ba)
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $80
+	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a

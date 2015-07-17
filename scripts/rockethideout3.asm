@@ -72,67 +72,63 @@ RocketHideout3ArrowTilePlayerMovement: ; 4526b (11:526b)
 	db $FF
 
 ;format: direction, count
-;right:	$10
-;left:	$20
-;up:	$40
-;down:	$80
 ;each list is read starting from the $FF and working backwards
 RocketHideout3ArrowMovement1: ; 452ac (11:52ac)
-	db $10,$04
-	db $40,$04
-	db $10,$04
+	db D_RIGHT,$04
+	db D_UP,$04
+	db D_RIGHT,$04
 	db $FF
 
 RocketHideout3ArrowMovement2: ; 452b3 (11:52b3)
-	db $80,$04
-	db $10,$04
+	db D_DOWN,$04
+	db D_RIGHT,$04
 	db $FF
 
 RocketHideout3ArrowMovement3: ; 452b8 (11:52b8)
-	db $20,$02
+	db D_LEFT,$02
 	db $FF
 
 RocketHideout3ArrowMovement4: ; 452bb (11:52bb)
-	db $10,$04
-	db $40,$02
-	db $10,$02
+	db D_RIGHT,$04
+	db D_UP,$02
+	db D_RIGHT,$02
 	db $FF
 
 RocketHideout3ArrowMovement5: ; 452c2 (11:52c2)
-	db $10,$04
-	db $40,$02
-	db $10,$02
-	db $40,$03
+	db D_RIGHT,$04
+	db D_UP,$02
+	db D_RIGHT,$02
+	db D_UP,$03
 	db $FF
 
 RocketHideout3ArrowMovement6: ; 452cb (11:52cb)
-	db $10,$04
+	db D_RIGHT,$04
 	db $FF
 
 RocketHideout3ArrowMovement7: ; 452ce (11:52ce)
-	db $10,$02
+	db D_RIGHT,$02
 	db $FF
 
 RocketHideout3ArrowMovement8: ; 452d1 (11:52d1)
-	db $10,$04
-	db $40,$02
+	db D_RIGHT,$04
+	db D_UP,$02
 	db $FF
 
 RocketHideout3ArrowMovement9: ; 452d6 (11:52d6)
-	db $10,$04
-	db $40,$04
+	db D_RIGHT,$04
+	db D_UP,$04
 	db $FF
 
 RocketHideout3ArrowMovement10: ; 452db (11:52db)
-	db $80,$04
+	db D_DOWN,$04
 	db $FF
 
 RocketHideout3ArrowMovement11: ; 452de (11:52de)
-	db $40,$02
+	db D_UP,$02
 	db $FF
 
 RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
-	db $40,$01
+	db D_UP,$01
 	db $FF
 
 RocketHideout3Script3: ; 452e4 (11:452e4)

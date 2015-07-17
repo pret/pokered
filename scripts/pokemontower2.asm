@@ -34,12 +34,12 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld a, [wWhichTrade]
 	cp $1
 	ld a, $8
-	ld b, $0
+	ld b, SPRITE_FACING_DOWN
 	jr nz, .asm_60544
 	ld hl, wd764
 	set 6, [hl]
 	ld a, $2
-	ld b, $c
+	ld b, SPRITE_FACING_RIGHT
 .asm_60544
 	ld [wd528], a
 	ld a, $1
@@ -90,10 +90,26 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ret
 
 MovementData_605a9: ; 605a9 (18:45a9)
-	db $C0,$00,$00,$C0,$00,$00,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 MovementData_605b2: ; 605b2 (18:45b2)
-	db $00,$00,$C0,$C0,$C0,$C0,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 PokemonTower2Script2: ; 605bb (18:45bb)
 	ld a, [wd730]

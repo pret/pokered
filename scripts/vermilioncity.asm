@@ -60,7 +60,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	and a
 	ret nz
 .asm_19810
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -84,7 +84,7 @@ VermilionCityScript4: ; 19826 (6:5826)
 VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wccd4], a
 	ld a, $2

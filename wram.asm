@@ -507,7 +507,7 @@ wPartyFoughtCurrentEnemyFlags:: ; ccf5
 wccf6:: ds 1 ; used in some hp bar thing
 wPlayerMonMinimized:: ds 1 ; ccf7
 
-ds 13
+	ds 13
 
 wLuckySlotHiddenObjectIndex:: ; cd05
 
@@ -517,7 +517,7 @@ wEnemyNumHits:: ; cd05
 wEnemyBideAccumulatedDamage:: ; cd05
 ; the amount of damage accumulated by the enemy while biding (2 bytes)
 
-ds 10
+	ds 10
 
 wInGameTradeGiveMonSpecies:: ; cd0f
 
@@ -1013,7 +1013,7 @@ wTilePlayerStandingOn:: ; cf0e
 ; used in CheckForTilePairCollisions2 to store the tile the player is on
 	ds 1
 
-wcf0f:: ds 1 ; used with moving overworld sprites
+wNPCNumScriptedSteps:: ds 1 ; cf0f
 
 wNPCMovementScriptFunctionNum:: ; cf10
 ; which script function within the pointer table indicated by
@@ -1064,7 +1064,7 @@ wcf37:: ds 20 ; used with palletes too (used for Party Menu)
 wcf4b:: ds 1 ; storage buffer for various strings
 wcf4c:: ds 1 ; used with displaying EXP value, probably also overflowed with wcf4b
 wGainBoostedExp:: ; cf4d
-    ds 1
+	ds 1
 	ds 17
 
 wGymCityName:: ; cf5f
@@ -1628,10 +1628,10 @@ W_MONHPADDING:: ; d0d7
 W_DAMAGE:: ; d0d7
 	ds 2
 
-ds 2
+	ds 2
 
 wRepelRemainingSteps:: ; d0db
-    ds 1
+	ds 1
 
 wMoves:: ; d0dc
 ; list of moves for FormatMovesString

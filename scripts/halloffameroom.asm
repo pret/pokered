@@ -73,7 +73,7 @@ HallofFameRoomScript0: ; 5a50d (16:650d)
 	ret
 
 RLEMovement5a528: ; 5a528 (16:6528)
-	db $40,$5
+	db D_UP,$5
 	db $ff
 
 HallofFameRoomScript1: ; 5a52b (16:652b)
@@ -85,7 +85,7 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld a, $1
 	ld [$ff8c], a
 	call SetSpriteMovementBytesToFF
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3

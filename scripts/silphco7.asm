@@ -160,7 +160,11 @@ CoordsData_51c78: ; 51c78 (14:5c78)
 	db $FF
 
 MovementData_51c7d: ; 51c7d (14:5c7d)
-	db $40,$40,$40,$40,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db $FF
 
 SilphCo7Script3: ; 51c82 (14:5c82)
 	ld a, [wd730]
@@ -232,10 +236,19 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	jp SilphCo7Text_51c10
 
 MovementData_51d1a: ; 51d1a (14:5d1a)
-	db $C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 MovementData_51d1d: ; 51d1d (14:5d1d)
-	db $80,$40,$40,$C0,$C0,$C0,$00,$FF
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 SilphCo7Script5: ; 51d25 (14:5d25)
 	ld a, [wd730]

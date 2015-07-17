@@ -80,45 +80,41 @@ ViridianGymArrowTilePlayerMovement: ; 74916 (1d:4916)
 	db $FF
 
 ;format: direction, count
-;right:	$10
-;left:	$20
-;up:	$40
-;down:	$80
 ViridianGymArrowMovement1: ; 74947 (1d:4947)
-	db $40,$09,$FF
+	db D_UP,$09,$FF
 
 ViridianGymArrowMovement2: ; 7494a (1d:494a)
-	db $20,$08,$FF
+	db D_LEFT,$08,$FF
 
 ViridianGymArrowMovement3: ; 7494d (1d:494d)
-	db $80,$09,$FF
+	db D_DOWN,$09,$FF
 
 ViridianGymArrowMovement4: ; 74950 (1d:4950)
-	db $10,$06,$FF
+	db D_RIGHT,$06,$FF
 
 ViridianGymArrowMovement5: ; 74953 (1d:4953)
-	db $80,$02,$FF
+	db D_DOWN,$02,$FF
 
 ViridianGymArrowMovement6: ; 74956 (1d:4956)
-	db $80,$07,$FF
+	db D_DOWN,$07,$FF
 
 ViridianGymArrowMovement7: ; 74959 (1d:4959)
-	db $10,$08,$FF
+	db D_RIGHT,$08,$FF
 
 ViridianGymArrowMovement8: ; 7495c (1d:495c)
-	db $10,$09,$FF
+	db D_RIGHT,$09,$FF
 
 ViridianGymArrowMovement9: ; 7495f (1d:495f)
-	db $40,$08,$FF
+	db D_UP,$08,$FF
 
 ViridianGymArrowMovement10: ; 74962 (1d:4962)
-	db $40,$06,$FF
+	db D_UP,$06,$FF
 
 ViridianGymArrowMovement11: ; 74965 (1d:4965)
-	db $20,$06,$FF
+	db D_LEFT,$06,$FF
 
 ViridianGymArrowMovement12: ; 74968 (1d:4968)
-	db $20,$0C,$FF
+	db D_LEFT,$0C,$FF
 
 ViridianGymScript4: ; 7496b (1d:496b)
 	ld a, [wSimulatedJoypadStatesIndex]

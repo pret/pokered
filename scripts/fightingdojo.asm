@@ -46,7 +46,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld [wd528], a
 	ld a, $1
 	ld [$ff8c], a
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
@@ -65,7 +65,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [wd528], a
 	ld a, $1
 	ld [$ff8c], a
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 

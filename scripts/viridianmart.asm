@@ -41,8 +41,8 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ret
 
 RLEMovement1d4bb: ; 1d4bb (7:54bb)
-	db $20, $01
-	db $40, $02
+	db D_LEFT, $01
+	db D_UP, $02
 	db $ff
 
 ViridianMartScript1: ; 1d4c0 (7:54c0)

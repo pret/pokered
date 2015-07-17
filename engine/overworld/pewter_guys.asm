@@ -66,17 +66,18 @@ PewterMuseumGuyCoords: ; 37cea (d:7cea)
 	dw .right
 
 .down
-	db $40, $40, $ff
+	db D_UP, D_UP, $ff
 .up
-	db $10, $20, $ff
+	db D_RIGHT, D_LEFT, $ff
 .left
-	db $40, $10, $ff
+	db D_UP, D_RIGHT, $ff
 .right
-	db $40, $20, $ff
+	db D_UP, D_LEFT, $ff
 
 ; these are the five coordinates which trigger the gym guy and pointers to
 ; different movements for the player to make to get positioned before the
 ; main movement
+; $00 is a pause
 PewterGymGuyCoords: ; 37d06 (d:7d06)
 	db 16, 34
 	dw .one
@@ -90,12 +91,12 @@ PewterGymGuyCoords: ; 37d06 (d:7d06)
 	dw .five
 
 .one
-	db $20, $80, $80, $10, $ff
+	db D_LEFT, D_DOWN, D_DOWN, D_RIGHT, $ff
 .two
-	db $20, $80, $10, $20, $ff
+	db D_LEFT, D_DOWN, D_RIGHT, D_LEFT, $ff
 .three
-	db $20, $20, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+	db D_LEFT, D_LEFT, D_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff
 .four
-	db $20, $20, $40, $20, $ff
+	db D_LEFT, D_LEFT, D_UP, D_LEFT, $ff
 .five
-	db $20, $80, $20, $00, $00, $00, $00, $00, $00, $00, $00, $ff
+	db D_LEFT, D_DOWN, D_LEFT, $00, $00, $00, $00, $00, $00, $00, $00, $ff

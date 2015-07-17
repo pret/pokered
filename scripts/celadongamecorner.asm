@@ -83,10 +83,23 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ret
 
 MovementData_48c5a: ; 48c5a (12:4c5a)
-	db $00,$C0,$C0,$40,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 MovementData_48c63: ; 48c63 (12:4c63)
-	db $C0,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ld a, [wd730]

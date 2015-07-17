@@ -59,7 +59,10 @@ OaksLabScript1: ; 1cb6e (7:4b6e)
 	ret
 
 OakEntryMovement: ; 1cb7e (7:4b7e)
-	db $40,$40,$40,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db $FF
 
 OaksLabScript2: ; 1cb82 (7:4b82)
 	ld a, [wd730]
@@ -86,12 +89,12 @@ OaksLabScript3: ; 1cba2 (7:4ba2)
 	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $5
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 
@@ -100,7 +103,8 @@ OaksLabScript3: ; 1cba2 (7:4ba2)
 	ret
 
 PlayerEntryMovementRLE: ; 1cbcf (7:4bcf)
-	db $40, $8, $ff
+	db D_UP,$8
+	db $ff
 
 OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -112,7 +116,7 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	set 0, [hl]
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
@@ -157,7 +161,7 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ret nz
 	ld a, $5
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
@@ -171,7 +175,7 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld a, $8
@@ -207,9 +211,20 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	jr .asm_1ccf3
 
 .MiddleBallMovement1
-	db 0,0,$C0,$C0,$C0,$40,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db $FF
+
 .MiddleBallMovement2
-	db 0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 .Squirtle
 	ld de, .RightBallMovement1
@@ -220,9 +235,22 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	jr .asm_1ccf3
 
 .RightBallMovement1
-	db 0,0,$C0,$C0,$C0,$C0,$40,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db $FF
+
 .RightBallMovement2
-	db 0,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 .Bulbasaur
 	ld de, .LeftBallMovement1
@@ -250,9 +278,11 @@ OaksLabScript8: ; 1cc80 (7:4c80)
 	jr .asm_1ccf3
 
 .LeftBallMovement1
-	db $00,$C0 ; not yet terminated!
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT ; not yet terminated!
 .LeftBallMovement2
-	db $C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 .asm_1ccf3
 	ld a, $1
@@ -271,7 +301,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $d
@@ -300,7 +330,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	call GetMonName
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $e
@@ -321,7 +351,7 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	ret nz
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $8
@@ -401,7 +431,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	call SetSpritePosition1
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
@@ -439,7 +469,13 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ret
 
 .RivalExitMovement
-	db $E0,$00,$00,$00,$00,$00,$FF
+	db $E0 ; change sprite facing direction
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 OaksLabScript14: ; 1ce6d (7:4e6d)
 	ld a, [wd730]
@@ -456,7 +492,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	jr .done
 ; make the player keep facing the rival as he walks away
 .asm_1ce8c
-	ld a, [wcf0f]
+	ld a, [wNPCNumScriptedSteps]
 	cp $5
 	jr nz, .asm_1cea8
 	ld a, [W_XCOORD]
@@ -512,12 +548,12 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 OaksLabScript_1cefd: ; 1cefd (7:4efd)
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $8
 	ld [H_SPRITEINDEX], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	jp SetSpriteFacingDirectionAndDelay
 
@@ -560,7 +596,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call DisplayTextID
 	ld a, $1
 	ld [H_SPRITEINDEX], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3

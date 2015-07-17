@@ -30,11 +30,19 @@ BillsHouseScript1: ; 1e783 (7:6783)
 	ret
 
 MovementData_1e79c: ; 1e79c (7:679c)
-	db $40,$40,$40,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db $FF
 
 ; make Bill walk around the player
 MovementData_1e7a0: ; 1e7a0 (7:67a0)
-	db $C0,$40,$40,$80,$40,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
+	db $FF
 
 BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld a, [wd730]
@@ -82,7 +90,12 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ret
 
 MovementData_1e807: ; 1e807 (7:6807)
-	db $00,$C0,$C0,$C0,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 BillsHouseScript4: ; 1e80d (7:680d)
 	ld a, [wd730]

@@ -9,7 +9,7 @@ Route5GateScriptPointers: ; 1df3f (7:5f3f)
 	dw Route5GateScript1
 
 Route5GateScript_1df43: ; 1df43 (7:5f43)
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a

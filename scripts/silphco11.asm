@@ -193,7 +193,10 @@ CoordsData_62211: ; 62211 (18:6211)
 	db $FF
 
 MovementData_62216: ; 62216 (18:6216)
-	db $00,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [wd528], a

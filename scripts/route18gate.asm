@@ -31,7 +31,7 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld [wSimulatedJoypadStatesIndex], a
 	ld b, $0
 	ld c, a
-	ld a, $40
+	ld a, D_UP
 	ld hl, wSimulatedJoypadStatesEnd
 	call FillMemory
 	call StartSimulatingJoypadStates
@@ -63,7 +63,7 @@ Route18GateScript2: ; 498df (12:58df)
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $10
+	ld a, D_RIGHT
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld a, $3

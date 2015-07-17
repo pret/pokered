@@ -70,10 +70,13 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ret
 
 MovementData_757d7: ; 757d7 (1d:57d7)
-	db $80,$40,$FF
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_UP
+	db $FF
 
 MovementData_757da: ; 757da (1d:57da)
-	db $80,$FF
+	db NPC_MOVEMENT_LEFT
+	db $FF
 
 CinnabarGymScript1: ; 757dc (1d:57dc)
 	ld a, [wd730]

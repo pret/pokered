@@ -45,10 +45,10 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld a, [wWhichTrade]
 	cp $1
 	ld a, $8
-	ld b, $0
+	ld b, SPRITE_FACING_DOWN
 	jr nz, .asm_194e6
 	ld a, $4
-	ld b, $4
+	ld b, SPRITE_FACING_UP
 .asm_194e6
 	ld [wd528], a
 	ld a, b
@@ -110,12 +110,15 @@ CeruleanCityCoords2: ; 19554 (6:5554)
 	db $ff
 
 CeruleanCityMovement1: ; 19559 (6:5559)
-	db $00,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld a,1
 	ld [$ff8c],a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d],a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
@@ -195,10 +198,24 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ret
 
 CeruleanCityMovement3: ; 19600 (6:5600)
-	db $80,$00,$00,$00,$00,$00,$00,$FF
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 CeruleanCityMovement4: ; 19608 (6:5608)
-	db $c0,$00,$00,$00,$00,$00,$00,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, [wd730]

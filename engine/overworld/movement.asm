@@ -162,8 +162,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	ld [hl], a       ; increment movement byte 1 (movement data index)
 	dec a
 	push hl
-	ld hl, wcf0f
-	dec [hl]         ; decrement wcf0f
+	ld hl, wNPCNumScriptedSteps
+	dec [hl]         ; decrement wNPCNumScriptedSteps
 	pop hl
 	ld de, wNPCMovementDirections
 	call LoadDEPlusA ; a = [wNPCMovementDirections + movement byte 1]

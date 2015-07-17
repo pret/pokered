@@ -45,7 +45,7 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 	ld a, $1
 .asm_467e8
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld hl, W_FLAGS_D733
@@ -105,15 +105,15 @@ CoordsData_4684d: ; 4684d (11:684d)
 	db $FF
 
 RLEMovementData_46852: ; 46852 (11:6852)
-	db $40,$03
-	db $10,$02
-	db $40,$01
+	db D_UP,$03
+	db D_RIGHT,$02
+	db D_UP,$01
 	db $FF
 
 RLEMovementData_46859: ; 46859 (11:6859)
-	db $40,$03
-	db $10,$03
-	db $40,$01
+	db D_UP,$03
+	db D_RIGHT,$03
+	db D_UP,$01
 	db $FF
 
 SeafoamIslands5Script3: ; 46860 (11:6860)

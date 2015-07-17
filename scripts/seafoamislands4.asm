@@ -79,9 +79,9 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	ret
 
 RLEMovement46632: ; 46632 (11:6632)
-	db $80,6
-	db $10,5
-	db $80,3
+	db D_DOWN,6
+	db D_RIGHT,5
+	db D_DOWN,3
 	db $ff
 
 SeafoamIslands4Script1: ; 46639 (11:6639)
@@ -124,10 +124,17 @@ SeafoamIslands4Script2: ; 46644 (11:6644)
 	ret
 
 RLEData_4667f: ; 4667f (11:667f)
-	db $80,$06,$10,$02,$80,$04,$20,$01,$FF
+	db D_DOWN,$06
+	db D_RIGHT,$02
+	db D_DOWN,$04
+	db D_LEFT,$01
+	db $FF
 
 RLEData_46688: ; 46688 (11:6688)
-	db $80,$06,$10,$02,$80,$04,$FF
+	db D_DOWN,$06
+	db D_RIGHT,$02
+	db D_DOWN,$04
+	db $FF
 
 SeafoamIslands4Script3: ; 4668f (11:668f)
 	ld a, [wSimulatedJoypadStatesIndex]

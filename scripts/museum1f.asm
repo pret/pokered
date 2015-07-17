@@ -116,7 +116,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	call PrintText
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $80
+	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	call UpdateSprites

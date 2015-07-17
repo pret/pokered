@@ -40,9 +40,9 @@ GaryScript1: ; 75f48 (1d:5f48)
 	ret
 
 RLEMovement75f63: ; 75f63 (1d:5f63)
-	db $40,1
-	db $10,1
-	db $40,3
+	db D_UP,1
+	db D_RIGHT,1
+	db D_UP,3
 	db $ff
 
 GaryScript2: ; 75f6a (1d:5f6a)
@@ -128,7 +128,12 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ret
 
 MovementData_76014: ; 76014 (1d:6014)
-	db $40,$40,$40,$40,$40,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db $FF
 
 GaryScript5: ; 7601a (1d:601a)
 	ld a, [wd730]
@@ -138,12 +143,12 @@ GaryScript5: ; 7601a (1d:601a)
 	ld [wd528], a
 	ld a, $1
 	ld [$ff8c], a
-	ld a, $8
+	ld a, SPRITE_FACING_LEFT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $2
 	ld [$ff8c], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $3
@@ -156,7 +161,7 @@ GaryScript5: ; 7601a (1d:601a)
 GaryScript6: ; 76047 (1d:6047)
 	ld a, $2
 	ld [$ff8c], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $4
@@ -169,7 +174,7 @@ GaryScript6: ; 76047 (1d:6047)
 GaryScript7: ; 7605f (1d:605f)
 	ld a, $2
 	ld [$ff8c], a
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay ; face object
 	ld a, $5
@@ -184,7 +189,9 @@ GaryScript7: ; 7605f (1d:605f)
 	ret
 
 MovementData_76080: ; 76080 (1d:6080)
-	db $40,$40,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_UP
+	db $FF
 
 GaryScript8: ; 76083 (1d:6083)
 	ld a, [wd730]
@@ -211,8 +218,8 @@ GaryScript9: ; 76099 (1d:6099)
 	ret
 
 RLEMovement760b4: ; 760b4 (1d:60b4)
-	db $40,4
-	db $20,1
+	db D_UP,4
+	db D_LEFT,1
 	db $ff
 
 GaryScript10: ; 760b9 (1d:60b9)

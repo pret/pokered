@@ -37,7 +37,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
-	ld a, $80
+	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a

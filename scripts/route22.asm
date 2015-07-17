@@ -48,7 +48,11 @@ Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
 	jp SetSpriteFacingDirectionAndDelay
 
 Route22RivalMovementData: ; 50efb (14:4efb)
-	db $C0,$C0,$C0,$C0,$FF ; move right 4 times
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 Route22Script0: ; 50f00 (14:4f00)
 	ld a, [wd7eb]
@@ -194,10 +198,27 @@ Route22MoveRival1: ; 51010 (14:5010)
 	jp MoveSprite
 
 Route22RivalExitMovementData1: ; 51017 (14:5017)
-	db $C0,$C0,$00,$00,$00,$00,$00,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 Route22RivalExitMovementData2: ; 5101f (14:501f)
-	db $40,$C0,$C0,$C0,$00,$00,$00,$00,$00,$00,$FF
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 Route22Script3: ; 5102a (14:502a)
 	ld a, [wd730]
@@ -339,10 +360,13 @@ Route22MoveRival2: ; 51145 (14:5145)
 	jp MoveSprite
 
 MovementData_5114c: ; 5114c (14:514c)
-	db $80 ; left
+	db NPC_MOVEMENT_LEFT
 
 MovementData_5114d: ; 5114d (14:514d)
-	db $80,$80,$80,$FF ; left x3
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db NPC_MOVEMENT_LEFT
+	db $FF
 
 Route22Script6: ; 51151 (14:5151)
 	ld a, [wd730]
