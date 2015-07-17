@@ -67,50 +67,60 @@ ENDC
 
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
-	call Func_4519
+	call ClearBothBGMaps
+
+; place tiles for pokemon logo (except for the last row)
 	hlCoord 2, 1
 	ld a, $80
 	ld de, SCREEN_WIDTH
-	ld c, $6
-.asm_434d
+	ld c, 6
+.pokemonLogoTileLoop
 	ld b, $10
 	push hl
-.asm_4350
+.pokemonLogoTileRowLoop ; place tiles for one row
 	ld [hli], a
 	inc a
 	dec b
-	jr nz, .asm_4350
+	jr nz, .pokemonLogoTileRowLoop
 	pop hl
 	add hl, de
 	dec c
-	jr nz, .asm_434d
+	jr nz, .pokemonLogoTileLoop
+
+; place tiles for the last row of the pokemon logo
 	hlCoord 2, 7
 	ld a, $31
 	ld b, $10
-.asm_4361
+.pokemonLogoLastTileRowLoop
 	ld [hli], a
 	inc a
 	dec b
-	jr nz, .asm_4361
-	call Func_44dd
+	jr nz, .pokemonLogoLastTileRowLoop
+
+	call DrawPlayerCharacter
+
+; put a pokeball in the player's hand
 	ld hl, wOAMBuffer + $28
 	ld a, $74
 	ld [hl], a
+
+; place tiles for title screen copyright
 	hlCoord 2, 17
-	ld de, .titlescreenTilemap
+	ld de, .tileScreenCopyrightTiles
 	ld b, $10
-.asm_4377
+.tileScreenCopyrightTilesLoop
 	ld a, [de]
 	ld [hli], a
 	inc de
 	dec b
-	jr nz, .asm_4377
-	jr .asm_438f
+	jr nz, .tileScreenCopyrightTilesLoop
 
-.titlescreenTilemap ; 437f (1:437f)
+	jr .next
+
+.tileScreenCopyrightTiles ; 437f (1:437f)
 	db $41,$42,$43,$42,$44,$42,$45,$46,$47,$48,$49,$4A,$4B,$4C,$4D,$4E ; ©'95.'96.'98 GAME FREAK inc.
 
-.asm_438f
+.next
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
@@ -121,37 +131,39 @@ IF DEF(_BLUE)
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
-	ld [wWhichTrade], a
-	call Func_4524
-	ld a, $9b
-	call Func_4533
+	ld [wTitleMonSpecies], a
+	call LoadTitleMonSprite
+	ld a, (vBGMap0 + $300) / $100
+	call TitleScreenCopyTileMapToVRAM
 	call SaveScreenTilesToBuffer1
 	ld a, $40
 	ld [hWY], a
 	call LoadScreenTilesFromBuffer2
-	ld a, $98
-	call Func_4533
+	ld a, vBGMap0 / $100
+	call TitleScreenCopyTileMapToVRAM
 	ld b, $6
 	call GoPAL_SET
 	call GBPalNormal
-	ld a, $e4
+	ld a, %11100100
 	ld [rOBP0], a
-	ld bc, $ffaf ; background scroll Y
+
+; make pokemon logo bounce up and down
+	ld bc, hSCY ; background scroll Y
 	ld hl, .TitleScreenPokemonLogoYScrolls
-.asm_43c6
+.bouncePokemonLogoLoop
 	ld a, [hli]
 	and a
-	jr z, .asm_43f4
+	jr z, .finishedBouncingPokemonLogo
 	ld d, a
-	cp $fd
-	jr nz, .asm_43d4
+	cp -3
+	jr nz, .skipPlayingSound
 	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
 	call PlaySound
-.asm_43d4
+.skipPlayingSound
 	ld a, [hli]
 	ld e, a
 	call .ScrollTitleScreenPokemonLogo
-	jr .asm_43c6
+	jr .bouncePokemonLogoLoop
 
 .TitleScreenPokemonLogoYScrolls: ; 43db (1:43db)
 ; Controls the bouncing effect of the Pokemon logo on the title screen
@@ -168,36 +180,40 @@ ENDC
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
 ; Scrolls d pixels e times
 	call DelayFrame
-	ld a, [bc]
+	ld a, [bc] ; background scroll Y
 	add d
 	ld [bc], a
 	dec e
 	jr nz, .ScrollTitleScreenPokemonLogo
 	ret
-.asm_43f4
+
+.finishedBouncingPokemonLogo
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
 	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
 	call PlaySound
+
+; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
-	ld d, $90
-.asm_440a
+	ld d, 144
+.scrollTitleScreenGameVersionLoop
 	ld h, d
-	ld l, $40
-	call Func_44cf
-	ld h, $0
-	ld l, $50
-	call Func_44cf
+	ld l, 64
+	call ScrollTitleScreenGameVersion
+	ld h, 0
+	ld l, 80
+	call ScrollTitleScreenGameVersion
 	ld a, d
-	add $4
+	add 4
 	ld d, a
 	and a
-	jr nz, .asm_440a
-	ld a, $9c
-	call Func_4533
+	jr nz, .scrollTitleScreenGameVersionLoop
+
+	ld a, vBGMap1 / $100
+	call TitleScreenCopyTileMapToVRAM
 	call LoadScreenTilesFromBuffer2
 	call PrintGameVersionOnTitleScreen
 	call Delay3
@@ -207,19 +223,22 @@ ENDC
 	call PlaySound
 	xor a
 	ld [wcc5b], a
-.asm_443b
-	ld c, $c8
+
+; Keep scrolling in new mons indefinitely until the user performs input.
+.awaitUserInterruptionLoop
+	ld c, 200
 	call CheckForUserInterruption
-	jr c, .asm_4459
-	call Func_44c1
-	ld c, $1
+	jr c, .finishedWaiting
+	call TitleScreenScrollInMon
+	ld c, 1
 	call CheckForUserInterruption
-	jr c, .asm_4459
-	callba Func_372ac
-	call Func_4496
-	jr .asm_443b
-.asm_4459
-	ld a, [wWhichTrade]
+	jr c, .finishedWaiting
+	callba TitleScreenAnimateBallIfStarterOut
+	call TitleScreenPickNewMon
+	jr .awaitUserInterruptionLoop
+
+.finishedWaiting
+	ld a, [wTitleMonSpecies]
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3
@@ -229,10 +248,10 @@ ENDC
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
-	ld a, $98
-	call Func_4533
-	ld a, $9c
-	call Func_4533
+	ld a, vBGMap0 / $100
+	call TitleScreenCopyTileMapToVRAM
+	ld a, vBGMap1 / $100
+	call TitleScreenCopyTileMapToVRAM
 	call Delay3
 	call LoadGBPal
 	ld a, [hJoyHeld]
@@ -247,12 +266,12 @@ ENDC
 	ld hl, DoClearSaveDialogue
 	jp Bankswitch
 
-Func_4496: ; 4496 (1:4496)
-	ld a, $98
-	call Func_4533
+TitleScreenPickNewMon: ; 4496 (1:4496)
+	ld a, vBGMap0 / $100
+	call TitleScreenCopyTileMapToVRAM
 
-.new
-; Generate a new TitleMon.
+.loop
+; Keep looping until a mon different from the current one is picked.
 	call Random
 	and $f
 	ld c, a
@@ -260,14 +279,14 @@ Func_4496: ; 4496 (1:4496)
 	ld hl, TitleMons
 	add hl, bc
 	ld a, [hl]
-	ld hl, wWhichTrade
+	ld hl, wTitleMonSpecies
 
 ; Can't be the same as before.
 	cp [hl]
-	jr z, .new
+	jr z, .loop
 
 	ld [hl], a
-	call Func_4524
+	call LoadTitleMonSprite
 
 	ld a, $90
 	ld [hWY], a
@@ -275,14 +294,14 @@ Func_4496: ; 4496 (1:4496)
 	callba TitleScroll
 	ret
 
-Func_44c1: ; 44c1 (1:44c1)
+TitleScreenScrollInMon: ; 44c1 (1:44c1)
 	ld d, 0 ; scroll in
 	callba TitleScroll
 	xor a
 	ld [hWY], a
 	ret
 
-Func_44cf: ; 44cf (1:44cf)
+ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
 .wait
 	ld a, [rLY]
 	cp l
@@ -297,7 +316,7 @@ Func_44cf: ; 44cf (1:44cf)
 	jr z, .wait2
 	ret
 
-Func_44dd: ; 44dd (1:44dd)
+DrawPlayerCharacter: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
 	ld bc, $230
@@ -305,49 +324,49 @@ Func_44dd: ; 44dd (1:44dd)
 	call FarCopyData2
 	call ClearSprites
 	xor a
-	ld [wWhichTrade], a
+	ld [wPlayerCharacterOAMTile], a
 	ld hl, wOAMBuffer
 	ld de, $605a
-	ld b, $7
-.asm_44fa
+	ld b, 7
+.loop
 	push de
-	ld c, $5
-.asm_44fd
+	ld c, 5
+.innerLoop
 	ld a, d
-	ld [hli], a
+	ld [hli], a ; Y
 	ld a, e
-	ld [hli], a
-	add $8
+	ld [hli], a ; X
+	add 8
 	ld e, a
-	ld a, [wWhichTrade]
-	ld [hli], a
+	ld a, [wPlayerCharacterOAMTile]
+	ld [hli], a ; tile
 	inc a
-	ld [wWhichTrade], a
+	ld [wPlayerCharacterOAMTile], a
 	inc hl
 	dec c
-	jr nz, .asm_44fd
+	jr nz, .innerLoop
 	pop de
-	ld a, $8
+	ld a, 8
 	add d
 	ld d, a
 	dec b
-	jr nz, .asm_44fa
+	jr nz, .loop
 	ret
 
-Func_4519: ; 4519 (1:4519)
+ClearBothBGMaps: ; 4519 (1:4519)
 	ld hl, vBGMap0
-	ld bc, $800
-	ld a, $7f
+	ld bc, $400 * 2
+	ld a, " "
 	jp FillMemory
 
-Func_4524: ; 4524 (1:4524)
+LoadTitleMonSprite: ; 4524 (1:4524)
 	ld [wcf91], a
 	ld [wd0b5], a
 	hlCoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
-Func_4533: ; 4533 (1:4533)
+TitleScreenCopyTileMapToVRAM: ; 4533 (1:4533)
 	ld [H_AUTOBGTRANSFERDEST + 1], a
 	jp Delay3
 

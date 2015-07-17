@@ -7,19 +7,19 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $3
+	ld a, 3
 	ld [wMaxMenuItem], a
-	ld a, $5
+	ld a, 5
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
 	hlCoord 0, 3
-	ld b, $8
-	ld c, $c
+	ld b, 8
+	ld c, 12
 	call TextBoxBorder
 	call UpdateSprites
 	hlCoord 2, 5
@@ -31,27 +31,28 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_74f93
+	bit 1, a ; pressed B?
+	jr nz, .notThirsty
 	ld a, [wCurrentMenuItem]
-	cp $3
-	jr z, .asm_74f93
+	cp 3 ; chose Cancel?
+	jr z, .notThirsty
 	xor a
-	ld [$ff9f], a
-	ld [$ffa1], a
+	ld [hMoney], a
+	ld [hMoney + 2], a
 	ld a, $2
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, VendingMachineText4
 	jp PrintText
 .enoughMoney
-	call Func_74fe7
-	ld a, [$ffdb]
+	call LoadVendingMachineItem
+	ld a, [hVendingMachineItem]
 	ld b, a
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
+
 	ld b, 60 ; number of times to play the "brrrrr" sound
 .playDeliverySound
 	ld c, 2
@@ -62,10 +63,10 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	pop bc
 	dec b
 	jr nz, .playDeliverySound
-.asm_74f72
+
 	ld hl, VendingMachineText5
 	call PrintText
-	ld hl, $ffde
+	ld hl, hVendingMachinePrice + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
@@ -75,7 +76,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 .BagFull
 	ld hl, VendingMachineText6
 	jp PrintText
-.asm_74f93
+.notThirsty
 	ld hl, VendingMachineText7
 	jp PrintText
 
@@ -110,22 +111,22 @@ VendingMachineText7: ; 74fe2 (1d:4fe2)
 	TX_FAR _VendingMachineText7
 	db "@"
 
-Func_74fe7: ; 74fe7 (1d:4fe7)
+LoadVendingMachineItem: ; 74fe7 (1d:4fe7)
 	ld hl, VendingPrices
 	ld a, [wCurrentMenuItem]
 	add a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
-	ld [$ffdb], a
+	ld [hVendingMachineItem], a
 	ld a, [hli]
-	ld [$ffdc], a
+	ld [hVendingMachinePrice], a
 	ld a, [hli]
-	ld [$ffdd], a
+	ld [hVendingMachinePrice + 1], a
 	ld a, [hl]
-	ld [$ffde], a
+	ld [hVendingMachinePrice + 2], a
 	ret
 
 VendingPrices: ; 75000 (1d:5000)

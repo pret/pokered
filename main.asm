@@ -31,30 +31,30 @@ ResetStatusAndHalveMoneyOnBlackout::
 	ld [wNPCMovementScriptPointerTableNum], a
 	ld [wFlags_0xcd60], a
 
-	ld [$ff9f], a
-	ld [$ff9f + 1], a
-	ld [$ff9f + 2], a
+	ld [hMoney], a
+	ld [hMoney + 1], a
+	ld [hMoney + 2], a
 	call HasEnoughMoney
 	jr c, .lostmoney ; never happens
 
 	; Halve the player's money.
 	ld a, [wPlayerMoney]
-	ld [$ff9f], a
+	ld [hMoney], a
 	ld a, [wPlayerMoney + 1]
-	ld [$ff9f + 1], a
+	ld [hMoney + 1], a
 	ld a, [wPlayerMoney + 2]
-	ld [$ff9f + 2], a
+	ld [hMoney + 2], a
 	xor a
-	ld [$ffa2], a
-	ld [$ffa3], a
+	ld [hDivideBCDDivisor], a
+	ld [hDivideBCDDivisor + 1], a
 	ld a, 2
-	ld [$ffa4], a
+	ld [hDivideBCDDivisor + 2], a
 	predef DivideBCDPredef3
-	ld a, [$ffa2]
+	ld a, [hDivideBCDQuotient]
 	ld [wPlayerMoney], a
-	ld a, [$ffa2 + 1]
+	ld a, [hDivideBCDQuotient + 1]
 	ld [wPlayerMoney + 1], a
-	ld a, [$ffa2 + 2]
+	ld a, [hDivideBCDQuotient + 2]
 	ld [wPlayerMoney + 2], a
 
 .lostmoney
@@ -789,12 +789,12 @@ INCLUDE "engine/oak_speech2.asm"
 ; sets carry flag if there is enough money and unsets carry flag if not
 SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	ld de,wPlayerMoney
-	ld hl,$ff9f ; total price of items
+	ld hl,hMoney ; total price of items
 	ld c,3 ; length of money in bytes
 	call StringCmp
 	ret c
 	ld de,wPlayerMoney + 2
-	ld hl,$ffa1 ; total price of items
+	ld hl,hMoney + 2 ; total price of items
 	ld c,3 ; length of money in bytes
 	predef SubBCDPredef ; subtract total price from money
 	ld a,MONEY_BOX

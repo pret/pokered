@@ -74,7 +74,7 @@ PalletMovementScript_OakMoveLeft: ; 1a44c (6:644c)
 	jr .done
 ; The player is on the left tile of the northern path out of Pallet Town and
 ; Prof. Oak is below.
-; Prof. Oak is already on the right tile.
+; Prof. Oak is already where he needs to be.
 .playerOnLeftTile
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a

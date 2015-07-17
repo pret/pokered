@@ -67,9 +67,9 @@ HiddenCoins: ; 76799 (1d:6799)
 	and a
 	ret nz
 	xor a
-	ld [$ff9f], a
-	ld [$ffa0], a
-	ld [$ffa1], a
+	ld [hCoins - 1], a
+	ld [hCoins], a
+	ld [hCoins + 1], a
 	ld a, [wWhichTrade]
 	sub COIN
 	cp 10
@@ -81,22 +81,22 @@ HiddenCoins: ; 76799 (1d:6799)
 	jr .bcd100
 .bcd10
 	ld a, $10
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	jr .bcddone
 .bcd20
 	ld a, $20
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	jr .bcddone
 .bcd40 ; due to a typo, this is never used
 	ld a, $40
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	jr .bcddone
 .bcd100
 	ld a, $1
-	ld [$ffa0], a
+	ld [hCoins], a
 .bcddone
 	ld de, wPlayerCoins + 1
-	ld hl, $ffa1
+	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	ld hl, wd6fe

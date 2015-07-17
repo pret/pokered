@@ -137,11 +137,11 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	and a
 	jp nz, .asm_56403
 	ld hl, wTrainerFacingDirection
-	ld [$ff9f], a
+	ld [hMoney], a
 	ld a, [hli]
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	ld a, [hl]
-	ld [$ffa1], a
+	ld [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .asm_56396
 	ld hl, DayCareMText_56454

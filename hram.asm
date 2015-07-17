@@ -92,6 +92,12 @@ hNPCPlayerRelativePosPerspective EQU $FF9B
 ; 1 = target is to the west
 hNPCPlayerRelativePosFlags EQU $FF9D
 
+hMoney EQU $FF9F ; 3-byte BCD number
+hCoins EQU $FFA0 ; 2-byte BCD number
+
+hDivideBCDDivisor  EQU $FFA2 ; 3-byte BCD number
+hDivideBCDQuotient EQU $FFA2 ; 3-byte BCD number
+
 hSerialReceivedNewData EQU $FFA9
 
 ; $01 = using external clock
@@ -200,6 +206,9 @@ H_VBLANKOCCURRED EQU $FFD6
 hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hVendingMachineItem  EQU $FFDB
+hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
 
 hNewPartyLength EQU $FFE4
 
