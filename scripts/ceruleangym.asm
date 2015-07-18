@@ -44,7 +44,7 @@ CeruleanGymScript3: ; 5c700 (17:4700)
 
 CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld a, $5
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd75e
 	set 7, [hl]
@@ -52,14 +52,14 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd75e
 	set 6, [hl]
 	jr .asm_5c736
 .BagFull
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5c736
 	ld hl, W_OBTAINEDBADGES

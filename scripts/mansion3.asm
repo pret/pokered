@@ -80,14 +80,14 @@ Mansion3Script_Switches: ; 5227a (14:627a)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Mansion3TextPointers: ; 5228a (14:628a)
 	dw Mansion3Text1
 	dw Mansion3Text2
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Mansion3Text5
 	dw Mansion3Text6
 

@@ -37,7 +37,7 @@ CinnabarGymScript_75792: ; 75792 (1d:5792)
 	ret
 
 CinnabarGymScript_757a0: ; 757a0 (1d:57a0)
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wTrainerHeaderFlagBit], a
 	ret
 
@@ -51,7 +51,7 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld a, [wda38]
 	and a
 	ret z
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	cp $4
 	jr nz, .asm_757c3
 	ld a, $4
@@ -86,7 +86,7 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	ld [wJoyIgnore], a
 	ld a, [wda38]
 	ld [wTrainerHeaderFlagBit], a
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CinnabarGymScript_757f1: ; 757f1 (1d:57f1)
@@ -139,7 +139,7 @@ CinnabarGymScript3: ; 7584a (1d:584a)
 	ld [wJoyIgnore], a
 CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd79a
 	set 1, [hl]
@@ -147,14 +147,14 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd79a
 	set 0, [hl]
 	jr .asm_75880
 .BagFull
 	ld a, $c
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75880
 	ld hl, W_OBTAINEDBADGES
@@ -189,7 +189,7 @@ CinnabarGymTextPointers: ; 7589f (1d:589f)
 	dw TM38NoRoomText
 
 CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

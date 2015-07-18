@@ -95,9 +95,9 @@ SilphCo4TextPointers: ; 19da0 (6:5da0)
 	dw SilphCo4Text2
 	dw SilphCo4Text3
 	dw SilphCo4Text4
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 SilphCo4TrainerHeaders: ; 19dae (6:5dae)
 SilphCo4TrainerHeader0: ; 19dae (6:5dae)

@@ -49,7 +49,7 @@ Mansion2Script_Switches: ; 52037 (14:6037)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $5
-	ld [H_SPRITEHEIGHT], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Mansion2ScriptPointers: ; 52047 (14:6047)
@@ -59,7 +59,7 @@ Mansion2ScriptPointers: ; 52047 (14:6047)
 
 Mansion2TextPointers: ; 5204d (14:604d)
 	dw Mansion2Text1
-	dw Predef5CText
+	dw PickUpItemText
 	dw Mansion2Text3
 	dw Mansion2Text4
 	dw Mansion2Text5

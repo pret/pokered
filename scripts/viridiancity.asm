@@ -32,7 +32,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	cp $20
 	ret nz
 	ld a, $e
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -52,7 +52,7 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 	cp $13
 	ret nz
 	ld a, $5
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -98,7 +98,7 @@ ViridianCityScript2: ; 1908f (6:508f)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $f
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [W_BATTLETYPE], a

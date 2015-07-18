@@ -22,11 +22,11 @@ PowerPlantTextPointers: ; 1e2df (7:62df)
 	dw PowerPlantText7
 	dw PowerPlantText8
 	dw PowerPlantText9
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 PowerPlantTrainerHeaders: ; 1e2fb (7:62fb)
 PowerPlantTrainerHeader0: ; 1e2fb (7:62fb)

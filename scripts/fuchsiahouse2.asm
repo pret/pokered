@@ -3,7 +3,7 @@ FuchsiaHouse2Script: ; 750b5 (1d:50b5)
 
 FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
 	dw FuchsiaHouse2Text1
-	dw Predef5CText
+	dw PickUpItemText
 	dw BoulderText
 	dw FuchsiaHouse2Text4
 	dw FuchsiaHouse2Text5

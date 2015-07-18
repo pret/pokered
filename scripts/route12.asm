@@ -28,7 +28,7 @@ Route12Script0: ; 59619 (16:5619)
 	res 6, [hl]
 	jp z, CheckFightingMapTrainers
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [W_CUROPPONENT], a
@@ -51,7 +51,7 @@ Route12Script3: ; 5964c (16:564c)
 	cp $2
 	jr z, .asm_59664
 	ld a, $e
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
 	ld hl, wd7d8
@@ -71,8 +71,8 @@ Route12TextPointers: ; 59675 (16:5675)
 	dw Route12Text6
 	dw Route12Text7
 	dw Route12Text8
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Route12Text11
 	dw Route12Text12
 	dw Route12Text13

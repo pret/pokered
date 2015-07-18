@@ -111,7 +111,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef InternalClockTradeAnim
 	add_predef TrainerEngage
 	add_predef IndexToPokedex
-	add_predef Predef3B; 3B display pic?
+	add_predef DisplayPicCenteredOrUpperRight; 3B display pic?
 	add_predef UsedCut
 	add_predef ShowPokedexData
 	add_predef WriteMonMoves
@@ -144,7 +144,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef GetTileTwoStepsInFrontOfPlayer
 	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt
-	add_predef PickupItem
+	add_predef PickUpItem
 	add_predef PrintMoveType
 	add_predef LoadMovePPs
 	add_predef DrawHP ; 5F

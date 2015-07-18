@@ -969,10 +969,10 @@ PokeCenterSignText:: ; 24ef (0:24ef)
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Predef5CText:: ; 24f4 (0:24f4)
+PickUpItemText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
 	TX_ASM
-	predef PickupItem
+	predef PickUpItem
 	jp TextScriptEnd
 
 
@@ -1050,7 +1050,7 @@ Func_28cb:: ; 28cb (0:28cb)
 	jp PlaySound
 
 ; this function is used to display sign messages, sprite dialog, etc.
-; INPUT: [$ff8c] = sprite ID or text ID
+; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -1069,7 +1069,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld h,[hl]
 	ld l,a ; hl = map text pointer
 	ld d,$00
-	ld a,[$ff8c] ; text ID
+	ld a,[hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
@@ -1083,7 +1083,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jp z,DisplayRepelWoreOffText
 	ld a,[W_NUMSPRITES]
 	ld e,a
-	ld a,[$ff8c] ; sprite ID
+	ld a,[hSpriteIndexOrTextID] ; sprite ID
 	cp e
 	jr z,.spriteHandling
 	jr nc,.skipSpriteHandling
@@ -1096,7 +1096,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	pop bc
 	pop de
 	ld hl,W_MAPSPRITEDATA ; NPC text entries
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	dec a
 	add a
 	add l
@@ -1235,10 +1235,12 @@ LoadItemList:: ; 2a5a (0:2a5a)
 	ret
 
 DisplayPokemonCenterDialogue:: ; 2a72 (0:2a72)
+; zeroing these doesn't appear to serve any purpose
 	xor a
 	ld [$ff8b],a
 	ld [$ff8c],a
 	ld [$ff8d],a
+
 	inc hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -2487,8 +2489,8 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld c, a
 	call TrainerFlagAction        ; read trainer flag
 	ld a, c
-	and a
-	jr nz, .trainerAlreadyFought
+	and a ; has the trainer already been defeated?
+	jr nz, .continue
 	push hl
 	push de
 	push hl
@@ -2507,7 +2509,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld a, [wTrainerSpriteOffset]
 	and a
 	ret nz        ; break if the trainer is engaging
-.trainerAlreadyFought
+.continue
 	ld hl, $c
 	add hl, de
 	ld d, h
@@ -2737,7 +2739,7 @@ SetSpriteFacingDirection:: ; 34ae (0:34ae)
 	ld a, $9
 	ld [H_SPRITEDATAOFFSET], a
 	call GetPointerWithinSpriteStateData1
-	ld a, [$ff8d]
+	ld a, [hSpriteFacingDirection]
 	ld [hl], a
 	ret
 
@@ -2858,18 +2860,18 @@ DecodeRLEList:: ; 350c (0:350c)
 	inc a                        ; include sentinel in counting
 	ret
 
-; sets movement byte 1 for sprite [$FF8C] to $FE and byte 2 to [$FF8D]
+; sets movement byte 1 for sprite [H_SPRITEINDEX] to $FE and byte 2 to [hSpriteMovementByte2]
 SetSpriteMovementBytesToFE:: ; 3533 (0:3533)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
 	call GetSpriteMovementByte2Pointer
-	ld a, [$ff8d]
+	ld a, [hSpriteMovementByte2]
 	ld [hl], a
 	pop hl
 	ret
 
-; sets both movement bytes for sprite [$FF8C] to $FF
+; sets both movement bytes for sprite [H_SPRITEINDEX] to $FF
 SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	push hl
 	call GetSpriteMovementByte1Pointer
@@ -2879,20 +2881,20 @@ SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	pop hl
 	ret
 
-; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
+; returns the sprite movement byte 1 pointer for sprite [H_SPRITEINDEX] in hl
 GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
-	ld a,[H_SPRITEINDEX] ; the sprite to move
+	ld a,[H_SPRITEINDEX]
 	swap a
 	add a,6
 	ld l,a
 	ret
 
-; returns the sprite movement byte 2 pointer for sprite [$FF8C] in hl
+; returns the sprite movement byte 2 pointer for sprite [H_SPRITEINDEX] in hl
 GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 	push de
 	ld hl,W_MAPSPRITEDATA
-	ld a,[$FF8C] ; the sprite to move
+	ld a,[H_SPRITEINDEX]
 	dec a
 	add a
 	ld d,0

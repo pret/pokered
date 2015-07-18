@@ -16,9 +16,9 @@ PokemonTower4TextPointers: ; 6080f (18:480f)
 	dw PokemonTower4Text1
 	dw PokemonTower4Text2
 	dw PokemonTower4Text3
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 PokemonTower4TrainerHeaders: ; 6081b (18:481b)
 PokemonTower4TrainerHeader0: ; 6081b (18:481b)

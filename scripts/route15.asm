@@ -23,7 +23,7 @@ Route15TextPointers: ; 597c7 (16:57c7)
 	dw Route15Text8
 	dw Route15Text9
 	dw Route15Text10
-	dw Predef5CText
+	dw PickUpItemText
 	dw Route15Text12
 
 Route15TrainerHeaders: ; 597df (16:57df)

@@ -14,8 +14,8 @@ UnknownDungeon3ScriptPointers: ; 45f03 (11:5f03)
 
 UnknownDungeon3TextPointers: ; 45f09 (11:5f09)
 	dw UnknownDungeon3Text1
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 
 UnknownDungeon3TrainerHeaders: ; 45f0f (11:5f0f)
 UnknownDungeon3TrainerHeader0: ; 45f0f (11:5f0f)

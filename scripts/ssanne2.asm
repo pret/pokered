@@ -30,14 +30,14 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [$ffdb], a
 	ld a, HS_SS_ANNE_2_RIVAL
 	ld [wcc4d], a
 	predef ShowObject
 	call Delay3
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	xor a
 	ld [hJoyHeld], a
@@ -79,11 +79,11 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	ld a, SPRITE_FACING_RIGHT
 	jr .asm_61427
 .asm_61426
-	xor a
+	xor a ; SPRITE_FACING_DOWN
 .asm_61427
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SSAnne2Script1: ; 61430 (18:5430)
@@ -94,7 +94,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld a, SONY2 + $c8
@@ -129,10 +129,10 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld a, [W_XCOORD]
 	cp $25
@@ -143,7 +143,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld de, MovementData_614b7
 .asm_6149a
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $ff
 	ld [wc0ee], a

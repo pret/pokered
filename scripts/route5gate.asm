@@ -31,7 +31,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	and a
 	jr nz, .asm_1df82
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route5GateScript_1df43
 	ld a, $1
@@ -39,7 +39,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ret
 .asm_1df82
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]

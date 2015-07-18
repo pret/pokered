@@ -1,9 +1,3 @@
-
-H_SPRITEWIDTH            EQU $FF8B ; in tiles
-H_SPRITEINTERLACECOUNTER EQU $FF8B
-H_SPRITEHEIGHT           EQU $FF8C ; in tiles
-H_SPRITEOFFSET           EQU $FF8D
-
 hSoftReset EQU $FF8A
 ; Initialized to 16.
 ; Decremented each input iteration if the player
@@ -12,7 +6,27 @@ hSoftReset EQU $FF8A
 
 hBaseTileID EQU $FF8B
 
+; 3-byte BCD number
 hItemPrice EQU $FF8B
+
+hDexWeight EQU $FF8B
+
+hWarpDestinationMap EQU $FF8B
+
+hOAMTile EQU $FF8B
+
+hROMBankTemp EQU $FF8B
+
+hPreviousTileset EQU $FF8B
+
+hEastWestConnectedMapWidth EQU $FF8B
+
+hSlideAmount EQU $FF8B
+
+H_SPRITEWIDTH            EQU $FF8B ; in tiles
+H_SPRITEINTERLACECOUNTER EQU $FF8B
+H_SPRITEHEIGHT           EQU $FF8C ; in tiles
+H_SPRITEOFFSET           EQU $FF8D
 
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
@@ -21,10 +35,39 @@ H_DOWNARROWBLINKCNT2 EQU $FF8C
 H_SPRITEDATAOFFSET EQU $FF8B
 H_SPRITEINDEX      EQU $FF8C
 
+hMapStride EQU $FF8B
+hMapWidth  EQU $FF8C
+
+hNorthSouthConnectionStripWidth EQU $FF8B
+hNorthSouthConnectedMapWidth    EQU $FF8C
+
 ; DisplayTextID's argument
 hSpriteIndexOrTextID EQU $FF8C
 
 hPartyMonIndex EQU $FF8C
+
+; the total number of tiles being shifted each time the pic slides by one tile
+hSlidingRegionSize EQU $FF8C
+
+; 2 bytes
+hEnemySpeed EQU $FF8D
+
+hVRAMSlot EQU $FF8D
+
+hFourTileSpriteCount EQU $FF8E
+
+; -1 = left
+;  0 = right
+hSlideDirection EQU $FF8D
+
+hSpriteFacingDirection EQU $FF8D
+
+hSpriteMovementByte2 EQU $FF8D
+
+hSpriteImageIndex EQU $FF8D
+
+hLoadSpriteTemp1 EQU $FF8D
+hLoadSpriteTemp2 EQU $FF8E
 
 hHalveItemPrices EQU $FF8E
 

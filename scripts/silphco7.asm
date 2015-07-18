@@ -136,10 +136,10 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
 	ld a, [wWhichTrade]
@@ -149,7 +149,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	inc de
 .asm_51c6c
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $3
 	jp SilphCo7Text_51c10
@@ -173,7 +173,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
@@ -212,12 +212,12 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, $4
 	ld [wd528], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
-	ld a, $4
-	ld [$ff8d], a
+	ld [H_SPRITEINDEX], a
+	ld a, SPRITE_FACING_UP
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wc0ee], a
@@ -230,7 +230,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $5
 	jp SilphCo7Text_51c10
@@ -272,9 +272,9 @@ SilphCo7TextPointers: ; 51d3f (14:5d3f)
 	dw SilphCo7Text7
 	dw SilphCo7Text8
 	dw SilphCo7Text9
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw SilphCo7Text13
 	dw SilphCo7Text14
 	dw SilphCo7Text15

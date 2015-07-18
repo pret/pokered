@@ -13,6 +13,10 @@ dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 percent EQUS "* $ff / 100"
 
+lb: MACRO ; r, hi, lo
+	ld \1, (\2) << 8 + (\3)
+	ENDM
+
 
 ; Constant enumeration is useful for monsters, items, moves, etc.
 const_def: MACRO
@@ -530,7 +534,7 @@ ENDM
 SOUTH_MAP_CONNECTION: MACRO
 	db \1 ; map id
 	dw \6 + \4 ; "Conection Strip" location
-	dw wOverworldMap + 3 + (\8 + 3) * (\7 + 6) + \3 ; current map positoin
+	dw wOverworldMap + 3 + (\8 + 3) * (\7 + 6) + \3 ; current map position
 	db \5 ; width of connection strip
 	db \2 ; map width
 	db 0  ; y alignment (y coordinate of player when entering map)

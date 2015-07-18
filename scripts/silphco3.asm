@@ -58,7 +58,7 @@ SilphCo3TextPointers: ; 59fc4 (16:5fc4)
 	dw SilphCo3Text1
 	dw SilphCo3Text2
 	dw SilphCo3Text3
-	dw Predef5CText
+	dw PickUpItemText
 
 SilphCo3TrainerHeaders: ; 59fcc (16:5fcc)
 SilphCo3TrainerHeader0: ; 59fcc (16:5fcc)

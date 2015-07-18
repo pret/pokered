@@ -21,9 +21,9 @@ SSAnne10TextPointers: ; 61d6e (18:5d6e)
 	dw SSAnne10Text6
 	dw SSAnne10Text7
 	dw SSAnne10Text8
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 SSAnne10TrainerHeaders: ; 61d84 (18:5d84)
 SSAnne10TrainerHeader0: ; 61d84 (18:5d84)

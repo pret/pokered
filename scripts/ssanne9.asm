@@ -21,10 +21,10 @@ SSAnne9TextPointers: ; 61b6a (18:5b6a)
 	dw SSAnne9Text3
 	dw SSAnne9Text4
 	dw SSAnne9Text5
-	dw Predef5CText
+	dw PickUpItemText
 	dw SSAnne9Text7
 	dw SSAnne9Text8
-	dw Predef5CText
+	dw PickUpItemText
 	dw SSAnne9Text10
 	dw SSAnne9Text11
 	dw SSAnne9Text12

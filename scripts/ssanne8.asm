@@ -22,7 +22,7 @@ SSAnne8TextPointers: ; 6198f (18:598f)
 	dw SSAnne8Text7
 	dw SSAnne8Text8
 	dw SSAnne8Text9
-	dw Predef5CText
+	dw PickUpItemText
 	dw SSAnne8Text11
 
 SSAnne8TrainerHeaders: ; 619a5 (18:59a5)

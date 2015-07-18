@@ -58,13 +58,13 @@ WhichPrizeTextPtr: ; 52789 (14:6789)
 GetPrizeMenuId: ; 5278e (14:678e)
 ; determine which one among the three
 ; prize-texts has been selected
-; using the text ID (stored in [$FF8C])
+; using the text ID (stored in [hSpriteIndexOrTextID])
 ; load the three prizes at wd13d-wd13f
 ; load the three prices at wd141-wd146
 ; display the three prizes' names
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
-	ld a,[$FF8C]
+	ld a,[hSpriteIndexOrTextID]
 	sub a,$03       ; prize-texts' id are 3, 4 and 5
 	ld [wd12f],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
 	add a

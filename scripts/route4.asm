@@ -15,7 +15,7 @@ Route4ScriptPointers: ; 5566b (15:566b)
 Route4TextPointers: ; 55671 (15:5671)
 	dw Route4Text1
 	dw Route4Text2
-	dw Predef5CText
+	dw PickUpItemText
 	dw PokeCenterSignText
 	dw Route4Text5
 	dw Route4Text6

@@ -1,10 +1,10 @@
 FarCopyData2::
-; Identical to FarCopyData, but uses $ff8b
+; Identical to FarCopyData, but uses hROMBankTemp
 ; as temp space instead of wBuffer.
-	ld [$ff8b],a
+	ld [hROMBankTemp],a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$ff8b]
+	ld a,[hROMBankTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	call CopyData
@@ -15,10 +15,10 @@ FarCopyData2::
 
 FarCopyData3::
 ; Copy bc bytes from a:de to hl.
-	ld [$ff8b],a
+	ld [hROMBankTemp],a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$ff8b]
+	ld a,[hROMBankTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	push hl
@@ -38,10 +38,10 @@ FarCopyData3::
 FarCopyDataDouble::
 ; Expand bc bytes of 1bpp image data
 ; from a:hl to 2bpp data at de.
-	ld [$ff8b],a
+	ld [hROMBankTemp],a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$ff8b]
+	ld a,[hROMBankTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 .loop
@@ -70,7 +70,7 @@ CopyVideoData::
 	ld [H_AUTOBGTRANSFERENABLED], a
 
 	ld a, [H_LOADEDROMBANK]
-	ld [$ff8b], a
+	ld [hROMBankTemp], a
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
@@ -94,7 +94,7 @@ CopyVideoData::
 .done
 	ld [H_VBCOPYSIZE], a
 	call DelayFrame
-	ld a, [$ff8b]
+	ld a, [hROMBankTemp]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	pop af
@@ -119,7 +119,7 @@ CopyVideoDataDouble::
 	xor a ; disable auto-transfer while copying
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [H_LOADEDROMBANK]
-	ld [$ff8b], a
+	ld [hROMBankTemp], a
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
@@ -143,7 +143,7 @@ CopyVideoDataDouble::
 .done
 	ld [H_VBCOPYDOUBLESIZE], a
 	call DelayFrame
-	ld a, [$ff8b]
+	ld a, [hROMBankTemp]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	pop af

@@ -38,7 +38,7 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -57,7 +57,7 @@ PokemonTower5TextPointers: ; 6099b (18:499b)
 	dw PokemonTower5Text3
 	dw PokemonTower5Text4
 	dw PokemonTower5Text5
-	dw Predef5CText
+	dw PickUpItemText
 	dw PokemonTower5Text7
 
 PokemonTower5TrainerHeaders: ; 609a9 (18:49a9)

@@ -16,7 +16,7 @@ PokemonTower3TextPointers: ; 606e5 (18:46e5)
 	dw PokemonTower3Text1
 	dw PokemonTower3Text2
 	dw PokemonTower3Text3
-	dw Predef5CText
+	dw PickUpItemText
 
 PokemonTower3TrainerHeaders: ; 606ed (18:46ed)
 PokemonTower3TrainerHeader0: ; 606ed (18:46ed)

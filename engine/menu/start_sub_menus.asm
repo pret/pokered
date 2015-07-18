@@ -524,7 +524,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedPicFront
 	ld bc,(BANK(RedPicFront) << 8) | $01
-	predef Predef3B
+	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
 	hlCoord 0, 2
 	ld a," "

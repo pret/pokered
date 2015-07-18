@@ -53,7 +53,7 @@ Mansion1Script_Switches: ; 44316 (11:4316)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $4
-	ld [H_SPRITEHEIGHT], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Mansion1ScriptPointers: ; 44326 (11:4326)
@@ -63,8 +63,8 @@ Mansion1ScriptPointers: ; 44326 (11:4326)
 
 Mansion1TextPointers: ; 4432c (11:432c)
 	dw Mansion1Text1
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Mansion1Text4
 
 Mansion1TrainerHeaders: ; 44334 (11:4334)

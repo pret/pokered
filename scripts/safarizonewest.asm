@@ -2,10 +2,10 @@ SafariZoneWestScript: ; 4a1b5 (12:61b5)
 	jp EnableAutoTextBoxDrawing
 
 SafariZoneWestTextPointers: ; 4a1b8 (12:61b8)
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw SafariZoneWestText5
 	dw SafariZoneWestText6
 	dw SafariZoneWestText7

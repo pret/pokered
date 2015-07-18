@@ -31,7 +31,7 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, MAROWAK
 	ld [W_CUROPPONENT], a
@@ -63,7 +63,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld hl, wd768
 	set 7, [hl]
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -100,8 +100,8 @@ PokemonTower6TextPointers: ; 60bb1 (18:4bb1)
 	dw PokemonTower6Text1
 	dw PokemonTower6Text2
 	dw PokemonTower6Text3
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw PokemonTower6Text6
 	dw PokemonTower6Text7
 

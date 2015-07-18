@@ -444,7 +444,7 @@ CheckWarpsCollision:: ; 0706 (0:0706)
 	ld a,[hli]
 	ld [wDestinationWarpID],a
 	ld a,[hl]
-	ld [$ff8b],a ; save target map
+	ld [hWarpDestinationMap],a
 	jr WarpFound2
 .retry1
 	inc hl
@@ -466,7 +466,7 @@ WarpFound1:: ; 0735 (0:0735)
 	ld a,[hli]
 	ld [wDestinationWarpID],a
 	ld a,[hli]
-	ld [$ff8b],a ; save target map
+	ld [hWarpDestinationMap],a
 
 WarpFound2:: ; 073c (0:073c)
 	ld a,[wNumberOfWarps]
@@ -481,8 +481,8 @@ WarpFound2:: ; 073c (0:073c)
 	ld [wLastMap],a
 	ld a,[W_CURMAPWIDTH]
 	ld [wd366],a
-	ld a,[$ff8b] ; destination map number
-	ld [W_CURMAP],a ; change current map to destination map
+	ld a,[hWarpDestinationMap]
+	ld [W_CURMAP],a
 	cp a,ROCK_TUNNEL_1
 	jr nz,.notRockTunnel
 	ld a,$06
@@ -493,11 +493,11 @@ WarpFound2:: ; 073c (0:073c)
 	jr .done
 ; for maps that can have the 0xFF destination map, which means to return to the outside map; not all these maps are necessarily indoors, though
 .indoorMaps
-	ld a,[$ff8b] ; destination map
+	ld a,[hWarpDestinationMap] ; destination map
 	cp a,$ff
 	jr z,.goBackOutside
 ; if not going back to the previous map
-	ld [W_CURMAP],a ; current map number
+	ld [W_CURMAP],a
 	callba IsPlayerStandingOnWarpPadOrHole
 	ld a,[wcd5b]
 	dec a ; is the player on a warp pad?
@@ -539,22 +539,22 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr nz,.checkEastMap
 	ld a,[W_MAPCONN3PTR]
 	ld [W_CURMAP],a
-	ld a,[wd38f] ; new X coordinate upon entering west map
+	ld a,[wWestConnectedMapXAlignment] ; new X coordinate upon entering west map
 	ld [W_XCOORD],a
 	ld a,[W_YCOORD]
 	ld c,a
-	ld a,[wd38e] ; Y adjustment upon entering west map
+	ld a,[wWestConnectedMapYAlignment] ; Y adjustment upon entering west map
 	add c
 	ld c,a
 	ld [W_YCOORD],a
-	ld a,[wd390] ; pointer to upper left corner of map without adjustment for Y position
+	ld a,[wWestConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
 	ld l,a
-	ld a,[wd391]
+	ld a,[wWestConnectedMapViewPointer + 1]
 	ld h,a
 	srl c
 	jr z,.savePointer1
 .pointerAdjustmentLoop1
-	ld a,[wd38d] ; width of connected map
+	ld a,[wWestConnectedMapWidth] ; width of connected map
 	add a,$06
 	ld e,a
 	ld d,$00
@@ -575,22 +575,22 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr nz,.checkNorthMap
 	ld a,[W_MAPCONN4PTR]
 	ld [W_CURMAP],a
-	ld a,[wd39a] ; new X coordinate upon entering east map
+	ld a,[wEastConnectedMapXAlignment] ; new X coordinate upon entering east map
 	ld [W_XCOORD],a
 	ld a,[W_YCOORD]
 	ld c,a
-	ld a,[wd399] ; Y adjustment upon entering east map
+	ld a,[wEastConnectedMapYAlignment] ; Y adjustment upon entering east map
 	add c
 	ld c,a
 	ld [W_YCOORD],a
-	ld a,[wd39b] ; pointer to upper left corner of map without adjustment for Y position
+	ld a,[wEastConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for Y position
 	ld l,a
-	ld a,[wd39c]
+	ld a,[wEastConnectedMapViewPointer + 1]
 	ld h,a
 	srl c
 	jr z,.savePointer2
 .pointerAdjustmentLoop2
-	ld a,[wd398]
+	ld a,[wEastConnectedMapWidth]
 	add a,$06
 	ld e,a
 	ld d,$00
@@ -610,19 +610,19 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr nz,.checkSouthMap
 	ld a,[W_MAPCONN1PTR]
 	ld [W_CURMAP],a
-	ld a,[wd378] ; new Y coordinate upon entering north map
+	ld a,[wNorthConnectedMapYAlignment] ; new Y coordinate upon entering north map
 	ld [W_YCOORD],a
 	ld a,[W_XCOORD]
 	ld c,a
-	ld a,[wd379] ; X adjustment upon entering north map
+	ld a,[wNorthConnectedMapXAlignment] ; X adjustment upon entering north map
 	add c
 	ld c,a
 	ld [W_XCOORD],a
-	ld a,[wd37a] ; pointer to upper left corner of map without adjustment for X position
+	ld a,[wNorthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
 	ld l,a
-	ld a,[wd37b]
+	ld a,[wNorthConnectedMapViewPointer + 1]
 	ld h,a
-	ld b,$00
+	ld b,0
 	srl c
 	add hl,bc
 	ld a,l
@@ -637,19 +637,19 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr nz,.didNotEnterConnectedMap
 	ld a,[W_MAPCONN2PTR]
 	ld [W_CURMAP],a
-	ld a,[wd383] ; new Y coordinate upon entering south map
+	ld a,[wSouthConnectedMapYAlignment] ; new Y coordinate upon entering south map
 	ld [W_YCOORD],a
 	ld a,[W_XCOORD]
 	ld c,a
-	ld a,[wd384] ; X adjustment upon entering south map
+	ld a,[wSouthConnectedMapXAlignment] ; X adjustment upon entering south map
 	add c
 	ld c,a
 	ld [W_XCOORD],a
-	ld a,[wd385] ; pointer to upper left corner of map without adjustment for X position
+	ld a,[wSouthConnectedMapViewPointer] ; pointer to upper left corner of map without adjustment for X position
 	ld l,a
-	ld a,[wd386]
+	ld a,[wSouthConnectedMapViewPointer + 1]
 	ld h,a
-	ld b,$00
+	ld b,0
 	srl c
 	add hl,bc
 	ld a,l
@@ -884,9 +884,9 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 ; a 3-byte border at the edges of the map is kept so that there is space for map connections
 	ld hl,wOverworldMap
 	ld a,[W_CURMAPWIDTH]
-	ld [$ff8c],a
+	ld [hMapWidth],a
 	add a,$06 ; border (east and west)
-	ld [$ff8b],a ; map width + border
+	ld [hMapStride],a ; map width + border
 	ld b,$00
 	ld c,a
 ; make space for north border (next 3 lines)
@@ -903,7 +903,7 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 	ld b,a
 .rowLoop ; copy one row each iteration
 	push hl
-	ld a,[$ff8c] ; map width (without border)
+	ld a,[hMapWidth] ; map width (without border)
 	ld c,a
 .rowInnerLoop
 	ld a,[de]
@@ -913,7 +913,7 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 	jr nz,.rowInnerLoop
 ; add the map width plus the border to the base address of the current row to get the next row's address
 	pop hl
-	ld a,[$ff8b] ; map width + border
+	ld a,[hMapStride] ; map width + border
 	add l
 	ld l,a
 	jr nc,.noCarry
@@ -926,72 +926,72 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 	cp a,$ff
 	jr z,.southConnection
 	call SwitchToMapRomBank
-	ld a,[wd372]
+	ld a,[wNorthConnectionStripSrc]
 	ld l,a
-	ld a,[wd373]
+	ld a,[wNorthConnectionStripSrc + 1]
 	ld h,a
-	ld a,[wd374]
+	ld a,[wNorthConnectionStripDest]
 	ld e,a
-	ld a,[wd375]
+	ld a,[wNorthConnectionStripDest + 1]
 	ld d,a
-	ld a,[wd376]
-	ld [$ff8b],a
-	ld a,[wd377]
-	ld [$ff8c],a
+	ld a,[wNorthConnectionStripWidth]
+	ld [hNorthSouthConnectionStripWidth],a
+	ld a,[wNorthConnectedMapWidth]
+	ld [hNorthSouthConnectedMapWidth],a
 	call LoadNorthSouthConnectionsTileMap
 .southConnection
 	ld a,[W_MAPCONN2PTR]
 	cp a,$ff
 	jr z,.westConnection
 	call SwitchToMapRomBank
-	ld a,[wd37d]
+	ld a,[wSouthConnectionStripSrc]
 	ld l,a
-	ld a,[wd37e]
+	ld a,[wSouthConnectionStripSrc + 1]
 	ld h,a
-	ld a,[wd37f]
+	ld a,[wSouthConnectionStripDest]
 	ld e,a
-	ld a,[wd380]
+	ld a,[wSouthConnectionStripDest + 1]
 	ld d,a
-	ld a,[wd381]
-	ld [$ff8b],a
-	ld a,[wd382]
-	ld [$ff8c],a
+	ld a,[wSouthConnectionStripWidth]
+	ld [hNorthSouthConnectionStripWidth],a
+	ld a,[wSouthConnectedMapWidth]
+	ld [hNorthSouthConnectedMapWidth],a
 	call LoadNorthSouthConnectionsTileMap
 .westConnection
 	ld a,[W_MAPCONN3PTR]
 	cp a,$ff
 	jr z,.eastConnection
 	call SwitchToMapRomBank
-	ld a,[wd388]
+	ld a,[wWestConnectionStripSrc]
 	ld l,a
-	ld a,[wd389]
+	ld a,[wWestConnectionStripSrc + 1]
 	ld h,a
-	ld a,[wd38a]
+	ld a,[wWestConnectionStripDest]
 	ld e,a
-	ld a,[wd38b]
+	ld a,[wWestConnectionStripDest + 1]
 	ld d,a
-	ld a,[wd38c]
+	ld a,[wWestConnectionStripHeight]
 	ld b,a
-	ld a,[wd38d]
-	ld [$ff8b],a
+	ld a,[wWestConnectedMapWidth]
+	ld [hEastWestConnectedMapWidth],a
 	call LoadEastWestConnectionsTileMap
 .eastConnection
 	ld a,[W_MAPCONN4PTR]
 	cp a,$ff
 	jr z,.done
 	call SwitchToMapRomBank
-	ld a,[wd393]
+	ld a,[wEastConnectionStripSrc]
 	ld l,a
-	ld a,[wd394]
+	ld a,[wEastConnectionStripSrc + 1]
 	ld h,a
-	ld a,[wd395]
+	ld a,[wEastConnectionStripDest]
 	ld e,a
-	ld a,[wd396]
+	ld a,[wEastConnectionStripDest + 1]
 	ld d,a
-	ld a,[wd397]
+	ld a,[wEastConnectionStripHeight]
 	ld b,a
-	ld a,[wd398]
-	ld [$ff8b],a
+	ld a,[wEastConnectedMapWidth]
+	ld [hEastWestConnectedMapWidth],a
 	call LoadEastWestConnectionsTileMap
 .done
 	ret
@@ -1001,7 +1001,7 @@ LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 .loop
 	push de
 	push hl
-	ld a,[$ff8b] ; width of connection
+	ld a,[hNorthSouthConnectionStripWidth]
 	ld b,a
 .innerLoop
 	ld a,[hli]
@@ -1011,7 +1011,7 @@ LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 	jr nz,.innerLoop
 	pop hl
 	pop de
-	ld a,[$ff8c] ; width of connected map
+	ld a,[hNorthSouthConnectedMapWidth]
 	add l
 	ld l,a
 	jr nc,.noCarry1
@@ -1040,7 +1040,7 @@ LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	jr nz,.innerLoop
 	pop de
 	pop hl
-	ld a,[$ff8b] ; width of connected map
+	ld a,[hEastWestConnectedMapWidth]
 	add l
 	ld l,a
 	jr nc,.noCarry1
@@ -2022,7 +2022,7 @@ LoadMapHeader:: ; 107c (0:107c)
 	ld b,a
 	res 7,a
 	ld [W_CURMAPTILESET],a
-	ld [$ff8b],a
+	ld [hPreviousTileset],a
 	bit 7,b
 	ret nz
 	ld hl,MapHeaderPointers
@@ -2191,24 +2191,24 @@ LoadMapHeader:: ; 107c (0:107c)
 	ld a,[hli]
 	ld [de],a ; store movement byte 1 at C2X6
 	ld a,[hli]
-	ld [$ff8d],a ; save movement byte 2
+	ld [hLoadSpriteTemp1],a ; save movement byte 2
 	ld a,[hli]
-	ld [$ff8e],a ; save text ID and flags byte
+	ld [hLoadSpriteTemp2],a ; save text ID and flags byte
 	push bc
 	push hl
 	ld b,$00
 	ld hl,W_MAPSPRITEDATA
 	add hl,bc
-	ld a,[$ff8d]
+	ld a,[hLoadSpriteTemp1]
 	ld [hli],a ; store movement byte 2 in byte 0 of sprite entry
-	ld a,[$ff8e]
+	ld a,[hLoadSpriteTemp2]
 	ld [hl],a ; this appears pointless, since the value is overwritten immediately after
-	ld a,[$ff8e]
-	ld [$ff8d],a
+	ld a,[hLoadSpriteTemp2]
+	ld [hLoadSpriteTemp1],a
 	and a,$3f
 	ld [hl],a ; store text ID in byte 1 of sprite entry
 	pop hl
-	ld a,[$ff8d]
+	ld a,[hLoadSpriteTemp1]
 	bit 6,a
 	jr nz,.trainerSprite
 	bit 7,a
@@ -2216,25 +2216,25 @@ LoadMapHeader:: ; 107c (0:107c)
 	jr .regularSprite
 .trainerSprite
 	ld a,[hli]
-	ld [$ff8d],a ; save trainer class
+	ld [hLoadSpriteTemp1],a ; save trainer class
 	ld a,[hli]
-	ld [$ff8e],a ; save trainer number (within class)
+	ld [hLoadSpriteTemp2],a ; save trainer number (within class)
 	push hl
 	ld hl,W_MAPSPRITEEXTRADATA
 	add hl,bc
-	ld a,[$ff8d]
+	ld a,[hLoadSpriteTemp1]
 	ld [hli],a ; store trainer class in byte 0 of the entry
-	ld a,[$ff8e]
+	ld a,[hLoadSpriteTemp2]
 	ld [hl],a ; store trainer number in byte 1 of the entry
 	pop hl
 	jr .nextSprite
 .itemBallSprite
 	ld a,[hli]
-	ld [$ff8d],a ; save item number
+	ld [hLoadSpriteTemp1],a ; save item number
 	push hl
 	ld hl,W_MAPSPRITEEXTRADATA
 	add hl,bc
-	ld a,[$ff8d]
+	ld a,[hLoadSpriteTemp1]
 	ld [hli],a ; store item number in byte 0 of the entry
 	xor a
 	ld [hl],a ; zero byte 1, since it is not used

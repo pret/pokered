@@ -2,7 +2,7 @@ SafariZoneCenterScript: ; 45bb2 (11:5bb2)
 	jp EnableAutoTextBoxDrawing
 
 SafariZoneCenterTextPointers: ; 45bb5 (11:5bb5)
-	dw Predef5CText
+	dw PickUpItemText
 	dw SafariZoneCenterText2
 	dw SafariZoneCenterText3
 

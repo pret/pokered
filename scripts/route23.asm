@@ -49,9 +49,9 @@ Route23Script0: ; 51219 (14:5219)
 	ret nc
 .asm_51237
 	ld a, e
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	ld a, c
-	ld [wWhichTrade], a
+	ld [wWhichBadge], a
 	ld b, $2
 	ld hl, wd7ed
 	predef FlagActionPredef
@@ -69,21 +69,21 @@ YCoordsData_51255: ; 51255 (14:5255)
 
 Route23Script_5125d: ; 5125d (14:525d)
 	ld hl, BadgeTextPointers
-	ld a, [wWhichTrade]
+	ld a, [wWhichBadge]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld de, wcd6d
-.asm_5126e
+.copyTextLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp $50
-	jr nz, .asm_5126e
+	cp "@"
+	jr nz, .copyTextLoop
 	ret
 
 BadgeTextPointers: ; 51276 (14:5276)
@@ -188,9 +188,9 @@ Route23Text7: ; 5133d (14:533d)
 	jp TextScriptEnd
 
 Route23Script_51346: ; 51346 (14:5346)
-	ld [wWhichTrade], a
+	ld [wWhichBadge], a
 	call Route23Script_5125d
-	ld a, [wWhichTrade]
+	ld a, [wWhichBadge]
 	inc a
 	ld c, a
 	ld b, $2
@@ -208,7 +208,7 @@ Route23Script_51346: ; 51346 (14:5346)
 .asm_5136e
 	ld hl, VictoryRoadGuardText2
 	call PrintText
-	ld a, [wWhichTrade]
+	ld a, [wWhichBadge]
 	ld c, a
 	ld b, $1
 	ld hl, wd7ed

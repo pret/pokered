@@ -66,7 +66,7 @@ MtMoon3Script0: ; 49d6f (12:5d6f)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 MtMoon3Script_49d91: ; 49d91 (12:5d91)
@@ -92,7 +92,7 @@ MtMoon3Script3: ; 49d9a (12:5d9a)
 
 MtMoon3Script4: ; 49dba (12:5dba)
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld hl, CoordsData_49dea
 	call ArePlayerCoordsInArray
@@ -106,7 +106,7 @@ MtMoon3Script4: ; 49dba (12:5dba)
 	ld de, MovementData_49df8
 .asm_49dda
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $5
 	ld [W_MTMOON3CURSCRIPT], a
@@ -140,7 +140,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, [wd7f6]
 	bit 6, a
@@ -167,8 +167,8 @@ MtMoon3TextPointers: ; 49e34 (12:5e34)
 	dw MtMoon3Text5
 	dw MtMoon3Text6
 	dw MtMoon3Text7
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw MtMoon3Text_49f99
 
 MtMoon3TrainerHeaders: ; 49e48 (12:5e48)

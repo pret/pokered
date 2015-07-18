@@ -170,17 +170,17 @@ SilphCo11Script0: ; 621db (18:61db)
 	ld hl, CoordsData_62211
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [wcf0d], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_62216
 	call MoveSprite
@@ -201,9 +201,9 @@ MovementData_62216: ; 62216 (18:6216)
 SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [wd528], a
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	ld a, b
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
@@ -214,17 +214,17 @@ SilphCo11Script5: ; 62227 (18:6227)
 	cp $1
 	jr z, .asm_6223c
 	ld a, $2
-	ld b, $c
+	ld b, SPRITE_FACING_RIGHT
 	jr .asm_62240
 .asm_6223c
 	ld a, $8
-	ld b, $0
+	ld b, SPRITE_FACING_DOWN
 .asm_62240
 	call SilphCo11Script_6221a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
@@ -242,17 +242,17 @@ SilphCo11Script3: ; 6226a (18:626a)
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_62284
 	ld a, $2
-	ld b, $c
+	ld b, SPRITE_FACING_RIGHT
 	jr .asm_62288
 .asm_62284
 	ld a, $8
-	ld b, $0
+	ld b, SPRITE_FACING_DOWN
 .asm_62288
 	call SilphCo11Script_6221a
 	call Delay3
@@ -266,7 +266,7 @@ SilphCo11Script4: ; 62293 (18:6293)
 	ld hl, SilphCo10Text_62330
 	ld de, SilphCo10Text_62330
 	call SaveEndBattleTextPointers
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [H_SPRITEINDEX]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

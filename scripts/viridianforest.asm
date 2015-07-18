@@ -17,9 +17,9 @@ ViridianForestTextPointers: ; 61126 (18:5126)
 	dw ViridianForestText2
 	dw ViridianForestText3
 	dw ViridianForestText4
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw ViridianForestText8
 	dw ViridianForestText9
 	dw ViridianForestText10

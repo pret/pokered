@@ -49,7 +49,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, [wd803]
 	bit 2, a
