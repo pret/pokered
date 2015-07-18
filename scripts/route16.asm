@@ -28,7 +28,7 @@ Route16Script0: ; 59959 (16:5959)
 	res 0, [hl]
 	jp z, CheckFightingMapTrainers
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [W_CUROPPONENT], a
@@ -52,7 +52,7 @@ Route16Script3: ; 5998f (16:598f)
 	cp $2
 	jr z, .asm_599a8
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_599a8
 	ld hl, wd7e0

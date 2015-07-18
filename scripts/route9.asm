@@ -22,7 +22,7 @@ Route9TextPointers: ; 556d5 (15:56d5)
 	dw Route9Text7
 	dw Route9Text8
 	dw Route9Text9
-	dw Predef5CText
+	dw PickUpItemText
 	dw Route9Text11
 
 Route9TrainerHeaders: ; 556eb (15:56eb)

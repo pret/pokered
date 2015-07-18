@@ -34,9 +34,9 @@ SetDefaultNames: ; 60ca (1:60ca)
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a, BANK(Music_Routes2) ; bank of song
+	ld a, BANK(Music_Routes2)
 	ld c,a
-	ld a, MUSIC_ROUTES2 ; song #
+	ld a, MUSIC_ROUTES2
 	call PlayMusic
 	call ClearScreen
 	call LoadTextBoxTilePatterns
@@ -54,50 +54,49 @@ OakSpeech: ; 6115 (1:6115)
 	xor a
 	ld [hTilesetType],a
 	ld a,[wd732]
-	bit 1,a ; XXX when is bit 1 set?
-	jp nz,Func_61bc ; easter egg: skip the intro
+	bit 1,a ; possibly a debug mode bit
+	jp nz,.skipChoosingNames
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
-	call IntroPredef3B   ; displays Oak pic?
+	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
-	call PrintText      ; prints text box
+	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld a,NIDORINO
-	ld [wd0b5],a    ; pic displayed is stored at this location
+	ld [wd0b5],a
 	ld [wcf91],a
-	call GetMonHeader      ; this is also related to the pic
-	hlCoord 6, 4     ; position on tilemap the pic is displayed
-	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
+	call GetMonHeader
+	hlCoord 6, 4
+	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl,OakSpeechText2
-	call PrintText      ; Prints text box
+	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
-	call IntroPredef3B      ; displays player pic?
+	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
-	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
+	call ChoosePlayerName
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,Rival1Pic
 	ld bc,(Bank(Rival1Pic) << 8) | $00
-	call IntroPredef3B ; displays rival pic
+	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	call LoadDefaultNamesRival
-
-Func_61bc: ; 61bc (1:61bc)
+	call ChooseRivalName
+.skipChoosingNames
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a,[wd72d]
 	and a
@@ -120,12 +119,12 @@ Func_61bc: ; 61bc (1:61bc)
 	call CopyVideoData
 	ld de,ShrinkPic1
 	ld bc,(BANK(ShrinkPic1) << 8) | $00
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
 	ld bc,(BANK(ShrinkPic2) << 8) | $00
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -207,10 +206,12 @@ MovePicLeft: ; 6288 (1:6288)
 	ld [rWX],a
 	jr .next
 
-Predef3B: ; 62a1 (1:62a1)
+DisplayPicCenteredOrUpperRight: ; 62a1 (1:62a1)
 	call GetPredefRegisters
-IntroPredef3B: ; 62a4 (1:62a4)
-; bank of sprite given in b
+IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
+; b = bank
+; de = address of compressed pic
+; c: 0 = centred, non-zero = upper-right
 	push bc
 	ld a,b
 	call UncompressSpriteFromDE

@@ -55,7 +55,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, W_OPTIONS
 	res 7, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
@@ -99,10 +99,10 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld a, $4
 	ld [W_GARYCURSCRIPT], a
@@ -111,14 +111,14 @@ GaryScript3: ; 75fbb (1d:5fbb)
 GaryScript4: ; 75fe4 (1d:5fe4)
 	callba Music_Cities1AlternateTempo
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_76014
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wcc4d], a
@@ -142,17 +142,17 @@ GaryScript5: ; 7601a (1d:601a)
 	ld a, $2
 	ld [wd528], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [$ff8d], a
-	call SetSpriteFacingDirectionAndDelay ; face object
+	ld [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $6
 	ld [W_GARYCURSCRIPT], a
@@ -160,12 +160,12 @@ GaryScript5: ; 7601a (1d:601a)
 
 GaryScript6: ; 76047 (1d:6047)
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_RIGHT
-	ld [$ff8d], a
-	call SetSpriteFacingDirectionAndDelay ; face object
+	ld [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $4
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $7
 	ld [W_GARYCURSCRIPT], a
@@ -173,16 +173,16 @@ GaryScript6: ; 76047 (1d:6047)
 
 GaryScript7: ; 7605f (1d:605f)
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [$ff8d], a
-	call SetSpriteFacingDirectionAndDelay ; face object
+	ld [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
 	ld a, $5
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld de, MovementData_76080
 	ld a, $2
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $8
 	ld [W_GARYCURSCRIPT], a

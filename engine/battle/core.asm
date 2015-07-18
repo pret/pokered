@@ -1310,7 +1310,7 @@ SevenSpacesText: ; 3c8d7 (f:48d7)
 ; if a is 8, the slide is to the right, else it is to the left
 ; bug: when this is called, [H_AUTOBGTRANSFERENABLED] is non-zero, so there is screen tearing
 SlideTrainerPicOffScreen: ; 3c8df (f:48df)
-	ld [$FF8B], a
+	ld [hSlideAmount], a
 	ld c, a
 .slideStepLoop ; each iteration, the trainer pic is slid one tile left/right
 	push bc
@@ -1318,10 +1318,10 @@ SlideTrainerPicOffScreen: ; 3c8df (f:48df)
 	ld b, 7 ; number of rows
 .rowLoop
 	push hl
-	ld a, [$FF8B]
+	ld a, [hSlideAmount]
 	ld c, a
 .columnLoop
-	ld a, [$FF8B]
+	ld a, [hSlideAmount]
 	cp 8
 	jr z, .slideRight
 .slideLeft ; slide player sprite off screen
@@ -1590,14 +1590,14 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld a, [hl]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, [de]
-	ld [$ff8d], a
+	ld [hEnemySpeed], a
 	inc de
 	ld a, [de]
-	ld [$ff8e], a
+	ld [hEnemySpeed + 1], a
 	call LoadScreenTilesFromBuffer1
 	ld de, H_MULTIPLICAND + 1
-	ld hl, $ff8d
-	ld c, $2
+	ld hl, hEnemySpeed
+	ld c, 2
 	call StringCmp
 	jr nc, .canEscape ; jump if player speed greater than enemy speed
 	xor a
@@ -1609,9 +1609,9 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld [H_DIVIDEND], a
 	ld a, [H_PRODUCT + 3]
 	ld [H_DIVIDEND + 1], a
-	ld a, [$ff8d]
+	ld a, [hEnemySpeed]
 	ld b, a
-	ld a, [$ff8e]
+	ld a, [hEnemySpeed + 1]
 ; divide enemy speed by 4
 	srl b
 	rr a
@@ -6411,7 +6411,7 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	predef ScaleSpriteByTwo
 	ld hl, wOAMBuffer
 	xor a
-	ld [$FF8B], a ; initial tile number
+	ld [hOAMTile], a ; initial tile number
 	ld b, $7 ; 7 columns
 	ld e, $a0 ; X for the left-most column
 .loop ; each loop iteration writes 3 OAM entries in a vertical column
@@ -6425,16 +6425,16 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	add d ; increase Y by height of tile
 	ld d, a
 	inc hl
-	ld a, [$FF8B]
+	ld a, [hOAMTile]
 	ld [hli], a ; OAM tile number
 	inc a ; increment tile number
-	ld [$FF8B], a
+	ld [hOAMTile], a
 	inc hl
 	dec c
 	jr nz, .innerLoop
-	ld a, [$FF8B]
+	ld a, [hOAMTile]
 	add $4 ; increase tile number by 4
-	ld [$FF8B], a
+	ld [hOAMTile], a
 	ld a, $8 ; width of tile
 	add e ; increase X by width of tile
 	ld e, a

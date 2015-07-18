@@ -64,7 +64,7 @@ VermilionGymScript3: ; 5ca9d (17:4a9d)
 
 VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd773
 	set 7, [hl]
@@ -72,14 +72,14 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd773
 	set 6, [hl]
 	jr .asm_5cad3
 .BagFull
 	ld a, $8
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5cad3
 	ld hl, W_OBTAINEDBADGES

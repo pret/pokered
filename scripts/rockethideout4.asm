@@ -56,7 +56,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	ld hl, wd81b
 	set 7, [hl]
 	ld a, $a
-	ld [H_SPRITEHEIGHT], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	ld a, HS_ROCKET_HIDEOUT_4_GIOVANNI
@@ -81,11 +81,11 @@ RocketHideout4TextPointers: ; 45501 (11:5501)
 	dw RocketHideout4Text2
 	dw RocketHideout4Text3
 	dw RocketHideout4Text4
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw RocketHideout4Text10
 
 RocketHideout4TrainerHeaders: ; 45515 (11:5515)

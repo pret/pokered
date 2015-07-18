@@ -163,7 +163,7 @@ DrawFrameBlock: ; 78000 (1e:4000)
 
 PlayAnimation: ; 780f1 (1e:40f1)
 	xor a
-	ld [$FF8B],a
+	ld [$FF8B],a ; it looks like nothing reads this
 	ld [W_SUBANIMTRANSFORM],a
 	ld a,[W_ANIMATIONID] ; get animation number
 	dec a

@@ -1,7 +1,6 @@
 GetMachinePrice: ; 7bf86 (1e:7f86)
 ; Input:  [wcf91] = Item Id of a TM
-; Output: Stores the 2-byte TM price in [H_DOWNARROWBLINKCNT1] and [H_DOWNARROWBLINKCNT2]
-;         as a BCD
+; Output: Stores the TM price at hItemPrice
 	ld a, [wcf91] ; a contains TM item id
 	sub TM_01
 	ret c
@@ -17,10 +16,10 @@ GetMachinePrice: ; 7bf86 (1e:7f86)
 	swap a
 .highNybbleIsPrice
 	and $f0
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hItemPrice + 1], a
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a
-	ld [$ff8d], a
+	ld [hItemPrice], a
+	ld [hItemPrice + 2], a
 	ret
 
 INCLUDE "data/tm_prices.asm"

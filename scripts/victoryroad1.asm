@@ -43,8 +43,8 @@ CoordsData_5da5c: ; 5da5c (17:5a5c)
 VictoryRoad1TextPointers: ; 5da5f (17:5a5f)
 	dw VictoryRoad1Text1
 	dw VictoryRoad1Text2
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText

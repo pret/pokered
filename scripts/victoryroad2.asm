@@ -77,10 +77,10 @@ VictoryRoad2TextPointers: ; 5181b (14:581b)
 	dw VictoryRoad2Text4
 	dw VictoryRoad2Text5
 	dw VictoryRoad2Text6
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText

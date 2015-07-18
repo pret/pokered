@@ -556,11 +556,11 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp PrintText
 .tryToStopSurfing
 	xor a
-	ld [$ff8c],a
+	ld [hSpriteIndexOrTextID],a
 	ld d,16 ; talking range in pixels (normal range)
 	call IsSpriteInFrontOfPlayer2
 	res 7,[hl]
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	jr nz,.cannotStopSurfing
 	ld hl,TilePairCollisionsWater

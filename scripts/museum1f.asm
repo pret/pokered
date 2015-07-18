@@ -25,7 +25,7 @@ Museum1FScript0: ; 5c10d (17:410d)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Museum1FScript1: ; 5c12a (17:412a)
@@ -69,7 +69,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	call PrintText
 	jp Museum1FScriptEnd
 .asm_3ded4
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
@@ -96,15 +96,15 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, wd754
 	set 0, [hl]
 	xor a
-	ld [wWhichTrade], a
-	ld [wTrainerEngageDistance], a
+	ld [wMuseumPriceTemp], a
+	ld [wMuseumPriceTemp + 1], a
 	ld a, $50
-	ld [wTrainerFacingDirection], a
-	ld hl, wTrainerFacingDirection
+	ld [wMuseumPriceTemp + 2], a
+	ld hl, wMuseumPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3

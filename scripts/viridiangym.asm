@@ -140,7 +140,7 @@ ViridianGymScript3: ; 74988 (1d:4988)
 	ld [wJoyIgnore], a
 ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd751
 	set 1, [hl]
@@ -148,14 +148,14 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd751
 	set 0, [hl]
 	jr .asm_749be
 .BagFull
 	ld a, $e
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_749be
 	ld hl, W_OBTAINEDBADGES
@@ -190,7 +190,7 @@ ViridianGymTextPointers: ; 749ec (1d:49ec)
 	dw ViridianGymText8
 	dw ViridianGymText9
 	dw ViridianGymText10
-	dw Predef5CText
+	dw PickUpItemText
 	dw ViridianGymText12
 	dw ViridianGymText13
 	dw ViridianGymText14

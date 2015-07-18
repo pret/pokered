@@ -64,7 +64,7 @@ LanceScript0: ; 5a305 (16:6305)
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_5a325
 	cp $5
@@ -93,7 +93,7 @@ LanceScript2: ; 5a349 (16:6349)
 	cp $ff
 	jp z, LanceScript_5a2f5
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 LanceScript_5a35b: ; 5a35b (16:635b)

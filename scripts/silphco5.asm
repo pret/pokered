@@ -74,9 +74,9 @@ SilphCo5TextPointers: ; 19fbc (6:5fbc)
 	dw SilphCo5Text3
 	dw SilphCo5Text4
 	dw SilphCo5Text5
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw SilphCo5Text9
 	dw SilphCo5Text10
 	dw SilphCo5Text11

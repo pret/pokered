@@ -31,7 +31,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd7f0
 	bit 1, [hl]
@@ -70,7 +70,7 @@ Route24Script3: ; 51422 (14:5422)
 	ld hl, wd7ef
 	set 1, [hl]
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -87,7 +87,7 @@ Route24TextPointers: ; 5144b (14:544b)
 	dw Route24Text5
 	dw Route24Text6
 	dw Route24Text7
-	dw Predef5CText
+	dw PickUpItemText
 
 Route24TrainerHeaders: ; 5145b (14:545b)
 Route24TrainerHeader0: ; 5145b (14:545b)
@@ -170,7 +170,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
 	call SaveEndBattleTextPointers
-	ld a, [$ff8c]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

@@ -2,10 +2,10 @@ SafariZoneEastScript: ; 4586b (11:586b)
 	jp EnableAutoTextBoxDrawing
 
 SafariZoneEastTextPointers: ; 4586e (11:586e)
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw SafariZoneEastText5
 	dw SafariZoneEastText6
 	dw SafariZoneEastText7

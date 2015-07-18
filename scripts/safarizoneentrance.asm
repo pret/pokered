@@ -18,7 +18,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -56,7 +56,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [wJoyIgnore], a
 	call UpdateSprites
 	ld a, $4
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -83,7 +83,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [W_NUMSAFARIBALLS], a
@@ -95,7 +95,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	jr .asm_75286
 .asm_7527f
 	ld a, $5
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75286
 	ret

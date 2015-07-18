@@ -44,7 +44,7 @@ PewterGymScript3: ; 5c3d2 (17:43d2)
 
 PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd755
 	set 7, [hl]
@@ -52,14 +52,14 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd755
 	set 6, [hl]
 	jr .asm_5c408
 .BagFull
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5c408
 	ld hl, W_OBTAINEDBADGES

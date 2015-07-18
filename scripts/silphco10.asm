@@ -44,9 +44,9 @@ SilphCo10TextPointers: ; 5a186 (16:6186)
 	dw SilphCo10Text1
 	dw SilphCo10Text2
 	dw SilphCo10Text3
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 SilphCo10TrainerHeaders: ; 5a192 (16:6192)
 SilphCo10TrainerHeader0: ; 5a192 (16:6192)

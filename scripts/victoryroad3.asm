@@ -83,8 +83,8 @@ VictoryRoad3TextPointers: ; 44a24 (11:4a24)
 	dw VictoryRoad3Text2
 	dw VictoryRoad3Text3
 	dw VictoryRoad3Text4
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText

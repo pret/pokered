@@ -44,7 +44,7 @@ CeladonGymScript3: ; 48956 (12:4956)
 
 CeladonGymText_48963: ; 48963 (12:4963)
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd77c
 	set 1, [hl]
@@ -52,14 +52,14 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd77c
 	set 0, [hl]
 	jr .asm_4898c
 .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_4898c
 	ld hl, W_OBTAINEDBADGES

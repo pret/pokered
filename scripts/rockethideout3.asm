@@ -146,8 +146,8 @@ RocketHideout3Script3: ; 452e4 (11:452e4)
 RocketHideout3TextPointers: ; 452fa (11:52fa)
 	dw RocketHideout3Text1
 	dw RocketHideout3Text2
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 
 RocketHideout3TrainerHeaders: ; 45302 (11:5302)
 RocketHideout3TrainerHeader0: ; 45302 (11:5302)

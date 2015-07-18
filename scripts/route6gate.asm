@@ -25,7 +25,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	and a
 	jr nz, .asm_1e080
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route6GateScript_1e0a1
 	ld a, $1
@@ -35,7 +35,7 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld hl, wd728
 	set 6, [hl]
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CoordsData_1e08c: ; 1e08c (7:608c)

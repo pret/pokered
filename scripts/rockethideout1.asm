@@ -43,8 +43,8 @@ RocketHideout1TextPointers: ; 44c14 (11:4c14)
 	dw RocketHideout1Text3
 	dw RocketHideout1Text4
 	dw RocketHideout1Text5
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 
 RocketHideout1TrainerHeaders: ; 44c22 (11:4c22)
 RocketHideout1TrainerHeader0: ; 44c22 (11:4c22)

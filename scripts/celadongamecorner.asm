@@ -58,10 +58,10 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [H_SPRITEHEIGHT], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
-	ld [H_SPRITEHEIGHT], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
 	ld a, [W_YCOORD]
@@ -76,7 +76,7 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld de, MovementData_48c63
 .asm_48c4d
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $2
 	ld [W_CELADONGAMECORNERCURSCRIPT], a

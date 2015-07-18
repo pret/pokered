@@ -44,7 +44,7 @@ SaffronGymScript3: ; 5d05b (17:505b)
 
 SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld a, $a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd7b3
 	set 1, [hl]
@@ -52,14 +52,14 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd7b3
 	set 0, [hl]
 	jr .asm_5d091
 .BagFull
 	ld a, $c
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5d091
 	ld hl, W_OBTAINEDBADGES

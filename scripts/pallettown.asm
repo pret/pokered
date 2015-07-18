@@ -67,7 +67,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld a,1
 	ld [H_SPRITEINDEX],a
 	ld a,SPRITE_FACING_UP
-	ld [$FF8D],a
+	ld [hSpriteFacingDirection],a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a,1

@@ -37,7 +37,7 @@ Route7GateScript0: ; 1e128 (7:6128)
 	and a
 	jr nz, .asm_1e15a
 	ld a, $2
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route7GateScript_1e111
 	ld a, $1
@@ -45,7 +45,7 @@ Route7GateScript0: ; 1e128 (7:6128)
 	ret
 .asm_1e15a
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]

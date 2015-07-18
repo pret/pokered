@@ -2,13 +2,13 @@ TradeCenterScript: ; 4fd10 (13:7d10)
 	call EnableAutoTextBoxDrawing
 	ld a, [$ffaa]
 	cp $2
-	ld a, $8
-	jr z, .asm_4fd1d
-	ld a, $c
-.asm_4fd1d
-	ld [$ff8d], a
+	ld a, SPRITE_FACING_LEFT
+	jr z, .next
+	ld a, SPRITE_FACING_RIGHT
+.next
+	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteFacingDirection
 	ld hl, wd72d
 	bit 0, [hl]

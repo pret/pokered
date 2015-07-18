@@ -45,12 +45,12 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ld a, $1
 	ld [wd528], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ret
 
@@ -64,9 +64,9 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld a, $1
 	ld [wd528], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 
 .asm_5cde4
@@ -76,7 +76,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	or $3e
 	ld [wd7b1], a
 	ld a, $8
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -148,7 +148,7 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	ld hl, FightingDojoText_5ce93
 	ld de, FightingDojoText_5ce93
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

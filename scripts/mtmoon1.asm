@@ -20,12 +20,12 @@ MtMoon1TextPointers: ; 499e1 (12:59e1)
 	dw MtMoon1Text5
 	dw MtMoon1Text6
 	dw MtMoon1Text7
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw MtMoon1Text14
 
 MtMoon1TrainerHeaders: ; 499fd (12:59fd)

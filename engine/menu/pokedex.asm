@@ -512,25 +512,25 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	inc de
 	inc de ; de = address of upper byte of weight
 	push de
-; put weight in big-endian order at $ff8b
-	ld hl,$ff8b
-	ld a,[hl] ; save existing value of [$ff8b]
+; put weight in big-endian order at hDexWeight
+	ld hl,hDexWeight
+	ld a,[hl] ; save existing value of [hDexWeight]
 	push af
 	ld a,[de] ; a = upper byte of weight
-	ld [hli],a ; store upper byte of weight in [$ff8b]
-	ld a,[hl] ; save existing value of [$ff8c]
+	ld [hli],a ; store upper byte of weight in [hDexWeight]
+	ld a,[hl] ; save existing value of [hDexWeight + 1]
 	push af
 	dec de
 	ld a,[de] ; a = lower byte of weight
-	ld [hl],a ; store lower byte of weight in [$ff8c]
-	ld de,$ff8b
+	ld [hl],a ; store lower byte of weight in [hDexWeight + 1]
+	ld de,hDexWeight
 	hlCoord 11, 8
 	ld bc,$0205 ; no leading zeroes, right-aligned, 2 bytes, 5 digits
 	call PrintNumber ; print weight
 	hlCoord 14, 8
-	ld a,[$ff8c]
+	ld a,[hDexWeight + 1]
 	sub a,10
-	ld a,[$ff8b]
+	ld a,[hDexWeight]
 	sbc a,0
 	jr nc,.next
 	ld [hl],"0" ; if the weight is less than 10, put a 0 before the decimal point
@@ -540,9 +540,9 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [hld],a ; make space for the decimal point by moving the last digit forward one tile
 	ld [hl],$f2 ; decimal point tile
 	pop af
-	ld [$ff8c],a ; restore original value of [$ff8c]
+	ld [hDexWeight + 1],a ; restore original value of [hDexWeight + 1]
 	pop af
-	ld [$ff8b],a ; restore original value of [$ff8b]
+	ld [hDexWeight],a ; restore original value of [hDexWeight]
 	pop hl
 	inc hl ; hl = address of pokedex description text
 	bcCoord 1, 11

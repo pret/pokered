@@ -50,8 +50,8 @@ SilphCo6TextPointers: ; 1a1f6 (6:61f6)
 	dw SilphCo6Text6
 	dw SilphCo6Text7
 	dw SilphCo6Text8
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 
 SilphCo6TrainerHeaders: ; 1a20a (6:620a)
 SilphCo6TrainerHeader0: ; 1a20a (6:620a)

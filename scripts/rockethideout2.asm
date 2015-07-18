@@ -415,10 +415,10 @@ SpinnerArrowAnimTiles: ; 45087 (11:5087)
 
 RocketHideout2TextPointers: ; 450c7 (11:50c7)
 	dw RocketHideout2Text1
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 RocketHideout2TrainerHeaders: ; 450d1 (11:50d1)
 RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)

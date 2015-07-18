@@ -43,8 +43,8 @@ Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
 	inc de
 .asm_50ef1
 	call MoveSprite
-	ld a, $c
-	ld [$ff8d], a
+	ld a, SPRITE_FACING_RIGHT
+	ld [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay
 
 Route22RivalMovementData: ; 50efb (14:4efb)
@@ -61,7 +61,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld hl, .Route22RivalBattleCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [wcf0d], a
 	xor a
 	ld [hJoyHeld], a
@@ -98,7 +98,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call Route22MoveRivalSprite
 	ld a, $1
 	ld [W_ROUTE22CURSCRIPT], a
@@ -113,19 +113,19 @@ Route22Script1: ; 50f62 (14:4f62)
 	jr nz, .asm_50f78
 	ld a, $4
 	ld [wd528], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	jr .asm_50f7a
 .asm_50f78
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 .asm_50f7a
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteFacingDirectionAndDelay
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72d
 	set 6, [hl]
@@ -159,16 +159,16 @@ Route22Script2: ; 50fb5 (14:4fb5)
 .notDown
 	ld a, SPRITE_FACING_RIGHT
 .done
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd7eb
 	set 5, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wc0ee], a
@@ -194,7 +194,7 @@ Route22Script_5100d: ; 5100d (14:500d)
 	ld de, Route22RivalExitMovementData2
 Route22MoveRival1: ; 51010 (14:5010)
 	ld a, $1
-	ld [H_SPRITEHEIGHT], a
+	ld [H_SPRITEINDEX], a
 	jp MoveSprite
 
 Route22RivalExitMovementData1: ; 51017 (14:5017)
@@ -255,7 +255,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	call PlaySound
 	callba Music_RivalAlternateTempo
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	call Route22MoveRivalSprite
 	ld a, $4
 	ld [W_ROUTE22CURSCRIPT], a
@@ -266,25 +266,25 @@ Route22Script4: ; 51087 (14:5087)
 	bit 0, a
 	ret nz
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510a1
 	ld a, $4
 	ld [wd528], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	jr .asm_510a8
 .asm_510a1
 	ld a, $2
 	ld [wd528], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 .asm_510a8
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72d
 	set 6, [hl]
@@ -310,27 +310,27 @@ Route22Script5: ; 510df (14:50df)
 	cp $ff
 	jp z, Route22Script_50ece
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510fb
 	ld a, $4
 	ld [wd528], a
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	jr .asm_51102
 .asm_510fb
 	ld a, $2
 	ld [wd528], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 .asm_51102
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd7eb
 	set 6, [hl]
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wc0ee], a
@@ -356,7 +356,7 @@ Route22Script_51142: ; 51142 (14:5142)
 	ld de, MovementData_5114d
 Route22MoveRival2: ; 51145 (14:5145)
 	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [H_SPRITEINDEX], a
 	jp MoveSprite
 
 MovementData_5114c: ; 5114c (14:514c)

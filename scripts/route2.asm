@@ -2,8 +2,8 @@ Route2Script: ; 554e3 (15:54e3)
 	jp EnableAutoTextBoxDrawing
 
 Route2TextPointers: ; 554e6 (15:54e6)
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Route2Text3
 	dw Route2Text4
 

@@ -89,7 +89,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr .willEncounter
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
-	ld a, $d2
+	ld a, 210
 	ld [H_DOWNARROWBLINKCNT2], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID

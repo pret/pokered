@@ -634,6 +634,11 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wWhichBadge:: ; cd3d
+
+wMuseumPriceTemp:: ; cd3d
+; 3-byte BCD number
+
 wTitleMonSpecies:: ; cd3d
 
 wPlayerCharacterOAMTile:: ; cd3d
@@ -1891,58 +1896,98 @@ W_MAPCONNECTIONS:: ; d370
 W_MAPCONN1PTR:: ; d371
 	ds 1
 
-wd372:: ds 1 ; some connection stuff, too bothered to label it
-wd373:: ds 1
-wd374:: ds 1
-wd375:: ds 1
-wd376:: ds 1
-wd377:: ds 1
-wd378:: ds 1
-wd379:: ds 1
-wd37a:: ds 1
-wd37b:: ds 1
+wNorthConnectionStripSrc:: ; d372
+	ds 2
+
+wNorthConnectionStripDest:: ; d374
+	ds 2
+
+wNorthConnectionStripWidth:: ; d376
+	ds 1
+
+wNorthConnectedMapWidth:: ; d377
+	ds 1
+
+wNorthConnectedMapYAlignment:: ; d378
+	ds 1
+
+wNorthConnectedMapXAlignment:: ; d379
+	ds 1
+
+wNorthConnectedMapViewPointer:: ; d37a
+	ds 2
 
 W_MAPCONN2PTR:: ; d37c
 	ds 1
 
-wd37d:: ds 1
-wd37e:: ds 1
-wd37f:: ds 1
-wd380:: ds 1
-wd381:: ds 1
-wd382:: ds 1
-wd383:: ds 1
-wd384:: ds 1
-wd385:: ds 1
-wd386:: ds 1
+wSouthConnectionStripSrc:: ; d37d
+	ds 2
+
+wSouthConnectionStripDest:: ; d37f:
+	ds 2
+
+wSouthConnectionStripWidth:: ; d381
+	ds 1
+
+wSouthConnectedMapWidth:: ; d382
+	ds 1
+
+wSouthConnectedMapYAlignment:: ; d383
+	ds 1
+
+wSouthConnectedMapXAlignment:: ; d384
+	ds 1
+
+wSouthConnectedMapViewPointer:: ; d385
+	ds 2
 
 W_MAPCONN3PTR:: ; d387
 	ds 1
 
-wd388:: ds 1
-wd389:: ds 1
-wd38a:: ds 1
-wd38b:: ds 1
-wd38c:: ds 1
-wd38d:: ds 1
-wd38e:: ds 1
-wd38f:: ds 1
-wd390:: ds 1
-wd391:: ds 1
+wWestConnectionStripSrc:: ; d388
+	ds 2
+
+wWestConnectionStripDest:: ; d38a
+	ds 2
+
+wWestConnectionStripHeight:: ; d38c
+	ds 1
+
+wWestConnectedMapWidth:: ; d38d
+	ds 1
+
+wWestConnectedMapYAlignment:: ; d38e
+	ds 1
+
+wWestConnectedMapXAlignment:: ; d38f
+	ds 1
+
+wWestConnectedMapViewPointer:: ; d390
+	ds 2
 
 W_MAPCONN4PTR:: ; d392
 	ds 1
 
-wd393:: ds 1
-wd394:: ds 1
-wd395:: ds 1
-wd396:: ds 1
-wd397:: ds 1
-wd398:: ds 1
-wd399:: ds 1
-wd39a:: ds 1
-wd39b:: ds 1
-wd39c:: ds 1
+wEastConnectionStripSrc:: ; d393
+	ds 2
+
+wEastConnectionStripDest:: ; d395
+	ds 2
+
+wEastConnectionStripHeight:: ; d397
+	ds 1
+
+wEastConnectedMapWidth:: ; d398
+	ds 1
+
+wEastConnectedMapYAlignment:: ; d399
+	ds 1
+
+wEastConnectedMapXAlignment:: ; d39a
+	ds 1
+
+wEastConnectedMapViewPointer:: ; d39b
+	ds 2
 
 W_SPRITESET:: ; d39d
 ; sprite set for the current map (11 sprite picture ID's)

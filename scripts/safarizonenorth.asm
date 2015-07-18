@@ -2,8 +2,8 @@ SafariZoneNorthScript: ; 459ab (11:59ab)
 	jp EnableAutoTextBoxDrawing
 
 SafariZoneNorthTextPointers: ; 459ae (11:59ae)
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw SafariZoneNorthText3
 	dw SafariZoneNorthText4
 	dw SafariZoneNorthText5

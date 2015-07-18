@@ -996,7 +996,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ld a,[wAutoTextBoxDrawingControl]
 	bit 0,a
 	jr nz,.skipDrawingTextBoxBorder
-	ld a,[$ff8c] ; text ID (or sprite ID)
+	ld a,[hSpriteIndexOrTextID] ; text ID (or sprite ID)
 	and a
 	jr nz,.notStartMenu
 ; if text ID is 0 (i.e. the start menu)
@@ -2094,7 +2094,7 @@ IsPlayerStandingOnWarp: ; c35f (3:435f)
 	ld a, [hli] ; target warp
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
-	ld [$ff8b], a
+	ld [hWarpDestinationMap], a
 	ld hl, wd736
 	set 2, [hl] ; standing on warp flag
 	ret
@@ -2593,7 +2593,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	ld [wJoyIgnore], a
 	call EnableAutoTextBoxDrawing
 	ld a, $d0
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	pop de
 	pop hl
@@ -2640,7 +2640,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	jr nz, .noBlackOut
 	call EnableAutoTextBoxDrawing
 	ld a, $d1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72e
 	set 5, [hl]
@@ -2692,7 +2692,7 @@ LoadTilesetHeader: ; c754 (3:4754)
 	jr c, .asm_c797
 	ld a, [W_CURMAPTILESET]
 	ld b, a
-	ld a, [$ff8b]
+	ld a, [hPreviousTileset]
 	cp b
 	jr z, .done
 .asm_c797
@@ -3454,15 +3454,15 @@ TryPushingBoulder: ; f225 (3:7225)
 	bit 1, a ; has boulder dust animation from previous push played yet?
 	ret nz
 	xor a
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call IsSpriteInFrontOfPlayer
-	ld a, [$ff8c]
+	ld a, [hSpriteIndexOrTextID]
 	ld [wBoulderSpriteIndex], a
 	and a
 	jp z, ResetBoulderPushFlags
 	ld hl, wSpriteStateData1 + 1
 	ld d, $0
-	ld a, [$ff8c]
+	ld a, [hSpriteIndexOrTextID]
 	swap a
 	ld e, a
 	add hl, de

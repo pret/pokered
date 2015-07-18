@@ -51,7 +51,7 @@ Mansion4Script_Switches: ; 52420 (14:6420)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $9
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Mansion4ScriptPointers: ; 52430 (14:6430)
@@ -62,12 +62,12 @@ Mansion4ScriptPointers: ; 52430 (14:6430)
 Mansion4TextPointers: ; 52436 (14:6436)
 	dw Mansion4Text1
 	dw Mansion4Text2
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 	dw Mansion4Text7
-	dw Predef5CText
+	dw PickUpItemText
 	dw Mansion3Text6
 
 Mansion4TrainerHeaders: ; 52448 (14:6448)
