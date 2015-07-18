@@ -14,9 +14,9 @@ HallOfFamePC: ; 7405c (1d:405c)
 	ld bc, $10
 	ld a, $ff
 	call FillMemory
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call FillFourRowsWithBlack
-	hlCoord 0, 14
+	coord hl, 0, 14
 	call FillFourRowsWithBlack
 	ld a, $c0
 	ld [rBGP], a
@@ -61,7 +61,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	ld a,[hl]
 	ld [wcf91],a
 	ld [wd0b5],a
-	hlCoord 8, 6
+	coord hl, 8, 6
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,vBGMap0 + $c
@@ -162,7 +162,7 @@ FillFourRowsWithBlack: ; 7417b (1d:417b)
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
-	hlCoord 0, 4
+	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 	ld a, $7f ; blank white tile
 	jp FillMemory
@@ -172,7 +172,7 @@ Credits: ; 7418e (1d:418e)
 	push de
 .nextCreditsScreen
 	pop de
-	hlCoord 9, 6
+	coord hl, 9, 6
 	push hl
 	call FillMiddleOfScreenWithWhite
 	pop hl
@@ -248,10 +248,10 @@ Credits: ; 7418e (1d:418e)
 	ld hl, vChars2 + $600
 	ld bc, (BANK(TheEndGfx) << 8) + $0a
 	call CopyVideoData
-	hlCoord 4, 8
+	coord hl, 4, 8
 	ld de, TheEndTextString
 	call PlaceString
-	hlCoord 4, 9
+	coord hl, 4, 9
 	inc de
 	call PlaceString
 	jp FadeInCreditsText

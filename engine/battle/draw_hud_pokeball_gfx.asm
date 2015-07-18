@@ -121,7 +121,7 @@ PlacePlayerHUDTiles: ; 3a902 (e:6902)
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	hlCoord 18, 10
+	coord hl, 18, 10
 	ld de, rIE
 	jr PlaceHUDTiles
 
@@ -136,7 +136,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld de, wTrainerFacingDirection
 	ld bc, $3
 	call CopyData
-	hlCoord 1, 2
+	coord hl, 1, 2
 	ld de, $1
 	jr PlaceHUDTiles
 

@@ -105,7 +105,7 @@ StatusScreen: ; 12953 (4:6953)
 	push af
 	xor a
 	ld [hTilesetType], a
-	hlCoord 19, 1
+	coord hl, 19, 1
 	ld bc, $060a
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, $fffa
@@ -113,54 +113,54 @@ StatusScreen: ; 12953 (4:6953)
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
-	hlCoord 19, 9
+	coord hl, 19, 9
 	ld bc, $0806
 	call DrawLineBox ; Draws the box around types, ID No. and OT
-	hlCoord 10, 9
+	coord hl, 10, 9
 	ld de, Type1Text
 	call PlaceString ; "TYPE1/"
-	hlCoord 11, 3
+	coord hl, 11, 3
 	predef DrawHP
 	ld hl, wcf25
 	call GetHealthBarColor
 	ld b, $3
 	call GoPAL_SET ; SGB palette
-	hlCoord 16, 6
+	coord hl, 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
 	jr nz, .StatusWritten
-	hlCoord 16, 6
+	coord hl, 16, 6
 	ld de, OKText
 	call PlaceString ; "OK"
 .StatusWritten
-	hlCoord 9, 6
+	coord hl, 9, 6
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
-	hlCoord 14, 2
+	coord hl, 14, 2
 	call PrintLevel ; Pokémon level
 	ld a, [W_MONHDEXNUM]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
-	hlCoord 3, 7
+	coord hl, 3, 7
 	ld de, wd11e
 	ld bc, $8103 ; Zero-padded, 3
 	call PrintNumber ; Pokémon no.
-	hlCoord 11, 10
+	coord hl, 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
 	call .GetStringPointer
 	ld d, h
 	ld e, l
-	hlCoord 9, 1
+	coord hl, 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
 	call .GetStringPointer
 	ld d, h
 	ld e, l
-	hlCoord 12, 16
+	coord hl, 12, 16
 	call PlaceString ; OT
-	hlCoord 12, 14
+	coord hl, 12, 14
 	ld de, wLoadedMonOTID
 	ld bc, $8205 ; 5
 	call PrintNumber ; ID Number
@@ -168,7 +168,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PrintStatsBox
 	call Delay3
 	call GBPalNormal
-	hlCoord 1, 0
+	coord hl, 1, 0
 	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
 	ld a, [wcf91]
 	call PlayCry ; play Pokémon cry
@@ -247,19 +247,19 @@ PrintStatsBox: ; 12ae4 (4:6ae4)
 	ld a, d
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
-	hlCoord 0, 8
+	coord hl, 0, 8
 	ld b, $8
 	ld c, $8
 	call TextBoxBorder ; Draws the box
-	hlCoord 1, 9 ; Start printing stats from here
+	coord hl, 1, 9 ; Start printing stats from here
 	ld bc, $0019 ; Number offset
 	jr .PrintStats
 .DifferentBox
-	hlCoord 9, 2
+	coord hl, 9, 2
 	ld b, $8
 	ld c, $9
 	call TextBoxBorder
-	hlCoord 11, 3
+	coord hl, 11, 3
 	ld bc, $0018
 .PrintStats
 	push bc
@@ -306,16 +306,16 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld bc, NUM_MOVES
 	call CopyData
 	callab FormatMovesString
-	hlCoord 9, 2
+	coord hl, 9, 2
 	ld bc, $050a
 	call ClearScreenArea ; Clear under name
-	hlCoord 19, 3
+	coord hl, 19, 3
 	ld [hl], $78
-	hlCoord 0, 8
+	coord hl, 0, 8
 	ld b, $8
 	ld c, $12
 	call TextBoxBorder ; Draw move container
-	hlCoord 2, 9
+	coord hl, 2, 9
 	ld de, wMovesString
 	call PlaceString ; Print moves
 	ld a, [wNumMovesMinusOne]
@@ -324,7 +324,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld a, $4
 	sub c
 	ld b, a ; Number of moves ?
-	hlCoord 11, 10
+	coord hl, 11, 10
 	ld de, SCREEN_WIDTH * 2
 	ld a, $72 ; special P tile id
 	call StatusScreen_PrintPP ; Print "PP"
@@ -336,7 +336,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call StatusScreen_PrintPP ; Fill the rest with --
 .InitPP ; 12bbb
 	ld hl, wLoadedMonMoves
-	deCoord 14, 10
+	coord de, 14, 10
 	ld b, 0
 .PrintPP ; 12bc3
 	ld a, [hli]
@@ -386,7 +386,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	cp $4
 	jr nz, .PrintPP
 .PPDone
-	hlCoord 9, 3
+	coord hl, 9, 3
 	ld de, EXPPointsText
 	call PlaceString
 	ld a, [wLoadedMonLevel] ; level
@@ -396,7 +396,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
-	hlCoord 14, 6
+	coord hl, 14, 6
 	ld [hl], $70 ; 1-tile "to"
 	inc hl
 	inc hl
@@ -404,22 +404,22 @@ StatusScreen2: ; 12b57 (4:6b57)
 	pop af
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
-	hlCoord 12, 4
+	coord hl, 12, 4
 	ld bc, $0307
 	call PrintNumber ; exp
 	call .asm_12c86
 	ld de, wLoadedMonExp
-	hlCoord 7, 6
+	coord hl, 7, 6
 	ld bc, $0307
 	call PrintNumber
-	hlCoord 9, 0
+	coord hl, 9, 0
 	call StatusScreen_ClearName
-	hlCoord 9, 1
+	coord hl, 9, 1
 	call StatusScreen_ClearName
 	ld a, [W_MONHDEXNUM]
 	ld [wd11e], a
 	call GetMonName
-	hlCoord 9, 1
+	coord hl, 9, 1
 	call PlaceString
 	ld a, $1
 	ld [$ffba], a

@@ -66,7 +66,7 @@ HisNameIsText: ; 69e7 (1:69e7)
 
 OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	push de
-	hlCoord 0, 0
+	coord hl, 0, 0
 	lb bc, 12, 11
 	call ClearScreenArea ; clear the name list text box
 	ld c, 10
@@ -76,13 +76,13 @@ OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	ld bc, $b
 	call CopyData
 	call Delay3
-	hlCoord 12, 4
+	coord hl, 12, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
 OakSpeechSlidePicRight: ; 6a12 (1:6a12)
-	hlCoord 5, 4
+	coord hl, 5, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
@@ -161,15 +161,15 @@ OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
 
 DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	push de
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	hlCoord 3, 0
+	coord hl, 3, 0
 	ld de, .namestring
 	call PlaceString
 	pop de
-	hlCoord 2, 2
+	coord hl, 2, 2
 	call PlaceString
 	call UpdateSprites
 	xor a

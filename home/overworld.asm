@@ -1420,7 +1420,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld bc,$0002
 	add hl,bc
 .copyToVisibleAreaBuffer
-	deCoord 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	coord de, 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
 	ld b, SCREEN_HEIGHT
 .rowLoop2
 	ld c, SCREEN_WIDTH
@@ -1693,7 +1693,7 @@ MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 ; the portion of the map that was newly exposed due to the player's movement
 
 ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call CopyToScreenEdgeTiles
 	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
@@ -1715,7 +1715,7 @@ CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ret
 
 ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
-	hlCoord 0, 16
+	coord hl, 0, 16
 	call CopyToScreenEdgeTiles
 	ld a,[wMapViewVRAMPointer]
 	ld l,a
@@ -1734,7 +1734,7 @@ ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	ret
 
 ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
-	hlCoord 18, 0
+	coord hl, 18, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
 	ld c,a
@@ -1772,7 +1772,7 @@ ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
 	ret
 
 ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
 	ld [H_SCREENEDGEREDRAWADDR],a
@@ -2323,7 +2323,7 @@ LoadMapData:: ; 1241 (0:1241)
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld de,vBGMap0
 	ld b,18
 .vramCopyLoop

@@ -402,11 +402,11 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 .asm_1ec2d
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, BillsMonListText
 	call PlaceString
 	ld hl, BillsHousePokemonListText2

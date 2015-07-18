@@ -641,7 +641,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 
 AIPrintItemUseAndUpdateHPBar: ; 3a718 (e:6718)
 	call AIPrintItemUse_
-	hlCoord 2, 2
+	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
 	predef UpdateHPBar2

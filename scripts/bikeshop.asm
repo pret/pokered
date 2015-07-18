@@ -51,15 +51,15 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $4
 	ld c, $f
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, BikeShopMenuText
 	call PlaceString
-	hlCoord 8, 3
+	coord hl, 8, 3
 	ld de, BikeShopMenuPrice
 	call PlaceString
 	ld hl, BikeShopText_1d815

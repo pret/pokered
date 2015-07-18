@@ -79,11 +79,11 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	hlCoord 14, 11
+	coord hl, 14, 11
 	ld b, 5
 	ld c, 4
 	call TextBoxBorder
-	hlCoord 16, 12
+	coord hl, 16, 12
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
@@ -133,7 +133,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
-	hlCoord 14, 12
+	coord hl, 14, 12
 	ld bc, $0d0f
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
@@ -614,7 +614,7 @@ YeahText: ; 37722 (d:7722)
 
 SlotMachine_PrintWinningSymbol: ; 37728 (d:7728)
 ; prints winning symbol and down arrow in text box
-	hlCoord 2, 14
+	coord hl, 2, 14
 	ld a, [wSlotMachineWinningSymbol]
 	add $25
 	ld [hli], a
@@ -626,7 +626,7 @@ SlotMachine_PrintWinningSymbol: ; 37728 (d:7728)
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlCoord 18, 16
+	coord hl, 18, 16
 	ld [hl], $ee ; down arrow
 	ret
 
@@ -641,13 +641,13 @@ SlotMachine_SubtractBetFromPlayerCoins: ; 37741 (d:7741)
 	predef SubBCDPredef
 
 SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
-	hlCoord 5, 1
+	coord hl, 5, 1
 	ld de, wPlayerCoins
 	ld c, $2
 	jp PrintBCDNumber
 
 SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
-	hlCoord 11, 1
+	coord hl, 11, 1
 	ld de, wPayoutCoins
 	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
 	jp PrintNumber
@@ -724,19 +724,19 @@ SlotMachine_LightBalls: ; 377d5 (d:77d5)
 	jr z, SlotMachine_UpdateTwoCoinBallTiles
 
 SlotMachine_UpdateThreeCoinBallTiles: ; 377e3 (d:77e3)
-	hlCoord 3, 2
+	coord hl, 3, 2
 	call SlotMachine_UpdateBallTiles
-	hlCoord 3, 10
+	coord hl, 3, 10
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateTwoCoinBallTiles: ; 377ef (d:77ef)
-	hlCoord 3, 4
+	coord hl, 3, 4
 	call SlotMachine_UpdateBallTiles
-	hlCoord 3, 8
+	coord hl, 3, 8
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateOneCoinBallTiles: ; 377fb (d:77fb)
-	hlCoord 3, 6
+	coord hl, 3, 6
 
 SlotMachine_UpdateBallTiles: ; 377fe (d:77fe)
 	ld a, [wd08a]
@@ -863,7 +863,7 @@ LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
-	deCoord 0, 0
+	coord de, 0, 0
 	ld bc, $00f0
 	call CopyData
 	call EnableLCD

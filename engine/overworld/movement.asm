@@ -704,7 +704,7 @@ GetTileSpriteStandsOn: ; 5207 (1:5207)
 	add SCREEN_WIDTH ; screen X tile + 20
 	ld d, $0
 	ld e, a
-	hlCoord 0, 0
+	coord hl, 0, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc

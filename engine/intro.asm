@@ -205,7 +205,7 @@ IntroClearScreen: ; 417f0 (10:57f0)
 
 IntroClearMiddleOfScreen: ; 417f8 (10:57f8)
 ; clear the area of the tile map between the black bars on the top and bottom
-	hlCoord 0, 4
+	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 
 IntroClearCommon: ; 417fe (10:57fe)
@@ -263,7 +263,7 @@ IntroMoveMon: ; 4180e (10:580e)
 	ret
 
 IntroCopyTiles: ; 4183f (10:583f)
-	hlCoord 13, 7
+	coord hl, 13, 7
 
 CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
 	ld c, 0
@@ -337,10 +337,10 @@ PlayShootingStar: ; 4188a (10:588a)
 IntroDrawBlackBars: ; 418e9 (10:58e9)
 ; clear the screen and draw black bars on the top and bottom
 	call IntroClearScreen
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld c, SCREEN_WIDTH * 4
 	call IntroPlaceBlackTiles
-	hlCoord 0, 14
+	coord hl, 0, 14
 	ld c, SCREEN_WIDTH * 4
 	call IntroPlaceBlackTiles
 	ld hl, vBGMap1

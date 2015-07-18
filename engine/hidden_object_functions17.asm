@@ -72,7 +72,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	call LoadMonFrontSprite
 	ld a, $80
 	ld [$ffe1], a
-	hlCoord 10, 11
+	coord hl, 10, 11
 	predef AnimateSendingOutMon
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
@@ -109,11 +109,11 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 .asm_5c51
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, HowToLinkText
 	call PlaceString
 	ld hl, LinkCableHelpText2
@@ -193,13 +193,13 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 .asm_5dd15
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld bc, $060a
 	call TextBoxBorder
-	hlCoord 1, 2
+	coord hl, 1, 2
 	ld de, StatusAilmentText1
 	call PlaceString
-	hlCoord 6, 2
+	coord hl, 6, 2
 	ld de, StatusAilmentText2
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2

@@ -63,7 +63,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	dec l
 	ld b, l
 	ld c, $c
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call TextBoxBorder
 	call UpdateSprites
 	call CeladonMartRoofScript_48532
@@ -200,7 +200,7 @@ CeladonMartRoofScript_48532: ; 48532 (12:4532)
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld a, [$ffdb]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes

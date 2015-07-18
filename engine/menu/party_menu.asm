@@ -30,7 +30,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	jp z,.printMessage
 	call ErasePartyMenuCursors
 	callba SendBlkPacket_PartyMenu
-	hlCoord 3, 0
+	coord hl, 3, 0
 	ld de,wPartySpecies
 	xor a
 	ld c,a

@@ -53,7 +53,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	call DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
-	hlCoord 0, 10
+	coord hl, 0, 10
 	ld bc, $0078
 	ld a, $14
 	call FillMemory

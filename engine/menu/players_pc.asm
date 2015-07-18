@@ -22,12 +22,12 @@ PlayerPCMenu: ; 790c (1:790c)
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call LoadScreenTilesFromBuffer2
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, PlayersPCMenuEntries
 	call PlaceString
 	ld hl, wTopMenuItemY

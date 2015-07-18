@@ -76,7 +76,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 AbandonLearning: ; 6eda (1:6eda)
 	ld hl, AbandonLearningText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc, $80f
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -99,7 +99,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc, $80f
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -120,11 +120,11 @@ TryingToLearn: ; 6f07 (1:6f07)
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
-	hlCoord 4, 7
+	coord hl, 4, 7
 	ld b, $4
 	ld c, $e
 	call TextBoxBorder
-	hlCoord 6, 8
+	coord hl, 6, 8
 	ld de, wMovesString
 	ld a, [hFlags_0xFFF6]
 	set 2, a

@@ -6,7 +6,7 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 	ld b, $1
 	call GoPAL_SET
 	callab _LoadTrainerPic
-	hlCoord 19, 0
+	coord hl, 19, 0
 	ld c, $0
 .scrollLoop
 	inc c

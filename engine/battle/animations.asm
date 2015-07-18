@@ -759,7 +759,7 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	cp a,1
 	ret nz
 .moveGhostMarowakLeft
-	hlCoord 17, 0
+	coord hl, 17, 0
 	ld de,20
 	ld bc,$0707 ; 7 rows and 7 columns
 .loop
@@ -858,7 +858,7 @@ DoExplodeSpecialEffects: ; 79009 (1e:5009)
 	cp a,1 ; is it the end of the subanimation?
 	jr nz,FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
-	hlCoord 1, 5
+	coord hl, 1, 5
 	jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
@@ -1292,12 +1292,12 @@ AnimationSlideMonUp: ; 7927a (1e:527a)
 	ld c, $7
 	ld a, [H_WHOSETURN]
 	and a
-	hlCoord 1, 6
-	deCoord 1, 5
+	coord hl, 1, 6
+	coord de, 1, 5
 	ld a, $30
 	jr z, .asm_79291
-	hlCoord 12, 1
-	deCoord 12, 0
+	coord hl, 12, 1
+	coord de, 12, 0
 	ld a, $ff
 .asm_79291
 	ld [wd09f], a
@@ -1352,9 +1352,9 @@ _AnimationSlideMonUp: ; 792bf (1e:52bf)
 	jr nz, .asm_792c4
 	ld a, [H_WHOSETURN]
 	and a
-	hlCoord 1, 11
+	coord hl, 1, 11
 	jr z, .asm_792e2
-	hlCoord 12, 6
+	coord hl, 12, 6
 .asm_792e2
 	ld a, [wd09f]
 	inc a
@@ -1513,11 +1513,11 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 ; The mon's sprite disappears after this animation.
 	ld a, [H_WHOSETURN]
 	and a
-	hlCoord 0, 5
-	deCoord 2, 5
+	coord hl, 0, 5
+	coord de, 2, 5
 	jr z, .asm_793c2
-	hlCoord 11, 0
-	deCoord 13, 0
+	coord hl, 11, 0
+	coord de, 13, 0
 
 .asm_793c2
 	xor a
@@ -1561,9 +1561,9 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 	call AnimationHideMonPic
 	ld a, [H_WHOSETURN]
 	and a
-	hlCoord 2, 5
+	coord hl, 2, 5
 	jr z, .asm_79407
-	hlCoord 11, 0
+	coord hl, 11, 0
 .asm_79407
 	xor a
 	push hl
@@ -1674,12 +1674,12 @@ AnimationSquishMonPic: ; 794a1 (1e:54a1)
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_794b1
-	hlCoord 16, 0
-	deCoord 14, 0
+	coord hl, 16, 0
+	coord de, 14, 0
 	jr .asm_794b7
 .asm_794b1
-	hlCoord 5, 5
-	deCoord 3, 5
+	coord hl, 5, 5
+	coord de, 3, 5
 .asm_794b7
 	push de
 	xor a
@@ -1883,10 +1883,10 @@ AnimationSlideMonLeft: ; 795f8 (1e:55f8)
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_79602
-	hlCoord 12, 0
+	coord hl, 12, 0
 	jr .asm_79605
 .asm_79602
-	hlCoord 0, 5
+	coord hl, 0, 5
 .asm_79605
 	ld d, $8
 .asm_79607
@@ -2121,7 +2121,7 @@ Func_79793: ; 79793 (1e:5793)
 	xor a
 	ld [W_SPRITEFLIPPED], a
 	call GetMonHeader
-	hlCoord 12, 0
+	coord hl, 12, 0
 	call LoadFrontSpriteByMonIndex
 	jr .asm_797d3
 .asm_797b0
@@ -2185,7 +2185,7 @@ Func_7980c: ; 7980c (1e:580c)
 	push bc
 	ld e, a
 	ld d, $0
-	hlCoord 0, 0
+	coord hl, 0, 0
 	add hl, de
 	ld bc, $707
 	call ClearScreenArea
@@ -2207,7 +2207,7 @@ GetMonSpriteTileMapPointerFromRowCount: ; 79820 (1e:5820)
 .enemyTurn
 	ld a, 12
 .next
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld e, a
 	ld d, 0
 	add hl, de

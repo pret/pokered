@@ -12,7 +12,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld bc, $0010
 	ld a, BANK(CircleTile)
 	call FarCopyData2
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld bc, $1012
 	predef Diploma_TextBoxBorder
 	ld hl, DiplomaTextPointersAndCoords
@@ -33,7 +33,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	pop bc
 	dec c
 	jr nz, .asm_56715
-	hlCoord 10, 4
+	coord hl, 10, 4
 	ld de, wPlayerName
 	call PlaceString
 	callba DrawPlayerCharacter

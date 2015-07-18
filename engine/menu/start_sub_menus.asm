@@ -285,7 +285,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors: ; 132ed (4:72ed)
-	hlCoord 0, 1
+	coord hl, 0, 1
 	ld bc,2 * 20 ; menu cursor positions are 2 rows apart
 	ld a,6 ; 6 menu cursor positions
 .loop
@@ -526,10 +526,10 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld bc,(BANK(RedPicFront) << 8) | $01
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
-	hlCoord 0, 2
+	coord hl, 0, 2
 	ld a," "
 	call TrainerInfo_DrawVerticalLine
-	hlCoord 1, 2
+	coord hl, 1, 2
 	call TrainerInfo_DrawVerticalLine
 	ld hl,vChars2 + $70
 	ld de,vChars2
@@ -572,7 +572,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	dec a
 	ld [hli],a
 	ld [hl],1
-	hlCoord 0, 0
+	coord hl, 0, 0
 	call TrainerInfo_DrawTextBox
 	ld hl,wTrainerInfoTextBoxWidthPlus1
 	ld a,16 + 1
@@ -580,27 +580,27 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	dec a
 	ld [hli],a
 	ld [hl],3
-	hlCoord 1, 10
+	coord hl, 1, 10
 	call TrainerInfo_DrawTextBox
-	hlCoord 0, 10
+	coord hl, 0, 10
 	ld a,$d7
 	call TrainerInfo_DrawVerticalLine
-	hlCoord 19, 10
+	coord hl, 19, 10
 	call TrainerInfo_DrawVerticalLine
-	hlCoord 6, 9
+	coord hl, 6, 9
 	ld de,TrainerInfo_BadgesText
 	call PlaceString
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de,TrainerInfo_NameMoneyTimeText
 	call PlaceString
-	hlCoord 7, 2
+	coord hl, 7, 2
 	ld de,wPlayerName
 	call PlaceString
-	hlCoord 8, 4
+	coord hl, 8, 4
 	ld de,wPlayerMoney
 	ld c,$e3
 	call PrintBCDNumber
-	hlCoord 9, 6
+	coord hl, 9, 6
 	ld de,W_PLAYTIMEHOURS + 1 ; hours
 	ld bc,$4103
 	call PrintNumber
@@ -713,7 +713,7 @@ SwitchPartyMon: ; 13613 (4:7613)
 
 SwitchPartyMon_ClearGfx: ; 13625 (4:7625)
 	push af
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld c, SCREEN_WIDTH * 2

@@ -67,22 +67,11 @@ bcd3: MACRO
 coins equs "bcd2"
 money equs "bcd3"
 
-;\1 = X
-;\2 = Y
-hlCoord: MACRO
-	ld hl, wTileMap + 20 * \2 + \1
-	ENDM
-
-;\1 = X
-;\2 = Y
-deCoord: MACRO
-	ld de, wTileMap + 20 * \2 + \1
-	ENDM
-
-;\1 = X
-;\2 = Y
-bcCoord: MACRO
-	ld bc, wTileMap + 20 * \2 + \1
+;\1 = r
+;\2 = X
+;\3 = Y
+coord: MACRO
+	ld \1, wTileMap + 20 * \3 + \2
 	ENDM
 
 ;\1 = X

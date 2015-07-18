@@ -99,7 +99,7 @@ EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
 
 Evolution_LoadPic: ; 7beb9 (1e:7eb9)
 	call GetMonHeader
-	hlCoord 7, 2
+	coord hl, 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
 Func_7bec2: ; 7bec2 (1e:7ec2)
@@ -117,7 +117,7 @@ Func_7bed6: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	hlCoord 7, 2
+	coord hl, 7, 2
 	ld bc, $707
 	ld de, $d
 .asm_7bee3

@@ -57,11 +57,11 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call HoFDisplayAndRecordMonInfo
 	ld c, 80
 	call DelayFrames
-	hlCoord 2, 13
+	coord hl, 2, 13
 	ld b, $3
 	ld c, $e
 	call TextBoxBorder
-	hlCoord 4, 15
+	coord hl, 4, 15
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
@@ -112,7 +112,7 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	call HoFLoadPlayerPics
 	jr .next1
 .showMon
-	hlCoord 12, 5
+	coord hl, 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
@@ -157,22 +157,22 @@ HoFDisplayAndRecordMonInfo: ; 702e1 (1c:42e1)
 	jp HoFRecordMonInfo
 
 HoFDisplayMonInfo: ; 702f0 (1c:42f0)
-	hlCoord 0, 2
+	coord hl, 0, 2
 	ld b, 9
 	ld c, 10
 	call TextBoxBorder
-	hlCoord 2, 6
+	coord hl, 2, 6
 	ld de, HoFMonInfoText
 	call PlaceString
-	hlCoord 1, 4
+	coord hl, 1, 4
 	ld de, wcd6d
 	call PlaceString
 	ld a, [wHoFMonLevel]
-	hlCoord 8, 7
+	coord hl, 8, 7
 	call PrintLevelCommon
 	ld a, [wHoFMonSpecies]
 	ld [wd0b5], a
-	hlCoord 3, 9
+	coord hl, 3, 9
 	predef PrintMonType
 	ld a, [wHoFMonSpecies]
 	jp PlayCry
@@ -203,28 +203,28 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 HoFLoadMonPlayerPicTileIDs: ; 7036d (1c:436d)
 ; c = base tile ID
 	ld b, 0
-	hlCoord 12, 5
+	coord hl, 12, 5
 	predef_jump CopyTileIDsFromList
 
 HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	ld hl, wd747
 	set 3, [hl]
 	predef DisplayDexRating
-	hlCoord 0, 4
+	coord hl, 0, 4
 	ld b, $6
 	ld c, $a
 	call TextBoxBorder
-	hlCoord 5, 0
+	coord hl, 5, 0
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
-	hlCoord 7, 2
+	coord hl, 7, 2
 	ld de, wPlayerName
 	call PlaceString
-	hlCoord 1, 6
+	coord hl, 1, 6
 	ld de, HoFPlayTimeText
 	call PlaceString
-	hlCoord 5, 7
+	coord hl, 5, 7
 	ld de, W_PLAYTIMEHOURS + 1
 	ld bc, $103
 	call PrintNumber
@@ -233,10 +233,10 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	ld de, W_PLAYTIMEMINUTES + 1
 	ld bc, $8102
 	call PrintNumber
-	hlCoord 1, 9
+	coord hl, 1, 9
 	ld de, HoFMoneyText
 	call PlaceString
-	hlCoord 4, 10
+	coord hl, 4, 10
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber

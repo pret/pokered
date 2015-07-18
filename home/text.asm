@@ -76,7 +76,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	cp $4F
 	jr nz,.next3
 	pop hl
-	hlCoord 1, 16
+	coord hl, 1, 16
 	push hl
 	jp PlaceNextChar_inc
 
@@ -290,13 +290,13 @@ Char51:: ; 1ab4 (0:1ab4)
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	hlCoord 1, 13
+	coord hl, 1, 13
 	ld bc,$0412
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames
 	pop de
-	hlCoord 1, 14
+	coord hl, 1, 14
 	jp PlaceNextChar_inc
 
 Char49:: ; 1ad5 (0:1ad5)
@@ -305,14 +305,14 @@ Char49:: ; 1ad5 (0:1ad5)
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	hlCoord 1, 10
+	coord hl, 1, 10
 	ld bc,$0712
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames
 	pop de
 	pop hl
-	hlCoord 1, 11
+	coord hl, 1, 11
 	push hl
 	jp PlaceNextChar_inc
 
@@ -330,13 +330,13 @@ Char4C:: ; 1b0a (0:1b0a)
 	push de
 	call Next1B18
 	call Next1B18
-	hlCoord 1, 16
+	coord hl, 1, 16
 	pop de
 	jp PlaceNextChar_inc
 
 Next1B18:: ; 1b18 (0:1b18)
-	hlCoord 0, 14
-	deCoord 0, 13
+	coord hl, 0, 14
+	coord de, 0, 13
 	ld b,60
 .next
 	ld a,[hli]
@@ -344,7 +344,7 @@ Next1B18:: ; 1b18 (0:1b18)
 	inc de
 	dec b
 	jr nz,.next
-	hlCoord 1, 16
+	coord hl, 1, 16
 	ld a, " "
 	ld b,SCREEN_WIDTH - 2
 .next2
@@ -499,7 +499,7 @@ TextCommand03:: ; 1bb7 (0:1bb7)
 ; (no arguments)
 TextCommand05:: ; 1bc5 (0:1bc5)
 	pop hl
-	bcCoord 1, 16 ; address of second line of dialogue text box
+	coord bc, 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; blink arrow and wait for A or B to be pressed
@@ -528,7 +528,7 @@ TextCommand07:: ; 1be7 (0:1be7)
 	call Next1B18 ; scroll up text
 	call Next1B18
 	pop hl
-	bcCoord 1, 16 ; address of second line of dialogue text box
+	coord bc, 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; execute asm inline

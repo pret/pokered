@@ -130,7 +130,7 @@ AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	dec a
 	jr z,.transferMiddleThird
 .transferBottomThird
-	hlCoord 0, 12
+	coord hl, 0, 12
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST + 1]
 	ld h,a
@@ -141,7 +141,7 @@ AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	xor a ; TRANSFERTOP
 	jr .doTransfer
 .transferTopThird
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST + 1]
 	ld h,a
@@ -150,7 +150,7 @@ AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	ld a,TRANSFERMIDDLE
 	jr .doTransfer
 .transferMiddleThird
-	hlCoord 0, 6
+	coord hl, 0, 6
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST + 1]
 	ld h,a

@@ -22,7 +22,7 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	ld a,$01
 	ld [wTopMenuItemX],a
 	call PrintPrizePrice
-	hlCoord 0, 2
+	coord hl, 0, 2
 	ld b,$08
 	ld c,$10
 	call TextBoxBorder
@@ -93,42 +93,42 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld a,[W_PRIZE1]
 	ld [wd11e],a
 	call GetItemName
-	hlCoord 2, 4
+	coord hl, 2, 4
 	call PlaceString
 	ld a,[W_PRIZE2]
 	ld [wd11e],a
 	call GetItemName
-	hlCoord 2, 6
+	coord hl, 2, 6
 	call PlaceString
 	ld a,[W_PRIZE3]
 	ld [wd11e],a
 	call GetItemName
-	hlCoord 2, 8
+	coord hl, 2, 8
 	call PlaceString
 	jr .putNoThanksText
 .putMonName
 	ld a,[W_PRIZE1]
 	ld [wd11e],a
 	call GetMonName
-	hlCoord 2, 4
+	coord hl, 2, 4
 	call PlaceString
 	ld a,[W_PRIZE2]
 	ld [wd11e],a
 	call GetMonName
-	hlCoord 2, 6
+	coord hl, 2, 6
 	call PlaceString
 	ld a,[W_PRIZE3]
 	ld [wd11e],a
 	call GetMonName
-	hlCoord 2, 8
+	coord hl, 2, 8
 	call PlaceString
 .putNoThanksText
-	hlCoord 2, 10
+	coord hl, 2, 10
 	ld de,NoThanksText
 	call PlaceString
 ; put prices on the right side of the textbox
 	ld de,wd141
-	hlCoord 13, 5
+	coord hl, 13, 5
 ; reg. c:
 ; [low nybble] number of bytes
 ; [bit 765 = %100] space-padding (not zero-padding)
@@ -137,29 +137,29 @@ GetPrizeMenuId: ; 5278e (14:678e)
 ; used by text-command $02)
 	call PrintBCDNumber
 	ld de,wd143
-	hlCoord 13, 7
+	coord hl, 13, 7
 	ld c,(%1 << 7 | 2)
 	call PrintBCDNumber
 	ld de,wd145
-	hlCoord 13, 9
+	coord hl, 13, 9
 	ld c,(1 << 7 | 2)
 	jp PrintBCDNumber
 
 INCLUDE "data/prizes.asm"
 
 PrintPrizePrice: ; 5287a (14:687a)
-	hlCoord 11, 0
+	coord hl, 11, 0
 	ld b,$01
 	ld c,$07
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 12, 0
+	coord hl, 12, 0
 	ld de,.CoinText
 	call PlaceString
-	hlCoord 13, 1
+	coord hl, 13, 1
 	ld de,.SixSpacesText
 	call PlaceString
-	hlCoord 13, 1
+	coord hl, 13, 1
 	ld de,wPlayerCoins
 	ld c,%10000010
 	call PrintBCDNumber

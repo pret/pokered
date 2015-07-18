@@ -53,12 +53,12 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [hli], a
 	ld [hl], a
 .getHPBarCoords
-	hlCoord 10, 9
+	coord hl, 10, 9
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, $1
 	jr z, .updateHPBar
-	hlCoord 2, 2
+	coord hl, 2, 2
 	xor a
 .updateHPBar
 	ld [wHPBarType], a

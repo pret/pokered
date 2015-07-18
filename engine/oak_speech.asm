@@ -68,7 +68,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld [wd0b5],a
 	ld [wcf91],a
 	call GetMonHeader
-	hlCoord 6, 4
+	coord hl, 6, 4
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl,OakSpeechText2
@@ -141,7 +141,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld [MBC1RomBank],a
 	ld c,20
 	call DelayFrames
-	hlCoord 6, 5
+	coord hl, 6, 5
 	ld b,7
 	ld c,7
 	call ClearScreenArea
@@ -224,9 +224,9 @@ IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
 	pop bc
 	ld a,c
 	and a
-	hlCoord 15, 1
+	coord hl, 15, 1
 	jr nz,.next
-	hlCoord 6, 4
+	coord hl, 6, 4
 .next
 	xor a
 	ld [$FFE1],a

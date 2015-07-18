@@ -25,7 +25,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 .asm_1389e
 ; determine if wild pokemon can appear in the half-block we're standing in
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
-	hlCoord 9, 9
+	coord hl, 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
