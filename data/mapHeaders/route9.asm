@@ -3,6 +3,6 @@ Route9_h: ; 0x54686 to 0x546a8 (34 bytes) (id=20)
 	db ROUTE_9_HEIGHT, ROUTE_9_WIDTH ; dimensions (y, x)
 	dw Route9Blocks, Route9TextPointers, Route9Script ; blocks, texts, scripts
 	db WEST | EAST ; connections
-	WEST_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 1, ROUTE_9_HEIGHT + 6, CeruleanCityBlocks, ROUTE_9_WIDTH
-	EAST_MAP_CONNECTION ROUTE_10, ROUTE_10_WIDTH, 0, 0, ROUTE_9_HEIGHT + 3, Route10Blocks, ROUTE_9_WIDTH
+	WEST_MAP_CONNECTION ROUTE_9, CERULEAN_CITY, -3, 1, CeruleanCityBlocks
+	EAST_MAP_CONNECTION ROUTE_9, ROUTE_10, 0, 0, Route10Blocks, 1
 	dw Route9Object ; objects

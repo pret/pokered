@@ -3,6 +3,6 @@ Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
 	db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
 	dw Route24Blocks, Route24TextPointers, Route24Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, -3, 2, ROUTE_24_WIDTH + 6, CeruleanCityBlocks, ROUTE_24_WIDTH, ROUTE_24_HEIGHT
-	EAST_MAP_CONNECTION ROUTE_25, ROUTE_25_WIDTH, 0, 0, ROUTE_25_HEIGHT, Route25Blocks, ROUTE_24_WIDTH
+	SOUTH_MAP_CONNECTION ROUTE_24, CERULEAN_CITY, -3, 2, CeruleanCityBlocks, 1
+	EAST_MAP_CONNECTION ROUTE_24, ROUTE_25, 0, 0, Route25Blocks
 	dw Route24Object ; objects

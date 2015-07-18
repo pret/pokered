@@ -3,6 +3,6 @@ Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
 	db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
 	dw Route16Blocks, Route16TextPointers, Route16Script ; blocks, texts, scripts
 	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION ROUTE_17, ROUTE_17_WIDTH, 0, 0, ROUTE_17_WIDTH, Route17Blocks, ROUTE_16_WIDTH, ROUTE_16_HEIGHT
-	EAST_MAP_CONNECTION CELADON_CITY, CELADON_CITY_WIDTH, -3, 1, ROUTE_16_HEIGHT + 6, CeladonCityBlocks, ROUTE_16_WIDTH
+	SOUTH_MAP_CONNECTION ROUTE_16, ROUTE_17, 0, 0, Route17Blocks
+	EAST_MAP_CONNECTION ROUTE_16, CELADON_CITY, -3, 1, CeladonCityBlocks, 1
 	dw Route16Object ; objects

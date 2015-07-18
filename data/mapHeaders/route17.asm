@@ -3,6 +3,6 @@ Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
 	db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
 	dw Route17Blocks, Route17TextPointers, Route17Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION ROUTE_16, ROUTE_16_WIDTH, ROUTE_16_HEIGHT, 0, 0, ROUTE_17_WIDTH + 3, Route16Blocks
-	SOUTH_MAP_CONNECTION ROUTE_18, ROUTE_18_WIDTH, 0, 0, ROUTE_17_WIDTH + 3, Route18Blocks, ROUTE_17_WIDTH, ROUTE_17_HEIGHT
+	NORTH_MAP_CONNECTION ROUTE_17, ROUTE_16, 0, 0, Route16Blocks
+	SOUTH_MAP_CONNECTION ROUTE_17, ROUTE_18, 0, 0, Route18Blocks, 1
 	dw Route17Object ; objects

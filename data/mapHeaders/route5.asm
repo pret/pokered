@@ -3,6 +3,6 @@ Route5_h: ; 0x54581 to 0x545a3 (34 bytes) (id=16)
 	db ROUTE_5_HEIGHT, ROUTE_5_WIDTH ; dimensions (y, x)
 	dw Route5Blocks, Route5TextPointers, Route5Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
-	NORTH_MAP_CONNECTION CERULEAN_CITY, CERULEAN_CITY_WIDTH, CERULEAN_CITY_HEIGHT, -3, 2, ROUTE_5_WIDTH + 6, CeruleanCityBlocks
-	SOUTH_MAP_CONNECTION SAFFRON_CITY, SAFFRON_CITY_WIDTH, -3, 2, ROUTE_5_WIDTH + 6, SaffronCityBlocks, ROUTE_5_WIDTH, ROUTE_5_HEIGHT
+	NORTH_MAP_CONNECTION ROUTE_5, CERULEAN_CITY, -3, 2, CeruleanCityBlocks
+	SOUTH_MAP_CONNECTION ROUTE_5, SAFFRON_CITY, -3, 2, SaffronCityBlocks, 1
 	dw Route5Object ; objects
