@@ -1,48 +1,50 @@
 ; sometimes it's necessary to add $C8 to these values
-YOUNGSTER     EQU $01
-BUG_CATCHER   EQU $02
-LASS          EQU $03
-SAILOR        EQU $04
-JR__TRAINER_M EQU $05
-JR__TRAINER_F EQU $06
-POKEMANIAC    EQU $07
-SUPER_NERD    EQU $08
-HIKER         EQU $09
-BIKER         EQU $0A
-BURGLAR       EQU $0B
-ENGINEER      EQU $0C
-JUGGLER_X     EQU $0D
-FISHER        EQU $0E
-SWIMMER       EQU $0F
-CUE_BALL      EQU $10
-GAMBLER       EQU $11
-BEAUTY        EQU $12
-PSYCHIC_TR    EQU $13
-ROCKER        EQU $14
-JUGGLER       EQU $15
-TAMER         EQU $16
-BIRD_KEEPER   EQU $17
-BLACKBELT     EQU $18
-SONY1         EQU $19
-PROF_OAK      EQU $1A
-CHIEF         EQU $1B
-SCIENTIST     EQU $1C
-GIOVANNI      EQU $1D
-ROCKET        EQU $1E
-COOLTRAINER_M EQU $1F
-COOLTRAINER_F EQU $20
-BRUNO         EQU $21
-BROCK         EQU $22
-MISTY         EQU $23
-LT__SURGE     EQU $24
-ERIKA         EQU $25
-KOGA          EQU $26
-BLAINE        EQU $27
-SABRINA       EQU $28
-GENTLEMAN     EQU $29
-SONY2         EQU $2A
-SONY3         EQU $2B
-LORELEI       EQU $2C
-CHANNELER     EQU $2D
-AGATHA        EQU $2E
-LANCE         EQU $2F
+const_value = 1
+
+	const YOUNGSTER     ; $01
+	const BUG_CATCHER   ; $02
+	const LASS          ; $03
+	const SAILOR        ; $04
+	const JR__TRAINER_M ; $05
+	const JR__TRAINER_F ; $06
+	const POKEMANIAC    ; $07
+	const SUPER_NERD    ; $08
+	const HIKER         ; $09
+	const BIKER         ; $0A
+	const BURGLAR       ; $0B
+	const ENGINEER      ; $0C
+	const JUGGLER_X     ; $0D
+	const FISHER        ; $0E
+	const SWIMMER       ; $0F
+	const CUE_BALL      ; $10
+	const GAMBLER       ; $11
+	const BEAUTY        ; $12
+	const PSYCHIC_TR    ; $13
+	const ROCKER        ; $14
+	const JUGGLER       ; $15
+	const TAMER         ; $16
+	const BIRD_KEEPER   ; $17
+	const BLACKBELT     ; $18
+	const SONY1         ; $19
+	const PROF_OAK      ; $1A
+	const CHIEF         ; $1B
+	const SCIENTIST     ; $1C
+	const GIOVANNI      ; $1D
+	const ROCKET        ; $1E
+	const COOLTRAINER_M ; $1F
+	const COOLTRAINER_F ; $20
+	const BRUNO         ; $21
+	const BROCK         ; $22
+	const MISTY         ; $23
+	const LT__SURGE     ; $24
+	const ERIKA         ; $25
+	const KOGA          ; $26
+	const BLAINE        ; $27
+	const SABRINA       ; $28
+	const GENTLEMAN     ; $29
+	const SONY2         ; $2A
+	const SONY3         ; $2B
+	const LORELEI       ; $2C
+	const CHANNELER     ; $2D
+	const AGATHA        ; $2E
+	const LANCE         ; $2F

@@ -1,27 +1,29 @@
-OVERWORLD    EQU 0
-REDS_HOUSE_1 EQU 1
-MART         EQU 2
-FOREST       EQU 3
-REDS_HOUSE_2 EQU 4
-DOJO         EQU 5
-POKECENTER   EQU 6
-GYM          EQU 7
-HOUSE        EQU 8
-FOREST_GATE  EQU 9
-MUSEUM       EQU 10
-UNDERGROUND  EQU 11
-GATE         EQU 12
-SHIP         EQU 13
-SHIP_PORT    EQU 14
-CEMETERY     EQU 15
-INTERIOR     EQU 16
-CAVERN       EQU 17
-LOBBY        EQU 18
-MANSION      EQU 19
-LAB          EQU 20
-CLUB         EQU 21
-FACILITY     EQU 22
-PLATEAU      EQU 23
+const_value = 0
+
+	const OVERWORLD    ; 0
+	const REDS_HOUSE_1 ; 1
+	const MART         ; 2
+	const FOREST       ; 3
+	const REDS_HOUSE_2 ; 4
+	const DOJO         ; 5
+	const POKECENTER   ; 6
+	const GYM          ; 7
+	const HOUSE        ; 8
+	const FOREST_GATE  ; 9
+	const MUSEUM       ; 10
+	const UNDERGROUND  ; 11
+	const GATE         ; 12
+	const SHIP         ; 13
+	const SHIP_PORT    ; 14
+	const CEMETERY     ; 15
+	const INTERIOR     ; 16
+	const CAVERN       ; 17
+	const LOBBY        ; 18
+	const MANSION      ; 19
+	const LAB          ; 20
+	const CLUB         ; 21
+	const FACILITY     ; 22
+	const PLATEAU      ; 23
 IF DEF(_OPTION_BEACH_HOUSE)
-BEACH_HOUSE_TILESET EQU 24
+	const BEACH_HOUSE_TILESET ; 24
 ENDC

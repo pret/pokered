@@ -1,65 +1,67 @@
-CRED_VERSION        EQU $00
-CRED_TAJIRI         EQU $01
-CRED_TA_OOTA        EQU $02
-CRED_MORIMOTO       EQU $03
-CRED_WATANABE       EQU $04
-CRED_MASUDE         EQU $05
-CRED_NISINO         EQU $06
-CRED_SUGIMORI       EQU $07
-CRED_NISHIDA        EQU $08
-CRED_MIYAMOTO       EQU $09
-CRED_KAWAGUCHI      EQU $0A
-CRED_ISHIHARA       EQU $0B
-CRED_YAMAUCHI       EQU $0C
-CRED_ZINNAI         EQU $0D
-CRED_HISHIDA        EQU $0E
-CRED_SAKAI          EQU $0F
-CRED_YAMAGUCHI      EQU $10
-CRED_YAMAMOTO       EQU $11
-CRED_TANIGUCHI      EQU $12
-CRED_NONOMURA       EQU $13
-CRED_FUZIWARA       EQU $14
-CRED_MATSUSIMA      EQU $15
-CRED_TOMISAWA       EQU $16
-CRED_KAWAMOTO       EQU $17
-CRED_KAKEI          EQU $18
-CRED_TSUCHIYA       EQU $19
-CRED_TA_NAKAMURA    EQU $1A
-CRED_YUDA           EQU $1B
-CRED_MON            EQU $1C ; Pokemon
-CRED_DIRECTOR       EQU $1D
-CRED_PROGRAMMERS    EQU $1E
-CRED_CHAR_DESIGN    EQU $1F
-CRED_MUSIC          EQU $20
-CRED_SOUND_EFFECTS  EQU $21
-CRED_GAME_DESIGN    EQU $22
-CRED_MONSTER_DESIGN EQU $23
-CRED_GAME_SCENE     EQU $24
-CRED_PARAM          EQU $25
-CRED_MAP            EQU $26
-CRED_TEST           EQU $27
-CRED_SPECIAL        EQU $28
-CRED_PRODUCERS      EQU $29
-CRED_PRODUCER       EQU $2A
-CRED_EXECUTIVE      EQU $2B
-CRED_TAMADA         EQU $2C
-CRED_SA_OOTA        EQU $2D
-CRED_YOSHIKAWA      EQU $2E
-CRED_TO_OOTA        EQU $2F
-CRED_US_STAFF       EQU $30
-CRED_US_COORD       EQU $31
-CRED_TILDEN         EQU $32
-CRED_KAWAKAMI       EQU $33
-CRED_HI_NAKAMURA    EQU $34
-CRED_GIESE          EQU $35
-CRED_OSBORNE        EQU $36
-CRED_TRANS          EQU $37
-CRED_OGASAWARA      EQU $38
-CRED_IWATA          EQU $39
-CRED_IZUSHI         EQU $3A
-CRED_HARADA         EQU $3B
-CRED_MURAKAWA       EQU $3C
-CRED_FUKUI          EQU $3D
-CRED_CLUB           EQU $3E
-CRED_PAAD           EQU $3F
+const_value = 0
+
+	const CRED_VERSION        ; $00
+	const CRED_TAJIRI         ; $01
+	const CRED_TA_OOTA        ; $02
+	const CRED_MORIMOTO       ; $03
+	const CRED_WATANABE       ; $04
+	const CRED_MASUDE         ; $05
+	const CRED_NISINO         ; $06
+	const CRED_SUGIMORI       ; $07
+	const CRED_NISHIDA        ; $08
+	const CRED_MIYAMOTO       ; $09
+	const CRED_KAWAGUCHI      ; $0A
+	const CRED_ISHIHARA       ; $0B
+	const CRED_YAMAUCHI       ; $0C
+	const CRED_ZINNAI         ; $0D
+	const CRED_HISHIDA        ; $0E
+	const CRED_SAKAI          ; $0F
+	const CRED_YAMAGUCHI      ; $10
+	const CRED_YAMAMOTO       ; $11
+	const CRED_TANIGUCHI      ; $12
+	const CRED_NONOMURA       ; $13
+	const CRED_FUZIWARA       ; $14
+	const CRED_MATSUSIMA      ; $15
+	const CRED_TOMISAWA       ; $16
+	const CRED_KAWAMOTO       ; $17
+	const CRED_KAKEI          ; $18
+	const CRED_TSUCHIYA       ; $19
+	const CRED_TA_NAKAMURA    ; $1A
+	const CRED_YUDA           ; $1B
+	const CRED_MON            ; $1C
+	const CRED_DIRECTOR       ; $1D
+	const CRED_PROGRAMMERS    ; $1E
+	const CRED_CHAR_DESIGN    ; $1F
+	const CRED_MUSIC          ; $20
+	const CRED_SOUND_EFFECTS  ; $21
+	const CRED_GAME_DESIGN    ; $22
+	const CRED_MONSTER_DESIGN ; $23
+	const CRED_GAME_SCENE     ; $24
+	const CRED_PARAM          ; $25
+	const CRED_MAP            ; $26
+	const CRED_TEST           ; $27
+	const CRED_SPECIAL        ; $28
+	const CRED_PRODUCERS      ; $29
+	const CRED_PRODUCER       ; $2A
+	const CRED_EXECUTIVE      ; $2B
+	const CRED_TAMADA         ; $2C
+	const CRED_SA_OOTA        ; $2D
+	const CRED_YOSHIKAWA      ; $2E
+	const CRED_TO_OOTA        ; $2F
+	const CRED_US_STAFF       ; $30
+	const CRED_US_COORD       ; $31
+	const CRED_TILDEN         ; $32
+	const CRED_KAWAKAMI       ; $33
+	const CRED_HI_NAKAMURA    ; $34
+	const CRED_GIESE          ; $35
+	const CRED_OSBORNE        ; $36
+	const CRED_TRANS          ; $37
+	const CRED_OGASAWARA      ; $38
+	const CRED_IWATA          ; $39
+	const CRED_IZUSHI         ; $3A
+	const CRED_HARADA         ; $3B
+	const CRED_MURAKAWA       ; $3C
+	const CRED_FUKUI          ; $3D
+	const CRED_CLUB           ; $3E
+	const CRED_PAAD           ; $3F
 
