@@ -67,7 +67,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	and a
 	ret nz
 	xor a
-	ld [hCoins - 1], a
+	ld [hUnusedCoinsByte], a
 	ld [hCoins], a
 	ld [hCoins + 1], a
 	ld a, [wHiddenObjectFunctionArgument]

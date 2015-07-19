@@ -137,6 +137,9 @@ hNPCPlayerRelativePosPerspective EQU $FF9B
 ; 1 = target is to the west
 hNPCPlayerRelativePosFlags EQU $FF9D
 
+; some code zeroes this for no reason when writing a coin amount
+hUnusedCoinsByte EQU $FF9F
+
 hMoney EQU $FF9F ; 3-byte BCD number
 hCoins EQU $FFA0 ; 2-byte BCD number
 

@@ -733,6 +733,8 @@ wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
 wTrainerSpriteOffset:: ; cd3d
+
+wUnusedCD3D:: ; cd3d
 	ds 1
 
 wSSAnneSmokeX:: ; cd3e
