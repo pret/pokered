@@ -35,6 +35,4 @@ InitBattleVariables: ; 525af (14:65af)
 	ld a, $2 ; safari battle
 	ld [W_BATTLETYPE], a
 .notSafariBattle
-	ld hl, PlayBattleMusic
-	ld b, BANK(PlayBattleMusic)
-	jp Bankswitch
+	jpab PlayBattleMusic

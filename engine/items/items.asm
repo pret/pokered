@@ -499,9 +499,7 @@ ItemUseTownMap: ; d968 (3:5968)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b, BANK(DisplayTownMap)
-	ld hl, DisplayTownMap
-	jp Bankswitch ; display Town Map
+	jpba DisplayTownMap
 
 ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]

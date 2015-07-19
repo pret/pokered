@@ -1,9 +1,7 @@
 HandleMidJump::
 ; Handle the player jumping down
 ; a ledge in the overworld.
-	ld b, BANK(_HandleMidJump)
-	ld hl, _HandleMidJump
-	jp Bankswitch
+	jpba _HandleMidJump
 
 EnterMap::
 ; Load a new map.
@@ -355,9 +353,7 @@ NewBattle:: ; 0683 (0:0683)
 	ld a,[wd72e]
 	bit 4,a
 	jr nz,.noBattle
-	ld b, BANK(InitBattle)
-	ld hl, InitBattle
-	jp Bankswitch
+	jpba InitBattle
 .noBattle
 	and a
 	ret
@@ -783,9 +779,7 @@ HandleFlyWarpOrDungeonWarp::
 	jp SpecialEnterMap
 
 LeaveMapAnim::
-	ld b, BANK(_LeaveMapAnim)
-	ld hl, _LeaveMapAnim
-	jp Bankswitch
+	jpba _LeaveMapAnim
 
 LoadPlayerSpriteGraphics::
 ; Load sprite graphics based on whether the player is standing, biking, or surfing.

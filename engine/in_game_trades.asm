@@ -159,9 +159,7 @@ InGameTrade_RestoreScreen: ; 71ca2 (1c:5ca2)
 	call LoadGBPal
 	ld c, 10
 	call DelayFrames
-	ld b, BANK(LoadWildData)
-	ld hl, LoadWildData
-	jp Bankswitch
+	jpba LoadWildData
 
 InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld hl, wTradedPlayerMonSpecies

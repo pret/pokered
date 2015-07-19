@@ -36,18 +36,12 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	ld c, 30
 	call DelayFrames
 	callab PlayCurrentMoveAnimation
-	ld hl, PrintMayNotAttackText
-	ld b, BANK(PrintMayNotAttackText)
-	jp Bankswitch
+	jpab PrintMayNotAttackText
 .didntAffect
 	ld c, 50
 	call DelayFrames
-	ld hl, PrintDidntAffectText
-	ld b, BANK(PrintDidntAffectText)
-	jp Bankswitch
+	jpab PrintDidntAffectText
 .doesntAffect
 	ld c, 50
 	call DelayFrames
-	ld hl, PrintDoesntAffectText
-	ld b, BANK(PrintDoesntAffectText)
-	jp Bankswitch
+	jpab PrintDoesntAffectText

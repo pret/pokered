@@ -110,9 +110,7 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	ld de, wHoFTeamNo
 	ld bc, $0103
 	call PrintNumber
-	ld b, BANK(HoFDisplayMonInfo)
-	ld hl, HoFDisplayMonInfo
-	jp Bankswitch
+	jpba HoFDisplayMonInfo
 
 HallOfFameNoText: ; 76670 (1d:6670)
 	db "HALL OF FAME No   @"

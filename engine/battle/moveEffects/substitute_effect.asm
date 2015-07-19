@@ -55,9 +55,7 @@ SubstituteEffect_: ; 17dad (5:7dad)
 	call Bankswitch ; jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
-	ld hl, DrawHUDsAndHPBars
-	ld b, BANK(DrawHUDsAndHPBars)
-	jp Bankswitch
+	jpab DrawHUDsAndHPBars
 .alreadyHasSubstitute
 	ld hl, HasSubstituteText
 	jr .printText

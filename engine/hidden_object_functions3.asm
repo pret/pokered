@@ -34,9 +34,7 @@ PrintBookshelfText: ; fb50 (3:7b50)
 .noMatch
 	ld a, $ff
 	ld [$ffdb], a
-	ld b, BANK(PrintCardKeyText)
-	ld hl, PrintCardKeyText
-	jp Bankswitch
+	jpba PrintCardKeyText
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)

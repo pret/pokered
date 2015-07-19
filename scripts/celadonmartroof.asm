@@ -135,9 +135,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jp PrintText
 
 RemoveItemByIDBank12: ; 484e6 (12:44e6)
-	ld b, BANK(RemoveItemByID)
-	ld hl, RemoveItemByID
-	jp Bankswitch
+	jpba RemoveItemByID
 
 CeladonMartRoofText_484ee: ; 484ee (12:44ee)
 	TX_FAR _CeladonMartRoofText_484ee

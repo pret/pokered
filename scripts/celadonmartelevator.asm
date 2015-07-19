@@ -55,9 +55,7 @@ CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
 	db $02, CELADON_MART_5
 
 CeladonMartElevatorScript_48654: ; 48654 (12:4654)
-	ld b, BANK(ShakeElevator)
-	ld hl, ShakeElevator
-	jp Bankswitch
+	jpba ShakeElevator
 
 CeladonMartElevatorTextPointers: ; 4865c (12:465c)
 	dw CeladonMartElevatorText1
