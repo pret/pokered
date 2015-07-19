@@ -1705,7 +1705,7 @@ ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 
 CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
-	ld c,2 * 20
+	ld c,2 * SCREEN_WIDTH
 .loop
 	ld a,[hli]
 	ld [de],a

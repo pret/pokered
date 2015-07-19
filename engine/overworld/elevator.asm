@@ -1,17 +1,16 @@
 ShakeElevator: ; 7bf15 (1e:7f15)
-	ld de, $ffe0
-	call Func_7bf64
-	ld de, $240
-	call Func_7bf64
+	ld de, -$20
+	call ShakeElevatorRedrawRow
+	ld de, SCREEN_HEIGHT * $20
+	call ShakeElevatorRedrawRow
 	call Delay3
 	ld a, $ff
 	call PlaySound
 	ld a, [hSCY]
 	ld d, a
 	ld e, $1
-	; number of times to play collision sfx
 	ld b, 100
-.asm_7bf30
+.shakeLoop ; scroll the BG up and down and play a sound effect
 	ld a, e
 	xor $fe
 	ld e, a
@@ -25,7 +24,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld c, 2
 	call DelayFrames
 	dec b
-	jr nz, .asm_7bf30
+	jr nz, .shakeLoop
 	ld a, d
 	ld [hSCY], a
 	ld a, $ff
@@ -33,14 +32,17 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld c, BANK(SFX_02_5f)
 	ld a, (SFX_02_5f - SFX_Headers_02) / 3
 	call PlayMusic
-.asm_7bf57
+.musicLoop
 	ld a, [wc02a]
 	cp $b9
-	jr z, .asm_7bf57
+	jr z, .musicLoop
 	call UpdateSprites
 	jp PlayDefaultMusic
 
-Func_7bf64: ; 7bf64 (1e:7f64)
+ShakeElevatorRedrawRow: ; 7bf64 (1e:7f64)
+; This function is used to redraw certain portions of the screen, but it does
+; not appear to ever result in any visible effect, so this function seems to
+; be pointless.
 	ld hl, wMapViewVRAMPointer + 1
 	ld a, [hld]
 	push af

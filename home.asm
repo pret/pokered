@@ -1140,7 +1140,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	callab CableClubNPC
 	jr AfterDisplayingTextID
 .notSpecialCase
-	call Func_3c59 ; display the text
+	call PrintText_NoCreatingTextBox ; display the text
 	ld a,[wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz,HoldTextDisplayOpen
@@ -4206,7 +4206,7 @@ PrintText:: ; 3c49 (0:3c49)
 	call UpdateSprites
 	call Delay3
 	pop hl
-Func_3c59:: ; 3c59 (0:3c59)
+PrintText_NoCreatingTextBox:: ; 3c59 (0:3c59)
 	coord bc, 1, 14
 	jp TextCommandProcessor
 
