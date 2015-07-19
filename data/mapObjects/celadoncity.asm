@@ -27,16 +27,16 @@ CeladonCityObject: ; 0x18022 (size=189)
 	db $15, $21, $11 ; CeladonCityText17
 	db $15, $1b, $12 ; CeladonCityText18
 
-	db $9 ; people
-	db SPRITE_LITTLE_GIRL, $11 + 4, $8 + 4, $fe, $0, $1 ; person
-	db SPRITE_OLD_PERSON, $1c + 4, $b + 4, $ff, $d1, $2 ; person
-	db SPRITE_GIRL, $13 + 4, $e + 4, $fe, $1, $3 ; person
-	db SPRITE_OLD_PERSON, $16 + 4, $19 + 4, $ff, $d0, $4 ; person
-	db SPRITE_OLD_PERSON, $10 + 4, $16 + 4, $ff, $d0, $5 ; person
-	db SPRITE_FISHER2, $c + 4, $20 + 4, $ff, $d2, $6 ; person
-	db SPRITE_SLOWBRO, $c + 4, $1e + 4, $ff, $d3, $7 ; person
-	db SPRITE_ROCKET, $1d + 4, $20 + 4, $fe, $2, $8 ; person
-	db SPRITE_ROCKET, $e + 4, $2a + 4, $fe, $2, $9 ; person
+	db $9 ; objects
+	object SPRITE_LITTLE_GIRL, $8, $11, WALK, $0, $1 ; person
+	object SPRITE_OLD_PERSON, $b, $1c, FACE, UP, $2 ; person
+	object SPRITE_GIRL, $e, $13, WALK, $1, $3 ; person
+	object SPRITE_OLD_PERSON, $19, $16, FACE, DOWN, $4 ; person
+	object SPRITE_OLD_PERSON, $16, $10, FACE, DOWN, $5 ; person
+	object SPRITE_FISHER2, $20, $c, FACE, RIGHT, $6 ; person
+	object SPRITE_SLOWBRO, $1e, $c, FACE, LEFT, $7 ; person
+	object SPRITE_ROCKET, $20, $1d, WALK, $2, $8 ; person
+	object SPRITE_ROCKET, $2a, $e, WALK, $2, $9 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_CITY_WIDTH, $d, $8 ; CELADON_MART_1

@@ -8,14 +8,14 @@ Route13Object: ; 0x5482e (size=93)
 	db $5, $21, $c ; Route13Text12
 	db $b, $1f, $d ; Route13Text13
 
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $a + 4, $31 + 4, $ff, $d3, TRAINER | $1, BIRD_KEEPER + $C8, $1
-	db SPRITE_LASS, $a + 4, $30 + 4, $ff, $d0, TRAINER | $2, JR__TRAINER_F + $C8, $c
-	db SPRITE_LASS, $9 + 4, $1b + 4, $ff, $d0, TRAINER | $3, JR__TRAINER_F + $C8, $d
-	db SPRITE_LASS, $a + 4, $17 + 4, $ff, $d2, TRAINER | $4, JR__TRAINER_F + $C8, $e
-	db SPRITE_LASS, $5 + 4, $32 + 4, $ff, $d0, TRAINER | $5, JR__TRAINER_F + $C8, $f
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $c + 4, $ff, $d3, TRAINER | $6, BIRD_KEEPER + $C8, $2
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $21 + 4, $ff, $d0, TRAINER | $7, BEAUTY + $C8, $4
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $20 + 4, $ff, $d0, TRAINER | $8, BEAUTY + $C8, $5
-	db SPRITE_BIKER, $7 + 4, $a + 4, $ff, $d1, TRAINER | $9, BIKER + $C8, $1
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $7 + 4, $ff, $d1, TRAINER | $a, BIRD_KEEPER + $C8, $3
+	db $a ; objects
+	object SPRITE_BLACK_HAIR_BOY_1, $31, $a, FACE, LEFT, $1, BIRD_KEEPER + $C8, $1
+	object SPRITE_LASS, $30, $a, FACE, DOWN, $2, JR__TRAINER_F + $C8, $c
+	object SPRITE_LASS, $1b, $9, FACE, DOWN, $3, JR__TRAINER_F + $C8, $d
+	object SPRITE_LASS, $17, $a, FACE, RIGHT, $4, JR__TRAINER_F + $C8, $e
+	object SPRITE_LASS, $32, $5, FACE, DOWN, $5, JR__TRAINER_F + $C8, $f
+	object SPRITE_BLACK_HAIR_BOY_1, $c, $4, FACE, LEFT, $6, BIRD_KEEPER + $C8, $2
+	object SPRITE_FOULARD_WOMAN, $21, $6, FACE, DOWN, $7, BEAUTY + $C8, $4
+	object SPRITE_FOULARD_WOMAN, $20, $6, FACE, DOWN, $8, BEAUTY + $C8, $5
+	object SPRITE_BIKER, $a, $7, FACE, UP, $9, BIKER + $C8, $1
+	object SPRITE_BLACK_HAIR_BOY_1, $7, $d, FACE, UP, $a, BIRD_KEEPER + $C8, $3

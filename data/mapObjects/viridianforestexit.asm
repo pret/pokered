@@ -9,9 +9,9 @@ ViridianForestExitObject: ; 0x5d598 (size=48)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
-	db SPRITE_OLD_PERSON, $5 + 4, $2 + 4, $ff, $ff, $2 ; person
+	db $2 ; objects
+	object SPRITE_BLACK_HAIR_BOY_2, $3, $2, FACE, STAY, $1 ; person
+	object SPRITE_OLD_PERSON, $2, $5, FACE, STAY, $2 ; person
 
 	; warp-to
 	EVENT_DISP VIRIDIAN_FOREST_EXIT_WIDTH, $0, $4

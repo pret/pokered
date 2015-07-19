@@ -10,8 +10,8 @@ SilphCo1Object: ; 0x5d470 (size=50)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
+	db $1 ; objects
+	object SPRITE_CABLE_CLUB_WOMAN, $4, $2, FACE, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP SILPH_CO_1F_WIDTH, $11, $a

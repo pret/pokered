@@ -21,18 +21,18 @@ CeruleanCityObject: ; 0x18786 (size=170)
 	db $19, $b, $10 ; CeruleanCityText16
 	db $15, $1b, $11 ; CeruleanCityText17
 
-	db $b ; people
-	db SPRITE_BLUE, $2 + 4, $14 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $8 + 4, $1e + 4, $ff, $ff, TRAINER | $2, ROCKET + $C8, $5
-	db SPRITE_BLACK_HAIR_BOY_1, $14 + 4, $1f + 4, $ff, $d0, $3 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $12 + 4, $f + 4, $fe, $1, $4 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $15 + 4, $9 + 4, $fe, $2, $5 ; person
-	db SPRITE_GUARD, $c + 4, $1c + 4, $ff, $d0, $6 ; person
-	db SPRITE_LASS, $1a + 4, $1d + 4, $ff, $d2, $7 ; person
-	db SPRITE_SLOWBRO, $1a + 4, $1c + 4, $ff, $d0, $8 ; person
-	db SPRITE_LASS, $1b + 4, $9 + 4, $fe, $2, $9 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $c + 4, $4 + 4, $ff, $d0, $a ; person
-	db SPRITE_GUARD, $c + 4, $1b + 4, $ff, $d0, $b ; person
+	db $b ; objects
+	object SPRITE_BLUE, $14, $2, FACE, DOWN, $1 ; person
+	object SPRITE_ROCKET, $1e, $8, FACE, STAY, $2, ROCKET + $C8, $5
+	object SPRITE_BLACK_HAIR_BOY_1, $1f, $14, FACE, DOWN, $3 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $f, $12, WALK, $1, $4 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $9, $15, WALK, $2, $5 ; person
+	object SPRITE_GUARD, $1c, $c, FACE, DOWN, $6 ; person
+	object SPRITE_LASS, $1d, $1a, FACE, RIGHT, $7 ; person
+	object SPRITE_SLOWBRO, $1c, $1a, FACE, DOWN, $8 ; person
+	object SPRITE_LASS, $9, $1b, WALK, $2, $9 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $c, FACE, DOWN, $a ; person
+	object SPRITE_GUARD, $1b, $c, FACE, DOWN, $b ; person
 
 	; warp-to
 	EVENT_DISP CERULEAN_CITY_WIDTH, $b, $1b ; TRASHED_HOUSE

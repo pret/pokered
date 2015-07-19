@@ -11,11 +11,11 @@ CeladonMansion1Object: ; 0x486cf (size=71)
 	db $1 ; signs
 	db $9, $4, $5 ; CeladonMansion1Text5
 
-	db $4 ; people
-	db SPRITE_SLOWBRO, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_OLD_MEDIUM_WOMAN, $5 + 4, $1 + 4, $ff, $d0, $2 ; person
-	db SPRITE_CLEFAIRY, $8 + 4, $1 + 4, $fe, $2, $3 ; person
-	db SPRITE_SLOWBRO, $4 + 4, $4 + 4, $fe, $1, $4 ; person
+	db $4 ; objects
+	object SPRITE_SLOWBRO, $0, $5, FACE, LEFT, $1 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $1, $5, FACE, DOWN, $2 ; person
+	object SPRITE_CLEFAIRY, $1, $8, WALK, $2, $3 ; person
+	object SPRITE_SLOWBRO, $4, $4, WALK, $1, $4 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MANSION_1_WIDTH, $b, $4

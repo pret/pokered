@@ -15,26 +15,26 @@ ELSE
 	db $9, $b, $b ; Route19Text11
 ENDC
 
-	db $a ; people
+	db $a ; objects
 IF DEF(_OPTION_BEACH_HOUSE)
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $9 + 4, $ff, $d3, TRAINER | 1, SWIMMER + $C8, 2
-	db SPRITE_BLACK_HAIR_BOY_1, $9 + 4, $c + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
+	object SPRITE_BLACK_HAIR_BOY_1, $9, $7, FACE, LEFT, 1, SWIMMER + $C8, 2
+	object SPRITE_BLACK_HAIR_BOY_1, $c, $9, FACE, RIGHT, 2, SWIMMER + $C8, 3
 ELSE
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $8 + 4, $ff, $d2, TRAINER | 1, SWIMMER + $C8, 2
-	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $d + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
+	object SPRITE_BLACK_HAIR_BOY_1, $8, $7, FACE, RIGHT, 1, SWIMMER + $C8, 2
+	object SPRITE_BLACK_HAIR_BOY_1, $d, $7, FACE, RIGHT, 2, SWIMMER + $C8, 3
 ENDC
-	db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, TRAINER | $3, SWIMMER + $C8, $4
-	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, TRAINER | $4, SWIMMER + $C8, $5
-	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, TRAINER | $5, SWIMMER + $C8, $6
+	object SPRITE_SWIMMER, $d, $19, FACE, RIGHT, $3, SWIMMER + $C8, $4
+	object SPRITE_SWIMMER, $4, $1b, FACE, LEFT, $4, SWIMMER + $C8, $5
+	object SPRITE_SWIMMER, $10, $1f, FACE, UP, $5, SWIMMER + $C8, $6
 IF DEF(_OPTION_BEACH_HOUSE)
-	db SPRITE_SWIMMER, $d + 4, $9 + 4, $ff, $d0, TRAINER | $6, SWIMMER + $C8, $7
+	object SPRITE_SWIMMER, $9, $d, FACE, DOWN, $6, SWIMMER + $C8, $7
 ELSE
-	db SPRITE_SWIMMER, $b + 4, $9 + 4, $ff, $d0, TRAINER | $6, SWIMMER + $C8, $7
+	object SPRITE_SWIMMER, $9, $b, FACE, DOWN, $6, SWIMMER + $C8, $7
 ENDC
-	db SPRITE_SWIMMER, $2b + 4, $8 + 4, $ff, $d2, TRAINER | $7, BEAUTY + $C8, $c
-	db SPRITE_SWIMMER, $2b + 4, $b + 4, $ff, $d3, TRAINER | $8, BEAUTY + $C8, $d
-	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, TRAINER | $9, SWIMMER + $C8, $8
-	db SPRITE_SWIMMER, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, BEAUTY + $C8, $e
+	object SPRITE_SWIMMER, $8, $2b, FACE, RIGHT, $7, BEAUTY + $C8, $c
+	object SPRITE_SWIMMER, $b, $2b, FACE, LEFT, $8, BEAUTY + $C8, $d
+	object SPRITE_SWIMMER, $9, $2a, FACE, UP, $9, SWIMMER + $C8, $8
+	object SPRITE_SWIMMER, $a, $2c, FACE, DOWN, $a, BEAUTY + $C8, $e
 
 	; warp-to
 	IF DEF(_OPTION_BEACH_HOUSE)

@@ -8,7 +8,7 @@ SilphCoElevatorObject: ; 0x45844 (size=23)
 	db $1 ; signs
 	db $0, $3, $1 ; SilphCoElevatorText1
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP SILPH_CO_ELEVATOR_WIDTH, $3, $1

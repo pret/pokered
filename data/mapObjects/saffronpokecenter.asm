@@ -7,11 +7,11 @@ SaffronPokecenterObject: ; 0x5d54f (size=44)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $8 + 4, $ff, $d0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+	db $4 ; objects
+	object SPRITE_NURSE, $3, $1, FACE, DOWN, $1 ; person
+	object SPRITE_FOULARD_WOMAN, $5, $5, FACE, STAY, $2 ; person
+	object SPRITE_GENTLEMAN, $8, $3, FACE, DOWN, $3 ; person
+	object SPRITE_CABLE_CLUB_WOMAN, $b, $2, FACE, DOWN, $4 ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_POKECENTER_WIDTH, $7, $3

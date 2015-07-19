@@ -12,11 +12,11 @@ SilphCo8Object: ; 0x56613 (size=90)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $2 + 4, $13 + 4, $ff, $d2, TRAINER | $2, ROCKET + $C8, $23
-	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d0, TRAINER | $3, SCIENTIST + $C8, $9
-	db SPRITE_ROCKET, $f + 4, $c + 4, $ff, $d3, TRAINER | $4, ROCKET + $C8, $24
+	db $4 ; objects
+	object SPRITE_LAPRAS_GIVER, $4, $2, FACE, STAY, $1 ; person
+	object SPRITE_ROCKET, $13, $2, FACE, RIGHT, $2, ROCKET + $C8, $23
+	object SPRITE_OAK_AIDE, $a, $2, FACE, DOWN, $3, SCIENTIST + $C8, $9
+	object SPRITE_ROCKET, $c, $f, FACE, LEFT, $4, ROCKET + $C8, $24
 
 	; warp-to
 	EVENT_DISP SILPH_CO_8F_WIDTH, $0, $10 ; SILPH_CO_9F

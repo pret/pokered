@@ -9,8 +9,8 @@ Route22GateObject: ; 0x1e720 (size=42)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_GUARD, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
+	db $1 ; objects
+	object SPRITE_GUARD, $6, $2, FACE, RIGHT, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_22_GATE_WIDTH, $7, $4

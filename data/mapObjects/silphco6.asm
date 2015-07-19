@@ -10,17 +10,17 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 
 	db $0 ; signs
 
-	db $a ; people
-	db SPRITE_LAPRAS_GIVER, $6 + 4, $a + 4, $ff, $ff, $1 ; person
-	db SPRITE_LAPRAS_GIVER, $6 + 4, $14 + 4, $ff, $ff, $2 ; person
-	db SPRITE_ERIKA, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
-	db SPRITE_ERIKA, $a + 4, $b + 4, $ff, $d3, $4 ; person
-	db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
-	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, TRAINER | $6, ROCKET + $C8, $1e
-	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, TRAINER | $7, SCIENTIST + $C8, $7
-	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, TRAINER | $8, ROCKET + $C8, $1f
-	db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, ITEM | $9, HP_UP
-	db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, ITEM | $a, X_ACCURACY
+	db $a ; objects
+	object SPRITE_LAPRAS_GIVER, $a, $6, FACE, STAY, $1 ; person
+	object SPRITE_LAPRAS_GIVER, $14, $6, FACE, STAY, $2 ; person
+	object SPRITE_ERIKA, $15, $6, FACE, DOWN, $3 ; person
+	object SPRITE_ERIKA, $b, $a, FACE, LEFT, $4 ; person
+	object SPRITE_LAPRAS_GIVER, $12, $d, FACE, UP, $5 ; person
+	object SPRITE_ROCKET, $11, $3, FACE, LEFT, $6, ROCKET + $C8, $1e
+	object SPRITE_OAK_AIDE, $7, $8, FACE, DOWN, $7, SCIENTIST + $C8, $7
+	object SPRITE_ROCKET, $e, $f, FACE, RIGHT, $8, ROCKET + $C8, $1f
+	object SPRITE_BALL, $3, $c, FACE, STAY, $9, HP_UP
+	object SPRITE_BALL, $2, $f, FACE, STAY, $a, X_ACCURACY
 
 	; warp-to
 	EVENT_DISP SILPH_CO_6F_WIDTH, $0, $10 ; SILPH_CO_7F

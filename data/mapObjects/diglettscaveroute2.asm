@@ -8,8 +8,8 @@ DiglettsCaveRoute2Object: ; 0x1debf (size=34)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $3 + 4, $ff, $ff, $1 ; person
+	db $1 ; objects
+	object SPRITE_FISHER, $3, $3, FACE, STAY, $1 ; person
 
 	; warp-to
 	EVENT_DISP DIGLETTS_CAVE_EXIT_WIDTH, $7, $2

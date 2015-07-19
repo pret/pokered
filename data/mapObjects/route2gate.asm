@@ -9,9 +9,9 @@ Route2GateObject: ; 0x5d620 (size=48)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $4 + 4, $1 + 4, $ff, $d2, $1 ; person
-	db SPRITE_BUG_CATCHER, $4 + 4, $5 + 4, $fe, $2, $2 ; person
+	db $2 ; objects
+	object SPRITE_OAK_AIDE, $1, $4, FACE, RIGHT, $1 ; person
+	object SPRITE_BUG_CATCHER, $5, $4, WALK, $2, $2 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_2_GATE_WIDTH, $0, $4

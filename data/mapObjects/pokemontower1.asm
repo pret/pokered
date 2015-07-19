@@ -8,12 +8,12 @@ PokemonTower1Object: ; 0x60452 (size=58)
 
 	db $0 ; signs
 
-	db $5 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $d + 4, $f + 4, $ff, $d1, $1 ; person
-	db SPRITE_MOM_GEISHA, $8 + 4, $6 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BALDING_GUY, $c + 4, $8 + 4, $ff, $ff, $3 ; person
-	db SPRITE_GIRL, $7 + 4, $d + 4, $ff, $ff, $4 ; person
-	db SPRITE_MEDIUM, $7 + 4, $11 + 4, $ff, $d2, $5 ; person
+	db $5 ; objects
+	object SPRITE_CABLE_CLUB_WOMAN, $f, $d, FACE, UP, $1 ; person
+	object SPRITE_MOM_GEISHA, $6, $8, FACE, STAY, $2 ; person
+	object SPRITE_BALDING_GUY, $8, $c, FACE, STAY, $3 ; person
+	object SPRITE_GIRL, $d, $7, FACE, STAY, $4 ; person
+	object SPRITE_MEDIUM, $11, $7, FACE, RIGHT, $5 ; person
 
 	; warp-to
 	EVENT_DISP POKEMONTOWER_1_WIDTH, $11, $a

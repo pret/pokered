@@ -8,8 +8,8 @@ LanceObject: ; 0x5a3c5 (size=36)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_LANCE, $1 + 4, $6 + 4, $ff, $d0, TRAINER | $1, LANCE + $C8, $1
+	db $1 ; objects
+	object SPRITE_LANCE, $6, $1, FACE, DOWN, $1, LANCE + $C8, $1
 
 	; warp-to
 	EVENT_DISP LANCES_ROOM_WIDTH, $10, $18 ; AGATHAS_ROOM

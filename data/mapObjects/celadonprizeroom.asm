@@ -10,9 +10,9 @@ CeladonPrizeRoomObject: ; 0x49108 (size=41)
 	db $2, $4, $4 ; CeladonPrizeRoomText4
 	db $2, $6, $5 ; CeladonPrizeRoomText5
 
-	db $2 ; people
-	db SPRITE_BALDING_GUY, $4 + 4, $1 + 4, $ff, $ff, $1 ; person
-	db SPRITE_GAMBLER, $3 + 4, $7 + 4, $fe, $2, $2 ; person
+	db $2 ; objects
+	object SPRITE_BALDING_GUY, $1, $4, FACE, STAY, $1 ; person
+	object SPRITE_GAMBLER, $7, $3, WALK, $2, $2 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_PRIZE_ROOM_WIDTH, $7, $4

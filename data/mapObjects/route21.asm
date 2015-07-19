@@ -5,13 +5,13 @@ Route21Object: ; 0x55021 (size=76)
 
 	db $0 ; signs
 
-	db $9 ; people
-	db SPRITE_FISHER2, $18 + 4, $4 + 4, $ff, $d2, TRAINER | $1, FISHER + $C8, $7
-	db SPRITE_FISHER2, $19 + 4, $6 + 4, $ff, $d0, TRAINER | $2, FISHER + $C8, $9
-	db SPRITE_SWIMMER, $1f + 4, $a + 4, $ff, $d1, TRAINER | $3, SWIMMER + $C8, $c
-	db SPRITE_SWIMMER, $1e + 4, $c + 4, $ff, $d3, TRAINER | $4, CUE_BALL + $C8, $9
-	db SPRITE_SWIMMER, $3f + 4, $10 + 4, $ff, $d0, TRAINER | $5, SWIMMER + $C8, $d
-	db SPRITE_SWIMMER, $47 + 4, $5 + 4, $ff, $d3, TRAINER | $6, SWIMMER + $C8, $e
-	db SPRITE_SWIMMER, $47 + 4, $f + 4, $ff, $d2, TRAINER | $7, SWIMMER + $C8, $f
-	db SPRITE_FISHER2, $38 + 4, $e + 4, $ff, $d2, TRAINER | $8, FISHER + $C8, $8
-	db SPRITE_FISHER2, $39 + 4, $11 + 4, $ff, $d3, TRAINER | $9, FISHER + $C8, $a
+	db $9 ; objects
+	object SPRITE_FISHER2, $4, $18, FACE, RIGHT, $1, FISHER + $C8, $7
+	object SPRITE_FISHER2, $6, $19, FACE, DOWN, $2, FISHER + $C8, $9
+	object SPRITE_SWIMMER, $a, $1f, FACE, UP, $3, SWIMMER + $C8, $c
+	object SPRITE_SWIMMER, $c, $1e, FACE, LEFT, $4, CUE_BALL + $C8, $9
+	object SPRITE_SWIMMER, $10, $3f, FACE, DOWN, $5, SWIMMER + $C8, $d
+	object SPRITE_SWIMMER, $5, $47, FACE, LEFT, $6, SWIMMER + $C8, $e
+	object SPRITE_SWIMMER, $f, $47, FACE, RIGHT, $7, SWIMMER + $C8, $f
+	object SPRITE_FISHER2, $e, $38, FACE, RIGHT, $8, FISHER + $C8, $8
+	object SPRITE_FISHER2, $11, $39, FACE, LEFT, $9, FISHER + $C8, $a

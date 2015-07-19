@@ -7,8 +7,8 @@ SaffronHouse2Object: ; 0x1de8a (size=26)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+	db $1 ; objects
+	object SPRITE_FISHER, $5, $3, FACE, RIGHT, $1 ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_HOUSE_2_WIDTH, $7, $2

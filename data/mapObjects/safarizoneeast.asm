@@ -13,11 +13,11 @@ SafariZoneEastObject: ; 0x4588b (size=81)
 	db $4, $6, $6 ; SafariZoneEastText6
 	db $17, $5, $7 ; SafariZoneEastText7
 
-	db $4 ; people
-	db SPRITE_BALL, $a + 4, $15 + 4, $ff, $ff, ITEM | $1, FULL_RESTORE
-	db SPRITE_BALL, $7 + 4, $3 + 4, $ff, $ff, ITEM | $2, MAX_POTION
-	db SPRITE_BALL, $d + 4, $14 + 4, $ff, $ff, ITEM | $3, CARBOS
-	db SPRITE_BALL, $c + 4, $f + 4, $ff, $ff, ITEM | $4, TM_37
+	db $4 ; objects
+	object SPRITE_BALL, $15, $a, FACE, STAY, $1, FULL_RESTORE
+	object SPRITE_BALL, $3, $7, FACE, STAY, $2, MAX_POTION
+	object SPRITE_BALL, $14, $d, FACE, STAY, $3, CARBOS
+	object SPRITE_BALL, $f, $c, FACE, STAY, $4, TM_37
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $4, $0 ; SAFARI_ZONE_NORTH

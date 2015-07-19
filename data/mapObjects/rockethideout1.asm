@@ -10,14 +10,14 @@ RocketHideout1Object: ; 0x44ce7 (size=98)
 
 	db $0 ; signs
 
-	db $7 ; people
-	db SPRITE_ROCKET, $8 + 4, $1a + 4, $ff, $d2, TRAINER | $1, ROCKET + $C8, $8
-	db SPRITE_ROCKET, $6 + 4, $c + 4, $ff, $d3, TRAINER | $2, ROCKET + $C8, $9
-	db SPRITE_ROCKET, $11 + 4, $12 + 4, $ff, $d0, TRAINER | $3, ROCKET + $C8, $a
-	db SPRITE_ROCKET, $19 + 4, $f + 4, $ff, $d3, TRAINER | $4, ROCKET + $C8, $b
-	db SPRITE_ROCKET, $12 + 4, $1c + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $c
-	db SPRITE_BALL, $e + 4, $b + 4, $ff, $ff, ITEM | $6, ESCAPE_ROPE
-	db SPRITE_BALL, $11 + 4, $9 + 4, $ff, $ff, ITEM | $7, HYPER_POTION
+	db $7 ; objects
+	object SPRITE_ROCKET, $1a, $8, FACE, RIGHT, $1, ROCKET + $C8, $8
+	object SPRITE_ROCKET, $c, $6, FACE, LEFT, $2, ROCKET + $C8, $9
+	object SPRITE_ROCKET, $12, $11, FACE, DOWN, $3, ROCKET + $C8, $a
+	object SPRITE_ROCKET, $f, $19, FACE, LEFT, $4, ROCKET + $C8, $b
+	object SPRITE_ROCKET, $1c, $12, FACE, RIGHT, $5, ROCKET + $C8, $c
+	object SPRITE_BALL, $b, $e, FACE, STAY, $6, ESCAPE_ROPE
+	object SPRITE_BALL, $9, $11, FACE, STAY, $7, HYPER_POTION
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_1_WIDTH, $2, $17 ; ROCKET_HIDEOUT_2

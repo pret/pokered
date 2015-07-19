@@ -15,11 +15,11 @@ SilphCo3Object: ; 0x5a035 (size=113)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_LAPRAS_GIVER, $8 + 4, $18 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $7 + 4, $14 + 4, $ff, $d2, TRAINER | $2, ROCKET + $C8, $19
-	db SPRITE_OAK_AIDE, $9 + 4, $7 + 4, $ff, $d0, TRAINER | $3, SCIENTIST + $C8, $4
-	db SPRITE_BALL, $5 + 4, $8 + 4, $ff, $ff, ITEM | $4, HYPER_POTION
+	db $4 ; objects
+	object SPRITE_LAPRAS_GIVER, $18, $8, FACE, STAY, $1 ; person
+	object SPRITE_ROCKET, $14, $7, FACE, RIGHT, $2, ROCKET + $C8, $19
+	object SPRITE_OAK_AIDE, $7, $9, FACE, DOWN, $3, SCIENTIST + $C8, $4
+	object SPRITE_BALL, $8, $5, FACE, STAY, $4, HYPER_POTION
 
 	; warp-to
 	EVENT_DISP SILPH_CO_3F_WIDTH, $0, $1a ; SILPH_CO_2F

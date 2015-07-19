@@ -7,12 +7,12 @@ CeladonDinerObject: ; 0x491bc (size=50)
 
 	db $0 ; signs
 
-	db $5 ; people
-	db SPRITE_COOK, $5 + 4, $8 + 4, $fe, $2, $1 ; person
-	db SPRITE_MOM_GEISHA, $2 + 4, $7 + 4, $ff, $ff, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $1 + 4, $ff, $d0, $3 ; person
-	db SPRITE_FISHER2, $3 + 4, $5 + 4, $ff, $d3, $4 ; person
-	db SPRITE_GYM_HELPER, $1 + 4, $0 + 4, $ff, $d0, $5 ; person
+	db $5 ; objects
+	object SPRITE_COOK, $8, $5, WALK, $2, $1 ; person
+	object SPRITE_MOM_GEISHA, $7, $2, FACE, STAY, $2 ; person
+	object SPRITE_FAT_BALD_GUY, $1, $4, FACE, DOWN, $3 ; person
+	object SPRITE_FISHER2, $5, $3, FACE, LEFT, $4 ; person
+	object SPRITE_GYM_HELPER, $0, $1, FACE, DOWN, $5 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_DINER_WIDTH, $7, $3

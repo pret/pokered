@@ -9,11 +9,11 @@ CeladonMart5Object: ; 0x49085 (size=55)
 	db $1 ; signs
 	db $1, $e, $5 ; CeladonMart5Text5
 
-	db $4 ; people
-	db SPRITE_GENTLEMAN, $5 + 4, $e + 4, $fe, $1, $1 ; person
-	db SPRITE_SAILOR, $6 + 4, $2 + 4, $ff, $ff, $2 ; person
-	db SPRITE_MART_GUY, $3 + 4, $5 + 4, $ff, $d0, $3 ; person
-	db SPRITE_MART_GUY, $3 + 4, $6 + 4, $ff, $d0, $4 ; person
+	db $4 ; objects
+	object SPRITE_GENTLEMAN, $e, $5, WALK, $1, $1 ; person
+	object SPRITE_SAILOR, $2, $6, FACE, STAY, $2 ; person
+	object SPRITE_MART_GUY, $5, $3, FACE, DOWN, $3 ; person
+	object SPRITE_MART_GUY, $6, $3, FACE, DOWN, $4 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MART_5_WIDTH, $1, $c ; CELADON_MART_ROOF

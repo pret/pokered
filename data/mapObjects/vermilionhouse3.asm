@@ -7,8 +7,8 @@ VermilionHouse3Object: ; 0x19c25 (size=26)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_LITTLE_GIRL, $5 + 4, $3 + 4, $ff, $d1, $1 ; person
+	db $1 ; objects
+	object SPRITE_LITTLE_GIRL, $3, $5, FACE, UP, $1 ; person
 
 	; warp-to
 	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2

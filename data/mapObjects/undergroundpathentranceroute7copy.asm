@@ -8,9 +8,9 @@ UndergroundPathEntranceRoute7CopyObject: ; 5d787 (17:5787)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_GIRL, $2 + 4, $3 + 4, $ff, $ff, $1 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $2 + 4, $ff, $ff, $2 ; person
+	db $2 ; objects
+	object SPRITE_GIRL, $3, $2, FACE, STAY, $1 ; person
+	object SPRITE_FAT_BALD_GUY, $2, $4, FACE, STAY, $2 ; person
 
 	; warp-to
 	EVENT_DISP PATH_ENTRANCE_ROUTE_7_COPY_WIDTH, $7, $3

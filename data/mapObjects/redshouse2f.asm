@@ -6,7 +6,7 @@ RedsHouse2FObject: ; 0x5c0d0
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP REDS_HOUSE_2F_WIDTH, $1, $7

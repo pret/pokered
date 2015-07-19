@@ -7,9 +7,9 @@ Route16HouseObject: ; 0x1e657 (size=32)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_BRUNETTE_GIRL, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BIRD, $4 + 4, $6 + 4, $fe, $0, $2 ; person
+	db $2 ; objects
+	object SPRITE_BRUNETTE_GIRL, $2, $3, FACE, LEFT, $1 ; person
+	object SPRITE_BIRD, $6, $4, WALK, $0, $2 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_16_HOUSE_WIDTH, $7, $2

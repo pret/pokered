@@ -8,10 +8,10 @@ CopycatsHouse1FObject: ; 0x75ee3 (size=46)
 
 	db $0 ; signs
 
-	db $3 ; people
-	db SPRITE_MOM_GEISHA, $2 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_FAT_BALD_GUY, $4 + 4, $5 + 4, $ff, $d2, $2 ; person
-	db SPRITE_CLEFAIRY, $4 + 4, $1 + 4, $fe, $1, $3 ; person
+	db $3 ; objects
+	object SPRITE_MOM_GEISHA, $2, $2, FACE, DOWN, $1 ; person
+	object SPRITE_FAT_BALD_GUY, $5, $4, FACE, RIGHT, $2 ; person
+	object SPRITE_CLEFAIRY, $1, $4, WALK, $1, $3 ; person
 
 	; warp-to
 	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $7, $2

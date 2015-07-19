@@ -5,5 +5,5 @@ ColosseumObject: ; 0x4fd87 (size=10)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_RED, $2 + 4, $2 + 4, $ff, $0, $1 ; person
+	db $1 ; objects
+	object SPRITE_RED, $2, $2, $ff, $0, $1 ; person

@@ -7,15 +7,15 @@ FuchsiaGymObject: ; 0x75658 (size=82)
 
 	db $0 ; signs
 
-	db $8 ; people
-	db SPRITE_BLACKBELT, $a + 4, $4 + 4, $ff, $d0, TRAINER | $1, KOGA + $C8, $1
-	db SPRITE_ROCKER, $d + 4, $8 + 4, $ff, $d0, TRAINER | $2, JUGGLER + $C8, $7
-	db SPRITE_ROCKER, $8 + 4, $7 + 4, $ff, $d3, TRAINER | $3, JUGGLER + $C8, $3
-	db SPRITE_ROCKER, $c + 4, $1 + 4, $ff, $d0, TRAINER | $4, JUGGLER + $C8, $8
-	db SPRITE_ROCKER, $5 + 4, $3 + 4, $ff, $d1, TRAINER | $5, TAMER + $C8, $1
-	db SPRITE_ROCKER, $2 + 4, $8 + 4, $ff, $d0, TRAINER | $6, TAMER + $C8, $2
-	db SPRITE_ROCKER, $7 + 4, $2 + 4, $ff, $d2, TRAINER | $7, JUGGLER + $C8, $4
-	db SPRITE_GYM_HELPER, $f + 4, $7 + 4, $ff, $d0, $8 ; person
+	db $8 ; objects
+	object SPRITE_BLACKBELT, $4, $a, FACE, DOWN, $1, KOGA + $C8, $1
+	object SPRITE_ROCKER, $8, $d, FACE, DOWN, $2, JUGGLER + $C8, $7
+	object SPRITE_ROCKER, $7, $8, FACE, LEFT, $3, JUGGLER + $C8, $3
+	object SPRITE_ROCKER, $1, $c, FACE, DOWN, $4, JUGGLER + $C8, $8
+	object SPRITE_ROCKER, $3, $5, FACE, UP, $5, TAMER + $C8, $1
+	object SPRITE_ROCKER, $8, $2, FACE, DOWN, $6, TAMER + $C8, $2
+	object SPRITE_ROCKER, $2, $7, FACE, RIGHT, $7, JUGGLER + $C8, $4
+	object SPRITE_GYM_HELPER, $7, $f, FACE, DOWN, $8 ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_GYM_WIDTH, $11, $4

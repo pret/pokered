@@ -9,7 +9,7 @@ CeladonMansion4Object: ; 0x48875 (size=31)
 	db $1 ; signs
 	db $7, $3, $1 ; CeladonMansion4Text1
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP CELADON_MANSION_4_WIDTH, $1, $6 ; CELADON_MANSION_3

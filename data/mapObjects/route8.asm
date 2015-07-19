@@ -11,16 +11,16 @@ Route8Object: ; 0x5814f (size=119)
 	db $1 ; signs
 	db $3, $11, $a ; Route8Text10
 
-	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $8 + 4, $ff, $d3, TRAINER | $1, SUPER_NERD + $C8, $3
-	db SPRITE_GAMBLER, $9 + 4, $d + 4, $ff, $d1, TRAINER | $2, GAMBLER + $C8, $5
-	db SPRITE_BLACK_HAIR_BOY_2, $6 + 4, $2a + 4, $ff, $d1, TRAINER | $3, SUPER_NERD + $C8, $4
-	db SPRITE_LASS, $3 + 4, $1a + 4, $ff, $d2, TRAINER | $4, LASS + $C8, $d
-	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $1a + 4, $ff, $d3, TRAINER | $5, SUPER_NERD + $C8, $5
-	db SPRITE_LASS, $5 + 4, $1a + 4, $ff, $d2, TRAINER | $6, LASS + $C8, $e
-	db SPRITE_LASS, $6 + 4, $1a + 4, $ff, $d3, TRAINER | $7, LASS + $C8, $f
-	db SPRITE_GAMBLER, $d + 4, $2e + 4, $ff, $d0, TRAINER | $8, GAMBLER + $C8, $7
-	db SPRITE_LASS, $c + 4, $33 + 4, $ff, $d2, TRAINER | $9, LASS + $C8, $10
+	db $9 ; objects
+	object SPRITE_BLACK_HAIR_BOY_2, $8, $5, FACE, LEFT, $1, SUPER_NERD + $C8, $3
+	object SPRITE_GAMBLER, $d, $9, FACE, UP, $2, GAMBLER + $C8, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $2a, $6, FACE, UP, $3, SUPER_NERD + $C8, $4
+	object SPRITE_LASS, $1a, $3, FACE, RIGHT, $4, LASS + $C8, $d
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $4, FACE, LEFT, $5, SUPER_NERD + $C8, $5
+	object SPRITE_LASS, $1a, $5, FACE, RIGHT, $6, LASS + $C8, $e
+	object SPRITE_LASS, $1a, $6, FACE, LEFT, $7, LASS + $C8, $f
+	object SPRITE_GAMBLER, $2e, $d, FACE, DOWN, $8, GAMBLER + $C8, $7
+	object SPRITE_LASS, $33, $c, FACE, RIGHT, $9, LASS + $C8, $10
 
 	; warp-to
 	EVENT_DISP ROUTE_8_WIDTH, $9, $1 ; ROUTE_8_GATE

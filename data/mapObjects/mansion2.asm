@@ -9,11 +9,11 @@ Mansion2Object: ; 0x520d1 (size=63)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $3 + 4, $fe, $2, TRAINER | $1, BURGLAR + $C8, $7
-	db SPRITE_BALL, $7 + 4, $1c + 4, $ff, $ff, ITEM | $2, CALCIUM
-	db SPRITE_BOOK_MAP_DEX, $2 + 4, $12 + 4, $ff, $ff, $3 ; person
-	db SPRITE_BOOK_MAP_DEX, $16 + 4, $3 + 4, $ff, $ff, $4 ; person
+	db $4 ; objects
+	object SPRITE_BLACK_HAIR_BOY_2, $3, $11, WALK, $2, $1, BURGLAR + $C8, $7
+	object SPRITE_BALL, $1c, $7, FACE, STAY, $2, CALCIUM
+	object SPRITE_BOOK_MAP_DEX, $12, $2, FACE, STAY, $3 ; person
+	object SPRITE_BOOK_MAP_DEX, $3, $16, FACE, STAY, $4 ; person
 
 	; warp-to
 	EVENT_DISP MANSION_2_WIDTH, $a, $5 ; MANSION_1

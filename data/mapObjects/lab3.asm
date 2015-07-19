@@ -10,9 +10,9 @@ Lab3Object: ; 0x75cec (size=41)
 	db $4, $1, $4 ; Lab3Text4
 	db $1, $2, $5 ; Lab3Text5
 
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $2 + 4, $7 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OAK_AIDE, $3 + 4, $2 + 4, $fe, $2, $2 ; person
+	db $2 ; objects
+	object SPRITE_OAK_AIDE, $7, $2, FACE, DOWN, $1 ; person
+	object SPRITE_OAK_AIDE, $2, $3, WALK, $2, $2 ; person
 
 	; warp-to
 	EVENT_DISP CINNABAR_LAB_3_WIDTH, $7, $2 ; CINNABAR_LAB_1

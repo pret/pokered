@@ -7,8 +7,8 @@ HallofFameRoomObject: ; 0x5a571 (size=26)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_OAK, $2 + 4, $5 + 4, $ff, $d0, $1 ; person
+	db $1 ; objects
+	object SPRITE_OAK, $5, $2, FACE, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP HALL_OF_FAME_WIDTH, $7, $4 ; CHAMPIONS_ROOM

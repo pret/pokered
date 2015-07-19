@@ -28,17 +28,17 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 	db $f, $d, $17 ; FuchsiaCityText23
 	db $7, $7, $18 ; FuchsiaCityText24
 
-	db $a ; people
-	db SPRITE_BUG_CATCHER, $c + 4, $a + 4, $fe, $2, $1 ; person
-	db SPRITE_GAMBLER, $11 + 4, $1c + 4, $fe, $2, $2 ; person
-	db SPRITE_FISHER2, $e + 4, $1e + 4, $ff, $d0, $3 ; person
-	db SPRITE_BUG_CATCHER, $8 + 4, $18 + 4, $ff, $d1, $4 ; person
-	db SPRITE_CLEFAIRY, $5 + 4, $1f + 4, $fe, $0, $5 ; person
-	db SPRITE_BALL, $6 + 4, $19 + 4, $ff, $ff, $6 ; person
-	db SPRITE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
-	db SPRITE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
-	db SPRITE_SEEL, $11 + 4, $8 + 4, $fe, $0, $9 ; person
-	db SPRITE_OMANYTE, $5 + 4, $6 + 4, $ff, $ff, $a ; person
+	db $a ; objects
+	object SPRITE_BUG_CATCHER, $a, $c, WALK, $2, $1 ; person
+	object SPRITE_GAMBLER, $1c, $11, WALK, $2, $2 ; person
+	object SPRITE_FISHER2, $1e, $e, FACE, DOWN, $3 ; person
+	object SPRITE_BUG_CATCHER, $18, $8, FACE, UP, $4 ; person
+	object SPRITE_CLEFAIRY, $1f, $5, WALK, $0, $5 ; person
+	object SPRITE_BALL, $19, $6, FACE, STAY, $6 ; person
+	object SPRITE_SLOWBRO, $c, $6, WALK, $2, $7 ; person
+	object SPRITE_SLOWBRO, $1e, $c, WALK, $2, $8 ; person
+	object SPRITE_SEEL, $8, $11, WALK, $0, $9 ; person
+	object SPRITE_OMANYTE, $6, $5, FACE, STAY, $a ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_CITY_WIDTH, $d, $5 ; FUCHSIA_MART

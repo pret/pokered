@@ -10,13 +10,13 @@ Route6Object: ; 0x58022 (size=87)
 	db $1 ; signs
 	db $f, $13, $7 ; Route6Text7
 
-	db $6 ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $a + 4, $ff, $d3, TRAINER | $1, JR__TRAINER_M + $C8, $4
-	db SPRITE_LASS, $15 + 4, $b + 4, $ff, $d2, TRAINER | $2, JR__TRAINER_F + $C8, $2
-	db SPRITE_BUG_CATCHER, $f + 4, $0 + 4, $ff, $d3, TRAINER | $3, BUG_CATCHER + $C8, $a
-	db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, TRAINER | $4, JR__TRAINER_M + $C8, $5
-	db SPRITE_LASS, $1e + 4, $b + 4, $ff, $d2, TRAINER | $5, JR__TRAINER_F + $C8, $3
-	db SPRITE_BUG_CATCHER, $1a + 4, $13 + 4, $ff, $d2, TRAINER | $6, BUG_CATCHER + $C8, $b
+	db $6 ; objects
+	object SPRITE_BLACK_HAIR_BOY_1, $a, $15, FACE, LEFT, $1, JR__TRAINER_M + $C8, $4
+	object SPRITE_LASS, $b, $15, FACE, RIGHT, $2, JR__TRAINER_F + $C8, $2
+	object SPRITE_BUG_CATCHER, $0, $f, FACE, LEFT, $3, BUG_CATCHER + $C8, $a
+	object SPRITE_BLACK_HAIR_BOY_1, $b, $1f, FACE, RIGHT, $4, JR__TRAINER_M + $C8, $5
+	object SPRITE_LASS, $b, $1e, FACE, RIGHT, $5, JR__TRAINER_F + $C8, $3
+	object SPRITE_BUG_CATCHER, $13, $1a, FACE, RIGHT, $6, BUG_CATCHER + $C8, $b
 
 	; warp-to
 	EVENT_DISP ROUTE_6_WIDTH, $1, $9 ; ROUTE_6_GATE

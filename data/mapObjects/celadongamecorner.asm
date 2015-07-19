@@ -9,18 +9,18 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	db $1 ; signs
 	db $4, $9, $c ; CeladonGameCornerText12
 
-	db $b ; people
-	db SPRITE_FOULARD_WOMAN, $6 + 4, $2 + 4, $ff, $d0, $1 ; person
-	db SPRITE_MART_GUY, $6 + 4, $5 + 4, $ff, $d0, $2 ; person
-	db SPRITE_FAT_BALD_GUY, $a + 4, $2 + 4, $ff, $d2, $3 ; person
-	db SPRITE_FOULARD_WOMAN, $d + 4, $2 + 4, $ff, $d2, $4 ; person
-	db SPRITE_FISHER, $b + 4, $5 + 4, $ff, $d3, $5 ; person
-	db SPRITE_MOM_GEISHA, $b + 4, $8 + 4, $ff, $d2, $6 ; person
-	db SPRITE_GYM_HELPER, $e + 4, $8 + 4, $ff, $d2, $7 ; person
-	db SPRITE_GAMBLER, $f + 4, $b + 4, $ff, $d3, $8 ; person
-	db SPRITE_MART_GUY, $b + 4, $e + 4, $ff, $d2, $9 ; person
-	db SPRITE_GENTLEMAN, $d + 4, $11 + 4, $ff, $d3, $a ; person
-	db SPRITE_ROCKET, $5 + 4, $9 + 4, $ff, $d1, TRAINER | $b, ROCKET + $C8, $7
+	db $b ; objects
+	object SPRITE_FOULARD_WOMAN, $2, $6, FACE, DOWN, $1 ; person
+	object SPRITE_MART_GUY, $5, $6, FACE, DOWN, $2 ; person
+	object SPRITE_FAT_BALD_GUY, $2, $a, FACE, RIGHT, $3 ; person
+	object SPRITE_FOULARD_WOMAN, $2, $d, FACE, RIGHT, $4 ; person
+	object SPRITE_FISHER, $5, $b, FACE, LEFT, $5 ; person
+	object SPRITE_MOM_GEISHA, $8, $b, FACE, RIGHT, $6 ; person
+	object SPRITE_GYM_HELPER, $8, $e, FACE, RIGHT, $7 ; person
+	object SPRITE_GAMBLER, $b, $f, FACE, LEFT, $8 ; person
+	object SPRITE_MART_GUY, $e, $b, FACE, RIGHT, $9 ; person
+	object SPRITE_GENTLEMAN, $11, $d, FACE, LEFT, $a ; person
+	object SPRITE_ROCKET, $9, $5, FACE, UP, $b, ROCKET + $C8, $7
 
 	; warp-to
 	EVENT_DISP GAME_CORNER_WIDTH, $11, $f

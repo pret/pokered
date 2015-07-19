@@ -14,9 +14,9 @@ Route16GateObject: ; 0x4978b (size=88)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_GUARD, $5 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_GAMBLER, $3 + 4, $4 + 4, $ff, $ff, $2 ; person
+	db $2 ; objects
+	object SPRITE_GUARD, $4, $5, FACE, DOWN, $1 ; person
+	object SPRITE_GAMBLER, $4, $3, FACE, STAY, $2 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $8, $0

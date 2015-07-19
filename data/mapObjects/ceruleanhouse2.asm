@@ -8,8 +8,8 @@ CeruleanHouse2Object: ; 0x74ebe (size=34)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_FAT_BALD_GUY, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
+	db $1 ; objects
+	object SPRITE_FAT_BALD_GUY, $5, $3, FACE, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP CERULEAN_HOUSE_2_WIDTH, $0, $2

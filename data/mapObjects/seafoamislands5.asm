@@ -11,10 +11,10 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 	db $f, $9, $4 ; SeafoamIslands5Text4
 	db $1, $17, $5 ; SeafoamIslands5Text5
 
-	db $3 ; people
-	db SPRITE_BOULDER, $f + 4, $4 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, TRAINER | $3, ARTICUNO, 50
+	db $3 ; objects
+	object SPRITE_BOULDER, $4, $f, FACE, STAY, $1 ; person
+	object SPRITE_BOULDER, $5, $f, FACE, STAY, $2 ; person
+	object SPRITE_BIRD, $6, $1, FACE, DOWN, $3, ARTICUNO, 50
 
 	; warp-to
 	EVENT_DISP SEAFOAM_ISLANDS_5_WIDTH, $11, $14 ; SEAFOAM_ISLANDS_4

@@ -7,11 +7,11 @@ PokemonTower3Object: ; 0x6075d (size=51)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_MEDIUM, $3 + 4, $c + 4, $ff, $d2, TRAINER | $1, CHANNELER + $C8, $5
-	db SPRITE_MEDIUM, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $2, CHANNELER + $C8, $6
-	db SPRITE_MEDIUM, $d + 4, $a + 4, $ff, $d0, TRAINER | $3, CHANNELER + $C8, $8
-	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, ITEM | $4, ESCAPE_ROPE
+	db $4 ; objects
+	object SPRITE_MEDIUM, $c, $3, FACE, RIGHT, $1, CHANNELER + $C8, $5
+	object SPRITE_MEDIUM, $9, $8, FACE, DOWN, $2, CHANNELER + $C8, $6
+	object SPRITE_MEDIUM, $a, $d, FACE, DOWN, $3, CHANNELER + $C8, $8
+	object SPRITE_BALL, $c, $1, FACE, STAY, $4, ESCAPE_ROPE
 
 	; warp-to
 	EVENT_DISP POKEMONTOWER_3_WIDTH, $9, $3 ; POKEMONTOWER_2

@@ -7,7 +7,7 @@ UndergroundPathWEObject: ; 0x61f4e (size=20)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP UNDERGROUND_PATH_WE_WIDTH, $5, $2 ; PATH_ENTRANCE_ROUTE_7

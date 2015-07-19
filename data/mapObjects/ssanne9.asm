@@ -17,20 +17,20 @@ SSAnne9Object: ; 0x61c8d (size=188)
 
 	db $0 ; signs
 
-	db $d ; people
-	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, TRAINER | $1, GENTLEMAN + $C8, $3
-	db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, TRAINER | $2, FISHER + $C8, $1
-	db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, TRAINER | $3, GENTLEMAN + $C8, $5
-	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, TRAINER | $4, LASS + $C8, $c
-	db SPRITE_GENTLEMAN, $2 + 4, $1 + 4, $ff, $d0, $5 ; person
-	db SPRITE_BALL, $1 + 4, $c + 4, $ff, $ff, ITEM | $6, MAX_ETHER
-	db SPRITE_GENTLEMAN, $2 + 4, $15 + 4, $ff, $d0, $7 ; person
-	db SPRITE_OLD_PERSON, $1 + 4, $16 + 4, $ff, $d0, $8 ; person
-	db SPRITE_BALL, $c + 4, $0 + 4, $ff, $ff, ITEM | $9, RARE_CANDY
-	db SPRITE_GENTLEMAN, $c + 4, $c + 4, $ff, $d0, $a ; person
-	db SPRITE_YOUNG_BOY, $e + 4, $b + 4, $ff, $ff, $b ; person
-	db SPRITE_BRUNETTE_GIRL, $c + 4, $16 + 4, $ff, $d2, $c ; person
-	db SPRITE_FOULARD_WOMAN, $c + 4, $14 + 4, $ff, $d3, $d ; person
+	db $d ; objects
+	object SPRITE_GENTLEMAN, $a, $2, FACE, LEFT, $1, GENTLEMAN + $C8, $3
+	object SPRITE_FISHER2, $d, $4, FACE, RIGHT, $2, FISHER + $C8, $1
+	object SPRITE_GENTLEMAN, $0, $e, FACE, LEFT, $3, GENTLEMAN + $C8, $5
+	object SPRITE_LASS, $2, $b, FACE, DOWN, $4, LASS + $C8, $c
+	object SPRITE_GENTLEMAN, $1, $2, FACE, DOWN, $5 ; person
+	object SPRITE_BALL, $c, $1, FACE, STAY, $6, MAX_ETHER
+	object SPRITE_GENTLEMAN, $15, $2, FACE, DOWN, $7 ; person
+	object SPRITE_OLD_PERSON, $16, $1, FACE, DOWN, $8 ; person
+	object SPRITE_BALL, $0, $c, FACE, STAY, $9, RARE_CANDY
+	object SPRITE_GENTLEMAN, $c, $c, FACE, DOWN, $a ; person
+	object SPRITE_YOUNG_BOY, $b, $e, FACE, STAY, $b ; person
+	object SPRITE_BRUNETTE_GIRL, $16, $c, FACE, RIGHT, $c ; person
+	object SPRITE_FOULARD_WOMAN, $14, $c, FACE, LEFT, $d ; person
 
 	; warp-to
 	EVENT_DISP SS_ANNE_9_WIDTH, $5, $2 ; SS_ANNE_2

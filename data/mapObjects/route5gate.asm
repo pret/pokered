@@ -9,8 +9,8 @@ Route5GateObject: ; 0x1dffb (size=42)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_GUARD, $3 + 4, $1 + 4, $ff, $d3, $1 ; person
+	db $1 ; objects
+	object SPRITE_GUARD, $1, $3, FACE, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_5_GATE_WIDTH, $5, $3

@@ -9,9 +9,9 @@ SafariZoneEntranceObject: ; 0x753f5 (size=48)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_WHITE_PLAYER, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
-	db SPRITE_WHITE_PLAYER, $4 + 4, $1 + 4, $ff, $d3, $2 ; person
+	db $2 ; objects
+	object SPRITE_WHITE_PLAYER, $6, $2, FACE, RIGHT, $1 ; person
+	object SPRITE_WHITE_PLAYER, $1, $4, FACE, LEFT, $2 ; person
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_ENTRANCE_WIDTH, $5, $3

@@ -232,6 +232,44 @@ tx_pre_jump: MACRO
 	jp PrintPredefTextID
 ENDM
 
+WALK EQU $FE
+FACE EQU $FF
+
+DOWN  EQU $D0
+UP    EQU $D1
+RIGHT EQU $D2
+LEFT  EQU $D3
+STAY  EQU $FF
+
+;\1 sprite id
+;\2 x position
+;\3 y position
+;\4 movement (WALK/FACE)
+;\5 range or direction
+;\6 text id
+;\7 items only: item id
+;\7 trainers only: trainer class/pokemon id
+;\8 trainers only: trainer number/pokemon level
+object: MACRO
+    db \1
+	db \3 + 4
+	db \2 + 4
+	db \4
+	db \5
+	IF (_NARG > 7)
+		db TRAINER | \6
+		db \7
+		db \8
+	ELSE
+		IF (_NARG > 6)
+			db ITEM | \6
+			db \7
+		ELSE
+			db \6
+		ENDC
+	ENDC
+ENDM
+
 
 ;1_channel	EQU $00
 ;2_channels	EQU $40

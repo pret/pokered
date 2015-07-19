@@ -7,10 +7,10 @@ PewterGymObject: ; 0x5c52e (size=42)
 
 	db $0 ; signs
 
-	db $3 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $1 + 4, $4 + 4, $ff, $d0, TRAINER | $1, BROCK + $C8, $1
-	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $3 + 4, $ff, $d3, TRAINER | $2, JR__TRAINER_M + $C8, $1
-	db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $3 ; person
+	db $3 ; objects
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $1, FACE, DOWN, $1, BROCK + $C8, $1
+	object SPRITE_BLACK_HAIR_BOY_1, $3, $6, FACE, LEFT, $2, JR__TRAINER_M + $C8, $1
+	object SPRITE_GYM_HELPER, $7, $a, FACE, DOWN, $3 ; person
 
 	; warp-to
 	EVENT_DISP PEWTER_GYM_WIDTH, $d, $4

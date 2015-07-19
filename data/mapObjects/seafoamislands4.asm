@@ -12,13 +12,13 @@ SeafoamIslands4Object: ; 0x466a6 (size=96)
 
 	db $0 ; signs
 
-	db $6 ; people
-	db SPRITE_BOULDER, $e + 4, $5 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $1 ; person
-	db SPRITE_BOULDER, $f + 4, $3 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $2 ; person
-	db SPRITE_BOULDER, $e + 4, $8 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $3 ; person
-	db SPRITE_BOULDER, $e + 4, $9 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $4 ; person
-	db SPRITE_BOULDER, $6 + 4, $12 + 4, $ff, $ff, $5 ; person
-	db SPRITE_BOULDER, $6 + 4, $13 + 4, $ff, $ff, $6 ; person
+	db $6 ; objects
+	object SPRITE_BOULDER, $5, $e, FACE, BOULDER_MOVEMENT_BYTE_2, $1 ; person
+	object SPRITE_BOULDER, $3, $f, FACE, BOULDER_MOVEMENT_BYTE_2, $2 ; person
+	object SPRITE_BOULDER, $8, $e, FACE, BOULDER_MOVEMENT_BYTE_2, $3 ; person
+	object SPRITE_BOULDER, $9, $e, FACE, BOULDER_MOVEMENT_BYTE_2, $4 ; person
+	object SPRITE_BOULDER, $12, $6, FACE, STAY, $5 ; person
+	object SPRITE_BOULDER, $13, $6, FACE, STAY, $6 ; person
 
 	; warp-to
 	EVENT_DISP SEAFOAM_ISLANDS_4_WIDTH, $c, $5 ; SEAFOAM_ISLANDS_3

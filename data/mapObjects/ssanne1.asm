@@ -16,9 +16,9 @@ SSAnne1Object: ; 0x61277 (size=104)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_WAITER, $6 + 4, $c + 4, $fe, $2, $1 ; person
-	db SPRITE_SAILOR, $5 + 4, $1b + 4, $ff, $ff, $2 ; person
+	db $2 ; objects
+	object SPRITE_WAITER, $c, $6, WALK, $2, $1 ; person
+	object SPRITE_SAILOR, $1b, $5, FACE, STAY, $2 ; person
 
 	; warp-to
 	EVENT_DISP SS_ANNE_1_WIDTH, $0, $1a ; VERMILION_DOCK

@@ -9,9 +9,9 @@ GaryObject: ; 0x7612f (size=48)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_BLUE, $2 + 4, $4 + 4, $ff, $d0, $1 ; person
-	db SPRITE_OAK, $7 + 4, $3 + 4, $ff, $d1, $2 ; person
+	db $2 ; objects
+	object SPRITE_BLUE, $4, $2, FACE, DOWN, $1 ; person
+	object SPRITE_OAK, $3, $7, FACE, UP, $2 ; person
 
 	; warp-to
 	EVENT_DISP CHAMPIONS_ROOM_WIDTH, $7, $3 ; LANCES_ROOM

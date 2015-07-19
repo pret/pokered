@@ -8,8 +8,8 @@ FuchsiaHouse3Object: ; 0x56221 (size=34)
 
 	db $0 ; signs
 
-	db $1 ; people
-	db SPRITE_FISHER, $3 + 4, $5 + 4, $ff, $d3, $1 ; person
+	db $1 ; objects
+	object SPRITE_FISHER, $5, $3, FACE, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_HOUSE_3_WIDTH, $0, $2

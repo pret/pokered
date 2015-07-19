@@ -7,9 +7,9 @@ PokemonTower2Object: ; 0x60646 (size=32)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_BLUE, $5 + 4, $e + 4, $ff, $ff, $1 ; person
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d3, $2 ; person
+	db $2 ; objects
+	object SPRITE_BLUE, $e, $5, FACE, STAY, $1 ; person
+	object SPRITE_MEDIUM, $3, $7, FACE, LEFT, $2 ; person
 
 	; warp-to
 	EVENT_DISP POKEMONTOWER_2_WIDTH, $9, $3 ; POKEMONTOWER_3

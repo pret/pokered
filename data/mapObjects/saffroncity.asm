@@ -23,22 +23,22 @@ SaffronCityObject: ; 0x509dc (size=188)
 	db $1d, $1b, $18 ; SaffronCityText24
 	db $13, $1, $19 ; SaffronCityText25
 
-	db $f ; people
-	db SPRITE_ROCKET, $6 + 4, $7 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $8 + 4, $14 + 4, $fe, $2, $2 ; person
-	db SPRITE_ROCKET, $4 + 4, $22 + 4, $ff, $ff, $3 ; person
-	db SPRITE_ROCKET, $c + 4, $d + 4, $ff, $ff, $4 ; person
-	db SPRITE_ROCKET, $19 + 4, $b + 4, $fe, $2, $5 ; person
-	db SPRITE_ROCKET, $d + 4, $20 + 4, $fe, $2, $6 ; person
-	db SPRITE_ROCKET, $1e + 4, $12 + 4, $fe, $2, $7 ; person
-	db SPRITE_OAK_AIDE, $e + 4, $8 + 4, $fe, $0, $8 ; person
-	db SPRITE_LAPRAS_GIVER, $17 + 4, $17 + 4, $ff, $ff, $9 ; person
-	db SPRITE_ERIKA, $1e + 4, $11 + 4, $fe, $2, $a ; person
-	db SPRITE_GENTLEMAN, $c + 4, $1e + 4, $ff, $d0, $b ; person
-	db SPRITE_BIRD, $c + 4, $1f + 4, $ff, $d0, $c ; person
-	db SPRITE_ROCKER, $8 + 4, $12 + 4, $ff, $d1, $d ; person
-	db SPRITE_ROCKET, $16 + 4, $12 + 4, $ff, $d0, $e ; person
-	db SPRITE_ROCKET, $16 + 4, $13 + 4, $ff, $d0, $f ; person
+	db $f ; objects
+	object SPRITE_ROCKET, $7, $6, FACE, STAY, $1 ; person
+	object SPRITE_ROCKET, $14, $8, WALK, $2, $2 ; person
+	object SPRITE_ROCKET, $22, $4, FACE, STAY, $3 ; person
+	object SPRITE_ROCKET, $d, $c, FACE, STAY, $4 ; person
+	object SPRITE_ROCKET, $b, $19, WALK, $2, $5 ; person
+	object SPRITE_ROCKET, $20, $d, WALK, $2, $6 ; person
+	object SPRITE_ROCKET, $12, $1e, WALK, $2, $7 ; person
+	object SPRITE_OAK_AIDE, $8, $e, WALK, $0, $8 ; person
+	object SPRITE_LAPRAS_GIVER, $17, $17, FACE, STAY, $9 ; person
+	object SPRITE_ERIKA, $11, $1e, WALK, $2, $a ; person
+	object SPRITE_GENTLEMAN, $1e, $c, FACE, DOWN, $b ; person
+	object SPRITE_BIRD, $1f, $c, FACE, DOWN, $c ; person
+	object SPRITE_ROCKER, $12, $8, FACE, UP, $d ; person
+	object SPRITE_ROCKET, $12, $16, FACE, DOWN, $e ; person
+	object SPRITE_ROCKET, $13, $16, FACE, DOWN, $f ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_CITY_WIDTH, $5, $7 ; COPYCATS_HOUSE_1F

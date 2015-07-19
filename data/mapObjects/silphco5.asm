@@ -12,18 +12,18 @@ SilphCo5Object: ; 0x1a08d (size=137)
 
 	db $0 ; signs
 
-	db $b ; people
-	db SPRITE_LAPRAS_GIVER, $9 + 4, $d + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $10 + 4, $8 + 4, $ff, $d3, TRAINER | $2, ROCKET + $C8, $1c
-	db SPRITE_OAK_AIDE, $3 + 4, $8 + 4, $ff, $d3, TRAINER | $3, SCIENTIST + $C8, $6
-	db SPRITE_ROCKER, $a + 4, $12 + 4, $ff, $d1, TRAINER | $4, JUGGLER + $C8, $1
-	db SPRITE_ROCKET, $4 + 4, $1c + 4, $ff, $d1, TRAINER | $5, ROCKET + $C8, $1d
-	db SPRITE_BALL, $d + 4, $2 + 4, $ff, $ff, ITEM | $6, TM_09
-	db SPRITE_BALL, $6 + 4, $4 + 4, $ff, $ff, ITEM | $7, PROTEIN
-	db SPRITE_BALL, $10 + 4, $15 + 4, $ff, $ff, ITEM | $8, CARD_KEY
-	db SPRITE_CLIPBOARD, $c + 4, $16 + 4, $ff, $ff, $9 ; person
-	db SPRITE_CLIPBOARD, $a + 4, $19 + 4, $ff, $ff, $a ; person
-	db SPRITE_CLIPBOARD, $6 + 4, $18 + 4, $ff, $ff, $b ; person
+	db $b ; objects
+	object SPRITE_LAPRAS_GIVER, $d, $9, FACE, STAY, $1 ; person
+	object SPRITE_ROCKET, $8, $10, FACE, LEFT, $2, ROCKET + $C8, $1c
+	object SPRITE_OAK_AIDE, $8, $3, FACE, LEFT, $3, SCIENTIST + $C8, $6
+	object SPRITE_ROCKER, $12, $a, FACE, UP, $4, JUGGLER + $C8, $1
+	object SPRITE_ROCKET, $1c, $4, FACE, UP, $5, ROCKET + $C8, $1d
+	object SPRITE_BALL, $2, $d, FACE, STAY, $6, TM_09
+	object SPRITE_BALL, $4, $6, FACE, STAY, $7, PROTEIN
+	object SPRITE_BALL, $15, $10, FACE, STAY, $8, CARD_KEY
+	object SPRITE_CLIPBOARD, $16, $c, FACE, STAY, $9 ; person
+	object SPRITE_CLIPBOARD, $19, $a, FACE, STAY, $a ; person
+	object SPRITE_CLIPBOARD, $18, $6, FACE, STAY, $b ; person
 
 	; warp-to
 	EVENT_DISP SILPH_CO_5F_WIDTH, $0, $18 ; SILPH_CO_6F

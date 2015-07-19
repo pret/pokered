@@ -8,7 +8,7 @@ CeladonMartElevatorObject: ; 0x4866d (size=23)
 	db $1 ; signs
 	db $0, $3, $1 ; CeladonMartElevatorText1
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP CELADON_MART_ELEVATOR_WIDTH, $3, $1 ; CELADON_MART_1

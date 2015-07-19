@@ -7,7 +7,7 @@ UndergroundPathNSObject: ; 0x61f2a (size=20)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP UNDERGROUND_PATH_NS_WIDTH, $4, $5 ; PATH_ENTRANCE_ROUTE_5

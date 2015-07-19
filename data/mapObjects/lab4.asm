@@ -7,9 +7,9 @@ Lab4Object: ; 0x75df0 (size=32)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_OAK_AIDE, $2 + 4, $5 + 4, $fe, $2, $1 ; person
-	db SPRITE_OAK_AIDE, $6 + 4, $7 + 4, $ff, $d1, $2 ; person
+	db $2 ; objects
+	object SPRITE_OAK_AIDE, $5, $2, WALK, $2, $1 ; person
+	object SPRITE_OAK_AIDE, $7, $6, FACE, UP, $2 ; person
 
 	; warp-to
 	EVENT_DISP CINNABAR_LAB_4_WIDTH, $7, $2 ; CINNABAR_LAB_1

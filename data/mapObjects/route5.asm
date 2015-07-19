@@ -11,7 +11,7 @@ Route5Object: ; 0x545a3 (size=47)
 	db $1 ; signs
 	db $1d, $11, $1 ; Route5Text1
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP ROUTE_5_WIDTH, $1d, $a ; ROUTE_5_GATE

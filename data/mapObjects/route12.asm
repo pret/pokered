@@ -11,17 +11,17 @@ Route12Object: ; 0x5869a (size=118)
 	db $d, $d, $b ; Route12Text11
 	db $3f, $b, $c ; Route12Text12
 
-	db $a ; people
-	db SPRITE_SNORLAX, $3e + 4, $a + 4, $ff, $d0, $1 ; person
-	db SPRITE_FISHER2, $1f + 4, $e + 4, $ff, $d2, TRAINER | $2, FISHER + $C8, $3
-	db SPRITE_FISHER2, $27 + 4, $5 + 4, $ff, $d1, TRAINER | $3, FISHER + $C8, $4
-	db SPRITE_BLACK_HAIR_BOY_1, $5c + 4, $b + 4, $ff, $d2, TRAINER | $4, JR__TRAINER_M + $C8, $9
-	db SPRITE_BLACK_HAIR_BOY_2, $4c + 4, $e + 4, $ff, $d1, TRAINER | $5, ROCKER + $C8, $2
-	db SPRITE_FISHER2, $28 + 4, $c + 4, $ff, $d2, TRAINER | $6, FISHER + $C8, $5
-	db SPRITE_FISHER2, $34 + 4, $9 + 4, $ff, $d3, TRAINER | $7, FISHER + $C8, $6
-	db SPRITE_FISHER2, $57 + 4, $6 + 4, $ff, $d0, TRAINER | $8, FISHER + $C8, $b
-	db SPRITE_BALL, $23 + 4, $e + 4, $ff, $ff, ITEM | $9, TM_16
-	db SPRITE_BALL, $59 + 4, $5 + 4, $ff, $ff, ITEM | $a, IRON
+	db $a ; objects
+	object SPRITE_SNORLAX, $a, $3e, FACE, DOWN, $1 ; person
+	object SPRITE_FISHER2, $e, $1f, FACE, RIGHT, $2, FISHER + $C8, $3
+	object SPRITE_FISHER2, $5, $27, FACE, UP, $3, FISHER + $C8, $4
+	object SPRITE_BLACK_HAIR_BOY_1, $b, $5c, FACE, RIGHT, $4, JR__TRAINER_M + $C8, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $e, $4c, FACE, UP, $5, ROCKER + $C8, $2
+	object SPRITE_FISHER2, $c, $28, FACE, RIGHT, $6, FISHER + $C8, $5
+	object SPRITE_FISHER2, $9, $34, FACE, LEFT, $7, FISHER + $C8, $6
+	object SPRITE_FISHER2, $6, $57, FACE, DOWN, $8, FISHER + $C8, $b
+	object SPRITE_BALL, $e, $23, FACE, STAY, $9, TM_16
+	object SPRITE_BALL, $5, $59, FACE, STAY, $a, IRON
 
 	; warp-to
 	EVENT_DISP ROUTE_12_WIDTH, $f, $a ; ROUTE_12_GATE_1F

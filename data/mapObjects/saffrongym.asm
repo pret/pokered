@@ -37,16 +37,16 @@ SaffronGymObject: ; 0x5d259 (size=330)
 
 	db $0 ; signs
 
-	db $9 ; people
-	db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + $C8, $1
-	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, CHANNELER + $C8, $16
-	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, TRAINER | $3, PSYCHIC_TR + $C8, $1
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, CHANNELER + $C8, $17
-	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, TRAINER | $5, PSYCHIC_TR + $C8, $2
-	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, TRAINER | $6, CHANNELER + $C8, $18
-	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, TRAINER | $7, PSYCHIC_TR + $C8, $3
-	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, TRAINER | $8, PSYCHIC_TR + $C8, $4
-	db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
+	db $9 ; objects
+	object SPRITE_GIRL, $9, $8, FACE, DOWN, $1, SABRINA + $C8, $1
+	object SPRITE_MEDIUM, $a, $1, FACE, DOWN, $2, CHANNELER + $C8, $16
+	object SPRITE_BUG_CATCHER, $11, $1, FACE, DOWN, $3, PSYCHIC_TR + $C8, $1
+	object SPRITE_MEDIUM, $3, $7, FACE, DOWN, $4, CHANNELER + $C8, $17
+	object SPRITE_BUG_CATCHER, $11, $7, FACE, DOWN, $5, PSYCHIC_TR + $C8, $2
+	object SPRITE_MEDIUM, $3, $d, FACE, DOWN, $6, CHANNELER + $C8, $18
+	object SPRITE_BUG_CATCHER, $11, $d, FACE, DOWN, $7, PSYCHIC_TR + $C8, $3
+	object SPRITE_BUG_CATCHER, $3, $1, FACE, DOWN, $8, PSYCHIC_TR + $C8, $4
+	object SPRITE_GYM_HELPER, $a, $f, FACE, DOWN, $9 ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_GYM_WIDTH, $11, $8

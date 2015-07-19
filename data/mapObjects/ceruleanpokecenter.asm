@@ -7,11 +7,11 @@ CeruleanPokecenterObject: ; 0x5c65f (size=44)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_NURSE, $1 + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $a + 4, $fe, $0, $2 ; person
-	db SPRITE_GENTLEMAN, $3 + 4, $4 + 4, $ff, $d0, $3 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $2 + 4, $b + 4, $ff, $d0, $4 ; person
+	db $4 ; objects
+	object SPRITE_NURSE, $3, $1, FACE, DOWN, $1 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $a, $5, WALK, $0, $2 ; person
+	object SPRITE_GENTLEMAN, $4, $3, FACE, DOWN, $3 ; person
+	object SPRITE_CABLE_CLUB_WOMAN, $b, $2, FACE, DOWN, $4 ; person
 
 	; warp-to
 	EVENT_DISP CERULEAN_POKECENTER_WIDTH, $7, $3

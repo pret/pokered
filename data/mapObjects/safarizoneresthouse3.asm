@@ -7,10 +7,10 @@ SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
 
 	db $0 ; signs
 
-	db $3 ; people
-	db SPRITE_OAK_AIDE, $3 + 4, $1 + 4, $fe, $1, $1 ; person
-	db SPRITE_ROCKER, $2 + 4, $4 + 4, $ff, $ff, $2 ; person
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $5 + 4, $ff, $ff, $3 ; person
+	db $3 ; objects
+	object SPRITE_OAK_AIDE, $1, $3, WALK, $1, $1 ; person
+	object SPRITE_ROCKER, $4, $2, FACE, STAY, $2 ; person
+	object SPRITE_LAPRAS_GIVER, $5, $2, FACE, STAY, $3 ; person
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_REST_HOUSE_3_WIDTH, $7, $2 ; SAFARI_ZONE_EAST

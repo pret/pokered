@@ -14,14 +14,14 @@ RockTunnel1Object: ; 0x445f6 (size=127)
 	db $1 ; signs
 	db $1d, $b, $8 ; RockTunnel1Text8
 
-	db $7 ; people
-	db SPRITE_HIKER, $5 + 4, $7 + 4, $ff, $d0, TRAINER | $1, HIKER + $C8, $c
-	db SPRITE_HIKER, $10 + 4, $5 + 4, $ff, $d0, TRAINER | $2, HIKER + $C8, $d
-	db SPRITE_HIKER, $f + 4, $11 + 4, $ff, $d2, TRAINER | $3, HIKER + $C8, $e
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $17 + 4, $ff, $d2, TRAINER | $4, POKEMANIAC + $C8, $7
-	db SPRITE_LASS, $15 + 4, $25 + 4, $ff, $d2, TRAINER | $5, JR__TRAINER_F + $C8, $11
-	db SPRITE_LASS, $18 + 4, $16 + 4, $ff, $d0, TRAINER | $6, JR__TRAINER_F + $C8, $12
-	db SPRITE_LASS, $18 + 4, $20 + 4, $ff, $d3, TRAINER | $7, JR__TRAINER_F + $C8, $13
+	db $7 ; objects
+	object SPRITE_HIKER, $7, $5, FACE, DOWN, $1, HIKER + $C8, $c
+	object SPRITE_HIKER, $5, $10, FACE, DOWN, $2, HIKER + $C8, $d
+	object SPRITE_HIKER, $11, $f, FACE, RIGHT, $3, HIKER + $C8, $e
+	object SPRITE_BLACK_HAIR_BOY_2, $17, $8, FACE, RIGHT, $4, POKEMANIAC + $C8, $7
+	object SPRITE_LASS, $25, $15, FACE, RIGHT, $5, JR__TRAINER_F + $C8, $11
+	object SPRITE_LASS, $16, $18, FACE, DOWN, $6, JR__TRAINER_F + $C8, $12
+	object SPRITE_LASS, $20, $18, FACE, LEFT, $7, JR__TRAINER_F + $C8, $13
 
 	; warp-to
 	EVENT_DISP ROCK_TUNNEL_1_WIDTH, $3, $f

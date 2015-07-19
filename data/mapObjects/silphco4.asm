@@ -12,14 +12,14 @@ SilphCo4Object: ; 0x19e35 (size=111)
 
 	db $0 ; signs
 
-	db $7 ; people
-	db SPRITE_LAPRAS_GIVER, $2 + 4, $6 + 4, $ff, $ff, $1 ; person
-	db SPRITE_ROCKET, $e + 4, $9 + 4, $ff, $d3, TRAINER | $2, ROCKET + $C8, $1a
-	db SPRITE_OAK_AIDE, $6 + 4, $e + 4, $ff, $d2, TRAINER | $3, SCIENTIST + $C8, $5
-	db SPRITE_ROCKET, $a + 4, $1a + 4, $ff, $d1, TRAINER | $4, ROCKET + $C8, $1b
-	db SPRITE_BALL, $9 + 4, $3 + 4, $ff, $ff, ITEM | $5, FULL_HEAL
-	db SPRITE_BALL, $7 + 4, $4 + 4, $ff, $ff, ITEM | $6, MAX_REVIVE
-	db SPRITE_BALL, $8 + 4, $5 + 4, $ff, $ff, ITEM | $7, ESCAPE_ROPE
+	db $7 ; objects
+	object SPRITE_LAPRAS_GIVER, $6, $2, FACE, STAY, $1 ; person
+	object SPRITE_ROCKET, $9, $e, FACE, LEFT, $2, ROCKET + $C8, $1a
+	object SPRITE_OAK_AIDE, $e, $6, FACE, RIGHT, $3, SCIENTIST + $C8, $5
+	object SPRITE_ROCKET, $1a, $a, FACE, UP, $4, ROCKET + $C8, $1b
+	object SPRITE_BALL, $3, $9, FACE, STAY, $5, FULL_HEAL
+	object SPRITE_BALL, $4, $7, FACE, STAY, $6, MAX_REVIVE
+	object SPRITE_BALL, $5, $8, FACE, STAY, $7, ESCAPE_ROPE
 
 	; warp-to
 	EVENT_DISP SILPH_CO_4F_WIDTH, $0, $18 ; SILPH_CO_3F

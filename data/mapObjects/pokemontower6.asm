@@ -7,12 +7,12 @@ PokemonTower6Object: ; 0x60c5b (size=58)
 
 	db $0 ; signs
 
-	db $5 ; people
-	db SPRITE_MEDIUM, $a + 4, $c + 4, $ff, $d3, TRAINER | $1, CHANNELER + $C8, $13
-	db SPRITE_MEDIUM, $5 + 4, $9 + 4, $ff, $d0, TRAINER | $2, CHANNELER + $C8, $14
-	db SPRITE_MEDIUM, $5 + 4, $10 + 4, $ff, $d2, TRAINER | $3, CHANNELER + $C8, $15
-	db SPRITE_BALL, $8 + 4, $6 + 4, $ff, $ff, ITEM | $4, RARE_CANDY
-	db SPRITE_BALL, $e + 4, $e + 4, $ff, $ff, ITEM | $5, X_ACCURACY
+	db $5 ; objects
+	object SPRITE_MEDIUM, $c, $a, FACE, LEFT, $1, CHANNELER + $C8, $13
+	object SPRITE_MEDIUM, $9, $5, FACE, DOWN, $2, CHANNELER + $C8, $14
+	object SPRITE_MEDIUM, $10, $5, FACE, RIGHT, $3, CHANNELER + $C8, $15
+	object SPRITE_BALL, $6, $8, FACE, STAY, $4, RARE_CANDY
+	object SPRITE_BALL, $e, $e, FACE, STAY, $5, X_ACCURACY
 
 	; warp-to
 	EVENT_DISP POKEMONTOWER_6_WIDTH, $9, $12 ; POKEMONTOWER_5

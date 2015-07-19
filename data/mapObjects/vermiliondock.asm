@@ -7,7 +7,7 @@ VermilionDockObject: ; 0x1dcc6 (size=20)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP VERMILION_DOCK_WIDTH, $0, $e

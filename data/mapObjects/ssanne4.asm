@@ -11,7 +11,7 @@ SSAnne4Object: ; 0x61632 (size=52)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP SS_ANNE_4_WIDTH, $3, $17 ; SS_ANNE_10

@@ -16,14 +16,14 @@ Route16Object: ; 0x58afc (size=136)
 	db $b, $1b, $8 ; Route16Text8
 	db $11, $5, $9 ; Route16Text9
 
-	db $7 ; people
-	db SPRITE_BIKER, $c + 4, $11 + 4, $ff, $d2, TRAINER | $1, BIKER + $C8, $5
-	db SPRITE_BIKER, $d + 4, $e + 4, $ff, $d3, TRAINER | $2, CUE_BALL + $C8, $1
-	db SPRITE_BIKER, $c + 4, $b + 4, $ff, $d1, TRAINER | $3, CUE_BALL + $C8, $2
-	db SPRITE_BIKER, $b + 4, $9 + 4, $ff, $d2, TRAINER | $4, BIKER + $C8, $6
-	db SPRITE_BIKER, $a + 4, $6 + 4, $ff, $d3, TRAINER | $5, CUE_BALL + $C8, $3
-	db SPRITE_BIKER, $c + 4, $3 + 4, $ff, $d3, TRAINER | $6, BIKER + $C8, $7
-	db SPRITE_SNORLAX, $a + 4, $1a + 4, $ff, $d0, $7 ; person
+	db $7 ; objects
+	object SPRITE_BIKER, $11, $c, FACE, RIGHT, $1, BIKER + $C8, $5
+	object SPRITE_BIKER, $e, $d, FACE, LEFT, $2, CUE_BALL + $C8, $1
+	object SPRITE_BIKER, $b, $c, FACE, UP, $3, CUE_BALL + $C8, $2
+	object SPRITE_BIKER, $9, $b, FACE, RIGHT, $4, BIKER + $C8, $6
+	object SPRITE_BIKER, $6, $a, FACE, LEFT, $5, CUE_BALL + $C8, $3
+	object SPRITE_BIKER, $3, $c, FACE, LEFT, $6, BIKER + $C8, $7
+	object SPRITE_SNORLAX, $1a, $a, FACE, DOWN, $7 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_16_WIDTH, $a, $11 ; ROUTE_16_GATE_1F
