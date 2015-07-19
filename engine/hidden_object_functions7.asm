@@ -68,7 +68,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	dec a
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
-	ld a, (SFX_02_5f - SFX_Headers_02) / 3
+	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_1e9c2
 	ld a, [wc02a]
@@ -214,7 +214,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	jp CinnabarGymQuiz_1eb0a
 .asm_1eab8
 	call WaitForSoundToFinish
-	ld a, (SFX_02_51 - SFX_Headers_02) / 3
+	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
@@ -247,7 +247,7 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	and a
 	jp nz, TextScriptEnd
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -335,22 +335,22 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	tx_pre BillsHouseInitiatedText
 	ld c, 32
 	call DelayFrames
-	ld a, (SFX_02_3c - SFX_Headers_02) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 80
 	call DelayFrames
-	ld a, (SFX_02_48 - SFX_Headers_02) / 3
+	ld a, SFX_SHRINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 48
 	call DelayFrames
-	ld a, (SFX_02_3c - SFX_Headers_02) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 32
 	call DelayFrames
-	ld a, (SFX_02_3a - SFX_Headers_02) / 3
+	ld a, SFX_GET_ITEM_1
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
@@ -376,7 +376,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	call PlaySound
 	ld c, 16
 	call DelayFrames
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 60

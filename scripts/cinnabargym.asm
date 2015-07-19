@@ -106,7 +106,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	and a
 	jr nz, .asm_7581b
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_7581b

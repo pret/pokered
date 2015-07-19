@@ -4,7 +4,7 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 	ld [MBC1RomBank],a
 	ld a,[wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy],a
-	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
+	ld a, SFX_START_MENU
 	call PlaySound
 
 RedisplayStartMenu:: ; 2adf (0:2adf)

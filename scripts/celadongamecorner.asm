@@ -454,7 +454,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld hl, CeladonGameCornerText_48f09
 	call PrintText
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, wd77e
@@ -468,7 +468,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 CeladonGameCornerText_48f09: ; 48f09 (12:4f09)
 	TX_FAR _CeladonGameCornerText_48f09
 	TX_ASM
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd

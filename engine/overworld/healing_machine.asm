@@ -28,7 +28,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld b, a
 .asm_7046e
 	call Func_70503
-	ld a, (SFX_02_4a - SFX_Headers_02) / 3
+	ld a, SFX_HEALING_MACHINE
 	call PlaySound
 	ld c, 30
 	call DelayFrames

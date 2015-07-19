@@ -262,7 +262,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [wHPBarNewHP]
 	ld [hli], a
 	ld [hl], $50
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
 .pressedB

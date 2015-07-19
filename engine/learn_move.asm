@@ -207,7 +207,7 @@ OneTwoAndText: ; 6fc8 (1:6fc8)
 	TX_FAR _OneTwoAndText
 	db $a
 	TX_ASM
-	ld a, (SFX_02_58 - SFX_Headers_02) / 3
+	ld a, SFX_SWAP
 	call PlaySoundWaitForCurrent
 	ld hl, PoofText
 	ret

@@ -117,7 +117,7 @@ Mansion2Text5: ; 52087 (14:6087)
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7
 	call PrintText
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld hl, wd796
 	bit 0, [hl]

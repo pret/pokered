@@ -50,7 +50,7 @@ HandleLedges: ; 1a672 (6:6672)
 	ld a, $2
 	ld [wSimulatedJoypadStatesIndex], a
 	call LoadHoppingShadowOAM
-	ld a, (SFX_02_4e - SFX_Headers_02) / 3
+	ld a, SFX_LEDGE
 	call PlaySound
 	ret
 

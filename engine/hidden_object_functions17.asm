@@ -423,7 +423,7 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -437,7 +437,7 @@ VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -446,7 +446,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -455,7 +455,7 @@ VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_51 - SFX_Headers_02) / 3
+	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd

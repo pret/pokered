@@ -674,10 +674,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
-	ld a,(SFX_02_57 - SFX_Headers_02) / 3
+	ld a,SFX_GO_INSIDE
 	jr .playSound
 .didNotGoThroughDoor
-	ld a,(SFX_02_5c - SFX_Headers_02) / 3
+	ld a,SFX_GO_OUTSIDE
 .playSound
 	call PlaySound
 	ld a,[wMapPalOffset]
@@ -1227,9 +1227,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	jr nc,.noCollision
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -1930,9 +1930,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	jr .loop
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf

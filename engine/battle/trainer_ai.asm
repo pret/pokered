@@ -553,7 +553,7 @@ DecrementAICount: ; 3a695 (e:6695)
 	ret
 
 AIPlayRestoringSFX: ; 3a69b (e:669b)
-	ld a,(SFX_08_3e - SFX_Headers_08) / 3
+	ld a,SFX_HEAL_AILMENT
 	jp PlaySoundWaitForCurrent
 
 AIUseFullRestore: ; 3a6a0 (e:66a0)

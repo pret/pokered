@@ -1330,7 +1330,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	jp WaitForSoundToFinish
 
@@ -3490,7 +3490,7 @@ ManualTextScroll:: ; 3898 (0:3898)
 	cp LINK_STATE_BATTLING
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	jp PlaySound
 .inLinkBattle
 	ld c, 65
@@ -4016,7 +4016,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	bit 5,[hl]
 	pop hl
 	jr nz,.skipPlayingSound
-	ld a,(SFX_02_40 - SFX_Headers_02) / 3
+	ld a,SFX_PRESS_AB
 	call PlaySound
 .skipPlayingSound
 	pop af

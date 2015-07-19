@@ -72,7 +72,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld b, [hl]
 	push bc
 	push hl
-	ld a, (SFX_02_54 - SFX_Headers_02) / 3
+	ld a, SFX_SS_ANNE_HORN
 	call PlaySoundWaitForCurrent
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
@@ -193,7 +193,7 @@ VermilionDock_1dc94: ; 1dc94 (7:5c94)
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, (SFX_02_54 - SFX_Headers_02) / 3
+	ld a, SFX_SS_ANNE_HORN
 	call PlaySound
 	ld c, 120
 	call DelayFrames

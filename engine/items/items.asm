@@ -644,7 +644,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [wcf91],a
 	ld a,$01
 	ld [wForceEvolution],a
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
@@ -917,7 +917,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
@@ -1067,7 +1067,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr c,.playStatusAilmentCuringSound
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
+	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
@@ -1089,7 +1089,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wPartyMenuTypeOrMessageID],a
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
+	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
@@ -1178,7 +1178,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,wcf4b
 	ld bc,10
 	call CopyData ; copy the stat's name to wcf4b
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl,VitaminStatRoseText
 	call PrintText
@@ -1720,7 +1720,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, (SFX_02_5e - SFX_Headers_02) / 3
+	ld a, SFX_POKEFLUE
 	ld c, BANK(SFX_02_5e)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
@@ -1824,7 +1824,7 @@ FishingInit: ; e2b4 (3:62b4)
 	call ItemUseReloadOverworldData
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld c,80
 	call DelayFrames
@@ -1847,9 +1847,9 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	jr nc,.printText ; if no hidden items
 	ld c,4
 .loop
-	ld a,(SFX_02_4a - SFX_Headers_02) / 3
+	ld a,SFX_HEALING_MACHINE
 	call PlaySoundWaitForCurrent
-	ld a,(SFX_02_5a - SFX_Headers_02) / 3
+	ld a,SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	dec c
 	jr nz,.loop
@@ -1951,7 +1951,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld bc,4
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl,PPRestoredText
 	call PrintText
@@ -2146,7 +2146,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,(SFX_02_51 - SFX_Headers_02) / 3
+	ld a,SFX_DENIED
 	call PlaySoundWaitForCurrent
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
@@ -2186,7 +2186,7 @@ MonCannotLearnMachineMoveText: ; e55e (3:655e)
 PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 

@@ -146,7 +146,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	push hl
 	ld hl, IntoText
 	call Func_3c59
-	ld a, (SFX_02_3b - SFX_Headers_02) / 3
+	ld a, SFX_GET_ITEM_2
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c, 40

@@ -58,7 +58,7 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld c, 2
 	call DelayFrames
 	push bc
-	ld a, (SFX_02_53 - SFX_Headers_02) / 3
+	ld a, SFX_PUSH_BOULDER
 	call PlaySound
 	pop bc
 	dec b

@@ -156,7 +156,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a

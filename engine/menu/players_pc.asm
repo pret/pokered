@@ -11,7 +11,7 @@ PlayerPC: ; 78e6 (1:78e6)
 	bit 3, a ; accessing player's PC through another PC?
 	jr nz, PlayerPCMenu
 ; accessing it directly
-	ld a, (SFX_02_45 - SFX_Headers_02) / 3
+	ld a, SFX_TURN_ON_PC
 	call PlaySound
 	ld hl, TurnedOnPC2Text
 	call PrintText
@@ -67,7 +67,7 @@ ExitPlayerPC: ; 796d (1:796d)
 	bit 3, a ; accessing player's PC through another PC?
 	jr nz, .next
 ; accessing it directly
-	ld a, (SFX_02_46 - SFX_Headers_02) / 3
+	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
 .next
@@ -130,7 +130,7 @@ PlayerPCDeposit: ; 7995 (1:7995)
 	ld hl, wNumBagItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
-	ld a, (SFX_02_55 - SFX_Headers_02) / 3
+	ld a, SFX_WITHDRAW_DEPOSIT
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, ItemWasStoredText
@@ -184,7 +184,7 @@ PlayerPCWithdraw: ; 7a12 (1:7a12)
 	ld hl, wNumBoxItems
 	call RemoveItemFromInventory
 	call WaitForSoundToFinish
-	ld a, (SFX_02_55 - SFX_Headers_02) / 3
+	ld a, SFX_WITHDRAW_DEPOSIT
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, WithdrewItemText

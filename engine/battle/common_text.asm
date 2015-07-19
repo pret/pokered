@@ -64,7 +64,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld [wc0f1], a
 	ld a, $80
 	ld [wc0f2], a
-	ld a, (SFX_08_77 - SFX_Headers_08) / 3
+	ld a, SFX_BATTLE_37
 	call PlaySound
 	jp WaitForSoundToFinish
 .done

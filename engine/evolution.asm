@@ -14,7 +14,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	call PlaySound
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, (SFX_08_3c - SFX_Headers_08) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	call Delay3
 	xor a

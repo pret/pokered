@@ -741,7 +741,7 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	cp a,11 ; is it the beginning of the subanimation?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
-	ld a,(SFX_08_41 - SFX_Headers_08) / 3
+	ld a,SFX_BATTLE_01
 	call PlaySound
 .skipPlayingSound
 	ld a,[W_ISINBATTLE]
@@ -787,7 +787,7 @@ DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
 	cp a,4 ; is it the beginning of a shake?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
-	ld a,(SFX_08_3c - SFX_Headers_08) / 3
+	ld a,SFX_TINK
 	call PlaySound
 	ld c,40
 	call DelayFrames
@@ -820,7 +820,7 @@ DoPoofSpecialEffects: ; 78fce (1e:4fce)
 	ld a,[W_SUBANIMCOUNTER]
 	cp a,5
 	ret nz
-	ld a,(SFX_08_42 - SFX_Headers_08) / 3
+	ld a,SFX_BATTLE_02
 	jp PlaySound
 
 DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
@@ -921,7 +921,7 @@ TradeShakePokeball: ; 7904c (1e:504c)
 	jr .loop
 .done
 	call AnimationCleanOAM
-	ld a,(SFX_02_44 - SFX_Headers_02) / 3
+	ld a,SFX_TRADE_MACHINE
 	jp PlaySound
 
 BallMoveDistances1: ; 79078 (1e:5078)
@@ -952,7 +952,7 @@ TradeJumpPokeball: ; 507C
 	cp a,$ff
 	jr nz,.skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
-	ld a,(SFX_08_58 - SFX_Headers_08) / 3
+	ld a,SFX_BATTLE_18
 	call PlaySound
 .skipPlayingSound
 	push bc
@@ -2329,172 +2329,172 @@ IsCryMove: ; 798ad (1e:58ad)
 	ret
 
 MoveSoundTable: ; 798bc (1e:58bc)
-	db (SFX_08_4a - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4c - SFX_Headers_08) / 3,$10,$80
-	db (SFX_08_5d - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4b - SFX_Headers_08) / 3,$01,$80
-	db (SFX_08_4d - SFX_Headers_08) / 3,$00,$40
-	db (SFX_08_77 - SFX_Headers_08) / 3,$00,$ff
-	db (SFX_08_4d - SFX_Headers_08) / 3,$10,$60
-	db (SFX_08_4d - SFX_Headers_08) / 3,$20,$80
-	db (SFX_08_4d - SFX_Headers_08) / 3,$00,$a0
-	db (SFX_08_50 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4f - SFX_Headers_08) / 3,$20,$40
-	db (SFX_08_4f - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4e - SFX_Headers_08) / 3,$00,$a0
-	db (SFX_08_51 - SFX_Headers_08) / 3,$10,$c0
-	db (SFX_08_51 - SFX_Headers_08) / 3,$00,$a0
-	db (SFX_08_52 - SFX_Headers_08) / 3,$00,$c0
-	db (SFX_08_52 - SFX_Headers_08) / 3,$10,$a0
-	db (SFX_08_53 - SFX_Headers_08) / 3,$00,$e0
-	db (SFX_08_51 - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_54 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_62 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_55 - SFX_Headers_08) / 3,$01,$80
-	db (SFX_08_60 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_57 - SFX_Headers_08) / 3,$f0,$40
-	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_57 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_61 - SFX_Headers_08) / 3,$10,$80
-	db (SFX_08_5b - SFX_Headers_08) / 3,$01,$a0
-	db (SFX_08_58 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5e - SFX_Headers_08) / 3,$00,$60
-	db (SFX_08_5e - SFX_Headers_08) / 3,$01,$40
-	db (SFX_08_5f - SFX_Headers_08) / 3,$00,$a0
-	db (SFX_08_5a - SFX_Headers_08) / 3,$10,$a0
-	db (SFX_08_60 - SFX_Headers_08) / 3,$00,$c0
-	db (SFX_08_54 - SFX_Headers_08) / 3,$10,$60
-	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$a0
-	db (SFX_08_62 - SFX_Headers_08) / 3,$11,$c0
-	db (SFX_08_5a - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_61 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5b - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5b - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_59 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_71 - SFX_Headers_08) / 3,$ff,$40
-	db (SFX_08_5e - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$c0
-	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$40
-	db (SFX_08_75 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_67 - SFX_Headers_08) / 3,$40,$60
-	db (SFX_08_67 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_67 - SFX_Headers_08) / 3,$ff,$40
-	db (SFX_08_6a - SFX_Headers_08) / 3,$80,$c0
-	db (SFX_08_59 - SFX_Headers_08) / 3,$10,$a0
-	db (SFX_08_59 - SFX_Headers_08) / 3,$21,$e0
-	db (SFX_08_69 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_64 - SFX_Headers_08) / 3,$20,$60
-	db (SFX_08_6a - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_6c - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_68 - SFX_Headers_08) / 3,$40,$80
-	db (SFX_08_69 - SFX_Headers_08) / 3,$f0,$e0
-	db (SFX_08_6d - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_6a - SFX_Headers_08) / 3,$f0,$60
-	db (SFX_08_68 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_76 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_47 - SFX_Headers_08) / 3,$01,$a0
-	db (SFX_08_53 - SFX_Headers_08) / 3,$f0,$20
-	db (SFX_08_63 - SFX_Headers_08) / 3,$01,$c0
-	db (SFX_08_63 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$e0
-	db (SFX_08_66 - SFX_Headers_08) / 3,$01,$60
-	db (SFX_08_66 - SFX_Headers_08) / 3,$20,$40
-	db (SFX_08_64 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_64 - SFX_Headers_08) / 3,$40,$c0
-	db (SFX_08_5b - SFX_Headers_08) / 3,$03,$60
-	db (SFX_08_65 - SFX_Headers_08) / 3,$11,$e0
-	db (SFX_08_52 - SFX_Headers_08) / 3,$20,$e0
-	db (SFX_08_6e - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5c - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_5c - SFX_Headers_08) / 3,$11,$a0
-	db (SFX_08_5c - SFX_Headers_08) / 3,$01,$c0
-	db (SFX_08_53 - SFX_Headers_08) / 3,$14,$c0
-	db (SFX_08_5b - SFX_Headers_08) / 3,$02,$a0
-	db (SFX_08_69 - SFX_Headers_08) / 3,$f0,$80
-	db (SFX_08_69 - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_6f - SFX_Headers_08) / 3,$00,$20
-	db (SFX_08_6f - SFX_Headers_08) / 3,$20,$80
-	db (SFX_08_6e - SFX_Headers_08) / 3,$12,$60
-	db (SFX_08_66 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_54 - SFX_Headers_08) / 3,$01,$e0
-	db (SFX_08_69 - SFX_Headers_08) / 3,$0f,$e0
-	db (SFX_08_69 - SFX_Headers_08) / 3,$11,$20
-	db (SFX_08_50 - SFX_Headers_08) / 3,$10,$40
-	db (SFX_08_4f - SFX_Headers_08) / 3,$10,$c0
-	db (SFX_08_54 - SFX_Headers_08) / 3,$00,$20
-	db (SFX_08_70 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_75 - SFX_Headers_08) / 3,$11,$18
-	db (SFX_08_49 - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_48 - SFX_Headers_08) / 3,$20,$c0
-	db (SFX_08_65 - SFX_Headers_08) / 3,$00,$10
-	db (SFX_08_66 - SFX_Headers_08) / 3,$f0,$20
-	db (SFX_08_73 - SFX_Headers_08) / 3,$f0,$c0
-	db (SFX_08_51 - SFX_Headers_08) / 3,$f0,$e0
-	db (SFX_08_49 - SFX_Headers_08) / 3,$f0,$40
-	db (SFX_08_71 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_73 - SFX_Headers_08) / 3,$80,$40
-	db (SFX_08_73 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_54 - SFX_Headers_08) / 3,$11,$20
-	db (SFX_08_54 - SFX_Headers_08) / 3,$22,$10
-	db (SFX_08_5b - SFX_Headers_08) / 3,$f1,$ff
-	db (SFX_08_53 - SFX_Headers_08) / 3,$f1,$ff
-	db (SFX_08_54 - SFX_Headers_08) / 3,$33,$30
-	db (SFX_08_72 - SFX_Headers_08) / 3,$40,$c0
-	db (SFX_08_4e - SFX_Headers_08) / 3,$20,$20
-	db (SFX_08_4e - SFX_Headers_08) / 3,$f0,$10
-	db (SFX_08_4f - SFX_Headers_08) / 3,$f8,$10
-	db (SFX_08_51 - SFX_Headers_08) / 3,$f0,$10
-	db (SFX_08_65 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_58 - SFX_Headers_08) / 3,$00,$c0
-	db (SFX_08_72 - SFX_Headers_08) / 3,$c0,$ff
-	db (SFX_08_49 - SFX_Headers_08) / 3,$f2,$20
-	db (SFX_08_74 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_74 - SFX_Headers_08) / 3,$00,$40
-	db (SFX_08_49 - SFX_Headers_08) / 3,$00,$40
-	db (SFX_08_51 - SFX_Headers_08) / 3,$10,$ff
-	db (SFX_08_6a - SFX_Headers_08) / 3,$20,$20
-	db (SFX_08_72 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_69 - SFX_Headers_08) / 3,$1f,$20
-	db (SFX_08_65 - SFX_Headers_08) / 3,$2f,$80
-	db (SFX_08_4f - SFX_Headers_08) / 3,$1f,$ff
-	db (SFX_08_6b - SFX_Headers_08) / 3,$1f,$60
-	db (SFX_08_66 - SFX_Headers_08) / 3,$1e,$20
-	db (SFX_08_66 - SFX_Headers_08) / 3,$1f,$18
-	db (SFX_08_54 - SFX_Headers_08) / 3,$0f,$80
-	db (SFX_08_49 - SFX_Headers_08) / 3,$f8,$10
-	db (SFX_08_48 - SFX_Headers_08) / 3,$18,$20
-	db (SFX_08_72 - SFX_Headers_08) / 3,$08,$40
-	db (SFX_08_57 - SFX_Headers_08) / 3,$01,$e0
-	db (SFX_08_51 - SFX_Headers_08) / 3,$09,$ff
-	db (SFX_08_75 - SFX_Headers_08) / 3,$42,$01
-	db (SFX_08_5c - SFX_Headers_08) / 3,$00,$ff
-	db (SFX_08_72 - SFX_Headers_08) / 3,$08,$e0
-	db (SFX_08_64 - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_49 - SFX_Headers_08) / 3,$88,$10
-	db (SFX_08_65 - SFX_Headers_08) / 3,$48,$ff
-	db (SFX_08_48 - SFX_Headers_08) / 3,$ff,$ff
-	db (SFX_08_64 - SFX_Headers_08) / 3,$ff,$10
-	db (SFX_08_48 - SFX_Headers_08) / 3,$ff,$04
-	db (SFX_08_5c - SFX_Headers_08) / 3,$01,$ff
-	db (SFX_08_53 - SFX_Headers_08) / 3,$f8,$ff
-	db (SFX_08_4c - SFX_Headers_08) / 3,$f0,$f0
-	db (SFX_08_4f - SFX_Headers_08) / 3,$08,$10
-	db (SFX_08_4d - SFX_Headers_08) / 3,$f0,$ff
-	db (SFX_08_5a - SFX_Headers_08) / 3,$f0,$ff
-	db (SFX_08_74 - SFX_Headers_08) / 3,$10,$ff
-	db (SFX_08_4e - SFX_Headers_08) / 3,$f0,$20
-	db (SFX_08_6b - SFX_Headers_08) / 3,$f0,$60
-	db (SFX_08_61 - SFX_Headers_08) / 3,$12,$10
-	db (SFX_08_76 - SFX_Headers_08) / 3,$f0,$20
-	db (SFX_08_5e - SFX_Headers_08) / 3,$12,$ff
-	db (SFX_08_71 - SFX_Headers_08) / 3,$80,$04
-	db (SFX_08_73 - SFX_Headers_08) / 3,$f0,$10
-	db (SFX_08_69 - SFX_Headers_08) / 3,$f8,$ff
-	db (SFX_08_66 - SFX_Headers_08) / 3,$f0,$ff
-	db (SFX_08_51 - SFX_Headers_08) / 3,$01,$ff
-	db (SFX_08_6c - SFX_Headers_08) / 3,$d8,$04
-	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$80
-	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$80
+	db SFX_BATTLE_0A,$00,$80
+	db SFX_BATTLE_0C,$10,$80
+	db SFX_BATTLE_1D,$00,$80
+	db SFX_BATTLE_0B,$01,$80
+	db SFX_BATTLE_0D,$00,$40
+	db SFX_BATTLE_37,$00,$ff
+	db SFX_BATTLE_0D,$10,$60
+	db SFX_BATTLE_0D,$20,$80
+	db SFX_BATTLE_0D,$00,$a0
+	db SFX_BATTLE_10,$00,$80
+	db SFX_BATTLE_0F,$20,$40
+	db SFX_BATTLE_0F,$00,$80
+	db SFX_BATTLE_0E,$00,$a0
+	db SFX_BATTLE_11,$10,$c0
+	db SFX_BATTLE_11,$00,$a0
+	db SFX_BATTLE_12,$00,$c0
+	db SFX_BATTLE_12,$10,$a0
+	db SFX_BATTLE_13,$00,$e0
+	db SFX_BATTLE_11,$20,$c0
+	db SFX_BATTLE_14,$00,$80
+	db SFX_BATTLE_22,$00,$80
+	db SFX_BATTLE_15,$01,$80
+	db SFX_BATTLE_20,$00,$80
+	db SFX_BATTLE_17,$f0,$40
+	db SFX_BATTLE_1A,$00,$80
+	db SFX_BATTLE_17,$00,$80
+	db SFX_BATTLE_21,$10,$80
+	db SFX_BATTLE_1B,$01,$a0
+	db SFX_BATTLE_18,$00,$80
+	db SFX_BATTLE_1E,$00,$60
+	db SFX_BATTLE_1E,$01,$40
+	db SFX_BATTLE_1F,$00,$a0
+	db SFX_BATTLE_1A,$10,$a0
+	db SFX_BATTLE_20,$00,$c0
+	db SFX_BATTLE_14,$10,$60
+	db SFX_BATTLE_1A,$00,$a0
+	db SFX_BATTLE_22,$11,$c0
+	db SFX_BATTLE_1A,$20,$c0
+	db SFX_BATTLE_21,$00,$80
+	db SFX_BATTLE_1B,$00,$80
+	db SFX_BATTLE_1B,$20,$c0
+	db SFX_BATTLE_19,$00,$80
+	db SFX_BATTLE_31,$ff,$40
+	db SFX_BATTLE_1E,$00,$80
+	db SFX_BATTLE_0B,$00,$c0
+	db SFX_BATTLE_0B,$00,$40
+	db SFX_BATTLE_35,$00,$80
+	db SFX_BATTLE_27,$40,$60
+	db SFX_BATTLE_27,$00,$80
+	db SFX_BATTLE_27,$ff,$40
+	db SFX_BATTLE_2A,$80,$c0
+	db SFX_BATTLE_19,$10,$a0
+	db SFX_BATTLE_19,$21,$e0
+	db SFX_BATTLE_29,$00,$80
+	db SFX_BATTLE_24,$20,$60
+	db SFX_BATTLE_2A,$00,$80
+	db SFX_BATTLE_2C,$00,$80
+	db SFX_BATTLE_28,$40,$80
+	db SFX_BATTLE_29,$f0,$e0
+	db SFX_BATTLE_2D,$00,$80
+	db SFX_BATTLE_2A,$f0,$60
+	db SFX_BATTLE_28,$00,$80
+	db SFX_BATTLE_36,$00,$80
+	db SFX_BATTLE_07,$01,$a0
+	db SFX_BATTLE_13,$f0,$20
+	db SFX_BATTLE_23,$01,$c0
+	db SFX_BATTLE_23,$00,$80
+	db SFX_BATTLE_1A,$00,$e0
+	db SFX_BATTLE_26,$01,$60
+	db SFX_BATTLE_26,$20,$40
+	db SFX_BATTLE_24,$00,$80
+	db SFX_BATTLE_24,$40,$c0
+	db SFX_BATTLE_1B,$03,$60
+	db SFX_BATTLE_25,$11,$e0
+	db SFX_BATTLE_12,$20,$e0
+	db SFX_BATTLE_2E,$00,$80
+	db SFX_BATTLE_1C,$00,$80
+	db SFX_BATTLE_1C,$11,$a0
+	db SFX_BATTLE_1C,$01,$c0
+	db SFX_BATTLE_13,$14,$c0
+	db SFX_BATTLE_1B,$02,$a0
+	db SFX_BATTLE_29,$f0,$80
+	db SFX_BATTLE_29,$20,$c0
+	db SFX_BATTLE_2F,$00,$20
+	db SFX_BATTLE_2F,$20,$80
+	db SFX_BATTLE_2E,$12,$60
+	db SFX_BATTLE_26,$00,$80
+	db SFX_BATTLE_14,$01,$e0
+	db SFX_BATTLE_29,$0f,$e0
+	db SFX_BATTLE_29,$11,$20
+	db SFX_BATTLE_10,$10,$40
+	db SFX_BATTLE_0F,$10,$c0
+	db SFX_BATTLE_14,$00,$20
+	db SFX_BATTLE_30,$00,$80
+	db SFX_BATTLE_35,$11,$18
+	db SFX_BATTLE_09,$20,$c0
+	db SFX_BATTLE_08,$20,$c0
+	db SFX_BATTLE_25,$00,$10
+	db SFX_BATTLE_26,$f0,$20
+	db SFX_BATTLE_33,$f0,$c0
+	db SFX_BATTLE_11,$f0,$e0
+	db SFX_BATTLE_09,$f0,$40
+	db SFX_BATTLE_31,$00,$80
+	db SFX_BATTLE_33,$80,$40
+	db SFX_BATTLE_33,$00,$80
+	db SFX_BATTLE_14,$11,$20
+	db SFX_BATTLE_14,$22,$10
+	db SFX_BATTLE_1B,$f1,$ff
+	db SFX_BATTLE_13,$f1,$ff
+	db SFX_BATTLE_14,$33,$30
+	db SFX_BATTLE_32,$40,$c0
+	db SFX_BATTLE_0E,$20,$20
+	db SFX_BATTLE_0E,$f0,$10
+	db SFX_BATTLE_0F,$f8,$10
+	db SFX_BATTLE_11,$f0,$10
+	db SFX_BATTLE_25,$00,$80
+	db SFX_BATTLE_18,$00,$c0
+	db SFX_BATTLE_32,$c0,$ff
+	db SFX_BATTLE_09,$f2,$20
+	db SFX_BATTLE_34,$00,$80
+	db SFX_BATTLE_34,$00,$40
+	db SFX_BATTLE_09,$00,$40
+	db SFX_BATTLE_11,$10,$ff
+	db SFX_BATTLE_2A,$20,$20
+	db SFX_BATTLE_32,$00,$80
+	db SFX_BATTLE_29,$1f,$20
+	db SFX_BATTLE_25,$2f,$80
+	db SFX_BATTLE_0F,$1f,$ff
+	db SFX_BATTLE_2B,$1f,$60
+	db SFX_BATTLE_26,$1e,$20
+	db SFX_BATTLE_26,$1f,$18
+	db SFX_BATTLE_14,$0f,$80
+	db SFX_BATTLE_09,$f8,$10
+	db SFX_BATTLE_08,$18,$20
+	db SFX_BATTLE_32,$08,$40
+	db SFX_BATTLE_17,$01,$e0
+	db SFX_BATTLE_11,$09,$ff
+	db SFX_BATTLE_35,$42,$01
+	db SFX_BATTLE_1C,$00,$ff
+	db SFX_BATTLE_32,$08,$e0
+	db SFX_BATTLE_24,$00,$80
+	db SFX_BATTLE_09,$88,$10
+	db SFX_BATTLE_25,$48,$ff
+	db SFX_BATTLE_08,$ff,$ff
+	db SFX_BATTLE_24,$ff,$10
+	db SFX_BATTLE_08,$ff,$04
+	db SFX_BATTLE_1C,$01,$ff
+	db SFX_BATTLE_13,$f8,$ff
+	db SFX_BATTLE_0C,$f0,$f0
+	db SFX_BATTLE_0F,$08,$10
+	db SFX_BATTLE_0D,$f0,$ff
+	db SFX_BATTLE_1A,$f0,$ff
+	db SFX_BATTLE_34,$10,$ff
+	db SFX_BATTLE_0E,$f0,$20
+	db SFX_BATTLE_2B,$f0,$60
+	db SFX_BATTLE_21,$12,$10
+	db SFX_BATTLE_36,$f0,$20
+	db SFX_BATTLE_1E,$12,$ff
+	db SFX_BATTLE_31,$80,$04
+	db SFX_BATTLE_33,$f0,$10
+	db SFX_BATTLE_29,$f8,$ff
+	db SFX_BATTLE_26,$f0,$ff
+	db SFX_BATTLE_11,$01,$ff
+	db SFX_BATTLE_2C,$d8,$04
+	db SFX_BATTLE_0B,$00,$80
+	db SFX_BATTLE_0B,$00,$80
 
 CopyPicTiles: ; 79aae (1e:5aae)
 	ld a, [H_WHOSETURN]
@@ -2929,7 +2929,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
 	call PlayAnimation
-	ld a,(SFX_08_43 - SFX_Headers_08) / 3
+	ld a,SFX_BATTLE_03
 	call PlaySound
 	ld a,BLOCKBALL_ANIM
 	ld [W_ANIMATIONID],a
@@ -2945,15 +2945,15 @@ PlayApplyingAttackSound: ; 79e6a (1e:5e6a)
 	cp $a
 	ld a, $20
 	ld b, $30
-	ld c, (SFX_08_50 - SFX_Headers_08) / 3
+	ld c, SFX_BATTLE_10
 	jr z, .asm_79e8b
 	ld a, $e0
 	ld b, $ff
-	ld c, (SFX_08_5a - SFX_Headers_08) / 3
+	ld c, SFX_BATTLE_1A
 	jr nc, .asm_79e8b
 	ld a, $50
 	ld b, $1
-	ld c, (SFX_08_51 - SFX_Headers_08) / 3
+	ld c, SFX_BATTLE_11
 .asm_79e8b
 	ld [wc0f1], a
 	ld a, b

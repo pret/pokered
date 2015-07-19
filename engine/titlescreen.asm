@@ -157,7 +157,7 @@ ENDC
 	ld d, a
 	cp -3
 	jr nz, .skipPlayingSound
-	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_CRASH
 	call PlaySound
 .skipPlayingSound
 	ld a, [hli]
@@ -191,7 +191,7 @@ ENDC
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
-	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_WHOOSH
 	call PlaySound
 
 ; scroll game version in from the right

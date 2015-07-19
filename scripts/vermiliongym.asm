@@ -34,7 +34,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, $24
 	jr .asm_5ca7f
 .asm_5ca78
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld a, $5
 .asm_5ca7f

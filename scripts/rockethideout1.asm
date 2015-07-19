@@ -21,7 +21,7 @@ RocketHideout1Script_44be0: ; 44be0 (11:4be0)
 	ld a, $54
 	jr .asm_44c03
 .asm_44bf7
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld hl, wd815
 	bit 7, [hl]

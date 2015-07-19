@@ -107,7 +107,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jr .asm_0b094

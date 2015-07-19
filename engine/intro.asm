@@ -35,14 +35,14 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
 	ld [wd09f], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
-	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HOP
 	call PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
@@ -51,12 +51,12 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HIP
 	call PlaySound
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
-	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HOP
 	call PlaySound
 	ld de, IntroNidorinoAnimation2
 	call AnimateIntroNidorino
@@ -67,7 +67,7 @@ PlayIntroScene: ; 4169d (10:569d)
 ; raise
 	ld b, $4
 	call IntroCopyTiles
-	ld a, (SFX_1f_61 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_RAISE
 	call PlaySound
 	ld de, $401 ; move Gengar left by 8 pixels
 	call IntroMoveMon
@@ -78,12 +78,12 @@ PlayIntroScene: ; 4169d (10:569d)
 ; slash
 	ld b, $5
 	call IntroCopyTiles
-	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_CRASH
 	call PlaySound
 	ld de, $800 ; move Gengar right by 16 pixels
 	call IntroMoveMon
 ; hip
-	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HIP
 	call PlaySound
 	ld a, $24
 	ld [wd09f], a
@@ -102,14 +102,14 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; hip
-	ld a, (SFX_1f_5f - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
 	ld [wd09f], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
-	ld a, (SFX_1f_60 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_HOP
 	call PlaySound
 	ld de, IntroNidorinoAnimation5
 	call AnimateIntroNidorino
@@ -126,7 +126,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 ; lunge
-	ld a, (SFX_1f_5e - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_LUNGE
 	call PlaySound
 	ld a, $48
 	ld [wd09f], a

@@ -111,7 +111,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText
 	call PrintText
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld hl, wd796
 	bit 0, [hl]

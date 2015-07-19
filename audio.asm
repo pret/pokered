@@ -538,7 +538,7 @@ INCLUDE "audio/engine_2.asm"
 
 
 Music_PokeFluteInBattle:: ; 22306 (8:6306)
-	ld a, (SFX_08_46 - SFX_Headers_08) / 3 ; PokeFlute outside of battle
+	ld a, SFX_BATTLE_06 ; PokeFlute outside of battle
 	call PlaySoundWaitForCurrent
 	ld hl, wc00e
 	ld de, SFX_08_PokeFlute_Ch1
@@ -583,13 +583,13 @@ PlayPokedexRatingSfx:: ; 7d13b (1f:513b)
 	jp PlayDefaultMusic
 
 PokedexRatingSfxPointers: ; 7d162 (1f:5162)
-	db (SFX_1f_51 - SFX_Headers_1f) / 3, BANK(SFX_1f_51)
-	db (SFX_02_41 - SFX_Headers_02) / 3, BANK(SFX_02_41)
-	db (SFX_02_3a - SFX_Headers_02) / 3, BANK(SFX_02_3a)
-	db (SFX_08_46 - SFX_Headers_08) / 3, BANK(SFX_08_46)
-	db (SFX_08_3a - SFX_Headers_08) / 3, BANK(SFX_08_3a)
-	db (SFX_02_42 - SFX_Headers_02) / 3, BANK(SFX_02_42)
-	db (SFX_02_3b - SFX_Headers_02) / 3, BANK(SFX_02_3b)
+	db SFX_DENIED,         BANK(SFX_1f_51)
+	db SFX_POKEDEX_RATING, BANK(SFX_02_41)
+	db SFX_GET_ITEM_1,     BANK(SFX_02_3a)
+	db SFX_BATTLE_06,      BANK(SFX_08_46)
+	db SFX_LEVEL_UP,       BANK(SFX_08_3a)
+	db SFX_GET_KEY_ITEM,   BANK(SFX_02_42)
+	db SFX_GET_ITEM_2,     BANK(SFX_02_3b)
 
 OwnedMonValues: ; 7d170 (1f:5170)
 	db 10, 40, 60, 90, 120, 150, $ff

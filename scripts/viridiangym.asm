@@ -41,7 +41,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	call StartSimulatingJoypadStates
 	ld hl, wd736
 	set 7, [hl]
-	ld a, (SFX_02_52 - SFX_Headers_02) / 3
+	ld a, SFX_ARROW_TILES
 	call PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a

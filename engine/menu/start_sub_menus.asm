@@ -734,7 +734,7 @@ SwitchPartyMon_ClearGfx: ; 13625 (4:7625)
 	dec c
 	jr nz, .clearMonOAMLoop
 	call WaitForSoundToFinish
-	ld a, (SFX_02_58 - SFX_Headers_02) / 3
+	ld a, SFX_SWAP
 	jp PlaySound
 
 SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)

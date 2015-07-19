@@ -106,7 +106,7 @@ OakSpeech: ; 6115 (1:6115)
 .next
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,(SFX_02_48 - SFX_Headers_02) / 3
+	ld a,SFX_SHRINK
 	call PlaySound
 	pop af
 	ld [H_LOADEDROMBANK],a

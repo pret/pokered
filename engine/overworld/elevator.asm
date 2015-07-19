@@ -19,7 +19,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld [hSCY], a
 	push bc
 	ld c, BANK(SFX_02_5b)
-	ld a, (SFX_02_5b - SFX_Headers_02) / 3
+	ld a, SFX_COLLISION
 	call PlayMusic
 	pop bc
 	ld c, 2
@@ -31,7 +31,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld a, $ff
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
-	ld a, (SFX_02_5f - SFX_Headers_02) / 3
+	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_7bf57
 	ld a, [wc02a]

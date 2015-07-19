@@ -287,7 +287,7 @@ Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
 	ld b, $7 ; open end of link cable tile ID list index
 	call CopyTileIDsFromList_ZeroBaseTileID
 	call Trade_CopyTileMapToVRAM
-	ld a, (SFX_02_3d - SFX_Headers_02) / 3
+	ld a, SFX_HEAL_HP
 	call PlaySound
 	ld c, 20
 .loop
@@ -332,7 +332,7 @@ Trade_AnimateBallEnteringLinkCable: ; 412d2 (10:52d2)
 	ld c, a
 	cp $a0
 	jr nc, .ballSpriteReachedEdgeOfScreen
-	ld a, (SFX_02_3c - SFX_Headers_02) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	jr .moveBallInsideLinkCableLoop
 .ballSpriteReachedEdgeOfScreen

@@ -22,7 +22,7 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 	ld a, $2d
 	jr .asm_45498
 .asm_4548c
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	ld hl, wd81b
 	set 5, [hl]

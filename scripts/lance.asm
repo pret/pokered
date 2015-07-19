@@ -75,7 +75,7 @@ LanceScript0: ; 5a305 (16:6305)
 	ret nz
 	ld hl, wd126
 	set 5, [hl]
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	jp LanceScript_5a2c4
 
