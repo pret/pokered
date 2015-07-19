@@ -1713,7 +1713,7 @@ FluteWokeUpText: ; e210 (3:6210)
 PlayedFluteHadEffectText: ; e215 (3:6215)
 	TX_FAR _PlayedFluteHadEffectText
 	db $06
-	db $08
+	TX_ASM
 	ld a,[W_ISINBATTLE]
 	and a
 	jr nz,.done

@@ -236,7 +236,8 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	db $0b
 	TX_FAR _CinnabarGymQuizCorrectText
-	db $06,$08
+	db $06
+	TX_ASM
 
 	ld a, [$ffe0]
 	ld c, a
