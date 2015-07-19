@@ -3743,7 +3743,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	dec de
 	dec de
 	xor a
-	ld [wHPBarMaxHP], a
+	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
@@ -3758,13 +3758,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	callab CalcExperience
 	pop de
 	inc de
-	ld a, [H_MULTIPLICAND] ; write experience
+	ld a, [hExperience] ; write experience
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
 	ld b, $a

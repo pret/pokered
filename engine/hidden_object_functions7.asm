@@ -128,7 +128,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	TX_ASM
 	xor a
 	ld [wda38], a
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	push af
 	and $f
 	ld [$ffdb], a

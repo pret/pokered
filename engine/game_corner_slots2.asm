@@ -1,4 +1,4 @@
-AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
+AbleToPlaySlotsCheck: ; 2ff09 (b:7f09)
 	ld a, [wSpriteStateData1 + 2]
 	and $8
 	jr z, .done ; not able
@@ -19,7 +19,7 @@ AbleToPlaySlotsCheck ; 2ff09 (b:7f09)
 	call PrintPredefTextID
 	xor a
 .done
-	ld [wWhichTrade], a
+	ld [wCanPlaySlots], a
 	ret
 
 GameCornerCoinCaseText: ; 2ff32 (b:7f32)

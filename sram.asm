@@ -29,8 +29,8 @@ sBox3:: ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
 sBox4:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
 sBox5:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
 sBox6:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
-sBoxes1CheckSum:: ds 1 ; ba4c
-sBoxes1CheckSum2:: ds 6 ; ba4d
+sBank2AllBoxesChecksum:: ds 1 ; ba4c
+sBank2IndividualBoxChecksums:: ds 6 ; ba4d
 
 
 SECTION "Saved Boxes 2", SRAM, BANK[3]
@@ -41,5 +41,5 @@ sBox9::  ds wBoxMonNicksEnd - W_NUMINBOX ; a8c4
 sBox10:: ds wBoxMonNicksEnd - W_NUMINBOX ; ad26
 sBox11:: ds wBoxMonNicksEnd - W_NUMINBOX ; b188
 sBox12:: ds wBoxMonNicksEnd - W_NUMINBOX ; b5ea
-sBoxes2CheckSum:: ds 1 ; ba4c
-sBoxes2CheckSum2:: ds 6 ; ba4d
+sBank3AllBoxesChecksum:: ds 1 ; ba4c
+sBank3IndividualBoxChecksums:: ds 6 ; ba4d

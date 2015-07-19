@@ -297,7 +297,7 @@ CallCurrentTradeCenterFunction:
 	ld b, 0
 	ld a, [wTradeCenterPointerTableIndex]
 	cp $ff
-	jp z, LoadTitlescreenGraphics
+	jp z, DisplayTitleScreen
 	add a
 	ld c, a
 	add hl, bc

@@ -23,17 +23,17 @@ rLCDC_DEFAULT EQU %11100011
 	xor a
 	ld [rIF], a
 	ld [rIE], a
-	ld [$ff43], a
-	ld [$ff42], a
+	ld [rSCX], a
+	ld [rSCY], a
 	ld [rSB], a
 	ld [rSC], a
 	ld [rWX], a
-	ld [$ff4a], a
-	ld [$ff06], a
-	ld [$ff07], a
+	ld [rWY], a
+	ld [rTMA], a
+	ld [rTAC], a
 	ld [rBGP], a
 	ld [rOBP0], a
-	ld [$ff49], a
+	ld [rOBP1], a
 
 	ld a, rLCDC_ENABLE_MASK
 	ld [rLCDC], a
@@ -66,10 +66,10 @@ rLCDC_DEFAULT EQU %11100011
 
 	xor a
 	ld [hTilesetType], a
-	ld [$ff41], a
+	ld [rSTAT], a
 	ld [hSCX], a
 	ld [hSCY], a
-	ld [$ff0f], a
+	ld [rIF], a
 	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
 	ld [rIE], a
 

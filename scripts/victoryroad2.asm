@@ -49,7 +49,7 @@ VictoryRoad2Script0: ; 517f1 (14:57f1)
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, wd7ee
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $2
 	jr z, .asm_5180b
 	bit 0, [hl]

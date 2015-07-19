@@ -42,7 +42,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
 	jr nc, .asm_194f7
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	ld a, $8
 	ld b, SPRITE_FACING_DOWN

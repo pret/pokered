@@ -8,7 +8,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	call CheckBoulderCoords
 	ret nc
 	ld hl, wd881
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_465b8
 	set 0, [hl]
@@ -35,7 +35,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld a, $a2
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
-	call Func_46981
+	call IsPlayerOnDungeonWarp
 	ld a, [wd732]
 	bit 4, a
 	ret nz

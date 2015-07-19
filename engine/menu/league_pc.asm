@@ -12,7 +12,7 @@ PKMNLeaguePC: ; 0x7657e
 	ld [hTilesetType], a
 	ld [W_SPRITEFLIPPED], a
 	ld [wUpdateSpritesEnabled], a
-	ld [wTrainerScreenX], a
+	ld [wHoFTeamIndex2], a
 	ld [wHoFTeamNo], a
 	ld a, [wNumHoFTeams]
 	ld b, a
@@ -27,13 +27,13 @@ PKMNLeaguePC: ; 0x7657e
 	ld hl, wHoFTeamNo
 	inc [hl]
 	push bc
-	ld a, [wTrainerScreenX]
-	ld [wHoFMonSpecies], a
+	ld a, [wHoFTeamIndex2]
+	ld [wHoFTeamIndex], a
 	callba LoadHallOfFameTeams
 	call LeaguePCShowTeam
 	pop bc
 	jr c, .doneShowingTeams
-	ld hl, wTrainerScreenX
+	ld hl, wHoFTeamIndex2
 	inc [hl]
 	ld a, [hl]
 	cp b

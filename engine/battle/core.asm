@@ -6298,7 +6298,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	dec de
 	dec de
 	xor a
-	ld [wHPBarMaxHP], a
+	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves ; get moves based on current level
 .loadMovePPs
 	ld hl, wEnemyMonMoves

@@ -867,7 +867,7 @@ LoadSlotMachineTiles: ; 378a8 (d:78a8)
 	ld bc, $00f0
 	call CopyData
 	call EnableLCD
-	ld hl, wTrainerEngageDistance
+	ld hl, wSlotMachineWheel1Offset
 	ld a, $1c
 	ld [hli], a
 	ld [hli], a

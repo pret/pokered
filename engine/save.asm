@@ -4,11 +4,11 @@ LoadSAV: ; 735e8 (1c:75e8)
 	call ClearScreen
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
-	call LoadSAVCheckSum
+	call LoadSAV0
 	jr c, .badsum
-	call LoadSAVCheckSum1
+	call LoadSAV1
 	jr c, .badsum
-	call LoadSAVCheckSum2
+	call LoadSAV2
 	jr c, .badsum
 	ld a, $2 ; good checksum
 	jr .goodsum
@@ -24,14 +24,14 @@ LoadSAV: ; 735e8 (1c:75e8)
 	res 6, [hl]
 	ld a, $1 ; bad checksum
 .goodsum
-	ld [wd088], a ; checksum flag
+	ld [wSaveFileStatus], a
 	ret
 
 FileDataDestroyedText: ; 7361e (1c:761e)
 	TX_FAR _FileDataDestroyedText
 	db "@"
 
-LoadSAVCheckSum: ; 73623 (1c:7623)
+LoadSAV0: ; 73623 (1c:7623)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -43,7 +43,9 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	ld c, a
 	ld a, [sMainDataCheckSum] ; SAV's checksum
 	cp c
-	jp z, .Func_73652
+	jp z, .checkSumsMatched
+
+; If the computed checksum didn't match the saved on, try again.
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName
 	call SAVCheckSum
@@ -52,7 +54,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	cp c
 	jp nz, SAVBadCheckSum
 
-.Func_73652 ; 73652 (1c:7652)
+.checkSumsMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, 11
@@ -76,7 +78,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 	and a
 	jp SAVGoodChecksum
 
-LoadSAVCheckSum1: ; 73690 (1c:7690)
+LoadSAV1: ; 73690 (1c:7690)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -96,7 +98,7 @@ LoadSAVCheckSum1: ; 73690 (1c:7690)
 	and a
 	jp SAVGoodChecksum
 
-LoadSAVCheckSum2: ; 736bd (1c:76bd)
+LoadSAV2: ; 736bd (1c:76bd)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -129,10 +131,11 @@ SAVGoodChecksum: ; 736f8 (1c:76f8)
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73701: ; 73701 (1c:7701)
-	call LoadSAVCheckSum
-	call LoadSAVCheckSum1
-	jp LoadSAVCheckSum2
+LoadSAVIgnoreBadCheckSum: ; 73701 (1c:7701)
+; unused function that loads save data and ignores bad checksums
+	call LoadSAV0
+	call LoadSAV1
+	jp LoadSAV2
 
 SaveSAV: ; 7370a (1c:770a)
 	callba PrintSaveScreenText
@@ -140,7 +143,7 @@ SaveSAV: ; 7370a (1c:770a)
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
 	ret nz
-	ld a,[wd088]
+	ld a,[wSaveFileStatus]
 	dec a
 	jr z,.save
 	call SAVCheckRandomID
@@ -270,14 +273,14 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 
 SaveSAVtoSRAM: ; 73848 (1c:7848)
 	ld a, $2
-	ld [wd088], a
+	ld [wSaveFileStatus], a
 	call SaveSAVtoSRAM0
 	call SaveSAVtoSRAM1
 	jp SaveSAVtoSRAM2
 
 SAVCheckSum: ; 73856 (1c:7856)
 ;Check Sum (result[1 byte] is complemented)
-	ld d, $0
+	ld d, 0
 .loop
 	ld a, [hli]
 	add d
@@ -290,11 +293,11 @@ SAVCheckSum: ; 73856 (1c:7856)
 	cpl
 	ret
 
-Func_73863: ; 73863 (1c:7863)
+CalcIndividualBoxCheckSums: ; 73863 (1c:7863)
 	ld hl, sBox1 ; sBox7
-	ld de, sBoxes1CheckSum2 ; sBoxes2CheckSum2
+	ld de, sBank2IndividualBoxChecksums ; sBank3IndividualBoxChecksums
 	ld b, NUM_BOXES / 2
-.asm_7386b
+.loop
 	push bc
 	push de
 	ld bc, wBoxMonNicksEnd - W_NUMINBOX
@@ -304,21 +307,23 @@ Func_73863: ; 73863 (1c:7863)
 	inc de
 	pop bc
 	dec b
-	jr nz, .asm_7386b
+	jr nz, .loop
 	ret
 
-Func_7387b: ; 7387b (1c:787b)
-	ld hl, PointerTable_73895
+GetBoxSRAMLocation: ; 7387b (1c:787b)
+; in: a = box num
+; out: b = box SRAM bank, hl = pointer to start of box
+	ld hl, BoxSRAMPointerTable
 	ld a, [wCurrentBoxNum]
 	and $7f
 	cp NUM_BOXES / 2
-	ld b, $2
-	jr c, .asm_7388c
+	ld b, 2
+	jr c, .next
 	inc b
 	sub NUM_BOXES / 2
-.asm_7388c
+.next
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -326,7 +331,7 @@ Func_7387b: ; 7387b (1c:787b)
 	ld l, a
 	ret
 
-PointerTable_73895: ; 73895 (1c:7895)
+BoxSRAMPointerTable: ; 73895 (1c:7895)
 	dw sBox1 ; sBox7
 	dw sBox2 ; sBox8
 	dw sBox3 ; sBox9
@@ -342,9 +347,9 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	and a
 	ret nz ; return if No was chosen
 	ld hl, wCurrentBoxNum
-	bit 7, [hl]
-	call z, Func_73a29
-	call Func_7393f
+	bit 7, [hl] ; is it the first time player is changing the box?
+	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
+	call DisplayChangeBoxMenu
 	call UpdateSprites
 	ld hl, hFlags_0xFFF6
 	set 1, [hl]
@@ -353,17 +358,17 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	res 1, [hl]
 	bit 1, a
 	ret nz
-	call Func_7387b
+	call GetBoxSRAMLocation
 	ld e, l
 	ld d, h
 	ld hl, W_NUMINBOX
-	call Func_7390e
+	call CopyBoxToOrFromSRAM ; copy old box from WRAM to SRAM
 	ld a, [wCurrentMenuItem]
 	set 7, a
 	ld [wCurrentBoxNum], a
-	call Func_7387b
+	call GetBoxSRAMLocation
 	ld de, W_NUMINBOX
-	call Func_7390e
+	call CopyBoxToOrFromSRAM ; copy new box from SRAM to WRAM
 	ld hl, W_MAPTEXTPTR
 	ld de, wChangeBoxSavedMapTextPointer
 	ld a, [hli]
@@ -384,7 +389,8 @@ WhenYouChangeBoxText: ; 73909 (1c:7909)
 	TX_FAR _WhenYouChangeBoxText
 	db "@"
 
-Func_7390e: ; 7390e (1c:790e)
+CopyBoxToOrFromSRAM: ; 7390e (1c:790e)
+; copy an entire box from hl to de with b as the SRAM bank
 	push hl
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
@@ -395,30 +401,33 @@ Func_7390e: ; 7390e (1c:790e)
 	ld bc, wBoxMonNicksEnd - W_NUMINBOX
 	call CopyData
 	pop hl
+
+; mark the memory that the box was copied from as am empty box
 	xor a
 	ld [hli], a
 	dec a
 	ld [hl], a
+
 	ld hl, sBox1 ; sBox7
-	ld bc, sBoxes1CheckSum - sBox1
+	ld bc, sBank2AllBoxesChecksum - sBox1
 	call SAVCheckSum
-	ld [sBoxes1CheckSum], a ; sBoxes2CheckSum
-	call Func_73863
+	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
+	call CalcIndividualBoxCheckSums
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_7393f: ; 7393f (1c:793f)
+DisplayChangeBoxMenu: ; 7393f (1c:793f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $b
+	ld a, 11
 	ld [wMaxMenuItem], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemY], a
-	ld a, $c
+	ld a, 12
 	ld [wTopMenuItemX], a
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
@@ -427,14 +436,14 @@ Func_7393f: ; 7393f (1c:793f)
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	coord hl, 0, 0
-	ld b, $2
-	ld c, $9
+	ld b, 2
+	ld c, 9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
 	coord hl, 11, 0
-	ld b, $c
-	ld c, $7
+	ld b, 12
+	ld c, 7
 	call TextBoxBorder
 	ld hl, hFlags_0xFFF6
 	set 2, [hl]
@@ -446,37 +455,37 @@ Func_7393f: ; 7393f (1c:793f)
 	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
-	jr c, .asm_739a6
+	jr c, .singleDigitBoxNum
 	sub 9
 	coord hl, 8, 2
 	ld [hl], "1"
 	add "0"
-	jr .asm_739a8
-.asm_739a6
+	jr .next
+.singleDigitBoxNum
 	add "1"
-.asm_739a8
+.next
 	Coorda 9, 2
 	coord hl, 1, 2
 	ld de, BoxNoText
 	call PlaceString
-	call Func_73a84
+	call GetMonCountsForAllBoxes
 	coord hl, 18, 1
-	ld de, wWhichTrade
+	ld de, wBoxMonCounts
 	ld bc, SCREEN_WIDTH
 	ld a, $c
-.asm_739c2
+.loop
 	push af
 	ld a, [de]
-	and a
-	jr z, .asm_739c9
-	ld [hl], $78
-.asm_739c9
+	and a ; is the box empty?
+	jr z, .skipPlacingPokeball
+	ld [hl], $78 ; place pokeball tile next to box name if box not empty
+.skipPlacingPokeball
 	add hl, bc
 	inc de
 	pop af
 	dec a
-	jr nz, .asm_739c2
-	ld a, $1
+	jr nz, .loop
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
@@ -501,51 +510,54 @@ BoxNames: ; 739d9 (1c:79d9)
 BoxNoText: ; 73a21 (1c:7a21)
 	db "BOX No.@"
 
-Func_73a29: ; 73a29 (1c:7a29)
+EmptyAllSRAMBoxes: ; 73a29 (1c:7a29)
+; marks all boxes in SRAM as empty (initialisation for the first time the
+; player changes the box)
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
-	ld a, $2
+	ld a, 2
 	ld [MBC1SRamBank], a
-	call Func_73a4b
-	ld a, $3
+	call EmptySRAMBoxesInBank
+	ld a, 3
 	ld [MBC1SRamBank], a
-	call Func_73a4b
+	call EmptySRAMBoxesInBank
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73a4b: ; 73a4b (1c:7a4b)
+EmptySRAMBoxesInBank: ; 73a4b (1c:7a4b)
+; marks every box in the current SRAM bank as empty
 	ld hl, sBox1 ; sBox7
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox2 ; sBox8
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox3 ; sBox9
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox4 ; sBox10
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox5 ; sBox11
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox6 ; sBox12
-	call Func_73a7f
+	call EmptySRAMBox
 	ld hl, sBox1 ; sBox7
-	ld bc, sBoxes1CheckSum - sBox1
+	ld bc, sBank2AllBoxesChecksum - sBox1
 	call SAVCheckSum
-	ld [sBoxes1CheckSum], a ; sBoxes2CheckSum
-	call Func_73863
+	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
+	call CalcIndividualBoxCheckSums
 	ret
 
-Func_73a7f: ; 73a7f (1c:7a7f)
+EmptySRAMBox: ; 73a7f (1c:7a7f)
 	xor a
 	ld [hli], a
 	dec a
 	ld [hl], a
 	ret
 
-Func_73a84: ; 73a84 (1c:7a84)
-	ld hl, wWhichTrade
+GetMonCountsForAllBoxes: ; 73a84 (1c:7a84)
+	ld hl, wBoxMonCounts
 	push hl
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
@@ -553,24 +565,27 @@ Func_73a84: ; 73a84 (1c:7a84)
 	ld [MBC1SRamBankingMode], a
 	ld a, $2
 	ld [MBC1SRamBank], a
-	call Func_73ab8
+	call GetMonCountsForBoxesInBank
 	ld a, $3
 	ld [MBC1SRamBank], a
-	call Func_73ab8
+	call GetMonCountsForBoxesInBank
 	xor a
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	pop hl
+
+; copy the count for the current box from WRAM
 	ld a, [wCurrentBoxNum]
 	and $7f
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [W_NUMINBOX]
 	ld [hl], a
+
 	ret
 
-Func_73ab8: ; 73ab8 (1c:7ab8)
+GetMonCountsForBoxesInBank: ; 73ab8 (1c:7ab8)
 	ld a, [sBox1] ; sBox7
 	ld [hli], a
 	ld a, [sBox2] ; sBox8
@@ -646,7 +661,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
-	ld a, [wWhichTrade]
+	ld a, [wHoFTeamIndex]
 	call AddNTimes
 	ld de, wcc5b
 	ld bc, HOF_TEAM

@@ -1,13 +1,16 @@
 _GivePokemon: ; 4fda5 (13:7da5)
+; returns success in carry
+; and whether the mon was added to the party in [wAddedToParty]
 	call EnableAutoTextBoxDrawing
 	xor a
-	ld [wccd3], a
+	ld [wAddedToParty], a
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	jr c, .asm_4fe01
+	jr c, .addToParty
 	ld a, [W_NUMINBOX]
 	cp MONS_PER_BOX
-	jr nc, .asm_4fdf9
+	jr nc, .boxFull
+; add to box
 	xor a
 	ld [W_ENEMYBATTSTATUS3], a
 	ld a, [wcf91]
@@ -19,32 +22,32 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
-	jr c, .asm_4fdec
+	jr c, .singleDigitBoxNum
 	sub 9
 	ld [hl], "1"
 	inc hl
 	add "0"
-	jr .asm_4fdee
-.asm_4fdec
+	jr .next
+.singleDigitBoxNum
 	add "1"
-.asm_4fdee
+.next
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, SetToBoxText
 	call PrintText
 	scf
 	ret
-.asm_4fdf9
+.boxFull
 	ld hl, BoxIsFullText
 	call PrintText
 	and a
 	ret
-.asm_4fe01
+.addToParty
 	call SetPokedexOwnedFlag
 	call AddPartyMon
-	ld a, $1
+	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld [wccd3], a
+	ld [wAddedToParty], a
 	scf
 	ret
 

@@ -55,7 +55,7 @@ KabutopsFossilText: ; 5dbd4 (17:5bd4)
 DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon interal id number
-	ld a, $1
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
@@ -85,7 +85,7 @@ PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	call PrintPredefTextID
 	ret
 
@@ -310,7 +310,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.

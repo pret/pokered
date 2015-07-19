@@ -25,51 +25,51 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	TX_ASM
 	ld a, [wd7c6]
 	add a
-	jp c, .asm_49353
+	jp c, .alreadyBoughtMagikarp
 	ld hl, MtMoonPokecenterText_4935c
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jp nz, .asm_4934e
+	jp nz, .choseNo
 	ld [hMoney], a
 	ld [hMoney + 2], a
 	ld a, $5
 	ld [hMoney + 1], a
 	call HasEnoughMoney
-	jr nc, .asm_faa09
+	jr nc, .enoughMoney
 	ld hl, MtMoonPokecenterText_49366
-	jr .asm_49356
-.asm_faa09
+	jr .printText
+.enoughMoney
 	ld bc,(MAGIKARP << 8) | 5
 	call GivePokemon
-	jr nc, .asm_49359
+	jr nc, .done
 	xor a
-	ld [wWhichTrade], a
-	ld [wTrainerFacingDirection], a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
 	ld a, $5
-	ld [wTrainerEngageDistance], a
-	ld hl, wTrainerFacingDirection
+	ld [wPriceTemp + 1], a
+	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wd7c6
 	set 7, [hl]
-	jr .asm_49359
-.asm_4934e
+	jr .done
+.choseNo
 	ld hl, MtMoonPokecenterText_49361
-	jr .asm_49356
-.asm_49353
+	jr .printText
+.alreadyBoughtMagikarp
 	ld hl, MtMoonPokecenterText_4936b
-.asm_49356
+.printText
 	call PrintText
-.asm_49359
+.done
 	jp TextScriptEnd
 
 MtMoonPokecenterText_4935c: ; 4935c (12:535c)

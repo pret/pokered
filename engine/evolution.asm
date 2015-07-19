@@ -20,11 +20,11 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a
-	ld a, [wHPBarMaxHP]
+	ld a, [wEvoOldSpecies]
 	ld [wcf1d], a
 	ld c, $0
 	call EvolutionSetWholeScreenPalette
-	ld a, [wHPBarMaxHP + 1]
+	ld a, [wEvoNewSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
 	call Evolution_LoadPic
@@ -32,13 +32,13 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld hl, vBackPic
 	ld bc, 7 * 7
 	call CopyVideoData
-	ld a, [wHPBarMaxHP]
+	ld a, [wEvoOldSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
 	call Evolution_LoadPic
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, [wHPBarMaxHP]
+	ld a, [wEvoOldSpecies]
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
@@ -49,23 +49,23 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld c, $1
 	call EvolutionSetWholeScreenPalette
 	ld bc, $110
-.asm_7be63
+.animLoop
 	push bc
 	call Evolution_CheckForCancel
 	jr c, .evolutionCancelled
-	call Func_7bec2
+	call Evolution_BackAndForthAnim
 	pop bc
 	inc b
 	dec c
 	dec c
-	jr nz, .asm_7be63
+	jr nz, .animLoop
 	xor a
-	ld [wHPBarOldHP + 1], a
+	ld [wEvoCancelled], a
 	ld a, $31
-	ld [wHPBarOldHP], a
-	call Func_7bed6
-	ld a, [wHPBarMaxHP + 1]
-.afterCancellation
+	ld [wEvoMonTileOffset], a
+	call Evolution_ChangeMonPic ; show the new species pic
+	ld a, [wEvoNewSpecies]
+.done
 	ld [wcf1d], a
 	ld a, $ff
 	ld [wc0ee], a
@@ -81,17 +81,17 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	pop bc
 	pop de
 	pop hl
-	ld a, [wHPBarOldHP + 1]
+	ld a, [wEvoCancelled]
 	and a
 	ret z
 	scf
 	ret
 .evolutionCancelled
 	pop bc
-	ld a, $1
-	ld [wHPBarOldHP + 1], a
-	ld a, [wHPBarMaxHP]
-	jr .afterCancellation
+	ld a, 1
+	ld [wEvoCancelled], a
+	ld a, [wEvoOldSpecies]
+	jr .done
 
 EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
 	ld b, $b
@@ -102,37 +102,38 @@ Evolution_LoadPic: ; 7beb9 (1e:7eb9)
 	coord hl, 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
-Func_7bec2: ; 7bec2 (1e:7ec2)
+Evolution_BackAndForthAnim: ; 7bec2 (1e:7ec2)
+; show the mon change back and forth between the new and old species b times
 	ld a, $31
-	ld [wHPBarOldHP], a
-	call Func_7bed6
-	ld a, $cf
-	ld [wHPBarOldHP], a
-	call Func_7bed6
+	ld [wEvoMonTileOffset], a
+	call Evolution_ChangeMonPic
+	ld a, -$31
+	ld [wEvoMonTileOffset], a
+	call Evolution_ChangeMonPic
 	dec b
-	jr nz, Func_7bec2
+	jr nz, Evolution_BackAndForthAnim
 	ret
 
-Func_7bed6: ; 7bed6 (1e:7ed6)
+Evolution_ChangeMonPic: ; 7bed6 (1e:7ed6)
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 7, 2
-	ld bc, $707
-	ld de, $d
-.asm_7bee3
+	lb bc, 7, 7
+	ld de, SCREEN_WIDTH - 7
+.loop
 	push bc
-.asm_7bee4
-	ld a, [wHPBarOldHP]
+.innerLoop
+	ld a, [wEvoMonTileOffset]
 	add [hl]
 	ld [hli], a
 	dec c
-	jr nz, .asm_7bee4
+	jr nz, .innerLoop
 	pop bc
 	add hl, de
 	dec b
-	jr nz, .asm_7bee3
-	ld a, $1
+	jr nz, .loop
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	pop bc

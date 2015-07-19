@@ -34,7 +34,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	ld hl, .coordsData_449f9
 	call CheckBoulderCoords
 	jp nc, .asm_449fe
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_449dc
 	ld hl, wd126
@@ -60,11 +60,11 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	db $FF
 
 .asm_449fe
-	ld a, $c2
+	ld a, VICTORY_ROAD_2
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, .coordsData_449f9
-	call Func_46981
-	ld a, [wWhichTrade]
+	call IsPlayerOnDungeonWarp
+	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_44a1b
 	ld hl, wd72d

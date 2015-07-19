@@ -19,9 +19,9 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld [W_OPTIONS], a
 	pop af
 	ld [wLetterPrintingDelayFlags], a
-	ld a, [wd08a]
+	ld a, [wOptionsInitialized]
 	and a
-	call z, Func_5bff
+	call z, InitOptions
 	ld hl, NintenText
 	ld de, wPlayerName
 	ld bc, $b

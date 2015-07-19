@@ -424,6 +424,10 @@ wNumStepsToTake:: ; cca1
 wRLEByteCount:: ; ccd2
 	ds 1
 
+wAddedToParty:: ; ccd3
+; 0 = not added
+; 1 = added
+
 wSimulatedJoypadStatesEnd:: ; ccd3
 ; this is the end of the joypad states
 ; the list starts above this address and extends downwards in memory until here
@@ -431,7 +435,13 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 
 wParentMenuItem:: ; ccd3
 
-wccd3:: ds 1 ; used in battle, pokemon, PC and game corner stuff
+wCanEvolveFlags:: ; ccd3
+; 1 flag for each party member indicating whether it can evolve
+; The purpose of these flags is to track which mons levelled up during the
+; current battle at the end of the battle when evolution occurs.
+; Other methods of evolution simply set it by calling TryEvolvingMon.
+	ds 1
+
 wForceEvolution::
 wccd4:: ds 1 ; has a direct reference for simulated joypad stuff in vermillion and seafoam
 
@@ -634,9 +644,33 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wHoFTeamIndex:: ; cd3d
+
+wSSAnneSmokeDriftAmount:: ; cd3d
+; multiplied by 16 to get the number of times to go right by 2 pixels
+
+wRivalStarterTemp:: ; cd3d
+
+wBoxMonCounts:: ; cd3d
+; 12 bytes
+; array of the number of mons in each box
+
+wDexMaxSeenMon:: ; cd3d
+
+wPPRestoreItem:: ; cd3d
+
+wWereAnyMonsAsleep:: ; cd3d
+
+wCanPlaySlots:: ; cd3d
+
+wNumShakes:: ; cd3d
+
+wDayCareStartLevel:: ; cd3d
+; the level of the mon at the time it entered day care
+
 wWhichBadge:: ; cd3d
 
-wMuseumPriceTemp:: ; cd3d
+wPriceTemp:: ; cd3d
 ; 3-byte BCD number
 
 wTitleMonSpecies:: ; cd3d
@@ -701,6 +735,12 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 	ds 1
 
+wSSAnneSmokeX:: ; cd3e
+
+wRivalStarterBallSpriteIndex:: ; cd3e
+
+wDayCareNumLevelsGrown:: ; cd3e
+
 wOptionsBattleAnimCursorX:: ; cd3e
 
 wTrainerInfoTextBoxWidth:: ; cd3e
@@ -732,6 +772,8 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wJigglypuffFacingDirections:: ; cd3f
 
 wOptionsBattleStyleCursorX:: ; cd3f
 
@@ -773,6 +815,10 @@ wHiddenObjectY:: ; cd40
 
 wTrainerScreenY:: ; cd40
 	ds 1
+
+wHoFTeamIndex2:: ; cd41
+
+wHiddenItemOrCoinsIndex:: ; cd41
 
 wTradedPlayerMonOT:: ; cd41
 
@@ -962,16 +1008,32 @@ wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
 	ds 20 * 18
 
+wEvoOldSpecies:: ; cee9
+
 wBuffer:: ; cee9
 ; Temporary storage area of 30 bytes.
 
 wTownMapCoords:: ; cee9
 ; lower nybble is x, upper nybble is y
 
+wLearningMovesFromDayCare:: ; cee9
+; whether WriteMonMoves is being used to make a mon learn moves from day care
+; non-zero if so
+
 wHPBarMaxHP:: ; cee9
-	ds 2
+	ds 1
+
+wEvoNewSpecies:: ; ceea
+	ds 1
+
+wEvoMonTileOffset:: ; ceeb
+
 wHPBarOldHP:: ; ceeb
-	ds 2
+	ds 1
+
+wEvoCancelled:: ; ceec
+	ds 1
+
 wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
@@ -1453,7 +1515,10 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-wd088:: ds 1 ; savefile checksum (if file is corrupted)
+wSaveFileStatus::
+; 1 = no save file or save file is corrupted
+; 2 = save file exists and no corruption has been detected
+	ds 1
 
 W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
@@ -1461,6 +1526,8 @@ W_NUMFBTILES:: ; d089
 
 wTradedMonMovingRight:: ; d08a
 ; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
+
+wOptionsInitialized:: ; d08a
 
 wd08a:: ds 1 ; used with sprites and displaying the option menu on the main menu screen?
 
@@ -2079,6 +2146,8 @@ wBoxItems:: ; d53b
 	ds 1 ; end
 
 wCurrentBoxNum:: ; d5a0
+; bits 0-6: box number
+; bit 7: whether the player has changed boxes before
 	ds 2
 
 wNumHoFTeams:: ; d5a2
@@ -2319,8 +2388,11 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 
 	ds 134
 
-wd6f0:: ds 14 ; flags for hidden items?
-wd6fe:: ds 2 ; flags for hidden coins?
+wObtainedHiddenItemsFlags::
+	ds 14
+
+wObtainedHiddenCoinsFlags::
+	ds 2
 
 wWalkBikeSurfState:: ; d700
 ; $00 = walking

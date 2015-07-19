@@ -231,18 +231,24 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	pop af
 	ld b,a
 	call GivePokemon
+
+; If either the party or box was full, wait after displaying message.
 	push af
-	ld a,[wccd3] ; XXX is there room?
+	ld a,[wAddedToParty]
 	and a
 	call z,WaitForTextScrollButtonPress
 	pop af
+
+; If the mon couldn't be given to the player (because both the party and box
+; were full), return without subtracting coins.
 	ret nc
+
 .SubtractCoins
 	call LoadCoinsToSubtract
 	ld hl,hCoins + 1
 	ld de,wPlayerCoins + 1
 	ld c,$02 ; how many bytes
-	predef SubBCDPredef ; subtract coins (BCD daa operations)
+	predef SubBCDPredef
 	jp PrintPrizePrice
 .BagFull
 	ld hl,PrizeRoomBagIsFullTextPtr

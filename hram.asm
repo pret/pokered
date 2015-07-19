@@ -90,6 +90,8 @@ hNPCSpriteOffset EQU $FF95
 ; temp value used when swapping bytes
 hSwapTemp EQU $FF95
 
+hExperience EQU $FF96 ; 3 bytes, big endian
+
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
@@ -260,6 +262,8 @@ hDivisor2  EQU $FFE6
 hQuotient2 EQU $FFE7
 
 hSpriteVRAMSlotAndFacing EQU $FFE9
+
+hCoordsInFrontOfPlayerMatch EQU $FFEA
 
 hSpriteAnimFrameCounter EQU $FFEA
 
