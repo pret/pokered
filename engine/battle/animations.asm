@@ -796,9 +796,9 @@ DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
 	dec a
 	ret nz
 ; if it's the end of the ball shaking subanimation, check if more shakes are left and restart the subanimation
-	ld a,[wWhichTrade] ; number of shakes
+	ld a,[wNumShakes] ; number of shakes
 	dec a ; decrement number of shakes
-	ld [wWhichTrade],a
+	ld [wNumShakes],a
 	ret z
 ; if there are shakes left, restart the subanimation
 	ld a,[W_SUBANIMSUBENTRYADDR]
@@ -1998,11 +1998,11 @@ AnimationWavyScreen: ; 79666 (1e:5666)
 	ret
 
 Func_796ae: ; 796ae (1e:56ae)
-	ld a, [$ff41]
+	ld a, [rSTAT]
 	and $3
 	jr nz, Func_796ae
 	ld a, [hl]
-	ld [$ff43], a
+	ld [rSCX], a
 	inc hl
 	ld a, [hl]
 	cp d
@@ -2895,7 +2895,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	; store these for later
 	ld a,b
 	and a,$F
-	ld [wWhichTrade],a
+	ld [wNumShakes],a
 
 	ld hl,.PokeBallAnimations
 	; choose which toss animation to use

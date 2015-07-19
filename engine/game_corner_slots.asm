@@ -7,7 +7,7 @@ StartSlotMachine: ; 37e2d (d:7e2d)
 	cp $ff
 	jr z, .printSomeonesKeys
 	callba AbleToPlaySlotsCheck
-	ld a, [wHiddenObjectFunctionArgument]
+	ld a, [wCanPlaySlots]
 	and a
 	ret z
 	ld a, [wLuckySlotHiddenObjectIndex]

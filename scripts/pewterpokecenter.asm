@@ -26,39 +26,45 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	ld c, 32
 	call DelayFrames
 	ld hl, JigglypuffFacingDirections
-	ld de, wTrainerFacingDirection
-	ld bc, $0004
+	ld de, wJigglypuffFacingDirections
+	ld bc, 4
 	call CopyData
-	ld a, [wSpriteStateData1 + $32]
-	ld hl, wTrainerFacingDirection
-.asm_5c5c3
+
+	ld a, [wSpriteStateData1 + 3 * $10 + $2]
+	ld hl, wJigglypuffFacingDirections
+.findMatchingFacingDirectionLoop
 	cp [hl]
 	inc hl
-	jr nz, .asm_5c5c3
+	jr nz, .findMatchingFacingDirectionLoop
 	dec hl
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
 	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
-.asm_5c5d1
+.loop
 	ld a, [hl]
-	ld [wSpriteStateData1 + $32], a
+	ld [wSpriteStateData1 + 3 * $10 + $2], a
+
+; rotate the array
 	push hl
-	ld hl, wTrainerFacingDirection
-	ld de, wTrainerEngageDistance
-	ld bc, $0004
+	ld hl, wJigglypuffFacingDirections
+	ld de, wJigglypuffFacingDirections - 1
+	ld bc, 4
 	call CopyData
-	ld a, [wTrainerEngageDistance]
-	ld [wcd42], a
+	ld a, [wJigglypuffFacingDirections - 1]
+	ld [wJigglypuffFacingDirections + 3], a
 	pop hl
+
 	ld c, 24
 	call DelayFrames
+
 	ld a, [wc026]
 	ld b, a
 	ld a, [wc027]
 	or b
-	jr nz, .asm_5c5d1
+	jr nz, .loop
+
 	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic

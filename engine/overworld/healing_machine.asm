@@ -14,7 +14,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld [rOBP1], a
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
-	call Func_70503
+	call CopyHealingMachineOAM
 	ld a, $4
 	ld [wMusicHeaderPointer], a
 	ld a, $ff
@@ -27,7 +27,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld a, [wPartyCount]
 	ld b, a
 .asm_7046e
-	call Func_70503
+	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
 	call PlaySound
 	ld c, 30
@@ -87,7 +87,8 @@ FlashSprite8Times: ; 704f3 (1c:44f3)
 	jr nz, .loop
 	ret
 
-Func_70503: ; 70503 (1c:4503)
+CopyHealingMachineOAM: ; 70503 (1c:4503)
+; copy one OAM entry and advance the pointers
 	ld a, [de]
 	inc de
 	ld [hli], a

@@ -34,7 +34,7 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 	ld hl, CoordsData_467fe
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $3
 	jr nc, .asm_467e6
 	ld a, $40
@@ -81,7 +81,7 @@ SeafoamIslands5Script2: ; 46816 (11:6816)
 	call ArePlayerCoordsInArray
 	ld a, $0
 	jr nc, .asm_46849
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_46837
 	ld de, RLEMovementData_46859

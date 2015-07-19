@@ -60,7 +60,7 @@ LanceScript0: ; 5a305 (16:6305)
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ld [hJoyHeld], a
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1

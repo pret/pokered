@@ -142,7 +142,7 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [wcf0d], a
 	cp $1
 	jr z, .asm_51c6c

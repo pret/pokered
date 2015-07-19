@@ -57,15 +57,15 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld bc, $0078
 	ld a, $14
 	call FillMemory
-	ld a, $1
-	ld [$ffba], a
+	ld a, 1
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
-	ld [$ffba], a
-	ld [wWhichTrade], a
-	ld [$ff49], a
-	ld a, $58
-	ld [wTrainerEngageDistance], a
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [wSSAnneSmokeDriftAmount], a
+	ld [rOBP1], a
+	ld a, 88
+	ld [wSSAnneSmokeX], a
 	ld hl, wMapViewVRAMPointer
 	ld c, [hl]
 	inc hl
@@ -88,11 +88,11 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	push hl
 	push de
 	call ScheduleEastColumnRedraw
-	call VermilionDock_1dc59
+	call VermilionDock_EmitSmokePuff
 	pop de
 	ld b, $10
 .asm_1dc11
-	call VermilionDock_1dc42
+	call VermilionDock_AnimSmokePuffDriftRight
 	ld c, $8
 .asm_1dc16
 	call VermilionDock_1dc7c
@@ -105,7 +105,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	dec e
 	jr nz, .asm_1dbfa
 	xor a
-	ld [$ff4a], a
+	ld [rWY], a
 	ld [hWY], a
 	call VermilionDock_1dc94
 	ld a, $90
@@ -122,33 +122,34 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	dec [hl]
 	ret
 
-VermilionDock_1dc42: ; 1dc42 (7:5c42)
+VermilionDock_AnimSmokePuffDriftRight: ; 1dc42 (7:5c42)
 	push bc
 	push de
 	ld hl, wOAMBuffer + $11
-	ld a, [wWhichTrade]
+	ld a, [wSSAnneSmokeDriftAmount]
 	swap a
 	ld c, a
-	ld de, $0004
-.asm_1dc50
+	ld de, 4
+.loop
 	inc [hl]
 	inc [hl]
 	add hl, de
 	dec c
-	jr nz, .asm_1dc50
+	jr nz, .loop
 	pop de
 	pop bc
 	ret
 
-VermilionDock_1dc59: ; 1dc59 (7:5c59)
-	ld a, [wTrainerEngageDistance]
-	sub $10
-	ld [wTrainerEngageDistance], a
+VermilionDock_EmitSmokePuff: ; 1dc59 (7:5c59)
+; new smoke puff above the S.S. Anne's front smokestack
+	ld a, [wSSAnneSmokeX]
+	sub 16
+	ld [wSSAnneSmokeX], a
 	ld c, a
-	ld b, $64
-	ld a, [wWhichTrade]
+	ld b, 100 ; Y
+	ld a, [wSSAnneSmokeDriftAmount]
 	inc a
-	ld [wWhichTrade], a
+	ld [wSSAnneSmokeDriftAmount], a
 	ld a, $1
 	ld de, VermilionDockOAMBlock
 	call WriteOAMBlock
@@ -171,7 +172,7 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 	cp l
 	jr nz, .asm_1dc86
 	ld a, h
-	ld [$ff43], a
+	ld [rSCX], a
 .asm_1dc8e
 	ld a, [rLY]
 	cp h

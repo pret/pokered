@@ -328,10 +328,10 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	ld [$fff9],a
 ; send RESET signal (P14=LOW, P15=LOW)
 	xor a
-	ld [$ff00],a
+	ld [rJOYP],a
 ; set P14=HIGH, P15=HIGH
 	ld a,$30
-	ld [$ff00],a
+	ld [rJOYP],a
 ;load length of packets (16 bytes)
 	ld b,$10
 .nextByte
@@ -348,10 +348,10 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; else (if 0th bit is zero) set P14=LOW,P15=HIGH (send bit 0)
 	ld a,$20
 .next0
-	ld [$ff00],a
+	ld [rJOYP],a
 ; must set P14=HIGH,P15=HIGH between each "pulse"
 	ld a,$30
-	ld [$ff00],a
+	ld [rJOYP],a
 ; rotation will put next bit in 0th position (so  we can always use command
 ; "bit 0,d" to fetch the bit that has to be sent)
 	rr d
@@ -362,10 +362,10 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	jr nz,.nextByte
 ; send bit 1 as a "stop bit" (end of parameter data)
 	ld a,$20
-	ld [$ff00],a
+	ld [rJOYP],a
 ; set P14=HIGH,P15=HIGH
 	ld a,$30
-	ld [$ff00],a
+	ld [rJOYP],a
 	xor a
 	ld [$fff9],a
 ; wait for about 70000 cycles
@@ -448,38 +448,38 @@ CheckSGB: ; 7209b (1c:609b)
 	ld [$fff9], a
 	ei
 	call Wait7000
-	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .asm_720fd
 	ld a, $20
-	ld [rJOYP], a ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a ; $ff0
+	ld [rJOYP], a
 	call Wait7000
 	call Wait7000
 	ld a, $10
-	ld [rJOYP], a ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
-	ld a, [rJOYP] ; $ff0
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
 	call Wait7000
 	call Wait7000
-	ld a, [rJOYP] ; $ff0
+	ld a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .asm_720fd

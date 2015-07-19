@@ -254,7 +254,7 @@ GainExperience: ; 5524f (15:524f)
 	ld a, [wd0b5]
 	ld [wd11e], a
 	predef LearnMoveFromLevelUp
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld b, $1

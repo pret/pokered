@@ -111,7 +111,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef InternalClockTradeAnim
 	add_predef TrainerEngage
 	add_predef IndexToPokedex
-	add_predef DisplayPicCenteredOrUpperRight; 3B display pic?
+	add_predef DisplayPicCenteredOrUpperRight
 	add_predef UsedCut
 	add_predef ShowPokedexData
 	add_predef WriteMonMoves
@@ -128,15 +128,15 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
 	add_predef PrintMonType
-	add_predef EmotionBubble; 4C player exclamation
+	add_predef EmotionBubble
 	add_predef EmptyFunc3; return immediately
 	add_predef AskName
 	add_predef PewterGuys
 	add_predef SaveSAVtoSRAM2
-	add_predef LoadSAVCheckSum2
+	add_predef LoadSAV2
 	add_predef LoadSAV
 	add_predef SaveSAVtoSRAM1
-	add_predef DoInGameTradeDialogue ; 54 initiate trade
+	add_predef DoInGameTradeDialogue
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
 	dbw $1E, _LeaveMapAnim ; wrong bank

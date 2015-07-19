@@ -51,7 +51,7 @@ RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
 	ld e,a
 	ld a,[H_SCREENEDGEREDRAWADDR + 1]
 	ld d,a
-	ld c,18 ; screen height
+	ld c,SCREEN_HEIGHT
 .loop1
 	ld a,[hli]
 	ld [de],a

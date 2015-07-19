@@ -71,8 +71,8 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ld [wd11e],a
 	ld a,[wd11e]
 	push af
-	ld a,[wWhichTrade]
-	push af
+	ld a,[wDexMaxSeenMon]
+	push af ; this doesn't need to be preserved
 	ld hl,wPokedexSeen
 	call IsPokemonBitSet
 	ld b,2
@@ -108,7 +108,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	ld b,1
 .exitSideMenu
 	pop af
-	ld [wWhichTrade],a
+	ld [wDexMaxSeenMon],a
 	pop af
 	ld [wd11e],a
 	pop af
@@ -207,7 +207,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	jr .maxSeenPokemonLoop
 .storeMaxSeenPokemon
 	ld a,b
-	ld [wWhichTrade],a ; max seen pokemon
+	ld [wDexMaxSeenMon],a
 .loop
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
@@ -218,7 +218,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld a,[wListScrollOffset]
 	ld [wd11e],a
 	ld d,7
-	ld a,[wWhichTrade]
+	ld a,[wDexMaxSeenMon]
 	cp a,7
 	jr nc,.printPokemonLoop
 	ld d,a
@@ -294,9 +294,9 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	bit 7,a ; was Down pressed?
 	jr z,.checkIfRightPressed
 .downPressed ; scroll down one row
-	ld a,[wWhichTrade]
+	ld a,[wDexMaxSeenMon]
 	cp a,7
-	jp c,.loop
+	jp c,.loop ; can't if the list is shorter than 7
 	sub a,7
 	ld b,a
 	ld a,[wListScrollOffset]
@@ -309,9 +309,9 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	bit 4,a ; was Right pressed?
 	jr z,.checkIfLeftPressed
 .rightPressed ; scroll down 7 rows
-	ld a,[wWhichTrade]
+	ld a,[wDexMaxSeenMon]
 	cp a,7
-	jp c,.loop
+	jp c,.loop ; can't if the list is shorter than 7
 	sub a,6
 	ld b,a
 	ld a,[wListScrollOffset]

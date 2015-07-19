@@ -21,7 +21,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [wc0ef], a
 	ld [wc0f0], a
 
-LoadTitlescreenGraphics: ; 42dd (1:42dd)
+DisplayTitleScreen: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a

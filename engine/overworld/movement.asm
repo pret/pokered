@@ -210,9 +210,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveDown
 	ld de, 2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows down
-	ld de, $100
-
-	ld bc, $400
+	lb de, 1, 0
+	lb bc, 4, SPRITE_FACING_DOWN
 	jr TryWalking
 .notDown
 	cp $80             ; $40 <= a < $80: up (or right)
@@ -223,8 +222,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveUp
 	ld de, -2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows up
-	ld de, $ff00
-	ld bc, $804
+	lb de, -1, 0
+	lb bc, 8, SPRITE_FACING_UP
 	jr TryWalking
 .notUp
 	cp $c0             ; $80 <= a < $c0: left (or up)
@@ -235,8 +234,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveLeft
 	dec hl
 	dec hl             ; move tile pointer two columns left
-	ld de, $ff
-	ld bc, $208
+	lb de, 0, -1
+	lb bc, 2, SPRITE_FACING_LEFT
 	jr TryWalking
 .notLeft              ; $c0 <= a: right (or down)
 	ld a, [wCurSpriteMovement2]
@@ -245,8 +244,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveRight
 	inc hl
 	inc hl             ; move tile pointer two columns right
-	ld de, $1
-	ld bc, $10c
+	lb de, 0, 1
+	lb bc, 1, SPRITE_FACING_RIGHT
 	jr TryWalking
 
 ; changes facing direction by zeroing the movement delta and calling TryWalking

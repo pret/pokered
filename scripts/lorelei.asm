@@ -68,7 +68,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_76206
 	ld hl, wd863

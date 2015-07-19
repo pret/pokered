@@ -297,8 +297,8 @@ StatusScreen2: ; 12b57 (4:6b57)
 	push af
 	xor a
 	ld [hTilesetType], a
-	ld [$ffba], a
-	ld bc, $0005
+	ld [H_AUTOBGTRANSFERENABLED], a
+	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
 	call FillMemory
 	ld hl, wLoadedMonMoves
@@ -307,13 +307,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call CopyData
 	callab FormatMovesString
 	coord hl, 9, 2
-	ld bc, $050a
+	lb bc, 5, 10
 	call ClearScreenArea ; Clear under name
 	coord hl, 19, 3
 	ld [hl], $78
 	coord hl, 0, 8
-	ld b, $8
-	ld c, $12
+	ld b, 8
+	ld c, 18
 	call TextBoxBorder ; Draw move container
 	coord hl, 2, 9
 	ld de, wMovesString
@@ -387,9 +387,9 @@ StatusScreen2: ; 12b57 (4:6b57)
 	jr nz, .PrintPP
 .PPDone
 	coord hl, 9, 3
-	ld de, EXPPointsText
+	ld de, StatusScreenExpText
 	call PlaceString
-	ld a, [wLoadedMonLevel] ; level
+	ld a, [wLoadedMonLevel]
 	push af
 	cp MAX_LEVEL
 	jr z, .Level100
@@ -407,11 +407,11 @@ StatusScreen2: ; 12b57 (4:6b57)
 	coord hl, 12, 4
 	ld bc, $0307
 	call PrintNumber ; exp
-	call .asm_12c86
+	call CalcExpToLevelUp
 	ld de, wLoadedMonExp
 	coord hl, 7, 6
 	ld bc, $0307
-	call PrintNumber
+	call PrintNumber ; exp needed to level up
 	coord hl, 9, 0
 	call StatusScreen_ClearName
 	coord hl, 9, 1
@@ -422,7 +422,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	coord hl, 9, 1
 	call PlaceString
 	ld a, $1
-	ld [$ffba], a
+	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
@@ -433,25 +433,26 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [$ff24], a
 	call GBPalWhiteOut
 	jp ClearScreen
-.asm_12c86 ; This does some magic with lvl/exp?
-	ld a, [wLoadedMonLevel] ; Load level
+
+CalcExpToLevelUp: ; 12c86 (4:6c86)
+	ld a, [wLoadedMonLevel]
 	cp MAX_LEVEL
-	jr z, .asm_12ca7  ; If 100
+	jr z, .atMaxLevel
 	inc a
 	ld d, a
 	callab CalcExperience
 	ld hl, wLoadedMonExp + 2
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	sub [hl]
 	ld [hld], a
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	sbc [hl]
 	ld [hld], a
-	ld a, [$ff96]
+	ld a, [hExperience]
 	sbc [hl]
 	ld [hld], a
 	ret
-.asm_12ca7
+.atMaxLevel
 	ld hl, wLoadedMonExp
 	xor a
 	ld [hli], a
@@ -459,11 +460,9 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [hl], a
 	ret
 
-EXPPointsText: ; 12caf (4:6caf)
-	db "EXP POINTS", $4e
-
-LevelUpText: ; 12cba (4:6cba)
-	db "LEVEL UP@"
+StatusScreenExpText: ; 12caf (4:6caf)
+	db   "EXP POINTS"
+	next "LEVEL UP@"
 
 StatusScreen_ClearName: ; 12cc3 (4:6cc3)
 	ld bc, 10

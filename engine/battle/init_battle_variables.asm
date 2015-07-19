@@ -19,7 +19,7 @@ InitBattleVariables: ; 525af (14:65af)
 	ld hl, wcf1d
 	ld [hli], a
 	ld [hl], a
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld b, $3c
 .loop
 	ld [hli], a

@@ -155,8 +155,8 @@ SafariZoneEntranceAutoWalk:
 	ld bc,3
 	call FillMemory
 	ld hl,.OhAllRightText
-	call Func_3c59
-	ld a,$13
+	call PrintText_NoCreatingTextBox
+	ld a,MONEY_BOX
 	ld a,[$d124]
 	call DisplayTextBoxID
 	ld hl,.CantGive30BallsText

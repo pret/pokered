@@ -1216,11 +1216,11 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,-19
 	add hl,bc ; hl now points to experience
 ; update experience to minimum for new level
-	ld a,[$ff96]
+	ld a,[hExperience]
 	ld [hli],a
-	ld a,[$ff97]
+	ld a,[hExperience + 1]
 	ld [hli],a
-	ld a,[$ff98]
+	ld a,[hExperience + 2]
 	ld [hl],a
 	pop hl
 	ld a,[wWhichPokemon]
@@ -1618,8 +1618,8 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jp PrintText
 .inBattle
 	xor a
-	ld [wWhichTrade],a ; initialize variable that indicates if any pokemon were woken up to zero
-	ld b,~SLP & $FF
+	ld [wWereAnyMonsAsleep],a
+	ld b,~SLP & $ff
 	ld hl,wPartyMon1Status
 	call WakeUpEntireParty
 	ld a,[W_ISINBATTLE]
@@ -1638,7 +1638,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	and b ; remove Sleep status
 	ld [hl],a
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	ld a,[wWhichTrade]
+	ld a,[wWereAnyMonsAsleep]
 	and a ; were any pokemon asleep before playing the flute?
 	ld hl,PlayedFluteNoEffectText
 	jp z,PrintText ; if no pokemon were asleep
@@ -1662,9 +1662,9 @@ ItemUsePokeflute: ; e140 (3:6140)
 ; INPUT:
 ; hl must point to status of first pokemon in party (player's or enemy's)
 ; b must equal ~SLP
-; [wWhichTrade] should be initialized to 0
+; [wWereAnyMonsAsleep] should be initialized to 0
 ; OUTPUT:
-; [wWhichTrade]: set to 1 if any pokemon were asleep
+; [wWereAnyMonsAsleep]: set to 1 if any pokemon were asleep
 WakeUpEntireParty: ; e1e5 (3:61e5)
 	ld de,44
 	ld c,6
@@ -1674,7 +1674,7 @@ WakeUpEntireParty: ; e1e5 (3:61e5)
 	and a,SLP ; is pokemon asleep?
 	jr z,.notAsleep
 	ld a,1
-	ld [wWhichTrade],a ; indicate that a pokemon had to be woken up
+	ld [wWereAnyMonsAsleep],a ; indicate that a pokemon had to be woken up
 .notAsleep
 	pop af
 	and b ; remove Sleep status
@@ -1874,7 +1874,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
-	ld [wWhichTrade],a
+	ld [wPPRestoreItem],a
 .chooseMon
 	xor a
 	ld [wUpdateSpritesEnabled],a
@@ -1884,13 +1884,13 @@ ItemUsePPRestore: ; e31e (3:631e)
 	jr nc,.chooseMove
 	jp .itemNotUsed
 .chooseMove
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ELIXER
 	jp nc,.useElixir ; if Elixir or Max Elixir
 	ld a,$02
 	ld [wMoveMenuType],a
 	ld hl,RaisePPWhichTechniqueText
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER ; is it a PP Up?
 	jr c,.printWhichTechniqueMessage ; if so, print the raise PP message
 	ld hl,RestorePPWhichTechniqueText ; otherwise, print the restore PP message
@@ -1911,7 +1911,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
 	pop hl
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER
 	jr nc,.useEther ; if Ether or Max Ether
 .usePPUp
@@ -1973,7 +1973,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	add hl,bc ; hl now points to move's PP
 	ld a,[wd11e]
 	ld b,a ; b = max PP
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,MAX_ETHER
 	jr z,.fullyRestorePP
 	ld a,[hl] ; move PP
@@ -2005,7 +2005,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	jr .storeNewAmount
 .useElixir
 ; decrement the item ID so that ELIXER becomes ETHER and MAX_ELIXER becomes MAX_ETHER
-	ld hl,wWhichTrade
+	ld hl,wPPRestoreItem
 	dec [hl]
 	dec [hl]
 	xor a
@@ -2701,13 +2701,13 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, a
 	callab CalcExperience
 	pop de
-	ld a, [H_NUMTOPRINT] ; (aliases: H_MULTIPLICAND)
+	ld a, [hExperience]
 	ld [de], a
 	inc de
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	ld [de], a
 	inc de
 	xor a

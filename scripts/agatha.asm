@@ -67,7 +67,7 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld [hJoyHeld], a
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_764b4
 	ld hl, wd865

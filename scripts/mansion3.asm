@@ -65,7 +65,7 @@ Mansion3Script_5225b: ; 5225b (14:625b)
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
