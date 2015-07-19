@@ -15,7 +15,7 @@ Lab1Object: ; 0x75bb3 (size=62)
 	db $4, $11, $5 ; Lab1Text5
 
 	db $1 ; objects
-	object SPRITE_FISHER, $1, $3, FACE, STAY, $1 ; person
+	object SPRITE_FISHER, $1, $3, STAY, NONE, $1 ; person
 
 	; warp-to
 	EVENT_DISP CINNABAR_LAB_1_WIDTH, $7, $2

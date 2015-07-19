@@ -9,15 +9,15 @@ RocketHideout4Object: ; 0x455f1 (size=95)
 	db $0 ; signs
 
 	db $9 ; objects
-	object SPRITE_GIOVANNI, $19, $3, FACE, DOWN, $1, GIOVANNI + $C8, $1
-	object SPRITE_ROCKET, $17, $c, FACE, DOWN, $2, ROCKET + $C8, $10
-	object SPRITE_ROCKET, $1a, $c, FACE, DOWN, $3, ROCKET + $C8, $11
-	object SPRITE_ROCKET, $b, $2, FACE, DOWN, $4, ROCKET + $C8, $12
-	object SPRITE_BALL, $a, $c, FACE, STAY, $5, HP_UP
-	object SPRITE_BALL, $9, $4, FACE, STAY, $6, TM_02
-	object SPRITE_BALL, $c, $14, FACE, STAY, $7, IRON
-	object SPRITE_BALL, $19, $2, FACE, STAY, $8, SILPH_SCOPE
-	object SPRITE_BALL, $a, $2, FACE, STAY, $9, LIFT_KEY
+	object SPRITE_GIOVANNI, $19, $3, STAY, DOWN, $1, GIOVANNI + $C8, $1
+	object SPRITE_ROCKET, $17, $c, STAY, DOWN, $2, ROCKET + $C8, $10
+	object SPRITE_ROCKET, $1a, $c, STAY, DOWN, $3, ROCKET + $C8, $11
+	object SPRITE_ROCKET, $b, $2, STAY, DOWN, $4, ROCKET + $C8, $12
+	object SPRITE_BALL, $a, $c, STAY, NONE, $5, HP_UP
+	object SPRITE_BALL, $9, $4, STAY, NONE, $6, TM_02
+	object SPRITE_BALL, $c, $14, STAY, NONE, $7, IRON
+	object SPRITE_BALL, $19, $2, STAY, NONE, $8, SILPH_SCOPE
+	object SPRITE_BALL, $a, $2, STAY, NONE, $9, LIFT_KEY
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_4_WIDTH, $a, $13 ; ROCKET_HIDEOUT_3

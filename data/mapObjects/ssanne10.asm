@@ -16,17 +16,17 @@ SSAnne10Object: ; 0x61e75 (size=165)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_SAILOR, $0, $d, FACE, DOWN, $1, SAILOR + $C8, $3
-	object SPRITE_SAILOR, $2, $b, FACE, DOWN, $2, SAILOR + $C8, $4
-	object SPRITE_SAILOR, $c, $3, FACE, RIGHT, $3, SAILOR + $C8, $5
-	object SPRITE_SAILOR, $16, $2, FACE, DOWN, $4, SAILOR + $C8, $6
-	object SPRITE_SAILOR, $0, $2, FACE, LEFT, $5, SAILOR + $C8, $7
-	object SPRITE_FISHER2, $0, $4, FACE, LEFT, $6, FISHER + $C8, $2
-	object SPRITE_BLACK_HAIR_BOY_2, $a, $d, FACE, LEFT, $7 ; person
-	object SPRITE_SLOWBRO, $b, $c, FACE, STAY, $8 ; person
-	object SPRITE_BALL, $14, $2, FACE, STAY, $9, ETHER
-	object SPRITE_BALL, $a, $2, FACE, STAY, $a, TM_44
-	object SPRITE_BALL, $c, $b, FACE, STAY, $b, MAX_POTION
+	object SPRITE_SAILOR, $0, $d, STAY, DOWN, $1, SAILOR + $C8, $3
+	object SPRITE_SAILOR, $2, $b, STAY, DOWN, $2, SAILOR + $C8, $4
+	object SPRITE_SAILOR, $c, $3, STAY, LEFT, $3, SAILOR + $C8, $5
+	object SPRITE_SAILOR, $16, $2, STAY, DOWN, $4, SAILOR + $C8, $6
+	object SPRITE_SAILOR, $0, $2, STAY, RIGHT, $5, SAILOR + $C8, $7
+	object SPRITE_FISHER2, $0, $4, STAY, RIGHT, $6, FISHER + $C8, $2
+	object SPRITE_BLACK_HAIR_BOY_2, $a, $d, STAY, RIGHT, $7 ; person
+	object SPRITE_SLOWBRO, $b, $c, STAY, NONE, $8 ; person
+	object SPRITE_BALL, $14, $2, STAY, NONE, $9, ETHER
+	object SPRITE_BALL, $a, $2, STAY, NONE, $a, TM_44
+	object SPRITE_BALL, $c, $b, STAY, NONE, $b, MAX_POTION
 
 	; warp-to
 	EVENT_DISP SS_ANNE_10_WIDTH, $5, $2 ; SS_ANNE_4

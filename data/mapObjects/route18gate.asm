@@ -11,7 +11,7 @@ Route18GateObject: ; 0x49937 (size=50)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GUARD, $4, $1, FACE, DOWN, $1 ; person
+	object SPRITE_GUARD, $4, $1, STAY, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_18_GATE_1F_WIDTH, $4, $0

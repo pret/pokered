@@ -10,7 +10,7 @@ AgathaObject: ; 0x76534 (size=44)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_AGATHA, $5, $2, FACE, DOWN, $1, AGATHA + $C8, $1
+	object SPRITE_AGATHA, $5, $2, STAY, DOWN, $1, AGATHA + $C8, $1
 
 	; warp-to
 	EVENT_DISP AGATHAS_ROOM_WIDTH, $b, $4 ; BRUNOS_ROOM

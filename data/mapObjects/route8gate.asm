@@ -10,7 +10,7 @@ Route8GateObject: ; 0x1e247 (size=42)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GUARD, $2, $1, FACE, DOWN, $1 ; person
+	object SPRITE_GUARD, $2, $1, STAY, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_8_GATE_WIDTH, $3, $0

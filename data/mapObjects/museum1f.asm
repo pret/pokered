@@ -11,11 +11,11 @@ Museum1FObject: ; 0x5c2c1 (size=74)
 	db $0 ; signs
 
 	db $5 ; objects
-	object SPRITE_OAK_AIDE, $c, $4, FACE, RIGHT, $1 ; person
-	object SPRITE_GAMBLER, $1, $4, FACE, STAY, $2 ; person
-	object SPRITE_OAK_AIDE, $f, $2, FACE, DOWN, $3 ; person
-	object SPRITE_OAK_AIDE, $11, $4, FACE, STAY, $4 ; person
-	object SPRITE_OLD_AMBER, $10, $2, FACE, STAY, $5 ; person
+	object SPRITE_OAK_AIDE, $c, $4, STAY, LEFT, $1 ; person
+	object SPRITE_GAMBLER, $1, $4, STAY, NONE, $2 ; person
+	object SPRITE_OAK_AIDE, $f, $2, STAY, DOWN, $3 ; person
+	object SPRITE_OAK_AIDE, $11, $4, STAY, NONE, $4 ; person
+	object SPRITE_OLD_AMBER, $10, $2, STAY, NONE, $5 ; person
 
 	; warp-to
 	EVENT_DISP MUSEUM_1F_WIDTH, $7, $a

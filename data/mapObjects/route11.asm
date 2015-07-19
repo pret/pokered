@@ -12,16 +12,16 @@ Route11Object: ; 0x584e0 (size=127)
 	db $5, $1, $b ; Route11Text11
 
 	db $a ; objects
-	object SPRITE_GAMBLER, $a, $e, FACE, DOWN, $1, GAMBLER + $C8, $1
-	object SPRITE_GAMBLER, $1a, $9, FACE, DOWN, $2, GAMBLER + $C8, $2
-	object SPRITE_BUG_CATCHER, $d, $5, FACE, RIGHT, $3, YOUNGSTER + $C8, $9
-	object SPRITE_BLACK_HAIR_BOY_2, $24, $b, FACE, DOWN, $4, ENGINEER + $C8, $2
-	object SPRITE_BUG_CATCHER, $16, $4, FACE, UP, $5, YOUNGSTER + $C8, $a
-	object SPRITE_GAMBLER, $2d, $7, FACE, DOWN, $6, GAMBLER + $C8, $3
-	object SPRITE_GAMBLER, $21, $3, FACE, UP, $7, GAMBLER + $C8, $4
-	object SPRITE_BUG_CATCHER, $2b, $5, FACE, LEFT, $8, YOUNGSTER + $C8, $b
-	object SPRITE_BLACK_HAIR_BOY_2, $2d, $10, FACE, RIGHT, $9, ENGINEER + $C8, $3
-	object SPRITE_BUG_CATCHER, $16, $c, FACE, UP, $a, YOUNGSTER + $C8, $c
+	object SPRITE_GAMBLER, $a, $e, STAY, DOWN, $1, GAMBLER + $C8, $1
+	object SPRITE_GAMBLER, $1a, $9, STAY, DOWN, $2, GAMBLER + $C8, $2
+	object SPRITE_BUG_CATCHER, $d, $5, STAY, LEFT, $3, YOUNGSTER + $C8, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $24, $b, STAY, DOWN, $4, ENGINEER + $C8, $2
+	object SPRITE_BUG_CATCHER, $16, $4, STAY, UP, $5, YOUNGSTER + $C8, $a
+	object SPRITE_GAMBLER, $2d, $7, STAY, DOWN, $6, GAMBLER + $C8, $3
+	object SPRITE_GAMBLER, $21, $3, STAY, UP, $7, GAMBLER + $C8, $4
+	object SPRITE_BUG_CATCHER, $2b, $5, STAY, RIGHT, $8, YOUNGSTER + $C8, $b
+	object SPRITE_BLACK_HAIR_BOY_2, $2d, $10, STAY, LEFT, $9, ENGINEER + $C8, $3
+	object SPRITE_BUG_CATCHER, $16, $c, STAY, UP, $a, YOUNGSTER + $C8, $c
 
 	; warp-to
 	EVENT_DISP ROUTE_11_WIDTH, $8, $31 ; ROUTE_11_GATE_1F

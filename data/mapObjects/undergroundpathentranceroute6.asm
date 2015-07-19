@@ -9,7 +9,7 @@ UndergroundPathEntranceRoute6Object: ; 0x5d6fe (size=34)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GIRL, $2, $3, FACE, STAY, $1 ; person
+	object SPRITE_GIRL, $2, $3, STAY, NONE, $1 ; person
 
 	; warp-to
 	EVENT_DISP PATH_ENTRANCE_ROUTE_6_WIDTH, $7, $3

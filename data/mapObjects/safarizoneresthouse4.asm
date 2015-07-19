@@ -9,7 +9,7 @@ SafariZoneRestHouse4Object: ; 0x45dd9 (size=38)
 
 	db $3 ; objects
 	object SPRITE_OAK_AIDE, $6, $3, WALK, $2, $1 ; person
-	object SPRITE_WHITE_PLAYER, $3, $4, FACE, STAY, $2 ; person
+	object SPRITE_WHITE_PLAYER, $3, $4, STAY, NONE, $2 ; person
 	object SPRITE_GENTLEMAN, $1, $5, WALK, $1, $3 ; person
 
 	; warp-to

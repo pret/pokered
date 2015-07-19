@@ -8,8 +8,8 @@ Route22Object: ; 0x50022 (size=27)
 	db $b, $7, $3 ; Route22FrontGateText
 
 	db $2 ; objects
-	object SPRITE_BLUE, $19, $5, FACE, STAY, $1 ; person
-	object SPRITE_BLUE, $19, $5, FACE, STAY, $2 ; person
+	object SPRITE_BLUE, $19, $5, STAY, NONE, $1 ; person
+	object SPRITE_BLUE, $19, $5, STAY, NONE, $2 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_22_WIDTH, $5, $8 ; ROUTE_22_GATE

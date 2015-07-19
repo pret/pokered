@@ -11,11 +11,11 @@ RocketHideout2Object: ; 0x450f7 (size=80)
 	db $0 ; signs
 
 	db $5 ; objects
-	object SPRITE_ROCKET, $14, $c, FACE, DOWN, $1, ROCKET + $C8, $d
-	object SPRITE_BALL, $1, $b, FACE, STAY, $2, MOON_STONE
-	object SPRITE_BALL, $10, $8, FACE, STAY, $3, NUGGET
-	object SPRITE_BALL, $6, $c, FACE, STAY, $4, TM_07
-	object SPRITE_BALL, $3, $15, FACE, STAY, $5, SUPER_POTION
+	object SPRITE_ROCKET, $14, $c, STAY, DOWN, $1, ROCKET + $C8, $d
+	object SPRITE_BALL, $1, $b, STAY, NONE, $2, MOON_STONE
+	object SPRITE_BALL, $10, $8, STAY, NONE, $3, NUGGET
+	object SPRITE_BALL, $6, $c, STAY, NONE, $4, TM_07
+	object SPRITE_BALL, $3, $15, STAY, NONE, $5, SUPER_POTION
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_2_WIDTH, $8, $1b ; ROCKET_HIDEOUT_1

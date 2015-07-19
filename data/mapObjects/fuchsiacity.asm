@@ -31,14 +31,14 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 	db $a ; objects
 	object SPRITE_BUG_CATCHER, $a, $c, WALK, $2, $1 ; person
 	object SPRITE_GAMBLER, $1c, $11, WALK, $2, $2 ; person
-	object SPRITE_FISHER2, $1e, $e, FACE, DOWN, $3 ; person
-	object SPRITE_BUG_CATCHER, $18, $8, FACE, UP, $4 ; person
+	object SPRITE_FISHER2, $1e, $e, STAY, DOWN, $3 ; person
+	object SPRITE_BUG_CATCHER, $18, $8, STAY, UP, $4 ; person
 	object SPRITE_CLEFAIRY, $1f, $5, WALK, $0, $5 ; person
-	object SPRITE_BALL, $19, $6, FACE, STAY, $6 ; person
+	object SPRITE_BALL, $19, $6, STAY, NONE, $6 ; person
 	object SPRITE_SLOWBRO, $c, $6, WALK, $2, $7 ; person
 	object SPRITE_SLOWBRO, $1e, $c, WALK, $2, $8 ; person
 	object SPRITE_SEEL, $8, $11, WALK, $0, $9 ; person
-	object SPRITE_OMANYTE, $6, $5, FACE, STAY, $a ; person
+	object SPRITE_OMANYTE, $6, $5, STAY, NONE, $a ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_CITY_WIDTH, $d, $5 ; FUCHSIA_MART

@@ -11,9 +11,9 @@ CopycatsHouse2FObject: ; 0x5cd21 (size=48)
 	db $5 ; objects
 	object SPRITE_BRUNETTE_GIRL, $4, $3, WALK, $0, $1 ; person
 	object SPRITE_BIRD, $4, $6, WALK, $2, $2 ; person
-	object SPRITE_SLOWBRO, $5, $1, FACE, DOWN, $3 ; person
-	object SPRITE_BIRD, $2, $0, FACE, DOWN, $4 ; person
-	object SPRITE_CLEFAIRY, $1, $6, FACE, LEFT, $5 ; person
+	object SPRITE_SLOWBRO, $5, $1, STAY, DOWN, $3 ; person
+	object SPRITE_BIRD, $2, $0, STAY, DOWN, $4 ; person
+	object SPRITE_CLEFAIRY, $1, $6, STAY, RIGHT, $5 ; person
 
 	; warp-to
 	EVENT_DISP COPYCATS_HOUSE_2F_WIDTH, $1, $7 ; COPYCATS_HOUSE_1F

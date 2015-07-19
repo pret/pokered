@@ -11,7 +11,7 @@ Route12GateObject: ; 0x4950e (size=50)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GUARD, $1, $3, FACE, STAY, $1 ; person
+	object SPRITE_GUARD, $1, $3, STAY, NONE, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_12_GATE_1F_WIDTH, $0, $4

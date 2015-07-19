@@ -8,7 +8,7 @@ SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_FISHER, $3, $3, FACE, DOWN, $1 ; person
+	object SPRITE_FISHER, $3, $3, STAY, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_SECRET_HOUSE_WIDTH, $7, $2 ; SAFARI_ZONE_WEST

@@ -12,7 +12,7 @@ BeachHouseObjects: ; 0xf23a4
 	db 1,$d,6
 
 	db 2 ; objects
-	object SPRITE_FISHER, 2, 3, FACE, DOWN, 1 ; surfin' dude
+	object SPRITE_FISHER, 2, 3, STAY, DOWN, 1 ; surfin' dude
 	object $3d, 5, 3, WALK, $01, 2 ; pikachu
 
 	; warp-to

@@ -10,10 +10,10 @@ SSAnne6Object: ; 0x6181b (size=54)
 	object SPRITE_COOK, $1, $8, WALK, $1, $1 ; person
 	object SPRITE_COOK, $5, $8, WALK, $1, $2 ; person
 	object SPRITE_COOK, $9, $7, WALK, $1, $3 ; person
-	object SPRITE_COOK, $d, $6, FACE, STAY, $4 ; person
-	object SPRITE_COOK, $d, $8, FACE, STAY, $5 ; person
-	object SPRITE_COOK, $d, $a, FACE, STAY, $6 ; person
-	object SPRITE_COOK, $b, $d, FACE, UP, $7 ; person
+	object SPRITE_COOK, $d, $6, STAY, NONE, $4 ; person
+	object SPRITE_COOK, $d, $8, STAY, NONE, $5 ; person
+	object SPRITE_COOK, $d, $a, STAY, NONE, $6 ; person
+	object SPRITE_COOK, $b, $d, STAY, UP, $7 ; person
 
 	; warp-to
 	EVENT_DISP SS_ANNE_6_WIDTH, $0, $6 ; SS_ANNE_1

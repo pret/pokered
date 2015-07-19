@@ -8,8 +8,8 @@ CeruleanHouse1Object: ; 0x1d710 (size=32)
 	db $0 ; signs
 
 	db $2 ; objects
-	object SPRITE_OLD_MEDIUM_WOMAN, $5, $4, FACE, RIGHT, $1 ; person
-	object SPRITE_GAMBLER, $1, $2, FACE, STAY, $2 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $5, $4, STAY, LEFT, $1 ; person
+	object SPRITE_GAMBLER, $1, $2, STAY, NONE, $2 ; person
 
 	; warp-to
 	EVENT_DISP CERULEAN_HOUSE_1_WIDTH, $7, $2

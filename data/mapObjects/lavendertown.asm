@@ -19,7 +19,7 @@ LavenderTownObject: ; 0x4402d (size=88)
 
 	db $3 ; objects
 	object SPRITE_LITTLE_GIRL, $f, $9, WALK, $0, $1 ; person
-	object SPRITE_BLACK_HAIR_BOY_1, $9, $a, FACE, STAY, $2 ; person
+	object SPRITE_BLACK_HAIR_BOY_1, $9, $a, STAY, NONE, $2 ; person
 	object SPRITE_BLACK_HAIR_BOY_2, $8, $7, WALK, $2, $3 ; person
 
 	; warp-to

@@ -21,11 +21,11 @@ CeladonMart3Object: ; 0x482c4 (size=94)
 	db $1, $a, $11 ; CeladonMart3Text17
 
 	db $5 ; objects
-	object SPRITE_MART_GUY, $10, $5, FACE, STAY, $1 ; person
-	object SPRITE_GAMEBOY_KID_COPY, $b, $6, FACE, LEFT, $2 ; person
-	object SPRITE_GAMEBOY_KID_COPY, $7, $2, FACE, DOWN, $3 ; person
-	object SPRITE_GAMEBOY_KID_COPY, $8, $2, FACE, DOWN, $4 ; person
-	object SPRITE_YOUNG_BOY, $2, $5, FACE, UP, $5 ; person
+	object SPRITE_MART_GUY, $10, $5, STAY, NONE, $1 ; person
+	object SPRITE_GAMEBOY_KID_COPY, $b, $6, STAY, RIGHT, $2 ; person
+	object SPRITE_GAMEBOY_KID_COPY, $7, $2, STAY, DOWN, $3 ; person
+	object SPRITE_GAMEBOY_KID_COPY, $8, $2, STAY, DOWN, $4 ; person
+	object SPRITE_YOUNG_BOY, $2, $5, STAY, UP, $5 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MART_3_WIDTH, $1, $c ; CELADON_MART_4

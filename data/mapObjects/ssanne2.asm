@@ -16,7 +16,7 @@ SSAnne2Object: ; 0x61514 (size=90)
 
 	db $2 ; objects
 	object SPRITE_WAITER, $3, $7, WALK, $1, $1 ; person
-	object SPRITE_BLUE, $24, $4, FACE, DOWN, $2, SONY1 + $C8, $1
+	object SPRITE_BLUE, $24, $4, STAY, DOWN, $2, SONY1 + $C8, $1
 
 	; warp-to
 	EVENT_DISP SS_ANNE_2_WIDTH, $b, $9 ; SS_ANNE_9

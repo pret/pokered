@@ -17,7 +17,7 @@ CinnabarIslandObject: ; 0x1c022 (size=71)
 
 	db $2 ; objects
 	object SPRITE_GIRL, $c, $5, WALK, $2, $1 ; person
-	object SPRITE_GAMBLER, $e, $6, FACE, STAY, $2 ; person
+	object SPRITE_GAMBLER, $e, $6, STAY, NONE, $2 ; person
 
 	; warp-to
 	EVENT_DISP CINNABAR_ISLAND_WIDTH, $3, $6 ; MANSION_1

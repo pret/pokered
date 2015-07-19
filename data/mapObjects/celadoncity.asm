@@ -29,12 +29,12 @@ CeladonCityObject: ; 0x18022 (size=189)
 
 	db $9 ; objects
 	object SPRITE_LITTLE_GIRL, $8, $11, WALK, $0, $1 ; person
-	object SPRITE_OLD_PERSON, $b, $1c, FACE, UP, $2 ; person
+	object SPRITE_OLD_PERSON, $b, $1c, STAY, UP, $2 ; person
 	object SPRITE_GIRL, $e, $13, WALK, $1, $3 ; person
-	object SPRITE_OLD_PERSON, $19, $16, FACE, DOWN, $4 ; person
-	object SPRITE_OLD_PERSON, $16, $10, FACE, DOWN, $5 ; person
-	object SPRITE_FISHER2, $20, $c, FACE, RIGHT, $6 ; person
-	object SPRITE_SLOWBRO, $1e, $c, FACE, LEFT, $7 ; person
+	object SPRITE_OLD_PERSON, $19, $16, STAY, DOWN, $4 ; person
+	object SPRITE_OLD_PERSON, $16, $10, STAY, DOWN, $5 ; person
+	object SPRITE_FISHER2, $20, $c, STAY, LEFT, $6 ; person
+	object SPRITE_SLOWBRO, $1e, $c, STAY, RIGHT, $7 ; person
 	object SPRITE_ROCKET, $20, $1d, WALK, $2, $8 ; person
 	object SPRITE_ROCKET, $2a, $e, WALK, $2, $9 ; person
 

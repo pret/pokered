@@ -11,9 +11,9 @@ CeladonMart5Object: ; 0x49085 (size=55)
 
 	db $4 ; objects
 	object SPRITE_GENTLEMAN, $e, $5, WALK, $1, $1 ; person
-	object SPRITE_SAILOR, $2, $6, FACE, STAY, $2 ; person
-	object SPRITE_MART_GUY, $5, $3, FACE, DOWN, $3 ; person
-	object SPRITE_MART_GUY, $6, $3, FACE, DOWN, $4 ; person
+	object SPRITE_SAILOR, $2, $6, STAY, NONE, $2 ; person
+	object SPRITE_MART_GUY, $5, $3, STAY, DOWN, $3 ; person
+	object SPRITE_MART_GUY, $6, $3, STAY, DOWN, $4 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MART_5_WIDTH, $1, $c ; CELADON_MART_ROOF

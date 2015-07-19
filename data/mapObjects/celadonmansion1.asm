@@ -12,8 +12,8 @@ CeladonMansion1Object: ; 0x486cf (size=71)
 	db $9, $4, $5 ; CeladonMansion1Text5
 
 	db $4 ; objects
-	object SPRITE_SLOWBRO, $0, $5, FACE, LEFT, $1 ; person
-	object SPRITE_OLD_MEDIUM_WOMAN, $1, $5, FACE, DOWN, $2 ; person
+	object SPRITE_SLOWBRO, $0, $5, STAY, RIGHT, $1 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $1, $5, STAY, DOWN, $2 ; person
 	object SPRITE_CLEFAIRY, $1, $8, WALK, $2, $3 ; person
 	object SPRITE_SLOWBRO, $4, $4, WALK, $1, $4 ; person
 

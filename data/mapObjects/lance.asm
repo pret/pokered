@@ -9,7 +9,7 @@ LanceObject: ; 0x5a3c5 (size=36)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_LANCE, $6, $1, FACE, DOWN, $1, LANCE + $C8, $1
+	object SPRITE_LANCE, $6, $1, STAY, DOWN, $1, LANCE + $C8, $1
 
 	; warp-to
 	EVENT_DISP LANCES_ROOM_WIDTH, $10, $18 ; AGATHAS_ROOM

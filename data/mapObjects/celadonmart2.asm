@@ -10,9 +10,9 @@ CeladonMart2Object: ; 0x56111 (size=55)
 	db $1, $e, $5 ; CeladonMart2Text5
 
 	db $4 ; objects
-	object SPRITE_MART_GUY, $5, $3, FACE, DOWN, $1 ; person
-	object SPRITE_MART_GUY, $6, $3, FACE, DOWN, $2 ; person
-	object SPRITE_FAT_BALD_GUY, $13, $5, FACE, STAY, $3 ; person
+	object SPRITE_MART_GUY, $5, $3, STAY, DOWN, $1 ; person
+	object SPRITE_MART_GUY, $6, $3, STAY, DOWN, $2 ; person
+	object SPRITE_FAT_BALD_GUY, $13, $5, STAY, NONE, $3 ; person
 	object SPRITE_GIRL, $e, $4, WALK, $1, $4 ; person
 
 	; warp-to

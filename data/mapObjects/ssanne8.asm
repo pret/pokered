@@ -12,16 +12,16 @@ SSAnne8Object: ; 0x61a60 (size=127)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_GENTLEMAN, $2, $3, FACE, RIGHT, $1, GENTLEMAN + $C8, $1
-	object SPRITE_GENTLEMAN, $b, $4, FACE, UP, $2, GENTLEMAN + $C8, $2
-	object SPRITE_BUG_CATCHER, $b, $e, FACE, UP, $3, YOUNGSTER + $C8, $8
-	object SPRITE_LASS, $d, $b, FACE, RIGHT, $4, LASS + $C8, $b
+	object SPRITE_GENTLEMAN, $2, $3, STAY, LEFT, $1, GENTLEMAN + $C8, $1
+	object SPRITE_GENTLEMAN, $b, $4, STAY, UP, $2, GENTLEMAN + $C8, $2
+	object SPRITE_BUG_CATCHER, $b, $e, STAY, UP, $3, YOUNGSTER + $C8, $8
+	object SPRITE_LASS, $d, $b, STAY, LEFT, $4, LASS + $C8, $b
 	object SPRITE_GIRL, $16, $3, WALK, $1, $5 ; person
-	object SPRITE_FAT_BALD_GUY, $0, $e, FACE, STAY, $6 ; person
-	object SPRITE_LITTLE_GIRL, $2, $b, FACE, DOWN, $7 ; person
-	object SPRITE_CLEFAIRY, $3, $b, FACE, DOWN, $8 ; person
-	object SPRITE_GIRL, $a, $d, FACE, LEFT, $9 ; person
-	object SPRITE_BALL, $c, $f, FACE, STAY, $a, TM_08
+	object SPRITE_FAT_BALD_GUY, $0, $e, STAY, NONE, $6 ; person
+	object SPRITE_LITTLE_GIRL, $2, $b, STAY, DOWN, $7 ; person
+	object SPRITE_CLEFAIRY, $3, $b, STAY, DOWN, $8 ; person
+	object SPRITE_GIRL, $a, $d, STAY, RIGHT, $9 ; person
+	object SPRITE_BALL, $c, $f, STAY, NONE, $a, TM_08
 	object SPRITE_GENTLEMAN, $15, $d, WALK, $2, $b ; person
 
 	; warp-to

@@ -18,10 +18,10 @@ SafariZoneWestObject: ; 0x4a1dc (size=108)
 	db $16, $18, $8 ; SafariZoneWestText8
 
 	db $4 ; objects
-	object SPRITE_BALL, $8, $14, FACE, STAY, $1, MAX_POTION
-	object SPRITE_BALL, $9, $7, FACE, STAY, $2, TM_32
-	object SPRITE_BALL, $12, $12, FACE, STAY, $3, MAX_REVIVE
-	object SPRITE_BALL, $13, $7, FACE, STAY, $4, GOLD_TEETH
+	object SPRITE_BALL, $8, $14, STAY, NONE, $1, MAX_POTION
+	object SPRITE_BALL, $9, $7, STAY, NONE, $2, TM_32
+	object SPRITE_BALL, $12, $12, STAY, NONE, $3, MAX_REVIVE
+	object SPRITE_BALL, $13, $7, STAY, NONE, $4, GOLD_TEETH
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_WEST_WIDTH, $0, $14 ; SAFARI_ZONE_NORTH

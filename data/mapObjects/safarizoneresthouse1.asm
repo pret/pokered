@@ -8,7 +8,7 @@ SafariZoneRestHouse1Object: ; 0x45cfe (size=32)
 	db $0 ; signs
 
 	db $2 ; objects
-	object SPRITE_GIRL, $3, $2, FACE, DOWN, $1 ; person
+	object SPRITE_GIRL, $3, $2, STAY, DOWN, $1 ; person
 	object SPRITE_OAK_AIDE, $1, $4, WALK, $1, $2 ; person
 
 	; warp-to

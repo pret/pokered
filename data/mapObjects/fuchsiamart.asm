@@ -8,8 +8,8 @@ FuchsiaMartObject: ; 0x1dd9b (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_MART_GUY, $0, $5, FACE, LEFT, $1 ; person
-	object SPRITE_FAT_BALD_GUY, $4, $2, FACE, STAY, $2 ; person
+	object SPRITE_MART_GUY, $0, $5, STAY, RIGHT, $1 ; person
+	object SPRITE_FAT_BALD_GUY, $4, $2, STAY, NONE, $2 ; person
 	object SPRITE_LASS, $6, $5, WALK, $1, $3 ; person
 
 	; warp-to

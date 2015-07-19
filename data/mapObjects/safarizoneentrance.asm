@@ -10,8 +10,8 @@ SafariZoneEntranceObject: ; 0x753f5 (size=48)
 	db $0 ; signs
 
 	db $2 ; objects
-	object SPRITE_WHITE_PLAYER, $6, $2, FACE, RIGHT, $1 ; person
-	object SPRITE_WHITE_PLAYER, $1, $4, FACE, LEFT, $2 ; person
+	object SPRITE_WHITE_PLAYER, $6, $2, STAY, LEFT, $1 ; person
+	object SPRITE_WHITE_PLAYER, $1, $4, STAY, RIGHT, $2 ; person
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_ENTRANCE_WIDTH, $5, $3

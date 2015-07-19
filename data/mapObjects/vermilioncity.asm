@@ -23,9 +23,9 @@ VermilionCityObject: ; 0x189ba (size=133)
 
 	db $6 ; objects
 	object SPRITE_FOULARD_WOMAN, $13, $7, WALK, $2, $1 ; person
-	object SPRITE_GAMBLER, $e, $6, FACE, STAY, $2 ; person
-	object SPRITE_SAILOR, $13, $1e, FACE, UP, $3 ; person
-	object SPRITE_GAMBLER, $1e, $7, FACE, STAY, $4 ; person
+	object SPRITE_GAMBLER, $e, $6, STAY, NONE, $2 ; person
+	object SPRITE_SAILOR, $13, $1e, STAY, UP, $3 ; person
+	object SPRITE_GAMBLER, $1e, $7, STAY, NONE, $4 ; person
 	object SPRITE_SLOWBRO, $1d, $9, WALK, $1, $5 ; person
 	object SPRITE_SAILOR, $19, $1b, WALK, $2, $6 ; person
 

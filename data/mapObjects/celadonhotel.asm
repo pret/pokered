@@ -8,8 +8,8 @@ CeladonHotelObject: ; 0x49281 (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_OLD_MEDIUM_WOMAN, $3, $1, FACE, DOWN, $1 ; person
-	object SPRITE_FOULARD_WOMAN, $2, $4, FACE, STAY, $2 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $3, $1, STAY, DOWN, $1 ; person
+	object SPRITE_FOULARD_WOMAN, $2, $4, STAY, NONE, $2 ; person
 	object SPRITE_BLACK_HAIR_BOY_2, $8, $4, WALK, $2, $3 ; person
 
 	; warp-to

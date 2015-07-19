@@ -8,8 +8,8 @@ VermilionMartObject: ; 0x5c9f4 (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_MART_GUY, $0, $5, FACE, LEFT, $1 ; person
-	object SPRITE_BLACK_HAIR_BOY_1, $5, $6, FACE, STAY, $2 ; person
+	object SPRITE_MART_GUY, $0, $5, STAY, RIGHT, $1 ; person
+	object SPRITE_BLACK_HAIR_BOY_1, $5, $6, STAY, NONE, $2 ; person
 	object SPRITE_LASS, $3, $3, WALK, $2, $3 ; person
 
 	; warp-to

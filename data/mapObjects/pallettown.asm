@@ -13,7 +13,7 @@ PalletTownObject: ; 0x182c3 (size=58)
 	db $5, $b, $7 ; PalletTownText7
 
 	db $3 ; objects
-	object SPRITE_OAK, $8, $5, FACE, STAY, $1 ; person
+	object SPRITE_OAK, $8, $5, STAY, NONE, $1 ; person
 	object SPRITE_GIRL, $3, $8, WALK, $0, $2 ; person
 	object SPRITE_FISHER2, $b, $e, WALK, $0, $3 ; person
 

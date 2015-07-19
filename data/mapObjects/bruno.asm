@@ -10,7 +10,7 @@ BrunoObject: ; 0x763d7 (size=44)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_BRUNO, $5, $2, FACE, DOWN, $1, BRUNO + $C8, $1
+	object SPRITE_BRUNO, $5, $2, STAY, DOWN, $1, BRUNO + $C8, $1
 
 	; warp-to
 	EVENT_DISP BRUNOS_ROOM_WIDTH, $b, $4 ; LORELEIS_ROOM

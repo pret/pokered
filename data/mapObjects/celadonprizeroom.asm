@@ -11,7 +11,7 @@ CeladonPrizeRoomObject: ; 0x49108 (size=41)
 	db $2, $6, $5 ; CeladonPrizeRoomText5
 
 	db $2 ; objects
-	object SPRITE_BALDING_GUY, $1, $4, FACE, STAY, $1 ; person
+	object SPRITE_BALDING_GUY, $1, $4, STAY, NONE, $1 ; person
 	object SPRITE_GAMBLER, $7, $3, WALK, $2, $2 ; person
 
 	; warp-to

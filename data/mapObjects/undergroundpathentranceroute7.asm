@@ -9,7 +9,7 @@ UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_FAT_BALD_GUY, $2, $4, FACE, STAY, $1 ; person
+	object SPRITE_FAT_BALD_GUY, $2, $4, STAY, NONE, $1 ; person
 
 	; warp-to
 	EVENT_DISP PATH_ENTRANCE_ROUTE_7_WIDTH, $7, $3

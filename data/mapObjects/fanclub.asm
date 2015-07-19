@@ -10,12 +10,12 @@ FanClubObject: ; 0x59c97 (size=62)
 	db $0, $6, $8 ; FanClubText8
 
 	db $6 ; objects
-	object SPRITE_FISHER2, $6, $3, FACE, RIGHT, $1 ; person
-	object SPRITE_GIRL, $1, $3, FACE, LEFT, $2 ; person
-	object SPRITE_CLEFAIRY, $6, $4, FACE, RIGHT, $3 ; person
-	object SPRITE_SEEL, $1, $4, FACE, LEFT, $4 ; person
-	object SPRITE_GENTLEMAN, $3, $1, FACE, DOWN, $5 ; person
-	object SPRITE_CABLE_CLUB_WOMAN, $5, $1, FACE, DOWN, $6 ; person
+	object SPRITE_FISHER2, $6, $3, STAY, LEFT, $1 ; person
+	object SPRITE_GIRL, $1, $3, STAY, RIGHT, $2 ; person
+	object SPRITE_CLEFAIRY, $6, $4, STAY, LEFT, $3 ; person
+	object SPRITE_SEEL, $1, $4, STAY, RIGHT, $4 ; person
+	object SPRITE_GENTLEMAN, $3, $1, STAY, DOWN, $5 ; person
+	object SPRITE_CABLE_CLUB_WOMAN, $5, $1, STAY, DOWN, $6 ; person
 
 	; warp-to
 	EVENT_DISP POKEMON_FAN_CLUB_WIDTH, $7, $2

@@ -8,8 +8,8 @@ Route2HouseObject: ; 0x1df07 (size=32)
 	db $0 ; signs
 
 	db $2 ; objects
-	object SPRITE_OAK_AIDE, $2, $4, FACE, LEFT, $1 ; person
-	object SPRITE_GAMEBOY_KID_COPY, $4, $1, FACE, DOWN, $2 ; person
+	object SPRITE_OAK_AIDE, $2, $4, STAY, RIGHT, $1 ; person
+	object SPRITE_GAMEBOY_KID_COPY, $4, $1, STAY, DOWN, $2 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_2_HOUSE_WIDTH, $7, $2

@@ -13,19 +13,19 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db $0 ; signs
 
 	db $d ; objects
-	object SPRITE_HIKER, $c, $9, FACE, RIGHT, $1, BLACKBELT + $C8, $9
-	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, FACE, RIGHT, $2, JUGGLER + $C8, $2
-	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, FACE, DOWN, $3, TAMER + $C8, $5
-	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, FACE, DOWN, $4, POKEMANIAC + $C8, $6
-	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, FACE, RIGHT, $5, JUGGLER + $C8, $5
-	object SPRITE_BIRD, $b, $5, FACE, UP, $6, MOLTRES, 50
-	object SPRITE_BALL, $1b, $5, FACE, STAY, $7, TM_17
-	object SPRITE_BALL, $12, $9, FACE, STAY, $8, FULL_HEAL
-	object SPRITE_BALL, $9, $b, FACE, STAY, $9, TM_05
-	object SPRITE_BALL, $b, $0, FACE, STAY, $a, GUARD_SPEC_
-	object SPRITE_BOULDER, $4, $e, FACE, BOULDER_MOVEMENT_BYTE_2, $b ; person
-	object SPRITE_BOULDER, $5, $5, FACE, BOULDER_MOVEMENT_BYTE_2, $c ; person
-	object SPRITE_BOULDER, $17, $10, FACE, BOULDER_MOVEMENT_BYTE_2, $d ; person
+	object SPRITE_HIKER, $c, $9, STAY, LEFT, $1, BLACKBELT + $C8, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, STAY, LEFT, $2, JUGGLER + $C8, $2
+	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, TAMER + $C8, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, POKEMANIAC + $C8, $6
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, JUGGLER + $C8, $5
+	object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50
+	object SPRITE_BALL, $1b, $5, STAY, NONE, $7, TM_17
+	object SPRITE_BALL, $12, $9, STAY, NONE, $8, FULL_HEAL
+	object SPRITE_BALL, $9, $b, STAY, NONE, $9, TM_05
+	object SPRITE_BALL, $b, $0, STAY, NONE, $a, GUARD_SPEC_
+	object SPRITE_BOULDER, $4, $e, STAY, BOULDER_MOVEMENT_BYTE_2, $b ; person
+	object SPRITE_BOULDER, $5, $5, STAY, BOULDER_MOVEMENT_BYTE_2, $c ; person
+	object SPRITE_BOULDER, $17, $10, STAY, BOULDER_MOVEMENT_BYTE_2, $d ; person
 
 	; warp-to
 	EVENT_DISP VICTORY_ROAD_2_WIDTH, $8, $0 ; VICTORY_ROAD_1

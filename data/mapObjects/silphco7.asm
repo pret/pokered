@@ -12,17 +12,17 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_LAPRAS_GIVER, $1, $5, FACE, STAY, $1 ; person
-	object SPRITE_LAPRAS_GIVER, $d, $d, FACE, UP, $2 ; person
-	object SPRITE_LAPRAS_GIVER, $7, $a, FACE, STAY, $3 ; person
-	object SPRITE_ERIKA, $a, $8, FACE, STAY, $4 ; person
-	object SPRITE_ROCKET, $d, $1, FACE, DOWN, $5, ROCKET + $C8, $20
-	object SPRITE_OAK_AIDE, $2, $d, FACE, DOWN, $6, SCIENTIST + $C8, $8
-	object SPRITE_ROCKET, $14, $2, FACE, RIGHT, $7, ROCKET + $C8, $21
-	object SPRITE_ROCKET, $13, $e, FACE, LEFT, $8, ROCKET + $C8, $22
-	object SPRITE_BLUE, $3, $7, FACE, UP, $9 ; person
-	object SPRITE_BALL, $1, $9, FACE, STAY, $a, CALCIUM
-	object SPRITE_BALL, $18, $b, FACE, STAY, $b, TM_03
+	object SPRITE_LAPRAS_GIVER, $1, $5, STAY, NONE, $1 ; person
+	object SPRITE_LAPRAS_GIVER, $d, $d, STAY, UP, $2 ; person
+	object SPRITE_LAPRAS_GIVER, $7, $a, STAY, NONE, $3 ; person
+	object SPRITE_ERIKA, $a, $8, STAY, NONE, $4 ; person
+	object SPRITE_ROCKET, $d, $1, STAY, DOWN, $5, ROCKET + $C8, $20
+	object SPRITE_OAK_AIDE, $2, $d, STAY, DOWN, $6, SCIENTIST + $C8, $8
+	object SPRITE_ROCKET, $14, $2, STAY, LEFT, $7, ROCKET + $C8, $21
+	object SPRITE_ROCKET, $13, $e, STAY, RIGHT, $8, ROCKET + $C8, $22
+	object SPRITE_BLUE, $3, $7, STAY, UP, $9 ; person
+	object SPRITE_BALL, $1, $9, STAY, NONE, $a, CALCIUM
+	object SPRITE_BALL, $18, $b, STAY, NONE, $b, TM_03
 
 	; warp-to
 	EVENT_DISP SILPH_CO_7F_WIDTH, $0, $10 ; SILPH_CO_8F

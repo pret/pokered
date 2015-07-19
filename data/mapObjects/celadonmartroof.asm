@@ -11,7 +11,7 @@ CeladonMartRoofObject: ; 0x485a8 (size=36)
 	db $2, $d, $6 ; CeladonMartRoofText6
 
 	db $2 ; objects
-	object SPRITE_BLACK_HAIR_BOY_2, $a, $4, FACE, RIGHT, $1 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $a, $4, STAY, LEFT, $1 ; person
 	object SPRITE_LITTLE_GIRL, $5, $5, WALK, $0, $2 ; person
 
 	; warp-to

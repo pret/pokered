@@ -10,7 +10,7 @@ RedsHouse1FObject: ; 481e4 (12:41e4)
 	db $1, $3, $2 ; TV
 
 	db $1 ; objects
-	object SPRITE_MOM, $5, $4, FACE, RIGHT, $1 ; Mom
+	object SPRITE_MOM, $5, $4, STAY, LEFT, $1 ; Mom
 
 	; warp-to
 	EVENT_DISP REDS_HOUSE_1F_WIDTH, $7, $2

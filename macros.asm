@@ -233,18 +233,18 @@ tx_pre_jump: MACRO
 ENDM
 
 WALK EQU $FE
-FACE EQU $FF
+STAY EQU $FF
 
 DOWN  EQU $D0
 UP    EQU $D1
-RIGHT EQU $D2
-LEFT  EQU $D3
-STAY  EQU $FF
+LEFT  EQU $D2
+RIGHT EQU $D3
+NONE  EQU $FF
 
 ;\1 sprite id
 ;\2 x position
 ;\3 y position
-;\4 movement (WALK/FACE)
+;\4 movement (WALK/STAY)
 ;\5 range or direction
 ;\6 text id
 ;\7 items only: item id

@@ -9,7 +9,7 @@ Route16GateUpstairsObject: ; 0x4984c (size=30)
 	db $2, $6, $4 ; Route16GateUpstairsText4
 
 	db $2 ; objects
-	object SPRITE_YOUNG_BOY, $4, $2, FACE, STAY, $1 ; person
+	object SPRITE_YOUNG_BOY, $4, $2, STAY, NONE, $1 ; person
 	object SPRITE_LITTLE_GIRL, $2, $5, WALK, $2, $2 ; person
 
 	; warp-to

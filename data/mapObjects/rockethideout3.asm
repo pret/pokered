@@ -8,10 +8,10 @@ RocketHideout3Object: ; 0x4534d (size=50)
 	db $0 ; signs
 
 	db $4 ; objects
-	object SPRITE_ROCKET, $a, $16, FACE, LEFT, $1, ROCKET + $C8, $e
-	object SPRITE_ROCKET, $1a, $c, FACE, UP, $2, ROCKET + $C8, $f
-	object SPRITE_BALL, $1a, $11, FACE, STAY, $3, TM_10
-	object SPRITE_BALL, $14, $e, FACE, STAY, $4, RARE_CANDY
+	object SPRITE_ROCKET, $a, $16, STAY, RIGHT, $1, ROCKET + $C8, $e
+	object SPRITE_ROCKET, $1a, $c, STAY, UP, $2, ROCKET + $C8, $f
+	object SPRITE_BALL, $1a, $11, STAY, NONE, $3, TM_10
+	object SPRITE_BALL, $14, $e, STAY, NONE, $4, RARE_CANDY
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_3_WIDTH, $6, $19 ; ROCKET_HIDEOUT_2

@@ -9,7 +9,7 @@ DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GAMBLER, $2, $3, FACE, STAY, $1 ; person
+	object SPRITE_GAMBLER, $2, $3, STAY, NONE, $1 ; person
 
 	; warp-to
 	EVENT_DISP DIGLETTS_CAVE_ENTRANCE_WIDTH, $7, $2

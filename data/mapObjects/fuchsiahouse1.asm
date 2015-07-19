@@ -8,9 +8,9 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_MOM_GEISHA, $2, $3, FACE, LEFT, $1 ; person
-	object SPRITE_GAMBLER, $7, $2, FACE, UP, $2 ; person
-	object SPRITE_BUG_CATCHER, $5, $5, FACE, STAY, $3 ; person
+	object SPRITE_MOM_GEISHA, $2, $3, STAY, RIGHT, $1 ; person
+	object SPRITE_GAMBLER, $7, $2, STAY, UP, $2 ; person
+	object SPRITE_BUG_CATCHER, $5, $5, STAY, NONE, $3 ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_HOUSE_1_WIDTH, $7, $2

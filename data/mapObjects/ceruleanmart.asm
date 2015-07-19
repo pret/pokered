@@ -8,7 +8,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_MART_GUY, $0, $5, FACE, LEFT, $1 ; person
+	object SPRITE_MART_GUY, $0, $5, STAY, RIGHT, $1 ; person
 	object SPRITE_BLACK_HAIR_BOY_1, $3, $4, WALK, $1, $2 ; person
 	object SPRITE_LASS, $6, $2, WALK, $2, $3 ; person
 

@@ -13,17 +13,17 @@ SilphCo5Object: ; 0x1a08d (size=137)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_LAPRAS_GIVER, $d, $9, FACE, STAY, $1 ; person
-	object SPRITE_ROCKET, $8, $10, FACE, LEFT, $2, ROCKET + $C8, $1c
-	object SPRITE_OAK_AIDE, $8, $3, FACE, LEFT, $3, SCIENTIST + $C8, $6
-	object SPRITE_ROCKER, $12, $a, FACE, UP, $4, JUGGLER + $C8, $1
-	object SPRITE_ROCKET, $1c, $4, FACE, UP, $5, ROCKET + $C8, $1d
-	object SPRITE_BALL, $2, $d, FACE, STAY, $6, TM_09
-	object SPRITE_BALL, $4, $6, FACE, STAY, $7, PROTEIN
-	object SPRITE_BALL, $15, $10, FACE, STAY, $8, CARD_KEY
-	object SPRITE_CLIPBOARD, $16, $c, FACE, STAY, $9 ; person
-	object SPRITE_CLIPBOARD, $19, $a, FACE, STAY, $a ; person
-	object SPRITE_CLIPBOARD, $18, $6, FACE, STAY, $b ; person
+	object SPRITE_LAPRAS_GIVER, $d, $9, STAY, NONE, $1 ; person
+	object SPRITE_ROCKET, $8, $10, STAY, RIGHT, $2, ROCKET + $C8, $1c
+	object SPRITE_OAK_AIDE, $8, $3, STAY, RIGHT, $3, SCIENTIST + $C8, $6
+	object SPRITE_ROCKER, $12, $a, STAY, UP, $4, JUGGLER + $C8, $1
+	object SPRITE_ROCKET, $1c, $4, STAY, UP, $5, ROCKET + $C8, $1d
+	object SPRITE_BALL, $2, $d, STAY, NONE, $6, TM_09
+	object SPRITE_BALL, $4, $6, STAY, NONE, $7, PROTEIN
+	object SPRITE_BALL, $15, $10, STAY, NONE, $8, CARD_KEY
+	object SPRITE_CLIPBOARD, $16, $c, STAY, NONE, $9 ; person
+	object SPRITE_CLIPBOARD, $19, $a, STAY, NONE, $a ; person
+	object SPRITE_CLIPBOARD, $18, $6, STAY, NONE, $b ; person
 
 	; warp-to
 	EVENT_DISP SILPH_CO_5F_WIDTH, $0, $18 ; SILPH_CO_6F

@@ -18,11 +18,11 @@ ViridianCityObject: ; 0x18384 (size=104)
 
 	db $7 ; objects
 	object SPRITE_BUG_CATCHER, $d, $14, WALK, $0, $1 ; person
-	object SPRITE_GAMBLER, $1e, $8, FACE, STAY, $2 ; person
+	object SPRITE_GAMBLER, $1e, $8, STAY, NONE, $2 ; person
 	object SPRITE_BUG_CATCHER, $1e, $19, WALK, $0, $3 ; person
-	object SPRITE_GIRL, $11, $9, FACE, LEFT, $4 ; person
-	object SPRITE_LYING_OLD_MAN, $12, $9, FACE, STAY, $5 ; person
-	object SPRITE_FISHER2, $6, $17, FACE, DOWN, $6 ; person
+	object SPRITE_GIRL, $11, $9, STAY, RIGHT, $4 ; person
+	object SPRITE_LYING_OLD_MAN, $12, $9, STAY, NONE, $5 ; person
+	object SPRITE_FISHER2, $6, $17, STAY, DOWN, $6 ; person
 	object SPRITE_GAMBLER, $11, $5, WALK, $2, $7 ; person
 
 	; warp-to
