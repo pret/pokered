@@ -6296,7 +6296,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef WriteMonMoves ; get moves based on current level
 .loadMovePPs
 	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonSpecial + 1
+	ld de, wEnemyMonPP - 1
 	predef LoadMovePPs
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
@@ -6957,7 +6957,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	ld [wLetterPrintingDelayFlags], a
 	pop af
 	ld [wMapPalOffset], a
-	ld a, [wd0d4]
+	ld a, [wSavedTilesetType]
 	ld [hTilesetType], a
 	scf
 	ret

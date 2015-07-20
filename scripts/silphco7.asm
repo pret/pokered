@@ -127,8 +127,8 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld a, $ff
 	ld [wc0ee], a
 	call PlaySound
@@ -209,8 +209,8 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld [wJoyIgnore], a
 	ld hl, wd82f
 	set 0, [hl]
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld a, $9
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_UP

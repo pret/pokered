@@ -22,8 +22,8 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ld hl, CoordsData_1df8f
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink

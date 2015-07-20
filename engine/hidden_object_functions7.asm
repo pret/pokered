@@ -78,7 +78,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	xor a
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_ENTRANCE
 	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, $3

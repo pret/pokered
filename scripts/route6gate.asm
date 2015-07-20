@@ -16,8 +16,8 @@ Route6GateScript0: ; 1e04e (7:604e)
 	ld hl, CoordsData_1e08c
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink

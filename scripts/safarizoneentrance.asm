@@ -72,8 +72,8 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ret
 
 .SafariZoneEntranceScript5
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld hl, wd790
 	bit 6, [hl]
 	res 6, [hl]

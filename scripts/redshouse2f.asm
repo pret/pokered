@@ -11,8 +11,8 @@ RedsHouse2FScriptPointers: ; 5c0bc (17:40bc)
 RedsHouse2FScript0: ; 5c0c0 (17:40c0)
 	xor a
 	ld [hJoyHeld],a
-	ld a,8
-	ld [wd528],a
+	ld a,PLAYER_DIR_UP
+	ld [wPlayerMovingDirection],a
 	ld a,1
 	ld [W_REDSHOUSE2CURSCRIPT],a
 	ret

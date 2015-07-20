@@ -1701,7 +1701,11 @@ W_MONHLEARNSET:: ; d0cc
 	flag_array 50 + 5
 	ds 1
 
-wd0d4:: ds 3 ; temp storage for hTilesetType
+wSavedTilesetType:: ; d0d4
+; saved at the start of a battle and then written back at the end of the battle
+	ds 1
+
+	ds 2
 
 W_MONHPADDING:: ; d0d7
 
@@ -2066,9 +2070,14 @@ W_SPRITESETID:: ; d3a8
 ; sprite set ID for the current map
 	ds 1
 
-wd3a9:: ds 1 ; used when getting the object data pointer
-wd3aa:: ds 3 ; second part of the pointer
-wd3ad:: ds 1 ; used as the beginning value for copying warp data
+wObjectDataPointerTemp:: ; d3a9
+	ds 2
+
+	ds 2
+
+wMapBackgroundTile:: ; d3ad
+; the tile shown outside the boundaries of the map
+	ds 1
 
 wNumberOfWarps:: ; d3ae
 ; number of warps in current map
@@ -2084,9 +2093,17 @@ wDestinationWarpID:: ; d42f
 
 	ds 128
 
-wd4b0:: ds 1 ; number of signs on the map
-wd4b1:: ds 32 ; starting address for sign coords
-wd4d1:: ds 16 ; starting address for sign text IDs
+wNumSigns:: ; d4b0
+; number of signs in the current map (up to 16)
+	ds 1
+
+wSignCoords:: ; d4b1
+; 2 bytes each
+; Y, X
+	ds 32
+
+wSignTextIDs:: ; d4d1
+	ds 16
 
 W_NUMSPRITES:: ; d4e1
 ; number of sprites on the current map
@@ -2107,16 +2124,35 @@ W_MAPSPRITEEXTRADATA:: ; d504
 ; two bytes per sprite (trainer class/item ID, trainer set ID)
 	ds 32
 
-wd524:: ds 1 ; map height in 2x2 metatiles, also used with checking connections
-wd525:: ds 1 ; map width in 2x2 metatiles, also used with checking connections
+wCurrentMapHeight2:: ; d524
+; map height in 2x2 meta-tiles
+	ds 1
+
+wCurrentMapWidth2:: ; d525
+; map width in 2x2 meta-tiles
+	ds 1
 
 wMapViewVRAMPointer:: ; d526
 ; the address of the upper left corner of the visible portion of the BG tile map in VRAM
 	ds 2
 
-wd528:: ds 1 ; additional storage for directions
-wd529:: ds 1 ; same case as above, but used differently
-wd52a:: ds 1 ; same case as above
+; In the comments for the player direction variables below, "moving" refers to
+; both walking and changing facing direction without taking a step.
+
+wPlayerMovingDirection:: ; d528
+; if the player is moving, the current direction
+; if the player is not moving, zero
+; map scripts write to this in order to change the player's facing direction
+	ds 1
+
+wPlayerLastStopDirection:: ; d529
+; the direction in which the player was moving before the player last stopped
+	ds 1
+
+wPlayerDirection:: ; d52a
+; if the player is moving, the current direction
+; if the player is not moving, the last the direction in which the player moved
+	ds 1
 
 W_TILESETBANK:: ; d52b
 	ds 1

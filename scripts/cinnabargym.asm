@@ -54,14 +54,14 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld [H_SPRITEINDEX], a
 	cp $4
 	jr nz, .asm_757c3
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld de, MovementData_757d7
 	jr .asm_757cb
 .asm_757c3
 	ld de, MovementData_757da
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 .asm_757cb
 	call MoveSprite
 	ld a, $1

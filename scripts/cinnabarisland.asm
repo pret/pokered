@@ -24,8 +24,8 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld a, [W_XCOORD]
 	cp $12
 	ret nz
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld a, $8
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID

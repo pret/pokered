@@ -82,6 +82,9 @@ hTilePlayerStandingOn EQU $FF93
 
 hSpritePriority EQU $FF94
 
+; 2 bytes
+hSignCoordPointer EQU $FF95
+
 hNPCMovementDirections2Index EQU $FF95
 
 ; CalcPositionOfPlayerRelativeToNPC

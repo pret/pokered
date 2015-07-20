@@ -1,6 +1,6 @@
 InitBattleVariables: ; 525af (14:65af)
 	ld a, [hTilesetType]
-	ld [wd0d4], a
+	ld [wSavedTilesetType], a
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wBattleResult], a

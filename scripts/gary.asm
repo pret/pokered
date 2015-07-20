@@ -139,8 +139,8 @@ GaryScript5: ; 7601a (1d:601a)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT

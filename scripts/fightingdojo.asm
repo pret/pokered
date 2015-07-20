@@ -42,8 +42,8 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ret nz
 	ld a, $1
 	ld [wcf0d], a
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT
@@ -61,8 +61,8 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld a, [wcf0d]
 	and a
 	jr z, .asm_5cde4
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT

@@ -74,8 +74,8 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	ld a, [W_XCOORD]
 	cp $25
 	jr nz, .asm_61426
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_RIGHT
 	jr .asm_61427
 .asm_61426

@@ -199,7 +199,7 @@ MovementData_62216: ; 62216 (18:6216)
 	db $FF
 
 SilphCo11Script_6221a: ; 6221a (18:621a)
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, $3
 	ld [H_SPRITEINDEX], a
 	ld a, b
@@ -213,11 +213,11 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_6223c
-	ld a, $2
+	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
 	jr .asm_62240
 .asm_6223c
-	ld a, $8
+	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
 .asm_62240
 	call SilphCo11Script_6221a
@@ -247,11 +247,11 @@ SilphCo11Script3: ; 6226a (18:626a)
 	ld a, [wcf0d]
 	cp $1
 	jr z, .asm_62284
-	ld a, $2
+	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
 	jr .asm_62288
 .asm_62284
-	ld a, $8
+	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
 .asm_62288
 	call SilphCo11Script_6221a

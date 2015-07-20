@@ -44,15 +44,15 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	jr nc, .asm_194f7
 	ld a, [wCoordIndex]
 	cp $1
-	ld a, $8
+	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
 	jr nz, .asm_194e6
-	ld a, $4
+	ld a, PLAYER_DIR_DOWN
 	ld b, SPRITE_FACING_UP
 .asm_194e6
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, b
-	ld [wSpriteStateData1 + $29], a
+	ld [wSpriteStateData1 + 2 * $10 + $9], a
 	call Delay3
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
