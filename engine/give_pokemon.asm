@@ -60,7 +60,7 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	dec a
 	ld c, a
 	ld hl, wPokedexOwned
-	ld b, $1
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop af
 	ld [wd11e], a

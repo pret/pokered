@@ -38,7 +38,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,$2
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -112,7 +112,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,$1
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
 	call PrintText

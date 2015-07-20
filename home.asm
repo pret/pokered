@@ -2297,7 +2297,7 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	call ReadTrainerHeaderInfo     ; read flag's byte ptr
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
@@ -2392,7 +2392,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [W_ENEMYMONORTRAINERCLASS]
 	cp $c8
@@ -2470,7 +2470,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ret z
 	ld a, $2
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
-	ld b, $2
+	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	call TrainerFlagAction        ; read trainer flag

@@ -17,7 +17,7 @@ CanLearnTM: ; 1373e (4:773e)
 	jr .findTMloop
 .TMfoundLoop
 	pop hl
-	ld b, $2  ; read corresponding bit from TM compatibility array
+	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
 
 ; converts TM/HM number in wd11e into move number

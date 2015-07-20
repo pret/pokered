@@ -5,7 +5,7 @@ HiddenItems: ; 76688 (1d:6688)
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -31,7 +31,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld a, SFX_GET_ITEM_2
 	call PlaySoundWaitForCurrent
@@ -61,7 +61,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -102,7 +102,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	call EnableAutoTextBoxDrawing
 	ld a, [wPlayerCoins]
