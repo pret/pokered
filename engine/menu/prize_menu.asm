@@ -179,7 +179,7 @@ LoadCoinsToSubtract: ; 528b1 (14:68b1)
 	ld hl,wd141 ; first prize's price
 	add hl,de ; get selected prize's price
 	xor a
-	ld [hCoins - 1],a
+	ld [hUnusedCoinsByte],a
 	ld a,[hli]
 	ld [hCoins],a
 	ld a,[hl]

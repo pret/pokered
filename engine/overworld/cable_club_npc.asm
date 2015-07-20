@@ -111,9 +111,7 @@ Func_72a8: ; 72a8 (1:72a8)
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld hl, LinkMenu
-	ld b, BANK(LinkMenu)
-	jp Bankswitch
+	jpab LinkMenu
 
 CableClubNPCAreaReservedFor2FriendsLinkedByCableText: ; 72b3 (1:72b3)
 	TX_FAR _CableClubNPCAreaReservedFor2FriendsLinkedByCableText

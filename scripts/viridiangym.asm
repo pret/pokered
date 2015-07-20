@@ -128,9 +128,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	ld [W_CURMAPSCRIPT], a
 	ret
 .asm_74980
-	ld b, BANK(LoadSpinnerArrowTiles)
-	ld hl, LoadSpinnerArrowTiles
-	jp Bankswitch
+	jpba LoadSpinnerArrowTiles
 
 ViridianGymScript3: ; 74988 (1d:4988)
 	ld a, [W_ISINBATTLE]

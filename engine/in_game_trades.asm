@@ -38,7 +38,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,$2
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -112,7 +112,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,$1
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
 	call PrintText
@@ -159,9 +159,7 @@ InGameTrade_RestoreScreen: ; 71ca2 (1c:5ca2)
 	call LoadGBPal
 	ld c, 10
 	call DelayFrames
-	ld b, BANK(LoadWildData)
-	ld hl, LoadWildData
-	jp Bankswitch
+	jpba LoadWildData
 
 InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld hl, wTradedPlayerMonSpecies

@@ -172,9 +172,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [W_ISINBATTLE]
 	and a
 	jp z, LoadTextBoxTilePatterns
-	ld hl, LoadHudTilePatterns
-	ld b, BANK(LoadHudTilePatterns)
-	jp Bankswitch
+	jpab LoadHudTilePatterns
 
 .namingScreenButtonFunctions
 	dw .dPadReturnPoint

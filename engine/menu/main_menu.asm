@@ -107,8 +107,8 @@ MainMenu: ; 5af2 (1:5af2)
 .pressedA
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	ld a,4
-	ld [wd52a],a
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerDirection],a
 	ld c,10
 	call DelayFrames
 	ld a,[wNumHoFTeams]

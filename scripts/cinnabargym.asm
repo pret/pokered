@@ -54,14 +54,14 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld [H_SPRITEINDEX], a
 	cp $4
 	jr nz, .asm_757c3
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld de, MovementData_757d7
 	jr .asm_757cb
 .asm_757c3
 	ld de, MovementData_757da
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 .asm_757cb
 	call MoveSprite
 	ld a, $1
@@ -99,7 +99,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, wd79a
 	call CinnabarGymScript_757f1
 	ld a, c
@@ -113,13 +113,13 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wd79a
 	call CinnabarGymScript_757f1
 	ld a, [wTrainerHeaderFlagBit]
 	sub $2
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wd79c
 	call CinnabarGymScript_757f1
 	call Func_3ead

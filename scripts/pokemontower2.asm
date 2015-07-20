@@ -33,15 +33,15 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	res 6, [hl]
 	ld a, [wCoordIndex]
 	cp $1
-	ld a, $8
+	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
 	jr nz, .asm_60544
 	ld hl, wd764
 	set 6, [hl]
-	ld a, $2
+	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
 .asm_60544
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, b

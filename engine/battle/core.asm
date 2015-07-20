@@ -187,9 +187,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld b, $1
 	call GoPAL_SET
 	call HideSprites
-	ld hl, PrintBeginningBattleText
-	ld b, BANK(PrintBeginningBattleText)
-	jp Bankswitch
+	jpab PrintBeginningBattleText
 
 ; when a battle is starting, silhouettes of the player's pic and the enemy's pic are slid onto the screen
 ; the lower of the player's pic (his body) is part of the background, but his head is a sprite
@@ -330,7 +328,7 @@ StartBattle: ; 3c11e (f:411e)
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	push bc
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
@@ -359,9 +357,7 @@ EnemyRan: ; 3c202 (f:4202)
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a
-	ld hl, AnimationSlideEnemyMonOut
-	ld b, BANK(AnimationSlideEnemyMonOut)
-	jp Bankswitch
+	jpab AnimationSlideEnemyMonOut
 
 WildRanText: ; 3c229 (f:4229)
 	TX_FAR _WildRanText
@@ -938,9 +934,7 @@ FaintEnemyPokemon: ; 0x3c567
 	jr nz, .gainExpFlagsLoop
 	ld a, b
 	ld [wPartyGainExpFlags], a
-	ld hl, GainExperience
-	ld b, BANK(GainExperience)
-	jp Bankswitch
+	jpab GainExperience
 
 EnemyMonFaintedText: ; 0x3c63e
 	TX_FAR _EnemyMonFaintedText
@@ -1087,7 +1081,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld a, [wPlayerMonNumber]
 	ld c, a
 	ld hl, wPartyGainExpFlags
-	ld b, $0
+	ld b, FLAG_RESET
 	predef FlagActionPredef ; clear gain exp flag for fainted mon
 	ld hl, W_ENEMYBATTSTATUS1
 	res 2, [hl]   ; reset "attacking multiple times" flag
@@ -1187,7 +1181,7 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 	ld [wPlayerMonNumber], a
 	ld c, a
 	ld hl, wPartyGainExpFlags
-	ld b, $1
+	ld b, FLAG_SET
 	push bc
 	predef FlagActionPredef
 	pop bc
@@ -1356,7 +1350,7 @@ EnemySendOut: ; 3c90e (f:490e)
 	ld [hl],a
 	ld a,[wPlayerMonNumber]
 	ld c,a
-	ld b,1
+	ld b,FLAG_SET
 	push bc
 	predef FlagActionPredef
 	ld hl,wPartyFoughtCurrentEnemyFlags
@@ -2496,7 +2490,7 @@ SwitchPlayerMon: ; 3d1ba (f:51ba)
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	push bc
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
@@ -6302,7 +6296,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef WriteMonMoves ; get moves based on current level
 .loadMovePPs
 	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonSpecial + 1
+	ld de, wEnemyMonPP - 1
 	predef LoadMovePPs
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
@@ -6332,7 +6326,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
 	ld hl, wEnemyMonLevel
@@ -6462,14 +6456,10 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 ; does nothing since no stats are ever selected (barring glitches)
 DoubleOrHalveSelectedStats: ; 3ed02 (f:6d02)
 	callab DoubleSelectedStats
-	ld hl, HalveSelectedStats
-	ld b, BANK(HalveSelectedStats)
-	jp Bankswitch
+	jpab HalveSelectedStats
 
 ScrollTrainerPicAfterBattle: ; 3ed12 (f:6d12)
-	ld hl, _ScrollTrainerPicAfterBattle
-	ld b, BANK(_ScrollTrainerPicAfterBattle)
-	jp Bankswitch
+	jpab _ScrollTrainerPicAfterBattle
 
 ApplyBurnAndParalysisPenaltiesToPlayer: ; 3ed1a (f:6d1a)
 	ld a, $1
@@ -6967,7 +6957,7 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	ld [wLetterPrintingDelayFlags], a
 	pop af
 	ld [wMapPalOffset], a
-	ld a, [wd0d4]
+	ld a, [wSavedTilesetType]
 	ld [hTilesetType], a
 	scf
 	ret
@@ -7372,9 +7362,7 @@ BadlyPoisonedText: ; 3f2e4 (f:72e4)
 	db "@"
 
 DrainHPEffect: ; 3f2e9 (f:72e9)
-	ld hl, DrainHPEffect_
-	ld b, BANK(DrainHPEffect_)
-	jp Bankswitch
+	jpab DrainHPEffect_
 
 ExplodeEffect: ; 3f2f1 (f:72f1)
 	ld hl, wBattleMonHP
@@ -8209,9 +8197,7 @@ FlinchSideEffect: ; 3f85b (f:785b)
 	ret
 
 OneHitKOEffect: ; 3f884 (f:7884)
-	ld hl, OneHitKOEffect_
-	ld b, BANK(OneHitKOEffect_)
-	jp Bankswitch
+	jpab OneHitKOEffect_
 
 ChargeEffect: ; 3f88c (f:788c)
 	ld hl, W_PLAYERBATTSTATUS1
@@ -8321,19 +8307,13 @@ TrappingEffect: ; 3f917 (f:7917)
 	ret
 
 MistEffect: ; 3f941 (f:7941)
-	ld hl, MistEffect_
-	ld b, BANK(MistEffect_)
-	jp Bankswitch
+	jpab MistEffect_
 
 FocusEnergyEffect: ; 3f949 (f:7949)
-	ld hl, FocusEnergyEffect_
-	ld b, BANK(FocusEnergyEffect_)
-	jp Bankswitch
+	jpab FocusEnergyEffect_
 
 RecoilEffect: ; 3f951 (f:7951)
-	ld hl, RecoilEffect_
-	ld b, BANK(RecoilEffect_)
-	jp Bankswitch
+	jpab RecoilEffect_
 
 ConfusionSideEffect: ; 3f959 (f:7959)
 	call BattleRandom
@@ -8387,14 +8367,10 @@ ConfusionEffectFailed: ; 3f9a6 (f:79a6)
 	jp ConditionalPrintButItFailed
 
 ParalyzeEffect: ; 3f9b1 (f:79b1)
-	ld hl, ParalyzeEffect_
-	ld b, BANK(ParalyzeEffect_)
-	jp Bankswitch
+	jpab ParalyzeEffect_
 
 SubstituteEffect: ; 3f9b9 (f:79b9)
-	ld hl, SubstituteEffect_
-	ld b, BANK(SubstituteEffect_)
-	jp Bankswitch
+	jpab SubstituteEffect_
 
 HyperBeamEffect: ; 3f9c1 (f:79c1)
 	ld hl, W_PLAYERBATTSTATUS2
@@ -8505,9 +8481,7 @@ MimicLearnedMoveText: ; 3fa77 (f:7a77)
 	db "@"
 
 LeechSeedEffect: ; 3fa7c (f:7a7c)
-	ld hl, LeechSeedEffect_
-	ld b, BANK(LeechSeedEffect_)
-	jp Bankswitch
+	jpab LeechSeedEffect_
 
 SplashEffect: ; 3fa84 (f:7a84)
 	call PlayCurrentMoveAnimation
@@ -8601,34 +8575,22 @@ MoveWasDisabledText: ; 3fb09 (f:7b09)
 	db "@"
 
 PayDayEffect: ; 3fb0e (f:7b0e)
-	ld hl, PayDayEffect_
-	ld b, BANK(PayDayEffect_)
-	jp Bankswitch
+	jpab PayDayEffect_
 
 ConversionEffect: ; 3fb16 (f:7b16)
-	ld hl, ConversionEffect_
-	ld b, BANK(ConversionEffect_)
-	jp Bankswitch
+	jpab ConversionEffect_
 
 HazeEffect: ; 3fb1e (f:7b1e)
-	ld hl, HazeEffect_
-	ld b, BANK(HazeEffect_)
-	jp Bankswitch
+	jpab HazeEffect_
 
 HealEffect: ; 3fb26 (f:7b26)
-	ld hl, HealEffect_
-	ld b, BANK(HealEffect_)
-	jp Bankswitch
+	jpab HealEffect_
 
 TransformEffect: ; 3fb2e (f:7b2e)
-	ld hl, TransformEffect_
-	ld b, BANK(TransformEffect_)
-	jp Bankswitch
+	jpab TransformEffect_
 
 ReflectLightScreenEffect: ; 3fb36 (f:7b36)
-	ld hl, ReflectLightScreenEffect_
-	ld b, BANK(ReflectLightScreenEffect_)
-	jp Bankswitch
+	jpab ReflectLightScreenEffect_
 
 NothingHappenedText: ; 3fb3e (f:7b3e)
 	TX_FAR _NothingHappenedText

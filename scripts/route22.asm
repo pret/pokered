@@ -67,8 +67,8 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	ld a, [wd7eb]
 	bit 0, a ; is this the rival battle at the beginning of the game?
 	jr nz, .firstRivalBattle
@@ -111,8 +111,8 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_50f78
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_UP
 	jr .asm_50f7a
 .asm_50f78
@@ -270,13 +270,13 @@ Route22Script4: ; 51087 (14:5087)
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510a1
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_UP
 	jr .asm_510a8
 .asm_510a1
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_RIGHT
 .asm_510a8
 	ld [hSpriteFacingDirection], a
@@ -314,13 +314,13 @@ Route22Script5: ; 510df (14:50df)
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510fb
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_UP
 	jr .asm_51102
 .asm_510fb
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	ld a, SPRITE_FACING_RIGHT
 .asm_51102
 	ld [hSpriteFacingDirection], a

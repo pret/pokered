@@ -379,7 +379,7 @@ IsPokemonBitSet: ; 402c2 (10:42c2)
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,2
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a

@@ -170,7 +170,7 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ld [hCoins - 1], a
+	ld [hUnusedCoinsByte], a
 	ld [hCoins], a
 	ld a, $50
 	ld [hCoins + 1], a
@@ -238,7 +238,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	call Has9990Coins
 	jr nc, .asm_48d8e
 	xor a
-	ld [hCoins - 1], a
+	ld [hUnusedCoinsByte], a
 	ld [hCoins], a
 	ld a, $10
 	ld [hCoins + 1], a
@@ -320,7 +320,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	call Has9990Coins
 	jr nc, .asm_48e18
 	xor a
-	ld [hCoins - 1], a
+	ld [hUnusedCoinsByte], a
 	ld [hCoins], a
 	ld a, $20
 	ld [hCoins + 1], a
@@ -373,7 +373,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	call Has9990Coins
 	jr z, .asm_48e7a
 	xor a
-	ld [hCoins - 1], a
+	ld [hUnusedCoinsByte], a
 	ld [hCoins], a
 	ld a, $20
 	ld [hCoins + 1], a

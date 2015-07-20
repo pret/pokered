@@ -28,8 +28,8 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	ret nz
 	xor a
 	ld [hJoyHeld],a
-	ld a,4
-	ld [wd528],a
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection],a
 	ld a,$FF
 	call PlaySound ; stop music
 	ld a, BANK(Music_MeetProfOak)
@@ -190,8 +190,8 @@ OakAppearsText: ; 18fb0 (6:4fb0)
 	ld [wEmotionBubbleSpriteIndex],a ; player's sprite
 	ld [wWhichEmotionBubble],a ; EXCLAMATION_BUBBLE
 	predef EmotionBubble
-	ld a,4
-	ld [wd528],a
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection],a
 	jp TextScriptEnd
 
 OakWalksUpText: ; 18fce (6:4fce)

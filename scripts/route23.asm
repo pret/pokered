@@ -52,7 +52,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld [hSpriteIndexOrTextID], a
 	ld a, c
 	ld [wWhichBadge], a
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, c
@@ -193,7 +193,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld a, [wWhichBadge]
 	inc a
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	ld hl, W_OBTAINEDBADGES
 	predef FlagActionPredef
 	ld a, c
@@ -210,7 +210,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	call PrintText
 	ld a, [wWhichBadge]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, $2

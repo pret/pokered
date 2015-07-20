@@ -27,8 +27,8 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld hl, CoordsData_1e22c
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, $2
-	ld [wd528], a
+	ld a, PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection], a
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink

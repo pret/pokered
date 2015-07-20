@@ -400,15 +400,15 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,2
-	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
+	ld b,FLAG_TEST
+	ld hl,wPokedexOwned
 	predef FlagActionPredef
 	ld a,c
 	push af
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,1
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	pop af
 	and a
@@ -499,9 +499,7 @@ ItemUseTownMap: ; d968 (3:5968)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b, BANK(DisplayTownMap)
-	ld hl, DisplayTownMap
-	jp Bankswitch ; display Town Map
+	jpba DisplayTownMap
 
 ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]
@@ -593,14 +591,14 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
-	ld a,[wd52a] ; direction the player is going
-	bit 3,a
+	ld a,[wPlayerDirection] ; direction the player is going
+	bit PLAYER_DIR_BIT_UP,a
 	ld b,D_UP
 	jr nz,.storeSimulatedButtonPress
-	bit 2,a
+	bit PLAYER_DIR_BIT_DOWN,a
 	ld b,D_DOWN
 	jr nz,.storeSimulatedButtonPress
-	bit 1,a
+	bit PLAYER_DIR_BIT_LEFT,a
 	ld b,D_LEFT
 	jr nz,.storeSimulatedButtonPress
 	ld b,D_RIGHT
@@ -806,7 +804,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyFoughtCurrentEnemyFlags
-	ld b,$02
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -814,7 +812,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyGainExpFlags
-	ld b,$01
+	ld b,FLAG_SET
 	predef FlagActionPredef
 .next
 	pop bc
@@ -2552,8 +2550,8 @@ IsKeyItem_: ; e764 (3:6764)
 	dec a
 	ld c,a
 	ld hl,wHPBarMaxHP
-	ld b,$02 ; test bit
-	predef FlagActionPredef ; bitfield operation function
+	ld b,FLAG_TEST
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ret nz
