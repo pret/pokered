@@ -46,14 +46,14 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_259
+	SetEvent EVENT_BEAT_KOGA
 	ld bc, (TM_06 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_258
+	SetEvent EVENT_GOT_TM06
 	jr .asm_754c0
 .BagFull
 	ld a, $b
@@ -142,9 +142,9 @@ FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 
 FuchsiaGymText1: ; 75534 (1d:5534)
 	TX_ASM
-	CheckEvent EVENT_259
+	CheckEvent EVENT_BEAT_KOGA
 	jr z, .asm_181b6
-	CheckEventReuseA EVENT_258
+	CheckEventReuseA EVENT_GOT_TM06
 	jr nz, .asm_adc3b
 	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
@@ -313,7 +313,7 @@ FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 
 FuchsiaGymText8: ; 7563a (1d:563a)
 	TX_ASM
-	CheckEvent EVENT_259
+	CheckEvent EVENT_BEAT_KOGA
 	ld hl, FuchsiaGymText_75653
 	jr nz, .asm_50671
 	ld hl, FuchsiaGymText_7564e

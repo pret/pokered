@@ -151,7 +151,7 @@ ViridianCityText2: ; 19107 (6:5107)
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe
-	CheckEvent EVENT_051
+	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .asm_ae9fe
 	ld hl, ViridianCityText_19122
 .asm_ae9fe

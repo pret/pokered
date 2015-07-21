@@ -143,14 +143,14 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_299
+	SetEvent EVENT_BEAT_BLAINE
 	ld bc, (TM_38 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_298
+	SetEvent EVENT_GOT_TM38
 	jr .asm_75880
 .BagFull
 	ld a, $c
@@ -206,9 +206,9 @@ CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 
 CinnabarGymText1: ; 758df (1d:58df)
 	TX_ASM
-	CheckEvent EVENT_299
+	CheckEvent EVENT_BEAT_BLAINE
 	jr z, .asm_d9332
-	CheckEventReuseA EVENT_298
+	CheckEventReuseA EVENT_GOT_TM38
 	jr nz, .asm_3012f
 	call z, CinnabarGymScript3_75857
 	call DisableWaitingAfterTextDisplay
@@ -453,7 +453,7 @@ CinnabarGymText_75aa7: ; 75aa7 (1d:5aa7)
 
 CinnabarGymText9: ; 75aac (1d:5aac)
 	TX_ASM
-	CheckEvent EVENT_299
+	CheckEvent EVENT_BEAT_BLAINE
 	jr nz, .asm_627d9
 	ld hl, CinnabarGymText_75ac2
 	jr .asm_0b11d

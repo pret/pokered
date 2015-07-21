@@ -65,14 +65,14 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_167
+	SetEvent EVENT_BEAT_LT_SURGE
 	ld bc, (TM_24 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_166
+	SetEvent EVENT_GOT_TM24
 	jr .asm_5cad3
 .BagFull
 	ld a, $8
@@ -131,9 +131,9 @@ VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 
 VermilionGymText1: ; 5cb1d (17:4b1d)
 	TX_ASM
-	CheckEvent EVENT_167
+	CheckEvent EVENT_BEAT_LT_SURGE
 	jr z, .asm_5cb39
-	CheckEventReuseA EVENT_166
+	CheckEventReuseA EVENT_GOT_TM24
 	jr nz, .asm_5cb31
 	call z, VermilionGymScript_5caaa
 	call DisableWaitingAfterTextDisplay

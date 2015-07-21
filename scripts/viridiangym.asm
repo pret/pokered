@@ -140,14 +140,14 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, $c
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_051
+	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	ld bc, (TM_27 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_050
+	SetEvent EVENT_GOT_TM27
 	jr .asm_749be
 .BagFull
 	ld a, $e
@@ -261,9 +261,9 @@ ViridianGymTrainerHeader7: ; 74a5c (1d:4a5c)
 
 ViridianGymText1: ; 74a69 (1d:4a69)
 	TX_ASM
-	CheckEvent EVENT_051
+	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr z, .asm_6de66
-	CheckEventReuseA EVENT_050
+	CheckEventReuseA EVENT_GOT_TM27
 	jr nz, .asm_9fc95
 	call z, ViridianGymScript3_74995
 	call DisableWaitingAfterTextDisplay
@@ -475,7 +475,7 @@ ViridianGymAfterBattleText8: ; 74bb6 (1d:4bb6)
 
 ViridianGymText10: ; 74bbb (1d:4bbb)
 	TX_ASM
-	CheckEvent EVENT_051
+	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .asm_1abd1
 	ld hl, ViridianGymText_74bd4
 	call PrintText

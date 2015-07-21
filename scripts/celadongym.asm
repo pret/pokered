@@ -46,14 +46,14 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	ld a, $9
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_1A9
+	SetEvent EVENT_BEAT_ERIKA
 	ld bc, (TM_21 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	SetEvent EVENT_1A8
+	SetEvent EVENT_GOT_TM21
 	jr .asm_4898c
 .BagFull
 	ld a, $b
@@ -151,9 +151,9 @@ CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 
 CeladonGymText1: ; 48a11 (12:4a11)
 	TX_ASM
-	CheckEvent EVENT_1A9
+	CheckEvent EVENT_BEAT_ERIKA
 	jr z, .asm_48a2d
-	CheckEventReuseA EVENT_1A8
+	CheckEventReuseA EVENT_GOT_TM21
 	jr nz, .asm_48a25
 	call z, CeladonGymText_48963
 	call DisableWaitingAfterTextDisplay

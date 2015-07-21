@@ -428,7 +428,7 @@ event_fill_count = 1 + event_fill_count
 		ELSE
 			IF ((\2) % 8) != 7
 				ld a, [wEventFlags + event_end_byte]
-				and ~((1 << (((\2) % 8) + 1)) - 1) $ ff
+				and ~((1 << (((\2) % 8) + 1)) - 1) & $ff
 				ld [wEventFlags + event_end_byte], a
 			ENDC
 		ENDC

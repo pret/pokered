@@ -21,7 +21,7 @@ PewterCityScript0: ; 19251 (6:5251)
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	CheckEvent EVENT_077
+	CheckEvent EVENT_BEAT_BROCK
 	ret nz
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray

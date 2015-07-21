@@ -283,7 +283,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	TX_ASM
-	CheckEvent EVENT_1A9
+	CheckEvent EVENT_BEAT_ERIKA
 	ld hl, CeladonGameCornerText_48dca
 	jr z, .asm_48dc4
 	ld hl, CeladonGameCornerText_48dcf
