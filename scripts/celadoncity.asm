@@ -42,7 +42,7 @@ CeladonCityText4: ; 19999 (6:5999)
 
 CeladonCityText5: ; 1999e (6:599e)
 	TX_ASM
-	CheckEvent EVENT_180
+	CheckEvent EVENT_GOT_TM41
 	jr nz, .asm_7053f
 	ld hl, TM41PreText
 	call PrintText
@@ -55,7 +55,7 @@ CeladonCityText5: ; 1999e (6:599e)
 .Success
 	ld hl, ReceivedTM41Text
 	call PrintText
-	SetEvent EVENT_180
+	SetEvent EVENT_GOT_TM41
 	jr .Done
 .asm_7053f
 	ld hl, TM41ExplanationText

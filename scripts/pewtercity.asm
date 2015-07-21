@@ -16,7 +16,7 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
-	ResetEvent EVENT_068
+	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	call PewterCityScript_1925e
 	ret
 

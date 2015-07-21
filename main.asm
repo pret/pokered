@@ -2760,7 +2760,7 @@ CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ret nz
-	CheckBothEventsSet EVENT_9D0, EVENT_9D1
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld hl, CoordsData_cdf7
 	call ArePlayerCoordsInArray

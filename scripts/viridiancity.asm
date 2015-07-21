@@ -15,12 +15,12 @@ ViridianCityScript0: ; 19005 (6:5005)
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b: ; 1900b (6:500b)
-	CheckEvent EVENT_028
+	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret nz
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	jr nz, .asm_1901e
-	SetEvent EVENT_028
+	SetEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret
 .asm_1901e
 	ld a, [W_YCOORD]
@@ -231,7 +231,7 @@ ViridianCityText_19191: ; 19191 (6:5191)
 
 ViridianCityText6: ; 19196 (6:5196)
 	TX_ASM
-	CheckEvent EVENT_029
+	CheckEvent EVENT_GOT_TM42
 	jr nz, .asm_4e5a0
 	ld hl, ViridianCityText_191ca
 	call PrintText
@@ -240,7 +240,7 @@ ViridianCityText6: ; 19196 (6:5196)
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
-	SetEvent EVENT_029
+	SetEvent EVENT_GOT_TM42
 	jr .asm_3c73c
 .BagFull
 	ld hl, TM42NoRoomText

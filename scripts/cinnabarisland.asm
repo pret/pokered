@@ -2,8 +2,8 @@ CinnabarIslandScript: ; 1ca19 (7:4a19)
 	call EnableAutoTextBoxDrawing
 	ld hl, wd126
 	set 5, [hl]
-	ResetEvent EVENT_278
-	ResetEvent EVENT_2E1
+	ResetEvent EVENT_MANSION_SWITCH_ON
+	ResetEvent EVENT_LAB_STILL_REVIVING_FOSSIL
 	ld hl, CinnabarIslandScriptPointers
 	ld a, [W_CINNABARISLANDCURSCRIPT]
 	jp CallFunctionInTable

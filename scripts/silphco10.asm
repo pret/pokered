@@ -16,7 +16,7 @@ SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	ld hl, DataTable_5a173
 	call SilphCo2Script_59d43
 	call SilphCo10Text_5a176
-	CheckEvent EVENT_778
+	CheckEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -30,7 +30,7 @@ SilphCo10Text_5a176: ; 5a176 (16:6176)
 	ld a, [$ffe0]
 	and a
 	ret z
-	SetEvent EVENT_778
+	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret
 
 SilphCo10ScriptPointers: ; 5a180 (16:6180)
@@ -81,7 +81,7 @@ SilphCo10Text2: ; 5a1b5 (16:61b5)
 
 SilphCo10Text3: ; 5a1bf (16:61bf)
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo10Text_5a1d8
 	jr nz, .asm_cf85f
 	ld hl, SilphCo10Text_5a1d3

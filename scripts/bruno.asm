@@ -69,7 +69,7 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_7635d
-	CheckAndSetEvent EVENT_8EE
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_BRUNOS_ROOM
 	jr z, BrunoScript_7631d
 .asm_7635d
 	ld a, $2

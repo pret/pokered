@@ -54,13 +54,13 @@ Museum1FText1: ; 5c135 (17:4135)
 	cp $c
 	jp z, Museum1FScript_5c1f9
 .asm_d49e7
-	CheckEvent EVENT_068
+	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
 	jr nz, .asm_31a16
 	ld hl, Museum1FText_5c23d
 	call PrintText
 	jp Museum1FScriptEnd
 .asm_b8709
-	CheckEvent EVENT_068
+	CheckEvent EVENT_BOUGHT_MUSEUM_TICKET
 	jr z, .asm_3ded4
 .asm_31a16
 	ld hl, Museum1FText_5c242
@@ -91,7 +91,7 @@ Museum1FText1: ; 5c135 (17:4135)
 .asm_0f3e3
 	ld hl, Museum1FText_5c224
 	call PrintText
-	SetEvent EVENT_068
+	SetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	xor a
 	ld [wPriceTemp], a
 	ld [wPriceTemp + 1], a
@@ -187,14 +187,14 @@ Museum1FText_5c251: ; 5c251 (17:4251)
 
 Museum1FText3: ; 5c256 (17:4256)
 	TX_ASM
-	CheckEvent EVENT_069
+	CheckEvent EVENT_GOT_OLD_AMBER
 	jr nz, .asm_5c285
 	ld hl, Museum1FText_5c28e
 	call PrintText
 	ld bc, (OLD_AMBER << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	SetEvent EVENT_069
+	SetEvent EVENT_GOT_OLD_AMBER
 	ld a, HS_OLD_AMBER
 	ld [wcc4d], a
 	predef HideObject

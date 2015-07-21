@@ -28,7 +28,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_1B9
+	CheckEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ret nz
 	ld a, $2a
 	ld [wd09f], a
@@ -226,7 +226,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	TX_ASM
-	CheckEvent EVENT_1BA
+	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
 	call PrintText
@@ -244,7 +244,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	SetEvent EVENT_1BA
+	SetEvent EVENT_GOT_10_COINS
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Received10CoinsText
@@ -305,7 +305,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	TX_ASM
-	CheckEvent EVENT_1BC
+	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
 	call PrintText
@@ -323,7 +323,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	SetEvent EVENT_1BC
+	SetEvent EVENT_GOT_20_COINS_2
 	ld hl, Received20CoinsText
 	jr .asm_48e20
 .asm_48e13
@@ -356,7 +356,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	TX_ASM
-	CheckEvent EVENT_1BB
+	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
 	call PrintText
@@ -374,7 +374,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	SetEvent EVENT_1BB
+	SetEvent EVENT_GOT_20_COINS
 	ld hl, CeladonGameCornerText_48e8d
 	jr .asm_48e82
 .asm_48e75
@@ -449,7 +449,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
-	SetEvent EVENT_1B9
+	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
 	ld [wd09f], a
 	ld bc, $0208

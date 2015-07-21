@@ -13,7 +13,7 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_278
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_442ec
 	ld bc, $060c
 	call Mansion1Script_4430b
@@ -112,9 +112,9 @@ Mansion1Text4: ; 4435a (11:435a)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	CheckAndSetEvent EVENT_278
+	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_44392
-	ResetEventReuseHL EVENT_278
+	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_44392
 .asm_4438c
 	ld hl, MansionSwitchNotPressedText

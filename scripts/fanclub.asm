@@ -24,16 +24,16 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 FanClubText1:
 ; pikachu fan
 	TX_ASM
-	CheckEvent EVENT_157
+	CheckEvent EVENT_PIKACHU_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	SetEvent EVENT_156
+	SetEvent EVENT_SEEL_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ResetEvent EVENT_157
+	ResetEvent EVENT_PIKACHU_FAN_BOAST
 .done
 	jp TextScriptEnd
 
@@ -48,16 +48,16 @@ FanClubText1:
 FanClubText2:
 ; seel fan
 	TX_ASM
-	CheckEvent EVENT_156
+	CheckEvent EVENT_SEEL_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	SetEvent EVENT_157
+	SetEvent EVENT_PIKACHU_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ResetEvent EVENT_156
+	ResetEvent EVENT_SEEL_FAN_BOAST
 .done
 	jp TextScriptEnd
 

@@ -22,7 +22,7 @@ Route24ScriptPointers: ; 513cb (14:53cb)
 	dw Route24Script4
 
 Route24Script0: ; 513d5 (14:53d5)
-	CheckEvent EVENT_540
+	CheckEvent EVENT_GOT_NUGGET
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5140e
 	call ArePlayerCoordsInArray
@@ -32,7 +32,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	CheckAndResetEvent EVENT_549
+	CheckAndResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	ret z
 	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
@@ -64,7 +64,7 @@ Route24Script3: ; 51422 (14:5422)
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEvent EVENT_541
+	SetEvent EVENT_BEAT_ROUTE24_ROCKET
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -144,15 +144,15 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 
 Route24Text1: ; 514a4 (14:54a4)
 	TX_ASM
-	ResetEvent EVENT_549
-	CheckEvent EVENT_540
+	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
+	CheckEvent EVENT_GOT_NUGGET
 	jr nz, .asm_514f9
 	ld hl, Route24Text_51510
 	call PrintText
 	ld bc, (NUGGET << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	SetEvent EVENT_540
+	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
 	call PrintText
 	ld hl, Route24Text_51526
@@ -180,7 +180,7 @@ Route24Text1: ; 514a4 (14:54a4)
 .BagFull
 	ld hl, Route24Text_51521
 	call PrintText
-	SetEvent EVENT_549
+	SetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	jp TextScriptEnd
 
 Route24Text_51510: ; 51510 (14:5510)

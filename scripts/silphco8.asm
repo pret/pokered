@@ -16,7 +16,7 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	ld hl, DataTable_5653e
 	call SilphCo8Script_56541
 	call SilphCo8Script_5656d
-	CheckEvent EVENT_758
+	CheckEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -66,7 +66,7 @@ SilphCo8Script_5656d: ; 5656d (15:656d)
 	ld a, [$ffe0]
 	and a
 	ret z
-	SetEvent EVENT_758
+	SetEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	ret
 
 SilphCo8ScriptPointers: ; 56577 (15:6577)
@@ -112,7 +112,7 @@ SilphCo8TrainerHeader2: ; 5659d (15:659d)
 
 SilphCo8Text1: ; 565aa (15:65aa)
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo8Text_565c3
 	jr nz, .asm_565b8
 	ld hl, SilphCo8Text_565be

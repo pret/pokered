@@ -16,7 +16,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld hl, DataTable_51bc1
 	call SilphCo7Text_51bc8
 	call SilphCo7Text_51bf4
-	CheckEvent EVENT_74C
+	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	jr nz, .asm_51b9e
 	push af
 	ld a, $54
@@ -25,7 +25,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	predef ReplaceTileBlock
 	pop af
 .asm_51b9e
-	bit 5, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	jr nz, .asm_51bb1
 	push af
 	ld a, $54
@@ -34,7 +34,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	predef ReplaceTileBlock
 	pop af
 .asm_51bb1
-	bit 6, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR2
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -81,21 +81,21 @@ SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	ret
 
 SilphCo7Text_51bf4: ; 51bf4 (14:5bf4)
-	EventFlagAddress hl, EVENT_74C
+	EventFlagAddress hl, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next1
-	SetEventReuseHL EVENT_74C
+	SetEventReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 .next1
 	cp $2
 	jr nz, .next2
-	SetEventAfterBranchReuseHL EVENT_74D, EVENT_74C
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 .next2
-	SetEventAfterBranchReuseHL EVENT_74E, EVENT_74C
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 
 SilphCo7Text_51c0c: ; 51c0c (14:5c0c)
@@ -116,7 +116,7 @@ SilphCo7ScriptPointers: ; 51c17 (14:5c17)
 	dw SilphCo7Script5
 
 SilphCo7Script0: ; 51c23 (14:5c23)
-	CheckEvent EVENT_740
+	CheckEvent EVENT_BEAT_SILPH_CO_RIVAL
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_51c78
 	call ArePlayerCoordsInArray
@@ -205,7 +205,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	jp z, SilphCo7Text_51c0c
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEvent EVENT_740
+	SetEvent EVENT_BEAT_SILPH_CO_RIVAL
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, $9
@@ -321,7 +321,7 @@ SilphCo7Text1:
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .LaprasGuyText
 	call PrintText
@@ -365,7 +365,7 @@ SilphCo7Text1:
 
 SilphCo7Text2:
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText
@@ -386,7 +386,7 @@ SilphCo7Text2:
 
 SilphCo7Text3:
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText
@@ -407,7 +407,7 @@ SilphCo7Text3:
 
 SilphCo7Text4:
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText

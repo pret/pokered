@@ -25,7 +25,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	jp z, CeruleanCityScript_1948c
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEvent EVENT_0A7
+	SetEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -35,7 +35,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ret
 
 CeruleanCityScript0: ; 194c8 (6:54c8)
-	CheckEvent EVENT_0A7
+	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .asm_194f7
 	ld hl, CeruleanCityCoords1
 	call ArePlayerCoordsInArray
@@ -56,7 +56,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_194f7
-	CheckEvent EVENT_098
+	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
 	ret nz
 	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
@@ -167,7 +167,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	call CeruleanCityScript_1955d
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEvent EVENT_098
+	SetEvent EVENT_BEAT_CERULEAN_RIVAL
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -248,7 +248,7 @@ CeruleanCityTextPointers: ; 1962d (6:562d)
 
 CeruleanCityText1: ; 1964f (6:564f)
 	TX_ASM
-	CheckEvent EVENT_098
+	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
 	; do pre-battle text
 	jr z, .PreBattleText
 	; or talk about bill
@@ -279,7 +279,7 @@ CeruleanCityText_19677: ; 19677 (6:5677)
 
 CeruleanCityText2: ; 1967c (6:567c)
 	TX_ASM
-	CheckEvent EVENT_0A7
+	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .asm_4ca20
 	ld hl, CeruleanCityText_196d9
 	call PrintText

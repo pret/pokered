@@ -70,7 +70,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_76206
-	CheckAndSetEvent EVENT_8E6
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
 	jr z, LoreleiScript_761c6
 .asm_76206
 	ld a, $2

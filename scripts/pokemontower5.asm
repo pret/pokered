@@ -18,10 +18,10 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	jr c, .asm_60960
 	ld hl, wd72e
 	res 4, [hl]
-	ResetEvent EVENT_107
+	ResetEvent EVENT_IN_PURIFIED_ZONE
 	jp CheckFightingMapTrainers
 .asm_60960
-	CheckAndSetEvent EVENT_107
+	CheckAndSetEvent EVENT_IN_PURIFIED_ZONE
 	ret nz
 	xor a
 	ld [hJoyHeld], a

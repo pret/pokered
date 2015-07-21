@@ -69,7 +69,7 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_764b4
-	CheckAndSetEvent EVENT_8F6
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_AGATHAS_ROOM
 	jr z, AgathaScript_76474
 .asm_764b4
 	ld a, $2

@@ -19,7 +19,19 @@ event_byte = ((\1) / 8)
 
 ;\1 = event index
 CheckEventReuseA: MACRO
-IF event_byte != ((\1) / 8)
+	IF event_byte != ((\1) / 8)
+event_byte = ((\1) / 8)
+		ld a, [wEventFlags + event_byte]
+	ENDC
+
+	bit (\1) % 8, a
+	ENDM
+
+;\1 = event index
+;\2 = event index of the last event used before the branch
+CheckEventAfterBranchReuseA: MACRO
+event_byte = ((\2) / 8)
+	IF event_byte != ((\1) / 8)
 event_byte = ((\1) / 8)
 		ld a, [wEventFlags + event_byte]
 	ENDC
@@ -355,11 +367,17 @@ event_fill_count = event_fill_count + 1
 	ENDM
 
 ; returns whether both events are set in Z flag
+; This is counter-intuitive because the other event checks set the Z flag when
+; the event is not set, but this sets the Z flag when the event is set.
 ;\1 = event index 1
 ;\2 = event index 2
+;\3 = try to reuse a (optional)
 CheckBothEventsSet: MACRO
 	IF ((\1) / 8) == ((\2) / 8)
-		ld a, [wEventFlags + ((\1) / 8)]
+		IF (_NARG < 3) || (((\1) / 8) != event_byte)
+event_byte = ((\1) / 8)
+			ld a, [wEventFlags + ((\1) / 8)]
+		ENDC
 		and (1 << ((\1) % 8)) | (1 << ((\2) % 8))
 		cp (1 << ((\1) % 8)) | (1 << ((\2) % 8))
 	ELSE

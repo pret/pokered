@@ -17,7 +17,7 @@ Route11GateUpstairsScriptEnd: ; 49469 (12:5469)
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	TX_ASM
-	CheckEvent EVENT_47F, 1
+	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
 	ld [$ffdb], a
@@ -34,7 +34,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1
-	SetEvent EVENT_47F
+	SetEvent EVENT_GOT_ITEMFINDER
 .asm_4949b
 	ld hl, Route11GateUpstairsText_494a3
 	call PrintText

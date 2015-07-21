@@ -7,18 +7,18 @@ SeafoamIslands2Script: ; 46315 (11:6315)
 	ld hl, Seafoam2HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	EventFlagAddress hl, EVENT_9C0
+	EventFlagAddress hl, EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_46340
-	SetEventReuseHL EVENT_9C0
+	SetEventReuseHL EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_1
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_1
 	ld [wd07a], a
 	jr .asm_4634c
 .asm_46340
-	SetEventAfterBranchReuseHL EVENT_9C1, EVENT_9C0
+	SetEventAfterBranchReuseHL EVENT_SEAFOAM2_BOULDER2_DOWN_HOLE, EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_2
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_2

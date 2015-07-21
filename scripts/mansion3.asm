@@ -13,7 +13,7 @@ Mansion3Script_52204: ; 52204 (14:6204)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_278
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52224
 	ld a, $e
 	ld bc, $207

@@ -322,11 +322,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
-	CheckEvent EVENT_55F
+	CheckEvent EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	jr nz, .asm_1ebd2
-	CheckEventReuseA EVENT_55B
+	CheckEventReuseA EVENT_USED_CELL_SEPARATOR_ON_BILL
 	jr nz, .asm_1eb86
-	CheckEventReuseA EVENT_55E
+	CheckEventReuseA EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	jr nz, .asm_1eb8b
 .asm_1eb86
 	tx_pre_jump BillsHouseMonitorText
@@ -355,7 +355,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
-	SetEvent EVENT_55B
+	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret
 .asm_1ebd2
 	ld a, $1

@@ -16,7 +16,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ld hl, DataTable_59fa8
 	call SilphCo2Script_59d43
 	call SilphCo3Script_59fad
-	CheckEvent EVENT_708
+	CheckEvent EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	jr nz, .asm_59f98
 	push af
 	ld a, $5f
@@ -25,7 +25,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	predef ReplaceTileBlock
 	pop af
 .asm_59f98
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -36,16 +36,16 @@ DataTable_59fa8: ; 59fa8 (16:5fa8)
 	db $04,$04,$04,$08,$FF
 
 SilphCo3Script_59fad: ; 59fad (16:5fad)
-	EventFlagAddress hl, EVENT_708
+	EventFlagAddress hl, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next
-	SetEventReuseHL EVENT_708
+	SetEventReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret
 .next
-	SetEventAfterBranchReuseHL EVENT_709, EVENT_708
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret
 
 SilphCo3ScriptPointers: ; 59fbe (16:5fbe)
@@ -82,7 +82,7 @@ SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
 
 SilphCo3Text1: ; 59fe5 (16:5fe5)
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo3Text_59ffe
 	jr nz, .asm_59fee
 	ld hl, SilphCo3Text_59ff9

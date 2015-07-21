@@ -13,17 +13,16 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_6A5
+	CheckEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	jr nz, .asm_45496
-	and $c
-	cp $c
+	CheckBothEventsSet EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2, 1
 	jr z, .asm_4548c
 	ld a, $2d
 	jr .asm_45498
 .asm_4548c
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	SetEvent EVENT_6A5
+	SetEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 .asm_45496
 	ld a, $e
 .asm_45498
@@ -51,7 +50,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEvent EVENT_6A7
+	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -117,7 +116,7 @@ RocketHideout4TrainerHeader3: ; 4552d (11:552d)
 
 RocketHideout4Text1: ; 4553a (11:553a)
 	TX_ASM
-	CheckEvent EVENT_6A7
+	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
 	jp nz, .asm_545571
 	ld hl, RocketHideout4Text_4557a
 	call PrintText
@@ -209,7 +208,7 @@ RocketHideout4AfterBattleText4: ; 455cf (11:55cf)
 	TX_ASM
 	ld hl, RocketHideout4Text_455ec
 	call PrintText
-	CheckAndSetEvent EVENT_6A6
+	CheckAndSetEvent EVENT_ROCKET_DROPPED_LIFT_KEY
 	jr nz, .asm_455e9
 	ld a, HS_ROCKET_HIDEOUT_4_ITEM_5
 	ld [wcc4d], a

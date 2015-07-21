@@ -16,7 +16,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	ld hl, SilphCo5Coords
 	call SilphCo4Script_19d5d
 	call SilphCo5Script_19f9e
-	CheckEvent EVENT_728
+	CheckEvent EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	jr nz, .asm_19f74
 	push af
 	ld a, $5f
@@ -25,7 +25,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	predef ReplaceTileBlock
 	pop af
 .asm_19f74
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_5_UNLOCKED_DOOR2, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	jr nz, .asm_19f87
 	push af
 	ld a, $5f
@@ -34,7 +34,7 @@ SilphCo5Script_19f4d: ; 19f4d (6:5f4d)
 	predef ReplaceTileBlock
 	pop af
 .asm_19f87
-	bit 2, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR2
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -45,21 +45,21 @@ SilphCo5Coords: ; 19f97 (6:5f97)
 	db $02, $03, $06, $03, $05, $07, $ff
 
 SilphCo5Script_19f9e: ; 19f9e (6:5f9e)
-	EventFlagAddress hl, EVENT_728
+	EventFlagAddress hl, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next1
-	SetEventReuseHL EVENT_728
+	SetEventReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
 .next1
 	cp $2
 	jr nz, .next2
-	SetEventAfterBranchReuseHL EVENT_729, EVENT_728
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR2, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
 .next2
-	SetEventAfterBranchReuseHL EVENT_72A, EVENT_728
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_5_UNLOCKED_DOOR3, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
 	ret
 
 SilphCo5ScriptPointers: ; 19fb6 (6:5fb6)

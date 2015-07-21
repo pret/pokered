@@ -13,7 +13,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_278
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52016
 	ld a, $e
 	ld bc, $204
@@ -118,9 +118,9 @@ Mansion2Text5: ; 52087 (14:6087)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	CheckAndSetEvent EVENT_278
+	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_520bf
-	ResetEventReuseHL EVENT_278
+	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_520bf
 .asm_520b9
 	ld hl, Mansion2Text_520cc

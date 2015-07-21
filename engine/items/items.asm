@@ -432,7 +432,7 @@ ItemUseBall: ; d687 (3:5687)
 	call ClearSprites
 	call SendNewMonToBox
 	ld hl,ItemUseBallText07
-	CheckEvent EVENT_550
+	CheckEvent EVENT_MET_BILL
 	jr nz,.sendToBox2
 	ld hl,ItemUseBallText08
 .sendToBox2

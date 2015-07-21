@@ -13,18 +13,18 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	CheckEventHL EVENT_55F
+	CheckEventHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ret nz
-	CheckEventReuseHL EVENT_55D
+	CheckEventReuseHL EVENT_MET_BILL_2
 	jr nz, .asm_515ff
-	ResetEventReuseHL EVENT_55E
+	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
 	ld [wcc4d], a
 	predef_jump ShowObject
 .asm_515ff
-	CheckEventAfterBranchReuseHL EVENT_55C, EVENT_55D
+	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
-	SetEventReuseHL EVENT_55F
+	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ld a, HS_NUGGET_BRIDGE_GUY
 	ld [wcc4d], a
 	predef HideObject

@@ -165,7 +165,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld a, HS_ROUTE_22_RIVAL_2
 	ld [wcc4d], a
 	predef ShowObject
-	SetEvents EVENT_521, EVENT_527
+	SetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 	jp ViridianGymScript_748d6
 
 ViridianGymTextPointers: ; 749ec (1d:49ec)

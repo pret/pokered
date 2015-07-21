@@ -16,7 +16,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld hl, DataTable_59d3e
 	call SilphCo2Script_59d43
 	call SilphCo2Script_59d6f
-	CheckEvent EVENT_6FD
+	CheckEvent EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	jr nz, .asm_59d2e
 	push af
 	ld a, $54
@@ -25,7 +25,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	predef ReplaceTileBlock
 	pop af
 .asm_59d2e
-	bit 6, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_2_UNLOCKED_DOOR2, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -72,16 +72,16 @@ SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	ret
 
 SilphCo2Script_59d6f: ; 59d6f (16:5d6f)
-	EventFlagAddress hl, EVENT_6FD
+	EventFlagAddress hl, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next
-	SetEventReuseHL EVENT_6FD
+	SetEventReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret
 .next
-	SetEventAfterBranchReuseHL EVENT_6FE, EVENT_6FD
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR2, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret
 
 SilphCo2ScriptPointers: ; 59d80 (16:5d80)
@@ -137,7 +137,7 @@ SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 
 SilphCo2Text1: ; 59dc1 (16:5dc1)
 	TX_ASM
-	CheckEvent EVENT_6FF
+	CheckEvent EVENT_GOT_TM36
 	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
 	call PrintText
@@ -145,7 +145,7 @@ SilphCo2Text1: ; 59dc1 (16:5dc1)
 	call GiveItem
 	ld hl, TM36NoRoomText
 	jr nc, .asm_59de7
-	SetEvent EVENT_6FF
+	SetEvent EVENT_GOT_TM36
 	ld hl, ReceivedTM36Text
 	jr .asm_59de7
 .asm_59de4

@@ -16,7 +16,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld hl, SilphCo4Data19d58
 	call SilphCo4Script_19d5d
 	call SilphCo4Script_19d89
-	CheckEvent EVENT_718
+	CheckEvent EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	jr nz, .asm_19d48
 	push af
 	ld a, $54
@@ -25,7 +25,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	predef ReplaceTileBlock
 	pop af
 .asm_19d48
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -72,16 +72,16 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ret
 
 SilphCo4Script_19d89: ; 19d89 (6:5d89)
-	EventFlagAddress hl, EVENT_718
+	EventFlagAddress hl, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next
-	SetEventReuseHL EVENT_718
+	SetEventReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
 .next
-	SetEventAfterBranchReuseHL EVENT_719, EVENT_718
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
 
 SilphCo4ScriptPointers: ; 19d9a (6:5d9a)

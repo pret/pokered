@@ -1,20 +1,20 @@
 VermilionDockScript: ; 1db52 (7:5b52)
 	call EnableAutoTextBoxDrawing
-	CheckEventHL EVENT_5E4
+	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	jr nz, .asm_1db8d
-	CheckEventReuseHL EVENT_5E0
+	CheckEventReuseHL EVENT_GOT_HM01
 	ret z
 	ld a, [wDestinationWarpID]
 	cp $1
 	ret nz
 	CheckEventReuseHL EVENT_SS_ANNE_LEFT
 	jp z, VermilionDock_1db9b
-	SetEventReuseHL EVENT_5E4
+	SetEventReuseHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	call Delay3
 	ld hl, wd730
 	set 7, [hl]
 	ld hl, wSimulatedJoypadStatesEnd
-	ld a, $40
+	ld a, D_UP
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
@@ -27,13 +27,13 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	ld [wJoyIgnore], a
 	ret
 .asm_1db8d
-	CheckEventAfterBranchReuseHL EVENT_5E5, EVENT_5E4
+	CheckEventAfterBranchReuseHL EVENT_WALKED_OUT_OF_DOCK, EVENT_STARTED_WALKING_OUT_OF_DOCK
 	ret nz
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld [wJoyIgnore], a
-	SetEventReuseHL EVENT_5E5
+	SetEventReuseHL EVENT_WALKED_OUT_OF_DOCK
 	ret
 
 VermilionDock_1db9b: ; 1db9b (7:5b9b)

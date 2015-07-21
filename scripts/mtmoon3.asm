@@ -5,7 +5,7 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 	ld a, [W_MTMOON3CURSCRIPT]
 	call ExecuteCurMapScriptInTable
 	ld [W_MTMOON3CURSCRIPT], a
-	CheckEvent EVENT_579
+	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	ret z
 	ld hl, CoordsData_49d37
 	call ArePlayerCoordsInArray
@@ -53,7 +53,7 @@ MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 	dw MtMoon3Script5
 
 MtMoon3Script0: ; 49d6f (12:5d6f)
-	CheckEvent EVENT_579
+	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	jp nz, MtMoon3Script_49d91
 	ld a, [W_YCOORD]
 	cp $8
@@ -68,7 +68,7 @@ MtMoon3Script0: ; 49d6f (12:5d6f)
 	jp DisplayTextID
 
 MtMoon3Script_49d91: ; 49d91 (12:5d91)
-	CheckEitherEventSet EVENT_57E, EVENT_57F
+	CheckEitherEventSet EVENT_GOT_DOME_FOSSIL, EVENT_GOT_HELIX_FOSSIL
 	jp z, CheckFightingMapTrainers
 	ret
 
@@ -78,7 +78,7 @@ MtMoon3Script3: ; 49d9a (12:5d9a)
 	jp z, MtMoon3Script_49d58
 	call UpdateSprites
 	call Delay3
-	SetEvent EVENT_579
+	SetEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
@@ -138,7 +138,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	CheckEvent EVENT_57E
+	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr z, .asm_49e1d
 	ld a, HS_MT_MOON_3_FOSSIL_2
 	jr .asm_49e1f
@@ -207,7 +207,7 @@ MtMoon3TrainerHeader4: ; 49e6c (12:5e6c)
 
 MtMoon3Text1: ; 49e79 (12:5e79)
 	TX_ASM
-	CheckEvent EVENT_579
+	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	jr z, .asm_49e8d
 	and $c0
 	jr nz, .asm_49eb8
@@ -278,7 +278,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	ld a, HS_MT_MOON_3_FOSSIL_1
 	ld [wcc4d], a
 	predef HideObject
-	SetEvent EVENT_57E
+	SetEvent EVENT_GOT_DOME_FOSSIL
 	ld a, $4
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
@@ -306,7 +306,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	ld a, HS_MT_MOON_3_FOSSIL_2
 	ld [wcc4d], a
 	predef HideObject
-	SetEvent EVENT_57F
+	SetEvent EVENT_GOT_HELIX_FOSSIL
 	ld a, $4
 	ld [W_MTMOON3CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

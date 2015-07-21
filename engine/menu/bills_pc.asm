@@ -28,7 +28,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	call UpdateSprites
 	ld a, 3
 	ld [wMaxMenuItem], a
-	CheckEvent EVENT_550
+	CheckEvent EVENT_MET_BILL
 	jr nz, .metBill
 	coord hl, 2, 2
 	ld de, SomeonesPCText

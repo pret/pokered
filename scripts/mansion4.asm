@@ -13,7 +13,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_278
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_523ff
 	ld a, $e
 	ld bc, $80d

@@ -21,13 +21,13 @@ FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
 	dw FightingDojoScript3
 
 FightingDojoScript1: ; 5cd83 (17:4d83)
-	CheckEvent EVENT_350
+	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	ret nz
 	call CheckFightingMapTrainers
 	ld a, [wTrainerHeaderFlagBit]
 	and a
 	ret nz
-	CheckEvent EVENT_351
+	CheckEvent EVENT_BEAT_KARATE_MASTER
 	ret nz
 	xor a
 	ld [hJoyHeld], a
@@ -70,7 +70,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 .asm_5cde4
 	ld a, $f0
 	ld [wJoyIgnore], a
-	SetEventRange EVENT_351, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
+	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, $8
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -131,9 +131,9 @@ FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 
 FightingDojoText1: ; 5ce44 (17:4e44)
 	TX_ASM
-	CheckEvent EVENT_350
+	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .continue1
-	CheckEventReuseA EVENT_351
+	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
 	jp nz, .continue2
 	ld hl, FightingDojoText_5ce8e
 	call PrintText
@@ -252,7 +252,7 @@ FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 FightingDojoText6: ; 5cf06 (17:4f06)
 ; Hitmonlee Poké Ball
 	TX_ASM
-	CheckEitherEventSet EVENT_356, EVENT_357
+	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
 	call PrintText
@@ -276,7 +276,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	ld a, HS_FIGHTING_DOJO_GIFT_1
 	ld [wcc4d], a
 	predef HideObject
-	SetEvents EVENT_356, EVENT_350
+	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
 .done
 	jp TextScriptEnd
 
@@ -287,7 +287,7 @@ WantHitmonleeText: ; 5cf49 (17:4f49)
 FightingDojoText7: ; 5cf4e (17:4f4e)
 ; Hitmonchan Poké Ball
 	TX_ASM
-	CheckEitherEventSet EVENT_356, EVENT_357
+	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
 	call PrintText
@@ -306,7 +306,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	ld c,30
 	call GivePokemon
 	jr nc, .done
-	SetEvents EVENT_357, EVENT_350
+	SetEvents EVENT_GOT_HITMONCHAN, EVENT_DEFEATED_FIGHTING_DOJO
 
 	; once Poké Ball is taken, hide sprite
 	ld a, HS_FIGHTING_DOJO_GIFT_2

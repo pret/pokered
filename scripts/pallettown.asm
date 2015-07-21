@@ -1,7 +1,7 @@
 PalletTownScript: ; 18e5b (6:4e5b)
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr z,.next
-	SetEvent EVENT_006
+	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 .next
 	call EnableAutoTextBoxDrawing
 	ld hl,PalletTownScriptPointers
@@ -18,7 +18,7 @@ PalletTownScriptPointers: ; 18e73 (6:4e73)
 	dw PalletTownScript6
 
 PalletTownScript0: ; 18e81 (6:4e81)
-	CheckEvent EVENT_STOPPED_FROM_LEAVING_PALLET
+	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
 	ld a,[W_YCOORD]
 	cp 1 ; is player near north exit?
@@ -35,7 +35,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	call PlayMusic
 	ld a,$FC
 	ld [wJoyIgnore],a
-	SetEvent EVENT_027
+	SetEvent EVENT_OAK_APPEARED_IN_PALLET
 
 	; trigger the next script
 	ld a,1
@@ -130,12 +130,11 @@ PalletTownScript4: ; 18f4b (6:4f4b)
 	ret
 
 PalletTownScript5: ; 18f56 (6:4f56)
-	CheckEvent EVENT_01A
+	CheckEvent EVENT_DAISY_WALKING
 	jr nz,.next
-	and 3
-	cp 3
+	CheckBothEventsSet EVENT_GOT_TOWN_MAP, EVENT_ENTERED_BLUES_HOUSE, 1
 	jr nz,.next
-	SetEvent EVENT_01A
+	SetEvent EVENT_DAISY_WALKING
 	ld a,HS_DAISY_SITTING
 	ld [wcc4d],a
 	predef HideObject
@@ -145,7 +144,7 @@ PalletTownScript5: ; 18f56 (6:4f56)
 .next
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
-	SetEvent EVENT_026
+	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
 PalletTownScript6: ; 18f87 (6:4f87)
 	ret
 

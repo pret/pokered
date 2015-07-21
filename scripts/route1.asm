@@ -8,7 +8,7 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 
 Route1Text1: ; 1cab8 (7:4ab8)
 	TX_ASM
-	CheckAndSetEvent EVENT_3C0
+	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
 	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
 	call PrintText

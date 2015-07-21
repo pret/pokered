@@ -65,7 +65,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
-	SetEvents EVENT_2E0, EVENT_2E1
+	SetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL
 	ret
 .asm_610a7
 	ld hl, LabFossil_610bd

@@ -16,10 +16,10 @@ VictoryRoad2Script: ; 5179d (14:579d)
 	ret
 
 VictoryRoad2Script_517c4: ; 517c4 (14:57c4)
-	ResetEvent EVENT_917
+	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 
 VictoryRoad2Script_517c9: ; 517c9 (14:57c9)
-	CheckEvent EVENT_538
+	CheckEvent EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	jr z, .asm_517da
 	push af
 	ld a, $15
@@ -46,17 +46,17 @@ VictoryRoad2Script0: ; 517f1 (14:57f1)
 	ld hl, CoordsData_51816
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
-	EventFlagAddress hl, EVENT_538
+	EventFlagAddress hl, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	ld a, [wCoordIndex]
 	cp $2
 	jr z, .asm_5180b
-	CheckEventReuseHL EVENT_538
-	SetEventReuseHL EVENT_538
+	CheckEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
+	SetEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	ret nz
 	jr .asm_51810
 .asm_5180b
-	CheckEventAfterBranchReuseHL EVENT_53F, EVENT_538
-	SetEventReuseHL EVENT_53F
+	CheckEventAfterBranchReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
+	SetEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ret nz
 .asm_51810
 	ld hl, wd126

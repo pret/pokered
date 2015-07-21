@@ -16,7 +16,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld hl, DataTable_5d82e
 	call SilphCo9Script_5d837
 	call SilphCo9Script_5d863
-	CheckEvent EVENT_768
+	CheckEvent EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	jr nz, .asm_5d7f8
 	push af
 	ld a, $5f
@@ -25,7 +25,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d7f8
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	jr nz, .asm_5d80b
 	push af
 	ld a, $54
@@ -34,7 +34,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d80b
-	bit 2, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR2
 	jr nz, .asm_5d81e
 	push af
 	ld a, $54
@@ -43,7 +43,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d81e
-	bit 3, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR3
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -90,28 +90,28 @@ SilphCo9Script_5d837: ; 5d837 (17:5837)
 	ret
 
 SilphCo9Script_5d863: ; 5d863 (17:5863)
-	EventFlagAddress hl, EVENT_768
+	EventFlagAddress hl, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
 	jr nz, .next1
-	SetEventReuseHL EVENT_768
+	SetEventReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 .next1
 	cp $2
 	jr nz, .next2
-	SetEventAfterBranchReuseHL EVENT_769, EVENT_768
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 .next2
 	cp $3
 	jr nz, .next3
-	SetEventAfterBranchReuseHL EVENT_76A, EVENT_768
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 .next3
 	cp $4
 	ret nz
-	SetEventAfterBranchReuseHL EVENT_76B, EVENT_768
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 
 SilphCo9ScriptPointers: ; 5d885 (17:5885)
@@ -157,7 +157,7 @@ SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
 
 SilphCo9Text1: ; 5d8b8 (17:58b8)
 	TX_ASM
-	CheckEvent EVENT_78F
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .asm_5d8dc
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText

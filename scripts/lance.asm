@@ -13,7 +13,7 @@ LanceScript_5a2c4: ; 5a2c4 (16:62c4)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEvent EVENT_8FF
+	CheckEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	jr nz, .asm_5a2da
 	ld a, $31
 	ld b, $32
@@ -51,7 +51,7 @@ LanceScript4: ; 5a304 (16:6304)
 	ret
 
 LanceScript0: ; 5a305 (16:6305)
-	CheckEvent EVENT_8FE
+	CheckEvent EVENT_BEAT_LANCE
 	ret nz
 	ld hl, CoordsData_5a33e
 	call ArePlayerCoordsInArray
@@ -67,7 +67,7 @@ LanceScript0: ; 5a305 (16:6305)
 .asm_5a325
 	cp $5
 	jr z, LanceScript_5a35b
-	CheckAndSetEvent EVENT_8FF
+	CheckAndSetEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	ret nz
 	ld hl, wd126
 	set 5, [hl]
@@ -156,5 +156,5 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText
 	TX_ASM
-	SetEvent EVENT_8FE
+	SetEvent EVENT_BEAT_LANCE
 	jp TextScriptEnd

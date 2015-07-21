@@ -23,8 +23,8 @@ VermilionCityScript_197c0: ; 197c0 (6:57c0)
 VermilionCityScript_197cb: ; 197cb (6:57cb)
 	CheckEventHL EVENT_SS_ANNE_LEFT
 	ret z
-	CheckEventReuseHL EVENT_5E3
-	SetEventReuseHL EVENT_5E3
+	CheckEventReuseHL EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
+	SetEventReuseHL EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
 	ret nz
 	ld a, $2
 	ld [W_VERMILIONCITYCURSCRIPT], a

@@ -13,7 +13,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	CheckEventHL EVENT_660
+	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
 	ld a, $1d
 	ld [wd09f], a
@@ -38,10 +38,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	jr nz, .asm_449dc
 	ld hl, wd126
 	set 5, [hl]
-	SetEvent EVENT_660
+	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret
 .asm_449dc
-	CheckAndSetEvent EVENT_666
+	CheckAndSetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	jr nz, .asm_449fe
 	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a

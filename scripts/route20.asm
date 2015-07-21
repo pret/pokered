@@ -1,5 +1,5 @@
 Route20Script: ; 50ca9 (14:4ca9)
-	CheckAndResetEvent EVENT_500
+	CheckAndResetEvent EVENT_IN_SEAFOAM_ISLANDS
 	call nz, Route20Script_50cc6
 	call EnableAutoTextBoxDrawing
 	ld hl, Route20TrainerHeader0
@@ -10,7 +10,7 @@ Route20Script: ; 50ca9 (14:4ca9)
 	ret
 
 Route20Script_50cc6: ; 50cc6 (14:4cc6)
-	CheckBothEventsSet EVENT_9C8, EVENT_9C9
+	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	jr z, .asm_50cef
 	ld a, HS_SEAFOAM_ISLANDS_1_BOULDER_1
 	call Route20Script_50d0c
@@ -36,7 +36,7 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	db $FF
 
 .asm_50cef
-	CheckBothEventsSet EVENT_9D0, EVENT_9D1
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_1
 	call Route20Script_50d0c

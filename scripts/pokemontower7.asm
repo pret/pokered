@@ -256,8 +256,8 @@ PokemonTower7FujiText:
 	TX_ASM
 	ld hl, TowerRescueFujiText
 	call PrintText
-	SetEvent EVENT_4CF
-	SetEvent EVENT_117
+	SetEvent EVENT_RESCUED_MR_FUJI
+	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
 	ld [wcc4d], a
 	predef ShowObject

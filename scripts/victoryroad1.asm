@@ -11,7 +11,7 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ld [W_VICTORYROAD1CURSCRIPT], a
 	ret
 .next
-	CheckEvent EVENT_917
+	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret z
 	ld a, $1d
 	ld [wd09f], a
@@ -24,14 +24,14 @@ VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
 	dw EndTrainerBattle
 
 VictoryRoad1Script0: ; 5da40 (17:5a40)
-	CheckEvent EVENT_917
+	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5da5c
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
 	ld hl, wd126
 	set 5, [hl]
-	SetEvent EVENT_917
+	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret
 
 CoordsData_5da5c: ; 5da5c (17:5a5c)

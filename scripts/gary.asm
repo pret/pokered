@@ -94,7 +94,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	cp $ff
 	jp z, GaryScript_75f29
 	call UpdateSprites
-	SetEvent EVENT_901
+	SetEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
@@ -248,7 +248,7 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 
 GaryText1: ; 760e0 (1d:60e0)
 	TX_ASM
-	CheckEvent EVENT_901
+	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld hl, GaryText_760f4
 	jr z, .asm_17e9f
 	ld hl, GaryText_76103

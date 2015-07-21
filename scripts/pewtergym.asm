@@ -72,7 +72,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld [wcc4d], a
 	predef HideObject
 
-	ResetEvents EVENT_520, EVENT_527
+	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 
 	; deactivate gym trainers
 	SetEvent EVENT_BEAT_PEWTER_GYM_TRAINER_0
