@@ -17,8 +17,7 @@ PokemonTower2ScriptPointers: ; 60509 (18:4509)
 	dw PokemonTower2Script2
 
 PokemonTower2Script0: ; 6050f (18:450f)
-	ld a, [wd764]
-	bit 7, a
+	CheckEvent EVENT_0EF
 	ret nz
 	ld hl, CoordsData_6055e
 	call ArePlayerCoordsInArray
@@ -29,15 +28,13 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, wd764
-	res 6, [hl]
+	ResetEvent EVENT_0EE
 	ld a, [wCoordIndex]
 	cp $1
 	ld a, PLAYER_DIR_UP
 	ld b, SPRITE_FACING_DOWN
 	jr nz, .asm_60544
-	ld hl, wd764
-	set 6, [hl]
+	SetEvent EVENT_0EE
 	ld a, PLAYER_DIR_LEFT
 	ld b, SPRITE_FACING_RIGHT
 .asm_60544
@@ -66,14 +63,12 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	jp z, PokemonTower2Script_604fe
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wd764
-	set 7, [hl]
+	SetEvent EVENT_0EF
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld de, MovementData_605b2
-	ld a, [wd764]
-	bit 6, a
+	CheckEvent EVENT_0EE
 	jr nz, .asm_60589
 	ld de, MovementData_605a9
 .asm_60589
@@ -132,8 +127,7 @@ PokemonTower2TextPointers: ; 605db (18:45db)
 
 PokemonTower2Text1: ; 605df (18:45df)
 	TX_ASM
-	ld a, [wd764]
-	bit 7, a
+	CheckEvent EVENT_0EF
 	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
 	call PrintText

@@ -30,81 +30,81 @@ PowerPlantTextPointers: ; 1e2df (7:62df)
 
 PowerPlantTrainerHeaders: ; 1e2fb (7:62fb)
 PowerPlantTrainerHeader0: ; 1e2fb (7:62fb)
-	db 1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_0
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_0
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader1: ; 1e307 (7:6307)
-	db 2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_1
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_1
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader2: ; 1e313 (7:6313)
-	db 3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_2
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_2
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader3: ; 1e31f (7:631f)
-	db 4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_3
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_3
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader4: ; 1e32b (7:632b)
-	db 5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_4
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_4
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader5: ; 1e337 (7:6337)
-	db 6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_5
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_5
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader6: ; 1e343 (7:6343)
-	db 7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_6
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_6
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader7: ; 1e34f (7:634f)
-	db 8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_7, 1
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_7, 1
 	dw VoltorbBattleText ; TextBeforeBattle
 	dw VoltorbBattleText ; TextAfterBattle
 	dw VoltorbBattleText ; TextEndBattle
 	dw VoltorbBattleText ; TextEndBattle
 
 PowerPlantTrainerHeader8: ; 1e35b (7:635b)
-	db 9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POWER_PLANT_TRAINER_8, 1
 	db 0 ; view range
-	dw wd7d3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_TRAINER_8, 1
 	dw ZapdosBattleText ; TextBeforeBattle
 	dw ZapdosBattleText ; TextAfterBattle
 	dw ZapdosBattleText ; TextEndBattle

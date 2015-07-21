@@ -21,11 +21,10 @@ Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script3
 
 Route12Script0: ; 59619 (16:5619)
-	ld hl, wd7d8
-	bit 7, [hl]
+	CheckEventHL EVENT_BEAT_ROUTE12_SNORLAX
 	jp nz, CheckFightingMapTrainers
-	bit 6, [hl]
-	res 6, [hl]
+	CheckEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
+	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, $d
 	ld [hSpriteIndexOrTextID], a
@@ -54,8 +53,7 @@ Route12Script3: ; 5964c (16:564c)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
-	ld hl, wd7d8
-	set 7, [hl]
+	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE12CURSCRIPT], a
@@ -80,63 +78,63 @@ Route12TextPointers: ; 59675 (16:5675)
 
 Route12TrainerHeaders: ; 59691 (16:5691)
 Route12TrainerHeader0: ; 59691 (16:5691)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_0
 	dw Route12BattleText1 ; TextBeforeBattle
 	dw Route12AfterBattleText1 ; TextAfterBattle
 	dw Route12EndBattleText1 ; TextEndBattle
 	dw Route12EndBattleText1 ; TextEndBattle
 
 Route12TrainerHeader1: ; 5969d (16:569d)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_1
 	dw Route12BattleText2 ; TextBeforeBattle
 	dw Route12AfterBattleText2 ; TextAfterBattle
 	dw Route12EndBattleText2 ; TextEndBattle
 	dw Route12EndBattleText2 ; TextEndBattle
 
 Route12TrainerHeader2: ; 596a9 (16:56a9)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_2
 	dw Route12BattleText3 ; TextBeforeBattle
 	dw Route12AfterBattleText3 ; TextAfterBattle
 	dw Route12EndBattleText3 ; TextEndBattle
 	dw Route12EndBattleText3 ; TextEndBattle
 
 Route12TrainerHeader3: ; 596b5 (16:56b5)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_3
 	dw Route12BattleText4 ; TextBeforeBattle
 	dw Route12AfterBattleText4 ; TextAfterBattle
 	dw Route12EndBattleText4 ; TextEndBattle
 	dw Route12EndBattleText4 ; TextEndBattle
 
 Route12TrainerHeader4: ; 596c1 (16:56c1)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_4
 	dw Route12BattleText5 ; TextBeforeBattle
 	dw Route12AfterBattleText5 ; TextAfterBattle
 	dw Route12EndBattleText5 ; TextEndBattle
 	dw Route12EndBattleText5 ; TextEndBattle
 
 Route12TrainerHeader5: ; 596cd (16:56cd)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_5
 	dw Route12BattleText6 ; TextBeforeBattle
 	dw Route12AfterBattleText6 ; TextAfterBattle
 	dw Route12EndBattleText6 ; TextEndBattle
 	dw Route12EndBattleText6 ; TextEndBattle
 
 Route12TrainerHeader6: ; 596d9 (16:56d9)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_6, 1
 	db ($1 << 4) ; trainer's view range
-	dw wd7d7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_12_TRAINER_6, 1
 	dw Route12BattleText7 ; TextBeforeBattle
 	dw Route12AfterBattleText7 ; TextAfterBattle
 	dw Route12EndBattleText7 ; TextEndBattle

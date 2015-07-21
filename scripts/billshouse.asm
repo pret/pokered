@@ -51,8 +51,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld a, HS_BILL_POKEMON
 	ld [wcc4d], a
 	predef HideObject
-	ld hl, wd7f2
-	set 6, [hl]
+	SetEvent EVENT_55E
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $3
@@ -60,8 +59,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ret
 
 BillsHouseScript3: ; 1e7c5 (7:67c5)
-	ld a, [wd7f2]
-	bit 3, a
+	CheckEvent EVENT_55B
 	ret z
 	ld a, $f0
 	ld [wJoyIgnore], a
@@ -103,10 +101,8 @@ BillsHouseScript4: ; 1e80d (7:680d)
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd7f2
-	set 5, [hl]
-	ld hl, wd7f1
-	set 0, [hl]
+	SetEvent EVENT_55D
+	SetEvent EVENT_550
 	ld a, $0
 	ld [W_BILLSHOUSECURSCRIPT], a
 	ret
@@ -163,8 +159,7 @@ BillsHouseText_1e86f: ; 1e86f (7:686f)
 
 BillsHouseText2: ; 1e874 (7:6874)
 	TX_ASM
-	ld a, [wd7f2]
-	bit 4, a
+	CheckEvent EVENT_55C
 	jr nz, .asm_1e8a9
 	ld hl, BillThankYouText
 	call PrintText
@@ -173,8 +168,7 @@ BillsHouseText2: ; 1e874 (7:6874)
 	jr nc, .BagFull
 	ld hl, SSTicketReceivedText
 	call PrintText
-	ld hl, wd7f2
-	set 4, [hl]
+	SetEvent EVENT_55C
 	ld a, HS_CERULEAN_GUARD_1
 	ld [wcc4d], a
 	predef ShowObject

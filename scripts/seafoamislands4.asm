@@ -7,18 +7,18 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld hl, Seafoam4HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	ld hl, wd881
+	EventFlagAddress hl, EVENT_9D0
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_465b8
-	set 0, [hl]
+	SetEventReuseHL EVENT_9D0
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_1
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_5_BOULDER_1
 	ld [wd07a], a
 	jr .asm_465c4
 .asm_465b8
-	set 1, [hl]
+	SetEventAfterBranchReuseHL EVENT_9D1, EVENT_9D0
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_2
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_5_BOULDER_2
@@ -56,9 +56,7 @@ SeafoamIslands4ScriptPointers: ; 465fb (11:65fb)
 	dw SeafoamIslands4Script3
 
 SeafoamIslands4Script0: ; 46603 (11:6603)
-	ld a, [wd880]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_9C8, EVENT_9C9
 	ret z
 	ld a, [W_YCOORD]
 	cp $8
@@ -93,9 +91,7 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	ret
 
 SeafoamIslands4Script2: ; 46644 (11:6644)
-	ld a, [wd880]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_9C8, EVENT_9C9
 	ret z
 	ld a, [W_XCOORD]
 	cp $12

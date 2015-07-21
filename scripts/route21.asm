@@ -25,81 +25,81 @@ Route21TextPointers: ; 55f04 (15:5f04)
 
 Route21TrainerHeaders: ; 55f16 (15:5f16)
 Route21TrainerHeader0: ; 55f16 (15:5f16)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_0
 	dw Route21BattleText1 ; TextBeforeBattle
 	dw Route21AfterBattleText1 ; TextAfterBattle
 	dw Route21EndBattleText1 ; TextEndBattle
 	dw Route21EndBattleText1 ; TextEndBattle
 
 Route21TrainerHeader1: ; 55f22 (15:5f22)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_1
 	db ($0 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_1
 	dw Route21BattleText2 ; TextBeforeBattle
 	dw Route21AfterBattleText2 ; TextAfterBattle
 	dw Route21EndBattleText2 ; TextEndBattle
 	dw Route21EndBattleText2 ; TextEndBattle
 
 Route21TrainerHeader2: ; 55f2e (15:5f2e)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_2
 	dw Route21BattleText3 ; TextBeforeBattle
 	dw Route21AfterBattleText3 ; TextAfterBattle
 	dw Route21EndBattleText3 ; TextEndBattle
 	dw Route21EndBattleText3 ; TextEndBattle
 
 Route21TrainerHeader3: ; 55f3a (15:5f3a)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_3
 	dw Route21BattleText4 ; TextBeforeBattle
 	dw Route21AfterBattleText4 ; TextAfterBattle
 	dw Route21EndBattleText4 ; TextEndBattle
 	dw Route21EndBattleText4 ; TextEndBattle
 
 Route21TrainerHeader4: ; 55f46 (15:5f46)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_4
 	dw Route21BattleText5 ; TextBeforeBattle
 	dw Route21AfterBattleText5 ; TextAfterBattle
 	dw Route21EndBattleText5 ; TextEndBattle
 	dw Route21EndBattleText5 ; TextEndBattle
 
 Route21TrainerHeader5: ; 55f52 (15:5f52)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_5
 	dw Route21BattleText6 ; TextBeforeBattle
 	dw Route21AfterBattleText6 ; TextAfterBattle
 	dw Route21EndBattleText6 ; TextEndBattle
 	dw Route21EndBattleText6 ; TextEndBattle
 
 Route21TrainerHeader6: ; 55f5e (15:5f5e)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_6
 	db ($3 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_6
 	dw Route21BattleText7 ; TextBeforeBattle
 	dw Route21AfterBattleText7 ; TextAfterBattle
 	dw Route21EndBattleText7 ; TextEndBattle
 	dw Route21EndBattleText7 ; TextEndBattle
 
 Route21TrainerHeader7: ; 55f6a (15:5f6a)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_7, 1
 	db ($0 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_7, 1
 	dw Route21BattleText8 ; TextBeforeBattle
 	dw Route21AfterBattleText8 ; TextAfterBattle
 	dw Route21EndBattleText8 ; TextEndBattle
 	dw Route21EndBattleText8 ; TextEndBattle
 
 Route21TrainerHeader8: ; 55f76 (15:5f76)
-	db $9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_8, 1
 	db ($0 << 4) ; trainer's view range
-	dw wd7e9 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_8, 1
 	dw Route21BattleText9 ; TextBeforeBattle
 	dw Route21AfterBattleText9 ; TextAfterBattle
 	dw Route21EndBattleText9 ; TextEndBattle

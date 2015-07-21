@@ -74,11 +74,9 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 .SafariZoneEntranceScript5
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld hl, wd790
-	bit 6, [hl]
-	res 6, [hl]
+	CheckAndResetEvent EVENT_SAFARI_GAME_OVER
 	jr z, .asm_7527f
-	res 7, [hl]
+	ResetEventReuseHL EVENT_IN_SAFARI_ZONE
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
@@ -191,9 +189,8 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wd790
-	set 7,[hl]
-	res 6,[hl]
+	SetEvent EVENT_IN_SAFARI_ZONE
+	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
 	ld a,3
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	jr .done
@@ -238,9 +235,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
-	ld hl, wd790
-	res 6, [hl]
-	res 7, [hl]
+	ResetEvents EVENT_SAFARI_GAME_OVER, EVENT_IN_SAFARI_ZONE
 	ld a, $0
 	ld [wcf0d], a
 	jr .asm_753b3

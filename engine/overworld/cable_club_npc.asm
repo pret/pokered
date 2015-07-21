@@ -1,8 +1,7 @@
 CableClubNPC: ; 71c5 (1:71c5)
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
-	ld a, [wd74b]
-	bit 5, a ; received pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex
 	ld c, 60

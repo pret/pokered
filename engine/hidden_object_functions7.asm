@@ -36,8 +36,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 	db "@"
 
 SafariZoneCheck: ; 1e988 (7:6988)
-	ld hl, wd790
-	bit 7, [hl]; if we are not in the Safari Zone,
+	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [W_NUMSAFARIBALLS]
 	and a
@@ -85,8 +84,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	ld hl, wd790
-	set 6, [hl]
+	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, $1
 	ld [wSafariZoneGameOver], a
 	ret
@@ -191,7 +189,7 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	db "@"
 
 CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	ld hl, wd79c
+	EventFlagAddress hl, EVENT_2A8
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
@@ -208,6 +206,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_2A8, 0
 	ld c, a
 	ld b, FLAG_SET
 	call CinnabarGymQuiz_1ea8a
@@ -221,9 +220,10 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call PrintText
 	ld a, [$ffdb]
 	add $2
+	AdjustEventBit EVENT_29A, 2
 	ld c, a
 	ld b, FLAG_TEST
-	ld hl, wd79a
+	EventFlagAddress hl, EVENT_29A
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -240,6 +240,7 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	TX_ASM
 
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_2A8, 0
 	ld c, a
 	ld b, FLAG_TEST
 	call CinnabarGymQuiz_1ea8a
@@ -277,6 +278,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	push bc
 	ld a, [$ffdb]
 	ld [$ffe0], a
+	AdjustEventBit EVENT_2A8, 0
 	ld c, a
 	ld b, FLAG_TEST
 	call CinnabarGymQuiz_1ea8a
@@ -320,12 +322,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
-	ld a, [wd7f2]
-	bit 7, a
+	CheckEvent EVENT_55F
 	jr nz, .asm_1ebd2
-	bit 3, a
+	CheckEventReuseA EVENT_55B
 	jr nz, .asm_1eb86
-	bit 6, a
+	CheckEventReuseA EVENT_55E
 	jr nz, .asm_1eb8b
 .asm_1eb86
 	tx_pre_jump BillsHouseMonitorText
@@ -354,8 +355,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
-	ld hl, wd7f2
-	set 3, [hl]
+	SetEvent EVENT_55B
 	ret
 .asm_1ebd2
 	ld a, $1

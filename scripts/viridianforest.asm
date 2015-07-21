@@ -30,27 +30,27 @@ ViridianForestTextPointers: ; 61126 (18:5126)
 
 ViridianForestTrainerHeaders: ; 61142 (18:5142)
 ViridianForestTrainerHeader0: ; 61142 (18:5142)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7f3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
 	dw ViridianForestBattleText1 ; TextBeforeBattle
 	dw ViridianForestAfterBattleText1 ; TextAfterBattle
 	dw ViridianForestEndBattleText1 ; TextEndBattle
 	dw ViridianForestEndBattleText1 ; TextEndBattle
 
 ViridianForestTrainerHeader1: ; 6114e (18:514e)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd7f3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
 	dw ViridianForestBattleText2 ; TextBeforeBattle
 	dw ViridianForestAfterBattleText2 ; TextAfterBattle
 	dw ViridianForestEndBattleText2 ; TextEndBattle
 	dw ViridianForestEndBattleText2 ; TextEndBattle
 
 ViridianForestTrainerHeader2: ; 6115a (18:515a)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
 	db ($1 << 4) ; trainer's view range
-	dw wd7f3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
 	dw ViridianForestBattleText3 ; TextBeforeBattle
 	dw ViridianForestAfterBattleText3 ; TextAfterBattle
 	dw ViridianForestEndBattleText3 ; TextEndBattle

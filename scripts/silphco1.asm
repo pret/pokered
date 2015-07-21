@@ -1,11 +1,8 @@
 SilphCo1Script: ; 5d44e (17:544e)
 	call EnableAutoTextBoxDrawing
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_78F
 	ret z
-	ld hl, wd7b9
-	bit 7, [hl]
-	set 7, [hl]
+	CheckAndSetEvent EVENT_397
 	ret nz
 	ld a, HS_SILPH_CO_1F_1
 	ld [wcc4d], a

@@ -20,27 +20,27 @@ PokemonTower3TextPointers: ; 606e5 (18:46e5)
 
 PokemonTower3TrainerHeaders: ; 606ed (18:46ed)
 PokemonTower3TrainerHeader0: ; 606ed (18:46ed)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_3_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd765 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_3_TRAINER_0
 	dw PokemonTower3BattleText1 ; TextBeforeBattle
 	dw PokemonTower3AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower3EndBattleText1 ; TextEndBattle
 	dw PokemonTower3EndBattleText1 ; TextEndBattle
 
 PokemonTower3TrainerHeader1: ; 606f9 (18:46f9)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_3_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd765 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_3_TRAINER_1
 	dw PokemonTower3BattleText2 ; TextBeforeBattle
 	dw PokemonTower3AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower3EndBattleText2 ; TextEndBattle
 	dw PokemonTower3EndBattleText2 ; TextEndBattle
 
 PokemonTower3TrainerHeader2: ; 60705 (18:4705)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_3_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd765 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_3_TRAINER_2
 	dw PokemonTower3BattleText3 ; TextBeforeBattle
 	dw PokemonTower3AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower3EndBattleText3 ; TextEndBattle

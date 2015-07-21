@@ -39,12 +39,8 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld [hl], a
 	ld [W_LANCECURSCRIPT], a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
-	ld hl, wd863
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	; Elite 4 events
+	ResetEventRange EVENT_8E0, EVENT_907, 1
 	xor a
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a
 	ld a, PALLET_TOWN

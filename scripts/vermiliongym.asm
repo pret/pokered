@@ -28,8 +28,7 @@ Gym3LeaderName: ; 5ca64 (17:4a64)
 	db "LT.SURGE@"
 
 VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
-	ld a, [wd773]
-	bit 0, a
+	CheckEvent EVENT_2ND_LOCK_OPENED
 	jr nz, .asm_5ca78
 	ld a, $24
 	jr .asm_5ca7f
@@ -66,16 +65,14 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd773
-	set 7, [hl]
+	SetEvent EVENT_167
 	ld bc, (TM_24 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd773
-	set 6, [hl]
+	SetEvent EVENT_166
 	jr .asm_5cad3
 .BagFull
 	ld a, $8
@@ -88,9 +85,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	set 2, [hl]
 
 	; deactivate gym trainers
-	ld a, [wd773]
-	or %00011100
-	ld [wd773], a
+	SetEventRange EVENT_BEAT_VERMILION_GYM_TRAINER_0, EVENT_BEAT_VERMILION_GYM_TRAINER_2
 
 	jp VermilionGymScript_5ca8a
 
@@ -106,27 +101,27 @@ VermilionGymTextPointers: ; 5cae8 (17:4ae8)
 
 VermilionGymTrainerHeaders: ; 5caf8 (17:4af8)
 VermilionGymTrainerHeader0: ; 5caf8 (17:4af8)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_0
 	dw VermilionGymBattleText1 ; TextBeforeBattle
 	dw VermilionGymAfterBattleText1 ; TextAfterBattle
 	dw VermilionGymEndBattleText1 ; TextEndBattle
 	dw VermilionGymEndBattleText1 ; TextEndBattle
 
 VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_1
 	db ($2 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_1
 	dw VermilionGymBattleText2 ; TextBeforeBattle
 	dw VermilionGymAfterBattleText2 ; TextAfterBattle
 	dw VermilionGymEndBattleText2 ; TextEndBattle
 	dw VermilionGymEndBattleText2 ; TextEndBattle
 
 VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_2
 	dw VermilionGymBattleText3 ; TextBeforeBattle
 	dw VermilionGymAfterBattleText3 ; TextAfterBattle
 	dw VermilionGymEndBattleText3 ; TextEndBattle
@@ -136,10 +131,9 @@ VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 
 VermilionGymText1: ; 5cb1d (17:4b1d)
 	TX_ASM
-	ld a, [wd773]
-	bit 7, a
+	CheckEvent EVENT_167
 	jr z, .asm_5cb39
-	bit 6, a
+	CheckEventReuseA EVENT_166
 	jr nz, .asm_5cb31
 	call z, VermilionGymScript_5caaa
 	call DisableWaitingAfterTextDisplay

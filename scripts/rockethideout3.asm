@@ -151,18 +151,18 @@ RocketHideout3TextPointers: ; 452fa (11:52fa)
 
 RocketHideout3TrainerHeaders: ; 45302 (11:5302)
 RocketHideout3TrainerHeader0: ; 45302 (11:5302)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd819 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
 	dw RocketHideout3BattleText2 ; TextBeforeBattle
 	dw RocketHideout3AfterBattleTxt2 ; TextAfterBattle
 	dw RocketHideout3EndBattleText2 ; TextEndBattle
 	dw RocketHideout3EndBattleText2 ; TextEndBattle
 
 RocketHideout3TrainerHeader2: ; 4530e (11:530e)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd819 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_2
 	dw RocketHideout3BattleTxt ; TextBeforeBattle
 	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
 	dw RocketHideout3EndBattleText3 ; TextEndBattle

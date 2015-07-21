@@ -314,8 +314,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
-	ld a, [wd773]
-	bit 0, a
+	CheckEvent EVENT_2ND_LOCK_OPENED
 	jr z, .ok
 
 	tx_pre_jump VermilionGymTrashText
@@ -335,8 +334,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 .openFirstLock
 ; Next can is trying for the second switch.
-	ld hl, wd773
-	set 1, [hl]
+	SetEvent EVENT_1ST_LOCK_OPENED
 
 	ld hl, GymTrashCans
 	ld a, [wcd5b]
@@ -379,8 +377,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	jr z, .openSecondLock
 
 ; Reset the cans.
-	ld hl, wd773
-	res 1, [hl]
+	ResetEvent EVENT_1ST_LOCK_OPENED
 	call Random
 
 	and $e
@@ -391,8 +388,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 .openSecondLock
 ; Completed the trash can puzzle.
-	ld hl, wd773
-	set 0, [hl]
+	SetEvent EVENT_2ND_LOCK_OPENED
 	ld hl, wd126
 	set 6, [hl]
 

@@ -5,18 +5,13 @@ IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, wd869
-	res 7, [hl]
+	ResetEvent EVENT_917
 	ld hl, wd734
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
-	ld hl, wd863
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	; Elite 4 events
+	ResetEventRange EVENT_8E0, EVENT_8FF
 	ret
 
 IndigoPlateauLobbyTextPointers: ; 19c7f (6:5c7f)

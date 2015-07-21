@@ -27,81 +27,81 @@ Route9TextPointers: ; 556d5 (15:56d5)
 
 Route9TrainerHeaders: ; 556eb (15:56eb)
 Route9TrainerHeader0: ; 556eb (15:56eb)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_0
 	dw Route9BattleText1 ; TextBeforeBattle
 	dw Route9AfterBattleText1 ; TextAfterBattle
 	dw Route9EndBattleText1 ; TextEndBattle
 	dw Route9EndBattleText1 ; TextEndBattle
 
 Route9TrainerHeader2: ; 556f7 (15:56f7)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_2
 	dw Route9BattleText2 ; TextBeforeBattle
 	dw Route9AfterBattleText2 ; TextAfterBattle
 	dw Route9EndBattleText2 ; TextEndBattle
 	dw Route9EndBattleText2 ; TextEndBattle
 
 Route9TrainerHeader3: ; 55703 (15:5703)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_3
 	dw Route9BattleText3 ; TextBeforeBattle
 	dw Route9AfterBattleText3 ; TextAfterBattle
 	dw Route9EndBattleText3 ; TextEndBattle
 	dw Route9EndBattleText3 ; TextEndBattle
 
 Route9TrainerHeader4: ; 5570f (15:570f)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_4
 	dw Route9BattleText4 ; TextBeforeBattle
 	dw Route9AfterBattleText4 ; TextAfterBattle
 	dw Route9EndBattleText4 ; TextEndBattle
 	dw Route9EndBattleText4 ; TextEndBattle
 
 Route9TrainerHeader5: ; 5571b (15:571b)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_5
 	db ($2 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_5
 	dw Route9BattleText5 ; TextBeforeBattle
 	dw Route9AfterBattleText5 ; TextAfterBattle
 	dw Route9EndBattleText5 ; TextEndBattle
 	dw Route9EndBattleText5 ; TextEndBattle
 
 Route9TrainerHeader6: ; 55727 (15:5727)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_6
 	db ($3 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_6
 	dw Route9BattleText6 ; TextBeforeBattle
 	dw Route9AfterBattleText6 ; TextAfterBattle
 	dw Route9EndBattleText6 ; TextEndBattle
 	dw Route9EndBattleText6 ; TextEndBattle
 
 Route9TrainerHeader7: ; 55733 (15:5733)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_7
 	db ($4 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_7
 	dw Route9BattleText7 ; TextBeforeBattle
 	dw Route9AfterBattleText7 ; TextAfterBattle
 	dw Route9EndBattleText7 ; TextEndBattle
 	dw Route9EndBattleText7 ; TextEndBattle
 
 Route9TrainerHeader8: ; 5573f (15:573f)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_8, 1
 	db ($2 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_8, 1
 	dw Route9BattleText8 ; TextBeforeBattle
 	dw Route9AfterBattleText8 ; TextAfterBattle
 	dw Route9EndBattleText8 ; TextEndBattle
 	dw Route9EndBattleText8 ; TextEndBattle
 
 Route9TrainerHeader9: ; 5574b (15:574b)
-	db $9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_9, 1
 	db ($2 << 4) ; trainer's view range
-	dw wd7cf ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_9, 1
 	dw Route9BattleText9 ; TextBeforeBattle
 	dw Route9AfterBattleText9 ; TextAfterBattle
 	dw Route9EndBattleText9 ; TextEndBattle

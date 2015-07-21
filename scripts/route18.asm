@@ -21,27 +21,27 @@ Route18TextPointers: ; 59ae0 (16:5ae0)
 
 Route18TrainerHeaders: ; 59aea (16:5aea)
 Route18TrainerHeader0: ; 59aea (16:5aea)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd7e3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_0
 	dw Route18BattleText1 ; TextBeforeBattle
 	dw Route18AfterBattleText1 ; TextAfterBattle
 	dw Route18EndBattleText1 ; TextEndBattle
 	dw Route18EndBattleText1 ; TextEndBattle
 
 Route18TrainerHeader1: ; 59af6 (16:5af6)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd7e3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_1
 	dw Route18BattleText2 ; TextBeforeBattle
 	dw Route18AfterBattleText2 ; TextAfterBattle
 	dw Route18EndBattleText2 ; TextEndBattle
 	dw Route18EndBattleText2 ; TextEndBattle
 
 Route18TrainerHeader2: ; 59b02 (16:5b02)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd7e3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_18_TRAINER_2
 	dw Route18BattleText3 ; TextBeforeBattle
 	dw Route18AfterBattleText3 ; TextAfterBattle
 	dw Route18EndBattleText3 ; TextEndBattle

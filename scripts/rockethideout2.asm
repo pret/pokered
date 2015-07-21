@@ -422,9 +422,9 @@ RocketHideout2TextPointers: ; 450c7 (11:50c7)
 
 RocketHideout2TrainerHeaders: ; 450d1 (11:50d1)
 RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd817 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
 	dw RocketHideout2BattleText2 ; TextBeforeBattle
 	dw RocketHideout2AfterBattleTxt2 ; TextAfterBattle
 	dw RocketHideout2EndBattleText2 ; TextEndBattle

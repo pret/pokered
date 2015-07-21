@@ -15,14 +15,12 @@ ViridianCityScript0: ; 19005 (6:5005)
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b: ; 1900b (6:500b)
-	ld a, [wd74c]
-	bit 0, a
+	CheckEvent EVENT_028
 	ret nz
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	jr nz, .asm_1901e
-	ld hl, wd74c
-	set 0, [hl]
+	SetEvent EVENT_028
 	ret
 .asm_1901e
 	ld a, [W_YCOORD]
@@ -42,8 +40,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ret
 
 ViridianCityScript_1903d: ; 1903d (6:503d)
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
 	ld a, [W_YCOORD]
 	cp $9
@@ -154,8 +151,7 @@ ViridianCityText2: ; 19107 (6:5107)
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe
-	ld a, [wd751]
-	bit 1, a
+	CheckEvent EVENT_051
 	jr nz, .asm_ae9fe
 	ld hl, ViridianCityText_19122
 .asm_ae9fe
@@ -201,8 +197,7 @@ ViridianCityText_19157: ; 19157 (6:5157)
 
 ViridianCityText4: ; 1915c (6:515c)
 	TX_ASM
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .asm_83894
 	ld hl, ViridianCityText_19175
 	call PrintText
@@ -236,8 +231,7 @@ ViridianCityText_19191: ; 19191 (6:5191)
 
 ViridianCityText6: ; 19196 (6:5196)
 	TX_ASM
-	ld a, [wd74c]
-	bit 1, a
+	CheckEvent EVENT_029
 	jr nz, .asm_4e5a0
 	ld hl, ViridianCityText_191ca
 	call PrintText
@@ -246,8 +240,7 @@ ViridianCityText6: ; 19196 (6:5196)
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
-	ld hl, wd74c
-	set 1, [hl]
+	SetEvent EVENT_029
 	jr .asm_3c73c
 .BagFull
 	ld hl, TM42NoRoomText

@@ -24,72 +24,72 @@ RockTunnel2TextPointers: ; 46004 (11:6004)
 
 RockTunnel2TrainerHeaders: ; 46014 (11:6014)
 RockTunnel2TrainerHeader0: ; 46014 (11:6014)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_0
 	dw RockTunnel2BattleText2 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText2 ; TextAfterBattle
 	dw RockTunnel2EndBattleText2 ; TextEndBattle
 	dw RockTunnel2EndBattleText2 ; TextEndBattle
 
 RockTunnel2TrainerHeader2: ; 46020 (11:6020)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_2
 	dw RockTunnel2BattleText3 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText3 ; TextAfterBattle
 	dw RockTunnel2EndBattleText3 ; TextEndBattle
 	dw RockTunnel2EndBattleText3 ; TextEndBattle
 
 RockTunnel2TrainerHeader3: ; 4602c (11:602c)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_3
 	dw RockTunnel2BattleText4 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText4 ; TextAfterBattle
 	dw RockTunnel2EndBattleText4 ; TextEndBattle
 	dw RockTunnel2EndBattleText4 ; TextEndBattle
 
 RockTunnel2TrainerHeader4: ; 46038 (11:6038)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_4
 	dw RockTunnel2BattleText5 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText5 ; TextAfterBattle
 	dw RockTunnel2EndBattleText5 ; TextEndBattle
 	dw RockTunnel2EndBattleText5 ; TextEndBattle
 
 RockTunnel2TrainerHeader5: ; 46044 (11:6044)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_5
 	db ($3 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_5
 	dw RockTunnel2BattleText6 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText6 ; TextAfterBattle
 	dw RockTunnel2EndBattleText6 ; TextEndBattle
 	dw RockTunnel2EndBattleText6 ; TextEndBattle
 
 RockTunnel2TrainerHeader6: ; 46050 (11:6050)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6
 	db ($4 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_6
 	dw RockTunnel2BattleText7 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText7 ; TextAfterBattle
 	dw RockTunnel2EndBattleText7 ; TextEndBattle
 	dw RockTunnel2EndBattleText7 ; TextEndBattle
 
 RockTunnel2TrainerHeader7: ; 4605c (11:605c)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7
 	db ($3 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_7
 	dw RockTunnel2BattleText8 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText8 ; TextAfterBattle
 	dw RockTunnel2EndBattleText8 ; TextEndBattle
 	dw RockTunnel2EndBattleText8 ; TextEndBattle
 
 RockTunnel2TrainerHeader8: ; 46068 (11:6068)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_8, 1
 	db ($3 << 4) ; trainer's view range
-	dw wd87d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_2_TRAINER_8, 1
 	dw RockTunnel2BattleText9 ; TextBeforeBattle
 	dw RockTunnel2AfterBattleText9 ; TextAfterBattle
 	dw RockTunnel2EndBattleText9 ; TextEndBattle
