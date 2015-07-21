@@ -6,12 +6,12 @@ IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	res 6, [hl]
 	ret z
 	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
-	ld hl, wd734
+	ld hl, wBeatLorelei
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
 	; Elite 4 events
-	ResetEventRange EVENT_ELITE4_EVENTS_START, EVENT_LANCES_ROOM_LOCK_DOOR
+	ResetEventRange ELITE4_EVENTS_START, EVENT_LANCES_ROOM_LOCK_DOOR
 	ret
 
 IndigoPlateauLobbyTextPointers: ; 19c7f (6:5c7f)

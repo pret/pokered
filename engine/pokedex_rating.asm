@@ -23,7 +23,7 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; load text pointer into hl
-	CheckAndResetEventA EVENT_003
+	CheckAndResetEventA EVENT_HALL_OF_FAME_DEX_RATING
 	jr nz, .label3
 	push hl
 	ld hl, PokedexRatingText_441cc

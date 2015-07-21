@@ -4590,8 +4590,8 @@ Random::
 INCLUDE "home/predef.asm"
 
 
-Func_3ead:: ; 3ead (0:3ead)
-	jpba CinnabarGymQuiz_1eb0a
+UpdateCinnabarGymGateTileBlocks:: ; 3ead (0:3ead)
+	jpba UpdateCinnabarGymGateTileBlocks_
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]

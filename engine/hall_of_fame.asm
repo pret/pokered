@@ -207,7 +207,7 @@ HoFLoadMonPlayerPicTileIDs: ; 7036d (1c:436d)
 	predef_jump CopyTileIDsFromList
 
 HoFDisplayPlayerStats: ; 70377 (1c:4377)
-	SetEvent EVENT_003
+	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	coord hl, 0, 4
 	ld b, $6

@@ -188,8 +188,8 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
-CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	EventFlagAddress hl, EVENT_2A8
+CinnabarGymGateFlagAction: ; 1ea8a (7:6a8a)
+	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
@@ -206,11 +206,11 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
 	ld a, [$ffe0]
-	AdjustEventBit EVENT_2A8, 0
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_SET
-	call CinnabarGymQuiz_1ea8a
-	jp CinnabarGymQuiz_1eb0a
+	call CinnabarGymGateFlagAction
+	jp UpdateCinnabarGymGateTileBlocks_
 .asm_1eab8
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
@@ -220,10 +220,10 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call PrintText
 	ld a, [$ffdb]
 	add $2
-	AdjustEventBit EVENT_29A, 2
+	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_TEST
-	EventFlagAddress hl, EVENT_29A
+	EventFlagAddress hl, EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -240,10 +240,10 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	TX_ASM
 
 	ld a, [$ffe0]
-	AdjustEventBit EVENT_2A8, 0
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
 	jp nz, TextScriptEnd
@@ -257,15 +257,17 @@ CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
 	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
-CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
-	ld a, $6
+UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
+; Update the overworld map with open floor blocks or locked gate blocks
+; depending on event flags.
+	ld a, 6
 	ld [$ffdb], a
-.asm_1eb0e
+.loop
 	ld a, [$ffdb]
 	dec a
 	add a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	ld hl, CinnabarGymGateCoords
 	add hl, de
@@ -278,24 +280,24 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	push bc
 	ld a, [$ffdb]
 	ld [$ffe0], a
-	AdjustEventBit EVENT_2A8, 0
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jr nz, .asm_1eb36
+	jr nz, .unlocked
 	ld a, [wd12f]
-	jr .asm_1eb38
-.asm_1eb36
+	jr .next
+.unlocked
 	ld a, $e
-.asm_1eb38
+.next
 	pop bc
 	ld [wd09f], a
 	predef ReplaceTileBlock
 	ld hl, $ffdb
 	dec [hl]
-	jr nz, .asm_1eb0e
+	jr nz, .loop
 	ret
 
 CinnabarGymGateCoords: ; 1eb48 (7:6b48)

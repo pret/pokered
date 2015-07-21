@@ -2547,7 +2547,10 @@ W_FLAGS_D733:: ; d733
 ; bit 7: used fly out of battle
 	ds 1
 
-wd734:: ds 2 ; flag for indigo plateau and lorelei (not sure what it's for)
+wBeatLorelei:: ; d734
+; bit 1: set when you beat Lorelei and reset in Indigo Plateau lobby
+; the game uses this to tell when Elite 4 events need to be reset
+	ds 2
 
 wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so

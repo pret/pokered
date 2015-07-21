@@ -13,7 +13,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, wd734
+	ld hl, wBeatLorelei
 	set 1, [hl]
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	jr z, .asm_761a9
