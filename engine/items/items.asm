@@ -1719,7 +1719,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	ld a,$ff
 	call PlaySound ; turn off music
 	ld a, SFX_POKEFLUE
-	ld c, BANK(SFX_02_5e)
+	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wc028]

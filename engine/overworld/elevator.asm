@@ -17,7 +17,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	add d
 	ld [hSCY], a
 	push bc
-	ld c, BANK(SFX_02_5b)
+	ld c, BANK(SFX_Collision_1)
 	ld a, SFX_COLLISION
 	call PlayMusic
 	pop bc
@@ -29,7 +29,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld [hSCY], a
 	ld a, $ff
 	call PlaySound
-	ld c, BANK(SFX_02_5f)
+	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .musicLoop

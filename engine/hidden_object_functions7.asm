@@ -67,7 +67,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [wMusicHeaderPointer], a
 	dec a
 	call PlaySound
-	ld c, BANK(SFX_02_5f)
+	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_1e9c2
