@@ -64,9 +64,8 @@
 	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wd790
-	set 7,[hl]
-	res 6,[hl]
+	SetEvent EVENT_IN_SAFARI_ZONE
+	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
 	ld a,3
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	jr .done

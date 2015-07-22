@@ -16,8 +16,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	ld hl, SilphCo4Data19d58
 	call SilphCo4Script_19d5d
 	call SilphCo4Script_19d89
-	ld a, [wd82a]
-	bit 0, a
+	CheckEvent EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	jr nz, .asm_19d48
 	push af
 	ld a, $54
@@ -26,7 +25,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	predef ReplaceTileBlock
 	pop af
 .asm_19d48
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -73,16 +72,16 @@ SilphCo4Script_19d5d: ; 19d5d (6:5d5d)
 	ret
 
 SilphCo4Script_19d89: ; 19d89 (6:5d89)
-	ld hl, wd82a
+	EventFlagAddress hl, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_19d97
-	set 0, [hl]
+	jr nz, .next
+	SetEventReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
-.asm_19d97
-	set 1, [hl]
+.next
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret
 
 SilphCo4ScriptPointers: ; 19d9a (6:5d9a)
@@ -101,27 +100,27 @@ SilphCo4TextPointers: ; 19da0 (6:5da0)
 
 SilphCo4TrainerHeaders: ; 19dae (6:5dae)
 SilphCo4TrainerHeader0: ; 19dae (6:5dae)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd829 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_0
 	dw SilphCo4BattleText2 ; TextBeforeBattle
 	dw SilphCo4AfterBattleText2 ; TextAfterBattle
 	dw SilphCo4EndBattleText2 ; TextEndBattle
 	dw SilphCo4EndBattleText2 ; TextEndBattle
 
 SilphCo4TrainerHeader2: ; 19dba (6:5dba)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd829 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_2
 	dw SilphCo4BattleText3 ; TextBeforeBattle
 	dw SilphCo4AfterBattleText3 ; TextAfterBattle
 	dw SilphCo4EndBattleText3 ; TextEndBattle
 	dw SilphCo4EndBattleText3 ; TextEndBattle
 
 SilphCo4TrainerHeader3: ; 19dc6 (6:5dc6)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd829 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_3
 	dw SilphCo4BattleText4 ; TextBeforeBattle
 	dw SilphCo4AfterBattleText4 ; TextAfterBattle
 	dw SilphCo4EndBattleText4 ; TextEndBattle

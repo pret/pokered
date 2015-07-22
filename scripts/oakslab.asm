@@ -1,6 +1,5 @@
 OaksLabScript: ; 1cb0e (7:4b0e)
-	ld a, [wd74b]
-	bit 6, a
+	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
 	call nz, OaksLabScript_1d076
 	ld a, $1
 	ld [wAutoTextBoxDrawingControl], a
@@ -32,8 +31,7 @@ OaksLabScriptPointers: ; 1cb28 (7:4b28)
 	dw OaksLabScript18
 
 OaksLabScript0: ; 1cb4e (7:4b4e)
-	ld a, [wd74b]
-	bit 7, a
+	CheckEvent EVENT_OAK_APPEARED_IN_PALLET
 	ret z
 	ld a, [wNPCMovementScriptFunctionNum]
 	and a
@@ -110,10 +108,8 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld hl, wd747
-	set 0, [hl]
-	ld hl, wd74b
-	set 0, [hl]
+	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB
+	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_UP
@@ -146,8 +142,7 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $14
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 1, [hl]
+	SetEvent EVENT_OAK_ASKED_TO_CHOOSE_MON
 	xor a
 	ld [wJoyIgnore], a
 
@@ -336,8 +331,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $e
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 2, [hl]
+	SetEvent EVENT_GOT_STARTER
 	xor a
 	ld [wJoyIgnore], a
 
@@ -435,8 +429,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
-	ld hl, wd74b
-	set 3, [hl]
+	SetEvent EVENT_BATTLED_RIVAL_IN_OAKS_LAB
 
 	ld a, $d
 	ld [W_OAKSLABCURSCRIPT], a
@@ -603,10 +596,8 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $1b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 5, [hl]
-	ld hl, wd74e
-	set 0, [hl]
+	SetEvent EVENT_GOT_POKEDEX
+	SetEvent EVENT_OAK_GOT_PARCEL
 	ld a, HS_LYING_OLD_MAN
 	ld [wcc4d], a
 	predef HideObject
@@ -641,10 +632,9 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ld a, HS_OAKS_LAB_RIVAL
 	ld [wcc4d], a
 	predef HideObject
-	ld hl, wd7eb
-	set 0, [hl]
-	res 1, [hl]
-	set 7, [hl]
+	SetEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
+	ResetEventReuseHL EVENT_2ND_ROUTE22_RIVAL_BATTLE
+	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 	ld a, HS_ROUTE_22_RIVAL_1
 	ld [wcc4d], a
 	predef ShowObject
@@ -660,19 +650,19 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 OaksLabScript18: ; 1d009 (7:5009)
 	ret
 
-OaksLabScript_1d00a: ; 1d00a (7:500a)
+OaksLabScript_RemoveParcel: ; 1d00a (7:500a)
 	ld hl, wBagItems
 	ld bc, $0000
-.asm_1d010
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp OAKS_PARCEL
-	jr z, .GotParcel
+	jr z, .foundParcel
 	inc hl
 	inc c
-	jr .asm_1d010
-.GotParcel
+	jr .loop
+.foundParcel
 	ld hl, wNumBagItems
 	ld a, c
 	ld [wWhichPokemon], a
@@ -772,8 +762,7 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
 	TX_ASM
-	ld a, [wd74b]
-	bit 0, a
+	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	jr nz, .asm_1d0de
 	ld hl, OaksLabGaryText1
 	call PrintText
@@ -839,10 +828,9 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [wd11e], a
 	ld a, b
 	ld [wSpriteIndex], a
-	ld a, [wd74b]
-	bit 2, a
+	CheckEvent EVENT_GOT_STARTER
 	jp nz, OaksLabScript_1d22d
-	bit 1, a
+	CheckEventReuseA EVENT_OAK_ASKED_TO_CHOOSE_MON
 	jr nz, OaksLabScript_1d157
 	ld hl, OaksLabText39
 	call PrintText
@@ -976,8 +964,7 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
 	TX_ASM
-	ld a, [wd747]
-	bit 6, a
+	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 	jr nz, .asm_1d266
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
@@ -985,8 +972,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld a, [wd11e]
 	cp $2
 	jr c, .asm_1d279
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .asm_1d279
 .asm_1d266
 	ld hl, OaksLabText_1d31d
@@ -999,13 +985,11 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld b,POKE_BALL
 	call IsItemInBag
 	jr nz, .asm_1d2e7
-	ld a, [wd7eb]
-	bit 5, a
+	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_FIGHT
 	jr nz, .asm_1d2d0
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .asm_1d2c8
-	bit 3, a
+	CheckEventReuseA EVENT_BATTLED_RIVAL_IN_OAKS_LAB
 	jr nz, .asm_1d2a9
 	ld a, [wd72e]
 	bit 3, a
@@ -1027,7 +1011,7 @@ OaksLabText5: ; 1d248 (7:5248)
 .asm_1d2b8
 	ld hl, OaksLabDeliverParcelText
 	call PrintText
-	call OaksLabScript_1d00a
+	call OaksLabScript_RemoveParcel
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_1d2ed
@@ -1036,9 +1020,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 	jr .asm_1d2ed
 .asm_1d2d0
-	ld hl, wd74b
-	bit 4, [hl]
-	set 4, [hl]
+	CheckAndSetEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr nz, .asm_1d2e7
 	ld bc, (POKE_BALL << 8) | 5
 	call GiveItem

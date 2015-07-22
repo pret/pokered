@@ -55,8 +55,7 @@ Route22RivalMovementData: ; 50efb (14:4efb)
 	db $FF
 
 Route22Script0: ; 50f00 (14:4f00)
-	ld a, [wd7eb]
-	bit 7, a
+	CheckEvent EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 	ret z
 	ld hl, .Route22RivalBattleCoords
 	call ArePlayerCoordsInArray
@@ -69,10 +68,9 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
-	ld a, [wd7eb]
-	bit 0, a ; is this the rival battle at the beginning of the game?
+	CheckEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
 	jr nz, .firstRivalBattle
-	bit 1, a ; is this the rival at the end of the game?
+	CheckEventReuseA EVENT_2ND_ROUTE22_RIVAL_BATTLE ; is this the rival at the end of the game?
 	jp nz, Route22Script_5104e
 	ret
 
@@ -165,8 +163,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wd7eb
-	set 5, [hl]
+	SetEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_FIGHT
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -230,9 +227,7 @@ Route22Script3: ; 5102a (14:502a)
 	ld [wcc4d], a
 	predef HideObject
 	call PlayDefaultMusic
-	ld hl, wd7eb
-	res 0, [hl]
-	res 7, [hl]
+	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 	ld a, $0
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
@@ -327,8 +322,7 @@ Route22Script5: ; 510df (14:50df)
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wd7eb
-	set 6, [hl]
+	SetEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_FIGHT
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -378,9 +372,7 @@ Route22Script6: ; 51151 (14:5151)
 	ld [wcc4d], a
 	predef HideObject
 	call PlayDefaultMusic
-	ld hl, wd7eb
-	res 1, [hl]
-	res 7, [hl]
+	ResetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 	ld a, $7
 	ld [W_ROUTE22CURSCRIPT], a
 	ret
@@ -392,8 +384,7 @@ Route22TextPointers: ; 51175 (14:5175)
 
 Route22Text1: ; 5117b (14:517b)
 	TX_ASM
-	ld a, [wd7eb]
-	bit 5, a
+	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_FIGHT
 	jr z, .asm_5118b
 	ld hl, Route22RivalAfterBattleText1
 	call PrintText
@@ -406,8 +397,7 @@ Route22Text1: ; 5117b (14:517b)
 
 Route22Text2: ; 51194 (14:5194)
 	TX_ASM
-	ld a, [wd7eb]
-	bit 6, a
+	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_FIGHT
 	jr z, .asm_511a4
 	ld hl, Route22RivalAfterBattleText2
 	call PrintText

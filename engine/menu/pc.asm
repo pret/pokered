@@ -74,8 +74,7 @@ BillsPC: ; 17ee4 (5:7ee4)
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
-	ld a, [wd7f1] ;has to do with having met Bill
-	bit 0, a
+	CheckEvent EVENT_MET_BILL
 	jr nz, .billsPC ;if you've met bill, use that bill's instead of someone's
 	ld hl, AccessedSomeonesPCText
 	jr .printText

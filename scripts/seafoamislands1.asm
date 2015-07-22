@@ -1,7 +1,6 @@
 SeafoamIslands1Script: ; 447e9 (11:47e9)
 	call EnableAutoTextBoxDrawing
-	ld hl, wd7e7
-	set 0, [hl]
+	SetEvent EVENT_IN_SEAFOAM_ISLANDS
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
@@ -9,18 +8,18 @@ SeafoamIslands1Script: ; 447e9 (11:47e9)
 	ld hl, Seafoam1HolesCoords
 	call CheckBoulderCoords
 	ret nc
-	ld hl, wd7e8
+	EventFlagAddress hl, EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_44819
-	set 6, [hl]
+	SetEventReuseHL EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_1_BOULDER_1
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_1
 	ld [wd07a], a
 	jr .asm_44825
 .asm_44819
-	set 7, [hl]
+	SetEventAfterBranchReuseHL EVENT_SEAFOAM1_BOULDER2_DOWN_HOLE, EVENT_SEAFOAM1_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_1_BOULDER_2
 	ld [wd079], a
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_2

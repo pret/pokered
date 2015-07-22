@@ -3,8 +3,7 @@ SSAnne7Script: ; 61895 (18:5895)
 	jp EnableAutoTextBoxDrawing
 
 SSAnne7Script_6189b: ; 6189b (18:589b)
-	ld a, [wd803]
-	bit 1, a
+	CheckEvent EVENT_RUBBED_CAPTAINS_BACK
 	ret nz
 	ld hl, wd72d
 	set 5, [hl]
@@ -17,8 +16,7 @@ SSAnne7TextPointers: ; 618a7 (18:58a7)
 
 SSAnne7Text1: ; 618ad (18:58ad)
 	TX_ASM
-	ld a, [wd803]
-	bit 0, a
+	CheckEvent EVENT_GOT_HM01
 	jr nz, .asm_797c4
 	ld hl, SSAnne7RubText
 	call PrintText
@@ -29,8 +27,7 @@ SSAnne7Text1: ; 618ad (18:58ad)
 	jr nc, .BagFull
 	ld hl, ReceivedHM01Text
 	call PrintText
-	ld hl, wd803
-	set 0, [hl]
+	SetEvent EVENT_GOT_HM01
 	jr .asm_0faf5
 .BagFull
 	ld hl, HM01NoRoomText
@@ -65,8 +62,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	cp MUSIC_PKMN_HEALED
 	jr z, .asm_61910
 	call PlayDefaultMusic
-	ld hl, wd803
-	set 1, [hl]
+	SetEvent EVENT_RUBBED_CAPTAINS_BACK
 	ld hl, wd72d
 	res 5, [hl]
 	jp TextScriptEnd

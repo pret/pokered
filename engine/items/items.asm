@@ -432,8 +432,7 @@ ItemUseBall: ; d687 (3:5687)
 	call ClearSprites
 	call SendNewMonToBox
 	ld hl,ItemUseBallText07
-	ld a,[wd7f1]
-	bit 0,a		;already met Bill?
+	CheckEvent EVENT_MET_BILL
 	jr nz,.sendToBox2
 	ld hl,ItemUseBallText08
 .sendToBox2
@@ -1375,8 +1374,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	set 6,[hl]
 	ld hl,wd72e
 	res 4,[hl]
-	ld hl,wd790
-	res 7,[hl] ; unset Safari Zone bit
+	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [W_NUMSAFARIBALLS],a
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
@@ -1584,8 +1582,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_12
 	jr nz,.notRoute12
-	ld a,[wd7d8]
-	bit 7,a ; has the player beaten Route 12 Snorlax yet?
+	CheckEvent EVENT_BEAT_ROUTE12_SNORLAX
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 12 Snorlax
 	ld hl,Route12SnorlaxFluteCoords
@@ -1593,14 +1590,12 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wd7d8
-	set 6,[hl] ; trigger Snorlax fight (handled by map script)
+	SetEvent EVENT_FIGHT_ROUTE12_SNORLAX
 	ret
 .notRoute12
 	cp a,ROUTE_16
 	jr nz,.noSnorlaxToWakeUp
-	ld a,[wd7e0]
-	bit 1,a ; has the player beaten Route 16 Snorlax yet?
+	CheckEvent EVENT_BEAT_ROUTE16_SNORLAX
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 16 Snorlax
 	ld hl,Route16SnorlaxFluteCoords
@@ -1608,8 +1603,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wd7e0
-	set 0,[hl] ; trigger Snorlax fight (handled by map script)
+	SetEvent EVENT_FIGHT_ROUTE16_SNORLAX
 	ret
 .noSnorlaxToWakeUp
 	ld hl,PlayedFluteNoEffectText

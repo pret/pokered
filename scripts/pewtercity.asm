@@ -16,14 +16,12 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
-	ld hl, wd754
-	res 0, [hl]
+	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	call PewterCityScript_1925e
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [wd755]
-	bit 7, a
+	CheckEvent EVENT_BEAT_BROCK
 	ret nz
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray

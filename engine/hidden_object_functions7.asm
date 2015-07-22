@@ -36,8 +36,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 	db "@"
 
 SafariZoneCheck: ; 1e988 (7:6988)
-	ld hl, wd790
-	bit 7, [hl]; if we are not in the Safari Zone,
+	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [W_NUMSAFARIBALLS]
 	and a
@@ -85,8 +84,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	ld hl, wd790
-	set 6, [hl]
+	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, $1
 	ld [wSafariZoneGameOver], a
 	ret
@@ -190,8 +188,8 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
-CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	ld hl, wd79c
+CinnabarGymGateFlagAction: ; 1ea8a (7:6a8a)
+	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
@@ -208,10 +206,11 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_SET
-	call CinnabarGymQuiz_1ea8a
-	jp CinnabarGymQuiz_1eb0a
+	call CinnabarGymGateFlagAction
+	jp UpdateCinnabarGymGateTileBlocks_
 .asm_1eab8
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
@@ -221,9 +220,10 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call PrintText
 	ld a, [$ffdb]
 	add $2
+	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_TEST
-	ld hl, wd79a
+	EventFlagAddress hl, EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -240,9 +240,10 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	TX_ASM
 
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
 	jp nz, TextScriptEnd
@@ -256,15 +257,17 @@ CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
 	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
-CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
-	ld a, $6
+UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
+; Update the overworld map with open floor blocks or locked gate blocks
+; depending on event flags.
+	ld a, 6
 	ld [$ffdb], a
-.asm_1eb0e
+.loop
 	ld a, [$ffdb]
 	dec a
 	add a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	ld hl, CinnabarGymGateCoords
 	add hl, de
@@ -277,23 +280,24 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	push bc
 	ld a, [$ffdb]
 	ld [$ffe0], a
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jr nz, .asm_1eb36
+	jr nz, .unlocked
 	ld a, [wd12f]
-	jr .asm_1eb38
-.asm_1eb36
+	jr .next
+.unlocked
 	ld a, $e
-.asm_1eb38
+.next
 	pop bc
 	ld [wd09f], a
 	predef ReplaceTileBlock
 	ld hl, $ffdb
 	dec [hl]
-	jr nz, .asm_1eb0e
+	jr nz, .loop
 	ret
 
 CinnabarGymGateCoords: ; 1eb48 (7:6b48)
@@ -320,12 +324,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
-	ld a, [wd7f2]
-	bit 7, a
+	CheckEvent EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	jr nz, .asm_1ebd2
-	bit 3, a
+	CheckEventReuseA EVENT_USED_CELL_SEPARATOR_ON_BILL
 	jr nz, .asm_1eb86
-	bit 6, a
+	CheckEventReuseA EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	jr nz, .asm_1eb8b
 .asm_1eb86
 	tx_pre_jump BillsHouseMonitorText
@@ -354,8 +357,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
-	ld hl, wd7f2
-	set 3, [hl]
+	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret
 .asm_1ebd2
 	ld a, $1

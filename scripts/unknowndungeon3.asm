@@ -19,9 +19,9 @@ UnknownDungeon3TextPointers: ; 45f09 (11:5f09)
 
 UnknownDungeon3TrainerHeaders: ; 45f0f (11:5f0f)
 UnknownDungeon3TrainerHeader0: ; 45f0f (11:5f0f)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_UNKNOWN_DUNGEON_3_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_UNKNOWN_DUNGEON_3_TRAINER_0
 	dw UnknownDungeon3MewtwoText ; TextBeforeBattle
 	dw UnknownDungeon3MewtwoText ; TextAfterBattle
 	dw UnknownDungeon3MewtwoText ; TextEndBattle

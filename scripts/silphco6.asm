@@ -16,8 +16,7 @@ SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	ld hl, SilphCo6Coords1
 	call SilphCo4Script_19d5d
 	call SilphCo6Script_1a1e6
-	ld a, [wd82e]
-	bit 7, a
+	CheckEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -32,8 +31,7 @@ SilphCo6Script_1a1e6: ; 1a1e6 (6:61e6)
 	ld a, [$ffe0]
 	and a
 	ret z
-	ld hl, wd82e
-	set 7, [hl]
+	SetEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	ret
 
 SilphCo6ScriptPointers: ; 1a1f0 (6:61f0)
@@ -55,27 +53,27 @@ SilphCo6TextPointers: ; 1a1f6 (6:61f6)
 
 SilphCo6TrainerHeaders: ; 1a20a (6:620a)
 SilphCo6TrainerHeader0: ; 1a20a (6:620a)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_6F_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd82d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_6F_TRAINER_0
 	dw SilphCo6BattleText2 ; TextBeforeBattle
 	dw SilphCo6AfterBattleText2 ; TextAfterBattle
 	dw SilphCo6EndBattleText2 ; TextEndBattle
 	dw SilphCo6EndBattleText2 ; TextEndBattle
 
 SilphCo6TrainerHeader2: ; 1a216 (6:6216)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_6F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd82d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_6F_TRAINER_2
 	dw SilphCo6BattleText3 ; TextBeforeBattle
 	dw SilphCo6AfterBattleText3 ; TextAfterBattle
 	dw SilphCo6EndBattleText3 ; TextEndBattle
 	dw SilphCo6EndBattleText3 ; TextEndBattle
 
 SilphCo6TrainerHeader3: ; 1a222 (6:6222)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_6F_TRAINER_3, 1
 	db ($2 << 4) ; trainer's view range
-	dw wd82d ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_6F_TRAINER_3, 1
 	dw SilphCo6BattleText4 ; TextBeforeBattle
 	dw SilphCo6AfterBattleText4 ; TextAfterBattle
 	dw SilphCo6EndBattleText4 ; TextEndBattle
@@ -84,8 +82,7 @@ SilphCo6TrainerHeader3: ; 1a222 (6:6222)
 	db $ff
 
 SilphCo6Script_1a22f: ; 1a22f (6:622f)
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .asm_1a238
 	jr .asm_1a23a
 .asm_1a238

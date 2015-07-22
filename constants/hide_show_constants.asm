@@ -82,7 +82,7 @@ const_value = 0
 	const HS_MANSION_1_ITEM_2             ; 49 X
 	const HS_FIGHTING_DOJO_GIFT_1         ; 4A
 	const HS_FIGHTING_DOJO_GIFT_2         ; 4B
-	const HS_SILPH_CO_1F_1                ; 4C
+	const HS_SILPH_CO_1F_RECEPTIONIST     ; 4C
 	const HS_VOLTORB_1                    ; 4D X
 	const HS_VOLTORB_2                    ; 4E X
 	const HS_VOLTORB_3                    ; 4F X

@@ -2547,7 +2547,10 @@ W_FLAGS_D733:: ; d733
 ; bit 7: used fly out of battle
 	ds 1
 
-wd734:: ds 2 ; flag for indigo plateau and lorelei (not sure what it's for)
+wBeatLorelei:: ; d734
+; bit 1: set when you beat Lorelei and reset in Indigo Plateau lobby
+; the game uses this to tell when Elite 4 events need to be reset
+	ds 2
 
 wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
@@ -2575,142 +2578,9 @@ wCardKeyDoorX:: ; d740
 
 wd743:: ds 1 ; used with surge gym trash cans
 wd744:: ds 3 ; also used with surge gym trash cans
-wd747:: ds 3 ; and we're getting to flags, which I'm not going to bother commenting
-wd74a:: ds 1
 
-wd74b:: ; d74b
-; bit 0: Prof. Oak has lead the player to the north end of his lab
-; bit 1: Prof. Oak has asked the player to choose a pokemon
-; bit 2: the player and the rival have received their pokemon
-; bit 3: the player has battled the rival in Oak's lab
-; bit 4: Prof. Oak has given the player 5 pokeballs
-; bit 5: received pokedex
-	ds 1
-
-wd74c:: ds 2
-wd74e:: ds 3
-wd751:: ds 1
-wd752:: ds 2
-wd754:: ds 1
-wd755:: ds 5
-wd75a:: ds 1
-wd75b:: ds 3
-wd75e:: ds 1
-wd75f:: ds 5
-wd764:: ds 1
-wd765:: ds 1
-wd766:: ds 1
-wd767:: ds 1
-wd768:: ds 1
-wd769:: ds 3
-wd76c:: ds 5
-wd771:: ds 2
-wd773:: ds 4
-wd777:: ds 1
-wd778:: ds 4
-wd77c:: ds 1
-wd77d:: ds 1
-wd77e:: ds 5
-wd783:: ds 11
-wd78e:: ds 2
-wd790:: ds 2
-wd792:: ds 4
-wd796:: ds 2
-wd798:: ds 2
-wd79a:: ds 1
-wd79b:: ds 1
-wd79c:: ds 5
-wd7a1:: ds 2
-wd7a3:: ds 12
-wd7af:: ds 2
-wd7b1:: ds 2
-wd7b3:: ds 1
-wd7b4:: ds 5
-wd7b9:: ds 4
-wd7bd:: ds 2
-wd7bf:: ds 3
-wd7c2:: ds 1
-wd7c3:: ds 2
-wd7c5:: ds 1
-wd7c6:: ds 3
-wd7c9:: ds 4
-wd7cd:: ds 2
-wd7cf:: ds 2
-wd7d1:: ds 1
-wd7d2:: ds 1
-wd7d3:: ds 2
-wd7d5:: ds 1
-wd7d6:: ds 1
-wd7d7:: ds 1
-wd7d8:: ds 1
-wd7d9:: ds 2
-wd7db:: ds 2
-wd7dd:: ds 2
-wd7df:: ds 1
-wd7e0:: ds 1
-wd7e1:: ds 2
-wd7e3:: ds 2
-wd7e5:: ds 2
-wd7e7:: ds 1
-wd7e8:: ds 1
-wd7e9:: ds 2
-wd7eb:: ds 2
-wd7ed:: ds 1
-wd7ee:: ds 1
-wd7ef:: ds 1
-wd7f0:: ds 1
-wd7f1:: ds 1
-wd7f2:: ds 1
-wd7f3:: ds 2
-wd7f5:: ds 1
-wd7f6:: ds 9
-wd7ff:: ds 4
-wd803:: ds 2
-wd805:: ds 2
-wd807:: ds 2
-wd809:: ds 10
-wd813:: ds 2
-wd815:: ds 1
-wd816:: ds 1
-wd817:: ds 2
-wd819:: ds 2
-wd81b:: ds 10
-wd825:: ds 1
-wd826:: ds 1
-wd827:: ds 1
-wd828:: ds 1
-wd829:: ds 1
-wd82a:: ds 1
-wd82b:: ds 1
-wd82c:: ds 1
-wd82d:: ds 1
-wd82e:: ds 1
-wd82f:: ds 1
-wd830:: ds 1
-wd831:: ds 1
-wd832:: ds 1
-wd833:: ds 1
-wd834:: ds 1
-wd835:: ds 1
-wd836:: ds 1
-wd837:: ds 1
-wd838:: ds 15
-wd847:: ds 2
-wd849:: ds 2
-wd84b:: ds 12
-wd857:: ds 8
-wd85f:: ds 4
-wd863:: ds 1
-wd864:: ds 1
-wd865:: ds 1
-wd866:: ds 1
-wd867:: ds 2
-wd869:: ds 20
-wd87d:: ds 2
-wd87f:: ds 1
-wd880:: ds 1
-wd881:: ds 1
-wd882:: ds 5
+wEventFlags:: ; d747
+	ds 320
 
 wLinkEnemyTrainerName:: ; d887
 ; linked game's trainer name

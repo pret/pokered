@@ -27,9 +27,7 @@ SeafoamIslands5Script4: ; 467b7 (11:67b7)
 	ret
 
 SeafoamIslands5Script0: ; 467c7 (11:67c7)
-	ld a, [wd880]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld hl, CoordsData_467fe
 	call ArePlayerCoordsInArray
@@ -72,9 +70,7 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	ret
 
 SeafoamIslands5Script2: ; 46816 (11:6816)
-	ld a, [wd881]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ld a, $0
 	jr z, .asm_46849
 	ld hl, CoordsData_4684d
@@ -143,9 +139,9 @@ SeafoamIslands5TextPointers: ; 4687c (11:687c)
 
 SeafoamIslands5TrainerHeaders: ; 46886 (11:6886)
 SeafoamIslands5TrainerHeader0: ; 46886 (11:6886)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SEAFOAM_ISLANDS_5_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd882 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SEAFOAM_ISLANDS_5_TRAINER_0
 	dw SeafoamIslands5BattleText2 ; TextBeforeBattle
 	dw SeafoamIslands5BattleText2 ; TextAfterBattle
 	dw SeafoamIslands5BattleText2 ; TextEndBattle

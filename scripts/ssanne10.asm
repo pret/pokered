@@ -27,54 +27,54 @@ SSAnne10TextPointers: ; 61d6e (18:5d6e)
 
 SSAnne10TrainerHeaders: ; 61d84 (18:5d84)
 SSAnne10TrainerHeader0: ; 61d84 (18:5d84)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_0
 	dw SSAnne10BattleText1 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText1 ; TextAfterBattle
 	dw SSAnne10EndBattleText1 ; TextEndBattle
 	dw SSAnne10EndBattleText1 ; TextEndBattle
 
 SSAnne10TrainerHeader1: ; 61d90 (18:5d90)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_1
 	dw SSAnne10BattleText2 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText2 ; TextAfterBattle
 	dw SSAnne10EndBattleText2 ; TextEndBattle
 	dw SSAnne10EndBattleText2 ; TextEndBattle
 
 SSAnne10TrainerHeader2: ; 61d9c (18:5d9c)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_2
 	dw SSAnne10BattleText3 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText3 ; TextAfterBattle
 	dw SSAnne10EndBattleText3 ; TextEndBattle
 	dw SSAnne10EndBattleText3 ; TextEndBattle
 
 SSAnne10TrainerHeader3: ; 61da8 (18:5da8)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_3
 	db ($2 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_3
 	dw SSAnne10BattleText4 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText4 ; TextAfterBattle
 	dw SSAnne10EndBattleText4 ; TextEndBattle
 	dw SSAnne10EndBattleText4 ; TextEndBattle
 
 SSAnne10TrainerHeader4: ; 61db4 (18:5db4)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_4
 	dw SSAnne10BattleText5 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText5 ; TextAfterBattle
 	dw SSAnne10EndBattleText5 ; TextEndBattle
 	dw SSAnne10EndBattleText5 ; TextEndBattle
 
 SSAnne10TrainerHeader5: ; 61dc0 (18:5dc0)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_5
 	db ($3 << 4) ; trainer's view range
-	dw wd809 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SS_ANNE_10_TRAINER_5
 	dw SSAnne10BattleText6 ; TextBeforeBattle
 	dw SSAnne10AfterBattleText6 ; TextAfterBattle
 	dw SSAnne10EndBattleText6 ; TextEndBattle

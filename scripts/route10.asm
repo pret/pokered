@@ -26,54 +26,54 @@ Route10TextPointers: ; 5934f (16:534f)
 
 Route10TrainerHeaders: ; 59363 (16:5363)
 Route10TrainerHeader0: ; 59363 (16:5363)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_0
 	dw Route10BattleText1 ; TextBeforeBattle
 	dw Route10AfterBattleText1 ; TextAfterBattle
 	dw Route10EndBattleText1 ; TextEndBattle
 	dw Route10EndBattleText1 ; TextEndBattle
 
 Route10TrainerHeader1: ; 5936f (16:536f)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_1
 	dw Route10BattleText2 ; TextBeforeBattle
 	dw Route10AfterBattleText2 ; TextAfterBattle
 	dw Route10EndBattleText2 ; TextEndBattle
 	dw Route10EndBattleText2 ; TextEndBattle
 
 Route10TrainerHeader2: ; 5937b (16:537b)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_2
 	dw Route10BattleText3 ; TextBeforeBattle
 	dw Route10AfterBattleText3 ; TextAfterBattle
 	dw Route10EndBattleText3 ; TextEndBattle
 	dw Route10EndBattleText3 ; TextEndBattle
 
 Route10TrainerHeader3: ; 59387 (16:5387)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_3
 	dw Route10BattleText4 ; TextBeforeBattle
 	dw Route10AfterBattleText4 ; TextAfterBattle
 	dw Route10EndBattleText4 ; TextEndBattle
 	dw Route10EndBattleText4 ; TextEndBattle
 
 Route10TrainerHeader4: ; 59393 (16:5393)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_4
 	dw Route10BattleText5 ; TextBeforeBattle
 	dw Route10AfterBattleText5 ; TextAfterBattle
 	dw Route10EndBattleText5 ; TextEndBattle
 	dw Route10EndBattleText5 ; TextEndBattle
 
 Route10TrainerHeader5: ; 5939f (16:539f)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_10_TRAINER_5
 	db ($2 << 4) ; trainer's view range
-	dw wd7d1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_10_TRAINER_5
 	dw Route10BattleText6 ; TextBeforeBattle
 	dw Route10AfterBattleText6 ; TextAfterBattle
 	dw Route10EndBattleText6 ; TextEndBattle

@@ -49,8 +49,7 @@ FossilsList: ; 75d68 (1d:5d68)
 
 Lab4Text1: ; 75d6c (1d:5d6c)
 	TX_ASM
-	ld a, [wd7a3]
-	bit 0, a
+	CheckEvent EVENT_GAVE_FOSSIL_TO_LAB
 	jr nz, .asm_75d96
 	ld hl, Lab4Text_75dc6
 	call PrintText
@@ -66,7 +65,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 .asm_75d93
 	jp TextScriptEnd
 .asm_75d96
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_GAVE_FOSSIL_TO_LAB
 	jr z, .asm_75da2
 	ld hl, Lab4Text_75dd0
 	call PrintText
@@ -75,17 +74,13 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	call LoadFossilItemAndMonNameBank1D
 	ld hl, Lab4Text_75dd5
 	call PrintText
-	ld hl, wd7a3
-	set 2, [hl]
+	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	ld a, [W_FOSSILMON]
 	ld b, a
 	ld c, 30
 	call GivePokemon
 	jr nc, .asm_75d93
-	ld hl, wd7a3
-	res 0, [hl]
-	res 1, [hl]
-	res 2, [hl]
+	ResetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	jr .asm_75d93
 
 Lab4Text_75dc6: ; 75dc6 (1d:5dc6)

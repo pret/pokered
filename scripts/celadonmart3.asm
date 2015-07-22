@@ -22,16 +22,14 @@ CeladonMart3TextPointers: ; 48228 (12:4228)
 
 CeladonMart3Text1: ; 4824a (12:424a)
 	TX_ASM
-	ld a, [wd778]
-	bit 7, a
+	CheckEvent EVENT_GOT_TM18
 	jr nz, .asm_a5463
 	ld hl, TM18PreReceiveText
 	call PrintText
 	ld bc, (TM_18 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd778
-	set 7, [hl]
+	SetEvent EVENT_GOT_TM18
 	ld hl, ReceivedTM18Text
 	jr .asm_81359
 .BagFull

@@ -6,8 +6,7 @@ SaffronHouse2TextPointers: ; 1de3f (7:5e3f)
 
 SaffronHouse2Text1: ; 1de41 (7:5e41)
 	TX_ASM
-	ld a, [wd7bd]
-	bit 0, a
+	CheckEvent EVENT_GOT_TM29
 	jr nz, .asm_9e72b
 	ld hl, TM29PreReceiveText
 	call PrintText
@@ -16,8 +15,7 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	jr nc, .BagFull
 	ld hl, ReceivedTM29Text
 	call PrintText
-	ld hl, wd7bd
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM29
 	jr .asm_fe4e1
 .BagFull
 	ld hl, TM29NoRoomText

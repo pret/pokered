@@ -6,8 +6,7 @@ ViridianMartScript: ; 1d46e (7:546e)
 	jp CallFunctionInTable
 
 ViridianMartScript_1d47d: ; 1d47d (7:547d)
-	ld a, [wd74e]
-	bit 0, a
+	CheckEvent EVENT_OAK_GOT_PARCEL
 	jr nz, .asm_1d489
 	ld hl, ViridianMartTextPointers
 	jr .asm_1d48c
@@ -55,8 +54,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	call DisplayTextID
 	ld bc, (OAKS_PARCEL << 8) + 1
 	call GiveItem
-	ld hl, wd74e
-	set 1, [hl]
+	SetEvent EVENT_GOT_OAKS_PARCEL
 	ld a, $2
 	ld [W_VIRIDIANMARKETCURSCRIPT], a
 	; fallthrough

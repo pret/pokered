@@ -1,7 +1,5 @@
 Route20Script: ; 50ca9 (14:4ca9)
-	ld hl, wd7e7
-	bit 0, [hl]
-	res 0, [hl]
+	CheckAndResetEvent EVENT_IN_SEAFOAM_ISLANDS
 	call nz, Route20Script_50cc6
 	call EnableAutoTextBoxDrawing
 	ld hl, Route20TrainerHeader0
@@ -12,9 +10,7 @@ Route20Script: ; 50ca9 (14:4ca9)
 	ret
 
 Route20Script_50cc6: ; 50cc6 (14:4cc6)
-	ld a, [wd880]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	jr z, .asm_50cef
 	ld a, HS_SEAFOAM_ISLANDS_1_BOULDER_1
 	call Route20Script_50d0c
@@ -40,9 +36,7 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	db $FF
 
 .asm_50cef
-	ld a, [wd881]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, HS_SEAFOAM_ISLANDS_4_BOULDER_1
 	call Route20Script_50d0c
@@ -83,90 +77,90 @@ Route20TextPointers: ; 50d22 (14:4d22)
 
 Route20TrainerHeaders: ; 50d3a (14:4d3a)
 Route20TrainerHeader0: ; 50d3a (14:4d3a)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_0
 	dw Route20BattleText1 ; TextBeforeBattle
 	dw Route20AfterBattleText1 ; TextAfterBattle
 	dw Route20EndBattleText1 ; TextEndBattle
 	dw Route20EndBattleText1 ; TextEndBattle
 
 Route20TrainerHeader2: ; 50d46 (14:4d46)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_2
 	dw Route20BattleText2 ; TextBeforeBattle
 	dw Route20AfterBattleText2 ; TextAfterBattle
 	dw Route20EndBattleText2 ; TextEndBattle
 	dw Route20EndBattleText2 ; TextEndBattle
 
 Route20TrainerHeader3: ; 50d52 (14:4d52)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_3
 	db ($2 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_3
 	dw Route20BattleText3 ; TextBeforeBattle
 	dw Route20AfterBattleText3 ; TextAfterBattle
 	dw Route20EndBattleText3 ; TextEndBattle
 	dw Route20EndBattleText3 ; TextEndBattle
 
 Route20TrainerHeader4: ; 50d5e (14:4d5e)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_4
 	dw Route20BattleText4 ; TextBeforeBattle
 	dw Route20AfterBattleText4 ; TextAfterBattle
 	dw Route20EndBattleText4 ; TextEndBattle
 	dw Route20EndBattleText4 ; TextEndBattle
 
 Route20TrainerHeader5: ; 50d6a (14:4d6a)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_5
 	db ($3 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_5
 	dw Route20BattleText5 ; TextBeforeBattle
 	dw Route20AfterBattleText5 ; TextAfterBattle
 	dw Route20EndBattleText5 ; TextEndBattle
 	dw Route20EndBattleText5 ; TextEndBattle
 
 Route20TrainerHeader6: ; 50d76 (14:4d76)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_6
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_6
 	dw Route20BattleText6 ; TextBeforeBattle
 	dw Route20AfterBattleText6 ; TextAfterBattle
 	dw Route20EndBattleText6 ; TextEndBattle
 	dw Route20EndBattleText6 ; TextEndBattle
 
 Route20TrainerHeader7: ; 50d82 (14:4d82)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_7
 	db ($2 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_7
 	dw Route20BattleText7 ; TextBeforeBattle
 	dw Route20AfterBattleText7 ; TextAfterBattle
 	dw Route20EndBattleText7 ; TextEndBattle
 	dw Route20EndBattleText7 ; TextEndBattle
 
 Route20TrainerHeader8: ; 50d8e (14:4d8e)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_8, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_8, 1
 	dw Route20BattleText8 ; TextBeforeBattle
 	dw Route20AfterBattleText8 ; TextAfterBattle
 	dw Route20EndBattleText8 ; TextEndBattle
 	dw Route20EndBattleText8 ; TextEndBattle
 
 Route20TrainerHeader9: ; 50d9a (14:4d9a)
-	db $9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_9, 1
 	db ($3 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_9, 1
 	dw Route20BattleText9 ; TextBeforeBattle
 	dw Route20AfterBattleText9 ; TextAfterBattle
 	dw Route20EndBattleText9 ; TextEndBattle
 	dw Route20EndBattleText9 ; TextEndBattle
 
 Route20TrainerHeader10: ; 50da6 (14:4da6)
-	db $a ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_10, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd7e7 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_10, 1
 	dw Route20BattleText10 ; TextBeforeBattle
 	dw Route20AfterBattleText10 ; TextAfterBattle
 	dw Route20EndBattleText10 ; TextEndBattle

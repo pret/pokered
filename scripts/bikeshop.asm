@@ -8,8 +8,7 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 
 BikeShopText1: ; 1d745 (7:5745)
 	TX_ASM
-	ld a, [wd75f]
-	bit 0, a
+	CheckEvent EVENT_GOT_BICYCLE
 	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
 	call PrintText
@@ -26,8 +25,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld a, BIKE_VOUCHER
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wd75f
-	set 0, [hl]
+	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
 	call PrintText
 	jr .Done
@@ -131,8 +129,7 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 
 BikeShopText3: ; 1d848 (7:5848)
 	TX_ASM
-	ld a, [wd75f]
-	bit 0, a
+	CheckEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d861
 	jr nz, .asm_34d2d
 	ld hl, BikeShopText_1d85c

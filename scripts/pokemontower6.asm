@@ -22,8 +22,7 @@ PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
 	dw PokemonTower6Script4
 
 PokemonTower6Script0: ; 60b17 (18:4b17)
-	ld a, [wd768]
-	bit 7, a
+	CheckEvent EVENT_BEAT_GHOST_MAROWAK
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_60b45
 	call ArePlayerCoordsInArray
@@ -60,8 +59,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_60b82
-	ld hl, wd768
-	set 7, [hl]
+	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, $7
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -107,27 +105,27 @@ PokemonTower6TextPointers: ; 60bb1 (18:4bb1)
 
 PokemonTower6TrainerHeaders: ; 60bbf (18:4bbf)
 PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_6_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd768 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_6_TRAINER_0
 	dw PokemonTower6BattleText1 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower6EndBattleText1 ; TextEndBattle
 	dw PokemonTower6EndBattleText1 ; TextEndBattle
 
 PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_6_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd768 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_6_TRAINER_1
 	dw PokemonTower6BattleText2 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower6EndBattleText2 ; TextEndBattle
 	dw PokemonTower6EndBattleText2 ; TextEndBattle
 
 PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_6_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd768 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_6_TRAINER_2
 	dw PokemonTower6BattleText3 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower6EndBattleText3 ; TextEndBattle

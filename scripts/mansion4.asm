@@ -13,8 +13,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd796]
-	bit 0, a
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_523ff
 	ld a, $e
 	ld bc, $80d
@@ -72,18 +71,18 @@ Mansion4TextPointers: ; 52436 (14:6436)
 
 Mansion4TrainerHeaders: ; 52448 (14:6448)
 Mansion4TrainerHeader0: ; 52448 (14:6448)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd84b ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_0
 	dw Mansion4BattleText1 ; TextBeforeBattle
 	dw Mansion4AfterBattleText1 ; TextAfterBattle
 	dw Mansion4EndBattleText1 ; TextEndBattle
 	dw Mansion4EndBattleText1 ; TextEndBattle
 
 Mansion4TrainerHeader2: ; 52454 (14:6454)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd84b ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_2
 	dw Mansion4BattleText2 ; TextBeforeBattle
 	dw Mansion4AfterBattleText2 ; TextAfterBattle
 	dw Mansion4EndBattleText2 ; TextEndBattle

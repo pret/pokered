@@ -1002,8 +1002,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 ; if text ID is 0 (i.e. the start menu)
 ; Note that the start menu text border is also drawn in the function directly
 ; below this, so this seems unnecessary.
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; start menu with pokedex
 	coord hl, 10, 0
 	ld b,$0e
@@ -1071,8 +1070,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 
 ; function that displays the start menu
 DrawStartMenu: ; 710b (1:710b)
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	coord hl, 10, 0
 	ld b,$0e
@@ -1098,8 +1096,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
 	coord hl, 12, 2
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokdex
 	ld a,$06
 	jr z,.storeMenuItemCount
@@ -2763,9 +2760,7 @@ CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ret nz
-	ld a, [wd881]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld hl, CoordsData_cdf7
 	call ArePlayerCoordsInArray

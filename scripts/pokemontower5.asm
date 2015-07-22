@@ -18,13 +18,10 @@ PokemonTower5Script0: ; 6094b (18:494b)
 	jr c, .asm_60960
 	ld hl, wd72e
 	res 4, [hl]
-	ld hl, wd767
-	res 7, [hl]
+	ResetEvent EVENT_IN_PURIFIED_ZONE
 	jp CheckFightingMapTrainers
 .asm_60960
-	ld hl, wd767
-	bit 7, [hl]
-	set 7, [hl]
+	CheckAndSetEvent EVENT_IN_PURIFIED_ZONE
 	ret nz
 	xor a
 	ld [hJoyHeld], a
@@ -62,36 +59,36 @@ PokemonTower5TextPointers: ; 6099b (18:499b)
 
 PokemonTower5TrainerHeaders: ; 609a9 (18:49a9)
 PokemonTower5TrainerHeader0: ; 609a9 (18:49a9)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_5_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd767 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_5_TRAINER_0
 	dw PokemonTower5BattleText1 ; TextBeforeBattle
 	dw PokemonTower5AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower5EndBattleText1 ; TextEndBattle
 	dw PokemonTower5EndBattleText1 ; TextEndBattle
 
 PokemonTower5TrainerHeader1: ; 609b5 (18:49b5)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_5_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd767 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_5_TRAINER_1
 	dw PokemonTower5BattleText2 ; TextBeforeBattle
 	dw PokemonTower5AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower5EndBattleText2 ; TextEndBattle
 	dw PokemonTower5EndBattleText2 ; TextEndBattle
 
 PokemonTower5TrainerHeader2: ; 609c1 (18:49c1)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_5_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd767 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_5_TRAINER_2
 	dw PokemonTower5BattleText3 ; TextBeforeBattle
 	dw PokemonTower5AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower5EndBattleText3 ; TextEndBattle
 	dw PokemonTower5EndBattleText3 ; TextEndBattle
 
 PokemonTower5TrainerHeader3: ; 609cd (18:49cd)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_5_TRAINER_3
 	db ($2 << 4) ; trainer's view range
-	dw wd767 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_5_TRAINER_3
 	dw PokemonTower5BattleText4 ; TextBeforeBattle
 	dw PokemonTower5AfterBattleText4 ; TextAfterBattle
 	dw PokemonTower5EndBattleText4 ; TextEndBattle

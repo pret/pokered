@@ -21,15 +21,13 @@ FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
 	dw FightingDojoScript3
 
 FightingDojoScript1: ; 5cd83 (17:4d83)
-	ld a, [wd7b1]
-	bit 0, a
+	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	ret nz
 	call CheckFightingMapTrainers
 	ld a, [wTrainerHeaderFlagBit]
 	and a
 	ret nz
-	ld a, [wd7b1]
-	bit 1, a
+	CheckEvent EVENT_BEAT_KARATE_MASTER
 	ret nz
 	xor a
 	ld [hJoyHeld], a
@@ -72,9 +70,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 .asm_5cde4
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [wd7b1]
-	or $3e
-	ld [wd7b1], a
+	SetEventRange EVENT_BEAT_KARATE_MASTER, EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	ld a, $8
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -96,36 +92,36 @@ FightingDojoTextPointers: ; 5ce03 (17:4e03)
 
 FightingDojoTrainerHeaders: ; 5ce13 (17:4e13)
 FightingDojoTrainerHeader0: ; 5ce13 (17:4e13)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7b1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
 	dw FightingDojoBattleText1 ; TextBeforeBattle
 	dw FightingDojoAfterBattleText1 ; TextAfterBattle
 	dw FightingDojoEndBattleText1 ; TextEndBattle
 	dw FightingDojoEndBattleText1 ; TextEndBattle
 
 FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd7b1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
 	dw FightingDojoBattleText2 ; TextBeforeBattle
 	dw FightingDojoAfterBattleText2 ; TextAfterBattle
 	dw FightingDojoEndBattleText2 ; TextEndBattle
 	dw FightingDojoEndBattleText2 ; TextEndBattle
 
 FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd7b1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
 	dw FightingDojoBattleText3 ; TextBeforeBattle
 	dw FightingDojoAfterBattleText3 ; TextAfterBattle
 	dw FightingDojoEndBattleText3 ; TextEndBattle
 	dw FightingDojoEndBattleText3 ; TextEndBattle
 
 FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd7b1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	dw FightingDojoBattleText4 ; TextBeforeBattle
 	dw FightingDojoAfterBattleText4 ; TextAfterBattle
 	dw FightingDojoEndBattleText4 ; TextEndBattle
@@ -135,10 +131,9 @@ FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 
 FightingDojoText1: ; 5ce44 (17:4e44)
 	TX_ASM
-	ld a, [wd7b1]
-	bit 0, a
+	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .continue1
-	bit 1, a
+	CheckEventReuseA EVENT_BEAT_KARATE_MASTER
 	jp nz, .continue2
 	ld hl, FightingDojoText_5ce8e
 	call PrintText
@@ -257,8 +252,7 @@ FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
 FightingDojoText6: ; 5cf06 (17:4f06)
 ; Hitmonlee Poké Ball
 	TX_ASM
-	ld a, [wd7b1]
-	and %11000000
+	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
 	call PrintText
@@ -282,9 +276,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	ld a, HS_FIGHTING_DOJO_GIFT_1
 	ld [wcc4d], a
 	predef HideObject
-	ld hl, wd7b1
-	set 6, [hl]
-	set 0, [hl]
+	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
 .done
 	jp TextScriptEnd
 
@@ -295,8 +287,7 @@ WantHitmonleeText: ; 5cf49 (17:4f49)
 FightingDojoText7: ; 5cf4e (17:4f4e)
 ; Hitmonchan Poké Ball
 	TX_ASM
-	ld a, [wd7b1]
-	and %11000000
+	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
 	jr z, .GetMon
 	ld hl, OtherHitmonText
 	call PrintText
@@ -315,9 +306,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	ld c,30
 	call GivePokemon
 	jr nc, .done
-	ld hl, wd7b1
-	set 7, [hl]
-	set 0, [hl]
+	SetEvents EVENT_GOT_HITMONCHAN, EVENT_DEFEATED_FIGHTING_DOJO
 
 	; once Poké Ball is taken, hide sprite
 	ld a, HS_FIGHTING_DOJO_GIFT_2

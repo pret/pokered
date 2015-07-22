@@ -46,16 +46,14 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd7b3
-	set 1, [hl]
+	SetEvent EVENT_BEAT_SABRINA
 	ld bc, (TM_46 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd7b3
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM46
 	jr .asm_5d091
 .BagFull
 	ld a, $c
@@ -68,11 +66,7 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	set 5, [hl]
 
 	; deactivate gym trainers
-	ld a, [wd7b3]
-	or %11111100
-	ld [wd7b3], a
-	ld hl, wd7b4
-	set 0, [hl]
+	SetEventRange EVENT_BEAT_SAFFRON_GYM_TRAINER_0, EVENT_BEAT_SAFFRON_GYM_TRAINER_6
 
 	jp SaffronGymText_5d048
 
@@ -92,63 +86,63 @@ SaffronGymTextPointers: ; 5d0ab (17:50ab)
 
 SaffronGymTrainerHeaders: ; 5d0c3 (17:50c3)
 SaffronGymTrainerHeader0: ; 5d0c3 (17:50c3)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_0
 	dw SaffronGymBattleText1 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText1 ; TextAfterBattle
 	dw SaffronGymEndBattleText1 ; TextEndBattle
 	dw SaffronGymEndBattleText1 ; TextEndBattle
 
 SaffronGymTrainerHeader1: ; 5d0cf (17:50cf)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_1
 	dw SaffronGymBattleText2 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText2 ; TextAfterBattle
 	dw SaffronGymEndBattleText2 ; TextEndBattle
 	dw SaffronGymEndBattleText2 ; TextEndBattle
 
 SaffronGymTrainerHeader2: ; 5d0db (17:50db)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_2
 	dw SaffronGymBattleText3 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText3 ; TextAfterBattle
 	dw SaffronGymEndBattleText3 ; TextEndBattle
 	dw SaffronGymEndBattleText3 ; TextEndBattle
 
 SaffronGymTrainerHeader3: ; 5d0e7 (17:50e7)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_3
 	dw SaffronGymBattleText4 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText4 ; TextAfterBattle
 	dw SaffronGymEndBattleText4 ; TextEndBattle
 	dw SaffronGymEndBattleText4 ; TextEndBattle
 
 SaffronGymTrainerHeader4: ; 5d0f3 (17:50f3)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_4
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_4
 	dw SaffronGymBattleText5 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText5 ; TextAfterBattle
 	dw SaffronGymEndBattleText5 ; TextEndBattle
 	dw SaffronGymEndBattleText5 ; TextEndBattle
 
 SaffronGymTrainerHeader5: ; 5d0ff (17:50ff)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_5
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_5
 	dw SaffronGymBattleText6 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText6 ; TextAfterBattle
 	dw SaffronGymEndBattleText6 ; TextEndBattle
 	dw SaffronGymEndBattleText6 ; TextEndBattle
 
 SaffronGymTrainerHeader6: ; 5d10b (17:510b)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1
 	db ($3 << 4) ; trainer's view range
-	dw wd7b3 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SAFFRON_GYM_TRAINER_6, 1
 	dw SaffronGymBattleText7 ; TextBeforeBattle
 	dw SaffronGymAfterBattleText7 ; TextAfterBattle
 	dw SaffronGymEndBattleText7 ; TextEndBattle
@@ -158,10 +152,9 @@ SaffronGymTrainerHeader6: ; 5d10b (17:510b)
 
 SaffronGymText1: ; 5d118 (17:5118)
 	TX_ASM
-	ld a, [wd7b3]
-	bit 1, a
+	CheckEvent EVENT_BEAT_SABRINA
 	jr z, .asm_5d134
-	bit 0, a
+	CheckEventReuseA EVENT_GOT_TM46
 	jr nz, .asm_5d12c
 	call z, SaffronGymText_5d068
 	call DisableWaitingAfterTextDisplay
@@ -262,8 +255,7 @@ SaffronGymText8: ; 5d1c3 (17:51c3)
 
 SaffronGymText9: ; 5d1cd (17:51cd)
 	TX_ASM
-	ld a, [wd7b3]
-	bit 1, a
+	CheckEvent EVENT_BEAT_SABRINA
 	jr nz, .asm_5d1dd
 	ld hl, SaffronGymText_5d1e6
 	call PrintText

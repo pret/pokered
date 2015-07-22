@@ -16,8 +16,7 @@ SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	ld hl, DataTable_5a173
 	call SilphCo2Script_59d43
 	call SilphCo10Text_5a176
-	ld a, [wd836]
-	bit 0, a
+	CheckEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -31,8 +30,7 @@ SilphCo10Text_5a176: ; 5a176 (16:6176)
 	ld a, [$ffe0]
 	and a
 	ret z
-	ld hl, wd836
-	set 0, [hl]
+	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret
 
 SilphCo10ScriptPointers: ; 5a180 (16:6180)
@@ -50,18 +48,18 @@ SilphCo10TextPointers: ; 5a186 (16:6186)
 
 SilphCo10TrainerHeaders: ; 5a192 (16:6192)
 SilphCo10TrainerHeader0: ; 5a192 (16:6192)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_10F_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd835 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_10F_TRAINER_0
 	dw SilphCo10BattleText1 ; TextBeforeBattle
 	dw SilphCo10AfterBattleText1 ; TextAfterBattle
 	dw SilphCo10EndBattleText1 ; TextEndBattle
 	dw SilphCo10EndBattleText1 ; TextEndBattle
 
 SilphCo10TrainerHeader1: ; 5a19e (16:619e)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_10F_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd835 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_10F_TRAINER_1
 	dw SilphCo10BattleText2 ; TextBeforeBattle
 	dw SilphCo10AfterBattleText2 ; TextAfterBattle
 	dw SilphCo10EndBattleText2 ; TextEndBattle
@@ -83,8 +81,7 @@ SilphCo10Text2: ; 5a1b5 (16:61b5)
 
 SilphCo10Text3: ; 5a1bf (16:61bf)
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo10Text_5a1d8
 	jr nz, .asm_cf85f
 	ld hl, SilphCo10Text_5a1d3

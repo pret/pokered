@@ -12,8 +12,7 @@ LavenderHouse1TextPointers: ; 1d8ac (7:58ac)
 
 LavenderHouse1Text1: ; 1d8b8 (7:58b8)
 	TX_ASM
-	ld a, [wd7e0]
-	bit 7, a
+	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .asm_72e5d
 	ld hl, LavenderHouse1Text_1d8d1
 	call PrintText
@@ -34,8 +33,7 @@ LavenderHouse1Text_1d8d6: ; 1d8d6 (7:58d6)
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
 	TX_ASM
-	ld a, [wd7e0]
-	bit 7, a
+	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .asm_06470
 	ld hl, LavenderHouse1Text_1d8f4
 	call PrintText
@@ -70,8 +68,7 @@ LavenderHouse1Text4: ; 1d90b (7:590b)
 
 LavenderHouse1Text5: ; 1d918 (7:5918)
 	TX_ASM
-	ld a, [wd76c]
-	bit 0, a
+	CheckEvent EVENT_GOT_POKE_FLUTE
 	jr nz, .asm_15ac2
 	ld hl, LavenderHouse1Text_1d94c
 	call PrintText
@@ -80,8 +77,7 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 	jr nc, .BagFull
 	ld hl, ReceivedFluteText
 	call PrintText
-	ld hl, wd76c
-	set 0, [hl]
+	SetEvent EVENT_GOT_POKE_FLUTE
 	jr .asm_da749
 .BagFull
 	ld hl, FluteNoRoomText

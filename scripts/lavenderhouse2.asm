@@ -15,8 +15,7 @@ LavenderHouse2Text1: ; 1d9b6 (7:59b6)
 
 LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 	TX_ASM
-	ld a, [wd7e0]
-	bit 7, a
+	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .asm_65711
 	ld hl, LavenderHouse2Text_1d9dc
 	call PrintText

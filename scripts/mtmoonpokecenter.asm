@@ -23,8 +23,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 
 MtMoonPokecenterText4: ; 492ec (12:52ec)
 	TX_ASM
-	ld a, [wd7c6]
-	add a
+	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
 	jp c, .alreadyBoughtMagikarp
 	ld hl, MtMoonPokecenterText_4935c
 	call PrintText
@@ -59,8 +58,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl, wd7c6
-	set 7, [hl]
+	SetEvent EVENT_BOUGHT_MAGIKARP
 	jr .done
 .choseNo
 	ld hl, MtMoonPokecenterText_49361

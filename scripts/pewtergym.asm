@@ -46,16 +46,14 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd755
-	set 7, [hl]
+	SetEvent EVENT_BEAT_BROCK
 	ld bc, (TM_34 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd755
-	set 6, [hl]
+	SetEvent EVENT_GOT_TM34
 	jr .asm_5c408
 .BagFull
 	ld a, $6
@@ -74,13 +72,10 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld [wcc4d], a
 	predef HideObject
 
-	ld hl, wd7eb
-	res 0, [hl]
-	res 7, [hl]
+	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
 
 	; deactivate gym trainers
-	ld hl, wd755
-	set 2, [hl]
+	SetEvent EVENT_BEAT_PEWTER_GYM_TRAINER_0
 
 	jp PewterGymScript_5c3bf
 
@@ -94,9 +89,9 @@ PewterGymTextPointers: ; 5c435 (17:4435)
 
 PewterGymTrainerHeaders: ; 5c441 (17:4441)
 PewterGymTrainerHeader0: ; 5c441 (17:4441)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_PEWTER_GYM_TRAINER_0
 	db ($5 << 4) ; trainer's view range
-	dw wd755 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_PEWTER_GYM_TRAINER_0
 	dw PewterGymBattleText1 ; TextBeforeBattle
 	dw PewterGymAfterBattleText1 ; TextAfterBattle
 	dw PewterGymEndBattleText1 ; TextEndBattle
@@ -106,10 +101,9 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 
 PewterGymText1: ; 5c44e (17:444e)
 	TX_ASM
-	ld a, [wd755]
-	bit 7, a
+	CheckEvent EVENT_BEAT_BROCK
 	jr z, .asm_5c46a
-	bit 6, a
+	CheckEventReuseA EVENT_GOT_TM34
 	jr nz, .asm_5c462
 	call z, PewterGymScript_5c3df
 	call DisableWaitingAfterTextDisplay

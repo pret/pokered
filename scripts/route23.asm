@@ -10,12 +10,8 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, wd7ee
-	res 0, [hl]
-	res 7, [hl]
-	ld hl, wd813
-	res 0, [hl]
-	res 6, [hl]
+	ResetEvents EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
+	ResetEvents EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a
 	predef ShowObject
@@ -33,7 +29,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld a, [W_YCOORD]
 	ld b, a
 	ld e, $0
-	ld c, $7
+	EventFlagBit c, EVENT_PASSED_EARTHBADGE_CHECK + 1, EVENT_PASSED_CASCADEBADGE_CHECK
 .asm_51224
 	ld a, [hli]
 	cp $ff
@@ -53,7 +49,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST
-	ld hl, wd7ed
+	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -147,43 +143,43 @@ Route23TextPointers: ; 512f7 (14:52f7)
 
 Route23Text1: ; 51307 (14:5307)
 	TX_ASM
-	ld a, $6
+	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text2: ; 51310 (14:5310)
 	TX_ASM
-	ld a, $5
+	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text3: ; 51319 (14:5319)
 	TX_ASM
-	ld a, $4
+	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text4: ; 51322 (14:5322)
 	TX_ASM
-	ld a, $3
+	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text5: ; 5132b (14:532b)
 	TX_ASM
-	ld a, $2
+	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text6: ; 51334 (14:5334)
 	TX_ASM
-	ld a, $1
+	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text7: ; 5133d (14:533d)
 	TX_ASM
-	ld a, $0
+	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
@@ -211,7 +207,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld a, [wWhichBadge]
 	ld c, a
 	ld b, FLAG_SET
-	ld hl, wd7ed
+	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
 	ld a, $2
 	ld [W_ROUTE23CURSCRIPT], a

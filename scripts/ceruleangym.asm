@@ -46,16 +46,14 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld a, $5
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd75e
-	set 7, [hl]
+	SetEvent EVENT_BEAT_MISTY
 	ld bc, (TM_11 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd75e
-	set 6, [hl]
+	SetEvent EVENT_GOT_TM11
 	jr .asm_5c736
 .BagFull
 	ld a, $7
@@ -68,9 +66,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	set 1, [hl]
 
 	; deactivate gym trainers
-	ld hl, wd75e
-	set 2, [hl]
-	set 3, [hl]
+	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 
 	jp CeruleanGymScript_5c6ed
 
@@ -85,18 +81,18 @@ CeruleanGymTextPointers: ; 5c74a (17:474a)
 
 CeruleanGymTrainerHeaders: ; 5c758 (17:4758)
 CeruleanGymTrainerHeader0: ; 5c758 (17:4758)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd75e ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_0
 	dw CeruleanGymBattleText1 ; TextBeforeBattle
 	dw CeruleanGymAfterBattleText1 ; TextAfterBattle
 	dw CeruleanGymEndBattleText1 ; TextEndBattle
 	dw CeruleanGymEndBattleText1 ; TextEndBattle
 
 CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd75e ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_1
 	dw CeruleanGymBattleText2 ; TextBeforeBattle
 	dw CeruleanGymAfterBattleText2 ; TextAfterBattle
 	dw CeruleanGymEndBattleText2 ; TextEndBattle
@@ -106,10 +102,9 @@ CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 
 CeruleanGymText1: ; 5c771 (17:4771)
 	TX_ASM
-	ld a, [wd75e]
-	bit 7, a
+	CheckEvent EVENT_BEAT_MISTY
 	jr z, .asm_5c78d
-	bit 6, a
+	CheckEventReuseA EVENT_GOT_TM11
 	jr nz, .asm_5c785
 	call z, CeruleanGymScript_5c70d
 	call DisableWaitingAfterTextDisplay
@@ -203,8 +198,7 @@ CeruleanGymAfterBattleText2: ; 5c80c (17:480c)
 
 CeruleanGymText4: ; 5c811 (17:4811)
 	TX_ASM
-	ld a, [wd75e]
-	bit 7, a
+	CheckEvent EVENT_BEAT_MISTY
 	jr nz, .asm_5c821
 	ld hl, CeruleanGymText_5c82a
 	call PrintText

@@ -27,90 +27,90 @@ Route19TextPointers: ; 55d5d (15:5d5d)
 
 Route19TrainerHeaders: ; 55d73 (15:5d73)
 Route19TrainerHeader0: ; 55d73 (15:5d73)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_0
 	dw Route19BattleText1 ; TextBeforeBattle
 	dw Route19AfterBattleText1 ; TextAfterBattle
 	dw Route19EndBattleText1 ; TextEndBattle
 	dw Route19EndBattleText1 ; TextEndBattle
 
 Route19TrainerHeader1: ; 55d7f (15:5d7f)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_1
 	dw Route19BattleText2 ; TextBeforeBattle
 	dw Route19AfterBattleText2 ; TextAfterBattle
 	dw Route19EndBattleText2 ; TextEndBattle
 	dw Route19EndBattleText2 ; TextEndBattle
 
 Route19TrainerHeader2: ; 55d8b (15:5d8b)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_2
 	dw Route19BattleText3 ; TextBeforeBattle
 	dw Route19AfterBattleText3 ; TextAfterBattle
 	dw Route19EndBattleText3 ; TextEndBattle
 	dw Route19EndBattleText3 ; TextEndBattle
 
 Route19TrainerHeader3: ; 55d97 (15:5d97)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_3
 	dw Route19BattleText4 ; TextBeforeBattle
 	dw Route19AfterBattleText4 ; TextAfterBattle
 	dw Route19EndBattleText4 ; TextEndBattle
 	dw Route19EndBattleText4 ; TextEndBattle
 
 Route19TrainerHeader4: ; 55da3 (15:5da3)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_4
 	dw Route19BattleText5 ; TextBeforeBattle
 	dw Route19AfterBattleText5 ; TextAfterBattle
 	dw Route19EndBattleText5 ; TextEndBattle
 	dw Route19EndBattleText5 ; TextEndBattle
 
 Route19TrainerHeader5: ; 55daf (15:5daf)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_5
 	dw Route19BattleText6 ; TextBeforeBattle
 	dw Route19AfterBattleText6 ; TextAfterBattle
 	dw Route19EndBattleText6 ; TextEndBattle
 	dw Route19EndBattleText6 ; TextEndBattle
 
 Route19TrainerHeader6: ; 55dbb (15:5dbb)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_6
 	db ($3 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_6
 	dw Route19BattleText7 ; TextBeforeBattle
 	dw Route19AfterBattleText7 ; TextAfterBattle
 	dw Route19EndBattleText7 ; TextEndBattle
 	dw Route19EndBattleText7 ; TextEndBattle
 
 Route19TrainerHeader7: ; 55dc7 (15:5dc7)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_7, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_7, 1
 	dw Route19BattleText8 ; TextBeforeBattle
 	dw Route19AfterBattleText8 ; TextAfterBattle
 	dw Route19EndBattleText8 ; TextEndBattle
 	dw Route19EndBattleText8 ; TextEndBattle
 
 Route19TrainerHeader8: ; 55dd3 (15:5dd3)
-	db $9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_8, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_8, 1
 	dw Route19BattleText9 ; TextBeforeBattle
 	dw Route19AfterBattleText9 ; TextAfterBattle
 	dw Route19EndBattleText9 ; TextEndBattle
 	dw Route19EndBattleText9 ; TextEndBattle
 
 Route19TrainerHeader9: ; 55ddf (15:5ddf)
-	db $a ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_9, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd7e5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_9, 1
 	dw Route19BattleText10 ; TextBeforeBattle
 	dw Route19AfterBattleText10 ; TextAfterBattle
 	dw Route19EndBattleText10 ; TextEndBattle

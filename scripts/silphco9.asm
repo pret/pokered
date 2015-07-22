@@ -16,8 +16,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	ld hl, DataTable_5d82e
 	call SilphCo9Script_5d837
 	call SilphCo9Script_5d863
-	ld a, [wd834]
-	bit 0, a
+	CheckEvent EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	jr nz, .asm_5d7f8
 	push af
 	ld a, $5f
@@ -26,7 +25,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d7f8
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	jr nz, .asm_5d80b
 	push af
 	ld a, $54
@@ -35,7 +34,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d80b
-	bit 2, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR2
 	jr nz, .asm_5d81e
 	push af
 	ld a, $54
@@ -44,7 +43,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	predef ReplaceTileBlock
 	pop af
 .asm_5d81e
-	bit 3, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR3
 	ret nz
 	ld a, $5f
 	ld [wd09f], a
@@ -91,28 +90,28 @@ SilphCo9Script_5d837: ; 5d837 (17:5837)
 	ret
 
 SilphCo9Script_5d863: ; 5d863 (17:5863)
-	ld hl, wd834
+	EventFlagAddress hl, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_5d871
-	set 0, [hl]
+	jr nz, .next1
+	SetEventReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.asm_5d871
+.next1
 	cp $2
-	jr nz, .asm_5d878
-	set 1, [hl]
+	jr nz, .next2
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR2, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.asm_5d878
+.next2
 	cp $3
-	jr nz, .asm_5d87f
-	set 2, [hl]
+	jr nz, .next3
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR3, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
-.asm_5d87f
+.next3
 	cp $4
 	ret nz
-	set 3, [hl]
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR1
 	ret
 
 SilphCo9ScriptPointers: ; 5d885 (17:5885)
@@ -128,27 +127,27 @@ SilphCo9TextPointers: ; 5d88b (17:588b)
 
 SilphCo9TrainerHeaders: ; 5d893 (17:5893)
 SilphCo9TrainerHeader0: ; 5d893 (17:5893)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_9F_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd833 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_9F_TRAINER_0
 	dw SilphCo9BattleText1 ; TextBeforeBattle
 	dw SilphCo9AfterBattleText1 ; TextAfterBattle
 	dw SilphCo9EndBattleText1 ; TextEndBattle
 	dw SilphCo9EndBattleText1 ; TextEndBattle
 
 SilphCo9TrainerHeader1: ; 5d89f (17:589f)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_9F_TRAINER_1
 	db ($2 << 4) ; trainer's view range
-	dw wd833 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_9F_TRAINER_1
 	dw SilphCo9BattleText2 ; TextBeforeBattle
 	dw SilphCo9AfterBattleText2 ; TextAfterBattle
 	dw SilphCo9EndBattleText2 ; TextEndBattle
 	dw SilphCo9EndBattleText2 ; TextEndBattle
 
 SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_9F_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd833 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_9F_TRAINER_2
 	dw SilphCo9BattleText3 ; TextBeforeBattle
 	dw SilphCo9AfterBattleText3 ; TextAfterBattle
 	dw SilphCo9EndBattleText3 ; TextEndBattle
@@ -158,8 +157,7 @@ SilphCo9TrainerHeader2: ; 5d8ab (17:58ab)
 
 SilphCo9Text1: ; 5d8b8 (17:58b8)
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .asm_5d8dc
 	ld hl, SilphCo9Text_5d8e5
 	call PrintText

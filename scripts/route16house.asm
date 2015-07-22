@@ -7,8 +7,7 @@ Route16HouseTextPointers: ; 1e5fb (7:65fb)
 
 Route16HouseText1: ; 1e5ff (7:65ff)
 	TX_ASM
-	ld a, [wd7e0]
-	bit 6, a
+	CheckEvent EVENT_GOT_HM02
 	ld hl, HM02ExplanationText
 	jr nz, .asm_13616
 	ld hl, Route16HouseText3
@@ -16,8 +15,7 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 	ld bc, (HM_02 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd7e0
-	set 6, [hl]
+	SetEvent EVENT_GOT_HM02
 	ld hl, ReceivedHM02Text
 	jr .asm_13616
 .BagFull

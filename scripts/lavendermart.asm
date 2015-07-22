@@ -12,8 +12,7 @@ LavenderMartText2: ; 5c935 (17:4935)
 
 LavenderMartText3: ; 5c93a (17:493a)
 	TX_ASM
-	ld a, [wd7e0]
-	bit 7, a
+	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .asm_c88d4
 	ld hl, LavenderMart_5c953
 	call PrintText

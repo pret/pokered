@@ -135,10 +135,9 @@ FuchsiaCityLaprasText: ; 19aef (6:5aef)
 
 FuchsiaCityText24: ; 19af4 (6:5af4)
 	TX_ASM
-	ld a, [wd7f6]
-	bit 6, a
+	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr nz, .asm_3b4e8
-	bit 7, a
+	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
 	jr nz, .asm_667d5
 	ld hl, FuchsiaCityText_19b2a
 	call PrintText

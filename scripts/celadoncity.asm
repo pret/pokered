@@ -1,10 +1,7 @@
 CeladonCityScript: ; 19956 (6:5956)
 	call EnableAutoTextBoxDrawing
-	ld hl, wd77e
-	res 0, [hl]
-	res 7, [hl]
-	ld hl, wd816
-	res 7, [hl]
+	ResetEvents EVENT_1B8, EVENT_1BF
+	ResetEvent EVENT_67F
 	ret
 
 CeladonCityTextPointers: ; 19966 (6:5966)
@@ -45,8 +42,7 @@ CeladonCityText4: ; 19999 (6:5999)
 
 CeladonCityText5: ; 1999e (6:599e)
 	TX_ASM
-	ld a, [wd777]
-	bit 0, a
+	CheckEvent EVENT_GOT_TM41
 	jr nz, .asm_7053f
 	ld hl, TM41PreText
 	call PrintText
@@ -59,8 +55,7 @@ CeladonCityText5: ; 1999e (6:599e)
 .Success
 	ld hl, ReceivedTM41Text
 	call PrintText
-	ld hl, wd777
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM41
 	jr .Done
 .asm_7053f
 	ld hl, TM41ExplanationText

@@ -16,8 +16,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	ld hl, DataTable_51bc1
 	call SilphCo7Text_51bc8
 	call SilphCo7Text_51bf4
-	ld a, [wd830]
-	bit 4, a
+	CheckEvent EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	jr nz, .asm_51b9e
 	push af
 	ld a, $54
@@ -26,7 +25,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	predef ReplaceTileBlock
 	pop af
 .asm_51b9e
-	bit 5, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	jr nz, .asm_51bb1
 	push af
 	ld a, $54
@@ -35,7 +34,7 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	predef ReplaceTileBlock
 	pop af
 .asm_51bb1
-	bit 6, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR2
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -82,21 +81,21 @@ SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	ret
 
 SilphCo7Text_51bf4: ; 51bf4 (14:5bf4)
-	ld hl, wd830
+	EventFlagAddress hl, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_51c02
-	set 4, [hl]
+	jr nz, .next1
+	SetEventReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
-.asm_51c02
+.next1
 	cp $2
-	jr nz, .asm_51c09
-	set 5, [hl]
+	jr nz, .next2
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR2, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
-.asm_51c09
-	set 6, [hl]
+.next2
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 
 SilphCo7Text_51c0c: ; 51c0c (14:5c0c)
@@ -117,8 +116,7 @@ SilphCo7ScriptPointers: ; 51c17 (14:5c17)
 	dw SilphCo7Script5
 
 SilphCo7Script0: ; 51c23 (14:5c23)
-	ld a, [wd82f]
-	bit 0, a
+	CheckEvent EVENT_BEAT_SILPH_CO_RIVAL
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_51c78
 	call ArePlayerCoordsInArray
@@ -207,8 +205,7 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	jp z, SilphCo7Text_51c0c
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wd82f
-	set 0, [hl]
+	SetEvent EVENT_BEAT_SILPH_CO_RIVAL
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, $9
@@ -281,36 +278,36 @@ SilphCo7TextPointers: ; 51d3f (14:5d3f)
 
 SilphCo7TrainerHeaders: ; 51d5d (14:5d5d)
 SilphCo7TrainerHeader0: ; 51d5d (14:5d5d)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd82f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_0
 	dw SilphCo7BattleText1 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText1 ; TextAfterBattle
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 
 SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd82f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_2
 	dw SilphCo7BattleText2 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText2 ; TextAfterBattle
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 
 SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd82f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_3
 	dw SilphCo7BattleText3 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText3 ; TextAfterBattle
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 
 SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
 	db ($4 << 4) ; trainer's view range
-	dw wd82f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
 	dw SilphCo7BattleText4 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText4 ; TextAfterBattle
 	dw SilphCo7EndBattleText4 ; TextEndBattle
@@ -324,8 +321,7 @@ SilphCo7Text1:
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
-	ld a, [wd838]
-	bit 7, a ; saved silph?
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .LaprasGuyText
 	call PrintText
@@ -369,8 +365,7 @@ SilphCo7Text1:
 
 SilphCo7Text2:
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a ; saved silph?
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText
@@ -391,8 +386,7 @@ SilphCo7Text2:
 
 SilphCo7Text3:
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a ; saved silph?
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText
@@ -413,8 +407,7 @@ SilphCo7Text3:
 
 SilphCo7Text4:
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a ; saved silph?
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
 	call PrintText

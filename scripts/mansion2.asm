@@ -13,8 +13,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd796]
-	bit 0, a
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52016
 	ld a, $e
 	ld bc, $204
@@ -66,9 +65,9 @@ Mansion2TextPointers: ; 5204d (14:604d)
 
 Mansion2TrainerHeaders: ; 52057 (14:6057)
 Mansion2TrainerHeader0: ; 52057 (14:6057)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_MANSION_2_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd847 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_MANSION_2_TRAINER_0
 	dw Mansion2BattleText1 ; TextBeforeBattle
 	dw Mansion2AfterBattleText1 ; TextAfterBattle
 	dw Mansion2EndBattleText1 ; TextEndBattle
@@ -119,11 +118,9 @@ Mansion2Text5: ; 52087 (14:6087)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	ld hl, wd796
-	bit 0, [hl]
-	set 0, [hl]
+	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_520bf
-	res 0, [hl]
+	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_520bf
 .asm_520b9
 	ld hl, Mansion2Text_520cc

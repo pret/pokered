@@ -7,8 +7,7 @@ Route2GateTextPointers: ; 5d5d7 (17:55d7)
 
 Route2GateText1: ; 5d5db (17:55db)
 	TX_ASM
-	ld a, [wd7c2]
-	bit 0, a
+	CheckEvent EVENT_GOT_HM05
 	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
 	ld [$ffdb], a
@@ -24,8 +23,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_5d613
-	ld hl, wd7c2
-	set 0, [hl]
+	SetEvent EVENT_GOT_HM05
 .asm_5d60d
 	ld hl, Route2GateText_5d616
 	call PrintText

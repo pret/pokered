@@ -10,8 +10,7 @@ Lab3TextPointers: ; 75c8a (1d:5c8a)
 
 Lab3Text1: ; 75c94 (1d:5c94)
 	TX_ASM
-	ld a, [wd7a1]
-	bit 7, a
+	CheckEvent EVENT_GOT_TM35
 	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
 	call PrintText
@@ -20,8 +19,7 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	jr nc, .BagFull
 	ld hl, ReceivedTM35Text
 	call PrintText
-	ld hl, wd7a1
-	set 7, [hl]
+	SetEvent EVENT_GOT_TM35
 	jr .asm_eb896
 .BagFull
 	ld hl, TM35NoRoomText

@@ -46,16 +46,14 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld a, $9
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd792
-	set 1, [hl]
+	SetEvent EVENT_BEAT_KOGA
 	ld bc, (TM_06 << 8) | 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd792
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM06
 	jr .asm_754c0
 .BagFull
 	ld a, $b
@@ -68,9 +66,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	set 4, [hl]
 
 	; deactivate gym trainers
-	ld a, [wd792]
-	or %11111100
-	ld [wd792], a
+	SetEventRange EVENT_BEAT_FUCHSIA_GYM_TRAINER_0, EVENT_BEAT_FUCHSIA_GYM_TRAINER_6
 
 	jp FuchsiaGymScript_75477
 
@@ -89,54 +85,54 @@ FuchsiaGymTextPointers: ; 754d5 (1d:54d5)
 
 FuchsiaGymTrainerHeaders: ; 754eb (1d:54eb)
 FuchsiaGymTrainerHeader0: ; 754eb (1d:54eb)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_0
 	dw FuchsiaGymBattleText1 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText1 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText1 ; TextEndBattle
 	dw FuchsiaGymEndBattleText1 ; TextEndBattle
 
 FuchsiaGymTrainerHeader2: ; 754f7 (1d:54f7)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_2
 	dw FuchsiaGymBattleText2 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText2 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText2 ; TextEndBattle
 	dw FuchsiaGymEndBattleText2 ; TextEndBattle
 
 FuchsiaGymTrainerHeader3: ; 75503 (1d:5503)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_3
 	dw FuchsiaGymBattleText3 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText3 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText3 ; TextEndBattle
 	dw FuchsiaGymEndBattleText3 ; TextEndBattle
 
 FuchsiaGymTrainerHeader4: ; 7550f (1d:550f)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_4
 	dw FuchsiaGymBattleText4 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText4 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText4 ; TextEndBattle
 	dw FuchsiaGymEndBattleText4 ; TextEndBattle
 
 FuchsiaGymTrainerHeader5: ; 7551b (1d:551b)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
 	db ($2 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_5
 	dw FuchsiaGymBattleText5 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText5 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText5 ; TextEndBattle
 	dw FuchsiaGymEndBattleText5 ; TextEndBattle
 
 FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FUCHSIA_GYM_TRAINER_6
 	db ($2 << 4) ; trainer's view range
-	dw wd792 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FUCHSIA_GYM_TRAINER_6
 	dw FuchsiaGymBattleText6 ; TextBeforeBattle
 	dw FuchsiaGymAfterBattleText6 ; TextAfterBattle
 	dw FuchsiaGymEndBattleText6 ; TextEndBattle
@@ -146,10 +142,9 @@ FuchsiaGymTrainerHeader6: ; 75527 (1d:5527)
 
 FuchsiaGymText1: ; 75534 (1d:5534)
 	TX_ASM
-	ld a, [wd792]
-	bit 1, a
+	CheckEvent EVENT_BEAT_KOGA
 	jr z, .asm_181b6
-	bit 0, a
+	CheckEventReuseA EVENT_GOT_TM06
 	jr nz, .asm_adc3b
 	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
@@ -318,8 +313,7 @@ FuchsiaGymAfterBattleText6: ; 75635 (1d:5635)
 
 FuchsiaGymText8: ; 7563a (1d:563a)
 	TX_ASM
-	ld a, [wd792]
-	bit 1, a
+	CheckEvent EVENT_BEAT_KOGA
 	ld hl, FuchsiaGymText_75653
 	jr nz, .asm_50671
 	ld hl, FuchsiaGymText_7564e

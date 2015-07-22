@@ -13,8 +13,7 @@ LanceScript_5a2c4: ; 5a2c4 (16:62c4)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd866]
-	bit 7, a
+	CheckEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	jr nz, .asm_5a2da
 	ld a, $31
 	ld b, $32
@@ -52,8 +51,7 @@ LanceScript4: ; 5a304 (16:6304)
 	ret
 
 LanceScript0: ; 5a305 (16:6305)
-	ld a, [wd866]
-	bit 6, a
+	CheckEvent EVENT_BEAT_LANCE
 	ret nz
 	ld hl, CoordsData_5a33e
 	call ArePlayerCoordsInArray
@@ -69,9 +67,7 @@ LanceScript0: ; 5a305 (16:6305)
 .asm_5a325
 	cp $5
 	jr z, LanceScript_5a35b
-	ld hl, wd866
-	bit 7, [hl]
-	set 7, [hl]
+	CheckAndSetEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	ret nz
 	ld hl, wd126
 	set 5, [hl]
@@ -133,9 +129,9 @@ LanceTextPointers: ; 5a395 (16:6395)
 
 LanceTrainerHeaders: ; 5a397 (16:6397)
 LanceTrainerHeader0: ; 5a397 (16:6397)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_LANCES_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd866 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_LANCES_ROOM_TRAINER_0
 	dw LanceBeforeBattleText ; TextBeforeBattle
 	dw LanceAfterBattleText ; TextAfterBattle
 	dw LanceEndBattleText ; TextEndBattle
@@ -160,6 +156,5 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText
 	TX_ASM
-	ld hl, wd866
-	set 6, [hl]
+	SetEvent EVENT_BEAT_LANCE
 	jp TextScriptEnd

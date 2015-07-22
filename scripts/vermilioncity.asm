@@ -21,11 +21,10 @@ VermilionCityScript_197c0: ; 197c0 (6:57c0)
 	ret
 
 VermilionCityScript_197cb: ; 197cb (6:57cb)
-	ld hl, wd803
-	bit 2, [hl]
+	CheckEventHL EVENT_SS_ANNE_LEFT
 	ret z
-	bit 3, [hl]
-	set 3, [hl]
+	CheckEventReuseHL EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
+	SetEventReuseHL EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
 	ret nz
 	ld a, $2
 	ld [W_VERMILIONCITYCURSCRIPT], a
@@ -51,8 +50,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld a, $3
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, [wd803]
-	bit 2, a
+	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_19810
 	ld b, S_S__TICKET
 	predef IsItemInBag_
@@ -136,8 +134,7 @@ VermilionCityText1: ; 19889 (6:5889)
 
 VermilionCityText2: ; 1988e (6:588e)
 	TX_ASM
-	ld a, [wd803]
-	bit 2, a
+	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_1989e
 	ld hl, VermilionCityText_198a7
 	call PrintText
@@ -158,8 +155,7 @@ VermilionCityText_198ac: ; 198ac (6:58ac)
 
 VermilionCityText3: ; 198b1 (6:58b1)
 	TX_ASM
-	ld a, [wd803]
-	bit 2, a
+	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_198f6
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_RIGHT

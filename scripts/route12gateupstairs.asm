@@ -8,8 +8,7 @@ Route12GateUpstairsTextPointers: ; 49563 (12:5563)
 
 Route12GateUpstairsText1: ; 49569 (12:5569)
 	TX_ASM
-	ld a, [wd7d7]
-	rrca
+	CheckEvent EVENT_GOT_TM39, 1
 	jr c, .asm_0ad3c
 	ld hl, TM39PreReceiveText
 	call PrintText
@@ -18,8 +17,7 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 	jr nc, .BagFull
 	ld hl, ReceivedTM39Text
 	call PrintText
-	ld hl, wd7d7
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM39
 	jr .asm_4ba56
 .BagFull
 	ld hl, TM39NoRoomText

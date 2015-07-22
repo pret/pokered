@@ -24,8 +24,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a
 	jr nz,.loop
 ; if the player pressed tried to go past the top item, wrap around to the bottom
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,6 ; there are 7 menu items with the pokedex, so the max index is 6
 	jr nz,.wrapMenuItemId
 	dec a ; there are only 6 menu items without the pokedex
@@ -37,8 +36,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	bit 7,a
 	jr z,.buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,[wCurrentMenuItem]
 	ld c,7 ; there are 7 menu items with the pokedex
 	jr nz,.checkIfPastBottom
@@ -59,8 +57,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,[wCurrentMenuItem]
 	jr nz,.displayMenuItem
 	inc a ; adjust position to account for missing pokedex menu item

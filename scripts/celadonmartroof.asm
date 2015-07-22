@@ -83,8 +83,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr z, .asm_484b6
 	cp SODA_POP
 	jr z, .asm_48492
-	ld a, [wd778]
-	bit 6, a
+	CheckEvent EVENT_GOT_TM49
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48515
 	call PrintText
@@ -94,12 +93,10 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, ReceivedTM49Text
 	call PrintText
-	ld hl, wd778
-	set 6, [hl]
+	SetEvent EVENT_GOT_TM49
 	ret
 .asm_48492
-	ld a, [wd778]
-	bit 5, a
+	CheckEvent EVENT_GOT_TM48
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48504
 	call PrintText
@@ -109,12 +106,10 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_4850a
 	call PrintText
-	ld hl, wd778
-	set 5, [hl]
+	SetEvent EVENT_GOT_TM48
 	ret
 .asm_484b6
-	ld a, [wd778]
-	bit 4, a
+	CheckEvent EVENT_GOT_TM13
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_484f3
 	call PrintText
@@ -124,8 +119,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_484f9
 	call PrintText
-	ld hl, wd778
-	set 4, [hl]
+	SetEvent EVENT_GOT_TM13
 	ret
 .BagFull
 	ld hl, CeladonMartRoofText_48526

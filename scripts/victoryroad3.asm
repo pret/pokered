@@ -13,8 +13,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, wd813
-	bit 0, [hl]
+	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
 	ld a, $1d
 	ld [wd09f], a
@@ -39,13 +38,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	jr nz, .asm_449dc
 	ld hl, wd126
 	set 5, [hl]
-	ld hl, wd813
-	set 0, [hl]
+	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret
 .asm_449dc
-	ld hl, wd813
-	bit 6, [hl]
-	set 6, [hl]
+	CheckAndSetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	jr nz, .asm_449fe
 	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a
@@ -92,36 +88,36 @@ VictoryRoad3TextPointers: ; 44a24 (11:4a24)
 
 VictoryRoad3TrainerHeaders: ; 44a38 (11:4a38)
 VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
 	db ($1 << 4) ; trainer's view range
-	dw wd813 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
 	dw VictoryRoad3BattleText2 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText2 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 
 VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wd813 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
 	dw VictoryRoad3BattleText3 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText3 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 
 VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dw wd813 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	dw VictoryRoad3BattleText4 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText4 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 
 VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
 	db ($4 << 4) ; trainer's view range
-	dw wd813 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
 	dw VictoryRoad3BattleText5 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText5 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText5 ; TextEndBattle

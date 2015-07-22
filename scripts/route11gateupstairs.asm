@@ -17,8 +17,7 @@ Route11GateUpstairsScriptEnd: ; 49469 (12:5469)
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	TX_ASM
-	ld a, [wd7d6]
-	add a
+	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
 	ld [$ffdb], a
@@ -35,8 +34,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1
-	ld hl, wd7d6
-	set 7, [hl]
+	SetEvent EVENT_GOT_ITEMFINDER
 .asm_4949b
 	ld hl, Route11GateUpstairsText_494a3
 	call PrintText
@@ -52,8 +50,7 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	jp nz, GateUpstairsScript_PrintIfFacingUp
-	ld a, [wd7d8]
-	bit 7, a ; fought snorlax?
+	CheckEvent EVENT_BEAT_ROUTE12_SNORLAX
 	ld hl, BinocularsSnorlaxText
 	jr z, .print
 	ld hl, BinocularsNoSnorlaxText

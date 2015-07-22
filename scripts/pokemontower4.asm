@@ -22,27 +22,27 @@ PokemonTower4TextPointers: ; 6080f (18:480f)
 
 PokemonTower4TrainerHeaders: ; 6081b (18:481b)
 PokemonTower4TrainerHeader0: ; 6081b (18:481b)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd766 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_0
 	dw PokemonTower4BattleText1 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower4EndBattleText1 ; TextEndBattle
 	dw PokemonTower4EndBattleText1 ; TextEndBattle
 
 PokemonTower4TrainerHeader1: ; 60827 (18:4827)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_1
 	db ($2 << 4) ; trainer's view range
-	dw wd766 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_1
 	dw PokemonTower4BattleText2 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower4EndBattleText2 ; TextEndBattle
 	dw PokemonTower4EndBattleText2 ; TextEndBattle
 
 PokemonTower4TrainerHeader2: ; 60833 (18:4833)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dw wd766 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_2
 	dw PokemonTower4BattleText3 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower4EndBattleText3 ; TextEndBattle

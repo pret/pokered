@@ -7,8 +7,7 @@ Route15GateUpstairsTextPointers: ; 4964d (12:564d)
 
 Route15GateUpstairsText1: ; 49651 (12:5651)
 	TX_ASM
-	ld a, [wd7dd]
-	bit 0, a
+	CheckEvent EVENT_GOT_EXP_ALL
 	jr nz, .asm_49683
 	ld a, 50 ; pokemon needed
 	ld [$ffdb], a
@@ -24,8 +23,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_49689
-	ld hl, wd7dd
-	set 0, [hl]
+	SetEvent EVENT_GOT_EXP_ALL
 .asm_49683
 	ld hl, Route15GateUpstairsText_4968c
 	call PrintText

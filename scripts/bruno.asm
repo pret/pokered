@@ -13,8 +13,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd864]
-	bit 1, a
+	CheckEvent EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
 	jr z, .asm_76300
 	ld a, $5
 	jp BrunoScript_76302
@@ -70,9 +69,7 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_7635d
-	ld hl, wd864
-	bit 6, [hl]
-	set 6, [hl]
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_BRUNOS_ROOM
 	jr z, BrunoScript_7631d
 .asm_7635d
 	ld a, $2
@@ -121,9 +118,9 @@ BrunoTextPointers: ; 763a8 (1d:63a8)
 
 BrunoTrainerHeaders: ; 763ac (1d:63ac)
 BrunoTrainerHeader0: ; 763ac (1d:63ac)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd864 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
 	dw BrunoBeforeBattleText ; TextBeforeBattle
 	dw BrunoAfterBattleText ; TextAfterBattle
 	dw BrunoEndBattleText ; TextEndBattle

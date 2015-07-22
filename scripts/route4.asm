@@ -22,9 +22,9 @@ Route4TextPointers: ; 55671 (15:5671)
 
 Route4TrainerHeaders: ; 5567d (15:567d)
 Route4TrainerHeader0: ; 5567d (15:567d)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_4_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd7c5 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_4_TRAINER_0
 	dw Route4BattleText1 ; TextBeforeBattle
 	dw Route4AfterBattleText1 ; TextAfterBattle
 	dw Route4EndBattleText1 ; TextEndBattle

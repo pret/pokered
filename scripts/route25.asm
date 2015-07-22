@@ -13,19 +13,18 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, wd7f2
-	bit 7, [hl]
+	CheckEventHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ret nz
-	bit 5, [hl]
+	CheckEventReuseHL EVENT_MET_BILL_2
 	jr nz, .asm_515ff
-	res 6, [hl]
+	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
 	ld [wcc4d], a
 	predef_jump ShowObject
 .asm_515ff
-	bit 4, [hl]
+	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
-	set 7, [hl]
+	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ld a, HS_NUGGET_BRIDGE_GUY
 	ld [wcc4d], a
 	predef HideObject
@@ -56,81 +55,81 @@ Route25TextPointers: ; 51628 (14:5628)
 
 Route25TrainerHeaders: ; 5163e (14:563e)
 Route25TrainerHeader0: ; 5163e (14:563e)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_0
 	dw Route25BattleText1 ; TextBeforeBattle
 	dw Route25AfterBattleText1 ; TextAfterBattle
 	dw Route25EndBattleText1 ; TextEndBattle
 	dw Route25EndBattleText1 ; TextEndBattle
 
 Route25TrainerHeader2: ; 5164a (14:564a)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_2
 	dw Route25BattleText2 ; TextBeforeBattle
 	dw Route25AfterBattleText2 ; TextAfterBattle
 	dw Route25EndBattleText2 ; TextEndBattle
 	dw Route25EndBattleText2 ; TextEndBattle
 
 Route25TrainerHeader3: ; 51656 (14:5656)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_3
 	dw Route25BattleText3 ; TextBeforeBattle
 	dw Route25AfterBattleText3 ; TextAfterBattle
 	dw Route25EndBattleText3 ; TextEndBattle
 	dw Route25EndBattleText3 ; TextEndBattle
 
 Route25TrainerHeader4: ; 51662 (14:5662)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_4
 	dw Route25BattleText4 ; TextBeforeBattle
 	dw Route25AfterBattleText4 ; TextAfterBattle
 	dw Route25EndBattleText4 ; TextEndBattle
 	dw Route25EndBattleText4 ; TextEndBattle
 
 Route25TrainerHeader5: ; 5166e (14:566e)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_5
 	dw Route25BattleText5 ; TextBeforeBattle
 	dw Route25AfterBattleText5 ; TextAfterBattle
 	dw Route25EndBattleText5 ; TextEndBattle
 	dw Route25EndBattleText5 ; TextEndBattle
 
 Route25TrainerHeader6: ; 5167a (14:567a)
-	db $6 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_6
 	db ($4 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_6
 	dw Route25BattleText6 ; TextBeforeBattle
 	dw Route25AfterBattleText6 ; TextAfterBattle
 	dw Route25EndBattleText6 ; TextEndBattle
 	dw Route25EndBattleText6 ; TextEndBattle
 
 Route25TrainerHeader7: ; 51686 (14:5686)
-	db $7 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_7
 	db ($3 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_7
 	dw Route25BattleText7 ; TextBeforeBattle
 	dw Route25AfterBattleText7 ; TextAfterBattle
 	dw Route25EndBattleText7 ; TextEndBattle
 	dw Route25EndBattleText7 ; TextEndBattle
 
 Route25TrainerHeader8: ; 51692 (14:5692)
-	db $8 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_8, 1
 	db ($2 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_8, 1
 	dw Route25BattleText8 ; TextBeforeBattle
 	dw Route25AfterBattleText8 ; TextAfterBattle
 	dw Route25EndBattleText8 ; TextEndBattle
 	dw Route25EndBattleText8 ; TextEndBattle
 
 Route25TrainerHeader9: ; 5169e (14:569e)
-	db $9 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_ROUTE_25_TRAINER_9, 1
 	db ($2 << 4) ; trainer's view range
-	dw wd7f1 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_ROUTE_25_TRAINER_9, 1
 	dw Route25BattleText9 ; TextBeforeBattle
 	dw Route25AfterBattleText9 ; TextAfterBattle
 	dw Route25EndBattleText9 ; TextEndBattle

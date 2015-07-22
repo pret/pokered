@@ -16,8 +16,7 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	ld hl, DataTable_62134
 	call SilphCo11Script_62137
 	call SilphCo11Script_62163
-	ld a, [wd838]
-	bit 0, a
+	CheckEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret nz
 	ld a, $20
 	ld [wd09f], a
@@ -67,8 +66,7 @@ SilphCo11Script_62163: ; 62163 (18:6163)
 	ld a, [$ffe0]
 	and a
 	ret z
-	ld hl, wd838
-	set 0, [hl]
+	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret
 
 SilphCo11Script_6216d: ; 6216d (18:616d)
@@ -164,8 +162,7 @@ SilphCo11ScriptPointers: ; 621cf (18:61cf)
 	dw SilphCo11Script5
 
 SilphCo11Script0: ; 621db (18:61db)
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ret nz
 	ld hl, CoordsData_62211
 	call ArePlayerCoordsInArray
@@ -231,8 +228,7 @@ SilphCo11Script5: ; 62227 (18:6227)
 	call UpdateSprites
 	call Delay3
 	call GBFadeInFromBlack
-	ld hl, wd838
-	set 7, [hl]
+	SetEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo11Script_621c8
@@ -285,18 +281,18 @@ SilphCo11TextPointers: ; 622b7 (18:62b7)
 
 SilphCo11TrainerHeaders: ; 622c3 (18:62c3)
 SilphCo11TrainerHeader0: ; 622c3 (18:62c3)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_11F_TRAINER_0
 	db ($4 << 4) ; trainer's view range
-	dw wd837 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_11F_TRAINER_0
 	dw SilphCo11BattleText1 ; TextBeforeBattle
 	dw SilphCo11AfterBattleText1 ; TextAfterBattle
 	dw SilphCo11EndBattleText1 ; TextEndBattle
 	dw SilphCo11EndBattleText1 ; TextEndBattle
 
 SilphCo11TrainerHeader1: ; 622cf (18:62cf)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_11F_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd837 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_11F_TRAINER_1
 	dw SilphCo11BattleText2 ; TextBeforeBattle
 	dw SilphCo11AfterBattleText2 ; TextAfterBattle
 	dw SilphCo11EndBattleText2 ; TextEndBattle
@@ -306,8 +302,7 @@ SilphCo11TrainerHeader1: ; 622cf (18:62cf)
 
 SilphCo11Text1: ; 622dc (18:62dc)
 	TX_ASM
-	ld a, [wd838]
-	bit 5, a
+	CheckEvent EVENT_GOT_MASTER_BALL
 	jp nz, .asm_62308
 	ld hl, SilphCoPresidentText
 	call PrintText
@@ -316,8 +311,7 @@ SilphCo11Text1: ; 622dc (18:62dc)
 	jr nc, .BagFull
 	ld hl, ReceivedSilphCoMasterBallText
 	call PrintText
-	ld hl, wd838
-	set 5, [hl]
+	SetEvent EVENT_GOT_MASTER_BALL
 	jr .asm_6230e
 .BagFull
 	ld hl, SilphCoMasterBallNoRoomText

@@ -16,8 +16,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	ld hl, DataTable_59d3e
 	call SilphCo2Script_59d43
 	call SilphCo2Script_59d6f
-	ld a, [wd826]
-	bit 5, a
+	CheckEvent EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	jr nz, .asm_59d2e
 	push af
 	ld a, $54
@@ -26,7 +25,7 @@ SilphCo2Script_59d07: ; 59d07 (16:5d07)
 	predef ReplaceTileBlock
 	pop af
 .asm_59d2e
-	bit 6, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_2_UNLOCKED_DOOR2, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
 	ld [wd09f], a
@@ -73,16 +72,16 @@ SilphCo2Script_59d43: ; 59d43 (16:5d43)
 	ret
 
 SilphCo2Script_59d6f: ; 59d6f (16:5d6f)
-	ld hl, wd826
+	EventFlagAddress hl, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_59d7d
-	set 5, [hl]
+	jr nz, .next
+	SetEventReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret
-.asm_59d7d
-	set 6, [hl]
+.next
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_2_UNLOCKED_DOOR2, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
 	ret
 
 SilphCo2ScriptPointers: ; 59d80 (16:5d80)
@@ -99,36 +98,36 @@ SilphCo2TextPointers: ; 59d86 (16:5d86)
 
 SilphCo2TrainerHeaders: ; 59d90 (16:5d90)
 SilphCo2TrainerHeader0: ; 59d90 (16:5d90)
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_2F_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd825 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_2F_TRAINER_0
 	dw SilphCo2BattleText1 ; TextBeforeBattle
 	dw SilphCo2AfterBattleText1 ; TextAfterBattle
 	dw SilphCo2EndBattleText1 ; TextEndBattle
 	dw SilphCo2EndBattleText1 ; TextEndBattle
 
 SilphCo2TrainerHeader1: ; 59d9c (16:5d9c)
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_2F_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd825 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_2F_TRAINER_1
 	dw SilphCo2BattleText2 ; TextBeforeBattle
 	dw SilphCo2AfterBattleText2 ; TextAfterBattle
 	dw SilphCo2EndBattleText2 ; TextEndBattle
 	dw SilphCo2EndBattleText2 ; TextEndBattle
 
 SilphCo2TrainerHeader2: ; 59da8 (16:5da8)
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_2F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dw wd825 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_2F_TRAINER_2
 	dw SilphCo2BattleText3 ; TextBeforeBattle
 	dw SilphCo2AfterBattleText3 ; TextAfterBattle
 	dw SilphCo2EndBattleText3 ; TextEndBattle
 	dw SilphCo2EndBattleText3 ; TextEndBattle
 
 SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_2F_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wd825 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_2F_TRAINER_3
 	dw SilphCo2BattleText4 ; TextBeforeBattle
 	dw SilphCo2AfterBattleText4 ; TextAfterBattle
 	dw SilphCo2EndBattleText4 ; TextEndBattle
@@ -138,8 +137,7 @@ SilphCo2TrainerHeader3: ; 59db4 (16:5db4)
 
 SilphCo2Text1: ; 59dc1 (16:5dc1)
 	TX_ASM
-	ld a, [wd826]
-	bit 7, a
+	CheckEvent EVENT_GOT_TM36
 	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
 	call PrintText
@@ -147,8 +145,7 @@ SilphCo2Text1: ; 59dc1 (16:5dc1)
 	call GiveItem
 	ld hl, TM36NoRoomText
 	jr nc, .asm_59de7
-	ld hl, wd826
-	set 7, [hl]
+	SetEvent EVENT_GOT_TM36
 	ld hl, ReceivedTM36Text
 	jr .asm_59de7
 .asm_59de4
