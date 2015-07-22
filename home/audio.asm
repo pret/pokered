@@ -56,19 +56,19 @@ Func_2324:: ; 2324 (0:2324)
 Func_235f:: ; 235f (0:235f)
 	ld a, [wc0ef]
 	ld b, a
-	cp BANK(Music2_UpdateMusic)
-	jr nz, .checkForBank08
-.bank02
-	ld hl, Music2_UpdateMusic
+	cp BANK(Audio1_UpdateMusic)
+	jr nz, .checkForAudio2
+.audio1
+	ld hl, Audio1_UpdateMusic
 	jr .asm_2378
-.checkForBank08
-	cp BANK(Music8_UpdateMusic)
-	jr nz, .bank1F
-.bank08
-	ld hl, Music8_UpdateMusic
+.checkForAudio2
+	cp BANK(Audio2_UpdateMusic)
+	jr nz, .audio3
+.audio2
+	ld hl, Audio2_UpdateMusic
 	jr .asm_2378
-.bank1F
-	ld hl, Music1f_UpdateMusic
+.audio3
+	ld hl, Audio3_UpdateMusic
 .asm_2378
 	ld c, $6
 .asm_237a
@@ -147,22 +147,22 @@ PlaySound:: ; 23b1 (0:23b1)
 	ld a, [wc0ef]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	cp BANK(Music2_9876)
-	jr nz, .checkForBank08
-.bank02
+	cp BANK(Audio1_9876)
+	jr nz, .checkForAudio2
+.audio1
 	ld a, b
-	call Music2_9876
+	call Audio1_9876
 	jr .asm_240b
-.checkForBank08
-	cp BANK(Music8_22035)
-	jr nz, .bank1F
-.bank08
+.checkForAudio2
+	cp BANK(Audio2_22035)
+	jr nz, .audio3
+.audio2
 	ld a, b
-	call Music8_22035
+	call Audio2_22035
 	jr .asm_240b
-.bank1F
+.audio3
 	ld a, b
-	call Music1f_7d8ea
+	call Audio3_7d8ea
 .asm_240b
 	ld a, [$ffb9]
 	ld [H_LOADEDROMBANK], a

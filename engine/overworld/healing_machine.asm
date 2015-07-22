@@ -35,7 +35,7 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	dec b
 	jr nz, .asm_7046e
 	ld a, [wc0ef]
-	cp BANK(Music1f_UpdateMusic)
+	cp BANK(Audio3_UpdateMusic)
 	ld [wc0f0], a
 	jr nz, .asm_70495
 	ld a, $ff

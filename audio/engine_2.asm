@@ -1,6 +1,6 @@
 ; The second of three duplicated sound engines.
 
-Music8_UpdateMusic:: ; 21879 (8:5879)
+Audio2_UpdateMusic:: ; 21879 (8:5879)
 	ld c, CH0
 .loop
 	ld b, $0
@@ -26,7 +26,7 @@ Music8_UpdateMusic:: ; 21879 (8:5879)
 	ld [$ff1a], a
 	jr .nextChannel
 .applyAffects
-	call Music8_ApplyMusicAffects
+	call Audio2_ApplyMusicAffects
 .nextChannel
 	ld a, c
 	inc c
@@ -42,13 +42,13 @@ Music8_UpdateMusic:: ; 21879 (8:5879)
 ;	3: a toggle used only by this routine for vibrato
 ;	4: pitchbend flag
 ;	6: dutycycle flag
-Music8_ApplyMusicAffects: ; 218ae (8:58ae)
+Audio2_ApplyMusicAffects: ; 218ae (8:58ae)
 	ld b, $0
 	ld hl, wc0b6 ; delay until next note
 	add hl, bc
 	ld a, [hl]
 	cp $1 ; if the delay is 1, play next note
-	jp z, Music8_PlayNextNote
+	jp z, Audio2_PlayNextNote
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
@@ -65,7 +65,7 @@ Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 	add hl, bc
 	bit 6, [hl] ; dutycycle
 	jr z, .checkForExecuteMusic
-	call Music8_ApplyDutyCycle
+	call Audio2_ApplyDutyCycle
 .checkForExecuteMusic
 	ld b, $0
 	ld hl, wc036
@@ -81,7 +81,7 @@ Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 	add hl, bc
 	bit 4, [hl] ; pitchbend
 	jr z, .checkVibratoDelay
-	jp Music8_ApplyPitchBend
+	jp Audio2_ApplyPitchBend
 .checkVibratoDelay
 	ld hl, wc04e ; vibrato delay
 	add hl, bc
@@ -141,14 +141,14 @@ Music8_ApplyMusicAffects: ; 218ae (8:58ae)
 .done
 	ld d, a
 	ld b, $3
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], d
 	ret
 
 ; this routine executes all music commands that take up no time,
 ; like tempo changes, duty changes etc. and doesn't return
 ; until the first note is reached
-Music8_PlayNextNote: ; 21946 (8:5946)
+Audio2_PlayNextNote: ; 21946 (8:5946)
 	ld hl, wc06e
 	add hl, bc
 	ld a, [hl]
@@ -166,14 +166,14 @@ Music8_PlayNextNote: ; 21946 (8:5946)
 	bit 7, a
 	ret nz
 .beginChecks
-	call Music8_endchannel
+	call Audio2_endchannel
 	ret
 
-Music8_endchannel: ; 21967 (8:5967)
-	call Music8_GetNextMusicByte
+Audio2_endchannel: ; 21967 (8:5967)
+	call Audio2_GetNextMusicByte
 	ld d, a
 	cp $ff ; is this command an endchannel?
-	jp nz, Music8_callchannel ; no
+	jp nz, Audio2_callchannel ; no
 	ld b, $0 ; yes
 	ld hl, wc02e
 	add hl, bc
@@ -223,7 +223,7 @@ Music8_endchannel: ; 21967 (8:5967)
 	inc de
 	ld a, [de]
 	ld [hl], a ; loads channel address to return to
-	jp Music8_endchannel
+	jp Audio2_endchannel
 .asm_219c0
 	ld hl, Unknown_222de
 	add hl, bc
@@ -245,7 +245,7 @@ Music8_endchannel: ; 21967 (8:5967)
 	ld a, c
 	cp CH4
 	jr z, .asm_219e6
-	call Music8_21e6d
+	call Audio2_21e6d
 	ret c
 .asm_219e6
 	ld a, [wc005]
@@ -258,12 +258,12 @@ Music8_endchannel: ; 21967 (8:5967)
 	ld [hl], b
 	ret
 
-Music8_callchannel: ; 219f5 (8:59f5)
+Audio2_callchannel: ; 219f5 (8:59f5)
 	cp $fd ; is this command a callchannel?
-	jp nz, Music8_loopchannel ; no
-	call Music8_GetNextMusicByte ; yes
+	jp nz, Audio2_loopchannel ; no
+	call Audio2_GetNextMusicByte ; yes
 	push af
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
 	pop af
 	ld e, a
@@ -293,12 +293,12 @@ Music8_callchannel: ; 219f5 (8:59f5)
 	ld hl, wc02e
 	add hl, bc
 	set 1, [hl] ; set the call flag
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_loopchannel: ; 21a2a (8:5a2a)
+Audio2_loopchannel: ; 21a2a (8:5a2a)
 	cp $fe ; is this command a loopchannel?
-	jp nz, Music8_notetype ; no
-	call Music8_GetNextMusicByte ; yes
+	jp nz, Audio2_notetype ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld e, a
 	and a
 	jr z, .infiniteLoop
@@ -310,17 +310,17 @@ Music8_loopchannel: ; 21a2a (8:5a2a)
 	jr nz, .loopAgain
 	ld a, $1 ; if no more loops to make,
 	ld [hl], a
-	call Music8_GetNextMusicByte ; skip pointer
-	call Music8_GetNextMusicByte
-	jp Music8_endchannel
+	call Audio2_GetNextMusicByte ; skip pointer
+	call Audio2_GetNextMusicByte
+	jp Audio2_endchannel
 .loopAgain ; inc loop count
 	inc a
 	ld [hl], a
 	; fall through
 .infiniteLoop ; overwrite current address with pointer
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	push af
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld b, a
 	ld d, $0
 	ld a, c
@@ -331,12 +331,12 @@ Music8_loopchannel: ; 21a2a (8:5a2a)
 	pop af
 	ld [hli], a
 	ld [hl], b
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_notetype: ; 21a65 (8:5a65)
+Audio2_notetype: ; 21a65 (8:5a65)
 	and $f0
 	cp $d0 ; is this command a notetype?
-	jp nz, Music8_toggleperfectpitch ; no
+	jp nz, Audio2_toggleperfectpitch ; no
 	ld a, d ; yes
 	and $f
 	ld b, $0
@@ -346,7 +346,7 @@ Music8_notetype: ; 21a65 (8:5a65)
 	ld a, c
 	cp CH3
 	jr z, .noiseChannel ; noise channel has 0 params
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
 	ld a, c
 	cp CH2
@@ -375,24 +375,24 @@ Music8_notetype: ; 21a65 (8:5a65)
 	add hl, bc
 	ld [hl], d
 .noiseChannel
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_toggleperfectpitch: ; 21aa4 (8:5aa4)
+Audio2_toggleperfectpitch: ; 21aa4 (8:5aa4)
 	ld a, d
 	cp $e8 ; is this command a toggleperfectpitch?
-	jr nz, Music8_vibrato ; no
+	jr nz, Audio2_vibrato ; no
 	ld b, $0 ; yes
 	ld hl, wc02e
 	add hl, bc
 	ld a, [hl]
 	xor $1
 	ld [hl], a ; flip bit 0 of wc02e
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_vibrato: ; 21ab6 (8:5ab6)
+Audio2_vibrato: ; 21ab6 (8:5ab6)
 	cp $ea ; is this command a vibrato?
-	jr nz, Music8_pitchbend ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_pitchbend ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc04e
 	add hl, bc
@@ -400,7 +400,7 @@ Music8_vibrato: ; 21ab6 (8:5ab6)
 	ld hl, wc06e
 	add hl, bc
 	ld [hl], a ; store delay
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
@@ -421,24 +421,24 @@ Music8_vibrato: ; 21ab6 (8:5ab6)
 	swap a
 	or d
 	ld [hl], a ; store depth as both high and low nibbles
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_pitchbend: ; 21aee (8:5aee)
+Audio2_pitchbend: ; 21aee (8:5aee)
 	cp $eb ; is this command a pitchbend?
-	jr nz, Music8_duty ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_duty ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc076
 	add hl, bc
 	ld [hl], a ; store first param
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
 	and $f0
 	swap a
 	ld b, a
 	ld a, d
 	and $f
-	call Music8_22017
+	call Audio2_22017
 	ld b, $0
 	ld hl, wc0a6
 	add hl, bc
@@ -450,14 +450,14 @@ Music8_pitchbend: ; 21aee (8:5aee)
 	ld hl, wc02e
 	add hl, bc
 	set 4, [hl] ; set pitchbend flag
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
-	jp Music8_notelength
+	jp Audio2_notelength
 
-Music8_duty: ; 21b26 (8:5b26)
+Audio2_duty: ; 21b26 (8:5b26)
 	cp $ec ; is this command a duty?
-	jr nz, Music8_tempo ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_tempo ; no
+	call Audio2_GetNextMusicByte ; yes
 	rrca
 	rrca
 	and $c0
@@ -465,17 +465,17 @@ Music8_duty: ; 21b26 (8:5b26)
 	ld hl, wc03e
 	add hl, bc
 	ld [hl], a ; store duty
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_tempo: ; 21b3b (8:5b3b)
+Audio2_tempo: ; 21b3b (8:5b3b)
 	cp $ed ; is this command a tempo?
-	jr nz, Music8_stereopanning ; no
+	jr nz, Audio2_stereopanning ; no
 	ld a, c ; yes
 	cp CH4
 	jr nc, .sfxChannel
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld [wc0e8], a ; store first param
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld [wc0e9], a ; store second param
 	xor a
 	ld [wc0ce], a ; clear RAM
@@ -484,9 +484,9 @@ Music8_tempo: ; 21b3b (8:5b3b)
 	ld [wc0d1], a
 	jr .musicChannelDone
 .sfxChannel
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld [wc0ea], a ; store first param
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld [wc0eb], a ; store second param
 	xor a
 	ld [wc0d2], a ; clear RAM
@@ -494,22 +494,22 @@ Music8_tempo: ; 21b3b (8:5b3b)
 	ld [wc0d4], a
 	ld [wc0d5], a
 .musicChannelDone
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_stereopanning: ; 21b7b (8:5b7b)
+Audio2_stereopanning: ; 21b7b (8:5b7b)
 	cp $ee ; is this command a stereopanning?
-	jr nz, Music8_unknownmusic0xef ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_unknownmusic0xef ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld [wc004], a ; store panning
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
 ; this appears to never be used
-Music8_unknownmusic0xef: ; 21b88 (8:5b88)
+Audio2_unknownmusic0xef: ; 21b88 (8:5b88)
 	cp $ef ; is this command an unknownmusic0xef?
-	jr nz, Music8_dutycycle ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_dutycycle ; no
+	call Audio2_GetNextMusicByte ; yes
 	push bc
-	call Music8_22035
+	call Audio2_22035
 	pop bc
 	ld a, [wc003]
 	and a
@@ -519,12 +519,12 @@ Music8_unknownmusic0xef: ; 21b88 (8:5b88)
 	xor a
 	ld [wc02d], a
 .skip
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_dutycycle: ; 21ba7 (8:5ba7)
+Audio2_dutycycle: ; 21ba7 (8:5ba7)
 	cp $fc ; is this command a dutycycle?
-	jr nz, Music8_volume ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_volume ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld b, $0
 	ld hl, wc046
 	add hl, bc
@@ -536,48 +536,48 @@ Music8_dutycycle: ; 21ba7 (8:5ba7)
 	ld hl, wc02e
 	add hl, bc
 	set 6, [hl] ; set dutycycle flag
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_volume: ; 21bc5 (8:5bc5)
+Audio2_volume: ; 21bc5 (8:5bc5)
 	cp $f0 ; is this command a volume?
-	jr nz, Music8_executemusic ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_executemusic ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld [$ff24], a ; store volume
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_executemusic: ; 21bd1 (8:5bd1)
+Audio2_executemusic: ; 21bd1 (8:5bd1)
 	cp $f8 ; is this command an executemusic?
-	jr nz, Music8_octave ; no
+	jr nz, Audio2_octave ; no
 	ld b, $0 ; yes
 	ld hl, wc036
 	add hl, bc
 	set 0, [hl]
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_octave: ; 21be0 (8:5be0)
+Audio2_octave: ; 21be0 (8:5be0)
 	and $f0
 	cp $e0 ; is this command an octave?
-	jr nz, Music8_unknownsfx0x20 ; no
+	jr nz, Audio2_unknownsfx0x20 ; no
 	ld hl, wc0d6 ; yes
 	ld b, $0
 	add hl, bc
 	ld a, d
 	and $f
 	ld [hl], a ; store low nibble as octave
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_unknownsfx0x20: ; 21bf3
+Audio2_unknownsfx0x20: ; 21bf3
 	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, Music8_unknownsfx0x10 ; no
+	jr nz, Audio2_unknownsfx0x10 ; no
 	ld a, c
 	cp CH3 ; is this a noise or sfx channel?
-	jr c, Music8_unknownsfx0x10 ; no
+	jr c, Audio2_unknownsfx0x10 ; no
 	ld b, $0
 	ld hl, wc036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, Music8_unknownsfx0x10 ; no
-	call Music8_notelength
+	jr nz, Audio2_unknownsfx0x10 ; no
+	call Audio2_notelength
 	ld d, a
 	ld b, $0
 	ld hl, wc03e
@@ -586,56 +586,56 @@ Music8_unknownsfx0x20: ; 21bf3
 	or d
 	ld d, a
 	ld b, $1
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], d
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld d, a
 	ld b, $2
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], d
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	ld e, a
 	ld a, c
 	cp CH7
 	ld a, $0
 	jr z, .sfxNoiseChannel ; only two params for noise channel
 	push de
-	call Music8_GetNextMusicByte
+	call Audio2_GetNextMusicByte
 	pop de
 .sfxNoiseChannel
 	ld d, a
 	push de
-	call Music8_21daa
-	call Music8_21d79
+	call Audio2_21daa
+	call Audio2_21d79
 	pop de
-	call Music8_21dcc
+	call Audio2_21dcc
 	ret
 
-Music8_unknownsfx0x10: ; 21c40 (8:5c40)
+Audio2_unknownsfx0x10: ; 21c40 (8:5c40)
 	ld a, c
 	cp CH4
-	jr c, Music8_note ; if not a sfx
+	jr c, Audio2_note ; if not a sfx
 	ld a, d
 	cp $10 ; is this command a unknownsfx0x10?
-	jr nz, Music8_note ; no
+	jr nz, Audio2_note ; no
 	ld b, $0
 	ld hl, wc036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, Music8_note ; no
-	call Music8_GetNextMusicByte ; yes
+	jr nz, Audio2_note ; no
+	call Audio2_GetNextMusicByte ; yes
 	ld [$ff10], a
-	jp Music8_endchannel
+	jp Audio2_endchannel
 
-Music8_note: ; 21c5c (8:5c5c)
+Audio2_note: ; 21c5c (8:5c5c)
 	ld a, c
 	cp CH3
-	jr nz, Music8_notelength ; if not noise channel
+	jr nz, Audio2_notelength ; if not noise channel
 	ld a, d
 	and $f0
 	cp $b0 ; is this command a dnote?
-	jr z, Music8_dnote ; yes
-	jr nc, Music8_notelength ; no
+	jr z, Audio2_dnote ; yes
+	jr nc, Audio2_notelength ; no
 	swap a
 	ld b, a
 	ld a, d
@@ -646,24 +646,24 @@ Music8_note: ; 21c5c (8:5c5c)
 	push bc
 	jr asm_21c7e
 
-Music8_dnote: ; 21c76 (8:5c76)
+Audio2_dnote: ; 21c76 (8:5c76)
 	ld a, d
 	and $f
 	push af
 	push bc
-	call Music8_GetNextMusicByte ; get dnote instrument
+	call Audio2_GetNextMusicByte ; get dnote instrument
 asm_21c7e
 	ld d, a
 	ld a, [wc003]
 	and a
 	jr nz, .asm_21c89
 	ld a, d
-	call Music8_22035
+	call Audio2_22035
 .asm_21c89
 	pop bc
 	pop de
 
-Music8_notelength: ; 21c8b (8:5c8b)
+Audio2_notelength: ; 21c8b (8:5c8b)
 	ld a, d
 	push af
 	and $f
@@ -675,7 +675,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	add hl, bc
 	ld a, [hl]
 	ld l, b
-	call Music8_22006
+	call Audio2_22006
 	ld a, c
 	cp CH4
 	jr nc, .sfxChannel
@@ -689,7 +689,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	ld e, $0
 	cp CH7
 	jr z, .skip ; if noise channel
-	call Music8_21e2f
+	call Audio2_21e2f
 	ld a, [wc0ea]
 	ld d, a
 	ld a, [wc0eb]
@@ -700,7 +700,7 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	ld hl, wc0ce
 	add hl, bc
 	ld l, [hl]
-	call Music8_22006
+	call Audio2_22006
 	ld e, l
 	ld d, h
 	ld hl, wc0ce
@@ -713,15 +713,15 @@ Music8_notelength: ; 21c8b (8:5c8b)
 	ld hl, wc036
 	add hl, bc
 	bit 0, [hl]
-	jr nz, Music8_notepitch
+	jr nz, Audio2_notepitch
 	ld hl, wc02e
 	add hl, bc
 	bit 2, [hl]
-	jr z, Music8_notepitch
+	jr z, Audio2_notepitch
 	pop hl
 	ret
 
-Music8_notepitch: ; 21ce9 (8:5ce9)
+Audio2_notepitch: ; 21ce9 (8:5ce9)
 	pop af
 	and $f0
 	cp $c0 ; compare to rest
@@ -751,7 +751,7 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	jr .done
 .notSfxChannel3
 	ld b, $2
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld a, $8
 	ld [hli], a
 	inc hl
@@ -765,13 +765,13 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld hl, wc0d6
 	add hl, bc
 	ld b, [hl]
-	call Music8_22017
+	call Audio2_22017
 	ld b, $0
 	ld hl, wc02e
 	add hl, bc
 	bit 4, [hl]
 	jr z, .asm_21d39
-	call Music8_21f4e
+	call Audio2_21f4e
 .asm_21d39
 	push de
 	ld a, c
@@ -794,10 +794,10 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	add hl, bc
 	ld d, [hl]
 	ld b, $2
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], d
-	call Music8_21daa
-	call Music8_21d79
+	call Audio2_21daa
+	call Audio2_21d79
 	pop de
 	ld b, $0
 	ld hl, wc02e
@@ -811,10 +811,10 @@ Music8_notepitch: ; 21ce9 (8:5ce9)
 	ld hl, wc066
 	add hl, bc
 	ld [hl], e
-	call Music8_21dcc
+	call Audio2_21dcc
 	ret
 
-Music8_21d79: ; 21d79 (8:5d79)
+Audio2_21d79: ; 21d79 (8:5d79)
 	ld b, $0
 	ld hl, Unknown_222e6
 	add hl, bc
@@ -848,7 +848,7 @@ Music8_21d79: ; 21d79 (8:5d79)
 	ld [$ff25], a
 	ret
 
-Music8_21daa: ; 21daa (8:5daa)
+Audio2_21daa: ; 21daa (8:5daa)
 	ld b, $0
 	ld hl, wc0b6
 	add hl, bc
@@ -868,11 +868,11 @@ Music8_21daa: ; 21daa (8:5daa)
 	ld d, a
 .channel3
 	ld b, $1
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], d
 	ret
 
-Music8_21dcc: ; 21dcc (8:5dcc)
+Audio2_21dcc: ; 21dcc (8:5dcc)
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -890,7 +890,7 @@ Music8_21dcc: ; 21dcc (8:5dcc)
 	add a
 	ld d, $0
 	ld e, a
-	ld hl, Music8_WavePointers
+	ld hl, Audio2_WavePointers
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -916,18 +916,18 @@ Music8_21dcc: ; 21dcc (8:5dcc)
 	and $c7
 	ld d, a
 	ld b, $3
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	ld a, c
 	cp CH4
 	jr c, .musicChannel
-	call Music8_21e56
+	call Audio2_21e56
 .musicChannel
 	ret
 
-Music8_21e19: ; 21e19 (8:5e19)
+Audio2_21e19: ; 21e19 (8:5e19)
 	ld a, c
 	cp CH4
 	jr nz, .asm_21e2e
@@ -941,10 +941,10 @@ Music8_21e19: ; 21e19 (8:5e19)
 .asm_21e2e
 	ret
 
-Music8_21e2f: ; 21e2f (8:5e2f)
-	call Music8_21e8b
+Audio2_21e2f: ; 21e2f (8:5e2f)
+	call Audio2_21e8b
 	jr c, .asm_21e39
-	call Music8_21e9f
+	call Audio2_21e9f
 	jr nc, .asm_21e4c
 .asm_21e39
 	ld d, $0
@@ -965,10 +965,10 @@ Music8_21e2f: ; 21e2f (8:5e2f)
 .asm_21e55
 	ret
 
-Music8_21e56: ; 21e56 (8:5e56)
-	call Music8_21e8b
+Audio2_21e56: ; 21e56 (8:5e56)
+	call Audio2_21e8b
 	jr c, .asm_21e60
-	call Music8_21e9f
+	call Audio2_21e9f
 	jr nc, .asm_21e6c
 .asm_21e60
 	ld a, [wc0f1]
@@ -984,8 +984,8 @@ Music8_21e56: ; 21e56 (8:5e56)
 .asm_21e6c
 	ret
 
-Music8_21e6d: ; 21e6d (8:5e6d)
-	call Music8_21e8b
+Audio2_21e6d: ; 21e6d (8:5e6d)
+	call Audio2_21e8b
 	jr nc, .asm_21e88
 	ld hl, wc006
 	ld e, c
@@ -1007,7 +1007,7 @@ Music8_21e6d: ; 21e6d (8:5e6d)
 	ccf
 	ret
 
-Music8_21e8b: ; 21e8b (8:5e8b)
+Audio2_21e8b: ; 21e8b (8:5e8b)
 	ld a, [wc02a]
 	cp $14
 	jr nc, .asm_21e94
@@ -1024,7 +1024,7 @@ Music8_21e8b: ; 21e8b (8:5e8b)
 	scf
 	ret
 
-Music8_21e9f: ; 21e9f (8:5e9f)
+Audio2_21e9f: ; 21e9f (8:5e9f)
 	ld a, [wc02d]
 	ld b, a
 	ld a, [wc02a]
@@ -1044,7 +1044,7 @@ Music8_21e9f: ; 21e9f (8:5e9f)
 	scf
 	ret
 
-Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
+Audio2_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	ld hl, wc02e
 	add hl, bc
 	bit 5, [hl]
@@ -1134,7 +1134,7 @@ Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	add hl, bc
 	ld [hl], d
 	ld b, $3
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld a, e
 	ld [hli], a
 	ld [hl], d
@@ -1146,7 +1146,7 @@ Music8_ApplyPitchBend: ; 21eb8 (8:5eb8)
 	res 5, [hl]
 	ret
 
-Music8_21f4e: ; 21f4e (8:5f4e)
+Audio2_21f4e: ; 21f4e (8:5f4e)
 	ld hl, wc096
 	add hl, bc
 	ld [hl], d
@@ -1235,7 +1235,7 @@ Music8_21f4e: ; 21f4e (8:5f4e)
 	ld [hl], a
 	ret
 
-Music8_ApplyDutyCycle: ; 21fcc (8:5fcc)
+Audio2_ApplyDutyCycle: ; 21fcc (8:5fcc)
 	ld b, $0
 	ld hl, wc046
 	add hl, bc
@@ -1246,14 +1246,14 @@ Music8_ApplyDutyCycle: ; 21fcc (8:5fcc)
 	and $c0
 	ld d, a
 	ld b, $1
-	call Music8_21ff7
+	call Audio2_21ff7
 	ld a, [hl]
 	and $3f
 	or d
 	ld [hl], a
 	ret
 
-Music8_GetNextMusicByte: ; 21fe4 (8:5fe4)
+Audio2_GetNextMusicByte: ; 21fe4 (8:5fe4)
 	ld d, $0
 	ld a, c
 	add a
@@ -1271,7 +1271,7 @@ Music8_GetNextMusicByte: ; 21fe4 (8:5fe4)
 	ld [hl], d
 	ret
 
-Music8_21ff7: ; 21ff7 (8:5ff7)
+Audio2_21ff7: ; 21ff7 (8:5ff7)
 	ld a, c
 	ld hl, Unknown_222d6
 	add l
@@ -1285,7 +1285,7 @@ Music8_21ff7: ; 21ff7 (8:5ff7)
 	ld h, $ff
 	ret
 
-Music8_22006: ; 22006 (8:6006)
+Audio2_22006: ; 22006 (8:6006)
 	ld h, $0
 .loop
 	srl a
@@ -1300,13 +1300,13 @@ Music8_22006: ; 22006 (8:6006)
 .done
 	ret
 
-Music8_22017: ; 22017 (8:6017)
+Audio2_22017: ; 22017 (8:6017)
 	ld h, $0
 	ld l, a
 	add hl, hl
 	ld d, h
 	ld e, l
-	ld hl, Music8_Pitches
+	ld hl, Audio2_Pitches
 	add hl, de
 	ld e, [hl]
 	inc hl
@@ -1325,16 +1325,16 @@ Music8_22017: ; 22017 (8:6017)
 	ld d, a
 	ret
 
-Music8_22035:: ; 22035 (8:6035)
+Audio2_22035:: ; 22035 (8:6035)
 	ld [wc001], a
 	cp $ff
-	jp z, Music8_221f3
+	jp z, Audio2_221f3
 	cp $e9
-	jp z, Music8_2210d
-	jp c, Music8_2210d
+	jp z, Audio2_2210d
+	jp c, Audio2_2210d
 	cp $fe
 	jr z, .asm_2204c
-	jp nc, Music8_2210d
+	jp nc, Audio2_2210d
 .asm_2204c
 	xor a
 	ld [wc000], a
@@ -1344,53 +1344,53 @@ Music8_22035:: ; 22035 (8:6035)
 	ld [wc0e7], a
 	ld d, $8
 	ld hl, wc016
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc006
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld d, $4
 	ld hl, wc026
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc02e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc03e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc046
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc04e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc056
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc05e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc066
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc06e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc036
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc076
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc07e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc086
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc08e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc096
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc09e
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc0a6
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc0ae
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld a, $1
 	ld hl, wc0be
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc0b6
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld hl, wc0c6
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld [wc0e8], a
 	ld a, $ff
 	ld [wc004], a
@@ -1406,16 +1406,16 @@ Music8_22035:: ; 22035 (8:6035)
 	ld [$ff1a], a
 	ld a, $77
 	ld [$ff24], a
-	jp Music8_2224e
+	jp Audio2_2224e
 
-Music8_2210d: ; 2210d (8:610d)
+Audio2_2210d: ; 2210d (8:610d)
 	ld l, a
 	ld e, a
 	ld h, $0
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, SFX_Headers_08
+	ld de, SFX_Headers_2
 	add hl, de
 	ld a, h
 	ld [wc0ec], a
@@ -1555,11 +1555,11 @@ Music8_2210d: ; 2210d (8:610d)
 .asm_221ea
 	ld a, c
 	and a
-	jp z, Music8_2224e
+	jp z, Audio2_2224e
 	dec c
 	jp .asm_22126
 
-Music8_221f3: ; 221f3 (8:61f3)
+Audio2_221f3: ; 221f3 (8:61f3)
 	ld a, $80
 	ld [$ff26], a
 	ld [$ff1a], a
@@ -1587,11 +1587,11 @@ Music8_221f3: ; 221f3 (8:61f3)
 	ld [wc0e7], a
 	ld d, $a0
 	ld hl, wc006
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld a, $1
 	ld d, $18
 	ld hl, wc0b6
-	call FillMusicRAM8
+	call FillAudioRAM2
 	ld [wc0e8], a
 	ld [wc0ea], a
 	ld a, $ff
@@ -1599,7 +1599,7 @@ Music8_221f3: ; 221f3 (8:61f3)
 	ret
 
 ; fills d bytes at hl with a
-FillMusicRAM8: ; 22248 (8:6248)
+FillAudioRAM2: ; 22248 (8:6248)
 	ld b, d
 .loop
 	ld [hli], a
@@ -1607,7 +1607,7 @@ FillMusicRAM8: ; 22248 (8:6248)
 	jr nz, .loop
 	ret
 
-Music8_2224e: ; 2224e (8:624e)
+Audio2_2224e: ; 2224e (8:624e)
 	ld a, [wc001]
 	ld l, a
 	ld e, a
@@ -1615,7 +1615,7 @@ Music8_2224e: ; 2224e (8:624e)
 	ld d, h
 	add hl, hl
 	add hl, de
-	ld de, SFX_Headers_08
+	ld de, SFX_Headers_2
 	add hl, de
 	ld e, l
 	ld d, h
@@ -1688,7 +1688,7 @@ Music8_2224e: ; 2224e (8:624e)
 	ld [hli], a
 	ld [hl], a
 	ld hl, wc012 ; sfx noise channel pointer
-	ld de, Noise8_endchannel
+	ld de, Noise2_endchannel
 	ld [hl], e
 	inc hl
 	ld [hl], d ; overwrite pointer to point to endchannel
@@ -1702,7 +1702,7 @@ Music8_2224e: ; 2224e (8:624e)
 .asm_222d4
 	ret
 
-Noise8_endchannel: ; 222d5 (8:62d5)
+Noise2_endchannel: ; 222d5 (8:62d5)
 	endchannel
 
 Unknown_222d6: ; 222d6 (8:62d6)
@@ -1717,7 +1717,7 @@ Unknown_222e6: ; 222e6 (8:62e6)
 	db $11, $22, $44, $88 ; channels 0-3
 	db $11, $22, $44, $88 ; channels 4-7
 
-Music8_Pitches: ; 222ee (8:62ee)
+Audio2_Pitches: ; 222ee (8:62ee)
 	dw $F82C ; C_
 	dw $F89D ; C#
 	dw $F907 ; D_

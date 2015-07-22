@@ -48,7 +48,7 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	TX_FAR _SSAnne7RubText
 	TX_ASM
 	ld a, [wc0ef]
-	cp BANK(Music1f_UpdateMusic)
+	cp BANK(Audio3_UpdateMusic)
 	ld [wc0f0], a
 	jr nz, .asm_61908
 	ld a, $ff

@@ -56,20 +56,20 @@ VBlank::
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 
-	cp BANK(Music2_UpdateMusic)
-	jr nz, .notbank2
-.bank2
-	call Music2_UpdateMusic
+	cp BANK(Audio1_UpdateMusic)
+	jr nz, .checkForAudio2
+.audio1
+	call Audio1_UpdateMusic
 	jr .afterMusic
-.notbank2
-	cp BANK(Music8_UpdateMusic)
-	jr nz, .bank1F
-.bank8
+.checkForAudio2
+	cp BANK(Audio2_UpdateMusic)
+	jr nz, .audio3
+.audio2
 	call Music_DoLowHealthAlarm
-	call Music8_UpdateMusic
+	call Audio2_UpdateMusic
 	jr .afterMusic
-.bank1F
-	call Music1f_UpdateMusic
+.audio3
+	call Audio3_UpdateMusic
 .afterMusic
 
 	callba TrackPlayTime ; keep track of time played

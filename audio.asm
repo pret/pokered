@@ -7,24 +7,24 @@ INCLUDE "constants.asm"
 
 
 SECTION "Sound Effect Headers 1", ROMX, BANK[AUDIO_1]
-INCLUDE "audio/headers/sfxheaders02.asm"
+INCLUDE "audio/headers/sfxheaders1.asm"
 
 SECTION "Sound Effect Headers 2", ROMX, BANK[AUDIO_2]
-INCLUDE "audio/headers/sfxheaders08.asm"
+INCLUDE "audio/headers/sfxheaders2.asm"
 
 SECTION "Sound Effect Headers 3", ROMX, BANK[AUDIO_3]
-INCLUDE "audio/headers/sfxheaders1f.asm"
+INCLUDE "audio/headers/sfxheaders3.asm"
 
 
 
 SECTION "Music Headers 1", ROMX, BANK[AUDIO_1]
-INCLUDE "audio/headers/musicheaders02.asm"
+INCLUDE "audio/headers/musicheaders1.asm"
 
 SECTION "Music Headers 2", ROMX, BANK[AUDIO_2]
-INCLUDE "audio/headers/musicheaders08.asm"
+INCLUDE "audio/headers/musicheaders2.asm"
 
 SECTION "Music Headers 3", ROMX, BANK[AUDIO_3]
-INCLUDE "audio/headers/musicheaders1f.asm"
+INCLUDE "audio/headers/musicheaders3.asm"
 
 
 
@@ -50,7 +50,7 @@ INCLUDE "audio/sfx/muted_snare2_1.asm"
 INCLUDE "audio/sfx/muted_snare3_1.asm"
 INCLUDE "audio/sfx/muted_snare4_1.asm"
 
-Music2_WavePointers: INCLUDE "audio/wave_instruments.asm"
+Audio1_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/start_menu_1.asm"
 INCLUDE "audio/sfx/pokeflute.asm"
@@ -86,7 +86,7 @@ INCLUDE "audio/sfx/push_boulder_1.asm"
 INCLUDE "audio/sfx/ss_anne_horn_1.asm"
 INCLUDE "audio/sfx/withdraw_deposit_1.asm"
 INCLUDE "audio/sfx/safari_zone_pa.asm"
-INCLUDE "audio/sfx/sfx_02_unused.asm"
+INCLUDE "audio/sfx/unused_1.asm"
 INCLUDE "audio/sfx/cry09_1.asm"
 INCLUDE "audio/sfx/cry23_1.asm"
 INCLUDE "audio/sfx/cry24_1.asm"
@@ -149,7 +149,7 @@ INCLUDE "audio/sfx/muted_snare2_2.asm"
 INCLUDE "audio/sfx/muted_snare3_2.asm"
 INCLUDE "audio/sfx/muted_snare4_2.asm"
 
-Music8_WavePointers: INCLUDE "audio/wave_instruments.asm"
+Audio2_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/press_ab_2.asm"
 INCLUDE "audio/sfx/start_menu_2.asm"
@@ -162,7 +162,7 @@ INCLUDE "audio/sfx/ball_poof.asm"
 INCLUDE "audio/sfx/faint_thud.asm"
 INCLUDE "audio/sfx/run.asm"
 INCLUDE "audio/sfx/dex_page_added.asm"
-INCLUDE "audio/sfx/sfx_08_pokeflute_ch3.asm"
+INCLUDE "audio/sfx/pokeflute_ch3.asm"
 INCLUDE "audio/sfx/peck.asm"
 INCLUDE "audio/sfx/faint_fall.asm"
 INCLUDE "audio/sfx/battle_09.asm"
@@ -211,7 +211,7 @@ INCLUDE "audio/sfx/battle_33.asm"
 INCLUDE "audio/sfx/battle_34.asm"
 INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
-INCLUDE "audio/sfx/sfx_08_unused.asm"
+INCLUDE "audio/sfx/unused_2.asm"
 INCLUDE "audio/sfx/cry09_2.asm"
 INCLUDE "audio/sfx/cry23_2.asm"
 INCLUDE "audio/sfx/cry24_2.asm"
@@ -274,7 +274,7 @@ INCLUDE "audio/sfx/muted_snare2_3.asm"
 INCLUDE "audio/sfx/muted_snare3_3.asm"
 INCLUDE "audio/sfx/muted_snare4_3.asm"
 
-Music1f_WavePointers: INCLUDE "audio/wave_instruments.asm"
+Audio3_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
 INCLUDE "audio/sfx/start_menu_3.asm"
 INCLUDE "audio/sfx/cut_3.asm"
@@ -318,7 +318,7 @@ INCLUDE "audio/sfx/slots_stop_wheel.asm"
 INCLUDE "audio/sfx/slots_reward.asm"
 INCLUDE "audio/sfx/slots_new_spin.asm"
 INCLUDE "audio/sfx/shooting_star.asm"
-INCLUDE "audio/sfx/sfx_1f_unused.asm"
+INCLUDE "audio/sfx/unused_3.asm"
 INCLUDE "audio/sfx/cry09_3.asm"
 INCLUDE "audio/sfx/cry23_3.asm"
 INCLUDE "audio/sfx/cry24_3.asm"
@@ -408,12 +408,12 @@ Music_RivalAlternateStart:: ; 0x9b47
 	call PlayMusic
 	ld hl, wc006
 	ld de, Music_MeetRival_branch_b1a2
-	call Music2_OverwriteChannelPointer
+	call Audio1_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b21d
-	call Music2_OverwriteChannelPointer
+	call Audio1_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b2b5
 
-Music2_OverwriteChannelPointer: ; 0x9b60
+Audio1_OverwriteChannelPointer: ; 0x9b60
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -427,14 +427,14 @@ Music_RivalAlternateTempo:: ; 0x9b65
 	call PlayMusic
 	ld hl, wc006
 	ld de, Music_MeetRival_branch_b119
-	jp Music2_OverwriteChannelPointer
+	jp Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo:: ; 0x9b75
 	call Music_RivalAlternateStart
 	ld hl, wc006
 	ld de, Music_MeetRival_branch_b19b
-	jp Music2_OverwriteChannelPointer
+	jp Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
 Music_Cities1AlternateTempo:: ; 0x9b81
@@ -450,7 +450,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 	call PlayMusic
 	ld hl, wc006
 	ld de, Music_Cities1_branch_aa6f
-	jp Music2_OverwriteChannelPointer
+	jp Audio1_OverwriteChannelPointer
 
 
 SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
@@ -544,12 +544,12 @@ Music_PokeFluteInBattle:: ; 22306 (8:6306)
 	; then immediately overwrtie the channel pointers
 	ld hl, wc00e
 	ld de, SFX_08_PokeFlute_Ch1
-	call Music8_OverwriteChannelPointer
+	call Audio2_OverwriteChannelPointer
 	ld de, SFX_08_PokeFlute_Ch2
-	call Music8_OverwriteChannelPointer
+	call Audio2_OverwriteChannelPointer
 	ld de, SFX_08_PokeFlute_Ch3
 
-Music8_OverwriteChannelPointer: ; 2231d (8:631d)
+Audio2_OverwriteChannelPointer: ; 2231d (8:631d)
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -632,8 +632,8 @@ INCLUDE "audio/music/pokecenter.asm"
 
 SECTION "Music 2", ROMX, BANK[AUDIO_2]
 
-INCLUDE "audio/sfx/sfx_08_pokeflute.asm"
-INCLUDE "audio/sfx/sfx_08_unused2.asm"
+INCLUDE "audio/sfx/pokeflute_ch1_ch2.asm"
+INCLUDE "audio/sfx/unused2_2.asm"
 INCLUDE "audio/music/gymleaderbattle.asm"
 INCLUDE "audio/music/trainerbattle.asm"
 INCLUDE "audio/music/wildbattle.asm"

@@ -1,4 +1,4 @@
-SFX_Headers_02::
+SFX_Headers_1::
 	db $ff, $ff, $ff ; padding
 
 SFX_Snare1_1:: ; 8003 (2:4003)
