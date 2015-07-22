@@ -76,7 +76,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	ld hl,vBGMap1
 	call CopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
-	ld a,%11111100 ; make the mon a black silhouette 
+	ld a,%11111100 ; make the mon a black silhouette
 	ld [rBGP],a
 
 ; scroll the mon left by one tile 7 times
@@ -88,7 +88,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 
 ; scroll the mon left by one tile 20 times
 ; This time, we have to move the window left too in order to hide the text that
-; is wrapping around to the right side of the screen. 
+; is wrapping around to the right side of the screen.
 	ld c,20
 .scrollLoop2
 	call ScrollCreditsMonLeft

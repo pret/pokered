@@ -66,15 +66,15 @@ jpab: MACRO
 	ENDM
 
 bcd2: MACRO
-    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-    dn ((\1) / 10) % 10, (\1) % 10
-    ENDM
+	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+	dn ((\1) / 10) % 10, (\1) % 10
+	ENDM
 
 bcd3: MACRO
-    dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
-    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-    dn ((\1) / 10) % 10, (\1) % 10
-    ENDM
+	dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
+	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+	dn ((\1) / 10) % 10, (\1) % 10
+	ENDM
 
 coins equs "bcd2"
 money equs "bcd3"
@@ -263,7 +263,7 @@ NONE  EQU $FF
 ;\7 trainers only: trainer class/pokemon id
 ;\8 trainers only: trainer number/pokemon level
 object: MACRO
-    db \1
+	db \1
 	db \3 + 4
 	db \2 + 4
 	db \4

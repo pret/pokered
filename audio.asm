@@ -538,8 +538,10 @@ INCLUDE "audio/engine_2.asm"
 
 
 Music_PokeFluteInBattle:: ; 22306 (8:6306)
-	ld a, SFX_BATTLE_06 ; PokeFlute outside of battle
+	; begin playing the "caught mon" sound effect
+	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
+	; then immediately overwrtie the channel pointers
 	ld hl, wc00e
 	ld de, SFX_08_PokeFlute_Ch1
 	call Music8_OverwriteChannelPointer
@@ -586,7 +588,7 @@ PokedexRatingSfxPointers: ; 7d162 (1f:5162)
 	db SFX_DENIED,         BANK(SFX_1f_51)
 	db SFX_POKEDEX_RATING, BANK(SFX_02_41)
 	db SFX_GET_ITEM_1,     BANK(SFX_02_3a)
-	db SFX_BATTLE_06,      BANK(SFX_08_46)
+	db SFX_CAUGHT_MON,     BANK(SFX_08_46)
 	db SFX_LEVEL_UP,       BANK(SFX_08_3a)
 	db SFX_GET_KEY_ITEM,   BANK(SFX_02_42)
 	db SFX_GET_ITEM_2,     BANK(SFX_02_3b)

@@ -353,7 +353,7 @@ EnemyRan: ; 3c202 (f:4202)
 	ld hl, EnemyRanText
 .printText
 	call PrintText
-	ld a, SFX_BATTLE_04
+	ld a, SFX_RUN
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a
@@ -860,13 +860,13 @@ FaintEnemyPokemon: ; 0x3c567
 	xor a
 	ld [wc0f1], a
 	ld [wc0f2], a
-	ld a, SFX_BATTLE_08 ; SFX_FALL?
+	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
 	ld a, [wc02a]
-	cp SFX_BATTLE_08
+	cp SFX_FAINT_FALL
 	jr z, .sfxwait
-	ld a, SFX_BATTLE_03 ; SFX_DROP
+	ld a, SFX_FAINT_THUD
 	call PlaySound
 	call WaitForSoundToFinish
 	jr .sfxplayed
@@ -1672,7 +1672,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	dec a
 .playSound
 	ld [wBattleResult], a
-	ld a, SFX_BATTLE_04
+	ld a, SFX_RUN
 	call PlaySoundWaitForCurrent
 	ld hl, GotAwayText
 	call PrintText

@@ -1463,7 +1463,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 ; pointless because both values are overwritten before they are read
 	ld a,$01
 	ld [wMenuExitMethod],a
-	ld [wChosenMenuItem],a 
+	ld [wChosenMenuItem],a
 
 	xor a
 	ld [wMenuWatchMovingOutOfBounds],a
