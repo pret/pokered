@@ -39,7 +39,7 @@ _DayCareMonHasGrownText:: ; 8ac32 (22:6c32)
 
 _DayCareOweMoneyText:: ; 8ac7d (22:6c7d)
 	text "You owe me ¥@"
-	TX_BCD wcd3f, $c2
+	TX_BCD wDayCareTotalCost, $c2
 	db $0
 	line "for the return"
 	cont "of this #MON."

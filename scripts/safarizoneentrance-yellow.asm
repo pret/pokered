@@ -1,7 +1,7 @@
 .xf1f77
 	ld hl,.ForJust500Text
 	call PrintText
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -21,11 +21,11 @@
 
 .xf1f9f
 	xor a
-	ld [$ff9f],a
+	ld [hMoney],a
 	ld a,$05
-	ld [$ffa0],a
+	ld [hMoney + 1],a
 	ld a,$00
-	ld [$ffa1],a
+	ld [hMoney + 2],a
 	call HasEnoughMoney
 	jr nc,.success
 	ld hl,.NotEnoughMoneyText
@@ -36,19 +36,19 @@
 
 .success
 	xor a
-	ld [wSubtrahend],a
+	ld [wPriceTemp],a
 	ld a,$05
-	ld [wSubtrahend+1],a
+	ld [wPriceTemp + 1],a
 	ld a,$00
-	ld [wSubtrahend+2],a
-	ld hl,wTrainerFacingDirection
+	ld [wPriceTemp + 2],a
+	ld hl,wPriceTemp + 2
 	ld de,wPlayerMoney + 2
 	ld c,3
 	predef SubBCDPredef
 	ld a,$b2
 	call $3736
 	call $373e
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,.MakePaymentText

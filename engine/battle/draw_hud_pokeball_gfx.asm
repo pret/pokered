@@ -6,7 +6,7 @@ DrawAllPokeballs: ; 3a849 (e:6849)
 	ret z ; return if wild pokémon
 	jp SetupEnemyPartyPokeballs
 
-DrawEnemyPokeballs: ; 0x3a857
+DrawEnemyPokeballs: ; 3a857 (e:6857)
 	call LoadPartyPokeballGfx
 	jp SetupEnemyPartyPokeballs
 
@@ -25,8 +25,8 @@ SetupOwnPartyPokeballs: ; 3a869 (e:6869)
 	ld hl, W_BASECOORDX
 	ld [hli], a
 	ld [hl], a
-	ld a, $8
-	ld [wTrainerEngageDistance], a
+	ld a, 8
+	ld [wHUDPokeballGfxOffsetX], a
 	ld hl, wOAMBuffer
 	jp WritePokeballOAMData
 
@@ -39,8 +39,8 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	ld a, $48
 	ld [hli], a
 	ld [hl], $20
-	ld a, $f8
-	ld [wTrainerEngageDistance], a
+	ld a, -8
+	ld [wHUDPokeballGfxOffsetX], a
 	ld hl, wOAMBuffer + PARTY_LENGTH * 4
 	jp WritePokeballOAMData
 
@@ -90,8 +90,8 @@ PickPokeball: ; 3a8c2 (e:68c2)
 .done
 	ld a, b
 	ld [de], a
-	ld bc, $0028 ; rest of mon struct
-	add hl, bc
+	ld bc, wPartyMon2 - wPartyMon1Status
+	add hl, bc ; next mon struct
 	ret
 
 WritePokeballOAMData: ; 3a8e1 (e:68e1)
@@ -108,7 +108,7 @@ WritePokeballOAMData: ; 3a8e1 (e:68e1)
 	ld [hli], a
 	ld a, [W_BASECOORDX]
 	ld b, a
-	ld a, [wTrainerEngageDistance]
+	ld a, [wHUDPokeballGfxOffsetX]
 	add b
 	ld [W_BASECOORDX], a
 	inc de
@@ -118,11 +118,11 @@ WritePokeballOAMData: ; 3a8e1 (e:68e1)
 
 PlacePlayerHUDTiles: ; 3a902 (e:6902)
 	ld hl, PlayerBattleHUDGraphicsTiles
-	ld de, wTrainerFacingDirection
+	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
 	coord hl, 18, 10
-	ld de, rIE
+	ld de, -1
 	jr PlaceHUDTiles
 
 PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
@@ -133,7 +133,7 @@ PlayerBattleHUDGraphicsTiles: ; 3a916 (e:6916)
 
 PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	ld hl, EnemyBattleHUDGraphicsTiles
-	ld de, wTrainerFacingDirection
+	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
 	coord hl, 1, 2
@@ -150,16 +150,16 @@ PlaceHUDTiles: ; 3a930 (e:6930)
 	ld [hl], $73
 	ld bc, SCREEN_WIDTH
 	add hl, bc
-	ld a, [wTrainerScreenY]
+	ld a, [wHUDGraphicsTiles + 1] ; leftmost tile
 	ld [hl], a
-	ld a, $8
-.asm_3a93c
+	ld a, 8
+.loop
 	add hl, de
 	ld [hl], $76
 	dec a
-	jr nz, .asm_3a93c
+	jr nz, .loop
 	add hl, de
-	ld a, [wTrainerScreenX]
+	ld a, [wHUDGraphicsTiles + 2] ; rightmost tile
 	ld [hl], a
 	ret
 
@@ -172,8 +172,8 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	ld a, $50
 	ld [hli], a
 	ld [hl], $40
-	ld a, $8
-	ld [wTrainerEngageDistance], a
+	ld a, 8
+	ld [wHUDPokeballGfxOffsetX], a
 	ld hl, wOAMBuffer
 	call WritePokeballOAMData
 	ld hl, wEnemyMons

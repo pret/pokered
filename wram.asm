@@ -644,6 +644,18 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wBattleTransitionCircleScreenQuadrantY:: ; cd3d
+; 0 = upper half (Y < 9)
+; 1 = lower half (Y >= 9)
+
+wBattleTransitionCopyTilesOffset:: ; cd3d
+; 2 bytes
+; after 1 row/column has been copied, the offset to the next one to copy from
+
+wInwardSpiralUpdateScreenCounter:: ; cd3d
+; counts down from 7 so that every time 7 more tiles of the spiral have been
+; placed, the tile map buffer is copied to VRAM so that progress is visible
+
 wHoFTeamIndex:: ; cd3d
 
 wSSAnneSmokeDriftAmount:: ; cd3d
@@ -726,9 +738,6 @@ wPlayerSpinWhileMovingUpOrDownAnimDeltaY:: ; cd3d
 
 wHiddenObjectFunctionArgument:: ; cd3d
 
-wSubtrahend:: ; cd3d
-; subtract (BCD) wSubtrahend, wSubtrahend+1, wSubtrahend+2
-
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
@@ -736,6 +745,13 @@ wTrainerSpriteOffset:: ; cd3d
 
 wUnusedCD3D:: ; cd3d
 	ds 1
+
+wHUDPokeballGfxOffsetX:: ; cd3e
+; difference in X between the next ball and the current one
+
+wBattleTransitionCircleScreenQuadrantX:: ; cd3e
+; 0 = left half (X < 10)
+; 1 = right half (X >= 10)
 
 wSSAnneSmokeX:: ; cd3e
 
@@ -775,6 +791,12 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 
+wHUDGraphicsTiles:: ; cd3f
+; 3 bytes
+
+wDayCareTotalCost:: ; cd3f
+; 2-byte BCD number
+
 wJigglypuffFacingDirections:: ; cd3f
 
 wOptionsBattleStyleCursorX:: ; cd3f
@@ -801,7 +823,6 @@ wPlayerSpinWhileMovingUpOrDownAnimFrameDelay:: ; cd3f
 wHiddenObjectIndex:: ; cd3f
 
 wTrainerFacingDirection:: ; cd3f
-wcd3f:: ; used with daycare text for money amount
 	ds 1
 
 wHoFMonOrPlayer:: ; cd40
@@ -816,7 +837,12 @@ wPlayerSpinInPlaceAnimSoundID:: ; cd40
 wHiddenObjectY:: ; cd40
 
 wTrainerScreenY:: ; cd40
+
+wUnusedCD40:: ; cd40
 	ds 1
+
+wDayCarePerLevelCost:: ; cd41
+; 2-byte BCD number (always set to $0100)
 
 wHoFTeamIndex2:: ; cd41
 
@@ -842,8 +868,7 @@ wHoFTeamNo:: ; cd42
 wSlotMachineWheel1MiddleTile:: ; cd42
 
 wFieldMovesLeftmostXCoord:: ; cd42
-
-wcd42:: ds 1 ; used in pewter center script, printing field mon moves, slot machines and HoF PC
+	ds 1
 
 wLastFieldMoveID:: ; cd43
 ; unused

@@ -256,7 +256,7 @@ ReadTrainerScreenPosition: ; 5698e (15:698e)
 ; a: distance player to sprite
 CheckSpriteCanSeePlayer: ; 569af (15:69af)
 	ld b, a
-	ld a, [wTrainerEngageDistance]  ; sprite line of sight (engage distance)
+	ld a, [wTrainerEngageDistance] ; how far the trainer can see
 	cp b
 	jr nc, .checkIfLinedUp
 	jr .notInLine         ; player too far away

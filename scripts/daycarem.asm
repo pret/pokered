@@ -103,21 +103,21 @@ DayCareMText1: ; 56254 (15:6254)
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
-	jp z, .asm_56403
-	ld de, wTrainerFacingDirection
+	jp z, .leaveMonInDayCare
+	ld de, wDayCareTotalCost
 	xor a
 	ld [de], a
 	inc de
 	ld [de], a
-	ld hl, wTrainerScreenX
+	ld hl, wDayCarePerLevelCost
 	ld a, $1
 	ld [hli], a
 	ld [hl], $0
 	ld a, [wDayCareNumLevelsGrown]
 	inc a
 	ld b, a
-	ld c, $2
-.asm_56357
+	ld c, 2
+.calcPriceLoop
 	push hl
 	push de
 	push bc
@@ -126,29 +126,29 @@ DayCareMText1: ; 56254 (15:6254)
 	pop de
 	pop hl
 	dec b
-	jr nz, .asm_56357
+	jr nz, .calcPriceLoop
 	ld hl, DayCareOweMoneyText
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld hl, DayCareAllRightThenText
 	ld a, [wCurrentMenuItem]
 	and a
-	jp nz, .asm_56403
-	ld hl, wTrainerFacingDirection
+	jp nz, .leaveMonInDayCare
+	ld hl, wDayCareTotalCost
 	ld [hMoney], a
 	ld a, [hli]
 	ld [hMoney + 1], a
 	ld a, [hl]
 	ld [hMoney + 2], a
 	call HasEnoughMoney
-	jr nc, .asm_56396
+	jr nc, .enoughMoney
 	ld hl, DayCareNotEnoughMoneyText
-	jp .asm_56403
+	jp .leaveMonInDayCare
 
-.asm_56396
+.enoughMoney
 	xor a
 	ld [W_DAYCARE_IN_USE], a
 	ld hl, wDayCareNumLevelsGrown
@@ -202,7 +202,7 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareGotMonBackText
 	jr .done
 
-.asm_56403
+.leaveMonInDayCare
 	ld a, [wDayCareStartLevel]
 	ld [wDayCareMonBoxLevel], a
 

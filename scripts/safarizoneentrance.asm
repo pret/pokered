@@ -145,7 +145,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 .SafariZoneEntranceText4
 	TX_FAR SafariZoneEntranceText_9e6e4
 	TX_ASM
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -166,16 +166,16 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 
 .success
 	xor a
-	ld [wSubtrahend],a
+	ld [wPriceTemp],a
 	ld a,$05
-	ld [wSubtrahend+1],a
+	ld [wPriceTemp + 1],a
 	ld a,$00
-	ld [wSubtrahend+2],a
-	ld hl,wTrainerFacingDirection
+	ld [wPriceTemp + 2],a
+	ld hl,wPriceTemp + 2
 	ld de,wPlayerMoney + 2
 	ld c,3
 	predef SubBCDPredef
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,.MakePaymentText

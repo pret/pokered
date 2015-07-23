@@ -455,7 +455,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld [wLastMenuItem],a
 	inc a
 	ld [wLetterPrintingDelayFlags],a
-	ld [wTrainerScreenY],a
+	ld [wUnusedCD40],a
 	ld a,3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY],a
 	call SetCursorPositionsFromOptions
