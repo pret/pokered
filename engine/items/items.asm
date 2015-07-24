@@ -2417,11 +2417,11 @@ GetMaxPP: ; e677 (3:6677)
 	ld b,a ; b = normal max PP
 	pop hl
 	push bc
-	ld bc,21 ; PP offset if not player's in-battle pokemon data
+	ld bc,wPartyMon1PP - wPartyMon1Moves ; PP offset if not player's in-battle pokemon data
 	ld a,[wMonDataLocation]
 	cp a,4 ; player's in-battle pokemon?
 	jr nz,.addPPOffset
-	ld bc,17 ; PP offset if player's in-battle pokemon data
+	ld bc,wBattleMonPP - wBattleMonMoves ; PP offset if player's in-battle pokemon data
 .addPPOffset
 	add hl,bc
 	ld a,[hl] ; a = current PP
@@ -2601,7 +2601,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $fff5
+	ld bc, -$b
 	add hl, bc
 	pop bc
 	dec b
@@ -2635,7 +2635,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $fff5
+	ld bc, -$b
 	add hl, bc
 	pop bc
 	dec b
@@ -2669,7 +2669,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $ffdf
+	ld bc, wBoxMon1 - wBoxMon2
 	add hl, bc
 	pop bc
 	dec b
@@ -2679,7 +2679,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
-	ld bc, $c
+	ld bc, wEnemyMonDVs - wEnemyMon
 	call CopyData
 	ld hl, wPlayerID
 	ld a, [hli]
@@ -2703,7 +2703,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	inc de
 	xor a
-	ld b, $a
+	ld b, NUM_STATS * 2
 .asm_e89f
 	ld [de], a
 	inc de
@@ -2716,7 +2716,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld a, [hli]
 	ld [de], a
 	ld hl, wEnemyMonPP
-	ld b, $4
+	ld b, NUM_MOVES
 .asm_e8b1
 	ld a, [hli]
 	inc de

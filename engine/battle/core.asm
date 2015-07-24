@@ -1696,19 +1696,19 @@ GotAwayText: ; 3cba1 (f:4ba1)
 ; copies from party data to battle mon data when sending out a new player mon
 LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	ld a, [wWhichPokemon]
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	ld hl, wPartyMon1Species
 	call AddNTimes
 	ld de, wBattleMonSpecies
-	ld bc, $c
+	ld bc, wBattleMonDVs - wBattleMonSpecies
 	call CopyData
-	ld bc, $f
+	ld bc, wPartyMon1DVs - wPartyMon1OTID
 	add hl, bc
 	ld de, wBattleMonDVs
-	ld bc, $2
+	ld bc, NUM_DVS
 	call CopyData
 	ld de, wBattleMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wBattleMonLevel
 	ld bc, $b
@@ -1724,12 +1724,12 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wPlayerMonUnmodifiedLevel ; block of memory used for unmodified stats
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToPlayer
 	call ApplyBadgeStatBoosts
 	ld a, $7 ; default stat modifier
-	ld b, $8
+	ld b, NUM_STAT_MODS
 	ld hl, wPlayerMonAttackMod
 .statModLoop
 	ld [hli], a
@@ -1740,19 +1740,19 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 ; copies from enemy party data to current enemy mon data when sending out a new enemy mon
 LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	ld a, [wWhichPokemon]
-	ld bc, $2c
+	ld bc, wEnemyMon2 - wEnemyMon1
 	ld hl, wEnemyMons
 	call AddNTimes
 	ld de, wEnemyMonSpecies
-	ld bc, $c
+	ld bc, wEnemyMonDVs - wEnemyMonSpecies
 	call CopyData
-	ld bc, $f
+	ld bc, wEnemyMon1DVs - wEnemyMon1OTID
 	add hl, bc
 	ld de, wEnemyMonDVs
-	ld bc, $2
+	ld bc, NUM_DVS
 	call CopyData
 	ld de, wEnemyMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wEnemyMonLevel
 	ld bc, $b
@@ -1768,12 +1768,12 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	call CopyData
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel ; block of memory used for unmodified stats
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToEnemy
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
-	ld b, $5
+	ld b, NUM_STATS
 .copyBaseStatsLoop
 	ld a, [hli]
 	ld [de], a
@@ -1781,7 +1781,7 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	dec b
 	jr nz, .copyBaseStatsLoop
 	ld a, $7 ; default stat modifier
-	ld b, $8
+	ld b, NUM_STAT_MODS
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
@@ -6300,7 +6300,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef LoadMovePPs
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
-	ld b, $5
+	ld b, NUM_STATS
 .copyBaseStatsLoop
 	ld a, [hli]
 	ld [de], a
@@ -6331,10 +6331,10 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	ld a, $7 ; default stat mod
-	ld b, $8 ; number of stat mods
+	ld b, NUM_STAT_MODS ; number of stat mods
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
@@ -6561,7 +6561,7 @@ CalculateModifiedStats: ; 3ed99 (f:6d99)
 	call CalculateModifiedStat
 	inc c
 	ld a, c
-	cp 4
+	cp NUM_STATS - 1
 	jr nz, .loop
 	ret
 

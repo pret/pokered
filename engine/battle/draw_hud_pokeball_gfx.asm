@@ -90,7 +90,7 @@ PickPokeball: ; 3a8c2 (e:68c2)
 .done
 	ld a, b
 	ld [de], a
-	ld bc, $0028 ; rest of mon struct
+	ld bc, wPartyMon2 - wPartyMon1 - 4 ; rest of mon struct
 	add hl, bc
 	ret
 

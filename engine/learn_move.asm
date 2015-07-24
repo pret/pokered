@@ -10,12 +10,12 @@ LearnMove: ; 6e43 (1:6e43)
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2Moves - wPartyMon1Moves
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld b, $4
+	ld b, NUM_MOVES
 .asm_6e6b
 	ld a, [hl]
 	and a
@@ -38,7 +38,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 .asm_6e8b
 	ld a, [wMoveNum]
 	ld [hl], a
-	ld bc, $15
+	ld bc, wPartyMon1PP - wPartyMon1Moves
 	add hl, bc
 	push hl
 	push de
@@ -66,10 +66,10 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld de, wBattleMonMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	ld bc, $11
+	ld bc, wPartyMon1PP - wPartyMon1OTID
 	add hl, bc
 	ld de, wBattleMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	jp PrintLearnedMove
 
@@ -108,7 +108,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, [wCurrentMenuItem]
 	rra
 	ret c
-	ld bc, $fffc
+	ld bc, - NUM_MOVES
 	add hl, bc
 	push hl
 	ld de, wMoves
