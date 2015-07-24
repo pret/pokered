@@ -1,4 +1,4 @@
-Func_1c9c6: ; 1c9c6 (7:49c6)
+DisplayElevatorFloorMenu: ; 1c9c6 (7:49c6)
 	ld hl, WhichFloorText
 	call PrintText
 	ld hl, wItemList
@@ -12,7 +12,7 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
 	ld [wPrintItemPrices], a
-	ld a, $4
+	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	pop bc
@@ -24,7 +24,7 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld hl, wcc5b
 	ld a, [wWhichPokemon]
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
@@ -32,15 +32,15 @@ Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld a, [hl]
 	ld c, a
 	ld hl, wWarpEntries
-	call Func_1ca0d
+	call .UpdateWarp
 
-Func_1ca0d: ; 1ca0d (7:4a0d)
+.UpdateWarp
 	inc hl
 	inc hl
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; destination warp ID
 	ld a, c
-	ld [hli], a
+	ld [hli], a ; destination map ID
 	ret
 
 WhichFloorText: ; 1ca14 (7:4a14)

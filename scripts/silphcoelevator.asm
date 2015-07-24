@@ -73,5 +73,5 @@ SilphCoElevatorText1: ; 45835 (11:5835)
 	TX_ASM
 	call SilphCoElevatorScript_457f1
 	ld hl, SilphCoElevatorWarpMaps
-	predef Func_1c9c6
+	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd

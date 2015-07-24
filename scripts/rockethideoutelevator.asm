@@ -68,7 +68,7 @@ RocketHideoutElevatorText1: ; 4576d (11:576d)
 	jr z, .asm_45782
 	call RocketHideoutElevatorScript_45741
 	ld hl, RocketHideoutElevatorWarpMaps
-	predef Func_1c9c6
+	predef DisplayElevatorFloorMenu
 	jr .asm_45788
 .asm_45782
 	ld hl, RocketHideoutElevatorText_4578b

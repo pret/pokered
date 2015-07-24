@@ -64,5 +64,5 @@ CeladonMartElevatorText1: ; 4865e (12:465e)
 	TX_ASM
 	call CeladonMartElevatorScript_48631
 	ld hl, CeldaonMartElevatorWarpMaps
-	predef Func_1c9c6
+	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd
