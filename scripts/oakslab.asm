@@ -634,7 +634,7 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	predef HideObject
 	SetEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
 	ResetEventReuseHL EVENT_2ND_ROUTE22_RIVAL_BATTLE
-	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_FIGHT
+	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ld a, HS_ROUTE_22_RIVAL_1
 	ld [wcc4d], a
 	predef ShowObject
@@ -985,7 +985,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld b,POKE_BALL
 	call IsItemInBag
 	jr nz, .asm_1d2e7
-	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_FIGHT
+	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr nz, .asm_1d2d0
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .asm_1d2c8
