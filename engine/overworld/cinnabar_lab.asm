@@ -3,19 +3,19 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	set 6, [hl]
 	xor a
 	ld [wCurrentMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, [wcd37]
 	dec a
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 	ld a, [wcd37]
 	dec a
-	ld bc, $2
-	ld hl, $3
+	ld bc, 2
+	ld hl, 3
 	call AddNTimes
 	dec l
 	ld b, l
@@ -23,12 +23,12 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	coord hl, 0, 0
 	call TextBoxBorder
 	call UpdateSprites
-	call Func_610c2
+	call PrintFossilsInBag
 	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_610a7
+	bit 1, a ; pressed B?
+	jr nz, .cancelledGivingFossil
 	ld hl, wcc5b
 	ld a, [wCurrentMenuItem]
 	ld d, $0
@@ -57,17 +57,17 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_610a7
+	jr nz, .cancelledGivingFossil
 	ld hl, LabFossil_610b3
 	call PrintText
 	ld a, [W_FOSSILITEM]
-	ld [$ffdb], a
+	ld [hItemToRemoveID], a
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
 	SetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL
 	ret
-.asm_610a7
+.cancelledGivingFossil
 	ld hl, LabFossil_610bd
 	call PrintText
 	ret
@@ -88,11 +88,12 @@ LabFossil_610bd: ; 610bd (18:50bd)
 	TX_FAR _Lab4Text_610bd
 	db "@"
 
-Func_610c2: ; 610c2 (18:50c2)
+PrintFossilsInBag: ; 610c2 (18:50c2)
+; Prints each fossil in the player's bag on a separate line in the menu.
 	ld hl, wcc5b
 	xor a
-	ld [$ffdb], a
-.asm_610c8
+	ld [hFossilCounter], a
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -100,15 +101,15 @@ Func_610c2: ; 610c2 (18:50c2)
 	ld [wd11e], a
 	call GetItemName
 	coord hl, 2, 2
-	ld a, [$ffdb]
+	ld a, [hFossilCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wcd6d
 	call PlaceString
-	ld hl, $ffdb
+	ld hl, hFossilCounter
 	inc [hl]
 	pop hl
-	jr .asm_610c8
+	jr .loop
 
 ; loads the names of the fossil item and the resulting mon
 LoadFossilItemAndMonName: ; 610eb (18:50eb)

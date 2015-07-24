@@ -114,13 +114,13 @@ AccessedMyPCText: ; 17f32 (5:7f32)
 	TX_FAR _AccessedMyPCText
 	db "@"
 
-; removes one of the specified item ID [$FFdb] from bag (if existent)
+; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID: ; 17f37 (5:7f37)
 	ld hl, wBagItems
-	ld a, [$ffdb]
+	ld a, [hItemToRemoveID]
 	ld b, a
 	xor a
-	ld [$ffdc], a
+	ld [hItemToRemoveIndex], a
 .asm_17f40
 	ld a, [hli]
 	cp $ff
@@ -128,14 +128,14 @@ RemoveItemByID: ; 17f37 (5:7f37)
 	cp b
 	jr z, .asm_17f4f
 	inc hl
-	ld a, [$ffdc]
+	ld a, [hItemToRemoveIndex]
 	inc a
-	ld [$ffdc], a
+	ld [hItemToRemoveIndex], a
 	jr .asm_17f40
 .asm_17f4f
 	ld a, $1
 	ld [wItemQuantity], a
-	ld a, [$ffdc]
+	ld a, [hItemToRemoveIndex]
 	ld [wWhichPokemon], a
 	ld hl, wNumBagItems
 	jp RemoveItemFromInventory

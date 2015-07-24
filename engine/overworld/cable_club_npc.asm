@@ -8,7 +8,7 @@ CableClubNPC: ; 71c5 (1:71c5)
 	call DelayFrames
 	ld hl, CableClubNPCMakingPreparationsText
 	call PrintText
-	jp Func_7298
+	jp .didNotConnect
 .receivedPokedex
 	ld a, $1
 	ld [wMenuJoypadPollCount], a
@@ -71,31 +71,29 @@ CableClubNPC: ; 71c5 (1:71c5)
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a
-	jr nz, Func_72a8
+	jr nz, .connected
 	ld a, [hl]
 	inc a
-	jr nz, Func_72a8
-	ld b, $a
-.asm_7273
+	jr nz, .connected
+	ld b, 10
+.syncLoop
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
-	jr nz, .asm_7273
+	jr nz, .syncLoop
 	call CloseLinkConnection
 	ld hl, CableClubNPCLinkClosedBecauseOfInactivityText
 	call PrintText
-	jr Func_7298
+	jr .didNotConnect
 .failedToEstablishConnection
 	ld hl, CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	call PrintText
-	jr Func_7298
+	jr .didNotConnect
 .choseNo
 	call CloseLinkConnection
 	ld hl, CableClubNPCPleaseComeAgainText
 	call PrintText
-	; fall through
-
-Func_7298: ; 7298 (1:7298)
+.didNotConnect
 	xor a
 	ld hl, wUnknownSerialCounter
 	ld [hli], a
@@ -105,8 +103,7 @@ Func_7298: ; 7298 (1:7298)
 	xor a
 	ld [wMenuJoypadPollCount], a
 	ret
-
-Func_72a8: ; 72a8 (1:72a8)
+.connected
 	xor a
 	ld [hld], a
 	ld [hl], a

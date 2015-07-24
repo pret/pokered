@@ -261,6 +261,11 @@ hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
+hFossilCounter EQU $FFDB
+
+hItemToRemoveID    EQU $FFDB
+hItemToRemoveIndex EQU $FFDC
+
 hVendingMachineItem  EQU $FFDB
 hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
 
