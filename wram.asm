@@ -479,8 +479,11 @@ wAICount:: ; ccdf
 wEnemyMoveListIndex:: ; cce2
 	ds 1
 
-wcce3:: ds 1 ; used in battle-related text functions
-wcce4:: ds 1 ; used in battle-related text functions
+wLastSwitchInEnemyMonHP:: ; cce3
+; The enemy mon's HP when it was switched in or when the current player mon
+; was switched in, which was more recent.
+; It's used to determine the message to print when switching out the player mon.
+	ds 2
 
 wTotalPayDayMoney:: ; cce5
 ; total amount of money made using Pay Day during the current battle

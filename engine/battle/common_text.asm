@@ -104,10 +104,10 @@ PrintSendOutMonMessage: ; 58e59 (16:4e59)
 	ld [H_MULTIPLICAND], a
 	ld hl, wEnemyMonHP
 	ld a, [hli]
-	ld [wcce3], a
+	ld [wLastSwitchInEnemyMonHP], a
 	ld [H_MULTIPLICAND + 1], a
 	ld a, [hl]
-	ld [wcce4], a
+	ld [wLastSwitchInEnemyMonHP + 1], a
 	ld [H_MULTIPLICAND + 2], a
 	ld a, 25
 	ld [H_MULTIPLIER], a
@@ -120,7 +120,7 @@ PrintSendOutMonMessage: ; 58e59 (16:4e59)
 	srl a
 	rr b
 	ld a, b
-	ld b, $4
+	ld b, 4
 	ld [H_DIVISOR], a ; enemy mon max HP divided by 4
 	call Divide
 	ld a, [H_QUOTIENT + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
@@ -174,19 +174,19 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	push de
 	push bc
 	ld hl, wEnemyMonHP + 1
-	ld de, wcce4
+	ld de, wLastSwitchInEnemyMonHP + 1
 	ld b, [hl]
 	dec hl
 	ld a, [de]
 	sub b
-	ld [$ff98], a
+	ld [H_MULTIPLICAND + 2], a
 	dec de
 	ld b, [hl]
 	ld a, [de]
 	sbc b
-	ld [$ff97], a
-	ld a, $19
-	ld [H_POWEROFTEN], a
+	ld [H_MULTIPLICAND + 1], a
+	ld a, 25
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -196,22 +196,27 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	srl a
 	rr b
 	ld a, b
-	ld b, $4
-	ld [H_POWEROFTEN], a
+	ld b, 4
+	ld [H_DIVISOR], a
 	call Divide
 	pop bc
 	pop de
-	ld a, [$ff98]
-	ld hl, EnoughText
+	ld a, [H_QUOTIENT + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
+; Assuming that the enemy mon hasn't gained HP since the last switch in,
+; a approximates the percentage that the enemy mon's total HP has decreased
+; since the last switch in.
+; If the enemy mon has gained HP, then a is garbage due to wrap-around and
+; can fall in any of the ranges below.
+	ld hl, EnoughText ; HP stayed the same
 	and a
 	ret z
-	ld hl, ComeBackText
-	cp $1e
+	ld hl, ComeBackText ; HP went down 1% - 29%
+	cp 30
 	ret c
-	ld hl, OKExclamationText
-	cp $46
+	ld hl, OKExclamationText ; HP went down 30% - 69%
+	cp 70
 	ret c
-	ld hl, GoodText
+	ld hl, GoodText ; HP went down 70% or more
 	ret
 
 EnoughText: ; 58f25 (16:4f25)

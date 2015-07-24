@@ -73,19 +73,19 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld a, [wc02a]
 	cp $b9
 	jr nz, .asm_1e9c2
-	ld a, $d3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld a, TEXT_SAFARI_GAME_OVER
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_ENTRANCE
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	SetEvent EVENT_SAFARI_GAME_OVER
-	ld a, $1
+	ld a, 1
 	ld [wSafariZoneGameOver], a
 	ret
 

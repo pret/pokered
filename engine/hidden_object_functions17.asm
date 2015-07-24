@@ -71,7 +71,7 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	ld de, vChars1 + $310
 	call LoadMonFrontSprite
 	ld a, $80
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 10, 11
 	predef AnimateSendingOutMon
 	call WaitForTextScrollButtonPress

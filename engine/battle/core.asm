@@ -175,7 +175,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $31
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 1, 5
 	predef CopyUncompressedPicToTilemap
 	xor a
@@ -1429,9 +1429,9 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call LoadEnemyMonData
 	ld hl,wEnemyMonHP
 	ld a,[hli]
-	ld [wcce3],a
+	ld [wLastSwitchInEnemyMonHP],a
 	ld a,[hl]
-	ld [wcce4],a
+	ld [wLastSwitchInEnemyMonHP + 1],a
 	ld a,1
 	ld [wCurrentMenuItem],a
 	ld a,[wd11d]
@@ -1497,8 +1497,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call GetMonHeader
 	ld de,vFrontPic
 	call LoadMonFrontSprite
-	ld a,$CF
-	ld [$FFE1],a
+	ld a,-$31
+	ld [hStartTileID],a
 	coord hl, 15, 6
 	predef AnimateSendingOutMon
 	ld a,[wEnemyMonSpecies2]
@@ -1802,7 +1802,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	call DrawPlayerHUDAndHPBar
 	predef LoadMonBackPic
 	xor a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
@@ -1839,23 +1839,23 @@ SendOutMon: ; 3cc91 (f:4c91)
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	coord hl, 1, 5
-	ld bc, $707
+	lb bc, 7, 7
 	call ClearScreenArea
 	coord hl, 3, 7
-	ld bc, $505
+	lb bc, 5, 5
 	xor a
 	ld [wDownscaledMonSize], a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
 	call .clearScreenArea
 	coord hl, 4, 9
-	ld bc, $303
-	ld a, $1
+	lb bc, 3, 3
+	ld a, 1
 	ld [wDownscaledMonSize], a
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	call Delay3
 	call .clearScreenArea
@@ -1863,7 +1863,7 @@ AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	Coorda 5, 11
 .clearScreenArea
 	coord hl, 1, 5
-	ld bc, $707
+	lb bc, 7, 7
 	jp ClearScreenArea
 
 ; reads player's current mon's HP into wBattleMonHP
@@ -6449,7 +6449,7 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	xor a
 	ld [$0], a
 	ld a, $31
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 1, 5
 	predef_jump CopyUncompressedPicToTilemap
 
@@ -6862,7 +6862,7 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	call _LoadTrainerPic
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	dec a
 	ld [wAICount], a
 	coord hl, 12, 0
@@ -6918,7 +6918,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 .spriteLoaded
 	xor a
 	ld [W_TRAINERCLASS], a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 12, 0
 	predef CopyUncompressedPicToTilemap
 
@@ -6995,38 +6995,38 @@ AnimateSendingOutMon: ; 3f073 (f:7073)
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [$ffe1]
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld a, [hStartTileID]
+	ld [hBaseTileID], a
 	ld b, $4c
 	ld a, [W_ISINBATTLE]
 	and a
-	jr z, .asm_3f0bc
+	jr z, .notInBattle
 	add b
 	ld [hl], a
 	call Delay3
-	ld bc, -41
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
 	add hl, bc
-	ld a, $1
+	ld a, 1
 	ld [wDownscaledMonSize], a
-	ld bc, $303
+	lb bc, 3, 3
 	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
-	ld bc, -41
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
 	add hl, bc
 	xor a
 	ld [wDownscaledMonSize], a
-	ld bc, $505
+	lb bc, 5, 5
 	predef CopyDownscaledMonTiles
 	ld c, 5
 	call DelayFrames
-	ld bc, -41
-	jr .asm_3f0bf
-.asm_3f0bc
-	ld bc, -123
-.asm_3f0bf
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
+	jr .next
+.notInBattle
+	ld bc, -(SCREEN_WIDTH * 6 + 3)
+.next
 	add hl, bc
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hBaseTileID]
 	add $31
 	jr CopyUncompressedPicToHL
 
@@ -7035,52 +7035,52 @@ CopyUncompressedPicToTilemap: ; 3f0c6 (f:70c6)
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [$ffe1]
+	ld a, [hStartTileID]
 CopyUncompressedPicToHL: ; 3f0d0 (f:70d0)
-	ld bc, $707
+	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
 	push af
 	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr nz, .asm_3f0ed
+	jr nz, .flipped
 	pop af
-.asm_3f0de
+.loop
 	push bc
 	push hl
-.asm_3f0e0
+.innerLoop
 	ld [hl], a
 	add hl, de
 	inc a
 	dec c
-	jr nz, .asm_3f0e0
+	jr nz, .innerLoop
 	pop hl
 	inc hl
 	pop bc
 	dec b
-	jr nz, .asm_3f0de
+	jr nz, .loop
 	ret
 
-.asm_3f0ed
+.flipped
 	push bc
-	ld b, $0
+	ld b, 0
 	dec c
 	add hl, bc
 	pop bc
 	pop af
-.asm_3f0f4
+.flippedLoop
 	push bc
 	push hl
-.asm_3f0f6
+.flippedInnerLoop
 	ld [hl], a
 	add hl, de
 	inc a
 	dec c
-	jr nz, .asm_3f0f6
+	jr nz, .flippedInnerLoop
 	pop hl
 	dec hl
 	pop bc
 	dec b
-	jr nz, .asm_3f0f4
+	jr nz, .flippedLoop
 	ret
 
 LoadMonBackPic: ; 3f103 (f:7103)

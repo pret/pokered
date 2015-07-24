@@ -301,7 +301,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	xor a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [W_SPRITEFLIPPED], a
@@ -1071,13 +1071,13 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
-	cp a,$d3
+	cp a,TEXT_SAFARI_GAME_OVER
 	jp z,DisplaySafariGameOverText
-	cp a,$d0
+	cp a,TEXT_MON_FAINTED
 	jp z,DisplayPokemonFaintedText
-	cp a,$d1
+	cp a,TEXT_BLACKED_OUT
 	jp z,DisplayPlayerBlackedOutText
-	cp a,$d2
+	cp a,TEXT_REPEL_WORE_OFF
 	jp z,DisplayRepelWoreOffText
 	ld a,[W_NUMSPRITES]
 	ld e,a
@@ -2825,7 +2825,7 @@ DecodeRLEList:: ; 350c (0:350c)
 	ld a, [de]
 	cp $ff
 	jr z, .endOfList
-	ld [H_DOWNARROWBLINKCNT1], a ; store byte value to be written
+	ld [hRLEByteValue], a ; store byte value to be written
 	inc de
 	ld a, [de]
 	ld b, $0
@@ -2833,7 +2833,7 @@ DecodeRLEList:: ; 350c (0:350c)
 	ld a, [wRLEByteCount]
 	add c
 	ld [wRLEByteCount], a     ; update total number of written bytes
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hRLEByteValue]
 	call FillMemory              ; write a c-times to output
 	inc de
 	jr .listLoop
@@ -3906,7 +3906,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	push af ; save existing values on stack
 	xor a
 	ld [H_DOWNARROWBLINKCNT1],a ; blinking down arrow timing value 1
-	ld a,$06
+	ld a,6
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
@@ -4631,7 +4631,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ret
 
 PrintPredefTextID:: ; 3ef5 (0:3ef5)
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag

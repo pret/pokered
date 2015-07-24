@@ -18,11 +18,11 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr z, .CantEncounter
 	ld a, [wRepelRemainingSteps]
 	and a
-	jr z, .asm_1389e
+	jr z, .next
 	dec a
 	jr z, .lastRepelStep
 	ld [wRepelRemainingSteps], a
-.asm_1389e
+.next
 ; determine if wild pokemon can appear in the half-block we're standing in
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	coord hl, 9, 9
@@ -71,7 +71,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
 .gotWildEncounterType
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hli]
 	ld [W_CURENEMYLVL], a
@@ -89,8 +89,8 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr .willEncounter
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
-	ld a, 210
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld a, TEXT_REPEL_WORE_OFF
+	ld [hSpriteIndexOrTextID], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
 .CantEncounter2
