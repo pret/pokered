@@ -38,7 +38,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	ret
 
 Mansion2Script_5202f: ; 5202f (14:602f)
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
 
 Mansion2Script_Switches: ; 52037 (14:6037)

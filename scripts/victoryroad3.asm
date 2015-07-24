@@ -16,7 +16,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
 	ld a, $1d
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $503
 	predef_jump ReplaceTileBlock
 

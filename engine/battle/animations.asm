@@ -223,7 +223,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	rla
 	sla c
 	rla
-	ld [wd09f],a ; tile select
+	ld [wWhichBattleAnimTileset],a
 	ld a,[hli] ; sound
 	ld [wAnimSoundID],a ; store sound
 	ld a,[hli] ; subanimation ID
@@ -243,7 +243,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	push hl
 	ld a,[rOBP0]
 	push af
-	ld a,[wcc79]
+	ld a,[wAnimPalette]
 	ld [rOBP0],a
 	call LoadAnimationTileset
 	call LoadSubanimation
@@ -328,7 +328,7 @@ GetSubanimationTransform2: ; 781ca (1e:41ca)
 
 ; loads tile patterns for battle animations
 LoadAnimationTileset: ; 781d2 (1e:41d2)
-	ld a,[wd09f] ; tileset select
+	ld a,[wWhichBattleAnimTileset]
 	add a
 	add a
 	ld hl,AnimationTilesetPointers
@@ -412,7 +412,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 	call WaitForSoundToFinish
 	xor a
 	ld [W_SUBANIMSUBENTRYADDR],a
-	ld [wd09b],a
+	ld [wUnusedD09B],a
 	ld [W_SUBANIMTRANSFORM],a
 	dec a
 	ld [wAnimSoundID],a
@@ -472,16 +472,16 @@ AnimationTypePointerTable: ; 78dcf (1e:4dcf)
 
 ShakeScreenVertically: ; 78ddb (1e:4ddb)
 	call PlayApplyingAttackSound
-	ld b, $8
+	ld b, 8
 	jp AnimationShakeScreenVertically
 
 ShakeScreenHorizontallyHeavy: ; 78de3 (1e:4de3)
 	call PlayApplyingAttackSound
-	ld b, $8
+	ld b, 8
 	jp AnimationShakeScreenHorizontallyFast
 
 ShakeScreenHorizontallySlow: ; 78deb (1e:4deb)
-	ld bc, $602
+	lb bc, 6, 2
 	jr AnimationShakeScreenHorizontallySlow
 
 BlinkEnemyMonSprite: ; 78df0 (1e:4df0)
@@ -490,32 +490,32 @@ BlinkEnemyMonSprite: ; 78df0 (1e:4df0)
 
 ShakeScreenHorizontallyLight: ; 78df6 (1e:4df6)
 	call PlayApplyingAttackSound
-	ld b, $2
+	ld b, 2
 	jp AnimationShakeScreenHorizontallyFast
 
 ShakeScreenHorizontallySlow2: ; 78dfe (1e:4dfe)
-	ld bc, $302
+	lb bc, 3, 2
 
 AnimationShakeScreenHorizontallySlow: ; 78e01 (1e:4e01)
 	push bc
 	push bc
-.asm_78e03
+.loop1
 	ld a, [rWX]
 	inc a
 	ld [rWX], a
 	ld c, 2
 	call DelayFrames
 	dec b
-	jr nz, .asm_78e03
+	jr nz, .loop1
 	pop bc
-.asm_78e11
+.loop2
 	ld a, [rWX]
 	dec a
 	ld [rWX], a
 	ld c, 2
 	call DelayFrames
 	dec b
-	jr nz, .asm_78e11
+	jr nz, .loop2
 	pop bc
 	dec c
 	jr nz, AnimationShakeScreenHorizontallySlow
@@ -525,25 +525,25 @@ SetAnimationPalette: ; 78e23 (1e:4e23)
 	ld a, [wOnSGB]
 	and a
 	ld a, $e4
-	jr z, .asm_78e47
+	jr z, .notSGB
 	ld a, $f0
-	ld [wcc79], a
+	ld [wAnimPalette], a
 	ld b, $e4
 	ld a, [W_ANIMATIONID]
 	cp TRADE_BALL_DROP_ANIM
-	jr c, .asm_78e3f
+	jr c, .next
 	cp TRADE_BALL_POOF_ANIM + 1
-	jr nc, .asm_78e3f
+	jr nc, .next
 	ld b, $f0
-.asm_78e3f
+.next
 	ld a, b
 	ld [rOBP0], a
 	ld a, $6c
 	ld [rOBP1], a
 	ret
-.asm_78e47
+.notSGB
 	ld a, $e4
-	ld [wcc79], a
+	ld [wAnimPalette], a
 	ld [rOBP0], a
 	ld a, $6c
 	ld [rOBP1], a
@@ -761,11 +761,11 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 .moveGhostMarowakLeft
 	coord hl, 17, 0
 	ld de,20
-	ld bc,$0707 ; 7 rows and 7 columns
+	lb bc, 7, 7
 .loop
 	push hl
 	push bc
-	call Func_79862 ; move row of tiles left
+	call AnimCopyRowRight ; move row of tiles left
 	pop bc
 	pop hl
 	add hl,de
@@ -891,8 +891,8 @@ TradeHidePokemon: ; 79041 (1e:5041)
 	ld a,[W_SUBANIMCOUNTER]
 	cp a,6
 	ret nz
-	ld a,$2F
-	jp Func_7980c ; make pokemon disappear
+	ld a,2 * SCREEN_WIDTH + 7
+	jp ClearMonPicFromTileMap ; make pokemon disappear
 
 ; function to make a shaking pokeball jump up at the end of the animation
 TradeShakePokeball: ; 7904c (1e:504c)
@@ -1010,8 +1010,8 @@ SpecialEffectPointers: ; 790da (1e:50da)
 	dw AnimationSlideMonDown
 	db SE_FLASH_MON_PIC ; $F5
 	dw AnimationFlashMonPic
-	db SE_SLIDE_MON_OUT ; $F4
-	dw AnimationSlideMonOut
+	db SE_SLIDE_MON_OFF ; $F4
+	dw AnimationSlideMonOff
 	db SE_BLINK_MON ; $F3
 	dw AnimationBlinkMon
 	db SE_MOVE_MON_HORIZONTALLY ; $F2
@@ -1040,8 +1040,8 @@ SpecialEffectPointers: ; 790da (1e:50da)
 	dw AnimationLeavesFalling
 	db SE_PETALS_FALLING ; $E6
 	dw AnimationPetalsFalling
-	db SE_SLIDE_MON_HALF_LEFT ; $E5
-	dw AnimationSlideMonHalfLeft
+	db SE_SLIDE_MON_HALF_OFF ; $E5
+	dw AnimationSlideMonHalfOff
 	db SE_SHAKE_ENEMY_HUD ; $E4
 	dw AnimationShakeEnemyHUD
 	db SE_SHAKE_ENEMY_HUD_2 ; unused--same pointer as SE_SHAKE_ENEMY_HUD ($E4)
@@ -1060,8 +1060,8 @@ SpecialEffectPointers: ; 790da (1e:50da)
 	dw AnimationShowMonPic
 	db SE_SHOW_ENEMY_MON_PIC ; $DC
 	dw AnimationShowEnemyMonPic
-	db SE_SLIDE_ENEMY_MON_OUT ; $DB
-	dw AnimationSlideEnemyMonOut
+	db SE_SLIDE_ENEMY_MON_OFF ; $DB
+	dw AnimationSlideEnemyMonOff
 	db SE_SHAKE_BACK_AND_FORTH ; $DA
 	dw AnimationShakeBackAndForth
 	db SE_SUBSTITUTE_MON ; $D9
@@ -1092,7 +1092,7 @@ CallWithTurnFlipped: ; 79155 (1e:5155)
 ; flashes the screen for an extended period (48 frames)
 AnimationFlashScreenLong: ; 79165 (1e:5165)
 	ld a,3 ; cycle through the palettes 3 times
-	ld [wd08a],a
+	ld [wFlashScreenLongCounter],a
 	ld a,[wOnSGB] ; running on SGB?
 	and a
 	ld hl,FlashScreenLongMonochrome
@@ -1108,9 +1108,9 @@ AnimationFlashScreenLong: ; 79165 (1e:5165)
 	call FlashScreenLongDelay
 	jr .innerLoop
 .endOfPalettes
-	ld a,[wd08a]
+	ld a,[wFlashScreenLongCounter]
 	dec a
-	ld [wd08a],a
+	ld [wFlashScreenLongCounter],a
 	pop hl
 	jr nz,.loop
 	ret
@@ -1150,8 +1150,8 @@ FlashScreenLongSGB: ; 7919b (1e:519b)
 ; causes a delay of 2 frames for the first cycle
 ; causes a delay of 1 frame for the second and third cycles
 FlashScreenLongDelay: ; 791a8 (1e:51a8)
-	ld a,[wd08a]
-	cp a,4 ; never true since [wd08a] starts at 3
+	ld a,[wFlashScreenLongCounter]
+	cp a,4 ; never true since [wFlashScreenLongCounter] starts at 3
 	ld c,4
 	jr z,.delayFrames
 	cp a,3
@@ -1179,46 +1179,46 @@ AnimationFlashScreen: ; 791be (1e:51be)
 
 AnimationDarkScreenPalette: ; 791d6 (1e:51d6)
 ; Changes the screen's palette to a dark palette.
-	ld bc, $6f6f
+	lb bc, $6f, $6f
 	jr SetAnimationBGPalette
 
 AnimationDarkenMonPalette: ; 791db (1e:51db)
 ; Darkens the mon sprite's palette.
-	ld bc, $f9f4
+	lb bc, $f9, $f4
 	jr SetAnimationBGPalette
 
 AnimationUnusedPalette1: ; 791e0 (1e:51e0)
-	ld bc, $fef8
+	lb bc, $fe, $f8
 	jr SetAnimationBGPalette
 
 AnimationUnusedPalette2: ; 791e5 (1e:51e5)
-	ld bc, $ffff
+	lb bc, $ff, $ff
 	jr SetAnimationBGPalette
 
 AnimationResetScreenPalette: ; 791ea (1e:51ea)
 ; Restores the screen's palette to the normal palette.
-	ld bc, $e4e4
+	lb bc, $e4, $e4
 	jr SetAnimationBGPalette
 
 AnimationUnusedPalette3: ; 791ef (1e:51ef)
-	ld bc, $0000
+	lb bc, $00, $00
 	jr SetAnimationBGPalette
 
 AnimationLightScreenPalette: ; 791f4 (1e:51f4)
 ; Changes the screen to use a palette with light colors.
-	ld bc, $9090
+	lb bc, $90, $90
 	jr SetAnimationBGPalette
 
 AnimationUnusedPalette4: ; 791f9 (1e:51f9)
-	ld bc, $4040
+	lb bc, $40, $40
 
 SetAnimationBGPalette: ; 791fc (1e:51fc)
 	ld a, [wOnSGB]
 	and a
 	ld a, b
-	jr z, .asm_79204
+	jr z, .next
 	ld a, c
-.asm_79204
+.next
 	ld [rBGP], a
 	ret
 
@@ -1239,75 +1239,75 @@ AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 ; scroll. It's hard to describe, but it's the main animation
 ; in Surf/Mist/Toxic.
 	xor a
-	ld [wd09f], a
+	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
-	ld d, $20
-	ld a, $f0
+	ld d, 32
+	ld a, -16
 	ld [W_BASECOORDX], a
 	ld a, $71
-	ld [wd09f], a
-.asm_79228
-	ld a, $10
+	ld [wDropletTile], a
+.loop
+	ld a, 16
 	ld [W_BASECOORDY], a
-	ld a, $0
-	ld [wd08a], a
+	ld a, 0
+	ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
-	ld a, $18
+	ld a, 24
 	ld [W_BASECOORDY], a
-	ld a, $20
-	ld [wd08a], a
+	ld a, 32
+	ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	dec d
-	jr nz, .asm_79228
+	jr nz, .loop
 	ret
 
 _AnimationWaterDroplets: ; 79246 (1e:5246)
 	ld hl, wOAMBuffer
-.asm_79249
+.loop
 	ld a, [W_BASECOORDY]
-	ld [hli], a
+	ld [hli], a ; Y
 	ld a, [W_BASECOORDX]
-	add $1b
+	add 27
 	ld [W_BASECOORDX], a
-	ld [hli], a
-	ld a, [wd09f]
-	ld [hli], a
+	ld [hli], a ; X
+	ld a, [wDropletTile]
+	ld [hli], a ; tile
 	xor a
-	ld [hli], a
+	ld [hli], a ; attribute
 	ld a, [W_BASECOORDX]
-	cp $90
-	jr c, .asm_79249
-	sub $a8
+	cp 144
+	jr c, .loop
+	sub 168
 	ld [W_BASECOORDX], a
 	ld a, [W_BASECOORDY]
-	add $10
+	add 16
 	ld [W_BASECOORDY], a
-	cp $70
-	jr c, .asm_79249
+	cp 112
+	jr c, .loop
 	call AnimationCleanOAM
 	jp DelayFrame
 
 AnimationSlideMonUp: ; 7927a (1e:527a)
 ; Slides the mon's sprite upwards.
-	ld c, $7
+	ld c, 7
 	ld a, [H_WHOSETURN]
 	and a
 	coord hl, 1, 6
 	coord de, 1, 5
 	ld a, $30
-	jr z, .asm_79291
+	jr z, .next
 	coord hl, 12, 1
 	coord de, 12, 0
 	ld a, $ff
-.asm_79291
-	ld [wd09f], a
+.next
+	ld [wSlideMonUpBottomRowLeftTile], a
 	jp _AnimationSlideMonUp
 
 AnimationSlideMonDown: ; 79297 (1e:5297)
 ; Slides the mon's sprite down out of the screen.
 	xor a
 	call GetTileIDList
-.asm_7929b
+.loop
 	call GetMonSpriteTileMapPointerFromRowCount
 	push bc
 	push de
@@ -1317,54 +1317,63 @@ AnimationSlideMonDown: ; 79297 (1e:5297)
 	pop de
 	pop bc
 	dec b
-	jr nz, .asm_7929b
+	jr nz, .loop
 	ret
 
-AnimationSlideMonOut: ; 792af (1e:52af)
-; Slides the mon's sprite out of the screen horizontally.
-	ld e, $8
-	ld a, $3
-	ld [W_SUBANIMTRANSFORM], a
-	jp AnimationSlideMonLeft
+AnimationSlideMonOff: ; 792af (1e:52af)
+; Slides the mon's sprite off the screen horizontally.
+	ld e, 8
+	ld a, 3
+	ld [wSlideMonDelay], a
+	jp _AnimationSlideMonOff
 
-AnimationSlideEnemyMonOut: ; 792b9 (1e:52b9)
-; Slides the enemy mon out of the screen horizontally.
-	ld hl, AnimationSlideMonOut
+AnimationSlideEnemyMonOff: ; 792b9 (1e:52b9)
+; Slides the enemy mon off the screen horizontally.
+	ld hl, AnimationSlideMonOff
 	jp CallWithTurnFlipped
 
 _AnimationSlideMonUp: ; 792bf (1e:52bf)
 	push de
 	push hl
 	push bc
-	ld b, $6
-.asm_792c4
+
+; In each iteration, slide up all rows but the top one (which is overwritten).
+	ld b, 6
+.slideLoop
 	push bc
 	push de
 	push hl
-	ld bc, $0007
+	ld bc, 7
 	call CopyData
+; Note that de and hl are popped in the same order they are pushed, swapping
+; their values. When CopyData is called, hl points to a tile 1 row below
+; the one de points to. To maintain this relationship, after swapping, we add 2
+; rows to hl so that it is 1 row below again.
 	pop de
 	pop hl
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_792c4
+	jr nz, .slideLoop
+
+; Fill in the bottom row of the mon pic with the next row's tile IDs.
 	ld a, [H_WHOSETURN]
 	and a
 	coord hl, 1, 11
-	jr z, .asm_792e2
+	jr z, .next
 	coord hl, 12, 6
-.asm_792e2
-	ld a, [wd09f]
+.next
+	ld a, [wSlideMonUpBottomRowLeftTile]
 	inc a
-	ld [wd09f], a
-	ld c, $7
-.asm_792eb
+	ld [wSlideMonUpBottomRowLeftTile], a
+	ld c, 7
+.fillBottomRowLoop
 	ld [hli], a
-	add $7
+	add 7
 	dec c
-	jr nz, .asm_792eb
+	jr nz, .fillBottomRowLoop
+
 	ld c, 2
 	call DelayFrames
 	pop bc
@@ -1374,35 +1383,41 @@ _AnimationSlideMonUp: ; 792bf (1e:52bf)
 	jr nz, _AnimationSlideMonUp
 	ret
 
-_AnimationShakeEnemyHUD: ; 792fd (1e:52fd)
+ShakeEnemyHUD_WritePlayerMonPicOAM: ; 792fd (1e:52fd)
+; Writes the OAM entries for a copy of the player mon's pic in OAM.
+; The top 5 rows are reproduced in OAM, although only 2 are actually needed.
 	ld a, $10
 	ld [W_BASECOORDX], a
 	ld a, $30
 	ld [W_BASECOORDY], a
 	ld hl, wOAMBuffer
-	ld d, $0
-	ld c, $7
-.asm_7930e
+	ld d, 0
+	ld c, 7
+.loop
 	ld a, [W_BASECOORDY]
 	ld e, a
-	ld b, $5
-.asm_79314
-	call Animations_79329
+	ld b, 5
+.innerLoop
+	call BattleAnimWriteOAMEntry
 	inc d
 	dec b
-	jr nz, .asm_79314
+	jr nz, .innerLoop
 	dec c
 	ret z
 	inc d
 	inc d
 	ld a, [W_BASECOORDX]
-	add $8
+	add 8
 	ld [W_BASECOORDX], a
-	jr .asm_7930e
+	jr .loop
 
-Animations_79329: ; 79329 (1e:5329)
+BattleAnimWriteOAMEntry: ; 79329 (1e:5329)
+; Y coordinate = e (increased by 8 each call, before the write to OAM)
+; X coordinate = [W_BASECOORDX]
+; tile = d
+; attributes = 0
 	ld a, e
-	add $8
+	add 8
 	ld e, a
 	ld [hli], a
 	ld a, [W_BASECOORDX]
@@ -1418,16 +1433,17 @@ AdjustOAMBlockXPos: ; 79337 (1e:5337)
 	ld h, d
 
 AdjustOAMBlockXPos2: ; 79339 (1e:5339)
-	ld de, $4
+	ld de, 4
 .loop
-	ld a, [wd08a]
+	ld a, [wCoordAdjustmentAmount]
 	ld b, a
 	ld a, [hl]
 	add b
-	cp $a8
+	cp 168
 	jr c, .skipPuttingEntryOffScreen
+; put off-screen if X >= 168
 	dec hl
-	ld a, $a0
+	ld a, 160
 	ld [hli], a
 .skipPuttingEntryOffScreen
 	ld [hl], a
@@ -1441,16 +1457,16 @@ AdjustOAMBlockYPos: ; 79350 (1e:5350)
 	ld h, d
 
 AdjustOAMBlockYPos2: ; 79352 (1e:5352)
-	ld de, $4
+	ld de, 4
 .loop
-	ld a, [wd08a]
+	ld a, [wCoordAdjustmentAmount]
 	ld b, a
 	ld a, [hl]
 	add b
-	cp $70
+	cp 112
 	jr c, .skipSettingPreviousEntrysAttribute
 	dec hl
-	ld a, $a0 ; bug, sets previous OAM entry's attribute
+	ld a, 160 ; bug, sets previous OAM entry's attribute
 	ld [hli], a
 .skipSettingPreviousEntrysAttribute
 	ld [hl], a
@@ -1467,8 +1483,8 @@ AnimationBlinkEnemyMon: ; 79369 (1e:5369)
 AnimationBlinkMon: ; 7936f (1e:536f)
 ; Make the mon's sprite blink on and off for a second or two.
 	push af
-	ld c, $6
-.asm_79372
+	ld c, 6
+.loop
 	push bc
 	call AnimationHideMonPic
 	ld c, 5
@@ -1478,17 +1494,17 @@ AnimationBlinkMon: ; 7936f (1e:536f)
 	call DelayFrames
 	pop bc
 	dec c
-	jr nz, .asm_79372
+	jr nz, .loop
 	pop af
 	ret
 
 AnimationFlashMonPic: ; 79389 (1e:5389)
 ; Flashes the mon's sprite on and off
 	ld a, [wBattleMonSpecies]
-	ld [wHPBarMaxHP + 1], a
+	ld [wChangeMonPicPlayerTurnSpecies], a
 	ld a, [wEnemyMonSpecies]
-	ld [wHPBarMaxHP], a
-	jp Func_79793
+	ld [wChangeMonPicEnemyTurnSpecies], a
+	jp ChangeMonPic
 
 AnimationFlashEnemyMonPic: ; 79398 (1e:5398)
 ; Flashes the enemy mon's sprite on and off
@@ -1515,14 +1531,14 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	and a
 	coord hl, 0, 5
 	coord de, 2, 5
-	jr z, .asm_793c2
+	jr z, .next
 	coord hl, 11, 0
 	coord de, 13, 0
 
-.asm_793c2
+.next
 	xor a
 	ld c, $10
-.asm_793c5
+.loop
 	push af
 	push bc
 	push de
@@ -1537,7 +1553,7 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	call CopyPicTiles
 	call Delay3
 	pop hl
-	ld bc, $0709
+	lb bc, 7, 9
 	call ClearScreenArea
 	pop af
 	call GetTileIDList
@@ -1545,14 +1561,14 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	call CopyPicTiles
 	call Delay3
 	pop hl
-	ld bc, $0709
+	lb bc, 7, 9
 	call ClearScreenArea
 	pop hl
 	pop de
 	pop bc
 	pop af
 	dec c
-	jr nz, .asm_793c5
+	jr nz, .loop
 	ret
 
 AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
@@ -1562,9 +1578,9 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 	ld a, [H_WHOSETURN]
 	and a
 	coord hl, 2, 5
-	jr z, .asm_79407
+	jr z, .next
 	coord hl, 11, 0
-.asm_79407
+.next
 	xor a
 	push hl
 	call GetTileIDList
@@ -1577,70 +1593,70 @@ AnimationResetMonPosition: ; 79415 (1e:5415)
 ; Resets the mon's sprites to be located at the normal coordinates.
 	ld a, [H_WHOSETURN]
 	and a
-	ld a, $66
-	jr z, .asm_7941e
-	ld a, $b
-.asm_7941e
-	call Func_7980c
+	ld a, 5 * SCREEN_WIDTH + 2
+	jr z, .next
+	ld a, 11
+.next
+	call ClearMonPicFromTileMap
 	jp AnimationShowMonPic
 
 AnimationSpiralBallsInward: ; 79424 (1e:5424)
-; Creates an effect that looks like energy balls sprialing into the
+; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_79435
-	ld a, $d8
-	ld [wd08a], a
-	ld a, $50
-	ld [W_SUBANIMTRANSFORM], a
-	jr .asm_7943c
-.asm_79435
+	jr z, .playerTurn
+	ld a, -40
+	ld [wSpiralBallsBaseY], a
+	ld a, 80
+	ld [wSpiralBallsBaseX], a
+	jr .next
+.playerTurn
 	xor a
-	ld [wd08a], a
-	ld [W_SUBANIMTRANSFORM], a
-.asm_7943c
-	ld d, $7a
-	ld c, $3
+	ld [wSpiralBallsBaseY], a
+	ld [wSpiralBallsBaseX], a
+.next
+	ld d, $7a ; ball tile
+	ld c, 3 ; number of balls
 	xor a
-	call Func_797e8
+	call InitMultipleObjectsOAM
 	ld hl, SpiralBallAnimationCoordinates
-.asm_79447
+.loop
 	push hl
-	ld c, $3
+	ld c, 3
 	ld de, wOAMBuffer
-.asm_7944d
+.innerLoop
 	ld a, [hl]
 	cp $ff
-	jr z, .asm_7946f
-	ld a, [wd08a]
+	jr z, .done
+	ld a, [wSpiralBallsBaseY]
 	add [hl]
-	ld [de], a
+	ld [de], a ; Y
 	inc de
 	inc hl
-	ld a, [W_SUBANIMTRANSFORM]
+	ld a, [wSpiralBallsBaseX]
 	add [hl]
-	ld [de], a
+	ld [de], a ; X
 	inc hl
 	inc de
 	inc de
 	inc de
 	dec c
-	jr nz, .asm_7944d
+	jr nz, .innerLoop
 	ld c, 5
 	call DelayFrames
 	pop hl
 	inc hl
 	inc hl
-	jr .asm_79447
-.asm_7946f
+	jr .loop
+.done
 	pop hl
 	call AnimationCleanOAM
 	jp AnimationFlashScreen
 
 SpiralBallAnimationCoordinates: ; 79476 (1e:5476)
 ; y, x pairs
-; This is the sequence of screen coordinates that the spiraling
+; This is the sequence of screen coordinates that the spiralling
 ; balls are positioned at.
 	db $38, $28
 	db $40, $18
@@ -1668,57 +1684,57 @@ SpiralBallAnimationCoordinates: ; 79476 (1e:5476)
 AnimationSquishMonPic: ; 794a1 (1e:54a1)
 ; Squishes the mon's sprite horizontally making it
 ; disappear. Used by Teleport/Sky Attack animations.
-	ld c, $4
-.asm_794a3
+	ld c, 4
+.loop
 	push bc
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_794b1
+	jr z, .playerTurn
 	coord hl, 16, 0
 	coord de, 14, 0
-	jr .asm_794b7
-.asm_794b1
+	jr .next
+.playerTurn
 	coord hl, 5, 5
 	coord de, 3, 5
-.asm_794b7
+.next
 	push de
-	xor a
-	ld [wd09f], a
+	xor a ; left
+	ld [wSquishMonCurrentDirection], a
 	call _AnimationSquishMonPic
 	pop hl
-	ld a, $1
-	ld [wd09f], a
+	ld a, 1 ; right
+	ld [wSquishMonCurrentDirection], a
 	call _AnimationSquishMonPic
 	pop bc
 	dec c
-	jr nz, .asm_794a3
+	jr nz, .loop
 	call AnimationHideMonPic
-	ld c, $2
+	ld c, 2
 	jp DelayFrame
 
 _AnimationSquishMonPic: ; 794d4 (1e:54d4)
-	ld c, $7
-.asm_794d6
+	ld c, 7
+.loop
 	push bc
 	push hl
-	ld c, $3
-	ld a, [wd09f]
-	cp $0
-	jr nz, .asm_794e7
-	call Func_7985b
+	ld c, 3
+	ld a, [wSquishMonCurrentDirection]
+	cp 0
+	jr nz, .right
+	call AnimCopyRowLeft
 	dec hl
-	jr .asm_794eb
-.asm_794e7
-	call Func_79862
+	jr .next
+.right
+	call AnimCopyRowRight
 	inc hl
-.asm_794eb
+.next
 	ld [hl], " "
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
 	pop bc
 	dec c
-	jr nz, .asm_794d6
+	jr nz, .loop
 	jp Delay3
 
 AnimationShootBallsUpward: ; 794f9 (1e:54f9)
@@ -1726,67 +1742,68 @@ AnimationShootBallsUpward: ; 794f9 (1e:54f9)
 ; animations.
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_79503
-	ld bc, $80
-	jr .asm_79506
-.asm_79503
-	ld bc, $3028
-.asm_79506
+	jr z, .playerTurn
+	lb bc, 0, 16 * 8
+	jr .next
+.playerTurn
+	lb bc, 6 * 8, 5 * 8
+.next
 	ld a, b
 	ld [W_BASECOORDY], a
 	ld a, c
 	ld [W_BASECOORDX], a
-	ld bc, $501
+	lb bc, 5, 1
 	call _AnimationShootBallsUpward
 	jp AnimationCleanOAM
 
 _AnimationShootBallsUpward: ; 79517 (1e:5517)
 	push bc
 	xor a
-	ld [wd09f], a
+	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
 	pop bc
-	ld d, $7a
+	ld d, $7a ; ball tile
 	ld hl, wOAMBuffer
 	push bc
 	ld a, [W_BASECOORDY]
 	ld e, a
-.asm_7952a
-	call Animations_79329
+.initOAMLoop
+	call BattleAnimWriteOAMEntry
 	dec b
-	jr nz, .asm_7952a
+	jr nz, .initOAMLoop
 	call DelayFrame
 	pop bc
 	ld a, b
-	ld [wd08a], a
-.asm_79538
+	ld [wNumShootingBalls], a
+.loop
 	push bc
 	ld hl, wOAMBuffer
-.asm_7953c
+.innerLoop
 	ld a, [W_BASECOORDY]
-	add $8
+	add 8
 	ld e, a
 	ld a, [hl]
-	cp e
-	jr z, .asm_7954b
-	add $fc
+	cp e ; has the ball reached the top?
+	jr z, .reachedTop
+	add -4 ; ball hasn't reached the top. move it up 4 pixels
 	ld [hl], a
-	jr .asm_79554
-.asm_7954b
-	ld [hl], $0
-	ld a, [wd08a]
+	jr .next
+.reachedTop
+; remove the ball once it has reached the top
+	ld [hl], 0 ; put it off-screen
+	ld a, [wNumShootingBalls]
 	dec a
-	ld [wd08a], a
-.asm_79554
-	ld de, $4
-	add hl, de
+	ld [wNumShootingBalls], a
+.next
+	ld de, 4
+	add hl, de ; next OAM entry
 	dec b
-	jr nz, .asm_7953c
+	jr nz, .innerLoop
 	call DelayFrames
 	pop bc
-	ld a, [wd08a]
+	ld a, [wNumShootingBalls]
 	and a
-	jr nz, .asm_79538
+	jr nz, .loop
 	ret
 
 AnimationShootManyBallsUpward: ; 79566 (1e:5566)
@@ -1799,15 +1816,15 @@ AnimationShootManyBallsUpward: ; 79566 (1e:5566)
 	ld hl, UpwardBallsAnimXCoordinatesEnemyTurn
 	ld a, $28 ; y coordinate for "energy" ball pillar
 .player
-	ld [wTrainerSpriteOffset], a
+	ld [wSavedY], a
 .loop
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wSavedY]
 	ld [W_BASECOORDY], a
 	ld a, [hli]
 	cp $ff
 	jp z, AnimationCleanOAM
 	ld [W_BASECOORDX], a
-	ld bc, $0401
+	lb bc, 4, 1
 	push hl
 	call _AnimationShootBallsUpward
 	pop hl
@@ -1838,14 +1855,14 @@ AnimationMinimizeMon: ; 7959f (1e:559f)
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, $5
-.asm_795b4
+.loop
 	ld a, [de]
 	ld [hli], a
 	ld [hli], a
 	inc de
 	dec c
-	jr nz, .asm_795b4
-	call Func_79652
+	jr nz, .loop
+	call CopyTempPicToMonPic
 	call Delay3
 	jp AnimationShowMonPic
 
@@ -1856,7 +1873,7 @@ AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
 	ld a, $1
 	ld c, $2
-.asm_795cd
+.loop
 	push bc
 	push af
 	call AnimationHideMonPic
@@ -1871,87 +1888,101 @@ AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 	inc a
 	pop bc
 	dec c
-	jr nz, .asm_795cd
+	jr nz, .loop
 	call AnimationHideMonPic
 	ld hl, wTempPic
 	ld bc, $0310
 	xor a
 	call FillMemory
-	jp Func_79652
+	jp CopyTempPicToMonPic
 
-AnimationSlideMonLeft: ; 795f8 (1e:55f8)
+_AnimationSlideMonOff: ; 795f8 (1e:55f8)
+; Slides the mon's sprite off the screen horizontally by e tiles and waits
+; [wSlideMonDelay] V-blanks each time the pic is slid by one tile.
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_79602
+	jr z, .playerTurn
 	coord hl, 12, 0
-	jr .asm_79605
-.asm_79602
+	jr .next
+.playerTurn
 	coord hl, 0, 5
-.asm_79605
-	ld d, $8
-.asm_79607
+.next
+	ld d, 8 ; d's value is unused
+.slideLoop ; iterates once for each time the pic slides by one tile
 	push hl
-	ld b, $7
-.asm_7960a
-	ld c, $8
-.asm_7960c
+	ld b, 7
+.rowLoop ; iterates once for each row
+	ld c, 8
+.tileLoop ; iterates once for each tile in the row
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_79616
-	call Func_7963c
-	jr .asm_79619
-.asm_79616
-	call Func_79633
-.asm_79619
+	jr z, .playerTurn2
+	call .EnemyNextTile
+	jr .next2
+.playerTurn2
+	call .PlayerNextTile
+.next2
 	ld [hli], a
 	dec c
-	jr nz, .asm_7960c
+	jr nz, .tileLoop
 	push de
-	ld de, $c
+	ld de, SCREEN_WIDTH - 8
 	add hl, de
 	pop de
 	dec b
-	jr nz, .asm_7960a
-	ld a, [W_SUBANIMTRANSFORM]
+	jr nz, .rowLoop
+	ld a, [wSlideMonDelay]
 	ld c, a
 	call DelayFrames
 	pop hl
 	dec d
 	dec e
-	jr nz, .asm_79607
+	jr nz, .slideLoop
 	ret
 
-Func_79633: ; 79633 (1e:5633)
+; Since mon pic tile numbers go from top to bottom, left to right in order,
+; adding the height of the mon pic in tiles to a tile number gives the tile
+; number of the tile one column to the right (and thus subtracting the height
+; gives the reverse). If the next tile would be past the edge of the pic, the 2
+; functions below catch it by checking if the tile number is within the valid
+; range and if not, replacing it with a blank tile.
+
+.PlayerNextTile ; 79633 (1e:5633)
 	ld a, [hl]
-	add $7
+	add 7
+; This is a bug. The lower right corner tile of the mon back pic is blanked
+; while the mon is sliding off the screen. It should compare with the max tile
+; plus one instead.
 	cp $61
 	ret c
-	ld a, $7f
+	ld a, " "
 	ret
 
-Func_7963c: ; 7963c (1e:563c)
+.EnemyNextTile ; 7963c (1e:563c)
 	ld a, [hl]
-	sub $7
+	sub 7
+; This has the same problem as above, but it has no visible effect because
+; the lower right tile is in the first column to slide off the screen.
 	cp $30
 	ret c
-	ld a, $7f
+	ld a, " "
 	ret
 
-AnimationSlideMonHalfLeft: ; 79645 (1e:5645)
-; Slides the mon's sprite halfway out of the screen. It's used in Softboiled.
-	ld e, $4
-	ld a, $4
-	ld [W_SUBANIMTRANSFORM], a
-	call AnimationSlideMonLeft
+AnimationSlideMonHalfOff: ; 79645 (1e:5645)
+; Slides the mon's sprite halfway off the screen. It's used in Softboiled.
+	ld e, 4
+	ld a, 4
+	ld [wSlideMonDelay], a
+	call _AnimationSlideMonOff
 	jp Delay3
 
-Func_79652: ; 79652 (1e:5652)
+CopyTempPicToMonPic: ; 79652 (1e:5652)
 	ld a, [H_WHOSETURN]
 	and a
-	ld hl, vBackPic
-	jr z, .asm_7965d
-	ld hl, vFrontPic
-.asm_7965d
+	ld hl, vBackPic ; player turn
+	jr z, .next
+	ld hl, vFrontPic ; enemy turn
+.next
 	ld de, wTempPic
 	ld bc, 7 * 7
 	jp CopyVideoData
@@ -1959,55 +1990,55 @@ Func_79652: ; 79652 (1e:5652)
 AnimationWavyScreen: ; 79666 (1e:5666)
 ; used in Psywave/Psychic etc.
 	ld hl, vBGMap0
-	call Func_79e0d
+	call BattleAnimCopyTileMapToVRAM
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
-	ld d, $80
-	ld e, $8f
+	ld d, $80 ; terminator
+	ld e, SCREEN_HEIGHT_PIXELS - 1
 	ld c, $ff
 	ld hl, WavyScreenLineOffsets
-.asm_7967f
+.loop
 	push hl
-.asm_79680
-	call Func_796ae
+.innerLoop
+	call WavyScreen_SetSCX
 	ld a, [rLY]
-	cp e
-	jr nz, .asm_79680
+	cp e ; is it the last visible line in the frame?
+	jr nz, .innerLoop ; keep going if not
 	pop hl
 	inc hl
 	ld a, [hl]
-	cp d
-	jr nz, .asm_79691
-	ld hl, WavyScreenLineOffsets
-.asm_79691
+	cp d ; have we reached the end?
+	jr nz, .next
+	ld hl, WavyScreenLineOffsets ; go back to the beginning if so
+.next
 	dec c
-	jr nz, .asm_7967f
+	jr nz, .loop
 	xor a
 	ld [hWY], a
 	call SaveScreenTilesToBuffer2
 	call ClearScreen
-	ld a, $1
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	call LoadScreenTilesFromBuffer2
 	ld hl, vBGMap1
-	call Func_79e0d
+	call BattleAnimCopyTileMapToVRAM
 	ret
 
-Func_796ae: ; 796ae (1e:56ae)
+WavyScreen_SetSCX: ; 796ae (1e:56ae)
 	ld a, [rSTAT]
-	and $3
-	jr nz, Func_796ae
+	and $3 ; is it H-blank?
+	jr nz, WavyScreen_SetSCX ; wait until it's H-blank
 	ld a, [hl]
 	ld [rSCX], a
 	inc hl
 	ld a, [hl]
-	cp d
+	cp d ; have we reached the end?
 	ret nz
-	ld hl, WavyScreenLineOffsets
+	ld hl, WavyScreenLineOffsets ; go back to the beginning if so
 	ret
 
 WavyScreenLineOffsets: ; 796bf (1e:56bf)
@@ -2023,9 +2054,9 @@ AnimationSubstitute: ; 796e0 (1e:56e0)
 	xor a
 	ld bc, $0310
 	call FillMemory
-	ld a, [$fff3]
+	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_79715
+	jr z, .playerTurn
 	ld hl, SlowbroSprite ; facing down sprite
 	ld de, wTempPic + $120
 	call CopySlowbroSpriteData
@@ -2038,8 +2069,8 @@ AnimationSubstitute: ; 796e0 (1e:56e0)
 	ld hl, SlowbroSprite + $30
 	ld de, wTempPic + $120 + $10 + $70
 	call CopySlowbroSpriteData
-	jr .asm_79739
-.asm_79715
+	jr .next
+.playerTurn
 	ld hl, SlowbroSprite + $40 ; facing up sprite
 	ld de, wTempPic + $120 + $70
 	call CopySlowbroSpriteData
@@ -2052,8 +2083,8 @@ AnimationSubstitute: ; 796e0 (1e:56e0)
 	ld hl, SlowbroSprite + $70
 	ld de, wTempPic + $120 + $f0
 	call CopySlowbroSpriteData
-.asm_79739
-	call Func_79652
+.next
+	call CopyTempPicToMonPic
 	jp AnimationShowMonPic
 
 CopySlowbroSpriteData: ; 7973f (1e:573f)
@@ -2077,7 +2108,7 @@ HideSubstituteShowMonAnim: ; 79747 (1e:5747)
 	call AnimationSlideMonDown
 	jr .next2
 .substituteStillUp
-	call AnimationSlideMonOut
+	call AnimationSlideMonOff
 .next2
 	pop hl
 	ld a, [hl]
@@ -2087,35 +2118,35 @@ HideSubstituteShowMonAnim: ; 79747 (1e:5747)
 	jp AnimationShowMonPic
 
 ReshowSubstituteAnim: ; 79771 (1e:5771)
-	call AnimationSlideMonOut
+	call AnimationSlideMonOff
 	call AnimationSubstitute
 	jp AnimationShowMonPic
 
 AnimationBoundUpAndDown: ; 7977a (1e:577a)
 ; Bounces the mon's sprite up and down several times. It is used
 ; by Splash's animation.
-	ld c, $5
-.asm_7977c
+	ld c, 5
+.loop
 	push bc
 	call AnimationSlideMonDown
 	pop bc
 	dec c
-	jr nz, .asm_7977c
+	jr nz, .loop
 	jp AnimationShowMonPic
 
 AnimationTransformMon: ; 79787 (1e:5787)
 ; Redraws this mon's sprite as the back/front sprite of the opposing mon.
 ; Used in Transform.
 	ld a, [wEnemyMonSpecies]
-	ld [wHPBarMaxHP + 1], a
+	ld [wChangeMonPicPlayerTurnSpecies], a
 	ld a, [wBattleMonSpecies]
-	ld [wHPBarMaxHP], a
+	ld [wChangeMonPicEnemyTurnSpecies], a
 
-Func_79793: ; 79793 (1e:5793)
+ChangeMonPic: ; 79793 (1e:5793)
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_797b0
-	ld a, [wHPBarMaxHP]
+	jr z, .playerTurn
+	ld a, [wChangeMonPicEnemyTurnSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
 	xor a
@@ -2123,11 +2154,11 @@ Func_79793: ; 79793 (1e:5793)
 	call GetMonHeader
 	coord hl, 12, 0
 	call LoadFrontSpriteByMonIndex
-	jr .asm_797d3
-.asm_797b0
+	jr .done
+.playerTurn
 	ld a, [wBattleMonSpecies2]
 	push af
-	ld a, [wHPBarMaxHP + 1]
+	ld a, [wChangeMonPicPlayerTurnSpecies]
 	ld [wBattleMonSpecies2], a
 	ld [wd0b5], a
 	call GetMonHeader
@@ -2138,7 +2169,7 @@ Func_79793: ; 79793 (1e:5793)
 	call CopyPicTiles
 	pop af
 	ld [wBattleMonSpecies2], a
-.asm_797d3
+.done
 	ld b, $1
 	jp GoPAL_SET
 
@@ -2152,10 +2183,14 @@ AnimationHideEnemyMonPic: ; 797d8 (1e:57d8)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-Func_797e8: ; 797e8 (1e:57e8)
+InitMultipleObjectsOAM: ; 797e8 (1e:57e8)
+; Writes c OAM entries with tile d.
+; Sets their Y coordinates to sequential multiples of 8, starting from 0.
+; Sets their X coordinates to 0.
+; Loads animation tileset a.
 	push bc
 	push de
-	ld [wd09f], a
+	ld [wWhichBattleAnimTileset], a
 	call LoadAnimationTileset
 	pop de
 	pop bc
@@ -2163,31 +2198,31 @@ Func_797e8: ; 797e8 (1e:57e8)
 	ld e, a
 	ld [W_BASECOORDX], a
 	ld hl, wOAMBuffer
-.asm_797fa
-	call Animations_79329
+.loop
+	call BattleAnimWriteOAMEntry
 	dec c
-	jr nz, .asm_797fa
+	jr nz, .loop
 	ret
 
 AnimationHideMonPic: ; 79801 (1e:5801)
 ; Hides the mon's sprite.
 	ld a, [H_WHOSETURN]
 	and a
-	jr z, .asm_7980a
-	ld a, $c
-	jr Func_7980c
-.asm_7980a
-	ld a, $65
+	jr z, .playerTurn
+	ld a, 12
+	jr ClearMonPicFromTileMap
+.playerTurn
+	ld a, 5 * SCREEN_WIDTH + 1
 
-Func_7980c: ; 7980c (1e:580c)
+ClearMonPicFromTileMap: ; 7980c (1e:580c)
 	push hl
 	push de
 	push bc
 	ld e, a
-	ld d, $0
+	ld d, 0
 	coord hl, 0, 0
 	add hl, de
-	ld bc, $707
+	lb bc, 7, 7
 	call ClearScreenArea
 	pop bc
 	pop de
@@ -2251,20 +2286,22 @@ GetTileIDList: ; 79842 (1e:5842)
 	ld b, a
 	ret
 
-Func_7985b: ; 7985b (1e:585b)
+AnimCopyRowLeft: ; 7985b (1e:585b)
+; copy a row of c tiles 1 tile left
 	ld a, [hld]
 	ld [hli], a
 	inc hl
 	dec c
-	jr nz, Func_7985b
+	jr nz, AnimCopyRowLeft
 	ret
 
-Func_79862: ; 79862 (1e:5862)
+AnimCopyRowRight: ; 79862 (1e:5862)
+; copy a row of c tiles 1 tile right
 	ld a, [hli]
 	ld [hld], a
 	dec hl
 	dec c
-	jr nz, Func_79862
+	jr nz, AnimCopyRowRight
 	ret
 
 ; get the sound of the move id in b
@@ -2649,12 +2686,12 @@ AnimationLeavesFalling: ; 79c74 (1e:5c74)
 ; in Razor Leaf's animation.
 	ld a, [rOBP0]
 	push af
-	ld a, [wcc79]
+	ld a, [wAnimPalette]
 	ld [rOBP0], a
-	ld d, $37
-	ld a, $3
-	ld [W_SUBANIMTRANSFORM], a
-	call Func_79c97
+	ld d, $37 ; leaf tile
+	ld a, 3 ; number of leaves
+	ld [wNumFallingObjects], a
+	call AnimationFallingObjects
 	pop af
 	ld [rOBP0], a
 	ret
@@ -2662,115 +2699,120 @@ AnimationLeavesFalling: ; 79c74 (1e:5c74)
 AnimationPetalsFalling: ; 79c8a (1e:5c8a)
 ; Makes lots of petals fall down from the top of the screen. It's used in
 ; the animation for Petal Dance.
-	ld d, $71
-	ld a, $14
-	ld [W_SUBANIMTRANSFORM], a
-	call Func_79c97
+	ld d, $71 ; petal tile
+	ld a, 20 ; number of petals
+	ld [wNumFallingObjects], a
+	call AnimationFallingObjects
 	jp ClearSprites
 
-Func_79c97: ; 79c97 (1e:5c97)
+AnimationFallingObjects: ; 79c97 (1e:5c97)
 	ld c, a
-	ld a, $1
-	call Func_797e8
-	call Func_79d2a
-	call Func_79d52
+	ld a, 1
+	call InitMultipleObjectsOAM
+	call FallingObjects_InitXCoords
+	call FallingObjects_InitMovementData
 	ld hl, wOAMBuffer
-	ld [hl], $0
-.asm_79ca8
-	ld hl, wTrainerSpriteOffset
-	ld de, $0000
-	ld a, [W_SUBANIMTRANSFORM]
+	ld [hl], 0
+.loop
+	ld hl, wFallingObjectsMovementData
+	ld de, 0
+	ld a, [wNumFallingObjects]
 	ld c, a
-.asm_79cb2
+.innerLoop
 	push bc
 	push hl
 	push de
 	ld a, [hl]
-	ld [wd08a], a
-	call Func_79d16
-	call Func_79cdb
+	ld [wFallingObjectMovementByte], a
+	call FallingObjects_UpdateMovementByte
+	call FallingObjects_UpdateOAMEntry
 	pop de
-	ld hl, $0004
+	ld hl, 4
 	add hl, de
 	ld e, l
 	ld d, h
 	pop hl
-	ld a, [wd08a]
+	ld a, [wFallingObjectMovementByte]
 	ld [hli], a
 	pop bc
 	dec c
-	jr nz, .asm_79cb2
+	jr nz, .innerLoop
 	call Delay3
 	ld hl, wOAMBuffer
-	ld a, [hl]
-	cp $68
-	jr nz, .asm_79ca8
+	ld a, [hl] ; Y
+	cp 104 ; has the top falling object reached 104 yet?
+	jr nz, .loop ; keep moving the falling objects down until it does
 	ret
 
-Func_79cdb: ; 79cdb (1e:5cdb)
+FallingObjects_UpdateOAMEntry: ; 79cdb (1e:5cdb)
+; Increases Y by 2 pixels and adjusts X and X flip based on the falling object's
+; movement byte.
 	ld hl, wOAMBuffer
 	add hl, de
 	ld a, [hl]
 	inc a
 	inc a
-	cp $70
-	jr c, .asm_79ce8
-	ld a, $a0
-.asm_79ce8
-	ld [hli], a
-	ld a, [wd08a]
+	cp 112
+	jr c, .next
+	ld a, 160 ; if Y >= 112, put it off-screen
+.next
+	ld [hli], a ; Y
+	ld a, [wFallingObjectMovementByte]
 	ld b, a
-	ld de, Unknown_79d0d
+	ld de, FallingObjects_DeltaXs
 	and $7f
 	add e
-	jr nc, .asm_79cf6
+	jr nc, .noCarry
 	inc d
-.asm_79cf6
+.noCarry
 	ld e, a
 	ld a, b
 	and $80
-	jr nz, .asm_79d03
+	jr nz, .movingLeft
+; moving right
 	ld a, [de]
 	add [hl]
-	ld [hli], a
+	ld [hli], a ; X
 	inc hl
-	xor a
-	jr .asm_79d0b
-.asm_79d03
+	xor a ; no horizontal flip
+	jr .next2
+.movingLeft
 	ld a, [de]
 	ld b, a
 	ld a, [hl]
 	sub b
-	ld [hli], a
+	ld [hli], a ; X
 	inc hl
-	ld a, $20
-.asm_79d0b
-	ld [hl], a
+	ld a, (1 << OAM_X_FLIP)
+.next2
+	ld [hl], a ; attribute
 	ret
 
-Unknown_79d0d: ; 79d0d (1e:5d0d)
-	db $00,$01,$03,$05,$07,$09,$0B,$0D,$0F
+FallingObjects_DeltaXs: ; 79d0d (1e:5d0d)
+	db 0, 1, 3, 5, 7, 9, 11, 13, 15
 
-Func_79d16: ; 79d16 (1e:5d16)
-	ld a, [wd08a]
+FallingObjects_UpdateMovementByte: ; 79d16 (1e:5d16)
+	ld a, [wFallingObjectMovementByte]
 	inc a
 	ld b, a
 	and $7f
-	cp $9
+	cp 9 ; have we reached the end of the delta-Xs?
 	ld a, b
-	jr nz, .asm_79d26
+	jr nz, .next
+; We've reached the end of the delta-Xs, so wrap to the start and change
+; direction from right to left or vice versa.
 	and $80
 	xor $80
-.asm_79d26
-	ld [wd08a], a
+.next
+	ld [wFallingObjectMovementByte], a
 	ret
 
-Func_79d2a: ; 79d2a (1e:5d2a)
+FallingObjects_InitXCoords: ; 79d2a (1e:5d2a)
 	ld hl, wOAMBuffer + $01
-	ld de, Unknown_79d3e
-	ld a, [W_SUBANIMTRANSFORM]
+	ld de, FallingObjects_InitialXCoords
+	ld a, [wNumFallingObjects]
 	ld c, a
-.asm_79d34
+.loop
 	ld a, [de]
 	ld [hli], a
 	inc hl
@@ -2778,66 +2820,98 @@ Func_79d2a: ; 79d2a (1e:5d2a)
 	inc hl
 	inc de
 	dec c
-	jr nz, .asm_79d34
+	jr nz, .loop
 	ret
 
-Unknown_79d3e: ; 79d3e (1e:5d3e)
+FallingObjects_InitialXCoords: ; 79d3e (1e:5d3e)
 	db $38,$40,$50,$60,$70,$88,$90,$56,$67,$4A,$77,$84,$98,$32,$22,$5C,$6C,$7D,$8E,$99
 
-Func_79d52: ; 79d52 (1e:5d52)
-	ld hl, wTrainerSpriteOffset
-	ld de, Unknown_79d63
-	ld a, [W_SUBANIMTRANSFORM]
+FallingObjects_InitMovementData: ; 79d52 (1e:5d52)
+	ld hl, wFallingObjectsMovementData
+	ld de, FallingObjects_InitialMovementData
+	ld a, [wNumFallingObjects]
 	ld c, a
-.asm_79d5c
+.loop
 	ld a, [de]
 	ld [hli], a
 	inc de
 	dec c
-	jr nz, .asm_79d5c
+	jr nz, .loop
 	ret
 
-Unknown_79d63: ; 79d63 (1e:5d63)
+FallingObjects_InitialMovementData: ; 79d63 (1e:5d63)
 	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
 
 AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
+; Shakes the enemy HUD.
+
+; Make a copy of the back pic's tile patterns in sprite tile pattern VRAM.
 	ld de, vBackPic
 	ld hl, vSprites
 	ld bc, 7 * 7
 	call CopyVideoData
+
 	xor a
 	ld [hSCX], a
+
+; Copy wTileMap to BG map 0. The regular BG (not the window) is set to use
+; map 0 and can be scrolled with SCX, which allows a shaking effect.
 	ld hl, vBGMap0
-	call Func_79e0d
-	ld a, $90
+	call BattleAnimCopyTileMapToVRAM
+
+; Now that the regular BG is showing the same thing the window was, move the
+; window off the screen so that we can modify its contents below.
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
-	ld hl, vBGMap0 + $320
-	call Func_79e0d
-	ld a, $38
+
+; Copy wTileMap to VRAM such that the row below the enemy HUD (in wTileMap) is
+; lined up with row 0 of the window.
+	ld hl, vBGMap1 - $20 * 7
+	call BattleAnimCopyTileMapToVRAM
+
+; Move the window so that the row below the enemy HUD (in BG map 0) lines up
+; with the top row of the window on the screen. This makes it so that the window
+; covers everything below the enemy HD with a copy that looks just like what
+; was there before.
+	ld a, 7 * 8
 	ld [hWY], a
-	call _AnimationShakeEnemyHUD
+
+; Write OAM entries so that the copy of the back pic from the top of this
+; function shows up on screen. We need this because the back pic's Y coordinates
+; range overlaps with that of the enemy HUD and we don't want to shake the top
+; of the back pic when we shake the enemy HUD. The OAM copy won't be affected
+; by SCX.
+	call ShakeEnemyHUD_WritePlayerMonPicOAM
+
 	ld hl, vBGMap0
-	call Func_79e0d
+	call BattleAnimCopyTileMapToVRAM
+
+; Remove the back pic from the BG map.
 	call AnimationHideMonPic
 	call Delay3
-	ld de, $0208
-	call Func_79de9
+
+; Use SCX to shake the regular BG. The window and the back pic OAM copy are
+; not affected.
+	lb de, 2, 8
+	call ShakeEnemyHUD_ShakeBG
+
+; Restore the original graphics.
 	call AnimationShowMonPic
 	call ClearSprites
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld hl, vBGMap1
-	call Func_79e0d
+	call BattleAnimCopyTileMapToVRAM
 	xor a
 	ld [hWY], a
 	call SaveScreenTilesToBuffer1
 	ld hl, vBGMap0
-	call Func_79e0d
+	call BattleAnimCopyTileMapToVRAM
 	call ClearScreen
 	call Delay3
 	call LoadScreenTilesFromBuffer1
 	ld hl, vBGMap1
-	jp Func_79e0d
+	jp BattleAnimCopyTileMapToVRAM
 
 ; b = tile ID list index
 ; c = base tile ID
@@ -2851,27 +2925,27 @@ CopyTileIDsFromList: ; 79dda (1e:5dda)
 	pop hl
 	jp CopyTileIDs
 
-Func_79de9: ; 79de9 (1e:5de9)
+ShakeEnemyHUD_ShakeBG: ; 79de9 (1e:5de9)
 	ld a, [hSCX]
-	ld [wTrainerSpriteOffset], a
-.asm_79dee
-	ld a, [wTrainerSpriteOffset]
+	ld [wTempSCX], a
+.loop
+	ld a, [wTempSCX]
 	add d
 	ld [hSCX], a
 	ld c, 2
 	call DelayFrames
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wTempSCX]
 	sub d
 	ld [hSCX], a
 	ld c, 2
 	call DelayFrames
 	dec e
-	jr nz, .asm_79dee
-	ld a, [wTrainerSpriteOffset]
+	jr nz, .loop
+	ld a, [wTempSCX]
 	ld [hSCX], a
 	ret
 
-Func_79e0d: ; 79e0d (1e:5e0d)
+BattleAnimCopyTileMapToVRAM: ; 79e0d (1e:5e0d)
 	ld a, h
 	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, l
@@ -2942,19 +3016,19 @@ PlayApplyingAttackSound: ; 79e6a (1e:5e6a)
 	ld a, [wDamageMultipliers]
 	and $7f
 	ret z
-	cp $a
+	cp 10
 	ld a, $20
 	ld b, $30
 	ld c, SFX_DAMAGE
-	jr z, .asm_79e8b
+	jr z, .playSound
 	ld a, $e0
 	ld b, $ff
 	ld c, SFX_SUPER_EFFECTIVE
-	jr nc, .asm_79e8b
+	jr nc, .playSound
 	ld a, $50
 	ld b, $1
 	ld c, SFX_NOT_VERY_EFFECTIVE
-.asm_79e8b
+.playSound
 	ld [wc0f1], a
 	ld a, b
 	ld [wc0f2], a

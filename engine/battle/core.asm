@@ -357,7 +357,7 @@ EnemyRan: ; 3c202 (f:4202)
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a
-	jpab AnimationSlideEnemyMonOut
+	jpab AnimationSlideEnemyMonOff
 
 WildRanText: ; 3c229 (f:4229)
 	TX_FAR _WildRanText

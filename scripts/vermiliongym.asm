@@ -37,7 +37,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	call PlaySound
 	ld a, $5
 .asm_5ca7f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $202
 	predef_jump ReplaceTileBlock
 

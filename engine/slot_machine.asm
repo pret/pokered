@@ -711,12 +711,12 @@ SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)
 
 SlotMachine_PutOutLitBalls: ; 377ce (d:77ce)
 	ld a, $23
-	ld [wd08a], a
+	ld [wNewSlotMachineBallTile], a
 	jr SlotMachine_UpdateThreeCoinBallTiles
 
 SlotMachine_LightBalls: ; 377d5 (d:77d5)
 	ld a, $14
-	ld [wd08a], a
+	ld [wNewSlotMachineBallTile], a
 	ld a, [wSlotMachineBet]
 	dec a
 	jr z, SlotMachine_UpdateOneCoinBallTiles
@@ -739,7 +739,7 @@ SlotMachine_UpdateOneCoinBallTiles: ; 377fb (d:77fb)
 	coord hl, 3, 6
 
 SlotMachine_UpdateBallTiles: ; 377fe (d:77fe)
-	ld a, [wd08a]
+	ld a, [wNewSlotMachineBallTile]
 	ld [hl], a
 	ld bc, 13
 	add hl, bc

@@ -33,7 +33,7 @@ VictoryRoad2Script_517c9: ; 517c9 (14:57c9)
 	ld bc, $70b
 
 VictoryRoad2Script_517e2: ; 517e2 (14:57e2)
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ret
 

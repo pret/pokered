@@ -20,7 +20,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	jr nz, .asm_5d7f8
 	push af
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $401
 	predef ReplaceTileBlock
 	pop af
@@ -29,7 +29,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	jr nz, .asm_5d80b
 	push af
 	ld a, $54
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $209
 	predef ReplaceTileBlock
 	pop af
@@ -38,7 +38,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	jr nz, .asm_5d81e
 	push af
 	ld a, $54
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $509
 	predef ReplaceTileBlock
 	pop af
@@ -46,7 +46,7 @@ SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_9_UNLOCKED_DOOR4, EVENT_SILPH_CO_9_UNLOCKED_DOOR3
 	ret nz
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $605
 	predef_jump ReplaceTileBlock
 

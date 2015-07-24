@@ -8,14 +8,14 @@ AnimateBoulderDust: ; 79f54 (1e:5f54)
 	ld a, %11100100
 	ld [rOBP1], a
 	call LoadSmokeTileFourTimes
-	callba WriteCutTreeBoulderDustAnimationOAMBlock
+	callba WriteCutOrBoulderDustAnimationOAMBlock
 	ld c, 8 ; number of steps in animation
 .loop
 	push bc
 	call GetMoveBoulderDustFunctionPointer
 	ld bc, .returnAddress
 	push bc
-	ld c, $4
+	ld c, 4
 	jp [hl]
 .returnAddress
 	ld a, [rOBP1]
@@ -36,7 +36,7 @@ GetMoveBoulderDustFunctionPointer: ; 79f92 (1e:5f92)
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
-	ld [wd08a], a
+	ld [wCoordAdjustmentAmount], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]

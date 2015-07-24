@@ -35,12 +35,12 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 
 Mansion1Script_44304: ; 44304 (11:4304)
 	ld a, $2d
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	jr Mansion1ReplaceBlock
 
 Mansion1Script_4430b: ; 4430b (11:430b)
 	ld a, $e
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 Mansion1ReplaceBlock: ; 44310 (11:4310)
 	predef ReplaceTileBlock
 	ret

@@ -19,7 +19,7 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	CheckEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $403
 	predef_jump ReplaceTileBlock
 

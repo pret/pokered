@@ -21,7 +21,7 @@ BrunoScript_762ec: ; 762ec (1d:62ec)
 	ld a, $24
 
 BrunoScript_76302: ; 76302 (1d:6302)
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $2
 	predef_jump ReplaceTileBlock
 

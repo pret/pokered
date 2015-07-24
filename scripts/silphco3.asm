@@ -20,7 +20,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	jr nz, .asm_59f98
 	push af
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $404
 	predef ReplaceTileBlock
 	pop af
@@ -28,7 +28,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret nz
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $408
 	predef_jump ReplaceTileBlock
 

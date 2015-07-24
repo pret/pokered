@@ -12,10 +12,10 @@ MarowakAnim: ; 708ca (1c:48ca)
 	ld [H_AUTOBGTRANSFERENABLED], a ; disable BG transfer so we don't see the Marowak too soon
 ; replace ghost pic with Marowak in BG
 	ld a, MAROWAK
-	ld [wHPBarMaxHP], a
+	ld [wChangeMonPicEnemyTurnSpecies], a
 	ld a, $1
 	ld [H_WHOSETURN], a
-	callab Func_79793
+	callab ChangeMonPic
  ; alternate between black and light grey 8 times.
  ; this makes the ghost's body appear to flash
 	ld d, $80

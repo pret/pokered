@@ -19,7 +19,7 @@ SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	CheckEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $0602
 	predef_jump ReplaceTileBlock
 

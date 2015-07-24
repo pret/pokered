@@ -296,7 +296,7 @@ WingAttackAnim: ; 7a277 (1e:6277)
 
 WhirlwindAnim: ; 7a27b (1e:627b)
 	db $46,$11,$10
-	db SE_SLIDE_ENEMY_MON_OUT, $FF
+	db SE_SLIDE_ENEMY_MON_OFF, $FF
 	db $FF
 
 FlyAnim: ; 7a281 (1e:6281)
@@ -550,19 +550,19 @@ DrillPeckAnim: ; 7a3c8 (1e:63c8)
 	db $FF
 
 SubmissionAnim: ; 7a3cc (1e:63cc)
-	db SE_SLIDE_MON_OUT, $41
+	db SE_SLIDE_MON_OFF, $41
 	db $06,$FF,$01
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 LowKickAnim: ; 7a3d4 (1e:63d4)
-	db SE_SLIDE_MON_OUT, $42
+	db SE_SLIDE_MON_OFF, $42
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
 CounterAnim: ; 7a3dc (1e:63dc)
-	db SE_SLIDE_MON_OUT, $43
+	db SE_SLIDE_MON_OFF, $43
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
@@ -571,7 +571,7 @@ SeismicTossAnim: ; 7a3e4 (1e:63e4)
 	db SE_BLINK_ENEMY_MON, $FF
 	db $41,$8B,$4E
 	db SE_HIDE_ENEMY_MON_PIC, $FF
-	db SE_SLIDE_MON_OUT, $FF
+	db SE_SLIDE_MON_OFF, $FF
 	db $42,$44,$4F
 	db SE_DELAY_ANIMATION_10, $FF
 	db SE_DELAY_ANIMATION_10, $FF
@@ -736,7 +736,7 @@ AgilityAnim: ; 7a4c3 (1e:64c3)
 	db $FF
 
 QuickAttackAnim: ; 7a4c8 (1e:64c8)
-	db SE_SLIDE_MON_OUT, $61
+	db SE_SLIDE_MON_OFF, $61
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
@@ -960,7 +960,7 @@ KinesisAnim: ; 7a5fa (1e:65fa)
 	db $FF
 
 SoftboiledAnim: ; 7a5fe (1e:65fe)
-	db SE_SLIDE_MON_HALF_LEFT, $48
+	db SE_SLIDE_MON_HALF_OFF, $48
 	db $08,$86,$4C
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_SPIRAL_BALLS_INWARD, $FF
@@ -1119,7 +1119,7 @@ SlashAnim: ; 7a6cd (1e:66cd)
 	db $FF
 
 SubstituteAnim: ; 7a6d1 (1e:66d1)
-	db SE_SLIDE_MON_OUT, $A3
+	db SE_SLIDE_MON_OFF, $A3
 	db $08,$FF,$47
 	db SE_SUBSTITUTE_MON, $FF
 	db $FF

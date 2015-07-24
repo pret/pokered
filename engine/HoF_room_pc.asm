@@ -65,16 +65,16 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,vBGMap0 + $c
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call LoadScreenTilesFromBuffer1
 	ld hl,vBGMap0
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	ld a,$A7
 	ld [rWX],a
 	ld hl,vBGMap1
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
 	ld a,%11111100 ; make the mon a black silhouette
 	ld [rBGP],a
@@ -136,12 +136,12 @@ HoFGBPalettes: ; 74160 (1d:4160)
 	db %11100000
 	db %11110000
 
-CopyTileMapToVRAM: ; 74164 (1d:4164)
+CreditsCopyTileMapToVRAM: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
 	ld [H_AUTOBGTRANSFERDEST + 1], a
-	ld a, $1
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 

@@ -319,7 +319,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
 	xor a
-	ld [$fff3],a
+	ld [H_WHOSETURN],a
 	ld [wAnimationType],a
 	ld [wDamageMultipliers],a
 	ld a,[wWhichPokemon]

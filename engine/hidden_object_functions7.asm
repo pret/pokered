@@ -293,7 +293,7 @@ UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
 	ld a, $e
 .next
 	pop bc
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, $ffdb
 	dec [hl]

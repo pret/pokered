@@ -19,7 +19,7 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	CheckEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret nz
 	ld a, $20
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $603
 	predef_jump ReplaceTileBlock
 

@@ -409,7 +409,11 @@ wSlotMachineSavedROMBank:: ; cc5e
 	ds 12
 
 wcc6b:: ds 14 ; doesn't seem to be used for anything, probably just more storage
-wcc79:: ds 30 ; used in battle animations
+
+wAnimPalette:: ; cc79
+	ds 1
+
+	ds 29
 
 wNPCMovementDirections2:: ; cc97
 
@@ -646,6 +650,13 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 	ds 1
 
 	ds 1
+
+wFallingObjectsMovementData:: ; cd3d
+; up to 20 bytes (one byte for each falling object)
+
+wSavedY:: ; cd3d
+
+wTempSCX:: ; cd3d
 
 wBattleTransitionCircleScreenQuadrantY:: ; cd3d
 ; 0 = upper half (Y < 9)
@@ -1050,8 +1061,12 @@ wLearningMovesFromDayCare:: ; cee9
 ; whether WriteMonMoves is being used to make a mon learn moves from day care
 ; non-zero if so
 
+wChangeMonPicEnemyTurnSpecies:: ; cee9
+
 wHPBarMaxHP:: ; cee9
 	ds 1
+
+wChangeMonPicPlayerTurnSpecies:: ; ceea
 
 wEvoNewSpecies:: ; ceea
 	ds 1
@@ -1554,12 +1569,34 @@ W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
 
+wFlashScreenLongCounter:: ; d08a
+
+wSpiralBallsBaseY:: ; d08a
+
+wFallingObjectMovementByte:: ; d08a
+; bits 0-6: index into FallingObjects_DeltaXs array (0 - 8)
+; bit 7: direction; 0 = right, 1 = left
+
+wNumShootingBalls:: ; d08a
+
 wTradedMonMovingRight:: ; d08a
 ; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
 
 wOptionsInitialized:: ; d08a
 
-wd08a:: ds 1 ; used with sprites and displaying the option menu on the main menu screen?
+wNewSlotMachineBallTile:: ; d08a
+
+wCoordAdjustmentAmount:: ; d08a
+; how much to add to the X/Y coord
+
+wUnusedD08A:: ; d08a
+	ds 1
+
+wSpiralBallsBaseX:: ; d08b
+
+wNumFallingObjects:: ; d08b
+
+wSlideMonDelay:: ; d08b
 
 wAnimCounter:: ; d08b
 ; generic counter variable for various animations
@@ -1601,13 +1638,17 @@ W_SUBANIMSUBENTRYADDR:: ; d096
 
 	ds 2
 
-wd09a:: ds 1 ; used with the battle transition screen when entering a battle (screen slowly draws into black)
+wOutwardSpiralTileMapPointer:: ; d09a
+	ds 1
+
+wPartyMenuAnimMonEnabled:: ; d09b
 
 wTownMapSpriteBlinkingEnabled:: ; d09b
 ; non-zero when enabled. causes nest locations to blink on and off.
 ; the town selection cursor will blink regardless of what this value is
 
-wd09b:: ds 1 ; also used with battle transition screen and move animations
+wUnusedD09B:: ; d09b
+	ds 1
 
 W_FBDESTADDR:: ; d09c
 ; current destination address in OAM for frame blocks (big endian)
@@ -1625,9 +1666,28 @@ W_FBMODE:: ; d09e
 ; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
 
+wLinkCableAnimBulgeToggle:: ; d09f
+; 0 = small
+; 1 = big
+
+wIntroNidorinoBaseTile:: ; d09f
+
+wOutwardSpiralCurrentDirection:: ; d09f
+
+wDropletTile:: ; d09f
+
 wNewTileBlockID:: ; d09f
 
-wd09f:: ds 1 ; used with predef ReplaceTileBlock
+wWhichBattleAnimTileset:: ; d09f
+
+wSquishMonCurrentDirection:: ; d09f
+; 0 = left
+; 1 = right
+
+wSlideMonUpBottomRowLeftTile:: ; d09f
+; the tile ID of the leftmost tile in the bottom row in AnimationSlideMonUp_
+	ds 1
+
 wDisableVBlankWYUpdate:: ds 1 ; if non-zero, don't update WY during V-blank
 
 W_SPRITECURPOSX:: ; d0a1

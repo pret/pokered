@@ -411,12 +411,12 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld a,1
 	ld [wMenuWrappingEnabled],a
 	ld a,$40
-	ld [wd09b],a
-	call HandleMenuInputPokemonSelection
+	ld [wPartyMenuAnimMonEnabled],a
+	call HandleMenuInput_
 	call PlaceUnfilledArrowMenuCursor
 	ld b,a
 	xor a
-	ld [wd09b],a
+	ld [wPartyMenuAnimMonEnabled],a
 	ld a,[wCurrentMenuItem]
 	ld [wPartyAndBillsPCSavedMenuItem],a
 	ld hl,wd730
@@ -3897,9 +3897,9 @@ WriteOAMBlock:: ; 3a97 (0:3a97)
 
 HandleMenuInput:: ; 3abe (0:3abe)
 	xor a
-	ld [wd09b],a
+	ld [wPartyMenuAnimMonEnabled],a
 
-HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
+HandleMenuInput_:: ; 3ac2 (0:3ac2)
 	ld a,[H_DOWNARROWBLINKCNT1]
 	push af
 	ld a,[H_DOWNARROWBLINKCNT2]
@@ -3915,7 +3915,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	call Delay3
 .loop2
 	push hl
-	ld a,[wd09b]
+	ld a,[wPartyMenuAnimMonEnabled]
 	and a ; is it a pokemon selection menu?
 	jr z,.getJoypadState
 	callba AnimatePartyMon ; shake mini sprite of selected pokemon

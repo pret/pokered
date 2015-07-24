@@ -1,19 +1,19 @@
-Func_79e96: ; 79e96 (1e:5e96)
+AnimCut: ; 79e96 (1e:5e96)
 	ld a, [wCutTile]
 	cp $52
-	jr z, .asm_79ec8
+	jr z, .grass
 	ld c, $8
-.asm_79e9f
+.cutTreeLoop
 	push bc
 	ld hl, wOAMBuffer + $91
-	ld a, $1
-	ld [wd08a], a
-	ld c, $2
+	ld a, 1
+	ld [wCoordAdjustmentAmount], a
+	ld c, 2
 	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $99
-	ld a, $ff
-	ld [wd08a], a
-	ld c, $2
+	ld a, -1
+	ld [wCoordAdjustmentAmount], a
+	ld c, 2
 	call AdjustOAMBlockXPos2
 	ld a, [rOBP1]
 	xor $64
@@ -21,49 +21,49 @@ Func_79e96: ; 79e96 (1e:5e96)
 	call DelayFrame
 	pop bc
 	dec c
-	jr nz, .asm_79e9f
+	jr nz, .cutTreeLoop
 	ret
-.asm_79ec8
-	ld c, $2
-.asm_79eca
+.grass
+	ld c, 2
+.cutGrassLoop
 	push bc
 	ld c, $8
-	call Func_79eed
-	call Func_79f30
+	call AnimCutGrass_UpdateOAMEntries
+	call AnimCutGrass_SwapOAMEntries
 	ld c, $8
-	call Func_79eed
-	call Func_79f30
+	call AnimCutGrass_UpdateOAMEntries
+	call AnimCutGrass_SwapOAMEntries
 	ld hl, wOAMBuffer + $90
-	ld a, $2
-	ld [wd08a], a
-	ld c, $4
+	ld a, 2
+	ld [wCoordAdjustmentAmount], a
+	ld c, 4
 	call AdjustOAMBlockYPos2
 	pop bc
 	dec c
-	jr nz, .asm_79eca
+	jr nz, .cutGrassLoop
 	ret
 
-Func_79eed: ; 79eed (1e:5eed)
+AnimCutGrass_UpdateOAMEntries: ; 79eed (1e:5eed)
 	push bc
 	ld hl, wOAMBuffer + $91
-	ld a, $1
-	ld [wd08a], a
-	ld c, $1
+	ld a, 1
+	ld [wCoordAdjustmentAmount], a
+	ld c, 1
 	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $95
-	ld a, $2
-	ld [wd08a], a
-	ld c, $1
+	ld a, 2
+	ld [wCoordAdjustmentAmount], a
+	ld c, 1
 	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $99
-	ld a, $fe
-	ld [wd08a], a
-	ld c, $1
+	ld a, -2
+	ld [wCoordAdjustmentAmount], a
+	ld c, 1
 	call AdjustOAMBlockXPos2
 	ld hl, wOAMBuffer + $9d
-	ld a, $ff
-	ld [wd08a], a
-	ld c, $1
+	ld a, -1
+	ld [wCoordAdjustmentAmount], a
+	ld c, 1
 	call AdjustOAMBlockXPos2
 	ld a, [rOBP1]
 	xor $64
@@ -71,19 +71,19 @@ Func_79eed: ; 79eed (1e:5eed)
 	call DelayFrame
 	pop bc
 	dec c
-	jr nz, Func_79eed
+	jr nz, AnimCutGrass_UpdateOAMEntries
 	ret
 
-Func_79f30: ; 79f30 (1e:5f30)
+AnimCutGrass_SwapOAMEntries: ; 79f30 (1e:5f30)
 	ld hl, wOAMBuffer + $90
-	ld de, wHPBarMaxHP
+	ld de, wBuffer
 	ld bc, $8
 	call CopyData
 	ld hl, wOAMBuffer + $98
 	ld de, wOAMBuffer + $90
 	ld bc, $8
 	call CopyData
-	ld hl, wHPBarMaxHP
+	ld hl, wBuffer
 	ld de, wOAMBuffer + $98
 	ld bc, $8
 	jp CopyData

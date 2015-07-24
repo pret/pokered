@@ -47,7 +47,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 .notSilphCo11F
 	ld a, $e
 .replaceCardKeyDoorTileBlock
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
 	ld hl, wd126
 	set 5, [hl]

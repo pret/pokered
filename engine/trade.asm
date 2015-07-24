@@ -304,25 +304,25 @@ Trade_AnimateBallEnteringLinkCable: ; 412d2 (10:52d2)
 	ld a, %11100100
 	ld [rOBP0], a
 	xor a
-	ld [wd09f], a
+	ld [wLinkCableAnimBulgeToggle], a
 	ld bc, $2060
 .moveBallInsideLinkCableLoop
 	push bc
 	xor a
 	ld de, Trade_BallInsideLinkCableOAM
 	call WriteOAMBlock
-	ld a, [wd09f]
+	ld a, [wLinkCableAnimBulgeToggle]
 	xor $1
-	ld [wd09f], a
+	ld [wLinkCableAnimBulgeToggle], a
 	add $7e
 	ld hl, wOAMBuffer + $02
-	ld de, $4
+	ld de, 4
 	ld c, e
-.cycleSpriteFramesLoop
+.cycleLinkCableBulgeTile
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .cycleSpriteFramesLoop
+	jr nz, .cycleLinkCableBulgeTile
 	call Delay3
 	pop bc
 	ld a, c

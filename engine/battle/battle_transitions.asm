@@ -210,28 +210,28 @@ BattleTransition_Spiral: ; 70a72 (1c:4a72)
 .outwardSpiral
 	coord hl, 10, 10
 	ld a, $3
-	ld [wd09f], a
+	ld [wOutwardSpiralCurrentDirection], a
 	ld a, l
-	ld [wd09b], a
+	ld [wOutwardSpiralTileMapPointer + 1], a
 	ld a, h
-	ld [wd09a], a
-	ld b, $78
-.loop1
-	ld c, $3
-.loop2
+	ld [wOutwardSpiralTileMapPointer], a
+	ld b, 120
+.loop
+	ld c, 3
+.innerLoop
 	push bc
 	call BattleTransition_OutwardSpiral_
 	pop bc
 	dec c
-	jr nz, .loop2
+	jr nz, .innerLoop
 	call DelayFrame
 	dec b
-	jr nz, .loop1
+	jr nz, .loop
 .done
 	call BattleTransition_BlackScreen
 	xor a
-	ld [wd09b], a
-	ld [wd09a], a
+	ld [wOutwardSpiralTileMapPointer + 1], a
+	ld [wOutwardSpiralTileMapPointer], a
 	ret
 
 BattleTransition_InwardSpiral: ; 70aaa (1c:4aaa)
@@ -286,69 +286,69 @@ BattleTransition_InwardSpiral_: ; 70ae0 (1c:4ae0)
 BattleTransition_OutwardSpiral_: ; 70af9 (1c:4af9)
 	ld bc, -SCREEN_WIDTH
 	ld de, SCREEN_WIDTH
-	ld a, [wd09b]
+	ld a, [wOutwardSpiralTileMapPointer + 1]
 	ld l, a
-	ld a, [wd09a]
+	ld a, [wOutwardSpiralTileMapPointer]
 	ld h, a
-	ld a, [wd09f]
+	ld a, [wOutwardSpiralCurrentDirection]
 	cp $0
-	jr z, .zero
+	jr z, .up
 	cp $1
-	jr z, .one
+	jr z, .left
 	cp $2
-	jr z, .two
+	jr z, .down
 	cp $3
-	jr z, .three
-.done1
+	jr z, .right
+.keepSameDirection
 	ld [hl], $ff
-.done2_
+.done
 	ld a, l
-	ld [wd09b], a
+	ld [wOutwardSpiralTileMapPointer + 1], a
 	ld a, h
-	ld [wd09a], a
+	ld [wOutwardSpiralTileMapPointer], a
 	ret
-.zero
+.up
 	dec hl
 	ld a, [hl]
 	cp $ff
-	jr nz, .done2
+	jr nz, .changeDirection
 	inc hl
 	add hl, bc
-	jr .done1
-.one
+	jr .keepSameDirection
+.left
 	add hl, de
 	ld a, [hl]
 	cp $ff
-	jr nz, .done2
+	jr nz, .changeDirection
 	add hl, bc
 	dec hl
-	jr .done1
-.two
+	jr .keepSameDirection
+.down
 	inc hl
 	ld a, [hl]
 	cp $ff
-	jr nz, .done2
+	jr nz, .changeDirection
 	dec hl
 	add hl, de
-	jr .done1
-.three
+	jr .keepSameDirection
+.right
 	add hl, bc
 	ld a, [hl]
 	cp $ff
-	jr nz, .done2
+	jr nz, .changeDirection
 	add hl, de
 	inc hl
-	jr .done1
-.done2
+	jr .keepSameDirection
+.changeDirection
 	ld [hl], $ff
-	ld a, [wd09f]
+	ld a, [wOutwardSpiralCurrentDirection]
 	inc a
 	cp $4
 	jr nz, .skip
 	xor a
 .skip
-	ld [wd09f], a
-	jr .done2_
+	ld [wOutwardSpiralCurrentDirection], a
+	jr .done
 
 FlashScreen:
 BattleTransition_FlashScreen_: ; 70b5d (1c:4b5d)

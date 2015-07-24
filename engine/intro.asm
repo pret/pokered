@@ -38,7 +38,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
@@ -86,7 +86,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	ld a, $24
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
 	ld c, $1e
@@ -105,7 +105,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
@@ -118,7 +118,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 	ld a, $24
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation6
 	call AnimateIntroNidorino
 	ld c, $1e
@@ -129,7 +129,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_LUNGE
 	call PlaySound
 	ld a, $48
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
 	jp AnimateIntroNidorino
 
@@ -152,17 +152,17 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 
 UpdateIntroNidorinoOAM: ; 417ae (10:57ae)
 	ld hl, wOAMBuffer
-	ld a, [wd09f]
+	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
 .loop
 	ld a, [W_BASECOORDY]
 	add [hl]
-	ld [hli], a
+	ld [hli], a ; Y
 	ld a, [W_BASECOORDX]
 	add [hl]
-	ld [hli], a
+	ld [hli], a ; X
 	ld a, d
-	ld [hli], a
+	ld [hli], a ; tile
 	inc hl
 	inc d
 	dec c

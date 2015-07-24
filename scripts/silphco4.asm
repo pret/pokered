@@ -20,7 +20,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	jr nz, .asm_19d48
 	push af
 	ld a, $54
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $0602
 	predef ReplaceTileBlock
 	pop af
@@ -28,7 +28,7 @@ SilphCo4Script_19d21: ; 19d21 (6:5d21)
 	CheckEventAfterBranchReuseA EVENT_SILPH_CO_4_UNLOCKED_DOOR2, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
 	ret nz
 	ld a, $54
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $0406
 	predef_jump ReplaceTileBlock
 
