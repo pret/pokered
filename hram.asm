@@ -259,6 +259,8 @@ H_VBLANKOCCURRED EQU $FFD6
 ; this is often set to 00 in order to turn off water and flower BG tile animations
 hTilesetType EQU $FFD7
 
+hMovingBGTilesCounter1 EQU $FFD8
+
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 hFossilCounter EQU $FFDB

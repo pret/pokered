@@ -46,10 +46,10 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld hl, Moves
 	ld bc, $6
 	call AddNTimes
-	ld de, wHPBarMaxHP
+	ld de, wBuffer
 	ld a, BANK(Moves)
 	call FarCopyData
-	ld a, [wHPBarNewHP + 1]
+	ld a, [wBuffer + 5] ; a = move's max PP
 	pop de
 	pop hl
 	ld [hl], a

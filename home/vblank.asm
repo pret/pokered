@@ -6,7 +6,7 @@ VBlank::
 	push hl
 
 	ld a, [H_LOADEDROMBANK]
-	ld [wd122], a
+	ld [wVBlankSavedROMBank], a
 
 	ld a, [hSCX]
 	ld [rSCX], a
@@ -78,7 +78,7 @@ VBlank::
 	and a
 	call z, ReadJoypad
 
-	ld a, [wd122]
+	ld a, [wVBlankSavedROMBank]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 

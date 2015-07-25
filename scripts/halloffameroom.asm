@@ -95,7 +95,7 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, HS_UNKNOWN_DUNGEON_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $2
 	ld [W_HALLOFFAMEROOMCURSCRIPT], a

@@ -311,7 +311,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
 	ld a, [wHiddenObjectFunctionArgument]
-	ld [wcd5b], a
+	ld [wGymTrashCanIndex], a
 
 ; Don't do the trash can puzzle if it's already been done.
 	CheckEvent EVENT_2ND_LOCK_OPENED
@@ -320,12 +320,12 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	tx_pre_jump VermilionGymTrashText
 
 .ok
-	bit 1, a
+	CheckEventReuseA EVENT_1ST_LOCK_OPENED
 	jr nz, .trySecondLock
 
-	ld a, [wd743]
+	ld a, [wFirstLockTrashCanIndex]
 	ld b, a
-	ld a, [wcd5b]
+	ld a, [wGymTrashCanIndex]
 	cp b
 	jr z, .openFirstLock
 
@@ -337,7 +337,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	SetEvent EVENT_1ST_LOCK_OPENED
 
 	ld hl, GymTrashCans
-	ld a, [wcd5b]
+	ld a, [wGymTrashCanIndex]
 	; * 5
 	ld b, a
 	add a
@@ -364,15 +364,15 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	add hl, de
 	ld a, [hl]
 	and $f
-	ld [wd744], a
+	ld [wSecondLockTrashCanIndex], a
 
 	tx_pre_id VermilionGymTrashSuccesText1
 	jr .done
 
 .trySecondLock
-	ld a, [wd744]
+	ld a, [wSecondLockTrashCanIndex]
 	ld b, a
-	ld a, [wcd5b]
+	ld a, [wGymTrashCanIndex]
 	cp b
 	jr z, .openSecondLock
 
@@ -381,7 +381,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	call Random
 
 	and $e
-	ld [wd743], a
+	ld [wFirstLockTrashCanIndex], a
 
 	tx_pre_id VermilionGymTrashFailText
 	jr .done

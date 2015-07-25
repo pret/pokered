@@ -13,10 +13,10 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	ResetEvents EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ResetEvents EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1, EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	ld a, HS_VICTORY_ROAD_3_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, HS_VICTORY_ROAD_2_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump HideObject
 
 Route23ScriptPointers: ; 51213 (14:5213)

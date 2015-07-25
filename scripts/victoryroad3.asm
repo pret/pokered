@@ -44,10 +44,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	CheckAndSetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	jr nz, .asm_449fe
 	ld a, HS_VICTORY_ROAD_3_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_VICTORY_ROAD_2_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 .coordsData_449f9: ; 449f9 (11:49f9)

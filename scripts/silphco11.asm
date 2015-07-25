@@ -76,7 +76,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	jr z, .asm_62181
 	push hl
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	pop hl
 	jr .asm_62170
@@ -87,7 +87,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	ret z
 	push hl
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	pop hl
 	jr .asm_62184

@@ -394,13 +394,13 @@ PartyMenuInit:: ; 1420 (0:1420)
 ; otherwise, it is 0
 .storeMaxMenuItemID
 	ld [hli], a ; max menu item ID
-	ld a, [wd11f]
+	ld a, [wForcePlayerToChooseMon]
 	and a
-	ld a, A_BUTTON + B_BUTTON
+	ld a, A_BUTTON | B_BUTTON
 	jr z, .next
 	xor a
-	ld [wd11f], a
-	inc a
+	ld [wForcePlayerToChooseMon], a
+	inc a ; a = A_BUTTON
 .next
 	ld [hli], a ; menu watched keys
 	pop af
@@ -2403,7 +2403,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	call IsInArray              ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [wcc4d], a               ; load corresponding missable object index and remove it
+	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
 	ld hl, wd730
@@ -2905,7 +2905,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld de, wd046
+	ld de, wTrainerBaseMoney
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -3944,7 +3944,7 @@ HandleMenuInput_:: ; 3ac2 (0:3ac2)
 	ret
 .keyPressed
 	xor a
-	ld [wcc4b],a
+	ld [wCheckFor180DegreeTurn],a
 	ld a,[hJoy5]
 	ld b,a
 	bit 6,a ; pressed Up key?

@@ -118,7 +118,7 @@ ItemUseBall: ; d687 (3:5687)
 .UseBall
 ;ok, you can use a ball
 	xor a
-	ld [wd11c],a
+	ld [wCapturedMonSpecies],a
 	ld a,[W_BATTLETYPE]
 	cp a,2		;SafariBattle
 	jr nz,.skipSafariZoneCode
@@ -388,7 +388,7 @@ ItemUseBall: ; d687 (3:5687)
 	pop af
 	ld [hl],a
 	ld a,[wEnemyMonSpecies]	;enemy
-	ld [wd11c],a
+	ld [wCapturedMonSpecies],a
 	ld [wcf91],a
 	ld [wd11e],a
 	ld a,[W_BATTLETYPE]
@@ -645,7 +645,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
-	ld a,[wd121]
+	ld a,[wEvolutionOccurred]
 	and a
 	jr z,.noEffect
 	pop af
@@ -2537,13 +2537,13 @@ IsKeyItem_: ; e764 (3:6764)
 ; if the item is not an HM or TM
 	push af
 	ld hl,KeyItemBitfield
-	ld de,wHPBarMaxHP
+	ld de,wBuffer
 	ld bc,15 ; only 11 bytes are actually used
 	call CopyData
 	pop af
 	dec a
 	ld c,a
-	ld hl,wHPBarMaxHP
+	ld hl,wBuffer
 	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c

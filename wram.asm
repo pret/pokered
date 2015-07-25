@@ -360,8 +360,14 @@ wMenuWrappingEnabled:: ; cc4a
 ; set to 0 if you can't go past the top or bottom of the menu
 	ds 1
 
-wcc4b:: ds 2 ; used as a joypad storage value
-wcc4d:: ds 1 ; used in sprite hiding/showing related operations
+wCheckFor180DegreeTurn:: ; cc4b
+; whether to check for 180-degree turn (0 = don't, 1 = do)
+	ds 1
+
+	ds 1
+
+wMissableObjectIndex:: ; cc4d
+	ds 1
 
 wPredefID:: ; cc4e
 	ds 1
@@ -979,10 +985,18 @@ wWhichAnimationOffsets:: ; cd50
 wTradedEnemyMonOTID:: ; cd59
 	ds 2
 
+wStandingOnWarpPadOrHole:: ; cd5b
+; 0 = neither
+; 1 = warp pad
+; 2 = hole
+
 wOAMBaseTile:: ; cd5b
 
-wcd5b:: ds 1 ; used in some sprite stuff, town map and surge gym trash cans
-wcd5c:: ds 1 ; used in town map
+wGymTrashCanIndex:: ; cd5b
+	ds 1
+
+wSymmetricSpriteOAMAttributes:: ; cd5c
+	ds 1
 
 wMonPartySpriteSpecies:: ; cd5d
 	ds 1
@@ -1049,6 +1063,8 @@ wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
 	ds 20 * 18
 
+wNamingScreenNameLength:: ; cee9
+
 wEvoOldSpecies:: ; cee9
 
 wBuffer:: ; cee9
@@ -1066,10 +1082,17 @@ wChangeMonPicEnemyTurnSpecies:: ; cee9
 wHPBarMaxHP:: ; cee9
 	ds 1
 
+wNamingScreenSubmitName:: ; ceea
+; non-zero when the player has chosen to submit the name
+
 wChangeMonPicPlayerTurnSpecies:: ; ceea
 
 wEvoNewSpecies:: ; ceea
 	ds 1
+
+wAlphabetCase:: ; ceeb
+; 0 = upper case
+; 1 = lower case
 
 wEvoMonTileOffset:: ; ceeb
 
@@ -1079,13 +1102,17 @@ wHPBarOldHP:: ; ceeb
 wEvoCancelled:: ; ceec
 	ds 1
 
+wNamingScreenLetter:: ; ceed
+
 wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
 	ds 1
 
-wcef0:: ds 1  ; used with HP bar stuff, probably used with wBuffer too.
-wcef1:: ds 12 ; same case as above
+wHPBarTempHP:: ; cef0
+	ds 2
+
+	ds 11
 
 wHPBarHPDifference:: ; cefd
 	ds 1
@@ -1356,9 +1383,16 @@ wTrainerPicPointer:: ; d033
 	ds 2
 	ds 1
 wd036:: ds 16 ; used as a temporary buffer to print "XXX learned YYY"
-wd046:: ds 1 ; used with trainer pointer stuff (not exactly sure, but the label is incremented and loaded with a value, so wd047 is accessed)
-wd047:: ds 1 ; used with unloading trainer data?
-wd048:: ds 2 ; used as a pointer for missable object loop
+
+wTrainerBaseMoney:: ; d046
+; 2-byte BCD number
+; money received after battle = base money × level of highest-level enemy mon
+	ds 2
+
+wMissableObjectCounter:: ; d048
+	ds 1
+
+	ds 1
 
 W_TRAINERNAME:: ; d04a
 ; 13 bytes for the letters of the opposing trainer
@@ -1367,6 +1401,7 @@ W_TRAINERNAME:: ; d04a
 	ds 13
 
 W_ISINBATTLE:: ; d057
+; lost battle, this is -1
 ; no battle, this is 0
 ; wild battle, this is 1
 ; trainer battle, this is 2
@@ -1513,10 +1548,16 @@ wEscapedFromBattle::
 ; non-zero when an item or move that allows escape from battle was used
 	ds 1
 
-wAmountMoneyWon:: ; wd079 - wd07b
-wd079:: ds 1 ; used as a value to print the money won from a battle, as well as a misc. value in seafoam
-wd07a:: ds 1 ; same case as above
-wd07b:: ds 1 ; used as a buffer to convert the money won from a battle into BCD
+wAmountMoneyWon:: ; d079
+; 3-byte BCD number
+
+wObjectToHide:: ; d079
+	ds 1
+
+wObjectToShow:: ; d07a
+	ds 1
+
+	ds 1
 
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
@@ -1551,7 +1592,8 @@ W_FBTILECOUNTER:: ; d084
 ; counts how many tiles of the current frame block have been drawn
 	ds 1
 
-wd085:: ds 1 ; used with animating water/flowers
+wMovingBGTilesCounter2:: ; d085
+	ds 1
 
 W_SUBANIMFRAMEDELAY:: ; d086
 ; duration of each frame of the current subanimation in terms of screen refreshes
@@ -1816,7 +1858,8 @@ wMoveNum:: ; d0e0
 wMovesString:: ; d0e1
 	ds 56
 
-wd119:: ds 1 ; written to from W_CURMAPTILESET but never read
+wUnusedD119:: ; d119
+	ds 1
 
 wWalkBikeSurfStateCopy:: ; d11a
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
@@ -1826,18 +1869,39 @@ wInitListType:: ; d11b
 ; the type of list for InitList to init
 	ds 1
 
-wd11c:: ds 1 ; temp storage value for catching pokemon
-wd11d:: ds 1 ; used with battle switchout and testing if the enemy mon fainted
+wCapturedMonSpecies:: ; d11c
+; 0 if no mon was captured
+	ds 1
+
+wFirstMonsNotOutYet:: ; d11d
+; Non-zero when the first player mon and enemy mon haven't been sent out yet.
+; It prevents the game from asking if the player wants to choose another mon
+; when the enemy sends out their first mon and suppresses the "no will to fight"
+; message when the game searches for the first non-fainted mon in the party,
+; which will be the first mon sent out.
+	ds 1
+
 wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
-wd11f:: ds 1 ; used when running from battle and PartyMenuInit
+
+wForcePlayerToChooseMon:: ; d11f
+; When this value is non-zero, the player isn't allowed to exit the party menu
+; by pressing B and not choosing a mon.
+	ds 1
 
 wNumRunAttempts::
 ; number of times the player has tried to run from battle
 	ds 1
 
-wd121:: ds 1 ; used with evolving pokemon
-wd122:: ds 2 ; saved ROM bank number for vblank
-wIsKeyItem:: ds 1 ; d124
+wEvolutionOccurred:: ; d121
+	ds 1
+
+wVBlankSavedROMBank:: ; d122
+	ds 1
+
+	ds 1
+
+wIsKeyItem:: ; d124
+	ds 1 
 
 wTextBoxID:: ; d125
 	ds 1
@@ -2664,9 +2728,13 @@ wCardKeyDoorX:: ; d740
 
 	ds 2
 
-wd743:: ds 1 ; used with surge gym trash cans
-wd744:: ds 3 ; also used with surge gym trash cans
+wFirstLockTrashCanIndex:: ; d743
+	ds 1
 
+wSecondLockTrashCanIndex:: ; d743
+	ds 1
+
+	ds 2
 wEventFlags:: ; d747
 	ds 320
 

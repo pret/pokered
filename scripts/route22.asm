@@ -224,7 +224,7 @@ Route22Script3: ; 5102a (14:502a)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, HS_ROUTE_22_RIVAL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call PlayDefaultMusic
 	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
@@ -369,7 +369,7 @@ Route22Script6: ; 51151 (14:5151)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, HS_ROUTE_22_RIVAL_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call PlayDefaultMusic
 	ResetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE

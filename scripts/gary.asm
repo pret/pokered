@@ -120,7 +120,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, HS_CHAMPIONS_ROOM_OAK
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $5
 	ld [W_GARYCURSCRIPT], a
@@ -197,7 +197,7 @@ GaryScript8: ; 76083 (1d:6083)
 	bit 0, a
 	ret nz
 	ld a, HS_CHAMPIONS_ROOM_OAK
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $9
 	ld [W_GARYCURSCRIPT], a

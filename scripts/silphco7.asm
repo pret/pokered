@@ -252,7 +252,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	bit 0, a
 	ret nz
 	ld a, HS_SILPH_CO_7F_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call PlayDefaultMusic
 	xor a

@@ -51,7 +51,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	ld [W_BATTLETYPE], a
 	ld [W_MOVEMISSED], a
 	ld [W_CUROPPONENT], a
-	ld [wd11f], a
+	ld [wForcePlayerToChooseMon], a
 	ld [wNumRunAttempts], a
 	ld [wEscapedFromBattle], a
 	ld hl, wPartyAndBillsPCSavedMenuItem

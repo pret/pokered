@@ -51,7 +51,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,HS_PALLET_TOWN_OAK
-	ld [wcc4d],a
+	ld [wMissableObjectIndex],a
 	predef ShowObject
 
 	; trigger the next script
@@ -136,10 +136,10 @@ PalletTownScript5: ; 18f56 (6:4f56)
 	jr nz,.next
 	SetEvent EVENT_DAISY_WALKING
 	ld a,HS_DAISY_SITTING
-	ld [wcc4d],a
+	ld [wMissableObjectIndex],a
 	predef HideObject
 	ld a,HS_DAISY_WALKING
-	ld [wcc4d],a
+	ld [wMissableObjectIndex],a
 	predef_jump ShowObject
 .next
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK

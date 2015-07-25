@@ -37,7 +37,7 @@ OaksLabScript0: ; 1cb4e (7:4b4e)
 	and a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld hl, wd72e
 	res 4, [hl]
@@ -67,10 +67,10 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 	bit 0, a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_OAKS_LAB_OAK_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 
 	ld a, $3
@@ -315,7 +315,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 .asm_1cd30
 	ld a, HS_STARTER_BALL_3
 .asm_1cd32
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call Delay3
 	ld a, [wRivalStarterTemp]
@@ -475,7 +475,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	bit 0, a
 	jr nz, .asm_1ce8c
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
@@ -519,7 +519,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	call DisplayTextID
 	call OaksLabScript_1d02b
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, [wNPCMovementDirections2Index]
 	ld [wd157], a
@@ -578,10 +578,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call DisplayTextID
 	call Delay3
 	ld a, HS_POKEDEX_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_POKEDEX_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call OaksLabScript_1cefd
 	ld a, $1a
@@ -599,10 +599,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_OAK_GOT_PARCEL
 	ld a, HS_LYING_OLD_MAN
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_OLD_MAN
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, [wd157]
 	ld b, $0
@@ -630,13 +630,13 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ret nz
 	call PlayDefaultMusic
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
 	ResetEventReuseHL EVENT_2ND_ROUTE22_RIVAL_BATTLE
 	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ld a, HS_ROUTE_22_RIVAL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
@@ -914,7 +914,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 .asm_1d1e3
 	ld a, HS_STARTER_BALL_3
 .asm_1d1e5
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

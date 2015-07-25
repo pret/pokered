@@ -9,7 +9,7 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ld a, HS_CERULEAN_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump HideObject
 
 CeruleanCityScriptPointers: ; 1949d (6:549d)
@@ -86,7 +86,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hl], $19
 .asm_19535
 	ld a, HS_CERULEAN_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld de, CeruleanCityMovement1
 	ld a, $1
@@ -218,7 +218,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	bit 0, a
 	ret nz
 	ld a, HS_CERULEAN_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a

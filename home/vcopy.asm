@@ -380,21 +380,23 @@ UpdateMovingBgTiles::
 	and a
 	ret z ; no animations if indoors (or if a menu set this to 0)
 
-	ld a, [$ffd8]
+	ld a, [hMovingBGTilesCounter1]
 	inc a
-	ld [$ffd8], a
-	cp $14
+	ld [hMovingBGTilesCounter1], a
+	cp 20
 	ret c
-	cp $15
+	cp 21
 	jr z, .flower
+
+; water
 
 	ld hl, vTileset + $14 * $10
 	ld c, $10
 
-	ld a, [wd085]
+	ld a, [wMovingBGTilesCounter2]
 	inc a
 	and 7
-	ld [wd085], a
+	ld [wMovingBGTilesCounter2], a
 
 	and 4
 	jr nz, .left
@@ -417,14 +419,14 @@ UpdateMovingBgTiles::
 	ret nc
 ; if in a cave, no flower animations
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 	ret
 
 .flower
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 
-	ld a, [wd085]
+	ld a, [wMovingBGTilesCounter2]
 	and 3
 	cp 2
 	ld hl, FlowerTile1

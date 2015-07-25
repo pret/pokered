@@ -49,11 +49,11 @@ Route20Script_50cc6: ; 50cc6 (14:4cc6)
 	ret
 
 Route20Script_50d0c: ; 50d0c (14:4d0c)
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 Route20Script_50d14: ; 50d14 (14:4d14)
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump HideObject
 
 Route20ScriptPointers: ; 50d1c (14:4d1c)

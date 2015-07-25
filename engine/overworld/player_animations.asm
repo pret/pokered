@@ -370,10 +370,10 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	ld b, [hl]
 .done
 	ld a, b
-	ld [wcd5b], a
+	ld [wStandingOnWarpPadOrHole], a
 	ret
 
-; format: db tileset id, tile id, value to be put in wcd5b
+; format: db tileset id, tile id, value to be put in [wStandingOnWarpPadOrHole]
 .warpPadAndHoleData: ; 707a9 (1c:47a9)
 	db FACILITY, $20, 1 ; warp pad
 	db FACILITY, $11, 2 ; hole

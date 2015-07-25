@@ -2,7 +2,7 @@
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	ld a, $a
-	ld hl, wHPBarMaxHP  ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
+	ld hl, wBuffer ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
 	ld [hli], a   ; move 1
 	ld [hli], a   ; move 2
 	ld [hli], a   ; move 3
@@ -11,14 +11,14 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	swap a
 	and $f
 	jr z, .noMoveDisabled
-	ld hl, wHPBarMaxHP
+	ld hl, wBuffer
 	dec a
 	ld c, a
 	ld b, $0
 	add hl, bc    ; advance pointer to forbidden move
 	ld [hl], $50  ; forbid (highly discourage) disabled move
 .noMoveDisabled
-	ld hl, TrainerClassMoveChoiceModifications ; 589B
+	ld hl, TrainerClassMoveChoiceModifications
 	ld a, [W_TRAINERCLASS]
 	ld b, a
 .loopTrainerClasses
@@ -44,7 +44,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	dec a
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc    ; skip to pointer
 	ld a, [hli]   ; read pointer into hl
 	ld h, [hl]
@@ -53,9 +53,9 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	push de
 	jp [hl]       ; execute modification function
 .loopFindMinimumEntries ; all entries will be decremented sequentially until one of them is zero
-	ld hl, wHPBarMaxHP  ; temp move selection array
+	ld hl, wBuffer  ; temp move selection array
 	ld de, wEnemyMonMoves  ; enemy moves
-	ld c, $4
+	ld c, NUM_MOVES
 .loopDecrementEntries
 	ld a, [de]
 	inc de
@@ -73,11 +73,11 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	inc [hl]
 	dec hl
 	inc a
-	cp $5
+	cp NUM_MOVES + 1
 	jr nz, .loopUndoPartialIteration
-	ld hl, wHPBarMaxHP  ; temp move selection array
+	ld hl, wBuffer  ; temp move selection array
 	ld de, wEnemyMonMoves  ; enemy moves
-	ld c, $4
+	ld c, NUM_MOVES
 .filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
 	ld a, [de]
 	and a
@@ -97,7 +97,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	inc de
 	dec c
 	jr nz, .filterMinimalEntries
-	ld hl, wHPBarMaxHP    ; use created temporary array as move set
+	ld hl, wBuffer    ; use created temporary array as move set
 	ret
 .useOriginalMoveSet
 	ld hl, wEnemyMonMoves    ; use original move set
@@ -694,11 +694,13 @@ SwitchEnemyMon: ; 3a74b (e:674b)
 	ld hl, AIBattleWithdrawText
 	call PrintText
 
+	; This wFirstMonsNotOutYet variable is abused to prevent the player from
+	; switching in a new mon in response to this switch.
 	ld a,1
-	ld [wd11d],a
+	ld [wFirstMonsNotOutYet],a
 	callab EnemySendOut
 	xor a
-	ld [wd11d],a
+	ld [wFirstMonsNotOutYet],a
 
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING

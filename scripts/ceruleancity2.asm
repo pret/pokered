@@ -4,13 +4,13 @@ CeruleanHideRocket: ; 74872 (1d:4872)
 ; the screen then fades out, he disappears, and fades back in
 	call GBFadeOutToBlack
 	ld a, HS_CERULEAN_GUARD_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, HS_CERULEAN_GUARD_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_CERULEAN_ROCKET
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call GBFadeInFromBlack
 	ret

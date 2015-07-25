@@ -5,7 +5,7 @@ SilphCo1Script: ; 5d44e (17:544e)
 	CheckAndSetEvent EVENT_SILPH_CO_RECEPTIONIST_AT_DESK
 	ret nz
 	ld a, HS_SILPH_CO_1F_RECEPTIONIST
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 SilphCo1TextPointers: ; 5d469 (17:5469)

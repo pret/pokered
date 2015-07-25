@@ -17,7 +17,7 @@ VermilionCityScript_197c0: ; 197c0 (6:57c0)
 	call Random
 	ld a, [$ffd4]
 	and $e
-	ld [wd743], a
+	ld [wFirstLockTrashCanIndex], a
 	ret
 
 VermilionCityScript_197cb: ; 197cb (6:57cb)

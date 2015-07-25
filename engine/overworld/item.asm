@@ -31,7 +31,7 @@ PickUpItem:
 	jr nc, .BagFull
 
 	ld a, [$ffdb]
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

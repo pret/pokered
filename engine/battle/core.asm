@@ -225,7 +225,7 @@ StartBattle: ; 3c11e (f:411e)
 	ld [wPartyFoughtCurrentEnemyFlags], a
 	ld [wActionResultOrTookBattleTurn], a
 	inc a
-	ld [wd11d], a
+	ld [wFirstMonsNotOutYet], a
 	ld hl, wEnemyMon1HP
 	ld bc, wEnemyMon2 - wEnemyMon1 - 1
 	ld d, $3
@@ -379,7 +379,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jp z, HandleEnemyMonFainted ; if enemy mon HP is 0, jump
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [wd11d], a
+	ld [wFirstMonsNotOutYet], a
 	ld a, [W_PLAYERBATTSTATUS2]
 	and (1 << NeedsToRecharge) | (1 << UsingRage) ; check if the player is using Rage or needs to recharge
 	jr nz, .selectEnemyMove
@@ -1434,7 +1434,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld [wLastSwitchInEnemyMonHP + 1],a
 	ld a,1
 	ld [wCurrentMenuItem],a
-	ld a,[wd11d]
+	ld a,[wFirstMonsNotOutYet]
 	dec a
 	jr z,.next4
 	ld a,[wPartyCount]
@@ -1549,7 +1549,7 @@ HasMonFainted: ; 3ca97 (f:4a97)
 	ld a, [hli]
 	or [hl]
 	ret nz
-	ld a, [wd11d]
+	ld a, [wFirstMonsNotOutYet]
 	and a
 	jr nz, .done
 	ld hl, NoWillText
@@ -1647,8 +1647,8 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld hl, NoRunningText
 .printCantEscapeOrNoRunningText
 	call PrintText
-	ld a, $1
-	ld [wd11f], a
+	ld a, 1
+	ld [wForcePlayerToChooseMon], a
 	call SaveScreenTilesToBuffer1
 	and a ; reset carry
 	ret
@@ -2334,7 +2334,7 @@ UseBagItem:
 	res UsingTrappingMove, [hl] ; not using multi-turn move any more
 
 .checkIfMonCaptured
-	ld a, [wd11c]
+	ld a, [wCapturedMonSpecies]
 	and a ; was the enemy mon captured with a ball?
 	jr nz, .returnAfterCapturingMon
 
@@ -2354,7 +2354,7 @@ UseBagItem:
 .returnAfterCapturingMon
 	call GBPalNormal
 	xor a
-	ld [wd11c], a
+	ld [wCapturedMonSpecies], a
 	ld a, $2
 	ld [wBattleResult], a
 	scf ; set carry
@@ -2516,8 +2516,8 @@ BattleMenu_RunWasSelected: ; 3d1fa (f:51fa)
 	ld hl, wBattleMonSpeed
 	ld de, wEnemyMonSpeed
 	call TryRunningFromBattle
-	ld a, $0
-	ld [wd11f], a
+	ld a, 0
+	ld [wForcePlayerToChooseMon], a
 	ret c
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
@@ -3035,18 +3035,18 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	push hl
 	call BattleRandom
 	ld b, $1
-	cp $3f ; select move 1 in [0,3e] (63/256 chance)
+	cp $3f ; select move 1, [0,3e] (63/256 chance)
 	jr c, .moveChosen
 	inc hl
 	inc b
-	cp $7f ; select move 1 in [3f,7e] (64/256 chance)
+	cp $7f ; select move 2, [3f,7e] (64/256 chance)
 	jr c, .moveChosen
 	inc hl
 	inc b
-	cp $be ; select move 1 in [7f,bd] (63/256 chance)
+	cp $be ; select move 3, [7f,bd] (63/256 chance)
 	jr c, .moveChosen
 	inc hl
-	inc b ; select move 4 in [be,ff] (66/256 chance)
+	inc b ; select move 4, [be,ff] (66/256 chance)
 .moveChosen
 	ld a, b
 	dec a

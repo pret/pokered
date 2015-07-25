@@ -154,7 +154,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld b,a
 .LastLoop
 ; update wAmountMoneyWon addresses (money to win) based on enemy's level
-	ld hl,wd047
+	ld hl,wTrainerBaseMoney + 1
 	ld c,2 ; wAmountMoneyWon is a 3-byte number
 	push bc
 	predef AddBCDPredef

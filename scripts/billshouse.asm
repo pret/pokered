@@ -49,7 +49,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	bit 0, a
 	ret nz
 	ld a, HS_BILL_POKEMON
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	xor a
@@ -75,7 +75,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld [$ffee], a
 	call SetSpritePosition1
 	ld a, HS_BILL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld c, 8
 	call DelayFrames
@@ -170,10 +170,10 @@ BillsHouseText2: ; 1e874 (7:6874)
 	call PrintText
 	SetEvent EVENT_GOT_SS_TICKET
 	ld a, HS_CERULEAN_GUARD_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, HS_CERULEAN_GUARD_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 .asm_1e8a9
 	ld hl, BillsHouseText_1e8cb

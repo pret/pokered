@@ -274,7 +274,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 
 	; once Poké Ball is taken, hide sprite
 	ld a, HS_FIGHTING_DOJO_GIFT_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvents EVENT_GOT_HITMONLEE, EVENT_DEFEATED_FIGHTING_DOJO
 .done
@@ -310,7 +310,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 
 	; once Poké Ball is taken, hide sprite
 	ld a, HS_FIGHTING_DOJO_GIFT_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 .done
 	jp TextScriptEnd

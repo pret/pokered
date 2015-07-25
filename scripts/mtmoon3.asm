@@ -145,7 +145,7 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 .asm_49e1d
 	ld a, HS_MT_MOON_3_FOSSIL_1
 .asm_49e1f
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
@@ -276,7 +276,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
 	ld a, HS_MT_MOON_3_FOSSIL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_DOME_FOSSIL
 	ld a, $4
@@ -304,7 +304,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
 	ld a, HS_MT_MOON_3_FOSSIL_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_GOT_HELIX_FOSSIL
 	ld a, $4

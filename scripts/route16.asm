@@ -34,7 +34,7 @@ Route16Script0: ; 59959 (16:5959)
 	ld a, 30
 	ld [W_CURENEMYLVL], a
 	ld a, HS_ROUTE_16_SNORLAX
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
 	ld a, $3

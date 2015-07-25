@@ -13,22 +13,22 @@ SeafoamIslands2Script: ; 46315 (11:6315)
 	jr nz, .asm_46340
 	SetEventReuseHL EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_1
-	ld [wd079], a
+	ld [wObjectToHide], a
 	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_1
-	ld [wd07a], a
+	ld [wObjectToShow], a
 	jr .asm_4634c
 .asm_46340
 	SetEventAfterBranchReuseHL EVENT_SEAFOAM2_BOULDER2_DOWN_HOLE, EVENT_SEAFOAM2_BOULDER1_DOWN_HOLE
 	ld a, HS_SEAFOAM_ISLANDS_2_BOULDER_2
-	ld [wd079], a
+	ld [wObjectToHide], a
 	ld a, HS_SEAFOAM_ISLANDS_3_BOULDER_2
-	ld [wd07a], a
+	ld [wObjectToShow], a
 .asm_4634c
-	ld a, [wd079]
-	ld [wcc4d], a
+	ld a, [wObjectToHide]
+	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld a, [wd07a]
-	ld [wcc4d], a
+	ld a, [wObjectToShow]
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 .asm_46362
 	ld a, $a0

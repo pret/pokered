@@ -112,7 +112,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	bit 0, a
 	ret nz
 	ld a, HS_POKEMONTOWER_2_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a

@@ -19,20 +19,20 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	jr nz, .asm_515ff
 	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 .asm_515ff
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
 	ret z
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ld a, HS_NUGGET_BRIDGE_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_BILL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_BILL_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 Route25ScriptPointers: ; 51622 (14:5622)

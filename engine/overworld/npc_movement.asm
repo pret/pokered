@@ -149,7 +149,7 @@ PalletMovementScript_Done: ; 1a4f4 (6:64f4)
 	and a
 	ret nz
 	ld a, $0
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, wd730
 	res 7, [hl]
