@@ -27,4 +27,3 @@ db 5 ; growth rate
 	tmlearn 0
 	tmlearn 0
 db 0 ; padding
-b 0 ; padding
