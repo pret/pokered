@@ -26,8 +26,8 @@ db 0 ; growth rate
 	tmlearn 33,34,39
 	tmlearn 44,46
 IF DEF(_YELLOW)
-		tmlearn 49,54
+		tmlearn 50,55
 ELSE
-		tmlearn 49
+		tmlearn 50
 ENDC
 db 0 ; padding
