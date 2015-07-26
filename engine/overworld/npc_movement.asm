@@ -178,7 +178,7 @@ PewterMovementScript_WalkToMuseum: ; 1a514 (6:6514)
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
-	ld [wd12f], a
+	ld [wWhichPewterGuy], a
 	predef PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
@@ -234,8 +234,8 @@ PewterMovementScript_WalkToGym: ; 1a581 (6:6581)
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $1
-	ld [wd12f], a
+	ld a, 1
+	ld [wWhichPewterGuy], a
 	predef PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy

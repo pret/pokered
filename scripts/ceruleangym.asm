@@ -62,7 +62,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 .asm_5c736
 	ld hl, W_OBTAINEDBADGES
 	set 1, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 1, [hl]
 
 	; deactivate gym trainers

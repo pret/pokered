@@ -1144,7 +1144,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jr nz,HoldTextDisplayOpen
 
 AfterDisplayingTextID:: ; 29d6 (0:29d6)
-	ld a,[wcc47]
+	ld a,[wEnteringCableClub]
 	and a
 	jr nz,HoldTextDisplayOpen
 	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
@@ -4162,7 +4162,7 @@ HandleDownArrowBlinkTiming:: ; 3c04 (0:3c04)
 
 ; The following code either enables or disables the automatic drawing of
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
-; for a button press after displaying text (unless [wcc47] is set).
+; for a button press after displaying text (unless [wEnteringCableClub] is set).
 
 EnableAutoTextBoxDrawing:: ; 3c3c (0:3c3c)
 	xor a

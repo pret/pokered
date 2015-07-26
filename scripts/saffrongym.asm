@@ -62,7 +62,7 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 .asm_5d091
 	ld hl, W_OBTAINEDBADGES
 	set 5, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 5, [hl]
 
 	; deactivate gym trainers

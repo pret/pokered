@@ -9,7 +9,7 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ld d, h
 	ld e, l
 	ld hl, PointerTable_37ce6
-	ld a, [wd12f]
+	ld a, [wWhichPewterGuy]
 	add a
 	ld b, 0
 	ld c, a
@@ -21,17 +21,17 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ld b, a
 	ld a, [W_XCOORD]
 	ld c, a
-.asm_37cc7
+.findMatchingCoordsLoop
 	ld a, [hli]
 	cp b
-	jr nz, .asm_37ce1
+	jr nz, .nextEntry1
 	ld a, [hli]
 	cp c
-	jr nz, .asm_37ce2
+	jr nz, .nextEntry2
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-.asm_37cd2
+.copyMovementDataLoop
 	ld a, [hli]
 	cp $ff
 	ret z
@@ -40,13 +40,13 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ld a, [wSimulatedJoypadStatesIndex]
 	inc a
 	ld [wSimulatedJoypadStatesIndex], a
-	jr .asm_37cd2
-.asm_37ce1
+	jr .copyMovementDataLoop
+.nextEntry1
 	inc hl
-.asm_37ce2
+.nextEntry2
 	inc hl
 	inc hl
-	jr .asm_37cc7
+	jr .findMatchingCoordsLoop
 
 PointerTable_37ce6: ; 37ce6 (d:7ce6)
 	dw PewterMuseumGuyCoords

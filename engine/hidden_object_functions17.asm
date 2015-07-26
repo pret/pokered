@@ -349,12 +349,21 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	add hl, de
 	ld a, [hli]
 
-	ld [$ffdb], a
+; There is a bug in this code. It should calculate a value in the range [0, 3]
+; but if the mask and random number don't have any 1 bits in common, then
+; the result of the AND will be 0. When 1 is subtracted from that, the value
+; will become $ff. This will result in 255 being added to hl, which will cause
+; hl to point to one of the zero bytes that pad the end of the ROM bank.
+; Trash can 0 was intended to be able to have the second lock only when the
+; first lock was in trash can 1 or 3. However, due to this bug, trash can 0 can
+; have the second lock regardless of which trash can had the first lock.
+
+	ld [hGymTrashCanRandNumMask], a
 	push hl
 	call Random
 	swap a
 	ld b, a
-	ld a, [$ffdb]
+	ld a, [hGymTrashCanRandNumMask]
 	and b
 	dec a
 	pop hl
@@ -398,6 +407,12 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	jp PrintPredefTextID
 
 GymTrashCans: ; 5de7d (17:5e7d)
+; byte 0: mask for random number
+; bytes 1-4: indices of the trash cans that can have the second lock
+;            (but see the comment above explaining a bug regarding this)
+; Note that the mask is simply the number of valid trash can indices that
+; follow. The remaining bytes are filled with 0 to pad the length of each entry
+; to 5 bytes.
 	db 2,  1,  3,  0,  0 ; 0
 	db 3,  0,  2,  4,  0 ; 1
 	db 2,  1,  5,  0,  0 ; 2

@@ -57,7 +57,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld [wJoyIgnore], a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
-	ld [wda38], a
+	ld [wUnusedDA38], a
 	ld a, $0
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a

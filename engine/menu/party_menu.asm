@@ -167,7 +167,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	dec hl
 	dec hl
 	ld b,[hl]
-	ld a,[wd156] ; evolution stone item ID
+	ld a,[wEvoStoneItemID] ; the stone the player used
 	inc hl
 	inc hl
 	inc hl

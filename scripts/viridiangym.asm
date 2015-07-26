@@ -156,7 +156,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 .asm_749be
 	ld hl, W_OBTAINEDBADGES
 	set 7, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 7, [hl]
 
 	; deactivate gym trainers

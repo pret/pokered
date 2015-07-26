@@ -106,13 +106,14 @@ OverworldLoopLessDelay::
 	aCoord 8, 9
 	ld [wTilePlayerStandingOn],a ; unused?
 	call DisplayTextID ; display either the start menu or the NPC/sign text
-	ld a,[wcc47]
+	ld a,[wEnteringCableClub]
 	and a
 	jr z,.checkForOpponent
 	dec a
-	ld a,$00
-	ld [wcc47],a
+	ld a,0
+	ld [wEnteringCableClub],a
 	jr z,.changeMap
+; XXX can this code be reached?
 	predef LoadSAV
 	ld a,[W_CURMAP]
 	ld [wDestinationMap],a
@@ -470,16 +471,16 @@ WarpFound1:: ; 0735 (0:0735)
 WarpFound2:: ; 073c (0:073c)
 	ld a,[wNumberOfWarps]
 	sub c
-	ld [wd73b],a ; save ID of used warp
+	ld [wWarpedFromWhichWarp],a ; save ID of used warp
 	ld a,[W_CURMAP]
-	ld [wd73c],a
+	ld [wWarpedFromWhichMap],a
 	call CheckIfInOutsideMap
 	jr nz,.indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map
 	ld a,[W_CURMAP]
 	ld [wLastMap],a
 	ld a,[W_CURMAPWIDTH]
-	ld [wd366],a
+	ld [wUnusedD366],a ; not read
 	ld a,[hWarpDestinationMap]
 	ld [W_CURMAP],a
 	cp a,ROCK_TUNNEL_1

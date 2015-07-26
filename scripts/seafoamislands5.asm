@@ -35,12 +35,12 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 	ld a, [wCoordIndex]
 	cp $3
 	jr nc, .asm_467e6
-	ld a, $40
-	ld [wccd4], a
-	ld a, $2
+	ld a, NPC_MOVEMENT_UP
+	ld [wSimulatedJoypadStatesEnd + 1], a
+	ld a, 2
 	jr .asm_467e8
 .asm_467e6
-	ld a, $1
+	ld a, 1
 .asm_467e8
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_UP

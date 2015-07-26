@@ -376,9 +376,9 @@ TextCommandProcessor:: ; 1b40 (0:1b40)
 	xor e
 	ld [wLetterPrintingDelayFlags],a
 	ld a,c
-	ld [wcc3a],a
+	ld [wUnusedCC3A],a
 	ld a,b
-	ld [wcc3b],a
+	ld [wUnusedCC3B],a
 
 NextTextCommand:: ; 1b55 (0:1b55)
 	ld a,[hli]
@@ -487,10 +487,10 @@ TextCommand02:: ; 1ba5 (0:1ba5)
 TextCommand03:: ; 1bb7 (0:1bb7)
 	pop hl
 	ld a,[hli]
-	ld [wcc3a],a
+	ld [wUnusedCC3A],a
 	ld c,a
 	ld a,[hli]
-	ld [wcc3b],a
+	ld [wUnusedCC3B],a
 	ld b,a
 	jp NextTextCommand
 

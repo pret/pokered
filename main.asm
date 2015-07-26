@@ -687,9 +687,9 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	ld a, [wWhichDungeonWarp]
 	ld c, a
 	ld hl, DungeonWarpList
-	ld de, $0
-	ld a, $6
-	ld [wd12f], a
+	ld de, 0
+	ld a, 6
+	ld [wDungeonWarpDataEntrySize], a
 .dungeonWarpListLoop
 	ld a, [hli]
 	cp b
@@ -701,7 +701,7 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	cp c
 	jr z, .matchedDungeonWarpID
 .nextDungeonWarp
-	ld a, [wd12f]
+	ld a, [wDungeonWarpDataEntrySize]
 	add e
 	ld e, a
 	jr .dungeonWarpListLoop
@@ -2063,7 +2063,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hJoyReleased], a
 	ld [hJoyHeld], a
 	ld [wActionResultOrTookBattleTurn], a
-	ld [wd5a3], a
+	ld [wUnusedD5A3], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a
@@ -3640,8 +3640,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
-	ld a, c
-	ld [wd153], a
+	ld a, c ; whether the mon was already flagged as owned
+	ld [wUnusedD153], a ; not read
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -4463,7 +4463,7 @@ InitPlayerData2:
 	ld [wPlayerID + 1], a
 
 	ld a, $ff
-	ld [wd71b], a                 ; XXX what's this?
+	ld [wUnusedD71B], a
 
 	ld hl, wPartyCount
 	call InitializeEmptyList

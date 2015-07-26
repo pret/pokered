@@ -16,9 +16,9 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 
 SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
 	ld hl, wWarpEntries
-	ld a, [wd73b]
+	ld a, [wWarpedFromWhichWarp]
 	ld b, a
-	ld a, [wd73c]
+	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call SilphCoElevatorScript_457ea
 

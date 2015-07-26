@@ -2310,7 +2310,7 @@ UseBagItem:
 	call GetItemName
 	call CopyStringToCF4B ; copy name
 	xor a
-	ld [wd152], a
+	ld [wPseudoItemID], a
 	call UseItem
 	call LoadHudTilePatterns
 	call ClearSprites

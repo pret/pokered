@@ -295,9 +295,11 @@ wTradeCenterPointerTableIndex:: ; cc38
 
 	ds 1
 
-; group these two together
-wcc3a:: ds 1 ; both used in home/text.asm
-wcc3b:: ds 1
+wUnusedCC3A:: ; cc3a
+	ds 1
+
+wUnusedCC3B:: ; cc3b
+	ds 1
 
 wDoNotWaitForButtonPressAfterDisplayingText:: ; cc3c
 ; if non-zero, skip waiting for a button press after displaying text in DisplayTextID
@@ -312,8 +314,7 @@ wSerialExchangeNybbleTempReceiveData:: ; cc3d
 wLinkMenuSelectionReceiveBuffer:: ; cc3d
 ; two byte buffer
 ; the received menu selection is stored twice
-
-wcc3d:: ds 1 ; not used for anything other than mentioned above (haha link function)
+	ds 1
 
 wSerialExchangeNybbleReceiveData:: ; cc3e
 ; the final received nybble is stored here by Serial_ExchangeNybble
@@ -336,8 +337,10 @@ wLinkTimeoutCounter:: ; cc47
 wUnknownSerialCounter:: ; cc47
 ; 2 bytes
 
-wcc47:: ds 1 ; used in text id stuff
-wcc48:: ds 1 ; part of wUnknownSerialCounter
+wEnteringCableClub:: ; cc47
+	ds 1
+
+	ds 1
 
 wWhichTradeMonSelectionMenu:: ; cc49
 ; $00 = player mons
@@ -412,9 +415,7 @@ wSlotMachineSavedROMBank:: ; cc5e
 ; ROM back to return to when the player is done with the slot machine
 	ds 1
 
-	ds 12
-
-wcc6b:: ds 14 ; doesn't seem to be used for anything, probably just more storage
+	ds 26
 
 wAnimPalette:: ; cc79
 	ds 1
@@ -452,8 +453,8 @@ wCanEvolveFlags:: ; ccd3
 ; Other methods of evolution simply set it by calling TryEvolvingMon.
 	ds 1
 
-wForceEvolution::
-wccd4:: ds 1 ; has a direct reference for simulated joypad stuff in vermillion and seafoam
+wForceEvolution:: ; ccd4
+	ds 1
 
 ; if [ccd5] != 1, the second AI layer is not applied
 wAILayer2Encouragement:: ; ccd5
@@ -1942,12 +1943,36 @@ wMenuExitMethod:: ; d12e
 ; $02 = the user pressed B or pressed A with the second menu item selected
 	ds 1
 
-wd12f:: ds 1 ; used in some coordinatestuff, npc pathstuff, and game corner prize stuff
-wd130:: ds 1 ; saved value of screen Y coord of trainer sprite
-wd131:: ds 1 ; saved value of screen X coord of trainer sprite
-wd132:: ds 1 ; saved value of map Y coordinate of trainer sprite (not sure for purpose)
-wd133:: ds 6 ; saved value of map X coordinate of trainer sprite
-wd139:: ds 1 ; backup of selected menu entry for game corner prizes
+wDungeonWarpDataEntrySize:: ; d12f
+; the size is always 6, so they didn't need a variable in RAM for this
+
+wWhichPewterGuy:: ; d12f
+; 0 = museum guy
+; 1 = gym guy
+
+wWhichPrizeWindow:: ; d12f
+; there are 3 windows, from 0 to 2
+
+wGymGateTileBlock:: ; d12f
+; a horizontal or vertical gate block
+	ds 1
+
+wSavedSpriteScreenY:: ; d130
+	ds 1
+
+wSavedSpriteScreenX:: ; d131
+	ds 1
+
+wSavedSpriteMapY:: ; d132
+	ds 1
+
+wSavedSpriteMapX:: ; d133
+	ds 1
+
+	ds 5
+
+wWhichPrize:: ; d139
+	ds 1
 
 wIgnoreInputCounter:: ; d13a
 ; counts downward each frame
@@ -1974,9 +1999,16 @@ W_PRIZE3:: ; d13f
 wSerialRandomNumberListBlock:: ; d141
 ; the first 7 bytes are the preamble
 
-wd141:: ds 2 ; prices for prizes
-wd143:: ds 2 ; prices for prizes
-wd145:: ds 3 ; prices for prizes
+wPrize1Price:: ; d141
+	ds 2
+
+wPrize2Price:: ; d143
+	ds 2
+
+wPrize3Price:: ; d145
+	ds 2
+
+	ds 1
 
 wLinkBattleRandomNumberList:: ; d148
 ; shared list of 9 random numbers, indexed by wLinkBattleRandomNumberListIndex
@@ -1985,11 +2017,23 @@ wLinkBattleRandomNumberList:: ; d148
 wSerialPlayerDataBlock:: ; d152
 ; the first 6 bytes are the preamble
 
-wd152:: ds 1 ; used as a temporary storage for the item used
-wd153:: ds 3 ; written to during pokedex flag action but doesn't seem to be read from
-wd156:: ds 1 ; evolution stone ID used
-wd157:: ds 1 ; used with oak's lab script (related to npc movement directions), possibly indirectly accessed with values below
+wPseudoItemID:: ; d152
+; When a real item is being used, this is 0.
+; When a move is acting as an item, this is the ID of the item it's acting as.
+; For example, out-of-battle Dig is executed using a fake Escape Rope item. In
+; that case, this would be ESCAPE_ROPE.
+	ds 1
 
+wUnusedD153:: ; d153
+	ds 1
+
+	ds 2
+
+wEvoStoneItemID:: ; d156
+	ds 1
+
+wSavedNPCMovementDirections2Index:: ; d157
+	ds 1
 
 wPlayerName:: ; d158
 	ds 11
@@ -2092,7 +2136,8 @@ W_XBLOCKCOORD:: ; d364
 wLastMap:: ; d365
 	ds 1
 
-wd366:: ds 1 ; W_CURMAPWIDTH of the last outdoor map visited when entering an inside map
+wUnusedD366:: ; d366
+	ds 1
 
 W_CURMAPTILESET:: ; d367
 	ds 1
@@ -2344,7 +2389,8 @@ wNumHoFTeams:: ; d5a2
 ; number of HOF teams
 	ds 1
 
-wd5a3:: ds 1 ; unused? (written to when loading map data)
+wUnusedD5A3:: ; d5a3
+	ds 1
 
 wPlayerCoins:: ; d5a4
 	ds 2 ; BCD
@@ -2635,7 +2681,8 @@ wDestinationMap:: ; d71a
 ; destination map (for certain types of special warps, not ordinary walking)
 	ds 1
 
-wd71b:: ds 1 ; written to but doesn't seem to be read
+wUnusedD71B:: ; d71b
+	ds 1
 
 wTileInFrontOfBoulderAndBoulderCollisionResult:: ; d71c
 ; used to store the tile in front of the boulder when trying to push a boulder
@@ -2650,7 +2697,10 @@ wWhichDungeonWarp:: ; d71e
 ; which dungeon warp within the source map was used
 	ds 1
 
-wd71f:: ds 9 ; used with card key
+wUnusedD71F:: ; d71f
+	ds 1
+
+	ds 8
 
 wd728::
 ; bit 0: using Strength outside of battle
@@ -2658,7 +2708,12 @@ wd728::
 
 	ds 1
 
-wd72a:: ds 2 ; flags for if a gym is beaten, also used to determine whether to display your name on the gym statues
+wBeatGymFlags:: ; d72a
+; redundant because it matches W_OBTAINEDBADGES
+; used to determine whether to show name on statue and in two NPC text scripts
+	ds 1
+
+	ds 1
 
 wd72c:: ; d72c
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
@@ -2717,8 +2772,13 @@ wCompletedInGameTradeFlags:: ; d737
 
 	ds 2
 
-wd73b:: ds 1 ; used with elevator warps
-wd73c:: ds 3 ; also used with elevator warps
+wWarpedFromWhichWarp:: ; d73b
+	ds 1
+
+wWarpedFromWhichMap:: ; d73c
+	ds 1
+
+	ds 2
 
 wCardKeyDoorY:: ; d73f
 	ds 1
@@ -2767,7 +2827,12 @@ W_TRAINERHEADERPTR:: ; da30
 
 	ds 6
 
-wda38:: ds 1 ; used with cinnabar gym questions and pokemon tower 7F?
+wOpponentAfterWrongAnswer:: ; da38
+; the trainer the player must face after getting a wrong answer in the Cinnabar
+; gym quiz
+
+wUnusedDA38:: ; da38
+	ds 1
 
 W_CURMAPSCRIPT:: ; da39
 ; index of current map script, mostly used as index for function pointer array

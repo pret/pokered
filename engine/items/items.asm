@@ -628,7 +628,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
-	ld [wd156],a
+	ld [wEvoStoneItemID],a
 	push af
 	ld a,EVO_STONE_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID],a
@@ -679,7 +679,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr z,.notUsingSoftboiled
 ; if using softboiled
@@ -712,7 +712,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wcf91],a
 	pop af
 	ld [wWhichPokemon],a
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr z,.checkItemType
 ; if using softboiled
@@ -865,7 +865,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
 	ld [wHPBarMaxHP],a ; max HP stored at wHPBarMaxHP (2 bytes, big-endian)
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jp z,.notUsingSoftboiled2
 ; if using softboiled
@@ -1052,7 +1052,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call ItemUseNoEffect
 	jp .done
 .doneHealing
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr nz,.skipRemovingItem ; no item to remove if using Softboiled
 	push hl
@@ -1107,7 +1107,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop af
 	pop af
 .done
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	ret nz ; if so, return
 	call GBPalWhiteOut
@@ -1381,7 +1381,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	inc a
 	ld [wEscapedFromBattle],a
 	ld [wActionResultOrTookBattleTurn],a ; item used
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Dig?
 	ret nz ; if so, return
 	call ItemUseReloadOverworldData
@@ -1419,7 +1419,7 @@ ItemUseXAccuracy: ; e013 (3:6013)
 ; The Card Key is handled in a different way.
 ItemUseCardKey: ; e022 (3:6022)
 	xor a
-	ld [wd71f],a
+	ld [wUnusedD71F],a
 	call GetTileAndCoordsInFrontOfPlayer
 	ld a,[GetTileAndCoordsInFrontOfPlayer] ; $4586
 	cp a,$18
@@ -1451,7 +1451,7 @@ ItemUseCardKey: ; e022 (3:6022)
 	cp e
 	jr nz,.nextEntry3
 	ld a,[hl]
-	ld [wd71f],a
+	ld [wUnusedD71F],a
 	jr .done
 .nextEntry1
 	inc hl

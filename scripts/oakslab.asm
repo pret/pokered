@@ -522,11 +522,11 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, [wNPCMovementDirections2Index]
-	ld [wd157], a
-	ld b, $0
+	ld [wSavedNPCMovementDirections2Index], a
+	ld b, 0
 	ld c, a
 	ld hl, wNPCMovementDirections2
-	ld a, $40
+	ld a, NPC_MOVEMENT_UP
 	call FillMemory
 	ld [hl], $ff
 	ld a, $1
@@ -604,11 +604,11 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, HS_OLD_MAN
 	ld [wMissableObjectIndex], a
 	predef ShowObject
-	ld a, [wd157]
-	ld b, $0
+	ld a, [wSavedNPCMovementDirections2Index]
+	ld b, 0
 	ld c, a
 	ld hl, wNPCMovementDirections2
-	xor a
+	xor a ; NPC_MOVEMENT_DOWN
 	call FillMemory
 	ld [hl], $ff
 	ld a, $ff

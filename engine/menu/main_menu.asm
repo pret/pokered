@@ -278,7 +278,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [wSerialExchangeNybbleSendData], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
-	ld [wcc47], a
+	ld [wEnteringCableClub], a
 	jr SpecialEnterMap
 .choseCancel
 	xor a
@@ -322,7 +322,7 @@ SpecialEnterMap: ; 5d5f (1:5d5f)
 	call ResetPlayerSpriteData
 	ld c, 20
 	call DelayFrames
-	ld a, [wcc47]
+	ld a, [wEnteringCableClub]
 	and a
 	ret nz
 	jp EnterMap

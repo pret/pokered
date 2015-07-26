@@ -265,6 +265,10 @@ H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 hFossilCounter EQU $FFDB
 
+hGymGateIndex EQU $FFDB
+
+hGymTrashCanRandNumMask EQU $FFDB
+
 hItemToRemoveID    EQU $FFDB
 hItemToRemoveIndex EQU $FFDC
 

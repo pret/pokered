@@ -62,7 +62,7 @@ CeladonGymText_48963: ; 48963 (12:4963)
 .asm_4898c
 	ld hl, W_OBTAINEDBADGES
 	set 3, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 3, [hl]
 
 	; deactivate gym trainers

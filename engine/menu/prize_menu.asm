@@ -65,11 +65,11 @@ GetPrizeMenuId: ; 5278e (14:678e)
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
 	ld a,[hSpriteIndexOrTextID]
-	sub a,$03       ; prize-texts' id are 3, 4 and 5
-	ld [wd12f],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
+	sub a,3       ; prize-texts' id are 3, 4 and 5
+	ld [wWhichPrizeWindow],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
 	add a
 	add a
-	ld d,$00
+	ld d,0
 	ld e,a
 	ld hl,PrizeDifferentMenuPtrs
 	add hl,de
@@ -84,10 +84,10 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld de,wd141
-	ld bc,$0006
+	ld de,wPrize1Price
+	ld bc,6
 	call CopyData
-	ld a,[wd12f]
+	ld a,[wWhichPrizeWindow]
 	cp a,$02        ;is TM_menu?
 	jr nz,.putMonName
 	ld a,[W_PRIZE1]
@@ -127,7 +127,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld de,NoThanksText
 	call PlaceString
 ; put prices on the right side of the textbox
-	ld de,wd141
+	ld de,wPrize1Price
 	coord hl, 13, 5
 ; reg. c:
 ; [low nybble] number of bytes
@@ -136,11 +136,11 @@ GetPrizeMenuId: ; 5278e (14:678e)
 ; Function $15CD displays BCD value (same routine
 ; used by text-command $02)
 	call PrintBCDNumber
-	ld de,wd143
+	ld de,wPrize2Price
 	coord hl, 13, 7
 	ld c,(%1 << 7 | 2)
 	call PrintBCDNumber
-	ld de,wd145
+	ld de,wPrize3Price
 	coord hl, 13, 9
 	ld c,(1 << 7 | 2)
 	jp PrintBCDNumber
@@ -172,11 +172,11 @@ PrintPrizePrice: ; 5287a (14:687a)
 	db "      @"
 
 LoadCoinsToSubtract: ; 528b1 (14:68b1)
-	ld a,[wd139] ; backup of selected menu_entry
+	ld a,[wWhichPrize]
 	add a
-	ld d,$00
+	ld d,0
 	ld e,a
-	ld hl,wd141 ; first prize's price
+	ld hl,wPrize1Price
 	add hl,de ; get selected prize's price
 	xor a
 	ld [hUnusedCoinsByte],a
@@ -187,15 +187,15 @@ LoadCoinsToSubtract: ; 528b1 (14:68b1)
 	ret
 
 HandlePrizeChoice: ; 528c6 (14:68c6)
-	ld a,[wCurrentMenuItem] ; selected menu_entry
-	ld [wd139],a
-	ld d,$00
+	ld a,[wCurrentMenuItem]
+	ld [wWhichPrize],a
+	ld d,0
 	ld e,a
 	ld hl,W_PRIZE1
 	add hl,de
 	ld a,[hl]
 	ld [wd11e],a
-	ld a,[wd12f]
+	ld a,[wWhichPrizeWindow]
 	cp a,$02 ; is prize a TM?
 	jr nz,.GetMonName
 	call GetItemName
@@ -205,14 +205,14 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 .GivePrize
 	ld hl,SoYouWantPrizeTextPtr
 	call PrintText
-	call YesNoChoice ; yes/no textbox
+	call YesNoChoice
 	ld a,[wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a
 	jr nz,.PrintOhFineThen
 	call LoadCoinsToSubtract
 	call HasEnoughCoins
 	jr c,.NotEnoughCoins
-	ld a,[wd12f]
+	ld a,[wWhichPrizeWindow]
 	cp a,$02
 	jr nz,.GiveMon
 	ld a,[wd11e]

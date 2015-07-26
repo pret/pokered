@@ -16,9 +16,9 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 
 CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
 	ld hl, wWarpEntries
-	ld a, [wd73b]
+	ld a, [wWarpedFromWhichWarp]
 	ld b, a
-	ld a, [wd73c]
+	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call CeladonMartElevatorScript_4862a
 

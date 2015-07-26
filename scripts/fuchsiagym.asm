@@ -62,7 +62,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 .asm_754c0
 	ld hl, W_OBTAINEDBADGES
 	set 4, [hl]
-	ld hl, wd72a
+	ld hl, wBeatGymFlags
 	set 4, [hl]
 
 	; deactivate gym trainers

@@ -19,7 +19,7 @@ GymStatues: ; 62419 (18:6419)
 	jr .loop
 .match
 	ld b, [hl]
-	ld a, [wd72a]
+	ld a, [wBeatGymFlags]
 	and b
 	cp b
 	tx_pre_id GymStatueText2

@@ -16,9 +16,9 @@ RocketHideoutElevatorScript: ; 45710 (11:5710)
 
 RocketHideoutElevatorScript_4572c: ; 4572c (11:572c)
 	ld hl, wWarpEntries
-	ld a, [wd73b]
+	ld a, [wWarpedFromWhichWarp]
 	ld b, a
-	ld a, [wd73c]
+	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call RocketHideoutElevatorScript_4573a
 

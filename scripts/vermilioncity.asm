@@ -84,8 +84,8 @@ VermilionCityScript2: ; 19833 (6:5833)
 	ld [wJoyIgnore], a
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
-	ld [wccd4], a
-	ld a, $2
+	ld [wSimulatedJoypadStatesEnd + 1], a
+	ld a, 2
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
