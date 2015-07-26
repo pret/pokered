@@ -19,15 +19,15 @@ db DIG
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01000011
-db %00001000
-db %11001110
-db %00000010
-db %10001000
+	tmlearn 6,8
+	tmlearn 9,10,15
+	tmlearn 20
+	tmlearn 26,27,28,31,32
+	tmlearn 34
+	tmlearn 44,48
 IF DEF(_YELLOW)
-	db %00000110
+		tmlearn 49,50
 ELSE
-	db %00000010
+		tmlearn 49
 ENDC
 db 0 ; padding

@@ -313,7 +313,7 @@ wLinkMenuSelectionReceiveBuffer:: ; cc3d
 ; two byte buffer
 ; the received menu selection is stored twice
 
-wcc3d:: ds 1 ; not used for anything other than mentioned above (haha link function)
+wcc3d:: ds 1 ; not used for anything other than mentioned above
 
 wSerialExchangeNybbleReceiveData:: ; cc3e
 ; the final received nybble is stored here by Serial_ExchangeNybble

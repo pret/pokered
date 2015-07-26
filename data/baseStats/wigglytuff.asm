@@ -19,11 +19,11 @@ db DEFENSE_CURL
 db DOUBLESLAP
 db 4 ; growth rate
 ; learnset
-db %10110001
-db %01111111
-db %10101111
-db %11110001
-db %10100011
-db %00111000
-db %01100011
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 17,18,19,20,22,24
+	tmlearn 25,29,30,31,32
+	tmlearn 33,34,38,40
+	tmlearn 44,45,46
+	tmlearn 49,50,54,55
 db 0 ; padding

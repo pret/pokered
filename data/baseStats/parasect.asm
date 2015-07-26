@@ -19,11 +19,11 @@ db LEECH_LIFE
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100100
-db %01000011
-db %00111000
-db %11001000
-db %10000011
-db %00001000
-db %00000110
+	tmlearn 3,6,8
+	tmlearn 9,10,15
+	tmlearn 20,21,22
+	tmlearn 28,31,32
+	tmlearn 33,34,40
+	tmlearn 44
+	tmlearn 50,51
 db 0 ; padding

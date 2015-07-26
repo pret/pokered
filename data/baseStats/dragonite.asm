@@ -19,11 +19,11 @@ db THUNDER_WAVE
 db AGILITY
 db 5 ; growth rate
 ; learnset
-db %11100010
-db %01111111
-db %11001000
-db %11000001
-db %11100011
-db %00011000
-db %00110010
+	tmlearn 2,6,7,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 20,23,24
+	tmlearn 25,31,32
+	tmlearn 33,34,38,39,40
+	tmlearn 44,45
+	tmlearn 50,53,54
 db 0 ; padding

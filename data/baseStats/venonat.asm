@@ -19,19 +19,18 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %00000011
-db %00111000
+	tmlearn 6
+	tmlearn 9,10
+	tmlearn 20,21,22
 IF DEF(_YELLOW)
-	db %11110000
-	db %01000011
-	db %00101000
-	db %00100010
+		tmlearn 28,29,30,31
+		tmlearn 32,33,38
+		tmlearn 43,45
+		tmlearn 49,53
 ELSE
-	db %11010000
-	db %00000011
-	db %00101000
-	db %00000010
+		tmlearn 28,30,31
+		tmlearn 32,33
+		tmlearn 43,45
+		tmlearn 49
 ENDC
-
 db 0 ; padding

@@ -19,11 +19,11 @@ db VICEGRIP
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100100
-db %01111111
-db %00001000
-db %11000000
-db %00000010
-db %00001000
-db %00110110
+	tmlearn 3,6,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 20
+	tmlearn 31,32
+	tmlearn 34
+	tmlearn 44
+	tmlearn 50,51,53,54
 db 0 ; padding

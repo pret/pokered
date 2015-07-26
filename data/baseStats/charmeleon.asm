@@ -19,11 +19,11 @@ db EMBER
 db 0
 db 3 ; growth rate
 ; learnset
-db %10110101
-db %00000011
-db %01001111
-db %11001000
-db %11100011
-db %00001000
-db %00100110
+	tmlearn 1,3,5,6,8
+	tmlearn 9,10
+	tmlearn 17,18,19,20,23
+	tmlearn 28,31,32
+	tmlearn 33,34,38,39,40
+	tmlearn 44
+	tmlearn 50,51,54
 db 0 ; padding
