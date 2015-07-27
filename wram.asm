@@ -1902,7 +1902,7 @@ wVBlankSavedROMBank:: ; d122
 	ds 1
 
 wIsKeyItem:: ; d124
-	ds 1 
+	ds 1
 
 wTextBoxID:: ; d125
 	ds 1
