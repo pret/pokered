@@ -583,11 +583,11 @@ GetMonHeader:: ; 1537 (0:1537)
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a,[wd11e]
 	dec a
-	ld bc,28
+	ld bc,MonBaseStatsEnd - MonBaseStats
 	ld hl,BaseStats
 	call AddNTimes
 	ld de,W_MONHEADER
-	ld bc,28
+	ld bc,MonBaseStatsEnd - MonBaseStats
 	call CopyData
 	jr .done
 .specialID
@@ -601,7 +601,7 @@ GetMonHeader:: ; 1537 (0:1537)
 .mew
 	ld hl,MewBaseStats
 	ld de,W_MONHEADER
-	ld bc,28
+	ld bc,MonBaseStatsEnd - MonBaseStats
 	ld a,BANK(MewBaseStats)
 	call FarCopyData
 .done
@@ -3611,7 +3611,7 @@ CalcStats:: ; 3936 (0:3936)
 	ld [de], a
 	inc de
 	ld a, c
-	cp $5
+	cp NUM_STATS
 	jr nz, .statsLoop
 	ret
 
@@ -3662,7 +3662,7 @@ CalcStat:: ; 394a (0:394a)
 	srl c
 	pop hl
 	push bc
-	ld bc, $b           ; skip to stat IV values
+	ld bc, wPartyMon1DVs - (wPartyMon1HPExp - 1) ; also wEnemyMonDVs - wEnemyMonHP
 	add hl, bc
 	pop bc
 	ld a, c
@@ -3756,7 +3756,7 @@ CalcStat:: ; 394a (0:394a)
 	call Divide             ; (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100
 	ld a, c
 	cp $1
-	ld a, $5
+	ld a, 5 ; + 5 for non-HP stat
 	jr nz, .notHPStat
 	ld a, [W_CURENEMYLVL]
 	ld b, a
@@ -3768,7 +3768,7 @@ CalcStat:: ; 394a (0:394a)
 	inc a
 	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
 .noCarry3
-	ld a, $a
+	ld a, 10 ; +10 for HP stat
 .notHPStat
 	ld b, a
 	ld a, [H_MULTIPLICAND+2]
@@ -3780,17 +3780,17 @@ CalcStat:: ; 394a (0:394a)
 	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
 	ld a, [H_MULTIPLICAND+1] ; check for overflow (>999)
-	cp $4
+	cp 999 / $100 + 1
 	jr nc, .overflow
-	cp $3
+	cp 999 / $100
 	jr c, .noOverflow
 	ld a, [H_MULTIPLICAND+2]
-	cp $e8
+	cp 999 % $100 + 1
 	jr c, .noOverflow
 .overflow
-	ld a, $3                 ; overflow: cap at 999
+	ld a, 999 / $100               ; overflow: cap at 999
 	ld [H_MULTIPLICAND+1], a
-	ld a, $e7
+	ld a, 999 % $100
 	ld [H_MULTIPLICAND+2], a
 .noOverflow
 	pop bc

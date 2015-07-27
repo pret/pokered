@@ -3691,7 +3691,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	inc de
 	jr .copyMonTypesAndMoves
 .copyEnemyMonData
-	ld bc, wPartyMon1DVs - wPartyMon1
+	ld bc, wEnemyMon1DVs - wEnemyMon1
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
@@ -3762,7 +3762,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
-	ld b, $a
+	ld b, NUM_STATS * 2
 .writeEVsLoop              ; set all EVs to 0
 	inc de
 	ld [de], a
@@ -3786,7 +3786,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	jr .done
 .calcFreshStats
 	pop hl
-	ld bc, $10
+	ld bc, wPartyMon1HPExp - 1 - wPartyMon1
 	add hl, bc
 	ld b, $0
 	call CalcStats         ; calculate fresh set of stats
@@ -3798,7 +3798,7 @@ LoadMovePPs: ; f473 (3:7473)
 	call GetPredefRegisters
 	; fallthrough
 AddPartyMon_WriteMovePP: ; f476 (3:7476)
-	ld b, $4
+	ld b, NUM_MOVES
 .pploop
 	ld a, [hli]     ; read move ID
 	and a

@@ -161,7 +161,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
-	ld bc, $1c
+	ld bc, MonBaseStatsEnd - MonBaseStats
 	call AddNTimes
 	ld de, W_MONHEADER
 	call CopyData

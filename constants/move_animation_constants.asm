@@ -16,7 +16,7 @@ const_value = $D8
 	const SE_SPIRAL_BALLS_INWARD       ; $E2 used in Growth/Focus Energy/Hyper Beam etc.
 	const SE_SHAKE_ENEMY_HUD_2         ; $E3 unused
 	const SE_SHAKE_ENEMY_HUD           ; $E4
-	const SE_SLIDE_MON_HALF_OFF       ; $E5 used in Softboiled
+	const SE_SLIDE_MON_HALF_OFF        ; $E5 used in Softboiled
 	const SE_PETALS_FALLING            ; $E6 used in Petal Dance
 	const SE_LEAVES_FALLING            ; $E7 used in Razor Leaf
 	const SE_TRANSFORM_MON             ; $E8 used in Transform

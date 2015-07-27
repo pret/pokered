@@ -1,3 +1,4 @@
+MonBaseStats:
 RhydonBaseStats: ; 39002 (e:5002)
 db DEX_RHYDON ; pokedex id
 db 105 ; base hp
@@ -27,3 +28,4 @@ db %10100010
 db %10001000
 db %00110010
 db 0 ; padding
+MonBaseStatsEnd:
