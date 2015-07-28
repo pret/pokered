@@ -2141,7 +2141,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	Coorda 13, 16
 	coord hl, 7, 14
 	ld de, W_NUMSAFARIBALLS
-	ld bc, $102
+	lb bc, 1, 2
 	call PrintNumber
 	ld b, $1 ; top menu item X
 .leftColumn_WaitForInput
@@ -2174,7 +2174,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	Coorda 1, 16 ; clear lower cursor position in left column
 	coord hl, 7, 14
 	ld de, W_NUMSAFARIBALLS
-	ld bc, $102
+	lb bc, 1, 2
 	call PrintNumber
 	ld b, $d ; top menu item X
 .rightColumn_WaitForInput
@@ -2951,11 +2951,11 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld [hl], "/"
 	coord hl, 5, 11
 	ld de, wcd6d
-	ld bc, $102
+	lb bc, 1, 2
 	call PrintNumber
 	coord hl, 8, 11
 	ld de, wd11e
-	ld bc, $102
+	lb bc, 1, 2
 	call PrintNumber
 	call GetCurrentMove
 	coord hl, 2, 10

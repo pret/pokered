@@ -108,7 +108,7 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	call PlaceString
 	coord hl, 16, 15
 	ld de, wHoFTeamNo
-	ld bc, $0103
+	lb bc, 1, 3
 	call PrintNumber
 	jpba HoFDisplayMonInfo
 

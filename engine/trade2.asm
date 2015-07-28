@@ -7,7 +7,7 @@ Trade_PrintPlayerMonInfoText: ; 42769 (10:6769)
 	predef IndexToPokedex
 	coord hl, 9, 0
 	ld de,wd11e
-	ld bc,$8103
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber
 	coord hl, 5, 2
 	ld de,wcf4b
@@ -17,7 +17,7 @@ Trade_PrintPlayerMonInfoText: ; 42769 (10:6769)
 	call PlaceString
 	coord hl, 8, 6
 	ld de,wTradedPlayerMonOTID
-	ld bc,$8205
+	lb bc, LEADING_ZEROES | 2, 5
 	jp PrintNumber
 
 Trade_PrintEnemyMonInfoText: ; 427a7 (10:67a7)
@@ -29,7 +29,7 @@ Trade_PrintEnemyMonInfoText: ; 427a7 (10:67a7)
 	predef IndexToPokedex
 	coord hl, 9, 10
 	ld de,wd11e
-	ld bc,$8103
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber
 	coord hl, 5, 12
 	ld de,wcd6d
@@ -39,7 +39,7 @@ Trade_PrintEnemyMonInfoText: ; 427a7 (10:67a7)
 	call PlaceString
 	coord hl, 8, 16
 	ld de,wTradedEnemyMonOTID
-	ld bc,$8205
+	lb bc, LEADING_ZEROES | 2, 5
 	jp PrintNumber
 
 Trade_MonInfoText: ; 427e5 (10:67e5)

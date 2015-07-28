@@ -561,7 +561,7 @@ TextCommand09:: ; 1bff (0:1bff)
 	ld a,b
 	and a,$f0
 	swap a
-	set 6,a
+	set BIT_LEFT_ALIGN,a
 	ld b,a
 	call PrintNumber
 	ld b,h

@@ -539,7 +539,7 @@ PrintLevelFull:: ; 151b (0:151b)
 PrintLevelCommon:: ; 1523 (0:1523)
 	ld [wd11e],a
 	ld de,wd11e
-	ld b,$41 ; no leading zeroes, left-aligned, one byte
+	ld b,LEFT_ALIGN | 1 ; 1 byte
 	jp PrintNumber
 
 GetwMoves:: ; 152e (0:152e)
@@ -1668,7 +1668,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	coord hl, 9, 10
 .printQuantity
 	ld de,wItemQuantity ; current quantity
-	ld bc,$8102 ; print leading zeroes, 1 byte, 2 digits
+	lb bc,LEADING_ZEROES | 1, 2 ; 1 byte, 2 digits
 	call PrintNumber
 	jp .waitForKeyPressLoop
 .buttonAPressed ; the player chose to make the transaction
@@ -1855,7 +1855,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	push de
 	ld de,wd11e
 	ld [de],a
-	ld bc,$0102
+	lb bc, 1, 2
 	call PrintNumber
 	pop de
 	pop af
@@ -4197,9 +4197,6 @@ PrintNumber:: ; 3c5f
 ; the value to char "0" instead of calling PrintNumber.
 ; Flags LEADING_ZEROES and LEFT_ALIGN can be given
 ; in bits 7 and 6 of b respectively.
-LEADING_ZEROES EQU 7
-LEFT_ALIGN     EQU 6
-
 	push bc
 	xor a
 	ld [H_PASTLEADINGZEROES], a
@@ -4392,7 +4389,7 @@ endm
 	ret
 
 .PrintLeadingZero:
-	bit LEADING_ZEROES, d
+	bit BIT_LEADING_ZEROES, d
 	ret z
 	ld [hl], "0"
 	ret
@@ -4401,9 +4398,9 @@ endm
 ; Increment unless the number is left-aligned,
 ; leading zeroes are not printed, and no digits
 ; have been printed yet.
-	bit LEADING_ZEROES, d
+	bit BIT_LEADING_ZEROES, d
 	jr nz, .inc
-	bit LEFT_ALIGN, d
+	bit BIT_LEFT_ALIGN, d
 	jr z, .inc
 	ld a, [H_PASTLEADINGZEROES]
 	and a
