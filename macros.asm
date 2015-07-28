@@ -635,61 +635,12 @@ EAST_MAP_CONNECTION: MACRO
 ENDM
 
 tmlearn: MACRO
-if 0 == \1
-tm1 = 0
-tm1_ = 0
-else
-tm1 = %111 & (\1 - 1)
-tm1_ = 1
+x = 0
+	rept _NARG
+if \1 != 0
+x = x | (1 << ((\1 - 1) % 8))
 endc
-if 2 <= _NARG
-tm2 = %111 & (\2 - 1)
-tm2_ = 1
-else
-tm2 = 0
-tm2_ = 0
-endc
-if 3 <= _NARG
-tm3 = %111 & (\3 - 1)
-tm3_ = 1
-else
-tm3 = 0
-tm3_ = 0
-endc
-if 4 <= _NARG
-tm4 = %111 & (\4 - 1)
-tm4_ = 1
-else
-tm4 = 0
-tm4_ = 0
-endc
-if 5 <= _NARG
-tm5 = %111 & (\5 - 1)
-tm5_ = 1
-else
-tm5 = 0
-tm5_ = 0
-endc
-if 6 <= _NARG
-tm6 = %111 & (\6 - 1)
-tm6_ = 1
-else
-tm6 = 0
-tm6_ = 0
-endc
-if 7 <= _NARG
-tm7 = %111 & (\7 - 1)
-tm7_ = 1
-else
-tm7 = 0
-tm7_ = 0
-endc
-if 8 <= _NARG
-tm8 = %111 & (\8 - 1)
-tm8_ = 1
-else
-tm8 = 0
-tm8_ = 0
-endc
-db tm8_ << tm8 | tm7_ << tm7 | tm6_ << tm6 | tm5_ << tm5 | tm4_ << tm4 | tm3_ << tm3 | tm2_ << tm2 | tm1_ << tm1
+	shift
+	endr
+	db x
 ENDM
