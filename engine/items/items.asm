@@ -91,9 +91,9 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
 	dw UnusableItem      ; EXP__ALL
-	dw OldRodCode        ; OLD_ROD
-	dw GoodRodCode       ; GOOD_ROD
-	dw SuperRodCode      ; SUPER_ROD
+	dw ItemUseOldRod     ; OLD_ROD
+	dw ItemUseGoodRod    ; GOOD_ROD
+	dw ItemUseSuperRod   ; SUPER_ROD
 	dw ItemUsePPUp       ; PP_UP (real one)
 	dw ItemUsePPRestore  ; ETHER
 	dw ItemUsePPRestore  ; MAX_ETHER
@@ -1734,14 +1734,14 @@ CoinCaseNumCoinsText: ; e247 (3:6247)
 	TX_FAR _CoinCaseNumCoinsText
 	db "@"
 
-OldRodCode: ; e24c (3:624c)
+ItemUseOldRod: ; e24c (3:624c)
 	call FishingInit
 	jp c, ItemUseNotTime
 	ld bc, (5 << 8) | MAGIKARP
 	ld a, $1 ; set bite
 	jr RodResponse
 
-GoodRodCode: ; e259 (3:6259)
+ItemUseGoodRod: ; e259 (3:6259)
 	call FishingInit
 	jp c,ItemUseNotTime
 .RandomLoop
@@ -1769,7 +1769,7 @@ GoodRodCode: ; e259 (3:6259)
 
 INCLUDE "data/good_rod.asm"
 
-SuperRodCode: ; e283 (3:6283)
+ItemUseSuperRod: ; e283 (3:6283)
 	call FishingInit
 	jp c, ItemUseNotTime
 	call ReadSuperRodData
