@@ -17,7 +17,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	ret z
 	ld a, $1d
 	ld [wNewTileBlockID], a
-	ld bc, $503
+	lb bc, 5, 3
 	predef_jump ReplaceTileBlock
 
 VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)

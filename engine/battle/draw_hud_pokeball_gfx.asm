@@ -13,7 +13,7 @@ DrawEnemyPokeballs: ; 3a857 (e:6857)
 LoadPartyPokeballGfx: ; 3a85d (e:685d)
 	ld de, PokeballTileGraphics
 	ld hl, vSprites + $310
-	ld bc, (BANK(PokeballTileGraphics) << 8) + $04
+	lb bc, BANK(PokeballTileGraphics), $04
 	jp CopyVideoData
 
 SetupOwnPartyPokeballs: ; 3a869 (e:6869)

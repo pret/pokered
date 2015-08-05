@@ -144,7 +144,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BLAINE
-	ld bc, (TM_38 << 8) | 1
+	lb bc, TM_38, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b

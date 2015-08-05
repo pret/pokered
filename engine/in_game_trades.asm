@@ -17,7 +17,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld a,[hli]
 	push af
 	ld de,wInGameTradeMonNick
-	ld bc,$000b
+	ld bc, 11
 	call CopyData
 	pop af
 	ld l,a
@@ -81,7 +81,7 @@ InGameTrade_GetMonName: ; 71b6a (1c:5b6a)
 	call GetMonName
 	ld hl,wcd6d
 	pop de
-	ld bc,$b
+	ld bc, 11
 	jp CopyData
 
 INCLUDE "data/trades.asm"
@@ -105,7 +105,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	jr nz,.tradeFailed ; jump if the selected mon's species is not the required one
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMon1Level
-	ld bc,$002c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a,[hl]
 	ld [W_CURENEMYLVL],a
@@ -168,11 +168,11 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld a, [wInGameTradeReceiveMonSpecies]
 	ld [hl], a ; wTradedEnemyMonSpecies
 	ld hl, wPartyMonOT
-	ld bc, $b
+	ld bc, 11
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wTradedPlayerMonOT
-	ld bc, $b
+	ld bc, 11
 	call InGameTrade_CopyData
 	ld hl, InGameTrade_TrainerString
 	ld de, wTradedEnemyMonOT
@@ -201,16 +201,16 @@ InGameTrade_CopyData: ; 71d11 (1c:5d11)
 
 InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
 	ld hl, wPartyMonNicks
-	ld bc, $b
+	ld bc, 11
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, wPartyMonOT
-	ld bc, $b
+	ld bc, 11
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1

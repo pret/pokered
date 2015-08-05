@@ -5,7 +5,7 @@ MarowakAnim: ; 708ca (1c:48ca)
 	call CopyMonPicFromBGToSpriteVRAM ; cover the BG ghost pic with a sprite ghost pic that looks the same
 ; now that the ghost pic is being displayed using sprites, clear the ghost pic from the BG tilemap
 	coord hl, 12, 0
-	ld bc, $707
+	lb bc, 7, 7
 	call ClearScreenArea
 	call Delay3
 	xor a
@@ -59,7 +59,7 @@ CopyMonPicFromBGToSpriteVRAM: ; 7092a (1c:492a)
 	ld a, $70
 	ld [W_BASECOORDX], a
 	ld hl, wOAMBuffer
-	ld bc, $606
+	lb bc, 6, 6
 	ld d, $8
 .oamLoop
 	push bc

@@ -31,7 +31,7 @@ CeladonDinerText5: ; 49173 (12:5173)
 	jr nz, .asm_eb14d
 	ld hl, CeladonDinerText_491a7
 	call PrintText
-	ld bc, (COIN_CASE << 8) | 1
+	lb bc, COIN_CASE, 1
 	call GiveItem
 	jr nc, .BagFull
 	SetEvent EVENT_GOT_COIN_CASE

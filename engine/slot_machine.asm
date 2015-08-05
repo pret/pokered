@@ -134,7 +134,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
 	coord hl, 14, 12
-	ld bc, $0d0f
+	lb bc, 13, 15
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU

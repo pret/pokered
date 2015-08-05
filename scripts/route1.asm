@@ -12,7 +12,7 @@ Route1Text1: ; 1cab8 (7:4ab8)
 	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
 	call PrintText
-	ld bc, (POTION << 8) | 1
+	lb bc, POTION, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, Route1Text_1cae8

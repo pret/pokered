@@ -13,19 +13,19 @@ SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, SilphCo6Coords1
+	ld hl, SilphCo6GateCoords
 	call SilphCo4Script_19d5d
 	call SilphCo6Script_1a1e6
 	CheckEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	ld bc, $0602
+	lb bc, 6, 2
 	predef_jump ReplaceTileBlock
 
-SilphCo6Coords1: ; 1a1e3 (6:61e3)
-	db $06, $02
-	db $ff
+SilphCo6GateCoords: ; 1a1e3 (6:61e3)
+	db $06,$02
+	db $FF
 
 SilphCo6Script_1a1e6: ; 1a1e6 (6:61e6)
 	ld a, [$ffe0]

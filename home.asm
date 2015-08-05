@@ -1402,7 +1402,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
 	coord hl, 4, 2 ; coordinates of upper left corner of menu text box
-	ld de,$090e ; height and width of menu text box
+	lb de, 9, 14 ; height and width of menu text box
 	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
 	jr nz,.skipMovingSprites
@@ -1668,7 +1668,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	coord hl, 9, 10
 .printQuantity
 	ld de,wItemQuantity ; current quantity
-	lb bc,LEADING_ZEROES | 1, 2 ; 1 byte, 2 digits
+	lb bc, LEADING_ZEROES | 1, 2 ; 1 byte, 2 digits
 	call PrintNumber
 	jp .waitForKeyPressLoop
 .buttonAPressed ; the player chose to make the transaction
@@ -1705,8 +1705,8 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 
 PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	coord hl, 5, 3
-	ld b,$09
-	ld c,$0e
+	ld b,9
+	ld c,14
 	call ClearScreenArea
 	ld a,[wListPointer]
 	ld e,a
@@ -1786,7 +1786,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld [wcf91],a
 	call GetItemPrice ; get price
 	pop hl
-	ld bc,20 + 5 ; 1 row down and 5 columns right
+	ld bc, SCREEN_WIDTH + 5 ; 1 row down and 5 columns right
 	add hl,bc
 	ld c,$a3 ; no leading zeroes, right-aligned, print currency symbol, 3 bytes
 	call PrintBCDNumber
@@ -1815,7 +1815,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,[wListScrollOffset]
 	add b
 	ld [hl],a
-	call LoadMonData ; load pokemon info
+	call LoadMonData
 	ld a,[wMonDataLocation]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z,.skipCopyingLevel
@@ -1826,7 +1826,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	pop hl
 	ld bc,$001c
 	add hl,bc
-	call PrintLevel ; print level
+	call PrintLevel
 	pop af
 	ld [wd11e],a
 .skipPrintingPokemonLevel
@@ -1844,7 +1844,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	and a ; is the item unsellable?
 	jr nz,.skipPrintingItemQuantity ; if so, don't print the quantity
 	push hl
-	ld bc,20 + 8 ; 1 row down and 8 columns right
+	ld bc, SCREEN_WIDTH + 8 ; 1 row down and 8 columns right
 	add hl,bc
 	ld a,"×"
 	ld [hli],a
@@ -1877,7 +1877,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,$ec ; unfilled right arrow menu cursor to indicate an item being swapped
 	ld [hli],a
 .nextListEntry
-	ld bc,2 * 20 ; 2 rows
+	ld bc,2 * SCREEN_WIDTH ; 2 rows
 	add hl,bc
 	pop bc
 	inc c
@@ -1899,12 +1899,12 @@ GetMonName:: ; 2f9e (0:2f9e)
 	push hl
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,BANK(MonsterNames) ; 07
+	ld a,BANK(MonsterNames)
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ld a,[wd11e]
 	dec a
-	ld hl,MonsterNames ; 421E
+	ld hl,MonsterNames
 	ld c,10
 	ld b,0
 	call AddNTimes
@@ -1972,7 +1972,7 @@ GetMachineName:: ; 2ff3 (0:2ff3)
 ; now get the machine number and convert it to text
 	ld a,[wd11e]
 	sub TM_01 - 1
-	ld b,$F6 ; "0"
+	ld b, "0"
 .FirstDigit
 	sub 10
 	jr c,.SecondDigit
@@ -1985,7 +1985,7 @@ GetMachineName:: ; 2ff3 (0:2ff3)
 	ld [de],a
 	inc de
 	pop af
-	ld b,$F6 ; "0"
+	ld b, "0"
 	add b
 	ld [de],a
 	inc de
@@ -2134,6 +2134,7 @@ IsKeyItem:: ; 30d9 (0:30d9)
 ; function to draw various text boxes
 ; INPUT:
 ; [wTextBoxID] = text box ID
+; b, c = y, x cursor position (TWO_OPTION_MENU only)
 DisplayTextBoxID:: ; 30e8 (0:30e8)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3002,7 +3003,7 @@ YesNoChoicePokeCenter:: ; 360a (0:360a)
 	ld a, HEAL_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
 	coord hl, 11, 6
-	ld bc, $80c
+	lb bc, 8, 12
 	jr DisplayYesNoChoice
 
 Func_361a:: ; 361a (0:361a)
@@ -3010,7 +3011,7 @@ Func_361a:: ; 361a (0:361a)
 	ld a, WIDE_YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	coord hl, 12, 7
-	ld bc, $080d
+	lb bc, 8, 13
 DisplayYesNoChoice:: ; 3628 (0:3628)
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -3097,7 +3098,7 @@ LoadFontTilePatterns::
 .on
 	ld de, FontGraphics
 	ld hl, vFont
-	ld bc, BANK(FontGraphics) << 8 | $80
+	lb bc, BANK(FontGraphics), $80
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
 LoadTextBoxTilePatterns::
@@ -3113,7 +3114,7 @@ LoadTextBoxTilePatterns::
 .on
 	ld de, TextBoxGraphics
 	ld hl, vChars2 + $600
-	ld bc, BANK(TextBoxGraphics) << 8 | $20
+	lb bc, BANK(TextBoxGraphics), $20
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 LoadHpBarAndStatusTilePatterns::
@@ -3129,7 +3130,7 @@ LoadHpBarAndStatusTilePatterns::
 .on
 	ld de, HpBarAndStatusGraphics
 	ld hl, vChars2 + $620
-	ld bc, BANK(HpBarAndStatusGraphics) << 8 | $1e
+	lb bc, BANK(HpBarAndStatusGraphics), $1e
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 
@@ -3824,12 +3825,12 @@ MoveMon:: ; 3a68 (0:3a68)
 	ld [MBC1RomBank], a
 	ret
 
-; skips a text entries, each of size $b (like trainer name, OT name, rival name, ...)
+; skips a text entries, each of size 11 (like trainer name, OT name, rival name, ...)
 ; hl: base pointer, will be incremented by $b * a
 SkipFixedLengthTextEntries:: ; 3a7d (0:3a7d)
 	and a
 	ret z
-	ld bc, $b
+	ld bc, 11
 .skipLoop
 	add hl, bc
 	dec a

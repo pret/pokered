@@ -12,7 +12,7 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 	jr c, .asm_0ad3c
 	ld hl, TM39PreReceiveText
 	call PrintText
-	ld bc, (TM_39 << 8) | 1
+	lb bc, TM_39, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM39Text

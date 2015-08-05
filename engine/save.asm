@@ -155,8 +155,8 @@ SaveSAV: ; 7370a (1c:770a)
 .save
 	call SaveSAVtoSRAM
 	coord hl, 1, 13
-	ld bc,$0412
-	call ClearScreenArea ; clear area 4x12 starting at 13,1
+	lb bc, 4, 18
+	call ClearScreenArea
 	coord hl, 1, 14
 	ld de,NowSavingString
 	call PlaceString
@@ -176,7 +176,7 @@ NowSavingString:
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
 	coord hl, 0, 7
-	ld bc,$0801
+	lb bc, 8, 1
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu

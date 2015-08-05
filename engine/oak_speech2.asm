@@ -73,7 +73,7 @@ OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	call DelayFrames
 	pop de
 	ld hl, wcd6d
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	call Delay3
 	coord hl, 12, 4

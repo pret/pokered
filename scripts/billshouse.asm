@@ -163,7 +163,7 @@ BillsHouseText2: ; 1e874 (7:6874)
 	jr nz, .asm_1e8a9
 	ld hl, BillThankYouText
 	call PrintText
-	ld bc, (S_S__TICKET << 8) | 1
+	lb bc, S_S__TICKET, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, SSTicketReceivedText

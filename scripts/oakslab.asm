@@ -1022,7 +1022,7 @@ OaksLabText5: ; 1d248 (7:5248)
 .asm_1d2d0
 	CheckAndSetEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr nz, .asm_1d2e7
-	ld bc, (POKE_BALL << 8) | 5
+	lb bc, POKE_BALL, 5
 	call GiveItem
 	ld hl, OaksLabGivePokeballsText
 	call PrintText

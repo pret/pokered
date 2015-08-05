@@ -82,11 +82,11 @@ InitCutAnimOAM: ; eff7 (3:6ff7)
 ; tree
 	ld de, Overworld_GFX + $2d0 ; cuttable tree sprite top row
 	ld hl, vChars1 + $7c0
-	ld bc, (BANK(Overworld_GFX) << 8) + $02
+	lb bc, BANK(Overworld_GFX), $02
 	call CopyVideoData
 	ld de, Overworld_GFX + $3d0 ; cuttable tree sprite bottom row
 	ld hl, vChars1 + $7e0
-	ld bc, (BANK(Overworld_GFX) << 8) + $02
+	lb bc, BANK(Overworld_GFX), $02
 	call CopyVideoData
 	jr WriteCutOrBoulderDustAnimationOAMBlock
 .grass
@@ -113,7 +113,7 @@ InitCutAnimOAM: ; eff7 (3:6ff7)
 
 LoadCutGrassAnimationTilePattern: ; f04c (3:704c)
 	ld de, AnimationTileset2 + $60 ; tile depicting a leaf
-	ld bc, (BANK(AnimationTileset2) << 8) + $01
+	lb bc, BANK(AnimationTileset2), $01
 	jp CopyVideoData
 
 WriteCutOrBoulderDustAnimationOAMBlock: ; f055 (3:7055)

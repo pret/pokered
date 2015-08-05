@@ -16,24 +16,24 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52016
 	ld a, $e
-	ld bc, $204
+	lb bc, 2, 4
 	call Mansion2Script_5202f
 	ld a, $54
-	ld bc, $409
+	lb bc, 4, 9
 	call Mansion2Script_5202f
 	ld a, $5f
-	ld bc, $b03
+	lb bc, 11, 3
 	call Mansion2Script_5202f
 	ret
 .asm_52016
 	ld a, $5f
-	ld bc, $204
+	lb bc, 2, 4
 	call Mansion2Script_5202f
 	ld a, $e
-	ld bc, $409
+	lb bc, 4, 9
 	call Mansion2Script_5202f
 	ld a, $e
-	ld bc, $b03
+	lb bc, 11, 3
 	call Mansion2Script_5202f
 	ret
 

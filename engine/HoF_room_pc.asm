@@ -164,7 +164,7 @@ FillFourRowsWithBlack: ; 7417b (1d:417b)
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
-	ld a, $7f ; blank white tile
+	ld a, " "
 	jp FillMemory
 
 Credits: ; 7418e (1d:418e)
@@ -246,7 +246,7 @@ Credits: ; 7418e (1d:418e)
 	pop de
 	ld de, TheEndGfx
 	ld hl, vChars2 + $600
-	ld bc, (BANK(TheEndGfx) << 8) + $0a
+	lb bc, BANK(TheEndGfx), $0a
 	call CopyVideoData
 	coord hl, 4, 8
 	ld de, TheEndTextString

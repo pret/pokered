@@ -113,7 +113,7 @@ FanClubText5:
 	; tell the story
 	ld hl, .storytext
 	call PrintText
-	ld bc, (BIKE_VOUCHER << 8) | 1
+	lb bc, BIKE_VOUCHER, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, .receivedvouchertext

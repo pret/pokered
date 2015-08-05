@@ -12,7 +12,7 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 	jr nz, .asm_13616
 	ld hl, Route16HouseText3
 	call PrintText
-	ld bc, (HM_02 << 8) | 1
+	lb bc, HM_02, 1
 	call GiveItem
 	jr nc, .BagFull
 	SetEvent EVENT_GOT_HM02

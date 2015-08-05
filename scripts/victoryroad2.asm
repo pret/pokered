@@ -23,14 +23,14 @@ VictoryRoad2Script_517c9: ; 517c9 (14:57c9)
 	jr z, .asm_517da
 	push af
 	ld a, $15
-	ld bc, $403
+	lb bc, 4, 3
 	call VictoryRoad2Script_517e2
 	pop af
 .asm_517da
 	bit 7, a
 	ret z
 	ld a, $1d
-	ld bc, $70b
+	lb bc, 7, 11
 
 VictoryRoad2Script_517e2: ; 517e2 (14:57e2)
 	ld [wNewTileBlockID], a

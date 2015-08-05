@@ -32,7 +32,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	ret nz
 	ld a, $2a
 	ld [wNewTileBlockID], a
-	ld bc, $0208
+	lb bc, 2, 8
 	predef_jump ReplaceTileBlock
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
@@ -452,7 +452,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
 	ld [wNewTileBlockID], a
-	ld bc, $0208
+	lb bc, 2, 8
 	predef ReplaceTileBlock
 	jp TextScriptEnd
 
@@ -477,8 +477,8 @@ CeladonGameCornerScript_48f1e: ; 48f1e (12:4f1e)
 	call TextBoxBorder
 	call UpdateSprites
 	coord hl, 12, 1
-	ld b, $4
-	ld c, $7
+	ld b, 4
+	ld c, 7
 	call ClearScreenArea
 	coord hl, 12, 2
 	ld de, GameCornerMoneyText

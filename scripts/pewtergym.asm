@@ -47,7 +47,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BROCK
-	ld bc, (TM_34 << 8) | 1
+	lb bc, TM_34, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5

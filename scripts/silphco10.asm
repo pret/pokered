@@ -13,18 +13,19 @@ SilphCo10Script_5a14f: ; 5a14f (16:614f)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_5a173
+	ld hl, SilphCo10GateCoords
 	call SilphCo2Script_59d43
 	call SilphCo10Text_5a176
 	CheckEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR
 	ret nz
 	ld a, $54
 	ld [wNewTileBlockID], a
-	ld bc, $405
+	lb bc, 4, 5
 	predef_jump ReplaceTileBlock
 
-DataTable_5a173: ; 5a173 (16:6173)
-	db $04,$05,$FF
+SilphCo10GateCoords: ; 5a173 (16:6173)
+	db $04,$05
+	db $FF
 
 SilphCo10Text_5a176: ; 5a176 (16:6176)
 	ld a, [$ffe0]

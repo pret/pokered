@@ -24,11 +24,11 @@ SetDefaultNames: ; 60ca (1:60ca)
 	call z, InitOptions
 	ld hl, NintenText
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, SonyText
 	ld de, W_RIVALNAME
-	ld bc, $b
+	ld bc, 11
 	jp CopyData
 
 OakSpeech: ; 6115 (1:6115)
@@ -57,7 +57,7 @@ OakSpeech: ; 6115 (1:6115)
 	bit 1,a ; possibly a debug mode bit
 	jp nz,.skipChoosingNames
 	ld de,ProfOakPic
-	ld bc, (Bank(ProfOakPic) << 8) | $00
+	lb bc, Bank(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
@@ -76,7 +76,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl,IntroducePlayerText
@@ -85,7 +85,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,Rival1Pic
-	ld bc,(Bank(Rival1Pic) << 8) | $00
+	lb bc, Bank(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
@@ -95,7 +95,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a,[wd72d]
@@ -115,15 +115,15 @@ OakSpeech: ; 6115 (1:6115)
 	call DelayFrames
 	ld de,RedSprite
 	ld hl,vSprites
-	ld bc,(BANK(RedSprite) << 8) | $0C
+	lb bc, BANK(RedSprite), $0C
 	call CopyVideoData
 	ld de,ShrinkPic1
-	ld bc,(BANK(ShrinkPic1) << 8) | $00
+	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
-	ld bc,(BANK(ShrinkPic2) << 8) | $00
+	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]

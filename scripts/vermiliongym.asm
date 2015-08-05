@@ -38,7 +38,7 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, $5
 .asm_5ca7f
 	ld [wNewTileBlockID], a
-	ld bc, $202
+	lb bc, 2, 2
 	predef_jump ReplaceTileBlock
 
 VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
@@ -66,7 +66,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_LT_SURGE
-	ld bc, (TM_24 << 8) | 1
+	lb bc, TM_24, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $7

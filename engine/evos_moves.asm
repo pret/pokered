@@ -278,7 +278,7 @@ RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	cp $50
 	jr nz, .compareNamesLoop
 	ld a, [wWhichPokemon]
-	ld bc, $b
+	ld bc, 11
 	ld hl, wPartyMonNicks
 	call AddNTimes
 	push hl

@@ -13,18 +13,19 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_5653e
+	ld hl, SilphCo8GateCoords
 	call SilphCo8Script_56541
 	call SilphCo8Script_5656d
 	CheckEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	ld bc, $403
+	lb bc, 4, 3
 	predef_jump ReplaceTileBlock
 
-DataTable_5653e: ; 5653e (15:653e)
-	db $04,$03,$FF
+SilphCo8GateCoords: ; 5653e (15:653e)
+	db $04,$03
+	db $FF
 
 SilphCo8Script_56541: ; 56541 (15:6541)
 	push hl

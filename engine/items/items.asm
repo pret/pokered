@@ -734,22 +734,22 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,4
 	add hl,bc ; hl now points to status
 	ld a,[wcf91]
-	ld bc, (ANTIDOTE_MSG << 8) | (1 << PSN)
+	lb bc, ANTIDOTE_MSG, 1 << PSN
 	cp a,ANTIDOTE
 	jr z,.checkMonStatus
-	ld bc, (BURN_HEAL_MSG << 8) | (1 << BRN)
+	lb bc, BURN_HEAL_MSG, 1 << BRN
 	cp a,BURN_HEAL
 	jr z,.checkMonStatus
-	ld bc, (ICE_HEAL_MSG << 8) | (1 << FRZ)
+	lb bc, ICE_HEAL_MSG, 1 << FRZ
 	cp a,ICE_HEAL
 	jr z,.checkMonStatus
-	ld bc, (AWAKENING_MSG << 8) | SLP
+	lb bc, AWAKENING_MSG, SLP
 	cp a,AWAKENING
 	jr z,.checkMonStatus
-	ld bc, (PARALYZ_HEAL_MSG << 8) | (1 << PAR)
+	lb bc, PARALYZ_HEAL_MSG, 1 << PAR
 	cp a,PARLYZ_HEAL
 	jr z,.checkMonStatus
-	ld bc, (FULL_HEAL_MSG << 8) | $ff ; Full Heal
+	lb bc, FULL_HEAL_MSG, $ff ; Full Heal
 .checkMonStatus
 	ld a,[hl] ; pokemon's status
 	and c ; does the pokemon have a status ailment the item can cure?
@@ -1737,7 +1737,7 @@ CoinCaseNumCoinsText: ; e247 (3:6247)
 ItemUseOldRod: ; e24c (3:624c)
 	call FishingInit
 	jp c, ItemUseNotTime
-	ld bc, (5 << 8) | MAGIKARP
+	lb bc, 5, MAGIKARP
 	ld a, $1 ; set bite
 	jr RodResponse
 
@@ -2088,7 +2088,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld hl,TeachMachineMoveText
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -2479,7 +2479,7 @@ TossItem_: ; e6f1 (3:66f1)
 	ld hl,IsItOKToTossItemText
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -2578,14 +2578,14 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e7b1
 	call GetMonHeader
 	ld hl, wBoxMonOT
-	ld bc, $b
+	ld bc, 11
 	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e7ee
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2596,7 +2596,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7db
 	push bc
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld d, h
@@ -2609,17 +2609,17 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7ee
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
-	ld bc, $b
+	ld bc, 11
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2630,7 +2630,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e817
 	push bc
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld d, h

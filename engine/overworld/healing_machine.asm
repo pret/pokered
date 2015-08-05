@@ -1,7 +1,7 @@
 AnimateHealingMachine: ; 70433 (1c:4433)
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 + $7c0
-	ld bc, (BANK(PokeCenterFlashingMonitorAndHealBall) << 8) + $03
+	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03
 	call CopyVideoData
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]

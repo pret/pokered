@@ -665,7 +665,7 @@ AISwitchIfEnoughMons: ; 3a72a (e:672a)
 	inc d
 .Fainted
 	push bc
-	ld bc,$2C
+	ld bc, wEnemyMon2 - wEnemyMon1
 	add hl,bc
 	pop bc
 	dec c

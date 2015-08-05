@@ -96,7 +96,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld a, SERIAL_PATCH_LIST_PART_TERMINATOR
 	ld [de], a ; end of part 1
 	inc de
-	ld bc, $100
+	lb bc, 1, 0
 	jr .patchPartyMonsLoop
 .finishedPatchingPlayerData
 	ld a, SERIAL_PATCH_LIST_PART_TERMINATOR
@@ -400,7 +400,7 @@ TradeCenter_SelectMon:
 	ld a, 1
 	ld [wTopMenuItemX], a
 	coord hl, 1, 1
-	ld bc, $0601
+	lb bc, 6, 1
 	call ClearScreenArea
 .playerMonMenu_HandleInput
 	ld hl, hFlags_0xFFF6
@@ -713,7 +713,7 @@ TradeCenter_Trade:
 	call TextCommandProcessor
 	call SaveScreenTilesToBuffer1
 	coord hl, 10, 7
-	ld bc, $080b
+	lb bc, 8, 11
 	ld a, TRADE_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU

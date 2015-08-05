@@ -28,7 +28,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld [W_BASECOORDX], a
 	ld a, 80
 	ld [W_BASECOORDY], a
-	ld bc, $606
+	lb bc, 6, 6
 	call InitIntroNidorinoOAM
 	ld de, $28ff ; move Nidorino right by 80 pixels
 	call IntroMoveMon

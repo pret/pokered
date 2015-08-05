@@ -15,7 +15,7 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	ret z
 	ld a, $1d
 	ld [wNewTileBlockID], a
-	ld bc, $604
+	lb bc, 6, 4
 	predef_jump ReplaceTileBlock
 
 VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)

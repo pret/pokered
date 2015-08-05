@@ -82,10 +82,10 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	inc a
 	jr z,.sellMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld hl,PokemartTellSellPriceText
-	ld bc,$0e01
+	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 08, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -163,7 +163,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartTellBuyPriceText
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu

@@ -47,7 +47,7 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_SABRINA
-	ld bc, (TM_46 << 8) | 1
+	lb bc, TM_46, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b

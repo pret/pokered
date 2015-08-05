@@ -235,7 +235,7 @@ ViridianCityText6: ; 19196 (6:5196)
 	jr nz, .asm_4e5a0
 	ld hl, ViridianCityText_191ca
 	call PrintText
-	ld bc, (TM_42 << 8) | 1
+	lb bc, TM_42, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text

@@ -191,7 +191,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	jr nz, .asm_5c285
 	ld hl, Museum1FText_5c28e
 	call PrintText
-	ld bc, (OLD_AMBER << 8) | 1
+	lb bc, OLD_AMBER, 1
 	call GiveItem
 	jr nc, .BagFull
 	SetEvent EVENT_GOT_OLD_AMBER

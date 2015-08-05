@@ -1,6 +1,6 @@
 ; copy text of fixed length $b (like player name, rival name, mon names, ...)
 CopyFixedLengthText: ; 42b1 (1:42b1)
-	ld bc, $b
+	ld bc, 11
 	jp CopyData
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
@@ -377,7 +377,7 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
-	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
+	lb bc, BANK(NintendoCopyrightLogoGraphics), $1c
 	call CopyVideoData
 	coord hl, 2, 7
 	ld de, CopyrightTextString

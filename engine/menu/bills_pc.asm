@@ -116,7 +116,7 @@ BillsPCMenu: ; 214e8 (8:54e8)
 	ld [wCurrentMenuItem], a
 	ld hl, vChars2 + $780
 	ld de, PokeballTileGraphics
-	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
+	lb bc, BANK(PokeballTileGraphics), $01
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	coord hl, 0, 0

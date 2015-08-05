@@ -13,7 +13,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	ld a, BANK(CircleTile)
 	call FarCopyData2
 	coord hl, 0, 0
-	ld bc, $1012
+	lb bc, 16, 18
 	predef Diploma_TextBoxBorder
 	ld hl, DiplomaTextPointersAndCoords
 	ld c, $5
@@ -41,7 +41,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 ; Move the player 33 pixels right and set the priority bit so he appears
 ; behind the background layer.
 	ld hl, wOAMBuffer + $01
-	ld bc, $8028
+	lb bc, $80, $28
 .adjustPlayerGfxLoop
 	ld a, [hl] ; X
 	add 33

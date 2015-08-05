@@ -102,7 +102,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	coord hl, 1, 5
-	ld bc, $307
+	lb bc, 3, 7
 	call ClearScreenArea
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -110,7 +110,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld hl, vBGMap0
 	ld bc, $400
 .clearBackgroundLoop
-	ld a, $7f
+	ld a, " "
 	ld [hli], a
 	dec bc
 	ld a, b
@@ -717,8 +717,8 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP: ; 3c4a3 (f:44a3)
 	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
 	ld [wHPBarMaxHP], a
-	ld de, $fff2
-	add hl, de           ; skip back fomr max hp to current hp
+	ld de, wBattleMonHP - wBattleMonMaxHP
+	add hl, de           ; skip back from max hp to current hp
 	ld a, [hl]
 	ld [wHPBarOldHP], a ; add bc to current HP
 	add c
@@ -852,7 +852,7 @@ FaintEnemyPokemon: ; 0x3c567
 	coord de, 12, 6
 	call SlideDownFaintedMonPic
 	coord hl, 0, 0
-	ld bc, $40b
+	lb bc, 4, 11
 	call ClearScreenArea
 	ld a, [W_ISINBATTLE]
 	dec a
@@ -1100,7 +1100,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wBattleMonStatus], a
 	call ReadPlayerMonCurHPAndStatus
 	coord hl, 9, 7
-	ld bc, $50b
+	lb bc, 5, 11
 	call ClearScreenArea
 	coord hl, 1, 10
 	coord de, 1, 11
@@ -1132,7 +1132,7 @@ DoUseNextMonDialogue: ; 3c79b (f:479b)
 	call PrintText
 .displayYesNoBox
 	coord hl, 13, 9
-	ld bc, $a0e
+	lb bc, 10, 14
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -1209,7 +1209,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp $c8 + SONY1
 	jr nz, .notSony1Battle
 	coord hl, 0, 0  ; sony 1 battle
-	ld bc, $815
+	lb bc, 8, 21
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
 	ld c, 40
@@ -1449,7 +1449,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld hl, TrainerAboutToUseText
 	call PrintText
 	coord hl, 0, 7
-	ld bc,$0801
+	lb bc, 8, 1
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
@@ -1484,7 +1484,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 .next4
 	call ClearSprites
 	coord hl, 0, 0
-	ld bc,$040B
+	lb bc, 4, 11
 	call ClearScreenArea
 	ld b,1
 	call GoPAL_SET
@@ -1886,7 +1886,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 9, 7
-	ld bc, $50b
+	lb bc, 5, 11
 	call ClearScreenArea
 	callab PlacePlayerHUDTiles
 	coord hl, 18, 9
@@ -1947,7 +1947,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 0, 0
-	ld bc, $40c
+	lb bc, 4, 12
 	call ClearScreenArea
 	callab PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
@@ -2055,11 +2055,11 @@ CenterMonName: ; 3ce9c (f:4e9c)
 .loop
 	inc de
 	ld a, [de]
-	cp $50
+	cp "@"
 	jr z, .done
 	inc de
 	ld a, [de]
-	cp $50
+	cp "@"
 	jr z, .done
 	dec hl
 	dec b
@@ -2091,7 +2091,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 ; the following happens for the old man tutorial
 	ld hl, wPlayerName
 	ld de, W_GRASSRATE
-	ld bc, $b
+	ld bc, 11
 	call CopyData  ; temporarily save the player name in unused space,
 	               ; which is supposed to get overwritten when entering a
 	               ; map with wild Pokémon. Due to an oversight, the data
@@ -2099,14 +2099,14 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	               ; Missingno. glitch can show up.
 	ld hl, .oldManName
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
 	coord hl, 9, 14
 	ld [hl], "▶"
 	ld c, 80
 	call DelayFrames
-	ld [hl], $7f
+	ld [hl], " "
 	coord hl, 9, 16
 	ld [hl], "▶"
 	ld c, 50
@@ -2395,7 +2395,7 @@ PartyMenuOrRockOrRun:
 .partyMonDeselected
 	coord hl, 11, 11
 	ld bc, $81
-	ld a, $7f
+	ld a, " "
 	call FillMemory
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
@@ -2585,7 +2585,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 .relearnmenu
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	call .loadmoves
 	coord hl, 4, 7
@@ -2662,7 +2662,7 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	jr z, .select
 	coord hl, 5, 13
 	dec a
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], $ec
 .select
@@ -2862,7 +2862,7 @@ SwapMovesInMenu: ; 3d435 (f:5435)
 	push hl
 	call .swapBytes ; swap moves
 	pop hl
-	ld bc, $15
+	ld bc, wPartyMon1PP - wPartyMon1Moves
 	add hl, bc
 	call .swapBytes ; swap move PP
 	xor a
@@ -6318,7 +6318,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wEnemyMonNick
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
@@ -6718,11 +6718,11 @@ LoadHudTilePatterns: ; 3ee5b (f:6e5b)
 .lcdEnabled
 	ld de, BattleHudTiles1
 	ld hl, vChars2 + $6d0
-	ld bc, (BANK(BattleHudTiles1) << 8) + $03
+	lb bc, BANK(BattleHudTiles1), $03
 	call CopyVideoDataDouble
 	ld de, BattleHudTiles2
 	ld hl, vChars2 + $730
-	ld bc, (BANK(BattleHudTiles2) << 8) + $06
+	lb bc, BANK(BattleHudTiles2), $06
 	jp CopyVideoDataDouble
 
 PrintEmptyString: ; 3ee94 (f:6e94)
@@ -6942,10 +6942,10 @@ InitBattle_Common: ; 3efeb (f:6feb)
 	ld [H_AUTOBGTRANSFERDEST + 1], a
 	call LoadScreenTilesFromBuffer1
 	coord hl, 9, 7
-	ld bc, $50a
+	lb bc, 5, 10
 	call ClearScreenArea
 	coord hl, 1, 0
-	ld bc, $40a
+	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
 	ld a, [W_ISINBATTLE]
@@ -7089,8 +7089,8 @@ LoadMonBackPic: ; 3f103 (f:7103)
 	ld a, [wBattleMonSpecies2]
 	ld [wcf91], a
 	coord hl, 1, 5
-	ld b, $7
-	ld c, $8
+	ld b, 7
+	ld c, 8
 	call ClearScreenArea
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
@@ -7928,7 +7928,7 @@ FellText: ; 3f683 (f:7683)
 
 PrintStatText: ; 3f688 (f:7688)
 	ld hl, StatsTextStrings
-	ld c, $50
+	ld c, "@"
 .asm_3f68d
 	dec b
 	jr z, .asm_3f696

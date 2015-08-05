@@ -20,7 +20,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	call CopyData
 	ld hl, vSprites + $40
 	ld de, TownMapCursor
-	ld bc, (BANK(TownMapCursor) << 8) + $04
+	lb bc, BANK(TownMapCursor), $04
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
@@ -29,7 +29,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 
 .townMapLoop
 	coord hl, 0, 0
-	ld bc, $114
+	lb bc, 1, 20
 	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
@@ -140,11 +140,11 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld hl, vSprites + $40
-	ld bc, (BANK(BirdSprite) << 8) + $0c
+	lb bc, BANK(BirdSprite), $0c
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
-	ld bc, (BANK(TownMapUpArrow) << 8) + $01
+	lb bc, BANK(TownMapUpArrow), $01
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -161,12 +161,12 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wFlyLocationsList
 	coord de, 18, 0
 .townMapFlyLoop
-	ld a, $7f
+	ld a, " "
 	ld [de], a
 	push hl
 	push hl
 	coord hl, 3, 0
-	ld bc, $10f
+	lb bc, 1, 15
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
@@ -442,8 +442,8 @@ WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
 
 WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	push hl
-	ld hl, $fcfc
-	add hl, bc ; subtract 4 from c (X coord) and 3 from b (Y coord)
+	lb hl, -4, -4
+	add hl, bc ; subtract 4 from c (X coord) and 4 from b (Y coord)
 	ld b, h
 	ld c, l
 	pop hl
@@ -451,7 +451,7 @@ WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 ; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
-	ld de, $202
+	lb de, 2, 2
 .loop
 	push de
 	push bc

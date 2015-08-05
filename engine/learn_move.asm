@@ -5,7 +5,7 @@ LearnMove: ; 6e43 (1:6e43)
 	call GetPartyMonName
 	ld hl, wcd6d
 	ld de, wd036
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
@@ -77,7 +77,7 @@ AbandonLearning: ; 6eda (1:6eda)
 	ld hl, AbandonLearningText
 	call PrintText
 	coord hl, 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu
@@ -100,7 +100,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld hl, TryingToLearnText
 	call PrintText
 	coord hl, 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID ; yes/no menu

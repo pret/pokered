@@ -184,7 +184,7 @@ DungeonMaps2: ; 70a44 (1c:4a44)
 LoadBattleTransitionTile: ; 70a4d (1c:4a4d)
 	ld hl, vChars1 + $7f0
 	ld de, BattleTransitionTile
-	ld bc, (BANK(BattleTransitionTile) << 8) + $01
+	lb bc, BANK(BattleTransitionTile), $01
 	jp CopyVideoData
 
 BattleTransitionTile: ; 70a59 (1c:4a59)

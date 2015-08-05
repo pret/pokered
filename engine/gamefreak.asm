@@ -5,15 +5,15 @@ LoadShootingStarGraphics: ; 70000 (1c:4000)
 	ld [rOBP1], a
 	ld de, AnimationTileset2 + $30 ; star tile (top left quadrant)
 	ld hl, vChars1 + $200
-	ld bc, (BANK(AnimationTileset2) << 8) + $01
+	lb bc, BANK(AnimationTileset2), $01
 	call CopyVideoData
 	ld de, AnimationTileset2 + $130 ; star tile (bottom left quadrant)
 	ld hl, vChars1 + $210
-	ld bc, (BANK(AnimationTileset2) << 8) + $01
+	lb bc, BANK(AnimationTileset2), $01
 	call CopyVideoData
 	ld de, FallingStar
 	ld hl, vChars1 + $220
-	ld bc, (BANK(FallingStar) << 8) + $01
+	lb bc, BANK(FallingStar), $01
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData
 	ld de, wOAMBuffer + $60
@@ -31,7 +31,7 @@ AnimateShootingStar: ; 70044 (1c:4044)
 
 ; Move the big star down and left across the screen.
 	ld hl, wOAMBuffer
-	ld bc, $a004
+	lb bc, $a0, $4
 .bigStarLoop
 	push hl
 	push bc

@@ -34,7 +34,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; display pokemon menu options
 	ld hl,wFieldMoves
-	ld bc,$020c ; max menu item ID, top menu item Y
+	lb bc, $02, $0c ; max menu item ID, top menu item Y
 	ld e,5
 .adjustMenuVariablesLoop
 	dec e
@@ -523,7 +523,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 ; loads tile patterns and draws everything except for gym leader faces / badges
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedPicFront
-	ld bc,(BANK(RedPicFront) << 8) | $01
+	lb bc, BANK(RedPicFront), $01
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
 	coord hl, 0, 2
@@ -632,7 +632,7 @@ TrainerInfo_BadgesText: ; 13597 (4:7597)
 ; [wTrainerInfoTextBoxNextRowOffset] = distance from the end of a text box row to the start of the next
 TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	ld a,$79 ; upper left corner tile ID
-	ld de,$7a7b ; top edge and upper right corner tile ID's
+	lb de, $7a, $7b ; top edge and upper right corner tile ID's
 	call TrainerInfo_DrawHorizontalEdge ; draw top edge
 	call TrainerInfo_NextTextBoxRow
 	ld a,[wTrainerInfoTextBoxWidthPlus1]
@@ -647,7 +647,7 @@ TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	dec c
 	jr nz,.loop
 	ld a,$7d ; lower left corner tile ID
-	ld de,$777e ; bottom edge and lower right corner tile ID's
+	lb de,$77, $7e ; bottom edge and lower right corner tile ID's
 
 TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ld [hli],a ; place left corner tile
@@ -813,36 +813,36 @@ SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a

@@ -5,8 +5,8 @@ AskName: ; 64eb (1:64eb)
 	ld a, [W_ISINBATTLE]
 	dec a
 	coord hl, 0, 0
-	ld b, $4
-	ld c, $b
+	ld b, 4
+	ld c, 11
 	call z, ClearScreenArea ; only if in wild batle
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -14,7 +14,7 @@ AskName: ; 64eb (1:64eb)
 	ld hl, DoYouWantToNicknameText
 	call PrintText
 	coord hl, 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -64,10 +64,10 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wcf4b]
-	cp $50
+	cp "@"
 	jr z, .playerCancelled
 	ld hl, wPartyMonNicks
-	ld bc, $b
+	ld bc, 11
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld e, l
@@ -269,7 +269,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ret z
 	call CalcStringLength
 	dec hl
-	ld [hl], $50
+	ld [hl], "@"
 	ret
 .pressedRight
 	ld a, [wCurrentMenuItem]
@@ -342,7 +342,7 @@ PrintAlphabet: ; 676f (1:676f)
 	ld de, UpperCaseAlphabet
 .lowercase
 	coord hl, 2, 5
-	ld bc, $509 ; 5 rows, 9 columns
+	lb bc, 5, 9 ; 5 rows, 9 columns
 .outerLoop
 	push bc
 .innerLoop
@@ -373,7 +373,7 @@ PrintNicknameAndUnderscores: ; 680e (1:680e)
 	ld a, c
 	ld [wNamingScreenNameLength], a
 	coord hl, 10, 2
-	ld bc, $10a
+	lb bc, 1, 10
 	call ClearScreenArea
 	coord hl, 10, 2
 	ld de, wcf4b
@@ -458,7 +458,7 @@ CalcStringLength: ; 68eb (1:68eb)
 	ld c, $0
 .loop
 	ld a, [hl]
-	cp $50
+	cp "@"
 	ret z
 	inc hl
 	inc c

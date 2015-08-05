@@ -149,7 +149,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	jr nz, .asm_514f9
 	ld hl, Route24Text_51510
 	call PrintText
-	ld bc, (NUGGET << 8) | 1
+	lb bc, NUGGET, 1
 	call GiveItem
 	jr nc, .BagFull
 	SetEvent EVENT_GOT_NUGGET

@@ -54,7 +54,7 @@
 	ld hl,.MakePaymentText
 	call PrintText
 	ld a,30
-	ld hl,(502 / $100) << 8 | (502 % $100)
+	lb hl, (502 / $100),  (502 % $100)
 .xf1ff2
 	ld [W_NUMSAFARIBALLS],a
 	ld a,h

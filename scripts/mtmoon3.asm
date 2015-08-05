@@ -271,7 +271,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_49f21
-	ld bc,(DOME_FOSSIL << 8) | 1
+	lb bc, DOME_FOSSIL, 1
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
@@ -299,7 +299,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_49f61
-	ld bc, (HELIX_FOSSIL << 8) | 1
+	lb bc, HELIX_FOSSIL, 1
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69

@@ -291,7 +291,7 @@ Char51:: ; 1ab4 (0:1ab4)
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 13
-	ld bc,$0412
+	lb bc, 4, 18
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames
@@ -306,7 +306,7 @@ Char49:: ; 1ad5 (0:1ad5)
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 10
-	ld bc,$0712
+	lb bc, 7, 18
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames

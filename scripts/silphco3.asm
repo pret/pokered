@@ -13,7 +13,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_59fa8
+	ld hl, SilphCo3GateCoords
 	call SilphCo2Script_59d43
 	call SilphCo3Script_59fad
 	CheckEvent EVENT_SILPH_CO_3_UNLOCKED_DOOR1
@@ -21,7 +21,7 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	push af
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	ld bc, $404
+	lb bc, 4, 4
 	predef ReplaceTileBlock
 	pop af
 .asm_59f98
@@ -29,11 +29,13 @@ SilphCo3Script_59f71: ; 59f71 (16:5f71)
 	ret nz
 	ld a, $5f
 	ld [wNewTileBlockID], a
-	ld bc, $408
+	lb bc, 4, 8
 	predef_jump ReplaceTileBlock
 
-DataTable_59fa8: ; 59fa8 (16:5fa8)
-	db $04,$04,$04,$08,$FF
+SilphCo3GateCoords: ; 59fa8 (16:5fa8)
+	db $04,$04
+	db $04,$08
+	db $FF
 
 SilphCo3Script_59fad: ; 59fad (16:5fad)
 	EventFlagAddress hl, EVENT_SILPH_CO_3_UNLOCKED_DOOR1

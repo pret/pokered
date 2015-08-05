@@ -27,7 +27,7 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 	ld a, $e
 .asm_45498
 	ld [wNewTileBlockID], a
-	ld bc, $050c
+	lb bc, 5, 12
 	predef_jump ReplaceTileBlock
 
 RocketHideout4Script_454a3: ; 454a3 (11:54a3)

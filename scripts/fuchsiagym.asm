@@ -47,7 +47,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_KOGA
-	ld bc, (TM_06 << 8) | 1
+	lb bc, TM_06, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a

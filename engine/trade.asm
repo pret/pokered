@@ -371,7 +371,7 @@ Trade_ShowEnemyMon: ; 41336 (10:5336)
 	call PlayCry
 	call Trade_Delay100
 	coord hl, 4, 10
-	ld bc, $80c
+	lb bc, 8, 12
 	call ClearScreenArea
 	jp PrintTradeTakeCareText
 
@@ -647,14 +647,14 @@ Trade_AnimMonMoveVertical: ; 41525 (10:5525)
 	and a
 	jr z, .movingLeft
 ; moving right
-	ld bc, $400 ; move right
+	lb bc, 4, 0 ; move right
 	call .doAnim
-	ld bc, $a ; move down
+	lb bc, 0, 10 ; move down
 	jr .doAnim
 .movingLeft
-	ld bc, $f6 ; move up
+	lb bc, 0, -10 ; move up
 	call .doAnim
-	ld bc, $fc00 ; move left
+	lb bc, -4, 0 ; move left
 .doAnim
 	ld a, b
 	ld [W_BASECOORDX], a

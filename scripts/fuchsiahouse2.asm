@@ -38,7 +38,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 .asm_60cba
 	ld hl, WardenThankYouText
 	call PrintText
-	ld bc,(HM_04 << 8) | 1
+	lb bc, HM_04, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHM04Text

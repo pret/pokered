@@ -48,7 +48,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	call DelayFrames
 	ld c, $1
 	call EvolutionSetWholeScreenPalette
-	ld bc, $110
+	lb bc, $1, $10
 .animLoop
 	push bc
 	call Evolution_CheckForCancel

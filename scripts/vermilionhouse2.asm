@@ -15,7 +15,7 @@ VermilionHouse2Text1: ; 56075 (15:6075)
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_eb1b7
-	ld bc, (OLD_ROD << 8) | 1
+	lb bc, OLD_ROD, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, wd728
