@@ -225,12 +225,12 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call PlaceString
 	coord hl, 5, 7
 	ld de, W_PLAYTIMEHOURS + 1
-	ld bc, $103
+	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, W_PLAYTIMEMINUTES + 1
-	ld bc, $8102
+	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
 	coord hl, 1, 9
 	ld de, HoFMoneyText

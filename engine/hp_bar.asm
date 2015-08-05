@@ -228,7 +228,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 	ld [hli], a
 	pop hl
 	ld de, wHPBarTempHP
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	call DelayFrame
 	pop hl

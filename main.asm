@@ -2314,12 +2314,12 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	cp UNKNOWN_DUNGEON_2
 	ret nc
 	coord hl, 0, 0
-	ld b, $3
-	ld c, $7
+	ld b, 3
+	ld c, 7
 	call TextBoxBorder
 	coord hl, 1, 1
 	ld de, wSafariSteps
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	coord hl, 4, 1
 	ld de, SafariSteps
@@ -2328,15 +2328,15 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS]
-	cp $a
+	cp 10
 	jr nc, .asm_c56d
 	coord hl, 5, 3
-	ld a, $7f
+	ld a, " "
 	ld [hl], a
 .asm_c56d
 	coord hl, 6, 3
 	ld de, W_NUMSAFARIBALLS
-	ld bc, $102
+	lb bc, 1, 2
 	jp PrintNumber
 
 SafariSteps: ; c579 (3:4579)

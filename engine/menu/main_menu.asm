@@ -396,7 +396,7 @@ PrintNumBadges: ; 5e2f (1:5e2f)
 	call CountSetBits
 	pop hl
 	ld de, wd11e
-	ld bc, $102
+	lb bc, 1, 2
 	jp PrintNumber
 
 PrintNumOwnedMons: ; 5e42 (1:5e42)
@@ -406,17 +406,17 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	call CountSetBits
 	pop hl
 	ld de, wd11e
-	ld bc, $103
+	lb bc, 1, 3
 	jp PrintNumber
 
 PrintPlayTime: ; 5e55 (1:5e55)
 	ld de, W_PLAYTIMEHOURS + 1
-	ld bc, $103
+	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, W_PLAYTIMEMINUTES + 1
-	ld bc, $8102
+	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
 SaveScreenInfoText: ; 5e6a (1:5e6a)

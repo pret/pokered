@@ -649,7 +649,7 @@ SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
 SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
 	coord hl, 11, 1
 	ld de, wPayoutCoins
-	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
+	lb bc, LEADING_ZEROES | 2, 4 ; 2 bytes, 4 digits
 	jp PrintNumber
 
 SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)

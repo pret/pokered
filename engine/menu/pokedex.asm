@@ -171,14 +171,14 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	call CountSetBits
 	ld de,wd11e
 	coord hl, 16, 3
-	ld bc,$0103
+	lb bc, 1, 3
 	call PrintNumber ; print number of seen pokemon
 	ld hl,wPokedexOwned
 	ld b,wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld de,wd11e
 	coord hl, 16, 6
-	ld bc,$0103
+	lb bc, 1, 3
 	call PrintNumber ; print number of owned pokemon
 	coord hl, 16, 2
 	ld de,PokedexSeenText
@@ -233,12 +233,12 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	push af
 	push de
 	push hl
-	ld de,-20
+	ld de,-SCREEN_WIDTH
 	add hl,de
 	ld de,wd11e
-	ld bc,$8103
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print the pokedex number
-	ld de,20
+	ld de,SCREEN_WIDTH
 	add hl,de
 	dec hl
 	push hl
@@ -466,7 +466,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld a,$f2
 	ld [hli],a
 	ld de,wd11e
-	ld bc,$8103
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
@@ -496,14 +496,14 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	inc de ; de = address of feet (height)
 	ld a,[de] ; reads feet, but a is overwritten without being used
 	coord hl, 12, 6
-	ld bc,$0102
+	lb bc, 1, 2
 	call PrintNumber ; print feet (height)
 	ld a,$60 ; feet symbol tile (one tick)
 	ld [hl],a
 	inc de
 	inc de ; de = address of inches (height)
 	coord hl, 15, 6
-	ld bc,$8102
+	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber ; print inches (height)
 	ld a,$61 ; inches symbol tile (two ticks)
 	ld [hl],a
@@ -525,7 +525,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [hl],a ; store lower byte of weight in [hDexWeight + 1]
 	ld de,hDexWeight
 	coord hl, 11, 8
-	ld bc,$0205 ; no leading zeroes, right-aligned, 2 bytes, 5 digits
+	lb bc, 2, 5 ; 2 bytes, 5 digits
 	call PrintNumber ; print weight
 	coord hl, 14, 8
 	ld a,[hDexWeight + 1]

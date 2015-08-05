@@ -602,12 +602,12 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	call PrintBCDNumber
 	coord hl, 9, 6
 	ld de,W_PLAYTIMEHOURS + 1 ; hours
-	ld bc,$4103
+	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
 	ld [hl],$d6 ; colon tile ID
 	inc hl
 	ld de,W_PLAYTIMEMINUTES + 1 ; minutes
-	ld bc,$8102
+	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
 TrainerInfo_FarCopyData: ; 1357f (4:757f)
