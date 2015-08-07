@@ -86,7 +86,7 @@ LoadMonData_:
 ;  2: boxmon
 ;  3: daycaremon
 ; Return monster id at wcf91 and its data at wLoadedMon.
-; Also load base stats at W_MONHDEXNUM for convenience.
+; Also load base stats at W_MONHEADER for convenience.
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
@@ -284,7 +284,7 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
 
 	ld a, [$ff91]
-	ld [hld], a ; [$c1ib] = adjusted X coordiate
+	ld [hld], a ; [$c1ib] = adjusted X coordinate
 	ld a, [$ff90]
 	ld [hl], a ; [$c1ia] = adjusted Y coordinate
 

@@ -2,7 +2,7 @@ PrintNotebookText: ; 52996 (14:6996)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wHiddenObjectFunctionArgument]
 	jp PrintPredefTextID
 
 TMNotebook: ; 529a4 (14:69a4)

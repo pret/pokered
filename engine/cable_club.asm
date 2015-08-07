@@ -256,9 +256,9 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec c
 	jr nz, .unpatchEnemyMonsLoop
 	ld a, wEnemyMonOT % $100
-	ld [wcf8d], a
+	ld [wUnusedCF8D], a
 	ld a, wEnemyMonOT / $100
-	ld [wcf8e], a
+	ld [wUnusedCF8D + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
 	ld a, $ff

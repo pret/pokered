@@ -240,7 +240,7 @@ DrawHPBar:: ; 1336 (0:1336)
 
 
 ; loads pokemon data from one of multiple sources to wLoadedMon
-; loads base stats to W_MONHDEXNUM
+; loads base stats to W_MONHEADER
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
 ; [wMonDataLocation] = source
@@ -251,7 +251,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; OUTPUT:
 ; [wcf91] = pokemon ID
 ; wLoadedMon = base address of pokemon data
-; W_MONHDEXNUM = base address of base stats
+; W_MONHEADER = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
 	jpab LoadMonData_
 
@@ -551,7 +551,7 @@ GetwMoves:: ; 152e (0:152e)
 	ld a,[hl]
 	ret
 
-; copies the base stat data of a pokemon to W_MONHDEXNUM (W_MONHEADER)
+; copies the base stat data of a pokemon to W_MONHEADER
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader:: ; 1537 (0:1537)
@@ -606,7 +606,7 @@ GetMonHeader:: ; 1537 (0:1537)
 	call FarCopyData
 .done
 	ld a,[wd0b5]
-	ld [W_MONHDEXNUM],a
+	ld [W_MONHINDEX],a
 	pop af
 	ld [wd11e],a
 	pop hl
@@ -3313,9 +3313,9 @@ GetName:: ; 376b (0:376b)
 	call CopyData
 .gotPtr
 	ld a,e
-	ld [wcf8d],a
+	ld [wUnusedCF8D],a
 	ld a,d
-	ld [wcf8e],a
+	ld [wUnusedCF8D + 1],a
 	pop de
 	pop bc
 	pop hl

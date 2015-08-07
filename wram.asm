@@ -1226,8 +1226,10 @@ wItemList:: ; cf7b
 wListPointer:: ; cf8b
 	ds 2
 
-wcf8d:: ds 1 ; used in GetMonName
-wcf8e:: ds 1 ; also used in GetMonName (probably as a pointer)
+wUnusedCF8D:: ; cf8d
+; 2 bytes
+; used to store pointers, but never read
+	ds 2
 
 wItemPrices:: ; cf8f
 	ds 2
@@ -1789,7 +1791,10 @@ wPredefBank:: ; d0b7
 	ds 1
 
 W_MONHEADER:: ; d0b8
-W_MONHDEXNUM:: ; d0b8
+
+W_MONHINDEX:: ; d0b8
+; In the ROM base stats data stucture, this is the dex number, but it is
+; overwritten with the internal index number after the header is copied to WRAM.
 	ds 1
 
 W_MONHBASESTATS:: ; d0b9
