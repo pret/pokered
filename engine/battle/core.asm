@@ -834,8 +834,17 @@ FaintEnemyPokemon: ; 0x3c567
 .wild
 	ld hl, W_PLAYERBATTSTATUS1
 	res AttackingMultipleTimes, [hl]
+; Bug. This only zeroes the high byte of the player's accumulated damage,
+; setting the accumulated damage to itself mod 256 instead of 0 as was probably
+; intended. That alone is problematic, but this mistake has another more severe
+; effect. This function's counterpart for when the player mon faints,
+; RemoveFaintedPlayerMon, zeroes both the high byte and the low byte. In a link
+; battle, the other player's Game Boy will call that function in response to
+; the enemy mon (the player mon from the other side's perspective) fainting,
+; and the states of the two Game Boys will go out of sync unless the damage
+; was congruent to 0 modulo 256.
 	xor a
-	ld [wPlayerNumHits], a
+	ld [wPlayerBideAccumulatedDamage], a
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -1092,8 +1101,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	call WaitForSoundToFinish
 .skipWaitForSound
-; bug? if the player mon faints while the enemy mon is using bide,
-; the accumulated damage is overwritten. xxx what values can [wLowHealthAlarm] have here?
+; a is 0, so this zeroes the enemy's accumulated damage.
 	ld hl, wEnemyBideAccumulatedDamage
 	ld [hli], a
 	ld [hl], a
