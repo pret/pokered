@@ -169,14 +169,14 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	ld hl,wPokedexSeen
 	ld b,wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
-	ld de,wd11e
+	ld de, wNumSetBits
 	coord hl, 16, 3
 	lb bc, 1, 3
 	call PrintNumber ; print number of seen pokemon
 	ld hl,wPokedexOwned
 	ld b,wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld de,wd11e
+	ld de, wNumSetBits
 	coord hl, 16, 6
 	lb bc, 1, 3
 	call PrintNumber ; print number of owned pokemon

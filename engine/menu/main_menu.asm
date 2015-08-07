@@ -395,7 +395,7 @@ PrintNumBadges: ; 5e2f (1:5e2f)
 	ld b, $1
 	call CountSetBits
 	pop hl
-	ld de, wd11e
+	ld de, wNumSetBits
 	lb bc, 1, 2
 	jp PrintNumber
 
@@ -405,7 +405,7 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	pop hl
-	ld de, wd11e
+	ld de, wNumSetBits
 	lb bc, 1, 3
 	jp PrintNumber
 

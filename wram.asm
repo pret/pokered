@@ -1882,6 +1882,8 @@ wFirstMonsNotOutYet:: ; d11d
 ; which will be the first mon sent out.
 	ds 1
 
+wNumSetBits:: ; d11e
+
 wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
 
 wForcePlayerToChooseMon:: ; d11f

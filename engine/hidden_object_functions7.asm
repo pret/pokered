@@ -19,8 +19,8 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
-	cp $2
+	ld a, [wNumSetBits]
+	cp 2
 	tx_pre_id SaveOptionText
 	jr c, .ownThreeOrMoreMon
 	tx_pre_id StrengthsAndWeaknessesText

@@ -1292,7 +1292,7 @@ INCLUDE "engine/menu/start_menu.asm"
 ; hl = address of string of bytes
 ; b = length of string of bytes
 ; OUTPUT:
-; [wd11e] = number of set bits
+; [wNumSetBits] = number of set bits
 CountSetBits:: ; 2b7f (0:2b7f)
 	ld c,0
 .loop
@@ -1309,7 +1309,7 @@ CountSetBits:: ; 2b7f (0:2b7f)
 	dec b
 	jr nz,.loop
 	ld a,c
-	ld [wd11e],a ; store number of set bits
+	ld [wNumSetBits],a
 	ret
 
 ; subtracts the amount the player paid from their money
