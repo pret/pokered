@@ -371,7 +371,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	pop hl

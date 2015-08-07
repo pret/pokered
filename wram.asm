@@ -1882,6 +1882,21 @@ wFirstMonsNotOutYet:: ; d11d
 ; which will be the first mon sent out.
 	ds 1
 
+; lower nybble: number of shakes
+; upper nybble: number of animations to play
+wPokeBallAnimData:: ; d11e
+
+wUsingPPUp:: ; d11e
+
+wMaxPP:: ; d11e
+
+; 0 for player, non-zero for enemy
+wCalculateWhoseStats:: ; d11e
+
+wTypeEffectiveness:: ; d11e
+
+wMoveType:: ; d11e
+
 wNumSetBits:: ; d11e
 
 wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits

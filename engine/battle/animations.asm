@@ -2956,7 +2956,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld a,[W_ISINBATTLE]
 	cp a,2
 	jr z,.BlockBall ; if in trainer battle, play different animation
-	ld a,[wd11e]
+	ld a,[wPokeBallAnimData]
 	ld b,a
 
 	; upper nybble: how many animations (from PokeBallAnimations) to play

@@ -231,8 +231,8 @@ GainExperience: ; 5524f (15:524f)
 	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 .recalcStatChanges
-	xor a
-	ld [wd11e], a
+	xor a ; battle mon
+	ld [wCalculateWhoseStats], a
 	callab CalculateModifiedStats
 	callab ApplyBurnAndParalysisPenaltiesToPlayer
 	callab ApplyBadgeStatBoosts
