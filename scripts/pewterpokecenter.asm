@@ -59,9 +59,9 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	ld c, 24
 	call DelayFrames
 
-	ld a, [wc026]
+	ld a, [wChannelSoundIDs]
 	ld b, a
-	ld a, [wc027]
+	ld a, [wChannelSoundIDs + CH1]
 	or b
 	jr nz, .loop
 

@@ -658,7 +658,7 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	ld [wCurrentTileBlockMapViewPointer + 1],a
 .loadNewMap ; load the connected map that was entered
 	call LoadMapHeader
-	call Func_2312 ; music
+	call PlayDefaultMusicFadeOutCurrent
 	ld b,$09
 	call GoPAL_SET
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
@@ -750,16 +750,16 @@ HandleBlackOut::
 	ld [MBC1RomBank], a
 	call ResetStatusAndHalveMoneyOnBlackout
 	call SpecialWarpIn
-	call Func_2312
+	call PlayDefaultMusicFadeOutCurrent
 	jp SpecialEnterMap
 
 StopMusic::
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 .wait
-	ld a, [wMusicHeaderPointer]
+	ld a, [wAudioFadeOutControl]
 	and a
 	jr nz, .wait
 	jp StopAllSounds
@@ -1224,7 +1224,7 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	call CheckTilePassable
 	jr nc,.noCollision
 .collision
-	ld a,[wc02a]
+	ld a,[wChannelSoundIDs + CH4]
 	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION
@@ -1927,7 +1927,7 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	jr z,.stopSurfing ; stop surfing if the tile is passable
 	jr .loop
 .collision
-	ld a,[wc02a]
+	ld a,[wChannelSoundIDs + CH4]
 	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION
@@ -2279,9 +2279,9 @@ LoadMapHeader:: ; 107c (0:107c)
 	add hl,bc
 	add hl,bc
 	ld a,[hli]
-	ld [wd35b],a ; music 1
+	ld [wMapMusicSoundID],a ; music 1
 	ld a,[hl]
-	ld [wd35c],a ; music 2
+	ld [wMapMusicROMBank],a ; music 2
 	pop af
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
@@ -2352,8 +2352,8 @@ LoadMapData:: ; 1241 (0:1241)
 	ld a,[W_FLAGS_D733]
 	bit 1,a
 	jr nz,.restoreRomBank
-	call Func_235f ; music related
-	call Func_2312 ; music related
+	call UpdateMusic6Times
+	call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af
 	ld [H_LOADEDROMBANK],a

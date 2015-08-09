@@ -40,7 +40,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING

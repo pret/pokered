@@ -8,9 +8,9 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	push af
 	xor a
 	ld [wLowHealthAlarm], a
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	dec a
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -68,7 +68,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 .done
 	ld [wcf1d], a
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wcf1d]
 	call PlayCry

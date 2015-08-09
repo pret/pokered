@@ -397,7 +397,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld hl,wd72c
 	set 1,[hl]
 	ld a,$33 ; 3/7 volume
-	ld [$ff24],a
+	ld [rNR50],a
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
 	ld a,[wd11e] ; pokemon ID
@@ -566,7 +566,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld hl,wd72c
 	res 1,[hl]
 	ld a,$77 ; max volume
-	ld [$ff24],a
+	ld [rNR50],a
 	ret
 
 HeightWeightText: ; 40448 (10:4448)

@@ -61,9 +61,9 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 
 .playSFX
 	xor a
-	ld [wc0f1], a
+	ld [wFrequencyModifier], a
 	ld a, $80
-	ld [wc0f2], a
+	ld [wTempoModifier], a
 	ld a, SFX_SILPH_SCOPE
 	call PlaySound
 	jp WaitForSoundToFinish

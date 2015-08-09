@@ -280,9 +280,9 @@ HoFRecordMonInfo: ; 70404 (1c:4404)
 	jp CopyData
 
 HoFFadeOutScreenAndMusic: ; 70423 (1c:4423)
-	ld a, $a
-	ld [wcfc8], a
-	ld [wcfc9], a
+	ld a, 10
+	ld [wAudioFadeOutCounterReloadValue], a
+	ld [wAudioFadeOutCounter], a
 	ld a, $ff
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	jp GBFadeOutToWhite

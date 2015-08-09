@@ -325,10 +325,10 @@ PlayShootingStar: ; 4188a (10:588a)
 	call DelayFrames
 .next
 	ld a, BANK(Music_IntroBattle)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_INTRO_BATTLE
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	call IntroClearMiddleOfScreen
 	call ClearSprites

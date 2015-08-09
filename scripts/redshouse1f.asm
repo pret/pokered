@@ -29,14 +29,14 @@ MomHealPokemon: ; 4818a (12:418a)
 	call ReloadMapData
 	predef HealParty
 	ld a, MUSIC_PKMN_HEALED
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 .next
-	ld a, [wc026]
+	ld a, [wChannelSoundIDs]
 	cp MUSIC_PKMN_HEALED
 	jr z, .next
-	ld a, [wd35b]
-	ld [wc0ee], a
+	ld a, [wMapMusicSoundID]
+	ld [wNewSoundID], a
 	call PlaySound
 	call GBFadeInFromWhite
 	ld hl, MomHealText2

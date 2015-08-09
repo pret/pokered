@@ -511,7 +511,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $15
@@ -612,7 +612,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call FillMemory
 	ld [hl], $ff
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1

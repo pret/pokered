@@ -867,12 +867,12 @@ FaintEnemyPokemon: ; 0x3c567
 	dec a
 	jr z, .wild_win
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -952,7 +952,7 @@ EnemyMonFaintedText: ; 0x3c63e
 EndLowHealthAlarm: ; 3c643 (f:4643)
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	inc a
 	ld [wccf6], a
 	ret
@@ -1045,7 +1045,7 @@ TrainerDefeatedText: ; 3c6e9 (f:46e9)
 PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 	push af
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
@@ -1944,7 +1944,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	ret
 .asm_3cde6
 	ld hl, wLowHealthAlarm
@@ -6993,8 +6993,8 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 ; unreferenced
 ResetCryModifiers: ; 3f069 (f:7069)
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	jp PlaySound
 
 ; animates the mon "growing" out of the pokeball

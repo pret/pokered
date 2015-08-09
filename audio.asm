@@ -364,10 +364,10 @@ SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
 
 PlayBattleMusic:: ; 0x90c6
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
 	dec a
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound ; stop music
 	call DelayFrame
 	ld c, BANK(Music_GymLeaderBattle)
@@ -406,7 +406,7 @@ Music_RivalAlternateStart:: ; 0x9b47
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, wc006
+	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_branch_b1a2
 	call Audio1_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b21d
@@ -425,30 +425,30 @@ Music_RivalAlternateTempo:: ; 0x9b65
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, wc006
+	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_branch_b119
 	jp Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
 Music_RivalAlternateStartAndTempo:: ; 0x9b75
 	call Music_RivalAlternateStart
-	ld hl, wc006
+	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_branch_b19b
 	jp Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
 Music_Cities1AlternateTempo:: ; 0x9b81
-	ld a, $a
-	ld [wcfc8], a
-	ld [wcfc9], a
-	ld a, $ff
-	ld [wMusicHeaderPointer], a
+	ld a, 10
+	ld [wAudioFadeOutCounterReloadValue], a
+	ld [wAudioFadeOutCounter], a
+	ld a, $ff ; stop playing music after the fade-out is finished
+	ld [wAudioFadeOutControl], a
 	ld c, 100
-	call DelayFrames
+	call DelayFrames ; wait for the fade-out to finish
 	ld c, BANK(Music_Cities1)
 	ld a, MUSIC_CITIES1
 	call PlayMusic
-	ld hl, wc006
+	ld hl, wChannelCommandPointers
 	ld de, Music_Cities1_branch_aa6f
 	jp Audio1_OverwriteChannelPointer
 
@@ -477,7 +477,7 @@ Music_DoLowHealthAlarm:: ; 2136e (8:536e)
 
 .asm_2138a
 	ld a, $86
-	ld [wc02a], a ;disable sound channel?
+	ld [wChannelSoundIDs + CH4], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -491,7 +491,7 @@ Music_DoLowHealthAlarm:: ; 2136e (8:536e)
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wc02a], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + CH4], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 
@@ -542,7 +542,7 @@ Music_PokeFluteInBattle:: ; 22306 (8:6306)
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrtie the channel pointers
-	ld hl, wc00e
+	ld hl, wChannelCommandPointers + CH4 * 2
 	ld de, SFX_08_PokeFlute_Ch1
 	call Audio2_OverwriteChannelPointer
 	ld de, SFX_08_PokeFlute_Ch2
@@ -572,7 +572,7 @@ PlayPokedexRatingSfx:: ; 7d13b (1f:513b)
 .gotSfxPointer
 	push bc
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
 	pop bc
 	ld b, $0

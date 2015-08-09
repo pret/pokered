@@ -61,66 +61,146 @@ ENDM
 
 SECTION "WRAM Bank 0", WRAM0
 
-wc000:: ds 1
-wc001:: ds 1
-wc002:: ds 1
-wc003:: ds 1
-wc004:: ds 1
-wc005:: ds 1
-wc006:: ds 8
-wc00e:: ds 4
-wc012:: ds 4
-wc016:: ds 16
-wc026:: ds 1
-wc027:: ds 1
-wc028:: ds 2
-wc02a:: ds 1
-wc02b:: ds 1
-wc02c:: ds 1
-wc02d:: ds 1
-wc02e:: ds 8
-wc036:: ds 8
-wc03e:: ds 8
-wc046:: ds 8
-wc04e:: ds 8
-wc056:: ds 8
-wc05e:: ds 8
-wc066:: ds 8
-wc06e:: ds 8
-wc076:: ds 8
-wc07e:: ds 8
-wc086:: ds 8
-wc08e:: ds 8
-wc096:: ds 8
-wc09e:: ds 8
-wc0a6:: ds 8
-wc0ae:: ds 8
-wc0b6:: ds 8
-wc0be:: ds 8
-wc0c6:: ds 8
-wc0ce:: ds 1
-wc0cf:: ds 1
-wc0d0:: ds 1
-wc0d1:: ds 1
-wc0d2:: ds 1
-wc0d3:: ds 1
-wc0d4:: ds 1
-wc0d5:: ds 1
-wc0d6:: ds 8
-wc0de:: ds 8
-wc0e6:: ds 1
-wc0e7:: ds 1
-wc0e8:: ds 1
-wc0e9:: ds 1
-wc0ea:: ds 1
-wc0eb:: ds 1
-wc0ec:: ds 1
-wc0ed:: ds 1
-wc0ee:: ds 1
-wc0ef:: ds 1
-wc0f0:: ds 1
-wc0f1:: ds 1
-wc0f2:: ds 14
+wUnusedC000:: ; c000
+	ds 1
+
+wSoundID:: ; c001
+	ds 1
+
+wMuteAudioAndPauseMusic:: ; c002
+; bit 7: whether sound has been muted
+; all bits: whether the effective is active
+; Store 1 to activate effect (any value in the range [1, 127] works).
+; All audio is muted and music is paused. Sfx continues playing until it
+; ends normally.
+; Store 0 to resume music.
+	ds 1
+
+wDisableChannelOutputWhenSfxEnds:: ; c003
+	ds 1
+
+wStereoPanning:: ; c004
+	ds 1
+
+wSavedVolume:: ; c005
+	ds 1
+
+wChannelCommandPointers:: ; c006
+	ds 16
+
+wChannelReturnAddresses:: ; c016
+	ds 16
+
+wChannelSoundIDs:: ; c026
+	ds 8
+
+wChannelFlags1:: ; c02e
+	ds 8
+
+wChannelFlags2:: ; c036
+	ds 8
+
+wChannelDuties:: ; c03e
+	ds 8
+
+wChannelDutyCycles:: ; c046
+	ds 8
+
+wChannelVibratoDelayCounters:: ; c04e
+; reloaded at the beginning of a note. counts down until the vibrato begins.
+	ds 8
+
+wChannelVibratoExtents:: ; c056
+	ds 8
+
+wChannelVibratoRates:: ; c05e
+; high nybble is rate (counter reload value) and low nybble is counter.
+; time between applications of vibrato.
+	ds 8
+
+wChannelFrequencyLowBytes:: ; c066
+	ds 8
+
+wChannelVibratoDelayCounterReloadValues:: ; c06e
+; delay of the beginning of the vibrato from the start of the note
+	ds 8
+
+wChannelPitchBendLengthModifiers:: ; c076
+	ds 8
+
+wChannelPitchBendFrequencySteps:: ; c07e
+	ds 8
+
+wChannelPitchBendFrequencyStepsFractionalPart:: ; c086
+	ds 8
+
+wChannelPitchBendCurrentFrequencyFractionalPart:: ; c08e
+	ds 8
+
+wChannelPitchBendCurrentFrequencyHighBytes:: ; c096
+	ds 8
+
+wChannelPitchBendCurrentFrequencyLowBytes:: ; c09e
+	ds 8
+
+wChannelPitchBendTargetFrequencyHighBytes:: ; c0a6
+	ds 8
+
+wChannelPitchBendTargetFrequencyLowBytes:: ; c0ae
+	ds 8
+
+wChannelNoteDelayCounters:: ; c0b6
+; Note delays are stored as 16-bit fixed-point numbers where the integer part
+; is 8 bits and the fractional part is 8 bits.
+	ds 8
+
+wChannelLoopCounters:: ; c0be
+	ds 8
+
+wChannelNoteSpeeds:: ; c0c6
+	ds 8
+
+wChannelNoteDelayCountersFractionalPart:: ; c0ce
+	ds 8
+
+wChannelOctaves:: ; c0d6
+	ds 8
+
+wChannelVolumes:: ; c0de
+; also includes fade for hardware channels that support it
+	ds 8
+
+wMusicWaveInstrument::
+	ds 1
+
+wSfxWaveInstrument::
+	ds 1
+
+wMusicTempo:: ; c0e8
+	ds 2
+
+wSfxTempo:: ; c0ea
+	ds 2
+
+wSfxHeaderPointer:: ; c0ec
+	ds 2
+
+wNewSoundID:: ; c0ee
+	ds 1
+
+wAudioROMBank:: ; c0ef
+	ds 1
+
+wAudioSavedROMBank:: ; c0f0
+	ds 1
+
+wFrequencyModifier:: ; c0f1
+	ds 1
+
+wTempoModifier:: ; c0f2
+	ds 1
+
+	ds 13
 
 
 SECTION "Sprite State Data", WRAM0[$c100]
@@ -1289,13 +1369,35 @@ wTileInFrontOfPlayer:: ; cfc6
 ; background tile number in front of the player (either 1 or 2 steps ahead)
 	ds 1
 
-wMusicHeaderPointer:: ; cfc7
-; (the current music channel address - $4000) / 3
+wAudioFadeOutControl:: ; cfc7
+; The desired fade counter reload value is stored here prior to calling
+; PlaySound in order to cause the current music to fade out before the new
+; music begins playing. Storing 0 causes no fade out to occur and the new music
+; to begin immediately.
+; This variable has another use related to fade-out, as well. PlaySound stores
+; the sound ID of the music that should be played after the fade-out is finished
+; in this variable. FadeOutAudio checks if it's non-zero every V-Blank and
+; fades out the current audio if it is. Once it has finished fading out the
+; audio, it zeroes this variable and starts playing the sound ID stored in it.
 	ds 1
 
-wcfc8:: ds 1 ; used with audio
-wcfc9:: ds 1 ; also used with audio
-wcfca:: ds 1 ; also used with audio too
+wAudioFadeOutCounterReloadValue:: ; cfc8
+	ds 1
+
+wAudioFadeOutCounter:: ; cfc9
+	ds 1
+
+wLastMusicSoundID:: ; cfca
+; This is used to determine whether the default music is already playing when
+; attempting to play the default music (in order to avoid restarting the same
+; music) and whether the music has already been stopped when attempting to
+; fade out the current music (so that the new music can be begin immediately
+; instead of waiting).
+; It sometimes contains the sound ID of the last music played, but it may also
+; contain $ff (if the music has been stopped) or 0 (because some routines zero
+; it in order to prevent assumptions from being made about the current state of
+; the music).
+	ds 1
 
 wUpdateSpritesEnabled:: ; cfcb
 ; $00 = causes sprites to be hidden and the value to change to $ff
@@ -2126,8 +2228,11 @@ wLetterPrintingDelayFlags:: ; d358
 wPlayerID:: ; d359
 	ds 2
 
-wd35b:: ds 1 ; used with audio stuff
-wd35c:: ds 1 ; storage for audio bank for current map?
+wMapMusicSoundID:: ; d35b
+	ds 1
+
+wMapMusicROMBank:: ; d35c
+	ds 1
 
 wMapPalOffset:: ; d35d
 ; offset subtracted from FadePal4 to get the background and object palettes for the current map

@@ -856,7 +856,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 .notFullHP ; if the pokemon's current HP doesn't equal its max HP
 	xor a
 	ld [wLowHealthAlarm],a ;disable low health alarm
-	ld [wc02a],a
+	ld [wChannelSoundIDs + CH4],a
 	push hl
 	push de
 	ld bc,32
@@ -1643,7 +1643,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	call WaitForSoundToFinish ; wait for sound to end
 	callba Music_PokeFluteInBattle ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
-	ld a,[wc02c]
+	ld a,[wChannelSoundIDs + CH6]
 	and a ; music off?
 	jr nz,.musicWaitLoop
 .skipMusic
@@ -1716,8 +1716,8 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
-	ld a,[wc028]
-	cp a,$b8
+	ld a,[wChannelSoundIDs + CH2]
+	cp a, SFX_POKEFLUE
 	jr z,.musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done
