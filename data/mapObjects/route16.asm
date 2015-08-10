@@ -17,12 +17,12 @@ Route16Object: ; 0x58afc (size=136)
 	db $11, $5, $9 ; Route16Text9
 
 	db $7 ; objects
-	object SPRITE_BIKER, $11, $c, STAY, LEFT, $1, BIKER + $C8, $5
-	object SPRITE_BIKER, $e, $d, STAY, RIGHT, $2, CUE_BALL + $C8, $1
-	object SPRITE_BIKER, $b, $c, STAY, UP, $3, CUE_BALL + $C8, $2
-	object SPRITE_BIKER, $9, $b, STAY, LEFT, $4, BIKER + $C8, $6
-	object SPRITE_BIKER, $6, $a, STAY, RIGHT, $5, CUE_BALL + $C8, $3
-	object SPRITE_BIKER, $3, $c, STAY, RIGHT, $6, BIKER + $C8, $7
+	object SPRITE_BIKER, $11, $c, STAY, LEFT, $1, OPP_BIKER, $5
+	object SPRITE_BIKER, $e, $d, STAY, RIGHT, $2, OPP_CUE_BALL, $1
+	object SPRITE_BIKER, $b, $c, STAY, UP, $3, OPP_CUE_BALL, $2
+	object SPRITE_BIKER, $9, $b, STAY, LEFT, $4, OPP_BIKER, $6
+	object SPRITE_BIKER, $6, $a, STAY, RIGHT, $5, OPP_CUE_BALL, $3
+	object SPRITE_BIKER, $3, $c, STAY, RIGHT, $6, OPP_BIKER, $7
 	object SPRITE_SNORLAX, $1a, $a, STAY, DOWN, $7 ; person
 
 	; warp-to

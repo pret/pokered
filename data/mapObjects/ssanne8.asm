@@ -12,10 +12,10 @@ SSAnne8Object: ; 0x61a60 (size=127)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_GENTLEMAN, $2, $3, STAY, LEFT, $1, GENTLEMAN + $C8, $1
-	object SPRITE_GENTLEMAN, $b, $4, STAY, UP, $2, GENTLEMAN + $C8, $2
-	object SPRITE_BUG_CATCHER, $b, $e, STAY, UP, $3, YOUNGSTER + $C8, $8
-	object SPRITE_LASS, $d, $b, STAY, LEFT, $4, LASS + $C8, $b
+	object SPRITE_GENTLEMAN, $2, $3, STAY, LEFT, $1, OPP_GENTLEMAN, $1
+	object SPRITE_GENTLEMAN, $b, $4, STAY, UP, $2, OPP_GENTLEMAN, $2
+	object SPRITE_BUG_CATCHER, $b, $e, STAY, UP, $3, OPP_YOUNGSTER, $8
+	object SPRITE_LASS, $d, $b, STAY, LEFT, $4, OPP_LASS, $b
 	object SPRITE_GIRL, $16, $3, WALK, $1, $5 ; person
 	object SPRITE_FAT_BALD_GUY, $0, $e, STAY, NONE, $6 ; person
 	object SPRITE_LITTLE_GIRL, $2, $b, STAY, DOWN, $7 ; person

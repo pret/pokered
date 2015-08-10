@@ -1518,7 +1518,7 @@ wPartyGainExpFlags:: ; d058
 
 W_CUROPPONENT:: ; d059
 ; in a wild battle, this is the species of pokemon
-; in a trainer battle, this is the trainer class + $C8
+; in a trainer battle, this is the trainer class + 200
 	ds 1
 
 W_BATTLETYPE:: ; d05a
@@ -2789,7 +2789,7 @@ W_FOSSILMON:: ; d710
 	ds 2
 
 W_ENEMYMONORTRAINERCLASS:: ; d713
-; trainer classes start at $c8
+; trainer classes start at 200
 	ds 1
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714

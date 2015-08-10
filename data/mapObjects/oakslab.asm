@@ -8,7 +8,7 @@ OaksLabObject: ; 0x1d40a (size=88)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_BLUE, $4, $3, STAY, NONE, $1, SONY1 + $C8, $1
+	object SPRITE_BLUE, $4, $3, STAY, NONE, $1, OPP_SONY1, $1
 	object SPRITE_BALL, $6, $3, STAY, NONE, $2 ; person
 	object SPRITE_BALL, $7, $3, STAY, NONE, $3 ; person
 	object SPRITE_BALL, $8, $3, STAY, NONE, $4 ; person

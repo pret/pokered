@@ -13,11 +13,11 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db $0 ; signs
 
 	db $d ; objects
-	object SPRITE_HIKER, $c, $9, STAY, LEFT, $1, BLACKBELT + $C8, $9
-	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, STAY, LEFT, $2, JUGGLER + $C8, $2
-	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, TAMER + $C8, $5
-	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, POKEMANIAC + $C8, $6
-	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, JUGGLER + $C8, $5
+	object SPRITE_HIKER, $c, $9, STAY, LEFT, $1, OPP_BLACKBELT, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, STAY, LEFT, $2, OPP_JUGGLER, $2
+	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, OPP_TAMER, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, OPP_POKEMANIAC, $6
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, OPP_JUGGLER, $5
 	object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50
 	object SPRITE_BALL, $1b, $5, STAY, NONE, $7, TM_17
 	object SPRITE_BALL, $12, $9, STAY, NONE, $8, FULL_HEAL

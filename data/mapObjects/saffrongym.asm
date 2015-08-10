@@ -38,14 +38,14 @@ SaffronGymObject: ; 0x5d259 (size=330)
 	db $0 ; signs
 
 	db $9 ; objects
-	object SPRITE_GIRL, $9, $8, STAY, DOWN, $1, SABRINA + $C8, $1
-	object SPRITE_MEDIUM, $a, $1, STAY, DOWN, $2, CHANNELER + $C8, $16
-	object SPRITE_BUG_CATCHER, $11, $1, STAY, DOWN, $3, PSYCHIC_TR + $C8, $1
-	object SPRITE_MEDIUM, $3, $7, STAY, DOWN, $4, CHANNELER + $C8, $17
-	object SPRITE_BUG_CATCHER, $11, $7, STAY, DOWN, $5, PSYCHIC_TR + $C8, $2
-	object SPRITE_MEDIUM, $3, $d, STAY, DOWN, $6, CHANNELER + $C8, $18
-	object SPRITE_BUG_CATCHER, $11, $d, STAY, DOWN, $7, PSYCHIC_TR + $C8, $3
-	object SPRITE_BUG_CATCHER, $3, $1, STAY, DOWN, $8, PSYCHIC_TR + $C8, $4
+	object SPRITE_GIRL, $9, $8, STAY, DOWN, $1, OPP_SABRINA, $1
+	object SPRITE_MEDIUM, $a, $1, STAY, DOWN, $2, OPP_CHANNELER, $16
+	object SPRITE_BUG_CATCHER, $11, $1, STAY, DOWN, $3, OPP_PSYCHIC_TR, $1
+	object SPRITE_MEDIUM, $3, $7, STAY, DOWN, $4, OPP_CHANNELER, $17
+	object SPRITE_BUG_CATCHER, $11, $7, STAY, DOWN, $5, OPP_PSYCHIC_TR, $2
+	object SPRITE_MEDIUM, $3, $d, STAY, DOWN, $6, OPP_CHANNELER, $18
+	object SPRITE_BUG_CATCHER, $11, $d, STAY, DOWN, $7, OPP_PSYCHIC_TR, $3
+	object SPRITE_BUG_CATCHER, $3, $1, STAY, DOWN, $8, OPP_PSYCHIC_TR, $4
 	object SPRITE_GYM_HELPER, $a, $f, STAY, DOWN, $9 ; person
 
 	; warp-to

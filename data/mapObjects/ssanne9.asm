@@ -18,10 +18,10 @@ SSAnne9Object: ; 0x61c8d (size=188)
 	db $0 ; signs
 
 	db $d ; objects
-	object SPRITE_GENTLEMAN, $a, $2, STAY, RIGHT, $1, GENTLEMAN + $C8, $3
-	object SPRITE_FISHER2, $d, $4, STAY, LEFT, $2, FISHER + $C8, $1
-	object SPRITE_GENTLEMAN, $0, $e, STAY, RIGHT, $3, GENTLEMAN + $C8, $5
-	object SPRITE_LASS, $2, $b, STAY, DOWN, $4, LASS + $C8, $c
+	object SPRITE_GENTLEMAN, $a, $2, STAY, RIGHT, $1, OPP_GENTLEMAN, $3
+	object SPRITE_FISHER2, $d, $4, STAY, LEFT, $2, OPP_FISHER, $1
+	object SPRITE_GENTLEMAN, $0, $e, STAY, RIGHT, $3, OPP_GENTLEMAN, $5
+	object SPRITE_LASS, $2, $b, STAY, DOWN, $4, OPP_LASS, $c
 	object SPRITE_GENTLEMAN, $1, $2, STAY, DOWN, $5 ; person
 	object SPRITE_BALL, $c, $1, STAY, NONE, $6, MAX_ETHER
 	object SPRITE_GENTLEMAN, $15, $2, STAY, DOWN, $7 ; person

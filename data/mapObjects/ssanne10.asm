@@ -16,12 +16,12 @@ SSAnne10Object: ; 0x61e75 (size=165)
 	db $0 ; signs
 
 	db $b ; objects
-	object SPRITE_SAILOR, $0, $d, STAY, DOWN, $1, SAILOR + $C8, $3
-	object SPRITE_SAILOR, $2, $b, STAY, DOWN, $2, SAILOR + $C8, $4
-	object SPRITE_SAILOR, $c, $3, STAY, LEFT, $3, SAILOR + $C8, $5
-	object SPRITE_SAILOR, $16, $2, STAY, DOWN, $4, SAILOR + $C8, $6
-	object SPRITE_SAILOR, $0, $2, STAY, RIGHT, $5, SAILOR + $C8, $7
-	object SPRITE_FISHER2, $0, $4, STAY, RIGHT, $6, FISHER + $C8, $2
+	object SPRITE_SAILOR, $0, $d, STAY, DOWN, $1, OPP_SAILOR, $3
+	object SPRITE_SAILOR, $2, $b, STAY, DOWN, $2, OPP_SAILOR, $4
+	object SPRITE_SAILOR, $c, $3, STAY, LEFT, $3, OPP_SAILOR, $5
+	object SPRITE_SAILOR, $16, $2, STAY, DOWN, $4, OPP_SAILOR, $6
+	object SPRITE_SAILOR, $0, $2, STAY, RIGHT, $5, OPP_SAILOR, $7
+	object SPRITE_FISHER2, $0, $4, STAY, RIGHT, $6, OPP_FISHER, $2
 	object SPRITE_BLACK_HAIR_BOY_2, $a, $d, STAY, RIGHT, $7 ; person
 	object SPRITE_SLOWBRO, $b, $c, STAY, NONE, $8 ; person
 	object SPRITE_BALL, $14, $2, STAY, NONE, $9, ETHER

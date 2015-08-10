@@ -8,9 +8,9 @@ PokemonTower6Object: ; 0x60c5b (size=58)
 	db $0 ; signs
 
 	db $5 ; objects
-	object SPRITE_MEDIUM, $c, $a, STAY, RIGHT, $1, CHANNELER + $C8, $13
-	object SPRITE_MEDIUM, $9, $5, STAY, DOWN, $2, CHANNELER + $C8, $14
-	object SPRITE_MEDIUM, $10, $5, STAY, LEFT, $3, CHANNELER + $C8, $15
+	object SPRITE_MEDIUM, $c, $a, STAY, RIGHT, $1, OPP_CHANNELER, $13
+	object SPRITE_MEDIUM, $9, $5, STAY, DOWN, $2, OPP_CHANNELER, $14
+	object SPRITE_MEDIUM, $10, $5, STAY, LEFT, $3, OPP_CHANNELER, $15
 	object SPRITE_BALL, $6, $8, STAY, NONE, $4, RARE_CANDY
 	object SPRITE_BALL, $e, $e, STAY, NONE, $5, X_ACCURACY
 

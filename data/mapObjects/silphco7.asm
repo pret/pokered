@@ -16,10 +16,10 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	object SPRITE_LAPRAS_GIVER, $d, $d, STAY, UP, $2 ; person
 	object SPRITE_LAPRAS_GIVER, $7, $a, STAY, NONE, $3 ; person
 	object SPRITE_ERIKA, $a, $8, STAY, NONE, $4 ; person
-	object SPRITE_ROCKET, $d, $1, STAY, DOWN, $5, ROCKET + $C8, $20
-	object SPRITE_OAK_AIDE, $2, $d, STAY, DOWN, $6, SCIENTIST + $C8, $8
-	object SPRITE_ROCKET, $14, $2, STAY, LEFT, $7, ROCKET + $C8, $21
-	object SPRITE_ROCKET, $13, $e, STAY, RIGHT, $8, ROCKET + $C8, $22
+	object SPRITE_ROCKET, $d, $1, STAY, DOWN, $5, OPP_ROCKET, $20
+	object SPRITE_OAK_AIDE, $2, $d, STAY, DOWN, $6, OPP_SCIENTIST, $8
+	object SPRITE_ROCKET, $14, $2, STAY, LEFT, $7, OPP_ROCKET, $21
+	object SPRITE_ROCKET, $13, $e, STAY, RIGHT, $8, OPP_ROCKET, $22
 	object SPRITE_BLUE, $3, $7, STAY, UP, $9 ; person
 	object SPRITE_BALL, $1, $9, STAY, NONE, $a, CALCIUM
 	object SPRITE_BALL, $18, $b, STAY, NONE, $b, TM_03

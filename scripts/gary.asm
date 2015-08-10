@@ -64,7 +64,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, GaryText_760f9
 	ld de, GaryText_760fe
 	call SaveEndBattleTextPointers
-	ld a, SONY3 + $c8
+	ld a, OPP_SONY3
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter

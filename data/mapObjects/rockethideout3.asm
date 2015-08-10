@@ -8,8 +8,8 @@ RocketHideout3Object: ; 0x4534d (size=50)
 	db $0 ; signs
 
 	db $4 ; objects
-	object SPRITE_ROCKET, $a, $16, STAY, RIGHT, $1, ROCKET + $C8, $e
-	object SPRITE_ROCKET, $1a, $c, STAY, UP, $2, ROCKET + $C8, $f
+	object SPRITE_ROCKET, $a, $16, STAY, RIGHT, $1, OPP_ROCKET, $e
+	object SPRITE_ROCKET, $1a, $c, STAY, UP, $2, OPP_ROCKET, $f
 	object SPRITE_BALL, $1a, $11, STAY, NONE, $3, TM_10
 	object SPRITE_BALL, $14, $e, STAY, NONE, $4, RARE_CANDY
 

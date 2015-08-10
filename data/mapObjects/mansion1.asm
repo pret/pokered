@@ -14,7 +14,7 @@ Mansion1Object: ; 0x443a4 (size=90)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_OAK_AIDE, $11, $11, STAY, LEFT, $1, SCIENTIST + $C8, $4
+	object SPRITE_OAK_AIDE, $11, $11, STAY, LEFT, $1, OPP_SCIENTIST, $4
 	object SPRITE_BALL, $e, $3, STAY, NONE, $2, ESCAPE_ROPE
 	object SPRITE_BALL, $12, $15, STAY, NONE, $3, CARBOS
 

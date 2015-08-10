@@ -101,7 +101,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 
 ; get trainer class number
 	ld a,[W_CUROPPONENT]
-	sub $C8
+	sub 200
 	ld b,a
 	ld hl,TeamMoves
 

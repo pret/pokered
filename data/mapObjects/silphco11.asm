@@ -12,9 +12,9 @@ SilphCo11Object: ; 0x62380 (size=72)
 	db $5 ; objects
 	object SPRITE_MR_MASTERBALL, $7, $5, STAY, DOWN, $1 ; person
 	object SPRITE_FOULARD_WOMAN, $a, $5, STAY, DOWN, $2 ; person
-	object SPRITE_GIOVANNI, $6, $9, STAY, DOWN, $3, GIOVANNI + $C8, $2
-	object SPRITE_ROCKET, $3, $10, STAY, UP, $4, ROCKET + $C8, $29
-	object SPRITE_ROCKET, $f, $9, STAY, UP, $5, ROCKET + $C8, $28
+	object SPRITE_GIOVANNI, $6, $9, STAY, DOWN, $3, OPP_GIOVANNI, $2
+	object SPRITE_ROCKET, $3, $10, STAY, UP, $4, OPP_ROCKET, $29
+	object SPRITE_ROCKET, $f, $9, STAY, UP, $5, OPP_ROCKET, $28
 
 	; warp-to
 	EVENT_DISP SILPH_CO_11F_WIDTH, $0, $9 ; SILPH_CO_10F

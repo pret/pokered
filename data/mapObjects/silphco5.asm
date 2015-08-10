@@ -14,10 +14,10 @@ SilphCo5Object: ; 0x1a08d (size=137)
 
 	db $b ; objects
 	object SPRITE_LAPRAS_GIVER, $d, $9, STAY, NONE, $1 ; person
-	object SPRITE_ROCKET, $8, $10, STAY, RIGHT, $2, ROCKET + $C8, $1c
-	object SPRITE_OAK_AIDE, $8, $3, STAY, RIGHT, $3, SCIENTIST + $C8, $6
-	object SPRITE_ROCKER, $12, $a, STAY, UP, $4, JUGGLER + $C8, $1
-	object SPRITE_ROCKET, $1c, $4, STAY, UP, $5, ROCKET + $C8, $1d
+	object SPRITE_ROCKET, $8, $10, STAY, RIGHT, $2, OPP_ROCKET, $1c
+	object SPRITE_OAK_AIDE, $8, $3, STAY, RIGHT, $3, OPP_SCIENTIST, $6
+	object SPRITE_ROCKER, $12, $a, STAY, UP, $4, OPP_JUGGLER, $1
+	object SPRITE_ROCKET, $1c, $4, STAY, UP, $5, OPP_ROCKET, $1d
 	object SPRITE_BALL, $2, $d, STAY, NONE, $6, TM_09
 	object SPRITE_BALL, $4, $6, STAY, NONE, $7, PROTEIN
 	object SPRITE_BALL, $15, $10, STAY, NONE, $8, CARD_KEY

@@ -13,9 +13,9 @@ IF DEF(_YELLOW)
 	object SPRITE_MR_FUJI, $a, 3, STAY, DOWN, 3
 ELSE
 	db $4 ; objects
-	object SPRITE_ROCKET, $9, $b, STAY, RIGHT, $1, ROCKET + $C8, $13
-	object SPRITE_ROCKET, $c, $9, STAY, LEFT, $2, ROCKET + $C8, $14
-	object SPRITE_ROCKET, $9, $7, STAY, RIGHT, $3, ROCKET + $C8, $15
+	object SPRITE_ROCKET, $9, $b, STAY, RIGHT, $1, OPP_ROCKET, $13
+	object SPRITE_ROCKET, $c, $9, STAY, LEFT, $2, OPP_ROCKET, $14
+	object SPRITE_ROCKET, $9, $7, STAY, RIGHT, $3, OPP_ROCKET, $15
 	object SPRITE_MR_FUJI, $a, $3, STAY, DOWN, $4 ; person
 ENDC
 

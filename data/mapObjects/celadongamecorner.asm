@@ -20,7 +20,7 @@ CeladonGameCornerObject: ; 0x48fa0 (size=99)
 	object SPRITE_GAMBLER, $b, $f, STAY, RIGHT, $8 ; person
 	object SPRITE_MART_GUY, $e, $b, STAY, LEFT, $9 ; person
 	object SPRITE_GENTLEMAN, $11, $d, STAY, RIGHT, $a ; person
-	object SPRITE_ROCKET, $9, $5, STAY, UP, $b, ROCKET + $C8, $7
+	object SPRITE_ROCKET, $9, $5, STAY, UP, $b, OPP_ROCKET, $7
 
 	; warp-to
 	EVENT_DISP GAME_CORNER_WIDTH, $11, $f

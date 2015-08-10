@@ -13,13 +13,13 @@ Route12Object: ; 0x5869a (size=118)
 
 	db $a ; objects
 	object SPRITE_SNORLAX, $a, $3e, STAY, DOWN, $1 ; person
-	object SPRITE_FISHER2, $e, $1f, STAY, LEFT, $2, FISHER + $C8, $3
-	object SPRITE_FISHER2, $5, $27, STAY, UP, $3, FISHER + $C8, $4
-	object SPRITE_BLACK_HAIR_BOY_1, $b, $5c, STAY, LEFT, $4, JR__TRAINER_M + $C8, $9
-	object SPRITE_BLACK_HAIR_BOY_2, $e, $4c, STAY, UP, $5, ROCKER + $C8, $2
-	object SPRITE_FISHER2, $c, $28, STAY, LEFT, $6, FISHER + $C8, $5
-	object SPRITE_FISHER2, $9, $34, STAY, RIGHT, $7, FISHER + $C8, $6
-	object SPRITE_FISHER2, $6, $57, STAY, DOWN, $8, FISHER + $C8, $b
+	object SPRITE_FISHER2, $e, $1f, STAY, LEFT, $2, OPP_FISHER, $3
+	object SPRITE_FISHER2, $5, $27, STAY, UP, $3, OPP_FISHER, $4
+	object SPRITE_BLACK_HAIR_BOY_1, $b, $5c, STAY, LEFT, $4, OPP_JR__TRAINER_M, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $e, $4c, STAY, UP, $5, OPP_ROCKER, $2
+	object SPRITE_FISHER2, $c, $28, STAY, LEFT, $6, OPP_FISHER, $5
+	object SPRITE_FISHER2, $9, $34, STAY, RIGHT, $7, OPP_FISHER, $6
+	object SPRITE_FISHER2, $6, $57, STAY, DOWN, $8, OPP_FISHER, $b
 	object SPRITE_BALL, $e, $23, STAY, NONE, $9, TM_16
 	object SPRITE_BALL, $5, $59, STAY, NONE, $a, IRON
 

@@ -378,11 +378,11 @@ PlayBattleMusic:: ; 0x90c6
 	jr .playSong
 .notGymLeaderBattle
 	ld a, [W_CUROPPONENT]
-	cp $c8
+	cp 200
 	jr c, .wildBattle
-	cp SONY3 + $c8
+	cp OPP_SONY3
 	jr z, .finalBattle
-	cp LANCE + $c8
+	cp OPP_LANCE
 	jr nz, .normalTrainerBattle
 	ld a, MUSIC_GYM_LEADER_BATTLE ; lance also plays gym leader theme
 	jr .playSong

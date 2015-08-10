@@ -183,7 +183,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	ld hl, SilphCo7Text14
 	ld de, SilphCo7Text_51ecd
 	call SaveEndBattleTextPointers
-	ld a, SONY2 + $c8
+	ld a, OPP_SONY2
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2

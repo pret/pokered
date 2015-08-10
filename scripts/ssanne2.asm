@@ -97,7 +97,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld a, SONY2 + $c8
+	ld a, OPP_SONY2
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
