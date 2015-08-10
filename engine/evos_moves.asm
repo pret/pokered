@@ -166,7 +166,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld de, W_MONHEADER
 	call CopyData
 	ld a, [wd0b5]
-	ld [W_MONHDEXNUM], a
+	ld [W_MONHINDEX], a
 	pop af
 	ld [wd11e], a
 	ld hl, wLoadedMonHPExp - 1
@@ -257,12 +257,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call nz, PlayDefaultMusic
 	ret
 
-; checks if the evolved mon's name is different from the standard name (i.e. it has a nickname)
-; if so, rename it to is evolved form's standard name
 RenameEvolvedMon: ; 3aef7 (e:6ef7)
+; Renames the mon to its new, evolved form's standard name unless it had a
+; nickname, in which case the nickname is kept.
 	ld a, [wd0b5]
 	push af
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd0b5], a
 	call GetName
 	pop af
@@ -275,7 +275,7 @@ RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	cp [hl]
 	inc hl
 	ret nz
-	cp $50
+	cp "@"
 	jr nz, .compareNamesLoop
 	ld a, [wWhichPokemon]
 	ld bc, 11

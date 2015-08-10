@@ -182,7 +182,9 @@ hJoy5        EQU $FFB5
 hJoy6        EQU $FFB6
 hJoy7        EQU $FFB7
 
-H_LOADEDROMBANK     EQU $FFB8
+H_LOADEDROMBANK EQU $FFB8
+
+hSavedROMBank EQU $FFB9
 
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
@@ -272,6 +274,19 @@ hFossilCounter EQU $FFDB
 hGymGateIndex EQU $FFDB
 
 hGymTrashCanRandNumMask EQU $FFDB
+
+hDexRatingNumMonsSeen  EQU $FFDB
+hDexRatingNumMonsOwned EQU $FFDC
+
+; $00 = bag full
+; $01 = got item
+; $80 = didn't meet required number of owned mons
+; $FF = player cancelled
+hOaksAideResult       EQU $FFDB
+
+hOaksAideRequirement  EQU $FFDB ; required number of owned mons
+hOaksAideItemReward   EQU $FFDC
+hOaksAideNumMonsOwned EQU $FFDD
 
 hItemToRemoveID    EQU $FFDB
 hItemToRemoveIndex EQU $FFDC

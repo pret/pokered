@@ -129,12 +129,12 @@ OakSpeech: ; 6115 (1:6115)
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a, BANK(Music_PalletTown)
-	ld [wc0ef],a
-	ld [wc0f0],a
-	ld a,$A
-	ld [wMusicHeaderPointer],a
+	ld [wAudioROMBank],a
+	ld [wAudioSavedROMBank],a
+	ld a, 10
+	ld [wAudioFadeOutControl],a
 	ld a,$FF
-	ld [wc0ee],a
+	ld [wNewSoundID],a
 	call PlaySound ; stop music
 	pop af
 	ld [H_LOADEDROMBANK],a

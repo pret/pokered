@@ -1,3 +1,42 @@
+; HW sound channel register base addresses
+HW_CH1_BASE EQU (rNR10 % $100)
+HW_CH2_BASE EQU ((rNR21 % $100) - 1)
+HW_CH3_BASE EQU (rNR30 % $100)
+HW_CH4_BASE EQU ((rNR41 % $100) - 1)
+
+; HW sound channel enable bit masks
+HW_CH1_ENABLE_MASK EQU %00010001
+HW_CH2_ENABLE_MASK EQU %00100010
+HW_CH3_ENABLE_MASK EQU %01000100
+HW_CH4_ENABLE_MASK EQU %10001000
+
+; HW sound channel disable bit masks
+HW_CH1_DISABLE_MASK EQU (~HW_CH1_ENABLE_MASK & $ff)
+HW_CH2_DISABLE_MASK EQU (~HW_CH2_ENABLE_MASK & $ff)
+HW_CH3_DISABLE_MASK EQU (~HW_CH3_ENABLE_MASK & $ff)
+HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
+
+REG_DUTY_SOUND_LEN  EQU 1
+REG_VOLUME_ENVELOPE EQU 2
+REG_FREQUENCY_LO    EQU 3
+
+MAX_SFX_ID EQU $B9
+
+CRY_SFX_START EQU $14
+CRY_SFX_END   EQU $86
+
+; wChannelFlags1 constants
+BIT_PERFECT_PITCH         EQU 0 ; controlled by toggleperfectpitch command
+BIT_CHANNEL_CALL          EQU 1 ; if in channel call
+BIT_NOISE_OR_SFX          EQU 2 ; if channel is the music noise channel or an SFX channel
+BIT_VIBRATO_DIRECTION     EQU 3 ; if the pitch is above or below normal (cycles)
+BIT_PITCH_BEND_ON         EQU 4 ; if pitch bend is active
+BIT_PITCH_BEND_DECREASING EQU 5 ; if the pitch bend frequency is decreasing (instead of increasing)
+BIT_ROTATE_DUTY           EQU 6 ; if rotating duty
+
+; wChannelFlags2 constant (only has one flag)
+BIT_EXECUTE_MUSIC EQU 0 ; if in execute music
+
 ; Song ids are calculated by address to save space.
 
 music_const: MACRO

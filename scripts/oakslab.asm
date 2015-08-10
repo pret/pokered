@@ -511,7 +511,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $15
@@ -612,7 +612,7 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call FillMemory
 	ld [hl], $ff
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
@@ -969,8 +969,8 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
-	cp $2
+	ld a, [wNumSetBits]
+	cp 2
 	jr c, .asm_1d279
 	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .asm_1d279

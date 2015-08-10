@@ -33,7 +33,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .musicLoop
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp $b9
 	jr z, .musicLoop
 	call UpdateSprites

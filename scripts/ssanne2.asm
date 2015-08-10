@@ -25,7 +25,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -146,7 +146,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $3

@@ -24,12 +24,12 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	predef HealParty
 	callba AnimateHealingMachine ; do the healing machine animation
 	xor a
-	ld [wMusicHeaderPointer], a
-	ld a, [wc0f0]
-	ld [wc0ef], a
-	ld a, [wd35b]
-	ld [wcfca], a
-	ld [wc0ee], a
+	ld [wAudioFadeOutControl], a
+	ld a, [wAudioSavedROMBank]
+	ld [wAudioROMBank], a
+	ld a, [wMapMusicSoundID]
+	ld [wLastMusicSoundID], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld hl, PokemonFightingFitText
 	call PrintText

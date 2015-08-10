@@ -256,9 +256,9 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec c
 	jr nz, .unpatchEnemyMonsLoop
 	ld a, wEnemyMonOT % $100
-	ld [wcf8d], a
+	ld [wUnusedCF8D], a
 	ld a, wEnemyMonOT / $100
-	ld [wcf8e], a
+	ld [wUnusedCF8D + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
 	ld a, $ff
@@ -824,12 +824,12 @@ TradeCenter_Trade:
 	add hl, bc
 	ld a, [hl]
 	ld [wTradedEnemyMonSpecies], a
-	ld a, $a
-	ld [wMusicHeaderPointer], a
+	ld a, 10
+	ld [wAudioFadeOutControl], a
 	ld a, $2
-	ld [wc0f0], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_SAFARI_ZONE
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 100
 	call DelayFrames
@@ -915,12 +915,12 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
 	ld [$ffb5], a
-	ld a, $a
-	ld [wMusicHeaderPointer], a
+	ld a, 10
+	ld [wAudioFadeOutControl], a
 	ld a, BANK(Music_Celadon)
-	ld [wc0f0], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_CELADON
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	jp PlaySound
 
 EmptyFunc3: ; 5aaf (1:5aaf)

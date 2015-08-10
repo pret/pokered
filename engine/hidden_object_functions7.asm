@@ -19,8 +19,8 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
-	cp $2
+	ld a, [wNumSetBits]
+	cp 2
 	tx_pre_id SaveOptionText
 	jr c, .ownThreeOrMoreMon
 	tx_pre_id StrengthsAndWeaknessesText
@@ -63,14 +63,14 @@ SafariZoneGameStillGoing: ; 1e9ab (7:69ab)
 SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	dec a
 	call PlaySound
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_1e9c2
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp $b9
 	jr nz, .asm_1e9c2
 	ld a, TEXT_SAFARI_GAME_OVER
@@ -374,7 +374,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	db $06
 	TX_ASM
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 16
 	call DelayFrames

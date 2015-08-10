@@ -10,17 +10,17 @@ Route2GateText1: ; 5d5db (17:55db)
 	CheckEvent EVENT_GOT_HM05
 	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
-	ld [$ffdb], a
+	ld [hOaksAideRequirement], a
 	ld a, HM_05 ; oak's aide reward
-	ld [$ffdc], a
+	ld [hOaksAideItemReward], a
 	ld [wd11e], a
 	call GetItemName
 	ld hl, wcd6d
 	ld de, wcc5b
 	ld bc, $000d
 	call CopyData
-	predef OaksAideScript ; call oak's aide script
-	ld a, [$ffdb]
+	predef OaksAideScript
+	ld a, [hOaksAideResult]
 	cp $1
 	jr nz, .asm_5d613
 	SetEvent EVENT_GOT_HM05

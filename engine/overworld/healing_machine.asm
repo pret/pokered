@@ -15,44 +15,44 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
-	ld a, $4
-	ld [wMusicHeaderPointer], a
+	ld a, 4
+	ld [wAudioFadeOutControl], a
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
-.asm_70464
-	ld a, [wMusicHeaderPointer]
-	and a
-	jr nz, .asm_70464
+.waitLoop
+	ld a, [wAudioFadeOutControl]
+	and a ; is fade-out finished?
+	jr nz, .waitLoop ; if not, check again
 	ld a, [wPartyCount]
 	ld b, a
-.asm_7046e
+.partyLoop
 	call CopyHealingMachineOAM
 	ld a, SFX_HEALING_MACHINE
 	call PlaySound
 	ld c, 30
 	call DelayFrames
 	dec b
-	jr nz, .asm_7046e
-	ld a, [wc0ef]
+	jr nz, .partyLoop
+	ld a, [wAudioROMBank]
 	cp BANK(Audio3_UpdateMusic)
-	ld [wc0f0], a
-	jr nz, .asm_70495
+	ld [wAudioSavedROMBank], a
+	jr nz, .next
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld a, BANK(Music_PkmnHealed)
-	ld [wc0ef], a
-.asm_70495
+	ld [wAudioROMBank], a
+.next
 	ld a, MUSIC_PKMN_HEALED
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld d, $28
 	call FlashSprite8Times
-.asm_704a2
-	ld a, [wc026]
-	cp MUSIC_PKMN_HEALED
-	jr z, .asm_704a2
+.waitLoop2
+	ld a, [wChannelSoundIDs]
+	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
+	jr z, .waitLoop2 ; if so, check gain
 	ld c, 32
 	call DelayFrames
 	pop af

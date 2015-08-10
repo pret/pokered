@@ -92,9 +92,9 @@ InitList: ; 39bd5 (e:5bd5)
 	ld a, h
 	ld [wListPointer + 1], a
 	ld a, e
-	ld [wcf8d], a
+	ld [wUnusedCF8D], a
 	ld a, d
-	ld [wcf8e], a
+	ld [wUnusedCF8D + 1], a
 	ld bc, ItemPrices
 	ld a, c
 	ld [wItemPrices], a

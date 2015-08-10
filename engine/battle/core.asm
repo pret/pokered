@@ -834,8 +834,17 @@ FaintEnemyPokemon: ; 0x3c567
 .wild
 	ld hl, W_PLAYERBATTSTATUS1
 	res AttackingMultipleTimes, [hl]
+; Bug. This only zeroes the high byte of the player's accumulated damage,
+; setting the accumulated damage to itself mod 256 instead of 0 as was probably
+; intended. That alone is problematic, but this mistake has another more severe
+; effect. This function's counterpart for when the player mon faints,
+; RemoveFaintedPlayerMon, zeroes both the high byte and the low byte. In a link
+; battle, the other player's Game Boy will call that function in response to
+; the enemy mon (the player mon from the other side's perspective) fainting,
+; and the states of the two Game Boys will go out of sync unless the damage
+; was congruent to 0 modulo 256.
 	xor a
-	ld [wPlayerNumHits], a
+	ld [wPlayerBideAccumulatedDamage], a
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -858,12 +867,12 @@ FaintEnemyPokemon: ; 0x3c567
 	dec a
 	jr z, .wild_win
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -943,7 +952,7 @@ EnemyMonFaintedText: ; 0x3c63e
 EndLowHealthAlarm: ; 3c643 (f:4643)
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	inc a
 	ld [wccf6], a
 	ret
@@ -1036,7 +1045,7 @@ TrainerDefeatedText: ; 3c6e9 (f:46e9)
 PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 	push af
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
@@ -1092,8 +1101,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	call WaitForSoundToFinish
 .skipWaitForSound
-; bug? if the player mon faints while the enemy mon is using bide,
-; the accumulated damage is overwritten. xxx what values can [wLowHealthAlarm] have here?
+; a is 0, so this zeroes the enemy's accumulated damage.
 	ld hl, wEnemyBideAccumulatedDamage
 	ld [hli], a
 	ld [hl], a
@@ -1936,7 +1944,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	ret
 .asm_3cde6
 	ld hl, wLowHealthAlarm
@@ -2954,7 +2962,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	lb bc, 1, 2
 	call PrintNumber
 	coord hl, 8, 11
-	ld de, wd11e
+	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	call GetCurrentMove
@@ -5279,7 +5287,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_PLAYERMOVETYPE]
-	ld [wd11e],a
+	ld [wMoveType],a
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.next
@@ -5293,9 +5301,9 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld d,a    ; d = type 1 of defender
 	ld e,[hl] ; e = type 2 of defender
 	ld a,[W_ENEMYMOVETYPE]
-	ld [wd11e],a
+	ld [wMoveType],a
 .next
-	ld a,[wd11e] ; move type
+	ld a,[wMoveType]
 	cp b ; does the move type match type 1 of the attacker?
 	jr z,.sameTypeAttackBonus
 	cp c ; does the move type match type 2 of the attacker?
@@ -5320,8 +5328,8 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld hl,wDamageMultipliers
 	set 7,[hl]
 .skipSameTypeAttackBonus
-	ld a,[wd11e]
-	ld b,a ; b = move type
+	ld a,[wMoveType]
+	ld b,a
 	ld hl,TypeEffects
 .loop
 	ld a,[hli] ; a = "attacking type" of the current type pair
@@ -5384,29 +5392,29 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
 ; this doesn't take into account the effects that dual types can have
 ; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
-; the result is stored in [wd11e]
+; the result is stored in [wTypeEffectiveness]
 ; ($05 is not very effective, $10 is neutral, $14 is super effective)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	ld a,[W_ENEMYMOVETYPE]
-	ld d,a                 ; d = type of enemy move
+	ld d,a                    ; d = type of enemy move
 	ld hl,wBattleMonType
-	ld b,[hl]              ; b = type 1 of player's pokemon
+	ld b,[hl]                 ; b = type 1 of player's pokemon
 	inc hl
-	ld c,[hl]              ; c = type 2 of player's pokemon
+	ld c,[hl]                 ; c = type 2 of player's pokemon
 	ld a,$10
-	ld [wd11e],a           ; initialize [wd11e] to neutral effectiveness
+	ld [wTypeEffectiveness],a ; initialize to neutral effectiveness
 	ld hl,TypeEffects
 .loop
 	ld a,[hli]
 	cp a,$ff
 	ret z
-	cp d                   ; match the type of the move
+	cp d                      ; match the type of the move
 	jr nz,.nextTypePair1
 	ld a,[hli]
-	cp b                   ; match with type 1 of pokemon
+	cp b                      ; match with type 1 of pokemon
 	jr z,.done
-	cp c                   ; or match with type 2 of pokemon
+	cp c                      ; or match with type 2 of pokemon
 	jr z,.done
 	jr .nextTypePair2
 .nextTypePair1
@@ -5416,7 +5424,7 @@ AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	jr .loop
 .done
 	ld a,[hl]
-	ld [wd11e],a           ; store damage multiplier
+	ld [wTypeEffectiveness],a ; store damage multiplier
 	ret
 
 INCLUDE "data/type_effects.asm"
@@ -6569,12 +6577,12 @@ CalculateModifiedStats: ; 3ed99 (f:6d99)
 CalculateModifiedStat: ; 3eda5 (f:6da5)
 	push bc
 	push bc
-	ld a, [wd11e]
+	ld a, [wCalculateWhoseStats]
 	and a
 	ld a, c
 	ld hl, wBattleMonAttack
 	ld de, wPlayerMonUnmodifiedAttack
-	ld bc, wPlayerMonAttackMod
+	ld bc, wPlayerMonStatMods
 	jr z, .next
 	ld hl, wEnemyMonAttack
 	ld de, wEnemyMonUnmodifiedAttack
@@ -6985,8 +6993,8 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 ; unreferenced
 ResetCryModifiers: ; 3f069 (f:7069)
 	xor a
-	ld [wc0f1], a
-	ld [wc0f2], a
+	ld [wFrequencyModifier], a
+	ld [wTempoModifier], a
 	jp PlaySound
 
 ; animates the mon "growing" out of the pokeball

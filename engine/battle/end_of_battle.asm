@@ -46,7 +46,7 @@ EndOfBattle: ; 137aa (4:77aa)
 .resetVariables
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
-	ld [wc02a], a
+	ld [wChannelSoundIDs + CH4], a
 	ld [W_ISINBATTLE], a
 	ld [W_BATTLETYPE], a
 	ld [W_MOVEMISSED], a

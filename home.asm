@@ -240,7 +240,7 @@ DrawHPBar:: ; 1336 (0:1336)
 
 
 ; loads pokemon data from one of multiple sources to wLoadedMon
-; loads base stats to W_MONHDEXNUM
+; loads base stats to W_MONHEADER
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
 ; [wMonDataLocation] = source
@@ -251,7 +251,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; OUTPUT:
 ; [wcf91] = pokemon ID
 ; wLoadedMon = base address of pokemon data
-; W_MONHDEXNUM = base address of base stats
+; W_MONHEADER = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
 	jpab LoadMonData_
 
@@ -332,9 +332,9 @@ GetCryData:: ; 13d9 (0:13d9)
 	ld a, [hli]
 	ld b, a ; cry id
 	ld a, [hli]
-	ld [wc0f1], a
+	ld [wFrequencyModifier], a
 	ld a, [hl]
-	ld [wc0f2], a
+	ld [wTempoModifier], a
 	call BankswitchBack
 
 	; Cry headers have 3 channels,
@@ -551,7 +551,7 @@ GetwMoves:: ; 152e (0:152e)
 	ld a,[hl]
 	ret
 
-; copies the base stat data of a pokemon to W_MONHDEXNUM (W_MONHEADER)
+; copies the base stat data of a pokemon to W_MONHEADER
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader:: ; 1537 (0:1537)
@@ -606,7 +606,7 @@ GetMonHeader:: ; 1537 (0:1537)
 	call FarCopyData
 .done
 	ld a,[wd0b5]
-	ld [W_MONHDEXNUM],a
+	ld [W_MONHINDEX],a
 	pop af
 	ld [wd11e],a
 	pop hl
@@ -998,27 +998,27 @@ ResetPlayerSpriteData_ClearSpriteData:: ; 28c4 (0:28c4)
 	xor a
 	jp FillMemory
 
-Func_28cb:: ; 28cb (0:28cb)
-	ld a, [wMusicHeaderPointer]
+FadeOutAudio:: ; 28cb (0:28cb)
+	ld a, [wAudioFadeOutControl]
 	and a
 	jr nz, .asm_28dc
 	ld a, [wd72c]
 	bit 1, a
 	ret nz
 	ld a, $77
-	ld [$ff24], a
+	ld [rNR50], a
 	ret
 .asm_28dc
-	ld a, [wcfc9]
+	ld a, [wAudioFadeOutCounter]
 	and a
-	jr z, .asm_28e7
+	jr z, .counterReachedZero
 	dec a
-	ld [wcfc9], a
+	ld [wAudioFadeOutCounter], a
 	ret
-.asm_28e7
-	ld a, [wcfc8]
-	ld [wcfc9], a
-	ld a, [$ff24]
+.counterReachedZero
+	ld a, [wAudioFadeOutCounterReloadValue]
+	ld [wAudioFadeOutCounter], a
+	ld a, [rNR50]
 	and a
 	jr z, .asm_2903
 	ld b, a
@@ -1031,20 +1031,20 @@ Func_28cb:: ; 28cb (0:28cb)
 	dec a
 	swap a
 	or c
-	ld [$ff24], a
+	ld [rNR50], a
 	ret
 .asm_2903
-	ld a, [wMusicHeaderPointer]
+	ld a, [wAudioFadeOutControl]
 	ld b, a
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
-	ld a, [wc0f0]
-	ld [wc0ef], a
+	ld a, [wAudioSavedROMBank]
+	ld [wAudioROMBank], a
 	ld a, b
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	jp PlaySound
 
 ; this function is used to display sign messages, sprite dialog, etc.
@@ -1292,7 +1292,7 @@ INCLUDE "engine/menu/start_menu.asm"
 ; hl = address of string of bytes
 ; b = length of string of bytes
 ; OUTPUT:
-; [wd11e] = number of set bits
+; [wNumSetBits] = number of set bits
 CountSetBits:: ; 2b7f (0:2b7f)
 	ld c,0
 .loop
@@ -1309,7 +1309,7 @@ CountSetBits:: ; 2b7f (0:2b7f)
 	dec b
 	jr nz,.loop
 	ld a,c
-	ld [wd11e],a ; store number of set bits
+	ld [wNumSetBits],a
 	ret
 
 ; subtracts the amount the player paid from their money
@@ -2604,12 +2604,12 @@ PlayTrainerMusic:: ; 33e8 (0:33e8)
 	and a
 	ret nz
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld a, $ff
 	call PlaySound
 	ld a, BANK(Music_MeetEvilTrainer)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, [wEngagedTrainerClass]
 	ld b, a
 	ld hl, EvilTrainerList
@@ -2634,7 +2634,7 @@ PlayTrainerMusic:: ; 33e8 (0:33e8)
 .maleTrainer
 	ld a, MUSIC_MEET_MALE_TRAINER
 .PlaySound
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	jp PlaySound
 
 INCLUDE "data/trainer_types.asm"
@@ -3217,8 +3217,8 @@ WaitForSoundToFinish:: ; 3748 (0:3748)
 	and $80
 	ret nz
 	push hl
-.asm_374f
-	ld hl, wc02a
+.waitLoop
+	ld hl, wChannelSoundIDs + CH4
 	xor a
 	or [hl]
 	inc hl
@@ -3226,7 +3226,7 @@ WaitForSoundToFinish:: ; 3748 (0:3748)
 	inc hl
 	inc hl
 	or [hl]
-	jr nz, .asm_374f
+	jr nz, .waitLoop
 	pop hl
 	ret
 
@@ -3313,9 +3313,9 @@ GetName:: ; 376b (0:376b)
 	call CopyData
 .gotPtr
 	ld a,e
-	ld [wcf8d],a
+	ld [wUnusedCF8D],a
 	ld a,d
-	ld [wcf8e],a
+	ld [wUnusedCF8D + 1],a
 	pop de
 	pop bc
 	pop hl

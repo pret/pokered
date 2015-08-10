@@ -191,7 +191,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 AIMoveChoiceModification3: ; 39817 (e:5817)
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
-	ld b, $5
+	ld b, NUM_MOVES + 1
 .nextMove
 	dec b
 	ret z ; processed all 4 moves
@@ -208,7 +208,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	pop de
 	pop bc
 	pop hl
-	ld a, [wd11e]
+	ld a, [wTypeEffectiveness]
 	cp $10
 	jr z, .nextMove
 	jr c, .notEffectiveMove

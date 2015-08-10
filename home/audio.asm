@@ -3,112 +3,139 @@ PlayDefaultMusic:: ; 2307 (0:2307)
 	xor a
 	ld c, a
 	ld d, a
-	ld [wcfca], a
-	jr Func_2324
+	ld [wLastMusicSoundID], a
+	jr PlayDefaultMusicCommon
 
-Func_2312:: ; 2312 (0:2312)
-	ld c, $a
-	ld d, $0
+PlayDefaultMusicFadeOutCurrent:: ; 2312 (0:2312)
+; Fade out the current music and then play the default music.
+	ld c, 10
+	ld d, 0
 	ld a, [wd72e]
-	bit 5, a
-	jr z, Func_2324
+	bit 5, a ; has a battle just ended?
+	jr z, PlayDefaultMusicCommon
 	xor a
-	ld [wcfca], a
-	ld c, $8
+	ld [wLastMusicSoundID], a
+	ld c, 8
 	ld d, c
-Func_2324:: ; 2324 (0:2324)
+
+PlayDefaultMusicCommon:: ; 2324 (0:2324)
 	ld a, [wWalkBikeSurfState]
 	and a
-	jr z, .asm_2343
+	jr z, .walking
 	cp $2
-	jr z, .asm_2332
+	jr z, .surfing
 	ld a, MUSIC_BIKE_RIDING
-	jr .asm_2334
-.asm_2332
+	jr .next
+
+.surfing
 	ld a, MUSIC_SURFING
-.asm_2334
+
+.next
 	ld b, a
 	ld a, d
-	and a
+	and a ; should current music be faded out first?
 	ld a, BANK(Music_BikeRiding)
-	jr nz, .asm_233e
-	ld [wc0ef], a
-.asm_233e
-	ld [wc0f0], a
-	jr .asm_234c
-.asm_2343
-	ld a, [wd35b]
+	jr nz, .next2
+
+; Only change the audio ROM bank if the current music isn't going to be faded
+; out before the default music begins.
+	ld [wAudioROMBank], a
+
+.next2
+; [wAudioSavedROMBank] will be copied to [wAudioROMBank] after fading out the
+; current music (if the current music is faded out).
+	ld [wAudioSavedROMBank], a
+	jr .next3
+
+.walking
+	ld a, [wMapMusicSoundID]
 	ld b, a
-	call Func_2385
-	jr c, .asm_2351
-.asm_234c
-	ld a, [wcfca]
-	cp b
-	ret z
-.asm_2351
+	call CompareMapMusicBankWithCurrentBank
+	jr c, .next4
+
+.next3
+	ld a, [wLastMusicSoundID]
+	cp b ; is the default music already playing?
+	ret z ; if so, do nothing
+
+.next4
 	ld a, c
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld a, b
-	ld [wcfca], a
-	ld [wc0ee], a
+	ld [wLastMusicSoundID], a
+	ld [wNewSoundID], a
 	jp PlaySound
 
-Func_235f:: ; 235f (0:235f)
-	ld a, [wc0ef]
+UpdateMusic6Times:: ; 235f (0:235f)
+; This is called when entering a map, before fading out the current music and
+; playing the default music (i.e. the map's music or biking/surfing music).
+	ld a, [wAudioROMBank]
 	ld b, a
 	cp BANK(Audio1_UpdateMusic)
 	jr nz, .checkForAudio2
-.audio1
+
+; audio 1
 	ld hl, Audio1_UpdateMusic
-	jr .asm_2378
+	jr .next
+
 .checkForAudio2
 	cp BANK(Audio2_UpdateMusic)
 	jr nz, .audio3
-.audio2
+
+; audio 2
 	ld hl, Audio2_UpdateMusic
-	jr .asm_2378
+	jr .next
+
 .audio3
 	ld hl, Audio3_UpdateMusic
-.asm_2378
-	ld c, $6
-.asm_237a
+
+.next
+	ld c, 6
+.loop
 	push bc
 	push hl
 	call Bankswitch
 	pop hl
 	pop bc
 	dec c
-	jr nz, .asm_237a
+	jr nz, .loop
 	ret
 
-Func_2385:: ; 2385 (0:2385)
-	ld a, [wd35c]
+CompareMapMusicBankWithCurrentBank:: ; 2385 (0:2385)
+; Compares the map music's audio ROM bank with the current audio ROM bank
+; and updates the audio ROM bank variables.
+; Returns whether the banks are different in carry.
+	ld a, [wMapMusicROMBank]
 	ld e, a
-	ld a, [wc0ef]
+	ld a, [wAudioROMBank]
 	cp e
-	jr nz, .asm_2394
-	ld [wc0f0], a
+	jr nz, .differentBanks
+	ld [wAudioSavedROMBank], a
 	and a
 	ret
-.asm_2394
-	ld a, c
+.differentBanks
+	ld a, c ; this is a fade-out counter value and it's always non-zero
 	and a
 	ld a, e
-	jr nz, .asm_239c
-	ld [wc0ef], a
-.asm_239c
-	ld [wc0f0], a
+	jr nz, .next
+; If the fade-counter is non-zero, we don't change the audio ROM bank because
+; it's needed to keep playing the music as it fades out. The FadeOutAudio
+; routine will take care of copying [wAudioSavedROMBank] to [wAudioROMBank]
+; when the music has faded out.
+	ld [wAudioROMBank], a
+.next
+	ld [wAudioSavedROMBank], a
 	scf
 	ret
 
 PlayMusic:: ; 23a1 (0:23a1)
 	ld b, a
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	ld a, c
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, b
 
 ; plays music specified by a. If value is $ff, music is stopped
@@ -117,66 +144,74 @@ PlaySound:: ; 23b1 (0:23b1)
 	push de
 	push bc
 	ld b, a
-	ld a, [wc0ee]
+	ld a, [wNewSoundID]
 	and a
-	jr z, .asm_23c8
+	jr z, .next
 	xor a
-	ld [wc02a], a
-	ld [wc02b], a
-	ld [wc02c], a
-	ld [wc02d], a
-.asm_23c8
-	ld a, [wMusicHeaderPointer]
-	and a
-	jr z, .asm_23e3
-	ld a, [wc0ee]
-	and a
-	jr z, .asm_2425
+	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + CH5], a
+	ld [wChannelSoundIDs + CH6], a
+	ld [wChannelSoundIDs + CH7], a
+.next
+	ld a, [wAudioFadeOutControl]
+	and a ; has a fade-out length been specified?
+	jr z, .noFadeOut
+	ld a, [wNewSoundID]
+	and a ; is the new sound ID 0?
+	jr z, .done ; if so, do nothing
 	xor a
-	ld [wc0ee], a
-	ld a, [wcfca]
-	cp $ff
-	jr nz, .asm_2414
+	ld [wNewSoundID], a
+	ld a, [wLastMusicSoundID]
+	cp $ff ; has the music been stopped?
+	jr nz, .fadeOut ; if not, fade out the current music
+; If it has been stopped, start playing the new music immediately.
 	xor a
-	ld [wMusicHeaderPointer], a
-.asm_23e3
+	ld [wAudioFadeOutControl], a
+.noFadeOut
 	xor a
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	ld a, [H_LOADEDROMBANK]
-	ld [$ffb9], a
-	ld a, [wc0ef]
+	ld [hSavedROMBank], a
+	ld a, [wAudioROMBank]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	cp BANK(Audio1_9876)
+	cp BANK(Audio1_PlaySound)
 	jr nz, .checkForAudio2
-.audio1
+
+; audio 1
 	ld a, b
-	call Audio1_9876
-	jr .asm_240b
+	call Audio1_PlaySound
+	jr .next2
+
 .checkForAudio2
-	cp BANK(Audio2_22035)
+	cp BANK(Audio2_PlaySound)
 	jr nz, .audio3
-.audio2
+
+; audio 2
 	ld a, b
-	call Audio2_22035
-	jr .asm_240b
+	call Audio2_PlaySound
+	jr .next2
+
 .audio3
 	ld a, b
-	call Audio3_7d8ea
-.asm_240b
-	ld a, [$ffb9]
+	call Audio3_PlaySound
+
+.next2
+	ld a, [hSavedROMBank]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	jr .asm_2425
-.asm_2414
+	jr .done
+
+.fadeOut
 	ld a, b
-	ld [wcfca], a
-	ld a, [wMusicHeaderPointer]
-	ld [wcfc8], a
-	ld [wcfc9], a
+	ld [wLastMusicSoundID], a
+	ld a, [wAudioFadeOutControl]
+	ld [wAudioFadeOutCounterReloadValue], a
+	ld [wAudioFadeOutCounter], a
 	ld a, b
-	ld [wMusicHeaderPointer], a
-.asm_2425
+	ld [wAudioFadeOutControl], a
+
+.done
 	pop bc
 	pop de
 	pop hl

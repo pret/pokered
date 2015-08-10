@@ -30,7 +30,7 @@ DirectorText: ; 487b2 (12:47b2)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
+	ld a, [wNumSetBits]
 	cp 150
 	jr nc, .CompletedDex
 	ld hl, .GameDesigner
