@@ -82,17 +82,17 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; MAX_ETHER
 	money 0     ; ELIXER
 	money 0     ; MAX_ELIXER
-	money 0     ; B2F
-	money 0     ; B1F
-	money 0     ; 1F
-	money 0     ; 2F
-	money 0     ; 3F
-	money 0     ; 4F
-	money 0     ; 5F
-	money 0     ; 6F
-	money 0     ; 7F
-	money 0     ; 8F
-	money 0     ; 9F
-	money 0     ; 10F
-	money 0     ; 11F
-	money 0     ; B4F
+	money 0     ; FLOOR_B2F
+	money 0     ; FLOOR_B1F
+	money 0     ; FLOOR_1F
+	money 0     ; FLOOR_2F
+	money 0     ; FLOOR_3F
+	money 0     ; FLOOR_4F
+	money 0     ; FLOOR_5F
+	money 0     ; FLOOR_6F
+	money 0     ; FLOOR_7F
+	money 0     ; FLOOR_8F
+	money 0     ; FLOOR_9F
+	money 0     ; FLOOR_10F
+	money 0     ; FLOOR_11F
+	money 0     ; FLOOR_B4F
