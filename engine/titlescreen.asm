@@ -56,15 +56,8 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX
-IF DEF(_RED)
-	ld de,vChars2 + $600
-	ld bc,$50
-ENDC
-IF DEF(_BLUE)
-	ld de,vChars2 + $600 + $10
-	ld bc,$50 - $10
-ENDC
-
+	ld de,vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
+	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call ClearBothBGMaps
@@ -317,7 +310,7 @@ ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
 DrawPlayerCharacter: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
-	ld bc, $230
+	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
 	call ClearSprites
@@ -377,7 +370,7 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
-	lb bc, BANK(NintendoCopyrightLogoGraphics), $1c
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
 	coord hl, 2, 7
 	ld de, CopyrightTextString

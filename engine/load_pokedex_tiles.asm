@@ -3,7 +3,7 @@ LoadPokedexTilePatterns: ; 17840 (5:7840)
 	call LoadHpBarAndStatusTilePatterns
 	ld de,PokedexTileGraphics
 	ld hl,vChars2 + $600
-	lb bc, BANK(PokedexTileGraphics), $12
+	lb bc, BANK(PokedexTileGraphics), (PokedexTileGraphicsEnd - PokedexTileGraphics) / $10
 	call CopyVideoData
 	ld de,PokeballTileGraphics
 	ld hl,vChars2 + $720

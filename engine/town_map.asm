@@ -20,7 +20,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	call CopyData
 	ld hl, vSprites + $40
 	ld de, TownMapCursor
-	lb bc, BANK(TownMapCursor), $04
+	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
@@ -107,6 +107,7 @@ INCLUDE "data/town_map_order.asm"
 
 TownMapCursor: ; 70f40 (1c:4f40)
 	INCBIN "gfx/town_map_cursor.1bpp"
+TownMapCursorEnd:
 
 LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	call LoadTownMap
@@ -144,7 +145,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
-	lb bc, BANK(TownMapUpArrow), $01
+	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -271,6 +272,7 @@ BuildFlyLocationsList: ; 71070 (1c:5070)
 
 TownMapUpArrow: ; 71093 (1c:5093)
 	INCBIN "gfx/up_arrow.1bpp"
+TownMapUpArrowEnd:
 
 LoadTownMap: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
@@ -283,12 +285,12 @@ LoadTownMap: ; 7109b (1c:509b)
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
 	ld de, vChars2 + $600
-	ld bc, $100
+	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon
 	ld de, vSprites + $40
-	ld bc, $8
+	ld bc, MonNestIconEnd - MonNestIcon
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
 	coord hl, 0, 0
@@ -582,6 +584,7 @@ INCLUDE "text/map_names.asm"
 
 MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
+MonNestIconEnd:
 
 TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
 	ld a, [wAnimCounter]

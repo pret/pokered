@@ -598,7 +598,7 @@ ReturnToCableClubRoom: ; 577d (1:577d)
 TradeCenter_DrawCancelBox:
 	coord hl, 11, 15
 	ld a, $7e
-	ld bc, 2 * 20 + 9
+	ld bc, 2 * SCREEN_WIDTH + 9
 	call FillMemory
 	coord hl, 0, 15
 	ld b, 1
@@ -614,7 +614,7 @@ CancelTextString:
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
 	coord hl, 1, 9
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], $ec ; cursor
 	ret

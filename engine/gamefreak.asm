@@ -13,15 +13,15 @@ LoadShootingStarGraphics: ; 70000 (1c:4000)
 	call CopyVideoData
 	ld de, FallingStar
 	ld hl, vChars1 + $220
-	lb bc, BANK(FallingStar), $01
+	lb bc, BANK(FallingStar), (FallingStarEnd - FallingStar) / $10
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData
 	ld de, wOAMBuffer + $60
-	ld bc, $40
+	ld bc, GameFreakLogoOAMDataEnd - GameFreakLogoOAMData
 	call CopyData
 	ld hl, GameFreakShootingStarOAMData
 	ld de, wOAMBuffer
-	ld bc, $10
+	ld bc, GameFreakShootingStarOAMDataEnd - GameFreakShootingStarOAMData
 	jp CopyData
 
 AnimateShootingStar: ; 70044 (1c:4044)
@@ -88,7 +88,7 @@ AnimateShootingStar: ; 70044 (1c:4044)
 .initSmallStarsOAMLoop
 	push af
 	ld hl, SmallStarsOAM
-	ld bc, 4
+	ld bc, SmallStarsOAMEnd - SmallStarsOAM
 	call CopyData
 	pop af
 	dec a
@@ -147,6 +147,7 @@ AnimateShootingStar: ; 70044 (1c:4044)
 
 SmallStarsOAM: ; 700ee (1c:40ee)
 	db $00,$00,$A2,$90
+SmallStarsOAMEnd:
 
 SmallStarsWaveCoordsPointerTable: ; 700f2 (1c:40f2)
 	dw SmallStarsWave1Coords
@@ -229,12 +230,15 @@ GameFreakLogoOAMData: ; 70140 (1c:4140)
 	db $60,$68,$83,$00
 	db $60,$70,$81,$00
 	db $60,$78,$86,$00
+GameFreakLogoOAMDataEnd:
 
 GameFreakShootingStarOAMData: ; 70180 (1c:4180)
 	db $00,$A0,$A0,$10
 	db $00,$A8,$A0,$30
 	db $08,$A0,$A1,$10
 	db $08,$A8,$A1,$30
+GameFreakShootingStarOAMDataEnd:
 
 FallingStar: ; 70190 (1c:4190)
 	INCBIN "gfx/falling_star.2bpp"
+FallingStarEnd:

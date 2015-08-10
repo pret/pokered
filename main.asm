@@ -590,7 +590,7 @@ INCLUDE "engine/cable_club.asm"
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
-	lb bc, BANK(TrainerInfoTextBoxTileGraphics), $09
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
 	jp CopyVideoData
 
 INCLUDE "engine/menu/main_menu.asm"
@@ -2068,7 +2068,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hli], a
 	ld [hl], a
 	ld hl, wWhichTrade
-	ld bc, $1e
+	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
 	ret
 
@@ -3296,7 +3296,7 @@ LoadMissableObjects: ; f132 (3:7132)
 
 InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld bc, $20
+	ld bc, wMissableObjectFlagsEnd - W_MISSABLEOBJECTFLAGS
 	xor a
 	call FillMemory ; clear missable objects flags
 	ld hl, MapHS00
@@ -3808,7 +3808,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	push de
 	push bc
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4173,7 +4173,7 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4495,7 +4495,7 @@ START_MONEY EQU $3000
 	ld [hl], a
 
 	ld hl, W_GAMEPROGRESSFLAGS
-	ld bc, $c8
+	ld bc, wGameProgressFlagsEnd - W_GAMEPROGRESSFLAGS
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags
@@ -4767,17 +4767,26 @@ SECTION "Graphics", ROMX, BANK[GFX]
 
 PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics:                   INCBIN "gfx/font.1bpp"
+FontGraphicsEnd:
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
+HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1End:
 BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles3End:
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+GamefreakLogoGraphicsEnd:
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+TextBoxGraphicsEnd:
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+PokedexTileGraphicsEnd:
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphicsEnd:
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+PlayerCharacterTitleGraphicsEnd:
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
@@ -5337,6 +5346,7 @@ SECTION "Battle (bank B)", ROMX, BANK[$B]
 INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+TrainerInfoTextBoxTileGraphicsEnd:
 BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
 CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
@@ -5498,10 +5508,12 @@ INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
+TradingAnimationGraphicsEnd:
 
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
+TradingAnimationGraphics2End:
 
 INCLUDE "engine/evos_moves.asm"
 INCLUDE "engine/battle/moveEffects/heal_effect.asm"
@@ -6487,6 +6499,7 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
 ENDC
+Version_GFXEnd:
 
 Dojo_GFX:
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"

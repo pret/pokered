@@ -9,7 +9,7 @@ EmotionBubble: ; 17c47 (5:7c47)
 	inc hl
 	ld d, [hl]
 	ld hl, vChars1 + $780
-	lb bc, BANK(EmotionBubblesPointerTable), $04
+	lb bc, BANK(EmotionBubbles), $04
 	call CopyVideoData
 	ld a, [wUpdateSpritesEnabled]
 	push af

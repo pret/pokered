@@ -13,7 +13,7 @@ DrawEnemyPokeballs: ; 3a857 (e:6857)
 LoadPartyPokeballGfx: ; 3a85d (e:685d)
 	ld de, PokeballTileGraphics
 	ld hl, vSprites + $310
-	lb bc, BANK(PokeballTileGraphics), $04
+	lb bc, BANK(PokeballTileGraphics), (PokeballTileGraphicsEnd - PokeballTileGraphics) / $10
 	jp CopyVideoData
 
 SetupOwnPartyPokeballs: ; 3a869 (e:6869)
@@ -189,3 +189,4 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 ; four tiles: pokeball, black pokeball (status ailment), crossed out pokeball (faited) and pokeball slot (no mon)
 PokeballTileGraphics:: ; 3a97e (e:697e)
 	INCBIN "gfx/pokeball.2bpp"
+PokeballTileGraphicsEnd:

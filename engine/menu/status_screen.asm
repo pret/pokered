@@ -99,7 +99,7 @@ StatusScreen: ; 12953 (4:6953)
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
 	ld hl, vChars2 + $720
-	lb bc, BANK(PTile), $01
+	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
 	call CopyVideoDataDouble ; P (for PP), inline
 	ld a, [hTilesetType]
 	push af
@@ -242,6 +242,7 @@ DrawLineBox: ; 0x12ac7
 
 PTile: ; 12adc (4:6adc) ; This is a single 1bpp "P" tile
 	INCBIN "gfx/p_tile.1bpp"
+PTileEnd:
 
 PrintStatsBox: ; 12ae4 (4:6ae4)
 	ld a, d

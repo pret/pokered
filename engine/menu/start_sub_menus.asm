@@ -611,7 +611,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	jp PrintNumber
 
 TrainerInfo_FarCopyData: ; 1357f (4:757f)
-	ld a,$0b
+	ld a,BANK(TrainerInfoTextBoxTileGraphics)
 	jp FarCopyData2
 
 TrainerInfo_NameMoneyTimeText: ; 13584 (4:7584)

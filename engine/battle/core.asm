@@ -2394,7 +2394,7 @@ PartyMenuOrRockOrRun:
 	jp DisplayBattleMenu
 .partyMonDeselected
 	coord hl, 11, 11
-	ld bc, $81
+	ld bc, 6 * SCREEN_WIDTH + 9
 	ld a, " "
 	call FillMemory
 	xor a ; NORMAL_PARTY_MENU
@@ -5194,7 +5194,7 @@ ReloadMoveData: ; 3e329 (f:6329)
 	ld [wd11e],a
 	dec a
 	ld hl,Moves
-	ld bc,$0006
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld a,BANK(Moves)
 	call FarCopyData ; copy the move's stats
@@ -6170,7 +6170,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	ld [wd0b5], a
 	dec a
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld a, BANK(Moves)
 	call FarCopyData
@@ -6707,22 +6707,22 @@ LoadHudTilePatterns: ; 3ee5b (f:6e5b)
 .lcdDisabled
 	ld hl, BattleHudTiles1
 	ld de, vChars2 + $6d0
-	ld bc, $18
+	ld bc, BattleHudTiles1End - BattleHudTiles1
 	ld a, BANK(BattleHudTiles1)
 	call FarCopyDataDouble
 	ld hl, BattleHudTiles2
 	ld de, vChars2 + $730
-	ld bc, $30
+	ld bc, BattleHudTiles3End - BattleHudTiles2
 	ld a, BANK(BattleHudTiles2)
 	jp FarCopyDataDouble
 .lcdEnabled
 	ld de, BattleHudTiles1
 	ld hl, vChars2 + $6d0
-	lb bc, BANK(BattleHudTiles1), $03
+	lb bc, BANK(BattleHudTiles1), (BattleHudTiles1End - BattleHudTiles1) / $8
 	call CopyVideoDataDouble
 	ld de, BattleHudTiles2
 	ld hl, vChars2 + $730
-	lb bc, BANK(BattleHudTiles2), $06
+	lb bc, BANK(BattleHudTiles2), (BattleHudTiles3End - BattleHudTiles2) / $8
 	jp CopyVideoDataDouble
 
 PrintEmptyString: ; 3ee94 (f:6e94)

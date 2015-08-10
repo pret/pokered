@@ -85,8 +85,9 @@ LoadSmokeTileFourTimes: ; 79fc0 (1e:5fc0)
 
 LoadSmokeTile: ; 79fd4 (1e:5fd4)
 	ld de, SSAnneSmokePuffTile
-	lb bc, BANK(SSAnneSmokePuffTile), $01
+	lb bc, BANK(SSAnneSmokePuffTile), (SSAnneSmokePuffTileEnd - SSAnneSmokePuffTile) / $10
 	jp CopyVideoData
 
 SSAnneSmokePuffTile: ; 79fdd (1e:5fdd)
 	INCBIN "gfx/ss_anne_smoke_puff.2bpp"
+SSAnneSmokePuffTileEnd:

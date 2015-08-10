@@ -2397,7 +2397,10 @@ wPlayerCoins:: ; d5a4
 
 W_MISSABLEOBJECTFLAGS:: ; d5a6
 ; bit array of missable objects. set = removed
-	ds 39
+	ds 32
+wMissableObjectFlagsEnd::
+
+	ds 7
 
 wd5cd:: ds 1 ; temp copy of c1x2 (sprite facing/anim)
 
@@ -2622,7 +2625,10 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 
-	ds 134
+	ds 78
+wGameProgressFlagsEnd::
+
+	ds 56
 
 wObtainedHiddenItemsFlags::
 	ds 14

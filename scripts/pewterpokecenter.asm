@@ -27,7 +27,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	call DelayFrames
 	ld hl, JigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections
-	ld bc, 4
+	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
 	call CopyData
 
 	ld a, [wSpriteStateData1 + 3 * $10 + $2]
@@ -50,7 +50,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	push hl
 	ld hl, wJigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections - 1
-	ld bc, 4
+	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
 	call CopyData
 	ld a, [wJigglypuffFacingDirections - 1]
 	ld [wJigglypuffFacingDirections + 3], a
@@ -79,6 +79,7 @@ JigglypuffFacingDirections: ; 5c608 (17:4608)
 	db $30 | SPRITE_FACING_LEFT
 	db $30 | SPRITE_FACING_UP
 	db $30 | SPRITE_FACING_RIGHT
+JigglypuffFacingDirectionsEnd:
 
 PewterPokecenterText4: ; 5c60c (17:460c)
 	db $f6

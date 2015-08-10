@@ -912,7 +912,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wHPBarNewHP+1],a
 	coord hl, 4, 1
 	ld a,[wWhichPokemon]
-	ld bc,2 * 20
+	ld bc,2 * SCREEN_WIDTH
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
@@ -1937,7 +1937,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	cp b ; is the pokemon whose PP was restored active in battle?
 	jr nz,.skipUpdatingInBattleData
 	ld hl,wPartyMon1PP
-	ld bc,44
+	ld bc,wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld de,wBattleMonPP
 	ld bc,4
@@ -2289,7 +2289,7 @@ GotOffBicycleText: ; e5fc (3:65fc)
 ; [wCurrentMenuItem] = index of move (when using a PP Up)
 RestoreBonusPP: ; e606 (3:6606)
 	ld hl,wPartyMon1Moves
-	ld bc,44
+	ld bc,wPartyMon2 - wPartyMon1
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	push hl
@@ -2407,7 +2407,7 @@ GetMaxPP: ; e677 (3:6677)
 	dec a
 	push hl
 	ld hl,Moves
-	ld bc,6
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld de,wcd6d
 	ld a,BANK(Moves)

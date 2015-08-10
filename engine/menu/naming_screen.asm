@@ -326,11 +326,14 @@ DisplayNamingScreen: ; 6596 (1:6596)
 LoadEDTile: ; 675b (1:675b)
 	ld de, ED_Tile
 	ld hl, vFont + $700
-	ld bc, $1
+	ld bc, (ED_TileEnd - ED_Tile) / $8
+	; to fix the graphical bug on poor emulators
+	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile: ; 6767 (1:6767)
 	INCBIN "gfx/ED_tile.1bpp"
+ED_TileEnd:
 
 PrintAlphabet: ; 676f (1:676f)
 	xor a

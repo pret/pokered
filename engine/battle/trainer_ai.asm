@@ -264,7 +264,7 @@ ReadMove: ; 39884 (e:5884)
 	push bc
 	dec a
 	ld hl,Moves
-	ld bc,6
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld de,W_ENEMYMOVENUM
 	call CopyData

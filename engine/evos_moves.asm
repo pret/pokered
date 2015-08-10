@@ -479,7 +479,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	push hl
 	dec a
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wBuffer
 	ld a, BANK(Moves)

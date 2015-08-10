@@ -36,7 +36,7 @@ RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps
 	ld de, wcc5b
-	ld bc, $0006
+	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
 	call CopyData
 	ret
 
@@ -52,6 +52,7 @@ RocketHideoutElevatorWarpMaps: ; 45759 (11:5759)
 	db $04, ROCKET_HIDEOUT_1
 	db $04, ROCKET_HIDEOUT_2
 	db $02, ROCKET_HIDEOUT_4
+RocketHideoutElevatorWarpMapsEnd:
 
 RocketHideoutElevatorScript_4575f: ; 4575f (11:575f)
 	call Delay3

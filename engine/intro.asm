@@ -278,22 +278,22 @@ PlayMoveSoundB: ; 41849 (10:5849)
 LoadIntroGraphics: ; 41852 (10:5852)
 	ld hl, FightIntroBackMon
 	ld de, vChars2
-	ld bc, $600
+	ld bc, FightIntroBackMonEnd - FightIntroBackMon
 	ld a, BANK(FightIntroBackMon)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars2 + $600
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars1
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, FightIntroFrontMon
 	ld de, vChars0
-	ld bc, $6c0
+	ld bc, FightIntroFrontMonEnd - FightIntroFrontMon
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
@@ -430,9 +430,11 @@ GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile
+GameFreakIntroEnd:
 
 FightIntroBackMon: ; 41a99 (10:5a99)
 	INCBIN "gfx/intro_fight.2bpp"
+FightIntroBackMonEnd:
 
 FightIntroFrontMon: ; 42099 (10:6099)
 
@@ -440,11 +442,13 @@ IF DEF(_RED)
 	INCBIN "gfx/red/intro_nido_1.6x6.2bpp"
 	INCBIN "gfx/red/intro_nido_2.6x6.2bpp"
 	INCBIN "gfx/red/intro_nido_3.6x6.2bpp"
-	ds $10 ; blank tile
 ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/intro_purin_1.6x6.2bpp"
 	INCBIN "gfx/blue/intro_purin_2.6x6.2bpp"
 	INCBIN "gfx/blue/intro_purin_3.6x6.2bpp"
-	ds $10 ; blank tile
 ENDC
+
+FightIntroFrontMonEnd:
+
+	ds $10 ; blank tile

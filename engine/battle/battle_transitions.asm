@@ -184,11 +184,12 @@ DungeonMaps2: ; 70a44 (1c:4a44)
 LoadBattleTransitionTile: ; 70a4d (1c:4a4d)
 	ld hl, vChars1 + $7f0
 	ld de, BattleTransitionTile
-	lb bc, BANK(BattleTransitionTile), $01
+	lb bc, BANK(BattleTransitionTile), (BattleTransitionTileEnd - BattleTransitionTile) / $10
 	jp CopyVideoData
 
 BattleTransitionTile: ; 70a59 (1c:4a59)
 	INCBIN "gfx/battle_transition.2bpp"
+BattleTransitionTileEnd:
 
 BattleTransition_BlackScreen: ; 70a69 (1c:4a69)
 	ld a, $ff

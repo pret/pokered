@@ -246,7 +246,7 @@ Credits: ; 7418e (1d:418e)
 	pop de
 	ld de, TheEndGfx
 	ld hl, vChars2 + $600
-	lb bc, BANK(TheEndGfx), $0a
+	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
 	call CopyVideoData
 	coord hl, 4, 8
 	ld de, TheEndTextString
@@ -267,3 +267,4 @@ INCLUDE "text/credits_text.asm"
 
 TheEndGfx: ; 7473e (1d:473e) (7473f on blue)
 	INCBIN "gfx/theend.interleave.2bpp"
+TheEndGfxEnd:

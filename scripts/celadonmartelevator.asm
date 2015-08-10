@@ -36,7 +36,7 @@ CeladonMartElevatorScript_48631: ; 48631 (12:4631)
 	call LoadItemList
 	ld hl, CeldaonMartElevatorWarpMaps
 	ld de, wcc5b
-	ld bc, $000a
+	ld bc, CeldaonMartElevatorWarpMapsEnd - CeldaonMartElevatorWarpMaps
 	jp CopyData
 
 CeladonMartElavatorFloors: ; 48643 (12:4643)
@@ -53,6 +53,7 @@ CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
 	db $02, CELADON_MART_3
 	db $02, CELADON_MART_4
 	db $02, CELADON_MART_5
+CeldaonMartElevatorWarpMapsEnd:
 
 CeladonMartElevatorScript_48654: ; 48654 (12:4654)
 	jpba ShakeElevator

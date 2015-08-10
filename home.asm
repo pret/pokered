@@ -3092,13 +3092,13 @@ LoadFontTilePatterns::
 .off
 	ld hl, FontGraphics
 	ld de, vFont
-	ld bc, $400
+	ld bc, FontGraphicsEnd - FontGraphics
 	ld a, BANK(FontGraphics)
 	jp FarCopyDataDouble ; if LCD is off, transfer all at once
 .on
 	ld de, FontGraphics
 	ld hl, vFont
-	lb bc, BANK(FontGraphics), $80
+	lb bc, BANK(FontGraphics), (FontGraphicsEnd - FontGraphics) / $8
 	jp CopyVideoDataDouble ; if LCD is on, transfer during V-blank
 
 LoadTextBoxTilePatterns::
@@ -3108,13 +3108,13 @@ LoadTextBoxTilePatterns::
 .off
 	ld hl, TextBoxGraphics
 	ld de, vChars2 + $600
-	ld bc, $200
+	ld bc, TextBoxGraphicsEnd - TextBoxGraphics
 	ld a, BANK(TextBoxGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .on
 	ld de, TextBoxGraphics
 	ld hl, vChars2 + $600
-	lb bc, BANK(TextBoxGraphics), $20
+	lb bc, BANK(TextBoxGraphics), (TextBoxGraphicsEnd - TextBoxGraphics) / $10
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 LoadHpBarAndStatusTilePatterns::
@@ -3124,13 +3124,13 @@ LoadHpBarAndStatusTilePatterns::
 .off
 	ld hl, HpBarAndStatusGraphics
 	ld de, vChars2 + $620
-	ld bc, $1e0
+	ld bc, HpBarAndStatusGraphicsEnd - HpBarAndStatusGraphics
 	ld a, BANK(HpBarAndStatusGraphics)
 	jp FarCopyData2 ; if LCD is off, transfer all at once
 .on
 	ld de, HpBarAndStatusGraphics
 	ld hl, vChars2 + $620
-	lb bc, BANK(HpBarAndStatusGraphics), $1e
+	lb bc, BANK(HpBarAndStatusGraphics), (HpBarAndStatusGraphicsEnd - HpBarAndStatusGraphics) / $10
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
 

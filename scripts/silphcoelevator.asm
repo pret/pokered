@@ -36,7 +36,7 @@ SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps
 	ld de, wcc5b
-	ld bc, $16
+	ld bc, SilphCoElevatorWarpMapsEnd - SilphCoElevatorWarpMaps
 	call CopyData
 	ret
 
@@ -60,6 +60,7 @@ SilphCoElevatorWarpMaps: ; 45811 (11:45811)
 	db $02, SILPH_CO_9F
 	db $02, SILPH_CO_10F
 	db $01, SILPH_CO_11F
+SilphCoElevatorWarpMapsEnd:
 
 SilphCoElevatorScript_45827: ; 45827 (11:5827)
 	call Delay3

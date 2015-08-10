@@ -149,7 +149,7 @@ Trade_Delay80: ; 41191 (10:5191)
 
 Trade_ClearTileMap: ; 41196 (10:5196)
 	coord hl, 0, 0
-	ld bc, 20 * 18
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
 	jp FillMemory
 
@@ -158,12 +158,12 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call DisableLCD
 	ld hl, TradingAnimationGraphics
 	ld de, vChars2 + $310
-	ld bc, $310
+	ld bc, TradingAnimationGraphicsEnd - TradingAnimationGraphics
 	ld a, BANK(TradingAnimationGraphics)
 	call FarCopyData2
 	ld hl, TradingAnimationGraphics2
 	ld de, vSprites + $7c0
-	ld bc, $40
+	ld bc, TradingAnimationGraphics2End - TradingAnimationGraphics2
 	ld a, BANK(TradingAnimationGraphics2)
 	call FarCopyData2
 	ld hl, vBGMap0
@@ -190,7 +190,7 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wcf4b
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wTradedEnemyMonSpecies]
 	ld [wd11e], a

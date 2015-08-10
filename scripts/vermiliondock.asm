@@ -53,8 +53,8 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
 	coord hl, 0, 10
-	ld bc, $0078
-	ld a, $14
+	ld bc, SCREEN_WIDTH * 6
+	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -180,7 +180,7 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 
 VermilionDock_1dc94: ; 1dc94 (7:5c94)
 	ld hl, wcc5b
-	ld bc, $00b4
+	ld bc, SCREEN_WIDTH * 9
 	ld a, $14
 	call FillMemory
 	ld hl, vBGMap0 + 10 * 32

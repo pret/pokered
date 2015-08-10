@@ -44,7 +44,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	push de
 	dec a
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wBuffer
 	ld a, BANK(Moves)
