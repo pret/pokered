@@ -1,3 +1,7 @@
+MOVE_GENGAR_RIGHT   EQU $00
+MOVE_GENGAR_LEFT    EQU $01
+MOVE_NIDORINO_RIGHT EQU $ff
+
 PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [hJoyHeld], a
@@ -30,7 +34,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld [W_BASECOORDY], a
 	lb bc, 6, 6
 	call InitIntroNidorinoOAM
-	ld de, $28ff ; move Nidorino right by 80 pixels
+	lb de, 80 / 2, MOVE_NIDORINO_RIGHT
 	call IntroMoveMon
 	ret c
 
@@ -69,7 +73,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
 	call PlaySound
-	ld de, $401 ; move Gengar left by 8 pixels
+	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld c, $1e
 	call CheckForUserInterruption
@@ -80,7 +84,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
 	call PlaySound
-	ld de, $800 ; move Gengar right by 16 pixels
+	lb de, 16 / 2, MOVE_GENGAR_RIGHT
 	call IntroMoveMon
 ; hip
 	ld a, SFX_INTRO_HIP
@@ -93,7 +97,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call CheckForUserInterruption
 	ret c
 
-	ld de, $401 ; move Gengar left by 8 pixels
+	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld b, $3
 	call IntroCopyTiles
