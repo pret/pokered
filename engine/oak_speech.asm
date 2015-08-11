@@ -24,11 +24,11 @@ SetDefaultNames: ; 60ca (1:60ca)
 	call z, InitOptions
 	ld hl, NintenText
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, SonyText
 	ld de, W_RIVALNAME
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 OakSpeech: ; 6115 (1:6115)

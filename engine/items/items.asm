@@ -142,7 +142,7 @@ ItemUseBall: ; d687 (3:5687)
 .oldManBattle
 	ld hl,W_GRASSRATE
 	ld de,wPlayerName
-	ld bc,11
+	ld bc,NAME_LENGTH
 	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
 	jp .BallSuccess
 .notOldManBattle
@@ -2573,14 +2573,14 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e7b1
 	call GetMonHeader
 	ld hl, wBoxMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e7ee
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2591,12 +2591,12 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7db
 	push bc
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, -$b
+	ld bc, -NAME_LENGTH
 	add hl, bc
 	pop bc
 	dec b
@@ -2604,17 +2604,17 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7ee
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2625,12 +2625,12 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e817
 	push bc
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, -$b
+	ld bc, -NAME_LENGTH
 	add hl, bc
 	pop bc
 	dec b

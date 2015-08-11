@@ -813,36 +813,36 @@ SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a

@@ -1967,7 +1967,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7ba6
 	ld d, h
 	ld e, l
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
@@ -2007,12 +2007,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
 .asm_7bfa
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPokedexOwned
 	ld a, [wRemoveMonFromBox]
@@ -3587,7 +3587,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
@@ -3858,7 +3858,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
@@ -3869,7 +3869,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -4000,7 +4000,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f5ec
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -4030,7 +4030,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f62a
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]

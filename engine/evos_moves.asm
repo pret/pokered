@@ -278,7 +278,7 @@ RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	cp "@"
 	jr nz, .compareNamesLoop
 	ld a, [wWhichPokemon]
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld hl, wPartyMonNicks
 	call AddNTimes
 	push hl

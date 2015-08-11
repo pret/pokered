@@ -176,7 +176,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	jr z, .findStartOfEnemyNameLoop
 	dec hl
 	ld de, wLinkEnemyTrainerName
-	ld c, 11
+	ld c, NAME_LENGTH
 .copyEnemyNameLoop
 	ld a, [hli]
 	cp SERIAL_NO_DATA_BYTE
@@ -698,7 +698,7 @@ TradeCenter_Trade:
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wNameOfPlayerMonToBeTraded
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wTradingWhichEnemyMon]
 	ld hl, wEnemyPartyMons
@@ -756,7 +756,7 @@ TradeCenter_Trade:
 	ld hl, wPartyMonOT
 	call SkipFixedLengthTextEntries
 	ld de, wTradedPlayerMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMon1Species
 	ld a, [wTradingWhichPlayerMon]
@@ -772,7 +772,7 @@ TradeCenter_Trade:
 	ld hl, wEnemyMonOT
 	call SkipFixedLengthTextEntries
 	ld de, wTradedEnemyMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wEnemyMons
 	ld a, [wTradingWhichEnemyMon]

@@ -276,7 +276,7 @@ HoFRecordMonInfo: ; 70404 (1c:4404)
 	ld e, l
 	ld d, h
 	ld hl, wcd6d
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 HoFFadeOutScreenAndMusic: ; 70423 (1c:4423)

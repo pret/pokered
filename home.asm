@@ -626,10 +626,10 @@ GetPartyMonName2:: ; 15b4 (0:15b4)
 GetPartyMonName:: ; 15ba (0:15ba)
 	push hl
 	push bc
-	call SkipFixedLengthTextEntries ; add 11 to hl, a times
+	call SkipFixedLengthTextEntries ; add NAME_LENGTH to hl, a times
 	ld de,wcd6d
 	push de
-	ld bc,11
+	ld bc,NAME_LENGTH
 	call CopyData
 	pop de
 	pop bc
@@ -2238,7 +2238,7 @@ LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	call CopyData   ; load city name
 	pop hl
 	ld de, wGymLeaderName
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData     ; load gym leader name
 
 ; reads specific information from trainer header (pointed to at W_TRAINERHEADERPTR)
@@ -3264,7 +3264,7 @@ GetName:: ; 376b (0:376b)
 	jr nz,.otherEntries
 	;1 = MON_NAMES
 	call GetMonName
-	ld hl,11
+	ld hl,NAME_LENGTH
 	add hl,de
 	ld e,l
 	ld d,h
@@ -3825,12 +3825,12 @@ MoveMon:: ; 3a68 (0:3a68)
 	ld [MBC1RomBank], a
 	ret
 
-; skips a text entries, each of size 11 (like trainer name, OT name, rival name, ...)
-; hl: base pointer, will be incremented by $b * a
+; skips a text entries, each of size NAME_LENGTH (like trainer name, OT name, rival name, ...)
+; hl: base pointer, will be incremented by NAME_LENGTH * a
 SkipFixedLengthTextEntries:: ; 3a7d (0:3a7d)
 	and a
 	ret z
-	ld bc, 11
+	ld bc, NAME_LENGTH
 .skipLoop
 	add hl, bc
 	dec a

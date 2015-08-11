@@ -57,7 +57,7 @@ LoadSAV0: ; 73623 (1c:7623)
 .checkSumsMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, sMainData
 	ld de, wMainDataStart
@@ -203,7 +203,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld [MBC1SRamBank], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wMainDataStart
 	ld de, sMainData

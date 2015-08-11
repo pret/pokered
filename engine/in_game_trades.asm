@@ -17,7 +17,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld a,[hli]
 	push af
 	ld de,wInGameTradeMonNick
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop af
 	ld l,a
@@ -81,7 +81,7 @@ InGameTrade_GetMonName: ; 71b6a (1c:5b6a)
 	call GetMonName
 	ld hl,wcd6d
 	pop de
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 INCLUDE "data/trades.asm"
@@ -168,11 +168,11 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld a, [wInGameTradeReceiveMonSpecies]
 	ld [hl], a ; wTradedEnemyMonSpecies
 	ld hl, wPartyMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wTradedPlayerMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call InGameTrade_CopyData
 	ld hl, InGameTrade_TrainerString
 	ld de, wTradedEnemyMonOT
@@ -201,16 +201,16 @@ InGameTrade_CopyData: ; 71d11 (1c:5d11)
 
 InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
 	ld hl, wPartyMonNicks
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, InGameTrade_TrainerString
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1

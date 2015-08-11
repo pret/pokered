@@ -90,7 +90,7 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	ld a, [hli]
 	ld [wHoFMonLevel], a
 	ld de, wcd6d
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld b, $0B
 	ld c, 0

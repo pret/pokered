@@ -1302,7 +1302,7 @@ wGymCityName:: ; cf5f
 	ds 17
 
 wGymLeaderName:: ; cf70
-	ds 11
+	ds NAME_LENGTH
 
 wItemList:: ; cf7b
 	ds 16
@@ -1441,7 +1441,7 @@ wEnemyMonSpecies2:: ; cfd8
 wBattleMonSpecies2:: ; cfd9
 	ds 1
 
-wEnemyMonNick:: ds 11 ; cfda
+wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
 wEnemyMon:: ; cfe5
 ; The wEnemyMon struct reaches past 0xcfff,
@@ -1479,7 +1479,7 @@ wEnemyMonBaseStats:: ds 5
 wEnemyMonCatchRate:: ds 1
 wEnemyMonBaseExp:: ds 1
 
-wBattleMonNick:: ds 11 ; d009
+wBattleMonNick:: ds NAME_LENGTH ; d009
 wBattleMon:: battle_struct wBattleMon ; d014
 
 
@@ -2164,7 +2164,7 @@ wSavedNPCMovementDirections2Index:: ; d157
 	ds 1
 
 wPlayerName:: ; d158
-	ds 11
+	ds NAME_LENGTH
 
 
 wPartyDataStart::
@@ -2181,8 +2181,8 @@ wPartyMon4:: party_struct wPartyMon4 ; d1ef
 wPartyMon5:: party_struct wPartyMon5 ; d21b
 wPartyMon6:: party_struct wPartyMon6 ; d247
 
-wPartyMonOT::    ds 11 * PARTY_LENGTH ; d273
-wPartyMonNicks:: ds 11 * PARTY_LENGTH ; d2b5
+wPartyMonOT::    ds NAME_LENGTH * PARTY_LENGTH ; d273
+wPartyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d2b5
 
 wPartyDataEnd::
 
@@ -2209,7 +2209,7 @@ wPlayerMoney:: ; d347
 	ds 3 ; BCD
 
 W_RIVALNAME:: ; d34a
-	ds 11
+	ds NAME_LENGTH
 
 W_OPTIONS:: ; d355
 ; bit 7 = battle animation
@@ -2962,8 +2962,8 @@ wEnemyMon4:: party_struct wEnemyMon4
 wEnemyMon5:: party_struct wEnemyMon5
 wEnemyMon6:: party_struct wEnemyMon6
 
-wEnemyMonOT::    ds 11 * PARTY_LENGTH ; d9ac
-wEnemyMonNicks:: ds 11 * PARTY_LENGTH ; d9ee
+wEnemyMonOT::    ds NAME_LENGTH * PARTY_LENGTH ; d9ac
+wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d9ee
 
 
 W_TRAINERHEADERPTR:: ; da30
@@ -3006,8 +3006,8 @@ W_DAYCARE_IN_USE:: ; da48
 ; 1 if pokemon is in the daycare
 	ds 1
 
-W_DAYCAREMONNAME:: ds 11 ; da49
-W_DAYCAREMONOT::   ds 11 ; da54
+W_DAYCAREMONNAME:: ds NAME_LENGTH ; da49
+W_DAYCAREMONOT::   ds NAME_LENGTH ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
 
@@ -3023,8 +3023,8 @@ wBoxMons::
 wBoxMon1:: box_struct wBoxMon1 ; da96
 wBoxMon2:: ds box_struct_length * (MONS_PER_BOX + -1) ; dab7
 
-wBoxMonOT::    ds 11 * MONS_PER_BOX ; dd2a
-wBoxMonNicks:: ds 11 * MONS_PER_BOX ; de06
+wBoxMonOT::    ds NAME_LENGTH * MONS_PER_BOX ; dd2a
+wBoxMonNicks:: ds NAME_LENGTH * MONS_PER_BOX ; de06
 wBoxMonNicksEnd:: ; dee2
 
 wBoxDataEnd::

@@ -190,7 +190,7 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wcf4b
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wTradedEnemyMonSpecies]
 	ld [wd11e], a
@@ -204,15 +204,15 @@ Trade_LoadMonPartySpriteGfx: ; 4120b (10:520b)
 Trade_SwapNames: ; 41217 (10:5217)
 	ld hl, wPlayerName
 	ld de, wBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wLinkEnemyTrainerName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wBuffer
 	ld de, wLinkEnemyTrainerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 Trade_Cleanup: ; 4123b (10:523b)

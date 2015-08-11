@@ -5,7 +5,7 @@ LearnMove: ; 6e43 (1:6e43)
 	call GetPartyMonName
 	ld hl, wcd6d
 	ld de, wd036
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)

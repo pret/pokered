@@ -689,7 +689,7 @@ CheckForPlayerNameInSRAM: ; 609e (1:609e)
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld b, $b
+	ld b, NAME_LENGTH
 	ld hl, sPlayerName
 .loop
 	ld a, [hli]

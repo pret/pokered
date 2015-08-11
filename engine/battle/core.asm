@@ -1728,7 +1728,7 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	ld a, [wPlayerMonNumber]
 	call SkipFixedLengthTextEntries
 	ld de, wBattleMonNick
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wPlayerMonUnmodifiedLevel ; block of memory used for unmodified stats
@@ -1772,7 +1772,7 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 	ld de, wEnemyMonNick
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel ; block of memory used for unmodified stats
@@ -2099,7 +2099,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 ; the following happens for the old man tutorial
 	ld hl, wPlayerName
 	ld de, W_GRASSRATE
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData  ; temporarily save the player name in unused space,
 	               ; which is supposed to get overwritten when entering a
 	               ; map with wild Pokémon. Due to an oversight, the data
@@ -2107,7 +2107,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	               ; Missingno. glitch can show up.
 	ld hl, .oldManName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
 	coord hl, 9, 14
@@ -6326,7 +6326,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wEnemyMonNick
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
