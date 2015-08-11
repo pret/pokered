@@ -205,6 +205,8 @@ wTempoModifier:: ; c0f2
 
 SECTION "Sprite State Data", WRAM0[$c100]
 
+wSpriteDataStart::
+
 wSpriteStateData1:: ; c100
 ; data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
@@ -228,7 +230,7 @@ wSpriteStateData1:: ; c100
 	ds $10 * $10
 
 
-SECTION "Sprite State Data 2", WRAM0[$c200]
+;SECTION "Sprite State Data 2", WRAM0[$c200]
 
 wSpriteStateData2:: ; c200
 ; more data for all sprites on the current map
@@ -251,6 +253,8 @@ wSpriteStateData2:: ; c200
 ; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
 ; C2xF
 	ds $10 * $10
+
+wSpriteDataEnd::
 
 
 SECTION "OAM Buffer", WRAM0[$c300]
@@ -2162,6 +2166,9 @@ wSavedNPCMovementDirections2Index:: ; d157
 wPlayerName:: ; d158
 	ds 11
 
+
+wPartyDataStart::
+
 wPartyCount::   ds 1 ; d163
 wPartySpecies:: ds PARTY_LENGTH ; d164
 wPartyEnd::     ds 1 ; d16a
@@ -2177,6 +2184,10 @@ wPartyMon6:: party_struct wPartyMon6 ; d247
 wPartyMonOT::    ds 11 * PARTY_LENGTH ; d273
 wPartyMonNicks:: ds 11 * PARTY_LENGTH ; d2b5
 
+wPartyDataEnd::
+
+
+wMainDataStart::
 
 wPokedexOwned:: ; d2f7
 	flag_array NUM_POKEMON
@@ -3000,6 +3011,10 @@ W_DAYCAREMONOT::   ds 11 ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
 
+wMainDataEnd::
+
+
+wBoxDataStart::
 
 W_NUMINBOX::  ds 1 ; da80
 wBoxSpecies:: ds MONS_PER_BOX + 1
@@ -3011,6 +3026,8 @@ wBoxMon2:: ds box_struct_length * (MONS_PER_BOX + -1) ; dab7
 wBoxMonOT::    ds 11 * MONS_PER_BOX ; dd2a
 wBoxMonNicks:: ds 11 * MONS_PER_BOX ; de06
 wBoxMonNicksEnd:: ; dee2
+
+wBoxDataEnd::
 
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
