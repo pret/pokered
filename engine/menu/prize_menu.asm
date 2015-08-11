@@ -13,7 +13,7 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	xor a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
-	ld a,$03
+	ld a,A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys],a
 	ld a,$03
 	ld [wMaxMenuItem],a

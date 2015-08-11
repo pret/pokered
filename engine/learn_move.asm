@@ -116,7 +116,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call CopyData
 	callab FormatMovesString
 	pop hl
-.asm_6f39
+.loop
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
@@ -155,8 +155,8 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call LoadScreenTilesFromBuffer1
 	pop af
 	pop hl
-	bit 1, a
-	jr nz, .asm_6fab
+	bit 1, a ; pressed b
+	jr nz, .cancel
 	push hl
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -169,17 +169,17 @@ TryingToLearn: ; 6f07 (1:6f07)
 	pop bc
 	pop de
 	ld a, d
-	jr c, .asm_6fa2
+	jr c, .hm
 	pop hl
 	add hl, bc
 	and a
 	ret
-.asm_6fa2
+.hm
 	ld hl, HMCantDeleteText
 	call PrintText
 	pop hl
-	jr .asm_6f39
-.asm_6fab
+	jr .loop
+.cancel
 	scf
 	ret
 

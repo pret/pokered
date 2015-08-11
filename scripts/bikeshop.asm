@@ -39,7 +39,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $1
 	ld [wMaxMenuItem], a
@@ -64,16 +64,16 @@ BikeShopText1: ; 1d745 (7:5745)
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_b7579
+	jr nz, .cancel
 	ld hl, wd730
 	res 6, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_b7579
-	ld hl, BikeShopText_1d81a
+	jr nz, .cancel
+	ld hl, BikeShopCantAffordText
 	call PrintText
-.asm_b7579
-	ld hl, BikeShopText_1d82a
+.cancel
+	ld hl, BikeShopComeAgainText
 	call PrintText
 .Done
 	jp TextScriptEnd
@@ -93,8 +93,8 @@ BikeShopText_1d815: ; 1d815 (7:5815)
 	TX_FAR _BikeShopText_1d815
 	db "@"
 
-BikeShopText_1d81a: ; 1d81a (7:581a)
-	TX_FAR _BikeShopText_1d81a
+BikeShopCantAffordText: ; 1d81a (7:581a)
+	TX_FAR _BikeShopCantAffordText
 	db "@"
 
 BikeShopText_1d81f: ; 1d81f (7:581f)
@@ -105,8 +105,8 @@ BikeShopText_1d824: ; 1d824 (7:5824)
 	TX_FAR _BikeShopText_1d824
 	db $11, "@"
 
-BikeShopText_1d82a: ; 1d82a (7:582a)
-	TX_FAR _BikeShopText_1d82a
+BikeShopComeAgainText: ; 1d82a (7:582a)
+	TX_FAR _BikeShopComeAgainText
 	db "@"
 
 BikeShopText_1d82f: ; 1d82f (7:582f)

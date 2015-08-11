@@ -46,7 +46,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	call PrintText
 	xor a
 	ld [wCurrentMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, [wcd37]
 	dec a
@@ -70,7 +70,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld hl, wd730
 	res 6, [hl]
 	call HandleMenuInput
-	bit 1, a
+	bit 1, a ; pressed b
 	ret nz
 	ld hl, wcc5b
 	ld a, [wCurrentMenuItem]

@@ -356,7 +356,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call HandleMenuInput
 	ld hl, hFlags_0xFFF6
 	res 1, [hl]
-	bit 1, a
+	bit 1, a ; pressed b
 	ret nz
 	call GetBoxSRAMLocation
 	ld e, l

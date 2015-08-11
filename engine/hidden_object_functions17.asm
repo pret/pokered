@@ -98,7 +98,7 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld [W_ANIMATIONID], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $3
 	ld [wMaxMenuItem], a
@@ -106,7 +106,7 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld [wTopMenuItemY], a
 	ld a, $1
 	ld [wTopMenuItemX], a
-.asm_5c51
+.linkHelpLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
@@ -119,11 +119,11 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld hl, LinkCableHelpText2
 	call PrintText
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_5dc93
+	bit 1, a ; pressed b
+	jr nz, .exit
 	ld a, [wCurrentMenuItem]
-	cp $3
-	jr z, .asm_5dc93
+	cp $3 ; pressed a on "STOP READING"
+	jr z, .exit
 	ld hl, wd730
 	res 6, [hl]
 	ld hl, LinkCableInfoTexts
@@ -135,8 +135,8 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jp .asm_5c51
-.asm_5dc93
+	jp .linkHelpLoop
+.exit
 	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer1
@@ -182,7 +182,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld [W_ANIMATIONID], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $33
+	ld a, D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $2
 	ld [wMaxMenuItem], a
@@ -190,7 +190,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld [wTopMenuItemY], a
 	ld a, $1
 	ld [wTopMenuItemX], a
-.asm_5dd15
+.blackboardLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
@@ -204,11 +204,12 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2
 	call PrintText
-	call HandleMenuInput
-	bit 1, a
+	call HandleMenuInput ; pressing up and down is handled in here
+	bit 1, a ; pressed b
 	jr nz, .exitBlackboard
-	bit 4, a
-	jr z, .asm_5dd5c
+	bit 4, a ; pressed right
+	jr z, .didNotPressRight
+	; move cursor to right column
 	ld a, $2
 	ld [wMaxMenuItem], a
 	ld a, $2
@@ -217,10 +218,11 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld [wTopMenuItemX], a
 	ld a, $3
 	ld [W_ANIMATIONID], a
-	jr .asm_5dd15
-.asm_5dd5c
-	bit 5, a
-	jr z, .asm_5dd75
+	jr .blackboardLoop
+.didNotPressRight
+	bit 5, a ; pressed left
+	jr z, .didNotPressLeftOrRight
+	; move cursor to left column
 	ld a, $2
 	ld [wMaxMenuItem], a
 	ld a, $2
@@ -229,14 +231,16 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld [wTopMenuItemX], a
 	xor a
 	ld [W_ANIMATIONID], a
-	jr .asm_5dd15
-.asm_5dd75
+	jr .blackboardLoop
+.didNotPressLeftOrRight
 	ld a, [wCurrentMenuItem]
 	ld b, a
 	ld a, [W_ANIMATIONID]
 	add b
-	cp $5
+	cp $5 ; cursor is pointing to "QUIT"
 	jr z, .exitBlackboard
+	; we must have pressed a on a status condition
+	; so print the text
 	ld hl, wd730
 	res 6, [hl]
 	ld hl, ViridianBlackboardStatusPointers
@@ -248,7 +252,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	jp .asm_5dd15
+	jp .blackboardLoop
 .exitBlackboard
 	ld hl, wd730
 	res 6, [hl]

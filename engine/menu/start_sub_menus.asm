@@ -57,7 +57,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	inc hl
 	ld a,b
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a
@@ -354,7 +354,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	inc hl
 	inc a ; a = 1
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a ; old menu item id

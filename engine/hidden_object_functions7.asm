@@ -394,7 +394,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld [W_ANIMATIONID], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $4
 	ld [wMaxMenuItem], a
@@ -402,7 +402,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld [wTopMenuItemY], a
 	ld a, $1
 	ld [wTopMenuItemX], a
-.asm_1ec2d
+.billsPokemonLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
@@ -416,24 +416,24 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_1ec74
+	bit 1, a ; pressed b
+	jr nz, .cancel
 	ld a, [wCurrentMenuItem]
 	add EEVEE
 	cp EEVEE
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp FLAREON
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp JOLTEON
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp VAPOREON
-	jr z, .asm_1ec6c
-	jr .asm_1ec74
-.asm_1ec6c
+	jr z, .displayPokedex
+	jr .cancel
+.displayPokedex
 	call DisplayPokedex
 	call LoadScreenTilesFromBuffer2
-	jr .asm_1ec2d
-.asm_1ec74
+	jr .billsPokemonLoop
+.cancel
 	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer2

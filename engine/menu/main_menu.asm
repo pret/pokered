@@ -61,7 +61,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [wTopMenuItemX],a
 	inc a
 	ld [wTopMenuItemY],a
-	ld a,$B
+	ld a,A_BUTTON | B_BUTTON | START
 	ld [wMenuWatchedKeys],a
 	ld a,[wSaveFileStatus]
 	ld [wMaxMenuItem],a
@@ -163,7 +163,8 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld a, $2
 	ld [hli], a
 	inc a
-	ld [hli], a
+	; ld a, A_BUTTON | B_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hl], a
 .waitForInputLoop

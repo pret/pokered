@@ -177,7 +177,7 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	ld [wLastMenuItem], a
 	inc a
 	ld [wTopMenuItemX], a
-	ld [wMenuWatchedKeys], a
+	ld [wMenuWatchedKeys], a ; A_BUTTON
 	inc a
 	ld [wTopMenuItemY], a
 	inc a

@@ -27,7 +27,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	inc hl
 	ld a,6
 	ld [hli],a ; max menu item ID
-	ld [hl],%00110011 ; menu watched keys (Left, Right, B button, A  button)
+	ld [hl],D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON
 	call HandlePokedexListMenu
 	jr c,.goToSideMenu ; if the player chose a pokemon from the list
 .exitPokedex
@@ -88,6 +88,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	inc hl
 	ld a,3
 	ld [hli],a ; max menu item ID
+	;ld a, A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys (A button and B button)
 	xor a
 	ld [hli],a ; old menu item ID

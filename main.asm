@@ -1082,7 +1082,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld c,$08
 .drawTextBoxBorder
 	call TextBoxBorder
-	ld a,%11001011 ; bit mask for down, up, start, B, and A buttons
+	ld a,D_DOWN | D_UP | START | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys],a
 	ld a,$02
 	ld [wTopMenuItemY],a ; Y position of first menu choice
