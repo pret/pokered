@@ -121,7 +121,7 @@ PredefPointers:: ; 4fe79 (13:7e79)
 	add_predef SetPartyMonTypes
 	add_predef CanLearnTM
 	add_predef TMToMove
-	add_predef Func_71ddf
+	add_predef _RunPaletteCommand
 	add_predef StarterDex ; 46
 	add_predef _AddPartyMon
 	add_predef UpdateHPBar2

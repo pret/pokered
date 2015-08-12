@@ -1,33 +1,33 @@
-Func_71ddf: ; 71ddf (1c:5ddf)
+_RunPaletteCommand: ; 71ddf (1c:5ddf)
 	call GetPredefRegisters
 	ld a, b
 	cp $ff
-	jr nz, .asm_71dea
-	ld a, [wcf1c]
-.asm_71dea
-	cp $fc
-	jp z, Func_71fc2
+	jr nz, .next
+	ld a, [wDefaultPaletteCommand] ; use default command if command ID is $ff
+.next
+	cp UPDATE_PARTY_MENU_BLK_PACKET
+	jp z, UpdatePartyMenuBlkPacket
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
-	ld de, PointerTable_71f73
+	ld de, SetPalFunctions
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, Func_72156
+	ld de, SendSGBPackets
 	push de
 	jp [hl]
 
-SendPalPacket_Black: ; 71dff (1c:5dff)
+SetPal_BattleBlack: ; 71dff (1c:5dff)
 	ld hl, PalPacket_Black
 	ld de, BlkPacket_Battle
 	ret
 
 ; uses PalPacket_Empty to build a packet based on mon IDs and health color
-BuildBattlePalPacket: ; 71e06 (1c:5e06)
+SetPal_Battle: ; 71e06 (1c:5e06)
 	ld hl, PalPacket_Empty
-	ld de, wcf2d
+	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
 	ld a, [W_PLAYERBATTSTATUS3]
@@ -38,12 +38,12 @@ BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	ld c, a
-	ld hl, wcf2e
-	ld a, [wcf1d]
+	ld hl, wPalPacket + 1
+	ld a, [wPlayerHPBarColor]
 	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
-	ld a, [wcf1e]
+	ld a, [wEnemyHPBarColor]
 	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
@@ -52,21 +52,21 @@ BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	inc hl
 	ld a, c
 	ld [hl], a
-	ld hl, wcf2d
+	ld hl, wPalPacket
 	ld de, BlkPacket_Battle
-	ld a, $1
-	ld [wcf1c], a
+	ld a, SET_PAL_BATTLE
+	ld [wDefaultPaletteCommand], a
 	ret
 
-SendPalPacket_TownMap: ; 71e48 (1c:5e48)
+SetPal_TownMap: ; 71e48 (1c:5e48)
 	ld hl, PalPacket_TownMap
 	ld de, BlkPacket_WholeScreen
 	ret
 
 ; uses PalPacket_Empty to build a packet based the mon ID
-BuildStatusScreenPalPacket: ; 71e4f (1c:5e4f)
+SetPal_StatusScreen: ; 71e4f (1c:5e4f)
 	ld hl, PalPacket_Empty
-	ld de, wcf2d
+	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
 	ld a, [wcf91]
@@ -76,67 +76,67 @@ BuildStatusScreenPalPacket: ; 71e4f (1c:5e4f)
 .pokemon
 	call DeterminePaletteIDOutOfBattle
 	push af
-	ld hl, wcf2e
-	ld a, [wcf25]
+	ld hl, wPalPacket + 1
+	ld a, [wStatusScreenHPBarColor]
 	add PAL_GREENBAR
 	ld [hli], a
 	inc hl
 	pop af
 	ld [hl], a
-	ld hl, wcf2d
+	ld hl, wPalPacket
 	ld de, BlkPacket_StatusScreen
 	ret
 
-SendPalPacket_PartyMenu: ; 71e7b (1c:5e7b)
+SetPal_PartyMenu: ; 71e7b (1c:5e7b)
 	ld hl, PalPacket_PartyMenu
-	ld de, wcf2e
+	ld de, wPartyMenuBlkPacket
 	ret
 
-SendPalPacket_Pokedex: ; 71e82 (1c:5e82)
+SetPal_Pokedex: ; 71e82 (1c:5e82)
 	ld hl, PalPacket_Pokedex
-	ld de, wcf2d
+	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
 	ld a, [wcf91]
 	call DeterminePaletteIDOutOfBattle
-	ld hl, wcf30
+	ld hl, wPalPacket + 3
 	ld [hl], a
-	ld hl, wcf2d
+	ld hl, wPalPacket
 	ld de, BlkPacket_Pokedex
 	ret
 
-SendPalPacket_Slots: ; 71e9f (1c:5e9f)
+SetPal_Slots: ; 71e9f (1c:5e9f)
 	ld hl, PalPacket_Slots
 	ld de, BlkPacket_Slots
 	ret
 
-SendPalPacket_Titlescreen: ; 71ea6 (1c:5ea6)
+SetPal_TitleScreen: ; 71ea6 (1c:5ea6)
 	ld hl, PalPacket_Titlescreen
 	ld de, BlkPacket_Titlescreen
 	ret
 
 ; used mostly for menus and the Oak intro
-SendPalPacket_Generic: ; 71ead (1c:5ead)
+SetPal_Generic: ; 71ead (1c:5ead)
 	ld hl, PalPacket_Generic
 	ld de, BlkPacket_WholeScreen
 	ret
 
-SendPalPacket_NidorinoIntro: ; 71eb4 (1c:5eb4)
+SetPal_NidorinoIntro: ; 71eb4 (1c:5eb4)
 	ld hl, PalPacket_NidorinoIntro
 	ld de, BlkPacket_NidorinoIntro
 	ret
 
-SendPalPacket_GameFreakIntro: ; 71ebb (1c:5ebb)
+SetPal_GameFreakIntro: ; 71ebb (1c:5ebb)
 	ld hl, PalPacket_GameFreakIntro
 	ld de, BlkPacket_GameFreakIntro
-	ld a, $8
-	ld [wcf1c], a
+	ld a, SET_PAL_GENERIC
+	ld [wDefaultPaletteCommand], a
 	ret
 
 ; uses PalPacket_Empty to build a packet based on the current map
-BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
+SetPal_Overworld: ; 71ec7 (1c:5ec7)
 	ld hl, PalPacket_Empty
-	ld de, wcf2d
+	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
 	ld a, [W_CURMAPTILESET]
@@ -162,12 +162,12 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr c, .town
 	ld a, PAL_ROUTE - 1
 .town
-	inc a ; a town's pallete ID is its map ID + 1
-	ld hl, wcf2e
+	inc a ; a town's palette ID is its map ID + 1
+	ld hl, wPalPacket + 1
 	ld [hld], a
 	ld de, BlkPacket_WholeScreen
-	ld a, $9
-	ld [wcf1c], a
+	ld a, SET_PAL_OVERWORLD
+	ld [wDefaultPaletteCommand], a
 	ret
 .PokemonTowerOrAgatha
 	ld a, PAL_GREYMON - 1
@@ -181,131 +181,143 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
-SendPokemonPalette_WholeScreen: ; 71f17 (1c:5f17)
+SetPal_PokemonWholeScreen: ; 71f17 (1c:5f17)
 	push bc
 	ld hl, PalPacket_Empty
-	ld de, wcf2d
+	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
 	pop bc
 	ld a, c
 	and a
-	ld a, $1e
-	jr nz, .asm_71f31
-	ld a, [wcf1d]
+	ld a, PAL_BLACK
+	jr nz, .next
+	ld a, [wWholeScreenPaletteMonSpecies]
 	call DeterminePaletteIDOutOfBattle
-.asm_71f31
-	ld [wcf2e], a
-	ld hl, wcf2d
+.next
+	ld [wPalPacket + 1], a
+	ld hl, wPalPacket
 	ld de, BlkPacket_WholeScreen
 	ret
 
-BuildTrainerCardPalPacket: ; 71f3b (1c:5f3b)
+SetPal_TrainerCard: ; 71f3b (1c:5f3b)
 	ld hl, BlkPacket_TrainerCard
-	ld de, wcc5b
+	ld de, wTrainerCardBlkPacket
 	ld bc, $40
 	call CopyData
-	ld de, LoopCounts_71f8f
-	ld hl, wcc5d
+	ld de, BadgeBlkDataLengths
+	ld hl, wTrainerCardBlkPacket + 2
 	ld a, [W_OBTAINEDBADGES]
-	ld c, $8
-.asm_71f52
+	ld c, 8
+.badgeLoop
 	srl a
 	push af
-	jr c, .asm_71f62
+	jr c, .haveBadge
+; The player doens't have the badge, so zero the badge's blk data.
 	push bc
 	ld a, [de]
 	ld c, a
 	xor a
-.asm_71f5b
+.zeroBadgeDataLoop
 	ld [hli], a
 	dec c
-	jr nz, .asm_71f5b
+	jr nz, .zeroBadgeDataLoop
 	pop bc
-	jr .asm_71f67
-.asm_71f62
+	jr .nextBadge
+.haveBadge
+; The player does have the badge, so skip past the badge's blk data.
 	ld a, [de]
-.asm_71f63
+.skipBadgeDataLoop
 	inc hl
 	dec a
-	jr nz, .asm_71f63
-.asm_71f67
+	jr nz, .skipBadgeDataLoop
+.nextBadge
 	pop af
 	inc de
 	dec c
-	jr nz, .asm_71f52
+	jr nz, .badgeLoop
 	ld hl, PalPacket_TrainerCard
-	ld de, wcc5b
+	ld de, wTrainerCardBlkPacket
 	ret
 
-PointerTable_71f73: ; 71f73 (1c:5f73)
-	dw SendPalPacket_Black
-	dw BuildBattlePalPacket
-	dw SendPalPacket_TownMap
-	dw BuildStatusScreenPalPacket
-	dw SendPalPacket_Pokedex
-	dw SendPalPacket_Slots
-	dw SendPalPacket_Titlescreen
-	dw SendPalPacket_NidorinoIntro
-	dw SendPalPacket_Generic
-	dw BuildOverworldPalPacket
-	dw SendPalPacket_PartyMenu
-	dw SendPokemonPalette_WholeScreen
-	dw SendPalPacket_GameFreakIntro
-	dw BuildTrainerCardPalPacket
+SetPalFunctions: ; 71f73 (1c:5f73)
+	dw SetPal_BattleBlack
+	dw SetPal_Battle
+	dw SetPal_TownMap
+	dw SetPal_StatusScreen
+	dw SetPal_Pokedex
+	dw SetPal_Slots
+	dw SetPal_TitleScreen
+	dw SetPal_NidorinoIntro
+	dw SetPal_Generic
+	dw SetPal_Overworld
+	dw SetPal_PartyMenu
+	dw SetPal_PokemonWholeScreen
+	dw SetPal_GameFreakIntro
+	dw SetPal_TrainerCard
 
-; each byte is the number of loops to make in .asm_71f5b for each badge
-LoopCounts_71f8f: ; 71f8f (1c:5f8f)
-	db $06,$06,$06,$12,$06,$06,$06,$06
+; The length of the blk data of each badge on the Trainer Card.
+; The Rainbow Badge has 3 entries because of its many colors.
+BadgeBlkDataLengths: ; 71f8f (1c:5f8f)
+	db 6     ; Boulder Badge
+	db 6     ; Cascade Badge
+	db 6     ; Thunder Badge
+	db 6 * 3 ; Rainbow Badge
+	db 6     ; Soul Badge
+	db 6     ; Marsh Badge
+	db 6     ; Volcano Badge
+	db 6     ; Earth Badge
 
 DeterminePaletteID: ; 71f97 (1c:5f97)
-	bit 3, a                 ; bit 3 of battle status 3, set if current Pokemon is transformed
-	ld a, PAL_GREYMON        ; if yes, use Ditto's palette
+	bit Transformed, a ; a is battle status 3
+	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ld [wd11e], a
-	and a
-	jr z, .idZero
+	and a ; is the mon index 0?
+	jr z, .skipDexNumConversion
 	push bc
-	predef IndexToPokedex               ; turn Pokemon ID number into Pokedex number
+	predef IndexToPokedex
 	pop bc
 	ld a, [wd11e]
-.idZero
+.skipDexNumConversion
 	ld e, a
-	ld d, $00
-	ld hl, MonsterPalettes   ; not just for Pokemon, Trainers use it too
+	ld d, 0
+	ld hl, MonsterPalettes ; not just for Pokemon, Trainers use it too
 	add hl, de
 	ld a, [hl]
 	ret
 
-SendBlkPacket_PartyMenu: ; 71fb6 (1c:5fb6)
+InitPartyMenuBlkPacket: ; 71fb6 (1c:5fb6)
 	ld hl, BlkPacket_PartyMenu
-	ld de, wcf2e
+	ld de, wPartyMenuBlkPacket
 	ld bc, $30
 	jp CopyData
 
-Func_71fc2: ; 71fc2 (1c:5fc2)
-	ld hl, wcf1f
-	ld a, [wcf2d]
+UpdatePartyMenuBlkPacket: ; 71fc2 (1c:5fc2)
+; Update the blk packet with the palette of the HP bar that is
+; specified in [wWhichPartyMenuHPBar].
+	ld hl, wPartyMenuHPBarColors
+	ld a, [wWhichPartyMenuHPBar]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld e, l
 	ld d, h
 	ld a, [de]
 	and a
-	ld e, $5
-	jr z, .asm_71fdb
+	ld e, (1 << 2) | 1 ; green
+	jr z, .next
 	dec a
-	ld e, $a
-	jr z, .asm_71fdb
-	ld e, $f
-.asm_71fdb
+	ld e, (2 << 2) | 2 ; yellow
+	jr z, .next
+	ld e, (3 << 2) | 3 ; red
+.next
 	push de
-	ld hl, wcf37
-	ld bc, $6
-	ld a, [wcf2d]
+	ld hl, wPartyMenuBlkPacket + 8 + 1
+	ld bc, 6
+	ld a, [wWhichPartyMenuHPBar]
 	call AddNTimes
 	pop de
 	ld [hl], e
@@ -321,11 +333,9 @@ SendSGBPacket: ; 71feb (1c:5feb)
 .loop2
 ; save B for later use
 	push bc
-; load a non-zero value in $fff9 to disable the routine that checks actual
-; joypad input (said routine, located at $15f, does nothing if $fff9 is not
-; zero)
-	ld a,$01
-	ld [$fff9],a
+; disable ReadJoypad to prevent it from interfering with sending the packet
+	ld a, 1
+	ld [hDisableJoypadPolling], a
 ; send RESET signal (P14=LOW, P15=LOW)
 	xor a
 	ld [rJOYP],a
@@ -367,7 +377,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 	ld a,$30
 	ld [rJOYP],a
 	xor a
-	ld [$fff9],a
+	ld [hDisableJoypadPolling],a
 ; wait for about 70000 cycles
 	call Wait7000
 ; restore (previously pushed) number of packets
@@ -383,39 +393,39 @@ LoadSGB: ; 7202b (1c:602b)
 	ld [wOnSGB], a
 	call CheckSGB
 	ret nc
-	ld a, $1
+	ld a, 1
 	ld [wOnSGB], a
 	ld a, [wGBC]
 	and a
-	jr z, .asm_7203f
+	jr z, .notGBC
 	ret
-.asm_7203f
+.notGBC
 	di
-	call Func_72075
+	call PrepareSuperNintendoVRAMTransfer
 	ei
-	ld a, $1
-	ld [wcf2d], a
+	ld a, 1
+	ld [wCopyingSGBTileData], a
 	ld de, ChrTrnPacket
 	ld hl, SGBBorderGraphics
-	call Func_7210b
+	call CopyGfxToSuperNintendoVRAM
 	xor a
-	ld [wcf2d], a
+	ld [wCopyingSGBTileData], a
 	ld de, PctTrnPacket
 	ld hl, BorderPalettes
-	call Func_7210b
+	call CopyGfxToSuperNintendoVRAM
 	xor a
-	ld [wcf2d], a
+	ld [wCopyingSGBTileData], a
 	ld de, PalTrnPacket
 	ld hl, SuperPalettes
-	call Func_7210b
+	call CopyGfxToSuperNintendoVRAM
 	call ClearVram
 	ld hl, MaskEnCancelPacket
 	jp SendSGBPacket
 
-Func_72075: ; 72075 (1c:6075)
-	ld hl, PointerTable_72089
-	ld c, $9
-.asm_7207a
+PrepareSuperNintendoVRAMTransfer: ; 72075 (1c:6075)
+	ld hl, .packetPointers
+	ld c, 9
+.loop
 	push bc
 	ld a, [hli]
 	push hl
@@ -426,10 +436,11 @@ Func_72075: ; 72075 (1c:6075)
 	inc hl
 	pop bc
 	dec c
-	jr nz, .asm_7207a
+	jr nz, .loop
 	ret
 
-PointerTable_72089: ; 72089 (1c:6089)
+.packetPointers
+; Only the first packet is needed.
 	dw MaskEnFreezePacket
 	dw DataSnd_72548
 	dw DataSnd_72558
@@ -441,17 +452,18 @@ PointerTable_72089: ; 72089 (1c:6089)
 	dw DataSnd_725b8
 
 CheckSGB: ; 7209b (1c:609b)
+; Returns whether the game is running on an SGB in carry.
 	ld hl, MltReq2Packet
 	di
 	call SendSGBPacket
-	ld a, $1
-	ld [$fff9], a
+	ld a, 1
+	ld [hDisableJoypadPolling], a
 	ei
 	call Wait7000
 	ld a, [rJOYP]
 	and $3
 	cp $3
-	jr nz, .asm_720fd
+	jr nz, .isSGB
 	ld a, $20
 	ld [rJOYP], a
 	ld a, [rJOYP]
@@ -482,50 +494,50 @@ CheckSGB: ; 7209b (1c:609b)
 	ld a, [rJOYP]
 	and $3
 	cp $3
-	jr nz, .asm_720fd
-	call Func_72102
+	jr nz, .isSGB
+	call SendMltReq1Packet
 	and a
 	ret
-.asm_720fd
-	call Func_72102
+.isSGB
+	call SendMltReq1Packet
 	scf
 	ret
 
-Func_72102: ; 72102 (1c:6102)
+SendMltReq1Packet: ; 72102 (1c:6102)
 	ld hl, MltReq1Packet
 	call SendSGBPacket
 	jp Wait7000
 
-Func_7210b: ; 7210b (1c:610b)
+CopyGfxToSuperNintendoVRAM: ; 7210b (1c:610b)
 	di
 	push de
 	call DisableLCD
 	ld a, $e4
 	ld [rBGP], a
 	ld de, vChars1
-	ld a, [wcf2d]
+	ld a, [wCopyingSGBTileData]
 	and a
-	jr z, .asm_72122
-	call Func_72188
-	jr .asm_72128
-.asm_72122
+	jr z, .notCopyingTileData
+	call CopySGBBorderTiles
+	jr .next
+.notCopyingTileData
 	ld bc, $1000
 	call CopyData
-.asm_72128
+.next
 	ld hl, vBGMap0
 	ld de, $c
 	ld a, $80
 	ld c, $d
-.asm_72132
+.loop
 	ld b, $14
-.asm_72134
+.innerLoop
 	ld [hli], a
 	inc a
 	dec b
-	jr nz, .asm_72134
+	jr nz, .innerLoop
 	add hl, de
 	dec c
-	jr nz, .asm_72132
+	jr nz, .loop
 	ld a, $e3
 	ld [rLCDC], a
 	pop hl
@@ -548,27 +560,27 @@ Wait7000: ; 7214a (1c:614a)
 	jr nz, .loop
 	ret
 
-Func_72156: ; 72156 (1c:6156)
+SendSGBPackets: ; 72156 (1c:6156)
 	ld a, [wGBC]
 	and a
-	jr z, .asm_72165
+	jr z, .notGBC
 	push de
-	call Func_7216d
+	call InitGBCPalettes
 	pop hl
-	call Func_72187
+	call EmptyFunc5
 	ret
-.asm_72165
+.notGBC
 	push de
 	call SendSGBPacket
 	pop hl
 	jp SendSGBPacket
 
-Func_7216d: ; 7216d (1c:616d)
-	ld a, $80
-	ld [$ff68], a
+InitGBCPalettes: ; 7216d (1c:616d)
+	ld a, $80 ; index 0 with auto-increment
+	ld [rBGPI], a
 	inc hl
 	ld c, $20
-.asm_72174
+.loop
 	ld a, [hli]
 	inc hl
 	add a
@@ -576,37 +588,48 @@ Func_7216d: ; 7216d (1c:616d)
 	add a
 	ld de, SuperPalettes
 	add e
-	jr nc, .asm_72180
+	jr nc, .noCarry
 	inc d
-.asm_72180
+.noCarry
 	ld a, [de]
-	ld [$ff69], a
+	ld [rBGPD], a
 	dec c
-	jr nz, .asm_72174
+	jr nz, .loop
 	ret
 
-Func_72187: ; 72187 (1c:6187)
+EmptyFunc5: ; 72187 (1c:6187)
 	ret
 
-Func_72188: ; 72188 (1c:6188)
-	ld b, $80
-.asm_7218a
-	ld c, $10
-.asm_7218c
+CopySGBBorderTiles: ; 72188 (1c:6188)
+; SGB tile data is stored in a 4BPP planar format.
+; Each tile is 32 bytes. The first 16 bytes contain bit planes 1 and 2, while
+; the second 16 bytes contain bit planes 3 and 4.
+; This function converts 2BPP planar data into this format by mapping
+; 2BPP colors 0-3 to 4BPP colors 0-3. 4BPP colors 4-15 are not used.
+	ld b, 128
+
+.tileLoop
+
+; Copy bit planes 1 and 2 of the tile data.
+	ld c, 16
+.copyLoop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_7218c
-	ld c, $10
+	jr nz, .copyLoop
+
+; Zero bit planes 3 and 4.
+	ld c, 16
 	xor a
-.asm_72195
+.zeroLoop
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_72195
+	jr nz, .zeroLoop
+
 	dec b
-	jr nz, .asm_7218a
+	jr nz, .tileLoop
 	ret
 
 INCLUDE "data/sgb_packets.asm"

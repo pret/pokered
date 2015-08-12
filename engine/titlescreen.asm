@@ -134,8 +134,8 @@ ENDC
 	call LoadScreenTilesFromBuffer2
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
-	ld b, $6
-	call GoPAL_SET
+	ld b, SET_PAL_TITLE_SCREEN
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
 	ld [rOBP0], a

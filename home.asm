@@ -4469,7 +4469,7 @@ RestoreScreenTilesAndReloadTilePatterns:: ; 3dbe (0:3dbe)
 	call ReloadMapSpriteTilePatterns
 	call LoadScreenTilesFromBuffer2
 	call LoadTextBoxTilePatterns
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jr Delay3
 
 
@@ -4499,13 +4499,13 @@ GBPalWhiteOut::
 	ret
 
 
-GoPAL_SET_CF1C:: ; 3ded (0:3ded)
+RunDefaultPaletteCommand:: ; 3ded (0:3ded)
 	ld b,$ff
-GoPAL_SET:: ; 3def (0:3def)
+RunPaletteCommand:: ; 3def (0:3def)
 	ld a,[wOnSGB]
 	and a
 	ret z
-	predef_jump Func_71ddf
+	predef_jump _RunPaletteCommand
 
 GetHealthBarColor::
 ; Return at hl the palette of

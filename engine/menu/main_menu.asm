@@ -24,7 +24,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld hl,wd72e
 	res 6,[hl]
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
 	ld hl,wd730

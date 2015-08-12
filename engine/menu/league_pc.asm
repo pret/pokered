@@ -47,7 +47,7 @@ PKMNLeaguePC: ; 0x7657e
 	res 6, [hl]
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jp GBPalNormal
 
 LeaguePCShowTeam: ; 765e5 (1d:65e5)
@@ -86,15 +86,15 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
-	ld [wcf1d], a
+	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [hli]
 	ld [wHoFMonLevel], a
 	ld de, wcd6d
 	ld bc, NAME_LENGTH
 	call CopyData
-	ld b, $0B
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0
-	call GoPAL_SET
+	call RunPaletteCommand
 	coord hl, 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex

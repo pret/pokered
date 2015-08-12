@@ -5,12 +5,12 @@ AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
 	inc a
 	jr GetAnimationSpeed
 
-; wcf1f contains the party mon's health bar colors
+; wPartyMenuHPBarColors contains the party mon's health bar colors
 ; 0: green
 ; 1: yellow
 ; 2: red
 AnimatePartyMon: ; 716ff (1c:56ff)
-	ld hl, wcf1f
+	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
 	ld b, $0

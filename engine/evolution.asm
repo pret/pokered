@@ -21,8 +21,8 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a
 	ld a, [wEvoOldSpecies]
-	ld [wcf1d], a
-	ld c, $0
+	ld [wWholeScreenPaletteMonSpecies], a
+	ld c, 0
 	call EvolutionSetWholeScreenPalette
 	ld a, [wEvoNewSpecies]
 	ld [wcf91], a
@@ -46,7 +46,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	call PlayMusic
 	ld c, 80
 	call DelayFrames
-	ld c, $1
+	ld c, 1 ; set PAL_BLACK instead of mon palette
 	call EvolutionSetWholeScreenPalette
 	lb bc, $1, $10
 .animLoop
@@ -66,13 +66,13 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	call Evolution_ChangeMonPic ; show the new species pic
 	ld a, [wEvoNewSpecies]
 .done
-	ld [wcf1d], a
+	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, $ff
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, [wcf1d]
+	ld a, [wWholeScreenPaletteMonSpecies]
 	call PlayCry
-	ld c, $0
+	ld c, 0
 	call EvolutionSetWholeScreenPalette
 	pop af
 	ld [wd0b5], a
@@ -94,8 +94,8 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	jr .done
 
 EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
-	ld b, $b
-	jp GoPAL_SET
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	jp RunPaletteCommand
 
 Evolution_LoadPic: ; 7beb9 (1e:7eb9)
 	call GetMonHeader

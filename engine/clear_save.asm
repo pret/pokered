@@ -1,6 +1,6 @@
 DoClearSaveDialogue: ; 1c98a (7:498a)
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	ld hl, ClearSaveDataText

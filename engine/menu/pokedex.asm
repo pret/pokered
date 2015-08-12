@@ -12,8 +12,8 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	ld [wd11e],a
 	ld [hJoy7],a
 .setUpGraphics
-	ld b,$08
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 	callab LoadPokedexTilePatterns
 .doPokemonListMenu
 	ld hl,wTopMenuItemY
@@ -41,7 +41,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	pop af
 	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jp ReloadMapData
 .goToSideMenu
 	call HandlePokedexSideMenu
@@ -404,8 +404,8 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld a,[wd11e] ; pokemon ID
 	ld [wcf91],a
 	push af
-	ld b,04
-	call GoPAL_SET
+	ld b, SET_PAL_POKEDEX
+	call RunPaletteCommand
 	pop af
 	ld [wd11e],a
 	ld a,[hTilesetType]
@@ -561,7 +561,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [hTilesetType],a
 	call GBPalWhiteOut
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call GBPalNormal
 	ld hl,wd72c

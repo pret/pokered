@@ -317,5 +317,7 @@ hFlags_0xFFF6 EQU $FFF6
 
 hFieldMoveMonMenuTopMenuItemX EQU $FFF7
 
+hDisableJoypadPolling EQU $FFF9
+
 hJoyInput EQU $FFF8
 

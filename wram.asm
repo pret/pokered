@@ -477,6 +477,9 @@ wNPCMovementScriptBank:: ; cc58
 
 	ds 2
 
+wTrainerCardBlkPacket:: ; cc5b
+; $40 bytes
+
 wSlotMachineSevenAndBarModeChance:: ; cc5b
 ; If a random number greater than this value is generated, then the player is
 ; allowed to have three 7 symbols or bar symbols line up.
@@ -1283,15 +1286,40 @@ wOnSGB:: ; cf1b
 ; if running on SGB, it's 1, else it's 0
 	ds 1
 
-wcf1c:: ds 1 ; used with sgb palettes
-wcf1d:: ds 1 ; used when displaying palettes for Pokemon
-wcf1e:: ds 1 ; used to display palettes for HP bar
-wcf1f:: ds 6 ; used to display HP bars in Pokemon Menu (probably palettes)
-wcf25:: ds 8 ; used to display HP bar for Pokemon Status Screen (probably palettes too)
-wcf2d:: ds 1 ; also used to display HP bar for Pokemon Menu (something about HP colour)
-wcf2e:: ds 2 ; more HP bar palette stuff.
-wcf30:: ds 7 ; used with palettes (apparently for Pokedex)
-wcf37:: ds 20 ; used with palletes too (used for Party Menu)
+wDefaultPaletteCommand:: ; cf1c
+	ds 1
+
+wPlayerHPBarColor:: ; cf1d
+
+wWholeScreenPaletteMonSpecies:: ; cf1d
+; species of the mon whose palette is used for the whole screen
+	ds 1
+
+wEnemyHPBarColor:: ; cf1e
+	ds 1
+
+; 0: green
+; 1: yellow
+; 2: red
+wPartyMenuHPBarColors:: ; cf1f
+	ds 6
+
+wStatusScreenHPBarColor:: ; cf25
+	ds 1
+
+	ds 7
+
+wCopyingSGBTileData:: ; c2fd
+
+wWhichPartyMenuHPBar:: ; cf2d
+
+wPalPacket:: ; cf2d
+	ds 1
+
+wPartyMenuBlkPacket:: ; cf2e
+; $30 bytes
+	ds 29
+
 wcf4b:: ds 1 ; storage buffer for various strings
 wcf4c:: ds 1 ; used with displaying EXP value, probably also overflowed with wcf4b
 wGainBoostedExp:: ; cf4d

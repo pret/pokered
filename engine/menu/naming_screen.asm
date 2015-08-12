@@ -88,8 +88,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, $8
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba LoadMonPartySpriteGfx
@@ -163,7 +163,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call ClearSprites
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 	xor a
 	ld [W_SUBANIMTRANSFORM], a

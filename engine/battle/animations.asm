@@ -2170,8 +2170,8 @@ ChangeMonPic: ; 79793 (1e:5793)
 	pop af
 	ld [wBattleMonSpecies2], a
 .done
-	ld b, $1
-	jp GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	jp RunPaletteCommand
 
 AnimationHideEnemyMonPic: ; 797d8 (1e:57d8)
 ; Hides the enemy mon's sprite

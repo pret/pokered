@@ -3156,7 +3156,7 @@ RedrawMapView: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]

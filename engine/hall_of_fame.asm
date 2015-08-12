@@ -104,7 +104,7 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
-	ld [wcf1d], a
+	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [wHoFMonOrPlayer]
 	and a
 	jr z, .showMon
@@ -117,9 +117,9 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
-	ld b, $b
-	ld c, $0
-	call GoPAL_SET
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 0
+	call RunPaletteCommand
 	ld a, %11100100
 	ld [rBGP], a
 	ld c, $31 ; back pic

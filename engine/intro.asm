@@ -18,8 +18,8 @@ PlayIntro: ; 41682 (10:5682)
 	ret
 
 PlayIntroScene: ; 4169d (10:569d)
-	ld b, $7
-	call GoPAL_SET
+	ld b, SET_PAL_NIDORINO_INTRO
+	call RunPaletteCommand
 	ld a, %11100100
 	ld [rBGP], a
 	ld [rOBP0], a
@@ -302,8 +302,8 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	jp FarCopyData2
 
 PlayShootingStar: ; 4188a (10:588a)
-	ld b, $c
-	call GoPAL_SET
+	ld b, SET_PAL_GAME_FREAK_INTRO
+	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
 	ld a, $e4
 	ld [rBGP], a

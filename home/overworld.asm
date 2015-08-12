@@ -659,8 +659,8 @@ CheckMapConnections:: ; 07ba (0:07ba)
 .loadNewMap ; load the connected map that was entered
 	call LoadMapHeader
 	call PlayDefaultMusicFadeOutCurrent
-	ld b,$09
-	call GoPAL_SET
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
 ; $C2XE without loading any tile patterns.
 	callba InitMapSprites
@@ -2343,8 +2343,8 @@ LoadMapData:: ; 1241 (0:1241)
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
 	call EnableLCD
-	ld b,$09
-	call GoPAL_SET
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a,[wd732]
 	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp

@@ -184,8 +184,8 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
-	ld b, $1
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
 	call HideSprites
 	jpab PrintBeginningBattleText
 
@@ -976,7 +976,7 @@ AnyEnemyPokemonAliveCheck: ; 3c64f (f:464f)
 
 ; stores whether enemy ran in Z flag
 ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
-	ld hl, wcf1e
+	ld hl, wEnemyHPBarColor
 	ld e, $30
 	call GetBattleHealthBarColor
 	callab DrawEnemyPokeballs
@@ -1199,7 +1199,7 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 	call GBPalWhiteOut
 	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer1
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 	call SendOutMon
 	ld hl, wEnemyMonHP
@@ -1228,8 +1228,8 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp OAKS_LAB
 	ret z            ; starter battle in oak's lab: don't black out
 .notSony1Battle
-	ld b, $0
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE_BLACK
+	call RunPaletteCommand
 	ld hl, PlayerBlackedOutText2
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -1494,8 +1494,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	coord hl, 0, 0
 	lb bc, 4, 11
 	call ClearScreenArea
-	ld b,1
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
 	call GBPalNormal
 	ld hl,TrainerSentOutText
 	call PrintText
@@ -1829,8 +1829,8 @@ SendOutMon: ; 3cc91 (f:4c91)
 	ld [W_PLAYERDISABLEDMOVE], a
 	ld [wPlayerDisabledMoveNumber], a
 	ld [wPlayerMonMinimized], a
-	ld b, $1
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
 	ld hl, W_ENEMYBATTSTATUS1
 	res UsingTrappingMove, [hl]
 	ld a, $1
@@ -1926,7 +1926,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	predef DrawHP
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wcf1d
+	ld hl, wPlayerHPBarColor
 	call GetBattleHealthBarColor
 	ld hl, wBattleMonHP
 	ld a, [hli]
@@ -1935,8 +1935,8 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld a, [wccf6]
 	and a
 	ret nz
-	ld a, [wcf1d]
-	cp $2
+	ld a, [wPlayerHPBarColor]
+	cp HP_BAR_RED
 	jr z, .asm_3cde6
 .asm_3cdd9
 	ld hl, wLowHealthAlarm
@@ -2039,7 +2039,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	call DrawHPBar
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld hl, wcf1e
+	ld hl, wEnemyHPBarColor
 
 GetBattleHealthBarColor: ; 3ce90 (f:4e90)
 	ld b, [hl]
@@ -2047,8 +2047,8 @@ GetBattleHealthBarColor: ; 3ce90 (f:4e90)
 	ld a, [hl]
 	cp b
 	ret z
-	ld b, $1
-	jp GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	jp RunPaletteCommand
 
 ; center's mon's name on the battle screen
 ; if the name is 1 or 2 letters long, it is printed 2 spaces more to the right than usual
@@ -2397,7 +2397,7 @@ PartyMenuOrRockOrRun:
 	call GBPalWhiteOut
 	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer2
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 	jp DisplayBattleMenu
 .partyMonDeselected
@@ -2486,7 +2486,7 @@ PartyMenuOrRockOrRun:
 	call ClearSprites
 	call LoadHudTilePatterns
 	call LoadScreenTilesFromBuffer1
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 ; fall through to SwitchPlayerMon
 
@@ -6932,8 +6932,8 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 
 ; common code that executes after init battle code specific to trainer or wild battles
 InitBattle_Common: ; 3efeb (f:6feb)
-	ld b, $0
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE_BLACK
+	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a

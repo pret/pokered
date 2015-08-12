@@ -268,8 +268,8 @@ Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
 	call Trade_ClearTileMap
 	ld b, vBGMap0 / $100
 	call CopyScreenTileBufferToVRAM
-	ld b, $8
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 
 ; This function call is pointless. It just copies blank tiles to VRAM that was
 ; already filled with blank tiles.
@@ -727,10 +727,10 @@ Trade_CircleOAM3: ; 4159c (10:559c)
 Trade_LoadMonSprite: ; 415a4 (10:55a4)
 	ld [wcf91], a
 	ld [wd0b5], a
-	ld [wcf1d], a
-	ld b, $b
-	ld c, $0
-	call GoPAL_SET
+	ld [wWholeScreenPaletteMonSpecies], a
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 0
+	call RunPaletteCommand
 	ld a, [H_AUTOBGTRANSFERENABLED]
 	xor $1
 	ld [H_AUTOBGTRANSFERENABLED], a
