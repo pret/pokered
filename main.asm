@@ -4508,21 +4508,23 @@ InitializeEmptyList:
 	ret
 
 
-IsItemInBag_: ; f8a5 (3:78a5)
+GetQuantityOfItemInBag: ; f8a5 (3:78a5)
+; In: b = item ID
+; Out: b = how many of that item are in the bag
 	call GetPredefRegisters
 	ld hl, wNumBagItems
-.asm_f8ab
+.loop
 	inc hl
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f8b7
+	jr z, .notInBag
 	cp b
-	jr nz, .asm_f8ab
+	jr nz, .loop
 	ld a, [hl]
 	ld b, a
 	ret
-.asm_f8b7
-	ld b, $0
+.notInBag
+	ld b, 0
 	ret
 
 FindPathToPlayer: ; f8ba (3:78ba)

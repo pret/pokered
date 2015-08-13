@@ -269,7 +269,7 @@ hMovingBGTilesCounter1 EQU $FFD8
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
-hFossilCounter EQU $FFDB
+hItemCounter EQU $FFDB
 
 hGymGateIndex EQU $FFDB
 
@@ -285,7 +285,7 @@ hDexRatingNumMonsOwned EQU $FFDC
 hOaksAideResult       EQU $FFDB
 
 hOaksAideRequirement  EQU $FFDB ; required number of owned mons
-hOaksAideItemReward   EQU $FFDC
+hOaksAideRewardItem   EQU $FFDC
 hOaksAideNumMonsOwned EQU $FFDD
 
 hItemToRemoveID    EQU $FFDB

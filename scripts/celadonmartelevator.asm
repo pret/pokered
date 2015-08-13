@@ -35,7 +35,7 @@ CeladonMartElevatorScript_48631: ; 48631 (12:4631)
 	ld hl, CeladonMartElavatorFloors
 	call LoadItemList
 	ld hl, CeldaonMartElevatorWarpMaps
-	ld de, wcc5b
+	ld de, wElevatorWarpMaps
 	ld bc, CeldaonMartElevatorWarpMapsEnd - CeldaonMartElevatorWarpMaps
 	jp CopyData
 

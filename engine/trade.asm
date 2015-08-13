@@ -849,5 +849,5 @@ TradeforText: ; 41671 (10:5671)
 Trade_ShowAnimation: ; 41676 (10:5676)
 	ld [W_ANIMATIONID], a
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	predef_jump MoveAnimation

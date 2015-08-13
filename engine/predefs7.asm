@@ -21,7 +21,7 @@ DisplayElevatorFloorMenu: ; 1c9c6 (7:49c6)
 	ret c
 	ld hl, wd126
 	set 7, [hl]
-	ld hl, wcc5b
+	ld hl, wElevatorWarpMaps
 	ld a, [wWhichPokemon]
 	add a
 	ld d, 0

@@ -477,6 +477,26 @@ wNPCMovementScriptBank:: ; cc58
 
 	ds 2
 
+wUnusedCC5B:: ; cc5b
+
+wVermilionDockTileMapBuffer:: ; cc5b
+; 180 bytes
+
+wOaksAideRewardItemName:: ; cc5b
+
+wDexRatingNumMonsSeen:: ; cc5b
+
+wFilteredBagItems:: ; cc5b
+; List of bag items that has been filtered to a certain type of items,
+; such as drinks or fossils.
+
+wElevatorWarpMaps:: ; cc5b
+
+wMonPartySpritesSavedOAM:: ; cc5b
+; Saved copy of OAM for the first frame of the animation to make it easy to
+; flip back from the second frame.
+; $60 bytes
+
 wTrainerCardBlkPacket:: ; cc5b
 ; $40 bytes
 
@@ -493,10 +513,13 @@ wAnimationType:: ; cc5b
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
 
 wNPCMovementDirections:: ; cc5b
+	ds 1
 
-wcc5b:: ds 1 ; these upcoming values below are miscellaneous storage values
-wcc5c:: ds 1 ; used in pokedex evaluation as well
-wcc5d:: ds 1 ; used in pokedex evaluation
+wDexRatingNumMonsOwned:: ; cc5c
+	ds 1
+
+wDexRatingText:: ; cc5d
+	ds 1
 
 wSlotMachineSavedROMBank:: ; cc5e
 ; ROM back to return to when the player is done with the slot machine
@@ -723,7 +746,11 @@ wInGameTradeReceiveMonSpecies::
 
 wNPCMovementDirections2Index:: ; cd37
 
-wcd37:: ds 1 ; used in list menus, like the fossil lab menu or drink girl menu. Also used in link menu.
+wUnusedCD37:: ; cd37
+
+wFilteredBagItemsCount:: ; cd37
+; number of items in wFilteredBagItems list
+	ds 1
 
 wSimulatedJoypadStatesIndex:: ; cd38
 ; the next simulated joypad state is at wSimulatedJoypadStatesEnd plus this value minus 1
@@ -1320,10 +1347,15 @@ wPartyMenuBlkPacket:: ; cf2e
 ; $30 bytes
 	ds 29
 
-wcf4b:: ds 1 ; storage buffer for various strings
-wcf4c:: ds 1 ; used with displaying EXP value, probably also overflowed with wcf4b
+wExpAmountGained:: ; cf4b
+; 2-byte big-endian number
+; the total amount of exp a mon gained
+
+wcf4b:: ds 2 ; storage buffer for various strings
+
 wGainBoostedExp:: ; cf4d
 	ds 1
+
 	ds 17
 
 wGymCityName:: ; cf5f

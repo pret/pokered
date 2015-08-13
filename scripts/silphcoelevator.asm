@@ -35,7 +35,7 @@ SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
 	ld hl, SilphCoElavatorFloors
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps
-	ld de, wcc5b
+	ld de, wElevatorWarpMaps
 	ld bc, SilphCoElevatorWarpMapsEnd - SilphCoElevatorWarpMaps
 	call CopyData
 	ret

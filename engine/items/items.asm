@@ -1324,7 +1324,7 @@ ItemUseRock: ; df67 (3:5f67)
 BaitRockCommon: ; df7f (3:5f7f)
 	ld [W_ANIMATIONID],a
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld [H_WHOSETURN],a
 	ld [de],a ; zero escape factor (for bait), zero bait factor (for rock)
 .randomLoop ; loop until a random number less than 5 is generated

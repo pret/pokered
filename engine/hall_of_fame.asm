@@ -243,7 +243,7 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call HoFPrintTextAndDelay
 	ld hl, DexRatingText
 	call HoFPrintTextAndDelay
-	ld hl, wcc5d
+	ld hl, wDexRatingText
 
 HoFPrintTextAndDelay: ; 703e2 (1c:43e2)
 	call PrintText
