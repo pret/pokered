@@ -25,8 +25,8 @@ InitBattleVariables: ; 525af (14:65af)
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	inc a
-	ld [wccd9], a
+	inc a ; POUND
+	ld [wTestBattlePlayerSelectedMove], a
 	ld a, [W_CURMAP]
 	cp SAFARI_ZONE_EAST
 	jr c, .notSafariBattle

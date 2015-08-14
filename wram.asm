@@ -577,7 +577,12 @@ wPlayerSubstituteHP:: ; ccd7
 wEnemySubstituteHP:: ; ccd8
 	ds 1
 
-wccd9:: ds 2 ; used in InitBattleVariablesLoop (written to after the loop is finished)
+wTestBattlePlayerSelectedMove:: ; ccd9
+; The player's selected move during a test battle.
+; InitBattleVariables sets it to the move Pound.
+	ds 1
+
+	ds 1
 
 wMoveMenuType:: ; ccdb
 ; 0=regular, 1=mimic, 2=above message box (relearn, heal pp..)
@@ -2951,6 +2956,7 @@ wd732:: ; d732
 	ds 1
 
 W_FLAGS_D733:: ; d733
+; bit 0: running a test battle
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1

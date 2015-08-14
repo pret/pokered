@@ -2634,7 +2634,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
 	ld a, [W_FLAGS_D733]
-	bit 0, a
+	bit BIT_TEST_BATTLE, a
 	ld b, D_UP | D_DOWN | A_BUTTON | B_BUTTON | SELECT
 	jr z, .matchedkeyspicked
 	ld b, $ff
@@ -2662,7 +2662,7 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	jr .select
 .battleselect
 	ld a, [W_FLAGS_D733]
-	bit 0, a
+	bit BIT_TEST_BATTLE, a
 	jr nz, .select
 	call PrintMenuItem
 	ld a, [wMenuItemToSwap]
@@ -6170,8 +6170,8 @@ GetCurrentMove: ; 3eabe (f:6abe)
 .player
 	ld de, W_PLAYERMOVENUM
 	ld a, [W_FLAGS_D733]
-	bit 0, a
-	ld a, [wccd9]
+	bit BIT_TEST_BATTLE, a
+	ld a, [wTestBattlePlayerSelectedMove]
 	jr nz, .selected
 	ld a, [wPlayerSelectedMove]
 .selected
