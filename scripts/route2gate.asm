@@ -17,7 +17,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	call GetItemName
 	ld hl, wcd6d
 	ld de, wOaksAideRewardItemName
-	ld bc, $000d
+	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
 	ld a, [hOaksAideResult]

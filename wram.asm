@@ -289,7 +289,7 @@ wOverworldMap:: ; c6e8
 
 wRedrawRowOrColumnSrcTiles:: ; cbfc
 ; the tiles of the row or column to be redrawn by RedrawRowOrColumn
-	ds 20 * 2
+	ds SCREEN_WIDTH * 2
 
 ; coordinates of the position of the cursor for the top menu item (id 0)
 wTopMenuItemY:: ; cc24

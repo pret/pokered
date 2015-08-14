@@ -17,7 +17,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	call GetItemName
 	ld hl, wcd6d
 	ld de, wOaksAideRewardItemName
-	ld bc, $000d
+	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
 	ld a, [hOaksAideResult]

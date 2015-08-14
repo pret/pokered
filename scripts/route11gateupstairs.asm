@@ -28,7 +28,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld h, d
 	ld l, e
 	ld de, wOaksAideRewardItemName
-	ld bc, $000d
+	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
 	ld a, [hOaksAideResult]
