@@ -22,7 +22,7 @@ VBlank::
 
 	call AutoBgMapTransfer
 	call VBlankCopyBgMap
-	call RedrawExposedScreenEdge
+	call RedrawRowOrColumn
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles

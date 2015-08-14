@@ -3184,7 +3184,7 @@ RedrawMapView: ; eedc (3:6edc)
 	add hl, de
 	dec a
 	jr nz, .calcWRAMAddrLoop
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
@@ -3196,11 +3196,11 @@ RedrawMapView: ; eedc (3:6edc)
 	or $98
 	dec c
 	jr nz, .calcVRAMAddrLoop
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]

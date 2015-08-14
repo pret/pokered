@@ -552,14 +552,14 @@ Trade_CopyCableTilesOffScreen: ; 414ae (10:54ae)
 ; continues when the screen is scrolled.
 	push hl
 	coord hl, 0, 4
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld a, h
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	ld c, 10
 	jp DelayFrames
 

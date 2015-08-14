@@ -104,6 +104,14 @@ dwCoord: MACRO
 	dw wTileMap + 20 * \2 + \1
 	ENDM
 
+;\1 = r
+;\2 = X
+;\3 = Y
+;\4 = map width
+overworldMapCoord: MACRO
+	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
+	ENDM
+
 ;\1 = Map Width
 ;\2 = Rows above (Y-blocks)
 ;\3 = X movement (X-blocks)

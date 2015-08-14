@@ -287,8 +287,8 @@ wTempPic::
 wOverworldMap:: ; c6e8
 	ds 1300
 
-wScreenEdgeTiles:: ; cbfc
-; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
+wRedrawRowOrColumnSrcTiles:: ; cbfc
+; the tiles of the row or column to be redrawn by RedrawRowOrColumn
 	ds 20 * 2
 
 ; coordinates of the position of the cursor for the top menu item (id 0)

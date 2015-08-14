@@ -181,12 +181,12 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 VermilionDock_EraseSSAnne: ; 1dc94 (7:5c94)
 ; Fill the area the S.S. Anne occupies in BG map 0 with water tiles.
 	ld hl, wVermilionDockTileMapBuffer
-	ld bc, (5 * 32) + SCREEN_WIDTH
+	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
 	ld a, $14 ; water tile
 	call FillMemory
-	ld hl, vBGMap0 + 10 * 32
+	ld hl, vBGMap0 + 10 * BG_MAP_WIDTH
 	ld de, wVermilionDockTileMapBuffer
-	ld bc, (6 * 32) / 16
+	ld bc, (6 * BG_MAP_WIDTH) / 16
 	call CopyVideoData
 
 ; Replace the blocks of the lower half of the ship with water blocks. This
@@ -194,7 +194,7 @@ VermilionDock_EraseSSAnne: ; 1dc94 (7:5c94)
 ; the blocks is unnecessary because the blocks the ship occupies are south of
 ; the player and won't be redrawn when the player automatically walks north and
 ; exits the map. This code could be removed without affecting anything.
-	ld hl, wOverworldMap + (5 + 3) + (2 + 3) * (VERMILION_DOCK_WIDTH + 6) ; (5, 2)
+	overworldMapCoord hl, 5, 2, VERMILION_DOCK_WIDTH
 	ld a, $d ; water block
 	ld [hli], a
 	ld [hli], a
