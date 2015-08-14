@@ -1872,9 +1872,6 @@ W_FBMODE:: ; d09e
 ; 02: move onto the next frame block with no delay and no cleaning OAM buffer
 ; 03: delay, but don't clean OAM buffer
 ; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
-; sprite data is written column by column, each byte contains 8 columns (one for ech bit)
-; for 2bpp sprites, pairs of two consecutive bytes (i.e. pairs of consecutive rows of sprite data)
-; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
 
 wLinkCableAnimBulgeToggle:: ; d09f
