@@ -622,15 +622,18 @@ wSafariBaitFactor:: ; cce9
 
 	ds 1
 
-wcceb:: ds 1 ; used to save the dvs of a mon when it uses transform
-wccec:: ds 1 ; also used with above case
+wTransformedEnemyMonOriginalDVs:: ; cceb
+	ds 2
 
 wMonIsDisobedient:: ds 1 ; cced
 
 wPlayerDisabledMoveNumber:: ds 1 ; ccee
 wEnemyDisabledMoveNumber:: ds 1 ; ccef
 
-wccf0:: ds 1 ; used as a check if a mon fainted
+wInHandlePlayerMonFainted:: ; ccf0
+; When running in the scope of HandlePlayerMonFainted, it equals 1.
+; When running in the scope of HandleEnemyMonFainted, it equals 0.
+	ds 1
 
 wPlayerUsedMove:: ds 1 ; ccf1
 wEnemyUsedMove:: ds 1 ; ccf2
@@ -643,8 +646,13 @@ wPartyFoughtCurrentEnemyFlags:: ; ccf5
 ; flags that indicate which party members have fought the current enemy mon
 	flag_array 6
 
-wccf6:: ds 1 ; used in some hp bar thing
-wPlayerMonMinimized:: ds 1 ; ccf7
+wLowHealthAlarmDisabled:: ; ccf6
+; Whether the low health alarm has been disabled due to the player winning the
+; battle.
+	ds 1
+
+wPlayerMonMinimized:: ; ccf7
+	ds 1
 
 	ds 13
 
@@ -1556,7 +1564,12 @@ W_TRAINERCLASS:: ; d031
 wTrainerPicPointer:: ; d033
 	ds 2
 	ds 1
-wd036:: ds 16 ; used as a temporary buffer to print "XXX learned YYY"
+
+wTempMoveNameBuffer:: ; d036
+
+wLearnMoveMonName:: ; d036
+; The name of the mon that is learning a move.
+	ds 16
 
 wTrainerBaseMoney:: ; d046
 ; 2-byte BCD number

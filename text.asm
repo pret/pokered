@@ -2686,7 +2686,7 @@ _PokemartAnythingElseText:: ; a2719 (28:6719)
 	done
 
 _LearnedMove1Text:: ; a273b (28:673b)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " learned"
 	line "@"
 	TX_RAM wcf4b
@@ -2705,7 +2705,7 @@ _AbandonLearningText:: ; a2771 (28:6771)
 	done
 
 _DidNotLearnText:: ; a278a (28:678a)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	db $0
 	line "did not learn"
 	cont "@"
@@ -2714,7 +2714,7 @@ _DidNotLearnText:: ; a278a (28:678a)
 	prompt
 
 _TryingToLearnText:: ; a27a4 (28:67a4)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " is"
 	line "trying to learn"
 	cont "@"
@@ -2722,7 +2722,7 @@ _TryingToLearnText:: ; a27a4 (28:67a4)
 	text "!"
 
 	para "But, @"
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	db $0
 	line "can't learn more"
 	cont "than 4 moves!"
@@ -2743,7 +2743,7 @@ _PoofText:: ; a2827 (28:6827)
 _ForgotAndText:: ; a2830 (28:6830)
 	db $0
 	para "@"
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " forgot"
 	line "@"
 	TX_RAM wcd6d

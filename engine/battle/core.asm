@@ -788,7 +788,7 @@ CheckNumAttacksLeft: ; 3c50f (f:450f)
 
 HandleEnemyMonFainted: ; 3c525 (f:4525)
 	xor a
-	ld [wccf0], a
+	ld [wInHandlePlayerMonFainted], a
 	call FaintEnemyPokemon
 	call AnyPartyAlive
 	ld a, d
@@ -888,9 +888,9 @@ FaintEnemyPokemon: ; 0x3c567
 	ld a, [hli]
 	or [hl]
 	jr nz, .playermonnotfaint
-	ld a, [wccf0]
-	and a
-	jr nz, .playermonnotfaint
+	ld a, [wInHandlePlayerMonFainted]
+	and a ; was this called by HandlePlayerMonFainted?
+	jr nz, .playermonnotfaint ; if so, don't call RemoveFaintedPlayerMon twice
 	call RemoveFaintedPlayerMon
 .playermonnotfaint
 	call AnyPartyAlive
@@ -950,11 +950,13 @@ EnemyMonFaintedText: ; 0x3c63e
 	db "@"
 
 EndLowHealthAlarm: ; 3c643 (f:4643)
+; This function is called when the player has the won the battle. It turns off
+; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
-	ld [wLowHealthAlarm], a ;disable low health alarm
+	ld [wLowHealthAlarm], a ; turn off low health alarm
 	ld [wChannelSoundIDs + CH4], a
 	inc a
-	ld [wccf6], a
+	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
 	ret
 
 AnyEnemyPokemonAliveCheck: ; 3c64f (f:464f)
@@ -1053,8 +1055,8 @@ PlayBattleVictoryMusic: ; 3c6ee (f:46ee)
 	jp Delay3
 
 HandlePlayerMonFainted: ; 3c700 (f:4700)
-	ld a, $1
-	ld [wccf0], a
+	ld a, 1
+	ld [wInHandlePlayerMonFainted], a
 	call RemoveFaintedPlayerMon
 	call AnyPartyAlive     ; test if any more mons are alive
 	ld a, d
@@ -1115,9 +1117,15 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	call SlideDownFaintedMonPic
 	ld a, $1
 	ld [wBattleResult], a
-	ld a, [wccf0]
-	and a
-	ret z
+
+; When the player mon and enemy mon faint at the same time and the fact that the
+; enemy mon has fainted is detected first (e.g. when the player mon knocks out
+; the enemy mon using a move with recoil and faints due to the recoil), don't
+; play the player mon's cry or show the "[player mon] fainted!" message.
+	ld a, [wInHandlePlayerMonFainted]
+	and a ; was this called by HandleEnemyMonFainted?
+	ret z ; if so, return
+
 	ld a, [wBattleMonSpecies]
 	call PlayCry
 	ld hl, PlayerMonFaintedText
@@ -1932,9 +1940,9 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld a, [hli]
 	or [hl]
 	jr z, .asm_3cdd9
-	ld a, [wccf6]
-	and a
-	ret nz
+	ld a, [wLowHealthAlarmDisabled]
+	and a ; has the alarm been disabled because the player has already won?
+	ret nz ; if so, return
 	ld a, [wPlayerHPBarColor]
 	cp HP_BAR_RED
 	jr z, .asm_3cde6
@@ -6201,7 +6209,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	call GetMonHeader
 	ld a, [W_ENEMYBATTSTATUS3]
 	bit Transformed, a ; is enemy mon transformed?
-	ld hl, wcceb ; copied DVs from when it used Transform
+	ld hl, wTransformedEnemyMonOriginalDVs ; original DVs before transforming
 	ld a, [hli]
 	ld b, [hl]
 	jr nz, .storeDVs
@@ -6879,7 +6887,7 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	ld [wEnemyMonPartyPos], a
 	ld a, $2
 	ld [W_ISINBATTLE], a
-	jp InitBattle_Common
+	jp _InitBattleCommon
 
 InitWildBattle: ; 3ef8b (f:6f8b)
 	ld a, $1
@@ -6931,7 +6939,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	predef CopyUncompressedPicToTilemap
 
 ; common code that executes after init battle code specific to trainer or wild battles
-InitBattle_Common: ; 3efeb (f:6feb)
+_InitBattleCommon: ; 3efeb (f:6feb)
 	ld b, SET_PAL_BATTLE_BLACK
 	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen

@@ -364,7 +364,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr .next16
 .next15
 	set Transformed,[hl]
-	ld hl,wcceb
+	ld hl,wTransformedEnemyMonOriginalDVs
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
 	ld a,[wEnemyMonDVs + 1]
@@ -2105,16 +2105,16 @@ ItemUseTMHM: ; e479 (3:6479)
 	push af
 .chooseMon
 	ld hl,wcf4b
-	ld de,wd036
+	ld de,wTempMoveNameBuffer
 	ld bc,14
-	call CopyData
+	call CopyData ; save the move name because DisplayPartyMenu will overwrite it
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	ld a,TMHM_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
-	ld hl,wd036
+	ld hl,wTempMoveNameBuffer
 	ld de,wcf4b
 	ld bc,14
 	call CopyData
