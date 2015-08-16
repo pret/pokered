@@ -55,3 +55,13 @@ In the **Cygwin terminal**:
 	cd pokered
 
 	make
+
+If you get an error with `easy_install pypng`, do the following:
+
+Reinstall **Cygwin** with the additional `curl` package.
+
+Run the following two commands in the cygwin shell
+
+	curl -O https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+	python ez_setup.py
+	
