@@ -33,7 +33,7 @@ DisplayDexRating: ; 44169 (11:4169)
 	callba PlayPokedexRatingSfx
 	jp WaitForTextScrollButtonPress
 .hallOfFame
-	ld de, wcc5b
+	ld de, wDexRatingNumMonsSeen
 	ld a, [hDexRatingNumMonsSeen]
 	ld [de], a
 	inc de

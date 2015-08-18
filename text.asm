@@ -100,7 +100,7 @@ _OaksAideHiText:: ; 80143 (20:4143)
 	cont "I'm supposed to"
 	cont "give you an"
 	cont "@"
-	TX_RAM wcc5b
+	TX_RAM wOaksAideRewardItemName
 	text "!"
 
 	para "So, ", $52, "! Have"
@@ -124,7 +124,7 @@ _OaksAideUhOhText:: ; 801e4 (20:41e4)
 	text " kinds"
 	line "if you want the"
 	cont "@"
-	TX_RAM wcc5b
+	TX_RAM wOaksAideRewardItemName
 	text "."
 	done
 
@@ -136,7 +136,7 @@ _OaksAideComeBackText:: ; 80250 (20:4250)
 	db $0
 	line "kinds, come back"
 	cont "for @"
-	TX_RAM wcc5b
+	TX_RAM wOaksAideRewardItemName
 	text "."
 	done
 
@@ -154,7 +154,7 @@ _OaksAideHereYouGoText:: ; 8028c (20:428c)
 _OaksAideGotItemText:: ; 802d9 (20:42d9)
 	text $52, " got the"
 	line "@"
-	TX_RAM wcc5b
+	TX_RAM wOaksAideRewardItemName
 	text "!@@"
 
 _OaksAideNoRoomText:: ; 802ec (20:42ec)
@@ -162,7 +162,7 @@ _OaksAideNoRoomText:: ; 802ec (20:42ec)
 	line "don't have any"
 	cont "room for the"
 	cont "@"
-	TX_RAM wcc5b
+	TX_RAM wOaksAideRewardItemName
 	text "."
 	done
 
@@ -363,10 +363,10 @@ _YeahText:: ; 88236 (22:4236)
 
 _DexSeenOwnedText:: ; 8823e (22:423e)
 	text "#DEX   Seen:@"
-	TX_NUM wcc5b, 1, 3
+	TX_NUM wDexRatingNumMonsSeen, 1, 3
 	db $0
 	line "         Owned:@"
-	TX_NUM wcc5c, 1, 3
+	TX_NUM wDexRatingNumMonsOwned, 1, 3
 	db "@"
 
 _DexRatingText:: ; 88267 (22:4267)
@@ -1467,7 +1467,7 @@ _BoostedText:: ; 89be1 (22:5be1)
 	text "a boosted"
 	cont "@@"
 _ExpPointsText:: ; 89bee (22:5bee)
-	TX_NUM wcf4b, 2, 4
+	TX_NUM wExpAmountGained, 2, 4
 	text " EXP. Points!"
 	prompt
 
@@ -2686,7 +2686,7 @@ _PokemartAnythingElseText:: ; a2719 (28:6719)
 	done
 
 _LearnedMove1Text:: ; a273b (28:673b)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " learned"
 	line "@"
 	TX_RAM wcf4b
@@ -2705,7 +2705,7 @@ _AbandonLearningText:: ; a2771 (28:6771)
 	done
 
 _DidNotLearnText:: ; a278a (28:678a)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	db $0
 	line "did not learn"
 	cont "@"
@@ -2714,7 +2714,7 @@ _DidNotLearnText:: ; a278a (28:678a)
 	prompt
 
 _TryingToLearnText:: ; a27a4 (28:67a4)
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " is"
 	line "trying to learn"
 	cont "@"
@@ -2722,7 +2722,7 @@ _TryingToLearnText:: ; a27a4 (28:67a4)
 	text "!"
 
 	para "But, @"
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	db $0
 	line "can't learn more"
 	cont "than 4 moves!"
@@ -2743,7 +2743,7 @@ _PoofText:: ; a2827 (28:6827)
 _ForgotAndText:: ; a2830 (28:6830)
 	db $0
 	para "@"
-	TX_RAM wd036
+	TX_RAM wLearnMoveMonName
 	text " forgot"
 	line "@"
 	TX_RAM wcd6d

@@ -555,10 +555,10 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr z,.savePointer1
 .pointerAdjustmentLoop1
 	ld a,[wWestConnectedMapWidth] ; width of connected map
-	add a,$06
+	add a,MAP_BORDER * 2
 	ld e,a
-	ld d,$00
-	ld b,$00
+	ld d,0
+	ld b,0
 	add hl,de
 	dec c
 	jr nz,.pointerAdjustmentLoop1
@@ -591,10 +591,10 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jr z,.savePointer2
 .pointerAdjustmentLoop2
 	ld a,[wEastConnectedMapWidth]
-	add a,$06
+	add a,MAP_BORDER * 2
 	ld e,a
-	ld d,$00
-	ld b,$00
+	ld d,0
+	ld b,0
 	add hl,de
 	dec c
 	jr nz,.pointerAdjustmentLoop2
@@ -659,8 +659,8 @@ CheckMapConnections:: ; 07ba (0:07ba)
 .loadNewMap ; load the connected map that was entered
 	call LoadMapHeader
 	call PlayDefaultMusicFadeOutCurrent
-	ld b,$09
-	call GoPAL_SET
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
 ; $C2XE without loading any tile patterns.
 	callba InitMapSprites
@@ -883,15 +883,15 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 	ld hl,wOverworldMap
 	ld a,[W_CURMAPWIDTH]
 	ld [hMapWidth],a
-	add a,$06 ; border (east and west)
+	add a,MAP_BORDER * 2 ; east and west
 	ld [hMapStride],a ; map width + border
-	ld b,$00
+	ld b,0
 	ld c,a
 ; make space for north border (next 3 lines)
 	add hl,bc
 	add hl,bc
 	add hl,bc
-	ld c,$03
+	ld c,MAP_BORDER
 	add hl,bc ; this puts us past the (west) border
 	ld a,[W_MAPDATAPTR] ; tile map pointer
 	ld e,a
@@ -995,7 +995,7 @@ LoadTileBlockMap:: ; 09fc (0:09fc)
 	ret
 
 LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
-	ld c,$03
+	ld c,MAP_BORDER
 .loop
 	push de
 	push hl
@@ -1016,7 +1016,7 @@ LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 	inc h
 .noCarry1
 	ld a,[W_CURMAPWIDTH]
-	add a,$06
+	add a,MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry2
@@ -1029,7 +1029,7 @@ LoadNorthSouthConnectionsTileMap:: ; 0ade (0:0ade)
 LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	push hl
 	push de
-	ld c,$03
+	ld c,MAP_BORDER
 .innerLoop
 	ld a,[hli]
 	ld [de],a
@@ -1045,7 +1045,7 @@ LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 	inc h
 .noCarry1
 	ld a,[W_CURMAPWIDTH]
-	add a,$06
+	add a,MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry2
@@ -1387,7 +1387,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 ; update tile block map pointer to next row's address
 	pop de
 	ld a,[W_CURMAPWIDTH]
-	add a,$06
+	add a,MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry
@@ -1418,7 +1418,7 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld bc,$0002
 	add hl,bc
 .copyToVisibleAreaBuffer
-	coord de, 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	coord de, 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
 	ld b, SCREEN_HEIGHT
 .rowLoop2
 	ld c, SCREEN_WIDTH
@@ -1662,7 +1662,7 @@ MoveTileBlockMapPointerWest:: ; 0e6f (0:0e6f)
 	ret
 
 MoveTileBlockMapPointerSouth:: ; 0e79 (0:0e79)
-	add a,$06
+	add a,MAP_BORDER * 2
 	ld b,a
 	ld a,[de]
 	add b
@@ -1675,7 +1675,7 @@ MoveTileBlockMapPointerSouth:: ; 0e79 (0:0e79)
 	ret
 
 MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
-	add a,$06
+	add a,MAP_BORDER * 2
 	ld b,a
 	ld a,[de]
 	sub b
@@ -1692,17 +1692,17 @@ MoveTileBlockMapPointerNorth:: ; 0e85 (0:0e85)
 
 ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 	coord hl, 0, 0
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	ld a,[wMapViewVRAMPointer]
-	ld [H_SCREENEDGEREDRAWADDR],a
+	ld [hRedrawRowOrColumnDest],a
 	ld a,[wMapViewVRAMPointer + 1]
-	ld [H_SCREENEDGEREDRAWADDR + 1],a
-	ld a,REDRAWROW
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnDest + 1],a
+	ld a,REDRAW_ROW
+	ld [hRedrawRowOrColumnMode],a
 	ret
 
-CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
-	ld de,wScreenEdgeTiles
+CopyToRedrawRowOrColumnSrcTiles:: ; 0ea6 (0:0ea6)
+	ld de,wRedrawRowOrColumnSrcTiles
 	ld c,2 * SCREEN_WIDTH
 .loop
 	ld a,[hli]
@@ -1714,7 +1714,7 @@ CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 
 ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	coord hl, 0, 16
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	ld a,[wMapViewVRAMPointer]
 	ld l,a
 	ld a,[wMapViewVRAMPointer + 1]
@@ -1724,11 +1724,11 @@ ScheduleSouthRowRedraw:: ; 0eb2 (0:0eb2)
 	ld a,h
 	and a,$03
 	or a,$98
-	ld [H_SCREENEDGEREDRAWADDR + 1],a
+	ld [hRedrawRowOrColumnDest + 1],a
 	ld a,l
-	ld [H_SCREENEDGEREDRAWADDR],a
-	ld a,REDRAWROW
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnDest],a
+	ld a,REDRAW_ROW
+	ld [hRedrawRowOrColumnMode],a
 	ret
 
 ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
@@ -1742,15 +1742,15 @@ ScheduleEastColumnRedraw:: ; 0ed3 (0:0ed3)
 	add a,18
 	and a,$1f
 	or b
-	ld [H_SCREENEDGEREDRAWADDR],a
+	ld [hRedrawRowOrColumnDest],a
 	ld a,[wMapViewVRAMPointer + 1]
-	ld [H_SCREENEDGEREDRAWADDR + 1],a
-	ld a,REDRAWCOL
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnDest + 1],a
+	ld a,REDRAW_COL
+	ld [hRedrawRowOrColumnMode],a
 	ret
 
 ScheduleColumnRedrawHelper:: ; 0ef2 (0:0ef2)
-	ld de,wScreenEdgeTiles
+	ld de,wRedrawRowOrColumnSrcTiles
 	ld c,SCREEN_HEIGHT
 .loop
 	ld a,[hli]
@@ -1773,11 +1773,11 @@ ScheduleWestColumnRedraw:: ; 0f08 (0:0f08)
 	coord hl, 0, 0
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
-	ld [H_SCREENEDGEREDRAWADDR],a
+	ld [hRedrawRowOrColumnDest],a
 	ld a,[wMapViewVRAMPointer + 1]
-	ld [H_SCREENEDGEREDRAWADDR + 1],a
-	ld a,REDRAWCOL
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnDest + 1],a
+	ld a,REDRAW_COL
+	ld [hRedrawRowOrColumnMode],a
 	ret
 
 ; function to write the tiles that make up a tile block to memory
@@ -2343,8 +2343,8 @@ LoadMapData:: ; 1241 (0:1241)
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
 	call EnableLCD
-	ld b,$09
-	call GoPAL_SET
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a,[wd732]
 	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp

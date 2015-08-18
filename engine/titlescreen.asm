@@ -134,8 +134,8 @@ ENDC
 	call LoadScreenTilesFromBuffer2
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
-	ld b, $6
-	call GoPAL_SET
+	ld b, SET_PAL_TITLE_SCREEN
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
 	ld [rOBP0], a
@@ -215,7 +215,7 @@ ENDC
 	ld [wNewSoundID], a
 	call PlaySound
 	xor a
-	ld [wcc5b], a
+	ld [wUnusedCC5B], a
 
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop

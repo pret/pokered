@@ -450,7 +450,7 @@ DisplayDepositWithdrawMenu: ; 2174b (8:574b)
 	predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadGBPal
 	jr .loop
 

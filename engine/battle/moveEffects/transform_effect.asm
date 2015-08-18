@@ -67,12 +67,12 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .next
-; save enemy mon DVs in wcceb/wccec (enemy turn only)
+; save enemy mon DVs at wTransformedEnemyMonOriginalDVs
 	ld a, [de]
-	ld [wcceb], a
+	ld [wTransformedEnemyMonOriginalDVs], a
 	inc de
 	ld a, [de]
-	ld [wccec], a
+	ld [wTransformedEnemyMonOriginalDVs + 1], a
 	dec de
 .next
 ; DVs

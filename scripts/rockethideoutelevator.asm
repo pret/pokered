@@ -35,7 +35,7 @@ RocketHideoutElevatorScript_45741: ; 45741 (11:5741)
 	ld hl, RocketHideoutElavatorFloors
 	call LoadItemList
 	ld hl, RocketHideoutElevatorWarpMaps
-	ld de, wcc5b
+	ld de, wElevatorWarpMaps
 	ld bc, RocketHideoutElevatorWarpMapsEnd - RocketHideoutElevatorWarpMaps
 	call CopyData
 	ret

@@ -18,7 +18,7 @@ OaksAideScript: ; 0x59035
 .giveItem
 	ld hl, OaksAideHereYouGoText
 	call PrintText
-	ld a, [hOaksAideItemReward]
+	ld a, [hOaksAideRewardItem]
 	ld b, a
 	ld c, 1
 	call GiveItem

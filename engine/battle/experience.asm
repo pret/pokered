@@ -76,11 +76,11 @@ GainExperience: ; 5524f (15:524f)
 	ld b, [hl]
 	ld a, [wPlayerID + 1]
 	cp b
-	ld a, $0
+	ld a, 0
 	jr z, .next
 .tradedMon
 	call BoostExp ; traded mon exp boost
-	ld a, $1
+	ld a, 1
 .next
 	ld [wGainBoostedExp], a
 	ld a, [W_ISINBATTLE]
@@ -92,12 +92,12 @@ GainExperience: ; 5524f (15:524f)
 ; add the gained exp to the party mon's exp
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 3]
-	ld [wcf4c], a
+	ld [wExpAmountGained + 1], a
 	add b
 	ld [hld], a
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 2]
-	ld [wcf4b], a
+	ld [wExpAmountGained], a
 	adc b
 	ld [hl], a
 	jr nc, .noCarry

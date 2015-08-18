@@ -297,7 +297,7 @@ ErasePartyMenuCursors: ; 132ed (4:72ed)
 
 ItemMenuLoop: ; 132fc (4:72fc)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 
 StartMenu_Item: ; 13302 (4:7302)
 	ld a,[wLinkState]
@@ -506,14 +506,14 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	ld [hTilesetType],a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
-	ld b,$0d
-	call GoPAL_SET
+	ld b, SET_PAL_TRAINER_CARD
+	call RunPaletteCommand
 	call GBPalNormal
 	call WaitForTextScrollButtonPress ; wait for button press
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call ReloadMapData
 	call LoadGBPal
 	pop af

@@ -5,15 +5,15 @@ AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
 	inc a
 	jr GetAnimationSpeed
 
-; wcf1f contains the party mon's health bar colors
+; wPartyMenuHPBarColors contains the party mon's health bar colors
 ; 0: green
 ; 1: yellow
 ; 2: red
 AnimatePartyMon: ; 716ff (1c:56ff)
-	ld hl, wcf1f
+	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 
@@ -42,7 +42,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	jp DelayFrame
 .resetSprites
 	push bc
-	ld hl, wcc5b
+	ld hl, wMonPartySpritesSavedOAM
 	ld de, wOAMBuffer
 	ld bc, $60
 	call CopyData
@@ -86,7 +86,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 ; that each frame lasts for green HP, yellow HP, and red HP in order.
 ; On the naming screen, the yellow HP speed is always used.
 PartyMonSpeeds: ; 71769 (1c:5769)
-	db $05,$10,$20
+	db 5, 16, 32
 
 LoadMonPartySpriteGfx: ; 7176c (1c:576c)
 ; Load mon party sprite tile patterns into VRAM during V-blank.
@@ -372,7 +372,7 @@ UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
 
 WriteMonPartySpriteOAM: ; 718c3 (1c:58c3)
 ; Write the OAM blocks for the first animation frame into the OAM buffer and
-; make a copy at wcc5b.
+; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
 	ld h, wOAMBuffer / $100
@@ -392,7 +392,7 @@ WriteMonPartySpriteOAM: ; 718c3 (1c:58c3)
 ; we can flip back to it from the second frame by copying it back.
 .makeCopy
 	ld hl, wOAMBuffer
-	ld de, wcc5b
+	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
 	jp CopyData
 

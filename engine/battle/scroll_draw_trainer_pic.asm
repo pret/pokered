@@ -3,8 +3,8 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 ; the screen from the right.
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld b, $1
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
 	callab _LoadTrainerPic
 	coord hl, 19, 0
 	ld c, $0

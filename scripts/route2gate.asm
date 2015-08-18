@@ -12,12 +12,12 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld a, 10 ; pokemon needed
 	ld [hOaksAideRequirement], a
 	ld a, HM_05 ; oak's aide reward
-	ld [hOaksAideItemReward], a
+	ld [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
 	ld hl, wcd6d
-	ld de, wcc5b
-	ld bc, $000d
+	ld de, wOaksAideRewardItemName
+	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
 	ld a, [hOaksAideResult]

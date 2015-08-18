@@ -314,8 +314,8 @@ LoadTownMap: ; 7109b (1c:509b)
 	jr .nextTile
 .done
 	call EnableLCD
-	ld b, $2
-	call GoPAL_SET
+	ld b, SET_PAL_TOWN_MAP
+	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
 	xor a
@@ -338,7 +338,7 @@ ExitTownMap: ; 711ab (1c:51ab)
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	call UpdateSprites
-	jp GoPAL_SET_CF1C
+	jp RunDefaultPaletteCommand
 
 DrawPlayerOrBirdSprite: ; 711c4 (1c:51c4)
 ; a = map number

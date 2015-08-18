@@ -121,10 +121,10 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; "TYPE1/"
 	coord hl, 11, 3
 	predef DrawHP
-	ld hl, wcf25
+	ld hl, wStatusScreenHPBarColor
 	call GetHealthBarColor
-	ld b, $3
-	call GoPAL_SET ; SGB palette
+	ld b, SET_PAL_STATUS_SCREEN
+	call RunPaletteCommand
 	coord hl, 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition

@@ -3156,7 +3156,7 @@ RedrawMapView: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -3184,7 +3184,7 @@ RedrawMapView: ; eedc (3:6edc)
 	add hl, de
 	dec a
 	jr nz, .calcWRAMAddrLoop
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
@@ -3196,11 +3196,11 @@ RedrawMapView: ; eedc (3:6edc)
 	or $98
 	dec c
 	jr nz, .calcVRAMAddrLoop
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]
@@ -4508,21 +4508,23 @@ InitializeEmptyList:
 	ret
 
 
-IsItemInBag_: ; f8a5 (3:78a5)
+GetQuantityOfItemInBag: ; f8a5 (3:78a5)
+; In: b = item ID
+; Out: b = how many of that item are in the bag
 	call GetPredefRegisters
 	ld hl, wNumBagItems
-.asm_f8ab
+.loop
 	inc hl
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f8b7
+	jr z, .notInBag
 	cp b
-	jr nz, .asm_f8ab
+	jr nz, .loop
 	ld a, [hl]
 	ld b, a
 	ret
-.asm_f8b7
-	ld b, $0
+.notInBag
+	ld b, 0
 	ret
 
 FindPathToPlayer: ; f8ba (3:78ba)

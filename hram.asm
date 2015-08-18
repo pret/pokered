@@ -242,12 +242,12 @@ H_VBCOPYDOUBLEDEST EQU $FFCE
 ; 00 = no redraw
 ; 01 = redraw column
 ; 02 = redraw row
-H_SCREENEDGEREDRAW EQU $FFD0
+hRedrawRowOrColumnMode EQU $FFD0
 
-REDRAWCOL EQU 1
-REDRAWROW EQU 2
+REDRAW_COL EQU 1
+REDRAW_ROW EQU 2
 
-H_SCREENEDGEREDRAWADDR EQU $FFD1
+hRedrawRowOrColumnDest EQU $FFD1
 
 hRandomAdd EQU $FFD3
 hRandomSub EQU $FFD4
@@ -269,7 +269,7 @@ hMovingBGTilesCounter1 EQU $FFD8
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
-hFossilCounter EQU $FFDB
+hItemCounter EQU $FFDB
 
 hGymGateIndex EQU $FFDB
 
@@ -285,7 +285,7 @@ hDexRatingNumMonsOwned EQU $FFDC
 hOaksAideResult       EQU $FFDB
 
 hOaksAideRequirement  EQU $FFDB ; required number of owned mons
-hOaksAideItemReward   EQU $FFDC
+hOaksAideRewardItem   EQU $FFDC
 hOaksAideNumMonsOwned EQU $FFDD
 
 hItemToRemoveID    EQU $FFDB
@@ -316,6 +316,8 @@ H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 hFlags_0xFFF6 EQU $FFF6
 
 hFieldMoveMonMenuTopMenuItemX EQU $FFF7
+
+hDisableJoypadPolling EQU $FFF9
 
 hJoyInput EQU $FFF8
 

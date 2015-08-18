@@ -287,9 +287,9 @@ wTempPic::
 wOverworldMap:: ; c6e8
 	ds 1300
 
-wScreenEdgeTiles:: ; cbfc
-; the tiles of the row or column to be redrawn by RedrawExposedScreenEdge
-	ds 20 * 2
+wRedrawRowOrColumnSrcTiles:: ; cbfc
+; the tiles of the row or column to be redrawn by RedrawRowOrColumn
+	ds SCREEN_WIDTH * 2
 
 ; coordinates of the position of the cursor for the top menu item (id 0)
 wTopMenuItemY:: ; cc24
@@ -477,6 +477,29 @@ wNPCMovementScriptBank:: ; cc58
 
 	ds 2
 
+wUnusedCC5B:: ; cc5b
+
+wVermilionDockTileMapBuffer:: ; cc5b
+; 180 bytes
+
+wOaksAideRewardItemName:: ; cc5b
+
+wDexRatingNumMonsSeen:: ; cc5b
+
+wFilteredBagItems:: ; cc5b
+; List of bag items that has been filtered to a certain type of items,
+; such as drinks or fossils.
+
+wElevatorWarpMaps:: ; cc5b
+
+wMonPartySpritesSavedOAM:: ; cc5b
+; Saved copy of OAM for the first frame of the animation to make it easy to
+; flip back from the second frame.
+; $60 bytes
+
+wTrainerCardBlkPacket:: ; cc5b
+; $40 bytes
+
 wSlotMachineSevenAndBarModeChance:: ; cc5b
 ; If a random number greater than this value is generated, then the player is
 ; allowed to have three 7 symbols or bar symbols line up.
@@ -490,10 +513,13 @@ wAnimationType:: ; cc5b
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
 
 wNPCMovementDirections:: ; cc5b
+	ds 1
 
-wcc5b:: ds 1 ; these upcoming values below are miscellaneous storage values
-wcc5c:: ds 1 ; used in pokedex evaluation as well
-wcc5d:: ds 1 ; used in pokedex evaluation
+wDexRatingNumMonsOwned:: ; cc5c
+	ds 1
+
+wDexRatingText:: ; cc5d
+	ds 1
 
 wSlotMachineSavedROMBank:: ; cc5e
 ; ROM back to return to when the player is done with the slot machine
@@ -551,7 +577,12 @@ wPlayerSubstituteHP:: ; ccd7
 wEnemySubstituteHP:: ; ccd8
 	ds 1
 
-wccd9:: ds 2 ; used in InitBattleVariablesLoop (written to after the loop is finished)
+wTestBattlePlayerSelectedMove:: ; ccd9
+; The player's selected move during a test battle.
+; InitBattleVariables sets it to the move Pound.
+	ds 1
+
+	ds 1
 
 wMoveMenuType:: ; ccdb
 ; 0=regular, 1=mimic, 2=above message box (relearn, heal pp..)
@@ -591,15 +622,18 @@ wSafariBaitFactor:: ; cce9
 
 	ds 1
 
-wcceb:: ds 1 ; used to save the dvs of a mon when it uses transform
-wccec:: ds 1 ; also used with above case
+wTransformedEnemyMonOriginalDVs:: ; cceb
+	ds 2
 
 wMonIsDisobedient:: ds 1 ; cced
 
 wPlayerDisabledMoveNumber:: ds 1 ; ccee
 wEnemyDisabledMoveNumber:: ds 1 ; ccef
 
-wccf0:: ds 1 ; used as a check if a mon fainted
+wInHandlePlayerMonFainted:: ; ccf0
+; When running in the scope of HandlePlayerMonFainted, it equals 1.
+; When running in the scope of HandleEnemyMonFainted, it equals 0.
+	ds 1
 
 wPlayerUsedMove:: ds 1 ; ccf1
 wEnemyUsedMove:: ds 1 ; ccf2
@@ -612,8 +646,13 @@ wPartyFoughtCurrentEnemyFlags:: ; ccf5
 ; flags that indicate which party members have fought the current enemy mon
 	flag_array 6
 
-wccf6:: ds 1 ; used in some hp bar thing
-wPlayerMonMinimized:: ds 1 ; ccf7
+wLowHealthAlarmDisabled:: ; ccf6
+; Whether the low health alarm has been disabled due to the player winning the
+; battle.
+	ds 1
+
+wPlayerMonMinimized:: ; ccf7
+	ds 1
 
 	ds 13
 
@@ -720,7 +759,11 @@ wInGameTradeReceiveMonSpecies::
 
 wNPCMovementDirections2Index:: ; cd37
 
-wcd37:: ds 1 ; used in list menus, like the fossil lab menu or drink girl menu. Also used in link menu.
+wUnusedCD37:: ; cd37
+
+wFilteredBagItemsCount:: ; cd37
+; number of items in wFilteredBagItems list
+	ds 1
 
 wSimulatedJoypadStatesIndex:: ; cd38
 ; the next simulated joypad state is at wSimulatedJoypadStatesEnd plus this value minus 1
@@ -1283,19 +1326,49 @@ wOnSGB:: ; cf1b
 ; if running on SGB, it's 1, else it's 0
 	ds 1
 
-wcf1c:: ds 1 ; used with sgb palettes
-wcf1d:: ds 1 ; used when displaying palettes for Pokemon
-wcf1e:: ds 1 ; used to display palettes for HP bar
-wcf1f:: ds 6 ; used to display HP bars in Pokemon Menu (probably palettes)
-wcf25:: ds 8 ; used to display HP bar for Pokemon Status Screen (probably palettes too)
-wcf2d:: ds 1 ; also used to display HP bar for Pokemon Menu (something about HP colour)
-wcf2e:: ds 2 ; more HP bar palette stuff.
-wcf30:: ds 7 ; used with palettes (apparently for Pokedex)
-wcf37:: ds 20 ; used with palletes too (used for Party Menu)
-wcf4b:: ds 1 ; storage buffer for various strings
-wcf4c:: ds 1 ; used with displaying EXP value, probably also overflowed with wcf4b
+wDefaultPaletteCommand:: ; cf1c
+	ds 1
+
+wPlayerHPBarColor:: ; cf1d
+
+wWholeScreenPaletteMonSpecies:: ; cf1d
+; species of the mon whose palette is used for the whole screen
+	ds 1
+
+wEnemyHPBarColor:: ; cf1e
+	ds 1
+
+; 0: green
+; 1: yellow
+; 2: red
+wPartyMenuHPBarColors:: ; cf1f
+	ds 6
+
+wStatusScreenHPBarColor:: ; cf25
+	ds 1
+
+	ds 7
+
+wCopyingSGBTileData:: ; c2fd
+
+wWhichPartyMenuHPBar:: ; cf2d
+
+wPalPacket:: ; cf2d
+	ds 1
+
+wPartyMenuBlkPacket:: ; cf2e
+; $30 bytes
+	ds 29
+
+wExpAmountGained:: ; cf4b
+; 2-byte big-endian number
+; the total amount of exp a mon gained
+
+wcf4b:: ds 2 ; storage buffer for various strings
+
 wGainBoostedExp:: ; cf4d
 	ds 1
+
 	ds 17
 
 wGymCityName:: ; cf5f
@@ -1491,7 +1564,12 @@ W_TRAINERCLASS:: ; d031
 wTrainerPicPointer:: ; d033
 	ds 2
 	ds 1
-wd036:: ds 16 ; used as a temporary buffer to print "XXX learned YYY"
+
+wTempMoveNameBuffer:: ; d036
+
+wLearnMoveMonName:: ; d036
+; The name of the mon that is learning a move.
+	ds 16
 
 wTrainerBaseMoney:: ; d046
 ; 2-byte BCD number
@@ -1812,9 +1890,6 @@ W_FBMODE:: ; d09e
 ; 02: move onto the next frame block with no delay and no cleaning OAM buffer
 ; 03: delay, but don't clean OAM buffer
 ; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
-; sprite data is written column by column, each byte contains 8 columns (one for ech bit)
-; for 2bpp sprites, pairs of two consecutive bytes (i.e. pairs of consecutive rows of sprite data)
-; contain the upper and lower bit of each of the 8 pixels, respectively
 	ds 1
 
 wLinkCableAnimBulgeToggle:: ; d09f
@@ -2894,6 +2969,7 @@ wd732:: ; d732
 	ds 1
 
 W_FLAGS_D733:: ; d733
+; bit 0: running a test battle
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1

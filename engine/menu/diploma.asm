@@ -55,8 +55,8 @@ DisplayDiploma: ; 566e2 (15:66e2)
 
 	call EnableLCD
 	callba LoadTrainerInfoTextBoxTiles
-	ld b, $8
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
 	ld a, $90

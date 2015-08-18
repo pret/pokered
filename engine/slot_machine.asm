@@ -21,8 +21,8 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call GBPalWhiteOutWithDelay3
 	call LoadSlotMachineTiles
 	call LoadFontTilePatterns
-	ld b, $5
-	call GoPAL_SET
+	ld b, SET_PAL_SLOTS
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, $e4
 	ld [rOBP0], a
@@ -41,7 +41,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call GBPalWhiteOutWithDelay3
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
 .done

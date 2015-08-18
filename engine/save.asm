@@ -644,7 +644,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
@@ -653,7 +653,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld de, sHallOfFame
 	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	call HallOfFame_Copy
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
@@ -663,7 +663,7 @@ LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld bc, HOF_TEAM
 	ld a, [wHoFTeamIndex]
 	call AddNTimes
-	ld de, wcc5b
+	ld de, wHallOfFame
 	ld bc, HOF_TEAM
 	; fallthrough
 

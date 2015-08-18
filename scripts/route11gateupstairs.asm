@@ -22,13 +22,13 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, 30 ; pokemon needed
 	ld [hOaksAideRequirement], a
 	ld a, ITEMFINDER ; oak's aide reward
-	ld [hOaksAideItemReward], a
+	ld [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
 	ld h, d
 	ld l, e
-	ld de, wcc5b
-	ld bc, $000d
+	ld de, wOaksAideRewardItemName
+	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
 	ld a, [hOaksAideResult]
