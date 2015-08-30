@@ -2752,14 +2752,14 @@ CanMoveBouldersText: ; cdbb (3:4dbb)
 	db "@"
 
 IsSurfingAllowed: ; cdc0 (3:4dc0)
-; Returns whether surfing is allowed in bit of d728.
+; Returns whether surfing is allowed in bit 1 of wd728.
 ; Surfing isn't allowed on the Cycling Road or in the lowest level of the
 ; Seafoam Islands before the current has been slowed with boulders.
 	ld hl, wd728
 	set 1, [hl]
 	ld a, [wd732]
 	bit 5, a
-	jr nz, .asm_cdec
+	jr nz, .forcedToRideBike
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ret nz
@@ -2772,7 +2772,7 @@ IsSurfingAllowed: ; cdc0 (3:4dc0)
 	res 1, [hl]
 	ld hl, CurrentTooFastText
 	jp PrintText
-.asm_cdec
+.forcedToRideBike
 	ld hl, wd728
 	res 1, [hl]
 	ld hl, CyclingIsFunText
@@ -2802,7 +2802,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	push de
 	push hl
 	push hl
-	ld d,50 ; PC box can hold 50 items
+	ld d,PC_ITEM_CAPACITY ; how many items the PC can hold
 	ld a,wNumBagItems & $FF
 	cp l
 	jr nz,.checkIfInventoryFull
@@ -2810,7 +2810,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	cp h
 	jr nz,.checkIfInventoryFull
 ; if the destination is the bag
-	ld d,20 ; bag can hold 20 items
+	ld d,BAG_ITEM_CAPACITY ; how many items the bag can hold
 .checkIfInventoryFull
 	ld a,[hl]
 	sub d
