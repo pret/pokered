@@ -71,7 +71,7 @@ ViridianCityScript1: ; 19062 (6:5062)
 	ld [wListScrollOffset], a
 
 	; set up battle for Old Man
-	ld a, $1
+	ld a, BATTLE_TYPE_OLD_MAN
 	ld [W_BATTLETYPE], a
 	ld a, 5
 	ld [W_CURENEMYLVL], a

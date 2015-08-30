@@ -1584,7 +1584,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	call IsGhostBattle
 	jp z, .canEscape ; jump if it's a ghost battle
 	ld a, [W_BATTLETYPE]
-	cp $2
+	cp BATTLE_TYPE_SAFARI
 	jp z, .canEscape ; jump if it's a safari battle
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -2094,7 +2094,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	call SaveScreenTilesToBuffer1
 .nonstandardbattle
 	ld a, [W_BATTLETYPE]
-	cp $2 ; safari
+	cp BATTLE_TYPE_SAFARI
 	ld a, BATTLE_MENU_TEMPLATE
 	jr nz, .menuselected
 	ld a, SAFARI_BATTLE_MENU_TEMPLATE
@@ -2144,7 +2144,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jr .rightColumn
 .leftColumn ; put cursor in left column of menu
 	ld a, [W_BATTLETYPE]
-	cp $2
+	cp BATTLE_TYPE_SAFARI
 	ld a, " "
 	jr z, .safariLeftColumn
 ; put cursor in left column for normal battle menu (i.e. when it's not a Safari battle)
@@ -2177,7 +2177,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jr .AButtonPressed ; the A button was pressed
 .rightColumn ; put cursor in right column of menu
 	ld a, [W_BATTLETYPE]
-	cp $2
+	cp BATTLE_TYPE_SAFARI
 	ld a, " "
 	jr z, .safariRightColumn
 ; put cursor in right column for normal battle menu (i.e. when it's not a Safari battle)
@@ -2214,7 +2214,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .AButtonPressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a, [W_BATTLETYPE]
-	cp $2 ; is it a Safari battle?
+	cp BATTLE_TYPE_SAFARI
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a
 	jr z, .handleMenuSelection
@@ -2236,7 +2236,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jr nz, .upperLeftMenuItemWasNotSelected
 ; the upper left menu item was selected
 	ld a, [W_BATTLETYPE]
-	cp $2
+	cp BATTLE_TYPE_SAFARI
 	jr z, .throwSafariBallWasSelected
 ; the "FIGHT" menu was selected
 	xor a
@@ -2264,7 +2264,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 .notLinkBattle
 	call SaveScreenTilesToBuffer2
 	ld a, [W_BATTLETYPE]
-	cp $2 ; is it a safari battle?
+	cp BATTLE_TYPE_SAFARI
 	jr nz, BagWasSelected
 
 ; bait was selected
@@ -2333,7 +2333,7 @@ UseBagItem:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld a, [W_BATTLETYPE]
-	cp $2 ; is it a safari battle?
+	cp BATTLE_TYPE_SAFARI
 	jr z, .checkIfMonCaptured
 
 	ld a, [wActionResultOrTookBattleTurn]
@@ -2355,7 +2355,7 @@ UseBagItem:
 	jr nz, .returnAfterCapturingMon
 
 	ld a, [W_BATTLETYPE]
-	cp $2 ; is it a safari battle?
+	cp BATTLE_TYPE_SAFARI
 	jr z, .returnAfterUsingItem_NoCapture
 ; not a safari battle
 	call LoadScreenTilesFromBuffer1
@@ -2386,7 +2386,7 @@ PartyMenuOrRockOrRun:
 ; party menu or rock was selected
 	call SaveScreenTilesToBuffer2
 	ld a, [W_BATTLETYPE]
-	cp $2 ; is it a safari battle?
+	cp BATTLE_TYPE_SAFARI
 	jr nz, .partyMenuWasSelected
 ; safari battle
 	ld a, SAFARI_ROCK
