@@ -901,10 +901,10 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld hl,W_PLAYERBATTSTATUS3
 	res BadlyPoisoned,[hl] ; heal Toxic status
 	pop hl
-	ld bc,30
+	ld bc,wPartyMon1Stats - wPartyMon1Status
 	add hl,bc ; hl now points to party stats
-	ld de,wBattleMonMaxHP
-	ld bc,10
+	ld de,wBattleMonStats
+	ld bc,NUM_STATS * 2
 	call CopyData ; copy party stats to in-battle stat data
 	predef DoubleOrHalveSelectedStats
 	jp .doneHealing
@@ -959,7 +959,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 .compareCurrentHPToMaxHP
 	push hl
 	push bc
-	ld bc,32
+	ld bc,wPartyMon1MaxHP - (wPartyMon1HP + 1)
 	add hl,bc ; hl now points to max HP
 	pop bc
 	ld a,[hli]
@@ -991,7 +991,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wChannelSoundIDs + CH4],a
 	push hl
 	push de
-	ld bc,32
+	ld bc,wPartyMon1MaxHP - (wPartyMon1HP + 1)
 	add hl,bc ; hl now points to max HP
 	ld a,[hli]
 	ld [wHPBarMaxHP+1],a
@@ -1024,7 +1024,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [H_DIVISOR],a
 	ld b,2 ; number of bytes
 	call Divide ; get 1/5 of max HP of pokemon that used Softboiled
-	ld bc,wPartyMon1HP - wPartyMon1MaxHP
+	ld bc,(wPartyMon1HP + 1) - (wPartyMon1MaxHP + 1)
 	add hl,bc ; hl now points to LSB of current HP of pokemon that used Softboiled
 ; subtract 1/5 of max HP from current HP of pokemon that used Softboiled
 	ld a,[H_QUOTIENT + 3]
@@ -1103,7 +1103,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	inc hl
 	ld d,h
 	ld e,l ; de now points to current HP
-	ld hl,33
+	ld hl,(wPartyMon1MaxHP + 1) - (wPartyMon1HP + 1)
 	add hl,de ; hl now points to max HP
 	ld a,[wcf91]
 	cp a,REVIVE
@@ -1150,7 +1150,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wcf91]
 	cp a,FULL_RESTORE
 	jr nz,.updateInBattleData
-	ld bc,-31
+	ld bc,wPartyMon1Status - (wPartyMon1MaxHP + 1)
 	add hl,bc
 	xor a
 	ld [hl],a ; remove the status ailment in the party data
@@ -1173,7 +1173,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 .calculateHPBarCoords
 	ld hl,wOAMBuffer + $90
-	ld bc,2 * 20
+	ld bc,2 * SCREEN_WIDTH
 	inc d
 .calculateHPBarCoordsLoop
 	add hl,bc
@@ -1253,7 +1253,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hl]
 	ld [wd0b5],a
 	ld [wd11e],a
-	ld bc,33
+	ld bc,wPartyMon1Level - wPartyMon1
 	add hl,bc ; hl now points to level
 	ld a,[hl] ; a = level
 	ld [W_CURENEMYLVL],a ; store level
@@ -1270,7 +1270,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push hl
 	sub a,HP_UP
 	add a
-	ld bc,17
+	ld bc,wPartyMon1HPExp - wPartyMon1
 	add hl,bc
 	add l
 	ld l,a
@@ -1318,17 +1318,17 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call PrintText
 	jp GBPalWhiteOut
 .recalculateStats
-	ld bc,34
+	ld bc,wPartyMon1Stats - wPartyMon1
 	add hl,bc
 	ld d,h
 	ld e,l ; de now points to stats
-	ld bc,-18
-	add hl,bc ; hl now points to byte 3 of experience
+	ld bc,(wPartyMon1Exp + 2) - wPartyMon1Stats
+	add hl,bc ; hl now points to LSB of experience
 	ld b,1
 	jp CalcStats ; recalculate stats
 .useRareCandy
 	push hl
-	ld bc,33
+	ld bc,wPartyMon1Level - wPartyMon1
 	add hl,bc ; hl now points to level
 	ld a,[hl] ; a = level
 	cp a, MAX_LEVEL
@@ -1342,8 +1342,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	callab CalcExperience ; calculate experience for next level and store it at $ff96
 	pop de
 	pop hl
-	ld bc,-19
-	add hl,bc ; hl now points to experience
+	ld bc,wPartyMon1Exp - wPartyMon1Level
+	add hl,bc ; hl now points to MSB of experience
 ; update experience to minimum for new level
 	ld a,[hExperience]
 	ld [hli],a
@@ -1358,7 +1358,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push af
 	push de
 	push hl
-	ld bc,34
+	ld bc,wPartyMon1MaxHP - wPartyMon1
 	add hl,bc ; hl now points to MSB of max HP
 	ld a,[hli]
 	ld b,a
@@ -1368,8 +1368,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push hl
 	call .recalculateStats
 	pop hl
-	ld bc,35 ; hl now points to LSB of max HP
-	add hl,bc
+	ld bc,(wPartyMon1MaxHP + 1) - wPartyMon1
+	add hl,bc ; hl now points to LSB of max HP
 	pop bc
 	ld a,[hld]
 	sub c
@@ -1378,8 +1378,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	sbc b
 	ld b,a ; bc = the amount of max HP gained from leveling up
 ; add the amount gained to the current HP
-	ld de,-32
-	add hl,de ; hl now points to MSB of current HP
+	ld de,(wPartyMon1HP + 1) - wPartyMon1MaxHP
+	add hl,de ; hl now points to LSB of current HP
 	ld a,[hl]
 	add c
 	ld [hld],a

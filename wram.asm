@@ -50,6 +50,7 @@ battle_struct: MACRO
 \1Moves::      ds NUM_MOVES
 \1DVs::        ds 2
 \1Level::      db
+\1Stats::
 \1MaxHP::      dw
 \1Attack::     dw
 \1Defense::    dw
