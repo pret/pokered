@@ -2073,6 +2073,8 @@ wFirstMonsNotOutYet:: ; d11d
 ; which will be the first mon sent out.
 	ds 1
 
+wPokeBallCaptureCalcTemp:: ; d11e
+
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData:: ; d11e

@@ -101,97 +101,144 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePPRestore  ; MAX_ELIXER
 
 ItemUseBall: ; d687 (3:5687)
+
+; Balls can't be used out of battle.
 	ld a,[W_ISINBATTLE]
 	and a
-	jp z,ItemUseNotTime ; not in battle
+	jp z,ItemUseNotTime
+
+; Balls can't catch trainers' Pokémon.
 	dec a
 	jp nz,ThrowBallAtTrainerMon
+
+; If this is for the old man battle, skip checking if the party & box are full.
 	ld a,[W_BATTLETYPE]
 	dec a
-	jr z,.UseBall
-	ld a,[wPartyCount]	;is Party full?
+	jr z,.canUseBall
+
+	ld a,[wPartyCount] ; is party full?
 	cp a,PARTY_LENGTH
-	jr nz,.UseBall
-	ld a,[W_NUMINBOX]	;is Box full?
+	jr nz,.canUseBall
+	ld a,[W_NUMINBOX] ; is box full?
 	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
-.UseBall
-;ok, you can use a ball
+
+.canUseBall
 	xor a
 	ld [wCapturedMonSpecies],a
+
 	ld a,[W_BATTLETYPE]
-	cp a,2		;SafariBattle
+	cp a,BATTLE_TYPE_SAFARI
 	jr nz,.skipSafariZoneCode
+
 .safariZone
-	; remove a Safari Ball from inventory
 	ld hl,W_NUMSAFARIBALLS
-	dec [hl]
+	dec [hl] ; remove a Safari Ball
+
 .skipSafariZoneCode
 	call RunDefaultPaletteCommand
-	ld a,$43
-	ld [wd11e],a
-	call LoadScreenTilesFromBuffer1	;restore screenBuffer from Backup
+
+	ld a,$43 ; successful capture value
+	ld [wPokeBallAnimData],a
+
+	call LoadScreenTilesFromBuffer1
 	ld hl,ItemUseText00
 	call PrintText
+
+; If the player is fighting an unidentified ghost, set the value that indicates
+; the Pokémon can't be caught and skip the capture calculations.
 	callab IsGhostBattle
-	ld b,$10
-	jp z,.next12
+	ld b,$10 ; can't be caught value
+	jp z,.setAnimData
+
 	ld a,[W_BATTLETYPE]
 	dec a
 	jr nz,.notOldManBattle
+
 .oldManBattle
 	ld hl,W_GRASSRATE
 	ld de,wPlayerName
 	ld bc,NAME_LENGTH
-	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
-	jp .BallSuccess
+	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
+	jp .captured
+
 .notOldManBattle
+
+; If the player is fighting the ghost Marowak, set the value that indicates the
+; Pokémon can't be caught and skip the capture calculations.
 	ld a,[W_CURMAP]
 	cp a,POKEMONTOWER_6
 	jr nz,.loop
 	ld a,[wEnemyMonSpecies2]
 	cp a,MAROWAK
-	ld b,$10
-	jp z,.next12
-; if not fighting ghost Marowak, loop until a random number in the current
-; pokeball's allowed range is found
+	ld b,$10 ; can't be caught value
+	jp z,.setAnimData
+
+; Get the first random number. Let it be called Rand1.
+; Rand1 must be within a certain range according the kind of ball being thrown.
+; The ranges are as follows.
+; Poké Ball:         [0, 255]
+; Great Ball:        [0, 200]
+; Ultra/Safari Ball: [0, 150]
+; Loop until an acceptable number is found.
+
 .loop
 	call Random
 	ld b,a
+
+; Get the item ID.
 	ld hl,wcf91
 	ld a,[hl]
+
+; The Master Ball always succeeds.
 	cp a,MASTER_BALL
-	jp z,.BallSuccess
+	jp z,.captured
+
+; Anything will do for the basic Poké Ball.
 	cp a,POKE_BALL
 	jr z,.checkForAilments
+
+; If it's a Great/Ultra/Safari Ball and Rand1 is greater than 200, try again.
 	ld a,200
 	cp b
-	jr c,.loop	;get only numbers <= 200 for Great Ball
+	jr c,.loop
+
+; Less than or equal to 200 is good enough for a Great Ball.
 	ld a,[hl]
 	cp a,GREAT_BALL
 	jr z,.checkForAilments
-	ld a,150	;get only numbers <= 150 for Ultra Ball
+
+; If it's an Ultra/Safari Ball and Rand1 is greater than 150, try again.
+	ld a,150
 	cp b
 	jr c,.loop
+
 .checkForAilments
-; pokemon can be caught more easily with any (primary) status ailment
-; Frozen/Asleep pokemon are relatively even easier to catch
-; for Frozen/Asleep pokemon, any random number from 0-24 ensures a catch.
-; for the others, a random number from 0-11 ensures a catch.
-	ld a,[wEnemyMonStatus]	;status ailments
+; Pokémon can be caught more easily with a status ailment.
+; Depending on the status ailment, a certain value will be subtracted from
+; Rand1. Let this value be called Status.
+; The larger Status is, the more easily the Pokémon can be caught.
+; no status ailment:     Status = 0
+; Burn/Paralysis/Poison: Status = 12
+; Freeze/Sleep:          Status = 25
+; If Status is greater than Rand1, the Pokémon will be caught for sure.
+	ld a,[wEnemyMonStatus]
 	and a
-	jr z,.noAilments
-	and a, 1 << FRZ | SLP	;is frozen and/or asleep?
+	jr z,.skipAilmentValueSubtraction ; no ailments
+	and a, 1 << FRZ | SLP
 	ld c,12
 	jr z,.notFrozenOrAsleep
 	ld c,25
 .notFrozenOrAsleep
 	ld a,b
 	sub c
-	jp c,.BallSuccess
+	jp c,.captured
 	ld b,a
-.noAilments
-	push bc		;save RANDOM number
+
+.skipAilmentValueSubtraction
+	push bc	; save (Rand1 - Status)
+
+; Calculate MaxHP * 255.
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld hl,wEnemyMonMaxHP
@@ -201,66 +248,96 @@ ItemUseBall: ; d687 (3:5687)
 	ld [H_MULTIPLICAND + 2],a
 	ld a,255
 	ld [H_MULTIPLIER],a
-	call Multiply	; MaxHP * 255
+	call Multiply
+
+; Determine BallFactor. It's 8 for Great Balls and 12 for the others.
 	ld a,[wcf91]
 	cp a,GREAT_BALL
-	ld a,12		;any other BallFactor
+	ld a,12
 	jr nz,.next7
 	ld a,8
+
 .next7
+
+; Note that the results of all division operations are floored.
+
+; Calculate (MaxHP * 255) / BallFactor.
 	ld [H_DIVISOR],a
-	ld b,4		; number of bytes in dividend
+	ld b,4 ; number of bytes in dividend
 	call Divide
+
+; Divide the enemy's current HP by 4. HP is not supposed to exceed 999 so
+; the result should fit in a. If the division results in a quotient of 0,
+; change it to 1.
 	ld hl,wEnemyMonHP
 	ld a,[hli]
 	ld b,a
 	ld a,[hl]
-
-; explanation: we have a 16-bit value equal to [b << 8 | a].
-; This number is divided by 4. The result is 8 bit (reg. a).
-; Always bigger than zero.
 	srl b
 	rr a
 	srl b
-	rr a ; a = current HP / 4
+	rr a
 	and a
 	jr nz,.next8
 	inc a
+
 .next8
+
+; Let W = ((MaxHP * 255) / BallFactor) / max(HP / 4, 1). Calculate W.
 	ld [H_DIVISOR],a
 	ld b,4
-	call Divide	; ((MaxHP * 255) / BallFactor) / (CurHP / 4)
+	call Divide
+
+; If W > 255, store 255 in [H_QUOTIENT + 3].
+; Let X = min(W, 255) = [H_QUOTIENT + 3].
 	ld a,[H_QUOTIENT + 2]
 	and a
 	jr z,.next9
 	ld a,255
 	ld [H_QUOTIENT + 3],a
+
 .next9
-	pop bc
-	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
+	pop bc ; b = Rand1 - Status
+
+; If Rand1 - Status > CatchRate, the ball fails to capture the Pokémon.
+	ld a,[wEnemyMonCatchRate]
 	cp b
-	jr c,.next10
+	jr c,.failedToCapture
+
+; If W > 255, the ball captures the Pokémon.
 	ld a,[H_QUOTIENT + 2]
 	and a
-	jr nz,.BallSuccess ; if ((MaxHP * 255) / BallFactor) / (CurHP / 4) > 0x255, automatic success
-	call Random
+	jr nz,.captured
+
+	call Random ; Let this random number be called Rand2.
+
+; If Rand2 > X, the ball fails to capture the Pokémon.
 	ld b,a
 	ld a,[H_QUOTIENT + 3]
 	cp b
-	jr c,.next10
-.BallSuccess
-	jr .BallSuccess2
-.next10
+	jr c,.failedToCapture
+
+.captured
+	jr .skipShakeCalculations
+
+.failedToCapture
 	ld a,[H_QUOTIENT + 3]
-	ld [wd11e],a
+	ld [wPokeBallCaptureCalcTemp],a ; Save X.
+
+; Calculate CatchRate * 100.
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld [H_MULTIPLICAND + 1],a
-	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
+	ld a,[wEnemyMonCatchRate]
 	ld [H_MULTIPLICAND + 2],a
 	ld a,100
 	ld [H_MULTIPLIER],a
-	call Multiply	; CatchRate * 100
+	call Multiply
+
+; Determine BallFactor2.
+; Poké Ball:         BallFactor2 = 255
+; Great Ball:        BallFactor2 = 200
+; Ultra/Safari Ball: BallFactor2 = 150
 	ld a,[wcf91]
 	ld b,255
 	cp a,POKE_BALL
@@ -271,51 +348,82 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,150
 	cp a,ULTRA_BALL
 	jr z,.next11
+
 .next11
+
+; Let Y = (CatchRate * 100) / BallFactor2. Calculate Y.
 	ld a,b
 	ld [H_DIVISOR],a
 	ld b,4
 	call Divide
+
+; If Y > 255, there are 3 shakes.
+; Note that this shouldn't be possible.
+; The maximum value of Y is (255 * 100) / 150 = 170.
 	ld a,[H_QUOTIENT + 2]
 	and a
-	ld b,$63
-	jr nz,.next12
-	ld a,[wd11e]
+	ld b,$63 ; 3 shakes
+	jr nz,.setAnimData
+
+; Calculate X * Y.
+	ld a,[wPokeBallCaptureCalcTemp]
 	ld [H_MULTIPLIER],a
 	call Multiply
+
+; Calculate (X * Y) / 255.
 	ld a,255
 	ld [H_DIVISOR],a
 	ld b,4
 	call Divide
-	ld a,[wEnemyMonStatus]	;status ailments
+
+; Determine Status2.
+; no status ailment:     Status2 = 0
+; Burn/Paralysis/Poison: Status2 = 5
+; Freeze/Sleep:          Status2 = 10
+; Let Z = ((X * Y) / 255) + Status2.
+	ld a,[wEnemyMonStatus]
 	and a
 	jr z,.next13
 	and a, 1 << FRZ | SLP
 	ld b,5
 	jr z,.next14
 	ld b,10
+
 .next14
+; If the Pokémon has a status ailment, add Status2.
 	ld a,[H_QUOTIENT + 3]
 	add b
 	ld [H_QUOTIENT + 3],a
+
 .next13
+; Finally determine the number of shakes.
+; The number of shakes depend on the range Z is in.
+; 0  ≤ Z < 10: 0 shakes (the ball misses)
+; 10 ≤ Z < 30: 1 shake
+; 30 ≤ Z < 70: 2 shakes
+; 70 ≤ Z:      3 shakes
 	ld a,[H_QUOTIENT + 3]
 	cp a,10
 	ld b,$20
-	jr c,.next12
+	jr c,.setAnimData
 	cp a,30
 	ld b,$61
-	jr c,.next12
+	jr c,.setAnimData
 	cp a,70
 	ld b,$62
-	jr c,.next12
+	jr c,.setAnimData
 	ld b,$63
-.next12
+
+.setAnimData
 	ld a,b
 	ld [wPokeBallAnimData],a
-.BallSuccess2
+
+.skipShakeCalculations
+
 	ld c,20
 	call DelayFrames
+
+; Do the animation.
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
 	xor a
@@ -331,44 +439,60 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wcf91],a
 	pop af
 	ld [wWhichPokemon],a
+
+; Determine the message to display from the animation.
 	ld a,[wPokeBallAnimData]
 	cp a,$10
 	ld hl,ItemUseBallText00
-	jp z,.printText0
+	jp z,.printMessage
 	cp a,$20
 	ld hl,ItemUseBallText01
-	jp z,.printText0
+	jp z,.printMessage
 	cp a,$61
 	ld hl,ItemUseBallText02
-	jp z,.printText0
+	jp z,.printMessage
 	cp a,$62
 	ld hl,ItemUseBallText03
-	jp z,.printText0
+	jp z,.printMessage
 	cp a,$63
 	ld hl,ItemUseBallText04
-	jp z,.printText0
-	ld hl,wEnemyMonHP	;current HP
+	jp z,.printMessage
+
+; Save current HP.
+	ld hl,wEnemyMonHP
 	ld a,[hli]
 	push af
 	ld a,[hli]
-	push af		;backup currentHP...
+	push af
+
+; Save status ailment.
 	inc hl
 	ld a,[hl]
-	push af		;...and status ailments
+	push af
+
 	push hl
+
+; If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
+; This is a bug because a wild Pokémon could have used Transform via
+; Mirror Move even though the only wild Pokémon that knows Transform is Ditto.
 	ld hl,W_ENEMYBATTSTATUS3
 	bit Transformed,[hl]
-	jr z,.next15
-	ld a,$4c
+	jr z,.notTransformed
+	ld a,DITTO
 	ld [wEnemyMonSpecies2],a
 	jr .next16
-.next15
+
+.notTransformed
+; If the Pokémon is not transformed, set the transformed bit and copy the
+; DVs to wTransformedEnemyMonOriginalDVs so that LoadEnemyMonData won't generate
+; new DVs.
 	set Transformed,[hl]
 	ld hl,wTransformedEnemyMonOriginalDVs
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
 	ld a,[wEnemyMonDVs + 1]
 	ld [hl],a
+
 .next16
 	ld a,[wcf91]
 	push af
@@ -387,15 +511,18 @@ ItemUseBall: ; d687 (3:5687)
 	ld [hld],a
 	pop af
 	ld [hl],a
-	ld a,[wEnemyMonSpecies]	;enemy
+	ld a,[wEnemyMonSpecies]
 	ld [wCapturedMonSpecies],a
 	ld [wcf91],a
 	ld [wd11e],a
 	ld a,[W_BATTLETYPE]
-	dec a
-	jr z,.printText1
+	dec a ; is this the old man battle?
+	jr z,.oldManCaughtMon ; if so, don't give the player the caught Pokémon
+
 	ld hl,ItemUseBallText05
 	call PrintText
+
+; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
 	ld a,[wd11e]
 	dec a
@@ -411,46 +538,56 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,FLAG_SET
 	predef FlagActionPredef
 	pop af
-	and a
-	jr nz,.checkParty
+
+	and a ; was the Pokémon already in the Pokédex?
+	jr nz,.skipShowingPokedexData ; if so, don't show the Pokédex data
+
 	ld hl,ItemUseBallText06
 	call PrintText
 	call ClearSprites
-	ld a,[wEnemyMonSpecies]	;caught mon_ID
+	ld a,[wEnemyMonSpecies]
 	ld [wd11e],a
 	predef ShowPokedexData
-.checkParty
+
+.skipShowingPokedexData
 	ld a,[wPartyCount]
-	cp a,PARTY_LENGTH		;is party full?
+	cp a,PARTY_LENGTH ; is party full?
 	jr z,.sendToBox
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation],a
 	call ClearSprites
-	call AddPartyMon	;add mon to Party
-	jr .End
+	call AddPartyMon
+	jr .done
+
 .sendToBox
 	call ClearSprites
 	call SendNewMonToBox
 	ld hl,ItemUseBallText07
 	CheckEvent EVENT_MET_BILL
-	jr nz,.sendToBox2
+	jr nz,.printTransferredToPCText
 	ld hl,ItemUseBallText08
-.sendToBox2
+.printTransferredToPCText
 	call PrintText
-	jr .End
-.printText1
+	jr .done
+
+.oldManCaughtMon
 	ld hl,ItemUseBallText05
-.printText0
+
+.printMessage
 	call PrintText
 	call ClearSprites
-.End
+
+.done
 	ld a,[W_BATTLETYPE]
-	and a
-	ret nz
+	and a ; is this the old man battle?
+	ret nz ; if so, don't remove a ball from the bag
+
+; Remove a ball from the bag.
 	ld hl,wNumBagItems
 	inc a
 	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
+
 ItemUseBallText00: ; d937 (3:5937)
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
