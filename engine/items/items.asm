@@ -163,7 +163,6 @@ ItemUseBall: ; d687 (3:5687)
 	jp .captured
 
 .notOldManBattle
-
 ; If the player is fighting the ghost Marowak, set the value that indicates the
 ; Pokémon can't be caught and skip the capture calculations.
 	ld a,[W_CURMAP]
@@ -254,11 +253,10 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wcf91]
 	cp a,GREAT_BALL
 	ld a,12
-	jr nz,.next7
+	jr nz,.skip1
 	ld a,8
 
-.next7
-
+.skip1
 ; Note that the results of all division operations are floored.
 
 ; Calculate (MaxHP * 255) / BallFactor.
@@ -278,11 +276,10 @@ ItemUseBall: ; d687 (3:5687)
 	srl b
 	rr a
 	and a
-	jr nz,.next8
+	jr nz,.skip2
 	inc a
 
-.next8
-
+.skip2
 ; Let W = ((MaxHP * 255) / BallFactor) / max(HP / 4, 1). Calculate W.
 	ld [H_DIVISOR],a
 	ld b,4
@@ -292,11 +289,11 @@ ItemUseBall: ; d687 (3:5687)
 ; Let X = min(W, 255) = [H_QUOTIENT + 3].
 	ld a,[H_QUOTIENT + 2]
 	and a
-	jr z,.next9
+	jr z,.skip3
 	ld a,255
 	ld [H_QUOTIENT + 3],a
 
-.next9
+.skip3
 	pop bc ; b = Rand1 - Status
 
 ; If Rand1 - Status > CatchRate, the ball fails to capture the Pokémon.
@@ -341,16 +338,15 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wcf91]
 	ld b,255
 	cp a,POKE_BALL
-	jr z,.next11
+	jr z,.skip4
 	ld b,200
 	cp a,GREAT_BALL
-	jr z,.next11
+	jr z,.skip4
 	ld b,150
 	cp a,ULTRA_BALL
-	jr z,.next11
+	jr z,.skip4
 
-.next11
-
+.skip4
 ; Let Y = (CatchRate * 100) / BallFactor2. Calculate Y.
 	ld a,b
 	ld [H_DIVISOR],a
@@ -380,23 +376,23 @@ ItemUseBall: ; d687 (3:5687)
 ; no status ailment:     Status2 = 0
 ; Burn/Paralysis/Poison: Status2 = 5
 ; Freeze/Sleep:          Status2 = 10
-; Let Z = ((X * Y) / 255) + Status2.
 	ld a,[wEnemyMonStatus]
 	and a
-	jr z,.next13
+	jr z,.skip5
 	and a, 1 << FRZ | SLP
 	ld b,5
-	jr z,.next14
+	jr z,.addAilmentValue
 	ld b,10
 
-.next14
+.addAilmentValue
 ; If the Pokémon has a status ailment, add Status2.
 	ld a,[H_QUOTIENT + 3]
 	add b
 	ld [H_QUOTIENT + 3],a
 
-.next13
+.skip5
 ; Finally determine the number of shakes.
+; Let Z = ((X * Y) / 255) + Status2 = [H_QUOTIENT + 3].
 ; The number of shakes depend on the range Z is in.
 ; 0  ≤ Z < 10: 0 shakes (the ball misses)
 ; 10 ≤ Z < 30: 1 shake
@@ -419,7 +415,6 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wPokeBallAnimData],a
 
 .skipShakeCalculations
-
 	ld c,20
 	call DelayFrames
 
@@ -480,7 +475,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr z,.notTransformed
 	ld a,DITTO
 	ld [wEnemyMonSpecies2],a
-	jr .next16
+	jr .skip6
 
 .notTransformed
 ; If the Pokémon is not transformed, set the transformed bit and copy the
@@ -493,7 +488,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wEnemyMonDVs + 1]
 	ld [hl],a
 
-.next16
+.skip6
 	ld a,[wcf91]
 	push af
 	ld a,[wEnemyMonSpecies2]
