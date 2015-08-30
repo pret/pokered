@@ -133,8 +133,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	ld l, a
 	inc l
 	ld a, [hl]        ; c1x1
-	bit 7, a
-	jp nz, InitializeSpriteFacingDirection  ; c1x1 >= $80
+	bit 7, a ; is the face player flag set?
+	jp nz, MakeNPCFacePlayer
 	ld b, a
 	ld a, [wFontLoaded]
 	bit 0, a
@@ -400,10 +400,15 @@ notYetMoving: ; 5073 (1:5073)
 	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
 	jp UpdateSpriteImage
 
-InitializeSpriteFacingDirection: ; 507f (1:507f)
+MakeNPCFacePlayer: ; 507f (1:507f)
+; Make an NPC face the player if the player has spoken to him or her.
+
+; Check if the behaviour of the NPC facing the player when spoken to is
+; disabled. This is only done when rubbing the S.S. Anne captain's back.
 	ld a, [wd72d]
 	bit 5, a
 	jr nz, notYetMoving
+
 	res 7, [hl]
 	ld a, [wPlayerDirection]
 	bit PLAYER_DIR_BIT_UP, a

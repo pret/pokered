@@ -1190,8 +1190,8 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,l
 	and a,$f0
 	inc a
-	ld l,a
-	set 7,[hl]
+	ld l,a ; hl = $c1x1
+	set 7,[hl] ; set flag to make the sprite face the player
 	ld a,e
 	ld [hSpriteIndexOrTextID],a
 	ret

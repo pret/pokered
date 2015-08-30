@@ -160,7 +160,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .surf
 	bit 4,a ; does the player have the Soul Badge?
 	jp z,.newBadgeRequired
-	callba CheckForForcedBikeSurf
+	callba IsSurfingAllowed
 	ld hl,wd728
 	bit 1,[hl]
 	res 1,[hl]

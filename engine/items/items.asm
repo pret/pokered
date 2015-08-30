@@ -1421,7 +1421,7 @@ ItemUseCardKey: ; e022 (3:6022)
 	xor a
 	ld [wUnusedD71F],a
 	call GetTileAndCoordsInFrontOfPlayer
-	ld a,[GetTileAndCoordsInFrontOfPlayer] ; $4586
+	ld a,[GetTileAndCoordsInFrontOfPlayer]
 	cp a,$18
 	jr nz,.next0
 	ld hl,CardKeyTable1
