@@ -186,8 +186,8 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
-	ld hl, S_SPRITEBUFFER1
-	ld de, S_SPRITEBUFFER0
+	ld hl, sSpriteBuffer1
+	ld de, sSpriteBuffer0
 	ld bc, $310
 	call CopyData
 	ld de, vFrontPic

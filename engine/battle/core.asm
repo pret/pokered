@@ -6457,7 +6457,7 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	xor a
 	ld [$4000], a
 	ld hl, vSprites
-	ld de, S_SPRITEBUFFER1
+	ld de, sSpriteBuffer1
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	ld c, 7 * 7
