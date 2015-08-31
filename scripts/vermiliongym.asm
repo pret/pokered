@@ -11,9 +11,9 @@ VermilionGymScript: ; 5ca26 (17:4a26)
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeader0
 	ld de, VermilionGymScriptPointers
-	ld a, [W_VERMILIONGYMCURSCRIPT]
+	ld a, [wVermilionGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_VERMILIONGYMCURSCRIPT], a
+	ld [wVermilionGymCurScript], a
 	ret
 
 VermilionGymScript_5ca4c: ; 5ca4c (17:4a4c)
@@ -44,8 +44,8 @@ VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_VERMILIONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wVermilionGymCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 VermilionGymScriptPointers: ; 5ca95 (17:4a95)
@@ -55,7 +55,7 @@ VermilionGymScriptPointers: ; 5ca95 (17:4a95)
 	dw VermilionGymScript3
 
 VermilionGymScript3: ; 5ca9d (17:4a9d)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, VermilionGymScript_5ca8a
 	ld a, $f0
@@ -79,7 +79,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5cad3
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedBadges
 	set 2, [hl]
 	ld hl, wBeatGymFlags
 	set 2, [hl]
@@ -156,12 +156,12 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_VERMILIONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wVermilionGymCurScript], a
+	ld [wCurMapScript], a
 .asm_5cb6a
 	jp TextScriptEnd
 

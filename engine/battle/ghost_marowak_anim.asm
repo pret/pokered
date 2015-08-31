@@ -55,22 +55,22 @@ CopyMonPicFromBGToSpriteVRAM: ; 7092a (1c:492a)
 	ld bc, 7 * 7
 	call CopyVideoData
 	ld a, $10
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, $70
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld hl, wOAMBuffer
 	lb bc, 6, 6
 	ld d, $8
 .oamLoop
 	push bc
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld e, a
 .oamInnerLoop
 	ld a, e
 	add $8
 	ld e, a
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld [hli], a
 	ld a, d
 	ld [hli], a
@@ -80,9 +80,9 @@ CopyMonPicFromBGToSpriteVRAM: ; 7092a (1c:492a)
 	dec c
 	jr nz, .oamInnerLoop
 	inc d
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add $8
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	pop bc
 	dec b
 	jr nz, .oamLoop

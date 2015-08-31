@@ -5,7 +5,7 @@ CinnabarIslandScript: ; 1ca19 (7:4a19)
 	ResetEvent EVENT_MANSION_SWITCH_ON
 	ResetEvent EVENT_LAB_STILL_REVIVING_FOSSIL
 	ld hl, CinnabarIslandScriptPointers
-	ld a, [W_CINNABARISLANDCURSCRIPT]
+	ld a, [wCinnabarIslandCurScript]
 	jp CallFunctionInTable
 
 CinnabarIslandScriptPointers: ; 1ca34 (7:4a34)
@@ -16,10 +16,10 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $4
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $12
 	ret nz
 	ld a, PLAYER_DIR_UP
@@ -38,7 +38,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [W_CINNABARISLANDCURSCRIPT], a
+	ld [wCinnabarIslandCurScript], a
 	ret
 
 CinnabarIslandScript1: ; 1ca73 (7:4a73)
@@ -47,7 +47,7 @@ CinnabarIslandScript1: ; 1ca73 (7:4a73)
 	ret nz
 	call Delay3
 	ld a, $0
-	ld [W_CINNABARISLANDCURSCRIPT], a
+	ld [wCinnabarIslandCurScript], a
 	ret
 
 CinnabarIslandTextPointers: ; 1ca81 (7:4a81)

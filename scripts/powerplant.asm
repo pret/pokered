@@ -2,9 +2,9 @@ PowerPlantScript: ; 1e2c6 (7:62c6)
 	call EnableAutoTextBoxDrawing
 	ld hl, PowerPlantTrainerHeaders
 	ld de, PowerPlantScriptPointers
-	ld a, [W_POWERPLANTCURSCRIPT]
+	ld a, [wPowerPlantCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_POWERPLANTCURSCRIPT], a
+	ld [wPowerPlantCurScript], a
 	ret
 
 PowerPlantScriptPointers: ; 1e2d9 (7:62d9)
@@ -114,8 +114,8 @@ PowerPlantTrainerHeader8: ; 1e35b (7:635b)
 
 InitVoltorbBattle: ; 1e368 (7:6368)
 	call TalkToTrainer
-	ld a, [W_CURMAPSCRIPT]
-	ld [W_POWERPLANTCURSCRIPT], a
+	ld a, [wCurMapScript]
+	ld [wPowerPlantCurScript], a
 	jp TextScriptEnd
 
 PowerPlantText1: ; 1e374 (7:6374)

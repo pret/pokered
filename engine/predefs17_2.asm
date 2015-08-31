@@ -8,8 +8,8 @@ SetPartyMonTypes: ; 5db5e (17:5b5e)
 	push hl
 	call GetMonHeader
 	pop hl
-	ld a, [W_MONHTYPE1]
+	ld a, [wMonHType1]
 	ld [hli], a
-	ld a, [W_MONHTYPE2]
+	ld a, [wMonHType2]
 	ld [hl], a
 	ret

@@ -4,9 +4,9 @@ Route20Script: ; 50ca9 (14:4ca9)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route20TrainerHeader0
 	ld de, Route20ScriptPointers
-	ld a, [W_ROUTE20CURSCRIPT]
+	ld a, [wRoute20CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE20CURSCRIPT], a
+	ld [wRoute20CurScript], a
 	ret
 
 Route20Script_50cc6: ; 50cc6 (14:4cc6)

@@ -48,7 +48,7 @@ _DayCareOweMoneyText:: ; 8ac7d (22:6c7d)
 _DayCareGotMonBackText:: ; 8acae (22:6cae)
 	text $52, " got"
 	line "@"
-	TX_RAM W_DAYCAREMONNAME
+	TX_RAM wDayCareMonName
 	text " back!"
 	done
 

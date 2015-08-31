@@ -63,7 +63,7 @@ LoadSAV0: ; 73623 (1c:7623)
 	ld de, wMainDataStart
 	ld bc, wMainDataEnd - wMainDataStart
 	call CopyData
-	ld hl, W_CURMAPTILESET
+	ld hl, wCurMapTileset
 	set 7, [hl]
 	ld hl, sSpriteData
 	ld de, wSpriteDataStart
@@ -369,7 +369,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call GetBoxSRAMLocation
 	ld de, wBoxDataStart
 	call CopyBoxToOrFromSRAM ; copy new box from SRAM to WRAM
-	ld hl, W_MAPTEXTPTR
+	ld hl, wMapTextPtr
 	ld de, wChangeBoxSavedMapTextPointer
 	ld a, [hli]
 	ld [de], a
@@ -580,7 +580,7 @@ GetMonCountsForAllBoxes: ; 73a84 (1c:7a84)
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	ld [hl], a
 
 	ret

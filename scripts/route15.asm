@@ -2,9 +2,9 @@ Route15Script: ; 597ae (16:57ae)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route15TrainerHeaders
 	ld de, Route15ScriptPointers
-	ld a, [W_ROUTE15CURSCRIPT]
+	ld a, [wRoute15CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE15CURSCRIPT], a
+	ld [wRoute15CurScript], a
 	ret
 
 Route15ScriptPointers: ; 597c1 (16:57c1)

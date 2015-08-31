@@ -74,7 +74,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	ld hl, Lab4Text_75dd5
 	call PrintText
 	SetEvent EVENT_LAB_HANDING_OVER_FOSSIL_MON
-	ld a, [W_FOSSILMON]
+	ld a, [wFossilMon]
 	ld b, a
 	ld c, 30
 	call GivePokemon

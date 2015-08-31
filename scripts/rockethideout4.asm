@@ -3,9 +3,9 @@ RocketHideout4Script: ; 4545d (11:545d)
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout4TrainerHeader0
 	ld de, RocketHideout4ScriptPointers
-	ld a, [W_ROCKETHIDEOUT4CURSCRIPT]
+	ld a, [wRocketHideout4CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
+	ld [wRocketHideout4CurScript], a
 	ret
 
 RocketHideout4Script_45473: ; 45473 (11:5473)
@@ -33,8 +33,8 @@ RocketHideout4Script_45473: ; 45473 (11:5473)
 RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRocketHideout4CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
@@ -44,7 +44,7 @@ RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
 	dw RocketHideout4Script3
 
 RocketHideout4Script3: ; 454b6 (11:54b6)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, RocketHideout4Script_454a3
 	call UpdateSprites
@@ -68,8 +68,8 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	ld hl, wd126
 	set 5, [hl]
 	ld a, $0
-	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRocketHideout4CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 RocketHideout4TextPointers: ; 45501 (11:5501)
@@ -133,8 +133,8 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRocketHideout4CurScript], a
+	ld [wCurMapScript], a
 	jr .asm_209f0
 .asm_545571
 	ld hl, RocketHideout4Text10

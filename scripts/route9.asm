@@ -2,9 +2,9 @@ Route9Script: ; 556bc (15:56bc)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route9TrainerHeaders
 	ld de, Route9ScriptPointers
-	ld a, [W_ROUTE9CURSCRIPT]
+	ld a, [wRoute9CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE9CURSCRIPT], a
+	ld [wRoute9CurScript], a
 	ret
 
 Route9ScriptPointers: ; 556cf (15:56cf)

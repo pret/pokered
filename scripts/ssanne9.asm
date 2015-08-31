@@ -5,9 +5,9 @@ SSAnne9Script: ; 61b4b (18:5b4b)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, SSAnne9TrainerHeaders
 	ld de, SSAnne9ScriptPointers
-	ld a, [W_SSANNE9CURSCRIPT]
+	ld a, [wSSAnne9CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SSANNE9CURSCRIPT], a
+	ld [wSSAnne9CurScript], a
 	ret
 
 SSAnne9ScriptPointers: ; 61b64 (18:5b64)

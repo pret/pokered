@@ -1,13 +1,13 @@
 CeruleanCityScript: ; 19480 (6:5480)
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCityScriptPointers
-	ld a, [W_CERULEANCITYCURSCRIPT]
+	ld a, [wCeruleanCityCurScript]
 	jp CallFunctionInTable
 
 CeruleanCityScript_1948c: ; 1948c (6:548c)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ld a, HS_CERULEAN_RIVAL
 	ld [wMissableObjectIndex], a
 	predef_jump HideObject
@@ -20,7 +20,7 @@ CeruleanCityScriptPointers: ; 1949d (6:549d)
 	dw CeruleanCityScript4
 
 CeruleanCityScript4: ; 194a7 (6:54a7)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
 	ld a, $f0
@@ -31,7 +31,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCityScript0: ; 194c8 (6:54c8)
@@ -75,7 +75,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $14
 	jr z, .asm_19535
 	ld a, $1
@@ -93,7 +93,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $1
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCityCoords1: ; 1954f (6:554f)
@@ -135,10 +135,10 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld de, CeruleanCityText_19672
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY1
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
 	ld a, $7
@@ -151,17 +151,17 @@ CeruleanCityScript1: ; 19567 (6:5567)
 .Charmander
 	ld a, $9
 .done
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 
 	xor a
 	ld [hJoyHeld], a
 	call CeruleanCityScript_1955d
 	ld a, $2
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCityScript2: ; 195b1 (6:55b1)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
 	call CeruleanCityScript_1955d
@@ -178,7 +178,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $14
 	jr nz, .asm_195f0
 	ld de, CeruleanCityMovement4
@@ -190,7 +190,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $3
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCityMovement3: ; 19600 (6:5600)
@@ -224,7 +224,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld [wJoyIgnore], a
 	call PlayDefaultMusic
 	ld a, $0
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	ret
 
 CeruleanCityTextPointers: ; 1962d (6:562d)
@@ -294,7 +294,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4
-	ld [W_CERULEANCITYCURSCRIPT], a
+	ld [wCeruleanCityCurScript], a
 	jp TextScriptEnd
 .asm_4ca20
 	ld hl, CeruleanCityText_196f3

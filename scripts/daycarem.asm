@@ -7,7 +7,7 @@ DayCareMTextPointers: ; 56252 (15:6252)
 DayCareMText1: ; 56254 (15:6254)
 	TX_ASM
 	call SaveScreenTilesToBuffer2
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	and a
 	jp nz, .daycareInUse
 	ld hl, DayCareIntroText
@@ -46,7 +46,7 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareWillLookAfterMonText
 	call PrintText
 	ld a, 1
-	ld [W_DAYCARE_IN_USE], a
+	ld [wDayCareInUse], a
 	ld a, PARTY_TO_DAYCARE
 	ld [wMoveMonType], a
 	call MoveMon
@@ -60,7 +60,7 @@ DayCareMText1: ; 56254 (15:6254)
 
 .daycareInUse
 	xor a
-	ld hl, W_DAYCAREMONNAME
+	ld hl, wDayCareMonName
 	call GetPartyMonName
 	ld a, DAYCARE_DATA
 	ld [wMonDataLocation], a
@@ -150,7 +150,7 @@ DayCareMText1: ; 56254 (15:6254)
 
 .enoughMoney
 	xor a
-	ld [W_DAYCARE_IN_USE], a
+	ld [wDayCareInUse], a
 	ld hl, wDayCareNumLevelsGrown
 	ld [hli], a
 	inc hl

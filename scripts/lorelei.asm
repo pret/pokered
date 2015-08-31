@@ -3,9 +3,9 @@ LoreleiScript: ; 7617b (1d:617b)
 	call EnableAutoTextBoxDrawing
 	ld hl, LoreleiTrainerHeaders
 	ld de, LoreleiScriptPointers
-	ld a, [W_LORELEICURSCRIPT]
+	ld a, [wLoreleiCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_LORELEICURSCRIPT], a
+	ld [wLoreleiCurScript], a
 	ret
 
 LoreleiScript_76191: ; 76191 (1d:6191)
@@ -28,7 +28,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 
 LoreleiScript_761b6: ; 761b6 (1d:61b6)
 	xor a
-	ld [W_LORELEICURSCRIPT], a
+	ld [wLoreleiCurScript], a
 	ret
 
 LoreleiScriptPointers: ; 761bb (1d:61bb)
@@ -54,8 +54,8 @@ LoreleiScript_761c6: ; 761c6 (1d:61c6)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wLoreleiCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 LoreleiScript0: ; 761e2 (1d:61e2)
@@ -82,8 +82,8 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wLoreleiCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_76223: ; 76223 (1d:6223)
@@ -100,12 +100,12 @@ LoreleiScript3: ; 7622c (1d:622c)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wLoreleiCurScript], a
+	ld [wCurMapScript], a
 	ret
 LoreleiScript2: ; 7623f (1d:623f)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, LoreleiScript_761b6
 	ld a, $1

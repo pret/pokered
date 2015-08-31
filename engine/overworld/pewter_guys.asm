@@ -17,9 +17,9 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 .findMatchingCoordsLoop
 	ld a, [hli]

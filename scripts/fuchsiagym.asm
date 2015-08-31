@@ -3,9 +3,9 @@ FuchsiaGymScript: ; 7543d (1d:543d)
 	call EnableAutoTextBoxDrawing
 	ld hl, FuchsiaGymTrainerHeaders
 	ld de, FuchsiaGymScriptPointers
-	ld a, [W_FUCHSIAGYMCURSCRIPT]
+	ld a, [wFuchsiaGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_FUCHSIAGYMCURSCRIPT], a
+	ld [wFuchsiaGymCurScript], a
 	ret
 
 FuchsiaGymScript_75453: ; 75453 (1d:5453)
@@ -26,8 +26,8 @@ Gym5LeaderName: ; 75472 (1d:5472)
 FuchsiaGymScript_75477: ; 75477 (1d:5477)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_FUCHSIAGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wFuchsiaGymCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 FuchsiaGymScriptPointers: ; 75482 (1d:5482)
@@ -37,7 +37,7 @@ FuchsiaGymScriptPointers: ; 75482 (1d:5482)
 	dw FuchsiaGymScript3
 
 FuchsiaGymScript3: ; 7548a (1d:548a)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, FuchsiaGymScript_75477
 	ld a, $f0
@@ -60,7 +60,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_754c0
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedBadges
 	set 4, [hl]
 	ld hl, wBeatGymFlags
 	set 4, [hl]
@@ -167,11 +167,11 @@ FuchsiaGymText1: ; 75534 (1d:5534)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_FUCHSIAGYMCURSCRIPT], a
+	ld [wFuchsiaGymCurScript], a
 .asm_e84c6
 	jp TextScriptEnd
 

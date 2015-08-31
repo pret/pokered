@@ -2,9 +2,9 @@ PokemonTower4Script: ; 607f6 (18:47f6)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower4TrainerHeaders
 	ld de, PokemonTower4ScriptPointers
-	ld a, [W_POKEMONTOWER4CURSCRIPT]
+	ld a, [wPokemonTower4CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_POKEMONTOWER4CURSCRIPT], a
+	ld [wPokemonTower4CurScript], a
 	ret
 
 PokemonTower4ScriptPointers: ; 60809 (18:4809)

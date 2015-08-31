@@ -2,7 +2,7 @@ Route18GateScript: ; 49876 (12:5876)
 	ld hl, wd732
 	res 5, [hl]
 	call EnableAutoTextBoxDrawing
-	ld a, [W_ROUTE18GATECURSCRIPT]
+	ld a, [wRoute18GateCurScript]
 	ld hl, Route18GateScriptPointers
 	jp CallFunctionInTable
 
@@ -36,11 +36,11 @@ Route18GateScript0: ; 4988f (12:588f)
 	call FillMemory
 	call StartSimulatingJoypadStates
 	ld a, $1
-	ld [W_ROUTE18GATECURSCRIPT], a
+	ld [wRoute18GateCurScript], a
 	ret
 .asm_498c6
 	ld a, $2
-	ld [W_ROUTE18GATECURSCRIPT], a
+	ld [wRoute18GateCurScript], a
 	ret
 
 CoordsData_498cc: ; 498cc (12:58cc)
@@ -67,7 +67,7 @@ Route18GateScript2: ; 498df (12:58df)
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_ROUTE18GATECURSCRIPT], a
+	ld [wRoute18GateCurScript], a
 	ret
 
 Route18GateScript3: ; 498f9 (12:58f9)
@@ -79,7 +79,7 @@ Route18GateScript3: ; 498f9 (12:58f9)
 	ld hl, wd730
 	res 7, [hl]
 	ld a, $0
-	ld [W_ROUTE18GATECURSCRIPT], a
+	ld [wRoute18GateCurScript], a
 	ret
 
 Route18GateTextPointers: ; 4990d (12:590d)

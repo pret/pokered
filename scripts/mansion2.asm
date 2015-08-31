@@ -3,9 +3,9 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion2TrainerHeaders
 	ld de, Mansion2ScriptPointers
-	ld a, [W_MANSION2CURSCRIPT]
+	ld a, [wMansion2CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_MANSION2CURSCRIPT], a
+	ld [wMansion2CurScript], a
 	ret
 
 Mansion2Script_51fee: ; 51fee (14:5fee)

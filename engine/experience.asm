@@ -29,7 +29,7 @@ CalcLevelFromExperience: ; 58f43 (16:4f43)
 
 ; calculates the amount of experience needed for level d
 CalcExperience: ; 58f6a (16:4f6a)
-	ld a, [W_MONHGROWTHRATE]
+	ld a, [wMonHGrowthRate]
 	add a
 	add a
 	ld c, a

@@ -29,9 +29,9 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld b, $3 ; Gengar tiles
 	call IntroCopyTiles
 	ld a, 0
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, 80
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	lb bc, 6, 6
 	call InitIntroNidorinoOAM
 	lb de, 80 / 2, MOVE_NIDORINO_RIGHT
@@ -141,10 +141,10 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 	ld a, [de]
 	cp $50
 	ret z
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	inc de
 	ld a, [de]
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	push de
 	ld c, 6 * 6
 	call UpdateIntroNidorinoOAM
@@ -159,10 +159,10 @@ UpdateIntroNidorinoOAM: ; 417ae (10:57ae)
 	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	add [hl]
 	ld [hli], a ; Y
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add [hl]
 	ld [hli], a ; X
 	ld a, d
@@ -178,14 +178,14 @@ InitIntroNidorinoOAM: ; 417c7 (10:57c7)
 	ld d, 0
 .loop
 	push bc
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld e, a
 .innerLoop
 	ld a, e
 	add 8
 	ld e, a
 	ld [hli], a ; Y
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld [hli], a ; X
 	ld a, d
 	ld [hli], a ; tile
@@ -194,9 +194,9 @@ InitIntroNidorinoOAM: ; 417c7 (10:57c7)
 	inc d
 	dec c
 	jr nz, .innerLoop
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add 8
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	pop bc
 	dec b
 	jr nz, .loop
@@ -245,9 +245,9 @@ IntroMoveMon: ; 4180e (10:580e)
 .moveNidorinoRight
 	push de
 	ld a, 2
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	xor a
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld c, 6 * 6
 	call UpdateIntroNidorinoOAM
 	pop de
@@ -312,7 +312,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	call ClearScreen
 	call DisableLCD
 	xor a
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	call IntroDrawBlackBars
 	call LoadIntroGraphics
 	call EnableLCD

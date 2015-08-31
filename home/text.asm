@@ -146,7 +146,7 @@ Char52:: ; 0x19f9 player’s name
 
 Char53:: ; 19ff (0:19ff) ; rival’s name
 	push de
-	ld de,W_RIVALNAME
+	ld de,wRivalName
 	jr FinishDTE
 
 Char5D:: ; 1a05 (0:1a05) ; TRAINER

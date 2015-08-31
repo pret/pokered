@@ -135,7 +135,7 @@ FindHiddenItemOrCoinsIndex: ; 76857 (1d:6857)
 	ld d, a
 	ld a, [wHiddenObjectX]
 	ld e, a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, a
 	ld c, -1
 .loop

@@ -2,9 +2,9 @@ PokemonTower5Script: ; 60932 (18:4932)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower5TrainerHeaders
 	ld de, PokemonTower5ScriptPointers
-	ld a, [W_POKEMONTOWER5CURSCRIPT]
+	ld a, [wPokemonTower5CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_POKEMONTOWER5CURSCRIPT], a
+	ld [wPokemonTower5CurScript], a
 	ret
 
 PokemonTower5ScriptPointers: ; 60945 (18:4945)

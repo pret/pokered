@@ -2,9 +2,9 @@ ViridianForestScript: ; 6110d (18:510d)
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianForestTrainerHeaders
 	ld de, ViridianForestScriptPointers
-	ld a, [W_VIRIDIANFORESTCURSCRIPT]
+	ld a, [wViridianForestCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_VIRIDIANFORESTCURSCRIPT], a
+	ld [wViridianForestCurScript], a
 	ret
 
 ViridianForestScriptPointers: ; 61120 (18:5120)

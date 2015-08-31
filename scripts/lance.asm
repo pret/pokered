@@ -3,9 +3,9 @@ LanceScript: ; 5a2ae (16:62ae)
 	call EnableAutoTextBoxDrawing
 	ld hl, LanceTrainerHeaders
 	ld de, LanceScriptPointers
-	ld a, [W_LANCECURSCRIPT]
+	ld a, [wLanceCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_LANCECURSCRIPT], a
+	ld [wLanceCurScript], a
 	ret
 
 LanceScript_5a2c4: ; 5a2c4 (16:62c4)
@@ -37,7 +37,7 @@ LanceScript_5a2f0: ; 5a2f0 (16:62f0)
 
 LanceScript_5a2f5: ; 5a2f5 (16:62f5)
 	xor a
-	ld [W_LANCECURSCRIPT], a
+	ld [wLanceCurScript], a
 	ret
 
 LanceScriptPointers: ; 5a2fa (16:62fa)
@@ -85,7 +85,7 @@ CoordsData_5a33e: ; 5a33e (16:633e)
 
 LanceScript2: ; 5a349 (16:6349)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, LanceScript_5a2f5
 	ld a, $1
@@ -102,8 +102,8 @@ LanceScript_5a35b: ; 5a35b (16:635b)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_LANCECURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wLanceCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 RLEList_5a379: ; 5a379 (16:6379)
@@ -120,8 +120,8 @@ LanceScript3: ; 5a382 (16:6382)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_LANCECURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wLanceCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 LanceTextPointers: ; 5a395 (16:6395)

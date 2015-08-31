@@ -10,9 +10,9 @@ VictoryRoad2Script: ; 5179d (14:579d)
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad2TrainerHeaders
 	ld de, VictoryRoad2ScriptPointers
-	ld a, [W_VICTORYROAD2CURSCRIPT]
+	ld a, [wVictoryRoad2CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_VICTORYROAD2CURSCRIPT], a
+	ld [wVictoryRoad2CurScript], a
 	ret
 
 VictoryRoad2Script_517c4: ; 517c4 (14:57c4)

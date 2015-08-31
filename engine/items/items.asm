@@ -103,7 +103,7 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 ItemUseBall: ; d687 (3:5687)
 
 ; Balls can't be used out of battle.
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
 
@@ -112,14 +112,14 @@ ItemUseBall: ; d687 (3:5687)
 	jp nz,ThrowBallAtTrainerMon
 
 ; If this is for the old man battle, skip checking if the party & box are full.
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	dec a
 	jr z,.canUseBall
 
 	ld a,[wPartyCount] ; is party full?
 	cp a,PARTY_LENGTH
 	jr nz,.canUseBall
-	ld a,[W_NUMINBOX] ; is box full?
+	ld a,[wNumInBox] ; is box full?
 	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
 
@@ -127,12 +127,12 @@ ItemUseBall: ; d687 (3:5687)
 	xor a
 	ld [wCapturedMonSpecies],a
 
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	cp a,BATTLE_TYPE_SAFARI
 	jr nz,.skipSafariZoneCode
 
 .safariZone
-	ld hl,W_NUMSAFARIBALLS
+	ld hl,wNumSafariBalls
 	dec [hl] ; remove a Safari Ball
 
 .skipSafariZoneCode
@@ -151,12 +151,12 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,$10 ; can't be caught value
 	jp z,.setAnimData
 
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	dec a
 	jr nz,.notOldManBattle
 
 .oldManBattle
-	ld hl,W_GRASSRATE
+	ld hl,wGrassRate
 	ld de,wPlayerName
 	ld bc,NAME_LENGTH
 	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno. glitch)
@@ -165,7 +165,7 @@ ItemUseBall: ; d687 (3:5687)
 .notOldManBattle
 ; If the player is fighting the ghost Marowak, set the value that indicates the
 ; Pokémon can't be caught and skip the capture calculations.
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	cp a,POKEMONTOWER_6
 	jr nz,.loop
 	ld a,[wEnemyMonSpecies2]
@@ -420,7 +420,7 @@ ItemUseBall: ; d687 (3:5687)
 
 ; Do the animation.
 	ld a,TOSS_ANIM
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	xor a
 	ld [H_WHOSETURN],a
 	ld [wAnimationType],a
@@ -470,7 +470,7 @@ ItemUseBall: ; d687 (3:5687)
 ; If the Pokémon is transformed, the Pokémon is assumed to be a Ditto.
 ; This is a bug because a wild Pokémon could have used Transform via
 ; Mirror Move even though the only wild Pokémon that knows Transform is Ditto.
-	ld hl,W_ENEMYBATTSTATUS3
+	ld hl,wEnemyBattleStatus3
 	bit Transformed,[hl]
 	jr z,.notTransformed
 	ld a,DITTO
@@ -494,7 +494,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wEnemyMonSpecies2]
 	ld [wcf91],a
 	ld a,[wEnemyMonLevel]
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	callab LoadEnemyMonData
 	pop af
 	ld [wcf91],a
@@ -510,7 +510,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wCapturedMonSpecies],a
 	ld [wcf91],a
 	ld [wd11e],a
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	dec a ; is this the old man battle?
 	jr z,.oldManCaughtMon ; if so, don't give the player the caught Pokémon
 
@@ -573,7 +573,7 @@ ItemUseBall: ; d687 (3:5687)
 	call ClearSprites
 
 .done
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	and a ; is this the old man battle?
 	ret nz ; if so, don't remove a ball from the bag
 
@@ -627,13 +627,13 @@ ItemUseBallText06: ; d961 (3:5961)
 	db "@"
 
 ItemUseTownMap: ; d968 (3:5968)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	jpba DisplayTownMap
 
 ItemUseBicycle: ; d977 (3:5977)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld a,[wWalkBikeSurfState]
@@ -695,7 +695,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld hl,TilePairCollisionsWater
 	call CheckForTilePairCollisions
 	jr c,.cannotStopSurfing
-	ld hl,W_TILESETCOLLISIONPTR ; pointer to list of passable tiles
+	ld hl,wTileSetCollisionPtr ; pointer to list of passable tiles
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl now points to passable tiles
@@ -754,7 +754,7 @@ ItemUsePokedex: ; da56 (3:5a56)
 	predef_jump ShowPokedexMenu
 
 ItemUseEvoStone: ; da5b (3:5a5b)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld a,[wWhichPokemon]
@@ -795,7 +795,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ret
 
 ItemUseVitamin: ; dab4 (3:5ab4)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 
@@ -898,7 +898,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	xor a
 	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 	push hl
-	ld hl,W_PLAYERBATTSTATUS3
+	ld hl,wPlayerBattleStatus3
 	res BadlyPoisoned,[hl] ; heal Toxic status
 	pop hl
 	ld bc,wPartyMon1Stats - wPartyMon1Status
@@ -926,7 +926,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.updateInBattleFaintedData
 	jp .healingItemNoEffect
 .updateInBattleFaintedData
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr z,.compareCurrentHPToMaxHP
 	push hl
@@ -1244,7 +1244,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ret nz ; if so, return
 	call GBPalWhiteOut
 	call z,RunDefaultPaletteCommand
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	ret nz
 	jp ReloadMapData
@@ -1256,7 +1256,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,wPartyMon1Level - wPartyMon1
 	add hl,bc ; hl now points to level
 	ld a,[hl] ; a = level
-	ld [W_CURENEMYLVL],a ; store level
+	ld [wCurEnemyLVL],a ; store level
 	call GetMonHeader
 	push de
 	ld a,d
@@ -1335,7 +1335,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.vitaminNoEffect ; can't raise level above 100
 	inc a
 	ld [hl],a ; store incremented level
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	push hl
 	push de
 	ld d,a
@@ -1454,7 +1454,7 @@ ItemUseRock: ; df67 (3:5f67)
 	ld de,wSafariBaitFactor ; bait factor
 
 BaitRockCommon: ; df7f (3:5f7f)
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	xor a
 	ld [wAnimationType],a
 	ld [H_WHOSETURN],a
@@ -1486,13 +1486,13 @@ ThrewRockText: ; dfaa (3:5faa)
 
 ; also used for Dig out-of-battle effect
 ItemUseEscapeRope: ; dfaf (3:5faf)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr nz,.notUsable
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	cp a,AGATHAS_ROOM
 	jr z,.notUsable
-	ld a,[W_CURMAPTILESET]
+	ld a,[wCurMapTileset]
 	ld b,a
 	ld hl,EscapeRopeTilesets
 .loop
@@ -1508,8 +1508,8 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	res 4,[hl]
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
-	ld [W_NUMSAFARIBALLS],a
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wNumSafariBalls],a
+	ld [wSafariZoneEntranceCurScript],a
 	inc a
 	ld [wEscapedFromBattle],a
 	ld [wActionResultOrTookBattleTurn],a ; item used
@@ -1531,7 +1531,7 @@ ItemUseRepel: ; e003 (3:6003)
 	ld b,100
 
 ItemUseRepelCommon: ; e005 (3:6005)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld a,b
@@ -1540,10 +1540,10 @@ ItemUseRepelCommon: ; e005 (3:6005)
 
 ; handles X Accuracy item
 ItemUseXAccuracy: ; e013 (3:6013)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
-	ld hl,W_PLAYERBATTSTATUS2
+	ld hl,wPlayerBattleStatus2
 	set UsingXAccuracy,[hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
 
@@ -1568,7 +1568,7 @@ ItemUseCardKey: ; e022 (3:6022)
 	jp nz,ItemUseNotTime
 	ld hl,CardKeyTable3
 .next1
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	ld b,a
 .loop
 	ld a,[hli]
@@ -1641,7 +1641,7 @@ CardKeyTable3: ; e0c4 (3:60c4)
 	db $ff
 
 ItemUsePokedoll: ; e0cd (3:60cd)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	dec a
 	jp nz,ItemUseNotTime
 	ld a,$01
@@ -1649,10 +1649,10 @@ ItemUsePokedoll: ; e0cd (3:60cd)
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseGuardSpec: ; e0dc (3:60dc)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
-	ld hl,W_PLAYERBATTSTATUS2
+	ld hl,wPlayerBattleStatus2
 	set ProtectedByMist,[hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
@@ -1665,15 +1665,15 @@ ItemUseMaxRepel: ; e0f0 (3:60f0)
 	jp ItemUseRepelCommon
 
 ItemUseDireHit: ; e0f5 (3:60f5)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
-	ld hl,W_PLAYERBATTSTATUS2
+	ld hl,wPlayerBattleStatus2
 	set GettingPumped,[hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseXStat: ; e104 (3:6104)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr nz,.inBattle
 	call ItemUseNotTime
@@ -1681,18 +1681,18 @@ ItemUseXStat: ; e104 (3:6104)
 	ld [wActionResultOrTookBattleTurn],a ; item not used
 	ret
 .inBattle
-	ld hl,W_PLAYERMOVENUM
+	ld hl,wPlayerMoveNum
 	ld a,[hli]
-	push af ; save [W_PLAYERMOVENUM]
+	push af ; save [wPlayerMoveNum]
 	ld a,[hl]
-	push af ; save [W_PLAYERMOVEEFFECT]
+	push af ; save [wPlayerMoveEffect]
 	push hl
 	ld a,[wcf91]
 	sub a,X_ATTACK - ATTACK_UP1_EFFECT
 	ld [hl],a ; store player move effect
 	call PrintItemUseTextAndRemoveItem
 	ld a,XSTATITEM_ANIM ; X stat item animation ID
-	ld [W_PLAYERMOVENUM],a
+	ld [wPlayerMoveNum],a
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
 	xor a
@@ -1700,18 +1700,18 @@ ItemUseXStat: ; e104 (3:6104)
 	callba StatModifierUpEffect ; do stat increase move
 	pop hl
 	pop af
-	ld [hld],a ; restore [W_PLAYERMOVEEFFECT]
+	ld [hld],a ; restore [wPlayerMoveEffect]
 	pop af
-	ld [hl],a ; restore [W_PLAYERMOVENUM]
+	ld [hl],a ; restore [wPlayerMoveNum]
 	ret
 
 ItemUsePokeflute: ; e140 (3:6140)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr nz,.inBattle
 ; if not in battle
 	call ItemUseReloadOverworldData
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	cp a,ROUTE_12
 	jr nz,.notRoute12
 	CheckEvent EVENT_BEAT_ROUTE12_SNORLAX
@@ -1746,7 +1746,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	ld b,~SLP & $ff
 	ld hl,wPartyMon1Status
 	call WakeUpEntireParty
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	dec a ; is it a trainer battle?
 	jr z,.skipWakingUpEnemyParty
 ; if it's a trainer battle
@@ -1838,7 +1838,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	TX_FAR _PlayedFluteHadEffectText
 	db $06
 	TX_ASM
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr nz,.done
 ; play out-of-battle pokeflute music
@@ -1856,7 +1856,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	jp TextScriptEnd ; end text
 
 ItemUseCoinCase: ; e23a (3:623a)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld hl,CoinCaseNumCoinsText
@@ -1913,11 +1913,11 @@ RodResponse: ; e28d (3:628d)
 	jr nz, .next
 	; if yes, store level and species data
 	ld a, 1
-	ld [W_MOVEMISSED], a
+	ld [wMoveMissed], a
 	ld a, b ; level
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, c ; species
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 
 .next
 	ld hl, wWalkBikeSurfState
@@ -1934,7 +1934,7 @@ RodResponse: ; e28d (3:628d)
 ; checks if fishing is possible and if so, runs initialization code common to all rods
 ; unsets carry if fishing is possible, sets carry if not
 FishingInit: ; e2b4 (3:62b4)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jr z,.notInBattle
 	scf ; can't fish during battle
@@ -1962,7 +1962,7 @@ ItemUseOaksParcel: ; e2de (3:62de)
 	jp ItemUseNotYoursToUse
 
 ItemUseItemfinder: ; e2e1 (3:62e1)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	call ItemUseReloadOverworldData
@@ -1990,7 +1990,7 @@ ItemfinderFoundNothingText: ; e312 (3:6312)
 	db "@"
 
 ItemUsePPUp: ; e317 (3:6317)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 
@@ -2195,7 +2195,7 @@ UnusableItem: ; e476 (3:6476)
 	jp ItemUseNotTime
 
 ItemUseTMHM: ; e479 (3:6479)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld a,[wcf91]
@@ -2337,7 +2337,7 @@ ThrowBallAtTrainerMon: ; e58b (3:658b)
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
 	ld a,TOSS_ANIM
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	predef MoveAnimation ; do animation
 	ld hl,ThrowBallAtTrainerMonText1
 	call PrintText
@@ -2687,7 +2687,7 @@ IsKeyItem_: ; e764 (3:6764)
 INCLUDE "data/key_items.asm"
 
 SendNewMonToBox: ; e7a4 (3:67a4)
-	ld de, W_NUMINBOX
+	ld de, wNumInBox
 	ld a, [de]
 	inc a
 	ld [de], a
@@ -2706,7 +2706,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, NAME_LENGTH
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e7ee
 	dec a
@@ -2717,7 +2717,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e7db
@@ -2738,7 +2738,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld de, wBoxMonOT
 	ld bc, NAME_LENGTH
 	call CopyData
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
@@ -2751,7 +2751,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e817
@@ -2772,7 +2772,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld a, NAME_MON_SCREEN
 	ld [wNamingScreenType], a
 	predef AskName
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e867
 	ld hl, wBoxMons
@@ -2785,7 +2785,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e854
@@ -2816,7 +2816,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	inc de
 	push de
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ld d, a
 	callab CalcExperience
 	pop de
@@ -2856,12 +2856,12 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
 IsNextTileShoreOrWater: ; e8b8 (3:68b8)
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld hl, WaterTilesets
 	ld de,1
 	call IsInArray
 	jr nc, .notShoreOrWater
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
 	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
@@ -2888,7 +2888,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 ; return e = 2 if no fish on this map
 ; return e = 1 if a bite, bc = level,species
 ; return e = 0 if no bite
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld de, 3 ; each fishing group is three bytes wide
 	ld hl, SuperRodData
 	call IsInArray

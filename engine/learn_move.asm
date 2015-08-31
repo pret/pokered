@@ -53,7 +53,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	pop de
 	pop hl
 	ld [hl], a
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	and a
 	jp z, PrintLearnedMove
 	ld a, [wWhichPokemon]

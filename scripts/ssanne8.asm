@@ -2,9 +2,9 @@ SSAnne8Script: ; 61976 (18:5976)
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne8TrainerHeaders
 	ld de, SSAnne8ScriptPointers
-	ld a, [W_SSANNE8CURSCRIPT]
+	ld a, [wSSAnne8CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SSANNE8CURSCRIPT], a
+	ld [wSSAnne8CurScript], a
 	ret
 
 SSAnne8ScriptPointers: ; 61989 (18:5989)

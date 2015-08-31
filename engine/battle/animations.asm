@@ -4,18 +4,18 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	ld l,c
 	ld h,b
 	ld a,[hli]
-	ld [W_NUMFBTILES],a
-	ld a,[W_FBDESTADDR + 1]
+	ld [wNumFBTiles],a
+	ld a,[wFBDestAddr + 1]
 	ld e,a
-	ld a,[W_FBDESTADDR]
+	ld a,[wFBDestAddr]
 	ld d,a
 	xor a
-	ld [W_FBTILECOUNTER],a ; loop counter
+	ld [wFBTileCounter],a ; loop counter
 .loop
-	ld a,[W_FBTILECOUNTER]
+	ld a,[wFBTileCounter]
 	inc a
-	ld [W_FBTILECOUNTER],a
-	ld a,[W_SUBANIMTRANSFORM]
+	ld [wFBTileCounter],a
+	ld a,[wSubAnimTransform]
 	dec a
 	jr z,.flipHorizontalAndVertical   ; 1
 	dec a
@@ -23,15 +23,15 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	dec a
 	jr z,.flipBaseCoords              ; 3
 .noTransformation
-	ld a,[W_BASECOORDY]
+	ld a,[wBaseCoordY]
 	add [hl]
 	ld [de],a ; store Y
 	inc hl
 	inc de
-	ld a,[W_BASECOORDX]
+	ld a,[wBaseCoordX]
 	jr .finishCopying
 .flipBaseCoords
-	ld a,[W_BASECOORDY]
+	ld a,[wBaseCoordY]
 	ld b,a
 	ld a,136
 	sub b ; flip Y base coordinate
@@ -39,11 +39,11 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	ld [de],a ; store Y
 	inc hl
 	inc de
-	ld a,[W_BASECOORDX]
+	ld a,[wBaseCoordX]
 	ld b,a
 	ld a,168
 	sub b ; flip X base coordinate
-.finishCopying ; finish copying values to OAM (when [W_SUBANIMTRANSFORM] not 1 or 2)
+.finishCopying ; finish copying values to OAM (when [wSubAnimTransform] not 1 or 2)
 	add [hl] ; X offset
 	ld [de],a ; store X
 	inc hl
@@ -57,7 +57,7 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	inc de
 	jp .nextTile
 .flipHorizontalAndVertical
-	ld a,[W_BASECOORDY]
+	ld a,[wBaseCoordY]
 	add [hl] ; Y offset
 	ld b,a
 	ld a,136
@@ -65,7 +65,7 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	ld [de],a ; store Y
 	inc hl
 	inc de
-	ld a,[W_BASECOORDX]
+	ld a,[wBaseCoordX]
 	add [hl] ; X offset
 	ld b,a
 	ld a,168
@@ -95,13 +95,13 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	inc de
 	jp .nextTile
 .flipHorizontalTranslateDown
-	ld a,[W_BASECOORDY]
+	ld a,[wBaseCoordY]
 	add [hl]
 	add a,40 ; translate Y coordinate downwards
 	ld [de],a ; store Y
 	inc hl
 	inc de
-	ld a,[W_BASECOORDX]
+	ld a,[wBaseCoordX]
 	add [hl]
 	ld b,a
 	ld a,168
@@ -125,47 +125,47 @@ DrawFrameBlock: ; 78000 (1e:4000)
 	ld [de],a
 	inc de
 .nextTile
-	ld a,[W_FBTILECOUNTER]
+	ld a,[wFBTileCounter]
 	ld c,a
-	ld a,[W_NUMFBTILES]
+	ld a,[wNumFBTiles]
 	cp c
 	jp nz,.loop ; go back up if there are more tiles to draw
 .afterDrawingTiles
-	ld a,[W_FBMODE]
+	ld a,[wFBMode]
 	cp a,2
 	jr z,.advanceFrameBlockDestAddr; skip delay and don't clean OAM buffer
-	ld a,[W_SUBANIMFRAMEDELAY]
+	ld a,[wSubAnimFrameDelay]
 	ld c,a
 	call DelayFrames
-	ld a,[W_FBMODE]
+	ld a,[wFBMode]
 	cp a,3
 	jr z,.advanceFrameBlockDestAddr ; skip cleaning OAM buffer
 	cp a,4
 	jr z,.done ; skip cleaning OAM buffer and don't advance the frame block destination address
-	ld a,[W_ANIMATIONID]
+	ld a,[wAnimationID]
 	cp a,GROWL
 	jr z,.resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
 	ld hl,wOAMBuffer ; OAM buffer
 	ld a,l
-	ld [W_FBDESTADDR + 1],a
+	ld [wFBDestAddr + 1],a
 	ld a,h
-	ld [W_FBDESTADDR],a ; set destination address to beginning of OAM buffer
+	ld [wFBDestAddr],a ; set destination address to beginning of OAM buffer
 	ret
 .advanceFrameBlockDestAddr
 	ld a,e
-	ld [W_FBDESTADDR + 1],a
+	ld [wFBDestAddr + 1],a
 	ld a,d
-	ld [W_FBDESTADDR],a
+	ld [wFBDestAddr],a
 .done
 	ret
 
 PlayAnimation: ; 780f1 (1e:40f1)
 	xor a
 	ld [$FF8B],a ; it looks like nothing reads this
-	ld [W_SUBANIMTRANSFORM],a
-	ld a,[W_ANIMATIONID] ; get animation number
+	ld [wSubAnimTransform],a
+	ld a,[wAnimationID] ; get animation number
 	dec a
 	ld l,a
 	ld h,0
@@ -217,7 +217,7 @@ PlayAnimation: ; 780f1 (1e:40f1)
 .playSubanimation
 	ld c,a
 	and a,%00111111
-	ld [W_SUBANIMFRAMEDELAY],a
+	ld [wSubAnimFrameDelay],a
 	xor a
 	sla c
 	rla
@@ -235,9 +235,9 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld de,SubanimationPointers
 	add hl,de
 	ld a,l
-	ld [W_SUBANIMADDRPTR],a
+	ld [wSubAnimAddrPtr],a
 	ld a,h
-	ld [W_SUBANIMADDRPTR + 1],a
+	ld [wSubAnimAddrPtr + 1],a
 	ld l,c
 	ld h,b
 	push hl
@@ -257,9 +257,9 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ret
 
 LoadSubanimation: ; 7817c (1e:417c)
-	ld a,[W_SUBANIMADDRPTR + 1]
+	ld a,[wSubAnimAddrPtr + 1]
 	ld h,a
-	ld a,[W_SUBANIMADDRPTR]
+	ld a,[wSubAnimAddrPtr]
 	ld l,a
 	ld a,[hli]
 	ld e,a
@@ -268,7 +268,7 @@ LoadSubanimation: ; 7817c (1e:417c)
 	ld a,[de]
 	ld b,a
 	and a,31
-	ld [W_SUBANIMCOUNTER],a ; number of frame blocks
+	ld [wSubAnimCounter],a ; number of frame blocks
 	ld a,b
 	and a,%11100000
 	cp a,5 << 5 ; is subanimation type 5?
@@ -282,12 +282,12 @@ LoadSubanimation: ; 7817c (1e:417c)
 ; place the upper 3 bits of a into bits 0-2 of a before storing
 	srl a
 	swap a
-	ld [W_SUBANIMTRANSFORM],a
+	ld [wSubAnimTransform],a
 	cp a,4 ; is the animation reversed?
 	ld hl,0
 	jr nz,.storeSubentryAddr
 ; if the animation is reversed, then place the initial subentry address at the end of the list of subentries
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	dec a
 	ld bc,3
 .loop
@@ -298,9 +298,9 @@ LoadSubanimation: ; 7817c (1e:417c)
 	inc de
 	add hl,de
 	ld a,l
-	ld [W_SUBANIMSUBENTRYADDR],a
+	ld [wSubAnimSubEntryAddr],a
 	ld a,h
-	ld [W_SUBANIMSUBENTRYADDR + 1],a
+	ld [wSubAnimSubEntryAddr + 1],a
 	ret
 
 ; called if the subanimation type is not 5
@@ -384,7 +384,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 	push af
 	call WaitForSoundToFinish
 	call SetAnimationPalette
-	ld a,[W_ANIMATIONID]
+	ld a,[wAnimationID]
 	and a
 	jr z,.AnimationFinished
 
@@ -397,7 +397,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 
 .MoveAnimation
 	; check if battle animations are disabled in the options
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	bit 7,a
 	jr nz,.AnimationsDisabled
 	call ShareMoveAnimations
@@ -411,9 +411,9 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 .AnimationFinished
 	call WaitForSoundToFinish
 	xor a
-	ld [W_SUBANIMSUBENTRYADDR],a
+	ld [wSubAnimSubEntryAddr],a
 	ld [wUnusedD09B],a
-	ld [W_SUBANIMTRANSFORM],a
+	ld [wSubAnimTransform],a
 	dec a
 	ld [wAnimSoundID],a
 	pop af
@@ -430,7 +430,7 @@ ShareMoveAnimations: ; 78da6 (1e:4da6)
 
 	; opponent’s turn
 
-	ld a,[W_ANIMATIONID]
+	ld a,[wAnimationID]
 
 	cp a,AMNESIA
 	ld b,CONF_ANIM
@@ -442,7 +442,7 @@ ShareMoveAnimations: ; 78da6 (1e:4da6)
 
 .Replace
 	ld a,b
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	ret
 
 PlayApplyingAttackAnimation: ; 78dbd (1e:4dbd)
@@ -529,7 +529,7 @@ SetAnimationPalette: ; 78e23 (1e:4e23)
 	ld a, $f0
 	ld [wAnimPalette], a
 	ld b, $e4
-	ld a, [W_ANIMATIONID]
+	ld a, [wAnimationID]
 	cp TRADE_BALL_DROP_ANIM
 	jr c, .next
 	cp TRADE_BALL_POOF_ANIM + 1
@@ -558,12 +558,12 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 .skipPlayingSound
 	ld hl,wOAMBuffer ; base address of OAM buffer
 	ld a,l
-	ld [W_FBDESTADDR + 1],a
+	ld [wFBDestAddr + 1],a
 	ld a,h
-	ld [W_FBDESTADDR],a
-	ld a,[W_SUBANIMSUBENTRYADDR + 1]
+	ld [wFBDestAddr],a
+	ld a,[wSubAnimSubEntryAddr + 1]
 	ld h,a
-	ld a,[W_SUBANIMSUBENTRYADDR]
+	ld a,[wSubAnimSubEntryAddr]
 	ld l,a
 .loop
 	push hl
@@ -585,24 +585,24 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 	add hl,de
 	add hl,de
 	ld a,[hli]
-	ld [W_BASECOORDY],a
+	ld [wBaseCoordY],a
 	ld a,[hl]
-	ld [W_BASECOORDX],a
+	ld [wBaseCoordX],a
 	pop hl
 	inc hl
 	ld a,[hl] ; frame block mode
-	ld [W_FBMODE],a
+	ld [wFBMode],a
 	call DrawFrameBlock
 	call DoSpecialEffectByAnimationId ; run animation-specific function (if there is one)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	dec a
-	ld [W_SUBANIMCOUNTER],a
+	ld [wSubAnimCounter],a
 	ret z
-	ld a,[W_SUBANIMSUBENTRYADDR + 1]
+	ld a,[wSubAnimSubEntryAddr + 1]
 	ld h,a
-	ld a,[W_SUBANIMSUBENTRYADDR]
+	ld a,[wSubAnimSubEntryAddr]
 	ld l,a
-	ld a,[W_SUBANIMTRANSFORM]
+	ld a,[wSubAnimTransform]
 	cp a,4 ; is the animation reversed?
 	ld bc,3
 	jr nz,.nextSubanimationSubentry
@@ -610,9 +610,9 @@ PlaySubanimation: ; 78e53 (1e:4e53)
 .nextSubanimationSubentry
 	add hl,bc
 	ld a,h
-	ld [W_SUBANIMSUBENTRYADDR + 1],a
+	ld [wSubAnimSubEntryAddr + 1],a
 	ld a,l
-	ld [W_SUBANIMSUBENTRYADDR],a
+	ld [wSubAnimSubEntryAddr],a
 	jp .loop
 
 AnimationCleanOAM: ; 78ec8 (1e:4ec8)
@@ -634,7 +634,7 @@ DoSpecialEffectByAnimationId: ; 78ed7 (1e:4ed7)
 	push hl
 	push de
 	push bc
-	ld a,[W_ANIMATIONID]
+	ld a,[wAnimationID]
 	ld hl,AnimationIdSpecialEffects
 	ld de,3
 	call IsInArray
@@ -737,21 +737,21 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	xor a,%00111100 ; complement colors 1 and 2
 	ld [rOBP0],a
 .skipFlashingEffect
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,11 ; is it the beginning of the subanimation?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
 	ld a,SFX_BALL_TOSS
 	call PlaySound
 .skipPlayingSound
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	cp a,02 ; is it a trainer battle?
 	jr z,.isTrainerBattle
 	ld a,[wd11e]
 	cp a,$10 ; is the enemy pokemon the Ghost Marowak?
 	ret nz
 ; if the enemy pokemon is the Ghost Marowak, make it dodge during the last 3 frames
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,3
 	jr z,.moveGhostMarowakLeft
 	cp a,2
@@ -775,15 +775,15 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	ld [rNR10],a ; Channel 1 sweep register
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,3
 	ret nz
 	dec a
-	ld [W_SUBANIMCOUNTER],a
+	ld [wSubAnimCounter],a
 	ret
 
 DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,4 ; is it the beginning of a shake?
 	jr nz,.skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
@@ -792,7 +792,7 @@ DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
 	ld c,40
 	call DelayFrames
 .skipPlayingSound
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	dec a
 	ret nz
 ; if it's the end of the ball shaking subanimation, check if more shakes are left and restart the subanimation
@@ -801,30 +801,30 @@ DoBallShakeSpecialEffects: ; 78f96 (1e:4f96)
 	ld [wNumShakes],a
 	ret z
 ; if there are shakes left, restart the subanimation
-	ld a,[W_SUBANIMSUBENTRYADDR]
+	ld a,[wSubAnimSubEntryAddr]
 	ld l,a
-	ld a,[W_SUBANIMSUBENTRYADDR + 1]
+	ld a,[wSubAnimSubEntryAddr + 1]
 	ld h,a
 	ld de,-(4 * 3) ; 4 subentries and 3 bytes per subentry
 	add hl,de
 	ld a,l
-	ld [W_SUBANIMSUBENTRYADDR],a
+	ld [wSubAnimSubEntryAddr],a
 	ld a,h
-	ld [W_SUBANIMSUBENTRYADDR + 1],a
+	ld [wSubAnimSubEntryAddr + 1],a
 	ld a,5 ; number of subentries in the ball shaking subanimation plus one
-	ld [W_SUBANIMCOUNTER],a
+	ld [wSubAnimCounter],a
 	ret
 
 ; plays a sound after the second frame of the poof animation
 DoPoofSpecialEffects: ; 78fce (1e:4fce)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,5
 	ret nz
 	ld a,SFX_BALL_POOF
 	jp PlaySound
 
 DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,12
 	ret nc
 	cp a,8
@@ -840,21 +840,21 @@ DoRockSlideSpecialEffects: ; 78fd9 (1e:4fd9)
 	predef_jump PredefShakeScreenVertically ; shake vertically
 
 FlashScreenEveryEightFrameBlocks: ; 78ff7 (1e:4ff7)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	and a,7 ; is the subanimation counter exactly 8?
 	call z,AnimationFlashScreen ; if so, flash the screen
 	ret
 
 ; flashes the screen if the subanimation counter is divisible by 4
 FlashScreenEveryFourFrameBlocks: ; 79000 (1e:5000)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	and a,3
 	call z,AnimationFlashScreen
 	ret
 
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects: ; 79009 (1e:5009)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,1 ; is it the end of the subanimation?
 	jr nz,FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
@@ -863,7 +863,7 @@ DoExplodeSpecialEffects: ; 79009 (1e:5009)
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects: ; 79016 (1e:5016)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,13
 	jp z,AnimationFlashScreen
 	cp a,9
@@ -877,7 +877,7 @@ DoBlizzardSpecialEffects: ; 79016 (1e:5016)
 ; flashes the screen at 3 points in the subanimation
 ; unused
 FlashScreenUnused: ; 7902e (1e:502e)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,14
 	jp z,AnimationFlashScreen
 	cp a,9
@@ -888,7 +888,7 @@ FlashScreenUnused: ; 7902e (1e:502e)
 
 ; function to make the pokemon disappear at the beginning of the animation
 TradeHidePokemon: ; 79041 (1e:5041)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,6
 	ret nz
 	ld a,2 * SCREEN_WIDTH + 7
@@ -896,7 +896,7 @@ TradeHidePokemon: ; 79041 (1e:5041)
 
 ; function to make a shaking pokeball jump up at the end of the animation
 TradeShakePokeball: ; 7904c (1e:504c)
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	cp a,1
 	ret nz
 ; if it's the end of the animation, make the ball jump up
@@ -976,7 +976,7 @@ DoGrowlSpecialEffects: ; 790bc (1e:50bc)
 	ld de,wOAMBuffer + $10
 	ld bc,$10
 	call CopyData ; copy the musical note graphic
-	ld a,[W_SUBANIMCOUNTER]
+	ld a,[wSubAnimCounter]
 	dec a
 	call z,AnimationCleanOAM ; clean up at the end of the subanimation
 	ret
@@ -984,7 +984,7 @@ DoGrowlSpecialEffects: ; 790bc (1e:50bc)
 ; this is associated with Tail Whip, but Tail Whip doesn't use any subanimations
 TailWhipAnimationUnused: ; 790d0 (1e:50d0)
 	ld a,1
-	ld [W_SUBANIMCOUNTER],a
+	ld [wSubAnimCounter],a
 	ld c,20
 	jp DelayFrames
 
@@ -1243,17 +1243,17 @@ AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 	call LoadAnimationTileset
 	ld d, 32
 	ld a, -16
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, $71
 	ld [wDropletTile], a
 .loop
 	ld a, 16
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, 0
 	ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
 	ld a, 24
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, 32
 	ld [wUnusedD08A], a
 	call _AnimationWaterDroplets
@@ -1264,24 +1264,24 @@ AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
 _AnimationWaterDroplets: ; 79246 (1e:5246)
 	ld hl, wOAMBuffer
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld [hli], a ; Y
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add 27
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld [hli], a ; X
 	ld a, [wDropletTile]
 	ld [hli], a ; tile
 	xor a
 	ld [hli], a ; attribute
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	cp 144
 	jr c, .loop
 	sub 168
-	ld [W_BASECOORDX], a
-	ld a, [W_BASECOORDY]
+	ld [wBaseCoordX], a
+	ld a, [wBaseCoordY]
 	add 16
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	cp 112
 	jr c, .loop
 	call AnimationCleanOAM
@@ -1387,14 +1387,14 @@ ShakeEnemyHUD_WritePlayerMonPicOAM: ; 792fd (1e:52fd)
 ; Writes the OAM entries for a copy of the player mon's pic in OAM.
 ; The top 5 rows are reproduced in OAM, although only 2 are actually needed.
 	ld a, $10
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, $30
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld hl, wOAMBuffer
 	ld d, 0
 	ld c, 7
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld e, a
 	ld b, 5
 .innerLoop
@@ -1406,21 +1406,21 @@ ShakeEnemyHUD_WritePlayerMonPicOAM: ; 792fd (1e:52fd)
 	ret z
 	inc d
 	inc d
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add 8
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	jr .loop
 
 BattleAnimWriteOAMEntry: ; 79329 (1e:5329)
 ; Y coordinate = e (increased by 8 each call, before the write to OAM)
-; X coordinate = [W_BASECOORDX]
+; X coordinate = [wBaseCoordX]
 ; tile = d
 ; attributes = 0
 	ld a, e
 	add 8
 	ld e, a
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld [hli], a
 	ld a, d
 	ld [hli], a
@@ -1749,9 +1749,9 @@ AnimationShootBallsUpward: ; 794f9 (1e:54f9)
 	lb bc, 6 * 8, 5 * 8
 .next
 	ld a, b
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, c
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	lb bc, 5, 1
 	call _AnimationShootBallsUpward
 	jp AnimationCleanOAM
@@ -1765,7 +1765,7 @@ _AnimationShootBallsUpward: ; 79517 (1e:5517)
 	ld d, $7a ; ball tile
 	ld hl, wOAMBuffer
 	push bc
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld e, a
 .initOAMLoop
 	call BattleAnimWriteOAMEntry
@@ -1779,7 +1779,7 @@ _AnimationShootBallsUpward: ; 79517 (1e:5517)
 	push bc
 	ld hl, wOAMBuffer
 .innerLoop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	add 8
 	ld e, a
 	ld a, [hl]
@@ -1819,11 +1819,11 @@ AnimationShootManyBallsUpward: ; 79566 (1e:5566)
 	ld [wSavedY], a
 .loop
 	ld a, [wSavedY]
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, [hli]
 	cp $ff
 	jp z, AnimationCleanOAM
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	lb bc, 4, 1
 	push hl
 	call _AnimationShootBallsUpward
@@ -2096,10 +2096,10 @@ HideSubstituteShowMonAnim: ; 79747 (1e:5747)
 	ld a, [H_WHOSETURN]
 	and a
 	ld hl, wPlayerMonMinimized
-	ld a, [W_PLAYERBATTSTATUS2]
+	ld a, [wPlayerBattleStatus2]
 	jr z, .next1
 	ld hl, wEnemyMonMinimized
-	ld a, [W_ENEMYBATTSTATUS2]
+	ld a, [wEnemyBattleStatus2]
 .next1
 	push hl
 ; if the substitute broke, slide it down, else slide it offscreen horizontally
@@ -2150,7 +2150,7 @@ ChangeMonPic: ; 79793 (1e:5793)
 	ld [wcf91], a
 	ld [wd0b5], a
 	xor a
-	ld [W_SPRITEFLIPPED], a
+	ld [wSpriteFlipped], a
 	call GetMonHeader
 	coord hl, 12, 0
 	call LoadFrontSpriteByMonIndex
@@ -2196,7 +2196,7 @@ InitMultipleObjectsOAM: ; 797e8 (1e:57e8)
 	pop bc
 	xor a
 	ld e, a
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld hl, wOAMBuffer
 .loop
 	call BattleAnimWriteOAMEntry
@@ -2354,7 +2354,7 @@ GetMoveSound: ; 7986f (1e:586f)
 
 IsCryMove: ; 798ad (1e:58ad)
 ; set carry if the move animation involves playing a monster cry
-	ld a,[W_ANIMATIONID]
+	ld a,[wAnimationID]
 	cp a,GROWL
 	jr z,.CryMove
 	cp a,ROAR
@@ -2953,7 +2953,7 @@ BattleAnimCopyTileMapToVRAM: ; 79e0d (1e:5e0d)
 	jp Delay3
 
 TossBallAnimation: ; 79e16 (1e:5e16)
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	cp a,2
 	jr z,.BlockBall ; if in trainer battle, play different animation
 	ld a,[wPokeBallAnimData]
@@ -2984,7 +2984,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 .done
 	ld a,b
 .PlayNextAnimation
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	push bc
 	push hl
 	call PlayAnimation
@@ -3001,12 +3001,12 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 
 .BlockBall ; 5E55
 	ld a,TOSS_ANIM
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	call PlayAnimation
 	ld a,SFX_FAINT_THUD
 	call PlaySound
 	ld a,BLOCKBALL_ANIM
-	ld [W_ANIMATIONID],a
+	ld [wAnimationID],a
 	jp PlayAnimation
 
 PlayApplyingAttackSound: ; 79e6a (1e:5e6a)

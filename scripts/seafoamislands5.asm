@@ -1,12 +1,12 @@
 SeafoamIslands5Script: ; 46799 (11:6799)
 	call EnableAutoTextBoxDrawing
-	ld a, [W_SEAFOAMISLANDS5CURSCRIPT]
+	ld a, [wSeafoamIslands5CurScript]
 	ld hl, SeafoamIslands5ScriptPointers
 	jp CallFunctionInTable
 
 SeafoamIslands5Script_467a5: ; 467a5 (11:67a5)
 	xor a
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ld [wJoyIgnore], a
 	ret
 
@@ -18,12 +18,12 @@ SeafoamIslands5ScriptPointers: ; 467ad (11:67ad)
 	dw SeafoamIslands5Script4
 
 SeafoamIslands5Script4: ; 467b7 (11:67b7)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jr z, SeafoamIslands5Script_467a5
 	call EndTrainerBattle
 	ld a, $0
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ret
 
 SeafoamIslands5Script0: ; 467c7 (11:67c7)
@@ -46,10 +46,10 @@ SeafoamIslands5Script0: ; 467c7 (11:67c7)
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	res 2, [hl]
 	ld a, $1
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ret
 
 CoordsData_467fe: ; 467fe (11:67fe)
@@ -66,7 +66,7 @@ SeafoamIslands5Script1: ; 46807 (11:6807)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ret
 
 SeafoamIslands5Script2: ; 46816 (11:6816)
@@ -92,7 +92,7 @@ SeafoamIslands5Script2: ; 46816 (11:6816)
 	call StartSimulatingJoypadStates
 	ld a, $3
 .asm_46849
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ret
 
 CoordsData_4684d: ; 4684d (11:684d)
@@ -121,7 +121,7 @@ SeafoamIslands5Script3: ; 46860 (11:6860)
 	and a
 	ret nz
 	ld a, $0
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	ret
 
 SeaFoamIslands5Script_46872: ; 46872 (11:6872)
@@ -154,7 +154,7 @@ SeafoamIslands5Text3: ; 46893 (11:6893)
 	ld hl, SeafoamIslands5TrainerHeader0
 	call TalkToTrainer
 	ld a, $4
-	ld [W_SEAFOAMISLANDS5CURSCRIPT], a
+	ld [wSeafoamIslands5CurScript], a
 	jp TextScriptEnd
 
 SeafoamIslands5BattleText2: ; 468a2 (11:68a2)

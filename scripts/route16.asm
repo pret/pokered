@@ -2,16 +2,16 @@ Route16Script: ; 59933 (16:5933)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route16TrainerHeaders
 	ld de, Route16ScriptPointers
-	ld a, [W_ROUTE16CURSCRIPT]
+	ld a, [wRoute16CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE16CURSCRIPT], a
+	ld [wRoute16CurScript], a
 	ret
 
 Route16Script_59946: ; 59946 (16:5946)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute16CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route16ScriptPointers: ; 59951 (16:5951)
@@ -30,20 +30,20 @@ Route16Script0: ; 59959 (16:5959)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	ld a, 30
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_16_SNORLAX
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
 	ld a, $3
-	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute16CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route16Script3: ; 5998f (16:598f)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route16Script_59946
 	call UpdateSprites
@@ -57,8 +57,8 @@ Route16Script3: ; 5998f (16:598f)
 	SetEvent EVENT_BEAT_ROUTE16_SNORLAX
 	call Delay3
 	ld a, $0
-	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute16CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route16TextPointers: ; 599b9 (16:59b9)

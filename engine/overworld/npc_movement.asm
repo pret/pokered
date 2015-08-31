@@ -52,7 +52,7 @@ PalletMovementScriptPointerTable: ; 1a442 (6:6442)
 	dw PalletMovementScript_Done
 
 PalletMovementScript_OakMoveLeft: ; 1a44c (6:644c)
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	sub $a
 	ld [wNumStepsToTake], a
 	jr z, .playerOnLeftTile
@@ -79,7 +79,7 @@ PalletMovementScript_OakMoveLeft: ; 1a44c (6:644c)
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .done
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 1, [hl]
 	ld a, $fc
 	ld [wJoyIgnore], a
@@ -267,7 +267,7 @@ RLEList_PewterGymGuy: ; 1a5da (6:65da)
 	db $FF
 
 FreezeEnemyTrainerSprite: ; 1a5e7 (6:65e7)
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp POKEMONTOWER_7
 	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't freeze them
 	ld hl, RivalIDs

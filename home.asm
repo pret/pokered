@@ -240,7 +240,7 @@ DrawHPBar:: ; 1336 (0:1336)
 
 
 ; loads pokemon data from one of multiple sources to wLoadedMon
-; loads base stats to W_MONHEADER
+; loads base stats to wMonHeader
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
 ; [wMonDataLocation] = source
@@ -251,7 +251,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; OUTPUT:
 ; [wcf91] = pokemon ID
 ; wLoadedMon = base address of pokemon data
-; W_MONHEADER = base address of base stats
+; wMonHeader = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
 	jpab LoadMonData_
 
@@ -268,7 +268,7 @@ OverwritewMoves:: ; 137a (0:137a)
 
 LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
 	ld a, 1
-	ld [W_SPRITEFLIPPED], a
+	ld [wSpriteFlipped], a
 
 LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	push hl
@@ -304,7 +304,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
-	ld [W_SPRITEFLIPPED], a
+	ld [wSpriteFlipped], a
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
@@ -551,7 +551,7 @@ GetwMoves:: ; 152e (0:152e)
 	ld a,[hl]
 	ret
 
-; copies the base stat data of a pokemon to W_MONHEADER
+; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader:: ; 1537 (0:1537)
@@ -586,12 +586,12 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld bc,MonBaseStatsEnd - MonBaseStats
 	ld hl,BaseStats
 	call AddNTimes
-	ld de,W_MONHEADER
+	ld de,wMonHeader
 	ld bc,MonBaseStatsEnd - MonBaseStats
 	call CopyData
 	jr .done
 .specialID
-	ld hl,W_MONHSPRITEDIM
+	ld hl,wMonHSpriteDim
 	ld [hl],b ; write sprite dimensions
 	inc hl
 	ld [hl],e ; write front sprite pointer
@@ -600,13 +600,13 @@ GetMonHeader:: ; 1537 (0:1537)
 	jr .done
 .mew
 	ld hl,MewBaseStats
-	ld de,W_MONHEADER
+	ld de,wMonHeader
 	ld bc,MonBaseStatsEnd - MonBaseStats
 	ld a,BANK(MewBaseStats)
 	call FarCopyData
 .done
 	ld a,[wd0b5]
-	ld [W_MONHINDEX],a
+	ld [wMonHIndex],a
 	pop af
 	ld [wd11e],a
 	pop hl
@@ -718,12 +718,12 @@ PrintBCDDigit:: ; 1604 (0:1604)
 ; assumes the corresponding mon header is already loaded
 ; hl contains offset to sprite pointer ($b for front or $d for back)
 UncompressMonSprite:: ; 1627 (0:1627)
-	ld bc,W_MONHEADER
+	ld bc,wMonHeader
 	add hl,bc
 	ld a,[hli]
-	ld [W_SPRITEINPUTPTR],a    ; fetch sprite input pointer
+	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
 	ld a,[hl]
-	ld [W_SPRITEINPUTPTR+1],a
+	ld [wSpriteInputPtr+1],a
 ; define (by index number) the bank that a pokemon's image is in
 ; index = Mew, bank 1
 ; index = Kabutops fossil, bank $B
@@ -764,9 +764,9 @@ UncompressMonSprite:: ; 1627 (0:1627)
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)
 	push de
-	ld hl, W_MONHFRONTSPRITE - W_MONHEADER
+	ld hl, wMonHFrontSprite - wMonHeader
 	call UncompressMonSprite
-	ld hl, W_MONHSPRITEDIM
+	ld hl, wMonHSpriteDim
 	ld a, [hli]
 	ld c, a
 	pop de
@@ -891,7 +891,7 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	dec a
 	ld [H_SPRITEINTERLACECOUNTER], a
 	jr nz, .interlaceLoop
-	ld a, [W_SPRITEFLIPPED]
+	ld a, [wSpriteFlipped]
 	and a
 	jr z, .notFlipped
 	ld bc, 2*SPRITEBUFFERSIZE
@@ -1057,12 +1057,12 @@ DisplayTextID:: ; 2920 (0:2920)
 	bit 0,[hl]
 	res 0,[hl]
 	jr nz,.skipSwitchToMapBank
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	call SwitchToMapRomBank
 .skipSwitchToMapBank
 	ld a,30 ; half a second
 	ld [H_FRAMECOUNTER],a ; used as joypad poll timer
-	ld hl,W_MAPTEXTPTR
+	ld hl,wMapTextPtr
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl = map text pointer
@@ -1079,7 +1079,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jp z,DisplayPlayerBlackedOutText
 	cp a,TEXT_REPEL_WORE_OFF
 	jp z,DisplayRepelWoreOffText
-	ld a,[W_NUMSPRITES]
+	ld a,[wNumSprites]
 	ld e,a
 	ld a,[hSpriteIndexOrTextID] ; sprite ID
 	cp e
@@ -1093,7 +1093,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	callba UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
-	ld hl,W_MAPSPRITEDATA ; NPC text entries
+	ld hl,wMapSpriteData ; NPC text entries
 	ld a,[hSpriteIndexOrTextID]
 	dec a
 	add a
@@ -1157,7 +1157,7 @@ HoldTextDisplayOpen:: ; 29df (0:29df)
 	jr nz,HoldTextDisplayOpen
 
 CloseTextDisplay:: ; 29e8 (0:29e8)
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	call SwitchToMapRomBank
 	ld a,$90
 	ld [hWY],a ; move the window off the screen
@@ -1376,7 +1376,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	ld [H_AUTOBGTRANSFERENABLED],a ; disable auto-transfer
 	ld a,1
 	ld [hJoy7],a ; joypad state update flag
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	and a ; is it the Old Man battle?
 	jr nz,.specialBattleType
 	ld a,$01 ; hardcoded bank
@@ -1432,7 +1432,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable transfer
 	call Delay3
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	and a ; is it the Old Man battle?
 	jr z,.notOldManBattle
 .oldManBattle
@@ -2043,7 +2043,7 @@ GetMoveName:: ; 3058 (0:3058)
 ReloadMapData:: ; 3071 (0:3071)
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	call SwitchToMapRomBank
 	call DisableLCD
 	call LoadTextBoxTilePatterns
@@ -2059,7 +2059,7 @@ ReloadMapData:: ; 3071 (0:3071)
 ReloadTilesetTilePatterns:: ; 3090 (0:3090)
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	call SwitchToMapRomBank
 	call DisableLCD
 	call LoadTilesetTilePatternData
@@ -2202,12 +2202,12 @@ EndNPCMovementScript:: ; 314e (0:314e)
 EmptyFunc2:: ; 3156 (0:3156)
 	ret
 
-; stores hl in [W_TRAINERHEADERPTR]
+; stores hl in [wTrainerHeaderPtr]
 StoreTrainerHeaderPointer:: ; 3157 (0:3157)
 	ld a, h
-	ld [W_TRAINERHEADERPTR], a
+	ld [wTrainerHeaderPtr], a
 	ld a, l
-	ld [W_TRAINERHEADERPTR+1], a
+	ld [wTrainerHeaderPtr+1], a
 	ret
 
 ; executes the current map script from the function pointer array provided in hl.
@@ -2219,16 +2219,16 @@ ExecuteCurMapScriptInTable:: ; 3160 (0:3160)
 	pop hl
 	pop af
 	push hl
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	bit 4, [hl]
 	res 4, [hl]
 	jr z, .useProvidedIndex   ; test if map script index was overridden manually
-	ld a, [W_CURMAPSCRIPT]
+	ld a, [wCurMapScript]
 .useProvidedIndex
 	pop hl
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	call CallFunctionInTable
-	ld a, [W_CURMAPSCRIPT]
+	ld a, [wCurMapScript]
 	ret
 
 LoadGymLeaderAndCityName:: ; 317f (0:317f)
@@ -2241,7 +2241,7 @@ LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	ld bc, NAME_LENGTH
 	jp CopyData     ; load gym leader name
 
-; reads specific information from trainer header (pointed to at W_TRAINERHEADERPTR)
+; reads specific information from trainer header (pointed to at wTrainerHeaderPtr)
 ; a: offset in header data
 ;    0 -> flag's bit (into wTrainerHeaderFlagBit)
 ;    2 -> flag's byte ptr (into hl)
@@ -2253,7 +2253,7 @@ ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	push af
 	ld d, $0
 	ld e, a
-	ld hl, W_TRAINERHEADERPTR
+	ld hl, wTrainerHeaderPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2317,14 +2317,14 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	call ReadTrainerHeaderInfo     ; read end battle text
 	pop de
 	call SaveEndBattleTextPointers
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 4, [hl]                    ; activate map script index override (index is set below)
 	ld hl, wFlags_0xcd60
 	bit 0, [hl]                    ; test if player is already engaging the trainer (because the trainer saw the player)
 	ret nz
 ; if the player talked to the trainer of his own volition
 	call EngageMapTrainer
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index before StartTrainerBattle increments it again (next script function is usually EndTrainerBattle)
 	jp StartTrainerBattle
 
@@ -2339,7 +2339,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 3, [hl]
 	ld [wEmotionBubbleSpriteIndex], a
 	xor a ; EXCLAMATION_BUBBLE
@@ -2350,7 +2350,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	xor a
 	ld [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
 
@@ -2374,7 +2374,7 @@ StartTrainerBattle:: ; 325d (0:325d)
 	set 7, [hl]
 	ld hl, wd72e
 	set 1, [hl]
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
 
@@ -2386,7 +2386,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	res 7, [hl]
 	ld hl, wFlags_0xcd60
 	res 0, [hl]                  ; player is no longer engaged by any trainer
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetButtonPressedAndMapScript
 	ld a, $2
@@ -2395,10 +2395,10 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld c, a
 	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
-	ld a, [W_ENEMYMONORTRAINERCLASS]
+	ld a, [wEnemyMonOrTrainerClass]
 	cp 200
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
 	call IsInArray              ; search for sprite ID
@@ -2418,7 +2418,7 @@ ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	ld [hJoyHeld], a
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
-	ld [W_CURMAPSCRIPT], a               ; reset battle status
+	ld [wCurMapScript], a               ; reset battle status
 	ret
 
 ; calls TrainerWalkUpToPlayer
@@ -2428,15 +2428,15 @@ TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
-	ld [W_CUROPPONENT], a
-	ld [W_ENEMYMONORTRAINERCLASS], a
+	ld [wCurOpponent], a
+	ld [wEnemyMonOrTrainerClass], a
 	cp 200
 	ld a, [wEngagedTrainerSet]
 	jr c, .noTrainer
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 	ret
 .noTrainer
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ret
 
 GetSpritePosition1:: ; 32ef (0:32ef)
@@ -2521,7 +2521,7 @@ SaveEndBattleTextPointers:: ; 3354 (0:3354)
 ; loads data of some trainer on the current map and plays pre-battle music
 ; [wSpriteIndex]: sprite ID of trainer who is engaged
 EngageMapTrainer:: ; 336a (0:336a)
-	ld hl, W_MAPSPRITEEXTRADATA
+	ld hl, wMapSpriteExtraData
 	ld d, $0
 	ld a, [wSpriteIndex]
 	dec a
@@ -2600,7 +2600,7 @@ PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ret z
 	cp OPP_SONY3
 	ret z
-	ld a, [W_GYMLEADERNO]
+	ld a, [wGymLeaderNo]
 	and a
 	ret nz
 	xor a
@@ -2741,9 +2741,9 @@ SetSpriteImageIndexAfterSettingFacingDirection:: ; 34b9 (0:34b9)
 ; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 ArePlayerCoordsInArray:: ; 34bf (0:34bf)
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	ld b,a
-	ld a,[W_XCOORD]
+	ld a,[wXCoord]
 	ld c,a
 	; fallthrough
 
@@ -2878,7 +2878,7 @@ GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 ; returns the sprite movement byte 2 pointer for sprite [H_SPRITEINDEX] in hl
 GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 	push de
-	ld hl,W_MAPSPRITEDATA
+	ld hl,wMapSpriteData
 	ld a,[H_SPRITEINDEX]
 	dec a
 	add a
@@ -2895,7 +2895,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	jr nz, .linkBattle
 	ld a, Bank(TrainerPicAndMoneyPointers)
 	call BankswitchHome
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerClass]
 	dec a
 	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $5
@@ -3151,7 +3151,7 @@ FillMemory::
 
 UncompressSpriteFromDE:: ; 36eb (0:36eb)
 ; Decompress pic at a:de.
-	ld hl, W_SPRITEINPUTPTR
+	ld hl, wSpriteInputPtr
 	ld [hl], e
 	inc hl
 	ld [hl], d
@@ -3537,7 +3537,7 @@ PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[wLetterPrintingDelayFlags]
 	bit 0,a
 	jr z,.waitOneFrame
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	and $f
 	ld [H_FRAMECOUNTER],a
 	jr .checkButtons
@@ -3627,7 +3627,7 @@ CalcStat:: ; 394a (0:394a)
 	ld a, b
 	ld d, a
 	push hl
-	ld hl, W_MONHEADER
+	ld hl, wMonHeader
 	ld b, $0
 	add hl, bc
 	ld a, [hl]          ; read base value of stat
@@ -3741,7 +3741,7 @@ CalcStat:: ; 394a (0:394a)
 	ld [H_MULTIPLICAND+1], a
 	xor a
 	ld [H_MULTIPLICAND], a
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ld [H_MULTIPLIER], a
 	call Multiply            ; ((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level
 	ld a, [H_MULTIPLICAND]
@@ -3759,7 +3759,7 @@ CalcStat:: ; 394a (0:394a)
 	cp $1
 	ld a, 5 ; + 5 for non-HP stat
 	jr nz, .notHPStat
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ld b, a
 	ld a, [H_MULTIPLICAND+2]
 	add b
@@ -4531,7 +4531,7 @@ ReloadMapSpriteTilePatterns:: ; 3e08 (0:3e08)
 	res 0, [hl]
 	push hl
 	xor a
-	ld [W_SPRITESETID], a
+	ld [wSpriteSetID], a
 	call DisableLCD
 	callba InitMapSprites
 	call EnableLCD
@@ -4565,7 +4565,7 @@ GivePokemon::
 	ld a, b
 	ld [wcf91], a
 	ld a, c
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	jpba _GivePokemon
@@ -4637,7 +4637,7 @@ PrintPredefTextID:: ; 3ef5 (0:3ef5)
 	call DisplayTextID
 
 RestoreMapTextPointer:: ; 3f05 (0:3f05)
-	ld hl, W_MAPTEXTPTR
+	ld hl, wMapTextPtr
 	ld a, [$ffec]
 	ld [hli], a
 	ld a, [$ffec + 1]
@@ -4645,14 +4645,14 @@ RestoreMapTextPointer:: ; 3f05 (0:3f05)
 	ret
 
 SetMapTextPointer:: ; 3f0f (0:3f0f)
-	ld a, [W_MAPTEXTPTR]
+	ld a, [wMapTextPtr]
 	ld [$ffec], a
-	ld a, [W_MAPTEXTPTR + 1]
+	ld a, [wMapTextPtr + 1]
 	ld [$ffec + 1], a
 	ld a, l
-	ld [W_MAPTEXTPTR], a
+	ld [wMapTextPtr], a
 	ld a, h
-	ld [W_MAPTEXTPTR + 1], a
+	ld [wMapTextPtr + 1], a
 	ret
 
 TextPredefs::

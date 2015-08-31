@@ -7,12 +7,12 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr c, .addToParty
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	cp MONS_PER_BOX
 	jr nc, .boxFull
 ; add to box
 	xor a
-	ld [W_ENEMYBATTSTATUS3], a
+	ld [wEnemyBattleStatus3], a
 	ld a, [wcf91]
 	ld [wEnemyMonSpecies2], a
 	callab LoadEnemyMonData

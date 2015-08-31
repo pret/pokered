@@ -1,9 +1,9 @@
 Route22GateScript: ; 1e683 (7:6683)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route22GateScriptPointers
-	ld a, [W_ROUTE22GATECURSCRIPT]
+	ld a, [wRoute22GateCurScript]
 	call CallFunctionInTable
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $4
 	ld a, ROUTE_23
 	jr c, .asm_1e69a
@@ -49,7 +49,7 @@ Route22GateScript1: ; 1e6cd (7:66cd)
 	ld [wJoyIgnore], a
 	call Delay3
 	ld a, $0
-	ld [W_ROUTE22GATECURSCRIPT], a
+	ld [wRoute22GateCurScript], a
 Route22GateScript2: ; 1e6de (7:66de)
 	ret
 
@@ -58,7 +58,7 @@ Route22GateTextPointers: ; 1e6df (7:66df)
 
 Route22GateText1: ; 1e6e1 (7:66e1)
 	TX_ASM
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedBadges]
 	bit 0, a
 	jr nz, .asm_1e6f6
 	ld hl, Route22GateText_1e704
@@ -71,7 +71,7 @@ Route22GateText1: ; 1e6e1 (7:66e1)
 	call PrintText
 	ld a, $2
 .asm_1e6fe
-	ld [W_ROUTE22GATECURSCRIPT], a
+	ld [wRoute22GateCurScript], a
 	jp TextScriptEnd
 
 Route22GateText_1e704: ; 1e704 (7:6704)

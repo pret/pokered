@@ -1,7 +1,7 @@
 ViridianCityScript: ; 18ff1 (6:4ff1)
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianCityScriptPointers
-	ld a, [W_VIRIDIANCITYCURSCRIPT]
+	ld a, [wViridianCityCurScript]
 	jp CallFunctionInTable
 
 ViridianCityScriptPointers: ; 18ffd (6:4ffd)
@@ -17,16 +17,16 @@ ViridianCityScript0: ; 19005 (6:5005)
 ViridianCityScript_1900b: ; 1900b (6:500b)
 	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret nz
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedBadges]
 	cp %01111111
 	jr nz, .asm_1901e
 	SetEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret
 .asm_1901e
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $8
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $20
 	ret nz
 	ld a, $e
@@ -36,16 +36,16 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ld [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript_1903d: ; 1903d (6:503d)
 	CheckEvent EVENT_GOT_POKEDEX
 	ret nz
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $9
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $13
 	ret nz
 	ld a, $5
@@ -55,7 +55,7 @@ ViridianCityScript_1903d: ; 1903d (6:503d)
 	ld [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript1: ; 19062 (6:5062)
@@ -72,13 +72,13 @@ ViridianCityScript1: ; 19062 (6:5062)
 
 	; set up battle for Old Man
 	ld a, BATTLE_TYPE_OLD_MAN
-	ld [W_BATTLETYPE], a
+	ld [wBattleType], a
 	ld a, 5
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, WEEDLE
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	ld a, $2
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript2: ; 1908f (6:508f)
@@ -98,10 +98,10 @@ ViridianCityScript2: ; 1908f (6:508f)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [W_BATTLETYPE], a
+	ld [wBattleType], a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript3: ; 190c1 (6:50c1)
@@ -110,7 +110,7 @@ ViridianCityScript3: ; 190c1 (6:50c1)
 	ret nz
 	call Delay3
 	ld a, 0
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	ret
 
 ViridianCityScript_190cf: ; 190cf (6:50cf)
@@ -147,7 +147,7 @@ ViridianCityText1: ; 19102 (6:5102)
 
 ViridianCityText2: ; 19107 (6:5107)
 	TX_ASM
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedBadges]
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe
@@ -222,7 +222,7 @@ ViridianCityText5: ; 1917f (6:517f)
 	call PrintText
 	call ViridianCityScript_190cf
 	ld a, $3
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	jp TextScriptEnd
 
 ViridianCityText_19191: ; 19191 (6:5191)
@@ -281,7 +281,7 @@ ViridianCityText7: ; 191df (6:51df)
 	ld hl, ViridianCityText_1920f
 	call PrintText
 	ld a, $1
-	ld [W_VIRIDIANCITYCURSCRIPT], a
+	ld [wViridianCityCurScript], a
 	jr .asm_2413a
 .asm_42f68
 	ld hl, ViridianCityText_19214

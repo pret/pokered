@@ -7,7 +7,7 @@ GymStatues: ; 62419 (18:6419)
 	cp SPRITE_FACING_UP
 	ret nz
 	ld hl, .BadgeFlags
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, a
 .loop
 	ld a, [hli]
@@ -50,7 +50,7 @@ GymStatueText2: ; 62458 (18:6458)
 PrintBenchGuyText: ; 6245d (18:645d)
 	call EnableAutoTextBoxDrawing
 	ld hl, BenchGuyTextPointers
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, a
 .loop
 	ld a, [hli]

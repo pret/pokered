@@ -2,7 +2,7 @@
 IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	push de
 	ld hl, DoorTileIDPointers
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld de, $3
 	call IsInArray
 	pop de

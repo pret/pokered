@@ -5,7 +5,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	call Delay3
 	push hl
 	call GBFadeInFromWhite
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	bit 7, [hl] ; used fly out of battle?
 	res 7, [hl]
 	jr nz, .flyAnimation
@@ -350,7 +350,7 @@ GetPlayerTeleportAnimFrameDelay: ; 7077f (1c:477f)
 IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	ld b, 0
 	ld hl, .warpPadAndHoleData
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld c, a
 .loop
 	ld a, [hli]

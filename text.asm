@@ -243,7 +243,7 @@ INCLUDE "text/maps/seafoam_islands_b3f.asm"
 INCLUDE "text/maps/seafoam_islands_b4f.asm"
 
 _AIBattleWithdrawText:: ; 880be (22:40be)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " with-"
 	line "drew @"
 	TX_RAM wEnemyMonNick
@@ -251,7 +251,7 @@ _AIBattleWithdrawText:: ; 880be (22:40be)
 	prompt
 
 _AIBattleUseItemText:: ; 880d5 (22:40d5)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	db $0
 	line "used @"
 	TX_RAM wcd6d
@@ -265,7 +265,7 @@ _TradeWentToText:: ; 880ef (22:40ef)
 	TX_RAM wcf4b
 	text " went"
 	line "to @"
-	TX_RAM W_GRASSRATE
+	TX_RAM wGrassRate
 	text "."
 	done
 
@@ -277,7 +277,7 @@ _TradeForText:: ; 88103 (22:4103)
 	done
 
 _TradeSendsText:: ; 88112 (22:4112)
-	TX_RAM W_GRASSRATE
+	TX_RAM wGrassRate
 	text " sends"
 	line "@"
 	TX_RAM wcd6d
@@ -285,7 +285,7 @@ _TradeSendsText:: ; 88112 (22:4112)
 	done
 
 _TradeWavesFarewellText:: ; 88124 (22:4124)
-	TX_RAM W_GRASSRATE
+	TX_RAM wGrassRate
 	text " waves"
 	line "farewell as"
 	done
@@ -304,7 +304,7 @@ _TradeTakeCareText:: ; 88150 (22:4150)
 	done
 
 _TradeWillTradeText:: ; 8816a (22:416a)
-	TX_RAM W_GRASSRATE
+	TX_RAM wGrassRate
 	text " will"
 	line "trade @"
 	TX_RAM wcd6d
@@ -1122,7 +1122,7 @@ _MoneyForWinningText:: ; 896dd (22:56dd)
 _TrainerDefeatedText:: ; 896f9 (22:56f9)
 	text $52, " defeated"
 	line "@"
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text "!"
 	prompt
 
@@ -1152,12 +1152,12 @@ _PlayerBlackedOutText2:: ; 89748 (22:5748)
 _LinkBattleLostText:: ; 89772 (22:5772)
 	text $52, " lost to"
 	line "@"
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text "!"
 	prompt
 
 _TrainerAboutToUseText:: ; 89784 (22:5784)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " is"
 	line "about to use"
 	cont"@"
@@ -1169,7 +1169,7 @@ _TrainerAboutToUseText:: ; 89784 (22:5784)
 	done
 
 _TrainerSentOutText:: ; 897b4 (22:57b4)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " sent"
 	line "out @"
 	TX_RAM wEnemyMonNick
@@ -1475,7 +1475,7 @@ _GrewLevelText:: ; 89c01 (22:5c01)
 	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM W_CURENEMYLVL, 1, 3
+	TX_NUM wCurEnemyLVL, 1, 3
 	text "!@@"
 
 _WildMonAppearedText:: ; 89c1d (22:5c1d)
@@ -1500,7 +1500,7 @@ _EnemyAppearedText:: ; 89c4f (22:5c4f)
 	prompt
 
 _TrainerWantsToFightText:: ; 89c5e (22:5c5e)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " wants"
 	line "to fight!"
 	prompt
@@ -1683,7 +1683,7 @@ _RareCandyText:: ; 89ee2 (22:5ee2)
 	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM W_CURENEMYLVL, $1,$3
+	TX_NUM wCurEnemyLVL, $1,$3
 	text "!@@"
 
 _TurnedOnPC1Text:: ; 89efe (22:5efe)

@@ -2,16 +2,16 @@ FightingDojoScript: ; 5cd5d (17:4d5d)
 	call EnableAutoTextBoxDrawing
 	ld hl, FightingDojoTrainerHeaders
 	ld de, FightingDojoScriptPointers
-	ld a, [W_FIGHTINGDOJOCURSCRIPT]
+	ld a, [wFightingDojoCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_FIGHTINGDOJOCURSCRIPT], a
+	ld [wFightingDojoCurScript], a
 	ret
 
 FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wFightingDojoCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
@@ -32,10 +32,10 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	xor a
 	ld [hJoyHeld], a
 	ld [wcf0d], a
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $3
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $4
 	ret nz
 	ld a, $1
@@ -53,7 +53,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	ret
 
 FightingDojoScript3: ; 5cdc6 (17:4dc6)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, FightingDojoScript_5cd70
 	ld a, [wcf0d]
@@ -76,8 +76,8 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wFightingDojoCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 FightingDojoTextPointers: ; 5ce03 (17:4e03)
@@ -148,8 +148,8 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
-	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wFightingDojoCurScript], a
+	ld [wCurMapScript], a
 	jr .asm_9dba4
 .continue1
 	ld hl, FightingDojoText_5ce9d

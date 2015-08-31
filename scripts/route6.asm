@@ -2,9 +2,9 @@ Route6Script: ; 590b0 (16:50b0)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6TrainerHeaders
 	ld de, Route6ScriptPointers
-	ld a, [W_ROUTE6CURSCRIPT]
+	ld a, [wRoute6CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE6CURSCRIPT], a
+	ld [wRoute6CurScript], a
 	ret
 
 Route6ScriptPointers: ; 590c3 (16:50c3)

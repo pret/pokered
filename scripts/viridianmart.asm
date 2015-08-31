@@ -2,7 +2,7 @@ ViridianMartScript: ; 1d46e (7:546e)
 	call ViridianMartScript_1d47d
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianMartScriptPointers
-	ld a, [W_VIRIDIANMARKETCURSCRIPT]
+	ld a, [wViridianMarketCurScript]
 	jp CallFunctionInTable
 
 ViridianMartScript_1d47d: ; 1d47d (7:547d)
@@ -14,9 +14,9 @@ ViridianMartScript_1d47d: ; 1d47d (7:547d)
 	ld hl, ViridianMartTextPointers + $a ; starts at ViridianMartText6
 .asm_1d48c
 	ld a, l
-	ld [W_MAPTEXTPTR], a
+	ld [wMapTextPtr], a
 	ld a, h
-	ld [W_MAPTEXTPTR+1], a
+	ld [wMapTextPtr+1], a
 	ret
 
 ViridianMartScriptPointers: ; 1d495 (7:5495)
@@ -36,7 +36,7 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $1
-	ld [W_VIRIDIANMARKETCURSCRIPT], a
+	ld [wViridianMarketCurScript], a
 	ret
 
 RLEMovement1d4bb: ; 1d4bb (7:54bb)
@@ -56,7 +56,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	call GiveItem
 	SetEvent EVENT_GOT_OAKS_PARCEL
 	ld a, $2
-	ld [W_VIRIDIANMARKETCURSCRIPT], a
+	ld [wViridianMarketCurScript], a
 	; fallthrough
 ViridianMartScript2: ; 1d4df (7:54df)
 	ret

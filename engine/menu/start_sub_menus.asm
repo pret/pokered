@@ -117,7 +117,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld a,[W_OBTAINEDBADGES] ; badges obtained
+	ld a,[wObtainedBadges] ; badges obtained
 	jp [hl]
 .outOfBattleMovePointers
 	dw .cut
@@ -601,12 +601,12 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld c,$e3
 	call PrintBCDNumber
 	coord hl, 9, 6
-	ld de,W_PLAYTIMEHOURS + 1 ; hours
+	ld de,wPlayTimeHours + 1 ; hours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
 	ld [hl],$d6 ; colon tile ID
 	inc hl
-	ld de,W_PLAYTIMEMINUTES + 1 ; minutes
+	ld de,wPlayTimeMinutes + 1 ; minutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 

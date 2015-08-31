@@ -38,7 +38,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 SafariZoneCheck: ; 1e988 (7:6988)
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
-	ld a, [W_NUMSAFARIBALLS]
+	ld a, [wNumSafariBalls]
 	and a
 	jr z, SafariZoneGameOver
 	jr SafariZoneGameStillGoing
@@ -83,7 +83,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1
 	ld [wSafariZoneGameOver], a
@@ -97,7 +97,7 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
 	TX_ASM
-	ld a, [W_NUMSAFARIBALLS]
+	ld a, [wNumSafariBalls]
 	and a
 	jr z, .asm_1ea04
 	ld hl, TimesUpText

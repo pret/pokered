@@ -31,14 +31,14 @@ HazeEffect_: ; 139da (4:79da)
 
 .cureVolatileStatuses
 	xor a
-	ld [W_PLAYERDISABLEDMOVE], a
-	ld [W_ENEMYDISABLEDMOVE], a
+	ld [wPlayerDisabledMove], a
+	ld [wEnemyDisabledMove], a
 	ld hl, wPlayerDisabledMoveNumber
 	ld [hli], a
 	ld [hl], a
-	ld hl, W_PLAYERBATTSTATUS1
+	ld hl, wPlayerBattleStatus1
 	call CureVolatileStatuses
-	ld hl, W_ENEMYBATTSTATUS1
+	ld hl, wEnemyBattleStatus1
 	call CureVolatileStatuses
 	ld hl, PlayCurrentMoveAnimation
 	call CallBankF

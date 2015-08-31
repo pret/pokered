@@ -3,9 +3,9 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad3TrainerHeaders
 	ld de, VictoryRoad3ScriptPointers
-	ld a, [W_VICTORYROAD3CURSCRIPT]
+	ld a, [wVictoryRoad3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_VICTORYROAD3CURSCRIPT], a
+	ld [wVictoryRoad3CurScript], a
 	ret
 
 VictoryRoad3Script_44996: ; 44996 (11:4996)

@@ -6,11 +6,11 @@ PrintMonType: ; 27d6b (9:7d6b)
 	call GetMonHeader
 	pop hl
 	push hl
-	ld a, [W_MONHTYPE1]
+	ld a, [wMonHType1]
 	call PrintType
-	ld a, [W_MONHTYPE1]
+	ld a, [wMonHType1]
 	ld b, a
-	ld a, [W_MONHTYPE2]
+	ld a, [wMonHType2]
 	cp b
 	pop hl
 	jr z, EraseType2Text
@@ -34,7 +34,7 @@ EraseType2Text: ; 27d8c (9:7d8c)
 PrintMoveType: ; 27d98 (9:7d98)
 	call GetPredefRegisters
 	push hl
-	ld a, [W_PLAYERMOVETYPE]
+	ld a, [wPlayerMoveType]
 ; fall through
 
 PrintType_: ; 27d9f (9:7d9f)

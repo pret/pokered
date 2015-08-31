@@ -27,12 +27,12 @@ InitBattleVariables: ; 525af (14:65af)
 	jr nz, .loop
 	inc a ; POUND
 	ld [wTestBattlePlayerSelectedMove], a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	jr c, .notSafariBattle
 	cp SAFARI_ZONE_REST_HOUSE_1
 	jr nc, .notSafariBattle
 	ld a, BATTLE_TYPE_SAFARI
-	ld [W_BATTLETYPE], a
+	ld [wBattleType], a
 .notSafariBattle
 	jpab PlayBattleMusic

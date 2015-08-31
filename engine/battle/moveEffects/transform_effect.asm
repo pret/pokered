@@ -1,27 +1,27 @@
 TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, wBattleMonSpecies
 	ld de, wEnemyMonSpecies
-	ld bc, W_ENEMYBATTSTATUS3
-	ld a, [W_ENEMYBATTSTATUS1]
+	ld bc, wEnemyBattleStatus3
+	ld a, [wEnemyBattleStatus1]
 	ld a, [H_WHOSETURN]
 	and a
 	jr nz, .hitTest
 	ld hl, wEnemyMonSpecies
 	ld de, wBattleMonSpecies
-	ld bc, W_PLAYERBATTSTATUS3
+	ld bc, wPlayerBattleStatus3
 	ld [wPlayerMoveListIndex], a
-	ld a, [W_PLAYERBATTSTATUS1]
+	ld a, [wPlayerBattleStatus1]
 .hitTest
 	bit Invulnerable, a ; is mon invulnerable to typical attacks? (fly/dig)
 	jp nz, .failed
 	push hl
 	push de
 	push bc
-	ld hl, W_PLAYERBATTSTATUS2
+	ld hl, wPlayerBattleStatus2
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .transformEffect
-	ld hl, W_ENEMYBATTSTATUS2
+	ld hl, wEnemyBattleStatus2
 .transformEffect
 ; animation(s) played are different if target has Substitute up
 	bit HasSubstituteUp, [hl]
@@ -29,7 +29,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, HideSubstituteShowMonAnim
 	ld b, BANK(HideSubstituteShowMonAnim)
 	call nz, Bankswitch
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	add a
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)

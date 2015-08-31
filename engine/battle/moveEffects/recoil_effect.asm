@@ -1,16 +1,16 @@
 RecoilEffect_: ; 1392c (4:792c)
 	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_PLAYERMOVENUM]
+	ld a, [wPlayerMoveNum]
 	ld hl, wBattleMonMaxHP
 	jr z, .recoilEffect
-	ld a, [W_ENEMYMOVENUM]
+	ld a, [wEnemyMoveNum]
 	ld hl, wEnemyMonMaxHP
 .recoilEffect
 	ld d, a
-	ld a, [W_DAMAGE]
+	ld a, [wDamage]
 	ld b, a
-	ld a, [W_DAMAGE + 1]
+	ld a, [wDamage + 1]
 	ld c, a
 	srl b
 	rr c

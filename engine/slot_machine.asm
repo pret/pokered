@@ -758,7 +758,7 @@ SlotMachine_AnimWheel1: ; 37813 (d:7813)
 	ld de, wSlotMachineWheel1Offset
 	ld hl, wOAMBuffer
 	ld a, $30
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	jr SlotMachine_AnimWheel
 
 SlotMachine_AnimWheel2: ; 37823 (d:7823)
@@ -766,7 +766,7 @@ SlotMachine_AnimWheel2: ; 37823 (d:7823)
 	ld de, wSlotMachineWheel2Offset
 	ld hl, wOAMBuffer + $30
 	ld a, $50
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	jr SlotMachine_AnimWheel
 
 SlotMachine_AnimWheel3: ; 37833 (d:7833)
@@ -774,11 +774,11 @@ SlotMachine_AnimWheel3: ; 37833 (d:7833)
 	ld de, wSlotMachineWheel3Offset
 	ld hl, wOAMBuffer + $60
 	ld a, $70
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 
 SlotMachine_AnimWheel: ; 37841 (d:7841)
 	ld a, $58
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	push de
 	ld a, [de]
 	ld d, b
@@ -787,17 +787,17 @@ SlotMachine_AnimWheel: ; 37841 (d:7841)
 	jr nc, .loop
 	inc d
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld [hli], a
 	ld a, [de]
 	ld [hli], a
 	ld a, $80
 	ld [hli], a
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add $8
 	ld [hli], a
 	ld a, [de]
@@ -806,9 +806,9 @@ SlotMachine_AnimWheel: ; 37841 (d:7841)
 	ld a, $80
 	ld [hli], a
 	inc de
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	sub $8
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	cp $28
 	jr nz, .loop
 	pop de

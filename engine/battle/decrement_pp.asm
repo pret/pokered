@@ -4,9 +4,9 @@ DecrementPP: ; 68000 (1a:4000)
 	cp a, STRUGGLE
 	ret z                ; if the pokemon is using "struggle", there's nothing to do
 	                     ; we don't decrement PP for "struggle"
-	ld hl, W_PLAYERBATTSTATUS1
-	ld a, [hli]          ; load the W_PLAYERBATTSTATUS1 pokemon status flags and increment hl to load the
-	                     ; W_PLAYERBATTSTATUS2 status flags later
+	ld hl, wPlayerBattleStatus1
+	ld a, [hli]          ; load the wPlayerBattleStatus1 pokemon status flags and increment hl to load the
+	                     ; wPlayerBattleStatus2 status flags later
 	and a, (1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << AttackingMultipleTimes)
 	ret nz               ; if any of these statuses are true, don't decrement PP
 	bit UsingRage, [hl]
@@ -17,7 +17,7 @@ DecrementPP: ; 68000 (1a:4000)
 	call .DecrementPP
 
 ; decrement PP in the party struct
-	ld a, [W_PLAYERBATTSTATUS3]
+	ld a, [wPlayerBattleStatus3]
 	bit Transformed, a
 	ret nz               ; Return if transformed. Pokemon Red stores the "current pokemon's" PP
 	                     ; separately from the "Pokemon in your party's" PP.  This is

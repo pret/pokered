@@ -2,9 +2,9 @@ Route11Script: ; 5944c (16:544c)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route11TrainerHeaders
 	ld de, Route11ScriptPointers
-	ld a, [W_ROUTE11CURSCRIPT]
+	ld a, [wRoute11CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE11CURSCRIPT], a
+	ld [wRoute11CurScript], a
 	ret
 
 Route11ScriptPointers: ; 5945f (16:545f)

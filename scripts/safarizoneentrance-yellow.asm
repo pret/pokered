@@ -56,7 +56,7 @@
 	ld a,30
 	lb hl, (502 / $100),  (502 % $100)
 .xf1ff2
-	ld [W_NUMSAFARIBALLS],a
+	ld [wNumSafariBalls],a
 	ld a,h
 	ld [wSafariSteps],a
 	ld a,l
@@ -67,7 +67,7 @@
 	SetEvent EVENT_IN_SAFARI_ZONE
 	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
 	ld a,3
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 	jr .done
 
 .PleaseComeAgain
@@ -78,7 +78,7 @@
 	ld c,1
 	call SafariZoneEntranceAutoWalk
 	ld a,4
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 .done
 	ret
 

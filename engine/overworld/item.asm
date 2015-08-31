@@ -3,7 +3,7 @@ PickUpItem:
 
 	ld a, [hSpriteIndexOrTextID]
 	ld b, a
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 .missableObjectsListLoop
 	ld a, [hli]
 	cp $ff
@@ -17,7 +17,7 @@ PickUpItem:
 	ld a, [hl]
 	ld [$ffdb], a
 
-	ld hl, W_MAPSPRITEEXTRADATA
+	ld hl, wMapSpriteExtraData
 	ld a, [hSpriteIndexOrTextID]
 	dec a
 	add a

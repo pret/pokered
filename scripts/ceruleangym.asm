@@ -6,9 +6,9 @@ CeruleanGymScript: ; 5c6b3 (17:46b3)
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanGymTrainerHeaders
 	ld de, CeruleanGymScriptPointers
-	ld a, [W_CERULEANGYMCURSCRIPT]
+	ld a, [wCeruleanGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_CERULEANGYMCURSCRIPT], a
+	ld [wCeruleanGymCurScript], a
 	ret
 
 CeruleanGymScript_5c6d0: ; 5c6d0 (17:46d0)
@@ -25,8 +25,8 @@ Gym2LeaderName: ; 5c6e7 (17:46e7)
 CeruleanGymScript_5c6ed: ; 5c6ed (17:46ed)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CERULEANGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCeruleanGymCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CeruleanGymScriptPointers: ; 5c6f8 (17:46f8)
@@ -36,7 +36,7 @@ CeruleanGymScriptPointers: ; 5c6f8 (17:46f8)
 	dw CeruleanGymScript3
 
 CeruleanGymScript3: ; 5c700 (17:4700)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanGymScript_5c6ed
 	ld a, $f0
@@ -60,7 +60,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_5c736
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedBadges
 	set 1, [hl]
 	ld hl, wBeatGymFlags
 	set 1, [hl]
@@ -127,11 +127,11 @@ CeruleanGymText1: ; 5c771 (17:4771)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $2
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_CERULEANGYMCURSCRIPT], a
+	ld [wCeruleanGymCurScript], a
 .asm_5c7bb
 	jp TextScriptEnd
 

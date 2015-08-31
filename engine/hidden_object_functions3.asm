@@ -4,7 +4,7 @@ PrintBookshelfText: ; fb50 (3:7b50)
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
 ; facing up
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld b, a
 	aCoord 8, 7
 	ld c, a
@@ -78,7 +78,7 @@ IndigoPlateauStatues: ; fbbf (3:7bbf)
 	TX_ASM
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	bit 0, a
 	ld hl, IndigoPlateauStatuesText2
 	jr nz, .asm_fbd3
@@ -102,7 +102,7 @@ IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
 BookOrSculptureText: ; fbe8 (3:7be8)
 	TX_ASM
 	ld hl, PokemonBooksText
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp MANSION ; Celadon Mansion tileset
 	jr nz, .asm_fbfd
 	aCoord 8, 6

@@ -1,5 +1,5 @@
 DrainHPEffect_: ; 783f (1:783f)
-	ld hl, W_DAMAGE
+	ld hl, wDamage
 	ld a, [hl]
 	srl a ; divide damage by 2
 	ld [hli], a
@@ -36,12 +36,12 @@ DrainHPEffect_: ; 783f (1:783f)
 	dec bc
 	ld [bc], a
 ; add damage to attacker's HP and copy new HP to wHPBarNewHP
-	ld a, [W_DAMAGE + 1]
+	ld a, [wDamage + 1]
 	ld b, [hl]
 	add b
 	ld [hld], a
 	ld [wHPBarNewHP], a
-	ld a, [W_DAMAGE]
+	ld a, [wDamage]
 	ld b, [hl]
 	adc b
 	ld [hli], a
@@ -85,9 +85,9 @@ DrainHPEffect_: ; 783f (1:783f)
 	ld hl, SuckedHealthText
 	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_PLAYERMOVEEFFECT]
+	ld a, [wPlayerMoveEffect]
 	jr z, .next3
-	ld a, [W_ENEMYMOVEEFFECT]
+	ld a, [wEnemyMoveEffect]
 .next3
 	cp DREAM_EATER_EFFECT
 	jr nz, .printText

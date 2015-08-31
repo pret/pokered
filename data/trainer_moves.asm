@@ -1,8 +1,8 @@
 IF !DEF(YELLOW)
 LoneMoves: ; 39d22 (e:5d22)
 ; these are used for gym leaders.
-; this is not automatic! you have to write the number you want to W_LONEATTACKNO
-; first. e.g., erika's script writes 4 to W_LONEATTACKNO to get mega drain,
+; this is not automatic! you have to write the number you want to wLoneAttackNo
+; first. e.g., erika's script writes 4 to wLoneAttackNo to get mega drain,
 ; the fourth entry in the list.
 
 ; first byte:  pokemon in the trainer's party that gets the move

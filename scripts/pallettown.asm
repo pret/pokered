@@ -5,7 +5,7 @@ PalletTownScript: ; 18e5b (6:4e5b)
 .next
 	call EnableAutoTextBoxDrawing
 	ld hl,PalletTownScriptPointers
-	ld a,[W_PALLETTOWNCURSCRIPT]
+	ld a,[wPalletTownCurScript]
 	jp CallFunctionInTable
 
 PalletTownScriptPointers: ; 18e73 (6:4e73)
@@ -20,7 +20,7 @@ PalletTownScriptPointers: ; 18e73 (6:4e73)
 PalletTownScript0: ; 18e81 (6:4e81)
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	cp 1 ; is player near north exit?
 	ret nz
 	xor a
@@ -39,7 +39,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 
 	; trigger the next script
 	ld a,1
-	ld [W_PALLETTOWNCURSCRIPT],a
+	ld [wPalletTownCurScript],a
 	ret
 
 PalletTownScript1: ; 18eb2 (6:4eb2)
@@ -56,7 +56,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 
 	; trigger the next script
 	ld a,2
-	ld [W_PALLETTOWNCURSCRIPT],a
+	ld [wPalletTownCurScript],a
 	ret
 
 PalletTownScript2: ; 18ed2 (6:4ed2)
@@ -67,7 +67,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a,1
-	ld [W_YCOORD],a
+	ld [wYCoord],a
 	ld a,1
 	ld [hNPCPlayerRelativePosPerspective],a
 	ld a,1
@@ -86,7 +86,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 
 	; trigger the next script
 	ld a,3
-	ld [W_PALLETTOWNCURSCRIPT],a
+	ld [wPalletTownCurScript],a
 	ret
 
 PalletTownScript3: ; 18f12 (6:4f12)
@@ -116,7 +116,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 
 	; trigger the next script
 	ld a,4
-	ld [W_PALLETTOWNCURSCRIPT],a
+	ld [wPalletTownCurScript],a
 	ret
 
 PalletTownScript4: ; 18f4b (6:4f4b)
@@ -126,7 +126,7 @@ PalletTownScript4: ; 18f4b (6:4f4b)
 
 	; trigger the next script
 	ld a,5
-	ld [W_PALLETTOWNCURSCRIPT],a
+	ld [wPalletTownCurScript],a
 	ret
 
 PalletTownScript5: ; 18f56 (6:4f56)

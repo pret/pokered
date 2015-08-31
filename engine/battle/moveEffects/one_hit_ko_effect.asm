@@ -1,5 +1,5 @@
 OneHitKOEffect_: ; 33f57 (c:7f57)
-	ld hl, W_DAMAGE
+	ld hl, wDamage
 	xor a
 	ld [hli], a
 	ld [hl], a ; set the damage output to zero
@@ -24,7 +24,7 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld a, [hl]
 	sbc b
 	jr c, .userIsSlower
-	ld hl, W_DAMAGE
+	ld hl, wDamage
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
@@ -34,5 +34,5 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 .userIsSlower
 ; keep damage at 0 and set move missed flag if target's current speed is higher instead
 	ld a, $1
-	ld [W_MOVEMISSED], a
+	ld [wMoveMissed], a
 	ret

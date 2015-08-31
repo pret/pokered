@@ -3,9 +3,9 @@ SilphCo5Script: ; 19f37 (6:5f37)
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo5TrainerHeaders
 	ld de, SilphCo5ScriptPointers
-	ld a, [W_SILPHCO5CURSCRIPT]
+	ld a, [wSilphCo5CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SILPHCO5CURSCRIPT], a
+	ld [wSilphCo5CurScript], a
 	ret
 
 SilphCo5Script_19f4d: ; 19f4d (6:5f4d)

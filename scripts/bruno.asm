@@ -3,9 +3,9 @@ BrunoScript: ; 762d6 (1d:62d6)
 	call EnableAutoTextBoxDrawing
 	ld hl, BrunoTrainerHeaders
 	ld de, BrunoScriptPointers
-	ld a, [W_BRUNOCURSCRIPT]
+	ld a, [wBrunoCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_BRUNOCURSCRIPT], a
+	ld [wBrunoCurScript], a
 	ret
 
 BrunoScript_762ec: ; 762ec (1d:62ec)
@@ -27,7 +27,7 @@ BrunoScript_76302: ; 76302 (1d:6302)
 
 BrunoScript_7630d: ; 7630d (1d:630d)
 	xor a
-	ld [W_BRUNOCURSCRIPT], a
+	ld [wBrunoCurScript], a
 	ret
 
 BrunoScriptPointers: ; 76312 (1d:6312)
@@ -53,8 +53,8 @@ BrunoScript_7631d: ; 7631d (1d:631d)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wBrunoCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 BrunoScript0: ; 76339 (1d:6339)
@@ -81,8 +81,8 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $3
-	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wBrunoCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_7637a: ; 7637a (1d:637a)
@@ -99,13 +99,13 @@ BrunoScript3: ; 76383 (1d:6383)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wBrunoCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 BrunoScript2: ; 76396 (1d:6396)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, BrunoScript_7630d
 	ld a, $1

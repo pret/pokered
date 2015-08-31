@@ -29,7 +29,7 @@ CheckForHiddenObject: ; 469a0 (11:69a0)
 	ld b, a
 	cp $ff
 	jr z, .noMatch
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp b
 	jr z, .foundMatchingMap
 	inc de
@@ -95,30 +95,30 @@ CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
 	cp SPRITE_FACING_RIGHT
 	jr z, .facingRight
 ; facing down
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	inc a
 	jr .upDownCommon
 .facingUp
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	dec a
 .upDownCommon
 	cp b
 	jr nz, .didNotMatch
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp c
 	jr nz, .didNotMatch
 	jr .matched
 .facingLeft
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	dec a
 	jr .leftRightCommon
 .facingRight
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	inc a
 .leftRightCommon
 	cp c
 	jr nz, .didNotMatch
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp b
 	jr nz, .didNotMatch
 .matched

@@ -1,8 +1,8 @@
 
 SPRITEBUFFERSIZE EQU 7*7 * 8 ; 7 * 7 (tiles) * 8 (bytes per tile)
 
-; Overload W_GRASSMONS
-wSerialEnemyDataBlock EQU $d893 ; W_GRASSMONS + 11
+; Overload wGrassMons
+wSerialEnemyDataBlock EQU $d893 ; wGrassMons + 11
 
 ; Overload enemy party data
 W_WATERRATE EQU $d8a4 ; wEnemyMon1Species

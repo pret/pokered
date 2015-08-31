@@ -89,7 +89,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 ; bit set by later logic.
 	ld a, [hTilePlayerStandingOn]
 	ld c, a
-	ld a, [W_GRASSTILE]
+	ld a, [wGrassTile]
 	cp c
 	ld a, $0
 	jr nz, .next2
@@ -114,7 +114,7 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	swap a
 	dec a
 	add a
-	ld hl, W_MAPSPRITEDATA
+	ld hl, wMapSpriteData
 	add l
 	ld l, a
 	ld a, [hl]        ; read movement byte 2
@@ -453,7 +453,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
 	ld a, [hl]      ; c2x4 (Y position + 4)
 	sub b           ; relative to player position
@@ -462,7 +462,7 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	dec h
 	ld [hli], a     ; c1x4 (screen Y position)
 	inc h
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld b, a
 	ld a, [hli]     ; c2x6 (X position + 4)
 	sub b           ; relative to player position
@@ -488,7 +488,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	add $4
 	ld l, a
 	ld b, [hl]      ; c2x4: Y pos (+4)
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp b
 	jr z, .skipYVisibilityTest
 	jr nc, .spriteInvisible ; above screen region
@@ -498,7 +498,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .skipYVisibilityTest
 	inc l
 	ld b, [hl]      ; c2x5: X pos (+4)
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp b
 	jr z, .skipXVisibilityTest
 	jr nc, .spriteInvisible ; left of screen region
@@ -542,7 +542,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
-	ld a, [W_GRASSTILE]
+	ld a, [wGrassTile]
 	cp c
 	ld a, $0
 	jr nz, .notInGrass
@@ -590,9 +590,9 @@ CanWalkOntoTile: ; 516e (1:516e)
 	and a
 	ret
 .notScripted
-	ld a, [W_TILESETCOLLISIONPTR]
+	ld a, [wTileSetCollisionPtr]
 	ld l, a
-	ld a, [W_TILESETCOLLISIONPTR+1]
+	ld a, [wTileSetCollisionPtr+1]
 	ld h, a
 .tilePassableLoop
 	ld a, [hli]

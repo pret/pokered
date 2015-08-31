@@ -2,7 +2,7 @@ HandleLedges: ; 1a672 (6:6672)
 	ld a, [wd736]
 	bit 6, a ; already jumping down ledge
 	ret nz
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
 	ret nz
 	predef GetTileAndCoordsInFrontOfPlayer

@@ -3,13 +3,13 @@ SubstituteEffect_: ; 17dad (5:7dad)
 	call DelayFrames
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
-	ld bc, W_PLAYERBATTSTATUS2
+	ld bc, wPlayerBattleStatus2
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyMonMaxHP
 	ld de, wEnemySubstituteHP
-	ld bc, W_ENEMYBATTSTATUS2
+	ld bc, wEnemyBattleStatus2
 .notEnemy
 	ld a, [bc]
 	bit HasSubstituteUp, a ; user already has substitute?
@@ -44,7 +44,7 @@ SubstituteEffect_: ; 17dad (5:7dad)
 	ld h, b
 	ld l, c
 	set HasSubstituteUp, [hl]
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	bit 7, a ; battle animation is enabled?
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)

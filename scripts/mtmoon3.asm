@@ -2,9 +2,9 @@ MtMoon3Script: ; 49d0b (12:5d0b)
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon3TrainerHeader0
 	ld de, MtMoon3ScriptPointers
-	ld a, [W_MTMOON3CURSCRIPT]
+	ld a, [wMtMoon3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_MTMOON3CURSCRIPT], a
+	ld [wMtMoon3CurScript], a
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	ret z
 	ld hl, CoordsData_49d37
@@ -40,8 +40,8 @@ CoordsData_49d37: ; 49d37 (12:5d37)
 MtMoon3Script_49d58: ; 49d58 (12:5d58)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 MtMoon3ScriptPointers: ; 49d63 (12:5d63)
@@ -55,10 +55,10 @@ MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 MtMoon3Script0: ; 49d6f (12:5d6f)
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	jp nz, MtMoon3Script_49d91
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $8
 	jp nz, MtMoon3Script_49d91
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $d
 	jp nz, MtMoon3Script_49d91
 	xor a
@@ -73,7 +73,7 @@ MtMoon3Script_49d91: ; 49d91 (12:5d91)
 	ret
 
 MtMoon3Script3: ; 49d9a (12:5d9a)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, MtMoon3Script_49d58
 	call UpdateSprites
@@ -82,8 +82,8 @@ MtMoon3Script3: ; 49d9a (12:5d9a)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 MtMoon3Script4: ; 49dba (12:5dba)
@@ -105,8 +105,8 @@ MtMoon3Script4: ; 49dba (12:5dba)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $5
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_49dea: ; 49dea (12:5dea)
@@ -150,8 +150,8 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 MtMoon3TextPointers: ; 49e34 (12:5e34)
@@ -228,8 +228,8 @@ MtMoon3Text1: ; 49e79 (12:5e79)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 	jr .asm_49ebe
 .asm_49eb8
 	ld hl, MtMoon3Text_49f94
@@ -280,8 +280,8 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	predef HideObject
 	SetEvent EVENT_GOT_DOME_FOSSIL
 	ld a, $4
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 .asm_49f21
 	jp TextScriptEnd
 
@@ -308,8 +308,8 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	predef HideObject
 	SetEvent EVENT_GOT_HELIX_FOSSIL
 	ld a, $4
-	ld [W_MTMOON3CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wMtMoon3CurScript], a
+	ld [wCurMapScript], a
 .asm_49f61
 	jp TextScriptEnd
 

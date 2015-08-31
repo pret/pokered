@@ -1,6 +1,6 @@
 Route5GateScript: ; 1df33 (7:5f33)
 	call EnableAutoTextBoxDrawing
-	ld a, [W_ROUTE5GATECURSCRIPT]
+	ld a, [wRoute5GateCurScript]
 	ld hl, Route5GateScriptPointers
 	jp CallFunctionInTable
 
@@ -35,7 +35,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	call DisplayTextID
 	call Route5GateScript_1df43
 	ld a, $1
-	ld [W_ROUTE5GATECURSCRIPT], a
+	ld [wRoute5GateCurScript], a
 	ret
 .asm_1df82
 	ld a, $3
@@ -57,7 +57,7 @@ Route5GateScript1: ; 1df94 (7:5f94)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROUTE5GATECURSCRIPT], a
+	ld [wRoute5GateCurScript], a
 	ret
 
 Route5GateTextPointers: ; 1dfa4 (7:5fa4)
@@ -81,7 +81,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	call PrintText
 	call Route5GateScript_1df43
 	ld a, $1
-	ld [W_ROUTE5GATECURSCRIPT], a
+	ld [wRoute5GateCurScript], a
 	jp TextScriptEnd
 .asm_768a2
 	ld hl, Route5GateText3

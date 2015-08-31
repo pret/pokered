@@ -3,11 +3,11 @@ HealEffect_: ; 3b9ec (e:79ec)
 	and a
 	ld de, wBattleMonHP
 	ld hl, wBattleMonMaxHP
-	ld a, [W_PLAYERMOVENUM]
+	ld a, [wPlayerMoveNum]
 	jr z, .healEffect
 	ld de, wEnemyMonHP
 	ld hl, wEnemyMonMaxHP
-	ld a, [W_ENEMYMOVENUM]
+	ld a, [wEnemyMoveNum]
 .healEffect
 	ld b, a
 	ld a, [de]

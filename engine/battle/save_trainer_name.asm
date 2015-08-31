@@ -1,6 +1,6 @@
 SaveTrainerName: ; 27e4a (9:7e4a)
 	ld hl,TrainerNamePointers
-	ld a,[W_TRAINERCLASS]
+	ld a,[wTrainerClass]
 	dec a
 	ld c,a
 	ld b,0
@@ -23,50 +23,50 @@ TrainerNamePointers: ; 27e64 (9:7e64)
 	dw YoungsterName
 	dw BugCatcherName
 	dw LassName
-	dw W_TRAINERNAME
+	dw wTrainerName
 	dw JrTrainerMName
 	dw JrTrainerFName
 	dw PokemaniacName
 	dw SuperNerdName
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
+	dw wTrainerName
+	dw wTrainerName
 	dw BurglarName
 	dw EngineerName
 	dw JugglerXName
-	dw W_TRAINERNAME
+	dw wTrainerName
 	dw SwimmerName
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
+	dw wTrainerName
+	dw wTrainerName
 	dw BeautyName
-	dw W_TRAINERNAME
+	dw wTrainerName
 	dw RockerName
 	dw JugglerName
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
+	dw wTrainerName
+	dw wTrainerName
 	dw BlackbeltName
-	dw W_TRAINERNAME
+	dw wTrainerName
 	dw ProfOakName
 	dw ChiefName
 	dw ScientistName
-	dw W_TRAINERNAME
+	dw wTrainerName
 	dw RocketName
 	dw CooltrainerMName
 	dw CooltrainerFName
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
-	dw W_TRAINERNAME
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
+	dw wTrainerName
 
 YoungsterName: ; 27ec2 (9:7ec2)
 	db "YOUNGSTER@"

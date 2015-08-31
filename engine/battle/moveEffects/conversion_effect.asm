@@ -3,13 +3,13 @@ ConversionEffect_: ; 139a3 (4:79a3)
 	ld de, wBattleMonType1
 	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_ENEMYBATTSTATUS1]
+	ld a, [wEnemyBattleStatus1]
 	jr z, .conversionEffect
 	push hl
 	ld h, d
 	ld l, e
 	pop de
-	ld a, [W_PLAYERBATTSTATUS1]
+	ld a, [wPlayerBattleStatus1]
 .conversionEffect
 	bit Invulnerable, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText

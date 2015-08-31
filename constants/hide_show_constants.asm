@@ -2,7 +2,7 @@
 ; sprites marked with an X are constants that are never used
 ; because those sprites are not (de)activated in a map's script
 ; (they are either items or sprites that deactivate after battle
-; and are detected in W_MISSABLEOBJECTLIST)
+; and are detected in wMissableObjectList)
 
 const_value = 0
 

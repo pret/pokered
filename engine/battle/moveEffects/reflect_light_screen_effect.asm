@@ -1,11 +1,11 @@
 ReflectLightScreenEffect_: ; 3bb97 (e:7b97)
-	ld hl, W_PLAYERBATTSTATUS3
-	ld de, W_PLAYERMOVEEFFECT
+	ld hl, wPlayerBattleStatus3
+	ld de, wPlayerMoveEffect
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .reflectLightScreenEffect
-	ld hl, W_ENEMYBATTSTATUS3
-	ld de, W_ENEMYMOVEEFFECT
+	ld hl, wEnemyBattleStatus3
+	ld de, wEnemyMoveEffect
 .reflectLightScreenEffect
 	ld a, [de]
 	cp LIGHT_SCREEN_EFFECT

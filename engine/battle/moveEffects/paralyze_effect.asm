@@ -1,11 +1,11 @@
 ParalyzeEffect_: ; 52601 (14:6601)
 	ld hl, wEnemyMonStatus
-	ld de, W_PLAYERMOVETYPE
+	ld de, wPlayerMoveType
 	ld a, [H_WHOSETURN]
 	and a
 	jp z, .next
 	ld hl, wBattleMonStatus
-	ld de, W_ENEMYMOVETYPE
+	ld de, wEnemyMoveType
 .next
 	ld a, [hl]
 	and a ; does the target already have a status ailment?
@@ -28,7 +28,7 @@ ParalyzeEffect_: ; 52601 (14:6601)
 	push hl
 	callab MoveHitTest
 	pop hl
-	ld a, [W_MOVEMISSED]
+	ld a, [wMoveMissed]
 	and a
 	jr nz, .didntAffect
 	set PAR, [hl]

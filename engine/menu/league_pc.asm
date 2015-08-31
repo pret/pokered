@@ -10,7 +10,7 @@ PKMNLeaguePC: ; 0x7657e
 	push af
 	xor a
 	ld [hTilesetType], a
-	ld [W_SPRITEFLIPPED], a
+	ld [wSpriteFlipped], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wHoFTeamIndex2], a
 	ld [wHoFTeamNo], a

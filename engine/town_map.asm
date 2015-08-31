@@ -7,7 +7,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	push hl
 	ld a, $1
 	ld [hJoy7], a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
@@ -156,7 +156,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	coord hl, 0, 0
 	ld de, ToText
 	call PlaceString
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
@@ -250,9 +250,9 @@ BuildFlyLocationsList: ; 71070 (1c:5070)
 	ld hl, wFlyLocationsList - 1
 	ld [hl], $ff
 	inc hl
-	ld a, [W_TOWNVISITEDFLAG]
+	ld a, [wTownVisitedFlag]
 	ld e, a
-	ld a, [W_TOWNVISITEDFLAG + 1]
+	ld a, [wTownVisitedFlag + 1]
 	ld d, a
 	ld bc, SAFFRON_CITY + 1
 .loop
@@ -405,7 +405,7 @@ DisplayWildLocations: ; 711ef (1c:51ef)
 	call PlaceString
 	jr .done
 .drawPlayerSprite
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 .done

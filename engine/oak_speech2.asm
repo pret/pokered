@@ -40,11 +40,11 @@ ChooseRivalName: ; 69a4 (1:69a4)
 	jr z, .customName
 	ld hl, DefaultNamesRivalList
 	call GetDefaultName
-	ld de, W_RIVALNAME
+	ld de, wRivalName
 	call OakSpeechSlidePicLeft
 	jr .done
 .customName
-	ld hl, W_RIVALNAME
+	ld hl, wRivalName
 	ld a, NAME_RIVAL_SCREEN
 	ld [wNamingScreenType], a
 	call DisplayNamingScreen

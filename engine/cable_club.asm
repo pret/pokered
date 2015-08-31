@@ -57,8 +57,8 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld [hli], a
 	dec b
 	jr nz, .zeroPlayerDataPatchListLoop
-	ld hl, W_GRASSRATE
-	ld bc, W_TRAINERHEADERPTR - W_GRASSRATE
+	ld hl, wGrassRate
+	ld bc, wTrainerHeaderPtr - wGrassRate
 .zeroEnemyPartyLoop
 	xor a
 	ld [hli], a
@@ -186,7 +186,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec c
 	jr nz, .copyEnemyNameLoop
 	ld de, wEnemyPartyCount
-	ld bc, W_TRAINERHEADERPTR - wEnemyPartyCount
+	ld bc, wTrainerHeaderPtr - wEnemyPartyCount
 .copyEnemyPartyLoop
 	ld a, [hli]
 	cp SERIAL_NO_DATA_BYTE
@@ -275,10 +275,10 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
 	ld a, OPP_SONY1
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	call ClearScreen
 	call Delay3
-	ld hl, W_OPTIONS
+	ld hl, wOptions
 	res 7, [hl]
 	predef InitOpponent
 	predef HealParty
@@ -900,18 +900,18 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	call CableClub_DoBattleOrTrade
 	ld hl, Club_GFX
 	ld a, h
-	ld [W_TILESETGFXPTR + 1], a
+	ld [wTileSetGFXPtr + 1], a
 	ld a, l
-	ld [W_TILESETGFXPTR], a
+	ld [wTileSetGFXPtr], a
 	ld a, Bank(Club_GFX)
-	ld [W_TILESETBANK], a
+	ld [wTileSetBank], a
 	ld hl, Club_Coll
 	ld a, h
-	ld [W_TILESETCOLLISIONPTR + 1], a
+	ld [wTileSetCollisionPtr + 1], a
 	ld a, l
-	ld [W_TILESETCOLLISIONPTR], a
+	ld [wTileSetCollisionPtr], a
 	xor a
-	ld [W_GRASSRATE], a
+	ld [wGrassRate], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
 	ld [$ffb5], a

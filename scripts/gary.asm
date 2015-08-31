@@ -1,13 +1,13 @@
 GaryScript: ; 75f1d (1d:5f1d)
 	call EnableAutoTextBoxDrawing
 	ld hl, GaryScriptPointers
-	ld a, [W_GARYCURSCRIPT]
+	ld a, [wGaryCurScript]
 	jp CallFunctionInTable
 
 GaryScript_75f29: ; 75f29 (1d:5f29)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScriptPointers: ; 75f31 (1d:5f31)
@@ -36,7 +36,7 @@ GaryScript1: ; 75f48 (1d:5f48)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $2
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 RLEMovement75f63: ; 75f63 (1d:5f63)
@@ -52,7 +52,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, W_OPTIONS
+	ld hl, wOptions
 	res 7, [hl]
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
@@ -65,10 +65,10 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld de, GaryText_760fe
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY3
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
 	ld a, $1
@@ -81,16 +81,16 @@ GaryScript2: ; 75f6a (1d:5f6a)
 .Charmander
 	ld a, $3
 .done
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript3: ; 75fbb (1d:5fbb)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, GaryScript_75f29
 	call UpdateSprites
@@ -104,7 +104,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld a, $4
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript4: ; 75fe4 (1d:5fe4)
@@ -123,7 +123,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $5
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 MovementData_76014: ; 76014 (1d:6014)
@@ -154,7 +154,7 @@ GaryScript5: ; 7601a (1d:601a)
 	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $6
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript6: ; 76047 (1d:6047)
@@ -167,7 +167,7 @@ GaryScript6: ; 76047 (1d:6047)
 	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $7
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript7: ; 7605f (1d:605f)
@@ -184,7 +184,7 @@ GaryScript7: ; 7605f (1d:605f)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $8
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 MovementData_76080: ; 76080 (1d:6080)
@@ -200,7 +200,7 @@ GaryScript8: ; 76083 (1d:6083)
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $9
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript9: ; 76099 (1d:6099)
@@ -213,7 +213,7 @@ GaryScript9: ; 76099 (1d:6099)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $a
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 RLEMovement760b4: ; 760b4 (1d:60b4)
@@ -228,7 +228,7 @@ GaryScript10: ; 760b9 (1d:60b9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_GARYCURSCRIPT], a
+	ld [wGaryCurScript], a
 	ret
 
 GaryScript_760c8: ; 760c8 (1d:60c8)
@@ -278,7 +278,7 @@ GaryText2: ; 76108 (1d:6108)
 
 GaryText3: ; 7610d (1d:610d)
 	TX_ASM
-	ld a, [W_PLAYERSTARTER]
+	ld a, [wPlayerStarter]
 	ld [wd11e], a
 	call GetMonName
 	ld hl, GaryText_76120

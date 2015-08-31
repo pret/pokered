@@ -15,7 +15,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [hl],a
 
 ; get the pointer to trainer data for this class
-	ld a,[W_CUROPPONENT]
+	ld a,[wCurOpponent]
 	sub $C9 ; convert value from pokemon to trainer
 	add a,a
 	ld hl,TrainerDataPointers
@@ -25,7 +25,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld a,[W_TRAINERNO]
+	ld a,[wTrainerNo]
 	ld b,a
 ; At this point b contains the trainer number,
 ; and hl points to the trainer class.
@@ -43,13 +43,13 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; if the first byte of trainer data is FF,
 ; - each pokemon has a specific level
 ;      (as opposed to the whole team being of the same level)
-; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
+; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 ; else the first byte is the level of every pokemon on the team
 .IterateTrainer
 	ld a,[hli]
 	cp $FF ; is the trainer special?
 	jr z,.SpecialTrainer ; if so, check for special moves
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 .LoopTrainerData
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
@@ -65,11 +65,11 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; if this code is being run:
 ; - each pokemon has a specific level
 ;      (as opposed to the whole team being of the same level)
-; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
+; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
 	jr z,.AddLoneMove
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	ld a,[hli]
 	ld [wcf91],a
 	ld a,ENEMY_PARTY_DATA
@@ -80,7 +80,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr .SpecialTrainer
 .AddLoneMove
 ; does the trainer have a single monster with a different move
-	ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
+	ld a,[wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
 	and a
 	jr z,.AddTeamMove
 	dec a
@@ -100,7 +100,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; check if our trainer's team has special moves
 
 ; get trainer class number
-	ld a,[W_CUROPPONENT]
+	ld a,[wCurOpponent]
 	sub 200
 	ld b,a
 	ld hl,TeamMoves
@@ -130,7 +130,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [wEnemyMon1Moves + 2],a
 
 ; starter
-	ld a,[W_RIVALSTARTER]
+	ld a,[wRivalStarter]
 	cp STARTER3
 	ld b,MEGA_DRAIN
 	jr z,.GiveStarterMove
@@ -150,7 +150,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [de],a
 	inc de
 	ld [de],a
-	ld a,[W_CURENEMYLVL]
+	ld a,[wCurEnemyLVL]
 	ld b,a
 .LastLoop
 ; update wAmountMoneyWon addresses (money to win) based on enemy's level
@@ -162,5 +162,5 @@ ReadTrainer: ; 39c53 (e:5c53)
 	inc de
 	inc de
 	dec b
-	jr nz,.LastLoop ; repeat W_CURENEMYLVL times
+	jr nz,.LastLoop ; repeat wCurEnemyLVL times
 	ret

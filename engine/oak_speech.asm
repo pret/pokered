@@ -1,7 +1,7 @@
 SetDefaultNames: ; 60ca (1:60ca)
 	ld a, [wLetterPrintingDelayFlags]
 	push af
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	push af
 	ld a, [wd732]
 	push af
@@ -16,7 +16,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	pop af
 	ld [wd732], a
 	pop af
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	pop af
 	ld [wLetterPrintingDelayFlags], a
 	ld a, [wOptionsInitialized]
@@ -27,7 +27,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, SonyText
-	ld de, W_RIVALNAME
+	ld de, wRivalName
 	ld bc, NAME_LENGTH
 	jp CopyData
 

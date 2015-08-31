@@ -3,9 +3,9 @@ Route25Script: ; 515cb (14:55cb)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25TrainerHeaders
 	ld de, Route25ScriptPointers
-	ld a, [W_ROUTE25CURSCRIPT]
+	ld a, [wRoute25CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE25CURSCRIPT], a
+	ld [wRoute25CurScript], a
 	ret
 
 Route25Script_515e1: ; 515e1 (14:55e1)

@@ -1,10 +1,10 @@
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE
+	ld hl, wGrassRate
 	ld a, [wLinkState]
 	and a
 	jr nz, .rival
-	ld hl, W_RIVALNAME
-	ld a, [W_TRAINERCLASS]
+	ld hl, wRivalName
+	ld a, [wTrainerClass]
 	cp SONY1
 	jr z, .rival
 	cp SONY2
@@ -19,6 +19,6 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	call GetName
 	ld hl, wcd6d
 .rival
-	ld de, W_TRAINERNAME
+	ld de, wTrainerName
 	ld bc, $d
 	jp CopyData

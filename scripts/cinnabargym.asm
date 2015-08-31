@@ -2,7 +2,7 @@ CinnabarGymScript: ; 7574a (1d:574a)
 	call CinnabarGymScript_75759
 	call EnableAutoTextBoxDrawing
 	ld hl, CinnabarGymScriptPointers
-	ld a, [W_CINNABARGYMCURSCRIPT]
+	ld a, [wCinnabarGymCurScript]
 	jp CallFunctionInTable
 
 CinnabarGymScript_75759: ; 75759 (1d:5759)
@@ -30,8 +30,8 @@ Gym7LeaderName: ; 7578b (1d:578b)
 CinnabarGymScript_75792: ; 75792 (1d:5792)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
 	ld [wOpponentAfterWrongAnswer], a
 	ret
 
@@ -64,8 +64,8 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 .asm_757cb
 	call MoveSprite
 	ld a, $1
-	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 MovementData_757d7: ; 757d7 (1d:57d7)
@@ -92,7 +92,7 @@ CinnabarGymFlagAction: ; 757f1 (1d:57f1)
 	predef_jump FlagActionPredef
 
 CinnabarGymScript2: ; 757f6 (1d:57f6)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CinnabarGymScript_75792
 	ld a, [wTrainerHeaderFlagBit]
@@ -129,12 +129,12 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld [wJoyIgnore], a
 	ld [wOpponentAfterWrongAnswer], a
 	ld a, $0
-	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CinnabarGymScript3: ; 7584a (1d:584a)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CinnabarGymScript_75792
 	ld a, $f0
@@ -157,7 +157,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75880
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedBadges
 	set 6, [hl]
 	ld hl, wBeatGymFlags
 	set 6, [hl]
@@ -200,8 +200,8 @@ CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 .asm_758d4
 	ld a, $3
 .asm_758d6
-	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCinnabarGymCurScript], a
+	ld [wCurMapScript], a
 	jp TextScriptEnd
 
 CinnabarGymText1: ; 758df (1d:58df)
@@ -224,7 +224,7 @@ CinnabarGymText1: ; 758df (1d:58df)
 	ld de, BlaineEndBattleText
 	call SaveEndBattleTextPointers
 	ld a, $7
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	jp CinnabarGymScript_758b7
 
 BlaineBattleText: ; 75914 (1d:5914)

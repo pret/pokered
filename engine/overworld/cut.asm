@@ -1,7 +1,7 @@
 UsedCut: ; ef54 (3:6f54)
 	xor a
 	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
 	jr z, .overworld
 	cp GYM
@@ -177,7 +177,7 @@ ReplaceTreeTileBlock: ; f09f (3:709f)
 ; player (i.e. where the tree is) and replace it with the corresponding tile
 ; block that doesn't have the tree.
 	push de
-	ld a, [W_CURMAPWIDTH]
+	ld a, [wCurMapWidth]
 	add 6
 	ld c, a
 	ld b, 0
@@ -195,22 +195,22 @@ ReplaceTreeTileBlock: ; f09f (3:709f)
 	cp SPRITE_FACING_LEFT
 	jr z, .left
 ; right
-	ld a, [W_XBLOCKCOORD]
+	ld a, [wXBlockCoord]
 	and a
 	jr z, .centerTileBlock
 	jr .rightOfCenter
 .down
-	ld a, [W_YBLOCKCOORD]
+	ld a, [wYBlockCoord]
 	and a
 	jr z, .centerTileBlock
 	jr .belowCenter
 .up
-	ld a, [W_YBLOCKCOORD]
+	ld a, [wYBlockCoord]
 	and a
 	jr z, .aboveCenter
 	jr .centerTileBlock
 .left
-	ld a, [W_XBLOCKCOORD]
+	ld a, [wXBlockCoord]
 	and a
 	jr z, .leftOfCenter
 	jr .centerTileBlock

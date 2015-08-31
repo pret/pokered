@@ -1484,29 +1484,29 @@ wUpdateSpritesEnabled:: ; cfcb
 ; other values aren't used
 	ds 1
 
-W_ENEMYMOVENUM:: ; cfcc
+wEnemyMoveNum:: ; cfcc
 	ds 1
-W_ENEMYMOVEEFFECT:: ; cfcd
+wEnemyMoveEffect:: ; cfcd
 	ds 1
-W_ENEMYMOVEPOWER:: ; cfce
+wEnemyMovePower:: ; cfce
 	ds 1
-W_ENEMYMOVETYPE:: ; cfcf
+wEnemyMoveType:: ; cfcf
 	ds 1
-W_ENEMYMOVEACCURACY:: ; cfd0
+wEnemyMoveAccuracy:: ; cfd0
 	ds 1
-W_ENEMYMOVEMAXPP:: ; cfd1
+wEnemyMoveMaxPP:: ; cfd1
 	ds 1
-W_PLAYERMOVENUM:: ; cfd2
+wPlayerMoveNum:: ; cfd2
 	ds 1
-W_PLAYERMOVEEFFECT:: ; cfd3
+wPlayerMoveEffect:: ; cfd3
 	ds 1
-W_PLAYERMOVEPOWER:: ; cfd4
+wPlayerMovePower:: ; cfd4
 	ds 1
-W_PLAYERMOVETYPE:: ; cfd5
+wPlayerMoveType:: ; cfd5
 	ds 1
-W_PLAYERMOVEACCURACY:: ; cfd6
+wPlayerMoveAccuracy:: ; cfd6
 	ds 1
-W_PLAYERMOVEMAXPP:: ; cfd7
+wPlayerMoveMaxPP:: ; cfd7
 	ds 1
 
 
@@ -1557,7 +1557,7 @@ wBattleMonNick:: ds NAME_LENGTH ; d009
 wBattleMon:: battle_struct wBattleMon ; d014
 
 
-W_TRAINERCLASS:: ; d031
+wTrainerClass:: ; d031
 	ds 1
 
 	ds 1
@@ -1582,13 +1582,13 @@ wMissableObjectCounter:: ; d048
 
 	ds 1
 
-W_TRAINERNAME:: ; d04a
+wTrainerName:: ; d04a
 ; 13 bytes for the letters of the opposing trainer
 ; the name is terminated with $50 with possible
 ; unused trailing letters
 	ds 13
 
-W_ISINBATTLE:: ; d057
+wIsInBattle:: ; d057
 ; lost battle, this is -1
 ; no battle, this is 0
 ; wild battle, this is 1
@@ -1599,12 +1599,12 @@ wPartyGainExpFlags:: ; d058
 ; flags that indicate which party members should be be given exp when GainExperience is called
 	flag_array 6
 
-W_CUROPPONENT:: ; d059
+wCurOpponent:: ; d059
 ; in a wild battle, this is the species of pokemon
 ; in a trainer battle, this is the trainer class + 200
 	ds 1
 
-W_BATTLETYPE:: ; d05a
+wBattleType:: ; d05a
 ; in normal battle, this is 0
 ; in old man battle, this is 1
 ; in safari battle, this is 2
@@ -1619,12 +1619,12 @@ wDamageMultipliers:: ; d05b
 ; bit 7: STAB
 	ds 1
 
-W_LONEATTACKNO:: ; d05c
+wLoneAttackNo:: ; d05c
 ; which entry in LoneAttacks to use
-W_GYMLEADERNO:: ; d05c
+wGymLeaderNo:: ; d05c
 ; it's actually the same thing as ^
 	ds 1
-W_TRAINERNO:: ; d05d
+wTrainerNo:: ; d05d
 ; which instance of [youngster, lass, etc] is this?
 	ds 1
 
@@ -1635,7 +1635,7 @@ wCriticalHitOrOHKO:: ; d05e
 ; $ff = failed OHKO
 	ds 1
 
-W_MOVEMISSED:: ; d05f
+wMoveMissed:: ; d05f
 	ds 1
 
 wPlayerStatsToDouble:: ; d060
@@ -1646,7 +1646,7 @@ wPlayerStatsToHalve:: ; d061
 ; always 0
 	ds 1
 
-W_PLAYERBATTSTATUS1:: ; d062
+wPlayerBattleStatus1:: ; d062
 ; bit 0 - bide
 ; bit 1 - thrash / petal dance
 ; bit 2 - attacking multiple times (e.g. double kick)
@@ -1657,7 +1657,7 @@ W_PLAYERBATTSTATUS1:: ; d062
 ; bit 7 - confusion
 	ds 1
 
-W_PLAYERBATTSTATUS2:: ; d063
+wPlayerBattleStatus2:: ; d063
 ; bit 0 - X Accuracy effect
 ; bit 1 - protected by "mist"
 ; bit 2 - focus energy effect
@@ -1667,7 +1667,7 @@ W_PLAYERBATTSTATUS2:: ; d063
 ; bit 7 - leech seeded
 	ds 1
 
-W_PLAYERBATTSTATUS3:: ; d064
+wPlayerBattleStatus3:: ; d064
 ; bit 0 - toxic
 ; bit 1 - light screen
 ; bit 2 - reflect
@@ -1682,23 +1682,24 @@ wEnemyStatsToHalve:: ; d066
 ; always 0
 	ds 1
 
-W_ENEMYBATTSTATUS1:: ; d067
+wEnemyBattleStatus1:: ; d067
 	ds 1
-W_ENEMYBATTSTATUS2:: ; d068
+wEnemyBattleStatus2:: ; d068
 	ds 1
-W_ENEMYBATTSTATUS3:: ; d069
+wEnemyBattleStatus3:: ; d069
 	ds 1
 
 wPlayerNumAttacksLeft::
 ; when the player is attacking multiple times, the number of attacks left
 	ds 1
 
-W_PLAYERCONFUSEDCOUNTER:: ; d06b
+wPlayerConfusedCounter:: ; d06b
 	ds 1
 
-W_PLAYERTOXICCOUNTER:: ; d06c
+wPlayerToxicCounter:: ; d06c
 	ds 1
-W_PLAYERDISABLEDMOVE:: ; d06d
+
+wPlayerDisabledMove:: ; d06d
 ; high nibble: which move is disabled (1-4)
 ; low nibble: disable turns left
 	ds 1
@@ -1709,12 +1710,13 @@ wEnemyNumAttacksLeft:: ; d06f
 ; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
-W_ENEMYCONFUSEDCOUNTER:: ; d070
+wEnemyConfusedCounter:: ; d070
 	ds 1
 
-W_ENEMYTOXICCOUNTER:: ; d071
+wEnemyToxcCounter:: ; d071
 	ds 1
-W_ENEMYDISABLEDMOVE:: ; d072
+
+wEnemyDisabledMove:: ; d072
 ; high nibble: which move is disabled (1-4)
 ; low nibble: disable turns left
 	ds 1
@@ -1752,7 +1754,7 @@ wDefaultMap:: ; d07c
 
 wMenuItemOffset:: ; d07c
 
-W_ANIMATIONID:: ; d07c
+wAnimationID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
 
@@ -1772,26 +1774,26 @@ wSavedListScrollOffset:: ; d07e
 	ds 2
 
 ; base coordinates of frame block
-W_BASECOORDX:: ; d081
+wBaseCoordX:: ; d081
 	ds 1
-W_BASECOORDY:: ; d082
+wBaseCoordY:: ; d082
 	ds 1
 
 ; low health alarm counter/enable
 ; high bit = enable, others = timer to cycle frequencies
 wLowHealthAlarm:: ds 1 ; d083
 
-W_FBTILECOUNTER:: ; d084
+wFBTileCounter:: ; d084
 ; counts how many tiles of the current frame block have been drawn
 	ds 1
 
 wMovingBGTilesCounter2:: ; d085
 	ds 1
 
-W_SUBANIMFRAMEDELAY:: ; d086
+wSubAnimFrameDelay:: ; d086
 ; duration of each frame of the current subanimation in terms of screen refreshes
 	ds 1
-W_SUBANIMCOUNTER:: ; d087
+wSubAnimCounter:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
@@ -1800,7 +1802,7 @@ wSaveFileStatus:: ; d088
 ; 2 = save file exists and no corruption has been detected
 	ds 1
 
-W_NUMFBTILES:: ; d089
+wNumFBTiles:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
 
@@ -1836,7 +1838,7 @@ wSlideMonDelay:: ; d08b
 wAnimCounter:: ; d08b
 ; generic counter variable for various animations
 
-W_SUBANIMTRANSFORM:: ; d08b
+wSubAnimTransform:: ; d08b
 ; controls what transformations are applied to the subanimation
 ; 01: flip horizontally and vertically
 ; 02: flip horizontally and translate downwards 40 pixels
@@ -1857,7 +1859,7 @@ wEndBattleTextRomBank:: ; d092
 
 	ds 1
 
-W_SUBANIMADDRPTR:: ; d094
+wSubAnimAddrPtr:: ; d094
 ; the address _of the address_ of the current subanimation entry
 	ds 2
 
@@ -1867,7 +1869,7 @@ wSlotMachineAllowMatchesCounter:: ; d096
 ; the only way it can increase. Winning certain payout amounts will decrement it
 ; or zero it.
 
-W_SUBANIMSUBENTRYADDR:: ; d096
+wSubAnimSubEntryAddr:: ; d096
 ; the address of the current subentry of the current subanimation
 	ds 2
 
@@ -1885,17 +1887,17 @@ wTownMapSpriteBlinkingEnabled:: ; d09b
 wUnusedD09B:: ; d09b
 	ds 1
 
-W_FBDESTADDR:: ; d09c
+wFBDestAddr:: ; d09c
 ; current destination address in OAM for frame blocks (big endian)
 	ds 2
 
-W_FBMODE:: ; d09e
+wFBMode:: ; d09e
 ; controls how the frame blocks are put together to form frames
 ; specifically, after finishing drawing the frame block, the frame block's mode determines what happens
 ; 00: clean OAM buffer and delay
 ; 02: move onto the next frame block with no delay and no cleaning OAM buffer
 ; 03: delay, but don't clean OAM buffer
-; 04: delay, without cleaning OAM buffer, and do not advance [W_FBDESTADDR], so that the next frame block will overwrite this one
+; 04: delay, without cleaning OAM buffer, and do not advance [wFBDestAddr], so that the next frame block will overwrite this one
 	ds 1
 
 wLinkCableAnimBulgeToggle:: ; d09f
@@ -1922,50 +1924,50 @@ wSlideMonUpBottomRowLeftTile:: ; d09f
 
 wDisableVBlankWYUpdate:: ds 1 ; if non-zero, don't update WY during V-blank
 
-W_SPRITECURPOSX:: ; d0a1
+wSpriteCurPosX:: ; d0a1
 	ds 1
-W_SPRITECURPOSY:: ; d0a2
+wSpriteCurPosY:: ; d0a2
 	ds 1
-W_SPRITEWITDH:: ; d0a3
+wSpriteWidth:: ; d0a3
 	ds 1
-W_SPRITEHEIGHT:: ; d0a4
+wSpriteHeight:: ; d0a4
 	ds 1
-W_SPRITEINPUTCURBYTE:: ; d0a5
+wSpriteInputCurByte:: ; d0a5
 ; current input byte
 	ds 1
-W_SPRITEINPUTBITCOUNTER:: ; d0a6
+wSpriteInputBitCounter:: ; d0a6
 ; bit offset of last read input bit
 	ds 1
 
-W_SPRITEOUTPUTBITOFFSET:: ; d0a7; determines where in the output byte the two bits are placed. Each byte contains four columns (2bpp data)
+wSpriteOutputBitOffset:: ; d0a7; determines where in the output byte the two bits are placed. Each byte contains four columns (2bpp data)
 ; 3 -> XX000000   1st column
 ; 2 -> 00XX0000   2nd column
 ; 1 -> 0000XX00   3rd column
 ; 0 -> 000000XX   4th column
 	ds 1
 
-W_SPRITELOADFLAGS:: ; d0a8
+wSpriteLoadFlags:: ; d0a8
 ; bit 0 determines used buffer (0 -> $a188, 1 -> $a310)
 ; bit 1 loading last sprite chunk? (there are at most 2 chunks per load operation)
 	ds 1
-W_SPRITEUNPACKMODE:: ; d0a9
+wSpriteUnpackMode:: ; d0a9
 	ds 1
-W_SPRITEFLIPPED:: ; d0aa
+wSpriteFlipped:: ; d0aa
 	ds 1
 
-W_SPRITEINPUTPTR:: ; d0ab
+wSpriteInputPtr:: ; d0ab
 ; pointer to next input byte
 	ds 2
-W_SPRITEOUTPUTPTR:: ; d0ad
+wSpriteOutputPtr:: ; d0ad
 ; pointer to current output byte
 	ds 2
-W_SPRITEOUTPUTPTRCACHED:: ; d0af
+wSpriteOutputPtrCached:: ; d0af
 ; used to revert pointer for different bit offsets
 	ds 2
-W_SPRITEDECODETABLE0PTR:: ; d0b1
+wSpriteDecodeTable0Ptr:: ; d0b1
 ; pointer to differential decoding table (assuming initial value 0)
 	ds 2
-W_SPRITEDECODETABLE1PTR:: ; d0b3
+wSpriteDecodeTable1Ptr:: ; d0b3
 ; pointer to differential decoding table (assuming initial value 1)
 	ds 2
 
@@ -1977,49 +1979,49 @@ wNameListType:: ; d0b6
 wPredefBank:: ; d0b7
 	ds 1
 
-W_MONHEADER:: ; d0b8
+wMonHeader:: ; d0b8
 
-W_MONHINDEX:: ; d0b8
+wMonHIndex:: ; d0b8
 ; In the ROM base stats data stucture, this is the dex number, but it is
 ; overwritten with the internal index number after the header is copied to WRAM.
 	ds 1
 
-W_MONHBASESTATS:: ; d0b9
-W_MONHBASEHP:: ; d0b9
+wMonHBaseStats:: ; d0b9
+wMonHBaseHP:: ; d0b9
 	ds 1
-W_MONHBASEATTACK:: ; d0ba
+wMonHBaseAttack:: ; d0ba
 	ds 1
-W_MONHBASEDEFENSE:: ; d0bb
+wMonHBaseDefense:: ; d0bb
 	ds 1
-W_MONHBASESPEED:: ; d0bc
+wMonHBaseSpeed:: ; d0bc
 	ds 1
-W_MONHBASESPECIAL:: ; d0bd
-	ds 1
-
-W_MONHTYPES:: ; d0be
-W_MONHTYPE1:: ; d0be
-	ds 1
-W_MONHTYPE2:: ; d0bf
+wMonHBaseSpecial:: ; d0bd
 	ds 1
 
-W_MONHCATCHRATE:: ; d0c0
+wMonHTypes:: ; d0be
+wMonHType1:: ; d0be
 	ds 1
-W_MONHBASEXP:: ; d0c1
+wMonHType2:: ; d0bf
 	ds 1
-W_MONHSPRITEDIM:: ; d0c2
+
+wMonHCatchRate:: ; d0c0
 	ds 1
-W_MONHFRONTSPRITE:: ; d0c3
+wMonHBaseEXP:: ; d0c1
+	ds 1
+wMonHSpriteDim:: ; d0c2
+	ds 1
+wMonHFrontSprite:: ; d0c3
 	ds 2
-W_MONHBACKSPRITE:: ; d0c5
+wMonHBackSprite:: ; d0c5
 	ds 2
 
-W_MONHMOVES:: ; d0c7
-	ds 4
+wMonHMoves:: ; d0c7
+	ds NUM_MOVES
 
-W_MONHGROWTHRATE:: ; d0cb
+wMonHGrowthRate:: ; d0cb
 	ds 1
 
-W_MONHLEARNSET:: ; d0cc
+wMonHLearnset:: ; d0cc
 ; bit field
 	flag_array 50 + 5
 	ds 1
@@ -2030,10 +2032,8 @@ wSavedTilesetType:: ; d0d4
 
 	ds 2
 
-W_MONHPADDING:: ; d0d7
 
-
-W_DAMAGE:: ; d0d7
+wDamage:: ; d0d7
 	ds 2
 
 	ds 2
@@ -2120,7 +2120,7 @@ wTextBoxID:: ; d125
 
 wd126:: ds 1 ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
-W_CURENEMYLVL:: ; d127
+wCurEnemyLVL:: ; d127
 	ds 1
 
 wItemListPointer:: ; d128
@@ -2198,11 +2198,11 @@ wNumberOfNoRandomBattleStepsLeft:: ; d13c
 ; after a battle, you have at least 3 steps before a random battle can occur
 	ds 1
 
-W_PRIZE1:: ; d13d
+wPrize1:: ; d13d
 	ds 1
-W_PRIZE2:: ; d13e
+wPrize2:: ; d13e
 	ds 1
-W_PRIZE3:: ; d13f
+wPrize3:: ; d13f
 	ds 1
 
 	ds 1
@@ -2291,10 +2291,10 @@ wBagItems:: ; d31e
 wPlayerMoney:: ; d347
 	ds 3 ; BCD
 
-W_RIVALNAME:: ; d34a
+wRivalName:: ; d34a
 	ds NAME_LENGTH
 
-W_OPTIONS:: ; d355
+wOptions:: ; d355
 ; bit 7 = battle animation
 ; 0: On
 ; 1: Off
@@ -2307,7 +2307,7 @@ W_OPTIONS:: ; d355
 ; 5: Slow
 	ds 1
 
-W_OBTAINEDBADGES:: ; d356
+wObtainedBadges:: ; d356
 	ds 1
 
 	ds 1
@@ -2333,25 +2333,25 @@ wMapPalOffset:: ; d35d
 ; normally, it is 0. it is 6 when Flash is needed, causing FadePal2 to be used instead of FadePal4
 	ds 1
 
-W_CURMAP:: ; d35e
+wCurMap:: ; d35e
 	ds 1
 
 wCurrentTileBlockMapViewPointer:: ; d35f
 ; pointer to the upper left corner of the current view in the tile block map
 	ds 2
 
-W_YCOORD:: ; d361
+wYCoord:: ; d361
 ; player’s position on the current map
 	ds 1
 
-W_XCOORD:: ; d362
+wXCoord:: ; d362
 	ds 1
 
-W_YBLOCKCOORD:: ; d363
+wYBlockCoord:: ; d363
 ; player's y position (by block)
 	ds 1
 
-W_XBLOCKCOORD:: ; d364
+wXBlockCoord:: ; d364
 	ds 1
 
 wLastMap:: ; d365
@@ -2360,31 +2360,31 @@ wLastMap:: ; d365
 wUnusedD366:: ; d366
 	ds 1
 
-W_CURMAPTILESET:: ; d367
+wCurMapTileset:: ; d367
 	ds 1
 
-W_CURMAPHEIGHT:: ; d368
+wCurMapHeight:: ; d368
 ; blocks
 	ds 1
 
-W_CURMAPWIDTH:: ; d369
+wCurMapWidth:: ; d369
 ; blocks
 	ds 1
 
-W_MAPDATAPTR:: ; d36a
+wMapDataPtr:: ; d36a
 	ds 2
 
-W_MAPTEXTPTR:: ; d36c
+wMapTextPtr:: ; d36c
 	ds 2
 
-W_MAPSCRIPTPTR:: ; d36e
+wMapScriptPtr:: ; d36e
 	ds 2
 
-W_MAPCONNECTIONS:: ; d370
+wMapConnections:: ; d370
 ; connection byte
 	ds 1
 
-W_MAPCONN1PTR:: ; d371
+wMapConn1Ptr:: ; d371
 	ds 1
 
 wNorthConnectionStripSrc:: ; d372
@@ -2408,7 +2408,7 @@ wNorthConnectedMapXAlignment:: ; d379
 wNorthConnectedMapViewPointer:: ; d37a
 	ds 2
 
-W_MAPCONN2PTR:: ; d37c
+wMapConn2Ptr:: ; d37c
 	ds 1
 
 wSouthConnectionStripSrc:: ; d37d
@@ -2432,7 +2432,7 @@ wSouthConnectedMapXAlignment:: ; d384
 wSouthConnectedMapViewPointer:: ; d385
 	ds 2
 
-W_MAPCONN3PTR:: ; d387
+wMapConn3Ptr:: ; d387
 	ds 1
 
 wWestConnectionStripSrc:: ; d388
@@ -2456,7 +2456,7 @@ wWestConnectedMapXAlignment:: ; d38f
 wWestConnectedMapViewPointer:: ; d390
 	ds 2
 
-W_MAPCONN4PTR:: ; d392
+wMapConn4Ptr:: ; d392
 	ds 1
 
 wEastConnectionStripSrc:: ; d393
@@ -2480,11 +2480,11 @@ wEastConnectedMapXAlignment:: ; d39a
 wEastConnectedMapViewPointer:: ; d39b
 	ds 2
 
-W_SPRITESET:: ; d39d
+wSpriteSet:: ; d39d
 ; sprite set for the current map (11 sprite picture ID's)
 	ds 11
 
-W_SPRITESETID:: ; d3a8
+wSpriteSetID:: ; d3a8
 ; sprite set ID for the current map
 	ds 1
 
@@ -2523,7 +2523,7 @@ wSignCoords:: ; d4b1
 wSignTextIDs:: ; d4d1
 	ds 16
 
-W_NUMSPRITES:: ; d4e1
+wNumSprites:: ; d4e1
 ; number of sprites on the current map
 	ds 1
 
@@ -2534,11 +2534,11 @@ wYOffsetSinceLastSpecialWarp:: ; d4e2
 wXOffsetSinceLastSpecialWarp:: ; d4e3
 	ds 1
 
-W_MAPSPRITEDATA:: ; d4e4
+wMapSpriteData:: ; d4e4
 ; two bytes per sprite (movement byte 2, text ID)
 	ds 32
 
-W_MAPSPRITEEXTRADATA:: ; d504
+wMapSpriteExtraData:: ; d504
 ; two bytes per sprite (trainer class/item ID, trainer set ID)
 	ds 32
 
@@ -2572,24 +2572,24 @@ wPlayerDirection:: ; d52a
 ; if the player is not moving, the last the direction in which the player moved
 	ds 1
 
-W_TILESETBANK:: ; d52b
+wTileSetBank:: ; d52b
 	ds 1
 
-W_TILESETBLOCKSPTR:: ; d52c
+wTileSetBlocksPtr:: ; d52c
 ; maps blocks (4x4 tiles) to tiles
 	ds 2
 
-W_TILESETGFXPTR:: ; d52e
+wTileSetGFXPtr:: ; d52e
 	ds 2
 
-W_TILESETCOLLISIONPTR:: ; d530
+wTileSetCollisionPtr:: ; d530
 ; list of all walkable tiles
 	ds 2
 
-W_TILESETTALKINGOVERTILES:: ; d532
+wTileSetTalkingOverTiles:: ; d532
 	ds 3
 
-W_GRASSTILE:: ; d535
+wGrassTile:: ; d535
 	ds 1
 
 	ds 4
@@ -2616,7 +2616,7 @@ wUnusedD5A3:: ; d5a3
 wPlayerCoins:: ; d5a4
 	ds 2 ; BCD
 
-W_MISSABLEOBJECTFLAGS:: ; d5a6
+wMissableObjectFlags:: ; d5a6
 ; bit array of missable objects. set = removed
 	ds 32
 wMissableObjectFlagsEnd::
@@ -2625,225 +2625,225 @@ wMissableObjectFlagsEnd::
 
 wd5cd:: ds 1 ; temp copy of c1x2 (sprite facing/anim)
 
-W_MISSABLEOBJECTLIST:: ; d5ce
+wMissableObjectList:: ; d5ce
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
-; * the missable object index (global, used for W_MISSABLEOBJECTFLAGS)
+; * the missable object index (global, used for wMissableObjectFlags)
 ; terminated with $FF
 	ds 17 * 2
 
-W_GAMEPROGRESSFLAGS:: ; d5f0
+wGameProgressFlags:: ; d5f0
 ; $c8 bytes
 	ds 0
 
-W_OAKSLABCURSCRIPT:: ; d5f0
+wOaksLabCurScript:: ; d5f0
 	ds 1
-W_PALLETTOWNCURSCRIPT:: ; d5f1
+wPalletTownCurScript:: ; d5f1
 	ds 1
 	ds 1
-W_BLUESHOUSECURSCRIPT:: ; d5f3
+wBluesHouseCurScript:: ; d5f3
 	ds 1
-W_VIRIDIANCITYCURSCRIPT:: ; d5f4
+wViridianCityCurScript:: ; d5f4
 	ds 1
 	ds 2
-W_PEWTERCITYCURSCRIPT:: ; d5f7
+wPewterCityCurScript:: ; d5f7
 	ds 1
-W_ROUTE3CURSCRIPT:: ; d5f8
+wRoute3CurScript:: ; d5f8
 	ds 1
-W_ROUTE4CURSCRIPT:: ; d5f9
-	ds 1
-	ds 1
-W_VIRIDIANGYMCURSCRIPT:: ; d5fb
-	ds 1
-W_PEWTERGYMCURSCRIPT:: ; d5fc
-	ds 1
-W_CERULEANGYMCURSCRIPT:: ; d5fd
-	ds 1
-W_VERMILIONGYMCURSCRIPT:: ; d5fe
-	ds 1
-W_CELADONGYMCURSCRIPT:: ; d5ff
-	ds 1
-W_ROUTE6CURSCRIPT:: ; d600
-	ds 1
-W_ROUTE8CURSCRIPT:: ; d601
-	ds 1
-W_ROUTE24CURSCRIPT:: ; d602
-	ds 1
-W_ROUTE25CURSCRIPT:: ; d603
-	ds 1
-W_ROUTE9CURSCRIPT:: ; d604
-	ds 1
-W_ROUTE10CURSCRIPT:: ; d605
-	ds 1
-W_MTMOON1CURSCRIPT:: ; d606
-	ds 1
-W_MTMOON3CURSCRIPT:: ; d607
-	ds 1
-W_SSANNE8CURSCRIPT:: ; d608
-	ds 1
-W_SSANNE9CURSCRIPT:: ; d609
-	ds 1
-W_ROUTE22CURSCRIPT:: ; d60a
+wRoute4CurScript:: ; d5f9
 	ds 1
 	ds 1
-W_REDSHOUSE2CURSCRIPT:: ; d60c
+wViridianGymCurScript:: ; d5fb
 	ds 1
-W_VIRIDIANMARKETCURSCRIPT:: ; d60d
+wPewterGymCurScript:: ; d5fc
 	ds 1
-W_ROUTE22GATECURSCRIPT:: ; d60e
+wCeruleanGymCurScript:: ; d5fd
 	ds 1
-W_CERULEANCITYCURSCRIPT:: ; d60f
+wVermilionGymCurScript:: ; d5fe
+	ds 1
+wCeladonGymCurScript:: ; d5ff
+	ds 1
+wRoute6CurScript:: ; d600
+	ds 1
+wRoute8CurScript:: ; d601
+	ds 1
+wRoute24CurScript:: ; d602
+	ds 1
+wRoute25CurScript:: ; d603
+	ds 1
+wRoute9CurScript:: ; d604
+	ds 1
+wRoute10CurScript:: ; d605
+	ds 1
+wMtMoon1CurScript:: ; d606
+	ds 1
+wMtMoon3CurScript:: ; d607
+	ds 1
+wSSAnne8CurScript:: ; d608
+	ds 1
+wSSAnne9CurScript:: ; d609
+	ds 1
+wRoute22CurScript:: ; d60a
+	ds 1
+	ds 1
+wRedsHouse2CurScript:: ; d60c
+	ds 1
+wViridianMarketCurScript:: ; d60d
+	ds 1
+wRoute22GateCurScript:: ; d60e
+	ds 1
+wCeruleanCityCurScript:: ; d60f
 	ds 1
 	ds 7
-W_SSANNE5CURSCRIPT:: ; d617
+wSSAnne5CurScript:: ; d617
 	ds 1
-W_VIRIDIANFORESTCURSCRIPT:: ; d618
+wViridianForestCurScript:: ; d618
 	ds 1
-W_MUSEUM1FCURSCRIPT:: ; d619
+wMuseum1fCurScript:: ; d619
 	ds 1
-W_ROUTE13CURSCRIPT:: ; d61a
+wRoute13CurScript:: ; d61a
 	ds 1
-W_ROUTE14CURSCRIPT:: ; d61b
+wRoute14CurScript:: ; d61b
 	ds 1
-W_ROUTE17CURSCRIPT:: ; d61c
+wRoute17CurScript:: ; d61c
 	ds 1
-W_ROUTE19CURSCRIPT:: ; d61d
+wRoute19CurScript:: ; d61d
 	ds 1
-W_ROUTE21CURSCRIPT:: ; d61e
+wRoute21CurScript:: ; d61e
 	ds 1
-W_SAFARIZONEENTRANCECURSCRIPT:: ; d61f
+wSafariZoneEntranceCurScript:: ; d61f
 	ds 1
-W_ROCKTUNNEL2CURSCRIPT:: ; d620
+wRockTunnel2CurScript:: ; d620
 	ds 1
-W_ROCKTUNNEL1CURSCRIPT:: ; d621
+wRockTunnel1CurScript:: ; d621
 	ds 1
 	ds 1
-W_ROUTE11CURSCRIPT:: ; d623
+wRoute11CurScript:: ; d623
 	ds 1
-W_ROUTE12CURSCRIPT:: ; d624
+wRoute12CurScript:: ; d624
 	ds 1
-W_ROUTE15CURSCRIPT:: ; d625
+wRoute15CurScript:: ; d625
 	ds 1
-W_ROUTE16CURSCRIPT:: ; d626
+wRoute16CurScript:: ; d626
 	ds 1
-W_ROUTE18CURSCRIPT:: ; d627
+wRoute18CurScript:: ; d627
 	ds 1
-W_ROUTE20CURSCRIPT:: ; d628
+wRoute20CurScript:: ; d628
 	ds 1
-W_SSANNE10CURSCRIPT:: ; d629
+wSSAnne10CurScript:: ; d629
 	ds 1
-W_VERMILIONCITYCURSCRIPT:: ; d62a
+wVermilionCityCurScript:: ; d62a
 	ds 1
-W_POKEMONTOWER2CURSCRIPT:: ; d62b
+wPokemonTower2CurScript:: ; d62b
 	ds 1
-W_POKEMONTOWER3CURSCRIPT:: ; d62c
+wPokemonTower3CurScript:: ; d62c
 	ds 1
-W_POKEMONTOWER4CURSCRIPT:: ; d62d
+wPokemonTower4CurScript:: ; d62d
 	ds 1
-W_POKEMONTOWER5CURSCRIPT:: ; d62e
+wPokemonTower5CurScript:: ; d62e
 	ds 1
-W_POKEMONTOWER6CURSCRIPT:: ; d62f
+wPokemonTower6CurScript:: ; d62f
 	ds 1
-W_POKEMONTOWER7CURSCRIPT:: ; d630
+wPokemonTower7CurScript:: ; d630
 	ds 1
-W_ROCKETHIDEOUT1CURSCRIPT:: ; d631
+wRocketHideout1CurScript:: ; d631
 	ds 1
-W_ROCKETHIDEOUT2CURSCRIPT:: ; d632
+wRocketHideout2CurScript:: ; d632
 	ds 1
-W_ROCKETHIDEOUT3CURSCRIPT:: ; d633
+wRocketHideout3CurScript:: ; d633
 	ds 1
-W_ROCKETHIDEOUT4CURSCRIPT:: ; d634
+wRocketHideout4CurScript:: ; d634
 	ds 2
-W_ROUTE6GATECURSCRIPT:: ; d636
+wRoute6GateCurScript:: ; d636
 	ds 1
-W_ROUTE8GATECURSCRIPT:: ; d637
+wRoute8GateCurScript:: ; d637
 	ds 2
-W_CINNABARISLANDCURSCRIPT:: ; d639
+wCinnabarIslandCurScript:: ; d639
 	ds 1
-W_MANSION1CURSCRIPT:: ; d63a
+wMansion1CurScript:: ; d63a
 	ds 2
-W_MANSION2CURSCRIPT:: ; d63c
+wMansion2CurScript:: ; d63c
 	ds 1
-W_MANSION3CURSCRIPT:: ; d63d
+wMansion3CurScript:: ; d63d
 	ds 1
-W_MANSION4CURSCRIPT:: ; d63e
+wMansion4CurScript:: ; d63e
 	ds 1
-W_VICTORYROAD2CURSCRIPT:: ; d63f
+wVictoryRoad2CurScript:: ; d63f
 	ds 1
-W_VICTORYROAD3CURSCRIPT:: ; d640
+wVictoryRoad3CurScript:: ; d640
 	ds 2
-W_FIGHTINGDOJOCURSCRIPT:: ; d642
+wFightingDojoCurScript:: ; d642
 	ds 1
-W_SILPHCO2CURSCRIPT:: ; d643
+wSilphCo2CurScript:: ; d643
 	ds 1
-W_SILPHCO3CURSCRIPT:: ; d644
+wSilphCo3CurScript:: ; d644
 	ds 1
-W_SILPHCO4CURSCRIPT:: ; d645
+wSilphCo4CurScript:: ; d645
 	ds 1
-W_SILPHCO5CURSCRIPT:: ; d646
+wSilphCo5CurScript:: ; d646
 	ds 1
-W_SILPHCO6CURSCRIPT:: ; d647
+wSilphCo6CurScript:: ; d647
 	ds 1
-W_SILPHCO7CURSCRIPT:: ; d648
+wSilphCo7CurScript:: ; d648
 	ds 1
-W_SILPHCO8CURSCRIPT:: ; d649
+wSilphCo8CurScript:: ; d649
 	ds 1
-W_SILPHCO9CURSCRIPT:: ; d64a
+wSilphCo9CurScript:: ; d64a
 	ds 1
-W_HALLOFFAMEROOMCURSCRIPT:: ; d64b
+wHallOfFameRoomCurScript:: ; d64b
 	ds 1
-W_GARYCURSCRIPT:: ; d64c
+wGaryCurScript:: ; d64c
 	ds 1
-W_LORELEICURSCRIPT:: ; d64d
+wLoreleiCurScript:: ; d64d
 	ds 1
-W_BRUNOCURSCRIPT:: ; d64e
+wBrunoCurScript:: ; d64e
 	ds 1
-W_AGATHACURSCRIPT:: ; d64f
+wAgathaCurScript:: ; d64f
 	ds 1
-W_UNKNOWNDUNGEON3CURSCRIPT:: ; d650
+wUnknownDungeon3CurScript:: ; d650
 	ds 1
-W_VICTORYROAD1CURSCRIPT:: ; d651
+wVictoryRoad1CurScript:: ; d651
 	ds 1
 	ds 1
-W_LANCECURSCRIPT:: ; d653
+wLanceCurScript:: ; d653
 	ds 1
 	ds 4
-W_SILPHCO10CURSCRIPT:: ; d658
+wSilphCo10CurScript:: ; d658
 	ds 1
-W_SILPHCO11CURSCRIPT:: ; d659
-	ds 1
-	ds 1
-W_FUCHSIAGYMCURSCRIPT:: ; d65b
-	ds 1
-W_SAFFRONGYMCURSCRIPT:: ; d65c
+wSilphCo11CurScript:: ; d659
 	ds 1
 	ds 1
-W_CINNABARGYMCURSCRIPT:: ; d65e
+wFuchsiaGymCurScript:: ; d65b
 	ds 1
-W_CELADONGAMECORNERCURSCRIPT:: ; d65f
+wSaffronGymCurScript:: ; d65c
 	ds 1
-W_ROUTE16GATECURSCRIPT:: ; d660
 	ds 1
-W_BILLSHOUSECURSCRIPT:: ; d661
+wCinnabarGymCurScript:: ; d65e
 	ds 1
-W_ROUTE5GATECURSCRIPT:: ; d662
+wCeladonGameCornerCurScript:: ; d65f
 	ds 1
-W_POWERPLANTCURSCRIPT:: ; d663
+wRoute16GateCurScript:: ; d660
+	ds 1
+wBillsHouseCurScript:: ; d661
+	ds 1
+wRoute5GateCurScript:: ; d662
+	ds 1
+wPowerPlantCurScript:: ; d663
 ; overload
 	ds 0
-W_ROUTE7GATECURSCRIPT:: ; d663
+wRoute7GateCurScript:: ; d663
 ; overload
 	ds 1
 	ds 1
-W_SSANNE2CURSCRIPT:: ; d665
+wSSAnne2CurScript:: ; d665
 	ds 1
-W_SEAFOAMISLANDS4CURSCRIPT:: ; d666
+wSeafoamIslands4CurScript:: ; d666
 	ds 1
-W_ROUTE23CURSCRIPT:: ; d667
+wRoute23CurScript:: ; d667
 	ds 1
-W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
+wSeafoamIslands5CurScript:: ; d668
 	ds 1
-W_ROUTE18GATECURSCRIPT:: ; d669
+wRoute18GateCurScript:: ; d669
 	ds 1
 
 	ds 78
@@ -2865,36 +2865,36 @@ wWalkBikeSurfState:: ; d700
 
 	ds 10
 
-W_TOWNVISITEDFLAG:: ; d70b
+wTownVisitedFlag:: ; d70b
 	flag_array 13
 
 wSafariSteps:: ; d70d
 ; starts at 502
 	ds 2
 
-W_FOSSILITEM:: ; d70f
+wFossilItem:: ; d70f
 ; item given to cinnabar lab
 	ds 1
 
-W_FOSSILMON:: ; d710
+wFossilMon:: ; d710
 ; mon that will result from the item
 	ds 1
 
 	ds 2
 
-W_ENEMYMONORTRAINERCLASS:: ; d713
+wEnemyMonOrTrainerClass:: ; d713
 ; trainer classes start at 200
 	ds 1
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714
 	ds 1
 
-W_RIVALSTARTER:: ; d715
+wRivalStarter:: ; d715
 	ds 1
 
 	ds 1
 
-W_PLAYERSTARTER:: ; d717
+wPlayerStarter:: ; d717
 	ds 1
 
 wBoulderSpriteIndex:: ; d718
@@ -2942,7 +2942,7 @@ wd728:: ; d728
 	ds 1
 
 wBeatGymFlags:: ; d72a
-; redundant because it matches W_OBTAINEDBADGES
+; redundant because it matches wObtainedBadges
 ; used to determine whether to show name on statue and in two NPC text scripts
 	ds 1
 
@@ -3002,12 +3002,12 @@ wd732:: ; d732
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 	ds 1
 
-W_FLAGS_D733:: ; d733
+wFlags_D733:: ; d733
 ; bit 0: running a test battle
 ; bit 1: prevent music from changing when entering new map
 ; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
 ; bit 3: trainer wants to battle
-; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
+; bit 4: use variable [wCurMapScript] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1
 
@@ -3058,10 +3058,10 @@ wEventFlags:: ; d747
 wLinkEnemyTrainerName:: ; d887
 ; linked game's trainer name
 
-W_GRASSRATE:: ; d887
+wGrassRate:: ; d887
 	ds 1
 
-W_GRASSMONS:: ; d888
+wGrassMons:: ; d888
 	ds 20
 
 wEnemyPartyCount:: ds 1     ; d89c
@@ -3079,7 +3079,7 @@ wEnemyMonOT::    ds NAME_LENGTH * PARTY_LENGTH ; d9ac
 wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d9ee
 
 
-W_TRAINERHEADERPTR:: ; da30
+wTrainerHeaderPtr:: ; da30
 	ds 2
 
 	ds 6
@@ -3091,36 +3091,36 @@ wOpponentAfterWrongAnswer:: ; da38
 wUnusedDA38:: ; da38
 	ds 1
 
-W_CURMAPSCRIPT:: ; da39
+wCurMapScript:: ; da39
 ; index of current map script, mostly used as index for function pointer array
 ; mostly copied from map-specific map script pointer and wirtten back later
 	ds 1
 
 	ds 6
 
-W_PLAYTIMEHOURS:: ; da40
+wPlayTimeHours:: ; da40
 	ds 2
-W_PLAYTIMEMINUTES:: ; da42
+wPlayTimeMinutes:: ; da42
 	ds 2
-W_PLAYTIMESECONDS:: ; da44
+wPlayTimeSeconds:: ; da44
 	ds 1
-W_PLAYTIMEFRAMES:: ; da45
+wPlayTimeFrames:: ; da45
 	ds 1
 
 wSafariZoneGameOver:: ; da46
 	ds 1
 
-W_NUMSAFARIBALLS:: ; da47
+wNumSafariBalls:: ; da47
 	ds 1
 
 
-W_DAYCARE_IN_USE:: ; da48
+wDayCareInUse:: ; da48
 ; 0 if no pokemon is in the daycare
 ; 1 if pokemon is in the daycare
 	ds 1
 
-W_DAYCAREMONNAME:: ds NAME_LENGTH ; da49
-W_DAYCAREMONOT::   ds NAME_LENGTH ; da54
+wDayCareMonName:: ds NAME_LENGTH ; da49
+wDayCareMonOT::   ds NAME_LENGTH ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
 
@@ -3129,7 +3129,7 @@ wMainDataEnd::
 
 wBoxDataStart::
 
-W_NUMINBOX::  ds 1 ; da80
+wNumInBox::  ds 1 ; da80
 wBoxSpecies:: ds MONS_PER_BOX + 1
 
 wBoxMons::

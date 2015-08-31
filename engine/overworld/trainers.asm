@@ -291,7 +291,7 @@ CheckSpriteCanSeePlayer: ; 569af (15:69af)
 
 ; tests if the player is in front of the sprite (rather than behind it)
 CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp POWER_PLANT
 	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work
 	ld a, [wTrainerSpriteOffset]

@@ -2,9 +2,9 @@ Route13Script: ; 5581e (15:581e)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route13TrainerHeaders
 	ld de, Route13ScriptPointers
-	ld a, [W_ROUTE13CURSCRIPT]
+	ld a, [wRoute13CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE13CURSCRIPT], a
+	ld [wRoute13CurScript], a
 	ret
 
 Route13ScriptPointers: ; 55831 (15:5831)

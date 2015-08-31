@@ -3,9 +3,9 @@ SilphCo11Script: ; 620fa (18:60fa)
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo11TrainerHeaders
 	ld de, SilphCo11ScriptPointers
-	ld a, [W_SILPHCO11CURSCRIPT]
+	ld a, [wSilphCo11CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SILPHCO11CURSCRIPT], a
+	ld [wSilphCo11CurScript], a
 	ret
 
 SilphCo11Script_62110: ; 62110 (18:6110)
@@ -150,8 +150,8 @@ SilphCo11Script_621c4: ; 621c4 (18:61c4)
 	ld [wJoyIgnore], a
 
 SilphCo11Script_621c8: ; 621c8 (18:61c8)
-	ld [W_SILPHCO11CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wSilphCo11CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 SilphCo11ScriptPointers: ; 621cf (18:61cf)
@@ -205,7 +205,7 @@ SilphCo11Script_6221a: ; 6221a (18:621a)
 	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SilphCo11Script_621c4
 	ld a, [wcf0d]

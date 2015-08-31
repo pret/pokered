@@ -30,11 +30,11 @@ SetPal_Battle: ; 71e06 (1c:5e06)
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [W_PLAYERBATTSTATUS3]
+	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies
 	call DeterminePaletteID
 	ld b, a
-	ld a, [W_ENEMYBATTSTATUS3]
+	ld a, [wEnemyBattleStatus3]
 	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	ld c, a
@@ -139,12 +139,12 @@ SetPal_Overworld: ; 71ec7 (1c:5ec7)
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
 	jr z, .caveOrBruno
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
 	cp UNKNOWN_DUNGEON_2
@@ -207,7 +207,7 @@ SetPal_TrainerCard: ; 71f3b (1c:5f3b)
 	call CopyData
 	ld de, BadgeBlkDataLengths
 	ld hl, wTrainerCardBlkPacket + 2
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedBadges]
 	ld c, 8
 .badgeLoop
 	srl a

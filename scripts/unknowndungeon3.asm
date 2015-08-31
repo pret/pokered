@@ -2,9 +2,9 @@ UnknownDungeon3Script: ; 45ef0 (11:5ef0)
 	call EnableAutoTextBoxDrawing
 	ld hl, UnknownDungeon3TrainerHeaders
 	ld de, UnknownDungeon3ScriptPointers
-	ld a, [W_UNKNOWNDUNGEON3CURSCRIPT]
+	ld a, [wUnknownDungeon3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_UNKNOWNDUNGEON3CURSCRIPT], a
+	ld [wUnknownDungeon3CurScript], a
 	ret
 
 UnknownDungeon3ScriptPointers: ; 45f03 (11:5f03)

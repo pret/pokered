@@ -1,6 +1,6 @@
 BillsHouseScript: ; 1e76a (7:676a)
 	call EnableAutoTextBoxDrawing
-	ld a, [W_BILLSHOUSECURSCRIPT]
+	ld a, [wBillsHouseCurScript]
 	ld hl, BillsHouseScriptPointers
 	jp CallFunctionInTable
 
@@ -26,7 +26,7 @@ BillsHouseScript1: ; 1e783 (7:6783)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $2
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	ret
 
 MovementData_1e79c: ; 1e79c (7:679c)
@@ -55,7 +55,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	ret
 
 BillsHouseScript3: ; 1e7c5 (7:67c5)
@@ -84,7 +84,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld de, MovementData_1e807
 	call MoveSprite
 	ld a, $4
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	ret
 
 MovementData_1e807: ; 1e807 (7:6807)
@@ -104,7 +104,7 @@ BillsHouseScript4: ; 1e80d (7:680d)
 	SetEvent EVENT_MET_BILL_2 ; this event seems redundant
 	SetEvent EVENT_MET_BILL
 	ld a, $0
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	ret
 
 BillsHouseScript5: ; 1e827 (7:6827)
@@ -112,7 +112,7 @@ BillsHouseScript5: ; 1e827 (7:6827)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $0
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	ret
 
 BillsHouseTextPointers: ; 1e834 (7:6834)
@@ -136,7 +136,7 @@ BillsHouseText1: ; 1e83d (7:683d)
 	ld hl, BillsHouseText_1e86a
 	call PrintText
 	ld a, $1
-	ld [W_BILLSHOUSECURSCRIPT], a
+	ld [wBillsHouseCurScript], a
 	jr .asm_1e862
 .asm_1e85a
 	ld hl, BillsHouseText_1e86f

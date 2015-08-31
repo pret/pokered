@@ -1,7 +1,7 @@
 PewterCityScript: ; 19237 (6:5237)
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterCityScriptPointers
-	ld a, [W_PEWTERCITYCURSCRIPT]
+	ld a, [wPewterCityCurScript]
 	jp CallFunctionInTable
 
 PewterCityScriptPointers: ; 19243 (6:5243)
@@ -15,7 +15,7 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
-	ld [W_MUSEUM1FCURSCRIPT], a
+	ld [wMuseum1fCurScript], a
 	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	call PewterCityScript_1925e
 	ret
@@ -73,7 +73,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
@@ -91,7 +91,7 @@ PewterCityScript2: ; 192d3 (6:52d3)
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $3
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 PewterCityScript3: ; 192e9 (6:52e9)
@@ -104,7 +104,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 PewterCityScript4: ; 19305 (6:5305)
@@ -141,7 +141,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 MovementData_PewterGymGuyExit: ; 19353 (6:5353)
@@ -160,7 +160,7 @@ PewterCityScript5: ; 19359 (6:5359)
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $6
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 PewterCityScript6: ; 1936f (6:536f)
@@ -173,7 +173,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
 PewterCityTextPointers: ; 1938b (6:538b)
@@ -226,7 +226,7 @@ PewterCityText3: ; 193b1 (6:53b1)
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $1
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 .asm_193ee
 	jp TextScriptEnd
 
@@ -290,7 +290,7 @@ PewterCityText5: ; 19436 (6:5436)
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $4
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	jp TextScriptEnd
 
 PewterCityText_1945d: ; 1945d (6:545d)

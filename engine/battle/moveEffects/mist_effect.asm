@@ -1,9 +1,9 @@
 MistEffect_: ; 33f2b (c:7f2b)
-	ld hl, W_PLAYERBATTSTATUS2
+	ld hl, wPlayerBattleStatus2
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .mistEffect
-	ld hl, W_ENEMYBATTSTATUS2
+	ld hl, wEnemyBattleStatus2
 .mistEffect
 	bit ProtectedByMist, [hl] ; is mon protected by mist?
 	jr nz, .mistAlreadyInUse

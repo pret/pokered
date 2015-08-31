@@ -1,13 +1,13 @@
 ; returns whether the player is one tile outside the map in Z
 IsPlayerJustOutsideMap: ; 128d8 (4:68d8)
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_CURMAPHEIGHT]
+	ld a, [wCurMapHeight]
 	call .compareCoordWithMapDimension
 	ret z
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld b, a
-	ld a, [W_CURMAPWIDTH]
+	ld a, [wCurMapWidth]
 .compareCoordWithMapDimension
 	add a
 	cp b

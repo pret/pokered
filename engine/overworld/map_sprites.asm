@@ -30,12 +30,12 @@ InitMapSprites: ; 1785b (5:785b)
 ; InitOutsideMapSprites.
 ; Loads tile pattern data for sprites into VRAM.
 LoadMapSpriteTilePatterns: ; 17871 (5:7871)
-	ld a,[W_NUMSPRITES]
+	ld a,[wNumSprites]
 	and a ; are there any sprites?
 	jr nz,.spritesExist
 	ret
 .spritesExist
-	ld c,a ; c = [W_NUMSPRITES]
+	ld c,a ; c = [wNumSprites]
 	ld b,$10 ; number of sprite slots
 	ld hl,wSpriteStateData2 + $0d
 	xor a
@@ -251,7 +251,7 @@ ReadSpriteSheetData: ; 17971 (5:7971)
 ; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
 ; sets carry if the map is a city or route, unsets carry if not
 InitOutsideMapSprites: ; 1797b (5:797b)
-	ld a,[W_CURMAP]
+	ld a,[wCurMap]
 	cp a,REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
 	ret nc ; if not, return
 	ld hl,MapSpriteSets
@@ -267,12 +267,12 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld a,[wFontLoaded]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadSpriteSet ; if so, forcibly reload the sprite set
-	ld a,[W_SPRITESETID]
+	ld a,[wSpriteSetID]
 	cp b ; has the sprite set ID changed?
 	jr z,.skipLoadingSpriteSet ; if not, don't load it again
 .loadSpriteSet
 	ld a,b
-	ld [W_SPRITESETID],a
+	ld [wSpriteSetID],a
 	dec a
 	ld b,a
 	sla a
@@ -291,7 +291,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld hl,wSpriteStateData2 + $0d
 	ld a,SPRITE_RED
 	ld [hl],a
-	ld bc,W_SPRITESET
+	ld bc,wSpriteSet
 ; Load the sprite set into RAM.
 ; This loop also fills $C2XD (sprite picture ID) where X is from $0 to $A
 ; with picture ID's. This is done so that LoadMapSpriteTilePatterns will
@@ -317,13 +317,13 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld [hl],a ; $C2XD (sprite picture ID)
 	dec b
 	jr nz,.zeroRemainingSlotsLoop
-	ld a,[W_NUMSPRITES]
+	ld a,[wNumSprites]
 	push af ; save number of sprites
 	ld a,11 ; 11 sprites in sprite set
-	ld [W_NUMSPRITES],a
+	ld [wNumSprites],a
 	call LoadMapSpriteTilePatterns
 	pop af
-	ld [W_NUMSPRITES],a ; restore number of sprites
+	ld [wNumSprites],a ; restore number of sprites
 	ld hl,wSpriteStateData2 + $1e
 	ld b,$0f
 ; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
@@ -352,7 +352,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	and a ; is the sprite slot used?
 	jr z,.skipGettingPictureIndex ; if the sprite slot is not used
 	ld b,a ; b = picture ID
-	ld de,W_SPRITESET
+	ld de,wSpriteSet
 ; Loop to find the index of the sprite's picture ID within the sprite set.
 .getPictureIndexLoop
 	inc c
@@ -399,10 +399,10 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 	ld b,a
 	jr z,.eastWestDivide
 .northSouthDivide
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	jr .compareCoord
 .eastWestDivide
-	ld a,[W_XCOORD]
+	ld a,[wXCoord]
 .compareCoord
 	cp b
 	jr c,.loadSpriteSetID
@@ -415,7 +415,7 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 ; Route 20 is a special case because the two map sections have a more complex
 ; shape instead of the map simply being split horizontally or vertically.
 .route20
-	ld hl,W_XCOORD
+	ld hl,wXCoord
 	ld a,[hl]
 	cp a,$2b
 	ld a,$01
@@ -430,7 +430,7 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 	jr nc,.next
 	ld b,$0d
 .next
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	cp b
 	ld a,$0a
 	ret c

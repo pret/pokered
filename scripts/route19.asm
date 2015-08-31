@@ -2,9 +2,9 @@ Route19Script: ; 55d44 (15:5d44)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route19TrainerHeaders
 	ld de, Route19ScriptPointers
-	ld a, [W_ROUTE19CURSCRIPT]
+	ld a, [wRoute19CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE19CURSCRIPT], a
+	ld [wRoute19CurScript], a
 	ret
 
 Route19ScriptPointers: ; 55d57 (15:5d57)

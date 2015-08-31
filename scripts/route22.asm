@@ -1,7 +1,7 @@
 Route22Script: ; 50eb2 (14:4eb2)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route22ScriptPointers
-	ld a, [W_ROUTE22CURSCRIPT]
+	ld a, [wRoute22CurScript]
 	jp CallFunctionInTable
 
 Route22ScriptPointers: ; 50ebe (14:4ebe)
@@ -17,12 +17,12 @@ Route22ScriptPointers: ; 50ebe (14:4ebe)
 Route22Script_50ece: ; 50ece (14:4ece)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 Route22Script7: ; 50ed5 (14:4ed5)
 	ret
 
 Route22Script_50ed6: ; 50ed6 (14:4ed6)
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	ld b, a
 .asm_50eda
 	ld a, [hli]
@@ -32,7 +32,7 @@ Route22Script_50ed6: ; 50ed6 (14:4ed6)
 	jr .asm_50eda
 .asm_50ee1
 	ld a, [hl]
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 	ret
 
 Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
@@ -99,7 +99,7 @@ Route22Script0: ; 50f00 (14:4f00)
 	ld [H_SPRITEINDEX], a
 	call Route22MoveRivalSprite
 	ld a, $1
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22Script1: ; 50f62 (14:4f62)
@@ -132,11 +132,11 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld de, Route22Text_511bc
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY1
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	ld hl, StarterMons_50faf
 	call Route22Script_50ed6
 	ld a, $2
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 StarterMons_50faf: ; 50faf (14:4faf)
@@ -146,7 +146,7 @@ StarterMons_50faf: ; 50faf (14:4faf)
 	db STARTER1,$06
 
 Route22Script2: ; 50fb5 (14:4fb5)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22Script_50ece
 	ld a, [wSpriteStateData1 + 9]
@@ -180,7 +180,7 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	call Route22Script_5100d
 .asm_51002
 	ld a, $3
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22Script_51008: ; 51008 (14:5008)
@@ -229,7 +229,7 @@ Route22Script3: ; 5102a (14:502a)
 	call PlayDefaultMusic
 	ResetEvents EVENT_1ST_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ld a, $0
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22Script_5104e: ; 5104e (14:504e)
@@ -253,7 +253,7 @@ Route22Script_5104e: ; 5104e (14:504e)
 	ld [H_SPRITEINDEX], a
 	call Route22MoveRivalSprite
 	ld a, $4
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22Script4: ; 51087 (14:5087)
@@ -288,11 +288,11 @@ Route22Script4: ; 51087 (14:5087)
 	ld de, Route22Text_511d0
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY2
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	ld hl, StarterMons_510d9
 	call Route22Script_50ed6
 	ld a, $5
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 StarterMons_510d9: ; 510d9 (14:50d9)
@@ -301,7 +301,7 @@ StarterMons_510d9: ; 510d9 (14:50d9)
 	db STARTER1,$0c
 
 Route22Script5: ; 510df (14:50df)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22Script_50ece
 	ld a, $2
@@ -339,7 +339,7 @@ Route22Script5: ; 510df (14:50df)
 	call Route22Script_51142
 .asm_51137
 	ld a, $6
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22Script_5113d: ; 5113d (14:513d)
@@ -374,7 +374,7 @@ Route22Script6: ; 51151 (14:5151)
 	call PlayDefaultMusic
 	ResetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ld a, $7
-	ld [W_ROUTE22CURSCRIPT], a
+	ld [wRoute22CurScript], a
 	ret
 
 Route22TextPointers: ; 51175 (14:5175)

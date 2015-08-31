@@ -2,16 +2,16 @@ Route12Script: ; 595f3 (16:55f3)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route12TrainerHeaders
 	ld de, Route12ScriptPointers
-	ld a, [W_ROUTE12CURSCRIPT]
+	ld a, [wRoute12CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE12CURSCRIPT], a
+	ld [wRoute12CurScript], a
 	ret
 
 Route12Script_59606: ; 59606 (16:5606)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute12CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route12ScriptPointers: ; 59611 (16:5611)
@@ -30,19 +30,19 @@ Route12Script0: ; 59619 (16:5619)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	ld a, 30
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $3
-	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute12CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route12Script3: ; 5964c (16:564c)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jr z, Route12Script_59606
 	call UpdateSprites
@@ -56,8 +56,8 @@ Route12Script3: ; 5964c (16:564c)
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX
 	call Delay3
 	ld a, $0
-	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wRoute12CurScript], a
+	ld [wCurMapScript], a
 	ret
 
 Route12TextPointers: ; 59675 (16:5675)

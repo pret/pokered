@@ -1,7 +1,7 @@
 SafariZoneEntranceScript: ; 751cd (1d:51cd)
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEntranceScriptPointers
-	ld a, [W_SAFARIZONEENTRANCECURSCRIPT]
+	ld a, [wSafariZoneEntranceCurScript]
 	jp CallFunctionInTable
 
 SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
@@ -30,7 +30,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	cp $1
 	jr z, .asm_7520f
 	ld a, $2
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 .asm_7520f
 	ld a, D_RIGHT
@@ -39,7 +39,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 .CoordsData_75221: ; 75221 (1d:5221)
@@ -68,7 +68,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 .SafariZoneEntranceScript5
@@ -84,12 +84,12 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [W_NUMSAFARIBALLS], a
+	ld [wNumSafariBalls], a
 	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
 	ld a, $4
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	jr .asm_75286
 .asm_7527f
 	ld a, $5
@@ -104,7 +104,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 .SafariZoneEntranceScript6
@@ -112,7 +112,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ret nz
 	call Delay3
 	ld a, [wcf0d]
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 SafariZoneEntranceAutoWalk:
@@ -181,7 +181,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld hl,.MakePaymentText
 	call PrintText
 	ld a,30
-	ld [W_NUMSAFARIBALLS],a
+	ld [wNumSafariBalls],a
 	ld a,502 / $100
 	ld [wSafariSteps],a
 	ld a, 502 % $100
@@ -192,7 +192,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	SetEvent EVENT_IN_SAFARI_ZONE
 	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
 	ld a,3
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 	jr .done
 
 .PleaseComeAgain
@@ -203,7 +203,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld c,1
 	call SafariZoneEntranceAutoWalk
 	ld a,4
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 .done
 	jp TextScriptEnd
 
@@ -251,7 +251,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld [wcf0d], a
 .asm_753b3
 	ld a, $6
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	jp TextScriptEnd
 
 .SafariZoneEntranceText_753bb

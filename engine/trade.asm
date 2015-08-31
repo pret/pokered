@@ -18,14 +18,14 @@ ExternalClockTradeAnim: ; 410f3 (10:50f3)
 	ld de, ExternalClockTradeFuncSequence
 
 TradeAnimCommon: ; 41102 (10:5102)
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	push af
 	ld a, [hSCY]
 	push af
 	ld a, [hSCX]
 	push af
 	xor a
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	ld [hSCY], a
 	ld [hSCX], a
 	push de
@@ -53,7 +53,7 @@ TradeAnimCommon: ; 41102 (10:5102)
 	pop af
 	ld [hSCY], a
 	pop af
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	ret
 
 addtradefunc: MACRO
@@ -383,9 +383,9 @@ Trade_AnimLeftToRight: ; 41376 (10:5376)
 	ld a, $e4
 	ld [rOBP0], a
 	ld a, $54
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, $1c
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, [wLeftGBMonSpecies]
 	ld [wMonPartySpriteSpecies], a
 	call Trade_WriteCircledMonOAM
@@ -415,9 +415,9 @@ Trade_AnimRightToLeft: ; 413c6 (10:53c6)
 	xor a
 	ld [wTradedMonMovingRight], a
 	ld a, $64
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, $44
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld a, [wRightGBMonSpecies]
 	ld [wMonPartySpriteSpecies], a
 	call Trade_WriteCircledMonOAM
@@ -622,10 +622,10 @@ Trade_AddOffsetsToOAMCoords: ; 41510 (10:5510)
 	ld hl, wOAMBuffer
 	ld c, $14
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	add [hl]
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	add [hl]
 	ld [hli], a
 	inc hl
@@ -657,9 +657,9 @@ Trade_AnimMonMoveVertical: ; 41525 (10:5525)
 	lb bc, -4, 0 ; move left
 .doAnim
 	ld a, b
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	ld a, c
-	ld [W_BASECOORDY], a
+	ld [wBaseCoordY], a
 	ld d, $4
 .loop
 	call Trade_AddOffsetsToOAMCoords
@@ -847,7 +847,7 @@ TradeforText: ; 41671 (10:5671)
 	db "@"
 
 Trade_ShowAnimation: ; 41676 (10:5676)
-	ld [W_ANIMATIONID], a
+	ld [wAnimationID], a
 	xor a
 	ld [wAnimationType], a
 	predef_jump MoveAnimation

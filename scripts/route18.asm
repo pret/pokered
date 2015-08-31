@@ -2,9 +2,9 @@ Route18Script: ; 59ac7 (16:5ac7)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route18TrainerHeaders
 	ld de, Route18ScriptPointers
-	ld a, [W_ROUTE18CURSCRIPT]
+	ld a, [wRoute18CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE18CURSCRIPT], a
+	ld [wRoute18CurScript], a
 	ret
 
 Route18ScriptPointers: ; 59ada (16:5ada)

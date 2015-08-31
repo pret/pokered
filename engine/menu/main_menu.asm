@@ -114,7 +114,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld a,[wNumHoFTeams]
 	and a
 	jp z,SpecialEnterMap
-	ld a,[W_CURMAP] ; map ID
+	ld a,[wCurMap] ; map ID
 	cp a,HALL_OF_FAME
 	jp nz,SpecialEnterMap
 	xor a
@@ -128,7 +128,7 @@ InitOptions: ; 5bff (1:5bff)
 	ld a,1 ; no delay
 	ld [wLetterPrintingDelayFlags],a
 	ld a,3 ; medium speed
-	ld [W_OPTIONS],a
+	ld [wOptions],a
 	ret
 
 LinkMenu: ; 5c0a (1:5c0a)
@@ -392,7 +392,7 @@ PrintSaveScreenText: ; 5def (1:5def)
 
 PrintNumBadges: ; 5e2f (1:5e2f)
 	push hl
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedBadges
 	ld b, $1
 	call CountSetBits
 	pop hl
@@ -411,12 +411,12 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	jp PrintNumber
 
 PrintPlayTime: ; 5e55 (1:5e55)
-	ld de, W_PLAYTIMEHOURS + 1
+	ld de, wPlayTimeHours + 1
 	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, W_PLAYTIMEMINUTES + 1
+	ld de, wPlayTimeMinutes + 1
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
@@ -626,13 +626,13 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 	res 6,d
 .storeOptions
 	ld a,d
-	ld [W_OPTIONS],a
+	ld [wOptions],a
 	ret
 
 ; reads the options variable and places menu cursors in the correct positions within the options menu
 SetCursorPositionsFromOptions: ; 604c (1:604c)
 	ld hl,TextSpeedOptionData + 1
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	ld c,a
 	and a,$3f
 	push bc

@@ -78,7 +78,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld e,a
 	inc hl
 	push hl
-	ld hl,W_PRIZE1
+	ld hl,wPrize1
 	call CopyString
 	pop hl
 	ld a,[hli]
@@ -90,34 +90,34 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld a,[wWhichPrizeWindow]
 	cp a,$02        ;is TM_menu?
 	jr nz,.putMonName
-	ld a,[W_PRIZE1]
+	ld a,[wPrize1]
 	ld [wd11e],a
 	call GetItemName
 	coord hl, 2, 4
 	call PlaceString
-	ld a,[W_PRIZE2]
+	ld a,[wPrize2]
 	ld [wd11e],a
 	call GetItemName
 	coord hl, 2, 6
 	call PlaceString
-	ld a,[W_PRIZE3]
+	ld a,[wPrize3]
 	ld [wd11e],a
 	call GetItemName
 	coord hl, 2, 8
 	call PlaceString
 	jr .putNoThanksText
 .putMonName
-	ld a,[W_PRIZE1]
+	ld a,[wPrize1]
 	ld [wd11e],a
 	call GetMonName
 	coord hl, 2, 4
 	call PlaceString
-	ld a,[W_PRIZE2]
+	ld a,[wPrize2]
 	ld [wd11e],a
 	call GetMonName
 	coord hl, 2, 6
 	call PlaceString
-	ld a,[W_PRIZE3]
+	ld a,[wPrize3]
 	ld [wd11e],a
 	call GetMonName
 	coord hl, 2, 8
@@ -191,7 +191,7 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld [wWhichPrize],a
 	ld d,0
 	ld e,a
-	ld hl,W_PRIZE1
+	ld hl,wPrize1
 	add hl,de
 	ld a,[hl]
 	ld [wd11e],a
@@ -300,7 +300,7 @@ GetPrizeMonLevel: ; 52977 (14:6977)
 	jr .loop
 .matchFound
 	ld a,[hl]
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	ret
 
 INCLUDE "data/prize_mon_levels.asm"

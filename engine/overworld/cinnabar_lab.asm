@@ -48,9 +48,9 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 .choseDomeFossil
 	ld b, KABUTO
 .fossilSelected
-	ld [W_FOSSILITEM], a
+	ld [wFossilItem], a
 	ld a, b
-	ld [W_FOSSILMON], a
+	ld [wFossilMon], a
 	call LoadFossilItemAndMonName
 	ld hl, LabFossil_610ae
 	call PrintText
@@ -60,7 +60,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	jr nz, .cancelledGivingFossil
 	ld hl, LabFossil_610b3
 	call PrintText
-	ld a, [W_FOSSILITEM]
+	ld a, [wFossilItem]
 	ld [hItemToRemoveID], a
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
@@ -113,11 +113,11 @@ PrintFossilsInBag: ; 610c2 (18:50c2)
 
 ; loads the names of the fossil item and the resulting mon
 LoadFossilItemAndMonName: ; 610eb (18:50eb)
-	ld a, [W_FOSSILMON]
+	ld a, [wFossilMon]
 	ld [wd11e], a
 	call GetMonName
 	call CopyStringToCF4B
-	ld a, [W_FOSSILITEM]
+	ld a, [wFossilItem]
 	ld [wd11e], a
 	call GetItemName
 	ret

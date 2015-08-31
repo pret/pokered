@@ -2,9 +2,9 @@ MtMoon1Script: ; 499c8 (12:59c8)
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon1TrainerHeader0
 	ld de, MtMoon1ScriptPointers
-	ld a, [W_MTMOON1CURSCRIPT]
+	ld a, [wMtMoon1CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_MTMOON1CURSCRIPT], a
+	ld [wMtMoon1CurScript], a
 	ret
 
 MtMoon1ScriptPointers: ; 499db (12:59db)

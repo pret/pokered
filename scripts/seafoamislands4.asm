@@ -41,7 +41,7 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ret nz
 .asm_465ed
 	ld hl, SeafoamIslands4ScriptPointers
-	ld a, [W_SEAFOAMISLANDS4CURSCRIPT]
+	ld a, [wSeafoamIslands4CurScript]
 	jp CallFunctionInTable
 
 Seafoam4HolesCoords: ; 465f6 (11:65f6)
@@ -58,10 +58,10 @@ SeafoamIslands4ScriptPointers: ; 465fb (11:65fb)
 SeafoamIslands4Script0: ; 46603 (11:6603)
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $8
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $f
 	ret nz
 	ld hl, wSimulatedJoypadStatesEnd
@@ -70,10 +70,10 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 2, [hl]
 	ld a, $1
-	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
+	ld [wSeafoamIslands4CurScript], a
 	ret
 
 RLEMovement46632: ; 46632 (11:6632)
@@ -87,13 +87,13 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	and a
 	ret nz
 	ld a, $0
-	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
+	ld [wSeafoamIslands4CurScript], a
 	ret
 
 SeafoamIslands4Script2: ; 46644 (11:6644)
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $12
 	jr z, .asm_4665e
 	cp $13
@@ -112,11 +112,11 @@ SeafoamIslands4Script2: ; 46644 (11:6644)
 	ld [wSpriteStateData2 + $06], a
 	ld hl, wd730
 	set 7, [hl]
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 2, [hl]
 	ld a, $3
 .asm_4667b
-	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
+	ld [wSeafoamIslands4CurScript], a
 	ret
 
 RLEData_4667f: ; 4667f (11:667f)
@@ -137,7 +137,7 @@ SeafoamIslands4Script3: ; 4668f (11:668f)
 	and a
 	ret nz
 	ld a, $0
-	ld [W_SEAFOAMISLANDS4CURSCRIPT], a
+	ld [wSeafoamIslands4CurScript], a
 	ret
 
 SeafoamIslands4TextPointers: ; 4669a (11:669a)

@@ -1,13 +1,13 @@
 SSAnne2Script: ; 6139f (18:539f)
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne2ScriptPointers
-	ld a, [W_SSANNE2CURSCRIPT]
+	ld a, [wSSAnne2CurScript]
 	jp CallFunctionInTable
 
 SSAnne2Script_613ab: ; 613ab (18:53ab)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_SSANNE2CURSCRIPT], a
+	ld [wSSAnne2CurScript], a
 	ret
 
 SSAnne2ScriptPointers: ; 613b3 (18:53b3)
@@ -53,7 +53,7 @@ SSAnne2Script0: ; 613be (18:53be)
 .asm_61403
 	call MoveSprite
 	ld a, $1
-	ld [W_SSANNE2CURSCRIPT], a
+	ld [wSSAnne2CurScript], a
 	ret
 
 MovementData_6140c: ; 6140c (18:540c)
@@ -71,7 +71,7 @@ CoordsData_61411: ; 61411 (18:5411)
 	db $FF
 
 SSAnne2Script_61416: ; 61416 (18:5416)
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $25
 	jr nz, .asm_61426
 	ld a, PLAYER_DIR_LEFT
@@ -98,10 +98,10 @@ SSAnne2Script1: ; 61430 (18:5430)
 	call DisplayTextID
 	call Delay3
 	ld a, OPP_SONY2
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle
 	ld a, $1
@@ -114,15 +114,15 @@ SSAnne2Script1: ; 61430 (18:5430)
 .Charmander
 	ld a, $3
 .done
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 
 	call SSAnne2Script_61416
 	ld a, $2
-	ld [W_SSANNE2CURSCRIPT], a
+	ld [wSSAnne2CurScript], a
 	ret
 
 SSAnne2Script2: ; 6146d (18:546d)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SSAnne2Script_613ab
 	call SSAnne2Script_61416
@@ -134,7 +134,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, $2
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $25
 	jr nz, .asm_61497
 	ld de, MovementData_614b9
@@ -150,7 +150,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $3
-	ld [W_SSANNE2CURSCRIPT], a
+	ld [wSSAnne2CurScript], a
 	ret
 
 MovementData_614b7: ; 614b7 (18:54b7)
@@ -175,7 +175,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	predef HideObject
 	call PlayDefaultMusic
 	ld a, $4
-	ld [W_SSANNE2CURSCRIPT], a
+	ld [wSSAnne2CurScript], a
 	ret
 
 SSAnne2TextPointers: ; 614db (18:54db)
