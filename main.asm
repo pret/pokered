@@ -2967,10 +2967,10 @@ LoadWildData: ; ceb8 (3:4eb8)
 	add hl,bc
 .NoGrassData
 	ld a,[hli]
-	ld [W_WATERRATE],a
+	ld [wWaterRate],a
 	and a
 	ret z        ; if no water data, we're done
-	ld de,W_WATERMONS  ; otherwise, load surfing data
+	ld de,wWaterMons  ; otherwise, load surfing data
 	ld bc,$0014
 	jp CopyData
 

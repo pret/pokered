@@ -33,7 +33,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr z, .CanEncounter
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
-	ld a, [W_WATERRATE]
+	ld a, [wWaterRate]
 	jr z, .CanEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokemon
 ; so long as the map is "indoor" and has wild pokemon defined.
@@ -67,7 +67,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	aCoord 8, 9
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
 	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
-	ld hl, W_WATERMONS
+	ld hl, wWaterMons
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.
 .gotWildEncounterType
