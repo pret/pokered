@@ -548,7 +548,7 @@ TestBattle:
 	ld [W_OBTAINEDBADGES], a
 
 	ld hl, W_FLAGS_D733
-	set 0, [hl]
+	set BIT_TEST_BATTLE, [hl]
 
 	; Reset the party.
 	ld hl, wPartyCount
@@ -668,7 +668,7 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	xor a
 	jr .done
 .notFirstMap
-	ld a, [wLastMap]
+	ld a, [wLastMap] ; this value is overwritten before it's ever read
 	ld hl, wd732
 	bit 4, [hl] ; used dungeon warp (jumped down hole/waterfall)?
 	jr nz, .usedDunegonWarp
@@ -2751,12 +2751,15 @@ CanMoveBouldersText: ; cdbb (3:4dbb)
 	TX_FAR _CanMoveBouldersText
 	db "@"
 
-CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
+IsSurfingAllowed: ; cdc0 (3:4dc0)
+; Returns whether surfing is allowed in bit 1 of wd728.
+; Surfing isn't allowed on the Cycling Road or in the lowest level of the
+; Seafoam Islands before the current has been slowed with boulders.
 	ld hl, wd728
 	set 1, [hl]
 	ld a, [wd732]
 	bit 5, a
-	jr nz, .asm_cdec
+	jr nz, .forcedToRideBike
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ret nz
@@ -2769,7 +2772,7 @@ CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
 	res 1, [hl]
 	ld hl, CurrentTooFastText
 	jp PrintText
-.asm_cdec
+.forcedToRideBike
 	ld hl, wd728
 	res 1, [hl]
 	ld hl, CyclingIsFunText
@@ -2799,7 +2802,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	push de
 	push hl
 	push hl
-	ld d,50 ; PC box can hold 50 items
+	ld d,PC_ITEM_CAPACITY ; how many items the PC can hold
 	ld a,wNumBagItems & $FF
 	cp l
 	jr nz,.checkIfInventoryFull
@@ -2807,7 +2810,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 	cp h
 	jr nz,.checkIfInventoryFull
 ; if the destination is the bag
-	ld d,20 ; bag can hold 20 items
+	ld d,BAG_ITEM_CAPACITY ; how many items the bag can hold
 .checkIfInventoryFull
 	ld a,[hl]
 	sub d

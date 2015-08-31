@@ -444,8 +444,12 @@ WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
 
 WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	push hl
+
+; Subtract 4 from c (X coord) and 4 from b (Y coord). However, the carry from c
+; is added to b, so the net result is that only 3 is subtracted from b.
 	lb hl, -4, -4
-	add hl, bc ; subtract 4 from c (X coord) and 4 from b (Y coord)
+	add hl, bc
+
 	ld b, h
 	ld c, l
 	pop hl
@@ -469,14 +473,14 @@ WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 	xor a
 	ld [hli], a
 	inc d
-	ld a, $8
+	ld a, 8
 	add c
 	ld c, a
 	dec e
 	jr nz, .innerLoop
 	pop bc
 	pop de
-	ld a, $8
+	ld a, 8
 	add b
 	ld b, a
 	dec d

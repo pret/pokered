@@ -147,7 +147,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	ld a, $1
+	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
@@ -391,23 +391,23 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld hl, BillsHousePokemonListText1
 	call PrintText
 	xor a
-	ld [W_ANIMATIONID], a
+	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $4
+	ld a, 4
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 .billsPokemonLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
-	ld b, $a
-	ld c, $9
+	ld b, 10
+	ld c, 9
 	call TextBoxBorder
 	coord hl, 2, 2
 	ld de, BillsMonListText

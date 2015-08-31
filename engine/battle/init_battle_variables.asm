@@ -32,7 +32,7 @@ InitBattleVariables: ; 525af (14:65af)
 	jr c, .notSafariBattle
 	cp SAFARI_ZONE_REST_HOUSE_1
 	jr nc, .notSafariBattle
-	ld a, $2 ; safari battle
+	ld a, BATTLE_TYPE_SAFARI
 	ld [W_BATTLETYPE], a
 .notSafariBattle
 	jpab PlayBattleMusic

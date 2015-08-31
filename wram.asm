@@ -50,6 +50,7 @@ battle_struct: MACRO
 \1Moves::      ds NUM_MOVES
 \1DVs::        ds 2
 \1Level::      db
+\1Stats::
 \1MaxHP::      dw
 \1Attack::     dw
 \1Defense::    dw
@@ -1746,6 +1747,11 @@ wObjectToShow:: ; d07a
 
 	ds 1
 
+wDefaultMap:: ; d07c
+; the map you will start at when the debug bit is set
+
+wMenuItemOffset:: ; d07c
+
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
@@ -1789,7 +1795,7 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-wSaveFileStatus::
+wSaveFileStatus:: ; d088
 ; 1 = no save file or save file is corrupted
 ; 2 = save file exists and no corruption has been detected
 	ds 1
@@ -2068,6 +2074,8 @@ wFirstMonsNotOutYet:: ; d11d
 ; which will be the first mon sent out.
 	ds 1
 
+wPokeBallCaptureCalcTemp:: ; d11e
+
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
 wPokeBallAnimData:: ; d11e
@@ -2277,7 +2285,7 @@ wNumBagItems:: ; d31d
 	ds 1
 wBagItems:: ; d31e
 ; item, quantity
-	ds 20 * 2
+	ds BAG_ITEM_CAPACITY * 2
 	ds 1 ; end
 
 wPlayerMoney:: ; d347
@@ -2590,7 +2598,7 @@ wNumBoxItems:: ; d53a
 	ds 1
 wBoxItems:: ; d53b
 ; item, quantity
-	ds 50 * 2
+	ds PC_ITEM_CAPACITY * 2
 	ds 1 ; end
 
 wCurrentBoxNum:: ; d5a0
@@ -2921,8 +2929,14 @@ wUnusedD71F:: ; d71f
 
 	ds 8
 
-wd728::
+wd728:: ; d728
 ; bit 0: using Strength outside of battle
+; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
+; bit 3: received Old Rod
+; bit 4: received Good Rod
+; bit 5: received Super Rod
+; bit 6: gave one of the Saffron guards a drink
+; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
 	ds 1
 
 	ds 1
@@ -2936,16 +2950,36 @@ wBeatGymFlags:: ; d72a
 
 wd72c:: ; d72c
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
+; bit 1: prevent audio fade out
 	ds 1
 
-wd72d:: ds 1 ; misc temp flags? (in some scripts, bit 6 and 7 set after a special battle (e.g. gym leaders) has been won)
-             ; also used as a start menu flag
+wd72d:: ; d72d
+; This variable is used for temporary flags and as the destination map when
+; warping to the Trade Center or Colosseum.
+; bit 0: sprite facing directions have been initialised in the Trade Center
+; bit 3: do scripted warp (used to warp back to Lavender Town from the top of the pokemon tower)
+; bit 4: on a dungeon warp
+; bit 5: don't make NPCs face the player when spoken to
+; Bits 6 and 7 are set by scripts when starting major battles in the storyline,
+; but they do not appear to affect anything. Bit 6 is reset after all battles
+; and bit 7 is reset after trainer battles (but it's only set before trainer
+; battles anyway).
+	ds 1
 
-wd72e::
+wd72e:: ; d72e
+; bit 0: the player has received Lapras in the Silph Co. building
+; bit 1: set in various places, but doesn't appear to have an effect
+; bit 2: the player has healed pokemon at a pokemon center at least once
+; bit 3: the player has a received a pokemon from Prof. Oak
+; bit 4: disable battles
+; bit 5: set when a battle ends and when the player blacks out in the overworld due to poison
+; bit 6: using the link feature
 ; bit 7: set if scripted NPC movement has been initialised
-	ds 2 ; more temp misc flags, used with npc movement, main menu and other stuff
+	ds 1
 
-wd730::
+	ds 1
+
+wd730:: ; d730
 ; bit 0: NPC sprite being moved by script
 ; bit 5: ignore joypad input
 ; bit 6: print text with no delay between each letter
@@ -2970,6 +3004,9 @@ wd732:: ; d732
 
 W_FLAGS_D733:: ; d733
 ; bit 0: running a test battle
+; bit 1: prevent music from changing when entering new map
+; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
+; bit 3: trainer wants to battle
 ; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1

@@ -166,7 +166,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call RunDefaultPaletteCommand
 	call GBPalNormal
 	xor a
-	ld [W_SUBANIMTRANSFORM], a
+	ld [wAnimCounter], a
 	ld hl, wd730
 	res 6, [hl]
 	ld a, [W_ISINBATTLE]

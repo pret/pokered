@@ -20,7 +20,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [hli],a
 	ld [hli],a
 	ld [hl],a
-	ld [W_ANIMATIONID],a
+	ld [wDefaultMap],a
 	ld hl,wd72e
 	res 6,[hl]
 	call ClearScreen
@@ -269,7 +269,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	call DelayFrames
 	ld hl, wd732
 	res 1, [hl]
-	ld a, [W_ANIMATIONID]
+	ld a, [wDefaultMap]
 	ld [wDestinationMap], a
 	call SpecialWarpIn
 	ld c, 20

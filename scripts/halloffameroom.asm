@@ -47,11 +47,11 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	ld [wLastBlackoutMap], a
 	callba SaveSAVtoSRAM
 	ld b, 5
-.asm_5a4ff
+.delayLoop
 	ld c, 600 / 5
 	call DelayFrames
 	dec b
-	jr nz, .asm_5a4ff
+	jr nz, .delayLoop
 	call WaitForTextScrollButtonPress
 	jp Init
 
