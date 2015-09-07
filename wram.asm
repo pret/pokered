@@ -3072,39 +3072,14 @@ wSerialEnemyDataBlock:: ; d893
 wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
-wEnemyMons:: ; d8a4
-wEnemyMon1::
-wEnemyMon1Species::
-
 ; Overload enemy party data
-wWaterRate::           db ; d8a4
-wWaterMons::              ; d8a5
+wWaterRate:: db ; d8a4
+wWaterMons:: db ; d8a5
 
-wEnemyMon1HP::         dw
-wEnemyMon1BoxLevel::   db
-wEnemyMon1Status::     db
-wEnemyMon1Type::
-wEnemyMon1Type1::      db
-wEnemyMon1Type2::      db
-wEnemyMon1CatchRate::  db
-wEnemyMon1Moves::      ds NUM_MOVES
-wEnemyMon1OTID::       dw
-wEnemyMon1Exp::        ds 3
-wEnemyMon1HPExp::      dw
-wEnemyMon1AttackExp::  dw
-wEnemyMon1DefenseExp:: dw
-wEnemyMon1SpeedExp::   dw
-wEnemyMon1SpecialExp:: dw
-wEnemyMon1DVs::        ds 2
-wEnemyMon1PP::         ds NUM_MOVES
-wEnemyMon1Level::      db
-wEnemyMon1Stats::
-wEnemyMon1MaxHP::      dw
-wEnemyMon1Attack::     dw
-wEnemyMon1Defense::    dw
-wEnemyMon1Speed::      dw
-wEnemyMon1Special::    dw
+	ds wWaterRate - @
 
+wEnemyMons:: ; d8a4
+wEnemyMon1:: party_struct wEnemyMon1
 wEnemyMon2:: party_struct wEnemyMon2
 wEnemyMon3:: party_struct wEnemyMon3
 wEnemyMon4:: party_struct wEnemyMon4
