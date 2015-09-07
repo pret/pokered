@@ -163,14 +163,13 @@ event_byte = ((\1) / 8)
 
 ;\1 = event index
 ;\2 = event index
-;\3 = event index (optional)
+;\3, \4, ... = additional (optional) event indices
 SetEvents: MACRO
 	SetEvent \1
+	rept (_NARG + -1)
 	SetEventReuseHL \2
-
-	IF _NARG > 2
-		SetEventReuseHL \3
-	ENDC
+	shift
+	endr
 	ENDM
 
 ;\1 = event index
@@ -214,11 +213,10 @@ event_byte = ((\1) / 8)
 ;\3 = event index (optional)
 ResetEvents: MACRO
 	ResetEvent \1
+	rept (_NARG + -1)
 	ResetEventReuseHL \2
-
-	IF _NARG > 2
-		ResetEventReuseHL \3
-	ENDC
+	shift
+	endr
 	ENDM
 
 ;\1 = event index
