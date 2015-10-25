@@ -66,29 +66,21 @@ $(foreach obj, $(all_obj), \
 )
 
 
-# Image files are added to a queue to reduce build time. They're converted when building parent objects.
 %.png:  ;
-%.2bpp: %.png  ; $(eval 2bppq += $<) @rm -f $@
-%.1bpp: %.png  ; $(eval 1bppq += $<) @rm -f $@
-%.pic:  %.2bpp ; $(eval picq  += $<) @rm -f $@
+%.2bpp: %.png  ; @$(gfx) 2bpp $<
+%.1bpp: %.png  ; @$(gfx) 1bpp $<
+%.pic:  %.2bpp ; @$(pic) compress $<
 
 # Assemble source files into objects.
-# Queue payloads are here. These are made silent since there may be hundreds of targets.
-# Use rgbasm -h to use halts without nops.
 $(all_obj): $$*.asm $$($$*_dep)
-	@$(gfx) 2bpp $(2bppq);    $(eval 2bppq :=)
-	@$(gfx) 1bpp $(1bppq);    $(eval 1bppq :=)
-	@$(pic) compress $(picq); $(eval picq  :=)
 	rgbasm -h -o $@ $*.asm
 
+# Make a symfile for debugging.
+link_opt = -n poke$*.sym
 
 # Link objects together to build a rom.
-
-# Make a symfile for debugging.
-link = rgblink -n poke$*.sym
-
 poke%.gbc: $$(%_obj)
-	$(link) -o $@ $^
+	rgblink $(link_opt) -o $@ $^
 	rgbfix $($*_opt) $@
 
 
