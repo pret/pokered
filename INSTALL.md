@@ -3,12 +3,12 @@
 	sudo apt-get install make gcc bison git python python-pip
 	sudo pip install pypng
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/bentley/rgbds
 	cd rgbds
 	sudo make install
 	cd ..
 
-	git clone --recursive git://github.com/iimarckus/pokered.git
+	git clone --recursive https://github.com/pret/pokered
 	cd pokered
 
 To build **pokered.gbc** and **pokeblue.gbc**:
@@ -28,12 +28,12 @@ In **Terminal**, run:
 	xcode-select --install
 	sudo easy_install pypng
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/bentley/rgbds
 	cd rgbds
 	sudo make install
 	cd ..
 
-	git clone --recursive git://github.com/iimarckus/pokered.git
+	git clone --recursive https://github.com/pret/pokered
 	cd pokered
 
 	make
@@ -54,7 +54,7 @@ In the **Cygwin terminal**:
 	lynx -source bootstrap.pypa.io/get-pip.py | python
 	pip install pypng
 
-	git clone --recursive git://github.com/iimarckus/pokered.git
+	git clone --recursive https://github.com/pret/pokered
 	cd pokered
 
 	make
