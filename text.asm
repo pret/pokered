@@ -3308,7 +3308,7 @@ _AfterTrade2Text:: ; a8212 (2a:4212)
 IF DEF(_YELLOW)
 	text "Hello there! Your"
 	line "old @"
-	TX_RAM wcd13
+	TX_RAM wInGameTradeGiveMonName
 	db " is"
 	cont "magnificent!"
 ELSE

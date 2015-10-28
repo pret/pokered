@@ -5430,10 +5430,26 @@ AIGetTypeEffectiveness: ; 3e449 (f:6449)
 .nextTypePair2
 	inc hl
 	jr .loop
+
 .done
+
+IF DEF(_YELLOW)
+	ld a, [W_TRAINERCLASS]
+	cp LORELEI
+	jr nz, .ok
+	ld a, [wEnemyMonSpecies]
+	cp DEWGONG
+	jr nz, .ok
+	call BattleRandom
+	cp 40 percent
+	ret c
+.ok
+ENDC
+
 	ld a,[hl]
 	ld [wTypeEffectiveness],a ; store damage multiplier
 	ret
+
 
 INCLUDE "data/type_effects.asm"
 
