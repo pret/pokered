@@ -1,13 +1,13 @@
-_SeafoamIslands5BattleText2:: ; 88075 (22:4075)
+_SeafoamIslands5BattleText2::
 	text "Gyaoo!@@"
 
-_SeafoamIslands5Text4:: ; 8807e (22:407e)
+_SeafoamIslands5Text4::
 	text "Boulders might"
 	line "change the flow"
 	cont "of water!"
 	done
 
-_SeafoamIslands5Text5:: ; 880a8 (22:40a8)
+_SeafoamIslands5Text5::
 	text "DANGER"
 	line "Fast current!"
 	done

@@ -1,10 +1,10 @@
-_SafariZoneRestHouse3Text1:: ; 85ad9 (21:5ad9)
+_SafariZoneRestHouse3Text1::
 	text "How many did you"
 	line "catch? I'm bushed"
 	cont "from the work!"
 	done
 
-_SafariZoneRestHouse3Text2:: ; 85b0b (21:5b0b)
+_SafariZoneRestHouse3Text2::
 	text "I caught a"
 	line "CHANSEY!"
 
@@ -12,7 +12,7 @@ _SafariZoneRestHouse3Text2:: ; 85b0b (21:5b0b)
 	line "all worthwhile!"
 	done
 
-_SafariZoneRestHouse3Text3:: ; 85b40 (21:5b40)
+_SafariZoneRestHouse3Text3::
 	text "Whew! I'm tired"
 	line "from all the fun!"
 	done

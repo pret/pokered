@@ -1,4 +1,4 @@
-_FuchsiaPokecenterText1:: ; 9e387 (27:6387)
+_FuchsiaPokecenterText1::
 	text "You can't win"
 	line "with just one"
 	cont "strong #MON."
@@ -8,7 +8,7 @@ _FuchsiaPokecenterText1:: ; 9e387 (27:6387)
 	cont "them evenly."
 	done
 
-_FuchsiaPokecenterText3:: ; 9e3de (27:63de)
+_FuchsiaPokecenterText3::
 	text "There's a narrow"
 	line "trail west of"
 	cont "VIRIDIAN CITY."

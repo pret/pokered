@@ -1,4 +1,4 @@
-_KogaBeforeBattleText:: ; 9e9b1 (27:69b1)
+_KogaBeforeBattleText::
 	text "KOGA: Fwahahaha!"
 
 	para "A mere child like"
@@ -16,7 +16,7 @@ _KogaBeforeBattleText:: ; 9e9b1 (27:69b1)
 	cont "techniques!"
 	done
 
-_KogaAfterBattleText:: ; 9ea66 (27:6a66)
+_KogaAfterBattleText::
 	text "Humph!"
 	line "You have proven"
 	cont "your worth!"

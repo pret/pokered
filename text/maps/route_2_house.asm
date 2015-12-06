@@ -1,4 +1,4 @@
-_Route2HouseText1:: ; 8a7b8 (22:67b8)
+_Route2HouseText1::
 	text "A fainted #MON"
 	line "can't fight. But, "
 	cont "it can still use "

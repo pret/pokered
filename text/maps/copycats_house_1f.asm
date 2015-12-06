@@ -1,11 +1,11 @@
-_CopycatsHouse1FText1:: ; a14f7 (28:54f7)
+_CopycatsHouse1FText1::
 	text "My daughter is so"
 	line "self-centered."
 	cont "She only has a"
 	cont "few friends."
 	done
 
-_CopycatsHouse1FText2:: ; a1535 (28:5535)
+_CopycatsHouse1FText2::
 	text "My daughter likes"
 	line "to mimic people."
 
@@ -15,11 +15,6 @@ _CopycatsHouse1FText2:: ; a1535 (28:5535)
 	cont "around here!"
 	done
 
-_CopycatsHouse1FText3:: ; a1596 (28:5596)
-IF DEF(_YELLOW)
-	text "CHANSEY: Chaan"
-	line "sey!@@"
-ELSE
+_CopycatsHouse1FText3::
 	text "CHANSEY: Chaan!"
 	line "Sii!@@"
-ENDC

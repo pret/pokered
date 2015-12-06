@@ -1,11 +1,11 @@
-_Museum2FText1:: ; 96841 (25:6841)
+_Museum2FText1::
 	text "MOON STONE?"
 
 	para "What's so special"
 	line "about it?"
 	done
 
-_Museum2FText2:: ; 96869 (25:6869)
+_Museum2FText2::
 	text "July 20, 1969!"
 
 	para "The 1st lunar"
@@ -15,12 +15,12 @@ _Museum2FText2:: ; 96869 (25:6869)
 	line "TV to watch it!"
 	done
 
-_Museum2FText3:: ; 968b1 (25:68b1)
+_Museum2FText3::
 	text "We have a space"
 	line "exhibit now."
 	done
 
-_Museum2FText4:: ; 968cf (25:68cf)
+_Museum2FText4::
 	text "I want a PIKACHU!"
 	line "It's so cute!"
 
@@ -28,32 +28,17 @@ _Museum2FText4:: ; 968cf (25:68cf)
 	line "to catch me one!"
 	done
 
-_Museum2FText5:: ; 96911 (25:6911)
+_Museum2FText5::
 	text "Yeah, a PIKACHU"
 	line "soon, I promise!"
 	done
 
-IF DEF(_YELLOW)
-_Museum2FPikachuText1::
-	text "Your PIKACHU looks"
-	line "untamed."
-	cont "May I have it for"
-	cont "my daughter?"
-	done
-
-_Museum2FPikachuText2::
-	text "I'd like to get"
-	line "that PIKACHU off"
-	cont "you, but it's too"
-	cont "attached to you."
-ENDC
-
-_Museum2FText6:: ; 96933 (25:6933)
+_Museum2FText6::
 	text "SPACE SHUTTLE"
 	line "COLUMBIA"
 	done
 
-_Museum2FText7:: ; 9694b (25:694b)
+_Museum2FText7::
 	text "Meteorite that"
 	line "fell on MT.MOON."
 	cont "(MOON STONE?)"

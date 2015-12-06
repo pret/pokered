@@ -1,4 +1,4 @@
-_DiglettsCaveEntRoute11Text1:: ; 8c7f9 (23:47f9)
+_DiglettsCaveEntRoute11Text1::
 	text "What a surprise!"
 	line "DIGLETTs dug this"
 	cont "long tunnel!"

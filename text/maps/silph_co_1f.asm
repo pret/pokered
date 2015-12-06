@@ -1,4 +1,4 @@
-_SilphCo1Text1:: ; a245a (28:645a)
+_SilphCo1Text1::
 	text "Welcome!"
 
 	para "The PRESIDENT is"

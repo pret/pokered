@@ -1,4 +1,4 @@
-_PokemonTower5Text1:: ; 99958 (26:5958)
+_PokemonTower5Text1::
 	text "Come, child! I"
 	line "sealed this space"
 	cont "with white magic!"
@@ -6,63 +6,63 @@ _PokemonTower5Text1:: ; 99958 (26:5958)
 	para "You can rest here!"
 	done
 
-_PokemonTower5BattleText1:: ; 9999f (26:599f)
+_PokemonTower5BattleText1::
 	text "Give...me..."
 	line "your...soul..."
 	done
 
-_PokemonTower5EndBattleText1:: ; 999bc (26:59bc)
+_PokemonTower5EndBattleText1::
 	text "Gasp!"
 	prompt
 
-_PokemonTower5AfterBattleText1:: ; 999c3 (26:59c3)
+_PokemonTower5AfterBattleText1::
 	text "I was under"
 	line "possession!"
 	done
 
-_PokemonTower5BattleText2:: ; 999dc (26:59dc)
+_PokemonTower5BattleText2::
 	text "You...shall..."
 	line "join...us..."
 	done
 
-_PokemonTower5EndBattleText2:: ; 999f9 (26:59f9)
+_PokemonTower5EndBattleText2::
 	text "What"
 	line "a nightmare!"
 	prompt
 
-_PokemonTower5AfterBattleText2:: ; 99a0c (26:5a0c)
+_PokemonTower5AfterBattleText2::
 	text "I was possessed!"
 	done
 
-_PokemonTower5BattleText3:: ; 99a1e (26:5a1e)
+_PokemonTower5BattleText3::
 	text "Zombies!"
 	done
 
-_PokemonTower5EndBattleText3:: ; 99a28 (26:5a28)
+_PokemonTower5EndBattleText3::
 	text "Ha?"
 	prompt
 
-_PokemonTower5AfterBattleText3:: ; 99a2d (26:5a2d)
+_PokemonTower5AfterBattleText3::
 	text "I regained my"
 	line "senses!"
 	done
 
-_PokemonTower5BattleText4:: ; 99a44 (26:5a44)
+_PokemonTower5BattleText4::
 	text "Urgah..."
 	line "Urff...."
 	done
 
-_PokemonTower5EndBattleText4:: ; 99a57 (26:5a57)
+_PokemonTower5EndBattleText4::
 	text "Whoo!"
 	prompt
 
-_PokemonTower5AfterBattleText4:: ; 99a5e (26:5a5e)
+_PokemonTower5AfterBattleText4::
 	text "I fell to evil"
 	line "spirits despite"
 	cont "my training!"
 	done
 
-_PokemonTower5Text7:: ; 99a8b (26:5a8b)
+_PokemonTower5Text7::
 	text "Entered purified,"
 	line "protected zone!"
 

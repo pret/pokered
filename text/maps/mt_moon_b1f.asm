@@ -1,4 +1,4 @@
-_MtMoonText1:: ; 8095c (20:495c)
+_MtMoonText1::
 	db $0
 	done
 

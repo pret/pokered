@@ -1,191 +1,156 @@
-IF DEF(_YELLOW)
-_Route25DamianText1::
-	text "I'm not good at"
-	line "raising #MON."
-
-	para "I should release"
-	line "my CHARMANDER"
-	cont "because I haven't"
-	cont "raised it well..."
-
-	para "If you promise me"
-	line "you'll care for"
-	cont "it, it's yours."
-	done
-
-_Route25DamianText2::
-	text "Take good care of"
-	line "my CHARMANDER!@@"
-
-_Route25DamianText3::
-	text "Oh... I'd better"
-	line "release it then."
-	done
-
-_Route25DamianText4::
-	text "How's CHARMANDER"
-	line "doing?"
-	done
-ENDC
-
-_Route25BattleText1:: ; 9421e (25:421e)
+_Route25BattleText1::
 	text "Local trainers"
 	line "come here to"
 	cont "practice!"
 	done
 
-_Route25EndBattleText1:: ; 94245 (25:4245)
+_Route25EndBattleText1::
 	text "You're"
 	line "decent."
 	prompt
 
-_Route25AfterBattleText1:: ; 94254 (25:4254)
+_Route25AfterBattleText1::
 	text "All #MON have"
 	line "weaknesses. It's"
 	cont "best to raise"
 	cont "different kinds."
 	done
 
-_Route25BattleText2:: ; 94292 (25:4292)
+_Route25BattleText2::
 	text "Dad took me to a"
 	line "great party on"
 	cont "S.S.ANNE at"
 	cont "VERMILION CITY!"
 	done
 
-_Route25EndBattleText2:: ; 942cf (25:42cf)
+_Route25EndBattleText2::
 	text "I'm"
 	line "not mad!"
 	prompt
 
-_Route25AfterBattleText2:: ; 942dc (25:42dc)
+_Route25AfterBattleText2::
 	text "On S.S.ANNE, I"
 	line "saw trainers from"
 	cont "around the world."
 	done
 
-_Route25BattleText3:: ; 94310 (25:4310)
+_Route25BattleText3::
 	text "I'm a cool guy."
 	line "I've got a girl"
 	cont "friend!"
 	done
 
-_Route25EndBattleText3:: ; 94337 (25:4337)
+_Route25EndBattleText3::
 	text "Aww,"
 	line "darn..."
 	prompt
 
-_Route25AfterBattleText3:: ; 94345 (25:4345)
+_Route25AfterBattleText3::
 	text "Oh well. My girl"
 	line "will cheer me up."
 	done
 
-_Route25BattleText4:: ; 94369 (25:4369)
+_Route25BattleText4::
 	text "Hi! My boy"
 	line "friend is cool!"
 	done
 
-_Route25EndBattleText4:: ; 94385 (25:4385)
-IF DEF(_YELLOW)
-	text "I'm in"
-	line "a slump!"
-ELSE
+_Route25EndBattleText4::
 	text "I was in"
 	line "bad condition!"
-ENDC
 	prompt
 
-_Route25AfterBattleText4:: ; 9439e (25:439e)
+_Route25AfterBattleText4::
 	text "I wish my guy was"
 	line "as good as you!"
 	done
 
-_Route25BattleText5:: ; 943c1 (25:43c1)
+_Route25BattleText5::
 	text "I knew I had to"
 	line "fight you!"
 	done
 
-_Route25EndBattleText5:: ; 943dd (25:43dd)
+_Route25EndBattleText5::
 	text "I knew"
 	line "I'd lose too!"
 	prompt
 
-_Route25AfterBattleText5:: ; 943f2 (25:43f2)
+_Route25AfterBattleText5::
 	text "If your #MON"
 	line "gets confused or"
 	cont "falls asleep,"
 	cont "switch it!"
 	done
 
-_Route25BattleText6:: ; 9442a (25:442a)
+_Route25BattleText6::
 	text "My friend has a"
 	line "cute #MON."
 	cont "I'm so jealous!"
 	done
 
-_Route25EndBattleText6:: ; 94455 (25:4455)
+_Route25EndBattleText6::
 	text "I'm"
 	line "not so jealous!"
 	prompt
 
-_Route25AfterBattleText6:: ; 94469 (25:4469)
+_Route25AfterBattleText6::
 	text "You came from MT."
 	line "MOON? May I have"
 	cont "a CLEFAIRY?"
 	done
 
-_Route25BattleText7:: ; 94499 (25:4499)
+_Route25BattleText7::
 	text "I just got down"
 	line "from MT.MOON,"
 	cont "but I'm ready!"
 	done
 
-_Route25EndBattleText7:: ; 944c6 (25:44c6)
+_Route25EndBattleText7::
 	text "You"
 	line "worked hard!"
 	prompt
 
-_Route25AfterBattleText7:: ; 944d8 (25:44d8)
+_Route25AfterBattleText7::
 	text "Drat!"
 	line "A ZUBAT bit me"
 	cont "back in there."
 	done
 
-_Route25BattleText8:: ; 944fd (25:44fd)
+_Route25BattleText8::
 	text "I'm off to see a"
 	line "#MON collector"
 	cont "at the cape!"
 	done
 
-_Route25EndBattleText8:: ; 9452a (25:452a)
+_Route25EndBattleText8::
 	text "You"
 	line "got me."
 	prompt
 
-_Route25AfterBattleText8:: ; 94537 (25:4537)
+_Route25AfterBattleText8::
 	text "The collector has"
 	line "many rare kinds"
 	cont "of #MON."
 	done
 
-_Route25BattleText9:: ; 94563 (25:4563)
+_Route25BattleText9::
 	text "You're going to"
 	line "see BILL? First,"
 	cont "let's fight!"
 	done
 
-_Route25EndBattleText9:: ; 94590 (25:4590)
+_Route25EndBattleText9::
 	text "You're"
 	line "something."
 	prompt
 
-_Route25AfterBattleText9:: ; 945a2 (25:45a2)
+_Route25AfterBattleText9::
 	text "The trail below"
 	line "is a shortcut to"
 	cont "CERULEAN CITY."
 	done
 
-_Route25Text11:: ; 945d3 (25:45d3)
+_Route25Text11::
 	text "SEA COTTAGE"
 	line "BILL lives here!"
 	done

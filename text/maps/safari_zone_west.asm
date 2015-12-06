@@ -1,8 +1,8 @@
-_SafariZoneWestText5:: ; 85719 (21:5719)
+_SafariZoneWestText5::
 	text "REST HOUSE"
 	done
 
-_SafariZoneWestText6:: ; 85725 (21:5725)
+_SafariZoneWestText6::
 	text "REQUEST NOTICE"
 
 	para "Please find the"
@@ -15,7 +15,7 @@ _SafariZoneWestText6:: ; 85725 (21:5725)
 	line "Contact: WARDEN"
 	done
 
-_SafariZoneWestText7:: ; 857a3 (21:57a3)
+_SafariZoneWestText7::
 	text "TRAINER TIPS"
 
 	para "Zone Exploration"
@@ -25,7 +25,7 @@ _SafariZoneWestText7:: ; 857a3 (21:57a3)
 	line "the SECRET HOUSE!"
 	done
 
-_SafariZoneWestText8:: ; 857ed (21:57ed)
+_SafariZoneWestText8::
 	text "AREA 3"
 	line "EAST: CENTER AREA"
 	done

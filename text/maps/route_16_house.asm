@@ -1,4 +1,4 @@
-_Route16HouseText3:: ; 8ce02 (23:4e02)
+_Route16HouseText3::
 	text "Oh, you found my"
 	line "secret retreat!"
 
@@ -8,11 +8,11 @@ _Route16HouseText3:: ; 8ce02 (23:4e02)
 	cont "to you with this!"
 	prompt
 
-_ReceivedHM02Text:: ; 8ce66 (23:4e66)
+_ReceivedHM02Text::
 	text $52, " received"
 	line "HM02!@@"
 
-_HM02ExplanationText:: ; 8ce79 (23:4e79)
+_HM02ExplanationText::
 	text "HM02 is FLY."
 	line "It will take you"
 	cont "back to any town."
@@ -21,12 +21,12 @@ _HM02ExplanationText:: ; 8ce79 (23:4e79)
 	line "use!"
 	done
 
-_HM02NoRoomText:: ; 8cebe (23:4ebe)
+_HM02NoRoomText::
 	text "You don't have any"
 	line "room for this."
 	done
 
-_Route16HouseText_1e652:: ; 8cee0 (23:4ee0)
+_Route16HouseText_1e652::
 	text "FEAROW: Kyueen!"
 	done
 

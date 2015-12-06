@@ -1,11 +1,11 @@
-_PewterHouse1Text1:: ; 984ce (26:44ce)
+_PewterHouse1Text1::
 	text "NIDORAN: Bowbow!@@"
 
-_PewterHouse1Text2:: ; 984e1 (26:44e1)
+_PewterHouse1Text2::
 	text "NIDORAN sit!"
 	done
 
-_PewterHouse1Text3:: ; 984ef (26:44ef)
+_PewterHouse1Text3::
 	text "Our #MON's an"
 	line "outsider, so it's"
 	cont "hard to handle."

@@ -1,40 +1,15 @@
-IF DEF(_YELLOW)
-_RocketHideoutJessieJamesText1::
-	text "Not another step,"
-	line "brat!@@"
-
-_RocketHideoutJessieJamesText2::
-	text "How dare you"
-	line "humiliate us at"
-	cont "MT.MOON!"
-
-	para "It's payback time,"
-	line "you brat!"
-	done
-
-_RocketHideoutJessieJamesText3::
-	text "Such"
-	line "a dreadful twerp!"
-	prompt
-
-_RocketHideoutJessieJamesText4::
-	text "Looks like TEAM"
-	line "ROCKET's blasting"
-	cont "off again!@@"
-ENDC
-
-_RocketHideout4Text_4557a:: ; 8223e (20:623e)
+_RocketHideout4Text_4557a::
 	text "So! I must say, I"
 	line "am impressed you"
 	cont "got here!"
 	done
 
-_RocketHideout4Text_4557f:: ; 8226c (20:626c)
+_RocketHideout4Text_4557f::
 	text "WHAT!"
 	line "This cannot be!"
 	prompt
 
-_RocketHideout4Text_45584:: ; 82283 (20:6283)
+_RocketHideout4Text_45584::
 	text "I see that you"
 	line "raise #MON"
 	cont "with utmost care."
@@ -51,49 +26,49 @@ _RocketHideout4Text_45584:: ; 82283 (20:6283)
 	line "again..."
 	done
 
-_RocketHideout4BattleText2:: ; 82326 (20:6326)
+_RocketHideout4BattleText2::
 	text "I know you! You"
 	line "ruined our plans"
 	cont "at MT.MOON!"
 	done
 
-_RocketHideout4EndBattleText2:: ; 82354 (20:6354)
+_RocketHideout4EndBattleText2::
 	text "Burned"
 	line "again!"
 	prompt
 
-_RocketHide4AfterBattleText2:: ; 82363 (20:6363)
+_RocketHide4AfterBattleText2::
 	text "Do you have"
 	line "something against"
 	cont "TEAM ROCKET?"
 	done
 
-_RocketHideout4BattleText3:: ; 8238f (20:638f)
+_RocketHideout4BattleText3::
 	text "How can you not"
 	line "see the beauty of"
 	cont "our evil?"
 	done
 
-_RocketHideout4EndBattleText3:: ; 823bc (20:63bc)
+_RocketHideout4EndBattleText3::
 	text "Ayaya!"
 	prompt
 
-_RocketHide4AfterBattleText3:: ; 823c4 (20:63c4)
+_RocketHide4AfterBattleText3::
 	text "BOSS! I'm sorry I"
 	line "failed you!"
 	done
 
-_RocketHideout4BattleText4:: ; 823e2 (20:63e2)
+_RocketHideout4BattleText4::
 	text "The elevator"
 	line "doesn't work? Who"
 	cont "has the LIFT KEY?"
 	done
 
-_RocketHideout4EndBattleText4:: ; 82413 (20:6413)
+_RocketHideout4EndBattleText4::
 	text "No!"
 	prompt
 
-_RocketHideout4Text_455ec:: ; 82418 (20:6418)
+_RocketHideout4Text_455ec::
 	text "Oh no! I dropped"
 	line "the LIFT KEY!"
 	done

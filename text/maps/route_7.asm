@@ -1,4 +1,4 @@
-_Route7Text1:: ; 8de7a (23:5e7a)
+_Route7Text1::
 	text "UNDERGROUND PATH"
 	line "CELADON CITY -"
 	cont "LAVENDER TOWN"

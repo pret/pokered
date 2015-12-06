@@ -1,101 +1,97 @@
-_Route10BattleText1:: ; 8e642 (23:6642)
+_Route10BattleText1::
 	text "Wow, are you a"
 	line "#MANIAC too?"
 	cont "Want to see my"
 	cont "collection?"
 	done
 
-_Route10EndBattleText1:: ; 8e67a (23:667a)
+_Route10EndBattleText1::
 	text "Humph."
 	line "I'm not angry!"
 	prompt
 
-_Route10AfterBattleText1:: ; 8e690 (23:6690)
+_Route10AfterBattleText1::
 	text "I have more rare"
 	line "#MON at home!"
 	done
 
-_Route10BattleText2:: ; 8e6b0 (23:66b0)
+_Route10BattleText2::
 	text "Ha-hahah-ah-ha!"
 	done
 
-_Route10EndBattleText2:: ; 8e6c1 (23:66c1)
+_Route10EndBattleText2::
 	text "Ha-haha!"
 	line "Not laughing!"
 	cont "Ha-hay fever!"
 	cont "Haha-ha-choo!"
 	prompt
 
-_Route10AfterBattleText2:: ; 8e6f5 (23:66f5)
+_Route10AfterBattleText2::
 	text "Haha-ha-choo!"
 	line "Ha-choo!"
 	cont "Snort! Snivel!"
 	done
 
-_Route10BattleText3:: ; 8e71c (23:671c)
-IF DEF(_YELLOW)
-	text "Hi, kid, want to"
-ELSE
+_Route10BattleText3::
 	text "Hi kid, want to"
-ENDC
 	line "see my #MON?"
 	done
 
-_Route10EndBattleText3:: ; 8e73a (23:673a)
+_Route10EndBattleText3::
 	text "Oh no!"
 	line "My #MON!"
 	prompt
 
-_Route10AfterBattleText3:: ; 8e74b (23:674b)
+_Route10AfterBattleText3::
 	text "I don't like you"
 	line "for beating me!"
 	done
 
-_Route10BattleText4:: ; 8e76c (23:676c)
+_Route10BattleText4::
 	text "I've been to a"
 	line "#MON GYM a few"
 	cont "times. But, I"
 	cont "lost each time."
 	done
 
-_Route10EndBattleText4:: ; 8e7a8 (23:67a8)
+_Route10EndBattleText4::
 	text "Ohh!"
 	line "Blew it again!"
 	prompt
 
-_Route10AfterBattleText4:: ; 8e7bd (23:67bd)
+_Route10AfterBattleText4::
 	text "I noticed some"
 	line "#MANIACs"
 	cont "prowling around."
 	done
 
-_Route10BattleText5:: ; 8e7e7 (23:67e7)
+_Route10BattleText5::
 	text "Ah! This mountain"
 	line "air is delicious!"
 	done
 
-_Route10EndBattleText5:: ; 8e80c (23:680c)
+_Route10EndBattleText5::
 	text "That"
 	line "cleared my head!"
 	prompt
 
-_Route10AfterBattleText5:: ; 8e823 (23:6823)
+_Route10AfterBattleText5::
 	text "I feel bloated on"
 	line "mountain air!"
 	done
 
-_Route10BattleText6:: ; 8e844 (23:6844)
+_Route10BattleText6::
 	text "I'm feeling a bit"
 	line "faint from this"
 	cont "tough hike."
 	done
 
-_Route10EndBattleText6:: ; 8e872 (23:6872)
+_Route10EndBattleText6::
 	text "I'm"
 	line "not up to it!"
 	prompt
 
-_Route10AfterBattleText6:: ; 8e884 (23:6884)
+_Route10AfterBattleText6::
 	text "The #MON here"
 	line "are so chunky!"
 	cont "There should be a"
@@ -103,12 +99,12 @@ _Route10AfterBattleText6:: ; 8e884 (23:6884)
 	cont "floral pattern!"
 	done
 
-_Route10Text9:: ; 8e8d4 (23:68d4)
-_Route10Text7:: ; 8e8d4 (23:68d4)
+_Route10Text9::
+_Route10Text7::
 	text "ROCK TUNNEL"
 	done
 
-_Route10Text10:: ; 8e8e1 (23:68e1)
+_Route10Text10::
 	text "POWER PLANT"
 	done
 

@@ -1,4 +1,4 @@
-_PewterCityText1:: ; a497f (29:497f)
+_PewterCityText1::
 	text "It's rumored that"
 	line "CLEFAIRYs came"
 	cont "from the moon!"
@@ -8,7 +8,7 @@ _PewterCityText1:: ; a497f (29:497f)
 	cont "fell on MT.MOON."
 	done
 
-_PewterCityText2:: ; a49e0 (29:49e0)
+_PewterCityText2::
 	text "There aren't many"
 	line "serious #MON"
 	cont "trainers here!"
@@ -20,24 +20,24 @@ _PewterCityText2:: ; a49e0 (29:49e0)
 	cont "into it!"
 	done
 
-_PewterCityText_193f1:: ; a4a56 (29:4a56)
+_PewterCityText_193f1::
 	text "Did you check out"
 	line "the MUSEUM?"
 	done
 
-_PewterCityText_193f6:: ; a4a75 (29:4a75)
+_PewterCityText_193f6::
 	text "Weren't those"
 	line "fossils from MT."
 	cont "MOON amazing?"
 	done
 
-_PewterCityText_193fb:: ; a4aa2 (29:4aa2)
+_PewterCityText_193fb::
 	text "Really?"
 	line "You absolutely"
 	cont "have to go!"
 	done
 
-_PewterCityText13:: ; a4ac6 (29:4ac6)
+_PewterCityText13::
 	text "It's right here!"
 	line "You have to pay"
 	cont "to get in, but"
@@ -45,24 +45,24 @@ _PewterCityText13:: ; a4ac6 (29:4ac6)
 	cont "See you around!"
 	done
 
-_PewterCityText_19427:: ; a4b14 (29:4b14)
+_PewterCityText_19427::
 	text "Psssst!"
 	line "Do you know what"
 	cont "I'm doing?"
 	done
 
-_PewterCityText_1942c:: ; a4b38 (29:4b38)
+_PewterCityText_1942c::
 	text "That's right!"
 	line "It's hard work!"
 	done
 
-_PewterCityText_19431:: ; a4b55 (29:4b55)
+_PewterCityText_19431::
 	text "I'm spraying REPEL"
 	line "to keep #MON"
 	cont "out of my garden!"
 	done
 
-_PewterCityText_1945d:: ; a4b87 (29:4b87)
+_PewterCityText_1945d::
 	text "You're a trainer"
 	line "right? BROCK's"
 	cont "looking for new"
@@ -70,13 +70,13 @@ _PewterCityText_1945d:: ; a4b87 (29:4b87)
 	cont "Follow me!"
 	done
 
-_PewterCityText_19462:: ; a4bce (29:4bce)
+_PewterCityText_19462::
 	text "If you have the"
 	line "right stuff, go"
 	cont "take on BROCK!"
 	done
 
-_PewterCityText6:: ; a4bfe (29:4bfe)
+_PewterCityText6::
 	text "TRAINER TIPS"
 
 	para "Any #MON that"
@@ -85,7 +85,7 @@ _PewterCityText6:: ; a4bfe (29:4bfe)
 	cont "short, earns EXP!"
 	done
 
-_PewterCityText7:: ; a4c4a (29:4c4a)
+_PewterCityText7::
 	text "NOTICE!"
 
 	para "Thieves have been"
@@ -96,12 +96,12 @@ _PewterCityText7:: ; a4c4a (29:4c4a)
 	cont "with any info!"
 	done
 
-_PewterCityText10:: ; a4cb1 (29:4cb1)
+_PewterCityText10::
 	text "PEWTER MUSEUM"
 	line "OF SCIENCE"
 	done
 
-_PewterCityText11:: ; a4ccb (29:4ccb)
+_PewterCityText11::
 	text "PEWTER CITY"
 	line "#MON GYM"
 	cont "LEADER: BROCK"
@@ -110,7 +110,7 @@ _PewterCityText11:: ; a4ccb (29:4ccb)
 	line "#MON Trainer!"
 	done
 
-_PewterCityText12:: ; a4d0c (29:4d0c)
+_PewterCityText12::
 	text "PEWTER CITY"
 	line "A Stone Gray"
 	cont "City"

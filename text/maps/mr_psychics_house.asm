@@ -1,17 +1,17 @@
-_TM29PreReceiveText:: ; a24fe (28:64fe)
+_TM29PreReceiveText::
 	text "...Wait! Don't"
 	line "say a word!"
 
 	para "You wanted this!"
 	prompt
 
-_ReceivedTM29Text:: ; a252a (28:652a)
+_ReceivedTM29Text::
 	text $52, " received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_TM29ExplanationText:: ; a253e (28:653e)
+_TM29ExplanationText::
 	text "TM29 is PSYCHIC!"
 
 	para "It can lower the"
@@ -19,7 +19,7 @@ _TM29ExplanationText:: ; a253e (28:653e)
 	cont "abilities."
 	done
 
-_TM29NoRoomText:: ; a257c (28:657c)
+_TM29NoRoomText::
 	text "Where do you plan"
 	line "to put this?"
 	done

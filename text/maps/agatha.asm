@@ -1,4 +1,4 @@
-_AgathaBeforeBattleText:: ; 8686b (21:686b)
+_AgathaBeforeBattleText::
 	text "I am AGATHA of"
 	line "the ELITE FOUR!"
 
@@ -22,17 +22,13 @@ _AgathaBeforeBattleText:: ; 8686b (21:686b)
 	cont "trainer fights!"
 	done
 
-_AgathaEndBattleText:: ; 86970 (21:6970)
-IF DEF(_YELLOW)
-	text "Woo-hoo!"
-ELSE
+_AgathaEndBattleText::
 	text "Oh ho!"
-ENDC
 	line "You're something"
 	cont "special, child!"
 	prompt
 
-_AgathaAfterBattleText:: ; 86998 (21:6998)
+_AgathaAfterBattleText::
 	text "You win! I see"
 	line "what the old duff"
 	cont "sees in you now!"
@@ -42,7 +38,7 @@ _AgathaAfterBattleText:: ; 86998 (21:6998)
 	cont "along now, child!"
 	done
 
-_AgathaDontRunAwayText:: ; 869fd (21:69fd)
+_AgathaDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

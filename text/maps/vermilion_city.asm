@@ -1,4 +1,4 @@
-_VermilionCityText1:: ; a5668 (29:5668)
+_VermilionCityText1::
 	text "We're careful"
 	line "about pollution!"
 
@@ -7,13 +7,13 @@ _VermilionCityText1:: ; a5668 (29:5668)
 	cont "toxic sludge!"
 	done
 
-_VermilionCityText_198a7:: ; a56b5 (29:56b5)
+_VermilionCityText_198a7::
 	text "Did you see S.S."
 	line "ANNE moored in"
 	cont "the harbor?"
 	done
 
-_VermilionCityText_198ac:: ; a56e2 (29:56e2)
+_VermilionCityText_198ac::
 	text "So, S.S.ANNE has"
 	line "departed!"
 
@@ -21,12 +21,12 @@ _VermilionCityText_198ac:: ; a56e2 (29:56e2)
 	line "about a year."
 	done
 
-_SSAnneWelcomeText4:: ; a571d (29:571d)
+_SSAnneWelcomeText4::
 	text "Welcome to S.S."
 	line "ANNE!"
 	done
 
-_SSAnneWelcomeText9:: ; a5734 (29:5734)
+_SSAnneWelcomeText9::
 	text "Welcome to S.S."
 	line "ANNE!"
 
@@ -34,7 +34,7 @@ _SSAnneWelcomeText9:: ; a5734 (29:5734)
 	line "have a ticket?"
 	prompt
 
-_SSAnneFlashedTicketText:: ; a576c (29:576c)
+_SSAnneFlashedTicketText::
 	text $52, " flashed"
 	line "the S.S.TICKET!"
 
@@ -42,7 +42,7 @@ _SSAnneFlashedTicketText:: ; a576c (29:576c)
 	line "S.S.ANNE!"
 	done
 
-_SSAnneNoTicketText:: ; a57a3 (29:57a3)
+_SSAnneNoTicketText::
 	text $52, " doesn't"
 	line "have the needed"
 	cont "S.S.TICKET."
@@ -53,11 +53,11 @@ _SSAnneNoTicketText:: ; a57a3 (29:57a3)
 	line "to get aboard."
 	done
 
-_SSAnneNotHereText:: ; a57f1 (29:57f1)
+_SSAnneNotHereText::
 	text "The ship set sail."
 	done
 
-_VermilionCityText4:: ; a5805 (29:5805)
+_VermilionCityText4::
 	text "I'm putting up a"
 	line "building on this"
 	cont "plot of land."
@@ -66,18 +66,18 @@ _VermilionCityText4:: ; a5805 (29:5805)
 	line "tamping the land."
 	done
 
-_VermilionCityText5:: ; a5852 (29:5852)
+_VermilionCityText5::
 	text "MACHOP: Guoh!"
 	line "Gogogoh!@@"
 
-_VermilionCityText14:: ; a586b (29:586b)
+_VermilionCityText14::
 	db $0
 	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."
 	done
 
-_VermilionCityText6:: ; a5891 (29:5891)
+_VermilionCityText6::
 	text "S.S.ANNE is a"
 	line "famous luxury"
 	cont "cruise ship."
@@ -86,13 +86,13 @@ _VermilionCityText6:: ; a5891 (29:5891)
 	line "once a year."
 	done
 
-_VermilionCityText7:: ; a58db (29:58db)
+_VermilionCityText7::
 	text "VERMILION CITY"
 	line "The Port of"
 	cont "Exquisite Sunsets"
 	done
 
-_VermilionCityText8:: ; a5909 (29:5909)
+_VermilionCityText8::
 	text "NOTICE!"
 
 	para "ROUTE 12 may be"
@@ -106,13 +106,13 @@ _VermilionCityText8:: ; a5909 (29:5909)
 	para "VERMILION POLICE"
 	done
 
-_VermilionCityText11:: ; a5980 (29:5980)
+_VermilionCityText11::
 	text "#MON FAN CLUB"
 	line "All #MON fans"
 	cont "welcome!"
 	done
 
-_VermilionCityText12:: ; a59a6 (29:59a6)
+_VermilionCityText12::
 	text "VERMILION CITY"
 	line "#MON GYM"
 	cont "LEADER: LT.SURGE"
@@ -121,7 +121,7 @@ _VermilionCityText12:: ; a59a6 (29:59a6)
 	line "American!"
 	done
 
-_VermilionCityText13:: ; a59e9 (29:59e9)
+_VermilionCityText13::
 	text "VERMILION HARBOR"
 	done
 

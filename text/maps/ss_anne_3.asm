@@ -1,4 +1,4 @@
-_SSAnne3Text1:: ; 80f4b (20:4f4b)
+_SSAnne3Text1::
 	text "Our CAPTAIN is a"
 	line "sword master!"
 

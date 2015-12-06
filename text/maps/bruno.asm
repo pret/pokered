@@ -1,4 +1,4 @@
-_BrunoBeforeBattleText:: ; 86749 (21:6749)
+_BrunoBeforeBattleText::
 	text "I am BRUNO of"
 	line "the ELITE FOUR!"
 
@@ -20,18 +20,18 @@ _BrunoBeforeBattleText:: ; 86749 (21:6749)
 	para "Hoo hah!"
 	done
 
-_BrunoEndBattleText:: ; 86805 (21:6805)
+_BrunoEndBattleText::
 	text "Why?"
 	line "How could I lose?"
 	prompt
 
-_BrunoAfterBattleText:: ; 8681d (21:681d)
+_BrunoAfterBattleText::
 	text "My job is done!"
 	line "Go face your next"
 	cont "challenge!"
 	done
 
-_BrunoDontRunAwayText:: ; 8684b (21:684b)
+_BrunoDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"
 	done

@@ -1,32 +1,32 @@
-_SilphCo5EndBattleText4:: ; 84000 (21:4000)
+_SilphCo5EndBattleText4::
 	text "Oh"
 	line "goodness!"
 	prompt
 
-_SilphCo5AfterBattleText4:: ; 8400e (21:400e)
+_SilphCo5AfterBattleText4::
 	text "You're only on 5F."
 	line "It's a long way"
 	cont "to my BOSS!"
 	done
 
-_SilphCo5BattleText5:: ; 8403c (21:403c)
+_SilphCo5BattleText5::
 	text "Show TEAM ROCKET"
 	line "a little respect!"
 	done
 
-_SilphCo5EndBattleText5:: ; 84060 (21:4060)
+_SilphCo5EndBattleText5::
 	text "Cough..."
 	line "Cough..."
 	prompt
 
-_SilphCo5AfterBattleText5:: ; 84073 (21:4073)
+_SilphCo5AfterBattleText5::
 	text "Which reminds me."
 
 	para "KOFFING evolves"
 	line "into WEEZING!"
 	done
 
-_SilphCo5Text9:: ; 840a4 (21:40a4)
+_SilphCo5Text9::
 	text "It's a #MON"
 	line "REPORT!"
 
@@ -36,7 +36,7 @@ _SilphCo5Text9:: ; 840a4 (21:40a4)
 	cont "reality #MON."
 	done
 
-_SilphCo5Text10:: ; 840f2 (21:40f2)
+_SilphCo5Text10::
 	text "It's a #MON"
 	line "REPORT!"
 
@@ -45,7 +45,7 @@ _SilphCo5Text10:: ; 840f2 (21:40f2)
 	cont "been confirmed."
 	done
 
-_SilphCo5Text11:: ; 84134 (21:4134)
+_SilphCo5Text11::
 	text "It's a #MON"
 	line "REPORT!"
 

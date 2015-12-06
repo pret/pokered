@@ -1,16 +1,16 @@
-_DayCareIntroText:: ; 8ab95 (22:6b95)
+_DayCareIntroText::
 	text "I run a DAYCARE."
 	line "Would you like me"
 	cont "to raise one of"
 	cont "your #MON?"
 	done
 
-_DayCareWhichMonText:: ; 8abd4 (22:6bd4)
+_DayCareWhichMonText::
 	text "Which #MON"
 	line "should I raise?"
 	prompt
 
-_DayCareWillLookAfterMonText:: ; 8abf0 (22:6bf0)
+_DayCareWillLookAfterMonText::
 	text "Fine, I'll look"
 	line "after @"
 	TX_RAM wcd6d
@@ -18,12 +18,12 @@ _DayCareWillLookAfterMonText:: ; 8abf0 (22:6bf0)
 	cont "for a while."
 	prompt
 
-_DayCareComeSeeMeInAWhileText:: ; 8ac19 (22:6c19)
+_DayCareComeSeeMeInAWhileText::
 	text "Come see me in"
 	line "a while."
 	done
 
-_DayCareMonHasGrownText:: ; 8ac32 (22:6c32)
+_DayCareMonHasGrownText::
 	text "Your @"
 	TX_RAM wcd6d
 	db $0
@@ -37,7 +37,7 @@ _DayCareMonHasGrownText:: ; 8ac32 (22:6c32)
 	para "Aren't I great?"
 	prompt
 
-_DayCareOweMoneyText:: ; 8ac7d (22:6c7d)
+_DayCareOweMoneyText::
 	text "You owe me ¥@"
 	TX_BCD wDayCareTotalCost, $c2
 	db $0
@@ -45,14 +45,14 @@ _DayCareOweMoneyText:: ; 8ac7d (22:6c7d)
 	cont "of this #MON."
 	done
 
-_DayCareGotMonBackText:: ; 8acae (22:6cae)
+_DayCareGotMonBackText::
 	text $52, " got"
 	line "@"
 	TX_RAM wDayCareMonName
 	text " back!"
 	done
 
-_DayCareMonNeedsMoreTimeText:: ; 8acc1 (22:6cc1)
+_DayCareMonNeedsMoreTimeText::
 	text "Back already?"
 	line "Your @"
 	TX_RAM wcd6d

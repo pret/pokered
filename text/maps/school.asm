@@ -1,18 +1,10 @@
-_SchoolText1:: ; 95d15 (25:5d15)
+_SchoolText1::
 	text "Whew! I'm trying"
 	line "to memorize all"
 	cont "my notes."
 	done
 
-IF DEF(_YELLOW)
-_SchoolText3::
-	text "Sis says #MON"
-	line "will become tame"
-	cont "if you treat them"
-	cont "nicely."
-ENDC
-
-_SchoolText2:: ; 95d40 (25:5d40)
+_SchoolText2::
 	text "Okay!"
 
 	para "Be sure to read"

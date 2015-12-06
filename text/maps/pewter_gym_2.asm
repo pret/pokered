@@ -1,25 +1,8 @@
-_PewterGymText_5c4a3:: ; 98000 (26:4000)
+_PewterGymText_5c4a3::
 	text "There are all"
 	line "kinds of trainers"
 	cont "in the world!"
 
-IF DEF(_YELLOW)
-	para "Some raise #MON"
-	line "for fights. Some"
-	cont "see them as pets."
-
-	para "I'm in training to"
-	line "become a #MON"
-	cont "breeder."
-
-	para "If you take your"
-	line "#MON training"
-	cont "seriously, go"
-	cont "visit the GYM in"
-	cont "CERULEAN and test"
-	cont "your abilities!"
-	done
-ELSE
 	para "You appear to be"
 	line "very gifted as a"
 	cont "#MON trainer!"
@@ -28,18 +11,17 @@ ELSE
 	line "CERULEAN and test"
 	cont "your abilities!"
 	done
-ENDC
 
-_TM34PreReceiveText:: ; 98092 (26:4092)
+_TM34PreReceiveText::
 	text "Wait! Take this"
 	line "with you!"
 	done
 
-_ReceivedTM34Text:: ; 980ad (26:40ad)
+_ReceivedTM34Text::
 	text $52, " received"
 	line "TM34!@@"
 
-_TM34ExplanationText:: ; 980c0 (26:40c0)
+_TM34ExplanationText::
 	db $0
 	para "A TM contains a"
 	line "technique that"
@@ -62,12 +44,12 @@ _TM34ExplanationText:: ; 980c0 (26:40c0)
 	cont "it back double!"
 	done
 
-_TM34NoRoomText:: ; 981ab (26:41ab)
+_TM34NoRoomText::
 	text "You don't have"
 	line "room for this!"
 	done
 
-_PewterGymText_5c4bc:: ; 981c9 (26:41c9)
+_PewterGymText_5c4bc::
 	text "I took"
 	line "you for granted."
 
@@ -78,7 +60,7 @@ _PewterGymText_5c4bc:: ; 981c9 (26:41c9)
 	para $52, " received"
 	line "the BOULDERBADGE!@@"
 
-_PewterGymText_5c4c1:: ; 98232 (26:4232)
+_PewterGymText_5c4c1::
 	db $0
 	para "That's an official"
 	line "#MON LEAGUE"
@@ -90,14 +72,10 @@ _PewterGymText_5c4c1:: ; 98232 (26:4232)
 
 	para "The technique"
 	line "FLASH can now be"
-IF DEF(_YELLOW)
-	cont "used anytime!"
-ELSE
 	cont "used any time!"
-ENDC
 	prompt
 
-_PewterGymBattleText1:: ; 982ae (26:42ae)
+_PewterGymBattleText1::
 	text "Stop right there,"
 	line "kid!"
 
@@ -106,7 +84,7 @@ _PewterGymBattleText1:: ; 982ae (26:42ae)
 	cont "BROCK!"
 	done
 
-_PewterGymEndBattleText1:: ; 982f1 (26:42f1)
+_PewterGymEndBattleText1::
 	text "Darn!"
 
 	para "Light years isn't"
@@ -114,13 +92,13 @@ _PewterGymEndBattleText1:: ; 982f1 (26:42f1)
 	cont "distance!"
 	prompt
 
-_PewterGymAfterBattleText1:: ; 98325 (26:4325)
+_PewterGymAfterBattleText1::
 	text "You're pretty hot,"
 	line "but not as hot"
 	cont "as BROCK!"
 	done
 
-_PewterGymText_5c515:: ; 98351 (26:4351)
+_PewterGymText_5c515::
 	text "Hiya! I can tell"
 	line "you have what it"
 	cont "takes to become a"
@@ -134,12 +112,12 @@ _PewterGymText_5c515:: ; 98351 (26:4351)
 	line "to the top!"
 	done
 
-_PewterGymText_5c51a:: ; 983dc (26:43dc)
+_PewterGymText_5c51a::
 	text "All right! Let's"
 	line "get happening!"
 	prompt
 
-_PewterGymText_5c51f:: ; 983fc (26:43fc)
+_PewterGymText_5c51f::
 	text "The 1st #MON"
 	line "out in a match is"
 	cont "at the top of the"
@@ -151,30 +129,14 @@ _PewterGymText_5c51f:: ; 983fc (26:43fc)
 	cont "made easier!"
 	done
 
-_PewterGymText_5c524:: ; 98476 (26:4476)
+_PewterGymText_5c524::
 	text "It's a free"
 	line "service! Let's"
 	cont "get happening!"
 	prompt
 
-_PewterGymText_5c529:: ; 9849f (26:449f)
+_PewterGymText_5c529::
 	text "Just as I thought!"
 	line "You're #MON"
 	cont "champ material!"
 	done
-
-IF DEF(_YELLOW)
-_PewterGymGuyText::
-	text "All right! Let's"
-	line "get happening!"
-
-	para "It will be tough"
-	line "for your PIKACHU"
-	cont "at this GYM!"
-
-	para "Electric attacks"
-	line "are harmless to"
-	cont "BROCK's ground-"
-	cont "type #MON."
-	done
-ENDC

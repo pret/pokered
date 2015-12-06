@@ -1,10 +1,6 @@
-_LanceBeforeBattleText:: ; 85d3c (21:5d3c)
+_LanceBeforeBattleText::
 	text "Ah! I heard about"
-IF DEF(_YELLOW)
-	line "you, ", $52, "!"
-ELSE
 	line "you ", $52, "!"
-ENDC
 
 	para "I lead the ELITE"
 	line "FOUR! You can"
@@ -31,7 +27,7 @@ ENDC
 	cont "with me, ", $52, "!"
 	done
 
-_LanceEndBattleText:: ; 85e64 (21:5e64)
+_LanceEndBattleText::
 	text "That's it!"
 
 	para "I hate to admit"
@@ -39,7 +35,7 @@ _LanceEndBattleText:: ; 85e64 (21:5e64)
 	cont "#MON master!"
 	prompt
 
-_LanceAfterBattleText:: ; 85e9e (21:5e9e)
+_LanceAfterBattleText::
 	text "I still can't"
 	line "believe my"
 	cont "dragons lost to"

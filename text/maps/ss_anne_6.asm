@@ -1,20 +1,20 @@
-_SSAnne6Text1:: ; 810e5 (20:50e5)
+_SSAnne6Text1::
 	text "You, mon petit!"
 	line "We're busy here!"
 	cont "Out of the way!"
 	done
 
-_SSAnne6Text2:: ; 81116 (20:5116)
+_SSAnne6Text2::
 	text "I saw an odd ball"
 	line "in the trash."
 	done
 
-_SSAnne6Text3:: ; 81137 (20:5137)
+_SSAnne6Text3::
 	text "I'm so busy I'm"
 	line "getting dizzy!"
 	done
 
-_SSAnne6Text4:: ; 81155 (20:5155)
+_SSAnne6Text4::
 	text "Hum-de-hum-de-"
 	line "ho..."
 
@@ -23,7 +23,7 @@ _SSAnne6Text4:: ; 81155 (20:5155)
 	cont "Hum-hum..."
 	done
 
-_SSAnne6Text5:: ; 8118e (20:518e)
+_SSAnne6Text5::
 	text "Did you hear about"
 	line "SNORLAX?"
 
@@ -31,7 +31,7 @@ _SSAnne6Text5:: ; 8118e (20:518e)
 	line "eat and sleep!"
 	done
 
-_SSAnne6Text6:: ; 811c9 (20:51c9)
+_SSAnne6Text6::
 	text "Snivel...Sniff..."
 
 	para "I only get to"
@@ -39,33 +39,29 @@ _SSAnne6Text6:: ; 811c9 (20:51c9)
 	cont "Snivel..."
 	done
 
-_SSAnne6Text_61807:: ; 81203 (20:5203)
+_SSAnne6Text_61807::
 	text "Er-hem! Indeed I"
 	line "am le CHEF!"
 
 	para "Le main course is"
 	prompt
 
-_SSAnne6Text_6180c:: ; 81233 (20:5233)
-IF DEF(_YELLOW)
-	text "Salade de Salmon!"
-ELSE
+_SSAnne6Text_6180c::
 	text "Salmon du Salad!"
-ENDC
 
 	para "Les guests may"
 	line "gripe it's fish"
 	cont "again, however!"
 	done
 
-_SSAnne6Text_61811:: ; 81273 (20:5273)
+_SSAnne6Text_61811::
 	text "Eels au Barbecue!"
 
 	para "Les guests will"
 	line "mutiny, I fear."
 	done
 
-_SSAnne6Text_61816:: ; 812a6 (20:52a6)
+_SSAnne6Text_61816::
 	text "Prime Beef Steak!"
 
 	para "But, have I enough"

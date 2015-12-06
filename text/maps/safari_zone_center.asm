@@ -1,8 +1,8 @@
-_SafariZoneCenterText2:: ; 85807 (21:5807)
+_SafariZoneCenterText2::
 	text "REST HOUSE"
 	done
 
-_SafariZoneCenterText3:: ; 85813 (21:5813)
+_SafariZoneCenterText3::
 	text "TRAINER TIPS"
 
 	para "Press the START"

@@ -1,4 +1,4 @@
-_Route12HouseText_564c0:: ; 8c9b3 (23:49b3)
+_Route12HouseText_564c0::
 	text "I'm the FISHING"
 	line "GURU's brother!"
 
@@ -9,7 +9,7 @@ _Route12HouseText_564c0:: ; 8c9b3 (23:49b3)
 	line "fish?"
 	done
 
-_Route12HouseText_564c5:: ; 8ca00 (23:4a00)
+_Route12HouseText_564c5::
 	text "Grand! I like"
 	line "your style!"
 
@@ -21,7 +21,7 @@ _Route12HouseText_564c5:: ; 8ca00 (23:4a00)
 	TX_RAM wcf4b
 	text "!@@"
 
-_Route12HouseText_564ca:: ; 8ca4f (23:4a4f)
+_Route12HouseText_564ca::
 	db $0
 	para "Fishing is a way"
 	line "of life!"
@@ -32,12 +32,12 @@ _Route12HouseText_564ca:: ; 8ca4f (23:4a4f)
 	cont "one!"
 	done
 
-_Route12HouseText_564cf:: ; 8caa1 (23:4aa1)
+_Route12HouseText_564cf::
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_Route12HouseText_564d4:: ; 8cac2 (23:4ac2)
+_Route12HouseText_564d4::
 	text "Hello there,"
 	line $52, "!"
 
@@ -51,7 +51,7 @@ _Route12HouseText_564d4:: ; 8cac2 (23:4ac2)
 	line "wherever you can!"
 	done
 
-_Route12HouseText_564d9:: ; 8cb38 (23:4b38)
+_Route12HouseText_564d9::
 	text "Oh no!"
 
 	para "I had a gift for"

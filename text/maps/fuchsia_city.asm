@@ -1,11 +1,11 @@
-_FuchsiaCityText1:: ; a5e9c (29:5e9c)
+_FuchsiaCityText1::
 	text "Did you try the"
 	line "SAFARI GAME? Some"
 	cont "#MON can only"
 	cont "be caught there."
 	done
 
-_FuchsiaCityText2:: ; a5ede (29:5ede)
+_FuchsiaCityText2::
 	text "SAFARI ZONE has a"
 	line "zoo in front of"
 	cont "the entrance."
@@ -15,71 +15,67 @@ _FuchsiaCityText2:: ; a5ede (29:5ede)
 	cont "catching #MON."
 	done
 
-_FuchsiaCityText3:: ; a5f3e (29:5f3e)
+_FuchsiaCityText3::
 	text "ERIK: Where's"
 	line "SARA? I said I'd"
 	cont "meet her here."
 	done
 
-_FuchsiaCityText4:: ; a5f6b (29:5f6b)
+_FuchsiaCityText4::
 	text "That item ball in"
 	line "there is really a"
 	cont "#MON."
 	done
 
-_FuchsiaCityText5:: ; a5f96 (29:5f96)
+_FuchsiaCityText5::
 	text "!"
 	done
 
-_FuchsiaCityText11:: ; a5f99 (29:5f99)
+_FuchsiaCityText11::
 	text "FUCHSIA CITY"
 	line "Behold! It's"
 	cont "Passion Pink!"
 	done
 
-_FuchsiaCityText13:: ; a5fc1 (29:5fc1)
+_FuchsiaCityText13::
 	text "SAFARI GAME"
 	line "#MON-U-CATCH!"
 	done
 
-_FuchsiaCityText16:: ; a5fdc (29:5fdc)
+_FuchsiaCityText16::
 	text "SAFARI ZONE"
 	line "WARDEN's HOME"
 	done
 
-_FuchsiaCityText17:: ; a5ff6 (29:5ff6)
+_FuchsiaCityText17::
 	text "#MON PARADISE"
 	line "SAFARI ZONE"
 	done
 
-_FuchsiaCityText18:: ; a6011 (29:6011)
+_FuchsiaCityText18::
 	text "FUCHSIA CITY"
 	line "#MON GYM"
 	cont "LEADER: KOGA"
 
 	para "The Poisonous"
-IF DEF(_YELLOW)
-	line "Ninja Master!"
-ELSE
 	line "Ninja Master"
-ENDC
 	done
 
-_FuchsiaCityChanseyText:: ; a6050 (29:6050)
+_FuchsiaCityChanseyText::
 	text "Name: CHANSEY"
 
 	para "Catching one is"
 	line "all up to chance."
 	prompt
 
-_FuchsiaCityVoltorbText:: ; a6081 (29:6081)
+_FuchsiaCityVoltorbText::
 	text "Name: VOLTORB"
 
 	para "The very image of"
 	line "a # BALL."
 	prompt
 
-_FuchsiaCityKangaskhanText:: ; a60ac (29:60ac)
+_FuchsiaCityKangaskhanText::
 	text "Name: KANGASKHAN"
 
 	para "A maternal #MON"
@@ -88,21 +84,21 @@ _FuchsiaCityKangaskhanText:: ; a60ac (29:60ac)
 	cont "on its belly."
 	prompt
 
-_FuchsiaCitySlowpokeText:: ; a60fd (29:60fd)
+_FuchsiaCitySlowpokeText::
 	text "Name: SLOWPOKE"
 
 	para "Friendly and very"
 	line "slow moving."
 	prompt
 
-_FuchsiaCityLaprasText:: ; a612c (29:612c)
+_FuchsiaCityLaprasText::
 	text "Name: LAPRAS"
 
 	para "A.K.A. the king"
 	line "of the seas."
 	prompt
 
-_FuchsiaCityOmanyteText:: ; a6157 (29:6157)
+_FuchsiaCityOmanyteText::
 	text "Name: OMANYTE"
 
 	para "A #MON that"
@@ -110,7 +106,7 @@ _FuchsiaCityOmanyteText:: ; a6157 (29:6157)
 	cont "from a fossil."
 	prompt
 
-_FuchsiaCityKabutoText:: ; a6191 (29:6191)
+_FuchsiaCityKabutoText::
 	text "Name: KABUTO"
 
 	para "A #MON that"
@@ -118,7 +114,7 @@ _FuchsiaCityKabutoText:: ; a6191 (29:6191)
 	cont "from a fossil."
 	prompt
 
-_FuchsiaCityText_19b2a:: ; a61ca (29:61ca)
+_FuchsiaCityText_19b2a::
 	text "..."
 	done
 

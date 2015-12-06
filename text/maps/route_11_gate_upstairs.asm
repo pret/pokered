@@ -1,4 +1,4 @@
-_Route11GateUpstairsText_494a3:: ; 8c689 (23:4689)
+_Route11GateUpstairsText_494a3::
 	text "There are items on"
 	line "the ground that"
 	cont "can't be seen."
@@ -28,7 +28,7 @@ _BinocularsNoSnorlaxText::
 	line "view!"
 	done
 
-_Route11GateUpstairsText_494d5:: ; 8c78b (23:478b)
+_Route11GateUpstairsText_494d5::
 	text "Looked into the"
 	line "binoculars."
 

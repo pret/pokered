@@ -78,82 +78,78 @@ _SilphCo7Text_51e4b::
 	line "Oh thank you!"
 	done
 
-_SilphCo7BattleText1:: ; 846ff (21:46ff)
-IF DEF(_YELLOW)
-	text "Aha! I smell a"
-ELSE
+_SilphCo7BattleText1::
 	text "Oh ho! I smell a"
-ENDC
 	line "little rat!"
 	done
 
-_SilphCo7EndBattleText1:: ; 8471d (21:471d)
+_SilphCo7EndBattleText1::
 	text "Lights"
 	line "out!"
 	prompt
 
-_SilphCo7AfterBattleText1:: ; 8472a (21:472a)
+_SilphCo7AfterBattleText1::
 	text "You won't find my"
 	line "BOSS by just"
 	cont "scurrying around!"
 	done
 
-_SilphCo7BattleText2:: ; 8475b (21:475b)
+_SilphCo7BattleText2::
 	text "Heheh!"
 
 	para "You mistook me for"
 	line "a SILPH worker?"
 	done
 
-_SilphCo7EndBattleText2:: ; 84786 (21:4786)
+_SilphCo7EndBattleText2::
 	text "I'm"
 	line "done!"
 	prompt
 
-_SilphCo7AfterBattleText2:: ; 84790 (21:4790)
+_SilphCo7AfterBattleText2::
 	text "Despite your age,"
 	line "you are a skilled"
 	cont "trainer!"
 	done
 
-_SilphCo7BattleText3:: ; 847be (21:47be)
+_SilphCo7BattleText3::
 	text "I am one of the 4"
 	line "ROCKET BROTHERS!"
 	done
 
-_SilphCo7EndBattleText3:: ; 847e2 (21:47e2)
+_SilphCo7EndBattleText3::
 	text "Aack!"
 	line "Brothers, I lost!"
 	prompt
 
-_SilphCo7AfterBattleText3:: ; 847fb (21:47fb)
+_SilphCo7AfterBattleText3::
 	text "Doesn't matter."
 	line "My brothers will"
 	cont "repay the favor!"
 	done
 
-_SilphCo7BattleText4:: ; 8482d (21:482d)
+_SilphCo7BattleText4::
 	text "A child intruder?"
 	line "That must be you!"
 	done
 
-_SilphCo7EndBattleText4:: ; 84852 (21:4852)
+_SilphCo7EndBattleText4::
 	text "Fine!"
 	line "I lost!"
 	prompt
 
-_SilphCo7AfterBattleText4:: ; 84861 (21:4861)
+_SilphCo7AfterBattleText4::
 	text "Go on home"
 	line "before my BOSS"
 	cont "gets ticked off!"
 	done
 
-_SilphCo7Text_51ebe:: ; 8488d (21:488d)
+_SilphCo7Text_51ebe::
 	text $53, ": What"
 	line "kept you ", $52, "?"
 	done
 
-_SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
+_SilphCo7Text_51ec3::
 	text $53, ": Hahaha!"
 	line "I thought you'd"
 	cont "turn up if I"
@@ -170,17 +166,13 @@ _SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
 	cont "you got better!"
 	done
 
-_SilphCo7Text_51ec8:: ; 8494a (21:494a)
-IF DEF(_YELLOW)
-	text "Oh-oh!"
-ELSE
+_SilphCo7Text_51ec8::
 	text "Oh ho!"
-ENDC
 	line "So, you are ready"
 	cont "for BOSS ROCKET!"
 	prompt
 
-_SilphCo7Text_51ecd:: ; 84975 (21:4975)
+_SilphCo7Text_51ecd::
 	text $53, ": How can"
 	line "I put this?"
 
@@ -189,7 +181,7 @@ _SilphCo7Text_51ecd:: ; 84975 (21:4975)
 	cont "with us big boys!"
 	prompt
 
-_SilphCo7Text_51ed2:: ; 849bd (21:49bd)
+_SilphCo7Text_51ed2::
 	text "Well, ", $52, "!"
 
 	para "I'm moving on up"

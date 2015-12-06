@@ -1,4 +1,4 @@
-_CeladonMart1Text1:: ; 9c672 (27:4672)
+_CeladonMart1Text1::
 	text "Hello! Welcome to"
 	line "CELADON DEPT."
 	cont "STORE."
@@ -8,7 +8,7 @@ _CeladonMart1Text1:: ; 9c672 (27:4672)
 	cont "the store layout."
 	done
 
-_CeladonMart1Text2:: ; 9c6cd (27:46cd)
+_CeladonMart1Text2::
 	text "1F: SERVICE"
 	line "    COUNTER"
 
@@ -25,7 +25,7 @@ _CeladonMart1Text2:: ; 9c6cd (27:46cd)
 	line "VENDING MACHINES"
 	done
 
-_CeladonMart1Text3:: ; 9c752 (27:4752)
+_CeladonMart1Text3::
 	text "1F: SERVICE"
 	line "    COUNTER"
 	done

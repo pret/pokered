@@ -1,4 +1,4 @@
-_Route11GateText1:: ; 8c5f3 (23:45f3)
+_Route11GateText1::
 	text "When you catch"
 	line "lots of #MON,"
 	cont "isn't it hard to"

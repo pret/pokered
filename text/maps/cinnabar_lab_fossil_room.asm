@@ -1,4 +1,4 @@
-_Lab4Text_75dc6:: ; a10e8 (28:50e8)
+_Lab4Text_75dc6::
 	text "Hiya!"
 
 	para "I am important"
@@ -11,11 +11,11 @@ _Lab4Text_75dc6:: ; a10e8 (28:50e8)
 	line "fossil for me?"
 	prompt
 
-_Lab4Text_75dcb:: ; a1145 (28:5145)
+_Lab4Text_75dcb::
 	text "No! Is too bad!"
 	done
 
-_Lab4Text_75dd0:: ; a1156 (28:5156)
+_Lab4Text_75dd0::
 	text "I take a little"
 	line "time!"
 
@@ -23,7 +23,7 @@ _Lab4Text_75dd0:: ; a1156 (28:5156)
 	line "little while!"
 	done
 
-_Lab4Text_75dd5:: ; a118d (28:518d)
+_Lab4Text_75dd5::
 	text "Where were you?"
 
 	para "Your fossil is"
@@ -35,7 +35,7 @@ _Lab4Text_75dd5:: ; a118d (28:518d)
 	line "like I think!"
 	prompt
 
-_Lab4Text_610ae:: ; a11d6 (28:51d6)
+_Lab4Text_610ae::
 	text "Oh! That is"
 	line "@"
 	TX_RAM wcd6d
@@ -54,7 +54,7 @@ _Lab4Text_610ae:: ; a11d6 (28:51d6)
 	cont "again!"
 	done
 
-_Lab4Text_610b3:: ; a1259 (28:5259)
+_Lab4Text_610b3::
 	text "So! You hurry and"
 	line "give me that!"
 
@@ -64,7 +64,7 @@ _Lab4Text_610b3:: ; a1259 (28:5259)
 	text "!"
 	prompt
 
-_Lab4Text_610b8:: ; a128f (28:528f)
+_Lab4Text_610b8::
 	text "I take a little"
 	line "time!"
 
@@ -72,7 +72,7 @@ _Lab4Text_610b8:: ; a128f (28:528f)
 	line "little while!"
 	done
 
-_Lab4Text_610bd:: ; a12c6 (28:52c6)
+_Lab4Text_610bd::
 	text "Aiyah! You come"
 	line "again!"
 	done

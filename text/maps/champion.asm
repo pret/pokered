@@ -1,4 +1,4 @@
-_GaryText_760f4:: ; 860e1 (21:60e1)
+_GaryText_760f4::
 	text $53, ": Hey!"
 
 	para "I was looking"
@@ -35,7 +35,7 @@ _GaryText_760f4:: ; 860e1 (21:60e1)
 	cont "in the world!"
 	done
 
-_GaryText_760f9:: ; 8623b (21:623b)
+_GaryText_760f9::
 	text "NO!"
 	line "That can't be!"
 	cont "You beat my best!"
@@ -49,7 +49,7 @@ _GaryText_760f9:: ; 8623b (21:623b)
 	cont "It's not fair!"
 	prompt
 
-_GaryText_760fe:: ; 862b4 (21:62b4)
+_GaryText_760fe::
 	text "Hahaha!"
 	line "I won, I won!"
 
@@ -65,7 +65,7 @@ _GaryText_760fe:: ; 862b4 (21:62b4)
 	line "Hahaha!"
 	prompt
 
-_GaryText_76103:: ; 8632f (21:632f)
+_GaryText_76103::
 	text "Why?"
 	line "Why did I lose?"
 
@@ -81,11 +81,11 @@ _GaryText_76103:: ; 8632f (21:632f)
 	line "like to admit it."
 	done
 
-_GaryText2:: ; 863c1 (21:63c1)
+_GaryText2::
 	text "OAK: ", $52, "!"
 	done
 
-_GaryText_76120:: ; 863ca (21:63ca)
+_GaryText_76120::
 	text "OAK: So, you won!"
 	line "Congratulations!"
 	cont "You're the new"
@@ -103,7 +103,7 @@ _GaryText_76120:: ; 863ca (21:63ca)
 	line "come of age!"
 	done
 
-_GaryText_76125:: ; 86463 (21:6463)
+_GaryText_76125::
 	text "OAK: ", $53, "! I'm"
 	line "disappointed!"
 
@@ -129,7 +129,7 @@ _GaryText_76125:: ; 86463 (21:6463)
 	cont "a champ again!"
 	done
 
-_GaryText_7612a:: ; 86567 (21:6567)
+_GaryText_7612a::
 	text "OAK: ", $52, "!"
 
 	para "You understand"

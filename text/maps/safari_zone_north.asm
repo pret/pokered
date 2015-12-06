@@ -1,19 +1,19 @@
-_SafariZoneNorthText3:: ; 85646 (21:5646)
+_SafariZoneNorthText3::
 	text "REST HOUSE"
 	done
 
-_SafariZoneNorthText4:: ; 85652 (21:5652)
+_SafariZoneNorthText4::
 	text "TRAINER TIPS"
 
 	para "The SECRET HOUSE"
 	line "is still ahead!"
 	done
 
-_SafariZoneNorthText5:: ; 85681 (21:5681)
+_SafariZoneNorthText5::
 	text "AREA 2"
 	done
 
-_SafariZoneNorthText6:: ; 85689 (21:5689)
+_SafariZoneNorthText6::
 	text "TRAINER TIPS"
 
 	para "#MON hide in"
@@ -24,7 +24,7 @@ _SafariZoneNorthText6:: ; 85689 (21:5689)
 	cont "flush them out."
 	done
 
-_SafariZoneNorthText7:: ; 856df (21:56df)
+_SafariZoneNorthText7::
 	text "TRAINER TIPS"
 
 	para "Win a free HM for"

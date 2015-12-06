@@ -1,4 +1,4 @@
-_IndigoPlateauLobbyText1:: ; a13f0 (28:53f0)
+_IndigoPlateauLobbyText1::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -13,7 +13,7 @@ _IndigoPlateauLobbyText1:: ; a13f0 (28:53f0)
 	cont "is it! Go for it!"
 	done
 
-_IndigoPlateauLobbyText3:: ; a148b (28:548b)
+_IndigoPlateauLobbyText3::
 	text "From here on, you"
 	line "face the ELITE"
 	cont "FOUR one by one!"

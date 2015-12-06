@@ -1,4 +1,4 @@
-_Route18GateUpstairsText_49993:: ; 8cf4a (23:4f4a)
+_Route18GateUpstairsText_49993::
 	text "Looked into the"
 	line "binoculars."
 
@@ -6,7 +6,7 @@ _Route18GateUpstairsText_49993:: ; 8cf4a (23:4f4a)
 	line "the west!"
 	done
 
-_Route18GateUpstairsText_4999f:: ; 8cf83 (23:4f83)
+_Route18GateUpstairsText_4999f::
 	text "Looked into the"
 	line "binoculars."
 

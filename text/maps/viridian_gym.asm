@@ -1,4 +1,4 @@
-_ViridianGymText_74ace:: ; 95e09 (25:5e09)
+_ViridianGymText_74ace::
 	text "Fwahahaha! This is"
 	line "my hideout!"
 
@@ -18,7 +18,7 @@ _ViridianGymText_74ace:: ; 95e09 (25:5e09)
 	cont "greatest trainer!"
 	done
 
-_ViridianGymText_74ad3:: ; 95ed5 (25:5ed5)
+_ViridianGymText_74ad3::
 	text "Ha!"
 	line "That was a truly"
 	cont "intense fight!"
@@ -26,7 +26,7 @@ _ViridianGymText_74ad3:: ; 95ed5 (25:5ed5)
 	cont "As proof, here is"
 	cont "the EARTHBADGE!@@"
 
-_ViridianGymText_74ad9:: ; 95f2b (25:5f2b)
+_ViridianGymText_74ad9::
 	text "Having lost, I"
 	line "cannot face my"
 	cont "underlings!"
@@ -38,14 +38,10 @@ _ViridianGymText_74ad9:: ; 95f2b (25:5f2b)
 	cont "of #MON!"
 
 	para "Let us meet again"
-IF DEF(_YELLOW)
-	line "someday!"
-ELSE
 	line "some day!"
-ENDC
 	cont "Farewell!@@"
 
-_ViridianGymText12:: ; 95fcc (25:5fcc)
+_ViridianGymText12::
 	text "The EARTHBADGE"
 	line "makes #MON of"
 	cont "any level obey!"
@@ -63,11 +59,11 @@ _ViridianGymText12:: ; 95fcc (25:5fcc)
 	cont "LEAGUE challenge!"
 	done
 
-_ReceivedTM27Text:: ; 96082 (25:6082)
+_ReceivedTM27Text::
 	text $52, " received"
 	line "TM27!@@"
 
-_TM27ExplanationText:: ; 96095 (25:6095)
+_TM27ExplanationText::
 	db $0
 	para "TM27 is FISSURE!"
 	line "It will take out"
@@ -79,147 +75,143 @@ _TM27ExplanationText:: ; 96095 (25:6095)
 	cont "too long ago..."
 	done
 
-_TM27NoRoomText:: ; 96104 (25:6104)
+_TM27NoRoomText::
 	text "You do not have"
 	line "space for this!"
 	done
 
-_ViridianGymBattleText1:: ; 96125 (25:6125)
+_ViridianGymBattleText1::
 	text "Heh! You must be"
 	line "running out of"
 	cont "steam by now!"
 	done
 
-_ViridianGymEndBattleText1:: ; 96154 (25:6154)
+_ViridianGymEndBattleText1::
 	text "I"
 	line "ran out of gas!"
 	prompt
 
-_ViridianGymAfterBattleText1:: ; 96167 (25:6167)
+_ViridianGymAfterBattleText1::
 	text "You need power to"
 	line "keep up with our"
 	cont "GYM LEADER!"
 	done
 
-_ViridianGymBattleText2:: ; 96197 (25:6197)
+_ViridianGymBattleText2::
 	text "Rrrroar! I'm"
 	line "working myself"
 	cont "into a rage!"
 	done
 
-_ViridianGymEndBattleText2:: ; 961c0 (25:61c0)
+_ViridianGymEndBattleText2::
 	text "Wargh!"
 	prompt
 
-_ViridianGymAfterBattleText2:: ; 961c8 (25:61c8)
+_ViridianGymAfterBattleText2::
 	text "I'm still not"
 	line "worthy!"
 	done
 
-_ViridianGymBattleText3:: ; 961de (25:61de)
+_ViridianGymBattleText3::
 	text "#MON and I, we"
 	line "make wonderful"
 	cont "music together!"
 	done
 
-_ViridianGymEndBattleText3:: ; 9620d (25:620d)
+_ViridianGymEndBattleText3::
 	text "You are in"
 	line "perfect harmony!"
 	prompt
 
-_ViridianGymAfterBattleText3:: ; 9622a (25:622a)
+_ViridianGymAfterBattleText3::
 	text "Do you know the"
 	line "identity of our"
 	cont "GYM LEADER?"
 	done
 
-_ViridianGymBattleText4:: ; 96257 (25:6257)
+_ViridianGymBattleText4::
 	text "Karate is the"
 	line "ultimate form of"
 	cont "martial arts!"
 	done
 
-_ViridianGymEndBattleText4:: ; 96285 (25:6285)
+_ViridianGymEndBattleText4::
 	text "Atcho!"
 	prompt
 
-_ViridianGymAfterBattleText4:: ; 9628d (25:628d)
+_ViridianGymAfterBattleText4::
 	text "If my #MON"
 	line "were as good at"
 	cont "Karate as I..."
 	done
 
-_ViridianGymBattleText5:: ; 962b8 (25:62b8)
+_ViridianGymBattleText5::
 	text "The truly talented"
 	line "win with style!"
 	done
 
-_ViridianGymEndBattleText5:: ; 962dc (25:62dc)
+_ViridianGymEndBattleText5::
 	text "I"
 	line "lost my grip!"
 	prompt
 
-_ViridianGymAfterBattleText5:: ; 962ed (25:62ed)
+_ViridianGymAfterBattleText5::
 	text "The LEADER will"
 	line "scold me!"
 	done
 
-_ViridianGymBattleText6:: ; 96308 (25:6308)
+_ViridianGymBattleText6::
 	text "I'm the KARATE"
 	line "KING! Your fate"
 	cont "rests with me!"
 	done
 
-_ViridianGymEndBattleText6:: ; 96336 (25:6336)
+_ViridianGymEndBattleText6::
 	text "Ayah!"
 	prompt
 
-_ViridianGymAfterBattleText6:: ; 9633d (25:633d)
+_ViridianGymAfterBattleText6::
 	text "#MON LEAGUE?"
 	line "You? Don't get"
 	cont "cocky!"
 	done
 
-_ViridianGymBattleText7:: ; 96360 (25:6360)
+_ViridianGymBattleText7::
 	text "Your #MON will"
 	line "cower at the"
 	cont "crack of my whip!"
 	done
 
-_ViridianGymEndBattleText7:: ; 9638f (25:638f)
+_ViridianGymEndBattleText7::
 	text "Yowch!"
 	line "Whiplash!"
 	prompt
 
-_ViridianGymAfterBattleText7:: ; 963a1 (25:63a1)
+_ViridianGymAfterBattleText7::
 	text "Wait! I was just"
 	line "careless!"
 	done
 
-_ViridianGymBattleText8:: ; 963bd (25:63bd)
+_ViridianGymBattleText8::
 	text "VIRIDIAN GYM was"
 	line "closed for a long"
 	cont "time, but now our"
 	cont "LEADER is back!"
 	done
 
-_ViridianGymEndBattleText8:: ; 96403 (25:6403)
+_ViridianGymEndBattleText8::
 	text "I"
 	line "was beaten?"
 	prompt
 
-_ViridianGymAfterBattleText8:: ; 96412 (25:6412)
-IF DEF(_YELLOW)
-	text "You can go on to"
-ELSE
+_ViridianGymAfterBattleText8::
 	text "You can go onto"
-ENDC
 	line "#MON LEAGUE"
 	cont "only by defeating"
 	cont "our GYM LEADER!"
 	done
 
-_ViridianGymText_74bd4:: ; 96451 (25:6451)
+_ViridianGymText_74bd4::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -237,7 +229,7 @@ _ViridianGymText_74bd4:: ; 96451 (25:6451)
 	cont "#MON!"
 	done
 
-_ViridianGymText_74bd9:: ; 964fb (25:64fb)
+_ViridianGymText_74bd9::
 	text "Blow me away!"
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"

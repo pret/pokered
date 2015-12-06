@@ -1,4 +1,4 @@
-_CeladonMansion4Text1:: ; 9d1a6 (27:51a6)
+_CeladonMansion4Text1::
 	text "I KNOW EVERYTHING!"
 	done
 

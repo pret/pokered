@@ -1,4 +1,4 @@
-_VermilionMartText2:: ; 9a9c1 (26:69c1)
+_VermilionMartText2::
 	text "There are evil"
 	line "people who will"
 	cont "use #MON for"
@@ -15,7 +15,7 @@ _VermilionMartText2:: ; 9a9c1 (26:69c1)
 	cont "useful."
 	done
 
-_VermilionMartText3:: ; 9aa67 (26:6a67)
+_VermilionMartText3::
 	text "I think #MON"
 	line "can be good or"
 	cont "evil. It depends"

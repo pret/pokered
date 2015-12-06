@@ -1,4 +1,4 @@
-_CeruleanMartText2:: ; 99012 (26:5012)
+_CeruleanMartText2::
 	text "Use REPEL to keep"
 	line "bugs and weak"
 	cont "#MON away."
@@ -9,7 +9,7 @@ _CeruleanMartText2:: ; 99012 (26:5012)
 	cont "for best results!"
 	done
 
-_CeruleanMartText3:: ; 9907f (26:507f)
+_CeruleanMartText3::
 	text "Have you seen any"
 	line "RARE CANDY?"
 

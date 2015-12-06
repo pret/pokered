@@ -1,73 +1,73 @@
-_RocketHideout1EndBattleText6:: ; 81f2a (20:5f2a)
+_RocketHideout1EndBattleText6::
 	text "Why...?@@"
 
-_RocketHideout1BattleText2:: ; 81f34 (20:5f34)
+_RocketHideout1BattleText2::
 	text "Who are you? How"
 	line "did you get here?"
 	done
 
-_RocketHideout1EndBattleText2:: ; 81f58 (20:5f58)
+_RocketHideout1EndBattleText2::
 	text "Oww!"
 	line "Beaten!"
 	prompt
 
-_RocketHideout1AfterBattleTxt2:: ; 81f66 (20:5f66)
+_RocketHideout1AfterBattleTxt2::
 	text "Are you dissing"
 	line "TEAM ROCKET?"
 	done
 
-_RocketHideout1BattleText3:: ; 81f84 (20:5f84)
+_RocketHideout1BattleText3::
 	text "You broke into"
 	line "our operation?"
 	done
 
-_RocketHideout1EndBattleText3:: ; 81fa3 (20:5fa3)
+_RocketHideout1EndBattleText3::
 	text "Burnt!"
 	prompt
 
-_RocketHideout1AfterBattleTxt3:: ; 81fab (20:5fab)
+_RocketHideout1AfterBattleTxt3::
 	text "You're not going"
 	line "to get away with"
 	cont "this, brat!"
 	done
 
-_RocketHideout1BattleText4:: ; 81fd9 (20:5fd9)
+_RocketHideout1BattleText4::
 	text "Intruder alert!"
 	done
 
-_RocketHideout1EndBattleText4:: ; 81fea (20:5fea)
+_RocketHideout1EndBattleText4::
 	text "I"
 	line "can't do it!"
 	prompt
 
-_RocketHideout1AfterBattleTxt4:: ; 81ff9 (20:5ff9)
+_RocketHideout1AfterBattleTxt4::
 	text "SILPH SCOPE?"
 	line "I don't know"
 	cont "where it is!"
 	done
 
-_RocketHideout1BattleText5:: ; 82020 (20:6020)
+_RocketHideout1BattleText5::
 	text "Why did you come"
 	line "here?"
 	done
 
-_RocketHideout1EndBattleText5:: ; 82038 (20:6038)
+_RocketHideout1EndBattleText5::
 	text "This"
 	line "won't do!"
 	prompt
 
-_RocketHideout1AfterBattleTxt5:: ; 82047 (20:6047)
+_RocketHideout1AfterBattleTxt5::
 	text "OK, I'll talk!"
 	line "Take the elevator"
 	cont "to see my BOSS!"
 	done
 
-_RocketHideout1BattleText6:: ; 82078 (20:6078)
+_RocketHideout1BattleText6::
 	text "Are you lost, you"
 	line "little rat?"
 	done
 
-_RocketHideout1AfterBattleTxt6:: ; 82097 (20:6097)
+_RocketHideout1AfterBattleTxt6::
 	text "Uh-oh, that fight"
 	line "opened the door!"
 	done

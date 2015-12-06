@@ -1,5 +1,5 @@
-_ViridianPokeCenterText2:: ; 95ba1 (25:5ba1)
-_ViridianPokeCenterText1:: ; 95ba1 (25:5ba1)
+_ViridianPokeCenterText2::
+_ViridianPokeCenterText1::
 	text "You can use that"
 	line "PC in the corner."
 
@@ -7,7 +7,7 @@ _ViridianPokeCenterText1:: ; 95ba1 (25:5ba1)
 	line "told me. So kind!"
 	done
 
-_ViridianPokeCenterText3:: ; 95be8 (25:5be8)
+_ViridianPokeCenterText3::
 	text "There's a #MON"
 	line "CENTER in every"
 	cont "town ahead."
@@ -16,17 +16,17 @@ _ViridianPokeCenterText3:: ; 95be8 (25:5be8)
 	line "any money either!"
 	done
 
-_ViridianMartText1:: ; 95c36 (25:5c36)
+_ViridianMartText1::
 	text "Okay! Say hi to"
 	line "PROF.OAK for me!"
 	done
 
-_ViridianMartText4:: ; 95c58 (25:5c58)
+_ViridianMartText4::
 	text "Hey! You came from"
 	line "PALLET TOWN?"
 	done
 
-ViridianMartParcelQuestText:: ; 95c79 (25:5c79)
+ViridianMartParcelQuestText::
 	text "You know PROF."
 	line "OAK, right?"
 
@@ -37,24 +37,12 @@ ViridianMartParcelQuestText:: ; 95c79 (25:5c79)
 	para $52, " got"
 	line "OAK's PARCEL!@@"
 
-_ViridianMartText2:: ; 95cd5 (25:5cd5)
-IF DEF(_YELLOW)
-	text "This shop sells a"
-	line "lot of PARLYZ"
-	cont "HEALs."
-ELSE
+_ViridianMartText2::
 	text "This shop sells"
 	line "many ANTIDOTEs."
-ENDC
 	done
 
-_ViridianMartText3:: ; 95cf6 (25:5cf6)
-IF DEF(_YELLOW)
-	text "The shop finally"
-	line "has some POTIONs"
-	cont "in stock."
-ELSE
+_ViridianMartText3::
 	text "No! POTIONs are"
 	line "all sold out."
-ENDC
 	done

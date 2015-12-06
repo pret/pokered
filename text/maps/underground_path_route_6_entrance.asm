@@ -1,4 +1,4 @@
-_UndergrdTunnelEntRoute6Text1:: ; 8c0cb (23:40cb)
+_UndergrdTunnelEntRoute6Text1::
 	text "People often lose"
 	line "things in that"
 	cont "UNDERGROUND PATH."

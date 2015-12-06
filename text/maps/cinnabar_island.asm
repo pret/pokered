@@ -1,37 +1,33 @@
-_CinnabarIslandText8:: ; a61cf (29:61cf)
+_CinnabarIslandText8::
 	text "The door is"
 	line "locked..."
 	done
 
-_CinnabarIslandText1:: ; a61e6 (29:61e6)
+_CinnabarIslandText1::
 	text "CINNABAR GYM's"
 	line "BLAINE is an odd"
 	cont "man who has lived"
 	cont "here for decades."
 	done
 
-_CinnabarIslandText2:: ; a622a (29:622a)
+_CinnabarIslandText2::
 	text "Scientists conduct"
 	line "experiments in"
-IF DEF(_YELLOW)
-	cont "the burned-out"
-ELSE
 	cont "the burned out"
-ENDC
 	cont "building."
 	done
 
-_CinnabarIslandText3:: ; a6266 (29:6266)
+_CinnabarIslandText3::
 	text "CINNABAR ISLAND"
 	line "The Fiery Town of"
 	cont "Burning Desire"
 	done
 
-_CinnabarIslandText6:: ; a6298 (29:6298)
+_CinnabarIslandText6::
 	text "#MON LAB"
 	done
 
-_CinnabarIslandText7:: ; a62a2 (29:62a2)
+_CinnabarIslandText7::
 	text "CINNABAR ISLAND"
 	line "#MON GYM"
 	cont "LEADER: BLAINE"

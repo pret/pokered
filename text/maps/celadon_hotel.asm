@@ -1,4 +1,4 @@
-_CeladonHotelText1:: ; 9e18a (27:618a)
+_CeladonHotelText1::
 	text "#MON? No, this"
 	line "is a hotel for"
 	cont "people."
@@ -6,7 +6,7 @@ _CeladonHotelText1:: ; 9e18a (27:618a)
 	para "We're full up."
 	done
 
-_CeladonHotelText2:: ; 9e1bf (27:61bf)
+_CeladonHotelText2::
 	text "I'm on vacation"
 	line "with my brother"
 	cont "and boy friend."
@@ -15,7 +15,7 @@ _CeladonHotelText2:: ; 9e1bf (27:61bf)
 	line "pretty city!"
 	done
 
-_CeladonHotelText3:: ; 9e20e (27:620e)
+_CeladonHotelText3::
 	text "Why did she bring"
 	line "her brother?"
 	done

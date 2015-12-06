@@ -1,4 +1,4 @@
-_FuchsiaMartText2:: ; 9e22e (27:622e)
+_FuchsiaMartText2::
 	text "Do you have a"
 	line "SAFARI ZONE flag?"
 
@@ -6,7 +6,7 @@ _FuchsiaMartText2:: ; 9e22e (27:622e)
 	line "or calendars?"
 	done
 
-_FuchsiaMartText3:: ; 9e26e (27:626e)
+_FuchsiaMartText3::
 	text "Did you try X"
 	line "SPEED? It speeds"
 	cont "up a #MON in"

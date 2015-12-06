@@ -1,4 +1,4 @@
-_MtMoonPokecenterText1:: ; 8a8eb (22:68eb)
+_MtMoonPokecenterText1::
 	text "I've 6 # BALLs"
 	line "set in my belt."
 
@@ -6,7 +6,7 @@ _MtMoonPokecenterText1:: ; 8a8eb (22:68eb)
 	line "carry 6 #MON."
 	done
 
-_MtMoonPokecenterText3:: ; 8a929 (22:6929)
+_MtMoonPokecenterText3::
 	text "TEAM ROCKET"
 	line "attacks CERULEAN"
 	cont "citizens..."
@@ -16,7 +16,7 @@ _MtMoonPokecenterText3:: ; 8a929 (22:6929)
 	cont "news!"
 	done
 
-_MtMoonPokecenterText_4935c:: ; 8a976 (22:6976)
+_MtMoonPokecenterText_4935c::
 	text "MAN: Hello, there!"
 	line "Have I got a deal"
 	cont "just for you!"
@@ -27,23 +27,23 @@ _MtMoonPokecenterText_4935c:: ; 8a976 (22:6976)
 	cont "What do you say?"
 	done
 
-_MtMoonPokecenterText_49361:: ; 8a9ec (22:69ec)
+_MtMoonPokecenterText_49361::
 	text "No? I'm only"
 	line "doing this as a"
 	cont "favor to you!"
 	done
 
-_MtMoonPokecenterText_49366:: ; 8aa17 (22:6a17)
+_MtMoonPokecenterText_49366::
 	text "You'll need more"
 	line "money than that!"
 	done
 
-_MtMoonPokecenterText_4936b:: ; 8aa39 (22:6a39)
+_MtMoonPokecenterText_4936b::
 	text "MAN: Well, I don't"
 	line "give refunds!"
 	done
 
-_MtMoonPokecenterText5:: ; 8aa5a (22:6a5a)
+_MtMoonPokecenterText5::
 	db $0
 	done
 

@@ -1,4 +1,4 @@
-_Lab2Text1:: ; a0eb5 (28:4eb5)
+_Lab2Text1::
 	text "I found this very"
 	line "strange fossil in"
 	cont "MT.MOON!"

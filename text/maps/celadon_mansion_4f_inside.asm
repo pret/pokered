@@ -1,4 +1,4 @@
-_CeladonMansion5Text1:: ; 9d1ba (27:51ba)
+_CeladonMansion5Text1::
 	text "I know everything"
 	line "about the world"
 	cont "of #MON in"

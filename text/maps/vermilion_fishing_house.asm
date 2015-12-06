@@ -1,4 +1,4 @@
-_VermilionHouse2Text_560b1:: ; 9c510 (27:4510)
+_VermilionHouse2Text_560b1::
 	text "I'm the FISHING"
 	line "GURU!"
 
@@ -9,7 +9,7 @@ _VermilionHouse2Text_560b1:: ; 9c510 (27:4510)
 	line "fish?"
 	done
 
-_VermilionHouse2Text_560b6:: ; 9c554 (27:4554)
+_VermilionHouse2Text_560b6::
 	text "Grand! I like"
 	line "your style!"
 
@@ -21,7 +21,7 @@ _VermilionHouse2Text_560b6:: ; 9c554 (27:4554)
 	TX_RAM wcf4b
 	text "!@@"
 
-_VermilionHouse2Text_560bb:: ; 9c5a4 (27:45a4)
+_VermilionHouse2Text_560bb::
 	db $0
 	para "Fishing is a way"
 	line "of life!"
@@ -32,12 +32,12 @@ _VermilionHouse2Text_560bb:: ; 9c5a4 (27:45a4)
 	cont "one, young one!"
 	done
 
-_VermilionHouse2Text_560c0:: ; 9c601 (27:4601)
+_VermilionHouse2Text_560c0::
 	text "Oh... That's so"
 	line "disappointing..."
 	done
 
-_VermilionHouse2Text_560c5:: ; 9c622 (27:4622)
+_VermilionHouse2Text_560c5::
 	text "Hello there,"
 	line $52, "!"
 
@@ -45,7 +45,7 @@ _VermilionHouse2Text_560c5:: ; 9c622 (27:4622)
 	line "biting?"
 	done
 
-_VermilionHouse2Text_560ca:: ; 9c64c (27:464c)
+_VermilionHouse2Text_560ca::
 	text "Oh no!"
 
 	para "You have no room"

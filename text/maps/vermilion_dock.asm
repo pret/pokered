@@ -1,3 +1,3 @@
-_VermilionDockText1:: ; 9c50e (27:450e)
+_VermilionDockText1::
 	db $0, $57
 
