@@ -56,7 +56,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FULL_HEAL     ; $34
 	const REVIVE        ; $35
 	const MAX_REVIVE    ; $36
-	const GUARD_SPEC_   ; $37
+	const GUARD_SPEC    ; $37
 	const SUPER_REPEL   ; $38
 	const MAX_REPEL     ; $39
 	const DIRE_HIT      ; $3A
@@ -64,7 +64,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FRESH_WATER   ; $3C
 	const SODA_POP      ; $3D
 	const LEMONADE      ; $3E
-	const S_S__TICKET   ; $3F
+	const S_S_TICKET    ; $3F
 	const GOLD_TEETH    ; $40
 	const X_ATTACK      ; $41
 	const X_DEFEND      ; $42
@@ -76,7 +76,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const SILPH_SCOPE   ; $48
 	const POKE_FLUTE    ; $49
 	const LIFT_KEY      ; $4A
-	const EXP__ALL      ; $4B
+	const EXP_ALL       ; $4B
 	const OLD_ROD       ; $4C
 	const GOOD_ROD      ; $4D
 	const SUPER_ROD     ; $4E

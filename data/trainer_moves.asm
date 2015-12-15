@@ -58,7 +58,7 @@ TeamMoves:
 	db 2,4,BUBBLEBEAM
 	db 0
 
-	db LT__SURGE,$1
+	db LT_SURGE,$1
 	db 1,1,THUNDERBOLT
 	db 1,2,MEGA_PUNCH
 	db 1,3,MEGA_KICK

@@ -1,4 +1,4 @@
-PayDayEffect_ ; 2feb8 (b:7eb8)
+PayDayEffect_: ; 2feb8 (b:7eb8)
 	xor a
 	ld hl, wcd6d
 	ld [hli], a

@@ -38,8 +38,8 @@ Route12Mons:
 		db 27,BELLSPROUT
 		db 29,GLOOM
 		db 29,WEEPINBELL
-		db 26,FARFETCH_D
-		db 31,FARFETCH_D
+		db 26,FARFETCHD
+		db 31,FARFETCHD
 
 		db $03
 		db 15,SLOWPOKE

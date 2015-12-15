@@ -63,7 +63,7 @@ const_value = 1
 	const MISSINGNO_3D ; $3D
 	const MISSINGNO_3E ; $3E
 	const MISSINGNO_3F ; $3F
-	const FARFETCH_D   ; $40
+	const FARFETCHD    ; $40
 	const VENONAT      ; $41
 	const DRAGONITE    ; $42
 	const MISSINGNO_43 ; $43

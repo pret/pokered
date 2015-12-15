@@ -44,7 +44,7 @@ CeladonMart4Text1:: ; 248e (0:248e)
 
 ; Celadon Dept. Store 5F (1)
 CeladonMart5Text3:: ; 2496 (0:2496)
-	db $FE,7,X_ACCURACY,GUARD_SPEC_,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
+	db $FE,7,X_ACCURACY,GUARD_SPEC,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
 
 ; Celadon Dept. Store 5F (2)

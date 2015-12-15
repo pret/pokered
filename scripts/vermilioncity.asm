@@ -52,7 +52,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	call DisplayTextID
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_19810
-	ld b, S_S__TICKET
+	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
@@ -170,7 +170,7 @@ VermilionCityText3: ; 198b1 (6:58b1)
 .asm_198d0
 	ld hl, SSAnneWelcomeText9
 	call PrintText
-	ld b, S_S__TICKET
+	ld b, S_S_TICKET
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a

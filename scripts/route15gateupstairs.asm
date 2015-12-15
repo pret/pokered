@@ -11,7 +11,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	jr nz, .asm_49683
 	ld a, 50 ; pokemon needed
 	ld [hOaksAideRequirement], a
-	ld a, EXP__ALL ; oak's aide reward
+	ld a, EXP_ALL ; oak's aide reward
 	ld [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName

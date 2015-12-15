@@ -1,6 +1,6 @@
 FemaleTrainerList:: ; 3434 (0:3434)
 	db OPP_LASS
-	db OPP_JR__TRAINER_F
+	db OPP_JR_TRAINER_F
 	db OPP_BEAUTY
 	db OPP_COOLTRAINER_F
 	db $FF

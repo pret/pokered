@@ -11,7 +11,7 @@ CeladonGymObject: ; 0x48b30 (size=84)
 	object SPRITE_ERIKA, $4, $3, STAY, DOWN, $1, OPP_ERIKA, $1
 	object SPRITE_LASS, $2, $b, STAY, RIGHT, $2, OPP_LASS, $11
 	object SPRITE_FOULARD_WOMAN, $7, $a, STAY, LEFT, $3, OPP_BEAUTY, $1
-	object SPRITE_LASS, $9, $5, STAY, DOWN, $4, OPP_JR__TRAINER_F, $b
+	object SPRITE_LASS, $9, $5, STAY, DOWN, $4, OPP_JR_TRAINER_F, $b
 	object SPRITE_FOULARD_WOMAN, $1, $5, STAY, DOWN, $5, OPP_BEAUTY, $2
 	object SPRITE_LASS, $6, $3, STAY, DOWN, $6, OPP_LASS, $12
 	object SPRITE_FOULARD_WOMAN, $3, $3, STAY, DOWN, $7, OPP_BEAUTY, $3

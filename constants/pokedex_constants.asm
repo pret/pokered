@@ -82,7 +82,7 @@ const_value = 1
 	const DEX_SLOWBRO    ; 80
 	const DEX_MAGNEMITE  ; 81
 	const DEX_MAGNETON   ; 82
-	const DEX_FARFETCH_D ; 83
+	const DEX_FARFETCHD  ; 83
 	const DEX_DODUO      ; 84
 	const DEX_DODRIO     ; 85
 	const DEX_SEEL       ; 86

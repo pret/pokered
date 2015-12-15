@@ -53,7 +53,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 600   ; FULL_HEAL
 	money 1500  ; REVIVE
 	money 4000  ; MAX_REVIVE
-	money 700   ; GUARD_SPEC_
+	money 700   ; GUARD_SPEC
 	money 500   ; SUPER_REPEL
 	money 700   ; MAX_REPEL
 	money 650   ; DIRE_HIT
@@ -61,7 +61,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 200   ; FRESH_WATER
 	money 300   ; SODA_POP
 	money 350   ; LEMONADE
-	money 0     ; S_S__TICKET
+	money 0     ; S_S_TICKET
 	money 0     ; GOLD_TEETH
 	money 500   ; X_ATTACK
 	money 550   ; X_DEFEND
@@ -73,7 +73,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; SILPH_SCOPE
 	money 0     ; POKE_FLUTE
 	money 0     ; LIFT_KEY
-	money 0     ; EXP__ALL
+	money 0     ; EXP_ALL
 	money 0     ; OLD_ROD
 	money 0     ; GOOD_ROD
 	money 0     ; SUPER_ROD

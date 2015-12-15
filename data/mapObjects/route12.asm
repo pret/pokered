@@ -15,7 +15,7 @@ Route12Object: ; 0x5869a (size=118)
 	object SPRITE_SNORLAX, $a, $3e, STAY, DOWN, $1 ; person
 	object SPRITE_FISHER2, $e, $1f, STAY, LEFT, $2, OPP_FISHER, $3
 	object SPRITE_FISHER2, $5, $27, STAY, UP, $3, OPP_FISHER, $4
-	object SPRITE_BLACK_HAIR_BOY_1, $b, $5c, STAY, LEFT, $4, OPP_JR__TRAINER_M, $9
+	object SPRITE_BLACK_HAIR_BOY_1, $b, $5c, STAY, LEFT, $4, OPP_JR_TRAINER_M, $9
 	object SPRITE_BLACK_HAIR_BOY_2, $e, $4c, STAY, UP, $5, OPP_ROCKER, $2
 	object SPRITE_FISHER2, $c, $28, STAY, LEFT, $6, OPP_FISHER, $5
 	object SPRITE_FISHER2, $9, $34, STAY, RIGHT, $7, OPP_FISHER, $6

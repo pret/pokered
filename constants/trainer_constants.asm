@@ -10,8 +10,8 @@ const_value = 1
 	trainer_const BUG_CATCHER   ; $02
 	trainer_const LASS          ; $03
 	trainer_const SAILOR        ; $04
-	trainer_const JR__TRAINER_M ; $05
-	trainer_const JR__TRAINER_F ; $06
+	trainer_const JR_TRAINER_M  ; $05
+	trainer_const JR_TRAINER_F  ; $06
 	trainer_const POKEMANIAC    ; $07
 	trainer_const SUPER_NERD    ; $08
 	trainer_const HIKER         ; $09
@@ -41,7 +41,7 @@ const_value = 1
 	trainer_const BRUNO         ; $21
 	trainer_const BROCK         ; $22
 	trainer_const MISTY         ; $23
-	trainer_const LT__SURGE     ; $24
+	trainer_const LT_SURGE      ; $24
 	trainer_const ERIKA         ; $25
 	trainer_const KOGA          ; $26
 	trainer_const BLAINE        ; $27
