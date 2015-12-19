@@ -4,7 +4,7 @@ GaryScript: ; 75f1d (1d:5f1d)
 	ld a, [wGaryCurScript]
 	jp CallFunctionInTable
 
-GaryScript_75f29: ; 75f29 (1d:5f29)
+ResetGaryScript: ; 75f29 (1d:5f29)
 	xor a
 	ld [wJoyIgnore], a
 	ld [wGaryCurScript], a
@@ -30,7 +30,7 @@ GaryScript1: ; 75f48 (1d:5f48)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEMovement75f63
+	ld de, GaryEntrance_RLEMovement
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -39,7 +39,7 @@ GaryScript1: ; 75f48 (1d:5f48)
 	ld [wGaryCurScript], a
 	ret
 
-RLEMovement75f63: ; 75f63 (1d:5f63)
+GaryEntrance_RLEMovement: ; 75f63 (1d:5f63)
 	db D_UP,1
 	db D_RIGHT,1
 	db D_UP,3
@@ -53,7 +53,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, wOptions
-	res 7, [hl]
+	res 7, [hl]  ; Turn on battle animations to make the battle feel more epic.
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -61,8 +61,8 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
-	ld hl, GaryText_760f9
-	ld de, GaryText_760fe
+	ld hl, GaryDefeatedText
+	ld de, GaryVictoryText
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY3
 	ld [wCurOpponent], a
@@ -70,17 +70,17 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
 	cp STARTER2
-	jr nz, .NotSquirtle
+	jr nz, .NotStarter2
 	ld a, $1
-	jr .done
-.NotSquirtle
+	jr .saveTrainerId
+.NotStarter2
 	cp STARTER3
-	jr nz, .Charmander
+	jr nz, .NotStarter3
 	ld a, $2
-	jr .done
-.Charmander
+	jr .saveTrainerId
+.NotStarter3
 	ld a, $3
-.done
+.saveTrainerId
 	ld [wTrainerNo], a
 
 	xor a
@@ -92,7 +92,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 GaryScript3: ; 75fbb (1d:5fbb)
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, GaryScript_75f29
+	jp z, ResetGaryScript
 	call UpdateSprites
 	SetEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld a, $f0
@@ -115,7 +115,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld a, $2
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
-	ld de, MovementData_76014
+	ld de, OakEntranceAfterVictoryMovement
 	ld a, $2
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
@@ -126,7 +126,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld [wGaryCurScript], a
 	ret
 
-MovementData_76014: ; 76014 (1d:6014)
+OakEntranceAfterVictoryMovement: ; 76014 (1d:6014)
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -179,7 +179,7 @@ GaryScript7: ; 7605f (1d:605f)
 	ld a, $5
 	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
-	ld de, MovementData_76080
+	ld de, OakExitGaryRoomMovement
 	ld a, $2
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
@@ -187,7 +187,7 @@ GaryScript7: ; 7605f (1d:605f)
 	ld [wGaryCurScript], a
 	ret
 
-MovementData_76080: ; 76080 (1d:6080)
+OakExitGaryRoomMovement: ; 76080 (1d:6080)
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db $FF
@@ -207,7 +207,7 @@ GaryScript9: ; 76099 (1d:6099)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEMovement760b4
+	ld de, WalkToHallOfFame_RLEMovment
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -216,7 +216,7 @@ GaryScript9: ; 76099 (1d:6099)
 	ld [wGaryCurScript], a
 	ret
 
-RLEMovement760b4: ; 760b4 (1d:60b4)
+WalkToHallOfFame_RLEMovment: ; 760b4 (1d:60b4)
 	db D_UP,4
 	db D_LEFT,1
 	db $ff
@@ -249,23 +249,23 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 GaryText1: ; 760e0 (1d:60e0)
 	TX_ASM
 	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
-	ld hl, GaryText_760f4
-	jr z, .asm_17e9f
+	ld hl, GaryChampionIntroText
+	jr z, .printText
 	ld hl, GaryText_76103
-.asm_17e9f
+.printText
 	call PrintText
 	jp TextScriptEnd
 
-GaryText_760f4: ; 760f4 (1d:60f4)
-	TX_FAR _GaryText_760f4
+GaryChampionIntroText: ; 760f4 (1d:60f4)
+	TX_FAR _GaryChampionIntroText
 	db "@"
 
-GaryText_760f9: ; 760f9 (1d:60f9)
-	TX_FAR _GaryText_760f9
+GaryDefeatedText: ; 760f9 (1d:60f9)
+	TX_FAR _GaryDefeatedText
 	db "@"
 
-GaryText_760fe: ; 760fe (1d:60fe)
-	TX_FAR _GaryText_760fe
+GaryVictoryText: ; 760fe (1d:60fe)
+	TX_FAR _GaryVictoryText
 	db "@"
 
 GaryText_76103: ; 76103 (1d:6103)

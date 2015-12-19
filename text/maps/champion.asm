@@ -1,4 +1,4 @@
-_GaryText_760f4::
+_GaryChampionIntroText::
 	text $53, ": Hey!"
 
 	para "I was looking"
@@ -35,7 +35,7 @@ _GaryText_760f4::
 	cont "in the world!"
 	done
 
-_GaryText_760f9::
+_GaryDefeatedText::
 	text "NO!"
 	line "That can't be!"
 	cont "You beat my best!"
@@ -49,7 +49,7 @@ _GaryText_760f9::
 	cont "It's not fair!"
 	prompt
 
-_GaryText_760fe::
+_GaryVictoryText::
 	text "Hahaha!"
 	line "I won, I won!"
 

@@ -1,5 +1,5 @@
 BrunoScript: ; 762d6 (1d:62d6)
-	call BrunoScript_762ec
+	call BrunoShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
 	ld hl, BrunoTrainerHeaders
 	ld de, BrunoScriptPointers
@@ -8,24 +8,24 @@ BrunoScript: ; 762d6 (1d:62d6)
 	ld [wBrunoCurScript], a
 	ret
 
-BrunoScript_762ec: ; 762ec (1d:62ec)
+BrunoShowOrHideExitBlock: ; 762ec (1d:62ec)
+; Blocks or clears the exit to the next room.
 	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	CheckEvent EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	jr z, .asm_76300
+	jr z, .blockExitToNextRoom
 	ld a, $5
-	jp BrunoScript_76302
-.asm_76300
+	jp .setExitBlock
+.blockExitToNextRoom
 	ld a, $24
-
-BrunoScript_76302: ; 76302 (1d:6302)
+.setExitBlock
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
-BrunoScript_7630d: ; 7630d (1d:630d)
+ResetBrunoScript: ; 7630d (1d:630d)
 	xor a
 	ld [wBrunoCurScript], a
 	ret
@@ -40,7 +40,8 @@ BrunoScriptPointers: ; 76312 (1d:6312)
 BrunoScript4: ; 7631c (1d:631c)
 	ret
 
-BrunoScript_7631d: ; 7631d (1d:631d)
+BrunoScriptWalkIntoRoom: ; 7631d (1d:631d)
+; Walk six steps upward.
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
 	ld [hli], a
@@ -58,7 +59,7 @@ BrunoScript_7631d: ; 7631d (1d:631d)
 	ret
 
 BrunoScript0: ; 76339 (1d:6339)
-	ld hl, CoordsData_7637a
+	ld hl, BrunoEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
@@ -67,14 +68,14 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
-	cp $3
-	jr c, .asm_7635d
+	cp $3  ; Is player standing one tile above the exit?
+	jr c, .stopPlayerFromLeaving
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_BRUNOS_ROOM
-	jr z, BrunoScript_7631d
-.asm_7635d
+	jr z, BrunoScriptWalkIntoRoom
+.stopPlayerFromLeaving
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
-	call DisplayTextID
+	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
@@ -85,7 +86,7 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [wCurMapScript], a
 	ret
 
-CoordsData_7637a: ; 7637a (1d:637a)
+BrunoEntranceCoords: ; 7637a (1d:637a)
 	db $0A,$04
 	db $0A,$05
 	db $0B,$04
@@ -107,7 +108,7 @@ BrunoScript2: ; 76396 (1d:6396)
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, BrunoScript_7630d
+	jp z, ResetBrunoScript
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID

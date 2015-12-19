@@ -1,5 +1,5 @@
 LanceScript: ; 5a2ae (16:62ae)
-	call LanceScript_5a2c4
+	call LanceShowOrHideEntranceBlocks
 	call EnableAutoTextBoxDrawing
 	ld hl, LanceTrainerHeaders
 	ld de, LanceScriptPointers
@@ -8,34 +8,36 @@ LanceScript: ; 5a2ae (16:62ae)
 	ld [wLanceCurScript], a
 	ret
 
-LanceScript_5a2c4: ; 5a2c4 (16:62c4)
+LanceShowOrHideEntranceBlocks: ; 5a2c4 (16:62c4)
 	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
 	CheckEvent EVENT_LANCES_ROOM_LOCK_DOOR
-	jr nz, .asm_5a2da
+	jr nz, .closeEntrance
+	; open entrance
 	ld a, $31
 	ld b, $32
-	jp LanceScript_5a2de
-.asm_5a2da
+	jp LanceSetEntranceBlocks
+.closeEntrance
 	ld a, $72
 	ld b, $73
 
-LanceScript_5a2de: ; 5a2de (16:62de)
+LanceSetEntranceBlocks: ; 5a2de (16:62de)
+; Replaces the tile blocks so the player can't leave.
 	push bc
 	ld [wNewTileBlockID], a
 	lb bc, 6, 2
-	call LanceScript_5a2f0
+	call LanceSetEntranceBlock
 	pop bc
 	ld a, b
 	ld [wNewTileBlockID], a
 	lb bc, 6, 3
 
-LanceScript_5a2f0: ; 5a2f0 (16:62f0)
+LanceSetEntranceBlock: ; 5a2f0 (16:62f0)
 	predef_jump ReplaceTileBlock
 
-LanceScript_5a2f5: ; 5a2f5 (16:62f5)
+ResetLanceScript: ; 5a2f5 (16:62f5)
 	xor a
 	ld [wLanceCurScript], a
 	ret
@@ -53,29 +55,29 @@ LanceScript4: ; 5a304 (16:6304)
 LanceScript0: ; 5a305 (16:6305)
 	CheckEvent EVENT_BEAT_LANCE
 	ret nz
-	ld hl, CoordsData_5a33e
+	ld hl, LanceTriggerMovementCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ld [hJoyHeld], a
 	ld a, [wCoordIndex]
-	cp $3
-	jr nc, .asm_5a325
+	cp $3  ; Is player standing next to Lance's sprite?
+	jr nc, .notStandingNextToLance
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
-.asm_5a325
-	cp $5
-	jr z, LanceScript_5a35b
+.notStandingNextToLance
+	cp $5  ; Is player standing on the entrance staircase?
+	jr z, WalkToLance
 	CheckAndSetEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	ret nz
 	ld hl, wd126
 	set 5, [hl]
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	jp LanceScript_5a2c4
+	jp LanceShowOrHideEntranceBlocks
 
-CoordsData_5a33e: ; 5a33e (16:633e)
+LanceTriggerMovementCoords: ; 5a33e (16:633e)
 	db $01,$05
 	db $02,$06
 	db $0B,$05
@@ -87,16 +89,17 @@ LanceScript2: ; 5a349 (16:6349)
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, LanceScript_5a2f5
+	jp z, ResetLanceScript
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-LanceScript_5a35b: ; 5a35b (16:635b)
+WalkToLance: ; 5a35b (16:635b)
+; Moves the player down the hallway to Lance's room.
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
-	ld de, RLEList_5a379
+	ld de, WalkToLance_RLEList
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
@@ -106,7 +109,7 @@ LanceScript_5a35b: ; 5a35b (16:635b)
 	ld [wCurMapScript], a
 	ret
 
-RLEList_5a379: ; 5a379 (16:6379)
+WalkToLance_RLEList: ; 5a379 (16:6379)
 	db D_UP, $0C
 	db D_LEFT, $0C
 	db D_DOWN, $07

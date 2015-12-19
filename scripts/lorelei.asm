@@ -1,5 +1,5 @@
 LoreleiScript: ; 7617b (1d:617b)
-	call LoreleiScript_76191
+	call LoreleiShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
 	ld hl, LoreleiTrainerHeaders
 	ld de, LoreleiScriptPointers
@@ -8,7 +8,8 @@ LoreleiScript: ; 7617b (1d:617b)
 	ld [wLoreleiCurScript], a
 	ret
 
-LoreleiScript_76191: ; 76191 (1d:6191)
+LoreleiShowOrHideExitBlock: ; 76191 (1d:6191)
+; Blocks or clears the exit to the next room.
 	ld hl, wd126
 	bit 5, [hl]
 	res 5, [hl]
@@ -16,17 +17,17 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 	ld hl, wBeatLorelei
 	set 1, [hl]
 	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	jr z, .asm_761a9
+	jr z, .blockExitToNextRoom
 	ld a, $5
-	jr .asm_761ab
-.asm_761a9
+	jr .setExitBlock
+.blockExitToNextRoom
 	ld a, $24
-.asm_761ab
+.setExitBlock
 	ld [wNewTileBlockID], a
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
-LoreleiScript_761b6: ; 761b6 (1d:61b6)
+ResetLoreleiScript: ; 761b6 (1d:61b6)
 	xor a
 	ld [wLoreleiCurScript], a
 	ret
@@ -41,7 +42,8 @@ LoreleiScriptPointers: ; 761bb (1d:61bb)
 LoreleiScript4: ; 761c5 (1d:61c5)
 	ret
 
-LoreleiScript_761c6: ; 761c6 (1d:61c6)
+LoreleiScriptWalkIntoRoom: ; 761c6 (1d:61c6)
+; Walk six steps upward.
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
 	ld [hli], a
@@ -59,7 +61,7 @@ LoreleiScript_761c6: ; 761c6 (1d:61c6)
 	ret
 
 LoreleiScript0: ; 761e2 (1d:61e2)
-	ld hl, CoordsData_76223
+	ld hl, LoreleiEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
@@ -68,14 +70,14 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, [wCoordIndex]
-	cp $3
-	jr c, .asm_76206
+	cp $3  ; Is player standing one tile above the exit?
+	jr c, .stopPlayerFromLeaving
 	CheckAndSetEvent EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
-	jr z, LoreleiScript_761c6
-.asm_76206
+	jr z, LoreleiScriptWalkIntoRoom
+.stopPlayerFromLeaving
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
-	call DisplayTextID
+	call DisplayTextID  ; "Don't run away!"
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
@@ -86,7 +88,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [wCurMapScript], a
 	ret
 
-CoordsData_76223: ; 76223 (1d:6223)
+LoreleiEntranceCoords: ; 76223 (1d:6223)
 	db $0A,$04
 	db $0A,$05
 	db $0B,$04
@@ -103,11 +105,12 @@ LoreleiScript3: ; 7622c (1d:622c)
 	ld [wLoreleiCurScript], a
 	ld [wCurMapScript], a
 	ret
+
 LoreleiScript2: ; 7623f (1d:623f)
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
-	jp z, LoreleiScript_761b6
+	jp z, ResetLoreleiScript
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
