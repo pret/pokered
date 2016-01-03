@@ -9,7 +9,7 @@ SilphCo3Script: ; 59f5b (16:5f5b)
 	ret
 
 SilphCo3Script_59f71: ; 59f71 (16:5f71)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

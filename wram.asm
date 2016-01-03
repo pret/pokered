@@ -2118,7 +2118,7 @@ wIsKeyItem:: ; d124
 wTextBoxID:: ; d125
 	ds 1
 
-wd126:: ds 1 ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
+wCurrentMapScriptFlags:: ds 1 ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: ; d127
 	ds 1
@@ -2308,7 +2308,7 @@ wOptions:: ; d355
 	ds 1
 
 wObtainedBadges:: ; d356
-	ds 1
+	flag_array 8
 
 	ds 1
 
@@ -3107,12 +3107,14 @@ wCurMapScript:: ; da39
 ; mostly copied from map-specific map script pointer and wirtten back later
 	ds 1
 
-	ds 6
+	ds 7
 
-wPlayTimeHours:: ; da40
-	ds 2
-wPlayTimeMinutes:: ; da42
-	ds 2
+wPlayTimeHours:: ; da41
+	ds 1
+wPlayTimeMaxed:: ; da42
+	ds 1
+wPlayTimeMinutes:: ; da43
+	ds 1
 wPlayTimeSeconds:: ; da44
 	ds 1
 wPlayTimeFrames:: ; da45

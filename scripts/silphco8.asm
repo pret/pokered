@@ -9,7 +9,7 @@ SilphCo8Script: ; 56504 (15:6504)
 	ret
 
 SilphCo8Script_5651a: ; 5651a (15:651a)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

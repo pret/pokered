@@ -1,5 +1,5 @@
 CeladonGymScript: ; 4890a (12:490a)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, CeladonGymScript_48927

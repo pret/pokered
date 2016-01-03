@@ -1,5 +1,5 @@
 CeruleanGymScript: ; 5c6b3 (17:46b3)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, CeruleanGymScript_5c6d0

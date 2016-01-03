@@ -9,7 +9,7 @@ Mansion1Script: ; 442af (11:42af)
 	ret
 
 Mansion1Subscript1: ; 442c5 (11:42c5)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -106,7 +106,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	jr nz, .asm_4438c
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld hl, MansionSwitchPressedText
 	call PrintText

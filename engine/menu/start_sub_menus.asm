@@ -601,12 +601,12 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld c,$e3
 	call PrintBCDNumber
 	coord hl, 9, 6
-	ld de,wPlayTimeHours + 1 ; hours
+	ld de,wPlayTimeHours ; hours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
 	ld [hl],$d6 ; colon tile ID
 	inc hl
-	ld de,wPlayTimeMinutes + 1 ; minutes
+	ld de,wPlayTimeMinutes ; minutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 

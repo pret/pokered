@@ -1,5 +1,5 @@
 CeladonMartElevatorScript: ; 48600 (12:4600)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	push hl

@@ -10,7 +10,7 @@ AgathaScript: ; 7642d (1d:642d)
 
 AgathaShowOrHideExitBlock: ; 76443 (1d:6443)
 ; Blocks or clears the exit to the next room.
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

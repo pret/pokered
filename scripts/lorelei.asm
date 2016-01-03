@@ -10,7 +10,7 @@ LoreleiScript: ; 7617b (1d:617b)
 
 LoreleiShowOrHideExitBlock: ; 76191 (1d:6191)
 ; Blocks or clears the exit to the next room.
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

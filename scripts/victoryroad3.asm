@@ -9,7 +9,7 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	ret
 
 VictoryRoad3Script_44996: ; 44996 (11:4996)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -36,7 +36,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	ld a, [wCoordIndex]
 	cp $1
 	jr nz, .asm_449dc
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	SetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret

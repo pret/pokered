@@ -402,7 +402,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 .openSecondLock
 ; Completed the trash can puzzle.
 	SetEvent EVENT_2ND_LOCK_OPENED
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 6, [hl]
 
 	tx_pre_id VermilionGymTrashSuccesText3

@@ -9,7 +9,7 @@ Route25Script: ; 515cb (14:55cb)
 	ret
 
 Route25Script_515e1: ; 515e1 (14:55e1)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z

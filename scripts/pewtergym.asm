@@ -1,5 +1,5 @@
 PewterGymScript: ; 5c387 (17:4387)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, PewterGymScript_5c3a4

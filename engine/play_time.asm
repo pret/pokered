@@ -3,7 +3,7 @@ TrackPlayTime: ; 18dee (6:4dee)
 	ld a, [wd732]
 	bit 0, a
 	ret z
-	ld a, [wPlayTimeMinutes]
+	ld a, [wPlayTimeMaxed]
 	and a
 	ret nz
 	ld a, [wPlayTimeFrames]
@@ -20,20 +20,20 @@ TrackPlayTime: ; 18dee (6:4dee)
 	ret nz
 	xor a
 	ld [wPlayTimeSeconds], a
-	ld a, [wPlayTimeMinutes + 1]
+	ld a, [wPlayTimeMinutes]
 	inc a
-	ld [wPlayTimeMinutes + 1], a
+	ld [wPlayTimeMinutes], a
 	cp 60
 	ret nz
 	xor a
-	ld [wPlayTimeMinutes + 1], a
-	ld a, [wPlayTimeHours + 1]
+	ld [wPlayTimeMinutes], a
+	ld a, [wPlayTimeHours]
 	inc a
-	ld [wPlayTimeHours + 1], a
+	ld [wPlayTimeHours], a
 	cp $ff
 	ret nz
 	ld a, $ff
-	ld [wPlayTimeMinutes], a
+	ld [wPlayTimeMaxed], a
 	ret
 
 CountDownIgnoreInputBitReset: ; 18e36 (6:4e36)

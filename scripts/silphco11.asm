@@ -9,7 +9,7 @@ SilphCo11Script: ; 620fa (18:60fa)
 	ret
 
 SilphCo11Script_62110: ; 62110 (18:6110)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

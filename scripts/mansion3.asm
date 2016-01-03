@@ -9,7 +9,7 @@ Mansion3Script: ; 521ee (14:61ee)
 	ret
 
 Mansion3Script_52204: ; 52204 (14:6204)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
