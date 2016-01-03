@@ -1,5 +1,5 @@
 SaffronGymScript: ; 5d00d (17:500d)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, .extra

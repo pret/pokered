@@ -1,7 +1,7 @@
 IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z

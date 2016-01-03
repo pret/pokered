@@ -1,5 +1,5 @@
 RocketHideoutElevatorScript: ; 45710 (11:5710)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	push hl

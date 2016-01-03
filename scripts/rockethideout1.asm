@@ -9,7 +9,7 @@ RocketHideout1Script: ; 44bca (11:4bca)
 	ret
 
 RocketHideout1Script_44be0: ; 44be0 (11:4be0)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

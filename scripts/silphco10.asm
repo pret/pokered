@@ -9,7 +9,7 @@ SilphCo10Script: ; 5a139 (16:6139)
 	ret
 
 SilphCo10Script_5a14f: ; 5a14f (16:614f)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

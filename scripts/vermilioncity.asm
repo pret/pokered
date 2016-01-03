@@ -1,6 +1,6 @@
 VermilionCityScript: ; 197a1 (6:57a1)
 	call EnableAutoTextBoxDrawing
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	push hl

@@ -90,7 +90,7 @@ MainMenu: ; 5af2 (1:5af2)
 	jp .mainMenuLoop
 .choseContinue
 	call DisplayContinueGameInfo
-	ld hl,wd126
+	ld hl,wCurrentMapScriptFlags
 	set 5,[hl]
 .inputLoop
 	xor a
@@ -411,12 +411,12 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	jp PrintNumber
 
 PrintPlayTime: ; 5e55 (1:5e55)
-	ld de, wPlayTimeHours + 1
+	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, wPlayTimeMinutes + 1
+	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 

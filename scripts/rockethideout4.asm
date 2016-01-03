@@ -9,7 +9,7 @@ RocketHideout4Script: ; 4545d (11:545d)
 	ret
 
 RocketHideout4Script_45473: ; 45473 (11:5473)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -65,7 +65,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	call GBFadeInFromBlack
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, $0
 	ld [wRocketHideout4CurScript], a

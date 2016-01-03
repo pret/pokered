@@ -199,7 +199,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld a, [wCurrentMenuItem]
 	cp c
 	jr nz, .wrongAnswer
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, [hGymGateIndex]
 	ld [$ffe0], a

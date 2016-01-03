@@ -7,7 +7,7 @@ CeladonGameCornerScript: ; 48bbd (12:4bbd)
 	jp CallFunctionInTable
 
 CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
@@ -24,7 +24,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -109,7 +109,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ld a, HS_GAME_CORNER_ROCKET
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
 	ld a, $0

@@ -9,7 +9,7 @@ SilphCo2Script: ; 59cf1 (16:5cf1)
 	ret
 
 SilphCo2Script_59d07: ; 59d07 (16:5d07)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

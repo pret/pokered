@@ -1,5 +1,5 @@
 VictoryRoad1Script: ; 5da0a (17:5a0a)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, .next
@@ -29,7 +29,7 @@ VictoryRoad1Script0: ; 5da40 (17:5a40)
 	ld hl, CoordsData_5da5c
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret

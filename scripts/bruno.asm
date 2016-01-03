@@ -10,7 +10,7 @@ BrunoScript: ; 762d6 (1d:62d6)
 
 BrunoShowOrHideExitBlock: ; 762ec (1d:62ec)
 ; Blocks or clears the exit to the next room.
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

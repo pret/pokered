@@ -9,7 +9,7 @@ LanceScript: ; 5a2ae (16:62ae)
 	ret
 
 LanceShowOrHideEntranceBlocks: ; 5a2c4 (16:62c4)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -71,7 +71,7 @@ LanceScript0: ; 5a305 (16:6305)
 	jr z, WalkToLance
 	CheckAndSetEvent EVENT_LANCES_ROOM_LOCK_DOOR
 	ret nz
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, SFX_GO_INSIDE
 	call PlaySound

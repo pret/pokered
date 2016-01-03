@@ -9,7 +9,7 @@ SilphCo9Script: ; 5d7bb (17:57bb)
 	ret
 
 SilphCo9Script_5d7d1: ; 5d7d1 (17:57d1)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z

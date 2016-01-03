@@ -1,9 +1,9 @@
 VictoryRoad2Script: ; 5179d (14:579d)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	call nz, VictoryRoad2Script_517c4
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, VictoryRoad2Script_517c9
@@ -59,7 +59,7 @@ VictoryRoad2Script0: ; 517f1 (14:57f1)
 	SetEventReuseHL EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH2
 	ret nz
 .asm_51810
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ret
 

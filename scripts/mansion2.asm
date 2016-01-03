@@ -9,7 +9,7 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	ret
 
 Mansion2Script_51fee: ; 51fee (14:5fee)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -112,7 +112,7 @@ Mansion2Text5: ; 52087 (14:6087)
 	jr nz, .asm_520b9
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld hl, Mansion2Text_520c7
 	call PrintText

@@ -2379,7 +2379,7 @@ StartTrainerBattle:: ; 325d (0:325d)
 	ret
 
 EndTrainerBattle:: ; 3275 (0:3275)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
 	ld hl, wd72d

@@ -6,7 +6,7 @@ CinnabarGymScript: ; 7574a (1d:574a)
 	jp CallFunctionInTable
 
 CinnabarGymScript_75759: ; 75759 (1d:5759)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	push hl
@@ -165,7 +165,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_CINNABAR_GYM_TRAINER_0, EVENT_BEAT_CINNABAR_GYM_TRAINER_6
 
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 
 	jp CinnabarGymScript_75792

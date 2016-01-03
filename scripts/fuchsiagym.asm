@@ -9,7 +9,7 @@ FuchsiaGymScript: ; 7543d (1d:543d)
 	ret
 
 FuchsiaGymScript_75453: ; 75453 (1d:5453)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z

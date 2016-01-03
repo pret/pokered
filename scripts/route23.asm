@@ -6,7 +6,7 @@ Route23Script: ; 511da (14:51da)
 	jp CallFunctionInTable
 
 Route23Script_511e9: ; 511e9 (14:51e9)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z

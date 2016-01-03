@@ -9,7 +9,7 @@ SilphCo6Script: ; 1a1a9 (6:61a9)
 	ret
 
 SilphCo6Script_1a1bf: ; 1a1bf (6:61bf)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
