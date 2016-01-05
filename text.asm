@@ -905,7 +905,7 @@ _ViridianBlackboardPoisonText::
 	line "to cure poison!"
 	prompt
 
-_ViridianBlackbaordPrlzText::
+_ViridianBlackboardPrlzText::
 	text "Paralysis could"
 	line "make #MON"
 	cont "moves misfire!"
