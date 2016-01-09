@@ -948,7 +948,7 @@ _VermilionGymTrashText::
 	line "only trash here."
 	done
 
-_VermilionGymTrashSuccesText1::
+_VermilionGymTrashSuccessText1::
 	text "Hey! There's a"
 	line "switch under the"
 	cont "trash!"
@@ -957,14 +957,14 @@ _VermilionGymTrashSuccesText1::
 	para "The 1st electric"
 	line "lock opened!@@"
 
-_VermilionGymTrashSuccesText2::
+_VermilionGymTrashSuccessText2::
 	text "Hey! There's"
 	line "another switch"
 	cont "under the trash!"
 	cont "Turn it on!"
 	prompt
 
-_VermilionGymTrashSuccesText3::
+_VermilionGymTrashSuccessText3::
 	text "The 2nd electric"
 	line "lock opened!"
 

@@ -195,7 +195,7 @@ RedsHouse2FHiddenObjects: ; 46b5a (11:6b5a)
 	db $01,$00,$04
 	dbw BANK(OpenRedsPC), OpenRedsPC
 	db $05,$03,$d0
-	dbw BANK(PrintRedsNESText), PrintRedsNESText
+	dbw BANK(PrintRedSNESText), PrintRedSNESText
 	db $FF
 BluesHouseHiddenObjects: ; 46b67 (11:6b67)
 	db $01,$00,$04

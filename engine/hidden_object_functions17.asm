@@ -1,4 +1,4 @@
-PrintRedsNESText: ; 5db79 (17:5b79)
+PrintRedSNESText: ; 5db79 (17:5b79)
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomSNESText
 
@@ -379,7 +379,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and $f
 	ld [wSecondLockTrashCanIndex], a
 
-	tx_pre_id VermilionGymTrashSuccesText1
+	tx_pre_id VermilionGymTrashSuccessText1
 	jr .done
 
 .trySecondLock
@@ -405,7 +405,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld hl, wCurrentMapScriptFlags
 	set 6, [hl]
 
-	tx_pre_id VermilionGymTrashSuccesText3
+	tx_pre_id VermilionGymTrashSuccessText3
 
 .done
 	jp PrintPredefTextID
@@ -434,8 +434,8 @@ GymTrashCans: ; 5de7d (17:5e7d)
 	db 2, 11, 13,  0,  0 ; 14
 ; 5dec8
 
-VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
-	TX_FAR _VermilionGymTrashSuccesText1
+VermilionGymTrashSuccessText1: ; 5dec8 (17:5ec8)
+	TX_FAR _VermilionGymTrashSuccessText1
 	TX_ASM
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
@@ -444,8 +444,8 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	jp TextScriptEnd
 
 ; unused
-VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
-	TX_FAR _VermilionGymTrashSuccesText2
+VermilionGymTrashSuccessText2: ; 5dedb (17:5edb)
+	TX_FAR _VermilionGymTrashSuccessText2
 	db "@"
 
 ; unused
@@ -457,8 +457,8 @@ VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
-	TX_FAR _VermilionGymTrashSuccesText3
+VermilionGymTrashSuccessText3: ; 5deef (17:5eef)
+	TX_FAR _VermilionGymTrashSuccessText3
 	TX_ASM
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
