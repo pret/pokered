@@ -22,9 +22,10 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	ld a, [wNumSetBits]
 	cp 2
 	tx_pre_id SaveOptionText
-	jr c, .ownThreeOrMoreMon
+	jr c, .ownLessThanTwo
+	; own two or more mon
 	tx_pre_id StrengthsAndWeaknessesText
-.ownThreeOrMoreMon
+.ownLessThanTwo
 	jp PrintPredefTextID
 
 SaveOptionText: ; 1e97e (7:697e)
