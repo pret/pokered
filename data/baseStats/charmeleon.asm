@@ -1,4 +1,3 @@
-CharmeleonBaseStats: ; 3844e (e:444e)
 db DEX_CHARMELEON ; pokedex id
 db 58 ; base hp
 db 64 ; base attack

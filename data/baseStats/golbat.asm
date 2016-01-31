@@ -1,4 +1,3 @@
-GolbatBaseStats: ; 3885a (e:485a)
 db DEX_GOLBAT ; pokedex id
 db 75 ; base hp
 db 80 ; base attack

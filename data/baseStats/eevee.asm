@@ -1,4 +1,3 @@
-EeveeBaseStats: ; 3924e (e:524e)
 db DEX_EEVEE ; pokedex id
 db 55 ; base hp
 db 55 ; base attack

@@ -1,4 +1,3 @@
-PrimeapeBaseStats: ; 389fe (e:49fe)
 db DEX_PRIMEAPE ; pokedex id
 db 65 ; base hp
 db 105 ; base attack

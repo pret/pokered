@@ -1,4 +1,3 @@
-HaunterBaseStats: ; 38dee (e:4dee)
 db DEX_HAUNTER ; pokedex id
 db 45 ; base hp
 db 50 ; base attack

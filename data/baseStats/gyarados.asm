@@ -1,4 +1,3 @@
-GyaradosBaseStats: ; 391fa (e:51fa)
 db DEX_GYARADOS ; pokedex id
 db 95 ; base hp
 db 125 ; base attack

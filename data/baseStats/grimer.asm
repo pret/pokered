@@ -1,4 +1,3 @@
-GrimerBaseStats: ; 38d62 (e:4d62)
 db DEX_GRIMER ; pokedex id
 db 80 ; base hp
 db 80 ; base attack

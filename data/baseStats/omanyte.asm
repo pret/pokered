@@ -1,4 +1,3 @@
-OmanyteBaseStats: ; 392da (e:52da)
 db DEX_OMANYTE ; pokedex id
 db 35 ; base hp
 db 40 ; base attack

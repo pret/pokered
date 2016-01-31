@@ -1,4 +1,3 @@
-SpearowBaseStats: ; 3860e (e:460e)
 db DEX_SPEAROW ; pokedex id
 db 40 ; base hp
 db 60 ; base attack

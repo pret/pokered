@@ -1,4 +1,3 @@
-LaprasBaseStats: ; 39216 (e:5216)
 db DEX_LAPRAS ; pokedex id
 db 130 ; base hp
 db 85 ; base attack

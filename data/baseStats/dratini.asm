@@ -1,4 +1,3 @@
-DratiniBaseStats: ; 393d6 (e:53d6)
 db DEX_DRATINI ; pokedex id
 db 41 ; base hp
 db 64 ; base attack

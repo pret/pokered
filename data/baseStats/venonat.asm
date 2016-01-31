@@ -1,4 +1,3 @@
-VenonatBaseStats: ; 38902 (e:4902)
 db DEX_VENONAT ; pokedex id
 db 60 ; base hp
 db 55 ; base attack

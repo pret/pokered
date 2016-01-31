@@ -1,4 +1,3 @@
-GeodudeBaseStats: ; 38bda (e:4bda)
 db DEX_GEODUDE ; pokedex id
 db 40 ; base hp
 db 80 ; base attack

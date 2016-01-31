@@ -1,4 +1,3 @@
-KadabraBaseStats: ; 38ac2 (e:4ac2)
 db DEX_KADABRA ; pokedex id
 db 40 ; base hp
 db 35 ; base attack

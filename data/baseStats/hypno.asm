@@ -1,4 +1,3 @@
-HypnoBaseStats: ; 38e5e (e:4e5e)
 db DEX_HYPNO ; pokedex id
 db 85 ; base hp
 db 73 ; base attack

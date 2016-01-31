@@ -1,4 +1,3 @@
-DittoBaseStats: ; 39232 (e:5232)
 db DEX_DITTO ; pokedex id
 db 48 ; base hp
 db 48 ; base attack

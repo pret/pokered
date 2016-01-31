@@ -1,4 +1,3 @@
-JigglypuffBaseStats: ; 38806 (e:4806)
 db DEX_JIGGLYPUFF ; pokedex id
 db 115 ; base hp
 db 45 ; base attack

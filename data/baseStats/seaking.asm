@@ -1,4 +1,3 @@
-SeakingBaseStats: ; 390c6 (e:50c6)
 db DEX_SEAKING ; pokedex id
 db 80 ; base hp
 db 92 ; base attack

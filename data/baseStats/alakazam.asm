@@ -1,4 +1,3 @@
-AlakazamBaseStats: ; 38ade (e:4ade)
 db DEX_ALAKAZAM ; pokedex id
 db 55 ; base hp
 db 50 ; base attack

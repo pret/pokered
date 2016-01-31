@@ -1,4 +1,3 @@
-CharizardBaseStats: ; 3846a (e:446a)
 db DEX_CHARIZARD ; pokedex id
 db 78 ; base hp
 db 84 ; base attack

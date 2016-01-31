@@ -1,4 +1,3 @@
-PidgeyBaseStats: ; 38582 (e:4582)
 db DEX_PIDGEY ; pokedex id
 db 40 ; base hp
 db 45 ; base attack

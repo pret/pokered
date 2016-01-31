@@ -1,4 +1,3 @@
-VaporeonBaseStats: ; 3926a (e:526a)
 db DEX_VAPOREON ; pokedex id
 db 130 ; base hp
 db 65 ; base attack

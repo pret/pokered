@@ -1,4 +1,3 @@
-CuboneBaseStats: ; 38f22 (e:4f22)
 db DEX_CUBONE ; pokedex id
 db 50 ; base hp
 db 50 ; base attack

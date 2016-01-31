@@ -1,4 +1,3 @@
-MetapodBaseStats: ; 384f6 (e:44f6)
 db DEX_METAPOD ; pokedex id
 db 50 ; base hp
 db 20 ; base attack

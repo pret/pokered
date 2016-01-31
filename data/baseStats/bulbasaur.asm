@@ -1,4 +1,4 @@
-BulbasaurBaseStats: ; 383de (e:43de)
+MonBaseStats:
 db DEX_BULBASAUR ; pokedex id
 db 45 ; base hp
 db 49 ; base attack
@@ -27,3 +27,4 @@ db 3 ; growth rate
 	tmlearn 44
 	tmlearn 50,51
 db 0 ; padding
+MonBaseStatsEnd:

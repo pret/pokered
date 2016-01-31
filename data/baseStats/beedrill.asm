@@ -1,4 +1,3 @@
-BeedrillBaseStats: ; 38566 (e:4566)
 db DEX_BEEDRILL ; pokedex id
 db 65 ; base hp
 db 80 ; base attack

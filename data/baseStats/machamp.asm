@@ -1,4 +1,3 @@
-MachampBaseStats: ; 38b32 (e:4b32)
 db DEX_MACHAMP ; pokedex id
 db 90 ; base hp
 db 130 ; base attack

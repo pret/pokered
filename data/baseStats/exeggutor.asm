@@ -1,4 +1,3 @@
-ExeggutorBaseStats: ; 38f06 (e:4f06)
 db DEX_EXEGGUTOR ; pokedex id
 db 95 ; base hp
 db 95 ; base attack

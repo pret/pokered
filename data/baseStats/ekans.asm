@@ -1,4 +1,3 @@
-EkansBaseStats: ; 38646 (e:4646)
 db DEX_EKANS ; pokedex id
 db 35 ; base hp
 db 60 ; base attack

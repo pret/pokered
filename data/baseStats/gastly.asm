@@ -1,4 +1,3 @@
-GastlyBaseStats: ; 38dd2 (e:4dd2)
 db DEX_GASTLY ; pokedex id
 db 30 ; base hp
 db 35 ; base attack

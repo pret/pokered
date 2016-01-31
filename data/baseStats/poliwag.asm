@@ -1,4 +1,3 @@
-PoliwagBaseStats: ; 38a52 (e:4a52)
 db DEX_POLIWAG ; pokedex id
 db 40 ; base hp
 db 50 ; base attack

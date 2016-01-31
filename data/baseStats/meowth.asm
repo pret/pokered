@@ -1,4 +1,3 @@
-MeowthBaseStats: ; 38972 (e:4972)
 db DEX_MEOWTH ; pokedex id
 db 40 ; base hp
 db 45 ; base attack

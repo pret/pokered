@@ -1,4 +1,3 @@
-DoduoBaseStats: ; 38cf2 (e:4cf2)
 db DEX_DODUO ; pokedex id
 db 35 ; base hp
 db 85 ; base attack

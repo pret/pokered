@@ -1,4 +1,3 @@
-OddishBaseStats: ; 38876 (e:4876)
 db DEX_ODDISH ; pokedex id
 db 45 ; base hp
 db 50 ; base attack

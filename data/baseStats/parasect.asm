@@ -1,4 +1,3 @@
-ParasectBaseStats: ; 388e6 (e:48e6)
 db DEX_PARASECT ; pokedex id
 db 60 ; base hp
 db 95 ; base attack

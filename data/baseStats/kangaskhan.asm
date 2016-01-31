@@ -1,4 +1,3 @@
-KangaskhanBaseStats: ; 39056 (e:5056)
 db DEX_KANGASKHAN ; pokedex id
 db 105 ; base hp
 db 95 ; base attack

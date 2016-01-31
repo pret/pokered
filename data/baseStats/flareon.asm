@@ -1,4 +1,3 @@
-FlareonBaseStats: ; 392a2 (e:52a2)
 db DEX_FLAREON ; pokedex id
 db 65 ; base hp
 db 130 ; base attack

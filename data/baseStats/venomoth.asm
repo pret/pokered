@@ -1,4 +1,3 @@
-VenomothBaseStats: ; 3891e (e:491e)
 db DEX_VENOMOTH ; pokedex id
 db 70 ; base hp
 db 65 ; base attack

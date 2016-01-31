@@ -1,4 +1,3 @@
-SandshrewBaseStats: ; 386b6 (e:46b6)
 db DEX_SANDSHREW ; pokedex id
 db 50 ; base hp
 db 75 ; base attack

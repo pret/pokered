@@ -1,4 +1,3 @@
-PikachuBaseStats: ; 3867e (e:467e)
 db DEX_PIKACHU ; pokedex id
 db 35 ; base hp
 db 55 ; base attack

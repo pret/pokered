@@ -1,4 +1,3 @@
-PoliwhirlBaseStats: ; 38a6e (e:4a6e)
 db DEX_POLIWHIRL ; pokedex id
 db 65 ; base hp
 db 65 ; base attack

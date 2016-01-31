@@ -1,4 +1,3 @@
-GengarBaseStats: ; 38e0a (e:4e0a)
 db DEX_GENGAR ; pokedex id
 db 60 ; base hp
 db 65 ; base attack

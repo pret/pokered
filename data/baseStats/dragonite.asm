@@ -1,4 +1,3 @@
-DragoniteBaseStats: ; 3940e (e:540e)
 db DEX_DRAGONITE ; pokedex id
 db 91 ; base hp
 db 134 ; base attack

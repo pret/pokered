@@ -1,4 +1,3 @@
-PonytaBaseStats: ; 38c2e (e:4c2e)
 db DEX_PONYTA ; pokedex id
 db 50 ; base hp
 db 85 ; base attack

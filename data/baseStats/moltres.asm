@@ -1,4 +1,3 @@
-MoltresBaseStats: ; 393ba (e:53ba)
 db DEX_MOLTRES ; pokedex id
 db 90 ; base hp
 db 100 ; base attack
