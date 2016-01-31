@@ -228,7 +228,39 @@ wSpriteStateData1:: ; c100
 ; C1xD
 ; C1xE
 ; C1xF
-	ds $10 * $10
+spritestatedata1: MACRO
+\1SpriteStateData1::
+\1PictureID:: db
+\1MovementStatus:: db
+\1SpriteImageIdx:: db
+\1YStepVector:: db
+\1YPixels:: db
+\1XStepVector:: db
+\1XPixels:: db
+\1IntraAnimFrameCounter:: db
+\1AnimFrameCounter:: db
+\1FacingDirection:: db
+	ds 6
+\1SpriteStateData1End::
+endm
+
+	spritestatedata1 Player
+	spritestatedata1 Sprite01
+	spritestatedata1 Sprite02
+	spritestatedata1 Sprite03
+	spritestatedata1 Sprite04
+	spritestatedata1 Sprite05
+	spritestatedata1 Sprite06
+	spritestatedata1 Sprite07
+	spritestatedata1 Sprite08
+	spritestatedata1 Sprite09
+	spritestatedata1 Sprite10
+	spritestatedata1 Sprite11
+	spritestatedata1 Sprite12
+	spritestatedata1 Sprite13
+	spritestatedata1 Sprite14
+	spritestatedata1 Sprite15
+	; ds $10 * $10
 
 
 ;SECTION "Sprite State Data 2", WRAM0[$c200]
@@ -253,7 +285,40 @@ wSpriteStateData2:: ; c200
 ; C2xD
 ; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
 ; C2xF
-	ds $10 * $10
+spritestatedata2: MACRO
+\1SpriteStateData2::
+\1WalkAnimationCounter:: db
+	ds 1
+\1YDisplacement:: db
+\1XDisplacement:: db
+\1MapY:: db
+\1MapX:: db
+\1MovementByte1:: db
+\1GrassPriority:: db
+\1MovementDelay:: db
+	ds 5
+\1SpriteImageBaseOffset:: db
+	ds 1
+\1SpriteStateData2End::
+endm
+
+	spritestatedata2 Player
+	spritestatedata2 Sprite01
+	spritestatedata2 Sprite02
+	spritestatedata2 Sprite03
+	spritestatedata2 Sprite04
+	spritestatedata2 Sprite05
+	spritestatedata2 Sprite06
+	spritestatedata2 Sprite07
+	spritestatedata2 Sprite08
+	spritestatedata2 Sprite09
+	spritestatedata2 Sprite10
+	spritestatedata2 Sprite11
+	spritestatedata2 Sprite12
+	spritestatedata2 Sprite13
+	spritestatedata2 Sprite14
+	spritestatedata2 Sprite15
+	; ds $10 * $10
 
 wSpriteDataEnd::
 
