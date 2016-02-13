@@ -1,29 +1,13 @@
 TowerMons5:
 	db $0A
-
-	IF DEF(_YELLOW)
-		db 22,GASTLY
-		db 23,GASTLY
-		db 24,GASTLY
-		db 25,GASTLY
-		db 26,GASTLY
-		db 21,GASTLY
-		db 20,CUBONE
-		db 27,GASTLY
-		db 22,HAUNTER
-		db 27,HAUNTER
-	ELSE
-		db 20,GASTLY
-		db 21,GASTLY
-		db 22,GASTLY
-		db 23,GASTLY
-		db 19,GASTLY
-		db 18,GASTLY
-		db 25,HAUNTER
-		db 20,CUBONE
-		db 22,CUBONE
-		db 24,GASTLY
-	ENDC
-
+	db 20,GASTLY
+	db 21,GASTLY
+	db 22,GASTLY
+	db 23,GASTLY
+	db 19,GASTLY
+	db 18,GASTLY
+	db 25,HAUNTER
+	db 20,CUBONE
+	db 22,CUBONE
+	db 24,GASTLY
 	db $00
-
