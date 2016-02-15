@@ -289,6 +289,8 @@ GaryText3: ; 7610d (1d:610d)
 	TX_ASM
 	ld a, [wPlayerStarter]
 	ld [wd11e], a
+	ld a, [wPlayerStarter + 1]
+	ld [wd11e + 1], a
 	call GetMonName
 	ld hl, GaryText_76120
 	call PrintText

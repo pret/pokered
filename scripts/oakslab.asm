@@ -191,10 +191,15 @@ OaksLabScript7: ; 1cc72 (7:4c72)
 	ret
 
 OaksLabScript8: ; 1cc80 (7:4c80)
+	ld a, [wPlayerStarter + 1]
+	ld b, a
 	ld a, [wPlayerStarter]
-	cp STARTER1
+	ld c, a
+	ld de, STARTER1
+	call CompareTwoBytes
 	jr z, .Charmander
-	cp STARTER2
+	ld de, STARTER2
+	call CompareTwoBytes
 	jr z, .Squirtle
 	jr .Bulbasaur
 .Charmander
@@ -923,6 +928,8 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	ld a, [wcf91]
 	ld [wPlayerStarter], a
 	ld [wd11e], a
+	ld [wPlayerStarter + 1], a
+	ld [wd11e + 1], a
 	call GetMonName
 	ld a, [wSpriteIndex]
 	cp $2
