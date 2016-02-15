@@ -40,17 +40,19 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	jr z, .choseDomeFossil
 	cp HELIX_FOSSIL
 	jr z, .choseHelixFossil
-	ld b, AERODACTYL
+	ld de, AERODACTYL
 	jr .fossilSelected
 .choseHelixFossil
-	ld b, OMANYTE
+	ld de, OMANYTE
 	jr .fossilSelected
 .choseDomeFossil
-	ld b, KABUTO
+	ld de, KABUTO
 .fossilSelected
 	ld [wFossilItem], a
-	ld a, b
+	ld a, e
 	ld [wFossilMon], a
+	ld a, d
+	ld [wFossilMon + 1], a
 	call LoadFossilItemAndMonName
 	ld hl, LabFossil_610ae
 	call PrintText
@@ -115,6 +117,8 @@ PrintFossilsInBag: ; 610c2 (18:50c2)
 LoadFossilItemAndMonName: ; 610eb (18:50eb)
 	ld a, [wFossilMon]
 	ld [wd11e], a
+	ld a, [wFossilMon + 1]
+	ld [wd11e + 1], a
 	call GetMonName
 	call CopyStringToCF4B
 	ld a, [wFossilItem]
