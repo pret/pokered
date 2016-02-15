@@ -169,6 +169,8 @@ DayCareMText1: ; 56254 (15:6254)
 	call MoveMon
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
+	ld a, [wDayCareMonSpecies + 1]
+	ld [wcf91 + 1], a
 	ld a, [wPartyCount]
 	dec a
 	push af

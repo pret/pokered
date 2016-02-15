@@ -90,6 +90,8 @@ LoadMonData_:
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
+	ld a, [wDayCareMonSpecies + 1]
+	ld [wcf91 + 1], a
 	ld a, [wMonDataLocation]
 	cp DAYCARE_DATA
 	jr z, .GetMonHeader

@@ -1392,7 +1392,7 @@ wUnusedCF8D:: ; cf8d
 wItemPrices:: ; cf8f
 	ds 2
 
-wcf91:: ds 1 ; used with a lot of things (too much to list here)
+wcf91:: ds 2 ; used with a lot of things (too much to list here)
 
 wWhichPokemon:: ; cf92
 ; which pokemon you selected
