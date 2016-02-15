@@ -23,14 +23,22 @@ Route22Script7: ; 50ed5 (14:4ed5)
 
 Route22Script_50ed6: ; 50ed6 (14:4ed6)
 	ld a, [wRivalStarter]
+	ld c, a
+	ld a, [wRivalStarter + 1]
 	ld b, a
 .asm_50eda
 	ld a, [hli]
+	cp c
+	jr nz, .different
+	ld a, [hl]
 	cp b
 	jr z, .asm_50ee1
+.different
+	inc hl
 	inc hl
 	jr .asm_50eda
 .asm_50ee1
+	inc hl
 	ld a, [hl]
 	ld [wTrainerNo], a
 	ret
@@ -141,9 +149,9 @@ Route22Script1: ; 50f62 (14:4f62)
 
 StarterMons_50faf: ; 50faf (14:4faf)
 ; starter the rival picked, rival trainer number
-	db STARTER2,$04
-	db STARTER3,$05
-	db STARTER1,$06
+	dwb STARTER2,$04
+	dwb STARTER3,$05
+	dwb STARTER1,$06
 
 Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, [wIsInBattle]
@@ -296,9 +304,9 @@ Route22Script4: ; 51087 (14:5087)
 	ret
 
 StarterMons_510d9: ; 510d9 (14:50d9)
-	db STARTER2,$0a
-	db STARTER3,$0b
-	db STARTER1,$0c
+	dwb STARTER2,$0a
+	dwb STARTER3,$0b
+	dwb STARTER1,$0c
 
 Route22Script5: ; 510df (14:50df)
 	ld a, [wIsInBattle]

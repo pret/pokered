@@ -146,13 +146,22 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
+	ld a, [wRivalStarter + 1]
+	ld b, a
 	ld a, [wRivalStarter]
-	cp STARTER2
+	ld c, a
+	ld de, STARTER2
+	call CompareTwoBytes
 	jr nz, .NotSquirtle
 	ld a, $4
 	jr .done
 .NotSquirtle
-	cp STARTER3
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER3
+	call CompareTwoBytes
 	jr nz, .Charmander
 	ld a, $5
 	jr .done

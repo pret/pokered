@@ -53,7 +53,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 .LoopTrainerData
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
-	jr z,.FinishUp
+	jp z,.FinishUp
 	ld [wcf91],a ; write species somewhere (XXX why?)
 	ld a,ENEMY_PARTY_DATA
 	ld [wMonDataLocation],a
@@ -130,14 +130,23 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [wEnemyMon1Moves + 2],a
 
 ; starter
-	ld a,[wRivalStarter]
-	cp STARTER3
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER3
+	call CompareTwoBytes
 	ld b,MEGA_DRAIN
 	jr z,.GiveStarterMove
-	cp STARTER1
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER1
+	call CompareTwoBytes
 	ld b,FIRE_BLAST
 	jr z,.GiveStarterMove
-	ld b,BLIZZARD ; must be squirtle
+	ld b,BLIZZARD ; must be STARTER2
 .GiveStarterMove
 	ld a,b
 	ld [wEnemyMon6Moves + 2],a

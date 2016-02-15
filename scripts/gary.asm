@@ -68,13 +68,22 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
+	ld a, [wRivalStarter + 1]
+	ld b, a
 	ld a, [wRivalStarter]
-	cp STARTER2
+	ld c, a
+	ld de, STARTER2
+	call CompareTwoBytes
 	jr nz, .NotStarter2
 	ld a, $1
 	jr .saveTrainerId
 .NotStarter2
-	cp STARTER3
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER3
+	call CompareTwoBytes
 	jr nz, .NotStarter3
 	ld a, $2
 	jr .saveTrainerId

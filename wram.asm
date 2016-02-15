@@ -1537,8 +1537,9 @@ wEnemyMonType::
 wEnemyMonType1::     db
 wEnemyMonType2::     db
 wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds NUM_MOVES
+wEnemyMonMoves::     ds 3
 SECTION "WRAM Bank 1", WRAMX, BANK[1]
+                     ds 1
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
 wEnemyMonMaxHP::     dw
@@ -2091,7 +2092,7 @@ wMoveType:: ; d11e
 
 wNumSetBits:: ; d11e
 
-wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
+wd11e:: ds 2 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
 
 wForcePlayerToChooseMon:: ; d11f
 ; When this value is non-zero, the player isn't allowed to exit the party menu

@@ -4722,3 +4722,13 @@ TextPredefs::
 	add_tx_pre BookOrSculptureText                  ; 40
 	add_tx_pre ElevatorText                         ; 41
 	add_tx_pre PokemonStuffText                     ; 42
+
+CompareTwoBytes::
+; Input: bc and de
+; Output: Set Zero flag if they're equal
+	ld a, b
+	cp d
+	ret nz
+	ld a, c
+	cp e
+	ret

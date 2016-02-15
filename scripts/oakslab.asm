@@ -322,6 +322,10 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld [wRivalStarter], a
 	ld [wcf91], a
 	ld [wd11e], a
+	ld a, [wRivalStarterTemp + 1]
+	ld [wRivalStarter + 1], a
+	ld [wcf91 + 1], a
+	ld [wd11e + 1], a
 	call GetMonName
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -383,13 +387,22 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	; define which team rival uses, and fight it
 	ld a, OPP_SONY1
 	ld [wCurOpponent], a
+	ld a, [wRivalStarter + 1]
+	ld b, a
 	ld a, [wRivalStarter]
-	cp STARTER2
+	ld c, a
+	ld de, STARTER2
+	call CompareTwoBytes
 	jr nz, .NotSquirtle
 	ld a, $1
 	jr .done
 .NotSquirtle
-	cp STARTER3
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER3
+	call CompareTwoBytes
 	jr nz, .Charmander
 	ld a, $2
 	jr .done
@@ -794,38 +807,48 @@ OaksLabText41: ; 1d0fd (7:50fd)
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
 	TX_ASM
-	ld a, STARTER2
+	ld a, (STARTER2 & $FF)
 	ld [wRivalStarterTemp], a
+	ld a, (STARTER2 >> 8)
+	ld [wRivalStarterTemp + 1], a
 	ld a, $3
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER1
+	ld de, STARTER1
 	ld b, $2
 	jr OaksLabScript_1d133
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
 	TX_ASM
-	ld a, STARTER3
+	ld a, (STARTER3 & $ff)
 	ld [wRivalStarterTemp], a
+	ld a, (STARTER3 >> 8)
+	ld [wRivalStarterTemp + 1], a
 	ld a, $4
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER2
+	ld de, STARTER2
 	ld b, $3
 	jr OaksLabScript_1d133
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
 	TX_ASM
-	ld a, STARTER1
+	ld a, (STARTER1 & $ff)
 	ld [wRivalStarterTemp], a
+	ld a, (STARTER1 >> 8)
+	ld [wRivalStarterTemp + 1], a
 	ld a, $2
 	ld [wRivalStarterBallSpriteIndex], a
-	ld a, STARTER3
+	ld de, STARTER3
 	ld b, $4
 
 OaksLabScript_1d133: ; 1d133 (7:5133)
+	ld a, e
 	ld [wcf91], a
 	ld [wd11e], a
+	ld a, d
+	ld [wcf91 + 1], a
+	ld [wd11e + 1], a
 	ld a, b
 	ld [wSpriteIndex], a
 	CheckEvent EVENT_GOT_STARTER

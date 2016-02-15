@@ -185,13 +185,22 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY2
 	ld [wCurOpponent], a
+	ld a, [wRivalStarter + 1]
+	ld b, a
 	ld a, [wRivalStarter]
-	cp STARTER2
+	ld c, a
+	ld de, STARTER2
+	call CompareTwoBytes
 	jr nz, .asm_51cb6
 	ld a, $7
 	jr .asm_51cc0
 .asm_51cb6
-	cp STARTER3
+	ld a, [wRivalStarter + 1]
+	ld b, a
+	ld a, [wRivalStarter]
+	ld c, a
+	ld de, STARTER3
+	call CompareTwoBytes
 	jr nz, .asm_51cbe
 	ld a, $8
 	jr .asm_51cc0
