@@ -1,4 +1,4 @@
-db DEX_EEVEE ; pokedex id
+dw DEX_EEVEE ; pokedex id
 db 55 ; base hp
 db 55 ; base attack
 db 50 ; base defense

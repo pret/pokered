@@ -1,4 +1,4 @@
-db DEX_GEODUDE ; pokedex id
+dw DEX_GEODUDE ; pokedex id
 db 40 ; base hp
 db 80 ; base attack
 db 100 ; base defense

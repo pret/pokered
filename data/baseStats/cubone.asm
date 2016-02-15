@@ -1,4 +1,4 @@
-db DEX_CUBONE ; pokedex id
+dw DEX_CUBONE ; pokedex id
 db 50 ; base hp
 db 50 ; base attack
 db 95 ; base defense

@@ -1,4 +1,4 @@
-db DEX_KRABBY ; pokedex id
+dw DEX_KRABBY ; pokedex id
 db 30 ; base hp
 db 105 ; base attack
 db 90 ; base defense

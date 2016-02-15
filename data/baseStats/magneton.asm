@@ -1,4 +1,4 @@
-db DEX_MAGNETON ; pokedex id
+dw DEX_MAGNETON ; pokedex id
 db 50 ; base hp
 db 60 ; base attack
 db 95 ; base defense

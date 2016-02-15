@@ -1,4 +1,4 @@
-db DEX_SEAKING ; pokedex id
+dw DEX_SEAKING ; pokedex id
 db 80 ; base hp
 db 92 ; base attack
 db 65 ; base defense

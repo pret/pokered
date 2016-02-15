@@ -1,4 +1,4 @@
-db DEX_PSYDUCK ; pokedex id
+dw DEX_PSYDUCK ; pokedex id
 db 50 ; base hp
 db 52 ; base attack
 db 48 ; base defense

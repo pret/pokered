@@ -1,4 +1,4 @@
-db DEX_ARBOK ; pokedex id
+dw DEX_ARBOK ; pokedex id
 db 60 ; base hp
 db 85 ; base attack
 db 69 ; base defense

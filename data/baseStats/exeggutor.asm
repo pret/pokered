@@ -1,4 +1,4 @@
-db DEX_EXEGGUTOR ; pokedex id
+dw DEX_EXEGGUTOR ; pokedex id
 db 95 ; base hp
 db 95 ; base attack
 db 85 ; base defense

@@ -1,4 +1,4 @@
-db DEX_CHARMELEON ; pokedex id
+dw DEX_CHARMELEON ; pokedex id
 db 58 ; base hp
 db 64 ; base attack
 db 58 ; base defense

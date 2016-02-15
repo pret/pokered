@@ -1,4 +1,4 @@
-db DEX_GOLBAT ; pokedex id
+dw DEX_GOLBAT ; pokedex id
 db 75 ; base hp
 db 80 ; base attack
 db 70 ; base defense

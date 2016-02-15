@@ -1,4 +1,4 @@
-db DEX_GRIMER ; pokedex id
+dw DEX_GRIMER ; pokedex id
 db 80 ; base hp
 db 80 ; base attack
 db 50 ; base defense

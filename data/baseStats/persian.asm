@@ -1,4 +1,4 @@
-db DEX_PERSIAN ; pokedex id
+dw DEX_PERSIAN ; pokedex id
 db 65 ; base hp
 db 70 ; base attack
 db 60 ; base defense

@@ -1,4 +1,4 @@
-db DEX_RHYHORN ; pokedex id
+dw DEX_RHYHORN ; pokedex id
 db 80 ; base hp
 db 85 ; base attack
 db 95 ; base defense

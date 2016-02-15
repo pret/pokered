@@ -1,4 +1,4 @@
-db DEX_PIDGEOTTO ; pokedex id
+dw DEX_PIDGEOTTO ; pokedex id
 db 63 ; base hp
 db 60 ; base attack
 db 55 ; base defense

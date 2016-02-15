@@ -1,4 +1,4 @@
-db DEX_ARTICUNO ; pokedex id
+dw DEX_ARTICUNO ; pokedex id
 db 90 ; base hp
 db 85 ; base attack
 db 100 ; base defense

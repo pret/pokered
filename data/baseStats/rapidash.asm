@@ -1,4 +1,4 @@
-db DEX_RAPIDASH ; pokedex id
+dw DEX_RAPIDASH ; pokedex id
 db 65 ; base hp
 db 100 ; base attack
 db 70 ; base defense

@@ -1,4 +1,4 @@
-db DEX_CHANSEY ; pokedex id
+dw DEX_CHANSEY ; pokedex id
 db 250 ; base hp
 db 5 ; base attack
 db 5 ; base defense

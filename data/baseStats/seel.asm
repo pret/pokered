@@ -1,4 +1,4 @@
-db DEX_SEEL ; pokedex id
+dw DEX_SEEL ; pokedex id
 db 65 ; base hp
 db 45 ; base attack
 db 55 ; base defense

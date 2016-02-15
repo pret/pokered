@@ -1,4 +1,4 @@
-db DEX_ODDISH ; pokedex id
+dw DEX_ODDISH ; pokedex id
 db 45 ; base hp
 db 50 ; base attack
 db 55 ; base defense

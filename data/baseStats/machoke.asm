@@ -1,4 +1,4 @@
-db DEX_MACHOKE ; pokedex id
+dw DEX_MACHOKE ; pokedex id
 db 80 ; base hp
 db 100 ; base attack
 db 70 ; base defense

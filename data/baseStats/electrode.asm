@@ -1,4 +1,4 @@
-db DEX_ELECTRODE ; pokedex id
+dw DEX_ELECTRODE ; pokedex id
 db 60 ; base hp
 db 50 ; base attack
 db 70 ; base defense

@@ -607,23 +607,36 @@ INCLUDE "data/pokedex_entries.asm"
 
 PokedexToIndex: ; 40ff9 (10:4ff9)
 	; converts the Pokédex number at wd11e to an index
+	push de
 	push bc
 	push hl
 	ld a,[wd11e]
-	ld b,a
-	ld c,0
+	ld e, a
+	ld a,[wd11e + 1]
+	ld d, a
+	ld bc, 0
 	ld hl,PokedexOrder
 
 .loop ; go through the list until we find an entry with a matching dex number
-	inc c
-	ld a,[hli]
-	cp b
-	jr nz,.loop
-
-	ld a,c
-	ld [wd11e],a
+	inc bc
+	ld a, [hli]
+	cp e
+	jr nz,.firstByteWrong
+	ld a, [hli]
+	cp d
+	jr nz, .loop
+	jr .found
+.firstByteWrong
+	inc hl
+	jr .loop
+.found
+	ld a, c
+	ld [wd11e], a
+	ld a, b 
+	ld [wd11e + 1], a
 	pop hl
 	pop bc
+	pop de
 	ret
 
 IndexToPokedex: ; 41010 (10:5010)
@@ -631,13 +644,17 @@ IndexToPokedex: ; 41010 (10:5010)
 	push bc
 	push hl
 	ld a,[wd11e]
-	dec a
+	ld c, a
+	ld a,[wd11e + 1]
+	ld b, a
+	dec bc
 	ld hl,PokedexOrder
-	ld b,0
-	ld c,a
 	add hl,bc
-	ld a,[hl]
+	add hl,bc
+	ld a, [hli]
 	ld [wd11e],a
+	ld a, [hl]
+	ld [wd11e + 1],a
 	pop hl
 	pop bc
 	ret

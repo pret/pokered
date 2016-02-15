@@ -1,4 +1,4 @@
-db DEX_SNORLAX ; pokedex id
+dw DEX_SNORLAX ; pokedex id
 db 160 ; base hp
 db 110 ; base attack
 db 65 ; base defense

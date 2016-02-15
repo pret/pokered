@@ -1,4 +1,4 @@
-db DEX_RAICHU ; pokedex id
+dw DEX_RAICHU ; pokedex id
 db 60 ; base hp
 db 90 ; base attack
 db 55 ; base defense

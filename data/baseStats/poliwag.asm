@@ -1,4 +1,4 @@
-db DEX_POLIWAG ; pokedex id
+dw DEX_POLIWAG ; pokedex id
 db 40 ; base hp
 db 50 ; base attack
 db 40 ; base defense

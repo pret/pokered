@@ -1,4 +1,4 @@
-db DEX_KADABRA ; pokedex id
+dw DEX_KADABRA ; pokedex id
 db 40 ; base hp
 db 35 ; base attack
 db 30 ; base defense

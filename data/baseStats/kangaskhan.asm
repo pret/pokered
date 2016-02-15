@@ -1,4 +1,4 @@
-db DEX_KANGASKHAN ; pokedex id
+dw DEX_KANGASKHAN ; pokedex id
 db 105 ; base hp
 db 95 ; base attack
 db 80 ; base defense

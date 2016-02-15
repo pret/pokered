@@ -1,4 +1,4 @@
-db DEX_ZAPDOS ; pokedex id
+dw DEX_ZAPDOS ; pokedex id
 db 90 ; base hp
 db 90 ; base attack
 db 85 ; base defense

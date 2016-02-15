@@ -1,4 +1,4 @@
-db DEX_SANDSHREW ; pokedex id
+dw DEX_SANDSHREW ; pokedex id
 db 50 ; base hp
 db 75 ; base attack
 db 85 ; base defense

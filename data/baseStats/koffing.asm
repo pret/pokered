@@ -1,4 +1,4 @@
-db DEX_KOFFING ; pokedex id
+dw DEX_KOFFING ; pokedex id
 db 40 ; base hp
 db 65 ; base attack
 db 95 ; base defense

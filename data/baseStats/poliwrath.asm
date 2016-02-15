@@ -1,4 +1,4 @@
-db DEX_POLIWRATH ; pokedex id
+dw DEX_POLIWRATH ; pokedex id
 db 90 ; base hp
 db 85 ; base attack
 db 95 ; base defense

@@ -1,4 +1,4 @@
-db DEX_WEEZING ; pokedex id
+dw DEX_WEEZING ; pokedex id
 db 65 ; base hp
 db 90 ; base attack
 db 120 ; base defense

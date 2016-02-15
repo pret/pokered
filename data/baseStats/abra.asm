@@ -1,4 +1,4 @@
-db DEX_ABRA ; pokedex id
+dw DEX_ABRA ; pokedex id
 db 25 ; base hp
 db 20 ; base attack
 db 15 ; base defense

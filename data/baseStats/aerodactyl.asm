@@ -1,4 +1,4 @@
-db DEX_AERODACTYL ; pokedex id
+dw DEX_AERODACTYL ; pokedex id
 db 80 ; base hp
 db 105 ; base attack
 db 65 ; base defense

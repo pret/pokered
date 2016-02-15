@@ -1,4 +1,4 @@
-db DEX_PINSIR ; pokedex id
+dw DEX_PINSIR ; pokedex id
 db 65 ; base hp
 db 125 ; base attack
 db 100 ; base defense

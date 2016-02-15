@@ -1,4 +1,4 @@
-db DEX_VOLTORB ; pokedex id
+dw DEX_VOLTORB ; pokedex id
 db 40 ; base hp
 db 30 ; base attack
 db 50 ; base defense

@@ -1,4 +1,4 @@
-db DEX_RATICATE ; pokedex id
+dw DEX_RATICATE ; pokedex id
 db 55 ; base hp
 db 81 ; base attack
 db 60 ; base defense

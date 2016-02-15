@@ -1,4 +1,4 @@
-db DEX_MEWTWO ; pokedex id
+dw DEX_MEWTWO ; pokedex id
 db 106 ; base hp
 db 110 ; base attack
 db 90 ; base defense

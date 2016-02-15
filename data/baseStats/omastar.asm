@@ -1,4 +1,4 @@
-db DEX_OMASTAR ; pokedex id
+dw DEX_OMASTAR ; pokedex id
 db 70 ; base hp
 db 60 ; base attack
 db 125 ; base defense

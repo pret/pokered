@@ -1,4 +1,4 @@
-db DEX_PIKACHU ; pokedex id
+dw DEX_PIKACHU ; pokedex id
 db 35 ; base hp
 db 55 ; base attack
 db 30 ; base defense

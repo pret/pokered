@@ -1,4 +1,4 @@
-db DEX_OMANYTE ; pokedex id
+dw DEX_OMANYTE ; pokedex id
 db 35 ; base hp
 db 40 ; base attack
 db 100 ; base defense

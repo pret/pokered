@@ -1,4 +1,4 @@
-db DEX_BELLSPROUT ; pokedex id
+dw DEX_BELLSPROUT ; pokedex id
 db 50 ; base hp
 db 75 ; base attack
 db 35 ; base defense

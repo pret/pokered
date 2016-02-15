@@ -1,4 +1,4 @@
-db DEX_CHARMANDER ; pokedex id
+dw DEX_CHARMANDER ; pokedex id
 db 39 ; base hp
 db 52 ; base attack
 db 43 ; base defense

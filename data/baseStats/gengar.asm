@@ -1,4 +1,4 @@
-db DEX_GENGAR ; pokedex id
+dw DEX_GENGAR ; pokedex id
 db 60 ; base hp
 db 65 ; base attack
 db 60 ; base defense

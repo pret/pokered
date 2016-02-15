@@ -1,4 +1,4 @@
-db DEX_FLAREON ; pokedex id
+dw DEX_FLAREON ; pokedex id
 db 65 ; base hp
 db 130 ; base attack
 db 60 ; base defense

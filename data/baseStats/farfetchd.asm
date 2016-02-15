@@ -1,4 +1,4 @@
-db DEX_FARFETCHD ; pokedex id
+dw DEX_FARFETCHD ; pokedex id
 db 52 ; base hp
 db 65 ; base attack
 db 55 ; base defense

@@ -1,4 +1,4 @@
-db DEX_VENOMOTH ; pokedex id
+dw DEX_VENOMOTH ; pokedex id
 db 70 ; base hp
 db 65 ; base attack
 db 60 ; base defense

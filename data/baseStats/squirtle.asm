@@ -1,4 +1,4 @@
-db DEX_SQUIRTLE ; pokedex id
+dw DEX_SQUIRTLE ; pokedex id
 db 44 ; base hp
 db 48 ; base attack
 db 65 ; base defense

@@ -1,4 +1,4 @@
-db DEX_POLIWHIRL ; pokedex id
+dw DEX_POLIWHIRL ; pokedex id
 db 65 ; base hp
 db 65 ; base attack
 db 65 ; base defense

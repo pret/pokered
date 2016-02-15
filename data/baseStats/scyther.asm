@@ -1,4 +1,4 @@
-db DEX_SCYTHER ; pokedex id
+dw DEX_SCYTHER ; pokedex id
 db 70 ; base hp
 db 110 ; base attack
 db 80 ; base defense

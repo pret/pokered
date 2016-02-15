@@ -1,4 +1,4 @@
-db DEX_MACHOP ; pokedex id
+dw DEX_MACHOP ; pokedex id
 db 70 ; base hp
 db 80 ; base attack
 db 50 ; base defense

@@ -1,4 +1,4 @@
-db DEX_CATERPIE ; pokedex id
+dw DEX_CATERPIE ; pokedex id
 db 45 ; base hp
 db 30 ; base attack
 db 35 ; base defense

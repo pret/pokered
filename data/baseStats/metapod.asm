@@ -1,4 +1,4 @@
-db DEX_METAPOD ; pokedex id
+dw DEX_METAPOD ; pokedex id
 db 50 ; base hp
 db 20 ; base attack
 db 55 ; base defense

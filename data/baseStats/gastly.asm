@@ -1,4 +1,4 @@
-db DEX_GASTLY ; pokedex id
+dw DEX_GASTLY ; pokedex id
 db 30 ; base hp
 db 35 ; base attack
 db 30 ; base defense

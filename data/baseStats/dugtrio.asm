@@ -1,4 +1,4 @@
-db DEX_DUGTRIO ; pokedex id
+dw DEX_DUGTRIO ; pokedex id
 db 35 ; base hp
 db 80 ; base attack
 db 50 ; base defense

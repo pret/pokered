@@ -1,4 +1,4 @@
-db DEX_ONIX ; pokedex id
+dw DEX_ONIX ; pokedex id
 db 35 ; base hp
 db 45 ; base attack
 db 160 ; base defense

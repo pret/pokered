@@ -1,4 +1,4 @@
-db DEX_RATTATA ; pokedex id
+dw DEX_RATTATA ; pokedex id
 db 30 ; base hp
 db 56 ; base attack
 db 35 ; base defense

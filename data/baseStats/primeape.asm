@@ -1,4 +1,4 @@
-db DEX_PRIMEAPE ; pokedex id
+dw DEX_PRIMEAPE ; pokedex id
 db 65 ; base hp
 db 105 ; base attack
 db 60 ; base defense

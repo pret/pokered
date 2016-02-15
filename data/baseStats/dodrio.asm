@@ -1,4 +1,4 @@
-db DEX_DODRIO ; pokedex id
+dw DEX_DODRIO ; pokedex id
 db 60 ; base hp
 db 110 ; base attack
 db 70 ; base defense

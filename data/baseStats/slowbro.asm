@@ -1,4 +1,4 @@
-db DEX_SLOWBRO ; pokedex id
+dw DEX_SLOWBRO ; pokedex id
 db 95 ; base hp
 db 75 ; base attack
 db 110 ; base defense

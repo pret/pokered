@@ -1,5 +1,5 @@
 MonBaseStats:
-db DEX_BULBASAUR ; pokedex id
+dw DEX_BULBASAUR ; pokedex id
 db 45 ; base hp
 db 49 ; base attack
 db 49 ; base defense

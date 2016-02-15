@@ -1,4 +1,4 @@
-db DEX_CLEFAIRY ; pokedex id
+dw DEX_CLEFAIRY ; pokedex id
 db 70 ; base hp
 db 45 ; base attack
 db 48 ; base defense

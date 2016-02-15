@@ -1,4 +1,4 @@
-db DEX_GOLDEEN ; pokedex id
+dw DEX_GOLDEEN ; pokedex id
 db 45 ; base hp
 db 67 ; base attack
 db 60 ; base defense

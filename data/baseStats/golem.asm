@@ -1,4 +1,4 @@
-db DEX_GOLEM ; pokedex id
+dw DEX_GOLEM ; pokedex id
 db 80 ; base hp
 db 110 ; base attack
 db 130 ; base defense

@@ -1,4 +1,4 @@
-db DEX_JOLTEON ; pokedex id
+dw DEX_JOLTEON ; pokedex id
 db 65 ; base hp
 db 65 ; base attack
 db 60 ; base defense

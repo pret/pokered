@@ -1,4 +1,4 @@
-db DEX_GOLDUCK ; pokedex id
+dw DEX_GOLDUCK ; pokedex id
 db 80 ; base hp
 db 82 ; base attack
 db 78 ; base defense

@@ -1,4 +1,4 @@
-db DEX_ZUBAT ; pokedex id
+dw DEX_ZUBAT ; pokedex id
 db 40 ; base hp
 db 45 ; base attack
 db 35 ; base defense

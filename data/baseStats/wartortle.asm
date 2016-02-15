@@ -1,4 +1,4 @@
-db DEX_WARTORTLE ; pokedex id
+dw DEX_WARTORTLE ; pokedex id
 db 59 ; base hp
 db 63 ; base attack
 db 80 ; base defense

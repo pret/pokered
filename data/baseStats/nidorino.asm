@@ -1,4 +1,4 @@
-db DEX_NIDORINO ; pokedex id
+dw DEX_NIDORINO ; pokedex id
 db 61 ; base hp
 db 72 ; base attack
 db 57 ; base defense

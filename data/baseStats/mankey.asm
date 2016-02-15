@@ -1,4 +1,4 @@
-db DEX_MANKEY ; pokedex id
+dw DEX_MANKEY ; pokedex id
 db 40 ; base hp
 db 80 ; base attack
 db 35 ; base defense

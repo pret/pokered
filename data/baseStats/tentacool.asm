@@ -1,4 +1,4 @@
-db DEX_TENTACOOL ; pokedex id
+dw DEX_TENTACOOL ; pokedex id
 db 40 ; base hp
 db 40 ; base attack
 db 35 ; base defense

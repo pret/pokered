@@ -1,4 +1,4 @@
-db DEX_VILEPLUME ; pokedex id
+dw DEX_VILEPLUME ; pokedex id
 db 75 ; base hp
 db 80 ; base attack
 db 85 ; base defense

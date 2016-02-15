@@ -1,4 +1,4 @@
-db DEX_EKANS ; pokedex id
+dw DEX_EKANS ; pokedex id
 db 35 ; base hp
 db 60 ; base attack
 db 44 ; base defense

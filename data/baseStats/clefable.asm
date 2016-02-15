@@ -1,4 +1,4 @@
-db DEX_CLEFABLE ; pokedex id
+dw DEX_CLEFABLE ; pokedex id
 db 95 ; base hp
 db 70 ; base attack
 db 73 ; base defense

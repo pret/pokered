@@ -1,4 +1,4 @@
-db DEX_VULPIX ; pokedex id
+dw DEX_VULPIX ; pokedex id
 db 38 ; base hp
 db 41 ; base attack
 db 40 ; base defense

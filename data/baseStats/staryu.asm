@@ -1,4 +1,4 @@
-db DEX_STARYU ; pokedex id
+dw DEX_STARYU ; pokedex id
 db 30 ; base hp
 db 45 ; base attack
 db 55 ; base defense

@@ -1,4 +1,4 @@
-db DEX_GRAVELER ; pokedex id
+dw DEX_GRAVELER ; pokedex id
 db 55 ; base hp
 db 95 ; base attack
 db 115 ; base defense

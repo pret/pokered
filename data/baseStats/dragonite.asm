@@ -1,4 +1,4 @@
-db DEX_DRAGONITE ; pokedex id
+dw DEX_DRAGONITE ; pokedex id
 db 91 ; base hp
 db 134 ; base attack
 db 95 ; base defense
