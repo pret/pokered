@@ -5,9 +5,9 @@ flag_array: MACRO
 	ds ((\1) + 7) / 8
 ENDM
 
-box_struct_length EQU 25 + NUM_MOVES * 2
+box_struct_length EQU 26 + NUM_MOVES * 2
 box_struct: MACRO
-\1Species::    db
+\1Species::    dw
 \1HP::         dw
 \1BoxLevel::   db
 \1Status::     db
@@ -39,7 +39,7 @@ party_struct: MACRO
 ENDM
 
 battle_struct: MACRO
-\1Species::    db
+\1Species::    dw
 \1HP::         dw
 \1BoxLevel::   db
 \1Status::     db
@@ -514,10 +514,10 @@ wAnimationType:: ; cc5b
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
 
 wNPCMovementDirections:: ; cc5b
-	ds 1
+	ds 2
 
 wDexRatingNumMonsOwned:: ; cc5c
-	ds 1
+	ds 2
 
 wDexRatingText:: ; cc5d
 	ds 1
@@ -670,7 +670,7 @@ wEnemyBideAccumulatedDamage:: ; cd05
 wInGameTradeGiveMonSpecies:: ; cd0f
 
 wPlayerMonUnmodifiedLevel:: ; cd0f
-	ds 1
+	ds 2
 
 wInGameTradeTextPointerTablePointer:: ; cd10
 
@@ -754,7 +754,7 @@ wEnemyMonEvasionMod:: ; cd33
 	ds 1
 
 wInGameTradeReceiveMonSpecies::
-	ds 1
+	ds 2
 
 	ds 2
 
@@ -893,7 +893,7 @@ wWhichTrade:: ; cd3d
 wTrainerSpriteOffset:: ; cd3d
 
 wUnusedCD3D:: ; cd3d
-	ds 1
+	ds 2
 
 wHUDPokeballGfxOffsetX:: ; cd3e
 ; difference in X between the next ball and the current one
@@ -1128,15 +1128,15 @@ wSymmetricSpriteOAMAttributes:: ; cd5c
 	ds 1
 
 wMonPartySpriteSpecies:: ; cd5d
-	ds 1
+	ds 2
 
 wLeftGBMonSpecies:: ; cd5e
 ; in the trade animation, the mon that leaves the left gameboy
-	ds 1
+	ds 2
 
 wRightGBMonSpecies:: ; cd5f
 ; in the trade animation, the mon that leaves the right gameboy
-	ds 1
+	ds 2
 
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
@@ -1209,7 +1209,7 @@ wLearningMovesFromDayCare:: ; cee9
 wChangeMonPicEnemyTurnSpecies:: ; cee9
 
 wHPBarMaxHP:: ; cee9
-	ds 1
+	ds 2
 
 wNamingScreenSubmitName:: ; ceea
 ; non-zero when the player has chosen to submit the name
@@ -1217,7 +1217,7 @@ wNamingScreenSubmitName:: ; ceea
 wChangeMonPicPlayerTurnSpecies:: ; ceea
 
 wEvoNewSpecies:: ; ceea
-	ds 1
+	ds 2
 
 wAlphabetCase:: ; ceeb
 ; 0 = upper case
@@ -1334,7 +1334,7 @@ wPlayerHPBarColor:: ; cf1d
 
 wWholeScreenPaletteMonSpecies:: ; cf1d
 ; species of the mon whose palette is used for the whole screen
-	ds 1
+	ds 2
 
 wEnemyHPBarColor:: ; cf1e
 	ds 1
@@ -1511,9 +1511,9 @@ wPlayerMoveMaxPP:: ; cfd7
 
 
 wEnemyMonSpecies2:: ; cfd8
-	ds 1
+	ds 2
 wBattleMonSpecies2:: ; cfd9
-	ds 1
+	ds 2
 
 wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
@@ -1528,7 +1528,7 @@ wEnemyMon:: ; cfe5
 ; Until this is fixed, this struct will have
 ; to be declared manually.
 
-wEnemyMonSpecies::   db
+wEnemyMonSpecies::   dw
 wEnemyMonHP::        dw
 wEnemyMonPartyPos::
 wEnemyMonBoxLevel::  db
@@ -1538,6 +1538,7 @@ wEnemyMonType1::     db
 wEnemyMonType2::     db
 wEnemyMonCatchRate_NotReferenced:: db
 wEnemyMonMoves::     ds NUM_MOVES
+SECTION "WRAM Bank 1", WRAMX, BANK[1]
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
 wEnemyMonMaxHP::     dw
@@ -1545,10 +1546,7 @@ wEnemyMonAttack::    dw
 wEnemyMonDefense::   dw
 wEnemyMonSpeed::     dw
 wEnemyMonSpecial::   dw
-wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
-SECTION "WRAM Bank 1", WRAMX, BANK[1]
-                     ds 2 ; NUM_MOVES - 2
-
+wEnemyMonPP::        ds NUM_MOVES
 wEnemyMonBaseStats:: ds 5
 wEnemyMonCatchRate:: ds 1
 wEnemyMonBaseExp:: ds 1
@@ -1971,7 +1969,7 @@ wSpriteDecodeTable1Ptr:: ; d0b3
 ; pointer to differential decoding table (assuming initial value 1)
 	ds 2
 
-wd0b5:: ds 1 ; used as a temp storage area for Pokemon Species, and other Pokemon/Battle related things
+wd0b5:: ds 2 ; used as a temp storage area for Pokemon Species, and other Pokemon/Battle related things
 
 wNameListType:: ; d0b6
 	ds 1
@@ -1984,7 +1982,7 @@ wMonHeader:: ; d0b8
 wMonHIndex:: ; d0b8
 ; In the ROM base stats data stucture, this is the dex number, but it is
 ; overwritten with the internal index number after the header is copied to WRAM.
-	ds 1
+	ds 2
 
 wMonHBaseStats:: ; d0b9
 wMonHBaseHP:: ; d0b9
@@ -2064,7 +2062,7 @@ wInitListType:: ; d11b
 
 wCapturedMonSpecies:: ; d11c
 ; 0 if no mon was captured
-	ds 1
+	ds 2
 
 wFirstMonsNotOutYet:: ; d11d
 ; Non-zero when the first player mon and enemy mon haven't been sent out yet.
@@ -2199,11 +2197,11 @@ wNumberOfNoRandomBattleStepsLeft:: ; d13c
 	ds 1
 
 wPrize1:: ; d13d
-	ds 1
+	ds 2
 wPrize2:: ; d13e
-	ds 1
+	ds 2
 wPrize3:: ; d13f
-	ds 1
+	ds 2
 
 	ds 1
 
@@ -2253,7 +2251,7 @@ wPlayerName:: ; d158
 wPartyDataStart::
 
 wPartyCount::   ds 1 ; d163
-wPartySpecies:: ds PARTY_LENGTH ; d164
+wPartySpecies:: ds (PARTY_LENGTH * 2) ; d164 2-bytes per mon in party
 wPartyEnd::     ds 1 ; d16a
 
 wPartyMons::
@@ -2878,24 +2876,24 @@ wFossilItem:: ; d70f
 
 wFossilMon:: ; d710
 ; mon that will result from the item
-	ds 1
+	ds 2
 
 	ds 2
 
 wEnemyMonOrTrainerClass:: ; d713
-; trainer classes start at 200
-	ds 1
+; trainer classes start at 200 (not anymore!)
+	ds 2
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714
 	ds 1
 
 wRivalStarter:: ; d715
-	ds 1
+	ds 2
 
 	ds 1
 
 wPlayerStarter:: ; d717
-	ds 1
+	ds 2
 
 wBoulderSpriteIndex:: ; d718
 ; sprite index of the boulder the player is trying to push
@@ -3064,13 +3062,13 @@ wGrassRate:: ; d887
 wGrassMons:: ; d888
 	;ds 20
 
-	ds 11
+	ds 31
 ; Overload wGrassMons
 wSerialEnemyDataBlock:: ; d893
 	ds 9
 
 wEnemyPartyCount:: ds 1     ; d89c
-wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
+wEnemyPartyMons::  ds (PARTY_LENGTH * 2) + 1 ; d89d
 
 ; Overload enemy party data
 wWaterRate:: db ; d8a4
