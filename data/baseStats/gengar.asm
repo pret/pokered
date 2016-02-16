@@ -25,4 +25,4 @@ db 3 ; growth rate
 	tmlearn 34,35,36,40
 	tmlearn 42,44,46,47
 	tmlearn 50,54
-db 0 ; padding
+db Bank(GengarPicFront) ; padding

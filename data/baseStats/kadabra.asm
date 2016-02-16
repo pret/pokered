@@ -30,4 +30,4 @@ db 3 ; growth rate
 	tmlearn 33,34,35,40
 	tmlearn 44,45,46
 	tmlearn 49,50,55
-db 0 ; padding
+db Bank(KadabraPicFront) ; padding

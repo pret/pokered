@@ -25,4 +25,4 @@ db 3 ; growth rate
 	tmlearn 33,34,40
 	tmlearn 44
 	tmlearn 50,53,54
-db 0 ; padding
+db Bank(WartortlePicFront) ; padding

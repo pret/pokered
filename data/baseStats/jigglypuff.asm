@@ -25,4 +25,4 @@ db 4 ; growth rate
 	tmlearn 33,34,38,40
 	tmlearn 44,45,46
 	tmlearn 49,50,54,55
-db 0 ; padding
+db Bank(JigglypuffPicFront) ; padding

@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 34,39
 	tmlearn 43,44
 	tmlearn 50,52
-db 0 ; padding
+db Bank(FearowPicFront) ; padding

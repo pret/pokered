@@ -25,4 +25,4 @@ db 3 ; growth rate
 	tmlearn 34,35,40
 	tmlearn 44,46
 	tmlearn 50,53,54
-db 0 ; padding
+db Bank(PoliwrathPicFront) ; padding

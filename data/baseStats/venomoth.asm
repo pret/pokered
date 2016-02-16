@@ -30,4 +30,4 @@ db 0 ; growth rate
 	tmlearn 33,34,39
 	tmlearn 44,46
 	tmlearn 50
-db 0 ; padding
+db Bank(VenomothPicFront) ; padding

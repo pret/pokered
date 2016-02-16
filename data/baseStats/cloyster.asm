@@ -25,4 +25,4 @@ db 5 ; growth rate
 	tmlearn 33,34,36,39
 	tmlearn 44,47
 	tmlearn 49,50,53
-db 0 ; padding
+db Bank(CloysterPicFront) ; padding

@@ -29,4 +29,4 @@ IF DEF(_YELLOW)
 ELSE
 	tmlearn 50
 ENDC
-db 0 ; padding
+db Bank(ButterfreePicFront) ; padding

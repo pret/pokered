@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 34,35,38,40
 	tmlearn 44,46
 	tmlearn 50,54
-db 0 ; padding
+db Bank(MagmarPicFront) ; padding

@@ -29,4 +29,4 @@ db 0 ; growth rate
 	tmlearn 33,34,39,40
 	tmlearn 44,45
 	tmlearn 50,55
-db 0 ; padding
+db Bank(JolteonPicFront) ; padding

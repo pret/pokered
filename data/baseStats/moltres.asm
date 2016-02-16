@@ -25,4 +25,4 @@ db 5 ; growth rate
 	tmlearn 33,34,38,39
 	tmlearn 43,44
 	tmlearn 50,52
-db 0 ; padding
+db Bank(MoltresPicFront) ; padding

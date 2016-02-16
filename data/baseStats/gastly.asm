@@ -25,4 +25,4 @@ db 3 ; growth rate
 	tmlearn 34,36
 	tmlearn 42,44,46,47
 	tmlearn 50
-db 0 ; padding
+db Bank(GastlyPicFront) ; padding

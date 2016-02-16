@@ -25,4 +25,4 @@ db 5 ; growth rate
 	tmlearn 34
 	tmlearn 44
 	tmlearn 50,51,54
-db 0 ; padding
+db Bank(PinsirPicFront) ; padding

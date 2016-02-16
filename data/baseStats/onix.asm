@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 34,36,40
 	tmlearn 44,47,48
 	tmlearn 50,54
-db 0 ; padding
+db Bank(OnixPicFront) ; padding

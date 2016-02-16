@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 33,34,35,39,40
 	tmlearn 44,45,46
 	tmlearn 50,54,55
-db 0 ; padding
+db Bank(ElectabuzzPicFront) ; padding

@@ -273,21 +273,43 @@ LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
 LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	push hl
 	ld a, [wd11e]
-	push af
+	ld c, a
+	ld a, [wd11e + 1]
+	ld b, a
+	push bc
 	ld a, [wcf91]
 	ld [wd11e], a
+	ld a, [wcf91 + 1]
+	ld [wd11e + 1], a
 	predef IndexToPokedex
 	ld hl, wd11e
+	ld a, [hli]
+	ld e, a
 	ld a, [hl]
+	ld d, a
 	pop bc
 	ld [hl], b
-	and a
+	dec hl
+	ld [hl], c
 	pop hl
+	; de = mon id
+	ld a, e
+	and a
+	jr nz, .notZero
+	ld a, d
+	and a
 	jr z, .invalidDexNumber ; dex #0 invalid
-	cp NUM_POKEMON + 1
+.notZero
+	ld a, d
+	cp ((NUM_POKEMON + 1) >> 8)
+	jr c, .validDexNumber
+	ld a, e
+	cp ((NUM_POKEMON + 1) & $FF)
 	jr c, .validDexNumber   ; dex >#151 invalid
 .invalidDexNumber
-	ld a, RHYDON ; $1
+	ld a, (RHYDON >> 8) ; $0
+	ld [wcf91 + 1], a
+	ld a, (RHYDON & $FF) ; $1
 	ld [wcf91], a
 	ret
 .validDexNumber
@@ -553,7 +575,7 @@ GetwMoves:: ; 152e (0:152e)
 
 ; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
-; [wd0b5] = pokemon ID
+; [wd0b5] = 2-byte pokemon ID
 GetMonHeader:: ; 1537 (0:1537)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -567,20 +589,32 @@ GetMonHeader:: ; 1537 (0:1537)
 	push af
 	ld a,[wd0b5]
 	ld [wd11e],a
+	ld a,[wd0b5 + 1]
+	ld [wd11e + 1],a
+	ld de, FOSSIL_KABUTOPS
+	call LoadBCWith_wd0b5
+	call CompareTwoBytes
 	ld de,FossilKabutopsPic
 	ld b,$66 ; size of Kabutops fossil and Ghost sprites
-	cp a,FOSSIL_KABUTOPS ; Kabutops fossil
 	jr z,.specialID
+	ld de, MON_GHOST
+	call LoadBCWith_wd0b5
+	call CompareTwoBytes
 	ld de,GhostPic
-	cp a,MON_GHOST ; Ghost
 	jr z,.specialID
+	ld de, FOSSIL_AERODACTYL
+	call LoadBCWith_wd0b5
+	call CompareTwoBytes
 	ld de,FossilAerodactylPic
 	ld b,$77 ; size of Aerodactyl fossil sprite
-	cp a,FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z,.specialID
-	cp a,MEW
+	ld de, MEW
+	call LoadBCWith_wd0b5
+	call CompareTwoBytes
 	jr z,.mew
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
+	; TODO: have to completely re-do how base stats are situated in the ROM.
+	; probably want to just have BANK, Address pointers for each pokemon.
 	ld a,[wd11e]
 	dec a
 	ld bc,MonBaseStatsEnd - MonBaseStats
@@ -605,8 +639,10 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld a,BANK(MewBaseStats)
 	call FarCopyData
 .done
-	ld a,[wd0b5]
-	ld [wMonHIndex],a
+	ld a, [wd0b5]
+	ld [wMonHIndex], a
+	ld a, [wd0b5 + 1]
+	ld [wMonHIndex + 1], a
 	pop af
 	ld [wd11e],a
 	pop hl
@@ -724,41 +760,7 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
 	ld a,[hl]
 	ld [wSpriteInputPtr+1],a
-; define (by index number) the bank that a pokemon's image is in
-; index = Mew, bank 1
-; index = Kabutops fossil, bank $B
-;	index < $1F, bank 9
-; $1F ≤ index < $4A, bank $A
-; $4A ≤ index < $74, bank $B
-; $74 ≤ index < $99, bank $C
-; $99 ≤ index,       bank $D
-	ld a,[wcf91] ; XXX name for this ram location
-	ld b,a
-	cp MEW
-	ld a,BANK(MewPicFront)
-	jr z,.GotBank
-	ld a,b
-	cp FOSSIL_KABUTOPS
-	ld a,BANK(FossilKabutopsPic)
-	jr z,.GotBank
-	ld a,b
-	cp TANGELA + 1
-	ld a,BANK(TangelaPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp MOLTRES + 1
-	ld a,BANK(MoltresPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp BEEDRILL + 2
-	ld a,BANK(BeedrillPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp STARMIE + 1
-	ld a,BANK(StarmiePicFront)
-	jr c,.GotBank
-	ld a,BANK(VictreebelPicFront)
-.GotBank
+	ld a, [wMonSpritesBank]
 	jp UncompressSpriteData
 
 ; de: destination location
@@ -4722,6 +4724,13 @@ TextPredefs::
 	add_tx_pre BookOrSculptureText                  ; 40
 	add_tx_pre ElevatorText                         ; 41
 	add_tx_pre PokemonStuffText                     ; 42
+
+LoadBCWith_wd0b5::
+	ld a,[wd0b5]
+	ld c, a
+	ld a,[wd0b5 + 1]
+	ld b, a
+	ret
 
 CompareTwoBytes::
 ; Input: bc and de

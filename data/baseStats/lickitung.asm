@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 34,38,40
 	tmlearn 44
 	tmlearn 50,51,53,54
-db 0 ; padding
+db Bank(LickitungPicFront) ; padding

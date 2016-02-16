@@ -25,4 +25,4 @@ db 5 ; growth rate
 	tmlearn 33,34,36,37
 	tmlearn 44,46,47
 	tmlearn 50
-db 0 ; padding
+db Bank(ExeggcutePicFront) ; padding

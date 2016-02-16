@@ -25,4 +25,4 @@ db 0 ; growth rate
 	tmlearn 33,34,40
 	tmlearn 43,44
 	tmlearn 49,50,52
-db 0 ; padding
+db Bank(DodrioPicFront) ; padding

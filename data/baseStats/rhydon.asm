@@ -25,4 +25,4 @@ db 5 ; growth rate
 	tmlearn 34,38,40
 	tmlearn 44,48
 	tmlearn 50,53,54
-db 0 ; padding
+db Bank(RhydonPicFront) ; padding

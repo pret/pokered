@@ -26,5 +26,5 @@ db 3 ; growth rate
 	tmlearn 33,34
 	tmlearn 44
 	tmlearn 50,51
-db 0 ; padding
+db Bank(BulbasaurPicFront) ; padding
 MonBaseStatsEnd:
