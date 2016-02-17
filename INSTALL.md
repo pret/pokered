@@ -1,7 +1,6 @@
 # Linux
 
-	sudo apt-get install make gcc bison git python python-pip
-	sudo pip install pypng
+	sudo apt-get install make gcc bison git python
 
 	git clone https://github.com/bentley/rgbds
 	cd rgbds
@@ -26,7 +25,6 @@ To build them individually:
 In **Terminal**, run:
 
 	xcode-select --install
-	sudo easy_install pypng
 
 	git clone https://github.com/bentley/rgbds
 	cd rgbds
@@ -49,9 +47,6 @@ Then get the most recent version of [**rgbds**](https://github.com/bentley/rgbds
 Extract the archive and put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
 
 In the **Cygwin terminal**:
-
-	lynx -source bootstrap.pypa.io/get-pip.py | python
-	pip install pypng
 
 	git clone --recursive https://github.com/pret/pokered
 	cd pokered
