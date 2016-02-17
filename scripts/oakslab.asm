@@ -928,6 +928,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	ld a, [wcf91]
 	ld [wPlayerStarter], a
 	ld [wd11e], a
+	ld a, [wcf91 + 1]
 	ld [wPlayerStarter + 1], a
 	ld [wd11e + 1], a
 	call GetMonName
