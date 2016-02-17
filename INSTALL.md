@@ -43,13 +43,12 @@ In **Terminal**, run:
 
 To build on Windows, use [**Cygwin**](http://cygwin.com/install.html). Use the default settings.
 
+In the installer, select the following packages: `make` `git` `python` `gettext`
+
 Then get the most recent version of [**rgbds**](https://github.com/bentley/rgbds/releases/).
 Extract the archive and put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
 
 In the **Cygwin terminal**:
-
-	install $(lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg) /bin
-	apt-cyg install make git python gettext
 
 	lynx -source bootstrap.pypa.io/get-pip.py | python
 	pip install pypng
