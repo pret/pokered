@@ -15,6 +15,8 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld [wEnemyBattleStatus3], a
 	ld a, [wcf91]
 	ld [wEnemyMonSpecies2], a
+	ld a, [wcf91 + 1]
+	ld [wEnemyMonSpecies2 + 1], a
 	callab LoadEnemyMonData
 	call SetPokedexOwnedFlag
 	callab SendNewMonToBox
@@ -53,17 +55,26 @@ _GivePokemon: ; 4fda5 (13:7da5)
 
 SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld a, [wcf91]
-	push af
+	ld e, a
+	ld a, [wcf91 + 1]
+	ld d, a
+	push de
+	ld [wd11e + 1], a
+	ld a, e
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
-	dec a
-	ld c, a
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld hl, wPokedexOwned
-	ld b, FLAG_SET
-	predef FlagActionPredef
-	pop af
+	call Set16BitFlag_Bank13
+	pop de
+	ld a, e
 	ld [wd11e], a
+	ld a, d
+	ld [wd11e + 1], a
 	call GetMonName
 	ld hl, GotMonText
 	jp PrintText
@@ -80,3 +91,62 @@ SetToBoxText: ; 4fe3f (13:7e3f)
 BoxIsFullText: ; 4fe44 (13:7e44)
 	TX_FAR _BoxIsFullText
 	db "@"
+
+Set16BitFlag_Bank13:
+; Input: de = flag index
+;        hl = flag data
+	ld bc, $20
+	ld a, d
+.hi
+	and a
+	jr z, .next
+	add hl, bc
+	dec a
+	jr .hi
+.next
+	ld a, e
+	srl a
+	srl a
+	srl a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, e
+	and a, %00000111
+	cp 7
+	jr nz, .check6
+	set 7, [hl]
+	ret
+.check6
+	cp 6
+	jr nz, .check5
+	set 6, [hl]
+	ret
+.check5
+	cp 5
+	jr nz, .check4
+	set 5, [hl]
+	ret
+.check4
+	cp 4
+	jr nz, .check3
+	set 3, [hl]
+	ret
+.check3
+	cp 3
+	jr nz, .check2
+	set 3, [hl]
+	ret
+.check2
+	cp 2
+	jr nz, .check1
+	set 2, [hl]
+	ret
+.check1
+	cp 1
+	jr nz, .zero
+	set 1, [hl]
+	ret
+.zero
+	set 0, [hl]
+	ret

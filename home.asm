@@ -1904,12 +1904,25 @@ GetMonName:: ; 2f9e (0:2f9e)
 	ld a,BANK(MonsterNames)
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
-	ld a,[wd11e]
-	dec a
+	ld a, [wd11e]
+	ld c, a
+	ld a, [wd11e + 1]
+	ld b, a
+	; bc = mon id
+	dec bc
 	ld hl,MonsterNames
-	ld c,10
-	ld b,0
-	call AddNTimes
+	ld de, 10
+.loop
+	xor a
+	or b
+	jr nz, .notZero
+	or c
+	jr z, .done
+.notZero
+	add hl, de
+	dec bc
+	jr .loop
+.done
 	ld de,wcd6d
 	push de
 	ld bc,10
@@ -4563,8 +4576,10 @@ GiveItem::
 	ret
 
 GivePokemon::
-; Give the player monster b at level c.
-	ld a, b
+; Give the player monster de at level c.
+	ld a, d
+	ld [wcf91 + 1], a
+	ld a, e
 	ld [wcf91], a
 	ld a, c
 	ld [wCurEnemyLVL], a

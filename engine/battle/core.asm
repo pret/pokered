@@ -6331,6 +6331,8 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld [de], a
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
+	ld a, [wEnemyMonSpecies2 + 1]
+	ld [wd11e + 1], a
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wEnemyMonNick

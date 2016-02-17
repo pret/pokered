@@ -115,8 +115,10 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 .copyStats
 ; original (unmodified) stats and stat mods
 	pop hl
-	ld a, [hl]
+	ld a, [hli]
 	ld [wd11e], a
+	ld a, [hl]
+	ld [wd11e + 1], a
 	call GetMonName
 	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wPlayerMonUnmodifiedAttack

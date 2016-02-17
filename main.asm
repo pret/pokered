@@ -3570,12 +3570,16 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld [de], a
 	ld a, [de]
 	ld [hNewPartyLength], a
+	sla a
 	add e
 	ld e, a
 	jr nc, .noCarry
 	inc d
 .noCarry
 	ld a, [wcf91]
+	ld [de], a
+	inc de
+	ld a, [wcf91 + 1]
 	ld [de], a ; write species of new mon in party list
 	inc de
 	ld a, $ff ; terminator
@@ -3620,8 +3624,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	push hl
 	ld a, [wcf91]
 	ld [wd0b5], a
+	ld a, [wcf91 + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld hl, wMonHeader
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a ; species
 	inc de
@@ -3636,26 +3645,29 @@ _AddPartyMon: ; f2e5 (3:72e5)
 ; If the mon is being added to the player's party, update the pokedex.
 	ld a, [wcf91]
 	ld [wd11e], a
+	ld a, [wcf91 + 1]
+	ld [wd11e + 1], a
 	push de
 	predef IndexToPokedex
 	pop de
 	ld a, [wd11e]
-	dec a
-	ld c, a
-	ld b, FLAG_TEST
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld hl, wPokedexOwned
-	call FlagAction
+	call Test16BitFlag
 	ld a, c ; whether the mon was already flagged as owned
 	ld [wUnusedD153], a ; not read
 	ld a, [wd11e]
-	dec a
-	ld c, a
-	ld b, FLAG_SET
-	push bc
-	call FlagAction
-	pop bc
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
+	ld hl, wPokedexOwned
+	call Set16BitFlag
 	ld hl, wPokedexSeen
-	call FlagAction
+	call Set16BitFlag
 
 	pop hl
 	push hl
@@ -3842,7 +3854,10 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld c, a
 	ld b, $0
 	add hl, bc
+	add hl, bc
 	ld a, [wcf91]
+	ld [hli], a
+	ld a, [wcf91 + 1]
 	ld [hli], a      ; add mon as last list entry
 	ld [hl], $ff     ; write new sentinel
 	ld hl, wPartyMons
@@ -3878,17 +3893,18 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
+	ld a, [wcf91 + 1]
+	ld [wd11e + 1], a
 	predef IndexToPokedex
 	ld a, [wd11e]
-	dec a
-	ld c, a
-	ld b, FLAG_SET
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld hl, wPokedexOwned
-	push bc
-	call FlagAction ; add to owned pokemon
-	pop bc
+	call Set16BitFlag ; add to owned pokemon
 	ld hl, wPokedexSeen
-	call FlagAction ; add to seen pokemon
+	call Set16BitFlag ; add to seen pokemon
 	and a
 	ret                  ; return success
 
@@ -3920,12 +3936,22 @@ _MoveMon: ; f51e (3:751e)
 	ld c, a
 	ld b, 0
 	add hl, bc
+	add hl, bc
 	ld a, [wMoveMonType]
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
+	ld c, a
+	ld a, [wDayCareMon + 1]
+	ld b, a
 	jr z, .asm_f556
 	ld a, [wcf91]
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
 .asm_f556
+	ld a, c
+	ld [hli], a
+	ld a, b
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
 	ld a, [wMoveMonType]
@@ -4737,6 +4763,130 @@ NPCMovementDirectionsToJoypadMasksTable: ; f9d2 (3:79d2)
 INCLUDE "engine/hp_bar.asm"
 
 INCLUDE "engine/hidden_object_functions3.asm"
+
+Set16BitFlag:
+; Input: de = flag index
+;        hl = flag data
+	ld bc, $20
+	ld a, d
+.hi
+	and a
+	jr z, .next
+	add hl, bc
+	dec a
+	jr .hi
+.next
+	ld a, e
+	srl a
+	srl a
+	srl a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, e
+	and a, %00000111
+	cp 7
+	jr nz, .check6
+	set 7, [hl]
+	ret
+.check6
+	cp 6
+	jr nz, .check5
+	set 6, [hl]
+	ret
+.check5
+	cp 5
+	jr nz, .check4
+	set 5, [hl]
+	ret
+.check4
+	cp 4
+	jr nz, .check3
+	set 3, [hl]
+	ret
+.check3
+	cp 3
+	jr nz, .check2
+	set 3, [hl]
+	ret
+.check2
+	cp 2
+	jr nz, .check1
+	set 2, [hl]
+	ret
+.check1
+	cp 1
+	jr nz, .zero
+	set 1, [hl]
+	ret
+.zero
+	set 0, [hl]
+	ret
+
+Test16BitFlag:
+; Input: de = flag index
+;        hl = flag data
+	ld bc, $20
+	ld a, d
+.hi
+	and a
+	jr z, .next
+	add hl, bc
+	dec a
+	jr .hi
+.next
+	ld a, e
+	srl a
+	srl a
+	srl a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, e
+	and a, %00000111
+	cp 7
+	jr nz, .check6
+	bit 7, [hl]
+	jr .end
+.check6
+	cp 6
+	jr nz, .check5
+	bit 6, [hl]
+	jr .end
+.check5
+	cp 5
+	jr nz, .check4
+	bit 5, [hl]
+	jr .end
+.check4
+	cp 4
+	jr nz, .check3
+	bit 3, [hl]
+	jr .end
+.check3
+	cp 3
+	jr nz, .check2
+	bit 3, [hl]
+	jr .end
+.check2
+	cp 2
+	jr nz, .check1
+	bit 2, [hl]
+	jr .end
+.check1
+	cp 1
+	jr nz, .zero
+	bit 1, [hl]
+	jr .end
+.zero
+	bit 0, [hl]
+.end
+	jr z, .flagNotSet
+	ld c, 1
+	ret
+.flagNotSet
+	ld c, 0
+	ret
 
 
 SECTION "NPC Sprites 1", ROMX, BANK[NPC_SPRITES_1]
@@ -5925,8 +6075,6 @@ INCLUDE "scripts/colosseum.asm"
 INCLUDE "data/mapObjects/colosseum.asm"
 ColosseumBlocks: INCBIN "maps/colosseum.blk"
 
-INCLUDE "engine/give_pokemon.asm"
-
 INCLUDE "engine/predefs.asm"
 
 
@@ -6694,6 +6842,8 @@ AgathaBlocks: INCBIN "maps/agatha.blk"
 INCLUDE "engine/menu/league_pc.asm"
 
 INCLUDE "engine/overworld/hidden_items.asm"
+
+INCLUDE "engine/give_pokemon.asm"
 
 
 SECTION "bank1E",ROMX,BANK[$1E]
