@@ -3571,6 +3571,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [de]
 	ld [hNewPartyLength], a
 	sla a
+	dec de
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -3650,6 +3651,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	push de
 	predef IndexToPokedex
 	pop de
+	push de
 	ld a, [wd11e]
 	ld e, a
 	ld a, [wd11e + 1]
@@ -3668,7 +3670,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	call Set16BitFlag
 	ld hl, wPokedexSeen
 	call Set16BitFlag
-
+	pop de
 	pop hl
 	push hl
 
