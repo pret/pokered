@@ -459,9 +459,13 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld b,0
 	ld c,a
 	add hl,bc
-	ld a,[hl]
+	add hl, bc
+	ld a,[hli]
 	ld [wcf91],a
 	ld [wBattleMonSpecies2],a
+	ld a,[hl]
+	ld [wcf91 + 1],a
+	ld [wBattleMonSpecies2 + 1],a
 	call BankswitchBack
 	and a
 	ret
@@ -483,7 +487,7 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld a,[wCurrentMenuItem]
 	ld [wWhichPokemon],a
 	callba SwitchPartyMon
-	jr HandlePartyMenuInput
+	jp HandlePartyMenuInput
 
 DrawPartyMenu:: ; 14d4 (0:14d4)
 	ld hl, DrawPartyMenu_

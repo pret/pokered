@@ -313,7 +313,11 @@ WriteMonPartySpriteOAMByPartyIndex: ; 71868 (1c:5868)
 	ld e, a
 	ld d, 0
 	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld c, a
 	ld a, [hl]
+	ld b, a
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
 	call WriteMonPartySpriteOAM
@@ -328,6 +332,9 @@ WriteMonPartySpriteOAMBySpecies: ; 71882 (1c:5882)
 	xor a
 	ld [hPartyMonIndex], a
 	ld a, [wMonPartySpriteSpecies]
+	ld c, a
+	ld a, [wMonPartySpriteSpecies + 1]
+	ld b, a
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
 	jr WriteMonPartySpriteOAM
@@ -338,6 +345,9 @@ UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
 ; the mon party sprite associated with the species in [wcf91].
 ; However, its calculations are off and it loads garbage data.
 	ld a, [wcf91]
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
 	call GetPartyMonSpriteID
 	push af
 	ld hl, vSprites
@@ -397,18 +407,28 @@ WriteMonPartySpriteOAM: ; 718c3 (1c:58c3)
 	jp CopyData
 
 GetPartyMonSpriteID: ; 718e9 (1c:58e9)
+; bc = mon id
+	ld a, c
 	ld [wd11e], a
+	ld a, b
+	ld [wd11e + 1], a
 	predef IndexToPokedex
 	ld a, [wd11e]
 	ld c, a
-	dec a
-	srl a
+	ld d, a
+	ld a, [wd11e + 1]
+	ld b, a
+	; bc = pokedex id
+	dec bc
+	srl c
+	srl b
+	jr nc, .nocarry
+	set 7, c
+.nocarry
 	ld hl, MonPartyData
-	ld e, a
-	ld d, 0
-	add hl, de
+	add hl, bc
 	ld a, [hl]
-	bit 0, c
+	bit 0, d
 	jr nz, .skipSwap
 	swap a ; use lower nybble if pokedex num is even
 .skipSwap

@@ -103,6 +103,8 @@ LoadMonData_:
 .GetMonHeader
 	ld a, [wcf91]
 	ld [wd0b5], a ; input for GetMonHeader
+	ld a, [wcf91 + 1]
+	ld [wd0b5 + 1], a ; input for GetMonHeader
 	call GetMonHeader
 
 	ld hl, wPartyMons
@@ -1726,6 +1728,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	ld [hli], a ; wFieldMoves + 2
 	ld [hli], a ; wFieldMoves + 3
 	ld [hli], a ; wNumFieldMoves
+	ld [hli], a
 	ld [hl], 12 ; wFieldMovesLeftmostXCoord
 	call GetMonFieldMoves
 	ld a, [wNumFieldMoves]
@@ -3582,6 +3585,9 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	inc de
 	ld a, [wcf91 + 1]
 	ld [de], a ; write species of new mon in party list
+	inc de
+	ld a, $ff ; terminator
+	ld [de], a
 	inc de
 	ld a, $ff ; terminator
 	ld [de], a

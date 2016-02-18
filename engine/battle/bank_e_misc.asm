@@ -117,6 +117,9 @@ GetMonSpecies: ; 39c37 (e:5c37)
 .getSpecies
 	ld d, 0
 	add hl, de
-	ld a, [hl]
+	add hl, de
+	ld a, [hli]
 	ld [wcf91], a
+	ld a, [hl]
+	ld [wcf91 + 1], a
 	ret

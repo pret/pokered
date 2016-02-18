@@ -2255,7 +2255,7 @@ wPartyDataStart::
 
 wPartyCount::   ds 1 ; d163
 wPartySpecies:: ds (PARTY_LENGTH * 2) ; d164 2-bytes per mon in party
-wPartyEnd::     ds 1 ; d16a
+wPartyEnd::     ds 2 ; d16a
 
 wPartyMons::
 wPartyMon1:: party_struct wPartyMon1 ; d16b

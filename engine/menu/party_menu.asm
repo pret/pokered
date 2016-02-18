@@ -39,7 +39,13 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 .loop
 	ld a,[de]
 	cp a,$FF ; reached the terminator?
+	jr nz, .notTheEnd
+	inc de
+	ld a, [de]
+	cp a, $FF ; reach the terminator?
+	dec de
 	jp z,.afterDrawingMonEntries
+.notTheEnd
 	push bc
 	push de
 	push hl
@@ -120,6 +126,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call PrintLevel
 	pop hl
 	pop de
+	inc de
 	inc de
 	ld bc,2 * 20
 	add hl,bc

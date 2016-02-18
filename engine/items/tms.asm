@@ -2,6 +2,8 @@
 CanLearnTM: ; 1373e (4:773e)
 	ld a, [wcf91]
 	ld [wd0b5], a
+	ld a, [wcf91 + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld hl, wMonHLearnset
 	push hl
