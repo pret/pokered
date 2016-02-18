@@ -330,12 +330,6 @@ INCLUDE "text/trainer_names.asm"
 
 INCLUDE "engine/battle/bank_e_misc.asm"
 
-INCLUDE "engine/battle/read_trainer_party.asm"
-
-INCLUDE "data/trainer_moves.asm"
-
-INCLUDE "data/trainer_parties.asm"
-
 TrainerAI: ; 3a52e (e:652e)
 	and a
 	ld a,[wIsInBattle]

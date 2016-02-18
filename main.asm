@@ -6884,3 +6884,11 @@ BeachHouse_GFX:
 BeachHouse_Block:
 	INCBIN "gfx/blocksets/beachhouse.bst"
 ENDC
+
+SECTION "Bank 2D", ROMX, BANK[$2d]
+
+INCLUDE "engine/battle/read_trainer_party.asm"
+
+INCLUDE "data/trainer_parties.asm"
+
+INCLUDE "data/trainer_moves.asm"

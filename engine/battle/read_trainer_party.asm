@@ -53,8 +53,17 @@ ReadTrainer: ; 39c53 (e:5c53)
 .LoopTrainerData
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
+	jr nz, .monNotZero
+	ld a,[hli]
+	and a
 	jp z,.FinishUp
+	dec hl
+.monNotZero
+	dec hl
+	ld a, [hli]
 	ld [wcf91],a ; write species somewhere (XXX why?)
+	ld a, [hli]
+	ld [wcf91 + 1], a
 	ld a,ENEMY_PARTY_DATA
 	ld [wMonDataLocation],a
 	push hl
@@ -72,6 +81,8 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [wCurEnemyLVL],a
 	ld a,[hli]
 	ld [wcf91],a
+	ld a,[hli]
+	ld [wcf91 + 1],a
 	ld a,ENEMY_PARTY_DATA
 	ld [wMonDataLocation],a
 	push hl

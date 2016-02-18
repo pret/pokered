@@ -1601,7 +1601,7 @@ wPartyGainExpFlags:: ; d058
 wCurOpponent:: ; d059
 ; in a wild battle, this is the species of pokemon
 ; in a trainer battle, this is the trainer class + 200
-	ds 1
+	ds 2
 
 wBattleType:: ; d05a
 ; in normal battle, this is 0
