@@ -313,14 +313,17 @@ StartBattle: ; 3c11e (f:411e)
 .foundFirstAliveMon
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
-	inc a
-	ld hl, wPartySpecies - 1
+	ld hl, wPartySpecies
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl] ; species
+	add hl, bc
+	ld a, [hli] ; species
 	ld [wcf91], a
 	ld [wBattleMonSpecies2], a
+	ld a, [hl] ; species
+	ld [wcf91 + 1], a
+	ld [wBattleMonSpecies2 + 1], a
 	call LoadScreenTilesFromBuffer1
 	coord hl, 1, 5
 	ld a, $9
@@ -1439,9 +1442,12 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld c,a
 	ld b,0
 	add hl,bc
-	ld a,[hl]
+	ld a,[hli]
 	ld [wEnemyMonSpecies2],a
 	ld [wcf91],a
+	ld a,[hl]
+	ld [wEnemyMonSpecies2 + 1],a
+	ld [wcf91 + 1],a
 	call LoadEnemyMonData
 	ld hl,wEnemyMonHP
 	ld a,[hli]
@@ -1510,6 +1516,9 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[wEnemyMonSpecies2]
 	ld [wcf91],a
 	ld [wd0b5],a
+	ld a,[wEnemyMonSpecies2 + 1]
+	ld [wcf91 + 1],a
+	ld [wd0b5 + 1],a
 	call GetMonHeader
 	ld de,vFrontPic
 	call LoadMonFrontSprite
@@ -1731,6 +1740,8 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	call CopyData
 	ld a, [wBattleMonSpecies2]
 	ld [wd0b5], a
+	ld a, [wBattleMonSpecies2 + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld hl, wPartyMonNicks
 	ld a, [wPlayerMonNumber]
@@ -1775,6 +1786,8 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	call CopyData
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
@@ -1913,7 +1926,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	call PlaceString
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
-	ld bc, $c
+	ld bc, $d
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wLoadedMonLevel
@@ -1930,6 +1943,8 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 .asm_3cdae
 	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
+	ld a, [wLoadedMonSpecies + 1]
+	ld [wcf91 + 1], a
 	coord hl, 10, 9
 	predef DrawHP
 	ld a, $1
@@ -2353,6 +2368,9 @@ UseBagItem:
 	ld a, [wCapturedMonSpecies]
 	and a ; was the enemy mon captured with a ball?
 	jr nz, .returnAfterCapturingMon
+	ld a, [wCapturedMonSpecies + 1]
+	and a ; was the enemy mon captured with a ball?
+	jr nz, .returnAfterCapturingMon
 
 	ld a, [wBattleType]
 	cp BATTLE_TYPE_SAFARI
@@ -2371,6 +2389,7 @@ UseBagItem:
 	call GBPalNormal
 	xor a
 	ld [wCapturedMonSpecies], a
+	ld [wCapturedMonSpecies + 1], a
 	ld a, $2
 	ld [wBattleResult], a
 	scf ; set carry
@@ -2466,6 +2485,9 @@ PartyMenuOrRockOrRun:
 	ld a, [wEnemyMonSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies + 1]
+	ld [wcf91 + 1], a
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld de, vFrontPic
 	call LoadMonFrontSprite
@@ -4486,6 +4508,8 @@ GetEnemyMonStat: ; 3df1c (f:5f1c)
 	ld [wCurEnemyLVL], a
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld hl, wEnemyMonDVs
 	ld de, wLoadedMonSpeedExp
@@ -4687,10 +4711,20 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [wEnemyMonSpecies]
-	jr nz, .asm_3e032
+	jr nz, .enemyMonSpecies
+	ld a, [wEnemyMonSpecies + 1]
+	jr nz, .enemyMonSpecies
 	ld a, [wBattleMonSpecies]
-.asm_3e032
 	ld [wd0b5], a
+	ld a, [wBattleMonSpecies + 1]
+	ld [wd0b5 + 1], a
+	jr .getHeader
+.enemyMonSpecies
+	ld a, [wEnemyMonSpecies]
+	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies + 1]
+	ld [wd0b5 + 1], a
+.getHeader
 	call GetMonHeader
 	ld a, [wMonHBaseSpeed]
 	ld b, a
@@ -6206,6 +6240,9 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld a, [wEnemyMonSpecies2]
 	ld [wEnemyMonSpecies], a
 	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies2 + 1]
+	ld [wEnemyMonSpecies + 1], a
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld a, [wEnemyBattleStatus3]
 	bit Transformed, a ; is enemy mon transformed?
@@ -6340,6 +6377,8 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	call CopyData
 	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
+	ld a, [wEnemyMonSpecies2 + 1]
+	ld [wd11e + 1], a
 	predef IndexToPokedex
 	ld a, [wd11e]
 	dec a
@@ -6847,6 +6886,9 @@ InitOpponent: ; 3ef18 (f:6f18)
 	ld a, [wCurOpponent]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
+	ld a, [wCurOpponent + 1]
+	ld [wcf91 + 1], a
+	ld [wEnemyMonSpecies2 + 1], a
 	jr InitBattleCommon
 
 DetermineWildOpponent: ; 3ef23 (f:6f23)
@@ -6870,9 +6912,11 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	push af
 	res 1, [hl]
 	callab InitBattleVariables
+	ld a, [wEnemyMonSpecies2 + 1]
+	cp $FF
+	jp nz, InitWildBattle
 	ld a, [wEnemyMonSpecies2]
 	sub 200
-	jp c, InitWildBattle
 	ld [wTrainerClass], a
 	call GetTrainerInformation
 	callab ReadTrainer
@@ -7106,6 +7150,8 @@ LoadMonBackPic: ; 3f103 (f:7103)
 ; been loaded with GetMonHeader.
 	ld a, [wBattleMonSpecies2]
 	ld [wcf91], a
+	ld a, [wBattleMonSpecies2 + 1]
+	ld [wcf91 + 1], a
 	coord hl, 1, 5
 	ld b, 7
 	ld c, 8

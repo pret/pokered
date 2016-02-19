@@ -1,23 +1,23 @@
 Route23Mons:
 	db $0A
 	IF DEF(_RED)
-		db 26,EKANS
+		dbw 26,EKANS
 	ENDC
 	IF !DEF(_RED)
-		db 26,SANDSHREW
+		dbw 26,SANDSHREW
 	ENDC
-	db 33,DITTO
-	db 26,SPEAROW
-	db 38,FEAROW
-	db 38,DITTO
-	db 38,FEAROW
+	dbw 33,DITTO
+	dbw 26,SPEAROW
+	dbw 38,FEAROW
+	dbw 38,DITTO
+	dbw 38,FEAROW
 	IF DEF(_RED)
-		db 41,ARBOK
+		dbw 41,ARBOK
 	ENDC
 	IF !DEF(_RED)
-		db 41,SANDSLASH
+		dbw 41,SANDSLASH
 	ENDC
-	db 43,DITTO
-	db 41,FEAROW
-	db 43,FEAROW
+	dbw 43,DITTO
+	dbw 41,FEAROW
+	dbw 43,FEAROW
 	db $00

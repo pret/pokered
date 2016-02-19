@@ -1,28 +1,28 @@
 Route13Mons:
 	IF DEF(_RED)
 		db $14
-		db 24,ODDISH
-		db 25,PIDGEY
-		db 27,PIDGEY
-		db 24,VENONAT
-		db 22,ODDISH
-		db 26,VENONAT
-		db 26,ODDISH
-		db 25,DITTO
-		db 28,GLOOM
-		db 30,GLOOM
+		dbw 24,ODDISH
+		dbw 25,PIDGEY
+		dbw 27,PIDGEY
+		dbw 24,VENONAT
+		dbw 22,ODDISH
+		dbw 26,VENONAT
+		dbw 26,ODDISH
+		dbw 25,DITTO
+		dbw 28,GLOOM
+		dbw 30,GLOOM
 	ENDC
 	IF DEF(_BLUE)
-		db $14
-		db 24,BELLSPROUT
-		db 25,PIDGEY
-		db 27,PIDGEY
-		db 24,VENONAT
-		db 22,BELLSPROUT
-		db 26,VENONAT
-		db 26,BELLSPROUT
-		db 25,DITTO
-		db 28,WEEPINBELL
-		db 30,WEEPINBELL
+		dbw $14
+		dbw 24,BELLSPROUT
+		dbw 25,PIDGEY
+		dbw 27,PIDGEY
+		dbw 24,VENONAT
+		dbw 22,BELLSPROUT
+		dbw 26,VENONAT
+		dbw 26,BELLSPROUT
+		dbw 25,DITTO
+		dbw 28,WEEPINBELL
+		dbw 30,WEEPINBELL
 	ENDC
 	db $00

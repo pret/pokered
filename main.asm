@@ -2965,10 +2965,10 @@ LoadWildData: ; ceb8 (3:4eb8)
 	jr z,.NoGrassData ; if no grass data, skip to surfing data
 	push hl
 	ld de,wGrassMons ; otherwise, load grass data
-	ld bc,$0014
+	ld bc,$001E
 	call CopyData
 	pop hl
-	ld bc,$0014
+	ld bc,$001E
 	add hl,bc
 .NoGrassData
 	ld a,[hli]
@@ -2976,7 +2976,7 @@ LoadWildData: ; ceb8 (3:4eb8)
 	and a
 	ret z        ; if no water data, we're done
 	ld de,wWaterMons  ; otherwise, load surfing data
-	ld bc,$0014
+	ld bc,$001E
 	jp CopyData
 
 INCLUDE "data/wild_mons.asm"

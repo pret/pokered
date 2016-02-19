@@ -1,27 +1,27 @@
 Route7Mons:
 	db $0F
 	IF DEF(_RED)
-		db 19,PIDGEY
-		db 19,ODDISH
-		db 17,MANKEY
-		db 22,ODDISH
-		db 22,PIDGEY
-		db 18,MANKEY
-		db 18,GROWLITHE
-		db 20,GROWLITHE
-		db 19,MANKEY
-		db 20,MANKEY
+		dbw 19,PIDGEY
+		dbw 19,ODDISH
+		dbw 17,MANKEY
+		dbw 22,ODDISH
+		dbw 22,PIDGEY
+		dbw 18,MANKEY
+		dbw 18,GROWLITHE
+		dbw 20,GROWLITHE
+		dbw 19,MANKEY
+		dbw 20,MANKEY
 	ENDC
 	IF DEF(_BLUE)
-		db 19,PIDGEY
-		db 19,BELLSPROUT
-		db 17,MEOWTH
-		db 22,BELLSPROUT
-		db 22,PIDGEY
-		db 18,MEOWTH
-		db 18,VULPIX
-		db 20,VULPIX
-		db 19,MEOWTH
-		db 20,MEOWTH
+		dbw 19,PIDGEY
+		dbw 19,BELLSPROUT
+		dbw 17,MEOWTH
+		dbw 22,BELLSPROUT
+		dbw 22,PIDGEY
+		dbw 18,MEOWTH
+		dbw 18,VULPIX
+		dbw 20,VULPIX
+		dbw 19,MEOWTH
+		dbw 20,MEOWTH
 	ENDC
 	db $00

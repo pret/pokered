@@ -33,8 +33,15 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	call IsItemInBag
 	ld a, [wEnemyMonSpecies2]
 	ld [wcf91], a
-	cp MAROWAK
+	ld a, [wEnemyMonSpecies2 + 1]
+	ld [wcf91 + 1], a
+	ld a, [wEnemyMonSpecies2]
+	cp (MAROWAK & $FF)
+	jr nz, .notMarowak
+	ld a, [wEnemyMonSpecies2 + 1]
+	cp (MAROWAK >> 8)
 	jr z, .isMarowak
+.notMarowak
 	ld a, b
 	and a
 	jr z, .noSilphScope
