@@ -68,6 +68,7 @@ SetupPokeballs: ; 0x3a8a6
 
 PickPokeball: ; 3a8c2 (e:68c2)
 	inc hl
+	inc hl
 	ld a, [hli]
 	and a
 	jr nz, .alive
