@@ -1926,7 +1926,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	call PlaceString
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
-	ld bc, $d
+	ld bc, $e
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wLoadedMonLevel

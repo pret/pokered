@@ -53,6 +53,7 @@ UpdateHPBar2:
 	ld c, a      ; old HP into bc
 	ld a, [hli]
 	ld b, a
+	ld hl, wHPBarNewHP
 	ld a, [hli]
 	ld e, a      ; new HP into de
 	ld d, [hl]
@@ -247,10 +248,12 @@ UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
 	ld e, a
 	ld a, [hli]
 	ld d, a
+	ld hl, wHPBarOldHP
 	ld a, [hli]  ; old HP into bc
 	ld c, a
 	ld a, [hli]
 	ld b, a
+	ld hl, wHPBarNewHP
 	ld a, [hli]  ; new HP into hl
 	ld h, [hl]
 	ld l, a
