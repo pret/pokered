@@ -668,9 +668,10 @@ wEnemyBideAccumulatedDamage:: ; cd05
 	ds 10
 
 wInGameTradeGiveMonSpecies:: ; cd0f
+	ds 2
 
 wPlayerMonUnmodifiedLevel:: ; cd0f
-	ds 2
+	ds 1
 
 wInGameTradeTextPointerTablePointer:: ; cd10
 
@@ -1194,8 +1195,6 @@ wTileMapBackup2:: ; cd81
 
 wNamingScreenNameLength:: ; cee9
 
-wEvoOldSpecies:: ; cee9
-
 wBuffer:: ; cee9
 ; Temporary storage area of 30 bytes.
 
@@ -1206,18 +1205,12 @@ wLearningMovesFromDayCare:: ; cee9
 ; whether WriteMonMoves is being used to make a mon learn moves from day care
 ; non-zero if so
 
-wChangeMonPicEnemyTurnSpecies:: ; cee9
-
 wHPBarMaxHP:: ; cee9
-	ds 2
+	ds 1
 
 wNamingScreenSubmitName:: ; ceea
 ; non-zero when the player has chosen to submit the name
-
-wChangeMonPicPlayerTurnSpecies:: ; ceea
-
-wEvoNewSpecies:: ; ceea
-	ds 2
+	ds 1
 
 wAlphabetCase:: ; ceeb
 ; 0 = upper case
@@ -1537,9 +1530,8 @@ wEnemyMonType::
 wEnemyMonType1::     db
 wEnemyMonType2::     db
 wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds 3
+wEnemyMonMoves::     ds 4
 SECTION "WRAM Bank 1", WRAMX, BANK[1]
-                     ds 1
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
 wEnemyMonMaxHP::     dw
@@ -3137,6 +3129,13 @@ wDayCareMonName:: ds NAME_LENGTH ; da49
 wDayCareMonOT::   ds NAME_LENGTH ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
+
+wEvoOldSpecies:: ; cee9
+wChangeMonPicEnemyTurnSpecies:: ; cee9
+	ds 2
+wChangeMonPicPlayerTurnSpecies:: ; ceea
+wEvoNewSpecies:: ; ceea
+	ds 2
 
 wMainDataEnd::
 
