@@ -863,7 +863,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr nc,.healHP ; if it's a Full Restore or one of the potions
 ; fall through if it's one of the status-specifc healing items
 .cureStatusAilment
-	ld bc,4
+	ld bc,wPartyMon1Status - wPartyMon1
 	add hl,bc ; hl now points to status
 	ld a,[wcf91]
 	lb bc, ANTIDOTE_MSG, 1 << PSN
@@ -2039,7 +2039,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	cp a,ETHER
 	jr nc,.useEther ; if Ether or Max Ether
 .usePPUp
-	ld bc,21
+	ld bc,wPartyMon1PP - wPartyMon1Moves
 	add hl,bc
 	ld a,[hl] ; move PP
 	cp a,3 << 6 ; have 3 PP Ups already been used?
