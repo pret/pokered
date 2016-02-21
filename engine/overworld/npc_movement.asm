@@ -286,7 +286,7 @@ FreezeEnemyTrainerSprite: ; 1a5e7 (6:65e7)
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs: ; 1a605 (6:6605)
-	db OPP_SONY1
-	db OPP_SONY2
-	db OPP_SONY3
+	db SONY1
+	db SONY2
+	db SONY3
 	db $ff

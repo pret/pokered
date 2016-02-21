@@ -2876,7 +2876,7 @@ wFossilMon:: ; d710
 	ds 2
 
 wEnemyMonOrTrainerClass:: ; d713
-; trainer classes start at 200 (not anymore!)
+; trainer classes look like (TRAINER << 8) | $FF
 	ds 2
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714

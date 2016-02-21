@@ -16,7 +16,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 
 ; get the pointer to trainer data for this class
 	ld a,[wCurOpponent]
-	sub $C9 ; convert value from pokemon to trainer
+	dec a
 	add a,a
 	ld hl,TrainerDataPointers
 	ld c,a
@@ -112,7 +112,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 
 ; get trainer class number
 	ld a,[wCurOpponent]
-	sub 200
+	dec a
 	ld b,a
 	ld hl,TeamMoves
 

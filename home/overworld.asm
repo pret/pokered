@@ -64,6 +64,9 @@ OverworldLoopLessDelay::
 	ld a,[wCurOpponent]
 	and a
 	jp nz,.newBattle
+	ld a,[wCurOpponent + 1]
+	and a
+	jp nz,.newBattle
 	ld a,[wd730]
 	bit 7,a ; are we simulating button presses?
 	jr z,.notSimulating
@@ -126,6 +129,9 @@ OverworldLoopLessDelay::
 	jp EnterMap
 .checkForOpponent
 	ld a,[wCurOpponent]
+	and a
+	jp nz,.newBattle
+	ld a,[wCurOpponent + 1]
 	and a
 	jp nz,.newBattle
 	jp OverworldLoop

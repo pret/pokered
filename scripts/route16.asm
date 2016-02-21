@@ -29,8 +29,10 @@ Route16Script0: ; 59959 (16:5959)
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, SNORLAX
+	ld a, (SNORLAX & $FF)
 	ld [wCurOpponent], a
+	ld a, (SNORLAX >> 8)
+	ld [wCurOpponent + 1], a
 	ld a, 30
 	ld [wCurEnemyLVL], a
 	ld a, HS_ROUTE_16_SNORLAX

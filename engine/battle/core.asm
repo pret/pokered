@@ -1225,7 +1225,10 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp LINK_STATE_BATTLING
 	jr z, .notSony1Battle
 	ld a, [wCurOpponent]
-	cp OPP_SONY1
+	cp SONY1
+	jr nz, .notSony1Battle
+	ld a, [wCurOpponent + 1]
+	cp $FF
 	jr nz, .notSony1Battle
 	coord hl, 0, 0  ; sony 1 battle
 	lb bc, 8, 21
@@ -1423,6 +1426,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld bc,wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	pop bc
+	inc hl
 	inc hl
 	ld a,[hli]
 	ld c,a
@@ -6880,6 +6884,8 @@ PlayMoveAnimation: ; 3ef07 (f:6f07)
 InitBattle: ; 3ef12 (f:6f12)
 	ld a, [wCurOpponent]
 	and a
+	jr nz, InitOpponent
+	ld a, [wCurOpponent + 1]
 	jr z, DetermineWildOpponent
 
 InitOpponent: ; 3ef18 (f:6f18)
@@ -6916,7 +6922,6 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	cp $FF
 	jp nz, InitWildBattle
 	ld a, [wEnemyMonSpecies2]
-	sub 200
 	ld [wTrainerClass], a
 	call GetTrainerInformation
 	callab ReadTrainer
@@ -6941,8 +6946,12 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	call LoadEnemyMonData
 	call DoBattleTransitionAndInitBattleVariables
 	ld a, [wCurOpponent]
-	cp MAROWAK
+	cp (MAROWAK & $FF)
+	jr nz, .notMarowak
+	ld a, [wCurOpponent + 1]
+	cp (MAROWAK >> 8)
 	jr z, .isGhost
+.notMarowak
 	call IsGhostBattle
 	jr nz, .isNoGhost
 .isGhost

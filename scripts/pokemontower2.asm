@@ -142,8 +142,10 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld hl, PokemonTower2Text_60632
 	ld de, PokemonTower2Text_60637
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY2
+	ld a, SONY2
 	ld [wCurOpponent], a
+	ld a, $FF
+	ld [wCurOpponent + 1], a
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter + 1]

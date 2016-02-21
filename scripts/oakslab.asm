@@ -390,8 +390,10 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret nz
 
 	; define which team rival uses, and fight it
-	ld a, OPP_SONY1
+	ld a, SONY1
 	ld [wCurOpponent], a
+	ld a, $FF
+	ld [wCurOpponent + 1], a
 	ld a, [wRivalStarter + 1]
 	ld b, a
 	ld a, [wRivalStarter]

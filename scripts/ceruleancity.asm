@@ -134,8 +134,10 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld hl, CeruleanCityText_1966d
 	ld de, CeruleanCityText_19672
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY1
+	ld a, SONY1
 	ld [wCurOpponent], a
+	ld a, $FF
+	ld [wCurOpponent + 1], a
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter + 1]

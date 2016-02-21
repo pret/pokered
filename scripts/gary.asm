@@ -64,8 +64,10 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, GaryDefeatedText
 	ld de, GaryVictoryText
 	call SaveEndBattleTextPointers
-	ld a, OPP_SONY3
+	ld a, SONY3
 	ld [wCurOpponent], a
+	ld a, $FF
+	ld [wCurOpponent + 1], a
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter + 1]

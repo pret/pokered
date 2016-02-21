@@ -51,6 +51,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	ld [wBattleType], a
 	ld [wMoveMissed], a
 	ld [wCurOpponent], a
+	ld [wCurOpponent + 1], a
 	ld [wForcePlayerToChooseMon], a
 	ld [wNumRunAttempts], a
 	ld [wEscapedFromBattle], a

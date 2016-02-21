@@ -574,8 +574,10 @@ TestBattle:
 
 	; Fight against a
 	; level 20 Rhydon.
-	ld a, RHYDON
+	ld a, (RHYDON & $FF)
 	ld [wCurOpponent], a
+	ld a, (RHYDON >> 8)
+	ld [wCurOpponent + 1], a
 
 	predef InitOpponent
 

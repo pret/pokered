@@ -75,8 +75,10 @@ ViridianCityScript1: ; 19062 (6:5062)
 	ld [wBattleType], a
 	ld a, 5
 	ld [wCurEnemyLVL], a
-	ld a, WEEDLE
+	ld a, (WEEDLE & $FF)
 	ld [wCurOpponent], a
+	ld a, (WEEDLE >> 8)
+	ld [wCurOpponent + 1], a
 	ld a, $2
 	ld [wViridianCityCurScript], a
 	ret

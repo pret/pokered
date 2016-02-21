@@ -32,8 +32,10 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, MAROWAK
+	ld a, (MAROWAK & $FF)
 	ld [wCurOpponent], a
+	ld a, (MAROWAK >> 8)
+	ld [wCurOpponent + 1], a
 	ld a, 30
 	ld [wCurEnemyLVL], a
 	ld a, $4

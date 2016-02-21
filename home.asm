@@ -568,15 +568,6 @@ PrintLevelCommon:: ; 1523 (0:1523)
 	ld b,LEFT_ALIGN | 1 ; 1 byte
 	jp PrintNumber
 
-GetwMoves:: ; 152e (0:152e)
-; Unused. Returns the move at index a from wMoves in a
-	ld hl,wMoves
-	ld c,a
-	ld b,0
-	add hl,bc
-	ld a,[hl]
-	ret
-
 ; copies the base stat data of a pokemon to wMonHeader
 ; INPUT:
 ; [wd0b5] = 2-byte pokemon ID
@@ -2449,9 +2440,12 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [wCurOpponent], a
 	ld [wEnemyMonOrTrainerClass], a
-	cp 200
+	ld a, [wEngagedTrainerClass + 1]
+	ld [wCurOpponent + 1], a
+	ld [wEnemyMonOrTrainerClass + 1], a
+	cp $FF
 	ld a, [wEngagedTrainerSet]
-	jr c, .noTrainer
+	jr nz, .noTrainer
 	ld [wTrainerNo], a
 	ret
 .noTrainer
@@ -2613,11 +2607,11 @@ CheckIfAlreadyEngaged:: ; 33dd (0:33dd)
 
 PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
-	cp OPP_SONY1
+	cp SONY1
 	ret z
-	cp OPP_SONY2
+	cp SONY2
 	ret z
-	cp OPP_SONY3
+	cp SONY3
 	ret z
 	ld a, [wGymLeaderNo]
 	and a
@@ -4611,6 +4605,7 @@ INCLUDE "home/predef.asm"
 
 UpdateCinnabarGymGateTileBlocks:: ; 3ead (0:3ead)
 	jpba UpdateCinnabarGymGateTileBlocks_
+
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]

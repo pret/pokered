@@ -274,8 +274,10 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	jr nz, .asm_5506
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
-	ld a, OPP_SONY1
+	ld a, SONY1
 	ld [wCurOpponent], a
+	ld a, $FF
+	ld [wCurOpponent + 1], a
 	call ClearScreen
 	call Delay3
 	ld hl, wOptions
