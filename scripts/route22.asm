@@ -141,7 +141,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	call SaveEndBattleTextPointers
 	ld a, (SONY1 & $FF)
 	ld [wCurOpponent], a
-	ld a, (SONY1 >> 8)
+	ld a, $FF
 	ld [wCurOpponent + 1], a
 	ld hl, StarterMons_50faf
 	call Route22Script_50ed6
@@ -299,7 +299,7 @@ Route22Script4: ; 51087 (14:5087)
 	call SaveEndBattleTextPointers
 	ld a, (SONY2 & $FF)
 	ld [wCurOpponent], a
-	ld a, (SONY2 >> 8)
+	ld a, $FF
 	ld [wCurOpponent + 1], a
 	ld hl, StarterMons_510d9
 	call Route22Script_50ed6

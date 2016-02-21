@@ -185,7 +185,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	call SaveEndBattleTextPointers
 	ld a, (SONY2 & $FF)
 	ld [wCurOpponent], a
-	ld a, (SONY2 >> 8)
+	ld a, $FF
 	ld [wCurOpponent + 1], a
 	ld a, [wRivalStarter + 1]
 	ld b, a

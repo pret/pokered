@@ -8,6 +8,7 @@ GainExperience: ; 5524f (15:524f)
 	ld [wWhichPokemon], a
 .partyMonLoop ; loop over each mon and add gained exp
 	inc hl
+	inc hl
 	ld a, [hli]
 	or [hl] ; is mon's HP 0?
 	jp z, .nextMon ; if so, go to next mon
@@ -113,8 +114,11 @@ GainExperience: ; 5524f (15:524f)
 	ld b, 0
 	ld hl, wPartySpecies
 	add hl, bc
-	ld a, [hl] ; species
+	add hl, bc
+	ld a, [hli] ; species
 	ld [wd0b5], a
+	ld a, [hl] ; species
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
 	callab CalcExperience ; get max exp
@@ -168,11 +172,14 @@ GainExperience: ; 5524f (15:524f)
 	ld [hl], a
 	ld bc, wPartyMon1Species - wPartyMon1Level
 	add hl, bc
-	ld a, [hl] ; species
+	ld a, [hli] ; species
 	ld [wd0b5], a
 	ld [wd11e], a
+	ld a, [hl] ; species
+	ld [wd0b5 + 1], a
+	ld [wd11e + 1], a
 	call GetMonHeader
-	ld bc, (wPartyMon1MaxHP + 1) - wPartyMon1Species
+	ld bc, (wPartyMon1MaxHP + 1) - (wPartyMon1Species + 1)
 	add hl, bc
 	push hl
 	ld a, [hld]
@@ -253,6 +260,8 @@ GainExperience: ; 5524f (15:524f)
 	ld [wMonDataLocation], a
 	ld a, [wd0b5]
 	ld [wd11e], a
+	ld a, [wd0b5 + 1]
+	ld [wd11e + 1], a
 	predef LearnMoveFromLevelUp
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
