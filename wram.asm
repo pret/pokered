@@ -541,7 +541,11 @@ wSwitchPartyMonTempBuffer:: ; cc97
 
 wNumStepsToTake:: ; cca1
 ; used in Pallet Town scripted movement
-	ds 49
+	ds 1
+
+wEvosMovesData::
+	ds 48
+wEvosMovesData_End::
 
 wRLEByteCount:: ; ccd2
 	ds 1
