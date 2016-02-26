@@ -2437,19 +2437,14 @@ TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
+	ld a, $FF
+	ld [wCurOpponent + 1], a
+	ld [wEnemyMonOrTrainerClass + 1], a
 	ld a, [wEngagedTrainerClass]
 	ld [wCurOpponent], a
 	ld [wEnemyMonOrTrainerClass], a
-	ld a, [wEngagedTrainerClass + 1]
-	ld [wCurOpponent + 1], a
-	ld [wEnemyMonOrTrainerClass + 1], a
-	cp $FF
 	ld a, [wEngagedTrainerSet]
-	jr nz, .noTrainer
 	ld [wTrainerNo], a
-	ret
-.noTrainer
-	ld [wCurEnemyLVL], a
 	ret
 
 GetSpritePosition1:: ; 32ef (0:32ef)

@@ -1441,10 +1441,10 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[hl]
 	ld [wCurEnemyLVL],a
 	ld a,[wWhichPokemon]
-	inc a
-	ld hl,wEnemyPartyCount
+	ld hl,wEnemyPartyCount + 1
 	ld c,a
 	ld b,0
+	add hl,bc
 	add hl,bc
 	ld a,[hli]
 	ld [wEnemyMonSpecies2],a
