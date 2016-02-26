@@ -38,7 +38,10 @@ UnknownDungeon3Text1: ; 45f1c (11:5f1c)
 UnknownDungeon3MewtwoText: ; 45f26 (11:5f26)
 	TX_FAR _UnknownDungeon3MewtwoText
 	TX_ASM
-	ld a, MEWTWO
+	ld a, (MEWTWO & $FF)
+	ld c, a
+	ld a, (MEWTWO >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

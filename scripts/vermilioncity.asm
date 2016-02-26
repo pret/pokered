@@ -222,7 +222,10 @@ VermilionCityText4: ; 1991d (6:591d)
 VermilionCityText5: ; 19922 (6:5922)
 	TX_FAR _VermilionCityText5
 	TX_ASM
-	ld a, MACHOP
+	ld a, (MACHOP & $FF)
+	ld c, a
+	ld a, (MACHOP >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	ld hl, VermilionCityText14

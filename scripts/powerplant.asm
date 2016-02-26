@@ -170,7 +170,10 @@ VoltorbBattleText: ; 1e3aa (7:63aa)
 ZapdosBattleText: ; 1e3af (7:63af)
 	TX_FAR _ZapdosBattleText
 	TX_ASM
-	ld a, ZAPDOS
+	ld a, (ZAPDOS & $FF)
+	ld c, a
+	ld a, (ZAPDOS >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

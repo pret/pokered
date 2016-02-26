@@ -121,7 +121,10 @@ SSAnne10Text6: ; 61dff (18:5dff)
 SSAnne10Text8: ; 61e09 (18:5e09)
 	TX_FAR _SSAnne10Text8
 	TX_ASM
-	ld a, MACHOKE
+	ld a, (MACHOKE & $FF)
+	ld c, a
+	ld a, (MACHOKE >> 8)
+	ld b, a
 	call PlayCry
 	jp TextScriptEnd
 

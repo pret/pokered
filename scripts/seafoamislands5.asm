@@ -160,7 +160,10 @@ SeafoamIslands5Text3: ; 46893 (11:6893)
 SeafoamIslands5BattleText2: ; 468a2 (11:68a2)
 	TX_FAR _SeafoamIslands5BattleText2
 	TX_ASM
-	ld a, ARTICUNO
+	ld a, (ARTICUNO & $FF)
+	ld c, a
+	ld a, (ARTICUNO >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

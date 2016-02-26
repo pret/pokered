@@ -259,6 +259,9 @@ Trade_ShowPlayerMon: ; 41245 (10:5245)
 	ld a, TRADE_BALL_DROP_ANIM
 	call Trade_ShowAnimation ; clears mon pic
 	ld a, [wTradedPlayerMonSpecies]
+	ld c, a
+	ld a, [wTradedPlayerMonSpecies + 1]
+	ld b, a
 	call PlayCry
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -368,6 +371,9 @@ Trade_ShowEnemyMon: ; 41336 (10:5336)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wTradedEnemyMonSpecies]
+	ld c, a
+	ld a, [wTradedEnemyMonSpecies + 1]
+	ld b, a
 	call PlayCry
 	call Trade_Delay100
 	coord hl, 4, 10

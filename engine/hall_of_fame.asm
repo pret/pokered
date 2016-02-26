@@ -175,6 +175,9 @@ HoFDisplayMonInfo: ; 702f0 (1c:42f0)
 	coord hl, 3, 9
 	predef PrintMonType
 	ld a, [wHoFMonSpecies]
+	ld c, a
+	ld a, [wHoFMonSpecies + 1]
+	ld b, a
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)

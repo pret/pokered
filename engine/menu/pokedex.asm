@@ -140,6 +140,9 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 ; play pokemon cry
 .choseCry
 	ld a,[wd11e]
+	ld c, a
+	ld a,[wd11e + 1]
+	ld b, a
 	call GetCryData
 	call PlaySound
 	jr .handleMenuInput
@@ -486,6 +489,9 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	coord hl, 1, 1
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
 	ld a,[wcf91]
+	ld c, a
+	ld a,[wcf91 + 1]
+	ld b, a
 	call PlayCry ; play pokemon cry
 	pop hl
 	pop de

@@ -9,7 +9,10 @@ PewterHouse1TextPointers: ; 1d5f6 (7:55f6)
 PewterHouse1Text1: ; 1d5fc (7:55fc)
 	TX_FAR _PewterHouse1Text1
 	TX_ASM
-	ld a, NIDORAN_M
+	ld a, (NIDORAN_M & $FF)
+	ld c, a
+	ld a, (NIDORAN_M >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

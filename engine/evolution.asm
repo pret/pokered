@@ -39,6 +39,9 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wEvoOldSpecies]
+	ld c, a
+	ld a, [wEvoOldSpecies + 1]
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, BANK(Music_SafariZone)
@@ -71,6 +74,9 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wWholeScreenPaletteMonSpecies]
+	ld c, a
+	ld a, [wWholeScreenPaletteMonSpecies + 1]
+	ld b, a
 	call PlayCry
 	ld c, 0
 	call EvolutionSetWholeScreenPalette

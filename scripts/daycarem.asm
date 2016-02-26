@@ -54,6 +54,9 @@ DayCareMText1: ; 56254 (15:6254)
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wcf91]
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
 	call PlayCry
 	ld hl, DayCareComeSeeMeInAWhileText
 	jp .done
@@ -200,6 +203,9 @@ DayCareMText1: ; 56254 (15:6254)
 	ld [de], a
 
 	ld a, [wcf91]
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
 	call PlayCry
 	ld hl, DayCareGotMonBackText
 	jr .done

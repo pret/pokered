@@ -55,14 +55,20 @@ LavenderHouse1Text_1d8f9: ; 1d8f9 (7:58f9)
 LavenderHouse1Text3: ; 1d8fe (7:58fe)
 	TX_FAR _LavenderHouse1Text3
 	TX_ASM
-	ld a, PSYDUCK
+	ld a, (PSYDUCK & $FF)
+	ld c, a
+	ld a, (PSYDUCK >> 8)
+	ld b, a
 	call PlayCry
 	jp TextScriptEnd
 
 LavenderHouse1Text4: ; 1d90b (7:590b)
 	TX_FAR _LavenderHouse1Text4
 	TX_ASM
-	ld a, NIDORINO
+	ld a, (NIDORINO & $FF)
+	ld c, a
+	ld a, (NIDORINO >> 8)
+	ld b, a
 	call PlayCry
 	jp TextScriptEnd
 

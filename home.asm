@@ -340,10 +340,8 @@ PlayCry:: ; 13d0 (0:13d0)
 	jp WaitForSoundToFinish
 
 GetCryData:: ; 13d9 (0:13d9)
-; Load cry data for monster a.
-	dec a
-	ld c, a
-	ld b, 0
+; Load cry data for monster bc.
+	dec bc
 	ld hl, CryData
 	add hl, bc
 	add hl, bc

@@ -234,9 +234,9 @@ ENDC
 
 .finishedWaiting
 	ld a, [wTitleMonSpecies]
-	ld e, a
+	ld c, a
 	ld a, [wTitleMonSpecies + 1]
-	ld d, a
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	call GBPalWhiteOutWithDelay3

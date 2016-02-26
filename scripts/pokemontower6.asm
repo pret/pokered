@@ -157,7 +157,10 @@ PokemonTower6Text7: ; 60c02 (18:4c02)
 	TX_ASM
 	ld hl, PokemonTower2Text_60c1f
 	call PrintText
-	ld a, MAROWAK
+	ld a, (MAROWAK & $FF)
+	ld c, a
+	ld a, (MAROWAK >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	ld c, 30

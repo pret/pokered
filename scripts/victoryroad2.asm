@@ -179,7 +179,10 @@ VictoryRoad2Text6: ; 518b0 (14:58b0)
 VictoryRoad2BattleText6: ; 518ba (14:58ba)
 	TX_FAR _VictoryRoad2BattleText6
 	TX_ASM
-	ld a, MOLTRES
+	ld a, (MOLTRES & $FF)
+	ld c, a
+	ld a, (MOLTRES >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

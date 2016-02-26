@@ -1130,6 +1130,9 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ret z ; if so, return
 
 	ld a, [wBattleMonSpecies]
+	ld c, a
+	ld a, [wBattleMonSpecies + 1]
+	ld b, a
 	call PlayCry
 	ld hl, PlayerMonFaintedText
 	jp PrintText
@@ -1531,6 +1534,9 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	coord hl, 15, 6
 	predef AnimateSendingOutMon
 	ld a,[wEnemyMonSpecies2]
+	ld c, a
+	ld a,[wEnemyMonSpecies2 + 1]
+	ld b, a
 	call PlayCry
 	call DrawEnemyHUDAndHPBar
 	ld a,[wCurrentMenuItem]
@@ -1865,6 +1871,9 @@ SendOutMon: ; 3cc91 (f:4c91)
 	coord hl, 4, 11
 	predef AnimateSendingOutMon
 	ld a, [wcf91]
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
 	call PlayCry
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1

@@ -2327,9 +2327,15 @@ GetMoveSound: ; 7986f (1e:586f)
 	and a
 	jr nz,.next
 	ld a,[wBattleMonSpecies] ; get number of current monster
+	ld c, a
+	ld a,[wBattleMonSpecies + 1]
+	ld b, a
 	jr .Continue
 .next
 	ld a,[wEnemyMonSpecies]
+	ld c, a
+	ld a,[wEnemyMonSpecies + 1]
+	ld b, a
 .Continue
 	push hl
 	call GetCryData

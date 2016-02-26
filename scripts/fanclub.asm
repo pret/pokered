@@ -74,7 +74,10 @@ FanClubText3:
 	TX_ASM
 	ld hl, .text
 	call PrintText
-	ld a, PIKACHU
+	ld a, (PIKACHU & $FF)
+	ld c, a
+	ld a, (PIKACHU >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -88,7 +91,10 @@ FanClubText4:
 	TX_ASM
 	ld hl, .text
 	call PrintText
-	ld a, SEEL
+	ld a, (SEEL & $FF)
+	ld c, a
+	ld a, (SEEL >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

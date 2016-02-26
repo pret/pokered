@@ -19,8 +19,10 @@ Route15GateLeftBinoculars: ; 5db8f (17:5b8f)
 	ret nz
 	call EnableAutoTextBoxDrawing
 	tx_pre Route15UpstairsBinocularsText
-	ld a, ARTICUNO
+	ld a, (ARTICUNO & $FF)
 	ld [wcf91], a
+	ld a, (ARTICUNO >> 8)
+	ld [wcf91 + 1], a
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 

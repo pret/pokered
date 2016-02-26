@@ -64,7 +64,10 @@ BeachHousePikachuText:
 	TX_ASM
 	ld hl,.BeachHousePikachuText
 	call PrintText
-	ld a,PIKACHU
+	ld a, (PIKACHU & $FF)
+	ld c, a
+	ld a, (PIKACHU >> 8)
+	ld b, a
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd

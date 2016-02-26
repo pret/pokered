@@ -14,7 +14,10 @@ SaffronHouse1Text1: ; 1dde8 (7:5de8)
 SaffronHouse1Text2: ; 1dded (7:5ded)
 	TX_FAR _SaffronHouse1Text2
 	TX_ASM
-	ld a, PIDGEY
+	ld a, (PIDGEY & $FF)
+	ld c, a
+	ld a, (PIDGEY >> 8)
+	ld b, a
 	call PlayCry
 	jp TextScriptEnd
 

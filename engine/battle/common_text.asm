@@ -9,6 +9,9 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	jr c, .pokemonTower
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]
+	ld c, a
+	ld a, [wEnemyMonSpecies2 + 1]
+	ld b, a
 	call PlayCry
 	ld hl, WildMonAppearedText
 	ld a, [wMoveMissed]

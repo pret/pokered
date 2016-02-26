@@ -9,7 +9,10 @@ LavenderHouse2TextPointers: ; 1d9b2 (7:59b2)
 LavenderHouse2Text1: ; 1d9b6 (7:59b6)
 	TX_FAR _LavenderHouse2Text1
 	TX_ASM
-	ld a, CUBONE
+	ld a, (CUBONE & $FF)
+	ld c, a
+	ld a, (CUBONE >> 8)
+	ld b, a
 	call PlayCry
 	jp TextScriptEnd
 
