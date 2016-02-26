@@ -9,10 +9,10 @@ PokemonTower5Object: ; 0x60a48 (size=65)
 
 	db $6 ; objects
 	object SPRITE_MEDIUM, $c, $8, STAY, NONE, $1 ; person
-	object SPRITE_MEDIUM, $11, $7, STAY, LEFT, $2, OPP_CHANNELER, $e
-	object SPRITE_MEDIUM, $e, $3, STAY, LEFT, $3, OPP_CHANNELER, $10
-	object SPRITE_MEDIUM, $6, $a, STAY, RIGHT, $4, OPP_CHANNELER, $11
-	object SPRITE_MEDIUM, $9, $10, STAY, RIGHT, $5, OPP_CHANNELER, $12
+	object SPRITE_MEDIUM, $11, $7, STAY, LEFT, $2, CHANNELER, $e
+	object SPRITE_MEDIUM, $e, $3, STAY, LEFT, $3, CHANNELER, $10
+	object SPRITE_MEDIUM, $6, $a, STAY, RIGHT, $4, CHANNELER, $11
+	object SPRITE_MEDIUM, $9, $10, STAY, RIGHT, $5, CHANNELER, $12
 	object SPRITE_BALL, $6, $e, STAY, NONE, $6, NUGGET
 
 	; warp-to
