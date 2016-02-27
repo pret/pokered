@@ -3636,7 +3636,7 @@ CalcStat:: ; 394a (0:394a)
 	ld a, b
 	ld d, a
 	push hl
-	ld hl, wMonHeader
+	ld hl, wMonHeader + (wMonHBaseStats - wMonHeader - 1)
 	ld b, $0
 	add hl, bc
 	ld a, [hl]          ; read base value of stat
