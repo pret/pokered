@@ -2484,9 +2484,11 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
 	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
+	push de
 	ld e, a
 	ld d, 0
 	call TrainerFlagAction        ; read trainer flag
+	pop de
 	ld a, c
 	and a ; has the trainer already been defeated?
 	jr nz, .continue
