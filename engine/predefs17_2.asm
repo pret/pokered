@@ -5,6 +5,8 @@ SetPartyMonTypes: ; 5db5e (17:5b5e)
 	add hl, bc
 	ld a, [wd11e]
 	ld [wd0b5], a
+	ld a, [wd11e + 1]
+	ld [wd0b5 + 1], a
 	push hl
 	call GetMonHeader
 	pop hl

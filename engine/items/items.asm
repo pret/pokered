@@ -2719,6 +2719,8 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	ld a, [wcf91]
 	ld [wd0b5], a
+	ld a, [wcf91 + 1]
+	ld [wd0b5 + 1], a
 	ld c, a
 .asm_e7b1
 	inc de

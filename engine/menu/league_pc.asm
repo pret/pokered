@@ -88,6 +88,12 @@ LeaguePCShowMon: ; 76610 (1d:6610)
 	ld [wBattleMonSpecies2], a
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [hli]
+	ld [wHoFMonSpecies + 1], a
+	ld [wcf91 + 1], a
+	ld [wd0b5 + 1], a
+	ld [wBattleMonSpecies2 + 1], a
+	ld [wWholeScreenPaletteMonSpecies + 1], a
+	ld a, [hli]
 	ld [wHoFMonLevel], a
 	ld de, wcd6d
 	ld bc, NAME_LENGTH

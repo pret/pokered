@@ -41,11 +41,22 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 .partyMonLoop
 	ld a, [hli]
 	cp $ff
+	jr nz, .notDoneShowingParty
+	ld a, [hli]
+	cp $ff
 	jr z, .doneShowingParty
+	dec hl
+.notDoneShowingParty
+	inc hl
 	inc c
 	push hl
 	push bc
+	dec hl
+	dec hl
+	ld a, [hli]
 	ld [wHoFMonSpecies], a
+	ld a, [hli]
+	ld [wHoFMonSpecies + 1], a
 	ld a, c
 	ld [wHoFPartyMonIndex], a
 	ld hl, wPartyMon1Level
@@ -80,6 +91,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call SaveHallOfFameTeams
 	xor a
 	ld [wHoFMonSpecies], a
+	ld [wHoFMonSpecies + 1], a
 	inc a
 	ld [wHoFMonOrPlayer], a ; player
 	call HoFShowMonOrPlayer
@@ -105,6 +117,11 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
 	ld [wWholeScreenPaletteMonSpecies], a
+	ld a, [wHoFMonSpecies + 1]
+	ld [wcf91 + 1], a
+	ld [wd0b5 + 1], a
+	ld [wBattleMonSpecies2 + 1], a
+	ld [wWholeScreenPaletteMonSpecies + 1], a
 	ld a, [wHoFMonOrPlayer]
 	and a
 	jr z, .showMon
@@ -172,6 +189,8 @@ HoFDisplayMonInfo: ; 702f0 (1c:42f0)
 	call PrintLevelCommon
 	ld a, [wHoFMonSpecies]
 	ld [wd0b5], a
+	ld a, [wHoFMonSpecies + 1]
+	ld [wd0b5 + 1], a
 	coord hl, 3, 9
 	predef PrintMonType
 	ld a, [wHoFMonSpecies]

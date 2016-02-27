@@ -141,6 +141,9 @@ StatusScreen: ; 12953 (4:6953)
 	ld a, [wMonHIndex]
 	ld [wd11e], a
 	ld [wd0b5], a
+	ld a, [wMonHIndex + 1]
+	ld [wd11e + 1], a
+	ld [wd0b5 + 1], a
 	predef IndexToPokedex
 	coord hl, 3, 7
 	ld de, wd11e

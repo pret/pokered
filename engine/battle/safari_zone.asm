@@ -17,6 +17,8 @@ PrintSafariZoneBattleText: ; 4277 (1:4277)
 	push hl
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
+	ld a, [wEnemyMonSpecies + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld a, [wMonHCatchRate]
 	ld [wEnemyMonCatchRate], a

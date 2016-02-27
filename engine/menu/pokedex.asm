@@ -408,11 +408,18 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call ClearScreen
 	ld a,[wd11e] ; pokemon ID
 	ld [wcf91],a
-	push af
+	ld c, a
+	ld a,[wd11e + 1] ; pokemon ID
+	ld [wcf91 + 1],a
+	ld b, a
+	push bc
 	ld b, SET_PAL_POKEDEX
 	call RunPaletteCommand
-	pop af
+	pop bc
+	ld a, c
 	ld [wd11e],a
+	ld a, b
+	ld [wd11e + 1], a
 	ld a,[hTilesetType]
 	push af
 	xor a
@@ -450,9 +457,10 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call PlaceString
 	ld hl,PokedexEntryPointers
 	ld a,[wd11e]
-	dec a
-	ld e,a
-	ld d,0
+	ld e, a
+	ld a,[wd11e + 1]
+	ld d, a
+	dec de
 	add hl,de
 	add hl,de
 	ld a,[hli]
@@ -464,7 +472,10 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld l,c
 	push de
 	ld a,[wd11e]
-	push af
+	ld c, a
+	ld a,[wd11e + 1]
+	ld b, a
+	push bc
 	call IndexToPokedex
 	coord hl, 2, 8
 	ld a, "№"
@@ -476,10 +487,15 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call PrintNumber ; print pokedex number
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
-	pop af
+	pop bc
+	ld a, c
 	ld [wd11e],a
+	ld a, b
+	ld [wd11e + 1],a
 	ld a,[wcf91]
 	ld [wd0b5],a
+	ld a,[wcf91 + 1]
+	ld [wd0b5 + 1],a
 	pop de
 	push af
 	push bc

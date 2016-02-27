@@ -667,7 +667,7 @@ AnimationIdSpecialEffects: ; 78ef5 (1e:4ef5)
 	dw AnimationFlashScreen
 
 	db TAIL_WHIP
-	dw TailWhipAnimationUnused
+	dw $0000
 
 	db GROWL
 	dw DoGrowlSpecialEffects
@@ -980,13 +980,6 @@ DoGrowlSpecialEffects: ; 790bc (1e:50bc)
 	dec a
 	call z,AnimationCleanOAM ; clean up at the end of the subanimation
 	ret
-
-; this is associated with Tail Whip, but Tail Whip doesn't use any subanimations
-TailWhipAnimationUnused: ; 790d0 (1e:50d0)
-	ld a,1
-	ld [wSubAnimCounter],a
-	ld c,20
-	jp DelayFrames
 
 ; Format: Special Effect ID (1 byte), Address (2 bytes)
 SpecialEffectPointers: ; 790da (1e:50da)
@@ -2149,6 +2142,9 @@ ChangeMonPic: ; 79793 (1e:5793)
 	ld a, [wChangeMonPicEnemyTurnSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
+	ld a, [wChangeMonPicEnemyTurnSpecies + 1]
+	ld [wcf91 + 1], a
+	ld [wd0b5 + 1], a
 	xor a
 	ld [wSpriteFlipped], a
 	call GetMonHeader
@@ -2161,6 +2157,9 @@ ChangeMonPic: ; 79793 (1e:5793)
 	ld a, [wChangeMonPicPlayerTurnSpecies]
 	ld [wBattleMonSpecies2], a
 	ld [wd0b5], a
+	ld a, [wChangeMonPicPlayerTurnSpecies + 1]
+	ld [wBattleMonSpecies2 + 1], a
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	predef LoadMonBackPic
 	xor a

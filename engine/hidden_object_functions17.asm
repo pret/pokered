@@ -31,8 +31,10 @@ Route15UpstairsBinocularsText: ; 5dba8 (17:5ba8)
 	db "@"
 
 AerodactylFossil: ; 5dbad (17:5bad)
-	ld a, FOSSIL_AERODACTYL
+	ld a, (FOSSIL_AERODACTYL & $FF)
 	ld [wcf91], a
+	ld a, (FOSSIL_AERODACTYL >> 8)
+	ld [wcf91 + 1], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	tx_pre AerodactylFossilText
@@ -43,8 +45,10 @@ AerodactylFossilText: ; 5dbbe (17:5bbe)
 	db "@"
 
 KabutopsFossil: ; 5bdc3 (17:5bc3)
-	ld a, FOSSIL_KABUTOPS
+	ld a, (FOSSIL_KABUTOPS & $FF)
 	ld [wcf91], a
+	ld a, (FOSSIL_KABUTOPS >> 8)
+	ld [wcf91 + 1], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
 	tx_pre KabutopsFossilText
@@ -69,6 +73,8 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	call UpdateSprites
 	ld a, [wcf91]
 	ld [wd0b5], a
+	ld a, [wcf91 + 1]
+	ld [wd0b5 + 1], a
 	call GetMonHeader
 	ld de, vChars1 + $310
 	call LoadMonFrontSprite
