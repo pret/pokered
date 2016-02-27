@@ -9,7 +9,8 @@ HiddenItemNear: ; 7481f (1d:481f)
 	push bc
 	push hl
 	ld hl, wObtainedHiddenItemsFlags
-	ld c, b
+	ld e, b
+	ld d, 0
 	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c

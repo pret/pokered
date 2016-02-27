@@ -4,7 +4,8 @@ TryEvolvingMon: ; 3ad0e (e:6d0e)
 	xor a
 	ld [hl], a
 	ld a, [wWhichPokemon]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	call Evolution_FlagAction
 
@@ -43,7 +44,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	dec hl
 	push hl
 	ld a, [wWhichPokemon]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld hl, wCanEvolveFlags
 	ld b, FLAG_TEST
 	call Evolution_FlagAction
@@ -272,12 +274,16 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call z, Evolution_ReloadTilesetTilePatterns
 	predef IndexToPokedex
 	ld a, [wd11e]
-	dec a
-	ld c, a
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld b, FLAG_SET
 	ld hl, wPokedexOwned
 	push bc
+	push de
 	call Evolution_FlagAction
+	pop de
 	pop bc
 	ld hl, wPokedexSeen
 	call Evolution_FlagAction

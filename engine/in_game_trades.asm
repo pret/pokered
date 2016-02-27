@@ -37,7 +37,8 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	call InGameTrade_GetMonName
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
@@ -111,7 +112,8 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld [wCurEnemyLVL],a
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld b,FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText

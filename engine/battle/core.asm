@@ -330,12 +330,15 @@ StartBattle: ; 3c11e (f:411e)
 	call SlideTrainerPicOffScreen
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	push bc
+	push de
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
 	ld hl, wPartyFoughtCurrentEnemyFlags
+	pop de
 	pop bc
 	predef FlagActionPredef
 	call LoadBattleMonFromParty
@@ -1093,7 +1096,8 @@ HandlePlayerMonFainted: ; 3c700 (f:4700)
 ; resets flags, slides mon's pic down, plays cry, and prints fainted message
 RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld a, [wPlayerMonNumber]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld hl, wPartyGainExpFlags
 	ld b, FLAG_RESET
 	predef FlagActionPredef ; clear gain exp flag for fainted mon
@@ -1201,11 +1205,14 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 	call ClearSprites
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld hl, wPartyGainExpFlags
 	ld b, FLAG_SET
 	push bc
+	push de
 	predef FlagActionPredef
+	pop de
 	pop bc
 	ld hl, wPartyFoughtCurrentEnemyFlags
 	predef FlagActionPredef
@@ -1374,13 +1381,16 @@ EnemySendOut: ; 3c90e (f:490e)
 	xor a
 	ld [hl],a
 	ld a,[wPlayerMonNumber]
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld b,FLAG_SET
 	push bc
+	push de
 	predef FlagActionPredef
 	ld hl,wPartyFoughtCurrentEnemyFlags
 	xor a
 	ld [hl],a
+	pop de
 	pop bc
 	predef FlagActionPredef
 
@@ -2540,11 +2550,14 @@ SwitchPlayerMon: ; 3d1ba (f:51ba)
 	call AnimateRetreatingPlayerMon
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	push bc
+	push de
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
+	pop de
 	pop bc
 	ld hl, wPartyFoughtCurrentEnemyFlags
 	predef FlagActionPredef
@@ -6394,8 +6407,10 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld [wd11e + 1], a
 	predef IndexToPokedex
 	ld a, [wd11e]
-	dec a
-	ld c, a
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef ; mark this mon as seen in the pokedex

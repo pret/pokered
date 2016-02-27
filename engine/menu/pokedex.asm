@@ -377,12 +377,14 @@ ENDC
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
-; [wd11e] = pokedex number
+; [wd11e] = 2-byte pokedex number
 ; hl = address of bit field
 IsPokemonBitSet: ; 402c2 (10:42c2)
 	ld a,[wd11e]
-	dec a
-	ld c,a
+	ld e, a
+	ld a,[wd11e + 1]
+	ld d, 0
+	dec de
 	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c

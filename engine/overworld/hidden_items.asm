@@ -4,7 +4,8 @@ HiddenItems: ; 76688 (1d:6688)
 	ld [wHiddenItemOrCoinsIndex], a
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
@@ -30,7 +31,8 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	jr nc, .BagFull
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld a, SFX_GET_ITEM_2
@@ -60,7 +62,8 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld [wHiddenItemOrCoinsIndex], a
 	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
@@ -101,7 +104,8 @@ HiddenCoins: ; 76799 (1d:6799)
 	predef AddBCDPredef
 	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	call EnableAutoTextBoxDrawing

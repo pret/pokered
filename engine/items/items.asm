@@ -490,14 +490,22 @@ ItemUseBall: ; d687 (3:5687)
 
 .skip6
 	ld a,[wcf91]
-	push af
+	ld e, a
+	ld a,[wcf91 + 1]
+	ld d, a
+	push de
 	ld a,[wEnemyMonSpecies2]
 	ld [wcf91],a
+	ld a,[wEnemyMonSpecies2 + 1]
+	ld [wcf91 + 1],a
 	ld a,[wEnemyMonLevel]
 	ld [wCurEnemyLVL],a
 	callab LoadEnemyMonData
-	pop af
+	pop de
+	ld a, e
 	ld [wcf91],a
+	ld a, d
+	ld [wcf91 + 1],a
 	pop hl
 	pop af
 	ld [hld],a
@@ -510,6 +518,10 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wCapturedMonSpecies],a
 	ld [wcf91],a
 	ld [wd11e],a
+	ld a,[wEnemyMonSpecies + 1]
+	ld [wCapturedMonSpecies + 1],a
+	ld [wcf91 + 1],a
+	ld [wd11e + 1],a
 	ld a,[wBattleType]
 	dec a ; is this the old man battle?
 	jr z,.oldManCaughtMon ; if so, don't give the player the caught Pokémon
@@ -519,17 +531,21 @@ ItemUseBall: ; d687 (3:5687)
 
 ; Add the caught Pokémon to the Pokédex.
 	predef IndexToPokedex
-	ld a,[wd11e]
-	dec a
-	ld c,a
+	ld a, [wd11e]
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld b,FLAG_TEST
 	ld hl,wPokedexOwned
 	predef FlagActionPredef
 	ld a,c
 	push af
-	ld a,[wd11e]
-	dec a
-	ld c,a
+	ld a, [wd11e]
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
 	ld b,FLAG_SET
 	predef FlagActionPredef
 	pop af
@@ -542,6 +558,8 @@ ItemUseBall: ; d687 (3:5687)
 	call ClearSprites
 	ld a,[wEnemyMonSpecies]
 	ld [wd11e],a
+	ld a,[wEnemyMonSpecies + 1]
+	ld [wd11e + 1],a
 	predef ShowPokedexData
 
 .skipShowingPokedexData
@@ -934,7 +952,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push de
 	push bc
 	ld a,[wUsedItemOnWhichPokemon]
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld hl,wPartyFoughtCurrentEnemyFlags
 	ld b,FLAG_TEST
 	predef FlagActionPredef
@@ -942,7 +961,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	and a
 	jr z,.next
 	ld a,[wUsedItemOnWhichPokemon]
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld hl,wPartyGainExpFlags
 	ld b,FLAG_SET
 	predef FlagActionPredef
@@ -2674,7 +2694,8 @@ IsKeyItem_: ; e764 (3:6764)
 	call CopyData
 	pop af
 	dec a
-	ld c,a
+	ld e, a
+	ld d, 0
 	ld hl,wBuffer
 	ld b,FLAG_TEST
 	predef FlagActionPredef
@@ -2979,11 +3000,18 @@ CheckMapForMon: ; e9f0 (3:69f0)
 .loop
 	ld a, [wd11e]
 	cp [hl]
-	jr nz, .nextEntry
+	jr nz, .nextEntry1
+	inc hl
+	ld a, [wd11e + 1]
+	cp [hl]
+	jr nz, .nextEntry2
 	ld a, c
 	ld [de], a
 	inc de
-.nextEntry
+	jr .nextEntry2
+.nextEntry1
+	inc hl
+.nextEntry2
 	inc hl
 	inc hl
 	dec b

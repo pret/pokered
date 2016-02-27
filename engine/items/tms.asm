@@ -18,6 +18,8 @@ CanLearnTM: ; 1373e (4:773e)
 	inc c
 	jr .findTMloop
 .TMfoundLoop
+	ld e, c
+	ld d, 0
 	pop hl
 	ld b, FLAG_TEST
 	predef_jump FlagActionPredef

@@ -15,7 +15,8 @@ GainExperience: ; 5524f (15:524f)
 	push hl
 	ld hl, wPartyGainExpFlags
 	ld a, [wWhichPokemon]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
@@ -265,7 +266,8 @@ GainExperience: ; 5524f (15:524f)
 	predef LearnMoveFromLevelUp
 	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop hl
@@ -289,13 +291,16 @@ GainExperience: ; 5524f (15:524f)
 	xor a
 	ld [hl], a ; clear gain exp flags
 	ld a, [wPlayerMonNumber]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	push bc
+	push de
 	predef FlagActionPredef ; set the gain exp flag for the mon that is currently out
 	ld hl, wPartyFoughtCurrentEnemyFlags
 	xor a
 	ld [hl], a
+	pop de
 	pop bc
 	predef_jump FlagActionPredef ; set the fought current enemy flag for the mon that is currently out
 

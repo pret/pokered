@@ -2305,7 +2305,8 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	ld a, $2
 	call ReadTrainerHeaderInfo     ; read flag's byte ptr
 	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_TEST
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
@@ -2400,12 +2401,13 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld a, $2
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
-	ld a, [wEnemyMonOrTrainerClass]
-	cp 200
-	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	ld a, [wEnemyMonOrTrainerClass + 1]
+	cp $FF
+	jr z, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
@@ -2479,7 +2481,8 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
 	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
-	ld c, a
+	ld e, a
+	ld d, 0
 	call TrainerFlagAction        ; read trainer flag
 	ld a, c
 	and a ; has the trainer already been defeated?

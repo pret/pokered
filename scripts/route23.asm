@@ -50,6 +50,8 @@ Route23Script0: ; 51219 (14:5219)
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST
 	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
+	ld e, c
+	ld d, 0
 	predef FlagActionPredef
 	ld a, c
 	and a
@@ -188,7 +190,8 @@ Route23Script_51346: ; 51346 (14:5346)
 	call Route23Script_5125d
 	ld a, [wWhichBadge]
 	inc a
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_TEST
 	ld hl, wObtainedBadges
 	predef FlagActionPredef
@@ -205,7 +208,8 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld hl, VictoryRoadGuardText2
 	call PrintText
 	ld a, [wWhichBadge]
-	ld c, a
+	ld e, a
+	ld d, 0
 	ld b, FLAG_SET
 	EventFlagAddress hl, EVENT_PASSED_CASCADEBADGE_CHECK
 	predef FlagActionPredef
