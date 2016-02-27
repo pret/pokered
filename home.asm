@@ -572,14 +572,17 @@ PrintLevelCommon:: ; 1523 (0:1523)
 GetMonHeader:: ; 1537 (0:1537)
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,BANK(BaseStats)
+	ld a,BANK(BaseStatsPointers)
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	push bc
 	push de
 	push hl
 	ld a,[wd11e]
-	push af
+	ld c, a
+	ld a,[wd11e + 1]
+	ld b, a
+	push bc
 	ld a,[wd0b5]
 	ld [wd11e],a
 	ld a,[wd0b5 + 1]
@@ -601,21 +604,25 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld de,FossilAerodactylPic
 	ld b,$77 ; size of Aerodactyl fossil sprite
 	jr z,.specialID
-	ld de, MEW
-	call LoadBCWith_wd0b5
-	call CompareTwoBytes
-	jr z,.mew
-	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
-	; TODO: have to completely re-do how base stats are situated in the ROM.
-	; probably want to just have BANK, Address pointers for each pokemon.
-	ld a,[wd11e]
-	dec a
-	ld bc,MonBaseStatsEnd - MonBaseStats
-	ld hl,BaseStats
-	call AddNTimes
+	predef IndexToPokedex
+	ld a, [wd11e]
+	ld e, a
+	ld a, [wd11e + 1]
+	ld d, a
+	dec de
+	ld hl, BaseStatsPointers
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	ld de,wMonHeader
+	ld a, b
 	ld bc,MonBaseStatsEnd - MonBaseStats
-	call CopyData
+	call FarCopyData
 	jr .done
 .specialID
 	ld hl,wMonHSpriteDim
@@ -624,20 +631,16 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld [hl],e ; write front sprite pointer
 	inc hl
 	ld [hl],d
-	jr .done
-.mew
-	ld hl,MewBaseStats
-	ld de,wMonHeader
-	ld bc,MonBaseStatsEnd - MonBaseStats
-	ld a,BANK(MewBaseStats)
-	call FarCopyData
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	ld a, [wd0b5 + 1]
 	ld [wMonHIndex + 1], a
-	pop af
+	pop bc
+	ld a, c
 	ld [wd11e],a
+	ld a, b
+	ld [wd11e + 1],a
 	pop hl
 	pop de
 	pop bc

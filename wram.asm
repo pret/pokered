@@ -543,8 +543,10 @@ wNumStepsToTake:: ; cca1
 ; used in Pallet Town scripted movement
 	ds 1
 
+wBaseStatsData::
 wEvosMovesData::
 	ds 48
+wBaseStatsData_End::
 wEvosMovesData_End::
 
 wRLEByteCount:: ; ccd2

@@ -1,150 +1,151 @@
-INCLUDE "data/baseStats/bulbasaur.asm"
-INCLUDE "data/baseStats/ivysaur.asm"
-INCLUDE "data/baseStats/venusaur.asm"
-INCLUDE "data/baseStats/charmander.asm"
-INCLUDE "data/baseStats/charmeleon.asm"
-INCLUDE "data/baseStats/charizard.asm"
-INCLUDE "data/baseStats/squirtle.asm"
-INCLUDE "data/baseStats/wartortle.asm"
-INCLUDE "data/baseStats/blastoise.asm"
-INCLUDE "data/baseStats/caterpie.asm"
-INCLUDE "data/baseStats/metapod.asm"
-INCLUDE "data/baseStats/butterfree.asm"
-INCLUDE "data/baseStats/weedle.asm"
-INCLUDE "data/baseStats/kakuna.asm"
-INCLUDE "data/baseStats/beedrill.asm"
-INCLUDE "data/baseStats/pidgey.asm"
-INCLUDE "data/baseStats/pidgeotto.asm"
-INCLUDE "data/baseStats/pidgeot.asm"
-INCLUDE "data/baseStats/rattata.asm"
-INCLUDE "data/baseStats/raticate.asm"
-INCLUDE "data/baseStats/spearow.asm"
-INCLUDE "data/baseStats/fearow.asm"
-INCLUDE "data/baseStats/ekans.asm"
-INCLUDE "data/baseStats/arbok.asm"
-INCLUDE "data/baseStats/pikachu.asm"
-INCLUDE "data/baseStats/raichu.asm"
-INCLUDE "data/baseStats/sandshrew.asm"
-INCLUDE "data/baseStats/sandslash.asm"
-INCLUDE "data/baseStats/nidoranf.asm"
-INCLUDE "data/baseStats/nidorina.asm"
-INCLUDE "data/baseStats/nidoqueen.asm"
-INCLUDE "data/baseStats/nidoranm.asm"
-INCLUDE "data/baseStats/nidorino.asm"
-INCLUDE "data/baseStats/nidoking.asm"
-INCLUDE "data/baseStats/clefairy.asm"
-INCLUDE "data/baseStats/clefable.asm"
-INCLUDE "data/baseStats/vulpix.asm"
-INCLUDE "data/baseStats/ninetails.asm"
-INCLUDE "data/baseStats/jigglypuff.asm"
-INCLUDE "data/baseStats/wigglytuff.asm"
-INCLUDE "data/baseStats/zubat.asm"
-INCLUDE "data/baseStats/golbat.asm"
-INCLUDE "data/baseStats/oddish.asm"
-INCLUDE "data/baseStats/gloom.asm"
-INCLUDE "data/baseStats/vileplume.asm"
-INCLUDE "data/baseStats/paras.asm"
-INCLUDE "data/baseStats/parasect.asm"
-INCLUDE "data/baseStats/venonat.asm"
-INCLUDE "data/baseStats/venomoth.asm"
-INCLUDE "data/baseStats/diglett.asm"
-INCLUDE "data/baseStats/dugtrio.asm"
-INCLUDE "data/baseStats/meowth.asm"
-INCLUDE "data/baseStats/persian.asm"
-INCLUDE "data/baseStats/psyduck.asm"
-INCLUDE "data/baseStats/golduck.asm"
-INCLUDE "data/baseStats/mankey.asm"
-INCLUDE "data/baseStats/primeape.asm"
-INCLUDE "data/baseStats/growlithe.asm"
-INCLUDE "data/baseStats/arcanine.asm"
-INCLUDE "data/baseStats/poliwag.asm"
-INCLUDE "data/baseStats/poliwhirl.asm"
-INCLUDE "data/baseStats/poliwrath.asm"
-INCLUDE "data/baseStats/abra.asm"
-INCLUDE "data/baseStats/kadabra.asm"
-INCLUDE "data/baseStats/alakazam.asm"
-INCLUDE "data/baseStats/machop.asm"
-INCLUDE "data/baseStats/machoke.asm"
-INCLUDE "data/baseStats/machamp.asm"
-INCLUDE "data/baseStats/bellsprout.asm"
-INCLUDE "data/baseStats/weepinbell.asm"
-INCLUDE "data/baseStats/victreebel.asm"
-INCLUDE "data/baseStats/tentacool.asm"
-INCLUDE "data/baseStats/tentacruel.asm"
-INCLUDE "data/baseStats/geodude.asm"
-INCLUDE "data/baseStats/graveler.asm"
-INCLUDE "data/baseStats/golem.asm"
-INCLUDE "data/baseStats/ponyta.asm"
-INCLUDE "data/baseStats/rapidash.asm"
-INCLUDE "data/baseStats/slowpoke.asm"
-INCLUDE "data/baseStats/slowbro.asm"
-INCLUDE "data/baseStats/magnemite.asm"
-INCLUDE "data/baseStats/magneton.asm"
-INCLUDE "data/baseStats/farfetchd.asm"
-INCLUDE "data/baseStats/doduo.asm"
-INCLUDE "data/baseStats/dodrio.asm"
-INCLUDE "data/baseStats/seel.asm"
-INCLUDE "data/baseStats/dewgong.asm"
-INCLUDE "data/baseStats/grimer.asm"
-INCLUDE "data/baseStats/muk.asm"
-INCLUDE "data/baseStats/shellder.asm"
-INCLUDE "data/baseStats/cloyster.asm"
-INCLUDE "data/baseStats/gastly.asm"
-INCLUDE "data/baseStats/haunter.asm"
-INCLUDE "data/baseStats/gengar.asm"
-INCLUDE "data/baseStats/onix.asm"
-INCLUDE "data/baseStats/drowzee.asm"
-INCLUDE "data/baseStats/hypno.asm"
-INCLUDE "data/baseStats/krabby.asm"
-INCLUDE "data/baseStats/kingler.asm"
-INCLUDE "data/baseStats/voltorb.asm"
-INCLUDE "data/baseStats/electrode.asm"
-INCLUDE "data/baseStats/exeggcute.asm"
-INCLUDE "data/baseStats/exeggutor.asm"
-INCLUDE "data/baseStats/cubone.asm"
-INCLUDE "data/baseStats/marowak.asm"
-INCLUDE "data/baseStats/hitmonlee.asm"
-INCLUDE "data/baseStats/hitmonchan.asm"
-INCLUDE "data/baseStats/lickitung.asm"
-INCLUDE "data/baseStats/koffing.asm"
-INCLUDE "data/baseStats/weezing.asm"
-INCLUDE "data/baseStats/rhyhorn.asm"
-INCLUDE "data/baseStats/rhydon.asm"
-INCLUDE "data/baseStats/chansey.asm"
-INCLUDE "data/baseStats/tangela.asm"
-INCLUDE "data/baseStats/kangaskhan.asm"
-INCLUDE "data/baseStats/horsea.asm"
-INCLUDE "data/baseStats/seadra.asm"
-INCLUDE "data/baseStats/goldeen.asm"
-INCLUDE "data/baseStats/seaking.asm"
-INCLUDE "data/baseStats/staryu.asm"
-INCLUDE "data/baseStats/starmie.asm"
-INCLUDE "data/baseStats/mrmime.asm"
-INCLUDE "data/baseStats/scyther.asm"
-INCLUDE "data/baseStats/jynx.asm"
-INCLUDE "data/baseStats/electabuzz.asm"
-INCLUDE "data/baseStats/magmar.asm"
-INCLUDE "data/baseStats/pinsir.asm"
-INCLUDE "data/baseStats/tauros.asm"
-INCLUDE "data/baseStats/magikarp.asm"
-INCLUDE "data/baseStats/gyarados.asm"
-INCLUDE "data/baseStats/lapras.asm"
-INCLUDE "data/baseStats/ditto.asm"
-INCLUDE "data/baseStats/eevee.asm"
-INCLUDE "data/baseStats/vaporeon.asm"
-INCLUDE "data/baseStats/jolteon.asm"
-INCLUDE "data/baseStats/flareon.asm"
-INCLUDE "data/baseStats/porygon.asm"
-INCLUDE "data/baseStats/omanyte.asm"
-INCLUDE "data/baseStats/omastar.asm"
-INCLUDE "data/baseStats/kabuto.asm"
-INCLUDE "data/baseStats/kabutops.asm"
-INCLUDE "data/baseStats/aerodactyl.asm"
-INCLUDE "data/baseStats/snorlax.asm"
-INCLUDE "data/baseStats/articuno.asm"
-INCLUDE "data/baseStats/zapdos.asm"
-INCLUDE "data/baseStats/moltres.asm"
-INCLUDE "data/baseStats/dratini.asm"
-INCLUDE "data/baseStats/dragonair.asm"
-INCLUDE "data/baseStats/dragonite.asm"
-INCLUDE "data/baseStats/mewtwo.asm"
+BaseStatsPointers::
+	dbw Bank(BulbasaurBaseStats), BulbasaurBaseStats
+	dbw Bank(IvysaurBaseStats), IvysaurBaseStats
+	dbw Bank(VenusaurBaseStats), VenusaurBaseStats
+	dbw Bank(CharmanderBaseStats), CharmanderBaseStats
+	dbw Bank(CharmeleonBaseStats), CharmeleonBaseStats
+	dbw Bank(CharizardBaseStats), CharizardBaseStats
+	dbw Bank(SquirtleBaseStats), SquirtleBaseStats
+	dbw Bank(WartortleBaseStats), WartortleBaseStats
+	dbw Bank(BlastoiseBaseStats), BlastoiseBaseStats
+	dbw Bank(CaterpieBaseStats), CaterpieBaseStats
+	dbw Bank(MetapodBaseStats), MetapodBaseStats
+	dbw Bank(ButterfreeBaseStats), ButterfreeBaseStats
+	dbw Bank(WeedleBaseStats), WeedleBaseStats
+	dbw Bank(KakunaBaseStats), KakunaBaseStats
+	dbw Bank(BeedrillBaseStats), BeedrillBaseStats
+	dbw Bank(PidgeyBaseStats), PidgeyBaseStats
+	dbw Bank(PidgeottoBaseStats), PidgeottoBaseStats
+	dbw Bank(PidgeotBaseStats), PidgeotBaseStats
+	dbw Bank(RattataBaseStats), RattataBaseStats
+	dbw Bank(RaticateBaseStats), RaticateBaseStats
+	dbw Bank(SpearowBaseStats), SpearowBaseStats
+	dbw Bank(FearowBaseStats), FearowBaseStats
+	dbw Bank(EkansBaseStats), EkansBaseStats
+	dbw Bank(ArbokBaseStats), ArbokBaseStats
+	dbw Bank(PikachuBaseStats), PikachuBaseStats
+	dbw Bank(RaichuBaseStats), RaichuBaseStats
+	dbw Bank(SandshrewBaseStats), SandshrewBaseStats
+	dbw Bank(SandslashBaseStats), SandslashBaseStats
+	dbw Bank(NidoranfBaseStats), NidoranfBaseStats
+	dbw Bank(NidorinaBaseStats), NidorinaBaseStats
+	dbw Bank(NidoqueenBaseStats), NidoqueenBaseStats
+	dbw Bank(NidoranmBaseStats), NidoranmBaseStats
+	dbw Bank(NidorinoBaseStats), NidorinoBaseStats
+	dbw Bank(NidokingBaseStats), NidokingBaseStats
+	dbw Bank(ClefairyBaseStats), ClefairyBaseStats
+	dbw Bank(ClefableBaseStats), ClefableBaseStats
+	dbw Bank(VulpixBaseStats), VulpixBaseStats
+	dbw Bank(NinetailsBaseStats), NinetailsBaseStats
+	dbw Bank(JigglypuffBaseStats), JigglypuffBaseStats
+	dbw Bank(WigglytuffBaseStats), WigglytuffBaseStats
+	dbw Bank(ZubatBaseStats), ZubatBaseStats
+	dbw Bank(GolbatBaseStats), GolbatBaseStats
+	dbw Bank(OddishBaseStats), OddishBaseStats
+	dbw Bank(GloomBaseStats), GloomBaseStats
+	dbw Bank(VileplumeBaseStats), VileplumeBaseStats
+	dbw Bank(ParasBaseStats), ParasBaseStats
+	dbw Bank(ParasectBaseStats), ParasectBaseStats
+	dbw Bank(VenonatBaseStats), VenonatBaseStats
+	dbw Bank(VenomothBaseStats), VenomothBaseStats
+	dbw Bank(DiglettBaseStats), DiglettBaseStats
+	dbw Bank(DugtrioBaseStats), DugtrioBaseStats
+	dbw Bank(MeowthBaseStats), MeowthBaseStats
+	dbw Bank(PersianBaseStats), PersianBaseStats
+	dbw Bank(PsyduckBaseStats), PsyduckBaseStats
+	dbw Bank(GolduckBaseStats), GolduckBaseStats
+	dbw Bank(MankeyBaseStats), MankeyBaseStats
+	dbw Bank(PrimeapeBaseStats), PrimeapeBaseStats
+	dbw Bank(GrowlitheBaseStats), GrowlitheBaseStats
+	dbw Bank(ArcanineBaseStats), ArcanineBaseStats
+	dbw Bank(PoliwagBaseStats), PoliwagBaseStats
+	dbw Bank(PoliwhirlBaseStats), PoliwhirlBaseStats
+	dbw Bank(PoliwrathBaseStats), PoliwrathBaseStats
+	dbw Bank(AbraBaseStats), AbraBaseStats
+	dbw Bank(KadabraBaseStats), KadabraBaseStats
+	dbw Bank(AlakazamBaseStats), AlakazamBaseStats
+	dbw Bank(MachopBaseStats), MachopBaseStats
+	dbw Bank(MachokeBaseStats), MachokeBaseStats
+	dbw Bank(MachampBaseStats), MachampBaseStats
+	dbw Bank(BellsproutBaseStats), BellsproutBaseStats
+	dbw Bank(WeepinbellBaseStats), WeepinbellBaseStats
+	dbw Bank(VictreebelBaseStats), VictreebelBaseStats
+	dbw Bank(TentacoolBaseStats), TentacoolBaseStats
+	dbw Bank(TentacruelBaseStats), TentacruelBaseStats
+	dbw Bank(GeodudeBaseStats), GeodudeBaseStats
+	dbw Bank(GravelerBaseStats), GravelerBaseStats
+	dbw Bank(GolemBaseStats), GolemBaseStats
+	dbw Bank(PonytaBaseStats), PonytaBaseStats
+	dbw Bank(RapidashBaseStats), RapidashBaseStats
+	dbw Bank(SlowpokeBaseStats), SlowpokeBaseStats
+	dbw Bank(SlowbroBaseStats), SlowbroBaseStats
+	dbw Bank(MagnemiteBaseStats), MagnemiteBaseStats
+	dbw Bank(MagnetonBaseStats), MagnetonBaseStats
+	dbw Bank(FarfetchdBaseStats), FarfetchdBaseStats
+	dbw Bank(DoduoBaseStats), DoduoBaseStats
+	dbw Bank(DodrioBaseStats), DodrioBaseStats
+	dbw Bank(SeelBaseStats), SeelBaseStats
+	dbw Bank(DewgongBaseStats), DewgongBaseStats
+	dbw Bank(GrimerBaseStats), GrimerBaseStats
+	dbw Bank(MukBaseStats), MukBaseStats
+	dbw Bank(ShellderBaseStats), ShellderBaseStats
+	dbw Bank(CloysterBaseStats), CloysterBaseStats
+	dbw Bank(GastlyBaseStats), GastlyBaseStats
+	dbw Bank(HaunterBaseStats), HaunterBaseStats
+	dbw Bank(GengarBaseStats), GengarBaseStats
+	dbw Bank(OnixBaseStats), OnixBaseStats
+	dbw Bank(DrowzeeBaseStats), DrowzeeBaseStats
+	dbw Bank(HypnoBaseStats), HypnoBaseStats
+	dbw Bank(KrabbyBaseStats), KrabbyBaseStats
+	dbw Bank(KinglerBaseStats), KinglerBaseStats
+	dbw Bank(VoltorbBaseStats), VoltorbBaseStats
+	dbw Bank(ElectrodeBaseStats), ElectrodeBaseStats
+	dbw Bank(ExeggcuteBaseStats), ExeggcuteBaseStats
+	dbw Bank(ExeggutorBaseStats), ExeggutorBaseStats
+	dbw Bank(CuboneBaseStats), CuboneBaseStats
+	dbw Bank(MarowakBaseStats), MarowakBaseStats
+	dbw Bank(HitmonleeBaseStats), HitmonleeBaseStats
+	dbw Bank(HitmonchanBaseStats), HitmonchanBaseStats
+	dbw Bank(LickitungBaseStats), LickitungBaseStats
+	dbw Bank(KoffingBaseStats), KoffingBaseStats
+	dbw Bank(WeezingBaseStats), WeezingBaseStats
+	dbw Bank(RhyhornBaseStats), RhyhornBaseStats
+	dbw Bank(RhydonBaseStats), RhydonBaseStats
+	dbw Bank(ChanseyBaseStats), ChanseyBaseStats
+	dbw Bank(TangelaBaseStats), TangelaBaseStats
+	dbw Bank(KangaskhanBaseStats), KangaskhanBaseStats
+	dbw Bank(HorseaBaseStats), HorseaBaseStats
+	dbw Bank(SeadraBaseStats), SeadraBaseStats
+	dbw Bank(GoldeenBaseStats), GoldeenBaseStats
+	dbw Bank(SeakingBaseStats), SeakingBaseStats
+	dbw Bank(StaryuBaseStats), StaryuBaseStats
+	dbw Bank(StarmieBaseStats), StarmieBaseStats
+	dbw Bank(MrmimeBaseStats), MrmimeBaseStats
+	dbw Bank(ScytherBaseStats), ScytherBaseStats
+	dbw Bank(JynxBaseStats), JynxBaseStats
+	dbw Bank(ElectabuzzBaseStats), ElectabuzzBaseStats
+	dbw Bank(MagmarBaseStats), MagmarBaseStats
+	dbw Bank(PinsirBaseStats), PinsirBaseStats
+	dbw Bank(TaurosBaseStats), TaurosBaseStats
+	dbw Bank(MagikarpBaseStats), MagikarpBaseStats
+	dbw Bank(GyaradosBaseStats), GyaradosBaseStats
+	dbw Bank(LaprasBaseStats), LaprasBaseStats
+	dbw Bank(DittoBaseStats), DittoBaseStats
+	dbw Bank(EeveeBaseStats), EeveeBaseStats
+	dbw Bank(VaporeonBaseStats), VaporeonBaseStats
+	dbw Bank(JolteonBaseStats), JolteonBaseStats
+	dbw Bank(FlareonBaseStats), FlareonBaseStats
+	dbw Bank(PorygonBaseStats), PorygonBaseStats
+	dbw Bank(OmanyteBaseStats), OmanyteBaseStats
+	dbw Bank(OmastarBaseStats), OmastarBaseStats
+	dbw Bank(KabutoBaseStats), KabutoBaseStats
+	dbw Bank(KabutopsBaseStats), KabutopsBaseStats
+	dbw Bank(AerodactylBaseStats), AerodactylBaseStats
+	dbw Bank(SnorlaxBaseStats), SnorlaxBaseStats
+	dbw Bank(ArticunoBaseStats), ArticunoBaseStats
+	dbw Bank(ZapdosBaseStats), ZapdosBaseStats
+	dbw Bank(MoltresBaseStats), MoltresBaseStats
+	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(DragonairBaseStats), DragonairBaseStats
+	dbw Bank(DragoniteBaseStats), DragoniteBaseStats
+	dbw Bank(MewtwoBaseStats), MewtwoBaseStats

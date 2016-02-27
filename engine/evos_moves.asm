@@ -200,22 +200,19 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd11e + 1]
 	ld d, a
 	dec de
-	ld hl, BaseStats
-	ld bc, MonBaseStatsEnd - MonBaseStats
-.addBaseStats
-	ld a, d
-	and a
-	jr nz, .addIt
-	ld a, e
-	and a
-	jr z, .doneAddBaseStats
-.addIt
-	dec de
-	add hl, bc
-	jr .addBaseStats
-.doneAddBaseStats
-	ld de, wMonHeader
-	call CopyData
+	ld hl, BaseStatsPointers
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de,wMonHeader
+	ld a, b
+	ld bc,MonBaseStatsEnd - MonBaseStats
+	call FarCopyData
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
 	ld a, [wd0b5 + 1]
