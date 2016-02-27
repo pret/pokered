@@ -51,6 +51,9 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	push hl
 ; transform user into opposing Pokemon
 ; species
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hl]
 	ld [de], a
 ; type 1, type 2, catch rate, and moves
