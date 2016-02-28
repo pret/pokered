@@ -1894,7 +1894,8 @@ CoinCaseNumCoinsText: ; e247 (3:6247)
 ItemUseOldRod: ; e24c (3:624c)
 	call FishingInit
 	jp c, ItemUseNotTime
-	lb bc, 5, MAGIKARP
+	ld b, 5
+	ld de, MAGIKARP
 	ld a, $1 ; set bite
 	jr RodResponse
 
@@ -1910,14 +1911,20 @@ ItemUseGoodRod: ; e259 (3:6259)
 	jr nc, .RandomLoop
 	; choose which monster appears
 	ld hl,GoodRodMons
+	ld c, a
 	add a,a
+	add c
 	ld c,a
 	ld b,0
 	add hl,bc
 	ld b,[hl]
 	inc hl
-	ld c,[hl]
-	and a
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a
+	ld a, 1
+	jr RodResponse
 .SetBite
 	ld a,0
 	rla
@@ -1930,10 +1937,12 @@ ItemUseSuperRod: ; e283 (3:6283)
 	call FishingInit
 	jp c, ItemUseNotTime
 	call ReadSuperRodData
-	ld a, e
+	ld a, c
 RodResponse: ; e28d (3:628d)
+; a = rod response (1 = bite; 0 = no bite)
+; b = level
+; de = species
 	ld [wRodResponse], a
-
 	dec a ; is there a bite?
 	jr nz, .next
 	; if yes, store level and species data
@@ -1941,8 +1950,10 @@ RodResponse: ; e28d (3:628d)
 	ld [wMoveMissed], a
 	ld a, b ; level
 	ld [wCurEnemyLVL], a
-	ld a, c ; species
+	ld a, e ; species
 	ld [wCurOpponent], a
+	ld a, d ; species
+	ld [wCurOpponent + 1], a
 
 .next
 	ld hl, wWalkBikeSurfState
@@ -2913,15 +2924,15 @@ WaterTilesets: ; e8e0 (3:68e0)
 	db $ff ; terminator
 
 ReadSuperRodData: ; e8ea (3:68ea)
-; return e = 2 if no fish on this map
-; return e = 1 if a bite, bc = level,species
-; return e = 0 if no bite
+; return c = 2 if no fish on this map
+; return c = 1 if a bite, b = level, de = species
+; return c = 0 if no bite
 	ld a, [wCurMap]
 	ld de, 3 ; each fishing group is three bytes wide
 	ld hl, SuperRodData
 	call IsInArray
 	jr c, .ReadFishingGroup
-	ld e, $2 ; $2 if no fishing groups found
+	ld c, $2 ; $2 if no fishing groups found
 	ret
 
 .ReadFishingGroup
@@ -2935,7 +2946,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 
 	ld b, [hl] ; how many mons in group
 	inc hl ; point to data
-	ld e, $0 ; no bite yet
+	ld c, $0 ; no bite yet
 
 .RandomLoop
 	call Random
@@ -2947,14 +2958,19 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	jr nc, .RandomLoop ; if a is greater than the number of mons, regenerate
 
 	; get the mon
+	ld c, a
 	add a
+	add c
 	ld c, a
 	ld b, $0
 	add hl, bc
 	ld b, [hl] ; level
 	inc hl
-	ld c, [hl] ; species
-	ld e, $1 ; $1 if there's a bite
+	ld a, [hli] ; species
+	ld e, a
+	ld a, [hl]
+	ld d, a
+	ld c, $1 ; $1 if there's a bite
 	ret
 
 INCLUDE "data/super_rod.asm"
