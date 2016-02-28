@@ -7068,3 +7068,11 @@ INCLUDE "data/baseStats/dratini.asm"
 INCLUDE "data/baseStats/dragonair.asm"
 INCLUDE "data/baseStats/dragonite.asm"
 INCLUDE "data/baseStats/mewtwo.asm"
+
+INCLUDE "data/baseStats/swampert.asm"
+
+
+SECTION "Bank 2F", ROMX, BANK[$2f]
+
+TyroguePicFront::      INCBIN "pic/bmon/tyrogue.pic"
+TyroguePicBack::       INCBIN "pic/monback/tyrogueb.pic"

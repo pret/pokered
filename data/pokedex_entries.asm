@@ -29,8 +29,8 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BlastoiseDexEntry
 	dw PinsirDexEntry
 	dw TangelaDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
 	dw FearowDexEntry
@@ -48,26 +48,26 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw PsyduckDexEntry
 	dw DrowzeeDexEntry
 	dw GolemDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw MagmarDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw ElectabuzzDexEntry
 	dw MagnetonDexEntry
 	dw KoffingDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw MankeyDexEntry
 	dw SeelDexEntry
 	dw DiglettDexEntry
 	dw TaurosDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw FarfetchdDexEntry
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw DoduoDexEntry
 	dw PoliwagDexEntry
 	dw JynxDexEntry
@@ -77,23 +77,23 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DittoDexEntry
 	dw MeowthDexEntry
 	dw KrabbyDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw VulpixDexEntry
 	dw NinetalesDexEntry
 	dw PikachuDexEntry
 	dw RaichuDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DragonairDexEntry
 	dw KabutoDexEntry
 	dw KabutopsDexEntry
 	dw HorseaDexEntry
 	dw SeadraDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw SandshrewDexEntry
 	dw SandslashDexEntry
 	dw OmanyteDexEntry
@@ -113,38 +113,38 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw WeedleDexEntry
 	dw KakunaDexEntry
 	dw BeedrillDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw DodrioDexEntry
 	dw PrimeapeDexEntry
 	dw DugtrioDexEntry
 	dw VenomothDexEntry
 	dw DewgongDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw CaterpieDexEntry
 	dw MetapodDexEntry
 	dw ButterfreeDexEntry
 	dw MachampDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw GolduckDexEntry
 	dw HypnoDexEntry
 	dw GolbatDexEntry
 	dw MewtwoDexEntry
 	dw SnorlaxDexEntry
 	dw MagikarpDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw MukDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw KinglerDexEntry
 	dw CloysterDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw ElectrodeDexEntry
 	dw ClefableDexEntry
 	dw WeezingDexEntry
 	dw PersianDexEntry
 	dw MarowakDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw HaunterDexEntry
 	dw AbraDexEntry
 	dw AlakazamDexEntry
@@ -154,13 +154,13 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BulbasaurDexEntry
 	dw VenusaurDexEntry
 	dw TentacruelDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw GoldeenDexEntry
 	dw SeakingDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw PonytaDexEntry
 	dw RapidashDexEntry
 	dw RattataDexEntry
@@ -170,16 +170,16 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw GeodudeDexEntry
 	dw PorygonDexEntry
 	dw AerodactylDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw MagnemiteDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
 	dw CharmanderDexEntry
 	dw SquirtleDexEntry
 	dw CharmeleonDexEntry
 	dw WartortleDexEntry
 	dw CharizardDexEntry
-	dw MissingNoDexEntry
+	dw DratiniDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
@@ -189,6 +189,83 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BellsproutDexEntry
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+	dw DratiniDexEntry
+
 
 ; string: species name
 ; height in feet, inches
