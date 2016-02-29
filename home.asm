@@ -1292,6 +1292,8 @@ INCLUDE "engine/menu/start_menu.asm"
 ; OUTPUT:
 ; [wNumSetBits] = number of set bits
 CountSetBits:: ; 2b7f (0:2b7f)
+	xor a
+	ld [wNumSetBits + 1], a
 	ld c,0
 .loop
 	ld a,[hli]
@@ -1301,6 +1303,13 @@ CountSetBits:: ; 2b7f (0:2b7f)
 	srl e
 	ld a,0
 	adc c
+	jr nc, .ok
+	push af
+	ld a, [wNumSetBits + 1]
+	inc a
+	ld [wNumSetBits + 1], a
+	pop af
+.ok
 	ld c,a
 	dec d
 	jr nz,.innerLoop

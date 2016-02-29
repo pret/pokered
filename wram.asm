@@ -537,7 +537,11 @@ wNPCMovementDirections2:: ; cc97
 
 wSwitchPartyMonTempBuffer:: ; cc97
 ; temporary buffer when swapping party mon data
-	ds 10
+wListScrollOffsetDex::
+	ds 2
+wLastMenuItemDex::
+	ds 2
+	ds 6
 
 wNumStepsToTake:: ; cca1
 ; used in Pallet Town scripted movement
