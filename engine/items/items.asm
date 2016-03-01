@@ -169,7 +169,10 @@ ItemUseBall: ; d687 (3:5687)
 	cp a,POKEMONTOWER_6
 	jr nz,.loop
 	ld a,[wEnemyMonSpecies2]
-	cp a,MAROWAK
+	cp a,(MAROWAK & $FF)
+	jr nz, .loop
+	ld a,[wEnemyMonSpecies2 + 1]
+	cp a,(MAROWAK >> 8)
 	ld b,$10 ; can't be caught value
 	jp z,.setAnimData
 
@@ -473,8 +476,10 @@ ItemUseBall: ; d687 (3:5687)
 	ld hl,wEnemyBattleStatus3
 	bit Transformed,[hl]
 	jr z,.notTransformed
-	ld a,DITTO
+	ld a,(DITTO & $FF)
 	ld [wEnemyMonSpecies2],a
+	ld a,(DITTO >> 8)
+	ld [wEnemyMonSpecies2 + 1],a
 	jr .skip6
 
 .notTransformed

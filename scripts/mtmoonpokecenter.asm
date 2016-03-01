@@ -43,7 +43,8 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld hl, MtMoonPokecenterText_49366
 	jr .printText
 .enoughMoney
-	lb bc, MAGIKARP, 5
+	ld de, MAGIKARP
+	ld c, 5
 	call GivePokemon
 	jr nc, .done
 	xor a

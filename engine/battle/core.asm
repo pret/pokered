@@ -6999,13 +6999,21 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	ld [hli], a
 	ld [hl], "@"
 	ld a, [wcf91]
-	push af
-	ld a, MON_GHOST
+	ld c, a
+	ld a, [wcf91 + 1]
+	ld b, a
+	push bc
+	ld a, (MON_GHOST & $FF)
 	ld [wcf91], a
+	ld a, (MON_GHOST >> 8)
+	ld [wcf91 + 1], a
 	ld de, vFrontPic
 	call LoadMonFrontSprite ; load ghost sprite
-	pop af
+	pop bc
+	ld a, c
 	ld [wcf91], a
+	ld a, b
+	ld [wcf91 + 1], a
 	jr .spriteLoaded
 .isNoGhost
 	ld de, vFrontPic
