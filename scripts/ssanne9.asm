@@ -99,7 +99,7 @@ SSAnne9Text5: ; 61bdd (18:5bdd)
 	ld hl, SSAnne9Text_61bf2
 	call PrintText
 	call LoadScreenTilesFromBuffer1
-	ld a, SNORLAX
+	ld bc, SNORLAX
 	call DisplayPokedex
 	jp TextScriptEnd
 

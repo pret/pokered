@@ -258,7 +258,7 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 	call PrintText
 	jr .done
 .GetMon
-	ld a, HITMONLEE
+	ld bc, HITMONLEE
 	call DisplayPokedex
 	ld hl, WantHitmonleeText
 	call PrintText
@@ -293,7 +293,7 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 	call PrintText
 	jr .done
 .GetMon
-	ld a, HITMONCHAN
+	ld bc, HITMONCHAN
 	call DisplayPokedex
 	ld hl, WantHitmonchanText
 	call PrintText

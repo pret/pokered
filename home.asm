@@ -255,17 +255,6 @@ DrawHPBar:: ; 1336 (0:1336)
 LoadMonData:: ; 1372 (0:1372)
 	jpab LoadMonData_
 
-
-OverwritewMoves:: ; 137a (0:137a)
-; Write c to [wMoves + b]. Unused.
-	ld hl, wMoves
-	ld e, b
-	ld d, 0
-	add hl, de
-	ld a, c
-	ld [hl], a
-	ret
-
 LoadFlippedFrontSpriteByMonIndex:: ; 1384 (0:1384)
 	ld a, 1
 	ld [wSpriteFlipped], a
@@ -2735,7 +2724,11 @@ IsItemInBag:: ; 3493 (0:3493)
 	ret
 
 DisplayPokedex:: ; 349b (0:349b)
+; bc = mon id
+	ld a, c
 	ld [wd11e], a
+	ld a, b
+	ld [wd11e + 1], a
 	jpba _DisplayPokedex
 
 SetSpriteFacingDirectionAndDelay:: ; 34a6 (0:34a6)
