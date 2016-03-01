@@ -12,13 +12,13 @@ NoThanksText: ; 5284f (14:684f)
 	db "NO THANKS@"
 
 PrizeMenuMon1Entries: ; 52859 (14:6859)
-	db ABRA
-	db CLEFAIRY
+	dw ABRA
+	dw CLEFAIRY
 IF DEF(_RED)
-	db NIDORINA
+	dw NIDORINA
 ENDC
 IF DEF(_BLUE)
-	db NIDORINO
+	dw NIDORINO
 ENDC
 	db "@"
 
@@ -36,14 +36,14 @@ ENDC
 
 PrizeMenuMon2Entries: ; 52864 (14:6864)
 IF DEF(_RED)
-	db DRATINI
-	db SCYTHER
+	dw DRATINI
+	dw SCYTHER
 ENDC
 IF DEF(_BLUE)
-	db PINSIR
-	db DRATINI
+	dw PINSIR
+	dw DRATINI
 ENDC
-	db PORYGON
+	dw PORYGON
 	db "@"
 
 PrizeMenuMon2Cost: ; 52868 (14:6868)
@@ -60,9 +60,9 @@ ENDC
 	db "@"
 
 PrizeMenuTMsEntries: ; 5286f (14:686f)
-	db TM_23
-	db TM_15
-	db TM_50
+	dw TM_23
+	dw TM_15
+	dw TM_50
 	db "@"
 
 PrizeMenuTMsCost: ; 52873 (14:6873)
