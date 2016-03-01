@@ -21,13 +21,14 @@ EvolutionAfterBattle: ; 3ad1c (e:6d1c)
 	push hl
 	push bc
 	push de
-	ld hl, wPartyCount
+	ld hl, wPartyCount - 1
 	push hl
 
 Evolution_PartyMonLoop: ; loop over party mons
 	ld hl, wWhichPokemon
 	inc [hl]
 	pop hl
+	inc hl
 	inc hl
 	ld a, [hli]
 	cp $ff ; have we reached the end of the party?
@@ -472,6 +473,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	push hl
 	push de
 	push bc
+	push de
 	ld a, [wcf91]  ; cur mon ID
 	ld c, a
 	ld a, [wcf91 + 1]  ; cur mon ID
@@ -490,14 +492,12 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	ld de,wEvosMovesData
 	ld bc,wEvosMovesData_End - wEvosMovesData
 	call FarCopyData
+	pop de
 	ld hl,wEvosMovesData
 .skipEvolutionsLoop
 	ld a,[hli]
 	and a ; reached terminator?
 	jr z,.firstMove
-	inc hl
-	inc hl
-	inc hl
 	cp a,EV_ITEM
 	jr nz,.notEVItem
 	inc hl
