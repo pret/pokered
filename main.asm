@@ -767,8 +767,18 @@ SetIshiharaTeam: ; 64ca (1:64ca)
 .loop
 	ld a, [de]
 	cp $ff
+	jr nz, .addMon
+	inc de
+	ld a, [de]
+	cp $ff
 	ret z
+	dec de
+.addMon
+	ld a, [de]
 	ld [wcf91], a
+	inc de
+	ld a, [de]
+	ld [wcf91 + 1], a
 	inc de
 	ld a, [de]
 	ld [wCurEnemyLVL], a
@@ -777,12 +787,12 @@ SetIshiharaTeam: ; 64ca (1:64ca)
 	jr .loop
 
 IshiharaTeam: ; 64df (1:64df)
-	db EXEGGUTOR,90
-	db MEW,20
-	db JOLTEON,56
-	db DUGTRIO,56
-	db ARTICUNO,57
-	db $FF
+	dwb EXEGGUTOR,90
+	dwb MEW,20
+	dwb JOLTEON,56
+	dwb DUGTRIO,56
+	dwb ARTICUNO,57
+	dw $FF, $FF
 
 EmptyFunc: ; 64ea (1:64ea)
 	ret
