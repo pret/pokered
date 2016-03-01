@@ -1,25 +1,65 @@
 TradeMons: ; 71b7b (1c:5b7b)
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
 IF DEF(_YELLOW)
-	db LICKITUNG, DUGTRIO,  0,"GURIO@@@@@@"
-	db CLEFAIRY,  MR_MIME,  0,"MILES@@@@@@"
-	db BUTTERFREE,BEEDRILL, 2,"STINGER@@@@"
-	db KANGASKHAN,MUK,      0,"STICKY@@@@@"
-	db MEW,       MEW,      2,"BART@@@@@@@"
-	db TANGELA,   PARASECT, 0,"SPIKE@@@@@@"
-	db PIDGEOT,   PIDGEOT,  1,"MARTY@@@@@@"
-	db GOLDUCK,   RHYDON,   1,"BUFFY@@@@@@"
-	db GROWLITHE, DEWGONG,  2,"CEZANNE@@@@"
-	db CUBONE,    MACHOKE,  2,"RICKY@@@@@@"
+	dw LICKITUNG, DUGTRIO
+	db 0,"GURIO@@@@@@"
+
+	dw CLEFAIRY,  MR_MIME
+	db 0,"MILES@@@@@@"
+
+	dw BUTTERFREE,BEEDRILL
+	db 2,"STINGER@@@@"
+
+	dw KANGASKHAN,MUK
+	db 0,"STICKY@@@@@"
+
+	dw MEW,       MEW
+	db 2,"BART@@@@@@@"
+
+	dw TANGELA,   PARASECT
+	db 0,"SPIKE@@@@@@"
+
+	dw PIDGEOT,   PIDGEOT
+	db 1,"MARTY@@@@@@"
+
+	dw GOLDUCK,   RHYDON
+	db 1,"BUFFY@@@@@@"
+
+	dw GROWLITHE, DEWGONG
+	db 2,"CEZANNE@@@@"
+
+	dw CUBONE,    MACHOKE
+	db 2,"RICKY@@@@@@"
+
 ELSE
-	db NIDORINO,  NIDORINA, 0,"TERRY@@@@@@"
-	db ABRA,      MR_MIME,  0,"MARCEL@@@@@"
-	db BUTTERFREE,BEEDRILL, 2,"CHIKUCHIKU@"
-	db PONYTA,    SEEL,     0,"SAILOR@@@@@"
-	db SPEAROW,   FARFETCHD,2,"DUX@@@@@@@@"
-	db SLOWBRO,   LICKITUNG,0,"MARC@@@@@@@"
-	db POLIWHIRL, JYNX,     1,"LOLA@@@@@@@"
-	db RAICHU,    ELECTRODE,1,"DORIS@@@@@@"
-	db VENONAT,   TANGELA,  2,"CRINKLES@@@"
-	db NIDORAN_M, NIDORAN_F,2,"SPOT@@@@@@@"
+	dw NIDORINO,  NIDORINA
+	db 0,"TERRY@@@@@@"
+
+	dw ABRA,      MR_MIME
+	db 0,"MARCEL@@@@@"
+
+	dw BUTTERFREE,BEEDRILL
+	db 2,"CHIKUCHIKU@"
+
+	dw PONYTA,    SEEL
+	db 0,"SAILOR@@@@@"
+
+	dw SPEAROW,   FARFETCHD
+	db 2,"DUX@@@@@@@@"
+
+	dw SLOWBRO,   LICKITUNG
+	db 0,"MARC@@@@@@@"
+
+	dw POLIWHIRL, JYNX
+	db 1,"LOLA@@@@@@@"
+
+	dw RAICHU,    ELECTRODE
+	db 1,"DORIS@@@@@@"
+
+	dw VENONAT,   TANGELA
+	db 2,"CRINKLES@@@"
+
+	dw NIDORAN_M, NIDORAN_F
+	db 2,"SPOT@@@@@@@"
+
 ENDC

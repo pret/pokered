@@ -445,9 +445,9 @@ Trade_AnimRightToLeft: ; 413c6 (10:53c6)
 	ld a, $44
 	ld [wBaseCoordY], a
 	ld a, [wRightGBMonSpecies]
-	ld [wMonPartySpriteSpecies + 1], a
-	ld a, [wRightGBMonSpecies + 1]
 	ld [wMonPartySpriteSpecies], a
+	ld a, [wRightGBMonSpecies + 1]
+	ld [wMonPartySpriteSpecies + 1], a
 	call Trade_WriteCircledMonOAM
 	call Trade_DrawRightGameboy
 	call Trade_CopyTileMapToVRAM
