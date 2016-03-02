@@ -581,17 +581,20 @@ GetMonHeader:: ; 1537 (0:1537)
 	call CompareTwoBytes
 	ld de,FossilKabutopsPic
 	ld b,$66 ; size of Kabutops fossil and Ghost sprites
+	ld c, Bank(FossilKabutopsPic)
 	jr z,.specialID
 	ld de, MON_GHOST
 	call LoadBCWith_wd0b5
 	call CompareTwoBytes
 	ld de,GhostPic
+	ld c, Bank(GhostPic)
 	jr z,.specialID
 	ld de, FOSSIL_AERODACTYL
 	call LoadBCWith_wd0b5
 	call CompareTwoBytes
 	ld de,FossilAerodactylPic
 	ld b,$77 ; size of Aerodactyl fossil sprite
+	ld c, Bank(FossilAerodactylPic)
 	jr z,.specialID
 	predef IndexToPokedex
 	ld a, [wd11e]
@@ -620,6 +623,8 @@ GetMonHeader:: ; 1537 (0:1537)
 	ld [hl],e ; write front sprite pointer
 	inc hl
 	ld [hl],d
+	ld hl,wMonSpritesBank
+	ld [hl], c
 .done
 	ld a, [wd0b5]
 	ld [wMonHIndex], a
@@ -2438,7 +2443,7 @@ TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
-	ld a, $FF
+	ld a, [wEngagedTrainerClass + 1]
 	ld [wCurOpponent + 1], a
 	ld [wEnemyMonOrTrainerClass + 1], a
 	ld a, [wEngagedTrainerClass]
@@ -2446,6 +2451,7 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld [wEnemyMonOrTrainerClass], a
 	ld a, [wEngagedTrainerSet]
 	ld [wTrainerNo], a
+	ld [wCurEnemyLVL], a
 	ret
 
 GetSpritePosition1:: ; 32ef (0:32ef)
@@ -2537,11 +2543,15 @@ EngageMapTrainer:: ; 336a (0:336a)
 	ld d, $0
 	ld a, [wSpriteIndex]
 	dec a
+	ld b, a
 	add a
+	add b
 	ld e, a
 	add hl, de     ; seek to engaged trainer data
 	ld a, [hli]    ; load trainer class
 	ld [wEngagedTrainerClass], a
+	ld a, [hli]    ; load trainer class
+	ld [wEngagedTrainerClass + 1], a
 	ld a, [hl]     ; load trainer mon set
 	ld [wEnemyMonAttackMod], a
 	jp PlayTrainerMusic
@@ -2593,61 +2603,13 @@ TrainerEndBattleText:: ; 33cf (0:33cf)
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-; only engage withe trainer if the player is not already
-; engaged with another trainer
-; XXX unused?
-CheckIfAlreadyEngaged:: ; 33dd (0:33dd)
-	ld a, [wFlags_0xcd60]
-	bit 0, a
-	ret nz
-	call EngageMapTrainer
-	xor a
-	ret
-
 PlayTrainerMusic:: ; 33e8 (0:33e8)
-	ld a, [wEngagedTrainerClass]
-	cp SONY1
-	ret z
-	cp SONY2
-	ret z
-	cp SONY3
-	ret z
-	ld a, [wGymLeaderNo]
-	and a
-	ret nz
-	xor a
-	ld [wAudioFadeOutControl], a
-	ld a, $ff
-	call PlaySound
-	ld a, BANK(Music_MeetEvilTrainer)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
-	ld a, [wEngagedTrainerClass]
-	ld b, a
-	ld hl, EvilTrainerList
-.evilTrainerListLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .noEvilTrainer
-	cp b
-	jr nz, .evilTrainerListLoop
-	ld a, MUSIC_MEET_EVIL_TRAINER
-	jr .PlaySound
-.noEvilTrainer
-	ld hl, FemaleTrainerList
-.femaleTrainerListLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .maleTrainer
-	cp b
-	jr nz, .femaleTrainerListLoop
-	ld a, MUSIC_MEET_FEMALE_TRAINER
-	jr .PlaySound
-.maleTrainer
-	ld a, MUSIC_MEET_MALE_TRAINER
-.PlaySound
-	ld [wNewSoundID], a
-	jp PlaySound
+	push hl
+	push bc
+	callab _PlayTrainerMusic
+	pop hl
+	pop bc
+	ret
 
 INCLUDE "data/trainer_types.asm"
 

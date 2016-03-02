@@ -552,6 +552,7 @@ wBadgeNumberTile:: ; cd3d
 ; tile ID of the badge number being drawn
 wBaseStatsData::
 wEvosMovesData::
+wLoadSpriteTemp2::
 	ds 1
 wBadgeNameTile:: ; cd3e
 ; first tile ID of the name being drawn
@@ -755,7 +756,7 @@ wEnemyMonUnmodifiedSpecial:: ; cd2c
 	ds 1
 
 wEngagedTrainerClass:: ; cd2d
-	ds 1
+	ds 2
 wEngagedTrainerSet:: ; cd2e
 ;	ds 1
 
@@ -1543,8 +1544,9 @@ wEnemyMonType::
 wEnemyMonType1::     db
 wEnemyMonType2::     db
 wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds 4
+wEnemyMonMoves::     ds 3
 SECTION "WRAM Bank 1", WRAMX, BANK[1]
+	ds 1
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
 wEnemyMonMaxHP::     dw
@@ -2546,7 +2548,7 @@ wMapSpriteData:: ; d4e4
 
 wMapSpriteExtraData:: ; d504
 ; two bytes per sprite (trainer class/item ID, trainer set ID)
-	ds 32
+	ds 48
 
 wCurrentMapHeight2:: ; d524
 ; map height in 2x2 meta-tiles

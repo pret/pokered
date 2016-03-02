@@ -18,7 +18,7 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, TAMER, $5
 	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, POKEMANIAC, $6
 	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, JUGGLER, $5
-	object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50
+	pokemon_object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50
 	object SPRITE_BALL, $1b, $5, STAY, NONE, $7, TM_17
 	object SPRITE_BALL, $12, $9, STAY, NONE, $8, FULL_HEAL
 	object SPRITE_BALL, $9, $b, STAY, NONE, $9, TM_05
