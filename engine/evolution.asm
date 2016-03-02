@@ -22,6 +22,8 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld [hTilesetType], a
 	ld a, [wEvoOldSpecies]
 	ld [wWholeScreenPaletteMonSpecies], a
+	ld a, [wEvoOldSpecies + 1]
+	ld [wWholeScreenPaletteMonSpecies + 1], a
 	ld c, 0
 	call EvolutionSetWholeScreenPalette
 	ld a, [wEvoNewSpecies]
@@ -75,7 +77,7 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	call Evolution_ChangeMonPic ; show the new species pic
 	ld a, [wEvoNewSpecies]
 	ld c, a
-	ld a, [wEvoNewSpecies]
+	ld a, [wEvoNewSpecies + 1]
 	ld b, a
 .done
 	ld a, c

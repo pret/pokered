@@ -1205,9 +1205,7 @@ ShrinkingSquareBlackAnim: ; 7a722 (1e:6722)
 	db $FF
 
 UnusedAnim: ; 7a72a (1e:672a)
-	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_SHOOT_MANY_BALLS_UPWARD, $FF
-	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
 ParalyzeAnim: ; 7a731 (1e:6731)
