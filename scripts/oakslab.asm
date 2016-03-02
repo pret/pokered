@@ -1004,9 +1004,19 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
+
 	ld a, [wNumSetBits]
-	cp 2
+	ld c, a
+	ld a, [wNumSetBits + 1]
+	ld b, a
+	ld a, b
+	cp (2 >> 8)
 	jr c, .asm_1d279
+	jr nz, .complete
+	ld a, c
+	cp (2 & $FF)
+	jr c, .asm_1d279
+.complete
 	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .asm_1d279
 .asm_1d266
