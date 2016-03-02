@@ -566,20 +566,8 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,vChars1 + $570
 	call TrainerInfo_FarCopyData
 	call EnableLCD
-	ld hl,wTrainerInfoTextBoxWidthPlus1
-	ld a,18 + 1
-	ld [hli],a
-	dec a
-	ld [hli],a
-	ld [hl],1
 	coord hl, 0, 0
 	call TrainerInfo_DrawTextBox
-	ld hl,wTrainerInfoTextBoxWidthPlus1
-	ld a,16 + 1
-	ld [hli],a
-	dec a
-	ld [hli],a
-	ld [hl],3
 	coord hl, 1, 10
 	call TrainerInfo_DrawTextBox
 	coord hl, 0, 10
@@ -627,15 +615,12 @@ TrainerInfo_BadgesText: ; 13597 (4:7597)
 ; height is always 6
 ; INPUT:
 ; hl = destination address
-; [wTrainerInfoTextBoxWidthPlus1] = width
-; [wTrainerInfoTextBoxWidth] = width - 1
-; [wTrainerInfoTextBoxNextRowOffset] = distance from the end of a text box row to the start of the next
 TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	ld a,$79 ; upper left corner tile ID
 	lb de, $7a, $7b ; top edge and upper right corner tile ID's
 	call TrainerInfo_DrawHorizontalEdge ; draw top edge
 	call TrainerInfo_NextTextBoxRow
-	ld a,[wTrainerInfoTextBoxWidthPlus1]
+	ld a,19
 	ld e,a
 	ld d,0
 	ld c,6 ; height of the text box
@@ -651,7 +636,7 @@ TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 
 TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ld [hli],a ; place left corner tile
-	ld a,[wTrainerInfoTextBoxWidth]
+	ld a,18
 	ld c,a
 	ld a,d
 .loop
@@ -663,7 +648,7 @@ TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ret
 
 TrainerInfo_NextTextBoxRow: ; 135d0 (4:75d0)
-	ld a,[wTrainerInfoTextBoxNextRowOffset] ; distance to the start of the next row
+	ld a, 1 ; distance to the start of the next row
 .loop
 	inc hl
 	dec a

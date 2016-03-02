@@ -548,11 +548,21 @@ wNumStepsToTake:: ; cca1
 	ds 1
 
 wOaksAideNumMonsOwned::
+wBadgeNumberTile:: ; cd3d
+; tile ID of the badge number being drawn
 wBaseStatsData::
 wEvosMovesData::
-	ds 2
+	ds 1
+wBadgeNameTile:: ; cd3e
+; first tile ID of the name being drawn
+	ds 1
+wBadgeOrFaceTiles::
+; 8 bytes
+; a list of the first tile IDs of each badge or face (depending on whether the
+; badge is owned) to be drawn on the trainer screen
+	ds 1
 wOaksAideRequirement::
-	ds 46
+	ds 45
 wBaseStatsData_End::
 wEvosMovesData_End::
 
@@ -873,9 +883,6 @@ wFieldMoves:: ; cd3d
 ; 4 bytes
 ; the current mon's field moves
 
-wBadgeNumberTile:: ; cd3d
-; tile ID of the badge number being drawn
-
 wRodResponse:: ; cd3d
 ; 0 = no bite
 ; 1 = bite
@@ -931,8 +938,6 @@ wHoFPartyMonIndex:: ; cd3e
 wNumCreditsMonsDisplayed:: ; cd3e
 ; the number of credits mons that have been displayed so far
 
-wBadgeNameTile:: ; cd3e
-; first tile ID of the name being drawn
 
 wFlyLocationsList:: ; cd3e
 ; 11 bytes plus $ff sentinel values at each end
@@ -967,11 +972,6 @@ wOptionsBattleStyleCursorX:: ; cd3f
 wTrainerInfoTextBoxNextRowOffset:: ; cd3f
 
 wHoFMonLevel:: ; cd3f
-
-wBadgeOrFaceTiles:: ; cd3f
-; 8 bytes
-; a list of the first tile IDs of each badge or face (depending on whether the
-; badge is owned) to be drawn on the trainer screen
 
 wSlotMachineWheel2Offset:: ; cd3f
 
