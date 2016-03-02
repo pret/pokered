@@ -9,8 +9,11 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	TX_ASM
 	CheckEvent EVENT_GOT_EXP_ALL
 	jr nz, .asm_49683
-	ld a, 50 ; pokemon needed
-	ld [hOaksAideRequirement], a
+	ld bc, 50 ; pokemon needed
+	ld a, c
+	ld [wOaksAideRequirement], a
+	ld a, b
+	ld [wOaksAideRequirement + 1], a
 	ld a, EXP_ALL ; oak's aide reward
 	ld [hOaksAideRewardItem], a
 	ld [wd11e], a

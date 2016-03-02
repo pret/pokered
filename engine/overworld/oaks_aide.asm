@@ -1,4 +1,10 @@
 OaksAideScript: ; 0x59035
+	ld hl, wOaksAideRequirement
+	ld a, [hli]
+	ld d, a
+	ld a , [hl]
+	ld [wOaksAideRequirement], a
+	ld [hl], d
 	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
@@ -9,9 +15,18 @@ OaksAideScript: ; 0x59035
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hOaksAideNumMonsOwned], a
+	ld [wOaksAideNumMonsOwned + 1], a
+	ld a, [wNumSetBits + 1]
+	ld [wOaksAideNumMonsOwned], a
+	ld a, [wOaksAideNumMonsOwned]
 	ld b, a
-	ld a, [hOaksAideRequirement]
+	ld a, [wOaksAideRequirement]
+	cp b
+	jr c, .giveItem
+	jr nz, .notEnoughOwnedMons
+	ld a, [wOaksAideNumMonsOwned + 1]
+	ld b, a
+	ld a, [wOaksAideRequirement + 1]
 	cp b
 	jr z, .giveItem
 	jr nc, .notEnoughOwnedMons

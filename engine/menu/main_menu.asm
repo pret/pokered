@@ -405,9 +405,15 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
+	ld hl, wNumSetBits
+	ld a, [hli]
+	ld d, a
+	ld a , [hl]
+	ld [wNumSetBits], a
+	ld [hl], d
 	pop hl
 	ld de, wNumSetBits
-	lb bc, 1, 3
+	lb bc, 2, 3
 	jp PrintNumber
 
 PrintPlayTime: ; 5e55 (1:5e55)

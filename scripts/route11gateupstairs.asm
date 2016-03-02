@@ -19,8 +19,11 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	TX_ASM
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .asm_4949b
-	ld a, 30 ; pokemon needed
-	ld [hOaksAideRequirement], a
+	ld bc, 30 ; pokemon needed
+	ld a, c
+	ld [wOaksAideRequirement], a
+	ld a, b
+	ld [wOaksAideRequirement + 1], a
 	ld a, ITEMFINDER ; oak's aide reward
 	ld [hOaksAideRewardItem], a
 	ld [wd11e], a
