@@ -31,12 +31,21 @@ DirectorText: ; 487b2 (12:47b2)
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	cp 150
-	jr nc, .CompletedDex
-	ld hl, .GameDesigner
-	jr .done
-.CompletedDex
+	ld c, a
+	ld a, [wNumSetBits + 1]
+	ld b, a
+	ld a, b
+	cp (150 >> 8)
+	jr c, .notComplete
+	jr nz, .complete
+	ld a, c
+	cp (150 & $FF)
+	jr c, .notComplete
+.complete
 	ld hl, .CompletedDexText
+	jr .done
+.notComplete
+	ld hl, .GameDesigner
 .done
 	call PrintText
 	jp TextScriptEnd
