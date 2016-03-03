@@ -6953,6 +6953,7 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	call _LoadTrainerPic
 	xor a
 	ld [wEnemyMonSpecies2], a
+	ld [wEnemyMonSpecies2 + 1], a
 	ld [hStartTileID], a
 	dec a
 	ld [wAICount], a

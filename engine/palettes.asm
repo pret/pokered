@@ -69,11 +69,16 @@ SetPal_StatusScreen: ; 71e4f (1c:5e4f)
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
+	ld a, [wcf91 + 1]
+	cp $FF
+	jr z, .notpokemon
+	ld d, a
 	ld a, [wcf91]
 	ld e, a
-	ld a, [wcf91 + 1]
-	ld d, a
-.pokemon
+	jr .ok
+.notpokemon
+	ld de, $1
+.ok
 	call DeterminePaletteIDOutOfBattle
 	push af
 	ld hl, wPalPacket + 1
