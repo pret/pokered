@@ -1957,15 +1957,26 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld c, a
 	ld b, $0
 	add hl, bc
+	add hl, bc
 	ld e, l
 	ld d, h
 	inc de
-.asm_7b81
+	inc de
+.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
-	inc a
-	jr nz, .asm_7b81
+	ld a, [de]
+	inc de
+	ld [hli], a
+	ld a, [hl]
+	cp $FF
+	jr nz, .loop
+	inc hl
+	ld a, [hl]
+	dec hl
+	cp $FF
+	jr nz, .loop
 	ld hl, wPartyMonOT
 	ld d, $5
 	ld a, [wRemoveMonFromBox]
@@ -2601,6 +2612,10 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	ld [hl], a
 	ld a, [de]
 	ld [wd11e], a
+	inc de
+	ld a, [de]
+	ld [wd11e + 1], a
+	dec de
 	push de
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
@@ -2618,9 +2633,16 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	inc hl
 .nextMon2
 	inc de
+	inc de
 	ld a, [de]
-	inc a
+	cp $ff
+	jr nz, .notDone
+	inc de
+	ld a, [de]
+	dec de
+	cp $ff
 	jr z, .applyDamageLoopDone
+.notDone
 	ld bc, wPartyMon2 - wPartyMon1
 	add hl, bc
 	push hl
@@ -3965,7 +3987,8 @@ _MoveMon: ; f51e (3:751e)
 	ret
 .partyOrBoxNotFull
 	inc a
-	ld [hl], a           ; increment number of mons in party/box
+	ld [hli], a           ; increment number of mons in party/box
+	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -3987,6 +4010,8 @@ _MoveMon: ; f51e (3:751e)
 	ld a, b
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
+	inc hl
+	ld [hl], $ff
 	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
@@ -4031,6 +4056,7 @@ _MoveMon: ; f51e (3:751e)
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld a, [hl]
+	inc de
 	inc de
 	inc de
 	inc de
@@ -4538,8 +4564,12 @@ InitPlayerData2:
 
 	ld hl, wPartyCount
 	call InitializeEmptyList
+	ld a, $FF
+	ld [wPartyCount + 2], a
 	ld hl, wNumInBox
 	call InitializeEmptyList
+	ld a, $FF
+	ld [wNumInBox + 2], a
 	ld hl, wNumBagItems
 	call InitializeEmptyList
 	ld hl, wNumBoxItems
@@ -6929,6 +6959,26 @@ _PlayTrainerMusic:: ; 33e8 (0:33e8)
 .PlaySound
 	ld [wNewSoundID], a
 	jp PlaySound
+
+
+; Wait for sound to finish playing
+WaitForSoundToFinish_:: ; 3748 (0:3748)
+	ld a, [wLowHealthAlarm]
+	and $80
+	ret nz
+	push hl
+.waitLoop
+	ld hl, wChannelSoundIDs + CH4
+	xor a
+	or [hl]
+	inc hl
+	or [hl]
+	inc hl
+	inc hl
+	or [hl]
+	jr nz, .waitLoop
+	pop hl
+	ret
 
 SECTION "bank1E",ROMX,BANK[$1E]
 

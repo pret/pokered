@@ -1483,8 +1483,11 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld [wWhichPokemon],a
 	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
-	jr nz,.skipMultiplying
+	jr z,.multiply
+	cp a,PCPOKEMONLISTMENU
+	jr nz, .skipMultiplying
 ; if it's an item menu
+.multiply
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
 	ld a,[wListPointer]
@@ -1494,8 +1497,11 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	inc hl ; hl = beginning of list entries
 	ld b,0
 	add hl,bc
-	ld a,[hl]
+	ld a,[hli]
 	ld [wcf91],a
+	ld a,[hl]
+	ld [wcf91 + 1],a
+	dec hl
 	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
 	jr z,.pokemonList
@@ -1718,13 +1724,17 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld c,a
 	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
-	ld a,c
+	jr z,.multiply
+	cp a,PCPOKEMONLISTMENU
 	jr nz,.skipMultiplying
 ; if it's an item menu
 ; item entries are 2 bytes long, so multiply by 2
+.multiply
+	ld a,c
 	sla a
 	sla c
 .skipMultiplying
+	ld a,c
 	add e
 	ld e,a
 	jr nc,.noCarry
@@ -1738,7 +1748,21 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	ld a,[de]
 	ld [wd11e],a
 	cp a,$ff
+	inc de
+	jp nz,.notDone
+	ld a,[wListMenuID]
+	cp a,PCPOKEMONLISTMENU
+	jp nz,.printCancelMenuItem
+	ld a,[de]
+	ld [wd11e + 1], a
+	cp a,$ff
 	jp z,.printCancelMenuItem
+	jr .ok
+.notDone
+	ld a,[de]
+	ld [wd11e + 1], a
+.ok
+	dec de
 	push bc
 	push de
 	push hl
@@ -1835,6 +1859,10 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	pop de
 	inc de
 	ld a,[wListMenuID]
+	cp a,PCPOKEMONLISTMENU
+	jr nz, .notpc
+	inc de
+.notpc
 	cp a,ITEMLISTMENU
 	jr nz,.nextListEntry
 .printItemQuantity
@@ -3191,20 +3219,8 @@ PlaySoundWaitForCurrent:: ; 3740 (0:3740)
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish:: ; 3748 (0:3748)
-	ld a, [wLowHealthAlarm]
-	and $80
-	ret nz
 	push hl
-.waitLoop
-	ld hl, wChannelSoundIDs + CH4
-	xor a
-	or [hl]
-	inc hl
-	or [hl]
-	inc hl
-	inc hl
-	or [hl]
-	jr nz, .waitLoop
+	callab WaitForSoundToFinish_
 	pop hl
 	ret
 

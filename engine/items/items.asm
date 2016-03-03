@@ -2735,18 +2735,34 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	ld a, [wcf91]
 	ld [wd0b5], a
+	ld l, a
 	ld a, [wcf91 + 1]
 	ld [wd0b5 + 1], a
-	ld c, a
-.asm_e7b1
+	ld h, a
+.loop
 	inc de
 	ld a, [de]
-	ld b, a
-	ld a, c
-	ld c, b
+	ld b, a  ; b = old low byte
+	ld a, l
 	ld [de], a
+	ld l, b
+	inc de
+	ld a, [de]
+	ld c, a  ; c = old high byte
+	ld a, h
+	ld [de], a
+	ld h, c
+	ld a, l
 	cp $ff
-	jr nz, .asm_e7b1
+	jr nz, .loop
+	ld a, h
+	cp $ff
+	jr nz, .loop
+	ld a, $FF
+	inc de
+	ld [de], a
+	inc de
+	ld [de], a
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, NAME_LENGTH

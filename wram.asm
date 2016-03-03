@@ -3158,7 +3158,7 @@ wMainDataEnd::
 wBoxDataStart::
 
 wNumInBox::  ds 1 ; da80
-wBoxSpecies:: ds MONS_PER_BOX + 1
+wBoxSpecies:: ds MONS_PER_BOX + 2
 
 wBoxMons::
 wBoxMon1:: box_struct wBoxMon1 ; da96

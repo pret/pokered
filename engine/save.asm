@@ -406,6 +406,7 @@ CopyBoxToOrFromSRAM: ; 7390e (1c:790e)
 	xor a
 	ld [hli], a
 	dec a
+	ld [hli], a
 	ld [hl], a
 
 	ld hl, sBox1 ; sBox7
@@ -553,6 +554,7 @@ EmptySRAMBox: ; 73a7f (1c:7a7f)
 	xor a
 	ld [hli], a
 	dec a
+	ld [hli], a
 	ld [hl], a
 	ret
 
