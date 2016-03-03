@@ -363,10 +363,10 @@ _OaksLabText_441cc::
 	line "letion is:"
 
 	para "@"
-	TX_NUM hDexRatingNumMonsSeen, 1, 3
+	TX_NUM wDexRatingNumMonsSeen2, 2, 3
 	text " #MON seen"
 	line "@"
-	TX_NUM hDexRatingNumMonsOwned, 1, 3
+	TX_NUM wDexRatingNumMonsOwned2, 2, 3
 	text " #MON owned"
 
 	para "PROF.OAK's"

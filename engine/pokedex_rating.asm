@@ -3,19 +3,34 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hDexRatingNumMonsSeen], a
+	ld [wDexRatingNumMonsSeen2 + 1], a
+	ld a, [wNumSetBits + 1]
+	ld [wDexRatingNumMonsSeen2], a
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hDexRatingNumMonsOwned], a
+	ld [wDexRatingNumMonsOwned2 + 1], a
+	ld a, [wNumSetBits + 1]
+	ld [wDexRatingNumMonsOwned2], a
 	ld hl, DexRatingsTable
 .findRating
 	ld a, [hli]
-	ld b, a
-	ld a, [hDexRatingNumMonsOwned]
+	ld c, a
+	ld a, [hli]
+	ld b, a  ; bc = num owned in table
+	ld a, [wDexRatingNumMonsOwned2 + 1]
+	ld d, a
+	ld a, [wDexRatingNumMonsOwned2]
+	ld e, a
 	cp b
 	jr c, .foundRating
+	jr nz, .next
+	; equal high bytes
+	ld a, d
+	cp c
+	jr c, .foundRating
+.next
 	inc hl
 	inc hl
 	jr .findRating
@@ -34,10 +49,16 @@ DisplayDexRating: ; 44169 (11:4169)
 	jp WaitForTextScrollButtonPress
 .hallOfFame
 	ld de, wDexRatingNumMonsSeen
-	ld a, [hDexRatingNumMonsSeen]
+	ld a, [wDexRatingNumMonsSeen2]
 	ld [de], a
 	inc de
-	ld a, [hDexRatingNumMonsOwned]
+	ld a, [wDexRatingNumMonsSeen2 + 1]
+	ld [de], a
+	inc de
+	ld a, [wDexRatingNumMonsOwned2]
+	ld [de], a
+	inc de
+	ld a, [wDexRatingNumMonsOwned2 + 1]
 	ld [de], a
 	inc de
 .copyRatingTextLoop
@@ -56,37 +77,37 @@ PokedexRatingText_441cc: ; 441cc (11:41cc)
 	db "@"
 
 DexRatingsTable: ; 441d1 (11:41d1)
-	db 10
+	dw 10
 	dw PokedexRatingText_44201
-	db 20
+	dw 20
 	dw PokedexRatingText_44206
-	db 30
+	dw 30
 	dw PokedexRatingText_4420b
-	db 40
+	dw 40
 	dw PokedexRatingText_44210
-	db 50
+	dw 50
 	dw PokedexRatingText_44215
-	db 60
+	dw 60
 	dw PokedexRatingText_4421a
-	db 70
+	dw 70
 	dw PokedexRatingText_4421f
-	db 80
+	dw 80
 	dw PokedexRatingText_44224
-	db 90
+	dw 90
 	dw PokedexRatingText_44229
-	db 100
+	dw 100
 	dw PokedexRatingText_4422e
-	db 110
+	dw 110
 	dw PokedexRatingText_44233
-	db 120
+	dw 120
 	dw PokedexRatingText_44238
-	db 130
+	dw 130
 	dw PokedexRatingText_4423d
-	db 140
+	dw 140
 	dw PokedexRatingText_44242
-	db 150
+	dw 150
 	dw PokedexRatingText_44247
-	db 152
+	dw NUM_POKEMON + 1
 	dw PokedexRatingText_4424c
 
 PokedexRatingText_44201: ; 44201 (11:4201)

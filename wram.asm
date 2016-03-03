@@ -553,6 +553,7 @@ wBadgeNumberTile:: ; cd3d
 wBaseStatsData::
 wEvosMovesData::
 wLoadSpriteTemp2::
+wDexRatingNumMonsSeen2::
 	ds 1
 wBadgeNameTile:: ; cd3e
 ; first tile ID of the name being drawn
@@ -561,6 +562,7 @@ wBadgeOrFaceTiles::
 ; 8 bytes
 ; a list of the first tile IDs of each badge or face (depending on whether the
 ; badge is owned) to be drawn on the trainer screen
+wDexRatingNumMonsOwned2::
 	ds 1
 wOaksAideRequirement::
 	ds 45

@@ -357,10 +357,10 @@ _YeahText::
 
 _DexSeenOwnedText::
 	text "#DEX   Seen:@"
-	TX_NUM wDexRatingNumMonsSeen, 1, 3
+	TX_NUM wDexRatingNumMonsSeen2, 2, 3
 	db $0
 	line "         Owned:@"
-	TX_NUM wDexRatingNumMonsOwned, 1, 3
+	TX_NUM wDexRatingNumMonsOwned2, 2, 3
 	db "@"
 
 _DexRatingText::
