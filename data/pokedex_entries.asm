@@ -29,7 +29,7 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BlastoiseDexEntry
 	dw PinsirDexEntry
 	dw TangelaDexEntry
-	dw DratiniDexEntry
+	dw ChikoritaDexEntry
 	dw DratiniDexEntry
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
@@ -1327,6 +1327,13 @@ VictreebelDexEntry: ; 40fd1 (10:4fd1)
 	db 5,7
 	dw 340
 	TX_FAR _VictreebelDexEntry
+	db "@"
+
+ChikoritaDexEntry:
+	db "LEAF@"
+	db 2,11
+	dw 141
+	TX_FAR _ChikoritaDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

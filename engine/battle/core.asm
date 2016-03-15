@@ -7200,15 +7200,19 @@ LoadMonBackPic: ; 3f103 (f:7103)
 	call ClearScreenArea
 	ld hl,  wMonHBackSprite - wMonHeader
 	call UncompressMonSprite
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	call LoadBackSpriteUnzoomed
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
+
+LoadBackSpriteUnzoomed:
+	ld a, $77
+	ld de, vBackPic
+	push de
+	jp LoadUncompressedBackSprite
 
 JumpMoveEffect: ; 3f132 (f:7132)
 	call _JumpMoveEffect

@@ -2,7 +2,7 @@ PalletTownObject: ; 0x182c3 (size=58)
 	db $b ; border block
 
 	db $3 ; warps
-	db $5, $5, $0, REDS_HOUSE_1F
+	db $5, $5, $0, DAYCAREM
 	db $5, $d, $0, BLUES_HOUSE
 	db $b, $c, $1, OAKS_LAB
 

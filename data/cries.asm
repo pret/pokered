@@ -30,7 +30,7 @@ CryData: ; 39446 (e:5446)
 	db $13, $00, $80; Blastoise
 	db $14, $00, $80; Pinsir
 	db $12, $00, $80; Tangela
-	db $00, $00, $00; MissingNo.
+	db $12, $80, $40; Chikorita
 	db $00, $00, $00; MissingNo.
 	db $1F, $20, $40; Growlithe
 	db $17, $FF, $C0; Onix

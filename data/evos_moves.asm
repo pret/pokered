@@ -659,10 +659,19 @@ Mon114_EvosMoves: ; 3b362 (e:7362)
 	db 0
 
 Mon152_EvosMoves: ; 3b370 (e:7370)
-;MISSINGNO
+;CHIKORITA
 ;Evolutions
+	db EV_LEVEL,16
+	dw TANGELA ;TODO: BAYLEEF
 	db 0
 ;Learnset
+	db 8,RAZOR_LEAF
+	db 12,REFLECT
+	db 15,POISONPOWDER
+	db 22,ABSORB
+	db 29,BODY_SLAM
+	db 36,LIGHT_SCREEN
+	db 50,SOLARBEAM
 	db 0
 
 Mon153_EvosMoves: ; 3b372 (e:7372)
