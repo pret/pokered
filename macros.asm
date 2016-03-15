@@ -41,6 +41,8 @@ homecall: MACRO
 	ld [MBC1RomBank], a
 	ENDM
 
+farcall EQUS "callba"
+
 callba: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
