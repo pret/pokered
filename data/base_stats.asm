@@ -151,8 +151,8 @@ BaseStatsPointers::
 	dbw Bank(MewtwoBaseStats), MewtwoBaseStats
 	dbw Bank(MewBaseStats), MewBaseStats
 	dbw Bank(ChikoritaBaseStats), ChikoritaBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(BayleefBaseStats), BayleefBaseStats
+	dbw Bank(MeganiumBaseStats), MeganiumBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

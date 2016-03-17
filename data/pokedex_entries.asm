@@ -30,7 +30,7 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw PinsirDexEntry
 	dw TangelaDexEntry
 	dw ChikoritaDexEntry
-	dw DratiniDexEntry
+	dw BayleefDexEntry
 	dw GrowlitheDexEntry
 	dw OnixDexEntry
 	dw FearowDexEntry
@@ -48,7 +48,7 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw PsyduckDexEntry
 	dw DrowzeeDexEntry
 	dw GolemDexEntry
-	dw DratiniDexEntry
+	dw MeganiumDexEntry
 	dw MagmarDexEntry
 	dw DratiniDexEntry
 	dw ElectabuzzDexEntry
@@ -1334,6 +1334,20 @@ ChikoritaDexEntry:
 	db 2,11
 	dw 141
 	TX_FAR _ChikoritaDexEntry
+	db "@"
+
+BayleefDexEntry:
+	db "LEAF@"
+	db 3,11
+	dw 348
+	TX_FAR _BayleefDexEntry
+	db "@"
+
+MeganiumDexEntry:
+	db "HERB@"
+	db 5,11
+	dw 2216
+	TX_FAR _MeganiumDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

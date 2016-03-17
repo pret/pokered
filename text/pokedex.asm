@@ -1517,3 +1517,23 @@ _ChikoritaDexEntry::
 	next "seek out warm"
 	next "places"
 	dex
+
+_BayleefDexEntry::
+	text "A spicy aroma"
+	next "emanates from"
+	next "around its neck."
+
+	page "The aroma acts as"
+	next "a stimulant to"
+	next "restore health"
+	dex
+
+_MeganiumDexEntry::
+	text "The aroma that"
+	next "rises from its"
+	next "petals contains"
+
+	page "a substance that"
+	next "calms aggressive"
+	next "feelings"
+	dex

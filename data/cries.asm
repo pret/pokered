@@ -31,7 +31,7 @@ CryData: ; 39446 (e:5446)
 	db $14, $00, $80; Pinsir
 	db $12, $00, $80; Tangela
 	db $12, $80, $40; Chikorita
-	db $00, $00, $00; MissingNo.
+	db $12, $60, $80; Bayleef
 	db $1F, $20, $40; Growlithe
 	db $17, $FF, $C0; Onix
 	db $18, $40, $A0; Fearow
@@ -49,7 +49,7 @@ CryData: ; 39446 (e:5446)
 	db $21, $20, $60; Psyduck
 	db $0D, $88, $20; Drowzee
 	db $12, $E0, $40; Golem
-	db $00, $00, $00; MissingNo.
+	db $12, $40, $A0; Meganium
 	db $04, $FF, $30; Magmar
 	db $00, $00, $00; MissingNo.
 	db $06, $8F, $FF; Electabuzz

@@ -662,7 +662,7 @@ Mon152_EvosMoves: ; 3b370 (e:7370)
 ;CHIKORITA
 ;Evolutions
 	db EV_LEVEL,16
-	dw TANGELA ;TODO: BAYLEEF
+	dw BAYLEEF
 	db 0
 ;Learnset
 	db 8,RAZOR_LEAF
@@ -675,10 +675,19 @@ Mon152_EvosMoves: ; 3b370 (e:7370)
 	db 0
 
 Mon153_EvosMoves: ; 3b372 (e:7372)
-;MISSINGNO
+;BAYLEEF
 ;Evolutions
+	db EV_LEVEL,32
+	dw MEGANIUM
 	db 0
 ;Learnset
+	db 8,RAZOR_LEAF
+	db 12,REFLECT
+	db 15,POISONPOWDER
+	db 23,LEECH_SEED
+	db 31,BODY_SLAM
+	db 39,LIGHT_SCREEN
+	db 48,SOLARBEAM
 	db 0
 
 Mon058_EvosMoves: ; 3b374 (e:7374)
@@ -909,10 +918,17 @@ Mon076_EvosMoves: ; 3b459 (e:7459)
 	db 0
 
 Mon154_EvosMoves: ; 3b467 (e:7467)
-;MISSINGNO
+;MEGANIUM
 ;Evolutions
 	db 0
 ;Learnset
+	db 8,RAZOR_LEAF
+	db 12,REFLECT
+	db 15,POISONPOWDER
+	db 23,LEECH_SEED
+	db 31,BODY_SLAM
+	db 41,LIGHT_SCREEN
+	db 51,SOLARBEAM
 	db 0
 
 Mon126_EvosMoves: ; 3b469 (e:7469)
