@@ -945,10 +945,18 @@ Mon126_EvosMoves: ; 3b469 (e:7469)
 	db 0
 
 Mon155_EvosMoves: ; 3b477 (e:7477)
-;MISSINGNO
+;CYNDAQUIL
 ;Evolutions
+	db EV_LEVEL,14
+	dw QUILAVA
 	db 0
 ;Learnset
+	db 6,SAND_ATTACK
+	db 12,EMBER
+	db 19,QUICK_ATTACK
+	db 27,FIRE_SPIN
+	db 36,SWIFT
+	db 42,FLAMETHROWER
 	db 0
 
 Mon125_EvosMoves: ; 3b479 (e:7479)
@@ -991,10 +999,18 @@ Mon109_EvosMoves: ; 3b493 (e:7493)
 	db 0
 
 Mon156_EvosMoves: ; 3b4a2 (e:74a2)
-;MISSINGNO
+;QUILAVA
 ;Evolutions
+	db EV_LEVEL,36
+	dw TYPHLOSION
 	db 0
 ;Learnset
+	db 6,SAND_ATTACK
+	db 12,EMBER
+	db 21,QUICK_ATTACK
+	db 31,FIRE_SPIN
+	db 42,SWIFT
+	db 54,FLAMETHROWER
 	db 0
 
 Mon056_EvosMoves: ; 3b4a4 (e:74a4)
@@ -1052,10 +1068,16 @@ Mon128_EvosMoves: ; 3b4d1 (e:74d1)
 	db 0
 
 Mon157_EvosMoves: ; 3b4dd (e:74dd)
-;MISSINGNO
+;TYPHLOSION
 ;Evolutions
 	db 0
 ;Learnset
+	db 6,SAND_ATTACK
+	db 12,EMBER
+	db 21,QUICK_ATTACK
+	db 31,FIRE_SPIN
+	db 43,SWIFT
+	db 55,FLAMETHROWER
 	db 0
 
 Mon158_EvosMoves: ; 3b4df (e:74df)

@@ -7087,6 +7087,9 @@ INCLUDE "data/baseStats/mewtwo.asm"
 INCLUDE "data/baseStats/chikorita.asm"
 INCLUDE "data/baseStats/bayleef.asm"
 INCLUDE "data/baseStats/meganium.asm"
+INCLUDE "data/baseStats/cyndaquil.asm"
+INCLUDE "data/baseStats/quilava.asm"
+INCLUDE "data/baseStats/typhlosion.asm"
 
 INCLUDE "data/baseStats/swampert.asm"
 
@@ -7193,3 +7196,12 @@ BayleefPicFront::       INCBIN "pic/bmon/bayleef.pic"
 BayleefPicBack::        INCBIN "pic/monback/bayleefb.pic"
 MeganiumPicFront::       INCBIN "pic/bmon/meganium.pic"
 MeganiumPicBack::        INCBIN "pic/monback/meganiumb.pic"
+CyndaquilPicFront::       INCBIN "pic/bmon/cyndaquil.pic"
+CyndaquilPicBack::        INCBIN "pic/monback/cyndaquilb.pic"
+
+SECTION "Bank 31", ROMX, BANK[$31]
+
+QuilavaPicFront::       INCBIN "pic/bmon/quilava.pic"
+QuilavaPicBack::        INCBIN "pic/monback/quilavab.pic"
+TyphlosionPicFront::       INCBIN "pic/bmon/typhlosion.pic"
+TyphlosionPicBack::        INCBIN "pic/monback/typhlosionb.pic"

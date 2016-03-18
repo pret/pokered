@@ -153,9 +153,9 @@ BaseStatsPointers::
 	dbw Bank(ChikoritaBaseStats), ChikoritaBaseStats
 	dbw Bank(BayleefBaseStats), BayleefBaseStats
 	dbw Bank(MeganiumBaseStats), MeganiumBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(CyndaquilBaseStats), CyndaquilBaseStats
+	dbw Bank(QuilavaBaseStats), QuilavaBaseStats
+	dbw Bank(TyphlosionBaseStats), TyphlosionBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

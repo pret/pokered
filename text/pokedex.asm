@@ -1537,3 +1537,33 @@ _MeganiumDexEntry::
 	next "calms aggressive"
 	next "feelings"
 	dex
+
+_CyndaquilDexEntry::
+	text "It is timid and"
+	next "always curls up"
+	next "into a ball."
+
+	page "If attacked, it"
+	next "flares up its"
+	next "back in defense"
+	dex
+
+_QuilavaDexEntry::
+	text "Before battle, it"
+	next "turns its back on"
+	next "its opponent to"
+
+	page "demonstrate how"
+	next "ferociously its"
+	next "fire blazes"
+	dex
+
+_TyphlosionDexEntry::
+	text "If its rage peaks"
+	next "it becomes so hot"
+	next "that anything it"
+
+	page "touches it will"
+	next "instantly go up"
+	next "in flames"
+	dex

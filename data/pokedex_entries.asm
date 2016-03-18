@@ -50,16 +50,16 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw GolemDexEntry
 	dw MeganiumDexEntry
 	dw MagmarDexEntry
-	dw DratiniDexEntry
+	dw CyndaquilDexEntry
 	dw ElectabuzzDexEntry
 	dw MagnetonDexEntry
 	dw KoffingDexEntry
-	dw DratiniDexEntry
+	dw QuilavaDexEntry
 	dw MankeyDexEntry
 	dw SeelDexEntry
 	dw DiglettDexEntry
 	dw TaurosDexEntry
-	dw DratiniDexEntry
+	dw TyphlosionDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw FarfetchdDexEntry
@@ -1348,6 +1348,27 @@ MeganiumDexEntry:
 	db 5,11
 	dw 2216
 	TX_FAR _MeganiumDexEntry
+	db "@"
+
+CyndaquilDexEntry:
+	db "FIRE MOUSE@"
+	db 1,8
+	dw 174
+	TX_FAR _CyndaquilDexEntry
+	db "@"
+
+QuilavaDexEntry:
+	db "VOLCANO@"
+	db 2,11
+	dw 419
+	TX_FAR _QuilavaDexEntry
+	db "@"
+
+TyphlosionDexEntry:
+	db "VOLCANO@"
+	db 5,7
+	dw 1753
+	TX_FAR _TyphlosionDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

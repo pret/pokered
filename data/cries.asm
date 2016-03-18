@@ -51,16 +51,16 @@ CryData: ; 39446 (e:5446)
 	db $12, $E0, $40; Golem
 	db $12, $40, $A0; Meganium
 	db $04, $FF, $30; Magmar
-	db $00, $00, $00; MissingNo.
+	db $04, $C0, $20; Cyndaquil
 	db $06, $8F, $FF; Electabuzz
 	db $1C, $20, $C0; Magneton
 	db $12, $E6, $DD; Koffing
-	db $00, $00, $00; MissingNo.
+	db $04, $B0, $30; Quilava
 	db $0A, $DD, $60; Mankey
 	db $0C, $88, $C0; Seel
 	db $0B, $AA, $01; Diglett
 	db $1D, $11, $40; Tauros
-	db $00, $00, $00; MissingNo.
+	db $04, $B0, $40; Typhlosion
 	db $00, $00, $00; MissingNo.
 	db $00, $00, $00; MissingNo.
 	db $10, $DD, $01; Farfetch'd
