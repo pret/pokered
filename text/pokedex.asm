@@ -1567,3 +1567,34 @@ _TyphlosionDexEntry::
 	next "instantly go up"
 	next "in flames"
 	dex
+
+_TotodileDexEntry::
+	text "It has the habit"
+	next "of biting"
+	next "anything with its"
+
+	page "developed jaws."
+	next "Even its Trainer"
+	next "must be careful"
+	dex
+
+_CroconawDexEntry::
+	text "Once it bites"
+	next "down, it won't let"
+	next "go until it loses"
+
+	page "its fangs. New"
+	next "fangs quickly"
+	next "grow into place"
+	dex
+
+_FeraligatrDexEntry::
+	text "It usually moves"
+	next "slowly, but it"
+	next "goes at blinding"
+
+	page "speed when it"
+	next "attacks and bites"
+	next "its victim"
+	dex
+

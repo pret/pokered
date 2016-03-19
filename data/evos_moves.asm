@@ -1081,17 +1081,35 @@ Mon157_EvosMoves: ; 3b4dd (e:74dd)
 	db 0
 
 Mon158_EvosMoves: ; 3b4df (e:74df)
-;MISSINGNO
+;TOTODILE
 ;Evolutions
+	db EV_LEVEL,18
+	dw CROCONAW
 	db 0
 ;Learnset
+	db 7,RAGE
+	db 13,WATER_GUN
+	db 20,BITE
+	db 27,MIST
+	db 35,SLASH
+	db 43,SCREECH
+	db 52,HYDRO_PUMP
 	db 0
 
 Mon159_EvosMoves: ; 3b4e1 (e:74e1)
-;MISSINGNO
+;CROCONAW
 ;Evolutions
+	db EV_LEVEL,30
+	dw FERALIGATR
 	db 0
 ;Learnset
+	db 7,RAGE
+	db 13,WATER_GUN
+	db 21,BITE
+	db 28,MIST
+	db 37,SLASH
+	db 45,SCREECH
+	db 55,HYDRO_PUMP
 	db 0
 
 Mon083_EvosMoves: ; 3b4e3 (e:74e3)
@@ -1134,10 +1152,17 @@ Mon149_EvosMoves: ; 3b500 (e:7500)
 	db 0
 
 Mon160_EvosMoves: ; 3b50c (e:750c)
-;MISSINGNO
+;FERALIGATR
 ;Evolutions
 	db 0
 ;Learnset
+	db 7,RAGE
+	db 13,WATER_GUN
+	db 21,BITE
+	db 28,MIST
+	db 38,SLASH
+	db 47,SCREECH
+	db 58,HYDRO_PUMP
 	db 0
 
 Mon161_EvosMoves: ; 3b50e (e:750e)

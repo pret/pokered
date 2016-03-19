@@ -77,8 +77,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_GRASS				;Mew/Chikorita
 	dn SPRITE_GRASS, SPRITE_GRASS			;Bayleef/Meganium
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Cyndaquil/Quilava
-	dn SPRITE_QUADRUPED, SPRITE_MON			;Typhlosion/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_QUADRUPED, SPRITE_MON			;Typhlosion/Totodile
+	dn SPRITE_MON, SPRITE_MON				;Croconaw/Feraligatr
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

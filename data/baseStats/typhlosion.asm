@@ -9,7 +9,7 @@ TyphlosionBaseStats::
 	db FIRE ; species type 2
 	db 45 ; catch rate
 	db 209 ; base exp yield
-	INCBIN "pic/bmon/Typhlosion.pic",0,1 ; sprite dimensions
+	INCBIN "pic/bmon/typhlosion.pic",0,1 ; sprite dimensions
 	dw TyphlosionPicFront
 	dw TyphlosionPicBack
 	; attacks known at lvl 0

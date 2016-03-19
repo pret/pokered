@@ -61,12 +61,12 @@ CryData: ; 39446 (e:5446)
 	db $0B, $AA, $01; Diglett
 	db $1D, $11, $40; Tauros
 	db $04, $B0, $40; Typhlosion
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $1D, $30, $30; Totodile
+	db $1D, $20, $A0; Croconaw
 	db $10, $DD, $01; Farfetch'd
 	db $1A, $44, $40; Venonat
 	db $0F, $3C, $C0; Dragonite
-	db $00, $80, $10; MissingNo.
+	db $1D, $10, $D0; Feraligatr
 	db $00, $00, $00; MissingNo.
 	db $1D, $E0, $80; MissingNo.
 	db $0B, $BB, $01; Doduo

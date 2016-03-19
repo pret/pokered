@@ -156,9 +156,9 @@ BaseStatsPointers::
 	dbw Bank(CyndaquilBaseStats), CyndaquilBaseStats
 	dbw Bank(QuilavaBaseStats), QuilavaBaseStats
 	dbw Bank(TyphlosionBaseStats), TyphlosionBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(TotodileBaseStats), TotodileBaseStats
+	dbw Bank(CroconawBaseStats), CroconawBaseStats
+	dbw Bank(FeraligatrBaseStats), FeraligatrBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

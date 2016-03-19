@@ -60,12 +60,12 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DiglettDexEntry
 	dw TaurosDexEntry
 	dw TyphlosionDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw TotodileDexEntry
+	dw CroconawDexEntry
 	dw FarfetchdDexEntry
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
-	dw DratiniDexEntry
+	dw FeraligatrDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DoduoDexEntry
@@ -1369,6 +1369,27 @@ TyphlosionDexEntry:
 	db 5,7
 	dw 1753
 	TX_FAR _TyphlosionDexEntry
+	db "@"
+
+TotodileDexEntry:
+	db "BIG JAW@"
+	db 2,0
+	dw 209
+	TX_FAR _TotodileDexEntry
+	db "@"
+
+CroconawDexEntry:
+	db "BIG JAW@"
+	db 3,7
+	dw 551
+	TX_FAR _CroconawDexEntry
+	db "@"
+
+FeraligatrDexEntry:
+	db "BIG JAW@"
+	db 7,7
+	dw 1958
+	TX_FAR _FeraligatrDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
