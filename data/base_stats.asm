@@ -159,8 +159,8 @@ BaseStatsPointers::
 	dbw Bank(TotodileBaseStats), TotodileBaseStats
 	dbw Bank(CroconawBaseStats), CroconawBaseStats
 	dbw Bank(FeraligatrBaseStats), FeraligatrBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(SentretBaseStats), SentretBaseStats
+	dbw Bank(FurretBaseStats), FurretBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

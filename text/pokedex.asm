@@ -1598,3 +1598,22 @@ _FeraligatrDexEntry::
 	next "its victim"
 	dex
 
+_SentretDexEntry::
+	text "When acting as a"
+	next "lookout, it warns"
+	next "others of danger"
+
+	page "by screeching and"
+	next "pounding with its"
+	next "large tail"
+	dex
+
+_FurretDexEntry::
+	text "The mother puts"
+	next "its offspring to"
+	next "sleep by curling"
+
+	page "up around them."
+	next "It corners foes"
+	next "with speed"
+	dex

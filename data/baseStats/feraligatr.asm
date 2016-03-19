@@ -20,10 +20,10 @@ FeraligatrBaseStats::
 	db 3 ; growth rate
 	; learnset
 	tmlearn 2,6
-	tmlearn 12,13,14
+	tmlearn 12,13,14,15
 	tmlearn 17,20
 	tmlearn 28,32
 	tmlearn 34
 	tmlearn 44,48
-	tmlearn 50,51,53
+	tmlearn 50,51,53,54
 	db Bank(FeraligatrPicFront) ; padding

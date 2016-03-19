@@ -66,8 +66,8 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw VenonatDexEntry
 	dw DragoniteDexEntry
 	dw FeraligatrDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw SentretDexEntry
+	dw FurretDexEntry
 	dw DoduoDexEntry
 	dw PoliwagDexEntry
 	dw JynxDexEntry
@@ -1390,6 +1390,20 @@ FeraligatrDexEntry:
 	db 7,7
 	dw 1958
 	TX_FAR _FeraligatrDexEntry
+	db "@"
+
+SentretDexEntry:
+	db "SCOUT@"
+	db 2,7
+	dw 132
+	TX_FAR _SentretDexEntry
+	db "@"
+
+FurretDexEntry:
+	db "LONG BODY@"
+	db 5,11
+	dw 716
+	TX_FAR _FurretDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

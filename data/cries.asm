@@ -67,8 +67,8 @@ CryData: ; 39446 (e:5446)
 	db $1A, $44, $40; Venonat
 	db $0F, $3C, $C0; Dragonite
 	db $1D, $10, $D0; Feraligatr
-	db $00, $00, $00; MissingNo.
-	db $1D, $E0, $80; MissingNo.
+	db $22, $50, $40; Sentret
+	db $22, $70, $70; Furret
 	db $0B, $BB, $01; Doduo
 	db $0E, $FF, $FF; Poliwag
 	db $0D, $FF, $FF; Jynx

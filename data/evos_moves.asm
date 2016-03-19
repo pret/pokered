@@ -1166,17 +1166,31 @@ Mon160_EvosMoves: ; 3b50c (e:750c)
 	db 0
 
 Mon161_EvosMoves: ; 3b50e (e:750e)
-;MISSINGNO
+;SENTRET
 ;Evolutions
+	db EV_LEVEL,15
+	dw FURRET
 	db 0
 ;Learnset
+	db 5,DEFENSE_CURL
+	db 11,QUICK_ATTACK
+	db 17,FURY_SWIPES
+	db 25,SLAM
+	db 33,REST
+	db 41,AMNESIA
 	db 0
 
 Mon162_EvosMoves: ; 3b510 (e:7510)
-;MISSINGNO
+;FURRET
 ;Evolutions
 	db 0
 ;Learnset
+	db 5,DEFENSE_CURL
+	db 11,QUICK_ATTACK
+	db 18,FURY_SWIPES
+	db 28,SLAM
+	db 38,REST
+	db 48,AMNESIA
 	db 0
 
 Mon084_EvosMoves: ; 3b512 (e:7512)
