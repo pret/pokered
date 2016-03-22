@@ -343,9 +343,6 @@ BillsPCMenuText: ; 216e1 (8:56e1)
 	next "DEPOSIT ",  $4a
 	next "RELEASE ",  $4a
 	next "CHANGE BOX"
-IF DEF(_YELLOW)
-	next "PRINT BOX"
-ENDC
 	next "SEE YA!"
 	db "@"
 
