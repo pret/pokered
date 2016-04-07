@@ -1,4 +1,4 @@
-SeafoamIslands1Script: ; 447e9 (11:47e9)
+SeafoamIslands1Script:
 	call EnableAutoTextBoxDrawing
 	SetEvent EVENT_IN_SEAFOAM_ISLANDS
 	ld hl, wFlags_0xcd60
@@ -37,11 +37,11 @@ SeafoamIslands1Script: ; 447e9 (11:47e9)
 	ld hl, Seafoam1HolesCoords
 	jp IsPlayerOnDungeonWarp
 
-Seafoam1HolesCoords: ; 44846 (11:4846)
+Seafoam1HolesCoords:
 	db $06,$11
 	db $06,$18
 	db $ff
 
-SeafoamIslands1TextPointers: ; 4484b (11:484b)
+SeafoamIslands1TextPointers:
 	dw BoulderText
 	dw BoulderText

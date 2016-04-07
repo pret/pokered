@@ -1,3 +1,3 @@
-_UnknownDungeon3MewtwoText::
+_MewtwoBattleText::
 	text "Mew!@@"
 
