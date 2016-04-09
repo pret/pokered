@@ -1,23 +1,23 @@
-CeladonPokecenterScript: ; 488b8 (12:48b8)
+CeladonPokecenterScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-CeladonPokecenterTextPointers: ; 488be (12:48be)
-	dw CeladonPokecenterText1
+CeladonPokecenterTextPointers:
+	dw CeladonHealNurseText
 	dw CeladonPokecenterText2
 	dw CeladonPokecenterText3
-	dw CeladonPokecenterText4
+	dw CeladonTradeNurseText
 
-CeladonPokecenterText4: ; 488c6 (12:48c6)
+CeladonTradeNurseText:
 	db $f6
 
-CeladonPokecenterText1: ; 488c7 (12:48c7)
+CeladonHealNurseText:
 	db $ff
 
-CeladonPokecenterText2: ; 488c8 (12:48c8)
+CeladonPokecenterText2:
 	TX_FAR _CeladonPokecenterText2
 	db "@"
 
-CeladonPokecenterText3: ; 488cd (12:48cd)
+CeladonPokecenterText3:
 	TX_FAR _CeladonPokecenterText3
 	db "@"

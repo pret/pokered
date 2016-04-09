@@ -1,4 +1,4 @@
-CeladonMartElevatorScript: ; 48600 (12:4600)
+CeladonMartElevatorScript:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -14,7 +14,7 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
+CeladonMartElevatorScript_4861c:
 	ld hl, wWarpEntries
 	ld a, [wWarpedFromWhichWarp]
 	ld b, a
@@ -22,7 +22,7 @@ CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
 	ld c, a
 	call CeladonMartElevatorScript_4862a
 
-CeladonMartElevatorScript_4862a: ; 4862a (12:462a)
+CeladonMartElevatorScript_4862a:
 	inc hl
 	inc hl
 	ld a, b
@@ -31,24 +31,24 @@ CeladonMartElevatorScript_4862a: ; 4862a (12:462a)
 	ld [hli], a
 	ret
 
-CeladonMartElevatorScript_48631: ; 48631 (12:4631)
-	ld hl, CeladonMartElavatorFloors
+CeladonMartElevatorScript_48631:
+	ld hl, CeladonMartElevatorFloors
 	call LoadItemList
-	ld hl, CeldaonMartElevatorWarpMaps
+	ld hl, CeladonMartElevatorWarpMaps
 	ld de, wElevatorWarpMaps
-	ld bc, CeldaonMartElevatorWarpMapsEnd - CeldaonMartElevatorWarpMaps
+	ld bc, CeladonMartElevatorWarpMapsEnd - CeladonMartElevatorWarpMaps
 	jp CopyData
 
-CeladonMartElavatorFloors: ; 48643 (12:4643)
-	db $05 ; num elements in list
+CeladonMartElevatorFloors:
+	db 5 ; number of elements in list
 	db FLOOR_1F
 	db FLOOR_2F
 	db FLOOR_3F
 	db FLOOR_4F
 	db FLOOR_5F
-	db $FF ; terminator
+	db $FF
 
-CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
+CeladonMartElevatorWarpMaps:
 ; first byte is warp number
 ; second byte is map number
 ; These specify where the player goes after getting out of the elevator.
@@ -57,17 +57,17 @@ CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
 	db $02, CELADON_MART_3
 	db $02, CELADON_MART_4
 	db $02, CELADON_MART_5
-CeldaonMartElevatorWarpMapsEnd:
+CeladonMartElevatorWarpMapsEnd:
 
-CeladonMartElevatorScript_48654: ; 48654 (12:4654)
+CeladonMartElevatorScript_48654:
 	jpba ShakeElevator
 
-CeladonMartElevatorTextPointers: ; 4865c (12:465c)
+CeladonMartElevatorTextPointers:
 	dw CeladonMartElevatorText1
 
-CeladonMartElevatorText1: ; 4865e (12:465e)
+CeladonMartElevatorText1:
 	TX_ASM
 	call CeladonMartElevatorScript_48631
-	ld hl, CeldaonMartElevatorWarpMaps
+	ld hl, CeladonMartElevatorWarpMaps
 	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd

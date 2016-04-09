@@ -12,4 +12,3 @@ _FuchsiaMartText3::
 	cont "up a #MON in"
 	cont "battle!"
 	done
-

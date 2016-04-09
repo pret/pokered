@@ -3,16 +3,16 @@
 ; first byte $FE, next byte # of items, last byte $FF
 
 ; Viridian
-ViridianMartText6:: ; 2442 (0:2442)
+ViridianCashierText::
 	db $FE,4,POKE_BALL,ANTIDOTE,PARLYZ_HEAL,BURN_HEAL,$FF
 
 ; Pewter
-PewterMartText1:: ; 2449 (0:2449)
+PewterCashierText::
 	db $FE,7,POKE_BALL,POTION,ESCAPE_ROPE,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
 ; Cerulean
-CeruleanMartText1:: ; 2453 (0:2453)
+CeruleanCashierText::
 	db $FE,7,POKE_BALL,POTION,REPEL,ANTIDOTE,BURN_HEAL,AWAKENING
 	db PARLYZ_HEAL,$FF
 
@@ -20,56 +20,56 @@ CeruleanMartText1:: ; 2453 (0:2453)
 	db $FE,1,BICYCLE,$FF
 
 ; Vermilion
-VermilionMartText1:: ; 2461 (0:2461)
+VermilionCashierText::
 	db $FE,6,POKE_BALL,SUPER_POTION,ICE_HEAL,AWAKENING,PARLYZ_HEAL
 	db REPEL,$FF
 
 ; Lavender
-LavenderMartText1:: ; 246a (0:246a)
+LavenderCashierText::
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,ESCAPE_ROPE,SUPER_REPEL
 	db ANTIDOTE,BURN_HEAL,ICE_HEAL,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (1)
-CeladonMart2Text1:: ; 2476 (0:2476)
+CeladonMart2Clerk1Text::
 	db $FE,9,GREAT_BALL,SUPER_POTION,REVIVE,SUPER_REPEL,ANTIDOTE
 	db BURN_HEAL,ICE_HEAL,AWAKENING,PARLYZ_HEAL,$FF
 
 ; Celadon Dept. Store 2F (2)
-CeladonMart2Text2:: ; 2482 (0:2482)
+CeladonMart2Clerk2Text::
 	db $FE,9,TM_32,TM_33,TM_02,TM_07,TM_37,TM_01,TM_05,TM_09,TM_17,$FF
 
 ; Celadon Dept. Store 4F
-CeladonMart4Text1:: ; 248e (0:248e)
+CeladonMart4ClerkText::
 	db $FE,5,POKE_DOLL,FIRE_STONE,THUNDER_STONE,WATER_STONE,LEAF_STONE,$FF
 
 ; Celadon Dept. Store 5F (1)
-CeladonMart5Text3:: ; 2496 (0:2496)
+CeladonMart5Clerk1Text::
 	db $FE,7,X_ACCURACY,GUARD_SPEC,DIRE_HIT,X_ATTACK,X_DEFEND,X_SPEED
 	db X_SPECIAL,$FF
 
 ; Celadon Dept. Store 5F (2)
-CeladonMart5Text4:: ; 24a0 (0:24a0)
+CeladonMart5Clerk2Text::
 	db $FE,5,HP_UP,PROTEIN,IRON,CARBOS,CALCIUM,$FF
 
 ; Fuchsia
-FuchsiaMartText1:: ; 24a8 (0:24a8)
+FuchsiaCashierText::
 	db $FE,6,ULTRA_BALL,GREAT_BALL,SUPER_POTION,REVIVE,FULL_HEAL
 	db SUPER_REPEL,$FF
 
-; unused? 24b1
+; unused?
 	db $FE,5,GREAT_BALL,HYPER_POTION,SUPER_POTION,FULL_HEAL,REVIVE,$FF
 
 ; Cinnabar
-CinnabarMartText1:: ; 24b9 (0:24b9)
+CinnabarCashierText::
 	db $FE,7,ULTRA_BALL,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE
 	db FULL_HEAL,REVIVE,$FF
 
 ; Saffron
-SaffronMartText1:: ; 24c3 (0:24c3)
+SaffronCashierText::
 	db $FE,6,GREAT_BALL,HYPER_POTION,MAX_REPEL,ESCAPE_ROPE,FULL_HEAL
 	db REVIVE,$FF
 
 ; Indigo
-IndigoPlateauLobbyText4:: ; 24cc (0:24cc)
+IndigoCashierText::
 	db $FE,7,ULTRA_BALL,GREAT_BALL,FULL_RESTORE,MAX_POTION,FULL_HEAL
 	db REVIVE,MAX_REPEL,$FF

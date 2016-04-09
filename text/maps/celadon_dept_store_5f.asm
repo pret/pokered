@@ -26,4 +26,3 @@ _CeladonMart5Text2::
 _CeladonMart5Text5::
 	text "5F: DRUG STORE"
 	done
-

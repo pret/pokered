@@ -96,4 +96,3 @@ _CeladonMart3Text15::
 	text "Red and Blue!"
 	line "Both are #MON!"
 	done
-

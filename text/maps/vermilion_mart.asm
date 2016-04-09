@@ -21,4 +21,3 @@ _VermilionMartText3::
 	cont "evil. It depends"
 	cont "on the trainer."
 	done
-

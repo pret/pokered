@@ -1,11 +1,11 @@
-ViridianMartScript: ; 1d46e (7:546e)
+ViridianMartScript:
 	call ViridianMartScript_1d47d
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianMartScriptPointers
 	ld a, [wViridianMarketCurScript]
 	jp CallFunctionInTable
 
-ViridianMartScript_1d47d: ; 1d47d (7:547d)
+ViridianMartScript_1d47d:
 	CheckEvent EVENT_OAK_GOT_PARCEL
 	jr nz, .asm_1d489
 	ld hl, ViridianMartTextPointers
@@ -19,12 +19,12 @@ ViridianMartScript_1d47d: ; 1d47d (7:547d)
 	ld [wMapTextPtr+1], a
 	ret
 
-ViridianMartScriptPointers: ; 1d495 (7:5495)
+ViridianMartScriptPointers:
 	dw ViridianMartScript0
 	dw ViridianMartScript1
 	dw ViridianMartScript2
 
-ViridianMartScript0: ; 1d49b (7:549b)
+ViridianMartScript0:
 	call UpdateSprites
 	ld a, $4
 	ld [hSpriteIndexOrTextID], a
@@ -39,12 +39,12 @@ ViridianMartScript0: ; 1d49b (7:549b)
 	ld [wViridianMarketCurScript], a
 	ret
 
-RLEMovement1d4bb: ; 1d4bb (7:54bb)
+RLEMovement1d4bb:
 	db D_LEFT, $01
 	db D_UP, $02
 	db $ff
 
-ViridianMartScript1: ; 1d4c0 (7:54c0)
+ViridianMartScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -58,36 +58,36 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	ld a, $2
 	ld [wViridianMarketCurScript], a
 	; fallthrough
-ViridianMartScript2: ; 1d4df (7:54df)
+ViridianMartScript2:
 	ret
 
-ViridianMartTextPointers: ; 1d4e0 (7:54e0)
+ViridianMartTextPointers:
 	dw ViridianMartText1
 	dw ViridianMartText2
 	dw ViridianMartText3
 	dw ViridianMartText4
 	dw ViridianMartText5
-	dw ViridianMartText6
+	dw ViridianCashierText
 	dw ViridianMartText2
 	dw ViridianMartText3
 
-ViridianMartText1: ; 1d4f0 (7:54f0)
+ViridianMartText1:
 	TX_FAR _ViridianMartText1
 	db "@"
 
-ViridianMartText4: ; 1d4f5 (7:54f5)
+ViridianMartText4:
 	TX_FAR _ViridianMartText4
 	db "@"
 
-ViridianMartText5: ; 1d4fa (7:54fa)
+ViridianMartText5:
 	TX_FAR ViridianMartParcelQuestText
 	db $11
 	db "@"
 
-ViridianMartText2: ; 1d500 (7:5500)
+ViridianMartText2:
 	TX_FAR _ViridianMartText2
 	db "@"
 
-ViridianMartText3: ; 1d505 (7:5505)
+ViridianMartText3:
 	TX_FAR _ViridianMartText3
 	db "@"

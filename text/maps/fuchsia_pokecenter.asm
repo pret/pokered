@@ -18,4 +18,3 @@ _FuchsiaPokecenterText3::
 	cont "The HQ governs"
 	cont "all trainers."
 	done
-

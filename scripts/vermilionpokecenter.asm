@@ -1,23 +1,23 @@
-VermilionPokecenterScript: ; 5c98f (17:498f)
+VermilionPokecenterScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-VermilionPokecenterTextPointers: ; 5c995 (17:4995)
-	dw VermilionPokecenterText1
+VermilionPokecenterTextPointers:
+	dw VermilionHealNurseText
 	dw VermilionPokecenterText2
 	dw VermilionPokecenterText3
-	dw VermilionPokecenterText4
+	dw VermilionTradeNurseText
 
-VermilionPokecenterText1: ; 5c99d (17:499d)
+VermilionHealNurseText:
 	db $ff
 
-VermilionPokecenterText2: ; 5c99e (17:499e)
-	TX_FAR _VermilionPokecenterText1
+VermilionPokecenterText2:
+	TX_FAR _VermilionPokecenterText2
 	db "@"
 
-VermilionPokecenterText3: ; 5c9a3 (17:49a3)
+VermilionPokecenterText3:
 	TX_FAR _VermilionPokecenterText3
 	db "@"
 
-VermilionPokecenterText4: ; 5c9a8 (17:49a8)
+VermilionTradeNurseText:
 	db $f6

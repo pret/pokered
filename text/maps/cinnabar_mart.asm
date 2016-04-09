@@ -8,4 +8,3 @@ _CinnabarMartText3::
 	text "It never hurts to"
 	line "have extra items!"
 	done
-

@@ -1,7 +1,7 @@
-CeladonMart3Script: ; 48225 (12:4225)
+CeladonMart3Script:
 	jp EnableAutoTextBoxDrawing
 
-CeladonMart3TextPointers: ; 48228 (12:4228)
+CeladonMart3TextPointers:
 	dw CeladonMart3Text1
 	dw CeladonMart3Text2
 	dw CeladonMart3Text3
@@ -20,7 +20,7 @@ CeladonMart3TextPointers: ; 48228 (12:4228)
 	dw CeladonMart3Text16
 	dw CeladonMart3Text17
 
-CeladonMart3Text1: ; 4824a (12:424a)
+CeladonMart3Text1:
 	TX_ASM
 	CheckEvent EVENT_GOT_TM18
 	jr nz, .asm_a5463
@@ -41,67 +41,67 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	call PrintText
 	jp TextScriptEnd
 
-TM18PreReceiveText: ; 48278 (12:4278)
+TM18PreReceiveText:
 	TX_FAR _TM18PreReceiveText
 	db "@"
 
-ReceivedTM18Text: ; 4827d (12:427d)
+ReceivedTM18Text:
 	TX_FAR _ReceivedTM18Text
 	db $0B, "@"
 
-TM18ExplanationText: ; 48283 (12:4283)
+TM18ExplanationText:
 	TX_FAR _TM18ExplanationText
 	db "@"
 
-TM18NoRoomText: ; 48288 (12:4288)
+TM18NoRoomText:
 	TX_FAR _TM18NoRoomText
 	db "@"
 
-CeladonMart3Text2: ; 4828d (12:428d)
+CeladonMart3Text2:
 	TX_FAR _CeladonMart3Text2
 	db "@"
 
-CeladonMart3Text3: ; 48292 (12:4292)
+CeladonMart3Text3:
 	TX_FAR _CeladonMart3Text3
 	db "@"
 
-CeladonMart3Text4: ; 48297 (12:4297)
+CeladonMart3Text4:
 	TX_FAR _CeladonMart3Text4
 	db "@"
 
-CeladonMart3Text5: ; 4829c (12:429c)
+CeladonMart3Text5:
 	TX_FAR _CeladonMart3Text5
 	db "@"
 
 CeladonMart3Text12
-CeladonMart3Text10: ; 482a1 (12:42a1)
-CeladonMart3Text8: ; 482a1 (12:42a1)
-CeladonMart3Text6: ; 482a1 (12:42a1)
+CeladonMart3Text10:
+CeladonMart3Text8:
+CeladonMart3Text6:
 	TX_FAR _CeladonMart3Text6
 	db "@"
 
-CeladonMart3Text7: ; 482a6 (12:42a6)
+CeladonMart3Text7:
 	TX_FAR _CeladonMart3Text7
 	db "@"
 
-CeladonMart3Text9: ; 482ab (12:42ab)
+CeladonMart3Text9:
 	TX_FAR _CeladonMart3Text9
 	db "@"
 
-CeladonMart3Text11: ; 482b0 (12:42b0)
+CeladonMart3Text11:
 	TX_FAR _CeladonMart3Text11
 	db "@"
 
-CeladonMart3Text13: ; 482b5 (12:42b5)
+CeladonMart3Text13:
 	TX_FAR _CeladonMart3Text13
 	db "@"
 
-CeladonMart3Text14: ; 482ba (12:42ba)
+CeladonMart3Text14:
 	TX_FAR _CeladonMart3Text14
 	db "@"
 
-CeladonMart3Text17: ; 482bf (12:42bf)
-CeladonMart3Text16: ; 482bf (12:42bf)
-CeladonMart3Text15: ; 482bf (12:42bf)
+CeladonMart3Text17:
+CeladonMart3Text16:
+CeladonMart3Text15:
 	TX_FAR _CeladonMart3Text15
 	db "@"
