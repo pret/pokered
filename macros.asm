@@ -214,6 +214,15 @@ TX_ASM: MACRO
 	db $08
 	ENDM
 
+TX_MART: MACRO
+	db $FE, _NARG
+	rept _NARG
+	db \1
+	shift
+	endr
+	db $FF
+	ENDM
+
 ; Predef macro.
 add_predef: MACRO
 \1Predef::
