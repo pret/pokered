@@ -80,7 +80,7 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_MON				;Typhlosion/Totodile
 	dn SPRITE_MON, SPRITE_MON				;Croconaw/Feraligatr
 	dn SPRITE_MON, SPRITE_QUADRUPED			;Sentret/Furret
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Hoothoot/Noctowl
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

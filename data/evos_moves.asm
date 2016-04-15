@@ -1302,17 +1302,31 @@ Mon098_EvosMoves: ; 3b56b (e:756b)
 	db 0
 
 Mon163_EvosMoves: ; 3b57a (e:757a)
-;MISSINGNO
+;HOOTHOOT
 ;Evolutions
+	db EV_LEVEL,20
+	dw NOCTOWL
 	db 0
 ;Learnset
+	db 11,PECK
+	db 16,HYPNOSIS
+	db 22,REFLECT
+	db 28,TAKE_DOWN
+	db 34,CONFUSION
+	db 48,DREAM_EATER
 	db 0
 
 Mon164_EvosMoves: ; 3b57c (e:757c)
-;MISSINGNO
+;NOCTOWL
 ;Evolutions
 	db 0
 ;Learnset
+	db 11,PECK
+	db 16,HYPNOSIS
+	db 25,REFLECT
+	db 33,TAKE_DOWN
+	db 41,CONFUSION
+	db 57,DREAM_EATER
 	db 0
 
 Mon165_EvosMoves: ; 3b57e (e:757e)

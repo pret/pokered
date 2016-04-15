@@ -78,8 +78,8 @@ CryData: ; 39446 (e:5446)
 	db $0E, $FF, $FF; Ditto
 	db $19, $77, $10; Meowth
 	db $20, $20, $E0; Krabby
-	db $22, $FF, $40; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $0E, $DF, $04; Hoothoot
+	db $18, $40, $A0; Noctowl
 	db $0E, $E0, $60; MissingNo.
 	db $24, $4F, $10; Vulpix
 	db $24, $88, $60; Ninetales

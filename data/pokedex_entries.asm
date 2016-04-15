@@ -77,8 +77,8 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DittoDexEntry
 	dw MeowthDexEntry
 	dw KrabbyDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw HoothootDexEntry
+	dw NoctowlDexEntry
 	dw DratiniDexEntry
 	dw VulpixDexEntry
 	dw NinetalesDexEntry
@@ -1404,6 +1404,20 @@ FurretDexEntry:
 	db 5,11
 	dw 716
 	TX_FAR _FurretDexEntry
+	db "@"
+	
+HoothootDexEntry:
+	db "OWL@"
+	db 2,4
+	dw 467
+	TX_FAR _HoothootDexEntry
+	db "@"
+	
+NoctowlDexEntry:
+	db "OWL@"
+	db 5,3
+	dw 899
+	TX_FAR _NoctowlDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
