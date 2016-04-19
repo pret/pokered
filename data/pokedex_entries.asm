@@ -113,13 +113,13 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw WeedleDexEntry
 	dw KakunaDexEntry
 	dw BeedrillDexEntry
-	dw DratiniDexEntry
+	dw ChinchouDexEntry
 	dw DodrioDexEntry
 	dw PrimeapeDexEntry
 	dw DugtrioDexEntry
 	dw VenomothDexEntry
 	dw DewgongDexEntry
-	dw DratiniDexEntry
+	dw LanturnDexEntry
 	dw DratiniDexEntry
 	dw CaterpieDexEntry
 	dw MetapodDexEntry
@@ -1418,6 +1418,20 @@ NoctowlDexEntry:
 	db 5,3
 	dw 899
 	TX_FAR _NoctowlDexEntry
+	db "@"
+
+ChinchouDexEntry:
+	db "ANGLER@"
+	db 1,8
+	dw 265
+	TX_FAR _ChinchouDexEntry
+	db "@"
+
+LanturnDexEntry:
+	db "LIGHT@"
+	db 3,11
+	dw 496
+	TX_FAR _LanturnDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

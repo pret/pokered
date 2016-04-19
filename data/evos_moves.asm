@@ -1732,10 +1732,18 @@ Mon015_EvosMoves: ; 3b6ee (e:76ee)
 	db 0
 
 Mon170_EvosMoves: ; 3b6fc (e:76fc)
-;MISSINGNO
+;CHINCHOU
 ;Evolutions
+	db EV_LEVEL,27
+	dw LANTURN
 	db 0
 ;Learnset
+	db 5,SUPERSONIC
+	db 13,TACKLE
+	db 17,WATER_GUN
+	db 25,THUNDERSHOCK
+	db 37,TAKE_DOWN
+	db 41,HYDRO_PUMP
 	db 0
 
 Mon085_EvosMoves: ; 3b6fe (e:76fe)
@@ -1801,10 +1809,17 @@ Mon087_EvosMoves: ; 3b732 (e:7732)
 	db 0
 
 Mon171_EvosMoves: ; 3b73e (e:773e)
-;MISSINGNO
+;LANTURN
 ;Evolutions
 	db 0
 ;Learnset
+	db 5,SUPERSONIC
+	db 13,TACKLE
+	db 17,WATER_GUN
+	db 25,THUNDERSHOCK
+	db 33,CONFUSE_RAY
+	db 45,TAKE_DOWN
+	db 53,HYDRO_PUMP
 	db 0
 
 Mon172_EvosMoves: ; 3b740 (e:7740)

@@ -114,13 +114,13 @@ CryData: ; 39446 (e:5446)
 	db $15, $EE, $01; Weedle
 	db $13, $FF, $01; Kakuna
 	db $13, $60, $80; Beedrill
-	db $00, $00, $00; MissingNo.
+	db $0E, $20, $70; Chinchou
 	db $0B, $99, $20; Dodrio
 	db $0A, $AF, $40; Primeape
 	db $0B, $2A, $10; Dugtrio
 	db $1A, $29, $80; Venomoth
 	db $0C, $23, $FF; Dewgong
-	db $00, $00, $00; MissingNo.
+	db $0E, $40, $70; Lanturn
 	db $00, $00, $00; MissingNo.
 	db $16, $80, $20; Caterpie
 	db $1C, $CC, $01; Metapod

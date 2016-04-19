@@ -7098,6 +7098,9 @@ INCLUDE "data/baseStats/furret.asm"
 INCLUDE "data/baseStats/hoothoot.asm"
 INCLUDE "data/baseStats/noctowl.asm"
 
+INCLUDE "data/baseStats/chinchou.asm"
+INCLUDE "data/baseStats/lanturn.asm"
+
 INCLUDE "data/baseStats/swampert.asm"
 
 
@@ -7226,3 +7229,7 @@ HoothootPicFront::       INCBIN "pic/bmon/hoothoot.pic"
 HoothootPicBack::        INCBIN "pic/monback/hoothootb.pic"
 NoctowlPicFront::       INCBIN "pic/bmon/noctowl.pic"
 NoctowlPicBack::        INCBIN "pic/monback/noctowlb.pic"
+ChinchouPicFront::       INCBIN "pic/bmon/chinchou.pic"
+ChinchouPicBack::        INCBIN "pic/monback/chinchoub.pic"
+LanturnPicFront::       INCBIN "pic/bmon/lanturn.pic"
+LanturnPicBack::        INCBIN "pic/monback/lanturnb.pic"

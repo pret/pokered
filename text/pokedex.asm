@@ -1638,4 +1638,22 @@ _NoctowlDexEntry::
 	next "being detected"
 	dex
 	
-	
+_ChinchouDexEntry::
+	text "On the dark ocean"
+	next "floor, its only"
+	next "means of"
+
+	page "communication is"
+	next "its constantly"
+	next "flashing lights"
+	dex
+
+_LanturnDexEntry::
+	text "Lanturn's light"
+	next "can shine up from"
+	next "great depths."
+
+	page "Some people refer"
+	next "to it as"
+	next "The Deep-Sea Star"
+	dex
