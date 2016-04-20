@@ -1953,7 +1953,7 @@ Mon042_EvosMoves: ; 3b784 (e:7784)
 ;GOLBAT
 ;Evolutions
 	db EV_LEVEL,40
-	dw GOLBAT
+	dw CROBAT
 	db 0
 ;Learnset
 	db 10,SUPERSONIC

@@ -295,7 +295,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	push hl
 	ld l, e
 	ld h, d
-	jr .nextEvoEntry2
+	jp Evolution_PartyMonLoop
 
 .nextEvoEntry1
 	inc hl
