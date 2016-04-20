@@ -80,21 +80,21 @@ CryData: ; 39446 (e:5446)
 	db $20, $20, $E0; Krabby
 	db $0E, $DF, $04; Hoothoot
 	db $18, $40, $A0; Noctowl
-	db $0E, $E0, $60; MissingNo.
+	db $16, $80, $20; Ledyba
 	db $24, $4F, $10; Vulpix
 	db $24, $88, $60; Ninetales
 	db $0F, $EE, $01; Pikachu
 	db $09, $EE, $08; Raichu
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $16, $77, $40; Ledian
+	db $15, $EE, $01; Spinarak
 	db $0F, $60, $40; Dratini
 	db $0F, $40, $80; Dragonair
 	db $16, $BB, $40; Kabuto
 	db $18, $EE, $01; Kabutops
 	db $19, $99, $10; Horsea
 	db $19, $3C, $01; Seadra
-	db $0F, $40, $C0; MissingNo.
-	db $0F, $20, $C0; MissingNo.
+	db $13, $60, $80; Ariados
+	db $1D, $FA, $80; Crobat
 	db $00, $20, $40; Sandshrew
 	db $00, $FF, $FF; Sandslash
 	db $1F, $F0, $01; Omanyte
@@ -139,13 +139,13 @@ CryData: ; 39446 (e:5446)
 	db $0F, $40, $80; MissingNo.
 	db $20, $EE, $E0; Kingler
 	db $18, $6F, $E0; Cloyster
-	db $00, $00, $00; MissingNo.
+	db $21, $20, $60; Natu
 	db $06, $A8, $90; Electrode
 	db $19, $AA, $20; Clefable
 	db $12, $FF, $FF; Weezing
 	db $19, $99, $FF; Persian
 	db $08, $4F, $60; Marowak
-	db $00, $00, $00; MissingNo.
+	db $21, $FF, $40; Xatu
 	db $1C, $30, $40; Haunter
 	db $1C, $C0, $01; Abra
 	db $1C, $98, $FF; Alakazam
@@ -155,11 +155,11 @@ CryData: ; 39446 (e:5446)
 	db $0F, $80, $01; Bulbasaur
 	db $0F, $00, $C0; Venusaur
 	db $1A, $EE, $FF; Tentacruel
-	db $00, $00, $00; MissingNo.
+	db $0F, $EE, $01; Mareep
 	db $16, $80, $40; Goldeen
 	db $16, $10, $FF; Seaking
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $0F, $EE, $01; Flaaffy
+	db $09, $EE, $08; Ampharos
 	db $00, $00, $00; MissingNo.
 	db $00, $00, $00; MissingNo.
 	db $25, $00, $80; Ponyta

@@ -163,11 +163,11 @@ BaseStatsPointers::
 	dbw Bank(FurretBaseStats), FurretBaseStats
 	dbw Bank(HoothootBaseStats), HoothootBaseStats
 	dbw Bank(NoctowlBaseStats), NoctowlBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(LedybaBaseStats), LedybaBaseStats
+	dbw Bank(LedianBaseStats), LedianBaseStats
+	dbw Bank(SpinarakBaseStats), SpinarakBaseStats
+	dbw Bank(AriadosBaseStats), AriadosBaseStats
+	dbw Bank(CrobatBaseStats), CrobatBaseStats
 	dbw Bank(ChinchouBaseStats), ChinchouBaseStats
 	dbw Bank(LanturnBaseStats), LanturnBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
@@ -175,13 +175,11 @@ BaseStatsPointers::
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(NatuBaseStats), NatuBaseStats
+	dbw Bank(XatuBaseStats), XatuBaseStats
+	dbw Bank(MareepBaseStats), MareepBaseStats
+	dbw Bank(FlaaffyBaseStats), FlaaffyBaseStats
+	dbw Bank(AmpharosBaseStats), AmpharosBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

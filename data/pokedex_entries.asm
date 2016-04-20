@@ -79,21 +79,21 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw KrabbyDexEntry
 	dw HoothootDexEntry
 	dw NoctowlDexEntry
-	dw DratiniDexEntry
+	dw LedybaDexEntry
 	dw VulpixDexEntry
 	dw NinetalesDexEntry
 	dw PikachuDexEntry
 	dw RaichuDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw LedianDexEntry
+	dw SpinarakDexEntry
 	dw DratiniDexEntry
 	dw DragonairDexEntry
 	dw KabutoDexEntry
 	dw KabutopsDexEntry
 	dw HorseaDexEntry
 	dw SeadraDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw AriadosDexEntry
+	dw CrobatDexEntry
 	dw SandshrewDexEntry
 	dw SandslashDexEntry
 	dw OmanyteDexEntry
@@ -138,13 +138,13 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DratiniDexEntry
 	dw KinglerDexEntry
 	dw CloysterDexEntry
-	dw DratiniDexEntry
+	dw NatuDexEntry
 	dw ElectrodeDexEntry
 	dw ClefableDexEntry
 	dw WeezingDexEntry
 	dw PersianDexEntry
 	dw MarowakDexEntry
-	dw DratiniDexEntry
+	dw XatuDexEntry
 	dw HaunterDexEntry
 	dw AbraDexEntry
 	dw AlakazamDexEntry
@@ -154,11 +154,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BulbasaurDexEntry
 	dw VenusaurDexEntry
 	dw TentacruelDexEntry
-	dw DratiniDexEntry
+	dw MareepDexEntry
 	dw GoldeenDexEntry
 	dw SeakingDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw FlaaffyDexEntry
+	dw AmpharosDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw PonytaDexEntry
@@ -1405,7 +1405,7 @@ FurretDexEntry:
 	dw 716
 	TX_FAR _FurretDexEntry
 	db "@"
-	
+
 HoothootDexEntry:
 	db "OWL@"
 	db 2,4
@@ -1418,6 +1418,41 @@ NoctowlDexEntry:
 	db 5,3
 	dw 899
 	TX_FAR _NoctowlDexEntry
+	db "@"
+
+LedybaDexEntry:
+	db "FIVE STAR@"
+	db 3,3
+	dw 240
+	TX_FAR _LedybaDexEntry
+	db "@"
+	
+LedianDexEntry:
+	db "FIVE STAR@"
+	db 4,7
+	dw 780
+	TX_FAR _LedianDexEntry
+	db "@"
+	
+SpinarakDexEntry:
+	db "STRINGSPIT@"
+	db 1,8
+	dw 190
+	TX_FAR _SpinarakDexEntry
+	db "@"
+	
+AriadosDexEntry:
+	db "LONG LEG@"
+	db 3,7
+	dw 740
+	TX_FAR _AriadosDexEntry
+	db "@"
+
+CrobatDexEntry:
+	db "BAT@"
+	db 5,11
+	dw 1653
+	TX_FAR _CrobatDexEntry
 	db "@"
 
 ChinchouDexEntry:
@@ -1433,7 +1468,42 @@ LanturnDexEntry:
 	dw 496
 	TX_FAR _LanturnDexEntry
 	db "@"
+	
+NatuDexEntry:
+	db "TINY BIRD@"
+	db 0,8
+	dw 44
+	TX_FAR _NatuDexEntry
+	db "@"
+	
+XatuDexEntry:
+	db "MYSTIC@"
+	db 4,11
+	dw 331
+	TX_FAR _XatuDexEntry
+	db "@"
 
+MareepDexEntry:
+	db "WOOL@"
+	db 2,0
+	dw 172
+	TX_FAR _MareepDexEntry
+	db "@"
+	
+FlaaffyDexEntry:
+	db "WOOL@"
+	db 2,7
+	dw 293
+	TX_FAR _FlaaffyDexEntry
+	db "@"
+
+AmpharosDexEntry:
+	db "LIGHT@"
+	db 4,7
+	dw 1356
+	TX_FAR _AmpharosDexEntry
+	db "@"
+	
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
 	db "???@"
 	db 10 ; 1.0 m

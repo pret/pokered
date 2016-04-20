@@ -1308,6 +1308,7 @@ Mon163_EvosMoves: ; 3b57a (e:757a)
 	dw NOCTOWL
 	db 0
 ;Learnset
+;	db 6,FORESIGHT
 	db 11,PECK
 	db 16,HYPNOSIS
 	db 22,REFLECT
@@ -1321,6 +1322,7 @@ Mon164_EvosMoves: ; 3b57c (e:757c)
 ;Evolutions
 	db 0
 ;Learnset
+;	db 6,FORESIGHT
 	db 11,PECK
 	db 16,HYPNOSIS
 	db 25,REFLECT
@@ -1330,10 +1332,20 @@ Mon164_EvosMoves: ; 3b57c (e:757c)
 	db 0
 
 Mon165_EvosMoves: ; 3b57e (e:757e)
-;MISSINGNO
+;LEDYBA
 ;Evolutions
+	db EV_LEVEL,18
+	dw LEDIAN
 	db 0
 ;Learnset
+	db 8,SUPERSONIC
+	db 15,COMET_PUNCH
+	db 22,LIGHT_SCREEN
+;	db 22,SAFEGUARD
+	db 29,REFLECT
+	db 36,SWIFT
+	db 43,AGILITY
+	db 50,DOUBLE_EDGE
 	db 0
 
 Mon037_EvosMoves: ; 3b580 (e:7580)
@@ -1379,17 +1391,36 @@ Mon026_EvosMoves: ; 3b5a2 (e:75a2)
 	db 0
 
 Mon166_EvosMoves: ; 3b5a4 (e:75a4)
-;MISSINGNO
+;LEDIAN
 ;Evolutions
 	db 0
 ;Learnset
+	db 8,SUPERSONIC
+	db 15,COMET_PUNCH
+	db 24,LIGHT_SCREEN
+;	db 24,SAFEGUARD
+	db 33,REFLECT
+	db 42,SWIFT
+	db 51,AGILITY
+	db 60,DOUBLE_EDGE
 	db 0
 
 Mon167_EvosMoves: ; 3b5a6 (e:75a6)
-;MISSINGNO
+;SPINARAK
 ;Evolutions
+	db EV_LEVEL,22
+	dw ARIADOS
 	db 0
 ;Learnset
+;	db 6,SCARY_FACE
+	db 11,CONSTRICT
+	db 17,NIGHT_SHADE
+	db 23,LEECH_LIFE
+	db 30,FURY_SWIPES
+;	db 37,SPIDER_WEB
+	db 37,AGILITY
+	db 45,SCREECH
+	db 53,PSYCHIC
 	db 0
 
 Mon147_EvosMoves: ; 3b5a8 (e:75a8)
@@ -1471,17 +1502,30 @@ Mon117_EvosMoves: ; 3b5ec (e:75ec)
 	db 0
 
 Mon168_EvosMoves: ; 3b5f8 (e:75f8)
-;MISSINGNO
+;ARIADOS
 ;Evolutions
 	db 0
 ;Learnset
+	db 11,CONSTRICT
+	db 17,NIGHT_SHADE
+	db 25,LEECH_LIFE
+	db 34,FURY_SWIPES
+;	db 43,SPIDER_WEB
+	db 43,AGILITY
+	db 53,SCREECH
+	db 63,PSYCHIC
 	db 0
 
 Mon169_EvosMoves: ; 3b5fa (e:75fa)
-;MISSINGNO
+;CROBAT
 ;Evolutions
 	db 0
 ;Learnset
+	db 10,SUPERSONIC
+	db 15,BITE
+	db 21,CONFUSE_RAY
+	db 32,WING_ATTACK
+	db 43,HAZE
 	db 0
 
 Mon027_EvosMoves: ; 3b5fc (e:75fc)
@@ -1908,6 +1952,8 @@ Mon097_EvosMoves: ; 3b776 (e:7776)
 Mon042_EvosMoves: ; 3b784 (e:7784)
 ;GOLBAT
 ;Evolutions
+	db EV_LEVEL,40
+	dw GOLBAT
 	db 0
 ;Learnset
 	db 10,SUPERSONIC
@@ -2005,10 +2051,17 @@ Mon091_EvosMoves: ; 3b7cd (e:77cd)
 	db 0
 
 Mon177_EvosMoves: ; 3b7d1 (e:77d1)
-;MISSINGNO
+;NATU
 ;Evolutions
+	db EV_LEVEL,25
+	dw XATU
 	db 0
 ;Learnset
+	db 10,NIGHT_SHADE
+	db 20,TELEPORT
+;	db 30,FUTURE_SIGHT
+	db 40,CONFUSE_RAY
+	db 50,PSYCHIC_M
 	db 0
 
 Mon101_EvosMoves: ; 3b7d3 (e:77d3)
@@ -2067,10 +2120,15 @@ Mon105_EvosMoves: ; 3b7f9 (e:77f9)
 	db 0
 
 Mon178_EvosMoves: ; 3b805 (e:7805)
-;MISSINGNO
+;XATU
 ;Evolutions
 	db 0
 ;Learnset
+	db 10,NIGHT_SHADE
+	db 20,TELEPORT
+;	db 35,FUTURE_SIGHT
+	db 50,CONFUSE_RAY
+	db 65,PSYCHIC_M
 	db 0
 
 Mon093_EvosMoves: ; 3b807 (e:7807)
@@ -2187,10 +2245,17 @@ Mon073_EvosMoves: ; 3b867 (e:7867)
 	db 0
 
 Mon179_EvosMoves: ; 3b879 (e:7879)
-;MISSINGNO
+;MAREEP
 ;Evolutions
+	db EV_LEVEL,15
+	dw FLAAFFY
 	db 0
 ;Learnset
+	db 9, THUNDERSHOCK
+	db 16,THUNDER_WAVE
+;	db 23,COTTON_SPORE
+	db 30,LIGHT_SCREEN
+	db 37,THUNDER
 	db 0
 
 Mon118_EvosMoves: ; 3b87b (e:787b)
@@ -2222,17 +2287,30 @@ Mon119_EvosMoves: ; 3b88c (e:788c)
 	db 0
 
 Mon180_EvosMoves: ; 3b89a (e:789a)
-;MISSINGNO
+;FLAAFFY
 ;Evolutions
+	db EV_LEVEL,30
+	dw AMPHAROS
 	db 0
 ;Learnset
+	db 9, THUNDERSHOCK
+	db 18,THUNDER_WAVE
+;	db 27,COTTON_SPORE
+	db 36,LIGHT_SCREEN
+	db 45,THUNDER
 	db 0
 
 Mon181_EvosMoves: ; 3b89c (e:789c)
-;MISSINGNO
+;AMPHAROS
 ;Evolutions
 	db 0
 ;Learnset
+	db 9, THUNDERSHOCK
+	db 18,THUNDER_WAVE
+;	db 27,COTTON_SPORE
+	db 31,THUNDERPUNCH
+	db 42,LIGHT_SCREEN
+	db 57,THUNDER
 	db 0
 
 Mon182_EvosMoves: ; 3b89e (e:789e)
