@@ -2021,10 +2021,16 @@ Mon174_EvosMoves: ; 3b7ad (e:77ad)
 	db 0
 
 Mon175_EvosMoves: ; 3b7af (e:77af)
-;MISSINGNO
+;TOGEPI
 ;Evolutions
+	db EV_LEVEL,20
+	dw TOGETIC
 	db 0
 ;Learnset
+	db 7,METRONOME
+	db 18,CONFUSE_RAY
+	db 28,RECOVER
+	db 37,DOUBLE_EDGE
 	db 0
 
 Mon089_EvosMoves: ; 3b7b1 (e:77b1)
@@ -2041,10 +2047,14 @@ Mon089_EvosMoves: ; 3b7b1 (e:77b1)
 	db 0
 
 Mon176_EvosMoves: ; 3b7bf (e:77bf)
-;MISSINGNO
+;TOGETIC
 ;Evolutions
 	db 0
 ;Learnset
+	db 7,METRONOME
+	db 18,CONFUSE_RAY
+	db 28,RECOVER
+	db 37,DOUBLE_EDGE
 	db 0
 
 Mon099_EvosMoves: ; 3b7c1 (e:77c1)

@@ -134,9 +134,9 @@ CryData: ; 39446 (e:5446)
 	db $05, $55, $01; Snorlax
 	db $17, $80, $00; Magikarp
 	db $0E, $FF, $15; Igglybuff
-	db $00, $00, $00; MissingNo.
+	db $19, $90, $40; Togepi
 	db $07, $EF, $FF; Muk
-	db $0F, $40, $80; MissingNo.
+	db $19, $A0, $60; Togetic
 	db $20, $EE, $E0; Kingler
 	db $18, $6F, $E0; Cloyster
 	db $21, $20, $60; Natu

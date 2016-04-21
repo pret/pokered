@@ -133,9 +133,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw SnorlaxDexEntry
 	dw MagikarpDexEntry
 	dw IgglybuffDexEntry
-	dw DratiniDexEntry
+	dw TogepiDexEntry
 	dw MukDexEntry
-	dw DratiniDexEntry
+	dw TogeticDexEntry
 	dw KinglerDexEntry
 	dw CloysterDexEntry
 	dw NatuDexEntry
@@ -1490,13 +1490,27 @@ IgglybuffDexEntry:
 	TX_FAR _IgglybuffDexEntry
 	db "@"
 
+TogepiDexEntry:
+	db "SPIKE BALL@"
+	db 1,0
+	dw 33
+	TX_FAR _TogepiDexEntry
+	db "@"
+
+TogeticDexEntry:
+	db "HAPPINESS@"
+	db 2,0
+	dw 71
+	TX_FAR _TogeticDexEntry
+	db "@"
+
 NatuDexEntry:
 	db "TINY BIRD@"
 	db 0,8
 	dw 44
 	TX_FAR _NatuDexEntry
 	db "@"
-	
+
 XatuDexEntry:
 	db "MYSTIC@"
 	db 4,11

@@ -173,8 +173,8 @@ BaseStatsPointers::
 	dbw Bank(PichuBaseStats), PichuBaseStats
 	dbw Bank(CleffaBaseStats), CleffaBaseStats
 	dbw Bank(IgglybuffBaseStats), IgglybuffBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(TogepiBaseStats), TogepiBaseStats
+	dbw Bank(TogeticBaseStats), TogeticBaseStats
 	dbw Bank(NatuBaseStats), NatuBaseStats
 	dbw Bank(XatuBaseStats), XatuBaseStats
 	dbw Bank(MareepBaseStats), MareepBaseStats

@@ -1740,6 +1740,26 @@ _IgglybuffDexEntry::
 	next "stop"
 	dex
 
+_TogepiDexEntry::
+	text "It transforms the"
+	next "kindness and joy"
+	next "of others into"
+
+	page "happiness, which"
+	next "it stores in its"
+	next "shell"
+	dex
+
+_TogeticDexEntry::
+	text "To shares its"
+	next "happiness, it"
+	next "flies around the"
+
+	page "world seeking"
+	next "kind-hearted"
+	next "people"
+	dex
+
 _NatuDexEntry::
 	text "Because its wings"
 	next "aren't yet fully"
