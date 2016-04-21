@@ -1709,7 +1709,37 @@ _LanturnDexEntry::
 	dex
 	
 SECTION "Pokedex Text 2", ROMX
+
+_PichuDexEntry::
+	text "It plays with"
+	next "other PICHU by"
+	next "touching tails"
+
+	page "and setting off"
+	next "sparks. It is a"
+	next "test of courage"
+	dex
+
+_CleffaDexEntry::
+	text "Because of its"
+	next "unusual, starlike"
+	next "silhouette,"
+
+	page "people believe it"
+	next "came here on a"
+	next "meteor"
+	dex
 	
+_IgglybuffDexEntry::
+	text "If has a soft and"
+	next "bouncy body."
+	next "Once it starts"
+
+	page "bouncing, it"
+	next "is impossible to"
+	next "stop"
+	dex
+
 _NatuDexEntry::
 	text "Because its wings"
 	next "aren't yet fully"

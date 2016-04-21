@@ -170,9 +170,9 @@ BaseStatsPointers::
 	dbw Bank(CrobatBaseStats), CrobatBaseStats
 	dbw Bank(ChinchouBaseStats), ChinchouBaseStats
 	dbw Bank(LanturnBaseStats), LanturnBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(PichuBaseStats), PichuBaseStats
+	dbw Bank(CleffaBaseStats), CleffaBaseStats
+	dbw Bank(IgglybuffBaseStats), IgglybuffBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(NatuBaseStats), NatuBaseStats

@@ -121,19 +121,19 @@ CryData: ; 39446 (e:5446)
 	db $1A, $29, $80; Venomoth
 	db $0C, $23, $FF; Dewgong
 	db $0E, $40, $70; Lanturn
-	db $00, $00, $00; MissingNo.
+	db $0F, $FE, $01; Pichu
 	db $16, $80, $20; Caterpie
 	db $1C, $CC, $01; Metapod
 	db $16, $77, $40; Butterfree
 	db $1F, $08, $C0; Machamp
-	db $11, $20, $10; MissingNo.
+	db $19, $EC, $01; Cleffa
 	db $21, $FF, $40; Golduck
 	db $0D, $EE, $40; Hypno
 	db $1D, $FA, $80; Golbat
 	db $1E, $99, $FF; Mewtwo
 	db $05, $55, $01; Snorlax
 	db $17, $80, $00; Magikarp
-	db $00, $00, $00; MissingNo.
+	db $0E, $FF, $15; Igglybuff
 	db $00, $00, $00; MissingNo.
 	db $07, $EF, $FF; Muk
 	db $0F, $40, $80; MissingNo.

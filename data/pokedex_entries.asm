@@ -120,19 +120,19 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw VenomothDexEntry
 	dw DewgongDexEntry
 	dw LanturnDexEntry
-	dw DratiniDexEntry
+	dw PichuDexEntry
 	dw CaterpieDexEntry
 	dw MetapodDexEntry
 	dw ButterfreeDexEntry
 	dw MachampDexEntry
-	dw DratiniDexEntry
+	dw CleffaDexEntry
 	dw GolduckDexEntry
 	dw HypnoDexEntry
 	dw GolbatDexEntry
 	dw MewtwoDexEntry
 	dw SnorlaxDexEntry
 	dw MagikarpDexEntry
-	dw DratiniDexEntry
+	dw IgglybuffDexEntry
 	dw DratiniDexEntry
 	dw MukDexEntry
 	dw DratiniDexEntry
@@ -1468,7 +1468,28 @@ LanturnDexEntry:
 	dw 496
 	TX_FAR _LanturnDexEntry
 	db "@"
+
+PichuDexEntry:
+	db "TINY MOUSE@"
+	db 1,0
+	dw 44
+	TX_FAR _PichuDexEntry
+	db "@"
 	
+CleffaDexEntry:
+	db "STAR SHAPE@"
+	db 1,0
+	dw 66
+	TX_FAR _CleffaDexEntry
+	db "@"
+	
+IgglybuffDexEntry:
+	db "BALLOON@"
+	db 1,0
+	dw 22
+	TX_FAR _IgglybuffDexEntry
+	db "@"
+
 NatuDexEntry:
 	db "TINY BIRD@"
 	db 0,8

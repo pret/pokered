@@ -1867,10 +1867,16 @@ Mon171_EvosMoves: ; 3b73e (e:773e)
 	db 0
 
 Mon172_EvosMoves: ; 3b740 (e:7740)
-;MISSINGNO
+;PICHU
 ;Evolutions
+	db EV_LEVEL,15
+	dw PIKACHU
 	db 0
 ;Learnset
+	db 6,TAIL_WHIP
+	db 8,THUNDER_WAVE
+	db 16,QUICK_ATTACK
+	db 26,SWIFT
 	db 0
 
 Mon010_EvosMoves: ; 3b742 (e:7742)
@@ -1918,10 +1924,16 @@ Mon068_EvosMoves: ; 3b75c (e:775c)
 	db 0
 
 Mon173_EvosMoves: ; 3b768 (e:7768)
-;MISSINGNO
+;CLEFFA
 ;Evolutions
+	db EV_LEVEL,15
+	dw CLEFAIRY
 	db 0
 ;Learnset
+	db 8,SING
+	db 16,DOUBLESLAP
+	db 21,MINIMIZE
+	db 24,METRONOME
 	db 0
 
 Mon055_EvosMoves: ; 3b76a (e:776a)
@@ -1997,10 +2009,15 @@ Mon129_EvosMoves: ; 3b7a6 (e:77a6)
 	db 0
 
 Mon174_EvosMoves: ; 3b7ad (e:77ad)
-;MISSINGNO
+;IGGLYBUFF
 ;Evolutions
+	db EV_LEVEL,15
+	dw JIGGLYPUFF
 	db 0
 ;Learnset
+	db 4,DEFENSE_CURL
+	db 9,POUND
+	db 16,DOUBLESLAP
 	db 0
 
 Mon175_EvosMoves: ; 3b7af (e:77af)
