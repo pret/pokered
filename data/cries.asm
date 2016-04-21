@@ -160,8 +160,8 @@ CryData: ; 39446 (e:5446)
 	db $16, $10, $FF; Seaking
 	db $0F, $EE, $01; Flaaffy
 	db $09, $EE, $08; Ampharos
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $23, $22, $FF; Bellossom
+	db $0E, $FF, $35; Marill
 	db $25, $00, $80; Ponyta
 	db $25, $20, $C0; Rapidash
 	db $22, $00, $80; Rattata
@@ -171,9 +171,9 @@ CryData: ; 39446 (e:5446)
 	db $24, $F0, $10; Geodude
 	db $25, $AA, $FF; Porygon
 	db $23, $20, $F0; Aerodactyl
-	db $00, $00, $00; MissingNo.
+	db $0E, $68, $60; Azumarill
 	db $1C, $80, $60; Magnemite
-	db $00, $00, $00; MissingNo.
+	db $10, $DD, $01; Sudowoodo
 	db $00, $00, $00; MissingNo.
 	db $04, $60, $40; Charmander
 	db $1D, $60, $40; Squirtle

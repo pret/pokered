@@ -159,8 +159,8 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw SeakingDexEntry
 	dw FlaaffyDexEntry
 	dw AmpharosDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw BellossomDexEntry
+	dw MarillDexEntry
 	dw PonytaDexEntry
 	dw RapidashDexEntry
 	dw RattataDexEntry
@@ -170,9 +170,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw GeodudeDexEntry
 	dw PorygonDexEntry
 	dw AerodactylDexEntry
-	dw DratiniDexEntry
+	dw AzumarillDexEntry
 	dw MagnemiteDexEntry
-	dw DratiniDexEntry
+	dw SudowoodoDexEntry
 	dw DratiniDexEntry
 	dw CharmanderDexEntry
 	dw SquirtleDexEntry
@@ -1502,6 +1502,34 @@ AmpharosDexEntry:
 	db 4,7
 	dw 1356
 	TX_FAR _AmpharosDexEntry
+	db "@"
+	
+BellossomDexEntry:
+	db "FLOWER@"
+	db 1,4
+	dw 128
+	TX_FAR _BellossomDexEntry
+	db "@"
+	
+MarillDexEntry:
+	db "AQUA MOUSE@"
+	db 1,4
+	dw 187
+	TX_FAR _MarillDexEntry
+	db "@"
+	
+AzumarillDexEntry:
+	db "AQUARABBIT@"
+	db 2,7
+	dw 628
+	TX_FAR _AzumarillDexEntry
+	db "@"
+	
+SudowoodoDexEntry:
+	db "IMITATION@"
+	db 3,11
+	dw 838
+	TX_FAR _SudowoodoDexEntry
 	db "@"
 	
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

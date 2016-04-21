@@ -1759,3 +1759,43 @@ _AmpharosDexEntry::
 	next "since ancient"
 	next "times as a beacon"
 	dex
+	
+_BellossomDexEntry::
+	text "Plentiful in the"
+	next "tropics. When it"
+	next "dances, its petals"
+
+	page "rub together and"
+	next "make a pleasant"
+	next "ringing sound"
+	dex
+	
+_MarillDexEntry::
+	text "The end of its"
+	next "tail serves as a"
+	next "buoy that keeps it"
+
+	page "from drowning,"
+	next "even in a vicious"
+	next "current"
+	dex
+	
+_AzumarillDexEntry::
+	text "By keeping still"
+	next "and listening"
+	next "intently, it"
+
+	page "can tell what is"
+	next "in even wild, fast"
+	next "-moving rivers"
+	dex
+	
+_SudowoodoDexEntry::
+	text "Although it always"
+	next "pretends to be a"
+	next "tree, its compo-"
+
+	page "sition appears to"
+	next "be closer to a"
+	next "rock than a plant"
+	dex

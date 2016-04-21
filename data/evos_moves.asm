@@ -2314,17 +2314,27 @@ Mon181_EvosMoves: ; 3b89c (e:789c)
 	db 0
 
 Mon182_EvosMoves: ; 3b89e (e:789e)
-;MISSINGNO
+;BELLOSSOM
 ;Evolutions
 	db 0
 ;Learnset
+	DB 55,SOLARBEAM
 	db 0
 
 Mon183_EvosMoves: ; 3b8a0 (e:78a0)
-;MISSINGNO
+;MARILL
 ;Evolutions
+	db EV_LEVEL,18
+	dw AZUMARILL
 	db 0
 ;Learnset
+	db 3,DEFENSE_CURL
+	db 6,TAIL_WHIP
+	db 10,WATER_GUN
+;	db 15,ROLLOUT
+	db 21,BUBBLEBEAM
+	db 28,DOUBLE_EDGE
+;	db 36,RAIN_DANCE
 	db 0
 
 Mon077_EvosMoves: ; 3b8a2 (e:78a2)
@@ -2447,10 +2457,17 @@ Mon142_EvosMoves: ; 3b917 (e:7917)
 	db 0
 
 Mon184_EvosMoves: ; 3b921 (e:7921)
-;MISSINGNO
+;AZUMARILL
 ;Evolutions
 	db 0
 ;Learnset
+	db 3,DEFENSE_CURL
+	db 6,TAIL_WHIP
+	db 10,WATER_GUN
+;	db 15,ROLLOUT
+	db 25,BUBBLEBEAM
+	db 36,DOUBLE_EDGE
+;	db 48,RAIN_DANCE
 	db 0
 
 Mon081_EvosMoves: ; 3b923 (e:7923)
@@ -2469,10 +2486,15 @@ Mon081_EvosMoves: ; 3b923 (e:7923)
 	db 0
 
 Mon185_EvosMoves: ; 3b934 (e:7934)
-;MISSINGNO
+;SUDOWOODO
 ;Evolutions
 	db 0
 ;Learnset
+;	db 10,FLAIL
+	db 19,LOW_KICK
+	db 28,ROCK_SLIDE
+;	db 37,FEINT_ATTACK
+	db 46,SLAM
 	db 0
 
 Mon186_EvosMoves: ; 3b936 (e:7936)
@@ -2603,6 +2625,8 @@ Mon044_EvosMoves: ; 3b9a3 (e:79a3)
 ;Evolutions
 	db EV_ITEM,LEAF_STONE,1
 	dw VILEPLUME
+	db EV_ITEM,SUN_STONE,1
+	dw BELLOSSOM
 	db 0
 ;Learnset
 	db 15,POISONPOWDER

@@ -180,10 +180,10 @@ BaseStatsPointers::
 	dbw Bank(MareepBaseStats), MareepBaseStats
 	dbw Bank(FlaaffyBaseStats), FlaaffyBaseStats
 	dbw Bank(AmpharosBaseStats), AmpharosBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(BellossomBaseStats), BellossomBaseStats
+	dbw Bank(MarillBaseStats), MarillBaseStats
+	dbw Bank(AzumarillBaseStats), AzumarillBaseStats
+	dbw Bank(SudowoodoBaseStats), SudowoodoBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
