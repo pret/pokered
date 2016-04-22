@@ -1,23 +1,23 @@
-SaffronPokecenterScript: ; 5d535 (17:5535)
+SaffronPokecenterScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-SaffronPokecenterTextPointers: ; 5d53b (17:553b)
-	dw SaffronPokecenterText1
+SaffronPokecenterTextPointers:
+	dw SaffronHealNurseText
 	dw SaffronPokecenterText2
 	dw SaffronPokecenterText3
-	dw SaffronPokecenterText4
+	dw SaffronTradeNurseText
 
-SaffronPokecenterText1: ; 5d543 (17:5543)
+SaffronHealNurseText:
 	db $ff
 
-SaffronPokecenterText2: ; 5d544 (17:5544)
-	TX_FAR _SaffronPokecenterText1
+SaffronPokecenterText2:
+	TX_FAR _SaffronPokecenterText2
 	db "@"
 
-SaffronPokecenterText3: ; 5d549 (17:5549)
+SaffronPokecenterText3:
 	TX_FAR _SaffronPokecenterText3
 	db "@"
 
-SaffronPokecenterText4: ; 5d54e (17:554e)
+SaffronTradeNurseText:
 	db $f6

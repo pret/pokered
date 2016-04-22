@@ -1,4 +1,4 @@
-_SeafoamIslands5BattleText2::
+_ArticunoBattleText::
 	text "Gyaoo!@@"
 
 _SeafoamIslands5Text4::

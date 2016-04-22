@@ -1,4 +1,4 @@
-_CeruleanPokecenterText1::
+_CeruleanPokecenterText2::
 	text "That BILL!"
 
 	para "I heard that"
@@ -22,4 +22,3 @@ _CeruleanPokecenterText3::
 	line "to boast about"
 	cont "their #MON?"
 	done
-

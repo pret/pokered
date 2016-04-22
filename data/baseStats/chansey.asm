@@ -14,11 +14,7 @@ ChanseyBaseStats::
 	dw ChanseyPicBack
 	; attacks known at lvl 0
 	db POUND
-	IF DEF(_YELLOW)
-	db TAIL_WHIP
-	ELSE
 	db DOUBLESLAP
-	ENDC
 	db 0
 	db 0
 	db 4 ; growth rate

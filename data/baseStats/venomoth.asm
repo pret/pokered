@@ -15,13 +15,8 @@ VenomothBaseStats::
 	; attacks known at lvl 0
 	db TACKLE
 	db DISABLE
-	IF DEF(_YELLOW)
-	db SUPERSONIC
-	db CONFUSION
-	ELSE
 	db POISONPOWDER
 	db LEECH_LIFE
-	ENDC
 	db 0 ; growth rate
 	; learnset
 	tmlearn 2,4,6

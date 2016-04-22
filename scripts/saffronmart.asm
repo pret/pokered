@@ -1,15 +1,15 @@
-SaffronMartScript: ; 5d409 (17:5409)
+SaffronMartScript:
 	jp EnableAutoTextBoxDrawing
 
-SaffronMartTextPointers: ; 5d40c (17:540c)
-	dw SaffronMartText1
+SaffronMartTextPointers:
+	dw SaffronCashierText
 	dw SaffronMartText2
 	dw SaffronMartText3
 
-SaffronMartText2: ; 5d412 (17:5412)
+SaffronMartText2:
 	TX_FAR _SaffronMartText2
 	db "@"
 
-SaffronMartText3: ; 5d417 (17:5417)
+SaffronMartText3:
 	TX_FAR _SaffronMartText3
 	db "@"

@@ -1,4 +1,4 @@
-SeafoamIslands3Script: ; 46451 (11:6451)
+SeafoamIslands3Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
@@ -36,11 +36,11 @@ SeafoamIslands3Script: ; 46451 (11:6451)
 	ld hl, Seafoam3HolesCoords
 	jp IsPlayerOnDungeonWarp
 
-Seafoam3HolesCoords: ; 464a9 (11:64a9)
+Seafoam3HolesCoords:
 	db $06,$13
 	db $06,$16
 	db $ff
 
-SeafoamIslands3TextPointers: ; 464ae (11:64ae)
+SeafoamIslands3TextPointers:
 	dw BoulderText
 	dw BoulderText

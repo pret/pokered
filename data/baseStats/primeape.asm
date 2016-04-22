@@ -14,14 +14,9 @@ PrimeapeBaseStats::
 	dw PrimeapePicBack
 	; attacks known at lvl 0
 	db SCRATCH
-	IF !DEF(_YELLOW)
 	db LEER
-	ENDC
 	db KARATE_CHOP
 	db FURY_SWIPES
-	IF DEF(_YELLOW)
-	db LOW_KICK
-	ENDC
 	db 0 ; growth rate
 	; learnset
 	tmlearn 1,5,6,8

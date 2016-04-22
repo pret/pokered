@@ -1,5 +1,4 @@
 _VermilionPokecenterText2::
-_VermilionPokecenterText1::
 	text "Even if they are"
 	line "the same level,"
 	cont "#MON can have"
@@ -18,4 +17,3 @@ _VermilionPokecenterText3::
 	cont "fainted while we"
 	cont "were walking!"
 	done
-

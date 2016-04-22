@@ -14,13 +14,13 @@ _LavenderMartText2::
 	line "I can get them?"
 	done
 
-_LavenderMart_5c953::
+_LavenderMartReviveText::
 	text "You know REVIVE?"
 	line "It revives any"
 	cont "fainted #MON!"
 	done
 
-_LavenderMart_5c958::
+_LavenderMartNuggetText::
 	text "I found a NUGGET"
 	line "in the mountains."
 
@@ -28,4 +28,3 @@ _LavenderMart_5c958::
 	line "useless, but it"
 	cont "sold for ¥5000!"
 	done
-

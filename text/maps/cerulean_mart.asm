@@ -17,4 +17,3 @@ _CeruleanMartText3::
 	line "make #MON go"
 	cont "up one level!"
 	done
-

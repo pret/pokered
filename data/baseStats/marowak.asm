@@ -14,15 +14,9 @@ MarowakBaseStats::
 	dw MarowakPicBack
 	; attacks known at lvl 0
 	db BONE_CLUB
-	IF DEF(_YELLOW)
-	db TAIL_WHIP
-	db 0
-	db 0
-	ELSE
 	db GROWL
 	db LEER
 	db FOCUS_ENERGY
-	ENDC
 	db 0 ; growth rate
 	; learnset
 	tmlearn 1,5,6,8

@@ -1,4 +1,4 @@
-_SaffronPokecenterText1::
+_SaffronPokecenterText2::
 	text "#MON growth"
 	line "rates differ from"
 	cont "specie to specie."
@@ -10,4 +10,3 @@ _SaffronPokecenterText3::
 	cont "why it attracted"
 	cont "TEAM ROCKET!"
 	done
-

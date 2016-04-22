@@ -24,16 +24,4 @@ Route22Mons:
 		dbw 3,NIDORAN_M
 		dbw 4,NIDORAN_M
 	ENDC
-	IF DEF(_YELLOW)
-		dbw 2,NIDORAN_M
-		dbw 2,NIDORAN_F
-		dbw 3,MANKEY
-		dbw 3,RATTATA
-		dbw 4,NIDORAN_M
-		dbw 4,NIDORAN_F
-		dbw 5,MANKEY
-		dbw 2,SPEAROW
-		dbw 4,SPEAROW
-		dbw 6,SPEAROW
-	ENDC
 	db $00
