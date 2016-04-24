@@ -184,11 +184,11 @@ BaseStatsPointers::
 	dbw Bank(MarillBaseStats), MarillBaseStats
 	dbw Bank(AzumarillBaseStats), AzumarillBaseStats
 	dbw Bank(SudowoodoBaseStats), SudowoodoBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(PolitoedBaseStats), PolitoedBaseStats
+	dbw Bank(HoppipBaseStats), HoppipBaseStats
+	dbw Bank(SkiploomBaseStats), SkiploomBaseStats
+	dbw Bank(JumpluffBaseStats), JumpluffBaseStats
+	dbw Bank(AipomBaseStats), AipomBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

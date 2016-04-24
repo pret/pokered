@@ -189,9 +189,9 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon069_EvosMoves), Mon069_EvosMoves
 	dbw Bank(Mon070_EvosMoves), Mon070_EvosMoves
 	dbw Bank(Mon071_EvosMoves), Mon071_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon191_EvosMoves), Mon191_EvosMoves
+	dbw Bank(Mon192_EvosMoves), Mon192_EvosMoves
+	dbw Bank(Mon193_EvosMoves), Mon193_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -1725,6 +1725,8 @@ Mon061_EvosMoves: ; 3b6cc (e:76cc)
 ;Evolutions
 	db EV_ITEM,WATER_STONE,1
 	dw POLIWRATH
+	db EV_LEVEL,40
+	dw POLITOED
 	db 0
 ;Learnset
 	db 16,HYPNOSIS
@@ -2525,7 +2527,7 @@ Mon185_EvosMoves: ; 3b934 (e:7934)
 	db 0
 
 Mon186_EvosMoves: ; 3b936 (e:7936)
-;MISSINGNO
+;POLITOED
 ;Evolutions
 	db 0
 ;Learnset
@@ -2605,28 +2607,40 @@ Mon006_EvosMoves: ; 3b97c (e:797c)
 	db 0
 
 Mon187_EvosMoves: ; 3b98a (e:798a)
-;MISSINGNO
+;HOPPIP
 ;Evolutions
+	db EV_LEVEL,18
+	dw SKIPLOOM
 	db 0
 ;Learnset
+	db 5,TAIL_WHIP
+;	db 8,SYNTHESIS
+	db 10,TACKLE
+	db 13,POISONPOWDER
+	db 15,STUN_SPORE
+	db 17,SLEEP_POWDER
+	db 20,LEECH_SEED
+;	db 25,COTTON_SPORE
+;	db 30,MEGA_DRAIN
 	db 0
 
 Mon188_EvosMoves: ; 3b98c (e:798c)
-;MISSINGNO
+;FOSSIL_KABUTOPS
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
+
 Mon189_EvosMoves: ; 3b98e (e:798e)
-;MISSINGNO
+;FOSSIL_AERODACTYL
 ;Evolutions
 	db 0
 ;Learnset
 	db 0
 
 Mon190_EvosMoves: ; 3b990 (e:7990)
-;MISSINGNO
+;MON_GHOST
 ;Evolutions
 	db 0
 ;Learnset
@@ -2714,4 +2728,51 @@ Mon071_EvosMoves: ; 3b9e4 (e:79e4)
 	db 13,WRAP
 	db 15,POISONPOWDER
 	db 18,SLEEP_POWDER
+	db 0
+	
+Mon191_EvosMoves:
+;SKIPLOOM
+;Evolutions
+	db EV_LEVEL,27
+	dw JUMPLUFF
+	db 0
+;Learnset
+	db 5,TAIL_WHIP
+;	db 8,SYNTHESIS
+	db 10,TACKLE
+	db 13,POISONPOWDER
+	db 15,STUN_SPORE
+	db 17,SLEEP_POWDER
+	db 22,LEECH_SEED
+;	db 29,COTTON_SPORE
+;	db 36,MEGA_DRAIN
+	db 0
+	
+Mon192_EvosMoves:
+;JUMPLUFF
+;Evolutions
+	db 0
+;Learnset
+	db 5,TAIL_WHIP
+;	db 8,SYNTHESIS
+	db 10,TACKLE
+	db 13,POISONPOWDER
+	db 15,STUN_SPORE
+	db 17,SLEEP_POWDER
+	db 22,LEECH_SEED
+;	db 33,COTTON_SPORE
+;	db 44,MEGA_DRAIN
+	db 0
+	
+Mon193_EvosMoves:
+;AIPOM
+;Evolutions
+	db 0
+;Learnset
+	db 6,SAND_ATTACK
+;	db 23,BATON_PASS
+	db 19,FURY_SWIPES
+	db 27,SWIFT
+	db 36,SCREECH
+	db 46,AGILITY
 	db 0

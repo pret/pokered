@@ -174,19 +174,22 @@ CryData: ; 39446 (e:5446)
 	db $0E, $68, $60; Azumarill
 	db $1C, $80, $60; Magnemite
 	db $10, $DD, $01; Sudowoodo
-	db $00, $00, $00; MissingNo.
+	db $0E, $00, $FF; Politoed
 	db $04, $60, $40; Charmander
 	db $1D, $60, $40; Squirtle
 	db $04, $20, $40; Charmeleon
 	db $1D, $20, $40; Wartortle
 	db $04, $00, $80; Charizard
-	db $1D, $00, $80; MissingNo.
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
-	db $00, $00, $00; MissingNo.
+	db $08, $DD, $01; Hoppip
+	db $00, $00, $00; Fossil Kabutops
+	db $00, $00, $00; Fossil Aerodactyl
+	db $00, $00, $00; Ghost
 	db $08, $DD, $01; Oddish
 	db $08, $AA, $40; Gloom
 	db $23, $22, $FF; Vileplume
 	db $21, $55, $01; Bellsprout
 	db $25, $44, $20; Weepinbell
 	db $25, $66, $CC; Victreebel
+	db $08, $AA, $40; Skiploom
+	db $23, $22, $FF; Jumpluff
+	db $0A, $DD, $60; Aipom

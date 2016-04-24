@@ -1849,3 +1849,53 @@ _SudowoodoDexEntry::
 	next "be closer to a"
 	next "rock than a plant"
 	dex
+	
+_PolitoedDexEntry::
+	text "When it expands"
+	next "its throat to"
+	next "croak out a tune,"
+
+	page "nearby POLIWAG and"
+	next "POLIWHIRL gather"
+	next "immediately"
+	dex
+	
+_HoppipDexEntry::
+	text "To keep from being"
+	next "blown away by the"
+	next "wind, they gather"
+
+	page "in clusters. They"
+	next "do enjoy gentle"
+	next "breezes, though"
+	dex
+	
+_SkiploomDexEntry::
+	text "It spreads its"
+	next "petals to absorb"
+	next "sunlight. It also"
+
+	page "floats in the air"
+	next "to get closer to"
+	next "the sun"
+	dex
+
+_JumpluffDexEntry::
+	text "Once it catches"
+	next "the wind, it deft-"
+	next "ly controls its"
+
+	page "cotton-puff spores"
+	next "to float, even"
+	next "around the world"
+	dex
+	
+_AipomDexEntry::
+	text "It uses its tail"
+	next "to hang on to tree"
+	next "branches. It uses"
+
+	page "its momentum to"
+	next "swing from one"
+	next "branch to another"
+	dex

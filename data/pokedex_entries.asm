@@ -173,13 +173,13 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw AzumarillDexEntry
 	dw MagnemiteDexEntry
 	dw SudowoodoDexEntry
-	dw DratiniDexEntry
+	dw PolitoedDexEntry
 	dw CharmanderDexEntry
 	dw SquirtleDexEntry
 	dw CharmeleonDexEntry
 	dw WartortleDexEntry
 	dw CharizardDexEntry
-	dw DratiniDexEntry
+	dw HoppipDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
 	dw MissingNoDexEntry
@@ -189,8 +189,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw BellsproutDexEntry
 	dw WeepinbellDexEntry
 	dw VictreebelDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw SkiploomDexEntry
+	dw JumpluffDexEntry
+	dw AipomDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1565,6 +1566,41 @@ SudowoodoDexEntry:
 	db 3,11
 	dw 838
 	TX_FAR _SudowoodoDexEntry
+	db "@"
+	
+PolitoedDexEntry:
+	db "FROG@"
+	db 3,7
+	dw 747
+	TX_FAR _PolitoedDexEntry
+	db "@"
+	
+HoppipDexEntry:
+	db "COTTONWEED@"
+	db 1,4
+	dw 11
+	TX_FAR _HoppipDexEntry
+	db "@"
+	
+SkiploomDexEntry:
+	db "COTTONWEED@"
+	db 2,0
+	dw 22
+	TX_FAR _SkiploomDexEntry
+	db "@"
+	
+JumpluffDexEntry:
+	db "COTTONWEED@"
+	db 2,7
+	dw 66
+	TX_FAR _JumpluffDexEntry
+	db "@"
+	
+AipomDexEntry:
+	db "LONG TAIL@"
+	db 2,7
+	dw 254
+	TX_FAR _AipomDexEntry
 	db "@"
 	
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
