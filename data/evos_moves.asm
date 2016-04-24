@@ -192,8 +192,8 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon188_EvosMoves), Mon188_EvosMoves
 	dbw Bank(Mon189_EvosMoves), Mon189_EvosMoves
 	dbw Bank(Mon190_EvosMoves), Mon190_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon191_EvosMoves), Mon191_EvosMoves
+	dbw Bank(Mon192_EvosMoves), Mon192_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -2760,4 +2760,31 @@ Mon190_EvosMoves:
 	db 27,SWIFT
 	db 36,SCREECH
 	db 46,AGILITY
+	db 0
+
+Mon191_EvosMoves:
+;SUNKERN
+;Evolutions
+	db EV_ITEM,SUN_STONE,1
+	dw SUNFLORA
+	db 0
+;Learnset
+	db 4,GROWTH
+	db 10,MEGA_DRAIN
+	db 14,LEECH_SEED
+	db 22,RAZOR_LEAF
+	db 36,DOUBLE_EDGE
+	db 0
+
+Mon192_EvosMoves:
+;SUNFLORA
+;Evolutions
+	db 0
+;Learnset
+	db 4,GROWTH
+	db 10,MEGA_DRAIN
+	db 14,LEECH_SEED
+	db 22,RAZOR_LEAF
+	db 36,DOUBLE_EDGE
+	db 43,SOLARBEAM
 	db 0

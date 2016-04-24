@@ -192,8 +192,8 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw SkiploomDexEntry
 	dw JumpluffDexEntry
 	dw AipomDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw SunkernDexEntry
+	dw SunfloraDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1602,7 +1602,21 @@ AipomDexEntry:
 	dw 254
 	TX_FAR _AipomDexEntry
 	db "@"
-	
+
+SunkernDexEntry:
+	db "SEED@"
+	db 1,0
+	dw 40
+	TX_FAR _SunkernDexEntry
+	db "@"
+
+SunfloraDexEntry:
+	db "SUN@"
+	db 2,7
+	dw 187
+	TX_FAR _SunfloraDexEntry
+	db "@"
+
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
 	db "???@"
 	db 10 ; 1.0 m

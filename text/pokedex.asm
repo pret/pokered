@@ -1899,3 +1899,23 @@ _AipomDexEntry::
 	next "swing from one"
 	next "branch to another"
 	dex
+
+_SunkernDexEntry::
+	text "It may plummet"
+	next "from the sky. If"
+	next "attacked by a"
+
+	page "SPEAROW, it will"
+	next "violently shake"
+	next "its leaves"
+	dex
+
+_SunfloraDexEntry::
+	text "As the hot season"
+	next "approaches, the"
+	next "petals on its"
+
+	page "face become much"
+	next "more vivid and"
+	next "lively"
+	dex

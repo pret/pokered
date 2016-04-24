@@ -189,8 +189,8 @@ BaseStatsPointers::
 	dbw Bank(SkiploomBaseStats), SkiploomBaseStats
 	dbw Bank(JumpluffBaseStats), JumpluffBaseStats
 	dbw Bank(AipomBaseStats), AipomBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(SunkernBaseStats), SunkernBaseStats
+	dbw Bank(SunfloraBaseStats), SunfloraBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

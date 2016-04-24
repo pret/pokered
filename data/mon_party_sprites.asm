@@ -94,7 +94,7 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_GRASS, SPRITE_WATER			;Sudowoodo/Politoed
 	dn SPRITE_GRASS, SPRITE_GRASS			;Hoppip/Skiploom
 	dn SPRITE_GRASS, SPRITE_MON				;Jumpluff/Aipom
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_GRASS, SPRITE_GRASS			;Sunkern/Sunflora
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

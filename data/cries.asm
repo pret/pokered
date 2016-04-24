@@ -193,3 +193,5 @@ CryData: ; 39446 (e:5446)
 	db $08, $AA, $40; Skiploom
 	db $23, $22, $FF; Jumpluff
 	db $0A, $DD, $60; Aipom
+	db $08, $30, $30; Sunkern
+	db $08, $40, $40; Sunflora
