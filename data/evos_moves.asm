@@ -2621,7 +2621,7 @@ Mon187_EvosMoves: ; 3b98a (e:798a)
 	db 17,SLEEP_POWDER
 	db 20,LEECH_SEED
 ;	db 25,COTTON_SPORE
-;	db 30,MEGA_DRAIN
+	db 30,MEGA_DRAIN
 	db 0
 
 Mon188_EvosMoves: ; 3b98c (e:798c)
@@ -2745,7 +2745,7 @@ Mon191_EvosMoves:
 	db 17,SLEEP_POWDER
 	db 22,LEECH_SEED
 ;	db 29,COTTON_SPORE
-;	db 36,MEGA_DRAIN
+	db 36,MEGA_DRAIN
 	db 0
 	
 Mon192_EvosMoves:
@@ -2761,7 +2761,7 @@ Mon192_EvosMoves:
 	db 17,SLEEP_POWDER
 	db 22,LEECH_SEED
 ;	db 33,COTTON_SPORE
-;	db 44,MEGA_DRAIN
+	db 44,MEGA_DRAIN
 	db 0
 	
 Mon193_EvosMoves:
