@@ -180,18 +180,18 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon008_EvosMoves), Mon008_EvosMoves
 	dbw Bank(Mon006_EvosMoves), Mon006_EvosMoves
 	dbw Bank(Mon187_EvosMoves), Mon187_EvosMoves
-	dbw Bank(Mon188_EvosMoves), Mon188_EvosMoves
-	dbw Bank(Mon189_EvosMoves), Mon189_EvosMoves
-	dbw Bank(Mon190_EvosMoves), Mon190_EvosMoves
+	dbw Bank(Null_EvosMoves), Null_EvosMoves
+	dbw Bank(Null_EvosMoves), Null_EvosMoves
+	dbw Bank(Null_EvosMoves), Null_EvosMoves
 	dbw Bank(Mon043_EvosMoves), Mon043_EvosMoves
 	dbw Bank(Mon044_EvosMoves), Mon044_EvosMoves
 	dbw Bank(Mon045_EvosMoves), Mon045_EvosMoves
 	dbw Bank(Mon069_EvosMoves), Mon069_EvosMoves
 	dbw Bank(Mon070_EvosMoves), Mon070_EvosMoves
 	dbw Bank(Mon071_EvosMoves), Mon071_EvosMoves
-	dbw Bank(Mon191_EvosMoves), Mon191_EvosMoves
-	dbw Bank(Mon192_EvosMoves), Mon192_EvosMoves
-	dbw Bank(Mon193_EvosMoves), Mon193_EvosMoves
+	dbw Bank(Mon188_EvosMoves), Mon188_EvosMoves
+	dbw Bank(Mon189_EvosMoves), Mon189_EvosMoves
+	dbw Bank(Mon190_EvosMoves), Mon190_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -2624,23 +2624,8 @@ Mon187_EvosMoves: ; 3b98a (e:798a)
 	db 30,MEGA_DRAIN
 	db 0
 
-Mon188_EvosMoves: ; 3b98c (e:798c)
+Null_EvosMoves: ; 3b98c (e:798c)
 ;FOSSIL_KABUTOPS
-;Evolutions
-	db 0
-;Learnset
-	db 0
-
-
-Mon189_EvosMoves: ; 3b98e (e:798e)
-;FOSSIL_AERODACTYL
-;Evolutions
-	db 0
-;Learnset
-	db 0
-
-Mon190_EvosMoves: ; 3b990 (e:7990)
-;MON_GHOST
 ;Evolutions
 	db 0
 ;Learnset
@@ -2730,7 +2715,7 @@ Mon071_EvosMoves: ; 3b9e4 (e:79e4)
 	db 18,SLEEP_POWDER
 	db 0
 	
-Mon191_EvosMoves:
+Mon188_EvosMoves:
 ;SKIPLOOM
 ;Evolutions
 	db EV_LEVEL,27
@@ -2748,7 +2733,7 @@ Mon191_EvosMoves:
 	db 36,MEGA_DRAIN
 	db 0
 	
-Mon192_EvosMoves:
+Mon189_EvosMoves:
 ;JUMPLUFF
 ;Evolutions
 	db 0
@@ -2764,7 +2749,7 @@ Mon192_EvosMoves:
 	db 44,MEGA_DRAIN
 	db 0
 	
-Mon193_EvosMoves:
+Mon190_EvosMoves:
 ;AIPOM
 ;Evolutions
 	db 0
