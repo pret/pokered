@@ -197,11 +197,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon196_EvosMoves), Mon196_EvosMoves
+	dbw Bank(Mon197_EvosMoves), Mon197_EvosMoves
+	dbw Bank(Mon198_EvosMoves), Mon198_EvosMoves
+	dbw Bank(Mon199_EvosMoves), Mon199_EvosMoves
+	dbw Bank(Mon200_EvosMoves), Mon200_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -748,6 +748,8 @@ Mon079_EvosMoves: ; 3b3ad (e:73ad)
 ;Evolutions
 	db EV_LEVEL,37
 	dw SLOWBRO
+	db EV_ITEM,WATER_STONE,1
+	dw SLOWKING
 	db 0
 ;Learnset
 	db 18,DISABLE
@@ -1610,6 +1612,10 @@ Mon133_EvosMoves: ; 3b644 (e:7644)
 	dw JOLTEON
 	db EV_ITEM,WATER_STONE,1
 	dw VAPOREON
+;	db EV_ITEM,SUN_STONE,1
+;	dw ESPEON
+;	db EV_ITEM,MOON_STONE,1
+;	dw UMBREON
 	db 0
 Mon133_EvosEnd:
 ;Learnset
@@ -2787,4 +2793,73 @@ Mon192_EvosMoves:
 	db 22,RAZOR_LEAF
 	db 36,DOUBLE_EDGE
 	db 43,SOLARBEAM
+	db 0
+	
+Mon196_EvosMoves:
+;ESPEON
+;Evolutions
+	db 0
+;Learnset
+	db 8,SAND_ATTACK
+	db 16,CONFUSION
+	db 23,QUICK_ATTACK
+	db 30,SWIFT
+	db 36,PSYBEAM
+;	db 42,PSYCH_UP
+	db 47,PSYCHIC
+;	db 52,MORNING_SUN
+	db 0
+
+Mon197_EvosMoves:
+;UMBREON
+;Evolutions
+	db 0
+;Learnset
+	db 8,SAND_ATTACK
+;	db 16,PURSUIT
+	db 23,QUICK_ATTACK
+	db 30,CONFUSE_RAY
+;	db 36,FEINT_ATTACK
+;	db 42,MEAN_LOOK
+	db 47,SCREECH
+;	db 52,MOONLIGHT
+	db 0
+	
+Mon198_EvosMoves:
+;MURKROW
+;Evolutions
+	db 0
+;Learnset
+;	db 11,PURSUIT
+	db 16,HAZE
+	db 26,NIGHT_SHADE
+;	db 31,FEINT_ATTACK
+;	db 41,MEAN_LOOK
+	db 0
+
+Mon199_EvosMoves:
+;SLOWKING
+;Evolutions
+	db 0
+;Learnset
+	db 6,GROWL
+	db 15,WATER_GUN
+	db 20,CONFUSION
+	db 29,DISABLE
+	db 34,HEADBUTT
+;	db 43,SWAGGER
+	db 48,PSYCHIC
+	db 0
+
+Mon200_EvosMoves:
+;MISDREAVUS
+;Evolutions
+	db 0
+;Learnset
+;	db 6,SPITE
+	db 12,CONFUSE_RAY
+;	db 19,MEAN_LOOK
+	db 27,PSYBEAM
+;	db 36,PAIN_SPLIT
+;	db 46,PSYBEAM
 	db 0
