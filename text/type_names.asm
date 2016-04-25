@@ -6,9 +6,21 @@ TypeNames:
 	dw .Poison
 	dw .Ground
 	dw .Rock
+	dw .Steel
 	dw .Bug
 	dw .Ghost
-	dw .Steel
+
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
+	dw .Normal
 
 	dw .Fire
 	dw .Water
@@ -31,8 +43,9 @@ TypeNames:
 .Ice:      db "ICE@"
 .Ground:   db "GROUND@"
 .Rock:     db "ROCK@"
+.Bird:     db "BIRD@"
 .Bug:      db "BUG@"
 .Ghost:    db "GHOST@"
 .Dragon:   db "DRAGON@"
 .Dark:     db "DARK@"
-.Steel     db "STEEL@"
+.Steel:    db "STEEL@"
