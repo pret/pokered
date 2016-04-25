@@ -191,9 +191,9 @@ BaseStatsPointers::
 	dbw Bank(AipomBaseStats), AipomBaseStats
 	dbw Bank(SunkernBaseStats), SunkernBaseStats
 	dbw Bank(SunfloraBaseStats), SunfloraBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(YanmaBaseStats), YanmaBaseStats
+	dbw Bank(WooperBaseStats), WooperBaseStats
+	dbw Bank(QuagsireBaseStats), QuagsireBaseStats
 	dbw Bank(EspeonBaseStats), EspeonBaseStats
 	dbw Bank(UmbreonBaseStats), UmbreonBaseStats
 	dbw Bank(MurkrowBaseStats), MurkrowBaseStats

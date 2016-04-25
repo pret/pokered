@@ -195,9 +195,9 @@ CryData: ; 39446 (e:5446)
 	db $0A, $DD, $60; Aipom
 	db $08, $30, $30; Sunkern
 	db $08, $40, $40; Sunflora
-	db $00, $00, $00; Yanma
-	db $00, $00, $00; Wooper
-	db $00, $00, $00; Quagsire
+	db $1A, $C0, $20; Yanma
+	db $0E, $30, $40; Wooper
+	db $0E, $20, $80; Quagsire
 	db $1A, $88, $60; Espeon
 	db $1A, $88, $60; Umbreon
 	db $18, $40, $A0; Murkrow
