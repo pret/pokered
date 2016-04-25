@@ -1919,3 +1919,33 @@ _SunfloraDexEntry::
 	next "more vivid and"
 	next "lively"
 	dex
+
+_YanmaDexEntry::
+	text "It can hover in"
+	next "one spot by"
+	next "flapping its"
+
+	page "wings at high"
+	next "speed. It can"
+	next "stop suddenly"
+	dex
+
+_WooperDexEntry::
+	text "When the temper-"
+	next "ature cools in"
+	next "the evening, they"
+
+	page "emerge from water"
+	next "to seek food"
+	next "along the shore"
+	dex
+
+_QuagsireDexEntry::
+	text "It has a sluggish"
+	next "nature. It lies"
+	next "at the bottom of"
+
+	page "the river waiting"
+	next "for prey to stray"
+	next "into its mouth"
+	dex

@@ -194,9 +194,9 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon190_EvosMoves), Mon190_EvosMoves
 	dbw Bank(Mon191_EvosMoves), Mon191_EvosMoves
 	dbw Bank(Mon192_EvosMoves), Mon192_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon193_EvosMoves), Mon193_EvosMoves
+	dbw Bank(Mon194_EvosMoves), Mon194_EvosMoves
+	dbw Bank(Mon195_EvosMoves), Mon195_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -2787,4 +2787,44 @@ Mon192_EvosMoves:
 	db 22,RAZOR_LEAF
 	db 36,DOUBLE_EDGE
 	db 43,SOLARBEAM
+	db 0
+
+Mon193_EvosMoves:
+;YANMA
+;Evolutions
+	db 0
+;Learnset
+	db 7,QUICK_ATTACK
+	db 13,DOUBLE_TEAM
+	db 19,SONICBOOM
+	db 26,SUPERSONIC
+	db 36,WING_ATTACK
+	db 43,SCREECH
+	db 48,HYPNOSIS
+	db 0
+
+Mon194_EvosMoves:
+;WOOPER
+;Evolutions
+	db EV_LEVEL,20
+	dw QUAGSIRE
+	db 0
+;Learnset
+	db 11,SLAM
+	db 21,AMNESIA
+	db 31,EARTHQUAKE
+	db 41,HAZE
+	db 42,MIST
+	db 0
+
+Mon195_EvosMoves:
+;QUAGSIRE
+;Evolutions
+	db 0
+;Learnset
+	db 11,SLAM
+	db 23,AMNESIA
+	db 35,EARTHQUAKE
+	db 52,HAZE
+	db 53,MIST
 	db 0

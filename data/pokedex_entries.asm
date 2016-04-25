@@ -194,9 +194,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw AipomDexEntry
 	dw SunkernDexEntry
 	dw SunfloraDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw YanmaDexEntry
+	dw WooperDexEntry
+	dw QuagsireDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1615,6 +1615,27 @@ SunfloraDexEntry:
 	db 2,7
 	dw 187
 	TX_FAR _SunfloraDexEntry
+	db "@"
+
+YanmaDexEntry:
+	db "CLEAR WING@"
+	db 3,11
+	dw 838
+	TX_FAR _YanmaDexEntry
+	db "@"
+
+WooperDexEntry:
+	db "WATER FISH@"
+	db 1,4
+	dw 187
+	TX_FAR _WooperDexEntry
+	db "@"
+
+QuagsireDexEntry:
+	db "WATER FISH@"
+	db 4,7
+	dw 1653
+	TX_FAR _QuagsireDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

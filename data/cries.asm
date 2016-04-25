@@ -195,3 +195,6 @@ CryData: ; 39446 (e:5446)
 	db $0A, $DD, $60; Aipom
 	db $08, $30, $30; Sunkern
 	db $08, $40, $40; Sunflora
+	db $1A, $C0, $20; Yanma
+	db $0E, $30, $40; Wooper
+	db $0E, $20, $80; Quagsire
