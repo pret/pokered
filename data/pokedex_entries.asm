@@ -197,11 +197,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw YanmaDexEntry
 	dw WooperDexEntry
 	dw QuagsireDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw EspeonDexEntry
+	dw UmbreonDexEntry
+	dw MurkrowDexEntry
+	dw SlowkingDexEntry
+	dw MisdreavusDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1616,7 +1616,7 @@ SunfloraDexEntry:
 	dw 187
 	TX_FAR _SunfloraDexEntry
 	db "@"
-
+	
 YanmaDexEntry:
 	db "CLEAR WING@"
 	db 3,11
@@ -1636,6 +1636,41 @@ QuagsireDexEntry:
 	db 4,7
 	dw 1653
 	TX_FAR _QuagsireDexEntry
+	db "@"
+	
+EspeonDexEntry:
+	db "SUN@"
+	db 2,11
+	dw 584
+	TX_FAR _EspeonDexEntry
+	db "@"
+	
+UmbreonDexEntry:
+	db "MOONLIGHT@"
+	db 3,3
+	dw 595
+	TX_FAR _UmbreonDexEntry
+	db "@"
+	
+MurkrowDexEntry:
+	db "DARKNESS@"
+	db 1,8
+	dw 46
+	TX_FAR _MurkrowDexEntry
+	db "@"
+	
+SlowkingDexEntry:
+	db "ROYAL@"
+	db 6,7
+	dw 1753
+	TX_FAR _SlowkingDexEntry
+	db "@"
+	
+MisdreavusDexEntry:
+	db "SCREECH@"
+	db 2,4
+	dw 22
+	TX_FAR _MisdreavusDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

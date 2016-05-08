@@ -194,11 +194,11 @@ BaseStatsPointers::
 	dbw Bank(YanmaBaseStats), YanmaBaseStats
 	dbw Bank(WooperBaseStats), WooperBaseStats
 	dbw Bank(QuagsireBaseStats), QuagsireBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(EspeonBaseStats), EspeonBaseStats
+	dbw Bank(UmbreonBaseStats), UmbreonBaseStats
+	dbw Bank(MurkrowBaseStats), MurkrowBaseStats
+	dbw Bank(SlowkingBaseStats), SlowkingBaseStats
+	dbw Bank(MisdreavusBaseStats), MisdreavusBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

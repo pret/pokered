@@ -198,3 +198,8 @@ CryData: ; 39446 (e:5446)
 	db $1A, $C0, $20; Yanma
 	db $0E, $30, $40; Wooper
 	db $0E, $20, $80; Quagsire
+	db $1A, $88, $60; Espeon
+	db $1A, $88, $60; Umbreon
+	db $18, $40, $A0; Murkrow
+	db $1F, $00, $80; Slowbro
+	db $1C, $00, $80; Misdreavus

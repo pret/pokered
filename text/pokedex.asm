@@ -1919,7 +1919,7 @@ _SunfloraDexEntry::
 	next "more vivid and"
 	next "lively"
 	dex
-
+	
 _YanmaDexEntry::
 	text "It can hover in"
 	next "one spot by"
@@ -1948,4 +1948,54 @@ _QuagsireDexEntry::
 	page "the river waiting"
 	next "for prey to stray"
 	next "into its mouth"
+	dex
+	
+_EspeonDexEntry::
+	text "It uses the fine"
+	next "hair that covers"
+	next "its body to sense"
+
+	page "air currents and"
+	next "predict its"
+	next "enemy's actions"
+	dex
+	
+_UmbreonDexEntry::
+	text "When darkness"
+	next "falls, the rings"
+	next "on the body begin"
+
+	page "to glow, striking"
+	next "fear in the hearts"
+	next "of anyone nearby"
+	dex
+	
+_MurkrowDexEntry::
+	text "Feared and loathed"
+	next "by many, it is"
+	next "believed to bring"
+
+	page "misfortune to all"
+	next "those who see"
+	next "it at night"
+	dex
+	
+_SlowkingDexEntry::
+	text "Every time it"
+	next "yawns, SHELLDER"
+	next "injects more poi-"
+
+	page "son into it. The"
+	next "poison makes it"
+	next "more intelligent"
+	dex
+	
+_MisdreavusDexEntry::
+	text "It loves to bite"
+	next "and yank people's"
+	next "hair from behind"
+
+	page "without warning,"
+	next "just to see their"
+	next "shocked reactions"
 	dex
