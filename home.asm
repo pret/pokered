@@ -1989,8 +1989,10 @@ GetItemName:: ; 2fcf (0:2fcf)
 	pop hl
 	ret
 
-GetMachineName:: ; 2ff3 (0:2ff3)
+GetMachineName_:: ; 2ff3 (0:2ff3)
 ; copies the name of the TM/HM in [wd11e] to wcd6d
+	add sp, -8
+GetMachineName::
 	push hl
 	push de
 	push bc
@@ -3244,11 +3246,6 @@ GetName:: ; 376b (0:376b)
 	ld a,[wd0b5]
 	ld [wd11e],a
 
-	; TM names are separate from item names.
-	; BUG: This applies to all names instead of just items.
-	cp HM_01
-	jp nc, GetMachineName
-
 	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl
@@ -3265,6 +3262,12 @@ GetName:: ; 376b (0:376b)
 	ld d,h
 	jr .gotPtr
 .otherEntries
+	; TM names are separate from item names.
+	; BUG: This applies to all names instead of just items.
+	ld a,[wd0b5]
+	cp HM_01
+	jp nc, GetMachineName_
+
 	;2-7 = OTHER ENTRIES
 	ld a,[wPredefBank]
 	ld [H_LOADEDROMBANK],a

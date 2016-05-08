@@ -1190,7 +1190,7 @@ wNumMovesMinusOne:: ; cd6c
 ; FormatMovesString stores the number of moves minus one here
 	ds 1
 
-wcd6d:: ds 4 ; buffer for various data
+wcd6d:: ds 14 ; buffer for various data
 
 wStatusScreenCurrentPP:: ; cd71
 ; temp variable used to print a move's current PP on the status screen
@@ -1537,7 +1537,9 @@ wEnemyMon:: ; cfe5
 ; Until this is fixed, this struct will have
 ; to be declared manually.
 
-wEnemyMonSpecies::   dw
+wEnemyMonSpecies::   db
+SECTION "WRAM Bank 1", WRAMX, BANK[1]
+	ds 1
 wEnemyMonHP::        dw
 wEnemyMonPartyPos::
 wEnemyMonBoxLevel::  db
@@ -1546,9 +1548,7 @@ wEnemyMonType::
 wEnemyMonType1::     db
 wEnemyMonType2::     db
 wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds 3
-SECTION "WRAM Bank 1", WRAMX, BANK[1]
-	ds 1
+wEnemyMonMoves::     ds 4
 wEnemyMonDVs::       ds 2
 wEnemyMonLevel::     db
 wEnemyMonMaxHP::     dw
