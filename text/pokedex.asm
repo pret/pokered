@@ -1999,3 +1999,53 @@ _MisdreavusDexEntry::
 	next "just to see their"
 	next "shocked reactions"
 	dex
+	
+_DunsparceDexEntry::
+	text "If spotted, it es-"
+	next "capes by burrowing"
+	next "with its tail. It"
+
+	page "can float just"
+	next "slightly using its"
+	next "wings"
+	dex
+	
+_GligarDexEntry::
+	text "It usually clings"
+	next "to cliffs. When it"
+	next "spots its prey, it"
+
+	page "spreads its wings"
+	next "and glides down"
+	next "to attack"
+	dex
+	
+_SteelixDexEntry::
+	text "It is said that if"
+	next "an ONIX lives for"
+	next "over 100 years,"
+
+	page "its composition"
+	next "changes to become"
+	next "diamond-like"
+	dex
+	
+_SnubbullDexEntry::
+	text "Although it looks"
+	next "frightening, it is"
+	next "actually kind and"
+
+	page "affectionate. It"
+	next "is very popular"
+	next "among women"
+	dex
+	
+_GranbullDexEntry::
+	text "It is actually"
+	next "timid and easily"
+	next "spooked. If att-"
+
+	page "acked, it flails"
+	next "about to fend off"
+	next "its attacker"
+	dex

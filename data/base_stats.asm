@@ -204,11 +204,11 @@ BaseStatsPointers::
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(DunsparceBaseStats), DunsparceBaseStats
+	dbw Bank(GligarBaseStats), GligarBaseStats
+	dbw Bank(SteelixBaseStats), SteelixBaseStats
+	dbw Bank(SnubbullBaseStats), SnubbullBaseStats
+	dbw Bank(GranbullBaseStats), GranbullBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
