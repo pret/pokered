@@ -207,11 +207,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw DunsparceDexEntry
+	dw GligarDexEntry
+	dw SteelixDexEntry
+	dw SnubbullDexEntry
+	dw GranbullDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1671,6 +1671,41 @@ MisdreavusDexEntry:
 	db 2,4
 	dw 22
 	TX_FAR _MisdreavusDexEntry
+	db "@"
+	
+DunsparceDexEntry:
+	db "LAND SNAKE@"
+	db 4,11
+	dw 309
+	TX_FAR _DunsparceDexEntry
+	db "@"
+	
+GligarDexEntry:
+	db "FLYSCORPION@"
+	db 3,7
+	dw 1429
+	TX_FAR _GligarDexEntry
+	db "@"
+	
+SteelixDexEntry:
+	db "IRON SNAKE@"
+	db 30,2
+	dw 8818
+	TX_FAR _SteelixDexEntry
+	db "@"
+	
+SnubbullDexEntry:
+	db "FAIRY@"
+	db 2,0
+	dw 172
+	TX_FAR _SnubbullDexEntry
+	db "@"
+	
+GranbullDexEntry:
+	db "FAIRY@"
+	db 4,7
+	dw 1074
+	TX_FAR _GranbullDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

@@ -207,11 +207,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon206_EvosMoves), Mon206_EvosMoves
+	dbw Bank(Mon207_EvosMoves), Mon207_EvosMoves
+	dbw Bank(Mon208_EvosMoves), Mon208_EvosMoves
+	dbw Bank(Mon209_EvosMoves), Mon209_EvosMoves
+	dbw Bank(Mon210_EvosMoves), Mon210_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -707,7 +707,8 @@ Mon058_EvosMoves: ; 3b374 (e:7374)
 Mon095_EvosMoves: ; 3b384 (e:7384)
 ;ONIX
 ;Evolutions
-	db 0
+	db EV_LEVEL,30
+	dw STEELIX
 ;Learnset
 	db 15,BIND
 	db 19,ROCK_THROW
@@ -2902,4 +2903,75 @@ Mon200_EvosMoves:
 	db 27,PSYBEAM
 ;	db 36,PAIN_SPLIT
 ;	db 46,PSYBEAM
+	db 0
+	
+Mon206_EvosMoves:
+;DUNSPARCE
+;Evolutions
+	db 0
+;Learnset
+	db 6,DEFENSE_CURL
+	db 13,GLARE
+;	db 18,SPITE
+;	db 26,PURSUIT
+	db 30,SCREECH
+	db 38,TAKE_DOWN
+	db 0
+	
+Mon207_EvosMoves:
+;GLIGAR
+;Evolutions
+	db 0
+;Learnset
+	db 6,SAND_ATTACK
+	db 13,HARDEN
+	db 20,QUICK_ATTACK
+;	db 28,FEINT_ATTACK
+	db 36,SLASH
+	db 44,SCREECH
+	db 52,GUILLOTINE
+	db 0
+	
+Mon208_EvosMoves:
+;STEELIX
+;Evolutions
+	db 0
+;Learnset
+	db 10,BIND
+	db 14,ROCK_THROW
+	db 23,HARDEN
+	db 27,RAGE
+;	db 36,SANDSTORM
+	db 40,SLAM
+;	db 49,CRUNCH
+	db 0
+	
+Mon209_EvosMoves:
+;SNUBBULL
+;Evolutions
+	db EV_LEVEL,23
+	dw GRANBULL
+	db 0
+;Learnset
+	db 4,TAIL_WHIP
+;	db 8,CHARM
+	db 13,BITE
+	db 19,LICK
+	db 26,ROAR
+	db 34,RAGE
+	db 43,TAKE_DOWN
+	db 0
+	
+Mon210_EvosMoves:
+;GRANBULL
+;Evolutions
+	db 0
+;Learnset
+	db 4,TAIL_WHIP
+;	db 8,CHARM
+	db 13,BITE
+	db 19,LICK
+	db 28,ROAR
+	db 38,RAGE
+	db 51,TAKE_DOWN
 	db 0
