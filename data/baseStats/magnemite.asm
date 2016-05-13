@@ -1,4 +1,3 @@
-MagnemiteBaseStats: ; 38c9e (e:4c9e)
 db DEX_MAGNEMITE ; pokedex id
 db 25 ; base hp
 db 35 ; base attack

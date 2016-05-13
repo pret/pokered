@@ -1,4 +1,3 @@
-VenonatBaseStats: ; 38902 (e:4902)
 db DEX_VENONAT ; pokedex id
 db 60 ; base hp
 db 55 ; base attack
@@ -22,15 +21,8 @@ db 0 ; growth rate
 	tmlearn 6
 	tmlearn 9,10
 	tmlearn 20,21,22
-IF DEF(_YELLOW)
-	tmlearn 29,30,31,32
-	tmlearn 33,34,39
-	tmlearn 44,46
-	tmlearn 50,55
-ELSE
 	tmlearn 29,31,32
 	tmlearn 33,34
 	tmlearn 44,46
 	tmlearn 50
-ENDC
 db 0 ; padding

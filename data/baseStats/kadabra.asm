@@ -1,4 +1,3 @@
-KadabraBaseStats: ; 38ac2 (e:4ac2)
 db DEX_KADABRA ; pokedex id
 db 40 ; base hp
 db 35 ; base attack
@@ -14,13 +13,8 @@ dw KadabraPicFront
 dw KadabraPicBack
 ; attacks known at lvl 0
 db TELEPORT
-IF DEF(_YELLOW)
-	DB KINESIS
-	db 0
-ELSE
-	db CONFUSION
-	db DISABLE
-ENDC
+db CONFUSION
+db DISABLE
 db 0
 db 3 ; growth rate
 ; learnset

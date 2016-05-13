@@ -1,4 +1,3 @@
-FlareonBaseStats: ; 392a2 (e:52a2)
 db DEX_FLAREON ; pokedex id
 db 65 ; base hp
 db 130 ; base attack
@@ -14,11 +13,7 @@ dw FlareonPicFront
 dw FlareonPicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db SAND_ATTACK
 db QUICK_ATTACK
 db EMBER
 db 0 ; growth rate

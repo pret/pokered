@@ -1,4 +1,3 @@
-NidoranFBaseStats: ; 386ee (e:46ee)
 db DEX_NIDORAN_F ; pokedex id
 db 55 ; base hp
 db 47 ; base attack

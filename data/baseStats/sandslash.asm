@@ -1,4 +1,3 @@
-SandslashBaseStats: ; 386d2 (e:46d2)
 db DEX_SANDSLASH ; pokedex id
 db 75 ; base hp
 db 100 ; base attack

@@ -1,4 +1,4 @@
-SeafoamIslands4Script: ; 4658d (11:658d)
+SeafoamIslands4Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
@@ -44,18 +44,18 @@ SeafoamIslands4Script: ; 4658d (11:658d)
 	ld a, [wSeafoamIslands4CurScript]
 	jp CallFunctionInTable
 
-Seafoam4HolesCoords: ; 465f6 (11:65f6)
+Seafoam4HolesCoords:
 	db $10,$03
 	db $10,$06
 	db $ff
 
-SeafoamIslands4ScriptPointers: ; 465fb (11:65fb)
+SeafoamIslands4ScriptPointers:
 	dw SeafoamIslands4Script0
 	dw SeafoamIslands4Script1
 	dw SeafoamIslands4Script2
 	dw SeafoamIslands4Script3
 
-SeafoamIslands4Script0: ; 46603 (11:6603)
+SeafoamIslands4Script0:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wYCoord]
@@ -76,13 +76,13 @@ SeafoamIslands4Script0: ; 46603 (11:6603)
 	ld [wSeafoamIslands4CurScript], a
 	ret
 
-RLEMovement46632: ; 46632 (11:6632)
+RLEMovement46632:
 	db D_DOWN,6
 	db D_RIGHT,5
 	db D_DOWN,3
 	db $ff
 
-SeafoamIslands4Script1: ; 46639 (11:6639)
+SeafoamIslands4Script1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -90,7 +90,7 @@ SeafoamIslands4Script1: ; 46639 (11:6639)
 	ld [wSeafoamIslands4CurScript], a
 	ret
 
-SeafoamIslands4Script2: ; 46644 (11:6644)
+SeafoamIslands4Script2:
 	CheckBothEventsSet EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE
 	ret z
 	ld a, [wXCoord]
@@ -119,20 +119,20 @@ SeafoamIslands4Script2: ; 46644 (11:6644)
 	ld [wSeafoamIslands4CurScript], a
 	ret
 
-RLEData_4667f: ; 4667f (11:667f)
+RLEData_4667f:
 	db D_DOWN,$06
 	db D_RIGHT,$02
 	db D_DOWN,$04
 	db D_LEFT,$01
 	db $FF
 
-RLEData_46688: ; 46688 (11:6688)
+RLEData_46688:
 	db D_DOWN,$06
 	db D_RIGHT,$02
 	db D_DOWN,$04
 	db $FF
 
-SeafoamIslands4Script3: ; 4668f (11:668f)
+SeafoamIslands4Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -140,7 +140,7 @@ SeafoamIslands4Script3: ; 4668f (11:668f)
 	ld [wSeafoamIslands4CurScript], a
 	ret
 
-SeafoamIslands4TextPointers: ; 4669a (11:669a)
+SeafoamIslands4TextPointers:
 	dw BoulderText
 	dw BoulderText
 	dw BoulderText

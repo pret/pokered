@@ -1,4 +1,3 @@
-DodrioBaseStats: ; 38d0e (e:4d0e)
 db DEX_DODRIO ; pokedex id
 db 60 ; base hp
 db 110 ; base attack

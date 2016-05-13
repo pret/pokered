@@ -1,4 +1,3 @@
-PidgeotBaseStats: ; 385ba (e:45ba)
 db DEX_PIDGEOT ; pokedex id
 db 83 ; base hp
 db 80 ; base attack

@@ -1,4 +1,3 @@
-OnixBaseStats: ; 38e26 (e:4e26)
 db DEX_ONIX ; pokedex id
 db 35 ; base hp
 db 45 ; base attack

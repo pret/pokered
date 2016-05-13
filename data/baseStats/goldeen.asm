@@ -1,4 +1,3 @@
-GoldeenBaseStats: ; 390aa (e:50aa)
 db DEX_GOLDEEN ; pokedex id
 db 45 ; base hp
 db 67 ; base attack

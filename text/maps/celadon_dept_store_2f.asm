@@ -20,4 +20,3 @@ _CeladonMart2Text5::
 	para "2F: TRAINER'S"
 	line "    MARKET"
 	done
-

@@ -1,4 +1,3 @@
-CharmanderBaseStats: ; 38432 (e:4432)
 db DEX_CHARMANDER ; pokedex id
 db 39 ; base hp
 db 52 ; base attack

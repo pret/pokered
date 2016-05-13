@@ -1,4 +1,3 @@
-PersianBaseStats: ; 3898e (e:498e)
 db DEX_PERSIAN ; pokedex id
 db 65 ; base hp
 db 70 ; base attack

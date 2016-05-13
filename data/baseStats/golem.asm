@@ -1,4 +1,3 @@
-GolemBaseStats: ; 38c12 (e:4c12)
 db DEX_GOLEM ; pokedex id
 db 80 ; base hp
 db 110 ; base attack

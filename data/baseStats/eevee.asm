@@ -1,4 +1,3 @@
-EeveeBaseStats: ; 3924e (e:524e)
 db DEX_EEVEE ; pokedex id
 db 55 ; base hp
 db 55 ; base attack
@@ -14,11 +13,7 @@ dw EeveePicFront
 dw EeveePicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db SAND_ATTACK
 db 0
 db 0
 db 0 ; growth rate

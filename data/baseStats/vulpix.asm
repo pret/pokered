@@ -1,4 +1,3 @@
-VulpixBaseStats: ; 387ce (e:47ce)
 db DEX_VULPIX ; pokedex id
 db 38 ; base hp
 db 41 ; base attack

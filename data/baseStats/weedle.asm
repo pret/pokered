@@ -1,4 +1,3 @@
-WeedleBaseStats: ; 3852e (e:452e)
 db DEX_WEEDLE ; pokedex id
 db 40 ; base hp
 db 35 ; base attack

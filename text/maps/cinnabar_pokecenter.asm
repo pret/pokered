@@ -1,5 +1,4 @@
 _CinnabarPokecenterText2::
-_CinnabarPokecenterText1::
 	text "You can cancel"
 	line "evolution."
 
@@ -20,4 +19,3 @@ _CinnabarPokecenterText3::
 	para "I think it's"
 	line "worth a try!"
 	done
-

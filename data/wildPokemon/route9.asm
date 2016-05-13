@@ -1,6 +1,5 @@
 Route9Mons:
 	db $0F
-
 	IF DEF(_RED)
 		db 16,RATTATA
 		db 16,SPEAROW
@@ -13,8 +12,7 @@ Route9Mons:
 		db 13,EKANS
 		db 17,EKANS
 	ENDC
-
-	IF DEF(_GREEN) || DEF(_BLUE)
+	IF DEF(_BLUE)
 		db 16,RATTATA
 		db 16,SPEAROW
 		db 14,RATTATA
@@ -26,19 +24,4 @@ Route9Mons:
 		db 13,SANDSHREW
 		db 17,SANDSHREW
 	ENDC
-
-	IF DEF(_YELLOW)
-		db 16,NIDORAN_M
-		db 16,NIDORAN_F
-		db 18,RATTATA
-		db 18,NIDORAN_M
-		db 18,NIDORAN_F
-		db 17,SPEAROW
-		db 18,NIDORINO
-		db 18,NIDORINA
-		db 20,RATICATE
-		db 19,FEAROW
-	ENDC
-
 	db $00
-

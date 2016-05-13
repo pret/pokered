@@ -1,4 +1,3 @@
-JolteonBaseStats: ; 39286 (e:5286)
 db DEX_JOLTEON ; pokedex id
 db 65 ; base hp
 db 65 ; base attack
@@ -14,11 +13,7 @@ dw JolteonPicFront
 dw JolteonPicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db SAND_ATTACK
 db QUICK_ATTACK
 db THUNDERSHOCK
 db 0 ; growth rate

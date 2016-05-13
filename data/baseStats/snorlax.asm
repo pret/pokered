@@ -1,4 +1,3 @@
-SnorlaxBaseStats: ; 39366 (e:5366)
 db DEX_SNORLAX ; pokedex id
 db 160 ; base hp
 db 110 ; base attack

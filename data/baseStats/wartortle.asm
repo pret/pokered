@@ -1,4 +1,3 @@
-WartortleBaseStats: ; 384a2 (e:44a2)
 db DEX_WARTORTLE ; pokedex id
 db 59 ; base hp
 db 63 ; base attack

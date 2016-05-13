@@ -15,6 +15,7 @@ POKEDEX_TEXT EQU TEXT_11 + 1
 MOVE_NAMES   EQU POKEDEX_TEXT + 1
 
 INCLUDE "macros.asm"
+INCLUDE "charmap.asm"
 INCLUDE "hram.asm"
 
 
@@ -2338,6 +2339,7 @@ _ColosseumText1::
 INCLUDE "text/maps/reds_house_1f.asm"
 INCLUDE "text/maps/blues_house.asm"
 INCLUDE "text/maps/oaks_lab.asm"
+INCLUDE "text/maps/viridian_pokecenter.asm"
 INCLUDE "text/maps/viridian_mart.asm"
 INCLUDE "text/maps/school.asm"
 INCLUDE "text/maps/viridian_house.asm"

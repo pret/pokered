@@ -1,4 +1,3 @@
-VaporeonBaseStats: ; 3926a (e:526a)
 db DEX_VAPOREON ; pokedex id
 db 130 ; base hp
 db 65 ; base attack
@@ -14,11 +13,7 @@ dw VaporeonPicFront
 dw VaporeonPicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db SAND_ATTACK
 db QUICK_ATTACK
 db WATER_GUN
 db 0 ; growth rate

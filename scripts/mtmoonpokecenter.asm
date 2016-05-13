@@ -1,31 +1,31 @@
-MtMoonPokecenterScript: ; 492cf (12:52cf)
+MtMoonPokecenterScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-MtMoonPokecenterTextPointers: ; 492d5 (12:52d5)
-	dw MtMoonPokecenterText1
+MtMoonPokecenterTextPointers:
+	dw MtMoonHealNurseText
 	dw MtMoonPokecenterText2
 	dw MtMoonPokecenterText3
-	dw MtMoonPokecenterText4
+	dw MagikarpSalesmanText
 	dw MtMoonPokecenterText5
-	dw MtMoonPokecenterText6
+	dw MtMoonTradeNurseText
 
-MtMoonPokecenterText1: ; 492e1 (12:52e1)
+MtMoonHealNurseText:
 	db $ff
 
-MtMoonPokecenterText2: ; 492e2 (12:52e2)
+MtMoonPokecenterText2:
 	TX_FAR _MtMoonPokecenterText1
 	db "@"
 
-MtMoonPokecenterText3: ; 492e7 (12:52e7)
+MtMoonPokecenterText3:
 	TX_FAR _MtMoonPokecenterText3
 	db "@"
 
-MtMoonPokecenterText4: ; 492ec (12:52ec)
+MagikarpSalesmanText:
 	TX_ASM
 	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
 	jp c, .alreadyBoughtMagikarp
-	ld hl, MtMoonPokecenterText_4935c
+	ld hl, .Text1
 	call PrintText
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
@@ -40,7 +40,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
-	ld hl, MtMoonPokecenterText_49366
+	ld hl, .NoMoneyText
 	jr .printText
 .enoughMoney
 	lb bc, MAGIKARP, 5
@@ -61,34 +61,34 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	SetEvent EVENT_BOUGHT_MAGIKARP
 	jr .done
 .choseNo
-	ld hl, MtMoonPokecenterText_49361
+	ld hl, .RefuseText
 	jr .printText
 .alreadyBoughtMagikarp
-	ld hl, MtMoonPokecenterText_4936b
+	ld hl, .Text2
 .printText
 	call PrintText
 .done
 	jp TextScriptEnd
 
-MtMoonPokecenterText_4935c: ; 4935c (12:535c)
-	TX_FAR _MtMoonPokecenterText_4935c
+.Text1
+	TX_FAR _MagikarpSalesmanText1
 	db "@"
 
-MtMoonPokecenterText_49361: ; 49361 (12:5361)
-	TX_FAR _MtMoonPokecenterText_49361
+.RefuseText
+	TX_FAR _MagikarpSalesmanNoText
 	db "@"
 
-MtMoonPokecenterText_49366: ; 49366 (12:5366)
-	TX_FAR _MtMoonPokecenterText_49366
+.NoMoneyText
+	TX_FAR _MagikarpSalesmanNoMoneyText
 	db "@"
 
-MtMoonPokecenterText_4936b: ; 4936b (12:536b)
-	TX_FAR _MtMoonPokecenterText_4936b
+.Text2
+	TX_FAR _MagikarpSalesmanText2
 	db "@"
 
-MtMoonPokecenterText5: ; 49370 (12:5370)
+MtMoonPokecenterText5:
 	TX_FAR _MtMoonPokecenterText5
 	db "@"
 
-MtMoonPokecenterText6: ; 49375 (12:5375)
+MtMoonTradeNurseText:
 	db $f6

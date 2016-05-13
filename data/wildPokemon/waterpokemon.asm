@@ -1,6 +1,5 @@
 WaterMons:
 	db $00
-
 	db $05
 	db 5,TENTACOOL
 	db 10,TENTACOOL
@@ -12,4 +11,3 @@ WaterMons:
 	db 30,TENTACOOL
 	db 35,TENTACOOL
 	db 40,TENTACOOL
-

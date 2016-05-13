@@ -1,4 +1,4 @@
-VictoryRoad3Script: ; 44980 (11:4980)
+VictoryRoad3Script:
 	call VictoryRoad3Script_44996
 	call EnableAutoTextBoxDrawing
 	ld hl, VictoryRoad3TrainerHeaders
@@ -8,7 +8,7 @@ VictoryRoad3Script: ; 44980 (11:4980)
 	ld [wVictoryRoad3CurScript], a
 	ret
 
-VictoryRoad3Script_44996: ; 44996 (11:4996)
+VictoryRoad3Script_44996:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -20,12 +20,12 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	lb bc, 5, 3
 	predef_jump ReplaceTileBlock
 
-VictoryRoad3ScriptPointers: ; 449b1 (11:49b1)
+VictoryRoad3ScriptPointers:
 	dw VictoryRoad3Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-VictoryRoad3Script0: ; 449b7 (11:49b7)
+VictoryRoad3Script0:
 	ld hl, wFlags_0xcd60
 	bit 7, [hl]
 	res 7, [hl]
@@ -50,7 +50,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
-.coordsData_449f9: ; 449f9 (11:49f9)
+.coordsData_449f9:
 	db $05,$03
 	db $0F,$17
 	db $FF
@@ -74,7 +74,7 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	jp z, CheckFightingMapTrainers
 	ret
 
-VictoryRoad3TextPointers: ; 44a24 (11:4a24)
+VictoryRoad3TextPointers:
 	dw VictoryRoad3Text1
 	dw VictoryRoad3Text2
 	dw VictoryRoad3Text3
@@ -86,8 +86,8 @@ VictoryRoad3TextPointers: ; 44a24 (11:4a24)
 	dw BoulderText
 	dw BoulderText
 
-VictoryRoad3TrainerHeaders: ; 44a38 (11:4a38)
-VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
+VictoryRoad3TrainerHeaders:
+VictoryRoad3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
 	db ($1 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
@@ -96,7 +96,7 @@ VictoryRoad3TrainerHeader0: ; 44a38 (11:4a38)
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 
-VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
+VictoryRoad3TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
@@ -105,7 +105,7 @@ VictoryRoad3TrainerHeader2: ; 44a44 (11:4a44)
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 
-VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
+VictoryRoad3TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
@@ -114,7 +114,7 @@ VictoryRoad3TrainerHeader3: ; 44a50 (11:4a50)
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 
-VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
+VictoryRoad3TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
@@ -125,74 +125,74 @@ VictoryRoad3TrainerHeader4: ; 44a5c (11:4a5c)
 
 	db $ff
 
-VictoryRoad3Text1: ; 44a69 (11:4a69)
+VictoryRoad3Text1:
 	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad3Text2: ; 44a73 (11:4a73)
+VictoryRoad3Text2:
 	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad3Text3: ; 44a7d (11:4a7d)
+VictoryRoad3Text3:
 	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad3Text4: ; 44a87 (11:4a87)
+VictoryRoad3Text4:
 	TX_ASM
 	ld hl, VictoryRoad3TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad3BattleText2: ; 44a91 (11:4a91)
+VictoryRoad3BattleText2:
 	TX_FAR _VictoryRoad3BattleText2
 	db "@"
 
-VictoryRoad3EndBattleText2: ; 44a96 (11:4a96)
+VictoryRoad3EndBattleText2:
 	TX_FAR _VictoryRoad3EndBattleText2
 	db "@"
 
-VictoryRoad3AfterBattleText2: ; 44a9b (11:4a9b)
+VictoryRoad3AfterBattleText2:
 	TX_FAR _VictoryRoad3AfterBattleText2
 	db "@"
 
-VictoryRoad3BattleText3: ; 44aa0 (11:4aa0)
+VictoryRoad3BattleText3:
 	TX_FAR _VictoryRoad3BattleText3
 	db "@"
 
-VictoryRoad3EndBattleText3: ; 44aa5 (11:4aa5)
+VictoryRoad3EndBattleText3:
 	TX_FAR _VictoryRoad3EndBattleText3
 	db "@"
 
-VictoryRoad3AfterBattleText3: ; 44aaa (11:4aaa)
+VictoryRoad3AfterBattleText3:
 	TX_FAR _VictoryRoad3AfterBattleText3
 	db "@"
 
-VictoryRoad3BattleText4: ; 44aaf (11:4aaf)
+VictoryRoad3BattleText4:
 	TX_FAR _VictoryRoad3BattleText4
 	db "@"
 
-VictoryRoad3EndBattleText4: ; 44ab4 (11:4ab4)
+VictoryRoad3EndBattleText4:
 	TX_FAR _VictoryRoad3EndBattleText4
 	db "@"
 
-VictoryRoad3AfterBattleText4: ; 44ab9 (11:4ab9)
+VictoryRoad3AfterBattleText4:
 	TX_FAR _VictoryRoad3AfterBattleText4
 	db "@"
 
-VictoryRoad3BattleText5: ; 44abe (11:4abe)
+VictoryRoad3BattleText5:
 	TX_FAR _VictoryRoad3BattleText5
 	db "@"
 
-VictoryRoad3EndBattleText5: ; 44ac3 (11:4ac3)
+VictoryRoad3EndBattleText5:
 	TX_FAR _VictoryRoad3EndBattleText5
 	db "@"
 
-VictoryRoad3AfterBattleText5: ; 44ac8 (11:4ac8)
+VictoryRoad3AfterBattleText5:
 	TX_FAR _VictoryRoad3AfterBattleText5
 	db "@"

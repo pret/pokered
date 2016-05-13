@@ -11,4 +11,3 @@ _SaffronMartText3::
 	line "but it revives"
 	cont "fainted #MON!"
 	done
-

@@ -1,4 +1,3 @@
-VictreebelBaseStats: ; 38b86 (e:4b86)
 db DEX_VICTREEBEL	 ; pokedex id
 db 80 ; base hp
 db 105 ; base attack

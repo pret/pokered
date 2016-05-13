@@ -1,4 +1,3 @@
-FarfetchdBaseStats: ; 38cd6 (e:4cd6)
 db DEX_FARFETCHD ; pokedex id
 db 52 ; base hp
 db 65 ; base attack

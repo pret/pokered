@@ -1,4 +1,3 @@
-WigglytuffBaseStats: ; 38822 (e:4822)
 db DEX_WIGGLYTUFF ; pokedex id
 db 140 ; base hp
 db 70 ; base attack

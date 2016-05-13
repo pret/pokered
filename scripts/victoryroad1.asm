@@ -1,4 +1,4 @@
-VictoryRoad1Script: ; 5da0a (17:5a0a)
+VictoryRoad1Script:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -18,12 +18,12 @@ VictoryRoad1Script: ; 5da0a (17:5a0a)
 	lb bc, 6, 4
 	predef_jump ReplaceTileBlock
 
-VictoryRoad1ScriptPointers: ; 5da3a (17:5a3a)
+VictoryRoad1ScriptPointers:
 	dw VictoryRoad1Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-VictoryRoad1Script0: ; 5da40 (17:5a40)
+VictoryRoad1Script0:
 	CheckEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5da5c
@@ -34,10 +34,10 @@ VictoryRoad1Script0: ; 5da40 (17:5a40)
 	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ret
 
-CoordsData_5da5c: ; 5da5c (17:5a5c)
+CoordsData_5da5c:
 	db $0D,$11,$FF
 
-VictoryRoad1TextPointers: ; 5da5f (17:5a5f)
+VictoryRoad1TextPointers:
 	dw VictoryRoad1Text1
 	dw VictoryRoad1Text2
 	dw PickUpItemText
@@ -46,8 +46,8 @@ VictoryRoad1TextPointers: ; 5da5f (17:5a5f)
 	dw BoulderText
 	dw BoulderText
 
-VictoryRoad1TrainerHeaders: ; 5da6d (17:5a6d)
-VictoryRoad1TrainerHeader0: ; 5da6d (17:5a6d)
+VictoryRoad1TrainerHeaders:
+VictoryRoad1TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0
@@ -56,7 +56,7 @@ VictoryRoad1TrainerHeader0: ; 5da6d (17:5a6d)
 	dw VictoryRoad1EndBattleText1 ; TextEndBattle
 	dw VictoryRoad1EndBattleText1 ; TextEndBattle
 
-VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
+VictoryRoad1TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_1_TRAINER_1
@@ -67,38 +67,38 @@ VictoryRoad1TrainerHeader1: ; 5da79 (17:5a79)
 
 	db $ff
 
-VictoryRoad1Text1: ; 5da86 (17:5a86)
+VictoryRoad1Text1:
 	TX_ASM
 	ld hl, VictoryRoad1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad1Text2: ; 5da90 (17:5a90)
+VictoryRoad1Text2:
 	TX_ASM
 	ld hl, VictoryRoad1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-VictoryRoad1BattleText1: ; 5da9a (17:5a9a)
+VictoryRoad1BattleText1:
 	TX_FAR _VictoryRoad1BattleText1
 	db "@"
 
-VictoryRoad1EndBattleText1: ; 5da9f (17:5a9f)
+VictoryRoad1EndBattleText1:
 	TX_FAR _VictoryRoad1EndBattleText1
 	db "@"
 
-VictoryRoad1AfterBattleText1: ; 5daa4 (17:5aa4)
+VictoryRoad1AfterBattleText1:
 	TX_FAR _VictoryRoad1AfterBattleText1
 	db "@"
 
-VictoryRoad1BattleText2: ; 5daa9 (17:5aa9)
+VictoryRoad1BattleText2:
 	TX_FAR _VictoryRoad1BattleText2
 	db "@"
 
-VictoryRoad1EndBattleText2: ; 5daae (17:5aae)
+VictoryRoad1EndBattleText2:
 	TX_FAR _VictoryRoad1EndBattleText2
 	db "@"
 
-VictoryRoad1AfterBattleText2: ; 5dab3 (17:5ab3)
+VictoryRoad1AfterBattleText2:
 	TX_FAR _VictoryRoad1AfterBattleText2
 	db "@"

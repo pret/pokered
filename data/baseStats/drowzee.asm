@@ -1,4 +1,3 @@
-DrowzeeBaseStats: ; 38e42 (e:4e42)
 db DEX_DROWZEE ; pokedex id
 db 60 ; base hp
 db 48 ; base attack

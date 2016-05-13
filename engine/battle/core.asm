@@ -1727,7 +1727,7 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wBattleMonLevel
-	ld bc, $b
+	ld bc, wBattleMonPP - wBattleMonLevel
 	call CopyData
 	ld a, [wBattleMonSpecies2]
 	ld [wd0b5], a
@@ -1771,7 +1771,7 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wEnemyMonLevel
-	ld bc, $b
+	ld bc, wEnemyMonPP - wEnemyMonLevel
 	call CopyData
 	ld a, [wEnemyMonSpecies]
 	ld [wd0b5], a
@@ -1913,11 +1913,11 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	call PlaceString
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
-	ld bc, $c
+	ld bc, wBattleMonDVs - wBattleMonSpecies
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wLoadedMonLevel
-	ld bc, $b
+	ld bc, wBattleMonPP - wBattleMonLevel
 	call CopyData
 	coord hl, 14, 8
 	push hl
@@ -2982,11 +2982,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	jp Delay3
 
 DisabledText: ; 3d555 (f:5555)
-IF DEF(_YELLOW)
-	db "Disabled!@"
-ELSE
 	db "disabled!@"
-ENDC
 
 TypeText: ; 3d55f (f:555f)
 	db "TYPE@"

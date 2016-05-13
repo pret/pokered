@@ -1,6 +1,5 @@
 Route10Mons:
 	db $0F
-
 	IF DEF(_RED)
 		db 16,VOLTORB
 		db 16,SPEAROW
@@ -13,8 +12,7 @@ Route10Mons:
 		db 13,EKANS
 		db 17,EKANS
 	ENDC
-
-	IF DEF(_BLUE) || DEF(_GREEN)
+	IF DEF(_BLUE)
 		db 16,VOLTORB
 		db 16,SPEAROW
 		db 14,VOLTORB
@@ -26,19 +24,4 @@ Route10Mons:
 		db 13,SANDSHREW
 		db 17,SANDSHREW
 	ENDC
-
-	IF DEF(_YELLOW)
-		db 16,MAGNEMITE
-		db 18,RATTATA
-		db 18,MAGNEMITE
-		db 20,MAGNEMITE
-		db 17,NIDORAN_M
-		db 17,NIDORAN_F
-		db 22,MAGNEMITE
-		db 20,RATICATE
-		db 16,MACHOP
-		db 18,MACHOP
-	ENDC
-
 	db $00
-

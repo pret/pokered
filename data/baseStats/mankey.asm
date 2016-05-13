@@ -1,4 +1,3 @@
-MankeyBaseStats: ; 389e2 (e:49e2)
 db DEX_MANKEY ; pokedex id
 db 40 ; base hp
 db 80 ; base attack

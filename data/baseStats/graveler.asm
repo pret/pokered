@@ -1,4 +1,3 @@
-GravelerBaseStats: ; 38bf6 (e:4bf6)
 db DEX_GRAVELER ; pokedex id
 db 55 ; base hp
 db 95 ; base attack

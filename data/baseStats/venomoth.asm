@@ -1,4 +1,3 @@
-VenomothBaseStats: ; 3891e (e:491e)
 db DEX_VENOMOTH ; pokedex id
 db 70 ; base hp
 db 65 ; base attack
@@ -15,13 +14,8 @@ dw VenomothPicBack
 ; attacks known at lvl 0
 db TACKLE
 db DISABLE
-IF DEF(_YELLOW)
-	db SUPERSONIC
-	db CONFUSION
-ELSE
-	db POISONPOWDER
-	db LEECH_LIFE
-ENDC
+db POISONPOWDER
+db LEECH_LIFE
 db 0 ; growth rate
 ; learnset
 	tmlearn 2,4,6

@@ -1,4 +1,3 @@
-DugtrioBaseStats: ; 38956 (e:4956)
 db DEX_DUGTRIO ; pokedex id
 db 35 ; base hp
 db 80 ; base attack
@@ -25,9 +24,5 @@ db 0 ; growth rate
 	tmlearn 26,27,28,31,32
 	tmlearn 34
 	tmlearn 44,48
-IF DEF(_YELLOW)
-	tmlearn 50,51
-ELSE
 	tmlearn 50
-ENDC
 db 0 ; padding

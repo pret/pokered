@@ -1,4 +1,3 @@
-ArticunoBaseStats: ; 39382 (e:5382)
 db DEX_ARTICUNO ; pokedex id
 db 90 ; base hp
 db 85 ; base attack

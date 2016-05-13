@@ -1,4 +1,3 @@
-TangelaBaseStats: ; 3903a (e:503a)
 db DEX_TANGELA ; pokedex id
 db 65 ; base hp
 db 55 ; base attack

@@ -1,4 +1,3 @@
-AbraBaseStats: ; 38aa6 (e:4aa6)
 db DEX_ABRA ; pokedex id
 db 25 ; base hp
 db 20 ; base attack

@@ -1,4 +1,3 @@
-MachopBaseStats: ; 38afa (e:4afa)
 db DEX_MACHOP ; pokedex id
 db 70 ; base hp
 db 80 ; base attack

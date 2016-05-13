@@ -1,4 +1,3 @@
-WeepinbellBaseStats: ; 38b6a (e:4b6a)
 db DEX_WEEPINBELL ; pokedex id
 db 65 ; base hp
 db 90 ; base attack

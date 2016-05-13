@@ -1,4 +1,3 @@
-TaurosBaseStats: ; 391c2 (e:51c2)
 db DEX_TAUROS ; pokedex id
 db 75 ; base hp
 db 100 ; base attack

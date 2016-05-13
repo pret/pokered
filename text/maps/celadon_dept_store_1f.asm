@@ -29,4 +29,3 @@ _CeladonMart1Text3::
 	text "1F: SERVICE"
 	line "    COUNTER"
 	done
-
