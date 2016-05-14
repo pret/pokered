@@ -2049,3 +2049,53 @@ _GranbullDexEntry::
 	next "about to fend off"
 	next "its attacker"
 	dex
+	
+_QwilfishDexEntry::
+	text "To fire its poison"
+	next "spikes, it must"
+	next "inflate its body"
+
+	page "by drinking over"
+	next "2.6 gallons of"
+	next "water all at once"
+	dex
+	
+_ScizorDexEntry::
+	text "It swings its eye-"
+	next "patterned pincers"
+	next "up to scare its"
+
+	page "foes. This makes"
+	next "it look like it"
+	next "has three heads"
+	dex
+	
+_ShuckleDexEntry::
+	text "The fluid secreted"
+	next "by its toes carves"
+	next "holes in rocks for"
+
+	page "nesting and can be"
+	next "mixed with BERRIES"
+	next "to make a drink"
+	dex
+	
+_HeracrossDexEntry::
+	text "With its Herculean"
+	next "powers, it can"
+	next "easily throw"
+
+	page "around an object"
+	next "that is 100 times"
+	next "its own weight"
+	dex
+
+_SneaselDexEntry::
+	text "Vicious in nature,"
+	next "it drives PIDGEY"
+	next "from their nests"
+
+	page "and feasts on the"
+	next "eggs that are left"
+	next "behind"
+	dex

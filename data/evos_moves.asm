@@ -212,11 +212,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon208_EvosMoves), Mon208_EvosMoves
 	dbw Bank(Mon209_EvosMoves), Mon209_EvosMoves
 	dbw Bank(Mon210_EvosMoves), Mon210_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon211_EvosMoves), Mon211_EvosMoves
+	dbw Bank(Mon212_EvosMoves), Mon212_EvosMoves
+	dbw Bank(Mon213_EvosMoves), Mon213_EvosMoves
+	dbw Bank(Mon214_EvosMoves), Mon214_EvosMoves
+	dbw Bank(Mon215_EvosMoves), Mon215_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -593,6 +593,8 @@ Mon092_EvosMoves: ; 3b31b (e:731b)
 Mon123_EvosMoves: ; 3b324 (e:7324)
 ;SCYTHER
 ;Evolutions
+	db EV_LEVEL,30
+	dw SCIZOR
 	db 0
 ;Learnset
 	db 17,LEER
@@ -2974,4 +2976,72 @@ Mon210_EvosMoves:
 	db 28,ROAR
 	db 38,RAGE
 	db 51,TAKE_DOWN
+	db 0
+	
+Mon211_EvosMoves:
+;QWILFISH
+;Evolutions
+	db 0
+;Learnset
+	db 10,HARDEN
+	db 11,MINIMIZE
+	db 19,WATER_GUN
+	db 28,PIN_MISSILE
+	db 37,TAKE_DOWN
+	db 46,HYDRO_PUMP
+	db 0
+	
+Mon212_EvosMoves:
+;SCIZOR
+;Evolutions
+	db 0
+;Learnset
+	db 6,FOCUS_ENERGY
+;	db 12,PURSUIT
+;	db 18,FALSE_SWIPE
+	db 24,AGILITY
+;	db 30,METAL_CLAW
+	db 36,SLASH
+	db 42,SWORDS_DANCE
+	db 48,DOUBLE_TEAM
+	db 0
+	
+Mon213_EvosMoves:
+;SHUCKLE
+;Evolutions
+	db 0
+;Learnset
+	db 9,WRAP
+;	db 14,ENCORE
+;	db 23,SAFEGUARD
+	db 28,BIDE
+	db 37,REST
+	db 0
+	
+Mon214_EvosMoves:
+;HERACROSS
+;Evolutions
+	db 0
+;Learnset
+	db 6,HORN_ATTACK
+;	db 12,ENDURE
+	db 19,FURY_ATTACK
+	db 27,COUNTER
+	db 35,TAKE_DOWN
+;	db 44,REVERSAL
+;	db 54,MEGAHORN
+	db 0
+	
+Mon215_EvosMoves:
+;SNEASEL
+;Evolutions
+	db 0
+;Learnset
+	db 9,QUICK_ATTACK
+	db 17,SCREECH
+;	db 25,FEINT_ATTACK
+	db 33,FURY_SWIPES
+	db 41,AGILITY
+	db 49,SLASH
+;	db 57,BEAT_UP
 	db 0
