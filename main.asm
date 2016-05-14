@@ -7138,6 +7138,11 @@ INCLUDE "data/baseStats/gligar.asm"
 INCLUDE "data/baseStats/steelix.asm"
 INCLUDE "data/baseStats/snubbull.asm"
 INCLUDE "data/baseStats/granbull.asm"
+INCLUDE "data/baseStats/qwilfish.asm"
+INCLUDE "data/baseStats/scizor.asm"
+INCLUDE "data/baseStats/shuckle.asm"
+INCLUDE "data/baseStats/heracross.asm"
+INCLUDE "data/baseStats/sneasel.asm"
 
 INCLUDE "data/baseStats/swampert.asm"
 
@@ -7352,3 +7357,16 @@ SnubbullPicFront::       INCBIN "pic/bmon/snubbull.pic"
 SnubbullPicBack::        INCBIN "pic/monback/snubbullb.pic"
 GranbullPicFront::       INCBIN "pic/bmon/granbull.pic"
 GranbullPicBack::        INCBIN "pic/monback/granbullb.pic"
+QwilfishPicFront::       INCBIN "pic/bmon/qwilfish.pic"
+QwilfishPicBack::        INCBIN "pic/monback/qwilfishb.pic"
+ScizorPicFront::       INCBIN "pic/bmon/scizor.pic"
+ScizorPicBack::        INCBIN "pic/monback/scizorb.pic"
+ShucklePicFront::       INCBIN "pic/bmon/shuckle.pic"
+ShucklePicBack::        INCBIN "pic/monback/shuckleb.pic"
+HeracrossPicFront::       INCBIN "pic/bmon/heracross.pic"
+HeracrossPicBack::        INCBIN "pic/monback/heracrossb.pic"
+
+SECTION "Bank 33", ROMX, BANK[$33]
+
+SneaselPicFront::       INCBIN "pic/bmon/sneasel.pic"
+SneaselPicBack::        INCBIN "pic/monback/sneaselb.pic"

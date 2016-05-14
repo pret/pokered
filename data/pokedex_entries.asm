@@ -212,11 +212,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw SteelixDexEntry
 	dw SnubbullDexEntry
 	dw GranbullDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw QwilfishDexEntry
+	dw ScizorDexEntry
+	dw ShuckleDexEntry
+	dw HeracrossDexEntry
+	dw SneaselDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1707,7 +1707,42 @@ GranbullDexEntry:
 	dw 1074
 	TX_FAR _GranbullDexEntry
 	db "@"
+	
+QwilfishDexEntry:
+	db "BALLOON@"
+	db 1,8
+	dw 86
+	TX_FAR _QwilfishDexEntry
+	db "@"
 
+ScizorDexEntry:
+	db "PINCER@"
+	db 5,11
+	dw 2601
+	TX_FAR _ScizorDexEntry
+	db "@"
+	
+ShuckleDexEntry:
+	db "MOLD@"
+	db 2,0
+	dw 452
+	TX_FAR _ShuckleDexEntry
+	db "@"
+	
+HeracrossDexEntry:
+	db "SINGLEHORN@"
+	db 4,11
+	dw 1190
+	TX_FAR _HeracrossDexEntry
+	db "@"
+	
+SneaselDexEntry:
+	db "SHARP CLAW@"
+	db 2,11
+	dw 617
+	TX_FAR _SneaselDexEntry
+	db "@"
+	
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
 	db "???@"
 	db 10 ; 1.0 m

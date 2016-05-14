@@ -213,3 +213,8 @@ CryData: ; 39446 (e:5446)
 	db $17, $FF, $C0; Steelix
 	db $1F, $20, $40; Snubbull
 	db $15, $00, $80; Granbull
+	db $1A, $00, $80; Qwilfish
+	db $16, $00, $80; Scizor
+	db $1B, $00, $80; Shuckle
+	db $14, $00, $80; Heracross
+	db $18, $6F, $E0; Sneasel
