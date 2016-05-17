@@ -217,12 +217,12 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon213_EvosMoves), Mon213_EvosMoves
 	dbw Bank(Mon214_EvosMoves), Mon214_EvosMoves
 	dbw Bank(Mon215_EvosMoves), Mon215_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon216_EvosMoves), Mon216_EvosMoves
+	dbw Bank(Mon217_EvosMoves), Mon217_EvosMoves
+	dbw Bank(Mon218_EvosMoves), Mon218_EvosMoves
+	dbw Bank(Mon219_EvosMoves), Mon219_EvosMoves
+	dbw Bank(Mon220_EvosMoves), Mon220_EvosMoves
+	dbw Bank(Mon221_EvosMoves), Mon221_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3044,4 +3044,93 @@ Mon215_EvosMoves:
 	db 41,AGILITY
 	db 49,SLASH
 ;	db 57,BEAT_UP
+	db 0
+	
+Mon216_EvosMoves:
+;TEDDIURSA
+;Evolutions
+	db EV_LEVEL,30
+	dw URSARING
+	db 0
+;Learnset
+	db 8,LICK
+	db 15,FURY_SWIPES
+;	db 22,FEINT_ATTACK
+	db 29,REST
+	db 36,SLASH
+;	db 43,SNORE
+	db 50,THRASH
+	db 0
+	
+Mon217_EvosMoves:
+;URSARING
+;Evolutions
+	db 0
+;Learnset
+	db 8,LICK
+	db 15,FURY_SWIPES
+;	db 22,FEINT_ATTACK
+	db 29,REST
+	db 39,SLASH
+;	db 49,SNORE
+	db 59,THRASH
+	db 0
+	
+Mon218_EvosMoves:
+;SLUGMA
+;Evolutions
+	db EV_LEVEL,38
+	dw MAGCARGO
+	db 0
+;Learnset
+	db 8,EMBER
+	db 15,ROCK_THROW
+	db 22,HARDEN
+	db 29,AMNESIA
+	db 36,FLAMETHROWER
+	db 43,ROCK_SLIDE
+	db 50,BODY_SLAM
+	db 0
+	
+Mon219_EvosMoves:
+;MAGCARGO
+;Evolutions
+	db 0
+;Learnset
+	db 8,EMBER
+	db 15,ROCK_THROW
+	db 22,HARDEN
+	db 29,AMNESIA
+	db 36,FLAMETHROWER
+	db 48,ROCK_SLIDE
+	db 60,BODY_SLAM
+	db 0
+	
+Mon220_EvosMoves:
+;SWINUB
+;Evolutions
+	db EV_LEVEL,33
+	dw PILOSWINE
+	db 0
+;Learnset
+;	db 10,POWDER_SNOW
+;	db 19,ENDURE
+	db 28,TAKE_DOWN
+	db 37,MIST
+	db 46,BLIZZARD
+	db 55,AMNESIA
+	db 0
+	
+Mon221_EvosMoves:
+;PILOSWINE
+;Evolutions
+	db 0
+;Learnset
+;	db 10,POWDER_SNOW
+;	db 19,ENDURE
+	db 28,TAKE_DOWN
+	db 33,FURY_ATTACK
+	db 42,MIST
+	db 56,BLIZZARD
+	db 70,AMNESIA
 	db 0
