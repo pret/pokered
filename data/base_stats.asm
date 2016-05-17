@@ -214,12 +214,12 @@ BaseStatsPointers::
 	dbw Bank(ShuckleBaseStats), ShuckleBaseStats
 	dbw Bank(HeracrossBaseStats), HeracrossBaseStats
 	dbw Bank(SneaselBaseStats), SneaselBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(TeddiursaBaseStats), TeddiursaBaseStats
+	dbw Bank(UrsaringBaseStats), UrsaringBaseStats
+	dbw Bank(SlugmaBaseStats), SlugmaBaseStats
+	dbw Bank(MagcargoBaseStats), MagcargoBaseStats
+	dbw Bank(SwinubBaseStats), SwinubBaseStats
+	dbw Bank(PiloswineBaseStats), PiloswineBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

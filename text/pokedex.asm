@@ -2099,3 +2099,63 @@ _SneaselDexEntry::
 	next "eggs that are left"
 	next "behind"
 	dex
+	
+_TeddiursaDexEntry::
+	text "If it finds honey,"
+	next "its crescent mark"
+	next "glows. It always"
+
+	page "licks its paws"
+	next "because they are"
+	next "soaked with honey"
+	dex
+
+_UrsaringDexEntry::
+	text "With its ability"
+	next "to distinguish any"
+	next "aroma, it unfail-"
+
+	page "ingly finds all"
+	next "food buried deep"
+	next "underground"
+	dex
+	
+_SlugmaDexEntry::
+	text "It never sleeps."
+	next "It has to keep"
+	next "moving because if"
+
+	page "it stopped, its"
+	next "magma body would"
+	next "cool and harden"
+	dex
+	
+_MagcargoDexEntry::
+	text "The shell on its"
+	next "back is just skin"
+	next "that has cooled"
+
+	page "and hardened. It"
+	next "breaks easily with"
+	next "a slight touch"
+	dex
+	
+_SwinubDexEntry::
+	text "It uses the tip of"
+	next "its nose to dig"
+	next "for food. Its nose"
+
+	page "is so tough that"
+	next "even frozen ground"
+	next "poses no problem"
+	dex
+
+_PiloswineDexEntry::
+	text "Because the long"
+	next "hair all over its"
+	next "body obscures its"
+
+	page "sight, it just"
+	next "keeps charging"
+	next "repeatedly"
+	dex

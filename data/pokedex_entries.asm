@@ -217,12 +217,12 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw ShuckleDexEntry
 	dw HeracrossDexEntry
 	dw SneaselDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw TeddiursaDexEntry
+	dw UrsaringDexEntry
+	dw SlugmaDexEntry
+	dw MagcargoDexEntry
+	dw SwinubDexEntry
+	dw PiloswineDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1741,6 +1741,48 @@ SneaselDexEntry:
 	db 2,11
 	dw 617
 	TX_FAR _SneaselDexEntry
+	db "@"
+	
+TeddiursaDexEntry:
+	db "LITTLEBEAR@"
+	db 2,0
+	dw 194
+	TX_FAR _TeddiursaDexEntry
+	db "@"
+	
+UrsaringDexEntry:
+	db "HIBERNATOR@"
+	db 5,11
+	dw 2773
+	TX_FAR _UrsaringDexEntry
+	db "@"
+	
+SlugmaDexEntry:
+	db "LAVA@"
+	db 2,4
+	dw 772
+	TX_FAR _SlugmaDexEntry
+	db "@"
+	
+MagcargoDexEntry:
+	db "LAVA@"
+	db 2,7
+	dw 1213
+	TX_FAR _MagcargoDexEntry
+	db "@"
+	
+SwinubDexEntry:
+	db "PIG@"
+	db 1,4
+	dw 143
+	TX_FAR _SwinubDexEntry
+	db "@"
+	
+PiloswineDexEntry:
+	db "SWINE@"
+	db 3,7
+	dw 1230
+	TX_FAR _PiloswineDexEntry
 	db "@"
 	
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

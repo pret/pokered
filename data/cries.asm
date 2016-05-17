@@ -218,3 +218,9 @@ CryData: ; 39446 (e:5446)
 	db $1B, $00, $80; Shuckle
 	db $14, $00, $80; Heracross
 	db $18, $6F, $E0; Sneasel
+	db $00, $20, $40; Teddiursa
+	db $00, $FF, $FF; Ursaring
+	db $12, $E6, $DD; Slugma
+	db $12, $FF, $FF; Magcargo
+	db $02, $00, $80; Swinub
+	db $1F, $00, $80; Piloswine
