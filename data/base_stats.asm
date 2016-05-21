@@ -199,11 +199,11 @@ BaseStatsPointers::
 	dbw Bank(MurkrowBaseStats), MurkrowBaseStats
 	dbw Bank(SlowkingBaseStats), SlowkingBaseStats
 	dbw Bank(MisdreavusBaseStats), MisdreavusBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(UnownBaseStats), UnownBaseStats
+	dbw Bank(WobbuffetBaseStats), WobbuffetBaseStats
+	dbw Bank(GirafarigBaseStats), GirafarigBaseStats
+	dbw Bank(PinecoBaseStats), PinecoBaseStats
+	dbw Bank(ForretressBaseStats), ForretressBaseStats
 	dbw Bank(DunsparceBaseStats), DunsparceBaseStats
 	dbw Bank(GligarBaseStats), GligarBaseStats
 	dbw Bank(SteelixBaseStats), SteelixBaseStats

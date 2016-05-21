@@ -99,10 +99,10 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_WATER, SPRITE_QUADRUPED		;Quagsire/Espeon
 	dn SPRITE_QUADRUPED, SPRITE_BIRD_M		;Umbreon/Murkrow
 	dn SPRITE_MON, SPRITE_MON				;Slowking/Misdreavus
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_SNAKE			;Dragonite/Dunsparce
-	dn SPRITE_MON, SPRITE_SNAKE				;Gligar/Steelix
+	dn SPRITE_MON, SPRITE_MON				;Unown/Wobbuffet
+	dn SPRITE_QUADRUPED, SPRITE_BUG			;Girafarig/Pineco
+	dn SPRITE_SNAKE, SPRITE_SNAKE			;Forretress/Dunsparce
+	dn SPRITE_BUG, SPRITE_SNAKE				;Gligar/Steelix
 	dn SPRITE_FAIRY, SPRITE_FAIRY			;Snubbull/Granbull
 	dn SPRITE_WATER, SPRITE_BUG				;Qwilfish/Scizor
 	dn SPRITE_BUG, SPRITE_BUG				;Shuckle/Heracross

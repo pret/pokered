@@ -202,11 +202,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon198_EvosMoves), Mon198_EvosMoves
 	dbw Bank(Mon199_EvosMoves), Mon199_EvosMoves
 	dbw Bank(Mon200_EvosMoves), Mon200_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon201_EvosMoves), Mon201_EvosMoves
+	dbw Bank(Mon202_EvosMoves), Mon202_EvosMoves
+	dbw Bank(Mon203_EvosMoves), Mon203_EvosMoves
+	dbw Bank(Mon204_EvosMoves), Mon204_EvosMoves
+	dbw Bank(Mon205_EvosMoves), Mon205_EvosMoves
 	dbw Bank(Mon206_EvosMoves), Mon206_EvosMoves
 	dbw Bank(Mon207_EvosMoves), Mon207_EvosMoves
 	dbw Bank(Mon208_EvosMoves), Mon208_EvosMoves
@@ -2906,7 +2906,61 @@ Mon200_EvosMoves:
 ;	db 36,PAIN_SPLIT
 ;	db 46,PSYBEAM
 	db 0
-	
+
+Mon201_EvosMoves:
+;UNOWN
+;Evolutions
+	db 0
+;Learnset
+	db 0
+
+Mon202_EvosMoves:
+;WOBBUFFET
+;Evolutions
+	db 0
+;Learnset
+	db 0
+
+Mon203_EvosMoves:
+;GIRAFARIG
+;Evolutions
+	db 0
+;Learnset
+	db 7,CONFUSION
+	db 13,STOMP
+	db 20,AGILITY
+	db 30,BITE
+	db 41,PSYBEAM
+	db 0
+
+Mon204_EvosMoves:
+;PINECO
+;Evolutions
+	db EV_LEVEL,31
+	dw FORRETRESS
+	db 0
+;Learnset
+	db 8,SELFDESTRUCT
+	db 15,TAKE_DOWN
+	db 29,BIDE
+	db 36,EXPLOSION
+;	db 43,SPIKES
+	db 50,DOUBLE_EDGE
+	db 0
+
+Mon205_EvosMoves:
+;FORRETRESS
+;Evolutions
+	db 0
+;Learnset
+	db 8,SELFDESTRUCT
+	db 15,TAKE_DOWN
+	db 29,BIDE
+	db 39,EXPLOSION
+;	db 43,SPIKES
+	db 59,DOUBLE_EDGE
+	db 0
+
 Mon206_EvosMoves:
 ;DUNSPARCE
 ;Evolutions

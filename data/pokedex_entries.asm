@@ -202,11 +202,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw MurkrowDexEntry
 	dw SlowkingDexEntry
 	dw MisdreavusDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw UnownDexEntry
+	dw WobbuffetDexEntry
+	dw GirafarigDexEntry
+	dw PinecoDexEntry
+	dw ForretressDexEntry
 	dw DunsparceDexEntry
 	dw GligarDexEntry
 	dw SteelixDexEntry
@@ -1672,7 +1672,42 @@ MisdreavusDexEntry:
 	dw 22
 	TX_FAR _MisdreavusDexEntry
 	db "@"
-	
+
+UnownDexEntry:
+	db "SYMBOL@"
+	db 1,8
+	dw 110
+	TX_FAR _UnownDexEntry
+	db "@"
+
+WobbuffetDexEntry:
+	db "PATIENT@"
+	db 4,3
+	dw 628
+	TX_FAR _WobbuffetDexEntry
+	db "@"
+
+GirafarigDexEntry:
+	db "LONG NECK@"
+	db 4,11
+	dw 915
+	TX_FAR _GirafarigDexEntry
+	db "@"
+
+PinecoDexEntry:
+	db "BAGWORM@"
+	db 2,0
+	dw 159
+	TX_FAR _PinecoDexEntry
+	db "@"
+
+ForretressDexEntry:
+	db "BAGWORM@"
+	db 3,11
+	dw 2773
+	TX_FAR _ForretressDexEntry
+	db "@"
+
 DunsparceDexEntry:
 	db "LAND SNAKE@"
 	db 4,11

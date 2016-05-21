@@ -203,11 +203,11 @@ CryData: ; 39446 (e:5446)
 	db $18, $40, $A0; Murkrow
 	db $1F, $00, $80; Slowbro
 	db $1C, $00, $80; Misdreavus
-	db $00, $00, $00; Missingno.
-	db $00, $00, $00; Missingno.
-	db $00, $00, $00; Missingno.
-	db $00, $00, $00; Missingno.
-	db $00, $00, $00; Missingno.
+	db $1C, $30, $01; Unown
+	db $18, $30, $F0; Wobbuffet
+	db $25, $40, $40; Girafarig
+	db $24, $40, $20; Pineco
+	db $24, $20, $50; Forretress
 	db $05, $55, $01; Dunsparce
 	db $23, $20, $F0; Gligar
 	db $17, $FF, $C0; Steelix

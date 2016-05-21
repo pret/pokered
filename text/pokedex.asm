@@ -1999,7 +1999,57 @@ _MisdreavusDexEntry::
 	next "just to see their"
 	next "shocked reactions"
 	dex
-	
+
+_UnownDexEntry::
+	text "Its flat, thin"
+	next "body is always"
+	next "stuck on walls."
+
+	page "Its shape appears"
+	next "to have some"
+	next "meaning"
+	dex
+
+_WobbuffetDexEntry::
+	text "It hates light"
+	next "and shock. If"
+	next "attacked, it"
+
+	page "inflates its"
+	next "body to build up"
+	next "a counterstrike"
+	dex
+
+_GirafarigDexEntry::
+	text "While it sleeps,"
+	next "the head on its"
+	next "tail keeps"
+
+	page "watch. The tail"
+	next "doesn't need to"
+	next "sleep"
+	dex
+
+_PinecoDexEntry::
+	text "It looks like a"
+	next "pinecone. Its"
+	next "shell protects it"
+
+	page "from bird #MON"
+	next "that peck it"
+	next "by mistake"
+	dex
+
+_ForretressDexEntry::
+	text "It is encased in"
+	next "a steel shell."
+	next "Its peering eyes"
+
+	page "are all that can"
+	next "be seen of its"
+	next "innards"
+	dex
+
 _DunsparceDexEntry::
 	text "If spotted, it es-"
 	next "capes by burrowing"
