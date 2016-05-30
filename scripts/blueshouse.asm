@@ -69,7 +69,7 @@ DaisyOfferMapText: ; 19baf (6:5baf)
 
 GotMapText: ; 19bb4 (6:5bb4)
 	TX_FAR _GotMapText
-	sound0x0A
+	TX_SFX_KEY_ITEM
 	db "@"
 
 DaisyBagFullText: ; 19bba (6:5bba)

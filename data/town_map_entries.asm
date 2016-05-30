@@ -94,7 +94,7 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP SAFARI_ZONE_REST_HOUSE_4,  $8,$C,SafariZoneName
 	IMAP UNKNOWN_DUNGEON_1,         $9,$1,CeruleanCaveName
 	IMAP NAME_RATERS_HOUSE,         $E,$5,LavenderTownName
-	IMAP CERULEAN_HOUSE_3,          $A,$2,CeruleanCityName
+	IMAP CERULEAN_HOUSE_2,          $A,$2,CeruleanCityName
 	IMAP ROCK_TUNNEL_2,             $E,$3,RockTunnelName
 	IMAP SILPH_CO_ELEVATOR,         $A,$5,SilphCoName
 	IMAP AGATHAS_ROOM,              $0,$2,PokemonLeagueName
