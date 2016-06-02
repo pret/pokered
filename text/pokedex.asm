@@ -2209,3 +2209,53 @@ _PiloswineDexEntry::
 	next "keeps charging"
 	next "repeatedly"
 	dex
+
+_HoundourDexEntry::
+	text "It's smart enough"
+	next "to hunt in packs."
+	next "It uses a variety"
+
+	page "of cries for"
+	next "communicating"
+	next "with others"
+	dex
+
+_HoundoomDexEntry::
+	text "The flames it"
+	next "breathes when"
+	next "angry contain"
+
+	page "toxins. If they"
+	next "cause a burn, it"
+	next "can hurt forever"
+	dex
+
+_KingdraDexEntry::
+	text "It lives in caves"
+	next "on the seafloor"
+	next "and creates giant"
+
+	page "whirlpools every"
+	next "time it moves"
+	next "or yawns"
+	dex
+
+_PhanpyDexEntry::
+	text "It is strong"
+	next "despite its"
+	next "compact size. It"
+
+	page "can easily pick"
+	next "up and carry a"
+	next "human"
+	dex
+
+_DonphanDexEntry::
+	text "It attacks by"
+	next "curling up, then"
+	next "rolling into its"
+
+	page "foe. It can blow"
+	next "apart a house in"
+	next "one hit"
+	dex

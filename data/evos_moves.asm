@@ -229,11 +229,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon228_EvosMoves), Mon228_EvosMoves
+	dbw Bank(Mon229_EvosMoves), Mon229_EvosMoves
+	dbw Bank(Mon230_EvosMoves), Mon230_EvosMoves
+	dbw Bank(Mon231_EvosMoves), Mon231_EvosMoves
+	dbw Bank(Mon232_EvosMoves), Mon232_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -1497,6 +1497,8 @@ Mon116_EvosMoves: ; 3b5dd (e:75dd)
 Mon117_EvosMoves: ; 3b5ec (e:75ec)
 ;SEADRA
 ;Evolutions
+	db EV_LEVEL,48
+	dw KINGDRA
 	db 0
 ;Learnset
 	db 19,SMOKESCREEN
@@ -3187,4 +3189,70 @@ Mon221_EvosMoves:
 	db 42,MIST
 	db 56,BLIZZARD
 	db 70,AMNESIA
+	db 0
+
+Mon228_EvosMoves:
+;HOUNDOUR
+;Evolutions
+	db EV_LEVEL,24
+	dw HOUNDOOM
+	db 0
+;Learnset
+	db 7,ROAR
+	db 13,SMOG
+	db 20,BITE
+	db 35,FLAMETHROWER
+;	db 43,CRUNCH
+	db 0
+
+Mon229_EvosMoves:
+;HOUNDOOM
+;Evolutions
+	db 0
+;Learnset
+	db 7,ROAR
+	db 13,SMOG
+	db 20,BITE
+	db 41,FLAMETHROWER
+;	db 52,CRUNCH
+	db 0
+
+Mon230_EvosMoves: ; 3b5ec (e:75ec)
+;KINGDRA
+;Evolutions
+	db 0
+;Learnset
+	db 19,SMOKESCREEN
+	db 24,LEER
+	db 30,WATER_GUN
+	db 41,AGILITY
+	db 52,HYDRO_PUMP
+	db 0
+
+Mon231_EvosMoves: ; 3b5ec (e:75ec)
+;PHANPY
+;Evolutions
+	db EV_LEVEL,25
+	dw DONPHAN
+	db 0
+;Learnset
+	db 9,DEFENSE_CURL
+	db 17,SLAM
+	db 25,TAKE_DOWN
+;	db 33,ROLLOUT
+;	db 41,ENDURE
+	db 49,DOUBLE_EDGE
+	db 0
+
+Mon232_EvosMoves: ; 3b5ec (e:75ec)
+;DONPHAN
+;Evolutions
+	db 0
+;Learnset
+	db 9,DEFENSE_CURL
+	db 17,SLAM
+	db 25,FURY_ATTACK
+;	db 33,ROLLOUT
+;	db 41,ENDURE
+	db 49,EARTHQUAKE
 	db 0

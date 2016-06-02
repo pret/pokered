@@ -229,11 +229,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw HoundourDexEntry
+	dw HoundoomDexEntry
+	dw KingdraDexEntry
+	dw PhanpyDexEntry
+	dw DonphanDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1819,7 +1819,42 @@ PiloswineDexEntry:
 	dw 1230
 	TX_FAR _PiloswineDexEntry
 	db "@"
-	
+
+HoundourDexEntry:
+	db "DARK@"
+	db 2,0
+	dw 238
+	TX_FAR _HoundourDexEntry
+	db "@"
+
+HoundoomDexEntry:
+	db "DARK@"
+	db 4,7
+	dw 772
+	TX_FAR _HoundoomDexEntry
+	db "@"
+
+KingdraDexEntry:
+	db "DRAGON@"
+	db 5,11
+	dw 3351
+	TX_FAR _KingdraDexEntry
+	db "@"
+
+PhanpyDexEntry:
+	db "LONG NOSE@"
+	db 1,8
+	dw 739
+	TX_FAR _PhanpyDexEntry
+	db "@"
+
+DonphanDexEntry:
+	db "ARMOR@"
+	db 3,7
+	dw 2646
+	TX_FAR _DonphanDexEntry
+	db "@"
+
 MissingNoDexEntry: ; 40fe5 (10:4fe5)
 	db "???@"
 	db 10 ; 1.0 m
