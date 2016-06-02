@@ -234,4 +234,9 @@ CryData: ; 39446 (e:5446)
 	db $00, $2C, $70; Houndoom
 	db $19, $20, $20; Kingdra
 	db $04, $70, $10; Phanpy
-	db $04, $30, $18; Phanpy
+	db $04, $30, $18; Donphan
+	db $25, $cA, $5F; Porygon2
+	db $25, $40, $40; Stantler
+	db $0A, $3D, $60; Smeargle
+	db $12, $C0, $30; Tyrogue
+	db $12, $40, $50; Hitmontop

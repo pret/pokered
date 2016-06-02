@@ -234,11 +234,11 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw KingdraDexEntry
 	dw PhanpyDexEntry
 	dw DonphanDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw Porygon2DexEntry
+	dw StantlerDexEntry
+	dw SmeargleDexEntry
+	dw TyrogueDexEntry
+	dw HitmontopDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1853,6 +1853,41 @@ DonphanDexEntry:
 	db 3,7
 	dw 2646
 	TX_FAR _DonphanDexEntry
+	db "@"
+
+Porygon2DexEntry:
+	db "VIRTUAL@"
+	db 2,0
+	dw 716
+	TX_FAR _Porygon2DexEntry
+	db "@"
+
+StantlerDexEntry:
+	db "BIG HORN@"
+	db 4,7
+	dw 1570
+	TX_FAR _StantlerDexEntry
+	db "@"
+
+SmeargleDexEntry:
+	db "PAINTER@"
+	db 3,11
+	dw 1279
+	TX_FAR _SmeargleDexEntry
+	db "@"
+
+TyrogueDexEntry:
+	db "SCUFFLE@"
+	db 2,4
+	dw 463
+	TX_FAR _TyrogueDexEntry
+	db "@"
+
+HitmontopDexEntry:
+	db "HANDSTAND@"
+	db 4,7
+	dw 1058
+	TX_FAR _HitmontopDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

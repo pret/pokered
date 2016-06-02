@@ -115,9 +115,9 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_BIRD_M, SPRITE_QUADRUPED		;Skarmory/Houndour
 	dn SPRITE_QUADRUPED, SPRITE_WATER		;Houndoom/Kingdra
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Phanpy/Donphan
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_MON, SPRITE_QUADRUPED			;Porygon2/Stantler
+	dn SPRITE_MON, SPRITE_MON				;Smeargle/Tyrogue
+	dn SPRITE_MON, SPRITE_MON				;Hitmontop/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

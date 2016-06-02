@@ -2259,3 +2259,53 @@ _DonphanDexEntry::
 	next "apart a house in"
 	next "one hit"
 	dex
+
+_Porygon2DexEntry::
+	text "It was upgraded"
+	next "to enable the"
+	next "exploration of"
+
+	page "other planets."
+	next "However, it didn't"
+	next "measure up well"
+	dex
+
+_StantlerDexEntry::
+	text "Staring at its"
+	next "antlers creates"
+	next "an odd sensation"
+
+	page "as if one were"
+	next "being drawn into"
+	next "their centers"
+	dex
+
+_SmeargleDexEntry::
+	text "It marks its"
+	next "territory by"
+	next "using its tail"
+
+	page "as a paintbrush."
+	next "There are over"
+	next "5,000 marks"
+	dex
+
+_TyrogueDexEntry::
+	text "It is famous for"
+	next "its eagerness to"
+	next "fight and always"
+
+	page "nurses injuries"
+	next "from challenging"
+	next "larger foes"
+	dex
+
+_HitmontopDexEntry::
+	text "It fights while"
+	next "spinning like a"
+	next "top. The"
+
+	page "centrifugal force"
+	next "boosts its power"
+	next "by 10"
+	dex

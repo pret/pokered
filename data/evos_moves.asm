@@ -234,11 +234,11 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon230_EvosMoves), Mon230_EvosMoves
 	dbw Bank(Mon231_EvosMoves), Mon231_EvosMoves
 	dbw Bank(Mon232_EvosMoves), Mon232_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon233_EvosMoves), Mon233_EvosMoves
+	dbw Bank(Mon234_EvosMoves), Mon234_EvosMoves
+	dbw Bank(Mon235_EvosMoves), Mon235_EvosMoves
+	dbw Bank(Mon236_EvosMoves), Mon236_EvosMoves
+	dbw Bank(Mon237_EvosMoves), Mon237_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -2477,6 +2477,8 @@ Mon074_EvosMoves: ; 3b8fc (e:78fc)
 Mon137_EvosMoves: ; 3b90d (e:790d)
 ;PORYGON
 ;Evolutions
+	db EV_LEVEL,35
+	dw PORYGON2
 	db 0
 ;Learnset
 	db 23,PSYBEAM
@@ -3217,7 +3219,7 @@ Mon229_EvosMoves:
 ;	db 52,CRUNCH
 	db 0
 
-Mon230_EvosMoves: ; 3b5ec (e:75ec)
+Mon230_EvosMoves:
 ;KINGDRA
 ;Evolutions
 	db 0
@@ -3229,7 +3231,7 @@ Mon230_EvosMoves: ; 3b5ec (e:75ec)
 	db 52,HYDRO_PUMP
 	db 0
 
-Mon231_EvosMoves: ; 3b5ec (e:75ec)
+Mon231_EvosMoves:
 ;PHANPY
 ;Evolutions
 	db EV_LEVEL,25
@@ -3244,7 +3246,7 @@ Mon231_EvosMoves: ; 3b5ec (e:75ec)
 	db 49,DOUBLE_EDGE
 	db 0
 
-Mon232_EvosMoves: ; 3b5ec (e:75ec)
+Mon232_EvosMoves:
 ;DONPHAN
 ;Evolutions
 	db 0
@@ -3255,4 +3257,62 @@ Mon232_EvosMoves: ; 3b5ec (e:75ec)
 ;	db 33,ROLLOUT
 ;	db 41,ENDURE
 	db 49,EARTHQUAKE
+	db 0
+
+Mon233_EvosMoves:
+;PORYGON2
+;Evolutions
+	db 0
+;Learnset
+	db 23,PSYBEAM
+	db 28,RECOVER
+	db 35,AGILITY
+	db 42,TRI_ATTACK
+	db 0
+
+Mon234_EvosMoves:
+;STANTLER
+;Evolutions
+	db 0
+;Learnset
+	db 8,LEER
+	db 15,HYPNOSIS
+	db 23,STOMP
+	db 31,SAND_ATTACK
+	db 40,TAKE_DOWN
+	db 49,CONFUSE_RAY
+	db 0
+
+Mon235_EvosMoves:
+;SMEARGLE
+;Evolutions
+	db 0
+;Learnset
+	db 0
+
+Mon236_EvosMoves:
+;TYROGUE
+;Evolutions
+	db EV_LEVEL,20
+	dw HITMONCHAN
+	db EV_LEVEL,20
+	dw HITMONLEE
+	db EV_LEVEL,20
+	dw HITMONTOP
+	db 0
+;Learnset
+	db 0
+
+Mon237_EvosMoves:
+;HITMONTOP
+;Evolutions
+	db 0
+;Learnset
+	db 7,FOCUS_ENERGY
+;	db 13,PURSUIT
+	db 19,QUICK_ATTACK
+	db 25,DOUBLE_KICK
+	db 31,COUNTER
+	db 37,AGILITY
+	db 49,LOW_KICK
 	db 0
