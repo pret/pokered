@@ -2309,3 +2309,13 @@ _HitmontopDexEntry::
 	next "boosts its power"
 	next "by 10"
 	dex
+
+_SmoochumDexEntry::
+	text "It tests"
+	next "everything by"
+	next "touching with its"
+
+	page "lips, which"
+	next "remember what it"
+	next "likes and hates"
+	dex

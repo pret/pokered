@@ -240,3 +240,4 @@ CryData: ; 39446 (e:5446)
 	db $0A, $3D, $60; Smeargle
 	db $12, $C0, $30; Tyrogue
 	db $12, $40, $50; Hitmontop
+	db $0D, $FF, $50; Smoochum

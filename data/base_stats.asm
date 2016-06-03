@@ -236,7 +236,7 @@ BaseStatsPointers::
 	dbw Bank(SmeargleBaseStats), SmeargleBaseStats
 	dbw Bank(TyrogueBaseStats), TyrogueBaseStats
 	dbw Bank(HitmontopBaseStats), HitmontopBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(SmoochumBaseStats), SmoochumBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

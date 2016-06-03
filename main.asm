@@ -7165,6 +7165,7 @@ INCLUDE "data/baseStats/stantler.asm"
 INCLUDE "data/baseStats/smeargle.asm"
 INCLUDE "data/baseStats/tyrogue.asm"
 INCLUDE "data/baseStats/hitmontop.asm"
+INCLUDE "data/baseStats/smoochum.asm"
 
 INCLUDE "data/baseStats/swampert.asm"
 
@@ -7432,3 +7433,5 @@ SmearglePicFront::       INCBIN "pic/bmon/smeargle.pic"
 SmearglePicBack::        INCBIN "pic/monback/smeargleb.pic"
 HitmontopPicFront::       INCBIN "pic/bmon/hitmontop.pic"
 HitmontopPicBack::        INCBIN "pic/monback/hitmontopb.pic"
+SmoochumPicFront::       INCBIN "pic/bmon/smoochum.pic"
+SmoochumPicBack::        INCBIN "pic/monback/smoochumb.pic"

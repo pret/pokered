@@ -239,7 +239,7 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw SmeargleDexEntry
 	dw TyrogueDexEntry
 	dw HitmontopDexEntry
-	dw DratiniDexEntry
+	dw SmoochumDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1888,6 +1888,13 @@ HitmontopDexEntry:
 	db 4,7
 	dw 1058
 	TX_FAR _HitmontopDexEntry
+	db "@"
+
+SmoochumDexEntry:
+	db "KISS@"
+	db 1,4
+	dw 132
+	TX_FAR _SmoochumDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

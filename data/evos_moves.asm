@@ -239,7 +239,7 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon235_EvosMoves), Mon235_EvosMoves
 	dbw Bank(Mon236_EvosMoves), Mon236_EvosMoves
 	dbw Bank(Mon237_EvosMoves), Mon237_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon238_EvosMoves), Mon238_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3315,4 +3315,19 @@ Mon237_EvosMoves:
 	db 31,COUNTER
 	db 37,AGILITY
 	db 49,LOW_KICK
+	db 0
+
+Mon238_EvosMoves:
+;SMOOCHUM
+;Evolutions
+	db EV_LEVEL,20
+	dw JYNX
+	db 0
+;Learnset
+	db 18,LICK
+	db 23,DOUBLESLAP
+	db 31,ICE_PUNCH
+	db 39,BODY_SLAM
+	db 47,THRASH
+	db 58,BLIZZARD
 	db 0
