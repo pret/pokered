@@ -118,8 +118,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_QUADRUPED			;Porygon2/Stantler
 	dn SPRITE_MON, SPRITE_MON				;Smeargle/Tyrogue
 	dn SPRITE_MON, SPRITE_MON				;Hitmontop/Smoochum
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_MON, SPRITE_MON				;Elekid/Magby
+	dn SPRITE_QUADRUPED, SPRITE_FAIRY		;Miltank/Blissey
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

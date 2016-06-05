@@ -237,10 +237,10 @@ BaseStatsPointers::
 	dbw Bank(TyrogueBaseStats), TyrogueBaseStats
 	dbw Bank(HitmontopBaseStats), HitmontopBaseStats
 	dbw Bank(SmoochumBaseStats), SmoochumBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(ElekidBaseStats), ElekidBaseStats
+	dbw Bank(MagbyBaseStats), MagbyBaseStats
+	dbw Bank(MiltankBaseStats), MiltankBaseStats
+	dbw Bank(BlisseyBaseStats), BlisseyBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

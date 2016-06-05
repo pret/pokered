@@ -240,10 +240,10 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw TyrogueDexEntry
 	dw HitmontopDexEntry
 	dw SmoochumDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw ElekidDexEntry
+	dw MagbyDexEntry
+	dw MiltankDexEntry
+	dw BlisseyDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1895,6 +1895,34 @@ SmoochumDexEntry:
 	db 1,4
 	dw 132
 	TX_FAR _SmoochumDexEntry
+	db "@"
+
+ElekidDexEntry:
+	db "ELECTRIC@"
+	db 2,0
+	dw 518
+	TX_FAR _ElekidDexEntry
+	db "@"
+
+MagbyDexEntry:
+	db "LIVE COAL@"
+	db 2,4
+	dw 472
+	TX_FAR _MagbyDexEntry
+	db "@"
+
+MiltankDexEntry:
+	db "MILK COW@"
+	db 3,11
+	dw 1664
+	TX_FAR _MiltankDexEntry
+	db "@"
+
+BlisseyDexEntry:
+	db "HAPPINESS@"
+	db 4,11
+	dw 1032
+	TX_FAR _BlisseyDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

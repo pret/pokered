@@ -240,10 +240,10 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon236_EvosMoves), Mon236_EvosMoves
 	dbw Bank(Mon237_EvosMoves), Mon237_EvosMoves
 	dbw Bank(Mon238_EvosMoves), Mon238_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon239_EvosMoves), Mon239_EvosMoves
+	dbw Bank(Mon240_EvosMoves), Mon240_EvosMoves
+	dbw Bank(Mon241_EvosMoves), Mon241_EvosMoves
+	dbw Bank(Mon242_EvosMoves), Mon242_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -796,6 +796,8 @@ Mon075_EvosMoves: ; 3b3cf (e:73cf)
 Mon113_EvosMoves: ; 3b3e0 (e:73e0)
 ;CHANSEY
 ;Evolutions
+	db EV_LEVEL,30
+	dw BLISSEY
 	db 0
 ;Learnset
 	db 24,SING
@@ -3330,4 +3332,61 @@ Mon238_EvosMoves:
 	db 39,BODY_SLAM
 	db 47,THRASH
 	db 58,BLIZZARD
+	db 0
+
+Mon239_EvosMoves:
+;ELEKID
+;Evolutions
+	db EV_LEVEL,24
+	dw ELECTABUZZ
+	db 0
+;Learnset
+	db 9,THUNDERPUNCH
+	db 17,LIGHT_SCREEN
+	db 25,SWIFT
+	db 33,SCREECH
+	db 41,THUNDERBOLT
+	db 54,THUNDER
+	db 0
+
+Mon240_EvosMoves:
+;MAGBY
+;Evolutions
+	db EV_LEVEL,24
+	dw MAGMAR
+	db 0
+;Learnset
+	db 7,LEER
+	db 13,SMOG
+	db 19,FIRE_PUNCH
+	db 25,SMOKESCREEN
+	db 37,FLAMETHROWER
+	db 42,COMET_PUNCH
+	db 48,FIRE_BLAST
+	db 0
+
+Mon241_EvosMoves:
+;MILTANK
+;Evolutions
+	db 0
+;Learnset
+	db 4,GROWL
+	db 8,DEFENSE_CURL
+	db 14,STOMP
+	db 25,BIDE
+	db 32,RECOVER
+	db 43,BODY_SLAM
+	db 0
+
+Mon242_EvosMoves:
+;BLISSEY
+;Evolutions
+	db 0
+;Learnset
+	db 24,SING
+	db 30,GROWL
+	db 38,MINIMIZE
+	db 44,DEFENSE_CURL
+	db 48,LIGHT_SCREEN
+	db 54,DOUBLE_EDGE
 	db 0

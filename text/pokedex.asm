@@ -2319,3 +2319,43 @@ _SmoochumDexEntry::
 	next "remember what it"
 	next "likes and hates"
 	dex
+
+_ElekidDexEntry::
+	text "A weak electric"
+	next "current flows"
+	next "between its"
+
+	page "horns. Sticking a"
+	next "hand there shocks"
+	next "the unwary"
+	dex
+
+_MagbyDexEntry::
+	text "Each and every"
+	next "time it inhales"
+	next "and exhales, hot"
+
+	page "embers dribble"
+	next "out of its mouth"
+	next "and nostrils"
+	dex
+
+_MiltankDexEntry::
+	text "It is said that"
+	next "kids who drink"
+	next "MILTANK's milk"
+
+	page "grow up to become"
+	next "hearty, healthy"
+	next "adults"
+	dex
+
+_BlisseyDexEntry::
+	text "The eggs it lays"
+	next "are filled with"
+	next "happiness. Eating"
+
+	page "even one bite"
+	next "will bring a"
+	next "smile to anyone"
+	dex

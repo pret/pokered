@@ -241,3 +241,7 @@ CryData: ; 39446 (e:5446)
 	db $12, $C0, $30; Tyrogue
 	db $12, $40, $50; Hitmontop
 	db $0D, $FF, $50; Smoochum
+	db $06, $CF, $AF; Elekid
+	db $04, $9F, $20; Magby
+	db $1D, $71, $90; Miltank
+	db $14, $5A, $C0; Blissey
