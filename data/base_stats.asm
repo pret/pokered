@@ -241,9 +241,9 @@ BaseStatsPointers::
 	dbw Bank(MagbyBaseStats), MagbyBaseStats
 	dbw Bank(MiltankBaseStats), MiltankBaseStats
 	dbw Bank(BlisseyBaseStats), BlisseyBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(RaikouBaseStats), RaikouBaseStats
+	dbw Bank(EnteiBaseStats), EnteiBaseStats
+	dbw Bank(SuicuneBaseStats), SuicuneBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

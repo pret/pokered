@@ -244,9 +244,9 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon240_EvosMoves), Mon240_EvosMoves
 	dbw Bank(Mon241_EvosMoves), Mon241_EvosMoves
 	dbw Bank(Mon242_EvosMoves), Mon242_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon243_EvosMoves), Mon243_EvosMoves
+	dbw Bank(Mon244_EvosMoves), Mon244_EvosMoves
+	dbw Bank(Mon245_EvosMoves), Mon245_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3389,4 +3389,43 @@ Mon242_EvosMoves:
 	db 44,DEFENSE_CURL
 	db 48,LIGHT_SCREEN
 	db 54,DOUBLE_EDGE
+	db 0
+
+Mon243_EvosMoves:
+;RAIKOU
+;Evolutions
+	db 0
+;Learnset
+	db 11,THUNDERSHOCK
+	db 21,ROAR
+	db 31,QUICK_ATTACK
+	db 41,THUNDER_WAVE
+	db 51,REFLECT
+	db 61,THUNDER
+	db 0
+
+Mon244_EvosMoves:
+;ENTEI
+;Evolutions
+	db 0
+;Learnset
+	db 11,EMBER
+	db 21,ROAR
+	db 31,FIRE_SPIN
+	db 41,STOMP
+	db 51,FLAMETHROWER
+	db 61,FIRE_BLAST
+	db 0
+
+Mon245_EvosMoves:
+;SUICUNE
+;Evolutions
+	db 0
+;Learnset
+	db 11,WATER_GUN
+	db 21,ROAR
+	db 31,GUST
+	db 41,BUBBLEBEAM
+	db 51,AURORA_BEAM
+	db 61,HYDRO_PUMP
 	db 0

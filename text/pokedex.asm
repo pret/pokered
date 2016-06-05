@@ -2359,3 +2359,33 @@ _BlisseyDexEntry::
 	next "will bring a"
 	next "smile to anyone"
 	dex
+
+_RaikouDexEntry::
+	text "It is said to"
+	next "have fallen with"
+	next "lighting. It can"
+
+	page "fire thunderbolts"
+	next "from the clouds"
+	next "on its back"
+	dex
+
+_EnteiDexEntry::
+	text "Volcanoes erupt"
+	next "when it roars."
+	next "Unable to contain"
+
+	page "its powers, it"
+	next "races headlong"
+	next "around the land"
+	dex
+
+_SuicuneDexEntry::
+	text "It travels across"
+	next "the world to"
+	next "purify polluted"
+
+	page "water. It moves"
+	next "together with the"
+	next "north wind"
+	dex

@@ -244,9 +244,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw MagbyDexEntry
 	dw MiltankDexEntry
 	dw BlisseyDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw RaikouDexEntry
+	dw EnteiDexEntry
+	dw SuicuneDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1923,6 +1923,27 @@ BlisseyDexEntry:
 	db 4,11
 	dw 1032
 	TX_FAR _BlisseyDexEntry
+	db "@"
+
+RaikouDexEntry:
+	db "THUNDER@"
+	db 6,3
+	dw 3924
+	TX_FAR _RaikouDexEntry
+	db "@"
+
+EnteiDexEntry:
+	db "VOLCANO@"
+	db 6,11
+	dw 4365
+	TX_FAR _EnteiDexEntry
+	db "@"
+
+SuicuneDexEntry:
+	db "AURORA@"
+	db 6,7
+	dw 4123
+	TX_FAR _SuicuneDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

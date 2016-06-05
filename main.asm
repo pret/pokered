@@ -7170,6 +7170,9 @@ INCLUDE "data/baseStats/elekid.asm"
 INCLUDE "data/baseStats/magby.asm"
 INCLUDE "data/baseStats/miltank.asm"
 INCLUDE "data/baseStats/blissey.asm"
+INCLUDE "data/baseStats/raikou.asm"
+INCLUDE "data/baseStats/entei.asm"
+INCLUDE "data/baseStats/suicune.asm"
 
 INCLUDE "data/baseStats/swampert.asm"
 
@@ -7447,3 +7450,13 @@ MiltankPicFront::       INCBIN "pic/bmon/miltank.pic"
 MiltankPicBack::        INCBIN "pic/monback/miltankb.pic"
 BlisseyPicFront::       INCBIN "pic/bmon/blissey.pic"
 BlisseyPicBack::        INCBIN "pic/monback/blisseyb.pic"
+RaikouPicFront::       INCBIN "pic/bmon/raikou.pic"
+RaikouPicBack::        INCBIN "pic/monback/raikoub.pic"
+
+SECTION "Bank 34", ROMX, BANK[$34]
+
+EnteiPicFront::       INCBIN "pic/bmon/entei.pic"
+EnteiPicBack::        INCBIN "pic/monback/enteib.pic"
+SuicunePicFront::       INCBIN "pic/bmon/suicune.pic"
+SuicunePicBack::        INCBIN "pic/monback/suicuneb.pic"
+

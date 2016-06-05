@@ -245,3 +245,6 @@ CryData: ; 39446 (e:5446)
 	db $04, $9F, $20; Magby
 	db $1D, $71, $90; Miltank
 	db $14, $5A, $C0; Blissey
+	db $00, $0C, $F0; Raikou
+	db $00, $01, $C0; Entei
+	db $00, $C1, $FF; Suicune
