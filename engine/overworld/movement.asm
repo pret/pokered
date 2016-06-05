@@ -95,7 +95,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	jr nz, .next2
 	ld a, $80
 .next2
-	ld [wSpriteStateData2 + $07], a
+	ld [wSpriteStateData2 + 7], a
 	ret
 
 UnusedReadSpriteDataFunction: ; 4ec7 (1:4ec7)
@@ -169,7 +169,7 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	call LoadDEPlusA ; a = [wNPCMovementDirections + movement byte 1]
 	cp $e0
 	jp z, ChangeFacingDirection
-	cp $ff
+	cp STAY
 	jr nz, .next
 ; reached end of wNPCMovementDirections list
 	ld [hl], a ; store $ff in movement byte 1, disabling scripted movement
@@ -180,7 +180,7 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	ld [wWastedByteCD3A], a
 	ret
 .next
-	cp $fe
+	cp WALK
 	jr nz, .determineDirection
 ; current NPC movement data is $fe. this seems buggy
 	ld [hl], $1     ; set movement byte 1 to $1

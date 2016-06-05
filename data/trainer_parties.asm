@@ -57,6 +57,7 @@ TrainerDataPointers:
 	; null-terminated
 
 YoungsterData:
+; Route 3
 	db 11
 	dw RATTATA,EKANS
 	db 0, 0
@@ -110,6 +111,7 @@ YoungsterData:
 	db 0, 0
 
 BugCatcherData:
+; Viridian Forest
 	db 6
 	dw WEEDLE,CATERPIE
 	db 0, 0
@@ -122,6 +124,7 @@ BugCatcherData:
 	dw WEEDLE
 	db 0, 0
 
+; Route 3
 	db 10
 	dw CATERPIE,WEEDLE,CATERPIE
 	db 0, 0
@@ -167,6 +170,7 @@ BugCatcherData:
 	db 0, 0
 
 LassData:
+; Route 3
 	db 9
 	dw PIDGEY,PIDGEY
 	db 0, 0

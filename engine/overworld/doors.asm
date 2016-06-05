@@ -26,32 +26,19 @@ IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	ret
 
 DoorTileIDPointers: ; 1a62c (6:662c)
-	db OVERWORLD
-	dw OverworldDoorTileIDs
-	db FOREST
-	dw ForestDoorTileIDs
-	db MART
-	dw MartDoorTileIDs
-	db HOUSE
-	dw HouseDoorTileIDs
-	db FOREST_GATE
-	dw TilesetMuseumDoorTileIDs
-	db MUSEUM
-	dw TilesetMuseumDoorTileIDs
-	db GATE
-	dw TilesetMuseumDoorTileIDs
-	db SHIP
-	dw ShipDoorTileIDs
-	db LOBBY
-	dw LobbyDoorTileIDs
-	db MANSION
-	dw MansionDoorTileIDs
-	db LAB
-	dw LabDoorTileIDs
-	db FACILITY
-	dw FacilityDoorTileIDs
-	db PLATEAU
-	dw PlateauDoorTileIDs
+	dbw OVERWORLD,   OverworldDoorTileIDs
+	dbw FOREST,      ForestDoorTileIDs
+	dbw MART,        MartDoorTileIDs
+	dbw HOUSE,       HouseDoorTileIDs
+	dbw FOREST_GATE, TilesetMuseumDoorTileIDs
+	dbw MUSEUM,      TilesetMuseumDoorTileIDs
+	dbw GATE,        TilesetMuseumDoorTileIDs
+	dbw SHIP,        ShipDoorTileIDs
+	dbw LOBBY,       LobbyDoorTileIDs
+	dbw MANSION,     MansionDoorTileIDs
+	dbw LAB,         LabDoorTileIDs
+	dbw FACILITY,    FacilityDoorTileIDs
+	dbw PLATEAU,     PlateauDoorTileIDs
 	db $ff
 
 OverworldDoorTileIDs: ; 1a654 (6:6654)

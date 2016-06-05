@@ -1,4 +1,4 @@
-NinetailsBaseStats::
+NinetalesBaseStats::
 	dw DEX_NINETALES ; pokedex id
 	db 73 ; base hp
 	db 76 ; base attack

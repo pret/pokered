@@ -36,7 +36,7 @@ BaseStatsPointers::
 	dbw Bank(ClefairyBaseStats), ClefairyBaseStats
 	dbw Bank(ClefableBaseStats), ClefableBaseStats
 	dbw Bank(VulpixBaseStats), VulpixBaseStats
-	dbw Bank(NinetailsBaseStats), NinetailsBaseStats
+	dbw Bank(NinetalesBaseStats), NinetalesBaseStats
 	dbw Bank(JigglypuffBaseStats), JigglypuffBaseStats
 	dbw Bank(WigglytuffBaseStats), WigglytuffBaseStats
 	dbw Bank(ZubatBaseStats), ZubatBaseStats
