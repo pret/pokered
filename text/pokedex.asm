@@ -2389,3 +2389,33 @@ _SuicuneDexEntry::
 	next "together with the"
 	next "north wind"
 	dex
+
+_LarvitarDexEntry::
+	text "A #MON that"
+	next "eats soil. Once"
+	next "it has eaten a"
+
+	page "large mountain,"
+	next "it falls asleep"
+	next "so it can grow"
+	dex
+
+_PupitarDexEntry::
+	text "Its body is as"
+	next "hard as bedrock."
+	next "By venting"
+
+	page "pressurized gas,"
+	next "it can launch"
+	next "into the air"
+	dex
+
+_TyranitarDexEntry::
+	text "If it rampages,"
+	next "it knocks down"
+	next "mountains and"
+
+	page "buries rivers."
+	next "Maps must be"
+	next "redrawn after"
+	dex

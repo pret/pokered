@@ -247,9 +247,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw RaikouDexEntry
 	dw EnteiDexEntry
 	dw SuicuneDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw LarvitarDexEntry
+	dw PupitarDexEntry
+	dw TyranitarDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1944,6 +1944,27 @@ SuicuneDexEntry:
 	db 6,7
 	dw 4123
 	TX_FAR _SuicuneDexEntry
+	db "@"
+
+LarvitarDexEntry:
+	db "ROCK SKIN@"
+	db 2,0
+	dw 1587
+	TX_FAR _LarvitarDexEntry
+	db "@"
+
+PupitarDexEntry:
+	db "HARD SHELL@"
+	db 3,11
+	dw 3351
+	TX_FAR _PupitarDexEntry
+	db "@"
+
+TyranitarDexEntry:
+	db "ARMOR@"
+	db 6,7
+	dw 4453
+	TX_FAR _TyranitarDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

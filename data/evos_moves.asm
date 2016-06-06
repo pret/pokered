@@ -247,9 +247,9 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon243_EvosMoves), Mon243_EvosMoves
 	dbw Bank(Mon244_EvosMoves), Mon244_EvosMoves
 	dbw Bank(Mon245_EvosMoves), Mon245_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon246_EvosMoves), Mon246_EvosMoves
+	dbw Bank(Mon247_EvosMoves), Mon247_EvosMoves
+	dbw Bank(Mon248_EvosMoves), Mon248_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3428,4 +3428,47 @@ Mon245_EvosMoves:
 	db 41,BUBBLEBEAM
 	db 51,AURORA_BEAM
 	db 61,HYDRO_PUMP
+	db 0
+
+Mon246_EvosMoves:
+;LARVITAR
+;Evolutions
+	db EV_LEVEL,30
+	dw PUPITAR
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 50,EARTHQUAKE
+	db 57,HYPER_BEAM
+	db 0
+
+Mon247_EvosMoves:
+;PUPITAR
+;Evolutions
+	db EV_LEVEL,55
+	dw TYRANITAR
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 56,EARTHQUAKE
+	db 65,HYPER_BEAM
+	db 0
+
+Mon248_EvosMoves:
+;TYRANITAR
+;Evolutions
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 61,EARTHQUAKE
+	db 70,HYPER_BEAM
 	db 0

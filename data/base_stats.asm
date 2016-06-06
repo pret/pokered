@@ -244,9 +244,9 @@ BaseStatsPointers::
 	dbw Bank(RaikouBaseStats), RaikouBaseStats
 	dbw Bank(EnteiBaseStats), EnteiBaseStats
 	dbw Bank(SuicuneBaseStats), SuicuneBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(LarvitarBaseStats), LarvitarBaseStats
+	dbw Bank(PupitarBaseStats), PupitarBaseStats
+	dbw Bank(TyranitarBaseStats), TyranitarBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

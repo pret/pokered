@@ -121,8 +121,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_MON				;Elekid/Magby
 	dn SPRITE_QUADRUPED, SPRITE_FAIRY		;Miltank/Blissey
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Raikou/Entei
-	dn SPRITE_QUADRUPED, SPRITE_MON			;Suicune/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_QUADRUPED, SPRITE_MON			;Suicune/Larvitar
+	dn SPRITE_MON, SPRITE_MON				;Pupitar/Tyranitar
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

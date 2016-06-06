@@ -248,3 +248,6 @@ CryData: ; 39446 (e:5446)
 	db $00, $0C, $F0; Raikou
 	db $00, $01, $C0; Entei
 	db $00, $C1, $FF; Suicune
+	db $11, $50, $20; Larvitar
+	db $11, $30, $40; Pupitar
+	db $11, $10, $C0; Tyranitar
