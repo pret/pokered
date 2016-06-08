@@ -141,4 +141,3 @@ _FanClubText8::
 	text "If someone brags,"
 	line "brag right back!"
 	done
-

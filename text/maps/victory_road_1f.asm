@@ -29,4 +29,3 @@ _VictoryRoad1AfterBattleText2::
 	text "I concede, you're"
 	line "better than me!"
 	done
-

@@ -81,4 +81,3 @@ _FuchsiaHouse2Text_7517b::
 	text "Old #MON"
 	line "merchandise."
 	done
-

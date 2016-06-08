@@ -141,4 +141,3 @@ _VermilionGymText_5cbf9::
 	text "Whew! That match"
 	line "was electric!"
 	done
-

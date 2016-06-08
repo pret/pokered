@@ -4,4 +4,3 @@ _VoltorbBattleText::
 
 _ZapdosBattleText::
 	text "Gyaoo!@@"
-

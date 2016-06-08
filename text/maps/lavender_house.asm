@@ -22,4 +22,3 @@ _LavenderHouse2Text_1d9e1::
 	line "soothed its"
 	cont "restless soul!"
 	done
-

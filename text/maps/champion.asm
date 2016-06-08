@@ -144,4 +144,3 @@ _GaryText_7612a::
 	para $52, "!"
 	line "Come with me!"
 	done
-

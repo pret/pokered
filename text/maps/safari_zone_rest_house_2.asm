@@ -17,4 +17,3 @@ _SafariZoneRestHouse2Text3::
 	line "I didn't see any"
 	cont "#MON I wanted."
 	done
-

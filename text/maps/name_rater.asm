@@ -58,4 +58,3 @@ _NameRaterText_1dad1::
 	TX_RAM wcd6d
 	text "!"
 	done
-

@@ -7,4 +7,3 @@ _DiglettsCaveRoute2Text1::
 	line "FLASH could light"
 	cont "it up..."
 	done
-

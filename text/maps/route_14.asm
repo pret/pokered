@@ -171,4 +171,3 @@ _Route14Text11::
 	line "West to FUCHSIA"
 	cont "CITY"
 	done
-

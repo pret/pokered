@@ -154,4 +154,3 @@ _Route25Text11::
 	text "SEA COTTAGE"
 	line "BILL lives here!"
 	done
-

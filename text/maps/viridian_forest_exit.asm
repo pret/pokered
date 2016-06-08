@@ -17,4 +17,3 @@ _ViridianForestExitText2::
 	line "down by a special"
 	cont "#MON move."
 	done
-

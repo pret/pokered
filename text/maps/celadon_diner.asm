@@ -57,4 +57,3 @@ _CeladonDinerText_491b7::
 	line "I was going to"
 	cont "win it back..."
 	done
-

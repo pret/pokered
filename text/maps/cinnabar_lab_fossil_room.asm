@@ -76,4 +76,3 @@ _Lab4Text_610bd::
 	text "Aiyah! You come"
 	line "again!"
 	done
-

@@ -25,4 +25,3 @@ _FuchsiaHouse1Text3::
 
 	para "Did he show you?"
 	done
-

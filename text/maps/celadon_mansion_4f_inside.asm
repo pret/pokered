@@ -8,4 +8,3 @@ _CeladonMansion5Text1::
 	line "your friends and"
 	cont "trade #MON!"
 	done
-

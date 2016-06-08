@@ -71,4 +71,3 @@ _RocketHideout1AfterBattleTxt6::
 	text "Uh-oh, that fight"
 	line "opened the door!"
 	done
-

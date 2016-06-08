@@ -35,4 +35,3 @@ _Mansion3Text5::
 	para "We named the"
 	line "newborn MEWTWO."
 	done
-

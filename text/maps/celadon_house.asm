@@ -20,4 +20,3 @@ _CeladonHouseText3::
 	para "There's no secret"
 	line "switch behind it!"
 	done
-

@@ -61,4 +61,3 @@ _SSAnneRivalCaptainText::
 	para "You should go see"
 	line "him! Smell ya!"
 	done
-

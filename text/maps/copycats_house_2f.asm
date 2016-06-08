@@ -94,4 +94,3 @@ _CopycatsHouse2FText_5cd17::
 _CopycatsHouse2FText_5cd1c::
 	text "Huh? Can't see!"
 	done
-

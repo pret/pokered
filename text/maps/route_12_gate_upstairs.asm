@@ -40,4 +40,3 @@ _Route12GateUpstairsText_495c4::
 
 	para "It's #MON TOWER!"
 	done
-

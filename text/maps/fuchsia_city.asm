@@ -117,4 +117,3 @@ _FuchsiaCityKabutoText::
 _FuchsiaCityText_19b2a::
 	text "..."
 	done
-

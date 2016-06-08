@@ -10,4 +10,3 @@ _CeladonPrizeRoomText2::
 	text "I had a major"
 	line "haul today!"
 	done
-

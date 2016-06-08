@@ -20,4 +20,3 @@ _Route16GateText2::
 	text "How'd you get in?"
 	line "Good effort!"
 	done
-

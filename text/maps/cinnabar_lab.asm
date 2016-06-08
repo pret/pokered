@@ -27,4 +27,3 @@ _Lab1Text5::
 	text "#MON LAB"
 	line "Testing Room"
 	done
-

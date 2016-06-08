@@ -54,4 +54,3 @@ _SilphCo8AfterBattleText3::
 	text "I'll leave you up"
 	line "to my brothers!"
 	done
-

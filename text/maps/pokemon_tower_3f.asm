@@ -43,4 +43,3 @@ _PokemonTower3AfterBattleText3::
 	text "My friends were"
 	line "possessed too!"
 	done
-

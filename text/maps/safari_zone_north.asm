@@ -31,4 +31,3 @@ _SafariZoneNorthText7::
 	line "finding the"
 	cont "SECRET HOUSE!"
 	done
-

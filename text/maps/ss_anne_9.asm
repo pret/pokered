@@ -111,4 +111,3 @@ _SSAnne9AfterBattleText4::
 	text "Oh, I adore your"
 	line "strong #MON!"
 	done
-
