@@ -123,8 +123,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Raikou/Entei
 	dn SPRITE_QUADRUPED, SPRITE_MON			;Suicune/Larvitar
 	dn SPRITE_MON, SPRITE_MON				;Pupitar/Tyranitar
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Lugia/Ho-Oh
+	dn SPRITE_GRASS, SPRITE_MON				;Celebi/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

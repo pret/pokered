@@ -251,7 +251,7 @@ MonsterNames: ; 1c21e (7:421e)
 	db "PUPITAR@@@"
 	db "TYRANITAR@"
 	db "LUGIA@@@@@"
-	db "HO_OH@@@@@"
+	db "HO-OH@@@@@"
 	db "CELEBI@@@@"
 	db "TREECKO@@@"
 	db "GROVYLE@@@"

@@ -251,3 +251,6 @@ CryData: ; 39446 (e:5446)
 	db $11, $50, $20; Larvitar
 	db $11, $30, $40; Pupitar
 	db $11, $10, $C0; Tyranitar
+	db $09, $28, $60; Lugia
+	db $09, $18, $60; Ho-Oh
+	db $23, $A2, $6F; Celebi

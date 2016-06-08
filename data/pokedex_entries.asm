@@ -250,9 +250,9 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw LarvitarDexEntry
 	dw PupitarDexEntry
 	dw TyranitarDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw LugiaDexEntry
+	dw Ho_OhDexEntry
+	dw CelebiDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -1965,6 +1965,27 @@ TyranitarDexEntry:
 	db 6,7
 	dw 4453
 	TX_FAR _TyranitarDexEntry
+	db "@"
+
+LugiaDexEntry:
+	db "DIVING@"
+	db 17,1
+	dw 4762
+	TX_FAR _LugiaDexEntry
+	db "@"
+
+Ho_OhDexEntry:
+	db "RAINBOW@"
+	db 12,6
+	dw 4387
+	TX_FAR _Ho_OhDexEntry
+	db "@"
+
+CelebiDexEntry:
+	db "TIME@"
+	db 2,0
+	dw 110
+	TX_FAR _CelebiDexEntry
 	db "@"
 
 MissingNoDexEntry: ; 40fe5 (10:4fe5)

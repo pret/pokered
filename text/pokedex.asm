@@ -2419,3 +2419,33 @@ _TyranitarDexEntry::
 	next "Maps must be"
 	next "redrawn after"
 	dex
+
+_LugiaDexEntry::
+	text "It sleeps in a"
+	next "deep-sea trench."
+	next "If it flaps its"
+
+	page "wings, it is said"
+	next "to cause a 40-day"
+	next "storm"
+	dex
+
+_Ho_OhDexEntry::
+	text "A legend says"
+	next "that its body"
+	next "glows in seven"
+
+	page "colors. A rainbow"
+	next "is said to form"
+	next "when it flies"
+	dex
+
+_CelebiDexEntry::
+	text "It has the power"
+	next "to travel across"
+	next "time, but it is"
+
+	page "said to appear"
+	next "only in peaceful"
+	next "times"
+	dex

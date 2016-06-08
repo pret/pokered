@@ -247,9 +247,9 @@ BaseStatsPointers::
 	dbw Bank(LarvitarBaseStats), LarvitarBaseStats
 	dbw Bank(PupitarBaseStats), PupitarBaseStats
 	dbw Bank(TyranitarBaseStats), TyranitarBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(LugiaBaseStats), LugiaBaseStats
+	dbw Bank(Ho_OhBaseStats), Ho_OhBaseStats
+	dbw Bank(CelebiBaseStats), CelebiBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
