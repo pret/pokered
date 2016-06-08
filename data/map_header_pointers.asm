@@ -248,6 +248,3 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw Lorelei_h
 	dw Bruno_h
 	dw Agatha_h ;247
-IF DEF(_OPTION_BEACH_HOUSE)
-	dw BeachHouse_h
-ENDC

@@ -23,6 +23,3 @@ Tilesets: ; c7be (3:47be)
 	tileset Club_Block,        Club_GFX,        Club_Coll,        $07,$17,$FF, $FF, INDOOR
 	tileset Facility_Block,    Facility_GFX,    Facility_Coll,    $12,$FF,$FF, $FF, CAVE
 	tileset Plateau_Block,     Plateau_GFX,     Plateau_Coll,     $FF,$FF,$FF, $45, CAVE
-IF DEF(_OPTION_BEACH_HOUSE)
-	tileset BeachHouse_Block,  BeachHouse_GFX,  BeachHouse_Coll,  $FF,$FF,$FF, $FF, INDOOR
-ENDC

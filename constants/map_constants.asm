@@ -248,6 +248,3 @@ const_value = 0
 	const LORELEIS_ROOM              ; $F5
 	const BRUNOS_ROOM                ; $F6
 	const AGATHAS_ROOM               ; $F7
-IF DEF(_OPTION_BEACH_HOUSE)
-	const BEACH_HOUSE                ; $F8
-ENDC

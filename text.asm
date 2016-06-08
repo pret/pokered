@@ -1969,9 +1969,6 @@ INCLUDE "text/maps/route_16_gate_upstairs.asm"
 INCLUDE "text/maps/route_16_house.asm"
 INCLUDE "text/maps/route_18_gate.asm"
 INCLUDE "text/maps/route_18_gate_upstairs.asm"
-IF DEF(_OPTION_BEACH_HOUSE)
-INCLUDE "text/maps/beach_house.asm"
-ENDC
 INCLUDE "text/maps/pokemon_league_gate.asm"
 INCLUDE "text/maps/victory_road_2f.asm"
 INCLUDE "text/maps/bills_house.asm"
