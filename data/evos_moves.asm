@@ -2904,7 +2904,7 @@ Mon200_EvosMoves:
 ;	db 19,MEAN_LOOK
 	db 27,PSYBEAM
 ;	db 36,PAIN_SPLIT
-;	db 46,PSYBEAM
+;	db 46,PERISH_SONG
 	db 0
 
 Mon201_EvosMoves:
