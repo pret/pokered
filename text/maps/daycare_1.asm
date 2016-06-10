@@ -60,4 +60,3 @@ _DayCareMonNeedsMoreTimeText::
 	cont "needs some more"
 	cont "time with me."
 	prompt
-

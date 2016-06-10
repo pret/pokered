@@ -5120,12 +5120,6 @@ INCLUDE "data/mapHeaders/billshouse.asm"
 INCLUDE "scripts/billshouse.asm"
 INCLUDE "data/mapObjects/billshouse.asm"
 BillsHouseBlocks: INCBIN "maps/billshouse.blk"
-IF DEF(_OPTION_BEACH_HOUSE)
-INCLUDE "data/mapHeaders/beach_house.asm"
-INCLUDE "scripts/beach_house.asm"
-BeachHouseBlockdata: INCBIN "maps/beach_house.blk"
-INCLUDE "data/mapObjects/beach_house.asm"
-ENDC
 
 INCLUDE "engine/menu/oaks_pc.asm"
 
@@ -6042,11 +6036,7 @@ Route17Blocks: INCBIN "maps/route17.blk"
 
 INCLUDE "data/mapHeaders/route19.asm"
 INCLUDE "data/mapObjects/route19.asm"
-IF DEF(_OPTION_BEACH_HOUSE)
-Route19Blocks: INCBIN "maps/route19-yellow.blk"
-ELSE
 Route19Blocks: INCBIN "maps/route19.blk"
-ENDC
 
 INCLUDE "data/mapHeaders/route21.asm"
 INCLUDE "data/mapObjects/route21.asm"
@@ -6714,13 +6704,3 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
-
-IF DEF(_OPTION_BEACH_HOUSE)
-SECTION "bank3C",ROMX[$4314],BANK[$3C]
-
-BeachHouse_GFX:
-	INCBIN "gfx/tilesets/beachhouse.2bpp"
-
-BeachHouse_Block:
-	INCBIN "gfx/blocksets/beachhouse.bst"
-ENDC

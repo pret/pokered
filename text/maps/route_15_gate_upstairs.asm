@@ -22,4 +22,3 @@ _Route15GateUpstairsText_49698::
 	para "It looks like a"
 	line "small island!"
 	done
-

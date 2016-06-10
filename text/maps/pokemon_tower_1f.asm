@@ -29,4 +29,3 @@ _PokemonTower1Text5::
 	line "There are spirits"
 	cont "up to mischief!"
 	done
-

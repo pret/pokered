@@ -41,4 +41,3 @@ _FuchsiaHouse3Text_5621c::
 	para "You have no room"
 	line "for my gift!"
 	done
-

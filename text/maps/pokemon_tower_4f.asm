@@ -43,4 +43,3 @@ _PokemonTower4AfterBattleText3::
 	line "souls of #MON"
 	cont "rest in peace..."
 	done
-

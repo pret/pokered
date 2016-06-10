@@ -60,4 +60,3 @@ _SSAnne7Text3::
 	cont "The CAPTAIN's"
 	cont "reading this!"
 	done
-

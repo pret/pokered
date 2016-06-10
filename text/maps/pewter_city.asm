@@ -115,4 +115,3 @@ _PewterCityText12::
 	line "A Stone Gray"
 	cont "City"
 	done
-

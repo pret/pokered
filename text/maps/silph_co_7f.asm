@@ -207,4 +207,3 @@ _SilphCo7Text_51ed2::
 	cont "Don't sweat it!"
 	cont "Smell ya!"
 	done
-

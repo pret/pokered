@@ -13,5 +13,3 @@ _Route18GateUpstairsText_4999f::
 	para "There are people"
 	line "swimming!"
 	done
-
-

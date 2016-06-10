@@ -23,4 +23,3 @@ _TM29NoRoomText::
 	text "Where do you plan"
 	line "to put this?"
 	done
-

@@ -131,5 +131,3 @@ _Route11BattleText9::
 	text "Watch out for"
 	line "live wires!"
 	done
-
-

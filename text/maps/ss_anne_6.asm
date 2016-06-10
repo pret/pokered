@@ -67,4 +67,3 @@ _SSAnne6Text_61816::
 	para "But, have I enough"
 	line "fillets du beef?"
 	done
-

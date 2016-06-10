@@ -61,4 +61,3 @@ _Lab3Text3::
 _Lab3Text5::
 	text "An amber pipe!"
 	done
-

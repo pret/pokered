@@ -247,9 +247,6 @@ WildDataPointers: ; ceeb (3:4eeb)
 	dw NoMons
 	dw NoMons
 	dw NoMons
-	IF DEF(_OPTION_BEACH_HOUSE)
-		dw NoMons
-	ENDC
 	dw $FFFF
 
 ; wild pokemon data is divided into two parts.

@@ -253,7 +253,3 @@ ENDM
 	mapconst LORELEIS_ROOM,               6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                 6,  5 ; $F6
 	mapconst AGATHAS_ROOM,                6,  5 ; $F7
-
-IF DEF(_OPTION_BEACH_HOUSE)
-	mapconst BEACH_HOUSE,                 4,  7 ; $F8
-ENDC

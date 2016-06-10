@@ -55,4 +55,3 @@ _PokemonTower2Text2::
 	line "might be able to"
 	cont "unmask them."
 	done
-

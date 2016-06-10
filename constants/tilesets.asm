@@ -24,6 +24,3 @@ const_value = 0
 	const CLUB         ; 21
 	const FACILITY     ; 22
 	const PLATEAU      ; 23
-IF DEF(_OPTION_BEACH_HOUSE)
-	const BEACH_HOUSE_TILESET ; 24
-ENDC

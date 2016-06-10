@@ -107,4 +107,3 @@ _Route10Text7::
 _Route10Text10::
 	text "POWER PLANT"
 	done
-

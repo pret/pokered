@@ -14,4 +14,3 @@ _SafariZoneEastText7::
 	text "CENTER AREA"
 	line "NORTH: AREA 2"
 	done
-

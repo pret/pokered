@@ -124,4 +124,3 @@ _VermilionCityText12::
 _VermilionCityText13::
 	text "VERMILION HARBOR"
 	done
-

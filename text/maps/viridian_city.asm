@@ -178,4 +178,3 @@ _ViridianCityText14::
 	text "The GYM's doors"
 	line "are locked..."
 	done
-

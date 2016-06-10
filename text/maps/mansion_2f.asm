@@ -45,4 +45,3 @@ _Mansion2Text_520c7::
 _Mansion2Text_520cc::
 	text "Not quite yet!"
 	done
-

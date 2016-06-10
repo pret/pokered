@@ -22,4 +22,3 @@ _PewterHouse1Text3::
 	para "If only we had"
 	line "some BADGEs..."
 	done
-

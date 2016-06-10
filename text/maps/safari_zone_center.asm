@@ -9,4 +9,3 @@ _SafariZoneCenterText3::
 	line "Button to check"
 	cont "remaining time!"
 	done
-

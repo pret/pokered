@@ -24,4 +24,3 @@ _FuchsiaMeetingRoomText3::
 	para "I think he's got"
 	line "a speech problem!"
 	done
-

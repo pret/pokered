@@ -33,4 +33,3 @@ _RocketHide3AfterBattleText3::
 	cont "LIFT KEY to run"
 	cont "the elevator!"
 	done
-

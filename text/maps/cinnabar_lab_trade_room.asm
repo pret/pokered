@@ -7,4 +7,3 @@ _Lab2Text1::
 	line "rare, prehistoric"
 	cont "#MON!"
 	done
-

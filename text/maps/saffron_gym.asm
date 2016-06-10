@@ -234,4 +234,3 @@ _SaffronGymAfterBattleText7::
 	line "used telepathy to"
 	cont "read your mind!"
 	done
-

@@ -137,4 +137,3 @@ _Route12Text11::
 _Route12Text12::
 	text "SPORT FISHING AREA"
 	done
-

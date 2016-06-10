@@ -12,4 +12,3 @@ _Route11GateText1::
 	para "He'll help you"
 	line "rename them too!"
 	done
-

@@ -4,4 +4,3 @@ _Route2HouseText1::
 	cont "it can still use "
 	cont "moves like CUT!"
 	done
-

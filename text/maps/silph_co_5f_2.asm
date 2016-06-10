@@ -53,4 +53,3 @@ _SilphCo5Text11::
 	line "only when traded"
 	cont "by link-cable."
 	done
-

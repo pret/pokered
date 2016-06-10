@@ -24,4 +24,3 @@ _Route16GateUpstairsText_49847::
 	para "There's a long"
 	line "path over water!"
 	done
-

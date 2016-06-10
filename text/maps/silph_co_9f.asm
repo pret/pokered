@@ -60,4 +60,3 @@ _SilphCo9AfterBattleText3::
 	text "My brothers will"
 	line "avenge me!"
 	done
-
