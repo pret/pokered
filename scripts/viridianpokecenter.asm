@@ -9,7 +9,7 @@ ViridianPokecenterTextPointers:
 	dw ViridianTradeNurseText
 
 ViridianHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 ViridianPokeCenterText2:
 	TX_FAR _ViridianPokeCenterText2
@@ -20,4 +20,4 @@ ViridianPokeCenterText3:
 	db "@"
 
 ViridianTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

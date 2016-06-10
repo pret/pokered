@@ -11,7 +11,7 @@ OpenRedsPC: ; 5db86 (17:5b86)
 	tx_pre_jump RedBedroomPCText
 
 RedBedroomPCText: ; 5db8e (17:5b8e)
-	db $fc ; FuncTX_ItemStoragePC
+	TX_PLAYERS_PC
 
 Route15GateLeftBinoculars: ; 5db8f (17:5b8f)
 	ld a, [wSpriteStateData1 + 9]

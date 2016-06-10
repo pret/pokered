@@ -9,7 +9,7 @@ CinnabarPokecenterTextPointers:
 	dw CinnabarTradeNurseText
 
 CinnabarHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 CinnabarPokecenterText2:
 	TX_FAR _CinnabarPokecenterText2
@@ -20,4 +20,4 @@ CinnabarPokecenterText3:
 	db "@"
 
 CinnabarTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

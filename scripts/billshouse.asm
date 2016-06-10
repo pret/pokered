@@ -122,7 +122,7 @@ BillsHouseTextPointers: ; 1e834 (7:6834)
 	dw BillsHouseText4
 
 BillsHouseText4: ; 1e83c (7:683c)
-	db $fd
+	TX_BILLS_PC
 
 BillsHouseText1: ; 1e83d (7:683d)
 	TX_ASM
@@ -191,7 +191,9 @@ BillThankYouText: ; 1e8ba (7:68ba)
 
 SSTicketReceivedText: ; 1e8bf (7:68bf)
 	TX_FAR _SSTicketReceivedText
-	db $11, $6, "@"
+	TX_SFX_KEY_ITEM
+	TX_BUTTON_SOUND
+	db "@"
 
 SSTicketNoRoomText: ; 1e8c6 (7:68c6)
 	TX_FAR _SSTicketNoRoomText

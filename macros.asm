@@ -205,13 +205,11 @@ TX_RAM: MACRO
 	ENDM
 
 TX_BCD: MACRO
+; \1: RAM address to read from
+; \2: number of bytes + print flags
 	db $2
 	dw \1
 	db \2
-	ENDM
-
-TX_ASM: MACRO
-	db $08
 	ENDM
 
 TX_MART: MACRO
@@ -222,6 +220,22 @@ TX_MART: MACRO
 	endr
 	db $FF
 	ENDM
+
+TX_LINE EQUS "db $05"
+TX_BUTTON_SOUND EQUS "db $06"
+TX_ASM EQUS "db $08"
+TX_SFX_ITEM EQUS "db $0b"
+TX_WAIT_BUTTON EQUS "db $0d"
+TX_SFX_CONGRATS EQUS "db $10"
+TX_SFX_KEY_ITEM EQUS "db $11"
+
+TX_VENDING_MACHINE         EQUS "db $f5"
+TX_CABLE_CLUB_RECEPTIONIST EQUS "db $f6"
+TX_PRIZE_VENDOR            EQUS "db $f7"
+TX_POKECENTER_PC           EQUS "db $f9"
+TX_PLAYERS_PC              EQUS "db $fc"
+TX_BILLS_PC                EQUS "db $fd"
+TX_POKECENTER_NURSE        EQUS "db $ff"
 
 ; Predef macro.
 add_predef: MACRO
@@ -263,14 +277,6 @@ tx_pre_jump: MACRO
 	jp PrintPredefTextID
 ENDM
 
-TX_SFX_KEY_ITEM: macro
-	db $11
-endm
-
-TX_CONGRATSSFX: macro
-	db $10
-endm
-
 WALK EQU $FE
 STAY EQU $FF
 
@@ -309,6 +315,10 @@ object: MACRO
 	ENDC
 ENDM
 
+StopAllMusic: macro
+	ld a, $ff
+	call PlaySound
+	endm
 
 ;1_channel	EQU $00
 ;2_channels	EQU $40

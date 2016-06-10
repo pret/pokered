@@ -9,10 +9,10 @@ CeladonPokecenterTextPointers:
 	dw CeladonTradeNurseText
 
 CeladonTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST
 
 CeladonHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 CeladonPokecenterText2:
 	TX_FAR _CeladonPokecenterText2

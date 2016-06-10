@@ -9,10 +9,10 @@ CeruleanPokecenterTextPointers:
 	dw CeruleanTradeNurseText
 
 CeruleanTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST
 
 CeruleanHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 CeruleanPokecenterText2:
 	TX_FAR _CeruleanPokecenterText2

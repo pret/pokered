@@ -9,7 +9,7 @@ VermilionPokecenterTextPointers:
 	dw VermilionTradeNurseText
 
 VermilionHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 VermilionPokecenterText2:
 	TX_FAR _VermilionPokecenterText2
@@ -20,4 +20,4 @@ VermilionPokecenterText3:
 	db "@"
 
 VermilionTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

@@ -9,7 +9,7 @@ SaffronPokecenterTextPointers:
 	dw SaffronTradeNurseText
 
 SaffronHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 SaffronPokecenterText2:
 	TX_FAR _SaffronPokecenterText2
@@ -20,4 +20,4 @@ SaffronPokecenterText3:
 	db "@"
 
 SaffronTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

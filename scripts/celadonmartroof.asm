@@ -139,48 +139,48 @@ CeladonMartRoofText_484ee:
 
 CeladonMartRoofText_484f3:
 	TX_FAR _CeladonMartRoofText_484f3
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_484f9:
 	TX_FAR _CeladonMartRoofText_484f9
-	db $0b
+	TX_SFX_ITEM
 	TX_FAR _CeladonMartRoofText_484fe
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_48504:
 	TX_FAR _CeladonMartRoofText_48504
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_4850a:
 	TX_FAR _CeladonMartRoofText_4850a
-	db $0b
+	TX_SFX_ITEM
 	TX_FAR _CeladonMartRoofText_4850f
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_48515:
 	TX_FAR _CeladonMartRoofText_48515
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 ReceivedTM49Text:
 	TX_FAR _ReceivedTM49Text
-	db $0b
+	TX_SFX_ITEM
 	TX_FAR _CeladonMartRoofText_48520
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_48526:
 	TX_FAR _CeladonMartRoofText_48526
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofText_4852c:
 	TX_FAR _CeladonMartRoofText_4852c
-	db $0d
+	TX_WAIT_BUTTON
 	db "@"
 
 CeladonMartRoofScript_PrintDrinksInBag:
@@ -248,7 +248,7 @@ CeladonMartRoofText4:
 	db "@"
 
 CeladonMartRoofText5:
-	db $f5
+	TX_VENDING_MACHINE
 
 CeladonMartRoofText6:
 	TX_FAR _CeladonMartRoofText6

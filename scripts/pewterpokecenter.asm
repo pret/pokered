@@ -9,7 +9,7 @@ PewterPokecenterTextPointers:
 	dw PewterTradeNurseText
 
 PewterHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 PewterPokecenterText2:
 	TX_FAR _PewterPokecenterText2
@@ -21,8 +21,7 @@ PewterJigglypuffText:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .Text
 	call PrintText
-	ld a, $ff
-	call PlaySound
+	StopAllMusic
 	ld c, 32
 	call DelayFrames
 	ld hl, JigglypuffFacingDirections
@@ -30,7 +29,7 @@ PewterJigglypuffText:
 	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
 	call CopyData
 
-	ld a, [wSpriteStateData1 + 3 * $10 + $2]
+	ld a, [Sprite03SpriteImageIdx]
 	ld hl, wJigglypuffFacingDirections
 .findMatchingFacingDirectionLoop
 	cp [hl]
@@ -44,7 +43,7 @@ PewterJigglypuffText:
 	pop hl
 .loop
 	ld a, [hl]
-	ld [wSpriteStateData1 + 3 * $10 + $2], a
+	ld [Sprite03SpriteImageIdx], a
 
 ; rotate the array
 	push hl
@@ -82,4 +81,4 @@ JigglypuffFacingDirections:
 JigglypuffFacingDirectionsEnd:
 
 PewterTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

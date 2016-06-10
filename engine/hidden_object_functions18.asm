@@ -195,4 +195,4 @@ OpenPokemonCenterPC: ; 62516 (18:6516)
 	tx_pre_jump PokemonCenterPCText
 
 PokemonCenterPCText: ; 62529 (18:6529)
-	db $F9 ; FuncTX_PokemonCenterPC
+	TX_POKECENTER_PC

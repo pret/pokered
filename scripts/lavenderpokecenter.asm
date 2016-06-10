@@ -9,10 +9,10 @@ LavenderPokecenterTextPointers:
 	dw LavenderTradeNurseText
 
 LavenderTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST
 
 LavenderHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 LavenderPokecenterText2:
 	TX_FAR _LavenderPokecenterText2
