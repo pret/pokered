@@ -2209,6 +2209,66 @@ _PiloswineDexEntry::
 	next "keeps charging"
 	next "repeatedly"
 	dex
+	
+_CorsolaDexEntry::
+	text "The points on its"
+	next "head absorb nutri-"
+	next "ents from clean"
+
+	page "water. They cannot"
+	next "survive in"
+	next "polluted water"
+	dex
+	
+_RemoraidDexEntry::
+	text "To escape from an"
+	next "attacker, it may"
+	next "shoot water out of"
+
+	page "its mouth, then"
+	next "use that force to"
+	next "swim backward"
+	dex
+	
+_OctilleryDexEntry::
+	text "It instinctively"
+	next "sneaks into rocky"
+	next "holes. If it gets"
+
+	page "sleepy, it steals"
+	next "the nest of a"
+	next "fellow OCTILLERY"
+	dex
+	
+_DelibirdDexEntry::
+	text "It carries food"
+	next "all day long."
+	next "There are tales"
+
+	page "about lost people"
+	next "who were saved by"
+	next "the food it had"
+	dex
+	
+_MantineDexEntry::
+	text "Swimming freely in"
+	next "open seas, it may"
+	next "fly out of the"
+
+	page "water and over the"
+	next "waves if it builds"
+	next "up enough speed"
+	dex
+	
+_SkarmoryDexEntry::
+	text "The feathers that"
+	next "it sheds are very"
+	next "sharp. It is said"
+
+	page "that people once"
+	next "used the feathers"
+	next "as swords"
+	dex
 
 _HoundourDexEntry::
 	text "It's smart enough"

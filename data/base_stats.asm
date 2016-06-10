@@ -220,12 +220,12 @@ BaseStatsPointers::
 	dbw Bank(MagcargoBaseStats), MagcargoBaseStats
 	dbw Bank(SwinubBaseStats), SwinubBaseStats
 	dbw Bank(PiloswineBaseStats), PiloswineBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(CorsolaBaseStats), CorsolaBaseStats
+	dbw Bank(RemoraidBaseStats), RemoraidBaseStats
+	dbw Bank(OctilleryBaseStats), OctilleryBaseStats
+	dbw Bank(DelibirdBaseStats), DelibirdBaseStats
+	dbw Bank(MantineBaseStats), MantineBaseStats
+	dbw Bank(SkarmoryBaseStats), SkarmoryBaseStats
 	dbw Bank(HoundourBaseStats), HoundourBaseStats
 	dbw Bank(HoundoomBaseStats), HoundoomBaseStats
 	dbw Bank(KingdraBaseStats), KingdraBaseStats

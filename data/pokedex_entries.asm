@@ -223,12 +223,12 @@ PokedexEntryPointers: ; 4047e (10:447e)
 	dw MagcargoDexEntry
 	dw SwinubDexEntry
 	dw PiloswineDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw CorsolaDexEntry
+	dw RemoraidDexEntry
+	dw OctilleryDexEntry
+	dw DelibirdDexEntry
+	dw MantineDexEntry
+	dw SkarmoryDexEntry
 	dw HoundourDexEntry
 	dw HoundoomDexEntry
 	dw KingdraDexEntry
@@ -1818,6 +1818,48 @@ PiloswineDexEntry:
 	db 3,7
 	dw 1230
 	TX_FAR _PiloswineDexEntry
+	db "@"
+	
+CorsolaDexEntry:
+	db "CORAL@"
+	db 2,0
+	dw 110
+	TX_FAR _CorsolaDexEntry
+	db "@"
+	
+RemoraidDexEntry:
+	db "JET@"
+	db 2,0
+	dw 265
+	TX_FAR _RemoraidDexEntry
+	db "@"
+	
+OctilleryDexEntry:
+	db "JET@"
+	db 2,11
+	dw 628
+	TX_FAR _OctilleryDexEntry
+	db "@"
+	
+DelibirdDexEntry:
+	db "DELIVERY@"
+	db 2,11
+	dw 353
+	TX_FAR _DelibirdDexEntry
+	db "@"
+
+MantineDexEntry:
+	db "KITE@"
+	db 6,11
+	dw 4850
+	TX_FAR _MantineDexEntry
+	db "@"
+	
+SkarmoryDexEntry:
+	db "ARMOR BIRD@"
+	db 5,7
+	dw 1113
+	TX_FAR _SkarmoryDexEntry
 	db "@"
 
 HoundourDexEntry:
