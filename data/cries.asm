@@ -224,3 +224,33 @@ CryData: ; 39446 (e:5446)
 	db $12, $FF, $FF; Magcargo
 	db $02, $00, $80; Swinub
 	db $1F, $00, $80; Piloswine
+	db $00, $00, $80; Corsola
+	db $00, $00, $80; Remoraid
+	db $00, $00, $80; Octillery
+	db $00, $00, $80; Delibird
+	db $00, $00, $80; Mantine
+	db $00, $00, $80; Skarmory
+	db $00, $5C, $60; Houndour
+	db $00, $2C, $70; Houndoom
+	db $19, $20, $20; Kingdra
+	db $04, $70, $10; Phanpy
+	db $04, $30, $18; Donphan
+	db $25, $cA, $5F; Porygon2
+	db $25, $40, $40; Stantler
+	db $0A, $3D, $60; Smeargle
+	db $12, $C0, $30; Tyrogue
+	db $12, $40, $50; Hitmontop
+	db $0D, $FF, $50; Smoochum
+	db $06, $CF, $AF; Elekid
+	db $04, $9F, $20; Magby
+	db $1D, $71, $90; Miltank
+	db $14, $5A, $C0; Blissey
+	db $00, $0C, $F0; Raikou
+	db $00, $01, $C0; Entei
+	db $00, $C1, $FF; Suicune
+	db $11, $50, $20; Larvitar
+	db $11, $30, $40; Pupitar
+	db $11, $10, $C0; Tyranitar
+	db $09, $28, $60; Lugia
+	db $09, $18, $60; Ho-Oh
+	db $23, $A2, $6F; Celebi

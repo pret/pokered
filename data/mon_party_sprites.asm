@@ -109,22 +109,22 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_MON				;Sneasel/Teddiursa
 	dn SPRITE_MON, SPRITE_SNAKE				;Ursaring/Slugma
 	dn SPRITE_SNAKE, SPRITE_QUADRUPED		;Magcargo/Swinub
-	dn SPRITE_QUADRUPED, SPRITE_MON			;Piloswine/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_QUADRUPED, SPRITE_MON			;Piloswine/Corsola
+	dn SPRITE_SNAKE, SPRITE_MON				;Remoraid/Octillery
+	dn SPRITE_SNAKE, SPRITE_MON				;Delibird/Mantine
+	dn SPRITE_BIRD_M, SPRITE_QUADRUPED		;Skarmory/Houndour
+	dn SPRITE_QUADRUPED, SPRITE_WATER		;Houndoom/Kingdra
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Phanpy/Donphan
+	dn SPRITE_MON, SPRITE_QUADRUPED			;Porygon2/Stantler
+	dn SPRITE_MON, SPRITE_MON				;Smeargle/Tyrogue
+	dn SPRITE_MON, SPRITE_MON				;Hitmontop/Smoochum
+	dn SPRITE_MON, SPRITE_MON				;Elekid/Magby
+	dn SPRITE_QUADRUPED, SPRITE_FAIRY		;Miltank/Blissey
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Raikou/Entei
+	dn SPRITE_QUADRUPED, SPRITE_MON			;Suicune/Larvitar
+	dn SPRITE_MON, SPRITE_MON				;Pupitar/Tyranitar
+	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Lugia/Ho-Oh
+	dn SPRITE_GRASS, SPRITE_MON				;Celebi/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

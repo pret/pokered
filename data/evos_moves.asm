@@ -229,30 +229,30 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon228_EvosMoves), Mon228_EvosMoves
+	dbw Bank(Mon229_EvosMoves), Mon229_EvosMoves
+	dbw Bank(Mon230_EvosMoves), Mon230_EvosMoves
+	dbw Bank(Mon231_EvosMoves), Mon231_EvosMoves
+	dbw Bank(Mon232_EvosMoves), Mon232_EvosMoves
+	dbw Bank(Mon233_EvosMoves), Mon233_EvosMoves
+	dbw Bank(Mon234_EvosMoves), Mon234_EvosMoves
+	dbw Bank(Mon235_EvosMoves), Mon235_EvosMoves
+	dbw Bank(Mon236_EvosMoves), Mon236_EvosMoves
+	dbw Bank(Mon237_EvosMoves), Mon237_EvosMoves
+	dbw Bank(Mon238_EvosMoves), Mon238_EvosMoves
+	dbw Bank(Mon239_EvosMoves), Mon239_EvosMoves
+	dbw Bank(Mon240_EvosMoves), Mon240_EvosMoves
+	dbw Bank(Mon241_EvosMoves), Mon241_EvosMoves
+	dbw Bank(Mon242_EvosMoves), Mon242_EvosMoves
+	dbw Bank(Mon243_EvosMoves), Mon243_EvosMoves
+	dbw Bank(Mon244_EvosMoves), Mon244_EvosMoves
+	dbw Bank(Mon245_EvosMoves), Mon245_EvosMoves
+	dbw Bank(Mon246_EvosMoves), Mon246_EvosMoves
+	dbw Bank(Mon247_EvosMoves), Mon247_EvosMoves
+	dbw Bank(Mon248_EvosMoves), Mon248_EvosMoves
+	dbw Bank(Mon249_EvosMoves), Mon249_EvosMoves
+	dbw Bank(Mon250_EvosMoves), Mon250_EvosMoves
+	dbw Bank(Mon251_EvosMoves), Mon251_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -796,6 +796,8 @@ Mon075_EvosMoves: ; 3b3cf (e:73cf)
 Mon113_EvosMoves: ; 3b3e0 (e:73e0)
 ;CHANSEY
 ;Evolutions
+	db EV_LEVEL,30
+	dw BLISSEY
 	db 0
 ;Learnset
 	db 24,SING
@@ -1497,6 +1499,8 @@ Mon116_EvosMoves: ; 3b5dd (e:75dd)
 Mon117_EvosMoves: ; 3b5ec (e:75ec)
 ;SEADRA
 ;Evolutions
+	db EV_LEVEL,48
+	dw KINGDRA
 	db 0
 ;Learnset
 	db 19,SMOKESCREEN
@@ -2475,6 +2479,8 @@ Mon074_EvosMoves: ; 3b8fc (e:78fc)
 Mon137_EvosMoves: ; 3b90d (e:790d)
 ;PORYGON
 ;Evolutions
+	db EV_LEVEL,35
+	dw PORYGON2
 	db 0
 ;Learnset
 	db 23,PSYBEAM
@@ -3187,4 +3193,317 @@ Mon221_EvosMoves:
 	db 42,MIST
 	db 56,BLIZZARD
 	db 70,AMNESIA
+	db 0
+
+Mon228_EvosMoves:
+;HOUNDOUR
+;Evolutions
+	db EV_LEVEL,24
+	dw HOUNDOOM
+	db 0
+;Learnset
+	db 7,ROAR
+	db 13,SMOG
+	db 20,BITE
+	db 35,FLAMETHROWER
+;	db 43,CRUNCH
+	db 0
+
+Mon229_EvosMoves:
+;HOUNDOOM
+;Evolutions
+	db 0
+;Learnset
+	db 7,ROAR
+	db 13,SMOG
+	db 20,BITE
+	db 41,FLAMETHROWER
+;	db 52,CRUNCH
+	db 0
+
+Mon230_EvosMoves:
+;KINGDRA
+;Evolutions
+	db 0
+;Learnset
+	db 19,SMOKESCREEN
+	db 24,LEER
+	db 30,WATER_GUN
+	db 41,AGILITY
+	db 52,HYDRO_PUMP
+	db 0
+
+Mon231_EvosMoves:
+;PHANPY
+;Evolutions
+	db EV_LEVEL,25
+	dw DONPHAN
+	db 0
+;Learnset
+	db 9,DEFENSE_CURL
+	db 17,SLAM
+	db 25,TAKE_DOWN
+;	db 33,ROLLOUT
+;	db 41,ENDURE
+	db 49,DOUBLE_EDGE
+	db 0
+
+Mon232_EvosMoves:
+;DONPHAN
+;Evolutions
+	db 0
+;Learnset
+	db 9,DEFENSE_CURL
+	db 17,SLAM
+	db 25,FURY_ATTACK
+;	db 33,ROLLOUT
+;	db 41,ENDURE
+	db 49,EARTHQUAKE
+	db 0
+
+Mon233_EvosMoves:
+;PORYGON2
+;Evolutions
+	db 0
+;Learnset
+	db 23,PSYBEAM
+	db 28,RECOVER
+	db 35,AGILITY
+	db 42,TRI_ATTACK
+	db 0
+
+Mon234_EvosMoves:
+;STANTLER
+;Evolutions
+	db 0
+;Learnset
+	db 8,LEER
+	db 15,HYPNOSIS
+	db 23,STOMP
+	db 31,SAND_ATTACK
+	db 40,TAKE_DOWN
+	db 49,CONFUSE_RAY
+	db 0
+
+Mon235_EvosMoves:
+;SMEARGLE
+;Evolutions
+	db 0
+;Learnset
+	db 0
+
+Mon236_EvosMoves:
+;TYROGUE
+;Evolutions
+	db EV_LEVEL,20
+	dw HITMONCHAN
+	db EV_LEVEL,20
+	dw HITMONLEE
+	db EV_LEVEL,20
+	dw HITMONTOP
+	db 0
+;Learnset
+	db 0
+
+Mon237_EvosMoves:
+;HITMONTOP
+;Evolutions
+	db 0
+;Learnset
+	db 7,FOCUS_ENERGY
+;	db 13,PURSUIT
+	db 19,QUICK_ATTACK
+	db 25,DOUBLE_KICK
+	db 31,COUNTER
+	db 37,AGILITY
+	db 49,LOW_KICK
+	db 0
+
+Mon238_EvosMoves:
+;SMOOCHUM
+;Evolutions
+	db EV_LEVEL,20
+	dw JYNX
+	db 0
+;Learnset
+	db 18,LICK
+	db 23,DOUBLESLAP
+	db 31,ICE_PUNCH
+	db 39,BODY_SLAM
+	db 47,THRASH
+	db 58,BLIZZARD
+	db 0
+
+Mon239_EvosMoves:
+;ELEKID
+;Evolutions
+	db EV_LEVEL,24
+	dw ELECTABUZZ
+	db 0
+;Learnset
+	db 9,THUNDERPUNCH
+	db 17,LIGHT_SCREEN
+	db 25,SWIFT
+	db 33,SCREECH
+	db 41,THUNDERBOLT
+	db 54,THUNDER
+	db 0
+
+Mon240_EvosMoves:
+;MAGBY
+;Evolutions
+	db EV_LEVEL,24
+	dw MAGMAR
+	db 0
+;Learnset
+	db 7,LEER
+	db 13,SMOG
+	db 19,FIRE_PUNCH
+	db 25,SMOKESCREEN
+	db 37,FLAMETHROWER
+	db 42,COMET_PUNCH
+	db 48,FIRE_BLAST
+	db 0
+
+Mon241_EvosMoves:
+;MILTANK
+;Evolutions
+	db 0
+;Learnset
+	db 4,GROWL
+	db 8,DEFENSE_CURL
+	db 14,STOMP
+	db 25,BIDE
+	db 32,RECOVER
+	db 43,BODY_SLAM
+	db 0
+
+Mon242_EvosMoves:
+;BLISSEY
+;Evolutions
+	db 0
+;Learnset
+	db 24,SING
+	db 30,GROWL
+	db 38,MINIMIZE
+	db 44,DEFENSE_CURL
+	db 48,LIGHT_SCREEN
+	db 54,DOUBLE_EDGE
+	db 0
+
+Mon243_EvosMoves:
+;RAIKOU
+;Evolutions
+	db 0
+;Learnset
+	db 11,THUNDERSHOCK
+	db 21,ROAR
+	db 31,QUICK_ATTACK
+	db 41,THUNDER_WAVE
+	db 51,REFLECT
+	db 61,THUNDER
+	db 0
+
+Mon244_EvosMoves:
+;ENTEI
+;Evolutions
+	db 0
+;Learnset
+	db 11,EMBER
+	db 21,ROAR
+	db 31,FIRE_SPIN
+	db 41,STOMP
+	db 51,FLAMETHROWER
+	db 61,FIRE_BLAST
+	db 0
+
+Mon245_EvosMoves:
+;SUICUNE
+;Evolutions
+	db 0
+;Learnset
+	db 11,WATER_GUN
+	db 21,ROAR
+	db 31,GUST
+	db 41,BUBBLEBEAM
+	db 51,AURORA_BEAM
+	db 61,HYDRO_PUMP
+	db 0
+
+Mon246_EvosMoves:
+;LARVITAR
+;Evolutions
+	db EV_LEVEL,30
+	dw PUPITAR
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 50,EARTHQUAKE
+	db 57,HYPER_BEAM
+	db 0
+
+Mon247_EvosMoves:
+;PUPITAR
+;Evolutions
+	db EV_LEVEL,55
+	dw TYRANITAR
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 56,EARTHQUAKE
+	db 65,HYPER_BEAM
+	db 0
+
+Mon248_EvosMoves:
+;TYRANITAR
+;Evolutions
+	db 0
+;Learnset
+	db 15,SCREECH
+	db 22,ROCK_SLIDE
+	db 29,THRASH
+	db 38,BITE
+	db 61,EARTHQUAKE
+	db 70,HYPER_BEAM
+	db 0
+
+Mon249_EvosMoves:
+;LUGIA
+;Evolutions
+	db 0
+;Learnset
+	db 22,GUST
+	db 33,RECOVER
+	db 44,HYDRO_PUMP
+	db 55,SWIFT
+	db 66,WHIRLWIND
+	db 77,PSYBEAM
+	db 0
+
+Mon250_EvosMoves:
+;HO_OH
+;Evolutions
+	db 0
+;Learnset
+	db 22,GUST
+	db 33,RECOVER
+	db 44,FIRE_BLAST
+	db 55,SWIFT
+	db 66,WHIRLWIND
+	db 77,PSYBEAM
+	db 0
+
+Mon251_EvosMoves:
+;CELEBI
+;Evolutions
+	db 0
+;Learnset
+	db 30,PSYBEAM
+	db 40,SOLARBEAM
 	db 0

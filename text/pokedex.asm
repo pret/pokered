@@ -2209,3 +2209,243 @@ _PiloswineDexEntry::
 	next "keeps charging"
 	next "repeatedly"
 	dex
+
+_HoundourDexEntry::
+	text "It's smart enough"
+	next "to hunt in packs."
+	next "It uses a variety"
+
+	page "of cries for"
+	next "communicating"
+	next "with others"
+	dex
+
+_HoundoomDexEntry::
+	text "The flames it"
+	next "breathes when"
+	next "angry contain"
+
+	page "toxins. If they"
+	next "cause a burn, it"
+	next "can hurt forever"
+	dex
+
+_KingdraDexEntry::
+	text "It lives in caves"
+	next "on the seafloor"
+	next "and creates giant"
+
+	page "whirlpools every"
+	next "time it moves"
+	next "or yawns"
+	dex
+
+_PhanpyDexEntry::
+	text "It is strong"
+	next "despite its"
+	next "compact size. It"
+
+	page "can easily pick"
+	next "up and carry a"
+	next "human"
+	dex
+
+_DonphanDexEntry::
+	text "It attacks by"
+	next "curling up, then"
+	next "rolling into its"
+
+	page "foe. It can blow"
+	next "apart a house in"
+	next "one hit"
+	dex
+
+_Porygon2DexEntry::
+	text "It was upgraded"
+	next "to enable the"
+	next "exploration of"
+
+	page "other planets."
+	next "However, it didn't"
+	next "measure up well"
+	dex
+
+_StantlerDexEntry::
+	text "Staring at its"
+	next "antlers creates"
+	next "an odd sensation"
+
+	page "as if one were"
+	next "being drawn into"
+	next "their centers"
+	dex
+
+_SmeargleDexEntry::
+	text "It marks its"
+	next "territory by"
+	next "using its tail"
+
+	page "as a paintbrush."
+	next "There are over"
+	next "5,000 marks"
+	dex
+
+_TyrogueDexEntry::
+	text "It is famous for"
+	next "its eagerness to"
+	next "fight and always"
+
+	page "nurses injuries"
+	next "from challenging"
+	next "larger foes"
+	dex
+
+_HitmontopDexEntry::
+	text "It fights while"
+	next "spinning like a"
+	next "top. The"
+
+	page "centrifugal force"
+	next "boosts its power"
+	next "by 10"
+	dex
+
+_SmoochumDexEntry::
+	text "It tests"
+	next "everything by"
+	next "touching with its"
+
+	page "lips, which"
+	next "remember what it"
+	next "likes and hates"
+	dex
+
+_ElekidDexEntry::
+	text "A weak electric"
+	next "current flows"
+	next "between its"
+
+	page "horns. Sticking a"
+	next "hand there shocks"
+	next "the unwary"
+	dex
+
+_MagbyDexEntry::
+	text "Each and every"
+	next "time it inhales"
+	next "and exhales, hot"
+
+	page "embers dribble"
+	next "out of its mouth"
+	next "and nostrils"
+	dex
+
+_MiltankDexEntry::
+	text "It is said that"
+	next "kids who drink"
+	next "MILTANK's milk"
+
+	page "grow up to become"
+	next "hearty, healthy"
+	next "adults"
+	dex
+
+_BlisseyDexEntry::
+	text "The eggs it lays"
+	next "are filled with"
+	next "happiness. Eating"
+
+	page "even one bite"
+	next "will bring a"
+	next "smile to anyone"
+	dex
+
+_RaikouDexEntry::
+	text "It is said to"
+	next "have fallen with"
+	next "lighting. It can"
+
+	page "fire thunderbolts"
+	next "from the clouds"
+	next "on its back"
+	dex
+
+_EnteiDexEntry::
+	text "Volcanoes erupt"
+	next "when it roars."
+	next "Unable to contain"
+
+	page "its powers, it"
+	next "races headlong"
+	next "around the land"
+	dex
+
+_SuicuneDexEntry::
+	text "It travels across"
+	next "the world to"
+	next "purify polluted"
+
+	page "water. It moves"
+	next "together with the"
+	next "north wind"
+	dex
+
+_LarvitarDexEntry::
+	text "A #MON that"
+	next "eats soil. Once"
+	next "it has eaten a"
+
+	page "large mountain,"
+	next "it falls asleep"
+	next "so it can grow"
+	dex
+
+_PupitarDexEntry::
+	text "Its body is as"
+	next "hard as bedrock."
+	next "By venting"
+
+	page "pressurized gas,"
+	next "it can launch"
+	next "into the air"
+	dex
+
+_TyranitarDexEntry::
+	text "If it rampages,"
+	next "it knocks down"
+	next "mountains and"
+
+	page "buries rivers."
+	next "Maps must be"
+	next "redrawn after"
+	dex
+
+_LugiaDexEntry::
+	text "It sleeps in a"
+	next "deep-sea trench."
+	next "If it flaps its"
+
+	page "wings, it is said"
+	next "to cause a 40-day"
+	next "storm"
+	dex
+
+_Ho_OhDexEntry::
+	text "A legend says"
+	next "that its body"
+	next "glows in seven"
+
+	page "colors. A rainbow"
+	next "is said to form"
+	next "when it flies"
+	dex
+
+_CelebiDexEntry::
+	text "It has the power"
+	next "to travel across"
+	next "time, but it is"
+
+	page "said to appear"
+	next "only in peaceful"
+	next "times"
+	dex

@@ -36,7 +36,7 @@ BaseStatsPointers::
 	dbw Bank(ClefairyBaseStats), ClefairyBaseStats
 	dbw Bank(ClefableBaseStats), ClefableBaseStats
 	dbw Bank(VulpixBaseStats), VulpixBaseStats
-	dbw Bank(NinetailsBaseStats), NinetailsBaseStats
+	dbw Bank(NinetalesBaseStats), NinetalesBaseStats
 	dbw Bank(JigglypuffBaseStats), JigglypuffBaseStats
 	dbw Bank(WigglytuffBaseStats), WigglytuffBaseStats
 	dbw Bank(ZubatBaseStats), ZubatBaseStats
@@ -226,30 +226,30 @@ BaseStatsPointers::
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(HoundourBaseStats), HoundourBaseStats
+	dbw Bank(HoundoomBaseStats), HoundoomBaseStats
+	dbw Bank(KingdraBaseStats), KingdraBaseStats
+	dbw Bank(PhanpyBaseStats), PhanpyBaseStats
+	dbw Bank(DonphanBaseStats), DonphanBaseStats
+	dbw Bank(Porygon2BaseStats), Porygon2BaseStats
+	dbw Bank(StantlerBaseStats), StantlerBaseStats
+	dbw Bank(SmeargleBaseStats), SmeargleBaseStats
+	dbw Bank(TyrogueBaseStats), TyrogueBaseStats
+	dbw Bank(HitmontopBaseStats), HitmontopBaseStats
+	dbw Bank(SmoochumBaseStats), SmoochumBaseStats
+	dbw Bank(ElekidBaseStats), ElekidBaseStats
+	dbw Bank(MagbyBaseStats), MagbyBaseStats
+	dbw Bank(MiltankBaseStats), MiltankBaseStats
+	dbw Bank(BlisseyBaseStats), BlisseyBaseStats
+	dbw Bank(RaikouBaseStats), RaikouBaseStats
+	dbw Bank(EnteiBaseStats), EnteiBaseStats
+	dbw Bank(SuicuneBaseStats), SuicuneBaseStats
+	dbw Bank(LarvitarBaseStats), LarvitarBaseStats
+	dbw Bank(PupitarBaseStats), PupitarBaseStats
+	dbw Bank(TyranitarBaseStats), TyranitarBaseStats
+	dbw Bank(LugiaBaseStats), LugiaBaseStats
+	dbw Bank(Ho_OhBaseStats), Ho_OhBaseStats
+	dbw Bank(CelebiBaseStats), CelebiBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
