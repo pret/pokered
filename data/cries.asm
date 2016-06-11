@@ -224,12 +224,12 @@ CryData: ; 39446 (e:5446)
 	db $12, $FF, $FF; Magcargo
 	db $02, $00, $80; Swinub
 	db $1F, $00, $80; Piloswine
-	db $00, $00, $80; Corsola
-	db $00, $00, $80; Remoraid
-	db $00, $00, $80; Octillery
-	db $00, $00, $80; Delibird
-	db $00, $00, $80; Mantine
-	db $00, $00, $80; Skarmory
+	db $1B, $00, $80; Corsola
+	db $18, $00, $80; Remoraid
+	db $18, $6F, $E0; Octillery
+	db $10, $DD, $01; Delibird
+	db $17, $00, $80; Mantine
+	db $18, $40, $A0; Skarmory
 	db $00, $5C, $60; Houndour
 	db $00, $2C, $70; Houndoom
 	db $19, $20, $20; Kingdra

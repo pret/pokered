@@ -223,12 +223,12 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon219_EvosMoves), Mon219_EvosMoves
 	dbw Bank(Mon220_EvosMoves), Mon220_EvosMoves
 	dbw Bank(Mon221_EvosMoves), Mon221_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon222_EvosMoves), Mon222_EvosMoves
+	dbw Bank(Mon223_EvosMoves), Mon223_EvosMoves
+	dbw Bank(Mon224_EvosMoves), Mon224_EvosMoves
+	dbw Bank(Mon225_EvosMoves), Mon225_EvosMoves
+	dbw Bank(Mon226_EvosMoves), Mon226_EvosMoves
+	dbw Bank(Mon227_EvosMoves), Mon227_EvosMoves
 	dbw Bank(Mon228_EvosMoves), Mon228_EvosMoves
 	dbw Bank(Mon229_EvosMoves), Mon229_EvosMoves
 	dbw Bank(Mon230_EvosMoves), Mon230_EvosMoves
@@ -2910,7 +2910,7 @@ Mon200_EvosMoves:
 ;	db 19,MEAN_LOOK
 	db 27,PSYBEAM
 ;	db 36,PAIN_SPLIT
-;	db 46,PSYBEAM
+;	db 46,PERISH_SONG
 	db 0
 
 Mon201_EvosMoves:
@@ -3193,6 +3193,83 @@ Mon221_EvosMoves:
 	db 42,MIST
 	db 56,BLIZZARD
 	db 70,AMNESIA
+	db 0
+	
+Mon222_EvosMoves:
+;CORSOLA
+;Evolutions
+	db 0
+;Learnset
+	db 7,HARDEN
+	db 13,BUBBLE
+	db 19,RECOVER
+	db 25,BUBBLEBEAM
+	db 31,SPIKE_CANNON
+;	db 37,MIRROR_COAT
+;	db 43,ANCIENTPOWER
+	db 0
+	
+Mon223_EvosMoves:
+;REMORAID
+;Evolutions
+	db EV_LEVEL,25
+	dw OCTILLERY
+	db 0
+;Learnset
+;	db 11,LOCK_ON
+	db 22,PSYBEAM
+	db 23,AURORA_BEAM ; meant to be Lv. 22
+	db 24,BUBBLEBEAM ; meant to be Lv. 22
+	db 33,FOCUS_ENERGY
+	db 44,ICE_BEAM
+	db 55,HYPER_BEAM
+	db 0
+	
+Mon224_EvosMoves:
+;OCTILLERY
+;Evolutions
+	db 0
+;Learnset
+	db 11,CONSTRICT
+	db 22,PSYBEAM
+	db 23,AURORA_BEAM ; meant to be Lv. 22
+	db 24,BUBBLEBEAM ; meant to be Lv. 22
+;	db 25,OCTAZOOKA
+	db 38,FOCUS_ENERGY
+	db 54,ICE_BEAM
+	db 70,HYPER_BEAM
+	db 0
+	
+Mon225_EvosMoves:
+;DELIBIRD
+;Evolutions
+	db 0
+;Learnset
+	db 0
+	
+Mon226_EvosMoves:
+;MANTINE
+;Evolutions
+	db 0
+;Learnset
+	db 10,SUPERSONIC
+	db 18,BUBBLEBEAM
+	db 25,TAKE_DOWN
+	db 32,AGILITY
+	db 40,WING_ATTACK
+	db 49,CONFUSE_RAY
+	db 0
+	
+Mon227_EvosMoves:
+;SKARMORY
+;Evolutions
+	db 0
+;Learnset
+	db 13,SAND_ATTACK
+	db 19,SWIFT
+	db 25,AGILITY
+	db 37,FURY_ATTACK
+;	db 49,STEEL_WING
 	db 0
 
 Mon228_EvosMoves:

@@ -109,9 +109,9 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_MON				;Sneasel/Teddiursa
 	dn SPRITE_MON, SPRITE_SNAKE				;Ursaring/Slugma
 	dn SPRITE_SNAKE, SPRITE_QUADRUPED		;Magcargo/Swinub
-	dn SPRITE_QUADRUPED, SPRITE_MON			;Piloswine/Corsola
-	dn SPRITE_SNAKE, SPRITE_MON				;Remoraid/Octillery
-	dn SPRITE_SNAKE, SPRITE_MON				;Delibird/Mantine
+	dn SPRITE_QUADRUPED, SPRITE_WATER		;Piloswine/Corsola
+	dn SPRITE_WATER, SPRITE_WATER			;Remoraid/Octillery
+	dn SPRITE_MON, SPRITE_WATER				;Delibird/Mantine
 	dn SPRITE_BIRD_M, SPRITE_QUADRUPED		;Skarmory/Houndour
 	dn SPRITE_QUADRUPED, SPRITE_WATER		;Houndoom/Kingdra
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Phanpy/Donphan
