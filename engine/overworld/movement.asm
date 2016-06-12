@@ -589,9 +589,9 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
-	ld a, [wTileSetCollisionPtr]
+	ld a, [wTilesetCollisionPtr]
 	ld l, a
-	ld a, [wTileSetCollisionPtr+1]
+	ld a, [wTilesetCollisionPtr+1]
 	ld h, a
 .tilePassableLoop
 	ld a, [hli]

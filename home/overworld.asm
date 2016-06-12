@@ -854,13 +854,13 @@ INCLUDE "data/bike_riding_tilesets.asm"
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData::
-	ld a,[wTileSetGFXPtr]
+	ld a,[wTilesetGfxPtr]
 	ld l,a
-	ld a,[wTileSetGFXPtr + 1]
+	ld a,[wTilesetGfxPtr + 1]
 	ld h,a
 	ld de,vTileset
 	ld bc,$600
-	ld a,[wTileSetBank]
+	ld a,[wTilesetBank]
 	jp FarCopyData2
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
@@ -1100,7 +1100,7 @@ IsSpriteOrSignInFrontOfPlayer::
 ; check if the player is front of a counter in a pokemon center, pokemart, etc. and if so, extend the range at which he can talk to the NPC
 .extendRangeOverCounter
 	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player in c
-	ld hl,wTileSetTalkingOverTiles ; list of tiles that extend talking range (counter tiles)
+	ld hl,wTilesetTalkingOverTiles ; list of tiles that extend talking range (counter tiles)
 	ld b,3
 	ld d,$20 ; talking range in pixels (long range)
 .counterTilesLoop
@@ -1242,7 +1242,7 @@ CheckTilePassable::
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
 	ld a,[wTileInFrontOfPlayer] ; tile in front of player
 	ld c,a
-	ld hl,wTileSetCollisionPtr ; pointer to list of passable tiles
+	ld hl,wTilesetCollisionPtr ; pointer to list of passable tiles
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl now points to passable tiles
@@ -1354,7 +1354,7 @@ TilePairCollisionsWater::
 LoadCurrentMapView::
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[wTileSetBank] ; tile data ROM bank
+	ld a,[wTilesetBank] ; tile data ROM bank
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a ; switch to ROM bank that contains tile data
 	ld a,[wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
@@ -1784,9 +1784,9 @@ ScheduleWestColumnRedraw::
 ; Input: c = tile block ID, hl = destination address
 DrawTileBlock::
 	push hl
-	ld a,[wTileSetBlocksPtr] ; pointer to tiles
+	ld a,[wTilesetBlocksPtr] ; pointer to tiles
 	ld l,a
-	ld a,[wTileSetBlocksPtr + 1]
+	ld a,[wTilesetBlocksPtr + 1]
 	ld h,a
 	ld a,c
 	swap a
@@ -1915,7 +1915,7 @@ CollisionCheckOnWater::
 	jr z,.noCollision ; keep surfing
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
-	ld hl,wTileSetCollisionPtr ; pointer to list of passable tiles
+	ld hl,wTilesetCollisionPtr ; pointer to list of passable tiles
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a

@@ -900,16 +900,16 @@ CableClub_Run:
 	call CableClub_DoBattleOrTrade
 	ld hl, Club_GFX
 	ld a, h
-	ld [wTileSetGFXPtr + 1], a
+	ld [wTilesetGfxPtr + 1], a
 	ld a, l
-	ld [wTileSetGFXPtr], a
+	ld [wTilesetGfxPtr], a
 	ld a, Bank(Club_GFX)
-	ld [wTileSetBank], a
+	ld [wTilesetBank], a
 	ld hl, Club_Coll
 	ld a, h
-	ld [wTileSetCollisionPtr + 1], a
+	ld [wTilesetCollisionPtr + 1], a
 	ld a, l
-	ld [wTileSetCollisionPtr], a
+	ld [wTilesetCollisionPtr], a
 	xor a
 	ld [wGrassRate], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
