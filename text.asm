@@ -781,12 +781,12 @@ _ViridianSchoolNotebookText4::
 	line "#MON LEAGUE!"
 	prompt
 
-_FightingDojoText_52a10::
+_EnemiesOnEverySideText::
 	text "Enemies on every"
 	line "side!"
 	done
 
-_FightingDojoText_52a1d::
+_WhatGoesAroundComesAroundText::
 	text "What goes around"
 	line "comes around!"
 	done

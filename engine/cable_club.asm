@@ -27,10 +27,10 @@ CableClub_DoBattleOrTradeAgain:
 	ld hl, wSerialPlayerDataBlock
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, 6
-.writePlayeDataBlockPreambleLoop
+.writePlayerDataBlockPreambleLoop
 	ld [hli], a
 	dec b
-	jr nz, .writePlayeDataBlockPreambleLoop
+	jr nz, .writePlayerDataBlockPreambleLoop
 	ld hl, wSerialRandomNumberListBlock
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, 7
@@ -271,7 +271,7 @@ CableClub_DoBattleOrTradeAgain:
 	cp LINK_STATE_START_BATTLE
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a
-	jr nz, .asm_5506
+	jr nz, .trading
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
 	ld a, OPP_SONY1
@@ -283,7 +283,7 @@ CableClub_DoBattleOrTradeAgain:
 	predef InitOpponent
 	predef HealParty
 	jp ReturnToCableClubRoom
-.asm_5506
+.trading
 	ld c, BANK(Music_GameCorner)
 	ld a, MUSIC_GAME_CORNER
 	call PlayMusic
@@ -964,8 +964,8 @@ CableClub_TextBoxBorder:
 ; c = width
 CableClub_DrawHorizontalLine:
 	ld d, c
-.asm_5ae1
+.loop
 	ld [hli], a
 	dec d
-	jr nz, .asm_5ae1
+	jr nz, .loop
 	ret

@@ -1778,7 +1778,7 @@ wEnemyNumAttacksLeft:: ; d06f
 wEnemyConfusedCounter:: ; d070
 	ds 1
 
-wEnemyToxcCounter:: ; d071
+wEnemyToxicCounter:: ; d071
 	ds 1
 
 wEnemyDisabledMove:: ; d072

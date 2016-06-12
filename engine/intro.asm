@@ -305,7 +305,7 @@ PlayShootingStar:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
-	ld a, $e4
+	ld a, %11100100
 	ld [rBGP], a
 	ld c, 180
 	call DelayFrames

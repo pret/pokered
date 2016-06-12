@@ -18,7 +18,7 @@ HallOfFamePC:
 	call FillFourRowsWithBlack
 	coord hl, 0, 14
 	call FillFourRowsWithBlack
-	ld a, $c0
+	ld a, %11000000
 	ld [rBGP], a
 	call EnableLCD
 	ld a, $ff
@@ -36,13 +36,13 @@ HallOfFamePC:
 FadeInCreditsText:
 	ld hl, HoFGBPalettes
 	ld b, 4
-.asm_740bf
+.loop
 	ld a, [hli]
 	ld [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
-	jr nz, .asm_740bf
+	jr nz, .loop
 	ret
 
 DisplayCreditsMon:

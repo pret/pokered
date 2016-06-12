@@ -66,18 +66,18 @@ ViridianSchoolNotebookText4:
 
 PrintFightingDojoText2:
 	call EnableAutoTextBoxDrawing
-	tx_pre_jump FightingDojoText_52a10
+	tx_pre_jump EnemiesOnEverySideText
 
-FightingDojoText_52a10:
-	TX_FAR _FightingDojoText_52a10
+EnemiesOnEverySideText:
+	TX_FAR _EnemiesOnEverySideText
 	db "@"
 
 PrintFightingDojoText3:
 	call EnableAutoTextBoxDrawing
-	tx_pre_jump FightingDojoText_52a1d
+	tx_pre_jump WhatGoesAroundComesAroundText
 
-FightingDojoText_52a1d:
-	TX_FAR _FightingDojoText_52a1d
+WhatGoesAroundComesAroundText:
+	TX_FAR _WhatGoesAroundComesAroundText
 	db "@"
 
 PrintFightingDojoText:

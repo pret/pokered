@@ -4710,8 +4710,8 @@ TextPredefs::
 	add_tx_pre LinkCableHelp                        ; 34
 	add_tx_pre TMNotebook                           ; 35
 	add_tx_pre FightingDojoText                     ; 36
-	add_tx_pre FightingDojoText_52a10               ; 37
-	add_tx_pre FightingDojoText_52a1d               ; 38
+	add_tx_pre EnemiesOnEverySideText               ; 37
+	add_tx_pre WhatGoesAroundComesAroundText        ; 38
 	add_tx_pre NewBicycleText                       ; 39
 	add_tx_pre IndigoPlateauStatues                 ; 3A
 	add_tx_pre VermilionGymTrashSuccessText1        ; 3B

@@ -49,11 +49,11 @@ GainExperience:
 	ld [de], a
 .nextBaseStat
 	dec c
-	jr z, .asm_552a1
+	jr z, .statExpDone
 	inc de
 	inc de
 	jr .gainStatExpLoop
-.asm_552a1
+.statExpDone
 	xor a
 	ld [H_MULTIPLICAND], a
 	ld [H_MULTIPLICAND + 1], a

@@ -7,7 +7,7 @@ AskName:
 	coord hl, 0, 0
 	ld b, 4
 	ld c, 11
-	call z, ClearScreenArea ; only if in wild batle
+	call z, ClearScreenArea ; only if in wild battle
 	ld a, [wcf91]
 	ld [wd11e], a
 	call GetMonName
@@ -40,7 +40,7 @@ AskName:
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	ld a, [wcf4b]
-	cp $50
+	cp "@"
 	ret nz
 .declinedNickname
 	ld d, h
@@ -108,7 +108,7 @@ DisplayNamingScreen:
 	ld [wMenuWatchedKeys], a
 	ld a, 7
 	ld [wMaxMenuItem], a
-	ld a, $50
+	ld a, "@"
 	ld [wcf4b], a
 	xor a
 	ld hl, wNamingScreenSubmitName
@@ -153,7 +153,7 @@ DisplayNamingScreen:
 	ld h, [hl]
 	ld l, a
 	push de
-	jp [hl]
+	jp hl
 
 .submitNickname
 	pop de
@@ -259,7 +259,7 @@ DisplayNamingScreen:
 .addLetter
 	ld a, [wNamingScreenLetter]
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], "@"
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret

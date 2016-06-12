@@ -74,7 +74,7 @@ UsedCutText:
 InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a
-	ld a, $e4
+	ld a, %11100100
 	ld [rOBP1], a
 	ld a, [wCutTile]
 	cp $52

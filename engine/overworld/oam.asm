@@ -6,7 +6,7 @@ PrepareOAMData:
 	dec a
 	jr z, .updateEnabled
 
-	cp 0 - 1
+	cp -1
 	ret nz
 	ld [wUpdateSpritesEnabled], a
 	jp HideSprites

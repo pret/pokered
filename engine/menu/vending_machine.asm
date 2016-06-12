@@ -130,6 +130,9 @@ LoadVendingMachineItem:
 	ret
 
 VendingPrices:
-	db FRESH_WATER,$00,$02,$00
-	db SODA_POP,   $00,$03,$00
-	db LEMONADE,   $00,$03,$50
+	db FRESH_WATER
+	money 200
+	db SODA_POP
+	money 300
+	db LEMONADE
+	money 350
