@@ -1,4 +1,4 @@
-Mansion3Script: ; 521ee (14:61ee)
+Mansion3Script:
 	call Mansion3Script_52204
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion3TrainerHeader0
@@ -8,7 +8,7 @@ Mansion3Script: ; 521ee (14:61ee)
 	ld [wMansion3CurScript], a
 	ret
 
-Mansion3Script_52204: ; 52204 (14:6204)
+Mansion3Script_52204:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -31,12 +31,12 @@ Mansion3Script_52204: ; 52204 (14:6204)
 	call Mansion2Script_5202f
 	ret
 
-Mansion3ScriptPointers: ; 52235 (14:6235)
+Mansion3ScriptPointers:
 	dw Mansion3Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Mansion3Script0: ; 5223b (14:623b)
+Mansion3Script0:
 	ld hl, CoordsData_52254
 	call Mansion3Script_5225b
 	ld a, [wWhichDungeonWarp]
@@ -50,13 +50,13 @@ Mansion3Script0: ; 5223b (14:623b)
 	ld [wDungeonWarpDestinationMap], a
 	ret
 
-CoordsData_52254: ; 52254 (14:6254)
+CoordsData_52254:
 	db $0E,$10
 	db $0E,$11
 	db $0E,$13
 	db $FF
 
-Mansion3Script_5225b: ; 5225b (14:625b)
+Mansion3Script_5225b:
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
@@ -72,7 +72,7 @@ Mansion3Script_5225b: ; 5225b (14:625b)
 	set 4, [hl]
 	ret
 
-Mansion3Script_Switches: ; 5227a (14:627a)
+Mansion3Script_Switches:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
@@ -82,7 +82,7 @@ Mansion3Script_Switches: ; 5227a (14:627a)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-Mansion3TextPointers: ; 5228a (14:628a)
+Mansion3TextPointers:
 	dw Mansion3Text1
 	dw Mansion3Text2
 	dw PickUpItemText
@@ -90,8 +90,8 @@ Mansion3TextPointers: ; 5228a (14:628a)
 	dw Mansion3Text5
 	dw Mansion3Text6
 
-Mansion3TrainerHeaders: ; 52296 (14:6296)
-Mansion3TrainerHeader0: ; 52296 (14:6296)
+Mansion3TrainerHeaders:
+Mansion3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_0
@@ -100,7 +100,7 @@ Mansion3TrainerHeader0: ; 52296 (14:6296)
 	dw Mansion3EndBattleText1 ; TextEndBattle
 	dw Mansion3EndBattleText1 ; TextEndBattle
 
-Mansion3TrainerHeader2: ; 522a2 (14:62a2)
+Mansion3TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_2
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_2
@@ -111,42 +111,42 @@ Mansion3TrainerHeader2: ; 522a2 (14:62a2)
 
 	db $ff
 
-Mansion3Text1: ; 522af (14:62af)
+Mansion3Text1:
 	TX_ASM
 	ld hl, Mansion3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion3Text2: ; 522b9 (14:62b9)
+Mansion3Text2:
 	TX_ASM
 	ld hl, Mansion3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion3BattleText1: ; 522c3 (14:62c3)
+Mansion3BattleText1:
 	TX_FAR _Mansion3BattleText1
 	db "@"
 
-Mansion3EndBattleText1: ; 522c8 (14:62c8)
+Mansion3EndBattleText1:
 	TX_FAR _Mansion3EndBattleText1
 	db "@"
 
-Mansion3AfterBattleText1: ; 522cd (14:62cd)
+Mansion3AfterBattleText1:
 	TX_FAR _Mansion3AfterBattleText1
 	db "@"
 
-Mansion3BattleText2: ; 522d2 (14:62d2)
+Mansion3BattleText2:
 	TX_FAR _Mansion3BattleText2
 	db "@"
 
-Mansion3EndBattleText2: ; 522d7 (14:62d7)
+Mansion3EndBattleText2:
 	TX_FAR _Mansion3EndBattleText2
 	db "@"
 
-Mansion3AfterBattleText2: ; 522dc (14:62dc)
+Mansion3AfterBattleText2:
 	TX_FAR _Mansion3AfterBattleText2
 	db "@"
 
-Mansion3Text5: ; 522e1 (14:62e1)
+Mansion3Text5:
 	TX_FAR _Mansion3Text5
 	db "@"

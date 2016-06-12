@@ -1,4 +1,4 @@
-UndergroundPathEntranceRoute7CopyObject: ; 5d787 (17:5787)
+UndergroundPathEntranceRoute7CopyObject:
 	db $a ; border block
 
 	db $3 ; warps

@@ -1,4 +1,4 @@
-LoadSAV: ; 735e8 (1c:75e8)
+LoadSAV:
 ;(if carry -> write
 ;"the file data is destroyed")
 	call ClearScreen
@@ -27,11 +27,11 @@ LoadSAV: ; 735e8 (1c:75e8)
 	ld [wSaveFileStatus], a
 	ret
 
-FileDataDestroyedText: ; 7361e (1c:761e)
+FileDataDestroyedText:
 	TX_FAR _FileDataDestroyedText
 	db "@"
 
-LoadSAV0: ; 73623 (1c:7623)
+LoadSAV0:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -78,7 +78,7 @@ LoadSAV0: ; 73623 (1c:7623)
 	and a
 	jp SAVGoodChecksum
 
-LoadSAV1: ; 73690 (1c:7690)
+LoadSAV1:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -98,7 +98,7 @@ LoadSAV1: ; 73690 (1c:7690)
 	and a
 	jp SAVGoodChecksum
 
-LoadSAV2: ; 736bd (1c:76bd)
+LoadSAV2:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -122,22 +122,22 @@ LoadSAV2: ; 736bd (1c:76bd)
 	and a
 	jp SAVGoodChecksum
 
-SAVBadCheckSum: ; 736f7 (1c:76f7)
+SAVBadCheckSum:
 	scf
 
-SAVGoodChecksum: ; 736f8 (1c:76f8)
+SAVGoodChecksum:
 	ld a, $0
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
 
-LoadSAVIgnoreBadCheckSum: ; 73701 (1c:7701)
+LoadSAVIgnoreBadCheckSum:
 ; unused function that loads save data and ignores bad checksums
 	call LoadSAV0
 	call LoadSAV1
 	jp LoadSAV2
 
-SaveSAV: ; 7370a (1c:770a)
+SaveSAV:
 	callba PrintSaveScreenText
 	ld hl,WouldYouLikeToSaveText
 	call SaveSAVConfirm
@@ -173,7 +173,7 @@ SaveSAV: ; 7370a (1c:770a)
 NowSavingString:
 	db "Now saving...@"
 
-SaveSAVConfirm: ; 73768 (1c:7768)
+SaveSAVConfirm:
 	call PrintText
 	coord hl, 0, 7
 	lb bc, 8, 1
@@ -187,15 +187,15 @@ WouldYouLikeToSaveText: ; 0x7377d
 	TX_FAR _WouldYouLikeToSaveText
 	db "@"
 
-GameSavedText: ; 73782 (1c:7782)
+GameSavedText:
 	TX_FAR _GameSavedText
 	db "@"
 
-OlderFileWillBeErasedText: ; 73787 (1c:7787)
+OlderFileWillBeErasedText:
 	TX_FAR _OlderFileWillBeErasedText
 	db "@"
 
-SaveSAVtoSRAM0: ; 7378c (1c:778c)
+SaveSAVtoSRAM0:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -228,7 +228,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld [MBC1SRamEnable], a
 	ret
 
-SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
+SaveSAVtoSRAM1:
 ; stored pokémon
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
@@ -248,7 +248,7 @@ SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 	ld [MBC1SRamEnable], a
 	ret
 
-SaveSAVtoSRAM2: ; 7380f (1c:780f)
+SaveSAVtoSRAM2:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -271,14 +271,14 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld [MBC1SRamEnable], a
 	ret
 
-SaveSAVtoSRAM: ; 73848 (1c:7848)
+SaveSAVtoSRAM:
 	ld a, $2
 	ld [wSaveFileStatus], a
 	call SaveSAVtoSRAM0
 	call SaveSAVtoSRAM1
 	jp SaveSAVtoSRAM2
 
-SAVCheckSum: ; 73856 (1c:7856)
+SAVCheckSum:
 ;Check Sum (result[1 byte] is complemented)
 	ld d, 0
 .loop
@@ -293,7 +293,7 @@ SAVCheckSum: ; 73856 (1c:7856)
 	cpl
 	ret
 
-CalcIndividualBoxCheckSums: ; 73863 (1c:7863)
+CalcIndividualBoxCheckSums:
 	ld hl, sBox1 ; sBox7
 	ld de, sBank2IndividualBoxChecksums ; sBank3IndividualBoxChecksums
 	ld b, NUM_BOXES / 2
@@ -310,7 +310,7 @@ CalcIndividualBoxCheckSums: ; 73863 (1c:7863)
 	jr nz, .loop
 	ret
 
-GetBoxSRAMLocation: ; 7387b (1c:787b)
+GetBoxSRAMLocation:
 ; in: a = box num
 ; out: b = box SRAM bank, hl = pointer to start of box
 	ld hl, BoxSRAMPointerTable
@@ -331,7 +331,7 @@ GetBoxSRAMLocation: ; 7387b (1c:787b)
 	ld l, a
 	ret
 
-BoxSRAMPointerTable: ; 73895 (1c:7895)
+BoxSRAMPointerTable:
 	dw sBox1 ; sBox7
 	dw sBox2 ; sBox8
 	dw sBox3 ; sBox9
@@ -339,7 +339,7 @@ BoxSRAMPointerTable: ; 73895 (1c:7895)
 	dw sBox5 ; sBox11
 	dw sBox6 ; sBox12
 
-ChangeBox:: ; 738a1 (1c:78a1)
+ChangeBox::
 	ld hl, WhenYouChangeBoxText
 	call PrintText
 	call YesNoChoice
@@ -385,11 +385,11 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call WaitForSoundToFinish
 	ret
 
-WhenYouChangeBoxText: ; 73909 (1c:7909)
+WhenYouChangeBoxText:
 	TX_FAR _WhenYouChangeBoxText
 	db "@"
 
-CopyBoxToOrFromSRAM: ; 7390e (1c:790e)
+CopyBoxToOrFromSRAM:
 ; copy an entire box from hl to de with b as the SRAM bank
 	push hl
 	ld a, SRAM_ENABLE
@@ -418,7 +418,7 @@ CopyBoxToOrFromSRAM: ; 7390e (1c:790e)
 	ld [MBC1SRamEnable], a
 	ret
 
-DisplayChangeBoxMenu: ; 7393f (1c:793f)
+DisplayChangeBoxMenu:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, A_BUTTON | B_BUTTON
@@ -489,11 +489,11 @@ DisplayChangeBoxMenu: ; 7393f (1c:793f)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-ChooseABoxText: ; 739d4 (1c:79d4)
+ChooseABoxText:
 	TX_FAR _ChooseABoxText
 	db "@"
 
-BoxNames: ; 739d9 (1c:79d9)
+BoxNames:
 	db   "BOX 1"
 	next "BOX 2"
 	next "BOX 3"
@@ -507,10 +507,10 @@ BoxNames: ; 739d9 (1c:79d9)
 	next "BOX11"
 	next "BOX12@"
 
-BoxNoText: ; 73a21 (1c:7a21)
+BoxNoText:
 	db "BOX No.@"
 
-EmptyAllSRAMBoxes: ; 73a29 (1c:7a29)
+EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the
 ; player changes the box)
 	ld a, SRAM_ENABLE
@@ -528,7 +528,7 @@ EmptyAllSRAMBoxes: ; 73a29 (1c:7a29)
 	ld [MBC1SRamEnable], a
 	ret
 
-EmptySRAMBoxesInBank: ; 73a4b (1c:7a4b)
+EmptySRAMBoxesInBank:
 ; marks every box in the current SRAM bank as empty
 	ld hl, sBox1 ; sBox7
 	call EmptySRAMBox
@@ -549,14 +549,14 @@ EmptySRAMBoxesInBank: ; 73a4b (1c:7a4b)
 	call CalcIndividualBoxCheckSums
 	ret
 
-EmptySRAMBox: ; 73a7f (1c:7a7f)
+EmptySRAMBox:
 	xor a
 	ld [hli], a
 	dec a
 	ld [hl], a
 	ret
 
-GetMonCountsForAllBoxes: ; 73a84 (1c:7a84)
+GetMonCountsForAllBoxes:
 	ld hl, wBoxMonCounts
 	push hl
 	ld a, SRAM_ENABLE
@@ -585,7 +585,7 @@ GetMonCountsForAllBoxes: ; 73a84 (1c:7a84)
 
 	ret
 
-GetMonCountsForBoxesInBank: ; 73ab8 (1c:7ab8)
+GetMonCountsForBoxesInBank:
 	ld a, [sBox1] ; sBox7
 	ld [hli], a
 	ld a, [sBox2] ; sBox8
@@ -600,7 +600,7 @@ GetMonCountsForBoxesInBank: ; 73ab8 (1c:7ab8)
 	ld [hli], a
 	ret
 
-SAVCheckRandomID: ; 73ad1 (1c:7ad1)
+SAVCheckRandomID:
 ;checks if Sav file is the same by checking player's name 1st letter ($a598)
 ; and the two random numbers generated at game beginning
 ;(which are stored at wPlayerID)s
@@ -634,7 +634,7 @@ SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 	ld [MBC1SRamEnable],a
 	ret
 
-SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
+SaveHallOfFameTeams:
 	ld a, [wNumHoFTeams]
 	dec a
 	cp HOF_TEAM_CAPACITY
@@ -658,7 +658,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
-LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
+LoadHallOfFameTeams:
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
 	ld a, [wHoFTeamIndex]
@@ -667,7 +667,7 @@ LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld bc, HOF_TEAM
 	; fallthrough
 
-HallOfFame_Copy: ; 73b51 (1c:7b51)
+HallOfFame_Copy:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -680,7 +680,7 @@ HallOfFame_Copy: ; 73b51 (1c:7b51)
 	ld [MBC1SRamEnable], a
 	ret
 
-ClearSAV: ; 73b6a (1c:7b6a)
+ClearSAV:
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, $1
@@ -698,7 +698,7 @@ ClearSAV: ; 73b6a (1c:7b6a)
 	ld [MBC1SRamEnable], a
 	ret
 
-PadSRAM_FF: ; 73b8f (1c:7b8f)
+PadSRAM_FF:
 	ld [MBC1SRamBank], a
 	ld hl, $a000
 	ld bc, $2000

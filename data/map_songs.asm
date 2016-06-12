@@ -1,4 +1,4 @@
-MapSongBanks: ; c04d (3:404d)
+MapSongBanks:
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ;PALLET_TOWN
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY

@@ -1,4 +1,4 @@
-Music_Celadon_Ch1:: ; b6c7 (2:76c7)
+Music_Celadon_Ch1::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -107,7 +107,7 @@ Music_Celadon_branch_b6d4::
 	loopchannel 0, Music_Celadon_branch_b6d4
 
 
-Music_Celadon_Ch2:: ; b73a (2:773a)
+Music_Celadon_Ch2::
 	duty 3
 	notetype 12, 12, 2
 	octave 4
@@ -226,7 +226,7 @@ Music_Celadon_branch_b74a::
 	loopchannel 0, Music_Celadon_branch_b74a
 
 
-Music_Celadon_Ch3:: ; b7b5 (2:77b5)
+Music_Celadon_Ch3::
 	notetype 12, 1, 3
 	rest 8
 	octave 5

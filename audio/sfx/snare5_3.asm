@@ -1,4 +1,4 @@
-SFX_Snare5_3_Ch1: ; 7c30d (1f:430d)
+SFX_Snare5_3_Ch1:
 	unknownnoise0x20 7, 132, 55
 	unknownnoise0x20 6, 132, 54
 	unknownnoise0x20 5, 131, 53

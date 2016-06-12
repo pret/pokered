@@ -1,4 +1,4 @@
-AttackAnimationPointers: ; 7a07d (1e:607d)
+AttackAnimationPointers:
 	dw PoundAnim
 	dw KarateChopAnim
 	dw DoubleSlapAnim
@@ -209,156 +209,156 @@ AttackAnimationPointers: ; 7a07d (1e:607d)
 ; if first byte >= $D8
 ;	db special_effect_id, sound_id
 ; $FF terminated
-ZigZagScreenAnim: ; 7a213 (1e:6213)
+ZigZagScreenAnim:
 	db SE_WAVY_SCREEN, $FF
 	db $FF
 
-PoundAnim: ; 7a216 (1e:6216)
-StruggleAnim: ; 7a216 (1e:6216)
+PoundAnim:
+StruggleAnim:
 	db $08,$00,$01
 	db $FF
 
-KarateChopAnim: ; 7a21a (1e:621a)
+KarateChopAnim:
 	db $08,$01,$03
 	db $FF
 
-DoubleSlapAnim: ; 7a21e (1e:621e)
+DoubleSlapAnim:
 	db $05,$02,$01
 	db $05,$02,$01
 	db $FF
 
-CometPunchAnim: ; 7a225 (1e:6225)
+CometPunchAnim:
 	db $04,$03,$02
 	db $04,$03,$02
 	db $FF
 
-MegaPunchAnim: ; 7a22c (1e:622c)
+MegaPunchAnim:
 	db $46,$04,$04
 	db $FF
 
-PayDayAnim: ; 7a230 (1e:6230)
+PayDayAnim:
 	db $08,$00,$01
 	db $04,$05,$52
 	db $FF
 
-FirePunchAnim: ; 7a237 (1e:6237)
+FirePunchAnim:
 	db $06,$06,$02
 	db $46,$FF,$11
 	db $FF
 
-IcePunchAnim: ; 7a23e (1e:623e)
+IcePunchAnim:
 	db $06,$07,$02
 	db $10,$FF,$2F
 	db $FF
 
-ThunderPunchAnim: ; 7a245 (1e:6245)
+ThunderPunchAnim:
 	db $06,$08,$02
 	db SE_DARK_SCREEN_PALETTE, $FF
 	db $46,$FF,$2B
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ScratchAnim: ; 7a250 (1e:6250)
+ScratchAnim:
 	db $06,$09,$0F
 	db $FF
 
-VicegripAnim: ; 7a254 (1e:6254)
+VicegripAnim:
 	db $08,$0A,$2A
 	db $FF
 
-GuillotineAnim: ; 7a258 (1e:6258)
+GuillotineAnim:
 	db $06,$0B,$2A
 	db $FF
 
-RazorWindAnim: ; 7a25c (1e:625c)
+RazorWindAnim:
 	db $04,$0C,$16
 	db $FF
 
-SwordsDanceAnim: ; 7a260 (1e:6260)
+SwordsDanceAnim:
 	db $46,$0D,$18
 	db $46,$0D,$18
 	db $46,$0D,$18
 	db $FF
 
-CutAnim: ; 7a26a (1e:626a)
+CutAnim:
 	db SE_DARK_SCREEN_FLASH, $0E
 	db $04,$FF,$16
 	db $FF
 
-GustAnim: ; 7a270 (1e:6270)
+GustAnim:
 	db $46,$0F,$10
 	db $06,$FF,$02
 	db $FF
 
-WingAttackAnim: ; 7a277 (1e:6277)
+WingAttackAnim:
 	db $46,$10,$04
 	db $FF
 
-WhirlwindAnim: ; 7a27b (1e:627b)
+WhirlwindAnim:
 	db $46,$11,$10
 	db SE_SLIDE_ENEMY_MON_OFF, $FF
 	db $FF
 
-FlyAnim: ; 7a281 (1e:6281)
+FlyAnim:
 	db $46,$12,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-BindAnim: ; 7a287 (1e:6287)
+BindAnim:
 	db $04,$13,$23
 	db $04,$13,$23
 	db $FF
 
-SlamAnim: ; 7a28e (1e:628e)
+SlamAnim:
 	db $06,$14,$02
 	db $FF
 
-VineWhipAnim: ; 7a292 (1e:6292)
+VineWhipAnim:
 	db $01,$15,$16
 	db $08,$FF,$01
 	db $FF
 
-StompAnim: ; 7a299 (1e:6299)
+StompAnim:
 	db $48,$16,$05
 	db $FF
 
-DoubleKickAnim: ; 7a29d (1e:629d)
+DoubleKickAnim:
 	db $08,$17,$01
 	db $08,$17,$01
 	db $FF
 
-MegaKickAnim: ; 7a2a4 (1e:62a4)
+MegaKickAnim:
 	db $46,$18,$04
 	db $FF
 
-JumpKickAnim: ; 7a2a8 (1e:62a8)
+JumpKickAnim:
 	db $46,$19,$04
 	db $FF
 
-RollingKickAnim: ; 7a2ac (1e:62ac)
+RollingKickAnim:
 	db SE_DARK_SCREEN_FLASH, $1A
 	db $46,$FF,$04
 	db $FF
 
-SandAttackAnim: ; 7a2b2 (1e:62b2)
+SandAttackAnim:
 	db $46,$1B,$28
 	db $FF
 
-HeatButtAnim: ; 7a2b6 (1e:62b6)
+HeatButtAnim:
 	db $46,$1C,$05
 	db $FF
 
-HornAttackAnim: ; 7a2ba (1e:62ba)
+HornAttackAnim:
 	db $06,$1D,$45
 	db $46,$FF,$05
 	db $FF
 
-FuryAttackAnim: ; 7a2c1 (1e:62c1)
+FuryAttackAnim:
 	db $02,$1E,$46
 	db $02,$FF,$46
 	db $FF
 
-HornDrillAnim: ; 7a2c8 (1e:62c8)
+HornDrillAnim:
 	db $42,$1F,$05
 	db $42,$FF,$05
 	db $42,$FF,$05
@@ -366,35 +366,35 @@ HornDrillAnim: ; 7a2c8 (1e:62c8)
 	db $42,$FF,$05
 	db $FF
 
-TackleAnim: ; 7a2d8 (1e:62d8)
+TackleAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $48
 	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
-BodySlamAnim: ; 7a2dd (1e:62dd)
+BodySlamAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $48
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
-WrapAnim: ; 7a2e6 (1e:62e6)
+WrapAnim:
 	db $04,$22,$23
 	db $04,$22,$23
 	db $04,$22,$23
 	db $FF
 
-TakeDownAnim: ; 7a2f0 (1e:62f0)
+TakeDownAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $48
 	db SE_DARK_SCREEN_FLASH, $23
 	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
-ThrashAnim: ; 7a2f7 (1e:62f7)
+ThrashAnim:
 	db $46,$24,$04
 	db $FF
 
-DoubleEdgeAnim: ; 7a2fb (1e:62fb)
+DoubleEdgeAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $48
 	db $06,$FF,$2D
 	db SE_RESET_SCREEN_PALETTE, $FF
@@ -403,7 +403,7 @@ DoubleEdgeAnim: ; 7a2fb (1e:62fb)
 	db SE_RESET_MON_POSITION, $FF
 	db $FF
 
-TailWhipAnim: ; 7a309 (1e:6309)
+TailWhipAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $84
 	db SE_DELAY_ANIMATION_10, $FF
 	db SE_RESET_MON_POSITION, $84
@@ -413,125 +413,125 @@ TailWhipAnim: ; 7a309 (1e:6309)
 	db SE_RESET_MON_POSITION, $84
 	db $FF
 
-PoisonStingAnim: ; 7a318 (1e:6318)
+PoisonStingAnim:
 	db $06,$27,$00
 	db $FF
 
-TwineedleAnim: ; 7a31c (1e:631c)
+TwineedleAnim:
 	db $05,$28,$01
 	db $05,$28,$01
 	db $FF
 
-PinMissileAnim: ; 7a323 (1e:6323)
+PinMissileAnim:
 	db $03,$29,$01
 	db $FF
 
-LeerAnim: ; 7a327 (1e:6327)
+LeerAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db SE_DARK_SCREEN_FLASH, $2A
 	db SE_DARK_SCREEN_FLASH, $2A
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-BiteAnim: ; 7a330 (1e:6330)
+BiteAnim:
 	db $08,$2B,$02
 	db $FF
 
-GrowlAnim: ; 7a334 (1e:6334)
+GrowlAnim:
 	db $46,$2C,$12
 	db $FF
 
-RoarAnim: ; 7a338 (1e:6338)
+RoarAnim:
 	db $46,$2D,$15
 	db $46,$2D,$15
 	db $46,$2D,$15
 	db $FF
 
-SingAnim: ; 7a342 (1e:6342)
+SingAnim:
 	db $46,$2E,$12
 	db $50,$FF,$40
 	db $50,$FF,$40
 	db $FF
 
-SupersonicAnim: ; 7a34c (1e:634c)
+SupersonicAnim:
 	db $06,$2F,$31
 	db $FF
 
-SonicBoomAnim: ; 7a350 (1e:6350)
+SonicBoomAnim:
 	db $46,$2D,$15
 	db $46,$2D,$15
 	db $46,$0F,$10
 	db $46,$FF,$05
 	db $FF
 
-DisableAnim: ; 7a35d (1e:635d)
+DisableAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db SE_DARK_SCREEN_FLASH, $2A
 	db SE_DARK_SCREEN_FLASH, $2A
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-AcidAnim: ; 7a366 (1e:6366)
+AcidAnim:
 	db $46,$32,$13
 	db $46,$32,$14
 	db $FF
 
-EmberAnim: ; 7a36d (1e:636d)
+EmberAnim:
 	db $46,$33,$11
 	db $FF
 
-FlamethrowerAnim: ; 7a371 (1e:6371)
+FlamethrowerAnim:
 	db $46,$34,$1F
 	db $46,$34,$0C
 	db $46,$34,$0D
 	db $FF
 
-MistAnim: ; 7a37b (1e:637b)
+MistAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-WaterGunAnim: ; 7a382 (1e:6382)
+WaterGunAnim:
 	db $06,$36,$2C
 	db $FF
 
-HydroPumpAnim: ; 7a386 (1e:6386)
+HydroPumpAnim:
 	db $06,$37,$1A
 	db $06,$37,$1A
 	db $FF
 
-SurfAnim: ; 7a38d (1e:638d)
+SurfAnim:
 	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db $06,$37,$1A
 	db $FF
 
-IceBeamAnim: ; 7a393 (1e:6393)
+IceBeamAnim:
 	db $03,$39,$2E
 	db $10,$FF,$2F
 	db $FF
 
-BlizzardAnim: ; 7a39a (1e:639a)
+BlizzardAnim:
 	db $04,$3A,$38
 	db $04,$37,$38
 	db $FF
 
-PsyBeamAnim: ; 7a3a1 (1e:63a1)
+PsyBeamAnim:
 	db $03,$3B,$2E
 	db SE_FLASH_SCREEN_LONG, $FF
 	db $FF
 
-BubbleBeamAnim: ; 7a3a7 (1e:63a7)
+BubbleBeamAnim:
 	db $12,$3C,$35
 	db $FF
 
-AuroraBeamAnim: ; 7a3ab (1e:63ab)
+AuroraBeamAnim:
 	db $03,$3D,$2E
 	db SE_DELAY_ANIMATION_10, $FF
 	db SE_DELAY_ANIMATION_10, $FF
 	db $FF
 
-HyperBeamAnim: ; 7a3b3 (1e:63b3)
+HyperBeamAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db $02,$3E,$2E
@@ -541,33 +541,33 @@ HyperBeamAnim: ; 7a3b3 (1e:63b3)
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-PeckAnim: ; 7a3c4 (1e:63c4)
+PeckAnim:
 	db $08,$3F,$01
 	db $FF
 
-DrillPeckAnim: ; 7a3c8 (1e:63c8)
+DrillPeckAnim:
 	db $46,$40,$04
 	db $FF
 
-SubmissionAnim: ; 7a3cc (1e:63cc)
+SubmissionAnim:
 	db SE_SLIDE_MON_OFF, $41
 	db $06,$FF,$01
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-LowKickAnim: ; 7a3d4 (1e:63d4)
+LowKickAnim:
 	db SE_SLIDE_MON_OFF, $42
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-CounterAnim: ; 7a3dc (1e:63dc)
+CounterAnim:
 	db SE_SLIDE_MON_OFF, $43
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-SeismicTossAnim: ; 7a3e4 (1e:63e4)
+SeismicTossAnim:
 	db SE_BLINK_ENEMY_MON, $FF
 	db $41,$8B,$4E
 	db SE_HIDE_ENEMY_MON_PIC, $FF
@@ -581,20 +581,20 @@ SeismicTossAnim: ; 7a3e4 (1e:63e4)
 	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
-StrengthAnim: ; 7a3fe (1e:63fe)
+StrengthAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $48
 	db SE_RESET_MON_POSITION, $FF
 	db $46,$06,$04
 	db $FF
 
-AbsorbAnim: ; 7a406 (1e:6406)
+AbsorbAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $46
 	db $06,$FF,$21
 	db $06,$FF,$22
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-MegaDrainAnim: ; 7a411 (1e:6411)
+MegaDrainAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $47
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $06,$FF,$21
@@ -603,79 +603,79 @@ MegaDrainAnim: ; 7a411 (1e:6411)
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-LeechSeedAnim: ; 7a420 (1e:6420)
+LeechSeedAnim:
 	db $46,$48,$1B
 	db $55,$4D,$1C
 	db $FF
 
-GrowthAnim: ; 7a427 (1e:6427)
+GrowthAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $49
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-RazorLeafAnim: ; 7a42e (1e:642e)
+RazorLeafAnim:
 	db SE_LEAVES_FALLING, $4A
 	db $41,$80,$44
 	db $01,$0C,$16
 	db $FF
 
-SolarBeamAnim: ; 7a437 (1e:6437)
+SolarBeamAnim:
 	db $06,$4B,$2E
 	db $06,$FF,$01
 	db $FF
 
-PoisonPowderAnim: ; 7a43e (1e:643e)
+PoisonPowderAnim:
 	db $06,$4C,$36
 	db $FF
 
-StunSporeAnim: ; 7a442 (1e:6442)
+StunSporeAnim:
 	db $06,$4D,$36
 	db $FF
 
-SleepPowderAnim: ; 7a446 (1e:6446)
+SleepPowderAnim:
 	db $06,$4E,$36
 	db $FF
 
-PedalDanceAnim: ; 7a44a (1e:644a)
+PedalDanceAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $4F
 	db SE_PETALS_FALLING, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-StringShotAnim: ; 7a451 (1e:6451)
+StringShotAnim:
 	db $08,$50,$37
 	db $FF
 
-DragonRageAnim: ; 7a455 (1e:6455)
+DragonRageAnim:
 	db $46,$51,$1F
 	db $46,$FF,$0C
 	db $46,$FF,$0D
 	db $46,$FF,$0E
 	db $FF
 
-FireSpinAnim: ; 7a462 (1e:6462)
+FireSpinAnim:
 	db $46,$52,$0C
 	db $46,$FF,$0D
 	db $46,$FF,$0E
 	db $FF
 
-ThunderShockAnim: ; 7a46c (1e:646c)
+ThunderShockAnim:
 	db $42,$53,$29
 	db $FF
 
-ThunderBoltAnim: ; 7a470 (1e:6470)
+ThunderBoltAnim:
 	db $41,$54,$29
 	db $41,$54,$29
 	db $FF
 
-ThunderWaveAnim: ; 7a477 (1e:6477)
+ThunderWaveAnim:
 	db $42,$55,$29
 	db $02,$FF,$23
 	db $04,$FF,$23
 	db $FF
 
-ThunderAnim: ; 7a481 (1e:6481)
+ThunderAnim:
 	db SE_DARK_SCREEN_PALETTE, $56
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $46,$FF,$2B
@@ -684,87 +684,87 @@ ThunderAnim: ; 7a481 (1e:6481)
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-RockThrowAnim: ; 7a490 (1e:6490)
+RockThrowAnim:
 	db $04,$57,$30
 	db $FF
 
-EarthquakeAnim: ; 7a494 (1e:6494)
+EarthquakeAnim:
 	db SE_SHAKE_SCREEN, $58
 	db SE_SHAKE_SCREEN, $58
 	db $FF
 
-FissureAnim: ; 7a499 (1e:6499)
+FissureAnim:
 	db SE_DARK_SCREEN_FLASH, $59
 	db SE_SHAKE_SCREEN, $FF
 	db SE_DARK_SCREEN_FLASH, $59
 	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
-DigAnim: ; 7a4a2 (1e:64a2)
+DigAnim:
 	db $46,$5A,$04
 	db SE_SLIDE_MON_UP, $FF
 	db $FF
 
-ToxicAnim: ; 7a4a8 (1e:64a8)
+ToxicAnim:
 	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db $46,$5B,$14
 	db $FF
 
-ConfusionAnim: ; 7a4ae (1e:64ae)
+ConfusionAnim:
 	db SE_FLASH_SCREEN_LONG, $5C
 	db $FF
 
-PsychicAnim: ; 7a4b1 (1e:64b1)
+PsychicAnim:
 	db SE_FLASH_SCREEN_LONG, $5D
 	db SE_WAVY_SCREEN, $FF
 	db $FF
 
-HypnosisAnim: ; 7a4b6 (1e:64b6)
+HypnosisAnim:
 	db SE_FLASH_SCREEN_LONG, $5E
 	db $FF
 
-MeditateAnim: ; 7a4b9 (1e:64b9)
+MeditateAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $5F
 	db $46,$FF,$43
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-AgilityAnim: ; 7a4c3 (1e:64c3)
+AgilityAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $60
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-QuickAttackAnim: ; 7a4c8 (1e:64c8)
+QuickAttackAnim:
 	db SE_SLIDE_MON_OFF, $61
 	db $46,$FF,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-RageAnim: ; 7a4d0 (1e:64d0)
+RageAnim:
 	db $06,$62,$01
 	db $FF
 
-TeleportAnim: ; 7a4d4 (1e:64d4)
+TeleportAnim:
 	db SE_SQUISH_MON_PIC, $63
 	db SE_SHOOT_BALLS_UPWARD, $FF
 	db $FF
 
-NightShadeAnim: ; 7a4d9 (1e:64d9)
+NightShadeAnim:
 	db SE_FLASH_SCREEN_LONG, $5C
 	db SE_WAVY_SCREEN, $FF
 	db $FF
 
-MimicAnim: ; 7a4de (1e:64de)
+MimicAnim:
 	db $46,$65,$21
 	db $46,$65,$22
 	db $FF
 
-ScreechAnim: ; 7a4e5 (1e:64e5)
+ScreechAnim:
 	db $46,$66,$12
 	db $FF
 
-DoubleTeamAnim: ; 7a4e9 (1e:64e9)
+DoubleTeamAnim:
 	db SE_DARK_SCREEN_PALETTE, $FF
 	db SE_DELAY_ANIMATION_10, $FF
 	db SE_DELAY_ANIMATION_10, $FF
@@ -776,28 +776,28 @@ DoubleTeamAnim: ; 7a4e9 (1e:64e9)
 	db $46,$6F,$33
 	db $FF
 
-RecoverAnim: ; 7a4fd (1e:64fd)
+RecoverAnim:
 	db SE_BLINK_MON, $68
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-HardenAnim: ; 7a506 (1e:6506)
+HardenAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $69
 	db $46,$FF,$43
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-MinimizeAnim: ; 7a510 (1e:6510)
+MinimizeAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $6A
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db SE_MINIMIZE_MON, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-SmokeScreenAnim: ; 7a519 (1e:6519)
+SmokeScreenAnim:
 	db $46,$6B,$28
 	db $04,$FF,$0A
 	db SE_DARKEN_MON_PALETTE, $FF
@@ -815,13 +815,13 @@ SmokeScreenAnim: ; 7a519 (1e:6519)
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ConfuseRayAnim: ; 7a53a (1e:653a)
+ConfuseRayAnim:
 	db SE_DARK_SCREEN_PALETTE, $6C
 	db $46,$FF,$3E
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-WithdrawAnim: ; 7a542 (1e:6542)
+WithdrawAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $6E
 	db SE_SLIDE_MON_DOWN, $FF
 	db $06,$FF,$51
@@ -829,47 +829,47 @@ WithdrawAnim: ; 7a542 (1e:6542)
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-DefenseCurlAnim: ; 7a54e (1e:654e)
+DefenseCurlAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $6E
 	db $06,$FF,$43
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-BarrierAnim: ; 7a558 (1e:6558)
+BarrierAnim:
 	db $46,$6F,$33
 	db $46,$6F,$33
 	db $FF
 
-LightScreenAnim: ; 7a55f (1e:655f)
+LightScreenAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db $46,$70,$33
 	db $46,$70,$33
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-HazeAnim: ; 7a56a (1e:656a)
+HazeAnim:
 	db SE_DARKEN_MON_PALETTE, $FF
 	db SE_WATER_DROPLETS_EVERYWHERE, $38
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ReflectAnim: ; 7a571 (1e:6571)
+ReflectAnim:
 	db SE_DARK_SCREEN_PALETTE, $FF
 	db $46,$72,$33
 	db $46,$72,$33
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-FocusEnergyAnim: ; 7a57c (1e:657c)
+FocusEnergyAnim:
 	db SE_SPIRAL_BALLS_INWARD, $73
 	db $FF
 
-BideAnim: ; 7a57f (1e:657f)
+BideAnim:
 	db $46,$74,$04
 	db $FF
 
-MetronomeAnim: ; 7a583 (1e:6583)
+MetronomeAnim:
 	db SE_MOVE_MON_HORIZONTALLY, $84
 	db SE_DELAY_ANIMATION_10, $FF
 	db SE_RESET_MON_POSITION, $84
@@ -879,39 +879,39 @@ MetronomeAnim: ; 7a583 (1e:6583)
 	db SE_RESET_MON_POSITION, $84
 	db $FF
 
-MirrorMoveAnim: ; 7a592 (1e:6592)
+MirrorMoveAnim:
 	db $08,$76,$01
 	db $FF
 
-SelfdestructAnim: ; 7a596 (1e:6596)
+SelfdestructAnim:
 	db $43,$77,$34
 	db $FF
 
-EggBombAnim: ; 7a59a (1e:659a)
+EggBombAnim:
 	db $44,$78,$41
 	db $44,$78,$42
 	db $FF
 
-LickAnim: ; 7a5a1 (1e:65a1)
+LickAnim:
 	db $46,$7B,$14
 	db $FF
 
-SmogAnim: ; 7a5a5 (1e:65a5)
+SmogAnim:
 	db SE_DARKEN_MON_PALETTE, $48
 	db $46,$7A,$19
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-SludgeAnim: ; 7a5ad (1e:65ad)
+SludgeAnim:
 	db $46,$7B,$13
 	db $46,$7B,$14
 	db $FF
 
-BoneClubAnim: ; 7a5b4 (1e:65b4)
+BoneClubAnim:
 	db $08,$7C,$02
 	db $FF
 
-FireBlastAnim: ; 7a5b8 (1e:65b8)
+FireBlastAnim:
 	db $46,$7D,$1F
 	db $46,$FF,$20
 	db $46,$FF,$20
@@ -919,47 +919,47 @@ FireBlastAnim: ; 7a5b8 (1e:65b8)
 	db $46,$FF,$0D
 	db $FF
 
-WaterfallAnim: ; 7a5c8 (1e:65c8)
+WaterfallAnim:
 	db SE_SLIDE_MON_DOWN, $48
 	db $06,$37,$1A
 	db $08,$FF,$02
 	db SE_SLIDE_MON_UP, $FF
 	db $FF
 
-ClampAnim: ; 7a5d3 (1e:65d3)
+ClampAnim:
 	db $08,$7F,$2A
 	db $06,$83,$23
 	db $06,$83,$23
 	db $FF
 
-SwiftAnim: ; 7a5dd (1e:65dd)
+SwiftAnim:
 	db $43,$80,$3F
 	db $FF
 
-SkullBashAnim: ; 7a5e1 (1e:65e1)
+SkullBashAnim:
 	db $46,$81,$05
 	db $FF
 
-SpikeCannonAnim: ; 7a5e5 (1e:65e5)
+SpikeCannonAnim:
 	db $44,$82,$04
 	db $FF
 
-ConstrictAnim: ; 7a5e9 (1e:65e9)
+ConstrictAnim:
 	db $06,$83,$23
 	db $06,$83,$23
 	db $06,$83,$23
 	db $FF
 
-AmnesiaAnim: ; 7a5f3 (1e:65f3)
+AmnesiaAnim:
 	db $08,$84,$25
 	db $08,$84,$25
 	db $FF
 
-KinesisAnim: ; 7a5fa (1e:65fa)
+KinesisAnim:
 	db $08,$85,$01
 	db $FF
 
-SoftboiledAnim: ; 7a5fe (1e:65fe)
+SoftboiledAnim:
 	db SE_SLIDE_MON_HALF_OFF, $48
 	db $08,$86,$4C
 	db SE_LIGHT_SCREEN_PALETTE, $FF
@@ -968,34 +968,34 @@ SoftboiledAnim: ; 7a5fe (1e:65fe)
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-HiJumpKickAnim: ; 7a6 (1e:660c)
+HiJumpKickAnim:
 	db $46,$87,$04
 	db $FF
 
-GlareAnim: ; 7a610 (1e:6610)
+GlareAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db SE_DARK_SCREEN_FLASH, $88
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-DreamEaterAnim: ; 7a619 (1e:6619)
+DreamEaterAnim:
 	db SE_FLASH_SCREEN_LONG, $89
 	db SE_DARK_SCREEN_PALETTE, $89
 	db $08,$89,$02
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-PoisonGasAnim: ; 7a623 (1e:6623)
+PoisonGasAnim:
 	db $46,$8A,$19
 	db $FF
 
-BarrageAnim: ; 7a627 (1e:6627)
+BarrageAnim:
 	db $43,$8B,$41
 	db $05,$FF,$55
 	db $FF
 
-LeechLifeAnim: ; 7a62e (1e:662e)
+LeechLifeAnim:
 	db $08,$8C,$02
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $06,$FF,$21
@@ -1003,264 +1003,264 @@ LeechLifeAnim: ; 7a62e (1e:662e)
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
-LovelyKissAnim: ; 7a63c (1e:663c)
+LovelyKissAnim:
 	db $06,$8D,$12
 	db $FF
 
-SkyAttackAnim: ; 7a640 (1e:6640)
+SkyAttackAnim:
 	db SE_SQUISH_MON_PIC, $8E
 	db SE_SHOOT_BALLS_UPWARD, $FF
 	db $46,$87,$04
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-TransformAnim: ; 7a64a (1e:664a)
+TransformAnim:
 	db $46,$8F,$21
 	db $44,$8F,$22
 	db $08,$FF,$47
 	db SE_TRANSFORM_MON, $FF
 	db $FF
 
-BubbleAnim: ; 7a656 (1e:6656)
+BubbleAnim:
 	db $16,$90,$35
 	db $FF
 
-DizzyPunchAnim: ; 7a65a (1e:665a)
+DizzyPunchAnim:
 	db $06,$91,$17
 	db $06,$91,$17
 	db $06,$91,$17
 	db $06,$02,$02
 	db $FF
 
-SporeAnim: ; 7a667 (1e:6667)
+SporeAnim:
 	db $06,$92,$36
 	db $FF
 
-FlashAnim: ; 7a66b (1e:666b)
+FlashAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $48
 	db SE_DARK_SCREEN_FLASH, $88
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-PsywaveAnim: ; 7a674 (1e:6674)
+PsywaveAnim:
 	db $06,$2F,$31
 	db SE_WAVY_SCREEN, $5C
 	db $FF
 
-SplashAnim: ; 7a67a (1e:667a)
+SplashAnim:
 	db SE_BOUNCE_UP_AND_DOWN, $95
 	db $FF
 
-AcidArmorAnim: ; 7a67d (1e:667d)
+AcidArmorAnim:
 	db SE_SLIDE_MON_DOWN_AND_HIDE, $96
 	db $FF
 
-CrabHammerAnim: ; 7a680 (1e:6680)
+CrabHammerAnim:
 	db $46,$97,$05
 	db $06,$FF,$2A
 	db $FF
 
-ExplosionAnim: ; 7a687 (1e:6687)
+ExplosionAnim:
 	db $43,$98,$34
 	db $FF
 
-FurySwipesAnim: ; 7a68b (1e:668b)
+FurySwipesAnim:
 	db $04,$99,$0F
 	db $FF
 
-BonemerangAnim: ; 7a68f (1e:668f)
+BonemerangAnim:
 	db $06,$9A,$02
 	db $FF
 
-RestAnim: ; 7a693 (1e:6693)
+RestAnim:
 	db $10,$9B,$3A
 	db $10,$9B,$3A
 	db $FF
 
-RockSlideAnim: ; 7a69a (1e:669a)
+RockSlideAnim:
 	db $04,$9C,$1D
 	db $03,$9C,$1E
 	db $46,$9D,$04
 	db $FF
 
-HyperFangAnim: ; 7a6a4 (1e:66a4)
+HyperFangAnim:
 	db $06,$9D,$02
 	db $FF
 
-SharpenAnim: ; 7a6a8 (1e:66a8)
+SharpenAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $9E
 	db $46,$FF,$43
 	db SE_DARK_SCREEN_FLASH, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ConversionAnim: ; 7a6b2 (1e:66b2)
+ConversionAnim:
 	db SE_DARK_SCREEN_FLASH, $9F
 	db $46,$FF,$21
 	db $46,$FF,$22
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
-TriAttackAnim: ; 7a6bd (1e:66bd)
+TriAttackAnim:
 	db SE_DARK_SCREEN_FLASH, $A0
 	db $46,$FF,$4D
 	db SE_DARK_SCREEN_FLASH, $FF
 	db $FF
 
-SuperFangAnim: ; 7a6c5 (1e:66c5)
+SuperFangAnim:
 	db SE_DARK_SCREEN_PALETTE, $48
 	db $46,$A1,$04
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-SlashAnim: ; 7a6cd (1e:66cd)
+SlashAnim:
 	db $06,$A2,$0F
 	db $FF
 
-SubstituteAnim: ; 7a6d1 (1e:66d1)
+SubstituteAnim:
 	db SE_SLIDE_MON_OFF, $A3
 	db $08,$FF,$47
 	db SE_SUBSTITUTE_MON, $FF
 	db $FF
 
-BallTossAnim: ; 7a6d9 (1e:66d9)
+BallTossAnim:
 	db $03,$FF,$06
 	db $FF
 
-GreatTossAnim: ; 7a6dd (1e:66dd)
+GreatTossAnim:
 	db $03,$FF,$07
 	db $FF
 
-UltraTossAnim: ; 7a6e1 (1e:66e1)
+UltraTossAnim:
 	db $02,$FF,$08
 	db $FF
 
-BallShakeAnim: ; 7a6e5 (1e:66e5)
+BallShakeAnim:
 	db $04,$FF,$09
 	db $FF
 
-BallPoofAnim: ; 7a6e9 (1e:66e9)
+BallPoofAnim:
 	db $04,$FF,$0A
 	db $FF
 
-ShowPicAnim: ; 7a6ed (1e:66ed)
+ShowPicAnim:
 	db SE_SHOW_ENEMY_MON_PIC, $FF
 	db $FF
 
-HidePicAnim: ; 7a6f0 (1e:66f0)
+HidePicAnim:
 	db SE_HIDE_ENEMY_MON_PIC, $FF
 	db $FF
 
-EnemyFlashAnim: ; 7a6f3 (1e:66f3)
+EnemyFlashAnim:
 	db SE_SHOW_MON_PIC, $FF
 	db $FF
 
-PlayerFlashAnim: ; 7a6f6 (1e:66f6)
+PlayerFlashAnim:
 	db SE_FLASH_MON_PIC, $FF
 	db $FF
 
-EnemyHUDShakeAnim: ; 7a6f9 (1e:66f9)
+EnemyHUDShakeAnim:
 	db SE_SHAKE_ENEMY_HUD, $FF
 	db $FF
 
-TradeBallDropAnim: ; 7a6fc (1e:66fc)
+TradeBallDropAnim:
 	db $86,$FF,$48
 	db $FF
 
-TradeBallAppear1Anim: ; 7a700 (1e:6700)
+TradeBallAppear1Anim:
 	db $84,$FF,$49
 	db $FF
 
-TradeBallAppear2Anim: ; 7a704 (1e:6704)
+TradeBallAppear2Anim:
 	db $86,$FF,$4A
 	db $FF
 
-TradeBallPoofAnim: ; 7a708 (1e:6708)
+TradeBallPoofAnim:
 	db $86,$FF,$4B
 	db $FF
 
-XStatItemAnim: ; 7a7c0 (1e:670c)
+XStatItemAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ShrinkingSquareAnim: ; 7a713 (1e:6713)
+ShrinkingSquareAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db $46,$FF,$43
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-XStatItemBlackAnim: ; 7a71b (1e:671b)
+XStatItemBlackAnim:
 	db SE_DARKEN_MON_PALETTE, $FF
 	db SE_SPIRAL_BALLS_INWARD, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ShrinkingSquareBlackAnim: ; 7a722 (1e:6722)
+ShrinkingSquareBlackAnim:
 	db SE_DARKEN_MON_PALETTE, $FF
 	db $46,$FF,$43
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-UnusedAnim: ; 7a72a (1e:672a)
+UnusedAnim:
 	db SE_LIGHT_SCREEN_PALETTE, $FF
 	db SE_SHOOT_MANY_BALLS_UPWARD, $FF
 	db SE_RESET_SCREEN_PALETTE, $FF
 	db $FF
 
-ParalyzeAnim: ; 7a731 (1e:6731)
+ParalyzeAnim:
 	db $04,$13,$24
 	db $04,$13,$24
 	db $FF
 
-PoisonAnim: ; 7a738 (1e:6738)
+PoisonAnim:
 	db $08,$13,$27
 	db $08,$13,$27
 	db $FF
 
-SleepPlayerAnim: ; 7a73f (1e:673f)
+SleepPlayerAnim:
 	db $10,$9B,$3A
 	db $10,$9B,$3A
 	db $FF
 
-SleepEnemyAnim: ; 7a746 (1e:6746)
+SleepEnemyAnim:
 	db $10,$9B,$3B
 	db $10,$9B,$3B
 	db $FF
 
-ConfusedPlayerAnim: ; 7a74d (1e:674d)
+ConfusedPlayerAnim:
 	db $08,$84,$25
 	db $08,$84,$25
 	db $FF
 
-ConfusedEnemyAnim: ; 7a754 (1e:6754)
+ConfusedEnemyAnim:
 	db $08,$84,$26
 	db $08,$84,$26
 	db $FF
 
-BallBlockAnim: ; 7a75b (1e:675b)
+BallBlockAnim:
 	db $03,$FF,$0B
 	db $FF
 
-FaintAnim: ; 7a75f (1e:675f)
+FaintAnim:
 	db SE_SLIDE_MON_DOWN, $5A
 	db $FF
 
-ShakeScreenAnim: ; 7a762 (1e:6762)
+ShakeScreenAnim:
 	db SE_SHAKE_SCREEN, $FF
 	db $FF
 
-ThrowRockAnim: ; 7a765 (1e:6765)
+ThrowRockAnim:
 	db $03,$8B,$53
 	db $FF
 
-ThrowBaitAnim: ; 7a769 (1e:6769)
+ThrowBaitAnim:
 	db $03,$8B,$54
 	db $FF
 
-SubanimationPointers: ; 7a76d (1e:676d)
+SubanimationPointers:
 	dw Subanimation00
 	dw Subanimation01
 	dw Subanimation02
@@ -1348,17 +1348,17 @@ SubanimationPointers: ; 7a76d (1e:676d)
 	dw Subanimation54
 	dw Subanimation55
 
-Subanimation04: ; 7a819 (1e:6819)
+Subanimation04:
 	db $43
 	db $02,$1a,$00
 	db $02,$10,$00
 	db $02,$03,$00
 
-Subanimation05: ; 7a823 (1e:6823)
+Subanimation05:
 	db $41
 	db $02,$10,$00
 
-Subanimation08: ; 7a827 (1e:6827)
+Subanimation08:
 	db $0b
 	db $03,$30,$00
 	db $03,$44,$00
@@ -1372,7 +1372,7 @@ Subanimation08: ; 7a827 (1e:6827)
 	db $03,$a1,$00
 	db $03,$34,$00
 
-Subanimation07: ; 7a849 (1e:6849)
+Subanimation07:
 	db $0b
 	db $03,$30,$00
 	db $03,$a2,$00
@@ -1386,7 +1386,7 @@ Subanimation07: ; 7a849 (1e:6849)
 	db $03,$a6,$00
 	db $03,$34,$00
 
-Subanimation06: ; 7a86b (1e:686b)
+Subanimation06:
 	db $0b
 	db $03,$30,$00
 	db $03,$a2,$00
@@ -1400,14 +1400,14 @@ Subanimation06: ; 7a86b (1e:686b)
 	db $03,$a9,$00
 	db $03,$34,$00
 
-Subanimation09: ; 7a88d (1e:688d)
+Subanimation09:
 	db $04
 	db $03,$21,$04
 	db $04,$21,$04
 	db $03,$21,$04
 	db $05,$21,$04
 
-Subanimation0a: ; 7a89a (1e:689a)
+Subanimation0a:
 	db $46
 	db $06,$1b,$00
 	db $07,$1b,$00
@@ -1416,18 +1416,18 @@ Subanimation0a: ; 7a89a (1e:689a)
 	db $0a,$15,$00
 	db $0a,$15,$00
 
-Subanimation0b: ; 7a8ad (1e:68ad)
+Subanimation0b:
 	db $04
 	db $01,$2d,$00
 	db $03,$2f,$00
 	db $03,$35,$00
 	db $03,$4d,$00
 
-Subanimation55: ; 7a8ba (1e:68ba)
+Subanimation55:
 	db $41
 	db $01,$9d,$00
 
-Subanimation11: ; 7a8be (1e:68be)
+Subanimation11:
 	db $4c
 	db $0b,$26,$00
 	db $0c,$26,$00
@@ -1442,7 +1442,7 @@ Subanimation11: ; 7a8be (1e:68be)
 	db $0b,$27,$00
 	db $0c,$27,$00
 
-Subanimation2b: ; 7a8e3 (1e:68e3)
+Subanimation2b:
 	db $4b
 	db $0d,$03,$03
 	db $0e,$03,$03
@@ -1456,7 +1456,7 @@ Subanimation2b: ; 7a8e3 (1e:68e3)
 	db $11,$1b,$00
 	db $11,$1b,$00
 
-Subanimation2c: ; 7a905 (1e:6905)
+Subanimation2c:
 	db $4c
 	db $12,$01,$00
 	db $12,$0f,$00
@@ -1471,7 +1471,7 @@ Subanimation2c: ; 7a905 (1e:6905)
 	db $16,$38,$00
 	db $16,$38,$00
 
-Subanimation12: ; 7a92a (1e:692a)
+Subanimation12:
 	db $69
 	db $17,$30,$00
 	db $17,$39,$00
@@ -1483,35 +1483,35 @@ Subanimation12: ; 7a92a (1e:692a)
 	db $17,$3f,$00
 	db $17,$1f,$00
 
-Subanimation00: ; 7a946 (1e:6946)
+Subanimation00:
 	db $41
 	db $01,$17,$00
 
-Subanimation01: ; 7a94a (1e:694a)
+Subanimation01:
 	db $42
 	db $01,$0f,$00
 	db $01,$1d,$00
 
-Subanimation02: ; 7a951 (1e:6951)
+Subanimation02:
 	db $43
 	db $01,$12,$00
 	db $01,$15,$00
 	db $01,$1c,$00
 
-Subanimation03: ; 7a95b (1e:695b)
+Subanimation03:
 	db $44
 	db $01,$0b,$00
 	db $01,$11,$00
 	db $01,$18,$00
 	db $01,$1d,$00
 
-Subanimation0c: ; 7a968 (1e:6968)
+Subanimation0c:
 	db $43
 	db $0c,$20,$00
 	db $0c,$21,$00
 	db $0c,$23,$00
 
-Subanimation0d: ; 7a972 (1e:6972)
+Subanimation0d:
 	db $46
 	db $0c,$20,$02
 	db $0c,$15,$00
@@ -1520,7 +1520,7 @@ Subanimation0d: ; 7a972 (1e:6972)
 	db $0c,$23,$02
 	db $0c,$19,$00
 
-Subanimation0e: ; 7a985 (1e:6985)
+Subanimation0e:
 	db $49
 	db $0c,$20,$02
 	db $0c,$15,$02
@@ -1532,7 +1532,7 @@ Subanimation0e: ; 7a985 (1e:6985)
 	db $0c,$19,$02
 	db $0c,$0c,$00
 
-Subanimation1f: ; 7a9a1 (1e:69a1)
+Subanimation1f:
 	db $85
 	db $0c,$30,$03
 	db $0c,$40,$03
@@ -1540,7 +1540,7 @@ Subanimation1f: ; 7a9a1 (1e:69a1)
 	db $0c,$42,$03
 	db $0c,$21,$00
 
-Subanimation2e: ; 7a9b1 (1e:69b1)
+Subanimation2e:
 	db $2e
 	db $18,$43,$02
 	db $75,$52,$04
@@ -1557,14 +1557,14 @@ Subanimation2e: ; 7a9b1 (1e:69b1)
 	db $1e,$43,$02
 	db $75,$1b,$00
 
-Subanimation2f: ; 7a9dc (1e:69dc)
+Subanimation2f:
 	db $44
 	db $1f,$24,$00
 	db $20,$20,$00
 	db $21,$1a,$00
 	db $22,$15,$00
 
-Subanimation30: ; 7a9e9 (1e:69e9)
+Subanimation30:
 	db $52
 	db $23,$00,$02
 	db $23,$02,$02
@@ -1585,7 +1585,7 @@ Subanimation30: ; 7a9e9 (1e:69e9)
 	db $24,$28,$00
 	db $24,$28,$00
 
-Subanimation0f: ; 7aa20 (1e:6a20)
+Subanimation0f:
 	db $4c
 	db $26,$0e,$02
 	db $26,$16,$02
@@ -1600,7 +1600,7 @@ Subanimation0f: ; 7aa20 (1e:6a20)
 	db $29,$16,$02
 	db $29,$1c,$00
 
-Subanimation16: ; 7aa45 (1e:6a45)
+Subanimation16:
 	db $4c
 	db $2a,$05,$00
 	db $2b,$05,$02
@@ -1615,7 +1615,7 @@ Subanimation16: ; 7aa45 (1e:6a45)
 	db $2c,$00,$02
 	db $2c,$00,$00
 
-Subanimation10: ; 7aa6a (1e:6a6a)
+Subanimation10:
 	db $88
 	db $2d,$44,$00
 	db $2e,$45,$00
@@ -1626,7 +1626,7 @@ Subanimation10: ; 7aa6a (1e:6a6a)
 	db $2d,$2f,$00
 	db $2e,$1a,$00
 
-Subanimation31: ; 7aa83 (1e:6a83)
+Subanimation31:
 	db $2a
 	db $2f,$46,$00
 	db $2f,$4a,$00
@@ -1639,7 +1639,7 @@ Subanimation31: ; 7aa83 (1e:6a83)
 	db $2f,$2e,$00
 	db $2f,$51,$00
 
-Subanimation13: ; 7aaa2 (1e:6aa2)
+Subanimation13:
 	db $86
 	db $30,$31,$00
 	db $30,$32,$00
@@ -1648,7 +1648,7 @@ Subanimation13: ; 7aaa2 (1e:6aa2)
 	db $30,$0f,$00
 	db $30,$10,$00
 
-Subanimation14: ; 7aab5 (1e:6ab5)
+Subanimation14:
 	db $49
 	db $30,$10,$00
 	db $30,$10,$03
@@ -1660,7 +1660,7 @@ Subanimation14: ; 7aab5 (1e:6ab5)
 	db $31,$22,$04
 	db $31,$27,$00
 
-Subanimation41: ; 7aad1 (1e:6ad1)
+Subanimation41:
 	db $85
 	db $03,$31,$00
 	db $03,$32,$00
@@ -1668,32 +1668,32 @@ Subanimation41: ; 7aad1 (1e:6ad1)
 	db $03,$0e,$00
 	db $03,$10,$00
 
-Subanimation42: ; 7aae1 (1e:6ae1)
+Subanimation42:
 	db $43
 	db $48,$08,$00
 	db $49,$08,$00
 	db $5a,$08,$00
 
-Subanimation15: ; 7aaeb (1e:6aeb)
+Subanimation15:
 	db $22
 	db $35,$52,$00
 	db $35,$53,$00
 
-Subanimation17: ; 7aaf2 (1e:6af2)
+Subanimation17:
 	db $44
 	db $36,$54,$00
 	db $36,$55,$00
 	db $37,$56,$00
 	db $37,$57,$00
 
-Subanimation18: ; 7aaff (1e:6aff)
+Subanimation18:
 	db $a4
 	db $36,$54,$00
 	db $36,$55,$00
 	db $37,$56,$00
 	db $37,$57,$00
 
-Subanimation40: ; 7ab0c (1e:6b0c)
+Subanimation40:
 	db $46
 	db $17,$54,$00
 	db $17,$55,$00
@@ -1702,7 +1702,7 @@ Subanimation40: ; 7ab0c (1e:6b0c)
 	db $17,$57,$00
 	db $17,$13,$00
 
-Subanimation19: ; 7ab1f (1e:6b1f)
+Subanimation19:
 	db $8c
 	db $38,$31,$00
 	db $39,$31,$00
@@ -1717,7 +1717,7 @@ Subanimation19: ; 7ab1f (1e:6b1f)
 	db $38,$10,$00
 	db $39,$10,$00
 
-Subanimation1a: ; 7ab44 (1e:6b44)
+Subanimation1a:
 	db $50
 	db $3a,$08,$00
 	db $3b,$08,$00
@@ -1736,20 +1736,20 @@ Subanimation1a: ; 7ab44 (1e:6b44)
 	db $3e,$0b,$00
 	db $3f,$0b,$00
 
-Subanimation1b: ; 7ab75 (1e:6b75)
+Subanimation1b:
 	db $84
 	db $40,$31,$00
 	db $40,$32,$00
 	db $40,$92,$00
 	db $40,$15,$00
 
-Subanimation1c: ; 7ab82 (1e:6b82)
+Subanimation1c:
 	db $43
 	db $41,$58,$00
 	db $41,$59,$00
 	db $41,$21,$00
 
-Subanimation1d: ; 7ab8c (1e:6b8c)
+Subanimation1d:
 	db $af
 	db $24,$9a,$00
 	db $23,$1b,$02
@@ -1767,22 +1767,22 @@ Subanimation1d: ; 7ab8c (1e:6b8c)
 	db $25,$62,$04
 	db $25,$99,$03
 
-Subanimation1e: ; 7abba (1e:6bba)
+Subanimation1e:
 	db $01
 	db $25,$75,$00
 
-Subanimation20: ; 7abbe (1e:6bbe)
+Subanimation20:
 	db $42
 	db $42,$07,$00
 	db $43,$07,$00
 
-Subanimation21: ; 7abc5 (1e:6bc5)
+Subanimation21:
 	db $43
 	db $44,$00,$00
 	db $45,$08,$00
 	db $46,$10,$02
 
-Subanimation22: ; 7abcf (1e:6bcf)
+Subanimation22:
 	db $8b
 	db $47,$10,$00
 	db $47,$56,$00
@@ -1796,7 +1796,7 @@ Subanimation22: ; 7abcf (1e:6bcf)
 	db $47,$89,$00
 	db $47,$b0,$00
 
-Subanimation2d: ; 7abf1 (1e:6bf1)
+Subanimation2d:
 	db $66
 	db $44,$64,$00
 	db $45,$65,$00
@@ -1805,15 +1805,15 @@ Subanimation2d: ; 7abf1 (1e:6bf1)
 	db $47,$66,$00
 	db $47,$66,$00
 
-Subanimation39: ; 7ac04 (1e:6c04)
+Subanimation39:
 	db $61
 	db $47,$67,$00
 
-Subanimation4e: ; 7ac08 (1e:6c08)
+Subanimation4e:
 	db $41
 	db $71,$0f,$03
 
-Subanimation4f: ; 7ac0c (1e:6c0c)
+Subanimation4f:
 	db $47
 	db $71,$0f,$00
 	db $71,$08,$00
@@ -1823,7 +1823,7 @@ Subanimation4f: ; 7ac0c (1e:6c0c)
 	db $73,$95,$00
 	db $74,$95,$00
 
-Subanimation50: ; 7ac22 (1e:6c22)
+Subanimation50:
 	db $48
 	db $74,$95,$00
 	db $73,$95,$00
@@ -1834,7 +1834,7 @@ Subanimation50: ; 7ac22 (1e:6c22)
 	db $71,$0f,$00
 	db $71,$16,$00
 
-Subanimation29: ; 7ac3b (1e:6c3b)
+Subanimation29:
 	db $5d
 	db $48,$0f,$00
 	db $4a,$68,$03
@@ -1866,63 +1866,63 @@ Subanimation29: ; 7ac3b (1e:6c3b)
 	db $4d,$2a,$03
 	db $49,$6b,$00
 
-Subanimation2a: ; 7ac93 (1e:6c93)
+Subanimation2a:
 	db $44
 	db $4e,$2b,$00
 	db $4f,$2b,$00
 	db $50,$2b,$00
 	db $50,$2b,$00
 
-Subanimation23: ; 7aca0 (1e:6ca0)
+Subanimation23:
 	db $42
 	db $51,$2d,$00
 	db $51,$6e,$00
 
-Subanimation24: ; 7aca7 (1e:6ca7)
+Subanimation24:
 	db $a2
 	db $51,$2d,$00
 	db $51,$6e,$00
 
-Subanimation25: ; 7acae (1e:6cae)
+Subanimation25:
 	db $62
 	db $52,$71,$00
 	db $52,$72,$00
 
-Subanimation26: ; 7acb5 (1e:6cb5)
+Subanimation26:
 	db $02
 	db $52,$01,$00
 	db $52,$2c,$00
 
-Subanimation3a: ; 7acbc (1e:6cbc)
+Subanimation3a:
 	db $63
 	db $53,$71,$00
 	db $53,$7f,$00
 	db $53,$81,$00
 
-Subanimation3b: ; 7acc6 (1e:6cc6)
+Subanimation3b:
 	db $03
 	db $53,$01,$00
 	db $53,$15,$00
 	db $53,$2c,$00
 
-Subanimation27: ; 7acd0 (1e:6cd0)
+Subanimation27:
 	db $a2
 	db $54,$01,$00
 	db $54,$2c,$00
 
-Subanimation28: ; 7acd7 (1e:6cd7)
+Subanimation28:
 	db $23
 	db $55,$73,$03
 	db $56,$73,$03
 	db $57,$73,$00
 
-Subanimation32: ; 7ace1 (1e:6ce1)
+Subanimation32:
 	db $63
 	db $47,$74,$00
 	db $47,$43,$00
 	db $47,$75,$00
 
-Subanimation33: ; 7aceb (1e:6ceb)
+Subanimation33:
 	db $26
 	db $58,$76,$00
 	db $34,$76,$00
@@ -1931,7 +1931,7 @@ Subanimation33: ; 7aceb (1e:6ceb)
 	db $58,$76,$00
 	db $34,$76,$00
 
-Subanimation3c: ; 7acfe (1e:6cfe)
+Subanimation3c:
 	db $67
 	db $59,$79,$03
 	db $59,$7b,$03
@@ -1941,7 +1941,7 @@ Subanimation3c: ; 7acfe (1e:6cfe)
 	db $59,$7c,$03
 	db $59,$76,$00
 
-Subanimation3d: ; 7ad14 (1e:6d14)
+Subanimation3d:
 	db $08
 	db $3a,$4d,$00
 	db $3b,$4d,$00
@@ -1952,7 +1952,7 @@ Subanimation3d: ; 7ad14 (1e:6d14)
 	db $3e,$4d,$00
 	db $3f,$4d,$00
 
-Subanimation34: ; 7ad2d (1e:6d2d)
+Subanimation34:
 	db $35
 	db $48,$7d,$00
 	db $49,$7d,$00
@@ -1976,14 +1976,14 @@ Subanimation34: ; 7ad2d (1e:6d2d)
 	db $49,$82,$00
 	db $5a,$82,$00
 
-Subanimation35: ; 7ad6d (1e:6d6d)
+Subanimation35:
 	db $24
 	db $5b,$83,$03
 	db $5c,$84,$03
 	db $5d,$85,$03
 	db $5e,$09,$00
 
-Subanimation36: ; 7ad7a (1e:6d7a)
+Subanimation36:
 	db $48
 	db $5f,$2a,$00
 	db $5f,$00,$00
@@ -1994,7 +1994,7 @@ Subanimation36: ; 7ad7a (1e:6d7a)
 	db $62,$2a,$00
 	db $62,$00,$00
 
-Subanimation37: ; 7ad93 (1e:6d93)
+Subanimation37:
 	db $2a
 	db $63,$89,$00
 	db $64,$75,$00
@@ -2007,7 +2007,7 @@ Subanimation37: ; 7ad93 (1e:6d93)
 	db $65,$88,$00
 	db $65,$1a,$00
 
-Subanimation38: ; 7adb2 (1e:6db2)
+Subanimation38:
 	db $50
 	db $66,$8a,$00
 	db $66,$33,$00
@@ -2026,7 +2026,7 @@ Subanimation38: ; 7adb2 (1e:6db2)
 	db $66,$1e,$04
 	db $67,$29,$00
 
-Subanimation3e: ; 7ade3 (1e:6de3)
+Subanimation3e:
 	db $92
 	db $02,$31,$00
 	db $34,$31,$00
@@ -2047,7 +2047,7 @@ Subanimation3e: ; 7ade3 (1e:6de3)
 	db $34,$10,$00
 	db $02,$10,$00
 
-Subanimation3f: ; 7ae1a (1e:6e1a)
+Subanimation3f:
 	db $72
 	db $68,$4b,$00
 	db $68,$8c,$00
@@ -2068,7 +2068,7 @@ Subanimation3f: ; 7ae1a (1e:6e1a)
 	db $68,$23,$00
 	db $68,$1f,$00
 
-Subanimation44: ; 7ae51 (1e:6e51)
+Subanimation44:
 	db $2c
 	db $69,$4b,$00
 	db $69,$8c,$00
@@ -2083,20 +2083,20 @@ Subanimation44: ; 7ae51 (1e:6e51)
 	db $69,$0c,$00
 	db $69,$06,$00
 
-Subanimation43: ; 7ae76 (1e:6e76)
+Subanimation43:
 	db $a3
 	db $6a,$07,$00
 	db $6b,$0f,$00
 	db $6c,$17,$00
 
-Subanimation45: ; 7ae80 (1e:6e80)
+Subanimation45:
 	db $24
 	db $6d,$8b,$00
 	db $6d,$84,$00
 	db $6d,$63,$00
 	db $6d,$8c,$00
 
-Subanimation46: ; 7ae8d (1e:6e8d)
+Subanimation46:
 	db $26
 	db $6d,$8b,$00
 	db $6d,$84,$00
@@ -2105,13 +2105,13 @@ Subanimation46: ; 7ae8d (1e:6e8d)
 	db $6d,$0a,$00
 	db $6d,$89,$00
 
-Subanimation47: ; 7aea0 (1e:6ea0)
+Subanimation47:
 	db $23
 	db $06,$82,$00
 	db $07,$82,$00
 	db $08,$96,$00
 
-Subanimation48: ; 7aeaa (1e:6eaa)
+Subanimation48:
 	db $06
 	db $03,$41,$04
 	db $03,$48,$04
@@ -2120,24 +2120,24 @@ Subanimation48: ; 7aeaa (1e:6eaa)
 	db $05,$48,$04
 	db $03,$48,$03
 
-Subanimation49: ; 7aebd (1e:6ebd)
+Subanimation49:
 	db $04
 	db $04,$48,$04
 	db $03,$48,$04
 	db $05,$48,$04
 	db $03,$48,$03
 
-Subanimation4a: ; 7aeca (1e:6eca)
+Subanimation4a:
 	db $01
 	db $04,$84,$03
 
-Subanimation4b: ; 7aece (1e:6ece)
+Subanimation4b:
 	db $03
 	db $06,$72,$00
 	db $07,$72,$00
 	db $08,$72,$00
 
-Subanimation4c: ; 7aed8 (1e:6ed8)
+Subanimation4c:
 	db $68
 	db $6f,$30,$00
 	db $6e,$30,$00
@@ -2148,7 +2148,7 @@ Subanimation4c: ; 7aed8 (1e:6ed8)
 	db $70,$30,$00
 	db $6e,$30,$00
 
-Subanimation4d: ; 7aef1 (1e:6ef1)
+Subanimation4d:
 	db $26
 	db $32,$4b,$00
 	db $33,$4f,$00
@@ -2157,7 +2157,7 @@ Subanimation4d: ; 7aef1 (1e:6ef1)
 	db $32,$19,$00
 	db $33,$0d,$00
 
-Subanimation51: ; 7af04 (1e:6f04)
+Subanimation51:
 	db $a6
 	db $76,$1b,$00
 	db $34,$1b,$00
@@ -2166,7 +2166,7 @@ Subanimation51: ; 7af04 (1e:6f04)
 	db $76,$1b,$00
 	db $34,$1b,$00
 
-Subanimation52: ; 7af17 (1e:6f17)
+Subanimation52:
 	db $47
 	db $77,$25,$00
 	db $77,$9b,$00
@@ -2176,7 +2176,7 @@ Subanimation52: ; 7af17 (1e:6f17)
 	db $77,$50,$00
 	db $77,$8c,$00
 
-Subanimation53: ; 7af2d (1e:6f2d)
+Subanimation53:
 	db $0c
 	db $78,$30,$00
 	db $78,$a2,$00
@@ -2191,7 +2191,7 @@ Subanimation53: ; 7af2d (1e:6f2d)
 	db $78,$34,$00
 	db $01,$9e,$00
 
-Subanimation54: ; 7af52 (1e:6f52)
+Subanimation54:
 	db $0b
 	db $79,$30,$00
 	db $79,$a2,$00
@@ -2205,7 +2205,7 @@ Subanimation54: ; 7af52 (1e:6f52)
 	db $79,$a9,$00
 	db $79,$34,$00
 
-FrameBlockPointers: ; 7af74 (1e:6f74)
+FrameBlockPointers:
 	dw FrameBlock00
 	dw FrameBlock01
 	dw FrameBlock02
@@ -2337,7 +2337,7 @@ FrameBlockPointers: ; 7af74 (1e:6f74)
 ; second byte = x offset
 ; third byte = tile id (it's actually tile id - $31)
 ; fourth byte = tile properties (xflip/yflip/etc.)
-FrameBlock01: ; 7b068 (1e:7068)
+FrameBlock01:
 	db $09
 	db $00,$00,$2c,$00
 	db $00,$08,$2d,$00
@@ -2349,7 +2349,7 @@ FrameBlock01: ; 7b068 (1e:7068)
 	db $10,$08,$2d,$40
 	db $10,$10,$2c,$60
 
-FrameBlock02: ; 7b08d (1e:708d)
+FrameBlock02:
 	db $10
 	db $00,$00,$20,$00
 	db $00,$08,$21,$00
@@ -2368,28 +2368,28 @@ FrameBlock02: ; 7b08d (1e:708d)
 	db $18,$10,$21,$60
 	db $18,$18,$20,$60
 
-FrameBlock03: ; 7b0ce (1e:70ce)
+FrameBlock03:
 	db $04
 	db $00,$00,$02,$00
 	db $00,$08,$02,$20
 	db $08,$00,$12,$00
 	db $08,$08,$12,$20
 
-FrameBlock04: ; 7b0df (1e:70df)
+FrameBlock04:
 	db $04
 	db $00,$00,$06,$00
 	db $00,$08,$07,$00
 	db $08,$00,$16,$00
 	db $08,$08,$17,$00
 
-FrameBlock05: ; 7b0f0 (1e:70f0)
+FrameBlock05:
 	db $04
 	db $00,$00,$07,$20
 	db $00,$08,$06,$20
 	db $08,$00,$17,$20
 	db $08,$08,$16,$20
 
-FrameBlock06: ; 7b101 (1e:7101)
+FrameBlock06:
 	db $0c
 	db $00,$08,$23,$00
 	db $08,$00,$32,$00
@@ -2404,7 +2404,7 @@ FrameBlock06: ; 7b101 (1e:7101)
 	db $10,$18,$32,$60
 	db $18,$10,$23,$60
 
-FrameBlock07: ; 7b132 (1e:7132)
+FrameBlock07:
 	db $10
 	db $00,$00,$20,$00
 	db $00,$08,$21,$00
@@ -2423,7 +2423,7 @@ FrameBlock07: ; 7b132 (1e:7132)
 	db $18,$10,$21,$60
 	db $18,$18,$20,$60
 
-FrameBlock08: ; 7b173 (1e:7173)
+FrameBlock08:
 	db $10
 	db $00,$00,$20,$00
 	db $00,$08,$21,$00
@@ -2442,7 +2442,7 @@ FrameBlock08: ; 7b173 (1e:7173)
 	db $20,$18,$21,$60
 	db $20,$20,$20,$60
 
-FrameBlock09: ; 7b1b4 (1e:71b4)
+FrameBlock09:
 	db $0c
 	db $00,$00,$24,$00
 	db $00,$08,$25,$00
@@ -2457,7 +2457,7 @@ FrameBlock09: ; 7b1b4 (1e:71b4)
 	db $20,$18,$25,$60
 	db $20,$20,$24,$60
 
-FrameBlock0a: ; 7b1e5 (1e:71e5)
+FrameBlock0a:
 	db $0c
 	db $00,$00,$24,$00
 	db $00,$08,$25,$00
@@ -2472,21 +2472,21 @@ FrameBlock0a: ; 7b1e5 (1e:71e5)
 	db $28,$20,$25,$60
 	db $28,$28,$24,$60
 
-FrameBlock0b: ; 7b216 (1e:7216)
+FrameBlock0b:
 	db $04
 	db $00,$00,$05,$00
 	db $00,$08,$05,$20
 	db $08,$00,$15,$00
 	db $08,$08,$15,$20
 
-FrameBlock0c: ; 7b227 (1e:7227)
+FrameBlock0c:
 	db $04
 	db $00,$00,$04,$00
 	db $00,$08,$04,$20
 	db $08,$00,$14,$00
 	db $08,$08,$14,$20
 
-FrameBlock0d: ; 7b238 (1e:7238)
+FrameBlock0d:
 	db $08
 	db $00,$00,$0c,$00
 	db $00,$08,$0d,$00
@@ -2497,21 +2497,21 @@ FrameBlock0d: ; 7b238 (1e:7238)
 	db $18,$00,$0d,$60
 	db $18,$08,$0c,$60
 
-FrameBlock0e: ; 7b259 (1e:7259)
+FrameBlock0e:
 	db $04
 	db $20,$00,$0c,$00
 	db $20,$08,$0d,$00
 	db $28,$00,$1c,$00
 	db $28,$08,$1d,$00
 
-FrameBlock0f: ; 7b26a (1e:726a)
+FrameBlock0f:
 	db $04
 	db $30,$00,$1d,$60
 	db $30,$08,$1c,$60
 	db $38,$00,$0d,$60
 	db $38,$08,$0c,$60
 
-FrameBlock10: ; 7b27b (1e:727b)
+FrameBlock10:
 	db $08
 	db $00,$00,$0e,$00
 	db $00,$08,$0f,$00
@@ -2522,7 +2522,7 @@ FrameBlock10: ; 7b27b (1e:727b)
 	db $08,$10,$1f,$20
 	db $08,$18,$1e,$20
 
-FrameBlock11: ; 7b29c (1e:729c)
+FrameBlock11:
 	db $08
 	db $00,$00,$0e,$00
 	db $00,$08,$0f,$00
@@ -2533,20 +2533,20 @@ FrameBlock11: ; 7b29c (1e:729c)
 	db $08,$20,$1f,$20
 	db $08,$28,$1e,$20
 
-FrameBlock12: ; 7b2bd (1e:72bd)
+FrameBlock12:
 	db $03
 	db $00,$00,$37,$00
 	db $08,$10,$37,$00
 	db $00,$20,$37,$00
 
-FrameBlock13: ; 7b2ca (1e:72ca)
+FrameBlock13:
 	db $04
 	db $00,$00,$36,$00
 	db $00,$08,$36,$20
 	db $08,$00,$36,$40
 	db $08,$08,$36,$60
 
-FrameBlock14: ; 7b2db (1e:72db)
+FrameBlock14:
 	db $08
 	db $00,$10,$28,$00
 	db $00,$18,$28,$20
@@ -2557,7 +2557,7 @@ FrameBlock14: ; 7b2db (1e:72db)
 	db $08,$20,$36,$40
 	db $08,$28,$36,$60
 
-FrameBlock15: ; 7b2fc (1e:72fc)
+FrameBlock15:
 	db $0c
 	db $00,$00,$28,$00
 	db $00,$08,$28,$20
@@ -2572,7 +2572,7 @@ FrameBlock15: ; 7b2fc (1e:72fc)
 	db $08,$20,$38,$00
 	db $08,$28,$38,$20
 
-FrameBlock16: ; 7b32d (1e:732d)
+FrameBlock16:
 	db $08
 	db $00,$00,$29,$00
 	db $00,$08,$29,$20
@@ -2583,60 +2583,60 @@ FrameBlock16: ; 7b32d (1e:732d)
 	db $08,$20,$39,$00
 	db $08,$28,$39,$20
 
-FrameBlock17: ; 7b34e (1e:734e)
+FrameBlock17:
 	db $04
 	db $00,$00,$08,$00
 	db $00,$08,$09,$00
 	db $08,$00,$18,$00
 	db $08,$08,$19,$00
 
-FrameBlock18: ; 7b35f (1e:735f)
+FrameBlock18:
 	db $01
 	db $18,$00,$45,$60
 
-FrameBlock19: ; 7b364 (1e:7364)
+FrameBlock19:
 	db $02
 	db $18,$08,$45,$00
 	db $10,$08,$46,$60
 
-FrameBlock1a: ; 7b36d (1e:736d)
+FrameBlock1a:
 	db $02
 	db $10,$10,$45,$60
 	db $18,$10,$46,$00
 
-FrameBlock1b: ; 7b376 (1e:7376)
+FrameBlock1b:
 	db $02
 	db $10,$18,$45,$00
 	db $08,$18,$46,$60
 
-FrameBlock1c: ; 7b37f (1e:737f)
+FrameBlock1c:
 	db $02
 	db $08,$20,$45,$60
 	db $10,$20,$46,$00
 
-FrameBlock1d: ; 7b388 (1e:7388)
+FrameBlock1d:
 	db $02
 	db $08,$28,$45,$00
 	db $00,$28,$46,$60
 
-FrameBlock1e: ; 7b391 (1e:7391)
+FrameBlock1e:
 	db $02
 	db $00,$30,$45,$60
 	db $08,$30,$46,$00
 
-FrameBlock75: ; 7b39a (1e:739a)
+FrameBlock75:
 	db $04
 	db $00,$00,$43,$00
 	db $00,$08,$43,$20
 	db $08,$00,$22,$00
 	db $08,$08,$43,$60
 
-FrameBlock1f: ; 7b3ab (1e:73ab)
+FrameBlock1f:
 	db $02
 	db $00,$00,$03,$00
 	db $00,$30,$03,$20
 
-FrameBlock20: ; 7b3b4 (1e:73b4)
+FrameBlock20:
 	db $06
 	db $00,$00,$03,$00
 	db $00,$30,$03,$20
@@ -2645,7 +2645,7 @@ FrameBlock20: ; 7b3b4 (1e:73b4)
 	db $08,$00,$13,$00
 	db $08,$30,$13,$20
 
-FrameBlock21: ; 7b3cd (1e:73cd)
+FrameBlock21:
 	db $0c
 	db $00,$00,$03,$00
 	db $00,$30,$03,$20
@@ -2660,7 +2660,7 @@ FrameBlock21: ; 7b3cd (1e:73cd)
 	db $10,$00,$03,$00
 	db $10,$30,$03,$20
 
-FrameBlock22: ; 7b3fe (1e:73fe)
+FrameBlock22:
 	db $13
 	db $00,$00,$03,$00
 	db $08,$00,$13,$00
@@ -2682,19 +2682,19 @@ FrameBlock22: ; 7b3fe (1e:73fe)
 	db $10,$30,$03,$20
 	db $18,$30,$13,$20
 
-FrameBlock23: ; 7b44b (1e:744b)
+FrameBlock23:
 	db $04
 	db $00,$00,$0a,$00
 	db $00,$08,$0b,$00
 	db $08,$00,$1a,$00
 	db $08,$08,$1b,$00
 
-FrameBlock24: ; 7b45c (1e:745c)
+FrameBlock24:
 	db $02
 	db $08,$00,$0a,$00
 	db $08,$08,$0b,$00
 
-FrameBlock25: ; 7b465 (1e:7465)
+FrameBlock25:
 	db $0c
 	db $10,$00,$0a,$00
 	db $10,$08,$0b,$00
@@ -2709,14 +2709,14 @@ FrameBlock25: ; 7b465 (1e:7465)
 	db $10,$20,$1a,$00
 	db $10,$28,$1b,$00
 
-FrameBlock26: ; 7b496 (1e:7496)
+FrameBlock26:
 	db $04
 	db $00,$10,$44,$00
 	db $00,$18,$44,$20
 	db $08,$10,$44,$40
 	db $08,$18,$44,$60
 
-FrameBlock27: ; 7b4a7 (1e:74a7)
+FrameBlock27:
 	db $05
 	db $08,$08,$44,$00
 	db $08,$10,$44,$20
@@ -2724,7 +2724,7 @@ FrameBlock27: ; 7b4a7 (1e:74a7)
 	db $10,$10,$44,$60
 	db $00,$18,$47,$00
 
-FrameBlock28: ; 7b4bc (1e:74bc)
+FrameBlock28:
 	db $06
 	db $10,$00,$44,$00
 	db $10,$08,$44,$20
@@ -2733,30 +2733,30 @@ FrameBlock28: ; 7b4bc (1e:74bc)
 	db $08,$10,$47,$00
 	db $02,$16,$47,$00
 
-FrameBlock29: ; 7b4d5 (1e:74d5)
+FrameBlock29:
 	db $04
 	db $18,$00,$47,$00
 	db $12,$06,$47,$00
 	db $0c,$0c,$47,$00
 	db $06,$12,$47,$00
 
-FrameBlock2a: ; 7b4e6 (1e:74e6)
+FrameBlock2a:
 	db $04
 	db $00,$00,$44,$00
 	db $00,$08,$44,$20
 	db $08,$00,$44,$40
 	db $08,$08,$44,$60
 
-FrameBlock2b: ; 7b4f7 (1e:74f7)
+FrameBlock2b:
 	db $02
 	db $06,$02,$47,$00
 	db $00,$08,$47,$00
 
-FrameBlock2c: ; 7b500 (1e:7500)
+FrameBlock2c:
 	db $01
 	db $a0,$00,$4d,$00
 
-FrameBlock2d: ; 7b505 (1e:7505)
+FrameBlock2d:
 	db $08
 	db $00,$00,$26,$00
 	db $00,$08,$27,$00
@@ -2767,7 +2767,7 @@ FrameBlock2d: ; 7b505 (1e:7505)
 	db $18,$00,$38,$00
 	db $18,$08,$39,$00
 
-FrameBlock2e: ; 7b526 (1e:7526)
+FrameBlock2e:
 	db $08
 	db $00,$00,$27,$20
 	db $00,$08,$26,$20
@@ -2778,25 +2778,25 @@ FrameBlock2e: ; 7b526 (1e:7526)
 	db $18,$00,$39,$20
 	db $18,$08,$38,$20
 
-FrameBlock2f: ; 7b547 (1e:7547)
+FrameBlock2f:
 	db $04
 	db $00,$00,$0c,$00
 	db $00,$08,$0d,$00
 	db $08,$00,$0c,$40
 	db $08,$08,$0d,$40
 
-FrameBlock30: ; 7b558 (1e:7558)
+FrameBlock30:
 	db $04
 	db $00,$00,$44,$00
 	db $00,$08,$44,$20
 	db $08,$00,$44,$40
 	db $08,$08,$44,$60
 
-FrameBlock31: ; 7b569 (1e:7569)
+FrameBlock31:
 	db $01
 	db $00,$00,$45,$00
 
-FrameBlock32: ; 7b56e (1e:756e)
+FrameBlock32:
 	db $07
 	db $00,$00,$4d,$00
 	db $00,$08,$2f,$00
@@ -2806,7 +2806,7 @@ FrameBlock32: ; 7b56e (1e:756e)
 	db $08,$10,$4e,$20
 	db $10,$08,$3f,$00
 
-FrameBlock33: ; 7b58b (1e:758b)
+FrameBlock33:
 	db $07
 	db $00,$08,$3f,$40
 	db $08,$00,$4e,$40
@@ -2816,11 +2816,11 @@ FrameBlock33: ; 7b58b (1e:758b)
 	db $10,$08,$2f,$40
 	db $10,$10,$4d,$60
 
-FrameBlock34: ; 7b5a8 (1e:75a8)
+FrameBlock34:
 	db $01
 	db $a0,$00,$00,$10
 
-FrameBlock35: ; 7b5ad (1e:75ad)
+FrameBlock35:
 	db $06
 	db $00,$00,$2a,$00
 	db $00,$08,$2b,$00
@@ -2829,42 +2829,42 @@ FrameBlock35: ; 7b5ad (1e:75ad)
 	db $18,$00,$2a,$40
 	db $18,$08,$2b,$40
 
-FrameBlock36: ; 7b5c6 (1e:75c6)
+FrameBlock36:
 	db $04
 	db $00,$00,$00,$00
 	db $00,$08,$01,$00
 	db $08,$00,$10,$00
 	db $08,$08,$11,$00
 
-FrameBlock37: ; 7b5d7 (1e:75d7)
+FrameBlock37:
 	db $04
 	db $00,$00,$01,$a0
 	db $00,$08,$00,$a0
 	db $08,$00,$11,$a0
 	db $08,$08,$10,$a0
 
-FrameBlock38: ; 7b5e8 (1e:75e8)
+FrameBlock38:
 	db $04
 	db $00,$00,$0a,$00
 	db $00,$08,$0b,$00
 	db $08,$00,$1a,$00
 	db $08,$08,$1b,$00
 
-FrameBlock39: ; 7b5f9 (1e:75f9)
+FrameBlock39:
 	db $04
 	db $00,$00,$0b,$20
 	db $00,$08,$0a,$20
 	db $08,$00,$1b,$20
 	db $08,$08,$1a,$20
 
-FrameBlock3a: ; 7b60a (1e:760a)
+FrameBlock3a:
 	db $04
 	db $20,$00,$05,$00
 	db $20,$08,$05,$20
 	db $28,$00,$15,$00
 	db $28,$08,$15,$20
 
-FrameBlock3b: ; 7b61b (1e:761b)
+FrameBlock3b:
 	db $05
 	db $18,$00,$04,$00
 	db $18,$08,$04,$20
@@ -2872,7 +2872,7 @@ FrameBlock3b: ; 7b61b (1e:761b)
 	db $20,$08,$14,$20
 	db $28,$04,$41,$00
 
-FrameBlock3c: ; 7b630 (1e:7630)
+FrameBlock3c:
 	db $06
 	db $10,$00,$05,$00
 	db $10,$08,$05,$20
@@ -2881,7 +2881,7 @@ FrameBlock3c: ; 7b630 (1e:7630)
 	db $20,$04,$42,$00
 	db $28,$04,$42,$00
 
-FrameBlock3d: ; 7b649 (1e:7649)
+FrameBlock3d:
 	db $07
 	db $08,$00,$04,$00
 	db $08,$08,$04,$20
@@ -2891,7 +2891,7 @@ FrameBlock3d: ; 7b649 (1e:7649)
 	db $20,$04,$41,$00
 	db $28,$04,$41,$00
 
-FrameBlock3e: ; 7b666 (1e:7666)
+FrameBlock3e:
 	db $08
 	db $00,$00,$05,$00
 	db $00,$08,$05,$20
@@ -2902,7 +2902,7 @@ FrameBlock3e: ; 7b666 (1e:7666)
 	db $20,$04,$42,$00
 	db $28,$04,$42,$00
 
-FrameBlock3f: ; 7b687 (1e:7687)
+FrameBlock3f:
 	db $08
 	db $00,$00,$04,$00
 	db $00,$08,$04,$20
@@ -2913,20 +2913,20 @@ FrameBlock3f: ; 7b687 (1e:7687)
 	db $20,$04,$41,$00
 	db $28,$04,$41,$00
 
-FrameBlock40: ; 7b6a8 (1e:76a8)
+FrameBlock40:
 	db $03
 	db $00,$00,$3d,$00
 	db $00,$08,$3d,$00
 	db $08,$08,$3d,$00
 
-FrameBlock41: ; 7b6b5 (1e:76b5)
+FrameBlock41:
 	db $04
 	db $00,$00,$06,$00
 	db $00,$08,$06,$20
 	db $08,$00,$16,$00
 	db $08,$08,$17,$00
 
-FrameBlock42: ; 7b6c6 (1e:76c6)
+FrameBlock42:
 	db $0b
 	db $00,$10,$42,$00
 	db $08,$00,$42,$00
@@ -2940,7 +2940,7 @@ FrameBlock42: ; 7b6c6 (1e:76c6)
 	db $20,$00,$42,$00
 	db $20,$20,$42,$00
 
-FrameBlock43: ; 7b6f3 (1e:76f3)
+FrameBlock43:
 	db $0b
 	db $00,$10,$41,$00
 	db $08,$00,$41,$00
@@ -2954,42 +2954,42 @@ FrameBlock43: ; 7b6f3 (1e:76f3)
 	db $20,$00,$41,$00
 	db $20,$20,$41,$00
 
-FrameBlock44: ; 7b720 (1e:7720)
+FrameBlock44:
 	db $04
 	db $00,$00,$49,$00
 	db $00,$28,$49,$00
 	db $28,$00,$49,$00
 	db $28,$28,$49,$00
 
-FrameBlock45: ; 7b731 (1e:7731)
+FrameBlock45:
 	db $04
 	db $00,$00,$49,$00
 	db $00,$18,$49,$00
 	db $18,$00,$49,$00
 	db $18,$18,$49,$00
 
-FrameBlock46: ; 7b742 (1e:7742)
+FrameBlock46:
 	db $04
 	db $00,$00,$49,$00
 	db $00,$08,$49,$00
 	db $08,$00,$49,$00
 	db $08,$08,$49,$00
 
-FrameBlock47: ; 7b753 (1e:7753)
+FrameBlock47:
 	db $04
 	db $00,$00,$43,$00
 	db $00,$08,$43,$20
 	db $08,$00,$43,$40
 	db $08,$08,$43,$60
 
-SmallBlackCircleFrameBlock: ; 7b764 (1e:7764)
+SmallBlackCircleFrameBlock:
 	db $04
 	db $08,$08,$33,$00
 	db $08,$10,$33,$20
 	db $10,$08,$33,$40
 	db $10,$10,$33,$60
 
-LargeBlockCircleFrameBlock: ; 7b775 (1e:7775)
+LargeBlockCircleFrameBlock:
 	db $10
 	db $00,$00,$22,$00
 	db $00,$08,$23,$00
@@ -3008,7 +3008,7 @@ LargeBlockCircleFrameBlock: ; 7b775 (1e:7775)
 	db $18,$10,$23,$60
 	db $18,$18,$22,$60
 
-FrameBlock71: ; 7b7b6 (1e:77b6)
+FrameBlock71:
 	db $10
 	db $00,$00,$22,$00
 	db $00,$08,$3b,$00
@@ -3027,7 +3027,7 @@ FrameBlock71: ; 7b7b6 (1e:77b6)
 	db $18,$10,$23,$60
 	db $18,$18,$22,$60
 
-FrameBlock72: ; 7b7f7 (1e:77f7)
+FrameBlock72:
 	db $0c
 	db $00,$00,$32,$00
 	db $00,$08,$43,$00
@@ -3042,7 +3042,7 @@ FrameBlock72: ; 7b7f7 (1e:77f7)
 	db $10,$10,$23,$60
 	db $10,$18,$22,$60
 
-FrameBlock73: ; 7b828 (1e:7828)
+FrameBlock73:
 	db $08
 	db $00,$00,$32,$40
 	db $00,$08,$43,$40
@@ -3053,42 +3053,42 @@ FrameBlock73: ; 7b828 (1e:7828)
 	db $08,$10,$23,$60
 	db $08,$18,$22,$60
 
-FrameBlock74: ; 7b849 (1e:7849)
+FrameBlock74:
 	db $04
 	db $00,$00,$22,$40
 	db $00,$08,$23,$40
 	db $00,$10,$23,$60
 	db $00,$18,$22,$60
 
-FrameBlock4a: ; 7b85a (1e:785a)
+FrameBlock4a:
 	db $04
 	db $08,$18,$4c,$20
 	db $20,$08,$4b,$00
 	db $30,$20,$4c,$00
 	db $18,$30,$4b,$40
 
-FrameBlock4b: ; 7b86b (1e:786b)
+FrameBlock4b:
 	db $04
 	db $00,$18,$4c,$00
 	db $20,$00,$4b,$40
 	db $38,$20,$4c,$20
 	db $18,$38,$4b,$00
 
-FrameBlock4c: ; 7b87c (1e:787c)
+FrameBlock4c:
 	db $04
 	db $10,$08,$4a,$40
 	db $30,$10,$4a,$00
 	db $28,$30,$4a,$20
 	db $08,$28,$4a,$60
 
-FrameBlock4d: ; 7b88d (1e:788d)
+FrameBlock4d:
 	db $04
 	db $08,$00,$4a,$20
 	db $38,$08,$4a,$60
 	db $30,$38,$4a,$40
 	db $00,$30,$4a,$00
 
-FrameBlock4e: ; 7b89e (1e:789e)
+FrameBlock4e:
 	db $08
 	db $00,$30,$44,$00
 	db $00,$38,$44,$20
@@ -3099,7 +3099,7 @@ FrameBlock4e: ; 7b89e (1e:789e)
 	db $2e,$0a,$44,$40
 	db $2e,$12,$44,$60
 
-FrameBlock4f: ; 7b8bf (1e:78bf)
+FrameBlock4f:
 	db $0c
 	db $0e,$22,$44,$00
 	db $0e,$2a,$44,$20
@@ -3114,7 +3114,7 @@ FrameBlock4f: ; 7b8bf (1e:78bf)
 	db $30,$08,$47,$00
 	db $2a,$0e,$47,$00
 
-FrameBlock50: ; 7b8f0 (1e:78f0)
+FrameBlock50:
 	db $08
 	db $06,$32,$47,$00
 	db $00,$38,$47,$00
@@ -3125,7 +3125,7 @@ FrameBlock50: ; 7b8f0 (1e:78f0)
 	db $2a,$0e,$47,$00
 	db $24,$14,$47,$00
 
-FrameBlock51: ; 7b911 (1e:7911)
+FrameBlock51:
 	db $08
 	db $00,$00,$35,$20
 	db $08,$00,$35,$40
@@ -3136,33 +3136,33 @@ FrameBlock51: ; 7b911 (1e:7911)
 	db $10,$40,$35,$20
 	db $18,$40,$35,$40
 
-FrameBlock52: ; 7b932 (1e:7932)
+FrameBlock52:
 	db $04
 	db $00,$00,$2a,$00
 	db $00,$08,$2b,$00
 	db $08,$00,$3a,$00
 	db $08,$08,$3b,$00
 
-FrameBlock53: ; 7b943 (1e:7943)
+FrameBlock53:
 	db $03
 	db $00,$00,$3f,$00
 	db $00,$08,$3f,$00
 	db $08,$06,$3f,$00
 
-FrameBlock54: ; 7b950 (1e:7950)
+FrameBlock54:
 	db $04
 	db $00,$00,$0e,$00
 	db $00,$08,$0e,$20
 	db $08,$00,$0f,$00
 	db $08,$08,$0f,$20
 
-FrameBlock55: ; 7b961 (1e:7961)
+FrameBlock55:
 	db $03
 	db $10,$00,$2c,$00
 	db $10,$08,$3c,$00
 	db $10,$10,$2d,$00
 
-FrameBlock56: ; 7b96e (1e:796e)
+FrameBlock56:
 	db $06
 	db $10,$10,$31,$00
 	db $10,$18,$31,$00
@@ -3171,7 +3171,7 @@ FrameBlock56: ; 7b96e (1e:796e)
 	db $08,$20,$2d,$00
 	db $10,$20,$2d,$00
 
-FrameBlock57: ; 7b987 (1e:7987)
+FrameBlock57:
 	db $09
 	db $08,$20,$31,$00
 	db $10,$20,$31,$00
@@ -3183,7 +3183,7 @@ FrameBlock57: ; 7b987 (1e:7987)
 	db $08,$30,$2d,$00
 	db $10,$30,$2d,$00
 
-FrameBlock58: ; 7b9ac (1e:79ac)
+FrameBlock58:
 	db $07
 	db $00,$00,$46,$00
 	db $08,$02,$47,$00
@@ -3193,11 +3193,11 @@ FrameBlock58: ; 7b9ac (1e:79ac)
 	db $28,$05,$48,$00
 	db $30,$05,$48,$00
 
-FrameBlock59: ; 7b9c9 (1e:79c9)
+FrameBlock59:
 	db $01
 	db $00,$00,$42,$00
 
-FrameBlock5a: ; 7b9ce (1e:79ce)
+FrameBlock5a:
 	db $0c
 	db $00,$00,$24,$00
 	db $00,$08,$25,$00
@@ -3212,14 +3212,14 @@ FrameBlock5a: ; 7b9ce (1e:79ce)
 	db $18,$10,$25,$60
 	db $18,$18,$24,$60
 
-FrameBlock5b: ; 7b9ff (1e:79ff)
+FrameBlock5b:
 	db $04
 	db $00,$00,$43,$00
 	db $00,$08,$43,$20
 	db $08,$00,$43,$40
 	db $08,$08,$43,$60
 
-FrameBlock5c: ; 7ba10 (1e:7a10)
+FrameBlock5c:
 	db $08
 	db $00,$00,$49,$00
 	db $02,$08,$49,$00
@@ -3230,7 +3230,7 @@ FrameBlock5c: ; 7ba10 (1e:7a10)
 	db $10,$00,$43,$40
 	db $10,$08,$43,$60
 
-FrameBlock5d: ; 7ba31 (1e:7a31)
+FrameBlock5d:
 	db $0b
 	db $00,$00,$49,$00
 	db $18,$02,$49,$00
@@ -3244,7 +3244,7 @@ FrameBlock5d: ; 7ba31 (1e:7a31)
 	db $0c,$08,$43,$40
 	db $0c,$10,$43,$60
 
-FrameBlock5e: ; 7ba5e (1e:7a5e)
+FrameBlock5e:
 	db $0f
 	db $00,$08,$49,$00
 	db $08,$10,$49,$00
@@ -3262,14 +3262,14 @@ FrameBlock5e: ; 7ba5e (1e:7a5e)
 	db $28,$08,$43,$40
 	db $28,$10,$43,$60
 
-FrameBlock5f: ; 7ba9b (1e:7a9b)
+FrameBlock5f:
 	db $04
 	db $00,$00,$49,$00
 	db $00,$10,$49,$00
 	db $00,$20,$49,$00
 	db $00,$30,$49,$00
 
-FrameBlock60: ; 7baac (1e:7aac)
+FrameBlock60:
 	db $08
 	db $00,$00,$49,$00
 	db $00,$10,$49,$00
@@ -3280,7 +3280,7 @@ FrameBlock60: ; 7baac (1e:7aac)
 	db $08,$28,$49,$00
 	db $08,$38,$49,$00
 
-FrameBlock61: ; 7bacd (1e:7acd)
+FrameBlock61:
 	db $0c
 	db $00,$00,$49,$00
 	db $00,$10,$49,$00
@@ -3295,7 +3295,7 @@ FrameBlock61: ; 7bacd (1e:7acd)
 	db $10,$20,$49,$00
 	db $10,$30,$49,$00
 
-FrameBlock62: ; 7bafe (1e:7afe)
+FrameBlock62:
 	db $0f
 	db $00,$00,$49,$00
 	db $00,$10,$49,$00
@@ -3314,7 +3314,7 @@ FrameBlock62: ; 7bafe (1e:7afe)
 	db $18,$28,$49,$00
 	db $18,$38,$49,$00 ; unused
 
-FrameBlock63: ; 7bb3f (1e:7b3f)
+FrameBlock63:
 	db $06
 	db $10,$00,$26,$00
 	db $10,$08,$27,$00
@@ -3323,7 +3323,7 @@ FrameBlock63: ; 7bb3f (1e:7b3f)
 	db $00,$20,$26,$00
 	db $00,$28,$27,$00
 
-FrameBlock64: ; 7bb58 (1e:7b58)
+FrameBlock64:
 	db $06
 	db $18,$00,$27,$00
 	db $10,$08,$26,$00
@@ -3332,7 +3332,7 @@ FrameBlock64: ; 7bb58 (1e:7b58)
 	db $08,$20,$27,$00
 	db $00,$28,$26,$00
 
-FrameBlock65: ; 7bb71 (1e:7b71)
+FrameBlock65:
 	db $06
 	db $00,$00,$1c,$00
 	db $00,$08,$1d,$00
@@ -3341,27 +3341,27 @@ FrameBlock65: ; 7bb71 (1e:7b71)
 	db $20,$00,$1c,$00
 	db $20,$08,$1d,$00
 
-FrameBlock66: ; 7bb8a (1e:7b8a)
+FrameBlock66:
 	db $02
 	db $00,$00,$03,$00
 	db $08,$00,$13,$00
 
-FrameBlock67: ; 7bb93 (1e:7b93)
+FrameBlock67:
 	db $01
 	db $00,$00,$03,$00
 
-FrameBlock68: ; 7bb98 (1e:7b98)
+FrameBlock68:
 	db $04
 	db $00,$00,$03,$00
 	db $00,$08,$03,$20
 	db $08,$00,$13,$00
 	db $08,$08,$13,$20
 
-FrameBlock69: ; 7bba9 (1e:7ba9)
+FrameBlock69:
 	db $01
 	db $00,$00,$06,$00
 
-FrameBlock6a: ; 7bbae (1e:7bae)
+FrameBlock6a:
 	db $08
 	db $00,$00,$2e,$00
 	db $00,$30,$2e,$20
@@ -3372,7 +3372,7 @@ FrameBlock6a: ; 7bbae (1e:7bae)
 	db $18,$00,$3e,$00
 	db $18,$30,$3e,$20
 
-FrameBlock6b: ; 7bbcf (1e:7bcf)
+FrameBlock6b:
 	db $08
 	db $00,$00,$2e,$00
 	db $00,$20,$2e,$20
@@ -3383,7 +3383,7 @@ FrameBlock6b: ; 7bbcf (1e:7bcf)
 	db $10,$00,$3e,$00
 	db $10,$20,$3e,$20
 
-FrameBlock6c: ; 7bbf0 (1e:7bf0)
+FrameBlock6c:
 	db $08
 	db $00,$00,$2e,$00
 	db $00,$10,$2e,$20
@@ -3394,33 +3394,33 @@ FrameBlock6c: ; 7bbf0 (1e:7bf0)
 	db $08,$00,$3e,$00
 	db $08,$10,$3e,$20
 
-FrameBlock6d: ; 7bc11 (1e:7c11)
+FrameBlock6d:
 	db $02
 	db $00,$00,$1e,$00
 	db $00,$08,$1f,$00
 
-FrameBlock6e: ; 7bc1a (1e:7c1a)
+FrameBlock6e:
 	db $04
 	db $00,$00,$48,$00
 	db $00,$08,$48,$20
 	db $08,$00,$12,$00
 	db $08,$08,$12,$20
 
-FrameBlock6f: ; 7bc2b (1e:7c2b)
+FrameBlock6f:
 	db $04
 	db $00,$00,$4a,$00
 	db $00,$08,$07,$00
 	db $08,$00,$16,$00
 	db $08,$08,$17,$00
 
-FrameBlock70: ; 7bc3c (1e:7c3c)
+FrameBlock70:
 	db $04
 	db $00,$00,$07,$20
 	db $00,$08,$4a,$20
 	db $08,$00,$17,$20
 	db $08,$08,$16,$20
 
-FrameBlock76: ; 7bc4d (1e:7c4d)
+FrameBlock76:
 	db $07
 	db $00,$10,$2f,$00
 	db $01,$08,$2f,$00
@@ -3430,22 +3430,22 @@ FrameBlock76: ; 7bc4d (1e:7c4d)
 	db $0a,$00,$3e,$00
 	db $0a,$20,$3e,$20
 
-FrameBlock77: ; 7bc6a (1e:7c6a)
+FrameBlock77:
 	db $04
 	db $00,$02,$4b,$00
 	db $00,$0a,$4c,$00
 	db $08,$00,$4c,$60
 	db $08,$08,$4b,$60
 
-FrameBlock78: ; 7bc7b (1e:7c7b)
+FrameBlock78:
 	db $01
 	db $00,$00,$4d,$00
 
-FrameBlock79: ; 7bc80 (1e:7c80)
+FrameBlock79:
 	db $01
 	db $00,$00,$4e,$00
 
-FrameBlockBaseCoords: ; 7bc85 (1e:7c85)
+FrameBlockBaseCoords:
 	db $10,$68
 	db $10,$70
 	db $10,$78
@@ -3624,5 +3624,5 @@ FrameBlockBaseCoords: ; 7bc85 (1e:7c85)
 	db $1C,$48
 	db $48,$28
 
-FrameBlock00: ; 7bde7 (1e:7de7)
+FrameBlock00:
 	db $00,$00

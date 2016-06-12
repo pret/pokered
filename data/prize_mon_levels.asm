@@ -1,4 +1,4 @@
-PrizeMonLevelDictionary: ; 5298a (14:698a)
+PrizeMonLevelDictionary:
 IF DEF(_RED)
 	db ABRA,9
 	db CLEFAIRY,8

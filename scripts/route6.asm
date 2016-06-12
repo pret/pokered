@@ -1,4 +1,4 @@
-Route6Script: ; 590b0 (16:50b0)
+Route6Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route6TrainerHeaders
 	ld de, Route6ScriptPointers
@@ -7,12 +7,12 @@ Route6Script: ; 590b0 (16:50b0)
 	ld [wRoute6CurScript], a
 	ret
 
-Route6ScriptPointers: ; 590c3 (16:50c3)
+Route6ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Route6TextPointers: ; 590c9 (16:50c9)
+Route6TextPointers:
 	dw Route6Text1
 	dw Route6Text2
 	dw Route6Text3
@@ -21,8 +21,8 @@ Route6TextPointers: ; 590c9 (16:50c9)
 	dw Route6Text6
 	dw Route6Text7
 
-Route6TrainerHeaders: ; 590d7 (16:50d7)
-Route6TrainerHeader0: ; 590d7 (16:50d7)
+Route6TrainerHeaders:
+Route6TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_0
@@ -31,7 +31,7 @@ Route6TrainerHeader0: ; 590d7 (16:50d7)
 	dw Route6EndBattleText1 ; TextEndBattle
 	dw Route6EndBattleText1 ; TextEndBattle
 
-Route6TrainerHeader1: ; 590e3 (16:50e3)
+Route6TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_1
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_1
@@ -40,7 +40,7 @@ Route6TrainerHeader1: ; 590e3 (16:50e3)
 	dw Route6EndBattleText2 ; TextEndBattle
 	dw Route6EndBattleText2 ; TextEndBattle
 
-Route6TrainerHeader2: ; 590ef (16:50ef)
+Route6TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_2
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_2
@@ -49,7 +49,7 @@ Route6TrainerHeader2: ; 590ef (16:50ef)
 	dw Route6EndBattleText3 ; TextEndBattle
 	dw Route6EndBattleText3 ; TextEndBattle
 
-Route6TrainerHeader3: ; 590fb (16:50fb)
+Route6TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_3
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_3
@@ -58,7 +58,7 @@ Route6TrainerHeader3: ; 590fb (16:50fb)
 	dw Route6EndBattleText4 ; TextEndBattle
 	dw Route6EndBattleText4 ; TextEndBattle
 
-Route6TrainerHeader4: ; 59107 (16:5107)
+Route6TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_4
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_4
@@ -67,7 +67,7 @@ Route6TrainerHeader4: ; 59107 (16:5107)
 	dw Route6EndBattleText5 ; TextEndBattle
 	dw Route6EndBattleText5 ; TextEndBattle
 
-Route6TrainerHeader5: ; 59113 (16:5113)
+Route6TrainerHeader5:
 	dbEventFlagBit EVENT_BEAT_ROUTE_6_TRAINER_5
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_6_TRAINER_5
@@ -78,110 +78,110 @@ Route6TrainerHeader5: ; 59113 (16:5113)
 
 	db $ff
 
-Route6Text1: ; 59120 (16:5120)
+Route6Text1:
 	TX_ASM
 	ld hl, Route6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText1: ; 5912a (16:512a)
+Route6BattleText1:
 	TX_FAR _Route6BattleText1
 	db "@"
 
-Route6EndBattleText1: ; 5912f (16:512f)
+Route6EndBattleText1:
 	TX_FAR _Route6EndBattleText1
 	db "@"
 
-Route6AfterBattleText1: ; 59134 (16:5134)
+Route6AfterBattleText1:
 	TX_FAR _Route6AfterBattleText1
 	db "@"
 
-Route6Text2: ; 59139 (16:5139)
+Route6Text2:
 	TX_ASM
 	ld hl, Route6TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText2: ; 59143 (16:5143)
+Route6BattleText2:
 	TX_FAR _Route6BattleText2
 	db "@"
 
-Route6EndBattleText2: ; 59148 (16:5148)
+Route6EndBattleText2:
 	TX_FAR _Route6EndBattleText2
 	db "@"
 
-Route6Text3: ; 5914d (16:514d)
+Route6Text3:
 	TX_ASM
 	ld hl, Route6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText3: ; 59157 (16:5157)
+Route6BattleText3:
 	TX_FAR _Route6BattleText3
 	db "@"
 
-Route6EndBattleText3: ; 5915c (16:515c)
+Route6EndBattleText3:
 	TX_FAR _Route6EndBattleText3
 	db "@"
 
-Route6AfterBattleText3: ; 59161 (16:5161)
+Route6AfterBattleText3:
 	TX_FAR _Route6AfterBattleText3
 	db "@"
 
-Route6Text4: ; 59166 (16:5166)
+Route6Text4:
 	TX_ASM
 	ld hl, Route6TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText4: ; 59170 (16:5170)
+Route6BattleText4:
 	TX_FAR _Route6BattleText4
 	db "@"
 
-Route6EndBattleText4: ; 59175 (16:5175)
+Route6EndBattleText4:
 	TX_FAR _Route6EndBattleText4
 	db "@"
 
-Route6AfterBattleText4: ; 5917a (16:517a)
+Route6AfterBattleText4:
 	TX_FAR _Route6AfterBattleText4
 	db "@"
 
-Route6Text5: ; 5917f (16:517f)
+Route6Text5:
 	TX_ASM
 	ld hl, Route6TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText5: ; 59189 (16:5189)
+Route6BattleText5:
 	TX_FAR _Route6BattleText5
 	db "@"
 
-Route6EndBattleText5: ; 5918e (16:518e)
+Route6EndBattleText5:
 	TX_FAR _Route6EndBattleText5
 	db "@"
 
-Route6AfterBattleText5: ; 59193 (16:5193)
+Route6AfterBattleText5:
 	TX_FAR _Route6AfterBattleText5
 	db "@"
 
-Route6Text6: ; 59198 (16:5198)
+Route6Text6:
 	TX_ASM
 	ld hl, Route6TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route6BattleText6: ; 591a2 (16:51a2)
+Route6BattleText6:
 	TX_FAR _Route6BattleText6
 	db "@"
 
-Route6EndBattleText6: ; 591a7 (16:51a7)
+Route6EndBattleText6:
 	TX_FAR _Route6EndBattleText6
 	db "@"
 
-Route6AfterBattleText6: ; 591ac (16:51ac)
+Route6AfterBattleText6:
 	TX_FAR _Route6AfterBattleText6
 	db "@"
 
-Route6Text7: ; 591b1 (16:51b1)
+Route6Text7:
 	TX_FAR _Route6Text7
 	db "@"

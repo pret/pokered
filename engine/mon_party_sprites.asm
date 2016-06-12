@@ -1,4 +1,4 @@
-AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
+AnimatePartyMon_ForceSpeed1:
 	xor a
 	ld [wCurrentMenuItem], a
 	ld b, a
@@ -9,7 +9,7 @@ AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
 ; 0: green
 ; 1: yellow
 ; 2: red
-AnimatePartyMon: ; 716ff (1c:56ff)
+AnimatePartyMon:
 	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -17,7 +17,7 @@ AnimatePartyMon: ; 716ff (1c:56ff)
 	add hl, bc
 	ld a, [hl]
 
-GetAnimationSpeed: ; 7170a (1c:570a)
+GetAnimationSpeed:
 	ld c, a
 	ld hl, PartyMonSpeeds
 	add hl, bc
@@ -85,15 +85,15 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 ; The members of the PartyMonSpeeds array specify the number of V-blanks
 ; that each frame lasts for green HP, yellow HP, and red HP in order.
 ; On the naming screen, the yellow HP speed is always used.
-PartyMonSpeeds: ; 71769 (1c:5769)
+PartyMonSpeeds:
 	db 5, 16, 32
 
-LoadMonPartySpriteGfx: ; 7176c (1c:576c)
+LoadMonPartySpriteGfx:
 ; Load mon party sprite tile patterns into VRAM during V-blank.
 	ld hl, MonPartySpritePointers
 	ld a, $1c
 
-LoadAnimSpriteGfx: ; 71771 (1c:5771)
+LoadAnimSpriteGfx:
 ; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
 ; of an array of structures that contain arguments for CopyVideoData and a is
 ; the number of structures in the array.
@@ -125,7 +125,7 @@ LoadAnimSpriteGfx: ; 71771 (1c:5771)
 	jr nz, .loop
 	ret
 
-LoadMonPartySpriteGfxWithLCDDisabled: ; 71791 (1c:5791)
+LoadMonPartySpriteGfxWithLCDDisabled:
 ; Load mon party sprite tile patterns into VRAM immediately by disabling the
 ; LCD.
 	call DisableLCD
@@ -162,7 +162,7 @@ LoadMonPartySpriteGfxWithLCDDisabled: ; 71791 (1c:5791)
 	jr nz, .asm_7179c
 	jp EnableLCD
 
-MonPartySpritePointers: ; 717c0 (1c:57c0)
+MonPartySpritePointers:
 	dw SlowbroSprite + $c0
 	db $40 / $10 ; 40 bytes
 	db BANK(SlowbroSprite)
@@ -303,7 +303,7 @@ MonPartySpritePointers: ; 717c0 (1c:57c0)
 	db BANK(MonPartySprites)
 	dw vSprites + $780
 
-WriteMonPartySpriteOAMByPartyIndex: ; 71868 (1c:5868)
+WriteMonPartySpriteOAMByPartyIndex:
 ; Write OAM blocks for the party mon in [hPartyMonIndex].
 	push hl
 	push de
@@ -322,7 +322,7 @@ WriteMonPartySpriteOAMByPartyIndex: ; 71868 (1c:5868)
 	pop hl
 	ret
 
-WriteMonPartySpriteOAMBySpecies: ; 71882 (1c:5882)
+WriteMonPartySpriteOAMBySpecies:
 ; Write OAM blocks for the party sprite of the species in
 ; [wMonPartySpriteSpecies].
 	xor a
@@ -332,7 +332,7 @@ WriteMonPartySpriteOAMBySpecies: ; 71882 (1c:5882)
 	ld [wOAMBaseTile], a
 	jr WriteMonPartySpriteOAM
 
-UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
+UnusedPartyMonSpriteFunction:
 ; This function is unused and doesn't appear to do anything useful. It looks
 ; like it may have been intended to load the tile patterns and OAM data for
 ; the mon party sprite associated with the species in [wcf91].
@@ -370,7 +370,7 @@ UnusedPartyMonSpriteFunction: ; 71890 (1c:5890)
 	pop hl
 	jp CopyVideoData
 
-WriteMonPartySpriteOAM: ; 718c3 (1c:58c3)
+WriteMonPartySpriteOAM:
 ; Write the OAM blocks for the first animation frame into the OAM buffer and
 ; make a copy at wMonPartySpritesSavedOAM.
 	push af
@@ -396,7 +396,7 @@ WriteMonPartySpriteOAM: ; 718c3 (1c:58c3)
 	ld bc, $60
 	jp CopyData
 
-GetPartyMonSpriteID: ; 718e9 (1c:58e9)
+GetPartyMonSpriteID:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
@@ -419,5 +419,5 @@ GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 
 INCLUDE "data/mon_party_sprites.asm"
 
-MonPartySprites: ; 71959 (1c:5959)
+MonPartySprites:
 	INCBIN "gfx/mon_ow_sprites.2bpp"

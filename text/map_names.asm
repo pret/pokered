@@ -1,107 +1,107 @@
-MapNames: ; 71473 (1c:5473)
-PalletTownName: ; 71473 (1c:5473)
+MapNames:
+PalletTownName:
 	db "PALLET TOWN@"
-ViridianCityName: ; 7147f (1c:547f)
+ViridianCityName:
 	db "VIRIDIAN CITY@"
-PewterCityName: ; 7148d (1c:548d)
+PewterCityName:
 	db "PEWTER CITY@"
-CeruleanCityName: ; 71499 (1c:5499)
+CeruleanCityName:
 	db "CERULEAN CITY@"
-LavenderTownName: ; 714a7 (1c:54a7)
+LavenderTownName:
 	db "LAVENDER TOWN@"
-VermilionCityName: ; 714b5 (1c:54b5)
+VermilionCityName:
 	db "VERMILION CITY@"
-CeladonCityName: ; 714c4 (1c:54c4)
+CeladonCityName:
 	db "CELADON CITY@"
-FuchsiaCityName: ; 714d1 (1c:54d1)
+FuchsiaCityName:
 	db "FUCHSIA CITY@"
-CinnabarIslandName: ; 714de (1c:54de)
+CinnabarIslandName:
 	db "CINNABAR ISLAND@"
-IndigoPlateauName: ; 714ee (1c:54ee)
+IndigoPlateauName:
 	db "INDIGO PLATEAU@"
-SaffronCityName: ; 714fd (1c:54fd)
+SaffronCityName:
 	db "SAFFRON CITY@"
-Route1Name: ; 7150a (1c:550a)
+Route1Name:
 	db "ROUTE 1@"
-Route2Name: ; 71512 (1c:5512)
+Route2Name:
 	db "ROUTE 2@"
-Route3Name: ; 7151a (1c:551a)
+Route3Name:
 	db "ROUTE 3@"
-Route4Name: ; 71522 (1c:5522)
+Route4Name:
 	db "ROUTE 4@"
-Route5Name: ; 7152a (1c:552a)
+Route5Name:
 	db "ROUTE 5@"
-Route6Name: ; 71532 (1c:5532)
+Route6Name:
 	db "ROUTE 6@"
-Route7Name: ; 7153a (1c:553a)
+Route7Name:
 	db "ROUTE 7@"
-Route8Name: ; 71542 (1c:5542)
+Route8Name:
 	db "ROUTE 8@"
-Route9Name: ; 7154a (1c:554a)
+Route9Name:
 	db "ROUTE 9@"
-Route10Name: ; 71552 (1c:5552)
+Route10Name:
 	db "ROUTE 10@"
-Route11Name: ; 7155b (1c:555b)
+Route11Name:
 	db "ROUTE 11@"
-Route12Name: ; 71564 (1c:5564)
+Route12Name:
 	db "ROUTE 12@"
-Route13Name: ; 7156d (1c:556d)
+Route13Name:
 	db "ROUTE 13@"
-Route14Name: ; 71576 (1c:5576)
+Route14Name:
 	db "ROUTE 14@"
-Route15Name: ; 7157f (1c:557f)
+Route15Name:
 	db "ROUTE 15@"
-Route16Name: ; 71588 (1c:5588)
+Route16Name:
 	db "ROUTE 16@"
-Route17Name: ; 71591 (1c:5591)
+Route17Name:
 	db "ROUTE 17@"
-Route18Name: ; 7159a (1c:559a)
+Route18Name:
 	db "ROUTE 18@"
-Route19Name: ; 715a3 (1c:55a3)
+Route19Name:
 	db "SEA ROUTE 19@"
-Route20Name: ; 715b0 (1c:55b0)
+Route20Name:
 	db "SEA ROUTE 20@"
-Route21Name: ; 715bd (1c:55bd)
+Route21Name:
 	db "SEA ROUTE 21@"
-Route22Name: ; 715ca (1c:55ca)
+Route22Name:
 	db "ROUTE 22@"
-Route23Name: ; 715d3 (1c:55d3)
+Route23Name:
 	db "ROUTE 23@"
-Route24Name: ; 715dc (1c:55dc)
+Route24Name:
 	db "ROUTE 24@"
-Route25Name: ; 715e5 (1c:55e5)
+Route25Name:
 	db "ROUTE 25@"
-ViridianForestName: ; 715ee (1c:55ee)
+ViridianForestName:
 	db "VIRIDIAN FOREST@"
-MountMoonName: ; 715fe (1c:55fe)
+MountMoonName:
 	db "MT.MOON@"
-RockTunnelName: ; 71606 (1c:5606)
+RockTunnelName:
 	db "ROCK TUNNEL@"
-SeaCottageName: ; 71612 (1c:5612)
+SeaCottageName:
 	db "SEA COTTAGE@"
-SSAnneName: ; 7161e (1c:561e)
+SSAnneName:
 	db "S.S.ANNE@"
-PokemonLeagueName: ; 71627 (1c:5627)
+PokemonLeagueName:
 	db "#MON LEAGUE@"
-UndergroundPathName: ; 71633 (1c:5633)
+UndergroundPathName:
 	db "UNDERGROUND PATH@"
-PokemonTowerName: ; 71644 (1c:5644)
+PokemonTowerName:
 	db "#MON TOWER@"
-SeafoamIslandsName: ; 7164f (1c:564f)
+SeafoamIslandsName:
 	db "SEAFOAM ISLANDS@"
-VictoryRoadName: ; 7165f (1c:565f)
+VictoryRoadName:
 	db "VICTORY ROAD@"
-DiglettsCaveName: ; 7166c (1c:566c)
+DiglettsCaveName:
 	db "DIGLETT's CAVE@"
-RocketHQName: ; 7167a (1c:567a)
+RocketHQName:
 	db "ROCKET HQ@"
-SilphCoName: ; 71684 (1c:5684)
+SilphCoName:
 	db "SILPH CO.@"
-PokemonMansionName: ; 7168e (1c:568e)
+PokemonMansionName:
 	db $4a," MANSION@"
-SafariZoneName: ; 71698 (1c:5698)
+SafariZoneName:
 	db "SAFARI ZONE@"
-CeruleanCaveName: ; 716a4 (1c:56a4)
+CeruleanCaveName:
 	db "CERULEAN CAVE@"
-PowerPlantName: ; 716b2 (1c:56b2)
+PowerPlantName:
 	db "POWER PLANT@"

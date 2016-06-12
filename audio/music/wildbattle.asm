@@ -1,4 +1,4 @@
-Music_WildBattle_Ch1:: ; 23099 (8:7099)
+Music_WildBattle_Ch1::
 	tempo 104
 	volume 7, 7
 	duty 3
@@ -300,7 +300,7 @@ Music_WildBattle_branch_230e0::
 	loopchannel 0, Music_WildBattle_branch_230e0
 
 
-Music_WildBattle_Ch2:: ; 231d8 (8:71d8)
+Music_WildBattle_Ch2::
 	duty 3
 	vibrato 8, 2, 5
 	notetype 12, 12, 3
@@ -462,7 +462,7 @@ Music_WildBattle_branch_23225::
 	loopchannel 0, Music_WildBattle_branch_23225
 
 
-Music_WildBattle_Ch3:: ; 23290 (8:7290)
+Music_WildBattle_Ch3::
 	vibrato 0, 2, 0
 	notetype 12, 1, 1
 	octave 4

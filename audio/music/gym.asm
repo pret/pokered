@@ -1,4 +1,4 @@
-Music_Gym_Ch1:: ; bcbb (2:7cbb)
+Music_Gym_Ch1::
 	tempo 138
 	volume 7, 7
 	duty 3
@@ -165,7 +165,7 @@ Music_Gym_branch_bcd8::
 	loopchannel 0, Music_Gym_branch_bcd8
 
 
-Music_Gym_Ch2:: ; bd6b (2:7d6b)
+Music_Gym_Ch2::
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 7
@@ -288,7 +288,7 @@ Music_Gym_branch_bd82::
 	loopchannel 0, Music_Gym_branch_bd82
 
 
-Music_Gym_Ch3:: ; bdfa (2:7dfa)
+Music_Gym_Ch3::
 	notetype 12, 1, 1
 	rest 16
 	rest 10

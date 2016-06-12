@@ -1,4 +1,4 @@
-DisplayDexRating: ; 44169 (11:4169)
+DisplayDexRating:
 	ld hl, wPokedexSeen
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
@@ -51,11 +51,11 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld [de], a
 	ret
 
-PokedexRatingText_441cc: ; 441cc (11:41cc)
+PokedexRatingText_441cc:
 	TX_FAR _OaksLabText_441cc
 	db "@"
 
-DexRatingsTable: ; 441d1 (11:41d1)
+DexRatingsTable:
 	db 10
 	dw PokedexRatingText_44201
 	db 20
@@ -89,66 +89,66 @@ DexRatingsTable: ; 441d1 (11:41d1)
 	db 152
 	dw PokedexRatingText_4424c
 
-PokedexRatingText_44201: ; 44201 (11:4201)
+PokedexRatingText_44201:
 	TX_FAR _OaksLabText_44201
 	db "@"
 
-PokedexRatingText_44206: ; 44206 (11:4206)
+PokedexRatingText_44206:
 	TX_FAR _OaksLabText_44206
 	db "@"
 
-PokedexRatingText_4420b: ; 4420b (11:420b)
+PokedexRatingText_4420b:
 	TX_FAR _OaksLabText_4420b
 	db "@"
 
-PokedexRatingText_44210: ; 44210 (11:4210)
+PokedexRatingText_44210:
 	TX_FAR _OaksLabText_44210
 	db "@"
 
-PokedexRatingText_44215: ; 44215 (11:4215)
+PokedexRatingText_44215:
 	TX_FAR _OaksLabText_44215
 	db "@"
 
-PokedexRatingText_4421a: ; 4421a (11:421a)
+PokedexRatingText_4421a:
 	TX_FAR _OaksLabText_4421a
 	db "@"
 
-PokedexRatingText_4421f: ; 4421f (11:421f)
+PokedexRatingText_4421f:
 	TX_FAR _OaksLabText_4421f
 	db "@"
 
-PokedexRatingText_44224: ; 44224 (11:4224)
+PokedexRatingText_44224:
 	TX_FAR _OaksLabText_44224
 	db "@"
 
-PokedexRatingText_44229: ; 44229 (11:4229)
+PokedexRatingText_44229:
 	TX_FAR _OaksLabText_44229
 	db "@"
 
-PokedexRatingText_4422e: ; 4422e (11:422e)
+PokedexRatingText_4422e:
 	TX_FAR _OaksLabText_4422e
 	db "@"
 
-PokedexRatingText_44233: ; 44233 (11:4233)
+PokedexRatingText_44233:
 	TX_FAR _OaksLabText_44233
 	db "@"
 
-PokedexRatingText_44238: ; 44238 (11:4238)
+PokedexRatingText_44238:
 	TX_FAR _OaksLabText_44238
 	db "@"
 
-PokedexRatingText_4423d: ; 4423d (11:423d)
+PokedexRatingText_4423d:
 	TX_FAR _OaksLabText_4423d
 	db "@"
 
-PokedexRatingText_44242: ; 44242 (11:4242)
+PokedexRatingText_44242:
 	TX_FAR _OaksLabText_44242
 	db "@"
 
-PokedexRatingText_44247: ; 44247 (11:4247)
+PokedexRatingText_44247:
 	TX_FAR _OaksLabText_44247
 	db "@"
 
-PokedexRatingText_4424c: ; 4424c (11:424c)
+PokedexRatingText_4424c:
 	TX_FAR _OaksLabText_4424c
 	db "@"

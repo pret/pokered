@@ -1,4 +1,4 @@
-_GetSpritePosition1: ; 567f9 (15:67f9)
+_GetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -17,7 +17,7 @@ _GetSpritePosition1: ; 567f9 (15:67f9)
 	ld [$ffee], a
 	ret
 
-_GetSpritePosition2: ; 56819 (15:6819)
+_GetSpritePosition2:
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -36,7 +36,7 @@ _GetSpritePosition2: ; 56819 (15:6819)
 	ld [wSavedSpriteMapX], a
 	ret
 
-_SetSpritePosition1: ; 5683d (15:683d)
+_SetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -55,7 +55,7 @@ _SetSpritePosition1: ; 5683d (15:683d)
 	ld [hl], a
 	ret
 
-_SetSpritePosition2: ; 5685d (15:685d)
+_SetSpritePosition2:
 	ld hl, wSpriteStateData1
 	ld de, $0004
 	ld a, [wSpriteIndex]
@@ -74,7 +74,7 @@ _SetSpritePosition2: ; 5685d (15:685d)
 	ld [hl], a
 	ret
 
-TrainerWalkUpToPlayer: ; 56881 (15:6881)
+TrainerWalkUpToPlayer:
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a
@@ -149,7 +149,7 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 
 ; input: de = offset within sprite entry
 ; output: de = pointer to sprite data
-GetSpriteDataPointer: ; 56903 (15:6903)
+GetSpriteDataPointer:
 	push de
 	add hl, de
 	ld a, [H_SPRITEINDEX]
@@ -161,7 +161,7 @@ GetSpriteDataPointer: ; 56903 (15:6903)
 	ret
 
 ; tests if this trainer is in the right position to engage the player and do so if she is.
-TrainerEngage: ; 5690f (15:690f)
+TrainerEngage:
 	push hl
 	push de
 	ld a, [wTrainerSpriteOffset]
@@ -225,14 +225,14 @@ TrainerEngage: ; 5690f (15:690f)
 	set 0, [hl]
 	call EngageMapTrainer
 	ld a, $ff
-.noEngage: ; 56988 (15:6988)
+.noEngage:
 	ld [wTrainerSpriteOffset], a
 	pop de
 	pop hl
 	ret
 
 ; reads trainer's Y position to wTrainerScreenY and X position to wTrainerScreenX
-ReadTrainerScreenPosition: ; 5698e (15:698e)
+ReadTrainerScreenPosition:
 	ld a, [wTrainerSpriteOffset]
 	add $4
 	ld d, $0
@@ -254,7 +254,7 @@ ReadTrainerScreenPosition: ; 5698e (15:698e)
 ; checks if the sprite is properly lined up with the player with respect to the direction it's looking. Also checks the distance between player and sprite
 ; note that this does not necessarily mean the sprite is seeing the player, he could be behind it's back
 ; a: distance player to sprite
-CheckSpriteCanSeePlayer: ; 569af (15:69af)
+CheckSpriteCanSeePlayer:
 	ld b, a
 	ld a, [wTrainerEngageDistance] ; how far the trainer can see
 	cp b
@@ -290,7 +290,7 @@ CheckSpriteCanSeePlayer: ; 569af (15:69af)
 	ret
 
 ; tests if the player is in front of the sprite (rather than behind it)
-CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
+CheckPlayerIsInFrontOfSprite:
 	ld a, [wCurMap]
 	cp POWER_PLANT
 	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work

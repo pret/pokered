@@ -1,14 +1,14 @@
-BluesHouseScript: ; 19b3b (6:5b3b)
+BluesHouseScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, BluesHouseScriptPointers
 	ld a, [wBluesHouseCurScript]
 	jp CallFunctionInTable
 
-BluesHouseScriptPointers: ; 19b47 (6:5b47)
+BluesHouseScriptPointers:
 	dw BluesHouseScript0
 	dw BluesHouseScript1
 
-BluesHouseScript0: ; 19b4b (6:5b4b)
+BluesHouseScript0:
 	SetEvent EVENT_ENTERED_BLUES_HOUSE
 
 	; trigger the next script
@@ -16,15 +16,15 @@ BluesHouseScript0: ; 19b4b (6:5b4b)
 	ld [wBluesHouseCurScript], a
 	ret
 
-BluesHouseScript1: ; 19b56 (6:5b56)
+BluesHouseScript1:
 	ret
 
-BluesHouseTextPointers: ; 19b57 (6:5b57)
+BluesHouseTextPointers:
 	dw BluesHouseText1
 	dw BluesHouseText2
 	dw BluesHouseText3
 
-BluesHouseText1: ; 19b5d (6:5b5d)
+BluesHouseText1:
 	TX_ASM
 	CheckEvent EVENT_GOT_TOWN_MAP
 	jr nz, .GotMap
@@ -59,24 +59,24 @@ BluesHouseText1: ; 19b5d (6:5b5d)
 .done
 	jp TextScriptEnd
 
-DaisyInitialText: ; 19baa (6:5baa)
+DaisyInitialText:
 	TX_FAR _DaisyInitialText
 	db "@"
 
-DaisyOfferMapText: ; 19baf (6:5baf)
+DaisyOfferMapText:
 	TX_FAR _DaisyOfferMapText
 	db "@"
 
-GotMapText: ; 19bb4 (6:5bb4)
+GotMapText:
 	TX_FAR _GotMapText
 	TX_SFX_KEY_ITEM
 	db "@"
 
-DaisyBagFullText: ; 19bba (6:5bba)
+DaisyBagFullText:
 	TX_FAR _DaisyBagFullText
 	db "@"
 
-DaisyUseMapText: ; 19bbf (6:5bbf)
+DaisyUseMapText:
 	TX_FAR _DaisyUseMapText
 	db "@"
 

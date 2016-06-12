@@ -1,6 +1,6 @@
 ; try to initiate a wild pokemon encounter
 ; returns success in Z
-TryDoWildEncounter: ; 13870 (4:7870)
+TryDoWildEncounter:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
@@ -101,7 +101,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	xor a
 	ret
 
-WildMonEncounterSlotChances: ; 13918 (4:7918)
+WildMonEncounterSlotChances:
 ; There are 10 slots for wild pokemon, and this is the table that defines how common each of
 ; those 10 slots is. A random number is generated and then the first byte of each pair in this
 ; table is compared against that random number. If the random number is less than or equal

@@ -1,4 +1,4 @@
-MonsterNames: ; 1c21e (7:421e)
+MonsterNames:
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
 	db "NIDORAN♂@@"

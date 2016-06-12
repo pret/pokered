@@ -1,4 +1,4 @@
-Music_Vermilion_Ch1:: ; b9eb (2:79eb)
+Music_Vermilion_Ch1::
 	tempo 156
 	volume 7, 7
 	duty 3
@@ -111,7 +111,7 @@ Music_Vermilion_branch_b9f6::
 	loopchannel 0, Music_Vermilion_branch_b9f6
 
 
-Music_Vermilion_Ch2:: ; ba61 (2:7a61)
+Music_Vermilion_Ch2::
 	duty 3
 	vibrato 10, 2, 3
 
@@ -178,7 +178,7 @@ Music_Vermilion_branch_ba66::
 	loopchannel 0, Music_Vermilion_branch_ba66
 
 
-Music_Vermilion_Ch3:: ; baa6 (2:7aa6)
+Music_Vermilion_Ch3::
 	notetype 12, 1, 0
 
 Music_Vermilion_branch_baa8::
@@ -282,7 +282,7 @@ Music_Vermilion_branch_baa8::
 	loopchannel 0, Music_Vermilion_branch_baa8
 
 
-Music_Vermilion_Ch4:: ; bb0d (2:7b0d)
+Music_Vermilion_Ch4::
 	dspeed 12
 
 Music_Vermilion_branch_bb0e::

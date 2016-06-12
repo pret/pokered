@@ -1,4 +1,4 @@
-PokemonTower4Script: ; 607f6 (18:47f6)
+PokemonTower4Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower4TrainerHeaders
 	ld de, PokemonTower4ScriptPointers
@@ -7,12 +7,12 @@ PokemonTower4Script: ; 607f6 (18:47f6)
 	ld [wPokemonTower4CurScript], a
 	ret
 
-PokemonTower4ScriptPointers: ; 60809 (18:4809)
+PokemonTower4ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-PokemonTower4TextPointers: ; 6080f (18:480f)
+PokemonTower4TextPointers:
 	dw PokemonTower4Text1
 	dw PokemonTower4Text2
 	dw PokemonTower4Text3
@@ -20,8 +20,8 @@ PokemonTower4TextPointers: ; 6080f (18:480f)
 	dw PickUpItemText
 	dw PickUpItemText
 
-PokemonTower4TrainerHeaders: ; 6081b (18:481b)
-PokemonTower4TrainerHeader0: ; 6081b (18:481b)
+PokemonTower4TrainerHeaders:
+PokemonTower4TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_0
@@ -30,7 +30,7 @@ PokemonTower4TrainerHeader0: ; 6081b (18:481b)
 	dw PokemonTower4EndBattleText1 ; TextEndBattle
 	dw PokemonTower4EndBattleText1 ; TextEndBattle
 
-PokemonTower4TrainerHeader1: ; 60827 (18:4827)
+PokemonTower4TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_1
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_1
@@ -39,7 +39,7 @@ PokemonTower4TrainerHeader1: ; 60827 (18:4827)
 	dw PokemonTower4EndBattleText2 ; TextEndBattle
 	dw PokemonTower4EndBattleText2 ; TextEndBattle
 
-PokemonTower4TrainerHeader2: ; 60833 (18:4833)
+PokemonTower4TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_4_TRAINER_2
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_4_TRAINER_2
@@ -50,56 +50,56 @@ PokemonTower4TrainerHeader2: ; 60833 (18:4833)
 
 	db $ff
 
-PokemonTower4Text1: ; 60840 (18:4840)
+PokemonTower4Text1:
 	TX_ASM
 	ld hl, PokemonTower4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-PokemonTower4Text2: ; 6084a (18:484a)
+PokemonTower4Text2:
 	TX_ASM
 	ld hl, PokemonTower4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-PokemonTower4Text3: ; 60854 (18:4854)
+PokemonTower4Text3:
 	TX_ASM
 	ld hl, PokemonTower4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-PokemonTower4BattleText1: ; 6085e (18:485e)
+PokemonTower4BattleText1:
 	TX_FAR _PokemonTower4BattleText1
 	db "@"
 
-PokemonTower4EndBattleText1: ; 60863 (18:4863)
+PokemonTower4EndBattleText1:
 	TX_FAR _PokemonTower4EndBattleText1
 	db "@"
 
-PokemonTower4AfterBattleText1: ; 60868 (18:4868)
+PokemonTower4AfterBattleText1:
 	TX_FAR _PokemonTower4AfterBattleText1
 	db "@"
 
-PokemonTower4BattleText2: ; 6086d (18:486d)
+PokemonTower4BattleText2:
 	TX_FAR _PokemonTower4BattleText2
 	db "@"
 
-PokemonTower4EndBattleText2: ; 60872 (18:4872)
+PokemonTower4EndBattleText2:
 	TX_FAR _PokemonTower4EndBattleText2
 	db "@"
 
-PokemonTower4AfterBattleText2: ; 60877 (18:4877)
+PokemonTower4AfterBattleText2:
 	TX_FAR _PokemonTower4AfterBattleText2
 	db "@"
 
-PokemonTower4BattleText3: ; 6087c (18:487c)
+PokemonTower4BattleText3:
 	TX_FAR _PokemonTower4BattleText3
 	db "@"
 
-PokemonTower4EndBattleText3: ; 60881 (18:4881)
+PokemonTower4EndBattleText3:
 	TX_FAR _PokemonTower4EndBattleText3
 	db "@"
 
-PokemonTower4AfterBattleText3: ; 60886 (18:4886)
+PokemonTower4AfterBattleText3:
 	TX_FAR _PokemonTower4AfterBattleText3
 	db "@"

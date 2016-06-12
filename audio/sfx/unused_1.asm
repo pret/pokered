@@ -1,4 +1,4 @@
-SFX_02_unused_Ch1: ; 86e3 (2:46e3)
+SFX_02_unused_Ch1:
 	dutycycle 240
 	unknownsfx0x20 15, 224, 128, 7
 	unknownsfx0x20 15, 240, 132, 7
@@ -9,7 +9,7 @@ SFX_02_unused_Ch1: ; 86e3 (2:46e3)
 	endchannel
 
 
-SFX_02_unused_Ch2: ; 86fe (2:46fe)
+SFX_02_unused_Ch2:
 	dutycycle 5
 	unknownsfx0x20 15, 160, 65, 7
 	unknownsfx0x20 15, 176, 67, 7
@@ -20,7 +20,7 @@ SFX_02_unused_Ch2: ; 86fe (2:46fe)
 	endchannel
 
 
-SFX_02_unused_Ch3: ; 8719 (2:4719)
+SFX_02_unused_Ch3:
 	unknownnoise0x20 2, 242, 76
 	unknownnoise0x20 6, 224, 58
 	unknownnoise0x20 15, 208, 58

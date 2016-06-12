@@ -1,4 +1,4 @@
-PrintStatusAilment: ; 747de (1d:47de)
+PrintStatusAilment:
 	ld a, [de]
 	bit PSN, a
 	jr nz, .psn

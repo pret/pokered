@@ -1,14 +1,14 @@
-Route8GateScript: ; 1e1c7 (7:61c7)
+Route8GateScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route8GateScriptPointers
 	ld a, [wRoute8GateCurScript]
 	jp CallFunctionInTable
 
-Route8GateScriptPointers: ; 1e1d3 (7:61d3)
+Route8GateScriptPointers:
 	dw Route8GateScript0
 	dw Route8GateScript1
 
-Route8GateScript_1e1d7: ; 1e1d7 (7:61d7)
+Route8GateScript_1e1d7:
 	ld hl, wd730
 	set 7, [hl]
 	ld a, $10
@@ -20,7 +20,7 @@ Route8GateScript_1e1d7: ; 1e1d7 (7:61d7)
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	ret
 
-Route8GateScript0: ; 1e1ee (7:61ee)
+Route8GateScript0:
 	ld a, [wd728]
 	bit 6, a
 	ret nz
@@ -49,12 +49,12 @@ Route8GateScript0: ; 1e1ee (7:61ee)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-CoordsData_1e22c: ; 1e22c (7:622c)
+CoordsData_1e22c:
 	db 3,2
 	db 4,2
 	db $ff
 
-Route8GateScript1: ; 1e231 (7:6231)
+Route8GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -64,7 +64,7 @@ Route8GateScript1: ; 1e231 (7:6231)
 	ld [wRoute8GateCurScript], a
 	ret
 
-Route8GateTextPointers: ; 1e241 (7:6241)
+Route8GateTextPointers:
 	dw Route8GateText1
 	dw Route8GateText2
 	dw Route8GateText3

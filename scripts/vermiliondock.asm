@@ -1,4 +1,4 @@
-VermilionDockScript: ; 1db52 (7:5b52)
+VermilionDockScript:
 	call EnableAutoTextBoxDrawing
 	CheckEventHL EVENT_STARTED_WALKING_OUT_OF_DOCK
 	jr nz, .asm_1db8d
@@ -36,7 +36,7 @@ VermilionDockScript: ; 1db52 (7:5b52)
 	SetEventReuseHL EVENT_WALKED_OUT_OF_DOCK
 	ret
 
-VermilionDock_1db9b: ; 1db9b (7:5b9b)
+VermilionDock_1db9b:
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -121,7 +121,7 @@ VermilionDock_1db9b: ; 1db9b (7:5b9b)
 	dec [hl]
 	ret
 
-VermilionDock_AnimSmokePuffDriftRight: ; 1dc42 (7:5c42)
+VermilionDock_AnimSmokePuffDriftRight:
 	push bc
 	push de
 	ld hl, wOAMBuffer + $11
@@ -139,7 +139,7 @@ VermilionDock_AnimSmokePuffDriftRight: ; 1dc42 (7:5c42)
 	pop bc
 	ret
 
-VermilionDock_EmitSmokePuff: ; 1dc59 (7:5c59)
+VermilionDock_EmitSmokePuff:
 ; new smoke puff above the S.S. Anne's front smokestack
 	ld a, [wSSAnneSmokeX]
 	sub 16
@@ -154,13 +154,13 @@ VermilionDock_EmitSmokePuff: ; 1dc59 (7:5c59)
 	call WriteOAMBlock
 	ret
 
-VermilionDockOAMBlock: ; 1dc74 (7:5c74)
+VermilionDockOAMBlock:
 	db $fc, $10
 	db $fd, $10
 	db $fe, $10
 	db $ff, $10
 
-VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
+VermilionDock_1dc7c:
 	ld h, d
 	ld l, $50
 	call .asm_1dc86
@@ -178,7 +178,7 @@ VermilionDock_1dc7c: ; 1dc7c (7:5c7c)
 	jr z, .asm_1dc8e
 	ret
 
-VermilionDock_EraseSSAnne: ; 1dc94 (7:5c94)
+VermilionDock_EraseSSAnne:
 ; Fill the area the S.S. Anne occupies in BG map 0 with water tiles.
 	ld hl, wVermilionDockTileMapBuffer
 	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
@@ -207,9 +207,9 @@ VermilionDock_EraseSSAnne: ; 1dc94 (7:5c94)
 	call DelayFrames
 	ret
 
-VermilionDockTextPointers: ; 1dcbf (7:5cbf)
+VermilionDockTextPointers:
 	dw VermilionDockText1
 
-VermilionDockText1: ; 1dcc1 (7:5cc1)
+VermilionDockText1:
 	TX_FAR _VermilionDockText1
 	db "@"

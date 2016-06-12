@@ -1,11 +1,11 @@
-Route2GateScript: ; 5d5d4 (17:55d4)
+Route2GateScript:
 	jp EnableAutoTextBoxDrawing
 
-Route2GateTextPointers: ; 5d5d7 (17:55d7)
+Route2GateTextPointers:
 	dw Route2GateText1
 	dw Route2GateText2
 
-Route2GateText1: ; 5d5db (17:55db)
+Route2GateText1:
 	TX_ASM
 	CheckEvent EVENT_GOT_HM05
 	jr nz, .asm_5d60d
@@ -30,10 +30,10 @@ Route2GateText1: ; 5d5db (17:55db)
 .asm_5d613
 	jp TextScriptEnd
 
-Route2GateText_5d616: ; 5d616 (17:5616)
+Route2GateText_5d616:
 	TX_FAR _Route2GateText_5d616
 	db "@"
 
-Route2GateText2: ; 5d61b (17:561b)
+Route2GateText2:
 	TX_FAR _Route2GateText2
 	db "@"

@@ -1,4 +1,4 @@
-OneHitKOEffect_: ; 33f57 (c:7f57)
+OneHitKOEffect_:
 	ld hl, wDamage
 	xor a
 	ld [hli], a

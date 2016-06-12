@@ -1,4 +1,4 @@
-CreditsOrder: ; 74243 (1d:4243)
+CreditsOrder:
 ; subsequent credits elements will be displayed on separate lines.
 ; $FF, $FE, $FD, $FC, $FB, and $FA are commands that are used
 ; to go to the next set of credits texts.

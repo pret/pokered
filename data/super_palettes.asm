@@ -1,5 +1,5 @@
 ; palettes for overworlds, title screen, monsters
-SuperPalettes: ; 72660 (1c:6660)
+SuperPalettes:
 	RGB 31,29,31 ; PAL_ROUTE
 	RGB 21,28,11
 	RGB 20,26,31

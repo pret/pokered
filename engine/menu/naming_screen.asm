@@ -1,4 +1,4 @@
-AskName: ; 64eb (1:64eb)
+AskName:
 	call SaveScreenTilesToBuffer1
 	call GetPredefRegisters
 	push hl
@@ -53,7 +53,7 @@ DoYouWantToNicknameText: ; 0x6557
 	TX_FAR _DoYouWantToNicknameText
 	db "@"
 
-DisplayNameRaterScreen: ; 655c (1:655c)
+DisplayNameRaterScreen:
 	ld hl, wBuffer
 	xor a
 	ld [wUpdateSpritesEnabled], a
@@ -81,7 +81,7 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	scf
 	ret
 
-DisplayNamingScreen: ; 6596 (1:6596)
+DisplayNamingScreen:
 	push hl
 	ld hl, wd730
 	set 6, [hl]
@@ -323,7 +323,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld [wTopMenuItemX], a
 	jp EraseMenuCursor
 
-LoadEDTile: ; 675b (1:675b)
+LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont + $700
 	ld bc, (ED_TileEnd - ED_Tile) / $8
@@ -331,11 +331,11 @@ LoadEDTile: ; 675b (1:675b)
 	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
-ED_Tile: ; 6767 (1:6767)
+ED_Tile:
 	INCBIN "gfx/ED_tile.1bpp"
 ED_TileEnd:
 
-PrintAlphabet: ; 676f (1:676f)
+PrintAlphabet:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [wAlphabetCase]
@@ -365,13 +365,13 @@ PrintAlphabet: ; 676f (1:676f)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-LowerCaseAlphabet: ; 679e (1:679e)
+LowerCaseAlphabet:
 	db "abcdefghijklmnopqrstuvwxyz ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥UPPER CASE@"
 
-UpperCaseAlphabet: ; 67d6 (1:67d6)
+UpperCaseAlphabet:
 	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/",$f2,",¥lower case@"
 
-PrintNicknameAndUnderscores: ; 680e (1:680e)
+PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
 	ld [wNamingScreenNameLength], a
@@ -425,7 +425,7 @@ PrintNicknameAndUnderscores: ; 680e (1:680e)
 	ld [hl], $77 ; raised underscore tile id
 	ret
 
-DakutensAndHandakutens: ; 6871 (1:6871)
+DakutensAndHandakutens:
 	push de
 	call CalcStringLength
 	dec hl
@@ -439,7 +439,7 @@ DakutensAndHandakutens: ; 6871 (1:6871)
 	ld [wNamingScreenLetter], a
 	ret
 
-Dakutens: ; 6885 (1:6885)
+Dakutens:
 	db "かが", "きぎ", "くぐ", "けげ", "こご"
 	db "さざ", "しじ", "すず", "せぜ", "そぞ"
 	db "ただ", "ちぢ", "つづ", "てで", "とど"
@@ -450,13 +450,13 @@ Dakutens: ; 6885 (1:6885)
 	db "ハバ", "ヒビ", "フブ", "へべ", "ホボ"
 	db $ff
 
-Handakutens: ; 68d6 (1:68d6)
+Handakutens:
 	db "はぱ", "ひぴ", "ふぷ", "へぺ", "ほぽ"
 	db "ハパ", "ヒピ", "フプ", "へぺ", "ホポ"
 	db $ff
 
 ; calculates the length of the string at wcf4b and stores it in c
-CalcStringLength: ; 68eb (1:68eb)
+CalcStringLength:
 	ld hl, wcf4b
 	ld c, $0
 .loop
@@ -467,7 +467,7 @@ CalcStringLength: ; 68eb (1:68eb)
 	inc c
 	jr .loop
 
-PrintNamingText: ; 68f8 (1:68f8)
+PrintNamingText:
 	coord hl, 0, 1
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
@@ -499,14 +499,14 @@ PrintNamingText: ; 68f8 (1:68f8)
 .placeString
 	jp PlaceString
 
-YourTextString: ; 693f (1:693f)
+YourTextString:
 	db "YOUR @"
 
-RivalsTextString: ; 6945 (1:6945)
+RivalsTextString:
 	db "RIVAL's @"
 
-NameTextString: ; 694d (1:694d)
+NameTextString:
 	db "NAME?@"
 
-NicknameTextString: ; 6953 (1:6953)
+NicknameTextString:
 	db "NICKNAME?@"

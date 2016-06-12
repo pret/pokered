@@ -1,4 +1,4 @@
-SFX_Shooting_Star_Ch1: ; 7c72d (1f:472d)
+SFX_Shooting_Star_Ch1:
 	dutycycle 228
 	unknownsfx0x10 47
 	unknownsfx0x20 4, 64, 224, 7

@@ -1,4 +1,4 @@
-SFX_Withdraw_Deposit_1_Ch1: ; 86ab (2:46ab)
+SFX_Withdraw_Deposit_1_Ch1:
 	duty 1
 	unknownsfx0x10 58
 	unknownsfx0x20 4, 242, 0, 5

@@ -1,10 +1,10 @@
-SafariZoneEntranceScript: ; 751cd (1d:51cd)
+SafariZoneEntranceScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEntranceScriptPointers
 	ld a, [wSafariZoneEntranceCurScript]
 	jp CallFunctionInTable
 
-SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
+SafariZoneEntranceScriptPointers:
 	dw .SafariZoneEntranceScript0
 	dw .SafariZoneEntranceScript1
 	dw .SafariZoneEntranceScript2
@@ -42,7 +42,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [wSafariZoneEntranceCurScript], a
 	ret
 
-.CoordsData_75221: ; 75221 (1d:5221)
+.CoordsData_75221:
 	db $02,$03
 	db $02,$04
 	db $FF
@@ -130,7 +130,7 @@ SafariZoneEntranceScript_752b4:
 	and a
 	ret
 
-SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
+SafariZoneEntranceTextPointers:
 	dw .SafariZoneEntranceText1
 	dw .SafariZoneEntranceText2
 	dw .SafariZoneEntranceText1

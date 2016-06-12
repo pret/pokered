@@ -1,4 +1,4 @@
-SFX_Healing_Machine_1_Ch1: ; 8580 (2:4580)
+SFX_Healing_Machine_1_Ch1:
 	duty 2
 	unknownsfx0x10 44
 	unknownsfx0x20 4, 242, 0, 5

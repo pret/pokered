@@ -1,4 +1,4 @@
-ChoosePlayerName: ; 695d (1:695d)
+ChoosePlayerName:
 	call OakSpeechSlidePicRight
 	ld de, DefaultNamesPlayer
 	call DisplayIntroNameTextBox
@@ -27,11 +27,11 @@ ChoosePlayerName: ; 695d (1:695d)
 	ld hl, YourNameIsText
 	jp PrintText
 
-YourNameIsText: ; 699f (1:699f)
+YourNameIsText:
 	TX_FAR _YourNameIsText
 	db "@"
 
-ChooseRivalName: ; 69a4 (1:69a4)
+ChooseRivalName:
 	call OakSpeechSlidePicRight
 	ld de, DefaultNamesRival
 	call DisplayIntroNameTextBox
@@ -60,11 +60,11 @@ ChooseRivalName: ; 69a4 (1:69a4)
 	ld hl, HisNameIsText
 	jp PrintText
 
-HisNameIsText: ; 69e7 (1:69e7)
+HisNameIsText:
 	TX_FAR _HisNameIsText
 	db "@"
 
-OakSpeechSlidePicLeft: ; 69ec (1:69ec)
+OakSpeechSlidePicLeft:
 	push de
 	coord hl, 0, 0
 	lb bc, 12, 11
@@ -81,12 +81,12 @@ OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
-OakSpeechSlidePicRight: ; 6a12 (1:6a12)
+OakSpeechSlidePicRight:
 	coord hl, 5, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
-OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
+OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
@@ -159,7 +159,7 @@ OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
 	pop hl
 	ret
 
-DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
+DisplayIntroNameTextBox:
 	push de
 	coord hl, 0, 0
 	ld b, $a
@@ -188,14 +188,14 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	db "NAME@"
 
 IF DEF(_RED)
-DefaultNamesPlayer: ; 6aa8 (1:6aa8)
+DefaultNamesPlayer:
 	db   "NEW NAME"
 	next "RED"
 	next "ASH"
 	next "JACK"
 	db   "@"
 
-DefaultNamesRival: ; 6abe (1:6abe)
+DefaultNamesRival:
 	db   "NEW NAME"
 	next "BLUE"
 	next "GARY"
@@ -204,14 +204,14 @@ DefaultNamesRival: ; 6abe (1:6abe)
 ENDC
 
 IF DEF(_BLUE)
-DefaultNamesPlayer: ; 6aa8 (1:6aa8)
+DefaultNamesPlayer:
 	db   "NEW NAME"
 	next "BLUE"
 	next "GARY"
 	next "JOHN"
 	db   "@"
 
-DefaultNamesRival: ; 6abe (1:6abe)
+DefaultNamesRival:
 	db   "NEW NAME"
 	next "RED"
 	next "ASH"
@@ -219,7 +219,7 @@ DefaultNamesRival: ; 6abe (1:6abe)
 	db   "@"
 ENDC
 
-GetDefaultName: ; 6ad6 (1:6ad6)
+GetDefaultName:
 ; a = name index
 ; hl = name list
 	ld b, a
@@ -244,29 +244,29 @@ GetDefaultName: ; 6ad6 (1:6ad6)
 	jp CopyData
 
 IF DEF(_RED)
-DefaultNamesPlayerList: ; 6af2 (1:6af2)
+DefaultNamesPlayerList:
 	db "NEW NAME@"
 	db "RED@"
 	db "ASH@"
 	db "JACK@"
-DefaultNamesRivalList: ; 6b08 (1:6b08)
+DefaultNamesRivalList:
 	db "NEW NAME@"
 	db "BLUE@"
 	db "GARY@"
 	db "JOHN@"
 ENDC
 IF DEF(_BLUE)
-DefaultNamesPlayerList: ; 6af2 (1:6af2)
+DefaultNamesPlayerList:
 	db "NEW NAME@"
 	db "BLUE@"
 	db "GARY@"
 	db "JOHN@"
-DefaultNamesRivalList: ; 6b08 (1:6b08)
+DefaultNamesRivalList:
 	db "NEW NAME@"
 	db "RED@"
 	db "ASH@"
 	db "JACK@"
 ENDC
 
-TextTerminator_6b20: ; 6b20 (1:6b20)
+TextTerminator_6b20:
 	db "@"

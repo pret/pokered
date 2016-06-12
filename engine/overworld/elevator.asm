@@ -1,4 +1,4 @@
-ShakeElevator: ; 7bf15 (1e:7f15)
+ShakeElevator:
 	ld de, -$20
 	call ShakeElevatorRedrawRow
 	ld de, SCREEN_HEIGHT * $20
@@ -39,7 +39,7 @@ ShakeElevator: ; 7bf15 (1e:7f15)
 	call UpdateSprites
 	jp PlayDefaultMusic
 
-ShakeElevatorRedrawRow: ; 7bf64 (1e:7f64)
+ShakeElevatorRedrawRow:
 ; This function is used to redraw certain portions of the screen, but it does
 ; not appear to ever result in any visible effect, so this function seems to
 ; be pointless.

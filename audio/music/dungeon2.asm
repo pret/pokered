@@ -1,4 +1,4 @@
-Music_Dungeon2_Ch1:: ; 7e887 (1f:6887)
+Music_Dungeon2_Ch1::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -70,7 +70,7 @@ Music_Dungeon2_branch_7e892::
 	loopchannel 0, Music_Dungeon2_branch_7e892
 
 
-Music_Dungeon2_Ch2:: ; 7e8d8 (1f:68d8)
+Music_Dungeon2_Ch2::
 	vibrato 11, 1, 5
 
 Music_Dungeon2_branch_7e8db::
@@ -162,7 +162,7 @@ Music_Dungeon2_branch_7e8db::
 	loopchannel 0, Music_Dungeon2_branch_7e8db
 
 
-Music_Dungeon2_Ch3:: ; 7e93b (1f:693b)
+Music_Dungeon2_Ch3::
 	notetype 12, 1, 3
 	vibrato 8, 2, 6
 
@@ -302,7 +302,7 @@ Music_Dungeon2_branch_7e9d1::
 	endchannel
 
 
-Music_Dungeon2_Ch4:: ; 7e9dc (1f:69dc)
+Music_Dungeon2_Ch4::
 	dspeed 12
 
 Music_Dungeon2_branch_7e9dd::

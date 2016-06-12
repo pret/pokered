@@ -1,4 +1,4 @@
-SFX_Heal_Ailment_2_Ch1: ; 203fd (8:43fd)
+SFX_Heal_Ailment_2_Ch1:
 	duty 2
 	unknownsfx0x10 20
 	unknownsfx0x20 4, 242, 0, 6

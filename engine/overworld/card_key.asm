@@ -1,4 +1,4 @@
-PrintCardKeyText: ; 52673 (14:6673)
+PrintCardKeyText:
 	ld hl, SilphCoMapList
 	ld a, [wCurMap]
 	ld b, a
@@ -58,7 +58,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld [hSpriteIndexOrTextID], a
 	jp PrintPredefTextID
 
-SilphCoMapList: ; 526e3 (14:66e3)
+SilphCoMapList:
 	db SILPH_CO_2F
 	db SILPH_CO_3F
 	db SILPH_CO_4F
@@ -71,19 +71,19 @@ SilphCoMapList: ; 526e3 (14:66e3)
 	db SILPH_CO_11F
 	db $FF
 
-CardKeySuccessText: ; 526ee (14:66ee)
+CardKeySuccessText:
 	TX_FAR _CardKeySuccessText1
 	db $0b
 	TX_FAR _CardKeySuccessText2
 	db "@"
 
-CardKeyFailText: ; 526f8 (14:66f8)
+CardKeyFailText:
 	TX_FAR _CardKeyFailText
 	db "@"
 
 ; d = Y
 ; e = X
-GetCoordsInFrontOfPlayer: ; 526fd (14:66fd)
+GetCoordsInFrontOfPlayer:
 	ld a, [wYCoord]
 	ld d, a
 	ld a, [wXCoord]

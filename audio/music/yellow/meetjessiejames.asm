@@ -1,4 +1,4 @@
-Music_MeetJessieJames_Ch1:: ; 8316d (20:716d)
+Music_MeetJessieJames_Ch1::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -77,7 +77,7 @@ Music_MeetJessieJames_branch_83187::
 	loopchannel 0, Music_MeetJessieJames_branch_83187
 
 
-Music_MeetJessieJames_Ch2:: ; 831c8 (20:71c8)
+Music_MeetJessieJames_Ch2::
 	duty 3
 	vibrato 6, 1, 5
 	notetype 12, 12, 2
@@ -164,7 +164,7 @@ Music_MeetJessieJames_branch_831df::
 	loopchannel 0, Music_MeetJessieJames_branch_831df
 
 
-Music_MeetJessieJames_Ch3:: ; 8322a (20:722a)
+Music_MeetJessieJames_Ch3::
 	notetype 12, 1, 0
 	rest 16
 	rest 8

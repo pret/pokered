@@ -1,4 +1,4 @@
-PalletTown_h: ; 182a1 (6:42a1)
+PalletTown_h:
 	db OVERWORLD ; tileset
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions
 	dw PalletTownBlocks, PalletTownTextPointers, PalletTownScript

@@ -1,4 +1,4 @@
-SFX_Go_Outside_1_Ch1: ; 8452 (2:4452)
+SFX_Go_Outside_1_Ch1:
 	unknownnoise0x20 2, 241, 84
 	unknownnoise0x20 12, 113, 35
 	unknownnoise0x20 2, 177, 84

@@ -1,4 +1,4 @@
-SpriteFacingAndAnimationTable: ; 4000 (1:4000)
+SpriteFacingAndAnimationTable:
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 0
 	dw SpriteFacingDownAndWalking, SpriteOAMParameters         ; facing down, walk animation frame 1
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters        ; facing down, walk animation frame 2
@@ -32,25 +32,25 @@ SpriteFacingAndAnimationTable: ; 4000 (1:4000)
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters
 	dw SpriteFacingDownAndStanding, SpriteOAMParameters
 
-SpriteFacingDownAndStanding: ; 4080 (1:4080)
+SpriteFacingDownAndStanding:
 	db $00,$01,$02,$03
-SpriteFacingDownAndWalking: ; 4084 (1:4084)
+SpriteFacingDownAndWalking:
 	db $80,$81,$82,$83
-SpriteFacingUpAndStanding: ; 4088 (1:4088)
+SpriteFacingUpAndStanding:
 	db $04,$05,$06,$07
-SpriteFacingUpAndWalking: ; 408c (1:408c)
+SpriteFacingUpAndWalking:
 	db $84,$85,$86,$87
-SpriteFacingLeftAndStanding: ; 4090 (1:4090)
+SpriteFacingLeftAndStanding:
 	db $08,$09,$0a,$0b
-SpriteFacingLeftAndWalking: ; 4094 (1:4094)
+SpriteFacingLeftAndWalking:
 	db $88,$89,$8a,$8b
 
-SpriteOAMParameters: ; 4098 (1:4098)
+SpriteOAMParameters:
 	db $00,$00, $00                                      ; top left
 	db $00,$08, $00                                      ; top right
 	db $08,$00, OAMFLAG_CANBEMASKED                      ; bottom left
 	db $08,$08, OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA  ; bottom right
-SpriteOAMParametersFlipped: ; 40a4 (1:40a4)
+SpriteOAMParametersFlipped:
 	db $00,$08, OAMFLAG_VFLIPPED
 	db $00,$00, OAMFLAG_VFLIPPED
 	db $08,$08, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED

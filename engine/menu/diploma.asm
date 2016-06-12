@@ -1,4 +1,4 @@
-DisplayDiploma: ; 566e2 (15:66e2)
+DisplayDiploma:
 	call SaveScreenTilesToBuffer2
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
@@ -69,7 +69,7 @@ DisplayDiploma: ; 566e2 (15:66e2)
 	call Delay3
 	jp GBPalNormal
 
-UnusedPlayerNameLengthFunc: ; 56777 (15:6777)
+UnusedPlayerNameLengthFunc:
 ; Unused function that does a calculation involving the length of the player's
 ; name.
 	ld hl, wPlayerName
@@ -81,7 +81,7 @@ UnusedPlayerNameLengthFunc: ; 56777 (15:6777)
 	dec c
 	jr .loop
 
-DiplomaTextPointersAndCoords: ; 56784 (15:6784)
+DiplomaTextPointersAndCoords:
 	dw DiplomaText
 	dwCoord 5, 2
 	dw DiplomaPlayer

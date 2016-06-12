@@ -1,4 +1,4 @@
-SFX_SS_Anne_Horn_1_Ch1: ; 866d (2:466d)
+SFX_SS_Anne_Horn_1_Ch1:
 	duty 2
 	unknownsfx0x20 15, 240, 0, 5
 	unknownsfx0x20 4, 0, 0, 0
@@ -10,7 +10,7 @@ SFX_SS_Anne_Horn_1_Ch1: ; 866d (2:466d)
 	endchannel
 
 
-SFX_SS_Anne_Horn_1_Ch2: ; 868c (2:468c)
+SFX_SS_Anne_Horn_1_Ch2:
 	duty 3
 	unknownsfx0x20 15, 240, 130, 4
 	unknownsfx0x20 4, 0, 0, 0

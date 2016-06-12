@@ -1,4 +1,4 @@
-EvolveMon: ; 7bde9 (1e:7de9)
+EvolveMon:
 	push hl
 	push de
 	push bc
@@ -93,16 +93,16 @@ EvolveMon: ; 7bde9 (1e:7de9)
 	ld a, [wEvoOldSpecies]
 	jr .done
 
-EvolutionSetWholeScreenPalette: ; 7beb4 (1e:7eb4)
+EvolutionSetWholeScreenPalette:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	jp RunPaletteCommand
 
-Evolution_LoadPic: ; 7beb9 (1e:7eb9)
+Evolution_LoadPic:
 	call GetMonHeader
 	coord hl, 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
-Evolution_BackAndForthAnim: ; 7bec2 (1e:7ec2)
+Evolution_BackAndForthAnim:
 ; show the mon change back and forth between the new and old species b times
 	ld a, $31
 	ld [wEvoMonTileOffset], a
@@ -114,7 +114,7 @@ Evolution_BackAndForthAnim: ; 7bec2 (1e:7ec2)
 	jr nz, Evolution_BackAndForthAnim
 	ret
 
-Evolution_ChangeMonPic: ; 7bed6 (1e:7ed6)
+Evolution_ChangeMonPic:
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -139,7 +139,7 @@ Evolution_ChangeMonPic: ; 7bed6 (1e:7ed6)
 	pop bc
 	ret
 
-Evolution_CheckForCancel: ; 7befa (1e:7efa)
+Evolution_CheckForCancel:
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity

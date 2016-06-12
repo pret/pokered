@@ -1,4 +1,4 @@
-AnimateHallOfFame: ; 701a0 (1c:41a0)
+AnimateHallOfFame:
 	call HoFFadeOutScreenAndMusic
 	call ClearScreen
 	ld c, 100
@@ -91,10 +91,10 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	res 3, [hl]
 	ret
 
-HallOfFameText: ; 7026b (1c:426b)
+HallOfFameText:
 	db "HALL OF FAME@"
 
-HoFShowMonOrPlayer: ; 70278 (1c:4278)
+HoFShowMonOrPlayer:
 	call ClearScreen
 	ld a, $d0
 	ld [hSCY], a
@@ -149,14 +149,14 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	jr nz, .ScrollPic
 	ret
 
-HoFDisplayAndRecordMonInfo: ; 702e1 (1c:42e1)
+HoFDisplayAndRecordMonInfo:
 	ld a, [wHoFPartyMonIndex]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	call HoFDisplayMonInfo
 	jp HoFRecordMonInfo
 
-HoFDisplayMonInfo: ; 702f0 (1c:42f0)
+HoFDisplayMonInfo:
 	coord hl, 0, 2
 	ld b, 9
 	ld c, 10
@@ -177,12 +177,12 @@ HoFDisplayMonInfo: ; 702f0 (1c:42f0)
 	ld a, [wHoFMonSpecies]
 	jp PlayCry
 
-HoFMonInfoText: ; 70329 (1c:4329)
+HoFMonInfoText:
 	db   "LEVEL/"
 	next "TYPE1/"
 	next "TYPE2/@"
 
-HoFLoadPlayerPics: ; 7033e (1c:433e)
+HoFLoadPlayerPics:
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
@@ -200,13 +200,13 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
 
-HoFLoadMonPlayerPicTileIDs: ; 7036d (1c:436d)
+HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID
 	ld b, 0
 	coord hl, 12, 5
 	predef_jump CopyTileIDsFromList
 
-HoFDisplayPlayerStats: ; 70377 (1c:4377)
+HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	coord hl, 0, 4
@@ -245,26 +245,26 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call HoFPrintTextAndDelay
 	ld hl, wDexRatingText
 
-HoFPrintTextAndDelay: ; 703e2 (1c:43e2)
+HoFPrintTextAndDelay:
 	call PrintText
 	ld c, 120
 	jp DelayFrames
 
-HoFPlayTimeText: ; 703ea (1c:43ea)
+HoFPlayTimeText:
 	db "PLAY TIME@"
 
-HoFMoneyText: ; 703f4 (1c:43f4)
+HoFMoneyText:
 	db "MONEY@"
 
-DexSeenOwnedText: ; 703fa (1c:43fa)
+DexSeenOwnedText:
 	TX_FAR _DexSeenOwnedText
 	db "@"
 
-DexRatingText: ; 703ff (1c:43ff)
+DexRatingText:
 	TX_FAR _DexRatingText
 	db "@"
 
-HoFRecordMonInfo: ; 70404 (1c:4404)
+HoFRecordMonInfo:
 	ld hl, wHallOfFame
 	ld bc, HOF_MON
 	ld a, [wHoFPartyMonIndex]
@@ -279,7 +279,7 @@ HoFRecordMonInfo: ; 70404 (1c:4404)
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-HoFFadeOutScreenAndMusic: ; 70423 (1c:4423)
+HoFFadeOutScreenAndMusic:
 	ld a, 10
 	ld [wAudioFadeOutCounterReloadValue], a
 	ld [wAudioFadeOutCounter], a

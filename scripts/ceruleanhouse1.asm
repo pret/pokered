@@ -1,15 +1,15 @@
-CeruleanHouse1Script: ; 1d6f6 (7:56f6)
+CeruleanHouse1Script:
 	jp EnableAutoTextBoxDrawing
 
-CeruleanHouse1TextPointers: ; 1d6f9 (7:56f9)
+CeruleanHouse1TextPointers:
 	dw CeruleanHouse1Text1
 	dw CeruleanHouse1Text2
 
-CeruleanHouse1Text1: ; 1d6fd (7:56fd)
+CeruleanHouse1Text1:
 	TX_FAR _CeruleanHouse1Text1
 	db "@"
 
-CeruleanHouse1Text2: ; 1d702 (7:5702)
+CeruleanHouse1Text2:
 	TX_ASM
 	ld a, $6
 	ld [wWhichTrade], a

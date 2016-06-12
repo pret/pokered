@@ -1,4 +1,4 @@
-MonPartyData: ; 7190d (1c:590d)
+MonPartyData:
 	dn SPRITE_GRASS, SPRITE_GRASS			;Bulbasaur/Ivysaur
 	dn SPRITE_GRASS, SPRITE_MON				;Venusaur/Charmander
 	dn SPRITE_MON, SPRITE_MON				;Charmeleon/Charizard

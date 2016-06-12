@@ -1,4 +1,4 @@
-HiddenItemCoords: ; 766b8 (1d:66b8)
+HiddenItemCoords:
 ; map ID, then coords
 	db VIRIDIAN_FOREST,$12,$01
 	db VIRIDIAN_FOREST,$2a,$10

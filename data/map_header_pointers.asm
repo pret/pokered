@@ -1,5 +1,5 @@
 ; see also MapHeaderBanks
-MapHeaderPointers:: ; 01ae (0:01ae)
+MapHeaderPointers::
 	dw PalletTown_h
 	dw ViridianCity_h
 	dw PewterCity_h

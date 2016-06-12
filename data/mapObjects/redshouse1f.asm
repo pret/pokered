@@ -1,4 +1,4 @@
-RedsHouse1FObject: ; 481e4 (12:41e4)
+RedsHouse1FObject:
 	db $0A ; border block
 
 	db $3 ; warps

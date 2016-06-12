@@ -1,4 +1,4 @@
-SFX_Level_Up_Ch1: ; 2397d (8:797d)
+SFX_Level_Up_Ch1:
 	executemusic
 	tempo 256
 	volume 7, 7
@@ -20,7 +20,7 @@ SFX_Level_Up_Ch1: ; 2397d (8:797d)
 	endchannel
 
 
-SFX_Level_Up_Ch2: ; 23998 (8:7998)
+SFX_Level_Up_Ch2:
 	executemusic
 	vibrato 4, 2, 2
 	duty 2
@@ -40,7 +40,7 @@ SFX_Level_Up_Ch2: ; 23998 (8:7998)
 	endchannel
 
 
-SFX_Level_Up_Ch3: ; 239b0 (8:79b0)
+SFX_Level_Up_Ch3:
 	executemusic
 	notetype 6, 1, 0
 	octave 5

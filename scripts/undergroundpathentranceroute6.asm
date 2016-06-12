@@ -1,11 +1,11 @@
-UndergroundPathEntranceRoute6Script: ; 5d6ef (17:56ef)
+UndergroundPathEntranceRoute6Script:
 	ld a, ROUTE_6
 	ld [wLastMap], a
 	jp EnableAutoTextBoxDrawing
 
-UndergroundPathEntranceRoute6TextPointers: ; 5d6f7 (17:56f7)
+UndergroundPathEntranceRoute6TextPointers:
 	dw UndergroundPathEntranceRoute6Text1
 
-UndergroundPathEntranceRoute6Text1: ; 5d6f9 (17:56f9)
+UndergroundPathEntranceRoute6Text1:
 	TX_FAR _UndergrdTunnelEntRoute6Text1
 	db "@"

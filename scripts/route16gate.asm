@@ -1,4 +1,4 @@
-Route16GateScript: ; 496be (12:56be)
+Route16GateScript:
 	ld hl, wd732
 	res 5, [hl]
 	call EnableAutoTextBoxDrawing
@@ -6,13 +6,13 @@ Route16GateScript: ; 496be (12:56be)
 	ld hl, Route16GateScriptPointers
 	jp CallFunctionInTable
 
-Route16GateScriptPointers: ; 496cf (12:56cf)
+Route16GateScriptPointers:
 	dw Route16GateScript0
 	dw Route16GateScript1
 	dw Route16GateScript2
 	dw Route16GateScript3
 
-Route16GateScript0: ; 496d7 (12:56d7)
+Route16GateScript0:
 	call Route16GateScript_49755
 	ret nz
 	ld hl, CoordsData_49714
@@ -43,21 +43,21 @@ Route16GateScript0: ; 496d7 (12:56d7)
 	ld [wRoute16GateCurScript], a
 	ret
 
-CoordsData_49714: ; 49714 (12:5714)
+CoordsData_49714:
 	db $07,$04
 	db $08,$04
 	db $09,$04
 	db $0A,$04
 	db $FF
 
-Route16GateScript1: ; 4971d (12:571d)
+Route16GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $f0
 	ld [wJoyIgnore], a
 
-Route16GateScript2: ; 49727 (12:5727)
+Route16GateScript2:
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -70,7 +70,7 @@ Route16GateScript2: ; 49727 (12:5727)
 	ld [wRoute16GateCurScript], a
 	ret
 
-Route16GateScript3: ; 49741 (12:5741)
+Route16GateScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -82,16 +82,16 @@ Route16GateScript3: ; 49741 (12:5741)
 	ld [wRoute16GateCurScript], a
 	ret
 
-Route16GateScript_49755: ; 49755 (12:5755)
+Route16GateScript_49755:
 	ld b, BICYCLE
 	jp IsItemInBag
 
-Route16GateTextPointers: ; 4975a (12:575a)
+Route16GateTextPointers:
 	dw Route16GateText1
 	dw Route16GateText2
 	dw Route16GateText3
 
-Route16GateText1: ; 49760 (12:5760)
+Route16GateText1:
 	TX_ASM
 	call Route16GateScript_49755
 	jr z, .asm_0bdf3
@@ -104,18 +104,18 @@ Route16GateText1: ; 49760 (12:5760)
 .asm_56c9d
 	jp TextScriptEnd
 
-Route16GateText_49777: ; 49777 (12:5777)
+Route16GateText_49777:
 	TX_FAR _Route16GateText_49777
 	db "@"
 
-Route16GateText_4977c: ; 4977c (12:577c)
+Route16GateText_4977c:
 	TX_FAR _Route16GateText_4977c
 	db "@"
 
-Route16GateText3: ; 49781 (12:5781)
+Route16GateText3:
 	TX_FAR _Route16GateText_49781
 	db "@"
 
-Route16GateText2: ; 49786 (12:5786)
+Route16GateText2:
 	TX_FAR _Route16GateText2
 	db "@"

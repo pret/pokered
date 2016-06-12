@@ -1,4 +1,4 @@
-SFX_Shrink_3_Ch1: ; 7c52b (1f:452b)
+SFX_Shrink_3_Ch1:
 	duty 1
 	unknownsfx0x10 23
 	unknownsfx0x20 15, 215, 0, 6

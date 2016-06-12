@@ -1,4 +1,4 @@
-SFX_Trade_Machine_1_Ch1: ; 84ee (2:44ee)
+SFX_Trade_Machine_1_Ch1:
 	duty 2
 	unknownsfx0x10 21
 	unknownsfx0x20 15, 240, 240, 4

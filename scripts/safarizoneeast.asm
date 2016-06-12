@@ -1,7 +1,7 @@
-SafariZoneEastScript: ; 4586b (11:586b)
+SafariZoneEastScript:
 	jp EnableAutoTextBoxDrawing
 
-SafariZoneEastTextPointers: ; 4586e (11:586e)
+SafariZoneEastTextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
@@ -10,14 +10,14 @@ SafariZoneEastTextPointers: ; 4586e (11:586e)
 	dw SafariZoneEastText6
 	dw SafariZoneEastText7
 
-SafariZoneEastText5: ; 4587c (11:587c)
+SafariZoneEastText5:
 	TX_FAR _SafariZoneEastText5
 	db "@"
 
-SafariZoneEastText6: ; 45881 (11:5881)
+SafariZoneEastText6:
 	TX_FAR _SafariZoneEastText6
 	db "@"
 
-SafariZoneEastText7: ; 45886 (11:5886)
+SafariZoneEastText7:
 	TX_FAR _SafariZoneEastText7
 	db "@"

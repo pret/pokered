@@ -1,4 +1,4 @@
-SilphCo1Script: ; 5d44e (17:544e)
+SilphCo1Script:
 	call EnableAutoTextBoxDrawing
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ret z
@@ -8,9 +8,9 @@ SilphCo1Script: ; 5d44e (17:544e)
 	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
-SilphCo1TextPointers: ; 5d469 (17:5469)
+SilphCo1TextPointers:
 	dw SilphCo1Text1
 
-SilphCo1Text1: ; 5d46b (17:546b)
+SilphCo1Text1:
 	TX_FAR _SilphCo1Text1
 	db "@"

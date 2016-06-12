@@ -1,4 +1,4 @@
-Music_MeetProfOak_Ch1:: ; af59 (2:6f59)
+Music_MeetProfOak_Ch1::
 	tempo 112
 	volume 7, 7
 	duty 3
@@ -74,7 +74,7 @@ Music_MeetProfOak_branch_af85::
 	loopchannel 0, Music_MeetProfOak_branch_af85
 
 
-Music_MeetProfOak_Ch2:: ; afa9 (2:6fa9)
+Music_MeetProfOak_Ch2::
 	vibrato 8, 1, 1
 	duty 2
 	notetype 12, 12, 4
@@ -208,7 +208,7 @@ Music_MeetProfOak_branch_b005::
 	loopchannel 0, Music_MeetProfOak_branch_b005
 
 
-Music_MeetProfOak_Ch3:: ; b03d (2:703d)
+Music_MeetProfOak_Ch3::
 	notetype 12, 1, 2
 	rest 10
 	octave 4

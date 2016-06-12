@@ -1,4 +1,4 @@
-SetDefaultNames: ; 60ca (1:60ca)
+SetDefaultNames:
 	ld a, [wLetterPrintingDelayFlags]
 	push af
 	ld a, [wOptions]
@@ -31,7 +31,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-OakSpeech: ; 6115 (1:6115)
+OakSpeech:
 	ld a,$FF
 	call PlaySound ; stop music
 	ld a, BANK(Music_Routes2)
@@ -152,25 +152,25 @@ OakSpeech: ; 6115 (1:6115)
 	call DelayFrames
 	call GBFadeOutToWhite
 	jp ClearScreen
-OakSpeechText1: ; 6253 (1:6253)
+OakSpeechText1:
 	TX_FAR _OakSpeechText1
 	db "@"
-OakSpeechText2: ; 6258 (1:6258)
+OakSpeechText2:
 	TX_FAR _OakSpeechText2A
 	db $14 ; play NIDORINA cry from TextCommandSounds
 	TX_FAR _OakSpeechText2B
 	db "@"
-IntroducePlayerText: ; 6262 (1:6262)
+IntroducePlayerText:
 	TX_FAR _IntroducePlayerText
 	db "@"
-IntroduceRivalText: ; 6267 (1:6267)
+IntroduceRivalText:
 	TX_FAR _IntroduceRivalText
 	db "@"
-OakSpeechText3: ; 626c (1:626c)
+OakSpeechText3:
 	TX_FAR _OakSpeechText3
 	db "@"
 
-FadeInIntroPic: ; 6271 (1:6271)
+FadeInIntroPic:
 	ld hl,IntroFadePalettes
 	ld b,6
 .next
@@ -182,7 +182,7 @@ FadeInIntroPic: ; 6271 (1:6271)
 	jr nz,.next
 	ret
 
-IntroFadePalettes: ; 6282 (1:6282)
+IntroFadePalettes:
 	db %01010100
 	db %10101000
 	db %11111100
@@ -190,7 +190,7 @@ IntroFadePalettes: ; 6282 (1:6282)
 	db %11110100
 	db %11100100
 
-MovePicLeft: ; 6288 (1:6288)
+MovePicLeft:
 	ld a,119
 	ld [rWX],a
 	call DelayFrame
@@ -206,9 +206,9 @@ MovePicLeft: ; 6288 (1:6288)
 	ld [rWX],a
 	jr .next
 
-DisplayPicCenteredOrUpperRight: ; 62a1 (1:62a1)
+DisplayPicCenteredOrUpperRight:
 	call GetPredefRegisters
-IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
+IntroDisplayPicCenteredOrUpperRight:
 ; b = bank
 ; de = address of compressed pic
 ; c: 0 = centred, non-zero = upper-right

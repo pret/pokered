@@ -1,4 +1,4 @@
-IndigoPlateauScript: ; 50935 (14:4935)
+IndigoPlateauScript:
 	ret
 
-IndigoPlateauTextPointers: ; 50936 (14:4936)
+IndigoPlateauTextPointers:

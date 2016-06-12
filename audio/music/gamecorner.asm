@@ -1,4 +1,4 @@
-Music_GameCorner_Ch1:: ; 7e20b (1f:620b)
+Music_GameCorner_Ch1::
 	tempo 120
 	volume 7, 7
 	duty 3
@@ -183,7 +183,7 @@ Music_GameCorner_branch_7e222::
 	loopchannel 0, Music_GameCorner_branch_7e222
 
 
-Music_GameCorner_Ch2:: ; 7e2df (1f:62df)
+Music_GameCorner_Ch2::
 	duty 2
 	vibrato 10, 2, 3
 	notetype 12, 12, 6
@@ -343,7 +343,7 @@ Music_GameCorner_branch_7e2fa::
 	loopchannel 0, Music_GameCorner_branch_7e2fa
 
 
-Music_GameCorner_Ch3:: ; 7e38b (1f:638b)
+Music_GameCorner_Ch3::
 	notetype 12, 1, 3
 	octave 5
 	C# 1

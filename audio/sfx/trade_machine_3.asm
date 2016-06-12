@@ -1,4 +1,4 @@
-SFX_Trade_Machine_3_Ch1: ; 7c4c7 (1f:44c7)
+SFX_Trade_Machine_3_Ch1:
 	duty 2
 	unknownsfx0x10 21
 	unknownsfx0x20 15, 240, 240, 4

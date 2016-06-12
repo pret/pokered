@@ -1,5 +1,5 @@
 ; returns whether the player is standing on a door tile in carry
-IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
+IsPlayerStandingOnDoorTile:
 	push de
 	ld hl, DoorTileIDPointers
 	ld a, [wCurMapTileset]
@@ -25,7 +25,7 @@ IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	and a
 	ret
 
-DoorTileIDPointers: ; 1a62c (6:662c)
+DoorTileIDPointers:
 	dbw OVERWORLD,   OverworldDoorTileIDs
 	dbw FOREST,      ForestDoorTileIDs
 	dbw MART,        MartDoorTileIDs
@@ -41,35 +41,35 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dbw PLATEAU,     PlateauDoorTileIDs
 	db $ff
 
-OverworldDoorTileIDs: ; 1a654 (6:6654)
+OverworldDoorTileIDs:
 	db $1B,$58,$00
 
-ForestDoorTileIDs: ; 1a657 (6:6657)
+ForestDoorTileIDs:
 	db $3a,$00
 
-MartDoorTileIDs: ; 1a659 (6:6659)
+MartDoorTileIDs:
 	db $5e,$00
 
-HouseDoorTileIDs: ; 1a65b (6:665b)
+HouseDoorTileIDs:
 	db $54,$00
 
-TilesetMuseumDoorTileIDs: ; 1a65d (6:665d)
+TilesetMuseumDoorTileIDs:
 	db $3b,$00
 
-ShipDoorTileIDs: ; 1a65f (6:665f)
+ShipDoorTileIDs:
 	db $1e,$00
 
-LobbyDoorTileIDs: ; 1a661 (6:6661)
+LobbyDoorTileIDs:
 	db $1c,$38,$1a,$00
 
-MansionDoorTileIDs: ; 1a665 (6:6665)
+MansionDoorTileIDs:
 	db $1a,$1c,$53,$00
 
-LabDoorTileIDs: ; 1a669 (6:6669)
+LabDoorTileIDs:
 	db $34,$00
 
-FacilityDoorTileIDs: ; 1a66b (6:666b)
+FacilityDoorTileIDs:
 	db $43,$58,$1b,$00
 
-PlateauDoorTileIDs: ; 1a66f (6:666f)
+PlateauDoorTileIDs:
 	db $3b,$1b,$00

@@ -1,4 +1,4 @@
-SFX_Save_3_Ch1: ; 7c45e (1f:445e)
+SFX_Save_3_Ch1:
 	duty 2
 IF DEF(_RED)
 	unknownsfx0x20 4, 244, 0, 7
@@ -16,7 +16,7 @@ ENDC
 	endchannel
 
 
-SFX_Save_3_Ch2: ; 7c475 (1f:4475)
+SFX_Save_3_Ch2:
 	duty 2
 IF DEF(_RED)
 	unknownsfx0x20 4, 8, 0, 0

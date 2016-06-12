@@ -1,4 +1,4 @@
-ShowPokedexMenu: ; 40000 (10:4000)
+ShowPokedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
@@ -57,7 +57,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 ; 00: showed pokemon data or area
 ; 01: the player chose Quit
 ; 02: the pokemon has not been seen yet or the player pressed the B button
-HandlePokedexSideMenu: ; 4006d (10:406d)
+HandlePokedexSideMenu:
 	call PlaceUnfilledArrowMenuCursor
 	ld a,[wCurrentMenuItem]
 	push af
@@ -150,7 +150,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 
 ; handles the list of pokemon on the left of the pokedex screen
 ; sets carry flag if player presses A, unsets carry flag if player presses B
-HandlePokedexListMenu: ; 40111 (10:4111)
+HandlePokedexListMenu:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 ; draw the horizontal line separating the seen and owned amounts from the menu
@@ -342,7 +342,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	and a
 	ret
 
-DrawPokedexVerticalLine: ; 4028e (10:428e)
+DrawPokedexVerticalLine:
 	ld c,9 ; height of line
 	ld de,20 ; width of screen
 	ld a,$71 ; vertical line tile
@@ -354,16 +354,16 @@ DrawPokedexVerticalLine: ; 4028e (10:428e)
 	jr nz,.loop
 	ret
 
-PokedexSeenText: ; 4029d (10:429d)
+PokedexSeenText:
 	db "SEEN@"
 
-PokedexOwnText: ; 402a2 (10:42a2)
+PokedexOwnText:
 	db "OWN@"
 
-PokedexContentsText: ; 402a6 (10:42a6)
+PokedexContentsText:
 	db "CONTENTS@"
 
-PokedexMenuItemsText: ; 402af (10:42af)
+PokedexMenuItemsText:
 	db   "DATA"
 	next "CRY"
 	next "AREA"
@@ -373,7 +373,7 @@ PokedexMenuItemsText: ; 402af (10:42af)
 ; INPUT:
 ; [wd11e] = pokedex number
 ; hl = address of bit field
-IsPokemonBitSet: ; 402c2 (10:42c2)
+IsPokemonBitSet:
 	ld a,[wd11e]
 	dec a
 	ld c,a
@@ -384,14 +384,14 @@ IsPokemonBitSet: ; 402c2 (10:42c2)
 	ret
 
 ; function to display pokedex data from outside the pokedex
-ShowPokedexData: ; 402d1 (10:42d1)
+ShowPokedexData:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
 	callab LoadPokedexTilePatterns ; load pokedex tiles
 
 ; function to display pokedex data from inside the pokedex
-ShowPokedexDataInternal: ; 402e2 (10:42e2)
+ShowPokedexDataInternal:
 	ld hl,wd72c
 	set 1,[hl]
 	ld a,$33 ; 3/7 volume
@@ -567,15 +567,15 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [rNR50],a
 	ret
 
-HeightWeightText: ; 40448 (10:4448)
+HeightWeightText:
 	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
 
 ; XXX does anything point to this?
-PokeText: ; 4045d (10:445d)
+PokeText:
 	db "#@"
 
 ; horizontal line that divides the pokedex text description from the rest of the data
-PokedexDataDividerLine: ; 4045f (10:445f)
+PokedexDataDividerLine:
 	db $68,$69,$6B,$69,$6B
 	db $69,$6B,$69,$6B,$6B
 	db $6B,$6B,$69,$6B,$69
@@ -588,7 +588,7 @@ PokedexDataDividerLine: ; 4045f (10:445f)
 ; c = number of tile ID's to write
 ; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
 ; hl = destination address
-DrawTileLine: ; 40474 (10:4474)
+DrawTileLine:
 	push bc
 	push de
 .loop
@@ -602,7 +602,7 @@ DrawTileLine: ; 40474 (10:4474)
 
 INCLUDE "data/pokedex_entries.asm"
 
-PokedexToIndex: ; 40ff9 (10:4ff9)
+PokedexToIndex:
 	; converts the Pokédex number at wd11e to an index
 	push bc
 	push hl
@@ -623,7 +623,7 @@ PokedexToIndex: ; 40ff9 (10:4ff9)
 	pop bc
 	ret
 
-IndexToPokedex: ; 41010 (10:5010)
+IndexToPokedex:
 	; converts the indexédex number at wd11e to a Pokédex number
 	push bc
 	push hl

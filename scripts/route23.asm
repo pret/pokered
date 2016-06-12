@@ -1,11 +1,11 @@
-Route23Script: ; 511da (14:51da)
+Route23Script:
 	call Route23Script_511e9
 	call EnableAutoTextBoxDrawing
 	ld hl, Route23ScriptPointers
 	ld a, [wRoute23CurScript]
 	jp CallFunctionInTable
 
-Route23Script_511e9: ; 511e9 (14:51e9)
+Route23Script_511e9:
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
@@ -19,12 +19,12 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	ld [wMissableObjectIndex], a
 	predef_jump HideObject
 
-Route23ScriptPointers: ; 51213 (14:5213)
+Route23ScriptPointers:
 	dw Route23Script0
 	dw Route23Script1
 	dw Route23Script2
 
-Route23Script0: ; 51219 (14:5219)
+Route23Script0:
 	ld hl, YCoordsData_51255
 	ld a, [wYCoord]
 	ld b, a
@@ -60,10 +60,10 @@ Route23Script0: ; 51219 (14:5219)
 	ld [hJoyHeld], a
 	ret
 
-YCoordsData_51255: ; 51255 (14:5255)
+YCoordsData_51255:
 	db $23,$38,$55,$60,$69,$77,$88,$FF
 
-Route23Script_5125d: ; 5125d (14:525d)
+Route23Script_5125d:
 	ld hl, BadgeTextPointers
 	ld a, [wWhichBadge]
 	ld c, a
@@ -82,7 +82,7 @@ Route23Script_5125d: ; 5125d (14:525d)
 	jr nz, .copyTextLoop
 	ret
 
-BadgeTextPointers: ; 51276 (14:5276)
+BadgeTextPointers:
 	dw CascadeBadgeText
 	dw ThunderBadgeText
 	dw RainbowBadgeText
@@ -91,28 +91,28 @@ BadgeTextPointers: ; 51276 (14:5276)
 	dw VolcanoBadgeText
 	dw EarthBadgeText
 
-EarthBadgeText: ; 51284 (14:5284)
+EarthBadgeText:
 	db "EARTHBADGE@"
 
-VolcanoBadgeText: ; 5128f (14:528f)
+VolcanoBadgeText:
 	db "VOLCANOBADGE@"
 
-MarshBadgeText: ; 5129c (14:529c)
+MarshBadgeText:
 	db "MARSHBADGE@"
 
-SoulBadgeText: ; 512a7 (14:52a7)
+SoulBadgeText:
 	db "SOULBADGE@"
 
-RainbowBadgeText: ; 512b1 (14:52b1)
+RainbowBadgeText:
 	db "RAINBOWBADGE@"
 
-ThunderBadgeText: ; 512be (14:52be)
+ThunderBadgeText:
 	db "THUNDERBADGE@"
 
-CascadeBadgeText: ; 512cb (14:52cb)
+CascadeBadgeText:
 	db "CASCADEBADGE@"
 
-Route23Script_512d8: ; 512d8 (14:52d8)
+Route23Script_512d8:
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN
@@ -122,16 +122,16 @@ Route23Script_512d8: ; 512d8 (14:52d8)
 	ld [wJoyIgnore], a
 	jp StartSimulatingJoypadStates
 
-Route23Script1: ; 512ec (14:52ec)
+Route23Script1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-Route23Script2: ; 512f1 (14:52f1)
+Route23Script2:
 	ld a, $0
 	ld [wRoute23CurScript], a
 	ret
 
-Route23TextPointers: ; 512f7 (14:52f7)
+Route23TextPointers:
 	dw Route23Text1
 	dw Route23Text2
 	dw Route23Text3
@@ -141,49 +141,49 @@ Route23TextPointers: ; 512f7 (14:52f7)
 	dw Route23Text7
 	dw Route23Text8
 
-Route23Text1: ; 51307 (14:5307)
+Route23Text1:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text2: ; 51310 (14:5310)
+Route23Text2:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text3: ; 51319 (14:5319)
+Route23Text3:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text4: ; 51322 (14:5322)
+Route23Text4:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text5: ; 5132b (14:532b)
+Route23Text5:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text6: ; 51334 (14:5334)
+Route23Text6:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Text7: ; 5133d (14:533d)
+Route23Text7:
 	TX_ASM
 	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
-Route23Script_51346: ; 51346 (14:5346)
+Route23Script_51346:
 	ld [wWhichBadge], a
 	call Route23Script_5125d
 	ld a, [wWhichBadge]
@@ -213,11 +213,11 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld [wRoute23CurScript], a
 	ret
 
-Route23Script_51388: ; 51388 (14:5388)
+Route23Script_51388:
 	ld hl, VictoryRoadGuardText2
 	jp PrintText
 
-VictoryRoadGuardText1: ; 5138e (14:538e)
+VictoryRoadGuardText1:
 	TX_FAR _VictoryRoadGuardText1
 	TX_ASM
 	ld a, SFX_DENIED
@@ -225,12 +225,12 @@ VictoryRoadGuardText1: ; 5138e (14:538e)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VictoryRoadGuardText2: ; 5139e (14:539e)
+VictoryRoadGuardText2:
 	TX_FAR _VictoryRoadGuardText2
 	db $b
 	TX_FAR _VictoryRoadGuardText_513a3
 	db "@"
 
-Route23Text8: ; 513a8 (14:53a8)
+Route23Text8:
 	TX_FAR _Route23Text8
 	db "@"

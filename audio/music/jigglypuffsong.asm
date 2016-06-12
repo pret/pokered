@@ -1,4 +1,4 @@
-Music_JigglypuffSong_Ch1:: ; 7fb7d (1f:7b7d)
+Music_JigglypuffSong_Ch1::
 	tempo 144
 	volume 7, 7
 	vibrato 8, 2, 4
@@ -21,7 +21,7 @@ Music_JigglypuffSong_Ch1:: ; 7fb7d (1f:7b7d)
 	endchannel
 
 
-Music_JigglypuffSong_Ch2:: ; 7fb9a (1f:7b9a)
+Music_JigglypuffSong_Ch2::
 	vibrato 5, 1, 5
 	duty 2
 	dutycycle 10

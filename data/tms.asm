@@ -1,4 +1,4 @@
-TechnicalMachines: ; 13773 (4:7773)
+TechnicalMachines:
 	db MEGA_PUNCH
 	db RAZOR_WIND
 	db SWORDS_DANCE

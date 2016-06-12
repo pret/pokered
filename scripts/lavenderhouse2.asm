@@ -1,19 +1,19 @@
-LavenderHouse2Script: ; 1d9ae (7:59ae)
+LavenderHouse2Script:
 	call EnableAutoTextBoxDrawing
 	ret
 
-LavenderHouse2TextPointers: ; 1d9b2 (7:59b2)
+LavenderHouse2TextPointers:
 	dw LavenderHouse2Text1
 	dw LavenderHouse2Text2
 
-LavenderHouse2Text1: ; 1d9b6 (7:59b6)
+LavenderHouse2Text1:
 	TX_FAR _LavenderHouse2Text1
 	TX_ASM
 	ld a, CUBONE
 	call PlayCry
 	jp TextScriptEnd
 
-LavenderHouse2Text2: ; 1d9c3 (7:59c3)
+LavenderHouse2Text2:
 	TX_ASM
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .asm_65711
@@ -26,10 +26,10 @@ LavenderHouse2Text2: ; 1d9c3 (7:59c3)
 .asm_64be1
 	jp TextScriptEnd
 
-LavenderHouse2Text_1d9dc: ; 1d9dc (7:59dc)
+LavenderHouse2Text_1d9dc:
 	TX_FAR _LavenderHouse2Text_1d9dc
 	db "@"
 
-LavenderHouse2Text_1d9e1: ; 1d9e1 (7:59e1)
+LavenderHouse2Text_1d9e1:
 	TX_FAR _LavenderHouse2Text_1d9e1
 	db "@"

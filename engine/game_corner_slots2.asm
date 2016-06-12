@@ -1,4 +1,4 @@
-AbleToPlaySlotsCheck: ; 2ff09 (b:7f09)
+AbleToPlaySlotsCheck:
 	ld a, [wSpriteStateData1 + 2]
 	and $8
 	jr z, .done ; not able
@@ -22,10 +22,10 @@ AbleToPlaySlotsCheck: ; 2ff09 (b:7f09)
 	ld [wCanPlaySlots], a
 	ret
 
-GameCornerCoinCaseText: ; 2ff32 (b:7f32)
+GameCornerCoinCaseText:
 	TX_FAR _GameCornerCoinCaseText
 	db "@"
 
-GameCornerNoCoinsText: ; 2ff37 (b:7f37)
+GameCornerNoCoinsText:
 	TX_FAR _GameCornerNoCoinsText
 	db "@"

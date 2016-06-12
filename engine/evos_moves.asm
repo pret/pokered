@@ -1,5 +1,5 @@
 ; try to evolve the mon in [wWhichPokemon]
-TryEvolvingMon: ; 3ad0e (e:6d0e)
+TryEvolvingMon:
 	ld hl, wCanEvolveFlags
 	xor a
 	ld [hl], a
@@ -10,7 +10,7 @@ TryEvolvingMon: ; 3ad0e (e:6d0e)
 
 ; this is only called after battle
 ; it is supposed to do level up evolutions, though there is a bug that allows item evolutions to occur
-EvolutionAfterBattle: ; 3ad1c (e:6d1c)
+EvolutionAfterBattle:
 	ld a, [hTilesetType]
 	push af
 	xor a
@@ -257,7 +257,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call nz, PlayDefaultMusic
 	ret
 
-RenameEvolvedMon: ; 3aef7 (e:6ef7)
+RenameEvolvedMon:
 ; Renames the mon to its new, evolved form's standard name unless it had a
 ; nickname, in which case the nickname is kept.
 	ld a, [wd0b5]
@@ -287,7 +287,7 @@ RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	pop de
 	jp CopyData
 
-CancelledEvolution: ; 3af2e (e:6f2e)
+CancelledEvolution:
 	ld hl, StoppedEvolvingText
 	call PrintText
 	call ClearScreen
@@ -295,29 +295,29 @@ CancelledEvolution: ; 3af2e (e:6f2e)
 	call Evolution_ReloadTilesetTilePatterns
 	jp Evolution_PartyMonLoop
 
-EvolvedText: ; 3af3e (e:6f3e)
+EvolvedText:
 	TX_FAR _EvolvedText
 	db "@"
 
-IntoText: ; 3af43 (e:6f43)
+IntoText:
 	TX_FAR _IntoText
 	db "@"
 
-StoppedEvolvingText: ; 3af48 (e:6f48)
+StoppedEvolvingText:
 	TX_FAR _StoppedEvolvingText
 	db "@"
 
-IsEvolvingText: ; 3af4d (e:6f4d)
+IsEvolvingText:
 	TX_FAR _IsEvolvingText
 	db "@"
 
-Evolution_ReloadTilesetTilePatterns: ; 3af52 (e:6f52)
+Evolution_ReloadTilesetTilePatterns:
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
 	ret z
 	jp ReloadTilesetTilePatterns
 
-LearnMoveFromLevelUp: ; 3af5b (e:6f5b)
+LearnMoveFromLevelUp:
 	ld hl, EvosMovesPointerTable
 	ld a, [wd11e] ; species
 	ld [wcf91], a
@@ -377,7 +377,7 @@ LearnMoveFromLevelUp: ; 3af5b (e:6f5b)
 
 ; writes the moves a mon has at level [wCurEnemyLVL] to [de]
 ; move slots are being filled up sequentially and shifted if all slots are full
-WriteMonMoves: ; 3afb8 (e:6fb8)
+WriteMonMoves:
 	call GetPredefRegisters
 	push hl
 	push de
@@ -497,7 +497,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	ret
 
 ; shifts all move data one up (freeing 4th move slot)
-WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
+WriteMonMoves_ShiftMoveData:
 	ld c, NUM_MOVES - 1
 .loop
 	inc de
@@ -507,7 +507,7 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	jr nz, .loop
 	ret
 
-Evolution_FlagAction: ; 3b057 (e:7057)
+Evolution_FlagAction:
 	predef_jump FlagActionPredef
 
 INCLUDE "data/evos_moves.asm"

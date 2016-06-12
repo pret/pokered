@@ -1,4 +1,4 @@
-SFX_Cry21_1_Ch1: ; 904d (2:504d)
+SFX_Cry21_1_Ch1:
 	dutycycle 27
 	unknownsfx0x20 3, 243, 100, 5
 	unknownsfx0x20 2, 226, 68, 5
@@ -11,7 +11,7 @@ SFX_Cry21_1_Ch1: ; 904d (2:504d)
 	endchannel
 
 
-SFX_Cry21_1_Ch2: ; 9070 (2:5070)
+SFX_Cry21_1_Ch2:
 	dutycycle 204
 	unknownsfx0x20 3, 211, 96, 5
 	unknownsfx0x20 2, 194, 64, 5
@@ -23,5 +23,5 @@ SFX_Cry21_1_Ch2: ; 9070 (2:5070)
 	unknownsfx0x20 8, 193, 0, 5
 
 
-SFX_Cry21_1_Ch3: ; 9092 (2:5092)
+SFX_Cry21_1_Ch3:
 	endchannel

@@ -1,14 +1,14 @@
-PewterHouse2Script: ; 1d648 (7:5648)
+PewterHouse2Script:
 	jp EnableAutoTextBoxDrawing
 
-PewterHouse2TextPointers: ; 1d64b (7:564b)
+PewterHouse2TextPointers:
 	dw PewterHouse2Text1
 	dw PewterHouse2Text2
 
-PewterHouse2Text1: ; 1d64f (7:564f)
+PewterHouse2Text1:
 	TX_FAR _PewterHouse2Text1
 	db "@"
 
-PewterHouse2Text2: ; 1d654 (7:5654)
+PewterHouse2Text2:
 	TX_FAR _PewterHouse2Text2
 	db "@"

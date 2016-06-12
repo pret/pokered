@@ -1,4 +1,4 @@
-Music_Surfing_Ch1:: ; 7fa19 (1f:7a19)
+Music_Surfing_Ch1::
 	tempo 160
 	volume 7, 7
 	duty 3
@@ -116,7 +116,7 @@ Music_Surfing_branch_7fa30::
 	loopchannel 0, Music_Surfing_branch_7fa30
 
 
-Music_Surfing_Ch2:: ; 7fa9c (1f:7a9c)
+Music_Surfing_Ch2::
 	duty 3
 	vibrato 16, 2, 5
 	notetype 12, 12, 6
@@ -203,7 +203,7 @@ Music_Surfing_branch_7faae::
 	loopchannel 0, Music_Surfing_branch_7faae
 
 
-Music_Surfing_Ch3:: ; 7fafa (1f:7afa)
+Music_Surfing_Ch3::
 	notetype 12, 1, 0
 	rest 12
 	octave 5

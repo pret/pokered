@@ -1,4 +1,4 @@
-EvolveTradeMon: ; 17d7d (5:7d7d)
+EvolveTradeMon:
 ; Verify the TradeMon's species name before
 ; attempting to initiate a trade evolution.
 

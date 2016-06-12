@@ -1,4 +1,4 @@
-Music_YellowIntro_Ch1:: ; 7f65c (1f:765c)
+Music_YellowIntro_Ch1::
 	tempo 116
 	volume 7, 7
 	duty 3
@@ -100,7 +100,7 @@ Music_YellowIntro_Ch1:: ; 7f65c (1f:765c)
 	endchannel
 
 
-Music_YellowIntro_Ch2:: ; 7f6d3 (1f:76d3)
+Music_YellowIntro_Ch2::
 	duty 2
 	vibrato 6, 1, 5
 	notetype 12, 12, 2
@@ -203,7 +203,7 @@ Music_YellowIntro_Ch2:: ; 7f6d3 (1f:76d3)
 	endchannel
 
 
-Music_YellowIntro_Ch3:: ; 7f749 (1f:7749)
+Music_YellowIntro_Ch3::
 	notetype 12, 1, 0
 	octave 4
 	E_ 1

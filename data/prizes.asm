@@ -1,4 +1,4 @@
-PrizeDifferentMenuPtrs: ; 52843 (14:6843)
+PrizeDifferentMenuPtrs:
 	dw PrizeMenuMon1Entries
 	dw PrizeMenuMon1Cost
 
@@ -8,10 +8,10 @@ PrizeDifferentMenuPtrs: ; 52843 (14:6843)
 	dw PrizeMenuTMsEntries
 	dw PrizeMenuTMsCost
 
-NoThanksText: ; 5284f (14:684f)
+NoThanksText:
 	db "NO THANKS@"
 
-PrizeMenuMon1Entries: ; 52859 (14:6859)
+PrizeMenuMon1Entries:
 	db ABRA
 	db CLEFAIRY
 IF DEF(_RED)
@@ -22,7 +22,7 @@ IF DEF(_BLUE)
 ENDC
 	db "@"
 
-PrizeMenuMon1Cost: ; 5285d (14:685d)
+PrizeMenuMon1Cost:
 IF DEF(_RED)
 	coins 180
 	coins 500
@@ -34,7 +34,7 @@ ENDC
 	coins 1200
 	db "@"
 
-PrizeMenuMon2Entries: ; 52864 (14:6864)
+PrizeMenuMon2Entries:
 IF DEF(_RED)
 	db DRATINI
 	db SCYTHER
@@ -46,7 +46,7 @@ ENDC
 	db PORYGON
 	db "@"
 
-PrizeMenuMon2Cost: ; 52868 (14:6868)
+PrizeMenuMon2Cost:
 IF DEF(_RED)
 	coins 2800
 	coins 5500
@@ -59,13 +59,13 @@ IF DEF(_BLUE)
 ENDC
 	db "@"
 
-PrizeMenuTMsEntries: ; 5286f (14:686f)
+PrizeMenuTMsEntries:
 	db TM_23
 	db TM_15
 	db TM_50
 	db "@"
 
-PrizeMenuTMsCost: ; 52873 (14:6873)
+PrizeMenuTMsCost:
 	coins 3300
 	coins 5500
 	coins 7700

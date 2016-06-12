@@ -1,5 +1,5 @@
 ; b = new colour for BG colour 0 (usually white) for 4 frames
-ChangeBGPalColor0_4Frames: ; 480eb (12:40eb)
+ChangeBGPalColor0_4Frames:
 	call GetPredefRegisters
 	ld a, [rBGP]
 	or b
@@ -11,7 +11,7 @@ ChangeBGPalColor0_4Frames: ; 480eb (12:40eb)
 	ld [rBGP], a
 	ret
 
-PredefShakeScreenVertically: ; 480ff (12:40ff)
+PredefShakeScreenVertically:
 ; Moves the window down and then back in a sequence of progressively smaller
 ; numbers of pixels, starting at b.
 	call GetPredefRegisters
@@ -37,7 +37,7 @@ PredefShakeScreenVertically: ; 480ff (12:40ff)
 	ld c, 3
 	jp DelayFrames
 
-PredefShakeScreenHorizontally: ; 48125 (12:4125)
+PredefShakeScreenHorizontally:
 ; Moves the window right and then back in a sequence of progressively smaller
 ; numbers of pixels, starting at b.
 	call GetPredefRegisters

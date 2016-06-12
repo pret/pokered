@@ -1,4 +1,4 @@
-UseItem_: ; d5c7 (3:55c7)
+UseItem_:
 	ld a,1
 	ld [wActionResultOrTookBattleTurn],a ; initialise to success value
 	ld a,[wcf91]	;contains item_ID
@@ -15,7 +15,7 @@ UseItem_: ; d5c7 (3:55c7)
 	ld l,a
 	jp [hl]
 
-ItemUsePtrTable: ; d5e1 (3:55e1)
+ItemUsePtrTable:
 	dw ItemUseBall       ; MASTER_BALL
 	dw ItemUseBall       ; ULTRA_BALL
 	dw ItemUseBall       ; GREAT_BALL
@@ -100,7 +100,7 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
 
-ItemUseBall: ; d687 (3:5687)
+ItemUseBall:
 
 ; Balls can't be used out of battle.
 	ld a,[wIsInBattle]
@@ -583,56 +583,56 @@ ItemUseBall: ; d687 (3:5687)
 	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 
-ItemUseBallText00: ; d937 (3:5937)
+ItemUseBallText00:
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
 	TX_FAR _ItemUseBallText00
 	db "@"
-ItemUseBallText01: ; d93c (3:593c)
+ItemUseBallText01:
 ;"You missed the pokemon!"
 	TX_FAR _ItemUseBallText01
 	db "@"
-ItemUseBallText02: ; d941 (3:5941)
+ItemUseBallText02:
 ;"Darn! The pokemon broke free!"
 	TX_FAR _ItemUseBallText02
 	db "@"
-ItemUseBallText03: ; d946 (3:5946)
+ItemUseBallText03:
 ;"Aww! It appeared to be caught!"
 	TX_FAR _ItemUseBallText03
 	db "@"
-ItemUseBallText04: ; d94b (3:594b)
+ItemUseBallText04:
 ;"Shoot! It was so close too!"
 	TX_FAR _ItemUseBallText04
 	db "@"
-ItemUseBallText05: ; d950 (3:5950)
+ItemUseBallText05:
 ;"All right! {MonName} was caught!"
 ;play sound
 	TX_FAR _ItemUseBallText05
 	db $12,$06
 	db "@"
-ItemUseBallText07: ; d957 (3:5957)
+ItemUseBallText07:
 ;"X was transferred to Bill's PC"
 	TX_FAR _ItemUseBallText07
 	db "@"
-ItemUseBallText08: ; d95c (3:595c)
+ItemUseBallText08:
 ;"X was transferred to someone's PC"
 	TX_FAR _ItemUseBallText08
 	db "@"
 
-ItemUseBallText06: ; d961 (3:5961)
+ItemUseBallText06:
 ;"New DEX data will be added..."
 ;play sound
 	TX_FAR _ItemUseBallText06
 	db $13,$06
 	db "@"
 
-ItemUseTownMap: ; d968 (3:5968)
+ItemUseTownMap:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	jpba DisplayTownMap
 
-ItemUseBicycle: ; d977 (3:5977)
+ItemUseBicycle:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
@@ -663,7 +663,7 @@ ItemUseBicycle: ; d977 (3:5977)
 	jp PrintText
 
 ; used for Surf out-of-battle effect
-ItemUseSurfboard: ; d9b4 (3:59b4)
+ItemUseSurfboard:
 	ld a,[wWalkBikeSurfState]
 	ld [wWalkBikeSurfStateCopy],a
 	cp a,2 ; is the player already surfing?
@@ -742,18 +742,18 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld [wSimulatedJoypadStatesIndex],a
 	ret
 
-SurfingGotOnText: ; da4c (3:5a4c)
+SurfingGotOnText:
 	TX_FAR _SurfingGotOnText
 	db "@"
 
-SurfingNoPlaceToGetOffText: ; da51 (3:5a51)
+SurfingNoPlaceToGetOffText:
 	TX_FAR _SurfingNoPlaceToGetOffText
 	db "@"
 
-ItemUsePokedex: ; da56 (3:5a56)
+ItemUsePokedex:
 	predef_jump ShowPokedexMenu
 
-ItemUseEvoStone: ; da5b (3:5a5b)
+ItemUseEvoStone:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
@@ -794,12 +794,12 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	pop af
 	ret
 
-ItemUseVitamin: ; dab4 (3:5ab4)
+ItemUseVitamin:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 
-ItemUseMedicine: ; dabb (3:5abb)
+ItemUseMedicine:
 	ld a,[wPartyCount]
 	and a
 	jp z,.emptyParty
@@ -1414,22 +1414,22 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wWhichPokemon],a
 	jp RemoveUsedItem
 
-VitaminStatRoseText: ; df24 (3:5f24)
+VitaminStatRoseText:
 	TX_FAR _VitaminStatRoseText
 	db "@"
 
-VitaminNoEffectText: ; df29 (3:5f29)
+VitaminNoEffectText:
 	TX_FAR _VitaminNoEffectText
 	db "@"
 
-VitaminText: ; df2e (3:5f2e)
+VitaminText:
 	db "HEALTH@"
 	db "ATTACK@"
 	db "DEFENSE@"
 	db "SPEED@"
 	db "SPECIAL@"
 
-ItemUseBait: ; df52 (3:5f52)
+ItemUseBait:
 	ld hl,ThrewBaitText
 	call PrintText
 	ld hl,wEnemyMonCatchRate ; catch rate
@@ -1439,7 +1439,7 @@ ItemUseBait: ; df52 (3:5f52)
 	ld de,wSafariEscapeFactor ; escape factor
 	jr BaitRockCommon
 
-ItemUseRock: ; df67 (3:5f67)
+ItemUseRock:
 	ld hl,ThrewRockText
 	call PrintText
 	ld hl,wEnemyMonCatchRate ; catch rate
@@ -1453,7 +1453,7 @@ ItemUseRock: ; df67 (3:5f67)
 	ld hl,wSafariEscapeFactor ; escape factor
 	ld de,wSafariBaitFactor ; bait factor
 
-BaitRockCommon: ; df7f (3:5f7f)
+BaitRockCommon:
 	ld [wAnimationID],a
 	xor a
 	ld [wAnimationType],a
@@ -1476,16 +1476,16 @@ BaitRockCommon: ; df7f (3:5f7f)
 	ld c,70
 	jp DelayFrames
 
-ThrewBaitText: ; dfa5 (3:5fa5)
+ThrewBaitText:
 	TX_FAR _ThrewBaitText
 	db "@"
 
-ThrewRockText: ; dfaa (3:5faa)
+ThrewRockText:
 	TX_FAR _ThrewRockText
 	db "@"
 
 ; also used for Dig out-of-battle effect
-ItemUseEscapeRope: ; dfaf (3:5faf)
+ItemUseEscapeRope:
 	ld a,[wIsInBattle]
 	and a
 	jr nz,.notUsable
@@ -1523,14 +1523,14 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 .notUsable
 	jp ItemUseNotTime
 
-EscapeRopeTilesets: ; dffd (3:5ffd)
+EscapeRopeTilesets:
 	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
 	db $ff ; terminator
 
-ItemUseRepel: ; e003 (3:6003)
+ItemUseRepel:
 	ld b,100
 
-ItemUseRepelCommon: ; e005 (3:6005)
+ItemUseRepelCommon:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
@@ -1539,7 +1539,7 @@ ItemUseRepelCommon: ; e005 (3:6005)
 	jp PrintItemUseTextAndRemoveItem
 
 ; handles X Accuracy item
-ItemUseXAccuracy: ; e013 (3:6013)
+ItemUseXAccuracy:
 	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
@@ -1549,7 +1549,7 @@ ItemUseXAccuracy: ; e013 (3:6013)
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
 ; The Card Key is handled in a different way.
-ItemUseCardKey: ; e022 (3:6022)
+ItemUseCardKey:
 	xor a
 	ld [wUnusedD71F],a
 	call GetTileAndCoordsInFrontOfPlayer
@@ -1609,7 +1609,7 @@ ItemUseCardKey: ; e022 (3:6022)
 ; 02: X
 ; 03: ID?
 
-CardKeyTable1: ; e072 (3:6072)
+CardKeyTable1:
 	db  SILPH_CO_2F,$04,$04,$00
 	db  SILPH_CO_2F,$04,$05,$01
 	db  SILPH_CO_4F,$0C,$04,$02
@@ -1622,7 +1622,7 @@ CardKeyTable1: ; e072 (3:6072)
 	db SILPH_CO_10F,$08,$0B,$09
 	db $ff
 
-CardKeyTable2: ; e09b (3:609b)
+CardKeyTable2:
 	db SILPH_CO_3F,$08,$09,$0A
 	db SILPH_CO_3F,$09,$09,$0B
 	db SILPH_CO_5F,$04,$07,$0C
@@ -1635,12 +1635,12 @@ CardKeyTable2: ; e09b (3:609b)
 	db SILPH_CO_9F,$09,$03,$13
 	db $ff
 
-CardKeyTable3: ; e0c4 (3:60c4)
+CardKeyTable3:
 	db SILPH_CO_11F,$08,$09,$14
 	db SILPH_CO_11F,$09,$09,$15
 	db $ff
 
-ItemUsePokedoll: ; e0cd (3:60cd)
+ItemUsePokedoll:
 	ld a,[wIsInBattle]
 	dec a
 	jp nz,ItemUseNotTime
@@ -1648,7 +1648,7 @@ ItemUsePokedoll: ; e0cd (3:60cd)
 	ld [wEscapedFromBattle],a
 	jp PrintItemUseTextAndRemoveItem
 
-ItemUseGuardSpec: ; e0dc (3:60dc)
+ItemUseGuardSpec:
 	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
@@ -1656,15 +1656,15 @@ ItemUseGuardSpec: ; e0dc (3:60dc)
 	set ProtectedByMist,[hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
-ItemUseSuperRepel: ; e0eb (3:60eb)
+ItemUseSuperRepel:
 	ld b,200
 	jp ItemUseRepelCommon
 
-ItemUseMaxRepel: ; e0f0 (3:60f0)
+ItemUseMaxRepel:
 	ld b,250
 	jp ItemUseRepelCommon
 
-ItemUseDireHit: ; e0f5 (3:60f5)
+ItemUseDireHit:
 	ld a,[wIsInBattle]
 	and a
 	jp z,ItemUseNotTime
@@ -1672,7 +1672,7 @@ ItemUseDireHit: ; e0f5 (3:60f5)
 	set GettingPumped,[hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
 
-ItemUseXStat: ; e104 (3:6104)
+ItemUseXStat:
 	ld a,[wIsInBattle]
 	and a
 	jr nz,.inBattle
@@ -1705,7 +1705,7 @@ ItemUseXStat: ; e104 (3:6104)
 	ld [hl],a ; restore [wPlayerMoveNum]
 	ret
 
-ItemUsePokeflute: ; e140 (3:6140)
+ItemUsePokeflute:
 	ld a,[wIsInBattle]
 	and a
 	jr nz,.inBattle
@@ -1789,7 +1789,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 ; [wWereAnyMonsAsleep] should be initialized to 0
 ; OUTPUT:
 ; [wWereAnyMonsAsleep]: set to 1 if any pokemon were asleep
-WakeUpEntireParty: ; e1e5 (3:61e5)
+WakeUpEntireParty:
 	ld de,44
 	ld c,6
 .loop
@@ -1811,7 +1811,7 @@ WakeUpEntireParty: ; e1e5 (3:61e5)
 ; Format:
 ; 00: Y
 ; 01: X
-Route12SnorlaxFluteCoords: ; e1fd (3:61fd)
+Route12SnorlaxFluteCoords:
 	db 62,9  ; one space West of Snorlax
 	db 61,10 ; one space North of Snorlax
 	db 63,10 ; one space South of Snorlax
@@ -1821,20 +1821,20 @@ Route12SnorlaxFluteCoords: ; e1fd (3:61fd)
 ; Format:
 ; 00: Y
 ; 01: X
-Route16SnorlaxFluteCoords: ; e206 (3:6206)
+Route16SnorlaxFluteCoords:
 	db 10,27 ; one space East of Snorlax
 	db 10,25 ; one space West of Snorlax
 	db $ff ; terminator
 
-PlayedFluteNoEffectText: ; e20b (3:620b)
+PlayedFluteNoEffectText:
 	TX_FAR _PlayedFluteNoEffectText
 	db "@"
 
-FluteWokeUpText: ; e210 (3:6210)
+FluteWokeUpText:
 	TX_FAR _FluteWokeUpText
 	db "@"
 
-PlayedFluteHadEffectText: ; e215 (3:6215)
+PlayedFluteHadEffectText:
 	TX_FAR _PlayedFluteHadEffectText
 	db $06
 	TX_ASM
@@ -1855,25 +1855,25 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 .done
 	jp TextScriptEnd ; end text
 
-ItemUseCoinCase: ; e23a (3:623a)
+ItemUseCoinCase:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 	ld hl,CoinCaseNumCoinsText
 	jp PrintText
 
-CoinCaseNumCoinsText: ; e247 (3:6247)
+CoinCaseNumCoinsText:
 	TX_FAR _CoinCaseNumCoinsText
 	db "@"
 
-ItemUseOldRod: ; e24c (3:624c)
+ItemUseOldRod:
 	call FishingInit
 	jp c, ItemUseNotTime
 	lb bc, 5, MAGIKARP
 	ld a, $1 ; set bite
 	jr RodResponse
 
-ItemUseGoodRod: ; e259 (3:6259)
+ItemUseGoodRod:
 	call FishingInit
 	jp c,ItemUseNotTime
 .RandomLoop
@@ -1901,12 +1901,12 @@ ItemUseGoodRod: ; e259 (3:6259)
 
 INCLUDE "data/good_rod.asm"
 
-ItemUseSuperRod: ; e283 (3:6283)
+ItemUseSuperRod:
 	call FishingInit
 	jp c, ItemUseNotTime
 	call ReadSuperRodData
 	ld a, e
-RodResponse: ; e28d (3:628d)
+RodResponse:
 	ld [wRodResponse], a
 
 	dec a ; is there a bite?
@@ -1933,7 +1933,7 @@ RodResponse: ; e28d (3:628d)
 
 ; checks if fishing is possible and if so, runs initialization code common to all rods
 ; unsets carry if fishing is possible, sets carry if not
-FishingInit: ; e2b4 (3:62b4)
+FishingInit:
 	ld a,[wIsInBattle]
 	and a
 	jr z,.notInBattle
@@ -1958,10 +1958,10 @@ FishingInit: ; e2b4 (3:62b4)
 	scf ; can't fish when surfing
 	ret
 
-ItemUseOaksParcel: ; e2de (3:62de)
+ItemUseOaksParcel:
 	jp ItemUseNotYoursToUse
 
-ItemUseItemfinder: ; e2e1 (3:62e1)
+ItemUseItemfinder:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
@@ -1981,20 +1981,20 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 .printText
 	jp PrintText
 
-ItemfinderFoundItemText: ; e30d (3:630d)
+ItemfinderFoundItemText:
 	TX_FAR _ItemfinderFoundItemText
 	db "@"
 
-ItemfinderFoundNothingText: ; e312 (3:6312)
+ItemfinderFoundNothingText:
 	TX_FAR _ItemfinderFoundNothingText
 	db "@"
 
-ItemUsePPUp: ; e317 (3:6317)
+ItemUsePPUp:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
 
-ItemUsePPRestore: ; e31e (3:631e)
+ItemUsePPRestore:
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
@@ -2170,31 +2170,31 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	ret
 
-RaisePPWhichTechniqueText: ; e45d (3:645d)
+RaisePPWhichTechniqueText:
 	TX_FAR _RaisePPWhichTechniqueText
 	db "@"
 
-RestorePPWhichTechniqueText: ; e462 (3:6462)
+RestorePPWhichTechniqueText:
 	TX_FAR _RestorePPWhichTechniqueText
 	db "@"
 
-PPMaxedOutText: ; e467 (3:6467)
+PPMaxedOutText:
 	TX_FAR _PPMaxedOutText
 	db "@"
 
-PPIncreasedText: ; e46c (3:646c)
+PPIncreasedText:
 	TX_FAR _PPIncreasedText
 	db "@"
 
-PPRestoredText: ; e471 (3:6471)
+PPRestoredText:
 	TX_FAR _PPRestoredText
 	db "@"
 
 ; for items that can't be used from the Item menu
-UnusableItem: ; e476 (3:6476)
+UnusableItem:
 	jp ItemUseNotTime
 
-ItemUseTMHM: ; e479 (3:6479)
+ItemUseTMHM:
 	ld a,[wIsInBattle]
 	and a
 	jp nz,ItemUseNotTime
@@ -2291,48 +2291,48 @@ ItemUseTMHM: ; e479 (3:6479)
 	ret c
 	jp RemoveUsedItem
 
-BootedUpTMText: ; e54f (3:654f)
+BootedUpTMText:
 	TX_FAR _BootedUpTMText
 	db "@"
 
-BootedUpHMText: ; e554 (3:6554)
+BootedUpHMText:
 	TX_FAR _BootedUpHMText
 	db "@"
 
-TeachMachineMoveText: ; e559 (3:6559)
+TeachMachineMoveText:
 	TX_FAR _TeachMachineMoveText
 	db "@"
 
-MonCannotLearnMachineMoveText: ; e55e (3:655e)
+MonCannotLearnMachineMoveText:
 	TX_FAR _MonCannotLearnMachineMoveText
 	db "@"
 
-PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
+PrintItemUseTextAndRemoveItem:
 	ld hl,ItemUseText00
 	call PrintText
 	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
-RemoveUsedItem: ; e571 (3:6571)
+RemoveUsedItem:
 	ld hl,wNumBagItems
 	ld a,1 ; one item
 	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 
-ItemUseNoEffect: ; e57c (3:657c)
+ItemUseNoEffect:
 	ld hl,ItemUseNoEffectText
 	jr ItemUseFailed
 
-ItemUseNotTime: ; e581 (3:6581)
+ItemUseNotTime:
 	ld hl,ItemUseNotTimeText
 	jr ItemUseFailed
 
-ItemUseNotYoursToUse: ; e586 (3:6586)
+ItemUseNotYoursToUse:
 	ld hl,ItemUseNotYoursToUseText
 	jr ItemUseFailed
 
-ThrowBallAtTrainerMon: ; e58b (3:658b)
+ThrowBallAtTrainerMon:
 	call RunDefaultPaletteCommand
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
@@ -2345,67 +2345,67 @@ ThrowBallAtTrainerMon: ; e58b (3:658b)
 	call PrintText
 	jr RemoveUsedItem
 
-NoCyclingAllowedHere: ; e5ac (3:65ac)
+NoCyclingAllowedHere:
 	ld hl,NoCyclingAllowedHereText
 	jr ItemUseFailed
 
-BoxFullCannotThrowBall: ; e5b1 (3:65b1)
+BoxFullCannotThrowBall:
 	ld hl,BoxFullCannotThrowBallText
 	jr ItemUseFailed
 
-SurfingAttemptFailed: ; e5b6 (3:65b6)
+SurfingAttemptFailed:
 	ld hl,NoSurfingHereText
 
-ItemUseFailed: ; e5b9 (3:65b9)
+ItemUseFailed:
 	xor a
 	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	jp PrintText
 
-ItemUseNotTimeText: ; e5c0 (3:65c0)
+ItemUseNotTimeText:
 	TX_FAR _ItemUseNotTimeText
 	db "@"
 
-ItemUseNotYoursToUseText: ; e5c5 (3:65c5)
+ItemUseNotYoursToUseText:
 	TX_FAR _ItemUseNotYoursToUseText
 	db "@"
 
-ItemUseNoEffectText: ; e5ca (3:65ca)
+ItemUseNoEffectText:
 	TX_FAR _ItemUseNoEffectText
 	db "@"
 
-ThrowBallAtTrainerMonText1: ; e5cf (3:65cf)
+ThrowBallAtTrainerMonText1:
 	TX_FAR _ThrowBallAtTrainerMonText1
 	db "@"
 
-ThrowBallAtTrainerMonText2: ; e5d4 (3:65d4)
+ThrowBallAtTrainerMonText2:
 	TX_FAR _ThrowBallAtTrainerMonText2
 	db "@"
 
-NoCyclingAllowedHereText: ; e5d9 (3:65d9)
+NoCyclingAllowedHereText:
 	TX_FAR _NoCyclingAllowedHereText
 	db "@"
 
-NoSurfingHereText: ; e5de (3:65de)
+NoSurfingHereText:
 	TX_FAR _NoSurfingHereText
 	db "@"
 
-BoxFullCannotThrowBallText: ; e5e3 (3:65e3)
+BoxFullCannotThrowBallText:
 	TX_FAR _BoxFullCannotThrowBallText
 	db "@"
 
-ItemUseText00: ; e5e8 (3:65e8)
+ItemUseText00:
 	TX_FAR _ItemUseText001
 	db $05
 	TX_FAR _ItemUseText002
 	db "@"
 
-GotOnBicycleText: ; e5f2 (3:65f2)
+GotOnBicycleText:
 	TX_FAR _GotOnBicycleText1
 	db $05
 	TX_FAR _GotOnBicycleText2
 	db "@"
 
-GotOffBicycleText: ; e5fc (3:65fc)
+GotOffBicycleText:
 	TX_FAR _GotOffBicycleText1
 	db $05
 	TX_FAR _GotOffBicycleText2
@@ -2416,7 +2416,7 @@ GotOffBicycleText: ; e5fc (3:65fc)
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon in party
 ; [wCurrentMenuItem] = index of move (when using a PP Up)
-RestoreBonusPP: ; e606 (3:6606)
+RestoreBonusPP:
 	ld hl,wPartyMon1Moves
 	ld bc, wPartyMon2 - wPartyMon1
 	ld a,[wWhichPokemon]
@@ -2458,7 +2458,7 @@ RestoreBonusPP: ; e606 (3:6606)
 ; INPUT:
 ; [de] = normal max PP
 ; [hl] = move PP
-AddBonusPP: ; e642 (3:6642)
+AddBonusPP:
 	push bc
 	ld a,[de] ; normal max PP of move
 	ld [H_DIVIDEND + 3],a
@@ -2507,7 +2507,7 @@ AddBonusPP: ; e642 (3:6642)
 ; [wCurrentMenuItem] = move index
 ; OUTPUT:
 ; [wMaxPP] = max PP
-GetMaxPP: ; e677 (3:6677)
+GetMaxPP:
 	ld a,[wMonDataLocation]
 	and a
 	ld hl,wPartyMon1Moves
@@ -2567,11 +2567,11 @@ GetMaxPP: ; e677 (3:6677)
 	ld [wMaxPP],a ; store max PP
 	ret
 
-GetSelectedMoveOffset: ; e6e3 (3:66e3)
+GetSelectedMoveOffset:
 	ld a,[wWhichPokemon]
 	call AddNTimes
 
-GetSelectedMoveOffset2: ; e6e9 (3:66e9)
+GetSelectedMoveOffset2:
 	ld a,[wCurrentMenuItem]
 	ld c,a
 	ld b,0
@@ -2586,7 +2586,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 ; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
-TossItem_: ; e6f1 (3:66f1)
+TossItem_:
 	push hl
 	ld a,[wcf91]
 	call IsItemHM
@@ -2636,15 +2636,15 @@ TossItem_: ; e6f1 (3:66f1)
 	scf
 	ret
 
-ThrewAwayItemText: ; e755 (3:6755)
+ThrewAwayItemText:
 	TX_FAR _ThrewAwayItemText
 	db "@"
 
-IsItOKToTossItemText: ; e75a (3:675a)
+IsItOKToTossItemText:
 	TX_FAR _IsItOKToTossItemText
 	db "@"
 
-TooImportantToTossText: ; e75f (3:675f)
+TooImportantToTossText:
 	TX_FAR _TooImportantToTossText
 	db "@"
 
@@ -2655,7 +2655,7 @@ TooImportantToTossText: ; e75f (3:675f)
 ; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
-IsKeyItem_: ; e764 (3:6764)
+IsKeyItem_:
 	ld a,$01
 	ld [wIsKeyItem],a
 	ld a,[wcf91]
@@ -2686,7 +2686,7 @@ IsKeyItem_: ; e764 (3:6764)
 
 INCLUDE "data/key_items.asm"
 
-SendNewMonToBox: ; e7a4 (3:67a4)
+SendNewMonToBox:
 	ld de, wNumInBox
 	ld a, [de]
 	inc a
@@ -2855,7 +2855,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 ; checks if the tile in front of the player is a shore or water tile
 ; used for surfing and fishing
 ; unsets carry if it is, sets carry if not
-IsNextTileShoreOrWater: ; e8b8 (3:68b8)
+IsNextTileShoreOrWater:
 	ld a, [wCurMapTileset]
 	ld hl, WaterTilesets
 	ld de,1
@@ -2880,11 +2880,11 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 	ret
 
 ; tilesets with water
-WaterTilesets: ; e8e0 (3:68e0)
+WaterTilesets:
 	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU
 	db $ff ; terminator
 
-ReadSuperRodData: ; e8ea (3:68ea)
+ReadSuperRodData:
 ; return e = 2 if no fish on this map
 ; return e = 1 if a bite, bc = level,species
 ; return e = 0 if no bite
@@ -2933,13 +2933,13 @@ INCLUDE "data/super_rod.asm"
 
 ; reloads map view and processes sprite data
 ; for items that cause the overworld to be displayed
-ItemUseReloadOverworldData: ; e9c5 (3:69c5)
+ItemUseReloadOverworldData:
 	call LoadCurrentMapView
 	jp UpdateSprites
 
 ; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
 ; this is used by the pokedex to display locations the mon can be found on the map.
-FindWildLocationsOfMon: ; e9cb (3:69cb)
+FindWildLocationsOfMon:
 	ld hl, WildDataPointers
 	ld de, wBuffer
 	ld c, $0
@@ -2968,7 +2968,7 @@ FindWildLocationsOfMon: ; e9cb (3:69cb)
 	ld [de], a
 	ret
 
-CheckMapForMon: ; e9f0 (3:69f0)
+CheckMapForMon:
 	inc hl
 	ld b, $a
 .loop

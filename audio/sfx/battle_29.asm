@@ -1,4 +1,4 @@
-SFX_Battle_29_Ch1: ; 2067e (8:467e)
+SFX_Battle_29_Ch1:
 	dutycycle 201
 	unknownsfx0x20 11, 243, 32, 1
 	unknownsfx0x20 9, 211, 80, 1
@@ -8,7 +8,7 @@ SFX_Battle_29_Ch1: ; 2067e (8:467e)
 	endchannel
 
 
-SFX_Battle_29_Ch2: ; 20695 (8:4695)
+SFX_Battle_29_Ch2:
 	unknownnoise0x20 10, 243, 53
 	unknownnoise0x20 14, 246, 69
 	loopchannel 4, SFX_Battle_29_Ch2

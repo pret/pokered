@@ -1,4 +1,4 @@
-SFX_08_PokeFlute_Ch3: ; 2049b (8:449b)
+SFX_08_PokeFlute_Ch3:
 	executemusic
 	vibrato 16, 1, 4
 	notetype 8, 1, 0

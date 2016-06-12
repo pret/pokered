@@ -1,4 +1,4 @@
-Serial:: ; 2125 (0:2125)
+Serial::
 	push af
 	push bc
 	push de
@@ -52,7 +52,7 @@ Serial:: ; 2125 (0:2125)
 ; hl = send data
 ; de = receive data
 ; bc = length of data
-Serial_ExchangeBytes:: ; 216f (0:216f)
+Serial_ExchangeBytes::
 	ld a, 1
 	ld [hSerialIgnoringInitialData], a
 .loop
@@ -86,7 +86,7 @@ Serial_ExchangeBytes:: ; 216f (0:216f)
 	jr nz, .loop
 	ret
 
-Serial_ExchangeByte:: ; 219a (0:219a)
+Serial_ExchangeByte::
 	xor a
 	ld [hSerialReceivedNewData], a
 	ld a, [hSerialConnectionStatus]
@@ -174,14 +174,14 @@ Serial_ExchangeByte:: ; 219a (0:219a)
 	call DelayFrame
 	jp Serial_ExchangeByte
 
-WaitLoop_15Iterations:: ; 2231 (0:2231)
+WaitLoop_15Iterations::
 	ld a, 15
 .waitLoop
 	dec a
 	jr nz, .waitLoop
 	ret
 
-IsUnknownCounterZero:: ; 2237 (0:2237)
+IsUnknownCounterZero::
 	push hl
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
@@ -190,7 +190,7 @@ IsUnknownCounterZero:: ; 2237 (0:2237)
 	ret
 
 ; a is always 0 when this is called
-SetUnknownCounterToFFFF:: ; 223f (0:223f)
+SetUnknownCounterToFFFF::
 	dec a
 	ld [wUnknownSerialCounter], a
 	ld [wUnknownSerialCounter + 1], a
@@ -198,7 +198,7 @@ SetUnknownCounterToFFFF:: ; 223f (0:223f)
 
 ; This is used to exchange the button press and selected menu item on the link menu.
 ; The data is sent thrice and read twice to increase reliability.
-Serial_ExchangeLinkMenuSelection:: ; 2247 (0:2247)
+Serial_ExchangeLinkMenuSelection::
 	ld hl, wLinkMenuSelectionSendBuffer
 	ld de, wLinkMenuSelectionReceiveBuffer
 	ld c, 2 ; number of bytes to save
@@ -223,13 +223,13 @@ Serial_ExchangeLinkMenuSelection:: ; 2247 (0:2247)
 	jr nz, .loop
 	ret
 
-Serial_PrintWaitingTextAndSyncAndExchangeNybble:: ; 226e (0:226e)
+Serial_PrintWaitingTextAndSyncAndExchangeNybble::
 	call SaveScreenTilesToBuffer1
 	callab PrintWaitingText
 	call Serial_SyncAndExchangeNybble
 	jp LoadScreenTilesFromBuffer1
 
-Serial_SyncAndExchangeNybble:: ; 227f (0:227f)
+Serial_SyncAndExchangeNybble::
 	ld a, $ff
 	ld [wSerialExchangeNybbleReceiveData], a
 .loop1
@@ -269,7 +269,7 @@ Serial_SyncAndExchangeNybble:: ; 227f (0:227f)
 	ld [wSerialSyncAndExchangeNybbleReceiveData], a
 	ret
 
-Serial_ExchangeNybble:: ; 22c3 (0:22c3)
+Serial_ExchangeNybble::
 	call .doExchange
 	ld a, [wSerialExchangeNybbleSendData]
 	add $60
@@ -292,7 +292,7 @@ Serial_ExchangeNybble:: ; 22c3 (0:22c3)
 	ld [wSerialExchangeNybbleReceiveData], a
 	ret
 
-Serial_SendZeroByte:: ; 22ed (0:22ed)
+Serial_SendZeroByte::
 	xor a
 	ld [hSerialSendData], a
 	ld a, [hSerialConnectionStatus]
@@ -302,7 +302,7 @@ Serial_SendZeroByte:: ; 22ed (0:22ed)
 	ld [rSC], a
 	ret
 
-Serial_TryEstablishingExternallyClockedConnection:: ; 22fa (0:22fa)
+Serial_TryEstablishingExternallyClockedConnection::
 	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
 	ld [rSB], a
 	xor a

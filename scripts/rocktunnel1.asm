@@ -1,4 +1,4 @@
-RockTunnel1Script: ; 444dc (11:44dc)
+RockTunnel1Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, RockTunnel1TrainerHeaders
 	ld de, RockTunnel1ScriptPointers
@@ -7,12 +7,12 @@ RockTunnel1Script: ; 444dc (11:44dc)
 	ld [wRockTunnel1CurScript], a
 	ret
 
-RockTunnel1ScriptPointers: ; 444ef (11:44ef)
+RockTunnel1ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-RockTunnel1TextPointers: ; 444f5 (11:44f5)
+RockTunnel1TextPointers:
 	dw RockTunnel1Text1
 	dw RockTunnel1Text2
 	dw RockTunnel1Text3
@@ -22,8 +22,8 @@ RockTunnel1TextPointers: ; 444f5 (11:44f5)
 	dw RockTunnel1Text7
 	dw RockTunnel1Text8
 
-RockTunnel1TrainerHeaders: ; 44505 (11:4505)
-RockTunnel1TrainerHeader1: ; 44505 (11:4505)
+RockTunnel1TrainerHeaders:
+RockTunnel1TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_1
@@ -32,7 +32,7 @@ RockTunnel1TrainerHeader1: ; 44505 (11:4505)
 	dw RockTunnel1EndBattleText1 ; TextEndBattle
 	dw RockTunnel1EndBattleText1 ; TextEndBattle
 
-RockTunnel1TrainerHeader2: ; 44511 (11:4511)
+RockTunnel1TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_2
@@ -41,7 +41,7 @@ RockTunnel1TrainerHeader2: ; 44511 (11:4511)
 	dw RockTunnel1EndBattleText2 ; TextEndBattle
 	dw RockTunnel1EndBattleText2 ; TextEndBattle
 
-RockTunnel1TrainerHeader3: ; 4451d (11:451d)
+RockTunnel1TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_3
@@ -50,7 +50,7 @@ RockTunnel1TrainerHeader3: ; 4451d (11:451d)
 	dw RockTunnel1EndBattleText3 ; TextEndBattle
 	dw RockTunnel1EndBattleText3 ; TextEndBattle
 
-RockTunnel1TrainerHeader4: ; 44529 (11:4529)
+RockTunnel1TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_4
@@ -59,7 +59,7 @@ RockTunnel1TrainerHeader4: ; 44529 (11:4529)
 	dw RockTunnel1EndBattleText4 ; TextEndBattle
 	dw RockTunnel1EndBattleText4 ; TextEndBattle
 
-RockTunnel1TrainerHeader5: ; 44535 (11:4535)
+RockTunnel1TrainerHeader5:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_5
@@ -68,7 +68,7 @@ RockTunnel1TrainerHeader5: ; 44535 (11:4535)
 	dw RockTunnel1EndBattleText5 ; TextEndBattle
 	dw RockTunnel1EndBattleText5 ; TextEndBattle
 
-RockTunnel1TrainerHeader6: ; 44541 (11:4541)
+RockTunnel1TrainerHeader6:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_6
@@ -77,7 +77,7 @@ RockTunnel1TrainerHeader6: ; 44541 (11:4541)
 	dw RockTunnel1EndBattleText6 ; TextEndBattle
 	dw RockTunnel1EndBattleText6 ; TextEndBattle
 
-RockTunnel1TrainerHeader7: ; 4454d (11:454d)
+RockTunnel1TrainerHeader7:
 	dbEventFlagBit EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_7
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCK_TUNNEL_1_TRAINER_7
@@ -88,127 +88,127 @@ RockTunnel1TrainerHeader7: ; 4454d (11:454d)
 
 	db $ff
 
-RockTunnel1Text1: ; 4455a (11:455a)
+RockTunnel1Text1:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader1
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text2: ; 44560 (11:4560)
+RockTunnel1Text2:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader2
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text3: ; 44566 (11:4566)
+RockTunnel1Text3:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader3
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text4: ; 4456c (11:456c)
+RockTunnel1Text4:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader4
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text5: ; 44572 (11:4572)
+RockTunnel1Text5:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader5
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text6: ; 44578 (11:4578)
+RockTunnel1Text6:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader6
 	jr RockTunnel1TalkToTrainer
 
-RockTunnel1Text7: ; 4457e (11:457e)
+RockTunnel1Text7:
 	TX_ASM
 	ld hl, RockTunnel1TrainerHeader7
-RockTunnel1TalkToTrainer: ; 44582 (11:4582)
+RockTunnel1TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
-RockTunnel1BattleText1: ; 44588 (11:4588)
+RockTunnel1BattleText1:
 	TX_FAR _RockTunnel1BattleText1
 	db "@"
 
-RockTunnel1EndBattleText1: ; 4458d (11:458d)
+RockTunnel1EndBattleText1:
 	TX_FAR _RockTunnel1EndBattleText1
 	db "@"
 
-RockTunnel1AfterBattleText1: ; 44592 (11:4592)
+RockTunnel1AfterBattleText1:
 	TX_FAR _RockTunnel1AfterBattleText1
 	db "@"
 
-RockTunnel1BattleText2: ; 44597 (11:4597)
+RockTunnel1BattleText2:
 	TX_FAR _RockTunnel1BattleText2
 	db "@"
 
-RockTunnel1EndBattleText2: ; 4459c (11:459c)
+RockTunnel1EndBattleText2:
 	TX_FAR _RockTunnel1EndBattleText2
 	db "@"
 
-RockTunnel1AfterBattleText2: ; 445a1 (11:45a1)
+RockTunnel1AfterBattleText2:
 	TX_FAR _RockTunnel1AfterBattleText2
 	db "@"
 
-RockTunnel1BattleText3: ; 445a6 (11:45a6)
+RockTunnel1BattleText3:
 	TX_FAR _RockTunnel1BattleText3
 	db "@"
 
-RockTunnel1EndBattleText3: ; 445ab (11:45ab)
+RockTunnel1EndBattleText3:
 	TX_FAR _RockTunnel1EndBattleText3
 	db "@"
 
-RockTunnel1AfterBattleText3: ; 445b0 (11:45b0)
+RockTunnel1AfterBattleText3:
 	TX_FAR _RockTunnel1AfterBattleText3
 	db "@"
 
-RockTunnel1BattleText4: ; 445b5 (11:45b5)
+RockTunnel1BattleText4:
 	TX_FAR _RockTunnel1BattleText4
 	db "@"
 
-RockTunnel1EndBattleText4: ; 445ba (11:45ba)
+RockTunnel1EndBattleText4:
 	TX_FAR _RockTunnel1EndBattleText4
 	db "@"
 
-RockTunnel1AfterBattleText4: ; 445bf (11:45bf)
+RockTunnel1AfterBattleText4:
 	TX_FAR _RockTunnel1AfterBattleText4
 	db "@"
 
-RockTunnel1BattleText5: ; 445c4 (11:45c4)
+RockTunnel1BattleText5:
 	TX_FAR _RockTunnel1BattleText5
 	db "@"
 
-RockTunnel1EndBattleText5: ; 445c9 (11:45c9)
+RockTunnel1EndBattleText5:
 	TX_FAR _RockTunnel1EndBattleText5
 	db "@"
 
-RockTunnel1AfterBattleText5: ; 445ce (11:45ce)
+RockTunnel1AfterBattleText5:
 	TX_FAR _RockTunnel1AfterBattleText5
 	db "@"
 
-RockTunnel1BattleText6: ; 445d3 (11:45d3)
+RockTunnel1BattleText6:
 	TX_FAR _RockTunnel1BattleText6
 	db "@"
 
-RockTunnel1EndBattleText6: ; 445d8 (11:45d8)
+RockTunnel1EndBattleText6:
 	TX_FAR _RockTunnel1EndBattleText6
 	db "@"
 
-RockTunnel1AfterBattleText6: ; 445dd (11:45dd)
+RockTunnel1AfterBattleText6:
 	TX_FAR _RockTunnel1AfterBattleText6
 	db "@"
 
-RockTunnel1BattleText7: ; 445e2 (11:45e2)
+RockTunnel1BattleText7:
 	TX_FAR _RockTunnel1BattleText7
 	db "@"
 
-RockTunnel1EndBattleText7: ; 445e7 (11:45e7)
+RockTunnel1EndBattleText7:
 	TX_FAR _RockTunnel1EndBattleText7
 	db "@"
 
-RockTunnel1AfterBattleText7: ; 445ec (11:45ec)
+RockTunnel1AfterBattleText7:
 	TX_FAR _RockTunnel1AfterBattleText7
 	db "@"
 
-RockTunnel1Text8: ; 445f1 (11:45f1)
+RockTunnel1Text8:
 	TX_FAR _RockTunnel1Text8
 	db "@"

@@ -1,10 +1,10 @@
-CeruleanCityScript: ; 19480 (6:5480)
+CeruleanCityScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, CeruleanCityScriptPointers
 	ld a, [wCeruleanCityCurScript]
 	jp CallFunctionInTable
 
-CeruleanCityScript_1948c: ; 1948c (6:548c)
+CeruleanCityScript_1948c:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wCeruleanCityCurScript], a
@@ -12,14 +12,14 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	ld [wMissableObjectIndex], a
 	predef_jump HideObject
 
-CeruleanCityScriptPointers: ; 1949d (6:549d)
+CeruleanCityScriptPointers:
 	dw CeruleanCityScript0
 	dw CeruleanCityScript1
 	dw CeruleanCityScript2
 	dw CeruleanCityScript3
 	dw CeruleanCityScript4
 
-CeruleanCityScript4: ; 194a7 (6:54a7)
+CeruleanCityScript4:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
@@ -34,7 +34,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityScript0: ; 194c8 (6:54c8)
+CeruleanCityScript0:
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .asm_194f7
 	ld hl, CeruleanCityCoords1
@@ -96,30 +96,30 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityCoords1: ; 1954f (6:554f)
+CeruleanCityCoords1:
 	db $07,$1e
 	db $09,$1e
 	db $ff
 
-CeruleanCityCoords2: ; 19554 (6:5554)
+CeruleanCityCoords2:
 	db $06,$14
 	db $06,$15
 	db $ff
 
-CeruleanCityMovement1: ; 19559 (6:5559)
+CeruleanCityMovement1:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-CeruleanCityScript_1955d: ; 1955d (6:555d)
+CeruleanCityScript_1955d:
 	ld a,1
 	ld [H_SPRITEINDEX],a
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection],a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
-CeruleanCityScript1: ; 19567 (6:5567)
+CeruleanCityScript1:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -160,7 +160,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityScript2: ; 195b1 (6:55b1)
+CeruleanCityScript2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityScript_1948c
@@ -193,7 +193,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityMovement3: ; 19600 (6:5600)
+CeruleanCityMovement3:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -203,7 +203,7 @@ CeruleanCityMovement3: ; 19600 (6:5600)
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-CeruleanCityMovement4: ; 19608 (6:5608)
+CeruleanCityMovement4:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -213,7 +213,7 @@ CeruleanCityMovement4: ; 19608 (6:5608)
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-CeruleanCityScript3: ; 19610 (6:5610)
+CeruleanCityScript3:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -227,7 +227,7 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld [wCeruleanCityCurScript], a
 	ret
 
-CeruleanCityTextPointers: ; 1962d (6:562d)
+CeruleanCityTextPointers:
 	dw CeruleanCityText1
 	dw CeruleanCityText2
 	dw CeruleanCityText3
@@ -246,7 +246,7 @@ CeruleanCityTextPointers: ; 1962d (6:562d)
 	dw CeruleanCityText16
 	dw CeruleanCityText17
 
-CeruleanCityText1: ; 1964f (6:564f)
+CeruleanCityText1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
 	; do pre-battle text
@@ -261,23 +261,23 @@ CeruleanCityText1: ; 1964f (6:564f)
 .end
 	jp TextScriptEnd
 
-CeruleanCityText_19668: ; 19668 (6:5668)
+CeruleanCityText_19668:
 	TX_FAR _CeruleanCityText_19668
 	db "@"
 
-CeruleanCityText_1966d: ; 1966d (6:566d)
+CeruleanCityText_1966d:
 	TX_FAR _CeruleanCityText_1966d
 	db "@"
 
-CeruleanCityText_19672: ; 19672 (6:5672)
+CeruleanCityText_19672:
 	TX_FAR _CeruleanCityText_19672
 	db "@"
 
-CeruleanCityText_19677: ; 19677 (6:5677)
+CeruleanCityText_19677:
 	TX_FAR _CeruleanCityText_19677
 	db "@"
 
-CeruleanCityText2: ; 1967c (6:567c)
+CeruleanCityText2:
 	TX_ASM
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .asm_4ca20
@@ -314,46 +314,46 @@ CeruleanCityText2: ; 1967c (6:567c)
 .Done
 	jp TextScriptEnd
 
-CeruleanCityText_196d9: ; 196d9 (6:56d9)
+CeruleanCityText_196d9:
 	TX_FAR _CeruleanCityText_196d9
 	db "@"
 
-ReceivedTM28Text: ; 196de (6:56de)
+ReceivedTM28Text:
 	TX_FAR _ReceivedTM28Text
 	db $0B
 	TX_FAR _ReceivedTM28Text2
 	db $0D, "@"
 
-TM28NoRoomText: ; 196e9 (6:56e9)
+TM28NoRoomText:
 	TX_FAR _TM28NoRoomText
 	db "@"
 
-CeruleanCityText_196ee: ; 196ee (6:56ee)
+CeruleanCityText_196ee:
 	TX_FAR _CeruleanCityText_196ee
 	db "@"
 
-CeruleanCityText_196f3: ; 196f3 (6:56f3)
+CeruleanCityText_196f3:
 	TX_FAR _CeruleanCityText_196f3
 	db "@"
 
-CeruleanCityText3: ; 196f8 (6:56f8)
+CeruleanCityText3:
 	TX_FAR _CeruleanCityText3
 	db "@"
 
-CeruleanCityText4: ; 196fd (6:56fd)
+CeruleanCityText4:
 	TX_FAR _CeruleanCityText4
 	db "@"
 
-CeruleanCityText5: ; 19702 (6:5702)
+CeruleanCityText5:
 	TX_FAR _CeruleanCityText5
 	db "@"
 
-CeruleanCityText11: ; 19707 (6:5707)
-CeruleanCityText6: ; 19707 (6:5707)
+CeruleanCityText11:
+CeruleanCityText6:
 	TX_FAR _CeruleanCityText6
 	db "@"
 
-CeruleanCityText7: ; 1970c (6:570c)
+CeruleanCityText7:
 	TX_ASM
 	ld a, [hRandomAdd]
 	cp $b4
@@ -373,19 +373,19 @@ CeruleanCityText7: ; 1970c (6:570c)
 .asm_d486e
 	jp TextScriptEnd
 
-CeruleanCityText_19730: ; 19730 (6:5730)
+CeruleanCityText_19730:
 	TX_FAR _CeruleanCityText_19730
 	db "@"
 
-CeruleanCityText_19735: ; 19735 (6:5735)
+CeruleanCityText_19735:
 	TX_FAR _CeruleanCityText_19735
 	db "@"
 
-CeruleanCityText_1973a: ; 1973a (6:573a)
+CeruleanCityText_1973a:
 	TX_FAR _CeruleanCityText_1973a
 	db "@"
 
-CeruleanCityText8: ; 1973f (6:573f)
+CeruleanCityText8:
 	TX_ASM
 	ld a, [hRandomAdd]
 	cp $b4
@@ -411,42 +411,42 @@ CeruleanCityText8: ; 1973f (6:573f)
 .asm_f2f38
 	jp TextScriptEnd
 
-CeruleanCityText_1976f: ; 1976f (6:576f)
+CeruleanCityText_1976f:
 	TX_FAR _CeruleanCityText_1976f
 	db "@"
 
-CeruleanCityText_19774: ; 19774 (6:5774)
+CeruleanCityText_19774:
 	TX_FAR _CeruleanCityText_19774
 	db "@"
 
-CeruleanCityText_19779: ; 19779 (6:5779)
+CeruleanCityText_19779:
 	TX_FAR _CeruleanCityText_19779
 	db "@"
 
-CeruleanCityText_1977e: ; 1977e (6:577e)
+CeruleanCityText_1977e:
 	TX_FAR _CeruleanCityText_1977e
 	db "@"
 
-CeruleanCityText9: ; 19783 (6:5783)
+CeruleanCityText9:
 	TX_FAR _CeruleanCityText9
 	db "@"
 
-CeruleanCityText10: ; 19788 (6:5788)
+CeruleanCityText10:
 	TX_FAR _CeruleanCityText10
 	db "@"
 
-CeruleanCityText12: ; 1978d (6:578d)
+CeruleanCityText12:
 	TX_FAR _CeruleanCityText12
 	db "@"
 
-CeruleanCityText13: ; 19792 (6:5792)
+CeruleanCityText13:
 	TX_FAR _CeruleanCityText13
 	db "@"
 
-CeruleanCityText16: ; 19797 (6:5797)
+CeruleanCityText16:
 	TX_FAR _CeruleanCityText16
 	db "@"
 
-CeruleanCityText17: ; 1979c (6:579c)
+CeruleanCityText17:
 	TX_FAR _CeruleanCityText17
 	db "@"

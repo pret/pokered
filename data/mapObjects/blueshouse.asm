@@ -1,4 +1,4 @@
-BluesHouseObject: ; 19bce (6:5bce)
+BluesHouseObject:
 	db $0A ; border block
 
 	db $2 ; warps

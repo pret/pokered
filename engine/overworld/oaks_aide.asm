@@ -45,27 +45,27 @@ OaksAideScript: ; 0x59035
 	ld [hOaksAideResult], a
 	ret
 
-OaksAideHiText: ; 59091 (16:5091)
+OaksAideHiText:
 	TX_FAR _OaksAideHiText
 	db "@"
 
-OaksAideUhOhText: ; 59096 (16:5096)
+OaksAideUhOhText:
 	TX_FAR _OaksAideUhOhText
 	db "@"
 
-OaksAideComeBackText: ; 5909b (16:509b)
+OaksAideComeBackText:
 	TX_FAR _OaksAideComeBackText
 	db "@"
 
-OaksAideHereYouGoText: ; 590a0 (16:50a0)
+OaksAideHereYouGoText:
 	TX_FAR _OaksAideHereYouGoText
 	db "@"
 
-OaksAideGotItemText: ; 590a5 (16:50a5)
+OaksAideGotItemText:
 	TX_FAR _OaksAideGotItemText
 	db $0b
 	db "@"
 
-OaksAideNoRoomText: ; 590ab (16:50ab)
+OaksAideNoRoomText:
 	TX_FAR _OaksAideNoRoomText
 	db "@"

@@ -1,4 +1,4 @@
-Route16Script: ; 59933 (16:5933)
+Route16Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, Route16TrainerHeaders
 	ld de, Route16ScriptPointers
@@ -7,20 +7,20 @@ Route16Script: ; 59933 (16:5933)
 	ld [wRoute16CurScript], a
 	ret
 
-Route16Script_59946: ; 59946 (16:5946)
+Route16Script_59946:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wRoute16CurScript], a
 	ld [wCurMapScript], a
 	ret
 
-Route16ScriptPointers: ; 59951 (16:5951)
+Route16ScriptPointers:
 	dw Route16Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route16Script3
 
-Route16Script0: ; 59959 (16:5959)
+Route16Script0:
 	CheckEventHL EVENT_BEAT_ROUTE16_SNORLAX
 	jp nz, CheckFightingMapTrainers
 	CheckEventReuseHL EVENT_FIGHT_ROUTE16_SNORLAX
@@ -42,7 +42,7 @@ Route16Script0: ; 59959 (16:5959)
 	ld [wCurMapScript], a
 	ret
 
-Route16Script3: ; 5998f (16:598f)
+Route16Script3:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route16Script_59946
@@ -61,7 +61,7 @@ Route16Script3: ; 5998f (16:598f)
 	ld [wCurMapScript], a
 	ret
 
-Route16TextPointers: ; 599b9 (16:59b9)
+Route16TextPointers:
 	dw Route16Text1
 	dw Route16Text2
 	dw Route16Text3
@@ -74,8 +74,8 @@ Route16TextPointers: ; 599b9 (16:59b9)
 	dw Route16Text10
 	dw Route16Text11
 
-Route16TrainerHeaders: ; 599cf (16:59cf)
-Route16TrainerHeader0: ; 599cf (16:59cf)
+Route16TrainerHeaders:
+Route16TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_0
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_0
@@ -84,7 +84,7 @@ Route16TrainerHeader0: ; 599cf (16:59cf)
 	dw Route16EndBattleText1 ; TextEndBattle
 	dw Route16EndBattleText1 ; TextEndBattle
 
-Route16TrainerHeader1: ; 599db (16:59db)
+Route16TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_1
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_1
@@ -93,7 +93,7 @@ Route16TrainerHeader1: ; 599db (16:59db)
 	dw Route16EndBattleText2 ; TextEndBattle
 	dw Route16EndBattleText2 ; TextEndBattle
 
-Route16TrainerHeader2: ; 599e7 (16:59e7)
+Route16TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_2
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_2
@@ -102,7 +102,7 @@ Route16TrainerHeader2: ; 599e7 (16:59e7)
 	dw Route16EndBattleText3 ; TextEndBattle
 	dw Route16EndBattleText3 ; TextEndBattle
 
-Route16TrainerHeader3: ; 599f3 (16:59f3)
+Route16TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_3
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_3
@@ -111,7 +111,7 @@ Route16TrainerHeader3: ; 599f3 (16:59f3)
 	dw Route16EndBattleText4 ; TextEndBattle
 	dw Route16EndBattleText4 ; TextEndBattle
 
-Route16TrainerHeader4: ; 599ff (16:59ff)
+Route16TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_4
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_4
@@ -120,7 +120,7 @@ Route16TrainerHeader4: ; 599ff (16:59ff)
 	dw Route16EndBattleText5 ; TextEndBattle
 	dw Route16EndBattleText5 ; TextEndBattle
 
-Route16TrainerHeader5: ; 59a0b (16:5a0b)
+Route16TrainerHeader5:
 	dbEventFlagBit EVENT_BEAT_ROUTE_16_TRAINER_5
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_16_TRAINER_5
@@ -131,130 +131,130 @@ Route16TrainerHeader5: ; 59a0b (16:5a0b)
 
 	db $ff
 
-Route16Text1: ; 59a18 (16:5a18)
+Route16Text1:
 	TX_ASM
 	ld hl, Route16TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText1: ; 59a22 (16:5a22)
+Route16BattleText1:
 	TX_FAR _Route16BattleText1
 	db "@"
 
-Route16EndBattleText1: ; 59a27 (16:5a27)
+Route16EndBattleText1:
 	TX_FAR _Route16EndBattleText1
 	db "@"
 
-Route16AfterBattleText1: ; 59a2c (16:5a2c)
+Route16AfterBattleText1:
 	TX_FAR _Route16AfterBattleText1
 	db "@"
 
-Route16Text2: ; 59a31 (16:5a31)
+Route16Text2:
 	TX_ASM
 	ld hl, Route16TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText2: ; 59a3b (16:5a3b)
+Route16BattleText2:
 	TX_FAR _Route16BattleText2
 	db "@"
 
-Route16EndBattleText2: ; 59a40 (16:5a40)
+Route16EndBattleText2:
 	TX_FAR _Route16EndBattleText2
 	db "@"
 
-Route16AfterBattleText2: ; 59a45 (16:5a45)
+Route16AfterBattleText2:
 	TX_FAR _Route16AfterBattleText2
 	db "@"
 
-Route16Text3: ; 59a4a (16:5a4a)
+Route16Text3:
 	TX_ASM
 	ld hl, Route16TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText3: ; 59a54 (16:5a54)
+Route16BattleText3:
 	TX_FAR _Route16BattleText3
 	db "@"
 
-Route16EndBattleText3: ; 59a59 (16:5a59)
+Route16EndBattleText3:
 	TX_FAR _Route16EndBattleText3
 	db "@"
 
-Route16AfterBattleText3: ; 59a5e (16:5a5e)
+Route16AfterBattleText3:
 	TX_FAR _Route16AfterBattleText3
 	db "@"
 
-Route16Text4: ; 59a63 (16:5a63)
+Route16Text4:
 	TX_ASM
 	ld hl, Route16TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText4: ; 59a6d (16:5a6d)
+Route16BattleText4:
 	TX_FAR _Route16BattleText4
 	db "@"
 
-Route16EndBattleText4: ; 59a72 (16:5a72)
+Route16EndBattleText4:
 	TX_FAR _Route16EndBattleText4
 	db "@"
 
-Route16AfterBattleText4: ; 59a77 (16:5a77)
+Route16AfterBattleText4:
 	TX_FAR _Route16AfterBattleText4
 	db "@"
 
-Route16Text5: ; 59a7c (16:5a7c)
+Route16Text5:
 	TX_ASM
 	ld hl, Route16TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText5: ; 59a86 (16:5a86)
+Route16BattleText5:
 	TX_FAR _Route16BattleText5
 	db "@"
 
-Route16EndBattleText5: ; 59a8b (16:5a8b)
+Route16EndBattleText5:
 	TX_FAR _Route16EndBattleText5
 	db "@"
 
-Route16AfterBattleText5: ; 59a90 (16:5a90)
+Route16AfterBattleText5:
 	TX_FAR _Route16AfterBattleText5
 	db "@"
 
-Route16Text6: ; 59a95 (16:5a95)
+Route16Text6:
 	TX_ASM
 	ld hl, Route16TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route16BattleText6: ; 59a9f (16:5a9f)
+Route16BattleText6:
 	TX_FAR _Route16BattleText6
 	db "@"
 
-Route16EndBattleText6: ; 59aa4 (16:5aa4)
+Route16EndBattleText6:
 	TX_FAR _Route16EndBattleText6
 	db "@"
 
-Route16AfterBattleText6: ; 59aa9 (16:5aa9)
+Route16AfterBattleText6:
 	TX_FAR _Route16AfterBattleText6
 	db "@"
 
-Route16Text7: ; 59aae (16:5aae)
+Route16Text7:
 	TX_FAR _Route16Text7
 	db "@"
 
-Route16Text10: ; 59ab3 (16:5ab3)
+Route16Text10:
 	TX_FAR _Route16Text10
 	db "@"
 
-Route16Text11: ; 59ab8 (16:5ab8)
+Route16Text11:
 	TX_FAR _Route16Text11
 	db "@"
 
-Route16Text8: ; 59abd (16:5abd)
+Route16Text8:
 	TX_FAR _Route16Text8
 	db "@"
 
-Route16Text9: ; 59ac2 (16:5ac2)
+Route16Text9:
 	TX_FAR _Route16Text9
 	db "@"

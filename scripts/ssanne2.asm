@@ -1,26 +1,26 @@
-SSAnne2Script: ; 6139f (18:539f)
+SSAnne2Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne2ScriptPointers
 	ld a, [wSSAnne2CurScript]
 	jp CallFunctionInTable
 
-SSAnne2Script_613ab: ; 613ab (18:53ab)
+SSAnne2Script_613ab:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wSSAnne2CurScript], a
 	ret
 
-SSAnne2ScriptPointers: ; 613b3 (18:53b3)
+SSAnne2ScriptPointers:
 	dw SSAnne2Script0
 	dw SSAnne2Script1
 	dw SSAnne2Script2
 	dw SSAnne2Script3
 	dw SSAnne2Script4
 
-SSAnne2Script4: ; 613bd (18:53bd)
+SSAnne2Script4:
 	ret
 
-SSAnne2Script0: ; 613be (18:53be)
+SSAnne2Script0:
 	ld hl, CoordsData_61411
 	call ArePlayerCoordsInArray
 	ret nc
@@ -56,21 +56,21 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld [wSSAnne2CurScript], a
 	ret
 
-MovementData_6140c: ; 6140c (18:540c)
+MovementData_6140c:
 	db NPC_MOVEMENT_DOWN
 
-MovementData_6140d: ; 6140d (18:540d)
+MovementData_6140d:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-CoordsData_61411: ; 61411 (18:5411)
+CoordsData_61411:
 	db $08,$24
 	db $08,$25
 	db $FF
 
-SSAnne2Script_61416: ; 61416 (18:5416)
+SSAnne2Script_61416:
 	ld a, [wXCoord]
 	cp $25
 	jr nz, .asm_61426
@@ -86,7 +86,7 @@ SSAnne2Script_61416: ; 61416 (18:5416)
 	ld [H_SPRITEINDEX], a
 	jp SetSpriteFacingDirectionAndDelay
 
-SSAnne2Script1: ; 61430 (18:5430)
+SSAnne2Script1:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -121,7 +121,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [wSSAnne2CurScript], a
 	ret
 
-SSAnne2Script2: ; 6146d (18:546d)
+SSAnne2Script2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SSAnne2Script_613ab
@@ -153,18 +153,18 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld [wSSAnne2CurScript], a
 	ret
 
-MovementData_614b7: ; 614b7 (18:54b7)
+MovementData_614b7:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 
-MovementData_614b9: ; 614b9 (18:54b9)
+MovementData_614b9:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-SSAnne2Script3: ; 614be (18:54be)
+SSAnne2Script3:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -178,16 +178,16 @@ SSAnne2Script3: ; 614be (18:54be)
 	ld [wSSAnne2CurScript], a
 	ret
 
-SSAnne2TextPointers: ; 614db (18:54db)
+SSAnne2TextPointers:
 	dw SSAnne2Text1
 	dw SSAnne2Text2
 	dw SSAnne2Text3
 
-SSAnne2Text1: ; 614e1 (18:54e1)
+SSAnne2Text1:
 	TX_FAR _SSAnne2Text1
 	db "@"
 
-SSAnne2Text2: ; 614e6 (18:54e6)
+SSAnne2Text2:
 	TX_ASM
 	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
@@ -199,18 +199,18 @@ SSAnne2Text2: ; 614e6 (18:54e6)
 	call SaveEndBattleTextPointers
 	jp TextScriptEnd
 
-SSAnneRivalBeforeBattleText: ; 61500 (18:5500)
+SSAnneRivalBeforeBattleText:
 	TX_FAR _SSAnneRivalBeforeBattleText
 	db "@"
 
-SSAnneRivalDefeatedText: ; 61505 (18:5505)
+SSAnneRivalDefeatedText:
 	TX_FAR _SSAnneRivalDefeatedText
 	db "@"
 
-SSAnneRivalWonText: ; 6150a (18:550a)
+SSAnneRivalWonText:
 	TX_FAR _SSAnneRivalWonText
 	db "@"
 
-SSAnne2Text3: ; 6150f (18:550f)
+SSAnne2Text3:
 	TX_FAR _SSAnneRivalCaptainText
 	db "@"

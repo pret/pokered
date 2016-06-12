@@ -1,4 +1,4 @@
-WildDataPointers: ; ceeb (3:4eeb)
+WildDataPointers:
 	dw NoMons      ; PALLET_TOWN
 	dw NoMons      ; VIRIDIAN_CITY
 	dw NoMons      ; PEWTER_CITY

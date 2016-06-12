@@ -1,4 +1,4 @@
-Music_DefeatedWildMon_Ch1:: ; 23b74 (8:7b74)
+Music_DefeatedWildMon_Ch1::
 	tempo 112
 	volume 7, 7
 	executemusic
@@ -67,7 +67,7 @@ Music_DefeatedWildMon_branch_23b8b::
 	loopchannel 0, Music_DefeatedWildMon_branch_23b8b
 
 
-Music_DefeatedWildMon_Ch2:: ; 23bc1 (8:7bc1)
+Music_DefeatedWildMon_Ch2::
 	executemusic
 	duty 2
 	notetype 12, 12, 3
@@ -142,7 +142,7 @@ Music_DefeatedWildMon_branch_23bce::
 	loopchannel 0, Music_DefeatedWildMon_branch_23bce
 
 
-Music_DefeatedWildMon_Ch3:: ; 23c0e (8:7c0e)
+Music_DefeatedWildMon_Ch3::
 	executemusic
 	notetype 12, 2, 0
 	octave 5

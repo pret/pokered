@@ -1,10 +1,10 @@
-Route12HouseScript: ; 5647f (15:647f)
+Route12HouseScript:
 	jp EnableAutoTextBoxDrawing
 
-Route12HouseTextPointers: ; 56482 (15:6482)
+Route12HouseTextPointers:
 	dw Route12HouseText1
 
-Route12HouseText1: ; 56484 (15:6484)
+Route12HouseText1:
 	TX_ASM
 	ld a, [wd728]
 	bit 5, a
@@ -34,24 +34,24 @@ Route12HouseText1: ; 56484 (15:6484)
 	call PrintText
 	jp TextScriptEnd
 
-Route12HouseText_564c0: ; 564c0 (15:64c0)
+Route12HouseText_564c0:
 	TX_FAR _Route12HouseText_564c0
 	db "@"
 
-Route12HouseText_564c5: ; 564c5 (15:64c5)
+Route12HouseText_564c5:
 	TX_FAR _Route12HouseText_564c5
 	db $0B
 	TX_FAR _Route12HouseText_564ca
 	db "@"
 
-Route12HouseText_564cf: ; 564cf (15:64cf)
+Route12HouseText_564cf:
 	TX_FAR _Route12HouseText_564cf
 	db "@"
 
-Route12HouseText_564d4: ; 564d4 (15:64d4)
+Route12HouseText_564d4:
 	TX_FAR _Route12HouseText_564d4
 	db "@"
 
-Route12HouseText_564d9: ; 564d9 (15:64d9)
+Route12HouseText_564d9:
 	TX_FAR _Route12HouseText_564d9
 	db "@"

@@ -1,4 +1,4 @@
-Mansion2Script: ; 51fd8 (14:5fd8)
+Mansion2Script:
 	call Mansion2Script_51fee
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion2TrainerHeaders
@@ -8,7 +8,7 @@ Mansion2Script: ; 51fd8 (14:5fd8)
 	ld [wMansion2CurScript], a
 	ret
 
-Mansion2Script_51fee: ; 51fee (14:5fee)
+Mansion2Script_51fee:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -37,11 +37,11 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	call Mansion2Script_5202f
 	ret
 
-Mansion2Script_5202f: ; 5202f (14:602f)
+Mansion2Script_5202f:
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
 
-Mansion2Script_Switches: ; 52037 (14:6037)
+Mansion2Script_Switches:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
@@ -51,20 +51,20 @@ Mansion2Script_Switches: ; 52037 (14:6037)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-Mansion2ScriptPointers: ; 52047 (14:6047)
+Mansion2ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Mansion2TextPointers: ; 5204d (14:604d)
+Mansion2TextPointers:
 	dw Mansion2Text1
 	dw PickUpItemText
 	dw Mansion2Text3
 	dw Mansion2Text4
 	dw Mansion2Text5
 
-Mansion2TrainerHeaders: ; 52057 (14:6057)
-Mansion2TrainerHeader0: ; 52057 (14:6057)
+Mansion2TrainerHeaders:
+Mansion2TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_2_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MANSION_2_TRAINER_0
@@ -75,34 +75,34 @@ Mansion2TrainerHeader0: ; 52057 (14:6057)
 
 	db $ff
 
-Mansion2Text1: ; 52064 (14:6064)
+Mansion2Text1:
 	TX_ASM
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion2BattleText1: ; 5206e (14:606e)
+Mansion2BattleText1:
 	TX_FAR _Mansion2BattleText1
 	db "@"
 
-Mansion2EndBattleText1: ; 52073 (14:6073)
+Mansion2EndBattleText1:
 	TX_FAR _Mansion2EndBattleText1
 	db "@"
 
-Mansion2AfterBattleText1: ; 52078 (14:6078)
+Mansion2AfterBattleText1:
 	TX_FAR _Mansion2AfterBattleText1
 	db "@"
 
-Mansion2Text3: ; 5207d (14:607d)
+Mansion2Text3:
 	TX_FAR _Mansion2Text3
 	db "@"
 
-Mansion2Text4: ; 52082 (14:6082)
+Mansion2Text4:
 	TX_FAR _Mansion2Text4
 	db "@"
 
-Mansion3Text6: ; 52087 (14:6087)
-Mansion2Text5: ; 52087 (14:6087)
+Mansion3Text6:
+Mansion2Text5:
 	TX_ASM
 	ld hl, Mansion2Text_520c2
 	call PrintText
@@ -128,14 +128,14 @@ Mansion2Text5: ; 52087 (14:6087)
 .asm_520bf
 	jp TextScriptEnd
 
-Mansion2Text_520c2: ; 520c2 (14:60c2)
+Mansion2Text_520c2:
 	TX_FAR _Mansion2Text_520c2
 	db "@"
 
-Mansion2Text_520c7: ; 520c7 (14:60c7)
+Mansion2Text_520c7:
 	TX_FAR _Mansion2Text_520c7
 	db "@"
 
-Mansion2Text_520cc: ; 520cc (14:60cc)
+Mansion2Text_520cc:
 	TX_FAR _Mansion2Text_520cc
 	db "@"

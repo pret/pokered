@@ -1,7 +1,7 @@
 ; this function seems to be used only once
 ; it store the address of a row and column of the VRAM background map in hl
 ; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
-GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
+GetRowColAddressBgMap::
 	xor a
 	srl h
 	rr a
@@ -18,7 +18,7 @@ GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
 
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
-ClearBgMap:: ; 1cf0 (0:1cf0)
+ClearBgMap::
 	ld a," "
 	jr .next
 	ld a,l
@@ -33,7 +33,7 @@ ClearBgMap:: ; 1cf0 (0:1cf0)
 	jr nz,.loop
 	ret
 
-RedrawRowOrColumn:: ; 1d01 (0:1d01)
+RedrawRowOrColumn::
 ; This function redraws a BG row of height 2 or a BG column of width 2.
 ; One of its main uses is redrawing the row or column that will be exposed upon
 ; scrolling the BG when the player takes a step. Redrawing only the exposed
@@ -119,7 +119,7 @@ RedrawRowOrColumn:: ; 1d01 (0:1d01)
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawRowOrColumn, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer:: ; 1d57 (0:1d57)
+AutoBgMapTransfer::
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a
 	ret z
@@ -167,7 +167,7 @@ AutoBgMapTransfer:: ; 1d57 (0:1d57)
 	ld [H_AUTOBGTRANSFERPORTION],a ; store next portion
 	ld b,6
 
-TransferBgRows:: ; 1d9e (0:1d9e)
+TransferBgRows::
 ; unrolled loop and using pop for speed
 
 	rept 20 / 2 - 1
@@ -201,7 +201,7 @@ TransferBgRows:: ; 1d9e (0:1d9e)
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
-VBlankCopyBgMap:: ; 1de1 (0:1de1)
+VBlankCopyBgMap::
 	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
 	and a
 	ret z

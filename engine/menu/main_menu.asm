@@ -1,4 +1,4 @@
-MainMenu: ; 5af2 (1:5af2)
+MainMenu:
 ; Check save file
 	call InitOptions
 	xor a
@@ -124,14 +124,14 @@ MainMenu: ; 5af2 (1:5af2)
 	call SpecialWarpIn
 	jp SpecialEnterMap
 
-InitOptions: ; 5bff (1:5bff)
+InitOptions:
 	ld a,1 ; no delay
 	ld [wLetterPrintingDelayFlags],a
 	ld a,3 ; medium speed
 	ld [wOptions],a
 	ret
 
-LinkMenu: ; 5c0a (1:5c0a)
+LinkMenu:
 	xor a
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd72e
@@ -292,19 +292,19 @@ LinkMenu: ; 5c0a (1:5c0a)
 	res 6, [hl]
 	ret
 
-WhereWouldYouLikeText: ; 5d43 (1:5d43)
+WhereWouldYouLikeText:
 	TX_FAR _WhereWouldYouLikeText
 	db "@"
 
-PleaseWaitText: ; 5d48 (1:5d48)
+PleaseWaitText:
 	TX_FAR _PleaseWaitText
 	db "@"
 
-LinkCanceledText: ; 5d4d (1:5d4d)
+LinkCanceledText:
 	TX_FAR _LinkCanceledText
 	db "@"
 
-StartNewGame: ; 5d52 (1:5d52)
+StartNewGame:
 	ld hl, wd732
 	res 1, [hl]
 	call OakSpeech
@@ -312,7 +312,7 @@ StartNewGame: ; 5d52 (1:5d52)
 	call DelayFrames
 
 ; enter map after using a special warp or loading the game from the main menu
-SpecialEnterMap: ; 5d5f (1:5d5f)
+SpecialEnterMap:
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
@@ -328,19 +328,19 @@ SpecialEnterMap: ; 5d5f (1:5d5f)
 	ret nz
 	jp EnterMap
 
-ContinueText: ; 5d7e (1:5d7e)
+ContinueText:
 	db "CONTINUE", $4e
 
-NewGameText: ; 5d87 (1:5d87)
+NewGameText:
 	db "NEW GAME", $4e
 	db "OPTION@"
 
-CableClubOptionsText: ; 5d97 (1:5d97)
+CableClubOptionsText:
 	db "TRADE CENTER", $4e
 	db "COLOSSEUM",    $4e
 	db "CANCEL@"
 
-DisplayContinueGameInfo: ; 5db5 (1:5db5)
+DisplayContinueGameInfo:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 4, 7
@@ -364,7 +364,7 @@ DisplayContinueGameInfo: ; 5db5 (1:5db5)
 	ld c, 30
 	jp DelayFrames
 
-PrintSaveScreenText: ; 5def (1:5def)
+PrintSaveScreenText:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	coord hl, 4, 0
@@ -390,7 +390,7 @@ PrintSaveScreenText: ; 5def (1:5def)
 	ld c, 30
 	jp DelayFrames
 
-PrintNumBadges: ; 5e2f (1:5e2f)
+PrintNumBadges:
 	push hl
 	ld hl, wObtainedBadges
 	ld b, $1
@@ -400,7 +400,7 @@ PrintNumBadges: ; 5e2f (1:5e2f)
 	lb bc, 1, 2
 	jp PrintNumber
 
-PrintNumOwnedMons: ; 5e42 (1:5e42)
+PrintNumOwnedMons:
 	push hl
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
@@ -410,7 +410,7 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	lb bc, 1, 3
 	jp PrintNumber
 
-PrintPlayTime: ; 5e55 (1:5e55)
+PrintPlayTime:
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
@@ -420,13 +420,13 @@ PrintPlayTime: ; 5e55 (1:5e55)
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
-SaveScreenInfoText: ; 5e6a (1:5e6a)
+SaveScreenInfoText:
 	db   "PLAYER"
 	next "BADGES    "
 	next "#DEX    "
 	next "TIME@"
 
-DisplayOptionMenu: ; 5e8a (1:5e8a)
+DisplayOptionMenu:
 	coord hl, 0, 0
 	ld b,3
 	ld c,18
@@ -578,23 +578,23 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld [wOptionsTextSpeedCursorX],a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
-TextSpeedOptionText: ; 5fc0 (1:5fc0)
+TextSpeedOptionText:
 	db   "TEXT SPEED"
 	next " FAST  MEDIUM SLOW@"
 
-BattleAnimationOptionText: ; 5fde (1:5fde)
+BattleAnimationOptionText:
 	db   "BATTLE ANIMATION"
 	next " ON       OFF@"
 
-BattleStyleOptionText: ; 5ffd (1:5ffd)
+BattleStyleOptionText:
 	db   "BATTLE STYLE"
 	next " SHIFT    SET@"
 
-OptionMenuCancelText: ; 6018 (1:6018)
+OptionMenuCancelText:
 	db "CANCEL@"
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
-SetOptionsFromCursorPositions: ; 601f (1:601f)
+SetOptionsFromCursorPositions:
 	ld hl,TextSpeedOptionData
 	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	ld c,a
@@ -630,7 +630,7 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 	ret
 
 ; reads the options variable and places menu cursors in the correct positions within the options menu
-SetCursorPositionsFromOptions: ; 604c (1:604c)
+SetCursorPositionsFromOptions:
 	ld hl,TextSpeedOptionData + 1
 	ld a,[wOptions]
 	ld c,a
@@ -674,14 +674,14 @@ SetCursorPositionsFromOptions: ; 604c (1:604c)
 ; Format:
 ; 00: X coordinate of menu cursor
 ; 01: delay after printing a letter (in frames)
-TextSpeedOptionData: ; 6096 (1:6096)
+TextSpeedOptionData:
 	db 14,5 ; Slow
 	db  7,3 ; Medium
 	db  1,1 ; Fast
 	db 7 ; default X coordinate (Medium)
 	db $ff ; terminator
 
-CheckForPlayerNameInSRAM: ; 609e (1:609e)
+CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character
 ; (indicating that a name may have been saved there) and return whether it does
 ; in carry.

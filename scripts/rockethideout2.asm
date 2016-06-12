@@ -1,4 +1,4 @@
-RocketHideout2Script: ; 44e27 (11:4e27)
+RocketHideout2Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout2TrainerHeaders
 	ld de, RocketHideout2ScriptPointers
@@ -7,13 +7,13 @@ RocketHideout2Script: ; 44e27 (11:4e27)
 	ld [wRocketHideout2CurScript], a
 	ret
 
-RocketHideout2ScriptPointers: ; 44e3a (11:4e3a)
+RocketHideout2ScriptPointers:
 	dw RocketHideout2Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout2Script3
 
-RocketHideout2Script0: ; 44e42 (11:4e42)
+RocketHideout2Script0:
 	ld a, [wYCoord]
 	ld b, a
 	ld a, [wXCoord]
@@ -36,7 +36,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 ;format:
 ;db y,x
 ;dw pointer to movement
-RocketHideout2ArrowTilePlayerMovement: ; 44e6d (11:4e6d)
+RocketHideout2ArrowTilePlayerMovement:
 	db $9,$4
 	dw RocketHideout2ArrowMovement1
 	db $b,$4
@@ -127,181 +127,181 @@ RocketHideout2ArrowTilePlayerMovement: ; 44e6d (11:4e6d)
 
 ;format: direction, count
 ;each list is read starting from the $FF and working backwards
-RocketHideout2ArrowMovement1: ; 44f1a (11:4f1a)
+RocketHideout2ArrowMovement1:
 	db D_LEFT,$02
 	db $FF
 
-RocketHideout2ArrowMovement2: ; 44f1d (11:4f1d)
+RocketHideout2ArrowMovement2:
 	db D_RIGHT,$04
 	db $FF
 
-RocketHideout2ArrowMovement3: ; 44f20 (11:4f20)
+RocketHideout2ArrowMovement3:
 	db D_UP,$04
 	db D_RIGHT,$04
 	db $FF
 
-RocketHideout2ArrowMovement4: ; 44f25 (11:4f25)
+RocketHideout2ArrowMovement4:
 	db D_UP,$04
 	db D_RIGHT,$04
 	db D_UP,$01
 	db $FF
 
-RocketHideout2ArrowMovement5: ; 44f2c (11:4f2c)
+RocketHideout2ArrowMovement5:
 	db D_LEFT,$02
 	db D_UP,$03
 	db $FF
 
-RocketHideout2ArrowMovement6: ; 44f31 (11:4f31)
+RocketHideout2ArrowMovement6:
 	db D_DOWN,$02
 	db D_RIGHT,$04
 	db $FF
 
-RocketHideout2ArrowMovement7: ; 44f36 (11:4f36)
+RocketHideout2ArrowMovement7:
 	db D_UP,$02
 	db $FF
 
-RocketHideout2ArrowMovement8: ; 44f39 (11:4f39)
+RocketHideout2ArrowMovement8:
 	db D_UP,$04
 	db $FF
 
-RocketHideout2ArrowMovement9: ; 44f3c (11:4f3c)
+RocketHideout2ArrowMovement9:
 	db D_LEFT,$06
 	db $FF
 
-RocketHideout2ArrowMovement10: ; 44f3f (11:4f3f)
+RocketHideout2ArrowMovement10:
 	db D_UP,$01
 	db $FF
 
-RocketHideout2ArrowMovement11: ; 44f42 (11:4f42)
+RocketHideout2ArrowMovement11:
 	db D_LEFT,$06
 	db D_UP,$04
 	db $FF
 
-RocketHideout2ArrowMovement12: ; 44f47 (11:4f47)
+RocketHideout2ArrowMovement12:
 	db D_DOWN,$02
 	db $FF
 
-RocketHideout2ArrowMovement13: ; 44f4a (11:4f4a)
+RocketHideout2ArrowMovement13:
 	db D_LEFT,$08
 	db $FF
 
-RocketHideout2ArrowMovement14: ; 44f4d (11:4f4d)
+RocketHideout2ArrowMovement14:
 	db D_LEFT,$08
 	db D_UP,$01
 	db $FF
 
-RocketHideout2ArrowMovement15: ; 44f52 (11:4f52)
+RocketHideout2ArrowMovement15:
 	db D_LEFT,$08
 	db D_UP,$06
 	db $FF
 
-RocketHideout2ArrowMovement16: ; 44f57 (11:4f57)
+RocketHideout2ArrowMovement16:
 	db D_UP,$02
 	db D_RIGHT,$04
 	db $FF
 
-RocketHideout2ArrowMovement17: ; 44f5c (11:4f5c)
+RocketHideout2ArrowMovement17:
 	db D_UP,$02
 	db D_RIGHT,$04
 	db D_UP,$02
 	db $FF
 
-RocketHideout2ArrowMovement18: ; 44f63 (11:4f63)
+RocketHideout2ArrowMovement18:
 	db D_DOWN,$02
 	db D_RIGHT,$04
 	db D_DOWN,$02
 	db $FF
 
-RocketHideout2ArrowMovement19: ; 44f6a (11:4f6a)
+RocketHideout2ArrowMovement19:
 	db D_DOWN,$02
 	db D_RIGHT,$04
 	db $FF
 
-RocketHideout2ArrowMovement20: ; 44f6f (11:4f6f)
+RocketHideout2ArrowMovement20:
 	db D_LEFT,$0A
 	db $FF
 
-RocketHideout2ArrowMovement21: ; 44f72 (11:4f72)
+RocketHideout2ArrowMovement21:
 	db D_LEFT,$0A
 	db D_UP,$02
 	db $FF
 
-RocketHideout2ArrowMovement22: ; 44f77 (11:4f77)
+RocketHideout2ArrowMovement22:
 	db D_LEFT,$0A
 	db D_UP,$04
 	db $FF
 
-RocketHideout2ArrowMovement23: ; 44f7c (11:4f7c)
+RocketHideout2ArrowMovement23:
 	db D_UP,$02
 	db D_RIGHT,$02
 	db $FF
 
-RocketHideout2ArrowMovement24: ; 44f81 (11:4f81)
+RocketHideout2ArrowMovement24:
 	db D_RIGHT,$01
 	db D_DOWN,$02
 	db $FF
 
-RocketHideout2ArrowMovement25: ; 44f86 (11:4f86)
+RocketHideout2ArrowMovement25:
 	db D_RIGHT,$01
 	db $FF
 
-RocketHideout2ArrowMovement26: ; 44f89 (11:4f89)
+RocketHideout2ArrowMovement26:
 	db D_DOWN,$02
 	db D_RIGHT,$02
 	db $FF
 
-RocketHideout2ArrowMovement27: ; 44f8e (11:4f8e)
+RocketHideout2ArrowMovement27:
 	db D_DOWN,$02
 	db D_LEFT,$02
 	db $FF
 
-RocketHideout2ArrowMovement28: ; 44f93 (11:4f93)
+RocketHideout2ArrowMovement28:
 	db D_UP,$02
 	db D_RIGHT,$04
 	db D_UP,$02
 	db D_LEFT,$03
 	db $FF
 
-RocketHideout2ArrowMovement29: ; 44f9c (11:4f9c)
+RocketHideout2ArrowMovement29:
 	db D_DOWN,$02
 	db D_LEFT,$04
 	db $FF
 
-RocketHideout2ArrowMovement30: ; 44fa1 (11:4fa1)
+RocketHideout2ArrowMovement30:
 	db D_LEFT,$06
 	db D_UP,$04
 	db D_LEFT,$05
 	db $FF
 
-RocketHideout2ArrowMovement31: ; 44fa8 (11:4fa8)
+RocketHideout2ArrowMovement31:
 	db D_UP,$02
 	db $FF
 
-RocketHideout2ArrowMovement32: ; 44fab (11:4fab)
+RocketHideout2ArrowMovement32:
 	db D_UP,$01
 	db $FF
 
-RocketHideout2ArrowMovement33: ; 44fae (11:4fae)
+RocketHideout2ArrowMovement33:
 	db D_UP,$03
 	db $FF
 
-RocketHideout2ArrowMovement34: ; 44fb1 (11:4fb1)
+RocketHideout2ArrowMovement34:
 	db D_UP,$05
 	db $FF
 
-RocketHideout2ArrowMovement35: ; 44fb4 (11:4fb4)
+RocketHideout2ArrowMovement35:
 	db D_RIGHT,$01
 	db D_DOWN,$02
 	db D_LEFT,$04
 	db $FF
 
-RocketHideout2ArrowMovement36: ; 44fbb (11:4fbb)
+RocketHideout2ArrowMovement36:
 	db D_LEFT,$0A
 	db D_UP,$02
 	db D_LEFT,$05
 	db $FF
 
-RocketHideout2Script3: ; 44fc2 (11:4fc2)
+RocketHideout2Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jr nz, LoadSpinnerArrowTiles
@@ -313,7 +313,7 @@ RocketHideout2Script3: ; 44fc2 (11:4fc2)
 	ld [wCurMapScript], a
 	ret
 
-LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
+LoadSpinnerArrowTiles:
 	ld a, [wSpriteStateData1 + 2]
 	srl a
 	srl a
@@ -400,7 +400,7 @@ vGymSpinner EQU vTileset + GYM_SPINNER
 	spinner Gym_GFX, GYM_SPINNER + $100, 1, vGymSpinner + $100
 	spinner Gym_GFX, GYM_SPINNER + $110, 1, vGymSpinner + $110
 
-SpinnerPlayerFacingDirections: ; 45083 (11:5083)
+SpinnerPlayerFacingDirections:
 ; This isn't the order of the facing directions.  Rather, it's a list of
 ; the facing directions that come next. For example, when the player is
 ; facing down (00), the next facing direction is left (08).
@@ -410,18 +410,18 @@ SpinnerPlayerFacingDirections: ; 45083 (11:5083)
 	db $00 ; right -> down
 
 ; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
-SpinnerArrowAnimTiles: ; 45087 (11:5087)
+SpinnerArrowAnimTiles:
 	INCBIN "gfx/spinner_arrow.2bpp"
 
-RocketHideout2TextPointers: ; 450c7 (11:50c7)
+RocketHideout2TextPointers:
 	dw RocketHideout2Text1
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
 	dw PickUpItemText
 
-RocketHideout2TrainerHeaders: ; 450d1 (11:50d1)
-RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
+RocketHideout2TrainerHeaders:
+RocketHideout2TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
@@ -432,20 +432,20 @@ RocketHideout2TrainerHeader0: ; 450d1 (11:50d1)
 
 	db $ff
 
-RocketHideout2Text1: ; 450de (11:50de)
+RocketHideout2Text1:
 	TX_ASM
 	ld hl, RocketHideout2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-RocketHideout2BattleText2: ; 450e8 (11:50e8)
+RocketHideout2BattleText2:
 	TX_FAR _RocketHideout2BattleText2
 	db "@"
 
-RocketHideout2EndBattleText2: ; 450ed (11:50ed)
+RocketHideout2EndBattleText2:
 	TX_FAR _RocketHideout2EndBattleText2
 	db "@"
 
-RocketHideout2AfterBattleTxt2: ; 450f2 (11:50f2)
+RocketHideout2AfterBattleTxt2:
 	TX_FAR _RocketHideout2AfterBattleTxt2
 	db "@"

@@ -1,4 +1,4 @@
-SFX_Battle_1E_Ch1: ; 20593 (8:4593)
+SFX_Battle_1E_Ch1:
 	duty 0
 	unknownsfx0x10 58
 	unknownsfx0x20 4, 242, 0, 2
@@ -8,7 +8,7 @@ SFX_Battle_1E_Ch1: ; 20593 (8:4593)
 	endchannel
 
 
-SFX_Battle_1E_Ch2: ; 205a4 (8:45a4)
+SFX_Battle_1E_Ch2:
 	unknownnoise0x20 0, 209, 66
 	unknownnoise0x20 4, 161, 50
 	unknownnoise0x20 0, 209, 34

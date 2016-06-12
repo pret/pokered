@@ -1,4 +1,4 @@
-LoadShootingStarGraphics: ; 70000 (1c:4000)
+LoadShootingStarGraphics:
 	ld a, $f9
 	ld [rOBP0], a
 	ld a, $a4
@@ -24,7 +24,7 @@ LoadShootingStarGraphics: ; 70000 (1c:4000)
 	ld bc, GameFreakShootingStarOAMDataEnd - GameFreakShootingStarOAMData
 	jp CopyData
 
-AnimateShootingStar: ; 70044 (1c:4044)
+AnimateShootingStar:
 	call LoadShootingStarGraphics
 	ld a, SFX_SHOOTING_STAR
 	call PlaySound
@@ -145,11 +145,11 @@ AnimateShootingStar: ; 70044 (1c:4044)
 	and a
 	ret
 
-SmallStarsOAM: ; 700ee (1c:40ee)
+SmallStarsOAM:
 	db $00,$00,$A2,$90
 SmallStarsOAMEnd:
 
-SmallStarsWaveCoordsPointerTable: ; 700f2 (1c:40f2)
+SmallStarsWaveCoordsPointerTable:
 	dw SmallStarsWave1Coords
 	dw SmallStarsWave2Coords
 	dw SmallStarsWave3Coords
@@ -160,34 +160,34 @@ SmallStarsWaveCoordsPointerTable: ; 700f2 (1c:40f2)
 ; The stars that fall from the Gamefreak logo come in 4 waves of 4 OAM entries.
 ; These arrays contain the Y and X coordinates of each OAM entry.
 
-SmallStarsWave1Coords: ; 700fe (1c:40fe)
+SmallStarsWave1Coords:
 	db $68,$30
 	db $68,$40
 	db $68,$58
 	db $68,$78
 
-SmallStarsWave2Coords: ; 70106 (1c:4106)
+SmallStarsWave2Coords:
 	db $68,$38
 	db $68,$48
 	db $68,$60
 	db $68,$70
 
-SmallStarsWave3Coords: ; 7010e (1c:410e)
+SmallStarsWave3Coords:
 	db $68,$34
 	db $68,$4C
 	db $68,$54
 	db $68,$64
 
-SmallStarsWave4Coords: ; 70116 (1c:4116)
+SmallStarsWave4Coords:
 	db $68,$3C
 	db $68,$5C
 	db $68,$6C
 	db $68,$74
 
-SmallStarsEmptyWave: ; 7011e (1c:411e)
+SmallStarsEmptyWave:
 	db $FF
 
-MoveDownSmallStars: ; 7011f (1c:411f)
+MoveDownSmallStars:
 	ld b, 8
 .loop
 	ld hl, wOAMBuffer + $5c
@@ -213,7 +213,7 @@ MoveDownSmallStars: ; 7011f (1c:411f)
 	jr nz, .loop
 	ret
 
-GameFreakLogoOAMData: ; 70140 (1c:4140)
+GameFreakLogoOAMData:
 	db $48,$50,$8D,$00
 	db $48,$58,$8E,$00
 	db $50,$50,$8F,$00
@@ -232,13 +232,13 @@ GameFreakLogoOAMData: ; 70140 (1c:4140)
 	db $60,$78,$86,$00
 GameFreakLogoOAMDataEnd:
 
-GameFreakShootingStarOAMData: ; 70180 (1c:4180)
+GameFreakShootingStarOAMData:
 	db $00,$A0,$A0,$10
 	db $00,$A8,$A0,$30
 	db $08,$A0,$A1,$10
 	db $08,$A8,$A1,$30
 GameFreakShootingStarOAMDataEnd:
 
-FallingStar: ; 70190 (1c:4190)
+FallingStar:
 	INCBIN "gfx/falling_star.2bpp"
 FallingStarEnd:

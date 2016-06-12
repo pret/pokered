@@ -1,4 +1,4 @@
-_Multiply: ; 37d41 (d:7d41)
+_Multiply:
 	ld a, $8
 	ld b, a
 	xor a
@@ -59,7 +59,7 @@ _Multiply: ; 37d41 (d:7d41)
 	ld [H_PRODUCT], a
 	ret
 
-_Divide: ; 37da5 (d:7da5)
+_Divide:
 	xor a
 	ld [H_DIVIDEBUFFER], a
 	ld [H_DIVIDEBUFFER+1], a
