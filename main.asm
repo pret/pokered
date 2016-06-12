@@ -2435,7 +2435,7 @@ GetTileTwoStepsInFrontOfPlayer:
 
 CheckForCollisionWhenPushingBoulder:
 	call GetTileTwoStepsInFrontOfPlayer
-	ld hl, wTileSetCollisionPtr
+	ld hl, wTilesetCollisionPtr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -2665,7 +2665,7 @@ LoadTilesetHeader:
 	ld e, a
 	ld hl, Tilesets
 	add hl, de
-	ld de, wTileSetBank
+	ld de, wTilesetBank
 	ld c, $b
 .copyTilesetHeaderLoop
 	ld a, [hli]

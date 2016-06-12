@@ -53,4 +53,3 @@ _OakSpeechText3::
 	cont "with #MON"
 	cont "awaits! Let's go!"
 	done
-

@@ -58,7 +58,7 @@ _SilphCo11Text2::
 	done
 
 _SilphCo11Text3::
-	text "Ah ", $52, "!"
+	text "Ah <PLAYER>!"
 	line "So we meet again!"
 
 	para "The PRESIDENT and"

@@ -91,79 +91,79 @@ Serial_ExchangeByte::
 	ld [hSerialReceivedNewData], a
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
-	jr nz, .asm_21a7
+	jr nz, .loop
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ld [rSC], a
-.asm_21a7
+.loop
 	ld a, [hSerialReceivedNewData]
 	and a
-	jr nz, .asm_21f1
+	jr nz, .ok
 	ld a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
-	jr nz, .asm_21cc
+	jr nz, .doNotIncrementUnknownCounter
 	call IsUnknownCounterZero
-	jr z, .asm_21cc
+	jr z, .doNotIncrementUnknownCounter
 	call WaitLoop_15Iterations
 	push hl
 	ld hl, wUnknownSerialCounter + 1
 	inc [hl]
-	jr nz, .asm_21c3
+	jr nz, .noCarry
 	dec hl
 	inc [hl]
-.asm_21c3
+.noCarry
 	pop hl
 	call IsUnknownCounterZero
-	jr nz, .asm_21a7
+	jr nz, .loop
 	jp SetUnknownCounterToFFFF
-.asm_21cc
+.doNotIncrementUnknownCounter
 	ld a, [rIE]
 	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp (1 << SERIAL)
-	jr nz, .asm_21a7
+	jr nz, .loop
 	ld a, [wUnknownSerialCounter2]
 	dec a
 	ld [wUnknownSerialCounter2], a
-	jr nz, .asm_21a7
+	jr nz, .loop
 	ld a, [wUnknownSerialCounter2 + 1]
 	dec a
 	ld [wUnknownSerialCounter2 + 1], a
-	jr nz, .asm_21a7
+	jr nz, .loop
 	ld a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
-	jr z, .asm_21f1
+	jr z, .ok
 	ld a, 255
 .waitLoop
 	dec a
 	jr nz, .waitLoop
-.asm_21f1
+.ok
 	xor a
 	ld [hSerialReceivedNewData], a
 	ld a, [rIE]
 	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	sub (1 << SERIAL)
-	jr nz, .asm_2204
+	jr nz, .skipReloadingUnknownCounter2
 	ld [wUnknownSerialCounter2], a
 	ld a, $50
 	ld [wUnknownSerialCounter2 + 1], a
-.asm_2204
+.skipReloadingUnknownCounter2
 	ld a, [hSerialReceiveData]
 	cp SERIAL_NO_DATA_BYTE
 	ret nz
 	call IsUnknownCounterZero
-	jr z, .asm_221f
+	jr z, .done
 	push hl
 	ld hl, wUnknownSerialCounter + 1
 	ld a, [hl]
 	dec a
 	ld [hld], a
 	inc a
-	jr nz, .asm_2219
+	jr nz, .noBorrow
 	dec [hl]
-.asm_2219
+.noBorrow
 	pop hl
 	call IsUnknownCounterZero
 	jr z, SetUnknownCounterToFFFF
-.asm_221f
+.done
 	ld a, [rIE]
 	and (1 << SERIAL) | (1 << TIMER) | (1 << LCD_STAT) | (1 << VBLANK)
 	cp (1 << SERIAL)

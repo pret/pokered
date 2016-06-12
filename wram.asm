@@ -2637,21 +2637,21 @@ wPlayerDirection:: ; d52a
 ; if the player is not moving, the last the direction in which the player moved
 	ds 1
 
-wTileSetBank:: ; d52b
+wTilesetBank:: ; d52b
 	ds 1
 
-wTileSetBlocksPtr:: ; d52c
+wTilesetBlocksPtr:: ; d52c
 ; maps blocks (4x4 tiles) to tiles
 	ds 2
 
-wTileSetGFXPtr:: ; d52e
+wTilesetGfxPtr:: ; d52e
 	ds 2
 
-wTileSetCollisionPtr:: ; d530
+wTilesetCollisionPtr:: ; d530
 ; list of all walkable tiles
 	ds 2
 
-wTileSetTalkingOverTiles:: ; d532
+wTilesetTalkingOverTiles:: ; d532
 	ds 3
 
 wGrassTile:: ; d535

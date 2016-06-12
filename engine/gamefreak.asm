@@ -199,7 +199,6 @@ MoveDownSmallStars:
 	add hl, de
 	dec c
 	jr nz, .innerLoop
-
 ; Toggle the palette so that the lower star in the small stars tile blinks in
 ; and out.
 	ld a, [rOBP1]

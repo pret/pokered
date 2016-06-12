@@ -8,7 +8,7 @@ _TM18PreReceiveText::
 	prompt
 
 _ReceivedTM18Text::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
