@@ -1,0 +1,18 @@
+# Auto detect text files and perform LF normalization
+* text eol=lf
+
+# Explicitly declare text files you want to always be normalized and converted
+# to native line endings on checkout.
+*.asm text
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.2bpp binary
+*.1bpp binary
+*.rle binary
+*.tilecoll binary
+*.bst binary
+*.map binary
+*.wav binary
+*.blk binary
+*.pic binary
