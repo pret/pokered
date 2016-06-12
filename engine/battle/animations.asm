@@ -253,7 +253,7 @@ PlayAnimation:
 .nextAnimationCommand
 	pop hl
 	jr .animationLoop
-.AnimationOver ; 417B
+.AnimationOver
 	ret
 
 LoadSubanimation:
@@ -926,7 +926,7 @@ BallMoveDistances1:
 	db $ff ; terminator
 
 ; function to make the pokeball jump up
-TradeJumpPokeball: ; 507C
+TradeJumpPokeball:
 	ld de,BallMoveDistances2
 .loop
 	ld hl,wOAMBuffer ; OAM buffer
@@ -2996,7 +2996,7 @@ TossBallAnimation:
 ; sequence of animations that make up the Poké Ball toss
 	db POOF_ANIM,HIDEPIC_ANIM,SHAKE_ANIM,POOF_ANIM,SHOWPIC_ANIM
 
-.BlockBall ; 5E55
+.BlockBall
 	ld a,TOSS_ANIM
 	ld [wAnimationID],a
 	call PlayAnimation

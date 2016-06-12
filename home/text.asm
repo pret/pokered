@@ -135,11 +135,11 @@ Char00::
 	dec de
 	ret
 
-Char00Text:: ; 0x19f4 “%d ERROR.”
+Char00Text:: ; “%d ERROR.”
 	TX_FAR _Char00Text
 	db "@"
 
-Char52:: ; 0x19f9 player’s name
+Char52:: ; player’s name
 	push de
 	ld de,wPlayerName
 	jr FinishDTE

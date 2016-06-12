@@ -1,4 +1,4 @@
-MtMoon2Object: ; 0x51a4d (size=68)
+MtMoon2Object:
 	db $3 ; border block
 
 	db $8 ; warps

@@ -1,4 +1,4 @@
-AgathaObject: ; 0x76534 (size=44)
+AgathaObject:
 	db $0 ; border block
 
 	db $4 ; warps

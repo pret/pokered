@@ -1,4 +1,4 @@
-PKMNLeaguePC: ; 0x7657e
+PKMNLeaguePC:
 	ld hl, AccessedHoFPCText
 	call PrintText
 	ld hl, wd730

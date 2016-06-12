@@ -497,7 +497,7 @@ PrintStatusCondition::
 	ld [hl],"T"
 	and a
 	ret
-PrintStatusConditionNotFainted: ; 14f6
+PrintStatusConditionNotFainted:
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a,BANK(PrintStatusAilment)
@@ -4192,7 +4192,7 @@ PrintText_NoCreatingTextBox::
 	jp TextCommandProcessor
 
 
-PrintNumber:: ; 3c5f
+PrintNumber::
 ; Print the c-digit, b-byte value at de.
 ; Allows 2 to 7 digits. For 1-digit numbers, add
 ; the value to char "0" instead of calling PrintNumber.

@@ -1,4 +1,4 @@
-FuchsiaGymObject: ; 0x75658 (size=82)
+FuchsiaGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

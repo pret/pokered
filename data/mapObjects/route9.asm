@@ -1,4 +1,4 @@
-Route9Object: ; 0x546a8 (size=86)
+Route9Object:
 	db $2c ; border block
 
 	db $0 ; warps

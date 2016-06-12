@@ -1,4 +1,4 @@
-FuchsiaHouse1Object: ; 0x75031 (size=38)
+FuchsiaHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps

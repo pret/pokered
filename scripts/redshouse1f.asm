@@ -49,7 +49,7 @@ MomHealText2:
 	TX_FAR _MomHealText2
 	db "@"
 
-RedsHouse1FText2: ; 0x481c6 TV
+RedsHouse1FText2: ; TV
 	TX_ASM
 	ld a,[wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP

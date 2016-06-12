@@ -1,4 +1,4 @@
-Route8Object: ; 0x5814f (size=119)
+Route8Object:
 	db $2c ; border block
 
 	db $5 ; warps

@@ -44,7 +44,7 @@ SetupEnemyPartyPokeballs:
 	ld hl, wOAMBuffer + PARTY_LENGTH * 4
 	jp WritePokeballOAMData
 
-SetupPokeballs: ; 0x3a8a6
+SetupPokeballs:
 	ld a, [de]
 	push af
 	ld de, wBuffer

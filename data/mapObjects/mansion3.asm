@@ -1,4 +1,4 @@
-Mansion3Object: ; 0x522e6 (size=64)
+Mansion3Object:
 	db $1 ; border block
 
 	db $3 ; warps

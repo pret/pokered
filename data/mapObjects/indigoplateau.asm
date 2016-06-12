@@ -1,4 +1,4 @@
-IndigoPlateauObject: ; 0x50936 (size=20)
+IndigoPlateauObject:
 	db $e ; border block
 
 	db $2 ; warps

@@ -189,26 +189,26 @@ OakWalksUpText:
 	TX_FAR _OakWalksUpText
 	db "@"
 
-PalletTownText2: ; 0x18fd3 girl
+PalletTownText2: ; girl
 	TX_FAR _PalletTownText2
 	db "@"
 
-PalletTownText3: ; 0x18fd8 fat man
+PalletTownText3: ; fat man
 	TX_FAR _PalletTownText3
 	db "@"
 
-PalletTownText4: ; 0x18fdd sign by lab
+PalletTownText4: ; sign by lab
 	TX_FAR _PalletTownText4
 	db "@"
 
-PalletTownText5: ; 0x18fe2 sign by fence
+PalletTownText5: ; sign by fence
 	TX_FAR _PalletTownText5
 	db "@"
 
-PalletTownText6: ; 0x18fe7 sign by Red’s house
+PalletTownText6: ; sign by Red’s house
 	TX_FAR _PalletTownText6
 	db "@"
 
-PalletTownText7: ; 0x18fec sign by Blue’s house
+PalletTownText7: ; sign by Blue’s house
 	TX_FAR _PalletTownText7
 	db "@"

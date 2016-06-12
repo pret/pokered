@@ -1,4 +1,4 @@
-ViridianHouseObject: ; 0x1d5bb (size=44)
+ViridianHouseObject:
 	db $a ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-CinnabarIslandObject: ; 0x1c022 (size=71)
+CinnabarIslandObject:
 	db $43 ; border block
 
 	db $5 ; warps

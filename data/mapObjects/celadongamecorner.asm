@@ -1,4 +1,4 @@
-CeladonGameCornerObject: ; 0x48fa0 (size=99)
+CeladonGameCornerObject:
 	db $f ; border block
 
 	db $3 ; warps

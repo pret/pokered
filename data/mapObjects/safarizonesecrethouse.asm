@@ -1,4 +1,4 @@
-SafariZoneSecretHouseObject: ; 0x4a365 (size=26)
+SafariZoneSecretHouseObject:
 	db $17 ; border block
 
 	db $2 ; warps

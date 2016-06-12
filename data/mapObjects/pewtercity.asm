@@ -1,4 +1,4 @@
-PewterCityObject: ; 0x18577 (size=111)
+PewterCityObject:
 	db $a ; border block
 
 	db $7 ; warps

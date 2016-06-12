@@ -1,4 +1,4 @@
-PewterMartObject: ; 0x74cda (size=38)
+PewterMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

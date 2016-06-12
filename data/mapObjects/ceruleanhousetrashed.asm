@@ -1,4 +1,4 @@
-CeruleanHouseTrashedObject: ; 0x1d6bf (size=43)
+CeruleanHouseTrashedObject:
 	db $a ; border block
 
 	db $3 ; warps

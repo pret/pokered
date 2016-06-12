@@ -1,4 +1,4 @@
-BikeShopObject: ; 0x1d866 (size=38)
+BikeShopObject:
 	db $e ; border block
 
 	db $2 ; warps

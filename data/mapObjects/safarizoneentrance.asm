@@ -1,4 +1,4 @@
-SafariZoneEntranceObject: ; 0x753f5 (size=48)
+SafariZoneEntranceObject:
 	db $a ; border block
 
 	db $4 ; warps

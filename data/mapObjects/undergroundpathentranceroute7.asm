@@ -1,4 +1,4 @@
-UndergroundPathEntranceRoute7Object: ; 0x5d73b (size=34)
+UndergroundPathEntranceRoute7Object:
 	db $a ; border block
 
 	db $3 ; warps

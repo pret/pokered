@@ -1,4 +1,4 @@
-UndergroundPathEntranceRoute8Object: ; 0x1e298 (size=34)
+UndergroundPathEntranceRoute8Object:
 	db $a ; border block
 
 	db $3 ; warps

@@ -23,7 +23,7 @@ CableClub_DoBattleOrTrade:
 	; fall through
 
 ; This is called after completing a trade.
-CableClub_DoBattleOrTradeAgain: ; 5345
+CableClub_DoBattleOrTradeAgain:
 	ld hl, wSerialPlayerDataBlock
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, 6

@@ -1,4 +1,4 @@
-Route21_h: ; 0x54fff to 0x55021 (34 bytes) (id=32)
+Route21_h:
 	db OVERWORLD ; tileset
 	db ROUTE_21_HEIGHT, ROUTE_21_WIDTH ; dimensions (y, x)
 	dw Route21Blocks, Route21TextPointers, Route21Script ; blocks, texts, scripts

@@ -1,4 +1,4 @@
-DiglettsCaveRoute2Object: ; 0x1debf (size=34)
+DiglettsCaveRoute2Object:
 	db $7d ; border block
 
 	db $3 ; warps

@@ -566,7 +566,7 @@ Audio2_octave:
 	ld [hl], a ; store low nibble as octave
 	jp Audio2_endchannel
 
-Audio2_unknownsfx0x20: ; 21bf3
+Audio2_unknownsfx0x20:
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Audio2_unknownsfx0x10 ; no
 	ld a, c

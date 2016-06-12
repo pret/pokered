@@ -1,4 +1,4 @@
-DayCareMObject: ; 0x56459 (size=26)
+DayCareMObject:
 	db $a ; border block
 
 	db $2 ; warps

@@ -49,7 +49,7 @@ AskName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-DoYouWantToNicknameText: ; 0x6557
+DoYouWantToNicknameText:
 	TX_FAR _DoYouWantToNicknameText
 	db "@"
 

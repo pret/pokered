@@ -1,4 +1,4 @@
-CeladonCityObject: ; 0x18022 (size=189)
+CeladonCityObject:
 	db $f ; border block
 
 	db $d ; warps

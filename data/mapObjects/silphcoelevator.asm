@@ -1,4 +1,4 @@
-SilphCoElevatorObject: ; 0x45844 (size=23)
+SilphCoElevatorObject:
 	db $f ; border block
 
 	db $2 ; warps

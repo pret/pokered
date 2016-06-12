@@ -1,4 +1,4 @@
-CinnabarPokecenterObject: ; 0x75e46 (size=44)
+CinnabarPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

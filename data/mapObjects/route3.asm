@@ -1,4 +1,4 @@
-Route3Object: ; 0x54208 (size=77)
+Route3Object:
 	db $2c ; border block
 
 	db $0 ; warps

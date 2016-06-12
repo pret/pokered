@@ -1,4 +1,4 @@
-SaffronCity_h: ; 0x509a4 to 0x509dc (56 bytes) (id=10)
+SaffronCity_h:
 	db OVERWORLD ; tileset
 	db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
 	dw SaffronCityBlocks, SaffronCityTextPointers, SaffronCityScript ; blocks, texts, scripts

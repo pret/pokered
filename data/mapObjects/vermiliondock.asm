@@ -1,4 +1,4 @@
-VermilionDockObject: ; 0x1dcc6 (size=20)
+VermilionDockObject:
 	db $f ; border block
 
 	db $2 ; warps

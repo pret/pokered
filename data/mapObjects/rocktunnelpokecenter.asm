@@ -1,4 +1,4 @@
-RockTunnelPokecenterObject: ; 0x493d4 (size=44)
+RockTunnelPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

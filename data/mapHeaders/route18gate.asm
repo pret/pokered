@@ -1,4 +1,4 @@
-Route18Gate_h: ; 0x4986a to 0x49876 (12 bytes) (id=190)
+Route18Gate_h:
 	db GATE ; tileset
 	db ROUTE_18_GATE_1F_HEIGHT, ROUTE_18_GATE_1F_WIDTH ; dimensions (y, x)
 	dw Route18GateBlocks, Route18GateTextPointers, Route18GateScript ; blocks, texts, scripts

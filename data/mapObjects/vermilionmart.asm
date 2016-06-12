@@ -1,4 +1,4 @@
-VermilionMartObject: ; 0x5c9f4 (size=38)
+VermilionMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

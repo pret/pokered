@@ -1,4 +1,4 @@
-OaksLabObject: ; 0x1d40a (size=88)
+OaksLabObject:
 	db $3 ; border block
 
 	db $2 ; warps

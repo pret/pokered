@@ -1,4 +1,4 @@
-Route19Object: ; 0x54e9a (size=87)
+Route19Object:
 	db $43 ; border block
 
 	db $0 ; warps

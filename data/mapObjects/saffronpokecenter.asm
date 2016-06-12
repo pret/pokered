@@ -1,4 +1,4 @@
-SaffronPokecenterObject: ; 0x5d54f (size=44)
+SaffronPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

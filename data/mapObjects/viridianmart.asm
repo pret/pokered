@@ -1,4 +1,4 @@
-ViridianMartObject: ; 0x1d50a (size=38)
+ViridianMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-PowerPlantObject: ; 0x1e3bf (size=135)
+PowerPlantObject:
 	db $2e ; border block
 
 	db $3 ; warps

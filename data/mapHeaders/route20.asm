@@ -1,4 +1,4 @@
-Route20_h: ; 0x500f1 to 0x50113 (34 bytes) (id=31)
+Route20_h:
 	db OVERWORLD ; tileset
 	db ROUTE_20_HEIGHT, ROUTE_20_WIDTH ; dimensions (y, x)
 	dw Route20Blocks, Route20TextPointers, Route20Script ; blocks, texts, scripts

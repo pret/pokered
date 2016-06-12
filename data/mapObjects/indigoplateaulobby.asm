@@ -1,4 +1,4 @@
-IndigoPlateauLobbyObject: ; 0x19c95 (size=58)
+IndigoPlateauLobbyObject:
 	db $0 ; border block
 
 	db $3 ; warps

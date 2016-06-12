@@ -1,4 +1,4 @@
-PewterHouse1Object: ; 0x1d616 (size=38)
+PewterHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps

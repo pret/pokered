@@ -1,4 +1,4 @@
-LavenderHouse1Object: ; 0x1d96a (size=56)
+LavenderHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps

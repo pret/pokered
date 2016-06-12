@@ -1,4 +1,4 @@
-Route20Object: ; 0x50113 (size=106)
+Route20Object:
 	db $43 ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-CeladonMansion5Object: ; 0x1dd5c (size=32)
+CeladonMansion5Object:
 	db $a ; border block
 
 	db $2 ; warps

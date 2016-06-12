@@ -1,4 +1,4 @@
-SchoolObject: ; 0x1d55d (size=32)
+SchoolObject:
 	db $a ; border block
 
 	db $2 ; warps

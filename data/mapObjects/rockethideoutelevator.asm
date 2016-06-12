@@ -1,4 +1,4 @@
-RocketHideoutElevatorObject: ; 0x45791 (size=23)
+RocketHideoutElevatorObject:
 	db $f ; border block
 
 	db $2 ; warps

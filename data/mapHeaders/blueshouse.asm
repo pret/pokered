@@ -1,4 +1,4 @@
-BluesHouse_h: ; 0x19b2f id=39
+BluesHouse_h:
 	db HOUSE ; tileset
 	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions
 	dw BluesHouseBlocks, BluesHouseTextPointers, BluesHouseScript

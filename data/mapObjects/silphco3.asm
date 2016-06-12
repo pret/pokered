@@ -1,4 +1,4 @@
-SilphCo3Object: ; 0x5a035 (size=113)
+SilphCo3Object:
 	db $2e ; border block
 
 	db $a ; warps

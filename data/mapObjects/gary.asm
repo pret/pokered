@@ -1,4 +1,4 @@
-GaryObject: ; 0x7612f (size=48)
+GaryObject:
 	db $3 ; border block
 
 	db $4 ; warps

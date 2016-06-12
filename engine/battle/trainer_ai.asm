@@ -145,7 +145,7 @@ AIMoveChoiceModification1:
 	ld [hl], a
 	jr .nextMove
 
-StatusAilmentMoveEffects: ; 57e2
+StatusAilmentMoveEffects:
 	db $01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
@@ -731,7 +731,7 @@ AICureStatus:
 	res 0,[hl]
 	ret
 
-AIUseXAccuracy: ; 0x3a7a8 unused
+AIUseXAccuracy: ; unused
 	call AIPlayRestoringSFX
 	ld hl,wEnemyBattleStatus2
 	set 0,[hl]
@@ -745,7 +745,7 @@ AIUseGuardSpec:
 	ld a,GUARD_SPEC
 	jp AIPrintItemUse
 
-AIUseDireHit: ; 0x3a7c2 unused
+AIUseDireHit: ; unused
 	call AIPlayRestoringSFX
 	ld hl,wEnemyBattleStatus2
 	set 2,[hl]

@@ -1,4 +1,4 @@
-SilphCo10Object: ; 0x5a1fb (size=95)
+SilphCo10Object:
 	db $2e ; border block
 
 	db $6 ; warps

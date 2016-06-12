@@ -1,4 +1,4 @@
-Route17_h: ; 0x54b20 to 0x54b42 (34 bytes) (id=28)
+Route17_h:
 	db OVERWORLD ; tileset
 	db ROUTE_17_HEIGHT, ROUTE_17_WIDTH ; dimensions (y, x)
 	dw Route17Blocks, Route17TextPointers, Route17Script ; blocks, texts, scripts

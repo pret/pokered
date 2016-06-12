@@ -1,4 +1,4 @@
-Route14_h: ; 0x54999 to 0x549bb (34 bytes) (id=25)
+Route14_h:
 	db OVERWORLD ; tileset
 	db ROUTE_14_HEIGHT, ROUTE_14_WIDTH ; dimensions (y, x)
 	dw Route14Blocks, Route14TextPointers, Route14Script ; blocks, texts, scripts

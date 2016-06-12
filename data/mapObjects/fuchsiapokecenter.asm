@@ -1,4 +1,4 @@
-FuchsiaPokecenterObject: ; 0x7507d (size=44)
+FuchsiaPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

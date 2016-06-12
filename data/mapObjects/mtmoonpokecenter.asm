@@ -1,4 +1,4 @@
-MtMoonPokecenterObject: ; 0x49376 (size=56)
+MtMoonPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

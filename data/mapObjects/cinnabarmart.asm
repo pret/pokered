@@ -1,4 +1,4 @@
-CinnabarMartObject: ; 0x75e91 (size=38)
+CinnabarMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

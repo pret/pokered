@@ -1,4 +1,4 @@
-PalletTownObject: ; 0x182c3 (size=58)
+PalletTownObject:
 	db $b ; border block
 
 	db $3 ; warps

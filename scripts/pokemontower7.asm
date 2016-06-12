@@ -142,7 +142,7 @@ CoordsData_60de3:
 	db $07,$0C
 	dw MovementData_60e22
 
-MovementData_60e13: ; 60e13
+MovementData_60e13:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -152,7 +152,7 @@ MovementData_60e13: ; 60e13
 	db NPC_MOVEMENT_LEFT
 	db $FF
 
-MovementData_60e1b: ; 60e1b
+MovementData_60e1b:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
@@ -161,7 +161,7 @@ MovementData_60e1b: ; 60e1b
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-MovementData_60e22: ; 60e22
+MovementData_60e22:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -169,7 +169,7 @@ MovementData_60e22: ; 60e22
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-MovementData_60e28: ; 60e28
+MovementData_60e28:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -179,7 +179,7 @@ MovementData_60e28: ; 60e28
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-MovementData_60e30: ; 60e30
+MovementData_60e30:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -188,7 +188,7 @@ MovementData_60e30: ; 60e30
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-MovementData_60e37: ; 60e37
+MovementData_60e37:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN

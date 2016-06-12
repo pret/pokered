@@ -92,7 +92,7 @@ OaksPCText:       db "PROF.OAK's PC@"
 PKMNLeaguePCText: db $4a, "LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
-BillsPC_:: ; 0x214c2
+BillsPC_::
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -457,51 +457,51 @@ StatsCancelPCText:
 	db   "STATS"
 	next "CANCEL@"
 
-SwitchOnText: ; 0x217e9
+SwitchOnText:
 	TX_FAR _SwitchOnText
 	db "@"
 
-WhatText: ; 0x217ee
+WhatText:
 	TX_FAR _WhatText
 	db "@"
 
-DepositWhichMonText: ; 0x217f3
+DepositWhichMonText:
 	TX_FAR _DepositWhichMonText
 	db "@"
 
-MonWasStoredText: ; 0x217f8
+MonWasStoredText:
 	TX_FAR _MonWasStoredText
 	db "@"
 
-CantDepositLastMonText: ; 0x217fd
+CantDepositLastMonText:
 	TX_FAR _CantDepositLastMonText
 	db "@"
 
-BoxFullText: ; 0x21802
+BoxFullText:
 	TX_FAR _BoxFullText
 	db "@"
 
-MonIsTakenOutText: ; 0x21807
+MonIsTakenOutText:
 	TX_FAR _MonIsTakenOutText
 	db "@"
 
-NoMonText: ; 0x2180c
+NoMonText:
 	TX_FAR _NoMonText
 	db "@"
 
-CantTakeMonText: ; 0x21811
+CantTakeMonText:
 	TX_FAR _CantTakeMonText
 	db "@"
 
-ReleaseWhichMonText: ; 0x21816
+ReleaseWhichMonText:
 	TX_FAR _ReleaseWhichMonText
 	db "@"
 
-OnceReleasedText: ; 0x2181b
+OnceReleasedText:
 	TX_FAR _OnceReleasedText
 	db "@"
 
-MonWasReleasedText: ; 0x21820
+MonWasReleasedText:
 	TX_FAR _MonWasReleasedText
 	db "@"
 

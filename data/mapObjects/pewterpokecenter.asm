@@ -1,4 +1,4 @@
-PewterPokecenterObject: ; 0x5c60d (size=44)
+PewterPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

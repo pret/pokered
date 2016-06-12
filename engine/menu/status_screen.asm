@@ -223,7 +223,7 @@ OKText:
 	db "OK@"
 
 ; Draws a line starting from hl high b and wide c
-DrawLineBox: ; 0x12ac7
+DrawLineBox:
 	ld de, SCREEN_WIDTH ; New line
 .PrintVerticalLine
 	ld [hl], $78 ; │
@@ -335,11 +335,11 @@ StatusScreen2:
 	ld c, a
 	ld a, "-"
 	call StatusScreen_PrintPP ; Fill the rest with --
-.InitPP ; 12bbb
+.InitPP
 	ld hl, wLoadedMonMoves
 	coord de, 14, 10
 	ld b, 0
-.PrintPP ; 12bc3
+.PrintPP
 	ld a, [hli]
 	and a
 	jr z, .PPDone

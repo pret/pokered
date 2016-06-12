@@ -362,7 +362,7 @@ INCLUDE "audio/sfx/cry22_3.asm"
 
 SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
 
-PlayBattleMusic:: ; 0x90c6
+PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
@@ -402,7 +402,7 @@ INCLUDE "audio/engine_1.asm"
 
 
 ; an alternate start for MeetRival which has a different first measure
-Music_RivalAlternateStart:: ; 0x9b47
+Music_RivalAlternateStart::
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -413,7 +413,7 @@ Music_RivalAlternateStart:: ; 0x9b47
 	call Audio1_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b2b5
 
-Audio1_OverwriteChannelPointer: ; 0x9b60
+Audio1_OverwriteChannelPointer:
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -421,7 +421,7 @@ Audio1_OverwriteChannelPointer: ; 0x9b60
 	ret
 
 ; an alternate tempo for MeetRival which is slightly slower
-Music_RivalAlternateTempo:: ; 0x9b65
+Music_RivalAlternateTempo::
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -430,14 +430,14 @@ Music_RivalAlternateTempo:: ; 0x9b65
 	jp Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
-Music_RivalAlternateStartAndTempo:: ; 0x9b75
+Music_RivalAlternateStartAndTempo::
 	call Music_RivalAlternateStart
 	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_branch_b19b
 	jp Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
-Music_Cities1AlternateTempo:: ; 0x9b81
+Music_Cities1AlternateTempo::
 	ld a, 10
 	ld [wAudioFadeOutCounterReloadValue], a
 	ld [wAudioFadeOutCounter], a

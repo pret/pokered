@@ -1,4 +1,4 @@
-Route2HouseObject: ; 0x1df07 (size=32)
+Route2HouseObject:
 	db $a ; border block
 
 	db $2 ; warps

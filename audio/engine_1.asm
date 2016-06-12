@@ -1,6 +1,6 @@
 ; The first of three duplicated sound engines.
 
-Audio1_UpdateMusic:: ; 0x9103
+Audio1_UpdateMusic::
 	ld c, CH0
 .loop
 	ld b, 0
@@ -36,7 +36,7 @@ Audio1_UpdateMusic:: ; 0x9103
 
 ; this routine checks flags for music effects currently applied
 ; to the channel and calls certain functions based on flags.
-Audio1_ApplyMusicAffects: ; 0x9138
+Audio1_ApplyMusicAffects:
 	ld b, $0
 	ld hl, wChannelNoteDelayCounters ; delay until next note
 	add hl, bc
@@ -144,7 +144,7 @@ Audio1_ApplyMusicAffects: ; 0x9138
 ; this routine executes all music commands that take up no time,
 ; like tempo changes, duty changes etc. and doesn't return
 ; until the first note is reached
-Audio1_PlayNextNote: ; 0x91d0
+Audio1_PlayNextNote:
 ; reload the vibrato delay counter
 	ld hl, wChannelVibratoDelayCounterReloadValues
 	add hl, bc
@@ -160,7 +160,7 @@ Audio1_PlayNextNote: ; 0x91d0
 	call Audio1_endchannel
 	ret
 
-Audio1_endchannel: ; 0x91e6
+Audio1_endchannel:
 	call Audio1_GetNextMusicByte
 	ld d, a
 	cp $ff ; is this command an endchannel?
@@ -250,7 +250,7 @@ Audio1_endchannel: ; 0x91e6
 	ld [hl], b
 	ret
 
-Audio1_callchannel: ; 0x9274
+Audio1_callchannel:
 	cp $fd ; is this command a callchannel?
 	jp nz, Audio1_loopchannel ; no
 	call Audio1_GetNextMusicByte
@@ -287,7 +287,7 @@ Audio1_callchannel: ; 0x9274
 	set BIT_CHANNEL_CALL, [hl] ; set the call flag
 	jp Audio1_endchannel
 
-Audio1_loopchannel: ; 0x92a9
+Audio1_loopchannel:
 	cp $fe ; is this command a loopchannel?
 	jp nz, Audio1_notetype ; no
 	call Audio1_GetNextMusicByte
@@ -325,7 +325,7 @@ Audio1_loopchannel: ; 0x92a9
 	ld [hl], b
 	jp Audio1_endchannel
 
-Audio1_notetype: ; 0x92e4
+Audio1_notetype:
 	and $f0
 	cp $d0 ; is this command a notetype?
 	jp nz, Audio1_toggleperfectpitch ; no
@@ -369,7 +369,7 @@ Audio1_notetype: ; 0x92e4
 .noiseChannel
 	jp Audio1_endchannel
 
-Audio1_toggleperfectpitch: ; 0x9323
+Audio1_toggleperfectpitch:
 	ld a, d
 	cp $e8 ; is this command a toggleperfectpitch?
 	jr nz, Audio1_vibrato ; no
@@ -381,7 +381,7 @@ Audio1_toggleperfectpitch: ; 0x9323
 	ld [hl], a ; flip bit 0 of wChannelFlags1
 	jp Audio1_endchannel
 
-Audio1_vibrato: ; 0x9335
+Audio1_vibrato:
 	cp $ea ; is this command a vibrato?
 	jr nz, Audio1_pitchbend ; no
 	call Audio1_GetNextMusicByte
@@ -429,7 +429,7 @@ Audio1_vibrato: ; 0x9335
 
 	jp Audio1_endchannel
 
-Audio1_pitchbend: ; 0x936d
+Audio1_pitchbend:
 	cp $eb ; is this command a pitchbend?
 	jr nz, Audio1_duty ; no
 	call Audio1_GetNextMusicByte
@@ -460,7 +460,7 @@ Audio1_pitchbend: ; 0x936d
 	ld d, a
 	jp Audio1_notelength
 
-Audio1_duty: ; 0x93a5
+Audio1_duty:
 	cp $ec ; is this command a duty?
 	jr nz, Audio1_tempo ; no
 	call Audio1_GetNextMusicByte
@@ -473,7 +473,7 @@ Audio1_duty: ; 0x93a5
 	ld [hl], a ; store duty
 	jp Audio1_endchannel
 
-Audio1_tempo: ; 0x93ba
+Audio1_tempo:
 	cp $ed ; is this command a tempo?
 	jr nz, Audio1_stereopanning ; no
 	ld a, c
@@ -502,7 +502,7 @@ Audio1_tempo: ; 0x93ba
 .musicChannelDone
 	jp Audio1_endchannel
 
-Audio1_stereopanning: ; 0x93fa
+Audio1_stereopanning:
 	cp $ee ; is this command a stereopanning?
 	jr nz, Audio1_unknownmusic0xef ; no
 	call Audio1_GetNextMusicByte
@@ -510,7 +510,7 @@ Audio1_stereopanning: ; 0x93fa
 	jp Audio1_endchannel
 
 ; this appears to never be used
-Audio1_unknownmusic0xef: ; 0x9407
+Audio1_unknownmusic0xef:
 	cp $ef ; is this command an unknownmusic0xef?
 	jr nz, Audio1_dutycycle ; no
 	call Audio1_GetNextMusicByte
@@ -527,7 +527,7 @@ Audio1_unknownmusic0xef: ; 0x9407
 .skip
 	jp Audio1_endchannel
 
-Audio1_dutycycle: ; 0x9426
+Audio1_dutycycle:
 	cp $fc ; is this command a dutycycle?
 	jr nz, Audio1_volume ; no
 	call Audio1_GetNextMusicByte
@@ -544,14 +544,14 @@ Audio1_dutycycle: ; 0x9426
 	set BIT_ROTATE_DUTY, [hl]
 	jp Audio1_endchannel
 
-Audio1_volume: ; 0x9444
+Audio1_volume:
 	cp $f0 ; is this command a volume?
 	jr nz, Audio1_executemusic ; no
 	call Audio1_GetNextMusicByte
 	ld [rNR50], a ; store volume
 	jp Audio1_endchannel
 
-Audio1_executemusic: ; 0x9450
+Audio1_executemusic:
 	cp $f8 ; is this command an executemusic?
 	jr nz, Audio1_octave ; no
 	ld b, $0
@@ -560,7 +560,7 @@ Audio1_executemusic: ; 0x9450
 	set BIT_EXECUTE_MUSIC, [hl]
 	jp Audio1_endchannel
 
-Audio1_octave: ; 0x945f
+Audio1_octave:
 	and $f0
 	cp $e0 ; is this command an octave?
 	jr nz, Audio1_unknownsfx0x20 ; no
@@ -572,7 +572,7 @@ Audio1_octave: ; 0x945f
 	ld [hl], a ; store low nibble as octave
 	jp Audio1_endchannel
 
-Audio1_unknownsfx0x20: ; 0x9472
+Audio1_unknownsfx0x20:
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Audio1_unknownsfx0x10
 	ld a, c
@@ -676,7 +676,7 @@ asm_94fd
 	pop bc
 	pop de
 
-Audio1_notelength: ; 0x950a
+Audio1_notelength:
 	ld a, d
 	push af
 	and $f
@@ -734,7 +734,7 @@ Audio1_notelength: ; 0x950a
 	pop hl
 	ret
 
-Audio1_notepitch: ; 0x9568
+Audio1_notepitch:
 	pop af
 	and $f0
 	cp $c0 ; compare to rest
@@ -829,7 +829,7 @@ Audio1_notepitch: ; 0x9568
 	call Audio1_ApplyWavePatternAndFrequency
 	ret
 
-Audio1_EnableChannelOutput: ; 0x95f8
+Audio1_EnableChannelOutput:
 	ld b, 0
 	ld hl, Audio1_HWChannelEnableMasks
 	add hl, bc
@@ -866,7 +866,7 @@ Audio1_EnableChannelOutput: ; 0x95f8
 	ld [rNR51], a
 	ret
 
-Audio1_ApplyDutyAndSoundLength: ; 0x9629
+Audio1_ApplyDutyAndSoundLength:
 	ld b, 0
 	ld hl, wChannelNoteDelayCounters ; use the note delay as sound length
 	add hl, bc
@@ -891,7 +891,7 @@ Audio1_ApplyDutyAndSoundLength: ; 0x9629
 	ld [hl], d
 	ret
 
-Audio1_ApplyWavePatternAndFrequency: ; 0x964b
+Audio1_ApplyWavePatternAndFrequency:
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -942,7 +942,7 @@ Audio1_ApplyWavePatternAndFrequency: ; 0x964b
 	call Audio1_ApplyFrequencyModifier
 	ret
 
-Audio1_SetSfxTempo: ; 0x9693
+Audio1_SetSfxTempo:
 	call Audio1_IsCry
 	jr nc, .notCry
 	ld d, 0
@@ -963,7 +963,7 @@ Audio1_SetSfxTempo: ; 0x9693
 .done
 	ret
 
-Audio1_ApplyFrequencyModifier: ; 0x96b5
+Audio1_ApplyFrequencyModifier:
 	call Audio1_IsCry
 	jr nc, .done
 ; if playing a cry, add the cry's frequency modifier
@@ -980,7 +980,7 @@ Audio1_ApplyFrequencyModifier: ; 0x96b5
 .done
 	ret
 
-Audio1_GoBackOneCommandIfCry: ; 0x96c7
+Audio1_GoBackOneCommandIfCry:
 	call Audio1_IsCry
 	jr nc, .done
 	ld hl, wChannelCommandPointers
@@ -1003,7 +1003,7 @@ Audio1_GoBackOneCommandIfCry: ; 0x96c7
 	ccf
 	ret
 
-Audio1_IsCry: ; 0x96e5
+Audio1_IsCry:
 ; Returns whether the currently playing audio is a cry in carry.
 	ld a, [wChannelSoundIDs + CH4]
 	cp CRY_SFX_START
@@ -1021,7 +1021,7 @@ Audio1_IsCry: ; 0x96e5
 	scf
 	ret
 
-Audio1_ApplyPitchBend: ; 0x96f9
+Audio1_ApplyPitchBend:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit BIT_PITCH_BEND_DECREASING, [hl]
@@ -1125,7 +1125,7 @@ Audio1_ApplyPitchBend: ; 0x96f9
 	res BIT_PITCH_BEND_DECREASING, [hl]
 	ret
 
-Audio1_InitPitchBendVars: ; 0x978f
+Audio1_InitPitchBendVars:
 	ld hl, wChannelPitchBendCurrentFrequencyHighBytes
 	add hl, bc
 	ld [hl], d
@@ -1224,7 +1224,7 @@ Audio1_InitPitchBendVars: ; 0x978f
 	ld [hl], a ; store remainder - dividend
 	ret
 
-Audio1_ApplyDutyCycle: ; 0x980d
+Audio1_ApplyDutyCycle:
 	ld b, 0
 	ld hl, wChannelDutyCycles
 	add hl, bc
@@ -1242,7 +1242,7 @@ Audio1_ApplyDutyCycle: ; 0x980d
 	ld [hl], a
 	ret
 
-Audio1_GetNextMusicByte: ; 0x9825
+Audio1_GetNextMusicByte:
 	ld d, 0
 	ld a, c
 	add a
@@ -1260,7 +1260,7 @@ Audio1_GetNextMusicByte: ; 0x9825
 	ld [hl], d
 	ret
 
-Audio1_GetRegisterPointer: ; 0x9838
+Audio1_GetRegisterPointer:
 ; hl = address of hardware sound register b for software channel c
 	ld a, c
 	ld hl, Audio1_HWChannelBaseAddresses
@@ -1275,7 +1275,7 @@ Audio1_GetRegisterPointer: ; 0x9838
 	ld h, $ff
 	ret
 
-Audio1_MultiplyAdd: ; 0x9847
+Audio1_MultiplyAdd:
 ; hl = l + (a * de)
 	ld h, 0
 .loop
@@ -1291,7 +1291,7 @@ Audio1_MultiplyAdd: ; 0x9847
 .done
 	ret
 
-Audio1_CalculateFrequency: ; 0x9858
+Audio1_CalculateFrequency:
 ; return the frequency for note a, octave b in de
 	ld h, 0
 	ld l, a
@@ -1317,7 +1317,7 @@ Audio1_CalculateFrequency: ; 0x9858
 	ld d, a
 	ret
 
-Audio1_PlaySound:: ; 0x9876
+Audio1_PlaySound::
 	ld [wSoundID], a
 	cp $ff
 	jp z, .stopAllAudio
@@ -1695,23 +1695,23 @@ Audio1_PlaySound:: ; 0x9876
 .done
 	ret
 
-Audio1_CryEndchannel: ; 0x9b16
+Audio1_CryEndchannel:
 	endchannel
 
-Audio1_HWChannelBaseAddresses: ; 0x9b17
+Audio1_HWChannelBaseAddresses:
 ; the low bytes of each HW channel's base address
 	db HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 0-3
 	db HW_CH1_BASE, HW_CH2_BASE, HW_CH3_BASE, HW_CH4_BASE ; channels 4-7
 
-Audio1_HWChannelDisableMasks: ; 0x9b1f
+Audio1_HWChannelDisableMasks:
 	db HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 0-3
 	db HW_CH1_DISABLE_MASK, HW_CH2_DISABLE_MASK, HW_CH3_DISABLE_MASK, HW_CH4_DISABLE_MASK ; channels 4-7
 
-Audio1_HWChannelEnableMasks: ; 0x9b27
+Audio1_HWChannelEnableMasks:
 	db HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 0-3
 	db HW_CH1_ENABLE_MASK, HW_CH2_ENABLE_MASK, HW_CH3_ENABLE_MASK, HW_CH4_ENABLE_MASK ; channels 4-7
 
-Audio1_Pitches: ; 0x9b2f
+Audio1_Pitches:
 	dw $F82C ; C_
 	dw $F89D ; C#
 	dw $F907 ; D_

@@ -1,4 +1,4 @@
-Route11_h: ; 0x584be to 0x584e0 (34 bytes) (id=22)
+Route11_h:
 	db OVERWORLD ; tileset
 	db ROUTE_11_HEIGHT, ROUTE_11_WIDTH ; dimensions (y, x)
 	dw Route11Blocks, Route11TextPointers, Route11Script ; blocks, texts, scripts

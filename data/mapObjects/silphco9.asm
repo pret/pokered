@@ -1,4 +1,4 @@
-SilphCo9Object: ; 0x5d93f (size=74)
+SilphCo9Object:
 	db $2e ; border block
 
 	db $5 ; warps

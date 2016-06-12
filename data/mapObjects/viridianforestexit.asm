@@ -1,4 +1,4 @@
-ViridianForestExitObject: ; 0x5d598 (size=48)
+ViridianForestExitObject:
 	db $a ; border block
 
 	db $4 ; warps

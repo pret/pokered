@@ -1,4 +1,4 @@
-Museum1FObject: ; 0x5c2c1 (size=74)
+Museum1FObject:
 	db $a ; border block
 
 	db $5 ; warps

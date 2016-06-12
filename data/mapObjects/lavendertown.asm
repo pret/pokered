@@ -1,4 +1,4 @@
-LavenderTownObject: ; 0x4402d (size=88)
+LavenderTownObject:
 	db $2c ; border block
 
 	db $6 ; warps

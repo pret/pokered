@@ -80,10 +80,10 @@ DaisyUseMapText:
 	TX_FAR _DaisyUseMapText
 	db "@"
 
-BluesHouseText2: ; 0x19bc4 Daisy, walking around
+BluesHouseText2: ; Daisy, walking around
 	TX_FAR _BluesHouseText2
 	db "@"
 
-BluesHouseText3: ; 0x19bc9 map on table
+BluesHouseText3: ; map on table
 	TX_FAR _BluesHouseText3
 	db "@"

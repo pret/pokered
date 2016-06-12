@@ -1,4 +1,4 @@
-Route22GateObject: ; 0x1e720 (size=42)
+Route22GateObject:
 	db $a ; border block
 
 	db $4 ; warps

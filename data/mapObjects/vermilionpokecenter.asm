@@ -1,4 +1,4 @@
-VermilionPokecenterObject: ; 0x5c9a9 (size=44)
+VermilionPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-Route24_h: ; 0x50682 to 0x506a4 (34 bytes) (id=35)
+Route24_h:
 	db OVERWORLD ; tileset
 	db ROUTE_24_HEIGHT, ROUTE_24_WIDTH ; dimensions (y, x)
 	dw Route24Blocks, Route24TextPointers, Route24Script ; blocks, texts, scripts

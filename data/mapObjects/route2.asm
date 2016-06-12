@@ -1,4 +1,4 @@
-Route2Object: ; 0x54022 (size=72)
+Route2Object:
 	db $f ; border block
 
 	db $6 ; warps

@@ -1,4 +1,4 @@
-Route7_h: ; 0x48000 to 0x48022 (34 bytes) (bank=12) (id=18)
+Route7_h:
 	db OVERWORLD ; tileset
 	db ROUTE_7_HEIGHT, ROUTE_7_WIDTH ; dimensions (y, x)
 	dw Route7Blocks, Route7TextPointers, Route7Script ; blocks, texts, scripts

@@ -1,4 +1,4 @@
-FanClubObject: ; 0x59c97 (size=62)
+FanClubObject:
 	db $d ; border block
 
 	db $2 ; warps

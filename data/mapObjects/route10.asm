@@ -1,4 +1,4 @@
-Route10Object: ; 0x582f6 (size=96)
+Route10Object:
 	db $2c ; border block
 
 	db $4 ; warps

@@ -1,4 +1,4 @@
-BrunoObject: ; 0x763d7 (size=44)
+BrunoObject:
 	db $3 ; border block
 
 	db $4 ; warps

@@ -819,7 +819,7 @@ HandleEnemyMonFainted:
 	ld [wActionResultOrTookBattleTurn], a
 	jp MainInBattleLoop
 
-FaintEnemyPokemon: ; 0x3c567
+FaintEnemyPokemon:
 	call ReadPlayerMonCurHPAndStatus
 	ld a, [wIsInBattle]
 	dec a
@@ -945,7 +945,7 @@ FaintEnemyPokemon: ; 0x3c567
 	ld [wPartyGainExpFlags], a
 	jpab GainExperience
 
-EnemyMonFaintedText: ; 0x3c63e
+EnemyMonFaintedText:
 	TX_FAR _EnemyMonFaintedText
 	db "@"
 
@@ -4672,7 +4672,6 @@ UnusedHighCriticalMoves:
 	db CRABHAMMER
 	db SLASH
 	db $FF
-; 3e023
 
 ; determines if attack is a critical hit
 ; azure heights claims "the fastest pokémon (who are,not coincidentally,

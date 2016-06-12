@@ -1,4 +1,4 @@
-SaffronMartObject: ; 0x5d41c (size=38)
+SaffronMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

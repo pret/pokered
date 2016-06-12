@@ -1,4 +1,4 @@
-Route8_h: ; 0x5812d to 0x5814f (34 bytes) (id=19)
+Route8_h:
 	db OVERWORLD ; tileset
 	db ROUTE_8_HEIGHT, ROUTE_8_WIDTH ; dimensions (y, x)
 	dw Route8Blocks, Route8TextPointers, Route8Script ; blocks, texts, scripts

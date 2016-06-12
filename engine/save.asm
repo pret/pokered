@@ -183,7 +183,7 @@ SaveSAVConfirm:
 	ld a,[wCurrentMenuItem]
 	ret
 
-WouldYouLikeToSaveText: ; 0x7377d
+WouldYouLikeToSaveText:
 	TX_FAR _WouldYouLikeToSaveText
 	db "@"
 

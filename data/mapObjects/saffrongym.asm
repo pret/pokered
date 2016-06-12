@@ -1,4 +1,4 @@
-SaffronGymObject: ; 0x5d259 (size=330)
+SaffronGymObject:
 	db $2e ; border block
 
 	db $20 ; warps

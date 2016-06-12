@@ -1,4 +1,4 @@
-Route19_h: ; 0x54e78 to 0x54e9a (34 bytes) (id=30)
+Route19_h:
 	db OVERWORLD ; tileset
 	db ROUTE_19_HEIGHT, ROUTE_19_WIDTH ; dimensions (y, x)
 	dw Route19Blocks, Route19TextPointers, Route19Script ; blocks, texts, scripts

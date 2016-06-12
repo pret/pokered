@@ -1,4 +1,4 @@
-ViridianPokecenterObject: ; 0x44277 (size=44)
+ViridianPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

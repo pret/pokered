@@ -1,4 +1,4 @@
-CopycatsHouse2FObject: ; 0x5cd21 (size=48)
+CopycatsHouse2FObject:
 	db $a ; border block
 
 	db $1 ; warps

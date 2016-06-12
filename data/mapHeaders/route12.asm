@@ -1,4 +1,4 @@
-Route12_h: ; 0x5866d to 0x5869a (45 bytes) (id=23)
+Route12_h:
 	db OVERWORLD ; tileset
 	db ROUTE_12_HEIGHT, ROUTE_12_WIDTH ; dimensions (y, x)
 	dw Route12Blocks, Route12TextPointers, Route12Script ; blocks, texts, scripts

@@ -1,4 +1,4 @@
-Lab1Object: ; 0x75bb3 (size=62)
+Lab1Object:
 	db $17 ; border block
 
 	db $5 ; warps

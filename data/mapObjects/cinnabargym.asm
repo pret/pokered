@@ -1,4 +1,4 @@
-CinnabarGymObject: ; 0x75acc (size=90)
+CinnabarGymObject:
 	db $2e ; border block
 
 	db $2 ; warps

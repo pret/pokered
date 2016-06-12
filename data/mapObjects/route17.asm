@@ -1,4 +1,4 @@
-Route17Object: ; 0x54b42 (size=102)
+Route17Object:
 	db $43 ; border block
 
 	db $0 ; warps

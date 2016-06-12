@@ -1,4 +1,4 @@
-OaksAideScript: ; 0x59035
+OaksAideScript:
 	ld hl, OaksAideHiText
 	call PrintText
 	call YesNoChoice
