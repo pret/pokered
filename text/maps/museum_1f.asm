@@ -81,7 +81,7 @@ _Museum1FText_5c28e::
 	prompt
 
 _ReceivedOldAmberText::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "OLD AMBER!@@"
 
 _Museum1FText_5c299::
