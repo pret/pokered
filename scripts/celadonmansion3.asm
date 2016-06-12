@@ -41,7 +41,7 @@ DirectorText:
 	call PrintText
 	jp TextScriptEnd
 
-.GameDesigner ; 487d0 (12:47d0)
+.GameDesigner
 	TX_FAR _GameDesignerText
 	db "@"
 

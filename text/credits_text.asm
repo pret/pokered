@@ -64,7 +64,7 @@ CreditsTextPointers:
 	dw CredClub
 	dw CredPAAD
 
-CredVersion: ; 74343 (1d:4343) ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
+CredVersion: ; this 1 byte difference makes all bank addresses offset by 1 in the blue version
 IF DEF(_RED)
 	db -8, "RED VERSION STAFF@"
 ENDC

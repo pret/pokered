@@ -5,7 +5,7 @@ RedsHouse1FTextPointers:
 	dw RedsHouse1FText1
 	dw RedsHouse1FText2
 
-RedsHouse1FText1: ; 4816f (12:416f) Mom
+RedsHouse1FText1: ; Mom
 	TX_ASM
 	ld a, [wd72e]
 	bit 3, a

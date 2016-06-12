@@ -204,7 +204,7 @@ _UpdateSprites:
 	cp $e               ; test for overflow (back at $0e)
 	jr nz, .spriteLoop
 	ret
-.updateCurrentSprite ; 4c54 (1:4c54)
+.updateCurrentSprite
 	cp $1
 	jp nz, UpdateNonPlayerSprite
 	jp UpdatePlayerSprite
@@ -1701,19 +1701,19 @@ TwoOptionMenuStrings:
 	db 4,3,0
 	dw .NoYesMenu
 
-.NoYesMenu ; 7699 (1:3699)
+.NoYesMenu
 	db "NO",$4E,"YES@"
-.YesNoMenu ; 76a0 (1:36a0)
+.YesNoMenu
 	db "YES",$4E,"NO@"
-.NorthWestMenu ; 76a7 (1:36a7)
+.NorthWestMenu
 	db "NORTH",$4E,"WEST@"
-.SouthEastMenu ; 76b2 (1:36b2)
+.SouthEastMenu
 	db "SOUTH",$4E,"EAST@"
-.NorthEastMenu ; 76bd (1:36bd)
+.NorthEastMenu
 	db "NORTH",$4E,"EAST@"
-.TradeCancelMenu ; 76c8 (1:36c8)
+.TradeCancelMenu
 	db "TRADE",$4E,"CANCEL@"
-.HealCancelMenu ; 76d5 (1:36d5)
+.HealCancelMenu
 	db "HEAL",$4E,"CANCEL@"
 
 DisplayFieldMoveMonMenu:
@@ -3032,7 +3032,7 @@ DrawBadges:
 ;	call .DrawBadgeRow
 ;	ret
 
-.DrawBadgeRow ; ea4c (3:6a4c)
+.DrawBadgeRow
 ; Draw 4 badges.
 
 	ld c, 4

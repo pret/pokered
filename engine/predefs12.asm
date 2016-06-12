@@ -29,7 +29,7 @@ PredefShakeScreenVertically:
 	ld [wDisableVBlankWYUpdate], a
 	ret
 
-.MutateWY ; 48119 (12:4119)
+.MutateWY
 	ld a, [$ff96]
 	xor b
 	ld [$ff96], a
@@ -57,7 +57,7 @@ PredefShakeScreenHorizontally:
 	ld [rWX], a
 	ret
 
-.MutateWX ; 4813f (12:413f)
+.MutateWX
 	ld a, [$ff97]
 	xor b
 	ld [$ff97], a

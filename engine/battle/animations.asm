@@ -1944,7 +1944,7 @@ _AnimationSlideMonOff:
 ; functions below catch it by checking if the tile number is within the valid
 ; range and if not, replacing it with a blank tile.
 
-.PlayerNextTile ; 79633 (1e:5633)
+.PlayerNextTile
 	ld a, [hl]
 	add 7
 ; This is a bug. The lower right corner tile of the mon back pic is blanked
@@ -1955,7 +1955,7 @@ _AnimationSlideMonOff:
 	ld a, " "
 	ret
 
-.EnemyNextTile ; 7963c (1e:563c)
+.EnemyNextTile
 	ld a, [hl]
 	sub 7
 ; This has the same problem as above, but it has no visible effect because

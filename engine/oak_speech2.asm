@@ -184,7 +184,7 @@ DisplayIntroNameTextBox:
 	ld [wMaxMenuItem], a
 	jp HandleMenuInput
 
-.namestring ; 6aa3 (1:6aa3)
+.namestring
 	db "NAME@"
 
 IF DEF(_RED)

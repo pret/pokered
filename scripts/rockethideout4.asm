@@ -37,7 +37,7 @@ RocketHideout4Script_454a3:
 	ld [wCurMapScript], a
 	ret
 
-RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
+RocketHideout4ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
