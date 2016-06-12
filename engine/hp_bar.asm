@@ -87,6 +87,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CompareNewHPToOldHP
 	jr z, .animateHPBarDone
 	jr nc, .HPIncrease
+; HP decrease
 	dec bc        ; subtract 1 HP
 	ld a, c
 	ld [wHPBarNewHP], a
@@ -95,7 +96,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, e
 	sub d         ; calc pixel difference
-	jr .asm_fa7e
+	jr .ok
 .HPIncrease
 	inc bc        ; add 1 HP
 	ld a, c
@@ -105,7 +106,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, d
 	sub e         ; calc pixel difference
-.asm_fa7e
+.ok
 	call UpdateHPBar_PrintHPNumber
 	and a
 	jr z, .noPixelDifference

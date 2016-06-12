@@ -34,7 +34,7 @@ ShakeElevator:
 	call PlayMusic
 .musicLoop
 	ld a, [wChannelSoundIDs + CH4]
-	cp $b9
+	cp SFX_SAFARI_ZONE_PA
 	jr z, .musicLoop
 	call UpdateSprites
 	jp PlayDefaultMusic
@@ -56,7 +56,7 @@ ShakeElevatorRedrawRow:
 	add hl, de
 	ld a, h
 	and $3
-	or $98
+	or vBGMap0 / $100
 	ld d, a
 	ld a, l
 	pop hl

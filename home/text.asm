@@ -52,28 +52,28 @@ PlaceNextChar::
 	ld a,[de]
 
 	cp "@"
-	jr nz,.PlaceText
+	jr nz, Char4ETest
 	ld b,h
 	ld c,l
 	pop hl
 	ret
 
-.PlaceText
-	cp $4E
-	jr nz,.next
-	ld bc,SCREEN_WIDTH * 2
+Char4ETest::
+	cp $4E ; next
+	jr nz, .char4FTest
+	ld bc, 2 * SCREEN_WIDTH
 	ld a,[hFlags_0xFFF6]
 	bit 2,a
-	jr z,.next2
+	jr z,.ok
 	ld bc,SCREEN_WIDTH
-.next2
+.ok
 	pop hl
 	add hl,bc
 	push hl
 	jp PlaceNextChar_inc
 
-.next
-	cp $4F
+.char4FTest
+	cp $4F ; line
 	jr nz,.next3
 	pop hl
 	coord hl, 1, 16
@@ -81,46 +81,36 @@ PlaceNextChar::
 	jp PlaceNextChar_inc
 
 .next3 ; Check against a dictionary
+dict: macro
+if \1 == 0
 	and a
-	jp z,Char00
-	cp $4C
-	jp z,Char4C
-	cp $4B
-	jp z,Char4B
-	cp $51
-	jp z,Char51
-	cp $49
-	jp z,Char49
-	cp $52
-	jp z,Char52
-	cp $53
-	jp z,Char53
-	cp $54
-	jp z,Char54
-	cp $5B
-	jp z,Char5B
-	cp $5E
-	jp z,Char5E
-	cp $5C
-	jp z,Char5C
-	cp $5D
-	jp z,Char5D
-	cp $55
-	jp z,Char55
-	cp $56
-	jp z,Char56
-	cp $57
-	jp z,Char57
-	cp $58
-	jp z,Char58
-	cp $4A
-	jp z,Char4A
-	cp $5F
-	jp z,Char5F
-	cp $59
-	jp z,Char59
-	cp $5A
-	jp z,Char5A
+else
+	cp \1
+endc
+	jp z, \2
+endm
+
+	dict $00, Char00 ; error
+	dict $4C, Char4C ; autocont
+	dict $4B, Char4B ; cont_
+	dict $51, Char51 ; para
+	dict $49, Char49 ; page
+	dict $52, Char52 ; player
+	dict $53, Char53 ; rival
+	dict $54, Char54 ; POKé
+	dict $5B, Char5B ; PC
+	dict $5E, Char5E ; ROCKET
+	dict $5C, Char5C ; TM
+	dict $5D, Char5D ; TRAINER
+	dict $55, Char55 ; cont
+	dict $56, Char56 ; 6 dots
+	dict $57, Char57 ; done
+	dict $58, Char58 ; prompt
+	dict $4A, Char4A ; PKMN
+	dict $5F, Char5F ; dex
+	dict $59, Char59 ; TARGET
+	dict $5A, Char5A ; USER
+
 	ld [hli],a
 	call PrintLetterDelay
 PlaceNextChar_inc::
@@ -211,7 +201,6 @@ MonsterNameCharsCommon::
 	; print “Enemy ”
 	ld de,Char5AText
 	call PlaceString
-
 	ld h,b
 	ld l,c
 	ld de,wEnemyMonNick ; enemy active monster name
@@ -264,36 +253,36 @@ Char5F::
 	pop hl
 	ret
 
-Char58::
+Char58:: ; prompt
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
-	jp z,Next1AA2
-	ld a,$EE
+	jp z, .ok
+	ld a, $EE
 	Coorda 18, 16
-Next1AA2::
+.ok
 	call ProtectedDelay3
 	call ManualTextScroll
 	ld a, " "
 	Coorda 18, 16
-Char57::
+Char57:: ; done
 	pop hl
-	ld de,Char58Text
+	ld de, Char58Text
 	dec de
 	ret
 
 Char58Text::
 	db "@"
 
-Char51::
+Char51:: ; para
 	push de
-	ld a,$EE
+	ld a, $EE
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 13
 	lb bc, 4, 18
 	call ClearScreenArea
-	ld c,20
+	ld c, 20
 	call DelayFrames
 	pop de
 	coord hl, 1, 14
@@ -328,13 +317,13 @@ Char4B::
 	;fall through
 Char4C::
 	push de
-	call Next1B18
-	call Next1B18
+	call ScrollTextUpOneLine
+	call ScrollTextUpOneLine
 	coord hl, 1, 16
 	pop de
 	jp PlaceNextChar_inc
 
-Next1B18::
+ScrollTextUpOneLine::
 	coord hl, 0, 14
 	coord de, 0, 13
 	ld b,60
@@ -372,7 +361,7 @@ TextCommandProcessor::
 	push af
 	set 1,a
 	ld e,a
-	ld a,[$fff4]
+	ld a, [$fff4]
 	xor e
 	ld [wLetterPrintingDelayFlags],a
 	ld a,c
@@ -389,22 +378,22 @@ NextTextCommand::
 	ret
 .doTextCommand
 	push hl
-	cp a,$17
-	jp z,TextCommand17
-	cp a,$0e
+	cp a, $17
+	jp z, TextCommand17
+	cp a, $0e
 	jp nc,TextCommand0B ; if a != 0x17 and a >= 0xE, go to command 0xB
 ; if a < 0xE, use a jump table
 	ld hl,TextCommandJumpTable
 	push bc
 	add a
-	ld b,$00
-	ld c,a
-	add hl,bc
+	ld b, 0
+	ld c, a
+	add hl, bc
 	pop bc
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	jp [hl]
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jp hl
 
 ; draw box
 ; 04AAAABBCC
@@ -523,10 +512,10 @@ TextCommand06::
 ; 07
 ; (no arguments)
 TextCommand07::
-	ld a," "
+	ld a, " "
 	Coorda 18, 16 ; place blank space in lower right corner of dialogue text box
-	call Next1B18 ; scroll up text
-	call Next1B18
+	call ScrollTextUpOneLine
+	call ScrollTextUpOneLine
 	pop hl
 	coord bc, 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
@@ -537,7 +526,7 @@ TextCommand08::
 	pop hl
 	ld de,NextTextCommand
 	push de ; return address
-	jp [hl]
+	jp hl
 
 ; print decimal number (converted from binary number)
 ; 09AAAABB
@@ -626,16 +615,16 @@ TextCommand0B::
 
 ; format: text command ID, sound ID or cry ID
 TextCommandSounds::
-	db $0B,SFX_GET_ITEM_1
-	db $12,SFX_CAUGHT_MON
-	db $0E,SFX_POKEDEX_RATING
-	db $0F,SFX_GET_ITEM_1
-	db $10,SFX_GET_ITEM_2
-	db $11,SFX_GET_KEY_ITEM
-	db $13,SFX_DEX_PAGE_ADDED
-	db $14,NIDORINA ; used in OakSpeech
-	db $15,PIDGEOT  ; used in SaffronCityText12
-	db $16,DEWGONG  ; unused?
+	db $0B, SFX_GET_ITEM_1
+	db $12, SFX_CAUGHT_MON
+	db $0E, SFX_POKEDEX_RATING
+	db $0F, SFX_GET_ITEM_1
+	db $10, SFX_GET_ITEM_2
+	db $11, SFX_GET_KEY_ITEM
+	db $13, SFX_DEX_PAGE_ADDED
+	db $14, NIDORINA ; used in OakSpeech
+	db $15, PIDGEOT  ; used in SaffronCityText12
+	db $16, DEWGONG  ; unused?
 
 ; draw ellipses
 ; 0CAA

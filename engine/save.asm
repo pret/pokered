@@ -638,7 +638,7 @@ SaveHallOfFameTeams:
 	ld a, [wNumHoFTeams]
 	dec a
 	cp HOF_TEAM_CAPACITY
-	jr nc, .asm_73b28
+	jr nc, .shiftHOFTeams
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
 	call AddNTimes
@@ -648,7 +648,9 @@ SaveHallOfFameTeams:
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
-.asm_73b28
+.shiftHOFTeams
+; if the space designated for HOF teams is full, then shift all HOF teams to the next slot, making space for the new HOF team
+; this deletes the last HOF team though
 	ld hl, sHallOfFame + HOF_TEAM
 	ld de, sHallOfFame
 	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)

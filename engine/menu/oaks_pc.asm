@@ -7,9 +7,9 @@ OpenOaksPC:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_1e932
+	jr nz, .closePC
 	predef DisplayDexRating
-.asm_1e932
+.closePC
 	ld hl, ClosedOaksPCText
 	call PrintText
 	jp LoadScreenTilesFromBuffer2

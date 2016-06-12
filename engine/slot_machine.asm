@@ -864,7 +864,7 @@ LoadSlotMachineTiles:
 	call FarCopyData2
 	ld hl, SlotMachineMap
 	coord de, 0, 0
-	ld bc, $00f0
+	ld bc, SlotMachineMapEnd - SlotMachineMap
 	call CopyData
 	call EnableLCD
 	ld hl, wSlotMachineWheel1Offset
@@ -878,6 +878,7 @@ LoadSlotMachineTiles:
 
 SlotMachineMap:
 	INCBIN "gfx/tilemaps/slotmachine.map"
+SlotMachineMapEnd:
 
 INCLUDE "data/slot_machine_wheels.asm"
 

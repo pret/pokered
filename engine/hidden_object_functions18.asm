@@ -73,29 +73,29 @@ PrintBenchGuyText:
 ; format: db map id, player sprite facing direction, text id of PredefTextIDPointerTable
 BenchGuyTextPointers:
 	db VIRIDIAN_POKECENTER,   SPRITE_FACING_LEFT
-	db (ViridianCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db_tx_pre ViridianCityPokecenterBenchGuyText
 	db PEWTER_POKECENTER,     SPRITE_FACING_LEFT
-	db (PewterCityPokecenterBenchGuyText_id     - TextPredefs) / 2 + 1
+	db_tx_pre PewterCityPokecenterBenchGuyText
 	db CERULEAN_POKECENTER,   SPRITE_FACING_LEFT
-	db (CeruleanCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db_tx_pre CeruleanCityPokecenterBenchGuyText
 	db LAVENDER_POKECENTER,   SPRITE_FACING_LEFT
-	db (LavenderCityPokecenterBenchGuyText_id   - TextPredefs) / 2 + 1
+	db_tx_pre LavenderCityPokecenterBenchGuyText
 	db VERMILION_POKECENTER,  SPRITE_FACING_LEFT
-	db (VermilionCityPokecenterBenchGuyText_id  - TextPredefs) / 2 + 1
+	db_tx_pre VermilionCityPokecenterBenchGuyText
 	db CELADON_POKECENTER,    SPRITE_FACING_LEFT
-	db (CeladonCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db_tx_pre CeladonCityPokecenterBenchGuyText
 	db CELADON_HOTEL,         SPRITE_FACING_LEFT
-	db (CeladonCityHotelText_id                 - TextPredefs) / 2 + 1
+	db_tx_pre CeladonCityHotelText
 	db FUCHSIA_POKECENTER,    SPRITE_FACING_LEFT
-	db (FuchsiaCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db_tx_pre FuchsiaCityPokecenterBenchGuyText
 	db CINNABAR_POKECENTER,   SPRITE_FACING_LEFT
-	db (CinnabarIslandPokecenterBenchGuyText_id - TextPredefs) / 2 + 1
+	db_tx_pre CinnabarIslandPokecenterBenchGuyText
 	db SAFFRON_POKECENTER,    SPRITE_FACING_LEFT
-	db (SaffronCityPokecenterBenchGuyText_id    - TextPredefs) / 2 + 1
+	db_tx_pre SaffronCityPokecenterBenchGuyText
 	db MT_MOON_POKECENTER,    SPRITE_FACING_LEFT
-	db (MtMoonPokecenterBenchGuyText_id         - TextPredefs) / 2 + 1
+	db_tx_pre MtMoonPokecenterBenchGuyText
 	db ROCK_TUNNEL_POKECENTER,SPRITE_FACING_LEFT
-	db (RockTunnelPokecenterBenchGuyText_id     - TextPredefs) / 2 + 1
+	db_tx_pre RockTunnelPokecenterBenchGuyText
 	db $FF
 
 ViridianCityPokecenterBenchGuyText:

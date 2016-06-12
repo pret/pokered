@@ -132,7 +132,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	ld hl, MonPartySpritePointers
 	ld a, $1c
 	ld bc, $0
-.asm_7179c
+.loop
 	push af
 	push bc
 	push hl
@@ -159,7 +159,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	ld c, a
 	pop af
 	dec a
-	jr nz, .asm_7179c
+	jr nz, .loop
 	jp EnableLCD
 
 MonPartySpritePointers:

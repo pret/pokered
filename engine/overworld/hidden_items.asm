@@ -27,7 +27,7 @@ FoundHiddenItemText:
 	ld b, a
 	ld c, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
@@ -37,7 +37,7 @@ FoundHiddenItemText:
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-.BagFull
+.bagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -77,24 +77,24 @@ HiddenCoins:
 	cp 20
 	jr z, .bcd20
 	cp 40
-	jr z, .bcd20
+	jr z, .bcd20 ; should be bcd40
 	jr .bcd100
 .bcd10
 	ld a, $10
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd20
 	ld a, $20
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd40 ; due to a typo, this is never used
 	ld a, $40
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd100
 	ld a, $1
 	ld [hCoins], a
-.bcddone
+.bcdDone
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -107,13 +107,13 @@ HiddenCoins:
 	call EnableAutoTextBoxDrawing
 	ld a, [wPlayerCoins]
 	cp $99
-	jr nz, .RoomInCoinCase
+	jr nz, .roomInCoinCase
 	ld a, [wPlayerCoins + 1]
 	cp $99
-	jr nz, .RoomInCoinCase
+	jr nz, .roomInCoinCase
 	tx_pre_id DroppedHiddenCoinsText
 	jr .done
-.RoomInCoinCase
+.roomInCoinCase
 	tx_pre_id FoundHiddenCoinsText
 .done
 	jp PrintPredefTextID

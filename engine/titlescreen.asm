@@ -169,7 +169,7 @@ ENDC
 	db -1,2
 	db 0      ; terminate list with 0
 
-.ScrollTitleScreenPokemonLogo
+.ScrollTitleScreenPokemonLogo:
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
 ; Scrolls d pixels e times
 	call DelayFrame

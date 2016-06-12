@@ -210,12 +210,12 @@ HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	coord hl, 0, 4
-	ld b, $6
-	ld c, $a
+	ld b, 6
+	ld c, 10
 	call TextBoxBorder
 	coord hl, 5, 0
-	ld b, $2
-	ld c, $9
+	ld b, 2
+	ld c, 9
 	call TextBoxBorder
 	coord hl, 7, 2
 	ld de, wPlayerName

@@ -125,6 +125,7 @@ HandlePokedexSideMenu:
 	call DrawTileLine ; cover up the menu cursor in the pokemon list
 	pop bc
 	ret
+
 .buttonBPressed
 	push bc
 	coord hl, 15, 10
@@ -133,16 +134,19 @@ HandlePokedexSideMenu:
 	call DrawTileLine ; cover up the menu cursor in the side menu
 	pop bc
 	jr .exitSideMenu
+
 .choseData
 	call ShowPokedexDataInternal
 	ld b,0
 	jr .exitSideMenu
+
 ; play pokemon cry
 .choseCry
 	ld a,[wd11e]
 	call GetCryData
 	call PlaySound
 	jr .handleMenuInput
+
 .choseArea
 	predef LoadTownMap_Nest ; display pokemon areas
 	ld b,0
@@ -206,6 +210,7 @@ HandlePokedexListMenu:
 	dec c
 	jr nz,.maxSeenPokemonInnerLoop
 	jr .maxSeenPokemonLoop
+
 .storeMaxSeenPokemon
 	ld a,b
 	ld [wDexMaxSeenMon],a
@@ -409,20 +414,25 @@ ShowPokedexDataInternal:
 	push af
 	xor a
 	ld [hTilesetType],a
+
 	coord hl, 0, 0
 	ld de,1
 	lb bc, $64, SCREEN_WIDTH
 	call DrawTileLine ; draw top border
+
 	coord hl, 0, 17
 	ld b, $6f
 	call DrawTileLine ; draw bottom border
+
 	coord hl, 0, 1
 	ld de,20
 	lb bc, $66, $10
 	call DrawTileLine ; draw left border
+
 	coord hl, 19, 1
 	ld b,$67
 	call DrawTileLine ; draw right border
+
 	ld a,$63 ; upper left corner tile
 	Coorda 0, 0
 	ld a,$65 ; upper right corner tile
@@ -431,15 +441,19 @@ ShowPokedexDataInternal:
 	Coorda 0, 17
 	ld a,$6e ; lower right corner tile
 	Coorda 19, 17
+
 	coord hl, 0, 9
 	ld de,PokedexDataDividerLine
 	call PlaceString ; draw horizontal divider line
+
 	coord hl, 9, 6
 	ld de,HeightWeightText
 	call PlaceString
+
 	call GetMonName
 	coord hl, 9, 2
 	call PlaceString
+
 	ld hl,PokedexEntryPointers
 	ld a,[wd11e]
 	dec a
@@ -450,14 +464,17 @@ ShowPokedexDataInternal:
 	ld a,[hli]
 	ld e,a
 	ld d,[hl] ; de = address of pokedex entry
+
 	coord hl, 9, 4
 	call PlaceString ; print species name
+
 	ld h,b
 	ld l,c
 	push de
 	ld a,[wd11e]
 	push af
 	call IndexToPokedex
+
 	coord hl, 2, 8
 	ld a, "№"
 	ld [hli],a
@@ -466,6 +483,7 @@ ShowPokedexDataInternal:
 	ld de,wd11e
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
+
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
 	pop af
@@ -473,10 +491,12 @@ ShowPokedexDataInternal:
 	ld a,[wcf91]
 	ld [wd0b5],a
 	pop de
+
 	push af
 	push bc
 	push de
 	push hl
+
 	call Delay3
 	call GBPalNormal
 	call GetMonHeader ; load pokemon picture location
@@ -484,10 +504,12 @@ ShowPokedexDataInternal:
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
 	ld a,[wcf91]
 	call PlayCry ; play pokemon cry
+
 	pop hl
 	pop de
 	pop bc
 	pop af
+
 	ld a,c
 	and a
 	jp z,.waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description

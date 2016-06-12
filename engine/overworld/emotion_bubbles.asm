@@ -17,11 +17,11 @@ EmotionBubble:
 	ld [wUpdateSpritesEnabled], a
 	ld a, [wd736]
 	bit 6, a ; are the last 4 OAM entries reserved for a shadow or fishing rod?
-	ld hl, wOAMBuffer + $8f
-	ld de, wOAMBuffer + $9f
+	ld hl, wOAMBuffer + 4 * 35 + $3 ; $8f
+	ld de, wOAMBuffer + 4 * 39 + $3 ; $9f
 	jr z, .next
-	ld hl, wOAMBuffer + $7f
-	ld de, wOAMBuffer + $8f
+	ld hl, wOAMBuffer + 4 * 31 + $3 ; $7f
+	ld de, wOAMBuffer + 4 * 35 + $3 ; $8f
 
 ; Copy OAM data 16 bytes forward to make room for emotion bubble OAM data at the
 ; start of the OAM buffer.

@@ -27,10 +27,10 @@ GetPredefPointer:
 	add a
 	add e
 	ld e,a
-	jr nc,.next
+	jr nc, .nocarry
 	inc d
 
-.next
+.nocarry
 	add hl,de
 	ld d,h
 	ld e,l
@@ -60,7 +60,7 @@ PredefPointers::
 	add_predef CopyDownscaledMonTiles
 	add_predef LoadMissableObjects
 	add_predef HealParty
-	add_predef MoveAnimation; 08 play move animation
+	add_predef MoveAnimation
 	add_predef DivideBCDPredef
 	add_predef DivideBCDPredef2
 	add_predef AddBCDPredef
@@ -81,8 +81,8 @@ PredefPointers::
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef GetQuantityOfItemInBag
-	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; for these two, the bank number is actually 0
-	dbw $03,GiveItem
+	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; home bank
+	dbw $03,GiveItem ; home bank
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
 	add_predef PredefShakeScreenVertically
@@ -122,7 +122,7 @@ PredefPointers::
 	add_predef CanLearnTM
 	add_predef TMToMove
 	add_predef _RunPaletteCommand
-	add_predef StarterDex ; 46
+	add_predef StarterDex
 	add_predef _AddPartyMon
 	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar
@@ -147,7 +147,7 @@ PredefPointers::
 	add_predef PickUpItem
 	add_predef PrintMoveType
 	add_predef LoadMovePPs
-	add_predef DrawHP ; 5F
+	add_predef DrawHP
 	add_predef DrawHP2
 	add_predef DisplayElevatorFloorMenu
 	add_predef OaksAideScript
