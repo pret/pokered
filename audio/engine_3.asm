@@ -1,6 +1,6 @@
 ; The third of three duplicated sound engines.
 
-Audio3_UpdateMusic:: ; 7d177 (1f:5177)
+Audio3_UpdateMusic::
 	ld c, CH0
 .loop
 	ld b, $0
@@ -42,7 +42,7 @@ Audio3_UpdateMusic:: ; 7d177 (1f:5177)
 ;	3: a toggle used only by this routine for vibrato
 ;	4: pitchbend flag
 ;	6: dutycycle flag
-Audio3_ApplyMusicAffects: ; 7d1ac (1f:51ac)
+Audio3_ApplyMusicAffects:
 	ld b, $0
 	ld hl, wChannelNoteDelayCounters ; delay until next note
 	add hl, bc
@@ -148,7 +148,7 @@ Audio3_ApplyMusicAffects: ; 7d1ac (1f:51ac)
 ; this routine executes all music commands that take up no time,
 ; like tempo changes, duty changes etc. and doesn't return
 ; until the first note is reached
-Audio3_PlayNextNote: ; 7d244 (1f:5244)
+Audio3_PlayNextNote:
 	ld hl, wChannelVibratoDelayCounterReloadValues
 	add hl, bc
 	ld a, [hl]
@@ -162,7 +162,7 @@ Audio3_PlayNextNote: ; 7d244 (1f:5244)
 	call Audio3_endchannel
 	ret
 
-Audio3_endchannel: ; 7d25a (1f:525a)
+Audio3_endchannel:
 	call Audio3_GetNextMusicByte
 	ld d, a
 	cp $ff ; is this command an endchannel?
@@ -251,7 +251,7 @@ Audio3_endchannel: ; 7d25a (1f:525a)
 	ld [hl], b
 	ret
 
-Audio3_callchannel: ; 7d2e8 (1f:52e8)
+Audio3_callchannel:
 	cp $fd ; is this command a callchannel?
 	jp nz, Audio3_loopchannel ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -288,7 +288,7 @@ Audio3_callchannel: ; 7d2e8 (1f:52e8)
 	set 1, [hl] ; set the call flag
 	jp Audio3_endchannel
 
-Audio3_loopchannel: ; 7d31d (1f:531d)
+Audio3_loopchannel:
 	cp $fe ; is this command a loopchannel?
 	jp nz, Audio3_notetype ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -326,7 +326,7 @@ Audio3_loopchannel: ; 7d31d (1f:531d)
 	ld [hl], b
 	jp Audio3_endchannel
 
-Audio3_notetype: ; 7d358 (1f:5358)
+Audio3_notetype:
 	and $f0
 	cp $d0 ; is this command a notetype?
 	jp nz, Audio3_toggleperfectpitch ; no
@@ -370,7 +370,7 @@ Audio3_notetype: ; 7d358 (1f:5358)
 .noiseChannel
 	jp Audio3_endchannel
 
-Audio3_toggleperfectpitch: ; 7d397 (1f:5397)
+Audio3_toggleperfectpitch:
 	ld a, d
 	cp $e8 ; is this command a toggleperfectpitch?
 	jr nz, Audio3_vibrato ; no
@@ -382,7 +382,7 @@ Audio3_toggleperfectpitch: ; 7d397 (1f:5397)
 	ld [hl], a ; flip bit 0 of wChannelFlags1
 	jp Audio3_endchannel
 
-Audio3_vibrato: ; 7d3a9 (1f:53a9)
+Audio3_vibrato:
 	cp $ea ; is this command a vibrato?
 	jr nz, Audio3_pitchbend ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -416,7 +416,7 @@ Audio3_vibrato: ; 7d3a9 (1f:53a9)
 	ld [hl], a ; store depth as both high and low nibbles
 	jp Audio3_endchannel
 
-Audio3_pitchbend: ; 7d3e1 (1f:53e1)
+Audio3_pitchbend:
 	cp $eb ; is this command a pitchbend?
 	jr nz, Audio3_duty ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -447,7 +447,7 @@ Audio3_pitchbend: ; 7d3e1 (1f:53e1)
 	ld d, a
 	jp Audio3_notelength
 
-Audio3_duty: ; 7d419 (1f:5419)
+Audio3_duty:
 	cp $ec ; is this command a duty?
 	jr nz, Audio3_tempo ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -460,7 +460,7 @@ Audio3_duty: ; 7d419 (1f:5419)
 	ld [hl], a ; store duty
 	jp Audio3_endchannel
 
-Audio3_tempo: ; 7d42e (1f:542e)
+Audio3_tempo:
 	cp $ed ; is this command a tempo?
 	jr nz, Audio3_stereopanning ; no
 	ld a, c ; yes
@@ -489,7 +489,7 @@ Audio3_tempo: ; 7d42e (1f:542e)
 .musicChannelDone
 	jp Audio3_endchannel
 
-Audio3_stereopanning: ; 7d46e (1f:546e)
+Audio3_stereopanning:
 	cp $ee ; is this command a stereopanning?
 	jr nz, Audio3_unknownmusic0xef ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -497,7 +497,7 @@ Audio3_stereopanning: ; 7d46e (1f:546e)
 	jp Audio3_endchannel
 
 ; this appears to never be used
-Audio3_unknownmusic0xef: ; 7d47b (1f:547b)
+Audio3_unknownmusic0xef:
 	cp $ef ; is this command an unknownmusic0xef?
 	jr nz, Audio3_dutycycle ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -514,7 +514,7 @@ Audio3_unknownmusic0xef: ; 7d47b (1f:547b)
 .skip
 	jp Audio3_endchannel
 
-Audio3_dutycycle: ; 7d49a (1f:549a)
+Audio3_dutycycle:
 	cp $fc ; is this command a dutycycle?
 	jr nz, Audio3_volume ; no
 	call Audio3_GetNextMusicByte ; yes
@@ -531,14 +531,14 @@ Audio3_dutycycle: ; 7d49a (1f:549a)
 	set 6, [hl] ; set duty flag
 	jp Audio3_endchannel
 
-Audio3_volume: ; 7d4b8 (1f:54b8)
+Audio3_volume:
 	cp $f0 ; is this command a volume?
 	jr nz, Audio3_executemusic ; no
 	call Audio3_GetNextMusicByte ; yes
 	ld [rNR50], a ; store volume
 	jp Audio3_endchannel
 
-Audio3_executemusic: ; 7d4c4 (1f:54c4)
+Audio3_executemusic:
 	cp $f8 ; is this command an executemusic?
 	jr nz, Audio3_octave ; no
 	ld b, $0 ; yes
@@ -547,7 +547,7 @@ Audio3_executemusic: ; 7d4c4 (1f:54c4)
 	set 0, [hl]
 	jp Audio3_endchannel
 
-Audio3_octave: ; 7d4d3 (1f:54d3)
+Audio3_octave:
 	and $f0
 	cp $e0 ; is this command an octave?
 	jr nz, Audio3_unknownsfx0x20 ; no
@@ -559,7 +559,7 @@ Audio3_octave: ; 7d4d3 (1f:54d3)
 	ld [hl], a ; store low nibble as octave
 	jp Audio3_endchannel
 
-Audio3_unknownsfx0x20: ; 7d4e6 (1f:54e6)
+Audio3_unknownsfx0x20:
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Audio3_unknownsfx0x10 ; no
 	ld a, c
@@ -604,7 +604,7 @@ Audio3_unknownsfx0x20: ; 7d4e6 (1f:54e6)
 	call Audio3_7d6bf
 	ret
 
-Audio3_unknownsfx0x10: ; 7d533 (1f:5533)
+Audio3_unknownsfx0x10:
 	ld a, c
 	cp CH4
 	jr c, Audio3_note ; if not a sfx
@@ -620,7 +620,7 @@ Audio3_unknownsfx0x10: ; 7d533 (1f:5533)
 	ld [rNR10], a
 	jp Audio3_endchannel
 
-Audio3_note: ; 7d54f (1f:554f)
+Audio3_note:
 	ld a, c
 	cp CH3
 	jr nz, Audio3_notelength ; if not noise channel
@@ -639,7 +639,7 @@ Audio3_note: ; 7d54f (1f:554f)
 	push bc
 	jr asm_7d571
 
-Audio3_dnote: ; 7d569 (1f:5569)
+Audio3_dnote:
 	ld a, d
 	and $f
 	push af
@@ -656,7 +656,7 @@ asm_7d571
 	pop bc
 	pop de
 
-Audio3_notelength: ; 7d57e (1f:557e)
+Audio3_notelength:
 	ld a, d
 	push af
 	and $f
@@ -714,7 +714,7 @@ Audio3_notelength: ; 7d57e (1f:557e)
 	pop hl
 	ret
 
-Audio3_notepitch: ; 7d5dc (1f:55dc)
+Audio3_notepitch:
 	pop af
 	and $f0
 	cp $c0 ; compare to rest
@@ -807,7 +807,7 @@ Audio3_notepitch: ; 7d5dc (1f:55dc)
 	call Audio3_7d6bf
 	ret
 
-Audio3_7d66c: ; 7d66c (1f:566c)
+Audio3_7d66c:
 	ld b, $0
 	ld hl, Unknown_7db9b
 	add hl, bc
@@ -841,7 +841,7 @@ Audio3_7d66c: ; 7d66c (1f:566c)
 	ld [rNR51], a
 	ret
 
-Audio3_7d69d: ; 7d69d (1f:569d)
+Audio3_7d69d:
 	ld b, $0
 	ld hl, wChannelNoteDelayCounters
 	add hl, bc
@@ -865,7 +865,7 @@ Audio3_7d69d: ; 7d69d (1f:569d)
 	ld [hl], d
 	ret
 
-Audio3_7d6bf: ; 7d6bf (1f:56bf)
+Audio3_7d6bf:
 	ld a, c
 	cp CH2
 	jr z, .channel3
@@ -916,7 +916,7 @@ Audio3_7d6bf: ; 7d6bf (1f:56bf)
 	call Audio3_7d729
 	ret
 
-Audio3_7d707: ; 7d707 (1f:5707)
+Audio3_7d707:
 	call Audio3_7d759
 	jr nc, .asm_7d71f
 	ld d, $0
@@ -937,7 +937,7 @@ Audio3_7d707: ; 7d707 (1f:5707)
 .asm_7d728
 	ret
 
-Audio3_7d729: ; 7d729 (1f:5729)
+Audio3_7d729:
 	call Audio3_7d759
 	jr nc, .asm_7d73a
 	ld a, [wFrequencyModifier]
@@ -953,7 +953,7 @@ Audio3_7d729: ; 7d729 (1f:5729)
 .asm_7d73a
 	ret
 
-Audio3_7d73b: ; 7d73b (1f:573b)
+Audio3_7d73b:
 	call Audio3_7d759
 	jr nc, .asm_7d756
 	ld hl, wChannelCommandPointers
@@ -976,7 +976,7 @@ Audio3_7d73b: ; 7d73b (1f:573b)
 	ccf
 	ret
 
-Audio3_7d759: ; 7d759 (1f:5759)
+Audio3_7d759:
 	ld a, [wChannelSoundIDs + CH4]
 	cp $14
 	jr nc, .asm_7d762
@@ -993,7 +993,7 @@ Audio3_7d759: ; 7d759 (1f:5759)
 	scf
 	ret
 
-Audio3_ApplyPitchBend: ; 7d76d (1f:576d)
+Audio3_ApplyPitchBend:
 	ld hl, wChannelFlags1
 	add hl, bc
 	bit 5, [hl]
@@ -1095,7 +1095,7 @@ Audio3_ApplyPitchBend: ; 7d76d (1f:576d)
 	res 5, [hl]
 	ret
 
-Audio3_7d803: ; 7d803 (1f:5803)
+Audio3_7d803:
 	ld hl, wChannelPitchBendCurrentFrequencyHighBytes
 	add hl, bc
 	ld [hl], d
@@ -1184,7 +1184,7 @@ Audio3_7d803: ; 7d803 (1f:5803)
 	ld [hl], a
 	ret
 
-Audio3_ApplyDutyCycle: ; 7d881 (1f:5881)
+Audio3_ApplyDutyCycle:
 	ld b, $0
 	ld hl, wChannelDutyCycles
 	add hl, bc
@@ -1202,7 +1202,7 @@ Audio3_ApplyDutyCycle: ; 7d881 (1f:5881)
 	ld [hl], a
 	ret
 
-Audio3_GetNextMusicByte: ; 7d899 (1f:5899)
+Audio3_GetNextMusicByte:
 	ld d, $0
 	ld a, c
 	add a
@@ -1220,7 +1220,7 @@ Audio3_GetNextMusicByte: ; 7d899 (1f:5899)
 	ld [hl], d
 	ret
 
-Audio3_7d8ac: ; 7d8ac (1f:58ac)
+Audio3_7d8ac:
 	ld a, c
 	ld hl, Unknown_7db8b
 	add l
@@ -1234,7 +1234,7 @@ Audio3_7d8ac: ; 7d8ac (1f:58ac)
 	ld h, $ff
 	ret
 
-Audio3_7d8bb: ; 7d8bb (1f:58bb)
+Audio3_7d8bb:
 	ld h, $0
 .loop
 	srl a
@@ -1249,7 +1249,7 @@ Audio3_7d8bb: ; 7d8bb (1f:58bb)
 .done
 	ret
 
-Audio3_7d8cc: ; 7d8cc (1f:58cc)
+Audio3_7d8cc:
 	ld h, $0
 	ld l, a
 	add hl, hl
@@ -1274,7 +1274,7 @@ Audio3_7d8cc: ; 7d8cc (1f:58cc)
 	ld d, a
 	ret
 
-Audio3_PlaySound:: ; 7d8ea (1f:58ea)
+Audio3_PlaySound::
 	ld [wSoundID], a
 	cp $ff
 	jp z, Audio3_7daa8
@@ -1357,7 +1357,7 @@ Audio3_PlaySound:: ; 7d8ea (1f:58ea)
 	ld [rNR50], a
 	jp Audio3_7db03
 
-Audio3_7d9c2: ; 7d9c2 (1f:59c2)
+Audio3_7d9c2:
 	ld l, a
 	ld e, a
 	ld h, $0
@@ -1508,7 +1508,7 @@ Audio3_7d9c2: ; 7d9c2 (1f:59c2)
 	dec c
 	jp .asm_7d9db
 
-Audio3_7daa8: ; 7daa8 (1f:5aa8)
+Audio3_7daa8:
 	ld a, $80
 	ld [rNR52], a
 	ld [rNR30], a
@@ -1548,7 +1548,7 @@ Audio3_7daa8: ; 7daa8 (1f:5aa8)
 	ret
 
 ; fills d bytes at hl with a
-FillAudioRAM3: ; 7dafd (1f:5afd)
+FillAudioRAM3:
 	ld b, d
 .loop
 	ld [hli], a
@@ -1556,7 +1556,7 @@ FillAudioRAM3: ; 7dafd (1f:5afd)
 	jr nz, .loop
 	ret
 
-Audio3_7db03: ; 7db03 (1f:5b03)
+Audio3_7db03:
 	ld a, [wSoundID]
 	ld l, a
 	ld e, a
@@ -1651,22 +1651,22 @@ Audio3_7db03: ; 7db03 (1f:5b03)
 .asm_7db89
 	ret
 
-Noise3_endchannel: ; 7db8a (1f:5b8a)
+Noise3_endchannel:
 	endchannel
 
-Unknown_7db8b: ; 7db8b (1f:5b8b)
+Unknown_7db8b:
 	db $10, $15, $1A, $1F ; channels 0-3
 	db $10, $15, $1A, $1F ; channels 4-7
 
-Unknown_7db93: ; 7db93 (1f:5b93)
+Unknown_7db93:
 	db $EE, $DD, $BB, $77 ; channels 0-3
 	db $EE, $DD, $BB, $77 ; channels 4-7
 
-Unknown_7db9b: ; 7db9b (1f:5b9b)
+Unknown_7db9b:
 	db $11, $22, $44, $88 ; channels 0-3
 	db $11, $22, $44, $88 ; channels 4-7
 
-Audio3_Pitches: ; 7dba3 (1f:5ba3)
+Audio3_Pitches:
 	dw $F82C ; C_
 	dw $F89D ; C#
 	dw $F907 ; D_

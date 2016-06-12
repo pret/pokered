@@ -1,4 +1,4 @@
-Music_Pokecenter_Ch1:: ; be56 (2:7e56)
+Music_Pokecenter_Ch1::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -149,7 +149,7 @@ Music_Pokecenter_branch_be61::
 	loopchannel 0, Music_Pokecenter_branch_be61
 
 
-Music_Pokecenter_Ch2:: ; bef9 (2:7ef9)
+Music_Pokecenter_Ch2::
 	vibrato 8, 2, 5
 
 Music_Pokecenter_branch_befc::
@@ -248,7 +248,7 @@ Music_Pokecenter_branch_bf60::
 	endchannel
 
 
-Music_Pokecenter_Ch3:: ; bf70 (2:7f70)
+Music_Pokecenter_Ch3::
 	notetype 12, 1, 0
 
 Music_Pokecenter_branch_bf72::

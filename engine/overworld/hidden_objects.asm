@@ -1,4 +1,4 @@
-IsPlayerOnDungeonWarp: ; 46981 (11:6981)
+IsPlayerOnDungeonWarp:
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
@@ -15,7 +15,7 @@ IsPlayerOnDungeonWarp: ; 46981 (11:6981)
 	ret
 
 ; if a hidden object was found, stores $00 in [$ffee], else stores $ff
-CheckForHiddenObject: ; 469a0 (11:69a0)
+CheckForHiddenObject:
 	ld hl, $ffeb
 	xor a
 	ld [hli], a
@@ -86,7 +86,7 @@ CheckForHiddenObject: ; 469a0 (11:69a0)
 
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
 ; [hCoordsInFrontOfPlayerMatch] = $00 if they match, $ff if they don't match
-CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
+CheckIfCoordsInFrontOfPlayerMatch:
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
 	jr z, .facingUp

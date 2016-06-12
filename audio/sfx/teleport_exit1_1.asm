@@ -1,4 +1,4 @@
-SFX_Teleport_Exit1_1_Ch1: ; 8595 (2:4595)
+SFX_Teleport_Exit1_1_Ch1:
 	duty 1
 	unknownsfx0x10 23
 	unknownsfx0x20 15, 215, 0, 5

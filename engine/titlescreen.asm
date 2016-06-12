@@ -1,9 +1,9 @@
 ; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
-CopyFixedLengthText: ; 42b1 (1:42b1)
+CopyFixedLengthText:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
+SetDefaultNamesBeforeTitlescreen:
 	ld hl, NintenText
 	ld de, wPlayerName
 	call CopyFixedLengthText
@@ -21,7 +21,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 
-DisplayTitleScreen: ; 42dd (1:42dd)
+DisplayTitleScreen:
 	call GBPalWhiteOut
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -158,7 +158,7 @@ ENDC
 	call .ScrollTitleScreenPokemonLogo
 	jr .bouncePokemonLogoLoop
 
-.TitleScreenPokemonLogoYScrolls: ; 43db (1:43db)
+.TitleScreenPokemonLogoYScrolls:
 ; Controls the bouncing effect of the Pokemon logo on the title screen
 	db -4,16  ; y scroll amount, number of times to scroll
 	db 3,4
@@ -257,7 +257,7 @@ ENDC
 .doClearSaveDialogue
 	jpba DoClearSaveDialogue
 
-TitleScreenPickNewMon: ; 4496 (1:4496)
+TitleScreenPickNewMon:
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
 
@@ -285,14 +285,14 @@ TitleScreenPickNewMon: ; 4496 (1:4496)
 	callba TitleScroll
 	ret
 
-TitleScreenScrollInMon: ; 44c1 (1:44c1)
+TitleScreenScrollInMon:
 	ld d, 0 ; scroll in
 	callba TitleScroll
 	xor a
 	ld [hWY], a
 	ret
 
-ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
+ScrollTitleScreenGameVersion:
 .wait
 	ld a, [rLY]
 	cp l
@@ -307,7 +307,7 @@ ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
 	jr z, .wait2
 	ret
 
-DrawPlayerCharacter: ; 44dd (1:44dd)
+DrawPlayerCharacter:
 	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
 	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
@@ -344,30 +344,30 @@ DrawPlayerCharacter: ; 44dd (1:44dd)
 	jr nz, .loop
 	ret
 
-ClearBothBGMaps: ; 4519 (1:4519)
+ClearBothBGMaps:
 	ld hl, vBGMap0
 	ld bc, $400 * 2
 	ld a, " "
 	jp FillMemory
 
-LoadTitleMonSprite: ; 4524 (1:4524)
+LoadTitleMonSprite:
 	ld [wcf91], a
 	ld [wd0b5], a
 	coord hl, 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
-TitleScreenCopyTileMapToVRAM: ; 4533 (1:4533)
+TitleScreenCopyTileMapToVRAM:
 	ld [H_AUTOBGTRANSFERDEST + 1], a
 	jp Delay3
 
-LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
+LoadCopyrightAndTextBoxTiles:
 	xor a
 	ld [hWY], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
-LoadCopyrightTiles: ; 4541 (1:4541)
+LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
@@ -376,7 +376,7 @@ LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, CopyrightTextString
 	jp PlaceString
 
-CopyrightTextString: ; 4556 (1:4556)
+CopyrightTextString:
 	db   $60,$61,$62,$61,$63,$61,$64,$7F,$65,$66,$67,$68,$69,$6A             ; ©'95.'96.'98 Nintendo
 	next $60,$61,$62,$61,$63,$61,$64,$7F,$6B,$6C,$6D,$6E,$6F,$70,$71,$72     ; ©'95.'96.'98 Creatures inc.
 	next $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; ©'95.'96.'98 GAME FREAK inc.
@@ -385,13 +385,13 @@ CopyrightTextString: ; 4556 (1:4556)
 INCLUDE "data/title_mons.asm"
 
 ; prints version text (red, blue)
-PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
+PrintGameVersionOnTitleScreen:
 	coord hl, 7, 8
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
-VersionOnTitleScreenText: ; 45a1 (1:45a1)
+VersionOnTitleScreenText:
 IF DEF(_RED)
 	db $60,$61,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
 ENDC

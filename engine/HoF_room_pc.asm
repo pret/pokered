@@ -1,4 +1,4 @@
-HallOfFamePC: ; 7405c (1d:405c)
+HallOfFamePC:
 	callba AnimateHallOfFame
 	call ClearScreen
 	ld c, 100
@@ -33,7 +33,7 @@ HallOfFamePC: ; 7405c (1d:405c)
 	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
 
-FadeInCreditsText: ; 740ba (1d:40ba)
+FadeInCreditsText:
 	ld hl, HoFGBPalettes
 	ld b, 4
 .asm_740bf
@@ -45,7 +45,7 @@ FadeInCreditsText: ; 740ba (1d:40ba)
 	jr nz, .asm_740bf
 	ret
 
-DisplayCreditsMon: ; 740cb (1d:40cb)
+DisplayCreditsMon:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call SaveScreenTilesToBuffer1
@@ -106,7 +106,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 
 INCLUDE "data/credit_mons.asm"
 
-ScrollCreditsMonLeft: ; 74140 (1d:4140)
+ScrollCreditsMonLeft:
 	ld h, b
 	ld l, $20
 	call ScrollCreditsMonLeft_SetSCX
@@ -118,7 +118,7 @@ ScrollCreditsMonLeft: ; 74140 (1d:4140)
 	ld b, a
 	ret
 
-ScrollCreditsMonLeft_SetSCX: ; 74152 (1d:4152)
+ScrollCreditsMonLeft_SetSCX:
 	ld a, [rLY]
 	cp l
 	jr nz, ScrollCreditsMonLeft_SetSCX
@@ -130,13 +130,13 @@ ScrollCreditsMonLeft_SetSCX: ; 74152 (1d:4152)
 	jr z, .loop
 	ret
 
-HoFGBPalettes: ; 74160 (1d:4160)
+HoFGBPalettes:
 	db %11000000
 	db %11010000
 	db %11100000
 	db %11110000
 
-CreditsCopyTileMapToVRAM: ; 74164 (1d:4164)
+CreditsCopyTileMapToVRAM:
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
@@ -145,7 +145,7 @@ CreditsCopyTileMapToVRAM: ; 74164 (1d:4164)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-ZeroMemory: ; 74171 (1d:4171)
+ZeroMemory:
 ; zero bc bytes at hl
 	ld [hl], 0
 	inc hl
@@ -156,18 +156,18 @@ ZeroMemory: ; 74171 (1d:4171)
 	jr nz, ZeroMemory
 	ret
 
-FillFourRowsWithBlack: ; 7417b (1d:417b)
+FillFourRowsWithBlack:
 	ld bc, SCREEN_WIDTH * 4
 	ld a, $7e
 	jp FillMemory
 
-FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
+FillMiddleOfScreenWithWhite:
 	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 	ld a, " "
 	jp FillMemory
 
-Credits: ; 7418e (1d:418e)
+Credits:
 	ld de, CreditsOrder
 	push de
 .nextCreditsScreen
@@ -256,7 +256,7 @@ Credits: ; 7418e (1d:418e)
 	call PlaceString
 	jp FadeInCreditsText
 
-TheEndTextString: ; 74229 (1d:4229)
+TheEndTextString:
 ; "T H E  E N D"
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"

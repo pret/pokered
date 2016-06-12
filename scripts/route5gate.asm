@@ -1,21 +1,21 @@
-Route5GateScript: ; 1df33 (7:5f33)
+Route5GateScript:
 	call EnableAutoTextBoxDrawing
 	ld a, [wRoute5GateCurScript]
 	ld hl, Route5GateScriptPointers
 	jp CallFunctionInTable
 
-Route5GateScriptPointers: ; 1df3f (7:5f3f)
+Route5GateScriptPointers:
 	dw Route5GateScript0
 	dw Route5GateScript1
 
-Route5GateScript_1df43: ; 1df43 (7:5f43)
+Route5GateScript_1df43:
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	jp StartSimulatingJoypadStates
 
-Route5GateScript0: ; 1df50 (7:5f50)
+Route5GateScript0:
 	ld a, [wd728]
 	bit 6, a
 	ret nz
@@ -45,12 +45,12 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	set 6, [hl]
 	ret
 
-CoordsData_1df8f: ; 1df8f (7:5f8f)
+CoordsData_1df8f:
 	db 3,3
 	db 3,4
 	db $ff
 
-Route5GateScript1: ; 1df94 (7:5f94)
+Route5GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -60,15 +60,15 @@ Route5GateScript1: ; 1df94 (7:5f94)
 	ld [wRoute5GateCurScript], a
 	ret
 
-Route5GateTextPointers: ; 1dfa4 (7:5fa4)
+Route5GateTextPointers:
 	dw Route5GateText1
 	dw Route5GateText2
 	dw Route5GateText3
 
-Route8GateText1: ; 1dfaa (7:5faa)
-Route7GateText1: ; 1dfaa (7:5faa)
-Route6GateText1: ; 1dfaa (7:5faa)
-Route5GateText1: ; 1dfaa (7:5faa)
+Route8GateText1:
+Route7GateText1:
+Route6GateText1:
+Route5GateText1:
 	TX_ASM
 	ld a, [wd728]
 	bit 6, a
@@ -94,23 +94,23 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	call PrintText
 	jp TextScriptEnd
 
-Route8GateText2: ; 1dfe7 (7:5fe7)
-Route7GateText2: ; 1dfe7 (7:5fe7)
-Route6GateText2: ; 1dfe7 (7:5fe7)
-Route5GateText2: ; 1dfe7 (7:5fe7)
+Route8GateText2:
+Route7GateText2:
+Route6GateText2:
+Route5GateText2:
 	TX_FAR _SaffronGateText_1dfe7
 	db "@"
 
-Route8GateText3: ; 1dfec (7:5fec)
-Route7GateText3: ; 1dfec (7:5fec)
-Route6GateText3: ; 1dfec (7:5fec)
-Route5GateText3: ; 1dfec (7:5fec)
+Route8GateText3:
+Route7GateText3:
+Route6GateText3:
+Route5GateText3:
 	TX_FAR _SaffronGateText_8aaa9
 	db $11
 	TX_FAR _SaffronGateText_1dff1
 	db "@"
 
-SaffronGateText_1dff6: ; 1dff6 (7:5ff6)
+SaffronGateText_1dff6:
 	TX_FAR _SaffronGateText_1dff6
 	db "@"
 

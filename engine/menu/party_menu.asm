@@ -17,14 +17,14 @@
 ; f6: health returned
 ; f7: revitalized
 ; f8: leveled up
-DrawPartyMenu_: ; 12cd2 (4:6cd2)
+DrawPartyMenu_:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	call UpdateSprites
 	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
-RedrawPartyMenu_: ; 12ce3 (4:6ce3)
+RedrawPartyMenu_:
 	ld a,[wPartyMenuTypeOrMessageID]
 	cp a,SWAP_MONS_PARTY_MENU
 	jp z,.printMessage
@@ -234,7 +234,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call PrintText
 	jr .done
 
-PartyMenuItemUseMessagePointers: ; 12e61 (4:6e61)
+PartyMenuItemUseMessagePointers:
 	dw AntidoteText
 	dw BurnHealText
 	dw IceHealText
@@ -245,7 +245,7 @@ PartyMenuItemUseMessagePointers: ; 12e61 (4:6e61)
 	dw ReviveText
 	dw RareCandyText
 
-PartyMenuMessagePointers: ; 12e73 (4:6e73)
+PartyMenuMessagePointers:
 	dw PartyMenuNormalText
 	dw PartyMenuItemUseText
 	dw PartyMenuBattleText
@@ -253,65 +253,65 @@ PartyMenuMessagePointers: ; 12e73 (4:6e73)
 	dw PartyMenuSwapMonText
 	dw PartyMenuItemUseText
 
-PartyMenuNormalText: ; 12e7f (4:6e7f)
+PartyMenuNormalText:
 	TX_FAR _PartyMenuNormalText
 	db "@"
 
-PartyMenuItemUseText: ; 12e84 (4:6e84)
+PartyMenuItemUseText:
 	TX_FAR _PartyMenuItemUseText
 	db "@"
 
-PartyMenuBattleText: ; 12e89 (4:6e89)
+PartyMenuBattleText:
 	TX_FAR _PartyMenuBattleText
 	db "@"
 
-PartyMenuUseTMText: ; 12e8e (4:6e8e)
+PartyMenuUseTMText:
 	TX_FAR _PartyMenuUseTMText
 	db "@"
 
-PartyMenuSwapMonText: ; 12e93 (4:6e93)
+PartyMenuSwapMonText:
 	TX_FAR _PartyMenuSwapMonText
 	db "@"
 
-PotionText: ; 12e98 (4:6e98)
+PotionText:
 	TX_FAR _PotionText
 	db "@"
 
-AntidoteText: ; 12e9d (4:6e9d)
+AntidoteText:
 	TX_FAR _AntidoteText
 	db "@"
 
-ParlyzHealText: ; 12ea2 (4:6ea2)
+ParlyzHealText:
 	TX_FAR _ParlyzHealText
 	db "@"
 
-BurnHealText: ; 12ea7 (4:6ea7)
+BurnHealText:
 	TX_FAR _BurnHealText
 	db "@"
 
-IceHealText: ; 12eac (4:6eac)
+IceHealText:
 	TX_FAR _IceHealText
 	db "@"
 
-AwakeningText: ; 12eb1 (4:6eb1)
+AwakeningText:
 	TX_FAR _AwakeningText
 	db "@"
 
-FullHealText: ; 12eb6 (4:6eb6)
+FullHealText:
 	TX_FAR _FullHealText
 	db "@"
 
-ReviveText: ; 12ebb (4:6ebb)
+ReviveText:
 	TX_FAR _ReviveText
 	db "@"
 
-RareCandyText: ; 12ec0 (4:6ec0)
+RareCandyText:
 	TX_FAR _RareCandyText
 	db $0B
 	db $06
 	db "@"
 
-SetPartyMenuHPBarColor: ; 12ec7 (4:6ec7)
+SetPartyMenuHPBarColor:
 	ld hl, wPartyMenuHPBarColors
 	ld a, [wWhichPartyMenuHPBar]
 	ld c, a

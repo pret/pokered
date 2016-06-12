@@ -2,7 +2,7 @@ MOVE_GENGAR_RIGHT   EQU $00
 MOVE_GENGAR_LEFT    EQU $01
 MOVE_NIDORINO_RIGHT EQU $ff
 
-PlayIntro: ; 41682 (10:5682)
+PlayIntro:
 	xor a
 	ld [hJoyHeld], a
 	inc a
@@ -17,7 +17,7 @@ PlayIntro: ; 41682 (10:5682)
 	call DelayFrame
 	ret
 
-PlayIntroScene: ; 4169d (10:569d)
+PlayIntroScene:
 	ld b, SET_PAL_NIDORINO_INTRO
 	call RunPaletteCommand
 	ld a, %11100100
@@ -137,7 +137,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld de, IntroNidorinoAnimation7
 	jp AnimateIntroNidorino
 
-AnimateIntroNidorino: ; 41793 (10:5793)
+AnimateIntroNidorino:
 	ld a, [de]
 	cp $50
 	ret z
@@ -154,7 +154,7 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 	inc de
 	jr AnimateIntroNidorino
 
-UpdateIntroNidorinoOAM: ; 417ae (10:57ae)
+UpdateIntroNidorinoOAM:
 	ld hl, wOAMBuffer
 	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
@@ -173,7 +173,7 @@ UpdateIntroNidorinoOAM: ; 417ae (10:57ae)
 	jr nz, .loop
 	ret
 
-InitIntroNidorinoOAM: ; 417c7 (10:57c7)
+InitIntroNidorinoOAM:
 	ld hl, wOAMBuffer
 	ld d, 0
 .loop
@@ -202,17 +202,17 @@ InitIntroNidorinoOAM: ; 417c7 (10:57c7)
 	jr nz, .loop
 	ret
 
-IntroClearScreen: ; 417f0 (10:57f0)
+IntroClearScreen:
 	ld hl, vBGMap1
 	ld bc, $240
 	jr IntroClearCommon
 
-IntroClearMiddleOfScreen: ; 417f8 (10:57f8)
+IntroClearMiddleOfScreen:
 ; clear the area of the tile map between the black bars on the top and bottom
 	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
 
-IntroClearCommon: ; 417fe (10:57fe)
+IntroClearCommon:
 	ld [hl], $0
 	inc hl
 	dec bc
@@ -221,7 +221,7 @@ IntroClearCommon: ; 417fe (10:57fe)
 	jr nz, IntroClearCommon
 	ret
 
-IntroPlaceBlackTiles: ; 41807 (10:5807)
+IntroPlaceBlackTiles:
 	ld a, $1
 .loop
 	ld [hli], a
@@ -229,7 +229,7 @@ IntroPlaceBlackTiles: ; 41807 (10:5807)
 	jr nz, .loop
 	ret
 
-IntroMoveMon: ; 4180e (10:580e)
+IntroMoveMon:
 ; d = number of times to move the mon (2 pixels each time)
 ; e: $00 = move Gengar right, $01 = move Gengar left, $ff = move Nidorino right
 	ld a, e
@@ -266,20 +266,20 @@ IntroMoveMon: ; 4180e (10:580e)
 	jr nz, IntroMoveMon
 	ret
 
-IntroCopyTiles: ; 4183f (10:583f)
+IntroCopyTiles:
 	coord hl, 13, 7
 
-CopyTileIDsFromList_ZeroBaseTileID: ; 41842 (10:5842)
+CopyTileIDsFromList_ZeroBaseTileID:
 	ld c, 0
 	predef_jump CopyTileIDsFromList
 
-PlayMoveSoundB: ; 41849 (10:5849)
+PlayMoveSoundB:
 ; unused
 	predef GetMoveSoundB
 	ld a, b
 	jp PlaySound
 
-LoadIntroGraphics: ; 41852 (10:5852)
+LoadIntroGraphics:
 	ld hl, FightIntroBackMon
 	ld de, vChars2
 	ld bc, FightIntroBackMonEnd - FightIntroBackMon
@@ -301,7 +301,7 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
-PlayShootingStar: ; 4188a (10:588a)
+PlayShootingStar:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
@@ -338,7 +338,7 @@ PlayShootingStar: ; 4188a (10:588a)
 	call ClearSprites
 	jp Delay3
 
-IntroDrawBlackBars: ; 418e9 (10:58e9)
+IntroDrawBlackBars:
 ; clear the screen and draw black bars on the top and bottom
 	call IntroClearScreen
 	coord hl, 0, 0
@@ -354,14 +354,14 @@ IntroDrawBlackBars: ; 418e9 (10:58e9)
 	ld c, $80
 	jp IntroPlaceBlackTiles
 
-EmptyFunc4: ; 4190c (10:590c)
+EmptyFunc4:
 	ret
 
-IntroNidorinoAnimation0: ; 4190d (10:590d)
+IntroNidorinoAnimation0:
 	db 0, 0
 	db $50
 
-IntroNidorinoAnimation1: ; 41910 (10:5910)
+IntroNidorinoAnimation1:
 ; This is a sequence of pixel movements for part of the Nidorino animation. This
 ; list describes how Nidorino should hop.
 ; First byte is y movement, second byte is x movement
@@ -372,7 +372,7 @@ IntroNidorinoAnimation1: ; 41910 (10:5910)
 	db  2, 2
 	db $50 ; list terminator
 
-IntroNidorinoAnimation2: ; 4191b (10:591b)
+IntroNidorinoAnimation2:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db  0,  0
@@ -382,7 +382,7 @@ IntroNidorinoAnimation2: ; 4191b (10:591b)
 	db  2, -2
 	db $50 ; list terminator
 
-IntroNidorinoAnimation3: ; 41926 (10:5926)
+IntroNidorinoAnimation3:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db   0, 0
@@ -392,7 +392,7 @@ IntroNidorinoAnimation3: ; 41926 (10:5926)
 	db  12, 6
 	db $50 ; list terminator
 
-IntroNidorinoAnimation4: ; 41931 (10:5931)
+IntroNidorinoAnimation4:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db  0,  0
@@ -402,7 +402,7 @@ IntroNidorinoAnimation4: ; 41931 (10:5931)
 	db  8, -4
 	db $50 ; list terminator
 
-IntroNidorinoAnimation5: ; 4193c (10:593c)
+IntroNidorinoAnimation5:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db  0, 0
@@ -412,7 +412,7 @@ IntroNidorinoAnimation5: ; 4193c (10:593c)
 	db  8, 4
 	db $50 ; list terminator
 
-IntroNidorinoAnimation6: ; 41947 (10:5947)
+IntroNidorinoAnimation6:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db 0, 0
@@ -421,7 +421,7 @@ IntroNidorinoAnimation6: ; 41947 (10:5947)
 	db 0, 0
 	db $50 ; list terminator
 
-IntroNidorinoAnimation7: ; 41950 (10:5950)
+IntroNidorinoAnimation7:
 ; This is a sequence of pixel movements for part of the Nidorino animation.
 ; First byte is y movement, second byte is x movement
 	db -8, -16
@@ -430,17 +430,17 @@ IntroNidorinoAnimation7: ; 41950 (10:5950)
 	db -4, -10
 	db $50 ; list terminator
 
-GameFreakIntro: ; 41959 (10:5959)
+GameFreakIntro:
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile
 GameFreakIntroEnd:
 
-FightIntroBackMon: ; 41a99 (10:5a99)
+FightIntroBackMon:
 	INCBIN "gfx/intro_fight.2bpp"
 FightIntroBackMonEnd:
 
-FightIntroFrontMon: ; 42099 (10:6099)
+FightIntroFrontMon:
 
 IF DEF(_RED)
 	INCBIN "gfx/red/intro_nido_1.6x6.2bpp"

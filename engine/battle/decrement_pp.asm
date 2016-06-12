@@ -1,4 +1,4 @@
-DecrementPP: ; 68000 (1a:4000)
+DecrementPP:
 ; after using a move, decrement pp in battle and (if not transformed?) in party
 	ld a, [de]
 	cp a, STRUGGLE

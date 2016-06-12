@@ -1,4 +1,4 @@
-TechnicalMachinePrices: ; 7bfa7 (1e:7fa7)
+TechnicalMachinePrices:
 ; In thousands (nybbles).
 	dn 3, 2  ; TM_01, TM_02
 	dn 2, 1  ; TM_03, TM_04

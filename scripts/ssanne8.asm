@@ -1,4 +1,4 @@
-SSAnne8Script: ; 61976 (18:5976)
+SSAnne8Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, SSAnne8TrainerHeaders
 	ld de, SSAnne8ScriptPointers
@@ -7,12 +7,12 @@ SSAnne8Script: ; 61976 (18:5976)
 	ld [wSSAnne8CurScript], a
 	ret
 
-SSAnne8ScriptPointers: ; 61989 (18:5989)
+SSAnne8ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-SSAnne8TextPointers: ; 6198f (18:598f)
+SSAnne8TextPointers:
 	dw SSAnne8Text1
 	dw SSAnne8Text2
 	dw SSAnne8Text3
@@ -25,8 +25,8 @@ SSAnne8TextPointers: ; 6198f (18:598f)
 	dw PickUpItemText
 	dw SSAnne8Text11
 
-SSAnne8TrainerHeaders: ; 619a5 (18:59a5)
-SSAnne8TrainerHeader0: ; 619a5 (18:59a5)
+SSAnne8TrainerHeaders:
+SSAnne8TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_8_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SS_ANNE_8_TRAINER_0
@@ -35,7 +35,7 @@ SSAnne8TrainerHeader0: ; 619a5 (18:59a5)
 	dw SSAnne8EndBattleText1 ; TextEndBattle
 	dw SSAnne8EndBattleText1 ; TextEndBattle
 
-SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
+SSAnne8TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_8_TRAINER_1
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SS_ANNE_8_TRAINER_1
@@ -44,7 +44,7 @@ SSAnne8TrainerHeader1: ; 619b1 (18:59b1)
 	dw SSAnne8EndBattleText2 ; TextEndBattle
 	dw SSAnne8EndBattleText2 ; TextEndBattle
 
-SSAnne8TrainerHeader2: ; 619bd (18:59bd)
+SSAnne8TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_8_TRAINER_2
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SS_ANNE_8_TRAINER_2
@@ -53,7 +53,7 @@ SSAnne8TrainerHeader2: ; 619bd (18:59bd)
 	dw SSAnne8EndBattleText3 ; TextEndBattle
 	dw SSAnne8EndBattleText3 ; TextEndBattle
 
-SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
+SSAnne8TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_8_TRAINER_3
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SS_ANNE_8_TRAINER_3
@@ -64,101 +64,101 @@ SSAnne8TrainerHeader3: ; 619c9 (18:59c9)
 
 	db $ff
 
-SSAnne8Text1: ; 619d6 (18:59d6)
+SSAnne8Text1:
 	TX_ASM
 	ld hl, SSAnne8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne8Text2: ; 619e0 (18:59e0)
+SSAnne8Text2:
 	TX_ASM
 	ld hl, SSAnne8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne8Text3: ; 619ea (18:59ea)
+SSAnne8Text3:
 	TX_ASM
 	ld hl, SSAnne8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne8Text4: ; 619f4 (18:59f4)
+SSAnne8Text4:
 	TX_ASM
 	ld hl, SSAnne8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SSAnne8Text8: ; 619fe (18:59fe)
+SSAnne8Text8:
 	TX_FAR _SSAnne8Text8
 	TX_ASM
 	ld a, WIGGLYTUFF
 	call PlayCry
 	jp TextScriptEnd
 
-SSAnne8BattleText1: ; 61a0b (18:5a0b)
+SSAnne8BattleText1:
 	TX_FAR _SSAnne8BattleText1
 	db "@"
 
-SSAnne8EndBattleText1: ; 61a10 (18:5a10)
+SSAnne8EndBattleText1:
 	TX_FAR _SSAnne8EndBattleText1
 	db "@"
 
-SSAnne8AfterBattleText1: ; 61a15 (18:5a15)
+SSAnne8AfterBattleText1:
 	TX_FAR _SSAnne8AfterBattleText1
 	db "@"
 
-SSAnne8BattleText2: ; 61a1a (18:5a1a)
+SSAnne8BattleText2:
 	TX_FAR _SSAnne8BattleText2
 	db "@"
 
-SSAnne8EndBattleText2: ; 61a1f (18:5a1f)
+SSAnne8EndBattleText2:
 	TX_FAR _SSAnne8EndBattleText2
 	db "@"
 
-SSAnne8AfterBattleText2: ; 61a24 (18:5a24)
+SSAnne8AfterBattleText2:
 	TX_FAR _SSAnne8AfterBattleText2
 	db "@"
 
-SSAnne8BattleText3: ; 61a29 (18:5a29)
+SSAnne8BattleText3:
 	TX_FAR _SSAnne8BattleText3
 	db "@"
 
-SSAnne8EndBattleText3: ; 61a2e (18:5a2e)
+SSAnne8EndBattleText3:
 	TX_FAR _SSAnne8EndBattleText3
 	db "@"
 
-SSAnne8AfterBattleText3: ; 61a33 (18:5a33)
+SSAnne8AfterBattleText3:
 	TX_FAR _SSAnne8AfterBattleText3
 	db "@"
 
-SSAnne8BattleText4: ; 61a38 (18:5a38)
+SSAnne8BattleText4:
 	TX_FAR _SSAnne8BattleText4
 	db "@"
 
-SSAnne8EndBattleText4: ; 61a3d (18:5a3d)
+SSAnne8EndBattleText4:
 	TX_FAR _SSAnne8EndBattleText4
 	db "@"
 
-SSAnne8AfterBattleText4: ; 61a42 (18:5a42)
+SSAnne8AfterBattleText4:
 	TX_FAR _SSAnne8AfterBattleText4
 	db "@"
 
-SSAnne8Text5: ; 61a47 (18:5a47)
+SSAnne8Text5:
 	TX_FAR _SSAnne8Text5
 	db "@"
 
-SSAnne8Text6: ; 61a4c (18:5a4c)
+SSAnne8Text6:
 	TX_FAR _SSAnne8Text6
 	db "@"
 
-SSAnne8Text7: ; 61a51 (18:5a51)
+SSAnne8Text7:
 	TX_FAR _SSAnne8Text7
 	db "@"
 
-SSAnne8Text9: ; 61a56 (18:5a56)
+SSAnne8Text9:
 	TX_FAR _SSAnne8Text9
 	db "@"
 
-SSAnne8Text11: ; 61a5b (18:5a5b)
+SSAnne8Text11:
 	TX_FAR _SSAnne8Text11
 	db "@"

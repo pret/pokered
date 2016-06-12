@@ -1,4 +1,4 @@
-SilphCo7Script: ; 51b61 (14:5b61)
+SilphCo7Script:
 	call SilphCo7Script_51b77
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo7TrainerHeaders
@@ -8,7 +8,7 @@ SilphCo7Script: ; 51b61 (14:5b61)
 	ld [wSilphCo7CurScript], a
 	ret
 
-SilphCo7Script_51b77: ; 51b77 (14:5b77)
+SilphCo7Script_51b77:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -41,13 +41,13 @@ SilphCo7Script_51b77: ; 51b77 (14:5b77)
 	lb bc, 6, 10
 	predef_jump ReplaceTileBlock
 
-SilphCo7GateCoords: ; 51bc1 (14:5bc1)
+SilphCo7GateCoords:
 	db $03,$05
 	db $02,$0A
 	db $06,$0A
 	db $FF
 
-SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
+SilphCo7Text_51bc8:
 	push hl
 	ld hl, wCardKeyDoorY
 	ld a, [hli]
@@ -83,7 +83,7 @@ SilphCo7Text_51bc8: ; 51bc8 (14:5bc8)
 	ld [$ffe0], a
 	ret
 
-SilphCo7Text_51bf4: ; 51bf4 (14:5bf4)
+SilphCo7Text_51bf4:
 	EventFlagAddress hl, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
@@ -101,16 +101,16 @@ SilphCo7Text_51bf4: ; 51bf4 (14:5bf4)
 	SetEventAfterBranchReuseHL EVENT_SILPH_CO_7_UNLOCKED_DOOR3, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
 	ret
 
-SilphCo7Text_51c0c: ; 51c0c (14:5c0c)
+SilphCo7Text_51c0c:
 	xor a
 	ld [wJoyIgnore], a
 
-SilphCo7Text_51c10: ; 51c10 (14:5c10)
+SilphCo7Text_51c10:
 	ld [wSilphCo7CurScript], a
 	ld [wCurMapScript], a
 	ret
 
-SilphCo7ScriptPointers: ; 51c17 (14:5c17)
+SilphCo7ScriptPointers:
 	dw SilphCo7Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
@@ -118,7 +118,7 @@ SilphCo7ScriptPointers: ; 51c17 (14:5c17)
 	dw SilphCo7Script4
 	dw SilphCo7Script5
 
-SilphCo7Script0: ; 51c23 (14:5c23)
+SilphCo7Script0:
 	CheckEvent EVENT_BEAT_SILPH_CO_RIVAL
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_51c78
@@ -155,19 +155,19 @@ SilphCo7Script0: ; 51c23 (14:5c23)
 	ld a, $3
 	jp SilphCo7Text_51c10
 
-CoordsData_51c78: ; 51c78 (14:5c78)
+CoordsData_51c78:
 	db $02,$03
 	db $03,$03
 	db $FF
 
-MovementData_51c7d: ; 51c7d (14:5c7d)
+MovementData_51c7d:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db $FF
 
-SilphCo7Script3: ; 51c82 (14:5c82)
+SilphCo7Script3:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -202,7 +202,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	ld a, $4
 	jp SilphCo7Text_51c10
 
-SilphCo7Script4: ; 51cc8 (14:5cc8)
+SilphCo7Script4:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SilphCo7Text_51c0c
@@ -235,12 +235,12 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, $5
 	jp SilphCo7Text_51c10
 
-MovementData_51d1a: ; 51d1a (14:5d1a)
+MovementData_51d1a:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db $FF
 
-MovementData_51d1d: ; 51d1d (14:5d1d)
+MovementData_51d1d:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -250,7 +250,7 @@ MovementData_51d1d: ; 51d1d (14:5d1d)
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-SilphCo7Script5: ; 51d25 (14:5d25)
+SilphCo7Script5:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -262,7 +262,7 @@ SilphCo7Script5: ; 51d25 (14:5d25)
 	ld [wJoyIgnore], a
 	jp SilphCo7Text_51c10
 
-SilphCo7TextPointers: ; 51d3f (14:5d3f)
+SilphCo7TextPointers:
 	dw SilphCo7Text1
 	dw SilphCo7Text2
 	dw SilphCo7Text3
@@ -279,8 +279,8 @@ SilphCo7TextPointers: ; 51d3f (14:5d3f)
 	dw SilphCo7Text14
 	dw SilphCo7Text15
 
-SilphCo7TrainerHeaders: ; 51d5d (14:5d5d)
-SilphCo7TrainerHeader0: ; 51d5d (14:5d5d)
+SilphCo7TrainerHeaders:
+SilphCo7TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_0
@@ -289,7 +289,7 @@ SilphCo7TrainerHeader0: ; 51d5d (14:5d5d)
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 
-SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
+SilphCo7TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_2
@@ -298,7 +298,7 @@ SilphCo7TrainerHeader2: ; 51d69 (14:5d69)
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 
-SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
+SilphCo7TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_3
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_3
@@ -307,7 +307,7 @@ SilphCo7TrainerHeader3: ; 51d75 (14:5d75)
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 
-SilphCo7TrainerHeader4: ; 51d81 (14:5d81)
+SilphCo7TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
@@ -429,100 +429,100 @@ SilphCo7Text4:
 	TX_FAR _SilphCo7Text_51e4b
 	db "@"
 
-SilphCo7Text5: ; 51e50 (14:5e50)
+SilphCo7Text5:
 	TX_ASM
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo7BattleText1: ; 51e5a (14:5e5a)
+SilphCo7BattleText1:
 	TX_FAR _SilphCo7BattleText1
 	db "@"
 
-SilphCo7EndBattleText1: ; 51e5f (14:5e5f)
+SilphCo7EndBattleText1:
 	TX_FAR _SilphCo7EndBattleText1
 	db "@"
 
-SilphCo7AfterBattleText1: ; 51e64 (14:5e64)
+SilphCo7AfterBattleText1:
 	TX_FAR _SilphCo7AfterBattleText1
 	db "@"
 
-SilphCo7Text6: ; 51e69 (14:5e69)
+SilphCo7Text6:
 	TX_ASM
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo7BattleText2: ; 51e73 (14:5e73)
+SilphCo7BattleText2:
 	TX_FAR _SilphCo7BattleText2
 	db "@"
 
-SilphCo7EndBattleText2: ; 51e78 (14:5e78)
+SilphCo7EndBattleText2:
 	TX_FAR _SilphCo7EndBattleText2
 	db "@"
 
-SilphCo7AfterBattleText2: ; 51e7d (14:5e7d)
+SilphCo7AfterBattleText2:
 	TX_FAR _SilphCo7AfterBattleText2
 	db "@"
 
-SilphCo7Text7: ; 51e82 (14:5e82)
+SilphCo7Text7:
 	TX_ASM
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo7BattleText3: ; 51e8c (14:5e8c)
+SilphCo7BattleText3:
 	TX_FAR _SilphCo7BattleText3
 	db "@"
 
-SilphCo7EndBattleText3: ; 51e91 (14:5e91)
+SilphCo7EndBattleText3:
 	TX_FAR _SilphCo7EndBattleText3
 	db "@"
 
-SilphCo7AfterBattleText3: ; 51e96 (14:5e96)
+SilphCo7AfterBattleText3:
 	TX_FAR _SilphCo7AfterBattleText3
 	db "@"
 
-SilphCo7Text8: ; 51e9b (14:5e9b)
+SilphCo7Text8:
 	TX_ASM
 	ld hl, SilphCo7TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo7BattleText4: ; 51ea5 (14:5ea5)
+SilphCo7BattleText4:
 	TX_FAR _SilphCo7BattleText4
 	db "@"
 
-SilphCo7EndBattleText4: ; 51eaa (14:5eaa)
+SilphCo7EndBattleText4:
 	TX_FAR _SilphCo7EndBattleText4
 	db "@"
 
-SilphCo7AfterBattleText4: ; 51eaf (14:5eaf)
+SilphCo7AfterBattleText4:
 	TX_FAR _SilphCo7AfterBattleText4
 	db "@"
 
-SilphCo7Text9: ; 51eb4 (14:5eb4)
+SilphCo7Text9:
 	TX_ASM
 	ld hl, SilphCo7Text_51ebe
 	call PrintText
 	jp TextScriptEnd
 
-SilphCo7Text_51ebe: ; 51ebe (14:5ebe)
+SilphCo7Text_51ebe:
 	TX_FAR _SilphCo7Text_51ebe
 	db "@"
 
-SilphCo7Text13: ; 51ec3 (14:5ec3)
+SilphCo7Text13:
 	TX_FAR _SilphCo7Text_51ec3
 	db "@"
 
-SilphCo7Text14: ; 51ec8 (14:5ec8)
+SilphCo7Text14:
 	TX_FAR _SilphCo7Text_51ec8
 	db "@"
 
-SilphCo7Text_51ecd: ; 51ecd (14:5ecd)
+SilphCo7Text_51ecd:
 	TX_FAR _SilphCo7Text_51ecd
 	db "@"
 
-SilphCo7Text15: ; 51ed2 (14:5ed2)
+SilphCo7Text15:
 	TX_FAR _SilphCo7Text_51ed2
 	db "@"

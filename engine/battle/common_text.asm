@@ -1,4 +1,4 @@
-PrintBeginningBattleText: ; 58d99 (16:4d99)
+PrintBeginningBattleText:
 	ld a, [wIsInBattle]
 	dec a
 	jr nz, .trainerBattle
@@ -70,31 +70,31 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 .done
 	ret
 
-WildMonAppearedText: ; 58e3b (16:4e3b)
+WildMonAppearedText:
 	TX_FAR _WildMonAppearedText
 	db "@"
 
-HookedMonAttackedText: ; 58e40 (16:4e40)
+HookedMonAttackedText:
 	TX_FAR _HookedMonAttackedText
 	db "@"
 
-EnemyAppearedText: ; 58e45 (16:4e45)
+EnemyAppearedText:
 	TX_FAR _EnemyAppearedText
 	db "@"
 
-TrainerWantsToFightText: ; 58e4a (16:4e4a)
+TrainerWantsToFightText:
 	TX_FAR _TrainerWantsToFightText
 	db "@"
 
-UnveiledGhostText: ; 58e4f (16:4e4f)
+UnveiledGhostText:
 	TX_FAR _UnveiledGhostText
 	db "@"
 
-GhostCantBeIDdText: ; 58e54 (16:4e54)
+GhostCantBeIDdText:
 	TX_FAR _GhostCantBeIDdText
 	db "@"
 
-PrintSendOutMonMessage: ; 58e59 (16:4e59)
+PrintSendOutMonMessage:
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
@@ -137,22 +137,22 @@ PrintSendOutMonMessage: ; 58e59 (16:4e59)
 .printText
 	jp PrintText
 
-GoText: ; 58eae (16:4eae)
+GoText:
 	TX_FAR _GoText
 	TX_ASM
 	jr PrintPlayerMon1Text
 
-DoItText: ; 58eb5 (16:4eb5)
+DoItText:
 	TX_FAR _DoItText
 	TX_ASM
 	jr PrintPlayerMon1Text
 
-GetmText: ; 58ebc (16:4ebc)
+GetmText:
 	TX_FAR _GetmText
 	TX_ASM
 	jr PrintPlayerMon1Text
 
-EnemysWeakText: ; 58ec3 (16:4ec3)
+EnemysWeakText:
 	TX_FAR _EnemysWeakText
 	TX_ASM
 
@@ -160,15 +160,15 @@ PrintPlayerMon1Text:
 	ld hl, PlayerMon1Text
 	ret
 
-PlayerMon1Text: ; 58ecc (16:4ecc)
+PlayerMon1Text:
 	TX_FAR _PlayerMon1Text
 	db "@"
 
-RetreatMon: ; 58ed1 (16:4ed1)
+RetreatMon:
 	ld hl, PlayerMon2Text
 	jp PrintText
 
-PlayerMon2Text: ; 58ed7 (16:4ed7)
+PlayerMon2Text:
 	TX_FAR _PlayerMon2Text
 	TX_ASM
 	push de
@@ -219,25 +219,25 @@ PlayerMon2Text: ; 58ed7 (16:4ed7)
 	ld hl, GoodText ; HP went down 70% or more
 	ret
 
-EnoughText: ; 58f25 (16:4f25)
+EnoughText:
 	TX_FAR _EnoughText
 	TX_ASM
 	jr PrintComeBackText
 
-OKExclamationText: ; 58f2c (16:4f2c)
+OKExclamationText:
 	TX_FAR _OKExclamationText
 	TX_ASM
 	jr PrintComeBackText
 
-GoodText: ; 58f33 (16:4f33)
+GoodText:
 	TX_FAR _GoodText
 	TX_ASM
 	jr PrintComeBackText
 
-PrintComeBackText: ; 58f3a (16:4f3a)
+PrintComeBackText:
 	ld hl, ComeBackText
 	ret
 
-ComeBackText: ; 58f3e (16:4f3e)
+ComeBackText:
 	TX_FAR _ComeBackText
 	db "@"

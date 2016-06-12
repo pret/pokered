@@ -1,4 +1,4 @@
-SFX_Run_Ch1: ; 2045d (8:445d)
+SFX_Run_Ch1:
 	unknownnoise0x20 2, 97, 35
 	unknownnoise0x20 2, 161, 51
 	unknownnoise0x20 2, 193, 51

@@ -1,4 +1,4 @@
-SFX_Withdraw_Deposit_3_Ch1: ; 7c688 (1f:4688)
+SFX_Withdraw_Deposit_3_Ch1:
 	duty 1
 	unknownsfx0x10 58
 	unknownsfx0x20 4, 242, 0, 5

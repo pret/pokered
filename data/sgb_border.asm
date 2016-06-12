@@ -1,4 +1,4 @@
-BorderPalettes: ; 72788 (1c:6788)
+BorderPalettes:
 IF DEF(_RED)
 	INCBIN "gfx/red/sgbborder.map"
 ENDC
@@ -53,7 +53,7 @@ ENDC
 
 	ds $18
 
-SGBBorderGraphics: ; 72fe8 (1c:6fe8)
+SGBBorderGraphics:
 IF DEF(_RED)
 	INCBIN "gfx/red/sgbborder.2bpp"
 ENDC

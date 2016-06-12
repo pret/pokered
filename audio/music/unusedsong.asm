@@ -1,4 +1,4 @@
-Music_UnusedSong_Ch1:: ; a913 (2:6913)
+Music_UnusedSong_Ch1::
 	tempo 144
 	volume 7, 7
 	vibrato 5, 1, 6
@@ -182,7 +182,7 @@ Music_UnusedSong_branch_a91b::
 	endchannel
 
 
-Music_UnusedSong_Ch2:: ; a9cf (2:69cf)
+Music_UnusedSong_Ch2::
 	tempo 144
 	volume 7, 7
 	toggleperfectpitch

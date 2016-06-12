@@ -1,4 +1,4 @@
-Music_SurfingPikachu_Ch1:: ; 82ce8 (20:6ce8)
+Music_SurfingPikachu_Ch1::
 	tempo 117
 	volume 7, 7
 	duty 3
@@ -162,7 +162,7 @@ Music_SurfingPikachu_branch_82d1a::
 	loopchannel 0, Music_SurfingPikachu_branch_82d1a
 
 
-Music_SurfingPikachu_Ch2:: ; 82d9d (20:6d9d)
+Music_SurfingPikachu_Ch2::
 	duty 3
 	vibrato 6, 1, 5
 	notetype 12, 12, 4
@@ -312,7 +312,7 @@ Music_SurfingPikachu_branch_82de0::
 	loopchannel 0, Music_SurfingPikachu_branch_82de0
 
 
-Music_SurfingPikachu_Ch3:: ; 82e45 (20:6e45)
+Music_SurfingPikachu_Ch3::
 	notetype 12, 1, 0
 	octave 4
 	B_ 6

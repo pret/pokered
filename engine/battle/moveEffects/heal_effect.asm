@@ -1,4 +1,4 @@
-HealEffect_: ; 3b9ec (e:79ec)
+HealEffect_:
 	ld a, [H_WHOSETURN]
 	and a
 	ld de, wBattleMonHP
@@ -107,14 +107,14 @@ HealEffect_: ; 3b9ec (e:79ec)
 	ld hl, PrintButItFailedText_
 	jp BankswitchEtoF
 
-StartedSleepingEffect: ; 3baa2 (e:7aa2)
+StartedSleepingEffect:
 	TX_FAR _StartedSleepingEffect
 	db "@"
 
-FellAsleepBecameHealthyText: ; 3baa7 (e:7aa7)
+FellAsleepBecameHealthyText:
 	TX_FAR _FellAsleepBecameHealthyText
 	db "@"
 
-RegainedHealthText: ; 3baac (e:7aac)
+RegainedHealthText:
 	TX_FAR _RegainedHealthText
 	db "@"

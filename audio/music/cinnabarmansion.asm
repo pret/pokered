@@ -1,4 +1,4 @@
-Music_CinnabarMansion_Ch1:: ; 7ed0f (1f:6d0f)
+Music_CinnabarMansion_Ch1::
 	tempo 144
 	volume 7, 7
 	vibrato 11, 2, 5
@@ -38,7 +38,7 @@ Music_CinnabarMansion_branch_7ed19::
 	loopchannel 0, Music_CinnabarMansion_branch_7ed19
 
 
-Music_CinnabarMansion_Ch2:: ; 7ed40 (1f:6d40)
+Music_CinnabarMansion_Ch2::
 	duty 2
 	toggleperfectpitch
 	vibrato 10, 2, 4
@@ -95,7 +95,7 @@ Music_CinnabarMansion_branch_7ed6c::
 	endchannel
 
 
-Music_CinnabarMansion_Ch3:: ; 7ed7e (1f:6d7e)
+Music_CinnabarMansion_Ch3::
 	notetype 12, 1, 1
 
 Music_CinnabarMansion_branch_7ed80::
@@ -143,7 +143,7 @@ Music_CinnabarMansion_branch_7ed80::
 	loopchannel 0, Music_CinnabarMansion_branch_7ed80
 
 
-Music_CinnabarMansion_Ch4:: ; 7edb0 (1f:6db0)
+Music_CinnabarMansion_Ch4::
 	dspeed 6
 	rest 16
 	rest 16

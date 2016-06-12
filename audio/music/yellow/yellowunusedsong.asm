@@ -1,4 +1,4 @@
-Music_YellowUnusedSong_Ch1:: ; 82fbe (20:6fbe)
+Music_YellowUnusedSong_Ch1::
 	tempo 140
 	volume 7, 7
 	duty 3
@@ -75,7 +75,7 @@ Music_YellowUnusedSong_branch_82fde::
 	loopchannel 0, Music_YellowUnusedSong_branch_82fde
 
 
-Music_YellowUnusedSong_Ch2:: ; 83010 (20:7010)
+Music_YellowUnusedSong_Ch2::
 	duty 2
 	notetype 8, 12, 2
 	octave 4
@@ -161,7 +161,7 @@ Music_YellowUnusedSong_branch_8302a::
 	loopchannel 0, Music_YellowUnusedSong_branch_8302a
 
 
-Music_YellowUnusedSong_Ch3:: ; 83068 (20:7068)
+Music_YellowUnusedSong_Ch3::
 	notetype 12, 1, 0
 	vibrato 2, 1, 5
 	rest 16
@@ -202,7 +202,7 @@ Music_YellowUnusedSong_branch_83075::
 	loopchannel 0, Music_YellowUnusedSong_branch_83075
 
 
-Music_YellowUnusedSong_Ch4:: ; 83092 (20:7092)
+Music_YellowUnusedSong_Ch4::
 	dspeed 12
 	snare3 4
 	dspeed 8

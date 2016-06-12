@@ -1,4 +1,4 @@
-SFX_Fly_1_Ch1: ; 85ee (2:45ee)
+SFX_Fly_1_Ch1:
 	unknownnoise0x20 2, 241, 18
 	unknownnoise0x20 2, 0, 0
 	unknownnoise0x20 2, 161, 18

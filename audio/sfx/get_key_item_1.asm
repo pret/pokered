@@ -1,4 +1,4 @@
-SFX_Get_Key_Item_1_Ch1: ; b362 (2:7362)
+SFX_Get_Key_Item_1_Ch1:
 	executemusic
 	tempo 256
 	volume 7, 7
@@ -23,7 +23,7 @@ SFX_Get_Key_Item_1_Ch1: ; b362 (2:7362)
 	endchannel
 
 
-SFX_Get_Key_Item_1_Ch2: ; b381 (2:7381)
+SFX_Get_Key_Item_1_Ch2:
 	executemusic
 	vibrato 4, 2, 3
 	duty 2
@@ -47,7 +47,7 @@ SFX_Get_Key_Item_1_Ch2: ; b381 (2:7381)
 	endchannel
 
 
-SFX_Get_Key_Item_1_Ch3: ; b39d (2:739d)
+SFX_Get_Key_Item_1_Ch3:
 	executemusic
 	notetype 5, 1, 0
 	octave 4

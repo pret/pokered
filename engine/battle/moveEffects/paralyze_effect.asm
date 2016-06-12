@@ -1,4 +1,4 @@
-ParalyzeEffect_: ; 52601 (14:6601)
+ParalyzeEffect_:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveType
 	ld a, [H_WHOSETURN]

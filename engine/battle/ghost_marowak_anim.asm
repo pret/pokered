@@ -1,4 +1,4 @@
-MarowakAnim: ; 708ca (1c:48ca)
+MarowakAnim:
 ; animate the ghost being unveiled as a Marowak
 	ld a, $e4
 	ld [rOBP1], a
@@ -49,7 +49,7 @@ MarowakAnim: ; 708ca (1c:48ca)
 	jp ClearSprites
 
 ; copies a mon pic's  from background VRAM to sprite VRAM and sets up OAM
-CopyMonPicFromBGToSpriteVRAM: ; 7092a (1c:492a)
+CopyMonPicFromBGToSpriteVRAM:
 	ld de, vFrontPic
 	ld hl, vSprites
 	ld bc, 7 * 7

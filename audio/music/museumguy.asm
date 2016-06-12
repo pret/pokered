@@ -1,4 +1,4 @@
-Music_MuseumGuy_Ch1:: ; adae (2:6dae)
+Music_MuseumGuy_Ch1::
 	tempo 128
 	volume 7, 7
 	duty 2
@@ -54,7 +54,7 @@ Music_MuseumGuy_branch_adec::
 	endchannel
 
 
-Music_MuseumGuy_Ch2:: ; adf1 (2:6df1)
+Music_MuseumGuy_Ch2::
 	duty 2
 	notetype 12, 12, 1
 	octave 4
@@ -165,7 +165,7 @@ Music_MuseumGuy_branch_ae26::
 	loopchannel 0, Music_MuseumGuy_branch_ae26
 
 
-Music_MuseumGuy_Ch3:: ; ae6e (2:6e6e)
+Music_MuseumGuy_Ch3::
 	notetype 12, 1, 0
 	rest 16
 	octave 4
@@ -261,7 +261,7 @@ Music_MuseumGuy_branch_aec1::
 	endchannel
 
 
-Music_MuseumGuy_Ch4:: ; aed1 (2:6ed1)
+Music_MuseumGuy_Ch4::
 	dspeed 12
 	rest 16
 	rest 16

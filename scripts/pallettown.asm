@@ -1,4 +1,4 @@
-PalletTownScript: ; 18e5b (6:4e5b)
+PalletTownScript:
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr z,.next
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
@@ -8,7 +8,7 @@ PalletTownScript: ; 18e5b (6:4e5b)
 	ld a,[wPalletTownCurScript]
 	jp CallFunctionInTable
 
-PalletTownScriptPointers: ; 18e73 (6:4e73)
+PalletTownScriptPointers:
 	dw PalletTownScript0
 	dw PalletTownScript1
 	dw PalletTownScript2
@@ -17,7 +17,7 @@ PalletTownScriptPointers: ; 18e73 (6:4e73)
 	dw PalletTownScript5
 	dw PalletTownScript6
 
-PalletTownScript0: ; 18e81 (6:4e81)
+PalletTownScript0:
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB
 	ret nz
 	ld a,[wYCoord]
@@ -42,7 +42,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	ld [wPalletTownCurScript],a
 	ret
 
-PalletTownScript1: ; 18eb2 (6:4eb2)
+PalletTownScript1:
 	xor a
 	ld [wcf0d],a
 	ld a,1
@@ -59,7 +59,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	ld [wPalletTownCurScript],a
 	ret
 
-PalletTownScript2: ; 18ed2 (6:4ed2)
+PalletTownScript2:
 	ld a,1
 	ld [H_SPRITEINDEX],a
 	ld a,SPRITE_FACING_UP
@@ -89,7 +89,7 @@ PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld [wPalletTownCurScript],a
 	ret
 
-PalletTownScript3: ; 18f12 (6:4f12)
+PalletTownScript3:
 	ld a,[wd730]
 	bit 0,a
 	ret nz
@@ -119,7 +119,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld [wPalletTownCurScript],a
 	ret
 
-PalletTownScript4: ; 18f4b (6:4f4b)
+PalletTownScript4:
 	ld a,[wNPCMovementScriptPointerTableNum]
 	and a ; is the movement script over?
 	ret nz
@@ -129,7 +129,7 @@ PalletTownScript4: ; 18f4b (6:4f4b)
 	ld [wPalletTownCurScript],a
 	ret
 
-PalletTownScript5: ; 18f56 (6:4f56)
+PalletTownScript5:
 	CheckEvent EVENT_DAISY_WALKING
 	jr nz,.next
 	CheckBothEventsSet EVENT_GOT_TOWN_MAP, EVENT_ENTERED_BLUES_HOUSE, 1
@@ -145,10 +145,10 @@ PalletTownScript5: ; 18f56 (6:4f56)
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	ret z
 	SetEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
-PalletTownScript6: ; 18f87 (6:4f87)
+PalletTownScript6:
 	ret
 
-PalletTownTextPointers: ; 18f88 (6:4f88)
+PalletTownTextPointers:
 	dw PalletTownText1
 	dw PalletTownText2
 	dw PalletTownText3
@@ -157,7 +157,7 @@ PalletTownTextPointers: ; 18f88 (6:4f88)
 	dw PalletTownText6
 	dw PalletTownText7
 
-PalletTownText1: ; 18f96 (6:4f96)
+PalletTownText1:
 	TX_ASM
 	ld a,[wcf0d]
 	and a
@@ -172,7 +172,7 @@ PalletTownText1: ; 18f96 (6:4f96)
 	call PrintText
 	jp TextScriptEnd
 
-OakAppearsText: ; 18fb0 (6:4fb0)
+OakAppearsText:
 	TX_FAR _OakAppearsText
 	TX_ASM
 	ld c,10
@@ -185,7 +185,7 @@ OakAppearsText: ; 18fb0 (6:4fb0)
 	ld [wPlayerMovingDirection],a
 	jp TextScriptEnd
 
-OakWalksUpText: ; 18fce (6:4fce)
+OakWalksUpText:
 	TX_FAR _OakWalksUpText
 	db "@"
 

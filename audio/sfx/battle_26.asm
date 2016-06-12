@@ -1,4 +1,4 @@
-SFX_Battle_26_Ch1: ; 2060e (8:460e)
+SFX_Battle_26_Ch1:
 	unknownnoise0x20 10, 255, 80
 	unknownnoise0x20 15, 255, 81
 	unknownnoise0x20 8, 242, 81

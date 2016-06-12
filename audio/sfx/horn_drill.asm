@@ -1,4 +1,4 @@
-SFX_Horn_Drill_Ch1: ; 205b1 (8:45b1)
+SFX_Horn_Drill_Ch1:
 	unknownnoise0x20 3, 146, 49
 	unknownnoise0x20 3, 178, 50
 	unknownnoise0x20 3, 194, 51

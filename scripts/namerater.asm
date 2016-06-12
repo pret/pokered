@@ -1,14 +1,14 @@
-NameRaterScript: ; 1da12 (7:5a12)
+NameRaterScript:
 	jp EnableAutoTextBoxDrawing
 
-NameRaterScript_1da15: ; 1da15 (7:5a15)
+NameRaterScript_1da15:
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ret
 
-NameRaterScript_1da20: ; 1da20 (7:5a20)
+NameRaterScript_1da20:
 	ld hl, wPartyMonOT
 	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
@@ -37,10 +37,10 @@ NameRaterScript_1da20: ; 1da20 (7:5a20)
 	scf
 	ret
 
-NameRaterTextPointers: ; 1da54 (7:5a54)
+NameRaterTextPointers:
 	dw NameRaterText1
 
-NameRaterText1: ; 1da56 (7:5a56)
+NameRaterText1:
 	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld hl, NameRaterText_1dab3
@@ -78,30 +78,30 @@ NameRaterText1: ; 1da56 (7:5a56)
 	ld hl, NameRaterText_1dacc
 	jr .asm_1daa8
 
-NameRaterText_1dab3: ; 1dab3 (7:5ab3)
+NameRaterText_1dab3:
 	TX_FAR _NameRaterText_1dab3
 	db "@"
 
-NameRaterText_1dab8: ; 1dab8 (7:5ab8)
+NameRaterText_1dab8:
 	TX_FAR _NameRaterText_1dab8
 	db "@"
 
-NameRaterText_1dabd: ; 1dabd (7:5abd)
+NameRaterText_1dabd:
 	TX_FAR _NameRaterText_1dabd
 	db "@"
 
-NameRaterText_1dac2: ; 1dac2 (7:5ac2)
+NameRaterText_1dac2:
 	TX_FAR _NameRaterText_1dac2
 	db "@"
 
-NameRaterText_1dac7: ; 1dac7 (7:5ac7)
+NameRaterText_1dac7:
 	TX_FAR _NameRaterText_1dac7
 	db "@"
 
-NameRaterText_1dacc: ; 1dacc (7:5acc)
+NameRaterText_1dacc:
 	TX_FAR _NameRaterText_1dacc
 	db "@"
 
-NameRaterText_1dad1: ; 1dad1 (7:5ad1)
+NameRaterText_1dad1:
 	TX_FAR _NameRaterText_1dad1
 	db "@"

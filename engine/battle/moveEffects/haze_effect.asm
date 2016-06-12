@@ -1,4 +1,4 @@
-HazeEffect_: ; 139da (4:79da)
+HazeEffect_:
 	ld a, $7
 ; store 7 on every stat mod
 	ld hl, wPlayerMonAttackMod
@@ -45,7 +45,7 @@ HazeEffect_: ; 139da (4:79da)
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
-CureVolatileStatuses: ; 13a37 (4:7a37)
+CureVolatileStatuses:
 ; only cures statuses of the Pokemon not using Haze
 	res Confused, [hl]
 	inc hl ; BATTSTATUS2
@@ -58,7 +58,7 @@ CureVolatileStatuses: ; 13a37 (4:7a37)
 	ld [hl], a
 	ret
 
-ResetStatMods: ; 13a43 (4:7a43)
+ResetStatMods:
 	ld b, $8
 .loop
 	ld [hli], a
@@ -66,7 +66,7 @@ ResetStatMods: ; 13a43 (4:7a43)
 	jr nz, .loop
 	ret
 
-ResetStats: ; 13a4a (4:7a4a)
+ResetStats:
 	ld b, $8
 .loop
 	ld a, [hli]
@@ -76,6 +76,6 @@ ResetStats: ; 13a4a (4:7a4a)
 	jr nz, .loop
 	ret
 
-StatusChangesEliminatedText: ; 13a53 (4:7a53)
+StatusChangesEliminatedText:
 	TX_FAR _StatusChangesEliminatedText
 	db "@"

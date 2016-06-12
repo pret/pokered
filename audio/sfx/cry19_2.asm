@@ -1,4 +1,4 @@
-SFX_Cry19_2_Ch1: ; 20f4e (8:4f4e)
+SFX_Cry19_2_Ch1:
 	dutycycle 27
 	unknownsfx0x20 7, 210, 64, 7
 	unknownsfx0x20 15, 229, 96, 7
@@ -6,7 +6,7 @@ SFX_Cry19_2_Ch1: ; 20f4e (8:4f4e)
 	endchannel
 
 
-SFX_Cry19_2_Ch2: ; 20f5d (8:4f5d)
+SFX_Cry19_2_Ch2:
 	dutycycle 129
 	unknownsfx0x20 2, 194, 1, 7
 	unknownsfx0x20 4, 194, 8, 7
@@ -14,5 +14,5 @@ SFX_Cry19_2_Ch2: ; 20f5d (8:4f5d)
 	unknownsfx0x20 15, 162, 1, 7
 
 
-SFX_Cry19_2_Ch3: ; 20f6f (8:4f6f)
+SFX_Cry19_2_Ch3:
 	endchannel

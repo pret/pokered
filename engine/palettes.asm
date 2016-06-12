@@ -1,4 +1,4 @@
-_RunPaletteCommand: ; 71ddf (1c:5ddf)
+_RunPaletteCommand:
 	call GetPredefRegisters
 	ld a, b
 	cp $ff
@@ -19,13 +19,13 @@ _RunPaletteCommand: ; 71ddf (1c:5ddf)
 	push de
 	jp [hl]
 
-SetPal_BattleBlack: ; 71dff (1c:5dff)
+SetPal_BattleBlack:
 	ld hl, PalPacket_Black
 	ld de, BlkPacket_Battle
 	ret
 
 ; uses PalPacket_Empty to build a packet based on mon IDs and health color
-SetPal_Battle: ; 71e06 (1c:5e06)
+SetPal_Battle:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
@@ -58,13 +58,13 @@ SetPal_Battle: ; 71e06 (1c:5e06)
 	ld [wDefaultPaletteCommand], a
 	ret
 
-SetPal_TownMap: ; 71e48 (1c:5e48)
+SetPal_TownMap:
 	ld hl, PalPacket_TownMap
 	ld de, BlkPacket_WholeScreen
 	ret
 
 ; uses PalPacket_Empty to build a packet based the mon ID
-SetPal_StatusScreen: ; 71e4f (1c:5e4f)
+SetPal_StatusScreen:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
@@ -87,12 +87,12 @@ SetPal_StatusScreen: ; 71e4f (1c:5e4f)
 	ld de, BlkPacket_StatusScreen
 	ret
 
-SetPal_PartyMenu: ; 71e7b (1c:5e7b)
+SetPal_PartyMenu:
 	ld hl, PalPacket_PartyMenu
 	ld de, wPartyMenuBlkPacket
 	ret
 
-SetPal_Pokedex: ; 71e82 (1c:5e82)
+SetPal_Pokedex:
 	ld hl, PalPacket_Pokedex
 	ld de, wPalPacket
 	ld bc, $10
@@ -105,28 +105,28 @@ SetPal_Pokedex: ; 71e82 (1c:5e82)
 	ld de, BlkPacket_Pokedex
 	ret
 
-SetPal_Slots: ; 71e9f (1c:5e9f)
+SetPal_Slots:
 	ld hl, PalPacket_Slots
 	ld de, BlkPacket_Slots
 	ret
 
-SetPal_TitleScreen: ; 71ea6 (1c:5ea6)
+SetPal_TitleScreen:
 	ld hl, PalPacket_Titlescreen
 	ld de, BlkPacket_Titlescreen
 	ret
 
 ; used mostly for menus and the Oak intro
-SetPal_Generic: ; 71ead (1c:5ead)
+SetPal_Generic:
 	ld hl, PalPacket_Generic
 	ld de, BlkPacket_WholeScreen
 	ret
 
-SetPal_NidorinoIntro: ; 71eb4 (1c:5eb4)
+SetPal_NidorinoIntro:
 	ld hl, PalPacket_NidorinoIntro
 	ld de, BlkPacket_NidorinoIntro
 	ret
 
-SetPal_GameFreakIntro: ; 71ebb (1c:5ebb)
+SetPal_GameFreakIntro:
 	ld hl, PalPacket_GameFreakIntro
 	ld de, BlkPacket_GameFreakIntro
 	ld a, SET_PAL_GENERIC
@@ -134,7 +134,7 @@ SetPal_GameFreakIntro: ; 71ebb (1c:5ebb)
 	ret
 
 ; uses PalPacket_Empty to build a packet based on the current map
-SetPal_Overworld: ; 71ec7 (1c:5ec7)
+SetPal_Overworld:
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
 	ld bc, $10
@@ -181,7 +181,7 @@ SetPal_Overworld: ; 71ec7 (1c:5ec7)
 
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
-SetPal_PokemonWholeScreen: ; 71f17 (1c:5f17)
+SetPal_PokemonWholeScreen:
 	push bc
 	ld hl, PalPacket_Empty
 	ld de, wPalPacket
@@ -200,7 +200,7 @@ SetPal_PokemonWholeScreen: ; 71f17 (1c:5f17)
 	ld de, BlkPacket_WholeScreen
 	ret
 
-SetPal_TrainerCard: ; 71f3b (1c:5f3b)
+SetPal_TrainerCard:
 	ld hl, BlkPacket_TrainerCard
 	ld de, wTrainerCardBlkPacket
 	ld bc, $40
@@ -240,7 +240,7 @@ SetPal_TrainerCard: ; 71f3b (1c:5f3b)
 	ld de, wTrainerCardBlkPacket
 	ret
 
-SetPalFunctions: ; 71f73 (1c:5f73)
+SetPalFunctions:
 	dw SetPal_BattleBlack
 	dw SetPal_Battle
 	dw SetPal_TownMap
@@ -258,7 +258,7 @@ SetPalFunctions: ; 71f73 (1c:5f73)
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.
-BadgeBlkDataLengths: ; 71f8f (1c:5f8f)
+BadgeBlkDataLengths:
 	db 6     ; Boulder Badge
 	db 6     ; Cascade Badge
 	db 6     ; Thunder Badge
@@ -268,12 +268,12 @@ BadgeBlkDataLengths: ; 71f8f (1c:5f8f)
 	db 6     ; Volcano Badge
 	db 6     ; Earth Badge
 
-DeterminePaletteID: ; 71f97 (1c:5f97)
+DeterminePaletteID:
 	bit Transformed, a ; a is battle status 3
 	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
-DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
+DeterminePaletteIDOutOfBattle:
 	ld [wd11e], a
 	and a ; is the mon index 0?
 	jr z, .skipDexNumConversion
@@ -289,13 +289,13 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ld a, [hl]
 	ret
 
-InitPartyMenuBlkPacket: ; 71fb6 (1c:5fb6)
+InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu
 	ld de, wPartyMenuBlkPacket
 	ld bc, $30
 	jp CopyData
 
-UpdatePartyMenuBlkPacket: ; 71fc2 (1c:5fc2)
+UpdatePartyMenuBlkPacket:
 ; Update the blk packet with the palette of the HP bar that is
 ; specified in [wWhichPartyMenuHPBar].
 	ld hl, wPartyMenuHPBarColors
@@ -323,7 +323,7 @@ UpdatePartyMenuBlkPacket: ; 71fc2 (1c:5fc2)
 	ld [hl], e
 	ret
 
-SendSGBPacket: ; 71feb (1c:5feb)
+SendSGBPacket:
 ;check number of packets
 	ld a,[hl]
 	and a,$07
@@ -388,7 +388,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; else send 16 more bytes
 	jr .loop2
 
-LoadSGB: ; 7202b (1c:602b)
+LoadSGB:
 	xor a
 	ld [wOnSGB], a
 	call CheckSGB
@@ -422,7 +422,7 @@ LoadSGB: ; 7202b (1c:602b)
 	ld hl, MaskEnCancelPacket
 	jp SendSGBPacket
 
-PrepareSuperNintendoVRAMTransfer: ; 72075 (1c:6075)
+PrepareSuperNintendoVRAMTransfer:
 	ld hl, .packetPointers
 	ld c, 9
 .loop
@@ -451,7 +451,7 @@ PrepareSuperNintendoVRAMTransfer: ; 72075 (1c:6075)
 	dw DataSnd_725a8
 	dw DataSnd_725b8
 
-CheckSGB: ; 7209b (1c:609b)
+CheckSGB:
 ; Returns whether the game is running on an SGB in carry.
 	ld hl, MltReq2Packet
 	di
@@ -503,12 +503,12 @@ CheckSGB: ; 7209b (1c:609b)
 	scf
 	ret
 
-SendMltReq1Packet: ; 72102 (1c:6102)
+SendMltReq1Packet:
 	ld hl, MltReq1Packet
 	call SendSGBPacket
 	jp Wait7000
 
-CopyGfxToSuperNintendoVRAM: ; 7210b (1c:610b)
+CopyGfxToSuperNintendoVRAM:
 	di
 	push de
 	call DisableLCD
@@ -547,7 +547,7 @@ CopyGfxToSuperNintendoVRAM: ; 7210b (1c:610b)
 	ei
 	ret
 
-Wait7000: ; 7214a (1c:614a)
+Wait7000:
 ; Each loop takes 9 cycles so this routine actually waits 63000 cycles.
 	ld de, 7000
 .loop
@@ -560,7 +560,7 @@ Wait7000: ; 7214a (1c:614a)
 	jr nz, .loop
 	ret
 
-SendSGBPackets: ; 72156 (1c:6156)
+SendSGBPackets:
 	ld a, [wGBC]
 	and a
 	jr z, .notGBC
@@ -575,7 +575,7 @@ SendSGBPackets: ; 72156 (1c:6156)
 	pop hl
 	jp SendSGBPacket
 
-InitGBCPalettes: ; 7216d (1c:616d)
+InitGBCPalettes:
 	ld a, $80 ; index 0 with auto-increment
 	ld [rBGPI], a
 	inc hl
@@ -597,10 +597,10 @@ InitGBCPalettes: ; 7216d (1c:616d)
 	jr nz, .loop
 	ret
 
-EmptyFunc5: ; 72187 (1c:6187)
+EmptyFunc5:
 	ret
 
-CopySGBBorderTiles: ; 72188 (1c:6188)
+CopySGBBorderTiles:
 ; SGB tile data is stored in a 4BPP planar format.
 ; Each tile is 32 bytes. The first 16 bytes contain bit planes 1 and 2, while
 ; the second 16 bytes contain bit planes 3 and 4.

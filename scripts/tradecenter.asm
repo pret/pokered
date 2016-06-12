@@ -1,4 +1,4 @@
-TradeCenterScript: ; 4fd10 (13:7d10)
+TradeCenterScript:
 	call EnableAutoTextBoxDrawing
 	ld a, [$ffaa]
 	cp $2
@@ -30,9 +30,9 @@ TradeCenterScript: ; 4fd10 (13:7d10)
 	ld [wSpriteStateData1 + $19], a
 	ret
 
-TradeCenterTextPointers: ; 4fd4c (13:7d4c)
+TradeCenterTextPointers:
 	dw TradeCenterText1
 
-TradeCenterText1: ; 4fd4e (13:7d4e)
+TradeCenterText1:
 	TX_FAR _TradeCenterText1
 	db "@"

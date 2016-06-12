@@ -1,4 +1,4 @@
-SFX_Cry0C_3_Ch1: ; 7cb33 (1f:4b33)
+SFX_Cry0C_3_Ch1:
 	dutycycle 204
 	unknownsfx0x20 8, 245, 0, 6
 	unknownsfx0x20 2, 210, 56, 6
@@ -12,7 +12,7 @@ SFX_Cry0C_3_Ch1: ; 7cb33 (1f:4b33)
 	endchannel
 
 
-SFX_Cry0C_3_Ch2: ; 7cb5a (1f:4b5a)
+SFX_Cry0C_3_Ch2:
 	dutycycle 68
 	unknownsfx0x20 12, 195, 192, 5
 	unknownsfx0x20 3, 177, 249, 5
@@ -25,5 +25,5 @@ SFX_Cry0C_3_Ch2: ; 7cb5a (1f:4b5a)
 	unknownsfx0x20 8, 145, 225, 5
 
 
-SFX_Cry0C_3_Ch3: ; 7cb80 (1f:4b80)
+SFX_Cry0C_3_Ch3:
 	endchannel

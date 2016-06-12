@@ -1,20 +1,20 @@
-CeladonHouseScript: ; 4920e (12:520e)
+CeladonHouseScript:
 	call EnableAutoTextBoxDrawing
 	ret
 
-CeladonHouseTextPointers: ; 49212 (12:5212)
+CeladonHouseTextPointers:
 	dw CeladonHouseText1
 	dw CeladonHouseText2
 	dw CeladonHouseText3
 
-CeladonHouseText1: ; 49218 (12:5218)
+CeladonHouseText1:
 	TX_FAR _CeladonHouseText1
 	db "@"
 
-CeladonHouseText2: ; 4921d (12:521d)
+CeladonHouseText2:
 	TX_FAR _CeladonHouseText2
 	db "@"
 
-CeladonHouseText3: ; 49222 (12:5222)
+CeladonHouseText3:
 	TX_FAR _CeladonHouseText3
 	db "@"

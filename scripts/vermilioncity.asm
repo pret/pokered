@@ -1,4 +1,4 @@
-VermilionCityScript: ; 197a1 (6:57a1)
+VermilionCityScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
@@ -13,14 +13,14 @@ VermilionCityScript: ; 197a1 (6:57a1)
 	ld a, [wVermilionCityCurScript]
 	jp CallFunctionInTable
 
-VermilionCityScript_197c0: ; 197c0 (6:57c0)
+VermilionCityScript_197c0:
 	call Random
 	ld a, [$ffd4]
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
 
-VermilionCityScript_197cb: ; 197cb (6:57cb)
+VermilionCityScript_197cb:
 	CheckEventHL EVENT_SS_ANNE_LEFT
 	ret z
 	CheckEventReuseHL EVENT_WALKED_PAST_GUARD_AFTER_SS_ANNE_LEFT
@@ -30,14 +30,14 @@ VermilionCityScript_197cb: ; 197cb (6:57cb)
 	ld [wVermilionCityCurScript], a
 	ret
 
-VermilionCityScriptPointers: ; 197dc (6:57dc)
+VermilionCityScriptPointers:
 	dw VermilionCityScript0
 	dw VermilionCityScript1
 	dw VermilionCityScript2
 	dw VermilionCityScript3
 	dw VermilionCityScript4
 
-VermilionCityScript0: ; 197e6 (6:57e6)
+VermilionCityScript0:
 	ld a, [wSpriteStateData1 + 9]
 	and a ; cp SPRITE_FACING_DOWN
 	ret nz
@@ -67,11 +67,11 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld [wVermilionCityCurScript], a
 	ret
 
-CoordsData_19823: ; 19823 (6:5823)
+CoordsData_19823:
 	db $1e,$12
 	db $ff
 
-VermilionCityScript4: ; 19826 (6:5826)
+VermilionCityScript4:
 	ld hl, CoordsData_19823
 	call ArePlayerCoordsInArray
 	ret c
@@ -79,7 +79,7 @@ VermilionCityScript4: ; 19826 (6:5826)
 	ld [wVermilionCityCurScript], a
 	ret
 
-VermilionCityScript2: ; 19833 (6:5833)
+VermilionCityScript2:
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, D_UP
@@ -92,7 +92,7 @@ VermilionCityScript2: ; 19833 (6:5833)
 	ld [wVermilionCityCurScript], a
 	ret
 
-VermilionCityScript3: ; 1984e (6:584e)
+VermilionCityScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -103,7 +103,7 @@ VermilionCityScript3: ; 1984e (6:584e)
 	ld [wVermilionCityCurScript], a
 	ret
 
-VermilionCityScript1: ; 1985f (6:585f)
+VermilionCityScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -113,7 +113,7 @@ VermilionCityScript1: ; 1985f (6:585f)
 	ld [wVermilionCityCurScript], a
 	ret
 
-VermilionCityTextPointers: ; 1986f (6:586f)
+VermilionCityTextPointers:
 	dw VermilionCityText1
 	dw VermilionCityText2
 	dw VermilionCityText3
@@ -128,11 +128,11 @@ VermilionCityTextPointers: ; 1986f (6:586f)
 	dw VermilionCityText12
 	dw VermilionCityText13
 
-VermilionCityText1: ; 19889 (6:5889)
+VermilionCityText1:
 	TX_FAR _VermilionCityText1
 	db "@"
 
-VermilionCityText2: ; 1988e (6:588e)
+VermilionCityText2:
 	TX_ASM
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_1989e
@@ -145,15 +145,15 @@ VermilionCityText2: ; 1988e (6:588e)
 .asm_198a4
 	jp TextScriptEnd
 
-VermilionCityText_198a7: ; 198a7 (6:58a7)
+VermilionCityText_198a7:
 	TX_FAR _VermilionCityText_198a7
 	db "@"
 
-VermilionCityText_198ac: ; 198ac (6:58ac)
+VermilionCityText_198ac:
 	TX_FAR _VermilionCityText_198ac
 	db "@"
 
-VermilionCityText3: ; 198b1 (6:58b1)
+VermilionCityText3:
 	TX_ASM
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .asm_198f6
@@ -190,36 +190,36 @@ VermilionCityText3: ; 198b1 (6:58b1)
 .asm_198fc
 	jp TextScriptEnd
 
-VermilionCityCoords1: ; 198ff (6:58ff)
+VermilionCityCoords1:
 	db $1d,$13
 	db $1f,$13
 	db $ff
 
-SSAnneWelcomeText4: ; 19904 (6:5904)
+SSAnneWelcomeText4:
 	TX_FAR _SSAnneWelcomeText4
 	db "@"
 
-SSAnneWelcomeText9: ; 19909 (6:5909)
+SSAnneWelcomeText9:
 	TX_FAR _SSAnneWelcomeText9
 	db "@"
 
-SSAnneFlashedTicketText: ; 1990e (6:590e)
+SSAnneFlashedTicketText:
 	TX_FAR _SSAnneFlashedTicketText
 	db "@"
 
-SSAnneNoTicketText: ; 19913 (6:5913)
+SSAnneNoTicketText:
 	TX_FAR _SSAnneNoTicketText
 	db "@"
 
-SSAnneNotHereText: ; 19918 (6:5918)
+SSAnneNotHereText:
 	TX_FAR _SSAnneNotHereText
 	db "@"
 
-VermilionCityText4: ; 1991d (6:591d)
+VermilionCityText4:
 	TX_FAR _VermilionCityText4
 	db "@"
 
-VermilionCityText5: ; 19922 (6:5922)
+VermilionCityText5:
 	TX_FAR _VermilionCityText5
 	TX_ASM
 	ld a, MACHOP
@@ -228,30 +228,30 @@ VermilionCityText5: ; 19922 (6:5922)
 	ld hl, VermilionCityText14
 	ret
 
-VermilionCityText14: ; 19933 (6:5933)
+VermilionCityText14:
 	TX_FAR _VermilionCityText14
 	db "@"
 
-VermilionCityText6: ; 19938 (6:5938)
+VermilionCityText6:
 	TX_FAR _VermilionCityText6
 	db "@"
 
-VermilionCityText7: ; 1993d (6:593d)
+VermilionCityText7:
 	TX_FAR _VermilionCityText7
 	db "@"
 
-VermilionCityText8: ; 19942 (6:5942)
+VermilionCityText8:
 	TX_FAR _VermilionCityText8
 	db "@"
 
-VermilionCityText11: ; 19947 (6:5947)
+VermilionCityText11:
 	TX_FAR _VermilionCityText11
 	db "@"
 
-VermilionCityText12: ; 1994c (6:594c)
+VermilionCityText12:
 	TX_FAR _VermilionCityText12
 	db "@"
 
-VermilionCityText13: ; 19951 (6:5951)
+VermilionCityText13:
 	TX_FAR _VermilionCityText13
 	db "@"

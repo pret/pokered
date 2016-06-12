@@ -1,4 +1,4 @@
-SFX_Battle_36_Ch1: ; 20902 (8:4902)
+SFX_Battle_36_Ch1:
 	duty 0
 	unknownsfx0x20 2, 241, 128, 7
 	unknownsfx0x20 2, 241, 0, 7
@@ -20,7 +20,7 @@ SFX_Battle_36_branch_20930:
 	endchannel
 
 
-SFX_Battle_36_Ch2: ; 20941 (8:4941)
+SFX_Battle_36_Ch2:
 	dutycycle 179
 	unknownsfx0x20 2, 241, 129, 7
 	unknownsfx0x20 2, 241, 1, 7
@@ -40,7 +40,7 @@ SFX_Battle_36_Ch2: ; 20941 (8:4941)
 	endchannel
 
 
-SFX_Battle_36_Ch3: ; 20980 (8:4980)
+SFX_Battle_36_Ch3:
 	unknownnoise0x20 1, 209, 73
 	unknownnoise0x20 1, 209, 41
 	loopchannel 26, SFX_Battle_36_Ch3

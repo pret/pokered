@@ -1,14 +1,14 @@
-ViridianForestExitScript: ; 5d587 (17:5587)
+ViridianForestExitScript:
 	jp EnableAutoTextBoxDrawing
 
-ViridianForestExitTextPointers: ; 5d58a (17:558a)
+ViridianForestExitTextPointers:
 	dw ViridianForestExitText1
 	dw ViridianForestExitText2
 
-ViridianForestExitText1: ; 5d58e (17:558e)
+ViridianForestExitText1:
 	TX_FAR _ViridianForestExitText1
 	db "@"
 
-ViridianForestExitText2: ; 5d593 (17:5593)
+ViridianForestExitText2:
 	TX_FAR _ViridianForestExitText2
 	db "@"

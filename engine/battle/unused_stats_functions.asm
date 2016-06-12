@@ -1,5 +1,5 @@
 ; does nothing since no stats are ever selected (barring glitches)
-DoubleSelectedStats: ; 39680 (e:5680)
+DoubleSelectedStats:
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [wPlayerStatsToDouble]
@@ -29,7 +29,7 @@ DoubleSelectedStats: ; 39680 (e:5680)
 	ret
 
 ; does nothing since no stats are ever selected (barring glitches)
-HalveSelectedStats: ; 396a7 (e:56a7)
+HalveSelectedStats:
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [wPlayerStatsToHalve]

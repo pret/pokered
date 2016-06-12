@@ -1,4 +1,4 @@
-Route15GateUpstairsObject: ; 4969d (12:569d)
+Route15GateUpstairsObject:
 	db $a ; border block
 
 	db $1 ; warps

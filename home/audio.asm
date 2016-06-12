@@ -1,4 +1,4 @@
-PlayDefaultMusic:: ; 2307 (0:2307)
+PlayDefaultMusic::
 	call WaitForSoundToFinish
 	xor a
 	ld c, a
@@ -6,7 +6,7 @@ PlayDefaultMusic:: ; 2307 (0:2307)
 	ld [wLastMusicSoundID], a
 	jr PlayDefaultMusicCommon
 
-PlayDefaultMusicFadeOutCurrent:: ; 2312 (0:2312)
+PlayDefaultMusicFadeOutCurrent::
 ; Fade out the current music and then play the default music.
 	ld c, 10
 	ld d, 0
@@ -18,7 +18,7 @@ PlayDefaultMusicFadeOutCurrent:: ; 2312 (0:2312)
 	ld c, 8
 	ld d, c
 
-PlayDefaultMusicCommon:: ; 2324 (0:2324)
+PlayDefaultMusicCommon::
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .walking
@@ -66,7 +66,7 @@ PlayDefaultMusicCommon:: ; 2324 (0:2324)
 	ld [wNewSoundID], a
 	jp PlaySound
 
-UpdateMusic6Times:: ; 235f (0:235f)
+UpdateMusic6Times::
 ; This is called when entering a map, before fading out the current music and
 ; playing the default music (i.e. the map's music or biking/surfing music).
 	ld a, [wAudioROMBank]
@@ -101,7 +101,7 @@ UpdateMusic6Times:: ; 235f (0:235f)
 	jr nz, .loop
 	ret
 
-CompareMapMusicBankWithCurrentBank:: ; 2385 (0:2385)
+CompareMapMusicBankWithCurrentBank::
 ; Compares the map music's audio ROM bank with the current audio ROM bank
 ; and updates the audio ROM bank variables.
 ; Returns whether the banks are different in carry.
@@ -128,7 +128,7 @@ CompareMapMusicBankWithCurrentBank:: ; 2385 (0:2385)
 	scf
 	ret
 
-PlayMusic:: ; 23a1 (0:23a1)
+PlayMusic::
 	ld b, a
 	ld [wNewSoundID], a
 	xor a
@@ -139,7 +139,7 @@ PlayMusic:: ; 23a1 (0:23a1)
 	ld a, b
 
 ; plays music specified by a. If value is $ff, music is stopped
-PlaySound:: ; 23b1 (0:23b1)
+PlaySound::
 	push hl
 	push de
 	push bc

@@ -1,4 +1,4 @@
-CreditsMons: ; 74131 (1d:4131)
+CreditsMons:
 	db VENUSAUR
 	db ARBOK
 	db RHYHORN

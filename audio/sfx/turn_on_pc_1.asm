@@ -1,4 +1,4 @@
-SFX_Turn_On_PC_1_Ch1: ; 84fd (2:44fd)
+SFX_Turn_On_PC_1_Ch1:
 	duty 2
 	unknownsfx0x20 15, 242, 192, 7
 	unknownsfx0x20 15, 0, 0, 0

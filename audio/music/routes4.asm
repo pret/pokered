@@ -1,4 +1,4 @@
-Music_Routes4_Ch1:: ; a26a (2:626a)
+Music_Routes4_Ch1::
 	tempo 148
 	volume 7, 7
 	duty 3
@@ -138,7 +138,7 @@ Music_Routes4_branch_a28a::
 	loopchannel 0, Music_Routes4_branch_a28a
 
 
-Music_Routes4_Ch2:: ; a304 (2:6304)
+Music_Routes4_Ch2::
 	vibrato 12, 2, 4
 	duty 1
 	notetype 12, 9, 2
@@ -288,7 +288,7 @@ Music_Routes4_branch_a325::
 	loopchannel 0, Music_Routes4_branch_a325
 
 
-Music_Routes4_Ch3:: ; a3c4 (2:63c4)
+Music_Routes4_Ch3::
 	notetype 12, 1, 0
 	octave 4
 	E_ 1
@@ -506,7 +506,7 @@ Music_Routes4_branch_a3d7::
 	loopchannel 0, Music_Routes4_branch_a3d7
 
 
-Music_Routes4_Ch4:: ; a49d (2:649d)
+Music_Routes4_Ch4::
 	dspeed 12
 	rest 16
 	rest 12

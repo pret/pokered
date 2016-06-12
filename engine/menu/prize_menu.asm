@@ -1,4 +1,4 @@
-CeladonPrizeMenu: ; 5271b (14:671b)
+CeladonPrizeMenu:
 	ld b,COIN_CASE
 	call IsItemInBag
 	jr nz,.havingCoinCase
@@ -42,20 +42,20 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	res 6,[hl]
 	ret
 
-RequireCoinCaseTextPtr: ; 5277e (14:677e)
+RequireCoinCaseTextPtr:
 	TX_FAR _RequireCoinCaseText
 	db $0D
 	db "@"
 
-ExchangeCoinsForPrizesTextPtr: ; 52784 (14:6784)
+ExchangeCoinsForPrizesTextPtr:
 	TX_FAR _ExchangeCoinsForPrizesText
 	db "@"
 
-WhichPrizeTextPtr: ; 52789 (14:6789)
+WhichPrizeTextPtr:
 	TX_FAR _WhichPrizeText
 	db "@"
 
-GetPrizeMenuId: ; 5278e (14:678e)
+GetPrizeMenuId:
 ; determine which one among the three
 ; prize-texts has been selected
 ; using the text ID (stored in [hSpriteIndexOrTextID])
@@ -147,7 +147,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 
 INCLUDE "data/prizes.asm"
 
-PrintPrizePrice: ; 5287a (14:687a)
+PrintPrizePrice:
 	coord hl, 11, 0
 	ld b,$01
 	ld c,$07
@@ -171,7 +171,7 @@ PrintPrizePrice: ; 5287a (14:687a)
 .SixSpacesText
 	db "      @"
 
-LoadCoinsToSubtract: ; 528b1 (14:68b1)
+LoadCoinsToSubtract:
 	ld a,[wWhichPrize]
 	add a
 	ld d,0
@@ -186,7 +186,7 @@ LoadCoinsToSubtract: ; 528b1 (14:68b1)
 	ld [hCoins + 1],a
 	ret
 
-HandlePrizeChoice: ; 528c6 (14:68c6)
+HandlePrizeChoice:
 	ld a,[wCurrentMenuItem]
 	ld [wWhichPrize],a
 	ld d,0
@@ -260,35 +260,35 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld hl,OhFineThenTextPtr
 	jp PrintText
 
-UnknownData52951: ; 52951 (14:6951)
+UnknownData52951:
 ; XXX what's this?
 	db $00,$01,$00,$01,$00,$01,$00,$00,$01
 
-HereYouGoTextPtr: ; 5295a (14:695a)
+HereYouGoTextPtr:
 	TX_FAR _HereYouGoText
 	db $0D
 	db "@"
 
-SoYouWantPrizeTextPtr: ; 52960 (14:6960)
+SoYouWantPrizeTextPtr:
 	TX_FAR _SoYouWantPrizeText
 	db "@"
 
-SorryNeedMoreCoinsText: ; 52965 (14:6965)
+SorryNeedMoreCoinsText:
 	TX_FAR _SorryNeedMoreCoinsText
 	db $0D
 	db "@"
 
-PrizeRoomBagIsFullTextPtr: ; 5296b (14:696b)
+PrizeRoomBagIsFullTextPtr:
 	TX_FAR _OopsYouDontHaveEnoughRoomText
 	db $0D
 	db "@"
 
-OhFineThenTextPtr: ; 52971 (14:6971)
+OhFineThenTextPtr:
 	TX_FAR _OhFineThenText
 	db $0D ; wait keypress (A/B) without blink
 	db "@"
 
-GetPrizeMonLevel: ; 52977 (14:6977)
+GetPrizeMonLevel:
 	ld a,[wcf91]
 	ld b,a
 	ld hl,PrizeMonLevelDictionary

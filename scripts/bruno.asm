@@ -1,4 +1,4 @@
-BrunoScript: ; 762d6 (1d:62d6)
+BrunoScript:
 	call BrunoShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
 	ld hl, BrunoTrainerHeaders
@@ -8,7 +8,7 @@ BrunoScript: ; 762d6 (1d:62d6)
 	ld [wBrunoCurScript], a
 	ret
 
-BrunoShowOrHideExitBlock: ; 762ec (1d:62ec)
+BrunoShowOrHideExitBlock:
 ; Blocks or clears the exit to the next room.
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -25,22 +25,22 @@ BrunoShowOrHideExitBlock: ; 762ec (1d:62ec)
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
-ResetBrunoScript: ; 7630d (1d:630d)
+ResetBrunoScript:
 	xor a
 	ld [wBrunoCurScript], a
 	ret
 
-BrunoScriptPointers: ; 76312 (1d:6312)
+BrunoScriptPointers:
 	dw BrunoScript0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw BrunoScript2
 	dw BrunoScript3
 	dw BrunoScript4
 
-BrunoScript4: ; 7631c (1d:631c)
+BrunoScript4:
 	ret
 
-BrunoScriptWalkIntoRoom: ; 7631d (1d:631d)
+BrunoScriptWalkIntoRoom:
 ; Walk six steps upward.
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
@@ -58,7 +58,7 @@ BrunoScriptWalkIntoRoom: ; 7631d (1d:631d)
 	ld [wCurMapScript], a
 	ret
 
-BrunoScript0: ; 76339 (1d:6339)
+BrunoScript0:
 	ld hl, BrunoEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
@@ -86,14 +86,14 @@ BrunoScript0: ; 76339 (1d:6339)
 	ld [wCurMapScript], a
 	ret
 
-BrunoEntranceCoords: ; 7637a (1d:637a)
+BrunoEntranceCoords:
 	db $0A,$04
 	db $0A,$05
 	db $0B,$04
 	db $0B,$05
 	db $FF
 
-BrunoScript3: ; 76383 (1d:6383)
+BrunoScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -104,7 +104,7 @@ BrunoScript3: ; 76383 (1d:6383)
 	ld [wCurMapScript], a
 	ret
 
-BrunoScript2: ; 76396 (1d:6396)
+BrunoScript2:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
@@ -113,12 +113,12 @@ BrunoScript2: ; 76396 (1d:6396)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-BrunoTextPointers: ; 763a8 (1d:63a8)
+BrunoTextPointers:
 	dw BrunoText1
 	dw BrunoDontRunAwayText
 
-BrunoTrainerHeaders: ; 763ac (1d:63ac)
-BrunoTrainerHeader0: ; 763ac (1d:63ac)
+BrunoTrainerHeaders:
+BrunoTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
@@ -129,24 +129,24 @@ BrunoTrainerHeader0: ; 763ac (1d:63ac)
 
 	db $ff
 
-BrunoText1: ; 763b9 (1d:63b9)
+BrunoText1:
 	TX_ASM
 	ld hl, BrunoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-BrunoBeforeBattleText: ; 763c3 (1d:63c3)
+BrunoBeforeBattleText:
 	TX_FAR _BrunoBeforeBattleText
 	db "@"
 
-BrunoEndBattleText: ; 763c8 (1d:63c8)
+BrunoEndBattleText:
 	TX_FAR _BrunoEndBattleText
 	db "@"
 
-BrunoAfterBattleText: ; 763cd (1d:63cd)
+BrunoAfterBattleText:
 	TX_FAR _BrunoAfterBattleText
 	db "@"
 
-BrunoDontRunAwayText: ; 763d2 (1d:63d2)
+BrunoDontRunAwayText:
 	TX_FAR _BrunoDontRunAwayText
 	db "@"

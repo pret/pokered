@@ -1,15 +1,15 @@
-CeladonMansion5Script: ; 1dd3a (7:5d3a)
+CeladonMansion5Script:
 	jp EnableAutoTextBoxDrawing
 
-CeladonMansion5TextPointers: ; 1dd3d (7:5d3d)
+CeladonMansion5TextPointers:
 	dw CeladonMansion5Text1
 	dw CeladonMansion5Text2
 
-CeladonMansion5Text1: ; 1dd41 (7:5d41)
+CeladonMansion5Text1:
 	TX_FAR _CeladonMansion5Text1
 	db "@"
 
-CeladonMansion5Text2: ; 1dd46 (7:5d46)
+CeladonMansion5Text2:
 	TX_ASM
 	lb bc, EEVEE, 25
 	call GivePokemon

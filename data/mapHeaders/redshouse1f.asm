@@ -1,4 +1,4 @@
-RedsHouse1F_h: ; 4815c (12:415c)
+RedsHouse1F_h:
 	db REDS_HOUSE_1 ; tileset
 	db REDS_HOUSE_1F_HEIGHT, REDS_HOUSE_1F_WIDTH ; dimensions
 	dw RedsHouse1FBlocks, RedsHouse1FTextPointers, RedsHouse1FScript

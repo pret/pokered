@@ -1,4 +1,4 @@
-SFX_Cry15_1_Ch1: ; 8e35 (2:4e35)
+SFX_Cry15_1_Ch1:
 	dutycycle 240
 	unknownsfx0x20 4, 243, 128, 7
 	unknownsfx0x20 15, 231, 0, 7
@@ -9,7 +9,7 @@ SFX_Cry15_1_Ch1: ; 8e35 (2:4e35)
 	endchannel
 
 
-SFX_Cry15_1_Ch2: ; 8e50 (2:4e50)
+SFX_Cry15_1_Ch2:
 	dutycycle 90
 	unknownsfx0x20 6, 195, 1, 7
 	unknownsfx0x20 14, 183, 129, 6
@@ -20,7 +20,7 @@ SFX_Cry15_1_Ch2: ; 8e50 (2:4e50)
 	endchannel
 
 
-SFX_Cry15_1_Ch3: ; 8e6b (2:4e6b)
+SFX_Cry15_1_Ch3:
 	unknownnoise0x20 6, 227, 92
 	unknownnoise0x20 14, 214, 76
 	unknownnoise0x20 6, 198, 60

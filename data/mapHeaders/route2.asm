@@ -1,4 +1,4 @@
-Route2_h: ; 54000 (15:4000)
+Route2_h:
 	db 00 ; Tileset
 	db ROUTE_2_HEIGHT,ROUTE_2_WIDTH ;Height,Width blocks (1 block = 4x4 tiles)
 	dw Route2Blocks, Route2TextPointers, Route2Script

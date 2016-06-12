@@ -1,10 +1,10 @@
-BillsHouseScript: ; 1e76a (7:676a)
+BillsHouseScript:
 	call EnableAutoTextBoxDrawing
 	ld a, [wBillsHouseCurScript]
 	ld hl, BillsHouseScriptPointers
 	jp CallFunctionInTable
 
-BillsHouseScriptPointers: ; 1e776 (7:6776)
+BillsHouseScriptPointers:
 	dw BillsHouseScript0
 	dw BillsHouseScript1
 	dw BillsHouseScript2
@@ -12,10 +12,10 @@ BillsHouseScriptPointers: ; 1e776 (7:6776)
 	dw BillsHouseScript4
 	dw BillsHouseScript5
 
-BillsHouseScript0: ; 1e782 (7:6782)
+BillsHouseScript0:
 	ret
 
-BillsHouseScript1: ; 1e783 (7:6783)
+BillsHouseScript1:
 	ld a, [wSpriteStateData1 + 9]
 	and a ; cp SPRITE_FACING_DOWN
 	ld de, MovementData_1e79c
@@ -29,14 +29,14 @@ BillsHouseScript1: ; 1e783 (7:6783)
 	ld [wBillsHouseCurScript], a
 	ret
 
-MovementData_1e79c: ; 1e79c (7:679c)
+MovementData_1e79c:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db $FF
 
 ; make Bill walk around the player
-MovementData_1e7a0: ; 1e7a0 (7:67a0)
+MovementData_1e7a0:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -44,7 +44,7 @@ MovementData_1e7a0: ; 1e7a0 (7:67a0)
 	db NPC_MOVEMENT_UP
 	db $FF
 
-BillsHouseScript2: ; 1e7a6 (7:67a6)
+BillsHouseScript2:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -58,7 +58,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseScript3: ; 1e7c5 (7:67c5)
+BillsHouseScript3:
 	CheckEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret z
 	ld a, $f0
@@ -87,7 +87,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld [wBillsHouseCurScript], a
 	ret
 
-MovementData_1e807: ; 1e807 (7:6807)
+MovementData_1e807:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -95,7 +95,7 @@ MovementData_1e807: ; 1e807 (7:6807)
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-BillsHouseScript4: ; 1e80d (7:680d)
+BillsHouseScript4:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -107,7 +107,7 @@ BillsHouseScript4: ; 1e80d (7:680d)
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseScript5: ; 1e827 (7:6827)
+BillsHouseScript5:
 	ld a, $4
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -115,16 +115,16 @@ BillsHouseScript5: ; 1e827 (7:6827)
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseTextPointers: ; 1e834 (7:6834)
+BillsHouseTextPointers:
 	dw BillsHouseText1
 	dw BillsHouseText2
 	dw BillsHouseText3
 	dw BillsHouseText4
 
-BillsHouseText4: ; 1e83c (7:683c)
+BillsHouseText4:
 	TX_BILLS_PC
 
-BillsHouseText1: ; 1e83d (7:683d)
+BillsHouseText1:
 	TX_ASM
 	ld hl, BillsHouseText_1e865
 	call PrintText
@@ -145,19 +145,19 @@ BillsHouseText1: ; 1e83d (7:683d)
 .asm_1e862
 	jp TextScriptEnd
 
-BillsHouseText_1e865: ; 1e865 (7:6865)
+BillsHouseText_1e865:
 	TX_FAR _BillsHouseText_1e865
 	db "@"
 
-BillsHouseText_1e86a: ; 1e86a (7:686a)
+BillsHouseText_1e86a:
 	TX_FAR _BillsHouseText_1e86a
 	db "@"
 
-BillsHouseText_1e86f: ; 1e86f (7:686f)
+BillsHouseText_1e86f:
 	TX_FAR _BillsHouseText_1e86f
 	db "@"
 
-BillsHouseText2: ; 1e874 (7:6874)
+BillsHouseText2:
 	TX_ASM
 	CheckEvent EVENT_GOT_SS_TICKET
 	jr nz, .asm_1e8a9
@@ -185,30 +185,30 @@ BillsHouseText2: ; 1e874 (7:6874)
 .asm_1e8b7
 	jp TextScriptEnd
 
-BillThankYouText: ; 1e8ba (7:68ba)
+BillThankYouText:
 	TX_FAR _BillThankYouText
 	db "@"
 
-SSTicketReceivedText: ; 1e8bf (7:68bf)
+SSTicketReceivedText:
 	TX_FAR _SSTicketReceivedText
 	TX_SFX_KEY_ITEM
 	TX_BUTTON_SOUND
 	db "@"
 
-SSTicketNoRoomText: ; 1e8c6 (7:68c6)
+SSTicketNoRoomText:
 	TX_FAR _SSTicketNoRoomText
 	db "@"
 
-BillsHouseText_1e8cb: ; 1e8cb (7:68cb)
+BillsHouseText_1e8cb:
 	TX_FAR _BillsHouseText_1e8cb
 	db "@"
 
-BillsHouseText3: ; 1e8d0 (7:68d0)
+BillsHouseText3:
 	TX_ASM
 	ld hl, BillsHouseText_1e8da
 	call PrintText
 	jp TextScriptEnd
 
-BillsHouseText_1e8da: ; 1e8da (7:68da)
+BillsHouseText_1e8da:
 	TX_FAR _BillsHouseText_1e8da
 	db "@"

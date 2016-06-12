@@ -1,4 +1,4 @@
-SubstituteEffect_: ; 17dad (5:7dad)
+SubstituteEffect_:
 	ld c, 50
 	call DelayFrames
 	ld hl, wBattleMonMaxHP
@@ -64,14 +64,14 @@ SubstituteEffect_: ; 17dad (5:7dad)
 .printText
 	jp PrintText
 
-SubstituteText: ; 17e1d (5:7e1d)
+SubstituteText:
 	TX_FAR _SubstituteText
 	db "@"
 
-HasSubstituteText: ; 17e22 (5:7e22)
+HasSubstituteText:
 	TX_FAR _HasSubstituteText
 	db "@"
 
-TooWeakSubstituteText: ; 17e27 (5:7e27)
+TooWeakSubstituteText:
 	TX_FAR _TooWeakSubstituteText
 	db "@"

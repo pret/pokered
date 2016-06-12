@@ -1,4 +1,4 @@
-Music_SafariZone_Ch1:: ; bc2e (2:7c2e)
+Music_SafariZone_Ch1::
 	tempo 132
 	volume 7, 7
 	vibrato 6, 3, 4
@@ -39,7 +39,7 @@ Music_SafariZone_branch_bc5f::
 	endchannel
 
 
-Music_SafariZone_Ch2:: ; bc6a (2:7c6a)
+Music_SafariZone_Ch2::
 	duty 2
 	vibrato 8, 2, 5
 	notetype 12, 10, 2
@@ -73,7 +73,7 @@ Music_SafariZone_branch_bc89::
 	endchannel
 
 
-Music_SafariZone_Ch3:: ; bc94 (2:7c94)
+Music_SafariZone_Ch3::
 	notetype 12, 1, 0
 	rest 8
 

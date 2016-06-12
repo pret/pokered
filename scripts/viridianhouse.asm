@@ -1,21 +1,21 @@
-ViridianHouseScript: ; 1d58a (7:558a)
+ViridianHouseScript:
 	jp EnableAutoTextBoxDrawing
 
-ViridianHouseTextPointers: ; 1d58d (7:558d)
+ViridianHouseTextPointers:
 	dw ViridianHouseText1
 	dw ViridianHouseText2
 	dw ViridianHouseText3
 	dw ViridianHouseText4
 
-ViridianHouseText1: ; 1d595 (7:5595)
+ViridianHouseText1:
 	TX_FAR _ViridianHouseText1
 	db "@"
 
-ViridianHouseText2: ; 1d59a (7:559a)
+ViridianHouseText2:
 	TX_FAR _ViridianHouseText2
 	db "@"
 
-ViridianHouseText3: ; 1d59f (7:559f)
+ViridianHouseText3:
 	TX_ASM
 	ld hl, ViridianHouseText_1d5b1
 	call PrintText
@@ -24,10 +24,10 @@ ViridianHouseText3: ; 1d59f (7:559f)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-ViridianHouseText_1d5b1: ; 1d5b1 (7:55b1)
+ViridianHouseText_1d5b1:
 	TX_FAR _ViridianHouseText_1d5b1
 	db "@"
 
-ViridianHouseText4: ; 1d5b6 (7:55b6)
+ViridianHouseText4:
 	TX_FAR _ViridianHouseText4
 	db "@"

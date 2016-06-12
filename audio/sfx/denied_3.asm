@@ -1,4 +1,4 @@
-SFX_Denied_3_Ch1: ; 7c5fc (1f:45fc)
+SFX_Denied_3_Ch1:
 	duty 3
 	unknownsfx0x10 90
 	unknownsfx0x20 4, 240, 0, 5
@@ -9,7 +9,7 @@ SFX_Denied_3_Ch1: ; 7c5fc (1f:45fc)
 	endchannel
 
 
-SFX_Denied_3_Ch2: ; 7c613 (1f:4613)
+SFX_Denied_3_Ch2:
 	duty 3
 	unknownsfx0x20 4, 240, 1, 4
 	unknownsfx0x20 4, 0, 0, 0

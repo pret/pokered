@@ -1,4 +1,4 @@
-HiddenObjectMaps: ; 46a40 (11:6a40)
+HiddenObjectMaps:
 	db REDS_HOUSE_2F
 	db BLUES_HOUSE
 	db OAKS_LAB
@@ -86,7 +86,7 @@ HiddenObjectMaps: ; 46a40 (11:6a40)
 	db ROUTE_4
 	db $FF
 
-HiddenObjectPointers: ; 46a96 (11:6a96)
+HiddenObjectPointers:
 ; each of these pointers is for the corresponding map in HiddenObjectMaps
 	dw RedsHouse2FHiddenObjects
 	dw BluesHouseHiddenObjects
@@ -175,7 +175,7 @@ HiddenObjectPointers: ; 46a96 (11:6a96)
 	dw Route4HiddenObjects
 
 ; format: y-coord, x-coord, text id/item id, object routine
-TradeCenterHiddenObjects: ; 46b40 (11:6b40)
+TradeCenterHiddenObjects:
 	db $04,$05,$d0
 	db BANK(CableClubRightGameboy)
 	dw CableClubRightGameboy
@@ -183,7 +183,7 @@ TradeCenterHiddenObjects: ; 46b40 (11:6b40)
 	db BANK(CableClubLeftGameboy)
 	dw CableClubLeftGameboy
 	db $FF
-ColosseumHiddenObjects: ; 46b4d (11:6b4d)
+ColosseumHiddenObjects:
 	db $04,$05,$d0
 	db BANK(CableClubRightGameboy)
 	dw CableClubRightGameboy
@@ -191,13 +191,13 @@ ColosseumHiddenObjects: ; 46b4d (11:6b4d)
 	db BANK(CableClubLeftGameboy)
 	dw CableClubLeftGameboy
 	db $FF
-RedsHouse2FHiddenObjects: ; 46b5a (11:6b5a)
+RedsHouse2FHiddenObjects:
 	db $01,$00,$04
 	dbw BANK(OpenRedsPC), OpenRedsPC
 	db $05,$03,$d0
 	dbw BANK(PrintRedSNESText), PrintRedSNESText
 	db $FF
-BluesHouseHiddenObjects: ; 46b67 (11:6b67)
+BluesHouseHiddenObjects:
 	db $01,$00,$04
 	db BANK(PrintBookcaseText)
 	dw PrintBookcaseText
@@ -208,7 +208,7 @@ BluesHouseHiddenObjects: ; 46b67 (11:6b67)
 	db BANK(PrintBookcaseText)
 	dw PrintBookcaseText
 	db $FF
-OaksLabHiddenObjects: ; 46b7a (11:6b7a)
+OaksLabHiddenObjects:
 	db $00,$04,$04
 	db BANK(DisplayOakLabLeftPoster)
 	dw DisplayOakLabLeftPoster
@@ -222,7 +222,7 @@ OaksLabHiddenObjects: ; 46b7a (11:6b7a)
 	db BANK(DisplayOakLabEmailText)
 	dw DisplayOakLabEmailText
 	db $FF
-ViridianPokecenterHiddenObjects: ; 46b93 (11:6b93)
+ViridianPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -230,9 +230,9 @@ ViridianPokecenterHiddenObjects: ; 46b93 (11:6b93)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-ViridianMartHiddenObjects: ; 46ba0 (11:6ba0)
+ViridianMartHiddenObjects:
 	db $FF
-ViridianSchoolHiddenObjects: ; 46ba1 (11:6ba1)
+ViridianSchoolHiddenObjects:
 	db $04,$03,(ViridianSchoolNotebook_id - TextPredefs) / 2 + 1
 	db Bank(PrintNotebookText)
 	dw PrintNotebookText
@@ -240,27 +240,27 @@ ViridianSchoolHiddenObjects: ; 46ba1 (11:6ba1)
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
 	db $FF
-ViridianGymHiddenObjects: ; 46bae (11:6bae)
+ViridianGymHiddenObjects:
 	db $0f,$0f,$04
 	dbw BANK(GymStatues),GymStatues
 	db $0f,$12,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-Museum1FHiddenObjects: ; 46bbb (11:6bbb)
+Museum1FHiddenObjects:
 	db $03,$02,$04
 	dbw BANK(AerodactylFossil), AerodactylFossil
 	db $06,$02,$04
 	dbw BANK(KabutopsFossil), KabutopsFossil
 	db $FF
-PewterGymHiddenObjects: ; 46bc8 (11:6bc8)
+PewterGymHiddenObjects:
 	db $0a,$03,$04
 	dbw BANK(GymStatues),GymStatues
 	db $0a,$06,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-PewterMartHiddenObjects: ; 46bd5 (11:6bd5)
+PewterMartHiddenObjects:
 	db $FF
-PewterPokecenterHiddenObjects: ; 46bd6 (11:6bd6)
+PewterPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -268,7 +268,7 @@ PewterPokecenterHiddenObjects: ; 46bd6 (11:6bd6)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-CeruleanPokecenterHiddenObjects: ; 46be3 (11:6be3)
+CeruleanPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -276,15 +276,15 @@ CeruleanPokecenterHiddenObjects: ; 46be3 (11:6be3)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-CeruleanGymHiddenObjects: ; 46bf0 (11:6bf0)
+CeruleanGymHiddenObjects:
 	db $0b,$03,$04
 	dbw BANK(GymStatues),GymStatues
 	db $0b,$06,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-CeruleanMartHiddenObjects: ; 46bfd (11:6bfd)
+CeruleanMartHiddenObjects:
 	db $FF
-LavenderPokecenterHiddenObjects: ; 46bfe (11:6bfe)
+LavenderPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -292,7 +292,7 @@ LavenderPokecenterHiddenObjects: ; 46bfe (11:6bfe)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-VermilionPokecenterHiddenObjects: ; 46c0b (11:6c0b)
+VermilionPokecenterHiddenObjects:
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
@@ -300,7 +300,7 @@ VermilionPokecenterHiddenObjects: ; 46c0b (11:6c0b)
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
-VermilionGymHiddenObjects: ; 46c18 (11:6c18)
+VermilionGymHiddenObjects:
 	db $0e,$03,$04
 	dbw BANK(GymStatues), GymStatues
 	db $0e,$06,$04
@@ -338,12 +338,12 @@ VermilionGymHiddenObjects: ; 46c18 (11:6c18)
 	db $0b,$09,$0e
 	dbw BANK(GymTrashScript), GymTrashScript
 	db $FF
-CeladonMansion2HiddenObjects: ; 46c85 (11:6c85)
+CeladonMansion2HiddenObjects:
 	db $05,$00,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-CeladonPokecenterHiddenObjects: ; 46c8c (11:6c8c)
+CeladonPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -351,13 +351,13 @@ CeladonPokecenterHiddenObjects: ; 46c8c (11:6c8c)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-CeladonGymHiddenObjects: ; 46c99 (11:6c99)
+CeladonGymHiddenObjects:
 	db $0f,$03,$04
 	dbw BANK(GymStatues),GymStatues
 	db $0f,$06,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-GameCornerHiddenObjects: ; 46ca6 (11:6ca6)
+GameCornerHiddenObjects:
 	db $0f,$12,$d0
 	dbw BANK(StartSlotMachine), StartSlotMachine
 	db $0e,$12,$d0
@@ -455,7 +455,7 @@ GameCornerHiddenObjects: ; 46ca6 (11:6ca6)
 	db $0f,$0c,COIN+10
 	dbw BANK(HiddenCoins),HiddenCoins
 	db $FF
-CeladonHotelHiddenObjects: ; 46dc7 (11:6dc7)
+CeladonHotelHiddenObjects:
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
@@ -463,7 +463,7 @@ CeladonHotelHiddenObjects: ; 46dc7 (11:6dc7)
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
-FuchsiaPokecenterHiddenObjects: ; 46dd4 (11:6dd4)
+FuchsiaPokecenterHiddenObjects:
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
@@ -471,13 +471,13 @@ FuchsiaPokecenterHiddenObjects: ; 46dd4 (11:6dd4)
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
-FuchsiaGymHiddenObjects: ; 46de1 (11:6de1)
+FuchsiaGymHiddenObjects:
 	db $0f,$03,$04
 	dbw BANK(GymStatues),GymStatues
 	db $0f,$06,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-CinnabarGymHiddenObjects: ; 46dee (11:6dee)
+CinnabarGymHiddenObjects:
 	db $0d,$11,$04
 	dbw BANK(GymStatues),GymStatues
 	db $07,$0f,$01
@@ -499,7 +499,7 @@ CinnabarGymHiddenObjects: ; 46dee (11:6dee)
 	db Bank(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $FF
-CinnabarPokecenterHiddenObjects: ; 46e19 (11:6e19)
+CinnabarPokecenterHiddenObjects:
 	db $04,$00,$04
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -507,11 +507,11 @@ CinnabarPokecenterHiddenObjects: ; 46e19 (11:6e19)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-SaffronGymHiddenObjects: ; 46e26 (11:6e26)
+SaffronGymHiddenObjects:
 	db $0f,$09,$04
 	dbw BANK(GymStatues),GymStatues
 	db $FF
-MtMoonPokecenterHiddenObjects: ; 46e2d (11:6e2d)
+MtMoonPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -519,7 +519,7 @@ MtMoonPokecenterHiddenObjects: ; 46e2d (11:6e2d)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-RockTunnelPokecenterHiddenObjects: ; 46e3a (11:6e3a)
+RockTunnelPokecenterHiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -527,19 +527,19 @@ RockTunnelPokecenterHiddenObjects: ; 46e3a (11:6e3a)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-ViridianForestHiddenObjects: ; 46e47 (11:6e47)
+ViridianForestHiddenObjects:
 	db $12,$01,POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $2a,$10,ANTIDOTE
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-MtMoon3HiddenObjects: ; 46e54 (11:6e54)
+MtMoon3HiddenObjects:
 	db $0c,$12,MOON_STONE
 	dbw BANK(HiddenItems),HiddenItems
 	db $09,$21,ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-IndigoPlateauHiddenObjects: ; 46e61 (11:6e61)
+IndigoPlateauHiddenObjects:
 	db $0d,$08,$ff
 	db BANK(PrintIndigoPlateauHQText)
 	dw PrintIndigoPlateauHQText
@@ -547,17 +547,17 @@ IndigoPlateauHiddenObjects: ; 46e61 (11:6e61)
 	db BANK(PrintIndigoPlateauHQText)
 	dw PrintIndigoPlateauHQText
 	db $FF
-Route25HiddenObjects: ; 46e6e (11:6e6e)
+Route25HiddenObjects:
 	db $03,$26,ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $01,$0a,ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Route9HiddenObjects: ; 46e7b (11:6e7b)
+Route9HiddenObjects:
 	db $07,$0e,ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SSAnne6HiddenObjects: ; 46e82 (11:6e82)
+SSAnne6HiddenObjects:
 	db $05,$0d,$00
 	dbw BANK(PrintTrashText), PrintTrashText
 	db $07,$0d,$00
@@ -565,29 +565,29 @@ SSAnne6HiddenObjects: ; 46e82 (11:6e82)
 	db $09,$0d,GREAT_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SSAnne10HiddenObjects: ; 46e95 (11:6e95)
+SSAnne10HiddenObjects:
 	db $01,$03,HYPER_POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Route10HiddenObjects: ; 46e9c (11:6e9c)
+Route10HiddenObjects:
 	db $11,$09,SUPER_POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $35,$10,MAX_ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-RocketHideout1HiddenObjects: ; 46ea9 (11:6ea9)
+RocketHideout1HiddenObjects:
 	db $0f,$15,PP_UP
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-RocketHideout3HiddenObjects: ; 46eb0 (11:6eb0)
+RocketHideout3HiddenObjects:
 	db $11,$1b,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-RocketHideout4HiddenObjects: ; 46eb7 (11:6eb7)
+RocketHideout4HiddenObjects:
 	db $01,$19,SUPER_POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SaffronPokecenterHiddenObjects: ; 46ebe (11:6ebe)
+SaffronPokecenterHiddenObjects:
 	db $04,$00,$04
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -595,78 +595,78 @@ SaffronPokecenterHiddenObjects: ; 46ebe (11:6ebe)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-PokemonTower5HiddenObjects: ; 46ecb (11:6ecb)
+PokemonTower5HiddenObjects:
 	db $0c,$04,ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Route13HiddenObjects: ; 46ed2 (11:6ed2)
+Route13HiddenObjects:
 	db $0e,$01,PP_UP
 	dbw BANK(HiddenItems),HiddenItems
 	db $0d,$10,CALCIUM
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SafariZoneEntranceHiddenObjects: ; 46edf (11:6edf)
+SafariZoneEntranceHiddenObjects:
 	db $01,$0a,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SafariZoneWestHiddenObjects: ; 46ee6 (11:6ee6)
+SafariZoneWestHiddenObjects:
 	db $05,$06,REVIVE
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SilphCo5FHiddenObjects: ; 46eed (11:6eed)
+SilphCo5FHiddenObjects:
 	db $03,$0c,ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SilphCo9FHiddenObjects: ; 46ef4 (11:6ef4)
+SilphCo9FHiddenObjects:
 	db $0f,$02,MAX_POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-CopycatsHouse2FHiddenObjects: ; 46efb (11:6efb)
+CopycatsHouse2FHiddenObjects:
 	db $01,$01,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UnknownDungeon1HiddenObjects: ; 46f02 (11:6f02)
+UnknownDungeon1HiddenObjects:
 	db $0b,$0e,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UnknownDungeon3HiddenObjects: ; 46f09 (11:6f09)
+UnknownDungeon3HiddenObjects:
 	db $03,$1b,ULTRA_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-PowerPlantHiddenObjects: ; 46f10 (11:6f10)
+PowerPlantHiddenObjects:
 	db $10,$11,MAX_ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $01,$0c,PP_UP
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SeafoamIslands3HiddenObjects: ; 46f1d (11:6f1d)
+SeafoamIslands3HiddenObjects:
 	db $0f,$0f,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SeafoamIslands5HiddenObjects: ; 46f24 (11:6f24)
+SeafoamIslands5HiddenObjects:
 	db $11,$19,ULTRA_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Mansion1HiddenObjects: ; 46f2b (11:6f2b)
+Mansion1HiddenObjects:
 	db $10,$08,MOON_STONE
 	dbw BANK(HiddenItems),HiddenItems
 	db $05,$02,$04
 	db BANK(Mansion1Script_Switches)
 	dw Mansion1Script_Switches
 	db $FF
-Mansion2HiddenObjects: ; 46f38 (11:6f38)
+Mansion2HiddenObjects:
 	db $0b,$02,$04
 	db BANK(Mansion2Script_Switches)
 	dw Mansion2Script_Switches
 	db $FF
-Mansion3HiddenObjects: ; 46f3f (11:6f3f)
+Mansion3HiddenObjects:
 	db $09,$01,MAX_REVIVE
 	dbw BANK(HiddenItems),HiddenItems
 	db $05,$0a,$04
 	db BANK(Mansion3Script_Switches)
 	dw Mansion3Script_Switches
 	db $FF
-Mansion4HiddenObjects: ; 46f4c (11:6f4c)
+Mansion4HiddenObjects:
 	db $09,$01,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $03,$14,$04
@@ -676,7 +676,7 @@ Mansion4HiddenObjects: ; 46f4c (11:6f4c)
 	db BANK(Mansion4Script_Switches)
 	dw Mansion4Script_Switches
 	db $FF
-Route23HiddenObjects: ; 46f5f (11:6f5f)
+Route23HiddenObjects:
 	db $2c,$09,FULL_RESTORE
 	dbw BANK(HiddenItems),HiddenItems
 	db $46,$13,ULTRA_BALL
@@ -684,25 +684,25 @@ Route23HiddenObjects: ; 46f5f (11:6f5f)
 	db $5a,$08,MAX_ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-VictoryRoad2HiddenObjects: ; 46f72 (11:6f72)
+VictoryRoad2HiddenObjects:
 	db $02,$05,ULTRA_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $07,$1a,FULL_RESTORE
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Unused6FHiddenObjects: ; 46f7f (11:6f7f)
+Unused6FHiddenObjects:
 	db $0b,$0e,MAX_ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-BillsHouseHiddenObjects: ; 46f86 (11:6f86)
+BillsHouseHiddenObjects:
 	db $04,$01,$04
 	dbw BANK(BillsHousePC), BillsHousePC
 	db $FF
-ViridianCityHiddenObjects: ; 46f8d (11:6f8d)
+ViridianCityHiddenObjects:
 	db $04,$0e,POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SafariZoneRestHouse2HiddenObjects: ; 46f94 (11:6f94)
+SafariZoneRestHouse2HiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -710,7 +710,7 @@ SafariZoneRestHouse2HiddenObjects: ; 46f94 (11:6f94)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-SafariZoneRestHouse3HiddenObjects: ; 46fa1 (11:6fa1)
+SafariZoneRestHouse3HiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -718,7 +718,7 @@ SafariZoneRestHouse3HiddenObjects: ; 46fa1 (11:6fa1)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-SafariZoneRestHouse4HiddenObjects: ; 46fae (11:6fae)
+SafariZoneRestHouse4HiddenObjects:
 	db $04,$00,$08
 	db Bank(PrintBenchGuyText)
 	dw PrintBenchGuyText
@@ -726,12 +726,12 @@ SafariZoneRestHouse4HiddenObjects: ; 46fae (11:6fae)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-Route15GateUpstairsHiddenObjects: ; 46fbb (11:6fbb)
+Route15GateUpstairsHiddenObjects:
 	db $02,$01,$04
 	db BANK(Route15GateLeftBinoculars)
 	dw Route15GateLeftBinoculars
 	db $FF
-LavenderHouse1HiddenObjects: ; 46fc2 (11:6fc2)
+LavenderHouse1HiddenObjects:
 	db $01,$00,$00
 	db BANK(PrintMagazinesText)
 	dw PrintMagazinesText
@@ -742,7 +742,7 @@ LavenderHouse1HiddenObjects: ; 46fc2 (11:6fc2)
 	db BANK(PrintMagazinesText)
 	dw PrintMagazinesText
 	db $FF
-CeladonMansion5HiddenObjects: ; 46fd5 (11:6fd5)
+CeladonMansion5HiddenObjects:
 	db $00,$03,(LinkCableHelp_id - TextPredefs) / 2 + 1
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
@@ -753,7 +753,7 @@ CeladonMansion5HiddenObjects: ; 46fd5 (11:6fd5)
 	db Bank(PrintNotebookText)
 	dw PrintNotebookText
 	db $FF
-FightingDojoHiddenObjects: ; 46fe8 (11:6fe8)
+FightingDojoHiddenObjects:
 	db $09,$03,$04
 	db BANK(PrintFightingDojoText)
 	dw PrintFightingDojoText
@@ -767,12 +767,12 @@ FightingDojoHiddenObjects: ; 46fe8 (11:6fe8)
 	db BANK(PrintFightingDojoText3)
 	dw PrintFightingDojoText3
 	db $FF
-IndigoPlateauLobbyHiddenObjects: ; 47001 (11:7001)
+IndigoPlateauLobbyHiddenObjects:
 	db $07,$0f,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-CinnabarLab4HiddenObjects: ; 47008 (11:7008)
+CinnabarLab4HiddenObjects:
 	db $04,$00,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
@@ -780,7 +780,7 @@ CinnabarLab4HiddenObjects: ; 47008 (11:7008)
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-BikeShopHiddenObjects: ; 47015 (11:7015)
+BikeShopHiddenObjects:
 	db $00,$01,$d0
 	dbw BANK(PrintNewBikeText), PrintNewBikeText
 	db $01,$02,$d0
@@ -794,20 +794,20 @@ BikeShopHiddenObjects: ; 47015 (11:7015)
 	db $05,$01,$d0
 	dbw BANK(PrintNewBikeText), PrintNewBikeText
 	db $FF
-Route11HiddenObjects: ; 4703a (11:703a)
+Route11HiddenObjects:
 	db $05,$30,ESCAPE_ROPE
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Route12HiddenObjects: ; 47041 (11:7041)
+Route12HiddenObjects:
 	db $3f,$02,HYPER_POTION
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SilphCo11FHiddenObjects: ; 47048 (11:7048)
+SilphCo11FHiddenObjects:
 	db $0c,$0a,$04
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $FF
-Route17HiddenObjects: ; 4704f (11:704f)
+Route17HiddenObjects:
 	db $0e,$0f,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $2d,$08,FULL_RESTORE
@@ -819,35 +819,35 @@ Route17HiddenObjects: ; 4704f (11:704f)
 	db $79,$08,MAX_ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UndergroundPathNsHiddenObjects: ; 4706e (11:706e)
+UndergroundPathNsHiddenObjects:
 	db $04,$03,FULL_RESTORE
 	dbw BANK(HiddenItems),HiddenItems
 	db $22,$04,X_SPECIAL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UndergroundPathWeHiddenObjects: ; 4707b (11:707b)
+UndergroundPathWeHiddenObjects:
 	db $02,$0c,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $05,$15,ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-CeladonCityHiddenObjects: ; 47088 (11:7088)
+CeladonCityHiddenObjects:
 	db $0f,$30,PP_UP
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-SeafoamIslands4HiddenObjects: ; 4708f (11:708f)
+SeafoamIslands4HiddenObjects:
 	db $10,$09,MAX_ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-VermilionCityHiddenObjects: ; 47096 (11:7096)
+VermilionCityHiddenObjects:
 	db $0b,$0e,MAX_ETHER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-CeruleanCityHiddenObjects: ; 4709d (11:709d)
+CeruleanCityHiddenObjects:
 	db $08,$0f,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-Route4HiddenObjects: ; 470a4 (11:70a4)
+Route4HiddenObjects:
 	db $03,$28,GREAT_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF

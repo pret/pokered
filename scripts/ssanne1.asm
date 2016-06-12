@@ -1,15 +1,15 @@
-SSAnne1Script: ; 61265 (18:5265)
+SSAnne1Script:
 	call EnableAutoTextBoxDrawing
 	ret
 
-SSAnne1TextPointers: ; 61269 (18:5269)
+SSAnne1TextPointers:
 	dw SSAnne1Text1
 	dw SSAnne1Text2
 
-SSAnne1Text1: ; 6126d (18:526d)
+SSAnne1Text1:
 	TX_FAR _SSAnne1Text1
 	db "@"
 
-SSAnne1Text2: ; 61272 (18:5272)
+SSAnne1Text2:
 	TX_FAR _SSAnne1Text2
 	db "@"

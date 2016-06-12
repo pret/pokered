@@ -1,4 +1,4 @@
-SilphCoElevatorScript: ; 457c0 (11:57c0)
+SilphCoElevatorScript:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -14,7 +14,7 @@ SilphCoElevatorScript: ; 457c0 (11:57c0)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
+SilphCoElevatorScript_457dc:
 	ld hl, wWarpEntries
 	ld a, [wWarpedFromWhichWarp]
 	ld b, a
@@ -22,7 +22,7 @@ SilphCoElevatorScript_457dc: ; 457dc (11:57dc)
 	ld c, a
 	call SilphCoElevatorScript_457ea
 
-SilphCoElevatorScript_457ea: ; 457ea (11:57ea)
+SilphCoElevatorScript_457ea:
 	inc hl
 	inc hl
 	ld a, b
@@ -31,7 +31,7 @@ SilphCoElevatorScript_457ea: ; 457ea (11:57ea)
 	ld [hli], a
 	ret
 
-SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
+SilphCoElevatorScript_457f1:
 	ld hl, SilphCoElavatorFloors
 	call LoadItemList
 	ld hl, SilphCoElevatorWarpMaps
@@ -40,7 +40,7 @@ SilphCoElevatorScript_457f1: ; 457f1 (11:57f1)
 	call CopyData
 	ret
 
-SilphCoElavatorFloors: ; 45804 (11:45804)
+SilphCoElavatorFloors:
 	db $0B ; num elements in list
 	db FLOOR_1F
 	db FLOOR_2F
@@ -55,7 +55,7 @@ SilphCoElavatorFloors: ; 45804 (11:45804)
 	db FLOOR_11F
 	db $FF ; terminator
 
-SilphCoElevatorWarpMaps: ; 45811 (11:45811)
+SilphCoElevatorWarpMaps:
 ; first byte is warp number
 ; second byte is map number
 ; These specify where the player goes after getting out of the elevator.
@@ -72,15 +72,15 @@ SilphCoElevatorWarpMaps: ; 45811 (11:45811)
 	db $01, SILPH_CO_11F
 SilphCoElevatorWarpMapsEnd:
 
-SilphCoElevatorScript_45827: ; 45827 (11:5827)
+SilphCoElevatorScript_45827:
 	call Delay3
 	callba ShakeElevator
 	ret
 
-SilphCoElevatorTextPointers: ; 45833 (11:5833)
+SilphCoElevatorTextPointers:
 	dw SilphCoElevatorText1
 
-SilphCoElevatorText1: ; 45835 (11:5835)
+SilphCoElevatorText1:
 	TX_ASM
 	call SilphCoElevatorScript_457f1
 	ld hl, SilphCoElevatorWarpMaps

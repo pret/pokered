@@ -1,4 +1,4 @@
-Music_Dungeon1_Ch1:: ; 7ded1 (1f:5ed1)
+Music_Dungeon1_Ch1::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -226,7 +226,7 @@ Music_Dungeon1_branch_7dfd5::
 	endchannel
 
 
-Music_Dungeon1_Ch2:: ; 7dfde (1f:5fde)
+Music_Dungeon1_Ch2::
 	vibrato 11, 1, 5
 	duty 3
 	notetype 12, 0, 15
@@ -441,7 +441,7 @@ Music_Dungeon1_branch_7e0cd::
 	endchannel
 
 
-Music_Dungeon1_Ch3:: ; 7e0dc (1f:60dc)
+Music_Dungeon1_Ch3::
 	notetype 12, 1, 1
 	vibrato 8, 2, 6
 	rest 14
@@ -596,7 +596,7 @@ Music_Dungeon1_branch_7e177::
 	endchannel
 
 
-Music_Dungeon1_Ch4:: ; 7e18a (1f:618a)
+Music_Dungeon1_Ch4::
 	dspeed 12
 	rest 14
 	cymbal1 1

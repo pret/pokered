@@ -1,10 +1,10 @@
-SFX_Swap_1_Ch1: ; 83f8 (2:43f8)
+SFX_Swap_1_Ch1:
 	duty 2
 	unknownsfx0x20 8, 225, 64, 7
 	endchannel
 
 
-SFX_Swap_1_Ch2: ; 83ff (2:43ff)
+SFX_Swap_1_Ch2:
 	duty 2
 	unknownsfx0x20 2, 8, 0, 0
 	unknownsfx0x20 8, 177, 65, 7

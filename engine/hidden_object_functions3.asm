@@ -1,5 +1,5 @@
 ; prints text for bookshelves in buildings without sign events
-PrintBookshelfText: ; fb50 (3:7b50)
+PrintBookshelfText:
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
@@ -37,7 +37,7 @@ PrintBookshelfText: ; fb50 (3:7b50)
 	jpba PrintCardKeyText
 
 ; format: db tileset id, bookshelf tile id, text id
-BookshelfTileIDs: ; fb8b (3:7b8b)
+BookshelfTileIDs:
 	db PLATEAU,      $30
 	db (IndigoPlateauStatues_id   - TextPredefs) / 2 + 1
 	db HOUSE,        $3D
@@ -74,7 +74,7 @@ BookshelfTileIDs: ; fb8b (3:7b8b)
 	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
 	db $FF
 
-IndigoPlateauStatues: ; fbbf (3:7bbf)
+IndigoPlateauStatues:
 	TX_ASM
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
@@ -87,19 +87,19 @@ IndigoPlateauStatues: ; fbbf (3:7bbf)
 	call PrintText
 	jp TextScriptEnd
 
-IndigoPlateauStatuesText1: ; fbd9 (3:7bd9)
+IndigoPlateauStatuesText1:
 	TX_FAR _IndigoPlateauStatuesText1
 	db "@"
 
-IndigoPlateauStatuesText2: ; fbde (3:7bde)
+IndigoPlateauStatuesText2:
 	TX_FAR _IndigoPlateauStatuesText2
 	db "@"
 
-IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
+IndigoPlateauStatuesText3:
 	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
-BookOrSculptureText: ; fbe8 (3:7be8)
+BookOrSculptureText:
 	TX_ASM
 	ld hl, PokemonBooksText
 	ld a, [wCurMapTileset]
@@ -113,19 +113,19 @@ BookOrSculptureText: ; fbe8 (3:7be8)
 	call PrintText
 	jp TextScriptEnd
 
-PokemonBooksText: ; fc03 (3:7c03)
+PokemonBooksText:
 	TX_FAR _PokemonBooksText
 	db "@"
 
-DiglettSculptureText: ; fc08 (3:7c08)
+DiglettSculptureText:
 	TX_FAR _DiglettSculptureText
 	db "@"
 
-ElevatorText: ; fc0d (3:7c0d)
+ElevatorText:
 	TX_FAR _ElevatorText
 	db "@"
 
-TownMapText: ; fc12 (3:7c12)
+TownMapText:
 	TX_FAR _TownMapText
 	db $06
 	TX_ASM
@@ -148,6 +148,6 @@ TownMapText: ; fc12 (3:7c12)
 	push af
 	jp CloseTextDisplay
 
-PokemonStuffText: ; fc45 (3:7c45)
+PokemonStuffText:
 	TX_FAR _PokemonStuffText
 	db "@"

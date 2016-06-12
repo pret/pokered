@@ -1,7 +1,7 @@
-SaffronCityScript: ; 50c00 (14:4c00)
+SaffronCityScript:
 	jp EnableAutoTextBoxDrawing
 
-SaffronCityTextPointers: ; 50c03 (14:4c03)
+SaffronCityTextPointers:
 	dw SaffronCityText1
 	dw SaffronCityText2
 	dw SaffronCityText3
@@ -28,94 +28,94 @@ SaffronCityTextPointers: ; 50c03 (14:4c03)
 	dw SaffronCityText24
 	dw SaffronCityText25
 
-SaffronCityText1: ; 50c35 (14:4c35)
+SaffronCityText1:
 	TX_FAR _SaffronCityText1
 	db "@"
 
-SaffronCityText2: ; 50c3a (14:4c3a)
+SaffronCityText2:
 	TX_FAR _SaffronCityText2
 	db "@"
 
-SaffronCityText3: ; 50c3f (14:4c3f)
+SaffronCityText3:
 	TX_FAR _SaffronCityText3
 	db "@"
 
-SaffronCityText4: ; 50c44 (14:4c44)
+SaffronCityText4:
 	TX_FAR _SaffronCityText4
 	db "@"
 
-SaffronCityText5: ; 50c49 (14:4c49)
+SaffronCityText5:
 	TX_FAR _SaffronCityText5
 	db "@"
 
-SaffronCityText6: ; 50c4e (14:4c4e)
+SaffronCityText6:
 	TX_FAR _SaffronCityText6
 	db "@"
 
-SaffronCityText7: ; 50c53 (14:4c53)
+SaffronCityText7:
 	TX_FAR _SaffronCityText7
 	db "@"
 
-SaffronCityText8: ; 50c58 (14:4c58)
+SaffronCityText8:
 	TX_FAR _SaffronCityText8
 	db "@"
 
-SaffronCityText9: ; 50c5d (14:4c5d)
+SaffronCityText9:
 	TX_FAR _SaffronCityText9
 	db "@"
 
-SaffronCityText10: ; 50c62 (14:4c62)
+SaffronCityText10:
 	TX_FAR _SaffronCityText10
 	db "@"
 
-SaffronCityText11: ; 50c67 (14:4c67)
+SaffronCityText11:
 	TX_FAR _SaffronCityText11
 	db "@"
 
-SaffronCityText12: ; 50c6c (14:4c6c)
+SaffronCityText12:
 	TX_FAR _SaffronCityText12
 	db $15, "@" ; play PIDGEOT cry from TextCommandSounds
 
-SaffronCityText13: ; 50c72 (14:4c72)
+SaffronCityText13:
 	TX_FAR _SaffronCityText13
 	db "@"
 
-SaffronCityText14: ; 50c77 (14:4c77)
+SaffronCityText14:
 	TX_FAR _SaffronCityText14
 	db "@"
 
-SaffronCityText15: ; 50c7c (14:4c7c)
+SaffronCityText15:
 	TX_FAR _SaffronCityText15
 	db "@"
 
-SaffronCityText16: ; 50c81 (14:4c81)
+SaffronCityText16:
 	TX_FAR _SaffronCityText16
 	db "@"
 
-SaffronCityText17: ; 50c86 (14:4c86)
+SaffronCityText17:
 	TX_FAR _SaffronCityText17
 	db "@"
 
-SaffronCityText18: ; 50c8b (14:4c8b)
+SaffronCityText18:
 	TX_FAR _SaffronCityText18
 	db "@"
 
-SaffronCityText20: ; 50c90 (14:4c90)
+SaffronCityText20:
 	TX_FAR _SaffronCityText20
 	db "@"
 
-SaffronCityText21: ; 50c95 (14:4c95)
+SaffronCityText21:
 	TX_FAR _SaffronCityText21
 	db "@"
 
-SaffronCityText22: ; 50c9a (14:4c9a)
+SaffronCityText22:
 	TX_FAR _SaffronCityText22
 	db "@"
 
-SaffronCityText24: ; 50c9f (14:4c9f)
+SaffronCityText24:
 	TX_FAR _SaffronCityText24
 	db "@"
 
-SaffronCityText25: ; 50ca4 (14:4ca4)
+SaffronCityText25:
 	TX_FAR _SaffronCityText25
 	db "@"

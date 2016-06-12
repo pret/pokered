@@ -1,4 +1,4 @@
-SFX_Cry06_2_Ch1: ; 20c87 (8:4c87)
+SFX_Cry06_2_Ch1:
 	dutycycle 250
 	unknownsfx0x20 6, 131, 71, 2
 	unknownsfx0x20 15, 98, 38, 2
@@ -8,11 +8,11 @@ SFX_Cry06_2_Ch1: ; 20c87 (8:4c87)
 	unknownsfx0x20 15, 66, 7, 2
 
 
-SFX_Cry06_2_Ch2: ; 20ca1 (8:4ca1)
+SFX_Cry06_2_Ch2:
 	endchannel
 
 
-SFX_Cry06_2_Ch3: ; 20ca2 (8:4ca2)
+SFX_Cry06_2_Ch3:
 	unknownnoise0x20 8, 212, 140
 	unknownnoise0x20 4, 226, 156
 	unknownnoise0x20 15, 198, 140

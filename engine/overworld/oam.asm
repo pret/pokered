@@ -166,7 +166,7 @@ PrepareOAMData:
 	add hl, de
 	jr .clear
 
-GetSpriteScreenXY: ; 4bd1 (1:4bd1)
+GetSpriteScreenXY:
 	inc e
 	inc e
 	ld a, [de] ; c1x4

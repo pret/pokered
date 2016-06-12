@@ -1,11 +1,11 @@
-Lab4Script: ; 75d31 (1d:5d31)
+Lab4Script:
 	jp EnableAutoTextBoxDrawing
 
-Lab4TextPointers: ; 75d34 (1d:5d34)
+Lab4TextPointers:
 	dw Lab4Text1
 	dw Lab4Text2
 
-Lab4Script_GetFossilsInBag: ; 75d38 (1d:5d38)
+Lab4Script_GetFossilsInBag:
 ; construct a list of all fossils in the player's bag
 	xor a
 	ld [wFilteredBagItemsCount], a
@@ -40,13 +40,13 @@ Lab4Script_GetFossilsInBag: ; 75d38 (1d:5d38)
 	ld [de], a
 	ret
 
-FossilsList: ; 75d68 (1d:5d68)
+FossilsList:
 	db DOME_FOSSIL
 	db HELIX_FOSSIL
 	db OLD_AMBER
 	db $00
 
-Lab4Text1: ; 75d6c (1d:5d6c)
+Lab4Text1:
 	TX_ASM
 	CheckEvent EVENT_GAVE_FOSSIL_TO_LAB
 	jr nz, .asm_75d96
@@ -82,28 +82,28 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	ResetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL, EVENT_LAB_HANDING_OVER_FOSSIL_MON
 	jr .asm_75d93
 
-Lab4Text_75dc6: ; 75dc6 (1d:5dc6)
+Lab4Text_75dc6:
 	TX_FAR _Lab4Text_75dc6
 	db "@"
 
-Lab4Text_75dcb: ; 75dcb (1d:5dcb)
+Lab4Text_75dcb:
 	TX_FAR _Lab4Text_75dcb
 	db "@"
 
-Lab4Text_75dd0: ; 75dd0 (1d:5dd0)
+Lab4Text_75dd0:
 	TX_FAR _Lab4Text_75dd0
 	db "@"
 
-Lab4Text_75dd5: ; 75dd5 (1d:5dd5)
+Lab4Text_75dd5:
 	TX_FAR _Lab4Text_75dd5
 	db "@"
 
-Lab4Text2: ; 75dda (1d:5dda)
+Lab4Text2:
 	TX_ASM
 	ld a, $3
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
-LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
+LoadFossilItemAndMonNameBank1D:
 	jpba LoadFossilItemAndMonName

@@ -1,4 +1,4 @@
-Music_HallOfFame_Ch1:: ; 7fbaf (1f:7baf)
+Music_HallOfFame_Ch1::
 	tempo 112
 	volume 7, 7
 	duty 3
@@ -31,7 +31,7 @@ Music_HallOfFame_branch_7fbc5::
 	loopchannel 0, Music_HallOfFame_branch_7fbc5
 
 
-Music_HallOfFame_Ch2:: ; 7fbda (1f:7bda)
+Music_HallOfFame_Ch2::
 	vibrato 8, 2, 5
 	duty 3
 
@@ -63,7 +63,7 @@ Music_HallOfFame_branch_7fbdf::
 	loopchannel 0, Music_HallOfFame_branch_7fbdf
 
 
-Music_HallOfFame_Ch3:: ; 7fbfc (1f:7bfc)
+Music_HallOfFame_Ch3::
 	notetype 12, 1, 2
 
 Music_HallOfFame_branch_7fbfe::

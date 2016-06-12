@@ -1,4 +1,4 @@
-SFX_Cry22_1_Ch1: ; 9093 (2:5093)
+SFX_Cry22_1_Ch1:
 	dutycycle 17
 	unknownsfx0x20 2, 61, 129, 3
 	unknownsfx0x20 7, 245, 1, 6
@@ -7,7 +7,7 @@ SFX_Cry22_1_Ch1: ; 9093 (2:5093)
 	endchannel
 
 
-SFX_Cry22_1_Ch2: ; 90a6 (2:50a6)
+SFX_Cry22_1_Ch2:
 	dutycycle 238
 	unknownsfx0x20 2, 62, 176, 5
 	unknownsfx0x20 7, 213, 93, 7
@@ -16,7 +16,7 @@ SFX_Cry22_1_Ch2: ; 90a6 (2:50a6)
 	endchannel
 
 
-SFX_Cry22_1_Ch3: ; 90b9 (2:50b9)
+SFX_Cry22_1_Ch3:
 	unknownnoise0x20 2, 146, 73
 	unknownnoise0x20 7, 181, 41
 	unknownnoise0x20 1, 162, 57

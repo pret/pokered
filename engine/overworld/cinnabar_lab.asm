@@ -1,4 +1,4 @@
-GiveFossilToCinnabarLab: ; 61006 (18:5006)
+GiveFossilToCinnabarLab:
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -72,23 +72,23 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	call PrintText
 	ret
 
-LabFossil_610ae: ; 610ae (18:50ae)
+LabFossil_610ae:
 	TX_FAR _Lab4Text_610ae
 	db "@"
 
-LabFossil_610b3: ; 610b3 (18:50b3)
+LabFossil_610b3:
 	TX_FAR _Lab4Text_610b3
 	db "@"
 
-LabFossil_610b8: ; 610b8 (18:50b8)
+LabFossil_610b8:
 	TX_FAR _Lab4Text_610b8
 	db "@"
 
-LabFossil_610bd: ; 610bd (18:50bd)
+LabFossil_610bd:
 	TX_FAR _Lab4Text_610bd
 	db "@"
 
-PrintFossilsInBag: ; 610c2 (18:50c2)
+PrintFossilsInBag:
 ; Prints each fossil in the player's bag on a separate line in the menu.
 	ld hl, wFilteredBagItems
 	xor a
@@ -112,7 +112,7 @@ PrintFossilsInBag: ; 610c2 (18:50c2)
 	jr .loop
 
 ; loads the names of the fossil item and the resulting mon
-LoadFossilItemAndMonName: ; 610eb (18:50eb)
+LoadFossilItemAndMonName:
 	ld a, [wFossilMon]
 	ld [wd11e], a
 	call GetMonName

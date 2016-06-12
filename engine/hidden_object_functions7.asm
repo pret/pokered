@@ -1,20 +1,20 @@
-PrintNewBikeText: ; 1e94b (7:694b)
+PrintNewBikeText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump NewBicycleText
 
-NewBicycleText: ; 1e953 (7:6953)
+NewBicycleText:
 	TX_FAR _NewBicycleText
 	db "@"
 
-DisplayOakLabLeftPoster: ; 1e958 (7:6958)
+DisplayOakLabLeftPoster:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump PushStartText
 
-PushStartText: ; 1e960 (7:6960)
+PushStartText:
 	TX_FAR _PushStartText
 	db "@"
 
-DisplayOakLabRightPoster: ; 1e965 (7:6965)
+DisplayOakLabRightPoster:
 	call EnableAutoTextBoxDrawing
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
@@ -28,15 +28,15 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 .ownLessThanTwo
 	jp PrintPredefTextID
 
-SaveOptionText: ; 1e97e (7:697e)
+SaveOptionText:
 	TX_FAR _SaveOptionText
 	db "@"
 
-StrengthsAndWeaknessesText: ; 1e983 (7:6983)
+StrengthsAndWeaknessesText:
 	TX_FAR _StrengthsAndWeaknessesText
 	db "@"
 
-SafariZoneCheck: ; 1e988 (7:6988)
+SafariZoneCheck:
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [wNumSafariBalls]
@@ -44,7 +44,7 @@ SafariZoneCheck: ; 1e988 (7:6988)
 	jr z, SafariZoneGameOver
 	jr SafariZoneGameStillGoing
 
-SafariZoneCheckSteps: ; 1e997 (7:6997)
+SafariZoneCheckSteps:
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]
@@ -56,12 +56,12 @@ SafariZoneCheckSteps: ; 1e997 (7:6997)
 	ld [wSafariSteps], a
 	ld a, c
 	ld [wSafariSteps + 1], a
-SafariZoneGameStillGoing: ; 1e9ab (7:69ab)
+SafariZoneGameStillGoing:
 	xor a
 	ld [wSafariZoneGameOver], a
 	ret
 
-SafariZoneGameOver: ; 1e9b0 (7:69b0)
+SafariZoneGameOver:
 	call EnableAutoTextBoxDrawing
 	xor a
 	ld [wAudioFadeOutControl], a
@@ -90,13 +90,13 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [wSafariZoneGameOver], a
 	ret
 
-PrintSafariGameOverText: ; 1e9ed (7:69ed)
+PrintSafariGameOverText:
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, SafariGameOverText
 	jp PrintText
 
-SafariGameOverText: ; 1e9f7 (7:69f7)
+SafariGameOverText:
 	TX_ASM
 	ld a, [wNumSafariBalls]
 	and a
@@ -108,22 +108,22 @@ SafariGameOverText: ; 1e9f7 (7:69f7)
 	call PrintText
 	jp TextScriptEnd
 
-TimesUpText: ; 1ea0d (7:6a0d)
+TimesUpText:
 	TX_FAR _TimesUpText
 	db "@"
 
-GameOverText: ; 1ea12 (7:6a12)
+GameOverText:
 	TX_FAR _GameOverText
 	db "@"
 
-PrintCinnabarQuiz: ; 1ea17 (7:6a17)
+PrintCinnabarQuiz:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump CinnabarGymQuiz
 
-CinnabarGymQuiz: ; 1ea25 (7:6a25)
+CinnabarGymQuiz:
 	TX_ASM
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
@@ -153,11 +153,11 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
 
-CinnabarGymQuizIntroText: ; 1ea5b (7:6a5b)
+CinnabarGymQuizIntroText:
 	TX_FAR _CinnabarGymQuizIntroText
 	db "@"
 
-CinnabarQuizQuestions: ; 1ea60 (7:6a60)
+CinnabarQuizQuestions:
 	dw CinnabarQuizQuestionsText1
 	dw CinnabarQuizQuestionsText2
 	dw CinnabarQuizQuestionsText3
@@ -165,35 +165,35 @@ CinnabarQuizQuestions: ; 1ea60 (7:6a60)
 	dw CinnabarQuizQuestionsText5
 	dw CinnabarQuizQuestionsText6
 
-CinnabarQuizQuestionsText1: ; 1ea6c (7:6a6c)
+CinnabarQuizQuestionsText1:
 	TX_FAR _CinnabarQuizQuestionsText1
 	db "@"
 
-CinnabarQuizQuestionsText2: ; 1ea71 (7:6a71)
+CinnabarQuizQuestionsText2:
 	TX_FAR _CinnabarQuizQuestionsText2
 	db "@"
 
-CinnabarQuizQuestionsText3: ; 1ea76 (7:6a76)
+CinnabarQuizQuestionsText3:
 	TX_FAR _CinnabarQuizQuestionsText3
 	db "@"
 
-CinnabarQuizQuestionsText4: ; 1ea7b (7:6a7b)
+CinnabarQuizQuestionsText4:
 	TX_FAR _CinnabarQuizQuestionsText4
 	db "@"
 
-CinnabarQuizQuestionsText5: ; 1ea80 (7:6a80)
+CinnabarQuizQuestionsText5:
 	TX_FAR _CinnabarQuizQuestionsText5
 	db "@"
 
-CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
+CinnabarQuizQuestionsText6:
 	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
-CinnabarGymGateFlagAction: ; 1ea8a (7:6a8a)
+CinnabarGymGateFlagAction:
 	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
-CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
+CinnabarGymQuiz_1ea92:
 	call YesNoChoice
 	ld a, [$ffdc]
 	ld c, a
@@ -234,7 +234,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld [wOpponentAfterWrongAnswer], a
 	ret
 
-CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
+CinnabarGymQuizCorrectText:
 	db $0b
 	TX_FAR _CinnabarGymQuizCorrectText
 	db $06
@@ -254,11 +254,11 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
+CinnabarGymQuizIncorrectText:
 	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
-UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
+UpdateCinnabarGymGateTileBlocks_:
 ; Update the overworld map with open floor blocks or locked gate blocks
 ; depending on event flags.
 	ld a, 6
@@ -301,7 +301,7 @@ UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
 	jr nz, .loop
 	ret
 
-CinnabarGymGateCoords: ; 1eb48 (7:6b48)
+CinnabarGymGateCoords:
 	; format: x-coord, y-coord, direction, padding
 	; direction: $54 = horizontal gate, $5f = vertical gate
 	db $09,$03,$54,$00
@@ -311,16 +311,16 @@ CinnabarGymGateCoords: ; 1eb48 (7:6b48)
 	db $02,$06,$54,$00
 	db $02,$03,$54,$00
 
-PrintMagazinesText: ; 1eb60 (7:6b60)
+PrintMagazinesText:
 	call EnableAutoTextBoxDrawing
 	tx_pre MagazinesText
 	ret
 
-MagazinesText: ; 1eb69 (7:6b69)
+MagazinesText:
 	TX_FAR _MagazinesText
 	db "@"
 
-BillsHousePC: ; 1eb6e (7:6b6e)
+BillsHousePC:
 	call EnableAutoTextBoxDrawing
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
@@ -366,11 +366,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	tx_pre BillsHousePokemonList
 	ret
 
-BillsHouseMonitorText: ; 1ebdd (7:6bdd)
+BillsHouseMonitorText:
 	TX_FAR _BillsHouseMonitorText
 	db "@"
 
-BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
+BillsHouseInitiatedText:
 	TX_FAR _BillsHouseInitiatedText
 	db $06
 	TX_ASM
@@ -386,7 +386,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	call DelayFrames
 	jp TextScriptEnd
 
-BillsHousePokemonList: ; 1ec05 (7:6c05)
+BillsHousePokemonList:
 	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
@@ -440,28 +440,28 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	call LoadScreenTilesFromBuffer2
 	jp TextScriptEnd
 
-BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
+BillsHousePokemonListText1:
 	TX_FAR _BillsHousePokemonListText1
 	db "@"
 
-BillsMonListText: ; 1ec84 (7:6c84)
+BillsMonListText:
 	db   "EEVEE"
 	next "FLAREON"
 	next "JOLTEON"
 	next "VAPOREON"
 	next "CANCEL@"
 
-BillsHousePokemonListText2: ; 1ecaa (7:6caa)
+BillsHousePokemonListText2:
 	TX_FAR _BillsHousePokemonListText2
 	db "@"
 
-DisplayOakLabEmailText: ; 1ecaf (7:6caf)
+DisplayOakLabEmailText:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump OakLabEmailText
 
-OakLabEmailText: ; 1ecbd (7:6cbd)
+OakLabEmailText:
 	TX_FAR _OakLabEmailText
 	db "@"

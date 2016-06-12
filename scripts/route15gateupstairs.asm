@@ -1,11 +1,11 @@
-Route15GateUpstairsScript: ; 4964a (12:564a)
+Route15GateUpstairsScript:
 	jp DisableAutoTextBoxDrawing
 
-Route15GateUpstairsTextPointers: ; 4964d (12:564d)
+Route15GateUpstairsTextPointers:
 	dw Route15GateUpstairsText1
 	dw Route15GateUpstairsText2
 
-Route15GateUpstairsText1: ; 49651 (12:5651)
+Route15GateUpstairsText1:
 	TX_ASM
 	CheckEvent EVENT_GOT_EXP_ALL
 	jr nz, .asm_49683
@@ -30,15 +30,15 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 .asm_49689
 	jp TextScriptEnd
 
-Route15GateUpstairsText_4968c: ; 4968c (12:568c)
+Route15GateUpstairsText_4968c:
 	TX_FAR _Route15GateUpstairsText_4968c
 	db "@"
 
-Route15GateUpstairsText2: ; 49691 (12:5691)
+Route15GateUpstairsText2:
 	TX_ASM
 	ld hl, Route15GateUpstairsText_49698
 	jp GateUpstairsScript_PrintIfFacingUp
 
-Route15GateUpstairsText_49698: ; 49698 (12:5698)
+Route15GateUpstairsText_49698:
 	TX_FAR _Route15GateUpstairsText_49698
 	db "@"

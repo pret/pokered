@@ -1,4 +1,4 @@
-SFX_Pokedex_Rating_3_Ch1: ; 7edda (1f:6dda)
+SFX_Pokedex_Rating_3_Ch1:
 	executemusic
 	tempo 256
 	volume 7, 7
@@ -21,7 +21,7 @@ SFX_Pokedex_Rating_3_Ch1: ; 7edda (1f:6dda)
 	endchannel
 
 
-SFX_Pokedex_Rating_3_Ch2: ; 7edf3 (1f:6df3)
+SFX_Pokedex_Rating_3_Ch2:
 	executemusic
 	duty 2
 	notetype 5, 12, 2
@@ -44,7 +44,7 @@ SFX_Pokedex_Rating_3_Ch2: ; 7edf3 (1f:6df3)
 	endchannel
 
 
-SFX_Pokedex_Rating_3_Ch3: ; 7ee09 (1f:6e09)
+SFX_Pokedex_Rating_3_Ch3:
 	executemusic
 	notetype 5, 1, 0
 	octave 5

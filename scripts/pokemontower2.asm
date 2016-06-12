@@ -1,22 +1,22 @@
-PokemonTower2Script: ; 604f2 (18:44f2)
+PokemonTower2Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower2ScriptPointers
 	ld a, [wPokemonTower2CurScript]
 	jp CallFunctionInTable
 
-PokemonTower2Script_604fe: ; 604fe (18:44fe)
+PokemonTower2Script_604fe:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wPokemonTower2CurScript], a
 	ld [wCurMapScript], a
 	ret
 
-PokemonTower2ScriptPointers: ; 60509 (18:4509)
+PokemonTower2ScriptPointers:
 	dw PokemonTower2Script0
 	dw PokemonTower2Script1
 	dw PokemonTower2Script2
 
-PokemonTower2Script0: ; 6050f (18:450f)
+PokemonTower2Script0:
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	ret nz
 	ld hl, CoordsData_6055e
@@ -53,12 +53,12 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld [hJoyPressed], a
 	ret
 
-CoordsData_6055e: ; 6055e (18:455e)
+CoordsData_6055e:
 	db $05,$0F
 	db $06,$0E
 	db $0F ; isn't this supposed to end in $ff?
 
-PokemonTower2Script1: ; 60563 (18:4563)
+PokemonTower2Script1:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower2Script_604fe
@@ -85,7 +85,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld [wCurMapScript], a
 	ret
 
-MovementData_605a9: ; 605a9 (18:45a9)
+MovementData_605a9:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
@@ -96,7 +96,7 @@ MovementData_605a9: ; 605a9 (18:45a9)
 	db NPC_MOVEMENT_RIGHT
 	db $FF
 
-MovementData_605b2: ; 605b2 (18:45b2)
+MovementData_605b2:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
@@ -107,7 +107,7 @@ MovementData_605b2: ; 605b2 (18:45b2)
 	db NPC_MOVEMENT_DOWN
 	db $FF
 
-PokemonTower2Script2: ; 605bb (18:45bb)
+PokemonTower2Script2:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -122,11 +122,11 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld [wCurMapScript], a
 	ret
 
-PokemonTower2TextPointers: ; 605db (18:45db)
+PokemonTower2TextPointers:
 	dw PokemonTower2Text1
 	dw PokemonTower2Text2
 
-PokemonTower2Text1: ; 605df (18:45df)
+PokemonTower2Text1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .asm_16f24
@@ -167,22 +167,22 @@ PokemonTower2Text1: ; 605df (18:45df)
 .asm_41852
 	jp TextScriptEnd
 
-PokemonTower2Text_6062d: ; 6062d (18:462d)
+PokemonTower2Text_6062d:
 	TX_FAR _PokemonTower2Text_6062d
 	db "@"
 
-PokemonTower2Text_60632: ; 60632 (18:4632)
+PokemonTower2Text_60632:
 	TX_FAR _PokemonTower2Text_60632
 	db "@"
 
-PokemonTower2Text_60637: ; 60637 (18:4637)
+PokemonTower2Text_60637:
 	TX_FAR _PokemonTower2Text_60637
 	db "@"
 
-PokemonTower2Text_6063c: ; 6063c (18:463c)
+PokemonTower2Text_6063c:
 	TX_FAR _PokemonTower2Text_6063c
 	db "@"
 
-PokemonTower2Text2: ; 60641 (18:4641)
+PokemonTower2Text2:
 	TX_FAR _PokemonTower2Text2
 	db "@"

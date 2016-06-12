@@ -1,4 +1,4 @@
-FanClubScript: ; 59b70 (16:5b70)
+FanClubScript:
 	jp EnableAutoTextBoxDrawing
 
 FanClubBikeInBag:
@@ -11,7 +11,7 @@ FanClubBikeInBag:
 	ld b, BIKE_VOUCHER
 	jp IsItemInBag
 
-FanClubTextPointers: ; 59b84 (16:5b84)
+FanClubTextPointers:
 	dw FanClubText1
 	dw FanClubText2
 	dw FanClubText3
@@ -160,14 +160,14 @@ FanClubText5:
 	TX_FAR FanClubBagFullText
 	db "@"
 
-FanClubText6: ; 59c88 (16:5c88)
+FanClubText6:
 	TX_FAR _FanClubText6
 	db "@"
 
-FanClubText7: ; 59c8d (16:5c8d)
+FanClubText7:
 	TX_FAR _FanClubText7
 	db "@"
 
-FanClubText8: ; 59c92 (16:5c92)
+FanClubText8:
 	TX_FAR _FanClubText8
 	db "@"

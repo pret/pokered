@@ -1,4 +1,4 @@
-EmotionBubble: ; 17c47 (5:7c47)
+EmotionBubble:
 	ld a, [wWhichEmotionBubble]
 	ld c, a
 	ld b, 0
@@ -61,14 +61,14 @@ EmotionBubble: ; 17c47 (5:7c47)
 	call DelayFrame
 	jp UpdateSprites
 
-EmotionBubblesPointerTable: ; 17caf (5:7caf)
+EmotionBubblesPointerTable:
 	dw EmotionBubbles
 	dw EmotionBubbles + $40
 	dw EmotionBubbles + $80
 
-EmotionBubblesOAM: ; 17cb5 (5:7cb5)
+EmotionBubblesOAM:
 	db $F8,$00,$F9,$00
 	db $FA,$00,$FB,$00
 
-EmotionBubbles: ; 17cbd (5:7cbd)
+EmotionBubbles:
 	INCBIN "gfx/emotion_bubbles.2bpp"

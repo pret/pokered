@@ -1,4 +1,4 @@
-GetMachinePrice: ; 7bf86 (1e:7f86)
+GetMachinePrice:
 ; Input:  [wcf91] = Item Id of a TM
 ; Output: Stores the TM price at hItemPrice
 	ld a, [wcf91] ; a contains TM item id

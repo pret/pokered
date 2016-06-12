@@ -1,10 +1,10 @@
-DayCareMScript: ; 5624f (15:624f)
+DayCareMScript:
 	jp EnableAutoTextBoxDrawing
 
-DayCareMTextPointers: ; 56252 (15:6252)
+DayCareMTextPointers:
 	dw DayCareMText1
 
-DayCareMText1: ; 56254 (15:6254)
+DayCareMText1:
 	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld a, [wDayCareInUse]
@@ -210,60 +210,60 @@ DayCareMText1: ; 56254 (15:6254)
 	call PrintText
 	jp TextScriptEnd
 
-DayCareIntroText: ; 5640f (15:640f)
+DayCareIntroText:
 	TX_FAR _DayCareIntroText
 	db "@"
 
-DayCareWhichMonText: ; 56414 (15:6414)
+DayCareWhichMonText:
 	TX_FAR _DayCareWhichMonText
 	db "@"
 
-DayCareWillLookAfterMonText: ; 56419 (15:6419)
+DayCareWillLookAfterMonText:
 	TX_FAR _DayCareWillLookAfterMonText
 	db "@"
 
-DayCareComeSeeMeInAWhileText: ; 5641e (15:641e)
+DayCareComeSeeMeInAWhileText:
 	TX_FAR _DayCareComeSeeMeInAWhileText
 	db "@"
 
-DayCareMonHasGrownText: ; 56423 (15:6423)
+DayCareMonHasGrownText:
 	TX_FAR _DayCareMonHasGrownText
 	db "@"
 
-DayCareOweMoneyText: ; 56428 (15:6428)
+DayCareOweMoneyText:
 	TX_FAR _DayCareOweMoneyText
 	db "@"
 
-DayCareGotMonBackText: ; 5642d (15:642d)
+DayCareGotMonBackText:
 	TX_FAR _DayCareGotMonBackText
 	db "@"
 
-DayCareMonNeedsMoreTimeText: ; 56432 (15:6432)
+DayCareMonNeedsMoreTimeText:
 	TX_FAR _DayCareMonNeedsMoreTimeText
 	db "@"
 
-DayCareAllRightThenText: ; 56437 (15:6437)
+DayCareAllRightThenText:
 	TX_FAR _DayCareAllRightThenText
-DayCareComeAgainText: ; 5643b (15:643b)
+DayCareComeAgainText:
 	TX_FAR _DayCareComeAgainText
 	db "@"
 
-DayCareNoRoomForMonText: ; 56440 (15:6440)
+DayCareNoRoomForMonText:
 	TX_FAR _DayCareNoRoomForMonText
 	db "@"
 
-DayCareOnlyHaveOneMonText: ; 56445 (15:6445)
+DayCareOnlyHaveOneMonText:
 	TX_FAR _DayCareOnlyHaveOneMonText
 	db "@"
 
-DayCareCantAcceptMonWithHMText: ; 5644a (15:644a)
+DayCareCantAcceptMonWithHMText:
 	TX_FAR _DayCareCantAcceptMonWithHMText
 	db "@"
 
-DayCareHeresYourMonText: ; 5644f (15:644f)
+DayCareHeresYourMonText:
 	TX_FAR _DayCareHeresYourMonText
 	db "@"
 
-DayCareNotEnoughMoneyText: ; 56454 (15:6454)
+DayCareNotEnoughMoneyText:
 	TX_FAR _DayCareNotEnoughMoneyText
 	db "@"

@@ -1,14 +1,14 @@
-FuchsiaHouse2Script: ; 750b5 (1d:50b5)
+FuchsiaHouse2Script:
 	jp EnableAutoTextBoxDrawing
 
-FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
+FuchsiaHouse2TextPointers:
 	dw FuchsiaHouse2Text1
 	dw PickUpItemText
 	dw BoulderText
 	dw FuchsiaHouse2Text4
 	dw FuchsiaHouse2Text5
 
-FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
+FuchsiaHouse2Text1:
 	TX_ASM
 	CheckEvent EVENT_GOT_HM04
 	jr nz, .subtract
@@ -55,44 +55,44 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 .asm_52039
 	jp TextScriptEnd
 
-WardenGibberishText1: ; 75135 (1d:5135)
+WardenGibberishText1:
 	TX_FAR _WardenGibberishText1
 	db "@"
 
-WardenGibberishText2: ; 7513a (1d:513a)
+WardenGibberishText2:
 	TX_FAR _WardenGibberishText2
 	db "@"
 
-WardenGibberishText3: ; 7513f (1d:513f)
+WardenGibberishText3:
 	TX_FAR _WardenGibberishText3
 	db "@"
 
-WardenTeethText1: ; 75144 (1d:5144)
+WardenTeethText1:
 	TX_FAR _WardenTeethText1
 	db $0b
 
-WardenTeethText2: ; 75149 (1d:5149)
+WardenTeethText2:
 	TX_FAR _WardenTeethText2
 	db "@"
 
-WardenThankYouText: ; 7514e (1d:514e)
+WardenThankYouText:
 	TX_FAR _WardenThankYouText
 	db "@"
 
-ReceivedHM04Text: ; 75153 (1d:5153)
+ReceivedHM04Text:
 	TX_FAR _ReceivedHM04Text
 	db $0B, "@"
 
-HM04ExplanationText: ; 75159 (1d:5159)
+HM04ExplanationText:
 	TX_FAR _HM04ExplanationText
 	db "@"
 
-HM04NoRoomText: ; 7515e (1d:515e)
+HM04NoRoomText:
 	TX_FAR _HM04NoRoomText
 	db "@"
 
-FuchsiaHouse2Text5: ; 75163 (1d:5163)
-FuchsiaHouse2Text4: ; 75163 (1d:5163)
+FuchsiaHouse2Text5:
+FuchsiaHouse2Text4:
 	TX_ASM
 	ld a, [H_SPRITEINDEX]
 	cp $4
@@ -103,10 +103,10 @@ FuchsiaHouse2Text4: ; 75163 (1d:5163)
 	call PrintText
 	jp TextScriptEnd
 
-FuchsiaHouse2Text_75176: ; 75176 (1d:5176)
+FuchsiaHouse2Text_75176:
 	TX_FAR _FuchsiaHouse2Text_75176
 	db "@"
 
-FuchsiaHouse2Text_7517b: ; 7517b (1d:517b)
+FuchsiaHouse2Text_7517b:
 	TX_FAR _FuchsiaHouse2Text_7517b
 	db "@"

@@ -1,4 +1,4 @@
-LoreleiScript: ; 7617b (1d:617b)
+LoreleiScript:
 	call LoreleiShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
 	ld hl, LoreleiTrainerHeaders
@@ -8,7 +8,7 @@ LoreleiScript: ; 7617b (1d:617b)
 	ld [wLoreleiCurScript], a
 	ret
 
-LoreleiShowOrHideExitBlock: ; 76191 (1d:6191)
+LoreleiShowOrHideExitBlock:
 ; Blocks or clears the exit to the next room.
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -27,22 +27,22 @@ LoreleiShowOrHideExitBlock: ; 76191 (1d:6191)
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
-ResetLoreleiScript: ; 761b6 (1d:61b6)
+ResetLoreleiScript:
 	xor a
 	ld [wLoreleiCurScript], a
 	ret
 
-LoreleiScriptPointers: ; 761bb (1d:61bb)
+LoreleiScriptPointers:
 	dw LoreleiScript0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw LoreleiScript2
 	dw LoreleiScript3
 	dw LoreleiScript4
 
-LoreleiScript4: ; 761c5 (1d:61c5)
+LoreleiScript4:
 	ret
 
-LoreleiScriptWalkIntoRoom: ; 761c6 (1d:61c6)
+LoreleiScriptWalkIntoRoom:
 ; Walk six steps upward.
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
@@ -60,7 +60,7 @@ LoreleiScriptWalkIntoRoom: ; 761c6 (1d:61c6)
 	ld [wCurMapScript], a
 	ret
 
-LoreleiScript0: ; 761e2 (1d:61e2)
+LoreleiScript0:
 	ld hl, LoreleiEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
@@ -88,14 +88,14 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld [wCurMapScript], a
 	ret
 
-LoreleiEntranceCoords: ; 76223 (1d:6223)
+LoreleiEntranceCoords:
 	db $0A,$04
 	db $0A,$05
 	db $0B,$04
 	db $0B,$05
 	db $FF
 
-LoreleiScript3: ; 7622c (1d:622c)
+LoreleiScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -106,7 +106,7 @@ LoreleiScript3: ; 7622c (1d:622c)
 	ld [wCurMapScript], a
 	ret
 
-LoreleiScript2: ; 7623f (1d:623f)
+LoreleiScript2:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
@@ -115,12 +115,12 @@ LoreleiScript2: ; 7623f (1d:623f)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-LoreleiTextPointers: ; 76251 (1d:6251)
+LoreleiTextPointers:
 	dw LoreleiText1
 	dw LoreleiDontRunAwayText
 
-LoreleiTrainerHeaders: ; 76255 (1d:6255)
-LoreleiTrainerHeader0: ; 76255 (1d:6255)
+LoreleiTrainerHeaders:
+LoreleiTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
@@ -131,24 +131,24 @@ LoreleiTrainerHeader0: ; 76255 (1d:6255)
 
 	db $ff
 
-LoreleiText1: ; 76262 (1d:6262)
+LoreleiText1:
 	TX_ASM
 	ld hl, LoreleiTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-LoreleiBeforeBattleText: ; 7626c (1d:626c)
+LoreleiBeforeBattleText:
 	TX_FAR _LoreleiBeforeBattleText
 	db "@"
 
-LoreleiEndBattleText: ; 76271 (1d:6271)
+LoreleiEndBattleText:
 	TX_FAR _LoreleiEndBattleText
 	db "@"
 
-LoreleiAfterBattleText: ; 76276 (1d:6276)
+LoreleiAfterBattleText:
 	TX_FAR _LoreleiAfterBattleText
 	db "@"
 
-LoreleiDontRunAwayText: ; 7627b (1d:627b)
+LoreleiDontRunAwayText:
 	TX_FAR _LoreleiDontRunAwayText
 	db "@"

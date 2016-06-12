@@ -1,4 +1,4 @@
-CeladonCity_h: ; 18000 (6:4000)
+CeladonCity_h:
 	db OVERWORLD ; tileset
 	db CELADON_CITY_HEIGHT, CELADON_CITY_WIDTH ; dimensions (y, x)
 	dw CeladonCityBlocks, CeladonCityTextPointers, CeladonCityScript ; blocks, texts, scripts

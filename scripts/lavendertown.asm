@@ -1,7 +1,7 @@
-LavenderTownScript: ; 4410b (11:410b)
+LavenderTownScript:
 	jp EnableAutoTextBoxDrawing
 
-LavenderTownTextPointers: ; 4410e (11:410e)
+LavenderTownTextPointers:
 	dw LavenderTownText1
 	dw LavenderTownText2
 	dw LavenderTownText3
@@ -12,7 +12,7 @@ LavenderTownTextPointers: ; 4410e (11:410e)
 	dw LavenderTownText8
 	dw LavenderTownText9
 
-LavenderTownText1: ; 44120 (11:4120)
+LavenderTownText1:
 	TX_ASM
 	ld hl, LavenderTownText_4413c
 	call PrintText
@@ -26,38 +26,38 @@ LavenderTownText1: ; 44120 (11:4120)
 	call PrintText
 	jp TextScriptEnd
 
-LavenderTownText_4413c: ; 4413c (11:413c)
+LavenderTownText_4413c:
 	TX_FAR _LavenderTownText_4413c
 	db "@"
 
-LavenderTownText_44141: ; 44141 (11:4141)
+LavenderTownText_44141:
 	TX_FAR _LavenderTownText_44141
 	db "@"
 
-LavenderTownText_44146: ; 44146 (11:4146)
+LavenderTownText_44146:
 	TX_FAR _LavenderTownText_44146
 	db "@"
 
-LavenderTownText2: ; 4414b (11:414b)
+LavenderTownText2:
 	TX_FAR _LavenderTownText2
 	db "@"
 
-LavenderTownText3: ; 44150 (11:4150)
+LavenderTownText3:
 	TX_FAR _LavenderTownText3
 	db "@"
 
-LavenderTownText4: ; 44155 (11:4155)
+LavenderTownText4:
 	TX_FAR _LavenderTownText4
 	db "@"
 
-LavenderTownText5: ; 4415a (11:415a)
+LavenderTownText5:
 	TX_FAR _LavenderTownText5
 	db "@"
 
-LavenderTownText8: ; 4415f (11:415f)
+LavenderTownText8:
 	TX_FAR _LavenderTownText8
 	db "@"
 
-LavenderTownText9: ; 44164 (11:4164)
+LavenderTownText9:
 	TX_FAR _LavenderTownText9
 	db "@"

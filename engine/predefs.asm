@@ -49,7 +49,7 @@ GetPredefPointer:
 
 	ret
 
-PredefPointers:: ; 4fe79 (13:7e79)
+PredefPointers::
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.
 	add_predef DrawPlayerHUDAndHPBar

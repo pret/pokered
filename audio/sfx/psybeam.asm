@@ -1,4 +1,4 @@
-SFX_Psybeam_Ch1: ; 20759 (8:4759)
+SFX_Psybeam_Ch1:
 	dutycycle 161
 	unknownsfx0x20 10, 241, 64, 6
 	unknownsfx0x20 10, 243, 128, 6
@@ -8,7 +8,7 @@ SFX_Psybeam_Ch1: ; 20759 (8:4759)
 	endchannel
 
 
-SFX_Psybeam_Ch2: ; 20770 (8:4770)
+SFX_Psybeam_Ch2:
 	dutycycle 179
 	unknownsfx0x20 10, 243, 113, 5
 	unknownsfx0x20 7, 227, 49, 5
@@ -18,7 +18,7 @@ SFX_Psybeam_Ch2: ; 20770 (8:4770)
 	endchannel
 
 
-SFX_Psybeam_Ch3: ; 20787 (8:4787)
+SFX_Psybeam_Ch3:
 	unknownnoise0x20 2, 209, 74
 	unknownnoise0x20 2, 210, 42
 	loopchannel 21, SFX_Psybeam_Ch3

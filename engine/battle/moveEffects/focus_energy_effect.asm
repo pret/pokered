@@ -1,4 +1,4 @@
-FocusEnergyEffect_: ; 27f86 (9:7f86)
+FocusEnergyEffect_:
 	ld hl, wPlayerBattleStatus2
 	ld a, [H_WHOSETURN]
 	and a
@@ -16,7 +16,7 @@ FocusEnergyEffect_: ; 27f86 (9:7f86)
 	call DelayFrames
 	jpab PrintButItFailedText_
 
-GettingPumpedText: ; 27fb3 (9:7fb3)
+GettingPumpedText:
 	db $0a
 	TX_FAR _GettingPumpedText
 	db "@"

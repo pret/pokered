@@ -1,4 +1,4 @@
-RemoveGuardDrink: ; 5a59f (16:659f)
+RemoveGuardDrink:
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
@@ -12,5 +12,5 @@ RemoveGuardDrink: ; 5a59f (16:659f)
 	jr z, .drinkLoop
 	jpba RemoveItemByID
 
-GuardDrinksList: ; 5a5b7 (16:65b7)
+GuardDrinksList:
 	db FRESH_WATER, SODA_POP, LEMONADE, $00

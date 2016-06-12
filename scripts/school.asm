@@ -1,14 +1,14 @@
-SchoolScript: ; 1d54c (7:554c)
+SchoolScript:
 	jp EnableAutoTextBoxDrawing
 
-SchoolTextPointers: ; 1d54f (7:554f)
+SchoolTextPointers:
 	dw SchoolText1
 	dw SchoolText2
 
-SchoolText1: ; 1d553 (7:5553)
+SchoolText1:
 	TX_FAR _SchoolText1
 	db "@"
 
-SchoolText2: ; 1d558 (7:5558)
+SchoolText2:
 	TX_FAR _SchoolText2
 	db "@"
