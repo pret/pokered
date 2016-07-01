@@ -6,19 +6,8 @@ MD5 := md5sum -c --quiet
 pic      := $(PYTHON) extras/pokemontools/pic.py compress
 includes := $(PYTHON) extras/pokemontools/scan_includes.py
 
-base_obj := \
-	audio.o \
-	main.o \
-	text.o \
-	wram.o
-
-red_obj := $(base_obj:.o=_red.o)
-blue_obj := $(base_obj:.o=_blue.o)
-all_obj := $(red_obj) $(blue_obj)
-
-$(foreach obj, $(base_obj:.o=), \
-	$(eval $(obj)_dep := $(shell $(includes) $(obj).asm)) \
-)
+pokered_obj := audio_red.o main_red.o text_red.o wram_red.o
+pokeblue_obj := audio_blue.o main_blue.o text_blue.o wram_blue.o
 
 .SUFFIXES:
 .SUFFIXES: .asm .o .gbc .png .2bpp .1bpp .pic
@@ -38,21 +27,24 @@ compare: red blue
 	@$(MD5) roms.md5
 
 clean:
-	rm -f $(roms) $(all_obj) $(roms:.gbc=.sym)
+	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
 
 %.asm: ;
-$(red_obj): %_red.o: %.asm $$(%_dep)
-	rgbasm -D "_RED" -h -o $@ $*.asm
-$(blue_obj): %_blue.o: %.asm $$(%_dep)
-	rgbasm -D "_BLUE" -h -o $@ $*.asm
 
-dmg_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03
-red_opt  = $(dmg_opt) -t "POKEMON RED"
-blue_opt = $(dmg_opt) -t "POKEMON BLUE"
+%_red.o: dep = $(shell $(includes) $(@D)/$*.asm)
+$(pokered_obj): %_red.o: %.asm $$(dep)
+	rgbasm -D _RED -h -o $@ $*.asm
 
-poke%.gbc: $$(%_obj)
-	rgblink -n poke$*.sym -o $@ $^
+%_blue.o: dep = $(shell $(includes) $(@D)/$*.asm)
+$(pokeblue_obj): %_blue.o: %.asm $$(dep)
+	rgbasm -D _BLUE -h -o $@ $*.asm
+
+pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
+pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
+
+%.gbc: $$(%_obj)
+	rgblink -n $*.sym -o $@ $^
 	rgbfix $($*_opt) $@
 
 %.png:  ;
