@@ -103,7 +103,8 @@ BikeShopText_1d81f:
 
 BikeShopText_1d824:
 	TX_FAR _BikeShopText_1d824
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
 BikeShopComeAgainText:
 	TX_FAR _BikeShopComeAgainText

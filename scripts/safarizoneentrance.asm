@@ -209,7 +209,7 @@ SafariZoneEntranceTextPointers:
 
 .MakePaymentText
 	TX_FAR SafariZoneEntranceText_9e747
-	db $b
+	TX_SFX_ITEM_1
 	TX_FAR _SafariZoneEntranceText_75360
 	db "@"
 

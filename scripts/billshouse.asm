@@ -192,7 +192,7 @@ BillThankYouText:
 SSTicketReceivedText:
 	TX_FAR _SSTicketReceivedText
 	TX_SFX_KEY_ITEM
-	TX_BUTTON_SOUND
+	TX_BLINK
 	db "@"
 
 SSTicketNoRoomText:

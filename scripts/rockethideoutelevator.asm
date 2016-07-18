@@ -81,4 +81,5 @@ RocketHideoutElevatorText1:
 
 RocketHideoutElevatorText_4578b:
 	TX_FAR _RocketElevatorText_4578b
-	db $d, "@"
+	TX_WAIT
+	db "@"

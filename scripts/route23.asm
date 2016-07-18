@@ -227,7 +227,7 @@ VictoryRoadGuardText1:
 
 VictoryRoadGuardText2:
 	TX_FAR _VictoryRoadGuardText2
-	db $b
+	TX_SFX_ITEM_1
 	TX_FAR _VictoryRoadGuardText_513a3
 	db "@"
 

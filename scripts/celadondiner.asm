@@ -54,7 +54,8 @@ CeladonDinerText_491a7:
 
 ReceivedCoinCaseText:
 	TX_FAR _ReceivedCoinCaseText
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
 CoinCaseNoRoomText:
 	TX_FAR _CoinCaseNoRoomText

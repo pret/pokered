@@ -215,7 +215,8 @@ Museum1FText_5c28e:
 
 ReceivedOldAmberText:
 	TX_FAR _ReceivedOldAmberText
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
 Museum1FText_5c299:
 	TX_FAR _Museum1FText_5c299

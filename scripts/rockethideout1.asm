@@ -130,7 +130,8 @@ RocketHideout1EndBattleText6:
 	ret
 
 RocketHideout1Text_44c9f:
-	db $6, "@"
+	TX_BLINK
+	db "@"
 
 RocketHideout1BattleText2:
 	TX_FAR _RocketHideout1BattleText2

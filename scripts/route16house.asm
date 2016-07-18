@@ -30,7 +30,8 @@ Route16HouseText3:
 
 ReceivedHM02Text:
 	TX_FAR _ReceivedHM02Text
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
 HM02ExplanationText:
 	TX_FAR _HM02ExplanationText

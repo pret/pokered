@@ -547,7 +547,7 @@ TradeCenter_SelectMon:
 	ld a, " "
 	ld [hl], a
 .cancelMenuItem_Loop
-	ld a, $ed ; filled arrow cursor
+	ld a, "▶" ; filled arrow cursor
 	Coorda 1, 16
 .cancelMenuItem_JoypadLoop
 	call JoypadLowSensitivity
@@ -566,7 +566,7 @@ TradeCenter_SelectMon:
 	ld [wCurrentMenuItem], a
 	jp .playerMonMenu
 .cancelMenuItem_APressed
-	ld a, $ec ; unfilled arrow cursor
+	ld a, "▷" ; unfilled arrow cursor
 	Coorda 1, 16
 	ld a, $f
 	ld [wSerialExchangeNybbleSendData], a
@@ -616,7 +616,7 @@ TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	coord hl, 1, 9
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ec ; cursor
+	ld [hl], "▷" ; cursor
 	ret
 
 TradeCenter_DisplayStats:

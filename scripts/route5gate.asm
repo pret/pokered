@@ -106,7 +106,7 @@ Route7GateText3:
 Route6GateText3:
 Route5GateText3:
 	TX_FAR _SaffronGateText_8aaa9
-	db $11
+	TX_SFX_KEY_ITEM
 	TX_FAR _SaffronGateText_1dff1
 	db "@"
 

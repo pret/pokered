@@ -70,7 +70,7 @@ RedrawPartyMenu_:
 	dec hl
 	dec hl
 	dec hl
-	ld a,$EC ; unfilled right arrow menu cursor
+	ld a,"▷" ; unfilled right arrow menu cursor
 	ld [hli],a ; place the cursor
 	inc hl
 	inc hl
@@ -87,7 +87,7 @@ RedrawPartyMenu_:
 	call PrintStatusCondition
 	pop hl
 	push hl
-	ld bc,20 + 1 ; down 1 row and right 1 column
+	ld bc,SCREEN_WIDTH + 1 ; down 1 row and right 1 column
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -307,8 +307,8 @@ ReviveText:
 
 RareCandyText:
 	TX_FAR _RareCandyText
-	db $0B
-	db $06
+	TX_SFX_ITEM_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
+	TX_BLINK
 	db "@"
 
 SetPartyMenuHPBarColor:

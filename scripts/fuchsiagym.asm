@@ -193,7 +193,7 @@ FuchsiaGymText9:
 
 FuchsiaGymText10:
 	TX_FAR _ReceivedTM06Text
-	db $11
+	TX_SFX_KEY_ITEM
 
 TM06ExplanationText:
 	TX_FAR _TM06ExplanationText

@@ -162,7 +162,8 @@ SilphCo2Text_59ded:
 
 ReceivedTM36Text:
 	TX_FAR _ReceivedTM36Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
 TM36ExplanationText:
 	TX_FAR _TM36ExplanationText

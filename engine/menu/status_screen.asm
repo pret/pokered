@@ -211,10 +211,11 @@ Type2Text:
 	db "TYPE2/", $4e
 
 IDNoText:
-	db $73, "№", "/", $4e
+	db $73, "№/", $4e
 
 OTText:
-	db "OT/", $4e, "@"
+	db   "OT/"
+	next "@"
 
 StatusText:
 	db "STATUS/@"

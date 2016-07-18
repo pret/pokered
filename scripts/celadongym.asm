@@ -201,7 +201,7 @@ CeladonGymText9:
 
 TM21Text:
 	TX_FAR _ReceivedTM21Text
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _TM21ExplanationText
 	db "@"
 

@@ -320,9 +320,10 @@ CeruleanCityText_196d9:
 
 ReceivedTM28Text:
 	TX_FAR _ReceivedTM28Text
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _ReceivedTM28Text2
-	db $0D, "@"
+	TX_WAIT
+	db "@"
 
 TM28NoRoomText:
 	TX_FAR _TM28NoRoomText
@@ -356,13 +357,13 @@ CeruleanCityText6:
 CeruleanCityText7:
 	TX_ASM
 	ld a, [hRandomAdd]
-	cp $b4
+	cp 180
 	jr c, .asm_e9fc9
 	ld hl, CeruleanCityText_19730
 	call PrintText
 	jr .asm_d486e
 .asm_e9fc9
-	cp $64
+	cp 100
 	jr c, .asm_df99b
 	ld hl, CeruleanCityText_19735
 	call PrintText
@@ -388,19 +389,19 @@ CeruleanCityText_1973a:
 CeruleanCityText8:
 	TX_ASM
 	ld a, [hRandomAdd]
-	cp $b4
+	cp 180
 	jr c, .asm_e28da
 	ld hl, CeruleanCityText_1976f
 	call PrintText
 	jr .asm_f2f38
 .asm_e28da
-	cp $78
+	cp 120
 	jr c, .asm_15d08
 	ld hl, CeruleanCityText_19774
 	call PrintText
 	jr .asm_f2f38
 .asm_15d08
-	cp $3c
+	cp 60
 	jr c, .asm_d7fea
 	ld hl, CeruleanCityText_19779
 	call PrintText

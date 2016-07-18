@@ -235,9 +235,9 @@ CinnabarGymQuiz_1ea92:
 	ret
 
 CinnabarGymQuizCorrectText:
-	db $0b
+	TX_SFX_ITEM_1
 	TX_FAR _CinnabarGymQuizCorrectText
-	db $06
+	TX_BLINK
 	TX_ASM
 
 	ld a, [$ffe0]
@@ -372,7 +372,7 @@ BillsHouseMonitorText:
 
 BillsHouseInitiatedText:
 	TX_FAR _BillsHouseInitiatedText
-	db $06
+	TX_BLINK
 	TX_ASM
 	ld a, $ff
 	ld [wNewSoundID], a

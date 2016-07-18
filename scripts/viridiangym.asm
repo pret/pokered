@@ -307,11 +307,13 @@ ViridianGymText_74ace:
 
 ViridianGymText_74ad3:
 	TX_FAR _ViridianGymText_74ad3
-	db $0b, "@"
+	TX_SFX_LEVEL_UP ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
+	db "@"
 
 ViridianGymText_74ad9:
 	TX_FAR _ViridianGymText_74ad9
-	db $0d, "@"
+	TX_WAIT
+	db "@"
 
 ViridianGymText12:
 	TX_FAR _ViridianGymText12
@@ -319,7 +321,7 @@ ViridianGymText12:
 
 ViridianGymText13:
 	TX_FAR _ReceivedTM27Text
-	db $0b
+	TX_SFX_ITEM_1
 
 TM27ExplanationText:
 	TX_FAR _TM27ExplanationText

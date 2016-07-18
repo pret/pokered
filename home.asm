@@ -968,7 +968,6 @@ PokeCenterSignText::
 	db "@"
 
 PickUpItemText::
-; XXX better label (what does predef $5C do?)
 	TX_ASM
 	predef PickUpItem
 	jp TextScriptEnd
@@ -1885,7 +1884,7 @@ PrintListMenuEntries::
 	jp nz,.loop
 	ld bc,-8
 	add hl,bc
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	ld [hl],a
 	ret
 .printCancelMenuItem
@@ -4123,7 +4122,7 @@ EraseMenuCursor::
 HandleDownArrowBlinkTiming::
 	ld a,[hl]
 	ld b,a
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	cp b
 	jr nz,.downArrowOff
 .downArrowOn
@@ -4157,7 +4156,7 @@ HandleDownArrowBlinkTiming::
 	ret nz
 	ld a,$06
 	ld [H_DOWNARROWBLINKCNT2],a
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	ld [hl],a
 	ret
 

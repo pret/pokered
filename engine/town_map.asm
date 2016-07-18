@@ -179,9 +179,9 @@ LoadTownMap_Fly:
 	ld c, 15
 	call DelayFrames
 	coord hl, 18, 0
-	ld [hl], $ed
+	ld [hl], "▲"
 	coord hl, 19, 0
-	ld [hl], $ee
+	ld [hl], "▼"
 	pop hl
 .inputLoop
 	push hl

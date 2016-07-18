@@ -332,13 +332,13 @@ ContinueText:
 	db "CONTINUE", $4e
 
 NewGameText:
-	db "NEW GAME", $4e
-	db "OPTION@"
+	db   "NEW GAME"
+	next "OPTION@"
 
 CableClubOptionsText:
-	db "TRADE CENTER", $4e
-	db "COLOSSEUM",    $4e
-	db "CANCEL@"
+	db   "TRADE CENTER"
+	next "COLOSSEUM"
+	next "CANCEL@"
 
 DisplayContinueGameInfo:
 	xor a

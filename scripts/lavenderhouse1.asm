@@ -95,7 +95,7 @@ LavenderHouse1Text_1d94c:
 
 ReceivedFluteText:
 	TX_FAR _ReceivedFluteText
-	db $11
+	TX_SFX_KEY_ITEM
 	TX_FAR _FluteExplanationText
 	db "@"
 

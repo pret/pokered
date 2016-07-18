@@ -144,7 +144,7 @@ FanClubText5:
 
 .receivedvouchertext
 	TX_FAR ReceivedBikeVoucherText
-	db $11
+	TX_SFX_KEY_ITEM
 	TX_FAR ExplainBikeVoucherText
 	db "@"
 

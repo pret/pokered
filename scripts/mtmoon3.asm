@@ -323,7 +323,9 @@ MtMoon3Script_49f69:
 
 MtMoon3Text_49f6f:
 	TX_FAR _MtMoon3Text_49f6f
-	db $11, $d, "@"
+	TX_SFX_KEY_ITEM
+	TX_WAIT
+	db "@"
 
 MtMoon3Script_49f76:
 	ld hl, MtMoon3Text_49f7f
@@ -332,7 +334,8 @@ MtMoon3Script_49f76:
 
 MtMoon3Text_49f7f:
 	TX_FAR _MtMoon3Text_49f7f
-	db $d, "@"
+	TX_WAIT
+	db "@"
 
 MtMoon3Text_49f85:
 	TX_FAR _MtMoon3Text_49f85
@@ -352,7 +355,8 @@ MtMoon3Text_49f94:
 
 MtMoon3Text_49f99:
 	TX_FAR _MtMoon3Text_49f99
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
 MtMoon3BattleText2:
 	TX_FAR _MtMoon3BattleText2

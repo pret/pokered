@@ -47,7 +47,7 @@ DirectorText:
 
 .CompletedDexText
 	TX_FAR _CompletedDexText
-	db $6
+	TX_BLINK
 	TX_ASM
 	callab DisplayDiploma
 	ld a, $1

@@ -155,7 +155,7 @@ HandlePokedexListMenu:
 	ld [H_AUTOBGTRANSFERENABLED],a
 ; draw the horizontal line separating the seen and owned amounts from the menu
 	coord hl, 15, 8
-	ld a,$7a ; horizontal line tile
+	ld a,"─"
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
@@ -267,7 +267,7 @@ HandlePokedexListMenu:
 	inc hl
 	call PlaceString
 	pop hl
-	ld bc,2 * 20
+	ld bc,2 * SCREEN_WIDTH
 	add hl,bc
 	pop de
 	pop af
@@ -344,7 +344,7 @@ HandlePokedexListMenu:
 
 DrawPokedexVerticalLine:
 	ld c,9 ; height of line
-	ld de,20 ; width of screen
+	ld de,SCREEN_WIDTH
 	ld a,$71 ; vertical line tile
 .loop
 	ld [hl],a
@@ -568,7 +568,8 @@ ShowPokedexDataInternal:
 	ret
 
 HeightWeightText:
-	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
+	db   "HT  ?",$60,"??",$61
+	next "WT   ???lb@"
 
 ; XXX does anything point to this?
 PokeText:
@@ -580,7 +581,7 @@ PokedexDataDividerLine:
 	db $69,$6B,$69,$6B,$6B
 	db $6B,$6B,$69,$6B,$69
 	db $6B,$69,$6B,$69,$6A
-	db $50
+	db "@"
 
 ; draws a line of tiles
 ; INPUT:

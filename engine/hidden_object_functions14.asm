@@ -7,7 +7,7 @@ PrintNotebookText:
 
 TMNotebook:
 	TX_FAR TMNotebookText
-	db $0d
+	TX_WAIT
 	db "@"
 
 ViridianSchoolNotebook:
@@ -45,7 +45,7 @@ TurnPageText:
 
 ViridianSchoolNotebookText5:
 	TX_FAR _ViridianSchoolNotebookText5
-	db $0d
+	TX_WAIT
 	db "@"
 
 ViridianSchoolNotebookText1:

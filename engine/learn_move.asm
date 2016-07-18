@@ -185,7 +185,9 @@ TryingToLearn:
 
 LearnedMove1Text:
 	TX_FAR _LearnedMove1Text
-	db $b,6,"@"
+	TX_SFX_ITEM_1 ; plays SFX_GET_ITEM_1 in the pary menu (rare candy) and plays SFX_LEVEL_UP in battle
+	TX_BLINK
+	db "@"
 
 WhichMoveToForgetText:
 	TX_FAR _WhichMoveToForgetText
@@ -205,7 +207,7 @@ TryingToLearnText:
 
 OneTwoAndText:
 	TX_FAR _OneTwoAndText
-	db $a
+	TX_DELAY
 	TX_ASM
 	ld a, SFX_SWAP
 	call PlaySoundWaitForCurrent
@@ -214,7 +216,7 @@ OneTwoAndText:
 
 PoofText:
 	TX_FAR _PoofText
-	db $a
+	TX_DELAY
 ForgotAndText:
 	TX_FAR _ForgotAndText
 	db "@"

@@ -40,7 +40,7 @@ VermilionHouse2Text_560b1:
 
 VermilionHouse2Text_560b6:
 	TX_FAR _VermilionHouse2Text_560b6
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _VermilionHouse2Text_560bb
 	db "@"
 

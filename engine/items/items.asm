@@ -608,7 +608,8 @@ ItemUseBallText05:
 ;"All right! {MonName} was caught!"
 ;play sound
 	TX_FAR _ItemUseBallText05
-	db $12,$06
+	TX_SFX_CAUGHT_MON
+	TX_BLINK
 	db "@"
 ItemUseBallText07:
 ;"X was transferred to Bill's PC"
@@ -623,7 +624,8 @@ ItemUseBallText06:
 ;"New DEX data will be added..."
 ;play sound
 	TX_FAR _ItemUseBallText06
-	db $13,$06
+	TX_SFX_DEX_PAGE_ADDED
+	TX_BLINK
 	db "@"
 
 ItemUseTownMap:
@@ -1836,7 +1838,7 @@ FluteWokeUpText:
 
 PlayedFluteHadEffectText:
 	TX_FAR _PlayedFluteHadEffectText
-	db $06
+	TX_BLINK
 	TX_ASM
 	ld a,[wIsInBattle]
 	and a
@@ -2395,19 +2397,19 @@ BoxFullCannotThrowBallText:
 
 ItemUseText00:
 	TX_FAR _ItemUseText001
-	db $05
+	TX_LINE
 	TX_FAR _ItemUseText002
 	db "@"
 
 GotOnBicycleText:
 	TX_FAR _GotOnBicycleText1
-	db $05
+	TX_LINE
 	TX_FAR _GotOnBicycleText2
 	db "@"
 
 GotOffBicycleText:
 	TX_FAR _GotOffBicycleText1
-	db $05
+	TX_LINE
 	TX_FAR _GotOffBicycleText2
 	db "@"
 

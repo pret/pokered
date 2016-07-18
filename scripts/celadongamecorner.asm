@@ -267,7 +267,7 @@ CeladonGameCornerText_48d9c:
 
 Received10CoinsText:
 	TX_FAR _Received10CoinsText
-	TX_SFX_ITEM
+	TX_SFX_ITEM_1
 	db "@"
 
 CeladonGameCornerText_48da7:
@@ -345,7 +345,7 @@ CeladonGameCornerText_48e26:
 
 Received20CoinsText:
 	TX_FAR _Received20CoinsText
-	TX_SFX_ITEM
+	TX_SFX_ITEM_1
 	db "@"
 
 CeladonGameCornerText_48e31:
@@ -397,7 +397,7 @@ CeladonGameCornerText_48e88:
 
 CeladonGameCornerText_48e8d:
 	TX_FAR _CeladonGameCornerText_48e8d
-	TX_SFX_ITEM
+	TX_SFX_ITEM_1
 	db "@"
 
 CeladonGameCornerText_48e93:

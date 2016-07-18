@@ -44,7 +44,7 @@ CeladonPrizeMenu:
 
 RequireCoinCaseTextPtr:
 	TX_FAR _RequireCoinCaseText
-	db $0D
+	TX_WAIT
 	db "@"
 
 ExchangeCoinsForPrizesTextPtr:
@@ -266,7 +266,7 @@ UnknownData52951:
 
 HereYouGoTextPtr:
 	TX_FAR _HereYouGoText
-	db $0D
+	TX_WAIT
 	db "@"
 
 SoYouWantPrizeTextPtr:
@@ -275,17 +275,17 @@ SoYouWantPrizeTextPtr:
 
 SorryNeedMoreCoinsText:
 	TX_FAR _SorryNeedMoreCoinsText
-	db $0D
+	TX_WAIT
 	db "@"
 
 PrizeRoomBagIsFullTextPtr:
 	TX_FAR _OopsYouDontHaveEnoughRoomText
-	db $0D
+	TX_WAIT
 	db "@"
 
 OhFineThenTextPtr:
 	TX_FAR _OhFineThenText
-	db $0D ; wait keypress (A/B) without blink
+	TX_WAIT
 	db "@"
 
 GetPrizeMonLevel:

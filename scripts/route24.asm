@@ -185,13 +185,15 @@ Route24Text1:
 
 Route24Text_51510:
 	TX_FAR _Route24Text_51510
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _Route24Text_51515
 	db "@"
 
 Route24Text_5151a:
 	TX_FAR _Route24Text_5151a
-	db $0B, $6, "@"
+	TX_SFX_ITEM_1
+	TX_BLINK
+	db "@"
 
 Route24Text_51521:
 	TX_FAR _Route24Text_51521

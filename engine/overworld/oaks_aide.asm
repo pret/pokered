@@ -63,7 +63,7 @@ OaksAideHereYouGoText:
 
 OaksAideGotItemText:
 	TX_FAR _OaksAideGotItemText
-	db $0b
+	TX_SFX_ITEM_1
 	db "@"
 
 OaksAideNoRoomText:

@@ -233,8 +233,8 @@ BlaineBattleText:
 
 BlaineEndBattleText:
 	TX_FAR _BlaineEndBattleText
-	db $11
-	db $d
+	TX_SFX_KEY_ITEM ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
+	TX_WAIT
 	db "@"
 
 BlaineFireBlastText:
@@ -247,7 +247,7 @@ BlaineBadgeText:
 
 ReceivedTM38Text:
 	TX_FAR _ReceivedTM38Text
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _TM38ExplanationText
 	db "@"
 

@@ -150,6 +150,7 @@ charmap "ー", $E3
 charmap "@", $50
 charmap "#", $54
 ;charmap "POKé", $54
+charmap "№", $74
 charmap "…", $75
 
 charmap "┌", $79
@@ -158,8 +159,6 @@ charmap "┐", $7B
 charmap "│", $7C
 charmap "└", $7D
 charmap "┘", $7E
-
-charmap "№", $74
 
 charmap " ", $7F
 charmap "A", $80
@@ -226,17 +225,24 @@ charmap "'l", $BC
 charmap "'s", $BD
 charmap "'t", $BE
 charmap "'v", $BF
+
 charmap "'", $E0
+
 charmap "-", $E3
 charmap "'r", $E4
 charmap "'m", $E5
 charmap "?", $E6
 charmap "!", $E7
 charmap ".", $E8
+
+charmap "▷", $EC
 charmap "▶", $ED
+charmap "▲", $ED
+charmap "▼", $EE
 charmap "♂", $EF
 charmap "¥", $F0
 charmap "×", $F1
+charmap "⠄", $F2
 charmap "/", $F3
 charmap ",", $F4
 charmap "♀", $F5

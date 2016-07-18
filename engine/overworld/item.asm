@@ -46,7 +46,7 @@ PickUpItem:
 
 FoundItemText:
 	TX_FAR _FoundItemText
-	db $0B
+	TX_SFX_ITEM_1
 	db "@"
 
 NoMoreRoomForItemText:

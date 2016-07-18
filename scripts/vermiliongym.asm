@@ -179,7 +179,7 @@ VermilionGymText6:
 
 VermilionGymText7:
 	TX_FAR _ReceivedTM24Text
-	db $11
+	TX_SFX_KEY_ITEM
 	TX_FAR _TM24ExplanationText
 	db "@"
 

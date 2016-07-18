@@ -73,7 +73,8 @@ ReceivingHM01Text:
 
 ReceivedHM01Text:
 	TX_FAR _ReceivedHM01Text
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
 SSAnne7Text_61932:
 	TX_FAR _SSAnne7Text_61932

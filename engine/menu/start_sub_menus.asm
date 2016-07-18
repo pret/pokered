@@ -675,7 +675,7 @@ TrainerInfo_NextTextBoxRow:
 ; hl = address of top tile in the line
 ; a = tile ID
 TrainerInfo_DrawVerticalLine:
-	ld de,20
+	ld de,SCREEN_WIDTH
 	ld c,8
 .loop
 	ld [hl],a

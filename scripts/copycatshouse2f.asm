@@ -53,10 +53,11 @@ TM31PreReceiveText:
 
 ReceivedTM31Text:
 	TX_FAR _ReceivedTM31Text
-	db $0B
+	TX_SFX_ITEM_1
 TM31ExplanationText1:
 	TX_FAR _TM31ExplanationText1
-	db $d, "@"
+	TX_WAIT
+	db "@"
 
 TM31ExplanationText2:
 	TX_FAR _TM31ExplanationText2
@@ -64,7 +65,8 @@ TM31ExplanationText2:
 
 TM31NoRoomText:
 	TX_FAR _TM31NoRoomText
-	db $d, "@"
+	TX_WAIT
+	db "@"
 
 CopycatsHouse2FText2:
 	TX_FAR _CopycatsHouse2FText2

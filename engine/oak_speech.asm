@@ -157,7 +157,7 @@ OakSpeechText1:
 	db "@"
 OakSpeechText2:
 	TX_FAR _OakSpeechText2A
-	db $14 ; play NIDORINA cry from TextCommandSounds
+	TX_CRY_NIDORINA
 	TX_FAR _OakSpeechText2B
 	db "@"
 IntroducePlayerText:

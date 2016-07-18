@@ -149,7 +149,7 @@ PewterGymText4:
 
 PewterGymText5:
 	TX_FAR _ReceivedTM34Text
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _TM34ExplanationText
 	db "@"
 
@@ -159,7 +159,7 @@ PewterGymText6:
 
 PewterGymText_5c4bc:
 	TX_FAR _PewterGymText_5c4bc
-	db $0B
+	TX_SFX_LEVEL_UP ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
 	TX_FAR _PewterGymText_5c4c1
 	db "@"
 

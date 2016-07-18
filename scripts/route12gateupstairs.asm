@@ -35,7 +35,8 @@ TM39PreReceiveText:
 
 ReceivedTM39Text:
 	TX_FAR _ReceivedTM39Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
 TM39ExplanationText:
 	TX_FAR _TM39ExplanationText

@@ -32,7 +32,8 @@ Route1ViridianMartSampleText:
 
 Route1Text_1cae8:
 	TX_FAR _Route1Text_1cae8
-	db $0b,"@"
+	TX_SFX_ITEM_1
+	db "@"
 
 Route1Text_1caee:
 	TX_FAR _Route1Text_1caee

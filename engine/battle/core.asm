@@ -2127,7 +2127,7 @@ DisplayBattleMenu:
 	ld [hl], "▶"
 	ld c, 50
 	call DelayFrames
-	ld [hl], $ec
+	ld [hl], "▷"
 	ld a, $2 ; select the "ITEM" menu
 	jp .upperLeftMenuItemWasNotSelected
 .oldManName
@@ -2680,7 +2680,7 @@ SelectMenuItem:
 	dec a
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ec
+	ld [hl], "▷"
 .select
 	ld hl, hFlags_0xFFF6
 	set 1, [hl]
@@ -7726,7 +7726,7 @@ MonsStatsRoseText:
 	ret
 
 GreatlyRoseText:
-	db $0a
+	TX_DELAY
 	TX_FAR _GreatlyRoseText
 
 RoseText:
@@ -7930,7 +7930,7 @@ MonsStatsFellText:
 	ret
 
 GreatlyFellText:
-	db $0a
+	TX_DELAY
 	TX_FAR _GreatlyFellText
 
 FellText:

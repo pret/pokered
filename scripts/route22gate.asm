@@ -89,4 +89,5 @@ Route22GateText_1e715:
 
 Route22GateText_1e71a:
 	TX_FAR _Route22GateText_1e71a
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
