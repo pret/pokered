@@ -393,7 +393,7 @@ UpdateSpriteMovementDelay:
 	ld l, a
 	ld [hl], $1             ; c1x1 = 1 (mark as ready to move)
 notYetMoving:
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
@@ -408,7 +408,6 @@ MakeNPCFacePlayer:
 	ld a, [wd72d]
 	bit 5, a
 	jr nz, notYetMoving
-
 	res 7, [hl]
 	ld a, [wPlayerDirection]
 	bit PLAYER_DIR_BIT_UP, a
@@ -449,7 +448,7 @@ InitializeSpriteStatus:
 
 ; calculates the spprite's scrren position form its map position and the player position
 InitializeSpriteScreenPosition:
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
@@ -477,7 +476,7 @@ CheckSpriteAvailability:
 	ld a, [$ffe5]
 	and a
 	jp nz, .spriteInvisible
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
@@ -525,7 +524,7 @@ CheckSpriteAvailability:
 	cp d
 	jr c, .spriteVisible    ; standing on tile with ID >=$60 (top right tile)
 .spriteInvisible
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
@@ -579,7 +578,7 @@ UpdateSpriteImage:
 ; e: X movement delta (-1, 0 or 1)
 ; set carry on failure, clears carry on success
 CanWalkOntoTile:
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
@@ -590,9 +589,9 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
-	ld a, [wTileSetCollisionPtr]
+	ld a, [wTilesetCollisionPtr]
 	ld l, a
-	ld a, [wTileSetCollisionPtr+1]
+	ld a, [wTilesetCollisionPtr+1]
 	ld h, a
 .tilePassableLoop
 	ld a, [hli]
@@ -607,7 +606,7 @@ CanWalkOntoTile:
 	ld a, [hl]         ; $c2x6 (movement byte 1)
 	inc a
 	jr z, .impassable  ; if $ff, no movement allowed (however, changing direction is)
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
@@ -626,14 +625,14 @@ CanWalkOntoTile:
 	call DetectCollisionBetweenSprites
 	pop bc
 	pop de
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $c
 	ld l, a
 	ld a, [hl]         ; c1xc (directions in which sprite collision would occur)
 	and b              ; check against chosen direction (1,2,4 or 8)
 	jr nz, .impassable ; collision between sprites, don't go there
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
@@ -690,7 +689,7 @@ CanWalkOntoTile:
 ; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
 ; hl: output pointer
 GetTileSpriteStandsOn:
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a

@@ -141,7 +141,7 @@ LoadTownMap_Fly:
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld hl, vSprites + $40
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), $c
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
@@ -355,12 +355,12 @@ DrawPlayerOrBirdSprite:
 	call WritePlayerOrBirdSpriteOAM
 	pop hl
 	ld de, wcd6d
-.asm_711dc
+.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp $50
-	jr nz, .asm_711dc
+	cp "@"
+	jr nz, .loop
 	ld hl, wOAMBuffer
 	ld de, wTileMapBackup
 	ld bc, $a0
@@ -397,8 +397,8 @@ DisplayWildLocations:
 	jr nz, .drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
 	coord hl, 1, 7
-	ld b, $2
-	ld c, $f
+	ld b, 2
+	ld c, 15
 	call TextBoxBorder
 	coord hl, 2, 9
 	ld de, AreaUnknownText

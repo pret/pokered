@@ -4,16 +4,16 @@ _GetSpritePosition1:
 	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
-	ld a, [hli]
+	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [$ffeb], a
 	inc hl
-	ld a, [hl]
+	ld a, [hl] ; c1x6 (screen X pos)
 	ld [$ffec], a
-	ld de, $fe
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
-	ld a, [hli]
+	ld a, [hli] ; c2x4 (map Y pos)
 	ld [$ffed], a
-	ld a, [hl]
+	ld a, [hl] ; c2x5 (map X pos)
 	ld [$ffee], a
 	ret
 
@@ -28,7 +28,7 @@ _GetSpritePosition2:
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
 	ld [wSavedSpriteScreenX], a
-	ld de, $104 - $6
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
 	ld [wSavedSpriteMapY], a
@@ -47,7 +47,7 @@ _SetSpritePosition1:
 	inc hl
 	ld a, [$ffec] ; c1x6 (screen X pos)
 	ld [hl], a
-	ld de, $104 - $6
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [$ffed] ; c2x4 (map Y pos)
 	ld [hli], a
@@ -57,21 +57,21 @@ _SetSpritePosition1:
 
 _SetSpritePosition2:
 	ld hl, wSpriteStateData1
-	ld de, $0004
+	ld de, 4
 	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [wSavedSpriteScreenY]
-	ld [hli], a
+	ld [hli], a ; c1x4 (screen Y pos)
 	inc hl
 	ld a, [wSavedSpriteScreenX]
-	ld [hl], a
-	ld de, $00fe
+	ld [hl], a ; c1x6 (screen X pos)
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [wSavedSpriteMapY]
-	ld [hli], a
+	ld [hli], a ; c2x4 (map Y pos)
 	ld a, [wSavedSpriteMapX]
-	ld [hl], a
+	ld [hl], a ; c2x5 (map X pos)
 	ret
 
 TrainerWalkUpToPlayer:
@@ -80,11 +80,11 @@ TrainerWalkUpToPlayer:
 	ld [wTrainerSpriteOffset], a
 	call ReadTrainerScreenPosition
 	ld a, [wTrainerFacingDirection]
-	and a
+	and a ; SPRITE_FACING_DOWN
 	jr z, .facingDown
-	cp $4
+	cp SPRITE_FACING_UP
 	jr z, .facingUp
-	cp $8
+	cp SPRITE_FACING_LEFT
 	jr z, .facingLeft
 	jr .facingRight
 .facingDown
@@ -148,7 +148,7 @@ TrainerWalkUpToPlayer:
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
-; output: de = pointer to sprite data
+; output: hl = pointer to sprite data
 GetSpriteDataPointer:
 	push de
 	add hl, de
@@ -225,7 +225,7 @@ TrainerEngage:
 	set 0, [hl]
 	call EngageMapTrainer
 	ld a, $ff
-.noEngage:
+.noEngage
 	ld [wTrainerSpriteOffset], a
 	pop de
 	pop hl
@@ -239,7 +239,7 @@ ReadTrainerScreenPosition:
 	ld e, a
 	ld hl, wSpriteStateData1
 	add hl, de
-	ld a, [hl]
+	ld a, [hl] ; c1x4 (sprite Y pos)
 	ld [wTrainerScreenY], a
 	ld a, [wTrainerSpriteOffset]
 	add $6
@@ -247,7 +247,7 @@ ReadTrainerScreenPosition:
 	ld e, a
 	ld hl, wSpriteStateData1
 	add hl, de
-	ld a, [hl]
+	ld a, [hl] ; c1x6 (sprite X pos)
 	ld [wTrainerScreenX], a
 	ret
 
@@ -262,13 +262,13 @@ CheckSpriteCanSeePlayer:
 	jr .notInLine         ; player too far away
 .checkIfLinedUp
 	ld a, [wTrainerFacingDirection]         ; sprite facing direction
-	cp $0                 ; down
+	cp SPRITE_FACING_DOWN
 	jr z, .checkXCoord
-	cp $4                 ; up
+	cp SPRITE_FACING_UP
 	jr z, .checkXCoord
-	cp $8                 ; left
+	cp SPRITE_FACING_LEFT
 	jr z, .checkYCoord
-	cp $c                 ; right
+	cp SPRITE_FACING_RIGHT
 	jr z, .checkYCoord
 	jr .notInLine
 .checkXCoord
@@ -315,21 +315,21 @@ CheckPlayerIsInFrontOfSprite:
 	ld a, [hl]          ; c1x6 (sprite screen X pos)
 	ld [wTrainerScreenX], a
 	ld a, [wTrainerFacingDirection]       ; facing direction
-	cp $0
+	cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
 	jr c, .engage       ; sprite above player
 	jr .noEngage        ; sprite below player
 .notFacingDown
-	cp $4
+	cp SPRITE_FACING_UP
 	jr nz, .notFacingUp
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
 	jr nc, .engage      ; sprite below player
 	jr .noEngage        ; sprite above player
 .notFacingUp
-	cp $8
+	cp SPRITE_FACING_LEFT
 	jr nz, .notFacingLeft
 	ld a, [wTrainerScreenX]       ; sprite screen X pos
 	cp $40

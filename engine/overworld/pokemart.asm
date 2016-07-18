@@ -85,7 +85,7 @@ DisplayPokemartDialogue_:
 	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	call PrintText
 	coord hl, 14, 7
-	lb bc, 08, 15
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu

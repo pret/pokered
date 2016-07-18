@@ -69,29 +69,62 @@ bcd3: MACRO
 coins equs "bcd2"
 money equs "bcd3"
 
+validateCoords: MACRO
+	if \1 >= SCREEN_WIDTH
+		fail "x coord out of range"
+	endc
+	if \2 >= SCREEN_HEIGHT
+		fail "y coord out of range"
+	endc
+	endm
+
 ;\1 = r
 ;\2 = X
 ;\3 = Y
+;\4 = which tilemap (optional)
 coord: MACRO
-	ld \1, wTileMap + 20 * \3 + \2
+	validateCoords \2, \3
+if _NARG >= 4
+	ld \1, \4 + SCREEN_WIDTH * \3 + \2
+else
+	ld \1, wTileMap + SCREEN_WIDTH * \3 + \2
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 aCoord: MACRO
-	ld a, [wTileMap + 20 * \2 + \1]
+	validateCoords \1, \2
+if _NARG >= 3
+	ld a, [\3 + SCREEN_WIDTH * \2 + \1]
+else
+	ld a, [wTileMap + SCREEN_WIDTH * \2 + \1]
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 Coorda: MACRO
-	ld [wTileMap + 20 * \2 + \1], a
+	validateCoords \1, \2
+if _NARG >= 3
+	ld [\3 + SCREEN_WIDTH * \2 + \1], a
+else
+	ld [wTileMap + SCREEN_WIDTH * \2 + \1], a
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 dwCoord: MACRO
-	dw wTileMap + 20 * \2 + \1
+	validateCoords \1, \2
+if _NARG >= 3
+	dw \3 + SCREEN_WIDTH * \2 + \1
+else
+	dw wTileMap + SCREEN_WIDTH * \2 + \1
+endc
 	ENDM
 
 ;\1 = r
@@ -122,7 +155,7 @@ EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 	; nybble: y-coordinate
 	; nybble: x-coordinate
 	; word  : pointer to map name
-	db (\1 + (\2 << 4))
+	dn \2, \1
 	dw \3
 	ENDM
 
@@ -134,7 +167,7 @@ IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 	; nybble: x-coordinate
 	; word  : pointer to map name
 	db \1 + 1
-	db \2 + \3 << 4
+	dn \3, \2
 	dw \4
 	ENDM
 
@@ -160,6 +193,24 @@ dn: MACRO
 dbw: MACRO
 	db \1
 	dw \2
+	ENDM
+
+dba: MACRO
+	dbw BANK(\1), \1
+	ENDM
+
+dwb: MACRO
+	dw \1
+	db \2
+	ENDM
+
+dab: MACRO
+	dwb \1, BANK(\1)
+	ENDM
+
+dbbw: MACRO
+	db \1, \2
+	dw \3
 	ENDM
 
 ; data format macros
@@ -248,6 +299,10 @@ TX_MART: MACRO
 TX_POKECENTER_NURSE        EQUS "db $ff"
 
 ; Predef macro.
+predef_const: MACRO
+	const \1PredefID
+	ENDM
+
 add_predef: MACRO
 \1Predef::
 	db BANK(\1)
@@ -268,9 +323,16 @@ predef_jump: MACRO
 	jp Predef
 	ENDM
 
+tx_pre_const: MACRO
+	const \1_id
+	ENDM
 
 add_tx_pre: MACRO
 \1_id:: dw \1
+ENDM
+
+db_tx_pre: MACRO
+	db (\1_id - TextPredefs) / 2 + 1
 ENDM
 
 tx_pre_id: MACRO
@@ -684,9 +746,9 @@ ENDM
 tmlearn: MACRO
 x = 0
 	rept _NARG
-if \1 != 0
+IF \1 != 0
 x = x | (1 << ((\1 - 1) % 8))
-endc
+ENDC
 	shift
 	endr
 	db x

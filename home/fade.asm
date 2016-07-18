@@ -1,7 +1,7 @@
 ; These routines manage gradual fading
 ; (e.g., entering a doorway)
 LoadGBPal::
-	ld a, [wMapPalOffset] ;tells if cur.map is dark (requires HM5_FLASH?)
+	ld a, [wMapPalOffset] ;tells if wCurMap is dark (requires HM5_FLASH?)
 	ld b, a
 	ld hl, FadePal4
 	ld a, l

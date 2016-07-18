@@ -70,10 +70,10 @@ SafariZoneGameOver:
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
-.asm_1e9c2
+.waitForMusicToPlay
 	ld a, [wChannelSoundIDs + CH4]
-	cp $b9
-	jr nz, .asm_1e9c2
+	cp SFX_SAFARI_ZONE_PA
+	jr nz, .waitForMusicToPlay
 	ld a, TEXT_SAFARI_GAME_OVER
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -100,10 +100,10 @@ SafariGameOverText:
 	TX_ASM
 	ld a, [wNumSafariBalls]
 	and a
-	jr z, .asm_1ea04
+	jr z, .noMoreSafariBalls
 	ld hl, TimesUpText
 	call PrintText
-.asm_1ea04
+.noMoreSafariBalls
 	ld hl, GameOverText
 	call PrintText
 	jp TextScriptEnd
@@ -326,14 +326,14 @@ BillsHousePC:
 	cp SPRITE_FACING_UP
 	ret nz
 	CheckEvent EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
-	jr nz, .asm_1ebd2
+	jr nz, .displayBillsHousePokemonList
 	CheckEventReuseA EVENT_USED_CELL_SEPARATOR_ON_BILL
-	jr nz, .asm_1eb86
+	jr nz, .displayBillsHouseMonitorText
 	CheckEventReuseA EVENT_BILL_SAID_USE_CELL_SEPARATOR
-	jr nz, .asm_1eb8b
-.asm_1eb86
+	jr nz, .doCellSeparator
+.displayBillsHouseMonitorText
 	tx_pre_jump BillsHouseMonitorText
-.asm_1eb8b
+.doCellSeparator
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	tx_pre BillsHouseInitiatedText
@@ -360,7 +360,7 @@ BillsHousePC:
 	call PlayDefaultMusic
 	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret
-.asm_1ebd2
+.displayBillsHousePokemonList
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	tx_pre BillsHousePokemonList

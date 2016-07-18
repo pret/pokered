@@ -121,18 +121,18 @@ RemoveItemByID:
 	ld b, a
 	xor a
 	ld [hItemToRemoveIndex], a
-.asm_17f40
+.loop
 	ld a, [hli]
-	cp $ff
+	cp -1 ; reached terminator?
 	ret z
 	cp b
-	jr z, .asm_17f4f
+	jr z, .foundItem
 	inc hl
 	ld a, [hItemToRemoveIndex]
 	inc a
 	ld [hItemToRemoveIndex], a
-	jr .asm_17f40
-.asm_17f4f
+	jr .loop
+.foundItem
 	ld a, $1
 	ld [wItemQuantity], a
 	ld a, [hItemToRemoveIndex]

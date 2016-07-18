@@ -388,7 +388,7 @@ FishingAnim:
 	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(RedSprite), $0c
+	lb bc, BANK(RedSprite), $c
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles

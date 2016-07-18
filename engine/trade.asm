@@ -305,7 +305,7 @@ Trade_AnimateBallEnteringLinkCable:
 	ld [rOBP0], a
 	xor a
 	ld [wLinkCableAnimBulgeToggle], a
-	ld bc, $2060
+	lb bc, $20, $60
 .moveBallInsideLinkCableLoop
 	push bc
 	xor a
@@ -380,7 +380,7 @@ Trade_AnimLeftToRight:
 	call Trade_InitGameboyTransferGfx
 	ld a, $1
 	ld [wTradedMonMovingRight], a
-	ld a, $e4
+	ld a, %11100100
 	ld [rOBP0], a
 	ld a, $54
 	ld [wBaseCoordX], a
@@ -466,7 +466,7 @@ Trade_DrawLeftGameboy:
 	ld a, $5d
 	ld [hli], a
 	ld a, $5e
-	ld c, $8
+	ld c, 8
 .loop
 	ld [hli], a
 	dec c
@@ -526,8 +526,8 @@ Trade_DrawRightGameboy:
 
 ; draw text box with enemy name above link cable
 	coord hl, 6, 0
-	ld b, $2
-	ld c, $7
+	ld b, 2
+	ld c, 7
 	call TextBoxBorder
 	coord hl, 7, 2
 	ld de, wLinkEnemyTrainerName

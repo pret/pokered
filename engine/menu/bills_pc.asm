@@ -248,7 +248,7 @@ BillsPCDeposit:
 	add "1"
 .next
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], "@"
 	ld hl, MonWasStoredText
 	call PrintText
 	jp BillsPCMenu

@@ -182,7 +182,7 @@ AIMoveChoiceModification2:
 	jr c, .preferMove
 	jr .nextMove
 .preferMove
-	dec [hl] ; sligthly encourage this move
+	dec [hl] ; slightly encourage this move
 	jr .nextMove
 
 ; encourages moves that are effective against the player's mon (even if non-damaging).

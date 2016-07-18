@@ -250,16 +250,16 @@ PrintStatsBox:
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
 	coord hl, 0, 8
-	ld b, $8
-	ld c, $8
+	ld b, 8
+	ld c, 8
 	call TextBoxBorder ; Draws the box
 	coord hl, 1, 9 ; Start printing stats from here
 	ld bc, $0019 ; Number offset
 	jr .PrintStats
 .DifferentBox
 	coord hl, 9, 2
-	ld b, $8
-	ld c, $9
+	ld b, 8
+	ld c, 9
 	call TextBoxBorder
 	coord hl, 11, 3
 	ld bc, $0018
@@ -280,7 +280,7 @@ PrintStatsBox:
 	call PrintStat
 	ld de, wLoadedMonSpecial
 	jp PrintNumber
-PrintStat
+PrintStat:
 	push hl
 	call PrintNumber
 	pop hl

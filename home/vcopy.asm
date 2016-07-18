@@ -33,13 +33,13 @@ ClearBgMap::
 	jr nz,.loop
 	ret
 
-RedrawRowOrColumn::
 ; This function redraws a BG row of height 2 or a BG column of width 2.
 ; One of its main uses is redrawing the row or column that will be exposed upon
 ; scrolling the BG when the player takes a step. Redrawing only the exposed
 ; row or column is more efficient than redrawing the entire screen.
 ; However, this function is also called repeatedly to redraw the whole screen
 ; when necessary. It is also used in trade animation and elevator code.
+RedrawRowOrColumn::
 	ld a,[hRedrawRowOrColumnMode]
 	and a
 	ret z

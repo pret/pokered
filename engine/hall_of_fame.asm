@@ -58,8 +58,8 @@ AnimateHallOfFame:
 	ld c, 80
 	call DelayFrames
 	coord hl, 2, 13
-	ld b, $3
-	ld c, $e
+	ld b, 3
+	ld c, 14
 	call TextBoxBorder
 	coord hl, 4, 15
 	ld de, HallOfFameText
@@ -210,12 +210,12 @@ HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	coord hl, 0, 4
-	ld b, $6
-	ld c, $a
+	ld b, 6
+	ld c, 10
 	call TextBoxBorder
 	coord hl, 5, 0
-	ld b, $2
-	ld c, $9
+	ld b, 2
+	ld c, 9
 	call TextBoxBorder
 	coord hl, 7, 2
 	ld de, wPlayerName

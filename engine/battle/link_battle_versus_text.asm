@@ -2,8 +2,8 @@
 DisplayLinkBattleVersusTextBox:
 	call LoadTextBoxTilePatterns
 	coord hl, 3, 4
-	ld b, $7
-	ld c, $c
+	ld b, 7
+	ld c, 12
 	call TextBoxBorder
 	coord hl, 4, 5
 	ld de, wPlayerName

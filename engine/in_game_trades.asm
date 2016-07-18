@@ -21,7 +21,7 @@ DoInGameTradeDialogue:
 	call CopyData
 	pop af
 	ld l,a
-	ld h,$0
+	ld h,0
 	ld de,InGameTradeTextPointers
 	add hl,hl
 	add hl,de

@@ -67,7 +67,7 @@ _TitleScroll:
 	pop bc
 	jr _TitleScroll
 
-.ScrollBetween
+.ScrollBetween:
 .wait
 	ld a, [rLY] ; rLY
 	cp l

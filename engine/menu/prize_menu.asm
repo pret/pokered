@@ -23,8 +23,8 @@ CeladonPrizeMenu:
 	ld [wTopMenuItemX],a
 	call PrintPrizePrice
 	coord hl, 0, 2
-	ld b,$08
-	ld c,$10
+	ld b, 8
+	ld c, 16
 	call TextBoxBorder
 	call GetPrizeMenuId
 	call UpdateSprites
@@ -32,12 +32,12 @@ CeladonPrizeMenu:
 	call PrintText
 	call HandleMenuInput ; menu choice handler
 	bit 1,a ; keypress = B (Cancel)
-	jr nz,.NoChoice
+	jr nz, .noChoice
 	ld a,[wCurrentMenuItem]
-	cp a,$03 ; "NO,THANKS" choice
-	jr z,.NoChoice
+	cp 3 ; "NO,THANKS" choice
+	jr z, .noChoice
 	call HandlePrizeChoice
-.NoChoice
+.noChoice
 	ld hl,wd730
 	res 6,[hl]
 	ret
@@ -65,7 +65,7 @@ GetPrizeMenuId:
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
 	ld a,[hSpriteIndexOrTextID]
-	sub a,3       ; prize-texts' id are 3, 4 and 5
+	sub 3       ; prize-texts' id are 3, 4 and 5
 	ld [wWhichPrizeWindow],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
 	add a
 	add a
@@ -88,7 +88,7 @@ GetPrizeMenuId:
 	ld bc,6
 	call CopyData
 	ld a,[wWhichPrizeWindow]
-	cp a,$02        ;is TM_menu?
+	cp 2        ;is TM_menu?
 	jr nz,.putMonName
 	ld a,[wPrize1]
 	ld [wd11e],a
@@ -138,7 +138,7 @@ GetPrizeMenuId:
 	call PrintBCDNumber
 	ld de,wPrize2Price
 	coord hl, 13, 7
-	ld c,(%1 << 7 | 2)
+	ld c,(1 << 7 | 2)
 	call PrintBCDNumber
 	ld de,wPrize3Price
 	coord hl, 13, 9
@@ -149,15 +149,15 @@ INCLUDE "data/prizes.asm"
 
 PrintPrizePrice:
 	coord hl, 11, 0
-	ld b,$01
-	ld c,$07
+	ld b, 1
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
 	coord hl, 12, 0
-	ld de,.CoinText
+	ld de, .CoinString
 	call PlaceString
 	coord hl, 13, 1
-	ld de,.SixSpacesText
+	ld de, .SixSpacesString
 	call PlaceString
 	coord hl, 13, 1
 	ld de,wPlayerCoins
@@ -165,10 +165,10 @@ PrintPrizePrice:
 	call PrintBCDNumber
 	ret
 
-.CoinText
+.CoinString:
 	db "COIN@"
 
-.SixSpacesText
+.SixSpacesString:
 	db "      @"
 
 LoadCoinsToSubtract:
@@ -196,33 +196,33 @@ HandlePrizeChoice:
 	ld a,[hl]
 	ld [wd11e],a
 	ld a,[wWhichPrizeWindow]
-	cp a,$02 ; is prize a TM?
-	jr nz,.GetMonName
+	cp 2 ; is prize a TM?
+	jr nz, .getMonName
 	call GetItemName
-	jr .GivePrize
-.GetMonName
+	jr .givePrize
+.getMonName
 	call GetMonName
-.GivePrize
+.givePrize
 	ld hl,SoYouWantPrizeTextPtr
 	call PrintText
 	call YesNoChoice
 	ld a,[wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a
-	jr nz,.PrintOhFineThen
+	jr nz, .printOhFineThen
 	call LoadCoinsToSubtract
 	call HasEnoughCoins
-	jr c,.NotEnoughCoins
+	jr c, .notEnoughCoins
 	ld a,[wWhichPrizeWindow]
-	cp a,$02
-	jr nz,.GiveMon
+	cp $02
+	jr nz, .giveMon
 	ld a,[wd11e]
 	ld b,a
 	ld a,1
 	ld c,a
 	call GiveItem
-	jr nc,.BagFull
-	jr .SubtractCoins
-.GiveMon
+	jr nc, .bagFull
+	jr .subtractCoins
+.giveMon
 	ld a,[wd11e]
 	ld [wcf91],a
 	push af
@@ -243,24 +243,24 @@ HandlePrizeChoice:
 ; were full), return without subtracting coins.
 	ret nc
 
-.SubtractCoins
+.subtractCoins
 	call LoadCoinsToSubtract
 	ld hl,hCoins + 1
 	ld de,wPlayerCoins + 1
 	ld c,$02 ; how many bytes
 	predef SubBCDPredef
 	jp PrintPrizePrice
-.BagFull
+.bagFull
 	ld hl,PrizeRoomBagIsFullTextPtr
 	jp PrintText
-.NotEnoughCoins
+.notEnoughCoins
 	ld hl,SorryNeedMoreCoinsText
 	jp PrintText
-.PrintOhFineThen
+.printOhFineThen
 	ld hl,OhFineThenTextPtr
 	jp PrintText
 
-UnknownData52951:
+UnknownPrizeData:
 ; XXX what's this?
 	db $00,$01,$00,$01,$00,$01,$00,$00,$01
 

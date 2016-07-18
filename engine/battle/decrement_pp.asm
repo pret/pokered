@@ -33,7 +33,7 @@ DecrementPP:
 	ld a, [wPlayerMonNumber] ; which mon in party is active
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes       ; calculate address of the mon to modify
-.DecrementPP
+.DecrementPP:
 	ld a, [wPlayerMoveListIndex] ; which move (0, 1, 2, 3) did we use?
 	ld c, a
 	ld b, 0

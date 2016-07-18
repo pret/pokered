@@ -6,7 +6,7 @@ SetDefaultNames:
 	ld a, [wd732]
 	push af
 	ld hl, wPlayerName
-	ld bc, $d8a
+	ld bc, wBoxDataEnd - wPlayerName
 	xor a
 	call FillMemory
 	ld hl, wSpriteStateData1
@@ -195,7 +195,7 @@ MovePicLeft:
 	ld [rWX],a
 	call DelayFrame
 
-	ld a,$E4
+	ld a,%11100100
 	ld [rBGP],a
 .next
 	call DelayFrame

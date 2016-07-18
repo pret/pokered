@@ -531,9 +531,9 @@ ReverseNybble::
 	ld de, NybbleReverseTable
 	add e
 	ld e, a
-	jr nc, .asm_283f
+	jr nc, .noCarry
 	inc d
-.asm_283f
+.noCarry
 	ld a, [de]
 	ret
 
