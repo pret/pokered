@@ -478,7 +478,7 @@ ShowPokedexDataInternal:
 	coord hl, 2, 8
 	ld a, "№"
 	ld [hli],a
-	ld a,$f2
+	ld a,"⠄"
 	ld [hli],a
 	ld de,wd11e
 	lb bc, LEADING_ZEROES | 1, 3
@@ -558,7 +558,7 @@ ShowPokedexDataInternal:
 	inc hl
 	ld a,[hli]
 	ld [hld],a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl],$f2 ; decimal point tile
+	ld [hl],"⠄" ; decimal point tile
 	pop af
 	ld [hDexWeight + 1],a ; restore original value of [hDexWeight + 1]
 	pop af
