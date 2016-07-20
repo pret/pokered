@@ -81,7 +81,6 @@ SilphCo8TextPointers:
 	dw SilphCo8Text3
 	dw SilphCo8Text4
 
-SilphCo8TrainerHeaders:
 SilphCo8TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_8F_TRAINER_0
 	db ($4 << 4) ; trainer's view range

@@ -298,9 +298,7 @@ PewterCityText_1945d:
 	db "@"
 
 PewterCityText14:
-
-PewterCityText_19462:
-	TX_FAR _PewterCityText_19462
+	TX_FAR _PewterCityText14
 	db "@"
 
 PewterCityText6:

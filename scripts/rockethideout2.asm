@@ -1,6 +1,6 @@
 RocketHideout2Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, RocketHideout2TrainerHeaders
+	ld hl, RocketHideout2TrainerHeader0
 	ld de, RocketHideout2ScriptPointers
 	ld a, [wRocketHideout2CurScript]
 	call ExecuteCurMapScriptInTable
@@ -420,7 +420,6 @@ RocketHideout2TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-RocketHideout2TrainerHeaders:
 RocketHideout2TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_2_TRAINER_0
 	db ($4 << 4) ; trainer's view range

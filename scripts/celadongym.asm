@@ -4,7 +4,7 @@ CeladonGymScript:
 	res 6, [hl]
 	call nz, CeladonGymScript_48927
 	call EnableAutoTextBoxDrawing
-	ld hl, CeladonGymTrainerHeaders
+	ld hl, CeladonGymTrainerHeader0
 	ld de, CeladonGymScriptPointers
 	ld a, [wCeladonGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -66,7 +66,7 @@ CeladonGymText_48963:
 	set 3, [hl]
 
 	; deactivate gym trainers
-	SetEventRange EVENT_BEAT_CELADON_GYM_TRAINER_0, EVENT_BEAT_CELADON_GYM_TRAINER_7
+	SetEventRange EVENT_BEAT_CELADON_GYM_TRAINER_0, EVENT_BEAT_CELADON_GYM_TRAINER_6
 
 	jp CeladonGymText_48943
 
@@ -83,7 +83,6 @@ CeladonGymTextPointers:
 	dw TM21Text
 	dw TM21NoRoomText
 
-CeladonGymTrainerHeaders:
 CeladonGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_0
 	db ($2 << 4) ; trainer's view range
@@ -93,55 +92,55 @@ CeladonGymTrainerHeader0:
 	dw CeladonGymEndBattleText2 ; TextEndBattle
 	dw CeladonGymEndBattleText2 ; TextEndBattle
 
-CeladonGymTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_2
+CeladonGymTrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_1
 	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_1
 	dw CeladonGymBattleText3 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText3 ; TextAfterBattle
 	dw CeladonGymEndBattleText3 ; TextEndBattle
 	dw CeladonGymEndBattleText3 ; TextEndBattle
 
-CeladonGymTrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_3
+CeladonGymTrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_2
 	dw CeladonGymBattleText4 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText4 ; TextAfterBattle
 	dw CeladonGymEndBattleText4 ; TextEndBattle
 	dw CeladonGymEndBattleText4 ; TextEndBattle
 
-CeladonGymTrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_4
+CeladonGymTrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_3
 	dw CeladonGymBattleText5 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText5 ; TextAfterBattle
 	dw CeladonGymEndBattleText5 ; TextEndBattle
 	dw CeladonGymEndBattleText5 ; TextEndBattle
 
-CeladonGymTrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_5
+CeladonGymTrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_4
 	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_4
 	dw CeladonGymBattleText6 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText6 ; TextAfterBattle
 	dw CeladonGymEndBattleText6 ; TextEndBattle
 	dw CeladonGymEndBattleText6 ; TextEndBattle
 
-CeladonGymTrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_6
+CeladonGymTrainerHeader5:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_5
 	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_6
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_5
 	dw CeladonGymBattleText7 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText7 ; TextAfterBattle
 	dw CeladonGymEndBattleText7 ; TextEndBattle
 	dw CeladonGymEndBattleText7 ; TextEndBattle
 
-CeladonGymTrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_7, 1
+CeladonGymTrainerHeader6:
+	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_6, 1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_7, 1
+	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_6, 1
 	dw CeladonGymBattleText8 ; TextBeforeBattle
 	dw CeladonGymAfterBattleText8 ; TextAfterBattle
 	dw CeladonGymEndBattleText8 ; TextEndBattle
@@ -229,7 +228,7 @@ CeladonGymAfterBattleText2:
 
 CeladonGymText3:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader2
+	ld hl, CeladonGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -247,7 +246,7 @@ CeladonGymAfterBattleText3:
 
 CeladonGymText4:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader3
+	ld hl, CeladonGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -265,7 +264,7 @@ CeladonGymAfterBattleText4:
 
 CeladonGymText5:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader4
+	ld hl, CeladonGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -283,7 +282,7 @@ CeladonGymAfterBattleText5:
 
 CeladonGymText6:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader5
+	ld hl, CeladonGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -301,7 +300,7 @@ CeladonGymAfterBattleText6:
 
 CeladonGymText7:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader6
+	ld hl, CeladonGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -319,7 +318,7 @@ CeladonGymAfterBattleText7:
 
 CeladonGymText8:
 	TX_ASM
-	ld hl, CeladonGymTrainerHeader7
+	ld hl, CeladonGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 

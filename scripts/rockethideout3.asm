@@ -1,6 +1,6 @@
 RocketHideout3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, RocketHideout3TrainerHeaders
+	ld hl, RocketHideout3TrainerHeader0
 	ld de, RocketHideout3ScriptPointers
 	ld a, [wRocketHideout3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -149,7 +149,6 @@ RocketHideout3TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-RocketHideout3TrainerHeaders:
 RocketHideout3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
 	db ($2 << 4) ; trainer's view range
@@ -159,10 +158,10 @@ RocketHideout3TrainerHeader0:
 	dw RocketHideout3EndBattleText2 ; TextEndBattle
 	dw RocketHideout3EndBattleText2 ; TextEndBattle
 
-RocketHideout3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_2
+RocketHideout3TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
 	dw RocketHideout3BattleTxt ; TextBeforeBattle
 	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
 	dw RocketHideout3EndBattleText3 ; TextEndBattle
@@ -190,7 +189,7 @@ RocketHideout3AfterBattleTxt2:
 
 RocketHideout3Text2:
 	TX_ASM
-	ld hl, RocketHideout3TrainerHeader2
+	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 

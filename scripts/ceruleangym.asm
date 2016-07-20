@@ -4,7 +4,7 @@ CeruleanGymScript:
 	res 6, [hl]
 	call nz, CeruleanGymScript_5c6d0
 	call EnableAutoTextBoxDrawing
-	ld hl, CeruleanGymTrainerHeaders
+	ld hl, CeruleanGymTrainerHeader0
 	ld de, CeruleanGymScriptPointers
 	ld a, [wCeruleanGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -79,7 +79,6 @@ CeruleanGymTextPointers:
 	dw CeruleanGymText6
 	dw CeruleanGymText7
 
-CeruleanGymTrainerHeaders:
 CeruleanGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
@@ -148,7 +147,6 @@ CeruleanGymText5:
 	db "@"
 
 CeruleanGymText6:
-ReceivedTM11Text:
 	TX_FAR _ReceivedTM11Text
 	TX_SFX_ITEM_1
 	db "@"

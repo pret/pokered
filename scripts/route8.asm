@@ -1,6 +1,6 @@
 Route8Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route8TrainerHeaders
+	ld hl, Route8TrainerHeader0
 	ld de, Route8ScriptPointers
 	ld a, [wRoute8CurScript]
 	call ExecuteCurMapScriptInTable
@@ -24,7 +24,6 @@ Route8TextPointers:
 	dw Route8Text9
 	dw Route8Text10
 
-Route8TrainerHeaders:
 Route8TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_0
 	db ($4 << 4) ; trainer's view range

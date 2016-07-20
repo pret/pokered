@@ -19,7 +19,6 @@ SSAnne5TextPointers:
 	dw SSAnne5Text4
 	dw SSAnne5Text5
 
-SSAnne5TrainerHeaders:
 SSAnne5TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_5_TRAINER_0
 	db ($3 << 4) ; trainer's view range

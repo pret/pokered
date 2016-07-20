@@ -1,7 +1,7 @@
 SilphCo7Script:
 	call SilphCo7Script_51b77
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo7TrainerHeaders
+	ld hl, SilphCo7TrainerHeader0
 	ld de, SilphCo7ScriptPointers
 	ld a, [wSilphCo7CurScript]
 	call ExecuteCurMapScriptInTable
@@ -279,7 +279,6 @@ SilphCo7TextPointers:
 	dw SilphCo7Text14
 	dw SilphCo7Text15
 
-SilphCo7TrainerHeaders:
 SilphCo7TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_0
 	db ($2 << 4) ; trainer's view range
@@ -289,28 +288,28 @@ SilphCo7TrainerHeader0:
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 	dw SilphCo7EndBattleText1 ; TextEndBattle
 
-SilphCo7TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_2
+SilphCo7TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_1
 	dw SilphCo7BattleText2 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText2 ; TextAfterBattle
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 	dw SilphCo7EndBattleText2 ; TextEndBattle
 
-SilphCo7TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_3
+SilphCo7TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_2
 	dw SilphCo7BattleText3 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText3 ; TextAfterBattle
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 	dw SilphCo7EndBattleText3 ; TextEndBattle
 
-SilphCo7TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
+SilphCo7TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_4, 1
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 1
 	dw SilphCo7BattleText4 ; TextBeforeBattle
 	dw SilphCo7AfterBattleText4 ; TextAfterBattle
 	dw SilphCo7EndBattleText4 ; TextEndBattle
@@ -449,7 +448,7 @@ SilphCo7AfterBattleText1:
 
 SilphCo7Text6:
 	TX_ASM
-	ld hl, SilphCo7TrainerHeader2
+	ld hl, SilphCo7TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -467,7 +466,7 @@ SilphCo7AfterBattleText2:
 
 SilphCo7Text7:
 	TX_ASM
-	ld hl, SilphCo7TrainerHeader3
+	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -485,7 +484,7 @@ SilphCo7AfterBattleText3:
 
 SilphCo7Text8:
 	TX_ASM
-	ld hl, SilphCo7TrainerHeader4
+	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 

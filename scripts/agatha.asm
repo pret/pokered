@@ -1,7 +1,7 @@
 AgathaScript:
 	call AgathaShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
-	ld hl, AgathaTrainerHeaders
+	ld hl, AgathaTrainerHeader0
 	ld de, AgathaScriptPointers
 	ld a, [wAgathaCurScript]
 	call ExecuteCurMapScriptInTable
@@ -120,7 +120,6 @@ AgathaTextPointers:
 	dw AgathaText1
 	dw AgathaDontRunAwayText
 
-AgathaTrainerHeaders:
 AgathaTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range

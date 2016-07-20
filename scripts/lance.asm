@@ -1,7 +1,7 @@
 LanceScript:
 	call LanceShowOrHideEntranceBlocks
 	call EnableAutoTextBoxDrawing
-	ld hl, LanceTrainerHeaders
+	ld hl, LanceTrainerHeader0
 	ld de, LanceScriptPointers
 	ld a, [wLanceCurScript]
 	call ExecuteCurMapScriptInTable
@@ -130,7 +130,6 @@ LanceScript3:
 LanceTextPointers:
 	dw LanceText1
 
-LanceTrainerHeaders:
 LanceTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_LANCES_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range

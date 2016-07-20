@@ -1,6 +1,6 @@
 FightingDojoScript:
 	call EnableAutoTextBoxDrawing
-	ld hl, FightingDojoTrainerHeaders
+	ld hl, FightingDojoTrainerHeader0
 	ld de, FightingDojoScriptPointers
 	ld a, [wFightingDojoCurScript]
 	call ExecuteCurMapScriptInTable
@@ -90,7 +90,6 @@ FightingDojoTextPointers:
 	dw FightingDojoText7
 	dw FightingDojoText8
 
-FightingDojoTrainerHeaders:
 FightingDojoTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
 	db ($4 << 4) ; trainer's view range

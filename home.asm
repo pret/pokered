@@ -4408,7 +4408,6 @@ endm
 
 
 CallFunctionInTable::
-JumpTable::
 ; Call function a in jumptable hl.
 ; de is not preserved.
 	push hl

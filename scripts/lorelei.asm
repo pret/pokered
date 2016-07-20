@@ -1,7 +1,7 @@
 LoreleiScript:
 	call LoreleiShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
-	ld hl, LoreleiTrainerHeaders
+	ld hl, LoreleiTrainerHeader0
 	ld de, LoreleiScriptPointers
 	ld a, [wLoreleiCurScript]
 	call ExecuteCurMapScriptInTable
@@ -119,7 +119,6 @@ LoreleiTextPointers:
 	dw LoreleiText1
 	dw LoreleiDontRunAwayText
 
-LoreleiTrainerHeaders:
 LoreleiTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range

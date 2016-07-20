@@ -70,7 +70,7 @@ _PewterCityText_1945d::
 	cont "Follow me!"
 	done
 
-_PewterCityText_19462::
+_PewterCityText14::
 	text "If you have the"
 	line "right stuff, go"
 	cont "take on BROCK!"

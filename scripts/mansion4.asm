@@ -69,7 +69,6 @@ Mansion4TextPointers:
 	dw PickUpItemText
 	dw Mansion3Text6
 
-Mansion4TrainerHeaders:
 Mansion4TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_0
 	db ($0 << 4) ; trainer's view range
@@ -79,10 +78,10 @@ Mansion4TrainerHeader0:
 	dw Mansion4EndBattleText1 ; TextEndBattle
 	dw Mansion4EndBattleText1 ; TextEndBattle
 
-Mansion4TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_2
+Mansion4TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_1
 	dw Mansion4BattleText2 ; TextBeforeBattle
 	dw Mansion4AfterBattleText2 ; TextAfterBattle
 	dw Mansion4EndBattleText2 ; TextEndBattle
@@ -98,7 +97,7 @@ Mansion4Text1:
 
 Mansion4Text2:
 	TX_ASM
-	ld hl, Mansion4TrainerHeader2
+	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 

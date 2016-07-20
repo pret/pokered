@@ -15,7 +15,7 @@ RocketHideout4Script_45473:
 	ret z
 	CheckEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	jr nz, .asm_45496
-	CheckBothEventsSet EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2, 1
+	CheckBothEventsSet EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1, 1
 	jr z, .asm_4548c
 	ld a, $2d
 	jr .asm_45498
@@ -84,7 +84,6 @@ RocketHideout4TextPointers:
 	dw PickUpItemText
 	dw RocketHideout4Text10
 
-RocketHideout4TrainerHeaders:
 RocketHideout4TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0
 	db ($0 << 4) ; trainer's view range
@@ -94,19 +93,19 @@ RocketHideout4TrainerHeader0:
 	dw RocketHideout4EndBattleText2 ; TextEndBattle
 	dw RocketHideout4EndBattleText2 ; TextEndBattle
 
-RocketHideout4TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
+RocketHideout4TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1
 	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1
 	dw RocketHideout4BattleText3 ; TextBeforeBattle
 	dw RocketHideout4AfterBattleText3 ; TextAfterBattle
 	dw RocketHideout4EndBattleText3 ; TextEndBattle
 	dw RocketHideout4EndBattleText3 ; TextEndBattle
 
-RocketHideout4TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_3
+RocketHideout4TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_2
 	dw RocketHideout4BattleText4 ; TextBeforeBattle
 	dw RocketHideout4AfterBattleText4 ; TextAfterBattle
 	dw RocketHideout4EndBattleText4 ; TextEndBattle
@@ -174,7 +173,7 @@ RocketHideout4AfterBattleText2:
 
 RocketHideout4Text3:
 	TX_ASM
-	ld hl, RocketHideout4TrainerHeader2
+	ld hl, RocketHideout4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -192,7 +191,7 @@ RocketHideout4AfterBattleText3:
 
 RocketHideout4Text4:
 	TX_ASM
-	ld hl, RocketHideout4TrainerHeader3
+	ld hl, RocketHideout4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 

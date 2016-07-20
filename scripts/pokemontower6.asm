@@ -1,6 +1,6 @@
 PokemonTower6Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower6TrainerHeaders
+	ld hl, PokemonTower6TrainerHeader0
 	ld de, PokemonTower6ScriptPointers
 	ld a, [wPokemonTower6CurScript]
 	call ExecuteCurMapScriptInTable
@@ -103,7 +103,6 @@ PokemonTower6TextPointers:
 	dw PokemonTower6Text6
 	dw PokemonTower6Text7
 
-PokemonTower6TrainerHeaders:
 PokemonTower6TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_6_TRAINER_0
 	db ($3 << 4) ; trainer's view range

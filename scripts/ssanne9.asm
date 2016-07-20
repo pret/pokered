@@ -3,7 +3,7 @@ SSAnne9Script:
 	ld [wAutoTextBoxDrawingControl], a
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, SSAnne9TrainerHeaders
+	ld hl, SSAnne9TrainerHeader0
 	ld de, SSAnne9ScriptPointers
 	ld a, [wSSAnne9CurScript]
 	call ExecuteCurMapScriptInTable
@@ -30,7 +30,6 @@ SSAnne9TextPointers:
 	dw SSAnne9Text12
 	dw SSAnne9Text13
 
-SSAnne9TrainerHeaders:
 SSAnne9TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_9_TRAINER_0
 	db ($2 << 4) ; trainer's view range

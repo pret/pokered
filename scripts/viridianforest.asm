@@ -1,6 +1,6 @@
 ViridianForestScript:
 	call EnableAutoTextBoxDrawing
-	ld hl, ViridianForestTrainerHeaders
+	ld hl, ViridianForestTrainerHeader0
 	ld de, ViridianForestScriptPointers
 	ld a, [wViridianForestCurScript]
 	call ExecuteCurMapScriptInTable
@@ -28,7 +28,6 @@ ViridianForestTextPointers:
 	dw ViridianForestText13
 	dw ViridianForestText14
 
-ViridianForestTrainerHeaders:
 ViridianForestTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
 	db ($4 << 4) ; trainer's view range

@@ -1,7 +1,7 @@
 SilphCo4Script:
 	call SilphCo4Script_19d21
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo4TrainerHeaders
+	ld hl, SilphCo4TrainerHeader0
 	ld de, SilphCo4ScriptPointers
 	ld a, [wSilphCo4CurScript]
 	call ExecuteCurMapScriptInTable
@@ -100,7 +100,6 @@ SilphCo4TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-SilphCo4TrainerHeaders:
 SilphCo4TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_0
 	db ($4 << 4) ; trainer's view range
@@ -110,19 +109,19 @@ SilphCo4TrainerHeader0:
 	dw SilphCo4EndBattleText2 ; TextEndBattle
 	dw SilphCo4EndBattleText2 ; TextEndBattle
 
-SilphCo4TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_2
+SilphCo4TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_1
 	dw SilphCo4BattleText3 ; TextBeforeBattle
 	dw SilphCo4AfterBattleText3 ; TextAfterBattle
 	dw SilphCo4EndBattleText3 ; TextEndBattle
 	dw SilphCo4EndBattleText3 ; TextEndBattle
 
-SilphCo4TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_3
+SilphCo4TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_4F_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_4F_TRAINER_2
 	dw SilphCo4BattleText4 ; TextBeforeBattle
 	dw SilphCo4AfterBattleText4 ; TextAfterBattle
 	dw SilphCo4EndBattleText4 ; TextEndBattle
@@ -165,7 +164,7 @@ SilphCo4AfterBattleText2:
 
 SilphCo4Text3:
 	TX_ASM
-	ld hl, SilphCo4TrainerHeader2
+	ld hl, SilphCo4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -183,7 +182,7 @@ SilphCo4AfterBattleText3:
 
 SilphCo4Text4:
 	TX_ASM
-	ld hl, SilphCo4TrainerHeader3
+	ld hl, SilphCo4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 

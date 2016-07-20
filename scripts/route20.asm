@@ -75,7 +75,6 @@ Route20TextPointers:
 	dw Route20Text11
 	dw Route20Text12
 
-Route20TrainerHeaders:
 Route20TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_0
 	db ($4 << 4) ; trainer's view range
@@ -85,82 +84,82 @@ Route20TrainerHeader0:
 	dw Route20EndBattleText1 ; TextEndBattle
 	dw Route20EndBattleText1 ; TextEndBattle
 
-Route20TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_2
+Route20TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_1
 	dw Route20BattleText2 ; TextBeforeBattle
 	dw Route20AfterBattleText2 ; TextAfterBattle
 	dw Route20EndBattleText2 ; TextEndBattle
 	dw Route20EndBattleText2 ; TextEndBattle
 
-Route20TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_3
+Route20TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_2
 	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_2
 	dw Route20BattleText3 ; TextBeforeBattle
 	dw Route20AfterBattleText3 ; TextAfterBattle
 	dw Route20EndBattleText3 ; TextEndBattle
 	dw Route20EndBattleText3 ; TextEndBattle
 
-Route20TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_4
+Route20TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_3
 	dw Route20BattleText4 ; TextBeforeBattle
 	dw Route20AfterBattleText4 ; TextAfterBattle
 	dw Route20EndBattleText4 ; TextEndBattle
 	dw Route20EndBattleText4 ; TextEndBattle
 
-Route20TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_5
+Route20TrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_4
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_4
 	dw Route20BattleText5 ; TextBeforeBattle
 	dw Route20AfterBattleText5 ; TextAfterBattle
 	dw Route20EndBattleText5 ; TextEndBattle
 	dw Route20EndBattleText5 ; TextEndBattle
 
-Route20TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_6
+Route20TrainerHeader5:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_6
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_5
 	dw Route20BattleText6 ; TextBeforeBattle
 	dw Route20AfterBattleText6 ; TextAfterBattle
 	dw Route20EndBattleText6 ; TextEndBattle
 	dw Route20EndBattleText6 ; TextEndBattle
 
-Route20TrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_7
+Route20TrainerHeader6:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_6
 	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_7
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_6
 	dw Route20BattleText7 ; TextBeforeBattle
 	dw Route20AfterBattleText7 ; TextAfterBattle
 	dw Route20EndBattleText7 ; TextEndBattle
 	dw Route20EndBattleText7 ; TextEndBattle
 
-Route20TrainerHeader8:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_8, 1
+Route20TrainerHeader7:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_7, 1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_8, 1
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_7, 1
 	dw Route20BattleText8 ; TextBeforeBattle
 	dw Route20AfterBattleText8 ; TextAfterBattle
 	dw Route20EndBattleText8 ; TextEndBattle
 	dw Route20EndBattleText8 ; TextEndBattle
 
-Route20TrainerHeader9:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_9, 1
+Route20TrainerHeader8:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_8, 1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_9, 1
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_8, 1
 	dw Route20BattleText9 ; TextBeforeBattle
 	dw Route20AfterBattleText9 ; TextAfterBattle
 	dw Route20EndBattleText9 ; TextEndBattle
 	dw Route20EndBattleText9 ; TextEndBattle
 
-Route20TrainerHeader10:
-	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_10, 1
+Route20TrainerHeader9:
+	dbEventFlagBit EVENT_BEAT_ROUTE_20_TRAINER_9, 1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_10, 1
+	dwEventFlagAddress EVENT_BEAT_ROUTE_20_TRAINER_9, 1
 	dw Route20BattleText10 ; TextBeforeBattle
 	dw Route20AfterBattleText10 ; TextAfterBattle
 	dw Route20EndBattleText10 ; TextEndBattle
@@ -176,55 +175,55 @@ Route20Text1:
 
 Route20Text2:
 	TX_ASM
-	ld hl, Route20TrainerHeader2
+	ld hl, Route20TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text3:
 	TX_ASM
-	ld hl, Route20TrainerHeader3
+	ld hl, Route20TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text4:
 	TX_ASM
-	ld hl, Route20TrainerHeader4
+	ld hl, Route20TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text5:
 	TX_ASM
-	ld hl, Route20TrainerHeader5
+	ld hl, Route20TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text6:
 	TX_ASM
-	ld hl, Route20TrainerHeader6
+	ld hl, Route20TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text7:
 	TX_ASM
-	ld hl, Route20TrainerHeader7
+	ld hl, Route20TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text8:
 	TX_ASM
-	ld hl, Route20TrainerHeader8
+	ld hl, Route20TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text9:
 	TX_ASM
-	ld hl, Route20TrainerHeader9
+	ld hl, Route20TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text10:
 	TX_ASM
-	ld hl, Route20TrainerHeader10
+	ld hl, Route20TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 

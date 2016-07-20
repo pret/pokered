@@ -1,6 +1,6 @@
 Route12Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route12TrainerHeaders
+	ld hl, Route12TrainerHeader0
 	ld de, Route12ScriptPointers
 	ld a, [wRoute12CurScript]
 	call ExecuteCurMapScriptInTable
@@ -76,7 +76,6 @@ Route12TextPointers:
 	dw Route12Text13
 	dw Route12Text14
 
-Route12TrainerHeaders:
 Route12TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_12_TRAINER_0
 	db ($4 << 4) ; trainer's view range

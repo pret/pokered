@@ -84,7 +84,6 @@ SaffronGymTextPointers:
 	dw SaffronGymText11
 	dw SaffronGymText12
 
-SaffronGymTrainerHeaders:
 SaffronGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range

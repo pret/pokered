@@ -1,7 +1,7 @@
 Mansion1Script:
 	call Mansion1Subscript1
 	call EnableAutoTextBoxDrawing
-	ld hl, Mansion1TrainerHeaders
+	ld hl, Mansion1TrainerHeader0
 	ld de, Mansion1ScriptPointers
 	ld a, [wMansion1CurScript]
 	call ExecuteCurMapScriptInTable
@@ -66,7 +66,6 @@ Mansion1TextPointers:
 	dw PickUpItemText
 	dw Mansion1Text4
 
-Mansion1TrainerHeaders:
 Mansion1TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_1_TRAINER_0
 	db ($3 << 4) ; trainer's view range

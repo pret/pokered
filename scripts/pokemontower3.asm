@@ -1,6 +1,6 @@
 PokemonTower3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower3TrainerHeaders
+	ld hl, PokemonTower3TrainerHeader0
 	ld de, PokemonTower3ScriptPointers
 	ld a, [wPokemonTower3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -18,7 +18,6 @@ PokemonTower3TextPointers:
 	dw PokemonTower3Text3
 	dw PickUpItemText
 
-PokemonTower3TrainerHeaders:
 PokemonTower3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_3_TRAINER_0
 	db ($2 << 4) ; trainer's view range

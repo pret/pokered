@@ -1,6 +1,6 @@
 PokemonTower5Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, PokemonTower5TrainerHeaders
+	ld hl, PokemonTower5TrainerHeader0
 	ld de, PokemonTower5ScriptPointers
 	ld a, [wPokemonTower5CurScript]
 	call ExecuteCurMapScriptInTable
@@ -57,7 +57,6 @@ PokemonTower5TextPointers:
 	dw PickUpItemText
 	dw PokemonTower5Text7
 
-PokemonTower5TrainerHeaders:
 PokemonTower5TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_5_TRAINER_0
 	db ($2 << 4) ; trainer's view range

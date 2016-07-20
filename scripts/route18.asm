@@ -1,6 +1,6 @@
 Route18Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route18TrainerHeaders
+	ld hl, Route18TrainerHeader0
 	ld de, Route18ScriptPointers
 	ld a, [wRoute18CurScript]
 	call ExecuteCurMapScriptInTable
@@ -19,7 +19,6 @@ Route18TextPointers:
 	dw Route18Text4
 	dw Route18Text5
 
-Route18TrainerHeaders:
 Route18TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_18_TRAINER_0
 	db ($3 << 4) ; trainer's view range

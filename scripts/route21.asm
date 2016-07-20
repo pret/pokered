@@ -1,6 +1,6 @@
 Route21Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route21TrainerHeaders
+	ld hl, Route21TrainerHeader0
 	ld de, Route21ScriptPointers
 	ld a, [wRoute21CurScript]
 	call ExecuteCurMapScriptInTable
@@ -23,7 +23,6 @@ Route21TextPointers:
 	dw Route21Text8
 	dw Route21Text9
 
-Route21TrainerHeaders:
 Route21TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_0
 	db ($0 << 4) ; trainer's view range

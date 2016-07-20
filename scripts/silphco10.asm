@@ -1,7 +1,7 @@
 SilphCo10Script:
 	call SilphCo10Script_5a14f
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo10TrainerHeaders
+	ld hl, SilphCo10TrainerHeader0
 	ld de, SilphCo10ScriptPointers
 	ld a, [wSilphCo10CurScript]
 	call ExecuteCurMapScriptInTable
@@ -47,7 +47,6 @@ SilphCo10TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-SilphCo10TrainerHeaders:
 SilphCo10TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_10F_TRAINER_0
 	db ($3 << 4) ; trainer's view range

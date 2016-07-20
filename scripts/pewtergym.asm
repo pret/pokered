@@ -4,7 +4,7 @@ PewterGymScript:
 	res 6, [hl]
 	call nz, PewterGymScript_5c3a4
 	call EnableAutoTextBoxDrawing
-	ld hl, PewterGymTrainerHeaders
+	ld hl, PewterGymTrainerHeader0
 	ld de, PewterGymScriptPointers
 	ld a, [wPewterGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -87,7 +87,6 @@ PewterGymTextPointers:
 	dw PewterGymText5
 	dw PewterGymText6
 
-PewterGymTrainerHeaders:
 PewterGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_PEWTER_GYM_TRAINER_0
 	db ($5 << 4) ; trainer's view range

@@ -1,6 +1,6 @@
 SSAnne10Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, SSAnne10TrainerHeaders
+	ld hl, SSAnne10TrainerHeader0
 	ld de, SSAnne10ScriptPointers
 	ld a, [wSSAnne10CurScript]
 	call ExecuteCurMapScriptInTable
@@ -25,7 +25,6 @@ SSAnne10TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-SSAnne10TrainerHeaders:
 SSAnne10TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SS_ANNE_10_TRAINER_0
 	db ($2 << 4) ; trainer's view range

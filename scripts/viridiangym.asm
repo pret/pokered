@@ -3,7 +3,7 @@ ViridianGymScript:
 	ld de, Gym8LeaderName
 	call LoadGymLeaderAndCityName
 	call EnableAutoTextBoxDrawing
-	ld hl, ViridianGymTrainerHeaders
+	ld hl, ViridianGymTrainerHeader0
 	ld de, ViridianGymScriptPointers
 	ld a, [wViridianGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -184,7 +184,6 @@ ViridianGymTextPointers:
 	dw ViridianGymText13
 	dw ViridianGymText14
 
-ViridianGymTrainerHeaders:
 ViridianGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VIRIDIAN_GYM_TRAINER_0
 	db ($4 << 4) ; trainer's view range

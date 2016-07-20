@@ -1,7 +1,7 @@
 BrunoScript:
 	call BrunoShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
-	ld hl, BrunoTrainerHeaders
+	ld hl, BrunoTrainerHeader0
 	ld de, BrunoScriptPointers
 	ld a, [wBrunoCurScript]
 	call ExecuteCurMapScriptInTable
@@ -117,7 +117,6 @@ BrunoTextPointers:
 	dw BrunoText1
 	dw BrunoDontRunAwayText
 
-BrunoTrainerHeaders:
 BrunoTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range

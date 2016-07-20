@@ -99,7 +99,6 @@ VermilionGymTextPointers:
 	dw VermilionGymText7
 	dw VermilionGymText8
 
-VermilionGymTrainerHeaders:
 VermilionGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
