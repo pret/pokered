@@ -1,4 +1,4 @@
-Music_JigglypuffSong_Ch1::
+Music_JigglypuffSong_Ch0::
 	tempo 144
 	volume 7, 7
 	vibrato 8, 2, 4
@@ -21,7 +21,7 @@ Music_JigglypuffSong_Ch1::
 	endchannel
 
 
-Music_JigglypuffSong_Ch2::
+Music_JigglypuffSong_Ch1::
 	vibrato 5, 1, 5
 	duty 2
 	dutycycle 10

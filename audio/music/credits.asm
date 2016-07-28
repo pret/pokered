@@ -1,4 +1,4 @@
-Music_Credits_Ch1::
+Music_Credits_Ch0::
 	tempo 140
 	volume 7, 7
 	duty 3
@@ -284,7 +284,7 @@ Music_Credits_Ch1::
 	endchannel
 
 
-Music_Credits_Ch2::
+Music_Credits_Ch1::
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 5
@@ -574,7 +574,7 @@ Music_Credits_Ch2::
 	endchannel
 
 
-Music_Credits_Ch3::
+Music_Credits_Ch2::
 	notetype 12, 1, 0
 	octave 5
 	C# 6

@@ -1,4 +1,4 @@
-Music_SSAnne_Ch1::
+Music_SSAnne_Ch0::
 	tempo 128
 	volume 7, 7
 	duty 1
@@ -107,7 +107,7 @@ Music_SSAnne_branch_b3b2::
 	loopchannel 0, Music_SSAnne_branch_b3b2
 
 
-Music_SSAnne_Ch2::
+Music_SSAnne_Ch1::
 	duty 0
 	vibrato 12, 2, 4
 
@@ -282,7 +282,7 @@ Music_SSAnne_branch_b41e::
 	loopchannel 0, Music_SSAnne_branch_b41e
 
 
-Music_SSAnne_Ch3::
+Music_SSAnne_Ch2::
 	notetype 12, 1, 3
 	rest 16
 	rest 12
@@ -335,4 +335,4 @@ Music_SSAnne_Ch3::
 	F# 8
 	G# 8
 	B_ 8
-	loopchannel 0, Music_SSAnne_Ch3
+	loopchannel 0, Music_SSAnne_Ch2

@@ -1,4 +1,4 @@
-Music_MeetEvilTrainer_Ch1::
+Music_MeetEvilTrainer_Ch0::
 	tempo 124
 	volume 7, 7
 	duty 2
@@ -21,7 +21,7 @@ Music_MeetEvilTrainer_branch_7f6ae::
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6ae
 
 
-Music_MeetEvilTrainer_Ch2::
+Music_MeetEvilTrainer_Ch1::
 	duty 1
 	notetype 12, 11, 6
 	octave 3
@@ -60,7 +60,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	loopchannel 0, Music_MeetEvilTrainer_branch_7f6c2
 
 
-Music_MeetEvilTrainer_Ch3::
+Music_MeetEvilTrainer_Ch2::
 	notetype 12, 1, 0
 	rest 8
 	octave 4

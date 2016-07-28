@@ -1,4 +1,4 @@
-Music_DefeatedTrainer_Ch1::
+Music_DefeatedTrainer_Ch0::
 	tempo 224
 	volume 7, 7
 	duty 2
@@ -95,7 +95,7 @@ Music_DefeatedTrainer_branch_23a76::
 	loopchannel 0, Music_DefeatedTrainer_branch_23a76
 
 
-Music_DefeatedTrainer_Ch2::
+Music_DefeatedTrainer_Ch1::
 	duty 2
 	notetype 4, 12, 3
 	octave 4
@@ -172,7 +172,7 @@ Music_DefeatedTrainer_branch_23ad2::
 	loopchannel 0, Music_DefeatedTrainer_branch_23ad2
 
 
-Music_DefeatedTrainer_Ch3::
+Music_DefeatedTrainer_Ch2::
 	notetype 4, 1, 0
 	octave 5
 	D_ 2

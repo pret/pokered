@@ -1,4 +1,4 @@
-Music_Routes3_Ch1::
+Music_Routes3_Ch0::
 	tempo 148
 	volume 7, 7
 	duty 3
@@ -77,7 +77,7 @@ Music_Routes3_branch_9fc3::
 	loopchannel 0, Music_Routes3_branch_9fc3
 
 
-Music_Routes3_Ch2::
+Music_Routes3_Ch1::
 	vibrato 8, 2, 3
 	duty 2
 	notetype 12, 12, 7
@@ -178,7 +178,7 @@ Music_Routes3_branch_a01a::
 	loopchannel 0, Music_Routes3_branch_a01a
 
 
-Music_Routes3_Ch3::
+Music_Routes3_Ch2::
 	vibrato 4, 1, 0
 	notetype 6, 1, 2
 	octave 4
@@ -354,7 +354,7 @@ Music_Routes3_branch_a0a3::
 	loopchannel 0, Music_Routes3_branch_a0a3
 
 
-Music_Routes3_Ch4::
+Music_Routes3_Ch3::
 	dspeed 6
 	mutedsnare4 1
 	mutedsnare4 1

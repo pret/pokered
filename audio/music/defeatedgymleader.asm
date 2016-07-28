@@ -1,4 +1,4 @@
-Music_DefeatedGymLeader_Ch1::
+Music_DefeatedGymLeader_Ch0::
 	tempo 112
 	volume 7, 7
 	duty 3
@@ -162,7 +162,7 @@ Music_DefeatedGymLeader_branch_23ccc::
 	loopchannel 0, Music_DefeatedGymLeader_branch_23ccc
 
 
-Music_DefeatedGymLeader_Ch2::
+Music_DefeatedGymLeader_Ch1::
 	duty 2
 	vibrato 24, 2, 4
 	notetype 12, 12, 4
@@ -352,7 +352,7 @@ Music_DefeatedGymLeader_branch_23d84::
 	loopchannel 0, Music_DefeatedGymLeader_branch_23d84
 
 
-Music_DefeatedGymLeader_Ch3::
+Music_DefeatedGymLeader_Ch2::
 	notetype 12, 1, 0
 	vibrato 16, 1, 2
 	octave 4

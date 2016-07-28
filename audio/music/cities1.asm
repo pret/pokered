@@ -2,7 +2,7 @@ Music_Cities1_branch_aa6f::
 	tempo 232
 	loopchannel 0, Music_Cities1_branch_aa79
 
-Music_Cities1_Ch1::
+Music_Cities1_Ch0::
 	tempo 144
 
 Music_Cities1_branch_aa79::
@@ -268,7 +268,7 @@ Music_Cities1_branch_ab8a::
 	endchannel
 
 
-Music_Cities1_Ch2::
+Music_Cities1_Ch1::
 	vibrato 5, 1, 5
 	callchannel Music_Cities1_branch_ac00
 	octave 4
@@ -357,7 +357,7 @@ Music_Cities1_Ch2::
 	G# 1
 	notetype 12, 10, 4
 	A_ 1
-	loopchannel 0, Music_Cities1_Ch2
+	loopchannel 0, Music_Cities1_Ch1
 
 Music_Cities1_branch_ac00::
 	duty 2
@@ -401,7 +401,7 @@ Music_Cities1_branch_ac00::
 	endchannel
 
 
-Music_Cities1_Ch3::
+Music_Cities1_Ch2::
 	notetype 12, 1, 1
 	toggleperfectpitch
 
@@ -579,7 +579,7 @@ Music_Cities1_branch_acce::
 	endchannel
 
 
-Music_Cities1_Ch4::
+Music_Cities1_Ch3::
 	dspeed 12
 	callchannel Music_Cities1_branch_ad36
 
@@ -609,7 +609,7 @@ Music_Cities1_branch_acf3::
 	triangle1 6
 	snare6 6
 	snare6 4
-	loopchannel 0, Music_Cities1_Ch4
+	loopchannel 0, Music_Cities1_Ch3
 
 Music_Cities1_branch_ad36::
 	snare6 6

@@ -1,4 +1,4 @@
-Music_Cinnabar_Ch1::
+Music_Cinnabar_Ch0::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -85,7 +85,7 @@ Music_Cinnabar_branch_b878::
 	loopchannel 0, Music_Cinnabar_branch_b878
 
 
-Music_Cinnabar_Ch2::
+Music_Cinnabar_Ch1::
 	duty 3
 	vibrato 10, 2, 3
 
@@ -179,7 +179,7 @@ Music_Cinnabar_branch_b8d9::
 	loopchannel 0, Music_Cinnabar_branch_b8d9
 
 
-Music_Cinnabar_Ch3::
+Music_Cinnabar_Ch2::
 	notetype 12, 1, 0
 
 Music_Cinnabar_branch_b93f::

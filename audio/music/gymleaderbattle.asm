@@ -1,4 +1,4 @@
-Music_GymLeaderBattle_Ch1::
+Music_GymLeaderBattle_Ch0::
 	tempo 104
 	volume 7, 7
 	duty 3
@@ -547,7 +547,7 @@ Music_GymLeaderBattle_branch_223b0::
 	loopchannel 0, Music_GymLeaderBattle_branch_223b0
 
 
-Music_GymLeaderBattle_Ch2::
+Music_GymLeaderBattle_Ch1::
 	duty 3
 	vibrato 8, 2, 5
 	notetype 12, 12, 3
@@ -848,7 +848,7 @@ Music_GymLeaderBattle_branch_225e0::
 	loopchannel 0, Music_GymLeaderBattle_branch_225e0
 
 
-Music_GymLeaderBattle_Ch3::
+Music_GymLeaderBattle_Ch2::
 	vibrato 0, 2, 0
 	notetype 12, 1, 3
 	rest 12

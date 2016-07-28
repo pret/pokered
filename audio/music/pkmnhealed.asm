@@ -1,4 +1,4 @@
-Music_PkmnHealed_Ch1::
+Music_PkmnHealed_Ch0::
 	tempo 144
 	volume 7, 7
 	duty 2
@@ -19,7 +19,7 @@ Music_PkmnHealed_Ch1::
 	endchannel
 
 
-Music_PkmnHealed_Ch2::
+Music_PkmnHealed_Ch1::
 	duty 2
 	notetype 12, 12, 3
 	octave 4
@@ -33,7 +33,7 @@ Music_PkmnHealed_Ch2::
 	endchannel
 
 
-Music_PkmnHealed_Ch3::
+Music_PkmnHealed_Ch2::
 	notetype 12, 1, 0
 	octave 4
 	E_ 2

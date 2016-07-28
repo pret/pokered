@@ -1,4 +1,4 @@
-Music_TrainerBattle_Ch1::
+Music_TrainerBattle_Ch0::
 	tempo 112
 	volume 7, 7
 	duty 3
@@ -649,7 +649,7 @@ Music_TrainerBattle_branch_22962::
 	loopchannel 0, Music_TrainerBattle_branch_22962
 
 
-Music_TrainerBattle_Ch2::
+Music_TrainerBattle_Ch1::
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 2
@@ -953,7 +953,7 @@ Music_TrainerBattle_branch_22bfc::
 	loopchannel 0, Music_TrainerBattle_branch_22bfc
 
 
-Music_TrainerBattle_Ch3::
+Music_TrainerBattle_Ch2::
 	vibrato 0, 2, 0
 	notetype 12, 1, 4
 	octave 3

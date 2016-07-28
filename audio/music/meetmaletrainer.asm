@@ -1,4 +1,4 @@
-Music_MeetMaleTrainer_Ch1::
+Music_MeetMaleTrainer_Ch0::
 	tempo 112
 	volume 7, 7
 	duty 3
@@ -32,7 +32,7 @@ Music_MeetMaleTrainer_branch_7f78f::
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f78f
 
 
-Music_MeetMaleTrainer_Ch2::
+Music_MeetMaleTrainer_Ch1::
 	duty 3
 	vibrato 24, 2, 2
 	notetype 12, 12, 4
@@ -75,7 +75,7 @@ Music_MeetMaleTrainer_branch_7f7b5::
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f7b5
 
 
-Music_MeetMaleTrainer_Ch3::
+Music_MeetMaleTrainer_Ch2::
 	notetype 12, 1, 0
 	rest 6
 	octave 4

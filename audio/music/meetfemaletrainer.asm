@@ -1,4 +1,4 @@
-Music_MeetFemaleTrainer_Ch1::
+Music_MeetFemaleTrainer_Ch0::
 	tempo 124
 	volume 7, 7
 	duty 1
@@ -26,7 +26,7 @@ Music_MeetFemaleTrainer_branch_7f70c::
 	loopchannel 0, Music_MeetFemaleTrainer_branch_7f70c
 
 
-Music_MeetFemaleTrainer_Ch2::
+Music_MeetFemaleTrainer_Ch1::
 	duty 2
 	notetype 12, 12, 2
 	octave 3
@@ -71,7 +71,7 @@ Music_MeetFemaleTrainer_branch_7f726::
 	loopchannel 0, Music_MeetFemaleTrainer_branch_7f726
 
 
-Music_MeetFemaleTrainer_Ch3::
+Music_MeetFemaleTrainer_Ch2::
 	notetype 12, 1, 0
 	rest 8
 	octave 5

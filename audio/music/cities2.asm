@@ -1,4 +1,4 @@
-Music_Cities2_Ch1::
+Music_Cities2_Ch0::
 	tempo 148
 	volume 7, 7
 	duty 3
@@ -94,7 +94,7 @@ Music_Cities2_branch_b51a::
 	loopchannel 0, Music_Cities2_branch_b51a
 
 
-Music_Cities2_Ch2::
+Music_Cities2_Ch1::
 	duty 3
 	vibrato 8, 2, 3
 	notetype 12, 12, 2
@@ -280,7 +280,7 @@ Music_Cities2_branch_b58b::
 	loopchannel 0, Music_Cities2_branch_b58b
 
 
-Music_Cities2_Ch3::
+Music_Cities2_Ch2::
 	notetype 12, 1, 1
 	rest 16
 	octave 4

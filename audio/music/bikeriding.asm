@@ -1,4 +1,4 @@
-Music_BikeRiding_Ch1::
+Music_BikeRiding_Ch0::
 	tempo 144
 	volume 7, 7
 	duty 3
@@ -153,7 +153,7 @@ Music_BikeRiding_branch_7dbc9::
 	loopchannel 0, Music_BikeRiding_branch_7dbc9
 
 
-Music_BikeRiding_Ch2::
+Music_BikeRiding_Ch1::
 	duty 2
 	vibrato 6, 1, 5
 	notetype 12, 12, 3
@@ -302,7 +302,7 @@ Music_BikeRiding_branch_7dc75::
 	loopchannel 0, Music_BikeRiding_branch_7dc75
 
 
-Music_BikeRiding_Ch3::
+Music_BikeRiding_Ch2::
 	notetype 12, 1, 3
 	rest 2
 
@@ -643,7 +643,7 @@ Music_BikeRiding_branch_7dd17::
 	loopchannel 0, Music_BikeRiding_branch_7dd17
 
 
-Music_BikeRiding_Ch4::
+Music_BikeRiding_Ch3::
 	dspeed 12
 	rest 2
 

@@ -1,4 +1,4 @@
-Music_OaksLab_Ch1::
+Music_OaksLab_Ch0::
 	tempo 140
 	volume 7, 7
 	duty 3
@@ -69,7 +69,7 @@ Music_OaksLab_branch_7eed0::
 	loopchannel 0, Music_OaksLab_branch_7eed0
 
 
-Music_OaksLab_Ch2::
+Music_OaksLab_Ch1::
 	duty 3
 	vibrato 10, 2, 5
 	notetype 12, 12, 4
@@ -144,7 +144,7 @@ Music_OaksLab_branch_7ef16::
 	loopchannel 0, Music_OaksLab_branch_7ef16
 
 
-Music_OaksLab_Ch3::
+Music_OaksLab_Ch2::
 	notetype 12, 1, 1
 	rest 2
 	octave 4
