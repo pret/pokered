@@ -392,64 +392,29 @@ StopAllMusic: macro
 	call PlaySound
 	endm
 
-;1_channel	EQU $00
-;2_channels	EQU $40
-;3_channels	EQU $80
-;4_channels	EQU $C0
+Ch0    EQU 0
+Ch1    EQU 1
+Ch2    EQU 2
+Ch3    EQU 3
+Ch4    EQU 4
+Ch5    EQU 5
+Ch6    EQU 6
+Ch7    EQU 7
 
-CH0		EQU 0
-CH1		EQU 1
-CH2		EQU 2
-CH3		EQU 3
-CH4		EQU 4
-CH5		EQU 5
-CH6		EQU 6
-CH7		EQU 7
-
-CH0_ EQU 1 << CH0
-CH1_ EQU 1 << CH1
-CH2_ EQU 1 << CH2
-CH3_ EQU 1 << CH3
-CH4_ EQU 1 << CH4
-CH5_ EQU 1 << CH5
-CH6_ EQU 1 << CH6
-CH7_ EQU 1 << CH7
-
-; channel 0 is not optional
-music: MACRO
-	db ((((\2 & CH0_) >> CH0) + ((\2 & CH1_) >> CH1) + ((\2 & CH2_) >> CH2) + ((\2 & CH3_) >> CH3)) - 1) << 6 | CH0
-	dw \1_Ch0
-	IF \2 & CH1_
-		db CH1
-		dw \1_Ch1
+audio: MACRO
+	db (_NARG - 2) << 6 | \2
+	dw \1_\2
+	IF _NARG > 2
+		db \3
+		dw \1_\3
 	ENDC
-	IF \2 & CH2_
-		db CH2
-		dw \1_Ch2
+	IF _NARG > 3
+		db \4
+		dw \1_\4
 	ENDC
-	IF \2 & CH3_
-		db CH3
-		dw \1_Ch3
-	ENDC
-ENDM
-
-; do not start a sound effect with channel 5 or 6, only channel 4 or 7
-sfx: MACRO
-	IF \2 & CH4_
-		db ((((\2 & CH4_) >> CH4) + ((\2 & CH5_) >> CH5) + ((\2 & CH6_) >> CH6) + ((\2 & CH7_) >> CH7)) - 1) << 6 | CH4
-		dw \1_Ch4
-	ENDC
-	IF \2 & CH5_
-		db CH5
-		dw \1_Ch5
-	ENDC
-	IF \2 & CH6_
-		db CH6
-		dw \1_Ch6
-	ENDC
-	IF \2 & CH7_
-		db CH7
-		dw \1_Ch7
+	IF _NARG > 4
+		db \5
+		dw \1_\5
 	ENDC
 ENDM
 

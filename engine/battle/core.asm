@@ -872,7 +872,7 @@ FaintEnemyPokemon:
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -956,7 +956,7 @@ EndLowHealthAlarm:
 ; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
 	ld [wLowHealthAlarm], a ; turn off low health alarm
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	inc a
 	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
 	ret
@@ -1954,7 +1954,7 @@ DrawPlayerHUDAndHPBar:
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	ret
 .setLowHealthAlarm
 	ld hl, wLowHealthAlarm

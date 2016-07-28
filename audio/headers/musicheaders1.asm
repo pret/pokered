@@ -1,66 +1,66 @@
 Music_PalletTown::
-	music Music_PalletTown, CH0_ | CH1_ | CH2_
+	audio Music_PalletTown, Ch0, Ch1, Ch2
 
 Music_Pokecenter::
-	music Music_Pokecenter, CH0_ | CH1_ | CH2_
+	audio Music_Pokecenter, Ch0, Ch1, Ch2
 
 Music_Gym::
-	music Music_Gym, CH0_ | CH1_ | CH2_
+	audio Music_Gym, Ch0, Ch1, Ch2
 
 ; Viridian City, Pewter City, Saffron City
 Music_Cities1::
-	music Music_Cities1, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Cities1, Ch0, Ch1, Ch2, Ch3
 
 ; Cerulean City, Fuchsia City
 Music_Cities2::
-	music Music_Cities2, CH0_ | CH1_ | CH2_
+	audio Music_Cities2, Ch0, Ch1, Ch2
 
 Music_Celadon::
-	music Music_Celadon, CH0_ | CH1_ | CH2_
+	audio Music_Celadon, Ch0, Ch1, Ch2
 
 Music_Cinnabar::
-	music Music_Cinnabar, CH0_ | CH1_ | CH2_
+	audio Music_Cinnabar, Ch0, Ch1, Ch2
 
 Music_Vermilion::
-	music Music_Vermilion, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Vermilion, Ch0, Ch1, Ch2, Ch3
 
 Music_Lavender::
-	music Music_Lavender, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Lavender, Ch0, Ch1, Ch2, Ch3
 
 Music_SSAnne::
-	music Music_SSAnne, CH0_ | CH1_ | CH2_
+	audio Music_SSAnne, Ch0, Ch1, Ch2
 
 Music_MeetProfOak::
-	music Music_MeetProfOak, CH0_ | CH1_ | CH2_
+	audio Music_MeetProfOak, Ch0, Ch1, Ch2
 
 Music_MeetRival::
-	music Music_MeetRival, CH0_ | CH1_ | CH2_
+	audio Music_MeetRival, Ch0, Ch1, Ch2
 
 Music_MuseumGuy::
-	music Music_MuseumGuy, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_MuseumGuy, Ch0, Ch1, Ch2, Ch3
 
 Music_SafariZone::
-	music Music_SafariZone, CH0_ | CH1_ | CH2_
+	audio Music_SafariZone, Ch0, Ch1, Ch2
 
 Music_PkmnHealed::
-	music Music_PkmnHealed, CH0_ | CH1_ | CH2_
+	audio Music_PkmnHealed, Ch0, Ch1, Ch2
 
 ; Routes 1 and 2
 Music_Routes1::
-	music Music_Routes1, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Routes1, Ch0, Ch1, Ch2, Ch3
 
 ; Routes 24 and 25
 Music_Routes2::
-	music Music_Routes2, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Routes2, Ch0, Ch1, Ch2, Ch3
 
 ; Routes 3, 4, 5, 6, 7, 8, 9, 10, 16, 17, 18, 19, 20, 21, 22
 Music_Routes3::
-	music Music_Routes3, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Routes3, Ch0, Ch1, Ch2, Ch3
 
 ; Routes 11, 12, 13, 14, 15
 Music_Routes4::
-	music Music_Routes4, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Routes4, Ch0, Ch1, Ch2, Ch3
 
 ; Route 23, Indigo Plateau
 Music_IndigoPlateau::
-	music Music_IndigoPlateau, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_IndigoPlateau, Ch0, Ch1, Ch2, Ch3

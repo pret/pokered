@@ -1,56 +1,56 @@
 Music_TitleScreen::
-	music Music_TitleScreen, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_TitleScreen, Ch0, Ch1, Ch2, Ch3
 
 Music_Credits::
-	music Music_Credits, CH0_ | CH1_ | CH2_
+	audio Music_Credits, Ch0, Ch1, Ch2
 
 Music_HallOfFame::
-	music Music_HallOfFame, CH0_ | CH1_ | CH2_
+	audio Music_HallOfFame, Ch0, Ch1, Ch2
 
 Music_OaksLab::
-	music Music_OaksLab, CH0_ | CH1_ | CH2_
+	audio Music_OaksLab, Ch0, Ch1, Ch2
 
 Music_JigglypuffSong::
-	music Music_JigglypuffSong, CH0_ | CH1_
+	audio Music_JigglypuffSong, Ch0, Ch1
 
 Music_BikeRiding::
-	music Music_BikeRiding, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_BikeRiding, Ch0, Ch1, Ch2, Ch3
 
 Music_Surfing::
-	music Music_Surfing, CH0_ | CH1_ | CH2_
+	audio Music_Surfing, Ch0, Ch1, Ch2
 
 Music_GameCorner::
-	music Music_GameCorner, CH0_ | CH1_ | CH2_
+	audio Music_GameCorner, Ch0, Ch1, Ch2
 
 Music_IntroBattle::
-	music Music_IntroBattle, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_IntroBattle, Ch0, Ch1, Ch2, Ch3
 
 ; Power Plant, Unknown Dungeon, Rocket HQ
 Music_Dungeon1::
-	music Music_Dungeon1, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Dungeon1, Ch0, Ch1, Ch2, Ch3
 
 ; Viridian Forest, Seafoam Islands
 Music_Dungeon2::
-	music Music_Dungeon2, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Dungeon2, Ch0, Ch1, Ch2, Ch3
 
 ; Mt. Moon, Rock Tunnel, Victory Road
 Music_Dungeon3::
-	music Music_Dungeon3, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_Dungeon3, Ch0, Ch1, Ch2, Ch3
 
 Music_CinnabarMansion::
-	music Music_CinnabarMansion, CH0_ | CH1_ | CH2_ | CH3_
+	audio Music_CinnabarMansion, Ch0, Ch1, Ch2, Ch3
 
 Music_PokemonTower::
-	music Music_PokemonTower, CH0_ | CH1_ | CH2_
+	audio Music_PokemonTower, Ch0, Ch1, Ch2
 
 Music_SilphCo::
-	music Music_SilphCo, CH0_ | CH1_ | CH2_
+	audio Music_SilphCo, Ch0, Ch1, Ch2
 
 Music_MeetEvilTrainer::
-	music Music_MeetEvilTrainer, CH0_ | CH1_ | CH2_
+	audio Music_MeetEvilTrainer, Ch0, Ch1, Ch2
 
 Music_MeetFemaleTrainer::
-	music Music_MeetFemaleTrainer, CH0_ | CH1_ | CH2_
+	audio Music_MeetFemaleTrainer, Ch0, Ch1, Ch2
 
 Music_MeetMaleTrainer::
-	music Music_MeetMaleTrainer, CH0_ | CH1_ | CH2_
+	audio Music_MeetMaleTrainer, Ch0, Ch1, Ch2

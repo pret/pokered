@@ -1,7 +1,7 @@
 ; The second of three duplicated sound engines.
 
 Audio2_UpdateMusic::
-	ld c, CH0
+	ld c, Ch0
 .loop
 	ld b, $0
 	ld hl, wChannelSoundIDs
@@ -10,7 +10,7 @@ Audio2_UpdateMusic::
 	and a
 	jr z, .nextChannel
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nc, .applyAffects ; if sfx channel
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
@@ -30,7 +30,7 @@ Audio2_UpdateMusic::
 .nextChannel
 	ld a, c
 	inc c
-	cp CH7
+	cp Ch7
 	jr nz, .loop
 	ret
 
@@ -52,9 +52,9 @@ Audio2_ApplyMusicAffects:
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nc, .startChecks ; if a sfx channel
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -160,7 +160,7 @@ Audio2_PlayNextNote:
 	res 4, [hl]
 	res 5, [hl]
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nz, .beginChecks
 	ld a, [wLowHealthAlarm] ;low health alarm enabled?
 	bit 7, a
@@ -180,7 +180,7 @@ Audio2_endchannel:
 	bit 1, [hl]
 	jr nz, .returnFromCall
 	ld a, c
-	cp CH3
+	cp Ch3
 	jr nc, .noiseOrSfxChannel
 	jr .asm_219c0
 .noiseOrSfxChannel
@@ -188,7 +188,7 @@ Audio2_endchannel:
 	ld hl, wChannelFlags2
 	add hl, bc
 	res 0, [hl]
-	cp CH6
+	cp Ch6
 	jr nz, .notSfxChannel3
 	ld a, $0
 	ld [rNR30], a
@@ -231,19 +231,19 @@ Audio2_endchannel:
 	and [hl]
 	ld [rNR51], a
 .asm_219c9
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp $14
 	jr nc, .asm_219d2
 	jr .asm_219ef
 .asm_219d2
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp $86
 	jr z, .asm_219ef
 	jr c, .asm_219dd
 	jr .asm_219ef
 .asm_219dd
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr z, .asm_219e6
 	call Audio2_21e6d
 	ret c
@@ -344,14 +344,14 @@ Audio2_notetype:
 	add hl, bc
 	ld [hl], a ; store low nibble as speed
 	ld a, c
-	cp CH3
+	cp Ch3
 	jr z, .noiseChannel ; noise channel has 0 params
 	call Audio2_GetNextMusicByte
 	ld d, a
 	ld a, c
-	cp CH2
+	cp Ch2
 	jr z, .musicChannel3
-	cp CH6
+	cp Ch6
 	jr nz, .notChannel3
 	ld hl, wSfxWaveInstrument
 	jr .sfxChannel3
@@ -471,7 +471,7 @@ Audio2_tempo:
 	cp $ed ; is this command a tempo?
 	jr nz, Audio2_stereopanning ; no
 	ld a, c ; yes
-	cp CH4
+	cp Ch4
 	jr nc, .sfxChannel
 	call Audio2_GetNextMusicByte
 	ld [wMusicTempo], a ; store first param
@@ -514,10 +514,10 @@ Audio2_unknownmusic0xef:
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
 	jr nz, .skip
-	ld a, [wChannelSoundIDs + CH7]
+	ld a, [wChannelSoundIDs + Ch7]
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	xor a
-	ld [wChannelSoundIDs + CH7], a
+	ld [wChannelSoundIDs + Ch7], a
 .skip
 	jp Audio2_endchannel
 
@@ -570,7 +570,7 @@ Audio2_unknownsfx0x20:
 	cp $20 ; is this command an unknownsfx0x20?
 	jr nz, Audio2_unknownsfx0x10 ; no
 	ld a, c
-	cp CH3 ; is this a noise or sfx channel?
+	cp Ch3 ; is this a noise or sfx channel?
 	jr c, Audio2_unknownsfx0x10 ; no
 	ld b, $0
 	ld hl, wChannelFlags2
@@ -596,7 +596,7 @@ Audio2_unknownsfx0x20:
 	call Audio2_GetNextMusicByte
 	ld e, a
 	ld a, c
-	cp CH7
+	cp Ch7
 	ld a, $0
 	jr z, .sfxNoiseChannel ; only two params for noise channel
 	push de
@@ -613,7 +613,7 @@ Audio2_unknownsfx0x20:
 
 Audio2_unknownsfx0x10:
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr c, Audio2_note ; if not a sfx
 	ld a, d
 	cp $10 ; is this command a unknownsfx0x10?
@@ -629,7 +629,7 @@ Audio2_unknownsfx0x10:
 
 Audio2_note:
 	ld a, c
-	cp CH3
+	cp Ch3
 	jr nz, Audio2_notelength ; if not noise channel
 	ld a, d
 	and $f0
@@ -677,7 +677,7 @@ Audio2_notelength:
 	ld l, b
 	call Audio2_22006
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nc, .sfxChannel
 	ld a, [wMusicTempo]
 	ld d, a
@@ -687,7 +687,7 @@ Audio2_notelength:
 .sfxChannel
 	ld d, $1
 	ld e, $0
-	cp CH7
+	cp Ch7
 	jr z, .skip ; if noise channel
 	call Audio2_21e2f
 	ld a, [wSfxTempo]
@@ -727,9 +727,9 @@ Audio2_notepitch:
 	cp $c0 ; compare to rest
 	jr nz, .notRest
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nc, .sfxChannel
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -737,9 +737,9 @@ Audio2_notepitch:
 	; fall through
 .sfxChannel
 	ld a, c
-	cp CH2
+	cp Ch2
 	jr z, .musicChannel3
-	cp CH6
+	cp Ch6
 	jr nz, .notSfxChannel3
 .musicChannel3
 	ld b, $0
@@ -775,9 +775,9 @@ Audio2_notepitch:
 .asm_21d39
 	push de
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nc, .skip ; if sfx channel
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -822,11 +822,11 @@ Audio2_21d79:
 	or [hl]
 	ld d, a
 	ld a, c
-	cp CH7
+	cp Ch7
 	jr z, .sfxNoiseChannel
-	cp CH4
+	cp Ch4
 	jr nc, .skip ; if sfx channel
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -854,9 +854,9 @@ Audio2_21daa:
 	add hl, bc
 	ld d, [hl]
 	ld a, c
-	cp CH2
+	cp Ch2
 	jr z, .channel3 ; if music channel 3
-	cp CH6
+	cp Ch6
 	jr z, .channel3 ; if sfx channel 3
 	ld a, d
 	and $3f
@@ -874,15 +874,15 @@ Audio2_21daa:
 
 Audio2_21dcc:
 	ld a, c
-	cp CH2
+	cp Ch2
 	jr z, .channel3
-	cp CH6
+	cp Ch6
 	jr nz, .notSfxChannel3
 	; fall through
 .channel3
 	push de
 	ld de, wMusicWaveInstrument
-	cp CH2
+	cp Ch2
 	jr z, .musicChannel3
 	ld de, wSfxWaveInstrument
 .musicChannel3
@@ -921,7 +921,7 @@ Audio2_21dcc:
 	inc hl
 	ld [hl], d
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr c, .musicChannel
 	call Audio2_21e56
 .musicChannel
@@ -929,7 +929,7 @@ Audio2_21dcc:
 
 Audio2_21e19:
 	ld a, c
-	cp CH4
+	cp Ch4
 	jr nz, .asm_21e2e
 	ld a, [wLowHealthAlarm]
 	bit 7, a
@@ -1008,7 +1008,7 @@ Audio2_21e6d:
 	ret
 
 Audio2_21e8b:
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp $14
 	jr nc, .asm_21e94
 	jr .asm_21e9a
@@ -1025,9 +1025,9 @@ Audio2_21e8b:
 	ret
 
 Audio2_21e9f:
-	ld a, [wChannelSoundIDs + CH7]
+	ld a, [wChannelSoundIDs + Ch7]
 	ld b, a
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	or b
 	cp $9d
 	jr nc, .asm_21ead
@@ -1313,7 +1313,7 @@ Audio2_22017:
 	ld d, [hl]
 	ld a, b
 .loop
-	cp CH7
+	cp Ch7
 	jr z, .done
 	sra d
 	rr e
@@ -1682,12 +1682,12 @@ Audio2_2224e:
 	jr c, .asm_222b5
 	jr .asm_222d4
 .asm_222b5
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wChannelCommandPointers + CH6 * 2 ; sfx noise channel pointer
+	ld hl, wChannelCommandPointers + Ch6 * 2 ; sfx noise channel pointer
 	ld de, Noise2_endchannel
 	ld [hl], e
 	inc hl

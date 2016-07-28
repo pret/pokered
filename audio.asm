@@ -477,7 +477,7 @@ Music_DoLowHealthAlarm::
 
 .asm_2138a
 	ld a, $86
-	ld [wChannelSoundIDs + CH4], a ;disable sound channel?
+	ld [wChannelSoundIDs + Ch4], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -491,7 +491,7 @@ Music_DoLowHealthAlarm::
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wChannelSoundIDs + CH4], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + Ch4], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 
@@ -542,7 +542,7 @@ Music_PokeFluteInBattle::
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrtie the channel pointers
-	ld hl, wChannelCommandPointers + CH4 * 2
+	ld hl, wChannelCommandPointers + Ch4 * 2
 	ld de, SFX_08_PokeFlute_Ch4
 	call Audio2_OverwriteChannelPointer
 	ld de, SFX_08_PokeFlute_Ch5
