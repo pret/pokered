@@ -406,6 +406,53 @@ CH5		EQU 5
 CH6		EQU 6
 CH7		EQU 7
 
+CH0_ EQU 1 << CH0
+CH1_ EQU 1 << CH1
+CH2_ EQU 1 << CH2
+CH3_ EQU 1 << CH3
+CH4_ EQU 1 << CH4
+CH5_ EQU 1 << CH5
+CH6_ EQU 1 << CH6
+CH7_ EQU 1 << CH7
+
+music: MACRO
+	db ((((\2 & CH0_) >> CH0) + ((\2 & CH1_) >> CH1) + ((\2 & CH2_) >> CH2) + ((\2 & CH3_) >> CH3)) - 1) << 6 | CH0
+	IF \2 & CH0_
+		dw \1_Ch0
+	ENDC
+	IF \2 & CH1_
+		db CH1
+		dw \1_Ch1
+	ENDC
+	IF \2 & CH2_
+		db CH2
+		dw \1_Ch2
+	ENDC
+	IF \2 & CH3_
+		db CH3
+		dw \1_Ch3
+	ENDC
+ENDM
+
+sfx: MACRO
+	IF \2 & CH4_
+		db ((((\2 & CH4_) >> CH4) + ((\2 & CH5_) >> CH5) + ((\2 & CH6_) >> CH6) + ((\2 & CH7_) >> CH7)) - 1) << 6 | CH4
+		dw \1_Ch4
+	ENDC
+	IF \2 & CH5_
+		db CH5
+		dw \1_Ch5
+	ENDC
+	IF \2 & CH6_
+		db CH6
+		dw \1_Ch6
+	ENDC
+	IF \2 & CH7_
+		db CH7
+		dw \1_Ch7
+	ENDC
+ENDM
+
 unknownsfx0x10: MACRO
 	db $10
 	db \1

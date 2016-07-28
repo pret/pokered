@@ -1,55 +1,20 @@
 Music_GymLeaderBattle::
-	db ( $80 | CH0 )
-	dw Music_GymLeaderBattle_Ch0
-	db CH1
-	dw Music_GymLeaderBattle_Ch1
-	db CH2
-	dw Music_GymLeaderBattle_Ch2
+	music Music_GymLeaderBattle, CH0_ | CH1_ | CH2_
 
 Music_TrainerBattle::
-	db ( $80 | CH0 )
-	dw Music_TrainerBattle_Ch0
-	db CH1
-	dw Music_TrainerBattle_Ch1
-	db CH2
-	dw Music_TrainerBattle_Ch2
+	music Music_TrainerBattle, CH0_ | CH1_ | CH2_
 
 Music_WildBattle::
-	db ( $80 | CH0 )
-	dw Music_WildBattle_Ch0
-	db CH1
-	dw Music_WildBattle_Ch1
-	db CH2
-	dw Music_WildBattle_Ch2
+	music Music_WildBattle, CH0_ | CH1_ | CH2_
 
 Music_FinalBattle::
-	db ( $80 | CH0 )
-	dw Music_FinalBattle_Ch0
-	db CH1
-	dw Music_FinalBattle_Ch1
-	db CH2
-	dw Music_FinalBattle_Ch2
+	music Music_FinalBattle, CH0_ | CH1_ | CH2_
 
 Music_DefeatedTrainer::
-	db ( $80 | CH0 )
-	dw Music_DefeatedTrainer_Ch0
-	db CH1
-	dw Music_DefeatedTrainer_Ch1
-	db CH2
-	dw Music_DefeatedTrainer_Ch2
+	music Music_DefeatedTrainer, CH0_ | CH1_ | CH2_
 
 Music_DefeatedWildMon::
-	db ( $80 | CH0 )
-	dw Music_DefeatedWildMon_Ch0
-	db CH1
-	dw Music_DefeatedWildMon_Ch1
-	db CH2
-	dw Music_DefeatedWildMon_Ch2
+	music Music_DefeatedWildMon, CH0_ | CH1_ | CH2_
 
 Music_DefeatedGymLeader::
-	db ( $80 | CH0 )
-	dw Music_DefeatedGymLeader_Ch0
-	db CH1
-	dw Music_DefeatedGymLeader_Ch1
-	db CH2
-	dw Music_DefeatedGymLeader_Ch2
+	music Music_DefeatedGymLeader, CH0_ | CH1_ | CH2_
