@@ -415,11 +415,10 @@ CH5_ EQU 1 << CH5
 CH6_ EQU 1 << CH6
 CH7_ EQU 1 << CH7
 
+; channel 0 is not optional
 music: MACRO
 	db ((((\2 & CH0_) >> CH0) + ((\2 & CH1_) >> CH1) + ((\2 & CH2_) >> CH2) + ((\2 & CH3_) >> CH3)) - 1) << 6 | CH0
-	IF \2 & CH0_
-		dw \1_Ch0
-	ENDC
+	dw \1_Ch0
 	IF \2 & CH1_
 		db CH1
 		dw \1_Ch1
@@ -434,6 +433,7 @@ music: MACRO
 	ENDC
 ENDM
 
+; do not start a sound effect with channel 5 or 6, only channel 4 or 7
 sfx: MACRO
 	IF \2 & CH4_
 		db ((((\2 & CH4_) >> CH4) + ((\2 & CH5_) >> CH5) + ((\2 & CH6_) >> CH6) + ((\2 & CH7_) >> CH7)) - 1) << 6 | CH4

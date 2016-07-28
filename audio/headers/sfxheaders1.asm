@@ -280,6 +280,7 @@ SFX_Go_Outside_1::
 SFX_Save_1::
 	sfx SFX_Save_1, CH4_ | CH5_
 
+; the Pokeflute sound effect directly hijacks channel 2
 SFX_Pokeflute::
 	db CH2
 	dw SFX_Pokeflute_Ch2
