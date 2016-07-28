@@ -4502,10 +4502,10 @@ GetEnemyMonStat:
 
 CalculateDamage:
 ; input:
-;	b: attack
-;	c: opponent defense
-;	d: base power
-;	e: level
+;   b: attack
+;   c: opponent defense
+;   d: base power
+;   e: level
 
 	ld a, [H_WHOSETURN] ; whose turn?
 	and a
@@ -7512,7 +7512,7 @@ FrozenText:
 
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
-	and a, 1 << FRZ	; are they frozen?
+	and a, 1 << FRZ ; are they frozen?
 	ret z ; return if so
 	ld a, [H_WHOSETURN]
 	and a
@@ -7521,7 +7521,7 @@ CheckDefrost:
 	ld a, [wPlayerMoveType]
 	sub a, FIRE
 	ret nz ; return if type of move used isn't fire
-	ld [wEnemyMonStatus], a	; set opponent status to 00 ["defrost" a frozen monster]
+	ld [wEnemyMonStatus], a ; set opponent status to 00 ["defrost" a frozen monster]
 	ld hl, wEnemyMon1Status
 	ld a, [wEnemyMonPartyPos]
 	ld bc, wEnemyMon2 - wEnemyMon1
@@ -7531,7 +7531,7 @@ CheckDefrost:
 	ld hl, FireDefrostedText
 	jr .common
 .opponent
-	ld a, [wEnemyMoveType]	; same as above with addresses swapped
+	ld a, [wEnemyMoveType] ; same as above with addresses swapped
 	sub a, FIRE
 	ret nz
 	ld [wBattleMonStatus], a

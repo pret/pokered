@@ -140,13 +140,13 @@ overworldMapCoord: MACRO
 ;\3 = X movement (X-blocks)
 EVENT_DISP: MACRO
 	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
-	db \2,\3	;Y,X
+	db \2,\3 ;Y,X
 	ENDM
 
 FLYWARP_DATA: MACRO
 	EVENT_DISP \1,\2,\3
-	db ((\2) & $01)	;sub-block Y
-	db ((\3) & $01)	;sub-block X
+	db ((\2) & $01) ;sub-block Y
+	db ((\3) & $01) ;sub-block X
 	ENDM
 
 ; external map entry macro
@@ -588,8 +588,8 @@ ENDM
 
 ; format: notetype speed, volume, fade
 notetype: MACRO
-	db	$D0 | \1
-	db	(\2 << 4) | \3
+	db $D0 | \1
+	db (\2 << 4) | \3
 ENDM
 
 dspeed: MACRO

@@ -37,11 +37,11 @@ Audio3_UpdateMusic::
 ; this routine checks flags for music effects currently applied
 ; to the channel and calls certain functions based on flags.
 ; known flags for wChannelFlags1:
-;	0: toggleperfectpitch has been used
-;	1: call has been used
-;	3: a toggle used only by this routine for vibrato
-;	4: pitchbend flag
-;	6: dutycycle flag
+;   0: toggleperfectpitch has been used
+;   1: call has been used
+;   3: a toggle used only by this routine for vibrato
+;   4: pitchbend flag
+;   6: dutycycle flag
 Audio3_ApplyMusicAffects:
 	ld b, $0
 	ld hl, wChannelNoteDelayCounters ; delay until next note

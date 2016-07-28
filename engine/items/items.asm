@@ -1,7 +1,7 @@
 UseItem_:
 	ld a,1
 	ld [wActionResultOrTookBattleTurn],a ; initialise to success value
-	ld a,[wcf91]	;contains item_ID
+	ld a,[wcf91] ;contains item_ID
 	cp a,HM_01
 	jp nc,ItemUseTMHM
 	ld hl,ItemUsePtrTable
@@ -235,7 +235,7 @@ ItemUseBall:
 	ld b,a
 
 .skipAilmentValueSubtraction
-	push bc	; save (Rand1 - Status)
+	push bc ; save (Rand1 - Status)
 
 ; Calculate MaxHP * 255.
 	xor a

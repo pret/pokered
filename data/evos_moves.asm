@@ -29,8 +29,8 @@ EvosMovesPointerTable:
 	dw Mon009_EvosMoves
 	dw Mon127_EvosMoves
 	dw Mon114_EvosMoves
-	dw Mon152_EvosMoves	;MissingNo
-	dw Mon153_EvosMoves	;MissingNo
+	dw Mon152_EvosMoves ;MissingNo
+	dw Mon153_EvosMoves ;MissingNo
 	dw Mon058_EvosMoves
 	dw Mon095_EvosMoves
 	dw Mon022_EvosMoves
@@ -48,26 +48,26 @@ EvosMovesPointerTable:
 	dw Mon054_EvosMoves
 	dw Mon096_EvosMoves
 	dw Mon076_EvosMoves
-	dw Mon154_EvosMoves	;MissingNo
+	dw Mon154_EvosMoves ;MissingNo
 	dw Mon126_EvosMoves
-	dw Mon155_EvosMoves	;MissingNo
+	dw Mon155_EvosMoves ;MissingNo
 	dw Mon125_EvosMoves
 	dw Mon082_EvosMoves
 	dw Mon109_EvosMoves
-	dw Mon156_EvosMoves	;MissingNo
+	dw Mon156_EvosMoves ;MissingNo
 	dw Mon056_EvosMoves
 	dw Mon086_EvosMoves
 	dw Mon050_EvosMoves
 	dw Mon128_EvosMoves
-	dw Mon157_EvosMoves	;MissingNo
-	dw Mon158_EvosMoves	;MissingNo
-	dw Mon159_EvosMoves	;MissingNo
+	dw Mon157_EvosMoves ;MissingNo
+	dw Mon158_EvosMoves ;MissingNo
+	dw Mon159_EvosMoves ;MissingNo
 	dw Mon083_EvosMoves
 	dw Mon048_EvosMoves
 	dw Mon149_EvosMoves
-	dw Mon160_EvosMoves	;MissingNo
-	dw Mon161_EvosMoves	;MissingNo
-	dw Mon162_EvosMoves	;MissingNo
+	dw Mon160_EvosMoves ;MissingNo
+	dw Mon161_EvosMoves ;MissingNo
+	dw Mon162_EvosMoves ;MissingNo
 	dw Mon084_EvosMoves
 	dw Mon060_EvosMoves
 	dw Mon124_EvosMoves
@@ -77,23 +77,23 @@ EvosMovesPointerTable:
 	dw Mon132_EvosMoves
 	dw Mon052_EvosMoves
 	dw Mon098_EvosMoves
-	dw Mon163_EvosMoves	;MissingNo
-	dw Mon164_EvosMoves	;MissingNo
-	dw Mon165_EvosMoves	;MissingNo
+	dw Mon163_EvosMoves ;MissingNo
+	dw Mon164_EvosMoves ;MissingNo
+	dw Mon165_EvosMoves ;MissingNo
 	dw Mon037_EvosMoves
 	dw Mon038_EvosMoves
 	dw Mon025_EvosMoves
 	dw Mon026_EvosMoves
-	dw Mon166_EvosMoves	;MissingNo
-	dw Mon167_EvosMoves	;MissingNo
+	dw Mon166_EvosMoves ;MissingNo
+	dw Mon167_EvosMoves ;MissingNo
 	dw Mon147_EvosMoves
 	dw Mon148_EvosMoves
 	dw Mon140_EvosMoves
 	dw Mon141_EvosMoves
 	dw Mon116_EvosMoves
 	dw Mon117_EvosMoves
-	dw Mon168_EvosMoves	;MissingNo
-	dw Mon169_EvosMoves	;MissingNo
+	dw Mon168_EvosMoves ;MissingNo
+	dw Mon169_EvosMoves ;MissingNo
 	dw Mon027_EvosMoves
 	dw Mon028_EvosMoves
 	dw Mon138_EvosMoves
@@ -113,38 +113,38 @@ EvosMovesPointerTable:
 	dw Mon013_EvosMoves
 	dw Mon014_EvosMoves
 	dw Mon015_EvosMoves
-	dw Mon170_EvosMoves	;MissingNo
+	dw Mon170_EvosMoves ;MissingNo
 	dw Mon085_EvosMoves
 	dw Mon057_EvosMoves
 	dw Mon051_EvosMoves
 	dw Mon049_EvosMoves
 	dw Mon087_EvosMoves
-	dw Mon171_EvosMoves	;MissingNo
-	dw Mon172_EvosMoves	;MissingNo
+	dw Mon171_EvosMoves ;MissingNo
+	dw Mon172_EvosMoves ;MissingNo
 	dw Mon010_EvosMoves
 	dw Mon011_EvosMoves
 	dw Mon012_EvosMoves
 	dw Mon068_EvosMoves
-	dw Mon173_EvosMoves	;MissingNo
+	dw Mon173_EvosMoves ;MissingNo
 	dw Mon055_EvosMoves
 	dw Mon097_EvosMoves
 	dw Mon042_EvosMoves
 	dw Mon150_EvosMoves
 	dw Mon143_EvosMoves
 	dw Mon129_EvosMoves
-	dw Mon174_EvosMoves	;MissingNo
-	dw Mon175_EvosMoves	;MissingNo
+	dw Mon174_EvosMoves ;MissingNo
+	dw Mon175_EvosMoves ;MissingNo
 	dw Mon089_EvosMoves
-	dw Mon176_EvosMoves	;MissingNo
+	dw Mon176_EvosMoves ;MissingNo
 	dw Mon099_EvosMoves
 	dw Mon091_EvosMoves
-	dw Mon177_EvosMoves	;MissingNo
+	dw Mon177_EvosMoves ;MissingNo
 	dw Mon101_EvosMoves
 	dw Mon036_EvosMoves
 	dw Mon110_EvosMoves
 	dw Mon053_EvosMoves
 	dw Mon105_EvosMoves
-	dw Mon178_EvosMoves	;MissingNo
+	dw Mon178_EvosMoves ;MissingNo
 	dw Mon093_EvosMoves
 	dw Mon063_EvosMoves
 	dw Mon065_EvosMoves
@@ -154,13 +154,13 @@ EvosMovesPointerTable:
 	dw Mon001_EvosMoves
 	dw Mon003_EvosMoves
 	dw Mon073_EvosMoves
-	dw Mon179_EvosMoves	;MissingNo
+	dw Mon179_EvosMoves ;MissingNo
 	dw Mon118_EvosMoves
 	dw Mon119_EvosMoves
-	dw Mon180_EvosMoves	;MissingNo
-	dw Mon181_EvosMoves	;MissingNo
-	dw Mon182_EvosMoves	;MissingNo
-	dw Mon183_EvosMoves	;MissingNo
+	dw Mon180_EvosMoves ;MissingNo
+	dw Mon181_EvosMoves ;MissingNo
+	dw Mon182_EvosMoves ;MissingNo
+	dw Mon183_EvosMoves ;MissingNo
 	dw Mon077_EvosMoves
 	dw Mon078_EvosMoves
 	dw Mon019_EvosMoves
@@ -170,19 +170,19 @@ EvosMovesPointerTable:
 	dw Mon074_EvosMoves
 	dw Mon137_EvosMoves
 	dw Mon142_EvosMoves
-	dw Mon184_EvosMoves	;MissingNo
+	dw Mon184_EvosMoves ;MissingNo
 	dw Mon081_EvosMoves
-	dw Mon185_EvosMoves	;MissingNo
-	dw Mon186_EvosMoves	;MissingNo
+	dw Mon185_EvosMoves ;MissingNo
+	dw Mon186_EvosMoves ;MissingNo
 	dw Mon004_EvosMoves
 	dw Mon007_EvosMoves
 	dw Mon005_EvosMoves
 	dw Mon008_EvosMoves
 	dw Mon006_EvosMoves
-	dw Mon187_EvosMoves	;MissingNo
-	dw Mon188_EvosMoves	;MissingNo
-	dw Mon189_EvosMoves	;MissingNo
-	dw Mon190_EvosMoves	;MissingNo
+	dw Mon187_EvosMoves ;MissingNo
+	dw Mon188_EvosMoves ;MissingNo
+	dw Mon189_EvosMoves ;MissingNo
+	dw Mon190_EvosMoves ;MissingNo
 	dw Mon043_EvosMoves
 	dw Mon044_EvosMoves
 	dw Mon045_EvosMoves
