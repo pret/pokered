@@ -1,4 +1,4 @@
-SFX_08_unused2_Ch1:
+SFX_08_unused2_Ch4:
 	executemusic
 	tempo 256
 	volume 7, 7
@@ -17,7 +17,7 @@ SFX_08_unused2_Ch1:
 	endchannel
 
 
-SFX_08_unused2_Ch2:
+SFX_08_unused2_Ch5:
 	executemusic
 	vibrato 8, 2, 7
 	duty 2
@@ -33,7 +33,7 @@ SFX_08_unused2_Ch2:
 	endchannel
 
 
-SFX_08_unused2_Ch3:
+SFX_08_unused2_Ch6:
 	executemusic
 	notetype 6, 1, 0
 	octave 4

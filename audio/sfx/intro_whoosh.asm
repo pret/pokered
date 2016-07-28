@@ -1,4 +1,4 @@
-SFX_Intro_Whoosh_Ch1:
+SFX_Intro_Whoosh_Ch7:
 	unknownnoise0x20 4, 44, 32
 	unknownnoise0x20 3, 160, 32
 	unknownnoise0x20 3, 176, 33

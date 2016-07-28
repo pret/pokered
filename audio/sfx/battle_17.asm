@@ -1,4 +1,4 @@
-SFX_Battle_17_Ch1:
+SFX_Battle_17_Ch7:
 	unknownnoise0x20 2, 148, 51
 	unknownnoise0x20 4, 180, 34
 	unknownnoise0x20 4, 241, 68

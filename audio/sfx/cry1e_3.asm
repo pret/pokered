@@ -1,4 +1,4 @@
-SFX_Cry1E_3_Ch1:
+SFX_Cry1E_3_Ch4:
 	dutycycle 240
 	unknownsfx0x20 6, 242, 0, 6
 	unknownsfx0x20 6, 226, 64, 6
@@ -11,7 +11,7 @@ SFX_Cry1E_3_Ch1:
 	endchannel
 
 
-SFX_Cry1E_3_Ch2:
+SFX_Cry1E_3_Ch5:
 	dutycycle 17
 	unknownsfx0x20 3, 8, 1, 0
 	unknownsfx0x20 6, 194, 193, 5
@@ -25,7 +25,7 @@ SFX_Cry1E_3_Ch2:
 	endchannel
 
 
-SFX_Cry1E_3_Ch3:
+SFX_Cry1E_3_Ch7:
 	unknownnoise0x20 6, 8, 1
 	unknownnoise0x20 5, 226, 92
 	unknownnoise0x20 5, 194, 76

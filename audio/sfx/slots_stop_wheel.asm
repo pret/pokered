@@ -1,4 +1,4 @@
-SFX_Slots_Stop_Wheel_Ch1:
+SFX_Slots_Stop_Wheel_Ch4:
 	duty 2
 	unknownsfx0x20 1, 242, 160, 6
 	unknownsfx0x20 1, 242, 224, 6

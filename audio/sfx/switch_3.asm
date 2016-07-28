@@ -1,4 +1,4 @@
-SFX_Switch_3_Ch1:
+SFX_Switch_3_Ch4:
 	duty 2
 	unknownsfx0x20 4, 0, 0, 0
 	unknownsfx0x20 2, 241, 128, 6

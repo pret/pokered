@@ -1,4 +1,4 @@
-SFX_Battle_27_Ch1:
+SFX_Battle_27_Ch4:
 	duty 2
 	unknownsfx0x20 15, 63, 192, 7
 
@@ -9,7 +9,7 @@ SFX_Battle_27_branch_2062a:
 	endchannel
 
 
-SFX_Battle_27_Ch2:
+SFX_Battle_27_Ch5:
 	dutycycle 179
 	unknownsfx0x20 15, 47, 200, 7
 
@@ -20,8 +20,8 @@ SFX_Battle_27_branch_2063d:
 	endchannel
 
 
-SFX_Battle_27_Ch3:
+SFX_Battle_27_Ch7:
 	unknownnoise0x20 3, 151, 18
 	unknownnoise0x20 3, 161, 17
-	loopchannel 10, SFX_Battle_27_Ch3
+	loopchannel 10, SFX_Battle_27_Ch7
 	endchannel

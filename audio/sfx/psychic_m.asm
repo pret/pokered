@@ -1,4 +1,4 @@
-SFX_Psychic_M_Ch1:
+SFX_Psychic_M_Ch4:
 	duty 2
 	unknownsfx0x10 247
 	unknownsfx0x20 8, 196, 189, 7
@@ -11,7 +11,7 @@ SFX_Psychic_M_Ch1:
 	endchannel
 
 
-SFX_Psychic_M_Ch2:
+SFX_Psychic_M_Ch5:
 	duty 2
 	unknownsfx0x20 8, 196, 112, 7
 	unknownsfx0x20 8, 196, 97, 7
@@ -22,7 +22,7 @@ SFX_Psychic_M_Ch2:
 	endchannel
 
 
-SFX_Psychic_M_Ch3:
+SFX_Psychic_M_Ch7:
 	unknownnoise0x20 15, 63, 20
 	unknownnoise0x20 15, 207, 19
 	unknownnoise0x20 15, 207, 18

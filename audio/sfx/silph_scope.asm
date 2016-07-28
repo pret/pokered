@@ -1,4 +1,4 @@
-SFX_Silph_Scope_Ch1:
+SFX_Silph_Scope_Ch4:
 	duty 0
 	unknownsfx0x20 0, 210, 0, 7
 	unknownsfx0x20 0, 210, 64, 7

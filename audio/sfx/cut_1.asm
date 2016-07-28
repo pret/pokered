@@ -1,4 +1,4 @@
-SFX_Cut_1_Ch1:
+SFX_Cut_1_Ch7:
 	unknownnoise0x20 2, 247, 36
 	unknownnoise0x20 2, 247, 52
 	unknownnoise0x20 4, 247, 68

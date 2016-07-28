@@ -1,4 +1,4 @@
-SFX_Fly_3_Ch1:
+SFX_Fly_3_Ch7:
 	unknownnoise0x20 2, 241, 18
 	unknownnoise0x20 2, 0, 0
 	unknownnoise0x20 2, 161, 18

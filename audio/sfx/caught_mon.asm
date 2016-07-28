@@ -1,4 +1,4 @@
-SFX_Caught_Mon_Ch1:
+SFX_Caught_Mon_Ch4:
 	executemusic
 	tempo 256
 	volume 7, 7
@@ -22,7 +22,7 @@ SFX_Caught_Mon_Ch1:
 	endchannel
 
 
-SFX_Caught_Mon_Ch2:
+SFX_Caught_Mon_Ch5:
 	executemusic
 	duty 2
 	notetype 6, 12, 2
@@ -44,7 +44,7 @@ SFX_Caught_Mon_Ch2:
 	endchannel
 
 
-SFX_Caught_Mon_Ch3:
+SFX_Caught_Mon_Ch6:
 	executemusic
 	notetype 6, 1, 0
 	octave 4

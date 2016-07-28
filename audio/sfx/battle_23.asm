@@ -1,4 +1,4 @@
-SFX_Battle_23_Ch1:
+SFX_Battle_23_Ch7:
 	unknownnoise0x20 2, 242, 67
 	unknownnoise0x20 4, 181, 50
 	unknownnoise0x20 9, 134, 49

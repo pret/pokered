@@ -1,4 +1,4 @@
-SFX_Push_Boulder_1_Ch1:
+SFX_Push_Boulder_1_Ch7:
 	unknownnoise0x20 4, 162, 35
 	unknownnoise0x20 8, 241, 52
 	unknownnoise0x20 15, 0, 0

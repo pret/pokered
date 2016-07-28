@@ -1,4 +1,4 @@
-SFX_Intro_Lunge_Ch1:
+SFX_Intro_Lunge_Ch7:
 	unknownnoise0x20 6, 32, 16
 	unknownnoise0x20 6, 47, 64
 	unknownnoise0x20 6, 79, 65

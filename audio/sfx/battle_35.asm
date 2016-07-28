@@ -1,4 +1,4 @@
-SFX_Battle_35_Ch1:
+SFX_Battle_35_Ch4:
 	executemusic
 	vibrato 10, 2, 4
 	duty 2
@@ -13,7 +13,7 @@ SFX_Battle_35_Ch1:
 	endchannel
 
 
-SFX_Battle_35_Ch2:
+SFX_Battle_35_Ch5:
 	executemusic
 	vibrato 10, 2, 3
 	duty 2

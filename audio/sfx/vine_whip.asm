@@ -1,4 +1,4 @@
-SFX_Vine_Whip_Ch1:
+SFX_Vine_Whip_Ch7:
 	unknownnoise0x20 1, 194, 51
 	unknownnoise0x20 2, 242, 33
 	unknownnoise0x20 1, 226, 51

@@ -1,4 +1,4 @@
-SFX_Healing_Machine_3_Ch1:
+SFX_Healing_Machine_3_Ch4:
 	duty 2
 	unknownsfx0x10 44
 	unknownsfx0x20 4, 242, 0, 5

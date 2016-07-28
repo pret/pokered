@@ -1,4 +1,4 @@
-SFX_Save_1_Ch1:
+SFX_Save_1_Ch4:
 	duty 2
 	unknownsfx0x20 4, 244, 0, 7
 	unknownsfx0x20 2, 228, 0, 6
@@ -10,7 +10,7 @@ SFX_Save_1_Ch1:
 	endchannel
 
 
-SFX_Save_1_Ch2:
+SFX_Save_1_Ch5:
 	duty 2
 	unknownsfx0x20 4, 8, 0, 0
 	unknownsfx0x20 2, 212, 1, 7

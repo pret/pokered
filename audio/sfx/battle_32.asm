@@ -1,4 +1,4 @@
-SFX_Battle_32_Ch1:
+SFX_Battle_32_Ch4:
 	duty 2
 	unknownsfx0x10 175
 	unknownsfx0x20 8, 241, 0, 7
@@ -6,7 +6,7 @@ SFX_Battle_32_Ch1:
 	endchannel
 
 
-SFX_Battle_32_Ch2:
+SFX_Battle_32_Ch5:
 	duty 3
 	unknownsfx0x20 8, 241, 1, 7
 	endchannel

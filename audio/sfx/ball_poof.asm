@@ -1,4 +1,4 @@
-SFX_Ball_Poof_Ch1:
+SFX_Ball_Poof_Ch4:
 	duty 2
 	unknownsfx0x10 22
 	unknownsfx0x20 15, 242, 0, 4
@@ -6,6 +6,6 @@ SFX_Ball_Poof_Ch1:
 	endchannel
 
 
-SFX_Ball_Poof_Ch2:
+SFX_Ball_Poof_Ch7:
 	unknownnoise0x20 15, 162, 34
 	endchannel
