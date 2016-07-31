@@ -6711,3 +6711,8 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
+
+
+SECTION "bank1F",ROMX,BANK[$1F]
+
+INCLUDE "engine/wonder_trade.asm"
