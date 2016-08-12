@@ -1,6 +1,7 @@
 # Pokémon Red and Blue
 
 This is a disassembly of Pokémon Red and Blue.
+This project is intended for educational purposes **only**, as it contains Nintendo's intellectual property.
 
 It builds the following roms:
 
