@@ -1,5 +1,5 @@
 TextBoxBorder::
-; Draw a cxb text box at hl.
+; Draw a c×b text box at hl.
 
 	; top row
 	push hl
@@ -369,9 +369,9 @@ TextCommandProcessor::
 	xor e
 	ld [wLetterPrintingDelayFlags],a
 	ld a,c
-	ld [wUnusedCC3A],a
+	ld [wTextDest],a
 	ld a,b
-	ld [wUnusedCC3B],a
+	ld [wTextDest + 1],a
 
 NextTextCommand::
 	ld a,[hli]
@@ -480,10 +480,10 @@ TextCommand02::
 TextCommand03::
 	pop hl
 	ld a,[hli]
-	ld [wUnusedCC3A],a
+	ld [wTextDest],a
 	ld c,a
 	ld a,[hli]
-	ld [wUnusedCC3B],a
+	ld [wTextDest + 1],a
 	ld b,a
 	jp NextTextCommand
 
