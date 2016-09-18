@@ -969,3 +969,9 @@ CableClub_DrawHorizontalLine:
 	dec d
 	jr nz, .loop
 	ret
+
+LoadTrainerInfoTextBoxTiles:
+	ld de, TrainerInfoTextBoxTileGraphics
+	ld hl, vChars2 + $760
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
+	jp CopyVideoData
