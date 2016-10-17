@@ -8047,9 +8047,8 @@ SwitchAndTeleportEffect:
 	cp c ; get a random number between 0 and c
 	jr nc, .rejectionSampleLoop1
 	srl b
-	srl b  ; b = enemy level * 4
-; bug: does not account for overflow, so levels above 63 can lead to erroneousness results
-	cp b ; is rand[0, playerLevel + enemyLevel] > enemyLevel?
+	srl b  ; b = enemyLevel / 4
+	cp b ; is rand[0, playerLevel + enemyLevel) >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
 	call DelayFrames
