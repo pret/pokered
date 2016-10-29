@@ -119,11 +119,11 @@ GainExperience:
 	ld d, MAX_LEVEL
 	callab CalcExperience ; get max exp
 ; compare max exp with current exp
-	ld a, [$ff96]
+	ld a, [hExperience]
 	ld b, a
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	ld c, a
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	ld d, a
 	pop hl
 	ld a, [hld]
