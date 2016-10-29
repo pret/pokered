@@ -3097,8 +3097,8 @@ LinkBattleExchangeData:
 	cp STRUGGLE
 	ld b, LINKBATTLE_STRUGGLE
 	jr z, .next
-	dec b
-	inc a
+	dec b ; LINKBATTLE_NO_ACTION
+	inc a ; does move equal -1 (i.e. no action)?
 	jr z, .next
 	ld a, [wPlayerMoveListIndex]
 	jr .doExchange
