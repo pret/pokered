@@ -200,3 +200,7 @@ LINK_STATE_START_BATTLE  EQU $03 ; pre-battle initialisation
 LINK_STATE_BATTLING      EQU $04 ; in a link battle
 LINK_STATE_RESET         EQU $05 ; reset game (unused)
 LINK_STATE_TRADING       EQU $32 ; in a link trade
+
+LINKBATTLE_RUN       EQU $F
+LINKBATTLE_STRUGGLE  EQU $E
+LINKBATTLE_NO_ACTION EQU $D ; never sent

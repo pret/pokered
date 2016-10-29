@@ -432,13 +432,13 @@ MainInBattleLoop:
 	jr nz, .noLinkBattle
 ; link battle
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	jp z, EnemyRan
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jr z, .noLinkBattle
-	cp $d
+	cp LINKBATTLE_NO_ACTION
 	jr z, .noLinkBattle
-	sub $4
+	sub 4
 	jr c, .noLinkBattle
 ; the link battle enemy has switched mons
 	ld a, [wPlayerBattleStatus1]
@@ -990,7 +990,7 @@ ReplaceFaintedEnemyMon:
 ; link battle
 	call LinkBattleExchangeData
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	ret z
 	call LoadScreenTilesFromBuffer1
 .notLinkBattle
@@ -1679,12 +1679,12 @@ TryRunningFromBattle:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
-	ld a, $f
+	ld a, LINKBATTLE_RUN
 	ld [wPlayerMoveListIndex], a
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	ld a, $2
 	jr z, .playSound
 	dec a
@@ -2999,16 +2999,16 @@ SelectEnemyMove:
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jp z, .linkedOpponentUsedStruggle
-	cp $d
+	cp LINKBATTLE_NO_ACTION
 	jr z, .unableToSelectMove
-	cp $4
+	cp 4
 	ret nc
 	ld [wEnemyMoveListIndex], a
 	ld c, a
 	ld hl, wEnemyMonMoves
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	jr .done
@@ -3087,7 +3087,7 @@ LinkBattleExchangeData:
 	ld a, $ff
 	ld [wSerialExchangeNybbleReceiveData], a
 	ld a, [wPlayerMoveListIndex]
-	cp $f ; is the player running from battle?
+	cp LINKBATTLE_RUN ; is the player running from battle?
 	jr z, .doExchange
 	ld a, [wActionResultOrTookBattleTurn]
 	and a ; is the player switching in another mon?
@@ -3095,7 +3095,7 @@ LinkBattleExchangeData:
 ; the player used a move
 	ld a, [wPlayerSelectedMove]
 	cp STRUGGLE
-	ld b, $e
+	ld b, LINKBATTLE_STRUGGLE
 	jr z, .next
 	dec b
 	inc a
@@ -5676,9 +5676,9 @@ ExecuteEnemyMove:
 	jr nz, .executeEnemyMove
 	ld b, $1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jr z, .executeEnemyMove
-	cp $4
+	cp 4
 	ret nc
 .executeEnemyMove
 	ld hl, wAILayer2Encouragement
