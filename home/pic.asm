@@ -7,10 +7,10 @@ UncompressSpriteData::
 	ld a, b
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call _UncompressSpriteData
 	pop af
 	ld [H_LOADEDROMBANK], a
