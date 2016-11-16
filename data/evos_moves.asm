@@ -253,7 +253,7 @@ EvosMovesPointerTable: ; 3b05c (e:705c)
 	dbw Bank(Mon249_EvosMoves), Mon249_EvosMoves
 	dbw Bank(Mon250_EvosMoves), Mon250_EvosMoves
 	dbw Bank(Mon251_EvosMoves), Mon251_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon252_EvosMoves), Mon252_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3582,5 +3582,25 @@ Mon251_EvosMoves:
 	db 0
 ;Learnset
 	db 30,PSYBEAM
+	db 40,SOLARBEAM
+	db 0
+
+Mon252_EvosMoves:
+;TREECKO
+;Evolutions
+	db EV_LEVEL,16
+	dw GROVYLE
+	db 0
+;Learnset
+	db 30,PSYBEAM
+	db 40,SOLARBEAM
+	db 0
+
+Mon253_EvosMoves:
+;GROVYLE
+;Evolutions
+	db 0
+;Learnset
+	db 16,RAZOR_LEAF
 	db 40,SOLARBEAM
 	db 0
