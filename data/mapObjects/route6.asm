@@ -1,4 +1,4 @@
-Route6Object: ; 0x58022 (size=87)
+Route6Object:
 	db $f ; border block
 
 	db $4 ; warps

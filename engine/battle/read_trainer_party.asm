@@ -1,4 +1,4 @@
-ReadTrainer: ; 39c53 (e:5c53)
+ReadTrainer:
 
 ; don't change any moves in a link battle
 	ld a,[wLinkState]

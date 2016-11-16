@@ -16,4 +16,3 @@ _PewterGymText_5c49e::
 	cont "Fine then! Show"
 	cont "me your best!"
 	done
-

@@ -1,4 +1,4 @@
-VermilionGymObject: ; 0x5cbfe (size=58)
+VermilionGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

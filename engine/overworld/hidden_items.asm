@@ -1,4 +1,4 @@
-HiddenItems: ; 76688 (1d:6688)
+HiddenItems:
 	ld hl, HiddenItemCoords
 	call FindHiddenItemOrCoinsIndex
 	ld [wHiddenItemOrCoinsIndex], a
@@ -21,14 +21,14 @@ HiddenItems: ; 76688 (1d:6688)
 
 INCLUDE "data/hidden_item_coords.asm"
 
-FoundHiddenItemText: ; 7675b (1d:675b)
+FoundHiddenItemText:
 	TX_FAR _FoundHiddenItemText
 	TX_ASM
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
 	ld b, a
 	ld c, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bagFull
 	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wHiddenItemOrCoinsIndex]
 	ld e, a
@@ -39,7 +39,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
-.BagFull
+.bagFull
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -47,11 +47,11 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	call PrintText
 	jp TextScriptEnd
 
-HiddenItemBagFullText: ; 76794 (1d:6794)
+HiddenItemBagFullText:
 	TX_FAR _HiddenItemBagFullText
 	db "@"
 
-HiddenCoins: ; 76799 (1d:6799)
+HiddenCoins:
 	ld b, COIN_CASE
 	predef GetQuantityOfItemInBag
 	ld a, b
@@ -80,24 +80,24 @@ HiddenCoins: ; 76799 (1d:6799)
 	cp 20
 	jr z, .bcd20
 	cp 40
-	jr z, .bcd20
+	jr z, .bcd20 ; should be bcd40
 	jr .bcd100
 .bcd10
 	ld a, $10
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd20
 	ld a, $20
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd40 ; due to a typo, this is never used
 	ld a, $40
 	ld [hCoins + 1], a
-	jr .bcddone
+	jr .bcdDone
 .bcd100
 	ld a, $1
 	ld [hCoins], a
-.bcddone
+.bcdDone
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -111,30 +111,31 @@ HiddenCoins: ; 76799 (1d:6799)
 	call EnableAutoTextBoxDrawing
 	ld a, [wPlayerCoins]
 	cp $99
-	jr nz, .RoomInCoinCase
+	jr nz, .roomInCoinCase
 	ld a, [wPlayerCoins + 1]
 	cp $99
-	jr nz, .RoomInCoinCase
+	jr nz, .roomInCoinCase
 	tx_pre_id DroppedHiddenCoinsText
 	jr .done
-.RoomInCoinCase
+.roomInCoinCase
 	tx_pre_id FoundHiddenCoinsText
 .done
 	jp PrintPredefTextID
 
 INCLUDE "data/hidden_coins.asm"
 
-FoundHiddenCoinsText: ; 76847 (1d:6847)
+FoundHiddenCoinsText:
 	TX_FAR _FoundHiddenCoinsText
-	db $10,"@"
+	TX_SFX_ITEM_2
+	db "@"
 
-DroppedHiddenCoinsText: ; 7684d (1d:684d)
+DroppedHiddenCoinsText:
 	TX_FAR _FoundHiddenCoins2Text
-	db $10
+	TX_SFX_ITEM_2
 	TX_FAR _DroppedHiddenCoinsText
 	db "@"
 
-FindHiddenItemOrCoinsIndex: ; 76857 (1d:6857)
+FindHiddenItemOrCoinsIndex:
 	ld a, [wHiddenObjectY]
 	ld d, a
 	ld a, [wHiddenObjectX]

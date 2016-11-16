@@ -1,4 +1,4 @@
-UndergroundPathEntranceRoute6Object: ; 0x5d6fe (size=34)
+UndergroundPathEntranceRoute6Object:
 	db $a ; border block
 
 	db $3 ; warps

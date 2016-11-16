@@ -1,4 +1,4 @@
-BillsHouseObject: ; 0x1e8df (size=38)
+BillsHouseObject:
 	db $d ; border block
 
 	db $2 ; warps

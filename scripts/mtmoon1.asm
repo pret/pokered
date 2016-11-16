@@ -1,4 +1,4 @@
-MtMoon1Script: ; 499c8 (12:59c8)
+MtMoon1Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon1TrainerHeader0
 	ld de, MtMoon1ScriptPointers
@@ -7,12 +7,12 @@ MtMoon1Script: ; 499c8 (12:59c8)
 	ld [wMtMoon1CurScript], a
 	ret
 
-MtMoon1ScriptPointers: ; 499db (12:59db)
+MtMoon1ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-MtMoon1TextPointers: ; 499e1 (12:59e1)
+MtMoon1TextPointers:
 	dw MtMoon1Text1
 	dw MtMoon1Text2
 	dw MtMoon1Text3
@@ -28,8 +28,7 @@ MtMoon1TextPointers: ; 499e1 (12:59e1)
 	dw PickUpItemText
 	dw MtMoon1Text14
 
-MtMoon1TrainerHeaders: ; 499fd (12:59fd)
-MtMoon1TrainerHeader0: ; 499fd (12:59fd)
+MtMoon1TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_0
@@ -38,55 +37,55 @@ MtMoon1TrainerHeader0: ; 499fd (12:59fd)
 	dw MtMoon1EndBattleText2 ; TextEndBattle
 	dw MtMoon1EndBattleText2 ; TextEndBattle
 
-MtMoon1TrainerHeader2: ; 49a09 (12:5a09)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_2
+MtMoon1TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_1
 	dw MtMoon1BattleText3 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText3 ; TextAfterBattle
 	dw MtMoon1EndBattleText3 ; TextEndBattle
 	dw MtMoon1EndBattleText3 ; TextEndBattle
 
-MtMoon1TrainerHeader3: ; 49a15 (12:5a15)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_3
+MtMoon1TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_2
 	dw MtMoon1BattleText4 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText4 ; TextAfterBattle
 	dw MtMoon1EndBattleText4 ; TextEndBattle
 	dw MtMoon1EndBattleText4 ; TextEndBattle
 
-MtMoon1TrainerHeader4: ; 49a21 (12:5a21)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_4
+MtMoon1TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_3
 	dw MtMoon1BattleText5 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText5 ; TextAfterBattle
 	dw MtMoon1EndBattleText5 ; TextEndBattle
 	dw MtMoon1EndBattleText5 ; TextEndBattle
 
-MtMoon1TrainerHeader5: ; 49a2d (12:5a2d)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_5
+MtMoon1TrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_4
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_4
 	dw MtMoon1BattleText6 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText6 ; TextAfterBattle
 	dw MtMoon1EndBattleText6 ; TextEndBattle
 	dw MtMoon1EndBattleText6 ; TextEndBattle
 
-MtMoon1TrainerHeader6: ; 49a39 (12:5a39)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_6
+MtMoon1TrainerHeader5:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_5
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_6
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_5
 	dw MtMoon1BattleText7 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText7 ; TextAfterBattle
 	dw MtMoon1EndBattleText7 ; TextEndBattle
 	dw MtMoon1EndBattleText7 ; TextEndBattle
 
-MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
-	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_7
+MtMoon1TrainerHeader6:
+	dbEventFlagBit EVENT_BEAT_MT_MOON_1_TRAINER_6
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_7
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_1_TRAINER_6
 	dw MtMoon1BattleText8 ; TextBeforeBattle
 	dw MtMoon1AfterBattleText8 ; TextAfterBattle
 	dw MtMoon1EndBattleText8 ; TextEndBattle
@@ -94,132 +93,132 @@ MtMoon1TrainerHeader7: ; 49a45 (12:5a45)
 
 	db $ff
 
-MtMoon1Text1: ; 49a52 (12:5a52)
+MtMoon1Text1:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text2: ; 49a5c (12:5a5c)
+MtMoon1Text2:
+	TX_ASM
+	ld hl, MtMoon1TrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+MtMoon1Text3:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text3: ; 49a66 (12:5a66)
+MtMoon1Text4:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text4: ; 49a70 (12:5a70)
+MtMoon1Text5:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text5: ; 49a7a (12:5a7a)
+MtMoon1Text6:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text6: ; 49a84 (12:5a84)
+MtMoon1Text7:
 	TX_ASM
 	ld hl, MtMoon1TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-MtMoon1Text7: ; 49a8e (12:5a8e)
-	TX_ASM
-	ld hl, MtMoon1TrainerHeader7
-	call TalkToTrainer
-	jp TextScriptEnd
-
-MtMoon1BattleText2: ; 49a98 (12:5a98)
+MtMoon1BattleText2:
 	TX_FAR _MtMoon1BattleText2
 	db "@"
 
-MtMoon1EndBattleText2: ; 49a9d (12:5a9d)
+MtMoon1EndBattleText2:
 	TX_FAR _MtMoon1EndBattleText2
 	db "@"
 
-MtMoon1AfterBattleText2: ; 49aa2 (12:5aa2)
+MtMoon1AfterBattleText2:
 	TX_FAR _MtMoon1AfterBattleText2
 	db "@"
 
-MtMoon1BattleText3: ; 49aa7 (12:5aa7)
+MtMoon1BattleText3:
 	TX_FAR _MtMoon1BattleText3
 	db "@"
 
-MtMoon1EndBattleText3: ; 49aac (12:5aac)
+MtMoon1EndBattleText3:
 	TX_FAR _MtMoon1EndBattleText3
 	db "@"
 
-MtMoon1AfterBattleText3: ; 49ab1 (12:5ab1)
+MtMoon1AfterBattleText3:
 	TX_FAR _MtMoon1AfterBattleText3
 	db "@"
 
-MtMoon1BattleText4: ; 49ab6 (12:5ab6)
+MtMoon1BattleText4:
 	TX_FAR _MtMoon1BattleText4
 	db "@"
 
-MtMoon1EndBattleText4: ; 49abb (12:5abb)
+MtMoon1EndBattleText4:
 	TX_FAR _MtMoon1EndBattleText4
 	db "@"
 
-MtMoon1AfterBattleText4: ; 49ac0 (12:5ac0)
+MtMoon1AfterBattleText4:
 	TX_FAR _MtMoon1AfterBattleText4
 	db "@"
 
-MtMoon1BattleText5: ; 49ac5 (12:5ac5)
+MtMoon1BattleText5:
 	TX_FAR _MtMoon1BattleText5
 	db "@"
 
-MtMoon1EndBattleText5: ; 49aca (12:5aca)
+MtMoon1EndBattleText5:
 	TX_FAR _MtMoon1EndBattleText5
 	db "@"
 
-MtMoon1AfterBattleText5: ; 49acf (12:5acf)
+MtMoon1AfterBattleText5:
 	TX_FAR _MtMoon1AfterBattleText5
 	db "@"
 
-MtMoon1BattleText6: ; 49ad4 (12:5ad4)
+MtMoon1BattleText6:
 	TX_FAR _MtMoon1BattleText6
 	db "@"
 
-MtMoon1EndBattleText6: ; 49ad9 (12:5ad9)
+MtMoon1EndBattleText6:
 	TX_FAR _MtMoon1EndBattleText6
 	db "@"
 
-MtMoon1AfterBattleText6: ; 49ade (12:5ade)
+MtMoon1AfterBattleText6:
 	TX_FAR _MtMoon1AfterBattleText6
 	db "@"
 
-MtMoon1BattleText7: ; 49ae3 (12:5ae3)
+MtMoon1BattleText7:
 	TX_FAR _MtMoon1BattleText7
 	db "@"
 
-MtMoon1EndBattleText7: ; 49ae8 (12:5ae8)
+MtMoon1EndBattleText7:
 	TX_FAR _MtMoon1EndBattleText7
 	db "@"
 
-MtMoon1AfterBattleText7: ; 49aed (12:5aed)
+MtMoon1AfterBattleText7:
 	TX_FAR _MtMoon1AfterBattleText7
 	db "@"
 
-MtMoon1BattleText8: ; 49af2 (12:5af2)
+MtMoon1BattleText8:
 	TX_FAR _MtMoon1BattleText8
 	db "@"
 
-MtMoon1EndBattleText8: ; 49af7 (12:5af7)
+MtMoon1EndBattleText8:
 	TX_FAR _MtMoon1EndBattleText8
 	db "@"
 
-MtMoon1AfterBattleText8: ; 49afc (12:5afc)
+MtMoon1AfterBattleText8:
 	TX_FAR _MtMoon1AfterBattleText8
 	db "@"
 
-MtMoon1Text14: ; 49b01 (12:5b01)
+MtMoon1Text14:
 	TX_FAR _MtMoon1Text14
 	db "@"

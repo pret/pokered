@@ -1,4 +1,4 @@
-Mansion4Script: ; 523b9 (14:63b9)
+Mansion4Script:
 	call Mansion4Script_523cf
 	call EnableAutoTextBoxDrawing
 	ld hl, Mansion4TrainerHeader0
@@ -8,7 +8,7 @@ Mansion4Script: ; 523b9 (14:63b9)
 	ld [wMansion4CurScript], a
 	ret
 
-Mansion4Script_523cf: ; 523cf (14:63cf)
+Mansion4Script_523cf:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -43,7 +43,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	call Mansion2Script_5202f
 	ret
 
-Mansion4Script_Switches: ; 52420 (14:6420)
+Mansion4Script_Switches:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
@@ -53,12 +53,12 @@ Mansion4Script_Switches: ; 52420 (14:6420)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-Mansion4ScriptPointers: ; 52430 (14:6430)
+Mansion4ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Mansion4TextPointers: ; 52436 (14:6436)
+Mansion4TextPointers:
 	dw Mansion4Text1
 	dw Mansion4Text2
 	dw PickUpItemText
@@ -69,8 +69,7 @@ Mansion4TextPointers: ; 52436 (14:6436)
 	dw PickUpItemText
 	dw Mansion3Text6
 
-Mansion4TrainerHeaders: ; 52448 (14:6448)
-Mansion4TrainerHeader0: ; 52448 (14:6448)
+Mansion4TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_0
@@ -79,10 +78,10 @@ Mansion4TrainerHeader0: ; 52448 (14:6448)
 	dw Mansion4EndBattleText1 ; TextEndBattle
 	dw Mansion4EndBattleText1 ; TextEndBattle
 
-Mansion4TrainerHeader2: ; 52454 (14:6454)
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_2
+Mansion4TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_1
 	dw Mansion4BattleText2 ; TextBeforeBattle
 	dw Mansion4AfterBattleText2 ; TextAfterBattle
 	dw Mansion4EndBattleText2 ; TextEndBattle
@@ -90,42 +89,42 @@ Mansion4TrainerHeader2: ; 52454 (14:6454)
 
 	db $ff
 
-Mansion4Text1: ; 52461 (14:6461)
+Mansion4Text1:
 	TX_ASM
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion4Text2: ; 5246b (14:646b)
+Mansion4Text2:
 	TX_ASM
-	ld hl, Mansion4TrainerHeader2
+	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion4BattleText1: ; 52475 (14:6475)
+Mansion4BattleText1:
 	TX_FAR _Mansion4BattleText1
 	db "@"
 
-Mansion4EndBattleText1: ; 5247a (14:647a)
+Mansion4EndBattleText1:
 	TX_FAR _Mansion4EndBattleText1
 	db "@"
 
-Mansion4AfterBattleText1: ; 5247f (14:647f)
+Mansion4AfterBattleText1:
 	TX_FAR _Mansion4AfterBattleText1
 	db "@"
 
-Mansion4BattleText2: ; 52484 (14:6484)
+Mansion4BattleText2:
 	TX_FAR _Mansion4BattleText2
 	db "@"
 
-Mansion4EndBattleText2: ; 52489 (14:6489)
+Mansion4EndBattleText2:
 	TX_FAR _Mansion4EndBattleText2
 	db "@"
 
-Mansion4AfterBattleText2: ; 5248e (14:648e)
+Mansion4AfterBattleText2:
 	TX_FAR _Mansion4AfterBattleText2
 	db "@"
 
-Mansion4Text7: ; 52493 (14:6493)
+Mansion4Text7:
 	TX_FAR _Mansion4Text7
 	db "@"

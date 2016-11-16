@@ -1,4 +1,4 @@
-ViridianGymObject: ; 0x74bde (size=105)
+ViridianGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

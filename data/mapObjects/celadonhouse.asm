@@ -1,4 +1,4 @@
-CeladonHouseObject: ; 0x49227 (size=38)
+CeladonHouseObject:
 	db $f ; border block
 
 	db $2 ; warps

@@ -62,4 +62,3 @@ _Route24BattleText1::
 	text "I saw your feat"
 	line "from the grass!"
 	done
-

@@ -12,4 +12,3 @@ _Route18GateText_4992d::
 _Route18GateText_49932::
 	text "Excuse me!"
 	done
-

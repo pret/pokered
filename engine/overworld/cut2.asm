@@ -1,4 +1,4 @@
-AnimCut: ; 79e96 (1e:5e96)
+AnimCut:
 	ld a, [wCutTile]
 	cp $52
 	jr z, .grass
@@ -43,7 +43,7 @@ AnimCut: ; 79e96 (1e:5e96)
 	jr nz, .cutGrassLoop
 	ret
 
-AnimCutGrass_UpdateOAMEntries: ; 79eed (1e:5eed)
+AnimCutGrass_UpdateOAMEntries:
 	push bc
 	ld hl, wOAMBuffer + $91
 	ld a, 1
@@ -74,7 +74,7 @@ AnimCutGrass_UpdateOAMEntries: ; 79eed (1e:5eed)
 	jr nz, AnimCutGrass_UpdateOAMEntries
 	ret
 
-AnimCutGrass_SwapOAMEntries: ; 79f30 (1e:5f30)
+AnimCutGrass_SwapOAMEntries:
 	ld hl, wOAMBuffer + $90
 	ld de, wBuffer
 	ld bc, $8

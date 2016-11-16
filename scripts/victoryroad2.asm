@@ -8,7 +8,7 @@ VictoryRoad2Script:
 	res 5, [hl]
 	call nz, VictoryRoad2Script_517c9
 	call EnableAutoTextBoxDrawing
-	ld hl, VictoryRoad2TrainerHeaders
+	ld hl, VictoryRoad2TrainerHeader0
 	ld de, VictoryRoad2ScriptPointers
 	ld a, [wVictoryRoad2CurScript]
 	call ExecuteCurMapScriptInTable
@@ -83,7 +83,6 @@ VictoryRoad2TextPointers:
 	dw BoulderText
 	dw BoulderText
 
-VictoryRoad2TrainerHeaders:
 VictoryRoad2TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_0
 	db ($4 << 4) ; trainer's view range
@@ -93,37 +92,37 @@ VictoryRoad2TrainerHeader0:
 	dw VictoryRoad2EndBattleText1 ; TextEndBattle
 	dw VictoryRoad2EndBattleText1 ; TextEndBattle
 
-VictoryRoad2TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2
+VictoryRoad2TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_1
 	dw VictoryRoad2BattleText2 ; TextBeforeBattle
 	dw VictoryRoad2AfterBattleText2 ; TextAfterBattle
 	dw VictoryRoad2EndBattleText2 ; TextEndBattle
 	dw VictoryRoad2EndBattleText2 ; TextEndBattle
 
-VictoryRoad2TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3
+VictoryRoad2TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_2
 	dw VictoryRoad2BattleText3 ; TextBeforeBattle
 	dw VictoryRoad2AfterBattleText3 ; TextAfterBattle
 	dw VictoryRoad2EndBattleText3 ; TextEndBattle
 	dw VictoryRoad2EndBattleText3 ; TextEndBattle
 
-VictoryRoad2TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4
+VictoryRoad2TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_3
 	dw VictoryRoad2BattleText4 ; TextBeforeBattle
 	dw VictoryRoad2AfterBattleText4 ; TextAfterBattle
 	dw VictoryRoad2EndBattleText4 ; TextEndBattle
 	dw VictoryRoad2EndBattleText4 ; TextEndBattle
 
-VictoryRoad2TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_5
+VictoryRoad2TrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4
 	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_2_TRAINER_4
 	dw VictoryRoad2BattleText5 ; TextBeforeBattle
 	dw VictoryRoad2AfterBattleText5 ; TextAfterBattle
 	dw VictoryRoad2EndBattleText5 ; TextEndBattle
@@ -148,25 +147,25 @@ VictoryRoad2Text1:
 
 VictoryRoad2Text2:
 	TX_ASM
-	ld hl, VictoryRoad2TrainerHeader2
+	ld hl, VictoryRoad2TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text3:
 	TX_ASM
-	ld hl, VictoryRoad2TrainerHeader3
+	ld hl, VictoryRoad2TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text4:
 	TX_ASM
-	ld hl, VictoryRoad2TrainerHeader4
+	ld hl, VictoryRoad2TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad2Text5:
 	TX_ASM
-	ld hl, VictoryRoad2TrainerHeader5
+	ld hl, VictoryRoad2TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 

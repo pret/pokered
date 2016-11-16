@@ -1,4 +1,4 @@
-TrainerPicAndMoneyPointers: ; 39914 (e:5914)
+TrainerPicAndMoneyPointers:
 ; trainer pic pointers and base money.
 ; money received after battle = base money × level of highest-level enemy mon
 	dw YoungsterPic

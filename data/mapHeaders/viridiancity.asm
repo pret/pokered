@@ -1,4 +1,4 @@
-ViridianCity_h: ; 0x18357 to 0x18384 (45 bytes) (bank=6) (id=1)
+ViridianCity_h:
 	db OVERWORLD ; tileset
 	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
 	dw ViridianCityBlocks, ViridianCityTextPointers, ViridianCityScript ; blocks, texts, scripts

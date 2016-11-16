@@ -1,14 +1,14 @@
-Lab3Script: ; 75c87 (1d:5c87)
+Lab3Script:
 	jp EnableAutoTextBoxDrawing
 
-Lab3TextPointers: ; 75c8a (1d:5c8a)
+Lab3TextPointers:
 	dw Lab3Text1
 	dw Lab3Text2
 	dw Lab3Text3
 	dw Lab3Text4
 	dw Lab3Text5
 
-Lab3Text1: ; 75c94 (1d:5c94)
+Lab3Text1:
 	TX_ASM
 	CheckEvent EVENT_GOT_TM35
 	jr nz, .asm_e551a
@@ -31,31 +31,32 @@ Lab3Text1: ; 75c94 (1d:5c94)
 .asm_eb896
 	jp TextScriptEnd
 
-TM35PreReceiveText: ; 75cc8 (1d:5cc8)
+TM35PreReceiveText:
 	TX_FAR _TM35PreReceiveText
 	db "@"
 
-ReceivedTM35Text: ; 75ccd (1d:5ccd)
+ReceivedTM35Text:
 	TX_FAR _ReceivedTM35Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
-TM35ExplanationText: ; 75cd3 (1d:5cd3)
+TM35ExplanationText:
 	TX_FAR _TM35ExplanationText
 	db "@"
 
-TM35NoRoomText: ; 75cd8 (1d:5cd8)
+TM35NoRoomText:
 	TX_FAR _TM35NoRoomText
 	db "@"
 
-Lab3Text2: ; 75cdd (1d:5cdd)
+Lab3Text2:
 	TX_FAR _Lab3Text2
 	db "@"
 
-Lab3Text4: ; 75ce2 (1d:5ce2)
-Lab3Text3: ; 75ce2 (1d:5ce2)
+Lab3Text4:
+Lab3Text3:
 	TX_FAR _Lab3Text3
 	db "@"
 
-Lab3Text5: ; 75ce7 (1d:5ce7)
+Lab3Text5:
 	TX_FAR _Lab3Text5
 	db "@"

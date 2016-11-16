@@ -1,4 +1,4 @@
-SafariZoneCenterObject: ; 0x45bc5 (size=89)
+SafariZoneCenterObject:
 	db $0 ; border block
 
 	db $9 ; warps

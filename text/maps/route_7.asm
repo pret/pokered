@@ -3,4 +3,3 @@ _Route7Text1::
 	line "CELADON CITY -"
 	cont "LAVENDER TOWN"
 	done
-

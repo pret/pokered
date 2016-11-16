@@ -1,4 +1,4 @@
-SafariZoneEastObject: ; 0x4588b (size=81)
+SafariZoneEastObject:
 	db $0 ; border block
 
 	db $5 ; warps

@@ -1,4 +1,4 @@
-ItemNames: ; 472b (1:472b)
+ItemNames:
 	db "MASTER BALL@"
 	db "ULTRA BALL@"
 	db "GREAT BALL@"

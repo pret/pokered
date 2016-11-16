@@ -37,4 +37,3 @@ _Mansion4Text7::
 	line "curb its vicious"
 	cont "tendencies..."
 	done
-

@@ -1,4 +1,4 @@
-PewterGymObject: ; 0x5c52e (size=42)
+PewterGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

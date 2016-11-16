@@ -1,4 +1,4 @@
-Route16GateUpstairsObject: ; 0x4984c (size=30)
+Route16GateUpstairsObject:
 	db $a ; border block
 
 	db $1 ; warps

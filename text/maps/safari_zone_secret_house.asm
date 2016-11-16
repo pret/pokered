@@ -42,4 +42,3 @@ _HM03NoRoomText::
 	line "room for this"
 	cont "fabulous prize!"
 	done
-

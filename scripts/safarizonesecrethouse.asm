@@ -1,10 +1,10 @@
-SafariZoneSecretHouseScript: ; 4a317 (12:6317)
+SafariZoneSecretHouseScript:
 	jp EnableAutoTextBoxDrawing
 
-SafariZoneSecretHouseTextPointers: ; 4a31a (12:631a)
+SafariZoneSecretHouseTextPointers:
 	dw SafariZoneSecretHouseText1
 
-SafariZoneSecretHouseText1: ; 4a31c (12:631c)
+SafariZoneSecretHouseText1:
 	TX_ASM
 	CheckEvent EVENT_GOT_HM03
 	jr nz, .asm_20a9b
@@ -27,18 +27,19 @@ SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 .asm_8f1fc
 	jp TextScriptEnd
 
-SafariZoneSecretHouseText_4a350: ; 4a350 (12:6350)
+SafariZoneSecretHouseText_4a350:
 	TX_FAR _SecretHouseText_4a350
 	db "@"
 
-ReceivedHM03Text: ; 4a355 (12:6355)
+ReceivedHM03Text:
 	TX_FAR _ReceivedHM03Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
-HM03ExplanationText: ; 4a35b (12:635b)
+HM03ExplanationText:
 	TX_FAR _HM03ExplanationText
 	db "@"
 
-HM03NoRoomText: ; 4a360 (12:6360)
+HM03NoRoomText:
 	TX_FAR _HM03NoRoomText
 	db "@"

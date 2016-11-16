@@ -1,4 +1,4 @@
-PewterCity_h: ; 0x18554 to 0x18576 (34 bytes) (bank=6) (id=2)
+PewterCity_h:
 	db OVERWORLD ; tileset
 	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
 	dw PewterCityBlocks, PewterCityTextPointers, PewterCityScript ; blocks, texts, scripts

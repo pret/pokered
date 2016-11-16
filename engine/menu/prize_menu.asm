@@ -1,4 +1,4 @@
-CeladonPrizeMenu: ; 5271b (14:671b)
+CeladonPrizeMenu:
 	ld b,COIN_CASE
 	call IsItemInBag
 	jr nz,.havingCoinCase
@@ -23,8 +23,8 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	ld [wTopMenuItemX],a
 	call PrintPrizePrice
 	coord hl, 0, 2
-	ld b,$08
-	ld c,$10
+	ld b, 8
+	ld c, 16
 	call TextBoxBorder
 	call GetPrizeMenuId
 	call UpdateSprites
@@ -32,30 +32,30 @@ CeladonPrizeMenu: ; 5271b (14:671b)
 	call PrintText
 	call HandleMenuInput ; menu choice handler
 	bit 1,a ; keypress = B (Cancel)
-	jr nz,.NoChoice
+	jr nz, .noChoice
 	ld a,[wCurrentMenuItem]
-	cp a,$03 ; "NO,THANKS" choice
-	jr z,.NoChoice
+	cp 3 ; "NO,THANKS" choice
+	jr z, .noChoice
 	call HandlePrizeChoice
-.NoChoice
+.noChoice
 	ld hl,wd730
 	res 6,[hl]
 	ret
 
-RequireCoinCaseTextPtr: ; 5277e (14:677e)
+RequireCoinCaseTextPtr:
 	TX_FAR _RequireCoinCaseText
-	db $0D
+	TX_WAIT
 	db "@"
 
-ExchangeCoinsForPrizesTextPtr: ; 52784 (14:6784)
+ExchangeCoinsForPrizesTextPtr:
 	TX_FAR _ExchangeCoinsForPrizesText
 	db "@"
 
-WhichPrizeTextPtr: ; 52789 (14:6789)
+WhichPrizeTextPtr:
 	TX_FAR _WhichPrizeText
 	db "@"
 
-GetPrizeMenuId: ; 5278e (14:678e)
+GetPrizeMenuId:
 ; determine which one among the three
 ; prize-texts has been selected
 ; using the text ID (stored in [hSpriteIndexOrTextID])
@@ -65,7 +65,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
 	ld a,[hSpriteIndexOrTextID]
-	sub a,3       ; prize-texts' id are 3, 4 and 5
+	sub 3       ; prize-texts' id are 3, 4 and 5
 	ld [wWhichPrizeWindow],a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
 	add a
 	add a
@@ -88,7 +88,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	ld bc,6
 	call CopyData
 	ld a,[wWhichPrizeWindow]
-	cp a,$02        ;is TM_menu?
+	cp 2        ;is TM_menu?
 	jr nz,.putMonName
 	ld a,[wPrize1]
 	ld [wd11e],a
@@ -144,7 +144,7 @@ GetPrizeMenuId: ; 5278e (14:678e)
 	call PrintBCDNumber
 	ld de,wPrize2Price
 	coord hl, 13, 7
-	ld c,(%1 << 7 | 2)
+	ld c,(1 << 7 | 2)
 	call PrintBCDNumber
 	ld de,wPrize3Price
 	coord hl, 13, 9
@@ -153,17 +153,17 @@ GetPrizeMenuId: ; 5278e (14:678e)
 
 INCLUDE "data/prizes.asm"
 
-PrintPrizePrice: ; 5287a (14:687a)
+PrintPrizePrice:
 	coord hl, 11, 0
-	ld b,$01
-	ld c,$07
+	ld b, 1
+	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
 	coord hl, 12, 0
-	ld de,.CoinText
+	ld de, .CoinString
 	call PlaceString
 	coord hl, 13, 1
-	ld de,.SixSpacesText
+	ld de, .SixSpacesString
 	call PlaceString
 	coord hl, 13, 1
 	ld de,wPlayerCoins
@@ -171,13 +171,13 @@ PrintPrizePrice: ; 5287a (14:687a)
 	call PrintBCDNumber
 	ret
 
-.CoinText
+.CoinString:
 	db "COIN@"
 
-.SixSpacesText
+.SixSpacesString:
 	db "      @"
 
-LoadCoinsToSubtract: ; 528b1 (14:68b1)
+LoadCoinsToSubtract:
 	ld a,[wWhichPrize]
 	add a
 	ld d,0
@@ -192,7 +192,7 @@ LoadCoinsToSubtract: ; 528b1 (14:68b1)
 	ld [hCoins + 1],a
 	ret
 
-HandlePrizeChoice: ; 528c6 (14:68c6)
+HandlePrizeChoice:
 	ld a,[wCurrentMenuItem]
 	ld [wWhichPrize],a
 	ld d,0
@@ -205,33 +205,33 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 	ld a,[hl]
 	ld [wd11e + 1],a
 	ld a,[wWhichPrizeWindow]
-	cp a,$02 ; is prize a TM?
-	jr nz,.GetMonName
+	cp 2 ; is prize a TM?
+	jr nz, .getMonName
 	call GetItemName
-	jr .GivePrize
-.GetMonName
+	jr .givePrize
+.getMonName
 	call GetMonName
-.GivePrize
+.givePrize
 	ld hl,SoYouWantPrizeTextPtr
 	call PrintText
 	call YesNoChoice
 	ld a,[wCurrentMenuItem] ; yes/no answer (Y=0, N=1)
 	and a
-	jr nz,.PrintOhFineThen
+	jr nz, .printOhFineThen
 	call LoadCoinsToSubtract
 	call HasEnoughCoins
-	jr c,.NotEnoughCoins
+	jr c, .notEnoughCoins
 	ld a,[wWhichPrizeWindow]
-	cp a,$02
-	jr nz,.GiveMon
+	cp $02
+	jr nz, .giveMon
 	ld a,[wd11e]
 	ld b,a
 	ld a,1
 	ld c,a
 	call GiveItem
-	jr nc,.BagFull
-	jr .SubtractCoins
-.GiveMon
+	jr nc, .bagFull
+	jr .subtractCoins
+.giveMon
 	ld a,[wd11e]
 	ld e, a
 	ld [wcf91],a
@@ -255,52 +255,52 @@ HandlePrizeChoice: ; 528c6 (14:68c6)
 ; were full), return without subtracting coins.
 	ret nc
 
-.SubtractCoins
+.subtractCoins
 	call LoadCoinsToSubtract
 	ld hl,hCoins + 1
 	ld de,wPlayerCoins + 1
 	ld c,$02 ; how many bytes
 	predef SubBCDPredef
 	jp PrintPrizePrice
-.BagFull
+.bagFull
 	ld hl,PrizeRoomBagIsFullTextPtr
 	jp PrintText
-.NotEnoughCoins
+.notEnoughCoins
 	ld hl,SorryNeedMoreCoinsText
 	jp PrintText
-.PrintOhFineThen
+.printOhFineThen
 	ld hl,OhFineThenTextPtr
 	jp PrintText
 
-UnknownData52951: ; 52951 (14:6951)
+UnknownPrizeData:
 ; XXX what's this?
 	db $00,$01,$00,$01,$00,$01,$00,$00,$01
 
-HereYouGoTextPtr: ; 5295a (14:695a)
+HereYouGoTextPtr:
 	TX_FAR _HereYouGoText
-	db $0D
+	TX_WAIT
 	db "@"
 
-SoYouWantPrizeTextPtr: ; 52960 (14:6960)
+SoYouWantPrizeTextPtr:
 	TX_FAR _SoYouWantPrizeText
 	db "@"
 
-SorryNeedMoreCoinsText: ; 52965 (14:6965)
+SorryNeedMoreCoinsText:
 	TX_FAR _SorryNeedMoreCoinsText
-	db $0D
+	TX_WAIT
 	db "@"
 
-PrizeRoomBagIsFullTextPtr: ; 5296b (14:696b)
+PrizeRoomBagIsFullTextPtr:
 	TX_FAR _OopsYouDontHaveEnoughRoomText
-	db $0D
+	TX_WAIT
 	db "@"
 
-OhFineThenTextPtr: ; 52971 (14:6971)
+OhFineThenTextPtr:
 	TX_FAR _OhFineThenText
-	db $0D ; wait keypress (A/B) without blink
+	TX_WAIT
 	db "@"
 
-GetPrizeMonLevel: ; 52977 (14:6977)
+GetPrizeMonLevel:
 	ld a,[wcf91]
 	ld c,a
 	ld a,[wcf91 + 1]

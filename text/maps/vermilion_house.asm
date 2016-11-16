@@ -19,4 +19,3 @@ _VermilionHouse1Text3::
 	para "VERMILION appears"
 	line "to be safe."
 	done
-

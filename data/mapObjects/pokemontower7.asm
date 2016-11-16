@@ -1,4 +1,4 @@
-PokemonTower7Object: ; 0x60ef6 (size=42)
+PokemonTower7Object:
 	db $1 ; border block
 
 	db $1 ; warps

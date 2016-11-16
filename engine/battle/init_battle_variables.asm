@@ -1,4 +1,4 @@
-InitBattleVariables: ; 525af (14:65af)
+InitBattleVariables:
 	ld a, [hTilesetType]
 	ld [wSavedTilesetType], a
 	xor a

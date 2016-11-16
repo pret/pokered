@@ -1,4 +1,4 @@
-VictoryRoad2Object: ; 0x51915 (size=154)
+VictoryRoad2Object:
 	db $7d ; border block
 
 	db $7 ; warps

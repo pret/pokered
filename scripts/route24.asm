@@ -1,27 +1,27 @@
-Route24Script: ; 513ad (14:53ad)
+Route24Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route24TrainerHeaders
+	ld hl, Route24TrainerHeader0
 	ld de, Route24ScriptPointers
 	ld a, [wRoute24CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute24CurScript], a
 	ret
 
-Route24Script_513c0: ; 513c0 (14:53c0)
+Route24Script_513c0:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	ret
 
-Route24ScriptPointers: ; 513cb (14:53cb)
+Route24ScriptPointers:
 	dw Route24Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route24Script3
 	dw Route24Script4
 
-Route24Script0: ; 513d5 (14:53d5)
+Route24Script0:
 	CheckEvent EVENT_GOT_NUGGET
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_5140e
@@ -44,10 +44,10 @@ Route24Script0: ; 513d5 (14:53d5)
 	ld [wCurMapScript], a
 	ret
 
-CoordsData_5140e: ; 5140e (14:540e)
+CoordsData_5140e:
 	db $0F,$0A,$FF
 
-Route24Script4: ; 51411 (14:5411)
+Route24Script4:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -57,7 +57,7 @@ Route24Script4: ; 51411 (14:5411)
 	ld [wCurMapScript], a
 	ret
 
-Route24Script3: ; 51422 (14:5422)
+Route24Script3:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route24Script_513c0
@@ -75,7 +75,7 @@ Route24Script3: ; 51422 (14:5422)
 	ld [wCurMapScript], a
 	ret
 
-Route24TextPointers: ; 5144b (14:544b)
+Route24TextPointers:
 	dw Route24Text1
 	dw Route24Text2
 	dw Route24Text3
@@ -85,8 +85,7 @@ Route24TextPointers: ; 5144b (14:544b)
 	dw Route24Text7
 	dw PickUpItemText
 
-Route24TrainerHeaders: ; 5145b (14:545b)
-Route24TrainerHeader0: ; 5145b (14:545b)
+Route24TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_0
@@ -95,46 +94,46 @@ Route24TrainerHeader0: ; 5145b (14:545b)
 	dw Route24EndBattleText1 ; TextEndBattle
 	dw Route24EndBattleText1 ; TextEndBattle
 
-Route24TrainerHeader2: ; 51467 (14:5467)
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_2
+Route24TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_1
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_1
 	dw Route24BattleText2 ; TextBeforeBattle
 	dw Route24AfterBattleText2 ; TextAfterBattle
 	dw Route24EndBattleText2 ; TextEndBattle
 	dw Route24EndBattleText2 ; TextEndBattle
 
-Route24TrainerHeader3: ; 51473 (14:5473)
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_3
+Route24TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_2
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_2
 	dw Route24BattleText3 ; TextBeforeBattle
 	dw Route24AfterBattleText3 ; TextAfterBattle
 	dw Route24EndBattleText3 ; TextEndBattle
 	dw Route24EndBattleText3 ; TextEndBattle
 
-Route24TrainerHeader4: ; 5147f (14:547f)
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_4
+Route24TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_3
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_3
 	dw Route24BattleText4 ; TextBeforeBattle
 	dw Route24AfterBattleText4 ; TextAfterBattle
 	dw Route24EndBattleText4 ; TextEndBattle
 	dw Route24EndBattleText4 ; TextEndBattle
 
-Route24TrainerHeader5: ; 5148b (14:548b)
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_5
+Route24TrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_4
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_5
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_4
 	dw Route24BattleText5 ; TextBeforeBattle
 	dw Route24AfterBattleText5 ; TextAfterBattle
 	dw Route24EndBattleText5 ; TextEndBattle
 	dw Route24EndBattleText5 ; TextEndBattle
 
-Route24TrainerHeader6: ; 51497 (14:5497)
-	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_6
+Route24TrainerHeader5:
+	dbEventFlagBit EVENT_BEAT_ROUTE_24_TRAINER_5
 	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_6
+	dwEventFlagAddress EVENT_BEAT_ROUTE_24_TRAINER_5
 	dw Route24BattleText6 ; TextBeforeBattle
 	dw Route24AfterBattleText6 ; TextAfterBattle
 	dw Route24EndBattleText6 ; TextEndBattle
@@ -142,7 +141,7 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 
 	db $ff
 
-Route24Text1: ; 514a4 (14:54a4)
+Route24Text1:
 	TX_ASM
 	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	CheckEvent EVENT_GOT_NUGGET
@@ -183,136 +182,138 @@ Route24Text1: ; 514a4 (14:54a4)
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	jp TextScriptEnd
 
-Route24Text_51510: ; 51510 (14:5510)
+Route24Text_51510:
 	TX_FAR _Route24Text_51510
-	db $0B
+	TX_SFX_ITEM_1
 	TX_FAR _Route24Text_51515
 	db "@"
 
-Route24Text_5151a: ; 5151a (14:551a)
+Route24Text_5151a:
 	TX_FAR _Route24Text_5151a
-	db $0B, $6, "@"
+	TX_SFX_ITEM_1
+	TX_BLINK
+	db "@"
 
-Route24Text_51521: ; 51521 (14:5521)
+Route24Text_51521:
 	TX_FAR _Route24Text_51521
 	db "@"
 
-Route24Text_51526: ; 51526 (14:5526)
+Route24Text_51526:
 	TX_FAR _Route24Text_51526
 	db "@"
 
-Route24Text_5152b: ; 5152b (14:552b)
+Route24Text_5152b:
 	TX_FAR _Route24Text_5152b
 	db "@"
 
-Route24Text_51530: ; 51530 (14:5530)
+Route24Text_51530:
 	TX_FAR _Route24Text_51530
 	db "@"
 
-Route24Text2: ; 51535 (14:5535)
+Route24Text2:
 	TX_ASM
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route24Text3: ; 5153f (14:553f)
+Route24Text3:
+	TX_ASM
+	ld hl, Route24TrainerHeader1
+	call TalkToTrainer
+	jp TextScriptEnd
+
+Route24Text4:
 	TX_ASM
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route24Text4: ; 51549 (14:5549)
+Route24Text5:
 	TX_ASM
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route24Text5: ; 51553 (14:5553)
+Route24Text6:
 	TX_ASM
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route24Text6: ; 5155d (14:555d)
+Route24Text7:
 	TX_ASM
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route24Text7: ; 51567 (14:5567)
-	TX_ASM
-	ld hl, Route24TrainerHeader6
-	call TalkToTrainer
-	jp TextScriptEnd
-
-Route24BattleText1: ; 51571 (14:5571)
+Route24BattleText1:
 	TX_FAR _Route24BattleText1
 	db "@"
 
-Route24EndBattleText1: ; 51576 (14:5576)
+Route24EndBattleText1:
 	TX_FAR _Route24EndBattleText1
 	db "@"
 
-Route24AfterBattleText1: ; 5157b (14:557b)
+Route24AfterBattleText1:
 	TX_FAR _Route24AfterBattleText1
 	db "@"
 
-Route24BattleText2: ; 51580 (14:5580)
+Route24BattleText2:
 	TX_FAR _Route24BattleText2
 	db "@"
 
-Route24EndBattleText2: ; 51585 (14:5585)
+Route24EndBattleText2:
 	TX_FAR _Route24EndBattleText2
 	db "@"
 
-Route24AfterBattleText2: ; 5158a (14:558a)
+Route24AfterBattleText2:
 	TX_FAR _Route24AfterBattleText2
 	db "@"
 
-Route24BattleText3: ; 5158f (14:558f)
+Route24BattleText3:
 	TX_FAR _Route24BattleText3
 	db "@"
 
-Route24EndBattleText3: ; 51594 (14:5594)
+Route24EndBattleText3:
 	TX_FAR _Route24EndBattleText3
 	db "@"
 
-Route24AfterBattleText3: ; 51599 (14:5599)
+Route24AfterBattleText3:
 	TX_FAR _Route24AfterBattleText3
 	db "@"
 
-Route24BattleText4: ; 5159e (14:559e)
+Route24BattleText4:
 	TX_FAR _Route24BattleText4
 	db "@"
 
-Route24EndBattleText4: ; 515a3 (14:55a3)
+Route24EndBattleText4:
 	TX_FAR _Route24EndBattleText4
 	db "@"
 
-Route24AfterBattleText4: ; 515a8 (14:55a8)
+Route24AfterBattleText4:
 	TX_FAR _Route24AfterBattleText4
 	db "@"
 
-Route24BattleText5: ; 515ad (14:55ad)
+Route24BattleText5:
 	TX_FAR _Route24BattleText5
 	db "@"
 
-Route24EndBattleText5: ; 515b2 (14:55b2)
+Route24EndBattleText5:
 	TX_FAR _Route24EndBattleText5
 	db "@"
 
-Route24AfterBattleText5: ; 515b7 (14:55b7)
+Route24AfterBattleText5:
 	TX_FAR _Route24AfterBattleText5
 	db "@"
 
-Route24BattleText6: ; 515bc (14:55bc)
+Route24BattleText6:
 	TX_FAR _Route24BattleText6
 	db "@"
 
-Route24EndBattleText6: ; 515c1 (14:55c1)
+Route24EndBattleText6:
 	TX_FAR _Route24EndBattleText6
 	db "@"
 
-Route24AfterBattleText6: ; 515c6 (14:55c6)
+Route24AfterBattleText6:
 	TX_FAR _Route24AfterBattleText6
 	db "@"

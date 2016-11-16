@@ -1,7 +1,7 @@
 _HallofFameRoomText1::
 	text "OAK: Er-hem!"
 	line "Congratulations"
-	cont $52, "!"
+	cont "<PLAYER>!"
 
 	para "This floor is the"
 	line "#MON HALL OF"
@@ -16,14 +16,13 @@ _HallofFameRoomText1::
 	line "also recorded in"
 	cont "the HALL OF FAME!"
 
-	para $52, "! You have"
+	para "<PLAYER>! You have"
 	line "endeavored hard"
 	cont "to become the new"
 	cont "LEAGUE champion!"
 
 	para "Congratulations,"
-	line $52, ", you and"
+	line "<PLAYER>, you and"
 	cont "your #MON are"
 	cont "HALL OF FAMERs!"
 	done
-

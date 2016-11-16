@@ -1,11 +1,11 @@
-RedsHouse1FScript: ; 48168 (12:4168)
+RedsHouse1FScript:
 	jp EnableAutoTextBoxDrawing
 
-RedsHouse1FTextPointers: ; 4816b (12:416b)
+RedsHouse1FTextPointers:
 	dw RedsHouse1FText1
 	dw RedsHouse1FText2
 
-RedsHouse1FText1: ; 4816f (12:416f) Mom
+RedsHouse1FText1: ; Mom
 	TX_ASM
 	ld a, [wd72e]
 	bit 3, a
@@ -18,11 +18,11 @@ RedsHouse1FText1: ; 4816f (12:416f) Mom
 .done
 	jp TextScriptEnd
 
-MomWakeUpText: ; 48185 (12:4185)
+MomWakeUpText:
 	TX_FAR _MomWakeUpText
 	db "@"
 
-MomHealPokemon: ; 4818a (12:418a)
+MomHealPokemon:
 	ld hl, MomHealText1
 	call PrintText
 	call GBFadeOutToWhite
@@ -42,14 +42,14 @@ MomHealPokemon: ; 4818a (12:418a)
 	ld hl, MomHealText2
 	jp PrintText
 
-MomHealText1: ; 481bc (12:41bc)
+MomHealText1:
 	TX_FAR _MomHealText1
 	db "@"
-MomHealText2: ; 481c1 (12:41c1)
+MomHealText2:
 	TX_FAR _MomHealText2
 	db "@"
 
-RedsHouse1FText2: ; 0x481c6 TV
+RedsHouse1FText2: ; TV
 	TX_ASM
 	ld a,[wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
@@ -60,10 +60,10 @@ RedsHouse1FText2: ; 0x481c6 TV
 	call PrintText
 	jp TextScriptEnd
 
-StandByMeText: ; 481da (12:41da)
+StandByMeText:
 	TX_FAR _StandByMeText
 	db "@"
 
-TVWrongSideText: ; 481df (12:41df)
+TVWrongSideText:
 	TX_FAR _TVWrongSideText
 	db "@"

@@ -10,4 +10,3 @@ _Route2GateText2::
 	cont "can get through"
 	cont "ROCK TUNNEL."
 	done
-

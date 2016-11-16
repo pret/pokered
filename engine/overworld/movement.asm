@@ -1,4 +1,4 @@
-UpdatePlayerSprite: ; 4e31 (1:4e31)
+UpdatePlayerSprite:
 	ld a, [wSpriteStateData2]
 	and a
 	jr z, .checkIfTextBoxInFrontOfSprite
@@ -98,7 +98,7 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld [wSpriteStateData2 + 7], a
 	ret
 
-UnusedReadSpriteDataFunction: ; 4ec7 (1:4ec7)
+UnusedReadSpriteDataFunction:
 	push bc
 	push af
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -109,7 +109,7 @@ UnusedReadSpriteDataFunction: ; 4ec7 (1:4ec7)
 	pop bc
 	ret
 
-UpdateNPCSprite: ; 4ed1 (1:4ed1)
+UpdateNPCSprite:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	dec a
@@ -249,7 +249,7 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 	jr TryWalking
 
 ; changes facing direction by zeroing the movement delta and calling TryWalking
-ChangeFacingDirection: ; 4fc8 (1:4fc8)
+ChangeFacingDirection:
 	ld de, $0
 	; fall through
 
@@ -259,7 +259,7 @@ ChangeFacingDirection: ; 4fc8 (1:4fc8)
 ; e: X movement delta (-1, 0 or 1)
 ; hl: pointer to tile the sprite would walk onto
 ; set carry on failure, clears carry on success
-TryWalking: ; 4fcb (1:4fcb)
+TryWalking:
 	push hl
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -298,7 +298,7 @@ TryWalking: ; 4fcb (1:4fcb)
 	jp UpdateSpriteImage
 
 ; update the walking animation parameters for a sprite that is currently walking
-UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
+UpdateSpriteInWalkingAnimation:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a
@@ -371,7 +371,7 @@ UpdateSpriteInWalkingAnimation: ; 4ffe (1:4ffe)
 	ret
 
 ; update delay value (c2x8) for sprites in the delayed state (c1x1)
-UpdateSpriteMovementDelay: ; 5057 (1:5057)
+UpdateSpriteMovementDelay:
 	ld h, $c2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
@@ -392,15 +392,15 @@ UpdateSpriteMovementDelay: ; 5057 (1:5057)
 	inc a
 	ld l, a
 	ld [hl], $1             ; c1x1 = 1 (mark as ready to move)
-notYetMoving: ; 5073 (1:5073)
-	ld h, $c1
+notYetMoving:
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
 	ld l, a
 	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
 	jp UpdateSpriteImage
 
-MakeNPCFacePlayer: ; 507f (1:507f)
+MakeNPCFacePlayer:
 ; Make an NPC face the player if the player has spoken to him or her.
 
 ; Check if the behaviour of the NPC facing the player when spoken to is
@@ -408,7 +408,6 @@ MakeNPCFacePlayer: ; 507f (1:507f)
 	ld a, [wd72d]
 	bit 5, a
 	jr nz, notYetMoving
-
 	res 7, [hl]
 	ld a, [wPlayerDirection]
 	bit PLAYER_DIR_BIT_UP, a
@@ -434,7 +433,7 @@ MakeNPCFacePlayer: ; 507f (1:507f)
 	ld [hl], c              ; c1x9: set facing direction
 	jr notYetMoving
 
-InitializeSpriteStatus: ; 50ad (1:50ad)
+InitializeSpriteStatus:
 	ld [hl], $1   ; $c1x1: set movement status to ready
 	inc l
 	ld [hl], $ff  ; $c1x2: set sprite image to $ff (invisible/off screen)
@@ -448,8 +447,8 @@ InitializeSpriteStatus: ; 50ad (1:50ad)
 	ret
 
 ; calculates the spprite's scrren position form its map position and the player position
-InitializeSpriteScreenPosition: ; 50bd (1:50bd)
-	ld h, $c2
+InitializeSpriteScreenPosition:
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
@@ -472,12 +471,12 @@ InitializeSpriteScreenPosition: ; 50bd (1:50bd)
 	ret
 
 ; tests if sprite is off screen or otherwise unable to do anything
-CheckSpriteAvailability: ; 50dc (1:50dc)
+CheckSpriteAvailability:
 	predef IsObjectHidden
 	ld a, [$ffe5]
 	and a
 	jp nz, .spriteInvisible
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
@@ -525,7 +524,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 	cp d
 	jr c, .spriteVisible    ; standing on tile with ID >=$60 (top right tile)
 .spriteInvisible
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
@@ -553,7 +552,7 @@ CheckSpriteAvailability: ; 50dc (1:50dc)
 .done
 	ret
 
-UpdateSpriteImage: ; 5157 (1:5157)
+UpdateSpriteImage:
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8
@@ -578,8 +577,8 @@ UpdateSpriteImage: ; 5157 (1:5157)
 ; d: Y movement delta (-1, 0 or 1)
 ; e: X movement delta (-1, 0 or 1)
 ; set carry on failure, clears carry on success
-CanWalkOntoTile: ; 516e (1:516e)
-	ld h, $c2
+CanWalkOntoTile:
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $6
 	ld l, a
@@ -590,9 +589,9 @@ CanWalkOntoTile: ; 516e (1:516e)
 	and a
 	ret
 .notScripted
-	ld a, [wTileSetCollisionPtr]
+	ld a, [wTilesetCollisionPtr]
 	ld l, a
-	ld a, [wTileSetCollisionPtr+1]
+	ld a, [wTilesetCollisionPtr+1]
 	ld h, a
 .tilePassableLoop
 	ld a, [hli]
@@ -607,7 +606,7 @@ CanWalkOntoTile: ; 516e (1:516e)
 	ld a, [hl]         ; $c2x6 (movement byte 1)
 	inc a
 	jr z, .impassable  ; if $ff, no movement allowed (however, changing direction is)
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
@@ -626,14 +625,14 @@ CanWalkOntoTile: ; 516e (1:516e)
 	call DetectCollisionBetweenSprites
 	pop bc
 	pop de
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $c
 	ld l, a
 	ld a, [hl]         ; c1xc (directions in which sprite collision would occur)
 	and b              ; check against chosen direction (1,2,4 or 8)
 	jr nz, .impassable ; collision between sprites, don't go there
-	ld h, $c2
+	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $2
 	ld l, a
@@ -689,8 +688,8 @@ CanWalkOntoTile: ; 516e (1:516e)
 ; calculates the tile pointer pointing to the tile the current sprite stancs on
 ; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
 ; hl: output pointer
-GetTileSpriteStandsOn: ; 5207 (1:5207)
-	ld h, $c1
+GetTileSpriteStandsOn:
+	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $4
 	ld l, a
@@ -718,7 +717,7 @@ GetTileSpriteStandsOn: ; 5207 (1:5207)
 	ret
 
 ; loads [de+a] into a
-LoadDEPlusA: ; 522f (1:522f)
+LoadDEPlusA:
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -727,7 +726,7 @@ LoadDEPlusA: ; 522f (1:522f)
 	ld a, [de]
 	ret
 
-DoScriptedNPCMovement: ; 5236 (1:5236)
+DoScriptedNPCMovement:
 ; This is an alternative method of scripting an NPC's movement and is only used
 ; a few times in the game. It is used when the NPC and player must walk together
 ; in sync, such as when the player is following the NPC somewhere. An NPC can't
@@ -798,23 +797,23 @@ DoScriptedNPCMovement: ; 5236 (1:5236)
 	inc [hl]
 	ret
 
-InitScriptedNPCMovement: ; 52a6 (1:52a6)
+InitScriptedNPCMovement:
 	xor a
 	ld [wNPCMovementDirections2Index], a
 	ld a, 8
 	ld [wScriptedNPCWalkCounter], a
 	jp AnimScriptedNPCMovement
 
-GetSpriteScreenYPointer: ; 52b2 (1:52b2)
+GetSpriteScreenYPointer:
 	ld a, $4
 	ld b, a
 	jr GetSpriteScreenXYPointerCommon
 
-GetSpriteScreenXPointer: ; 52b7 (1:52b7)
+GetSpriteScreenXPointer:
 	ld a, $6
 	ld b, a
 
-GetSpriteScreenXYPointerCommon: ; 52ba (1:52ba)
+GetSpriteScreenXYPointerCommon:
 	ld hl, wSpriteStateData1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add l
@@ -822,7 +821,7 @@ GetSpriteScreenXYPointerCommon: ; 52ba (1:52ba)
 	ld l, a
 	ret
 
-AnimScriptedNPCMovement: ; 52c3 (1:52c3)
+AnimScriptedNPCMovement:
 	ld hl, wSpriteStateData2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $e
@@ -861,7 +860,7 @@ AnimScriptedNPCMovement: ; 52c3 (1:52c3)
 	ld [hl], a
 	ret
 
-AdvanceScriptedNPCAnimFrameCounter: ; 5301 (1:5301)
+AdvanceScriptedNPCAnimFrameCounter:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $7
 	ld l, a

@@ -1,4 +1,4 @@
-TrackPlayTime: ; 18dee (6:4dee)
+TrackPlayTime:
 	call CountDownIgnoreInputBitReset
 	ld a, [wd732]
 	bit 0, a
@@ -36,7 +36,7 @@ TrackPlayTime: ; 18dee (6:4dee)
 	ld [wPlayTimeMaxed], a
 	ret
 
-CountDownIgnoreInputBitReset: ; 18e36 (6:4e36)
+CountDownIgnoreInputBitReset:
 	ld a, [wIgnoreInputCounter]
 	and a
 	jr nz, .asm_18e40

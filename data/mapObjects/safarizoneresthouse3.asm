@@ -1,4 +1,4 @@
-SafariZoneRestHouse3Object: ; 0x45d8e (size=38)
+SafariZoneRestHouse3Object:
 	db $a ; border block
 
 	db $2 ; warps

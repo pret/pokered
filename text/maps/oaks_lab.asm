@@ -1,11 +1,11 @@
 _OaksLabGaryText1::
-	text $53,": Yo"
-	line $52,"! Gramps"
+	text "<RIVAL>: Yo"
+	line "<PLAYER>! Gramps"
 	cont "isn't around!"
 	done
 
 _OaksLabText40::
-	text $53,": Heh, I"
+	text "<RIVAL>: Heh, I"
 	line "don't need to be"
 	cont "greedy like you!"
 
@@ -14,7 +14,7 @@ _OaksLabText40::
 	done
 
 _OaksLabText41::
-	text $53,": My"
+	text "<RIVAL>: My"
 	line "#MON looks a"
 	cont "lot stronger."
 	done
@@ -60,7 +60,7 @@ _OaksLabLastMonText::
 	done
 
 _OaksLabText_1d2f0::
-	text "OAK: Now, ", $52, ","
+	text "OAK: Now, <PLAYER>,"
 	line "which #MON do"
 	cont "you want?"
 	done
@@ -73,14 +73,14 @@ _OaksLabText_1d2f5::
 	done
 
 _OaksLabText_1d2fa::
-	text "OAK: ", $52, ","
+	text "OAK: <PLAYER>,"
 	line "raise your young"
 	cont "#MON by making"
 	cont "it fight!"
 	done
 
 _OaksLabDeliverParcelText1::
-	text "OAK: Oh, ", $52, "!"
+	text "OAK: Oh, <PLAYER>!"
 
 	para "How is my old"
 	line "#MON?"
@@ -95,11 +95,11 @@ _OaksLabDeliverParcelText1::
 	para "What? You have"
 	line "something for me?"
 
-	para $52, " delivered"
+	para "<PLAYER> delivered"
 	line "OAK's PARCEL.@@"
 
 _OaksLabDeliverParcelText2::
-	db $0
+	text ""
 	para "Ah! This is the"
 	line "custom # BALL"
 	cont "I ordered!"
@@ -109,7 +109,7 @@ _OaksLabDeliverParcelText2::
 _OaksLabAroundWorldText::
 	text "#MON around the"
 	line "world wait for"
-	cont "you, ", $52, "!"
+	cont "you, <PLAYER>!"
 	done
 
 _OaksLabGivePokeballsText1::
@@ -123,11 +123,11 @@ _OaksLabGivePokeballsText1::
 	cont "to capture wild"
 	cont "#MON."
 
-	para $52, " got 5"
+	para "<PLAYER> got 5"
 	line "# BALLs!@@"
 
 _OaksLabGivePokeballsText2::
-	db $0
+	text ""
 	para "When a wild"
 	line "#MON appears,"
 	cont "it's fair game."
@@ -182,20 +182,20 @@ _OaksLabText_1d340::
 	done
 
 _OaksLabRivalWaitingText::
-	text $53, ": Gramps!"
+	text "<RIVAL>: Gramps!"
 	line "I'm fed up with"
 	cont "waiting!"
 	done
 
 _OaksLabChooseMonText::
-	text "OAK: ", $53, "?"
+	text "OAK: <RIVAL>?"
 	line "Let me think..."
 
 	para "Oh, that's right,"
 	line "I told you to"
 	cont "come! Just wait!"
 
-	para "Here, ", $52, "!"
+	para "Here, <PLAYER>!"
 
 	para "There are 3"
 	line "#MON here!"
@@ -216,14 +216,14 @@ _OaksLabChooseMonText::
 	done
 
 _OaksLabRivalInterjectionText::
-	text $53, ": Hey!"
+	text "<RIVAL>: Hey!"
 	line "Gramps! What"
 	cont "about me?"
 	done
 
 _OaksLabBePatientText::
 	text "OAK: Be patient!"
-	line $53, ", you can"
+	line "<RIVAL>, you can"
 	cont "have one too!"
 	done
 
@@ -233,19 +233,19 @@ _OaksLabLeavingText::
 	done
 
 _OaksLabRivalPickingMonText::
-	text $53, ": I'll take"
+	text "<RIVAL>: I'll take"
 	line "this one, then!"
 	done
 
 _OaksLabRivalReceivedMonText::
-	text $53, " received"
+	text "<RIVAL> received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"
 
 _OaksLabRivalChallengeText::
-	text $53, ": Wait"
-	line $52, "!"
+	text "<RIVAL>: Wait"
+	line "<PLAYER>!"
 	cont "Let's check out"
 	cont "our #MON!"
 
@@ -261,26 +261,26 @@ _OaksLabText_1d3be::
 	prompt
 
 _OaksLabText_1d3c3::
-	text $53, ": Yeah! Am"
+	text "<RIVAL>: Yeah! Am"
 	line "I great or what?"
 	prompt
 
 _OaksLabRivalToughenUpText::
-	text $53, ": Okay!"
+	text "<RIVAL>: Okay!"
 	line "I'll make my"
 	cont "#MON fight to"
 	cont "toughen it up!"
 
-	para $52, "! Gramps!"
+	para "<PLAYER>! Gramps!"
 	line "Smell you later!"
 	done
 
 _OaksLabText21::
-	text $53, ": Gramps!"
+	text "<RIVAL>: Gramps!"
 	done
 
 _OaksLabText22::
-	text $53, ": What did"
+	text "<RIVAL>: What did"
 	line "you call me for?"
 	done
 
@@ -305,11 +305,11 @@ _OaksLabText24::
 	done
 
 _OaksLabText25::
-	text "OAK: ", $52, " and"
-	line $53, "! Take"
+	text "OAK: <PLAYER> and"
+	line "<RIVAL>! Take"
 	cont "these with you!"
 
-	para $52, " got"
+	para "<PLAYER> got"
 	line "#DEX from OAK!@@"
 
 _OaksLabText26::
@@ -336,11 +336,11 @@ _OaksLabText26::
 	done
 
 _OaksLabText27::
-	text $53, ": Alright"
+	text "<RIVAL>: Alright"
 	line "Gramps! Leave it"
 	cont "all to me!"
 
-	para $52, ", I hate to"
+	para "<PLAYER>, I hate to"
 	line "say it, but I"
 	cont "don't need you!"
 
@@ -350,7 +350,7 @@ _OaksLabText27::
 
 	para "I'll tell her not"
 	line "to lend you one,"
-	cont $52, "! Hahaha!"
+	cont "<PLAYER>! Hahaha!"
 	done
 
 _OaksLabText_1d405::
@@ -475,4 +475,3 @@ _OaksLabText_4424c::
 	line "entirely complete!"
 	cont "Congratulations!"
 	done
-

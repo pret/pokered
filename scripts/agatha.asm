@@ -1,14 +1,14 @@
-AgathaScript: ; 7642d (1d:642d)
+AgathaScript:
 	call AgathaShowOrHideExitBlock
 	call EnableAutoTextBoxDrawing
-	ld hl, AgathaTrainerHeaders
+	ld hl, AgathaTrainerHeader0
 	ld de, AgathaScriptPointers
 	ld a, [wAgathaCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wAgathaCurScript], a
 	ret
 
-AgathaShowOrHideExitBlock: ; 76443 (1d:6443)
+AgathaShowOrHideExitBlock:
 ; Blocks or clears the exit to the next room.
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
@@ -25,22 +25,22 @@ AgathaShowOrHideExitBlock: ; 76443 (1d:6443)
 	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
-ResetAgathaScript: ; 76464 (1d:6464)
+ResetAgathaScript:
 	xor a
 	ld [wAgathaCurScript], a
 	ret
 
-AgathaScriptPointers: ; 76469 (1d:6469)
+AgathaScriptPointers:
 	dw AgathaScript0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw AgathaScript2
 	dw AgathaScript3
 	dw AgathaScript4
 
-AgathaScript4: ; 76473 (1d:6473)
+AgathaScript4:
 	ret
 
-AgathaScriptWalkIntoRoom: ; 76474 (1d:6474)
+AgathaScriptWalkIntoRoom:
 ; Walk six steps upward.
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, D_UP
@@ -58,7 +58,7 @@ AgathaScriptWalkIntoRoom: ; 76474 (1d:6474)
 	ld [wCurMapScript], a
 	ret
 
-AgathaScript0: ; 76490 (1d:6490)
+AgathaScript0:
 	ld hl, AgathaEntranceCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
@@ -86,14 +86,14 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld [wCurMapScript], a
 	ret
 
-AgathaEntranceCoords: ; 764d1 (1d:64d1)
+AgathaEntranceCoords:
 	db $0A,$04
 	db $0A,$05
 	db $0B,$04
 	db $0B,$05
 	db $FF
 
-AgathaScript3: ; 764da (1d:64da)
+AgathaScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -104,7 +104,7 @@ AgathaScript3: ; 764da (1d:64da)
 	ld [wCurMapScript], a
 	ret
 
-AgathaScript2: ; 764ed (1d:64ed)
+AgathaScript2:
 	call EndTrainerBattle
 	ld a, [wIsInBattle]
 	cp $ff
@@ -116,12 +116,11 @@ AgathaScript2: ; 764ed (1d:64ed)
 	ld [wGaryCurScript], a
 	ret
 
-AgathaTextPointers: ; 76505 (1d:6505)
+AgathaTextPointers:
 	dw AgathaText1
 	dw AgathaDontRunAwayText
 
-AgathaTrainerHeaders: ; 76509 (1d:6509)
-AgathaTrainerHeader0: ; 76509 (1d:6509)
+AgathaTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
@@ -132,24 +131,24 @@ AgathaTrainerHeader0: ; 76509 (1d:6509)
 
 	db $ff
 
-AgathaText1: ; 76516 (1d:6516)
+AgathaText1:
 	TX_ASM
 	ld hl, AgathaTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-AgathaBeforeBattleText: ; 76520 (1d:6520)
+AgathaBeforeBattleText:
 	TX_FAR _AgathaBeforeBattleText
 	db "@"
 
-AgathaEndBattleText: ; 76525 (1d:6525)
+AgathaEndBattleText:
 	TX_FAR _AgathaEndBattleText
 	db "@"
 
-AgathaAfterBattleText: ; 7652a (1d:652a)
+AgathaAfterBattleText:
 	TX_FAR _AgathaAfterBattleText
 	db "@"
 
-AgathaDontRunAwayText: ; 7652f (1d:652f)
+AgathaDontRunAwayText:
 	TX_FAR _AgathaDontRunAwayText
 	db "@"

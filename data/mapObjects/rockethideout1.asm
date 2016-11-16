@@ -1,4 +1,4 @@
-RocketHideout1Object: ; 0x44ce7 (size=98)
+RocketHideout1Object:
 	db $2e ; border block
 
 	db $5 ; warps

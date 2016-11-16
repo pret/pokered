@@ -113,4 +113,3 @@ _RockTunnel1Text8::
 	line "CERULEAN CITY -"
 	cont "LAVENDER TOWN"
 	done
-

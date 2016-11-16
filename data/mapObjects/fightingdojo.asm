@@ -1,4 +1,4 @@
-FightingDojoObject: ; 0x5cf9b (size=72)
+FightingDojoObject:
 	db $3 ; border block
 
 	db $2 ; warps

@@ -83,13 +83,13 @@ FanClubChairStoryText::
 	prompt
 
 ReceivedBikeVoucherText::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"
 
 ExplainBikeVoucherText::
-	db $0
+	text ""
 	para "Exchange that for"
 	line "a BICYCLE!"
 
@@ -111,7 +111,7 @@ FanClubNoStoryText::
 	done
 
 FanClubChairFinalText::
-	text "Hello, ", $52, "!"
+	text "Hello, <PLAYER>!"
 
 	para "Did you come see"
 	line "me about my"
@@ -141,4 +141,3 @@ _FanClubText8::
 	text "If someone brags,"
 	line "brag right back!"
 	done
-

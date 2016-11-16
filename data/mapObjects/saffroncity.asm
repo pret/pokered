@@ -1,4 +1,4 @@
-SaffronCityObject: ; 0x509dc (size=188)
+SaffronCityObject:
 	db $f ; border block
 
 	db $8 ; warps

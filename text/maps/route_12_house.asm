@@ -58,4 +58,3 @@ _Route12HouseText_564d9::
 	line "you, but you have"
 	cont "no room for it!"
 	done
-

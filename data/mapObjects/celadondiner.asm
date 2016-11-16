@@ -1,4 +1,4 @@
-CeladonDinerObject: ; 0x491bc (size=50)
+CeladonDinerObject:
 	db $f ; border block
 
 	db $2 ; warps

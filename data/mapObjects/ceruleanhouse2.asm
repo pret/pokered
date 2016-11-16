@@ -1,4 +1,4 @@
-CeruleanHouse2Object: ; 0x74ebe (size=34)
+CeruleanHouse2Object:
 	db $c ; border block
 
 	db $3 ; warps

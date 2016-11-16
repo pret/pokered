@@ -1,4 +1,4 @@
-ExternalMapEntries: ; 71313 (1c:5313)
+ExternalMapEntries:
 	EMAP $2,$B,PalletTownName
 	EMAP $2,$8,ViridianCityName
 	EMAP $2,$3,PewterCityName
@@ -37,7 +37,7 @@ ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $A,$1,Route24Name
 	EMAP $B,$0,Route25Name
 
-InternalMapEntries: ; 71382 (1c:5382)
+InternalMapEntries:
 	IMAP OAKS_LAB,                  $2,$B,PalletTownName
 	IMAP VIRIDIAN_GYM,              $2,$8,ViridianCityName
 	IMAP VIRIDIAN_FOREST_ENTRANCE,  $2,$6,Route2Name
@@ -94,7 +94,7 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP SAFARI_ZONE_REST_HOUSE_4,  $8,$C,SafariZoneName
 	IMAP UNKNOWN_DUNGEON_1,         $9,$1,CeruleanCaveName
 	IMAP NAME_RATERS_HOUSE,         $E,$5,LavenderTownName
-	IMAP CERULEAN_HOUSE_3,          $A,$2,CeruleanCityName
+	IMAP CERULEAN_HOUSE_2,          $A,$2,CeruleanCityName
 	IMAP ROCK_TUNNEL_2,             $E,$3,RockTunnelName
 	IMAP SILPH_CO_ELEVATOR,         $A,$5,SilphCoName
 	IMAP AGATHAS_ROOM,              $0,$2,PokemonLeagueName

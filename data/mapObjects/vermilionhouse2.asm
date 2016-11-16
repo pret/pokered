@@ -1,4 +1,4 @@
-VermilionHouse2Object: ; 0x560cf (size=26)
+VermilionHouse2Object:
 	db $a ; border block
 
 	db $2 ; warps

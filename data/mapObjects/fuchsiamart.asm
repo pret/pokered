@@ -1,4 +1,4 @@
-FuchsiaMartObject: ; 0x1dd9b (size=38)
+FuchsiaMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

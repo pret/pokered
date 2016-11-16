@@ -1,4 +1,4 @@
-Route1Object: ; 0x1c0e5 (size=19)
+Route1Object:
 	db $b ; border block
 
 	db $0 ; warps

@@ -1,4 +1,4 @@
-PokemonTower3Object: ; 0x6075d (size=51)
+PokemonTower3Object:
 	db $1 ; border block
 
 	db $2 ; warps

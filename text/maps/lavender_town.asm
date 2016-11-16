@@ -62,4 +62,3 @@ _LavenderTownText9::
 	line "#MON Rest Easy"
 	cont "#MON TOWER"
 	done
-

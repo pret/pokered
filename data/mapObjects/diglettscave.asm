@@ -1,4 +1,4 @@
-DiglettsCaveObject: ; 0x61f72 (size=20)
+DiglettsCaveObject:
 	db $19 ; border block
 
 	db $2 ; warps

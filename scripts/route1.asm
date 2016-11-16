@@ -1,12 +1,12 @@
-Route1Script: ; 1caaf (7:4aaf)
+Route1Script:
 	jp EnableAutoTextBoxDrawing
 
-Route1TextPointers: ; 1cab2 (7:4ab2)
+Route1TextPointers:
 	dw Route1Text1
 	dw Route1Text2
 	dw Route1Text3
 
-Route1Text1: ; 1cab8 (7:4ab8)
+Route1Text1:
 	TX_ASM
 	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
 	jr nz, .asm_1cada
@@ -26,26 +26,27 @@ Route1Text1: ; 1cab8 (7:4ab8)
 	call PrintText
 	jp TextScriptEnd
 
-Route1ViridianMartSampleText: ; 1cae3 (7:4ae3)
+Route1ViridianMartSampleText:
 	TX_FAR _Route1ViridianMartSampleText
 	db "@"
 
-Route1Text_1cae8: ; 1cae8 (7:4ae8)
+Route1Text_1cae8:
 	TX_FAR _Route1Text_1cae8
-	db $0b,"@"
+	TX_SFX_ITEM_1
+	db "@"
 
-Route1Text_1caee: ; 1caee (7:4aee)
+Route1Text_1caee:
 	TX_FAR _Route1Text_1caee
 	db "@"
 
-Route1Text_1caf3: ; 1caf3 (7:4af3)
+Route1Text_1caf3:
 	TX_FAR _Route1Text_1caf3
 	db "@"
 
-Route1Text2: ; 1caf8 (7:4af8)
+Route1Text2:
 	TX_FAR _Route1Text2
 	db "@"
 
-Route1Text3: ; 1cafd (7:4afd)
+Route1Text3:
 	TX_FAR _Route1Text3
 	db "@"

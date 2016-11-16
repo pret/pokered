@@ -1,5 +1,5 @@
 ; formats a string at wMovesString that lists the moves at wMoves
-FormatMovesString: ; 39b87 (e:5b87)
+FormatMovesString:
 	ld hl, wMoves
 	ld de, wMovesString
 	ld b, $0
@@ -52,7 +52,7 @@ FormatMovesString: ; 39b87 (e:5b87)
 	ret
 
 ; XXX this is called in a few places, but it doesn't appear to do anything useful
-InitList: ; 39bd5 (e:5bd5)
+InitList:
 	ld a, [wInitListType]
 	cp INIT_ENEMYOT_LIST
 	jr nz, .notEnemy
@@ -103,7 +103,7 @@ InitList: ; 39bd5 (e:5bd5)
 	ret
 
 ; get species of mon e in list [wMonDataLocation] for LoadMonData
-GetMonSpecies: ; 39c37 (e:5c37)
+GetMonSpecies:
 	ld hl, wPartySpecies
 	ld a, [wMonDataLocation]
 	and a

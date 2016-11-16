@@ -234,4 +234,3 @@ _ViridianGymText_74bd9::
 	line "GIOVANNI was the"
 	cont "GYM LEADER here?"
 	done
-

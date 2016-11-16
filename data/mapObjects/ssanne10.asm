@@ -1,4 +1,4 @@
-SSAnne10Object: ; 0x61e75 (size=165)
+SSAnne10Object:
 	db $c ; border block
 
 	db $a ; warps

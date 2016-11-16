@@ -1,6 +1,6 @@
 PowerPlantScript:
 	call EnableAutoTextBoxDrawing
-	ld hl, PowerPlantTrainerHeaders
+	ld hl, Voltorb0TrainerHeader
 	ld de, .ScriptPointers
 	ld a, [wPowerPlantCurScript]
 	call ExecuteCurMapScriptInTable
@@ -28,7 +28,6 @@ PowerPlantTextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-PowerPlantTrainerHeaders:
 Voltorb0TrainerHeader:
 	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_0
 	db 0 ; view range

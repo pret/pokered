@@ -1,4 +1,4 @@
-Route4Object: ; 0x543b2 (size=58)
+Route4Object:
 	db $2c ; border block
 
 	db $3 ; warps

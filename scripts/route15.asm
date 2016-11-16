@@ -1,18 +1,18 @@
-Route15Script: ; 597ae (16:57ae)
+Route15Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route15TrainerHeaders
+	ld hl, Route15TrainerHeader0
 	ld de, Route15ScriptPointers
 	ld a, [wRoute15CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute15CurScript], a
 	ret
 
-Route15ScriptPointers: ; 597c1 (16:57c1)
+Route15ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Route15TextPointers: ; 597c7 (16:57c7)
+Route15TextPointers:
 	dw Route15Text1
 	dw Route15Text2
 	dw Route15Text3
@@ -26,8 +26,7 @@ Route15TextPointers: ; 597c7 (16:57c7)
 	dw PickUpItemText
 	dw Route15Text12
 
-Route15TrainerHeaders: ; 597df (16:57df)
-Route15TrainerHeader0: ; 597df (16:57df)
+Route15TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_0
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_0
@@ -36,7 +35,7 @@ Route15TrainerHeader0: ; 597df (16:57df)
 	dw Route15EndBattleText1 ; TextEndBattle
 	dw Route15EndBattleText1 ; TextEndBattle
 
-Route15TrainerHeader1: ; 597eb (16:57eb)
+Route15TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_1
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_1
@@ -45,7 +44,7 @@ Route15TrainerHeader1: ; 597eb (16:57eb)
 	dw Route15EndBattleText2 ; TextEndBattle
 	dw Route15EndBattleText2 ; TextEndBattle
 
-Route15TrainerHeader2: ; 597f7 (16:57f7)
+Route15TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_2
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_2
@@ -54,7 +53,7 @@ Route15TrainerHeader2: ; 597f7 (16:57f7)
 	dw Route15EndBattleText3 ; TextEndBattle
 	dw Route15EndBattleText3 ; TextEndBattle
 
-Route15TrainerHeader3: ; 59803 (16:5803)
+Route15TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_3
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_3
@@ -63,7 +62,7 @@ Route15TrainerHeader3: ; 59803 (16:5803)
 	dw Route15EndBattleText4 ; TextEndBattle
 	dw Route15EndBattleText4 ; TextEndBattle
 
-Route15TrainerHeader4: ; 5980f (16:580f)
+Route15TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_4
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_4
@@ -72,7 +71,7 @@ Route15TrainerHeader4: ; 5980f (16:580f)
 	dw Route15EndBattleText5 ; TextEndBattle
 	dw Route15EndBattleText5 ; TextEndBattle
 
-Route15TrainerHeader5: ; 5981b (16:581b)
+Route15TrainerHeader5:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_5
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_5
@@ -81,7 +80,7 @@ Route15TrainerHeader5: ; 5981b (16:581b)
 	dw Route15EndBattleText6 ; TextEndBattle
 	dw Route15EndBattleText6 ; TextEndBattle
 
-Route15TrainerHeader6: ; 59827 (16:5827)
+Route15TrainerHeader6:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_6
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_6
@@ -90,7 +89,7 @@ Route15TrainerHeader6: ; 59827 (16:5827)
 	dw Route15EndBattleText7 ; TextEndBattle
 	dw Route15EndBattleText7 ; TextEndBattle
 
-Route15TrainerHeader7: ; 59833 (16:5833)
+Route15TrainerHeader7:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_7, 1
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_7, 1
@@ -99,7 +98,7 @@ Route15TrainerHeader7: ; 59833 (16:5833)
 	dw Route15EndBattleText8 ; TextEndBattle
 	dw Route15EndBattleText8 ; TextEndBattle
 
-Route15TrainerHeader8: ; 5983f (16:583f)
+Route15TrainerHeader8:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_8, 1
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_8, 1
@@ -108,7 +107,7 @@ Route15TrainerHeader8: ; 5983f (16:583f)
 	dw Route15EndBattleText9 ; TextEndBattle
 	dw Route15EndBattleText9 ; TextEndBattle
 
-Route15TrainerHeader9: ; 5984b (16:584b)
+Route15TrainerHeader9:
 	dbEventFlagBit EVENT_BEAT_ROUTE_15_TRAINER_9, 1
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_15_TRAINER_9, 1
@@ -119,178 +118,178 @@ Route15TrainerHeader9: ; 5984b (16:584b)
 
 	db $ff
 
-Route15Text1: ; 59858 (16:5858)
+Route15Text1:
 	TX_ASM
 	ld hl, Route15TrainerHeader0
 	jr Route15TalkToTrainer
 
-Route15Text2: ; 5985e (16:585e)
+Route15Text2:
 	TX_ASM
 	ld hl, Route15TrainerHeader1
 	jr Route15TalkToTrainer
 
-Route15Text3: ; 59864 (16:5864)
+Route15Text3:
 	TX_ASM
 	ld hl, Route15TrainerHeader2
 	jr Route15TalkToTrainer
 
-Route15Text4: ; 5986a (16:586a)
+Route15Text4:
 	TX_ASM
 	ld hl, Route15TrainerHeader3
 	jr Route15TalkToTrainer
 
-Route15Text5: ; 59870 (16:5870)
+Route15Text5:
 	TX_ASM
 	ld hl, Route15TrainerHeader4
 	jr Route15TalkToTrainer
 
-Route15Text6: ; 59876 (16:5876)
+Route15Text6:
 	TX_ASM
 	ld hl, Route15TrainerHeader5
 	jr Route15TalkToTrainer
 
-Route15Text7: ; 5987c (16:587c)
+Route15Text7:
 	TX_ASM
 	ld hl, Route15TrainerHeader6
 	jr Route15TalkToTrainer
 
-Route15Text8: ; 59882 (16:5882)
+Route15Text8:
 	TX_ASM
 	ld hl, Route15TrainerHeader7
 	jr Route15TalkToTrainer
 
-Route15Text9: ; 59888 (16:5888)
+Route15Text9:
 	TX_ASM
 	ld hl, Route15TrainerHeader8
 	jr Route15TalkToTrainer
 
-Route15Text10: ; 5988e (16:588e)
+Route15Text10:
 	TX_ASM
 	ld hl, Route15TrainerHeader9
-Route15TalkToTrainer: ; 59892 (16:5892)
+Route15TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route15BattleText1: ; 59898 (16:5898)
+Route15BattleText1:
 	TX_FAR _Route15BattleText1
 	db "@"
 
-Route15EndBattleText1: ; 5989d (16:589d)
+Route15EndBattleText1:
 	TX_FAR _Route15EndBattleText1
 	db "@"
 
-Route15AfterBattleText1: ; 598a2 (16:58a2)
+Route15AfterBattleText1:
 	TX_FAR _Route15AfterBattleText1
 	db "@"
 
-Route15BattleText2: ; 598a7 (16:58a7)
+Route15BattleText2:
 	TX_FAR _Route15BattleText2
 	db "@"
 
-Route15EndBattleText2: ; 598ac (16:58ac)
+Route15EndBattleText2:
 	TX_FAR _Route15EndBattleText2
 	db "@"
 
-Route15AfterBattleText2: ; 598b1 (16:58b1)
+Route15AfterBattleText2:
 	TX_FAR _Route15AfterBattleText2
 	db "@"
 
-Route15BattleText3: ; 598b6 (16:58b6)
+Route15BattleText3:
 	TX_FAR _Route15BattleText3
 	db "@"
 
-Route15EndBattleText3: ; 598bb (16:58bb)
+Route15EndBattleText3:
 	TX_FAR _Route15EndBattleText3
 	db "@"
 
-Route15AfterBattleText3: ; 598c0 (16:58c0)
+Route15AfterBattleText3:
 	TX_FAR _Route15AfterBattleText3
 	db "@"
 
-Route15BattleText4: ; 598c5 (16:58c5)
+Route15BattleText4:
 	TX_FAR _Route15BattleText4
 	db "@"
 
-Route15EndBattleText4: ; 598ca (16:58ca)
+Route15EndBattleText4:
 	TX_FAR _Route15EndBattleText4
 	db "@"
 
-Route15AfterBattleText4: ; 598cf (16:58cf)
+Route15AfterBattleText4:
 	TX_FAR _Route15AfterBattleText4
 	db "@"
 
-Route15BattleText5: ; 598d4 (16:58d4)
+Route15BattleText5:
 	TX_FAR _Route15BattleText5
 	db "@"
 
-Route15EndBattleText5: ; 598d9 (16:58d9)
+Route15EndBattleText5:
 	TX_FAR _Route15EndBattleText5
 	db "@"
 
-Route15AfterBattleText5: ; 598de (16:58de)
+Route15AfterBattleText5:
 	TX_FAR _Route15AfterBattleText5
 	db "@"
 
-Route15BattleText6: ; 598e3 (16:58e3)
+Route15BattleText6:
 	TX_FAR _Route15BattleText6
 	db "@"
 
-Route15EndBattleText6: ; 598e8 (16:58e8)
+Route15EndBattleText6:
 	TX_FAR _Route15EndBattleText6
 	db "@"
 
-Route15AfterBattleText6: ; 598ed (16:58ed)
+Route15AfterBattleText6:
 	TX_FAR _Route15AfterBattleText6
 	db "@"
 
-Route15BattleText7: ; 598f2 (16:58f2)
+Route15BattleText7:
 	TX_FAR _Route15BattleText7
 	db "@"
 
-Route15EndBattleText7: ; 598f7 (16:58f7)
+Route15EndBattleText7:
 	TX_FAR _Route15EndBattleText7
 	db "@"
 
-Route15AfterBattleText7: ; 598fc (16:58fc)
+Route15AfterBattleText7:
 	TX_FAR _Route15AfterBattleText7
 	db "@"
 
-Route15BattleText8: ; 59901 (16:5901)
+Route15BattleText8:
 	TX_FAR _Route15BattleText8
 	db "@"
 
-Route15EndBattleText8: ; 59906 (16:5906)
+Route15EndBattleText8:
 	TX_FAR _Route15EndBattleText8
 	db "@"
 
-Route15AfterBattleText8: ; 5990b (16:590b)
+Route15AfterBattleText8:
 	TX_FAR _Route15AfterBattleText8
 	db "@"
 
-Route15BattleText9: ; 59910 (16:5910)
+Route15BattleText9:
 	TX_FAR _Route15BattleText9
 	db "@"
 
-Route15EndBattleText9: ; 59915 (16:5915)
+Route15EndBattleText9:
 	TX_FAR _Route15EndBattleText9
 	db "@"
 
-Route15AfterBattleText9: ; 5991a (16:591a)
+Route15AfterBattleText9:
 	TX_FAR _Route15AfterBattleText9
 	db "@"
 
-Route15BattleText10: ; 5991f (16:591f)
+Route15BattleText10:
 	TX_FAR _Route15BattleText10
 	db "@"
 
-Route15EndBattleText10: ; 59924 (16:5924)
+Route15EndBattleText10:
 	TX_FAR _Route15EndBattleText10
 	db "@"
 
-Route15AfterBattleText10: ; 59929 (16:5929)
+Route15AfterBattleText10:
 	TX_FAR _Route15AfterBattleText10
 	db "@"
 
-Route15Text12: ; 5992e (16:592e)
+Route15Text12:
 	TX_FAR _Route15Text12
 	db "@"

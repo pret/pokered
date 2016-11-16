@@ -1,4 +1,4 @@
-LearnMove: ; 6e43 (1:6e43)
+LearnMove:
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
@@ -8,7 +8,7 @@ LearnMove: ; 6e43 (1:6e43)
 	ld bc, NAME_LENGTH
 	call CopyData
 
-DontAbandonLearning: ; 6e5b (1:6e5b)
+DontAbandonLearning:
 	ld hl, wPartyMon1Moves
 	ld bc, wPartyMon2Moves - wPartyMon1Moves
 	ld a, [wWhichPokemon]
@@ -73,7 +73,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	call CopyData
 	jp PrintLearnedMove
 
-AbandonLearning: ; 6eda (1:6eda)
+AbandonLearning:
 	ld hl, AbandonLearningText
 	call PrintText
 	coord hl, 14, 7
@@ -89,13 +89,13 @@ AbandonLearning: ; 6eda (1:6eda)
 	ld b, 0
 	ret
 
-PrintLearnedMove: ; 6efe (1:6efe)
+PrintLearnedMove:
 	ld hl, LearnedMove1Text
 	call PrintText
 	ld b, 1
 	ret
 
-TryingToLearn: ; 6f07 (1:6f07)
+TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
@@ -183,42 +183,44 @@ TryingToLearn: ; 6f07 (1:6f07)
 	scf
 	ret
 
-LearnedMove1Text: ; 6fb4 (1:6fb4)
+LearnedMove1Text:
 	TX_FAR _LearnedMove1Text
-	db $b,6,"@"
+	TX_SFX_ITEM_1 ; plays SFX_GET_ITEM_1 in the pary menu (rare candy) and plays SFX_LEVEL_UP in battle
+	TX_BLINK
+	db "@"
 
-WhichMoveToForgetText: ; 6fb4 (1:6fb4)
+WhichMoveToForgetText:
 	TX_FAR _WhichMoveToForgetText
 	db "@"
 
-AbandonLearningText: ; 6fb9 (1:6fb9)
+AbandonLearningText:
 	TX_FAR _AbandonLearningText
 	db "@"
 
-DidNotLearnText: ; 6fbe (1:6fbe)
+DidNotLearnText:
 	TX_FAR _DidNotLearnText
 	db "@"
 
-TryingToLearnText: ; 6fc3 (1:6fc3)
+TryingToLearnText:
 	TX_FAR _TryingToLearnText
 	db "@"
 
-OneTwoAndText: ; 6fc8 (1:6fc8)
+OneTwoAndText:
 	TX_FAR _OneTwoAndText
-	db $a
+	TX_DELAY
 	TX_ASM
 	ld a, SFX_SWAP
 	call PlaySoundWaitForCurrent
 	ld hl, PoofText
 	ret
 
-PoofText: ; 6fd7 (1:6fd7)
+PoofText:
 	TX_FAR _PoofText
-	db $a
-ForgotAndText: ; 6fdc (1:6fdc)
+	TX_DELAY
+ForgotAndText:
 	TX_FAR _ForgotAndText
 	db "@"
 
-HMCantDeleteText: ; 6fe1 (1:6fe1)
+HMCantDeleteText:
 	TX_FAR _HMCantDeleteText
 	db "@"

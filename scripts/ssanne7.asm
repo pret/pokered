@@ -1,20 +1,20 @@
-SSAnne7Script: ; 61895 (18:5895)
+SSAnne7Script:
 	call SSAnne7Script_6189b
 	jp EnableAutoTextBoxDrawing
 
-SSAnne7Script_6189b: ; 6189b (18:589b)
+SSAnne7Script_6189b:
 	CheckEvent EVENT_RUBBED_CAPTAINS_BACK
 	ret nz
 	ld hl, wd72d
 	set 5, [hl]
 	ret
 
-SSAnne7TextPointers: ; 618a7 (18:58a7)
+SSAnne7TextPointers:
 	dw SSAnne7Text1
 	dw SSAnne7Text2
 	dw SSAnne7Text3
 
-SSAnne7Text1: ; 618ad (18:58ad)
+SSAnne7Text1:
 	TX_ASM
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .asm_797c4
@@ -41,7 +41,7 @@ SSAnne7Text1: ; 618ad (18:58ad)
 .asm_0faf5
 	jp TextScriptEnd
 
-SSAnne7RubText: ; 618ec (18:58ec)
+SSAnne7RubText:
 	TX_FAR _SSAnne7RubText
 	TX_ASM
 	ld a, [wAudioROMBank]
@@ -67,26 +67,27 @@ SSAnne7RubText: ; 618ec (18:58ec)
 	res 5, [hl]
 	jp TextScriptEnd
 
-ReceivingHM01Text: ; 61927 (18:5927)
+ReceivingHM01Text:
 	TX_FAR _ReceivingHM01Text
 	db "@"
 
-ReceivedHM01Text: ; 6192c (18:592c)
+ReceivedHM01Text:
 	TX_FAR _ReceivedHM01Text
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
-SSAnne7Text_61932: ; 61932 (18:5932)
+SSAnne7Text_61932:
 	TX_FAR _SSAnne7Text_61932
 	db "@"
 
-HM01NoRoomText: ; 61937 (18:5937)
+HM01NoRoomText:
 	TX_FAR _HM01NoRoomText
 	db "@"
 
-SSAnne7Text2: ; 6193c (18:593c)
+SSAnne7Text2:
 	TX_FAR _SSAnne7Text2
 	db "@"
 
-SSAnne7Text3: ; 61941 (18:5941)
+SSAnne7Text3:
 	TX_FAR _SSAnne7Text3
 	db "@"

@@ -1,7 +1,7 @@
 ; performs the appropriate action when the player uses the gameboy on the table in the Colosseum or Trade Center
 ; In the Colosseum, it starts a battle. In the Trade Center, it displays the trade selection screen.
 ; Before doing either action, it swaps random numbers, trainer names and party data with the other gameboy.
-CableClub_DoBattleOrTrade: ; 5317 (1:5317)
+CableClub_DoBattleOrTrade:
 	ld c, 80
 	call DelayFrames
 	call ClearScreen
@@ -23,14 +23,14 @@ CableClub_DoBattleOrTrade: ; 5317 (1:5317)
 	; fall through
 
 ; This is called after completing a trade.
-CableClub_DoBattleOrTradeAgain: ; 5345
+CableClub_DoBattleOrTradeAgain:
 	ld hl, wSerialPlayerDataBlock
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, 6
-.writePlayeDataBlockPreambleLoop
+.writePlayerDataBlockPreambleLoop
 	ld [hli], a
 	dec b
-	jr nz, .writePlayeDataBlockPreambleLoop
+	jr nz, .writePlayerDataBlockPreambleLoop
 	ld hl, wSerialRandomNumberListBlock
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, 7
@@ -271,7 +271,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	cp LINK_STATE_START_BATTLE
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a
-	jr nz, .asm_5506
+	jr nz, .trading
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
 	ld a, SONY1
@@ -285,13 +285,13 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	predef InitOpponent
 	predef HealParty
 	jp ReturnToCableClubRoom
-.asm_5506
+.trading
 	ld c, BANK(Music_GameCorner)
 	ld a, MUSIC_GAME_CORNER
 	call PlayMusic
 	jr CallCurrentTradeCenterFunction
 
-PleaseWaitString: ; 550f (1:550f)
+PleaseWaitString:
 	db "PLEASE WAIT!@"
 
 CallCurrentTradeCenterFunction:
@@ -549,11 +549,11 @@ TradeCenter_SelectMon:
 	ld a, " "
 	ld [hl], a
 .cancelMenuItem_Loop
-	ld a, $ed ; filled arrow cursor
+	ld a, "▶" ; filled arrow cursor
 	Coorda 1, 16
 .cancelMenuItem_JoypadLoop
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and a ; pressed anything?
 	jr z, .cancelMenuItem_JoypadLoop
 	bit 0, a ; A button pressed?
@@ -568,7 +568,7 @@ TradeCenter_SelectMon:
 	ld [wCurrentMenuItem], a
 	jp .playerMonMenu
 .cancelMenuItem_APressed
-	ld a, $ec ; unfilled arrow cursor
+	ld a, "▷" ; unfilled arrow cursor
 	Coorda 1, 16
 	ld a, $f
 	ld [wSerialExchangeNybbleSendData], a
@@ -578,7 +578,7 @@ TradeCenter_SelectMon:
 	jr nz, .cancelMenuItem_Loop
 	; fall through
 
-ReturnToCableClubRoom: ; 577d (1:577d)
+ReturnToCableClubRoom:
 	call GBPalWhiteOutWithDelay3
 	ld hl, wFontLoaded
 	ld a, [hl]
@@ -618,7 +618,7 @@ TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	coord hl, 1, 9
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ec ; cursor
+	ld [hl], "▷" ; cursor
 	ret
 
 TradeCenter_DisplayStats:
@@ -873,7 +873,7 @@ TradeCenter_Trade:
 	ld [wTradeCenterPointerTableIndex], a
 	jp CallCurrentTradeCenterFunction
 
-WillBeTradedText: ; 5a24 (1:5a24)
+WillBeTradedText:
 	TX_FAR _WillBeTradedText
 	db "@"
 
@@ -884,11 +884,11 @@ TradeCanceled:
 	db   "Too bad! The trade"
 	next "was canceled!@"
 
-TradeCenterPointerTable: ; 5a5b (1:5a5b)
+TradeCenterPointerTable:
 	dw TradeCenter_SelectMon
 	dw TradeCenter_Trade
 
-CableClub_Run: ; 5a5f (1:5a5f)
+CableClub_Run:
 	ld a, [wLinkState]
 	cp LINK_STATE_START_TRADE
 	jr z, .doBattleOrTrade
@@ -902,21 +902,21 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	call CableClub_DoBattleOrTrade
 	ld hl, Club_GFX
 	ld a, h
-	ld [wTileSetGFXPtr + 1], a
+	ld [wTilesetGfxPtr + 1], a
 	ld a, l
-	ld [wTileSetGFXPtr], a
+	ld [wTilesetGfxPtr], a
 	ld a, Bank(Club_GFX)
-	ld [wTileSetBank], a
+	ld [wTilesetBank], a
 	ld hl, Club_Coll
 	ld a, h
-	ld [wTileSetCollisionPtr + 1], a
+	ld [wTilesetCollisionPtr + 1], a
 	ld a, l
-	ld [wTileSetCollisionPtr], a
+	ld [wTilesetCollisionPtr], a
 	xor a
 	ld [wGrassRate], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
-	ld [$ffb5], a
+	ld [hJoy5], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
 	ld a, BANK(Music_Celadon)
@@ -925,15 +925,15 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	ld [wNewSoundID], a
 	jp PlaySound
 
-EmptyFunc3: ; 5aaf (1:5aaf)
+EmptyFunc3:
 	ret
 
-Diploma_TextBoxBorder: ; 5ab0 (1:5ab0)
+Diploma_TextBoxBorder:
 	call GetPredefRegisters
 
 ; b = height
 ; c = width
-CableClub_TextBoxBorder: ; 5ab3 (1:5ab3)
+CableClub_TextBoxBorder:
 	push hl
 	ld a, $78 ; border upper left corner tile
 	ld [hli], a
@@ -964,10 +964,16 @@ CableClub_TextBoxBorder: ; 5ab3 (1:5ab3)
 	ret
 
 ; c = width
-CableClub_DrawHorizontalLine: ; 5ae0 (1:5ae0)
+CableClub_DrawHorizontalLine:
 	ld d, c
-.asm_5ae1
+.loop
 	ld [hli], a
 	dec d
-	jr nz, .asm_5ae1
+	jr nz, .loop
 	ret
+
+LoadTrainerInfoTextBoxTiles:
+	ld de, TrainerInfoTextBoxTileGraphics
+	ld hl, vChars2 + $760
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
+	jp CopyVideoData

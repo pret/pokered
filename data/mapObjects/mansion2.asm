@@ -1,4 +1,4 @@
-Mansion2Object: ; 0x520d1 (size=63)
+Mansion2Object:
 	db $1 ; border block
 
 	db $4 ; warps

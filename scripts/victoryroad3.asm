@@ -1,7 +1,7 @@
 VictoryRoad3Script:
 	call VictoryRoad3Script_44996
 	call EnableAutoTextBoxDrawing
-	ld hl, VictoryRoad3TrainerHeaders
+	ld hl, VictoryRoad3TrainerHeader0
 	ld de, VictoryRoad3ScriptPointers
 	ld a, [wVictoryRoad3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -86,7 +86,6 @@ VictoryRoad3TextPointers:
 	dw BoulderText
 	dw BoulderText
 
-VictoryRoad3TrainerHeaders:
 VictoryRoad3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
 	db ($1 << 4) ; trainer's view range
@@ -96,28 +95,28 @@ VictoryRoad3TrainerHeader0:
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 	dw VictoryRoad3EndBattleText2 ; TextEndBattle
 
-VictoryRoad3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
+VictoryRoad3TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1
 	dw VictoryRoad3BattleText3 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText3 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 	dw VictoryRoad3EndBattleText3 ; TextEndBattle
 
-VictoryRoad3TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
+VictoryRoad3TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
 	dw VictoryRoad3BattleText4 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText4 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 	dw VictoryRoad3EndBattleText4 ; TextEndBattle
 
-VictoryRoad3TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
+VictoryRoad3TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
 	dw VictoryRoad3BattleText5 ; TextBeforeBattle
 	dw VictoryRoad3AfterBattleText5 ; TextAfterBattle
 	dw VictoryRoad3EndBattleText5 ; TextEndBattle
@@ -133,19 +132,19 @@ VictoryRoad3Text1:
 
 VictoryRoad3Text2:
 	TX_ASM
-	ld hl, VictoryRoad3TrainerHeader2
+	ld hl, VictoryRoad3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text3:
 	TX_ASM
-	ld hl, VictoryRoad3TrainerHeader3
+	ld hl, VictoryRoad3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text4:
 	TX_ASM
-	ld hl, VictoryRoad3TrainerHeader4
+	ld hl, VictoryRoad3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 

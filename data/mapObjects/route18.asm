@@ -1,4 +1,4 @@
-Route18Object: ; 0x58c5a (size=66)
+Route18Object:
 	db $43 ; border block
 
 	db $4 ; warps

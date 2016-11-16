@@ -1,12 +1,12 @@
-BikeShopScript: ; 1d73c (7:573c)
+BikeShopScript:
 	jp EnableAutoTextBoxDrawing
 
-BikeShopTextPointers: ; 1d73f (7:573f)
+BikeShopTextPointers:
 	dw BikeShopText1
 	dw BikeShopText2
 	dw BikeShopText3
 
-BikeShopText1: ; 1d745 (7:5745)
+BikeShopText1:
 	TX_ASM
 	CheckEvent EVENT_GOT_BICYCLE
 	jr z, .asm_260d4
@@ -78,56 +78,57 @@ BikeShopText1: ; 1d745 (7:5745)
 .Done
 	jp TextScriptEnd
 
-BikeShopMenuText: ; 1d7f8 (7:57f8)
+BikeShopMenuText:
 	db   "BICYCLE"
 	next "CANCEL@"
 
-BikeShopMenuPrice: ; 1d807 (7:5807)
+BikeShopMenuPrice:
 	db "¥1000000@"
 
-BikeShopText_1d810: ; 1d810 (7:5810)
+BikeShopText_1d810:
 	TX_FAR _BikeShopText_1d810
 	db "@"
 
-BikeShopText_1d815: ; 1d815 (7:5815)
+BikeShopText_1d815:
 	TX_FAR _BikeShopText_1d815
 	db "@"
 
-BikeShopCantAffordText: ; 1d81a (7:581a)
+BikeShopCantAffordText:
 	TX_FAR _BikeShopCantAffordText
 	db "@"
 
-BikeShopText_1d81f: ; 1d81f (7:581f)
+BikeShopText_1d81f:
 	TX_FAR _BikeShopText_1d81f
 	db "@"
 
-BikeShopText_1d824: ; 1d824 (7:5824)
+BikeShopText_1d824:
 	TX_FAR _BikeShopText_1d824
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
-BikeShopComeAgainText: ; 1d82a (7:582a)
+BikeShopComeAgainText:
 	TX_FAR _BikeShopComeAgainText
 	db "@"
 
-BikeShopText_1d82f: ; 1d82f (7:582f)
+BikeShopText_1d82f:
 	TX_FAR _BikeShopText_1d82f
 	db "@"
 
-BikeShopText_1d834: ; 1d834 (7:5834)
+BikeShopText_1d834:
 	TX_FAR _BikeShopText_1d834
 	db "@"
 
-BikeShopText2: ; 1d839 (7:5839)
+BikeShopText2:
 	TX_ASM
 	ld hl, BikeShopText_1d843
 	call PrintText
 	jp TextScriptEnd
 
-BikeShopText_1d843: ; 1d843 (7:5843)
+BikeShopText_1d843:
 	TX_FAR _BikeShopText_1d843
 	db "@"
 
-BikeShopText3: ; 1d848 (7:5848)
+BikeShopText3:
 	TX_ASM
 	CheckEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d861
@@ -137,10 +138,10 @@ BikeShopText3: ; 1d848 (7:5848)
 	call PrintText
 	jp TextScriptEnd
 
-BikeShopText_1d85c: ; 1d85c (7:585c)
+BikeShopText_1d85c:
 	TX_FAR _BikeShopText_1d85c
 	db "@"
 
-BikeShopText_1d861: ; 1d861 (7:5861)
+BikeShopText_1d861:
 	TX_FAR _BikeShopText_1d861
 	db "@"

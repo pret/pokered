@@ -1,4 +1,4 @@
-FuchsiaMeetingRoomObject: ; 0x756fc (size=38)
+FuchsiaMeetingRoomObject:
 	db $17 ; border block
 
 	db $2 ; warps

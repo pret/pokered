@@ -1,4 +1,4 @@
-CeladonMartRoofObject: ; 0x485a8 (size=36)
+CeladonMartRoofObject:
 	db $42 ; border block
 
 	db $1 ; warps

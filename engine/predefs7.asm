@@ -1,4 +1,4 @@
-DisplayElevatorFloorMenu: ; 1c9c6 (7:49c6)
+DisplayElevatorFloorMenu:
 	ld hl, WhichFloorText
 	call PrintText
 	ld hl, wItemList
@@ -43,6 +43,6 @@ DisplayElevatorFloorMenu: ; 1c9c6 (7:49c6)
 	ld [hli], a ; destination map ID
 	ret
 
-WhichFloorText: ; 1ca14 (7:4a14)
+WhichFloorText:
 	TX_FAR _WhichFloorText
 	db "@"

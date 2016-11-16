@@ -1,4 +1,4 @@
-LanceObject: ; 0x5a3c5 (size=36)
+LanceObject:
 	db $3 ; border block
 
 	db $3 ; warps

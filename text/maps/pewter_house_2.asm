@@ -17,4 +17,3 @@ _PewterHouse2Text2::
 	para "But, it's not a"
 	line "sure thing!"
 	done
-

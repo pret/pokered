@@ -1,4 +1,4 @@
-SaffronHouse1Object: ; 0x1de04 (size=44)
+SaffronHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps

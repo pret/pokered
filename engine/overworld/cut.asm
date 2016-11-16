@@ -1,4 +1,4 @@
-UsedCut: ; ef54 (3:6f54)
+UsedCut:
 	xor a
 	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
 	ld a, [wCurMapTileset]
@@ -67,14 +67,14 @@ UsedCut: ; ef54 (3:6f54)
 	call UpdateSprites
 	jp RedrawMapView
 
-UsedCutText: ; eff2 (3:6ff2)
+UsedCutText:
 	TX_FAR _UsedCutText
 	db "@"
 
-InitCutAnimOAM: ; eff7 (3:6ff7)
+InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a
-	ld a, $e4
+	ld a, %11100100
 	ld [rOBP1], a
 	ld a, [wCutTile]
 	cp $52
@@ -111,22 +111,22 @@ InitCutAnimOAM: ; eff7 (3:6ff7)
 	jr nz, .loop
 	ret
 
-LoadCutGrassAnimationTilePattern: ; f04c (3:704c)
+LoadCutGrassAnimationTilePattern:
 	ld de, AnimationTileset2 + $60 ; tile depicting a leaf
 	lb bc, BANK(AnimationTileset2), $01
 	jp CopyVideoData
 
-WriteCutOrBoulderDustAnimationOAMBlock: ; f055 (3:7055)
+WriteCutOrBoulderDustAnimationOAMBlock:
 	call GetCutOrBoulderDustAnimationOffsets
 	ld a, $9
 	ld de, CutOrBoulderDustAnimationTilesAndAttributes
 	jp WriteOAMBlock
 
-CutOrBoulderDustAnimationTilesAndAttributes: ; f060 (3:7060)
+CutOrBoulderDustAnimationTilesAndAttributes:
 	db $FC,$10,$FD,$10
 	db $FE,$10,$FF,$10
 
-GetCutOrBoulderDustAnimationOffsets: ; f068 (3:7068)
+GetCutOrBoulderDustAnimationOffsets:
 	ld hl, wSpriteStateData1 + 4
 	ld a, [hli] ; player's sprite screen Y position
 	ld b, a
@@ -157,14 +157,14 @@ GetCutOrBoulderDustAnimationOffsets: ; f068 (3:7068)
 	ld c, a
 	ret
 
-CutAnimationOffsets: ; f08f (3:708f)
+CutAnimationOffsets:
 ; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
 	db  8, 36 ; player is facing down
 	db  8,  4 ; player is facing up
 	db -8, 20 ; player is facing left
 	db 24, 20 ; player is facing right
 
-BoulderDustAnimationOffsets: ; f097 (3:7097)
+BoulderDustAnimationOffsets:
 ; Each pair represents the x and y pixels offsets from the player of where the cut tree animation should be drawn
 ; These offsets represent 2 blocks away from the player
 	db  8,  52 ; player is facing down
@@ -172,7 +172,7 @@ BoulderDustAnimationOffsets: ; f097 (3:7097)
 	db -24, 20 ; player is facing left
 	db 40,  20 ; player is facing right
 
-ReplaceTreeTileBlock: ; f09f (3:709f)
+ReplaceTreeTileBlock:
 ; Determine the address of the tile block that contains the tile in front of the
 ; player (i.e. where the tree is) and replace it with the corresponding tile
 ; block that doesn't have the tree.
@@ -248,7 +248,7 @@ ReplaceTreeTileBlock: ; f09f (3:709f)
 	ld [hl], a
 	ret
 
-CutTreeBlockSwaps: ; f100 (3:7100)
+CutTreeBlockSwaps:
 ; first byte = tileset block containing the cut tree
 ; second byte = corresponding tileset block after the cut animation happens
 	db $32, $6D

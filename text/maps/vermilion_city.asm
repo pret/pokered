@@ -35,7 +35,7 @@ _SSAnneWelcomeText9::
 	prompt
 
 _SSAnneFlashedTicketText::
-	text $52, " flashed"
+	text "<PLAYER> flashed"
 	line "the S.S.TICKET!"
 
 	para "Great! Welcome to"
@@ -43,7 +43,7 @@ _SSAnneFlashedTicketText::
 	done
 
 _SSAnneNoTicketText::
-	text $52, " doesn't"
+	text "<PLAYER> doesn't"
 	line "have the needed"
 	cont "S.S.TICKET."
 
@@ -71,7 +71,7 @@ _VermilionCityText5::
 	line "Gogogoh!@@"
 
 _VermilionCityText14::
-	db $0
+	text ""
 	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."
@@ -124,4 +124,3 @@ _VermilionCityText12::
 _VermilionCityText13::
 	text "VERMILION HARBOR"
 	done
-

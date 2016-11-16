@@ -1,4 +1,4 @@
-SilphCo8Script: ; 56504 (15:6504)
+SilphCo8Script:
 	call SilphCo8Script_5651a
 	call EnableAutoTextBoxDrawing
 	ld hl, SilphCo8TrainerHeader0
@@ -8,7 +8,7 @@ SilphCo8Script: ; 56504 (15:6504)
 	ld [wSilphCo8CurScript], a
 	ret
 
-SilphCo8Script_5651a: ; 5651a (15:651a)
+SilphCo8Script_5651a:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -23,11 +23,11 @@ SilphCo8Script_5651a: ; 5651a (15:651a)
 	lb bc, 4, 3
 	predef_jump ReplaceTileBlock
 
-SilphCo8GateCoords: ; 5653e (15:653e)
+SilphCo8GateCoords:
 	db $04,$03
 	db $FF
 
-SilphCo8Script_56541: ; 56541 (15:6541)
+SilphCo8Script_56541:
 	push hl
 	ld hl, wCardKeyDoorY
 	ld a, [hli]
@@ -63,26 +63,25 @@ SilphCo8Script_56541: ; 56541 (15:6541)
 	ld [$ffe0], a
 	ret
 
-SilphCo8Script_5656d: ; 5656d (15:656d)
+SilphCo8Script_5656d:
 	ld a, [$ffe0]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR
 	ret
 
-SilphCo8ScriptPointers: ; 56577 (15:6577)
+SilphCo8ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-SilphCo8TextPointers: ; 5657d (15:657d)
+SilphCo8TextPointers:
 	dw SilphCo8Text1
 	dw SilphCo8Text2
 	dw SilphCo8Text3
 	dw SilphCo8Text4
 
-SilphCo8TrainerHeaders: ; 56585 (15:6585)
-SilphCo8TrainerHeader0: ; 56585 (15:6585)
+SilphCo8TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_8F_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_8F_TRAINER_0
@@ -91,7 +90,7 @@ SilphCo8TrainerHeader0: ; 56585 (15:6585)
 	dw SilphCo8EndBattleText1 ; TextEndBattle
 	dw SilphCo8EndBattleText1 ; TextEndBattle
 
-SilphCo8TrainerHeader1: ; 56591 (15:6591)
+SilphCo8TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_8F_TRAINER_1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_8F_TRAINER_1
@@ -100,7 +99,7 @@ SilphCo8TrainerHeader1: ; 56591 (15:6591)
 	dw SilphCo8EndBattleText2 ; TextEndBattle
 	dw SilphCo8EndBattleText2 ; TextEndBattle
 
-SilphCo8TrainerHeader2: ; 5659d (15:659d)
+SilphCo8TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_SILPH_CO_8F_TRAINER_2
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_SILPH_CO_8F_TRAINER_2
@@ -111,7 +110,7 @@ SilphCo8TrainerHeader2: ; 5659d (15:659d)
 
 	db $ff
 
-SilphCo8Text1: ; 565aa (15:65aa)
+SilphCo8Text1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo8Text_565c3
@@ -121,64 +120,64 @@ SilphCo8Text1: ; 565aa (15:65aa)
 	call PrintText
 	jp TextScriptEnd
 
-SilphCo8Text_565be: ; 565be (15:65be)
+SilphCo8Text_565be:
 	TX_FAR _SilphCo8Text_565be
 	db "@"
 
-SilphCo8Text_565c3: ; 565c3 (15:65c3)
+SilphCo8Text_565c3:
 	TX_FAR _SilphCo8Text_565c3
 	db "@"
 
-SilphCo8Text2: ; 565c8 (15:65c8)
+SilphCo8Text2:
 	TX_ASM
 	ld hl, SilphCo8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo8Text3: ; 565d2 (15:65d2)
+SilphCo8Text3:
 	TX_ASM
 	ld hl, SilphCo8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo8Text4: ; 565dc (15:65dc)
+SilphCo8Text4:
 	TX_ASM
 	ld hl, SilphCo8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo8BattleText1: ; 565e6 (15:65e6)
+SilphCo8BattleText1:
 	TX_FAR _SilphCo8BattleText1
 	db "@"
 
-SilphCo8EndBattleText1: ; 565eb (15:65eb)
+SilphCo8EndBattleText1:
 	TX_FAR _SilphCo8EndBattleText1
 	db "@"
 
-SilphCo8AfterBattleText1: ; 565f0 (15:65f0)
+SilphCo8AfterBattleText1:
 	TX_FAR _SilphCo8AfterBattleText1
 	db "@"
 
-SilphCo8BattleText2: ; 565f5 (15:65f5)
+SilphCo8BattleText2:
 	TX_FAR _SilphCo8BattleText2
 	db "@"
 
-SilphCo8EndBattleText2: ; 565fa (15:65fa)
+SilphCo8EndBattleText2:
 	TX_FAR _SilphCo8EndBattleText2
 	db "@"
 
-SilphCo8AfterBattleText2: ; 565ff (15:65ff)
+SilphCo8AfterBattleText2:
 	TX_FAR _SilphCo8AfterBattleText2
 	db "@"
 
-SilphCo8BattleText3: ; 56604 (15:6604)
+SilphCo8BattleText3:
 	TX_FAR _SilphCo8BattleText3
 	db "@"
 
-SilphCo8EndBattleText3: ; 56609 (15:6609)
+SilphCo8EndBattleText3:
 	TX_FAR _SilphCo8EndBattleText3
 	db "@"
 
-SilphCo8AfterBattleText3: ; 5660e (15:660e)
+SilphCo8AfterBattleText3:
 	TX_FAR _SilphCo8AfterBattleText3
 	db "@"

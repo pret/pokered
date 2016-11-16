@@ -51,4 +51,3 @@ _VermilionHouse2Text_560ca::
 	para "You have no room"
 	line "for my gift!"
 	done
-

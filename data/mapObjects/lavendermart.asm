@@ -1,4 +1,4 @@
-LavenderMartObject: ; 0x5c95d (size=38)
+LavenderMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

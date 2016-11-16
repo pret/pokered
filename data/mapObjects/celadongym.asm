@@ -1,4 +1,4 @@
-CeladonGymObject: ; 0x48b30 (size=84)
+CeladonGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

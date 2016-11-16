@@ -1,4 +1,4 @@
-FuchsiaCityObject: ; 0x18bd4 (size=178)
+FuchsiaCityObject:
 	db $f ; border block
 
 	db $9 ; warps

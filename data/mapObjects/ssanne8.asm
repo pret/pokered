@@ -1,4 +1,4 @@
-SSAnne8Object: ; 0x61a60 (size=127)
+SSAnne8Object:
 	db $c ; border block
 
 	db $6 ; warps

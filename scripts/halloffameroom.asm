@@ -1,25 +1,25 @@
-HallofFameRoomScript: ; 5a49e (16:649e)
+HallofFameRoomScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, HallofFameRoomScriptPointers
 	ld a, [wHallOfFameRoomCurScript]
 	jp CallFunctionInTable
 
-HallofFameRoomScript_5a4aa: ; 5a4aa (16:64aa)
+HallofFameRoomScript_5a4aa:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wHallOfFameRoomCurScript], a
 	ret
 
-HallofFameRoomScriptPointers: ; 5a4b2 (16:64b2)
+HallofFameRoomScriptPointers:
 	dw HallofFameRoomScript0
 	dw HallofFameRoomScript1
 	dw HallofFameRoomScript2
 	dw HallofFameRoomScript3
 
-HallofFameRoomScript3: ; 5a4ba (16:64ba)
+HallofFameRoomScript3:
 	ret
 
-HallofFameRoomScript2: ; 5a4bb (16:64bb)
+HallofFameRoomScript2:
 	call Delay3
 	ld a, [wLetterPrintingDelayFlags]
 	push af
@@ -55,7 +55,7 @@ HallofFameRoomScript2: ; 5a4bb (16:64bb)
 	call WaitForTextScrollButtonPress
 	jp Init
 
-HallofFameRoomScript0: ; 5a50d (16:650d)
+HallofFameRoomScript0:
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld hl, wSimulatedJoypadStatesEnd
@@ -68,11 +68,11 @@ HallofFameRoomScript0: ; 5a50d (16:650d)
 	ld [wHallOfFameRoomCurScript], a
 	ret
 
-RLEMovement5a528: ; 5a528 (16:6528)
+RLEMovement5a528:
 	db D_UP,$5
 	db $ff
 
-HallofFameRoomScript1: ; 5a52b (16:652b)
+HallofFameRoomScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -101,9 +101,9 @@ HallofFameRoomScript1: ; 5a52b (16:652b)
 	ld [wHallOfFameRoomCurScript], a
 	ret
 
-HallofFameRoomTextPointers: ; 5a56a (16:656a)
+HallofFameRoomTextPointers:
 	dw HallofFameRoomText1
 
-HallofFameRoomText1: ; 5a56c (16:656c)
+HallofFameRoomText1:
 	TX_FAR _HallofFameRoomText1
 	db "@"

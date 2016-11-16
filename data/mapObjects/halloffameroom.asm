@@ -1,4 +1,4 @@
-HallofFameRoomObject: ; 0x5a571 (size=26)
+HallofFameRoomObject:
 	db $3 ; border block
 
 	db $2 ; warps

@@ -129,4 +129,3 @@ _CeruleanGymText_5c82f::
 	line "we make a pretty"
 	cont "darn good team!"
 	done
-

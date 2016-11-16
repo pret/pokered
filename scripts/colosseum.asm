@@ -1,9 +1,9 @@
-ColosseumScript: ; 4fd7d (13:7d7d)
+ColosseumScript:
 	jp TradeCenterScript
 
-ColosseumTextPointers: ; 4fd80 (13:7d80)
+ColosseumTextPointers:
 	dw ColosseumText1
 
-ColosseumText1: ; 4fd82 (13:7d82)
+ColosseumText1:
 	TX_FAR _ColosseumText1
 	db "@"

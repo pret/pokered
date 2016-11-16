@@ -1,14 +1,14 @@
-ViridianForestEntranceScript: ; 5d65c (17:565c)
+ViridianForestEntranceScript:
 	jp EnableAutoTextBoxDrawing
 
-ViridianForestEntranceTextPointers: ; 5d65f (17:565f)
+ViridianForestEntranceTextPointers:
 	dw ViridianForestEntranceText1
 	dw ViridianForestEntranceText2
 
-ViridianForestEntranceText1: ; 5d663 (17:5663)
+ViridianForestEntranceText1:
 	TX_FAR _ViridianForestEntranceText1
 	db "@"
 
-ViridianForestEntranceText2: ; 5d668 (17:5668)
+ViridianForestEntranceText2:
 	TX_FAR _ViridianForestEntranceText2
 	db "@"

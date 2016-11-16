@@ -1,4 +1,4 @@
-VendingMachineMenu: ; 74ee0 (1d:4ee0)
+VendingMachineMenu:
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, MONEY_BOX
@@ -80,38 +80,39 @@ VendingMachineMenu: ; 74ee0 (1d:4ee0)
 	ld hl, VendingMachineText7
 	jp PrintText
 
-VendingMachineText1: ; 74f99 (1d:4f99)
+VendingMachineText1:
 	TX_FAR _VendingMachineText1
 	db "@"
 
-DrinkText: ; 74f9e (1d:4f9e)
+DrinkText:
 	db   "FRESH WATER"
 	next "SODA POP"
 	next "LEMONADE"
 	next "CANCEL@"
 
-DrinkPriceText: ; 74fc3 (1d:4fc3)
+DrinkPriceText:
 	db   "¥200"
 	next "¥300"
-	next "¥350",$4E,"@"
+	next "¥350"
+	next "@"
 
-VendingMachineText4: ; 74fd3 (1d:4fd3)
+VendingMachineText4:
 	TX_FAR _VendingMachineText4
 	db "@"
 
-VendingMachineText5: ; 74fd8 (1d:4fd8)
+VendingMachineText5:
 	TX_FAR _VendingMachineText5
 	db "@"
 
-VendingMachineText6: ; 74fdd (1d:4fdd)
+VendingMachineText6:
 	TX_FAR _VendingMachineText6
 	db "@"
 
-VendingMachineText7: ; 74fe2 (1d:4fe2)
+VendingMachineText7:
 	TX_FAR _VendingMachineText7
 	db "@"
 
-LoadVendingMachineItem: ; 74fe7 (1d:4fe7)
+LoadVendingMachineItem:
 	ld hl, VendingPrices
 	ld a, [wCurrentMenuItem]
 	add a
@@ -129,7 +130,10 @@ LoadVendingMachineItem: ; 74fe7 (1d:4fe7)
 	ld [hVendingMachinePrice + 2], a
 	ret
 
-VendingPrices: ; 75000 (1d:5000)
-	db FRESH_WATER,$00,$02,$00
-	db SODA_POP,   $00,$03,$00
-	db LEMONADE,   $00,$03,$50
+VendingPrices:
+	db FRESH_WATER
+	money 200
+	db SODA_POP
+	money 300
+	db LEMONADE
+	money 350

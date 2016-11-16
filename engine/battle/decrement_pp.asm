@@ -1,4 +1,4 @@
-DecrementPP: ; 68000 (1a:4000)
+DecrementPP:
 ; after using a move, decrement pp in battle and (if not transformed?) in party
 	ld a, [de]
 	cp a, STRUGGLE
@@ -33,7 +33,7 @@ DecrementPP: ; 68000 (1a:4000)
 	ld a, [wPlayerMonNumber] ; which mon in party is active
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes       ; calculate address of the mon to modify
-.DecrementPP
+.DecrementPP:
 	ld a, [wPlayerMoveListIndex] ; which move (0, 1, 2, 3) did we use?
 	ld c, a
 	ld b, 0

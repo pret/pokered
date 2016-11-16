@@ -1,4 +1,4 @@
-Museum1FScript: ; 5c0f7 (17:40f7)
+Museum1FScript:
 	ld a, $1
 	ld [wAutoTextBoxDrawingControl], a
 	xor a
@@ -7,11 +7,11 @@ Museum1FScript: ; 5c0f7 (17:40f7)
 	ld a, [wMuseum1fCurScript]
 	jp CallFunctionInTable
 
-Museum1FScriptPointers: ; 5c109 (17:4109)
+Museum1FScriptPointers:
 	dw Museum1FScript0
 	dw Museum1FScript1
 
-Museum1FScript0: ; 5c10d (17:410d)
+Museum1FScript0:
 	ld a, [wYCoord]
 	cp $4
 	ret nz
@@ -28,17 +28,17 @@ Museum1FScript0: ; 5c10d (17:410d)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-Museum1FScript1: ; 5c12a (17:412a)
+Museum1FScript1:
 	ret
 
-Museum1FTextPointers: ; 5c12b (17:412b)
+Museum1FTextPointers:
 	dw Museum1FText1
 	dw Museum1FText2
 	dw Museum1FText3
 	dw Museum1FText4
 	dw Museum1FText5
 
-Museum1FText1: ; 5c135 (17:4135)
+Museum1FText1:
 	TX_ASM
 	ld a, [wYCoord]
 	cp $4
@@ -123,7 +123,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld [wMuseum1fCurScript], a
 	jr Museum1FScriptEnd
 
-Museum1FScript_5c1f9: ; 5c1f9 (17:41f9)
+Museum1FScript_5c1f9:
 	ld hl, Museum1FText_5c22e
 	call PrintText
 	call YesNoChoice
@@ -136,56 +136,56 @@ Museum1FScript_5c1f9: ; 5c1f9 (17:41f9)
 .asm_d1144
 	ld hl, Museum1FText_5c238
 	call PrintText
-Museum1FScriptEnd: ; 5c217 (17:4217)
+Museum1FScriptEnd:
 	jp TextScriptEnd
 
-Museum1FText_5c21a: ; 5c21a (17:421a)
+Museum1FText_5c21a:
 	TX_FAR _Museum1FText_5c21a
 	db "@"
 
-Museum1FText_5c21f: ; 5c21f (17:421f)
+Museum1FText_5c21f:
 	TX_FAR _Museum1FText_5c21f
 	db "@"
 
-Museum1FText_5c224: ; 5c224 (17:4224)
+Museum1FText_5c224:
 	TX_FAR _Museum1FText_5c224
 	db "@"
 
-Museum1FText_5c229: ; 5c229 (17:4229)
+Museum1FText_5c229:
 	TX_FAR _Museum1FText_5c229
 	db "@"
 
-Museum1FText_5c22e: ; 5c22e (17:422e)
+Museum1FText_5c22e:
 	TX_FAR _Museum1FText_5c22e
 	db "@"
 
-Museum1FText_5c233: ; 5c233 (17:4233)
+Museum1FText_5c233:
 	TX_FAR _Museum1FText_5c233
 	db "@"
 
-Museum1FText_5c238: ; 5c238 (17:4238)
+Museum1FText_5c238:
 	TX_FAR _Museum1FText_5c238
 	db "@"
 
-Museum1FText_5c23d: ; 5c23d (17:423d)
+Museum1FText_5c23d:
 	TX_FAR _Museum1FText_5c23d
 	db "@"
 
-Museum1FText_5c242: ; 5c242 (17:4242)
+Museum1FText_5c242:
 	TX_FAR _Museum1FText_5c242
 	db "@"
 
-Museum1FText2: ; 5c247 (17:4247)
+Museum1FText2:
 	TX_ASM
 	ld hl, Museum1FText_5c251
 	call PrintText
 	jp TextScriptEnd
 
-Museum1FText_5c251: ; 5c251 (17:4251)
+Museum1FText_5c251:
 	TX_FAR _Museum1FText_5c251
 	db "@"
 
-Museum1FText3: ; 5c256 (17:4256)
+Museum1FText3:
 	TX_ASM
 	CheckEvent EVENT_GOT_OLD_AMBER
 	jr nz, .asm_5c285
@@ -209,38 +209,39 @@ Museum1FText3: ; 5c256 (17:4256)
 	call PrintText
 	jp TextScriptEnd
 
-Museum1FText_5c28e: ; 5c28e (17:428e)
+Museum1FText_5c28e:
 	TX_FAR _Museum1FText_5c28e
 	db "@"
 
-ReceivedOldAmberText: ; 5c293 (17:4293)
+ReceivedOldAmberText:
 	TX_FAR _ReceivedOldAmberText
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
-Museum1FText_5c299: ; 5c299 (17:4299)
+Museum1FText_5c299:
 	TX_FAR _Museum1FText_5c299
 	db "@"
 
-Museum1FText_5c29e: ; 5c29e (17:429e)
+Museum1FText_5c29e:
 	TX_FAR _Museum1FText_5c29e
 	db "@"
 
-Museum1FText4: ; 5c2a3 (17:42a3)
+Museum1FText4:
 	TX_ASM
 	ld hl, Museum1FText_5c2ad
 	call PrintText
 	jp TextScriptEnd
 
-Museum1FText_5c2ad: ; 5c2ad (17:42ad)
+Museum1FText_5c2ad:
 	TX_FAR _Museum1FText_5c2ad
 	db "@"
 
-Museum1FText5: ; 5c2b2 (17:42b2)
+Museum1FText5:
 	TX_ASM
 	ld hl, Museum1FText_5c2bc
 	call PrintText
 	jp TextScriptEnd
 
-Museum1FText_5c2bc: ; 5c2bc (17:42bc)
+Museum1FText_5c2bc:
 	TX_FAR _Museum1FText_5c2bc
 	db "@"

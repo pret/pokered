@@ -1,8 +1,8 @@
-SSAnne6Script: ; 617b3 (18:57b3)
+SSAnne6Script:
 	call EnableAutoTextBoxDrawing
 	ret
 
-SSAnne6TextPointers: ; 617b7 (18:57b7)
+SSAnne6TextPointers:
 	dw SSAnne6Text1
 	dw SSAnne6Text2
 	dw SSAnne6Text3
@@ -11,31 +11,31 @@ SSAnne6TextPointers: ; 617b7 (18:57b7)
 	dw SSAnne6Text6
 	dw SSAnne6Text7
 
-SSAnne6Text1: ; 617c5 (18:57c5)
+SSAnne6Text1:
 	TX_FAR _SSAnne6Text1
 	db "@"
 
-SSAnne6Text2: ; 617ca (18:57ca)
+SSAnne6Text2:
 	TX_FAR _SSAnne6Text2
 	db "@"
 
-SSAnne6Text3: ; 617cf (18:57cf)
+SSAnne6Text3:
 	TX_FAR _SSAnne6Text3
 	db "@"
 
-SSAnne6Text4: ; 617d4 (18:57d4)
+SSAnne6Text4:
 	TX_FAR _SSAnne6Text4
 	db "@"
 
-SSAnne6Text5: ; 617d9 (18:57d9)
+SSAnne6Text5:
 	TX_FAR _SSAnne6Text5
 	db "@"
 
-SSAnne6Text6: ; 617de (18:57de)
+SSAnne6Text6:
 	TX_FAR _SSAnne6Text6
 	db "@"
 
-SSAnne6Text7: ; 617e3 (18:57e3)
+SSAnne6Text7:
 	TX_ASM
 	ld hl, SSAnne6Text_61807
 	call PrintText
@@ -55,18 +55,18 @@ SSAnne6Text7: ; 617e3 (18:57e3)
 	call PrintText
 	jp TextScriptEnd
 
-SSAnne6Text_61807: ; 61807 (18:5807)
+SSAnne6Text_61807:
 	TX_FAR _SSAnne6Text_61807
 	db "@"
 
-SSAnne6Text_6180c: ; 6180c (18:580c)
+SSAnne6Text_6180c:
 	TX_FAR _SSAnne6Text_6180c
 	db "@"
 
-SSAnne6Text_61811: ; 61811 (18:5811)
+SSAnne6Text_61811:
 	TX_FAR _SSAnne6Text_61811
 	db "@"
 
-SSAnne6Text_61816: ; 61816 (18:5816)
+SSAnne6Text_61816:
 	TX_FAR _SSAnne6Text_61816
 	db "@"

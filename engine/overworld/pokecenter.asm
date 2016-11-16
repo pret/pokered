@@ -1,4 +1,4 @@
-DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
+DisplayPokemonCenterDialogue_:
 	call SaveScreenTilesToBuffer1 ; save screen
 	ld hl, PokemonCenterWelcomeText
 	call PrintText
@@ -45,24 +45,24 @@ DisplayPokemonCenterDialogue_: ; 6fe6 (1:6fe6)
 	call PrintText
 	jp UpdateSprites
 
-PokemonCenterWelcomeText: ; 705d (1:705d)
+PokemonCenterWelcomeText:
 	TX_FAR _PokemonCenterWelcomeText
 	db "@"
 
-ShallWeHealYourPokemonText: ; 7062 (1:7062)
-	db $a
+ShallWeHealYourPokemonText:
+	TX_DELAY
 	TX_FAR _ShallWeHealYourPokemonText
 	db "@"
 
-NeedYourPokemonText: ; 7068 (1:7068)
+NeedYourPokemonText:
 	TX_FAR _NeedYourPokemonText
 	db "@"
 
-PokemonFightingFitText: ; 706d (1:706d)
+PokemonFightingFitText:
 	TX_FAR _PokemonFightingFitText
 	db "@"
 
-PokemonCenterFarewellText: ; 7072 (1:7072)
-	db $a
+PokemonCenterFarewellText:
+	TX_DELAY
 	TX_FAR _PokemonCenterFarewellText
 	db "@"

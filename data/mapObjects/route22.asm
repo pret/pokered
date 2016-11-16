@@ -1,4 +1,4 @@
-Route22Object: ; 0x50022 (size=27)
+Route22Object:
 	db $2c ; border block
 
 	db $1 ; warps

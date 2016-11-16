@@ -1,4 +1,4 @@
-VermilionCityObject: ; 0x189ba (size=133)
+VermilionCityObject:
 	db $43 ; border block
 
 	db $9 ; warps

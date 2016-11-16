@@ -1,4 +1,4 @@
-Route21Object: ; 0x55021 (size=76)
+Route21Object:
 	db $43 ; border block
 
 	db $0 ; warps

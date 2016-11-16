@@ -1,4 +1,4 @@
-ViridianForestEntranceObject: ; 0x5d66d (size=48)
+ViridianForestEntranceObject:
 	db $a ; border block
 
 	db $4 ; warps

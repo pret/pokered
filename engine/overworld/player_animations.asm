@@ -1,4 +1,4 @@
-EnterMapAnim: ; 70510 (1c:4510)
+EnterMapAnim:
 	call InitFacingDirectionList
 	ld a, $ec
 	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
@@ -63,7 +63,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	call LoadPlayerSpriteGraphics
 	jr .restoreDefaultMusic
 
-FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
+FlyAnimationEnterScreenCoords:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the overworld
 ; Fly animation when the player is entering a map.
@@ -80,7 +80,7 @@ FlyAnimationEnterScreenCoords: ; 70592 (1c:4592)
 	db $3C, $48
 	db $3C, $40
 
-PlayerSpinWhileMovingDown: ; 705aa (1c:45aa)
+PlayerSpinWhileMovingDown:
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, $10
 	ld [hli], a ; wPlayerSpinWhileMovingUpOrDownAnimDeltaY
@@ -90,7 +90,7 @@ PlayerSpinWhileMovingDown: ; 705aa (1c:45aa)
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	jp PlayerSpinWhileMovingUpOrDown
 
-_LeaveMapAnim: ; 705ba (1c:45ba)
+_LeaveMapAnim:
 	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -167,7 +167,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	call GBFadeOutToWhite
 	jp RestoreFacingDirectionAndYScreenPos
 
-FlyAnimationScreenCoords1: ; 7064f (1c:464f)
+FlyAnimationScreenCoords1:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the first part
 ; of the Fly overworld animation.
@@ -184,7 +184,7 @@ FlyAnimationScreenCoords1: ; 7064f (1c:464f)
 	db $2A, $98
 	db $27, $A0
 
-FlyAnimationScreenCoords2: ; 70667 (1c:4667)
+FlyAnimationScreenCoords2:
 ; y, x pairs
 ; This is the sequence of screen coordinates used by the second part
 ; of the Fly overworld animation.
@@ -201,7 +201,7 @@ FlyAnimationScreenCoords2: ; 70667 (1c:4667)
 
 	db $F0, $00
 
-LeaveMapThroughHoleAnim: ; 7067d (1c:467d)
+LeaveMapThroughHoleAnim:
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a ; disable UpdateSprites
 	; shift upper half of player's sprite down 8 pixels and hide lower half
@@ -223,7 +223,7 @@ LeaveMapThroughHoleAnim: ; 7067d (1c:467d)
 	ld [wUpdateSpritesEnabled], a ; enable UpdateSprites
 	jp RestoreFacingDirectionAndYScreenPos
 
-DoFlyAnimation: ; 706ae (1c:46ae)
+DoFlyAnimation:
 	ld a, [wFlyAnimBirdSpriteImageIndex]
 	xor $1 ; make the bird flap its wings
 	ld [wFlyAnimBirdSpriteImageIndex], a
@@ -247,7 +247,7 @@ DoFlyAnimation: ; 706ae (1c:46ae)
 	jr nz, DoFlyAnimation
 	ret
 
-LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
+LoadBirdSpriteGraphics:
 	ld de, BirdSprite
 	ld hl, vNPCSprites
 	lb bc, BANK(BirdSprite), $0c
@@ -257,7 +257,7 @@ LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
 	lb bc, BANK(BirdSprite), $0c
 	jp CopyVideoData
 
-InitFacingDirectionList: ; 706ef (1c:46ef)
+InitFacingDirectionList:
 	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
 	ld [wSavedPlayerFacingDirection], a
 	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
@@ -276,12 +276,12 @@ InitFacingDirectionList: ; 706ef (1c:46ef)
 	dec hl
 	ret
 
-PlayerSpinningFacingOrder: ; 70713 (1c:4713)
+PlayerSpinningFacingOrder:
 ; The order of the direction the player's sprite is facing when teleporting
 ; away. Creates a spinning effect.
 	db SPRITE_FACING_DOWN, SPRITE_FACING_LEFT, SPRITE_FACING_UP, SPRITE_FACING_RIGHT
 
-SpinPlayerSprite: ; 70717 (1c:4717)
+SpinPlayerSprite:
 ; copy the current value from the list into the sprite data and rotate the list
 	ld a, [hl]
 	ld [wSpriteStateData1 + 2], a ; player's sprite facing direction (image index is locked to standing images)
@@ -295,7 +295,7 @@ SpinPlayerSprite: ; 70717 (1c:4717)
 	pop hl
 	ret
 
-PlayerSpinInPlace: ; 70730 (1c:4730)
+PlayerSpinInPlace:
 	call SpinPlayerSprite
 	ld a, [wPlayerSpinInPlaceAnimFrameDelay]
 	ld c, a
@@ -316,7 +316,7 @@ PlayerSpinInPlace: ; 70730 (1c:4730)
 	call DelayFrames
 	jr PlayerSpinInPlace
 
-PlayerSpinWhileMovingUpOrDown: ; 70755 (1c:4755)
+PlayerSpinWhileMovingUpOrDown:
 	call SpinPlayerSprite
 	ld a, [wPlayerSpinWhileMovingUpOrDownAnimDeltaY]
 	ld c, a
@@ -332,7 +332,7 @@ PlayerSpinWhileMovingUpOrDown: ; 70755 (1c:4755)
 	call DelayFrames
 	jr PlayerSpinWhileMovingUpOrDown
 
-RestoreFacingDirectionAndYScreenPos: ; 70772 (1c:4772)
+RestoreFacingDirectionAndYScreenPos:
 	ld a, [wSavedPlayerScreenY]
 	ld [wSpriteStateData1 + 4], a
 	ld a, [wSavedPlayerFacingDirection]
@@ -340,14 +340,14 @@ RestoreFacingDirectionAndYScreenPos: ; 70772 (1c:4772)
 	ret
 
 ; if SGB, 2 frames, else 3 frames
-GetPlayerTeleportAnimFrameDelay: ; 7077f (1c:477f)
+GetPlayerTeleportAnimFrameDelay:
 	ld a, [wOnSGB]
 	xor $1
 	inc a
 	inc a
 	ret
 
-IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
+IsPlayerStandingOnWarpPadOrHole:
 	ld b, 0
 	ld hl, .warpPadAndHoleData
 	ld a, [wCurMapTileset]
@@ -374,21 +374,21 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	ret
 
 ; format: db tileset id, tile id, value to be put in [wStandingOnWarpPadOrHole]
-.warpPadAndHoleData: ; 707a9 (1c:47a9)
+.warpPadAndHoleData:
 	db FACILITY, $20, 1 ; warp pad
 	db FACILITY, $11, 2 ; hole
 	db CAVERN,   $22, 2 ; hole
 	db INTERIOR, $55, 1 ; warp pad
 	db $FF
 
-FishingAnim: ; 707b6 (1c:47b6)
+FishingAnim:
 	ld c, 10
 	call DelayFrames
 	ld hl, wd736
 	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(RedSprite), $0c
+	lb bc, BANK(RedSprite), $c
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles
@@ -462,19 +462,19 @@ FishingAnim: ; 707b6 (1c:47b6)
 	ld [hl], a
 	ret
 
-NoNibbleText: ; 70847 (1c:4847)
+NoNibbleText:
 	TX_FAR _NoNibbleText
 	db "@"
 
-NothingHereText: ; 7084c (1c:484c)
+NothingHereText:
 	TX_FAR _NothingHereText
 	db "@"
 
-ItsABiteText: ; 70851 (1c:4851)
+ItsABiteText:
 	TX_FAR _ItsABiteText
 	db "@"
 
-FishingRodOAM: ; 70856 (1c:4856)
+FishingRodOAM:
 ; specifies how the fishing rod should be drawn on the screen
 ; first byte = screen y coordinate
 ; second byte = screen x coordinate
@@ -485,7 +485,7 @@ FishingRodOAM: ; 70856 (1c:4856)
 	db $50, $40, $FE, $00 ; player facing left
 	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
 
-RedFishingTiles: ; 70866 (1c:4866)
+RedFishingTiles:
 	dw RedFishingTilesFront
 	db 2, BANK(RedFishingTilesFront)
 	dw vNPCSprites + $20
@@ -502,7 +502,7 @@ RedFishingTiles: ; 70866 (1c:4866)
 	db 3, BANK(RedFishingRodTiles)
 	dw vNPCSprites2 + $7d0
 
-_HandleMidJump: ; 7087e (1c:487e)
+_HandleMidJump:
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a
@@ -534,6 +534,6 @@ _HandleMidJump: ; 7087e (1c:487e)
 	ld [wJoyIgnore], a
 	ret
 
-PlayerJumpingYScreenCoords: ; 708ba (1c:48ba)
+PlayerJumpingYScreenCoords:
 ; Sequence of y screen coordinates for player's sprite when jumping over a ledge.
 	db $38, $36, $34, $32, $31, $30, $30, $30, $31, $32, $33, $34, $36, $38, $3C, $3C

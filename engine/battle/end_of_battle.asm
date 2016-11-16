@@ -1,4 +1,4 @@
-EndOfBattle: ; 137aa (4:77aa)
+EndOfBattle:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
@@ -46,7 +46,7 @@ EndOfBattle: ; 137aa (4:77aa)
 .resetVariables
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	ld [wIsInBattle], a
 	ld [wBattleType], a
 	ld [wMoveMissed], a
@@ -75,15 +75,15 @@ EndOfBattle: ; 137aa (4:77aa)
 	ld [wDestinationWarpID], a
 	ret
 
-YouWinText: ; 13853 (4:7853)
+YouWinText:
 	db "YOU WIN@"
 
-YouLoseText: ; 1385b (4:785b)
+YouLoseText:
 	db "YOU LOSE@"
 
-DrawText: ; 13864 (4:7864)
+DrawText:
 	db "  DRAW@"
 
-PickUpPayDayMoneyText: ; 1386b (4:786b)
+PickUpPayDayMoneyText:
 	TX_FAR _PickUpPayDayMoneyText
 	db "@"

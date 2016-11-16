@@ -1,4 +1,4 @@
-CeladonHotelObject: ; 0x49281 (size=38)
+CeladonHotelObject:
 	db $0 ; border block
 
 	db $2 ; warps

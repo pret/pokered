@@ -1,5 +1,5 @@
 ; see also MapHeaderPointers
-MapHeaderBanks: ; c23d (3:423d)
+MapHeaderBanks:
 	db BANK(PalletTown_h) ;PALLET_TOWN
 	db BANK(ViridianCity_h) ; VIRIDIAN_CITY
 	db BANK(PewterCity_h) ; PEWTER_CITY
@@ -248,6 +248,3 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(Lorelei_h)
 	db BANK(Bruno_h)
 	db BANK(Agatha_h)
-IF DEF(_OPTION_BEACH_HOUSE)
-	db BANK(BeachHouse_h)
-ENDC

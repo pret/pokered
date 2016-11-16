@@ -1,4 +1,4 @@
-ForcedBikeOrSurfMaps: ; c3e6 (3:43e6)
+ForcedBikeOrSurfMaps:
 ; map id, y, x
 	db ROUTE_16,$0A,$11
 	db ROUTE_16,$0B,$11

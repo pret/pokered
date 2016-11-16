@@ -11,4 +11,3 @@ _SeafoamIslands5Text5::
 	text "DANGER"
 	line "Fast current!"
 	done
-

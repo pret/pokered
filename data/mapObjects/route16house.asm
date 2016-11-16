@@ -1,4 +1,4 @@
-Route16HouseObject: ; 0x1e657 (size=32)
+Route16HouseObject:
 	db $a ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-CeladonMartElevatorObject: ; 0x4866d (size=23)
+CeladonMartElevatorObject:
 	db $f ; border block
 
 	db $2 ; warps

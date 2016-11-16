@@ -1,4 +1,4 @@
-CeladonPrizeRoomObject: ; 0x49108 (size=41)
+CeladonPrizeRoomObject:
 	db $f ; border block
 
 	db $2 ; warps

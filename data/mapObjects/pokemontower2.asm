@@ -1,4 +1,4 @@
-PokemonTower2Object: ; 0x60646 (size=32)
+PokemonTower2Object:
 	db $1 ; border block
 
 	db $2 ; warps

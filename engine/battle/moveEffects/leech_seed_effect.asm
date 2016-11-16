@@ -1,4 +1,4 @@
-LeechSeedEffect_: ; 2bea9 (a:7ea9)
+LeechSeedEffect_:
 	callab MoveHitTest
 	ld a, [wMoveMissed]
 	and a
@@ -31,10 +31,10 @@ LeechSeedEffect_: ; 2bea9 (a:7ea9)
 	ld hl, EvadedAttackText
 	jp PrintText
 
-WasSeededText: ; 2bef2 (a:7ef2)
+WasSeededText:
 	TX_FAR _WasSeededText
 	db "@"
 
-EvadedAttackText: ; 2bef7 (a:7ef7)
+EvadedAttackText:
 	TX_FAR _EvadedAttackText
 	db "@"

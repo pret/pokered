@@ -1,14 +1,14 @@
-Mansion1Script: ; 442af (11:42af)
+Mansion1Script:
 	call Mansion1Subscript1
 	call EnableAutoTextBoxDrawing
-	ld hl, Mansion1TrainerHeaders
+	ld hl, Mansion1TrainerHeader0
 	ld de, Mansion1ScriptPointers
 	ld a, [wMansion1CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wMansion1CurScript], a
 	ret
 
-Mansion1Subscript1: ; 442c5 (11:42c5)
+Mansion1Subscript1:
 	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
@@ -33,19 +33,19 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 	lb bc, 13, 13
 	jp Mansion1Script_4430b
 
-Mansion1Script_44304: ; 44304 (11:4304)
+Mansion1Script_44304:
 	ld a, $2d
 	ld [wNewTileBlockID], a
 	jr Mansion1ReplaceBlock
 
-Mansion1Script_4430b: ; 4430b (11:430b)
+Mansion1Script_4430b:
 	ld a, $e
 	ld [wNewTileBlockID], a
-Mansion1ReplaceBlock: ; 44310 (11:4310)
+Mansion1ReplaceBlock:
 	predef ReplaceTileBlock
 	ret
 
-Mansion1Script_Switches: ; 44316 (11:4316)
+Mansion1Script_Switches:
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
@@ -55,19 +55,18 @@ Mansion1Script_Switches: ; 44316 (11:4316)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-Mansion1ScriptPointers: ; 44326 (11:4326)
+Mansion1ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Mansion1TextPointers: ; 4432c (11:432c)
+Mansion1TextPointers:
 	dw Mansion1Text1
 	dw PickUpItemText
 	dw PickUpItemText
 	dw Mansion1Text4
 
-Mansion1TrainerHeaders: ; 44334 (11:4334)
-Mansion1TrainerHeader0: ; 44334 (11:4334)
+Mansion1TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MANSION_1_TRAINER_0
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_MANSION_1_TRAINER_0
@@ -78,25 +77,25 @@ Mansion1TrainerHeader0: ; 44334 (11:4334)
 
 	db $ff
 
-Mansion1Text1: ; 44341 (11:4341)
+Mansion1Text1:
 	TX_ASM
 	ld hl, Mansion1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Mansion1BattleText2: ; 4434b (11:434b)
+Mansion1BattleText2:
 	TX_FAR _Mansion1BattleText2
 	db "@"
 
-Mansion1EndBattleText2: ; 44350 (11:4350)
+Mansion1EndBattleText2:
 	TX_FAR _Mansion1EndBattleText2
 	db "@"
 
-Mansion1AfterBattleText2: ; 44355 (11:4355)
+Mansion1AfterBattleText2:
 	TX_FAR _Mansion1AfterBattleText2
 	db "@"
 
-Mansion1Text4: ; 4435a (11:435a)
+Mansion1Text4:
 	TX_ASM
 	ld hl, MansionSwitchText
 	call PrintText
@@ -122,14 +121,14 @@ Mansion1Text4: ; 4435a (11:435a)
 .asm_44392
 	jp TextScriptEnd
 
-MansionSwitchText: ; 44395 (11:4395)
+MansionSwitchText:
 	TX_FAR _MansionSwitchText
 	db "@"
 
-MansionSwitchPressedText: ; 4439a (11:439a)
+MansionSwitchPressedText:
 	TX_FAR _MansionSwitchPressedText
 	db "@"
 
-MansionSwitchNotPressedText: ; 4439f (11:439f)
+MansionSwitchNotPressedText:
 	TX_FAR _MansionSwitchNotPressedText
 	db "@"

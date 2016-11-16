@@ -1,4 +1,4 @@
-UndergroundPathWEObject: ; 0x61f4e (size=20)
+UndergroundPathWEObject:
 	db $1 ; border block
 
 	db $2 ; warps

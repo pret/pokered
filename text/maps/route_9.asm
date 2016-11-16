@@ -155,4 +155,3 @@ _Route9Text11::
 	line "CERULEAN CITY-"
 	cont "ROCK TUNNEL"
 	done
-

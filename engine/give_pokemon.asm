@@ -1,4 +1,4 @@
-_GivePokemon: ; 4fda5 (13:7da5)
+_GivePokemon:
 ; returns success in carry
 ; and whether the mon was added to the party in [wAddedToParty]
 	call EnableAutoTextBoxDrawing
@@ -53,7 +53,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	scf
 	ret
 
-SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
+SetPokedexOwnedFlag:
 	ld a, [wcf91]
 	ld e, a
 	ld a, [wcf91 + 1]
@@ -79,16 +79,16 @@ SetPokedexOwnedFlag: ; 4fe11 (13:7e11)
 	ld hl, GotMonText
 	jp PrintText
 
-GotMonText: ; 4fe39 (13:7e39)
+GotMonText:
 	TX_FAR _GotMonText
-	db $0b
+	TX_SFX_ITEM_1
 	db "@"
 
-SetToBoxText: ; 4fe3f (13:7e3f)
+SetToBoxText:
 	TX_FAR _SetToBoxText
 	db "@"
 
-BoxIsFullText: ; 4fe44 (13:7e44)
+BoxIsFullText:
 	TX_FAR _BoxIsFullText
 	db "@"
 

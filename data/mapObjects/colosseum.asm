@@ -1,4 +1,4 @@
-ColosseumObject: ; 0x4fd87 (size=10)
+ColosseumObject:
 	db $e ; border block
 
 	db $0 ; warps

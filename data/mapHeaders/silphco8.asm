@@ -1,4 +1,4 @@
-SilphCo8_h: ; 0x564f8 to 0x56504 (12 bytes) (id=213)
+SilphCo8_h:
 	db FACILITY ; tileset
 	db SILPH_CO_8F_HEIGHT, SILPH_CO_8F_WIDTH ; dimensions (y, x)
 	dw SilphCo8Blocks, SilphCo8TextPointers, SilphCo8Script ; blocks, texts, scripts

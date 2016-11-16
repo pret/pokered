@@ -1,4 +1,4 @@
-PayDayEffect_: ; 2feb8 (b:7eb8)
+PayDayEffect_:
 	xor a
 	ld hl, wcd6d
 	ld [hli], a
@@ -40,6 +40,6 @@ PayDayEffect_: ; 2feb8 (b:7eb8)
 	ld hl, CoinsScatteredText
 	jp PrintText
 
-CoinsScatteredText: ; 2ff04 (b:7f04)
+CoinsScatteredText:
 	TX_FAR _CoinsScatteredText
 	db "@"

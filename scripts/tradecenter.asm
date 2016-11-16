@@ -1,7 +1,7 @@
-TradeCenterScript: ; 4fd10 (13:7d10)
+TradeCenterScript:
 	call EnableAutoTextBoxDrawing
-	ld a, [$ffaa]
-	cp $2
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	ld a, SPRITE_FACING_LEFT
 	jr z, .next
 	ld a, SPRITE_FACING_RIGHT
@@ -21,8 +21,8 @@ TradeCenterScript: ; 4fd10 (13:7d10)
 	ld [hl], a
 	ld a, SPRITE_FACING_LEFT
 	ld [wSpriteStateData1 + $19], a
-	ld a, [$ffaa]
-	cp $2
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	ret z
 	ld a, $7
 	ld [wSpriteStateData2 + $15], a
@@ -30,9 +30,9 @@ TradeCenterScript: ; 4fd10 (13:7d10)
 	ld [wSpriteStateData1 + $19], a
 	ret
 
-TradeCenterTextPointers: ; 4fd4c (13:7d4c)
+TradeCenterTextPointers:
 	dw TradeCenterText1
 
-TradeCenterText1: ; 4fd4e (13:7d4e)
+TradeCenterText1:
 	TX_FAR _TradeCenterText1
 	db "@"

@@ -1,4 +1,4 @@
-Tilesets: ; c7be (3:47be)
+Tilesets:
 	tileset Overworld_Block,   Overworld_GFX,   Overworld_Coll,   $FF,$FF,$FF, $52, OUTDOOR
 	tileset RedsHouse1_Block,  RedsHouse1_GFX,  RedsHouse1_Coll,  $FF,$FF,$FF, $FF, INDOOR
 	tileset Mart_Block,        Mart_GFX,        Mart_Coll,        $18,$19,$1E, $FF, INDOOR
@@ -23,6 +23,3 @@ Tilesets: ; c7be (3:47be)
 	tileset Club_Block,        Club_GFX,        Club_Coll,        $07,$17,$FF, $FF, INDOOR
 	tileset Facility_Block,    Facility_GFX,    Facility_Coll,    $12,$FF,$FF, $FF, CAVE
 	tileset Plateau_Block,     Plateau_GFX,     Plateau_Coll,     $FF,$FF,$FF, $45, CAVE
-IF DEF(_OPTION_BEACH_HOUSE)
-	tileset BeachHouse_Block,  BeachHouse_GFX,  BeachHouse_Coll,  $FF,$FF,$FF, $FF, INDOOR
-ENDC

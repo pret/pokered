@@ -65,15 +65,15 @@ YoungsterData:
 	db 14
 	dw SPEAROW
 	db 0, 0
-
+; Mt. Moon 1F
 	db 10
 	dw RATTATA,RATTATA,ZUBAT
 	db 0, 0
-
+; Route 24
 	db 14
 	dw RATTATA,EKANS,ZUBAT
 	db 0, 0
-
+; Route 25
 	db 15
 	dw RATTATA,SPEAROW
 	db 0, 0
@@ -85,11 +85,11 @@ YoungsterData:
 	db 14
 	dw EKANS,SANDSHREW
 	db 0, 0
-
+; SS Anne 1F Rooms
 	db 21
 	dw NIDORAN_M
 	db 0, 0
-
+; Route 11
 	db 21
 	dw EKANS
 	db 0, 0
@@ -105,7 +105,7 @@ YoungsterData:
 	db 18
 	dw NIDORAN_M,NIDORINO
 	db 0, 0
-
+; Unused
 	db 17
 	dw SPEAROW,RATTATA,RATTATA,SPEAROW
 	db 0, 0

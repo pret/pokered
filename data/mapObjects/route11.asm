@@ -1,4 +1,4 @@
-Route11Object: ; 0x584e0 (size=127)
+Route11Object:
 	db $f ; border block
 
 	db $5 ; warps

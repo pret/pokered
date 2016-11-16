@@ -9,4 +9,3 @@ _SafariZoneRestHouse1Text2::
 	line "#MON to take"
 	cont "home as gifts!"
 	done
-

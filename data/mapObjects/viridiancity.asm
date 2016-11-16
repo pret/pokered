@@ -1,4 +1,4 @@
-ViridianCityObject: ; 0x18384 (size=104)
+ViridianCityObject:
 	db $f ; border block
 
 	db $5 ; warps

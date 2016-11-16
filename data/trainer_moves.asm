@@ -1,4 +1,4 @@
-LoneMoves: ; 39d22 (e:5d22)
+LoneMoves:
 ; these are used for gym leaders.
 ; this is not automatic! you have to write the number you want to wLoneAttackNo
 ; first. e.g., erika's script writes 4 to wLoneAttackNo to get mega drain,
@@ -16,7 +16,7 @@ LoneMoves: ; 39d22 (e:5d22)
 	db 3,FIRE_BLAST
 	db 4,FISSURE
 
-TeamMoves: ; 39d32 (e:5d32)
+TeamMoves:
 ; these are used for elite four.
 ; this is automatic, based on trainer class.
 ; don't be confused by LoneMoves above, the two data structures are

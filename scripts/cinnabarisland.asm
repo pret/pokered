@@ -1,4 +1,4 @@
-CinnabarIslandScript: ; 1ca19 (7:4a19)
+CinnabarIslandScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
@@ -8,11 +8,11 @@ CinnabarIslandScript: ; 1ca19 (7:4a19)
 	ld a, [wCinnabarIslandCurScript]
 	jp CallFunctionInTable
 
-CinnabarIslandScriptPointers: ; 1ca34 (7:4a34)
+CinnabarIslandScriptPointers:
 	dw CinnabarIslandScript0
 	dw CinnabarIslandScript1
 
-CinnabarIslandScript0: ; 1ca38 (7:4a38)
+CinnabarIslandScript0:
 	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
@@ -41,7 +41,7 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld [wCinnabarIslandCurScript], a
 	ret
 
-CinnabarIslandScript1: ; 1ca73 (7:4a73)
+CinnabarIslandScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -50,7 +50,7 @@ CinnabarIslandScript1: ; 1ca73 (7:4a73)
 	ld [wCinnabarIslandCurScript], a
 	ret
 
-CinnabarIslandTextPointers: ; 1ca81 (7:4a81)
+CinnabarIslandTextPointers:
 	dw CinnabarIslandText1
 	dw CinnabarIslandText2
 	dw CinnabarIslandText3
@@ -60,26 +60,26 @@ CinnabarIslandTextPointers: ; 1ca81 (7:4a81)
 	dw CinnabarIslandText7
 	dw CinnabarIslandText8
 
-CinnabarIslandText8: ; 1ca91 (7:4a91)
+CinnabarIslandText8:
 	TX_FAR _CinnabarIslandText8
 	db "@"
 
-CinnabarIslandText1: ; 1ca96 (7:4a96)
+CinnabarIslandText1:
 	TX_FAR _CinnabarIslandText1
 	db "@"
 
-CinnabarIslandText2: ; 1ca9b (7:4a9b)
+CinnabarIslandText2:
 	TX_FAR _CinnabarIslandText2
 	db "@"
 
-CinnabarIslandText3: ; 1caa0 (7:4aa0)
+CinnabarIslandText3:
 	TX_FAR _CinnabarIslandText3
 	db "@"
 
-CinnabarIslandText6: ; 1caa5 (7:4aa5)
+CinnabarIslandText6:
 	TX_FAR _CinnabarIslandText6
 	db "@"
 
-CinnabarIslandText7: ; 1caaa (7:4aaa)
+CinnabarIslandText7:
 	TX_FAR _CinnabarIslandText7
 	db "@"

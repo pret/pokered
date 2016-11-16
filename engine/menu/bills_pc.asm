@@ -1,4 +1,4 @@
-DisplayPCMainMenu:: ; 213c8 (8:53c8)
+DisplayPCMainMenu::
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call SaveScreenTilesToBuffer2
@@ -92,7 +92,7 @@ OaksPCText:       db "PROF.OAK's PC@"
 PKMNLeaguePCText: db $4a, "LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
-BillsPC_:: ; 0x214c2
+BillsPC_::
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -111,7 +111,7 @@ BillsPC_:: ; 0x214c2
 	ld hl, SwitchOnText
 	call PrintText
 
-BillsPCMenu: ; 214e8 (8:54e8)
+BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
 	ld hl, vChars2 + $780
@@ -185,7 +185,7 @@ BillsPCMenu: ; 214e8 (8:54e8)
 	cp $3
 	jp z, BillsPCChangeBox ; change box
 
-ExitBillsPC: ; 21588 (8:5588)
+ExitBillsPC:
 	ld a, [wFlags_0xcd60]
 	bit 3, a ; accessing Bill's PC through another PC?
 	jr nz, .next
@@ -204,7 +204,7 @@ ExitBillsPC: ; 21588 (8:5588)
 	res 6, [hl]
 	ret
 
-BillsPCDeposit: ; 215ac (8:55ac)
+BillsPCDeposit:
 	ld a, [wPartyCount]
 	dec a
 	jr nz, .partyLargeEnough
@@ -251,12 +251,12 @@ BillsPCDeposit: ; 215ac (8:55ac)
 	add "1"
 .next
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], "@"
 	ld hl, MonWasStoredText
 	call PrintText
 	jp BillsPCMenu
 
-BillsPCWithdraw: ; 21618 (8:5618)
+BillsPCWithdraw:
 	ld a, [wNumInBox]
 	and a
 	jr nz, .boxNotEmpty
@@ -296,7 +296,7 @@ BillsPCWithdraw: ; 21618 (8:5618)
 	call PrintText
 	jp BillsPCMenu
 
-BillsPCRelease: ; 21673 (8:5673)
+BillsPCRelease:
 	ld a, [wNumInBox]
 	and a
 	jr nz, .loop
@@ -326,11 +326,11 @@ BillsPCRelease: ; 21673 (8:5673)
 	call PrintText
 	jp BillsPCMenu
 
-BillsPCChangeBox: ; 216b3 (8:56b3)
+BillsPCChangeBox:
 	callba ChangeBox
 	jp BillsPCMenu
 
-DisplayMonListMenu: ; 216be (8:56be)
+DisplayMonListMenu:
 	ld a, l
 	ld [wListPointer], a
 	ld a, h
@@ -347,7 +347,7 @@ DisplayMonListMenu: ; 216be (8:56be)
 	ld [wPartyAndBillsPCSavedMenuItem], a
 	ret
 
-BillsPCMenuText: ; 216e1 (8:56e1)
+BillsPCMenuText:
 	db   "WITHDRAW ", $4a
 	next "DEPOSIT ",  $4a
 	next "RELEASE ",  $4a
@@ -355,10 +355,10 @@ BillsPCMenuText: ; 216e1 (8:56e1)
 	next "SEE YA!"
 	db "@"
 
-BoxNoPCText: ; 21713 (8:5713)
+BoxNoPCText:
 	db "BOX No.@"
 
-KnowsHMMove:: ; 2171b (8:571b)
+KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
 	ld hl, wPartyMon1Moves
 	ld bc, wPartyMon2 - wPartyMon1
@@ -385,7 +385,7 @@ KnowsHMMove:: ; 2171b (8:571b)
 	and a
 	ret
 
-HMMoveArray: ; 21745 (8:5745)
+HMMoveArray:
 	db CUT
 	db FLY
 	db SURF
@@ -393,7 +393,7 @@ HMMoveArray: ; 21745 (8:5745)
 	db FLASH
 	db -1
 
-DisplayDepositWithdrawMenu: ; 2174b (8:574b)
+DisplayDepositWithdrawMenu:
 	coord hl, 9, 10
 	ld b, 6
 	ld c, 9
@@ -466,55 +466,55 @@ StatsCancelPCText:
 	db   "STATS"
 	next "CANCEL@"
 
-SwitchOnText: ; 0x217e9
+SwitchOnText:
 	TX_FAR _SwitchOnText
 	db "@"
 
-WhatText: ; 0x217ee
+WhatText:
 	TX_FAR _WhatText
 	db "@"
 
-DepositWhichMonText: ; 0x217f3
+DepositWhichMonText:
 	TX_FAR _DepositWhichMonText
 	db "@"
 
-MonWasStoredText: ; 0x217f8
+MonWasStoredText:
 	TX_FAR _MonWasStoredText
 	db "@"
 
-CantDepositLastMonText: ; 0x217fd
+CantDepositLastMonText:
 	TX_FAR _CantDepositLastMonText
 	db "@"
 
-BoxFullText: ; 0x21802
+BoxFullText:
 	TX_FAR _BoxFullText
 	db "@"
 
-MonIsTakenOutText: ; 0x21807
+MonIsTakenOutText:
 	TX_FAR _MonIsTakenOutText
 	db "@"
 
-NoMonText: ; 0x2180c
+NoMonText:
 	TX_FAR _NoMonText
 	db "@"
 
-CantTakeMonText: ; 0x21811
+CantTakeMonText:
 	TX_FAR _CantTakeMonText
 	db "@"
 
-ReleaseWhichMonText: ; 0x21816
+ReleaseWhichMonText:
 	TX_FAR _ReleaseWhichMonText
 	db "@"
 
-OnceReleasedText: ; 0x2181b
+OnceReleasedText:
 	TX_FAR _OnceReleasedText
 	db "@"
 
-MonWasReleasedText: ; 0x21820
+MonWasReleasedText:
 	TX_FAR _MonWasReleasedText
 	db "@"
 
-CableClubLeftGameboy:: ; 5824 (8:5825)
+CableClubLeftGameboy::
 	ld a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	ret z
@@ -531,7 +531,7 @@ CableClubLeftGameboy:: ; 5824 (8:5825)
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump JustAMomentText
 
-CableClubRightGameboy:: ; 5845 (8:5845)
+CableClubRightGameboy::
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	ret z
@@ -548,7 +548,7 @@ CableClubRightGameboy:: ; 5845 (8:5845)
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump JustAMomentText
 
-JustAMomentText:: ; 21865 (8:5865)
+JustAMomentText::
 	TX_FAR _JustAMomentText
 	db "@"
 
@@ -558,6 +558,6 @@ JustAMomentText:: ; 21865 (8:5865)
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump OpenBillsPCText
 
-OpenBillsPCText:: ; 21878 (8:5878)
+OpenBillsPCText::
 	db $FD ; FuncTX_BillsPC
 

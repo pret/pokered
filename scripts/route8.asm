@@ -1,18 +1,18 @@
-Route8Script: ; 591b6 (16:51b6)
+Route8Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route8TrainerHeaders
+	ld hl, Route8TrainerHeader0
 	ld de, Route8ScriptPointers
 	ld a, [wRoute8CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute8CurScript], a
 	ret
 
-Route8ScriptPointers: ; 591c9 (16:51c9)
+Route8ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Route8TextPointers: ; 591cf (16:51cf)
+Route8TextPointers:
 	dw Route8Text1
 	dw Route8Text2
 	dw Route8Text3
@@ -24,8 +24,7 @@ Route8TextPointers: ; 591cf (16:51cf)
 	dw Route8Text9
 	dw Route8Text10
 
-Route8TrainerHeaders: ; 591e3 (16:51e3)
-Route8TrainerHeader0: ; 591e3 (16:51e3)
+Route8TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_0
@@ -34,7 +33,7 @@ Route8TrainerHeader0: ; 591e3 (16:51e3)
 	dw Route8EndBattleText1 ; TextEndBattle
 	dw Route8EndBattleText1 ; TextEndBattle
 
-Route8TrainerHeader1: ; 591ef (16:51ef)
+Route8TrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_1
@@ -43,7 +42,7 @@ Route8TrainerHeader1: ; 591ef (16:51ef)
 	dw Route8EndBattleText2 ; TextEndBattle
 	dw Route8EndBattleText2 ; TextEndBattle
 
-Route8TrainerHeader2: ; 591fb (16:51fb)
+Route8TrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_2
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_2
@@ -52,7 +51,7 @@ Route8TrainerHeader2: ; 591fb (16:51fb)
 	dw Route8EndBattleText3 ; TextEndBattle
 	dw Route8EndBattleText3 ; TextEndBattle
 
-Route8TrainerHeader3: ; 59207 (16:5207)
+Route8TrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_3
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_3
@@ -61,7 +60,7 @@ Route8TrainerHeader3: ; 59207 (16:5207)
 	dw Route8EndBattleText4 ; TextEndBattle
 	dw Route8EndBattleText4 ; TextEndBattle
 
-Route8TrainerHeader4: ; 59213 (16:5213)
+Route8TrainerHeader4:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_4
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_4
@@ -70,7 +69,7 @@ Route8TrainerHeader4: ; 59213 (16:5213)
 	dw Route8EndBattleText5 ; TextEndBattle
 	dw Route8EndBattleText5 ; TextEndBattle
 
-Route8TrainerHeader5: ; 5921f (16:521f)
+Route8TrainerHeader5:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_5
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_5
@@ -79,7 +78,7 @@ Route8TrainerHeader5: ; 5921f (16:521f)
 	dw Route8EndBattleText6 ; TextEndBattle
 	dw Route8EndBattleText6 ; TextEndBattle
 
-Route8TrainerHeader6: ; 5922b (16:522b)
+Route8TrainerHeader6:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_6
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_6
@@ -88,7 +87,7 @@ Route8TrainerHeader6: ; 5922b (16:522b)
 	dw Route8EndBattleText7 ; TextEndBattle
 	dw Route8EndBattleText7 ; TextEndBattle
 
-Route8TrainerHeader7: ; 59237 (16:5237)
+Route8TrainerHeader7:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_7, 1
 	db ($2 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_7, 1
@@ -97,7 +96,7 @@ Route8TrainerHeader7: ; 59237 (16:5237)
 	dw Route8EndBattleText8 ; TextEndBattle
 	dw Route8EndBattleText8 ; TextEndBattle
 
-Route8TrainerHeader8: ; 59243 (16:5243)
+Route8TrainerHeader8:
 	dbEventFlagBit EVENT_BEAT_ROUTE_8_TRAINER_8, 1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_ROUTE_8_TRAINER_8, 1
@@ -108,168 +107,168 @@ Route8TrainerHeader8: ; 59243 (16:5243)
 
 	db $ff
 
-Route8Text1: ; 59250 (16:5250)
+Route8Text1:
 	TX_ASM
 	ld hl, Route8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText1: ; 5925a (16:525a)
+Route8BattleText1:
 	TX_FAR _Route8BattleText1
 	db "@"
 
-Route8EndBattleText1: ; 5925f (16:525f)
+Route8EndBattleText1:
 	TX_FAR _Route8EndBattleText1
 	db "@"
 
-Route8AfterBattleText1: ; 59264 (16:5264)
+Route8AfterBattleText1:
 	TX_FAR _Route8AfterBattleText1
 	db "@"
 
-Route8Text2: ; 59269 (16:5269)
+Route8Text2:
 	TX_ASM
 	ld hl, Route8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText2: ; 59273 (16:5273)
+Route8BattleText2:
 	TX_FAR _Route8BattleText2
 	db "@"
 
-Route8EndBattleText2: ; 59278 (16:5278)
+Route8EndBattleText2:
 	TX_FAR _Route8EndBattleText2
 	db "@"
 
-Route8AfterBattleText2: ; 5927d (16:527d)
+Route8AfterBattleText2:
 	TX_FAR _Route8AfterBattleText2
 	db "@"
 
-Route8Text3: ; 59282 (16:5282)
+Route8Text3:
 	TX_ASM
 	ld hl, Route8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText3: ; 5928c (16:528c)
+Route8BattleText3:
 	TX_FAR _Route8BattleText3
 	db "@"
 
-Route8EndBattleText3: ; 59291 (16:5291)
+Route8EndBattleText3:
 	TX_FAR _Route8EndBattleText3
 	db "@"
 
-Route8AfterBattleText3: ; 59296 (16:5296)
+Route8AfterBattleText3:
 	TX_FAR _Route8AfterBattleText3
 	db "@"
 
-Route8Text4: ; 5929b (16:529b)
+Route8Text4:
 	TX_ASM
 	ld hl, Route8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText4: ; 592a5 (16:52a5)
+Route8BattleText4:
 	TX_FAR _Route8BattleText4
 	db "@"
 
-Route8EndBattleText4: ; 592aa (16:52aa)
+Route8EndBattleText4:
 	TX_FAR _Route8EndBattleText4
 	db "@"
 
-Route8AfterBattleText4: ; 592af (16:52af)
+Route8AfterBattleText4:
 	TX_FAR _Route8AfterBattleText4
 	db "@"
 
-Route8Text5: ; 592b4 (16:52b4)
+Route8Text5:
 	TX_ASM
 	ld hl, Route8TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText5: ; 592be (16:52be)
+Route8BattleText5:
 	TX_FAR _Route8BattleText5
 	db "@"
 
-Route8EndBattleText5: ; 592c3 (16:52c3)
+Route8EndBattleText5:
 	TX_FAR _Route8EndBattleText5
 	db "@"
 
-Route8AfterBattleText5: ; 592c8 (16:52c8)
+Route8AfterBattleText5:
 	TX_FAR _Route8AfterBattleText5
 	db "@"
 
-Route8Text6: ; 592cd (16:52cd)
+Route8Text6:
 	TX_ASM
 	ld hl, Route8TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText6: ; 592d7 (16:52d7)
+Route8BattleText6:
 	TX_FAR _Route8BattleText6
 	db "@"
 
-Route8EndBattleText6: ; 592dc (16:52dc)
+Route8EndBattleText6:
 	TX_FAR _Route8EndBattleText6
 	db "@"
 
-Route8AfterBattleText6: ; 592e1 (16:52e1)
+Route8AfterBattleText6:
 	TX_FAR _Route8AfterBattleText6
 	db "@"
 
-Route8Text7: ; 592e6 (16:52e6)
+Route8Text7:
 	TX_ASM
 	ld hl, Route8TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText7: ; 592f0 (16:52f0)
+Route8BattleText7:
 	TX_FAR _Route8BattleText7
 	db "@"
 
-Route8EndBattleText7: ; 592f5 (16:52f5)
+Route8EndBattleText7:
 	TX_FAR _Route8EndBattleText7
 	db "@"
 
-Route8AfterBattleText7: ; 592fa (16:52fa)
+Route8AfterBattleText7:
 	TX_FAR _Route8AfterBattleText7
 	db "@"
 
-Route8Text8: ; 592ff (16:52ff)
+Route8Text8:
 	TX_ASM
 	ld hl, Route8TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText8: ; 59309 (16:5309)
+Route8BattleText8:
 	TX_FAR _Route8BattleText8
 	db "@"
 
-Route8EndBattleText8: ; 5930e (16:530e)
+Route8EndBattleText8:
 	TX_FAR _Route8EndBattleText8
 	db "@"
 
-Route8AfterBattleText8: ; 59313 (16:5313)
+Route8AfterBattleText8:
 	TX_FAR _Route8AfterBattleText8
 	db "@"
 
-Route8Text9: ; 59318 (16:5318)
+Route8Text9:
 	TX_ASM
 	ld hl, Route8TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route8BattleText9: ; 59322 (16:5322)
+Route8BattleText9:
 	TX_FAR _Route8BattleText9
 	db "@"
 
-Route8EndBattleText9: ; 59327 (16:5327)
+Route8EndBattleText9:
 	TX_FAR _Route8EndBattleText9
 	db "@"
 
-Route8AfterBattleText9: ; 5932c (16:532c)
+Route8AfterBattleText9:
 	TX_FAR _Route8AfterBattleText9
 	db "@"
 
-Route8Text10: ; 59331 (16:5331)
+Route8Text10:
 	TX_FAR _Route8Text10
 	db "@"

@@ -1,4 +1,4 @@
-Route22_h: ; 0x50000 to 0x50022 (34 bytes) (id=33)
+Route22_h:
 	db OVERWORLD ; tileset
 	db ROUTE_22_HEIGHT, ROUTE_22_WIDTH ; dimensions (y, x)
 	dw Route22Blocks, Route22TextPointers, Route22Script ; blocks, texts, scripts

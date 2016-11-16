@@ -177,4 +177,3 @@ _Route13Text13::
 	line "North to SILENCE"
 	cont "BRIDGE"
 	done
-

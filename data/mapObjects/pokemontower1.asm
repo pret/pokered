@@ -1,4 +1,4 @@
-PokemonTower1Object: ; 0x60452 (size=58)
+PokemonTower1Object:
 	db $1 ; border block
 
 	db $3 ; warps

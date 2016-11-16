@@ -1,4 +1,4 @@
-CeruleanGymObject: ; 0x5c834 (size=50)
+CeruleanGymObject:
 	db $3 ; border block
 
 	db $2 ; warps

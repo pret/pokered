@@ -1,4 +1,4 @@
-CeruleanHouse2_h: ; 0x74dfd to 0x74e09 (12 bytes) (id=230)
+CeruleanHouse2_h:
 	db SHIP ; tileset
 	db CERULEAN_HOUSE_2_HEIGHT, CERULEAN_HOUSE_2_WIDTH ; dimensions (y, x)
 	dw CeruleanHouse2Blocks, CeruleanHouse2TextPointers, CeruleanHouse2Script ; blocks, texts, scripts

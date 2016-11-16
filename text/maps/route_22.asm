@@ -60,7 +60,7 @@ _Route22RivalBeforeBattleText2::
 	cont "That's cool!"
 
 	para "Then I'll whip you"
-	line $52, " as a"
+	line "<PLAYER> as a"
 	cont "warm up for"
 	cont "#MON LEAGUE!"
 
@@ -88,8 +88,8 @@ _Route22RivalDefeatedText2::
 	prompt
 
 _Route22Text_511d0::
-	text $53, ": Hahaha!"
-	line $52, "! That's"
+	text "<RIVAL>: Hahaha!"
+	line "<PLAYER>! That's"
 	cont "your best? You're"
 	cont "nowhere near as"
 	cont "good as me, pal!"
@@ -102,4 +102,3 @@ _Route22FrontGateText::
 	text "#MON LEAGUE"
 	line "Front Gate"
 	done
-

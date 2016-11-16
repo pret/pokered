@@ -1,4 +1,4 @@
-UnknownDungeon2Object: ; 0x45e14 (size=73)
+UnknownDungeon2Object:
 	db $7d ; border block
 
 	db $6 ; warps

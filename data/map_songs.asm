@@ -1,4 +1,4 @@
-MapSongBanks: ; c04d (3:404d)
+MapSongBanks:
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ;PALLET_TOWN
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY
@@ -247,6 +247,3 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_GYM, BANK(Music_Gym) ; Lorelei
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; Bruno
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ; Agatha
-IF DEF(_OPTION_BEACH_HOUSE)
-	db MUSIC_ROUTES3, BANK(Music_Routes3) ; BeachHouse
-ENDC

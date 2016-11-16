@@ -8,7 +8,7 @@
 ; fields, respectively, within loops. The X is the loop index.
 ; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
 ; denote fields of the sprite slots interated over in the inner loop.
-InitMapSprites: ; 1785b (5:785b)
+InitMapSprites:
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
 ; if the map is an inside map (i.e. mapID >= $25)
@@ -29,7 +29,7 @@ InitMapSprites: ; 1785b (5:785b)
 ; This is used for both inside and outside maps, since it is called by
 ; InitOutsideMapSprites.
 ; Loads tile pattern data for sprites into VRAM.
-LoadMapSpriteTilePatterns: ; 17871 (5:7871)
+LoadMapSpriteTilePatterns:
 	ld a,[wNumSprites]
 	and a ; are there any sprites?
 	jr nz,.spritesExist
@@ -236,7 +236,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 ; de = pointer to sprite sheet
 ; bc = length in bytes
 ; a = ROM bank
-ReadSpriteSheetData: ; 17971 (5:7971)
+ReadSpriteSheetData:
 	ld a,[hli]
 	ld e,a
 	ld a,[hli]
@@ -250,7 +250,7 @@ ReadSpriteSheetData: ; 17971 (5:7971)
 
 ; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
 ; sets carry if the map is a city or route, unsets carry if not
-InitOutsideMapSprites: ; 1797b (5:797b)
+InitOutsideMapSprites:
 	ld a,[wCurMap]
 	cp a,REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
 	ret nc ; if not, return
@@ -380,7 +380,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 
 ; Chooses the correct sprite set ID depending on the player's position within
 ; the map for maps with two sprite sets.
-GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
+GetSplitMapSpriteSetID:
 	cp a,$f8
 	jr z,.route20
 	ld hl,SplitMapSpriteSets

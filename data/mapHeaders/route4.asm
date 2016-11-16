@@ -1,4 +1,4 @@
-Route4_h: ; 0x54390 to 0x543b2 (34 bytes) (id=15)
+Route4_h:
 	db OVERWORLD ; tileset
 	db ROUTE_4_HEIGHT, ROUTE_4_WIDTH ; dimensions (y, x)
 	dw Route4Blocks, Route4TextPointers, Route4Script; blocks, texts, scripts

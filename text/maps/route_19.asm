@@ -155,4 +155,3 @@ _Route19Text11::
 	line "FUCHSIA CITY -"
 	cont "SEAFOAM ISLANDS"
 	done
-

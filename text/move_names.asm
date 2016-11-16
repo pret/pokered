@@ -1,4 +1,4 @@
-MoveNames:: ; b0000 (2c:4000)
+MoveNames::
 	db "POUND@"
 	db "KARATE CHOP@"
 	db "DOUBLESLAP@"

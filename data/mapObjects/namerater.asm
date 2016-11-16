@@ -1,4 +1,4 @@
-NameRaterObject: ; 0x1dad6 (size=26)
+NameRaterObject:
 	db $a ; border block
 
 	db $2 ; warps

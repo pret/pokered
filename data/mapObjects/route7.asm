@@ -1,4 +1,4 @@
-Route7Object: ; 0x48022 (size=47)
+Route7Object:
 	db $f ; border block
 
 	db $5 ; warps

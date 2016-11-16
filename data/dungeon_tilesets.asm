@@ -1,2 +1,2 @@
-DungeonTilesets: ; c7b2 (3:47b2)
+DungeonTilesets:
 	db FOREST, MUSEUM, SHIP, CAVERN, LOBBY, MANSION, GATE, LAB, FACILITY, CEMETERY, GYM, $FF

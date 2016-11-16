@@ -162,7 +162,7 @@ INCLUDE "audio/sfx/ball_poof.asm"
 INCLUDE "audio/sfx/faint_thud.asm"
 INCLUDE "audio/sfx/run.asm"
 INCLUDE "audio/sfx/dex_page_added.asm"
-INCLUDE "audio/sfx/pokeflute_ch3.asm"
+INCLUDE "audio/sfx/pokeflute_ch6.asm"
 INCLUDE "audio/sfx/peck.asm"
 INCLUDE "audio/sfx/faint_fall.asm"
 INCLUDE "audio/sfx/battle_09.asm"
@@ -362,7 +362,7 @@ INCLUDE "audio/sfx/cry22_3.asm"
 
 SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
 
-PlayBattleMusic:: ; 0x90c6
+PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
@@ -403,7 +403,7 @@ INCLUDE "audio/engine_1.asm"
 
 
 ; an alternate start for MeetRival which has a different first measure
-Music_RivalAlternateStart:: ; 0x9b47
+Music_RivalAlternateStart::
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -414,7 +414,7 @@ Music_RivalAlternateStart:: ; 0x9b47
 	call Audio1_OverwriteChannelPointer
 	ld de, Music_MeetRival_branch_b2b5
 
-Audio1_OverwriteChannelPointer: ; 0x9b60
+Audio1_OverwriteChannelPointer:
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -422,7 +422,7 @@ Audio1_OverwriteChannelPointer: ; 0x9b60
 	ret
 
 ; an alternate tempo for MeetRival which is slightly slower
-Music_RivalAlternateTempo:: ; 0x9b65
+Music_RivalAlternateTempo::
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -431,14 +431,14 @@ Music_RivalAlternateTempo:: ; 0x9b65
 	jp Audio1_OverwriteChannelPointer
 
 ; applies both the alternate start and alternate tempo
-Music_RivalAlternateStartAndTempo:: ; 0x9b75
+Music_RivalAlternateStartAndTempo::
 	call Music_RivalAlternateStart
 	ld hl, wChannelCommandPointers
 	ld de, Music_MeetRival_branch_b19b
 	jp Audio1_OverwriteChannelPointer
 
 ; an alternate tempo for Cities1 which is used for the Hall of Fame room
-Music_Cities1AlternateTempo:: ; 0x9b81
+Music_Cities1AlternateTempo::
 	ld a, 10
 	ld [wAudioFadeOutCounterReloadValue], a
 	ld [wAudioFadeOutCounter], a
@@ -456,7 +456,7 @@ Music_Cities1AlternateTempo:: ; 0x9b81
 
 SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
 
-Music_DoLowHealthAlarm:: ; 2136e (8:536e)
+Music_DoLowHealthAlarm::
 	ld a, [wLowHealthAlarm]
 	cp $ff
 	jr z, .disableAlarm
@@ -478,7 +478,7 @@ Music_DoLowHealthAlarm:: ; 2136e (8:536e)
 
 .asm_2138a
 	ld a, $86
-	ld [wChannelSoundIDs + CH4], a ;disable sound channel?
+	ld [wChannelSoundIDs + Ch4], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -492,7 +492,7 @@ Music_DoLowHealthAlarm:: ; 2136e (8:536e)
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wChannelSoundIDs + CH4], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + Ch4], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 
@@ -538,19 +538,19 @@ INCLUDE "engine/menu/bills_pc.asm"
 INCLUDE "audio/engine_2.asm"
 
 
-Music_PokeFluteInBattle:: ; 22306 (8:6306)
+Music_PokeFluteInBattle::
 	; begin playing the "caught mon" sound effect
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrtie the channel pointers
-	ld hl, wChannelCommandPointers + CH4 * 2
-	ld de, SFX_08_PokeFlute_Ch1
+	ld hl, wChannelCommandPointers + Ch4 * 2
+	ld de, SFX_08_PokeFlute_Ch4
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch2
+	ld de, SFX_08_PokeFlute_Ch5
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch3
+	ld de, SFX_08_PokeFlute_Ch6
 
-Audio2_OverwriteChannelPointer: ; 2231d (8:631d)
+Audio2_OverwriteChannelPointer:
 	ld a, e
 	ld [hli], a
 	ld a, d
@@ -560,7 +560,7 @@ Audio2_OverwriteChannelPointer: ; 2231d (8:631d)
 
 SECTION "Audio Engine 3", ROMX, BANK[AUDIO_3]
 
-PlayPokedexRatingSfx:: ; 7d13b (1f:513b)
+PlayPokedexRatingSfx::
 	ld a, [$ffdc]
 	ld c, $0
 	ld hl, OwnedMonValues
@@ -585,7 +585,7 @@ PlayPokedexRatingSfx:: ; 7d13b (1f:513b)
 	call PlayMusic
 	jp PlayDefaultMusic
 
-PokedexRatingSfxPointers: ; 7d162 (1f:5162)
+PokedexRatingSfxPointers:
 	db SFX_DENIED,         BANK(SFX_Denied_3)
 	db SFX_POKEDEX_RATING, BANK(SFX_Pokedex_Rating_1)
 	db SFX_GET_ITEM_1,     BANK(SFX_Get_Item1_1)
@@ -594,7 +594,7 @@ PokedexRatingSfxPointers: ; 7d162 (1f:5162)
 	db SFX_GET_KEY_ITEM,   BANK(SFX_Get_Key_Item_1)
 	db SFX_GET_ITEM_2,     BANK(SFX_Get_Item2_1)
 
-OwnedMonValues: ; 7d170 (1f:5170)
+OwnedMonValues:
 	db 10, 40, 60, 90, 120, 150, $ff
 
 
@@ -633,7 +633,7 @@ INCLUDE "audio/music/pokecenter.asm"
 
 SECTION "Music 2", ROMX, BANK[AUDIO_2]
 
-INCLUDE "audio/sfx/pokeflute_ch1_ch2.asm"
+INCLUDE "audio/sfx/pokeflute_ch4_ch5.asm"
 INCLUDE "audio/sfx/unused2_2.asm"
 INCLUDE "audio/music/gymleaderbattle.asm"
 INCLUDE "audio/music/trainerbattle.asm"

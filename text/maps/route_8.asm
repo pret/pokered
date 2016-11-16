@@ -152,4 +152,3 @@ _Route8Text10::
 	line "CELADON CITY -"
 	cont "LAVENDER TOWN"
 	done
-

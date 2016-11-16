@@ -1,26 +1,26 @@
-FightingDojoScript: ; 5cd5d (17:4d5d)
+FightingDojoScript:
 	call EnableAutoTextBoxDrawing
-	ld hl, FightingDojoTrainerHeaders
+	ld hl, FightingDojoTrainerHeader0
 	ld de, FightingDojoScriptPointers
 	ld a, [wFightingDojoCurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wFightingDojoCurScript], a
 	ret
 
-FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
+FightingDojoScript_5cd70:
 	xor a
 	ld [wJoyIgnore], a
 	ld [wFightingDojoCurScript], a
 	ld [wCurMapScript], a
 	ret
 
-FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
+FightingDojoScriptPointers:
 	dw FightingDojoScript1
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw FightingDojoScript3
 
-FightingDojoScript1: ; 5cd83 (17:4d83)
+FightingDojoScript1:
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	ret nz
 	call CheckFightingMapTrainers
@@ -52,7 +52,7 @@ FightingDojoScript1: ; 5cd83 (17:4d83)
 	call DisplayTextID
 	ret
 
-FightingDojoScript3: ; 5cdc6 (17:4dc6)
+FightingDojoScript3:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, FightingDojoScript_5cd70
@@ -80,7 +80,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	ld [wCurMapScript], a
 	ret
 
-FightingDojoTextPointers: ; 5ce03 (17:4e03)
+FightingDojoTextPointers:
 	dw FightingDojoText1
 	dw FightingDojoText2
 	dw FightingDojoText3
@@ -90,8 +90,7 @@ FightingDojoTextPointers: ; 5ce03 (17:4e03)
 	dw FightingDojoText7
 	dw FightingDojoText8
 
-FightingDojoTrainerHeaders: ; 5ce13 (17:4e13)
-FightingDojoTrainerHeader0: ; 5ce13 (17:4e13)
+FightingDojoTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_0
@@ -100,7 +99,7 @@ FightingDojoTrainerHeader0: ; 5ce13 (17:4e13)
 	dw FightingDojoEndBattleText1 ; TextEndBattle
 	dw FightingDojoEndBattleText1 ; TextEndBattle
 
-FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
+FightingDojoTrainerHeader1:
 	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
 	db ($4 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_1
@@ -109,7 +108,7 @@ FightingDojoTrainerHeader1: ; 5ce1f (17:4e1f)
 	dw FightingDojoEndBattleText2 ; TextEndBattle
 	dw FightingDojoEndBattleText2 ; TextEndBattle
 
-FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
+FightingDojoTrainerHeader2:
 	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_2
@@ -118,7 +117,7 @@ FightingDojoTrainerHeader2: ; 5ce2b (17:4e2b)
 	dw FightingDojoEndBattleText3 ; TextEndBattle
 	dw FightingDojoEndBattleText3 ; TextEndBattle
 
-FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
+FightingDojoTrainerHeader3:
 	dbEventFlagBit EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
 	db ($3 << 4) ; trainer's view range
 	dwEventFlagAddress EVENT_BEAT_FIGHTING_DOJO_TRAINER_3
@@ -129,7 +128,7 @@ FightingDojoTrainerHeader3: ; 5ce37 (17:4e37)
 
 	db $ff
 
-FightingDojoText1: ; 5ce44 (17:4e44)
+FightingDojoText1:
 	TX_ASM
 	CheckEvent EVENT_DEFEATED_FIGHTING_DOJO
 	jp nz, .continue1
@@ -161,95 +160,95 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 .asm_9dba4
 	jp TextScriptEnd
 
-FightingDojoText_5ce8e: ; 5ce8e (17:4e8e)
+FightingDojoText_5ce8e:
 	TX_FAR _FightingDojoText_5ce8e
 	db "@"
 
-FightingDojoText_5ce93: ; 5ce93 (17:4e93)
+FightingDojoText_5ce93:
 	TX_FAR _FightingDojoText_5ce93
 	db "@"
 
-FightingDojoText8: ; 5ce98 (17:4e98)
+FightingDojoText8:
 	TX_FAR _FightingDojoText_5ce98
 	db "@"
 
-FightingDojoText_5ce9d: ; 5ce9d (17:4e9d)
+FightingDojoText_5ce9d:
 	TX_FAR _FightingDojoText_5ce9d
 	db "@"
 
-FightingDojoText2: ; 5cea2 (17:4ea2)
+FightingDojoText2:
 	TX_ASM
 	ld hl, FightingDojoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-FightingDojoBattleText1: ; 5ceac (17:4eac)
+FightingDojoBattleText1:
 	TX_FAR _FightingDojoBattleText1
 	db "@"
 
-FightingDojoEndBattleText1: ; 5ceb1 (17:4eb1)
+FightingDojoEndBattleText1:
 	TX_FAR _FightingDojoEndBattleText1
 	db "@"
 
-FightingDojoAfterBattleText1: ; 5ceb6 (17:4eb6)
+FightingDojoAfterBattleText1:
 	TX_FAR _FightingDojoAfterBattleText1
 	db "@"
 
-FightingDojoText3: ; 5cebb (17:4ebb)
+FightingDojoText3:
 	TX_ASM
 	ld hl, FightingDojoTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-FightingDojoBattleText2: ; 5cec5 (17:4ec5)
+FightingDojoBattleText2:
 	TX_FAR _FightingDojoBattleText2
 	db "@"
 
-FightingDojoEndBattleText2: ; 5ceca (17:4eca)
+FightingDojoEndBattleText2:
 	TX_FAR _FightingDojoEndBattleText2
 	db "@"
 
-FightingDojoAfterBattleText2: ; 5cecf (17:4ecf)
+FightingDojoAfterBattleText2:
 	TX_FAR _FightingDojoAfterBattleText2
 	db "@"
 
-FightingDojoText4: ; 5ced4 (17:4ed4)
+FightingDojoText4:
 	TX_ASM
 	ld hl, FightingDojoTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-FightingDojoBattleText3: ; 5cede (17:4ede)
+FightingDojoBattleText3:
 	TX_FAR _FightingDojoBattleText3
 	db "@"
 
-FightingDojoEndBattleText3: ; 5cee3 (17:4ee3)
+FightingDojoEndBattleText3:
 	TX_FAR _FightingDojoEndBattleText3
 	db "@"
 
-FightingDojoAfterBattleText3: ; 5cee8 (17:4ee8)
+FightingDojoAfterBattleText3:
 	TX_FAR _FightingDojoAfterBattleText3
 	db "@"
 
-FightingDojoText5: ; 5ceed (17:4eed)
+FightingDojoText5:
 	TX_ASM
 	ld hl, FightingDojoTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-FightingDojoBattleText4: ; 5cef7 (17:4ef7)
+FightingDojoBattleText4:
 	TX_FAR _FightingDojoBattleText4
 	db "@"
 
-FightingDojoEndBattleText4: ; 5cefc (17:4efc)
+FightingDojoEndBattleText4:
 	TX_FAR _FightingDojoEndBattleText4
 	db "@"
 
-FightingDojoAfterBattleText4: ; 5cf01 (17:4f01)
+FightingDojoAfterBattleText4:
 	TX_FAR _FightingDojoAfterBattleText4
 	db "@"
 
-FightingDojoText6: ; 5cf06 (17:4f06)
+FightingDojoText6:
 ; Hitmonlee Poké Ball
 	TX_ASM
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
@@ -280,11 +279,11 @@ FightingDojoText6: ; 5cf06 (17:4f06)
 .done
 	jp TextScriptEnd
 
-WantHitmonleeText: ; 5cf49 (17:4f49)
+WantHitmonleeText:
 	TX_FAR _WantHitmonleeText
 	db "@"
 
-FightingDojoText7: ; 5cf4e (17:4f4e)
+FightingDojoText7:
 ; Hitmonchan Poké Ball
 	TX_ASM
 	CheckEitherEventSet EVENT_GOT_HITMONLEE, EVENT_GOT_HITMONCHAN
@@ -315,10 +314,10 @@ FightingDojoText7: ; 5cf4e (17:4f4e)
 .done
 	jp TextScriptEnd
 
-WantHitmonchanText: ; 5cf91 (17:4f91)
+WantHitmonchanText:
 	TX_FAR _WantHitmonchanText
 	db "@"
 
-OtherHitmonText: ; 5cf96 (17:4f96)
+OtherHitmonText:
 	TX_FAR _OtherHitmonText
 	db "@"

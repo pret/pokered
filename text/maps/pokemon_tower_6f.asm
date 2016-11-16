@@ -59,4 +59,3 @@ _PokemonTower6Text6::
 	text "Be gone..."
 	line "Intruders..."
 	done
-

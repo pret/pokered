@@ -1,4 +1,4 @@
-FuchsiaHouse2Object: ; 0x75180 (size=45)
+FuchsiaHouse2Object:
 	db $17 ; border block
 
 	db $2 ; warps

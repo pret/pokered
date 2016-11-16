@@ -1,4 +1,4 @@
-Route16Object: ; 0x58afc (size=136)
+Route16Object:
 	db $f ; border block
 
 	db $9 ; warps

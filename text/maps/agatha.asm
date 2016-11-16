@@ -42,4 +42,3 @@ _AgathaDontRunAwayText::
 	text "Someone's voice:"
 	line "Don't run away!"
 	done
-

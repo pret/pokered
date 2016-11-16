@@ -47,4 +47,3 @@ _Route1Text3::
 	line "PALLET TOWN -"
 	cont "VIRIDIAN CITY"
 	done
-

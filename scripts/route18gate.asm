@@ -1,4 +1,4 @@
-Route18GateScript: ; 49876 (12:5876)
+Route18GateScript:
 	ld hl, wd732
 	res 5, [hl]
 	call EnableAutoTextBoxDrawing
@@ -6,13 +6,13 @@ Route18GateScript: ; 49876 (12:5876)
 	ld hl, Route18GateScriptPointers
 	jp CallFunctionInTable
 
-Route18GateScriptPointers: ; 49887 (12:5887)
+Route18GateScriptPointers:
 	dw Route18GateScript0
 	dw Route18GateScript1
 	dw Route18GateScript2
 	dw Route18GateScript3
 
-Route18GateScript0: ; 4988f (12:588f)
+Route18GateScript0:
 	call Route16GateScript_49755
 	ret nz
 	ld hl, CoordsData_498cc
@@ -43,21 +43,21 @@ Route18GateScript0: ; 4988f (12:588f)
 	ld [wRoute18GateCurScript], a
 	ret
 
-CoordsData_498cc: ; 498cc (12:58cc)
+CoordsData_498cc:
 	db $03,$04
 	db $04,$04
 	db $05,$04
 	db $06,$04
 	db $FF
 
-Route18GateScript1: ; 498d5 (12:58d5)
+Route18GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld a, $f0
 	ld [wJoyIgnore], a
 
-Route18GateScript2: ; 498df (12:58df)
+Route18GateScript2:
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -70,7 +70,7 @@ Route18GateScript2: ; 498df (12:58df)
 	ld [wRoute18GateCurScript], a
 	ret
 
-Route18GateScript3: ; 498f9 (12:58f9)
+Route18GateScript3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
@@ -82,11 +82,11 @@ Route18GateScript3: ; 498f9 (12:58f9)
 	ld [wRoute18GateCurScript], a
 	ret
 
-Route18GateTextPointers: ; 4990d (12:590d)
+Route18GateTextPointers:
 	dw Route18GateText1
 	dw Route18GateText2
 
-Route18GateText1: ; 49911 (12:5911)
+Route18GateText1:
 	TX_ASM
 	call Route16GateScript_49755
 	jr z, .asm_3c84d
@@ -99,14 +99,14 @@ Route18GateText1: ; 49911 (12:5911)
 .asm_a8410
 	jp TextScriptEnd
 
-Route18GateText_49928: ; 49928 (12:5928)
+Route18GateText_49928:
 	TX_FAR _Route18GateText_49928
 	db "@"
 
-Route18GateText_4992d: ; 4992d (12:592d)
+Route18GateText_4992d:
 	TX_FAR _Route18GateText_4992d
 	db "@"
 
-Route18GateText2: ; 49932 (12:5932)
+Route18GateText2:
 	TX_FAR _Route18GateText_49932
 	db "@"

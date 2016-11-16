@@ -58,7 +58,7 @@ _SilphCo11Text2::
 	done
 
 _SilphCo11Text3::
-	text "Ah ", $52, "!"
+	text "Ah <PLAYER>!"
 	line "So we meet again!"
 
 	para "The PRESIDENT and"
@@ -132,4 +132,3 @@ _SilphCo10Text_6237b::
 	text "The monitor has"
 	line "#MON on it!"
 	done
-

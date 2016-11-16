@@ -1,4 +1,4 @@
-Route5Object: ; 0x545a3 (size=47)
+Route5Object:
 	db $a ; border block
 
 	db $5 ; warps

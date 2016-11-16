@@ -1,4 +1,4 @@
-LavenderPokecenterObject: ; 0x5c8f4 (size=44)
+LavenderPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

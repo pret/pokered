@@ -1,3 +1,3 @@
-GoodRodMons: ; e27f (3:627f)
+GoodRodMons:
 	dbw 10,GOLDEEN
 	dbw 10,POLIWAG

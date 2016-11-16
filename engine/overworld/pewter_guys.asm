@@ -1,4 +1,4 @@
-PewterGuys: ; 37ca1 (d:7ca1)
+PewterGuys:
 	ld hl, wSimulatedJoypadStatesEnd
 	ld a, [wSimulatedJoypadStatesIndex]
 	dec a ; this decrement causes it to overwrite the last byte before $FF in the list
@@ -48,14 +48,14 @@ PewterGuys: ; 37ca1 (d:7ca1)
 	inc hl
 	jr .findMatchingCoordsLoop
 
-PointerTable_37ce6: ; 37ce6 (d:7ce6)
+PointerTable_37ce6:
 	dw PewterMuseumGuyCoords
 	dw PewterGymGuyCoords
 
 ; these are the four coordinates of the spaces below, above, to the left and
 ; to the right of the museum guy, and pointers to different movements for
 ; the player to make to get positioned before the main movement.
-PewterMuseumGuyCoords: ; 37cea (d:7cea)
+PewterMuseumGuyCoords:
 	db 18, 27
 	dw .down
 	db 16, 27
@@ -78,7 +78,7 @@ PewterMuseumGuyCoords: ; 37cea (d:7cea)
 ; different movements for the player to make to get positioned before the
 ; main movement
 ; $00 is a pause
-PewterGymGuyCoords: ; 37d06 (d:7d06)
+PewterGymGuyCoords:
 	db 16, 34
 	dw .one
 	db 17, 35

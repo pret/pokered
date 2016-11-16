@@ -1,4 +1,4 @@
-PokemonTower5Object: ; 0x60a48 (size=65)
+PokemonTower5Object:
 	db $1 ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-UndergroundPathNSObject: ; 0x61f2a (size=20)
+UndergroundPathNSObject:
 	db $1 ; border block
 
 	db $2 ; warps

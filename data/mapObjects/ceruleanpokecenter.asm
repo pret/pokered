@@ -1,4 +1,4 @@
-CeruleanPokecenterObject: ; 0x5c65f (size=44)
+CeruleanPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

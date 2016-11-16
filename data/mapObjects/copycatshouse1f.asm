@@ -1,4 +1,4 @@
-CopycatsHouse1FObject: ; 0x75ee3 (size=46)
+CopycatsHouse1FObject:
 	db $a ; border block
 
 	db $3 ; warps

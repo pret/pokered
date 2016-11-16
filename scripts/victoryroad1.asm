@@ -4,7 +4,7 @@ VictoryRoad1Script:
 	res 5, [hl]
 	call nz, .next
 	call EnableAutoTextBoxDrawing
-	ld hl, VictoryRoad1TrainerHeaders
+	ld hl, VictoryRoad1TrainerHeader0
 	ld de, VictoryRoad1ScriptPointers
 	ld a, [wVictoryRoad1CurScript]
 	call ExecuteCurMapScriptInTable
@@ -46,7 +46,6 @@ VictoryRoad1TextPointers:
 	dw BoulderText
 	dw BoulderText
 
-VictoryRoad1TrainerHeaders:
 VictoryRoad1TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_1_TRAINER_0
 	db ($2 << 4) ; trainer's view range

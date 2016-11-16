@@ -1,4 +1,4 @@
-CeladonPokecenterObject: ; 0x488d2 (size=44)
+CeladonPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps

@@ -1,4 +1,4 @@
-LavenderTown_h: ; 0x44000 to 0x4402d (45 bytes) (bank=11) (id=4)
+LavenderTown_h:
 	db OVERWORLD ; tileset
 	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
 	dw LavenderTownBlocks, LavenderTownTextPointers, LavenderTownScript ; blocks, texts, scripts

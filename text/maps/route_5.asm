@@ -3,4 +3,3 @@ _Route5Text1::
 	line "CERULEAN CITY -"
 	cont "VERMILION CITY"
 	done
-

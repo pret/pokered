@@ -1,4 +1,4 @@
-CableClubNPC: ; 71c5 (1:71c5)
+CableClubNPC:
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
 	CheckEvent EVENT_GOT_POKEDEX
@@ -109,35 +109,36 @@ CableClubNPC: ; 71c5 (1:71c5)
 	ld [hl], a
 	jpab LinkMenu
 
-CableClubNPCAreaReservedFor2FriendsLinkedByCableText: ; 72b3 (1:72b3)
+CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
 	TX_FAR _CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	db "@"
 
-CableClubNPCWelcomeText: ; 72b8 (1:72b8)
+CableClubNPCWelcomeText:
 	TX_FAR _CableClubNPCWelcomeText
 	db "@"
 
-CableClubNPCPleaseApplyHereHaveToSaveText: ; 72bd (1:72bd)
+CableClubNPCPleaseApplyHereHaveToSaveText:
 	TX_FAR _CableClubNPCPleaseApplyHereHaveToSaveText
 	db "@"
 
-CableClubNPCPleaseWaitText: ; 72c2 (1:72c2)
+CableClubNPCPleaseWaitText:
 	TX_FAR _CableClubNPCPleaseWaitText
-	db $a, "@"
+	TX_DELAY
+	db "@"
 
-CableClubNPCLinkClosedBecauseOfInactivityText: ; 72c8 (1:72c8)
+CableClubNPCLinkClosedBecauseOfInactivityText:
 	TX_FAR _CableClubNPCLinkClosedBecauseOfInactivityText
 	db "@"
 
-CableClubNPCPleaseComeAgainText: ; 72cd (1:72cd)
+CableClubNPCPleaseComeAgainText:
 	TX_FAR _CableClubNPCPleaseComeAgainText
 	db "@"
 
-CableClubNPCMakingPreparationsText: ; 72d2 (1:72d2)
+CableClubNPCMakingPreparationsText:
 	TX_FAR _CableClubNPCMakingPreparationsText
 	db "@"
 
-CloseLinkConnection: ; 72d7 (1:72d7)
+CloseLinkConnection:
 	call Delay3
 	ld a, CONNECTION_NOT_ESTABLISHED
 	ld [hSerialConnectionStatus], a

@@ -1,4 +1,4 @@
-Route7GateObject: ; 0x1e185 (size=42)
+Route7GateObject:
 	db $a ; border block
 
 	db $4 ; warps

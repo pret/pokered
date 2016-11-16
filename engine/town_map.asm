@@ -1,4 +1,4 @@
-DisplayTownMap: ; 70e3e (1c:4e3e)
+DisplayTownMap:
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
@@ -105,11 +105,11 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 
 INCLUDE "data/town_map_order.asm"
 
-TownMapCursor: ; 70f40 (1c:4f40)
+TownMapCursor:
 	INCBIN "gfx/town_map_cursor.1bpp"
 TownMapCursorEnd:
 
-LoadTownMap_Nest: ; 70f60 (1c:4f60)
+LoadTownMap_Nest:
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
@@ -131,17 +131,17 @@ LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	ld [hl], a
 	ret
 
-MonsNestText: ; 70f89 (1c:4f89)
+MonsNestText:
 	db "'s NEST@"
 
-LoadTownMap_Fly: ; 70f90 (1c:4f90)
+LoadTownMap_Fly:
 	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld hl, vSprites + $40
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), $c
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
@@ -179,9 +179,9 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld c, 15
 	call DelayFrames
 	coord hl, 18, 0
-	ld [hl], $ed
+	ld [hl], "▲"
 	coord hl, 19, 0
-	ld [hl], $ee
+	ld [hl], "▼"
 	pop hl
 .inputLoop
 	push hl
@@ -243,10 +243,10 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wFlyLocationsList + 11
 	jr .pressedDown
 
-ToText: ; 7106d (1c:506d)
+ToText:
 	db "To@"
 
-BuildFlyLocationsList: ; 71070 (1c:5070)
+BuildFlyLocationsList:
 	ld hl, wFlyLocationsList - 1
 	ld [hl], $ff
 	inc hl
@@ -270,11 +270,11 @@ BuildFlyLocationsList: ; 71070 (1c:5070)
 	ld [hl], $ff
 	ret
 
-TownMapUpArrow: ; 71093 (1c:5093)
+TownMapUpArrow:
 	INCBIN "gfx/up_arrow.1bpp"
 TownMapUpArrowEnd:
 
-LoadTownMap: ; 7109b (1c:509b)
+LoadTownMap:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -324,11 +324,11 @@ LoadTownMap: ; 7109b (1c:509b)
 	ld [wTownMapSpriteBlinkingEnabled], a
 	ret
 
-CompressedMap: ; 71100 (1c:5100)
+CompressedMap:
 ; you can decompress this file with the redrle program in the extras/ dir
 	INCBIN "gfx/town_map.rle"
 
-ExitTownMap: ; 711ab (1c:51ab)
+ExitTownMap:
 ; clear town map graphics data and load usual graphics data
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
@@ -340,7 +340,7 @@ ExitTownMap: ; 711ab (1c:51ab)
 	call UpdateSprites
 	jp RunDefaultPaletteCommand
 
-DrawPlayerOrBirdSprite: ; 711c4 (1c:51c4)
+DrawPlayerOrBirdSprite:
 ; a = map number
 ; b = OAM base tile
 	push af
@@ -355,18 +355,18 @@ DrawPlayerOrBirdSprite: ; 711c4 (1c:51c4)
 	call WritePlayerOrBirdSpriteOAM
 	pop hl
 	ld de, wcd6d
-.asm_711dc
+.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp $50
-	jr nz, .asm_711dc
+	cp "@"
+	jr nz, .loop
 	ld hl, wOAMBuffer
 	ld de, wTileMapBackup
 	ld bc, $a0
 	jp CopyData
 
-DisplayWildLocations: ; 711ef (1c:51ef)
+DisplayWildLocations:
 	callba FindWildLocationsOfMon
 	call ZeroOutDuplicatesInList
 	ld hl, wOAMBuffer
@@ -397,8 +397,8 @@ DisplayWildLocations: ; 711ef (1c:51ef)
 	jr nz, .drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
 	coord hl, 1, 7
-	ld b, $2
-	ld c, $f
+	ld b, 2
+	ld c, 15
 	call TextBoxBorder
 	coord hl, 2, 9
 	ld de, AreaUnknownText
@@ -414,10 +414,10 @@ DisplayWildLocations: ; 711ef (1c:51ef)
 	ld bc, $a0
 	jp CopyData
 
-AreaUnknownText: ; 7124a (1c:524a)
+AreaUnknownText:
 	db " AREA UNKNOWN@"
 
-TownMapCoordsToOAMCoords: ; 71258 (1c:5258)
+TownMapCoordsToOAMCoords:
 ; in: lower nybble of a = x, upper nybble of a = y
 ; out: b and [hl] = (y * 8) + 24, c and [hl+1] = (x * 8) + 24
 	push af
@@ -435,14 +435,14 @@ TownMapCoordsToOAMCoords: ; 71258 (1c:5258)
 	ld [hli], a
 	ret
 
-WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
+WritePlayerOrBirdSpriteOAM:
 	ld a, [wOAMBaseTile]
 	and a
 	ld hl, wOAMBuffer + $90 ; for player sprite
 	jr z, WriteTownMapSpriteOAM
 	ld hl, wOAMBuffer + $80 ; for bird sprite
 
-WriteTownMapSpriteOAM: ; 71279 (1c:5279)
+WriteTownMapSpriteOAM:
 	push hl
 
 ; Subtract 4 from c (X coord) and 4 from b (Y coord). However, the carry from c
@@ -454,7 +454,7 @@ WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	ld c, l
 	pop hl
 
-WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
+WriteAsymmetricMonPartySpriteOAM:
 ; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
 	lb de, 2, 2
@@ -487,7 +487,7 @@ WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 	jr nz, .loop
 	ret
 
-WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
+WriteSymmetricMonPartySpriteOAM:
 ; Writes 4 OAM blocks for a mon party sprite other than a helix. All the
 ; sprites other than the helix one have a vertical line of symmetry which allows
 ; the X-flip OAM bit to be used so that only 2 rather than 4 tile patterns are
@@ -529,7 +529,7 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 	jr nz, .loop
 	ret
 
-ZeroOutDuplicatesInList: ; 712d9 (1c:52d9)
+ZeroOutDuplicatesInList:
 ; replace duplicate bytes in the list of wild pokemon locations with 0
 	ld de, wBuffer
 .loop
@@ -552,7 +552,7 @@ ZeroOutDuplicatesInList: ; 712d9 (1c:52d9)
 	inc hl
 	jr .zeroDuplicatesLoop
 
-LoadTownMapEntry: ; 712f1 (1c:52f1)
+LoadTownMapEntry:
 ; in: a = map number
 ; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
 	cp REDS_HOUSE_1F
@@ -586,11 +586,11 @@ INCLUDE "data/town_map_entries.asm"
 
 INCLUDE "text/map_names.asm"
 
-MonNestIcon: ; 716be (1c:56be)
+MonNestIcon:
 	INCBIN "gfx/mon_nest_icon.1bpp"
 MonNestIconEnd:
 
-TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
+TownMapSpriteBlinkingAnimation:
 	ld a, [wAnimCounter]
 	inc a
 	cp 25

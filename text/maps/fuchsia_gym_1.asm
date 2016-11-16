@@ -24,4 +24,3 @@ _KogaAfterBattleText::
 	para "Here! Take the"
 	line "SOULBADGE!"
 	prompt
-

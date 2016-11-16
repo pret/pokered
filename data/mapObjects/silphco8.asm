@@ -1,4 +1,4 @@
-SilphCo8Object: ; 0x56613 (size=90)
+SilphCo8Object:
 	db $2e ; border block
 
 	db $7 ; warps

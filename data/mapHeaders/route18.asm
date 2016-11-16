@@ -1,4 +1,4 @@
-Route18_h: ; 0x58c38 to 0x58c5a (34 bytes) (id=29)
+Route18_h:
 	db OVERWORLD ; tileset
 	db ROUTE_18_HEIGHT, ROUTE_18_WIDTH ; dimensions (y, x)
 	dw Route18Blocks, Route18TextPointers, Route18Script ; blocks, texts, scripts

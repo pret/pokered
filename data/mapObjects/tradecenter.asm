@@ -1,4 +1,4 @@
-TradeCenterObject: ; 0x4fd53 (size=10)
+TradeCenterObject:
 	db $e ; border block
 
 	db $0 ; warps

@@ -1,4 +1,4 @@
-CeladonMansion2Object: ; 0x48745 (size=39)
+CeladonMansion2Object:
 	db $f ; border block
 
 	db $4 ; warps

@@ -6,4 +6,3 @@ _DiglettsCaveEntRoute11Text1::
 	para "It goes right to"
 	line "VIRIDIAN CITY!"
 	done
-

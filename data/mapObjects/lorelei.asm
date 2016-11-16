@@ -1,4 +1,4 @@
-LoreleiObject: ; 0x76280 (size=44)
+LoreleiObject:
 	db $3 ; border block
 
 	db $4 ; warps

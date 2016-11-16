@@ -16,4 +16,3 @@ _SafariZoneRestHouse3Text3::
 	text "Whew! I'm tired"
 	line "from all the fun!"
 	done
-

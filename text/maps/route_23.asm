@@ -36,4 +36,3 @@ _Route23Text8::
 	text "VICTORY ROAD GATE"
 	line "- #MON LEAGUE"
 	done
-

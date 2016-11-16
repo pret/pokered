@@ -9,7 +9,7 @@ FuchsiaPokecenterTextPointers:
 	dw FuchsiaTradeNurseText
 
 FuchsiaHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 FuchsiaPokecenterText2:
 	TX_FAR _FuchsiaPokecenterText1
@@ -20,4 +20,4 @@ FuchsiaPokecenterText3:
 	db "@"
 
 FuchsiaTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST

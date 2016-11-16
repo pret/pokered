@@ -1,4 +1,4 @@
-DisplayStartMenu:: ; 2acd (0:2acd)
+DisplayStartMenu::
 	ld a,BANK(StartMenu_Pokedex)
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
@@ -7,7 +7,7 @@ DisplayStartMenu:: ; 2acd (0:2acd)
 	ld a, SFX_START_MENU
 	call PlaySound
 
-RedisplayStartMenu:: ; 2adf (0:2adf)
+RedisplayStartMenu::
 	callba DrawStartMenu
 	callba PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
 	call UpdateSprites
@@ -76,7 +76,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	jp z,StartMenu_Option
 
 ; EXIT falls through to here
-CloseStartMenu:: ; 2b70 (0:2b70)
+CloseStartMenu::
 	call Joypad
 	ld a,[hJoyPressed]
 	bit 0,a ; was A button newly pressed?

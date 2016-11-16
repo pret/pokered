@@ -35,4 +35,3 @@ _CinnabarIslandText7::
 	para "The Hot-Headed"
 	line "Quiz Master!"
 	done
-

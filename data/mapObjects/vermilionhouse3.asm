@@ -1,4 +1,4 @@
-VermilionHouse3Object: ; 0x19c25 (size=26)
+VermilionHouse3Object:
 	db $a ; border block
 
 	db $2 ; warps

@@ -94,4 +94,3 @@ _SilphCo2AfterBattleText4::
 	line "be merged with"
 	cont "TEAM ROCKET!"
 	done
-

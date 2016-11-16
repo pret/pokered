@@ -1,4 +1,4 @@
-RockTunnel1Object: ; 0x445f6 (size=127)
+RockTunnel1Object:
 	db $3 ; border block
 
 	db $8 ; warps

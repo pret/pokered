@@ -1,4 +1,4 @@
-Route23Object: ; 0x50361 (size=81)
+Route23Object:
 	db $f ; border block
 
 	db $4 ; warps

@@ -1,6 +1,6 @@
 UnknownDungeon3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, UnknownDungeon3TrainerHeaders
+	ld hl, MewtwoTrainerHeader
 	ld de, .ScriptPointers
 	ld a, [wUnknownDungeon3CurScript]
 	call ExecuteCurMapScriptInTable
@@ -17,7 +17,6 @@ UnknownDungeon3TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-UnknownDungeon3TrainerHeaders:
 MewtwoTrainerHeader:
 	dbEventFlagBit EVENT_BEAT_MEWTWO
 	db ($0 << 4) ; trainer's view range

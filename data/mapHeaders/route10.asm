@@ -1,4 +1,4 @@
-Route10_h: ; 0x582d4 to 0x582f6 (34 bytes) (id=21)
+Route10_h:
 	db OVERWORLD ; tileset
 	db ROUTE_10_HEIGHT, ROUTE_10_WIDTH ; dimensions (y, x)
 	dw Route10Blocks, Route10TextPointers, Route10Script ; blocks, texts, scripts

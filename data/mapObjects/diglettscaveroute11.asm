@@ -1,4 +1,4 @@
-DiglettsCaveEntranceRoute11Object: ; 0x1e5ca (size=34)
+DiglettsCaveEntranceRoute11Object:
 	db $7d ; border block
 
 	db $3 ; warps

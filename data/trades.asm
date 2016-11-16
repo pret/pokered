@@ -1,4 +1,4 @@
-TradeMons: ; 71b7b (1c:5b7b)
+TradeMons:
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
 	dw NIDORINO,  NIDORINA
 	db 0,"TERRY@@@@@@"

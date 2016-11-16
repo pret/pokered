@@ -1,4 +1,4 @@
-ActivatePC: ; 17e2c (5:7e2c)
+ActivatePC:
 	call SaveScreenTilesToBuffer2
 	ld a, SFX_TURN_ON_PC
 	call PlaySound
@@ -9,7 +9,7 @@ ActivatePC: ; 17e2c (5:7e2c)
 	set 3, [hl]
 	call LoadScreenTilesFromBuffer2
 	call Delay3
-PCMainMenu: ; 17e48 (5:7e48)
+PCMainMenu:
 	callba DisplayPCMainMenu
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
@@ -58,19 +58,19 @@ PCMainMenu: ; 17e48 (5:7e48)
 	call PrintText
 	callba PlayerPC
 	jr ReloadMainMenu
-OaksPC: ; 17ec0 (5:7ec0)
+OaksPC:
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
 	callba OpenOaksPC
 	jr ReloadMainMenu
-PKMNLeague: ; 17ed2 (5:7ed2)
+PKMNLeague:
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
 	callba PKMNLeaguePC
 	jr ReloadMainMenu
-BillsPC: ; 17ee4 (5:7ee4)
+BillsPC:
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
@@ -83,13 +83,13 @@ BillsPC: ; 17ee4 (5:7ee4)
 .printText
 	call PrintText
 	callba BillsPC_
-ReloadMainMenu: ; 17f06 (5:7f06)
+ReloadMainMenu:
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call ReloadMapData
 	call UpdateSprites
 	jp PCMainMenu
-LogOff: ; 17f13 (5:7f13)
+LogOff:
 	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
@@ -98,41 +98,41 @@ LogOff: ; 17f13 (5:7f13)
 	res 5, [hl]
 	ret
 
-TurnedOnPC1Text: ; 17f23 (5:7f23)
+TurnedOnPC1Text:
 	TX_FAR _TurnedOnPC1Text
 	db "@"
 
-AccessedBillsPCText: ; 17f28 (5:7f28)
+AccessedBillsPCText:
 	TX_FAR _AccessedBillsPCText
 	db "@"
 
-AccessedSomeonesPCText: ; 17f2d (5:7f2d)
+AccessedSomeonesPCText:
 	TX_FAR _AccessedSomeonesPCText
 	db "@"
 
-AccessedMyPCText: ; 17f32 (5:7f32)
+AccessedMyPCText:
 	TX_FAR _AccessedMyPCText
 	db "@"
 
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
-RemoveItemByID: ; 17f37 (5:7f37)
+RemoveItemByID:
 	ld hl, wBagItems
 	ld a, [hItemToRemoveID]
 	ld b, a
 	xor a
 	ld [hItemToRemoveIndex], a
-.asm_17f40
+.loop
 	ld a, [hli]
-	cp $ff
+	cp -1 ; reached terminator?
 	ret z
 	cp b
-	jr z, .asm_17f4f
+	jr z, .foundItem
 	inc hl
 	ld a, [hItemToRemoveIndex]
 	inc a
 	ld [hItemToRemoveIndex], a
-	jr .asm_17f40
-.asm_17f4f
+	jr .loop
+.foundItem
 	ld a, $1
 	ld [wItemQuantity], a
 	ld a, [hItemToRemoveIndex]

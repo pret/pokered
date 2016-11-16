@@ -1,4 +1,4 @@
-Route12Object: ; 0x5869a (size=118)
+Route12Object:
 	db $43 ; border block
 
 	db $4 ; warps

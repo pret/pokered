@@ -1,4 +1,4 @@
-IndigoPlateau_h: ; 0x5091e to 0x50935 (23 bytes) (id=9)
+IndigoPlateau_h:
 	db PLATEAU ; tileset
 	db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauBlocks, IndigoPlateauTextPointers, IndigoPlateauScript ; blocks, texts, scripts

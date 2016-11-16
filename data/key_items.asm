@@ -1,4 +1,4 @@
-KeyItemBitfield: ; e799 (3:6799)
+KeyItemBitfield:
 	db %11110000
 	db %00000001
 	db %11110000

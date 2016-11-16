@@ -1,4 +1,4 @@
-Route16_h: ; 0x58ada to 0x58afc (34 bytes) (id=27)
+Route16_h:
 	db OVERWORLD ; tileset
 	db ROUTE_16_HEIGHT, ROUTE_16_WIDTH ; dimensions (y, x)
 	dw Route16Blocks, Route16TextPointers, Route16Script ; blocks, texts, scripts

@@ -19,4 +19,3 @@ _SSAnne1Text2::
 	line "challenged by the"
 	cont "more bored ones!"
 	done
-

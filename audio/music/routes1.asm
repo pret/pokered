@@ -1,4 +1,4 @@
-Music_Routes1_Ch1:: ; 9bde (2:5bde)
+Music_Routes1_Ch0::
 	tempo 152
 	volume 7, 7
 	vibrato 4, 2, 3
@@ -106,7 +106,7 @@ Music_Routes1_branch_9be9::
 	endchannel
 
 
-Music_Routes1_Ch2:: ; 9c51 (2:5c51)
+Music_Routes1_Ch1::
 	duty 2
 
 Music_Routes1_branch_9c53::
@@ -234,7 +234,7 @@ Music_Routes1_branch_9c8d::
 	endchannel
 
 
-Music_Routes1_Ch3:: ; 9cd8 (2:5cd8)
+Music_Routes1_Ch2::
 	vibrato 8, 2, 5
 	notetype 12, 1, 3
 
@@ -309,7 +309,7 @@ Music_Routes1_branch_9cdd::
 	endchannel
 
 
-Music_Routes1_Ch4:: ; 9d24 (2:5d24)
+Music_Routes1_Ch3::
 	dspeed 12
 	rest 4
 	mutedsnare1 2
@@ -400,5 +400,5 @@ Music_Routes1_Ch4:: ; 9d24 (2:5d24)
 	rest 2
 	mutedsnare1 2
 	mutedsnare1 2
-	loopchannel 0, Music_Routes1_Ch4
+	loopchannel 0, Music_Routes1_Ch3
 	endchannel

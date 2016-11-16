@@ -1,4 +1,4 @@
-SSAnne5Object: ; 0x6172b (size=54)
+SSAnne5Object:
 	db $23 ; border block
 
 	db $2 ; warps

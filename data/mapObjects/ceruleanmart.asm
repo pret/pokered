@@ -1,4 +1,4 @@
-CeruleanMartObject: ; 0x5c8a8 (size=38)
+CeruleanMartObject:
 	db $0 ; border block
 
 	db $2 ; warps

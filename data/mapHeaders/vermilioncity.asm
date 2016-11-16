@@ -1,4 +1,4 @@
-VermilionCity_h: ; 0x18998 to 0x189ba (34 bytes) (bank=6) (id=5)
+VermilionCity_h:
 	db OVERWORLD ; tileset
 	db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
 	dw VermilionCityBlocks, VermilionCityTextPointers, VermilionCityScript ; blocks, texts, scripts
