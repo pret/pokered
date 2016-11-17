@@ -10,6 +10,8 @@ AskName:
 	call z, ClearScreenArea ; only if in wild battle
 	ld a, [wcf91]
 	ld [wd11e], a
+	ld a, [wcf91 + 1]
+	ld [wd11e + 1], a
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
@@ -477,11 +479,18 @@ PrintNamingText:
 	dec a
 	jr z, .notNickname
 	ld a, [wcf91]
+	ld e, a
 	ld [wMonPartySpriteSpecies], a
-	push af
+	ld a, [wcf91 + 1]
+	ld d, a
+	ld [wMonPartySpriteSpecies + 1], a
+	push de
 	callba WriteMonPartySpriteOAMBySpecies
-	pop af
+	pop de
+	ld a, e
 	ld [wd11e], a
+	ld a, d
+	ld [wd11e + 1], a
 	call GetMonName
 	coord hl, 4, 1
 	call PlaceString

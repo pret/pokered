@@ -426,6 +426,8 @@ StatusScreen2:
 	call StatusScreen_ClearName
 	ld a, [wMonHIndex]
 	ld [wd11e], a
+	ld a, [wMonHIndex + 1]
+	ld [wd11e + 1], a
 	call GetMonName
 	coord hl, 9, 1
 	call PlaceString

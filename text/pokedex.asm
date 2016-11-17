@@ -2509,3 +2509,33 @@ _CelebiDexEntry::
 	next "only in peaceful"
 	next "times"
 	dex
+
+_TreeckoDexEntry::
+	text "It quickly scales"
+	next "even vertical"
+	next "walls. It senses"
+
+	page "humidity with its"
+	next "tail to predict"
+	next "the weather"
+	dex
+
+_GrovyleDexEntry::
+	text "It lives in dense"
+	next "jungles. While"
+	next "closing in on its"
+
+	page "prey, it leaps"
+	next "from branch to"
+	next "branch"
+	dex
+
+_SceptileDexEntry::
+	text "The leaves that"
+	next "grow on its arms"
+	next "can slice down"
+
+	page "thick trees. It"
+	next "is without peer"
+	next "in jungle combat"
+	dex

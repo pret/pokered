@@ -3242,6 +3242,8 @@ GetName::
 ; returns pointer to name in de
 	ld a,[wd0b5]
 	ld [wd11e],a
+	ld a,[wd0b5 + 1]
+	ld [wd11e + 1],a
 
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -3560,21 +3562,6 @@ PrintLetterDelay::
 	pop bc
 	pop de
 	pop hl
-	ret
-
-; Copies [hl, bc) to [de, bc - hl).
-; In other words, the source data is from hl up to but not including bc,
-; and the destination is de.
-CopyDataUntil::
-	ld a,[hli]
-	ld [de],a
-	inc de
-	ld a,h
-	cp b
-	jr nz,CopyDataUntil
-	ld a,l
-	cp c
-	jr nz,CopyDataUntil
 	ret
 
 ; Function to remove a pokemon from the party or the current box.

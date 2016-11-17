@@ -104,3 +104,18 @@ _RemovePokemon:
 	ld bc, wBoxMonNicksEnd
 .asm_7c15
 	jp CopyDataUntil
+
+; Copies [hl, bc) to [de, bc - hl).
+; In other words, the source data is from hl up to but not including bc,
+; and the destination is de.
+CopyDataUntil::
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,h
+	cp b
+	jr nz,CopyDataUntil
+	ld a,l
+	cp c
+	jr nz,CopyDataUntil
+	ret

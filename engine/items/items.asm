@@ -1432,9 +1432,17 @@ ItemUseMedicine:
 	ld d,$01
 	callab PrintStatsBox ; display new stats text box
 	call WaitForTextScrollButtonPress ; wait for button press
+	ld a, [wd11e]
+	push af
+	ld a, [wLoadedMonSpecies]
+	ld [wd11e], a
+	ld a, [wLoadedMonSpecies + 1]
+	ld [wd11e + 1], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation],a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
+	pop af
+	ld [wd11e], a
 	xor a
 	ld [wForceEvolution],a
 	callab TryEvolvingMon ; evolve pokemon, if appropriate

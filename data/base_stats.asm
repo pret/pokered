@@ -250,9 +250,9 @@ BaseStatsPointers::
 	dbw Bank(LugiaBaseStats), LugiaBaseStats
 	dbw Bank(Ho_OhBaseStats), Ho_OhBaseStats
 	dbw Bank(CelebiBaseStats), CelebiBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(TreeckoBaseStats), TreeckoBaseStats
+	dbw Bank(GrovyleBaseStats), GrovyleBaseStats
+	dbw Bank(SceptileBaseStats), SceptileBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats
 	dbw Bank(DratiniBaseStats), DratiniBaseStats

@@ -254,3 +254,7 @@ CryData:
 	db $09, $28, $60; Lugia
 	db $09, $18, $60; Ho-Oh
 	db $23, $A2, $6F; Celebi
+	db $12, $50, $20; Treecko
+	db $12, $30, $40; Grovyle
+	db $12, $10, $70; Sceptile
+

@@ -253,9 +253,9 @@ PokedexEntryPointers:
 	dw LugiaDexEntry
 	dw Ho_OhDexEntry
 	dw CelebiDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw TreeckoDexEntry
+	dw GrovyleDexEntry
+	dw SceptileDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -2028,6 +2028,27 @@ CelebiDexEntry:
 	db 2,0
 	dw 110
 	TX_FAR _CelebiDexEntry
+	db "@"
+
+TreeckoDexEntry:
+	db "WOOD GECKO@"
+	db 1,8
+	dw 110
+	TX_FAR _TreeckoDexEntry
+	db "@"
+
+GrovyleDexEntry:
+	db "WOOD GECKO@"
+	db 2,11
+	dw 476
+	TX_FAR _GrovyleDexEntry
+	db "@"
+
+SceptileDexEntry:
+	db "FOREST@"
+	db 5,7
+	dw 1151
+	TX_FAR _SceptileDexEntry
 	db "@"
 
 MissingNoDexEntry:
