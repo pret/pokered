@@ -12,13 +12,7 @@ Route1Text1:
 	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
 	call PrintText
-	ld de, TREECKO
-	ld c, 5
-	call GivePokemon
-	ld de, GROVYLE
-	ld c, 16
-	call GivePokemon
-	lb bc, RARE_CANDY, 99
+	lb bc, POTION, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, Route1Text_1cae8
