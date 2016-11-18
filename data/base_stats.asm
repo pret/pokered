@@ -253,7 +253,7 @@ BaseStatsPointers::
 	dbw Bank(TreeckoBaseStats), TreeckoBaseStats
 	dbw Bank(GrovyleBaseStats), GrovyleBaseStats
 	dbw Bank(SceptileBaseStats), SceptileBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
-	dbw Bank(DratiniBaseStats), DratiniBaseStats
+	dbw Bank(TorchicBaseStats), TorchicBaseStats
+	dbw Bank(CombuskenBaseStats), CombuskenBaseStats
+	dbw Bank(BlazikenBaseStats), BlazikenBaseStats
 	dbw Bank(SwampertBaseStats), SwampertBaseStats

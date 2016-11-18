@@ -256,9 +256,9 @@ EvosMovesPointerTable:
 	dbw Bank(Mon252_EvosMoves), Mon252_EvosMoves
 	dbw Bank(Mon253_EvosMoves), Mon253_EvosMoves
 	dbw Bank(Mon254_EvosMoves), Mon254_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon255_EvosMoves), Mon255_EvosMoves
+	dbw Bank(Mon256_EvosMoves), Mon256_EvosMoves
+	dbw Bank(Mon257_EvosMoves), Mon257_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3625,4 +3625,59 @@ Mon254_EvosMoves:
 	db 26,SCREECH
 	db 35,AGILITY
 	db 43,SLAM
+	db 0
+	
+Mon255_EvosMoves:
+;TORCHIC
+;Evolutions
+	db EV_LEVEL,16
+	dw COMBUSKEN
+	db 0
+;Learnset
+	db 7,FOCUS_ENERGY
+	db 10,EMBER
+	db 16,PECK
+	db 19,SAND_ATTACK
+;	db 25,FIRE_SPIN
+	db 28,QUICK_ATTACK
+	db 34,SLASH
+	db 37,MIRROR_MOVE
+	db 43,FLAMETHROWER
+	db 0
+	
+Mon256_EvosMoves:
+;COMBUSKEN
+;Evolutions
+	db EV_LEVEL,36
+	dw BLAZIKEN
+	db 0
+;Learnset
+	db 7,FOCUS_ENERGY
+	db 10,EMBER
+	db 16,DOUBLE_KICK
+	db 17,PECK
+	db 21,SAND_ATTACK
+;	db 28,BULK_UP
+	db 32,QUICK_ATTACK
+	db 39,SLASH
+	db 43,MIRROR_MOVE
+;	db 50,SKY_UPPERCUT
+	db 0
+
+Mon257_EvosMoves:
+;BLAZIKEN
+;Evolutions
+	db 0
+;Learnset
+	db 7,FOCUS_ENERGY
+	db 13,EMBER
+	db 16,DOUBLE_KICK
+	db 17,PECK
+	db 21,SAND_ATTACK
+;	db 28,BULK_UP
+	db 32,QUICK_ATTACK
+;	db 36,BLAZE_KICK
+	db 42,SLASH
+	db 49,MIRROR_MOVE
+;	db 59,SKY_UPPERCUT
 	db 0

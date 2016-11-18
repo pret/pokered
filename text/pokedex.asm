@@ -2539,3 +2539,33 @@ _SceptileDexEntry::
 	next "is without peer"
 	next "in jungle combat"
 	dex
+	
+_TorchicDexEntry::
+	text "It has a flame"
+	next "sac inside its"
+	next "belly that"
+
+	page "perpetually burns."
+	next "It feels warm if"
+	next "hugged"
+	dex
+	
+_CombuskenDexEntry::
+	text "It boosts its"
+	next "concentration by"
+	next "emitting harsh"
+
+	page "cries. Its kicks"
+	next "have outstanding"
+	next "destructive power"
+	dex
+	
+_BlazikenDexEntry::
+	text "Flames spout from"
+	next "its wrists,"
+	next "enveloping its"
+
+	page "knuckles. Its"
+	next "punches scorch"
+	next "its foes"
+	dex

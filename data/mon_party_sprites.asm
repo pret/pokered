@@ -126,8 +126,8 @@ MonPartyData:
 	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Lugia/Ho-Oh
 	dn SPRITE_GRASS, SPRITE_GRASS			;Celebi/Treecko
 	dn SPRITE_GRASS, SPRITE_GRASS			;Grovyle/Sceptile
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Torchic/Combusken
+	dn SPRITE_BIRD_M, SPRITE_MON			;Blaziken/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
