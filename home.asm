@@ -1987,9 +1987,6 @@ GetItemName::
 	pop hl
 	ret
 
-GetMachineName_::
-; copies the name of the TM/HM in [wd11e] to wcd6d
-	add sp, -8
 GetMachineName::
 	push hl
 	push de
@@ -3265,8 +3262,11 @@ GetName::
 	; BUG: This applies to all names instead of just items.
 	ld a,[wd0b5]
 	cp HM_01
-	jp nc, GetMachineName_
+	jr c, .notMachine
+	add sp, 8
+	jp GetMachineName
 
+.notMachine
 	;2-7 = OTHER ENTRIES
 	ld a,[wPredefBank]
 	ld [H_LOADEDROMBANK],a
