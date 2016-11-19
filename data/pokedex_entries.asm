@@ -256,9 +256,9 @@ PokedexEntryPointers:
 	dw TreeckoDexEntry
 	dw GrovyleDexEntry
 	dw SceptileDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw TorchicDexEntry
+	dw CombuskenDexEntry
+	dw BlazikenDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -2049,6 +2049,27 @@ SceptileDexEntry:
 	db 5,7
 	dw 1151
 	TX_FAR _SceptileDexEntry
+	db "@"
+	
+TorchicDexEntry:
+	db "CHICK@"
+	db 1,4
+	dw 55
+	TX_FAR _TorchicDexEntry
+	db "@"
+
+CombuskenDexEntry:
+	db "YOUNG FOWL@"
+	db 2,11
+	dw 430
+	TX_FAR _CombuskenDexEntry
+	db "@"
+
+BlazikenDexEntry:
+	db "FOREST@"
+	db 6,3
+	dw 1146
+	TX_FAR _BlazikenDexEntry
 	db "@"
 
 MissingNoDexEntry:

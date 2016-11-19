@@ -257,4 +257,6 @@ CryData:
 	db $12, $50, $20; Treecko
 	db $12, $30, $40; Grovyle
 	db $12, $10, $70; Sceptile
-
+	db $0E, $DF, $04; Torchic
+	db $14, $28, $C0; Combusken
+	db $14, $11, $FF; Blaziken
