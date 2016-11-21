@@ -259,9 +259,9 @@ PokedexEntryPointers:
 	dw TorchicDexEntry
 	dw CombuskenDexEntry
 	dw BlazikenDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw MudkipDexEntry
+	dw MarshtompDexEntry
+	dw SwampertDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
 	dw DratiniDexEntry
@@ -2070,6 +2070,27 @@ BlazikenDexEntry:
 	db 6,3
 	dw 1146
 	TX_FAR _BlazikenDexEntry
+	db "@"
+
+MudkipDexEntry:
+	db "MUD FISH@"
+	db 1,4
+	dw 168
+	TX_FAR _MudkipDexEntry
+	db "@"
+
+MarshtompDexEntry:
+	db "MUD FISH@"
+	db 2,4
+	dw 617
+	TX_FAR _MarshtompDexEntry
+	db "@"
+
+SwampertDexEntry:
+	db "MUD FISH@"
+	db 4,11
+	dw 1806
+	TX_FAR _SwampertDexEntry
 	db "@"
 
 MissingNoDexEntry:

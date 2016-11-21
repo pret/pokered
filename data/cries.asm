@@ -260,3 +260,6 @@ CryData:
 	db $0E, $DF, $04; Torchic
 	db $14, $28, $C0; Combusken
 	db $14, $11, $FF; Blaziken
+	db $1D, $77, $40; Mudkip
+	db $1D, $55, $44; Marshtomp
+	db $1D, $33, $99; Swampert

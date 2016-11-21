@@ -193,7 +193,7 @@ MonsterNames:
 	db "JUMPLUFF@@"
 	db "AIPOM@@@@@"
 	db "SUNKERN@@@"
-	db "FUNFLORA@@"
+	db "SUNFLORA@@"
 	db "YANMA@@@@@"
 	db "WOOPER@@@@"
 	db "QUAGSIRE@@"

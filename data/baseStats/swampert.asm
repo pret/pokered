@@ -4,26 +4,26 @@ SwampertBaseStats::
 	db 110 ; base attack
 	db 90 ; base defense
 	db 60 ; base speed
-	db 87 ; base special
+	db 88 ; base special
 	db WATER ; species type 1
 	db GROUND ; species type 2
 	db 45 ; catch rate
 	db 210 ; base exp yield
-	INCBIN "pic/bmon/tyrogue.pic",0,1 ; 55, sprite dimensions
-	dw TyroguePicFront
-	dw TyroguePicBack
+	INCBIN "pic/bmon/swampert.pic",0,1 ; 55, sprite dimensions
+	dw SwampertPicFront
+	dw SwampertPicBack
 	; attacks known at lvl 0
-	db GROWL
 	db TACKLE
+	db GROWL
 	db WATER_GUN
-	db 0
+	db 0 ; MUD_SLAP
 	db 3 ; growth rate
 	; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10
-	tmlearn 17,18,19,20
-	tmlearn 29,30,31,32
-	tmlearn 33,34,35,40
-	tmlearn 44,45,46
-	tmlearn 49,50,55
-	db Bank(TyroguePicFront) ; padding
+	tmlearn 6,7,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 20
+	tmlearn 26,28,31,32
+	tmlearn 34
+	tmlearn 44
+	tmlearn 53,54
+	db Bank(SwampertPicFront) ; padding

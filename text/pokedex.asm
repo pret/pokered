@@ -2569,3 +2569,33 @@ _BlazikenDexEntry::
 	next "punches scorch"
 	next "its foes"
 	dex
+
+_MudkipDexEntry::
+	text "To alert it, the"
+	next "fin on its head"
+	next "senses the flow"
+
+	page "of water. It has"
+	next "the strength to"
+	next "lift boulders"
+	dex
+
+_MarshtompDexEntry::
+	text "Its sturdy legs"
+	next "give it sure"
+	next "footing, even in"
+
+	page "mud. It burrows"
+	next "into dirt to"
+	next "sleep"
+	dex
+
+_SwampertDexEntry::
+	text "It can swim while"
+	next "towing a large"
+	next "ship. It bashes"
+
+	page "down foes with a"
+	next "swing of its"
+	next "thick arms"
+	dex

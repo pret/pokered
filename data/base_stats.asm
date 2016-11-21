@@ -256,4 +256,6 @@ BaseStatsPointers::
 	dbw Bank(TorchicBaseStats), TorchicBaseStats
 	dbw Bank(CombuskenBaseStats), CombuskenBaseStats
 	dbw Bank(BlazikenBaseStats), BlazikenBaseStats
+	dbw Bank(MudkipBaseStats), MudkipBaseStats
+	dbw Bank(MarshtompBaseStats), MarshtompBaseStats
 	dbw Bank(SwampertBaseStats), SwampertBaseStats
