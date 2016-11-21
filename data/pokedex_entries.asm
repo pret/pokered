@@ -1716,7 +1716,7 @@ DunsparceDexEntry:
 	db "@"
 	
 GligarDexEntry:
-	db "FLYSCORP@"
+	db "FLYSCORPIO@"
 	db 3,7
 	dw 1429
 	TX_FAR _GligarDexEntry
