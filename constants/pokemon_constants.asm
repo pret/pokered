@@ -263,4 +263,8 @@ const_value = 1
 	const MUDKIP       ; $105
 	const MARSHTOMP    ; $106
 	const SWAMPERT     ; $107
+	const POOCHYENA    ; $108
+	const MIGHTYENA    ; $109
+	const ZIGZAGOON    ; $10A
+	const LINOONE      ; $10B
 

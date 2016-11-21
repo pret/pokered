@@ -262,10 +262,10 @@ EvosMovesPointerTable:
 	dbw Bank(Mon258_EvosMoves), Mon258_EvosMoves
 	dbw Bank(Mon259_EvosMoves), Mon259_EvosMoves
 	dbw Bank(Mon260_EvosMoves), Mon260_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon261_EvosMoves), Mon261_EvosMoves
+	dbw Bank(Mon262_EvosMoves), Mon262_EvosMoves
+	dbw Bank(Mon263_EvosMoves), Mon263_EvosMoves
+	dbw Bank(Mon264_EvosMoves), Mon264_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 
 Mon112_EvosMoves:
@@ -3733,4 +3733,78 @@ Mon260_EvosMoves:
 ;	db 39,MUDDY_WATER
 ;	db 46,PROTECT
 	db 52,EARTHQUAKE
+	db 0
+	
+Mon261_EvosMoves:
+;POOCHYENA
+;Evolutions
+	db EV_LEVEL,18
+	dw MIGHTYENA
+	db 0
+;Learnset
+;	db 5,HOWL
+	db 8,SAND_ATTACK
+	db 13,BITE
+;	db 17,ODOR_SLEUTH
+	db 21,ROAR
+;	db 25,SWAGGER
+;	db 29,SCARY_FACE
+	db 33,TAKE_DOWN
+;	db 37,TAUNT
+;	db 41,CRUNCH
+;	db 45,THIEF
+	db 0
+
+Mon262_EvosMoves:
+;MIGHTYENA
+;Evolutions
+	db 0
+;Learnset
+;	db 5,HOWL
+	db 8,SAND_ATTACK
+	db 13,BITE
+;	db 17,ODOR_SLEUTH
+	db 22,ROAR
+;	db 27,SWAGGER
+;	db 32,SCARY_FACE
+	db 37,TAKE_DOWN
+;	db 42,TAUNT
+;	db 47,CRUNCH
+;	db 52,THIEF
+	db 0
+
+Mon263_EvosMoves:
+;ZIGZAGOON
+;Evolutions
+	db EV_LEVEL,20
+	dw LINOONE
+	db 0
+;Learnset
+	db 5,TAIL_WHIP
+	db 9,HEADBUTT
+	db 13,SAND_ATTACK
+;	db 17,ODOR_SLEUTH
+;	db 21,MUD_SPORT
+	db 25,PIN_MISSILE
+;	db 29,COVET
+;	db 33,FLAIL
+	db 37,REST
+;	db 41,BELLY_DRUM
+	db 0
+
+Mon264_EvosMoves:
+;LINOONE
+;Evolutions
+	db 0
+;Learnset
+	db 5,TAIL_WHIP
+	db 9,HEADBUTT
+	db 13,SAND_ATTACK
+;	db 17,ODOR_SLEUTH
+;	db 23,MUD_SPORT
+	db 29,FURY_SWIPES
+;	db 35,COVET
+	db 41,SLASH
+	db 47,REST
+;	db 53,BELLY_DRUM
 	db 0

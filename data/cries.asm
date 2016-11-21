@@ -263,3 +263,8 @@ CryData:
 	db $1D, $77, $40; Mudkip
 	db $1D, $55, $44; Marshtomp
 	db $1D, $33, $99; Swampert
+	db $1F, $20, $40; Poochyena
+	db $15, $00, $80; Mightyena
+	db $22, $00, $80; Zigzagoon
+	db $22, $20, $FF; Linoone
+	

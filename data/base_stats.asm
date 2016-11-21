@@ -259,3 +259,7 @@ BaseStatsPointers::
 	dbw Bank(MudkipBaseStats), MudkipBaseStats
 	dbw Bank(MarshtompBaseStats), MarshtompBaseStats
 	dbw Bank(SwampertBaseStats), SwampertBaseStats
+	dbw Bank(PoochyenaBaseStats), PoochyenaBaseStats
+	dbw Bank(MightyenaBaseStats), MightyenaBaseStats
+	dbw Bank(ZigzagoonBaseStats), ZigzagoonBaseStats
+	dbw Bank(LinooneBaseStats), LinooneBaseStats
