@@ -259,9 +259,9 @@ EvosMovesPointerTable:
 	dbw Bank(Mon255_EvosMoves), Mon255_EvosMoves
 	dbw Bank(Mon256_EvosMoves), Mon256_EvosMoves
 	dbw Bank(Mon257_EvosMoves), Mon257_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon258_EvosMoves), Mon258_EvosMoves
+	dbw Bank(Mon259_EvosMoves), Mon259_EvosMoves
+	dbw Bank(Mon260_EvosMoves), Mon260_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
 	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
@@ -3680,4 +3680,57 @@ Mon257_EvosMoves:
 	db 42,SLASH
 	db 49,MIRROR_MOVE
 ;	db 59,SKY_UPPERCUT
+	db 0
+
+Mon258_EvosMoves:
+;MUDKIP
+;Evolutions
+	db EV_LEVEL,16
+	dw MARSHTOMP
+	db 0
+;Learnset
+;	db 6,MUD_SLAP
+	db 10,WATER_GUN
+	db 15,BIDE
+;	db 19,FORESIGHT
+;	db 24,MUD_SPORT
+	db 28,TAKE_DOWN
+;	db 33,WHIRLPOOL
+;	db 37,PROTECT
+	db 42,HYDRO_PUMP
+	db 0
+
+Mon259_EvosMoves:
+;MARSHTOMP
+;Evolutions
+	db EV_LEVEL,36
+	dw SWAMPERT
+	db 0
+;Learnset
+;	db 6,MUD_SLAP
+	db 10,WATER_GUN
+	db 15,BIDE
+;	db 20,FORESIGHT
+;	db 25,MUD_SPORT
+	db 31,TAKE_DOWN
+;	db 37,MUDDY_WATER
+;	db 42,PROTECT
+	db 46,EARTHQUAKE
+	db 0
+
+Mon260_EvosMoves:
+;SWAMPERT
+;Evolutions
+	db 0
+;Learnset
+;	db 6,MUD_SLAP
+	db 10,WATER_GUN
+	db 15,BIDE
+;	db 16,MUD_SHOT
+;	db 20,FORESIGHT
+;	db 25,MUD_SPORT
+	db 31,TAKE_DOWN
+;	db 39,MUDDY_WATER
+;	db 46,PROTECT
+	db 52,EARTHQUAKE
 	db 0
