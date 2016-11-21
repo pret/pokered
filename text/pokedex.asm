@@ -2599,3 +2599,44 @@ _SwampertDexEntry::
 	next "swing of its"
 	next "thick arms"
 	dex
+
+_PoochyenaDexEntry::
+	text "A #MON with a"
+	next "persistent nature,"
+	next "It chases its"
+
+	page "chosen prey until"
+	next "the prey becomes"
+	next "exhausted"
+	dex
+	
+_MightyenaDexEntry::
+	text "It chases down"
+	next "prey in a pack of"
+	next "around ten. They"
+
+	page "defeat foes with"
+	next "perfectly coord-"
+	next "inated teamwork"
+	dex
+	
+_ZigzagoonDexEntry::
+	text "A #MON with"
+	next "abundant curios-"
+	next "ity. It shows an"
+
+	page "interest in every-"
+	next "thing so it always"
+	next "zigs and zags"
+	dex
+	
+_LinooneDexEntry::
+	text "When running in a"
+	next "straight line, it"
+	next "can easily top 60"
+
+	page "miles an hour. It"
+	next "has a tough time"
+	next "with curved roads"
+	dex
+	

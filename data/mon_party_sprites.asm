@@ -129,8 +129,8 @@ MonPartyData:
 	dn SPRITE_BIRD_M, SPRITE_BIRD_M			;Torchic/Combusken
 	dn SPRITE_BIRD_M, SPRITE_WATER			;Blaziken/Mudkip
 	dn SPRITE_WATER, SPRITE_WATER			;Marshtomp/Swampert
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Poochyena/Mightyena
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Zigzagoon/Linoone
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

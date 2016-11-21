@@ -5186,6 +5186,10 @@ INCLUDE "data/baseStats/blaziken.asm"
 INCLUDE "data/baseStats/mudkip.asm"
 INCLUDE "data/baseStats/marshtomp.asm"
 INCLUDE "data/baseStats/swampert.asm"
+INCLUDE "data/baseStats/poochyena.asm"
+INCLUDE "data/baseStats/mightyena.asm"
+INCLUDE "data/baseStats/zigzagoon.asm"
+INCLUDE "data/baseStats/linoone.asm"
 
 
 SECTION "Bank 2F", ROMX, BANK[$2f]
@@ -5512,3 +5516,14 @@ MarshtompPicFront::       INCBIN "pic/bmon/marshtomp.pic"
 MarshtompPicBack::        INCBIN "pic/monback/marshtompb.pic"
 SwampertPicFront::       INCBIN "pic/bmon/swampert.pic"
 SwampertPicBack::        INCBIN "pic/monback/swampertb.pic"
+PoochyenaPicFront::       INCBIN "pic/bmon/poochyena.pic"
+PoochyenaPicBack::        INCBIN "pic/monback/poochyenab.pic"
+
+SECTION "Bank 35", ROMX, BANK[$35]
+
+MightyenaPicFront::       INCBIN "pic/bmon/mightyena.pic"
+MightyenaPicBack::        INCBIN "pic/monback/mightyenab.pic"
+ZigzagoonPicFront::       INCBIN "pic/bmon/zigzagoon.pic"
+ZigzagoonPicBack::        INCBIN "pic/monback/zigzagoonb.pic"
+LinoonePicFront::       INCBIN "pic/bmon/linoone.pic"
+LinoonePicBack::        INCBIN "pic/monback/linooneb.pic"

@@ -262,10 +262,10 @@ PokedexEntryPointers:
 	dw MudkipDexEntry
 	dw MarshtompDexEntry
 	dw SwampertDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
-	dw DratiniDexEntry
+	dw PoochyenaDexEntry
+	dw MightyenaDexEntry
+	dw ZigzagoonDexEntry
+	dw LinooneDexEntry
 
 
 ; string: species name
@@ -1716,7 +1716,7 @@ DunsparceDexEntry:
 	db "@"
 	
 GligarDexEntry:
-	db "FLYSCORPION@"
+	db "FLYSCORP@"
 	db 3,7
 	dw 1429
 	TX_FAR _GligarDexEntry
@@ -2066,7 +2066,7 @@ CombuskenDexEntry:
 	db "@"
 
 BlazikenDexEntry:
-	db "FOREST@"
+	db "BLAZE@"
 	db 6,3
 	dw 1146
 	TX_FAR _BlazikenDexEntry
@@ -2092,7 +2092,35 @@ SwampertDexEntry:
 	dw 1806
 	TX_FAR _SwampertDexEntry
 	db "@"
+	
+PoochyenaDexEntry:
+	db "BITE@"
+	db 1,8
+	dw 300
+	TX_FAR _PoochyenaDexEntry
+	db "@"
 
+MightyenaDexEntry:
+	db "BITE@"
+	db 3,3
+	dw 816
+	TX_FAR _MightyenaDexEntry
+	db "@"
+	
+ZigzagoonDexEntry:
+	db "TINY COON@"
+	db 1,4
+	dw 386
+	TX_FAR _ZigzagoonDexEntry
+	db "@"
+	
+LinooneDexEntry:
+	db "RUSHING@"
+	db 1,8
+	dw 717
+	TX_FAR _LinooneDexEntry
+	db "@"
+	
 MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
