@@ -267,4 +267,8 @@ CryData:
 	db $15, $00, $80; Mightyena
 	db $22, $00, $80; Zigzagoon
 	db $22, $20, $FF; Linoone
-	
+	db $15, $CE, $04; Wurmple
+	db $13, $6F, $08; Silcoon
+	db $16, $C7, $80; Beautifly
+	db $13, $8F, $10; Cascoon
+	db $16, $A7, $70; Dustox

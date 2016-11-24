@@ -264,6 +264,10 @@ const_value = 1
 	const DEX_MIGHTYENA  ; 262
 	const DEX_ZIGZAGOON  ; 263
 	const DEX_LINOONE    ; 264
+	const DEX_WURMPLE    ; 265
+	const DEX_SILCOON    ; 266
+	const DEX_BEAUTIFLY  ; 267
+	const DEX_CASCOON    ; 268
+	const DEX_DUSTOX     ; 269
 	
-
-NUM_POKEMON    EQU 264
+NUM_POKEMON    EQU 269

@@ -263,3 +263,8 @@ BaseStatsPointers::
 	dbw Bank(MightyenaBaseStats), MightyenaBaseStats
 	dbw Bank(ZigzagoonBaseStats), ZigzagoonBaseStats
 	dbw Bank(LinooneBaseStats), LinooneBaseStats
+	dbw Bank(WurmpleBaseStats), WurmpleBaseStats
+	dbw Bank(SilcoonBaseStats), SilcoonBaseStats
+	dbw Bank(BeautiflyBaseStats), BeautiflyBaseStats
+	dbw Bank(CascoonBaseStats), CascoonBaseStats
+	dbw Bank(DustoxBaseStats), DustoxBaseStats

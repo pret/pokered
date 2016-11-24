@@ -266,7 +266,11 @@ EvosMovesPointerTable:
 	dbw Bank(Mon262_EvosMoves), Mon262_EvosMoves
 	dbw Bank(Mon263_EvosMoves), Mon263_EvosMoves
 	dbw Bank(Mon264_EvosMoves), Mon264_EvosMoves
-	dbw Bank(Mon147_EvosMoves), Mon147_EvosMoves
+	dbw Bank(Mon265_EvosMoves), Mon265_EvosMoves
+	dbw Bank(Mon266_EvosMoves), Mon266_EvosMoves
+	dbw Bank(Mon267_EvosMoves), Mon267_EvosMoves
+	dbw Bank(Mon268_EvosMoves), Mon268_EvosMoves
+	dbw Bank(Mon269_EvosMoves), Mon269_EvosMoves
 
 Mon112_EvosMoves:
 ;RHYDON
@@ -3807,4 +3811,60 @@ Mon264_EvosMoves:
 	db 41,SLASH
 	db 47,REST
 ;	db 53,BELLY_DRUM
+	db 0
+
+Mon265_EvosMoves:
+;WURMPLE
+;Evolutions
+	db EV_LEVEL,7
+	dw CASCOON
+	db 0
+;Learnset
+	db 5,POISON_STING
+	db 0
+
+Mon266_EvosMoves:
+;SILCOON
+;Evolutions
+	db EV_LEVEL,10
+	dw BEAUTIFLY
+	db 0
+;Learnset
+	db 7,HARDEN
+	db 0
+
+Mon267_EvosMoves:
+;BEAUTIFLY
+;Evolutions
+	db 0
+;Learnset
+	db 10,ABSORB
+	db 13,GUST
+	db 17,STUN_SPORE
+	db 24,MEGA_DRAIN
+	db 27,WHIRLWIND
+	db 0
+
+Mon268_EvosMoves:
+;CASCOON
+;Evolutions
+	db EV_LEVEL,10
+	dw DUSTOX
+	db 0
+;Learnset
+	db 7,HARDEN
+	db 0
+
+Mon269_EvosMoves:
+;DUSTOX
+;Evolutions
+	db 0
+;Learnset
+	db 10,CONFUSION
+	db 13,GUST
+	db 17,POISONPOWDER
+	db 24,PSYBEAM
+	db 27,WHIRLWIND
+	db 31,LIGHT_SCREEN
+	db 38,TOXIC
 	db 0

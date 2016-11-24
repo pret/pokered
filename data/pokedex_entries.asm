@@ -266,6 +266,11 @@ PokedexEntryPointers:
 	dw MightyenaDexEntry
 	dw ZigzagoonDexEntry
 	dw LinooneDexEntry
+	dw WurmpleDexEntry
+	dw SilcoonDexEntry
+	dw BeautiflyDexEntry
+	dw CascoonDexEntry
+	dw DustoxDexEntry
 
 
 ; string: species name
@@ -2120,7 +2125,42 @@ LinooneDexEntry:
 	dw 717
 	TX_FAR _LinooneDexEntry
 	db "@"
-	
+
+WurmpleDexEntry:
+	db "WORM@"
+	db 1,0
+	dw 79
+	TX_FAR _WurmpleDexEntry
+	db "@"
+
+SilcoonDexEntry:
+	db "COCOON@"
+	db 2,0
+	dw 220
+	TX_FAR _SilcoonDexEntry
+	db "@"
+
+BeautiflyDexEntry:
+	db "BUTTERFLY@"
+	db 3,3
+	dw 626
+	TX_FAR _BeautiflyDexEntry
+	db "@"
+
+CascoonDexEntry:
+	db "COCOON@"
+	db 2,4
+	dw 254
+	TX_FAR _CascoonDexEntry
+	db "@"
+
+DustoxDexEntry:
+	db "TOXIC MOTH@"
+	db 3,11
+	dw 697
+	TX_FAR _DustoxDexEntry
+	db "@"
+
 MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m

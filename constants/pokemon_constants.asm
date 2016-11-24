@@ -267,4 +267,8 @@ const_value = 1
 	const MIGHTYENA    ; $109
 	const ZIGZAGOON    ; $10A
 	const LINOONE      ; $10B
-
+	const WURMPLE      ; $10C
+	const SILCOON      ; $10D
+	const BEAUTIFLY    ; $10E
+	const CASCOON      ; $10F
+	const DUSTOX       ; $110

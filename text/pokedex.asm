@@ -2639,4 +2639,53 @@ _LinooneDexEntry::
 	next "has a tough time"
 	next "with curved roads"
 	dex
-	
+
+_WurmpleDexEntry::
+	text "Often targeted by"
+	next "bird #MON, it"
+	next "resists by"
+
+	page "releasing poison"
+	next "from its tail"
+	next "spikes"
+	dex
+
+_SilcoonDexEntry::
+	text "It wraps silk"
+	next "around branches"
+	next "of a tree. It"
+
+	page "drinks rainwater"
+	next "on its silk while"
+	next "it waits"
+	dex
+
+_BeautiflyDexEntry::
+	text "Despite its looks"
+	next "it is aggressive."
+	next "It jabs with its"
+
+	page "long, thin mouth"
+	next "if disturbed when"
+	next "gathering pollen"
+	dex
+
+_CascoonDexEntry::
+	text "It never forgets"
+	next "any attack it"
+	next "endured while in"
+
+	page "the cocoon. After"
+	next "evolution, it"
+	next "seeks payback"
+	dex
+
+_DustoxDexEntry::
+	text "Toxic powder is"
+	next "scattered with"
+	next "each flap. At"
+
+	page "night, it's known"
+	next "to strip leaves"
+	next "off city trees"
+	dex
