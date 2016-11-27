@@ -3816,8 +3816,9 @@ Mon264_EvosMoves:
 Mon265_EvosMoves:
 ;WURMPLE
 ;Evolutions
-	db EV_LEVEL,7
+	db EV_RANDOM,7
 	dw CASCOON
+	dw SILCOON
 	db 0
 ;Learnset
 	db 5,POISON_STING

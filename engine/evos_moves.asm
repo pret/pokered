@@ -108,6 +108,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, b
 	cp EV_LEVEL
 	jr z, .checkLevel
+	cp EV_RANDOM
+	jr z, .checkEvoRandom
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -117,6 +119,23 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
+	jr .doEvolution
+.checkEvoRandom
+	ld a, [hli] ; level requirement
+	ld b, a
+	ld a, [wLoadedMonLevel]
+	cp b ; is the mon's level greater than the evolution requirement?
+	jp c, .nextEvoEntry3
+	; Use DV's on mon to determine which of the two possible evolutions to use. (50% chance)
+	; We'll just add the DVs together, and use bit 0 to determine which evolution mon to use.
+	ld a, [wLoadedMonDVs]
+	ld b, a
+	ld a, [wLoadedMonDVs + 1]
+	add b
+	bit 0, a
+	jr z, .doEvolution
+	inc hl
+	inc hl
 	jr .doEvolution
 .checkItemEvo
 	ld a, [hli]
@@ -296,6 +315,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld l, e
 	ld h, d
 	jp Evolution_PartyMonLoop
+
+.nextEvoEntry3
+	inc hl
 
 .nextEvoEntry1
 	inc hl
