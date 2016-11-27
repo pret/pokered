@@ -269,5 +269,8 @@ const_value = 1
 	const DEX_BEAUTIFLY  ; 267
 	const DEX_CASCOON    ; 268
 	const DEX_DUSTOX     ; 269
+	const DEX_LOTAD      ; 270
+	const DEX_LOMBRE     ; 271
+	const DEX_LUDICOLO   ; 272
 	
-NUM_POKEMON    EQU 269
+NUM_POKEMON    EQU 272

@@ -268,3 +268,6 @@ BaseStatsPointers::
 	dbw Bank(BeautiflyBaseStats), BeautiflyBaseStats
 	dbw Bank(CascoonBaseStats), CascoonBaseStats
 	dbw Bank(DustoxBaseStats), DustoxBaseStats
+	dbw Bank(LotadBaseStats), LotadBaseStats
+	dbw Bank(LombreBaseStats), LombreBaseStats
+	dbw Bank(LudicoloBaseStats), LudicoloBaseStats

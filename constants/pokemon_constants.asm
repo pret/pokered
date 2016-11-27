@@ -272,3 +272,6 @@ const_value = 1
 	const BEAUTIFLY    ; $10E
 	const CASCOON      ; $10F
 	const DUSTOX       ; $110
+	const LOTAD        ; $111
+	const LOMBRE       ; $112
+	const LUDICOLO     ; $113

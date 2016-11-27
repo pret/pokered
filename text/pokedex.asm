@@ -2689,3 +2689,33 @@ _DustoxDexEntry::
 	next "to strip leaves"
 	next "off city trees"
 	dex
+
+_LotadDexEntry::
+	text "It looks like an"
+	next "aquatic plant and"
+	next "serves as a ferry"
+
+	page "to #MON that"
+	next "can't swim on"
+	next "their own"
+	dex
+
+_LombreDexEntry::
+	text "It lives at the"
+	next "water's edge where"
+	next "it is sunny. It"
+
+	page "sleeps on a bed"
+	next "of water grass"
+	next "during the day"
+	dex
+
+_LudicoloDexEntry::
+	text "If it hears"
+	next "festive music,"
+	next "all its muscles"
+
+	page "fill with energy."
+	next "It will then"
+	next "start to dance"
+	dex

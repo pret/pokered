@@ -271,3 +271,6 @@ MonsterNames:
 	db "BEAUTIFLY@"
 	db "CASCOON@@@"
 	db "DUSTOX@@@@"
+	db "LOTAD@@@@@"
+	db "LOMBRE@@@@"
+	db "LUDICOLO@@"

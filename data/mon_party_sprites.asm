@@ -133,8 +133,8 @@ MonPartyData:
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED	;Zigzagoon/Linoone
 	dn SPRITE_BUG, SPRITE_BUG				;Wurmple/Silcoon
 	dn SPRITE_BUG, SPRITE_BUG				;Beautifly/Cascoon
-	dn SPRITE_BUG, SPRITE_MON				;Dustox/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_BUG, SPRITE_GRASS				;Dustox/Lotad
+	dn SPRITE_GRASS, SPRITE_GRASS			;Lombre/Ludicolo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

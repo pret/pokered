@@ -271,6 +271,9 @@ PokedexEntryPointers:
 	dw BeautiflyDexEntry
 	dw CascoonDexEntry
 	dw DustoxDexEntry
+	dw LotadDexEntry
+	dw LombreDexEntry
+	dw LudicoloDexEntry
 
 
 ; string: species name
@@ -2159,6 +2162,27 @@ DustoxDexEntry:
 	db 3,11
 	dw 697
 	TX_FAR _DustoxDexEntry
+	db "@"
+
+LotadDexEntry:
+	db "WATER WEED@"
+	db 1,8
+	dw 57
+	TX_FAR _LotadDexEntry
+	db "@"
+
+LombreDexEntry:
+	db "JOLLY@"
+	db 3,11
+	dw 716
+	TX_FAR _LombreDexEntry
+	db "@"
+
+LudicoloDexEntry:
+	db "CAREFREE@"
+	db 4,11
+	dw 1213
+	TX_FAR _LudicoloDexEntry
 	db "@"
 
 MissingNoDexEntry:

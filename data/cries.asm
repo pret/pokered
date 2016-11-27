@@ -272,3 +272,6 @@ CryData:
 	db $16, $C7, $80; Beautifly
 	db $13, $8F, $10; Cascoon
 	db $16, $A7, $70; Dustox
+	db $0E, $C0, $FF; Lotad
+	db $0E, $A0, $A0; Lombre
+	db $0E, $40, $A0; Ludicolo

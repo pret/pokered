@@ -271,6 +271,9 @@ EvosMovesPointerTable:
 	dbw Bank(Mon267_EvosMoves), Mon267_EvosMoves
 	dbw Bank(Mon268_EvosMoves), Mon268_EvosMoves
 	dbw Bank(Mon269_EvosMoves), Mon269_EvosMoves
+	dbw Bank(Mon270_EvosMoves), Mon270_EvosMoves
+	dbw Bank(Mon271_EvosMoves), Mon271_EvosMoves
+	dbw Bank(Mon272_EvosMoves), Mon272_EvosMoves
 
 Mon112_EvosMoves:
 ;RHYDON
@@ -3868,4 +3871,39 @@ Mon269_EvosMoves:
 	db 27,WHIRLWIND
 	db 31,LIGHT_SCREEN
 	db 38,TOXIC
+	db 0
+
+Mon270_EvosMoves:
+;LOTAD
+;Evolutions
+	db EV_LEVEL,14
+	dw LOMBRE
+	db 0
+;Learnset
+	db 7,ABSORB
+	db 11,BUBBLE
+	db 15,MIST
+	db 21,MEGA_DRAIN
+	db 0
+
+Mon271_EvosMoves:
+;LOMBRE
+;Evolutions
+	db EV_ITEM,WATER_STONE,1
+	dw LUDICOLO
+	db 0
+;Learnset
+	db 7,ABSORB
+	db 11,BUBBLE
+	db 15,FURY_SWIPES
+	db 21,MEGA_DRAIN
+	db 25,BUBBLEBEAM
+	db 45,HYDRO_PUMP
+	db 0
+
+Mon272_EvosMoves:
+;LUDICOLO
+;Evolutions
+	db 0
+;Learnset
 	db 0
