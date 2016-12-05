@@ -275,3 +275,6 @@ CryData:
 	db $0E, $C0, $FF; Lotad
 	db $0E, $A0, $A0; Lombre
 	db $0E, $40, $A0; Ludicolo
+	db $0D, $E0, $20; Seedot
+	db $0D, $A0, $40; Nuzleaf
+	db $0D, $50, $80; Shiftry

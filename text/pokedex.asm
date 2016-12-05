@@ -2719,3 +2719,33 @@ _LudicoloDexEntry::
 	next "It will then"
 	next "start to dance"
 	dex
+
+_SeedotDexEntry::
+	text "When it dangles"
+	next "from a tree"
+	next "branch, it looks"
+
+	page "just like an"
+	next "acorn. It enjoys"
+	next "scaring #MON"
+	dex
+
+_NuzleafDexEntry::
+	text "The sound of its"
+	next "grass flute makes"
+	next "its listeners"
+
+	page "uneasy. It lives"
+	next "deep in thick"
+	next "forests"
+	dex
+
+_ShiftryDexEntry::
+	text "By flapping its"
+	next "leafy fan, it can"
+	next "whip up gusts of"
+
+	page "100 ft./second"
+	next "that can level"
+	next "houses"
+	dex

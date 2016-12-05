@@ -274,6 +274,9 @@ EvosMovesPointerTable:
 	dbw Bank(Mon270_EvosMoves), Mon270_EvosMoves
 	dbw Bank(Mon271_EvosMoves), Mon271_EvosMoves
 	dbw Bank(Mon272_EvosMoves), Mon272_EvosMoves
+	dbw Bank(Mon273_EvosMoves), Mon273_EvosMoves
+	dbw Bank(Mon274_EvosMoves), Mon274_EvosMoves
+	dbw Bank(Mon275_EvosMoves), Mon275_EvosMoves
 
 Mon112_EvosMoves:
 ;RHYDON
@@ -3903,6 +3906,40 @@ Mon271_EvosMoves:
 
 Mon272_EvosMoves:
 ;LUDICOLO
+;Evolutions
+	db 0
+;Learnset
+	db 0
+
+Mon273_EvosMoves:
+;SEEDOT
+;Evolutions
+	db EV_LEVEL,14
+	dw NUZLEAF
+	db 0
+;Learnset
+	db 3,HARDEN
+	db 7,GROWTH
+	db 21,RECOVER
+	db 43,EXPLOSION
+	db 0
+
+Mon274_EvosMoves:
+;NUZLEAF
+;Evolutions
+	db EV_ITEM,LEAF_STONE,1
+	dw SHIFTRY
+	db 0
+;Learnset
+	db 3,HARDEN
+	db 7,GROWTH
+	db 14,RAZOR_LEAF
+	db 21,RAZOR_WIND
+	; Lots of future-gen moves...
+	db 0
+
+Mon275_EvosMoves:
+;SHIFTRY
 ;Evolutions
 	db 0
 ;Learnset

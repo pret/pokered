@@ -275,3 +275,6 @@ const_value = 1
 	const LOTAD        ; $111
 	const LOMBRE       ; $112
 	const LUDICOLO     ; $113
+	const SEEDOT       ; $114
+	const NUZLEAF      ; $115
+	const SHIFTRY      ; $116

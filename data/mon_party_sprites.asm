@@ -135,8 +135,8 @@ MonPartyData:
 	dn SPRITE_BUG, SPRITE_BUG				;Beautifly/Cascoon
 	dn SPRITE_BUG, SPRITE_GRASS				;Dustox/Lotad
 	dn SPRITE_GRASS, SPRITE_GRASS			;Lombre/Ludicolo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
-	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
+	dn SPRITE_GRASS, SPRITE_GRASS			;Seedot/Nuzleaf
+	dn SPRITE_GRASS, SPRITE_MON				;Shiftry/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo

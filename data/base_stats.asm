@@ -271,3 +271,6 @@ BaseStatsPointers::
 	dbw Bank(LotadBaseStats), LotadBaseStats
 	dbw Bank(LombreBaseStats), LombreBaseStats
 	dbw Bank(LudicoloBaseStats), LudicoloBaseStats
+	dbw Bank(SeedotBaseStats), SeedotBaseStats
+	dbw Bank(NuzleafBaseStats), NuzleafBaseStats
+	dbw Bank(ShiftryBaseStats), ShiftryBaseStats

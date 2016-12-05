@@ -274,6 +274,9 @@ PokedexEntryPointers:
 	dw LotadDexEntry
 	dw LombreDexEntry
 	dw LudicoloDexEntry
+	dw SeedotDexEntry
+	dw NuzleafDexEntry
+	dw ShiftryDexEntry
 
 
 ; string: species name
@@ -2183,6 +2186,27 @@ LudicoloDexEntry:
 	db 4,11
 	dw 1213
 	TX_FAR _LudicoloDexEntry
+	db "@"
+
+SeedotDexEntry:
+	db "ACORN@"
+	db 1,8
+	dw 88
+	TX_FAR _SeedotDexEntry
+	db "@"
+
+NuzleafDexEntry:
+	db "WILY@"
+	db 3,3
+	dw 617
+	TX_FAR _NuzleafDexEntry
+	db "@"
+
+ShiftryDexEntry:
+	db "WICKED@"
+	db 4,3
+	dw 1314
+	TX_FAR _ShiftryDexEntry
 	db "@"
 
 MissingNoDexEntry:

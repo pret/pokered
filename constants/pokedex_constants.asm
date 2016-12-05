@@ -272,5 +272,8 @@ const_value = 1
 	const DEX_LOTAD      ; 270
 	const DEX_LOMBRE     ; 271
 	const DEX_LUDICOLO   ; 272
+	const DEX_SEEDOT     ; 273
+	const DEX_NUZLEAF    ; 274
+	const DEX_SHIFTRY    ; 275
 	
-NUM_POKEMON    EQU 272
+NUM_POKEMON    EQU 275

@@ -274,3 +274,6 @@ MonsterNames:
 	db "LOTAD@@@@@"
 	db "LOMBRE@@@@"
 	db "LUDICOLO@@"
+	db "SEEDOT@@@@"
+	db "NUZLEAF@@@"
+	db "SHIFTRY@@@"
