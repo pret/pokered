@@ -8,7 +8,7 @@ EnterMap::
 	ld a, $ff
 	ld [wJoyIgnore], a
 	call LoadMapData
-	callba ClearVariablesAfterLoadingMapData
+	callba ClearVariablesOnEnterMap
 	ld hl, wd72c
 	bit 0, [hl] ; has the player already made 3 steps since the last battle?
 	jr z, .skipGivingThreeStepsOfNoRandomBattles

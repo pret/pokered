@@ -588,7 +588,7 @@ ReturnToCableClubRoom:
 	dec a
 	ld [wDestinationWarpID], a
 	call LoadMapData
-	callba ClearVariablesAfterLoadingMapData
+	callba ClearVariablesOnEnterMap
 	pop hl
 	pop af
 	ld [hl], a
