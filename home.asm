@@ -208,7 +208,7 @@ DrawHPBar::
 	and a
 	jr nz, .fill
 
-	; If c iz nonzero, draw a pixel anyway.
+	; If c is nonzero, draw a pixel anyway.
 	ld a, c
 	and a
 	jr z, .done
@@ -4113,7 +4113,7 @@ EraseMenuCursor::
 ; The reason is that most functions that call this initialize H_DOWNARROWBLINKCNT1 to 0.
 ; The effect is that if the tile at hl is initialized with a down arrow,
 ; this function will toggle that down arrow on and off, but if the tile isn't
-; initliazed with a down arrow, this function does nothing.
+; initialized with a down arrow, this function does nothing.
 ; That allows this to be called without worrying about if a down arrow should
 ; be blinking.
 HandleDownArrowBlinkTiming::
