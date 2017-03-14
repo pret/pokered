@@ -30,7 +30,7 @@ SECTION "joypad", ROM0 [$60]
 	reti
 
 
-SECTION "Home", ROM0
+SECTION "Home", ROM0 [$61]
 
 DisableLCD::
 	xor a
@@ -99,7 +99,7 @@ SECTION "Header", ROM0 [$104]
 
 
 
-SECTION "Main", ROM0
+SECTION "Main", ROM0 [$150]
 
 Start::
 	cp GBC
