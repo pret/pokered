@@ -1414,7 +1414,7 @@ wStatusScreenHPBarColor:: ; cf25
 
 	ds 7
 
-wCopyingSGBTileData:: ; c2fd
+wCopyingSGBTileData:: ; cf2d
 
 wWhichPartyMenuHPBar:: ; cf2d
 
