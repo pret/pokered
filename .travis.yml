@@ -1,26 +1,24 @@
 language: c
 install:
-  - sudo easy_install pypng
-  - path="$(pwd)"; cd; git clone git://github.com/bentley/rgbds.git && cd rgbds && sudo make install; cd "$path"
+  - |-
+    path="$(pwd)"; cd;
+    wget https://github.com/rednex/rgbds/archive/v0.2.5.tar.gz -O rgbds.tar.gz && 
+    tar xf rgbds.tar.gz && 
+    cd rgbds-0.2.5 && 
+    sudo make install && 
+    cd - && 
+    rm -rf rgbds && 
+    cd "$path"
 before_script:
   - |-
     function check_status() {
-      if ! git diff-index --quiet HEAD --; then
-        echo 'Uncommitted changes detected.';
-        return 1;
-      fi;
-    }
-  - |-
-    function verify() {
-      actual="$(md5sum "${1}" | cut -c 1-32)";
-      expected="${2}";
-      if [ "${actual}" != "${expected}" ]; then
-        echo "md5(${1}): expected ${2}, but got ${actual} instead.";
+      if ! git diff-index --quiet --ignore-submodules=all HEAD --; then
+        echo 'Uncommitted changes detected:';
+        git diff-index HEAD --;
         return 1;
       fi;
     }
 script:
   - make
-  - verify pokeblue.gbc 50927e843568814f7ed45ec4f944bd8b
-  - verify pokered.gbc 3d45c1ee9abd5738df46d2bdda8b57dc
+  - make compare
   - check_status
