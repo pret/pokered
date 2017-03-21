@@ -19,7 +19,7 @@ INCLUDE "macros.asm"
 INCLUDE "hram.asm"
 
 
-SECTION "Text 1", ROMX[$4000], BANK[TEXT_1]
+SECTION "Text 1", ROMX, BANK[TEXT_1]
 
 _CardKeySuccessText1::
 	text "Bingo!@@"
@@ -192,7 +192,7 @@ INCLUDE "text/maps/silph_co_4f.asm"
 INCLUDE "text/maps/silph_co_5f_1.asm"
 
 
-SECTION "Text 2", ROMX[$4000], BANK[TEXT_2]
+SECTION "Text 2", ROMX, BANK[TEXT_2]
 
 INCLUDE "text/maps/silph_co_5f_2.asm"
 INCLUDE "text/maps/silph_co_6f.asm"
@@ -224,7 +224,7 @@ INCLUDE "text/maps/agatha.asm"
 INCLUDE "text/maps/rock_tunnel_b2f_1.asm"
 
 
-SECTION "Text 3", ROMX[$4000], BANK[TEXT_3]
+SECTION "Text 3", ROMX, BANK[TEXT_3]
 
 INCLUDE "text/maps/rock_tunnel_b2f_2.asm"
 INCLUDE "text/maps/seafoam_islands_b4f.asm"
@@ -1939,7 +1939,7 @@ INCLUDE "text/maps/saffron_gates.asm"
 INCLUDE "text/maps/daycare_1.asm"
 
 
-SECTION "Text 4", ROMX[$4000], BANK[TEXT_4]
+SECTION "Text 4", ROMX, BANK[TEXT_4]
 
 INCLUDE "text/maps/daycare_2.asm"
 INCLUDE "text/maps/underground_path_route_6_entrance.asm"
@@ -1978,7 +1978,7 @@ INCLUDE "text/maps/route_10.asm"
 INCLUDE "text/maps/route_11_1.asm"
 
 
-SECTION "Text 5", ROMX[$4000], BANK[TEXT_5]
+SECTION "Text 5", ROMX, BANK[TEXT_5]
 
 INCLUDE "text/maps/route_11_2.asm"
 INCLUDE "text/maps/route_12.asm"
@@ -1996,7 +1996,7 @@ INCLUDE "text/maps/route_23.asm"
 INCLUDE "text/maps/route_24_1.asm"
 
 
-SECTION "Text 6", ROMX[$4000], BANK[TEXT_6]
+SECTION "Text 6", ROMX, BANK[TEXT_6]
 
 INCLUDE "text/maps/route_24_2.asm"
 INCLUDE "text/maps/route_25.asm"
@@ -2339,7 +2339,7 @@ INCLUDE "text/maps/museum_2f.asm"
 INCLUDE "text/maps/pewter_gym_1.asm"
 
 
-SECTION "Text 7", ROMX[$4000], BANK[TEXT_7]
+SECTION "Text 7", ROMX, BANK[TEXT_7]
 
 INCLUDE "text/maps/pewter_gym_2.asm"
 INCLUDE "text/maps/pewter_house_1.asm"
@@ -2371,7 +2371,7 @@ INCLUDE "text/maps/vermilion_mart.asm"
 INCLUDE "text/maps/vermilion_gym_1.asm"
 
 
-SECTION "Text 8", ROMX[$4000], BANK[TEXT_8]
+SECTION "Text 8", ROMX, BANK[TEXT_8]
 
 INCLUDE "text/maps/vermilion_gym_2.asm"
 INCLUDE "text/maps/vermilion_house.asm"
@@ -2403,7 +2403,7 @@ INCLUDE "text/maps/safari_zone_entrance.asm"
 INCLUDE "text/maps/fuchsia_gym_1.asm"
 
 
-SECTION "Text 9", ROMX[$4000], BANK[TEXT_9]
+SECTION "Text 9", ROMX, BANK[TEXT_9]
 
 INCLUDE "text/maps/fuchsia_gym_2.asm"
 INCLUDE "text/maps/fuchsia_meeting_room.asm"
@@ -2646,7 +2646,7 @@ _CableClubNPCLinkClosedBecauseOfInactivityText::
 	done
 
 
-SECTION "Text 10", ROMX[$4000], BANK[TEXT_10]
+SECTION "Text 10", ROMX, BANK[TEXT_10]
 
 _CableClubNPCPleaseComeAgainText::
 	text "Please come again!"
@@ -2992,7 +2992,7 @@ _BoxFullCannotThrowBallText::
 	prompt
 
 
-SECTION "Text 11", ROMX[$4000], BANK[TEXT_11]
+SECTION "Text 11", ROMX, BANK[TEXT_11]
 
 _ItemUseText001::
 	text "<PLAYER> used@@"
@@ -3192,11 +3192,11 @@ _UsedCutText::
 	prompt
 
 
-SECTION "Pokedex Text", ROMX[$4000], BANK[POKEDEX_TEXT]
+SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 
 INCLUDE "text/pokedex.asm"
 
 
-SECTION "Move Names", ROMX[$4000], BANK[MOVE_NAMES]
+SECTION "Move Names", ROMX, BANK[MOVE_NAMES]
 
 INCLUDE "text/move_names.asm"
