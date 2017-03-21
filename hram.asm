@@ -155,6 +155,7 @@ hCoins EQU $FFA0 ; 2-byte BCD number
 
 hDivideBCDDivisor  EQU $FFA2 ; 3-byte BCD number
 hDivideBCDQuotient EQU $FFA2 ; 3-byte BCD number
+hDivideBCDBuffer   EQU $FFA5 ; 3-byte BCD number
 
 hSerialReceivedNewData EQU $FFA9
 
