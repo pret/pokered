@@ -213,18 +213,23 @@ wSpriteStateData1:: ; c100
 ; holds info for 16 sprites with $10 bytes each
 ; player sprite is always sprite 0
 ; C1x0: picture ID (fixed, loaded at map init)
-; C1x1: movement status (0: uninitialized, 1: ready, 2: delayed, 3: moving)
+; C1x1: movement status
+;       0: uninitialized
+;       1: ready to move
+;       2: delayed
+;       3: moving
+;       bit 7 set: should face player (when spoken to by the player, for example)
 ; C1x2: sprite image index (changed on update, $ff if off screen, includes facing direction, progress in walking animation and a sprite-specific offset)
 ; C1x3: Y screen position delta (-1,0 or 1; added to c1x4 on each walking animation update)
 ; C1x4: Y screen position (in pixels, always 4 pixels above grid which makes sprites appear to be in the center of a tile)
 ; C1x5: X screen position delta (-1,0 or 1; added to c1x6 on each walking animation update)
 ; C1x6: X screen position (in pixels, snaps to grid if not currently walking)
-; C1x7: intra-animation-frame counter (counting upwards to 4 until c1x8 is incremented)
-; C1x8: animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames)
-; C1x9: facing direction (0: down, 4: up, 8: left, $c: right)
+; C1x7: intra-animation-frame counter (counter until next walk animation frame, counting upwards to 4 until c1x8 is incremented)
+; C1x8: walk animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames))
+; C1x9: facing direction (0: SPRITE_FACING_DOWN, 4: SPRITE_FACING_UP, 8: SPRITE_FACING_LEFT, $c: SPRITE_FACING_RIGHT)
 ; C1xA
 ; C1xB
-; C1xC
+; C1xC: directions in which sprite collision would occur
 ; C1xD
 ; C1xE
 ; C1xF
@@ -240,7 +245,9 @@ spritestatedata1: MACRO
 \1IntraAnimFrameCounter:: db
 \1AnimFrameCounter:: db
 \1FacingDirection:: db
-	ds 6
+	ds 2
+\1CollisionDirections:: db
+	ds 3
 \1SpriteStateData1End::
 endm
 
@@ -276,7 +283,7 @@ wSpriteStateData2:: ; c200
 ; C2x4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)
 ; C2x5: X position (in 2x2 tile grid steps, leftmost 2x2 tile has value 4)
 ; C2x6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
-; C2x7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
+; C2x7: set to $80 when in grass, else $0; used to draw grass above the sprite
 ; C2x8: delay until next movement (counted downwards, status (c1x1) is set to ready if reached 0)
 ; C2x9
 ; C2xA
