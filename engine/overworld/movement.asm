@@ -1,11 +1,11 @@
 UpdatePlayerSprite:
-	ld a, [wSpriteStateData2]
+	ld a, [PlayerWalkAnimationCounter]
 	and a
 	jr z, .checkIfTextBoxInFrontOfSprite
 	cp $ff
 	jr z, .disableSprite
 	dec a
-	ld [wSpriteStateData2], a
+	ld [PlayerWalkAnimationCounter], a
 	jr .disableSprite
 ; check if a text box is in front of the sprite by checking if the lower left
 ; background tile the sprite is standing on is greater than $5F, which is
@@ -17,7 +17,7 @@ UpdatePlayerSprite:
 	jr c, .lowerLeftTileIsMapTile
 .disableSprite
 	ld a, $ff
-	ld [wSpriteStateData1 + 2], a
+	ld [PlayerSpriteImageIdx], a
 	ret
 .lowerLeftTileIsMapTile
 	call DetectCollisionBetweenSprites
@@ -49,11 +49,11 @@ UpdatePlayerSprite:
 .notMoving
 ; zero the animation counters
 	xor a
-	ld [wSpriteStateData1 + 7], a
-	ld [wSpriteStateData1 + 8], a
+	ld [PlayerIntraAnimFrameCounter], a
+	ld [PlayerAnimFrameCounter], a
 	jr .calcImageIndex
 .next
-	ld [wSpriteStateData1 + 9], a ; facing direction
+	ld [PlayerFacingDirection], a
 	ld a, [wFontLoaded]
 	bit 0, a
 	jr nz, .notMoving
@@ -77,11 +77,11 @@ UpdatePlayerSprite:
 	and $3
 	ld [hl], a ; $c1x8 (AnimFrameCounter)
 .calcImageIndex
-	ld a, [wSpriteStateData1 + 8]
+	ld a, [PlayerAnimFrameCounter]
 	ld b, a
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [PlayerFacingDirection]
 	add b
-	ld [wSpriteStateData1 + 2], a
+	ld [PlayerSpriteImageIdx], a
 .skipSpriteAnim
 ; If the player is standing on a grass tile, make the player's sprite have
 ; lower priority than the background so that it's partially obscured by the
@@ -95,7 +95,7 @@ UpdatePlayerSprite:
 	jr nz, .next2
 	ld a, $80
 .next2
-	ld [wSpriteStateData2 + 7], a
+	ld [PlayerGrassPriority], a
 	ret
 
 UnusedReadSpriteDataFunction:
