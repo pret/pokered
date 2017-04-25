@@ -60,7 +60,7 @@ battle_struct: MACRO
 ENDM
 
 
-SECTION "WRAM Bank 0", WRAM0 [$c000]
+SECTION "WRAM Bank 0", WRAM0
 
 wUnusedC000:: ; c000
 	ds 1
@@ -1610,7 +1610,7 @@ wEnemyMonDefense::   dw
 wEnemyMonSpeed::     dw
 wEnemyMonSpecial::   dw
 wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
-SECTION "WRAM Bank 1", WRAMX[$d000], BANK[1]
+SECTION "WRAM Bank 1", WRAMX, BANK[1]
                      ds 2 ; NUM_MOVES - 2
 
 wEnemyMonBaseStats:: ds 5

@@ -6,29 +6,29 @@ AUDIO_3 EQU $1f
 INCLUDE "constants.asm"
 
 
-SECTION "Sound Effect Headers 1", ROMX[$4000], BANK[AUDIO_1]
+SECTION "Sound Effect Headers 1", ROMX, BANK[AUDIO_1]
 INCLUDE "audio/headers/sfxheaders1.asm"
 
-SECTION "Sound Effect Headers 2", ROMX[$4000], BANK[AUDIO_2]
+SECTION "Sound Effect Headers 2", ROMX, BANK[AUDIO_2]
 INCLUDE "audio/headers/sfxheaders2.asm"
 
-SECTION "Sound Effect Headers 3", ROMX[$4000], BANK[AUDIO_3]
+SECTION "Sound Effect Headers 3", ROMX, BANK[AUDIO_3]
 INCLUDE "audio/headers/sfxheaders3.asm"
 
 
 
-SECTION "Music Headers 1", ROMX[$422E], BANK[AUDIO_1]
+SECTION "Music Headers 1", ROMX, BANK[AUDIO_1]
 INCLUDE "audio/headers/musicheaders1.asm"
 
-SECTION "Music Headers 2", ROMX[$42BE], BANK[AUDIO_2]
+SECTION "Music Headers 2", ROMX, BANK[AUDIO_2]
 INCLUDE "audio/headers/musicheaders2.asm"
 
-SECTION "Music Headers 3", ROMX[$4249], BANK[AUDIO_3]
+SECTION "Music Headers 3", ROMX, BANK[AUDIO_3]
 INCLUDE "audio/headers/musicheaders3.asm"
 
 
 
-SECTION "Sound Effects 1", ROMX[$42FD], BANK[AUDIO_1]
+SECTION "Sound Effects 1", ROMX, BANK[AUDIO_1]
 
 INCLUDE "audio/sfx/snare1_1.asm"
 INCLUDE "audio/sfx/snare2_1.asm"
@@ -127,7 +127,7 @@ INCLUDE "audio/sfx/cry21_1.asm"
 INCLUDE "audio/sfx/cry22_1.asm"
 
 
-SECTION "Sound Effects 2", ROMX[$42FD], BANK[AUDIO_2]
+SECTION "Sound Effects 2", ROMX, BANK[AUDIO_2]
 
 INCLUDE "audio/sfx/snare1_2.asm"
 INCLUDE "audio/sfx/snare2_2.asm"
@@ -252,7 +252,7 @@ INCLUDE "audio/sfx/cry21_2.asm"
 INCLUDE "audio/sfx/cry22_2.asm"
 
 
-SECTION "Sound Effects 3", ROMX[$42FD], BANK[AUDIO_3]
+SECTION "Sound Effects 3", ROMX, BANK[AUDIO_3]
 
 INCLUDE "audio/sfx/snare1_3.asm"
 INCLUDE "audio/sfx/snare2_3.asm"
@@ -360,7 +360,7 @@ INCLUDE "audio/sfx/cry22_3.asm"
 
 
 
-SECTION "Audio Engine 1", ROMX[$50C6], BANK[AUDIO_1]
+SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
 
 PlayBattleMusic::
 	xor a
@@ -453,7 +453,7 @@ Music_Cities1AlternateTempo::
 	jp Audio1_OverwriteChannelPointer
 
 
-SECTION "Audio Engine 2", ROMX[$536E], BANK[AUDIO_2]
+SECTION "Audio Engine 2", ROMX, BANK[AUDIO_2]
 
 Music_DoLowHealthAlarm::
 	ld a, [wLowHealthAlarm]
@@ -557,7 +557,7 @@ Audio2_OverwriteChannelPointer:
 	ret
 
 
-SECTION "Audio Engine 3", ROMX[$513B], BANK[AUDIO_3]
+SECTION "Audio Engine 3", ROMX, BANK[AUDIO_3]
 
 PlayPokedexRatingSfx::
 	ld a, [$ffdc]
@@ -601,7 +601,7 @@ INCLUDE "audio/engine_3.asm"
 
 
 
-SECTION "Music 1", ROMX[$5BA3], BANK[AUDIO_1]
+SECTION "Music 1", ROMX, BANK[AUDIO_1]
 
 INCLUDE "audio/music/pkmnhealed.asm"
 INCLUDE "audio/music/routes1.asm"
@@ -630,7 +630,7 @@ INCLUDE "audio/music/gym.asm"
 INCLUDE "audio/music/pokecenter.asm"
 
 
-SECTION "Music 2", ROMX[$6322], BANK[AUDIO_2]
+SECTION "Music 2", ROMX, BANK[AUDIO_2]
 
 INCLUDE "audio/sfx/pokeflute_ch4_ch5.asm"
 INCLUDE "audio/sfx/unused2_2.asm"
@@ -646,7 +646,7 @@ INCLUDE "audio/music/defeatedwildmon.asm"
 INCLUDE "audio/music/defeatedgymleader.asm"
 
 
-SECTION "Music 3", ROMX[$5BBB], BANK[AUDIO_3]
+SECTION "Music 3", ROMX, BANK[AUDIO_3]
 
 INCLUDE "audio/music/bikeriding.asm"
 INCLUDE "audio/music/dungeon1.asm"
