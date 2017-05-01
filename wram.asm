@@ -3220,9 +3220,9 @@ wBoxMonNicksEnd:: ; dee2
 wBoxDataEnd::
 
 
-SECTION "Stack", WRAMX[$dfff], BANK[1]
+SECTION "Stack", WRAMX[$df00], BANK[1]
+	ds $ff
 wStack:: ; dfff
-	ds -$100
 
 
 INCLUDE "sram.asm"
