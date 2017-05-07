@@ -4,11 +4,11 @@ SFX_08_PokeFlute_Ch4:
 
 SFX_08_PokeFlute_Ch5:
 	executemusic
-	notetype 8, 0, 0
-	rest 5
-	rest 7
-	rest 5
-	rest 5
-	rest 5
-	rest 5
+	notetype 8, (0<<4) + 0
+	note __, 5
+	note __, 7
+	note __, 5
+	note __, 5
+	note __, 5
+	note __, 5
 	endchannel

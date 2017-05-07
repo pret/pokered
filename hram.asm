@@ -184,6 +184,7 @@ hJoy6        EQU $FFB6
 hJoy7        EQU $FFB7
 
 H_LOADEDROMBANK EQU $FFB8
+hROMBank        EQU $FFB8 ; XXXXX
 
 hSavedROMBank EQU $FFB9
 

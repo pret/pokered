@@ -1,5 +1,5 @@
 SFX_Ledge_1_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x10 149
 	unknownsfx0x20 15, 242, 0, 4
 	unknownsfx0x10 8

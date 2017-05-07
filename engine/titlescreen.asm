@@ -17,7 +17,7 @@ SetDefaultNamesBeforeTitlescreen:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, BANK(Music_TitleScreen)
+	ld a, 0 ; BANK(Music_TitleScreen)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 
@@ -181,6 +181,9 @@ ENDC
 	ret
 
 .finishedBouncingPokemonLogo
+	xor a
+	ld [hSCY], a
+
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
@@ -213,7 +216,7 @@ ENDC
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
 	ld [wNewSoundID], a
-	call PlaySound
+	call PlayMusic
 	xor a
 	ld [wUnusedCC5B], a
 

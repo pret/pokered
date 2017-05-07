@@ -42,7 +42,7 @@ VermilionDock_1db9b:
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
 	call PlaySound
-	ld c, BANK(Music_Surfing)
+	ld c, 0 ; BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
 	callba LoadSmokeTileFourTimes

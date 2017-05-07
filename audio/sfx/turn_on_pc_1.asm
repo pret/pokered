@@ -1,5 +1,5 @@
 SFX_Turn_On_PC_1_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x20 15, 242, 192, 7
 	unknownsfx0x20 15, 0, 0, 0
 	unknownsfx0x20 3, 161, 128, 7

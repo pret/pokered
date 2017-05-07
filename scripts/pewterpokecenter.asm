@@ -37,7 +37,7 @@ PewterJigglypuffText:
 	jr nz, .findMatchingFacingDirectionLoop
 	dec hl
 	push hl
-	ld c, BANK(Music_JigglypuffSong)
+	ld c, 0 ; BANK(Music_JigglypuffSong)
 	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
@@ -58,11 +58,10 @@ PewterJigglypuffText:
 	ld c, 24
 	call DelayFrames
 
-	ld a, [wChannelSoundIDs]
-	ld b, a
-	ld a, [wChannelSoundIDs + Ch1]
-	or b
-	jr nz, .loop
+	push hl
+	call IsSongPlaying
+	pop hl
+	jr c, .loop
 
 	ld c, 48
 	call DelayFrames

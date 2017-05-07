@@ -1,5 +1,5 @@
 SFX_Battle_27_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x20 15, 63, 192, 7
 
 SFX_Battle_27_branch_2062a:

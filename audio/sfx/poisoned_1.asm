@@ -1,5 +1,5 @@
 SFX_Poisoned_1_Ch4:
-	duty 0
+	dutycycle 0
 	unknownsfx0x10 20
 	unknownsfx0x20 4, 242, 0, 6
 	loopchannel 4, SFX_Poisoned_1_Ch4

@@ -1,5 +1,5 @@
 SFX_Psychic_M_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x10 247
 	unknownsfx0x20 8, 196, 189, 7
 	unknownsfx0x20 8, 196, 190, 7
@@ -12,7 +12,7 @@ SFX_Psychic_M_Ch4:
 
 
 SFX_Psychic_M_Ch5:
-	duty 2
+	dutycycle 2
 	unknownsfx0x20 8, 196, 112, 7
 	unknownsfx0x20 8, 196, 97, 7
 	unknownsfx0x20 8, 196, 98, 7

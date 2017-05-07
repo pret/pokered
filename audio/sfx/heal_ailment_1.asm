@@ -1,5 +1,5 @@
 SFX_Heal_Ailment_1_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x10 20
 	unknownsfx0x20 4, 242, 0, 6
 	unknownsfx0x20 4, 242, 0, 6

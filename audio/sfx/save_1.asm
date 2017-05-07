@@ -1,5 +1,5 @@
 SFX_Save_1_Ch4:
-	duty 2
+	dutycycle 2
 	unknownsfx0x20 4, 244, 0, 7
 	unknownsfx0x20 2, 228, 0, 6
 	unknownsfx0x20 2, 228, 128, 6
@@ -11,7 +11,7 @@ SFX_Save_1_Ch4:
 
 
 SFX_Save_1_Ch5:
-	duty 2
+	dutycycle 2
 	unknownsfx0x20 4, 8, 0, 0
 	unknownsfx0x20 2, 212, 1, 7
 	unknownsfx0x20 2, 196, 1, 6

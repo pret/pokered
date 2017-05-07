@@ -1,5 +1,5 @@
 SFX_Battle_36_Ch4:
-	duty 0
+	dutycycle 0
 	unknownsfx0x20 2, 241, 128, 7
 	unknownsfx0x20 2, 241, 0, 7
 	unknownsfx0x20 2, 241, 144, 7

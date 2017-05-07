@@ -201,8 +201,10 @@ wFrequencyModifier:: ; c0f1
 wTempoModifier:: ; c0f2
 	ds 1
 
-	ds 13
+	ds 11
 
+wHaltAudio:: ds 1
+wSFXDontWait:: ds 1
 
 SECTION "Sprite State Data", WRAM0[$c100]
 
@@ -3226,3 +3228,320 @@ wStack:: ; dfff
 
 
 INCLUDE "sram.asm"
+
+
+SECTION "crysaudio", SRAM, BANK[0]
+Crysaudio::
+MusicPlaying:: ; c100
+; nonzero if playing
+	ds 1
+
+Channels::
+Channel1::
+Channel1MusicID:: ; c101
+	ds 2
+Channel1MusicBank:: ; c103
+	ds 1
+Channel1Flags:: ; c104
+; 0: on/off
+; 1: subroutine
+; 2: 
+; 3: 
+; 4: noise sampling on/off
+; 5: 
+; 6: 
+; 7: 
+	ds 1
+Channel1Flags2:: ; c105
+; 0: vibrato on/off
+; 1: 
+; 2: duty cycle on/off
+; 3: 
+; 4: 
+; 5: 
+; 6: 
+; 7: 
+	ds 1
+Channel1Flags3:: ; c106
+; 0: vibrato up/down
+; 1: 
+; 2: 
+; 3: 
+; 4: 
+; 5: 
+; 6: 
+; 7: 
+	ds 1
+Channel1MusicAddress:: ; c107
+	ds 2
+Channel1LastMusicAddress:: ; c109
+	ds 2
+; could have been meant as a third-level address
+	ds 2
+Channel1NoteFlags:: ; c10d
+; 0: 
+; 1: 
+; 2: 
+; 3: 
+; 4: 
+; 5: rest
+; 6: 
+; 7: 
+	ds 1
+Channel1Condition:: ; c10e
+; used for conditional jumps
+	ds 1
+Channel1DutyCycle:: ; c10f
+; uses top 2 bits only
+;	0: 12.5%
+;	1: 25%
+;	2: 50%
+;	3: 75%
+	ds 1
+Channel1Intensity:: ; c110
+;	hi: pressure
+;   lo: velocity
+	ds 1
+Channel1Frequency::
+; 11 bits
+Channel1FrequencyLo:: ; c111
+	ds 1
+Channel1FrequencyHi:: ; c112
+	ds 1
+Channel1Pitch:: ; c113
+; 0: rest
+; 1: C
+; 2: C#
+; 3: D
+; 4: D#
+; 5: E
+; 6: F
+; 7: F#
+; 8: G
+; 9: G#
+; a: A
+; b: A#
+; c: B
+	ds 1
+Channel1Octave:: ; c114
+; 0: highest
+; 7: lowest
+	ds 1
+Channel1StartingOctave:: ; c115
+; raises existing octaves by this value
+; used for repeating phrases in a higher octave to save space
+	ds 1
+Channel1NoteDuration:: ; c116
+; number of frames remaining in the current note
+	ds 1
+; c117
+	ds 1
+; c118
+	ds 1
+Channel1LoopCount:: ; c119
+	ds 1
+Channel1Tempo:: ; c11a
+	ds 2
+Channel1Tracks:: ; c11c
+; hi: l
+; lo: r
+	ds 1
+; c11d
+	ds 1
+
+Channel1VibratoDelayCount:: ; c11e
+; initialized at the value in VibratoDelay
+; decrements each frame
+; at 0, vibrato starts
+	ds 1
+Channel1VibratoDelay:: ; c11f
+; number of frames a note plays until vibrato starts
+	ds 1
+Channel1VibratoExtent:: ; c120
+; difference in 
+	ds 1
+Channel1VibratoRate:: ; c121
+; counts down from a max of 15 frames
+; over which the pitch is alternated
+; hi: init frames
+; lo: frame count
+	ds 1
+
+; c122
+	ds 1
+; c123
+	ds 1
+; c124
+	ds 1
+; c125
+	ds 1
+; c126
+	ds 1
+; c127
+	ds 1
+Channel1CryPitch:: ; c128
+	ds 1
+Channel1CryEcho:: ; c129
+	ds 1
+	ds 4
+Channel1NoteLength:: ; c12e
+; # frames per 16th note
+	ds 1
+; c12f
+	ds 1
+; c130
+	ds 1
+; c131
+	ds 1
+; c132
+	ds 1
+; end
+
+Channel2:: ; c133
+	ds 50
+Channel3:: ; c165
+	ds 50
+Channel4:: ; c197
+	ds 50
+
+SFXChannels::
+Channel5:: ; c1c9
+	ds 50
+Channel6:: ; c1fb
+	ds 50
+Channel7:: ; c22d
+	ds 50
+Channel8:: ; c25f
+	ds 50
+
+; c291
+	ds 1
+; c292
+	ds 1
+; c293
+	ds 1
+; c294
+	ds 1
+; c295
+	ds 1
+; c296
+	ds 1
+; c297
+	ds 1
+
+CurMusicByte:: ; c298
+	ds 1
+CurChannel:: ; c299
+	ds 1
+Volume:: ; c29a
+; corresponds to $ff24
+; Channel control / ON-OFF / Volume (R/W)
+;   bit 7 - Vin->SO2 ON/OFF
+;   bit 6-4 - SO2 output level (volume) (# 0-7)
+;   bit 3 - Vin->SO1 ON/OFF
+;   bit 2-0 - SO1 output level (volume) (# 0-7)
+	ds 1
+SoundOutput:: ; c29b
+; corresponds to $ff25
+; bit 4-7: ch1-4 so2 on/off
+; bit 0-3: ch1-4 so1 on/off
+	ds 1
+SoundInput:: ; c29c
+; corresponds to $ff26
+; bit 7: global on/off
+; bit 0: ch1 on/off
+; bit 1: ch2 on/off
+; bit 2: ch3 on/off
+; bit 3: ch4 on/off
+	ds 1
+
+MusicID::
+MusicIDLo:: ; c29d
+	ds 1
+MusicIDHi:: ; c29e
+	ds 1
+MusicBank:: ; c29f
+	ds 1
+NoiseSampleAddress::
+NoiseSampleAddressLo:: ; c2a0
+	ds 1
+NoiseSampleAddressHi:: ; c2a1
+	ds 1
+; noise delay? ; c2a2
+	ds 1
+; c2a3
+	ds 1
+MusicNoiseSampleSet:: ; c2a4
+	ds 1
+SFXNoiseSampleSet:: ; c2a5
+	ds 1
+Danger:: ; c2a6
+wDanger:: ; because i'm dumb
+; bit 7: on/off
+; bit 4: pitch
+; bit 0-3: counter
+	ds 1
+MusicFade:: ; c2a7
+; fades volume over x frames
+; bit 7: fade in/out
+; bit 0-5: number of frames for each volume level
+; $00 = none (default)
+	ds 1
+MusicFadeCount:: ; c2a8
+	ds 1
+MusicFadeID::
+MusicFadeIDLo:: ; c2a9
+	ds 1
+MusicFadeIDHi:: ; c2aa
+	ds 1
+	ds 5
+CryPitch:: ; c2b0
+	ds 1
+CryEcho:: ; c2b1
+	ds 1
+CryLength:: ; c2b2
+	ds 2
+LastVolume:: ; c2b4
+	ds 1
+	ds 1
+SFXPriority:: ; c2b6
+; if nonzero, turn off music when playing sfx
+	ds 1
+	ds 6
+CryTracks:: ; c2bd
+; plays only in left or right track depending on what side the monster is on
+; both tracks active outside of battle
+	ds 1
+	ds 1
+CurSFX:: ; c2bf
+; id of sfx currently playing
+	ds 1
+CurMusic:: ; c2c0
+; id of music currently playing
+	ds 1
+
+wTranspositionInterval:: ds 1
+
+; misc crys labels
+Options:: ds 1
+GBPrinter:: ds 1
+PlayerState:: ds 1
+
+wSongSelection:: ds 2
+wNumNoteLines:: ds 1
+wTmpCh:: ds 1
+wChLastNotes:: ds 3
+wVolTimer:: ds 1
+wC1Vol:: ds 1
+wC1VolSub:: ds 1
+wC2Vol:: ds 1
+wC2VolSub:: ds 1
+wC3Vol:: ds 1
+wC3VolSub:: ds 1
+wC4Vol:: ds 1
+wC4VolSub:: ds 1
+wNoteEnded:: ds 3
+wSelectorTop:: ds 1
+wSelectorCur:: ds 1
+wChannelSelector:: ds 1
+wChannelSelectorSwitches:: ds 8

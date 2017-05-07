@@ -1,5 +1,5 @@
 SFX_Teleport_Exit1_1_Ch4:
-	duty 1
+	dutycycle 1
 	unknownsfx0x10 23
 	unknownsfx0x20 15, 215, 0, 5
 	unknownsfx0x20 15, 183, 128, 5

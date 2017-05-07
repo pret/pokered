@@ -1,5 +1,5 @@
 SFX_Battle_28_Ch4:
-	duty 0
+	dutycycle 0
 	unknownsfx0x20 0, 241, 192, 7
 	unknownsfx0x20 0, 241, 0, 7
 	loopchannel 12, SFX_Battle_28_Ch4

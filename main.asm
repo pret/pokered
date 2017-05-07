@@ -2094,3 +2094,22 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
+
+SECTION "bank38",ROMX,BANK[$38]
+SpriteBank1:
+    ds $4000
+SECTION "bank39",ROMX,BANK[$39]
+SpriteBank2:
+    ds $4000
+SECTION "bank3a",ROMX,BANK[$3A]
+SpriteBank3:
+    ds $4000
+SECTION "bank3b",ROMX,BANK[$3b]
+SpriteBank4:
+    ds $4000
+SECTION "bank3e",ROMX,BANK[$3e]
+SpriteBank5:
+    ds $4000
+SECTION "bank3f",ROMX,BANK[$3f]
+SpriteBank6:
+    ds $4000

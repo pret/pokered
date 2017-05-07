@@ -25,7 +25,7 @@ PokemonTower2Script0:
 	ld a, $ff
 	ld [wNewSoundID], a
 	call PlaySound
-	ld c, BANK(Music_MeetRival)
+	ld c, 0 ; BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ResetEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
