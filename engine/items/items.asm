@@ -1846,12 +1846,12 @@ PlayedFluteHadEffectText:
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, SFX_POKEFLUE
+	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wChannelSoundIDs + Ch2]
-	cp a, SFX_POKEFLUE
+	cp a, SFX_POKEFLUTE
 	jr z,.musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done
