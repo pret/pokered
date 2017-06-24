@@ -114,7 +114,7 @@ AIMoveChoiceModification1:
 	ld a, [wBattleMonStatus]
 	and a
 	ret z ; return if no status ailment on player's mon
-	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offest)
+	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
 .nextMove
@@ -154,7 +154,7 @@ StatusAilmentMoveEffects:
 
 ; slightly encourage moves with specific effects.
 ; in particular, stat-modifying moves and other move effects
-; that fall in-bewteen
+; that fall in-between
 AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
 	cp $1
@@ -212,7 +212,7 @@ AIMoveChoiceModification3:
 	cp $10
 	jr z, .nextMove
 	jr c, .notEffectiveMove
-	dec [hl] ; sligthly encourage this move
+	dec [hl] ; slightly encourage this move
 	jr .nextMove
 .notEffectiveMove ; discourages non-effective moves if better moves are available
 	push hl
@@ -253,7 +253,7 @@ AIMoveChoiceModification3:
 	pop hl
 	and a
 	jr z, .nextMove
-	inc [hl] ; sligthly discourage this move
+	inc [hl] ; slightly discourage this move
 	jr .nextMove
 AIMoveChoiceModification4:
 	ret

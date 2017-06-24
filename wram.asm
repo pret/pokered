@@ -1735,7 +1735,7 @@ wPlayerBattleStatus3:: ; d064
 ; bit 0 - toxic
 ; bit 1 - light screen
 ; bit 2 - reflect
-; bit 3 - tranformed
+; bit 3 - transformed
 	ds 1
 
 wEnemyStatsToDouble:: ; d065
@@ -2046,7 +2046,7 @@ wPredefBank:: ; d0b7
 wMonHeader:: ; d0b8
 
 wMonHIndex:: ; d0b8
-; In the ROM base stats data stucture, this is the dex number, but it is
+; In the ROM base stats data structure, this is the dex number, but it is
 ; overwritten with the internal index number after the header is copied to WRAM.
 	ds 1
 
@@ -3057,7 +3057,7 @@ wd732:: ; d732
 ; bit 1: remnant of debug mode? not set by the game code.
 ; if it is set
 ; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
-; 2. does not have the player start in floor two of the playyer's house (instead sending them to [wLastMap])
+; 2. does not have the player start in floor two of the player's house (instead sending them to [wLastMap])
 ; 3. allows wild battles to be avoided by holding down B
 ; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
 ; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
@@ -3085,7 +3085,7 @@ wd736:: ; d736
 ; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
 ; bit 6: jumping down a ledge / fishing animation
-; bit 7: player sprite spinning due to spin tiles (Rocket hidehout / Viridian Gym)
+; bit 7: player sprite spinning due to spin tiles (Rocket hideout / Viridian Gym)
 	ds 1
 
 wCompletedInGameTradeFlags:: ; d737
@@ -3168,7 +3168,7 @@ wUnusedDA38:: ; da38
 
 wCurMapScript:: ; da39
 ; index of current map script, mostly used as index for function pointer array
-; mostly copied from map-specific map script pointer and wirtten back later
+; mostly copied from map-specific map script pointer and written back later
 	ds 1
 
 	ds 7

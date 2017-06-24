@@ -27,7 +27,7 @@ DrawStartMenu:
 	set 6,[hl] ; no pauses between printing each letter
 	coord hl, 12, 2
 	CheckEvent EVENT_GOT_POKEDEX
-; case for not having pokdex
+; case for not having pokedex
 	ld a,$06
 	jr z,.storeMenuItemCount
 ; case for having pokedex

@@ -541,7 +541,7 @@ Music_PokeFluteInBattle::
 	; begin playing the "caught mon" sound effect
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
-	; then immediately overwrtie the channel pointers
+	; then immediately overwrite the channel pointers
 	ld hl, wChannelCommandPointers + Ch4 * 2
 	ld de, SFX_08_PokeFlute_Ch4
 	call Audio2_OverwriteChannelPointer

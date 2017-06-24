@@ -863,7 +863,7 @@ ItemUseMedicine:
 	jp nc,.useVitamin ; if it's a vitamin or Rare Candy
 	cp a,FULL_RESTORE
 	jr nc,.healHP ; if it's a Full Restore or one of the potions
-; fall through if it's one of the status-specifc healing items
+; fall through if it's one of the status-specific healing items
 .cureStatusAilment
 	ld bc,wPartyMon1Status - wPartyMon1
 	add hl,bc ; hl now points to status

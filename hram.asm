@@ -98,7 +98,7 @@ hSwapTemp EQU $FF95
 
 hExperience EQU $FF96 ; 3 bytes, big endian
 
-; Multiplcation and division variables are meant
+; Multiplication and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
 H_MULTIPLICAND EQU $FF96 ; 3 bytes
