@@ -29,7 +29,7 @@ _VictoryRoad2EndBattleText2::
 	prompt
 
 _VictoryRoad2AfterBattleText2::
-	text $53, " also came"
+	text "<RIVAL> also came"
 	line "through here!"
 	done
 

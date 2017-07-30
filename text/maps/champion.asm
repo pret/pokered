@@ -1,9 +1,9 @@
 _GaryChampionIntroText::
-	text $53, ": Hey!"
+	text "<RIVAL>: Hey!"
 
 	para "I was looking"
 	line "forward to seeing"
-	cont "you, ", $52, "!"
+	cont "you, <PLAYER>!"
 
 	para "My rival should"
 	line "be strong to keep"
@@ -24,7 +24,7 @@ _GaryChampionIntroText::
 	para "I'm the #MON"
 	line "LEAGUE champion!"
 
-	para $52, "! Do you"
+	para "<PLAYER>! Do you"
 	line "know what that"
 	cont "means?"
 
@@ -54,11 +54,11 @@ _GaryVictoryText::
 	line "I won, I won!"
 
 	para "I'm too good for"
-	line "you, ", $52, "!"
+	line "you, <PLAYER>!"
 
 	para "You did well to"
 	line "even reach me,"
-	cont $53, ", the"
+	cont "<RIVAL>, the"
 	cont "#MON genius!"
 
 	para "Nice try, loser!"
@@ -82,7 +82,7 @@ _GaryText_76103::
 	done
 
 _GaryText2::
-	text "OAK: ", $52, "!"
+	text "OAK: <PLAYER>!"
 	done
 
 _GaryText_76120::
@@ -99,12 +99,12 @@ _GaryText_76120::
 	TX_RAM wcd6d
 	text "!"
 
-	para $52, ", you have"
+	para "<PLAYER>, you have"
 	line "come of age!"
 	done
 
 _GaryText_76125::
-	text "OAK: ", $53, "! I'm"
+	text "OAK: <RIVAL>! I'm"
 	line "disappointed!"
 
 	para "I came when I"
@@ -115,7 +115,7 @@ _GaryText_76125::
 	line "here, you had"
 	cont "already lost!"
 
-	para $53, "! Do you"
+	para "<RIVAL>! Do you"
 	line "understand why"
 	cont "you lost?"
 
@@ -130,7 +130,7 @@ _GaryText_76125::
 	done
 
 _GaryText_7612a::
-	text "OAK: ", $52, "!"
+	text "OAK: <PLAYER>!"
 
 	para "You understand"
 	line "that your victory"
@@ -141,6 +141,6 @@ _GaryText_7612a::
 	line "with your #MON"
 	cont "is marvelous!"
 
-	para $52, "!"
+	para "<PLAYER>!"
 	line "Come with me!"
 	done
