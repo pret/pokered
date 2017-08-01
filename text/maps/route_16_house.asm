@@ -9,7 +9,7 @@ _Route16HouseText3::
 	prompt
 
 _ReceivedHM02Text::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "HM02!@@"
 
 _HM02ExplanationText::

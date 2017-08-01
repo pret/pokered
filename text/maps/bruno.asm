@@ -11,7 +11,7 @@ _BrunoBeforeBattleText::
 	line "trained with"
 	cont "my #MON!"
 
-	para $52, "!"
+	para "<PLAYER>!"
 
 	para "We will grind you"
 	line "down with our"
