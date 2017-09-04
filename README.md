@@ -13,7 +13,9 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 ## See also
 
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
+* Discord: [**pret**][Discord]
 * irc: **irc.freenode.net** [**#pret**][irc]
 
 [pokecrystal]: https://github.com/kanzure/pokecrystal
+[Discord]: https://discord.gg/cJxDDVP
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
