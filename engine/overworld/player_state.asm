@@ -103,7 +103,7 @@ IsPlayerFacingEdgeOfMap:
 	ld c, a
 	ld de, .asm_c41e
 	push de
-	jp [hl]
+	jp hl
 .asm_c41e
 	pop bc
 	pop de
