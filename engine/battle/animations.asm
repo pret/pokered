@@ -308,7 +308,7 @@ LoadSubanimation:
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
 	ld b,a
-	ld a,[H_WHOSETURN]
+	ld a,[hWhoseTurn]
 	and a
 	ld a,b
 	ret nz
@@ -319,7 +319,7 @@ GetSubanimationTransform1:
 ; sets the transform to 2 (i.e. horizontal and vertical flip) if it's the player's turn
 ; sets the transform to 0 (i.e. no transform) if it's the enemy's turn
 GetSubanimationTransform2:
-	ld a,[H_WHOSETURN]
+	ld a,[hWhoseTurn]
 	and a
 	ld a,2 << 5
 	ret z
@@ -421,7 +421,7 @@ MoveAnimation:
 
 ShareMoveAnimations:
 ; some moves just reuse animations from status conditions
-	ld a,[H_WHOSETURN]
+	ld a,[hWhoseTurn]
 	and a
 	ret z
 
@@ -1074,16 +1074,16 @@ AnimationDelay10:
 ; calls a function with the turn flipped from player to enemy or vice versa
 ; input - hl - address of function to call
 CallWithTurnFlipped:
-	ld a,[H_WHOSETURN]
+	ld a,[hWhoseTurn]
 	push af
 	xor a,1
-	ld [H_WHOSETURN],a
+	ld [hWhoseTurn],a
 	ld de,.returnAddress
 	push de
 	jp [hl]
 .returnAddress
 	pop af
-	ld [H_WHOSETURN],a
+	ld [hWhoseTurn],a
 	ret
 
 ; flashes the screen for an extended period (48 frames)
@@ -1287,7 +1287,7 @@ _AnimationWaterDroplets:
 AnimationSlideMonUp:
 ; Slides the mon's sprite upwards.
 	ld c, 7
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	coord hl, 1, 6
 	coord de, 1, 5
@@ -1355,7 +1355,7 @@ _AnimationSlideMonUp:
 	jr nz, .slideLoop
 
 ; Fill in the bottom row of the mon pic with the next row's tile IDs.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	coord hl, 1, 11
 	jr z, .next
@@ -1524,7 +1524,7 @@ AnimationShowEnemyMonPic:
 AnimationShakeBackAndForth:
 ; Shakes the mon's sprite back and forth rapidly. This is used in Double Team.
 ; The mon's sprite disappears after this animation.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	coord hl, 0, 5
 	coord de, 2, 5
@@ -1572,7 +1572,7 @@ AnimationMoveMonHorizontally:
 ; Shifts the mon's sprite horizontally to a fixed location. Used by lots of
 ; animations like Tackle/Body Slam.
 	call AnimationHideMonPic
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	coord hl, 2, 5
 	jr z, .next
@@ -1588,7 +1588,7 @@ AnimationMoveMonHorizontally:
 
 AnimationResetMonPosition:
 ; Resets the mon's sprites to be located at the normal coordinates.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, 5 * SCREEN_WIDTH + 2
 	jr z, .next
@@ -1600,7 +1600,7 @@ AnimationResetMonPosition:
 AnimationSpiralBallsInward:
 ; Creates an effect that looks like energy balls spiralling into the
 ; player mon's sprite.  Used in Focus Energy, for example.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	ld a, -40
@@ -1684,7 +1684,7 @@ AnimationSquishMonPic:
 	ld c, 4
 .loop
 	push bc
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	coord hl, 16, 0
@@ -1737,7 +1737,7 @@ _AnimationSquishMonPic:
 AnimationShootBallsUpward:
 ; Shoots one pillar of "energy" balls upwards. Used in Teleport/Sky Attack
 ; animations.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	lb bc, 0, 16 * 8
@@ -1805,7 +1805,7 @@ _AnimationShootBallsUpward:
 
 AnimationShootManyBallsUpward:
 ; Shoots several pillars of "energy" balls upward.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld hl, UpwardBallsAnimXCoordinatesPlayerTurn
 	ld a, $50 ; y coordinate for "energy" ball pillar
@@ -1897,7 +1897,7 @@ AnimationSlideMonDownAndHide:
 _AnimationSlideMonOff:
 ; Slides the mon's sprite off the screen horizontally by e tiles and waits
 ; [wSlideMonDelay] V-blanks each time the pic is slid by one tile.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	coord hl, 12, 0
@@ -1912,7 +1912,7 @@ _AnimationSlideMonOff:
 .rowLoop ; iterates once for each row
 	ld c, 8
 .tileLoop ; iterates once for each tile in the row
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn2
 	call .EnemyNextTile
@@ -1975,7 +1975,7 @@ AnimationSlideMonHalfOff:
 	jp Delay3
 
 CopyTempPicToMonPic:
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld hl, vBackPic ; player turn
 	jr z, .next
@@ -1991,7 +1991,7 @@ AnimationWavyScreen:
 	call BattleAnimCopyTileMapToVRAM
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld d, $80 ; terminator
@@ -2019,7 +2019,7 @@ AnimationWavyScreen:
 	call SaveScreenTilesToBuffer2
 	call ClearScreen
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	call LoadScreenTilesFromBuffer2
 	ld hl, vBGMap1
@@ -2052,7 +2052,7 @@ AnimationSubstitute:
 	xor a
 	ld bc, $0310
 	call FillMemory
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	ld hl, SlowbroSprite ; facing down sprite
@@ -2091,7 +2091,7 @@ CopySlowbroSpriteData:
 	jp FarCopyData2
 
 HideSubstituteShowMonAnim:
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld hl, wPlayerMonMinimized
 	ld a, [wPlayerBattleStatus2]
@@ -2141,7 +2141,7 @@ AnimationTransformMon:
 	ld [wChangeMonPicEnemyTurnSpecies], a
 
 ChangeMonPic:
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	ld a, [wChangeMonPicEnemyTurnSpecies]
@@ -2174,11 +2174,11 @@ ChangeMonPic:
 AnimationHideEnemyMonPic:
 ; Hides the enemy mon's sprite
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld hl, AnimationHideMonPic
 	call CallWithTurnFlipped
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp Delay3
 
 InitMultipleObjectsOAM:
@@ -2204,7 +2204,7 @@ InitMultipleObjectsOAM:
 
 AnimationHideMonPic:
 ; Hides the mon's sprite.
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	ld a, 12
@@ -2232,7 +2232,7 @@ ClearMonPicFromTileMap:
 ; in order to show only a portion of the mon sprite.
 GetMonSpriteTileMapPointerFromRowCount:
 	push de
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
 	ld a, 20 * 5 + 1
@@ -2320,7 +2320,7 @@ GetMoveSound:
 	ld b,a
 	call IsCryMove
 	jr nc,.NotCryMove
-	ld a,[H_WHOSETURN]
+	ld a,[hWhoseTurn]
 	and a
 	jr nz,.next
 	ld a,[wBattleMonSpecies] ; get number of current monster
@@ -2532,7 +2532,7 @@ MoveSoundTable:
 	db SFX_BATTLE_0B,         $00,$80
 
 CopyPicTiles:
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, $31 ; base tile ID of player mon sprite
 	jr z, .next
@@ -2556,7 +2556,7 @@ CopyDownscaledMonTiles:
 
 CopyTileIDs_NoBGTransfer:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 ; fall through
 
 ; b = number of rows
@@ -2582,7 +2582,7 @@ CopyTileIDs:
 	dec b
 	jr nz, .rowLoop
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	pop hl
 	ret
 
@@ -2945,9 +2945,9 @@ ShakeEnemyHUD_ShakeBG:
 
 BattleAnimCopyTileMapToVRAM:
 	ld a, h
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ld [hAutoBGTransferDest + 1], a
 	ld a, l
-	ld [H_AUTOBGTRANSFERDEST], a
+	ld [hAutoBGTransferDest], a
 	jp Delay3
 
 TossBallAnimation:

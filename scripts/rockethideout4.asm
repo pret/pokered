@@ -125,7 +125,7 @@ RocketHideout4Text1:
 	ld hl, RocketHideout4Text_4557f
 	ld de, RocketHideout4Text_4557f
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

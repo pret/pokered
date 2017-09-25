@@ -50,12 +50,12 @@ RedrawMapView:
 	ld a, [wIsInBattle]
 	inc a
 	ret z
-	ld a, [H_AUTOBGTRANSFERENABLED]
+	ld a, [hAutoBGTransferEnabled]
 	push af
 	ld a, [hTilesetType]
 	push af
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
 	call RunDefaultPaletteCommand
@@ -114,7 +114,7 @@ RedrawMapView:
 	pop af
 	ld [hTilesetType], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 CompareHLWithBC:

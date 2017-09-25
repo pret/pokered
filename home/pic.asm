@@ -2,10 +2,10 @@
 ; bank is given in a, sprite input stream is pointed to in wSpriteInputPtr
 UncompressSpriteData::
 	ld b, a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
@@ -13,7 +13,7 @@ UncompressSpriteData::
 	ld [MBC1SRamBank], a
 	call _UncompressSpriteData
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 

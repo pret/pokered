@@ -41,5 +41,5 @@ TestBattle:
 	; do it all again.
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jr .loop

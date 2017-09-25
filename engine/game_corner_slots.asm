@@ -22,7 +22,7 @@ StartSlotMachine:
 	ld a, 250
 .next
 	ld [wSlotMachineSevenAndBarModeChance], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wSlotMachineSavedROMBank], a
 	call PromptUserToPlaySlots
 	ret

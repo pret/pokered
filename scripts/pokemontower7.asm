@@ -107,7 +107,7 @@ PokemonTower7Script_60db6:
 	ld d, [hl]
 	ld e, a
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp MoveSprite
 .asm_60dde
 	inc hl

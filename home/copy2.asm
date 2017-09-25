@@ -2,24 +2,24 @@ FarCopyData2::
 ; Identical to FarCopyData, but uses hROMBankTemp
 ; as temp space instead of wBuffer.
 	ld [hROMBankTemp],a
-	ld a,[H_LOADEDROMBANK]
+	ld a,[hLoadedROMBank]
 	push af
 	ld a,[hROMBankTemp]
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 	call CopyData
 	pop af
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 	ret
 
 FarCopyData3::
 ; Copy bc bytes from a:de to hl.
 	ld [hROMBankTemp],a
-	ld a,[H_LOADEDROMBANK]
+	ld a,[hLoadedROMBank]
 	push af
 	ld a,[hROMBankTemp]
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 	push hl
 	push de
@@ -31,7 +31,7 @@ FarCopyData3::
 	pop de
 	pop hl
 	pop af
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 	ret
 
@@ -39,10 +39,10 @@ FarCopyDataDouble::
 ; Expand bc bytes of 1bpp image data
 ; from a:hl to 2bpp data at de.
 	ld [hROMBankTemp],a
-	ld a,[H_LOADEDROMBANK]
+	ld a,[hLoadedROMBank]
 	push af
 	ld a,[hROMBankTemp]
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 .loop
 	ld a,[hli]
@@ -55,7 +55,7 @@ FarCopyDataDouble::
 	or b
 	jr nz,.loop
 	pop af
-	ld [H_LOADEDROMBANK],a
+	ld [hLoadedROMBank],a
 	ld [MBC1RomBank],a
 	ret
 
@@ -64,27 +64,27 @@ CopyVideoData::
 ; tiles from b:de to hl, 8 tiles at a time.
 ; This takes c/8 frames.
 
-	ld a, [H_AUTOBGTRANSFERENABLED]
+	ld a, [hAutoBGTransferEnabled]
 	push af
 	xor a ; disable auto-transfer while copying
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [hROMBankTemp], a
 
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld a, e
-	ld [H_VBCOPYSRC], a
+	ld [hVBCopySrc], a
 	ld a, d
-	ld [H_VBCOPYSRC + 1], a
+	ld [hVBCopySrc + 1], a
 
 	ld a, l
-	ld [H_VBCOPYDEST], a
+	ld [hVBCopyDest], a
 	ld a, h
-	ld [H_VBCOPYDEST + 1], a
+	ld [hVBCopyDest + 1], a
 
 .loop
 	ld a, c
@@ -92,18 +92,18 @@ CopyVideoData::
 	jr nc, .keepgoing
 
 .done
-	ld [H_VBCOPYSIZE], a
+	ld [hVBCopySize], a
 	call DelayFrame
 	ld a, [hROMBankTemp]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 .keepgoing
 	ld a, 8
-	ld [H_VBCOPYSIZE], a
+	ld [hVBCopySize], a
 	call DelayFrame
 	ld a, c
 	sub 8
@@ -114,26 +114,26 @@ CopyVideoDataDouble::
 ; Wait for the next VBlank, then copy c 1bpp
 ; tiles from b:de to hl, 8 tiles at a time.
 ; This takes c/8 frames.
-	ld a, [H_AUTOBGTRANSFERENABLED]
+	ld a, [hAutoBGTransferEnabled]
 	push af
 	xor a ; disable auto-transfer while copying
-	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, [H_LOADEDROMBANK]
+	ld [hAutoBGTransferEnabled], a
+	ld a, [hLoadedROMBank]
 	ld [hROMBankTemp], a
 
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	ld a, e
-	ld [H_VBCOPYDOUBLESRC], a
+	ld [hVBCopyDoubleSrc], a
 	ld a, d
-	ld [H_VBCOPYDOUBLESRC + 1], a
+	ld [hVBCopyDoubleSrc + 1], a
 
 	ld a, l
-	ld [H_VBCOPYDOUBLEDEST], a
+	ld [hVBCopyDoubleDest], a
 	ld a, h
-	ld [H_VBCOPYDOUBLEDEST + 1], a
+	ld [hVBCopyDoubleDest + 1], a
 
 .loop
 	ld a, c
@@ -141,18 +141,18 @@ CopyVideoDataDouble::
 	jr nc, .keepgoing
 
 .done
-	ld [H_VBCOPYDOUBLESIZE], a
+	ld [hVBCopyDoubleSize], a
 	call DelayFrame
 	ld a, [hROMBankTemp]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop af
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 .keepgoing
 	ld a, 8
-	ld [H_VBCOPYDOUBLESIZE], a
+	ld [hVBCopyDoubleSize], a
 	call DelayFrame
 	ld a, c
 	sub 8
@@ -200,16 +200,16 @@ CopyScreenTileBufferToVRAM::
 
 .setup
 	ld a, d
-	ld [H_VBCOPYBGSRC+1], a
+	ld [hVBCopyBGSrc+1], a
 	call GetRowColAddressBgMap
 	ld a, l
-	ld [H_VBCOPYBGDEST], a
+	ld [hVBCopyBGDest], a
 	ld a, h
-	ld [H_VBCOPYBGDEST+1], a
+	ld [hVBCopyBGDest+1], a
 	ld a, c
-	ld [H_VBCOPYBGNUMROWS], a
+	ld [hVBCopyBGNumRows], a
 	ld a, e
-	ld [H_VBCOPYBGSRC], a
+	ld [hVBCopyBGSrc], a
 	ret
 
 ClearScreen::

@@ -1,7 +1,7 @@
 ReflectLightScreenEffect_:
 	ld hl, wPlayerBattleStatus3
 	ld de, wPlayerMoveEffect
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .reflectLightScreenEffect
 	ld hl, wEnemyBattleStatus3

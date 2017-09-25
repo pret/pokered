@@ -19,7 +19,7 @@
 ; f8: leveled up
 DrawPartyMenu_:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED],a
+	ld [hAutoBGTransferEnabled],a
 	call ClearScreen
 	call UpdateSprites
 	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
@@ -213,7 +213,7 @@ RedrawPartyMenu_:
 	pop af
 	ld [hl],a
 	ld a,1
-	ld [H_AUTOBGTRANSFERENABLED],a
+	ld [hAutoBGTransferEnabled],a
 	call Delay3
 	jp GBPalNormal
 .printItemUseMessage

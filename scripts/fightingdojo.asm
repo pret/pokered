@@ -43,7 +43,7 @@ FightingDojoScript1:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -62,7 +62,7 @@ FightingDojoScript3:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay

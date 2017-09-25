@@ -60,7 +60,7 @@ rLCDC_DEFAULT EQU %11100011
 	call ClearSprites
 
 	ld a, Bank(WriteDMACodeToHRAM)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM
 
@@ -101,9 +101,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, $9c
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ld [hAutoBGTransferDest + 1], a
 	xor a
-	ld [H_AUTOBGTRANSFERDEST], a
+	ld [hAutoBGTransferDest], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 

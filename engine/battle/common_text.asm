@@ -101,16 +101,16 @@ PrintSendOutMonMessage:
 	ld hl, GoText
 	jr z, .printText
 	xor a
-	ld [H_MULTIPLICAND], a
+	ld [hMultiplicand], a
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wLastSwitchInEnemyMonHP], a
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand + 1], a
 	ld a, [hl]
 	ld [wLastSwitchInEnemyMonHP + 1], a
-	ld [H_MULTIPLICAND + 2], a
+	ld [hMultiplicand + 2], a
 	ld a, 25
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -121,9 +121,9 @@ PrintSendOutMonMessage:
 	rr b
 	ld a, b
 	ld b, 4
-	ld [H_DIVISOR], a ; enemy mon max HP divided by 4
+	ld [hDivisor], a ; enemy mon max HP divided by 4
 	call Divide
-	ld a, [H_QUOTIENT + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
+	ld a, [hQuotient + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
 	ld hl, GoText ; 70% or greater
 	cp 70
 	jr nc, .printText
@@ -179,14 +179,14 @@ PlayerMon2Text:
 	dec hl
 	ld a, [de]
 	sub b
-	ld [H_MULTIPLICAND + 2], a
+	ld [hMultiplicand + 2], a
 	dec de
 	ld b, [hl]
 	ld a, [de]
 	sbc b
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand + 1], a
 	ld a, 25
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -197,11 +197,11 @@ PlayerMon2Text:
 	rr b
 	ld a, b
 	ld b, 4
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	call Divide
 	pop bc
 	pop de
-	ld a, [H_QUOTIENT + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
+	ld a, [hQuotient + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
 ; Assuming that the enemy mon hasn't gained HP since the last switch in,
 ; a approximates the percentage that the enemy mon's total HP has decreased
 ; since the last switch in.

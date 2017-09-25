@@ -120,7 +120,7 @@ PewterGymText1:
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

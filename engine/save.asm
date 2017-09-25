@@ -420,7 +420,7 @@ CopyBoxToOrFromSRAM:
 
 DisplayChangeBoxMenu:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -486,7 +486,7 @@ DisplayChangeBoxMenu:
 	dec a
 	jr nz, .loop
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 ChooseABoxText:

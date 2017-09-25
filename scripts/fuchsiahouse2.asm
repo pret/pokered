@@ -95,7 +95,7 @@ HM04NoRoomText:
 FuchsiaHouse2Text5:
 FuchsiaHouse2Text4:
 	TX_ASM
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
 	jr nz, .asm_4c9a2

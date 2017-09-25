@@ -44,7 +44,7 @@ PewterCityScript1:
 	and a
 	ret nz
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -69,7 +69,7 @@ PewterCityScript1:
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
@@ -112,7 +112,7 @@ PewterCityScript4:
 	and a
 	ret nz
 	ld a, $5
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -137,7 +137,7 @@ PewterCityScript4:
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $5
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
@@ -220,7 +220,7 @@ PewterCityText3:
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
@@ -284,7 +284,7 @@ PewterCityText5:
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a

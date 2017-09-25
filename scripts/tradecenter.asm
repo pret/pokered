@@ -8,7 +8,7 @@ TradeCenterScript:
 .next
 	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteFacingDirection
 	ld hl, wd72d
 	bit 0, [hl]
