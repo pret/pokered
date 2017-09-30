@@ -1995,7 +1995,7 @@ RunMapScript::
 	ld l,a
 	ld de,.return
 	push de
-	jp [hl] ; jump to script
+	jp hl ; jump to script
 .return
 	ret
 

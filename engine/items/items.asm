@@ -13,7 +13,7 @@ UseItem_:
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	jp [hl]
+	jp hl
 
 ItemUsePtrTable:
 	dw ItemUseBall       ; MASTER_BALL

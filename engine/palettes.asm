@@ -17,7 +17,7 @@ _RunPaletteCommand:
 	ld l, a
 	ld de, SendSGBPackets
 	push de
-	jp [hl]
+	jp hl
 
 SetPal_BattleBlack:
 	ld hl, PalPacket_Black
