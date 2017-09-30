@@ -3137,10 +3137,12 @@ wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
 ; Overload enemy party data
+UNION
+
 wWaterRate:: db ; d8a4
 wWaterMons:: db ; d8a5
 
-	ds wWaterRate - @
+NEXTU
 
 wEnemyMons:: ; d8a4
 wEnemyMon1:: party_struct wEnemyMon1
@@ -3152,6 +3154,8 @@ wEnemyMon6:: party_struct wEnemyMon6
 
 wEnemyMonOT::    ds NAME_LENGTH * PARTY_LENGTH ; d9ac
 wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d9ee
+
+ENDU
 
 
 wTrainerHeaderPtr:: ; da30
