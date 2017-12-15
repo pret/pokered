@@ -19,7 +19,7 @@ PrintSafariZoneBattleText:
 	ld [wd0b5], a
 	call GetMonHeader
 	ld a, [wMonHCatchRate]
-	ld [wEnemyMonCatchRate], a
+	ld [wEnemyMonActualCatchRate], a
 	pop hl
 .asm_429f
 	push hl
