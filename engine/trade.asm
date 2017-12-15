@@ -46,7 +46,7 @@ TradeAnimCommon:
 	ld l, a
 	ld de, .loop
 	push de
-	jp [hl] ; call trade func, which will return to the top of the loop
+	jp hl ; call trade func, which will return to the top of the loop
 .done
 	pop af
 	ld [hSCX], a

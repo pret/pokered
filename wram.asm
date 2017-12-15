@@ -60,7 +60,7 @@ battle_struct: MACRO
 ENDM
 
 
-SECTION "WRAM Bank 0", WRAM0 [$c000]
+SECTION "WRAM Bank 0", WRAM0
 
 wUnusedC000:: ; c000
 	ds 1
@@ -1414,7 +1414,7 @@ wStatusScreenHPBarColor:: ; cf25
 
 	ds 7
 
-wCopyingSGBTileData:: ; c2fd
+wCopyingSGBTileData:: ; cf2d
 
 wWhichPartyMenuHPBar:: ; cf2d
 
@@ -1581,40 +1581,19 @@ wBattleMonSpecies2:: ; cfd9
 
 wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
-wEnemyMon:: ; cfe5
-; The wEnemyMon struct reaches past 0xcfff,
-; the end of wram bank 0 on cgb.
-; This has no significance on dmg, where wram
-; isn't banked (c000-dfff is contiguous).
-; However, recent versions of rgbds have replaced
-; dmg-style wram with cgb wram banks.
+UNION
+wEnemyMon:: battle_struct wEnemyMon ; cfe5
 
-; Until this is fixed, this struct will have
-; to be declared manually.
+NEXTU
 
-wEnemyMonSpecies::   db
-wEnemyMonHP::        dw
-wEnemyMonPartyPos::
-wEnemyMonBoxLevel::  db
-wEnemyMonStatus::    db
-wEnemyMonType::
-wEnemyMonType1::     db
-wEnemyMonType2::     db
-wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds NUM_MOVES
-wEnemyMonDVs::       ds 2
-wEnemyMonLevel::     db
-wEnemyMonMaxHP::     dw
-wEnemyMonAttack::    dw
-wEnemyMonDefense::   dw
-wEnemyMonSpeed::     dw
-wEnemyMonSpecial::   dw
-wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
-SECTION "WRAM Bank 1", WRAMX[$d000], BANK[1]
-                     ds 2 ; NUM_MOVES - 2
+	ds 3
+; Alias for wEnemyMonBoxLevel
+wEnemyMonPartyPos::	ds 1
+ENDU
+
 
 wEnemyMonBaseStats:: ds 5
-wEnemyMonCatchRate:: ds 1
+wEnemyMonActualCatchRate:: ds 1
 wEnemyMonBaseExp:: ds 1
 
 wBattleMonNick:: ds NAME_LENGTH ; d009
@@ -1735,7 +1714,7 @@ wPlayerBattleStatus3:: ; d064
 ; bit 0 - toxic
 ; bit 1 - light screen
 ; bit 2 - reflect
-; bit 3 - tranformed
+; bit 3 - transformed
 	ds 1
 
 wEnemyStatsToDouble:: ; d065
@@ -2046,7 +2025,7 @@ wPredefBank:: ; d0b7
 wMonHeader:: ; d0b8
 
 wMonHIndex:: ; d0b8
-; In the ROM base stats data stucture, this is the dex number, but it is
+; In the ROM base stats data structure, this is the dex number, but it is
 ; overwritten with the internal index number after the header is copied to WRAM.
 	ds 1
 
@@ -3057,7 +3036,7 @@ wd732:: ; d732
 ; bit 1: remnant of debug mode? not set by the game code.
 ; if it is set
 ; 1. skips most of Prof. Oak's speech, and uses NINTEN as the player's name and SONY as the rival's name
-; 2. does not have the player start in floor two of the playyer's house (instead sending them to [wLastMap])
+; 2. does not have the player start in floor two of the player's house (instead sending them to [wLastMap])
 ; 3. allows wild battles to be avoided by holding down B
 ; bit 2: the target warp is a fly warp (bit 3 set or blacked out) or a dungeon warp (bit 4 set)
 ; bit 3: used warp pad, escape rope, dig, teleport, or fly, so the target warp is a "fly warp"
@@ -3085,7 +3064,7 @@ wd736:: ; d736
 ; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
 ; bit 6: jumping down a ledge / fishing animation
-; bit 7: player sprite spinning due to spin tiles (Rocket hidehout / Viridian Gym)
+; bit 7: player sprite spinning due to spin tiles (Rocket hideout / Viridian Gym)
 	ds 1
 
 wCompletedInGameTradeFlags:: ; d737
@@ -3137,10 +3116,12 @@ wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
 ; Overload enemy party data
+UNION
+
 wWaterRate:: db ; d8a4
 wWaterMons:: db ; d8a5
 
-	ds wWaterRate - @
+NEXTU
 
 wEnemyMons:: ; d8a4
 wEnemyMon1:: party_struct wEnemyMon1
@@ -3152,6 +3133,8 @@ wEnemyMon6:: party_struct wEnemyMon6
 
 wEnemyMonOT::    ds NAME_LENGTH * PARTY_LENGTH ; d9ac
 wEnemyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH ; d9ee
+
+ENDU
 
 
 wTrainerHeaderPtr:: ; da30
@@ -3168,7 +3151,7 @@ wUnusedDA38:: ; da38
 
 wCurMapScript:: ; da39
 ; index of current map script, mostly used as index for function pointer array
-; mostly copied from map-specific map script pointer and wirtten back later
+; mostly copied from map-specific map script pointer and written back later
 	ds 1
 
 	ds 7
@@ -3220,9 +3203,9 @@ wBoxMonNicksEnd:: ; dee2
 wBoxDataEnd::
 
 
-SECTION "Stack", WRAMX[$dfff], BANK[1]
+SECTION "Stack", WRAM0[$df00]
+	ds $ff
 wStack:: ; dfff
-	ds -$100
 
 
 INCLUDE "sram.asm"

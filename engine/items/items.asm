@@ -13,7 +13,7 @@ UseItem_:
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	jp [hl]
+	jp hl
 
 ItemUsePtrTable:
 	dw ItemUseBall       ; MASTER_BALL
@@ -297,7 +297,7 @@ ItemUseBall:
 	pop bc ; b = Rand1 - Status
 
 ; If Rand1 - Status > CatchRate, the ball fails to capture the Pokémon.
-	ld a,[wEnemyMonCatchRate]
+	ld a,[wEnemyMonActualCatchRate]
 	cp b
 	jr c,.failedToCapture
 
@@ -325,7 +325,7 @@ ItemUseBall:
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld [H_MULTIPLICAND + 1],a
-	ld a,[wEnemyMonCatchRate]
+	ld a,[wEnemyMonActualCatchRate]
 	ld [H_MULTIPLICAND + 2],a
 	ld a,100
 	ld [H_MULTIPLIER],a
@@ -863,7 +863,7 @@ ItemUseMedicine:
 	jp nc,.useVitamin ; if it's a vitamin or Rare Candy
 	cp a,FULL_RESTORE
 	jr nc,.healHP ; if it's a Full Restore or one of the potions
-; fall through if it's one of the status-specifc healing items
+; fall through if it's one of the status-specific healing items
 .cureStatusAilment
 	ld bc,wPartyMon1Status - wPartyMon1
 	add hl,bc ; hl now points to status
@@ -1434,7 +1434,7 @@ VitaminText:
 ItemUseBait:
 	ld hl,ThrewBaitText
 	call PrintText
-	ld hl,wEnemyMonCatchRate ; catch rate
+	ld hl,wEnemyMonActualCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a,BAIT_ANIM
 	ld hl,wSafariBaitFactor ; bait factor
@@ -1444,7 +1444,7 @@ ItemUseBait:
 ItemUseRock:
 	ld hl,ThrewRockText
 	call PrintText
-	ld hl,wEnemyMonCatchRate ; catch rate
+	ld hl,wEnemyMonActualCatchRate ; catch rate
 	ld a,[hl]
 	add a ; double catch rate
 	jr nc,.noCarry
@@ -1846,12 +1846,12 @@ PlayedFluteHadEffectText:
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, SFX_POKEFLUE
+	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wChannelSoundIDs + Ch2]
-	cp a, SFX_POKEFLUE
+	cp a, SFX_POKEFLUTE
 	jr z,.musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done

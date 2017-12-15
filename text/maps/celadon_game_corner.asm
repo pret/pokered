@@ -64,7 +64,7 @@ _CeladonGameCornerText_48d9c::
 	prompt
 
 _Received10CoinsText::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "10 coins!@@"
 
 _CeladonGameCornerText_48da7::
@@ -121,7 +121,7 @@ _CeladonGameCornerText_48e26::
 	prompt
 
 _Received20CoinsText::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "20 coins!@@"
 
 _CeladonGameCornerText_48e31::
@@ -143,7 +143,7 @@ _CeladonGameCornerText_48e88::
 	prompt
 
 _CeladonGameCornerText_48e8d::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "20 coins!@@"
 
 _CeladonGameCornerText_48e93::

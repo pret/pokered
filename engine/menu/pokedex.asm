@@ -647,7 +647,7 @@ PokedexToIndex:
 	ret
 
 IndexToPokedex:
-	; converts the indexédex number at wd11e to a Pokédex number
+	; converts the index number at wd11e to a Pokédex number
 	push bc
 	push hl
 	ld a,[wd11e]

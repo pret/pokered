@@ -25,7 +25,7 @@ RecoilEffect_:
 	jr nz, .updateHP
 	inc c ; minimum recoil damage is 1
 .updateHP
-; substract HP from user due to the recoil damage
+; subtract HP from user due to the recoil damage
 	ld a, [hli]
 	ld [wHPBarMaxHP+1], a
 	ld a, [hl]

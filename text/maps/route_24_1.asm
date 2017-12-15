@@ -10,7 +10,7 @@ _Route24Text_51515::
 	prompt
 
 _Route24Text_5151a::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"

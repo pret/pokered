@@ -24,7 +24,7 @@ DisplayTextBoxID_:
 	ld l,a ; hl = address of function
 	ld de,.done
 	push de
-	jp [hl] ; jump to the function
+	jp hl ; jump to the function
 .coordTableMatch
 	call GetTextBoxIDCoords
 	call GetAddressOfScreenCoords

@@ -331,9 +331,9 @@ UpdateSpriteInWalkingAnimation:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
 	inc h
-	ld a, [hl]                       ; c2x0 (walk animantion counter)
+	ld a, [hl]                       ; c2x0 (walk animation counter)
 	dec a
-	ld [hl], a                       ; update walk animantion counter
+	ld [hl], a                       ; update walk animation counter
 	ret nz
 	ld a, $6                         ; walking finished, update state
 	add l
@@ -446,7 +446,7 @@ InitializeSpriteStatus:
 	ld [hl], a    ; $c2x3: set X displacement to 8
 	ret
 
-; calculates the spprite's scrren position form its map position and the player position
+; calculates the sprite's screen position form its map position and the player position
 InitializeSpriteScreenPosition:
 	ld h, wSpriteStateData2 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]
@@ -685,7 +685,7 @@ CanWalkOntoTile:
 	scf                ; set carry (marking failure to walk)
 	ret
 
-; calculates the tile pointer pointing to the tile the current sprite stancs on
+; calculates the tile pointer pointing to the tile the current sprite stands on
 ; this is always the lower left tile of the 2x2 tile blocks all sprites are snapped to
 ; hl: output pointer
 GetTileSpriteStandsOn:

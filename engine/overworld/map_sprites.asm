@@ -7,7 +7,7 @@
 ; $C1X* and $C2X* are used to denote wSpriteStateData1-wSpriteStateData1 + $ff and wSpriteStateData2 + $00-wSpriteStateData2 + $ff sprite slot
 ; fields, respectively, within loops. The X is the loop index.
 ; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
-; denote fields of the sprite slots interated over in the inner loop.
+; denote fields of the sprite slots iterated over in the inner loop.
 InitMapSprites:
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
@@ -192,7 +192,7 @@ LoadMapSpriteTilePatterns:
 	pop de
 	call FarCopyData2 ; load tile pattern data for sprite when walking
 	jr .skipSecondLoad
-; When reloading the upper half of tile patterns after diplaying text, the LCD
+; When reloading the upper half of tile patterns after displaying text, the LCD
 ; will be on, so CopyVideoData (which writes to VRAM only during V-blank) must
 ; be used instead of FarCopyData2.
 .loadWhileLCDOn

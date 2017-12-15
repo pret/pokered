@@ -619,7 +619,7 @@ SAVCheckRandomID:
 	ld a,[sMainDataCheckSum]
 	cp c
 	jr nz,.next
-	ld hl,sMainData + 98 ; player ID
+	ld hl,sMainData + (wPlayerID - wMainDataStart) ; player ID
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a

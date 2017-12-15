@@ -213,7 +213,7 @@ PlayAnimation:
 	ld h,a
 	ld de,.nextAnimationCommand
 	push de
-	jp [hl] ; jump to special effect function
+	jp hl ; jump to special effect function
 .playSubanimation
 	ld c,a
 	and a,%00111111
@@ -457,7 +457,7 @@ PlayApplyingAttackAnimation:
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	jp [hl]
+	jp hl
 
 AnimationTypePointerTable:
 	dw ShakeScreenVertically ; enemy mon has used a damaging move without a side effect
@@ -642,7 +642,7 @@ DoSpecialEffectByAnimationId:
 	ld l,a
 	ld de,.done
 	push de
-	jp [hl]
+	jp hl
 .done
 	pop bc
 	pop de
@@ -829,7 +829,7 @@ DoRockSlideSpecialEffects:
 	cp a,1
 	jp z,AnimationFlashScreen ; if it's the end of the subanimation, flash the screen
 	ret
-; if the subaninmation counter is between 8 and 11, shake the screen horizontally and vertically
+; if the subanimation counter is between 8 and 11, shake the screen horizontally and vertically
 .shakeScreen
 	ld b,1
 	predef PredefShakeScreenHorizontally ; shake horizontally
@@ -1080,7 +1080,7 @@ CallWithTurnFlipped:
 	ld [H_WHOSETURN],a
 	ld de,.returnAddress
 	push de
-	jp [hl]
+	jp hl
 .returnAddress
 	pop af
 	ld [H_WHOSETURN],a
@@ -1516,7 +1516,7 @@ AnimationShowMonPic:
 	jp Delay3
 
 AnimationShowEnemyMonPic:
-; Shows the emenmy mon's front sprite. Used in animations like Seismic Toss
+; Shows the enemy mon's front sprite. Used in animations like Seismic Toss
 ; to make the mon's sprite reappear after disappears offscreen.
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped
