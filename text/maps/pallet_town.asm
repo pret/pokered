@@ -47,9 +47,9 @@ _PalletTownText5::
 	done
 
 _PalletTownText6::
-	text "<PLAYER>'s house "
+	text $52,"'s house "
 	done
 
 _PalletTownText7::
-	text "<RIVAL>'s house "
+	text $53,"'s house "
 	done

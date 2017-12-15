@@ -712,7 +712,7 @@ OaksLabScript_1d02b:
 	ret
 
 OaksLabScript_1d076:
-	ld hl, OaksLabTextPointers2
+	ld hl, OaksLabTextPointers + $36 ; starts at OaksLabText28
 	ld a, l
 	ld [wMapTextPtr], a
 	ld a, h
@@ -747,20 +747,19 @@ OaksLabTextPointers:
 	dw OaksLabText25
 	dw OaksLabText26
 	dw OaksLabText27
+	dw OaksLabText28
+	dw OaksLabText29
+	dw OaksLabText30
+	dw OaksLabText31
+	dw OaksLabText32
+	dw OaksLabText33
+	dw OaksLabText34
+	dw OaksLabText35
+	dw OaksLabText36
+	dw OaksLabText37
+	dw OaksLabText38
 
-OaksLabTextPointers2:
-	dw OaksLabText1
-	dw OaksLabText2
-	dw OaksLabText3
-	dw OaksLabText4
-	dw OaksLabText5
-	dw OaksLabText6
-	dw OaksLabText7
-	dw OaksLabText8
-	dw OaksLabText9
-	dw OaksLabText10
-	dw OaksLabText11
-
+OaksLabText28:
 OaksLabText1:
 	TX_ASM
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
@@ -792,6 +791,7 @@ OaksLabText41:
 	TX_FAR _OaksLabText41
 	db "@"
 
+OaksLabText29:
 OaksLabText2:
 	TX_ASM
 	ld a, STARTER2
@@ -802,6 +802,7 @@ OaksLabText2:
 	ld b, $2
 	jr OaksLabScript_1d133
 
+OaksLabText30:
 OaksLabText3:
 	TX_ASM
 	ld a, STARTER3
@@ -812,6 +813,7 @@ OaksLabText3:
 	ld b, $3
 	jr OaksLabScript_1d133
 
+OaksLabText31:
 OaksLabText4:
 	TX_ASM
 	ld a, STARTER1
@@ -1068,6 +1070,8 @@ OaksLabText_1d31d:
 	TX_FAR _OaksLabText_1d31d
 	db "@"
 
+OaksLabText34:
+OaksLabText33:
 OaksLabText7:
 OaksLabText6:
 	TX_ASM
@@ -1079,10 +1083,12 @@ OaksLabText_1d32c:
 	TX_FAR _OaksLabText_1d32c
 	db "@"
 
+OaksLabText35:
 OaksLabText8:
 	TX_FAR _OaksLabText8
 	db "@"
 
+OaksLabText36:
 OaksLabText9:
 	TX_ASM
 	ld hl, OaksLabText_1d340
@@ -1221,6 +1227,8 @@ OaksLabText27:
 	TX_FAR _OaksLabText27
 	db "@"
 
+OaksLabText38:
+OaksLabText37:
 OaksLabText11:
 OaksLabText10:
 	TX_ASM

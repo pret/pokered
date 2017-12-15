@@ -46,7 +46,7 @@ _DayCareOweMoneyText::
 	done
 
 _DayCareGotMonBackText::
-	text "<PLAYER> got"
+	text $52, " got"
 	line "@"
 	TX_RAM wDayCareMonName
 	text " back!"

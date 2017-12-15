@@ -10,7 +10,7 @@ _OaksLabText40::
 	cont "greedy like you!"
 
 	para "Go ahead and"
-	line "choose, <PLAYER>!"
+	line "choose, ", $52, "!"
 	done
 
 _OaksLabText41::
@@ -49,7 +49,7 @@ _OaksLabMonEnergeticText::
 	prompt
 
 _OaksLabReceivedMonText::
-	text "<PLAYER> received"
+	text $52, " received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"

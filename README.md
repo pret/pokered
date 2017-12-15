@@ -12,20 +12,8 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
 ## See also
 
-* Disassembly of [**Pokémon Yellow**][pokeyellow]
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
-* Disassembly of [**Pokémon Pinball**][pokepinball]
-* Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Ruby**][pokeruby]
-* Disassembly of [**Pokémon Emerald**][pokeemerald]
-* Discord: [**pret**][Discord]
 * irc: **irc.freenode.net** [**#pret**][irc]
 
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokeruby]: https://github.com/pret/pokeruby
-[pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/cJxDDVP
+[pokecrystal]: https://github.com/kanzure/pokecrystal
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

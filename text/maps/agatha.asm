@@ -17,7 +17,7 @@ _AgathaBeforeBattleText::
 	cont "wrong! #MON"
 	cont "are for fighting!"
 
-	para "<PLAYER>! I'll show"
+	para $52, "! I'll show"
 	line "you how a real"
 	cont "trainer fights!"
 	done

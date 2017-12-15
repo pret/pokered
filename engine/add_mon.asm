@@ -340,14 +340,13 @@ _AddEnemyMonToPlayerParty:
 
 _MoveMon:
 	ld a, [wMoveMonType]
-	and a   ; BOX_TO_PARTY
+	and a
 	jr z, .checkPartyMonSlots
 	cp DAYCARE_TO_PARTY
 	jr z, .checkPartyMonSlots
 	cp PARTY_TO_DAYCARE
 	ld hl, wDayCareMon
-	jr z, .findMonDataSrc
-	; else it's PARTY_TO_BOX
+	jr z, .asm_f575
 	ld hl, wNumInBox
 	ld a, [hl]
 	cp MONS_PER_BOX
@@ -370,26 +369,24 @@ _MoveMon:
 	ld a, [wMoveMonType]
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
-	jr z, .copySpecies
+	jr z, .asm_f556
 	ld a, [wcf91]
-.copySpecies
+.asm_f556
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
-.findMonDataDest
 	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
 	ld a, [wPartyCount]
-	jr nz, .addMonOffset
-	; if it's PARTY_TO_BOX
+	jr nz, .skipToNewMonEntry
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1 ; $21
 	ld a, [wNumInBox]
-.addMonOffset
+.skipToNewMonEntry
 	dec a
 	call AddNTimes
-.findMonDataSrc
+.asm_f575
 	push hl
 	ld e, l
 	ld d, h
@@ -397,16 +394,16 @@ _MoveMon:
 	and a
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1 ; $21
-	jr z, .addMonOffset2
+	jr z, .asm_f591
 	cp DAYCARE_TO_PARTY
 	ld hl, wDayCareMon
-	jr z, .copyMonData
+	jr z, .asm_f597
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
-.addMonOffset2
+.asm_f591
 	ld a, [wWhichPokemon]
 	call AddNTimes
-.copyMonData
+.asm_f597
 	push hl
 	push de
 	ld bc, wBoxMon2 - wBoxMon1
@@ -414,85 +411,84 @@ _MoveMon:
 	pop de
 	pop hl
 	ld a, [wMoveMonType]
-	and a ; BOX_TO_PARTY
-	jr z, .findOTdest
+	and a
+	jr z, .asm_f5b4
 	cp DAYCARE_TO_PARTY
-	jr z, .findOTdest
+	jr z, .asm_f5b4
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
-	ld a, [hl] ; hl = Level
+	ld a, [hl]
 	inc de
 	inc de
 	inc de
-	ld [de], a ; de = BoxLevel
-.findOTdest
+	ld [de], a
+.asm_f5b4
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonOT
-	jr z, .findOTsrc
-	dec a 
+	jr z, .asm_f5d3
+	dec a
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
-	jr nz, .addOToffset
+	jr nz, .asm_f5cd
 	ld hl, wBoxMonOT
 	ld a, [wNumInBox]
-.addOToffset
+.asm_f5cd
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-.findOTsrc
+.asm_f5d3
 	ld hl, wBoxMonOT
 	ld a, [wMoveMonType]
 	and a
-	jr z, .addOToffset2
+	jr z, .asm_f5e6
 	ld hl, wDayCareMonOT
 	cp DAYCARE_TO_PARTY
-	jr z, .copyOT
+	jr z, .asm_f5ec
 	ld hl, wPartyMonOT
-.addOToffset2
+.asm_f5e6
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-.copyOT
+.asm_f5ec
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
-.findNickDest
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonName
-	jr z, .findNickSrc
+	jr z, .asm_f611
 	dec a
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
-	jr nz, .addNickOffset
+	jr nz, .asm_f60b
 	ld hl, wBoxMonNicks
 	ld a, [wNumInBox]
-.addNickOffset
+.asm_f60b
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
 	ld e, l
-.findNickSrc
+.asm_f611
 	ld hl, wBoxMonNicks
 	ld a, [wMoveMonType]
 	and a
-	jr z, .addNickOffset2
+	jr z, .asm_f624
 	ld hl, wDayCareMonName
 	cp DAYCARE_TO_PARTY
-	jr z, .copyNick
+	jr z, .asm_f62a
 	ld hl, wPartyMonNicks
-.addNickOffset2
+.asm_f624
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-.copyNick
+.asm_f62a
 	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]
 	cp PARTY_TO_BOX
-	jr z, .done
+	jr z, .asm_f664
 	cp PARTY_TO_DAYCARE
-	jr z, .done
+	jr z, .asm_f664
 	push hl
 	srl a
 	add $2
@@ -511,6 +507,6 @@ _MoveMon:
 	add hl, bc
 	ld b, $1
 	call CalcStats
-.done
+.asm_f664
 	and a
 	ret

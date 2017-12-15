@@ -3,7 +3,7 @@ _SSAnne7RubText::
 	line "I feel hideous..."
 	cont "Urrp! Seasick..."
 
-	para "<PLAYER> rubbed"
+	para $52, " rubbed"
 	line "the CAPTAIN's"
 	cont "back!"
 
@@ -31,7 +31,7 @@ _ReceivingHM01Text::
 	prompt
 
 _ReceivedHM01Text::
-	text "<PLAYER> got"
+	text $52, " got"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

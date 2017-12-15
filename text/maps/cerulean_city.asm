@@ -1,6 +1,6 @@
 _CeruleanCityText_19668::
-	text "<RIVAL>: Yo!"
-	line "<PLAYER>!"
+	text $53, ": Yo!"
+	line $52, "!"
 
 	para "You're still"
 	line "struggling along"
@@ -13,7 +13,7 @@ _CeruleanCityText_19668::
 
 	para "Here, let me see"
 	line "what you caught,"
-	cont "<PLAYER>!"
+	cont $52, "!"
 	done
 
 _CeruleanCityText_1966d::
@@ -29,7 +29,7 @@ _CeruleanCityText_19672::
 	prompt
 
 _CeruleanCityText_19677::
-	text "<RIVAL>: Hey,"
+	text $53, ": Hey,"
 	line "guess what?"
 
 	para "I went to BILL's"
@@ -69,7 +69,7 @@ _CeruleanCityText_196d9::
 	done
 
 _ReceivedTM28Text::
-	text "<PLAYER> recovered"
+	text $52, " recovered"
 	line "TM28!@@"
 
 _ReceivedTM28Text2::

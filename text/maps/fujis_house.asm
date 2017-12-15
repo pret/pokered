@@ -34,7 +34,7 @@ _LavenderHouse1Text4::
 	text "NIDORINO: Gaoo!@@"
 
 _LavenderHouse1Text_1d94c::
-	text "MR.FUJI: <PLAYER>."
+	text "MR.FUJI: ", $52, "."
 
 	para "Your #DEX quest"
 	line "may fail without"
@@ -46,7 +46,7 @@ _LavenderHouse1Text_1d94c::
 	prompt
 
 _ReceivedFluteText::
-	text "<PLAYER> received"
+	text $52, " received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"

@@ -55,7 +55,7 @@ _SaffronGymText_5d173::
 	done
 
 ReceivedTM46Text::
-	text "<PLAYER> received"
+	text $52, " received"
 	line "TM46!@@"
 
 _TM46ExplanationText::

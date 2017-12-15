@@ -1,11 +1,11 @@
 _CopycatsHouse2FText_5ccd4::
-	text "<PLAYER>: Hi! Do"
+	text $52, ": Hi! Do"
 	line "you like #MON?"
 
-	para "<PLAYER>: Uh no, I"
+	para $52, ": Uh no, I"
 	line "just asked you."
 
-	para "<PLAYER>: Huh?"
+	para $52, ": Huh?"
 	line "You're strange!"
 
 	para "COPYCAT: Hmm?"
@@ -27,7 +27,7 @@ _TM31PreReceiveText::
 	prompt
 
 _ReceivedTM31Text::
-	text "<PLAYER> received"
+	text $52, " received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -41,12 +41,12 @@ _TM31ExplanationText1::
 	line "#MON!@@"
 
 _TM31ExplanationText2::
-	text "<PLAYER>: Hi!"
+	text $52, ": Hi!"
 	line "Thanks for TM31!"
 
-	para "<PLAYER>: Pardon?"
+	para $52, ": Pardon?"
 
-	para "<PLAYER>: Is it"
+	para $52, ": Is it"
 	line "that fun to mimic"
 	cont "my every move?"
 

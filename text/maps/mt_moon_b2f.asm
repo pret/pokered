@@ -9,7 +9,7 @@ _MtMoon3Text_49f64::
 	done
 
 _MtMoon3Text_49f6f::
-	text "<PLAYER> got the"
+	text $52, " got the"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
