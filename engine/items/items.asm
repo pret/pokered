@@ -13,7 +13,7 @@ UseItem_:
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	jp [hl]
+	jp hl
 
 ItemUsePtrTable:
 	dw ItemUseBall       ; MASTER_BALL
@@ -863,7 +863,7 @@ ItemUseMedicine:
 	jp nc,.useVitamin ; if it's a vitamin or Rare Candy
 	cp a,FULL_RESTORE
 	jr nc,.healHP ; if it's a Full Restore or one of the potions
-; fall through if it's one of the status-specifc healing items
+; fall through if it's one of the status-specific healing items
 .cureStatusAilment
 	ld bc,wPartyMon1Status - wPartyMon1
 	add hl,bc ; hl now points to status
@@ -1846,12 +1846,12 @@ PlayedFluteHadEffectText:
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, SFX_POKEFLUE
+	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wChannelSoundIDs + Ch2]
-	cp a, SFX_POKEFLUE
+	cp a, SFX_POKEFLUTE
 	jr z,.musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done

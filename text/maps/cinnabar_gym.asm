@@ -42,7 +42,7 @@ _BlaineBadgeText::
 	done
 
 _ReceivedTM38Text::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -204,6 +204,6 @@ _CinnabarGymText_75ac2::
 	done
 
 _CinnabarGymText_75ac7::
-	text $52, "! You beat"
+	text "<PLAYER>! You beat"
 	line "that fire brand!"
 	done

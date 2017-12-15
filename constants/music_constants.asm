@@ -194,7 +194,7 @@ ENDM
 	music_const SFX_SAVE,               SFX_Save_1
 
 	; AUDIO_1
-	music_const SFX_POKEFLUE,           SFX_Pokeflute
+	music_const SFX_POKEFLUTE,           SFX_Pokeflute
 	music_const SFX_SAFARI_ZONE_PA,     SFX_Safari_Zone_PA
 
 	; AUDIO_2
