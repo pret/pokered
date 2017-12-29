@@ -2101,7 +2101,7 @@ HideSubstituteShowMonAnim:
 .next1
 	push hl
 ; if the substitute broke, slide it down, else slide it offscreen horizontally
-	bit HasSubstituteUp, a
+	bit HAS_SUBSTITUTE_UP, a
 	jr nz, .substituteStillUp
 	call AnimationSlideMonDown
 	jr .next2

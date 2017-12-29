@@ -7,9 +7,9 @@ DecrementPP:
 	ld hl, wPlayerBattleStatus1
 	ld a, [hli]          ; load the wPlayerBattleStatus1 pokemon status flags and increment hl to load the
 	                     ; wPlayerBattleStatus2 status flags later
-	and a, (1 << StoringEnergy) | (1 << ThrashingAbout) | (1 << AttackingMultipleTimes)
+	and a, (1 << STORING_ENERGY) | (1 << THRASHING_ABOUT) | (1 << ATTACKING_MULTIPLE_TIMES)
 	ret nz               ; if any of these statuses are true, don't decrement PP
-	bit UsingRage, [hl]
+	bit USING_RAGE, [hl]
 	ret nz               ; don't decrement PP either if Pokemon is using Rage
 	ld hl, wBattleMonPP  ; PP of first move (in battle)
 
@@ -18,7 +18,7 @@ DecrementPP:
 
 ; decrement PP in the party struct
 	ld a, [wPlayerBattleStatus3]
-	bit Transformed, a
+	bit TRANSFORMED, a
 	ret nz               ; Return if transformed. Pokemon Red stores the "current pokemon's" PP
 	                     ; separately from the "Pokemon in your party's" PP.  This is
 	                     ; duplication -- in all cases *other* than Pokemon with Transform.

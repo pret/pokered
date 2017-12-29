@@ -471,7 +471,7 @@ ItemUseBall:
 ; This is a bug because a wild Pokémon could have used Transform via
 ; Mirror Move even though the only wild Pokémon that knows Transform is Ditto.
 	ld hl,wEnemyBattleStatus3
-	bit Transformed,[hl]
+	bit TRANSFORMED,[hl]
 	jr z,.notTransformed
 	ld a,DITTO
 	ld [wEnemyMonSpecies2],a
@@ -481,7 +481,7 @@ ItemUseBall:
 ; If the Pokémon is not transformed, set the transformed bit and copy the
 ; DVs to wTransformedEnemyMonOriginalDVs so that LoadEnemyMonData won't generate
 ; new DVs.
-	set Transformed,[hl]
+	set TRANSFORMED,[hl]
 	ld hl,wTransformedEnemyMonOriginalDVs
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
@@ -901,7 +901,7 @@ ItemUseMedicine:
 	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 	push hl
 	ld hl,wPlayerBattleStatus3
-	res BadlyPoisoned,[hl] ; heal Toxic status
+	res BADLY_POISONED,[hl] ; heal Toxic status
 	pop hl
 	ld bc,wPartyMon1Stats - wPartyMon1Status
 	add hl,bc ; hl now points to party stats
@@ -1546,7 +1546,7 @@ ItemUseXAccuracy:
 	and a
 	jp z,ItemUseNotTime
 	ld hl,wPlayerBattleStatus2
-	set UsingXAccuracy,[hl] ; X Accuracy bit
+	set USING_X_ACCURACY,[hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
@@ -1655,7 +1655,7 @@ ItemUseGuardSpec:
 	and a
 	jp z,ItemUseNotTime
 	ld hl,wPlayerBattleStatus2
-	set ProtectedByMist,[hl] ; Mist bit
+	set PROTECTED_BY_MIST,[hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseSuperRepel:
@@ -1671,7 +1671,7 @@ ItemUseDireHit:
 	and a
 	jp z,ItemUseNotTime
 	ld hl,wPlayerBattleStatus2
-	set GettingPumped,[hl] ; Focus Energy bit
+	set GETTING_PUMPED,[hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseXStat:
