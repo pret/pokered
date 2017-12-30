@@ -6,7 +6,7 @@ AnimateHallOfFame:
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
 	call DisableLCD
-	ld hl,vBGMap0
+	ld hl, vBGMap0
 	ld bc, $800
 	ld a, " "
 	call FillMemory

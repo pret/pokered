@@ -2,133 +2,133 @@ MainMenu:
 ; Check save file
 	call InitOptions
 	xor a
-	ld [wOptionsInitialized],a
+	ld [wOptionsInitialized], a
 	inc a
-	ld [wSaveFileStatus],a
+	ld [wSaveFileStatus], a
 	call CheckForPlayerNameInSRAM
-	jr nc,.mainMenuLoop
+	jr nc, .mainMenuLoop
 
 	predef LoadSAV
 
 .mainMenuLoop
-	ld c,20
+	ld c, 20
 	call DelayFrames
 	xor a ; LINK_STATE_NONE
-	ld [wLinkState],a
-	ld hl,wPartyAndBillsPCSavedMenuItem
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-	ld [hl],a
-	ld [wDefaultMap],a
-	ld hl,wd72e
-	res 6,[hl]
+	ld [wLinkState], a
+	ld hl, wPartyAndBillsPCSavedMenuItem
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld [wDefaultMap], a
+	ld hl, wd72e
+	res 6, [hl]
 	call ClearScreen
 	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
-	ld hl,wd730
-	set 6,[hl]
-	ld a,[wSaveFileStatus]
-	cp a,1
-	jr z,.noSaveFile
+	ld hl, wd730
+	set 6, [hl]
+	ld a, [wSaveFileStatus]
+	cp 1
+	jr z, .noSaveFile
 ; there's a save file
 	coord hl, 0, 0
-	ld b,6
-	ld c,13
+	ld b, 6
+	ld c, 13
 	call TextBoxBorder
 	coord hl, 2, 2
-	ld de,ContinueText
+	ld de, ContinueText
 	call PlaceString
 	jr .next2
 .noSaveFile
 	coord hl, 0, 0
-	ld b,4
-	ld c,13
+	ld b, 4
+	ld c, 13
 	call TextBoxBorder
 	coord hl, 2, 2
-	ld de,NewGameText
+	ld de, NewGameText
 	call PlaceString
 .next2
-	ld hl,wd730
-	res 6,[hl]
+	ld hl, wd730
+	res 6, [hl]
 	call UpdateSprites
 	xor a
-	ld [wCurrentMenuItem],a
-	ld [wLastMenuItem],a
-	ld [wMenuJoypadPollCount],a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	ld [wMenuJoypadPollCount], a
 	inc a
-	ld [wTopMenuItemX],a
+	ld [wTopMenuItemX], a
 	inc a
-	ld [wTopMenuItemY],a
-	ld a,A_BUTTON | B_BUTTON | START
-	ld [wMenuWatchedKeys],a
-	ld a,[wSaveFileStatus]
-	ld [wMaxMenuItem],a
+	ld [wTopMenuItemY], a
+	ld a, A_BUTTON | B_BUTTON | START
+	ld [wMenuWatchedKeys], a
+	ld a, [wSaveFileStatus]
+	ld [wMaxMenuItem], a
 	call HandleMenuInput
-	bit 1,a ; pressed B?
-	jp nz,DisplayTitleScreen ; if so, go back to the title screen
-	ld c,20
+	bit 1, a ; pressed B?
+	jp nz, DisplayTitleScreen ; if so, go back to the title screen
+	ld c, 20
 	call DelayFrames
-	ld a,[wCurrentMenuItem]
-	ld b,a
-	ld a,[wSaveFileStatus]
-	cp a,2
-	jp z,.skipInc
+	ld a, [wCurrentMenuItem]
+	ld b, a
+	ld a, [wSaveFileStatus]
+	cp 2
+	jp z, .skipInc
 ; If there's no save file, increment the current menu item so that the numbers
 ; are the same whether or not there's a save file.
 	inc b
 .skipInc
-	ld a,b
+	ld a, b
 	and a
-	jr z,.choseContinue
-	cp a,1
-	jp z,StartNewGame
+	jr z, .choseContinue
+	cp 1
+	jp z, StartNewGame
 	call DisplayOptionMenu
-	ld a,1
-	ld [wOptionsInitialized],a
+	ld a, 1
+	ld [wOptionsInitialized], a
 	jp .mainMenuLoop
 .choseContinue
 	call DisplayContinueGameInfo
-	ld hl,wCurrentMapScriptFlags
-	set 5,[hl]
+	ld hl, wCurrentMapScriptFlags
+	set 5, [hl]
 .inputLoop
 	xor a
-	ld [hJoyPressed],a
-	ld [hJoyReleased],a
-	ld [hJoyHeld],a
+	ld [hJoyPressed], a
+	ld [hJoyReleased], a
+	ld [hJoyHeld], a
 	call Joypad
-	ld a,[hJoyHeld]
-	bit 0,a
-	jr nz,.pressedA
-	bit 1,a
-	jp nz,.mainMenuLoop ; pressed B
+	ld a, [hJoyHeld]
+	bit 0, a
+	jr nz, .pressedA
+	bit 1, a
+	jp nz, .mainMenuLoop ; pressed B
 	jr .inputLoop
 .pressedA
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
-	ld a,PLAYER_DIR_DOWN
-	ld [wPlayerDirection],a
-	ld c,10
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerDirection], a
+	ld c, 10
 	call DelayFrames
-	ld a,[wNumHoFTeams]
+	ld a, [wNumHoFTeams]
 	and a
-	jp z,SpecialEnterMap
-	ld a,[wCurMap] ; map ID
-	cp a,HALL_OF_FAME
-	jp nz,SpecialEnterMap
+	jp z, SpecialEnterMap
+	ld a, [wCurMap] ; map ID
+	cp HALL_OF_FAME
+	jp nz, SpecialEnterMap
 	xor a
-	ld [wDestinationMap],a
-	ld hl,wd732
-	set 2,[hl] ; fly warp or dungeon warp
+	ld [wDestinationMap], a
+	ld hl, wd732
+	set 2, [hl] ; fly warp or dungeon warp
 	call SpecialWarpIn
 	jp SpecialEnterMap
 
 InitOptions:
-	ld a,1 ; no delay
-	ld [wLetterPrintingDelayFlags],a
-	ld a,3 ; medium speed
-	ld [wOptions],a
+	ld a, 1 ; no delay
+	ld [wLetterPrintingDelayFlags], a
+	ld a, 3 ; medium speed
+	ld [wOptions], a
 	ret
 
 LinkMenu:
@@ -428,154 +428,154 @@ SaveScreenInfoText:
 
 DisplayOptionMenu:
 	coord hl, 0, 0
-	ld b,3
-	ld c,18
+	ld b, 3
+	ld c, 18
 	call TextBoxBorder
 	coord hl, 0, 5
-	ld b,3
-	ld c,18
+	ld b, 3
+	ld c, 18
 	call TextBoxBorder
 	coord hl, 0, 10
-	ld b,3
-	ld c,18
+	ld b, 3
+	ld c, 18
 	call TextBoxBorder
 	coord hl, 1, 1
-	ld de,TextSpeedOptionText
+	ld de, TextSpeedOptionText
 	call PlaceString
 	coord hl, 1, 6
-	ld de,BattleAnimationOptionText
+	ld de, BattleAnimationOptionText
 	call PlaceString
 	coord hl, 1, 11
-	ld de,BattleStyleOptionText
+	ld de, BattleStyleOptionText
 	call PlaceString
 	coord hl, 2, 16
-	ld de,OptionMenuCancelText
+	ld de, OptionMenuCancelText
 	call PlaceString
 	xor a
-	ld [wCurrentMenuItem],a
-	ld [wLastMenuItem],a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	inc a
-	ld [wLetterPrintingDelayFlags],a
-	ld [wUnusedCD40],a
-	ld a,3 ; text speed cursor Y coordinate
-	ld [wTopMenuItemY],a
+	ld [wLetterPrintingDelayFlags], a
+	ld [wUnusedCD40], a
+	ld a, 3 ; text speed cursor Y coordinate
+	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromOptions
-	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	ld [wTopMenuItemX],a
-	ld a,$01
-	ld [H_AUTOBGTRANSFERENABLED],a ; enable auto background transfer
+	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
+	ld [wTopMenuItemX], a
+	ld a, $01
+	ld [H_AUTOBGTRANSFERENABLED], a ; enable auto background transfer
 	call Delay3
 .loop
 	call PlaceMenuCursor
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
 	call JoypadLowSensitivity
-	ld a,[hJoy5]
-	ld b,a
-	and a,A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
-	jr z,.getJoypadStateLoop
-	bit 1,b ; B button pressed?
-	jr nz,.exitMenu
-	bit 3,b ; Start button pressed?
-	jr nz,.exitMenu
-	bit 0,b ; A button pressed?
-	jr z,.checkDirectionKeys
-	ld a,[wTopMenuItemY]
-	cp a,16 ; is the cursor on Cancel?
-	jr nz,.loop
+	ld a, [hJoy5]
+	ld b, a
+	and A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
+	jr z, .getJoypadStateLoop
+	bit 1, b ; B button pressed?
+	jr nz, .exitMenu
+	bit 3, b ; Start button pressed?
+	jr nz, .exitMenu
+	bit 0, b ; A button pressed?
+	jr z, .checkDirectionKeys
+	ld a, [wTopMenuItemY]
+	cp 16 ; is the cursor on Cancel?
+	jr nz, .loop
 .exitMenu
-	ld a,SFX_PRESS_AB
+	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
 .eraseOldMenuCursor
-	ld [wTopMenuItemX],a
+	ld [wTopMenuItemX], a
 	call EraseMenuCursor
 	jp .loop
 .checkDirectionKeys
-	ld a,[wTopMenuItemY]
-	bit 7,b ; Down pressed?
-	jr nz,.downPressed
-	bit 6,b ; Up pressed?
-	jr nz,.upPressed
-	cp a,8 ; cursor in Battle Animation section?
-	jr z,.cursorInBattleAnimation
-	cp a,13 ; cursor in Battle Style section?
-	jr z,.cursorInBattleStyle
-	cp a,16 ; cursor on Cancel?
-	jr z,.loop
+	ld a, [wTopMenuItemY]
+	bit 7, b ; Down pressed?
+	jr nz, .downPressed
+	bit 6, b ; Up pressed?
+	jr nz, .upPressed
+	cp 8 ; cursor in Battle Animation section?
+	jr z, .cursorInBattleAnimation
+	cp 13 ; cursor in Battle Style section?
+	jr z, .cursorInBattleStyle
+	cp 16 ; cursor on Cancel?
+	jr z, .loop
 .cursorInTextSpeed
-	bit 5,b ; Left pressed?
-	jp nz,.pressedLeftInTextSpeed
+	bit 5, b ; Left pressed?
+	jp nz, .pressedLeftInTextSpeed
 	jp .pressedRightInTextSpeed
 .downPressed
-	cp a,16
-	ld b,-13
-	ld hl,wOptionsTextSpeedCursorX
-	jr z,.updateMenuVariables
-	ld b,5
-	cp a,3
+	cp 16
+	ld b, -13
+	ld hl, wOptionsTextSpeedCursorX
+	jr z, .updateMenuVariables
+	ld b, 5
+	cp 3
 	inc hl
-	jr z,.updateMenuVariables
-	cp a,8
+	jr z, .updateMenuVariables
+	cp 8
 	inc hl
-	jr z,.updateMenuVariables
-	ld b,3
+	jr z, .updateMenuVariables
+	ld b, 3
 	inc hl
 	jr .updateMenuVariables
 .upPressed
-	cp a,8
-	ld b,-5
-	ld hl,wOptionsTextSpeedCursorX
-	jr z,.updateMenuVariables
-	cp a,13
+	cp 8
+	ld b, -5
+	ld hl, wOptionsTextSpeedCursorX
+	jr z, .updateMenuVariables
+	cp 13
 	inc hl
-	jr z,.updateMenuVariables
-	cp a,16
-	ld b,-3
+	jr z, .updateMenuVariables
+	cp 16
+	ld b, -3
 	inc hl
-	jr z,.updateMenuVariables
-	ld b,13
+	jr z, .updateMenuVariables
+	ld b, 13
 	inc hl
 .updateMenuVariables
 	add b
-	ld [wTopMenuItemY],a
-	ld a,[hl]
-	ld [wTopMenuItemX],a
+	ld [wTopMenuItemY], a
+	ld a, [hl]
+	ld [wTopMenuItemX], a
 	call PlaceUnfilledArrowMenuCursor
 	jp .loop
 .cursorInBattleAnimation
-	ld a,[wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
-	xor a,$0b ; toggle between 1 and 10
-	ld [wOptionsBattleAnimCursorX],a
+	ld a, [wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
+	xor $0b ; toggle between 1 and 10
+	ld [wOptionsBattleAnimCursorX], a
 	jp .eraseOldMenuCursor
 .cursorInBattleStyle
-	ld a,[wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
-	xor a,$0b ; toggle between 1 and 10
-	ld [wOptionsBattleStyleCursorX],a
+	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
+	xor $0b ; toggle between 1 and 10
+	ld [wOptionsBattleStyleCursorX], a
 	jp .eraseOldMenuCursor
 .pressedLeftInTextSpeed
-	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp a,1
-	jr z,.updateTextSpeedXCoord
-	cp a,7
-	jr nz,.fromSlowToMedium
-	sub a,6
+	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
+	cp 1
+	jr z, .updateTextSpeedXCoord
+	cp 7
+	jr nz, .fromSlowToMedium
+	sub 6
 	jr .updateTextSpeedXCoord
 .fromSlowToMedium
-	sub a,7
+	sub 7
 	jr .updateTextSpeedXCoord
 .pressedRightInTextSpeed
-	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp a,14
-	jr z,.updateTextSpeedXCoord
-	cp a,7
-	jr nz,.fromFastToMedium
-	add a,7
+	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
+	cp 14
+	jr z, .updateTextSpeedXCoord
+	cp 7
+	jr nz, .fromFastToMedium
+	add 7
 	jr .updateTextSpeedXCoord
 .fromFastToMedium
-	add a,6
+	add 6
 .updateTextSpeedXCoord
-	ld [wOptionsTextSpeedCursorX],a ; text speed cursor X coordinate
+	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText:
@@ -595,79 +595,79 @@ OptionMenuCancelText:
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions:
-	ld hl,TextSpeedOptionData
-	ld a,[wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	ld c,a
+	ld hl, TextSpeedOptionData
+	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
+	ld c, a
 .loop
-	ld a,[hli]
+	ld a, [hli]
 	cp c
-	jr z,.textSpeedMatchFound
+	jr z, .textSpeedMatchFound
 	inc hl
 	jr .loop
 .textSpeedMatchFound
-	ld a,[hl]
-	ld d,a
-	ld a,[wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
+	ld a, [hl]
+	ld d, a
+	ld a, [wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
 	dec a
-	jr z,.battleAnimationOn
+	jr z, .battleAnimationOn
 .battleAnimationOff
-	set 7,d
+	set 7, d
 	jr .checkBattleStyle
 .battleAnimationOn
-	res 7,d
+	res 7, d
 .checkBattleStyle
-	ld a,[wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
+	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
 	dec a
-	jr z,.battleStyleShift
+	jr z, .battleStyleShift
 .battleStyleSet
-	set 6,d
+	set 6, d
 	jr .storeOptions
 .battleStyleShift
-	res 6,d
+	res 6, d
 .storeOptions
-	ld a,d
-	ld [wOptions],a
+	ld a, d
+	ld [wOptions], a
 	ret
 
 ; reads the options variable and places menu cursors in the correct positions within the options menu
 SetCursorPositionsFromOptions:
-	ld hl,TextSpeedOptionData + 1
-	ld a,[wOptions]
-	ld c,a
-	and a,$3f
+	ld hl, TextSpeedOptionData + 1
+	ld a, [wOptions]
+	ld c, a
+	and $3f
 	push bc
-	ld de,2
+	ld de, 2
 	call IsInArray
 	pop bc
 	dec hl
-	ld a,[hl]
-	ld [wOptionsTextSpeedCursorX],a ; text speed cursor X coordinate
+	ld a, [hl]
+	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
 	coord hl, 0, 3
 	call .placeUnfilledRightArrow
 	sla c
-	ld a,1 ; On
-	jr nc,.storeBattleAnimationCursorX
-	ld a,10 ; Off
+	ld a, 1 ; On
+	jr nc, .storeBattleAnimationCursorX
+	ld a, 10 ; Off
 .storeBattleAnimationCursorX
-	ld [wOptionsBattleAnimCursorX],a ; battle animation cursor X coordinate
+	ld [wOptionsBattleAnimCursorX], a ; battle animation cursor X coordinate
 	coord hl, 0, 8
 	call .placeUnfilledRightArrow
 	sla c
-	ld a,1
-	jr nc,.storeBattleStyleCursorX
-	ld a,10
+	ld a, 1
+	jr nc, .storeBattleStyleCursorX
+	ld a, 10
 .storeBattleStyleCursorX
-	ld [wOptionsBattleStyleCursorX],a ; battle style cursor X coordinate
+	ld [wOptionsBattleStyleCursorX], a ; battle style cursor X coordinate
 	coord hl, 0, 13
 	call .placeUnfilledRightArrow
 ; cursor in front of Cancel
 	coord hl, 0, 16
-	ld a,1
+	ld a, 1
 .placeUnfilledRightArrow
-	ld e,a
-	ld d,0
-	add hl,de
-	ld [hl],$ec ; unfilled right arrow menu cursor
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld [hl], $ec ; unfilled right arrow menu cursor
 	ret
 
 ; table that indicates how the 3 text speed options affect frame delays

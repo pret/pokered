@@ -144,7 +144,7 @@ CeladonGameCornerText2:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_48d0f
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call IsItemInBag
 	jr z, .asm_48d19
 	call Has9990Coins
@@ -362,7 +362,7 @@ CeladonGameCornerText10:
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
 	call PrintText
-	ld b,COIN_CASE
+	ld b, COIN_CASE
 	call IsItemInBag
 	jr z, .asm_48e7f
 	call Has9990Coins

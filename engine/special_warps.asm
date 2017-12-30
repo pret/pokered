@@ -1,31 +1,31 @@
 SpecialWarpIn:
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
-	ld hl,wd732
-	bit 2,[hl] ; dungeon warp or fly warp?
-	res 2,[hl]
-	jr z,.next
+	ld hl, wd732
+	bit 2, [hl] ; dungeon warp or fly warp?
+	res 2, [hl]
+	jr z, .next
 ; if dungeon warp or fly warp
-	ld a,[wDestinationMap]
+	ld a, [wDestinationMap]
 	jr .next2
 .next
-	bit 1,[hl]
-	jr z,.next3
+	bit 1, [hl]
+	jr z, .next3
 	call EmptyFunc
 .next3
-	ld a,0
+	ld a, 0
 .next2
-	ld b,a
-	ld a,[wd72d]
+	ld b, a
+	ld a, [wd72d]
 	and a
-	jr nz,.next4
-	ld a,b
+	jr nz, .next4
+	ld a, b
 .next4
-	ld hl,wd732
-	bit 4,[hl] ; dungeon warp?
+	ld hl, wd732
+	bit 4, [hl] ; dungeon warp?
 	ret nz
 ; if not dungeon warp
-	ld [wLastMap],a
+	ld [wLastMap], a
 	ret
 
 ; gets the map ID, tile block map view pointer, tileset, and coordinates

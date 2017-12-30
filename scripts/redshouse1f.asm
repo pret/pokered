@@ -51,11 +51,11 @@ MomHealText2:
 
 RedsHouse1FText2: ; TV
 	TX_ASM
-	ld a,[wSpriteStateData1 + 9]
+	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
-	ld hl,TVWrongSideText
-	jr nz,.notUp
-	ld hl,StandByMeText
+	ld hl, TVWrongSideText
+	jr nz, .notUp
+	ld hl, StandByMeText
 .notUp
 	call PrintText
 	jp TextScriptEnd

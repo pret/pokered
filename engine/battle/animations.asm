@@ -1,202 +1,202 @@
 ; Draws a "frame block". Frame blocks are blocks of tiles that are put
 ; together to form frames in battle animations.
 DrawFrameBlock:
-	ld l,c
-	ld h,b
-	ld a,[hli]
-	ld [wNumFBTiles],a
-	ld a,[wFBDestAddr + 1]
-	ld e,a
-	ld a,[wFBDestAddr]
-	ld d,a
+	ld l, c
+	ld h, b
+	ld a, [hli]
+	ld [wNumFBTiles], a
+	ld a, [wFBDestAddr + 1]
+	ld e, a
+	ld a, [wFBDestAddr]
+	ld d, a
 	xor a
-	ld [wFBTileCounter],a ; loop counter
+	ld [wFBTileCounter], a ; loop counter
 .loop
-	ld a,[wFBTileCounter]
+	ld a, [wFBTileCounter]
 	inc a
-	ld [wFBTileCounter],a
-	ld a,[wSubAnimTransform]
+	ld [wFBTileCounter], a
+	ld a, [wSubAnimTransform]
 	dec a
-	jr z,.flipHorizontalAndVertical   ; 1
+	jr z, .flipHorizontalAndVertical   ; 1
 	dec a
-	jp z,.flipHorizontalTranslateDown ; 2
+	jp z, .flipHorizontalTranslateDown ; 2
 	dec a
-	jr z,.flipBaseCoords              ; 3
+	jr z, .flipBaseCoords              ; 3
 .noTransformation
-	ld a,[wBaseCoordY]
+	ld a, [wBaseCoordY]
 	add [hl]
-	ld [de],a ; store Y
+	ld [de], a ; store Y
 	inc hl
 	inc de
-	ld a,[wBaseCoordX]
+	ld a, [wBaseCoordX]
 	jr .finishCopying
 .flipBaseCoords
-	ld a,[wBaseCoordY]
-	ld b,a
-	ld a,136
+	ld a, [wBaseCoordY]
+	ld b, a
+	ld a, 136
 	sub b ; flip Y base coordinate
 	add [hl] ; Y offset
-	ld [de],a ; store Y
+	ld [de], a ; store Y
 	inc hl
 	inc de
-	ld a,[wBaseCoordX]
-	ld b,a
-	ld a,168
+	ld a, [wBaseCoordX]
+	ld b, a
+	ld a, 168
 	sub b ; flip X base coordinate
 .finishCopying ; finish copying values to OAM (when [wSubAnimTransform] not 1 or 2)
 	add [hl] ; X offset
-	ld [de],a ; store X
+	ld [de], a ; store X
 	inc hl
 	inc de
-	ld a,[hli]
-	add a,$31 ; base tile ID for battle animations
-	ld [de],a ; store tile ID
+	ld a, [hli]
+	add $31 ; base tile ID for battle animations
+	ld [de], a ; store tile ID
 	inc de
-	ld a,[hli]
-	ld [de],a ; store flags
+	ld a, [hli]
+	ld [de], a ; store flags
 	inc de
 	jp .nextTile
 .flipHorizontalAndVertical
-	ld a,[wBaseCoordY]
+	ld a, [wBaseCoordY]
 	add [hl] ; Y offset
-	ld b,a
-	ld a,136
+	ld b, a
+	ld a, 136
 	sub b ; flip Y coordinate
-	ld [de],a ; store Y
+	ld [de], a ; store Y
 	inc hl
 	inc de
-	ld a,[wBaseCoordX]
+	ld a, [wBaseCoordX]
 	add [hl] ; X offset
-	ld b,a
-	ld a,168
+	ld b, a
+	ld a, 168
 	sub b ; flip X coordinate
-	ld [de],a ; store X
+	ld [de], a ; store X
 	inc hl
 	inc de
-	ld a,[hli]
-	add a,$31 ; base tile ID for battle animations
-	ld [de],a ; store tile ID
+	ld a, [hli]
+	add $31 ; base tile ID for battle animations
+	ld [de], a ; store tile ID
 	inc de
 ; toggle horizontal and vertical flip
-	ld a,[hli] ; flags
+	ld a, [hli] ; flags
 	and a
-	ld b,OAM_VFLIP | OAM_HFLIP
-	jr z,.storeFlags1
-	cp a,OAM_HFLIP
-	ld b,OAM_VFLIP
-	jr z,.storeFlags1
-	cp a,OAM_VFLIP
-	ld b,OAM_HFLIP
-	jr z,.storeFlags1
-	ld b,0
+	ld b, OAM_VFLIP | OAM_HFLIP
+	jr z, .storeFlags1
+	cp OAM_HFLIP
+	ld b, OAM_VFLIP
+	jr z, .storeFlags1
+	cp OAM_VFLIP
+	ld b, OAM_HFLIP
+	jr z, .storeFlags1
+	ld b, 0
 .storeFlags1
-	ld a,b
-	ld [de],a
+	ld a, b
+	ld [de], a
 	inc de
 	jp .nextTile
 .flipHorizontalTranslateDown
-	ld a,[wBaseCoordY]
+	ld a, [wBaseCoordY]
 	add [hl]
-	add a,40 ; translate Y coordinate downwards
-	ld [de],a ; store Y
+	add 40 ; translate Y coordinate downwards
+	ld [de], a ; store Y
 	inc hl
 	inc de
-	ld a,[wBaseCoordX]
+	ld a, [wBaseCoordX]
 	add [hl]
-	ld b,a
-	ld a,168
+	ld b, a
+	ld a, 168
 	sub b ; flip X coordinate
-	ld [de],a ; store X
+	ld [de], a ; store X
 	inc hl
 	inc de
-	ld a,[hli]
-	add a,$31 ; base tile ID for battle animations
-	ld [de],a ; store tile ID
+	ld a, [hli]
+	add $31 ; base tile ID for battle animations
+	ld [de], a ; store tile ID
 	inc de
-	ld a,[hli]
-	bit 5,a ; is horizontal flip enabled?
-	jr nz,.disableHorizontalFlip
+	ld a, [hli]
+	bit 5, a ; is horizontal flip enabled?
+	jr nz, .disableHorizontalFlip
 .enableHorizontalFlip
-	set 5,a
+	set 5, a
 	jr .storeFlags2
 .disableHorizontalFlip
-	res 5,a
+	res 5, a
 .storeFlags2
-	ld [de],a
+	ld [de], a
 	inc de
 .nextTile
-	ld a,[wFBTileCounter]
-	ld c,a
-	ld a,[wNumFBTiles]
+	ld a, [wFBTileCounter]
+	ld c, a
+	ld a, [wNumFBTiles]
 	cp c
-	jp nz,.loop ; go back up if there are more tiles to draw
+	jp nz, .loop ; go back up if there are more tiles to draw
 .afterDrawingTiles
-	ld a,[wFBMode]
-	cp a,2
-	jr z,.advanceFrameBlockDestAddr; skip delay and don't clean OAM buffer
-	ld a,[wSubAnimFrameDelay]
-	ld c,a
+	ld a, [wFBMode]
+	cp 2
+	jr z, .advanceFrameBlockDestAddr; skip delay and don't clean OAM buffer
+	ld a, [wSubAnimFrameDelay]
+	ld c, a
 	call DelayFrames
-	ld a,[wFBMode]
-	cp a,3
-	jr z,.advanceFrameBlockDestAddr ; skip cleaning OAM buffer
-	cp a,4
-	jr z,.done ; skip cleaning OAM buffer and don't advance the frame block destination address
-	ld a,[wAnimationID]
-	cp a,GROWL
-	jr z,.resetFrameBlockDestAddr
+	ld a, [wFBMode]
+	cp 3
+	jr z, .advanceFrameBlockDestAddr ; skip cleaning OAM buffer
+	cp 4
+	jr z, .done ; skip cleaning OAM buffer and don't advance the frame block destination address
+	ld a, [wAnimationID]
+	cp GROWL
+	jr z, .resetFrameBlockDestAddr
 	call AnimationCleanOAM
 .resetFrameBlockDestAddr
-	ld hl,wOAMBuffer ; OAM buffer
-	ld a,l
-	ld [wFBDestAddr + 1],a
-	ld a,h
-	ld [wFBDestAddr],a ; set destination address to beginning of OAM buffer
+	ld hl, wOAMBuffer ; OAM buffer
+	ld a, l
+	ld [wFBDestAddr + 1], a
+	ld a, h
+	ld [wFBDestAddr], a ; set destination address to beginning of OAM buffer
 	ret
 .advanceFrameBlockDestAddr
-	ld a,e
-	ld [wFBDestAddr + 1],a
-	ld a,d
-	ld [wFBDestAddr],a
+	ld a, e
+	ld [wFBDestAddr + 1], a
+	ld a, d
+	ld [wFBDestAddr], a
 .done
 	ret
 
 PlayAnimation:
 	xor a
-	ld [$FF8B],a ; it looks like nothing reads this
-	ld [wSubAnimTransform],a
-	ld a,[wAnimationID] ; get animation number
+	ld [$FF8B], a ; it looks like nothing reads this
+	ld [wSubAnimTransform], a
+	ld a, [wAnimationID] ; get animation number
 	dec a
-	ld l,a
-	ld h,0
-	add hl,hl
-	ld de,AttackAnimationPointers  ; animation command stream pointers
-	add hl,de
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, AttackAnimationPointers  ; animation command stream pointers
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 .animationLoop
-	ld a,[hli]
-	cp a,$FF
-	jr z,.AnimationOver
-	cp a,$C0 ; is this subanimation or a special effect?
-	jr c,.playSubanimation
+	ld a, [hli]
+	cp $FF
+	jr z, .AnimationOver
+	cp $C0 ; is this subanimation or a special effect?
+	jr c, .playSubanimation
 .doSpecialEffect
-	ld c,a
-	ld de,SpecialEffectPointers
+	ld c, a
+	ld de, SpecialEffectPointers
 .searchSpecialEffectTableLoop
-	ld a,[de]
+	ld a, [de]
 	cp c
-	jr z,.foundMatch
+	jr z, .foundMatch
 	inc de
 	inc de
 	inc de
 	jr .searchSpecialEffectTableLoop
 .foundMatch
-	ld a,[hli]
-	cp a,$FF ; is there a sound to play?
-	jr z,.skipPlayingSound
-	ld [wAnimSoundID],a ; store sound
+	ld a, [hli]
+	cp $FF ; is there a sound to play?
+	jr z, .skipPlayingSound
+	ld [wAnimSoundID], a ; store sound
 	push hl
 	push de
 	call GetMoveSound
@@ -206,50 +206,50 @@ PlayAnimation:
 .skipPlayingSound
 	push hl
 	inc de
-	ld a,[de]
-	ld l,a
+	ld a, [de]
+	ld l, a
 	inc de
-	ld a,[de]
-	ld h,a
-	ld de,.nextAnimationCommand
+	ld a, [de]
+	ld h, a
+	ld de, .nextAnimationCommand
 	push de
 	jp hl ; jump to special effect function
 .playSubanimation
-	ld c,a
-	and a,%00111111
-	ld [wSubAnimFrameDelay],a
+	ld c, a
+	and %00111111
+	ld [wSubAnimFrameDelay], a
 	xor a
 	sla c
 	rla
 	sla c
 	rla
-	ld [wWhichBattleAnimTileset],a
-	ld a,[hli] ; sound
-	ld [wAnimSoundID],a ; store sound
-	ld a,[hli] ; subanimation ID
-	ld c,l
-	ld b,h
-	ld l,a
-	ld h,0
-	add hl,hl
-	ld de,SubanimationPointers
-	add hl,de
-	ld a,l
-	ld [wSubAnimAddrPtr],a
-	ld a,h
-	ld [wSubAnimAddrPtr + 1],a
-	ld l,c
-	ld h,b
+	ld [wWhichBattleAnimTileset], a
+	ld a, [hli] ; sound
+	ld [wAnimSoundID], a ; store sound
+	ld a, [hli] ; subanimation ID
+	ld c, l
+	ld b, h
+	ld l, a
+	ld h, 0
+	add hl, hl
+	ld de, SubanimationPointers
+	add hl, de
+	ld a, l
+	ld [wSubAnimAddrPtr], a
+	ld a, h
+	ld [wSubAnimAddrPtr + 1], a
+	ld l, c
+	ld h, b
 	push hl
-	ld a,[rOBP0]
+	ld a, [rOBP0]
 	push af
-	ld a,[wAnimPalette]
-	ld [rOBP0],a
+	ld a, [wAnimPalette]
+	ld [rOBP0], a
 	call LoadAnimationTileset
 	call LoadSubanimation
 	call PlaySubanimation
 	pop af
-	ld [rOBP0],a
+	ld [rOBP0], a
 .nextAnimationCommand
 	pop hl
 	jr .animationLoop
@@ -257,22 +257,22 @@ PlayAnimation:
 	ret
 
 LoadSubanimation:
-	ld a,[wSubAnimAddrPtr + 1]
-	ld h,a
-	ld a,[wSubAnimAddrPtr]
-	ld l,a
-	ld a,[hli]
-	ld e,a
-	ld a,[hl]
-	ld d,a ; de = address of subanimation
-	ld a,[de]
-	ld b,a
-	and a,31
-	ld [wSubAnimCounter],a ; number of frame blocks
-	ld a,b
-	and a,%11100000
-	cp a,5 << 5 ; is subanimation type 5?
-	jr nz,.isNotType5
+	ld a, [wSubAnimAddrPtr + 1]
+	ld h, a
+	ld a, [wSubAnimAddrPtr]
+	ld l, a
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a ; de = address of subanimation
+	ld a, [de]
+	ld b, a
+	and 31
+	ld [wSubAnimCounter], a ; number of frame blocks
+	ld a, b
+	and %11100000
+	cp 5 << 5 ; is subanimation type 5?
+	jr nz, .isNotType5
 .isType5
 	call GetSubanimationTransform2
 	jr .saveTransformation
@@ -282,35 +282,35 @@ LoadSubanimation:
 ; place the upper 3 bits of a into bits 0-2 of a before storing
 	srl a
 	swap a
-	ld [wSubAnimTransform],a
-	cp a,4 ; is the animation reversed?
-	ld hl,0
-	jr nz,.storeSubentryAddr
+	ld [wSubAnimTransform], a
+	cp 4 ; is the animation reversed?
+	ld hl, 0
+	jr nz, .storeSubentryAddr
 ; if the animation is reversed, then place the initial subentry address at the end of the list of subentries
-	ld a,[wSubAnimCounter]
+	ld a, [wSubAnimCounter]
 	dec a
-	ld bc,3
+	ld bc, 3
 .loop
-	add hl,bc
+	add hl, bc
 	dec a
-	jr nz,.loop
+	jr nz, .loop
 .storeSubentryAddr
 	inc de
-	add hl,de
-	ld a,l
-	ld [wSubAnimSubEntryAddr],a
-	ld a,h
-	ld [wSubAnimSubEntryAddr + 1],a
+	add hl, de
+	ld a, l
+	ld [wSubAnimSubEntryAddr], a
+	ld a, h
+	ld [wSubAnimSubEntryAddr + 1], a
 	ret
 
 ; called if the subanimation type is not 5
 ; sets the transform to 0 (i.e. no transform) if it's the player's turn
 ; sets the transform to the subanimation type if it's the enemy's turn
 GetSubanimationTransform1:
-	ld b,a
-	ld a,[H_WHOSETURN]
+	ld b, a
+	ld a, [H_WHOSETURN]
 	and a
-	ld a,b
+	ld a, b
 	ret nz
 	xor a
 	ret
@@ -319,32 +319,32 @@ GetSubanimationTransform1:
 ; sets the transform to 2 (i.e. horizontal and vertical flip) if it's the player's turn
 ; sets the transform to 0 (i.e. no transform) if it's the enemy's turn
 GetSubanimationTransform2:
-	ld a,[H_WHOSETURN]
+	ld a, [H_WHOSETURN]
 	and a
-	ld a,2 << 5
+	ld a, 2 << 5
 	ret z
 	xor a
 	ret
 
 ; loads tile patterns for battle animations
 LoadAnimationTileset:
-	ld a,[wWhichBattleAnimTileset]
+	ld a, [wWhichBattleAnimTileset]
 	add a
 	add a
-	ld hl,AnimationTilesetPointers
-	ld e,a
-	ld d,0
-	add hl,de
-	ld a,[hli]
-	ld [wTempTilesetNumTiles],a ; number of tiles
-	ld a,[hli]
-	ld e,a
-	ld a,[hl]
-	ld d,a ; de = address of tileset
-	ld hl,vSprites + $310
+	ld hl, AnimationTilesetPointers
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld a, [hli]
+	ld [wTempTilesetNumTiles], a ; number of tiles
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a ; de = address of tileset
+	ld hl, vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	ld a,[wTempTilesetNumTiles]
-	ld c,a ; number of tiles
+	ld a, [wTempTilesetNumTiles]
+	ld c, a ; number of tiles
 	jp CopyVideoData ; load tileset
 
 AnimationTilesetPointers:
@@ -381,12 +381,12 @@ MoveAnimation:
 	push af
 	call WaitForSoundToFinish
 	call SetAnimationPalette
-	ld a,[wAnimationID]
+	ld a, [wAnimationID]
 	and a
 	jr z, .animationFinished
 
 	; if throwing a Poké Ball, skip the regular animation code
-	cp a,TOSS_ANIM
+	cp TOSS_ANIM
 	jr nz, .moveAnimation
 	ld de, .animationFinished
 	push de
@@ -394,25 +394,25 @@ MoveAnimation:
 
 .moveAnimation
 	; check if battle animations are disabled in the options
-	ld a,[wOptions]
-	bit 7,a
+	ld a, [wOptions]
+	bit 7, a
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
 	jr .next4
 .animationsDisabled
-	ld c,30
+	ld c, 30
 	call DelayFrames
 .next4
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .animationFinished
 	call WaitForSoundToFinish
 	xor a
-	ld [wSubAnimSubEntryAddr],a
-	ld [wUnusedD09B],a
-	ld [wSubAnimTransform],a
+	ld [wSubAnimSubEntryAddr], a
+	ld [wUnusedD09B], a
+	ld [wSubAnimTransform], a
 	dec a
-	ld [wAnimSoundID],a
+	ld [wAnimSoundID], a
 	pop af
 	pop bc
 	pop de
@@ -421,42 +421,42 @@ MoveAnimation:
 
 ShareMoveAnimations:
 ; some moves just reuse animations from status conditions
-	ld a,[H_WHOSETURN]
+	ld a, [H_WHOSETURN]
 	and a
 	ret z
 
 	; opponent’s turn
 
-	ld a,[wAnimationID]
+	ld a, [wAnimationID]
 
-	cp a,AMNESIA
-	ld b,CONF_ANIM
+	cp AMNESIA
+	ld b, CONF_ANIM
 	jr z, .replaceAnim
 
-	cp a,REST
-	ld b,SLP_ANIM
+	cp REST
+	ld b, SLP_ANIM
 	ret nz
 
 .replaceAnim
-	ld a,b
-	ld [wAnimationID],a
+	ld a, b
+	ld [wAnimationID], a
 	ret
 
 PlayApplyingAttackAnimation:
 ; Generic animation that shows after the move's individual animation
 ; Different animation depending on whether the move has an additional effect and on whose turn it is
-	ld a,[wAnimationType]
+	ld a, [wAnimationType]
 	and a
 	ret z
 	dec a
 	add a
-	ld c,a
-	ld b,0
-	ld hl,AnimationTypePointerTable
-	add hl,bc
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
+	ld c, a
+	ld b, 0
+	ld hl, AnimationTypePointerTable
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	jp hl
 
 AnimationTypePointerTable:
@@ -547,69 +547,69 @@ SetAnimationPalette:
 	ret
 
 PlaySubanimation:
-	ld a,[wAnimSoundID]
-	cp a,$FF
-	jr z,.skipPlayingSound
+	ld a, [wAnimSoundID]
+	cp $FF
+	jr z, .skipPlayingSound
 	call GetMoveSound
 	call PlaySound
 .skipPlayingSound
-	ld hl,wOAMBuffer ; base address of OAM buffer
-	ld a,l
-	ld [wFBDestAddr + 1],a
-	ld a,h
-	ld [wFBDestAddr],a
-	ld a,[wSubAnimSubEntryAddr + 1]
-	ld h,a
-	ld a,[wSubAnimSubEntryAddr]
-	ld l,a
+	ld hl, wOAMBuffer ; base address of OAM buffer
+	ld a, l
+	ld [wFBDestAddr + 1], a
+	ld a, h
+	ld [wFBDestAddr], a
+	ld a, [wSubAnimSubEntryAddr + 1]
+	ld h, a
+	ld a, [wSubAnimSubEntryAddr]
+	ld l, a
 .loop
 	push hl
-	ld c,[hl] ; frame block ID
-	ld b,0
-	ld hl,FrameBlockPointers
-	add hl,bc
-	add hl,bc
-	ld a,[hli]
-	ld c,a
-	ld a,[hli]
-	ld b,a
+	ld c, [hl] ; frame block ID
+	ld b, 0
+	ld hl, FrameBlockPointers
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
 	pop hl
 	inc hl
 	push hl
-	ld e,[hl] ; base coordinate ID
-	ld d,0
-	ld hl,FrameBlockBaseCoords  ; base coordinate table
-	add hl,de
-	add hl,de
-	ld a,[hli]
-	ld [wBaseCoordY],a
-	ld a,[hl]
-	ld [wBaseCoordX],a
+	ld e, [hl] ; base coordinate ID
+	ld d, 0
+	ld hl, FrameBlockBaseCoords  ; base coordinate table
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld [wBaseCoordY], a
+	ld a, [hl]
+	ld [wBaseCoordX], a
 	pop hl
 	inc hl
-	ld a,[hl] ; frame block mode
-	ld [wFBMode],a
+	ld a, [hl] ; frame block mode
+	ld [wFBMode], a
 	call DrawFrameBlock
 	call DoSpecialEffectByAnimationId ; run animation-specific function (if there is one)
-	ld a,[wSubAnimCounter]
+	ld a, [wSubAnimCounter]
 	dec a
-	ld [wSubAnimCounter],a
+	ld [wSubAnimCounter], a
 	ret z
-	ld a,[wSubAnimSubEntryAddr + 1]
-	ld h,a
-	ld a,[wSubAnimSubEntryAddr]
-	ld l,a
-	ld a,[wSubAnimTransform]
-	cp a,4 ; is the animation reversed?
-	ld bc,3
-	jr nz,.nextSubanimationSubentry
-	ld bc,-3
+	ld a, [wSubAnimSubEntryAddr + 1]
+	ld h, a
+	ld a, [wSubAnimSubEntryAddr]
+	ld l, a
+	ld a, [wSubAnimTransform]
+	cp 4 ; is the animation reversed?
+	ld bc, 3
+	jr nz, .nextSubanimationSubentry
+	ld bc, -3
 .nextSubanimationSubentry
-	add hl,bc
-	ld a,h
-	ld [wSubAnimSubEntryAddr + 1],a
-	ld a,l
-	ld [wSubAnimSubEntryAddr],a
+	add hl, bc
+	ld a, h
+	ld [wSubAnimSubEntryAddr + 1], a
+	ld a, l
+	ld [wSubAnimSubEntryAddr], a
 	jp .loop
 
 AnimationCleanOAM:
@@ -631,16 +631,16 @@ DoSpecialEffectByAnimationId:
 	push hl
 	push de
 	push bc
-	ld a,[wAnimationID]
-	ld hl,AnimationIdSpecialEffects
-	ld de,3
+	ld a, [wAnimationID]
+	ld hl, AnimationIdSpecialEffects
+	ld de, 3
 	call IsInArray
-	jr nc,.done
+	jr nc, .done
 	inc hl
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	ld de,.done
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, .done
 	push de
 	jp hl
 .done
@@ -726,38 +726,38 @@ AnimationIdSpecialEffects:
 	db $FF ; terminator
 
 DoBallTossSpecialEffects:
-	ld a,[wcf91]
-	cp a,3 ; is it a Master Ball or Ultra Ball?
-	jr nc,.skipFlashingEffect
+	ld a, [wcf91]
+	cp 3 ; is it a Master Ball or Ultra Ball?
+	jr nc, .skipFlashingEffect
 .flashingEffect ; do a flashing effect if it's Master Ball or Ultra Ball
-	ld a,[rOBP0]
-	xor a,%00111100 ; complement colors 1 and 2
-	ld [rOBP0],a
+	ld a, [rOBP0]
+	xor %00111100 ; complement colors 1 and 2
+	ld [rOBP0], a
 .skipFlashingEffect
-	ld a,[wSubAnimCounter]
-	cp a,11 ; is it the beginning of the subanimation?
-	jr nz,.skipPlayingSound
+	ld a, [wSubAnimCounter]
+	cp 11 ; is it the beginning of the subanimation?
+	jr nz, .skipPlayingSound
 ; if it is the beginning of the subanimation, play a sound
-	ld a,SFX_BALL_TOSS
+	ld a, SFX_BALL_TOSS
 	call PlaySound
 .skipPlayingSound
-	ld a,[wIsInBattle]
-	cp a,02 ; is it a trainer battle?
-	jr z,.isTrainerBattle
-	ld a,[wd11e]
-	cp a,$10 ; is the enemy pokemon the Ghost Marowak?
+	ld a, [wIsInBattle]
+	cp 02 ; is it a trainer battle?
+	jr z, .isTrainerBattle
+	ld a, [wd11e]
+	cp $10 ; is the enemy pokemon the Ghost Marowak?
 	ret nz
 ; if the enemy pokemon is the Ghost Marowak, make it dodge during the last 3 frames
-	ld a,[wSubAnimCounter]
-	cp a,3
-	jr z,.moveGhostMarowakLeft
-	cp a,2
-	jr z,.moveGhostMarowakLeft
-	cp a,1
+	ld a, [wSubAnimCounter]
+	cp 3
+	jr z, .moveGhostMarowakLeft
+	cp 2
+	jr z, .moveGhostMarowakLeft
+	cp 1
 	ret nz
 .moveGhostMarowakLeft
 	coord hl, 17, 0
-	ld de,20
+	ld de, 20
 	lb bc, 7, 7
 .loop
 	push hl
@@ -765,152 +765,152 @@ DoBallTossSpecialEffects:
 	call AnimCopyRowRight ; move row of tiles left
 	pop bc
 	pop hl
-	add hl,de
+	add hl, de
 	dec b
-	jr nz,.loop
-	ld a,%00001000
-	ld [rNR10],a ; Channel 1 sweep register
+	jr nz, .loop
+	ld a, %00001000
+	ld [rNR10], a ; Channel 1 sweep register
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
-	ld a,[wSubAnimCounter]
-	cp a,3
+	ld a, [wSubAnimCounter]
+	cp 3
 	ret nz
 	dec a
-	ld [wSubAnimCounter],a
+	ld [wSubAnimCounter], a
 	ret
 
 DoBallShakeSpecialEffects:
-	ld a,[wSubAnimCounter]
-	cp a,4 ; is it the beginning of a shake?
-	jr nz,.skipPlayingSound
+	ld a, [wSubAnimCounter]
+	cp 4 ; is it the beginning of a shake?
+	jr nz, .skipPlayingSound
 ; if it is the beginning of a shake, play a sound and wait 2/3 of a second
-	ld a,SFX_TINK
+	ld a, SFX_TINK
 	call PlaySound
-	ld c,40
+	ld c, 40
 	call DelayFrames
 .skipPlayingSound
-	ld a,[wSubAnimCounter]
+	ld a, [wSubAnimCounter]
 	dec a
 	ret nz
 ; if it's the end of the ball shaking subanimation, check if more shakes are left and restart the subanimation
-	ld a,[wNumShakes] ; number of shakes
+	ld a, [wNumShakes] ; number of shakes
 	dec a ; decrement number of shakes
-	ld [wNumShakes],a
+	ld [wNumShakes], a
 	ret z
 ; if there are shakes left, restart the subanimation
-	ld a,[wSubAnimSubEntryAddr]
-	ld l,a
-	ld a,[wSubAnimSubEntryAddr + 1]
-	ld h,a
-	ld de,-(4 * 3) ; 4 subentries and 3 bytes per subentry
-	add hl,de
-	ld a,l
-	ld [wSubAnimSubEntryAddr],a
-	ld a,h
-	ld [wSubAnimSubEntryAddr + 1],a
-	ld a,5 ; number of subentries in the ball shaking subanimation plus one
-	ld [wSubAnimCounter],a
+	ld a, [wSubAnimSubEntryAddr]
+	ld l, a
+	ld a, [wSubAnimSubEntryAddr + 1]
+	ld h, a
+	ld de, -(4 * 3) ; 4 subentries and 3 bytes per subentry
+	add hl, de
+	ld a, l
+	ld [wSubAnimSubEntryAddr], a
+	ld a, h
+	ld [wSubAnimSubEntryAddr + 1], a
+	ld a, 5 ; number of subentries in the ball shaking subanimation plus one
+	ld [wSubAnimCounter], a
 	ret
 
 ; plays a sound after the second frame of the poof animation
 DoPoofSpecialEffects:
-	ld a,[wSubAnimCounter]
-	cp a,5
+	ld a, [wSubAnimCounter]
+	cp 5
 	ret nz
-	ld a,SFX_BALL_POOF
+	ld a, SFX_BALL_POOF
 	jp PlaySound
 
 DoRockSlideSpecialEffects:
-	ld a,[wSubAnimCounter]
-	cp a,12
+	ld a, [wSubAnimCounter]
+	cp 12
 	ret nc
-	cp a,8
-	jr nc,.shakeScreen
-	cp a,1
-	jp z,AnimationFlashScreen ; if it's the end of the subanimation, flash the screen
+	cp 8
+	jr nc, .shakeScreen
+	cp 1
+	jp z, AnimationFlashScreen ; if it's the end of the subanimation, flash the screen
 	ret
 ; if the subanimation counter is between 8 and 11, shake the screen horizontally and vertically
 .shakeScreen
-	ld b,1
+	ld b, 1
 	predef PredefShakeScreenHorizontally ; shake horizontally
-	ld b,1
+	ld b, 1
 	predef_jump PredefShakeScreenVertically ; shake vertically
 
 FlashScreenEveryEightFrameBlocks:
-	ld a,[wSubAnimCounter]
-	and a,7 ; is the subanimation counter exactly 8?
-	call z,AnimationFlashScreen ; if so, flash the screen
+	ld a, [wSubAnimCounter]
+	and 7 ; is the subanimation counter exactly 8?
+	call z, AnimationFlashScreen ; if so, flash the screen
 	ret
 
 ; flashes the screen if the subanimation counter is divisible by 4
 FlashScreenEveryFourFrameBlocks:
-	ld a,[wSubAnimCounter]
-	and a,3
-	call z,AnimationFlashScreen
+	ld a, [wSubAnimCounter]
+	and 3
+	call z, AnimationFlashScreen
 	ret
 
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects:
-	ld a,[wSubAnimCounter]
-	cp a,1 ; is it the end of the subanimation?
-	jr nz,FlashScreenEveryFourFrameBlocks
+	ld a, [wSubAnimCounter]
+	cp 1 ; is it the end of the subanimation?
+	jr nz, FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
 	coord hl, 1, 5
 	jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
 DoBlizzardSpecialEffects:
-	ld a,[wSubAnimCounter]
-	cp a,13
-	jp z,AnimationFlashScreen
-	cp a,9
-	jp z,AnimationFlashScreen
-	cp a,5
-	jp z,AnimationFlashScreen
-	cp a,1
-	jp z,AnimationFlashScreen
+	ld a, [wSubAnimCounter]
+	cp 13
+	jp z, AnimationFlashScreen
+	cp 9
+	jp z, AnimationFlashScreen
+	cp 5
+	jp z, AnimationFlashScreen
+	cp 1
+	jp z, AnimationFlashScreen
 	ret
 
 ; flashes the screen at 3 points in the subanimation
 ; unused
 FlashScreenUnused:
-	ld a,[wSubAnimCounter]
-	cp a,14
-	jp z,AnimationFlashScreen
-	cp a,9
-	jp z,AnimationFlashScreen
-	cp a,2
-	jp z,AnimationFlashScreen
+	ld a, [wSubAnimCounter]
+	cp 14
+	jp z, AnimationFlashScreen
+	cp 9
+	jp z, AnimationFlashScreen
+	cp 2
+	jp z, AnimationFlashScreen
 	ret
 
 ; function to make the pokemon disappear at the beginning of the animation
 TradeHidePokemon:
-	ld a,[wSubAnimCounter]
-	cp a,6
+	ld a, [wSubAnimCounter]
+	cp 6
 	ret nz
-	ld a,2 * SCREEN_WIDTH + 7
+	ld a, 2 * SCREEN_WIDTH + 7
 	jp ClearMonPicFromTileMap ; make pokemon disappear
 
 ; function to make a shaking pokeball jump up at the end of the animation
 TradeShakePokeball:
-	ld a,[wSubAnimCounter]
-	cp a,1
+	ld a, [wSubAnimCounter]
+	cp 1
 	ret nz
 ; if it's the end of the animation, make the ball jump up
-	ld de,BallMoveDistances1
+	ld de, BallMoveDistances1
 .loop
-	ld hl,wOAMBuffer ; OAM buffer
-	ld bc,4
+	ld hl, wOAMBuffer ; OAM buffer
+	ld bc, 4
 .innerLoop
-	ld a,[de]
-	cp a,$ff
-	jr z,.done
+	ld a, [de]
+	cp $ff
+	jr z, .done
 	add [hl] ; add to Y value of OAM entry
-	ld [hl],a
-	add hl,bc
-	ld a,l
-	cp a,4 * 4 ; there are 4 entries, each 4 bytes
-	jr nz,.innerLoop
+	ld [hl], a
+	add hl, bc
+	ld a, l
+	cp 4 * 4 ; there are 4 entries, each 4 bytes
+	jr nz, .innerLoop
 	inc de
 	push bc
 	call Delay3
@@ -918,7 +918,7 @@ TradeShakePokeball:
 	jr .loop
 .done
 	call AnimationCleanOAM
-	ld a,SFX_TRADE_MACHINE
+	ld a, SFX_TRADE_MACHINE
 	jp PlaySound
 
 BallMoveDistances1:
@@ -927,38 +927,38 @@ BallMoveDistances1:
 
 ; function to make the pokeball jump up
 TradeJumpPokeball:
-	ld de,BallMoveDistances2
+	ld de, BallMoveDistances2
 .loop
-	ld hl,wOAMBuffer ; OAM buffer
-	ld bc,4
+	ld hl, wOAMBuffer ; OAM buffer
+	ld bc, 4
 .innerLoop
-	ld a,[de]
-	cp a,$ff
-	jp z,ClearScreen
+	ld a, [de]
+	cp $ff
+	jp z, ClearScreen
 	add [hl]
-	ld [hl],a
-	add hl,bc
-	ld a,l
-	cp a,4 * 4 ; there are 4 entries, each 4 bytes
-	jr nz,.innerLoop
+	ld [hl], a
+	add hl, bc
+	ld a, l
+	cp 4 * 4 ; there are 4 entries, each 4 bytes
+	jr nz, .innerLoop
 	inc de
 	push de
-	ld a,[de]
-	cp a,12
-	jr z,.playSound
-	cp a,$ff
-	jr nz,.skipPlayingSound
+	ld a, [de]
+	cp 12
+	jr z, .playSound
+	cp $ff
+	jr nz, .skipPlayingSound
 .playSound ; play sound if next move distance is 12 or this is the last one
-	ld a,SFX_BATTLE_18
+	ld a, SFX_BATTLE_18
 	call PlaySound
 .skipPlayingSound
 	push bc
-	ld c,5
+	ld c, 5
 	call DelayFrames
 	pop bc
-	ld a,[hSCX] ; background scroll X
-	sub a,8 ; scroll to the left
-	ld [hSCX],a
+	ld a, [hSCX] ; background scroll X
+	sub 8 ; scroll to the left
+	ld [hSCX], a
 	pop de
 	jr .loop
 
@@ -969,20 +969,20 @@ BallMoveDistances2:
 ; this function copies the current musical note graphic
 ; so that there are two musical notes flying towards the defending pokemon
 DoGrowlSpecialEffects:
-	ld hl,wOAMBuffer ; OAM buffer
-	ld de,wOAMBuffer + $10
-	ld bc,$10
+	ld hl, wOAMBuffer ; OAM buffer
+	ld de, wOAMBuffer + $10
+	ld bc, $10
 	call CopyData ; copy the musical note graphic
-	ld a,[wSubAnimCounter]
+	ld a, [wSubAnimCounter]
 	dec a
-	call z,AnimationCleanOAM ; clean up at the end of the subanimation
+	call z, AnimationCleanOAM ; clean up at the end of the subanimation
 	ret
 
 ; this is associated with Tail Whip, but Tail Whip doesn't use any subanimations
 TailWhipAnimationUnused:
-	ld a,1
-	ld [wSubAnimCounter],a
-	ld c,20
+	ld a, 1
+	ld [wSubAnimCounter], a
+	ld c, 20
 	jp DelayFrames
 
 ; Format: Special Effect ID (1 byte), Address (2 bytes)
@@ -1068,48 +1068,48 @@ SpecialEffectPointers:
 	db $FF
 
 AnimationDelay10:
-	ld c,10
+	ld c, 10
 	jp DelayFrames
 
 ; calls a function with the turn flipped from player to enemy or vice versa
 ; input - hl - address of function to call
 CallWithTurnFlipped:
-	ld a,[H_WHOSETURN]
+	ld a, [H_WHOSETURN]
 	push af
-	xor a,1
-	ld [H_WHOSETURN],a
-	ld de,.returnAddress
+	xor 1
+	ld [H_WHOSETURN], a
+	ld de, .returnAddress
 	push de
 	jp hl
 .returnAddress
 	pop af
-	ld [H_WHOSETURN],a
+	ld [H_WHOSETURN], a
 	ret
 
 ; flashes the screen for an extended period (48 frames)
 AnimationFlashScreenLong:
-	ld a,3 ; cycle through the palettes 3 times
-	ld [wFlashScreenLongCounter],a
-	ld a,[wOnSGB] ; running on SGB?
+	ld a, 3 ; cycle through the palettes 3 times
+	ld [wFlashScreenLongCounter], a
+	ld a, [wOnSGB] ; running on SGB?
 	and a
-	ld hl,FlashScreenLongMonochrome
-	jr z,.loop
-	ld hl,FlashScreenLongSGB
+	ld hl, FlashScreenLongMonochrome
+	jr z, .loop
+	ld hl, FlashScreenLongSGB
 .loop
 	push hl
 .innerLoop
-	ld a,[hli]
-	cp a,$01 ; is it the end of the palettes?
-	jr z,.endOfPalettes
-	ld [rBGP],a
+	ld a, [hli]
+	cp $01 ; is it the end of the palettes?
+	jr z, .endOfPalettes
+	ld [rBGP], a
 	call FlashScreenLongDelay
 	jr .innerLoop
 .endOfPalettes
-	ld a,[wFlashScreenLongCounter]
+	ld a, [wFlashScreenLongCounter]
 	dec a
-	ld [wFlashScreenLongCounter],a
+	ld [wFlashScreenLongCounter], a
 	pop hl
-	jr nz,.loop
+	jr nz, .loop
 	ret
 
 ; BG palettes
@@ -1147,31 +1147,31 @@ FlashScreenLongSGB:
 ; causes a delay of 2 frames for the first cycle
 ; causes a delay of 1 frame for the second and third cycles
 FlashScreenLongDelay:
-	ld a,[wFlashScreenLongCounter]
-	cp a,4 ; never true since [wFlashScreenLongCounter] starts at 3
-	ld c,4
-	jr z,.delayFrames
-	cp a,3
-	ld c,2
-	jr z,.delayFrames
-	cp a,2 ; nothing is done with this
-	ld c,1
+	ld a, [wFlashScreenLongCounter]
+	cp 4 ; never true since [wFlashScreenLongCounter] starts at 3
+	ld c, 4
+	jr z, .delayFrames
+	cp 3
+	ld c, 2
+	jr z, .delayFrames
+	cp 2 ; nothing is done with this
+	ld c, 1
 .delayFrames
 	jp DelayFrames
 
 AnimationFlashScreen:
-	ld a,[rBGP]
+	ld a, [rBGP]
 	push af ; save initial palette
-	ld a,%00011011 ; 0, 1, 2, 3 (inverted colors)
-	ld [rBGP],a
-	ld c,2
+	ld a, %00011011 ; 0, 1, 2, 3 (inverted colors)
+	ld [rBGP], a
+	ld c, 2
 	call DelayFrames
 	xor a ; white out background
-	ld [rBGP],a
-	ld c,2
+	ld [rBGP], a
+	ld c, 2
 	call DelayFrames
 	pop af
-	ld [rBGP],a ; restore initial palette
+	ld [rBGP], a ; restore initial palette
 	ret
 
 AnimationDarkScreenPalette:
@@ -2310,52 +2310,52 @@ GetMoveSoundB:
 	ret
 
 GetMoveSound:
-	ld hl,MoveSoundTable
-	ld e,a
-	ld d,0
-	add hl,de
-	add hl,de
-	add hl,de
-	ld a,[hli]
-	ld b,a
+	ld hl, MoveSoundTable
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld b, a
 	call IsCryMove
-	jr nc,.NotCryMove
-	ld a,[H_WHOSETURN]
+	jr nc, .NotCryMove
+	ld a, [H_WHOSETURN]
 	and a
-	jr nz,.next
-	ld a,[wBattleMonSpecies] ; get number of current monster
+	jr nz, .next
+	ld a, [wBattleMonSpecies] ; get number of current monster
 	jr .Continue
 .next
-	ld a,[wEnemyMonSpecies]
+	ld a, [wEnemyMonSpecies]
 .Continue
 	push hl
 	call GetCryData
-	ld b,a
+	ld b, a
 	pop hl
-	ld a,[wFrequencyModifier]
+	ld a, [wFrequencyModifier]
 	add [hl]
-	ld [wFrequencyModifier],a
+	ld [wFrequencyModifier], a
 	inc hl
-	ld a,[wTempoModifier]
+	ld a, [wTempoModifier]
 	add [hl]
-	ld [wTempoModifier],a
+	ld [wTempoModifier], a
 	jr .done
 .NotCryMove
-	ld a,[hli]
-	ld [wFrequencyModifier],a
-	ld a,[hli]
-	ld [wTempoModifier],a
+	ld a, [hli]
+	ld [wFrequencyModifier], a
+	ld a, [hli]
+	ld [wTempoModifier], a
 .done
-	ld a,b
+	ld a, b
 	ret
 
 IsCryMove:
 ; set carry if the move animation involves playing a monster cry
-	ld a,[wAnimationID]
-	cp a,GROWL
-	jr z,.CryMove
-	cp a,ROAR
-	jr z,.CryMove
+	ld a, [wAnimationID]
+	cp GROWL
+	jr z, .CryMove
+	cp ROAR
+	jr z, .CryMove
 	and a ; clear carry
 	ret
 .CryMove
@@ -2951,46 +2951,46 @@ BattleAnimCopyTileMapToVRAM:
 	jp Delay3
 
 TossBallAnimation:
-	ld a,[wIsInBattle]
-	cp a,2
-	jr z,.BlockBall ; if in trainer battle, play different animation
-	ld a,[wPokeBallAnimData]
-	ld b,a
+	ld a, [wIsInBattle]
+	cp 2
+	jr z, .BlockBall ; if in trainer battle, play different animation
+	ld a, [wPokeBallAnimData]
+	ld b, a
 
 	; upper nybble: how many animations (from PokeBallAnimations) to play
 	; this will be 4 for successful capture, 6 for breakout
-	and a,$F0
+	and $F0
 	swap a
-	ld c,a
+	ld c, a
 
 	; lower nybble: number of shakes
 	; store these for later
-	ld a,b
-	and a,$F
-	ld [wNumShakes],a
+	ld a, b
+	and $F
+	ld [wNumShakes], a
 
-	ld hl,.PokeBallAnimations
+	ld hl, .PokeBallAnimations
 	; choose which toss animation to use
-	ld a,[wcf91]
-	cp a,POKE_BALL
-	ld b,TOSS_ANIM
-	jr z,.done
-	cp a,GREAT_BALL
-	ld b,GREATTOSS_ANIM
-	jr z,.done
-	ld b,ULTRATOSS_ANIM
+	ld a, [wcf91]
+	cp POKE_BALL
+	ld b, TOSS_ANIM
+	jr z, .done
+	cp GREAT_BALL
+	ld b, GREATTOSS_ANIM
+	jr z, .done
+	ld b, ULTRATOSS_ANIM
 .done
-	ld a,b
+	ld a, b
 .PlayNextAnimation
-	ld [wAnimationID],a
+	ld [wAnimationID], a
 	push bc
 	push hl
 	call PlayAnimation
 	pop hl
-	ld a,[hli]
+	ld a, [hli]
 	pop bc
 	dec c
-	jr nz,.PlayNextAnimation
+	jr nz, .PlayNextAnimation
 	ret
 
 .PokeBallAnimations:
@@ -2998,13 +2998,13 @@ TossBallAnimation:
 	db POOF_ANIM,HIDEPIC_ANIM,SHAKE_ANIM,POOF_ANIM,SHOWPIC_ANIM
 
 .BlockBall
-	ld a,TOSS_ANIM
-	ld [wAnimationID],a
+	ld a, TOSS_ANIM
+	ld [wAnimationID], a
 	call PlayAnimation
-	ld a,SFX_FAINT_THUD
+	ld a, SFX_FAINT_THUD
 	call PlaySound
-	ld a,BLOCKBALL_ANIM
-	ld [wAnimationID],a
+	ld a, BLOCKBALL_ANIM
+	ld [wAnimationID], a
 	jp PlayAnimation
 
 PlayApplyingAttackSound:

@@ -1,21 +1,21 @@
 SaveTrainerName:
-	ld hl,TrainerNamePointers
-	ld a,[wTrainerClass]
+	ld hl, TrainerNamePointers
+	ld a, [wTrainerClass]
 	dec a
-	ld c,a
-	ld b,0
-	add hl,bc
-	add hl,bc
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	ld de,wcd6d
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, wcd6d
 .CopyCharacter
-	ld a,[hli]
-	ld [de],a
+	ld a, [hli]
+	ld [de], a
 	inc de
 	cp "@"
-	jr nz,.CopyCharacter
+	jr nz, .CopyCharacter
 	ret
 
 TrainerNamePointers:
