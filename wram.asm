@@ -9,7 +9,6 @@ box_struct_length EQU 25 + NUM_MOVES * 2
 box_struct: MACRO
 \1Species::    db
 \1HP::         dw
-\1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
@@ -42,6 +41,7 @@ ENDM
 battle_struct: MACRO
 \1Species::    db
 \1HP::         dw
+\1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
