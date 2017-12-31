@@ -159,9 +159,6 @@ ROMX $2C
 WRAM0
   "WRAM Bank 0"
 
-WRAMX 1
-  "WRAM Bank 1"
-
 SRAM 0
   "Sprite Buffers"
 
