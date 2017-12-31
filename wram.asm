@@ -9,6 +9,7 @@ box_struct_length EQU 25 + NUM_MOVES * 2
 box_struct: MACRO
 \1Species::    db
 \1HP::         dw
+\1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
@@ -1581,15 +1582,7 @@ wBattleMonSpecies2:: ; cfd9
 
 wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
-UNION
 wEnemyMon:: battle_struct wEnemyMon ; cfe5
-
-NEXTU
-
-	ds 3
-; Alias for wEnemyMonBoxLevel
-wEnemyMonPartyPos::	ds 1
-ENDU
 
 
 wEnemyMonBaseStats:: ds 5
