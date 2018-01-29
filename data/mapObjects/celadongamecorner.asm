@@ -1,28 +1,28 @@
 CeladonGameCornerObject:
-	db $f ; border block
+	db 15 ; border block
 
-	db $3 ; warps
-	warp $f, $11, $7, $ff
-	warp $10, $11, $7, $ff
-	warp $11, $4, $1, ROCKET_HIDEOUT_1
+	db 3 ; warps
+	warp 15, 17, 7, -1
+	warp 16, 17, 7, -1
+	warp 17, 4, 1, ROCKET_HIDEOUT_1
 
-	db $1 ; signs
-	sign $9, $4, $c ; CeladonGameCornerText12
+	db 1 ; signs
+	sign 9, 4, 12 ; CeladonGameCornerText12
 
-	db $b ; objects
-	object SPRITE_FOULARD_WOMAN, $2, $6, STAY, DOWN, $1 ; person
-	object SPRITE_MART_GUY, $5, $6, STAY, DOWN, $2 ; person
-	object SPRITE_FAT_BALD_GUY, $2, $a, STAY, LEFT, $3 ; person
-	object SPRITE_FOULARD_WOMAN, $2, $d, STAY, LEFT, $4 ; person
-	object SPRITE_FISHER, $5, $b, STAY, RIGHT, $5 ; person
-	object SPRITE_MOM_GEISHA, $8, $b, STAY, LEFT, $6 ; person
-	object SPRITE_GYM_HELPER, $8, $e, STAY, LEFT, $7 ; person
-	object SPRITE_GAMBLER, $b, $f, STAY, RIGHT, $8 ; person
-	object SPRITE_MART_GUY, $e, $b, STAY, LEFT, $9 ; person
-	object SPRITE_GENTLEMAN, $11, $d, STAY, RIGHT, $a ; person
-	object SPRITE_ROCKET, $9, $5, STAY, UP, $b, OPP_ROCKET, $7
+	db 11 ; objects
+	object SPRITE_FOULARD_WOMAN, 2, 6, STAY, DOWN, 1 ; person
+	object SPRITE_MART_GUY, 5, 6, STAY, DOWN, 2 ; person
+	object SPRITE_FAT_BALD_GUY, 2, 10, STAY, LEFT, 3 ; person
+	object SPRITE_FOULARD_WOMAN, 2, 13, STAY, LEFT, 4 ; person
+	object SPRITE_FISHER, 5, 11, STAY, RIGHT, 5 ; person
+	object SPRITE_MOM_GEISHA, 8, 11, STAY, LEFT, 6 ; person
+	object SPRITE_GYM_HELPER, 8, 14, STAY, LEFT, 7 ; person
+	object SPRITE_GAMBLER, 11, 15, STAY, RIGHT, 8 ; person
+	object SPRITE_MART_GUY, 14, 11, STAY, LEFT, 9 ; person
+	object SPRITE_GENTLEMAN, 17, 13, STAY, RIGHT, 10 ; person
+	object SPRITE_ROCKET, 9, 5, STAY, UP, 11, OPP_ROCKET, 7
 
 	; warp-to
-	warp_to $f, $11, GAME_CORNER_WIDTH
-	warp_to $10, $11, GAME_CORNER_WIDTH
-	warp_to $11, $4, GAME_CORNER_WIDTH ; ROCKET_HIDEOUT_1
+	warp_to 15, 17, GAME_CORNER_WIDTH
+	warp_to 16, 17, GAME_CORNER_WIDTH
+	warp_to 17, 4, GAME_CORNER_WIDTH ; ROCKET_HIDEOUT_1

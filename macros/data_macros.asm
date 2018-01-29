@@ -121,7 +121,7 @@ ENDM
 ;\1 x position
 ;\2 y position
 ;\3 destination warp id
-;\4 destination map ($ff = wLastMap)
+;\4 destination map (-1 = wLastMap)
 warp: MACRO
 	db \2, \1, \3, \4
 ENDM
