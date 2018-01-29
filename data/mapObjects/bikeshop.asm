@@ -2,8 +2,8 @@ BikeShopObject:
 	db $e ; border block
 
 	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
+	warp $2, $7, $4, $ff
+	warp $3, $7, $4, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ BikeShopObject:
 	object SPRITE_BUG_CATCHER, $1, $3, STAY, UP, $3 ; person
 
 	; warp-to
-	EVENT_DISP BIKE_SHOP_WIDTH, $7, $2
-	EVENT_DISP BIKE_SHOP_WIDTH, $7, $3
+	warp_to $2, $7, BIKE_SHOP_WIDTH
+	warp_to $3, $7, BIKE_SHOP_WIDTH

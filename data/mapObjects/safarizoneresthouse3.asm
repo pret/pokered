@@ -2,8 +2,8 @@ SafariZoneRestHouse3Object:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $4, SAFARI_ZONE_EAST
-	db $7, $3, $4, SAFARI_ZONE_EAST
+	warp $2, $7, $4, SAFARI_ZONE_EAST
+	warp $3, $7, $4, SAFARI_ZONE_EAST
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ SafariZoneRestHouse3Object:
 	object SPRITE_LAPRAS_GIVER, $5, $2, STAY, NONE, $3 ; person
 
 	; warp-to
-	EVENT_DISP SAFARI_ZONE_REST_HOUSE_3_WIDTH, $7, $2 ; SAFARI_ZONE_EAST
-	EVENT_DISP SAFARI_ZONE_REST_HOUSE_3_WIDTH, $7, $3 ; SAFARI_ZONE_EAST
+	warp_to $2, $7, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; SAFARI_ZONE_EAST
+	warp_to $3, $7, SAFARI_ZONE_REST_HOUSE_3_WIDTH ; SAFARI_ZONE_EAST

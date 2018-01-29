@@ -2,14 +2,14 @@ Route11Object:
 	db $f ; border block
 
 	db $5 ; warps
-	db $8, $31, $0, ROUTE_11_GATE_1F
-	db $9, $31, $1, ROUTE_11_GATE_1F
-	db $8, $3a, $2, ROUTE_11_GATE_1F
-	db $9, $3a, $3, ROUTE_11_GATE_1F
-	db $5, $4, $0, DIGLETTS_CAVE_ENTRANCE
+	warp $31, $8, $0, ROUTE_11_GATE_1F
+	warp $31, $9, $1, ROUTE_11_GATE_1F
+	warp $3a, $8, $2, ROUTE_11_GATE_1F
+	warp $3a, $9, $3, ROUTE_11_GATE_1F
+	warp $4, $5, $0, DIGLETTS_CAVE_ENTRANCE
 
 	db $1 ; signs
-	db $5, $1, $b ; Route11Text11
+	sign $1, $5, $b ; Route11Text11
 
 	db $a ; objects
 	object SPRITE_GAMBLER, $a, $e, STAY, DOWN, $1, OPP_GAMBLER, $1
@@ -24,8 +24,8 @@ Route11Object:
 	object SPRITE_BUG_CATCHER, $16, $c, STAY, UP, $a, OPP_YOUNGSTER, $c
 
 	; warp-to
-	EVENT_DISP ROUTE_11_WIDTH, $8, $31 ; ROUTE_11_GATE_1F
-	EVENT_DISP ROUTE_11_WIDTH, $9, $31 ; ROUTE_11_GATE_1F
-	EVENT_DISP ROUTE_11_WIDTH, $8, $3a ; ROUTE_11_GATE_1F
-	EVENT_DISP ROUTE_11_WIDTH, $9, $3a ; ROUTE_11_GATE_1F
-	EVENT_DISP ROUTE_11_WIDTH, $5, $4 ; DIGLETTS_CAVE_ENTRANCE
+	warp_to $31, $8, ROUTE_11_WIDTH ; ROUTE_11_GATE_1F
+	warp_to $31, $9, ROUTE_11_WIDTH ; ROUTE_11_GATE_1F
+	warp_to $3a, $8, ROUTE_11_WIDTH ; ROUTE_11_GATE_1F
+	warp_to $3a, $9, ROUTE_11_WIDTH ; ROUTE_11_GATE_1F
+	warp_to $4, $5, ROUTE_11_WIDTH ; DIGLETTS_CAVE_ENTRANCE

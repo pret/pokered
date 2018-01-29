@@ -2,10 +2,10 @@ MtMoon3Object:
 	db $3 ; border block
 
 	db $4 ; warps
-	db $9, $19, $1, MT_MOON_2
-	db $11, $15, $4, MT_MOON_2
-	db $1b, $f, $5, MT_MOON_2
-	db $7, $5, $6, MT_MOON_2
+	warp $19, $9, $1, MT_MOON_2
+	warp $15, $11, $4, MT_MOON_2
+	warp $f, $1b, $5, MT_MOON_2
+	warp $5, $7, $6, MT_MOON_2
 
 	db $0 ; signs
 
@@ -21,7 +21,7 @@ MtMoon3Object:
 	object SPRITE_BALL, $1d, $5, STAY, NONE, $9, TM_01
 
 	; warp-to
-	EVENT_DISP MT_MOON_3_WIDTH, $9, $19 ; MT_MOON_2
-	EVENT_DISP MT_MOON_3_WIDTH, $11, $15 ; MT_MOON_2
-	EVENT_DISP MT_MOON_3_WIDTH, $1b, $f ; MT_MOON_2
-	EVENT_DISP MT_MOON_3_WIDTH, $7, $5 ; MT_MOON_2
+	warp_to $19, $9, MT_MOON_3_WIDTH ; MT_MOON_2
+	warp_to $15, $11, MT_MOON_3_WIDTH ; MT_MOON_2
+	warp_to $f, $1b, MT_MOON_3_WIDTH ; MT_MOON_2
+	warp_to $5, $7, MT_MOON_3_WIDTH ; MT_MOON_2

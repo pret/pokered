@@ -2,24 +2,24 @@ VermilionCityObject:
 	db $43 ; border block
 
 	db $9 ; warps
-	db $3, $b, $0, VERMILION_POKECENTER
-	db $d, $9, $0, POKEMON_FAN_CLUB
-	db $d, $17, $0, VERMILION_MART
-	db $13, $c, $0, VERMILION_GYM
-	db $13, $17, $0, VERMILION_HOUSE_1
-	db $1f, $12, $0, VERMILION_DOCK
-	db $1f, $13, $0, VERMILION_DOCK
-	db $d, $f, $0, VERMILION_HOUSE_3
-	db $3, $7, $0, VERMILION_HOUSE_2
+	warp $b, $3, $0, VERMILION_POKECENTER
+	warp $9, $d, $0, POKEMON_FAN_CLUB
+	warp $17, $d, $0, VERMILION_MART
+	warp $c, $13, $0, VERMILION_GYM
+	warp $17, $13, $0, VERMILION_HOUSE_1
+	warp $12, $1f, $0, VERMILION_DOCK
+	warp $13, $1f, $0, VERMILION_DOCK
+	warp $f, $d, $0, VERMILION_HOUSE_3
+	warp $7, $3, $0, VERMILION_HOUSE_2
 
 	db $7 ; signs
-	db $3, $1b, $7 ; VermilionCityText7
-	db $d, $25, $8 ; VermilionCityText8
-	db $d, $18, $9 ; MartSignText
-	db $3, $c, $a ; PokeCenterSignText
-	db $d, $7, $b ; VermilionCityText11
-	db $13, $7, $c ; VermilionCityText12
-	db $f, $1d, $d ; VermilionCityText13
+	sign $1b, $3, $7 ; VermilionCityText7
+	sign $25, $d, $8 ; VermilionCityText8
+	sign $18, $d, $9 ; MartSignText
+	sign $c, $3, $a ; PokeCenterSignText
+	sign $7, $d, $b ; VermilionCityText11
+	sign $7, $13, $c ; VermilionCityText12
+	sign $1d, $f, $d ; VermilionCityText13
 
 	db $6 ; objects
 	object SPRITE_FOULARD_WOMAN, $13, $7, WALK, $2, $1 ; person
@@ -30,12 +30,12 @@ VermilionCityObject:
 	object SPRITE_SAILOR, $19, $1b, WALK, $2, $6 ; person
 
 	; warp-to
-	EVENT_DISP VERMILION_CITY_WIDTH, $3, $b ; VERMILION_POKECENTER
-	EVENT_DISP VERMILION_CITY_WIDTH, $d, $9 ; POKEMON_FAN_CLUB
-	EVENT_DISP VERMILION_CITY_WIDTH, $d, $17 ; VERMILION_MART
-	EVENT_DISP VERMILION_CITY_WIDTH, $13, $c ; VERMILION_GYM
-	EVENT_DISP VERMILION_CITY_WIDTH, $13, $17 ; VERMILION_HOUSE_1
-	EVENT_DISP VERMILION_CITY_WIDTH, $1f, $12 ; VERMILION_DOCK
-	EVENT_DISP VERMILION_CITY_WIDTH, $1f, $13 ; VERMILION_DOCK
-	EVENT_DISP VERMILION_CITY_WIDTH, $d, $f ; VERMILION_HOUSE_3
-	EVENT_DISP VERMILION_CITY_WIDTH, $3, $7 ; VERMILION_HOUSE_2
+	warp_to $b, $3, VERMILION_CITY_WIDTH ; VERMILION_POKECENTER
+	warp_to $9, $d, VERMILION_CITY_WIDTH ; POKEMON_FAN_CLUB
+	warp_to $17, $d, VERMILION_CITY_WIDTH ; VERMILION_MART
+	warp_to $c, $13, VERMILION_CITY_WIDTH ; VERMILION_GYM
+	warp_to $17, $13, VERMILION_CITY_WIDTH ; VERMILION_HOUSE_1
+	warp_to $12, $1f, VERMILION_CITY_WIDTH ; VERMILION_DOCK
+	warp_to $13, $1f, VERMILION_CITY_WIDTH ; VERMILION_DOCK
+	warp_to $f, $d, VERMILION_CITY_WIDTH ; VERMILION_HOUSE_3
+	warp_to $7, $3, VERMILION_CITY_WIDTH ; VERMILION_HOUSE_2

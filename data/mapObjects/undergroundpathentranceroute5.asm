@@ -2,9 +2,9 @@ UndergroundPathEntranceRoute5Object:
 	db $a ; border block
 
 	db $3 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
-	db $4, $4, $0, UNDERGROUND_PATH_NS
+	warp $3, $7, $3, $ff
+	warp $4, $7, $3, $ff
+	warp $4, $4, $0, UNDERGROUND_PATH_NS
 
 	db $0 ; signs
 
@@ -12,6 +12,6 @@ UndergroundPathEntranceRoute5Object:
 	object SPRITE_LITTLE_GIRL, $2, $3, STAY, NONE, $1 ; person
 
 	; warp-to
-	EVENT_DISP PATH_ENTRANCE_ROUTE_5_WIDTH, $7, $3
-	EVENT_DISP PATH_ENTRANCE_ROUTE_5_WIDTH, $7, $4
-	EVENT_DISP PATH_ENTRANCE_ROUTE_5_WIDTH, $4, $4 ; UNDERGROUND_PATH_NS
+	warp_to $3, $7, PATH_ENTRANCE_ROUTE_5_WIDTH
+	warp_to $4, $7, PATH_ENTRANCE_ROUTE_5_WIDTH
+	warp_to $4, $4, PATH_ENTRANCE_ROUTE_5_WIDTH ; UNDERGROUND_PATH_NS

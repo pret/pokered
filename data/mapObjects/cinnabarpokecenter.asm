@@ -2,8 +2,8 @@ CinnabarPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $3, $ff
-	db $7, $4, $3, $ff
+	warp $3, $7, $3, $ff
+	warp $4, $7, $3, $ff
 
 	db $0 ; signs
 
@@ -14,5 +14,5 @@ CinnabarPokecenterObject:
 	object SPRITE_CABLE_CLUB_WOMAN, $b, $2, STAY, DOWN, $4 ; person
 
 	; warp-to
-	EVENT_DISP CINNABAR_POKECENTER_WIDTH, $7, $3
-	EVENT_DISP CINNABAR_POKECENTER_WIDTH, $7, $4
+	warp_to $3, $7, CINNABAR_POKECENTER_WIDTH
+	warp_to $4, $7, CINNABAR_POKECENTER_WIDTH

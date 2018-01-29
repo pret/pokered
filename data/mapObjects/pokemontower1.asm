@@ -2,9 +2,9 @@ PokemonTower1Object:
 	db $1 ; border block
 
 	db $3 ; warps
-	db $11, $a, $1, $ff
-	db $11, $b, $1, $ff
-	db $9, $12, $1, POKEMONTOWER_2
+	warp $a, $11, $1, $ff
+	warp $b, $11, $1, $ff
+	warp $12, $9, $1, POKEMONTOWER_2
 
 	db $0 ; signs
 
@@ -16,6 +16,6 @@ PokemonTower1Object:
 	object SPRITE_MEDIUM, $11, $7, STAY, LEFT, $5 ; person
 
 	; warp-to
-	EVENT_DISP POKEMONTOWER_1_WIDTH, $11, $a
-	EVENT_DISP POKEMONTOWER_1_WIDTH, $11, $b
-	EVENT_DISP POKEMONTOWER_1_WIDTH, $9, $12 ; POKEMONTOWER_2
+	warp_to $a, $11, POKEMONTOWER_1_WIDTH
+	warp_to $b, $11, POKEMONTOWER_1_WIDTH
+	warp_to $12, $9, POKEMONTOWER_1_WIDTH ; POKEMONTOWER_2

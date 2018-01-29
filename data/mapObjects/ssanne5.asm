@@ -2,8 +2,8 @@ SSAnne5Object:
 	db $23 ; border block
 
 	db $2 ; warps
-	db $6, $d, $0, SS_ANNE_3
-	db $7, $d, $0, SS_ANNE_3
+	warp $d, $6, $0, SS_ANNE_3
+	warp $d, $7, $0, SS_ANNE_3
 
 	db $0 ; signs
 
@@ -15,5 +15,5 @@ SSAnne5Object:
 	object SPRITE_SAILOR, $a, $8, STAY, UP, $5, OPP_SAILOR, $2
 
 	; warp-to
-	EVENT_DISP SS_ANNE_5_WIDTH, $6, $d ; SS_ANNE_3
-	EVENT_DISP SS_ANNE_5_WIDTH, $7, $d ; SS_ANNE_3
+	warp_to $d, $6, SS_ANNE_5_WIDTH ; SS_ANNE_3
+	warp_to $d, $7, SS_ANNE_5_WIDTH ; SS_ANNE_3

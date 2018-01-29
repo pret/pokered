@@ -2,19 +2,19 @@ ViridianCityObject:
 	db $f ; border block
 
 	db $5 ; warps
-	db $19, $17, $0, VIRIDIAN_POKECENTER
-	db $13, $1d, $0, VIRIDIAN_MART
-	db $f, $15, $0, VIRIDIAN_SCHOOL
-	db $9, $15, $0, VIRIDIAN_HOUSE
-	db $7, $20, $0, VIRIDIAN_GYM
+	warp $17, $19, $0, VIRIDIAN_POKECENTER
+	warp $1d, $13, $0, VIRIDIAN_MART
+	warp $15, $f, $0, VIRIDIAN_SCHOOL
+	warp $15, $9, $0, VIRIDIAN_HOUSE
+	warp $20, $7, $0, VIRIDIAN_GYM
 
 	db $6 ; signs
-	db $11, $11, $8 ; ViridianCityText8
-	db $1, $13, $9 ; ViridianCityText9
-	db $1d, $15, $a ; ViridianCityText10
-	db $13, $1e, $b ; MartSignText
-	db $19, $18, $c ; PokeCenterSignText
-	db $7, $1b, $d ; ViridianCityText13
+	sign $11, $11, $8 ; ViridianCityText8
+	sign $13, $1, $9 ; ViridianCityText9
+	sign $15, $1d, $a ; ViridianCityText10
+	sign $1e, $13, $b ; MartSignText
+	sign $18, $19, $c ; PokeCenterSignText
+	sign $1b, $7, $d ; ViridianCityText13
 
 	db $7 ; objects
 	object SPRITE_BUG_CATCHER, $d, $14, WALK, $0, $1 ; person
@@ -26,8 +26,8 @@ ViridianCityObject:
 	object SPRITE_GAMBLER, $11, $5, WALK, $2, $7 ; person
 
 	; warp-to
-	EVENT_DISP VIRIDIAN_CITY_WIDTH, $19, $17 ; VIRIDIAN_POKECENTER
-	EVENT_DISP VIRIDIAN_CITY_WIDTH, $13, $1d ; VIRIDIAN_MART
-	EVENT_DISP VIRIDIAN_CITY_WIDTH, $f, $15 ; VIRIDIAN_SCHOOL
-	EVENT_DISP VIRIDIAN_CITY_WIDTH, $9, $15 ; VIRIDIAN_HOUSE
-	EVENT_DISP VIRIDIAN_CITY_WIDTH, $7, $20 ; VIRIDIAN_GYM
+	warp_to $17, $19, VIRIDIAN_CITY_WIDTH ; VIRIDIAN_POKECENTER
+	warp_to $1d, $13, VIRIDIAN_CITY_WIDTH ; VIRIDIAN_MART
+	warp_to $15, $f, VIRIDIAN_CITY_WIDTH ; VIRIDIAN_SCHOOL
+	warp_to $15, $9, VIRIDIAN_CITY_WIDTH ; VIRIDIAN_HOUSE
+	warp_to $20, $7, VIRIDIAN_CITY_WIDTH ; VIRIDIAN_GYM

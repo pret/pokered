@@ -2,8 +2,8 @@ CeladonHotelObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $c, $ff
-	db $7, $4, $c, $ff
+	warp $3, $7, $c, $ff
+	warp $4, $7, $c, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ CeladonHotelObject:
 	object SPRITE_BLACK_HAIR_BOY_2, $8, $4, WALK, $2, $3 ; person
 
 	; warp-to
-	EVENT_DISP CELADON_HOTEL_WIDTH, $7, $3
-	EVENT_DISP CELADON_HOTEL_WIDTH, $7, $4
+	warp_to $3, $7, CELADON_HOTEL_WIDTH
+	warp_to $4, $7, CELADON_HOTEL_WIDTH

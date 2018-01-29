@@ -2,10 +2,10 @@ Route25Object:
 	db $2c ; border block
 
 	db $1 ; warps
-	db $3, $2d, $0, BILLS_HOUSE
+	warp $2d, $3, $0, BILLS_HOUSE
 
 	db $1 ; signs
-	db $3, $2b, $b ; Route25Text11
+	sign $2b, $3, $b ; Route25Text11
 
 	db $a ; objects
 	object SPRITE_BUG_CATCHER, $e, $2, STAY, DOWN, $1, OPP_YOUNGSTER, $5
@@ -20,4 +20,4 @@ Route25Object:
 	object SPRITE_BALL, $16, $2, STAY, NONE, $a, TM_19
 
 	; warp-to
-	EVENT_DISP ROUTE_25_WIDTH, $3, $2d ; BILLS_HOUSE
+	warp_to $2d, $3, ROUTE_25_WIDTH ; BILLS_HOUSE

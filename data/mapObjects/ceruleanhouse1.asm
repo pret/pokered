@@ -2,8 +2,8 @@ CeruleanHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
+	warp $2, $7, $1, $ff
+	warp $3, $7, $1, $ff
 
 	db $0 ; signs
 
@@ -12,5 +12,5 @@ CeruleanHouse1Object:
 	object SPRITE_GAMBLER, $1, $2, STAY, NONE, $2 ; person
 
 	; warp-to
-	EVENT_DISP CERULEAN_HOUSE_1_WIDTH, $7, $2
-	EVENT_DISP CERULEAN_HOUSE_1_WIDTH, $7, $3
+	warp_to $2, $7, CERULEAN_HOUSE_1_WIDTH
+	warp_to $3, $7, CERULEAN_HOUSE_1_WIDTH

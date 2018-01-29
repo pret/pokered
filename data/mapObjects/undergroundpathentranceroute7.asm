@@ -2,9 +2,9 @@ UndergroundPathEntranceRoute7Object:
 	db $a ; border block
 
 	db $3 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
-	db $4, $4, $0, UNDERGROUND_PATH_WE
+	warp $3, $7, $4, $ff
+	warp $4, $7, $4, $ff
+	warp $4, $4, $0, UNDERGROUND_PATH_WE
 
 	db $0 ; signs
 
@@ -12,6 +12,6 @@ UndergroundPathEntranceRoute7Object:
 	object SPRITE_FAT_BALD_GUY, $2, $4, STAY, NONE, $1 ; person
 
 	; warp-to
-	EVENT_DISP PATH_ENTRANCE_ROUTE_7_WIDTH, $7, $3
-	EVENT_DISP PATH_ENTRANCE_ROUTE_7_WIDTH, $7, $4
-	EVENT_DISP PATH_ENTRANCE_ROUTE_7_WIDTH, $4, $4 ; UNDERGROUND_PATH_WE
+	warp_to $3, $7, PATH_ENTRANCE_ROUTE_7_WIDTH
+	warp_to $4, $7, PATH_ENTRANCE_ROUTE_7_WIDTH
+	warp_to $4, $4, PATH_ENTRANCE_ROUTE_7_WIDTH ; UNDERGROUND_PATH_WE

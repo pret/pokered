@@ -2,8 +2,8 @@ FuchsiaMeetingRoomObject:
 	db $17 ; border block
 
 	db $2 ; warps
-	db $7, $4, $6, $ff
-	db $7, $5, $6, $ff
+	warp $4, $7, $6, $ff
+	warp $5, $7, $6, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ FuchsiaMeetingRoomObject:
 	object SPRITE_WHITE_PLAYER, $a, $1, STAY, DOWN, $3 ; person
 
 	; warp-to
-	EVENT_DISP FUCHSIA_MEETING_ROOM_WIDTH, $7, $4
-	EVENT_DISP FUCHSIA_MEETING_ROOM_WIDTH, $7, $5
+	warp_to $4, $7, FUCHSIA_MEETING_ROOM_WIDTH
+	warp_to $5, $7, FUCHSIA_MEETING_ROOM_WIDTH

@@ -2,15 +2,15 @@ Route16GateObject:
 	db $a ; border block
 
 	db $9 ; warps
-	db $8, $0, $0, $ff
-	db $9, $0, $1, $ff
-	db $8, $7, $2, $ff
-	db $9, $7, $2, $ff
-	db $2, $0, $4, $ff
-	db $3, $0, $5, $ff
-	db $2, $7, $6, $ff
-	db $3, $7, $7, $ff
-	db $c, $6, $0, ROUTE_16_GATE_2F
+	warp $0, $8, $0, $ff
+	warp $0, $9, $1, $ff
+	warp $7, $8, $2, $ff
+	warp $7, $9, $2, $ff
+	warp $0, $2, $4, $ff
+	warp $0, $3, $5, $ff
+	warp $7, $2, $6, $ff
+	warp $7, $3, $7, $ff
+	warp $6, $c, $0, ROUTE_16_GATE_2F
 
 	db $0 ; signs
 
@@ -19,12 +19,12 @@ Route16GateObject:
 	object SPRITE_GAMBLER, $4, $3, STAY, NONE, $2 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $8, $0
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $9, $0
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $8, $7
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $9, $7
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $2, $0
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $3, $0
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $2, $7
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $3, $7
-	EVENT_DISP ROUTE_16_GATE_1F_WIDTH, $c, $6 ; ROUTE_16_GATE_2F
+	warp_to $0, $8, ROUTE_16_GATE_1F_WIDTH
+	warp_to $0, $9, ROUTE_16_GATE_1F_WIDTH
+	warp_to $7, $8, ROUTE_16_GATE_1F_WIDTH
+	warp_to $7, $9, ROUTE_16_GATE_1F_WIDTH
+	warp_to $0, $2, ROUTE_16_GATE_1F_WIDTH
+	warp_to $0, $3, ROUTE_16_GATE_1F_WIDTH
+	warp_to $7, $2, ROUTE_16_GATE_1F_WIDTH
+	warp_to $7, $3, ROUTE_16_GATE_1F_WIDTH
+	warp_to $6, $c, ROUTE_16_GATE_1F_WIDTH ; ROUTE_16_GATE_2F

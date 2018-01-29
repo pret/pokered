@@ -2,8 +2,8 @@ VermilionMartObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $2, $ff
-	db $7, $4, $2, $ff
+	warp $3, $7, $2, $ff
+	warp $4, $7, $2, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ VermilionMartObject:
 	object SPRITE_LASS, $3, $3, WALK, $2, $3 ; person
 
 	; warp-to
-	EVENT_DISP VERMILION_MART_WIDTH, $7, $3
-	EVENT_DISP VERMILION_MART_WIDTH, $7, $4
+	warp_to $3, $7, VERMILION_MART_WIDTH
+	warp_to $4, $7, VERMILION_MART_WIDTH

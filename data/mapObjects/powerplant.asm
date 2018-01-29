@@ -2,9 +2,9 @@ PowerPlantObject:
 	db $2e ; border block
 
 	db $3 ; warps
-	db $23, $4, $3, $ff
-	db $23, $5, $3, $ff
-	db $b, $0, $3, $ff
+	warp $4, $23, $3, $ff
+	warp $5, $23, $3, $ff
+	warp $0, $b, $3, $ff
 
 	db $0 ; signs
 
@@ -25,6 +25,6 @@ PowerPlantObject:
 	object SPRITE_BALL, $14, $20, STAY, NONE, $e, TM_33
 
 	; warp-to
-	EVENT_DISP POWER_PLANT_WIDTH, $23, $4
-	EVENT_DISP POWER_PLANT_WIDTH, $23, $5
-	EVENT_DISP POWER_PLANT_WIDTH, $b, $0
+	warp_to $4, $23, POWER_PLANT_WIDTH
+	warp_to $5, $23, POWER_PLANT_WIDTH
+	warp_to $0, $b, POWER_PLANT_WIDTH

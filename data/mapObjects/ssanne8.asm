@@ -2,12 +2,12 @@ SSAnne8Object:
 	db $c ; border block
 
 	db $6 ; warps
-	db $0, $0, $2, SS_ANNE_1
-	db $0, $a, $3, SS_ANNE_1
-	db $0, $14, $4, SS_ANNE_1
-	db $a, $0, $5, SS_ANNE_1
-	db $a, $a, $6, SS_ANNE_1
-	db $a, $14, $7, SS_ANNE_1
+	warp $0, $0, $2, SS_ANNE_1
+	warp $a, $0, $3, SS_ANNE_1
+	warp $14, $0, $4, SS_ANNE_1
+	warp $0, $a, $5, SS_ANNE_1
+	warp $a, $a, $6, SS_ANNE_1
+	warp $14, $a, $7, SS_ANNE_1
 
 	db $0 ; signs
 
@@ -25,9 +25,9 @@ SSAnne8Object:
 	object SPRITE_GENTLEMAN, $15, $d, WALK, $2, $b ; person
 
 	; warp-to
-	EVENT_DISP SS_ANNE_8_WIDTH, $0, $0 ; SS_ANNE_1
-	EVENT_DISP SS_ANNE_8_WIDTH, $0, $a ; SS_ANNE_1
-	EVENT_DISP SS_ANNE_8_WIDTH, $0, $14 ; SS_ANNE_1
-	EVENT_DISP SS_ANNE_8_WIDTH, $a, $0 ; SS_ANNE_1
-	EVENT_DISP SS_ANNE_8_WIDTH, $a, $a ; SS_ANNE_1
-	EVENT_DISP SS_ANNE_8_WIDTH, $a, $14 ; SS_ANNE_1
+	warp_to $0, $0, SS_ANNE_8_WIDTH ; SS_ANNE_1
+	warp_to $a, $0, SS_ANNE_8_WIDTH ; SS_ANNE_1
+	warp_to $14, $0, SS_ANNE_8_WIDTH ; SS_ANNE_1
+	warp_to $0, $a, SS_ANNE_8_WIDTH ; SS_ANNE_1
+	warp_to $a, $a, SS_ANNE_8_WIDTH ; SS_ANNE_1
+	warp_to $14, $a, SS_ANNE_8_WIDTH ; SS_ANNE_1

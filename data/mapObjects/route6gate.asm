@@ -2,10 +2,10 @@ Route6GateObject:
 	db $a ; border block
 
 	db $4 ; warps
-	db $5, $3, $2, $ff
-	db $5, $4, $2, $ff
-	db $0, $3, $1, $ff
-	db $0, $4, $1, $ff
+	warp $3, $5, $2, $ff
+	warp $4, $5, $2, $ff
+	warp $3, $0, $1, $ff
+	warp $4, $0, $1, $ff
 
 	db $0 ; signs
 
@@ -13,7 +13,7 @@ Route6GateObject:
 	object SPRITE_GUARD, $6, $2, STAY, LEFT, $1 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_6_GATE_WIDTH, $5, $3
-	EVENT_DISP ROUTE_6_GATE_WIDTH, $5, $4
-	EVENT_DISP ROUTE_6_GATE_WIDTH, $0, $3
-	EVENT_DISP ROUTE_6_GATE_WIDTH, $0, $4
+	warp_to $3, $5, ROUTE_6_GATE_WIDTH
+	warp_to $4, $5, ROUTE_6_GATE_WIDTH
+	warp_to $3, $0, ROUTE_6_GATE_WIDTH
+	warp_to $4, $0, ROUTE_6_GATE_WIDTH

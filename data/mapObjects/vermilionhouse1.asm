@@ -2,8 +2,8 @@ VermilionHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $4, $ff
-	db $7, $3, $4, $ff
+	warp $2, $7, $4, $ff
+	warp $3, $7, $4, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ VermilionHouse1Object:
 	object SPRITE_PAPER_SHEET, $4, $3, STAY, NONE, $3 ; person
 
 	; warp-to
-	EVENT_DISP VERMILION_HOUSE_1_WIDTH, $7, $2
-	EVENT_DISP VERMILION_HOUSE_1_WIDTH, $7, $3
+	warp_to $2, $7, VERMILION_HOUSE_1_WIDTH
+	warp_to $3, $7, VERMILION_HOUSE_1_WIDTH

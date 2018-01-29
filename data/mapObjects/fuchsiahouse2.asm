@@ -2,12 +2,12 @@ FuchsiaHouse2Object:
 	db $17 ; border block
 
 	db $2 ; warps
-	db $7, $4, $3, $ff
-	db $7, $5, $3, $ff
+	warp $4, $7, $3, $ff
+	warp $5, $7, $3, $ff
 
 	db $2 ; signs
-	db $3, $4, $4 ; FuchsiaHouse2Text4
-	db $3, $5, $5 ; FuchsiaHouse2Text5
+	sign $4, $3, $4 ; FuchsiaHouse2Text4
+	sign $5, $3, $5 ; FuchsiaHouse2Text5
 
 	db $3 ; objects
 	object SPRITE_WARDEN, $2, $3, STAY, NONE, $1 ; person
@@ -15,5 +15,5 @@ FuchsiaHouse2Object:
 	object SPRITE_BOULDER, $8, $4, STAY, BOULDER_MOVEMENT_BYTE_2, $3 ; person
 
 	; warp-to
-	EVENT_DISP FUCHSIA_HOUSE_2_WIDTH, $7, $4
-	EVENT_DISP FUCHSIA_HOUSE_2_WIDTH, $7, $5
+	warp_to $4, $7, FUCHSIA_HOUSE_2_WIDTH
+	warp_to $5, $7, FUCHSIA_HOUSE_2_WIDTH

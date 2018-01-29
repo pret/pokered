@@ -2,8 +2,8 @@ Route2HouseObject:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
+	warp $2, $7, $2, $ff
+	warp $3, $7, $2, $ff
 
 	db $0 ; signs
 
@@ -12,5 +12,5 @@ Route2HouseObject:
 	object SPRITE_GAMEBOY_KID_COPY, $4, $1, STAY, DOWN, $2 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_2_HOUSE_WIDTH, $7, $2
-	EVENT_DISP ROUTE_2_HOUSE_WIDTH, $7, $3
+	warp_to $2, $7, ROUTE_2_HOUSE_WIDTH
+	warp_to $3, $7, ROUTE_2_HOUSE_WIDTH

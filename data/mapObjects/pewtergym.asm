@@ -2,8 +2,8 @@ PewterGymObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $d, $4, $2, $ff
-	db $d, $5, $2, $ff
+	warp $4, $d, $2, $ff
+	warp $5, $d, $2, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ PewterGymObject:
 	object SPRITE_GYM_HELPER, $7, $a, STAY, DOWN, $3 ; person
 
 	; warp-to
-	EVENT_DISP PEWTER_GYM_WIDTH, $d, $4
-	EVENT_DISP PEWTER_GYM_WIDTH, $d, $5
+	warp_to $4, $d, PEWTER_GYM_WIDTH
+	warp_to $5, $d, PEWTER_GYM_WIDTH

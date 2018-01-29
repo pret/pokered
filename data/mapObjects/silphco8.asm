@@ -2,13 +2,13 @@ SilphCo8Object:
 	db $2e ; border block
 
 	db $7 ; warps
-	db $0, $10, $1, SILPH_CO_9F
-	db $0, $e, $0, SILPH_CO_7F
-	db $0, $12, $0, SILPH_CO_ELEVATOR
-	db $b, $3, $6, SILPH_CO_8F
-	db $f, $3, $4, SILPH_CO_2F
-	db $5, $b, $5, SILPH_CO_2F
-	db $9, $b, $3, SILPH_CO_8F
+	warp $10, $0, $1, SILPH_CO_9F
+	warp $e, $0, $0, SILPH_CO_7F
+	warp $12, $0, $0, SILPH_CO_ELEVATOR
+	warp $3, $b, $6, SILPH_CO_8F
+	warp $3, $f, $4, SILPH_CO_2F
+	warp $b, $5, $5, SILPH_CO_2F
+	warp $b, $9, $3, SILPH_CO_8F
 
 	db $0 ; signs
 
@@ -19,10 +19,10 @@ SilphCo8Object:
 	object SPRITE_ROCKET, $c, $f, STAY, RIGHT, $4, OPP_ROCKET, $24
 
 	; warp-to
-	EVENT_DISP SILPH_CO_8F_WIDTH, $0, $10 ; SILPH_CO_9F
-	EVENT_DISP SILPH_CO_8F_WIDTH, $0, $e ; SILPH_CO_7F
-	EVENT_DISP SILPH_CO_8F_WIDTH, $0, $12 ; SILPH_CO_ELEVATOR
-	EVENT_DISP SILPH_CO_8F_WIDTH, $b, $3 ; SILPH_CO_8F
-	EVENT_DISP SILPH_CO_8F_WIDTH, $f, $3 ; SILPH_CO_2F
-	EVENT_DISP SILPH_CO_8F_WIDTH, $5, $b ; SILPH_CO_2F
-	EVENT_DISP SILPH_CO_8F_WIDTH, $9, $b ; SILPH_CO_8F_WIDTH
+	warp_to $10, $0, SILPH_CO_8F_WIDTH ; SILPH_CO_9F
+	warp_to $e, $0, SILPH_CO_8F_WIDTH ; SILPH_CO_7F
+	warp_to $12, $0, SILPH_CO_8F_WIDTH ; SILPH_CO_ELEVATOR
+	warp_to $3, $b, SILPH_CO_8F_WIDTH ; SILPH_CO_8F
+	warp_to $3, $f, SILPH_CO_8F_WIDTH ; SILPH_CO_2F
+	warp_to $b, $5, SILPH_CO_8F_WIDTH ; SILPH_CO_2F
+	warp_to $b, $9, SILPH_CO_8F_WIDTH ; SILPH_CO_8F_WIDTH

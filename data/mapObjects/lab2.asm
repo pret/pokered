@@ -2,8 +2,8 @@ Lab2Object:
 	db $17 ; border block
 
 	db $2 ; warps
-	db $7, $2, $2, CINNABAR_LAB_1
-	db $7, $3, $2, CINNABAR_LAB_1
+	warp $2, $7, $2, CINNABAR_LAB_1
+	warp $3, $7, $2, CINNABAR_LAB_1
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ Lab2Object:
 	object SPRITE_FOULARD_WOMAN, $5, $5, STAY, UP, $3 ; person
 
 	; warp-to
-	EVENT_DISP CINNABAR_LAB_2_WIDTH, $7, $2 ; CINNABAR_LAB_1
-	EVENT_DISP CINNABAR_LAB_2_WIDTH, $7, $3 ; CINNABAR_LAB_1
+	warp_to $2, $7, CINNABAR_LAB_2_WIDTH ; CINNABAR_LAB_1
+	warp_to $3, $7, CINNABAR_LAB_2_WIDTH ; CINNABAR_LAB_1

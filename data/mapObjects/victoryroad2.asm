@@ -2,13 +2,13 @@ VictoryRoad2Object:
 	db $7d ; border block
 
 	db $7 ; warps
-	db $8, $0, $2, VICTORY_ROAD_1
-	db $7, $1d, $3, $ff
-	db $8, $1d, $3, $ff
-	db $7, $17, $0, VICTORY_ROAD_3
-	db $e, $19, $2, VICTORY_ROAD_3
-	db $7, $1b, $1, VICTORY_ROAD_3
-	db $1, $1, $3, VICTORY_ROAD_3
+	warp $0, $8, $2, VICTORY_ROAD_1
+	warp $1d, $7, $3, $ff
+	warp $1d, $8, $3, $ff
+	warp $17, $7, $0, VICTORY_ROAD_3
+	warp $19, $e, $2, VICTORY_ROAD_3
+	warp $1b, $7, $1, VICTORY_ROAD_3
+	warp $1, $1, $3, VICTORY_ROAD_3
 
 	db $0 ; signs
 
@@ -28,10 +28,10 @@ VictoryRoad2Object:
 	object SPRITE_BOULDER, $17, $10, STAY, BOULDER_MOVEMENT_BYTE_2, $d ; person
 
 	; warp-to
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $8, $0 ; VICTORY_ROAD_1
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $7, $1d
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $8, $1d
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $7, $17 ; VICTORY_ROAD_3
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $e, $19 ; VICTORY_ROAD_3
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $7, $1b ; VICTORY_ROAD_3
-	EVENT_DISP VICTORY_ROAD_2_WIDTH, $1, $1 ; VICTORY_ROAD_3
+	warp_to $0, $8, VICTORY_ROAD_2_WIDTH ; VICTORY_ROAD_1
+	warp_to $1d, $7, VICTORY_ROAD_2_WIDTH
+	warp_to $1d, $8, VICTORY_ROAD_2_WIDTH
+	warp_to $17, $7, VICTORY_ROAD_2_WIDTH ; VICTORY_ROAD_3
+	warp_to $19, $e, VICTORY_ROAD_2_WIDTH ; VICTORY_ROAD_3
+	warp_to $1b, $7, VICTORY_ROAD_2_WIDTH ; VICTORY_ROAD_3
+	warp_to $1, $1, VICTORY_ROAD_2_WIDTH ; VICTORY_ROAD_3

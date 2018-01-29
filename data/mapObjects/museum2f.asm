@@ -2,11 +2,11 @@ Museum2FObject:
 	db $a ; border block
 
 	db $1 ; warps
-	db $7, $7, $4, MUSEUM_1F
+	warp $7, $7, $4, MUSEUM_1F
 
 	db $2 ; signs
-	db $2, $b, $6 ; Museum2FText6
-	db $5, $2, $7 ; Museum2FText7
+	sign $b, $2, $6 ; Museum2FText6
+	sign $2, $5, $7 ; Museum2FText7
 
 	db $5 ; objects
 	object SPRITE_BUG_CATCHER, $1, $7, WALK, $2, $1 ; person
@@ -16,4 +16,4 @@ Museum2FObject:
 	object SPRITE_HIKER, $c, $5, STAY, DOWN, $5 ; person
 
 	; warp-to
-	EVENT_DISP MUSEUM_2F_WIDTH, $7, $7 ; MUSEUM_1F
+	warp_to $7, $7, MUSEUM_2F_WIDTH ; MUSEUM_1F

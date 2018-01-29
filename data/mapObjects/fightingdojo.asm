@@ -2,8 +2,8 @@ FightingDojoObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $b, $4, $1, $ff
-	db $b, $5, $1, $ff
+	warp $4, $b, $1, $ff
+	warp $5, $b, $1, $ff
 
 	db $0 ; signs
 
@@ -17,5 +17,5 @@ FightingDojoObject:
 	object SPRITE_BALL, $5, $1, STAY, NONE, $7 ; person
 
 	; warp-to
-	EVENT_DISP FIGHTING_DOJO_WIDTH, $b, $4
-	EVENT_DISP FIGHTING_DOJO_WIDTH, $b, $5
+	warp_to $4, $b, FIGHTING_DOJO_WIDTH
+	warp_to $5, $b, FIGHTING_DOJO_WIDTH

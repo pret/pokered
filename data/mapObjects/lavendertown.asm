@@ -2,20 +2,20 @@ LavenderTownObject:
 	db $2c ; border block
 
 	db $6 ; warps
-	db $5, $3, $0, LAVENDER_POKECENTER
-	db $5, $e, $0, POKEMONTOWER_1
-	db $9, $7, $0, LAVENDER_HOUSE_1
-	db $d, $f, $0, LAVENDER_MART
-	db $d, $3, $0, LAVENDER_HOUSE_2
-	db $d, $7, $0, NAME_RATERS_HOUSE
+	warp $3, $5, $0, LAVENDER_POKECENTER
+	warp $e, $5, $0, POKEMONTOWER_1
+	warp $7, $9, $0, LAVENDER_HOUSE_1
+	warp $f, $d, $0, LAVENDER_MART
+	warp $3, $d, $0, LAVENDER_HOUSE_2
+	warp $7, $d, $0, NAME_RATERS_HOUSE
 
 	db $6 ; signs
-	db $9, $b, $4 ; LavenderTownText4
-	db $3, $9, $5 ; LavenderTownText5
-	db $d, $10, $6 ; MartSignText
-	db $5, $4, $7 ; PokeCenterSignText
-	db $9, $5, $8 ; LavenderTownText8
-	db $7, $11, $9 ; LavenderTownText9
+	sign $b, $9, $4 ; LavenderTownText4
+	sign $9, $3, $5 ; LavenderTownText5
+	sign $10, $d, $6 ; MartSignText
+	sign $4, $5, $7 ; PokeCenterSignText
+	sign $5, $9, $8 ; LavenderTownText8
+	sign $11, $7, $9 ; LavenderTownText9
 
 	db $3 ; objects
 	object SPRITE_LITTLE_GIRL, $f, $9, WALK, $0, $1 ; person
@@ -23,9 +23,9 @@ LavenderTownObject:
 	object SPRITE_BLACK_HAIR_BOY_2, $8, $7, WALK, $2, $3 ; person
 
 	; warp-to
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $5, $3 ; LAVENDER_POKECENTER
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $5, $e ; POKEMONTOWER_1
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $9, $7 ; LAVENDER_HOUSE_1
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $d, $f ; LAVENDER_MART
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $d, $3 ; LAVENDER_HOUSE_2
-	EVENT_DISP LAVENDER_TOWN_WIDTH, $d, $7 ; NAME_RATERS_HOUSE
+	warp_to $3, $5, LAVENDER_TOWN_WIDTH ; LAVENDER_POKECENTER
+	warp_to $e, $5, LAVENDER_TOWN_WIDTH ; POKEMONTOWER_1
+	warp_to $7, $9, LAVENDER_TOWN_WIDTH ; LAVENDER_HOUSE_1
+	warp_to $f, $d, LAVENDER_TOWN_WIDTH ; LAVENDER_MART
+	warp_to $3, $d, LAVENDER_TOWN_WIDTH ; LAVENDER_HOUSE_2
+	warp_to $7, $d, LAVENDER_TOWN_WIDTH ; NAME_RATERS_HOUSE

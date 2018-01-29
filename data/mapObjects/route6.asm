@@ -2,13 +2,13 @@ Route6Object:
 	db $f ; border block
 
 	db $4 ; warps
-	db $1, $9, $2, ROUTE_6_GATE
-	db $1, $a, $2, ROUTE_6_GATE
-	db $7, $a, $0, ROUTE_6_GATE
-	db $d, $11, $0, PATH_ENTRANCE_ROUTE_6
+	warp $9, $1, $2, ROUTE_6_GATE
+	warp $a, $1, $2, ROUTE_6_GATE
+	warp $a, $7, $0, ROUTE_6_GATE
+	warp $11, $d, $0, PATH_ENTRANCE_ROUTE_6
 
 	db $1 ; signs
-	db $f, $13, $7 ; Route6Text7
+	sign $13, $f, $7 ; Route6Text7
 
 	db $6 ; objects
 	object SPRITE_BLACK_HAIR_BOY_1, $a, $15, STAY, RIGHT, $1, OPP_JR_TRAINER_M, $4
@@ -19,7 +19,7 @@ Route6Object:
 	object SPRITE_BUG_CATCHER, $13, $1a, STAY, LEFT, $6, OPP_BUG_CATCHER, $b
 
 	; warp-to
-	EVENT_DISP ROUTE_6_WIDTH, $1, $9 ; ROUTE_6_GATE
-	EVENT_DISP ROUTE_6_WIDTH, $1, $a ; ROUTE_6_GATE
-	EVENT_DISP ROUTE_6_WIDTH, $7, $a ; ROUTE_6_GATE
-	EVENT_DISP ROUTE_6_WIDTH, $d, $11 ; PATH_ENTRANCE_ROUTE_6
+	warp_to $9, $1, ROUTE_6_WIDTH ; ROUTE_6_GATE
+	warp_to $a, $1, ROUTE_6_WIDTH ; ROUTE_6_GATE
+	warp_to $a, $7, ROUTE_6_WIDTH ; ROUTE_6_GATE
+	warp_to $11, $d, ROUTE_6_WIDTH ; PATH_ENTRANCE_ROUTE_6

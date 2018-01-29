@@ -2,9 +2,9 @@ CopycatsHouse1FObject:
 	db $a ; border block
 
 	db $3 ; warps
-	db $7, $2, $0, $ff
-	db $7, $3, $0, $ff
-	db $1, $7, $0, COPYCATS_HOUSE_2F
+	warp $2, $7, $0, $ff
+	warp $3, $7, $0, $ff
+	warp $7, $1, $0, COPYCATS_HOUSE_2F
 
 	db $0 ; signs
 
@@ -14,6 +14,6 @@ CopycatsHouse1FObject:
 	object SPRITE_CLEFAIRY, $1, $4, WALK, $1, $3 ; person
 
 	; warp-to
-	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $7, $2
-	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $7, $3
-	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $1, $7 ; COPYCATS_HOUSE_2F
+	warp_to $2, $7, COPYCATS_HOUSE_1F_WIDTH
+	warp_to $3, $7, COPYCATS_HOUSE_1F_WIDTH
+	warp_to $7, $1, COPYCATS_HOUSE_1F_WIDTH ; COPYCATS_HOUSE_2F

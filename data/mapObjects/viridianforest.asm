@@ -2,20 +2,20 @@ ViridianForestObject:
 	db $3 ; border block
 
 	db $6 ; warps
-	db $0, $1, $2, VIRIDIAN_FOREST_EXIT
-	db $0, $2, $3, VIRIDIAN_FOREST_EXIT
-	db $2f, $f, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $10, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $11, $1, VIRIDIAN_FOREST_ENTRANCE
-	db $2f, $12, $1, VIRIDIAN_FOREST_ENTRANCE
+	warp $1, $0, $2, VIRIDIAN_FOREST_EXIT
+	warp $2, $0, $3, VIRIDIAN_FOREST_EXIT
+	warp $f, $2f, $1, VIRIDIAN_FOREST_ENTRANCE
+	warp $10, $2f, $1, VIRIDIAN_FOREST_ENTRANCE
+	warp $11, $2f, $1, VIRIDIAN_FOREST_ENTRANCE
+	warp $12, $2f, $1, VIRIDIAN_FOREST_ENTRANCE
 
 	db $6 ; signs
-	db $28, $18, $9 ; ViridianForestText9
-	db $20, $10, $a ; ViridianForestText10
-	db $11, $1a, $b ; ViridianForestText11
-	db $18, $4, $c ; ViridianForestText12
-	db $2d, $12, $d ; ViridianForestText13
-	db $1, $2, $e ; ViridianForestText14
+	sign $18, $28, $9 ; ViridianForestText9
+	sign $10, $20, $a ; ViridianForestText10
+	sign $1a, $11, $b ; ViridianForestText11
+	sign $4, $18, $c ; ViridianForestText12
+	sign $12, $2d, $d ; ViridianForestText13
+	sign $2, $1, $e ; ViridianForestText14
 
 	db $8 ; objects
 	object SPRITE_BUG_CATCHER, $10, $2b, STAY, NONE, $1 ; person
@@ -28,9 +28,9 @@ ViridianForestObject:
 	object SPRITE_BUG_CATCHER, $1b, $28, STAY, NONE, $8 ; person
 
 	; warp-to
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $0, $1 ; VIRIDIAN_FOREST_EXIT
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $0, $2 ; VIRIDIAN_FOREST_EXIT
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $2f, $f ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $2f, $10 ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $2f, $11 ; VIRIDIAN_FOREST_ENTRANCE
-	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $2f, $12 ; VIRIDIAN_FOREST_ENTRANCE
+	warp_to $1, $0, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_EXIT
+	warp_to $2, $0, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_EXIT
+	warp_to $f, $2f, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_ENTRANCE
+	warp_to $10, $2f, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_ENTRANCE
+	warp_to $11, $2f, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_ENTRANCE
+	warp_to $12, $2f, VIRIDIAN_FOREST_WIDTH ; VIRIDIAN_FOREST_ENTRANCE

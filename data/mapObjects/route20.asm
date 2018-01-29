@@ -2,12 +2,12 @@ Route20Object:
 	db $43 ; border block
 
 	db $2 ; warps
-	db $5, $30, $0, SEAFOAM_ISLANDS_1
-	db $9, $3a, $2, SEAFOAM_ISLANDS_1
+	warp $30, $5, $0, SEAFOAM_ISLANDS_1
+	warp $3a, $9, $2, SEAFOAM_ISLANDS_1
 
 	db $2 ; signs
-	db $7, $33, $b ; Route20Text11
-	db $b, $39, $c ; Route20Text12
+	sign $33, $7, $b ; Route20Text11
+	sign $39, $b, $c ; Route20Text12
 
 	db $a ; objects
 	object SPRITE_SWIMMER, $57, $8, STAY, UP, $1, OPP_SWIMMER, $9
@@ -22,5 +22,5 @@ Route20Object:
 	object SPRITE_SWIMMER, $f, $8, STAY, UP, $a, OPP_BEAUTY, $8
 
 	; warp-to
-	EVENT_DISP ROUTE_20_WIDTH, $5, $30 ; SEAFOAM_ISLANDS_1
-	EVENT_DISP ROUTE_20_WIDTH, $9, $3a ; SEAFOAM_ISLANDS_1
+	warp_to $30, $5, ROUTE_20_WIDTH ; SEAFOAM_ISLANDS_1
+	warp_to $3a, $9, ROUTE_20_WIDTH ; SEAFOAM_ISLANDS_1

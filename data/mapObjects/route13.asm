@@ -4,9 +4,9 @@ Route13Object:
 	db $0 ; warps
 
 	db $3 ; signs
-	db $d, $f, $b ; Route13Text11
-	db $5, $21, $c ; Route13Text12
-	db $b, $1f, $d ; Route13Text13
+	sign $f, $d, $b ; Route13Text11
+	sign $21, $5, $c ; Route13Text12
+	sign $1f, $b, $d ; Route13Text13
 
 	db $a ; objects
 	object SPRITE_BLACK_HAIR_BOY_1, $31, $a, STAY, RIGHT, $1, OPP_BIRD_KEEPER, $1

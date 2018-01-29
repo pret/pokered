@@ -2,24 +2,24 @@ Lab1Object:
 	db $17 ; border block
 
 	db $5 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
-	db $4, $8, $0, CINNABAR_LAB_2
-	db $4, $c, $0, CINNABAR_LAB_3
-	db $4, $10, $0, CINNABAR_LAB_4
+	warp $2, $7, $2, $ff
+	warp $3, $7, $2, $ff
+	warp $8, $4, $0, CINNABAR_LAB_2
+	warp $c, $4, $0, CINNABAR_LAB_3
+	warp $10, $4, $0, CINNABAR_LAB_4
 
 	db $4 ; signs
-	db $2, $3, $2 ; Lab1Text2
-	db $4, $9, $3 ; Lab1Text3
-	db $4, $d, $4 ; Lab1Text4
-	db $4, $11, $5 ; Lab1Text5
+	sign $3, $2, $2 ; Lab1Text2
+	sign $9, $4, $3 ; Lab1Text3
+	sign $d, $4, $4 ; Lab1Text4
+	sign $11, $4, $5 ; Lab1Text5
 
 	db $1 ; objects
 	object SPRITE_FISHER, $1, $3, STAY, NONE, $1 ; person
 
 	; warp-to
-	EVENT_DISP CINNABAR_LAB_1_WIDTH, $7, $2
-	EVENT_DISP CINNABAR_LAB_1_WIDTH, $7, $3
-	EVENT_DISP CINNABAR_LAB_1_WIDTH, $4, $8 ; CINNABAR_LAB_2
-	EVENT_DISP CINNABAR_LAB_1_WIDTH, $4, $c ; CINNABAR_LAB_3
-	EVENT_DISP CINNABAR_LAB_1_WIDTH, $4, $10 ; CINNABAR_LAB_4
+	warp_to $2, $7, CINNABAR_LAB_1_WIDTH
+	warp_to $3, $7, CINNABAR_LAB_1_WIDTH
+	warp_to $8, $4, CINNABAR_LAB_1_WIDTH ; CINNABAR_LAB_2
+	warp_to $c, $4, CINNABAR_LAB_1_WIDTH ; CINNABAR_LAB_3
+	warp_to $10, $4, CINNABAR_LAB_1_WIDTH ; CINNABAR_LAB_4

@@ -2,8 +2,8 @@ VermilionGymObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $11, $4, $3, $ff
-	db $11, $5, $3, $ff
+	warp $4, $11, $3, $ff
+	warp $5, $11, $3, $ff
 
 	db $0 ; signs
 
@@ -15,5 +15,5 @@ VermilionGymObject:
 	object SPRITE_GYM_HELPER, $4, $e, STAY, DOWN, $5 ; person
 
 	; warp-to
-	EVENT_DISP VERMILION_GYM_WIDTH, $11, $4
-	EVENT_DISP VERMILION_GYM_WIDTH, $11, $5
+	warp_to $4, $11, VERMILION_GYM_WIDTH
+	warp_to $5, $11, VERMILION_GYM_WIDTH

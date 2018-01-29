@@ -4,7 +4,7 @@ Route19Object:
 	db $0 ; warps
 
 	db $1 ; signs
-	db $9, $b, $b ; Route19Text11
+	sign $b, $9, $b ; Route19Text11
 
 	db $a ; objects
 	object SPRITE_BLACK_HAIR_BOY_1, $8, $7, STAY, LEFT, 1, OPP_SWIMMER, 2

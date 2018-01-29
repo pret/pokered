@@ -4,7 +4,7 @@ Route3Object:
 	db $0 ; warps
 
 	db $1 ; signs
-	db $9, $3b, $a ; Route3Text10
+	sign $3b, $9, $a ; Route3Text10
 
 	db $9 ; objects
 	object SPRITE_BLACK_HAIR_BOY_2, $39, $b, STAY, NONE, $1 ; person

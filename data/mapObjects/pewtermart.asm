@@ -2,8 +2,8 @@ PewterMartObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
+	warp $3, $7, $4, $ff
+	warp $4, $7, $4, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ PewterMartObject:
 	object SPRITE_BLACK_HAIR_BOY_2, $5, $5, STAY, NONE, $3 ; person
 
 	; warp-to
-	EVENT_DISP PEWTER_MART_WIDTH, $7, $3
-	EVENT_DISP PEWTER_MART_WIDTH, $7, $4
+	warp_to $3, $7, PEWTER_MART_WIDTH
+	warp_to $4, $7, PEWTER_MART_WIDTH

@@ -2,14 +2,14 @@ Mansion1Object:
 	db $2e ; border block
 
 	db $8 ; warps
-	db $1b, $4, $0, $ff
-	db $1b, $5, $0, $ff
-	db $1b, $6, $0, $ff
-	db $1b, $7, $0, $ff
-	db $a, $5, $0, MANSION_2
-	db $17, $15, $0, MANSION_4
-	db $1b, $1a, $0, $ff
-	db $1b, $1b, $0, $ff
+	warp $4, $1b, $0, $ff
+	warp $5, $1b, $0, $ff
+	warp $6, $1b, $0, $ff
+	warp $7, $1b, $0, $ff
+	warp $5, $a, $0, MANSION_2
+	warp $15, $17, $0, MANSION_4
+	warp $1a, $1b, $0, $ff
+	warp $1b, $1b, $0, $ff
 
 	db $0 ; signs
 
@@ -19,11 +19,11 @@ Mansion1Object:
 	object SPRITE_BALL, $12, $15, STAY, NONE, $3, CARBOS
 
 	; warp-to
-	EVENT_DISP MANSION_1_WIDTH, $1b, $4
-	EVENT_DISP MANSION_1_WIDTH, $1b, $5
-	EVENT_DISP MANSION_1_WIDTH, $1b, $6
-	EVENT_DISP MANSION_1_WIDTH, $1b, $7
-	EVENT_DISP MANSION_1_WIDTH, $a, $5 ; MANSION_2
-	EVENT_DISP MANSION_1_WIDTH, $17, $15 ; MANSION_4
-	EVENT_DISP MANSION_1_WIDTH, $1b, $1a
-	EVENT_DISP MANSION_1_WIDTH, $1b, $1b
+	warp_to $4, $1b, MANSION_1_WIDTH
+	warp_to $5, $1b, MANSION_1_WIDTH
+	warp_to $6, $1b, MANSION_1_WIDTH
+	warp_to $7, $1b, MANSION_1_WIDTH
+	warp_to $5, $a, MANSION_1_WIDTH ; MANSION_2
+	warp_to $15, $17, MANSION_1_WIDTH ; MANSION_4
+	warp_to $1a, $1b, MANSION_1_WIDTH
+	warp_to $1b, $1b, MANSION_1_WIDTH

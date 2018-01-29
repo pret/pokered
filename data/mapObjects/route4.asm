@@ -2,14 +2,14 @@ Route4Object:
 	db $2c ; border block
 
 	db $3 ; warps
-	db $5, $b, $0, MT_MOON_POKECENTER
-	db $5, $12, $0, MT_MOON_1
-	db $5, $18, $7, MT_MOON_2
+	warp $b, $5, $0, MT_MOON_POKECENTER
+	warp $12, $5, $0, MT_MOON_1
+	warp $18, $5, $7, MT_MOON_2
 
 	db $3 ; signs
-	db $5, $c, $4 ; PokeCenterSignText
-	db $7, $11, $5 ; Route4Text5
-	db $7, $1b, $6 ; Route4Text6
+	sign $c, $5, $4 ; PokeCenterSignText
+	sign $11, $7, $5 ; Route4Text5
+	sign $1b, $7, $6 ; Route4Text6
 
 	db $3 ; objects
 	object SPRITE_LASS, $9, $8, WALK, $0, $1 ; person
@@ -17,6 +17,6 @@ Route4Object:
 	object SPRITE_BALL, $39, $3, STAY, NONE, $3, TM_04
 
 	; warp-to
-	EVENT_DISP ROUTE_4_WIDTH, $5, $b ; MT_MOON_POKECENTER
-	EVENT_DISP ROUTE_4_WIDTH, $5, $12 ; MT_MOON_1
-	EVENT_DISP ROUTE_4_WIDTH, $5, $18 ; MT_MOON_2
+	warp_to $b, $5, ROUTE_4_WIDTH ; MT_MOON_POKECENTER
+	warp_to $12, $5, ROUTE_4_WIDTH ; MT_MOON_1
+	warp_to $18, $5, ROUTE_4_WIDTH ; MT_MOON_2

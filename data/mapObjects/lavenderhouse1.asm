@@ -2,8 +2,8 @@ LavenderHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $2, $ff
-	db $7, $3, $2, $ff
+	warp $2, $7, $2, $ff
+	warp $3, $7, $2, $ff
 
 	db $0 ; signs
 
@@ -16,5 +16,5 @@ LavenderHouse1Object:
 	object SPRITE_BOOK_MAP_DEX, $3, $3, STAY, NONE, $6 ; person
 
 	; warp-to
-	EVENT_DISP LAVENDER_HOUSE_1_WIDTH, $7, $2
-	EVENT_DISP LAVENDER_HOUSE_1_WIDTH, $7, $3
+	warp_to $2, $7, LAVENDER_HOUSE_1_WIDTH
+	warp_to $3, $7, LAVENDER_HOUSE_1_WIDTH

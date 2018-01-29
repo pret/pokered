@@ -2,8 +2,8 @@ Route16HouseObject:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $8, $ff
-	db $7, $3, $8, $ff
+	warp $2, $7, $8, $ff
+	warp $3, $7, $8, $ff
 
 	db $0 ; signs
 
@@ -12,5 +12,5 @@ Route16HouseObject:
 	object SPRITE_BIRD, $6, $4, WALK, $0, $2 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_16_HOUSE_WIDTH, $7, $2
-	EVENT_DISP ROUTE_16_HOUSE_WIDTH, $7, $3
+	warp_to $2, $7, ROUTE_16_HOUSE_WIDTH
+	warp_to $3, $7, ROUTE_16_HOUSE_WIDTH

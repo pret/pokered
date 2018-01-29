@@ -2,12 +2,12 @@ CeladonGameCornerObject:
 	db $f ; border block
 
 	db $3 ; warps
-	db $11, $f, $7, $ff
-	db $11, $10, $7, $ff
-	db $4, $11, $1, ROCKET_HIDEOUT_1
+	warp $f, $11, $7, $ff
+	warp $10, $11, $7, $ff
+	warp $11, $4, $1, ROCKET_HIDEOUT_1
 
 	db $1 ; signs
-	db $4, $9, $c ; CeladonGameCornerText12
+	sign $9, $4, $c ; CeladonGameCornerText12
 
 	db $b ; objects
 	object SPRITE_FOULARD_WOMAN, $2, $6, STAY, DOWN, $1 ; person
@@ -23,6 +23,6 @@ CeladonGameCornerObject:
 	object SPRITE_ROCKET, $9, $5, STAY, UP, $b, OPP_ROCKET, $7
 
 	; warp-to
-	EVENT_DISP GAME_CORNER_WIDTH, $11, $f
-	EVENT_DISP GAME_CORNER_WIDTH, $11, $10
-	EVENT_DISP GAME_CORNER_WIDTH, $4, $11 ; ROCKET_HIDEOUT_1
+	warp_to $f, $11, GAME_CORNER_WIDTH
+	warp_to $10, $11, GAME_CORNER_WIDTH
+	warp_to $11, $4, GAME_CORNER_WIDTH ; ROCKET_HIDEOUT_1

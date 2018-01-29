@@ -2,13 +2,13 @@ SeafoamIslands1Object:
 	db $7d ; border block
 
 	db $7 ; warps
-	db $11, $4, $0, $ff
-	db $11, $5, $0, $ff
-	db $11, $1a, $1, $ff
-	db $11, $1b, $1, $ff
-	db $5, $7, $1, SEAFOAM_ISLANDS_2
-	db $3, $19, $6, SEAFOAM_ISLANDS_2
-	db $f, $17, $4, SEAFOAM_ISLANDS_2
+	warp $4, $11, $0, $ff
+	warp $5, $11, $0, $ff
+	warp $1a, $11, $1, $ff
+	warp $1b, $11, $1, $ff
+	warp $7, $5, $1, SEAFOAM_ISLANDS_2
+	warp $19, $3, $6, SEAFOAM_ISLANDS_2
+	warp $17, $f, $4, SEAFOAM_ISLANDS_2
 
 	db $0 ; signs
 
@@ -17,14 +17,14 @@ SeafoamIslands1Object:
 	object SPRITE_BOULDER, $1a, $7, STAY, BOULDER_MOVEMENT_BYTE_2, $2 ; person
 
 	; warp-to
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $11, $4
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $11, $5
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $11, $1a
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $11, $1b
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $5, $7 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $3, $19 ; SEAFOAM_ISLANDS_2
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $f, $17 ; SEAFOAM_ISLANDS_2
+	warp_to $4, $11, SEAFOAM_ISLANDS_1_WIDTH
+	warp_to $5, $11, SEAFOAM_ISLANDS_1_WIDTH
+	warp_to $1a, $11, SEAFOAM_ISLANDS_1_WIDTH
+	warp_to $1b, $11, SEAFOAM_ISLANDS_1_WIDTH
+	warp_to $7, $5, SEAFOAM_ISLANDS_1_WIDTH ; SEAFOAM_ISLANDS_2
+	warp_to $19, $3, SEAFOAM_ISLANDS_1_WIDTH ; SEAFOAM_ISLANDS_2
+	warp_to $17, $f, SEAFOAM_ISLANDS_1_WIDTH ; SEAFOAM_ISLANDS_2
 
 	; holes
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $6, $11
-	EVENT_DISP SEAFOAM_ISLANDS_1_WIDTH, $6, $18
+	warp_to $11, $6, SEAFOAM_ISLANDS_1_WIDTH
+	warp_to $18, $6, SEAFOAM_ISLANDS_1_WIDTH

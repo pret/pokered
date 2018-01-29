@@ -2,8 +2,8 @@ FuchsiaGymObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $11, $4, $5, $ff
-	db $11, $5, $5, $ff
+	warp $4, $11, $5, $ff
+	warp $5, $11, $5, $ff
 
 	db $0 ; signs
 
@@ -18,5 +18,5 @@ FuchsiaGymObject:
 	object SPRITE_GYM_HELPER, $7, $f, STAY, DOWN, $8 ; person
 
 	; warp-to
-	EVENT_DISP FUCHSIA_GYM_WIDTH, $11, $4
-	EVENT_DISP FUCHSIA_GYM_WIDTH, $11, $5
+	warp_to $4, $11, FUCHSIA_GYM_WIDTH
+	warp_to $5, $11, FUCHSIA_GYM_WIDTH

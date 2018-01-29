@@ -2,18 +2,18 @@ SSAnne9Object:
 	db $c ; border block
 
 	db $c ; warps
-	db $5, $2, $0, SS_ANNE_2
-	db $5, $3, $0, SS_ANNE_2
-	db $5, $c, $1, SS_ANNE_2
-	db $5, $d, $1, SS_ANNE_2
-	db $5, $16, $2, SS_ANNE_2
-	db $5, $17, $2, SS_ANNE_2
-	db $f, $2, $3, SS_ANNE_2
-	db $f, $3, $3, SS_ANNE_2
-	db $f, $c, $4, SS_ANNE_2
-	db $f, $d, $4, SS_ANNE_2
-	db $f, $16, $5, SS_ANNE_2
-	db $f, $17, $5, SS_ANNE_2
+	warp $2, $5, $0, SS_ANNE_2
+	warp $3, $5, $0, SS_ANNE_2
+	warp $c, $5, $1, SS_ANNE_2
+	warp $d, $5, $1, SS_ANNE_2
+	warp $16, $5, $2, SS_ANNE_2
+	warp $17, $5, $2, SS_ANNE_2
+	warp $2, $f, $3, SS_ANNE_2
+	warp $3, $f, $3, SS_ANNE_2
+	warp $c, $f, $4, SS_ANNE_2
+	warp $d, $f, $4, SS_ANNE_2
+	warp $16, $f, $5, SS_ANNE_2
+	warp $17, $f, $5, SS_ANNE_2
 
 	db $0 ; signs
 
@@ -33,15 +33,15 @@ SSAnne9Object:
 	object SPRITE_FOULARD_WOMAN, $14, $c, STAY, RIGHT, $d ; person
 
 	; warp-to
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $2 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $3 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $c ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $d ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $16 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $5, $17 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $2 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $3 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $c ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $d ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $16 ; SS_ANNE_2
-	EVENT_DISP SS_ANNE_9_WIDTH, $f, $17 ; SS_ANNE_2
+	warp_to $2, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $3, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $c, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $d, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $16, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $17, $5, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $2, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $3, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $c, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $d, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $16, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2
+	warp_to $17, $f, SS_ANNE_9_WIDTH ; SS_ANNE_2

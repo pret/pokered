@@ -4,7 +4,7 @@ Route14Object:
 	db $0 ; warps
 
 	db $1 ; signs
-	db $d, $11, $b ; Route14Text11
+	sign $11, $d, $b ; Route14Text11
 
 	db $a ; objects
 	object SPRITE_BLACK_HAIR_BOY_1, $4, $4, STAY, DOWN, $1, OPP_BIRD_KEEPER, $e

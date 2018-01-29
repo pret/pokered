@@ -2,8 +2,8 @@ ViridianGymObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $11, $10, $4, $ff
-	db $11, $11, $4, $ff
+	warp $10, $11, $4, $ff
+	warp $11, $11, $4, $ff
 
 	db $0 ; signs
 
@@ -21,5 +21,5 @@ ViridianGymObject:
 	object SPRITE_BALL, $10, $9, STAY, NONE, $b, REVIVE
 
 	; warp-to
-	EVENT_DISP VIRIDIAN_GYM_WIDTH, $11, $10
-	EVENT_DISP VIRIDIAN_GYM_WIDTH, $11, $11
+	warp_to $10, $11, VIRIDIAN_GYM_WIDTH
+	warp_to $11, $11, VIRIDIAN_GYM_WIDTH

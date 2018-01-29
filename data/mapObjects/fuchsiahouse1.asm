@@ -2,8 +2,8 @@ FuchsiaHouse1Object:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
+	warp $2, $7, $1, $ff
+	warp $3, $7, $1, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ FuchsiaHouse1Object:
 	object SPRITE_BUG_CATCHER, $5, $5, STAY, NONE, $3 ; person
 
 	; warp-to
-	EVENT_DISP FUCHSIA_HOUSE_1_WIDTH, $7, $2
-	EVENT_DISP FUCHSIA_HOUSE_1_WIDTH, $7, $3
+	warp_to $2, $7, FUCHSIA_HOUSE_1_WIDTH
+	warp_to $3, $7, FUCHSIA_HOUSE_1_WIDTH

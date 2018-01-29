@@ -2,7 +2,7 @@ Mansion4Object:
 	db $1 ; border block
 
 	db $1 ; warps
-	db $16, $17, $5, MANSION_1
+	warp $17, $16, $5, MANSION_1
 
 	db $0 ; signs
 
@@ -17,4 +17,4 @@ Mansion4Object:
 	object SPRITE_BALL, $5, $d, STAY, NONE, $8, SECRET_KEY
 
 	; warp-to
-	EVENT_DISP MANSION_4_WIDTH, $16, $17 ; MANSION_1
+	warp_to $17, $16, MANSION_4_WIDTH ; MANSION_1

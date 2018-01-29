@@ -2,8 +2,8 @@ CinnabarGymObject:
 	db $2e ; border block
 
 	db $2 ; warps
-	db $11, $10, $1, $ff
-	db $11, $11, $1, $ff
+	warp $10, $11, $1, $ff
+	warp $11, $11, $1, $ff
 
 	db $0 ; signs
 
@@ -19,5 +19,5 @@ CinnabarGymObject:
 	object SPRITE_GYM_HELPER, $10, $d, STAY, DOWN, $9 ; person
 
 	; warp-to
-	EVENT_DISP CINNABAR_GYM_WIDTH, $11, $10
-	EVENT_DISP CINNABAR_GYM_WIDTH, $11, $11
+	warp_to $10, $11, CINNABAR_GYM_WIDTH
+	warp_to $11, $11, CINNABAR_GYM_WIDTH

@@ -2,8 +2,8 @@ OaksLabObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $b, $4, $2, $ff
-	db $b, $5, $2, $ff
+	warp $4, $b, $2, $ff
+	warp $5, $b, $2, $ff
 
 	db $0 ; signs
 
@@ -21,5 +21,5 @@ OaksLabObject:
 	object SPRITE_OAK_AIDE, $8, $a, STAY, NONE, $b ; person
 
 	; warp-to
-	EVENT_DISP OAKS_LAB_WIDTH, $b, $4
-	EVENT_DISP OAKS_LAB_WIDTH, $b, $5
+	warp_to $4, $b, OAKS_LAB_WIDTH
+	warp_to $5, $b, OAKS_LAB_WIDTH

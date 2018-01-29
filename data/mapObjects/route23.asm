@@ -2,13 +2,13 @@ Route23Object:
 	db $f ; border block
 
 	db $4 ; warps
-	db $8b, $7, $2, ROUTE_22_GATE
-	db $8b, $8, $3, ROUTE_22_GATE
-	db $1f, $4, $0, VICTORY_ROAD_1
-	db $1f, $e, $1, VICTORY_ROAD_2
+	warp $7, $8b, $2, ROUTE_22_GATE
+	warp $8, $8b, $3, ROUTE_22_GATE
+	warp $4, $1f, $0, VICTORY_ROAD_1
+	warp $e, $1f, $1, VICTORY_ROAD_2
 
 	db $1 ; signs
-	db $21, $3, $8 ; Route23Text8
+	sign $3, $21, $8 ; Route23Text8
 
 	db $7 ; objects
 	object SPRITE_GUARD, $4, $23, STAY, DOWN, $1 ; person
@@ -20,7 +20,7 @@ Route23Object:
 	object SPRITE_GUARD, $8, $88, STAY, DOWN, $7 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_23_WIDTH, $8b, $7 ; ROUTE_22_GATE
-	EVENT_DISP ROUTE_23_WIDTH, $8b, $8 ; ROUTE_22_GATE
-	EVENT_DISP ROUTE_23_WIDTH, $1f, $4 ; VICTORY_ROAD_1
-	EVENT_DISP ROUTE_23_WIDTH, $1f, $e ; VICTORY_ROAD_2
+	warp_to $7, $8b, ROUTE_23_WIDTH ; ROUTE_22_GATE
+	warp_to $8, $8b, ROUTE_23_WIDTH ; ROUTE_22_GATE
+	warp_to $4, $1f, ROUTE_23_WIDTH ; VICTORY_ROAD_1
+	warp_to $e, $1f, ROUTE_23_WIDTH ; VICTORY_ROAD_2

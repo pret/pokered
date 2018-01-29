@@ -2,8 +2,8 @@ SaffronMartObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $4, $ff
-	db $7, $4, $4, $ff
+	warp $3, $7, $4, $ff
+	warp $4, $7, $4, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ SaffronMartObject:
 	object SPRITE_LASS, $6, $5, WALK, $0, $3 ; person
 
 	; warp-to
-	EVENT_DISP SAFFRON_MART_WIDTH, $7, $3
-	EVENT_DISP SAFFRON_MART_WIDTH, $7, $4
+	warp_to $3, $7, SAFFRON_MART_WIDTH
+	warp_to $4, $7, SAFFRON_MART_WIDTH

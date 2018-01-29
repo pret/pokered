@@ -2,16 +2,16 @@ SSAnne10Object:
 	db $c ; border block
 
 	db $a ; warps
-	db $5, $2, $4, SS_ANNE_4
-	db $5, $3, $4, SS_ANNE_4
-	db $5, $c, $3, SS_ANNE_4
-	db $5, $d, $3, SS_ANNE_4
-	db $5, $16, $2, SS_ANNE_4
-	db $5, $17, $2, SS_ANNE_4
-	db $f, $2, $1, SS_ANNE_4
-	db $f, $3, $1, SS_ANNE_4
-	db $f, $c, $0, SS_ANNE_4
-	db $f, $d, $0, SS_ANNE_4
+	warp $2, $5, $4, SS_ANNE_4
+	warp $3, $5, $4, SS_ANNE_4
+	warp $c, $5, $3, SS_ANNE_4
+	warp $d, $5, $3, SS_ANNE_4
+	warp $16, $5, $2, SS_ANNE_4
+	warp $17, $5, $2, SS_ANNE_4
+	warp $2, $f, $1, SS_ANNE_4
+	warp $3, $f, $1, SS_ANNE_4
+	warp $c, $f, $0, SS_ANNE_4
+	warp $d, $f, $0, SS_ANNE_4
 
 	db $0 ; signs
 
@@ -29,13 +29,13 @@ SSAnne10Object:
 	object SPRITE_BALL, $c, $b, STAY, NONE, $b, MAX_POTION
 
 	; warp-to
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $2 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $3 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $c ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $d ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $16 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $5, $17 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $f, $2 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $f, $3 ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $f, $c ; SS_ANNE_4
-	EVENT_DISP SS_ANNE_10_WIDTH, $f, $d ; SS_ANNE_4
+	warp_to $2, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $3, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $c, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $d, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $16, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $17, $5, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $2, $f, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $3, $f, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $c, $f, SS_ANNE_10_WIDTH ; SS_ANNE_4
+	warp_to $d, $f, SS_ANNE_10_WIDTH ; SS_ANNE_4

@@ -2,8 +2,8 @@ CeladonGymObject:
 	db $3 ; border block
 
 	db $2 ; warps
-	db $11, $4, $6, $ff
-	db $11, $5, $6, $ff
+	warp $4, $11, $6, $ff
+	warp $5, $11, $6, $ff
 
 	db $0 ; signs
 
@@ -18,5 +18,5 @@ CeladonGymObject:
 	object SPRITE_LASS, $5, $3, STAY, DOWN, $8, OPP_COOLTRAINER_F, $1
 
 	; warp-to
-	EVENT_DISP CELADON_GYM_WIDTH, $11, $4
-	EVENT_DISP CELADON_GYM_WIDTH, $11, $5
+	warp_to $4, $11, CELADON_GYM_WIDTH
+	warp_to $5, $11, CELADON_GYM_WIDTH

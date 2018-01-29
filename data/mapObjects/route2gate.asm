@@ -2,10 +2,10 @@ Route2GateObject:
 	db $a ; border block
 
 	db $4 ; warps
-	db $0, $4, $3, $ff
-	db $0, $5, $3, $ff
-	db $7, $4, $4, $ff
-	db $7, $5, $4, $ff
+	warp $4, $0, $3, $ff
+	warp $5, $0, $3, $ff
+	warp $4, $7, $4, $ff
+	warp $5, $7, $4, $ff
 
 	db $0 ; signs
 
@@ -14,7 +14,7 @@ Route2GateObject:
 	object SPRITE_BUG_CATCHER, $5, $4, WALK, $2, $2 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_2_GATE_WIDTH, $0, $4
-	EVENT_DISP ROUTE_2_GATE_WIDTH, $0, $5
-	EVENT_DISP ROUTE_2_GATE_WIDTH, $7, $4
-	EVENT_DISP ROUTE_2_GATE_WIDTH, $7, $5
+	warp_to $4, $0, ROUTE_2_GATE_WIDTH
+	warp_to $5, $0, ROUTE_2_GATE_WIDTH
+	warp_to $4, $7, ROUTE_2_GATE_WIDTH
+	warp_to $5, $7, ROUTE_2_GATE_WIDTH

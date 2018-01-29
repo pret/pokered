@@ -2,7 +2,7 @@ SSAnne6Object:
 	db $c ; border block
 
 	db $1 ; warps
-	db $0, $6, $a, SS_ANNE_1
+	warp $6, $0, $a, SS_ANNE_1
 
 	db $0 ; signs
 
@@ -16,4 +16,4 @@ SSAnne6Object:
 	object SPRITE_COOK, $b, $d, STAY, UP, $7 ; person
 
 	; warp-to
-	EVENT_DISP SS_ANNE_6_WIDTH, $0, $6 ; SS_ANNE_1
+	warp_to $6, $0, SS_ANNE_6_WIDTH ; SS_ANNE_1

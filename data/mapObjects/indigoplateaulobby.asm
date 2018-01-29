@@ -2,9 +2,9 @@ IndigoPlateauLobbyObject:
 	db $0 ; border block
 
 	db $3 ; warps
-	db $b, $7, $0, $ff
-	db $b, $8, $1, $ff
-	db $0, $8, $0, LORELEIS_ROOM
+	warp $7, $b, $0, $ff
+	warp $8, $b, $1, $ff
+	warp $8, $0, $0, LORELEIS_ROOM
 
 	db $0 ; signs
 
@@ -16,6 +16,6 @@ IndigoPlateauLobbyObject:
 	object SPRITE_CABLE_CLUB_WOMAN, $d, $6, STAY, DOWN, $5 ; person
 
 	; warp-to
-	EVENT_DISP INDIGO_PLATEAU_LOBBY_WIDTH, $b, $7
-	EVENT_DISP INDIGO_PLATEAU_LOBBY_WIDTH, $b, $8
-	EVENT_DISP INDIGO_PLATEAU_LOBBY_WIDTH, $0, $8 ; LORELEIS_ROOM
+	warp_to $7, $b, INDIGO_PLATEAU_LOBBY_WIDTH
+	warp_to $8, $b, INDIGO_PLATEAU_LOBBY_WIDTH
+	warp_to $8, $0, INDIGO_PLATEAU_LOBBY_WIDTH ; LORELEIS_ROOM

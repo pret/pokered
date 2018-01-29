@@ -2,12 +2,12 @@ FanClubObject:
 	db $d ; border block
 
 	db $2 ; warps
-	db $7, $2, $1, $ff
-	db $7, $3, $1, $ff
+	warp $2, $7, $1, $ff
+	warp $3, $7, $1, $ff
 
 	db $2 ; signs
-	db $0, $1, $7 ; FanClubText7
-	db $0, $6, $8 ; FanClubText8
+	sign $1, $0, $7 ; FanClubText7
+	sign $6, $0, $8 ; FanClubText8
 
 	db $6 ; objects
 	object SPRITE_FISHER2, $6, $3, STAY, LEFT, $1 ; person
@@ -18,5 +18,5 @@ FanClubObject:
 	object SPRITE_CABLE_CLUB_WOMAN, $5, $1, STAY, DOWN, $6 ; person
 
 	; warp-to
-	EVENT_DISP POKEMON_FAN_CLUB_WIDTH, $7, $2
-	EVENT_DISP POKEMON_FAN_CLUB_WIDTH, $7, $3
+	warp_to $2, $7, POKEMON_FAN_CLUB_WIDTH
+	warp_to $3, $7, POKEMON_FAN_CLUB_WIDTH

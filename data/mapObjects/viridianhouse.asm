@@ -2,8 +2,8 @@ ViridianHouseObject:
 	db $a ; border block
 
 	db $2 ; warps
-	db $7, $2, $3, $ff
-	db $7, $3, $3, $ff
+	warp $2, $7, $3, $ff
+	warp $3, $7, $3, $ff
 
 	db $0 ; signs
 
@@ -14,5 +14,5 @@ ViridianHouseObject:
 	object SPRITE_CLIPBOARD, $4, $0, STAY, NONE, $4 ; person
 
 	; warp-to
-	EVENT_DISP VIRIDIAN_HOUSE_WIDTH, $7, $2
-	EVENT_DISP VIRIDIAN_HOUSE_WIDTH, $7, $3
+	warp_to $2, $7, VIRIDIAN_HOUSE_WIDTH
+	warp_to $3, $7, VIRIDIAN_HOUSE_WIDTH

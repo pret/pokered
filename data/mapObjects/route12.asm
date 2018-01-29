@@ -2,14 +2,14 @@ Route12Object:
 	db $43 ; border block
 
 	db $4 ; warps
-	db $f, $a, $0, ROUTE_12_GATE_1F
-	db $f, $b, $1, ROUTE_12_GATE_1F
-	db $15, $a, $2, ROUTE_12_GATE_1F
-	db $4d, $b, $0, ROUTE_12_HOUSE
+	warp $a, $f, $0, ROUTE_12_GATE_1F
+	warp $b, $f, $1, ROUTE_12_GATE_1F
+	warp $a, $15, $2, ROUTE_12_GATE_1F
+	warp $b, $4d, $0, ROUTE_12_HOUSE
 
 	db $2 ; signs
-	db $d, $d, $b ; Route12Text11
-	db $3f, $b, $c ; Route12Text12
+	sign $d, $d, $b ; Route12Text11
+	sign $b, $3f, $c ; Route12Text12
 
 	db $a ; objects
 	object SPRITE_SNORLAX, $a, $3e, STAY, DOWN, $1 ; person
@@ -24,7 +24,7 @@ Route12Object:
 	object SPRITE_BALL, $5, $59, STAY, NONE, $a, IRON
 
 	; warp-to
-	EVENT_DISP ROUTE_12_WIDTH, $f, $a ; ROUTE_12_GATE_1F
-	EVENT_DISP ROUTE_12_WIDTH, $f, $b ; ROUTE_12_GATE_1F
-	EVENT_DISP ROUTE_12_WIDTH, $15, $a ; ROUTE_12_GATE_1F
-	EVENT_DISP ROUTE_12_WIDTH, $4d, $b ; ROUTE_12_HOUSE
+	warp_to $a, $f, ROUTE_12_WIDTH ; ROUTE_12_GATE_1F
+	warp_to $b, $f, ROUTE_12_WIDTH ; ROUTE_12_GATE_1F
+	warp_to $a, $15, ROUTE_12_WIDTH ; ROUTE_12_GATE_1F
+	warp_to $b, $4d, ROUTE_12_WIDTH ; ROUTE_12_HOUSE

@@ -2,8 +2,8 @@ CeruleanPokecenterObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $2, $ff
-	db $7, $4, $2, $ff
+	warp $3, $7, $2, $ff
+	warp $4, $7, $2, $ff
 
 	db $0 ; signs
 
@@ -14,5 +14,5 @@ CeruleanPokecenterObject:
 	object SPRITE_CABLE_CLUB_WOMAN, $b, $2, STAY, DOWN, $4 ; person
 
 	; warp-to
-	EVENT_DISP CERULEAN_POKECENTER_WIDTH, $7, $3
-	EVENT_DISP CERULEAN_POKECENTER_WIDTH, $7, $4
+	warp_to $3, $7, CERULEAN_POKECENTER_WIDTH
+	warp_to $4, $7, CERULEAN_POKECENTER_WIDTH

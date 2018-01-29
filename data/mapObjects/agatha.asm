@@ -2,10 +2,10 @@ AgathaObject:
 	db $0 ; border block
 
 	db $4 ; warps
-	db $b, $4, $2, BRUNOS_ROOM
-	db $b, $5, $3, BRUNOS_ROOM
-	db $0, $4, $0, LANCES_ROOM
-	db $0, $5, $0, LANCES_ROOM
+	warp $4, $b, $2, BRUNOS_ROOM
+	warp $5, $b, $3, BRUNOS_ROOM
+	warp $4, $0, $0, LANCES_ROOM
+	warp $5, $0, $0, LANCES_ROOM
 
 	db $0 ; signs
 
@@ -13,7 +13,7 @@ AgathaObject:
 	object SPRITE_AGATHA, $5, $2, STAY, DOWN, $1, OPP_AGATHA, $1
 
 	; warp-to
-	EVENT_DISP AGATHAS_ROOM_WIDTH, $b, $4 ; BRUNOS_ROOM
-	EVENT_DISP AGATHAS_ROOM_WIDTH, $b, $5 ; BRUNOS_ROOM
-	EVENT_DISP AGATHAS_ROOM_WIDTH, $0, $4 ; LANCES_ROOM
-	EVENT_DISP AGATHAS_ROOM_WIDTH, $0, $5 ; LANCES_ROOM
+	warp_to $4, $b, AGATHAS_ROOM_WIDTH ; BRUNOS_ROOM
+	warp_to $5, $b, AGATHAS_ROOM_WIDTH ; BRUNOS_ROOM
+	warp_to $4, $0, AGATHAS_ROOM_WIDTH ; LANCES_ROOM
+	warp_to $5, $0, AGATHAS_ROOM_WIDTH ; LANCES_ROOM

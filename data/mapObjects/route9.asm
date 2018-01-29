@@ -4,7 +4,7 @@ Route9Object:
 	db $0 ; warps
 
 	db $1 ; signs
-	db $7, $19, $b ; Route9Text11
+	sign $19, $7, $b ; Route9Text11
 
 	db $a ; objects
 	object SPRITE_LASS, $d, $a, STAY, LEFT, $1, OPP_JR_TRAINER_F, $5

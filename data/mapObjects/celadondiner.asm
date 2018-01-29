@@ -2,8 +2,8 @@ CeladonDinerObject:
 	db $f ; border block
 
 	db $2 ; warps
-	db $7, $3, $a, $ff
-	db $7, $4, $a, $ff
+	warp $3, $7, $a, $ff
+	warp $4, $7, $a, $ff
 
 	db $0 ; signs
 
@@ -15,5 +15,5 @@ CeladonDinerObject:
 	object SPRITE_GYM_HELPER, $0, $1, STAY, DOWN, $5 ; person
 
 	; warp-to
-	EVENT_DISP CELADON_DINER_WIDTH, $7, $3
-	EVENT_DISP CELADON_DINER_WIDTH, $7, $4
+	warp_to $3, $7, CELADON_DINER_WIDTH
+	warp_to $4, $7, CELADON_DINER_WIDTH

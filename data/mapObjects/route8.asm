@@ -2,14 +2,14 @@ Route8Object:
 	db $2c ; border block
 
 	db $5 ; warps
-	db $9, $1, $0, ROUTE_8_GATE
-	db $a, $1, $1, ROUTE_8_GATE
-	db $9, $8, $2, ROUTE_8_GATE
-	db $a, $8, $3, ROUTE_8_GATE
-	db $3, $d, $0, PATH_ENTRANCE_ROUTE_8
+	warp $1, $9, $0, ROUTE_8_GATE
+	warp $1, $a, $1, ROUTE_8_GATE
+	warp $8, $9, $2, ROUTE_8_GATE
+	warp $8, $a, $3, ROUTE_8_GATE
+	warp $d, $3, $0, PATH_ENTRANCE_ROUTE_8
 
 	db $1 ; signs
-	db $3, $11, $a ; Route8Text10
+	sign $11, $3, $a ; Route8Text10
 
 	db $9 ; objects
 	object SPRITE_BLACK_HAIR_BOY_2, $8, $5, STAY, RIGHT, $1, OPP_SUPER_NERD, $3
@@ -23,8 +23,8 @@ Route8Object:
 	object SPRITE_LASS, $33, $c, STAY, LEFT, $9, OPP_LASS, $10
 
 	; warp-to
-	EVENT_DISP ROUTE_8_WIDTH, $9, $1 ; ROUTE_8_GATE
-	EVENT_DISP ROUTE_8_WIDTH, $a, $1 ; ROUTE_8_GATE
-	EVENT_DISP ROUTE_8_WIDTH, $9, $8 ; ROUTE_8_GATE
-	EVENT_DISP ROUTE_8_WIDTH, $a, $8 ; ROUTE_8_GATE
-	EVENT_DISP ROUTE_8_WIDTH, $3, $d ; PATH_ENTRANCE_ROUTE_8
+	warp_to $1, $9, ROUTE_8_WIDTH ; ROUTE_8_GATE
+	warp_to $1, $a, ROUTE_8_WIDTH ; ROUTE_8_GATE
+	warp_to $8, $9, ROUTE_8_WIDTH ; ROUTE_8_GATE
+	warp_to $8, $a, ROUTE_8_WIDTH ; ROUTE_8_GATE
+	warp_to $d, $3, ROUTE_8_WIDTH ; PATH_ENTRANCE_ROUTE_8

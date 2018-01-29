@@ -2,16 +2,16 @@ SafariZoneEastObject:
 	db $0 ; border block
 
 	db $5 ; warps
-	db $4, $0, $6, SAFARI_ZONE_NORTH
-	db $5, $0, $7, SAFARI_ZONE_NORTH
-	db $16, $0, $6, SAFARI_ZONE_CENTER
-	db $17, $0, $6, SAFARI_ZONE_CENTER
-	db $9, $19, $0, SAFARI_ZONE_REST_HOUSE_3
+	warp $0, $4, $6, SAFARI_ZONE_NORTH
+	warp $0, $5, $7, SAFARI_ZONE_NORTH
+	warp $0, $16, $6, SAFARI_ZONE_CENTER
+	warp $0, $17, $6, SAFARI_ZONE_CENTER
+	warp $19, $9, $0, SAFARI_ZONE_REST_HOUSE_3
 
 	db $3 ; signs
-	db $a, $1a, $5 ; SafariZoneEastText5
-	db $4, $6, $6 ; SafariZoneEastText6
-	db $17, $5, $7 ; SafariZoneEastText7
+	sign $1a, $a, $5 ; SafariZoneEastText5
+	sign $6, $4, $6 ; SafariZoneEastText6
+	sign $5, $17, $7 ; SafariZoneEastText7
 
 	db $4 ; objects
 	object SPRITE_BALL, $15, $a, STAY, NONE, $1, FULL_RESTORE
@@ -20,8 +20,8 @@ SafariZoneEastObject:
 	object SPRITE_BALL, $f, $c, STAY, NONE, $4, TM_37
 
 	; warp-to
-	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $4, $0 ; SAFARI_ZONE_NORTH
-	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $5, $0 ; SAFARI_ZONE_NORTH
-	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $16, $0 ; SAFARI_ZONE_CENTER
-	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $17, $0 ; SAFARI_ZONE_CENTER
-	EVENT_DISP SAFARI_ZONE_EAST_WIDTH, $9, $19 ; SAFARI_ZONE_REST_HOUSE_3
+	warp_to $0, $4, SAFARI_ZONE_EAST_WIDTH ; SAFARI_ZONE_NORTH
+	warp_to $0, $5, SAFARI_ZONE_EAST_WIDTH ; SAFARI_ZONE_NORTH
+	warp_to $0, $16, SAFARI_ZONE_EAST_WIDTH ; SAFARI_ZONE_CENTER
+	warp_to $0, $17, SAFARI_ZONE_EAST_WIDTH ; SAFARI_ZONE_CENTER
+	warp_to $19, $9, SAFARI_ZONE_EAST_WIDTH ; SAFARI_ZONE_REST_HOUSE_3

@@ -2,13 +2,13 @@ Route15Object:
 	db $43 ; border block
 
 	db $4 ; warps
-	db $8, $7, $0, ROUTE_15_GATE_1F
-	db $9, $7, $1, ROUTE_15_GATE_1F
-	db $8, $e, $2, ROUTE_15_GATE_1F
-	db $9, $e, $3, ROUTE_15_GATE_1F
+	warp $7, $8, $0, ROUTE_15_GATE_1F
+	warp $7, $9, $1, ROUTE_15_GATE_1F
+	warp $e, $8, $2, ROUTE_15_GATE_1F
+	warp $e, $9, $3, ROUTE_15_GATE_1F
 
 	db $1 ; signs
-	db $9, $27, $c ; Route15Text12
+	sign $27, $9, $c ; Route15Text12
 
 	db $b ; objects
 	object SPRITE_LASS, $29, $b, STAY, DOWN, $1, OPP_JR_TRAINER_F, $14
@@ -24,7 +24,7 @@ Route15Object:
 	object SPRITE_BALL, $12, $5, STAY, NONE, $b, TM_20
 
 	; warp-to
-	EVENT_DISP ROUTE_15_WIDTH, $8, $7 ; ROUTE_15_GATE_1F
-	EVENT_DISP ROUTE_15_WIDTH, $9, $7 ; ROUTE_15_GATE_1F
-	EVENT_DISP ROUTE_15_WIDTH, $8, $e ; ROUTE_15_GATE_1F
-	EVENT_DISP ROUTE_15_WIDTH, $9, $e ; ROUTE_15_GATE_1F
+	warp_to $7, $8, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
+	warp_to $7, $9, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
+	warp_to $e, $8, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F
+	warp_to $e, $9, ROUTE_15_WIDTH ; ROUTE_15_GATE_1F

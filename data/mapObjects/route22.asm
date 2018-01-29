@@ -2,14 +2,14 @@ Route22Object:
 	db $2c ; border block
 
 	db $1 ; warps
-	db $5, $8, $0, ROUTE_22_GATE
+	warp $8, $5, $0, ROUTE_22_GATE
 
 	db $1 ; signs
-	db $b, $7, $3 ; Route22FrontGateText
+	sign $7, $b, $3 ; Route22FrontGateText
 
 	db $2 ; objects
 	object SPRITE_BLUE, $19, $5, STAY, NONE, $1 ; person
 	object SPRITE_BLUE, $19, $5, STAY, NONE, $2 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_22_WIDTH, $5, $8 ; ROUTE_22_GATE
+	warp_to $8, $5, ROUTE_22_WIDTH ; ROUTE_22_GATE

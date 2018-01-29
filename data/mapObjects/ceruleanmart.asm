@@ -2,8 +2,8 @@ CeruleanMartObject:
 	db $0 ; border block
 
 	db $2 ; warps
-	db $7, $3, $5, $ff
-	db $7, $4, $5, $ff
+	warp $3, $7, $5, $ff
+	warp $4, $7, $5, $ff
 
 	db $0 ; signs
 
@@ -13,5 +13,5 @@ CeruleanMartObject:
 	object SPRITE_LASS, $6, $2, WALK, $2, $3 ; person
 
 	; warp-to
-	EVENT_DISP CERULEAN_MART_WIDTH, $7, $3
-	EVENT_DISP CERULEAN_MART_WIDTH, $7, $4
+	warp_to $3, $7, CERULEAN_MART_WIDTH
+	warp_to $4, $7, CERULEAN_MART_WIDTH

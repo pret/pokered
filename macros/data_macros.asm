@@ -118,6 +118,28 @@ object: MACRO
 	ENDC
 ENDM
 
+;\1 x position
+;\2 y position
+;\3 destination warp id
+;\4 destination map ($ff = wLastMap)
+warp: MACRO
+	db \2, \1, \3, \4
+ENDM
+
+;\1 x position
+;\2 y position
+;\3 sign id
+sign: MACRO
+	db \2, \1, \3
+ENDM
+
+;\1 x position
+;\2 y position
+;\3 map width
+warp_to: MACRO
+	EVENT_DISP \3, \2, \1
+ENDM
+
 ;\1 (byte) = current map id
 ;\2 (byte) = connected map id
 ;\3 (byte) = x movement of connection strip

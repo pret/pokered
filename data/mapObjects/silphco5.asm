@@ -2,13 +2,13 @@ SilphCo5Object:
 	db $2e ; border block
 
 	db $7 ; warps
-	db $0, $18, $1, SILPH_CO_6F
-	db $0, $1a, $1, SILPH_CO_4F
-	db $0, $14, $0, SILPH_CO_ELEVATOR
-	db $3, $1b, $5, SILPH_CO_7F
-	db $f, $9, $4, SILPH_CO_9F
-	db $5, $b, $4, SILPH_CO_3F
-	db $f, $3, $5, SILPH_CO_3F
+	warp $18, $0, $1, SILPH_CO_6F
+	warp $1a, $0, $1, SILPH_CO_4F
+	warp $14, $0, $0, SILPH_CO_ELEVATOR
+	warp $1b, $3, $5, SILPH_CO_7F
+	warp $9, $f, $4, SILPH_CO_9F
+	warp $b, $5, $4, SILPH_CO_3F
+	warp $3, $f, $5, SILPH_CO_3F
 
 	db $0 ; signs
 
@@ -26,10 +26,10 @@ SilphCo5Object:
 	object SPRITE_CLIPBOARD, $18, $6, STAY, NONE, $b ; person
 
 	; warp-to
-	EVENT_DISP SILPH_CO_5F_WIDTH, $0, $18 ; SILPH_CO_6F
-	EVENT_DISP SILPH_CO_5F_WIDTH, $0, $1a ; SILPH_CO_4F
-	EVENT_DISP SILPH_CO_5F_WIDTH, $0, $14 ; SILPH_CO_ELEVATOR
-	EVENT_DISP SILPH_CO_5F_WIDTH, $3, $1b ; SILPH_CO_7F
-	EVENT_DISP SILPH_CO_5F_WIDTH, $f, $9 ; SILPH_CO_9F
-	EVENT_DISP SILPH_CO_5F_WIDTH, $5, $b ; SILPH_CO_3F
-	EVENT_DISP SILPH_CO_5F_WIDTH, $f, $3 ; SILPH_CO_3F
+	warp_to $18, $0, SILPH_CO_5F_WIDTH ; SILPH_CO_6F
+	warp_to $1a, $0, SILPH_CO_5F_WIDTH ; SILPH_CO_4F
+	warp_to $14, $0, SILPH_CO_5F_WIDTH ; SILPH_CO_ELEVATOR
+	warp_to $1b, $3, SILPH_CO_5F_WIDTH ; SILPH_CO_7F
+	warp_to $9, $f, SILPH_CO_5F_WIDTH ; SILPH_CO_9F
+	warp_to $b, $5, SILPH_CO_5F_WIDTH ; SILPH_CO_3F
+	warp_to $3, $f, SILPH_CO_5F_WIDTH ; SILPH_CO_3F

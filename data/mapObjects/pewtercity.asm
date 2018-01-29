@@ -2,22 +2,22 @@ PewterCityObject:
 	db $a ; border block
 
 	db $7 ; warps
-	db $7, $e, $0, MUSEUM_1F
-	db $5, $13, $2, MUSEUM_1F
-	db $11, $10, $0, PEWTER_GYM
-	db $d, $1d, $0, PEWTER_HOUSE_1
-	db $11, $17, $0, PEWTER_MART
-	db $1d, $7, $0, PEWTER_HOUSE_2
-	db $19, $d, $0, PEWTER_POKECENTER
+	warp $e, $7, $0, MUSEUM_1F
+	warp $13, $5, $2, MUSEUM_1F
+	warp $10, $11, $0, PEWTER_GYM
+	warp $1d, $d, $0, PEWTER_HOUSE_1
+	warp $17, $11, $0, PEWTER_MART
+	warp $7, $1d, $0, PEWTER_HOUSE_2
+	warp $d, $19, $0, PEWTER_POKECENTER
 
 	db $7 ; signs
-	db $1d, $13, $6 ; PewterCityText6
-	db $13, $21, $7 ; PewterCityText7
-	db $11, $18, $8 ; MartSignText
-	db $19, $e, $9 ; PokeCenterSignText
-	db $9, $f, $a ; PewterCityText10
-	db $11, $b, $b ; PewterCityText11
-	db $17, $19, $c ; PewterCityText12
+	sign $13, $1d, $6 ; PewterCityText6
+	sign $21, $13, $7 ; PewterCityText7
+	sign $18, $11, $8 ; MartSignText
+	sign $e, $19, $9 ; PokeCenterSignText
+	sign $f, $9, $a ; PewterCityText10
+	sign $b, $11, $b ; PewterCityText11
+	sign $19, $17, $c ; PewterCityText12
 
 	db $5 ; objects
 	object SPRITE_LASS, $8, $f, STAY, NONE, $1 ; person
@@ -27,10 +27,10 @@ PewterCityObject:
 	object SPRITE_BUG_CATCHER, $23, $10, STAY, DOWN, $5 ; person
 
 	; warp-to
-	EVENT_DISP PEWTER_CITY_WIDTH, $7, $e ; MUSEUM_1F
-	EVENT_DISP PEWTER_CITY_WIDTH, $5, $13 ; MUSEUM_1F
-	EVENT_DISP PEWTER_CITY_WIDTH, $11, $10 ; PEWTER_GYM
-	EVENT_DISP PEWTER_CITY_WIDTH, $d, $1d ; PEWTER_HOUSE_1
-	EVENT_DISP PEWTER_CITY_WIDTH, $11, $17 ; PEWTER_MART
-	EVENT_DISP PEWTER_CITY_WIDTH, $1d, $7 ; PEWTER_HOUSE_2
-	EVENT_DISP PEWTER_CITY_WIDTH, $19, $d ; PEWTER_POKECENTER
+	warp_to $e, $7, PEWTER_CITY_WIDTH ; MUSEUM_1F
+	warp_to $13, $5, PEWTER_CITY_WIDTH ; MUSEUM_1F
+	warp_to $10, $11, PEWTER_CITY_WIDTH ; PEWTER_GYM
+	warp_to $1d, $d, PEWTER_CITY_WIDTH ; PEWTER_HOUSE_1
+	warp_to $17, $11, PEWTER_CITY_WIDTH ; PEWTER_MART
+	warp_to $7, $1d, PEWTER_CITY_WIDTH ; PEWTER_HOUSE_2
+	warp_to $d, $19, PEWTER_CITY_WIDTH ; PEWTER_POKECENTER

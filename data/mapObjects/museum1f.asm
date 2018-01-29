@@ -2,11 +2,11 @@ Museum1FObject:
 	db $a ; border block
 
 	db $5 ; warps
-	db $7, $a, $0, $ff
-	db $7, $b, $0, $ff
-	db $7, $10, $1, $ff
-	db $7, $11, $1, $ff
-	db $7, $7, $0, MUSEUM_2F
+	warp $a, $7, $0, $ff
+	warp $b, $7, $0, $ff
+	warp $10, $7, $1, $ff
+	warp $11, $7, $1, $ff
+	warp $7, $7, $0, MUSEUM_2F
 
 	db $0 ; signs
 
@@ -18,8 +18,8 @@ Museum1FObject:
 	object SPRITE_OLD_AMBER, $10, $2, STAY, NONE, $5 ; person
 
 	; warp-to
-	EVENT_DISP MUSEUM_1F_WIDTH, $7, $a
-	EVENT_DISP MUSEUM_1F_WIDTH, $7, $b
-	EVENT_DISP MUSEUM_1F_WIDTH, $7, $10
-	EVENT_DISP MUSEUM_1F_WIDTH, $7, $11
-	EVENT_DISP MUSEUM_1F_WIDTH, $7, $7 ; MUSEUM_2F
+	warp_to $a, $7, MUSEUM_1F_WIDTH
+	warp_to $b, $7, MUSEUM_1F_WIDTH
+	warp_to $10, $7, MUSEUM_1F_WIDTH
+	warp_to $11, $7, MUSEUM_1F_WIDTH
+	warp_to $7, $7, MUSEUM_1F_WIDTH ; MUSEUM_2F

@@ -2,9 +2,9 @@ Mansion3Object:
 	db $1 ; border block
 
 	db $3 ; warps
-	db $a, $7, $1, MANSION_2
-	db $1, $6, $3, MANSION_2
-	db $e, $19, $2, MANSION_2
+	warp $7, $a, $1, MANSION_2
+	warp $6, $1, $3, MANSION_2
+	warp $19, $e, $2, MANSION_2
 
 	db $0 ; signs
 
@@ -16,6 +16,6 @@ Mansion3Object:
 	object SPRITE_BOOK_MAP_DEX, $6, $c, STAY, NONE, $5 ; person
 
 	; warp-to
-	EVENT_DISP MANSION_3_WIDTH, $a, $7 ; MANSION_2
-	EVENT_DISP MANSION_3_WIDTH, $1, $6 ; MANSION_2
-	EVENT_DISP MANSION_3_WIDTH, $e, $19 ; MANSION_2
+	warp_to $7, $a, MANSION_3_WIDTH ; MANSION_2
+	warp_to $6, $1, MANSION_3_WIDTH ; MANSION_2
+	warp_to $19, $e, MANSION_3_WIDTH ; MANSION_2

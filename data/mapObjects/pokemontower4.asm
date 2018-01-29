@@ -2,8 +2,8 @@ PokemonTower4Object:
 	db $1 ; border block
 
 	db $2 ; warps
-	db $9, $3, $0, POKEMONTOWER_5
-	db $9, $12, $1, POKEMONTOWER_3
+	warp $3, $9, $0, POKEMONTOWER_5
+	warp $12, $9, $1, POKEMONTOWER_3
 
 	db $0 ; signs
 
@@ -16,5 +16,5 @@ PokemonTower4Object:
 	object SPRITE_BALL, $c, $10, STAY, NONE, $6, HP_UP
 
 	; warp-to
-	EVENT_DISP POKEMONTOWER_4_WIDTH, $9, $3 ; POKEMONTOWER_5
-	EVENT_DISP POKEMONTOWER_4_WIDTH, $9, $12 ; POKEMONTOWER_3
+	warp_to $3, $9, POKEMONTOWER_4_WIDTH ; POKEMONTOWER_5
+	warp_to $12, $9, POKEMONTOWER_4_WIDTH ; POKEMONTOWER_3
