@@ -1,5 +1,5 @@
 LanceObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 3 ; warps
 	warp 24, 16, 2, AGATHAS_ROOM

@@ -1,5 +1,5 @@
 Mansion1Object:
-	db 46 ; border block
+	db $2e ; border block
 
 	db 8 ; warps
 	warp 4, 27, 0, -1

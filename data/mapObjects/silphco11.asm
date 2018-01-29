@@ -1,5 +1,5 @@
 SilphCo11Object:
-	db 13 ; border block
+	db $d ; border block
 
 	db 4 ; warps
 	warp 9, 0, 1, SILPH_CO_10F

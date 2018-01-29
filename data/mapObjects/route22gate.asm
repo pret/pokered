@@ -1,5 +1,5 @@
 Route22GateObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 4 ; warps
 	warp 4, 7, 0, -1

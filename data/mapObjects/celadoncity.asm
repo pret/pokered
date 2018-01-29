@@ -1,5 +1,5 @@
 CeladonCityObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 13 ; warps
 	warp 8, 13, 0, CELADON_MART_1

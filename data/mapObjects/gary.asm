@@ -1,5 +1,5 @@
 GaryObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 4 ; warps
 	warp 3, 7, 1, LANCES_ROOM

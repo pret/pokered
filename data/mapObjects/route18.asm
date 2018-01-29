@@ -1,5 +1,5 @@
 Route18Object:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 4 ; warps
 	warp 33, 8, 0, ROUTE_18_GATE_1F

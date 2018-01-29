@@ -1,5 +1,5 @@
 CeruleanHouse2Object:
-	db 12 ; border block
+	db $c ; border block
 
 	db 3 ; warps
 	warp 2, 0, 9, -1

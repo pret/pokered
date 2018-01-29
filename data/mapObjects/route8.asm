@@ -1,5 +1,5 @@
 Route8Object:
-	db 44 ; border block
+	db $2c ; border block
 
 	db 5 ; warps
 	warp 1, 9, 0, ROUTE_8_GATE

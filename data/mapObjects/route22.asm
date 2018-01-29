@@ -1,5 +1,5 @@
 Route22Object:
-	db 44 ; border block
+	db $2c ; border block
 
 	db 1 ; warps
 	warp 8, 5, 0, ROUTE_22_GATE

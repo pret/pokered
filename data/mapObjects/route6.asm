@@ -1,5 +1,5 @@
 Route6Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 4 ; warps
 	warp 9, 1, 2, ROUTE_6_GATE

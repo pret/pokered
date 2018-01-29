@@ -1,5 +1,5 @@
 CinnabarIslandObject:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 5 ; warps
 	warp 6, 3, 1, MANSION_1

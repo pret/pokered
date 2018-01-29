@@ -1,5 +1,5 @@
 Route16Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 9 ; warps
 	warp 17, 10, 0, ROUTE_16_GATE_1F

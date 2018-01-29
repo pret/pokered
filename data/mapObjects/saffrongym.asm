@@ -1,5 +1,5 @@
 SaffronGymObject:
-	db 46 ; border block
+	db $2e ; border block
 
 	db 32 ; warps
 	warp 8, 17, 2, -1

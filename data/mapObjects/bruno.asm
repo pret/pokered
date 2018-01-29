@@ -1,5 +1,5 @@
 BrunoObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 4 ; warps
 	warp 4, 11, 2, LORELEIS_ROOM

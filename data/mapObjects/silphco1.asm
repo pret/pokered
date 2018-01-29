@@ -1,5 +1,5 @@
 SilphCo1Object:
-	db 46 ; border block
+	db $2e ; border block
 
 	db 5 ; warps
 	warp 10, 17, 5, -1

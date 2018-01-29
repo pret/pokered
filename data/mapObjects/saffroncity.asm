@@ -1,5 +1,5 @@
 SaffronCityObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 8 ; warps
 	warp 7, 5, 0, COPYCATS_HOUSE_1F

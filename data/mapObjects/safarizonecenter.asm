@@ -1,5 +1,5 @@
 SafariZoneCenterObject:
-	db 0 ; border block
+	db $0 ; border block
 
 	db 9 ; warps
 	warp 14, 25, 2, SAFARI_ZONE_ENTRANCE

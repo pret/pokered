@@ -1,5 +1,5 @@
 RedsHouse2FObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 1 ; warps
 	warp 7, 1, 2, REDS_HOUSE_1F

@@ -1,5 +1,5 @@
 SafariZoneWestObject:
-	db 0 ; border block
+	db $0 ; border block
 
 	db 8 ; warps
 	warp 20, 0, 0, SAFARI_ZONE_NORTH

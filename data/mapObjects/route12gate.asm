@@ -1,5 +1,5 @@
 Route12GateObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 5 ; warps
 	warp 4, 0, 0, -1

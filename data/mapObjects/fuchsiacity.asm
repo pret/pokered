@@ -1,5 +1,5 @@
 FuchsiaCityObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 9 ; warps
 	warp 5, 13, 0, FUCHSIA_MART

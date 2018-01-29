@@ -1,5 +1,5 @@
 ViridianGymObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 16, 17, 4, -1

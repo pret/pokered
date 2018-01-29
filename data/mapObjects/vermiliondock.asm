@@ -1,5 +1,5 @@
 VermilionDockObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 2 ; warps
 	warp 14, 0, 5, -1

@@ -1,5 +1,5 @@
 SSAnne1Object:
-	db 12 ; border block
+	db $c ; border block
 
 	db 11 ; warps
 	warp 26, 0, 1, VERMILION_DOCK

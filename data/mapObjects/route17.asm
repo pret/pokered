@@ -1,5 +1,5 @@
 Route17Object:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 0 ; warps
 

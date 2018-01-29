@@ -1,5 +1,5 @@
 UnknownDungeon3Object:
-	db 125 ; border block
+	db $7d ; border block
 
 	db 1 ; warps
 	warp 3, 6, 8, UNKNOWN_DUNGEON_1

@@ -1,5 +1,5 @@
 Route3Object:
-	db 44 ; border block
+	db $2c ; border block
 
 	db 0 ; warps
 

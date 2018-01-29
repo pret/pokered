@@ -1,5 +1,5 @@
 CeladonDinerObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 2 ; warps
 	warp 3, 7, 10, -1

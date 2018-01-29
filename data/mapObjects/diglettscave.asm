@@ -1,5 +1,5 @@
 DiglettsCaveObject:
-	db 25 ; border block
+	db $19 ; border block
 
 	db 2 ; warps
 	warp 5, 5, 2, DIGLETTS_CAVE_EXIT

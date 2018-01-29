@@ -1,5 +1,5 @@
 SafariZoneSecretHouseObject:
-	db 23 ; border block
+	db $17 ; border block
 
 	db 2 ; warps
 	warp 2, 7, 6, SAFARI_ZONE_WEST

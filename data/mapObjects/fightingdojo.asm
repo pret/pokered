@@ -1,5 +1,5 @@
 FightingDojoObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 4, 11, 1, -1

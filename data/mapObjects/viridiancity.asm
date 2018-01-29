@@ -1,5 +1,5 @@
 ViridianCityObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 5 ; warps
 	warp 23, 25, 0, VIRIDIAN_POKECENTER

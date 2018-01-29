@@ -1,5 +1,5 @@
 PowerPlantObject:
-	db 46 ; border block
+	db $2e ; border block
 
 	db 3 ; warps
 	warp 4, 35, 3, -1

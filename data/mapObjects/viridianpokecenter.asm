@@ -1,5 +1,5 @@
 ViridianPokecenterObject:
-	db 0 ; border block
+	db $0 ; border block
 
 	db 2 ; warps
 	warp 3, 7, 0, -1

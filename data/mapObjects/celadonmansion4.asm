@@ -1,5 +1,5 @@
 CeladonMansion4Object:
-	db 9 ; border block
+	db $9 ; border block
 
 	db 3 ; warps
 	warp 6, 1, 1, CELADON_MANSION_3

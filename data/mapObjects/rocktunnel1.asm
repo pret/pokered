@@ -1,5 +1,5 @@
 RockTunnel1Object:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 8 ; warps
 	warp 15, 3, 1, -1

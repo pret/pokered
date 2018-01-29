@@ -1,5 +1,5 @@
 Museum2FObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 1 ; warps
 	warp 7, 7, 4, MUSEUM_1F

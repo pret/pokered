@@ -1,5 +1,5 @@
 IndigoPlateauObject:
-	db 14 ; border block
+	db $e ; border block
 
 	db 2 ; warps
 	warp 9, 5, 0, INDIGO_PLATEAU_LOBBY

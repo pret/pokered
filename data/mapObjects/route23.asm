@@ -1,5 +1,5 @@
 Route23Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 4 ; warps
 	warp 7, 139, 2, ROUTE_22_GATE

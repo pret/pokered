@@ -1,5 +1,5 @@
 SafariZoneRestHouse4Object:
-	db 10 ; border block
+	db $a ; border block
 
 	db 2 ; warps
 	warp 2, 7, 8, SAFARI_ZONE_NORTH

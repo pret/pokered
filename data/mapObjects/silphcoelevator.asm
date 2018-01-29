@@ -1,5 +1,5 @@
 SilphCoElevatorObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 2 ; warps
 	warp 1, 3, 0, 237

@@ -1,5 +1,5 @@
 Route8GateObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 4 ; warps
 	warp 0, 3, 0, -1

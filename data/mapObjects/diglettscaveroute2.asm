@@ -1,5 +1,5 @@
 DiglettsCaveRoute2Object:
-	db 125 ; border block
+	db $7d ; border block
 
 	db 3 ; warps
 	warp 2, 7, 0, -1

@@ -1,5 +1,5 @@
 CeladonPrizeRoomObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 2 ; warps
 	warp 4, 7, 9, -1

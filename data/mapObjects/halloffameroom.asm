@@ -1,5 +1,5 @@
 HallofFameRoomObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 4, 7, 2, CHAMPIONS_ROOM

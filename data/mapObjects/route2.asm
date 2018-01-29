@@ -1,5 +1,5 @@
 Route2Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 6 ; warps
 	warp 12, 9, 0, DIGLETTS_CAVE_EXIT

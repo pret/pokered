@@ -1,5 +1,5 @@
 IndigoPlateauLobbyObject:
-	db 0 ; border block
+	db $0 ; border block
 
 	db 3 ; warps
 	warp 7, 11, 0, -1

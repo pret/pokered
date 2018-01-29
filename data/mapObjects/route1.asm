@@ -1,5 +1,5 @@
 Route1Object:
-	db 11 ; border block
+	db $b ; border block
 
 	db 0 ; warps
 

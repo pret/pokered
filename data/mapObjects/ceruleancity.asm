@@ -1,5 +1,5 @@
 CeruleanCityObject:
-	db 15 ; border block
+	db $f ; border block
 
 	db 10 ; warps
 	warp 27, 11, 0, TRASHED_HOUSE

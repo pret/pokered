@@ -1,5 +1,5 @@
 UndergroundPathEntranceRoute7CopyObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 3 ; warps
 	warp 3, 7, 5, -1

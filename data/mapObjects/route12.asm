@@ -1,5 +1,5 @@
 Route12Object:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 4 ; warps
 	warp 10, 15, 0, ROUTE_12_GATE_1F

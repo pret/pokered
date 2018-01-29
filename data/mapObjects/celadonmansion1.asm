@@ -1,5 +1,5 @@
 CeladonMansion1Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 5 ; warps
 	warp 4, 11, 2, -1

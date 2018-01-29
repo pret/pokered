@@ -1,5 +1,5 @@
 PewterGymObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 4, 13, 2, -1

@@ -1,5 +1,5 @@
 AgathaObject:
-	db 0 ; border block
+	db $0 ; border block
 
 	db 4 ; warps
 	warp 4, 11, 2, BRUNOS_ROOM

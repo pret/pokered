@@ -1,5 +1,5 @@
 Route20Object:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 2 ; warps
 	warp 48, 5, 0, SEAFOAM_ISLANDS_1

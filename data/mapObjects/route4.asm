@@ -1,5 +1,5 @@
 Route4Object:
-	db 44 ; border block
+	db $2c ; border block
 
 	db 3 ; warps
 	warp 11, 5, 0, MT_MOON_POKECENTER

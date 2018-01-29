@@ -1,5 +1,5 @@
 LavenderTownObject:
-	db 44 ; border block
+	db $2c ; border block
 
 	db 6 ; warps
 	warp 3, 5, 0, LAVENDER_POKECENTER

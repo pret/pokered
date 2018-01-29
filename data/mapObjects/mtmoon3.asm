@@ -1,5 +1,5 @@
 MtMoon3Object:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 4 ; warps
 	warp 25, 9, 1, MT_MOON_2

@@ -1,5 +1,5 @@
 SSAnne4Object:
-	db 12 ; border block
+	db $c ; border block
 
 	db 6 ; warps
 	warp 23, 3, 8, SS_ANNE_10

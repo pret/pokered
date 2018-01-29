@@ -1,5 +1,5 @@
 UndergroundPathWEObject:
-	db 1 ; border block
+	db $1 ; border block
 
 	db 2 ; warps
 	warp 2, 5, 2, PATH_ENTRANCE_ROUTE_7

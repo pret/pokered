@@ -1,5 +1,5 @@
 RocketHideout4Object:
-	db 46 ; border block
+	db $2e ; border block
 
 	db 3 ; warps
 	warp 19, 10, 1, ROCKET_HIDEOUT_3

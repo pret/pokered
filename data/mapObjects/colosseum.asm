@@ -1,5 +1,5 @@
 ColosseumObject:
-	db 14 ; border block
+	db $e ; border block
 
 	db 0 ; warps
 

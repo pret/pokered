@@ -1,5 +1,5 @@
 VictoryRoad3Object:
-	db 125 ; border block
+	db $7d ; border block
 
 	db 4 ; warps
 	warp 23, 7, 3, VICTORY_ROAD_2

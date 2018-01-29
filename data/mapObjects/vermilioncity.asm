@@ -1,5 +1,5 @@
 VermilionCityObject:
-	db 67 ; border block
+	db $43 ; border block
 
 	db 9 ; warps
 	warp 11, 3, 0, VERMILION_POKECENTER

@@ -1,5 +1,5 @@
 SeafoamIslands5Object:
-	db 125 ; border block
+	db $7d ; border block
 
 	db 4 ; warps
 	warp 20, 17, 5, SEAFOAM_ISLANDS_4

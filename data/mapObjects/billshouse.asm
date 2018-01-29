@@ -1,5 +1,5 @@
 BillsHouseObject:
-	db 13 ; border block
+	db $d ; border block
 
 	db 2 ; warps
 	warp 2, 7, 0, -1

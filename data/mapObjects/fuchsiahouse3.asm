@@ -1,5 +1,5 @@
 FuchsiaHouse3Object:
-	db 12 ; border block
+	db $c ; border block
 
 	db 3 ; warps
 	warp 2, 0, 8, -1

@@ -1,5 +1,5 @@
 FuchsiaHouse2Object:
-	db 23 ; border block
+	db $17 ; border block
 
 	db 2 ; warps
 	warp 4, 7, 3, -1

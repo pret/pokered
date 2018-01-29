@@ -1,5 +1,5 @@
 CeladonGymObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 4, 17, 6, -1

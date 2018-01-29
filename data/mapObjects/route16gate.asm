@@ -1,5 +1,5 @@
 Route16GateObject:
-	db 10 ; border block
+	db $a ; border block
 
 	db 9 ; warps
 	warp 0, 8, 0, -1

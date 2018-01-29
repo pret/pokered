@@ -1,5 +1,5 @@
 PokemonTower3Object:
-	db 1 ; border block
+	db $1 ; border block
 
 	db 2 ; warps
 	warp 3, 9, 0, POKEMONTOWER_2

@@ -1,5 +1,5 @@
 Route7Object:
-	db 15 ; border block
+	db $f ; border block
 
 	db 5 ; warps
 	warp 18, 9, 2, ROUTE_7_GATE

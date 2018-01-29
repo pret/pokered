@@ -1,5 +1,5 @@
 CeruleanGymObject:
-	db 3 ; border block
+	db $3 ; border block
 
 	db 2 ; warps
 	warp 4, 13, 3, -1

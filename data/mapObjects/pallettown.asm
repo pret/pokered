@@ -1,5 +1,5 @@
 PalletTownObject:
-	db 11 ; border block
+	db $b ; border block
 
 	db 3 ; warps
 	warp 5, 5, 0, REDS_HOUSE_1F
