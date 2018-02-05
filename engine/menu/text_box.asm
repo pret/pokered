@@ -1,28 +1,28 @@
 ; function to draw various text boxes
 DisplayTextBoxID_:
-	ld a,[wTextBoxID]
-	cp a,TWO_OPTION_MENU
-	jp z,DisplayTwoOptionMenu
-	ld c,a
-	ld hl,TextBoxFunctionTable
-	ld de,3
+	ld a, [wTextBoxID]
+	cp TWO_OPTION_MENU
+	jp z, DisplayTwoOptionMenu
+	ld c, a
+	ld hl, TextBoxFunctionTable
+	ld de, 3
 	call SearchTextBoxTable
-	jr c,.functionTableMatch
-	ld hl,TextBoxCoordTable
-	ld de,5
+	jr c, .functionTableMatch
+	ld hl, TextBoxCoordTable
+	ld de, 5
 	call SearchTextBoxTable
-	jr c,.coordTableMatch
-	ld hl,TextBoxTextAndCoordTable
-	ld de,9
+	jr c, .coordTableMatch
+	ld hl, TextBoxTextAndCoordTable
+	ld de, 9
 	call SearchTextBoxTable
-	jr c,.textAndCoordTableMatch
+	jr c, .textAndCoordTableMatch
 .done
 	ret
 .functionTableMatch
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a ; hl = address of function
-	ld de,.done
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a ; hl = address of function
+	ld de, .done
 	push de
 	jp hl ; jump to the function
 .coordTableMatch
@@ -37,14 +37,14 @@ DisplayTextBoxID_:
 	call TextBoxBorder
 	pop hl
 	call GetTextBoxIDText
-	ld a,[wd730]
+	ld a, [wd730]
 	push af
-	ld a,[wd730]
-	set 6,a ; no pauses between printing each letter
-	ld [wd730],a
+	ld a, [wd730]
+	set 6, a ; no pauses between printing each letter
+	ld [wd730], a
 	call PlaceString
 	pop af
-	ld [wd730],a
+	ld [wd730], a
 	call UpdateSprites
 	ret
 
@@ -53,12 +53,12 @@ DisplayTextBoxID_:
 SearchTextBoxTable:
 	dec de
 .loop
-	ld a,[hli]
-	cp a,$ff
-	jr z,.notFound
+	ld a, [hli]
+	cp $ff
+	jr z, .notFound
 	cp c
-	jr z,.found
-	add hl,de
+	jr z, .found
+	add hl, de
 	jr .loop
 .found
 	scf
@@ -74,31 +74,31 @@ SearchTextBoxTable:
 ; d = row of upper left corner
 ; e = column of upper left corner
 GetTextBoxIDCoords:
-	ld a,[hli] ; column of upper left corner
-	ld e,a
-	ld a,[hli] ; row of upper left corner
-	ld d,a
-	ld a,[hli] ; column of lower right corner
+	ld a, [hli] ; column of upper left corner
+	ld e, a
+	ld a, [hli] ; row of upper left corner
+	ld d, a
+	ld a, [hli] ; column of lower right corner
 	sub e
 	dec a
-	ld c,a     ; c = width
-	ld a,[hli] ; row of lower right corner
+	ld c, a     ; c = width
+	ld a, [hli] ; row of lower right corner
 	sub d
 	dec a
-	ld b,a     ; b = height
+	ld b, a     ; b = height
 	ret
 
 ; function to load a text address and text coordinates from the TextBoxTextAndCoordTable
 GetTextBoxIDText:
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a ; de = address of text
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a ; de = address of text
 	push de ; save text address
-	ld a,[hli]
-	ld e,a ; column of upper left corner of text
-	ld a,[hl]
-	ld d,a ; row of upper left corner of text
+	ld a, [hli]
+	ld e, a ; column of upper left corner of text
+	ld a, [hl]
+	ld d, a ; row of upper left corner of text
 	call GetAddressOfScreenCoords
 	pop de ; restore text address
 	ret
@@ -112,17 +112,17 @@ GetTextBoxIDText:
 GetAddressOfScreenCoords:
 	push bc
 	coord hl, 0, 0
-	ld bc,20
+	ld bc, 20
 .loop ; loop to add d rows to the base address
-	ld a,d
+	ld a, d
 	and a
-	jr z,.addedRows
-	add hl,bc
+	jr z, .addedRows
+	add hl, bc
 	dec d
 	jr .loop
 .addedRows
 	pop bc
-	add hl,de
+	add hl, de
 	ret
 
 ; Format:

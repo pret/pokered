@@ -12,7 +12,7 @@ FuchsiaHouse2Text1:
 	TX_ASM
 	CheckEvent EVENT_GOT_HM04
 	jr nz, .subtract
-	ld b,GOLD_TEETH
+	ld b, GOLD_TEETH
 	call IsItemInBag
 	jr nz, .asm_3f30f
 	CheckEvent EVENT_GAVE_GOLD_TEETH

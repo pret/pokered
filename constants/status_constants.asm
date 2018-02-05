@@ -6,27 +6,27 @@ FRZ EQU 5
 PAR EQU 6
 
 ; volatile statuses 1
-StoringEnergy          EQU 0 ; Bide
-ThrashingAbout         EQU 1 ; e.g. Thrash
-AttackingMultipleTimes EQU 2 ; e.g. Double Kick, Fury Attack
-Flinched               EQU 3
-ChargingUp             EQU 4 ; e.g. Solar Beam, Fly
-UsingTrappingMove      EQU 5 ; e.g. Wrap
-Invulnerable           EQU 6 ; charging up Fly/Dig
-Confused               EQU 7
+STORING_ENERGY           EQU 0 ; Bide
+THRASHING_ABOUT          EQU 1 ; e.g. Thrash
+ATTACKING_MULTIPLE_TIMES EQU 2 ; e.g. Double Kick, Fury Attack
+FLINCHED                 EQU 3
+CHARGING_UP              EQU 4 ; e.g. Solar Beam, Fly
+USING_TRAPPING_MOVE      EQU 5 ; e.g. Wrap
+INVULNERABLE             EQU 6 ; charging up Fly/Dig
+CONFUSED                 EQU 7
 
 ; volatile statuses 2
-UsingXAccuracy    EQU 0
-ProtectedByMist   EQU 1
-GettingPumped     EQU 2 ; Focus Energy
-;                 EQU 3 ; unused?
-HasSubstituteUp   EQU 4
-NeedsToRecharge   EQU 5 ; Hyper Beam
-UsingRage         EQU 6
-Seeded            EQU 7
+USING_X_ACCURACY    EQU 0
+PROTECTED_BY_MIST   EQU 1
+GETTING_PUMPED      EQU 2 ; Focus Energy
+;                   EQU 3 ; unused
+HAS_SUBSTITUTE_UP   EQU 4
+NEEDS_TO_RECHARGE   EQU 5 ; Hyper Beam
+USING_RAGE          EQU 6
+SEEDED              EQU 7
 
 ; volatile statuses 3
-BadlyPoisoned    EQU 0
-HasLightScreenUp EQU 1
-HasReflectUp     EQU 2
-Transformed      EQU 3
+BADLY_POISONED      EQU 0
+HAS_LIGHT_SCREEN_UP EQU 1
+HAS_REFLECT_UP      EQU 2
+TRANSFORMED         EQU 3

@@ -1,7 +1,7 @@
 DisplayEffectiveness:
 	ld a, [wDamageMultipliers]
-	and a, $7F
-	cp a, $0A
+	and $7F
+	cp $0A
 	ret z
 	ld hl, SuperEffectiveText
 	jr nc, .done

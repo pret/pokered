@@ -12,7 +12,7 @@ SubstituteEffect_:
 	ld bc, wEnemyBattleStatus2
 .notEnemy
 	ld a, [bc]
-	bit HasSubstituteUp, a ; user already has substitute?
+	bit HAS_SUBSTITUTE_UP, a ; user already has substitute?
 	jr nz, .alreadyHasSubstitute
 ; quarter health to remove from user
 ; assumes max HP is 1023 or lower
@@ -43,7 +43,7 @@ SubstituteEffect_:
 	ld [hl], d
 	ld h, b
 	ld l, c
-	set HasSubstituteUp, [hl]
+	set HAS_SUBSTITUTE_UP, [hl]
 	ld a, [wOptions]
 	bit 7, a ; battle animation is enabled?
 	ld hl, PlayCurrentMoveAnimation

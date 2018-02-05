@@ -113,10 +113,10 @@ CeruleanCityMovement1:
 	db $FF
 
 CeruleanCityScript_1955d:
-	ld a,1
-	ld [H_SPRITEINDEX],a
+	ld a, 1
+	ld [H_SPRITEINDEX], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [hSpriteFacingDirection],a
+	ld [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1:

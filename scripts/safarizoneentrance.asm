@@ -117,10 +117,10 @@ SafariZoneEntranceScriptPointers:
 
 SafariZoneEntranceAutoWalk:
 	push af
-	ld b,0
-	ld a,c
-	ld [wSimulatedJoypadStatesIndex],a
-	ld hl,wSimulatedJoypadStatesEnd
+	ld b, 0
+	ld a, c
+	ld [wSimulatedJoypadStatesIndex], a
+	ld hl, wSimulatedJoypadStatesEnd
 	pop af
 	call FillMemory
 	jp StartSimulatingJoypadStates
@@ -146,64 +146,64 @@ SafariZoneEntranceTextPointers:
 	TX_FAR SafariZoneEntranceText_9e6e4
 	TX_ASM
 	ld a, MONEY_BOX
-	ld [wTextBoxID],a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
-	jp nz,.PleaseComeAgain
+	jp nz, .PleaseComeAgain
 	xor a
-	ld [hMoney],a
-	ld a,$05
-	ld [hMoney + 1],a
-	ld a,$00
-	ld [hMoney + 2],a
+	ld [hMoney], a
+	ld a, $05
+	ld [hMoney + 1], a
+	ld a, $00
+	ld [hMoney + 2], a
 	call HasEnoughMoney
-	jr nc,.success
-	ld hl,.NotEnoughMoneyText
+	jr nc, .success
+	ld hl, .NotEnoughMoneyText
 	call PrintText
 	jr .CantPayWalkDown
 
 .success
 	xor a
-	ld [wPriceTemp],a
-	ld a,$05
-	ld [wPriceTemp + 1],a
-	ld a,$00
-	ld [wPriceTemp + 2],a
-	ld hl,wPriceTemp + 2
-	ld de,wPlayerMoney + 2
-	ld c,3
+	ld [wPriceTemp], a
+	ld a, $05
+	ld [wPriceTemp + 1], a
+	ld a, $00
+	ld [wPriceTemp + 2], a
+	ld hl, wPriceTemp + 2
+	ld de, wPlayerMoney + 2
+	ld c, 3
 	predef SubBCDPredef
-	ld a,MONEY_BOX
-	ld [wTextBoxID],a
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl,.MakePaymentText
+	ld hl, .MakePaymentText
 	call PrintText
-	ld a,30
-	ld [wNumSafariBalls],a
-	ld a,502 / $100
-	ld [wSafariSteps],a
+	ld a, 30
+	ld [wNumSafariBalls], a
+	ld a, 502 / $100
+	ld [wSafariSteps], a
 	ld a, 502 % $100
-	ld [wSafariSteps + 1],a
-	ld a,D_UP
-	ld c,3
+	ld [wSafariSteps + 1], a
+	ld a, D_UP
+	ld c, 3
 	call SafariZoneEntranceAutoWalk
 	SetEvent EVENT_IN_SAFARI_ZONE
 	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
-	ld a,3
-	ld [wSafariZoneEntranceCurScript],a
+	ld a, 3
+	ld [wSafariZoneEntranceCurScript], a
 	jr .done
 
 .PleaseComeAgain
-	ld hl,.PleaseComeAgainText
+	ld hl, .PleaseComeAgainText
 	call PrintText
 .CantPayWalkDown
-	ld a,D_DOWN
-	ld c,1
+	ld a, D_DOWN
+	ld c, 1
 	call SafariZoneEntranceAutoWalk
-	ld a,4
-	ld [wSafariZoneEntranceCurScript],a
+	ld a, 4
+	ld [wSafariZoneEntranceCurScript], a
 .done
 	jp TextScriptEnd
 
@@ -225,7 +225,7 @@ SafariZoneEntranceTextPointers:
 	TX_FAR SafariZoneEntranceText_9e814
 	TX_ASM
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
@@ -268,14 +268,14 @@ SafariZoneEntranceTextPointers:
 
 .SafariZoneEntranceText2
 	TX_ASM
-	ld hl,.FirstTimeQuestionText
+	ld hl, .FirstTimeQuestionText
 	call PrintText
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
-	ld hl,.RegularText
-	jr nz,.Explanation
-	ld hl,.ExplanationText
+	ld hl, .RegularText
+	jr nz, .Explanation
+	ld hl, .ExplanationText
 .Explanation
 	call PrintText
 	jp TextScriptEnd
