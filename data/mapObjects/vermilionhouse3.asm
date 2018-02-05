@@ -1,15 +1,15 @@
 VermilionHouse3Object:
 	db $a ; border block
 
-	db $2 ; warps
-	db $7, $2, $7, $ff
-	db $7, $3, $7, $ff
+	db 2 ; warps
+	warp 2, 7, 7, -1
+	warp 3, 7, 7, -1
 
-	db $0 ; signs
+	db 0 ; signs
 
-	db $1 ; objects
-	object SPRITE_LITTLE_GIRL, $3, $5, STAY, UP, $1 ; person
+	db 1 ; objects
+	object SPRITE_LITTLE_GIRL, 3, 5, STAY, UP, 1 ; person
 
 	; warp-to
-	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
-	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $3
+	warp_to 2, 7, VERMILION_HOUSE_3_WIDTH
+	warp_to 3, 7, VERMILION_HOUSE_3_WIDTH
