@@ -19,6 +19,6 @@ before_script:
       fi;
     }
 script:
-  - make
+  - make -j2
   - make compare
   - check_status
