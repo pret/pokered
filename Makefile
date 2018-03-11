@@ -22,7 +22,7 @@ compare: red blue
 clean:
 	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
-	#$(MAKE) clean -C tools/
+	$(MAKE) clean -C tools/
 
 tools:
 	$(MAKE) -C tools/
