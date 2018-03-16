@@ -1,6 +1,6 @@
 SFX_Teleport_Exit2_1_Ch4:
 	duty 1
-	pitchenvelope 22
+	pitchenvelope 1, 6
 	squarenote 15, 210, 0, 5
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel

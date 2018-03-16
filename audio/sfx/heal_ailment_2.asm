@@ -1,9 +1,9 @@
 SFX_Heal_Ailment_2_Ch4:
 	duty 2
-	pitchenvelope 20
+	pitchenvelope 1, 4
 	squarenote 4, 242, 0, 6
 	squarenote 4, 242, 0, 6
-	pitchenvelope 23
+	pitchenvelope 1, 7
 	squarenote 15, 242, 0, 6
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel

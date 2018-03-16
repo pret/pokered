@@ -1,6 +1,6 @@
 SFX_Faint_Thud_Ch4:
 	squarenote 15, 209, 0, 2
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel
 
 

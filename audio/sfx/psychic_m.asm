@@ -1,13 +1,13 @@
 SFX_Psychic_M_Ch4:
 	duty 2
-	pitchenvelope 247
+	pitchenvelope 15, 7
 	squarenote 8, 196, 189, 7
 	squarenote 8, 196, 190, 7
 	squarenote 8, 196, 191, 7
 	squarenote 8, 196, 192, 7
 	squarenote 15, 196, 193, 7
 	squarenote 15, 242, 192, 7
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel
 
 

@@ -1,8 +1,8 @@
 SFX_Battle_32_Ch4:
 	duty 2
-	pitchenvelope 175
+	pitchenvelope 10, -7
 	squarenote 8, 241, 0, 7
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel
 
 

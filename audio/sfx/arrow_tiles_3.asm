@@ -1,6 +1,6 @@
 SFX_Arrow_Tiles_3_Ch4:
 	duty 0
-	pitchenvelope 23
+	pitchenvelope 1, 7
 	squarenote 15, 210, 0, 7
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel

@@ -1,6 +1,6 @@
 SFX_Ball_Toss_Ch4:
 	duty 2
-	pitchenvelope 47
+	pitchenvelope 2, -7
 	squarenote 15, 242, 128, 7
 	endchannel
 

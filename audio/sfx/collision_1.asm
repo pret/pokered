@@ -1,6 +1,6 @@
 SFX_Collision_1_Ch4:
 	duty 2
-	pitchenvelope 90
+	pitchenvelope 5, -2
 	squarenote 15, 241, 0, 3
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel

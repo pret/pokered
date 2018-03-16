@@ -30,19 +30,24 @@ audio: MACRO
 	ENDC
 ENDM
 
-pitchenvelope: MACRO ; this was originally unknownsfx0x10
+;format: length [0, 7], pitch change [-7, 7]
+pitchenvelope: MACRO
 	db $10
-	db \1
+	IF \2 > 0
+		db (\1 << 4) | \2
+	ELSE
+		db (\1 << 4) | (%1000 | (\2 * -1))
+	ENDC
 ENDM
 
-squarenote: MACRO ; this was originally unknownsfx0x20
+squarenote: MACRO
 	db $20 | \1
 	db \2
 	db \3
 	db \4
 ENDM
 
-noisenote: MACRO ; this was originally unknownnoise0x20
+noisenote: MACRO
 	db $20 | \1
 	db \2
 	db \3

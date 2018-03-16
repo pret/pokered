@@ -1,8 +1,8 @@
 SFX_Ball_Poof_Ch4:
 	duty 2
-	pitchenvelope 22
+	pitchenvelope 1, 6
 	squarenote 15, 242, 0, 4
-	pitchenvelope 8
+	pitchenvelope 0, 0
 	endchannel
 
 
