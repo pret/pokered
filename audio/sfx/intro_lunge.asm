@@ -1,10 +1,10 @@
 SFX_Intro_Lunge_Ch7:
-	unknownnoise0x20 6, 32, 16
-	unknownnoise0x20 6, 47, 64
-	unknownnoise0x20 6, 79, 65
-	unknownnoise0x20 6, 143, 65
-	unknownnoise0x20 6, 207, 66
-	unknownnoise0x20 8, 215, 66
-	unknownnoise0x20 15, 231, 67
-	unknownnoise0x20 15, 242, 67
+	noisenote 6, 32, 16
+	noisenote 6, 47, 64
+	noisenote 6, 79, 65
+	noisenote 6, 143, 65
+	noisenote 6, 207, 66
+	noisenote 8, 215, 66
+	noisenote 15, 231, 67
+	noisenote 15, 242, 67
 	endchannel

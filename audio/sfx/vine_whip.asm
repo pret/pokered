@@ -1,10 +1,10 @@
 SFX_Vine_Whip_Ch7:
-	unknownnoise0x20 1, 194, 51
-	unknownnoise0x20 2, 242, 33
-	unknownnoise0x20 1, 226, 51
-	unknownnoise0x20 1, 194, 50
-	unknownnoise0x20 1, 146, 18
-	unknownnoise0x20 1, 178, 49
-	unknownnoise0x20 12, 145, 16
-	unknownnoise0x20 8, 242, 65
+	noisenote 1, 194, 51
+	noisenote 2, 242, 33
+	noisenote 1, 226, 51
+	noisenote 1, 194, 50
+	noisenote 1, 146, 18
+	noisenote 1, 178, 49
+	noisenote 12, 145, 16
+	noisenote 8, 242, 65
 	endchannel

@@ -1,8 +1,8 @@
 SFX_Snare5_3_Ch7:
-	unknownnoise0x20 7, 132, 55
-	unknownnoise0x20 6, 132, 54
-	unknownnoise0x20 5, 131, 53
-	unknownnoise0x20 4, 131, 52
-	unknownnoise0x20 3, 130, 51
-	unknownnoise0x20 2, 129, 50
+	noisenote 7, 132, 55
+	noisenote 6, 132, 54
+	noisenote 5, 131, 53
+	noisenote 4, 131, 52
+	noisenote 3, 130, 51
+	noisenote 2, 129, 50
 	endchannel

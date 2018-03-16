@@ -1,6 +1,6 @@
 SFX_Ledge_3_Ch4:
 	duty 2
-	unknownsfx0x10 149
-	unknownsfx0x20 15, 242, 0, 4
-	unknownsfx0x10 8
+	pitchenvelope 149
+	squarenote 15, 242, 0, 4
+	pitchenvelope 8
 	endchannel

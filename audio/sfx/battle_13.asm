@@ -1,6 +1,6 @@
 SFX_Battle_13_Ch7:
-	unknownnoise0x20 8, 79, 51
-	unknownnoise0x20 4, 196, 34
-	unknownnoise0x20 6, 242, 35
-	unknownnoise0x20 15, 242, 34
+	noisenote 8, 79, 51
+	noisenote 4, 196, 34
+	noisenote 6, 242, 35
+	noisenote 15, 242, 34
 	endchannel
