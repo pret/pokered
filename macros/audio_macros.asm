@@ -30,19 +30,19 @@ audio: MACRO
 	ENDC
 ENDM
 
-eSquarePitchEnvelope: MACRO
+eSquarePitchEnvelope: MACRO ; this was originally unknownsfx0x10
 	db $10
 	db \1
 ENDM
 
-SquareSound: MACRO
+SquareSound: MACRO ; this was originally unknownsfx0x20
 	db $20 | \1
 	db \2
 	db \3
 	db \4
 ENDM
 
-NoiseSound: MACRO
+NoiseSound: MACRO ; this was originally unknownnoise0x20
 	db $20 | \1
 	db \2
 	db \3
