@@ -30,19 +30,19 @@ audio: MACRO
 	ENDC
 ENDM
 
-unknownsfx0x10: MACRO
+pitchenvelope: MACRO ; this was originally unknownsfx0x10
 	db $10
 	db \1
 ENDM
 
-unknownsfx0x20: MACRO
+squarenote: MACRO ; this was originally unknownsfx0x20
 	db $20 | \1
 	db \2
 	db \3
 	db \4
 ENDM
 
-unknownnoise0x20: MACRO
+noisenote: MACRO ; this was originally unknownnoise0x20
 	db $20 | \1
 	db \2
 	db \3

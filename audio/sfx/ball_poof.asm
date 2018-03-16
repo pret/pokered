@@ -1,11 +1,11 @@
 SFX_Ball_Poof_Ch4:
 	duty 2
-	unknownsfx0x10 22
-	unknownsfx0x20 15, 242, 0, 4
-	unknownsfx0x10 8
+	pitchenvelope 22
+	squarenote 15, 242, 0, 4
+	pitchenvelope 8
 	endchannel
 
 
 SFX_Ball_Poof_Ch7:
-	unknownnoise0x20 15, 162, 34
+	noisenote 15, 162, 34
 	endchannel

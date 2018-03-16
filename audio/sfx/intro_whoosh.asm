@@ -1,7 +1,7 @@
 SFX_Intro_Whoosh_Ch7:
-	unknownnoise0x20 4, 44, 32
-	unknownnoise0x20 3, 160, 32
-	unknownnoise0x20 3, 176, 33
-	unknownnoise0x20 3, 192, 34
-	unknownnoise0x20 15, 210, 36
+	noisenote 4, 44, 32
+	noisenote 3, 160, 32
+	noisenote 3, 176, 33
+	noisenote 3, 192, 34
+	noisenote 15, 210, 36
 	endchannel

@@ -1,6 +1,6 @@
 SFX_Teleport_Enter2_1_Ch7:
-	unknownnoise0x20 2, 241, 50
-	unknownnoise0x20 2, 0, 0
-	unknownnoise0x20 2, 241, 34
-	unknownnoise0x20 1, 0, 0
+	noisenote 2, 241, 50
+	noisenote 2, 0, 0
+	noisenote 2, 241, 34
+	noisenote 1, 0, 0
 	endchannel
