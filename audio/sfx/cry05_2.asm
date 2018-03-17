@@ -1,18 +1,18 @@
 SFX_Cry05_2_Ch4:
 	dutycycle 10
-	squarenote 6, 226, 0, 5
-	squarenote 6, 227, 128, 5
-	squarenote 6, 211, 112, 5
-	squarenote 8, 161, 96, 5
+	squarenote 6, 14, 2, 1280
+	squarenote 6, 14, 3, 1408
+	squarenote 6, 13, 3, 1392
+	squarenote 8, 10, 1, 1376
 	endchannel
 
 
 SFX_Cry05_2_Ch5:
 	dutycycle 245
-	squarenote 6, 226, 130, 4
-	squarenote 6, 211, 1, 5
-	squarenote 6, 178, 226, 4
-	squarenote 8, 129, 193, 4
+	squarenote 6, 14, 2, 1154
+	squarenote 6, 13, 3, 1281
+	squarenote 6, 11, 2, 1250
+	squarenote 8, 8, 1, 1217
 
 
 SFX_Cry05_2_Ch7:

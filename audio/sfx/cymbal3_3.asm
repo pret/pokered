@@ -1,3 +1,3 @@
 SFX_Cymbal3_3_Ch7:
-	noisenote 0, 162, 80
+	noisenote 0, 10, 2, 80
 	endchannel

@@ -1,7 +1,7 @@
 SFX_Cut_1_Ch7:
-	noisenote 2, 247, 36
-	noisenote 2, 247, 52
-	noisenote 4, 247, 68
-	noisenote 8, 244, 85
-	noisenote 8, 241, 68
+	noisenote 2, 15, 7, 36
+	noisenote 2, 15, 7, 52
+	noisenote 4, 15, 7, 68
+	noisenote 8, 15, 4, 85
+	noisenote 8, 15, 1, 68
 	endchannel

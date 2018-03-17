@@ -1,26 +1,26 @@
 SFX_Cry21_2_Ch4:
 	dutycycle 27
-	squarenote 3, 243, 100, 5
-	squarenote 2, 226, 68, 5
-	squarenote 5, 209, 34, 5
-	squarenote 2, 178, 132, 4
-	squarenote 8, 209, 162, 4
-	squarenote 3, 243, 36, 5
-	squarenote 4, 228, 228, 4
-	squarenote 8, 209, 2, 5
+	squarenote 3, 15, 3, 1380
+	squarenote 2, 14, 2, 1348
+	squarenote 5, 13, 1, 1314
+	squarenote 2, 11, 2, 1156
+	squarenote 8, 13, 1, 1186
+	squarenote 3, 15, 3, 1316
+	squarenote 4, 14, 4, 1252
+	squarenote 8, 13, 1, 1282
 	endchannel
 
 
 SFX_Cry21_2_Ch5:
 	dutycycle 204
-	squarenote 3, 211, 96, 5
-	squarenote 2, 194, 64, 5
-	squarenote 5, 193, 32, 5
-	squarenote 2, 146, 128, 4
-	squarenote 8, 193, 160, 4
-	squarenote 3, 211, 32, 5
-	squarenote 3, 196, 224, 4
-	squarenote 8, 193, 0, 5
+	squarenote 3, 13, 3, 1376
+	squarenote 2, 12, 2, 1344
+	squarenote 5, 12, 1, 1312
+	squarenote 2, 9, 2, 1152
+	squarenote 8, 12, 1, 1184
+	squarenote 3, 13, 3, 1312
+	squarenote 3, 12, 4, 1248
+	squarenote 8, 12, 1, 1280
 
 
 SFX_Cry21_2_Ch7:

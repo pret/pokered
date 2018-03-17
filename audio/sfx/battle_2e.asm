@@ -1,27 +1,27 @@
 SFX_Battle_2E_Ch4:
 	duty 0
-	squarenote 2, 241, 0, 2
-	squarenote 3, 241, 0, 7
-	squarenote 4, 241, 0, 5
-	squarenote 5, 241, 240, 7
+	squarenote 2, 15, 1, 512
+	squarenote 3, 15, 1, 1792
+	squarenote 4, 15, 1, 1280
+	squarenote 5, 15, 1, 2032
 	loopchannel 8, SFX_Battle_2E_Ch4
 	endchannel
 
 
 SFX_Battle_2E_Ch5:
 	dutycycle 179
-	squarenote 2, 225, 2, 3
-	squarenote 3, 225, 242, 7
-	squarenote 4, 225, 2, 6
-	squarenote 5, 225, 2, 7
+	squarenote 2, 14, 1, 770
+	squarenote 3, 14, 1, 2034
+	squarenote 4, 14, 1, 1538
+	squarenote 5, 14, 1, 1794
 	loopchannel 8, SFX_Battle_2E_Ch5
 	endchannel
 
 
 SFX_Battle_2E_Ch7:
-	noisenote 2, 211, 16
-	noisenote 3, 211, 17
-	noisenote 2, 210, 16
-	noisenote 5, 210, 18
+	noisenote 2, 13, 3, 16
+	noisenote 3, 13, 3, 17
+	noisenote 2, 13, 2, 16
+	noisenote 5, 13, 2, 18
 	loopchannel 9, SFX_Battle_2E_Ch7
 	endchannel

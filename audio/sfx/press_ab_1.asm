@@ -1,7 +1,7 @@
 SFX_Press_AB_1_Ch4:
 	duty 2
-	squarenote 0, 145, 192, 7
-	squarenote 0, 129, 208, 7
-	squarenote 0, 145, 192, 7
-	squarenote 12, 161, 208, 7
+	squarenote 0, 9, 1, 1984
+	squarenote 0, 8, 1, 2000
+	squarenote 0, 9, 1, 1984
+	squarenote 12, 10, 1, 2000
 	endchannel

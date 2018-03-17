@@ -1,17 +1,17 @@
 SFX_Cry19_3_Ch4:
 	dutycycle 27
-	squarenote 7, 210, 64, 7
-	squarenote 15, 229, 96, 7
-	squarenote 15, 193, 48, 7
+	squarenote 7, 13, 2, 1856
+	squarenote 15, 14, 5, 1888
+	squarenote 15, 12, 1, 1840
 	endchannel
 
 
 SFX_Cry19_3_Ch5:
 	dutycycle 129
-	squarenote 2, 194, 1, 7
-	squarenote 4, 194, 8, 7
-	squarenote 15, 215, 65, 7
-	squarenote 15, 162, 1, 7
+	squarenote 2, 12, 2, 1793
+	squarenote 4, 12, 2, 1800
+	squarenote 15, 13, 7, 1857
+	squarenote 15, 10, 2, 1793
 
 
 SFX_Cry19_3_Ch7:

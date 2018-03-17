@@ -1,32 +1,32 @@
 SFX_Cry04_2_Ch4:
 	dutycycle 240
-	squarenote 4, 247, 160, 6
-	squarenote 8, 230, 164, 6
-	squarenote 4, 214, 160, 6
-	squarenote 12, 211, 32, 6
-	squarenote 8, 195, 36, 6
-	squarenote 4, 194, 32, 6
-	squarenote 8, 177, 16, 6
+	squarenote 4, 15, 7, 1696
+	squarenote 8, 14, 6, 1700
+	squarenote 4, 13, 6, 1696
+	squarenote 12, 13, 3, 1568
+	squarenote 8, 12, 3, 1572
+	squarenote 4, 12, 2, 1568
+	squarenote 8, 11, 1, 1552
 	endchannel
 
 
 SFX_Cry04_2_Ch5:
 	dutycycle 90
-	squarenote 4, 231, 1, 6
-	squarenote 8, 214, 3, 6
-	squarenote 4, 198, 1, 6
-	squarenote 12, 195, 129, 5
-	squarenote 8, 179, 131, 5
-	squarenote 4, 178, 130, 5
-	squarenote 8, 161, 113, 5
+	squarenote 4, 14, 7, 1537
+	squarenote 8, 13, 6, 1539
+	squarenote 4, 12, 6, 1537
+	squarenote 12, 12, 3, 1409
+	squarenote 8, 11, 3, 1411
+	squarenote 4, 11, 2, 1410
+	squarenote 8, 10, 1, 1393
 	endchannel
 
 
 SFX_Cry04_2_Ch7:
-	noisenote 7, 214, 92
-	noisenote 8, 230, 76
-	noisenote 4, 212, 92
-	noisenote 4, 212, 76
-	noisenote 7, 195, 76
-	noisenote 8, 161, 92
+	noisenote 7, 13, 6, 92
+	noisenote 8, 14, 6, 76
+	noisenote 4, 13, 4, 92
+	noisenote 4, 13, 4, 76
+	noisenote 7, 12, 3, 76
+	noisenote 8, 10, 1, 92
 	endchannel

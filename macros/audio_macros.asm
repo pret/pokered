@@ -40,17 +40,26 @@ pitchenvelope: MACRO
 	ENDC
 ENDM
 
+;format: duty, volume, volume change, pitch
 squarenote: MACRO
 	db $20 | \1
-	db \2
-	db \3
-	db \4
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
+	dw \4
 ENDM
 
+;format: duty, volume, volume change, pitch
 noisenote: MACRO
 	db $20 | \1
-	db \2
-	db \3
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
+	db \4
 ENDM
 
 ;format: pitch length (in 16ths)

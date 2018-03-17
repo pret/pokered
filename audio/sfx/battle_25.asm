@@ -1,7 +1,7 @@
 SFX_Battle_25_Ch7:
-	noisenote 15, 79, 65
-	noisenote 8, 143, 65
-	noisenote 8, 207, 65
-	noisenote 8, 242, 66
-	noisenote 15, 242, 65
+	noisenote 15, 4, -7, 65
+	noisenote 8, 8, -7, 65
+	noisenote 8, 12, -7, 65
+	noisenote 8, 15, 2, 66
+	noisenote 15, 15, 2, 65
 	endchannel
