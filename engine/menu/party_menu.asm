@@ -150,7 +150,7 @@ RedrawPartyMenu_:
 	ld l, a
 	ld de, wcd6d
 	ld a, BANK(EvosMovesPointerTable)
-	ld bc, Mon133_EvosEnd - Mon133_EvosMoves
+	ld bc, EEVEE_EvosEnd - EEVEE_EvosMoves
 	call FarCopyData
 	ld hl, wcd6d
 	ld de, .notAbleToEvolveText
