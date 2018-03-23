@@ -1253,7 +1253,7 @@ wNormalMaxPPList:: ; cd78
 
 NEXTU
 
-wEvosMoves:: ds 13
+wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
 .end::
 
 ENDU

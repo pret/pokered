@@ -1,3 +1,6 @@
+; See constants/evolution_constants.asm
+; The max number of evolutions per monster is MAX_EVOLUTIONS
+
 EvosMovesPointerTable:
 	dw RhydonEvosMoves
 	dw KangaskhanEvosMoves
@@ -1243,7 +1246,6 @@ EeveeEvosMoves:
 	db EV_ITEM,THUNDER_STONE,1,JOLTEON
 	db EV_ITEM,WATER_STONE,1,VAPOREON
 	db 0
-EeveeEvosEnd:
 ;Learnset
 	db 27,QUICK_ATTACK
 	db 31,TAIL_WHIP
