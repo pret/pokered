@@ -297,7 +297,7 @@ ItemUseBall:
 	pop bc ; b = Rand1 - Status
 
 ; If Rand1 - Status > CatchRate, the ball fails to capture the Pokémon.
-	ld a, [wEnemyMonCatchRate]
+	ld a, [wEnemyMonActualCatchRate]
 	cp b
 	jr c, .failedToCapture
 
@@ -325,7 +325,7 @@ ItemUseBall:
 	xor a
 	ld [H_MULTIPLICAND], a
 	ld [H_MULTIPLICAND + 1], a
-	ld a, [wEnemyMonCatchRate]
+	ld a, [wEnemyMonActualCatchRate]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, 100
 	ld [H_MULTIPLIER], a
@@ -1434,7 +1434,7 @@ VitaminText:
 ItemUseBait:
 	ld hl, ThrewBaitText
 	call PrintText
-	ld hl, wEnemyMonCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a, BAIT_ANIM
 	ld hl, wSafariBaitFactor ; bait factor
@@ -1444,7 +1444,7 @@ ItemUseBait:
 ItemUseRock:
 	ld hl, ThrewRockText
 	call PrintText
-	ld hl, wEnemyMonCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate ; catch rate
 	ld a, [hl]
 	add a ; double catch rate
 	jr nc, .noCarry

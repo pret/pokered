@@ -41,6 +41,7 @@ ENDM
 battle_struct: MACRO
 \1Species::    db
 \1HP::         dw
+\1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
@@ -1590,40 +1591,10 @@ wBattleMonSpecies2:: ; cfd9
 
 wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
-wEnemyMon:: ; cfe5
-; The wEnemyMon struct reaches past 0xcfff,
-; the end of wram bank 0 on cgb.
-; This has no significance on dmg, where wram
-; isn't banked (c000-dfff is contiguous).
-; However, recent versions of rgbds have replaced
-; dmg-style wram with cgb wram banks.
-
-; Until this is fixed, this struct will have
-; to be declared manually.
-
-wEnemyMonSpecies::   db
-wEnemyMonHP::        dw
-wEnemyMonPartyPos::
-wEnemyMonBoxLevel::  db
-wEnemyMonStatus::    db
-wEnemyMonType::
-wEnemyMonType1::     db
-wEnemyMonType2::     db
-wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds NUM_MOVES
-wEnemyMonDVs::       ds 2
-wEnemyMonLevel::     db
-wEnemyMonMaxHP::     dw
-wEnemyMonAttack::    dw
-wEnemyMonDefense::   dw
-wEnemyMonSpeed::     dw
-wEnemyMonSpecial::   dw
-wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
-SECTION "WRAM Bank 1", WRAMX, BANK[1]
-                     ds 2 ; NUM_MOVES - 2
+wEnemyMon:: battle_struct wEnemyMon ; cfe5
 
 wEnemyMonBaseStats:: ds 5
-wEnemyMonCatchRate:: ds 1
+wEnemyMonActualCatchRate:: ds 1
 wEnemyMonBaseExp:: ds 1
 
 wBattleMonNick:: ds NAME_LENGTH ; d009
@@ -3233,7 +3204,7 @@ wBoxMonNicksEnd:: ; dee2
 wBoxDataEnd::
 
 
-SECTION "Stack", WRAMX[$df00], BANK[1]
+SECTION "Stack", WRAM0[$df00]
 	ds $ff
 wStack:: ; dfff
 
