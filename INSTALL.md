@@ -1,12 +1,8 @@
 # Linux
 
-	sudo apt-get install make git gcc
+Install [**RGBDS**](https://github.com/rednex/rgbds/blob/master/README.rst#1-installing-rgbds)
 
-	sudo apt-get install byacc flex pkg-config libpng-dev
-	git clone https://github.com/rednex/rgbds
-	cd rgbds
-	sudo make install
-	cd ..
+Then in a terminal, run:
 
 	git clone https://github.com/pret/pokered
 	cd pokered
