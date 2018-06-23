@@ -1,3 +1,10 @@
+; monochrome palette color ids
+	const_def
+	const WHITE
+	const LIGHT_GRAY
+	const DARK_GRAY
+	const BLACK
+
 SET_PAL_BATTLE_BLACK         EQU $00
 SET_PAL_BATTLE               EQU $01
 SET_PAL_TOWN_MAP             EQU $02
