@@ -1,12 +1,14 @@
-MOVE_GENGAR_RIGHT   EQU 0
-MOVE_GENGAR_LEFT    EQU 1
-MOVE_NIDORINO_RIGHT EQU -1
+const_value = -1
+	const MOVE_NIDORINO_RIGHT
+	const MOVE_GENGAR_RIGHT
+	const MOVE_GENGAR_LEFT
 
-ANIMATION_END       EQU 80
+ANIMATION_END EQU 80
 
-GENGAR_INTRO_TILES1 EQU 3
-GENGAR_INTRO_TILES2 EQU 4
-GENGAR_INTRO_TILES3 EQU 5
+const_value = 3
+	const GENGAR_INTRO_TILES1
+	const GENGAR_INTRO_TILES2
+	const GENGAR_INTRO_TILES3
 
 PlayIntro:
 	xor a
@@ -237,11 +239,10 @@ IntroPlaceBlackTiles:
 
 IntroMoveMon:
 ; d = number of times to move the mon (2 pixels each time)
-; e: 0 = move Gengar right, 1 = move Gengar left, -1 = move Nidorino right
 	ld a, e
-	cp -1
+	cp MOVE_NIDORINO_RIGHT
 	jr z, .moveNidorinoRight
-	cp 1
+	cp MOVE_GENGAR_LEFT
 	jr z, .moveGengarLeft
 ; move Gengar right
 	ld a, [hSCX]
