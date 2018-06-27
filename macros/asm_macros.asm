@@ -186,3 +186,7 @@ tx_pre_jump: MACRO
 	tx_pre_id \1
 	jp PrintPredefTextID
 ENDM
+
+ldPal: MACRO
+	ld \1, \2 << 6 | \3 << 4 | \4 << 2 | \5
+ENDM
