@@ -1,6 +1,6 @@
 
 lb: MACRO ; r, hi, lo
-	ld \1, (\2) << 8 + ((\3) & $ff)
+	ld \1, ((\2) & $ff) << 8 + ((\3) & $ff)
 ENDM
 
 homecall: MACRO
