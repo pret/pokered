@@ -1256,4 +1256,4 @@ MissingNoDexEntry:
 	db "???@"
 	db 10 ; 1.0 m
 	db 100 ; 10.0 kg
-	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
+	text "コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
