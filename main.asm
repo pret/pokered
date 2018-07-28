@@ -275,6 +275,7 @@ INCLUDE "data/mapObjects/viridiancity.asm"
 ViridianCityBlocks: INCBIN "maps/viridiancity.blk"
 
 INCLUDE "data/mapHeaders/pewtercity.asm"
+	db $0
 INCLUDE "data/mapObjects/pewtercity.asm"
 PewterCityBlocks: INCBIN "maps/pewtercity.blk"
 

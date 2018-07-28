@@ -1,5 +1,5 @@
 Route2_h:
-	db 00 ; tileset
+	db OVERWORLD ; tileset
 	db ROUTE_2_HEIGHT, ROUTE_2_WIDTH ; dimensions (y, x)
 	dw Route2Blocks, Route2TextPointers, Route2Script ; blocks, texts, scripts
 	db NORTH | SOUTH ; connections
