@@ -4,5 +4,3 @@ ViridianHouse_h:
 	dw ViridianHouseBlocks, ViridianHouseTextPointers, ViridianHouseScript ; blocks, texts, scripts
 	db 0 ; connections
 	dw ViridianHouseObject ; objects
-
-	db $0

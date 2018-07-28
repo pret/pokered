@@ -395,6 +395,7 @@ INCLUDE "scripts/school.asm"
 INCLUDE "data/mapObjects/school.asm"
 
 INCLUDE "data/mapHeaders/viridianhouse.asm"
+	db $0
 INCLUDE "scripts/viridianhouse.asm"
 INCLUDE "data/mapObjects/viridianhouse.asm"
 
