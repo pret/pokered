@@ -1,173 +1,273 @@
 ROM0
-  ORG $61
-  "Home"
-  ORG $150
-  "Main"
+	org $0000
+	"rst 00"
+
+	org $0008
+	"rst 08"
+
+	org $0010
+	"rst 10"
+
+	org $0018
+	"rst 18"
+
+	org $0020
+	"rst 20"
+
+	org $0028
+	"rst 28"
+
+	org $0030
+	"rst 30"
+	
+	org $0038
+	"rst 38"
+	
+	org $0040
+	"vblank"
+	
+	org $0048
+	"hblank"
+	
+	org $0050
+	"timer"
+	
+	org $0058
+	"serial"
+	
+	org $0060
+	"joypad"
+	; $0061
+	"Home"
+
+	org $100
+	"Entry"
+	; $0104
+	"Header"
+
+	org $150
+	"Main"
 
 ROMX $1
-  "bank1"
+	org $4000
+	"bank1"
 
 ROMX $2
-  "Sound Effect Headers 1" ; AUDIO_1
-  "Music Headers 1"
-  "Sound Effects 1"
-  "Audio Engine 1"
-  "Music 1"
+	org $4000
+	"Sound Effect Headers 1" ; AUDIO_1
+	"Music Headers 1"
+	"Sound Effects 1"
+	"Audio Engine 1"
+	"Music 1"
 
 ROMX $3
-  "bank3"
+	org $4000
+	"bank3"
 
 ROMX $4
-  "NPC Sprites 1" ; NPC_SPRITES_1
-  "Graphics" ; GFX
-  "Battle (bank 4)"
+	org $4000
+	"NPC Sprites 1" ; NPC_SPRITES_1
+	"Graphics (BANK 4)" ; GFX
+	"Battle (BANK 4)"
 
 ROMX $5
-  "NPC Sprites 2" ; NPC_SPRITES_2
-  "Battle (bank 5)"
+	org $4000
+	"NPC Sprites 2" ; NPC_SPRITES_2
+	"Battle (BANK 5)"
 
 ROMX $6
-  "bank6"
+	org $4000
+	"bank6"
 
 ROMX $7
-  "bank7"
+	org $4000
+	"bank7"
 
 ROMX $8
-  "Sound Effect Headers 2" ; AUDIO_2
-  "Music Headers 2"
-  "Sound Effects 2"
-  "Audio Engine 2"
-  "Music 2"
+	org $4000
+	"Sound Effect Headers 2" ; AUDIO_2
+	"Music Headers 2"
+	"Sound Effects 2"
+	"Audio Engine 2"
+	"Music 2"
 
 ROMX $9
-  "Pics 1" ; PICS_1
-  "Battle (bank 9)"
+	org $4000
+	"Pics 1" ; PICS_1
+	"Battle (BANK 9)"
 
 ROMX $A
-  "Pics 2" ; PICS_2
-  "Battle (bank A)"
+	org $4000
+	"Pics 2" ; PICS_2
+	"Battle (BANK A)"
 
 ROMX $B
-  "Pics 3" ; PICS_3
-  "Battle (bank B)"
+	org $4000
+	"Pics 3" ; PICS_3
+	"Battle (BANK B)"
 
 ROMX $C
-  "Pics 4" ; PICS_4
-  "Battle (bank C)"
+	org $4000
+	"Pics 4" ; PICS_4
+	"Battle (BANK C)"
 
 ROMX $D
-  "Pics 5" ; PICS_5
-  "Battle (bank D)"
+	org $4000
+	"Pics 5" ; PICS_5
+	"Battle (BANK D)"
 
 ROMX $E
-  "bankE"
+	org $4000
+	"bankE"
 
 ROMX $F
-  "bankF"
+	org $4000
+	"bankF"
 
 ROMX $10
-  "bank10"
+	org $4000
+	"bank10"
 
 ROMX $11
-  "bank11"
+	org $4000
+	"bank11"
 
 ROMX $12
-  "bank12"
+	org $4000
+	"bank12"
 
 ROMX $13
-  "bank13"
+	org $4000
+	"bank13"
 
 ROMX $14
-  "bank14"
+	org $4000
+	"bank14"
 
 ROMX $15
-  "bank15"
+	org $4000
+	"bank15"
 
 ROMX $16
-  "bank16"
+	org $4000
+	"bank16"
 
 ROMX $17
-  "bank17"
+	org $4000
+	"bank17"
 
 ROMX $18
-  "bank18"
+	org $4000
+	"bank18"
 
 ROMX $19
-  "bank19"
+	org $4000
+	"bank19"
 
 ROMX $1A
-  "bank1A"
+	org $4000
+	"bank1A"
 
 ROMX $1B
-  "bank1B"
+	org $4000
+	"bank1B"
 
 ROMX $1C
-  "bank1C"
+	org $4000
+	"bank1C"
 
 ROMX $1D
-  "bank1D"
+	org $4000
+	"bank1D"
 
 ROMX $1E
-  "bank1E"
+	org $4000
+	"bank1E"
 
 ROMX $1F
-  "Sound Effect Headers 3" ; AUDIO_3
-  "Music Headers 3"
-  "Sound Effects 3"
-  "Audio Engine 3"
-  "Music 3"
+	org $4000
+	"Sound Effect Headers 3" ; AUDIO_3
+	"Music Headers 3"
+	"Sound Effects 3"
+	"Audio Engine 3"
+	"Music 3"
 
 ROMX $20
-  "Text 1" ; TEXT_1
+	org $4000
+	"Text 1" ; TEXT_1
 
 ROMX $21
-  "Text 2" ; TEXT_2
+	org $4000
+	"Text 2" ; TEXT_2
 
 ROMX $22
-  "Text 3" ; TEXT_3
+	org $4000
+	"Text 3" ; TEXT_3
 
 ROMX $23
-  "Text 4" ; TEXT_4
+	org $4000
+	"Text 4" ; TEXT_4
 
 ROMX $24
-  "Text 5" ; TEXT_5
+	org $4000
+	"Text 5" ; TEXT_5
 
 ROMX $25
-  "Text 6" ; TEXT_6
+	org $4000
+	"Text 6" ; TEXT_6
 
 ROMX $26
-  "Text 7" ; TEXT_7
+	org $4000
+	"Text 7" ; TEXT_7
 
 ROMX $27
-  "Text 8" ; TEXT_8
+	org $4000
+	"Text 8" ; TEXT_8
 
 ROMX $28
-  "Text 9" ; TEXT_9
+	org $4000
+	"Text 9" ; TEXT_9
 
 ROMX $29
-  "Text 10" ; TEXT_10
+	org $4000
+	"Text 10" ; TEXT_10
 
 ROMX $2A
-  "Text 11" ; TEXT_11
+	org $4000
+	"Text 11" ; TEXT_11
 
 ROMX $2B
-  "Pokedex Text" ; POKEDEX_TEXT
+	org $4000
+	"Pokedex Text" ; POKEDEX_TEXT
 
 ROMX $2C
-  "Move Names" ; MOVE_NAMES
+	org $4000
+	"Move Names" ; MOVE_NAMES
 
 WRAM0
-  "WRAM Bank 0"
+	org $c000
+	"WRAM Bank 0"
+
+	org $c100
+	"Sprite State Data"
+	"OAM Buffer"
+
+	org $dfff
+	"Stack"
 
 SRAM 0
-  "Sprite Buffers"
+	org $a000
+	"Sprite Buffers"
 
 SRAM 1
-  "Save Data"
+	org $a000
+	"Save Data"
 
 SRAM 2
-  "Saved Boxes 1"
+	org $a000
+	"Saved Boxes 1"
 
 SRAM 3
-  "Saved Boxes 2"
+	org $a000
+	"Saved Boxes 2"
 

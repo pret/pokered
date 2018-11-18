@@ -205,7 +205,7 @@ wTempoModifier:: ; c0f2
 	ds 13
 
 
-SECTION "Sprite State Data", WRAM0[$c100]
+SECTION "Sprite State Data", WRAM0
 
 wSpriteDataStart::
 
@@ -318,7 +318,7 @@ wSprite15StateData2::      spritestatedata2 wSprite15StateData2
 wSpriteDataEnd::
 
 
-SECTION "OAM Buffer", WRAM0[$c300]
+SECTION "OAM Buffer", WRAM0
 
 wOAMBuffer:: ; c300
 ; buffer for OAM data. Copied to OAM by DMA
@@ -3197,9 +3197,9 @@ wBoxMonNicksEnd:: ; dee2
 
 wBoxDataEnd::
 
+; dee2
 
-SECTION "Stack", WRAM0[$df00]
-	ds $ff
+SECTION "Stack", WRAM0
 wStack:: ; dfff
 
 
