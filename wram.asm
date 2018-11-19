@@ -292,7 +292,7 @@ spritestatedata2: MACRO
 \1GrassPriority:: db
 \1MovementDelay:: db
 	ds 5
-\1SpriteImageBaseOffset:: db
+\1ImageBaseOffset:: db
 	ds 1
 \1End::
 endm
