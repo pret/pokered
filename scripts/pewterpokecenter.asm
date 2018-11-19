@@ -29,7 +29,7 @@ PewterJigglypuffText:
 	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
 	call CopyData
 
-	ld a, [Sprite03SpriteImageIdx]
+	ld a, [wSprite03StateData1ImageIndex]
 	ld hl, wJigglypuffFacingDirections
 .findMatchingFacingDirectionLoop
 	cp [hl]
@@ -43,7 +43,7 @@ PewterJigglypuffText:
 	pop hl
 .loop
 	ld a, [hl]
-	ld [Sprite03SpriteImageIdx], a
+	ld [wSprite03StateData1ImageIndex], a
 
 ; rotate the array
 	push hl

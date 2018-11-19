@@ -440,7 +440,9 @@ IntroNidorinoAnimation7:
 GameFreakIntro:
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
-	ds $10 ; blank tile
+	rept 16
+	db $00 ; blank tile
+	endr
 GameFreakIntroEnd:
 
 FightIntroBackMon:
