@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
 """Supplementary scripts for graphics conversion."""
 
 import os
