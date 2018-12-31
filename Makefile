@@ -1,22 +1,34 @@
-MD5 := md5sum -c
+roms := pokered.gbc pokeblue.gbc
 
 pokered_obj := audio_red.o main_red.o text_red.o wram_red.o
 pokeblue_obj := audio_blue.o main_blue.o text_blue.o wram_blue.o
+
+
+### Build tools
+
+MD5 := md5sum -c
+
+RGBDS ?=
+RGBASM  ?= $(RGBDS)rgbasm
+RGBFIX  ?= $(RGBDS)rgbfix
+RGBGFX  ?= $(RGBDS)rgbgfx
+RGBLINK ?= $(RGBDS)rgblink
+
+
+### Build targets
 
 .SUFFIXES:
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all clean red blue compare tools tidy
-
-roms := pokered.gbc pokeblue.gbc
+.PHONY: all red blue clean tidy compare tools
 
 all: $(roms)
 red: pokered.gbc
 blue: pokeblue.gbc
 
 # For contributors to make sure a change didn't affect the contents of the rom.
-compare: red blue
+compare: $(roms)
 	@$(MD5) roms.md5
 
 clean:
@@ -43,40 +55,48 @@ endif
 
 %_red.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
 $(pokered_obj): %_red.o: %.asm $$(dep)
-	rgbasm -D _RED -h -o $@ $*.asm
+	$(RGBASM) -D _RED -h -o $@ $*.asm
 
 %_blue.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
 $(pokeblue_obj): %_blue.o: %.asm $$(dep)
-	rgbasm -D _BLUE -h -o $@ $*.asm
+	$(RGBASM) -D _BLUE -h -o $@ $*.asm
 
 pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj)
-	rgblink -d -n $*.sym -l pokered.link -o $@ $^
-	rgbfix $($*_opt) $@
+	$(RGBLINK) -d -n $*.sym -l pokered.link -o $@ $^
+	$(RGBFIX) $($*_opt) $@
 	sort $*.sym -o $*.sym
 
-gfx/blue/intro_purin_1.2bpp: rgbgfx += -h
-gfx/blue/intro_purin_2.2bpp: rgbgfx += -h
-gfx/blue/intro_purin_3.2bpp: rgbgfx += -h
-gfx/red/intro_nido_1.2bpp: rgbgfx += -h
-gfx/red/intro_nido_2.2bpp: rgbgfx += -h
-gfx/red/intro_nido_3.2bpp: rgbgfx += -h
+
+### Misc file-specific graphics rules
+
+gfx/blue/intro_purin_1.2bpp: $(RGBGFX) += -h
+gfx/blue/intro_purin_2.2bpp: $(RGBGFX) += -h
+gfx/blue/intro_purin_3.2bpp: $(RGBGFX) += -h
+gfx/red/intro_nido_1.2bpp: $(RGBGFX) += -h
+gfx/red/intro_nido_2.2bpp: $(RGBGFX) += -h
+gfx/red/intro_nido_3.2bpp: $(RGBGFX) += -h
 
 gfx/game_boy.2bpp: tools/gfx += --remove-duplicates
 gfx/theend.2bpp: tools/gfx += --interleave --png=$<
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 
+
+### Catch-all graphics rules
+
 %.png: ;
 
 %.2bpp: %.png
-	rgbgfx $(rgbgfx) -o $@ $<
+	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
+
 %.1bpp: %.png
-	rgbgfx -d1 $(rgbgfx) -o $@ $<
+	$(RGBGFX) -d1 $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+
 %.pic:  %.2bpp
 	tools/pkmncompress $< $@
