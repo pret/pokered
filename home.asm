@@ -1,4 +1,3 @@
-
 ; The rst vectors are unused.
 SECTION "rst 00", ROM0
 	rst $38
@@ -83,7 +82,6 @@ HideSprites::
 INCLUDE "home/copy.asm"
 
 
-
 SECTION "Entry", ROM0
 
 	nop
@@ -96,7 +94,6 @@ SECTION "Header", ROM0
 	; The space here is allocated to prevent code from being overwritten.
 
 	ds $150 - $104
-
 
 
 SECTION "Main", ROM0

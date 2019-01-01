@@ -1,4 +1,3 @@
-
 INCLUDE "constants.asm"
 
 
@@ -12,7 +11,6 @@ SECTION "Sound Effect Headers 3", ROMX ; BANK $1f
 INCLUDE "audio/headers/sfxheaders3.asm"
 
 
-
 SECTION "Music Headers 1", ROMX ; BANK $02
 INCLUDE "audio/headers/musicheaders1.asm"
 
@@ -21,7 +19,6 @@ INCLUDE "audio/headers/musicheaders2.asm"
 
 SECTION "Music Headers 3", ROMX ; BANK $1f
 INCLUDE "audio/headers/musicheaders3.asm"
-
 
 
 SECTION "Sound Effects 1", ROMX ; BANK $02

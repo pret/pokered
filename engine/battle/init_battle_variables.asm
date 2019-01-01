@@ -30,7 +30,7 @@ InitBattleVariables:
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	jr c, .notSafariBattle
-	cp SAFARI_ZONE_REST_HOUSE_1
+	cp SAFARI_ZONE_CENTER_REST_HOUSE
 	jr nc, .notSafariBattle
 	ld a, BATTLE_TYPE_SAFARI
 	ld [wBattleType], a
