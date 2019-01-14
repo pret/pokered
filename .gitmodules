@@ -1,3 +1,0 @@
-[submodule "extras"]
-	path = extras
-	url = git://github.com/kanzure/pokemon-reverse-engineering-tools.git
