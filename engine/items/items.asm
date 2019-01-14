@@ -166,7 +166,7 @@ ItemUseBall:
 ; If the player is fighting the ghost Marowak, set the value that indicates the
 ; Pokémon can't be caught and skip the capture calculations.
 	ld a, [wCurMap]
-	cp POKEMONTOWER_6
+	cp POKEMON_TOWER_6F
 	jr nz, .loop
 	ld a, [wEnemyMonSpecies2]
 	cp MAROWAK
@@ -1511,7 +1511,7 @@ ItemUseEscapeRope:
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a
-	ld [wSafariZoneEntranceCurScript], a
+	ld [wSafariZoneGateCurScript], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used

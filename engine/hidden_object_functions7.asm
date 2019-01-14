@@ -79,12 +79,12 @@ SafariZoneGameOver:
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
-	ld a, SAFARI_ZONE_ENTRANCE
+	ld a, SAFARI_ZONE_GATE
 	ld [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
-	ld [wSafariZoneEntranceCurScript], a
+	ld [wSafariZoneGateCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1
 	ld [wSafariZoneGameOver], a

@@ -25,15 +25,15 @@ SuperRodData:
 	dbw ROUTE_25, FishingGroup3
 	dbw CERULEAN_GYM, FishingGroup3
 	dbw VERMILION_DOCK, FishingGroup4
-	dbw SEAFOAM_ISLANDS_4, FishingGroup8
-	dbw SEAFOAM_ISLANDS_5, FishingGroup8
+	dbw SEAFOAM_ISLANDS_B3F, FishingGroup8
+	dbw SEAFOAM_ISLANDS_B4F, FishingGroup8
 	dbw SAFARI_ZONE_EAST, FishingGroup6
 	dbw SAFARI_ZONE_NORTH, FishingGroup6
 	dbw SAFARI_ZONE_WEST, FishingGroup6
 	dbw SAFARI_ZONE_CENTER, FishingGroup6
-	dbw UNKNOWN_DUNGEON_2, FishingGroup9
-	dbw UNKNOWN_DUNGEON_3, FishingGroup9
-	dbw UNKNOWN_DUNGEON_1, FishingGroup9
+	dbw CERULEAN_CAVE_2F, FishingGroup9
+	dbw CERULEAN_CAVE_B1F, FishingGroup9
+	dbw CERULEAN_CAVE_1F, FishingGroup9
 	db $FF
 
 ; fishing groups

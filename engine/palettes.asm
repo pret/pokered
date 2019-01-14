@@ -147,7 +147,7 @@ SetPal_Overworld:
 	ld a, [wCurMap]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
-	cp UNKNOWN_DUNGEON_2
+	cp CERULEAN_CAVE_2F
 	jr c, .normalDungeonOrBuilding
 	cp NAME_RATERS_HOUSE
 	jr c, .caveOrBruno
