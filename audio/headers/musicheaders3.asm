@@ -25,7 +25,7 @@ Music_GameCorner::
 Music_IntroBattle::
 	audio Music_IntroBattle, Ch0, Ch1, Ch2, Ch3
 
-; Power Plant, Unknown Dungeon, Rocket HQ
+; Power Plant, Cerulean Cave, Rocket HQ
 Music_Dungeon1::
 	audio Music_Dungeon1, Ch0, Ch1, Ch2, Ch3
 
