@@ -166,7 +166,7 @@ ItemUseBall:
 ; If the player is fighting the ghost Marowak, set the value that indicates the
 ; Pokémon can't be caught and skip the capture calculations.
 	ld a, [wCurMap]
-	cp POKEMONTOWER_6
+	cp POKEMON_TOWER_6F
 	jr nz, .loop
 	ld a, [wEnemyMonSpecies2]
 	cp MAROWAK
@@ -297,7 +297,7 @@ ItemUseBall:
 	pop bc ; b = Rand1 - Status
 
 ; If Rand1 - Status > CatchRate, the ball fails to capture the Pokémon.
-	ld a, [wEnemyMonCatchRate]
+	ld a, [wEnemyMonActualCatchRate]
 	cp b
 	jr c, .failedToCapture
 
@@ -325,7 +325,7 @@ ItemUseBall:
 	xor a
 	ld [H_MULTIPLICAND], a
 	ld [H_MULTIPLICAND + 1], a
-	ld a, [wEnemyMonCatchRate]
+	ld a, [wEnemyMonActualCatchRate]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, 100
 	ld [H_MULTIPLIER], a
@@ -1434,7 +1434,7 @@ VitaminText:
 ItemUseBait:
 	ld hl, ThrewBaitText
 	call PrintText
-	ld hl, wEnemyMonCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a, BAIT_ANIM
 	ld hl, wSafariBaitFactor ; bait factor
@@ -1444,7 +1444,7 @@ ItemUseBait:
 ItemUseRock:
 	ld hl, ThrewRockText
 	call PrintText
-	ld hl, wEnemyMonCatchRate ; catch rate
+	ld hl, wEnemyMonActualCatchRate ; catch rate
 	ld a, [hl]
 	add a ; double catch rate
 	jr nc, .noCarry
@@ -1511,7 +1511,7 @@ ItemUseEscapeRope:
 	ResetEvent EVENT_IN_SAFARI_ZONE
 	xor a
 	ld [wNumSafariBalls], a
-	ld [wSafariZoneEntranceCurScript], a
+	ld [wSafariZoneGateCurScript], a
 	inc a
 	ld [wEscapedFromBattle], a
 	ld [wActionResultOrTookBattleTurn], a ; item used

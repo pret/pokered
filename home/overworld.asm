@@ -494,7 +494,7 @@ WarpFound2::
 	ld [wUnusedD366], a ; not read
 	ld a, [hWarpDestinationMap]
 	ld [wCurMap], a
-	cp ROCK_TUNNEL_1
+	cp ROCK_TUNNEL_1F
 	jr nz, .notRockTunnel
 	ld a, $06
 	ld [wMapPalOffset], a
@@ -718,15 +718,15 @@ CheckIfInOutsideMap::
 ; sets carry if the check passes, otherwise clears carry
 ExtraWarpCheck::
 	ld a, [wCurMap]
-	cp SS_ANNE_3
+	cp SS_ANNE_3F
 	jr z, .useFunction1
-	cp ROCKET_HIDEOUT_1
+	cp ROCKET_HIDEOUT_B1F
 	jr z, .useFunction2
-	cp ROCKET_HIDEOUT_2
+	cp ROCKET_HIDEOUT_B2F
 	jr z, .useFunction2
-	cp ROCKET_HIDEOUT_4
+	cp ROCKET_HIDEOUT_B4F
 	jr z, .useFunction2
-	cp ROCK_TUNNEL_1
+	cp ROCK_TUNNEL_1F
 	jr z, .useFunction2
 	ld a, [wCurMapTileset]
 	and a ; outside tileset (OVERWORLD)

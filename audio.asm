@@ -1,8 +1,3 @@
-
-AUDIO_1 EQU $2
-AUDIO_2 EQU $8
-AUDIO_3 EQU $1f
-
 INCLUDE "constants.asm"
 INCLUDE "crysmacros.asm"
 
@@ -156,16 +151,16 @@ toggleperfectpitch: MACRO ; XXX XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	ENDM
 
 
-SECTION "Sound Effect Headers 1", ROMX, BANK[AUDIO_1]
+SECTION "Sound Effect Headers 1", ROMX ; BANK $02
 INCLUDE "audio/headers/sfxheaders1.asm"
 
-SECTION "Sound Effect Headers 2", ROMX, BANK[AUDIO_2]
+SECTION "Sound Effect Headers 2", ROMX ; BANK $08
 INCLUDE "audio/headers/sfxheaders2.asm"
 
-SECTION "Sound Effect Headers 3", ROMX, BANK[AUDIO_3]
+SECTION "Sound Effect Headers 3", ROMX ; BANK $1f
 INCLUDE "audio/headers/sfxheaders3.asm"
 
-SECTION "Sound Effects 1", ROMX, BANK[AUDIO_1]
+SECTION "Sound Effects 1", ROMX ; BANK $02
 
 SFX_02:
 INCLUDE "audio/sfx/get_item1_1.asm"
@@ -207,7 +202,7 @@ INCLUDE "audio/sfx/save_1.asm"
 INCLUDE "audio/sfx/pokeflute.asm"
 INCLUDE "audio/sfx/safari_zone_pa.asm"
 
-SECTION "Sound Effects 2", ROMX, BANK[AUDIO_2]
+SECTION "Sound Effects 2", ROMX ; BANK $08
 
 SFX_08:
 INCLUDE "audio/sfx/level_up.asm"
@@ -267,7 +262,7 @@ INCLUDE "audio/sfx/battle_35.asm"
 INCLUDE "audio/sfx/battle_36.asm"
 INCLUDE "audio/sfx/silph_scope.asm"
 
-SECTION "Sound Effects 3", ROMX, BANK[AUDIO_3]
+SECTION "Sound Effects 3", ROMX ; BANK $1f
 
 SFX_1F:
 INCLUDE "audio/sfx/intro_lunge.asm"
@@ -407,7 +402,7 @@ OwnedMonValues:
 
 ; crystal:
     
-SECTION "Audio Engine 1", ROMX, BANK[AUDIO_1]
+SECTION "Audio Engine 1", ROMX
 
 
 INCLUDE "crysaudio/engine.asm"

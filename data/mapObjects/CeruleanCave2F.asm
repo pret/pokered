@@ -1,0 +1,25 @@
+CeruleanCave2F_Object:
+	db $7d ; border block
+
+	db 6 ; warps
+	warp 29, 1, 2, CERULEAN_CAVE_1F
+	warp 22, 6, 3, CERULEAN_CAVE_1F
+	warp 19, 7, 4, CERULEAN_CAVE_1F
+	warp 9, 1, 5, CERULEAN_CAVE_1F
+	warp 1, 3, 6, CERULEAN_CAVE_1F
+	warp 3, 11, 7, CERULEAN_CAVE_1F
+
+	db 0 ; signs
+
+	db 3 ; objects
+	object SPRITE_BALL, 29, 9, STAY, NONE, 1, PP_UP
+	object SPRITE_BALL, 4, 15, STAY, NONE, 2, ULTRA_BALL
+	object SPRITE_BALL, 13, 6, STAY, NONE, 3, FULL_RESTORE
+
+	; warp-to
+	warp_to 29, 1, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F
+	warp_to 22, 6, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F
+	warp_to 19, 7, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F
+	warp_to 9, 1, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F
+	warp_to 1, 3, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F
+	warp_to 3, 11, CERULEAN_CAVE_2F_WIDTH ; CERULEAN_CAVE_1F

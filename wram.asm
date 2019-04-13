@@ -1,4 +1,3 @@
-
 INCLUDE "constants.asm"
 
 flag_array: MACRO
@@ -41,6 +40,7 @@ ENDM
 battle_struct: MACRO
 \1Species::    db
 \1HP::         dw
+\1PartyPos::
 \1BoxLevel::   db
 \1Status::     db
 \1Type::
@@ -206,7 +206,7 @@ wTempoModifier:: ; c0f2
 wHaltAudio:: ds 1
 wSFXDontWait:: ds 1
 
-SECTION "Sprite State Data", WRAM0[$c100]
+SECTION "Sprite State Data", WRAM0
 
 wSpriteDataStart::
 
@@ -231,10 +231,9 @@ wSpriteStateData1:: ; c100
 ; C1xE
 ; C1xF
 spritestatedata1: MACRO
-\1SpriteStateData1::
 \1PictureID:: db
 \1MovementStatus:: db
-\1SpriteImageIdx:: db
+\1ImageIndex:: db
 \1YStepVector:: db
 \1YPixels:: db
 \1XStepVector:: db
@@ -243,29 +242,25 @@ spritestatedata1: MACRO
 \1AnimFrameCounter:: db
 \1FacingDirection:: db
 	ds 6
-\1SpriteStateData1End::
+\1End::
 endm
 
-	spritestatedata1 Player
-	spritestatedata1 Sprite01
-	spritestatedata1 Sprite02
-	spritestatedata1 Sprite03
-	spritestatedata1 Sprite04
-	spritestatedata1 Sprite05
-	spritestatedata1 Sprite06
-	spritestatedata1 Sprite07
-	spritestatedata1 Sprite08
-	spritestatedata1 Sprite09
-	spritestatedata1 Sprite10
-	spritestatedata1 Sprite11
-	spritestatedata1 Sprite12
-	spritestatedata1 Sprite13
-	spritestatedata1 Sprite14
-	spritestatedata1 Sprite15
-	; ds $10 * $10
-
-
-;SECTION "Sprite State Data 2", WRAM0[$c200]
+wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1
+wSprite01StateData1::      spritestatedata1 wSprite01StateData1
+wSprite02StateData1::      spritestatedata1 wSprite02StateData1
+wSprite03StateData1::      spritestatedata1 wSprite03StateData1
+wSprite04StateData1::      spritestatedata1 wSprite04StateData1
+wSprite05StateData1::      spritestatedata1 wSprite05StateData1
+wSprite06StateData1::      spritestatedata1 wSprite06StateData1
+wSprite07StateData1::      spritestatedata1 wSprite07StateData1
+wSprite08StateData1::      spritestatedata1 wSprite08StateData1
+wSprite09StateData1::      spritestatedata1 wSprite09StateData1
+wSprite10StateData1::      spritestatedata1 wSprite10StateData1
+wSprite11StateData1::      spritestatedata1 wSprite11StateData1
+wSprite12StateData1::      spritestatedata1 wSprite12StateData1
+wSprite13StateData1::      spritestatedata1 wSprite13StateData1
+wSprite14StateData1::      spritestatedata1 wSprite14StateData1
+wSprite15StateData1::      spritestatedata1 wSprite15StateData1
 
 wSpriteStateData2:: ; c200
 ; more data for all sprites on the current map
@@ -288,7 +283,6 @@ wSpriteStateData2:: ; c200
 ; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
 ; C2xF
 spritestatedata2: MACRO
-\1SpriteStateData2::
 \1WalkAnimationCounter:: db
 	ds 1
 \1YDisplacement:: db
@@ -299,33 +293,33 @@ spritestatedata2: MACRO
 \1GrassPriority:: db
 \1MovementDelay:: db
 	ds 5
-\1SpriteImageBaseOffset:: db
+\1ImageBaseOffset:: db
 	ds 1
-\1SpriteStateData2End::
+\1End::
 endm
 
-	spritestatedata2 Player
-	spritestatedata2 Sprite01
-	spritestatedata2 Sprite02
-	spritestatedata2 Sprite03
-	spritestatedata2 Sprite04
-	spritestatedata2 Sprite05
-	spritestatedata2 Sprite06
-	spritestatedata2 Sprite07
-	spritestatedata2 Sprite08
-	spritestatedata2 Sprite09
-	spritestatedata2 Sprite10
-	spritestatedata2 Sprite11
-	spritestatedata2 Sprite12
-	spritestatedata2 Sprite13
-	spritestatedata2 Sprite14
-	spritestatedata2 Sprite15
-	; ds $10 * $10
+wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2
+wSprite01StateData2::      spritestatedata2 wSprite01StateData2
+wSprite02StateData2::      spritestatedata2 wSprite02StateData2
+wSprite03StateData2::      spritestatedata2 wSprite03StateData2
+wSprite04StateData2::      spritestatedata2 wSprite04StateData2
+wSprite05StateData2::      spritestatedata2 wSprite05StateData2
+wSprite06StateData2::      spritestatedata2 wSprite06StateData2
+wSprite07StateData2::      spritestatedata2 wSprite07StateData2
+wSprite08StateData2::      spritestatedata2 wSprite08StateData2
+wSprite09StateData2::      spritestatedata2 wSprite09StateData2
+wSprite10StateData2::      spritestatedata2 wSprite10StateData2
+wSprite11StateData2::      spritestatedata2 wSprite11StateData2
+wSprite12StateData2::      spritestatedata2 wSprite12StateData2
+wSprite13StateData2::      spritestatedata2 wSprite13StateData2
+wSprite14StateData2::      spritestatedata2 wSprite14StateData2
+wSprite15StateData2::      spritestatedata2 wSprite15StateData2
+
 
 wSpriteDataEnd::
 
 
-SECTION "OAM Buffer", WRAM0[$c300]
+SECTION "OAM Buffer", WRAM0
 
 wOAMBuffer:: ; c300
 ; buffer for OAM data. Copied to OAM by DMA
@@ -1239,6 +1233,8 @@ wNumMovesMinusOne:: ; cd6c
 ; FormatMovesString stores the number of moves minus one here
 	ds 1
 
+UNION
+
 wcd6d:: ds 4 ; buffer for various data
 
 wStatusScreenCurrentPP:: ; cd71
@@ -1250,6 +1246,13 @@ wStatusScreenCurrentPP:: ; cd71
 wNormalMaxPPList:: ; cd78
 ; list of normal max PP (without PP up) values
 	ds 9
+
+NEXTU
+
+wEvosMoves:: ds MAX_EVOLUTIONS * EVOLUTION_SIZE + 1
+.end::
+
+ENDU
 
 wSerialOtherGameboyRandomNumberListBlock:: ; cd81
 ; buffer for transferring the random number list generated by the other gameboy
@@ -1583,40 +1586,10 @@ wBattleMonSpecies2:: ; cfd9
 
 wEnemyMonNick:: ds NAME_LENGTH ; cfda
 
-wEnemyMon:: ; cfe5
-; The wEnemyMon struct reaches past 0xcfff,
-; the end of wram bank 0 on cgb.
-; This has no significance on dmg, where wram
-; isn't banked (c000-dfff is contiguous).
-; However, recent versions of rgbds have replaced
-; dmg-style wram with cgb wram banks.
-
-; Until this is fixed, this struct will have
-; to be declared manually.
-
-wEnemyMonSpecies::   db
-wEnemyMonHP::        dw
-wEnemyMonPartyPos::
-wEnemyMonBoxLevel::  db
-wEnemyMonStatus::    db
-wEnemyMonType::
-wEnemyMonType1::     db
-wEnemyMonType2::     db
-wEnemyMonCatchRate_NotReferenced:: db
-wEnemyMonMoves::     ds NUM_MOVES
-wEnemyMonDVs::       ds 2
-wEnemyMonLevel::     db
-wEnemyMonMaxHP::     dw
-wEnemyMonAttack::    dw
-wEnemyMonDefense::   dw
-wEnemyMonSpeed::     dw
-wEnemyMonSpecial::   dw
-wEnemyMonPP::        ds 2 ; NUM_MOVES - 2
-SECTION "WRAM Bank 1", WRAMX, BANK[1]
-                     ds 2 ; NUM_MOVES - 2
+wEnemyMon:: battle_struct wEnemyMon ; cfe5
 
 wEnemyMonBaseStats:: ds 5
-wEnemyMonCatchRate:: ds 1
+wEnemyMonActualCatchRate:: ds 1
 wEnemyMonBaseExp:: ds 1
 
 wBattleMonNick:: ds NAME_LENGTH ; d009
@@ -2700,8 +2673,6 @@ wMissableObjectList:: ; d5ce
 
 wGameProgressFlags:: ; d5f0
 ; $c8 bytes
-	ds 0
-
 wOaksLabCurScript:: ; d5f0
 	ds 1
 wPalletTownCurScript:: ; d5f1
@@ -2741,31 +2712,31 @@ wRoute9CurScript:: ; d604
 	ds 1
 wRoute10CurScript:: ; d605
 	ds 1
-wMtMoon1CurScript:: ; d606
+wMtMoon1FCurScript:: ; d606
 	ds 1
-wMtMoon3CurScript:: ; d607
+wMtMoonB2FCurScript:: ; d607
 	ds 1
-wSSAnne8CurScript:: ; d608
+wSSAnne1FRoomsCurScript:: ; d608
 	ds 1
-wSSAnne9CurScript:: ; d609
+wSSAnne2FRoomsCurScript:: ; d609
 	ds 1
 wRoute22CurScript:: ; d60a
 	ds 1
 	ds 1
-wRedsHouse2CurScript:: ; d60c
+wRedsHouse2FCurScript:: ; d60c
 	ds 1
-wViridianMarketCurScript:: ; d60d
+wViridianMartCurScript:: ; d60d
 	ds 1
 wRoute22GateCurScript:: ; d60e
 	ds 1
 wCeruleanCityCurScript:: ; d60f
 	ds 1
 	ds 7
-wSSAnne5CurScript:: ; d617
+wSSAnneBowCurScript:: ; d617
 	ds 1
 wViridianForestCurScript:: ; d618
 	ds 1
-wMuseum1fCurScript:: ; d619
+wMuseum1FCurScript:: ; d619
 	ds 1
 wRoute13CurScript:: ; d61a
 	ds 1
@@ -2777,11 +2748,11 @@ wRoute19CurScript:: ; d61d
 	ds 1
 wRoute21CurScript:: ; d61e
 	ds 1
-wSafariZoneEntranceCurScript:: ; d61f
+wSafariZoneGateCurScript:: ; d61f
 	ds 1
-wRockTunnel2CurScript:: ; d620
+wRockTunnelB1FCurScript:: ; d620
 	ds 1
-wRockTunnel1CurScript:: ; d621
+wRockTunnel1FCurScript:: ; d621
 	ds 1
 	ds 1
 wRoute11CurScript:: ; d623
@@ -2796,29 +2767,29 @@ wRoute18CurScript:: ; d627
 	ds 1
 wRoute20CurScript:: ; d628
 	ds 1
-wSSAnne10CurScript:: ; d629
+wSSAnneB1FRoomsCurScript:: ; d629
 	ds 1
 wVermilionCityCurScript:: ; d62a
 	ds 1
-wPokemonTower2CurScript:: ; d62b
+wPokemonTower2FCurScript:: ; d62b
 	ds 1
-wPokemonTower3CurScript:: ; d62c
+wPokemonTower3FCurScript:: ; d62c
 	ds 1
-wPokemonTower4CurScript:: ; d62d
+wPokemonTower4FCurScript:: ; d62d
 	ds 1
-wPokemonTower5CurScript:: ; d62e
+wPokemonTower5FCurScript:: ; d62e
 	ds 1
-wPokemonTower6CurScript:: ; d62f
+wPokemonTower6FCurScript:: ; d62f
 	ds 1
-wPokemonTower7CurScript:: ; d630
+wPokemonTower7FCurScript:: ; d630
 	ds 1
-wRocketHideout1CurScript:: ; d631
+wRocketHideoutB1FCurScript:: ; d631
 	ds 1
-wRocketHideout2CurScript:: ; d632
+wRocketHideoutB2FCurScript:: ; d632
 	ds 1
-wRocketHideout3CurScript:: ; d633
+wRocketHideoutB3FCurScript:: ; d633
 	ds 1
-wRocketHideout4CurScript:: ; d634
+wRocketHideoutB4FCurScript:: ; d634
 	ds 2
 wRoute6GateCurScript:: ; d636
 	ds 1
@@ -2826,57 +2797,57 @@ wRoute8GateCurScript:: ; d637
 	ds 2
 wCinnabarIslandCurScript:: ; d639
 	ds 1
-wMansion1CurScript:: ; d63a
+wPokemonMansion1FCurScript:: ; d63a
 	ds 2
-wMansion2CurScript:: ; d63c
+wPokemonMansion2FCurScript:: ; d63c
 	ds 1
-wMansion3CurScript:: ; d63d
+wPokemonMansion3FCurScript:: ; d63d
 	ds 1
-wMansion4CurScript:: ; d63e
+wPokemonMansionB1FCurScript:: ; d63e
 	ds 1
-wVictoryRoad2CurScript:: ; d63f
+wVictoryRoad2FCurScript:: ; d63f
 	ds 1
-wVictoryRoad3CurScript:: ; d640
+wVictoryRoad3FCurScript:: ; d640
 	ds 2
 wFightingDojoCurScript:: ; d642
 	ds 1
-wSilphCo2CurScript:: ; d643
+wSilphCo2FCurScript:: ; d643
 	ds 1
-wSilphCo3CurScript:: ; d644
+wSilphCo3FCurScript:: ; d644
 	ds 1
-wSilphCo4CurScript:: ; d645
+wSilphCo4FCurScript:: ; d645
 	ds 1
-wSilphCo5CurScript:: ; d646
+wSilphCo5FCurScript:: ; d646
 	ds 1
-wSilphCo6CurScript:: ; d647
+wSilphCo6FCurScript:: ; d647
 	ds 1
-wSilphCo7CurScript:: ; d648
+wSilphCo7FCurScript:: ; d648
 	ds 1
-wSilphCo8CurScript:: ; d649
+wSilphCo8FCurScript:: ; d649
 	ds 1
-wSilphCo9CurScript:: ; d64a
+wSilphCo9FCurScript:: ; d64a
 	ds 1
-wHallOfFameRoomCurScript:: ; d64b
+wHallOfFameCurScript:: ; d64b
 	ds 1
-wGaryCurScript:: ; d64c
+wChampionsRoomCurScript:: ; d64c
 	ds 1
-wLoreleiCurScript:: ; d64d
+wLoreleisRoomCurScript:: ; d64d
 	ds 1
-wBrunoCurScript:: ; d64e
+wBrunosRoomCurScript:: ; d64e
 	ds 1
-wAgathaCurScript:: ; d64f
+wAgathasRoomCurScript:: ; d64f
 	ds 1
-wUnknownDungeon3CurScript:: ; d650
+wCeruleanCaveB1FCurScript:: ; d650
 	ds 1
-wVictoryRoad1CurScript:: ; d651
+wVictoryRoad1FCurScript:: ; d651
 	ds 1
 	ds 1
-wLanceCurScript:: ; d653
+wLancesRoomCurScript:: ; d653
 	ds 1
 	ds 4
-wSilphCo10CurScript:: ; d658
+wSilphCo10FCurScript:: ; d658
 	ds 1
-wSilphCo11CurScript:: ; d659
+wSilphCo11FCurScript:: ; d659
 	ds 1
 	ds 1
 wFuchsiaGymCurScript:: ; d65b
@@ -2886,30 +2857,28 @@ wSaffronGymCurScript:: ; d65c
 	ds 1
 wCinnabarGymCurScript:: ; d65e
 	ds 1
-wCeladonGameCornerCurScript:: ; d65f
+wGameCornerCurScript:: ; d65f
 	ds 1
-wRoute16GateCurScript:: ; d660
+wRoute16Gate1FCurScript:: ; d660
 	ds 1
 wBillsHouseCurScript:: ; d661
 	ds 1
 wRoute5GateCurScript:: ; d662
 	ds 1
 wPowerPlantCurScript:: ; d663
-; overload
-	ds 0
 wRoute7GateCurScript:: ; d663
 ; overload
 	ds 1
 	ds 1
-wSSAnne2CurScript:: ; d665
+wSSAnne2FCurScript:: ; d665
 	ds 1
-wSeafoamIslands4CurScript:: ; d666
+wSeafoamIslandsB3FCurScript:: ; d666
 	ds 1
 wRoute23CurScript:: ; d667
 	ds 1
-wSeafoamIslands5CurScript:: ; d668
+wSeafoamIslandsB4FCurScript:: ; d668
 	ds 1
-wRoute18GateCurScript:: ; d669
+wRoute18Gate1FCurScript:: ; d669
 	ds 1
 
 	ds 78
@@ -3225,9 +3194,9 @@ wBoxMonNicksEnd:: ; dee2
 
 wBoxDataEnd::
 
+; dee2
 
-SECTION "Stack", WRAMX[$df00], BANK[1]
-	ds $ff
+SECTION "Stack", WRAM0
 wStack:: ; dfff
 
 
