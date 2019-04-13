@@ -1,14 +1,14 @@
 UndergroundPathNSObject:
 	db $1 ; border block
 
-	db $2 ; warps
-	db $4, $5, $2, PATH_ENTRANCE_ROUTE_5
-	db $29, $2, $2, PATH_ENTRANCE_ROUTE_6
+	db 2 ; warps
+	warp 5, 4, 2, PATH_ENTRANCE_ROUTE_5
+	warp 2, 41, 2, PATH_ENTRANCE_ROUTE_6
 
-	db $0 ; signs
+	db 0 ; signs
 
-	db $0 ; objects
+	db 0 ; objects
 
 	; warp-to
-	EVENT_DISP UNDERGROUND_PATH_NS_WIDTH, $4, $5 ; PATH_ENTRANCE_ROUTE_5
-	EVENT_DISP UNDERGROUND_PATH_NS_WIDTH, $29, $2 ; PATH_ENTRANCE_ROUTE_6
+	warp_to 5, 4, UNDERGROUND_PATH_NS_WIDTH ; PATH_ENTRANCE_ROUTE_5
+	warp_to 2, 41, UNDERGROUND_PATH_NS_WIDTH ; PATH_ENTRANCE_ROUTE_6

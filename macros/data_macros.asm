@@ -118,6 +118,28 @@ object: MACRO
 	ENDC
 ENDM
 
+;\1 x position
+;\2 y position
+;\3 destination warp id
+;\4 destination map (-1 = wLastMap)
+warp: MACRO
+	db \2, \1, \3, \4
+ENDM
+
+;\1 x position
+;\2 y position
+;\3 sign id
+sign: MACRO
+	db \2, \1, \3
+ENDM
+
+;\1 x position
+;\2 y position
+;\3 map width
+warp_to: MACRO
+	EVENT_DISP \3, \2, \1
+ENDM
+
 ;\1 (byte) = current map id
 ;\2 (byte) = connected map id
 ;\3 (byte) = x movement of connection strip
@@ -146,7 +168,7 @@ ENDM
 ;\6 (flag) = add 3 to width of connection strip (why?)
 SOUTH_MAP_CONNECTION: MACRO
 	db \2 ; map id
-	dw \5 + \4 ; "Conection Strip" location
+	dw \5 + \4 ; "Connection Strip" location
 	dw wOverworldMap + 3 + (\1_HEIGHT + 3) * (\1_WIDTH + 6) + \3 ; current map position
 	IF (\1_WIDTH < \2_WIDTH)
 		IF (_NARG > 5)

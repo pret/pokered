@@ -1,47 +1,47 @@
 CeruleanCityObject:
 	db $f ; border block
 
-	db $a ; warps
-	db $b, $1b, $0, TRASHED_HOUSE
-	db $f, $d, $0, CERULEAN_HOUSE_1
-	db $11, $13, $0, CERULEAN_POKECENTER
-	db $13, $1e, $0, CERULEAN_GYM
-	db $19, $d, $0, BIKE_SHOP
-	db $19, $19, $0, CERULEAN_MART
-	db $b, $4, $0, UNKNOWN_DUNGEON_1
-	db $9, $1b, $2, TRASHED_HOUSE
-	db $b, $9, $1, CERULEAN_HOUSE_2
-	db $9, $9, $0, CERULEAN_HOUSE_2
+	db 10 ; warps
+	warp 27, 11, 0, TRASHED_HOUSE
+	warp 13, 15, 0, CERULEAN_HOUSE_1
+	warp 19, 17, 0, CERULEAN_POKECENTER
+	warp 30, 19, 0, CERULEAN_GYM
+	warp 13, 25, 0, BIKE_SHOP
+	warp 25, 25, 0, CERULEAN_MART
+	warp 4, 11, 0, UNKNOWN_DUNGEON_1
+	warp 27, 9, 2, TRASHED_HOUSE
+	warp 9, 11, 1, CERULEAN_HOUSE_2
+	warp 9, 9, 0, CERULEAN_HOUSE_2
 
-	db $6 ; signs
-	db $13, $17, $c ; CeruleanCityText12
-	db $1d, $11, $d ; CeruleanCityText13
-	db $19, $1a, $e ; MartSignText
-	db $11, $14, $f ; PokeCenterSignText
-	db $19, $b, $10 ; CeruleanCityText16
-	db $15, $1b, $11 ; CeruleanCityText17
+	db 6 ; signs
+	sign 23, 19, 12 ; CeruleanCityText12
+	sign 17, 29, 13 ; CeruleanCityText13
+	sign 26, 25, 14 ; MartSignText
+	sign 20, 17, 15 ; PokeCenterSignText
+	sign 11, 25, 16 ; CeruleanCityText16
+	sign 27, 21, 17 ; CeruleanCityText17
 
-	db $b ; objects
-	object SPRITE_BLUE, $14, $2, STAY, DOWN, $1 ; person
-	object SPRITE_ROCKET, $1e, $8, STAY, NONE, $2, OPP_ROCKET, $5
-	object SPRITE_BLACK_HAIR_BOY_1, $1f, $14, STAY, DOWN, $3 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, $f, $12, WALK, $1, $4 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, $9, $15, WALK, $2, $5 ; person
-	object SPRITE_GUARD, $1c, $c, STAY, DOWN, $6 ; person
-	object SPRITE_LASS, $1d, $1a, STAY, LEFT, $7 ; person
-	object SPRITE_SLOWBRO, $1c, $1a, STAY, DOWN, $8 ; person
-	object SPRITE_LASS, $9, $1b, WALK, $2, $9 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, $4, $c, STAY, DOWN, $a ; person
-	object SPRITE_GUARD, $1b, $c, STAY, DOWN, $b ; person
+	db 11 ; objects
+	object SPRITE_BLUE, 20, 2, STAY, DOWN, 1 ; person
+	object SPRITE_ROCKET, 30, 8, STAY, NONE, 2, OPP_ROCKET, 5
+	object SPRITE_BLACK_HAIR_BOY_1, 31, 20, STAY, DOWN, 3 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, 15, 18, WALK, 1, 4 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, 9, 21, WALK, 2, 5 ; person
+	object SPRITE_GUARD, 28, 12, STAY, DOWN, 6 ; person
+	object SPRITE_LASS, 29, 26, STAY, LEFT, 7 ; person
+	object SPRITE_SLOWBRO, 28, 26, STAY, DOWN, 8 ; person
+	object SPRITE_LASS, 9, 27, WALK, 2, 9 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, 4, 12, STAY, DOWN, 10 ; person
+	object SPRITE_GUARD, 27, 12, STAY, DOWN, 11 ; person
 
 	; warp-to
-	EVENT_DISP CERULEAN_CITY_WIDTH, $b, $1b ; TRASHED_HOUSE
-	EVENT_DISP CERULEAN_CITY_WIDTH, $f, $d ; CERULEAN_HOUSE_1
-	EVENT_DISP CERULEAN_CITY_WIDTH, $11, $13 ; CERULEAN_POKECENTER
-	EVENT_DISP CERULEAN_CITY_WIDTH, $13, $1e ; CERULEAN_GYM
-	EVENT_DISP CERULEAN_CITY_WIDTH, $19, $d ; BIKE_SHOP
-	EVENT_DISP CERULEAN_CITY_WIDTH, $19, $19 ; CERULEAN_MART
-	EVENT_DISP CERULEAN_CITY_WIDTH, $b, $4 ; UNKNOWN_DUNGEON_1
-	EVENT_DISP CERULEAN_CITY_WIDTH, $9, $1b ; TRASHED_HOUSE
-	EVENT_DISP CERULEAN_CITY_WIDTH, $b, $9 ; CERULEAN_HOUSE_2
-	EVENT_DISP CERULEAN_CITY_WIDTH, $9, $9 ; CERULEAN_HOUSE_2
+	warp_to 27, 11, CERULEAN_CITY_WIDTH ; TRASHED_HOUSE
+	warp_to 13, 15, CERULEAN_CITY_WIDTH ; CERULEAN_HOUSE_1
+	warp_to 19, 17, CERULEAN_CITY_WIDTH ; CERULEAN_POKECENTER
+	warp_to 30, 19, CERULEAN_CITY_WIDTH ; CERULEAN_GYM
+	warp_to 13, 25, CERULEAN_CITY_WIDTH ; BIKE_SHOP
+	warp_to 25, 25, CERULEAN_CITY_WIDTH ; CERULEAN_MART
+	warp_to 4, 11, CERULEAN_CITY_WIDTH ; UNKNOWN_DUNGEON_1
+	warp_to 27, 9, CERULEAN_CITY_WIDTH ; TRASHED_HOUSE
+	warp_to 9, 11, CERULEAN_CITY_WIDTH ; CERULEAN_HOUSE_2
+	warp_to 9, 9, CERULEAN_CITY_WIDTH ; CERULEAN_HOUSE_2

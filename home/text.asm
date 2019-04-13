@@ -18,7 +18,7 @@ TextBoxBorder::
 .next
 	push hl
 	ld a, "│"
-	ld [hli],a
+	ld [hli], a
 	ld a, " "
 	call NPlaceChar
 	ld [hl], "│"
@@ -49,12 +49,12 @@ NPlaceChar::
 PlaceString::
 	push hl
 PlaceNextChar::
-	ld a,[de]
+	ld a, [de]
 
 	cp "@"
 	jr nz, Char4ETest
-	ld b,h
-	ld c,l
+	ld b, h
+	ld c, l
 	pop hl
 	ret
 
@@ -62,19 +62,19 @@ Char4ETest::
 	cp $4E ; next
 	jr nz, .char4FTest
 	ld bc, 2 * SCREEN_WIDTH
-	ld a,[hFlags_0xFFF6]
-	bit 2,a
-	jr z,.ok
-	ld bc,SCREEN_WIDTH
+	ld a, [hFlags_0xFFF6]
+	bit 2, a
+	jr z, .ok
+	ld bc, SCREEN_WIDTH
 .ok
 	pop hl
-	add hl,bc
+	add hl, bc
 	push hl
 	jp PlaceNextChar_inc
 
 .char4FTest
 	cp $4F ; line
-	jr nz,.next3
+	jr nz, .next3
 	pop hl
 	coord hl, 1, 16
 	push hl
@@ -111,17 +111,17 @@ endm
 	dict $59, Char59 ; TARGET
 	dict $5A, Char5A ; USER
 
-	ld [hli],a
+	ld [hli], a
 	call PrintLetterDelay
 PlaceNextChar_inc::
 	inc de
 	jp PlaceNextChar
 
 Char00::
-	ld b,h
-	ld c,l
+	ld b, h
+	ld c, l
 	pop hl
-	ld de,Char00Text
+	ld de, Char00Text
 	dec de
 	ret
 
@@ -131,47 +131,47 @@ Char00Text:: ; “%d ERROR.”
 
 Char52:: ; player’s name
 	push de
-	ld de,wPlayerName
+	ld de, wPlayerName
 	jr FinishDTE
 
 Char53:: ; rival’s name
 	push de
-	ld de,wRivalName
+	ld de, wRivalName
 	jr FinishDTE
 
 Char5D:: ; TRAINER
 	push de
-	ld de,Char5DText
+	ld de, Char5DText
 	jr FinishDTE
 
 Char5C:: ; TM
 	push de
-	ld de,Char5CText
+	ld de, Char5CText
 	jr FinishDTE
 
 Char5B:: ; PC
 	push de
-	ld de,Char5BText
+	ld de, Char5BText
 	jr FinishDTE
 
 Char5E:: ; ROCKET
 	push de
-	ld de,Char5EText
+	ld de, Char5EText
 	jr FinishDTE
 
 Char54:: ; POKé
 	push de
-	ld de,Char54Text
+	ld de, Char54Text
 	jr FinishDTE
 
 Char56:: ; ……
 	push de
-	ld de,Char56Text
+	ld de, Char56Text
 	jr FinishDTE
 
 Char4A:: ; PKMN
 	push de
-	ld de,Char4AText
+	ld de, Char4AText
 	jr FinishDTE
 
 Char59::
@@ -180,7 +180,7 @@ Char59::
 ; or
 ; player active monster’s name
 ; (like Char5A but flipped)
-	ld a,[H_WHOSETURN]
+	ld a, [H_WHOSETURN]
 	xor 1
 	jr MonsterNameCharsCommon
 
@@ -189,26 +189,26 @@ Char5A::
 ; player active monster’s name
 ; or
 ; enemy active monster’s name, prefixed with “Enemy ”
-	ld a,[H_WHOSETURN]
+	ld a, [H_WHOSETURN]
 MonsterNameCharsCommon::
 	push de
 	and a
-	jr nz,.Enemy
-	ld de,wBattleMonNick ; player active monster name
+	jr nz, .Enemy
+	ld de, wBattleMonNick ; player active monster name
 	jr FinishDTE
 
 .Enemy
 	; print “Enemy ”
-	ld de,Char5AText
+	ld de, Char5AText
 	call PlaceString
-	ld h,b
-	ld l,c
-	ld de,wEnemyMonNick ; enemy active monster name
+	ld h, b
+	ld l, c
+	ld de, wEnemyMonNick ; enemy active monster name
 
 FinishDTE::
 	call PlaceString
-	ld h,b
-	ld l,c
+	ld h, b
+	ld l, c
 	pop de
 	inc de
 	jp PlaceNextChar
@@ -232,12 +232,12 @@ Char4AText::
 
 Char55::
 	push de
-	ld b,h
-	ld c,l
-	ld hl,Char55Text
+	ld b, h
+	ld c, l
+	ld hl, Char55Text
 	call TextCommandProcessor
-	ld h,b
-	ld l,c
+	ld h, b
+	ld l, c
 	pop de
 	inc de
 	jp PlaceNextChar
@@ -249,12 +249,12 @@ Char55Text::
 
 Char5F::
 ; ends a Pokédex entry
-	ld [hl],"."
+	ld [hl], "."
 	pop hl
 	ret
 
 Char58:: ; prompt
-	ld a,[wLinkState]
+	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jp z, .ok
 	ld a, "▼"
@@ -290,14 +290,14 @@ Char51:: ; para
 
 Char49::
 	push de
-	ld a,"▼"
+	ld a, "▼"
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 10
 	lb bc, 7, 18
 	call ClearScreenArea
-	ld c,20
+	ld c, 20
 	call DelayFrames
 	pop de
 	pop hl
@@ -306,7 +306,7 @@ Char49::
 	jp PlaceNextChar_inc
 
 Char4B::
-	ld a,"▼"
+	ld a, "▼"
 	Coorda 18, 16
 	call ProtectedDelay3
 	push de
@@ -332,25 +332,25 @@ ScrollTextUpOneLine::
 	coord de, 0, 13 ; empty line above text
 	ld b, SCREEN_WIDTH * 3
 .copyText
-	ld a,[hli]
-	ld [de],a
+	ld a, [hli]
+	ld [de], a
 	inc de
 	dec b
-	jr nz,.copyText
+	jr nz, .copyText
 	coord hl, 1, 16
 	ld a, " "
-	ld b,SCREEN_WIDTH - 2
+	ld b, SCREEN_WIDTH - 2
 .clearText
-	ld [hli],a
+	ld [hli], a
 	dec b
-	jr nz,.clearText
+	jr nz, .clearText
 
 	; wait five frames
-	ld b,5
+	ld b, 5
 .WaitFrame
 	call DelayFrame
 	dec b
-	jr nz,.WaitFrame
+	jr nz, .WaitFrame
 
 	ret
 
@@ -361,33 +361,33 @@ ProtectedDelay3::
 	ret
 
 TextCommandProcessor::
-	ld a,[wLetterPrintingDelayFlags]
+	ld a, [wLetterPrintingDelayFlags]
 	push af
-	set 1,a
-	ld e,a
+	set 1, a
+	ld e, a
 	ld a, [$fff4]
 	xor e
-	ld [wLetterPrintingDelayFlags],a
-	ld a,c
-	ld [wTextDest],a
-	ld a,b
-	ld [wTextDest + 1],a
+	ld [wLetterPrintingDelayFlags], a
+	ld a, c
+	ld [wTextDest], a
+	ld a, b
+	ld [wTextDest + 1], a
 
 NextTextCommand::
-	ld a,[hli]
-	cp a, "@" ; terminator
-	jr nz,.doTextCommand
+	ld a, [hli]
+	cp "@" ; terminator
+	jr nz, .doTextCommand
 	pop af
-	ld [wLetterPrintingDelayFlags],a
+	ld [wLetterPrintingDelayFlags], a
 	ret
 .doTextCommand
 	push hl
-	cp a, $17
+	cp $17
 	jp z, TextCommand17
-	cp a, $0e
-	jp nc,TextCommand0B ; if a != 0x17 and a >= 0xE, go to command 0xB
+	cp $0e
+	jp nc, TextCommand0B ; if a != 0x17 and a >= 0xE, go to command 0xB
 ; if a < 0xE, use a jump table
-	ld hl,TextCommandJumpTable
+	ld hl, TextCommandJumpTable
 	push bc
 	add a
 	ld b, 0
@@ -406,17 +406,17 @@ NextTextCommand::
 ; CC = width
 TextCommand04::
 	pop hl
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a
-	ld a,[hli]
-	ld b,a
-	ld a,[hli]
-	ld c,a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
 	push hl
-	ld h,d
-	ld l,e
+	ld h, d
+	ld l, e
 	call TextBoxBorder
 	pop hl
 	jr NextTextCommand
@@ -425,13 +425,13 @@ TextCommand04::
 ; 00{string}
 TextCommand00::
 	pop hl
-	ld d,h
-	ld e,l
-	ld h,b
-	ld l,c
+	ld d, h
+	ld e, l
+	ld h, b
+	ld l, c
 	call PlaceString
-	ld h,d
-	ld l,e
+	ld h, d
+	ld l, e
 	inc hl
 	jr NextTextCommand
 
@@ -440,13 +440,13 @@ TextCommand00::
 ; AAAA = address of string
 TextCommand01::
 	pop hl
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
 	push hl
-	ld h,b
-	ld l,c
+	ld h, b
+	ld l, c
 	call PlaceString
 	pop hl
 	jr NextTextCommand
@@ -459,18 +459,18 @@ TextCommand01::
 ; bits 5-7 = unknown flags
 TextCommand02::
 	pop hl
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a
-	ld a,[hli]
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
 	push hl
-	ld h,b
-	ld l,c
-	ld c,a
+	ld h, b
+	ld l, c
+	ld c, a
 	call PrintBCDNumber
-	ld b,h
-	ld c,l
+	ld b, h
+	ld c, l
 	pop hl
 	jr NextTextCommand
 
@@ -479,12 +479,12 @@ TextCommand02::
 ; AAAA = new destination address
 TextCommand03::
 	pop hl
-	ld a,[hli]
-	ld [wTextDest],a
-	ld c,a
-	ld a,[hli]
-	ld [wTextDest + 1],a
-	ld b,a
+	ld a, [hli]
+	ld [wTextDest], a
+	ld c, a
+	ld a, [hli]
+	ld [wTextDest + 1], a
+	ld b, a
 	jp NextTextCommand
 
 ; repoint destination to second line of dialogue text box
@@ -499,15 +499,15 @@ TextCommand05::
 ; 06
 ; (no arguments)
 TextCommand06::
-	ld a,[wLinkState]
-	cp a,LINK_STATE_BATTLING
-	jp z,TextCommand0D
-	ld a,"▼"
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jp z, TextCommand0D
+	ld a, "▼"
 	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
 	call ManualTextScroll ; blink arrow and wait for A or B to be pressed
 	pop bc
-	ld a," "
+	ld a, " "
 	Coorda 18, 16 ; overwrite down arrow with blank space
 	pop hl
 	jp NextTextCommand
@@ -528,7 +528,7 @@ TextCommand07::
 ; 08{code}
 TextCommand08::
 	pop hl
-	ld de,NextTextCommand
+	ld de, NextTextCommand
 	push de ; return address
 	jp hl
 
@@ -540,25 +540,25 @@ TextCommand08::
 ; bits 4-7 = how long the number is in bytes
 TextCommand09::
 	pop hl
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a
-	ld a,[hli]
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
 	push hl
-	ld h,b
-	ld l,c
-	ld b,a
-	and a,$0f
-	ld c,a
-	ld a,b
-	and a,$f0
+	ld h, b
+	ld l, c
+	ld b, a
+	and $0f
+	ld c, a
+	ld a, b
+	and $f0
 	swap a
 	set BIT_LEFT_ALIGN,a
-	ld b,a
+	ld b, a
 	call PrintNumber
-	ld b,h
-	ld c,l
+	ld b, h
+	ld c, l
 	pop hl
 	jp NextTextCommand
 
@@ -568,10 +568,10 @@ TextCommand09::
 TextCommand0A::
 	push bc
 	call Joypad
-	ld a,[hJoyHeld]
-	and a,A_BUTTON | B_BUTTON
-	jr nz,.skipDelay
-	ld c,30
+	ld a, [hJoyHeld]
+	and A_BUTTON | B_BUTTON
+	jr nz, .skipDelay
+	ld c, 30
 	call DelayFrames
 .skipDelay
 	pop bc
@@ -585,24 +585,24 @@ TextCommand0B::
 	pop hl
 	push bc
 	dec hl
-	ld a,[hli]
-	ld b,a ; b = command number that got us here
+	ld a, [hli]
+	ld b, a ; b = command number that got us here
 	push hl
-	ld hl,TextCommandSounds
+	ld hl, TextCommandSounds
 .loop
-	ld a,[hli]
+	ld a, [hli]
 	cp b
-	jr z,.matchFound
+	jr z, .matchFound
 	inc hl
 	jr .loop
 .matchFound
-	cp a,$14
-	jr z,.pokemonCry
-	cp a,$15
-	jr z,.pokemonCry
-	cp a,$16
-	jr z,.pokemonCry
-	ld a,[hl]
+	cp $14
+	jr z, .pokemonCry
+	cp $15
+	jr z, .pokemonCry
+	cp $16
+	jr z, .pokemonCry
+	ld a, [hl]
 	call PlaySound
 	call WaitForSoundToFinish
 	pop hl
@@ -610,7 +610,7 @@ TextCommand0B::
 	jp NextTextCommand
 .pokemonCry
 	push de
-	ld a,[hl]
+	ld a, [hl]
 	call PlayCry
 	pop de
 	pop hl
@@ -635,27 +635,27 @@ TextCommandSounds::
 ; AA = number of ellipses to draw
 TextCommand0C::
 	pop hl
-	ld a,[hli]
-	ld d,a
+	ld a, [hli]
+	ld d, a
 	push hl
-	ld h,b
-	ld l,c
+	ld h, b
+	ld l, c
 .loop
-	ld a,"…"
-	ld [hli],a
+	ld a, "…"
+	ld [hli], a
 	push de
 	call Joypad
 	pop de
-	ld a,[hJoyHeld] ; joypad state
-	and a,A_BUTTON | B_BUTTON
-	jr nz,.skipDelay ; if so, skip the delay
-	ld c,10
+	ld a, [hJoyHeld] ; joypad state
+	and A_BUTTON | B_BUTTON
+	jr nz, .skipDelay ; if so, skip the delay
+	ld c, 10
 	call DelayFrames
 .skipDelay
 	dec d
-	jr nz,.loop
-	ld b,h
-	ld c,l
+	jr nz, .loop
+	ld b, h
+	ld c, l
 	pop hl
 	jp NextTextCommand
 
@@ -675,23 +675,23 @@ TextCommand0D::
 ; BB = bank
 TextCommand17::
 	pop hl
-	ld a,[H_LOADEDROMBANK]
+	ld a, [H_LOADEDROMBANK]
 	push af
-	ld a,[hli]
-	ld e,a
-	ld a,[hli]
-	ld d,a
-	ld a,[hli]
-	ld [H_LOADEDROMBANK],a
-	ld [MBC1RomBank],a
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
 	push hl
-	ld l,e
-	ld h,d
+	ld l, e
+	ld h, d
 	call TextCommandProcessor
 	pop hl
 	pop af
-	ld [H_LOADEDROMBANK],a
-	ld [MBC1RomBank],a
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
 	jp NextTextCommand
 
 TextCommandJumpTable::

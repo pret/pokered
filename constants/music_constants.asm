@@ -137,7 +137,7 @@ const_value = 1
 	const SFX_SAVE
 
 	; AUDIO_1
-	const SFX_POKEFLUE
+	const SFX_POKEFLUTE
 	const SFX_SAFARI_ZONE_PA
 
 	; AUDIO_2

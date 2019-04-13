@@ -409,7 +409,7 @@ PrintNicknameAndUnderscores:
 	call EraseMenuCursor
 	ld a, $11 ; "ED" x coord
 	ld [wTopMenuItemX], a
-	ld a, $5 ; "ED" y corrd
+	ld a, $5 ; "ED" y coord
 	ld [wCurrentMenuItem], a
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN

@@ -1,20 +1,20 @@
 ViridianForestEntranceObject:
 	db $a ; border block
 
-	db $4 ; warps
-	db $0, $4, $3, VIRIDIAN_FOREST
-	db $0, $5, $4, VIRIDIAN_FOREST
-	db $7, $4, $5, $ff
-	db $7, $5, $5, $ff
+	db 4 ; warps
+	warp 4, 0, 3, VIRIDIAN_FOREST
+	warp 5, 0, 4, VIRIDIAN_FOREST
+	warp 4, 7, 5, -1
+	warp 5, 7, 5, -1
 
-	db $0 ; signs
+	db 0 ; signs
 
-	db $2 ; objects
-	object SPRITE_GIRL, $8, $4, STAY, LEFT, $1 ; person
-	object SPRITE_LITTLE_GIRL, $2, $4, WALK, $1, $2 ; person
+	db 2 ; objects
+	object SPRITE_GIRL, 8, 4, STAY, LEFT, 1 ; person
+	object SPRITE_LITTLE_GIRL, 2, 4, WALK, 1, 2 ; person
 
 	; warp-to
-	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $0, $4 ; VIRIDIAN_FOREST
-	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $0, $5 ; VIRIDIAN_FOREST
-	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $7, $4
-	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $7, $5
+	warp_to 4, 0, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; VIRIDIAN_FOREST
+	warp_to 5, 0, VIRIDIAN_FOREST_ENTRANCE_WIDTH ; VIRIDIAN_FOREST
+	warp_to 4, 7, VIRIDIAN_FOREST_ENTRANCE_WIDTH
+	warp_to 5, 7, VIRIDIAN_FOREST_ENTRANCE_WIDTH

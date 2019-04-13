@@ -1,14 +1,14 @@
 # Linux
 
-	sudo apt-get install make gcc bison git python
+	sudo apt-get install make git gcc
 
+	sudo apt-get install byacc flex pkg-config libpng-dev
 	git clone https://github.com/rednex/rgbds
 	cd rgbds
-	git checkout v0.2.5
 	sudo make install
 	cd ..
 
-	git clone --recursive https://github.com/pret/pokered
+	git clone https://github.com/pret/pokered
 	cd pokered
 
 To build **pokered.gbc** and **pokeblue.gbc**:
@@ -23,34 +23,38 @@ To build them individually:
 
 # Mac
 
-In **Terminal**, run:
+Get [**Homebrew**](http://brew.sh/).
+
+Then in **Terminal**, run:
 
 	xcode-select --install
+	brew install rgbds
 
-	git clone https://github.com/rednex/rgbds
-	cd rgbds
-	git checkout v0.2.5
-	sudo make install
-	cd ..
-
-	git clone --recursive https://github.com/pret/pokered
+	git clone https://github.com/pret/pokered
 	cd pokered
+
+To build **pokered.gbc** and **pokeblue.gbc**:
 
 	make
 
 
 # Windows
 
-To build on Windows, use [**Cygwin**](http://cygwin.com/install.html). Use the default settings.
+Download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
 
-In the installer, select the following packages: `make` `git` `python` `gettext`
+Run setup and leave the default settings. At "Select Packages", choose to install the following:
 
-Then get [**rgbds 0.2.5**](https://github.com/bentley/rgbds/releases/tag/v0.2.5).
-Extract the archive and put `rgbasm.exe`, `rgblink.exe`, `rgbfix.exe` and `rgbgfx.exe` in `C:\cygwin\usr\local\bin`.  If your Cygwin installation directory differs, ensure the `bin` directory is present in the PATH variable.
+- `make`
+- `git`
+- `gcc-core`
 
-In the **Cygwin terminal**:
+Then download [**rgbds**](https://github.com/rednex/rgbds/releases/): the latest **win64.tar.gz** or **win32.tar.gz** release. Extract it and put all the `exe` and `dll` files individually in **C:\cygwin64\usr\local\bin**.
 
-	git clone --recursive https://github.com/pret/pokered
+In the **Cygwin terminal**, enter these commands:
+
+	git clone https://github.com/pret/pokered
 	cd pokered
+
+To build **pokered.gbc** and **pokeblue.gbc**:
 
 	make

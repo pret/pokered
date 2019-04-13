@@ -56,7 +56,7 @@ DisplayTitleScreen:
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX
-	ld de,vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
+	ld de, vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
 	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
@@ -118,10 +118,10 @@ DisplayTitleScreen:
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
 IF DEF(_RED)
-	ld a,CHARMANDER ; which Pokemon to show first on the title screen
+	ld a, CHARMANDER ; which Pokemon to show first on the title screen
 ENDC
 IF DEF(_BLUE)
-	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
+	ld a, SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
 	ld [wTitleMonSpecies], a

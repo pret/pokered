@@ -1,85 +1,85 @@
 DoInGameTradeDialogue:
 ; trigger the trade offer/action specified by wWhichTrade
 	call SaveScreenTilesToBuffer2
-	ld hl,TradeMons
-	ld a,[wWhichTrade]
-	ld b,a
+	ld hl, TradeMons
+	ld a, [wWhichTrade]
+	ld b, a
 	swap a
 	sub b
 	sub b
-	ld c,a
-	ld b,0
-	add hl,bc
-	ld a,[hli]
-	ld [wInGameTradeGiveMonSpecies],a
-	ld a,[hli]
-	ld [wInGameTradeReceiveMonSpecies],a
-	ld a,[hli]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [hli]
+	ld [wInGameTradeGiveMonSpecies], a
+	ld a, [hli]
+	ld [wInGameTradeReceiveMonSpecies], a
+	ld a, [hli]
 	push af
-	ld de,wInGameTradeMonNick
+	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH
 	call CopyData
 	pop af
-	ld l,a
-	ld h,0
-	ld de,InGameTradeTextPointers
-	add hl,hl
-	add hl,de
-	ld a,[hli]
-	ld [wInGameTradeTextPointerTablePointer],a
-	ld a,[hl]
-	ld [wInGameTradeTextPointerTablePointer + 1],a
-	ld a,[wInGameTradeGiveMonSpecies]
-	ld de,wInGameTradeGiveMonName
+	ld l, a
+	ld h, 0
+	ld de, InGameTradeTextPointers
+	add hl, hl
+	add hl, de
+	ld a, [hli]
+	ld [wInGameTradeTextPointerTablePointer], a
+	ld a, [hl]
+	ld [wInGameTradeTextPointerTablePointer + 1], a
+	ld a, [wInGameTradeGiveMonSpecies]
+	ld de, wInGameTradeGiveMonName
 	call InGameTrade_GetMonName
-	ld a,[wInGameTradeReceiveMonSpecies]
-	ld de,wInGameTradeReceiveMonName
+	ld a, [wInGameTradeReceiveMonSpecies]
+	ld de, wInGameTradeReceiveMonName
 	call InGameTrade_GetMonName
-	ld hl,wCompletedInGameTradeFlags
-	ld a,[wWhichTrade]
-	ld c,a
-	ld b,FLAG_TEST
+	ld hl, wCompletedInGameTradeFlags
+	ld a, [wWhichTrade]
+	ld c, a
+	ld b, FLAG_TEST
 	predef FlagActionPredef
-	ld a,c
+	ld a, c
 	and a
-	ld a,$4
-	ld [wInGameTradeTextPointerTableIndex],a
-	jr nz,.printText
+	ld a, $4
+	ld [wInGameTradeTextPointerTableIndex], a
+	jr nz, .printText
 ; if the trade hasn't been done yet
 	xor a
-	ld [wInGameTradeTextPointerTableIndex],a
+	ld [wInGameTradeTextPointerTableIndex], a
 	call .printText
-	ld a,$1
-	ld [wInGameTradeTextPointerTableIndex],a
+	ld a, $1
+	ld [wInGameTradeTextPointerTableIndex], a
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
-	jr nz,.printText
+	jr nz, .printText
 	call InGameTrade_DoTrade
-	jr c,.printText
+	jr c, .printText
 	ld hl, TradedForText
 	call PrintText
 .printText
-	ld hl,wInGameTradeTextPointerTableIndex
-	ld a,[hld] ; wInGameTradeTextPointerTableIndex
-	ld e,a
-	ld d,0
-	ld a,[hld] ; wInGameTradeTextPointerTablePointer + 1
-	ld l,[hl] ; wInGameTradeTextPointerTablePointer
-	ld h,a
-	add hl,de
-	add hl,de
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
+	ld hl, wInGameTradeTextPointerTableIndex
+	ld a, [hld] ; wInGameTradeTextPointerTableIndex
+	ld e, a
+	ld d, 0
+	ld a, [hld] ; wInGameTradeTextPointerTablePointer + 1
+	ld l, [hl] ; wInGameTradeTextPointerTablePointer
+	ld h, a
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 	jp PrintText
 
 ; copies name of species a to hl
 InGameTrade_GetMonName:
 	push de
-	ld [wd11e],a
+	ld [wd11e], a
 	call GetMonName
-	ld hl,wcd6d
+	ld hl, wcd6d
 	pop de
 	ld bc, NAME_LENGTH
 	jp CopyData
@@ -88,53 +88,53 @@ INCLUDE "data/trades.asm"
 
 InGameTrade_DoTrade:
 	xor a ; NORMAL_PARTY_MENU
-	ld [wPartyMenuTypeOrMessageID],a
+	ld [wPartyMenuTypeOrMessageID], a
 	dec a
-	ld [wUpdateSpritesEnabled],a
+	ld [wUpdateSpritesEnabled], a
 	call DisplayPartyMenu
 	push af
 	call InGameTrade_RestoreScreen
 	pop af
-	ld a,$1
-	jp c,.tradeFailed ; jump if the player didn't select a pokemon
-	ld a,[wInGameTradeGiveMonSpecies]
-	ld b,a
-	ld a,[wcf91]
+	ld a, $1
+	jp c, .tradeFailed ; jump if the player didn't select a pokemon
+	ld a, [wInGameTradeGiveMonSpecies]
+	ld b, a
+	ld a, [wcf91]
 	cp b
-	ld a,$2
-	jr nz,.tradeFailed ; jump if the selected mon's species is not the required one
-	ld a,[wWhichPokemon]
-	ld hl,wPartyMon1Level
+	ld a, $2
+	jr nz, .tradeFailed ; jump if the selected mon's species is not the required one
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Level
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
-	ld a,[hl]
-	ld [wCurEnemyLVL],a
-	ld hl,wCompletedInGameTradeFlags
-	ld a,[wWhichTrade]
-	ld c,a
-	ld b,FLAG_SET
+	ld a, [hl]
+	ld [wCurEnemyLVL], a
+	ld hl, wCompletedInGameTradeFlags
+	ld a, [wWhichTrade]
+	ld c, a
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
 	call PrintText
-	ld a,[wWhichPokemon]
+	ld a, [wWhichPokemon]
 	push af
-	ld a,[wCurEnemyLVL]
+	ld a, [wCurEnemyLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
 	predef InternalClockTradeAnim
 	pop af
-	ld [wCurEnemyLVL],a
+	ld [wCurEnemyLVL], a
 	pop af
-	ld [wWhichPokemon],a
-	ld a,[wInGameTradeReceiveMonSpecies]
-	ld [wcf91],a
+	ld [wWhichPokemon], a
+	ld a, [wInGameTradeReceiveMonSpecies]
+	ld [wcf91], a
 	xor a
-	ld [wMonDataLocation],a ; not used
-	ld [wRemoveMonFromBox],a
+	ld [wMonDataLocation], a ; not used
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
-	ld a,$80 ; prevent the player from naming the mon
-	ld [wMonDataLocation],a
+	ld a, $80 ; prevent the player from naming the mon
+	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
@@ -142,12 +142,12 @@ InGameTrade_DoTrade:
 	call InGameTrade_RestoreScreen
 	callba RedrawMapView
 	and a
-	ld a,$3
+	ld a, $3
 	jr .tradeSucceeded
 .tradeFailed
 	scf
 .tradeSucceeded
-	ld [wInGameTradeTextPointerTableIndex],a
+	ld [wInGameTradeTextPointerTableIndex], a
 	ret
 
 InGameTrade_RestoreScreen:

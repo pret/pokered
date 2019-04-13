@@ -1,27 +1,27 @@
 CinnabarIslandObject:
 	db $43 ; border block
 
-	db $5 ; warps
-	db $3, $6, $1, MANSION_1
-	db $3, $12, $0, CINNABAR_GYM
-	db $9, $6, $0, CINNABAR_LAB_1
-	db $b, $b, $0, CINNABAR_POKECENTER
-	db $b, $f, $0, CINNABAR_MART
+	db 5 ; warps
+	warp 6, 3, 1, MANSION_1
+	warp 18, 3, 0, CINNABAR_GYM
+	warp 6, 9, 0, CINNABAR_LAB_1
+	warp 11, 11, 0, CINNABAR_POKECENTER
+	warp 15, 11, 0, CINNABAR_MART
 
-	db $5 ; signs
-	db $5, $9, $3 ; CinnabarIslandText3
-	db $b, $10, $4 ; MartSignText
-	db $b, $c, $5 ; PokeCenterSignText
-	db $b, $9, $6 ; CinnabarIslandText6
-	db $3, $d, $7 ; CinnabarIslandText7
+	db 5 ; signs
+	sign 9, 5, 3 ; CinnabarIslandText3
+	sign 16, 11, 4 ; MartSignText
+	sign 12, 11, 5 ; PokeCenterSignText
+	sign 9, 11, 6 ; CinnabarIslandText6
+	sign 13, 3, 7 ; CinnabarIslandText7
 
-	db $2 ; objects
-	object SPRITE_GIRL, $c, $5, WALK, $2, $1 ; person
-	object SPRITE_GAMBLER, $e, $6, STAY, NONE, $2 ; person
+	db 2 ; objects
+	object SPRITE_GIRL, 12, 5, WALK, 2, 1 ; person
+	object SPRITE_GAMBLER, 14, 6, STAY, NONE, 2 ; person
 
 	; warp-to
-	EVENT_DISP CINNABAR_ISLAND_WIDTH, $3, $6 ; MANSION_1
-	EVENT_DISP CINNABAR_ISLAND_WIDTH, $3, $12 ; CINNABAR_GYM
-	EVENT_DISP CINNABAR_ISLAND_WIDTH, $9, $6 ; CINNABAR_LAB_1
-	EVENT_DISP CINNABAR_ISLAND_WIDTH, $b, $b ; CINNABAR_POKECENTER
-	EVENT_DISP CINNABAR_ISLAND_WIDTH, $b, $f ; CINNABAR_MART
+	warp_to 6, 3, CINNABAR_ISLAND_WIDTH ; MANSION_1
+	warp_to 18, 3, CINNABAR_ISLAND_WIDTH ; CINNABAR_GYM
+	warp_to 6, 9, CINNABAR_ISLAND_WIDTH ; CINNABAR_LAB_1
+	warp_to 11, 11, CINNABAR_ISLAND_WIDTH ; CINNABAR_POKECENTER
+	warp_to 15, 11, CINNABAR_ISLAND_WIDTH ; CINNABAR_MART

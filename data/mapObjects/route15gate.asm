@@ -1,21 +1,21 @@
 Route15GateObject:
 	db $a ; border block
 
-	db $5 ; warps
-	db $4, $0, $0, $ff
-	db $5, $0, $1, $ff
-	db $4, $7, $2, $ff
-	db $5, $7, $3, $ff
-	db $8, $6, $0, ROUTE_15_GATE_2F
+	db 5 ; warps
+	warp 0, 4, 0, -1
+	warp 0, 5, 1, -1
+	warp 7, 4, 2, -1
+	warp 7, 5, 3, -1
+	warp 6, 8, 0, ROUTE_15_GATE_2F
 
-	db $0 ; signs
+	db 0 ; signs
 
-	db $1 ; objects
-	object SPRITE_GUARD, $4, $1, STAY, NONE, $1 ; person
+	db 1 ; objects
+	object SPRITE_GUARD, 4, 1, STAY, NONE, 1 ; person
 
 	; warp-to
-	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $4, $0
-	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $5, $0
-	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $4, $7
-	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $5, $7
-	EVENT_DISP ROUTE_15_GATE_1F_WIDTH, $8, $6 ; ROUTE_15_GATE_2F
+	warp_to 0, 4, ROUTE_15_GATE_1F_WIDTH
+	warp_to 0, 5, ROUTE_15_GATE_1F_WIDTH
+	warp_to 7, 4, ROUTE_15_GATE_1F_WIDTH
+	warp_to 7, 5, ROUTE_15_GATE_1F_WIDTH
+	warp_to 6, 8, ROUTE_15_GATE_1F_WIDTH ; ROUTE_15_GATE_2F

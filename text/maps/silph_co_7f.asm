@@ -145,12 +145,12 @@ _SilphCo7AfterBattleText4::
 	done
 
 _SilphCo7Text_51ebe::
-	text $53, ": What"
-	line "kept you ", $52, "?"
+	text "<RIVAL>: What"
+	line "kept you <PLAYER>?"
 	done
 
 _SilphCo7Text_51ec3::
-	text $53, ": Hahaha!"
+	text "<RIVAL>: Hahaha!"
 	line "I thought you'd"
 	cont "turn up if I"
 	cont "waited here!"
@@ -173,7 +173,7 @@ _SilphCo7Text_51ec8::
 	prompt
 
 _SilphCo7Text_51ecd::
-	text $53, ": How can"
+	text "<RIVAL>: How can"
 	line "I put this?"
 
 	para "You're not good"
@@ -182,7 +182,7 @@ _SilphCo7Text_51ecd::
 	prompt
 
 _SilphCo7Text_51ed2::
-	text "Well, ", $52, "!"
+	text "Well, <PLAYER>!"
 
 	para "I'm moving on up"
 	line "and ahead!"
@@ -202,7 +202,7 @@ _SilphCo7Text_51ed2::
 	line "world's most"
 	cont "powerful trainer!"
 
-	para $52, ", well"
+	para "<PLAYER>, well"
 	line "good luck to you!"
 	cont "Don't sweat it!"
 	cont "Smell ya!"

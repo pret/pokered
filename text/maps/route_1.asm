@@ -13,7 +13,7 @@ _Route1ViridianMartSampleText::
 	prompt
 
 _Route1Text_1cae8::
-	text $52, " got"
+	text "<PLAYER> got"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

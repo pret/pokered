@@ -18,7 +18,7 @@ _WardenGibberishText3::
 	done
 
 _WardenTeethText1::
-	text $52, " gave the"
+	text "<PLAYER> gave the"
 	line "GOLD TEETH to the"
 	cont "WARDEN!@@"
 
@@ -42,7 +42,7 @@ _WardenThankYouText::
 	prompt
 
 _ReceivedHM04Text::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

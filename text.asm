@@ -2239,7 +2239,7 @@ _CoinsScatteredText::
 	prompt
 
 _GettingPumpedText::
-	text $5a, "'s"
+	text "<USER>'s"
 	line "getting pumped!"
 	prompt
 

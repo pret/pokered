@@ -54,7 +54,7 @@ KabutopsFossilText:
 
 DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.
-; [wcf91] = pokemon interal id number
+; [wcf91] = pokemon internal id number
 	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3

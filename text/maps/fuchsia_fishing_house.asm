@@ -17,7 +17,7 @@ _FuchsiaHouse3Text_561c2::
 	para "Take this and"
 	line "fish, young one!"
 
-	para $52, " received"
+	para "<PLAYER> received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"
@@ -29,7 +29,7 @@ _FuchsiaHouse3Text_56212::
 
 _FuchsiaHouse3Text_56217::
 	text "Hello there,"
-	line $52, "!"
+	line "<PLAYER>!"
 
 	para "How are the fish"
 	line "biting?"
