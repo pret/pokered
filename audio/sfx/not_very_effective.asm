@@ -1,6 +1,6 @@
 SFX_Not_Very_Effective_Ch7:
-	unknownnoise0x20 4, 143, 85
-	unknownnoise0x20 2, 244, 68
-	unknownnoise0x20 8, 244, 34
-	unknownnoise0x20 15, 242, 33
+	noisenote 4, 8, -7, 85
+	noisenote 2, 15, 4, 68
+	noisenote 8, 15, 4, 34
+	noisenote 15, 15, 2, 33
 	endchannel

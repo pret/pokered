@@ -1,22 +1,22 @@
 SFX_Battle_34_Ch4:
 	dutycycle 237
-	unknownsfx0x20 8, 255, 248, 3
-	unknownsfx0x20 15, 255, 0, 4
-	unknownsfx0x20 15, 243, 0, 4
+	squarenote 8, 15, -7, 1016
+	squarenote 15, 15, -7, 1024
+	squarenote 15, 15, 3, 1024
 	endchannel
 
 
 SFX_Battle_34_Ch5:
 	dutycycle 180
-	unknownsfx0x20 8, 239, 192, 3
-	unknownsfx0x20 15, 239, 192, 3
-	unknownsfx0x20 15, 227, 192, 3
+	squarenote 8, 14, -7, 960
+	squarenote 15, 14, -7, 960
+	squarenote 15, 14, 3, 960
 	endchannel
 
 
 SFX_Battle_34_Ch7:
-	unknownnoise0x20 4, 255, 81
-	unknownnoise0x20 8, 255, 84
-	unknownnoise0x20 15, 255, 85
-	unknownnoise0x20 15, 243, 86
+	noisenote 4, 15, -7, 81
+	noisenote 8, 15, -7, 84
+	noisenote 15, 15, -7, 85
+	noisenote 15, 15, 3, 86
 	endchannel

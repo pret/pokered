@@ -1,6 +1,6 @@
 SFX_Faint_Fall_Ch4:
 	dutycycle 1
-	unknownsfx0x10 175
-	unknownsfx0x20 15, 242, 128, 7
-	unknownsfx0x10 8
+	pitchenvelope 10, -7
+	squarenote 15, 15, 2, 1920
+	pitchenvelope 0, 0
 	endchannel

@@ -1,10 +1,10 @@
 SFX_Shrink_1_Ch4:
 	dutycycle 1
-	unknownsfx0x10 23
-	unknownsfx0x20 15, 215, 0, 6
-	unknownsfx0x20 15, 183, 128, 5
-	unknownsfx0x20 15, 135, 0, 5
-	unknownsfx0x20 15, 71, 128, 4
-	unknownsfx0x20 15, 23, 0, 4
-	unknownsfx0x10 8
+	pitchenvelope 1, 7
+	squarenote 15, 13, 7, 1536
+	squarenote 15, 11, 7, 1408
+	squarenote 15, 8, 7, 1280
+	squarenote 15, 4, 7, 1152
+	squarenote 15, 1, 7, 1024
+	pitchenvelope 0, 0
 	endchannel

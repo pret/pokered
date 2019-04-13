@@ -1,12 +1,12 @@
 SFX_Battle_24_Ch4:
 	dutycycle 1
-	unknownsfx0x10 151
-	unknownsfx0x20 15, 242, 0, 7
-	unknownsfx0x10 8
+	pitchenvelope 9, 7
+	squarenote 15, 15, 2, 1792
+	pitchenvelope 0, 0
 	endchannel
 
 
 SFX_Battle_24_Ch7:
-	unknownnoise0x20 15, 63, 34
-	unknownnoise0x20 15, 242, 33
+	noisenote 15, 3, -7, 34
+	noisenote 15, 15, 2, 33
 	endchannel

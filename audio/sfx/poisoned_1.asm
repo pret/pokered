@@ -1,8 +1,8 @@
 SFX_Poisoned_1_Ch4:
 	dutycycle 0
-	unknownsfx0x10 20
-	unknownsfx0x20 4, 242, 0, 6
+	pitchenvelope 1, 4
+	squarenote 4, 15, 2, 1536
 	loopchannel 4, SFX_Poisoned_1_Ch4
-	unknownsfx0x20 15, 243, 0, 6
-	unknownsfx0x10 8
+	squarenote 15, 15, 3, 1536
+	pitchenvelope 0, 0
 	endchannel

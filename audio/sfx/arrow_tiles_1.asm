@@ -1,6 +1,6 @@
 SFX_Arrow_Tiles_1_Ch4:
 	dutycycle 0
-	unknownsfx0x10 23
-	unknownsfx0x20 15, 210, 0, 7
-	unknownsfx0x10 8
+	pitchenvelope 1, 7
+	squarenote 15, 13, 2, 1792
+	pitchenvelope 0, 0
 	endchannel

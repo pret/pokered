@@ -1,13 +1,13 @@
 SFX_Purchase_1_Ch4:
 	dutycycle 2
-	unknownsfx0x20 4, 225, 0, 7
-	unknownsfx0x20 8, 242, 224, 7
+	squarenote 4, 14, 1, 1792
+	squarenote 8, 15, 2, 2016
 	endchannel
 
 
 SFX_Purchase_1_Ch5:
 	dutycycle 2
-	unknownsfx0x20 1, 8, 0, 0
-	unknownsfx0x20 4, 145, 193, 6
-	unknownsfx0x20 8, 162, 161, 7
+	squarenote 1, 0, 8, 0
+	squarenote 4, 9, 1, 1729
+	squarenote 8, 10, 2, 1953
 	endchannel

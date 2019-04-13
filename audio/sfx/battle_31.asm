@@ -1,18 +1,18 @@
 SFX_Battle_31_Ch4:
 	dutycycle 2
-	unknownsfx0x20 15, 255, 224, 7
-	unknownsfx0x20 15, 255, 224, 7
-	unknownsfx0x20 15, 255, 224, 7
-	unknownsfx0x20 15, 255, 224, 7
-	unknownsfx0x20 15, 242, 224, 7
+	squarenote 15, 15, -7, 2016
+	squarenote 15, 15, -7, 2016
+	squarenote 15, 15, -7, 2016
+	squarenote 15, 15, -7, 2016
+	squarenote 15, 15, 2, 2016
 	endchannel
 
 
 SFX_Battle_31_Ch5:
 	dutycycle 3
-	unknownsfx0x20 15, 255, 226, 7
-	unknownsfx0x20 15, 255, 225, 7
-	unknownsfx0x20 15, 255, 226, 7
-	unknownsfx0x20 15, 255, 225, 7
-	unknownsfx0x20 15, 242, 226, 7
+	squarenote 15, 15, -7, 2018
+	squarenote 15, 15, -7, 2017
+	squarenote 15, 15, -7, 2018
+	squarenote 15, 15, -7, 2017
+	squarenote 15, 15, 2, 2018
 	endchannel

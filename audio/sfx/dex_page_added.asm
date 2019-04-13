@@ -1,15 +1,15 @@
 SFX_Dex_Page_Added_Ch4:
 	dutycycle 2
-	unknownsfx0x10 68
-	unknownsfx0x20 15, 240, 240, 4
-	unknownsfx0x10 23
-	unknownsfx0x20 15, 242, 80, 6
-	unknownsfx0x10 8
+	pitchenvelope 4, 4
+	squarenote 15, 15, 0, 1264
+	pitchenvelope 1, 7
+	squarenote 15, 15, 2, 1616
+	pitchenvelope 0, 0
 	endchannel
 
 
 SFX_Dex_Page_Added_Ch5:
 	dutycycle 2
-	unknownsfx0x20 15, 146, 0, 6
-	unknownsfx0x20 15, 146, 130, 7
+	squarenote 15, 9, 2, 1536
+	squarenote 15, 9, 2, 1922
 	endchannel

@@ -1,7 +1,7 @@
 SFX_Battle_25_Ch7:
-	unknownnoise0x20 15, 79, 65
-	unknownnoise0x20 8, 143, 65
-	unknownnoise0x20 8, 207, 65
-	unknownnoise0x20 8, 242, 66
-	unknownnoise0x20 15, 242, 65
+	noisenote 15, 4, -7, 65
+	noisenote 8, 8, -7, 65
+	noisenote 8, 12, -7, 65
+	noisenote 8, 15, 2, 66
+	noisenote 15, 15, 2, 65
 	endchannel

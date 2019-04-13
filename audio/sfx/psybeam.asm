@@ -1,25 +1,25 @@
 SFX_Psybeam_Ch4:
 	dutycycle 161
-	unknownsfx0x20 10, 241, 64, 6
-	unknownsfx0x20 10, 243, 128, 6
-	unknownsfx0x20 10, 242, 32, 6
+	squarenote 10, 15, 1, 1600
+	squarenote 10, 15, 3, 1664
+	squarenote 10, 15, 2, 1568
 	loopchannel 4, SFX_Psybeam_Ch4
-	unknownsfx0x20 10, 241, 64, 6
+	squarenote 10, 15, 1, 1600
 	endchannel
 
 
 SFX_Psybeam_Ch5:
 	dutycycle 179
-	unknownsfx0x20 10, 243, 113, 5
-	unknownsfx0x20 7, 227, 49, 5
-	unknownsfx0x20 10, 241, 81, 5
+	squarenote 10, 15, 3, 1393
+	squarenote 7, 14, 3, 1329
+	squarenote 10, 15, 1, 1361
 	loopchannel 4, SFX_Psybeam_Ch5
-	unknownsfx0x20 10, 241, 113, 5
+	squarenote 10, 15, 1, 1393
 	endchannel
 
 
 SFX_Psybeam_Ch7:
-	unknownnoise0x20 2, 209, 74
-	unknownnoise0x20 2, 210, 42
+	noisenote 2, 13, 1, 74
+	noisenote 2, 13, 2, 42
 	loopchannel 21, SFX_Psybeam_Ch7
 	endchannel

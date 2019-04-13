@@ -557,7 +557,7 @@ Audio2_executemusic:
 Audio2_octave:
 	and $f0
 	cp $e0 ; is this command an octave?
-	jr nz, Audio2_unknownsfx0x20 ; no
+	jr nz, Audio2_sfxnote ; no
 	ld hl, wChannelOctaves ; yes
 	ld b, $0
 	add hl, bc
@@ -566,17 +566,18 @@ Audio2_octave:
 	ld [hl], a ; store low nibble as octave
 	jp Audio2_endchannel
 
-Audio2_unknownsfx0x20:
-	cp $20 ; is this command an unknownsfx0x20?
-	jr nz, Audio2_unknownsfx0x10 ; no
+; sfxnote is either squarenote or noisenote depending on the channel
+Audio2_sfxnote:
+	cp $20 ; is this command an sfxnote?
+	jr nz, Audio2_pitchenvelope ; no
 	ld a, c
 	cp Ch3 ; is this a noise or sfx channel?
-	jr c, Audio2_unknownsfx0x10 ; no
+	jr c, Audio2_pitchenvelope ; no
 	ld b, $0
 	ld hl, wChannelFlags2
 	add hl, bc
 	bit 0, [hl]
-	jr nz, Audio2_unknownsfx0x10 ; no
+	jr nz, Audio2_pitchenvelope ; no
 	call Audio2_notelength
 	ld d, a
 	ld b, $0
@@ -611,12 +612,12 @@ Audio2_unknownsfx0x20:
 	call Audio2_21dcc
 	ret
 
-Audio2_unknownsfx0x10:
+Audio2_pitchenvelope:
 	ld a, c
 	cp Ch4
 	jr c, Audio2_note ; if not a sfx
 	ld a, d
-	cp $10 ; is this command a unknownsfx0x10?
+	cp $10 ; is this command a pitchenvelope?
 	jr nz, Audio2_note ; no
 	ld b, $0
 	ld hl, wChannelFlags2

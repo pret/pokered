@@ -30,24 +30,38 @@ audio: MACRO
 	ENDC
 ENDM
 
-unknownsfx0x10: MACRO
+;format: length [0, 7], pitch change [-7, 7]
+pitchenvelope: MACRO
 	db $dd ; soundinput
-	db \1
+	IF \2 > 0
+		db (\1 << 4) | \2
+	ELSE
+		db (\1 << 4) | (%1000 | (\2 * -1))
+	ENDC
 ENDM
 
-unknownsfx0x20: MACRO
+;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
+squarenote: MACRO
 	; noise/sound
 	db \1
 	;db $20 | \1
-	db \2
-	db \3
-	db \4
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
+	dw \4
 ENDM
 
-unknownnoise0x20: MACRO
+;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
+noisenote: MACRO
 	db \1 ; | $20
-	db \2
-	db \3
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
+	db \4
 ENDM
 
 

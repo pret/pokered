@@ -1,6 +1,6 @@
 SFX_Ledge_1_Ch4:
 	dutycycle 2
-	unknownsfx0x10 149
-	unknownsfx0x20 15, 242, 0, 4
-	unknownsfx0x10 8
+	pitchenvelope 9, 5
+	squarenote 15, 15, 2, 1024
+	pitchenvelope 0, 0
 	endchannel

@@ -1,6 +1,6 @@
 SFX_Battle_09_Ch4:
 	dutycycle 1
-	unknownsfx0x10 151
-	unknownsfx0x20 15, 242, 0, 5
-	unknownsfx0x10 8
+	pitchenvelope 9, 7
+	squarenote 15, 15, 2, 1280
+	pitchenvelope 0, 0
 	endchannel

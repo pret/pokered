@@ -1,4 +1,4 @@
 SFX_Battle_18_Ch7:
-	unknownnoise0x20 4, 255, 85
-	unknownnoise0x20 8, 241, 101
+	noisenote 4, 15, -7, 85
+	noisenote 8, 15, 1, 101
 	endchannel

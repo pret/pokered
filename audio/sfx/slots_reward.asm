@@ -1,5 +1,5 @@
 SFX_Slots_Reward_Ch4:
 	dutycycle 2
-	unknownsfx0x20 2, 241, 0, 7
-	unknownsfx0x20 8, 129, 224, 7
+	squarenote 2, 15, 1, 1792
+	squarenote 8, 8, 1, 2016
 	endchannel

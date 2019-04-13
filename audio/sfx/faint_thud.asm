@@ -1,11 +1,11 @@
 SFX_Faint_Thud_Ch4:
-	unknownsfx0x20 15, 209, 0, 2
-	unknownsfx0x10 8
+	squarenote 15, 13, 1, 512
+	pitchenvelope 0, 0
 	endchannel
 
 
 SFX_Faint_Thud_Ch7:
-	unknownnoise0x20 4, 245, 51
-	unknownnoise0x20 8, 244, 34
-	unknownnoise0x20 15, 242, 33
+	noisenote 4, 15, 5, 51
+	noisenote 8, 15, 4, 34
+	noisenote 15, 15, 2, 33
 	endchannel
