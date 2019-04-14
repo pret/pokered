@@ -2515,6 +2515,8 @@ _PlayMusic:: ; e8b30
 	ld a, e
 	and a
 	jp z, _SoundRestart
+	cp NUM_SONGS
+	ret nc ; sfx
 ; load music
 	call MusicOff
 	ld hl, MusicID
