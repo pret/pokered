@@ -3493,8 +3493,6 @@ CurMusic:: ; c2c0
 ; id of music currently playing
 	ds 1
 
-wTranspositionInterval:: ds 1
-
 ; misc crys labels
 Options:: ds 1
 GBPrinter:: ds 1

@@ -410,15 +410,9 @@ INCLUDE "crysaudio/engine.asm"
 ; What music plays when a trainer notices you
 ;INCLUDE "crysaudio/trainer_encounters.asm"
 
-MusicMT:
-INCLUDE "crysaudio/music_pointers_music_test.asm"
-
 Music:
 INCLUDE "crysaudio/red_pointers.asm"
 ;INCLUDE "crysaudio/music_pointers.asm"
-
-Music2:
-INCLUDE "crysaudio/music_pointers2.asm"
 
 
 INCLUDE "crysaudio/music/nothing.asm"

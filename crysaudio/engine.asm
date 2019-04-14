@@ -2298,35 +2298,6 @@ GetFrequency: ; e8a5d
 ; 	de: frequency
 
 ; get octave
-	ld a, [CurChannel]
-	cp 3
-	jr nc, .added
-	ld a, [wTranspositionInterval]
-	bit 7, a
-	jr nz, .negative
-.positive
-	add e
-	ld e, a
-	cp 13
-	jr c, .added
-	sub 12
-	ld e, a
-	dec d
-	jr .added
-.negative
-	dec e
-	add e
-	jr c, .c
-	inc a
-	add 12
-	ld e, a
-	inc d
-	jr .added
-.c
-	inc a
-	ld e, a
-.added
-
 	; get starting octave
 	ld hl, Channel1StartingOctave - Channel1
 	add hl, bc
@@ -2507,9 +2478,6 @@ SetLRTracks: ; e8b1b
 	ret
 ; e8b30
 
-SongTranspositions:
-	ds 46
-
 _PlayMusic:: ; e8b30
 	call OpenSRAMForSound
 	ld a, e
@@ -2523,19 +2491,7 @@ _PlayMusic:: ; e8b30
 	ld [hl], e ; song number
 	inc hl
 	ld [hl], d ; MusicIDHi (always $00)
-
-	ld hl, SongTranspositions
-	add hl, de
-	ld a, [hl]
-	ld [wTranspositionInterval], a
-
-	ld a, [GBPrinter]
-	bit 1, a
-	jr nz, .MTMusic
-	bit 0, a
-	jr nz, .AltMusic
 	ld hl, Music
-.ContinueMusic
 	add hl, de ; three
 	add hl, de ; byte
 	add hl, de ; pointer
@@ -2580,12 +2536,6 @@ _PlayMusic:: ; e8b30
 	ret
 ; e8b79
 
-.AltMusic
-	ld hl, Music2
-	jr .ContinueMusic
-.MTMusic
-	ld hl, MusicMT
-	jr .ContinueMusic
 PlayCry_:: ; e8b79
 ; Play cry de using parameters:
 ;	CryPitch
