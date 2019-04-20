@@ -1,154 +1,7 @@
 INCLUDE "constants.asm"
 INCLUDE "crysmacros.asm"
-
-; crystal.py macros: 
-octave: MACRO
-	db $d8 - (\1)
-	ENDM
-	
-notetype: MACRO
-	db $d8, \1
-IF _NARG==2
-	db \2
-ENDC
-	ENDM
-forceoctave: MACRO
-	db $d9, \1
-	ENDM
-tempo: MACRO
-	db $da
-	bigdw \1
-	ENDM
-dutycycle: MACRO
-	db $db, \1
-	ENDM
-intensity: MACRO
-	db $dc, \1
-	ENDM
-soundinput: MACRO
-	db $dd, \1
-	ENDM
-unknownmusic0xde: MACRO
-	db $de, \1
-	ENDM
-togglesfx: MACRO
-	db $df
-	ENDM
-unknownmusic0xe0: MACRO
-	db $e0, \1, \2
-	ENDM
-vibrato: MACRO
-	db $e1, \1, \2
-	ENDM
-unknownmusic0xe2: MACRO
-	db $e2, \1
-	ENDM
-togglenoise: MACRO
-	db $e3, \1
-	ENDM
-panning: MACRO
-	db $e4, \1
-	ENDM
-volume: MACRO
-	db $e5, \1
-	ENDM
-tone: MACRO
-	db $e6
-	bigdw \1
-	ENDM
-unknownmusic0xe7: MACRO
-	db $e7, \1
-	ENDM
-unknownmusic0xe8: MACRO
-	db $e8, \1
-	ENDM
-globaltempo: MACRO
-	db $e9
-	bigdw \1
-	ENDM
-restartchannel: MACRO
-	dbw $ea, \1
-	ENDM
-newsong: MACRO
-	db $eb
-	bigdw \1
-	ENDM
-sfxpriorityon: MACRO
-	db $ec
-	ENDM
-sfxpriorityoff: MACRO
-	db $ed
-	ENDM
-unknownmusic0xee: MACRO
-	dbw $ee, \1
-	ENDM
-stereopanning: MACRO
-	db $ef, \1
-	ENDM
-sfxtogglenoise: MACRO
-	db $f0, \1
-	ENDM
-ftempo: MACRO
-	db $f1
-	bigdw \1
-	ENDM
-fdutycycle: MACRO
-	db $f2, \1
-	ENDM
-music0xf3: MACRO
-	db $f3
-	ENDM
-incoctave: MACRO
-	db $f4
-	ENDM
-decoctave: MACRO
-	db $f5
-	ENDM
-music0xf6: MACRO
-	db $f6
-	ENDM
-music0xf7: MACRO
-	db $f7
-	ENDM
-music0xf8: MACRO
-	db $f8
-	ENDM
-unknownmusic0xf9: MACRO
-	db $f9, \1
-	ENDM
-setcondition: MACRO
-	db $fa, \1
-	ENDM
-jumpif: MACRO
-	db $fb, \1
-	dw \2
-	ENDM
-jumpchannel: MACRO
-	dbw $fc, \1
-	ENDM
-loopchannel: MACRO
-	db $fd, \1
-	dw \2
-	ENDM
-callchannel: MACRO
-	dbw $fe, \1
-	ENDM
-endchannel: MACRO
-	db $ff
-	ENDM
-	
-	
-sound: MACRO
-	db \1, \2
-	dw \3
-	ENDM
-
-noise: MACRO
-	db \1, \2, \3
-	ENDM
-    
-toggleperfectpitch: MACRO ; XXX XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	ENDM
+INCLUDE "crysaudio/audio_constants.asm"
+INCLUDE "crysaudio/cry_constants.asm"
 
 
 SECTION "Sound Effect Headers 1", ROMX ; BANK $02
@@ -285,7 +138,7 @@ PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
-	ld [MusicFade], a
+	ld [wMusicFade], a
 	dec a
 	ld [wNewSoundID], a
 	call PlayMusic ; stop music
@@ -404,24 +257,18 @@ OwnedMonValues:
     
 SECTION "Audio Engine 1", ROMX
 
-
 INCLUDE "crysaudio/engine.asm"
-
-; What music plays when a trainer notices you
 ;INCLUDE "crysaudio/trainer_encounters.asm"
 
-Music:
 INCLUDE "crysaudio/red_pointers.asm"
 ;INCLUDE "crysaudio/music_pointers.asm"
 
-
 INCLUDE "crysaudio/music/nothing.asm"
 
-Cries:
 INCLUDE "crysaudio/cry_pointers.asm"
 
-;SFX:
 INCLUDE "crysaudio/rbsfx.asm"
+;INCLUDE "crysaudio/sfx_pointers.asm"
 
 
 SECTION "Songs 1", ROMX
@@ -581,6 +428,7 @@ SECTION "RBY Songs 1", ROMX
 	inc_section "crysaudio/music/RBY/wildbattle.asm"
 	inc_section "crysaudio/music/RBY/finalbattle.asm"
 
+
 SECTION "RBY Songs 2", ROMX
 
 	inc_section "crysaudio/music/RBY/defeatedtrainer.asm"
@@ -612,37 +460,6 @@ SECTION "RBY Songs 2", ROMX
 	inc_section "crysaudio/music/RBY/meetjessiejames.asm"
 	inc_section "crysaudio/music/RBY/yellowunusedsong.asm"
 
-SECTION "Custom Songs 1", ROMX
-
-	inc_section "crysaudio/music/custom/johtoGSC.asm"
-	inc_section "crysaudio/music/custom/ceruleanGSC.asm"
-	inc_section "crysaudio/music/custom/cinnabarGSC.asm"
-	inc_section "crysaudio/music/custom/nuggetbridge.asm"
-	inc_section "crysaudio/music/custom/shop.asm"
-	inc_section "crysaudio/music/custom/pokeathelonfinal.asm"
-
-SECTION "Custom Songs 2", ROMX
-
-	inc_section "crysaudio/music/custom/naljowildbattle.asm"
-	inc_section "crysaudio/music/custom/naljogymbattle.asm"
-	inc_section "crysaudio/music/custom/palletbattle.asm"
-	inc_section "crysaudio/music/custom/cinnabarremix.asm"
-	inc_section "crysaudio/music/custom/kantogymleaderremix.asm"
-
-SECTION "DPPt Songs 1", ROMX
-
-	inc_section "crysaudio/music/DPPt/pokeradar.asm"
-	inc_section "crysaudio/music/DPPt/sinnohtrainer.asm"
-	inc_section "crysaudio/music/DPPt/sinnohwild.asm"
-	inc_section "crysaudio/music/DPPt/WinPokeSinnoh.asm"
-	inc_section "crysaudio/music/DPPt/WinTrainerSinnoh.asm"
-	inc_section "crysaudio/music/DPPt/route201.asm"
-	inc_section "crysaudio/music/DPPt/route203.asm"
-	inc_section "crysaudio/music/DPPt/route205.asm"
-	inc_section "crysaudio/music/DPPt/route206.asm"
-	inc_section "crysaudio/music/DPPt/jubilifecity.asm"
-	inc_section "crysaudio/music/DPPt/EternaForest.asm"
-	inc_section "crysaudio/music/DPPt/frontierbrain.asm"
 
 SECTION "TCG Songs 1", ROMX
 	inc_section "crysaudio/music/TCG/titlescreen.asm"
@@ -660,6 +477,7 @@ SECTION "TCG Songs 1", ROMX
 	inc_section "crysaudio/music/TCG/club2.asm"
 	inc_section "crysaudio/music/TCG/club3.asm"
 
+
 SECTION "TCG Songs 2", ROMX
 	inc_section "crysaudio/music/TCG/ronald.asm"
 	inc_section "crysaudio/music/TCG/imakuni.asm"
@@ -674,6 +492,7 @@ SECTION "TCG Songs 2", ROMX
 	inc_section "crysaudio/music/TCG/boosterpack.asm"
 	inc_section "crysaudio/music/TCG/medal.asm"
 
+
 SECTION "TCG2 Songs 1", ROMX
 	inc_section "crysaudio/music/TCG2/titlescreen.asm"
 	inc_section "crysaudio/music/TCG2/herecomesgr.asm"
@@ -685,6 +504,7 @@ SECTION "TCG2 Songs 1", ROMX
 	inc_section "crysaudio/music/TCG2/grcastle.asm"
 	inc_section "crysaudio/music/TCG2/grchallengecup.asm"
 
+
 SECTION "TCG2 Songs 2", ROMX
 	inc_section "crysaudio/music/TCG2/gamecorner.asm"
 	inc_section "crysaudio/music/TCG2/grblimp.asm"
@@ -692,6 +512,7 @@ SECTION "TCG2 Songs 2", ROMX
 	inc_section "crysaudio/music/TCG2/grdueltheme2.asm"
 	inc_section "crysaudio/music/TCG2/grdueltheme3.asm"
 	inc_section "crysaudio/music/TCG2/ishihara.asm"
+
 
 SECTION "TCG2 Songs 3", ROMX
 	inc_section "crysaudio/music/TCG2/imakuni2.asm"
@@ -702,6 +523,7 @@ SECTION "TCG2 Songs 3", ROMX
 	inc_section "crysaudio/music/TCG2/diddly4.asm"
 	inc_section "crysaudio/music/TCG2/diddly5.asm"
 	inc_section "crysaudio/music/TCG2/diddly6.asm"
+
 
 SECTION "Pinball Songs", ROMX
 	inc_section "crysaudio/music/pinball/redfield.asm"
@@ -718,6 +540,7 @@ SECTION "Pinball Songs", ROMX
 	inc_section "crysaudio/music/pinball/diglettstage_digletts.asm"
 	inc_section "crysaudio/music/pinball/diglettstage_dugtrio.asm"
 
+
 SECTION "Pinball Songs 2", ROMX
 	inc_section "crysaudio/music/pinball/seelstage.asm"
 	inc_section "crysaudio/music/pinball/titlescreen.asm"
@@ -727,6 +550,7 @@ SECTION "Pinball Songs 2", ROMX
 	inc_section "crysaudio/music/pinball/meowthstage.asm"
 	inc_section "crysaudio/music/pinball/endcredits.asm"
 	inc_section "crysaudio/music/pinball/nameentry.asm"
+
 
 SECTION "Sound Effects", ROMX
 
@@ -738,11 +562,8 @@ SECTION "Crystal Sound Effects", ROMX
 INCLUDE "crysaudio/sfx_crystal.asm"
 
 
-
 SECTION "Cries", ROMX
 
-CryHeaders:: INCLUDE "crysaudio/cry_headers.asm"
+INCLUDE "crysaudio/cry_headers.asm"
 
 INCLUDE "crysaudio/cries.asm"
-
-

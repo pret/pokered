@@ -1,14 +1,13 @@
-Music_LookRocket: ; f74a2
-	dbw $c0, Music_LookRocket_Ch1
-	dbw $01, Music_LookRocket_Ch2
-	dbw $02, Music_LookRocket_Ch3
-	dbw $03, Music_LookRocket_Ch4
-; f74ae
+Music_LookRocket:
+	musicheader 4, 1, Music_LookRocket_Ch1
+	musicheader 1, 2, Music_LookRocket_Ch2
+	musicheader 1, 3, Music_LookRocket_Ch3
+	musicheader 1, 4, Music_LookRocket_Ch4
 
-Music_LookRocket_Ch1: ; f74ae
+Music_LookRocket_Ch1:
 	tempo 123
 	volume $77
-	forceoctave $2
+	pitchoffset 0, D_
 	stereopanning $f
 	dutycycle $3
 	vibrato $5, $64
@@ -18,7 +17,7 @@ Music_LookRocket_Ch1: ; f74ae
 	note D_, 1
 	callchannel Music_LookRocket_branch_f74e6
 	dutycycle $1
-Music_LookRocket_branch_f74c7: ; f74c7
+Music_LookRocket_branch_f74c7:
 	intensity $a8
 	callchannel Music_LookRocket_branch_f74f7
 	callchannel Music_LookRocket_branch_f758a
@@ -33,10 +32,9 @@ Music_LookRocket_branch_f74c7: ; f74c7
 	callchannel Music_LookRocket_branch_f750c
 	note __, 16
 	loopchannel 0, Music_LookRocket_branch_f74c7
-; f74e6
 
-Music_LookRocket_branch_f74e6: ; f74e6
-Music_RocketTheme_branch_f74e6: ; f74e6
+Music_LookRocket_branch_f74e6:
+Music_RocketTheme_branch_f74e6:
 	note D#, 1
 	note __, 1
 	note D_, 1
@@ -54,10 +52,9 @@ Music_RocketTheme_branch_f74e6: ; f74e6
 	note F_, 1
 	note G#, 1
 	endchannel
-; f74f7
 
-Music_LookRocket_branch_f74f7: ; f74f7
-Music_RocketTheme_branch_f74f7: ; f74f7
+Music_LookRocket_branch_f74f7:
+Music_RocketTheme_branch_f74f7:
 	note __, 2
 	octave 3
 	note D#, 1
@@ -79,10 +76,9 @@ Music_RocketTheme_branch_f74f7: ; f74f7
 	note F#, 1
 	note __, 1
 	endchannel
-; f750c
 
-Music_LookRocket_branch_f750c: ; f750c
-Music_RocketTheme_branch_f750c: ; f750c
+Music_LookRocket_branch_f750c:
+Music_RocketTheme_branch_f750c:
 	note __, 2
 	octave 2
 	note B_, 1
@@ -91,10 +87,9 @@ Music_RocketTheme_branch_f750c: ; f750c
 	note C_, 1
 	note __, 5
 	endchannel
-; f7514
 
-Music_LookRocket_Ch2: ; f7514
-	forceoctave $2
+Music_LookRocket_Ch2:
+	pitchoffset 0, D_
 	vibrato $4, $64
 	dutycycle $3
 	notetype $c, $b7
@@ -103,7 +98,7 @@ Music_LookRocket_Ch2: ; f7514
 	note C_, 1
 	note D_, 1
 	callchannel Music_LookRocket_branch_f7547
-Music_LookRocket_branch_f7526: ; f7526
+Music_LookRocket_branch_f7526:
 	intensity $b7
 	callchannel Music_LookRocket_branch_f758a
 	octave 5
@@ -118,10 +113,9 @@ Music_LookRocket_branch_f7526: ; f7526
 	callchannel Music_LookRocket_branch_f7568
 	callchannel Music_LookRocket_branch_f756f
 	loopchannel 0, Music_LookRocket_branch_f7526
-; f7547
 
-Music_LookRocket_branch_f7547: ; f7547
-Music_RocketTheme_branch_f7547: ; f7547
+Music_LookRocket_branch_f7547:
+Music_RocketTheme_branch_f7547:
 	note D#, 1
 	note __, 1
 	note D_, 1
@@ -134,10 +128,9 @@ Music_RocketTheme_branch_f7547: ; f7547
 	note B_, 6
 	dutycycle $0
 	endchannel
-; f7554
 
-Music_LookRocket_branch_f7554: ; f7554
-Music_RocketTheme_branch_f7554: ; f7554
+Music_LookRocket_branch_f7554:
+Music_RocketTheme_branch_f7554:
 	note __, 2
 	octave 4
 	note D#, 1
@@ -158,10 +151,9 @@ Music_RocketTheme_branch_f7554: ; f7554
 	note D#, 1
 	note __, 1
 	endchannel
-; f7568
 
-Music_LookRocket_branch_f7568: ; f7568
-Music_RocketTheme_branch_f7568: ; f7568
+Music_LookRocket_branch_f7568:
+Music_RocketTheme_branch_f7568:
 	note __, 2
 	octave 3
 	note F_, 1
@@ -169,10 +161,9 @@ Music_RocketTheme_branch_f7568: ; f7568
 	note F#, 1
 	note __, 5
 	endchannel
-; f756f
 
-Music_LookRocket_branch_f756f: ; f756f
-Music_RocketTheme_branch_f756f: ; f756f
+Music_LookRocket_branch_f756f:
+Music_RocketTheme_branch_f756f:
 	intensity $63
 	note G#, 1
 	note F_, 1
@@ -196,10 +187,9 @@ Music_RocketTheme_branch_f756f: ; f756f
 	note F_, 1
 	note D_, 1
 	endchannel
-; f758a
 
-Music_LookRocket_branch_f758a: ; f758a
-Music_RocketTheme_branch_f758a: ; f758a
+Music_LookRocket_branch_f758a:
+Music_RocketTheme_branch_f758a:
 	octave 3
 	note __, 2
 	note G_, 1
@@ -213,16 +203,15 @@ Music_RocketTheme_branch_f758a: ; f758a
 	note A_, 1
 	note __, 1
 	endchannel
-; f7597
 
-Music_LookRocket_Ch3: ; f7597
-	forceoctave $2
+Music_LookRocket_Ch3:
+	pitchoffset 0, D_
 	vibrato $4, $22
 	notetype $c, $14
 	stereopanning $f0
 	note __, 2
 	callchannel Music_LookRocket_branch_f75bf
-Music_LookRocket_branch_f75a5: ; f75a5
+Music_LookRocket_branch_f75a5:
 	callchannel Music_LookRocket_branch_f75fe
 	callchannel Music_LookRocket_branch_f75fe
 	intensity $24
@@ -232,10 +221,9 @@ Music_LookRocket_branch_f75a5: ; f75a5
 	callchannel Music_LookRocket_branch_f7623
 	callchannel Music_LookRocket_branch_f75e1
 	loopchannel 0, Music_LookRocket_branch_f75a5
-; f75bf
 
-Music_LookRocket_branch_f75bf: ; f75bf
-Music_RocketTheme_branch_f75bf: ; f75bf
+Music_LookRocket_branch_f75bf:
+Music_RocketTheme_branch_f75bf:
 	octave 3
 	note F_, 1
 	note __, 1
@@ -249,10 +237,9 @@ Music_RocketTheme_branch_f75bf: ; f75bf
 	octave 3
 	note D_, 6
 	endchannel
-; f75cc
 
-Music_LookRocket_branch_f75cc: ; f75cc
-Music_RocketTheme_branch_f75cc: ; f75cc
+Music_LookRocket_branch_f75cc:
+Music_RocketTheme_branch_f75cc:
 	octave 2
 	note G#, 1
 	note __, 1
@@ -274,10 +261,9 @@ Music_RocketTheme_branch_f75cc: ; f75cc
 	note F#, 1
 	note __, 1
 	endchannel
-; f75e1
 
-Music_LookRocket_branch_f75e1: ; f75e1
-Music_RocketTheme_branch_f75e1: ; f75e1
+Music_LookRocket_branch_f75e1:
+Music_RocketTheme_branch_f75e1:
 	intensity $24
 	octave 2
 	note G#, 1
@@ -305,10 +291,9 @@ Music_RocketTheme_branch_f75e1: ; f75e1
 	note G#, 1
 	note __, 1
 	endchannel
-; f75fe
 
-Music_LookRocket_branch_f75fe: ; f75fe
-Music_RocketTheme_branch_f75fe: ; f75fe
+Music_LookRocket_branch_f75fe:
+Music_RocketTheme_branch_f75fe:
 	note C_, 1
 	note __, 1
 	octave 4
@@ -346,10 +331,9 @@ Music_RocketTheme_branch_f75fe: ; f75fe
 	note A_, 1
 	note __, 1
 	endchannel
-; f7623
 
-Music_LookRocket_branch_f7623: ; f7623
-Music_RocketTheme_branch_f7623: ; f7623
+Music_LookRocket_branch_f7623:
+Music_RocketTheme_branch_f7623:
 	octave 2
 	note G#, 1
 	note __, 1
@@ -371,14 +355,13 @@ Music_RocketTheme_branch_f7623: ; f7623
 	note D#, 1
 	note C_, 1
 	endchannel
-; f7638
 
-Music_LookRocket_Ch4: ; f7638
+Music_LookRocket_Ch4:
 	togglenoise $3
 	notetype $c
 	note __, 2
 	callchannel Music_LookRocket_branch_f765c
-Music_LookRocket_branch_f7640: ; f7640
+Music_LookRocket_branch_f7640:
 	callchannel Music_LookRocket_branch_f7664
 	callchannel Music_LookRocket_branch_f7664
 	callchannel Music_LookRocket_branch_f7664
@@ -388,10 +371,9 @@ Music_LookRocket_branch_f7640: ; f7640
 	callchannel Music_LookRocket_branch_f7664
 	callchannel Music_LookRocket_branch_f765c
 	loopchannel 0, Music_LookRocket_branch_f7640
-; f765c
 
-Music_LookRocket_branch_f765c: ; f765c
-Music_RocketTheme_branch_f765c: ; f765c
+Music_LookRocket_branch_f765c:
+Music_RocketTheme_branch_f765c:
 	note C_, 8
 	note D_, 2
 	note D#, 2
@@ -400,10 +382,9 @@ Music_RocketTheme_branch_f765c: ; f765c
 	note D_, 1
 	note D_, 1
 	endchannel
-; f7664
 
-Music_LookRocket_branch_f7664: ; f7664
-Music_RocketTheme_branch_f7664: ; f7664
+Music_LookRocket_branch_f7664:
+Music_RocketTheme_branch_f7664:
 	note D#, 2
 	note F#, 2
 	note D_, 2
@@ -413,6 +394,3 @@ Music_RocketTheme_branch_f7664: ; f7664
 	note D_, 2
 	note F#, 2
 	endchannel
-; f766d
-
-

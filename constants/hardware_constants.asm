@@ -48,6 +48,7 @@ rNR11       EQU $ff11 ; Channel 1 Sound length/Wave pattern duty (R/W)
 rNR12       EQU $ff12 ; Channel 1 Volume Envelope (R/W)
 rNR13       EQU $ff13 ; Channel 1 Frequency lo (Write Only)
 rNR14       EQU $ff14 ; Channel 1 Frequency hi (R/W)
+rNR20       EQU $ff15 ; Channel 2 Sweep register (R/W)
 rNR21       EQU $ff16 ; Channel 2 Sound Length/Wave Pattern Duty (R/W)
 rNR22       EQU $ff17 ; Channel 2 Volume Envelope (R/W)
 rNR23       EQU $ff18 ; Channel 2 Frequency lo data (W)
@@ -57,6 +58,7 @@ rNR31       EQU $ff1b ; Channel 3 Sound Length
 rNR32       EQU $ff1c ; Channel 3 Select output level (R/W)
 rNR33       EQU $ff1d ; Channel 3 Frequency's lower data (W)
 rNR34       EQU $ff1e ; Channel 3 Frequency's higher data (R/W)
+rNR40       EQU $ff1f ; Channel 4 Sweep register (R/W)
 rNR41       EQU $ff20 ; Channel 4 Sound Length (R/W)
 rNR42       EQU $ff21 ; Channel 4 Volume Envelope (R/W)
 rNR43       EQU $ff22 ; Channel 4 Polynomial Counter (R/W)
@@ -64,6 +66,22 @@ rNR44       EQU $ff23 ; Channel 4 Counter/consecutive; Initial (R/W)
 rNR50       EQU $ff24 ; Channel control / ON-OFF / Volume (R/W)
 rNR51       EQU $ff25 ; Selection of Sound output terminal (R/W)
 rNR52       EQU $ff26 ; Sound on/off
+rWave_0     EQU $ff30
+rWave_1     EQU $ff31
+rWave_2     EQU $ff32
+rWave_3     EQU $ff33
+rWave_4     EQU $ff34
+rWave_5     EQU $ff35
+rWave_6     EQU $ff36
+rWave_7     EQU $ff37
+rWave_8     EQU $ff38
+rWave_9     EQU $ff39
+rWave_a     EQU $ff3a
+rWave_b     EQU $ff3b
+rWave_c     EQU $ff3c
+rWave_d     EQU $ff3d
+rWave_e     EQU $ff3e
+rWave_f     EQU $ff3f
 rLCDC       EQU $ff40 ; LCD Control (R/W)
 rLCDC_ENABLE EQU 7
 rLCDC_ENABLE_MASK EQU 1 << rLCDC_ENABLE

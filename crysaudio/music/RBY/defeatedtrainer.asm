@@ -4,7 +4,7 @@ Music_DefeatedTrainer:
 	dbw $02, Music_DefeatedTrainer_Ch3
 
 Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
-	ftempo 224
+	tempo 224
 	volume 119
 	dutycycle 2
 	notetype 4, 162

@@ -854,7 +854,7 @@ Music_Pinballbluefield_branch_40e75: ; 40e75
 ; 4111e
 
 Music_Pinballbluefield_Ch3: ; 4111e
-	forceoctave $10
+	pitchoffset 1, C_
 	notetype $8, $22
 	octave 3
 	note F_, 4

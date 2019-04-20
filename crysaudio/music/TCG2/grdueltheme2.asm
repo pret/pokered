@@ -1471,7 +1471,7 @@ Branch_1efa62:
 
 Music_TCG2GRDuelTheme2_Ch3: 
 	notetype1 10
-	notetype2 15
+	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	notetype0 1
 	notetype1 1
 	octave 2

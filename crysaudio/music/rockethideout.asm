@@ -1,11 +1,10 @@
-Music_RocketHideout: ; eeb75
-	dbw $c0, Music_RocketHideout_Ch1
-	dbw $01, Music_RocketHideout_Ch2
-	dbw $02, Music_RocketHideout_Ch3
-	dbw $03, Music_RocketHideout_Ch4
-; eeb81
+Music_RocketHideout:
+	musicheader 4, 1, Music_RocketHideout_Ch1
+	musicheader 1, 2, Music_RocketHideout_Ch2
+	musicheader 1, 3, Music_RocketHideout_Ch3
+	musicheader 1, 4, Music_RocketHideout_Ch4
 
-Music_RocketHideout_Ch1: ; eeb81
+Music_RocketHideout_Ch1:
 	tempo 144
 	volume $77
 	dutycycle $3
@@ -13,10 +12,10 @@ Music_RocketHideout_Ch1: ; eeb81
 	vibrato $10, $44
 	notetype $c, $b3
 	stereopanning $f0
-Music_RocketHideout_branch_eeb93: ; eeb93
+Music_RocketHideout_branch_eeb93:
 	note __, 16
 	loopchannel 4, Music_RocketHideout_branch_eeb93
-Music_RocketHideout_branch_eeb98: ; eeb98
+Music_RocketHideout_branch_eeb98:
 	octave 2
 	note D#, 2
 	note __, 2
@@ -114,19 +113,18 @@ Music_RocketHideout_branch_eeb98: ; eeb98
 	note __, 16
 	note A_, 16
 	intensity $b3
-Music_RocketHideout_branch_eebfe: ; eebfe
+Music_RocketHideout_branch_eebfe:
 	note __, 16
 	loopchannel 4, Music_RocketHideout_branch_eebfe
 	loopchannel 0, Music_RocketHideout_branch_eeb93
-; eec07
 
-Music_RocketHideout_Ch2: ; eec07
+Music_RocketHideout_Ch2:
 	dutycycle $3
 	tone $0002
 	vibrato $0, $f0
 	notetype $c, $c4
 	stereopanning $f
-Music_RocketHideout_branch_eec14: ; eec14
+Music_RocketHideout_branch_eec14:
 	octave 2
 	note D#, 2
 	note __, 2
@@ -221,11 +219,10 @@ Music_RocketHideout_branch_eec14: ; eec14
 	note G_, 2
 	note __, 8
 	loopchannel 0, Music_RocketHideout_branch_eec14
-; eec79
 
-Music_RocketHideout_Ch3: ; eec79
+Music_RocketHideout_Ch3:
 	notetype $c, $19
-Music_RocketHideout_branch_eec7c: ; eec7c
+Music_RocketHideout_branch_eec7c:
 	octave 2
 	note D#, 2
 	note __, 2
@@ -237,7 +234,7 @@ Music_RocketHideout_branch_eec7c: ; eec7c
 	note A_, 2
 	note __, 8
 	loopchannel 6, Music_RocketHideout_branch_eec7c
-Music_RocketHideout_branch_eec8a: ; eec8a
+Music_RocketHideout_branch_eec8a:
 	note F_, 2
 	note __, 2
 	octave 3
@@ -252,7 +249,7 @@ Music_RocketHideout_branch_eec8a: ; eec8a
 	note B_, 2
 	note __, 8
 	loopchannel 2, Music_RocketHideout_branch_eec8a
-Music_RocketHideout_branch_eec9b: ; eec9b
+Music_RocketHideout_branch_eec9b:
 	note C#, 2
 	note __, 2
 	note G#, 4
@@ -261,7 +258,7 @@ Music_RocketHideout_branch_eec9b: ; eec9b
 	octave 3
 	note C#, 16
 	loopchannel 2, Music_RocketHideout_branch_eec9b
-Music_RocketHideout_branch_eeca6: ; eeca6
+Music_RocketHideout_branch_eeca6:
 	octave 2
 	note C#, 2
 	note __, 2
@@ -274,9 +271,8 @@ Music_RocketHideout_branch_eeca6: ; eeca6
 	note __, 8
 	loopchannel 2, Music_RocketHideout_branch_eeca6
 	loopchannel 0, Music_RocketHideout_branch_eec7c
-; eecb8
 
-Music_RocketHideout_Ch4: ; eecb8
+Music_RocketHideout_Ch4:
 	togglenoise $0
 	notetype $c
 	stereopanning $f
@@ -287,7 +283,7 @@ Music_RocketHideout_Ch4: ; eecb8
 	note D#, 1
 	note D#, 1
 	callchannel Music_RocketHideout_branch_eecdb
-Music_RocketHideout_branch_eecc7: ; eecc7
+Music_RocketHideout_branch_eecc7:
 	callchannel Music_RocketHideout_branch_eecdb
 	note E_, 4
 	callchannel Music_RocketHideout_branch_eecdb
@@ -297,9 +293,8 @@ Music_RocketHideout_branch_eecc7: ; eecc7
 	callchannel Music_RocketHideout_branch_eecdb
 	note F#, 4
 	loopchannel 0, Music_RocketHideout_branch_eecc7
-; eecdb
 
-Music_RocketHideout_branch_eecdb: ; eecdb
+Music_RocketHideout_branch_eecdb:
 	stereopanning $f0
 	note D#, 1
 	note D#, 1
@@ -310,6 +305,3 @@ Music_RocketHideout_branch_eecdb: ; eecdb
 	stereopanning $f0
 	note A_, 4
 	endchannel
-; eece8
-
-

@@ -1,11 +1,10 @@
-Music_TrainerVictory: ; ebeab
-	dbw $80, Music_TrainerVictory_Ch1
-	dbw $01, Music_TrainerVictory_Ch2
-	dbw $02, Music_TrainerVictory_Ch3
-; ebeb4
+Music_TrainerVictory:
+	musicheader 3, 1, Music_TrainerVictory_Ch1
+	musicheader 1, 2, Music_TrainerVictory_Ch2
+	musicheader 1, 3, Music_TrainerVictory_Ch3
 
-Music_TrainerVictory_Ch1: ; ebeb4
-	ftempo 120
+Music_TrainerVictory_Ch1:
+	tempo 120
 	volume $77
 	dutycycle $2
 	tone $0001
@@ -20,7 +19,7 @@ Music_TrainerVictory_Ch1: ; ebeb4
 	intensity $b6
 	note A_, 12
 	stereopanning $f
-Music_TrainerVictory_branch_ebecd: ; ebecd
+Music_TrainerVictory_branch_ebecd:
 	intensity $72
 	callchannel Music_TrainerVictory_branch_ebf11
 	intensity $51
@@ -48,7 +47,7 @@ Music_TrainerVictory_branch_ebecd: ; ebecd
 	note __, 2
 	note G_, 2
 	note A#, 6
-Music_TrainerVictory_branch_ebef2: ; ebef2
+Music_TrainerVictory_branch_ebef2:
 	intensity $72
 	octave 4
 	note D_, 2
@@ -60,7 +59,7 @@ Music_TrainerVictory_branch_ebef2: ; ebef2
 	note A_, 2
 	octave 4
 	note D_, 2
-Music_TrainerVictory_branch_ebf01: ; ebf01
+Music_TrainerVictory_branch_ebf01:
 	octave 4
 	note C#, 2
 	octave 3
@@ -71,9 +70,8 @@ Music_TrainerVictory_branch_ebf01: ; ebf01
 	note F#, 2
 	note G_, 2
 	loopchannel 0, Music_TrainerVictory_branch_ebecd
-; ebf11
 
-Music_TrainerVictory_branch_ebf11: ; ebf11
+Music_TrainerVictory_branch_ebf11:
 	octave 3
 	note F#, 2
 	note __, 2
@@ -84,9 +82,8 @@ Music_TrainerVictory_branch_ebf11: ; ebf11
 	note E_, 2
 	note G_, 6
 	endchannel
-; ebf1b
 
-Music_TrainerVictory_Ch2: ; ebf1b
+Music_TrainerVictory_Ch2:
 	vibrato $12, $34
 	dutycycle $3
 	notetype $8, $d1
@@ -101,7 +98,7 @@ Music_TrainerVictory_Ch2: ; ebf1b
 	intensity $d6
 	note D_, 12
 	stereopanning $f0
-Music_TrainerVictory_branch_ebf30: ; ebf30
+Music_TrainerVictory_branch_ebf30:
 	notetype $8, $82
 	callchannel Music_TrainerVictory_branch_ebf56
 	note F#, 2
@@ -126,9 +123,8 @@ Music_TrainerVictory_branch_ebf30: ; ebf30
 	note F#, 16
 	note E_, 16
 	loopchannel 0, Music_TrainerVictory_branch_ebf30
-; ebf56
 
-Music_TrainerVictory_branch_ebf56: ; ebf56
+Music_TrainerVictory_branch_ebf56:
 	octave 4
 	note D_, 2
 	note __, 2
@@ -143,9 +139,8 @@ Music_TrainerVictory_branch_ebf56: ; ebf56
 	octave 4
 	note E_, 6
 	endchannel
-; ebf64
 
-Music_TrainerVictory_Ch3: ; ebf64
+Music_TrainerVictory_Ch3:
 	notetype $8, $25
 	octave 3
 	note G_, 6
@@ -160,7 +155,7 @@ Music_TrainerVictory_Ch3: ; ebf64
 	note C#, 2
 	octave 2
 	note B_, 2
-Music_TrainerVictory_branch_ebf74: ; ebf74
+Music_TrainerVictory_branch_ebf74:
 	callchannel Music_TrainerVictory_branch_ebfb1
 	octave 3
 	note C#, 2
@@ -212,9 +207,8 @@ Music_TrainerVictory_branch_ebf74: ; ebf74
 	note E_, 2
 	note C#, 2
 	loopchannel 0, Music_TrainerVictory_branch_ebf74
-; ebfb1
 
-Music_TrainerVictory_branch_ebfb1: ; ebfb1
+Music_TrainerVictory_branch_ebfb1:
 	octave 2
 	note A_, 2
 	note __, 2
@@ -233,5 +227,3 @@ Music_TrainerVictory_branch_ebfb1: ; ebfb1
 	octave 2
 	note B_, 2
 	endchannel
-; ebfc3
-

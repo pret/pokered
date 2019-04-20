@@ -1,11 +1,10 @@
-Music_PokemonChannel: ; ee45f
-	dbw $c0, Music_PokemonChannel_Ch1
-	dbw $01, Music_PokemonChannel_Ch2
-	dbw $02, Music_PokemonChannel_Ch3
-	dbw $03, Music_PokemonChannel_Ch4
-; ee46b
+Music_PokemonChannel:
+	musicheader 4, 1, Music_PokemonChannel_Ch1
+	musicheader 1, 2, Music_PokemonChannel_Ch2
+	musicheader 1, 3, Music_PokemonChannel_Ch3
+	musicheader 1, 4, Music_PokemonChannel_Ch4
 
-Music_PokemonChannel_Ch1: ; ee46b
+Music_PokemonChannel_Ch1:
 	tempo 128
 	volume $77
 	vibrato $8, $38
@@ -74,9 +73,8 @@ Music_PokemonChannel_Ch1: ; ee46b
 	note D_, 2
 	note __, 6
 	endchannel
-; ee4be
 
-Music_PokemonChannel_Ch2: ; ee4be
+Music_PokemonChannel_Ch2:
 	dutycycle $1
 	vibrato $8, $38
 	stereopanning $ff
@@ -145,9 +143,8 @@ Music_PokemonChannel_Ch2: ; ee4be
 	note G_, 2
 	note __, 6
 	endchannel
-; ee50e
 
-Music_PokemonChannel_Ch3: ; ee50e
+Music_PokemonChannel_Ch3:
 	vibrato $8, $38
 	notetype $c, $25
 	stereopanning $f0
@@ -202,12 +199,11 @@ Music_PokemonChannel_Ch3: ; ee50e
 	note G_, 1
 	note __, 3
 	endchannel
-; ee549
 
-Music_PokemonChannel_Ch4: ; ee549
+Music_PokemonChannel_Ch4:
 	togglenoise $3
 	notetype $c
-Music_PokemonChannel_branch_ee54d: ; ee54d
+Music_PokemonChannel_branch_ee54d:
 	note A#, 3
 	note A#, 1
 	note D_, 2
@@ -233,6 +229,3 @@ Music_PokemonChannel_branch_ee54d: ; ee54d
 	note A#, 4
 	note A#, 4
 	endchannel
-; ee569
-
-

@@ -4,7 +4,7 @@ Music_GymLeaderBattle:
 	dbw $02, Music_GymLeaderBattle_Ch3
 
 Music_GymLeaderBattle_Ch1: 
-	ftempo 104
+	tempo 104
 	volume 119
 	dutycycle 3
 	vibrato $8, $34

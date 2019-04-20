@@ -1,15 +1,14 @@
-Music_PokemonLullaby: ; f6d79
-	dbw $80, Music_PokemonLullaby_Ch1
-	dbw $01, Music_PokemonLullaby_Ch2
-	dbw $02, Music_PokemonLullaby_Ch3
-; f6d82
+Music_PokemonLullaby:
+	musicheader 3, 1, Music_PokemonLullaby_Ch1
+	musicheader 1, 2, Music_PokemonLullaby_Ch2
+	musicheader 1, 3, Music_PokemonLullaby_Ch3
 
-Music_PokemonLullaby_Ch1: ; f6d82
+Music_PokemonLullaby_Ch1:
 	tempo 224
 	volume $77
 	dutycycle $3
 	tone $0001
-Music_PokemonLullaby_branch_f6d8c: ; f6d8c
+Music_PokemonLullaby_branch_f6d8c:
 	notetype $c, $a7
 	octave 3
 	note G_, 16
@@ -53,13 +52,12 @@ Music_PokemonLullaby_branch_f6d8c: ; f6d8c
 	octave 3
 	note B_, 8
 	loopchannel 0, Music_PokemonLullaby_branch_f6d8c
-; f6dc4
 
-Music_PokemonLullaby_Ch2: ; f6dc4
+Music_PokemonLullaby_Ch2:
 	vibrato $10, $14
 	dutycycle $0
 	notetype $c, $b4
-Music_PokemonLullaby_branch_f6dcc: ; f6dcc
+Music_PokemonLullaby_branch_f6dcc:
 	note __, 16
 	note __, 10
 	octave 4
@@ -104,11 +102,10 @@ Music_PokemonLullaby_branch_f6dcc: ; f6dcc
 	note E_, 16
 	note __, 14
 	loopchannel 0, Music_PokemonLullaby_branch_f6dcc
-; f6e03
 
-Music_PokemonLullaby_Ch3: ; f6e03
+Music_PokemonLullaby_Ch3:
 	notetype $c, $11
-Music_PokemonLullaby_branch_f6e06: ; f6e06
+Music_PokemonLullaby_branch_f6e06:
 	stereopanning $f0
 	octave 4
 	note C_, 2
@@ -133,6 +130,3 @@ Music_PokemonLullaby_branch_f6e06: ; f6e06
 	note B_, 2
 	note A_, 2
 	loopchannel 0, Music_PokemonLullaby_branch_f6e06
-; f6e23
-
-

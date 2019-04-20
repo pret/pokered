@@ -1,10 +1,9 @@
-Music_Mom: ; f6bf2
-	dbw $81, Music_Mom_Ch2
-	dbw $02, Music_Mom_Ch3
-	dbw $03, Music_Mom_Ch4
-; f6bfb
+Music_Mom:
+	musicheader 3, 2, Music_Mom_Ch2
+	musicheader 1, 3, Music_Mom_Ch3
+	musicheader 1, 4, Music_Mom_Ch4
 
-Music_Mom_Ch2: ; f6bfb
+Music_Mom_Ch2:
 	tempo 144
 	volume $77
 	stereopanning $f
@@ -17,7 +16,7 @@ Music_Mom_Ch2: ; f6bfb
 	note G#, 1
 	note A_, 1
 	note B_, 8
-Music_Mom_branch_f6c0e: ; f6c0e
+Music_Mom_branch_f6c0e:
 	notetype $c, $b1
 	note __, 4
 	octave 3
@@ -31,9 +30,8 @@ Music_Mom_branch_f6c0e: ; f6c0e
 	note A#, 2
 	note B_, 2
 	loopchannel 0, Music_Mom_branch_f6c0e
-; f6c20
 
-Music_Mom_Ch3: ; f6c20
+Music_Mom_Ch3:
 	stereopanning $f0
 	notetype $6, $25
 	octave 3
@@ -44,7 +42,7 @@ Music_Mom_Ch3: ; f6c20
 	note G#, 1
 	note E_, 8
 	intensity $23
-Music_Mom_branch_f6c2e: ; f6c2e
+Music_Mom_branch_f6c2e:
 	octave 2
 	note A_, 2
 	note __, 6
@@ -77,13 +75,12 @@ Music_Mom_branch_f6c2e: ; f6c2e
 	note D_, 2
 	note __, 2
 	loopchannel 0, Music_Mom_branch_f6c2e
-; f6c51
 
-Music_Mom_Ch4: ; f6c51
+Music_Mom_Ch4:
 	togglenoise $3
 	notetype $c
 	note __, 6
-Music_Mom_branch_f6c56: ; f6c56
+Music_Mom_branch_f6c56:
 	note D#, 1
 	note __, 1
 	note F#, 2
@@ -109,6 +106,3 @@ Music_Mom_branch_f6c56: ; f6c56
 	note D#, 1
 	note __, 1
 	loopchannel 0, Music_Mom_branch_f6c56
-; f6c72
-
-

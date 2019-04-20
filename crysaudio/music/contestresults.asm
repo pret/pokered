@@ -1,15 +1,14 @@
-Music_ContestResults: ; efb3e
-	dbw $c0, Music_ContestResults_Ch1
-	dbw $01, Music_ContestResults_Ch2
-	dbw $02, Music_ContestResults_Ch3
-	dbw $03, Music_ContestResults_Ch4
-; efb4a
+Music_ContestResults:
+	musicheader 4, 1, Music_ContestResults_Ch1
+	musicheader 1, 2, Music_ContestResults_Ch2
+	musicheader 1, 3, Music_ContestResults_Ch3
+	musicheader 1, 4, Music_ContestResults_Ch4
 
-Music_ContestResults_Ch1: ; efb4a
+Music_ContestResults_Ch1:
 	tempo 144
 	volume $77
 	notetype $c, $51
-Music_ContestResults_branch_efb52: ; efb52
+Music_ContestResults_branch_efb52:
 	note __, 2
 	octave 2
 	note G_, 1
@@ -48,11 +47,10 @@ Music_ContestResults_branch_efb52: ; efb52
 	note G_, 1
 	note __, 1
 	loopchannel 0, Music_ContestResults_branch_efb52
-; efb7b
 
-Music_ContestResults_Ch2: ; efb7b
+Music_ContestResults_Ch2:
 	notetype $c, $61
-Music_ContestResults_branch_efb7e: ; efb7e
+Music_ContestResults_branch_efb7e:
 	octave 2
 	note C_, 2
 	octave 3
@@ -93,7 +91,7 @@ Music_ContestResults_branch_efb7e: ; efb7e
 	octave 3
 	note F_, 1
 	note __, 1
-Music_ContestResults_branch_efba6: ; efba6
+Music_ContestResults_branch_efba6:
 	octave 2
 	note D_, 2
 	octave 3
@@ -126,12 +124,11 @@ Music_ContestResults_branch_efba6: ; efba6
 	note D_, 1
 	note __, 1
 	loopchannel 0, Music_ContestResults_branch_efb7e
-; efbcc
 
-Music_ContestResults_Ch3: ; efbcc
+Music_ContestResults_Ch3:
 	vibrato $8, $24
 	notetype $c, $23
-Music_ContestResults_branch_efbd2: ; efbd2
+Music_ContestResults_branch_efbd2:
 	octave 4
 	note E_, 5
 	note __, 1
@@ -152,12 +149,11 @@ Music_ContestResults_branch_efbd2: ; efbd2
 	note A_, 8
 	note G_, 8
 	loopchannel 0, Music_ContestResults_branch_efbd2
-; efbe9
 
-Music_ContestResults_Ch4: ; efbe9
+Music_ContestResults_Ch4:
 	togglenoise $4
 	notetype $6
-Music_ContestResults_branch_efbed: ; efbed
+Music_ContestResults_branch_efbed:
 	note C#, 4
 	note C#, 4
 	note C#, 2
@@ -175,6 +171,3 @@ Music_ContestResults_branch_efbed: ; efbed
 	note G_, 1
 	note G_, 1
 	loopchannel 0, Music_ContestResults_branch_efbed
-; efc01
-
-

@@ -1,13 +1,11 @@
-Music_Route1: ; ec000
-	dbw $80, Music_Route1_Ch1
-	dbw $01, Music_Route1_Ch2
-	dbw $02, Music_Route1_Ch3
-; ec009
+Music_Route1:
+	musicheader 3, 1, Music_Route1_Ch1
+	musicheader 1, 2, Music_Route1_Ch2
+	musicheader 1, 3, Music_Route1_Ch3
 
+	db $3
 
-
-
-Music_Route1_Ch1: ; ec00a
+Music_Route1_Ch1:
 	stereopanning $f
 	tempo 184
 	volume $77
@@ -61,7 +59,7 @@ Music_Route1_Ch1: ; ec00a
 	note D_, 2
 	intensity $83
 	note __, 2
-Music_Route1_branch_ec04a: ; ec04a
+Music_Route1_branch_ec04a:
 	intensity $83
 	note __, 2
 	octave 4
@@ -204,9 +202,8 @@ Music_Route1_branch_ec04a: ; ec04a
 	note D_, 2
 	note __, 2
 	loopchannel 0, Music_Route1_branch_ec04a
-; ec0eb
 
-Music_Route1_Ch2: ; ec0eb
+Music_Route1_Ch2:
 	stereopanning $f0
 	vibrato $12, $22
 	dutycycle $2
@@ -233,7 +230,7 @@ Music_Route1_Ch2: ; ec0eb
 	note D_, 1
 	note E_, 1
 	dutycycle $2
-Music_Route1_branch_ec112: ; ec112
+Music_Route1_branch_ec112:
 	intensity $82
 	callchannel Music_Route1_branch_ec188
 	intensity $81
@@ -324,9 +321,8 @@ Music_Route1_branch_ec112: ; ec112
 	note D_, 1
 	note E_, 1
 	loopchannel 0, Music_Route1_branch_ec112
-; ec188
 
-Music_Route1_branch_ec188: ; ec188
+Music_Route1_branch_ec188:
 	note F#, 2
 	note F#, 2
 	note F#, 2
@@ -343,9 +339,8 @@ Music_Route1_branch_ec188: ; ec188
 	note F#, 1
 	note E_, 2
 	endchannel
-; ec198
 
-Music_Route1_branch_ec198: ; ec198
+Music_Route1_branch_ec198:
 	note A_, 2
 	note A_, 2
 	note F#, 2
@@ -364,9 +359,8 @@ Music_Route1_branch_ec198: ; ec198
 	note F#, 1
 	note E_, 2
 	endchannel
-; ec1aa
 
-Music_Route1_branch_ec1aa: ; ec1aa
+Music_Route1_branch_ec1aa:
 	note A_, 2
 	note A_, 2
 	note F#, 2
@@ -381,9 +375,8 @@ Music_Route1_branch_ec1aa: ; ec1aa
 	octave 5
 	note D_, 2
 	endchannel
-; ec1b8
 
-Music_Route1_Ch3: ; ec1b8
+Music_Route1_Ch3:
 	stereopanning $ff
 	vibrato $10, $23
 	notetype $c, $25
@@ -463,7 +456,7 @@ Music_Route1_Ch3: ; ec1b8
 	note __, 1
 	note A_, 1
 	note __, 3
-Music_Route1_branch_ec20c: ; ec20c
+Music_Route1_branch_ec20c:
 	octave 3
 	note D_, 1
 	note __, 1
@@ -651,6 +644,3 @@ Music_Route1_branch_ec20c: ; ec20c
 	note A_, 1
 	note __, 3
 	loopchannel 0, Music_Route1_branch_ec20c
-; ec2ca
-
-

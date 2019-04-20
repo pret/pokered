@@ -1,13 +1,11 @@
-Music_VermilionCity: ; eb676
-	dbw $80, Music_VermilionCity_Ch1
-	dbw $01, Music_VermilionCity_Ch2
-	dbw $02, Music_VermilionCity_Ch3
-; eb67f
+Music_VermilionCity:
+	musicheader 3, 1, Music_VermilionCity_Ch1
+	musicheader 1, 2, Music_VermilionCity_Ch2
+	musicheader 1, 3, Music_VermilionCity_Ch3
 
+	db $3
 
-
-
-Music_VermilionCity_Ch1: ; eb680
+Music_VermilionCity_Ch1:
 	stereopanning $f
 	tempo 176
 	volume $77
@@ -31,7 +29,7 @@ Music_VermilionCity_Ch1: ; eb680
 	octave 5
 	note D_, 1
 	vibrato $10, $23
-Music_VermilionCity_branch_eb6a0: ; eb6a0
+Music_VermilionCity_branch_eb6a0:
 	dutycycle $1
 	notetype $c, $85
 	callchannel Music_VermilionCity_branch_eb6f9
@@ -92,9 +90,8 @@ Music_VermilionCity_branch_eb6a0: ; eb6a0
 	octave 3
 	note D_, 4
 	loopchannel 0, Music_VermilionCity_branch_eb6a0
-; eb6f9
 
-Music_VermilionCity_branch_eb6f9: ; eb6f9
+Music_VermilionCity_branch_eb6f9:
 	octave 3
 	note C#, 4
 	note E_, 4
@@ -103,9 +100,8 @@ Music_VermilionCity_branch_eb6f9: ; eb6f9
 	note E_, 2
 	note G#, 2
 	endchannel
-; eb701
 
-Music_VermilionCity_branch_eb701: ; eb701
+Music_VermilionCity_branch_eb701:
 	note D_, 2
 	note F_, 2
 	note A_, 2
@@ -117,9 +113,8 @@ Music_VermilionCity_branch_eb701: ; eb701
 	note A_, 2
 	note E_, 2
 	endchannel
-; eb70c
 
-Music_VermilionCity_branch_eb70c: ; eb70c
+Music_VermilionCity_branch_eb70c:
 	note __, 2
 	note F#, 2
 	note A_, 2
@@ -141,9 +136,8 @@ Music_VermilionCity_branch_eb70c: ; eb70c
 	note B_, 2
 	note G#, 2
 	endchannel
-; eb721
 
-Music_VermilionCity_Ch2: ; eb721
+Music_VermilionCity_Ch2:
 	stereopanning $ff
 	dutycycle $3
 	notetype $c, $77
@@ -158,7 +152,7 @@ Music_VermilionCity_Ch2: ; eb721
 	note E_, 4
 	note F#, 4
 	note G#, 4
-Music_VermilionCity_branch_eb735: ; eb735
+Music_VermilionCity_branch_eb735:
 	notetype $c, $97
 	callchannel Music_VermilionCity_branch_eb768
 	note G#, 2
@@ -192,9 +186,8 @@ Music_VermilionCity_branch_eb735: ; eb735
 	octave 5
 	note E_, 16
 	loopchannel 0, Music_VermilionCity_branch_eb735
-; eb768
 
-Music_VermilionCity_branch_eb768: ; eb768
+Music_VermilionCity_branch_eb768:
 	octave 1
 	note A_, 8
 	octave 2
@@ -217,9 +210,8 @@ Music_VermilionCity_branch_eb768: ; eb768
 	octave 1
 	note A_, 2
 	endchannel
-; eb77e
 
-Music_VermilionCity_branch_eb77e: ; eb77e
+Music_VermilionCity_branch_eb77e:
 	note F#, 8
 	note B_, 8
 	note A_, 4
@@ -227,9 +219,8 @@ Music_VermilionCity_branch_eb77e: ; eb77e
 	note F#, 4
 	note E_, 4
 	endchannel
-; eb785
 
-Music_VermilionCity_Ch3: ; eb785
+Music_VermilionCity_Ch3:
 	stereopanning $f0
 	vibrato $22, $23
 	notetype $c, $25
@@ -250,7 +241,7 @@ Music_VermilionCity_Ch3: ; eb785
 	note D_, 1
 	octave 2
 	note B_, 1
-Music_VermilionCity_branch_eb79e: ; eb79e
+Music_VermilionCity_branch_eb79e:
 	notetype $c, $22
 	callchannel Music_VermilionCity_branch_eb7de
 	octave 5
@@ -298,9 +289,8 @@ Music_VermilionCity_branch_eb79e: ; eb79e
 	note E_, 1
 	note G#, 1
 	loopchannel 0, Music_VermilionCity_branch_eb79e
-; eb7de
 
-Music_VermilionCity_branch_eb7de: ; eb7de
+Music_VermilionCity_branch_eb7de:
 	octave 5
 	note A_, 8
 	octave 6
@@ -324,9 +314,8 @@ Music_VermilionCity_branch_eb7de: ; eb7de
 	octave 5
 	note B_, 1
 	endchannel
-; eb7f5
 
-Music_VermilionCity_branch_eb7f5: ; eb7f5
+Music_VermilionCity_branch_eb7f5:
 	note A_, 1
 	note __, 1
 	note A_, 2
@@ -346,6 +335,3 @@ Music_VermilionCity_branch_eb7f5: ; eb7f5
 	octave 4
 	note C#, 1
 	endchannel
-; eb808
-
-

@@ -5,13 +5,13 @@ Music_Pinballgengarstage_haunter: ; 3dffc
 ; 3e005
 
 Music_Pinballgengarstage_haunter_Ch1: ; 3e005
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballgengarstage_haunter_branch_3ddf3
 Music_Pinballgengarstage_haunter_Ch2: ; 3e00a
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballgengarstage_haunter_branch_3de4c
 Music_Pinballgengarstage_haunter_Ch3: ; 3e00f
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballgengarstage_haunter_branch_3df1f
 
 Music_Pinballgengarstage_gengar: ; 3e014
@@ -138,11 +138,11 @@ Music_Pinballgengarstage_haunter_branch_3e081: ; 3e081
 	note __, 2
 	loopchannel 2, Music_Pinballgengarstage_haunter_branch_3e081
 	callchannel Music_Pinballgengarstage_haunter_branch_3e12f
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballgengarstage_haunter_branch_3e12f
-	forceoctave $8
+	pitchoffset 0, G#
 	callchannel Music_Pinballgengarstage_haunter_branch_3e12f
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $88
 	octave 4
 	note C#, 4
@@ -377,11 +377,11 @@ Music_Pinballgengarstage_gengar_branch_3e1a8: ; 3e1a8
 	note F#, 2
 	loopchannel 2, Music_Pinballgengarstage_gengar_branch_3e1a8
 	callchannel Music_Pinballgengarstage_gengar_branch_3e25f
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballgengarstage_gengar_branch_3e25f
-	forceoctave $8
+	pitchoffset 0, G#
 	callchannel Music_Pinballgengarstage_gengar_branch_3e25f
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $b8
 	octave 4
 	note E_, 4
@@ -572,7 +572,7 @@ Music_Pinballgengarstage_gengar_Ch3: ; 3e299
 	notetype $6, $22
 	note D#, 16
 	notetype $6, $12
-	forceoctave $28
+	pitchoffset 2, G#
 	octave 3
 	note G#, 1
 	note G_, 1
@@ -582,7 +582,7 @@ Music_Pinballgengarstage_gengar_Ch3: ; 3e299
 	note D#, 1
 	note D_, 1
 	note C#, 1
-	forceoctave $0
+	pitchoffset 0, C_
 Music_Pinballgengarstage_gengar_branch_3e2db: ; 3e2db
 	notetype $6, $22
 	octave 1
@@ -624,11 +624,11 @@ Music_Pinballgengarstage_gengar_branch_3e2db: ; 3e2db
 	note __, 2
 	loopchannel 2, Music_Pinballgengarstage_gengar_branch_3e2db
 	callchannel Music_Pinballgengarstage_gengar_branch_3e36d
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballgengarstage_gengar_branch_3e36d
-	forceoctave $8
+	pitchoffset 0, G#
 	callchannel Music_Pinballgengarstage_gengar_branch_3e36d
-	forceoctave $0
+	pitchoffset 0, C_
 	note E_, 4
 	octave 2
 	note F#, 1

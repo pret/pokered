@@ -1,11 +1,10 @@
-Music_Route26: ; eefb2
-	dbw $c0, Music_Route26_Ch1
-	dbw $01, Music_Route26_Ch2
-	dbw $02, Music_Route26_Ch3
-	dbw $03, Music_Route26_Ch4
-; eefbe
+Music_Route26:
+	musicheader 4, 1, Music_Route26_Ch1
+	musicheader 1, 2, Music_Route26_Ch2
+	musicheader 1, 3, Music_Route26_Ch3
+	musicheader 1, 4, Music_Route26_Ch4
 
-Music_Route26_Ch1: ; eefbe
+Music_Route26_Ch1:
 	stereopanning $f
 	vibrato $12, $23
 	tempo 151
@@ -27,7 +26,7 @@ Music_Route26_Ch1: ; eefbe
 	octave 3
 	note G#, 2
 	note F#, 2
-Music_Route26_branch_eefe0: ; eefe0
+Music_Route26_branch_eefe0:
 	dutycycle $0
 	notetype $c, $a7
 	octave 3
@@ -194,9 +193,8 @@ Music_Route26_branch_eefe0: ; eefe0
 	note B_, 4
 	note __, 4
 	loopchannel 0, Music_Route26_branch_eefe0
-; ef09d
 
-Music_Route26_Ch2: ; ef09d
+Music_Route26_Ch2:
 	stereopanning $f0
 	vibrato $14, $23
 	dutycycle $2
@@ -234,7 +232,7 @@ Music_Route26_Ch2: ; ef09d
 	octave 2
 	note C_, 2
 	note D#, 2
-Music_Route26_branch_ef0ce: ; ef0ce
+Music_Route26_branch_ef0ce:
 	dutycycle $2
 	notetype $c, $c2
 	octave 2
@@ -283,7 +281,7 @@ Music_Route26_branch_ef0ce: ; ef0ce
 	note D#, 4
 	note D#, 4
 	notetype $8, $c2
-Music_Route26_branch_ef10e: ; ef10e
+Music_Route26_branch_ef10e:
 	octave 2
 	note G#, 2
 	note G#, 2
@@ -339,9 +337,8 @@ Music_Route26_branch_ef10e: ; ef10e
 	note C_, 1
 	note D#, 1
 	loopchannel 0, Music_Route26_branch_ef0ce
-; ef14e
 
-Music_Route26_branch_ef14e: ; ef14e
+Music_Route26_branch_ef14e:
 	note A#, 6
 	note A#, 1
 	octave 2
@@ -354,9 +351,8 @@ Music_Route26_branch_ef14e: ; ef14e
 	octave 1
 	note A#, 2
 	endchannel
-; ef15a
 
-Music_Route26_Ch3: ; ef15a
+Music_Route26_Ch3:
 	stereopanning $ff
 	vibrato $12, $23
 	notetype $c, $14
@@ -392,7 +388,7 @@ Music_Route26_Ch3: ; ef15a
 	note F#, 2
 	note F_, 2
 	note D#, 2
-Music_Route26_branch_ef18a: ; ef18a
+Music_Route26_branch_ef18a:
 	vibrato $18, $23
 	notetype $c, $14
 	octave 5
@@ -538,9 +534,8 @@ Music_Route26_branch_ef18a: ; ef18a
 	octave 3
 	note C_, 1
 	loopchannel 0, Music_Route26_branch_ef18a
-; ef22f
 
-Music_Route26_branch_ef22f: ; ef22f
+Music_Route26_branch_ef22f:
 	octave 5
 	note F_, 8
 	note C#, 2
@@ -550,18 +545,17 @@ Music_Route26_branch_ef22f: ; ef22f
 	note C#, 4
 	note D#, 4
 	endchannel
-; ef238
 
-Music_Route26_Ch4: ; ef238
+Music_Route26_Ch4:
 	togglenoise $4
 	notetype $c
-Music_Route26_branch_ef23c: ; ef23c
+Music_Route26_branch_ef23c:
 	note B_, 6
 	note D_, 1
 	note D_, 1
 	loopchannel 3, Music_Route26_branch_ef23c
 	callchannel Music_Route26_branch_ef2b0
-Music_Route26_branch_ef246: ; ef246
+Music_Route26_branch_ef246:
 	notetype $6
 	callchannel Music_Route26_branch_ef29a
 	callchannel Music_Route26_branch_ef29a
@@ -580,7 +574,7 @@ Music_Route26_branch_ef246: ; ef246
 	callchannel Music_Route26_branch_ef29a
 	callchannel Music_Route26_branch_ef29a
 	notetype $8
-Music_Route26_branch_ef266: ; ef266
+Music_Route26_branch_ef266:
 	note D_, 2
 	note D_, 2
 	note D_, 2
@@ -591,7 +585,7 @@ Music_Route26_branch_ef266: ; ef266
 	callchannel Music_Route26_branch_ef2a8
 	callchannel Music_Route26_branch_ef29a
 	callchannel Music_Route26_branch_ef2a8
-Music_Route26_branch_ef27c: ; ef27c
+Music_Route26_branch_ef27c:
 	notetype $6
 	note D_, 1
 	note D_, 1
@@ -611,9 +605,8 @@ Music_Route26_branch_ef27c: ; ef27c
 	note B_, 16
 	callchannel Music_Route26_branch_ef2b0
 	loopchannel 0, Music_Route26_branch_ef246
-; ef29a
 
-Music_Route26_branch_ef29a: ; ef29a
+Music_Route26_branch_ef29a:
 	note E_, 12
 	note D_, 2
 	note D_, 2
@@ -628,9 +621,8 @@ Music_Route26_branch_ef29a: ; ef29a
 	note C#, 1
 	note C#, 1
 	endchannel
-; ef2a8
 
-Music_Route26_branch_ef2a8: ; ef2a8
+Music_Route26_branch_ef2a8:
 	note E_, 12
 	note D_, 2
 	note D_, 2
@@ -639,9 +631,8 @@ Music_Route26_branch_ef2a8: ; ef2a8
 	note E_, 4
 	note D_, 4
 	endchannel
-; ef2b0
 
-Music_Route26_branch_ef2b0: ; ef2b0
+Music_Route26_branch_ef2b0:
 	notetype $6
 	note C#, 1
 	note C#, 1
@@ -672,6 +663,3 @@ Music_Route26_branch_ef2b0: ; ef2b0
 	note D_, 2
 	note E_, 2
 	endchannel
-; ef2d0
-
-

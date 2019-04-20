@@ -1,11 +1,10 @@
-Music_LookMysticalMan: ; 17843b
-	dbw $c0, Music_LookMysticalMan_Ch1
-	dbw $01, Music_LookMysticalMan_Ch2
-	dbw $02, Music_LookMysticalMan_Ch3
-	dbw $03, Music_LookMysticalMan_Ch4
-; 178447
+Music_LookMysticalMan:
+	musicheader 4, 1, Music_LookMysticalMan_Ch1
+	musicheader 1, 2, Music_LookMysticalMan_Ch2
+	musicheader 1, 3, Music_LookMysticalMan_Ch3
+	musicheader 1, 4, Music_LookMysticalMan_Ch4
 
-Music_LookMysticalMan_Ch1: ; 178447
+Music_LookMysticalMan_Ch1:
 	tempo 136
 	volume $77
 	vibrato $a, $34
@@ -13,7 +12,7 @@ Music_LookMysticalMan_Ch1: ; 178447
 	stereopanning $f
 	notetype $c, $b3
 	note __, 8
-Music_LookMysticalMan_branch_178458: ; 178458
+Music_LookMysticalMan_branch_178458:
 	dutycycle $3
 	notetype $6, $96
 	octave 3
@@ -94,7 +93,7 @@ Music_LookMysticalMan_branch_178458: ; 178458
 	note A#, 6
 	dutycycle $2
 	intensity $72
-Music_LookMysticalMan_branch_1784b4: ; 1784b4
+Music_LookMysticalMan_branch_1784b4:
 	octave 5
 	note D_, 2
 	octave 4
@@ -124,7 +123,7 @@ Music_LookMysticalMan_branch_1784b4: ; 1784b4
 	note D_, 2
 	note F#, 2
 	note B_, 2
-Music_LookMysticalMan_branch_1784d4: ; 1784d4
+Music_LookMysticalMan_branch_1784d4:
 	octave 5
 	note D_, 2
 	octave 4
@@ -156,9 +155,8 @@ Music_LookMysticalMan_branch_1784d4: ; 1784d4
 	note F#, 2
 	note A#, 2
 	loopchannel 0, Music_LookMysticalMan_branch_178458
-; 1784f9
 
-Music_LookMysticalMan_branch_1784f9: ; 1784f9
+Music_LookMysticalMan_branch_1784f9:
 	note D_, 16
 	octave 4
 	note D_, 2
@@ -192,14 +190,13 @@ Music_LookMysticalMan_branch_1784f9: ; 1784f9
 	note B_, 2
 	note A_, 6
 	endchannel
-; 17851a
 
-Music_LookMysticalMan_Ch2: ; 17851a
+Music_LookMysticalMan_Ch2:
 	dutycycle $3
 	vibrato $a, $34
 	notetype $c, $b3
 	note __, 8
-Music_LookMysticalMan_branch_178523: ; 178523
+Music_LookMysticalMan_branch_178523:
 	stereopanning $f0
 	notetype $6, $b8
 	octave 3
@@ -297,9 +294,8 @@ Music_LookMysticalMan_branch_178523: ; 178523
 	note A#, 16
 	note __, 2
 	loopchannel 0, Music_LookMysticalMan_branch_178523
-; 17859a
 
-Music_LookMysticalMan_branch_17859a: ; 17859a
+Music_LookMysticalMan_branch_17859a:
 	note B_, 2
 	note __, 2
 	octave 4
@@ -343,9 +339,8 @@ Music_LookMysticalMan_branch_17859a: ; 17859a
 	note F#, 2
 	note E_, 6
 	endchannel
-; 1785c8
 
-Music_LookMysticalMan_branch_1785c8: ; 1785c8
+Music_LookMysticalMan_branch_1785c8:
 	note C#, 8
 	intensity $88
 	note C_, 1
@@ -361,12 +356,11 @@ Music_LookMysticalMan_branch_1785c8: ; 1785c8
 	note __, 1
 	intensity $b8
 	endchannel
-; 1785db
 
-Music_LookMysticalMan_Ch3: ; 1785db
+Music_LookMysticalMan_Ch3:
 	notetype $6, $16
 	note __, 16
-Music_LookMysticalMan_branch_1785df: ; 1785df
+Music_LookMysticalMan_branch_1785df:
 	octave 2
 	note B_, 4
 	octave 3
@@ -421,7 +415,7 @@ Music_LookMysticalMan_branch_1785df: ; 1785df
 	note A_, 2
 	octave 3
 	note E_, 2
-Music_LookMysticalMan_branch_178615: ; 178615
+Music_LookMysticalMan_branch_178615:
 	octave 2
 	note F#, 4
 	note A#, 2
@@ -537,9 +531,8 @@ Music_LookMysticalMan_branch_178615: ; 178615
 	note B_, 8
 	note A#, 4
 	loopchannel 0, Music_LookMysticalMan_branch_1785df
-; 17868e
 
-Music_LookMysticalMan_Ch4: ; 17868e
+Music_LookMysticalMan_Ch4:
 	togglenoise $3
 	notetype $c
 	note D#, 2
@@ -547,7 +540,7 @@ Music_LookMysticalMan_Ch4: ; 17868e
 	note D_, 2
 	note D_, 1
 	note D_, 1
-Music_LookMysticalMan_branch_178697: ; 178697
+Music_LookMysticalMan_branch_178697:
 	callchannel Music_LookMysticalMan_branch_1786d3
 	callchannel Music_LookMysticalMan_branch_1786d9
 	callchannel Music_LookMysticalMan_branch_1786d3
@@ -566,7 +559,7 @@ Music_LookMysticalMan_branch_178697: ; 178697
 	note D_, 2
 	note D_, 1
 	note D_, 1
-Music_LookMysticalMan_branch_1786ba: ; 1786ba
+Music_LookMysticalMan_branch_1786ba:
 	note D_, 2
 	note D#, 2
 	note D_, 3
@@ -586,27 +579,24 @@ Music_LookMysticalMan_branch_1786ba: ; 1786ba
 	note D_, 1
 	loopchannel 2, Music_LookMysticalMan_branch_1786ba
 	loopchannel 0, Music_LookMysticalMan_branch_178697
-; 1786d3
 
-Music_LookMysticalMan_branch_1786d3: ; 1786d3
+Music_LookMysticalMan_branch_1786d3:
 	note D#, 4
 	note D_, 3
 	note D#, 3
 	note D#, 2
 	note D_, 4
 	endchannel
-; 1786d9
 
-Music_LookMysticalMan_branch_1786d9: ; 1786d9
+Music_LookMysticalMan_branch_1786d9:
 	note D#, 4
 	note D_, 3
 	note D_, 3
 	note D#, 2
 	note D_, 4
 	endchannel
-; 1786df
 
-Music_LookMysticalMan_branch_1786df: ; 1786df
+Music_LookMysticalMan_branch_1786df:
 	note D#, 4
 	note D_, 2
 	note D#, 1
@@ -616,6 +606,3 @@ Music_LookMysticalMan_branch_1786df: ; 1786df
 	note D_, 1
 	note D_, 1
 	endchannel
-; 1786e8
-
-

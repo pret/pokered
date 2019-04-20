@@ -1,11 +1,10 @@
-Music_LookRival: ; f4f79
-	dbw $c0, Music_LookRival_Ch1
-	dbw $01, Music_LookRival_Ch2
-	dbw $02, Music_LookRival_Ch3
-	dbw $03, Music_LookRival_Ch4
-; f4f85
+Music_LookRival:
+	musicheader 4, 1, Music_LookRival_Ch1
+	musicheader 1, 2, Music_LookRival_Ch2
+	musicheader 1, 3, Music_LookRival_Ch3
+	musicheader 1, 4, Music_LookRival_Ch4
 
-Music_LookRival_Ch1: ; f4f85
+Music_LookRival_Ch1:
 	tempo 112
 	volume $77
 	dutycycle $1
@@ -34,8 +33,8 @@ Music_LookRival_Ch1: ; f4f85
 	note G#, 8
 	intensity $a6
 	note F#, 8
-Music_AfterTheRivalFight_branch_f4fb1: ; f4fb1
-Music_LookRival_branch_f4fb1: ; f4fb1
+Music_AfterTheRivalFight_branch_f4fb1:
+Music_LookRival_branch_f4fb1:
 	intensity $b5
 	note F_, 4
 	note D#, 2
@@ -99,7 +98,7 @@ Music_LookRival_branch_f4fb1: ; f4fb1
 	note G#, 8
 	note F_, 6
 	note C_, 2
-Music_LookRival_branch_f4ff7: ; f4ff7
+Music_LookRival_branch_f4ff7:
 	intensity $b2
 	note F_, 6
 	intensity $b7
@@ -115,9 +114,8 @@ Music_LookRival_branch_f4ff7: ; f4ff7
 	note G#, 6
 	note F#, 4
 	loopchannel 0, Music_LookRival_branch_f4fb1
-; f5010
 
-Music_LookRival_Ch2: ; f5010
+Music_LookRival_Ch2:
 	dutycycle $3
 	vibrato $8, $36
 	stereopanning $f0
@@ -138,8 +136,8 @@ Music_LookRival_Ch2: ; f5010
 	note D#, 10
 	intensity $b7
 	note D#, 16
-Music_AfterTheRivalFight_branch_f502e: ; f502e
-Music_LookRival_branch_f502e: ; f502e
+Music_AfterTheRivalFight_branch_f502e:
+Music_LookRival_branch_f502e:
 	intensity $c7
 	note C_, 12
 	intensity $c4
@@ -192,7 +190,7 @@ Music_LookRival_branch_f502e: ; f502e
 	note D#, 1
 	note D_, 1
 	note D#, 2
-Music_LookRival_branch_f5070: ; f5070
+Music_LookRival_branch_f5070:
 	intensity $c2
 	note C_, 6
 	intensity $c7
@@ -205,9 +203,8 @@ Music_LookRival_branch_f5070: ; f5070
 	intensity $c7
 	note D#, 10
 	loopchannel 0, Music_LookRival_branch_f502e
-; f5086
 
-Music_LookRival_Ch3: ; f5086
+Music_LookRival_Ch3:
 	notetype $c, $28
 	note __, 2
 	octave 4
@@ -229,8 +226,8 @@ Music_LookRival_Ch3: ; f5086
 	note C_, 2
 	note D#, 2
 	note F#, 2
-Music_AfterTheRivalFight_branch_f509d: ; f509d
-Music_LookRival_branch_f509d: ; f509d
+Music_AfterTheRivalFight_branch_f509d:
+Music_LookRival_branch_f509d:
 	callchannel Music_LookRival_branch_f50ef
 	loopchannel 3, Music_LookRival_branch_f509d
 	note F_, 4
@@ -293,9 +290,8 @@ Music_LookRival_branch_f509d: ; f509d
 	note F#, 2
 	note E_, 2
 	loopchannel 0, Music_LookRival_branch_f509d
-; f50ef
 
-Music_LookRival_branch_f50ef: ; f50ef
+Music_LookRival_branch_f50ef:
 	note F_, 2
 	note C_, 2
 	note D_, 2
@@ -304,9 +300,8 @@ Music_LookRival_branch_f50ef: ; f50ef
 	note D_, 2
 	note D#, 2
 	endchannel
-; f50f7
 
-Music_LookRival_branch_f50f7: ; f50f7
+Music_LookRival_branch_f50f7:
 	note A#, 2
 	note F_, 2
 	note G_, 2
@@ -315,9 +310,8 @@ Music_LookRival_branch_f50f7: ; f50f7
 	note G_, 2
 	note G#, 2
 	endchannel
-; f50ff
 
-Music_LookRival_branch_f50ff: ; f50ff
+Music_LookRival_branch_f50ff:
 	note A#, 4
 	note F_, 2
 	note G#, 4
@@ -325,9 +319,8 @@ Music_LookRival_branch_f50ff: ; f50ff
 	note G_, 2
 	note G#, 2
 	endchannel
-; f5106
 
-Music_LookRival_Ch4: ; f5106
+Music_LookRival_Ch4:
 	stereopanning $f0
 	togglenoise $3
 	notetype $c
@@ -343,8 +336,8 @@ Music_LookRival_Ch4: ; f5106
 	note D_, 2
 	note D_, 2
 	note D_, 2
-Music_AfterTheRivalFight_branch_f5118: ; f5118
-Music_LookRival_branch_f5118: ; f5118
+Music_AfterTheRivalFight_branch_f5118:
+Music_LookRival_branch_f5118:
 	note D#, 4
 	note D_, 2
 	note D#, 4
@@ -357,6 +350,3 @@ Music_LookRival_branch_f5118: ; f5118
 	note D_, 2
 	note D_, 2
 	loopchannel 0, Music_LookRival_branch_f5118
-; f5127
-
-

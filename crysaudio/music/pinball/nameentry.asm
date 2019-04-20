@@ -33,16 +33,16 @@ Music_Pinballnameentry_Ch1: ; 4d538
 Music_Pinballnameentry_branch_4d55c: ; 4d55c
 	dutycycle $2
 	intensity $68
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballnameentry_branch_4d80d
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballnameentry_branch_4d80d
 	callchannel Music_Pinballnameentry_branch_4d80d
 Music_Pinballnameentry_branch_4d56d: ; 4d56d
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballnameentry_branch_4d80d
 	loopchannel 3, Music_Pinballnameentry_branch_4d56d
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballnameentry_branch_4d80d
 	octave 3
 	note C#, 4
@@ -911,19 +911,19 @@ Music_Pinballnameentry_branch_4d854: ; 4d854
 	intensity $78
 	note G_, 1
 	vibrato $18, $24
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballnameentry_branch_4da64
-	forceoctave $0
+	pitchoffset 0, C_
 	octave 5
 	note F_, 1
 	note F#, 5
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballnameentry_branch_4da8d
 	intensity $28
 	note A_, 2
 	octave 5
 	note __, 2
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $a8
 	note A_, 2
 	note G#, 2

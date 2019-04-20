@@ -65,9 +65,9 @@ PlayDefaultMusicCommon::
 	ld [wLastMusicSoundID], a
 	ld [wNewSoundID], a
 
-	ld [MusicFadeID], a
+	ld [wMusicFadeID], a
 	ld a, 8
-	ld [MusicFade], a
+	ld [wMusicFade], a
 	;call FadeMusic ; called in updatemusic
 	ret
 
@@ -202,12 +202,12 @@ PlayCry::
 	push af
 
 ; Cry headers are stuck in one bank.
-	ld a, BANK(CryHeaders)
+	ld a, BANK(PokemonCries)
 	ld [hROMBank], a
 	ld [$2000], a
 
 ; Each header is 6 bytes long:
-	ld hl, CryHeaders
+	ld hl, PokemonCries
 	add hl, de
 	add hl, de
 	add hl, de
@@ -221,19 +221,19 @@ PlayCry::
 	inc hl
 
 	ld a, [hli]
-	ld [CryPitch], a
+	ld [wCryPitch], a
 	ld a, [hli]
-	ld [CryEcho], a
+	ld [wCryPitch+1], a
 	ld a, [hli]
-	ld [CryLength], a
+	ld [wCryLength], a
 	ld a, [hl]
-	ld [CryLength+1], a
+	ld [wCryLength+1], a
 
-	ld a, BANK(PlayCry_)
+	ld a, BANK(_PlayCry)
 	ld [hROMBank], a
 	ld [$2000], a
 
-	call PlayCry_
+	call _PlayCry
 
 	pop af
 	ld [hROMBank], a
@@ -256,7 +256,7 @@ PlaySFX::
 	;call CheckSFX
 	;jr nc, .play
 ; Does it have priority?
-	;ld a, [CurSFX]
+	;ld a, [wCurSFX]
 	;cp e
 	;jr c, .quit
 
@@ -269,7 +269,7 @@ PlaySFX_play
 	ld [$2000], a ; bankswitch
 
 	ld a, e
-	ld [CurSFX], a
+	ld [wCurSFX], a
 	call _PlaySFX
 
 	pop af
@@ -291,7 +291,7 @@ GLOBAL LoadMusicByte
 	ld [MBC1RomBank], a
 
 	ld a, [de]
-	ld [CurMusicByte], a
+	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
 	ld [hROMBank], a

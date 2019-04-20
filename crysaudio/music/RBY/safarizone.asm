@@ -4,20 +4,20 @@ Music_SafariZone:
 	dbw $02, Music_SafariZone_Ch3
 
 Music_SafariZone_Ch1: ; bc2e (2:7c2e)
-	ftempo 132
+	tempo 132
 	volume 119
 	vibrato 6, 52
 	
 	dutycycle 2
 	notetype 12, 146
 	octave 3
-	unknownmusic0xe0 0, $4A
+	slidepitchto 1, 4, A_
 	note C_, 1
-	unknownmusic0xe0 0, $4A
+	slidepitchto 1, 4, A_
 	note G_, 1
-	unknownmusic0xe0 0, $4A
+	slidepitchto 1, 4, A_
 	note C_, 1
-	unknownmusic0xe0 0, $4A
+	slidepitchto 1, 4, A_
 	note G_, 1
 	note __, 4
 	dutycycle 3

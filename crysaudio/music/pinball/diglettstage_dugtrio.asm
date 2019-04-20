@@ -121,12 +121,12 @@ Music_Pinballdiglettstage_dugtrio_branch_450c4: ; 450c4
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45245
 	panning $ff
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4529e
-	forceoctave $4
+	pitchoffset 0, E_
 	panning $f0
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452cb
 	panning $f
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452e4
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45245
 	panning $ff
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452cb
@@ -158,11 +158,11 @@ Music_Pinballdiglettstage_dugtrio_branch_450c4: ; 450c4
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45245
 	panning $f
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4529e
-	forceoctave $4
+	pitchoffset 0, E_
 	panning $f0
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452cb
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452e4
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45245
 	panning $ff
 	intensity $83
@@ -198,19 +198,19 @@ Music_Pinballdiglettstage_dugtrio_branch_450c4: ; 450c4
 	note D#, 1
 	intensity $53
 	note D#, 1
-	forceoctave $1
+	pitchoffset 0, C#
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45221
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452fd
 	panning $f0
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4532e
-	forceoctave $e
+	pitchoffset 0, $e + 1
 	panning $f
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45213
-	forceoctave $a
+	pitchoffset 0, A#
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45213
 	panning $ff
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45345
 	panning $f0
 	octave 3
@@ -251,15 +251,15 @@ Music_Pinballdiglettstage_dugtrio_branch_450c4: ; 450c4
 	note __, 1
 	note G_, 1
 	note __, 1
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_452fd
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4532e
 	panning $f
-	forceoctave $e
+	pitchoffset 0, $e + 1
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45213
-	forceoctave $a
+	pitchoffset 0, A#
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45213
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45345
 	panning $ff
 	intensity $83
@@ -703,25 +703,25 @@ Music_Pinballdiglettstage_dugtrio_Ch3: ; 45375
 	intensity $32
 	note E_, 1
 Music_Pinballdiglettstage_dugtrio_branch_453c5: ; 453c5
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454d5
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454d5
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
 	intensity $12
 	octave 1
@@ -781,15 +781,15 @@ Music_Pinballdiglettstage_dugtrio_branch_453c5: ; 453c5
 	note B_, 1
 	octave 2
 	note C_, 1
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_454fe
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45556
 	intensity $22
 	octave 4
@@ -828,13 +828,13 @@ Music_Pinballdiglettstage_dugtrio_branch_453c5: ; 453c5
 	note C#, 1
 	note G_, 1
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_45565
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4559a
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4559a
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4559a
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $12
 	note F#, 1
 	note G_, 1
@@ -877,7 +877,7 @@ Music_Pinballdiglettstage_dugtrio_branch_453c5: ; 453c5
 	octave 2
 	note A#, 1
 	note __, 1
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballdiglettstage_dugtrio_branch_4559a
 	loopchannel 0, Music_Pinballdiglettstage_dugtrio_branch_453c5
 ; 454d5

@@ -78,11 +78,11 @@ Music_Pinballendcredits_branch_4cd04: ; 4cd04
 	intensity $98
 	callchannel Music_Pinballendcredits_branch_4cef5
 Music_Pinballendcredits_branch_4cd2e: ; 4cd2e
-	forceoctave $1
+	pitchoffset 0, C#
 	callchannel Music_Pinballendcredits_branch_4cef5
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballendcredits_branch_4cef5
-	forceoctave $0
+	pitchoffset 0, C_
 	note D_, 2
 	note __, 2
 	note D_, 4
@@ -511,7 +511,7 @@ Music_Pinballendcredits_Ch2: ; 4cf03
 	note G_, 2
 	callchannel Music_Pinballendcredits_branch_4d1f2
 Music_Pinballendcredits_branch_4cf36: ; 4cf36
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballendcredits_branch_4d21e
 	note A_, 2
 	intensity $28
@@ -535,7 +535,7 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note G_, 1
 	intensity $28
 	note G_, 1
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballendcredits_branch_4d21e
 	octave 5
 	note C_, 2
@@ -553,7 +553,7 @@ Music_Pinballendcredits_branch_4cf36: ; 4cf36
 	note D_, 1
 	note C#, 1
 	note C_, 1
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballendcredits_branch_4d21e
 	note G_, 1
 	intensity $28
@@ -1009,7 +1009,7 @@ Music_Pinballendcredits_branch_4d1f2: ; 4d1f2
 	intensity $28
 	note G_, 1
 	intensity $a8
-	forceoctave $0
+	pitchoffset 0, C_
 	note G_, 2
 	intensity $28
 	note G_, 2
@@ -1047,7 +1047,7 @@ Music_Pinballendcredits_branch_4d21e: ; 4d21e
 	intensity $28
 	note G_, 1
 	intensity $a8
-	forceoctave $0
+	pitchoffset 0, C_
 	endchannel
 ; 4d23e
 

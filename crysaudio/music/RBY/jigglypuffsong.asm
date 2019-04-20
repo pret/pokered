@@ -3,11 +3,11 @@ Music_JigglypuffSong:
 	dbw $01, Music_JigglypuffSong_Ch2
 
 Music_JigglypuffSong_Ch1: ; 7fb7d (1f:7b7d)
-	ftempo 144
+	tempo 144
 	volume 119
 	vibrato 8, 36
 	dutycycle 2
-	unknownmusic0xde 165
+	sound_duty 165
 	
 	notetype 13, 103
 	octave 4
@@ -28,7 +28,7 @@ Music_JigglypuffSong_Ch1: ; 7fb7d (1f:7b7d)
 Music_JigglypuffSong_Ch2: ; 7fb9a (1f:7b9a)
 	vibrato 5, 21
 	dutycycle 2
-	unknownmusic0xde 10
+	sound_duty 10
 	notetype 12, 167
 	octave 4
 	note E_, 8

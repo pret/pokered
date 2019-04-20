@@ -4,7 +4,7 @@ Music_YellowIntro:
 	dbw $02, Music_YellowIntro_Ch3
 
 Music_YellowIntro_Ch1: 
-	ftempo 116
+	tempo 116
 	volume 119
 	dutycycle 3
 	vibrato $8, $14

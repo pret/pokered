@@ -4,7 +4,7 @@ Music_WildBattle:
 	dbw $02, Music_WildBattle_Ch3
 
 Music_WildBattle_Ch1: 
-	ftempo 104
+	tempo 104
 	volume 119
 	dutycycle 3
 	vibrato $6, $34

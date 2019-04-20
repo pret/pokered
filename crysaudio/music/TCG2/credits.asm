@@ -3035,7 +3035,7 @@ Music_TCG2Credits_Ch1:
 
 Music_TCG2Credits_Ch3: 
 	notetype1 10
-	db $f3, $cc, $cc, $cc, $cc, $bc, $cc, $bc, $cc, $c0, $00, $00, $00, $00, $00, $00, $0b
+	load_wave 12, 12, 12, 12, 12, 12, 12, 12, 11, 12, 12, 12, 11, 12, 12, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11
 	notetype0 1
 	notetype1 1
 	octave 5

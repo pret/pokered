@@ -1,20 +1,18 @@
-Music_DancingHall: ; ef9bc
-	dbw $80, Music_DancingHall_Ch1
-	dbw $01, Music_DancingHall_Ch2
-	dbw $02, Music_DancingHall_Ch3
-; ef9c5
+Music_DancingHall:
+	musicheader 3, 1, Music_DancingHall_Ch1
+	musicheader 1, 2, Music_DancingHall_Ch2
+	musicheader 1, 3, Music_DancingHall_Ch3
 
+	db $3
 
-
-
-Music_DancingHall_Ch1: ; ef9c6
+Music_DancingHall_Ch1:
 	tempo 208
 	volume $77
 	stereopanning $f
 	notetype $6, $b7
 	note __, 3
 	dutycycle $0
-Music_DancingHall_branch_ef9d3: ; ef9d3
+Music_DancingHall_branch_ef9d3:
 	notetype $c, $b7
 	callchannel Music_DancingHall_branch_efa17
 	note __, 16
@@ -65,9 +63,8 @@ Music_DancingHall_branch_ef9d3: ; ef9d3
 	note __, 1
 	note F_, 2
 	loopchannel 0, Music_DancingHall_branch_ef9d3
-; efa17
 
-Music_DancingHall_branch_efa17: ; efa17
+Music_DancingHall_branch_efa17:
 	octave 3
 	note B_, 1
 	note __, 1
@@ -89,15 +86,14 @@ Music_DancingHall_branch_efa17: ; efa17
 	note D_, 1
 	note __, 1
 	endchannel
-; efa2c
 
-Music_DancingHall_Ch2: ; efa2c
+Music_DancingHall_Ch2:
 	stereopanning $f0
 	notetype $6, $a1
 	dutycycle $0
 	vibrato $10, $24
 	note __, 3
-Music_DancingHall_branch_efa37: ; efa37
+Music_DancingHall_branch_efa37:
 	notetype $6, $a2
 	callchannel Music_DancingHall_branch_efa7a
 	callchannel Music_DancingHall_branch_efa7a
@@ -145,9 +141,8 @@ Music_DancingHall_branch_efa37: ; efa37
 	note __, 1
 	note D_, 2
 	loopchannel 0, Music_DancingHall_branch_efa37
-; efa7a
 
-Music_DancingHall_branch_efa7a: ; efa7a
+Music_DancingHall_branch_efa7a:
 	intensity $a1
 	octave 4
 	note E_, 4
@@ -223,9 +218,8 @@ Music_DancingHall_branch_efa7a: ; efa7a
 	octave 4
 	note D_, 1
 	endchannel
-; efad6
 
-Music_DancingHall_Ch3: ; efad6
+Music_DancingHall_Ch3:
 	stereopanning $ff
 	vibrato $16, $24
 	notetype $6, $10
@@ -234,7 +228,7 @@ Music_DancingHall_Ch3: ; efad6
 	note B_, 1
 	octave 6
 	note D_, 1
-Music_DancingHall_branch_efae3: ; efae3
+Music_DancingHall_branch_efae3:
 	note E_, 13
 	note D_, 1
 	note E_, 1
@@ -309,6 +303,3 @@ Music_DancingHall_branch_efae3: ; efae3
 	octave 6
 	note D_, 1
 	loopchannel 0, Music_DancingHall_branch_efae3
-; efb3e
-
-

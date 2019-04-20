@@ -4,7 +4,7 @@ Music_DefeatedWildMon:
 	dbw $02, Music_DefeatedWildMon_Ch3
 
 Music_DefeatedWildMon_Ch1: ; 23b74 (8:7b74)
-	ftempo 112
+	tempo 112
 	volume 119
 	dutycycle 3
 	vibrato 6, 52

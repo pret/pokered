@@ -1,175 +1,152 @@
-Sfx_IntroUnown1: ; 17982d
-	dbw $04, Sfx_IntroUnown1_Ch5
-; 179830
+Sfx_IntroUnown1:
+	musicheader 1, 5, Sfx_IntroUnown1_Ch5
 
-Sfx_IntroUnown1_Ch5: ; 179830
+Sfx_IntroUnown1_Ch5:
 	vibrato $1, $a3
 	dutycycle $2
-	sound $8, $39, $0705
-	sound $20, $e2, $0705
+	sound __,  9, $39, $0705
+	sound C#,  1, $e2, $0705
 	endchannel
-; 17983e
 
-Sfx_IntroUnown2: ; 17983e
-	dbw $05, Sfx_IntroUnown2_Ch6
-; 179841
+Sfx_IntroUnown2:
+	musicheader 1, 6, Sfx_IntroUnown2_Ch6
 
-Sfx_IntroUnown2_Ch6: ; 179841
+Sfx_IntroUnown2_Ch6:
 	vibrato $1, $73
 	dutycycle $2
-	sound $8, $39, $0758
-	sound $20, $e2, $0758
+	sound __,  9, $39, $0758
+	sound C#,  1, $e2, $0758
 	endchannel
-; 17984f
 
-Sfx_IntroUnown3: ; 17984f
-	dbw $06, Sfx_IntroUnown3_Ch7
-; 179852
+Sfx_IntroUnown3:
+	musicheader 1, 7, Sfx_IntroUnown3_Ch7
 
-Sfx_IntroUnown3_Ch7: ; 179852
+Sfx_IntroUnown3_Ch7:
 	vibrato $1, $53
-	sound $3, $32, $07c2
-	sound $3, $22, $07c2
-	sound $3, $12, $07c2
-	sound $10, $12, $07c2
-	sound $6, $22, $07c2
-	sound $6, $32, $07c2
+	sound __,  4, $32, $07c2
+	sound __,  4, $22, $07c2
+	sound __,  4, $12, $07c2
+	sound C_,  1, $12, $07c2
+	sound __,  7, $22, $07c2
+	sound __,  7, $32, $07c2
 	endchannel
-; 17986e
 
-Sfx_DittoPopUp: ; 17986e
-	dbw $04, Sfx_DittoPopUp_Ch5
-; 179871
+Sfx_DittoPopUp:
+	musicheader 1, 5, Sfx_DittoPopUp_Ch5
 
-Sfx_DittoPopUp_Ch5: ; 179871
+Sfx_DittoPopUp_Ch5:
 	dutycycle $2
 	soundinput $1e
-	sound $3, $82, $0700
-	sound $1, $31, $0701
+	sound __,  4, $82, $0700
+	sound __,  2, $31, $0701
 	soundinput $16
-	sound $4, $b1, $0640
-	sound $10, $31, $0641
+	sound __,  5, $b1, $0640
+	sound C_,  1, $31, $0641
 	endchannel
-; 179888
 
-Sfx_DittoTransform: ; 179888
-	dbw $04, Sfx_DittoTransform_Ch5
-; 17988b
+Sfx_DittoTransform:
+	musicheader 1, 5, Sfx_DittoTransform_Ch5
 
-Sfx_DittoTransform_Ch5: ; 17988b
+Sfx_DittoTransform_Ch5:
 	dutycycle $1
 	soundinput $26
-	sound $14, $3b, $0440
-	sound $4, $97, $04c0
-	sound $4, $67, $04c1
-	sound $4, $42, $04c2
+	sound C_,  5, $3b, $0440
+	sound __,  5, $97, $04c0
+	sound __,  5, $67, $04c1
+	sound __,  5, $42, $04c2
 	endchannel
-; 1798a0
 
-Sfx_IntroSuicune1: ; 1798a0
-	dbw $07, Sfx_IntroSuicune1_Ch8
-; 1798a3
+Sfx_IntroSuicune1:
+	musicheader 1, 8, Sfx_IntroSuicune1_Ch8
 
-Sfx_IntroSuicune1_Ch8: ; 1798a3
-	noise $1, $58, $59
-	noise $2, $91, $23
+Sfx_IntroSuicune1_Ch8:
+	noise __,  2, $58, $59
+	noise __,  3, $91, $23
 	endchannel
-; 1798aa
 
-Sfx_IntroPichu: ; 1798aa
-	dbw $04, Sfx_IntroPichu_Ch5
-; 1798ad
+Sfx_IntroPichu:
+	musicheader 1, 5, Sfx_IntroPichu_Ch5
 
-Sfx_IntroPichu_Ch5: ; 1798ad
+Sfx_IntroPichu_Ch5:
 	dutycycle $3
 	soundinput $4d
-	sound $1, $88, $0770
-	sound $3, $0, $0000
+	sound __,  2, $88, $0770
+	sound __,  4, $0, 0
 	soundinput $17
-	sound $2, $88, $0776
+	sound __,  3, $88, $0776
 	endchannel
-; 1798c0
 
-Sfx_IntroSuicune2: ; 1798c0
-	dbw $07, Sfx_IntroSuicune2_Ch8
-; 1798c3
+Sfx_IntroSuicune2:
+	musicheader 1, 8, Sfx_IntroSuicune2_Ch8
 
-Sfx_IntroSuicune2_Ch8: ; 1798c3
-	noise $1, $a7, $31
-	noise $1, $91, $0
-	noise $1, $92, $21
-	noise $1, $91, $0
-	noise $1, $92, $22
-	noise $1, $82, $11
-	noise $1, $82, $22
-	noise $1, $72, $11
-	noise $1, $72, $12
-	noise $1, $62, $10
-	noise $1, $63, $0
-	noise $1, $53, $10
-	noise $1, $43, $0
-	noise $1, $33, $10
-	noise $1, $23, $0
-	noise $1, $13, $10
+Sfx_IntroSuicune2_Ch8:
+	noise __,  2, $a7, $31
+	noise __,  2, $91, $0
+	noise __,  2, $92, $21
+	noise __,  2, $91, $0
+	noise __,  2, $92, $22
+	noise __,  2, $82, $11
+	noise __,  2, $82, $22
+	noise __,  2, $72, $11
+	noise __,  2, $72, $12
+	noise __,  2, $62, $10
+	noise __,  2, $63, $0
+	noise __,  2, $53, $10
+	noise __,  2, $43, $0
+	noise __,  2, $33, $10
+	noise __,  2, $23, $0
+	noise __,  2, $13, $10
 	endchannel
-; 1798f4
 
-Sfx_IntroSuicune3: ; 1798f4
-	dbw $07, Sfx_IntroSuicune3_Ch8
-; 1798f7
+Sfx_IntroSuicune3:
+	musicheader 1, 8, Sfx_IntroSuicune3_Ch8
 
-Sfx_IntroSuicune3_Ch8: ; 1798f7
-	noise $1, $88, $31
-	noise $8, $39, $11
-	noise $4, $a4, $10
-	noise $4, $44, $10
-	noise $4, $24, $10
+Sfx_IntroSuicune3_Ch8:
+	noise __,  2, $88, $31
+	noise __,  9, $39, $11
+	noise __,  5, $a4, $10
+	noise __,  5, $44, $10
+	noise __,  5, $24, $10
 	endchannel
-; 179907
 
-Sfx_DittoBounce: ; 179907
-	dbw $04, Sfx_DittoBounce_Ch5
-; 17990a
+Sfx_DittoBounce:
+	musicheader 1, 5, Sfx_DittoBounce_Ch5
 
-Sfx_DittoBounce_Ch5: ; 17990a
+Sfx_DittoBounce_Ch5:
 	dutycycle $2
 	soundinput $2c
-	sound $2, $82, $04b0
-	sound $0, $31, $04b0
+	sound __,  3, $82, $04b0
+	sound __,  1, $31, $04b0
 	soundinput $34
-	sound $10, $b1, $0420
+	sound C_,  1, $b1, $0420
 	endchannel
-; 17991d
 
-Sfx_IntroSuicune4: ; 17991d
-	dbw $07, Sfx_IntroSuicune4_Ch8
-; 179920
+Sfx_IntroSuicune4:
+	musicheader 1, 8, Sfx_IntroSuicune4_Ch8
 
-Sfx_IntroSuicune4_Ch8: ; 179920
-	noise $1, $a1, $5c
-	noise $0, $0, $0
-	noise $1, $c1, $4d
-	noise $0, $0, $0
-	noise $4, $b2, $31
-	noise $0, $0, $0
-	noise $4, $a2, $2
-	noise $0, $0, $0
-	noise $4, $92, $1
-	noise $0, $0, $0
-	noise $20, $72, $0
+Sfx_IntroSuicune4_Ch8:
+	noise __,  2, $a1, $5c
+	noise __,  1, $0, $0
+	noise __,  2, $c1, $4d
+	noise __,  1, $0, $0
+	noise __,  5, $b2, $31
+	noise __,  1, $0, $0
+	noise __,  5, $a2, $2
+	noise __,  1, $0, $0
+	noise __,  5, $92, $1
+	noise __,  1, $0, $0
+	noise C#,  1, $72, $0
 	endchannel
-; 179942
 
-Sfx_GameFreakPresents: ; 179942
-	dbw $04, Sfx_GameFreakPresents_Ch5
-; 179945
+Sfx_GameFreakPresents:
+	musicheader 1, 5, Sfx_GameFreakPresents_Ch5
 
-Sfx_GameFreakPresents_Ch5: ; 179945
+Sfx_GameFreakPresents_Ch5:
 	togglesfx
 	dutycycle $2
 	notetype $2, $b1
 	soundinput $ff
-	forceoctave $1a
+	pitchoffset 1, A#
 	octave 5
 	note C_, 2
 	note E_, 2
@@ -185,18 +162,16 @@ Sfx_GameFreakPresents_Ch5: ; 179945
 	intensity $31
 	note G_, 3
 	endchannel
-; 179961
 
-Sfx_Tingle: ; 179961
-	dbw $04, Sfx_Tingle_Ch5
-; 179964
+Sfx_Tingle:
+	musicheader 1, 5, Sfx_Tingle_Ch5
 
-Sfx_Tingle_Ch5: ; 179964
+Sfx_Tingle_Ch5:
 	togglesfx
 	dutycycle $1
-	forceoctave $b
+	pitchoffset 0, B_
 	notetype $1, $b1
-Sfx_Tingle_branch_17996c: ; 17996c
+.loop
 	octave 5
 	note C_, 3
 	octave 6
@@ -204,37 +179,33 @@ Sfx_Tingle_branch_17996c: ; 17996c
 	octave 5
 	note C_, 3
 	note __, 2
-	loopchannel 2, Sfx_Tingle_branch_17996c
+	loopchannel 2, .loop
 	note C_, 2
 	intensity $a1
 	note G_, 13
 	endchannel
-; 17997c
 
-Sfx_TwoPcBeeps: ; 17997c
-	dbw $04, Sfx_TwoPcBeeps_Ch5
-; 17997f
+Sfx_TwoPcBeeps:
+	musicheader 1, 5, Sfx_TwoPcBeeps_Ch5
 
-Sfx_TwoPcBeeps_Ch5: ; 17997f
+Sfx_TwoPcBeeps_Ch5:
 	dutycycle $2
-	sound $2, $e8, $07c2
-	sound $2, $28, $07c2
-	sound $2, $e8, $07c2
-	sound $2, $28, $07c2
+	sound __,  3, $e8, $07c2
+	sound __,  3, $28, $07c2
+	sound __,  3, $e8, $07c2
+	sound __,  3, $28, $07c2
 	endchannel
-; 179992
 
-Sfx_4NoteDitty: ; 179992
-	dbw $84, Sfx_4NoteDitty_Ch5
-	dbw $05, Sfx_4NoteDitty_Ch6
-	dbw $06, Sfx_4NoteDitty_Ch7
-; 17999b
+Sfx_4NoteDitty:
+	musicheader 3, 5, Sfx_4NoteDitty_Ch5
+	musicheader 1, 6, Sfx_4NoteDitty_Ch6
+	musicheader 1, 7, Sfx_4NoteDitty_Ch7
 
-Sfx_4NoteDitty_Ch5: ; 17999b
+Sfx_4NoteDitty_Ch5:
 	togglesfx
 	dutycycle $2
 	notetype $2, $e8
-	forceoctave $2
+	pitchoffset 0, D_
 	octave 4
 	note C_, 2
 	intensity $48
@@ -254,32 +225,28 @@ Sfx_4NoteDitty_Ch5: ; 17999b
 	intensity $43
 	note C_, 16
 	endchannel
-; 1799bd
 
-Sfx_4NoteDitty_Ch6: ; 1799bd
+Sfx_4NoteDitty_Ch6:
 	togglesfx
 	notetype $2, $b8
 	note __, 9
 	note __, 16
 	endchannel
-; 1799c4
 
-Sfx_4NoteDitty_Ch7: ; 1799c4
+Sfx_4NoteDitty_Ch7:
 	togglesfx
 	notetype $2, $b8
 	note __, 9
 	note __, 16
 	endchannel
-; 1799cb
 
-Sfx_Twinkle: ; 1799cb
-	dbw $04, Sfx_Twinkle_Ch5
-; 1799ce
+Sfx_Twinkle:
+	musicheader 1, 5, Sfx_Twinkle_Ch5
 
-Sfx_Twinkle_Ch5: ; 1799ce
+Sfx_Twinkle_Ch5:
 	togglesfx
 	dutycycle $0
-	forceoctave $2
+	pitchoffset 0, D_
 	notetype $2, $e1
 	octave 3
 	note G_, 2
@@ -300,4 +267,3 @@ Sfx_Twinkle_Ch5: ; 1799ce
 	octave 5
 	note G_, 6
 	endchannel
-; 1799ef

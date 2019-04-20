@@ -1,214 +1,210 @@
-; e927c
-;	dbw BANK(Sfx_DexFanfare5079), Sfx_DexFanfare5079
-	dbw BANK(Sfx_Item), Sfx_Item
-	dbw BANK(Sfx_Item), Sfx_Item
-	dbw BANK(Sfx_CaughtMon), Sfx_CaughtMon
-	dbw BANK(Sfx_PokeballsPlacedOnTable), Sfx_PokeballsPlacedOnTable
-	dbw BANK(Sfx_Potion), Sfx_Potion
-	dbw BANK(Sfx_FullHeal), Sfx_FullHeal
-	dbw BANK(Sfx_Menu), Sfx_Menu
-	dbw BANK(Sfx_ReadText), Sfx_ReadText
-	dbw BANK(Sfx_ReadText2), Sfx_ReadText2
-	dbw BANK(Sfx_DexFanfare2049), Sfx_DexFanfare2049
-	dbw BANK(Sfx_DexFanfare80109), Sfx_DexFanfare80109
-	dbw BANK(Sfx_Poison), Sfx_Poison
-	dbw BANK(Sfx_GotSafariBalls), Sfx_GotSafariBalls
-	dbw BANK(Sfx_BootPc), Sfx_BootPc
-	dbw BANK(Sfx_ShutDownPc), Sfx_ShutDownPc
-	dbw BANK(Sfx_ChoosePcOption), Sfx_ChoosePcOption
-	dbw BANK(Sfx_EscapeRope), Sfx_EscapeRope
-	dbw BANK(Sfx_PushButton), Sfx_PushButton
-	dbw BANK(Sfx_SecondPartOfItemfinder), Sfx_SecondPartOfItemfinder
-	dbw BANK(Sfx_WarpTo), Sfx_WarpTo
-	dbw BANK(Sfx_WarpFrom), Sfx_WarpFrom
-	dbw BANK(Sfx_ChangeDexMode), Sfx_ChangeDexMode
-	dbw BANK(Sfx_JumpOverLedge), Sfx_JumpOverLedge
-	dbw BANK(Sfx_GrassRustle), Sfx_GrassRustle
-	dbw BANK(Sfx_Fly), Sfx_Fly
-	dbw BANK(Sfx_Wrong), Sfx_Wrong
-	dbw BANK(Sfx_Squeak), Sfx_Squeak
-	dbw BANK(Sfx_Strength), Sfx_Strength
-	dbw BANK(Sfx_Boat), Sfx_Boat
-	dbw BANK(Sfx_WallOpen), Sfx_WallOpen
-	dbw BANK(Sfx_PlacePuzzlePieceDown), Sfx_PlacePuzzlePieceDown
-	dbw BANK(Sfx_EnterDoor), Sfx_EnterDoor
-	dbw BANK(Sfx_SwitchPokemon), Sfx_SwitchPokemon
-	dbw BANK(Sfx_Tally), Sfx_Tally
-	dbw BANK(Sfx_Transaction), Sfx_Transaction
-	dbw BANK(Sfx_ExitBuilding), Sfx_ExitBuilding
-	dbw BANK(Sfx_Bump), Sfx_Bump
-	dbw BANK(Sfx_Save), Sfx_Save
-	dbw BANK(Sfx_Pokeflute), Sfx_Pokeflute
-	dbw BANK(Sfx_ElevatorEnd), Sfx_ElevatorEnd
-	dbw BANK(Sfx_ThrowBall), Sfx_ThrowBall
-	dbw BANK(Sfx_BallPoof), Sfx_BallPoof
-	dbw BANK(Sfx_Unknown3A), Sfx_Unknown3A
-	dbw BANK(Sfx_Run), Sfx_Run
-	dbw BANK(Sfx_SlotMachineStart), Sfx_SlotMachineStart
-	dbw BANK(Sfx_Fanfare), Sfx_Fanfare
-	dbw BANK(Sfx_Peck), Sfx_Peck
-	dbw BANK(Sfx_Kinesis), Sfx_Kinesis
-	dbw BANK(Sfx_Lick), Sfx_Lick
-	dbw BANK(Sfx_Pound), Sfx_Pound
-	dbw BANK(Sfx_MovePuzzlePiece), Sfx_MovePuzzlePiece
-	dbw BANK(Sfx_CometPunch), Sfx_CometPunch
-	dbw BANK(Sfx_MegaPunch), Sfx_MegaPunch
-	dbw BANK(Sfx_Scratch), Sfx_Scratch
-	dbw BANK(Sfx_Vicegrip), Sfx_Vicegrip
-	dbw BANK(Sfx_RazorWind), Sfx_RazorWind
-	dbw BANK(Sfx_Cut), Sfx_Cut
-	dbw BANK(Sfx_WingAttack), Sfx_WingAttack
-	dbw BANK(Sfx_Whirlwind), Sfx_Whirlwind
-	dbw BANK(Sfx_Bind), Sfx_Bind
-	dbw BANK(Sfx_VineWhip), Sfx_VineWhip
-	dbw BANK(Sfx_DoubleKick), Sfx_DoubleKick
-	dbw BANK(Sfx_MegaKick), Sfx_MegaKick
-	dbw BANK(Sfx_Headbutt), Sfx_Headbutt
-	dbw BANK(Sfx_HornAttack), Sfx_HornAttack
-	dbw BANK(Sfx_Tackle), Sfx_Tackle
-	dbw BANK(Sfx_PoisonSting), Sfx_PoisonSting
-	dbw BANK(Sfx_Powder), Sfx_Powder
-	dbw BANK(Sfx_Doubleslap), Sfx_Doubleslap
-	dbw BANK(Sfx_Bite), Sfx_Bite
-	dbw BANK(Sfx_JumpKick), Sfx_JumpKick
-	dbw BANK(Sfx_Stomp), Sfx_Stomp
-	dbw BANK(Sfx_TailWhip), Sfx_TailWhip
-	dbw BANK(Sfx_KarateChop), Sfx_KarateChop
-	dbw BANK(Sfx_Submission), Sfx_Submission
-	dbw BANK(Sfx_WaterGun), Sfx_WaterGun
-	dbw BANK(Sfx_SwordsDance), Sfx_SwordsDance
-	dbw BANK(Sfx_Thunder), Sfx_Thunder
-	dbw BANK(Sfx_Supersonic), Sfx_Supersonic
-	dbw BANK(Sfx_Leer), Sfx_Leer
-	dbw BANK(Sfx_Ember), Sfx_Ember
-	dbw BANK(Sfx_Bubblebeam), Sfx_Bubblebeam
-	dbw BANK(Sfx_HydroPump), Sfx_HydroPump
-	dbw BANK(Sfx_Surf), Sfx_Surf
-	dbw BANK(Sfx_Psybeam), Sfx_Psybeam
-	dbw BANK(Sfx_Charge), Sfx_Charge
-	dbw BANK(Sfx_Thundershock), Sfx_Thundershock
-	dbw BANK(Sfx_Psychic), Sfx_Psychic
-	dbw BANK(Sfx_Screech), Sfx_Screech
-	dbw BANK(Sfx_BoneClub), Sfx_BoneClub
-	dbw BANK(Sfx_Sharpen), Sfx_Sharpen
-	dbw BANK(Sfx_EggBomb), Sfx_EggBomb
-	dbw BANK(Sfx_Sing), Sfx_Sing
-	dbw BANK(Sfx_HyperBeam), Sfx_HyperBeam
-	dbw BANK(Sfx_Shine), Sfx_Shine
-	dbw BANK(Sfx_Unknown5F), Sfx_Unknown5F
-	dbw BANK(Sfx_Unknown60), Sfx_Unknown60
-	dbw BANK(Sfx_Unknown61), Sfx_Unknown61
-	dbw BANK(Sfx_Unknown62), Sfx_Unknown62
-	dbw BANK(Sfx_Unknown63), Sfx_Unknown63
-	dbw BANK(Sfx_Burn), Sfx_Burn
-	dbw BANK(Sfx_TitleScreenEntrance), Sfx_TitleScreenEntrance
-	dbw BANK(Sfx_Unknown66), Sfx_Unknown66
-	dbw BANK(Sfx_GetCoinFromSlots), Sfx_GetCoinFromSlots
-	dbw BANK(Sfx_PayDay), Sfx_PayDay
-	dbw BANK(Sfx_Metronome), Sfx_Metronome
-	dbw BANK(Sfx_Call), Sfx_Call
-	dbw BANK(Sfx_HangUp), Sfx_HangUp
-	dbw BANK(Sfx_NoSignal), Sfx_NoSignal
-	dbw BANK(Sfx_Sandstorm), Sfx_Sandstorm
-	dbw BANK(Sfx_Elevator), Sfx_Elevator
-	dbw BANK(Sfx_Protect), Sfx_Protect
-	dbw BANK(Sfx_Sketch), Sfx_Sketch
-	dbw BANK(Sfx_RainDance), Sfx_RainDance
-	dbw BANK(Sfx_Aeroblast), Sfx_Aeroblast
-	dbw BANK(Sfx_Spark), Sfx_Spark
-	dbw BANK(Sfx_Curse), Sfx_Curse
-	dbw BANK(Sfx_Rage), Sfx_Rage
-	dbw BANK(Sfx_Thief), Sfx_Thief
-	dbw BANK(Sfx_Thief2), Sfx_Thief2
-	dbw BANK(Sfx_SpiderWeb), Sfx_SpiderWeb
-	dbw BANK(Sfx_MindReader), Sfx_MindReader
-	dbw BANK(Sfx_Nightmare), Sfx_Nightmare
-	dbw BANK(Sfx_Snore), Sfx_Snore
-	dbw BANK(Sfx_SweetKiss), Sfx_SweetKiss
-	dbw BANK(Sfx_SweetKiss2), Sfx_SweetKiss2
-	dbw BANK(Sfx_BellyDrum), Sfx_BellyDrum
-	dbw BANK(Sfx_Unknown7F), Sfx_Unknown7F
-	dbw BANK(Sfx_SludgeBomb), Sfx_SludgeBomb
-	dbw BANK(Sfx_Foresight), Sfx_Foresight
-	dbw BANK(Sfx_Spite), Sfx_Spite
-	dbw BANK(Sfx_Outrage), Sfx_Outrage
-	dbw BANK(Sfx_PerishSong), Sfx_PerishSong
-	dbw BANK(Sfx_GigaDrain), Sfx_GigaDrain
-	dbw BANK(Sfx_Attract), Sfx_Attract
-	dbw BANK(Sfx_Kinesis2), Sfx_Kinesis2
-	dbw BANK(Sfx_ZapCannon), Sfx_ZapCannon
-	dbw BANK(Sfx_MeanLook), Sfx_MeanLook
-	dbw BANK(Sfx_HealBell), Sfx_HealBell
-	dbw BANK(Sfx_Return), Sfx_Return
-	dbw BANK(Sfx_ExpBar), Sfx_ExpBar
-	dbw BANK(Sfx_MilkDrink), Sfx_MilkDrink
-	dbw BANK(Sfx_Present), Sfx_Present
-	dbw BANK(Sfx_MorningSun), Sfx_MorningSun
-	dbw BANK(Sfx_LevelUp), Sfx_LevelUp
-	dbw BANK(Sfx_KeyItem), Sfx_KeyItem
-	dbw BANK(Sfx_Fanfare2), Sfx_Fanfare2
-	dbw BANK(Sfx_RegisterPhoneNumber), Sfx_RegisterPhoneNumber
-	dbw BANK(Sfx_3RdPlace), Sfx_3RdPlace
-	dbw BANK(Sfx_GetEggFromDaycareMan), Sfx_GetEggFromDaycareMan
-	dbw BANK(Sfx_GetEggFromDaycareLady), Sfx_GetEggFromDaycareLady
-	dbw BANK(Sfx_MoveDeleted), Sfx_MoveDeleted
-	dbw BANK(Sfx_2ndPlace), Sfx_2ndPlace
-	dbw BANK(Sfx_1stPlace), Sfx_1stPlace
-	dbw BANK(Sfx_ChooseACard), Sfx_ChooseACard
-	dbw BANK(Sfx_GetTm), Sfx_GetTm
-	dbw BANK(Sfx_GetBadge), Sfx_GetBadge
-	dbw BANK(Sfx_QuitSlots), Sfx_QuitSlots
-	dbw BANK(Sfx_EggCrack), Sfx_EggCrack
-	dbw BANK(Sfx_DexFanfareLessThan20), Sfx_DexFanfareLessThan20
-	dbw BANK(Sfx_DexFanfare140169), Sfx_DexFanfare140169
-	dbw BANK(Sfx_DexFanfare170199), Sfx_DexFanfare170199
-	dbw BANK(Sfx_DexFanfare200229), Sfx_DexFanfare200229
-	dbw BANK(Sfx_DexFanfare230Plus), Sfx_DexFanfare230Plus
-	dbw BANK(Sfx_Evolved), Sfx_Evolved
-	dbw BANK(Sfx_MasterBall), Sfx_MasterBall
-	dbw BANK(Sfx_EggHatch), Sfx_EggHatch
-	dbw BANK(Sfx_GsIntroCharizardFireball), Sfx_GsIntroCharizardFireball
-	dbw BANK(Sfx_GsIntroPokemonAppears), Sfx_GsIntroPokemonAppears
-	dbw BANK(Sfx_Flash), Sfx_Flash
-	dbw BANK(Sfx_GameFreakLogoGs), Sfx_GameFreakLogoGs
-	dbw BANK(Sfx_NotVeryEffective), Sfx_NotVeryEffective
-	dbw BANK(Sfx_Damage), Sfx_Damage
-	dbw BANK(Sfx_SuperEffective), Sfx_SuperEffective
-	dbw BANK(Sfx_BallBounce), Sfx_BallBounce
-	dbw BANK(Sfx_Moonlight), Sfx_Moonlight
-	dbw BANK(Sfx_Encore), Sfx_Encore
-	dbw BANK(Sfx_BeatUp), Sfx_BeatUp
-	dbw BANK(Sfx_BatonPass), Sfx_BatonPass
-	dbw BANK(Sfx_BallWiggle), Sfx_BallWiggle
-	dbw BANK(Sfx_SweetScent), Sfx_SweetScent
-	dbw BANK(Sfx_SweetScent2), Sfx_SweetScent2
-	dbw BANK(Sfx_HitEndOfExpBar), Sfx_HitEndOfExpBar
-	dbw BANK(Sfx_GiveTrademon), Sfx_GiveTrademon
-	dbw BANK(Sfx_GetTrademon), Sfx_GetTrademon
-	dbw BANK(Sfx_TrainArrived), Sfx_TrainArrived
-	dbw BANK(Sfx_StopSlot), Sfx_StopSlot
-	dbw BANK(Sfx_2Boops), Sfx_2Boops
-	dbw BANK(Sfx_GlassTing), Sfx_GlassTing
-	dbw BANK(Sfx_GlassTing2), Sfx_GlassTing2
-
-; Crystal adds the following SFX:
-
-	dbw BANK(Sfx_IntroUnown1), Sfx_IntroUnown1
-	dbw BANK(Sfx_IntroUnown2), Sfx_IntroUnown2
-	dbw BANK(Sfx_IntroUnown3), Sfx_IntroUnown3
-	dbw BANK(Sfx_DittoPopUp), Sfx_DittoPopUp
-	dbw BANK(Sfx_DittoTransform), Sfx_DittoTransform
-	dbw BANK(Sfx_IntroSuicune1), Sfx_IntroSuicune1
-	dbw BANK(Sfx_IntroPichu), Sfx_IntroPichu
-	dbw BANK(Sfx_IntroSuicune2), Sfx_IntroSuicune2
-	dbw BANK(Sfx_IntroSuicune3), Sfx_IntroSuicune3
-	dbw BANK(Sfx_DittoBounce), Sfx_DittoBounce
-	dbw BANK(Sfx_IntroSuicune4), Sfx_IntroSuicune4
-	dbw BANK(Sfx_GameFreakPresents), Sfx_GameFreakPresents
-	dbw BANK(Sfx_Tingle), Sfx_Tingle
-	dbw BANK(Sfx_UnknownCB), Sfx_UnknownCB
-	dbw BANK(Sfx_TwoPcBeeps), Sfx_TwoPcBeeps
-	dbw BANK(Sfx_4NoteDitty), Sfx_4NoteDitty
-	dbw BANK(Sfx_Twinkle), Sfx_Twinkle
-; e94e9
-
+SFX:
+; entries correspond to SFX_* constants
+	dba Sfx_DexFanfare5079
+	dba Sfx_Item
+	dba Sfx_CaughtMon
+	dba Sfx_PokeballsPlacedOnTable
+	dba Sfx_Potion
+	dba Sfx_FullHeal
+	dba Sfx_Menu
+	dba Sfx_ReadText
+	dba Sfx_ReadText2
+	dba Sfx_DexFanfare2049
+	dba Sfx_DexFanfare80109
+	dba Sfx_Poison
+	dba Sfx_GotSafariBalls
+	dba Sfx_BootPc
+	dba Sfx_ShutDownPc
+	dba Sfx_ChoosePcOption
+	dba Sfx_EscapeRope
+	dba Sfx_PushButton
+	dba Sfx_SecondPartOfItemfinder
+	dba Sfx_WarpTo
+	dba Sfx_WarpFrom
+	dba Sfx_ChangeDexMode
+	dba Sfx_JumpOverLedge
+	dba Sfx_GrassRustle
+	dba Sfx_Fly
+	dba Sfx_Wrong
+	dba Sfx_Squeak
+	dba Sfx_Strength
+	dba Sfx_Boat
+	dba Sfx_WallOpen
+	dba Sfx_PlacePuzzlePieceDown
+	dba Sfx_EnterDoor
+	dba Sfx_SwitchPokemon
+	dba Sfx_Tally
+	dba Sfx_Transaction
+	dba Sfx_ExitBuilding
+	dba Sfx_Bump
+	dba Sfx_Save
+	dba Sfx_Pokeflute
+	dba Sfx_ElevatorEnd
+	dba Sfx_ThrowBall
+	dba Sfx_BallPoof
+	dba Sfx_Unknown3A
+	dba Sfx_Run
+	dba Sfx_SlotMachineStart
+	dba Sfx_Fanfare
+	dba Sfx_Peck
+	dba Sfx_Kinesis
+	dba Sfx_Lick
+	dba Sfx_Pound
+	dba Sfx_MovePuzzlePiece
+	dba Sfx_CometPunch
+	dba Sfx_MegaPunch
+	dba Sfx_Scratch
+	dba Sfx_Vicegrip
+	dba Sfx_RazorWind
+	dba Sfx_Cut
+	dba Sfx_WingAttack
+	dba Sfx_Whirlwind
+	dba Sfx_Bind
+	dba Sfx_VineWhip
+	dba Sfx_DoubleKick
+	dba Sfx_MegaKick
+	dba Sfx_Headbutt
+	dba Sfx_HornAttack
+	dba Sfx_Tackle
+	dba Sfx_PoisonSting
+	dba Sfx_Powder
+	dba Sfx_Doubleslap
+	dba Sfx_Bite
+	dba Sfx_JumpKick
+	dba Sfx_Stomp
+	dba Sfx_TailWhip
+	dba Sfx_KarateChop
+	dba Sfx_Submission
+	dba Sfx_WaterGun
+	dba Sfx_SwordsDance
+	dba Sfx_Thunder
+	dba Sfx_Supersonic
+	dba Sfx_Leer
+	dba Sfx_Ember
+	dba Sfx_Bubblebeam
+	dba Sfx_HydroPump
+	dba Sfx_Surf
+	dba Sfx_Psybeam
+	dba Sfx_Charge
+	dba Sfx_Thundershock
+	dba Sfx_Psychic
+	dba Sfx_Screech
+	dba Sfx_BoneClub
+	dba Sfx_Sharpen
+	dba Sfx_EggBomb
+	dba Sfx_Sing
+	dba Sfx_HyperBeam
+	dba Sfx_Shine
+	dba Sfx_Unknown5F
+	dba Sfx_Unknown60
+	dba Sfx_Unknown61
+	dba Sfx_SwitchPockets
+	dba Sfx_Unknown63
+	dba Sfx_Burn
+	dba Sfx_TitleScreenEntrance
+	dba Sfx_Unknown66
+	dba Sfx_GetCoinFromSlots
+	dba Sfx_PayDay
+	dba Sfx_Metronome
+	dba Sfx_Call
+	dba Sfx_HangUp
+	dba Sfx_NoSignal
+	dba Sfx_Sandstorm
+	dba Sfx_Elevator
+	dba Sfx_Protect
+	dba Sfx_Sketch
+	dba Sfx_RainDance
+	dba Sfx_Aeroblast
+	dba Sfx_Spark
+	dba Sfx_Curse
+	dba Sfx_Rage
+	dba Sfx_Thief
+	dba Sfx_Thief2
+	dba Sfx_SpiderWeb
+	dba Sfx_MindReader
+	dba Sfx_Nightmare
+	dba Sfx_Snore
+	dba Sfx_SweetKiss
+	dba Sfx_SweetKiss2
+	dba Sfx_BellyDrum
+	dba Sfx_Unknown7F
+	dba Sfx_SludgeBomb
+	dba Sfx_Foresight
+	dba Sfx_Spite
+	dba Sfx_Outrage
+	dba Sfx_PerishSong
+	dba Sfx_GigaDrain
+	dba Sfx_Attract
+	dba Sfx_Kinesis2
+	dba Sfx_ZapCannon
+	dba Sfx_MeanLook
+	dba Sfx_HealBell
+	dba Sfx_Return
+	dba Sfx_ExpBar
+	dba Sfx_MilkDrink
+	dba Sfx_Present
+	dba Sfx_MorningSun
+	dba Sfx_LevelUp
+	dba Sfx_KeyItem
+	dba Sfx_Fanfare2
+	dba Sfx_RegisterPhoneNumber
+	dba Sfx_3RdPlace
+	dba Sfx_GetEggFromDayCareMan
+	dba Sfx_GetEggFromDayCareLady
+	dba Sfx_MoveDeleted
+	dba Sfx_2ndPlace
+	dba Sfx_1stPlace
+	dba Sfx_ChooseACard
+	dba Sfx_GetTm
+	dba Sfx_GetBadge
+	dba Sfx_QuitSlots
+	dba Sfx_EggCrack
+	dba Sfx_DexFanfareLessThan20
+	dba Sfx_DexFanfare140169
+	dba Sfx_DexFanfare170199
+	dba Sfx_DexFanfare200229
+	dba Sfx_DexFanfare230Plus
+	dba Sfx_Evolved
+	dba Sfx_MasterBall
+	dba Sfx_EggHatch
+	dba Sfx_GsIntroCharizardFireball
+	dba Sfx_GsIntroPokemonAppears
+	dba Sfx_Flash
+	dba Sfx_GameFreakLogoGs
+	dba Sfx_NotVeryEffective
+	dba Sfx_Damage
+	dba Sfx_SuperEffective
+	dba Sfx_BallBounce
+	dba Sfx_Moonlight
+	dba Sfx_Encore
+	dba Sfx_BeatUp
+	dba Sfx_BatonPass
+	dba Sfx_BallWobble
+	dba Sfx_SweetScent
+	dba Sfx_SweetScent2
+	dba Sfx_HitEndOfExpBar
+	dba Sfx_GiveTrademon
+	dba Sfx_GetTrademon
+	dba Sfx_TrainArrived
+	dba Sfx_StopSlot
+	dba Sfx_2Boops
+	dba Sfx_GlassTing
+	dba Sfx_GlassTing2
+; new to Crystal
+	dba Sfx_IntroUnown1
+	dba Sfx_IntroUnown2
+	dba Sfx_IntroUnown3
+	dba Sfx_DittoPopUp
+	dba Sfx_DittoTransform
+	dba Sfx_IntroSuicune1
+	dba Sfx_IntroPichu
+	dba Sfx_IntroSuicune2
+	dba Sfx_IntroSuicune3
+	dba Sfx_DittoBounce
+	dba Sfx_IntroSuicune4
+	dba Sfx_GameFreakPresents
+	dba Sfx_Tingle
+	dba Sfx_IntroWhoosh
+	dba Sfx_TwoPcBeeps
+	dba Sfx_4NoteDitty
+	dba Sfx_Twinkle

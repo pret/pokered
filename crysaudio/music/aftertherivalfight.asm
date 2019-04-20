@@ -1,11 +1,10 @@
-Music_AfterTheRivalFight: ; f5127
-	dbw $c0, Music_AfterTheRivalFight_Ch1
-	dbw $01, Music_AfterTheRivalFight_Ch2
-	dbw $02, Music_AfterTheRivalFight_Ch3
-	dbw $03, Music_AfterTheRivalFight_Ch4
-; f5133
+Music_AfterTheRivalFight:
+	musicheader 4, 1, Music_AfterTheRivalFight_Ch1
+	musicheader 1, 2, Music_AfterTheRivalFight_Ch2
+	musicheader 1, 3, Music_AfterTheRivalFight_Ch3
+	musicheader 1, 4, Music_AfterTheRivalFight_Ch4
 
-Music_AfterTheRivalFight_Ch1: ; f5133
+Music_AfterTheRivalFight_Ch1:
 	tempo 112
 	volume $77
 	dutycycle $0
@@ -23,9 +22,8 @@ Music_AfterTheRivalFight_Ch1: ; f5133
 	note G#, 2
 	note G#, 2
 	loopchannel 0, Music_AfterTheRivalFight_branch_f4fb1
-; f5153
 
-Music_AfterTheRivalFight_Ch2: ; f5153
+Music_AfterTheRivalFight_Ch2:
 	dutycycle $1
 	vibrato $6, $35
 	stereopanning $f
@@ -39,9 +37,8 @@ Music_AfterTheRivalFight_Ch2: ; f5153
 	note G#, 2
 	note G#, 2
 	loopchannel 0, Music_AfterTheRivalFight_branch_f502e
-; f516a
 
-Music_AfterTheRivalFight_Ch3: ; f516a
+Music_AfterTheRivalFight_Ch3:
 	notetype $c, $28
 	octave 3
 	note D#, 2
@@ -53,9 +50,8 @@ Music_AfterTheRivalFight_Ch3: ; f516a
 	note F_, 2
 	note D#, 2
 	loopchannel 0, Music_AfterTheRivalFight_branch_f509d
-; f517a
 
-Music_AfterTheRivalFight_Ch4: ; f517a
+Music_AfterTheRivalFight_Ch4:
 	togglenoise $3
 	stereopanning $f
 	notetype $c
@@ -66,6 +62,3 @@ Music_AfterTheRivalFight_Ch4: ; f517a
 	note D_, 2
 	note D_, 2
 	loopchannel 0, Music_AfterTheRivalFight_branch_f5118
-; f518a
-
-

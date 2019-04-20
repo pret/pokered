@@ -4,7 +4,7 @@ Music_DefeatedGymLeader:
 	dbw $02, Music_DefeatedGymLeader_Ch3
 
 Music_DefeatedGymLeader_Ch1: ; 23cad (8:7cad)
-	ftempo 112
+	tempo 112
 	volume 119
 	dutycycle 3
 	vibrato 18, 49

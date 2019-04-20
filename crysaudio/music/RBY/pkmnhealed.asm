@@ -4,28 +4,28 @@ Music_PkmnHealed:
 	dbw $02, Music_PkmnHealed_Ch3
 
 Music_PkmnHealed_Ch1: ; 9ba3 (2:5ba3)
-	ftempo 144
+	tempo 144
 	volume 119
-	fdutycycle 2
+	dutycycle 2
 	
 	notetype 12, 129
 	note __, 2
-	unknownmusic0xe0 0, $4C
+	slidepitchto 1, 4, B_
 	note B_, 2
-	unknownmusic0xe0 0, $55
+	slidepitchto 1, 5, E_
 	note B_, 2
-	unknownmusic0xe0 0, $45
+	slidepitchto 1, 4, E_
 	note E_, 2
 	note __, 4
-	unknownmusic0xe0 0, $3C
+	slidepitchto 1, 3, B_
 	note E_, 4
-	unknownmusic0xe0 0, $4C
+	slidepitchto 1, 4, B_
 	note B_, 4
 	endchannel
 
 
 Music_PkmnHealed_Ch2: ; 9bc4 (2:5bc4)
-	fdutycycle 2
+	dutycycle 2
 	notetype 12, 195
 	octave 4
 	note B_, 4

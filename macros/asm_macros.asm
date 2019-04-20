@@ -109,7 +109,11 @@ ENDM
 
 ; macro for two nibbles
 dn: MACRO
-	db (\1 << 4 | \2)
+rept _NARG / 2
+	db ((\1) << 4) | (\2)
+	shift
+	shift
+endr
 ENDM
 
 ; macro for putting a byte then a word

@@ -1,13 +1,11 @@
-Music_LookKimonoGirl: ; f79b8
-	dbw $80, Music_LookKimonoGirl_Ch1
-	dbw $01, Music_LookKimonoGirl_Ch2
-	dbw $02, Music_LookKimonoGirl_Ch3
-; f79c1
+Music_LookKimonoGirl:
+	musicheader 3, 1, Music_LookKimonoGirl_Ch1
+	musicheader 1, 2, Music_LookKimonoGirl_Ch2
+	musicheader 1, 3, Music_LookKimonoGirl_Ch3
 
+	db $3
 
-
-
-Music_LookKimonoGirl_Ch1: ; f79c2
+Music_LookKimonoGirl_Ch1:
 	tempo 160
 	volume $77
 	stereopanning $f
@@ -15,8 +13,8 @@ Music_LookKimonoGirl_Ch1: ; f79c2
 	notetype $6, $87
 	tone $0001
 	callchannel Music_LookKimonoGirl_branch_f7aa8
-	tone $0000
-Music_LookKimonoGirl_branch_f79d7: ; f79d7
+	tone 0
+Music_LookKimonoGirl_branch_f79d7:
 	notetype $c, $b2
 	callchannel Music_LookKimonoGirl_branch_f7a13
 	callchannel Music_LookKimonoGirl_branch_f7a13
@@ -50,9 +48,8 @@ Music_LookKimonoGirl_branch_f79d7: ; f79d7
 	octave 3
 	note A_, 1
 	loopchannel 0, Music_LookKimonoGirl_branch_f79d7
-; f7a13
 
-Music_LookKimonoGirl_branch_f7a13: ; f7a13
+Music_LookKimonoGirl_branch_f7a13:
 	intensity $b4
 	octave 2
 	note F_, 1
@@ -78,9 +75,8 @@ Music_LookKimonoGirl_branch_f7a13: ; f7a13
 	octave 4
 	note D_, 1
 	endchannel
-; f7a34
 
-Music_LookKimonoGirl_branch_f7a34: ; f7a34
+Music_LookKimonoGirl_branch_f7a34:
 	intensity $b4
 	octave 2
 	note E_, 1
@@ -106,14 +102,13 @@ Music_LookKimonoGirl_branch_f7a34: ; f7a34
 	octave 4
 	note D_, 1
 	endchannel
-; f7a55
 
-Music_LookKimonoGirl_Ch2: ; f7a55
+Music_LookKimonoGirl_Ch2:
 	dutycycle $0
 	notetype $6, $a7
 	stereopanning $f0
 	callchannel Music_LookKimonoGirl_branch_f7aa8
-Music_LookKimonoGirl_branch_f7a5f: ; f7a5f
+Music_LookKimonoGirl_branch_f7a5f:
 	dutycycle $3
 	notetype $c, $91
 	octave 5
@@ -157,9 +152,8 @@ Music_LookKimonoGirl_branch_f7a5f: ; f7a5f
 	note D_, 1
 	callchannel Music_LookKimonoGirl_branch_f7a94
 	loopchannel 0, Music_LookKimonoGirl_branch_f7a5f
-; f7a94
 
-Music_LookKimonoGirl_branch_f7a94: ; f7a94
+Music_LookKimonoGirl_branch_f7a94:
 	octave 5
 	note B_, 1
 	note A_, 1
@@ -180,9 +174,8 @@ Music_LookKimonoGirl_branch_f7a94: ; f7a94
 	note B_, 1
 	note E_, 1
 	endchannel
-; f7aa8
 
-Music_LookKimonoGirl_branch_f7aa8: ; f7aa8
+Music_LookKimonoGirl_branch_f7aa8:
 	octave 4
 	note E_, 1
 	octave 5
@@ -216,9 +209,8 @@ Music_LookKimonoGirl_branch_f7aa8: ; f7aa8
 	note E_, 1
 	note E_, 1
 	endchannel
-; f7ad4
 
-Music_LookKimonoGirl_Ch3: ; f7ad4
+Music_LookKimonoGirl_Ch3:
 	stereopanning $ff
 	vibrato $12, $24
 	notetype $6, $13
@@ -234,7 +226,7 @@ Music_LookKimonoGirl_Ch3: ; f7ad4
 	octave 5
 	note D_, 2
 	note E_, 2
-Music_LookKimonoGirl_branch_f7aec: ; f7aec
+Music_LookKimonoGirl_branch_f7aec:
 	octave 5
 	note D_, 4
 	note E_, 4
@@ -271,6 +263,3 @@ Music_LookKimonoGirl_branch_f7aec: ; f7aec
 	note D_, 8
 	note E_, 8
 	loopchannel 0, Music_LookKimonoGirl_branch_f7aec
-; f7b13
-
-

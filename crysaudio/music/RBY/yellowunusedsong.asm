@@ -5,7 +5,7 @@ Music_YellowUnusedSong:
 	dbw $03, Music_YellowUnusedSong_Ch4
 
 Music_YellowUnusedSong_Ch1: 
-	ftempo 140
+	tempo 140
 	volume 119
 	dutycycle 3
 	vibrato $8, $14

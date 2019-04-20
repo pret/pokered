@@ -3203,7 +3203,7 @@ PlaySoundWaitForCurrent::
 WaitForSoundToFinish::
 WaitSFX::
 ; infinite loop until sfx is done playing
-	ld a, [Danger]
+	ld a, [wDanger]
 	and a
 	ret nz
 	ld a, [wSFXDontWait]
@@ -3213,19 +3213,19 @@ WaitSFX::
 
 .loop
 	; ch5 on?
-	ld hl, Channel5 + Channel1Flags - Channel1
+	ld hl, wChannel5 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .loop
 	; ch6 on?
-	ld hl, Channel6 + Channel1Flags - Channel1
+	ld hl, wChannel6 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .loop
 	; ch7 on?
-	ld hl, Channel7 + Channel1Flags - Channel1
+	ld hl, wChannel7 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .loop
 	; ch8 on?
-	ld hl, Channel8 + Channel1Flags - Channel1
+	ld hl, wChannel8 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .loop
 
@@ -3240,19 +3240,19 @@ WaitForSongToFinish::
 
 IsSongPlaying::
 	; ch1 on?
-	ld hl, Channel1 + Channel1Flags - Channel1
+	ld hl, wChannel1 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .playing
 	; ch2 on?
-	ld hl, Channel2 + Channel1Flags - Channel1
+	ld hl, wChannel2 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .playing
 	; ch3 on?
-	ld hl, Channel3 + Channel1Flags - Channel1
+	ld hl, wChannel3 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr nz, .playing
 	; ch4 on?
-	ld hl, Channel4 + Channel1Flags - Channel1
+	ld hl, wChannel4 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
 	bit 0, [hl]
 	jr z, .notPlaying
 .playing

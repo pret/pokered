@@ -1,10 +1,9 @@
-Music_LookPokemaniac: ; ebde1
-	dbw $80, Music_LookPokemaniac_Ch1
-	dbw $01, Music_LookPokemaniac_Ch2
-	dbw $02, Music_LookPokemaniac_Ch3
-; ebdea
+Music_LookPokemaniac:
+	musicheader 3, 1, Music_LookPokemaniac_Ch1
+	musicheader 1, 2, Music_LookPokemaniac_Ch2
+	musicheader 1, 3, Music_LookPokemaniac_Ch3
 
-Music_LookPokemaniac_Ch1: ; ebdea
+Music_LookPokemaniac_Ch1:
 	stereopanning $f
 	tempo 144
 	volume $77
@@ -12,7 +11,7 @@ Music_LookPokemaniac_Ch1: ; ebdea
 	tone $0002
 	notetype $c, $b3
 	note __, 8
-Music_LookPokemaniac_branch_ebdfb: ; ebdfb
+Music_LookPokemaniac_branch_ebdfb:
 	note __, 4
 	octave 3
 	note A#, 1
@@ -27,9 +26,8 @@ Music_LookPokemaniac_branch_ebdfb: ; ebdfb
 	note __, 3
 	loopchannel 4, Music_LookPokemaniac_branch_ebdfb
 	loopchannel 0, Music_LookPokemaniac_branch_ebdfb
-; ebe12
 
-Music_LookPokemaniac_Ch2: ; ebe12
+Music_LookPokemaniac_Ch2:
 	stereopanning $ff
 	vibrato $2, $33
 	tone $0001
@@ -41,7 +39,7 @@ Music_LookPokemaniac_Ch2: ; ebe12
 	note C_, 1
 	octave 1
 	note A_, 4
-Music_LookPokemaniac_branch_ebe24: ; ebe24
+Music_LookPokemaniac_branch_ebe24:
 	octave 2
 	note C_, 2
 	note __, 2
@@ -59,7 +57,7 @@ Music_LookPokemaniac_branch_ebe24: ; ebe24
 	note D#, 1
 	note __, 3
 	loopchannel 2, Music_LookPokemaniac_branch_ebe24
-Music_LookPokemaniac_branch_ebe38: ; ebe38
+Music_LookPokemaniac_branch_ebe38:
 	octave 1
 	note A_, 2
 	note __, 2
@@ -79,9 +77,8 @@ Music_LookPokemaniac_branch_ebe38: ; ebe38
 	note __, 3
 	loopchannel 2, Music_LookPokemaniac_branch_ebe38
 	loopchannel 0, Music_LookPokemaniac_branch_ebe24
-; ebe51
 
-Music_LookPokemaniac_Ch3: ; ebe51
+Music_LookPokemaniac_Ch3:
 	stereopanning $f0
 	vibrato $6, $33
 	notetype $c, $15
@@ -93,15 +90,14 @@ Music_LookPokemaniac_Ch3: ; ebe51
 	octave 5
 	note C_, 4
 	intensity $10
-Music_LookPokemaniac_branch_ebe62: ; ebe62
+Music_LookPokemaniac_branch_ebe62:
 	callchannel Music_LookPokemaniac_branch_ebe70
 	intensity $14
 	callchannel Music_LookPokemaniac_branch_ebe70
 	intensity $10
 	loopchannel 0, Music_LookPokemaniac_branch_ebe62
-; ebe70
 
-Music_LookPokemaniac_branch_ebe70: ; ebe70
+Music_LookPokemaniac_branch_ebe70:
 	note A#, 6
 	note A_, 2
 	note G#, 2
@@ -161,6 +157,3 @@ Music_LookPokemaniac_branch_ebe70: ; ebe70
 	note C_, 1
 	note __, 1
 	endchannel
-; ebeab
-
-

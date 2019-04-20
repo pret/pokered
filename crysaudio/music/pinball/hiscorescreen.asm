@@ -260,9 +260,9 @@ Music_Pinballhiscorescreen_branch_41e5d: ; 41e5d
 	notetype $8, $a2
 	callchannel Music_Pinballhiscorescreen_branch_41fd5
 	callchannel Music_Pinballhiscorescreen_branch_41fd5
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballhiscorescreen_branch_41fd5
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $a2
 	note E_, 4
 	note E_, 1
@@ -643,9 +643,9 @@ Music_Pinballhiscorescreen_Ch3: ; 4206b
 	note __, 16
 	notetype $8, $22
 Music_Pinballhiscorescreen_branch_42072: ; 42072
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballhiscorescreen_branch_42153
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballhiscorescreen_branch_42153
 	callchannel Music_Pinballhiscorescreen_branch_4219a
 	octave 2
@@ -692,9 +692,9 @@ Music_Pinballhiscorescreen_branch_42072: ; 42072
 	note __, 1
 	note D_, 1
 	note __, 1
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballhiscorescreen_branch_42153
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballhiscorescreen_branch_42153
 	callchannel Music_Pinballhiscorescreen_branch_4219a
 	callchannel Music_Pinballhiscorescreen_branch_421e1
@@ -708,9 +708,9 @@ Music_Pinballhiscorescreen_branch_42072: ; 42072
 	note E_, 1
 	note __, 1
 	notetype $8, $22
-	forceoctave $2
+	pitchoffset 0, D_
 	callchannel Music_Pinballhiscorescreen_branch_42153
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballhiscorescreen_branch_42153
 	callchannel Music_Pinballhiscorescreen_branch_4219a
 	callchannel Music_Pinballhiscorescreen_branch_421e1

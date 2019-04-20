@@ -168,9 +168,9 @@ Music_Pinballmeowthstage_branch_4971a: ; 4971a
 	octave 5
 	note C#, 10
 	note __, 4
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballmeowthstage_branch_497e7
-	forceoctave $0
+	pitchoffset 0, C_
 	loopchannel 0, Music_Pinballmeowthstage_branch_4971a
 ; 497e7
 
@@ -431,9 +431,9 @@ Music_Pinballmeowthstage_branch_4984c: ; 4984c
 	intensity $18
 	note F#, 2
 	note __, 2
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballmeowthstage_branch_4993c
-	forceoctave $0
+	pitchoffset 0, C_
 	loopchannel 0, Music_Pinballmeowthstage_branch_4984c
 ; 4993c
 
@@ -798,9 +798,9 @@ Music_Pinballmeowthstage_branch_49a21: ; 49a21
 	octave 2
 	note C#, 4
 	note __, 2
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballmeowthstage_branch_49add
-	forceoctave $0
+	pitchoffset 0, C_
 	loopchannel 0, Music_Pinballmeowthstage_branch_49a21
 ; 49add
 

@@ -772,15 +772,15 @@ HandleBlackOut::
 
 StopMusic::
     xor a
-	ld [MusicFadeID], a
+	ld [wMusicFadeID], a
 	ld a, 1
-	ld [MusicFade], a
+	ld [wMusicFade], a
 .wait0
-    ld a, [MusicFadeCount]
+    ld a, [wMusicFadeCount]
     and a
     jr z, .wait0
 .wait1
-    ld a, [MusicFadeCount]
+    ld a, [wMusicFadeCount]
     and a
     jr nz, .wait1
     ret
@@ -1262,7 +1262,7 @@ CollisionCheckOnLand::
 	; curSFX is not cleared for some reason.
 	
     ; ch5 on?
-    ld hl, Channel5 + Channel1Flags - Channel1
+    ld hl, wChannel5 + wChannel1Flags1 - wChannel1 ; + CHANNEL_FLAGS1
     bit 0, [hl]
     
 	jr nz, .setCarry

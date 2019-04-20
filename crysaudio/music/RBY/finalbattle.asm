@@ -4,7 +4,7 @@ Music_FinalBattle:
 	dbw $02, Music_FinalBattle_Ch3
 
 Music_FinalBattle_Ch1: 
-	ftempo 112
+	tempo 112
 	volume 119
 	dutycycle 3
 	vibrato $6, $34

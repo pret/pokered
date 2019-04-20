@@ -5,7 +5,7 @@ Music_RBYTitleScreen:
 	dbw $03, Music_RBYTitleScreen_Ch4
 
 Music_RBYTitleScreen_Ch1: ; 7e4c0 (1f:64c0)
-	ftempo 144
+	tempo 144
 	volume 119
 	vibrato 9, 52
 	dutycycle 3

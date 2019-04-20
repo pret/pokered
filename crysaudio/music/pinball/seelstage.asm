@@ -77,29 +77,29 @@ Music_Pinballseelstage_branch_45615: ; 45615
 	note __, 16
 	note __, 1
 	dutycycle $2
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_456f0
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballseelstage_branch_4570a
 	notetype $8, $b3
 	note __, 12
 	note __, 12
 	note __, 12
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_456f0
-	forceoctave $c
+	pitchoffset 0, CC
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $4
+	pitchoffset 0, E_
 	callchannel Music_Pinballseelstage_branch_4570a
-	forceoctave $0
+	pitchoffset 0, C_
 	notetype $c, $b3
 	note __, 16
 	note __, 9
@@ -241,28 +241,28 @@ Music_Pinballseelstage_branch_4573f: ; 4573f
 	note G#, 1
 	note __, 15
 	note __, 2
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45935
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45969
 	intensity $b2
 	octave 3
 	note C_, 2
 	intensity $43
 	callchannel Music_Pinballseelstage_branch_45980
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45935
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45969
 	intensity $42
 	octave 3
@@ -291,35 +291,35 @@ Music_Pinballseelstage_branch_4573f: ; 4573f
 	note __, 15
 	note __, 2
 	intensity $b1
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45935
-	forceoctave $3
+	pitchoffset 0, D#
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45969
-	forceoctave $c
+	pitchoffset 0, CC
 	intensity $a3
 	octave 3
 	note C_, 2
 	callchannel Music_Pinballseelstage_branch_45980
-	forceoctave $5
+	pitchoffset 0, F_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45935
-	forceoctave $7
+	pitchoffset 0, G_
 	callchannel Music_Pinballseelstage_branch_4594f
-	forceoctave $0
+	pitchoffset 0, C_
 	callchannel Music_Pinballseelstage_branch_45969
 	intensity $32
-	forceoctave $c
+	pitchoffset 0, CC
 	octave 2
 	note G_, 2
 	callchannel Music_Pinballseelstage_branch_459b6
-	forceoctave $0
+	pitchoffset 0, C_
 	intensity $b1
 	octave 2
 	note B_, 1

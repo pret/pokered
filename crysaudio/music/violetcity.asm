@@ -1,11 +1,10 @@
-Music_VioletCity: ; f0000
-	dbw $c0, Music_VioletCity_Ch1
-	dbw $01, Music_VioletCity_Ch2
-	dbw $02, Music_VioletCity_Ch3
-	dbw $03, Music_VioletCity_Ch4
-; f000c
+Music_VioletCity:
+	musicheader 4, 1, Music_VioletCity_Ch1
+	musicheader 1, 2, Music_VioletCity_Ch2
+	musicheader 1, 3, Music_VioletCity_Ch3
+	musicheader 1, 4, Music_VioletCity_Ch4
 
-Music_VioletCity_Ch1: ; f000c
+Music_VioletCity_Ch1:
 	tempo 164
 	volume $77
 	vibrato $12, $25
@@ -65,7 +64,7 @@ Music_VioletCity_Ch1: ; f000c
 	octave 3
 	note C#, 12
 	note __, 8
-Music_VioletCity_branch_f0056: ; f0056
+Music_VioletCity_branch_f0056:
 	notetype $6, $95
 	note __, 4
 	octave 2
@@ -296,9 +295,8 @@ Music_VioletCity_branch_f0056: ; f0056
 	note C#, 4
 	note __, 4
 	loopchannel 0, Music_VioletCity_branch_f0056
-; f0162
 
-Music_VioletCity_Ch2: ; f0162
+Music_VioletCity_Ch2:
 	vibrato $12, $24
 	dutycycle $2
 	notetype $c, $c7
@@ -349,7 +347,7 @@ Music_VioletCity_Ch2: ; f0162
 	note __, 2
 	note D#, 1
 	note E_, 1
-Music_VioletCity_branch_f0199: ; f0199
+Music_VioletCity_branch_f0199:
 	intensity $b7
 	note F#, 4
 	note __, 2
@@ -503,9 +501,8 @@ Music_VioletCity_branch_f0199: ; f0199
 	note D#, 1
 	note E_, 1
 	loopchannel 0, Music_VioletCity_branch_f0199
-; f0247
 
-Music_VioletCity_Ch3: ; f0247
+Music_VioletCity_Ch3:
 	notetype $c, $25
 	note __, 16
 	note __, 6
@@ -530,7 +527,7 @@ Music_VioletCity_Ch3: ; f0247
 	note F#, 2
 	octave 2
 	note A#, 2
-Music_VioletCity_branch_f0261: ; f0261
+Music_VioletCity_branch_f0261:
 	notetype $c, $25
 	note B_, 1
 	note __, 5
@@ -692,9 +689,8 @@ Music_VioletCity_branch_f0261: ; f0261
 	octave 2
 	note A#, 4
 	loopchannel 0, Music_VioletCity_branch_f0261
-; f0311
 
-Music_VioletCity_branch_f0311: ; f0311
+Music_VioletCity_branch_f0311:
 	note G_, 2
 	note __, 10
 	note G_, 2
@@ -708,9 +704,8 @@ Music_VioletCity_branch_f0311: ; f0311
 	octave 2
 	note A_, 4
 	endchannel
-; f031e
 
-Music_VioletCity_Ch4: ; f031e
+Music_VioletCity_Ch4:
 	togglenoise $3
 	notetype $c
 	note D#, 2
@@ -729,7 +724,7 @@ Music_VioletCity_Ch4: ; f031e
 	note D_, 2
 	note C_, 8
 	note D#, 2
-Music_VioletCity_branch_f0338: ; f0338
+Music_VioletCity_branch_f0338:
 	callchannel Music_VioletCity_branch_f037a
 	callchannel Music_VioletCity_branch_f037a
 	callchannel Music_VioletCity_branch_f037a
@@ -747,9 +742,8 @@ Music_VioletCity_branch_f0338: ; f0338
 	callchannel Music_VioletCity_branch_f037a
 	callchannel Music_VioletCity_branch_f037a
 	loopchannel 0, Music_VioletCity_branch_f0338
-; f036c
 
-Music_VioletCity_branch_f036c: ; f036c
+Music_VioletCity_branch_f036c:
 	note D_, 1
 	note D_, 1
 	note D#, 1
@@ -764,9 +758,8 @@ Music_VioletCity_branch_f036c: ; f036c
 	note G_, 1
 	note G_, 1
 	endchannel
-; f037a
 
-Music_VioletCity_branch_f037a: ; f037a
+Music_VioletCity_branch_f037a:
 	note D#, 2
 	note G_, 1
 	note G_, 1
@@ -779,6 +772,3 @@ Music_VioletCity_branch_f037a: ; f037a
 	note D_, 2
 	note D#, 2
 	endchannel
-; f0386
-
-

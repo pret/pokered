@@ -1,11 +1,10 @@
-Music_LakeOfRage: ; ee6c5
-	dbw $c0, Music_LakeOfRage_Ch1
-	dbw $01, Music_LakeOfRage_Ch2
-	dbw $02, Music_LakeOfRage_Ch3
-	dbw $03, Music_LakeOfRage_Ch4
-; ee6d1
+Music_LakeOfRage:
+	musicheader 4, 1, Music_LakeOfRage_Ch1
+	musicheader 1, 2, Music_LakeOfRage_Ch2
+	musicheader 1, 3, Music_LakeOfRage_Ch3
+	musicheader 1, 4, Music_LakeOfRage_Ch4
 
-Music_LakeOfRage_Ch1: ; ee6d1
+Music_LakeOfRage_Ch1:
 	tempo 144
 	volume $77
 	dutycycle $3
@@ -19,7 +18,7 @@ Music_LakeOfRage_Ch1: ; ee6d1
 	note D_, 6
 	note D_, 6
 	note E_, 4
-Music_LakeOfRage_branch_ee6e9: ; ee6e9
+Music_LakeOfRage_branch_ee6e9:
 	intensity $b5
 	note F#, 6
 	note E_, 6
@@ -93,9 +92,8 @@ Music_LakeOfRage_branch_ee6e9: ; ee6e9
 	intensity $a7
 	note D_, 6
 	loopchannel 0, Music_LakeOfRage_branch_ee6e9
-; ee749
 
-Music_LakeOfRage_Ch2: ; ee749
+Music_LakeOfRage_Ch2:
 	dutycycle $3
 	vibrato $20, $44
 	stereopanning $ff
@@ -108,7 +106,7 @@ Music_LakeOfRage_Ch2: ; ee749
 	note A_, 8
 	intensity $a7
 	note A_, 8
-Music_LakeOfRage_branch_ee75e: ; ee75e
+Music_LakeOfRage_branch_ee75e:
 	notetype $8, $c7
 	octave 4
 	note D_, 16
@@ -183,9 +181,8 @@ Music_LakeOfRage_branch_ee75e: ; ee75e
 	notetype $c, $c7
 	note A_, 16
 	loopchannel 0, Music_LakeOfRage_branch_ee75e
-; ee7c1
 
-Music_LakeOfRage_Ch3: ; ee7c1
+Music_LakeOfRage_Ch3:
 	stereopanning $f
 	notetype $c, $16
 	octave 3
@@ -198,7 +195,7 @@ Music_LakeOfRage_Ch3: ; ee7c1
 	note F#, 4
 	note __, 2
 	note E_, 4
-Music_LakeOfRage_branch_ee7d0: ; ee7d0
+Music_LakeOfRage_branch_ee7d0:
 	octave 3
 	note D_, 4
 	octave 2
@@ -297,13 +294,12 @@ Music_LakeOfRage_branch_ee7d0: ; ee7d0
 	octave 2
 	note A_, 2
 	loopchannel 0, Music_LakeOfRage_branch_ee7d0
-; ee835
 
-Music_LakeOfRage_Ch4: ; ee835
+Music_LakeOfRage_Ch4:
 	stereopanning $f0
 	togglenoise $3
 	notetype $c
-Music_LakeOfRage_branch_ee83b: ; ee83b
+Music_LakeOfRage_branch_ee83b:
 	note D_, 2
 	note D_, 1
 	note D_, 1
@@ -324,6 +320,3 @@ Music_LakeOfRage_branch_ee83b: ; ee83b
 	note D_, 1
 	note D_, 1
 	loopchannel 0, Music_LakeOfRage_branch_ee83b
-; ee852
-
-

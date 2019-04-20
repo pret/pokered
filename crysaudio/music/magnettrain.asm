@@ -1,12 +1,11 @@
-Music_MagnetTrain: ; ef5f0
-	dbw $c0, Music_MagnetTrain_Ch1
-	dbw $01, Music_MagnetTrain_Ch2
-	dbw $02, Music_MagnetTrain_Ch3
-	dbw $03, Music_MagnetTrain_Ch4
-; ef5fc
+Music_MagnetTrain:
+	musicheader 4, 1, Music_MagnetTrain_Ch1
+	musicheader 1, 2, Music_MagnetTrain_Ch2
+	musicheader 1, 3, Music_MagnetTrain_Ch3
+	musicheader 1, 4, Music_MagnetTrain_Ch4
 
-Music_MagnetTrain_Ch1: ; ef5fc
-	ftempo 110
+Music_MagnetTrain_Ch1:
+	tempo 110
 	volume $77
 	stereopanning $f
 	vibrato $14, $23
@@ -68,9 +67,8 @@ Music_MagnetTrain_Ch1: ; ef5fc
 	notetype $c, $b7
 	note D_, 16
 	endchannel
-; ef648
 
-Music_MagnetTrain_Ch2: ; ef648
+Music_MagnetTrain_Ch2:
 	vibrato $14, $23
 	dutycycle $1
 	notetype $c, $d2
@@ -107,9 +105,8 @@ Music_MagnetTrain_Ch2: ; ef648
 	notetype $c, $d7
 	note A_, 16
 	endchannel
-; ef67d
 
-Music_MagnetTrain_Ch3: ; ef67d
+Music_MagnetTrain_Ch3:
 	stereopanning $ff
 	vibrato $10, $23
 	notetype $c, $15
@@ -224,9 +221,8 @@ Music_MagnetTrain_Ch3: ; ef67d
 	octave 2
 	note D_, 16
 	endchannel
-; ef6f4
 
-Music_MagnetTrain_Ch4: ; ef6f4
+Music_MagnetTrain_Ch4:
 	togglenoise $3
 	notetype $c
 	note B_, 12
@@ -248,12 +244,24 @@ Music_MagnetTrain_Ch4: ; ef6f4
 	notetype $c
 	note B_, 16
 	endchannel
-; ef711
 
+; unused
+Music_MagnetTrain_branch_ef711:
+	note G#, 1
+	note G_, 1
+	note G_, 1
+	note G#, 1
+	note G_, 1
+	note G_, 1
+	note G#, 1
+	note G_, 1
+	note G_, 1
+	note G#, 1
+	note G_, 1
+	note G_, 1
+	endchannel
 
-
-
-Music_MagnetTrain_branch_ef71e: ; ef71e
+Music_MagnetTrain_branch_ef71e:
 	note G#, 2
 	note G_, 2
 	note G_, 2
@@ -271,6 +279,3 @@ Music_MagnetTrain_branch_ef71e: ; ef71e
 	note G_, 2
 	note G_, 2
 	endchannel
-; ef72f
-
-

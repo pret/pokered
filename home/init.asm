@@ -126,10 +126,7 @@ ClearVram:
 
 
 StopAllSounds::
-    call OpenSRAMForSound
-    ld hl, MusicPlaying
-	ld bc, (wChannelSelectorSwitches+8) - Crysaudio
-	call FillMemory
+	call OpenSRAMForSound
 
 	ld a, 0 ; BANK(Audio1_UpdateMusic)
 	ld [wAudioROMBank], a

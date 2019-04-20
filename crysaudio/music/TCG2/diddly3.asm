@@ -45,7 +45,7 @@ Music_TCG2Diddly3_Ch1:
 
 Music_TCG2Diddly3_Ch3: 
 	notetype1 10
-	notetype2 15
+	load_wave 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 13, 12, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	notetype0 1
 	notetype1 2
 	notetype0 1

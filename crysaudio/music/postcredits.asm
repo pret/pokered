@@ -1,19 +1,17 @@
-Music_PostCredits: ; cfd9e
-	dbw $40, Music_PostCredits_Ch1
-	dbw $01, Music_PostCredits_Ch2
-; cfda4
+Music_PostCredits:
+	musicheader 2, 1, Music_PostCredits_Ch1
+	musicheader 1, 2, Music_PostCredits_Ch2
 
+	db $2
 
-
-
-Music_PostCredits_Ch1: ; cfda5
-	ftempo 271
+Music_PostCredits_Ch1:
+	tempo 271
 	volume $77
-	forceoctave $3
+	pitchoffset 0, D#
 	dutycycle $2
 	notetype $c, $93
 	note __, 8
-Music_PostCredits_branch_cfdb2: ; cfdb2
+Music_PostCredits_branch_cfdb2:
 	octave 3
 	note C_, 2
 	note E_, 2
@@ -131,10 +129,9 @@ Music_PostCredits_branch_cfdb2: ; cfdb2
 	octave 2
 	note G_, 2
 	loopchannel 0, Music_PostCredits_branch_cfdb2
-; cfe48
 
-Music_PostCredits_Ch2: ; cfe48
-	forceoctave $3
+Music_PostCredits_Ch2:
+	pitchoffset 0, D#
 	dutycycle $2
 	notetype $c, $a3
 	octave 5
@@ -145,7 +142,7 @@ Music_PostCredits_Ch2: ; cfe48
 	note F_, 2
 	intensity $73
 	note F_, 2
-Music_PostCredits_branch_cfe5a: ; cfe5a
+Music_PostCredits_branch_cfe5a:
 	intensity $a3
 	note G_, 2
 	intensity $73
@@ -265,5 +262,3 @@ Music_PostCredits_branch_cfe5a: ; cfe5a
 	note E_, 2
 	note F_, 2
 	loopchannel 0, Music_PostCredits_branch_cfe5a
-; cff04
-

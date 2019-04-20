@@ -1,20 +1,18 @@
-Music_NewBarkTown: ; eb2d3
-	dbw $80, Music_NewBarkTown_Ch1
-	dbw $01, Music_NewBarkTown_Ch2
-	dbw $02, Music_NewBarkTown_Ch3
-; eb2dc
+Music_NewBarkTown:
+	musicheader 3, 1, Music_NewBarkTown_Ch1
+	musicheader 1, 2, Music_NewBarkTown_Ch2
+	musicheader 1, 3, Music_NewBarkTown_Ch3
 
+	db $3
 
-
-
-Music_NewBarkTown_Ch1: ; eb2dd
+Music_NewBarkTown_Ch1:
 	tempo 187
 	volume $77
 	stereopanning $f
 	vibrato $12, $23
 	notetype $c, $87
 	note __, 4
-Music_NewBarkTown_branch_eb2eb: ; eb2eb
+Music_NewBarkTown_branch_eb2eb:
 	dutycycle $0
 	callchannel Music_NewBarkTown_branch_eb349
 	octave 3
@@ -86,9 +84,8 @@ Music_NewBarkTown_branch_eb2eb: ; eb2eb
 	note B_, 2
 	intensity $87
 	loopchannel 0, Music_NewBarkTown_branch_eb2eb
-; eb349
 
-Music_NewBarkTown_branch_eb349: ; eb349
+Music_NewBarkTown_branch_eb349:
 	octave 3
 	note F#, 1
 	note __, 1
@@ -140,9 +137,8 @@ Music_NewBarkTown_branch_eb349: ; eb349
 	note B_, 1
 	note __, 1
 	endchannel
-; eb37c
 
-Music_NewBarkTown_branch_eb37c: ; eb37c
+Music_NewBarkTown_branch_eb37c:
 	octave 2
 	note G_, 2
 	note B_, 2
@@ -160,14 +156,13 @@ Music_NewBarkTown_branch_eb37c: ; eb37c
 	note A_, 4
 	note E_, 2
 	endchannel
-; eb38d
 
-Music_NewBarkTown_Ch2: ; eb38d
+Music_NewBarkTown_Ch2:
 	stereopanning $ff
 	vibrato $12, $23
 	notetype $6, $a7
 	note __, 8
-Music_NewBarkTown_branch_eb396: ; eb396
+Music_NewBarkTown_branch_eb396:
 	dutycycle $2
 	notetype $6, $a7
 	callchannel Music_NewBarkTown_branch_eb3bf
@@ -191,9 +186,8 @@ Music_NewBarkTown_branch_eb396: ; eb396
 	note D_, 4
 	note E_, 16
 	loopchannel 0, Music_NewBarkTown_branch_eb396
-; eb3bf
 
-Music_NewBarkTown_branch_eb3bf: ; eb3bf
+Music_NewBarkTown_branch_eb3bf:
 	octave 2
 	note D_, 4
 	note __, 8
@@ -245,9 +239,8 @@ Music_NewBarkTown_branch_eb3bf: ; eb3bf
 	octave 2
 	note C#, 4
 	endchannel
-; eb3f2
 
-Music_NewBarkTown_branch_eb3f2: ; eb3f2
+Music_NewBarkTown_branch_eb3f2:
 	notetype $6, $97
 	dutycycle $2
 	octave 4
@@ -257,15 +250,14 @@ Music_NewBarkTown_branch_eb3f2: ; eb3f2
 	notetype $c, $97
 	note E_, 16
 	endchannel
-; eb400
 
-Music_NewBarkTown_Ch3: ; eb400
+Music_NewBarkTown_Ch3:
 	stereopanning $f0
 	notetype $c, $10
 	octave 5
 	note D_, 2
 	note E_, 2
-Music_NewBarkTown_branch_eb408: ; eb408
+Music_NewBarkTown_branch_eb408:
 	vibrato $16, $23
 	note F#, 4
 	note A_, 4
@@ -330,6 +322,3 @@ Music_NewBarkTown_branch_eb408: ; eb408
 	note D_, 1
 	note E_, 1
 	loopchannel 0, Music_NewBarkTown_branch_eb408
-; eb453
-
-
