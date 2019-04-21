@@ -106,7 +106,7 @@ BillsPC_::
 	bit 3, a ; accessing Bill's PC through another PC?
 	jr nz, BillsPCMenu
 ; accessing it directly
-	ld a, $99
+	ld a, SFX_TURN_ON_PC
 	call PlaySound
 	ld hl, SwitchOnText
 	call PrintText
@@ -191,7 +191,7 @@ ExitBillsPC:
 	jr nz, .next
 ; accessing it directly
 	call LoadTextBoxTilePatterns
-	ld a, $9a
+	ld a, SFX_TURN_OFF_PC
 	call PlaySound
 	call WaitForSoundToFinish
 .next
