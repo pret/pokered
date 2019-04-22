@@ -50,7 +50,7 @@ PlayDefaultMusicCommon::
 .walking
 	ld a, [wMapMusicSoundID]
 	ld b, a
-	call CompareMapMusicBankWithCurrentBank
+;	call CompareMapMusicBankWithCurrentBank
 	jr c, .next4
 
 .next3
@@ -71,20 +71,17 @@ PlayDefaultMusicCommon::
 	;call FadeMusic ; called in updatemusic
 	ret
 
-UpdateMusic6Times::
-	;jp UpdateSound
-	;ret ; XXX UpdateMusic
+;UpdateMusic6Times::
+;CompareMapMusicBankWithCurrentBank:
+;	ret
 
-CompareMapMusicBankWithCurrentBank:
-	ret
-
-; plays <s>music</s>SFX specified by a. If value is $ff, music is stopped
+; plays music or SFX specified by a. If value is $ff, music is stopped
 PlaySound::
 	push de
 	cp $ff
-    jr nz, .notff
-    xor a
-    call PlayMusic
+	jr nz, .notff
+	xor a
+	call PlayMusic
 	pop de
 	ret
 .notff
@@ -103,7 +100,7 @@ OpenSRAMForSound::
 	ld [MBC1SRamBank], a
 	ret
 
-;SoundRestart::
+;MapSetup_Sound_Off::
 ;	push hl
 ;	push de
 ;	push bc
@@ -111,16 +108,16 @@ OpenSRAMForSound::
 ;
 ;	call OpenSRAMForSound
 ;
-;	ld a, [hROMBank]
+;	ldh a, [hROMBank]
 ;	push af
-;	ld a, BANK(_SoundRestart)
-;	ld [hROMBank], a
+;	ld a, BANK(_MapSetup_Sound_Off)
+;	ldh [hROMBank], a
 ;	ld [MBC1RomBank], a
 ;
-;	call _SoundRestart
+;	call _MapSetup_Sound_Off
 ;
 ;	pop af
-;	ld [hROMBank], a
+;	ldh [hROMBank], a
 ;	ld [MBC1RomBank], a
 ;
 ;	pop af
@@ -129,32 +126,45 @@ OpenSRAMForSound::
 ;	pop hl
 ;	ret
 
-
 UpdateSound::
 ;	push hl
 ;	push de
 ;	push bc
 ;	push af
+
 	ld a, [wHaltAudio]
 	and a
 	ret nz
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_UpdateSound)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC1RomBank], a
 
 	call _UpdateSound
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC1RomBank], a
 
 ;	pop af
 ;	pop bc
 ;	pop de
 ;	pop hl
+	ret
+
+_LoadMusicByte::
+; wCurMusicByte = [a:de]
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
+
+	ld a, [de]
+	ld [wCurMusicByte], a
+	ld a, BANK(LoadMusicByte)
+
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
 	ret
 
 PlayMusic::
@@ -168,28 +178,74 @@ PlayMusic::
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
-	ld a, BANK(_PlayMusic) ; and BANK(_SoundRestart)
-	ld [hROMBank], a
+	ld a, BANK(_PlayMusic) ; aka BANK(_MapSetup_Sound_Off)
+	ldh [hROMBank], a
 	ld [MBC1RomBank], a
+
+	ld a, e
+	and a
+	jr z, .nomusic
 
 	call _PlayMusic
+	jr .end
 
+.nomusic
+	call _MapSetup_Sound_Off
+
+.end
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC1RomBank], a
-	jr PopAllRet
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
 
+;PlayMusic2::
+;	ld e, a
+;	xor a
+;	ld d, a
+; Stop playing music, then play music de.
+;
+;	push hl
+;	push de
+;	push bc
+;	push af
+;
+;	ldh a, [hROMBank]
+;	push af
+;	ld a, BANK(_PlayMusic)
+;	ldh [hROMBank], a
+;	ld [MBC1RomBank], a
+;
+;	push de
+;	ld de, MUSIC_NONE
+;	call _PlayMusic
+;	call DelayFrame
+;	pop de
+;	call _PlayMusic
+;
+;	pop af
+;	ldh [hROMBank], a
+;	ld [MBC1RomBank], a
+;
+;	pop af
+;	pop bc
+;	pop de
+;	pop hl
+;	ret
 
 PlayCry::
 ; Play monster a's cry.
-; Play a cry given parameters in header de
 
 	push hl
 	push de
 	push bc
 	push af
+
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
@@ -197,23 +253,18 @@ PlayCry::
 	ld e, a
 	ld d, 0
 
-; Save current bank
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 
-; Cry headers are stuck in one bank.
+	; Cries are stuck in one bank.
 	ld a, BANK(PokemonCries)
-	ld [hROMBank], a
-	ld [$2000], a
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
 
-; Each header is 6 bytes long:
 	ld hl, PokemonCries
+rept 6 ; sizeof(mon_cry)
 	add hl, de
-	add hl, de
-	add hl, de
-	add hl, de
-	add hl, de
-	add hl, de
+endr
 
 	ld e, [hl]
 	inc hl
@@ -223,25 +274,29 @@ PlayCry::
 	ld a, [hli]
 	ld [wCryPitch], a
 	ld a, [hli]
-	ld [wCryPitch+1], a
+	ld [wCryPitch + 1], a
 	ld a, [hli]
 	ld [wCryLength], a
 	ld a, [hl]
-	ld [wCryLength+1], a
+	ld [wCryLength + 1], a
 
 	ld a, BANK(_PlayCry)
-	ld [hROMBank], a
-	ld [$2000], a
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
 
 	call _PlayCry
 
 	pop af
-	ld [hROMBank], a
-	ld [$2000], a
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
 	
 	call WaitForSoundToFinish
-	
-	jr PopAllRet
+
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret
 
 PlaySFX::
 ; Play sound effect de.
@@ -252,48 +307,97 @@ PlaySFX::
 	push bc
 	push af
 
-; Is something already playing?
-	;call CheckSFX
-	;jr nc, .play
-; Does it have priority?
-	;ld a, [wCurSFX]
-	;cp e
-	;jr c, .quit
+	; Is something already playing?
+;	call CheckSFX
+;	jr nc, .play
 
-PlaySFX_play
+	; Does it have priority?
+;	ld a, [wCurSFX]
+;	cp e
+;	jr c, .done
+
 .play
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlaySFX)
-	ld [hROMBank], a
-	ld [$2000], a ; bankswitch
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
 
 	ld a, e
 	ld [wCurSFX], a
 	call _PlaySFX
 
 	pop af
-	ld [hROMBank], a
-	ld [$2000], a ; bankswitch
-.quit
-PopAllRet:
+	ldh [hROMBank], a
+	ld [MBC1RomBank], a
+
+.done
 	pop af
 	pop bc
 	pop de
 	pop hl
 	ret
 
-_LoadMusicByte::
-; CurMusicByte = [a:de]
-GLOBAL LoadMusicByte
+PlaySoundWaitForCurrent::
+WaitPlaySFX::
+	push af
+	call WaitForSoundToFinish
+	pop af
+	jp PlaySound
 
-	ld [hROMBank], a
-	ld [MBC1RomBank], a
+; Wait for sound to finish playing
+WaitForSoundToFinish::
+WaitSFX::
+	ld a, [wDanger]
+	and a
+	ret nz
+	ld a, [wSFXDontWait]
+	and a
+	ret nz
 
-	ld a, [de]
-	ld [wCurMusicByte], a
-	ld a, BANK(LoadMusicByte)
+; infinite loop until sfx is done playing
 
-	ld [hROMBank], a
-	ld [MBC1RomBank], a
+	push hl
+
+.wait
+	ld hl, wChannel5Flags1
+	bit 0, [hl]
+	jr nz, .wait
+	ld hl, wChannel6Flags1
+	bit 0, [hl]
+	jr nz, .wait
+	ld hl, wChannel7Flags1
+	bit 0, [hl]
+	jr nz, .wait
+	ld hl, wChannel8Flags1
+	bit 0, [hl]
+	jr nz, .wait
+
+	pop hl
+	ret
+
+WaitForSongToFinish::
+.loop
+	call IsSongPlaying
+	jr c, .loop
+	ret
+
+IsSongPlaying::
+; Return carry if any song channels are active.
+	ld a, [wChannel1Flags1]
+	bit 0, a
+	jr nz, .playing
+	ld a, [wChannel2Flags1]
+	bit 0, a
+	jr nz, .playing
+	ld a, [wChannel3Flags1]
+	bit 0, a
+	jr nz, .playing
+	ld a, [wChannel4Flags1]
+	bit 0, a
+	jr nz, .playing
+	and a
+	ret
+.playing
+	scf
 	ret

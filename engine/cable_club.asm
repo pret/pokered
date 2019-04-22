@@ -830,7 +830,7 @@ TradeCenter_Trade:
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_SAFARI_ZONE
 	ld [wNewSoundID], a
-	call PlaySound
+	call PlayMusic
 	ld c, 100
 	call DelayFrames
 	call ClearScreen
@@ -921,7 +921,7 @@ CableClub_Run:
 	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_CELADON
 	ld [wNewSoundID], a
-	jp PlaySound
+	jp PlayMusic
 
 EmptyFunc3:
 	ret

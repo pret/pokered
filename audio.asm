@@ -254,7 +254,7 @@ OwnedMonValues:
 	db 10, 40, 60, 90, 120, 150, $ff
 
 ; crystal:
-    
+
 SECTION "Audio Engine 1", ROMX
 
 INCLUDE "crysaudio/engine.asm"

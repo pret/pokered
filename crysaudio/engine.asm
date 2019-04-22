@@ -2385,9 +2385,6 @@ SetLRTracks:
 
 _PlayMusic::
 	call OpenSRAMForSound
-	ld a, e
-	and a
-	jp z, _MapSetup_Sound_Off
 	cp NUM_SONGS
 	ret nc ; sfx
 ; load music
