@@ -1,17 +1,17 @@
-Music_Routes2:
-	dbw $C0, Music_Routes2_Ch1
-	dbw $01, Music_Routes2_Ch2
-	dbw $02, Music_Routes2_Ch3
-	dbw $03, Music_Routes2_Ch4
+Music_Routes2::
+	musicheader 4, 1, Music_Routes2_Ch0
+	musicheader 1, 2, Music_Routes2_Ch1
+	musicheader 1, 3, Music_Routes2_Ch2
+	musicheader 1, 4, Music_Routes2_Ch3
 
-Music_Routes2_Ch1: ; 9db9 (2:5db9)
+Music_Routes2_Ch0::
 	tempo 152
-	volume 119
-	vibrato 9, 37
+	volume $77
+	vibrato 9, $25
 	dutycycle 1
 
-Music_Routes2_branch_9dc3:
-	notetype 12, 178
+Music_Routes2_branch_9dc3::
+	notetype 12, $b2
 	octave 2
 	note B_, 4
 	octave 3
@@ -44,7 +44,7 @@ Music_Routes2_branch_9dc3:
 	note A_, 2
 	note G#, 4
 	note B_, 4
-	notetype 8, 178
+	notetype 8, $b2
 	octave 4
 	note E_, 2
 	octave 3
@@ -148,12 +148,12 @@ Music_Routes2_branch_9dc3:
 	endchannel
 
 
-Music_Routes2_Ch2: ; 9e4f (2:5e4f)
-	vibrato 8, 38
+Music_Routes2_Ch1::
+	vibrato 8, $26
 	dutycycle 3
 
-Music_Routes2_branch_9e54:
-	notetype 12, 212
+Music_Routes2_branch_9e54::
+	notetype 12, $d4
 	octave 4
 	note E_, 6
 	octave 3
@@ -222,11 +222,11 @@ Music_Routes2_branch_9e54:
 	endchannel
 
 
-Music_Routes2_Ch3: ; 9e9b (2:5e9b)
-	vibrato 9, 40
+Music_Routes2_Ch2::
+	vibrato 9, $28
 
-Music_Routes2_branch_9e9e:
-	notetype 12, 17
+Music_Routes2_branch_9e9e::
+	notetype 12, $11
 	octave 3
 	note E_, 2
 	note __, 2
@@ -330,9 +330,8 @@ Music_Routes2_branch_9e9e:
 	endchannel
 
 
-Music_Routes2_Ch4: ; 9f08 (2:5f08)
+Music_Routes2_Ch3::
 	togglenoise 0
-Music_Routes2_Loop4:
 	notetype 12
 	note D_, 2
 	note __, 2
@@ -429,6 +428,5 @@ Music_Routes2_Loop4:
 	note __, 3
 	note D_, 3
 	note __, 3
-	loopchannel 0, Music_Routes2_Loop4
+	loopchannel 0, Music_Routes2_Ch3
 	endchannel
-; 0x9fad

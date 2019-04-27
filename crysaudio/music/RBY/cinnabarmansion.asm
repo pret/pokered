@@ -1,17 +1,17 @@
-Music_CinnabarMansion:
-	dbw $C0, Music_CinnabarMansion_Ch1
-	dbw $01, Music_CinnabarMansion_Ch2
-	dbw $02, Music_CinnabarMansion_Ch3
-	dbw $03, Music_CinnabarMansion_Ch4
+Music_CinnabarMansion::
+	musicheader 4, 1, Music_CinnabarMansion_Ch0
+	musicheader 1, 2, Music_CinnabarMansion_Ch1
+	musicheader 1, 3, Music_CinnabarMansion_Ch2
+	musicheader 1, 4, Music_CinnabarMansion_Ch3
 
-Music_CinnabarMansion_Ch1: ; 7ed0f (1f:6d0f)
+Music_CinnabarMansion_Ch0::
 	tempo 144
-	volume 119
-	vibrato 11, 37
+	volume $77
+	vibrato 11, $25
 	dutycycle 2
 
-Music_CinnabarMansion_branch_7ed19:
-	notetype 12, 98
+Music_CinnabarMansion_branch_7ed19::
+	notetype 12, $62
 	octave 5
 	note E_, 1
 	note E_, 1
@@ -32,7 +32,7 @@ Music_CinnabarMansion_branch_7ed19:
 	note B_, 1
 	note __, 2
 	loopchannel 14, Music_CinnabarMansion_branch_7ed19
-	notetype 12, 165
+	notetype 12, $a5
 	note __, 16
 	note __, 16
 	note __, 15
@@ -44,21 +44,21 @@ Music_CinnabarMansion_branch_7ed19:
 	loopchannel 0, Music_CinnabarMansion_branch_7ed19
 
 
-Music_CinnabarMansion_Ch2: ; 7ed40 (1f:6d40)
+Music_CinnabarMansion_Ch1::
 	dutycycle 2
-	
-	vibrato 10, 36
-	notetype 12, 194
+	;toggleperfectpitch
+	vibrato 10, $24
+	notetype 12, $c2
 
-Music_CinnabarMansion_branch_7ed48:
+Music_CinnabarMansion_branch_7ed48::
 	note __, 16
 	note __, 16
 	loopchannel 4, Music_CinnabarMansion_branch_7ed48
 
-Music_CinnabarMansion_branch_7ed4e:
-	notetype 12, 194
+Music_CinnabarMansion_branch_7ed4e::
+	notetype 12, $c2
 
-Music_CinnabarMansion_branch_7ed50:
+Music_CinnabarMansion_branch_7ed50::
 	callchannel Music_CinnabarMansion_branch_7ed6c
 	loopchannel 3, Music_CinnabarMansion_branch_7ed50
 	octave 3
@@ -80,7 +80,7 @@ Music_CinnabarMansion_branch_7ed50:
 	note D#, 4
 	loopchannel 0, Music_CinnabarMansion_branch_7ed4e
 
-Music_CinnabarMansion_branch_7ed6c:
+Music_CinnabarMansion_branch_7ed6c::
 	octave 3
 	note E_, 4
 	note D#, 4
@@ -101,10 +101,10 @@ Music_CinnabarMansion_branch_7ed6c:
 	endchannel
 
 
-Music_CinnabarMansion_Ch3: ; 7ed7e (1f:6d7e)
-	notetype 12, 17
+Music_CinnabarMansion_Ch2::
+	notetype 12, $11
 
-Music_CinnabarMansion_branch_7ed80:
+Music_CinnabarMansion_branch_7ed80::
 	octave 2
 	note B_, 2
 	note __, 2
@@ -149,15 +149,15 @@ Music_CinnabarMansion_branch_7ed80:
 	loopchannel 0, Music_CinnabarMansion_branch_7ed80
 
 
-Music_CinnabarMansion_Ch4: ; 7edb0 (1f:6db0)
-	notetype 6
+Music_CinnabarMansion_Ch3::
 	togglenoise 1
+	notetype 6
 	note __, 16
 	note __, 16
 	note __, 16
 	note __, 16
 
-Music_CinnabarMansion_branch_7edb5:
+Music_CinnabarMansion_branch_7edb5::
 	note E_, 2
 	note E_, 2
 	note F_, 4
@@ -177,4 +177,3 @@ Music_CinnabarMansion_branch_7edb5:
 	note __, 8
 	note F#, 8
 	loopchannel 0, Music_CinnabarMansion_branch_7edb5
-; 0x7edda

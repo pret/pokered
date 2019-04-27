@@ -1,18 +1,18 @@
-Music_Dungeon2:
-	dbw $C0, Music_Dungeon2_Ch1
-	dbw $01, Music_Dungeon2_Ch2
-	dbw $02, Music_Dungeon2_Ch3
-	dbw $03, Music_Dungeon2_Ch4
+Music_Dungeon2::
+	musicheader 4, 1, Music_Dungeon2_Ch0
+	musicheader 1, 2, Music_Dungeon2_Ch1
+	musicheader 1, 3, Music_Dungeon2_Ch2
+	musicheader 1, 4, Music_Dungeon2_Ch3
 
-Music_Dungeon2_Ch1: ; 7e887 (1f:6887)
+Music_Dungeon2_Ch0::
 	tempo 144
-	volume 119
+	volume $77
 	dutycycle 3
-	
-	vibrato 10, 20
+	;toggleperfectpitch
+	vibrato 10, $14
 
-Music_Dungeon2_branch_7e892:
-	notetype 12, 178
+Music_Dungeon2_branch_7e892::
+	notetype 12, $b2
 	octave 4
 	note E_, 4
 	note E_, 4
@@ -58,7 +58,7 @@ Music_Dungeon2_branch_7e892:
 	note A_, 4
 	note F#, 2
 	loopchannel 2, Music_Dungeon2_branch_7e892
-	notetype 12, 31
+	notetype 12, $1f
 	octave 3
 	note E_, 16
 	note C_, 16
@@ -76,12 +76,12 @@ Music_Dungeon2_branch_7e892:
 	loopchannel 0, Music_Dungeon2_branch_7e892
 
 
-Music_Dungeon2_Ch2: ; 7e8d8 (1f:68d8)
-	vibrato 11, 21
+Music_Dungeon2_Ch1::
+	vibrato 11, $15
 
-Music_Dungeon2_branch_7e8db:
+Music_Dungeon2_branch_7e8db::
 	dutycycle 3
-	notetype 12, 194
+	notetype 12, $c2
 	octave 3
 	note E_, 4
 	note E_, 4
@@ -158,7 +158,7 @@ Music_Dungeon2_branch_7e8db:
 	note __, 16
 	note __, 16
 	note __, 16
-	notetype 12, 199
+	notetype 12, $c7
 	dutycycle 1
 	octave 4
 	note E_, 16
@@ -168,11 +168,11 @@ Music_Dungeon2_branch_7e8db:
 	loopchannel 0, Music_Dungeon2_branch_7e8db
 
 
-Music_Dungeon2_Ch3: ; 7e93b (1f:693b)
-	notetype 12, 19
-	vibrato 8, 38
+Music_Dungeon2_Ch2::
+	notetype 12, $13
+	vibrato 8, $26
 
-Music_Dungeon2_branch_7e940:
+Music_Dungeon2_branch_7e940::
 	callchannel Music_Dungeon2_branch_7e9d1
 	loopchannel 16, Music_Dungeon2_branch_7e940
 	note E_, 4
@@ -193,7 +193,7 @@ Music_Dungeon2_branch_7e940:
 	note __, 4
 	note A#, 4
 
-Music_Dungeon2_branch_7e958:
+Music_Dungeon2_branch_7e958::
 	octave 5
 	note E_, 2
 	note __, 2
@@ -294,7 +294,7 @@ Music_Dungeon2_branch_7e958:
 	note __, 2
 	endchannel
 
-Music_Dungeon2_branch_7e9d1:
+Music_Dungeon2_branch_7e9d1::
 	octave 4
 	note E_, 2
 	note __, 4
@@ -308,11 +308,11 @@ Music_Dungeon2_branch_7e9d1:
 	endchannel
 
 
-Music_Dungeon2_Ch4: ; 7e9dc (1f:69dc)
-	notetype 12
+Music_Dungeon2_Ch3::
 	togglenoise 1
+	notetype 12
 
-Music_Dungeon2_branch_7e9dd:
+Music_Dungeon2_branch_7e9dd::
 	note E_, 4
 	note F_, 4
 	note E_, 4
@@ -322,4 +322,3 @@ Music_Dungeon2_branch_7e9dd:
 	note D#, 4
 	note C#, 4
 	loopchannel 0, Music_Dungeon2_branch_7e9dd
-; 0x7e9f1

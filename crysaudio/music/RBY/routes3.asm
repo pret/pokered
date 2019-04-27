@@ -1,16 +1,16 @@
-Music_Routes3:
-	dbw $C0, Music_Routes3_Ch1
-	dbw $01, Music_Routes3_Ch2
-	dbw $02, Music_Routes3_Ch3
-	dbw $03, Music_Routes3_Ch4
+Music_Routes3::
+	musicheader 4, 1, Music_Routes3_Ch0
+	musicheader 1, 2, Music_Routes3_Ch1
+	musicheader 1, 3, Music_Routes3_Ch2
+	musicheader 1, 4, Music_Routes3_Ch3
 
-Music_Routes3_Ch1: ; 9fad (2:5fad)
+Music_Routes3_Ch0::
 	tempo 148
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 6, 52
-	
-	notetype 12, 181
+	vibrato 6, $34
+	;toggleperfectpitch
+	notetype 12, $b5
 	octave 3
 	note E_, 1
 	note F#, 1
@@ -21,8 +21,8 @@ Music_Routes3_Ch1: ; 9fad (2:5fad)
 	note __, 16
 	note __, 15
 
-Music_Routes3_branch_9fc3:
-	notetype 12, 181
+Music_Routes3_branch_9fc3::
+	notetype 12, $b5
 	note E_, 6
 	note D_, 1
 	note E_, 1
@@ -35,12 +35,12 @@ Music_Routes3_branch_9fc3:
 	note G_, 2
 	note G_, 2
 	note A_, 2
-	notetype 12, 167
+	notetype 12, $a7
 	note A#, 8
 	note F_, 8
 	note D_, 8
 	note F_, 8
-	notetype 12, 181
+	notetype 12, $b5
 	note E_, 6
 	note D_, 1
 	note E_, 1
@@ -53,12 +53,12 @@ Music_Routes3_branch_9fc3:
 	note G_, 2
 	note G_, 2
 	note A_, 2
-	notetype 12, 167
+	notetype 12, $a7
 	note A#, 8
 	note A#, 8
 	note D_, 8
 	note F_, 8
-	notetype 12, 181
+	notetype 12, $b5
 	note E_, 4
 	note E_, 2
 	note F_, 2
@@ -71,22 +71,22 @@ Music_Routes3_branch_9fc3:
 	octave 3
 	note B_, 8
 	note A_, 2
-	notetype 8, 195
+	notetype 8, $c3
 	note A_, 4
 	note F_, 4
 	note A_, 4
-	notetype 8, 79
+	notetype 8, $4f
 	note A_, 12
-	notetype 8, 144
+	notetype 8, $90
 	note F_, 12
 	note G_, 12
 	loopchannel 0, Music_Routes3_branch_9fc3
 
 
-Music_Routes3_Ch2: ; a009 (2:6009)
-	vibrato 8, 35
+Music_Routes3_Ch1::
+	vibrato 8, $23
 	dutycycle 2
-	notetype 12, 199
+	notetype 12, $c7
 	octave 3
 	note G_, 1
 	note A#, 1
@@ -98,8 +98,8 @@ Music_Routes3_Ch2: ; a009 (2:6009)
 	note __, 15
 	note __, 16
 
-Music_Routes3_branch_a01a:
-	notetype 12, 199
+Music_Routes3_branch_a01a::
+	notetype 12, $c7
 	dutycycle 2
 	octave 4
 	note C_, 6
@@ -119,12 +119,12 @@ Music_Routes3_branch_a01a:
 	note C_, 2
 	note D_, 8
 	note F_, 8
-	notetype 12, 197
+	notetype 12, $c5
 	dutycycle 3
 	octave 3
 	note A#, 8
 	note A_, 8
-	notetype 12, 199
+	notetype 12, $c7
 	dutycycle 2
 	octave 4
 	note C_, 6
@@ -144,13 +144,13 @@ Music_Routes3_branch_a01a:
 	note C_, 2
 	note D_, 8
 	note F_, 8
-	notetype 12, 197
+	notetype 12, $c5
 	dutycycle 3
 	octave 3
 	note A#, 8
 	octave 4
 	note D_, 6
-	notetype 12, 199
+	notetype 12, $c7
 	dutycycle 2
 	note C_, 1
 	note D_, 1
@@ -169,14 +169,14 @@ Music_Routes3_branch_a01a:
 	note G_, 8
 	note F_, 1
 	note E_, 1
-	notetype 8, 211
+	notetype 8, $d3
 	note F_, 4
 	note E_, 4
-	notetype 8, 196
+	notetype 8, $c4
 	note C_, 4
-	notetype 8, 197
+	notetype 8, $c5
 	note C_, 12
-	notetype 12, 160
+	notetype 12, $a0
 	dutycycle 3
 	octave 3
 	note A_, 8
@@ -184,9 +184,9 @@ Music_Routes3_branch_a01a:
 	loopchannel 0, Music_Routes3_branch_a01a
 
 
-Music_Routes3_Ch3: ; a07f (2:607f)
-	vibrato 4, 16
-	notetype 6, 18
+Music_Routes3_Ch2::
+	vibrato 4, $10
+	notetype 6, $12
 	octave 4
 	note G_, 2
 	note A#, 2
@@ -219,8 +219,8 @@ Music_Routes3_Ch3: ; a07f (2:607f)
 	note __, 2
 	note G_, 8
 
-Music_Routes3_branch_a0a3:
-	notetype 12, 18
+Music_Routes3_branch_a0a3::
+	notetype 12, $12
 	note E_, 1
 	note __, 1
 	note G_, 4
@@ -360,9 +360,9 @@ Music_Routes3_branch_a0a3:
 	loopchannel 0, Music_Routes3_branch_a0a3
 
 
-Music_Routes3_Ch4: ; a131 (2:6131)
-	notetype 6
+Music_Routes3_Ch3::
 	togglenoise 1
+	notetype 6
 	note B_, 1
 	note B_, 1
 	note A#, 1
@@ -400,7 +400,7 @@ Music_Routes3_Ch4: ; a131 (2:6131)
 	note A#, 1
 	note A#, 1
 
-Music_Routes3_branch_a17a:
+Music_Routes3_branch_a17a::
 	note A_, 12
 	note A_, 2
 	note A#, 2
@@ -520,4 +520,3 @@ Music_Routes3_branch_a17a:
 	note A#, 1
 	note A#, 1
 	loopchannel 0, Music_Routes3_branch_a17a
-; 0xa26a

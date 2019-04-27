@@ -1,17 +1,17 @@
-Music_SSAnne:
-	dbw $80, Music_SSAnne_Ch1
-	dbw $01, Music_SSAnne_Ch2
-	dbw $02, Music_SSAnne_Ch3
+Music_SSAnne::
+	musicheader 3, 1, Music_SSAnne_Ch0
+	musicheader 1, 2, Music_SSAnne_Ch1
+	musicheader 1, 3, Music_SSAnne_Ch2
 
-Music_SSAnne_Ch1: ; b3a7 (2:73a7)
+Music_SSAnne_Ch0::
 	tempo 128
-	volume 119
+	volume $77
 	dutycycle 1
-	vibrato 8, 52
-	
+	vibrato 8, $34
+	;toggleperfectpitch
 
-Music_SSAnne_branch_b3b2:
-	notetype 12, 164
+Music_SSAnne_branch_b3b2::
+	notetype 12, $a4
 	note __, 12
 	octave 3
 	note E_, 2
@@ -112,12 +112,12 @@ Music_SSAnne_branch_b3b2:
 	loopchannel 0, Music_SSAnne_branch_b3b2
 
 
-Music_SSAnne_Ch2: ; b419 (2:7419)
+Music_SSAnne_Ch1::
 	dutycycle 0
-	vibrato 12, 36
+	vibrato 12, $24
 
-Music_SSAnne_branch_b41e:
-	notetype 12, 197
+Music_SSAnne_branch_b41e::
+	notetype 12, $c5
 	octave 3
 	note A_, 2
 	note E_, 2
@@ -125,7 +125,7 @@ Music_SSAnne_branch_b41e:
 	note B_, 4
 	octave 4
 	note D_, 4
-	notetype 8, 197
+	notetype 8, $c5
 	note C#, 2
 	note D_, 2
 	note C#, 2
@@ -287,8 +287,8 @@ Music_SSAnne_branch_b41e:
 	loopchannel 0, Music_SSAnne_branch_b41e
 
 
-Music_SSAnne_Ch3: ; b4cb (2:74cb)
-	notetype 12, 19
+Music_SSAnne_Ch2::
+	notetype 12, $13
 	note __, 16
 	note __, 12
 	octave 4
@@ -340,5 +340,4 @@ Music_SSAnne_Ch3: ; b4cb (2:74cb)
 	note F#, 8
 	note G#, 8
 	note B_, 8
-	loopchannel 0, Music_SSAnne_Ch3
-; 0xb504
+	loopchannel 0, Music_SSAnne_Ch2

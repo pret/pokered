@@ -1,15 +1,15 @@
-Music_OaksLab:
-	dbw $80, Music_OaksLab_Ch1
-	dbw $01, Music_OaksLab_Ch2
-	dbw $02, Music_OaksLab_Ch3
+Music_OaksLab::
+	musicheader 3, 1, Music_OaksLab_Ch0
+	musicheader 1, 2, Music_OaksLab_Ch1
+	musicheader 1, 3, Music_OaksLab_Ch2
 
-Music_OaksLab_Ch1: ; 7eeb9 (1f:6eb9)
+Music_OaksLab_Ch0::
 	tempo 140
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 16, 18
-	
-	notetype 12, 179
+	vibrato 16, $12
+	;toggleperfectpitch
+	notetype 12, $b3
 	octave 2
 	note B_, 1
 	octave 3
@@ -21,7 +21,7 @@ Music_OaksLab_Ch1: ; 7eeb9 (1f:6eb9)
 	note A_, 1
 	note B_, 1
 
-Music_OaksLab_branch_7eed0:
+Music_OaksLab_branch_7eed0::
 	octave 4
 	note C#, 4
 	octave 3
@@ -74,10 +74,10 @@ Music_OaksLab_branch_7eed0:
 	loopchannel 0, Music_OaksLab_branch_7eed0
 
 
-Music_OaksLab_Ch2: ; 7ef05 (1f:6f05)
+Music_OaksLab_Ch1::
 	dutycycle 3
-	vibrato 10, 37
-	notetype 12, 196
+	vibrato 10, $25
+	notetype 12, $c4
 	octave 3
 	note G#, 1
 	note A_, 1
@@ -89,7 +89,7 @@ Music_OaksLab_Ch2: ; 7ef05 (1f:6f05)
 	note F#, 1
 	note G#, 1
 
-Music_OaksLab_branch_7ef16:
+Music_OaksLab_branch_7ef16::
 	note A_, 6
 	note G#, 1
 	note F#, 1
@@ -149,8 +149,8 @@ Music_OaksLab_branch_7ef16:
 	loopchannel 0, Music_OaksLab_branch_7ef16
 
 
-Music_OaksLab_Ch3: ; 7ef52 (1f:6f52)
-	notetype 12, 17
+Music_OaksLab_Ch2::
+	notetype 12, $11
 	note __, 2
 	octave 4
 	note G#, 1
@@ -160,7 +160,7 @@ Music_OaksLab_Ch3: ; 7ef52 (1f:6f52)
 	note E_, 1
 	note __, 1
 
-Music_OaksLab_branch_7ef5c:
+Music_OaksLab_branch_7ef5c::
 	note C#, 1
 	note __, 1
 	note A_, 1
@@ -396,4 +396,3 @@ Music_OaksLab_branch_7ef5c:
 	note E_, 1
 	note __, 3
 	loopchannel 0, Music_OaksLab_branch_7ef5c
-; 0x7f04a

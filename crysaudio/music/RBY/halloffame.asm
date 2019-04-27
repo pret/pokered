@@ -1,15 +1,15 @@
-Music_RBYHallOfFame:
-	dbw $80, Music_RBYHallOfFame_Ch1
-	dbw $01, Music_RBYHallOfFame_Ch2
-	dbw $02, Music_RBYHallOfFame_Ch3
+Music_RBYHallOfFame::
+	musicheader 3, 1, Music_RBYHallOfFame_Ch0
+	musicheader 1, 2, Music_RBYHallOfFame_Ch1
+	musicheader 1, 3, Music_RBYHallOfFame_Ch2
 
-Music_RBYHallOfFame_Ch1: ; 7fbaf (1f:7baf)
+Music_RBYHallOfFame_Ch0::
 	tempo 112
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 12, 34
-	
-	notetype 12, 179
+	vibrato 12, $22
+	;toggleperfectpitch
+	notetype 12, $b3
 	note __, 16
 	note __, 16
 	note __, 16
@@ -20,13 +20,13 @@ Music_RBYHallOfFame_Ch1: ; 7fbaf (1f:7baf)
 	note F_, 1
 	note F#, 1
 
-Music_RBYHallOfFame_branch_7fbc5:
-	notetype 12, 128
+Music_RBYHallOfFame_branch_7fbc5::
+	notetype 12, $80
 	octave 4
 	note C_, 16
 	note E_, 16
 	note F#, 16
-	notetype 12, 96
+	notetype 12, $60
 	note F_, 16
 	loopchannel 3, Music_RBYHallOfFame_branch_7fbc5
 	note __, 16
@@ -36,12 +36,12 @@ Music_RBYHallOfFame_branch_7fbc5:
 	loopchannel 0, Music_RBYHallOfFame_branch_7fbc5
 
 
-Music_RBYHallOfFame_Ch2: ; 7fbda (1f:7bda)
-	vibrato 8, 37
+Music_RBYHallOfFame_Ch1::
+	vibrato 8, $25
 	dutycycle 3
 
-Music_RBYHallOfFame_branch_7fbdf:
-	notetype 12, 196
+Music_RBYHallOfFame_branch_7fbdf::
+	notetype 12, $c4
 	octave 3
 	note G_, 2
 	note D_, 2
@@ -68,10 +68,10 @@ Music_RBYHallOfFame_branch_7fbdf:
 	loopchannel 0, Music_RBYHallOfFame_branch_7fbdf
 
 
-Music_RBYHallOfFame_Ch3: ; 7fbfc (1f:7bfc)
-	notetype 12, 18
+Music_RBYHallOfFame_Ch2::
+	notetype 12, $12
 
-Music_RBYHallOfFame_branch_7fbfe:
+Music_RBYHallOfFame_branch_7fbfe::
 	octave 4
 	note D_, 2
 	note G_, 2
@@ -98,5 +98,4 @@ Music_RBYHallOfFame_branch_7fbfe:
 	note G_, 4
 	note E_, 4
 	note G_, 4
-	loopchannel 0, Music_RBYHallOfFame_Ch3
-; 0x7fc1f
+	loopchannel 0, Music_RBYHallOfFame_Ch2

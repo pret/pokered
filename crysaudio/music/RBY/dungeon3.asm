@@ -1,19 +1,20 @@
-Music_Dungeon3:
-	dbw $80, Music_Dungeon3_Ch1
-	dbw $01, Music_Dungeon3_Ch2
-	dbw $02, Music_Dungeon3_Ch3
+Music_Dungeon3::
+	musicheader 4, 1, Music_Dungeon3_Ch0
+	musicheader 1, 2, Music_Dungeon3_Ch1
+	musicheader 1, 3, Music_Dungeon3_Ch2
+	musicheader 1, 4, Music_Dungeon3_Ch3
 
-Music_Dungeon3_Ch1: ; 7e9f1 (1f:69f1)
+Music_Dungeon3_Ch0::
 	tempo 160
-	volume 119
+	volume $77
 	dutycycle 3
-	
-	vibrato 8, 20
+	;toggleperfectpitch
+	vibrato 8, $14
 
-Music_Dungeon3_branch_7e9fc:
-	notetype 12, 195
+Music_Dungeon3_branch_7e9fc::
+	notetype 12, $c3
 
-Music_Dungeon3_branch_7e9fe:
+Music_Dungeon3_branch_7e9fe::
 	callchannel Music_Dungeon3_branch_7eab2
 	loopchannel 3, Music_Dungeon3_branch_7e9fe
 	octave 2
@@ -29,11 +30,11 @@ Music_Dungeon3_branch_7e9fe:
 	note D#, 2
 	note E_, 2
 
-Music_Dungeon3_branch_7ea11:
+Music_Dungeon3_branch_7ea11::
 	callchannel Music_Dungeon3_branch_7eac1
 	loopchannel 4, Music_Dungeon3_branch_7ea11
 
-Music_Dungeon3_branch_7ea18:
+Music_Dungeon3_branch_7ea18::
 	callchannel Music_Dungeon3_branch_7eab2
 	loopchannel 4, Music_Dungeon3_branch_7ea18
 	octave 4
@@ -64,11 +65,11 @@ Music_Dungeon3_branch_7ea18:
 	note F_, 2
 	note F_, 2
 
-Music_Dungeon3_branch_7ea3c:
+Music_Dungeon3_branch_7ea3c::
 	callchannel Music_Dungeon3_branch_7eace
 	loopchannel 4, Music_Dungeon3_branch_7ea3c
 
-Music_Dungeon3_branch_7ea43:
+Music_Dungeon3_branch_7ea43::
 	callchannel Music_Dungeon3_branch_7eadd
 	loopchannel 3, Music_Dungeon3_branch_7ea43
 	octave 3
@@ -161,7 +162,7 @@ Music_Dungeon3_branch_7ea43:
 	note __, 16
 	loopchannel 0, Music_Dungeon3_branch_7e9fc
 
-Music_Dungeon3_branch_7eab2:
+Music_Dungeon3_branch_7eab2::
 	octave 2
 	note B_, 2
 	octave 3
@@ -178,7 +179,7 @@ Music_Dungeon3_branch_7eab2:
 	note D#, 2
 	endchannel
 
-Music_Dungeon3_branch_7eac1:
+Music_Dungeon3_branch_7eac1::
 	note E_, 2
 	note G#, 2
 	octave 4
@@ -193,7 +194,7 @@ Music_Dungeon3_branch_7eac1:
 	note G#, 2
 	endchannel
 
-Music_Dungeon3_branch_7eace:
+Music_Dungeon3_branch_7eace::
 	octave 3
 	note D#, 2
 	octave 2
@@ -210,7 +211,7 @@ Music_Dungeon3_branch_7eace:
 	note B_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eadd:
+Music_Dungeon3_branch_7eadd::
 	note A_, 2
 	note F_, 2
 	octave 3
@@ -225,7 +226,7 @@ Music_Dungeon3_branch_7eadd:
 	note F_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eaea:
+Music_Dungeon3_branch_7eaea::
 	octave 3
 	note G#, 2
 	note E_, 2
@@ -240,14 +241,14 @@ Music_Dungeon3_branch_7eaea:
 	note C_, 2
 	endchannel
 
-Music_Dungeon3_branch_7eaf7:
+Music_Dungeon3_branch_7eaf7::
 	note D#, 2
 	note G_, 2
 	note D#, 2
 	note C#, 6
 	endchannel
 
-Music_Dungeon3_branch_7eafc:
+Music_Dungeon3_branch_7eafc::
 	tempo 168
 	octave 1
 	note A#, 1
@@ -340,12 +341,12 @@ Music_Dungeon3_branch_7eafc:
 	endchannel
 
 
-Music_Dungeon3_Ch2: ; 7eb68 (1f:6b68)
-	vibrato 11, 21
+Music_Dungeon3_Ch1::
+	vibrato 11, $15
 	dutycycle 3
 
-Music_Dungeon3_branch_7eb6d:
-	notetype 12, 211
+Music_Dungeon3_branch_7eb6d::
+	notetype 12, $d3
 	octave 4
 	note D#, 6
 	note C#, 6
@@ -612,8 +613,8 @@ Music_Dungeon3_branch_7eb6d:
 	loopchannel 0, Music_Dungeon3_branch_7eb6d
 
 
-Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
-	notetype 12, 18
+Music_Dungeon3_Ch2::
+	notetype 12, $12
 	note __, 16
 	note __, 16
 	note __, 16
@@ -626,7 +627,7 @@ Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
 	note __, 16
 	note __, 16
 	note __, 12
-	notetype 6, 16
+	notetype 6, $10
 	octave 3
 	note B_, 1
 	octave 4
@@ -690,7 +691,7 @@ Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
 	note B_, 1
 	note __, 10
 	note __, 16
-	notetype 12, 16
+	notetype 12, $10
 	note __, 16
 	note __, 16
 	note __, 16
@@ -712,4 +713,51 @@ Music_Dungeon3_Ch3: ; 7ec7a (1f:6c7a)
 	note __, 16
 	note __, 16
 	note __, 10
-	loopchannel 0, Music_Dungeon3_Ch3
+	loopchannel 0, Music_Dungeon3_Ch2
+
+
+Music_Dungeon3_Ch3::
+	togglenoise 0
+	notetype 12
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 16
+	note __, 10
+	endchannel

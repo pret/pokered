@@ -1,15 +1,15 @@
-Music_MeetMaleTrainer:
-	dbw $80, Music_MeetMaleTrainer_Ch1
-	dbw $01, Music_MeetMaleTrainer_Ch2
-	dbw $02, Music_MeetMaleTrainer_Ch3
+Music_MeetMaleTrainer::
+	musicheader 3, 1, Music_MeetMaleTrainer_Ch0
+	musicheader 1, 2, Music_MeetMaleTrainer_Ch1
+	musicheader 1, 3, Music_MeetMaleTrainer_Ch2
 
-Music_MeetMaleTrainer_Ch1: ; 7f77b (1f:777b)
+Music_MeetMaleTrainer_Ch0::
 	tempo 112
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 20, 51
-	
-	notetype 12, 180
+	vibrato 20, $33
+	;toggleperfectpitch
+	notetype 12, $b4
 	octave 3
 	note C#, 1
 	note D_, 1
@@ -18,7 +18,7 @@ Music_MeetMaleTrainer_Ch1: ; 7f77b (1f:777b)
 	note F_, 12
 	note __, 16
 
-Music_MeetMaleTrainer_branch_7f78f:
+Music_MeetMaleTrainer_branch_7f78f::
 	octave 3
 	note B_, 4
 	note A_, 4
@@ -37,10 +37,10 @@ Music_MeetMaleTrainer_branch_7f78f:
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f78f
 
 
-Music_MeetMaleTrainer_Ch2: ; 7f7a2 (1f:77a2)
+Music_MeetMaleTrainer_Ch1::
 	dutycycle 3
-	vibrato 24, 34
-	notetype 12, 196
+	vibrato 24, $22
+	notetype 12, $c4
 	octave 4
 	note E_, 1
 	note D#, 1
@@ -54,8 +54,8 @@ Music_MeetMaleTrainer_Ch2: ; 7f7a2 (1f:77a2)
 	note E_, 1
 	note __, 9
 
-Music_MeetMaleTrainer_branch_7f7b5:
-	notetype 12, 196
+Music_MeetMaleTrainer_branch_7f7b5::
+	notetype 12, $c4
 	octave 4
 	note E_, 6
 	note D#, 6
@@ -70,9 +70,9 @@ Music_MeetMaleTrainer_branch_7f7b5:
 	note B_, 2
 	octave 4
 	note C#, 2
-	notetype 12, 199
+	notetype 12, $c7
 	note F_, 16
-	notetype 12, 197
+	notetype 12, $c5
 	octave 3
 	note F#, 8
 	octave 4
@@ -80,8 +80,8 @@ Music_MeetMaleTrainer_branch_7f7b5:
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f7b5
 
 
-Music_MeetMaleTrainer_Ch3: ; 7f7d2 (1f:77d2)
-	notetype 12, 16
+Music_MeetMaleTrainer_Ch2::
+	notetype 12, $10
 	note __, 6
 	octave 4
 	note B_, 1
@@ -105,7 +105,7 @@ Music_MeetMaleTrainer_Ch3: ; 7f7d2 (1f:77d2)
 	note F#, 1
 	note __, 1
 
-Music_MeetMaleTrainer_branch_7f7ea:
+Music_MeetMaleTrainer_branch_7f7ea::
 	note E_, 1
 	note __, 1
 	note B_, 1
@@ -193,4 +193,3 @@ Music_MeetMaleTrainer_branch_7f7ea:
 	note D#, 1
 	note __, 1
 	loopchannel 0, Music_MeetMaleTrainer_branch_7f7ea
-; 0x7f844

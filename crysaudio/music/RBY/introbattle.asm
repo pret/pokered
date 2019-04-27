@@ -1,136 +1,136 @@
-Music_IntroBattle:
-	dbw $C0, Music_IntroBattle_Ch1
-	dbw $01, Music_IntroBattle_Ch2
-	dbw $02, Music_IntroBattle_Ch3
-	dbw $03, Music_IntroBattle_Ch4
+Music_IntroBattle::
+	musicheader 4, 1, Music_IntroBattle_Ch0
+	musicheader 1, 2, Music_IntroBattle_Ch1
+	musicheader 1, 3, Music_IntroBattle_Ch2
+	musicheader 1, 4, Music_IntroBattle_Ch3
 
-Music_IntroBattle_Ch1: ; 7f844 (1f:7844)
+Music_IntroBattle_Ch0::
 	tempo 98
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 6, 52
-	
-	notetype 12, 177
+	vibrato 6, $34
+	;toggleperfectpitch
+	notetype 12, $b1
 	note __, 8
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D_, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D#, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D_, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 160
+	notetype 12, $a0
 	note A#, 4
-	notetype 12, 177
+	notetype 12, $b1
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D_, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 41
+	notetype 12, $29
 	octave 3
 	note G_, 4
-	notetype 12, 176
+	notetype 12, $b0
 	note A_, 8
 	octave 2
 	note A_, 8
-	notetype 12, 183
+	notetype 12, $b7
 	octave 3
 	note F_, 8
-	notetype 12, 79
+	notetype 12, $4f
 	octave 2
 	note F_, 8
-	notetype 12, 177
+	notetype 12, $b1
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D_, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note D#, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note F_, 4
-	notetype 12, 177
+	notetype 12, $b1
 	octave 2
 	note A_, 2
 	note A_, 2
-	notetype 12, 180
+	notetype 12, $b4
 	octave 3
 	note G_, 4
-	notetype 12, 176
+	notetype 12, $b0
 	note F#, 16
-	notetype 12, 177
+	notetype 12, $b1
 	octave 4
 	note D_, 16
 	endchannel
 
 
-Music_IntroBattle_Ch2: ; 7f8bc (1f:78bc)
+Music_IntroBattle_Ch1::
 	dutycycle 3
-	vibrato 8, 37
-	notetype 12, 194
+	vibrato 8, $25
+	notetype 12, $c2
 	note __, 8
 	octave 3
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A_, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A#, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A_, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 183
+	notetype 12, $b7
 	note C#, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A_, 4
-	notetype 12, 194
+	notetype 12, $c2
 	octave 3
 	note D_, 2
 	note D_, 2
-	notetype 12, 199
+	notetype 12, $c7
 	octave 4
 	note C#, 4
 	note D_, 8
@@ -140,39 +140,39 @@ Music_IntroBattle_Ch2: ; 7f8bc (1f:78bc)
 	note C_, 8
 	octave 3
 	note C_, 8
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A_, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	note A#, 4
-	notetype 12, 194
+	notetype 12, $c2
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	octave 4
 	note C_, 4
-	notetype 12, 194
+	notetype 12, $c2
 	octave 3
 	note D_, 2
 	note D_, 2
-	notetype 12, 197
+	notetype 12, $c5
 	octave 4
 	note C#, 4
-	notetype 12, 47
+	notetype 12, $2f
 	note D_, 16
-	notetype 12, 193
+	notetype 12, $c1
 	octave 5
 	note D_, 16
 	endchannel
 
 
-Music_IntroBattle_Ch3: ; 7f91d (1f:791d)
-	notetype 12, 16
+Music_IntroBattle_Ch2::
+	notetype 12, $10
 	note __, 8
 	octave 4
 	note D_, 1
@@ -235,9 +235,9 @@ Music_IntroBattle_Ch3: ; 7f91d (1f:791d)
 	endchannel
 
 
-Music_IntroBattle_Ch4: ; 7f95b (1f:795b)
-	notetype 6
+Music_IntroBattle_Ch3::
 	togglenoise 1
+	notetype 6
 	note B_, 1
 	note B_, 1
 	note B_, 1
@@ -334,4 +334,3 @@ Music_IntroBattle_Ch4: ; 7f95b (1f:795b)
 	note __, 16
 	note __, 14
 	endchannel
-; 0x7fa19

@@ -1,18 +1,18 @@
-Music_JigglypuffSong:
-	dbw $40, Music_JigglypuffSong_Ch1
-	dbw $01, Music_JigglypuffSong_Ch2
+Music_JigglypuffSong::
+	musicheader 2, 1, Music_JigglypuffSong_Ch0
+	musicheader 1, 2, Music_JigglypuffSong_Ch1
 
-Music_JigglypuffSong_Ch1: ; 7fb7d (1f:7b7d)
+Music_JigglypuffSong_Ch0::
 	tempo 144
-	volume 119
-	vibrato 8, 36
+	volume $77
+	vibrato 8, $24
 	dutycycle 2
-	sound_duty 165
-	
-	notetype 13, 103
+	sound_duty 1, 1, 2, 2
+	;toggleperfectpitch
+	notetype 13, $67
 	octave 4
 	note E_, 8
-	notetype 12, 103
+	notetype 12, $67
 	note B_, 2
 	note G#, 6
 	note F#, 8
@@ -25,11 +25,11 @@ Music_JigglypuffSong_Ch1: ; 7fb7d (1f:7b7d)
 	endchannel
 
 
-Music_JigglypuffSong_Ch2: ; 7fb9a (1f:7b9a)
-	vibrato 5, 21
+Music_JigglypuffSong_Ch1::
+	vibrato 5, $15
 	dutycycle 2
-	sound_duty 10
-	notetype 12, 167
+	sound_duty 2, 2, 0, 0
+	notetype 12, $a7
 	octave 4
 	note E_, 8
 	note B_, 2
@@ -42,4 +42,3 @@ Music_JigglypuffSong_Ch2: ; 7fb9a (1f:7b9a)
 	note G#, 4
 	note E_, 10
 	endchannel
-; 0x7fbaf

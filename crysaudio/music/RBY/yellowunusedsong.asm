@@ -1,15 +1,15 @@
-Music_YellowUnusedSong:
-	dbw $C0, Music_YellowUnusedSong_Ch1
-	dbw $01, Music_YellowUnusedSong_Ch2
-	dbw $02, Music_YellowUnusedSong_Ch3
-	dbw $03, Music_YellowUnusedSong_Ch4
+Music_YellowUnusedSong::
+	musicheader 4, 1, Music_YellowUnusedSong_Ch1
+	musicheader 1, 2, Music_YellowUnusedSong_Ch2
+	musicheader 1, 3, Music_YellowUnusedSong_Ch3
+	musicheader 1, 4, Music_YellowUnusedSong_Ch4
 
-Music_YellowUnusedSong_Ch1: 
+Music_YellowUnusedSong_Ch1::
 	tempo 140
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato $8, $14
-	notetype $8, $b2
+	vibrato 8, $14
+	notetype 8, $b2
 	octave 3
 	note A_, 6
 	note A_, 2
@@ -30,7 +30,8 @@ Music_YellowUnusedSong_Ch1:
 	note A_, 6
 	note G_, 6
 	note A_, 12
-Music_YellowUnusedSong_branch_82fde:
+
+Music_YellowUnusedSong_branch_82fde::
 	note A_, 6
 	note A_, 2
 	note A_, 2
@@ -78,9 +79,11 @@ Music_YellowUnusedSong_branch_82fde:
 	note G_, 6
 	note A_, 12
 	loopchannel 0, Music_YellowUnusedSong_branch_82fde
-Music_YellowUnusedSong_Ch2: 
+
+
+Music_YellowUnusedSong_Ch2::
 	dutycycle 2
-	notetype $8, $c2
+	notetype 8, $c2
 	octave 4
 	note D_, 6
 	note D_, 2
@@ -103,7 +106,8 @@ Music_YellowUnusedSong_Ch2:
 	note D_, 6
 	note A#, 6
 	note A_, 12
-Music_YellowUnusedSong_branch_8302a:
+
+Music_YellowUnusedSong_branch_8302a::
 	note D_, 6
 	note D_, 2
 	note D_, 2
@@ -125,7 +129,7 @@ Music_YellowUnusedSong_branch_8302a:
 	note C_, 6
 	note G#, 6
 	note G_, 12
-	notetype $8, $90
+	notetype 8, $90
 	octave 3
 	note D#, 16
 	note D#, 8
@@ -137,7 +141,7 @@ Music_YellowUnusedSong_branch_8302a:
 	octave 3
 	note D#, 12
 	note F_, 12
-	notetype $8, $c2
+	notetype 8, $c2
 	octave 4
 	note D_, 6
 	note D_, 2
@@ -161,9 +165,11 @@ Music_YellowUnusedSong_branch_8302a:
 	note A#, 6
 	note A_, 12
 	loopchannel 0, Music_YellowUnusedSong_branch_8302a
-Music_YellowUnusedSong_Ch3: 
-	notetype $c, $10
-	vibrato $2, $15
+
+
+Music_YellowUnusedSong_Ch3::
+	notetype 12, $10
+	vibrato 2, $15
 	note __, 16
 	note __, 12
 	octave 4
@@ -172,7 +178,8 @@ Music_YellowUnusedSong_Ch3:
 	note D#, 8
 	note G_, 8
 	note A#, 8
-Music_YellowUnusedSong_branch_83075:
+
+Music_YellowUnusedSong_branch_83075::
 	note A_, 8
 	note A#, 8
 	note G_, 8
@@ -199,9 +206,11 @@ Music_YellowUnusedSong_branch_83075:
 	note G_, 8
 	note A#, 8
 	loopchannel 0, Music_YellowUnusedSong_branch_83075
-Music_YellowUnusedSong_Ch4: 
-	notetype 12
+
+
+Music_YellowUnusedSong_Ch4::
 	togglenoise 0
+	notetype 12
 	note D_, 4
 	notetype 8
 	note D_, 2
@@ -228,7 +237,8 @@ Music_YellowUnusedSong_Ch4:
 	note D_, 2
 	note D_, 4
 	note D_, 4
-Music_YellowUnusedSong_branch_830c3:
+
+Music_YellowUnusedSong_branch_830c3::
 	note D_, 4
 	notetype 8
 	note D_, 2

@@ -1,16 +1,19 @@
-Music_DefeatedTrainer:
-	dbw $80, Music_DefeatedTrainer_Ch1
-	dbw $01, Music_DefeatedTrainer_Ch2
-	dbw $02, Music_DefeatedTrainer_Ch3
+Music_DefeatedTrainer::
+	musicheader 3, 1, Music_DefeatedTrainer_Ch0
+	musicheader 1, 2, Music_DefeatedTrainer_Ch1
+	musicheader 1, 3, Music_DefeatedTrainer_Ch2
 
-Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
+Music_DefeatedTrainer_Ch0::
 	tempo 224
-	volume 119
+	volume $77
 	dutycycle 2
-	notetype 4, 162
+	;toggleperfectpitch
+	tempo 224
+	notetype 4, $a2
 	octave 4
 	note D_, 2
-	notetype 4, 162
+	tempo 224
+	notetype 4, $a2
 	note D_, 2
 	note D_, 2
 	note D_, 2
@@ -18,12 +21,13 @@ Music_DefeatedTrainer_Ch1: ; 23a53 (8:7a53)
 	note A_, 2
 	octave 4
 	note D_, 2
-	notetype 4, 179
+	notetype 4, $b3
 	note F#, 12
 	dutycycle 1
+	tempo 224
 
-Music_DefeatedTrainer_branch_23a76:
-	notetype 4, 99
+Music_DefeatedTrainer_branch_23a76::
+	notetype 4, $63
 	octave 3
 	note A_, 6
 	note F#, 3
@@ -96,23 +100,23 @@ Music_DefeatedTrainer_branch_23a76:
 	loopchannel 0, Music_DefeatedTrainer_branch_23a76
 
 
-Music_DefeatedTrainer_Ch2: ; 23ac1 (8:7ac1)
+Music_DefeatedTrainer_Ch1::
 	dutycycle 2
-	notetype 4, 195
+	notetype 4, $c3
 	octave 4
 	note A_, 2
-	notetype 4, 195
+	notetype 4, $c3
 	note A_, 2
 	note A_, 2
 	note A_, 2
 	note B_, 2
 	octave 5
 	note C#, 2
-	notetype 4, 196
+	notetype 4, $c4
 	note D_, 12
 
-Music_DefeatedTrainer_branch_23ad2:
-	notetype 4, 133
+Music_DefeatedTrainer_branch_23ad2::
+	notetype 4, $85
 	octave 4
 	note D_, 6
 	octave 3
@@ -162,22 +166,22 @@ Music_DefeatedTrainer_branch_23ad2:
 	note G_, 3
 	note D_, 3
 	note G_, 6
-	notetype 4, 112
+	notetype 4, $70
 	note F#, 12
-	notetype 4, 119
+	notetype 4, $77
 	note F#, 12
-	notetype 4, 96
+	notetype 4, $60
 	note E_, 12
-	notetype 4, 103
+	notetype 4, $67
 	note E_, 12
 	loopchannel 0, Music_DefeatedTrainer_branch_23ad2
 
 
-Music_DefeatedTrainer_Ch3: ; 23b15 (8:7b15)
-	notetype 4, 16
+Music_DefeatedTrainer_Ch2::
+	notetype 4, $10
 	octave 5
 	note D_, 2
-	notetype 4, 16
+	notetype 4, $10
 	note D_, 2
 	note D_, 2
 	octave 4
@@ -185,9 +189,9 @@ Music_DefeatedTrainer_Ch3: ; 23b15 (8:7b15)
 	note A_, 2
 	note G_, 2
 	note A_, 12
-	notetype 4, 33
+	notetype 4, $21
 
-Music_DefeatedTrainer_branch_23b24:
+Music_DefeatedTrainer_branch_23b24::
 	note F#, 3
 	note __, 3
 	note F#, 3
@@ -265,4 +269,3 @@ Music_DefeatedTrainer_branch_23b24:
 	octave 4
 	note A_, 3
 	loopchannel 0, Music_DefeatedTrainer_branch_23b24
-; 0x23b74

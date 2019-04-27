@@ -1,18 +1,18 @@
-Music_Vermilion:
-	dbw $C0, Music_Vermilion_Ch1
-	dbw $01, Music_Vermilion_Ch2
-	dbw $02, Music_Vermilion_Ch3
-	dbw $03, Music_Vermilion_Ch4
+Music_Vermilion::
+	musicheader 4, 1, Music_Vermilion_Ch0
+	musicheader 1, 2, Music_Vermilion_Ch1
+	musicheader 1, 3, Music_Vermilion_Ch2
+	musicheader 1, 4, Music_Vermilion_Ch3
 
-Music_Vermilion_Ch1: ; b9eb (2:79eb)
+Music_Vermilion_Ch0::
 	tempo 156
-	volume 119
+	volume $77
 	dutycycle 3
-	vibrato 12, 52
-	
+	vibrato 12, $34
+	;toggleperfectpitch
 
-Music_Vermilion_branch_b9f6:
-	notetype 12, 181
+Music_Vermilion_branch_b9f6::
+	notetype 12, $b5
 	octave 3
 	note E_, 4
 	note C#, 1
@@ -117,12 +117,12 @@ Music_Vermilion_branch_b9f6:
 	loopchannel 0, Music_Vermilion_branch_b9f6
 
 
-Music_Vermilion_Ch2: ; ba61 (2:7a61)
+Music_Vermilion_Ch1::
 	dutycycle 3
-	vibrato 10, 35
+	vibrato 10, $23
 
-Music_Vermilion_branch_ba66:
-	notetype 12, 199
+Music_Vermilion_branch_ba66::
+	notetype 12, $c7
 	octave 3
 	note A_, 8
 	octave 4
@@ -184,10 +184,10 @@ Music_Vermilion_branch_ba66:
 	loopchannel 0, Music_Vermilion_branch_ba66
 
 
-Music_Vermilion_Ch3: ; baa6 (2:7aa6)
-	notetype 12, 16
+Music_Vermilion_Ch2::
+	notetype 12, $10
 
-Music_Vermilion_branch_baa8:
+Music_Vermilion_branch_baa8::
 	octave 4
 	note A_, 2
 	note E_, 2
@@ -288,11 +288,11 @@ Music_Vermilion_branch_baa8:
 	loopchannel 0, Music_Vermilion_branch_baa8
 
 
-Music_Vermilion_Ch4: ; bb0d (2:7b0d)
-	notetype 12
+Music_Vermilion_Ch3::
 	togglenoise 0
+	notetype 12
 
-Music_Vermilion_branch_bb0e:
+Music_Vermilion_branch_bb0e::
 	callchannel Music_Vermilion_branch_bb3f
 	note F_, 2
 	note F_, 1
@@ -314,7 +314,7 @@ Music_Vermilion_branch_bb0e:
 	callchannel Music_Vermilion_branch_bb3f
 	loopchannel 0, Music_Vermilion_branch_bb0e
 
-Music_Vermilion_branch_bb3f:
+Music_Vermilion_branch_bb3f::
 	note F_, 2
 	note F_, 1
 	note F_, 1
@@ -328,4 +328,3 @@ Music_Vermilion_branch_bb3f:
 	note F_, 1
 	note F_, 1
 	endchannel
-; 0xbb58

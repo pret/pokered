@@ -1,15 +1,15 @@
-Music_MuseumGuy:
-	dbw $C0, Music_MuseumGuy_Ch1
-	dbw $01, Music_MuseumGuy_Ch2
-	dbw $02, Music_MuseumGuy_Ch3
-	dbw $03, Music_MuseumGuy_Ch4
+Music_MuseumGuy::
+	musicheader 4, 1, Music_MuseumGuy_Ch0
+	musicheader 1, 2, Music_MuseumGuy_Ch1
+	musicheader 1, 3, Music_MuseumGuy_Ch2
+	musicheader 1, 4, Music_MuseumGuy_Ch3
 
-Music_MuseumGuy_Ch1: ; adae (2:6dae)
+Music_MuseumGuy_Ch0::
 	tempo 128
-	volume 119
+	volume $77
 	dutycycle 2
-	
-	notetype 12, 177
+	;toggleperfectpitch
+	notetype 12, $b1
 	octave 3
 	note B_, 2
 	note A_, 2
@@ -35,7 +35,7 @@ Music_MuseumGuy_Ch1: ; adae (2:6dae)
 	note E_, 2
 	note E_, 6
 
-Music_MuseumGuy_branch_add6:
+Music_MuseumGuy_branch_add6::
 	callchannel Music_MuseumGuy_branch_ade7
 	callchannel Music_MuseumGuy_branch_adec
 	callchannel Music_MuseumGuy_branch_ade7
@@ -45,14 +45,14 @@ Music_MuseumGuy_branch_add6:
 	note E_, 6
 	loopchannel 0, Music_MuseumGuy_branch_add6
 
-Music_MuseumGuy_branch_ade7:
+Music_MuseumGuy_branch_ade7::
 	note E_, 2
 	note E_, 6
 	note F#, 2
 	note F#, 6
 	endchannel
 
-Music_MuseumGuy_branch_adec:
+Music_MuseumGuy_branch_adec::
 	note E_, 2
 	note E_, 6
 	note D_, 2
@@ -60,9 +60,9 @@ Music_MuseumGuy_branch_adec:
 	endchannel
 
 
-Music_MuseumGuy_Ch2: ; adf1 (2:6df1)
+Music_MuseumGuy_Ch1::
 	dutycycle 2
-	notetype 12, 193
+	notetype 12, $c1
 	octave 4
 	note E_, 2
 	note D_, 2
@@ -113,21 +113,21 @@ Music_MuseumGuy_Ch2: ; adf1 (2:6df1)
 	note A_, 2
 	note A_, 4
 
-Music_MuseumGuy_branch_ae26:
+Music_MuseumGuy_branch_ae26::
 	octave 3
 	note A_, 2
 	octave 4
 	note C#, 2
 	note E_, 3
-	notetype 12, 129
+	notetype 12, $81
 	note E_, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note D_, 2
 	note F#, 2
 	note A_, 3
-	notetype 12, 145
+	notetype 12, $91
 	note A_, 1
-	notetype 12, 193
+	notetype 12, $c1
 	octave 3
 	note A_, 2
 	octave 4
@@ -139,31 +139,31 @@ Music_MuseumGuy_branch_ae26:
 	octave 3
 	note B_, 1
 	note B_, 3
-	notetype 12, 161
+	notetype 12, $a1
 	note G#, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note A_, 2
 	octave 4
 	note C#, 2
 	note E_, 3
-	notetype 12, 145
+	notetype 12, $91
 	note E_, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note D_, 2
 	note F#, 2
 	note A_, 3
-	notetype 12, 129
+	notetype 12, $81
 	note A_, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note G#, 2
 	note E_, 1
-	notetype 12, 129
+	notetype 12, $81
 	note E_, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note F#, 2
-	notetype 12, 129
+	notetype 12, $81
 	note F#, 1
-	notetype 12, 193
+	notetype 12, $c1
 	note G#, 1
 	note A_, 2
 	note A_, 2
@@ -171,8 +171,8 @@ Music_MuseumGuy_branch_ae26:
 	loopchannel 0, Music_MuseumGuy_branch_ae26
 
 
-Music_MuseumGuy_Ch3: ; ae6e (2:6e6e)
-	notetype 12, 16
+Music_MuseumGuy_Ch2::
+	notetype 12, $10
 	note __, 16
 	octave 4
 	note E_, 1
@@ -200,7 +200,7 @@ Music_MuseumGuy_Ch3: ; ae6e (2:6e6e)
 	note A_, 1
 	note __, 3
 
-Music_MuseumGuy_branch_ae8e:
+Music_MuseumGuy_branch_ae8e::
 	callchannel Music_MuseumGuy_branch_aec1
 	note __, 3
 	octave 6
@@ -237,7 +237,7 @@ Music_MuseumGuy_branch_ae8e:
 	note __, 3
 	loopchannel 0, Music_MuseumGuy_branch_ae8e
 
-Music_MuseumGuy_branch_aeb8:
+Music_MuseumGuy_branch_aeb8::
 	note A_, 1
 	note __, 1
 	note A_, 1
@@ -248,7 +248,7 @@ Music_MuseumGuy_branch_aeb8:
 	note __, 5
 	endchannel
 
-Music_MuseumGuy_branch_aec1:
+Music_MuseumGuy_branch_aec1::
 	octave 6
 	note C#, 1
 	note __, 1
@@ -267,9 +267,9 @@ Music_MuseumGuy_branch_aec1:
 	endchannel
 
 
-Music_MuseumGuy_Ch4: ; aed1 (2:6ed1)
-	notetype 12
+Music_MuseumGuy_Ch3::
 	togglenoise 1
+	notetype 12
 	note __, 16
 	note __, 16
 	note __, 16
@@ -282,7 +282,7 @@ Music_MuseumGuy_Ch4: ; aed1 (2:6ed1)
 	note A#, 1
 	note A#, 1
 
-Music_MuseumGuy_branch_aee1:
+Music_MuseumGuy_branch_aee1::
 	note A_, 4
 	note A_, 6
 	note A_, 2
@@ -342,4 +342,3 @@ Music_MuseumGuy_branch_aee1:
 	note A#, 1
 	note A#, 1
 	loopchannel 0, Music_MuseumGuy_branch_aee1
-; 0xaf59

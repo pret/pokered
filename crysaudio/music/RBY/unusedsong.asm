@@ -1,14 +1,14 @@
-Music_UnusedSong:
-	dbw $40, Music_UnusedSong_Ch1
-	dbw $01, Music_UnusedSong_Ch2
+Music_UnusedSong::
+	musicheader 2, 1, Music_UnusedSong_Ch0
+	musicheader 1, 2, Music_UnusedSong_Ch1
 
-Music_UnusedSong_Ch1: ; a913 (2:6913)
+Music_UnusedSong_Ch0::
 	tempo 144
-	volume 119
-	vibrato 5, 22
+	volume $77
+	vibrato 5, $16
 
-Music_UnusedSong_branch_a91b:
-	notetype 12, 16
+Music_UnusedSong_branch_a91b::
+	notetype 12, $10
 	octave 6
 	note E_, 1
 	note __, 1
@@ -186,14 +186,14 @@ Music_UnusedSong_branch_a91b:
 	endchannel
 
 
-Music_UnusedSong_Ch2: ; a9cf (2:69cf)
+Music_UnusedSong_Ch1::
 	tempo 144
-	volume 119
-	
-	vibrato 6, 21
+	volume $77
+	;toggleperfectpitch
+	vibrato 6, $15
 
-Music_UnusedSong_branch_a9d8:
-	notetype 12, 16
+Music_UnusedSong_branch_a9d8::
+	notetype 12, $10
 	octave 6
 	note E_, 1
 	note __, 1
@@ -340,4 +340,3 @@ Music_UnusedSong_branch_a9d8:
 	note __, 6
 	loopchannel 0, Music_UnusedSong_branch_a9d8
 	endchannel
-; 0xaa6f
