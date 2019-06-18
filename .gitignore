@@ -1,8 +1,9 @@
+# generated
+*.o
+
 # precompiled python
 *.pyc
-
-# compiled object file
-*.o
+*$py.class
 
 # no binaries
 *.exe
@@ -11,7 +12,13 @@
 *.gbc
 *.gb
 
+# for any of the poor souls with save game files in their working directory
+*.sa*
+*.sg*
+*.sn*
+
 # rgbds extras
+*.map
 *.sym
 
 # converted image data
@@ -22,31 +29,8 @@
 # converted audio data
 *.pcm
 
-# swap files for vim
-.*.swp
-
 # no data from extras/
 *.json
-
-# for any of the poor souls with save game files in their working directory
-*.sgm
-*.sav
-*.sys
-
-# lol bgb
-*.sn1
-*.sn2
-*.sn3
-*.sn4
-*.sn5
-*.sn6
-*.sn7
-*.sn8
-*.sn9
-*.sn0
-
-# replace.sh
-replace.sh
 
 # leftover txt files from diff
 *.txt
@@ -54,3 +38,7 @@ replace.sh
 # for vim configuration
 # url: http://www.vim.org/scripts/script.php?script_id=441
 .lvimrc
+# swap files for vim
+.*.swp
+# swap files for gedit
+*~
