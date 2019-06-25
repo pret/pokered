@@ -1,16 +1,18 @@
 _ViridianPokeCenterText2::
-	text "You can use that"
-	line "PC in the corner."
+	text "אפשר להשתמש"
+	line ".במחשב שבפינה"
 
-	para "The receptionist"
-	line "told me. So kind!"
+	para "האחות בקבלה"
+	line "סיפרה לי. כמה"
+	cont "!אדיב מצידה"
 	done
 
 _ViridianPokeCenterText3::
-	text "There's a #MON"
-	line "CENTER in every"
-	cont "town ahead."
+	text "יש מרכז"
+	line "פוקימונים בכל"
+	cont ".עיר החל מכאן"
 
-	para "They don't charge"
-	line "any money either!"
+	para "והם אפילו לא"
+	line "לוקחים ממך"
+	cont "!כסף"
 	done
