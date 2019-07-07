@@ -137,8 +137,8 @@ HiddenObjectPointers:
 	dw SilphCo5FHiddenObjects
 	dw SilphCo9FHiddenObjects
 	dw CopycatsHouse2FHiddenObjects
-	dw UnknownDungeon1HiddenObjects
-	dw UnknownDungeon3HiddenObjects
+	dw CeruleanCave1HiddenObjects
+	dw CeruleanCave3HiddenObjects
 	dw PowerPlantHiddenObjects
 	dw SeafoamIslands3HiddenObjects
 	dw SeafoamIslands5HiddenObjects
@@ -625,11 +625,11 @@ CopycatsHouse2FHiddenObjects:
 	db $01,$01,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UnknownDungeon1HiddenObjects:
+CeruleanCave1HiddenObjects:
 	db $0b,$0e,RARE_CANDY
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
-UnknownDungeon3HiddenObjects:
+CeruleanCave3HiddenObjects:
 	db $03,$1b,ULTRA_BALL
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF

@@ -94,7 +94,7 @@ HallofFameRoomScript1:
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, HS_UNKNOWN_DUNGEON_GUY
+	ld a, HS_CERULEAN_CAVE_GUY
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $2
