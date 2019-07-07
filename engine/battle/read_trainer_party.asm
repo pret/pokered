@@ -101,7 +101,7 @@ ReadTrainer:
 
 ; get trainer class number
 	ld a, [wCurOpponent]
-	sub 200
+	sub OPP_ID_OFFSET
 	ld b, a
 	ld hl, TeamMoves
 

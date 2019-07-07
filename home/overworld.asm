@@ -887,7 +887,7 @@ LoadTileBlockMap::
 	ld hl, wOverworldMap
 	ld a, [wMapBackgroundTile]
 	ld d, a
-	ld bc, $0514
+	ld bc, wOverworldMapEnd - wOverworldMap
 .backgroundTileLoop
 	ld a, d
 	ld [hli], a

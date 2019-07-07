@@ -16,18 +16,18 @@ Mansion3Script_52204:
 	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_52224
 	ld a, $e
-	ld bc, $207
+	lb bc, 2, 7
 	call Mansion2Script_5202f
 	ld a, $5f
-	ld bc, $507
+	lb bc, 5, 7
 	call Mansion2Script_5202f
 	ret
 .asm_52224
 	ld a, $5f
-	ld bc, $207
+	lb bc, 2, 7
 	call Mansion2Script_5202f
 	ld a, $e
-	ld bc, $507
+	lb bc, 5, 7
 	call Mansion2Script_5202f
 	ret
 
@@ -43,9 +43,9 @@ Mansion3Script0:
 	and a
 	jp z, CheckFightingMapTrainers
 	cp $3
-	ld a, $a5
+	ld a, POKEMON_MANSION_1F
 	jr nz, .asm_52250
-	ld a, $d6
+	ld a, POKEMON_MANSION_2F
 .asm_52250
 	ld [wDungeonWarpDestinationMap], a
 	ret

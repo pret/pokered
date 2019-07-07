@@ -346,6 +346,7 @@ wSerialEnemyMonsPatchList:: ; c5d0
 wTempPic::
 wOverworldMap:: ; c6e8
 	ds 1300
+wOverworldMapEnd::
 
 wRedrawRowOrColumnSrcTiles:: ; cbfc
 ; the tiles of the row or column to be redrawn by RedrawRowOrColumn
@@ -1638,7 +1639,7 @@ wPartyGainExpFlags:: ; d058
 
 wCurOpponent:: ; d059
 ; in a wild battle, this is the species of pokemon
-; in a trainer battle, this is the trainer class + 200
+; in a trainer battle, this is the trainer class + OPP_ID_OFFSET
 	ds 1
 
 wBattleType:: ; d05a
@@ -2916,7 +2917,7 @@ wFossilMon:: ; d710
 	ds 2
 
 wEnemyMonOrTrainerClass:: ; d713
-; trainer classes start at 200
+; trainer classes start at OPP_ID_OFFSET
 	ds 1
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714
