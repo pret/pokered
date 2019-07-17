@@ -1,3 +1,5 @@
+MAP_TILESET_SIZE EQU $60
+
 UpdatePlayerSprite:
 	ld a, [wSpriteStateData2]
 	and a
@@ -13,7 +15,7 @@ UpdatePlayerSprite:
 .checkIfTextBoxInFrontOfSprite
 	aCoord 8, 9
 	ld [hTilePlayerStandingOn], a
-	cp $60
+	cp MAP_TILESET_SIZE
 	jr c, .lowerLeftTileIsMapTile
 .disableSprite
 	ld a, $ff
@@ -127,7 +129,7 @@ UpdateNPCSprite:
 	and a
 	jp z, InitializeSpriteStatus
 	call CheckSpriteAvailability
-	ret c             ; if sprite is invisible, on tile >=$60, in grass or player is currently walking
+	ret c             ; if sprite is invisible, on tile >=MAP_TILESET_SIZE, in grass or player is currently walking
 	ld h, $c1
 	ld a, [H_CURRENTSPRITEOFFSET]
 	ld l, a
@@ -508,21 +510,21 @@ CheckSpriteAvailability:
 ; make the sprite invisible if a text box is in front of it
 ; $5F is the maximum number for map tiles
 	call GetTileSpriteStandsOn
-	ld d, $60
+	ld d, MAP_TILESET_SIZE
 	ld a, [hli]
 	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom left tile)
+	jr nc, .spriteInvisible ; standing on tile with ID >=MAP_TILESET_SIZE (bottom left tile)
 	ld a, [hld]
 	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (bottom right tile)
+	jr nc, .spriteInvisible ; standing on tile with ID >=MAP_TILESET_SIZE (bottom right tile)
 	ld bc, -20
 	add hl, bc              ; go back one row of tiles
 	ld a, [hli]
 	cp d
-	jr nc, .spriteInvisible ; standing on tile with ID >=$60 (top left tile)
+	jr nc, .spriteInvisible ; standing on tile with ID >=MAP_TILESET_SIZE (top left tile)
 	ld a, [hl]
 	cp d
-	jr c, .spriteVisible    ; standing on tile with ID >=$60 (top right tile)
+	jr c, .spriteVisible    ; standing on tile with ID >=MAP_TILESET_SIZE (top right tile)
 .spriteInvisible
 	ld h, wSpriteStateData1 / $100
 	ld a, [H_CURRENTSPRITEOFFSET]

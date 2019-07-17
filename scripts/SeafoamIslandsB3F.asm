@@ -32,7 +32,7 @@ SeafoamIslandsB3F_Script:
 	predef ShowObject
 	jr .asm_465ed
 .asm_465dc
-	ld a, $a2
+	ld a, SEAFOAM_ISLANDS_B4F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam4HolesCoords
 	call IsPlayerOnDungeonWarp

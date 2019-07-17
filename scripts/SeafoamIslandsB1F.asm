@@ -31,7 +31,7 @@ SeafoamIslandsB1F_Script:
 	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 .asm_46362
-	ld a, $a0
+	ld a, SEAFOAM_ISLANDS_B2F
 	ld [wDungeonWarpDestinationMap], a
 	ld hl, Seafoam2HolesCoords
 	jp IsPlayerOnDungeonWarp

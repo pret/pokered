@@ -82,7 +82,7 @@ BattleTransitions:
 
 GetBattleTransitionID_WildOrTrainer:
 	ld a, [wCurOpponent]
-	cp 200
+	cp OPP_ID_OFFSET
 	jr nc, .trainer
 	res 0, c
 	ret

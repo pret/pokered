@@ -1,6 +1,8 @@
+OPP_ID_OFFSET EQU 200
+
 trainer_const: MACRO
 \1     EQU const_value
-OPP_\1 EQU const_value + 200
+OPP_\1 EQU const_value + OPP_ID_OFFSET
 const_value = const_value + 1
 ENDM
 
