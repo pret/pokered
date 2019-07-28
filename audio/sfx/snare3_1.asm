@@ -1,3 +1,3 @@
-SFX_Snare3_1_Ch7:
-	noisenote 0, 10, 1, 51
-	endchannel
+SFX_Snare3_1_Ch8:
+	noise_note 0, 10, 1, 51
+	sound_ret

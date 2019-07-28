@@ -4,16 +4,16 @@ StopAllMusic: MACRO
 	call PlaySound
 ENDM
 
-Ch0    EQU 0
-Ch1    EQU 1
-Ch2    EQU 2
-Ch3    EQU 3
-Ch4    EQU 4
-Ch5    EQU 5
-Ch6    EQU 6
-Ch7    EQU 7
+Ch1    EQU 0
+Ch2    EQU 1
+Ch3    EQU 2
+Ch4    EQU 3
+Ch5    EQU 4
+Ch6    EQU 5
+Ch7    EQU 6
+Ch8    EQU 7
 
-audio: MACRO
+audio_header: MACRO
 	db (_NARG - 2) << 6 | \2
 	dw \1_\2
 	IF _NARG > 2
@@ -31,7 +31,7 @@ audio: MACRO
 ENDM
 
 ;format: length [0, 7], pitch change [-7, 7]
-pitchenvelope: MACRO
+pitch_sweep: MACRO
 	db $10
 	IF \2 > 0
 		db (\1 << 4) | \2
@@ -41,7 +41,7 @@ pitchenvelope: MACRO
 ENDM
 
 ;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
-squarenote: MACRO
+square_note: MACRO
 	db $20 | \1
 	IF \3 < 0
 		db (\2 << 4) | (%1000 | (\3 * -1))
@@ -52,7 +52,7 @@ squarenote: MACRO
 ENDM
 
 ;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
-noisenote: MACRO
+noise_note: MACRO
 	db $20 | \1
 	IF \3 < 0
 		db (\2 << 4) | (%1000 | (\3 * -1))
@@ -62,53 +62,22 @@ noisenote: MACRO
 	db \4
 ENDM
 
+C_ EQU $0
+C# EQU $1
+D_ EQU $2
+D# EQU $3
+E_ EQU $4
+F_ EQU $5
+F# EQU $6
+G_ EQU $7
+G# EQU $8
+A_ EQU $9
+A# EQU $A
+B_ EQU $B
+
 ;format: pitch length (in 16ths)
-C_: MACRO
-	db $00 | (\1 - 1)
-ENDM
-
-C#: MACRO
-	db $10 | (\1 - 1)
-ENDM
-
-D_: MACRO
-	db $20 | (\1 - 1)
-ENDM
-
-D#: MACRO
-	db $30 | (\1 - 1)
-ENDM
-
-E_: MACRO
-	db $40 | (\1 - 1)
-ENDM
-
-F_: MACRO
-	db $50 | (\1 - 1)
-ENDM
-
-F#: MACRO
-	db $60 | (\1 - 1)
-ENDM
-
-G_: MACRO
-	db $70 | (\1 - 1)
-ENDM
-
-G#: MACRO
-	db $80 | (\1 - 1)
-ENDM
-
-A_: MACRO
-	db $90 | (\1 - 1)
-ENDM
-
-A#: MACRO
-	db $A0 | (\1 - 1)
-ENDM
-
-B_: MACRO
-	db $B0 | (\1 - 1)
+note: MACRO
+	db (\1 << 4) | (\2 - 1)
 ENDM
 
 ;format: instrument length (in 16ths)
@@ -213,7 +182,7 @@ rest: MACRO
 ENDM
 
 ; format: notetype speed, volume, fade
-notetype: MACRO
+note_type: MACRO
 	db $D0 | \1
 	db (\2 << 4) | \3
 ENDM
@@ -226,7 +195,7 @@ octave: MACRO
 	db $E8 - \1
 ENDM
 
-toggleperfectpitch: MACRO
+toggle_perfect_pitch: MACRO
 	db $E8
 ENDM
 
@@ -237,13 +206,13 @@ vibrato: MACRO
 	db (\2 << 4) | \3
 ENDM
 
-pitchbend: MACRO
+pitch_slide: MACRO
 	db $EB
 	db \1
 	db \2
 ENDM
 
-duty: MACRO
+duty_cycle: MACRO
 	db $EC
 	db \1
 ENDM
@@ -254,7 +223,7 @@ tempo: MACRO
 	db \1 % $100
 ENDM
 
-stereopanning: MACRO
+stereo_panning: MACRO
 	db $EE
 	db \1
 ENDM
@@ -264,28 +233,28 @@ volume: MACRO
 	db (\1 << 4) | \2
 ENDM
 
-executemusic: MACRO
+execute_music: MACRO
 	db $F8
 ENDM
 
-dutycycle: MACRO
+duty_cycle_pattern: MACRO
 	db $FC
 	db \1
 ENDM
 
 ;format: callchannel address
-callchannel: MACRO
+sound_call: MACRO
 	db $FD
 	dw \1
 ENDM
 
 ;format: loopchannel count, address
-loopchannel: MACRO
+sound_loop: MACRO
 	db $FE
 	db \1
 	dw \2
 ENDM
 
-endchannel: MACRO
+sound_ret: MACRO
 	db $FF
 ENDM

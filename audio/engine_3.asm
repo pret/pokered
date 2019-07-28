@@ -1,7 +1,7 @@
 ; The third of three duplicated sound engines.
 
 Audio3_UpdateMusic::
-	ld c, Ch0
+	ld c, Ch1
 .loop
 	ld b, $0
 	ld hl, wChannelSoundIDs
@@ -10,7 +10,7 @@ Audio3_UpdateMusic::
 	and a
 	jr z, .nextChannel
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr nc, .applyAffects ; if sfx channel
 	ld a, [wMuteAudioAndPauseMusic]
 	and a
@@ -30,7 +30,7 @@ Audio3_UpdateMusic::
 .nextChannel
 	ld a, c
 	inc c ; inc channel number
-	cp Ch7
+	cp Ch8
 	jr nz, .loop
 	ret
 
@@ -52,9 +52,9 @@ Audio3_ApplyMusicAffects:
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr nc, .startChecks ; if a sfx channel
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -173,7 +173,7 @@ Audio3_endchannel:
 	bit 1, [hl]
 	jr nz, .returnFromCall
 	ld a, c
-	cp Ch3
+	cp Ch4
 	jr nc, .noiseOrSfxChannel
 	jr .asm_7d2b3
 .noiseOrSfxChannel
@@ -181,7 +181,7 @@ Audio3_endchannel:
 	ld hl, wChannelFlags2
 	add hl, bc
 	res 0, [hl]
-	cp Ch6
+	cp Ch7
 	jr nz, .notSfxChannel3
 	ld a, $0
 	ld [rNR30], a
@@ -224,19 +224,19 @@ Audio3_endchannel:
 	and [hl]
 	ld [rNR51], a
 .asm_7d2bc
-	ld a, [wChannelSoundIDs + Ch4]
+	ld a, [wChannelSoundIDs + Ch5]
 	cp $14
 	jr nc, .asm_7d2c5
 	jr .asm_7d2e2
 .asm_7d2c5
-	ld a, [wChannelSoundIDs + Ch4]
+	ld a, [wChannelSoundIDs + Ch5]
 	cp $86
 	jr z, .asm_7d2e2
 	jr c, .asm_7d2d0
 	jr .asm_7d2e2
 .asm_7d2d0
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr z, .asm_7d2d9
 	call Audio3_7d73b
 	ret c
@@ -337,14 +337,14 @@ Audio3_notetype:
 	add hl, bc
 	ld [hl], a ; store low nibble as speed
 	ld a, c
-	cp Ch3
+	cp Ch4
 	jr z, .noiseChannel ; noise channel has 0 params
 	call Audio3_GetNextMusicByte
 	ld d, a
 	ld a, c
-	cp Ch2
+	cp Ch3
 	jr z, .musicChannel3
-	cp Ch6
+	cp Ch7
 	jr nz, .notChannel3
 	ld hl, wSfxWaveInstrument
 	jr .sfxChannel3
@@ -464,7 +464,7 @@ Audio3_tempo:
 	cp $ed ; is this command a tempo?
 	jr nz, Audio3_stereopanning ; no
 	ld a, c ; yes
-	cp Ch4
+	cp Ch5
 	jr nc, .sfxChannel
 	call Audio3_GetNextMusicByte
 	ld [wMusicTempo], a ; store first param
@@ -507,10 +507,10 @@ Audio3_unknownmusic0xef:
 	ld a, [wDisableChannelOutputWhenSfxEnds]
 	and a
 	jr nz, .skip
-	ld a, [wChannelSoundIDs + Ch7]
+	ld a, [wChannelSoundIDs + Ch8]
 	ld [wDisableChannelOutputWhenSfxEnds], a
 	xor a
-	ld [wChannelSoundIDs + Ch7], a
+	ld [wChannelSoundIDs + Ch8], a
 .skip
 	jp Audio3_endchannel
 
@@ -564,7 +564,7 @@ Audio3_sfxnote:
 	cp $20 ; is this command an sfxnote?
 	jr nz, Audio3_pitchenvelope ; no
 	ld a, c
-	cp Ch3 ; is this a noise or sfx channel?
+	cp Ch4 ; is this a noise or sfx channel?
 	jr c, Audio3_pitchenvelope ; no
 	ld b, $0
 	ld hl, wChannelFlags2
@@ -590,7 +590,7 @@ Audio3_sfxnote:
 	call Audio3_GetNextMusicByte
 	ld e, a
 	ld a, c
-	cp Ch7
+	cp Ch8
 	ld a, $0
 	jr z, .sfxNoiseChannel ; only two params for noise channel
 	push de
@@ -607,7 +607,7 @@ Audio3_sfxnote:
 
 Audio3_pitchenvelope:
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr c, Audio3_note ; if not a sfx
 	ld a, d
 	cp $10 ; is this command an pitchenvelope?
@@ -623,7 +623,7 @@ Audio3_pitchenvelope:
 
 Audio3_note:
 	ld a, c
-	cp Ch3
+	cp Ch4
 	jr nz, Audio3_notelength ; if not noise channel
 	ld a, d
 	and $f0
@@ -671,7 +671,7 @@ Audio3_notelength:
 	ld l, b
 	call Audio3_7d8bb
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr nc, .sfxChannel
 	ld a, [wMusicTempo]
 	ld d, a
@@ -681,7 +681,7 @@ Audio3_notelength:
 .sfxChannel
 	ld d, $1
 	ld e, $0
-	cp Ch7
+	cp Ch8
 	jr z, .skip ; if noise channel
 	call Audio3_7d707
 	ld a, [wSfxTempo]
@@ -721,9 +721,9 @@ Audio3_notepitch:
 	cp $c0 ; compare to rest
 	jr nz, .notRest
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr nc, .sfxChannel
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -731,9 +731,9 @@ Audio3_notepitch:
 	; fall through
 .sfxChannel
 	ld a, c
-	cp Ch2
+	cp Ch3
 	jr z, .musicChannel3
-	cp Ch6
+	cp Ch7
 	jr nz, .notSfxChannel3
 .musicChannel3
 	ld b, $0
@@ -769,9 +769,9 @@ Audio3_notepitch:
 .asm_7d62c
 	push de
 	ld a, c
-	cp Ch4
+	cp Ch5
 	jr nc, .skip ; if sfx Channel
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	ld d, $0
 	ld e, a
 	add hl, de
@@ -816,11 +816,11 @@ Audio3_7d66c:
 	or [hl]
 	ld d, a
 	ld a, c
-	cp Ch7
+	cp Ch8
 	jr z, .sfxNoiseChannel
-	cp Ch4
+	cp Ch5
 	jr nc, .skip ; if sfx channel
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -848,9 +848,9 @@ Audio3_7d69d:
 	add hl, bc
 	ld d, [hl]
 	ld a, c
-	cp Ch2
+	cp Ch3
 	jr z, .channel3 ; if music channel 3
-	cp Ch6
+	cp Ch7
 	jr z, .channel3 ; if sfx channel 3
 	ld a, d
 	and $3f
@@ -868,15 +868,15 @@ Audio3_7d69d:
 
 Audio3_7d6bf:
 	ld a, c
-	cp Ch2
+	cp Ch3
 	jr z, .channel3
-	cp Ch6
+	cp Ch7
 	jr nz, .notSfxChannel3
 	; fall through
 .channel3
 	push de
 	ld de, wMusicWaveInstrument
-	cp Ch2
+	cp Ch3
 	jr z, .musicChannel3
 	ld de, wSfxWaveInstrument
 .musicChannel3
@@ -978,7 +978,7 @@ Audio3_7d73b:
 	ret
 
 Audio3_7d759:
-	ld a, [wChannelSoundIDs + Ch4]
+	ld a, [wChannelSoundIDs + Ch5]
 	cp $14
 	jr nc, .asm_7d762
 	jr .asm_7d768
@@ -1632,12 +1632,12 @@ Audio3_7db03:
 	jr c, .asm_7db6a
 	jr .asm_7db89
 .asm_7db6a
-	ld hl, wChannelSoundIDs + Ch4
+	ld hl, wChannelSoundIDs + Ch5
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wChannelCommandPointers + Ch6 * 2 ; sfx noise channel pointer
+	ld hl, wChannelCommandPointers + Ch7 * 2 ; sfx noise channel pointer
 	ld de, Noise3_endchannel
 	ld [hl], e
 	inc hl
@@ -1653,7 +1653,7 @@ Audio3_7db03:
 	ret
 
 Noise3_endchannel:
-	endchannel
+	sound_ret
 
 Unknown_7db8b:
 	db $10, $15, $1A, $1F ; channels 0-3

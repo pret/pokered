@@ -1,18 +1,18 @@
-SFX_Battle_31_Ch4:
-	duty 2
-	squarenote 15, 15, -7, 2016
-	squarenote 15, 15, -7, 2016
-	squarenote 15, 15, -7, 2016
-	squarenote 15, 15, -7, 2016
-	squarenote 15, 15, 2, 2016
-	endchannel
-
-
 SFX_Battle_31_Ch5:
-	duty 3
-	squarenote 15, 15, -7, 2018
-	squarenote 15, 15, -7, 2017
-	squarenote 15, 15, -7, 2018
-	squarenote 15, 15, -7, 2017
-	squarenote 15, 15, 2, 2018
-	endchannel
+	duty_cycle 2
+	square_note 15, 15, -7, 2016
+	square_note 15, 15, -7, 2016
+	square_note 15, 15, -7, 2016
+	square_note 15, 15, -7, 2016
+	square_note 15, 15, 2, 2016
+	sound_ret
+
+
+SFX_Battle_31_Ch6:
+	duty_cycle 3
+	square_note 15, 15, -7, 2018
+	square_note 15, 15, -7, 2017
+	square_note 15, 15, -7, 2018
+	square_note 15, 15, -7, 2017
+	square_note 15, 15, 2, 2018
+	sound_ret

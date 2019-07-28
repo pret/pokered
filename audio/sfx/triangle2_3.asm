@@ -1,4 +1,4 @@
-SFX_Triangle2_3_Ch7:
-	noisenote 1, 4, 1, 43
-	noisenote 0, 6, 1, 42
-	endchannel
+SFX_Triangle2_3_Ch8:
+	noise_note 1, 4, 1, 43
+	noise_note 0, 6, 1, 42
+	sound_ret

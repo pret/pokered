@@ -1,335 +1,335 @@
-Music_Surfing_Ch0::
+Music_Surfing_Ch1::
 	tempo 160
 	volume 7, 7
-	duty 3
+	duty_cycle 3
 	vibrato 12, 3, 4
-	toggleperfectpitch
-	notetype 12, 11, 5
+	toggle_perfect_pitch
+	note_type 12, 11, 5
 	rest 6
 	octave 2
-	A_ 2
-	G# 3
-	F# 1
-	E_ 6
+	note A_, 2
+	note G#, 3
+	note F#, 1
+	note E_, 6
 	octave 3
-	G# 2
-	F# 2
-	G# 4
+	note G#, 2
+	note F#, 2
+	note G#, 4
 
 Music_Surfing_branch_7fa30::
-	notetype 12, 11, 2
-	E_ 2
-	E_ 4
-	E_ 2
-	E_ 4
-	D_ 2
-	D_ 4
-	D_ 2
-	D_ 4
-	D_ 2
-	D_ 4
-	notetype 12, 11, 1
-	F# 3
-	notetype 12, 11, 2
-	D_ 3
-	E_ 2
-	E_ 4
-	E_ 2
-	E_ 4
-	A_ 2
-	A_ 4
-	G# 2
-	G# 4
-	F# 2
-	F# 4
-	E_ 2
-	E_ 4
-	G# 2
-	G# 4
-	notetype 12, 11, 1
-	F# 3
-	notetype 12, 11, 2
-	G# 1
-	notetype 12, 11, 4
-	A_ 2
-	B_ 2
+	note_type 12, 11, 2
+	note E_, 2
+	note E_, 4
+	note E_, 2
+	note E_, 4
+	note D_, 2
+	note D_, 4
+	note D_, 2
+	note D_, 4
+	note D_, 2
+	note D_, 4
+	note_type 12, 11, 1
+	note F#, 3
+	note_type 12, 11, 2
+	note D_, 3
+	note E_, 2
+	note E_, 4
+	note E_, 2
+	note E_, 4
+	note A_, 2
+	note A_, 4
+	note G#, 2
+	note G#, 4
+	note F#, 2
+	note F#, 4
+	note E_, 2
+	note E_, 4
+	note G#, 2
+	note G#, 4
+	note_type 12, 11, 1
+	note F#, 3
+	note_type 12, 11, 2
+	note G#, 1
+	note_type 12, 11, 4
+	note A_, 2
+	note B_, 2
 	octave 4
-	C_ 2
-	notetype 12, 11, 7
-	C# 6
-	notetype 12, 11, 3
-	D_ 2
-	C# 2
+	note C_, 2
+	note_type 12, 11, 7
+	note C#, 6
+	note_type 12, 11, 3
+	note D_, 2
+	note C#, 2
 	octave 3
-	B_ 2
-	A_ 2
-	G# 2
-	F# 2
-	E_ 2
-	F# 2
-	G# 2
-	A_ 2
-	G# 2
-	F# 2
-	G# 2
-	F# 2
-	E_ 2
-	G# 2
-	F# 2
-	G# 2
-	A_ 2
-	G# 2
-	F# 2
-	G# 2
-	A_ 2
-	B_ 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note G#, 2
+	note F#, 2
+	note E_, 2
+	note G#, 2
+	note F#, 2
+	note G#, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note G#, 2
+	note A_, 2
+	note B_, 2
 	octave 4
-	D_ 2
-	C# 2
+	note D_, 2
+	note C#, 2
 	octave 3
-	B_ 2
-	A_ 2
-	G# 2
-	F# 2
-	E_ 2
-	F# 2
-	G# 2
-	A_ 2
-	G# 2
-	A_ 2
-	E_ 2
-	G# 2
-	B_ 2
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note E_, 2
+	note F#, 2
+	note G#, 2
+	note A_, 2
+	note G#, 2
+	note A_, 2
+	note E_, 2
+	note G#, 2
+	note B_, 2
 	octave 4
-	D_ 2
-	C# 2
+	note D_, 2
+	note C#, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	C# 2
+	note C#, 2
 	octave 3
-	B_ 2
-	A_ 2
-	G# 2
-	F# 2
-	E_ 4
-	loopchannel 0, Music_Surfing_branch_7fa30
-
-
-Music_Surfing_Ch1::
-	duty 3
-	vibrato 16, 2, 5
-	notetype 12, 12, 6
-	octave 3
-	A_ 2
-	G# 3
-	F# 1
-	E_ 6
-	G# 6
-	octave 4
-	E_ 2
-	D_ 2
-	octave 3
-	B_ 2
-
-Music_Surfing_branch_7faae::
-	notetype 12, 12, 6
-	octave 4
-	E_ 6
-	C# 5
-	E_ 1
-	D_ 6
-	octave 3
-	B_ 6
-	octave 4
-	D_ 6
-	octave 3
-	B_ 2
-	notetype 12, 12, 1
-	octave 4
-	F# 3
-	notetype 12, 12, 6
-	D_ 1
-	E_ 6
-	C# 6
-	E_ 6
-	C# 5
-	E_ 1
-	F# 6
-	D_ 6
-	F# 6
-	E_ 2
-	notetype 12, 12, 1
-	F# 3
-	notetype 12, 12, 6
-	E_ 1
-	A_ 6
-	A_ 6
-	B_ 2
-	A_ 3
-	D_ 1
-	F# 6
-	E_ 2
-	F# 3
-	E_ 1
-	C# 6
-	D_ 2
-	C# 3
-	octave 3
-	B_ 1
-	octave 4
-	F# 6
-	E_ 2
-	D# 3
-	E_ 1
-	A_ 6
-	B_ 2
-	A_ 3
-	D_ 1
-	F# 6
-	E_ 2
-	F# 3
-	G# 1
-	A_ 6
-	G# 2
-	F# 3
-	E_ 1
-	G# 6
-	A_ 2
-	G# 3
-	A_ 1
-	octave 5
-	C# 6
-	loopchannel 0, Music_Surfing_branch_7faae
+	note B_, 2
+	note A_, 2
+	note G#, 2
+	note F#, 2
+	note E_, 4
+	sound_loop 0, Music_Surfing_branch_7fa30
 
 
 Music_Surfing_Ch2::
-	notetype 12, 1, 0
+	duty_cycle 3
+	vibrato 16, 2, 5
+	note_type 12, 12, 6
+	octave 3
+	note A_, 2
+	note G#, 3
+	note F#, 1
+	note E_, 6
+	note G#, 6
+	octave 4
+	note E_, 2
+	note D_, 2
+	octave 3
+	note B_, 2
+
+Music_Surfing_branch_7faae::
+	note_type 12, 12, 6
+	octave 4
+	note E_, 6
+	note C#, 5
+	note E_, 1
+	note D_, 6
+	octave 3
+	note B_, 6
+	octave 4
+	note D_, 6
+	octave 3
+	note B_, 2
+	note_type 12, 12, 1
+	octave 4
+	note F#, 3
+	note_type 12, 12, 6
+	note D_, 1
+	note E_, 6
+	note C#, 6
+	note E_, 6
+	note C#, 5
+	note E_, 1
+	note F#, 6
+	note D_, 6
+	note F#, 6
+	note E_, 2
+	note_type 12, 12, 1
+	note F#, 3
+	note_type 12, 12, 6
+	note E_, 1
+	note A_, 6
+	note A_, 6
+	note B_, 2
+	note A_, 3
+	note D_, 1
+	note F#, 6
+	note E_, 2
+	note F#, 3
+	note E_, 1
+	note C#, 6
+	note D_, 2
+	note C#, 3
+	octave 3
+	note B_, 1
+	octave 4
+	note F#, 6
+	note E_, 2
+	note D#, 3
+	note E_, 1
+	note A_, 6
+	note B_, 2
+	note A_, 3
+	note D_, 1
+	note F#, 6
+	note E_, 2
+	note F#, 3
+	note G#, 1
+	note A_, 6
+	note G#, 2
+	note F#, 3
+	note E_, 1
+	note G#, 6
+	note A_, 2
+	note G#, 3
+	note A_, 1
+	octave 5
+	note C#, 6
+	sound_loop 0, Music_Surfing_branch_7faae
+
+
+Music_Surfing_Ch3::
+	note_type 12, 1, 0
 	rest 12
 	octave 5
-	E_ 6
+	note E_, 6
 	octave 4
-	E_ 2
-	F# 2
-	G# 2
+	note E_, 2
+	note F#, 2
+	note G#, 2
 
 Music_Surfing_branch_7fb03::
 	octave 3
-	A_ 2
+	note A_, 2
 	octave 4
-	A_ 2
-	A_ 2
-	E_ 2
-	A_ 2
-	A_ 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	G# 2
-	G# 2
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note G#, 2
+	note G#, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	G# 1
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note G#, 1
 	rest 2
-	E_ 1
-	C# 2
-	A_ 2
-	A_ 2
-	E_ 2
-	A_ 2
-	A_ 2
-	C# 2
-	A_ 2
-	A_ 2
-	E_ 2
-	A_ 2
-	A_ 2
+	note E_, 1
+	note C#, 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
+	note C#, 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	G# 2
-	G# 2
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note G#, 2
+	note G#, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	G# 1
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note G#, 1
 	rest 2
-	E_ 1
-	C# 2
-	A_ 2
-	A_ 2
-	E_ 2
-	A_ 2
-	A_ 2
-	D_ 2
-	F# 2
-	F# 2
+	note E_, 1
+	note C#, 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
+	note D_, 2
+	note F#, 2
+	note F#, 2
 	octave 3
-	A_ 2
+	note A_, 2
 	octave 4
-	F# 2
-	F# 2
-	E_ 2
-	A_ 2
-	A_ 2
-	C# 2
-	A_ 2
-	A_ 2
-	E_ 2
-	G# 2
-	G# 2
+	note F#, 2
+	note F#, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
+	note C#, 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note G#, 2
+	note G#, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	A_ 2
-	A_ 2
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
 	octave 3
-	A_ 2
+	note A_, 2
 	octave 4
-	A_ 2
-	A_ 2
-	D_ 2
-	F# 2
-	F# 2
+	note A_, 2
+	note A_, 2
+	note D_, 2
+	note F#, 2
+	note F#, 2
 	octave 3
-	A_ 2
+	note A_, 2
 	octave 4
-	F# 2
-	F# 2
-	E_ 2
-	A_ 2
-	A_ 2
-	C# 2
-	A_ 2
-	A_ 2
-	E_ 2
-	G# 2
-	G# 2
+	note F#, 2
+	note F#, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
+	note C#, 2
+	note A_, 2
+	note A_, 2
+	note E_, 2
+	note G#, 2
+	note G#, 2
 	octave 3
-	B_ 2
+	note B_, 2
 	octave 4
-	G# 2
-	G# 2
-	E_ 2
-	A_ 2
-	A_ 2
-	C# 2
-	D_ 2
-	E_ 2
-	loopchannel 0, Music_Surfing_branch_7fb03
+	note G#, 2
+	note G#, 2
+	note E_, 2
+	note A_, 2
+	note A_, 2
+	note C#, 2
+	note D_, 2
+	note E_, 2
+	sound_loop 0, Music_Surfing_branch_7fb03

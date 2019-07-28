@@ -1,5 +1,5 @@
-SFX_Battle_19_Ch7:
-	noisenote 2, 8, 4, 67
-	noisenote 2, 12, 4, 34
-	noisenote 8, 15, 2, 52
-	endchannel
+SFX_Battle_19_Ch8:
+	noise_note 2, 8, 4, 67
+	noise_note 2, 12, 4, 34
+	noise_note 8, 15, 2, 52
+	sound_ret

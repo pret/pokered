@@ -8,7 +8,7 @@ EvolveMon:
 	push af
 	xor a
 	ld [wLowHealthAlarm], a
-	ld [wChannelSoundIDs + Ch4], a
+	ld [wChannelSoundIDs + Ch5], a
 	dec a
 	ld [wNewSoundID], a
 	call PlaySound

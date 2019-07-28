@@ -1,3 +1,3 @@
-SFX_Cymbal3_2_Ch7:
-	noisenote 0, 10, 2, 80
-	endchannel
+SFX_Cymbal3_2_Ch8:
+	noise_note 0, 10, 2, 80
+	sound_ret
