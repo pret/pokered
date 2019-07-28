@@ -1,309 +1,309 @@
 Music_MeetJessieJames_Ch1::
 	tempo 144
 	volume 7, 7
-	duty 3
+	duty_cycle 3
 	vibrato 8, 1, 4
-	notetype 12, 11, 2
+	note_type 12, 11, 2
 	octave 3
-	G# 1
-	G_ 1
-	F# 2
-	F_ 2
-	E_ 2
-	D# 2
-	D_ 2
-	C# 2
-	C_ 2
-	notetype 12, 11, 6
-	D# 12
-	C_ 4
+	note G#, 1
+	note G_, 1
+	note F#, 2
+	note F_, 2
+	note E_, 2
+	note D#, 2
+	note D_, 2
+	note C#, 2
+	note C_, 2
+	note_type 12, 11, 6
+	note D#, 12
+	note C_, 4
 
 Music_MeetJessieJames_branch_83187::
-	notetype 12, 11, 2
+	note_type 12, 11, 2
 	octave 4
-	D_ 16
+	note D_, 16
 	rest 12
-	notetype 12, 11, 4
+	note_type 12, 11, 4
 	octave 3
-	A# 4
+	note A#, 4
 	rest 16
 	rest 8
-	notetype 12, 11, 2
+	note_type 12, 11, 2
 	octave 2
-	A_ 2
+	note A_, 2
 	octave 3
-	A# 2
-	A_ 4
-	D_ 1
-	D# 1
-	D# 2
-	D# 2
-	D_ 2
-	D# 2
-	D_ 2
-	D# 2
-	F_ 2
-	D_ 1
-	D# 1
-	D# 2
-	D# 2
-	D_ 2
+	note A#, 2
+	note A_, 4
+	note D_, 1
+	note D#, 1
+	note D#, 2
+	note D#, 2
+	note D_, 2
+	note D#, 2
+	note D_, 2
+	note D#, 2
+	note F_, 2
+	note D_, 1
+	note D#, 1
+	note D#, 2
+	note D#, 2
+	note D_, 2
 	octave 2
-	A# 4
-	notetype 12, 11, 4
+	note A#, 4
+	note_type 12, 11, 4
 	octave 3
-	B_ 4
-	notetype 12, 11, 2
-	D_ 1
-	D# 1
-	D# 2
-	D# 2
-	D_ 2
-	D# 2
-	D_ 2
-	D# 2
-	F_ 2
-	D_ 1
-	D# 1
-	D# 2
-	D# 2
-	D_ 2
+	note B_, 4
+	note_type 12, 11, 2
+	note D_, 1
+	note D#, 1
+	note D#, 2
+	note D#, 2
+	note D_, 2
+	note D#, 2
+	note D_, 2
+	note D#, 2
+	note F_, 2
+	note D_, 1
+	note D#, 1
+	note D#, 2
+	note D#, 2
+	note D_, 2
 	octave 2
-	A# 2
+	note A#, 2
 	octave 3
-	B_ 2
-	notetype 12, 11, 4
-	A# 4
-	loopchannel 0, Music_MeetJessieJames_branch_83187
+	note B_, 2
+	note_type 12, 11, 4
+	note A#, 4
+	sound_loop 0, Music_MeetJessieJames_branch_83187
 
 
 Music_MeetJessieJames_Ch2::
-	duty 3
+	duty_cycle 3
 	vibrato 6, 1, 5
-	notetype 12, 12, 2
+	note_type 12, 12, 2
 	octave 4
-	D_ 1
-	C# 1
-	C_ 2
+	note D_, 1
+	note C#, 1
+	note C_, 2
 	octave 3
-	B_ 2
-	A# 2
-	A_ 2
-	G# 2
-	G_ 2
-	F# 2
-	notetype 12, 12, 7
-	A_ 12
+	note B_, 2
+	note A#, 2
+	note A_, 2
+	note G#, 2
+	note G_, 2
+	note F#, 2
+	note_type 12, 12, 7
+	note A_, 12
 	octave 4
-	C# 4
+	note C#, 4
 
 Music_MeetJessieJames_branch_831df::
-	notetype 12, 12, 2
+	note_type 12, 12, 2
 	octave 3
-	C# 1
-	D_ 1
-	D_ 2
-	D_ 2
-	C# 2
-	D_ 2
-	C# 2
-	D_ 2
-	E_ 2
-	C# 1
-	D_ 1
-	D_ 2
-	D_ 2
-	C# 2
+	note C#, 1
+	note D_, 1
+	note D_, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note E_, 2
+	note C#, 1
+	note D_, 1
+	note D_, 2
+	note D_, 2
+	note C#, 2
 	octave 2
-	A_ 4
-	notetype 12, 12, 5
+	note A_, 4
+	note_type 12, 12, 5
 	octave 4
-	C# 4
-	notetype 12, 12, 2
-	D_ 1
+	note C#, 4
+	note_type 12, 12, 2
+	note D_, 1
 	octave 3
-	D_ 1
-	D_ 2
-	D_ 2
-	C# 2
-	D_ 2
-	C# 2
-	D_ 2
-	E_ 2
-	C# 1
-	D_ 1
-	D_ 2
-	D_ 2
-	C# 2
-	notetype 12, 12, 6
+	note D_, 1
+	note D_, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note C#, 2
+	note D_, 2
+	note E_, 2
+	note C#, 1
+	note D_, 1
+	note D_, 2
+	note D_, 2
+	note C#, 2
+	note_type 12, 12, 6
 	octave 4
-	D_ 8
-	notetype 12, 12, 2
-	D# 6
-	F_ 4
-	D# 4
+	note D_, 8
+	note_type 12, 12, 2
+	note D#, 6
+	note F_, 4
+	note D#, 4
 	octave 3
-	A# 2
+	note A#, 2
 	octave 4
-	D# 6
-	F_ 4
-	D# 2
-	notetype 12, 12, 5
-	D_ 4
-	notetype 12, 12, 2
-	D# 6
-	F_ 4
-	D# 4
+	note D#, 6
+	note F_, 4
+	note D#, 2
+	note_type 12, 12, 5
+	note D_, 4
+	note_type 12, 12, 2
+	note D#, 6
+	note F_, 4
+	note D#, 4
 	octave 3
-	A# 2
+	note A#, 2
 	octave 4
-	D# 4
-	F_ 4
-	notetype 12, 12, 5
-	D# 8
-	loopchannel 0, Music_MeetJessieJames_branch_831df
+	note D#, 4
+	note F_, 4
+	note_type 12, 12, 5
+	note D#, 8
+	sound_loop 0, Music_MeetJessieJames_branch_831df
 
 
 Music_MeetJessieJames_Ch3::
-	notetype 12, 1, 0
+	note_type 12, 1, 0
 	rest 16
 	rest 8
 	octave 4
-	D_ 2
+	note D_, 2
 	octave 3
-	A_ 2
+	note A_, 2
 	octave 4
-	C_ 2
-	D# 2
+	note C_, 2
+	note D#, 2
 
 Music_MeetJessieJames_branch_83235::
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A# 2
-	A_ 2
-	D# 2
-	D_ 1
+	note A#, 2
+	note A_, 2
+	note D#, 2
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
+	note D_, 1
 	rest 1
-	A_ 1
+	note A_, 1
 	rest 1
-	D_ 1
-	rest 1
-	octave 3
-	A_ 2
-	octave 4
-	C_ 2
-	D_ 2
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
+	note D_, 1
 	rest 1
 	octave 3
-	A# 1
-	rest 1
+	note A_, 2
 	octave 4
-	C# 1
+	note C_, 2
+	note D_, 2
+	note D#, 1
 	rest 1
-	E_ 1
+	note A#, 1
 	rest 1
-	D# 1
+	note D#, 1
 	rest 1
-	A# 1
+	note A#, 1
 	rest 1
-	D# 1
+	note D#, 1
 	rest 1
-	A# 1
+	note A#, 1
 	rest 1
-	D# 1
+	note D#, 1
 	rest 1
-	A# 1
+	note A#, 1
 	rest 1
-	D# 1
+	note D#, 1
 	rest 1
-	A# 1
+	note A#, 1
 	rest 1
-	D# 1
+	note D#, 1
 	rest 1
-	A# 1
+	note A#, 1
 	rest 1
-	D# 1
-	rest 1
-	A# 1
-	rest 1
-	D# 1
+	note D#, 1
 	rest 1
 	octave 3
-	A# 1
+	note A#, 1
 	rest 1
 	octave 4
-	C# 1
+	note C#, 1
 	rest 1
-	E_ 1
+	note E_, 1
 	rest 1
-	loopchannel 0, Music_MeetJessieJames_branch_83235
-	endchannel
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	note A#, 1
+	rest 1
+	note D#, 1
+	rest 1
+	octave 3
+	note A#, 1
+	rest 1
+	octave 4
+	note C#, 1
+	rest 1
+	note E_, 1
+	rest 1
+	sound_loop 0, Music_MeetJessieJames_branch_83235
+	sound_ret

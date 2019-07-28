@@ -194,6 +194,6 @@ Music_Lavender_Ch4::
 	rest 16
 
 Music_Lavender_branch_bc26::
-	triangle2 8
-	triangle2 8
+	dnote 7, 8
+	dnote 7, 8
 	sound_loop 0, Music_Lavender_branch_bc26

@@ -287,19 +287,19 @@ Music_Vermilion_Ch4::
 
 Music_Vermilion_branch_bb0e::
 	sound_call Music_Vermilion_branch_bb3f
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 1
-	triangle1 1
-	triangle1 1
-	triangle1 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 1
 	sound_loop 4, Music_Vermilion_branch_bb0e
 	sound_call Music_Vermilion_branch_bb3f
 	sound_call Music_Vermilion_branch_bb3f
@@ -308,16 +308,16 @@ Music_Vermilion_branch_bb0e::
 	sound_loop 0, Music_Vermilion_branch_bb0e
 
 Music_Vermilion_branch_bb3f::
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 2
-	triangle1 1
-	triangle1 1
-	triangle1 2
-	triangle1 1
-	triangle1 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
+	dnote 6, 2
+	dnote 6, 1
+	dnote 6, 1
 	sound_ret

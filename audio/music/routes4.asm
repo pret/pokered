@@ -510,172 +510,172 @@ Music_Routes4_Ch4::
 	dspeed 12
 	rest 16
 	rest 12
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
 
 Music_Routes4_branch_a4a8::
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare3 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 18, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 2
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 18, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 2
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 2
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 2
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
 	sound_loop 0, Music_Routes4_branch_a4a8

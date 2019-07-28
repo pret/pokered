@@ -270,68 +270,68 @@ Music_MuseumGuy_Ch4::
 	rest 16
 	rest 14
 	dspeed 6
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
 
 Music_MuseumGuy_branch_aee1::
-	mutedsnare2 4
-	mutedsnare2 6
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 6
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 4
-	mutedsnare2 6
-	mutedsnare2 2
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 6
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 2
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 2
-	mutedsnare2 2
-	mutedsnare2 4
-	mutedsnare2 2
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 6
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 17, 4
+	dnote 17, 6
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 4
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 6
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 4
+	dnote 17, 6
+	dnote 17, 2
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 6
+	dnote 17, 2
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 2
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 2
+	dnote 17, 2
+	dnote 17, 4
+	dnote 17, 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 6
+	dnote 19, 1
+	dnote 19, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
 	sound_loop 0, Music_MuseumGuy_branch_aee1

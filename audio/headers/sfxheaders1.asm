@@ -1,62 +1,62 @@
 SFX_Headers_1::
 	db $ff, $ff, $ff ; padding
 
-SFX_Snare1_1::
-	audio_header SFX_Snare1_1, Ch8
+SFX_Noise_Instrument01_1::
+	audio_header SFX_Noise_Instrument01_1, Ch8
 
-SFX_Snare2_1::
-	audio_header SFX_Snare2_1, Ch8
+SFX_Noise_Instrument02_1::
+	audio_header SFX_Noise_Instrument02_1, Ch8
 
-SFX_Snare3_1::
-	audio_header SFX_Snare3_1, Ch8
+SFX_Noise_Instrument03_1::
+	audio_header SFX_Noise_Instrument03_1, Ch8
 
-SFX_Snare4_1::
-	audio_header SFX_Snare4_1, Ch8
+SFX_Noise_Instrument04_1::
+	audio_header SFX_Noise_Instrument04_1, Ch8
 
-SFX_Snare5_1::
-	audio_header SFX_Snare5_1, Ch8
+SFX_Noise_Instrument05_1::
+	audio_header SFX_Noise_Instrument05_1, Ch8
 
-SFX_Triangle1_1::
-	audio_header SFX_Triangle1_1, Ch8
+SFX_Noise_Instrument06_1::
+	audio_header SFX_Noise_Instrument06_1, Ch8
 
-SFX_Triangle2_1::
-	audio_header SFX_Triangle2_1, Ch8
+SFX_Noise_Instrument07_1::
+	audio_header SFX_Noise_Instrument07_1, Ch8
 
-SFX_Snare6_1::
-	audio_header SFX_Snare6_1, Ch8
+SFX_Noise_Instrument08_1::
+	audio_header SFX_Noise_Instrument08_1, Ch8
 
-SFX_Snare7_1::
-	audio_header SFX_Snare7_1, Ch8
+SFX_Noise_Instrument09_1::
+	audio_header SFX_Noise_Instrument09_1, Ch8
 
-SFX_Snare8_1::
-	audio_header SFX_Snare8_1, Ch8
+SFX_Noise_Instrument10_1::
+	audio_header SFX_Noise_Instrument10_1, Ch8
 
-SFX_Snare9_1::
-	audio_header SFX_Snare9_1, Ch8
+SFX_Noise_Instrument11_1::
+	audio_header SFX_Noise_Instrument11_1, Ch8
 
-SFX_Cymbal1_1::
-	audio_header SFX_Cymbal1_1, Ch8
+SFX_Noise_Instrument12_1::
+	audio_header SFX_Noise_Instrument12_1, Ch8
 
-SFX_Cymbal2_1::
-	audio_header SFX_Cymbal2_1, Ch8
+SFX_Noise_Instrument13_1::
+	audio_header SFX_Noise_Instrument13_1, Ch8
 
-SFX_Cymbal3_1::
-	audio_header SFX_Cymbal3_1, Ch8
+SFX_Noise_Instrument14_1::
+	audio_header SFX_Noise_Instrument14_1, Ch8
 
-SFX_Muted_Snare1_1::
-	audio_header SFX_Muted_Snare1_1, Ch8
+SFX_Noise_Instrument15_1::
+	audio_header SFX_Noise_Instrument15_1, Ch8
 
-SFX_Triangle3_1::
-	audio_header SFX_Triangle3_1, Ch8
+SFX_Noise_Instrument16_1::
+	audio_header SFX_Noise_Instrument16_1, Ch8
 
-SFX_Muted_Snare2_1::
-	audio_header SFX_Muted_Snare2_1, Ch8
+SFX_Noise_Instrument17_1::
+	audio_header SFX_Noise_Instrument17_1, Ch8
 
-SFX_Muted_Snare3_1::
-	audio_header SFX_Muted_Snare3_1, Ch8
+SFX_Noise_Instrument18_1::
+	audio_header SFX_Noise_Instrument18_1, Ch8
 
-SFX_Muted_Snare4_1::
-	audio_header SFX_Muted_Snare4_1, Ch8
+SFX_Noise_Instrument19_1::
+	audio_header SFX_Noise_Instrument19_1, Ch8
 
 SFX_Cry00_1::
 	audio_header SFX_Cry00_1, Ch5, Ch6, Ch8

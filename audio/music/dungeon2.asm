@@ -306,12 +306,12 @@ Music_Dungeon2_Ch4::
 	dspeed 12
 
 Music_Dungeon2_branch_7e9dd::
-	cymbal1 4
-	cymbal2 4
-	cymbal1 4
-	snare8 4
-	cymbal1 4
-	cymbal2 4
-	snare9 4
-	snare7 4
+	dnote 12, 4
+	dnote 13, 4
+	dnote 12, 4
+	dnote 10, 4
+	dnote 12, 4
+	dnote 13, 4
+	dnote 11, 4
+	dnote 9, 4
 	sound_loop 0, Music_Dungeon2_branch_7e9dd

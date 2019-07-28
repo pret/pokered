@@ -671,34 +671,34 @@ Music_BikeRiding_branch_7de6a::
 
 Music_BikeRiding_branch_7dea7::
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	sound_ret
 
 Music_BikeRiding_branch_7deb4::
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
-	triangle3 2
-	triangle3 2
+	dnote 16, 2
+	dnote 16, 2
+	dnote 16, 2
 	sound_ret
 
 Music_BikeRiding_branch_7dec2::
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 2
+	dnote 16, 2
 	rest 2
-	triangle3 1
-	triangle3 1
+	dnote 16, 1
+	dnote 16, 1
 	sound_ret

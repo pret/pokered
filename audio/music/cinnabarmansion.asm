@@ -151,22 +151,22 @@ Music_CinnabarMansion_Ch4::
 	rest 16
 
 Music_CinnabarMansion_branch_7edb5::
-	cymbal1 2
-	cymbal1 2
-	cymbal2 4
-	cymbal1 2
-	cymbal1 2
-	cymbal2 4
-	cymbal1 2
-	cymbal1 2
-	cymbal2 4
-	cymbal1 2
-	cymbal1 2
-	cymbal3 4
-	cymbal1 2
-	cymbal1 2
+	dnote 12, 2
+	dnote 12, 2
+	dnote 13, 4
+	dnote 12, 2
+	dnote 12, 2
+	dnote 13, 4
+	dnote 12, 2
+	dnote 12, 2
+	dnote 13, 4
+	dnote 12, 2
+	dnote 12, 2
+	dnote 14, 4
+	dnote 12, 2
+	dnote 12, 2
 	rest 2
 	rest 10
 	rest 8
-	cymbal3 8
+	dnote 14, 8
 	sound_loop 0, Music_CinnabarMansion_branch_7edb5

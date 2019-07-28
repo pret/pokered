@@ -312,93 +312,93 @@ Music_Routes1_branch_9cdd::
 Music_Routes1_Ch4::
 	dspeed 12
 	rest 4
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 4
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
+	dnote 15, 2
 	rest 2
-	mutedsnare1 2
-	mutedsnare1 2
+	dnote 15, 2
+	dnote 15, 2
 	sound_loop 0, Music_Routes1_Ch4
 	sound_ret

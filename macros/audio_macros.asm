@@ -40,7 +40,7 @@ pitch_sweep: MACRO
 	ENDC
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
+;format: length [0, 15], volume [0, 15], volume change [-7, 7], frequency
 square_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -51,7 +51,7 @@ square_note: MACRO
 	dw \4
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
+;format: length [0, 15], volume [0, 15], volume change [-7, 7], frequency
 noise_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -75,113 +75,23 @@ A_ EQU $9
 A# EQU $A
 B_ EQU $B
 
-;format: pitch length (in 16ths)
+;format: pitch, length (in 16ths)
 note: MACRO
 	db (\1 << 4) | (\2 - 1)
 ENDM
 
-;format: instrument length (in 16ths)
-snare1: MACRO
-	db $B0 | (\1 - 1)
-	db $01
+;format: instrument, length (in 16ths)
+dnote: MACRO
+	db $B0 | (\2 - 1)
+	db \1
 ENDM
 
-snare2: MACRO
-	db $B0 | (\1 - 1)
-	db $02
-ENDM
-
-snare3: MACRO
-	db $B0 | (\1 - 1)
-	db $03
-ENDM
-
-snare4: MACRO
-	db $B0 | (\1 - 1)
-	db $04
-ENDM
-
-snare5: MACRO
-	db $B0 | (\1 - 1)
-	db $05
-ENDM
-
-triangle1: MACRO
-	db $B0 | (\1 - 1)
-	db $06
-ENDM
-
-triangle2: MACRO
-	db $B0 | (\1 - 1)
-	db $07
-ENDM
-
-snare6: MACRO
-	db $B0 | (\1 - 1)
-	db $08
-ENDM
-
-snare7: MACRO
-	db $B0 | (\1 - 1)
-	db $09
-ENDM
-
-snare8: MACRO
-	db $B0 | (\1 - 1)
-	db $0A
-ENDM
-
-snare9: MACRO
-	db $B0 | (\1 - 1)
-	db $0B
-ENDM
-
-cymbal1: MACRO
-	db $B0 | (\1 - 1)
-	db $0C
-ENDM
-
-cymbal2: MACRO
-	db $B0 | (\1 - 1)
-	db $0D
-ENDM
-
-cymbal3: MACRO
-	db $B0 | (\1 - 1)
-	db $0E
-ENDM
-
-mutedsnare1: MACRO
-	db $B0 | (\1 - 1)
-	db $0F
-ENDM
-
-triangle3: MACRO
-	db $B0 | (\1 - 1)
-	db $10
-ENDM
-
-mutedsnare2: MACRO
-	db $B0 | (\1 - 1)
-	db $11
-ENDM
-
-mutedsnare3: MACRO
-	db $B0 | (\1 - 1)
-	db $12
-ENDM
-
-mutedsnare4: MACRO
-	db $B0 | (\1 - 1)
-	db $13
-ENDM
-
-;format: rest length (in 16ths)
+;format: length (in 16ths)
 rest: MACRO
 	db $C0 | (\1 - 1)
 ENDM
 
-; format: notetype speed, volume, fade
+;format: speed, volume, fade
 note_type: MACRO
 	db $D0 | \1
 	db (\2 << 4) | \3
@@ -242,13 +152,13 @@ duty_cycle_pattern: MACRO
 	db \1
 ENDM
 
-;format: callchannel address
+;format: address
 sound_call: MACRO
 	db $FD
 	dw \1
 ENDM
 
-;format: loopchannel count, address
+;format: count, address
 sound_loop: MACRO
 	db $FE
 	db \1

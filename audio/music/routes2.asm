@@ -326,100 +326,100 @@ Music_Routes2_branch_9e9e::
 
 Music_Routes2_Ch4::
 	dspeed 12
-	snare3 2
+	dnote 3, 2
 	rest 2
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare3 1
-	snare3 1
-	snare3 2
-	snare3 2
-	snare3 2
+	dnote 3, 1
+	dnote 3, 1
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
 	rest 2
 	dspeed 8
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
-	snare3 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
+	dnote 3, 3
 	dspeed 12
-	snare3 1
+	dnote 3, 1
 	rest 3
-	snare3 2
+	dnote 3, 2
 	rest 2
-	snare3 2
+	dnote 3, 2
 	rest 4
-	snare3 1
-	snare3 1
-	snare3 2
+	dnote 3, 1
+	dnote 3, 1
+	dnote 3, 2
 	rest 2
-	snare3 2
+	dnote 3, 2
 	rest 2
 	dspeed 8
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
-	snare3 3
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
+	dnote 3, 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
 	rest 3
 	dspeed 12
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare3 1
-	snare3 1
-	snare3 2
-	snare3 2
-	snare3 2
+	dnote 3, 1
+	dnote 3, 1
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
 	rest 2
 	dspeed 8
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
 	rest 3
 	dspeed 12
-	snare3 1
+	dnote 3, 1
 	rest 3
-	snare3 2
+	dnote 3, 2
 	rest 2
-	snare3 2
+	dnote 3, 2
 	rest 4
-	snare3 1
-	snare3 1
-	snare3 2
-	snare3 2
-	snare3 2
+	dnote 3, 1
+	dnote 3, 1
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
 	rest 2
 	dspeed 8
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
 	rest 3
-	snare3 3
-	snare3 3
-	snare3 3
+	dnote 3, 3
+	dnote 3, 3
+	dnote 3, 3
 	rest 3
 	dspeed 12
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare3 1
-	snare3 1
-	snare3 2
-	snare3 2
-	snare3 2
+	dnote 3, 1
+	dnote 3, 1
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
 	rest 2
 	dspeed 8
-	snare3 2
-	snare3 2
-	snare3 2
-	snare3 3
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 2
+	dnote 3, 3
 	rest 3
-	snare3 3
+	dnote 3, 3
 	rest 3
 	sound_loop 0, Music_Routes2_Ch4
 	sound_ret

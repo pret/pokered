@@ -227,18 +227,18 @@ Music_IndigoPlateau_branch_a6fe::
 
 Music_IndigoPlateau_Ch4::
 	dspeed 6
-	mutedsnare2 16
-	mutedsnare2 16
-	mutedsnare2 16
-	mutedsnare2 8
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 17, 16
+	dnote 17, 16
+	dnote 17, 16
+	dnote 17, 8
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
 
 Music_IndigoPlateau_branch_a728::
 	sound_call Music_IndigoPlateau_branch_a791
@@ -255,67 +255,67 @@ Music_IndigoPlateau_branch_a728::
 	sound_call Music_IndigoPlateau_branch_a7a8
 	sound_call Music_IndigoPlateau_branch_a77e
 	sound_call Music_IndigoPlateau_branch_a7a8
-	mutedsnare2 16
-	mutedsnare2 8
-	mutedsnare3 8
-	mutedsnare2 16
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 1
+	dnote 17, 16
+	dnote 17, 8
+	dnote 18, 8
+	dnote 17, 16
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 1
 	sound_loop 0, Music_IndigoPlateau_branch_a728
 
 Music_IndigoPlateau_branch_a77e::
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare4 4
-	mutedsnare3 4
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare4 4
-	mutedsnare4 2
-	mutedsnare3 2
+	dnote 17, 4
+	dnote 18, 4
+	dnote 19, 4
+	dnote 18, 4
+	dnote 17, 4
+	dnote 18, 4
+	dnote 19, 4
+	dnote 19, 2
+	dnote 18, 2
 	sound_ret
 
 Music_IndigoPlateau_branch_a791::
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare4 4
-	mutedsnare3 4
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare4 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 17, 4
+	dnote 18, 4
+	dnote 19, 4
+	dnote 18, 4
+	dnote 17, 4
+	dnote 18, 4
+	dnote 19, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
 	sound_ret
 
 Music_IndigoPlateau_branch_a7a8::
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare2 4
-	mutedsnare3 4
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
+	dnote 17, 4
+	dnote 18, 4
+	dnote 17, 4
+	dnote 18, 4
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
 	sound_ret

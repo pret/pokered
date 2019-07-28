@@ -231,99 +231,99 @@ Music_IntroBattle_Ch3::
 
 Music_IntroBattle_Ch4::
 	dspeed 6
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 16
-	mutedsnare2 16
-	mutedsnare2 16
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare4 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare3 1
-	mutedsnare2 4
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 8
-	mutedsnare2 4
-	mutedsnare2 16
-	mutedsnare2 16
-	mutedsnare2 2
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 16
+	dnote 17, 16
+	dnote 17, 16
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 4
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 19, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 18, 1
+	dnote 17, 4
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 8
+	dnote 17, 4
+	dnote 17, 16
+	dnote 17, 16
+	dnote 17, 2
 	rest 16
 	rest 14
 	sound_ret

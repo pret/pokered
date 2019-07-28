@@ -591,67 +591,67 @@ Music_Cities1_branch_acf3::
 	sound_call Music_Cities1_branch_ad36
 	sound_call Music_Cities1_branch_ad5f
 	sound_call Music_Cities1_branch_ad52
-	triangle1 6
-	triangle1 6
-	triangle2 4
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 4
 	sound_call Music_Cities1_branch_ad6e
 	sound_call Music_Cities1_branch_ad5f
 	sound_call Music_Cities1_branch_ad52
 	sound_call Music_Cities1_branch_ad6e
 	sound_call Music_Cities1_branch_ad52
-	triangle1 6
-	triangle1 6
-	triangle2 2
-	triangle1 2
-	triangle1 6
-	triangle1 6
-	triangle1 4
-	triangle1 6
-	snare6 6
-	snare6 4
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 2
+	dnote 6, 2
+	dnote 6, 6
+	dnote 6, 6
+	dnote 6, 4
+	dnote 6, 6
+	dnote 8, 6
+	dnote 8, 4
 	sound_loop 0, Music_Cities1_Ch4
 
 Music_Cities1_branch_ad36::
-	snare6 6
-	snare6 6
-	snare6 4
-	snare6 6
-	snare6 6
-	snare6 2
-	snare6 2
+	dnote 8, 6
+	dnote 8, 6
+	dnote 8, 4
+	dnote 8, 6
+	dnote 8, 6
+	dnote 8, 2
+	dnote 8, 2
 	sound_ret
 
 Music_Cities1_branch_ad45::
-	snare6 6
-	snare6 6
-	snare6 4
-	snare6 6
-	snare6 6
-	snare6 4
+	dnote 8, 6
+	dnote 8, 6
+	dnote 8, 4
+	dnote 8, 6
+	dnote 8, 6
+	dnote 8, 4
 	sound_ret
 
 Music_Cities1_branch_ad52::
-	triangle1 6
-	triangle1 6
-	triangle2 4
-	triangle1 6
-	triangle1 6
-	triangle2 4
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 4
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 4
 	sound_ret
 
 Music_Cities1_branch_ad5f::
-	triangle1 6
-	triangle1 6
-	triangle2 4
-	triangle1 6
-	triangle1 6
-	triangle2 2
-	triangle1 2
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 4
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 2
+	dnote 6, 2
 	sound_ret
 
 Music_Cities1_branch_ad6e::
-	triangle1 6
-	triangle1 6
-	triangle2 2
-	triangle2 2
+	dnote 6, 6
+	dnote 6, 6
+	dnote 7, 2
+	dnote 7, 2
 	sound_ret

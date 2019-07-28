@@ -462,216 +462,216 @@ Music_TitleScreen_branch_7e6e5::
 Music_TitleScreen_Ch4::
 	dspeed 6
 	rest 4
-	snare3 1
-	snare3 1
-	snare4 1
-	snare4 1
+	dnote 3, 1
+	dnote 3, 1
+	dnote 4, 1
+	dnote 4, 1
 	dspeed 12
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare2 1
-	snare2 1
+	dnote 2, 1
+	dnote 2, 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 3
 	dspeed 8
-	snare3 2
-	snare4 2
-	snare2 2
-	snare3 2
-	snare2 2
-	snare1 2
+	dnote 3, 2
+	dnote 4, 2
+	dnote 2, 2
+	dnote 3, 2
+	dnote 2, 2
+	dnote 1, 2
 
 Music_TitleScreen_branch_7e716::
 	dspeed 12
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare2 1
-	snare3 1
+	dnote 2, 1
+	dnote 2, 1
+	dnote 3, 1
 	rest 3
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e834
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare2 1
-	snare3 1
+	dnote 2, 1
+	dnote 2, 1
+	dnote 3, 1
 	rest 1
-	snare3 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
 	sound_call Music_TitleScreen_branch_7e842
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 1
-	snare2 1
+	dnote 2, 1
 	rest 1
 	sound_call Music_TitleScreen_branch_7e842
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 1
 	dspeed 6
-	snare3 1
-	snare3 1
-	snare4 1
-	snare4 1
+	dnote 3, 1
+	dnote 3, 1
+	dnote 4, 1
+	dnote 4, 1
 	dspeed 12
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e842
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare3 1
-	snare2 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 2, 1
 	rest 1
-	snare3 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e842
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare3 1
-	snare2 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 2, 1
 	rest 1
-	snare4 1
-	snare3 1
-	snare2 1
+	dnote 4, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 3
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare2 1
-	snare4 1
-	snare2 1
+	dnote 2, 1
+	dnote 4, 1
+	dnote 2, 1
 	rest 1
 	dspeed 6
-	snare3 1
-	snare3 1
-	snare4 1
-	snare4 1
+	dnote 3, 1
+	dnote 3, 1
+	dnote 4, 1
+	dnote 4, 1
 	dspeed 12
-	snare1 1
+	dnote 1, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare3 1
-	snare2 1
-	snare1 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 1, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare3 1
-	snare2 1
-	snare3 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 3, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare4 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 4, 1
 	rest 1
-	snare3 1
-	snare2 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 2, 1
 	rest 3
-	snare3 1
+	dnote 3, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 3
-	snare5 1
+	dnote 5, 1
 	rest 5
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare3 1
-	snare2 1
-	snare1 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 1, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 1
-	snare1 1
+	dnote 1, 1
 	rest 1
 	dspeed 8
-	snare2 4
-	snare3 4
-	snare1 4
+	dnote 2, 4
+	dnote 3, 4
+	dnote 1, 4
 	dspeed 12
-	snare5 1
+	dnote 5, 1
 	rest 5
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare3 1
-	snare2 1
-	snare3 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 3, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare1 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 1, 1
 	rest 1
-	snare3 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
 	dspeed 8
-	snare2 4
-	snare3 4
-	snare2 4
+	dnote 2, 4
+	dnote 3, 4
+	dnote 2, 4
 	sound_loop 0, Music_TitleScreen_branch_7e716
 
 Music_TitleScreen_branch_7e834::
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare2 1
-	snare3 1
-	snare2 1
+	dnote 2, 1
+	dnote 3, 1
+	dnote 2, 1
 	rest 3
 	sound_ret
 
 Music_TitleScreen_branch_7e842::
-	snare2 1
+	dnote 2, 1
 	rest 3
-	snare2 1
+	dnote 2, 1
 	rest 5
-	snare3 1
-	snare2 1
-	snare2 1
+	dnote 3, 1
+	dnote 2, 1
+	dnote 2, 1
 	rest 3
 	sound_ret
