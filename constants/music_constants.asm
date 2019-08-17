@@ -20,19 +20,27 @@ REG_DUTY_SOUND_LEN  EQU 1
 REG_VOLUME_ENVELOPE EQU 2
 REG_FREQUENCY_LO    EQU 3
 
-MAX_SFX_ID EQU $B9
+MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
+MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
+MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
 
-CRY_SFX_START EQU $14
-CRY_SFX_END   EQU $86
+NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
+NOISE_INSTRUMENTS_END   EQUS "SFX_NOISE_INSTRUMENT19 + 1"
+
+CRY_SFX_START EQUS "SFX_CRY_00"
+CRY_SFX_END   EQUS "SFX_CRY_25 + 3"
+
+BATTLE_SFX_START EQUS "SFX_PECK"
+BATTLE_SFX_END   EQUS "SFX_SILPH_SCOPE + 1"
 
 ; wChannelFlags1 constants
-BIT_PERFECT_PITCH         EQU 0 ; controlled by toggleperfectpitch command
-BIT_CHANNEL_CALL          EQU 1 ; if in channel call
-BIT_NOISE_OR_SFX          EQU 2 ; if channel is the music noise channel or an SFX channel
-BIT_VIBRATO_DIRECTION     EQU 3 ; if the pitch is above or below normal (cycles)
-BIT_PITCH_BEND_ON         EQU 4 ; if pitch bend is active
-BIT_PITCH_BEND_DECREASING EQU 5 ; if the pitch bend frequency is decreasing (instead of increasing)
-BIT_ROTATE_DUTY           EQU 6 ; if rotating duty
+BIT_PERFECT_PITCH          EQU 0 ; controlled by toggle_perfect_pitch command
+BIT_SOUND_CALL             EQU 1 ; if in sound call
+BIT_NOISE_OR_SFX           EQU 2 ; if channel is the music noise channel or an SFX channel
+BIT_VIBRATO_DIRECTION      EQU 3 ; if the pitch is above or below normal (cycles)
+BIT_PITCH_SLIDE_ON         EQU 4 ; if pitch slide is active
+BIT_PITCH_SLIDE_DECREASING EQU 5 ; if the pitch slide frequency is decreasing (instead of increasing)
+BIT_ROTATE_DUTY_CYCLE      EQU 6 ; if rotating duty cycle
 
 ; wChannelFlags2 constant (only has one flag)
 BIT_EXECUTE_MUSIC EQU 0 ; if in execute music

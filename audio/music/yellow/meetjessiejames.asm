@@ -306,4 +306,3 @@ Music_MeetJessieJames_branch_83235::
 	note E_, 1
 	rest 1
 	sound_loop 0, Music_MeetJessieJames_branch_83235
-	sound_ret

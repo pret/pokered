@@ -86,6 +86,14 @@ dnote: MACRO
 	db \1
 ENDM
 
+;format: instrument [1, 3-10], length (in 16ths)
+; like dnote but one 1 byte instead of 2
+; can only be used with instruments 1-10, excluding 2
+; unused
+dnote_short: MACRO
+	db (\1 << 4) | (\2 - 1)
+ENDM
+
 ;format: length (in 16ths)
 rest: MACRO
 	db $C0 | (\1 - 1)
