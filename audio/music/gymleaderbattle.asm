@@ -779,7 +779,7 @@ Music_GymLeaderBattle_branch_225e0::
 	note_type 12, 11, 0
 	octave 3
 	note B_, 16
-	note_type 12, 3, 15
+	note_type 12, 3, -7
 	octave 4
 	note F#, 16
 	note_type 12, 12, 3

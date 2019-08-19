@@ -50,7 +50,7 @@ Music_WildBattle_Ch1::
 	note C#, 14
 	note E_, 6
 	note D#, 10
-	note_type 12, 4, 15
+	note_type 12, 4, -7
 	note C#, 10
 	note_type 12, 11, 1
 	note G_, 6
@@ -279,7 +279,7 @@ Music_WildBattle_branch_230e0::
 	note_type 12, 11, 7
 	octave 4
 	note C_, 16
-	note_type 12, 3, 15
+	note_type 12, 3, -7
 	note G_, 16
 	note_type 12, 11, 5
 	octave 3
@@ -416,7 +416,7 @@ Music_WildBattle_branch_23225::
 	note G#, 16
 	note_type 12, 11, 0
 	note G#, 16
-	note_type 12, 4, 14
+	note_type 12, 4, -6
 	note G_, 16
 	note_type 12, 12, 7
 	note G_, 16
@@ -438,7 +438,7 @@ Music_WildBattle_branch_23225::
 	note F_, 8
 	note_type 12, 12, 0
 	note G_, 16
-	note_type 12, 3, 15
+	note_type 12, 3, -7
 	octave 5
 	note C_, 16
 	note_type 12, 12, 5

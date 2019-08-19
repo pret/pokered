@@ -6,13 +6,13 @@ Music_SafariZone_Ch1::
 	duty_cycle 2
 	note_type 12, 9, 2
 	octave 3
-	pitch_slide 0, 73
+	pitch_slide 1, 4, A_
 	note C_, 1
-	pitch_slide 0, 73
+	pitch_slide 1, 4, A_
 	note G_, 1
-	pitch_slide 0, 73
+	pitch_slide 1, 4, A_
 	note C_, 1
-	pitch_slide 0, 73
+	pitch_slide 1, 4, A_
 	note G_, 1
 	rest 4
 	duty_cycle 3

@@ -1,5 +1,5 @@
 SFX_Cry1A_2_Ch5:
-	duty_cycle_pattern 240
+	duty_cycle_pattern 3, 3, 0, 0
 	square_note 6, 15, 7, 1856
 	square_note 12, 14, 6, 1860
 	square_note 6, 13, 5, 1872
@@ -10,7 +10,7 @@ SFX_Cry1A_2_Ch5:
 
 
 SFX_Cry1A_2_Ch6:
-	duty_cycle_pattern 10
+	duty_cycle_pattern 0, 0, 2, 2
 	square_note 6, 12, 7, 1793
 	square_note 11, 11, 6, 1794
 	square_note 6, 10, 5, 1809

@@ -5,16 +5,16 @@ Music_PkmnHealed_Ch1::
 	toggle_perfect_pitch
 	note_type 12, 8, 1
 	rest 2
-	pitch_slide 0, 75
+	pitch_slide 1, 4, B_
 	note B_, 2
-	pitch_slide 0, 84
+	pitch_slide 1, 3, E_
 	note B_, 2
-	pitch_slide 0, 68
+	pitch_slide 1, 4, E_
 	note E_, 2
 	rest 4
-	pitch_slide 0, 59
+	pitch_slide 1, 5, B_
 	note E_, 4
-	pitch_slide 0, 75
+	pitch_slide 1, 4, B_
 	note B_, 4
 	sound_ret
 

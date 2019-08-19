@@ -10,7 +10,7 @@ SFX_Battle_27_branch_2062a:
 
 
 SFX_Battle_27_Ch6:
-	duty_cycle_pattern 179
+	duty_cycle_pattern 2, 3, 0, 3
 	square_note 15, 2, -7, 1992
 
 SFX_Battle_27_branch_2063d:

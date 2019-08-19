@@ -9,7 +9,7 @@ SFX_Battle_2E_Ch5:
 
 
 SFX_Battle_2E_Ch6:
-	duty_cycle_pattern 179
+	duty_cycle_pattern 2, 3, 0, 3
 	square_note 2, 14, 1, 770
 	square_note 3, 14, 1, 2034
 	square_note 4, 14, 1, 1538

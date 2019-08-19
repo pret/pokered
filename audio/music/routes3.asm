@@ -69,7 +69,7 @@ Music_Routes3_branch_9fc3::
 	note A_, 4
 	note F_, 4
 	note A_, 4
-	note_type 8, 4, 15
+	note_type 8, 4, -7
 	note A_, 12
 	note_type 8, 9, 0
 	note F_, 12

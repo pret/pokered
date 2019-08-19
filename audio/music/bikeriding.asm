@@ -114,7 +114,7 @@ Music_BikeRiding_branch_7dbc9::
 	note B_, 1
 	octave 4
 	note C_, 4
-	note_type 12, 3, 13
+	note_type 12, 3, -5
 	note C_, 4
 	note_type 12, 11, 4
 	note F_, 6

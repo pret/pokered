@@ -4,12 +4,12 @@ Music_Dungeon1_Ch1::
 	duty_cycle 3
 	toggle_perfect_pitch
 	vibrato 10, 1, 4
-	note_type 12, 4, 13
+	note_type 12, 4, -5
 	rest 8
-	stereo_panning 237
+	stereo_panning %1110, %1101
 	octave 4
 	note F#, 8
-	stereo_panning 255
+	stereo_panning %1111, %1111
 
 Music_Dungeon1_branch_7dee5::
 	note_type 12, 11, 2
@@ -229,10 +229,10 @@ Music_Dungeon1_branch_7dfd5::
 Music_Dungeon1_Ch2::
 	vibrato 11, 1, 5
 	duty_cycle 3
-	note_type 12, 0, 15
+	note_type 12, 0, -7
 	octave 4
 	note G#, 8
-	note_type 12, 4, 13
+	note_type 12, 4, -5
 	octave 5
 	note D_, 8
 

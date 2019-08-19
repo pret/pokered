@@ -236,7 +236,7 @@ Music_PokemonTower_branch_7f0ee::
 	note A_, 4
 	note G#, 4
 	note F#, 4
-	note_type 12, 2, 15
+	note_type 12, 2, -7
 	octave 5
 	note D_, 16
 	note_type 12, 12, 0

@@ -68,7 +68,7 @@ Music_IndigoPlateau_branch_a605::
 	note_type 12, 11, 7
 	octave 3
 	note F_, 8
-	note_type 12, 4, 14
+	note_type 12, 4, -6
 	octave 2
 	note A#, 8
 	sound_loop 0, Music_IndigoPlateau_branch_a605
@@ -95,7 +95,7 @@ Music_IndigoPlateau_Ch2::
 	note D_, 8
 	note D_, 8
 	note D_, 4
-	note_type 12, 5, 10
+	note_type 12, 5, -2
 	note D#, 4
 
 Music_IndigoPlateau_branch_a673::
@@ -129,7 +129,7 @@ Music_IndigoPlateau_branch_a673::
 	note D_, 8
 	octave 4
 	note C_, 8
-	note_type 12, 4, 13
+	note_type 12, 4, -5
 	octave 4
 	note D#, 8
 	sound_loop 0, Music_IndigoPlateau_branch_a673

@@ -292,7 +292,7 @@ Music_SilphCo_branch_7f26d::
 	note A#, 1
 	octave 3
 	note C_, 1
-	note_type 6, 3, 15
+	note_type 6, 3, -7
 	note C_, 16
 	note_type 6, 10, 0
 	note C_, 11
@@ -303,7 +303,7 @@ Music_SilphCo_branch_7f26d::
 	note G#, 1
 	note F#, 1
 	note E_, 1
-	note_type 6, 3, 15
+	note_type 6, 3, -7
 	note E_, 16
 	note_type 6, 9, 0
 	note E_, 11
@@ -314,7 +314,7 @@ Music_SilphCo_branch_7f26d::
 	octave 3
 	note C_, 1
 	note D_, 1
-	note_type 6, 3, 15
+	note_type 6, 3, -7
 	note D_, 16
 	note_type 6, 10, 7
 	note D_, 11
@@ -477,7 +477,7 @@ Music_SilphCo_branch_7f42e::
 	note D_, 8
 	note D#, 8
 	duty_cycle 3
-	note_type 6, 6, 15
+	note_type 6, 6, -7
 	note E_, 16
 	note_type 6, 12, 0
 	note B_, 16
@@ -528,7 +528,7 @@ Music_SilphCo_branch_7f42e::
 	note F_, 8
 	note_type 6, 11, 7
 	note F_, 8
-	note_type 6, 8, 10
+	note_type 6, 8, -2
 	note F_, 4
 	note_type 6, 12, 4
 	duty_cycle 3
@@ -539,7 +539,7 @@ Music_SilphCo_branch_7f42e::
 	note F#, 8
 	note_type 6, 11, 0
 	note F#, 8
-	note_type 6, 9, 9
+	note_type 6, 9, -1
 	note F#, 4
 	note_type 6, 12, 4
 	note F#, 4
@@ -547,7 +547,7 @@ Music_SilphCo_branch_7f42e::
 	note F#, 4
 	note_type 6, 9, 0
 	note G_, 12
-	note_type 6, 5, 9
+	note_type 6, 5, -1
 	note G_, 8
 	note_type 6, 12, 4
 	note G_, 4
@@ -766,7 +766,7 @@ Music_SilphCo_branch_7f42e::
 	note_type 6, 8, 3
 	note G_, 2
 	rest 6
-	note_type 6, 4, 15
+	note_type 6, 4, -7
 	note G#, 8
 	note_type 6, 11, 4
 	note G_, 2

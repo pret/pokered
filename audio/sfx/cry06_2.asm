@@ -1,5 +1,5 @@
 SFX_Cry06_2_Ch5:
-	duty_cycle_pattern 250
+	duty_cycle_pattern 3, 3, 2, 2
 	square_note 6, 8, 3, 583
 	square_note 15, 6, 2, 550
 	square_note 4, 5, 2, 581

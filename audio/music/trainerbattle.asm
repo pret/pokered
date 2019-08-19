@@ -735,7 +735,7 @@ Music_TrainerBattle_branch_22bfc::
 	note C_, 8
 	note_type 12, 3, 0
 	note C_, 8
-	note_type 12, 4, 14
+	note_type 12, 4, -6
 	note C_, 8
 	note_type 12, 12, 7
 	note C_, 8
@@ -827,7 +827,7 @@ Music_TrainerBattle_branch_22bfc::
 	note B_, 8
 	note_type 12, 6, 0
 	note B_, 8
-	note_type 12, 6, 9
+	note_type 12, 6, -1
 	note B_, 6
 	note_type 12, 9, 6
 	note B_, 6

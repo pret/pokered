@@ -147,7 +147,7 @@ Music_FinalBattle_branch_23429::
 	note F_, 4
 	note F#, 12
 	note A#, 4
-	note_type 12, 5, 14
+	note_type 12, 5, -6
 	note B_, 12
 	note_type 12, 11, 2
 	note E_, 3
@@ -475,7 +475,7 @@ Music_FinalBattle_Ch2::
 	octave 4
 	note E_, 1
 	note E_, 3
-	note_type 12, 4, 10
+	note_type 12, 4, -2
 	octave 3
 	note G#, 4
 
@@ -634,7 +634,7 @@ Music_FinalBattle_branch_235e6::
 	note F#, 12
 	note_type 12, 12, 7
 	note F#, 4
-	note_type 12, 1, 15
+	note_type 12, 1, -7
 	octave 3
 	note F#, 8
 	note_type 12, 9, 0
@@ -686,7 +686,7 @@ Music_FinalBattle_branch_235e6::
 	note_type 12, 12, 7
 	octave 4
 	note D_, 8
-	note_type 12, 4, 12
+	note_type 12, 4, -4
 	note C_, 8
 	note_type 12, 13, 7
 	note E_, 8
@@ -696,7 +696,7 @@ Music_FinalBattle_branch_235e6::
 	note B_, 8
 	note A#, 4
 	note B_, 12
-	note_type 12, 5, 13
+	note_type 12, 5, -5
 	octave 4
 	note D_, 8
 	note_type 12, 12, 0

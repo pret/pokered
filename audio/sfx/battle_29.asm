@@ -1,5 +1,5 @@
 SFX_Battle_29_Ch5:
-	duty_cycle_pattern 201
+	duty_cycle_pattern 3, 0, 2, 1
 	square_note 11, 15, 3, 288
 	square_note 9, 13, 3, 336
 	sound_loop 5, SFX_Battle_29_Ch5

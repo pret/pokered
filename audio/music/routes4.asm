@@ -9,7 +9,7 @@ Music_Routes4_Ch1::
 	note G#, 4
 	note G#, 4
 	note G#, 4
-	note_type 12, 7, 15
+	note_type 12, 7, -7
 	note G#, 4
 	note_type 12, 10, 2
 	note G#, 4
@@ -223,7 +223,7 @@ Music_Routes4_branch_a325::
 	note G#, 6
 	note_type 12, 7, 0
 	note G#, 6
-	note_type 12, 6, 15
+	note_type 12, 6, -7
 	note G#, 6
 	note_type 12, 12, 7
 	note G#, 4
@@ -233,7 +233,7 @@ Music_Routes4_branch_a325::
 	note F#, 4
 	note_type 8, 9, 0
 	note F#, 6
-	note_type 8, 7, 15
+	note_type 8, 7, -7
 	note F#, 6
 	duty_cycle 0
 	note_type 8, 9, 0

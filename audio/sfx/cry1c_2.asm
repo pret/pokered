@@ -1,5 +1,5 @@
 SFX_Cry1C_2_Ch5:
-	duty_cycle_pattern 245
+	duty_cycle_pattern 3, 3, 1, 1
 	square_note 7, 13, 6, 2017
 	square_note 6, 12, 6, 2018
 	square_note 9, 13, 6, 2017
@@ -12,7 +12,7 @@ SFX_Cry1C_2_Ch5:
 
 
 SFX_Cry1C_2_Ch6:
-	duty_cycle_pattern 68
+	duty_cycle_pattern 1, 0, 1, 0
 	square_note 6, 12, 3, 1993
 	square_note 6, 11, 3, 1991
 	square_note 10, 12, 4, 1987

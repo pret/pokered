@@ -287,7 +287,7 @@ Music_DefeatedGymLeader_branch_23d84::
 	note G_, 6
 	note E_, 1
 	note G_, 1
-	note_type 12, 6, 15
+	note_type 12, 6, -7
 	octave 4
 	note C#, 8
 	note_type 12, 12, 7
@@ -318,7 +318,7 @@ Music_DefeatedGymLeader_branch_23d84::
 	note B_, 6
 	note G#, 1
 	note B_, 1
-	note_type 12, 4, 15
+	note_type 12, 4, -7
 	octave 4
 	note E_, 8
 	note_type 12, 11, 0

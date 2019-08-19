@@ -1,5 +1,5 @@
 SFX_Unused_1_Ch5:
-	duty_cycle_pattern 240
+	duty_cycle_pattern 3, 3, 0, 0
 	square_note 15, 14, 0, 1920
 	square_note 15, 15, 0, 1924
 	square_note 15, 12, 3, 1504
@@ -10,7 +10,7 @@ SFX_Unused_1_Ch5:
 
 
 SFX_Unused_1_Ch6:
-	duty_cycle_pattern 5
+	duty_cycle_pattern 0, 0, 1, 1
 	square_note 15, 10, 0, 1857
 	square_note 15, 11, 0, 1859
 	square_note 15, 9, 3, 1457

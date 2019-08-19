@@ -8,7 +8,7 @@ Music_MeetEvilTrainer_Ch1::
 	octave 3
 	note D_, 2
 	note C#, 2
-	note_type 12, 4, 15
+	note_type 12, 4, -7
 	note D_, 4
 
 Music_MeetEvilTrainer_branch_7f6ae::
@@ -42,7 +42,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	note B_, 4
 	note B_, 4
 	note B_, 4
-	note_type 12, 4, 15
+	note_type 12, 4, -7
 	note A#, 4
 	note_type 12, 12, 2
 	note G_, 2
@@ -54,7 +54,7 @@ Music_MeetEvilTrainer_branch_7f6c2::
 	note B_, 4
 	note B_, 4
 	note B_, 4
-	note_type 12, 3, 15
+	note_type 12, 3, -7
 	note A#, 4
 	note_type 12, 12, 2
 	sound_loop 0, Music_MeetEvilTrainer_branch_7f6c2

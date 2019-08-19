@@ -21,7 +21,7 @@ SFX_Battle_36_branch_20930:
 
 
 SFX_Battle_36_Ch6:
-	duty_cycle_pattern 179
+	duty_cycle_pattern 2, 3, 0, 3
 	square_note 2, 15, 1, 1921
 	square_note 2, 15, 1, 1793
 	square_note 2, 15, 1, 1937

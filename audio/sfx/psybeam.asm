@@ -1,5 +1,5 @@
 SFX_Psybeam_Ch5:
-	duty_cycle_pattern 161
+	duty_cycle_pattern 2, 2, 0, 1
 	square_note 10, 15, 1, 1600
 	square_note 10, 15, 3, 1664
 	square_note 10, 15, 2, 1568
@@ -9,7 +9,7 @@ SFX_Psybeam_Ch5:
 
 
 SFX_Psybeam_Ch6:
-	duty_cycle_pattern 179
+	duty_cycle_pattern 2, 3, 0, 3
 	square_note 10, 15, 3, 1393
 	square_note 7, 14, 3, 1329
 	square_note 10, 15, 1, 1361

@@ -1,5 +1,5 @@
 SFX_Battle_2A_Ch5:
-	duty_cycle_pattern 57
+	duty_cycle_pattern 0, 3, 2, 1
 	square_note 4, 15, 4, 1536
 	square_note 3, 12, 4, 1280
 	square_note 5, 11, 5, 1536
@@ -10,7 +10,7 @@ SFX_Battle_2A_Ch5:
 
 
 SFX_Battle_2A_Ch6:
-	duty_cycle_pattern 141
+	duty_cycle_pattern 2, 0, 3, 1
 	square_note 5, 14, 4, 1504
 	square_note 4, 11, 4, 1248
 	square_note 6, 10, 5, 1512

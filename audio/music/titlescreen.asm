@@ -237,7 +237,7 @@ Music_TitleScreen_branch_7e594::
 	note G_, 8
 	vibrato 16, 2, 6
 	duty_cycle 3
-	note_type 12, 0, 11
+	note_type 12, 0, -3
 	note G_, 8
 	note_type 12, 14, 7
 	note A_, 8
@@ -383,14 +383,14 @@ Music_TitleScreen_branch_7e664::
 	note A_, 3
 	sound_call Music_TitleScreen_branch_7e6e5
 	octave 5
-	pitch_slide 0, 66
+	pitch_slide 1, 4, D_
 	note D_, 4
 	rest 4
 	octave 6
-	pitch_slide 0, 50
+	pitch_slide 1, 5, D_
 	note D_, 4
 	octave 5
-	pitch_slide 0, 66
+	pitch_slide 1, 4, D_
 	note D_, 4
 	rest 2
 	note_type 8, 1, 0
@@ -400,11 +400,11 @@ Music_TitleScreen_branch_7e664::
 	note C#, 4
 	sound_call Music_TitleScreen_branch_7e6e5
 	octave 6
-	pitch_slide 0, 50
+	pitch_slide 1, 5, D_
 	note D_, 4
 	rest 4
 	octave 5
-	pitch_slide 0, 66
+	pitch_slide 1, 4, D_
 	note D_, 4
 	rest 6
 	note_type 8, 1, 0

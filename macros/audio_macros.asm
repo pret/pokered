@@ -30,17 +30,22 @@ audio_header: MACRO
 	ENDC
 ENDM
 
-;format: length [0, 7], pitch change [-7, 7]
+; arguments: length [0, 7], pitch change [-7, 7]
+; length: length of time between pitch shifts
+; pitch change: positive value means increase in pitch, negative value means decrease in pitch
+;               small magnitude means quick change, large magnitude means slow change
 pitch_sweep: MACRO
 	db $10
-	IF \2 > 0
-		db (\1 << 4) | \2
-	ELSE
+	IF \2 <= 0
 		db (\1 << 4) | (%1000 | (\2 * -1))
+	ELSE
+		db (\1 << 4) | \2
 	ENDC
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], frequency
+; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
 square_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -51,7 +56,9 @@ square_note: MACRO
 	dw \4
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], frequency
+; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
 noise_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -75,18 +82,18 @@ A_ EQU $9
 A# EQU $A
 B_ EQU $B
 
-;format: pitch, length (in 16ths)
+; arguments: pitch, length [1, 16]
 note: MACRO
 	db (\1 << 4) | (\2 - 1)
 ENDM
 
-;format: instrument, length (in 16ths)
+; arguments: instrument [1, 19], length [1, 16]
 dnote: MACRO
 	db $B0 | (\2 - 1)
 	db \1
 ENDM
 
-;format: instrument [1, 3-10], length (in 16ths)
+; arguments: instrument, length [1, 16]
 ; like dnote but one 1 byte instead of 2
 ; can only be used with instruments 1-10, excluding 2
 ; unused
@@ -94,79 +101,103 @@ dnote_short: MACRO
 	db (\1 << 4) | (\2 - 1)
 ENDM
 
-;format: length (in 16ths)
+; arguments: length [1, 16]
 rest: MACRO
 	db $C0 | (\1 - 1)
 ENDM
 
-;format: speed, volume, fade
+; arguments: speed [0, 15], volume [0, 15], fade [-7, 7]
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
 note_type: MACRO
 	db $D0 | \1
-	db (\2 << 4) | \3
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
 ENDM
 
+; arguments: speed [0, 15]
 dspeed: MACRO
 	db $D0 | \1
 ENDM
 
+; arguments: octave [1, 8]
 octave: MACRO
 	db $E8 - \1
 ENDM
 
+; when enabled, effective frequency used is incremented by 1
 toggle_perfect_pitch: MACRO
 	db $E8
 ENDM
 
-;format: vibrato delay, rate, depth
+; arguments: delay [0, 255], depth [0, 15], rate [0, 15]
+; delay: time delay until vibrato effect begins
+; depth: amplitude of vibrato wave
+; rate: frequency of vibrato wave
 vibrato: MACRO
 	db $EA
 	db \1
 	db (\2 << 4) | \3
 ENDM
 
+; arguments: length [1, 256], octave [1, 8], pitch
 pitch_slide: MACRO
 	db $EB
-	db \1
-	db \2
+	db \1 - 1
+	db ((8 - \2) << 4) | \3
 ENDM
 
+; arguments: duty cycle [0, 3] (12.5%, 25%, 50%, 75%)
 duty_cycle: MACRO
 	db $EC
 	db \1
 ENDM
 
+; arguments: tempo [0, $ffff]
+; used to calculate note delay counters
+; so a smaller value means music plays faster
+; ideally should be set to $100 or less to guarantee no overflow
+; if larger than $100, large note speed or note length values might cause overflow
+; stored in big endian
 tempo: MACRO
 	db $ED
 	db \1 / $100
 	db \1 % $100
 ENDM
 
+; arguments: left output enable mask, right output enable mask
 stereo_panning: MACRO
 	db $EE
-	db \1
+	db (\1 << 4) | \2
 ENDM
 
+; arguments: left master volume [0, 7], right master volume [0, 7]
 volume: MACRO
 	db $F0
 	db (\1 << 4) | \2
 ENDM
 
+; when enabled, the sfx data is interpreted as music data
 execute_music: MACRO
 	db $F8
 ENDM
 
+; arguments: duty cycle 1, duty cycle 2, duty cycle 3, duty cycle 4
 duty_cycle_pattern: MACRO
 	db $FC
-	db \1
+	db \1 << 6 | \2 << 4 | \3 << 2 | \4
 ENDM
 
-;format: address
+; arguments: address
 sound_call: MACRO
 	db $FD
 	dw \1
 ENDM
 
-;format: count, address
+; arguments: count, address
 sound_loop: MACRO
 	db $FE
 	db \1

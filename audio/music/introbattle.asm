@@ -42,7 +42,7 @@ Music_IntroBattle_Ch1::
 	octave 2
 	note A_, 2
 	note A_, 2
-	note_type 12, 2, 9
+	note_type 12, 2, -1
 	octave 3
 	note G_, 4
 	note_type 12, 11, 0
@@ -52,7 +52,7 @@ Music_IntroBattle_Ch1::
 	note_type 12, 11, 7
 	octave 3
 	note F_, 8
-	note_type 12, 4, 15
+	note_type 12, 4, -7
 	octave 2
 	note F_, 8
 	note_type 12, 11, 1
@@ -157,7 +157,7 @@ Music_IntroBattle_Ch2::
 	note_type 12, 12, 5
 	octave 4
 	note C#, 4
-	note_type 12, 2, 15
+	note_type 12, 2, -7
 	note D_, 16
 	note_type 12, 12, 1
 	octave 5

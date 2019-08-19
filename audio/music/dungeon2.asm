@@ -52,7 +52,7 @@ Music_Dungeon2_branch_7e892::
 	note A_, 4
 	note F#, 2
 	sound_loop 2, Music_Dungeon2_branch_7e892
-	note_type 12, 1, 15
+	note_type 12, 1, -7
 	octave 3
 	note E_, 16
 	note C_, 16
