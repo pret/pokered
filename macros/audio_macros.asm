@@ -32,11 +32,13 @@ ENDM
 
 ; arguments: length [0, 7], pitch change [-7, 7]
 ; length: length of time between pitch shifts
+;         sometimes used with a value >7 in which case the MSB is ignored
 ; pitch change: positive value means increase in pitch, negative value means decrease in pitch
 ;               small magnitude means quick change, large magnitude means slow change
+;               in signed magnitude representation, so a value of 8 is the same as (negative) 0
 pitch_sweep: MACRO
 	db $10
-	IF \2 <= 0
+	IF \2 < 0
 		db (\1 << 4) | (%1000 | (\2 * -1))
 	ELSE
 		db (\1 << 4) | \2
@@ -46,6 +48,7 @@ ENDM
 ; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
 ; fade: positive value means decrease in volume, negative value means increase in volume
 ;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
 square_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -59,6 +62,7 @@ ENDM
 ; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
 ; fade: positive value means decrease in volume, negative value means increase in volume
 ;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
 noise_note: MACRO
 	db $20 | \1
 	IF \3 < 0
@@ -109,6 +113,7 @@ ENDM
 ; arguments: speed [0, 15], volume [0, 15], fade [-7, 7]
 ; fade: positive value means decrease in volume, negative value means increase in volume
 ;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
 note_type: MACRO
 	db $D0 | \1
 	IF \3 < 0

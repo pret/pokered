@@ -6,5 +6,5 @@ SFX_Teleport_Enter1_1_Ch5:
 	square_note 15, 8, 7, 1536
 	square_note 15, 4, 7, 1408
 	square_note 15, 1, 7, 1280
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret

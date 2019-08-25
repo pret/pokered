@@ -6,5 +6,5 @@ SFX_Shrink_3_Ch5:
 	square_note 15, 8, 7, 1280
 	square_note 15, 4, 7, 1152
 	square_note 15, 1, 7, 1024
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret

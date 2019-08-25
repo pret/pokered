@@ -8,5 +8,5 @@ SFX_Withdraw_Deposit_1_Ch5:
 	square_note 4, 15, 2, 1792
 	pitch_sweep 2, 2
 	square_note 15, 14, 2, 1792
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret

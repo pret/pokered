@@ -1,6 +1,6 @@
 SFX_Faint_Thud_Ch5:
 	square_note 15, 13, 1, 512
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret
 
 

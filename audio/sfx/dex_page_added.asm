@@ -4,7 +4,7 @@ SFX_Dex_Page_Added_Ch5:
 	square_note 15, 15, 0, 1264
 	pitch_sweep 1, 7
 	square_note 15, 15, 2, 1616
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret
 
 

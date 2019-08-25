@@ -4,5 +4,5 @@ SFX_Tink_2_Ch5:
 	square_note 4, 15, 2, 512
 	pitch_sweep 2, 2
 	square_note 8, 14, 2, 512
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret

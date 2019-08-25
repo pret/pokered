@@ -7,7 +7,7 @@ SFX_Psychic_M_Ch5:
 	square_note 8, 12, 4, 1984
 	square_note 15, 12, 4, 1985
 	square_note 15, 15, 2, 1984
-	pitch_sweep 0, 0
+	pitch_sweep 0, 8
 	sound_ret
 
 
