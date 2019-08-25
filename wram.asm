@@ -1319,7 +1319,7 @@ wAIItem:: ; cf05
 ; the item that the AI used
 	ds 1
 
-wUsedItemOnWhichPokemon:: ; cf05
+wUsedItemOnWhichPokemon:: ; cf06
 	ds 1
 
 wAnimSoundID:: ; cf07
@@ -1767,7 +1767,7 @@ wPlayerNumHits:: ; d074
 wPlayerBideAccumulatedDamage:: ; d074
 ; the amount of damage accumulated by the player while biding (2 bytes)
 
-wUnknownSerialCounter2:: ; d075
+wUnknownSerialCounter2:: ; d074
 ; 2 bytes
 
 	ds 4
@@ -3082,7 +3082,7 @@ wCardKeyDoorX:: ; d740
 wFirstLockTrashCanIndex:: ; d743
 	ds 1
 
-wSecondLockTrashCanIndex:: ; d743
+wSecondLockTrashCanIndex:: ; d744
 	ds 1
 
 	ds 2
