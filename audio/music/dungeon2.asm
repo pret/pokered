@@ -303,15 +303,15 @@ Music_Dungeon2_branch_7e9d1::
 
 
 Music_Dungeon2_Ch4::
-	dspeed 12
+	drum_speed 12
 
 Music_Dungeon2_branch_7e9dd::
-	dnote 12, 4
-	dnote 13, 4
-	dnote 12, 4
-	dnote 10, 4
-	dnote 12, 4
-	dnote 13, 4
-	dnote 11, 4
-	dnote 9, 4
+	drum_note 12, 4
+	drum_note 13, 4
+	drum_note 12, 4
+	drum_note 10, 4
+	drum_note 12, 4
+	drum_note 13, 4
+	drum_note 11, 4
+	drum_note 9, 4
 	sound_loop 0, Music_Dungeon2_branch_7e9dd

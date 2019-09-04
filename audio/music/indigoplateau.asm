@@ -226,19 +226,19 @@ Music_IndigoPlateau_branch_a6fe::
 
 
 Music_IndigoPlateau_Ch4::
-	dspeed 6
-	dnote 17, 16
-	dnote 17, 16
-	dnote 17, 16
-	dnote 17, 8
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
+	drum_speed 6
+	drum_note 17, 16
+	drum_note 17, 16
+	drum_note 17, 16
+	drum_note 17, 8
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
 
 Music_IndigoPlateau_branch_a728::
 	sound_call Music_IndigoPlateau_branch_a791
@@ -255,67 +255,67 @@ Music_IndigoPlateau_branch_a728::
 	sound_call Music_IndigoPlateau_branch_a7a8
 	sound_call Music_IndigoPlateau_branch_a77e
 	sound_call Music_IndigoPlateau_branch_a7a8
-	dnote 17, 16
-	dnote 17, 8
-	dnote 18, 8
-	dnote 17, 16
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 17, 1
-	dnote 17, 1
-	dnote 17, 1
-	dnote 17, 1
+	drum_note 17, 16
+	drum_note 17, 8
+	drum_note 18, 8
+	drum_note 17, 16
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 17, 1
+	drum_note 17, 1
+	drum_note 17, 1
+	drum_note 17, 1
 	sound_loop 0, Music_IndigoPlateau_branch_a728
 
 Music_IndigoPlateau_branch_a77e::
-	dnote 17, 4
-	dnote 18, 4
-	dnote 19, 4
-	dnote 18, 4
-	dnote 17, 4
-	dnote 18, 4
-	dnote 19, 4
-	dnote 19, 2
-	dnote 18, 2
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 19, 4
+	drum_note 18, 4
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 19, 4
+	drum_note 19, 2
+	drum_note 18, 2
 	sound_ret
 
 Music_IndigoPlateau_branch_a791::
-	dnote 17, 4
-	dnote 18, 4
-	dnote 19, 4
-	dnote 18, 4
-	dnote 17, 4
-	dnote 18, 4
-	dnote 19, 4
-	dnote 19, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 18, 1
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 19, 4
+	drum_note 18, 4
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 19, 4
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 18, 1
 	sound_ret
 
 Music_IndigoPlateau_branch_a7a8::
-	dnote 17, 4
-	dnote 18, 4
-	dnote 17, 4
-	dnote 18, 4
-	dnote 17, 4
-	dnote 17, 4
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 19, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
-	dnote 18, 1
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 17, 4
+	drum_note 18, 4
+	drum_note 17, 4
+	drum_note 17, 4
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 19, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
+	drum_note 18, 1
 	sound_ret

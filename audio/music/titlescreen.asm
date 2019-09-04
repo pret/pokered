@@ -460,218 +460,218 @@ Music_TitleScreen_branch_7e6e5::
 
 
 Music_TitleScreen_Ch4::
-	dspeed 6
+	drum_speed 6
 	rest 4
-	dnote 3, 1
-	dnote 3, 1
-	dnote 4, 1
-	dnote 4, 1
-	dspeed 12
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_speed 12
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 2, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dspeed 8
-	dnote 3, 2
-	dnote 4, 2
-	dnote 2, 2
-	dnote 3, 2
-	dnote 2, 2
-	dnote 1, 2
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 4, 2
+	drum_note 2, 2
+	drum_note 3, 2
+	drum_note 2, 2
+	drum_note 1, 2
 
 Music_TitleScreen_branch_7e716::
-	dspeed 12
-	dnote 2, 1
+	drum_speed 12
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 2, 1
-	dnote 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
 	rest 3
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e834
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 2, 1
-	dnote 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
 	rest 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	sound_call Music_TitleScreen_branch_7e842
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 1
-	dnote 2, 1
+	drum_note 2, 1
 	rest 1
 	sound_call Music_TitleScreen_branch_7e842
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 1
-	dspeed 6
-	dnote 3, 1
-	dnote 3, 1
-	dnote 4, 1
-	dnote 4, 1
-	dspeed 12
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_speed 12
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e842
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 3, 1
-	dnote 2, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	rest 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	sound_call Music_TitleScreen_branch_7e834
 	sound_call Music_TitleScreen_branch_7e842
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 3, 1
-	dnote 2, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	rest 1
-	dnote 4, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 4, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
+	drum_note 3, 1
 	rest 5
-	dnote 2, 1
-	dnote 4, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 4, 1
+	drum_note 2, 1
 	rest 1
-	dspeed 6
-	dnote 3, 1
-	dnote 3, 1
-	dnote 4, 1
-	dnote 4, 1
-	dspeed 12
-	dnote 1, 1
+	drum_speed 6
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 4, 1
+	drum_note 4, 1
+	drum_speed 12
+	drum_note 1, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 3, 1
-	dnote 2, 1
-	dnote 1, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 1, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
+	drum_note 3, 1
 	rest 5
-	dnote 3, 1
-	dnote 2, 1
-	dnote 3, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 3, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
+	drum_note 3, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 4, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 4, 1
 	rest 1
-	dnote 3, 1
-	dnote 2, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
+	drum_note 3, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 3
-	dnote 5, 1
+	drum_note 5, 1
 	rest 5
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
-	dnote 2, 1
-	dnote 1, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 1, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 1
-	dnote 1, 1
+	drum_note 1, 1
 	rest 1
-	dspeed 8
-	dnote 2, 4
-	dnote 3, 4
-	dnote 1, 4
-	dspeed 12
-	dnote 5, 1
+	drum_speed 8
+	drum_note 2, 4
+	drum_note 3, 4
+	drum_note 1, 4
+	drum_speed 12
+	drum_note 5, 1
 	rest 5
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 3, 1
-	dnote 2, 1
-	dnote 3, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 3, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 1, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 1, 1
 	rest 1
-	dnote 3, 1
-	dnote 2, 1
-	dspeed 8
-	dnote 2, 4
-	dnote 3, 4
-	dnote 2, 4
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_speed 8
+	drum_note 2, 4
+	drum_note 3, 4
+	drum_note 2, 4
 	sound_loop 0, Music_TitleScreen_branch_7e716
 
 Music_TitleScreen_branch_7e834::
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 2, 1
-	dnote 3, 1
-	dnote 2, 1
+	drum_note 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
 	rest 3
 	sound_ret
 
 Music_TitleScreen_branch_7e842::
-	dnote 2, 1
+	drum_note 2, 1
 	rest 3
-	dnote 2, 1
+	drum_note 2, 1
 	rest 5
-	dnote 3, 1
-	dnote 2, 1
-	dnote 2, 1
+	drum_note 3, 1
+	drum_note 2, 1
+	drum_note 2, 1
 	rest 3
 	sound_ret

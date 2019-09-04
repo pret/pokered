@@ -187,13 +187,13 @@ Music_Lavender_branch_bbb9::
 
 
 Music_Lavender_Ch4::
-	dspeed 12
+	drum_speed 12
 	rest 16
 	rest 16
 	rest 16
 	rest 16
 
 Music_Lavender_branch_bc26::
-	dnote 7, 8
-	dnote 7, 8
+	drum_note 7, 8
+	drum_note 7, 8
 	sound_loop 0, Music_Lavender_branch_bc26

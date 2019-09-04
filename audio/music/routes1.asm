@@ -310,95 +310,95 @@ Music_Routes1_branch_9cdd::
 
 
 Music_Routes1_Ch4::
-	dspeed 12
+	drum_speed 12
 	rest 4
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 4
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	rest 2
-	dnote 15, 2
-	dnote 15, 2
+	drum_note 15, 2
+	drum_note 15, 2
 	sound_loop 0, Music_Routes1_Ch4
 	sound_ret

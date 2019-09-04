@@ -711,7 +711,7 @@ Music_Dungeon3_Ch3::
 
 
 Music_Dungeon3_Ch4::
-	dspeed 12
+	drum_speed 12
 	rest 16
 	rest 16
 	rest 16

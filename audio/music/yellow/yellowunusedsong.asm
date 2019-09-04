@@ -203,124 +203,124 @@ Music_YellowUnusedSong_branch_83075::
 
 
 Music_YellowUnusedSong_Ch4::
-	dspeed 12
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 4
-	dnote 3, 4
+	drum_speed 12
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 3, 4
 
 Music_YellowUnusedSong_branch_830c3::
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 4
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 4
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dspeed 12
-	dnote 3, 4
-	dnote 3, 4
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 4
-	dnote 3, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_speed 12
+	drum_note 3, 4
+	drum_note 3, 4
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 4
+	drum_note 3, 4
 	sound_loop 0, Music_YellowUnusedSong_branch_830c3

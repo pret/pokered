@@ -144,29 +144,29 @@ Music_CinnabarMansion_branch_7ed80::
 
 
 Music_CinnabarMansion_Ch4::
-	dspeed 6
+	drum_speed 6
 	rest 16
 	rest 16
 	rest 16
 	rest 16
 
 Music_CinnabarMansion_branch_7edb5::
-	dnote 12, 2
-	dnote 12, 2
-	dnote 13, 4
-	dnote 12, 2
-	dnote 12, 2
-	dnote 13, 4
-	dnote 12, 2
-	dnote 12, 2
-	dnote 13, 4
-	dnote 12, 2
-	dnote 12, 2
-	dnote 14, 4
-	dnote 12, 2
-	dnote 12, 2
+	drum_note 12, 2
+	drum_note 12, 2
+	drum_note 13, 4
+	drum_note 12, 2
+	drum_note 12, 2
+	drum_note 13, 4
+	drum_note 12, 2
+	drum_note 12, 2
+	drum_note 13, 4
+	drum_note 12, 2
+	drum_note 12, 2
+	drum_note 14, 4
+	drum_note 12, 2
+	drum_note 12, 2
 	rest 2
 	rest 10
 	rest 8
-	dnote 14, 8
+	drum_note 14, 8
 	sound_loop 0, Music_CinnabarMansion_branch_7edb5

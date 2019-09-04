@@ -647,8 +647,8 @@ Audio3_note:
 	jr nz, Audio3_note_length ; if not noise channel
 	ld a, d
 	and $f0
-	cp $b0 ; is this command a dnote?
-	jr z, .dnote
+	cp $b0 ; is this command a drum_note?
+	jr z, .drum_note
 	jr nc, Audio3_note_length ; no
 
 	; this executes when on the noise channel and
@@ -657,7 +657,7 @@ Audio3_note:
 	; and the lower nybble is the length minus 1 (0-15)
 	; however, this doesn't work for instrument #2 because the command id
 	; is captured by the noise_note command (command id $2x)
-	; this essentially acts like a dnote command that is only 1 byte
+	; this essentially acts like a drum_note command that is only 1 byte
 	; instead of 2 and can only be used with instruments 1 and 3 through 10
 	; this is unused by the game
 	swap a
@@ -670,12 +670,12 @@ Audio3_note:
 	push bc
 	jr .playDnote
 
-.dnote
+.drum_note
 	ld a, d
 	and $f
 	push af
 	push bc
-	call Audio3_GetNextMusicByte ; get dnote instrument
+	call Audio3_GetNextMusicByte ; get drum_note instrument
 .playDnote
 	ld d, a
 	ld a, [wDisableChannelOutputWhenSfxEnds]

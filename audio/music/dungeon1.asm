@@ -597,27 +597,27 @@ Music_Dungeon1_branch_7e177::
 
 
 Music_Dungeon1_Ch4::
-	dspeed 12
+	drum_speed 12
 	rest 14
-	dnote 12, 1
-	dnote 12, 1
+	drum_note 12, 1
+	drum_note 12, 1
 
 Music_Dungeon1_branch_7e190::
 	sound_call Music_Dungeon1_branch_7e1f1
 	sound_loop 3, Music_Dungeon1_branch_7e190
-	dnote 13, 4
-	dnote 12, 4
-	dnote 13, 4
-	dnote 12, 2
-	dnote 12, 2
+	drum_note 13, 4
+	drum_note 12, 4
+	drum_note 13, 4
+	drum_note 12, 2
+	drum_note 12, 2
 
 Music_Dungeon1_branch_7e1a1::
 	sound_call Music_Dungeon1_branch_7e1f1
 	sound_loop 3, Music_Dungeon1_branch_7e1a1
-	dnote 13, 4
-	dnote 12, 4
-	dnote 13, 4
-	dnote 13, 4
+	drum_note 13, 4
+	drum_note 12, 4
+	drum_note 13, 4
+	drum_note 13, 4
 
 Music_Dungeon1_branch_7e1b0::
 	sound_call Music_Dungeon1_branch_7e1fa
@@ -628,12 +628,12 @@ Music_Dungeon1_branch_7e1ba::
 	sound_call Music_Dungeon1_branch_7e1fa
 	sound_loop 3, Music_Dungeon1_branch_7e1ba
 	sound_call Music_Dungeon1_branch_7e202
-	dnote 9, 4
-	dnote 10, 4
-	dnote 10, 4
+	drum_note 9, 4
+	drum_note 10, 4
+	drum_note 10, 4
 	rest 2
-	dnote 9, 2
-	dnote 13, 4
+	drum_note 9, 2
+	drum_note 13, 4
 
 Music_Dungeon1_branch_7e1cf::
 	rest 16
@@ -643,33 +643,33 @@ Music_Dungeon1_branch_7e1cf::
 Music_Dungeon1_branch_7e1d5::
 	sound_call Music_Dungeon1_branch_7e1fa
 	sound_loop 3, Music_Dungeon1_branch_7e1d5
-	dnote 12, 4
-	dnote 12, 4
-	dnote 12, 4
+	drum_note 12, 4
+	drum_note 12, 4
+	drum_note 12, 4
 	rest 2
-	dnote 12, 1
-	dnote 12, 1
+	drum_note 12, 1
+	drum_note 12, 1
 	sound_call Music_Dungeon1_branch_7e1f1
 	sound_call Music_Dungeon1_branch_7e1f1
 	sound_loop 0, Music_Dungeon1_branch_7e190
 
 Music_Dungeon1_branch_7e1f1::
-	dnote 13, 4
-	dnote 12, 4
-	dnote 13, 4
-	dnote 12, 4
+	drum_note 13, 4
+	drum_note 12, 4
+	drum_note 13, 4
+	drum_note 12, 4
 	sound_ret
 
 Music_Dungeon1_branch_7e1fa::
-	dnote 12, 1
-	dnote 12, 1
+	drum_note 12, 1
+	drum_note 12, 1
 	rest 10
-	dnote 14, 4
+	drum_note 14, 4
 	sound_ret
 
 Music_Dungeon1_branch_7e202::
-	dnote 9, 4
-	dnote 10, 4
-	dnote 10, 4
-	dnote 11, 4
+	drum_note 9, 4
+	drum_note 10, 4
+	drum_note 10, 4
+	drum_note 11, 4
 	sound_ret

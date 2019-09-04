@@ -92,16 +92,16 @@ note: MACRO
 ENDM
 
 ; arguments: instrument [1, 19], length [1, 16]
-dnote: MACRO
+drum_note: MACRO
 	db $B0 | (\2 - 1)
 	db \1
 ENDM
 
 ; arguments: instrument, length [1, 16]
-; like dnote but one 1 byte instead of 2
+; like drum_note but one 1 byte instead of 2
 ; can only be used with instruments 1-10, excluding 2
 ; unused
-dnote_short: MACRO
+drum_note_short: MACRO
 	db (\1 << 4) | (\2 - 1)
 ENDM
 
@@ -124,7 +124,7 @@ note_type: MACRO
 ENDM
 
 ; arguments: speed [0, 15]
-dspeed: MACRO
+drum_speed: MACRO
 	db $D0 | \1
 ENDM
 

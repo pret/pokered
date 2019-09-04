@@ -580,7 +580,7 @@ Music_Cities1_branch_acce::
 
 
 Music_Cities1_Ch4::
-	dspeed 12
+	drum_speed 12
 	sound_call Music_Cities1_branch_ad36
 
 Music_Cities1_branch_acf3::
@@ -591,67 +591,67 @@ Music_Cities1_branch_acf3::
 	sound_call Music_Cities1_branch_ad36
 	sound_call Music_Cities1_branch_ad5f
 	sound_call Music_Cities1_branch_ad52
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 4
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 4
 	sound_call Music_Cities1_branch_ad6e
 	sound_call Music_Cities1_branch_ad5f
 	sound_call Music_Cities1_branch_ad52
 	sound_call Music_Cities1_branch_ad6e
 	sound_call Music_Cities1_branch_ad52
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 2
-	dnote 6, 2
-	dnote 6, 6
-	dnote 6, 6
-	dnote 6, 4
-	dnote 6, 6
-	dnote 8, 6
-	dnote 8, 4
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 2
+	drum_note 6, 2
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 6, 4
+	drum_note 6, 6
+	drum_note 8, 6
+	drum_note 8, 4
 	sound_loop 0, Music_Cities1_Ch4
 
 Music_Cities1_branch_ad36::
-	dnote 8, 6
-	dnote 8, 6
-	dnote 8, 4
-	dnote 8, 6
-	dnote 8, 6
-	dnote 8, 2
-	dnote 8, 2
+	drum_note 8, 6
+	drum_note 8, 6
+	drum_note 8, 4
+	drum_note 8, 6
+	drum_note 8, 6
+	drum_note 8, 2
+	drum_note 8, 2
 	sound_ret
 
 Music_Cities1_branch_ad45::
-	dnote 8, 6
-	dnote 8, 6
-	dnote 8, 4
-	dnote 8, 6
-	dnote 8, 6
-	dnote 8, 4
+	drum_note 8, 6
+	drum_note 8, 6
+	drum_note 8, 4
+	drum_note 8, 6
+	drum_note 8, 6
+	drum_note 8, 4
 	sound_ret
 
 Music_Cities1_branch_ad52::
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 4
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 4
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 4
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 4
 	sound_ret
 
 Music_Cities1_branch_ad5f::
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 4
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 2
-	dnote 6, 2
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 4
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 2
+	drum_note 6, 2
 	sound_ret
 
 Music_Cities1_branch_ad6e::
-	dnote 6, 6
-	dnote 6, 6
-	dnote 7, 2
-	dnote 7, 2
+	drum_note 6, 6
+	drum_note 6, 6
+	drum_note 7, 2
+	drum_note 7, 2
 	sound_ret

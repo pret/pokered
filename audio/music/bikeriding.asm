@@ -644,7 +644,7 @@ Music_BikeRiding_branch_7dd17::
 
 
 Music_BikeRiding_Ch4::
-	dspeed 12
+	drum_speed 12
 	rest 2
 
 Music_BikeRiding_branch_7de6a::
@@ -671,34 +671,34 @@ Music_BikeRiding_branch_7de6a::
 
 Music_BikeRiding_branch_7dea7::
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	sound_ret
 
 Music_BikeRiding_branch_7deb4::
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
-	dnote 16, 2
-	dnote 16, 2
+	drum_note 16, 2
+	drum_note 16, 2
+	drum_note 16, 2
 	sound_ret
 
 Music_BikeRiding_branch_7dec2::
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 2
+	drum_note 16, 2
 	rest 2
-	dnote 16, 1
-	dnote 16, 1
+	drum_note 16, 1
+	drum_note 16, 1
 	sound_ret

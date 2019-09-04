@@ -325,101 +325,101 @@ Music_Routes2_branch_9e9e::
 
 
 Music_Routes2_Ch4::
-	dspeed 12
-	dnote 3, 2
+	drum_speed 12
+	drum_note 3, 2
 	rest 2
-	dnote 3, 1
+	drum_note 3, 1
 	rest 5
-	dnote 3, 1
-	dnote 3, 1
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
 	rest 2
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
-	dnote 3, 3
-	dspeed 12
-	dnote 3, 1
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
+	drum_note 3, 3
+	drum_speed 12
+	drum_note 3, 1
 	rest 3
-	dnote 3, 2
+	drum_note 3, 2
 	rest 2
-	dnote 3, 2
+	drum_note 3, 2
 	rest 4
-	dnote 3, 1
-	dnote 3, 1
-	dnote 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
 	rest 2
-	dnote 3, 2
+	drum_note 3, 2
 	rest 2
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
-	dnote 3, 3
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
+	drum_note 3, 3
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
 	rest 3
-	dspeed 12
-	dnote 3, 1
+	drum_speed 12
+	drum_note 3, 1
 	rest 5
-	dnote 3, 1
-	dnote 3, 1
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
 	rest 2
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
 	rest 3
-	dspeed 12
-	dnote 3, 1
+	drum_speed 12
+	drum_note 3, 1
 	rest 3
-	dnote 3, 2
+	drum_note 3, 2
 	rest 2
-	dnote 3, 2
+	drum_note 3, 2
 	rest 4
-	dnote 3, 1
-	dnote 3, 1
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
 	rest 2
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
 	rest 3
-	dnote 3, 3
-	dnote 3, 3
-	dnote 3, 3
+	drum_note 3, 3
+	drum_note 3, 3
+	drum_note 3, 3
 	rest 3
-	dspeed 12
-	dnote 3, 1
+	drum_speed 12
+	drum_note 3, 1
 	rest 5
-	dnote 3, 1
-	dnote 3, 1
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
+	drum_note 3, 1
+	drum_note 3, 1
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
 	rest 2
-	dspeed 8
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 2
-	dnote 3, 3
+	drum_speed 8
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 2
+	drum_note 3, 3
 	rest 3
-	dnote 3, 3
+	drum_note 3, 3
 	rest 3
 	sound_loop 0, Music_Routes2_Ch4
 	sound_ret

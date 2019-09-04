@@ -283,23 +283,23 @@ Music_Vermilion_branch_baa8::
 
 
 Music_Vermilion_Ch4::
-	dspeed 12
+	drum_speed 12
 
 Music_Vermilion_branch_bb0e::
 	sound_call Music_Vermilion_branch_bb3f
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 1
 	sound_loop 4, Music_Vermilion_branch_bb0e
 	sound_call Music_Vermilion_branch_bb3f
 	sound_call Music_Vermilion_branch_bb3f
@@ -308,16 +308,16 @@ Music_Vermilion_branch_bb0e::
 	sound_loop 0, Music_Vermilion_branch_bb0e
 
 Music_Vermilion_branch_bb3f::
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
-	dnote 6, 2
-	dnote 6, 1
-	dnote 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
+	drum_note 6, 2
+	drum_note 6, 1
+	drum_note 6, 1
 	sound_ret
