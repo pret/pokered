@@ -201,9 +201,9 @@ OaksLabScript8:
 	ld de, .MiddleBallMovement1
 	ld a, [wYCoord]
 	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3
+	jr z, .moveBlue
 	ld de, .MiddleBallMovement2
-	jr .asm_1ccf3
+	jr .moveBlue
 
 .MiddleBallMovement1
 	db NPC_MOVEMENT_DOWN
@@ -225,9 +225,9 @@ OaksLabScript8:
 	ld de, .RightBallMovement1
 	ld a, [wYCoord]
 	cp $4 ; is the player standing below the table?
-	jr z, .asm_1ccf3
+	jr z, .moveBlue
 	ld de, .RightBallMovement2
-	jr .asm_1ccf3
+	jr .moveBlue
 
 .RightBallMovement1
 	db NPC_MOVEMENT_DOWN
@@ -251,7 +251,7 @@ OaksLabScript8:
 	ld de, .LeftBallMovement1
 	ld a, [wXCoord]
 	cp $9 ; is the player standing to the right of the table?
-	jr nz, .asm_1ccf3
+	jr nz, .moveBlue
 	push hl
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -270,7 +270,7 @@ OaksLabScript8:
 	ld [hl], $9
 	ld de, .LeftBallMovement2 ; the rival is not currently onscreen, so account for that
 	pop hl
-	jr .asm_1ccf3
+	jr .moveBlue
 
 .LeftBallMovement1
 	db NPC_MOVEMENT_DOWN
@@ -279,7 +279,7 @@ OaksLabScript8:
 	db NPC_MOVEMENT_RIGHT
 	db $FF
 
-.asm_1ccf3
+.moveBlue
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
@@ -304,17 +304,17 @@ OaksLabScript9:
 	call DisplayTextID
 	ld a, [wRivalStarterBallSpriteIndex]
 	cp $2
-	jr nz, .asm_1cd28
+	jr nz, .rivalDidNotChoseBall1
 	ld a, HS_STARTER_BALL_1
-	jr .asm_1cd32
-.asm_1cd28
+	jr .hideBallAndContinue
+.rivalDidNotChoseBall1
 	cp $3
-	jr nz, .asm_1cd30
+	jr nz, .rivalChoseBall3
 	ld a, HS_STARTER_BALL_2
-	jr .asm_1cd32
-.asm_1cd30
+	jr .hideBallAndContinue
+.rivalChoseBall3
 	ld a, HS_STARTER_BALL_3
-.asm_1cd32
+.hideBallAndContinue
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	call Delay3
@@ -473,7 +473,7 @@ OaksLabScript13:
 OaksLabScript14:
 	ld a, [wd730]
 	bit 0, a
-	jr nz, .asm_1ce8c
+	jr nz, .checkRivalPosition
 	ld a, HS_OAKS_LAB_RIVAL
 	ld [wMissableObjectIndex], a
 	predef HideObject
@@ -484,21 +484,21 @@ OaksLabScript14:
 	ld [wOaksLabCurScript], a
 	jr .done
 ; make the player keep facing the rival as he walks away
-.asm_1ce8c
+.checkRivalPosition
 	ld a, [wNPCNumScriptedSteps]
 	cp $5
-	jr nz, .asm_1cea8
+	jr nz, .turnPlayerDown
 	ld a, [wXCoord]
 	cp $4
-	jr nz, .asm_1cea1
+	jr nz, .turnPlayerLeft
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + 9], a
 	jr .done
-.asm_1cea1
+.turnPlayerLeft
 	ld a, SPRITE_FACING_LEFT
 	ld [wSpriteStateData1 + 9], a
 	jr .done
-.asm_1cea8
+.turnPlayerDown
 	cp $4
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
@@ -767,17 +767,17 @@ OaksLabText1:
 	jr nz, .asm_1d0de
 	ld hl, OaksLabGaryText1
 	call PrintText
-	jr .asm_1d0f0
+	jr .done
 .asm_1d0de
 	bit 2, a
 	jr nz, .asm_1d0ea
 	ld hl, OaksLabText40
 	call PrintText
-	jr .asm_1d0f0
+	jr .done
 .asm_1d0ea
 	ld hl, OaksLabText41
 	call PrintText
-.asm_1d0f0
+.done
 	jp TextScriptEnd
 
 OaksLabGaryText1:
