@@ -54,12 +54,12 @@ CeladonGymText_48963:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM21
-	jr .asm_4898c
+	jr .gymVictory
 .BagFull
 	ld a, $b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_4898c
+.gymVictory
 	ld hl, wObtainedBadges
 	set 3, [hl]
 	ld hl, wBeatGymFlags
@@ -151,17 +151,17 @@ CeladonGymTrainerHeader6:
 CeladonGymText1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_ERIKA
-	jr z, .asm_48a2d
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM21
-	jr nz, .asm_48a25
+	jr nz, .afterVictory
 	call z, CeladonGymText_48963
 	call DisableWaitingAfterTextDisplay
-	jr .asm_48a5b
-.asm_48a25
+	jr .done
+.afterVictory
 	ld hl, CeladonGymText_48a68
 	call PrintText
-	jr .asm_48a5b
-.asm_48a2d
+	jr .done
+.beginBattle
 	ld hl, CeladonGymText_48a5e
 	call PrintText
 	ld hl, wd72d
@@ -179,7 +179,7 @@ CeladonGymText1:
 	ld a, $3
 	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
-.asm_48a5b
+.done
 	jp TextScriptEnd
 
 CeladonGymText_48a5e:

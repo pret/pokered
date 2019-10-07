@@ -54,12 +54,12 @@ PewterGymScript_5c3df:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
-	jr .asm_5c408
+	jr .gymVictory
 .BagFull
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_5c408
+.gymVictory
 	ld hl, wObtainedBadges
 	set 0, [hl]
 	ld hl, wBeatGymFlags
@@ -101,17 +101,17 @@ PewterGymTrainerHeader0:
 PewterGymText1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_BROCK
-	jr z, .asm_5c46a
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM34
-	jr nz, .asm_5c462
+	jr nz, .gymVictory
 	call z, PewterGymScript_5c3df
 	call DisableWaitingAfterTextDisplay
-	jr .asm_5c49b
-.asm_5c462
+	jr .done
+.gymVictory
 	ld hl, PewterGymText_5c4a3
 	call PrintText
-	jr .asm_5c49b
-.asm_5c46a
+	jr .done
+.beginBattle
 	ld hl, PewterGymText_5c49e
 	call PrintText
 	ld hl, wd72d
@@ -131,7 +131,7 @@ PewterGymText1:
 	ld a, $3
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
-.asm_5c49b
+.done
 	jp TextScriptEnd
 
 PewterGymText_5c49e:

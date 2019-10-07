@@ -54,12 +54,12 @@ SaffronGymText_5d068:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM46
-	jr .asm_5d091
+	jr .gymVictory
 .BagFull
 	ld a, $c
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_5d091
+.gymVictory
 	ld hl, wObtainedBadges
 	set 5, [hl]
 	ld hl, wBeatGymFlags
@@ -152,17 +152,17 @@ SaffronGymTrainerHeader6:
 SaffronGymText1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_SABRINA
-	jr z, .asm_5d134
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM46
-	jr nz, .asm_5d12c
+	jr nz, .afterVictory
 	call z, SaffronGymText_5d068
 	call DisableWaitingAfterTextDisplay
-	jr .asm_5d15f
-.asm_5d12c
+	jr .done
+.afterVictory
 	ld hl, SaffronGymText_5d16e
 	call PrintText
-	jr .asm_5d15f
-.asm_5d134
+	jr .done
+.beginBattle
 	ld hl, SaffronGymText_5d162
 	call PrintText
 	ld hl, wd72d
@@ -179,7 +179,7 @@ SaffronGymText1:
 	ld [wGymLeaderNo], a
 	ld a, $3
 	ld [wSaffronGymCurScript], a
-.asm_5d15f
+.done
 	jp TextScriptEnd
 
 SaffronGymText_5d162:

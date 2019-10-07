@@ -54,12 +54,12 @@ FuchsiaGymScript3_75497:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM06
-	jr .asm_754c0
+	jr .gymVictory
 .BagFull
 	ld a, $b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-.asm_754c0
+.gymVictory
 	ld hl, wObtainedBadges
 	set 4, [hl]
 	ld hl, wBeatGymFlags
@@ -142,17 +142,17 @@ FuchsiaGymTrainerHeader5:
 FuchsiaGymText1:
 	TX_ASM
 	CheckEvent EVENT_BEAT_KOGA
-	jr z, .asm_181b6
+	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM06
-	jr nz, .asm_adc3b
+	jr nz, .afterVictory
 	call z, FuchsiaGymScript3_75497
 	call DisableWaitingAfterTextDisplay
-	jr .asm_e84c6
-.asm_adc3b
+	jr .done
+.afterVictory
 	ld hl, KogaExplainToxicText
 	call PrintText
-	jr .asm_e84c6
-.asm_181b6
+	jr .done
+.beginBattle
 	ld hl, KogaBeforeBattleText
 	call PrintText
 	ld hl, wd72d
@@ -171,7 +171,7 @@ FuchsiaGymText1:
 	ld [hJoyHeld], a
 	ld a, $3
 	ld [wFuchsiaGymCurScript], a
-.asm_e84c6
+.done
 	jp TextScriptEnd
 
 KogaBeforeBattleText:

@@ -764,17 +764,17 @@ OaksLab_TextPointers2:
 OaksLabText1:
 	TX_ASM
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
-	jr nz, .asm_1d0de
+	jr nz, .beforeChooseMon
 	ld hl, OaksLabGaryText1
 	call PrintText
 	jr .done
-.asm_1d0de
+.beforeChooseMon
 	bit 2, a
-	jr nz, .asm_1d0ea
+	jr nz, .afterChooseMon
 	ld hl, OaksLabText40
 	call PrintText
 	jr .done
-.asm_1d0ea
+.afterChooseMon
 	ld hl, OaksLabText41
 	call PrintText
 .done
