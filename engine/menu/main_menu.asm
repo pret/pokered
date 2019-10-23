@@ -329,11 +329,11 @@ SpecialEnterMap:
 	jp EnterMap
 
 ContinueText:
-	db "CONTINUE", $4e
+	db "DAUxRIGI", $4e
 
 NewGameText:
-	db   "NEW GAME"
-	next "OPTION@"
+	db   "NOVA LUDO"
+	next "AGORDO@"
 
 CableClubOptionsText:
 	db   "TRADE CENTER"
