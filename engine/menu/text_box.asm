@@ -524,42 +524,42 @@ TwoOptionMenu_RestoreScreenTiles:
 TwoOptionMenuStrings:
 	db 4,3,0
 	dw .YesNoMenu
-	db 6,3,0
+	db 10,3,0
 	dw .NorthWestMenu
-	db 6,3,0
+	db 8,3,0
 	dw .SouthEastMenu
 	db 6,3,0
 	dw .YesNoMenu
-	db 6,3,0
+	db 8,3,0
 	dw .NorthEastMenu
-	db 7,3,0
+	db 11,3,0
 	dw .TradeCancelMenu
-	db 7,4,1
+	db 8,4,1
 	dw .HealCancelMenu
 	db 4,3,0
 	dw .NoYesMenu
 
 .NoYesMenu
-	db   "NO"
-	next "YES@"
+	db   "NE"
+	next "JES@"
 .YesNoMenu
-	db   "YES"
-	next "NO@"
+	db   "JES"
+	next "NE@"
 .NorthWestMenu
-	db   "NORTH"
-	next "WEST@"
+	db   "NORDO"
+	next "OKSIDENTO@"
 .SouthEastMenu
-	db   "SOUTH"
-	next "EAST@"
+	db   "SUDO"
+	next "ORIENTO@"
 .NorthEastMenu
-	db   "NORTH"
-	next "EAST@"
+	db   "NORDO"
+	next "ORIENTO@"
 .TradeCancelMenu
-	db   "TRADE"
-	next "CANCEL@"
+	db   "INTERSxANIGxI"
+	next "NULIGI@"
 .HealCancelMenu
-	db   "HEAL"
-	next "CANCEL@"
+	db   "KURACI"
+	next "NULIGI@"
 
 DisplayFieldMoveMonMenu:
 	xor a
