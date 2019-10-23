@@ -4,13 +4,13 @@ _OakSpeechText1::
 	cont "mondo de #MON!"
 
 	para "Mia nomo"
-    line "estas OAK!"
-	cont "homoj nomas min"
+	line "estas OAK!"
+	cont "Homoj nomas min"
 	cont "la #MON PROF!"
 	prompt
 
 _OakSpeechText2A::
-	text "en cxi tiu mondo"
+	text "En cxi tiu mondo"
 	line "logxas estajxoj"
 	cont "nomata"
 	cont "#MON!@@"
@@ -19,7 +19,7 @@ _OakSpeechText2B::
 	text $51,"Por iuj homoj,"
 	line "#MON estas"
 	cont "dorlobestoj."
-    cont "Aliaj uzas"
+	cont "Aliaj uzas"
 	cont "sin por bataloj."
 
 	para "Min mem..."
@@ -38,7 +38,7 @@ _IntroduceRivalText::
 	line "nepo. Li estis"
 	cont "via rivalo"
 	cont "de kiam"
-    cont "vi estis bebo."
+	cont "vi estis bebo."
 
 	para "...Erm, kio estas"
 	line "lia nomo refoje?"
@@ -47,7 +47,7 @@ _IntroduceRivalText::
 _OakSpeechText3::
 	text "<PLAYER>!"
 
-	para "Via #MON legend"
+	para "Via #MON legendo"
 	line "komencos frue!"
 
 	para "mondo de revoj"
