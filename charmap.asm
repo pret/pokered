@@ -263,3 +263,18 @@ charmap "6", $FC
 charmap "7", $FD
 charmap "8", $FE
 charmap "9", $FF
+
+;esperanto characters
+charmap "Cx", $C0
+charmap "Gx", $C1
+charmap "Hx", $C2
+charmap "Jx", $C3
+charmap "Sx", $C4
+charmap "Ux", $C5
+
+charmap "cx", $D0
+charmap "gx", $D1
+charmap "hx", $D2
+charmap "jx", $D3
+charmap "sx", $D4
+charmap "ux", $D5
