@@ -472,10 +472,10 @@ PrintNamingText:
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
-	jr z, .notNickname
+	jr z, .placeString ; modified for esperanto translation
 	ld de, RivalsTextString
 	dec a
-	jr z, .notNickname
+	jr z, .placeString ; modified for esperanto translation
 	ld a, [wcf91]
 	ld [wMonPartySpriteSpecies], a
 	push af
@@ -490,23 +490,23 @@ PrintNamingText:
 	ld [hl], $c9
 	coord hl, 1, 3
 	ld de, NicknameTextString
-	jr .placeString
-.notNickname
-	call PlaceString
-	ld l, c
-	ld h, b
-	ld de, NameTextString
+;	jr .placeString
+;.notNickname
+;	call PlaceString
+;	ld l, c
+;	ld h, b
+;	ld de, NameTextString
 .placeString
 	jp PlaceString
 
 YourTextString:
-	db "VIA @"
+	db "VIA NOMO?@"
 
 RivalsTextString:
-	db "RIVAL's @" ; TODO
+	db "NOMO DE RIVALO?@" ; TODO
 
-NameTextString:
-	db "NOMO?@"
+;NameTextString:
+;	db "NOMO?@"
 
 NicknameTextString:
 	db "APUDNOMO?@"
