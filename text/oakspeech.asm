@@ -1,57 +1,57 @@
 _OakSpeechText1::
-	;text "Saluton!"
-    text "CxGxHxJxSxUx"
-    line "cxgxhxjxsxux"
-	;line "Welcome to the"
-	cont "world of #MON!"
+	text "Saluton!"
+	line "Bonvenon al la"
+	cont "mondo de #MON!"
 
-	para "My name is OAK!"
-	line "People call me"
-	cont "the #MON PROF!"
+	para "Mia nomo"
+    line "estas OAK!"
+	cont "homoj nomas min"
+	cont "la #MON PROF!"
 	prompt
 
 _OakSpeechText2A::
-	text "This world is"
-	line "inhabited by"
-	cont "creatures called"
+	text "en cxi tiu mondo"
+	line "logxas estajxoj"
+	cont "nomata"
 	cont "#MON!@@"
 
 _OakSpeechText2B::
-	text $51,"For some people,"
-	line "#MON are"
-	cont "pets. Others use"
-	cont "them for fights."
+	text $51,"Por iuj homoj,"
+	line "#MON estas"
+	cont "dorlobestoj."
+    cont "Aliaj uzas"
+	cont "sin por bataloj."
 
-	para "Myself..."
+	para "Min mem..."
 
-	para "I study #MON"
-	line "as a profession."
+	para "Mi studas #MON"
+	line "kiel profesio."
 	prompt
 
 _IntroducePlayerText::
-	text "First, what is"
-	line "your name?"
+	text "Unuan, kio estas"
+	line "via nomo?"
 	prompt
 
 _IntroduceRivalText::
-	text "This is my grand-"
-	line "son. He's been"
-	cont "your rival since"
-	cont "you were a baby."
+	text "Cxi tiu estas mia"
+	line "nepo. Li estis"
+	cont "via rivalo"
+	cont "de kiam"
+    cont "vi estis bebo."
 
-	para "...Erm, what is"
-	line "his name again?"
+	para "...Erm, kio estas"
+	line "lia nomo refoje?"
 	prompt
 
 _OakSpeechText3::
 	text "<PLAYER>!"
 
-	para "Your very own"
-	line "#MON legend is"
-	cont "about to unfold!"
+	para "Via #MON legend"
+	line "komencos frue!"
 
-	para "A world of dreams"
-	line "and adventures"
-	cont "with #MON"
-	cont "awaits! Let's go!"
+	para "mondo de revoj"
+	line "kaj aventuroj"
+	cont "kun #MON"
+	cont "atendas! Ni iru!"
 	done

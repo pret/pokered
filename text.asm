@@ -1905,14 +1905,16 @@ _DoYouWantToNicknameText::
 	done
 
 _YourNameIsText::
-	text "Right! So your"
-	line "name is <PLAYER>!"
+	text "Gxusta!"
+    line "do via nomo estas"
+    cont "<PLAYER>!"
 	prompt
 
 _HisNameIsText::
-	text "That's right! I"
-	line "remember now! His"
-	cont "name is <RIVAL>!"
+	text "tio estas gxusta!"
+	line "Mi memoras nun!"
+    cont "Lia nomo estas"
+	cont "<RIVAL>!"
 	prompt
 
 _WillBeTradedText::
