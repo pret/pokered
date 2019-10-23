@@ -1,35 +1,30 @@
-# Pokémon Red and Blue
+# Pokémon Red and Blue Esperanto translation
 
-This is a disassembly of Pokémon Red and Blue.
+This is an Esperanto translation of Pokémon Red and Blue,
+based on [this dissasembly](https://github.com/pret/pokered).
 
+<!-- TODO: updata this when more stable
 It builds the following roms:
 
 * Pokemon Red (UE) [S][!].gb  `md5: 3d45c1ee9abd5738df46d2bdda8b57dc`
 * Pokemon Blue (UE) [S][!].gb `md5: 50927e843568814f7ed45ec4f944bd8b`
 
+-->
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
+# translation information
 
-## See also
+## character set
 
-* Disassembly of [**Pokémon Yellow**][pokeyellow]
-* Disassembly of [**Pokémon Gold**][pokegold]
-* Disassembly of [**Pokémon Crystal**][pokecrystal]
-* Disassembly of [**Pokémon Pinball**][pokepinball]
-* Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Ruby**][pokeruby]
-* Disassembly of [**Pokémon Fire Red**][pokefirered]
-* Disassembly of [**Pokémon Emerald**][pokeemerald]
-* Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
+The bitmap graphics are generated from [gfs/fonts.png](gfx/fonts.png).
 
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokegold]: https://github.com/pret/pokegold
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokeruby]: https://github.com/pret/pokeruby
-[pokefirered]: https://github.com/pret/pokefirered
-[pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/6EuWgX9
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+Each character is 8x8 pixels and normally includes whitespace to the right and
+bottom.
+
+[This site](https://bulbapedia.bulbagarden.net/wiki/Character_encoding_in_Generation_I)
+describes the conversion from bytes to characters. esperanto characters are
+currently stored in 0xC0-0xDF.
+
+Strings are written useing the
+[X-system](https://en.wikipedia.org/wiki/Esperanto_orthography#X-system).
+This is achieved by mapping sequences of characters in [charmap.asm](charmap.asm).
