@@ -2,21 +2,21 @@
 DrawStartMenu:
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
-	coord hl, 10, 0
+	coord hl, 8, 0 ; modified for eo translation
 	ld b, $0e
-	ld c, $08
+	ld c, $0a ; modified for eo translation
 	jr nz, .drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
-	coord hl, 10, 0
+	coord hl, 8, 0 ; modified for eo translation
 	ld b, $0c
-	ld c, $08
+	ld c, $0a ; modified for eo translation
 .drawTextBoxBorder
 	call TextBoxBorder
 	ld a, D_DOWN | D_UP | START | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $02
 	ld [wTopMenuItemY], a ; Y position of first menu choice
-	ld a, $0b
+	ld a, $09 ; modified for eo translation
 	ld [wTopMenuItemX], a ; X position of first menu choice
 	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
 	ld [wCurrentMenuItem], a
@@ -25,7 +25,7 @@ DrawStartMenu:
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wd730
 	set 6, [hl] ; no pauses between printing each letter
-	coord hl, 12, 2
+	coord hl, 10, 2 ; modified for eo translation
 	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokedex
 	ld a, $06
@@ -66,19 +66,19 @@ StartMenuPokemonText:
 	db "POKéMON@"
 
 StartMenuItemText:
-	db "ITEM@"
+	db "ELEMENTO@"
 
 StartMenuSaveText:
-	db "SAVE@"
+	db "KONSERVI@"
 
 StartMenuResetText:
-	db "RESET@"
+	db "REKOMENCIGI@"
 
 StartMenuExitText:
-	db "EXIT@"
+	db "ELIRI@"
 
 StartMenuOptionText:
-	db "OPTION@"
+	db "AGORDO@"
 
 PrintStartMenuItem:
 	push hl
