@@ -1,37 +1,39 @@
 _MomWakeUpText::
-	text "MOM: Right."
-	line "All boys leave"
-	cont "home some day."
-	cont "It said so on TV."
+	text "PANJO: Gxusta."
+	line "Cxio knaboj deiras"
+	cont "hejmo iam."
+	cont "Gxi diris Gxin"
+    cont "de TV."
 
-	para "PROF.OAK, next"
-	line "door, is looking"
-	cont "for you."
+	para "PROF.OAK, sekva"
+	line "pordo, sercxas"
+	cont "por vi."
 	done
 
 _MomHealText1::
-	text "MOM: <PLAYER>!"
-	line "You should take a"
-	cont "quick rest."
+	text "PANJO: <PLAYER>!"
+	line "Vi devus"
+	cont "kusxigxi rapide"
 	prompt
 
 _MomHealText2::
-	text "MOM: Oh good!"
-	line "You and your"
-	cont "#MON are"
-	cont "looking great!"
-	cont "Take care now!"
+	text "MOM: Bona!"
+	line "Vi kaj via"
+	cont "#MON estas"
+	cont "bonega!"
+	cont "Zorgu nin!"
 	done
 
 _StandByMeText::
-	text "There's a movie"
-	line "on TV. Four boys"
-	cont "are walking on"
-	cont "railroad tracks."
+	text "Estas filmo sur"
+	line "TV. Kvar Knaboj"
+	cont "marsxas sur"
+	cont "fervoja trakoj."
 
-	para "I better go too."
+	para "Mi devus"
+    line "iri ankaux."
 	done
 
 _TVWrongSideText::
-	text "Oops, wrong side."
+	text "Ups, malgxusta flanko."
 	done
