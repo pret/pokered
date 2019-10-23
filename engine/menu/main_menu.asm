@@ -579,19 +579,22 @@ DisplayOptionMenu:
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText:
-	db   "TEXT SPEED"
-	next " FAST  MEDIUM SLOW@"
+	db   "TEXTO RAPIDO"
+   ;next " FAST  MEDIUM SLOW@"
+	next " RAPID MEZA   MRAP@"
 
 BattleAnimationOptionText:
-	db   "BATTLE ANIMATION"
-	next " ON       OFF@"
+	db   "BATALO ANIMACIO"
+   ;next " ON       OFF@"
+	next " JES      NE@"
 
 BattleStyleOptionText:
-	db   "BATTLE STYLE"
-	next " SHIFT    SET@"
+	db   "BATALO STILO"
+   ;next " SHIFT    SET@"
+	next " SxANGxI    FIKSO@"
 
 OptionMenuCancelText:
-	db "CANCEL@"
+	db "NULIGI@"
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions:
