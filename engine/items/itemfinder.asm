@@ -24,6 +24,8 @@ HiddenItemNear:
 	inc hl
 	jr nz, .loop ; if the item has already been obtained
 ; check if the item is within 4-5 tiles (depending on the direction of item)
+;There is a bug in this code at the two "jr nc, .loop" lines.
+;If an item has an x or y coord at 0, the carry bit will not be set and the item will not be detected.
 	ld a, [wYCoord]
 	call Sub5ClampTo0
 	cp d
