@@ -101,10 +101,10 @@ wChannelFlags1:: ; c02e
 wChannelFlags2:: ; c036
 	ds 8
 
-wChannelDuties:: ; c03e
+wChannelDutyCycles:: ; c03e
 	ds 8
 
-wChannelDutyCycles:: ; c046
+wChannelDutyCyclePatterns:: ; c046
 	ds 8
 
 wChannelVibratoDelayCounters:: ; c04e
@@ -126,28 +126,28 @@ wChannelVibratoDelayCounterReloadValues:: ; c06e
 ; delay of the beginning of the vibrato from the start of the note
 	ds 8
 
-wChannelPitchBendLengthModifiers:: ; c076
+wChannelPitchSlideLengthModifiers:: ; c076
 	ds 8
 
-wChannelPitchBendFrequencySteps:: ; c07e
+wChannelPitchSlideFrequencySteps:: ; c07e
 	ds 8
 
-wChannelPitchBendFrequencyStepsFractionalPart:: ; c086
+wChannelPitchSlideFrequencyStepsFractionalPart:: ; c086
 	ds 8
 
-wChannelPitchBendCurrentFrequencyFractionalPart:: ; c08e
+wChannelPitchSlideCurrentFrequencyFractionalPart:: ; c08e
 	ds 8
 
-wChannelPitchBendCurrentFrequencyHighBytes:: ; c096
+wChannelPitchSlideCurrentFrequencyHighBytes:: ; c096
 	ds 8
 
-wChannelPitchBendCurrentFrequencyLowBytes:: ; c09e
+wChannelPitchSlideCurrentFrequencyLowBytes:: ; c09e
 	ds 8
 
-wChannelPitchBendTargetFrequencyHighBytes:: ; c0a6
+wChannelPitchSlideTargetFrequencyHighBytes:: ; c0a6
 	ds 8
 
-wChannelPitchBendTargetFrequencyLowBytes:: ; c0ae
+wChannelPitchSlideTargetFrequencyLowBytes:: ; c0ae
 	ds 8
 
 wChannelNoteDelayCounters:: ; c0b6

@@ -1,4 +1,4 @@
-SFX_Go_Inside_1_Ch7:
-	noisenote 9, 15, 1, 68
-	noisenote 8, 13, 1, 67
-	endchannel
+SFX_Go_Inside_1_Ch8:
+	noise_note 9, 15, 1, 68
+	noise_note 8, 13, 1, 67
+	sound_ret

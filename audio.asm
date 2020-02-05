@@ -23,25 +23,25 @@ INCLUDE "audio/headers/musicheaders3.asm"
 
 SECTION "Sound Effects 1", ROMX ; BANK $02
 
-INCLUDE "audio/sfx/snare1_1.asm"
-INCLUDE "audio/sfx/snare2_1.asm"
-INCLUDE "audio/sfx/snare3_1.asm"
-INCLUDE "audio/sfx/snare4_1.asm"
-INCLUDE "audio/sfx/snare5_1.asm"
-INCLUDE "audio/sfx/triangle1_1.asm"
-INCLUDE "audio/sfx/triangle2_1.asm"
-INCLUDE "audio/sfx/snare6_1.asm"
-INCLUDE "audio/sfx/snare7_1.asm"
-INCLUDE "audio/sfx/snare8_1.asm"
-INCLUDE "audio/sfx/snare9_1.asm"
-INCLUDE "audio/sfx/cymbal1_1.asm"
-INCLUDE "audio/sfx/cymbal2_1.asm"
-INCLUDE "audio/sfx/cymbal3_1.asm"
-INCLUDE "audio/sfx/muted_snare1_1.asm"
-INCLUDE "audio/sfx/triangle3_1.asm"
-INCLUDE "audio/sfx/muted_snare2_1.asm"
-INCLUDE "audio/sfx/muted_snare3_1.asm"
-INCLUDE "audio/sfx/muted_snare4_1.asm"
+INCLUDE "audio/sfx/noise_instrument01_1.asm"
+INCLUDE "audio/sfx/noise_instrument02_1.asm"
+INCLUDE "audio/sfx/noise_instrument03_1.asm"
+INCLUDE "audio/sfx/noise_instrument04_1.asm"
+INCLUDE "audio/sfx/noise_instrument05_1.asm"
+INCLUDE "audio/sfx/noise_instrument06_1.asm"
+INCLUDE "audio/sfx/noise_instrument07_1.asm"
+INCLUDE "audio/sfx/noise_instrument08_1.asm"
+INCLUDE "audio/sfx/noise_instrument09_1.asm"
+INCLUDE "audio/sfx/noise_instrument10_1.asm"
+INCLUDE "audio/sfx/noise_instrument11_1.asm"
+INCLUDE "audio/sfx/noise_instrument12_1.asm"
+INCLUDE "audio/sfx/noise_instrument13_1.asm"
+INCLUDE "audio/sfx/noise_instrument14_1.asm"
+INCLUDE "audio/sfx/noise_instrument15_1.asm"
+INCLUDE "audio/sfx/noise_instrument16_1.asm"
+INCLUDE "audio/sfx/noise_instrument17_1.asm"
+INCLUDE "audio/sfx/noise_instrument18_1.asm"
+INCLUDE "audio/sfx/noise_instrument19_1.asm"
 
 Audio1_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
@@ -122,25 +122,25 @@ INCLUDE "audio/sfx/cry22_1.asm"
 
 SECTION "Sound Effects 2", ROMX ; BANK $08
 
-INCLUDE "audio/sfx/snare1_2.asm"
-INCLUDE "audio/sfx/snare2_2.asm"
-INCLUDE "audio/sfx/snare3_2.asm"
-INCLUDE "audio/sfx/snare4_2.asm"
-INCLUDE "audio/sfx/snare5_2.asm"
-INCLUDE "audio/sfx/triangle1_2.asm"
-INCLUDE "audio/sfx/triangle2_2.asm"
-INCLUDE "audio/sfx/snare6_2.asm"
-INCLUDE "audio/sfx/snare7_2.asm"
-INCLUDE "audio/sfx/snare8_2.asm"
-INCLUDE "audio/sfx/snare9_2.asm"
-INCLUDE "audio/sfx/cymbal1_2.asm"
-INCLUDE "audio/sfx/cymbal2_2.asm"
-INCLUDE "audio/sfx/cymbal3_2.asm"
-INCLUDE "audio/sfx/muted_snare1_2.asm"
-INCLUDE "audio/sfx/triangle3_2.asm"
-INCLUDE "audio/sfx/muted_snare2_2.asm"
-INCLUDE "audio/sfx/muted_snare3_2.asm"
-INCLUDE "audio/sfx/muted_snare4_2.asm"
+INCLUDE "audio/sfx/noise_instrument01_2.asm"
+INCLUDE "audio/sfx/noise_instrument02_2.asm"
+INCLUDE "audio/sfx/noise_instrument03_2.asm"
+INCLUDE "audio/sfx/noise_instrument04_2.asm"
+INCLUDE "audio/sfx/noise_instrument05_2.asm"
+INCLUDE "audio/sfx/noise_instrument06_2.asm"
+INCLUDE "audio/sfx/noise_instrument07_2.asm"
+INCLUDE "audio/sfx/noise_instrument08_2.asm"
+INCLUDE "audio/sfx/noise_instrument09_2.asm"
+INCLUDE "audio/sfx/noise_instrument10_2.asm"
+INCLUDE "audio/sfx/noise_instrument11_2.asm"
+INCLUDE "audio/sfx/noise_instrument12_2.asm"
+INCLUDE "audio/sfx/noise_instrument13_2.asm"
+INCLUDE "audio/sfx/noise_instrument14_2.asm"
+INCLUDE "audio/sfx/noise_instrument15_2.asm"
+INCLUDE "audio/sfx/noise_instrument16_2.asm"
+INCLUDE "audio/sfx/noise_instrument17_2.asm"
+INCLUDE "audio/sfx/noise_instrument18_2.asm"
+INCLUDE "audio/sfx/noise_instrument19_2.asm"
 
 Audio2_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
@@ -155,7 +155,7 @@ INCLUDE "audio/sfx/ball_poof.asm"
 INCLUDE "audio/sfx/faint_thud.asm"
 INCLUDE "audio/sfx/run.asm"
 INCLUDE "audio/sfx/dex_page_added.asm"
-INCLUDE "audio/sfx/pokeflute_ch6.asm"
+INCLUDE "audio/sfx/pokeflute_ch7.asm"
 INCLUDE "audio/sfx/peck.asm"
 INCLUDE "audio/sfx/faint_fall.asm"
 INCLUDE "audio/sfx/battle_09.asm"
@@ -247,25 +247,25 @@ INCLUDE "audio/sfx/cry22_2.asm"
 
 SECTION "Sound Effects 3", ROMX ; BANK $1f
 
-INCLUDE "audio/sfx/snare1_3.asm"
-INCLUDE "audio/sfx/snare2_3.asm"
-INCLUDE "audio/sfx/snare3_3.asm"
-INCLUDE "audio/sfx/snare4_3.asm"
-INCLUDE "audio/sfx/snare5_3.asm"
-INCLUDE "audio/sfx/triangle1_3.asm"
-INCLUDE "audio/sfx/triangle2_3.asm"
-INCLUDE "audio/sfx/snare6_3.asm"
-INCLUDE "audio/sfx/snare7_3.asm"
-INCLUDE "audio/sfx/snare8_3.asm"
-INCLUDE "audio/sfx/snare9_3.asm"
-INCLUDE "audio/sfx/cymbal1_3.asm"
-INCLUDE "audio/sfx/cymbal2_3.asm"
-INCLUDE "audio/sfx/cymbal3_3.asm"
-INCLUDE "audio/sfx/muted_snare1_3.asm"
-INCLUDE "audio/sfx/triangle3_3.asm"
-INCLUDE "audio/sfx/muted_snare2_3.asm"
-INCLUDE "audio/sfx/muted_snare3_3.asm"
-INCLUDE "audio/sfx/muted_snare4_3.asm"
+INCLUDE "audio/sfx/noise_instrument01_3.asm"
+INCLUDE "audio/sfx/noise_instrument02_3.asm"
+INCLUDE "audio/sfx/noise_instrument03_3.asm"
+INCLUDE "audio/sfx/noise_instrument04_3.asm"
+INCLUDE "audio/sfx/noise_instrument05_3.asm"
+INCLUDE "audio/sfx/noise_instrument06_3.asm"
+INCLUDE "audio/sfx/noise_instrument07_3.asm"
+INCLUDE "audio/sfx/noise_instrument08_3.asm"
+INCLUDE "audio/sfx/noise_instrument09_3.asm"
+INCLUDE "audio/sfx/noise_instrument10_3.asm"
+INCLUDE "audio/sfx/noise_instrument11_3.asm"
+INCLUDE "audio/sfx/noise_instrument12_3.asm"
+INCLUDE "audio/sfx/noise_instrument13_3.asm"
+INCLUDE "audio/sfx/noise_instrument14_3.asm"
+INCLUDE "audio/sfx/noise_instrument15_3.asm"
+INCLUDE "audio/sfx/noise_instrument16_3.asm"
+INCLUDE "audio/sfx/noise_instrument17_3.asm"
+INCLUDE "audio/sfx/noise_instrument18_3.asm"
+INCLUDE "audio/sfx/noise_instrument19_3.asm"
 
 Audio3_WavePointers: INCLUDE "audio/wave_instruments.asm"
 
@@ -470,7 +470,7 @@ Music_DoLowHealthAlarm::
 
 .asm_2138a
 	ld a, $86
-	ld [wChannelSoundIDs + Ch4], a ;disable sound channel?
+	ld [wChannelSoundIDs + Ch5], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -484,7 +484,7 @@ Music_DoLowHealthAlarm::
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wChannelSoundIDs + Ch4], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + Ch5], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 
@@ -535,12 +535,12 @@ Music_PokeFluteInBattle::
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrite the channel pointers
-	ld hl, wChannelCommandPointers + Ch4 * 2
-	ld de, SFX_08_PokeFlute_Ch4
+	ld hl, wChannelCommandPointers + Ch5 * 2
+	ld de, SFX_Pokeflute_Ch5
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch5
+	ld de, SFX_Pokeflute_Ch6
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch6
+	ld de, SFX_Pokeflute_Ch7
 
 Audio2_OverwriteChannelPointer:
 	ld a, e
@@ -625,7 +625,7 @@ INCLUDE "audio/music/pokecenter.asm"
 
 SECTION "Music 2", ROMX ; BANK $08
 
-INCLUDE "audio/sfx/pokeflute_ch4_ch5.asm"
+INCLUDE "audio/sfx/pokeflute_ch5_ch6.asm"
 INCLUDE "audio/sfx/unused2_2.asm"
 INCLUDE "audio/music/gymleaderbattle.asm"
 INCLUDE "audio/music/trainerbattle.asm"

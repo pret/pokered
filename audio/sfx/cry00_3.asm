@@ -1,21 +1,21 @@
-SFX_Cry00_3_Ch4:
-	dutycycle 245
-	squarenote 4, 15, 3, 1816
-	squarenote 15, 14, 5, 1944
-	squarenote 8, 9, 1, 1880
-	endchannel
-
-
 SFX_Cry00_3_Ch5:
-	dutycycle 160
-	squarenote 5, 11, 3, 1800
-	squarenote 15, 12, 5, 1928
-	squarenote 8, 7, 1, 1864
-	endchannel
+	duty_cycle_pattern 3, 3, 1, 1
+	square_note 4, 15, 3, 1816
+	square_note 15, 14, 5, 1944
+	square_note 8, 9, 1, 1880
+	sound_ret
 
 
-SFX_Cry00_3_Ch7:
-	noisenote 3, 10, 1, 28
-	noisenote 14, 9, 4, 44
-	noisenote 8, 8, 1, 28
-	endchannel
+SFX_Cry00_3_Ch6:
+	duty_cycle_pattern 2, 2, 0, 0
+	square_note 5, 11, 3, 1800
+	square_note 15, 12, 5, 1928
+	square_note 8, 7, 1, 1864
+	sound_ret
+
+
+SFX_Cry00_3_Ch8:
+	noise_note 3, 10, 1, 28
+	noise_note 14, 9, 4, 44
+	noise_note 8, 8, 1, 28
+	sound_ret

@@ -1,31 +1,31 @@
-SFX_Cry1C_2_Ch4:
-	dutycycle 245
-	squarenote 7, 13, 6, 2017
-	squarenote 6, 12, 6, 2018
-	squarenote 9, 13, 6, 2017
-	squarenote 7, 12, 6, 2016
-	squarenote 5, 11, 6, 2018
-	squarenote 7, 12, 6, 2017
-	squarenote 6, 11, 6, 2016
-	squarenote 8, 10, 1, 2015
-	endchannel
-
-
 SFX_Cry1C_2_Ch5:
-	dutycycle 68
-	squarenote 6, 12, 3, 1993
-	squarenote 6, 11, 3, 1991
-	squarenote 10, 12, 4, 1987
-	squarenote 8, 11, 4, 1991
-	squarenote 6, 12, 3, 1993
-	squarenote 15, 10, 2, 1989
-	endchannel
+	duty_cycle_pattern 3, 3, 1, 1
+	square_note 7, 13, 6, 2017
+	square_note 6, 12, 6, 2018
+	square_note 9, 13, 6, 2017
+	square_note 7, 12, 6, 2016
+	square_note 5, 11, 6, 2018
+	square_note 7, 12, 6, 2017
+	square_note 6, 11, 6, 2016
+	square_note 8, 10, 1, 2015
+	sound_ret
 
 
-SFX_Cry1C_2_Ch7:
-	noisenote 13, 1, -1, 124
-	noisenote 13, 15, 7, 140
-	noisenote 12, 13, 6, 124
-	noisenote 8, 12, 4, 108
-	noisenote 15, 11, 3, 92
-	endchannel
+SFX_Cry1C_2_Ch6:
+	duty_cycle_pattern 1, 0, 1, 0
+	square_note 6, 12, 3, 1993
+	square_note 6, 11, 3, 1991
+	square_note 10, 12, 4, 1987
+	square_note 8, 11, 4, 1991
+	square_note 6, 12, 3, 1993
+	square_note 15, 10, 2, 1989
+	sound_ret
+
+
+SFX_Cry1C_2_Ch8:
+	noise_note 13, 1, -1, 124
+	noise_note 13, 15, 7, 140
+	noise_note 12, 13, 6, 124
+	noise_note 8, 12, 4, 108
+	noise_note 15, 11, 3, 92
+	sound_ret

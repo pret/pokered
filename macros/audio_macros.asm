@@ -4,16 +4,16 @@ StopAllMusic: MACRO
 	call PlaySound
 ENDM
 
-Ch0    EQU 0
-Ch1    EQU 1
-Ch2    EQU 2
-Ch3    EQU 3
-Ch4    EQU 4
-Ch5    EQU 5
-Ch6    EQU 6
-Ch7    EQU 7
+Ch1    EQU 0
+Ch2    EQU 1
+Ch3    EQU 2
+Ch4    EQU 3
+Ch5    EQU 4
+Ch6    EQU 5
+Ch7    EQU 6
+Ch8    EQU 7
 
-audio: MACRO
+audio_header: MACRO
 	db (_NARG - 2) << 6 | \2
 	dw \1_\2
 	IF _NARG > 2
@@ -30,18 +30,26 @@ audio: MACRO
 	ENDC
 ENDM
 
-;format: length [0, 7], pitch change [-7, 7]
-pitchenvelope: MACRO
+; arguments: length [0, 7], pitch change [-7, 7]
+; length: length of time between pitch shifts
+;         sometimes used with a value >7 in which case the MSB is ignored
+; pitch change: positive value means increase in pitch, negative value means decrease in pitch
+;               small magnitude means quick change, large magnitude means slow change
+;               in signed magnitude representation, so a value of 8 is the same as (negative) 0
+pitch_sweep: MACRO
 	db $10
-	IF \2 > 0
-		db (\1 << 4) | \2
-	ELSE
+	IF \2 < 0
 		db (\1 << 4) | (%1000 | (\2 * -1))
+	ELSE
+		db (\1 << 4) | \2
 	ENDC
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
-squarenote: MACRO
+; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
+square_note: MACRO
 	db $20 | \1
 	IF \3 < 0
 		db (\2 << 4) | (%1000 | (\3 * -1))
@@ -51,8 +59,11 @@ squarenote: MACRO
 	dw \4
 ENDM
 
-;format: length [0, 15], volume [0, 15], volume change [-7, 7], pitch
-noisenote: MACRO
+; arguments: length [0, 15], volume [0, 15], fade [-7, 7], frequency
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
+noise_note: MACRO
 	db $20 | \1
 	IF \3 < 0
 		db (\2 << 4) | (%1000 | (\3 * -1))
@@ -62,230 +73,142 @@ noisenote: MACRO
 	db \4
 ENDM
 
-;format: pitch length (in 16ths)
-C_: MACRO
-	db $00 | (\1 - 1)
+C_ EQU $0
+C# EQU $1
+D_ EQU $2
+D# EQU $3
+E_ EQU $4
+F_ EQU $5
+F# EQU $6
+G_ EQU $7
+G# EQU $8
+A_ EQU $9
+A# EQU $A
+B_ EQU $B
+
+; arguments: pitch, length [1, 16]
+note: MACRO
+	db (\1 << 4) | (\2 - 1)
 ENDM
 
-C#: MACRO
-	db $10 | (\1 - 1)
+; arguments: instrument [1, 19], length [1, 16]
+drum_note: MACRO
+	db $B0 | (\2 - 1)
+	db \1
 ENDM
 
-D_: MACRO
-	db $20 | (\1 - 1)
+; arguments: instrument, length [1, 16]
+; like drum_note but one 1 byte instead of 2
+; can only be used with instruments 1-10, excluding 2
+; unused
+drum_note_short: MACRO
+	db (\1 << 4) | (\2 - 1)
 ENDM
 
-D#: MACRO
-	db $30 | (\1 - 1)
-ENDM
-
-E_: MACRO
-	db $40 | (\1 - 1)
-ENDM
-
-F_: MACRO
-	db $50 | (\1 - 1)
-ENDM
-
-F#: MACRO
-	db $60 | (\1 - 1)
-ENDM
-
-G_: MACRO
-	db $70 | (\1 - 1)
-ENDM
-
-G#: MACRO
-	db $80 | (\1 - 1)
-ENDM
-
-A_: MACRO
-	db $90 | (\1 - 1)
-ENDM
-
-A#: MACRO
-	db $A0 | (\1 - 1)
-ENDM
-
-B_: MACRO
-	db $B0 | (\1 - 1)
-ENDM
-
-;format: instrument length (in 16ths)
-snare1: MACRO
-	db $B0 | (\1 - 1)
-	db $01
-ENDM
-
-snare2: MACRO
-	db $B0 | (\1 - 1)
-	db $02
-ENDM
-
-snare3: MACRO
-	db $B0 | (\1 - 1)
-	db $03
-ENDM
-
-snare4: MACRO
-	db $B0 | (\1 - 1)
-	db $04
-ENDM
-
-snare5: MACRO
-	db $B0 | (\1 - 1)
-	db $05
-ENDM
-
-triangle1: MACRO
-	db $B0 | (\1 - 1)
-	db $06
-ENDM
-
-triangle2: MACRO
-	db $B0 | (\1 - 1)
-	db $07
-ENDM
-
-snare6: MACRO
-	db $B0 | (\1 - 1)
-	db $08
-ENDM
-
-snare7: MACRO
-	db $B0 | (\1 - 1)
-	db $09
-ENDM
-
-snare8: MACRO
-	db $B0 | (\1 - 1)
-	db $0A
-ENDM
-
-snare9: MACRO
-	db $B0 | (\1 - 1)
-	db $0B
-ENDM
-
-cymbal1: MACRO
-	db $B0 | (\1 - 1)
-	db $0C
-ENDM
-
-cymbal2: MACRO
-	db $B0 | (\1 - 1)
-	db $0D
-ENDM
-
-cymbal3: MACRO
-	db $B0 | (\1 - 1)
-	db $0E
-ENDM
-
-mutedsnare1: MACRO
-	db $B0 | (\1 - 1)
-	db $0F
-ENDM
-
-triangle3: MACRO
-	db $B0 | (\1 - 1)
-	db $10
-ENDM
-
-mutedsnare2: MACRO
-	db $B0 | (\1 - 1)
-	db $11
-ENDM
-
-mutedsnare3: MACRO
-	db $B0 | (\1 - 1)
-	db $12
-ENDM
-
-mutedsnare4: MACRO
-	db $B0 | (\1 - 1)
-	db $13
-ENDM
-
-;format: rest length (in 16ths)
+; arguments: length [1, 16]
 rest: MACRO
 	db $C0 | (\1 - 1)
 ENDM
 
-; format: notetype speed, volume, fade
-notetype: MACRO
+; arguments: speed [0, 15], volume [0, 15], fade [-7, 7]
+; fade: positive value means decrease in volume, negative value means increase in volume
+;       small magnitude means quick change, large magnitude means slow change
+;       in signed magnitude representation, so a value of 8 is the same as (negative) 0
+note_type: MACRO
 	db $D0 | \1
-	db (\2 << 4) | \3
+	IF \3 < 0
+		db (\2 << 4) | (%1000 | (\3 * -1))
+	ELSE
+		db (\2 << 4) | \3
+	ENDC
 ENDM
 
-dspeed: MACRO
+; arguments: speed [0, 15]
+drum_speed: MACRO
 	db $D0 | \1
 ENDM
 
+; arguments: octave [1, 8]
 octave: MACRO
 	db $E8 - \1
 ENDM
 
-toggleperfectpitch: MACRO
+; when enabled, effective frequency used is incremented by 1
+toggle_perfect_pitch: MACRO
 	db $E8
 ENDM
 
-;format: vibrato delay, rate, depth
+; arguments: delay [0, 255], depth [0, 15], rate [0, 15]
+; delay: time delay until vibrato effect begins
+; depth: amplitude of vibrato wave
+; rate: frequency of vibrato wave
 vibrato: MACRO
 	db $EA
 	db \1
 	db (\2 << 4) | \3
 ENDM
 
-pitchbend: MACRO
+; arguments: length [1, 256], octave [1, 8], pitch
+pitch_slide: MACRO
 	db $EB
-	db \1
-	db \2
+	db \1 - 1
+	db ((8 - \2) << 4) | \3
 ENDM
 
-duty: MACRO
+; arguments: duty cycle [0, 3] (12.5%, 25%, 50%, 75%)
+duty_cycle: MACRO
 	db $EC
 	db \1
 ENDM
 
+; arguments: tempo [0, $ffff]
+; used to calculate note delay counters
+; so a smaller value means music plays faster
+; ideally should be set to $100 or less to guarantee no overflow
+; if larger than $100, large note speed or note length values might cause overflow
+; stored in big endian
 tempo: MACRO
 	db $ED
 	db \1 / $100
 	db \1 % $100
 ENDM
 
-stereopanning: MACRO
+; arguments: left output enable mask, right output enable mask
+stereo_panning: MACRO
 	db $EE
-	db \1
+	db (\1 << 4) | \2
 ENDM
 
+; arguments: left master volume [0, 7], right master volume [0, 7]
 volume: MACRO
 	db $F0
 	db (\1 << 4) | \2
 ENDM
 
-executemusic: MACRO
+; when enabled, the sfx data is interpreted as music data
+execute_music: MACRO
 	db $F8
 ENDM
 
-dutycycle: MACRO
+; arguments: duty cycle 1, duty cycle 2, duty cycle 3, duty cycle 4
+duty_cycle_pattern: MACRO
 	db $FC
-	db \1
+	db \1 << 6 | \2 << 4 | \3 << 2 | \4
 ENDM
 
-;format: callchannel address
-callchannel: MACRO
+; arguments: address
+sound_call: MACRO
 	db $FD
 	dw \1
 ENDM
 
-;format: loopchannel count, address
-loopchannel: MACRO
+; arguments: count, address
+sound_loop: MACRO
 	db $FE
 	db \1
 	dw \2
 ENDM
 
-endchannel: MACRO
+sound_ret: MACRO
 	db $FF
 ENDM

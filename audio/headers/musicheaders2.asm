@@ -1,20 +1,20 @@
 Music_GymLeaderBattle::
-	audio Music_GymLeaderBattle, Ch0, Ch1, Ch2
+	audio_header Music_GymLeaderBattle, Ch1, Ch2, Ch3
 
 Music_TrainerBattle::
-	audio Music_TrainerBattle, Ch0, Ch1, Ch2
+	audio_header Music_TrainerBattle, Ch1, Ch2, Ch3
 
 Music_WildBattle::
-	audio Music_WildBattle, Ch0, Ch1, Ch2
+	audio_header Music_WildBattle, Ch1, Ch2, Ch3
 
 Music_FinalBattle::
-	audio Music_FinalBattle, Ch0, Ch1, Ch2
+	audio_header Music_FinalBattle, Ch1, Ch2, Ch3
 
 Music_DefeatedTrainer::
-	audio Music_DefeatedTrainer, Ch0, Ch1, Ch2
+	audio_header Music_DefeatedTrainer, Ch1, Ch2, Ch3
 
 Music_DefeatedWildMon::
-	audio Music_DefeatedWildMon, Ch0, Ch1, Ch2
+	audio_header Music_DefeatedWildMon, Ch1, Ch2, Ch3
 
 Music_DefeatedGymLeader::
-	audio Music_DefeatedGymLeader, Ch0, Ch1, Ch2
+	audio_header Music_DefeatedGymLeader, Ch1, Ch2, Ch3

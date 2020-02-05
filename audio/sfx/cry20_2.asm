@@ -1,24 +1,24 @@
-SFX_Cry20_2_Ch4:
-	dutycycle 240
-	squarenote 13, 15, 1, 1297
-	squarenote 13, 14, 1, 1301
-	squarenote 13, 14, 1, 1297
-	squarenote 8, 13, 1, 1297
-	endchannel
-
-
 SFX_Cry20_2_Ch5:
-	dutycycle 21
-	squarenote 12, 14, 1, 1292
-	squarenote 12, 13, 1, 1296
-	squarenote 14, 12, 1, 1292
-	squarenote 8, 12, 1, 1290
-	endchannel
+	duty_cycle_pattern 3, 3, 0, 0
+	square_note 13, 15, 1, 1297
+	square_note 13, 14, 1, 1301
+	square_note 13, 14, 1, 1297
+	square_note 8, 13, 1, 1297
+	sound_ret
 
 
-SFX_Cry20_2_Ch7:
-	noisenote 14, 15, 2, 101
-	noisenote 13, 14, 2, 85
-	noisenote 14, 13, 2, 86
-	noisenote 8, 13, 1, 102
-	endchannel
+SFX_Cry20_2_Ch6:
+	duty_cycle_pattern 0, 1, 1, 1
+	square_note 12, 14, 1, 1292
+	square_note 12, 13, 1, 1296
+	square_note 14, 12, 1, 1292
+	square_note 8, 12, 1, 1290
+	sound_ret
+
+
+SFX_Cry20_2_Ch8:
+	noise_note 14, 15, 2, 101
+	noise_note 13, 14, 2, 85
+	noise_note 14, 13, 2, 86
+	noise_note 8, 13, 1, 102
+	sound_ret

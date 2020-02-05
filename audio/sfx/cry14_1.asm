@@ -1,21 +1,21 @@
-SFX_Cry14_1_Ch4:
-	dutycycle 240
-	squarenote 8, 14, 4, 1936
-	squarenote 15, 15, 5, 1984
-	squarenote 8, 13, 1, 2008
-	endchannel
-
-
 SFX_Cry14_1_Ch5:
-	dutycycle 165
-	squarenote 10, 12, 4, 1905
-	squarenote 15, 11, 6, 1954
-	squarenote 8, 10, 1, 1975
-	endchannel
+	duty_cycle_pattern 3, 3, 0, 0
+	square_note 8, 14, 4, 1936
+	square_note 15, 15, 5, 1984
+	square_note 8, 13, 1, 2008
+	sound_ret
 
 
-SFX_Cry14_1_Ch7:
-	noisenote 8, 14, 4, 76
-	noisenote 14, 12, 4, 60
-	noisenote 8, 13, 1, 44
-	endchannel
+SFX_Cry14_1_Ch6:
+	duty_cycle_pattern 2, 2, 1, 1
+	square_note 10, 12, 4, 1905
+	square_note 15, 11, 6, 1954
+	square_note 8, 10, 1, 1975
+	sound_ret
+
+
+SFX_Cry14_1_Ch8:
+	noise_note 8, 14, 4, 76
+	noise_note 14, 12, 4, 60
+	noise_note 8, 13, 1, 44
+	sound_ret

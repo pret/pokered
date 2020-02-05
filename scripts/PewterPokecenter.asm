@@ -60,7 +60,7 @@ PewterJigglypuffText:
 
 	ld a, [wChannelSoundIDs]
 	ld b, a
-	ld a, [wChannelSoundIDs + Ch1]
+	ld a, [wChannelSoundIDs + Ch2]
 	or b
 	jr nz, .loop
 

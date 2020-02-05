@@ -1,27 +1,27 @@
-SFX_Battle_27_Ch4:
-	duty 2
-	squarenote 15, 3, -7, 1984
+SFX_Battle_27_Ch5:
+	duty_cycle 2
+	square_note 15, 3, -7, 1984
 
 SFX_Battle_27_branch_2062a:
-	squarenote 15, 13, -7, 1984
-	loopchannel 4, SFX_Battle_27_branch_2062a
-	squarenote 15, 13, 1, 1984
-	endchannel
+	square_note 15, 13, -7, 1984
+	sound_loop 4, SFX_Battle_27_branch_2062a
+	square_note 15, 13, 1, 1984
+	sound_ret
 
 
-SFX_Battle_27_Ch5:
-	dutycycle 179
-	squarenote 15, 2, -7, 1992
+SFX_Battle_27_Ch6:
+	duty_cycle_pattern 2, 3, 0, 3
+	square_note 15, 2, -7, 1992
 
 SFX_Battle_27_branch_2063d:
-	squarenote 15, 12, -7, 1991
-	loopchannel 4, SFX_Battle_27_branch_2063d
-	squarenote 15, 12, 1, 1992
-	endchannel
+	square_note 15, 12, -7, 1991
+	sound_loop 4, SFX_Battle_27_branch_2063d
+	square_note 15, 12, 1, 1992
+	sound_ret
 
 
-SFX_Battle_27_Ch7:
-	noisenote 3, 9, 7, 18
-	noisenote 3, 10, 1, 17
-	loopchannel 10, SFX_Battle_27_Ch7
-	endchannel
+SFX_Battle_27_Ch8:
+	noise_note 3, 9, 7, 18
+	noise_note 3, 10, 1, 17
+	sound_loop 10, SFX_Battle_27_Ch8
+	sound_ret

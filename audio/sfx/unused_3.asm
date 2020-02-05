@@ -1,31 +1,31 @@
-SFX_Unused_3_Ch4:
-	dutycycle 240
-	squarenote 15, 14, 0, 1920
-	squarenote 15, 15, 0, 1924
-	squarenote 15, 12, 3, 1504
-	squarenote 15, 12, 4, 1536
-	squarenote 10, 6, -4, 1920
-	squarenote 8, 7, 1, 1924
-	endchannel
-
-
 SFX_Unused_3_Ch5:
-	dutycycle 5
-	squarenote 15, 10, 0, 1857
-	squarenote 15, 11, 0, 1859
-	squarenote 15, 9, 3, 1457
-	squarenote 15, 9, 4, 1473
-	squarenote 10, 4, -4, 1857
-	squarenote 8, 3, 1, 1862
-	endchannel
+	duty_cycle_pattern 3, 3, 0, 0
+	square_note 15, 14, 0, 1920
+	square_note 15, 15, 0, 1924
+	square_note 15, 12, 3, 1504
+	square_note 15, 12, 4, 1536
+	square_note 10, 6, -4, 1920
+	square_note 8, 7, 1, 1924
+	sound_ret
 
 
-SFX_Unused_3_Ch7:
-	noisenote 2, 15, 2, 76
-	noisenote 6, 14, 0, 58
-	noisenote 15, 13, 0, 58
-	noisenote 8, 13, 0, 44
-	noisenote 6, 14, 6, 76
-	noisenote 12, 7, -5, 76
-	noisenote 15, 13, 3, 76
-	endchannel
+SFX_Unused_3_Ch6:
+	duty_cycle_pattern 0, 0, 1, 1
+	square_note 15, 10, 0, 1857
+	square_note 15, 11, 0, 1859
+	square_note 15, 9, 3, 1457
+	square_note 15, 9, 4, 1473
+	square_note 10, 4, -4, 1857
+	square_note 8, 3, 1, 1862
+	sound_ret
+
+
+SFX_Unused_3_Ch8:
+	noise_note 2, 15, 2, 76
+	noise_note 6, 14, 0, 58
+	noise_note 15, 13, 0, 58
+	noise_note 8, 13, 0, 44
+	noise_note 6, 14, 6, 76
+	noise_note 12, 7, -5, 76
+	noise_note 15, 13, 3, 76
+	sound_ret

@@ -1,11 +1,11 @@
-SFX_Ball_Poof_Ch4:
-	duty 2
-	pitchenvelope 1, 6
-	squarenote 15, 15, 2, 1024
-	pitchenvelope 0, 0
-	endchannel
+SFX_Ball_Poof_Ch5:
+	duty_cycle 2
+	pitch_sweep 1, 6
+	square_note 15, 15, 2, 1024
+	pitch_sweep 0, 8
+	sound_ret
 
 
-SFX_Ball_Poof_Ch7:
-	noisenote 15, 10, 2, 34
-	endchannel
+SFX_Ball_Poof_Ch8:
+	noise_note 15, 10, 2, 34
+	sound_ret

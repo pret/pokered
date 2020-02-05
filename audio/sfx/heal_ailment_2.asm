@@ -1,9 +1,9 @@
-SFX_Heal_Ailment_2_Ch4:
-	duty 2
-	pitchenvelope 1, 4
-	squarenote 4, 15, 2, 1536
-	squarenote 4, 15, 2, 1536
-	pitchenvelope 1, 7
-	squarenote 15, 15, 2, 1536
-	pitchenvelope 0, 0
-	endchannel
+SFX_Heal_Ailment_2_Ch5:
+	duty_cycle 2
+	pitch_sweep 1, 4
+	square_note 4, 15, 2, 1536
+	square_note 4, 15, 2, 1536
+	pitch_sweep 1, 7
+	square_note 15, 15, 2, 1536
+	pitch_sweep 0, 8
+	sound_ret

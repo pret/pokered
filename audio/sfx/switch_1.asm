@@ -1,8 +1,8 @@
-SFX_Switch_1_Ch4:
-	duty 2
-	squarenote 4, 0, 0, 0
-	squarenote 2, 15, 1, 1664
-	squarenote 1, 0, 0, 0
-	squarenote 4, 15, 1, 1920
-	squarenote 4, 0, 0, 0
-	endchannel
+SFX_Switch_1_Ch5:
+	duty_cycle 2
+	square_note 4, 0, 0, 0
+	square_note 2, 15, 1, 1664
+	square_note 1, 0, 0, 0
+	square_note 4, 15, 1, 1920
+	square_note 4, 0, 0, 0
+	sound_ret

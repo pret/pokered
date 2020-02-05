@@ -1,7 +1,7 @@
-SFX_Heal_HP_2_Ch4:
-	duty 2
-	pitchenvelope 1, 7
-	squarenote 15, 15, 0, 1264
-	squarenote 15, 15, 2, 1616
-	pitchenvelope 0, 0
-	endchannel
+SFX_Heal_HP_2_Ch5:
+	duty_cycle 2
+	pitch_sweep 1, 7
+	square_note 15, 15, 0, 1264
+	square_note 15, 15, 2, 1616
+	pitch_sweep 0, 8
+	sound_ret

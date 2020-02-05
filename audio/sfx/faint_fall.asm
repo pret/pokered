@@ -1,6 +1,6 @@
-SFX_Faint_Fall_Ch4:
-	duty 1
-	pitchenvelope 10, -7
-	squarenote 15, 15, 2, 1920
-	pitchenvelope 0, 0
-	endchannel
+SFX_Faint_Fall_Ch5:
+	duty_cycle 1
+	pitch_sweep 10, -7
+	square_note 15, 15, 2, 1920
+	pitch_sweep 0, 8
+	sound_ret

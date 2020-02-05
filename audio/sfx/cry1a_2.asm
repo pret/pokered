@@ -1,30 +1,30 @@
-SFX_Cry1A_2_Ch4:
-	dutycycle 240
-	squarenote 6, 15, 7, 1856
-	squarenote 12, 14, 6, 1860
-	squarenote 6, 13, 5, 1872
-	squarenote 4, 12, 3, 1888
-	squarenote 3, 12, 3, 1920
-	squarenote 8, 13, 1, 1952
-	endchannel
-
-
 SFX_Cry1A_2_Ch5:
-	dutycycle 10
-	squarenote 6, 12, 7, 1793
-	squarenote 11, 11, 6, 1794
-	squarenote 6, 10, 5, 1809
-	squarenote 4, 9, 3, 1825
-	squarenote 3, 10, 3, 1857
-	squarenote 8, 9, 1, 1890
-	endchannel
+	duty_cycle_pattern 3, 3, 0, 0
+	square_note 6, 15, 7, 1856
+	square_note 12, 14, 6, 1860
+	square_note 6, 13, 5, 1872
+	square_note 4, 12, 3, 1888
+	square_note 3, 12, 3, 1920
+	square_note 8, 13, 1, 1952
+	sound_ret
 
 
-SFX_Cry1A_2_Ch7:
-	noisenote 3, 14, 2, 60
-	noisenote 8, 13, 6, 76
-	noisenote 5, 13, 4, 60
-	noisenote 12, 12, 7, 76
-	noisenote 2, 14, 2, 60
-	noisenote 8, 13, 1, 44
-	endchannel
+SFX_Cry1A_2_Ch6:
+	duty_cycle_pattern 0, 0, 2, 2
+	square_note 6, 12, 7, 1793
+	square_note 11, 11, 6, 1794
+	square_note 6, 10, 5, 1809
+	square_note 4, 9, 3, 1825
+	square_note 3, 10, 3, 1857
+	square_note 8, 9, 1, 1890
+	sound_ret
+
+
+SFX_Cry1A_2_Ch8:
+	noise_note 3, 14, 2, 60
+	noise_note 8, 13, 6, 76
+	noise_note 5, 13, 4, 60
+	noise_note 12, 12, 7, 76
+	noise_note 2, 14, 2, 60
+	noise_note 8, 13, 1, 44
+	sound_ret

@@ -1,59 +1,59 @@
-SFX_Get_Key_Item_1_Ch4:
-	executemusic
+SFX_Get_Key_Item_1_Ch5:
+	execute_music
 	tempo 256
 	volume 7, 7
-	duty 2
-	toggleperfectpitch
-	notetype 5, 10, 4
+	duty_cycle 2
+	toggle_perfect_pitch
+	note_type 5, 10, 4
 	octave 3
-	A# 4
-	notetype 5, 11, 1
+	note A#, 4
+	note_type 5, 11, 1
 	octave 4
-	C_ 2
-	C_ 1
-	C_ 1
-	notetype 5, 10, 4
-	D# 4
-	notetype 5, 11, 1
-	F_ 2
-	F_ 1
-	F_ 1
-	notetype 5, 11, 4
-	A# 8
-	endchannel
-
-
-SFX_Get_Key_Item_1_Ch5:
-	executemusic
-	vibrato 4, 2, 3
-	duty 2
-	notetype 5, 13, 1
-	octave 4
-	G_ 2
-	G_ 1
-	G_ 1
-	notetype 5, 12, 4
-	D# 4
-	notetype 5, 13, 1
-	G# 2
-	G# 1
-	G# 1
-	A# 2
-	A# 1
-	A# 1
-	notetype 5, 12, 4
-	octave 5
-	D# 8
-	endchannel
+	note C_, 2
+	note C_, 1
+	note C_, 1
+	note_type 5, 10, 4
+	note D#, 4
+	note_type 5, 11, 1
+	note F_, 2
+	note F_, 1
+	note F_, 1
+	note_type 5, 11, 4
+	note A#, 8
+	sound_ret
 
 
 SFX_Get_Key_Item_1_Ch6:
-	executemusic
-	notetype 5, 1, 0
+	execute_music
+	vibrato 4, 2, 3
+	duty_cycle 2
+	note_type 5, 13, 1
 	octave 4
-	D# 4
-	G# 4
-	G_ 4
-	F_ 4
-	D# 8
-	endchannel
+	note G_, 2
+	note G_, 1
+	note G_, 1
+	note_type 5, 12, 4
+	note D#, 4
+	note_type 5, 13, 1
+	note G#, 2
+	note G#, 1
+	note G#, 1
+	note A#, 2
+	note A#, 1
+	note A#, 1
+	note_type 5, 12, 4
+	octave 5
+	note D#, 8
+	sound_ret
+
+
+SFX_Get_Key_Item_1_Ch7:
+	execute_music
+	note_type 5, 1, 0
+	octave 4
+	note D#, 4
+	note G#, 4
+	note G_, 4
+	note F_, 4
+	note D#, 8
+	sound_ret

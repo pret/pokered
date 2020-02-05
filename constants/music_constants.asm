@@ -20,19 +20,27 @@ REG_DUTY_SOUND_LEN  EQU 1
 REG_VOLUME_ENVELOPE EQU 2
 REG_FREQUENCY_LO    EQU 3
 
-MAX_SFX_ID EQU $B9
+MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
+MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
+MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
 
-CRY_SFX_START EQU $14
-CRY_SFX_END   EQU $86
+NOISE_INSTRUMENTS_START EQUS "SFX_NOISE_INSTRUMENT01"
+NOISE_INSTRUMENTS_END   EQUS "SFX_NOISE_INSTRUMENT19 + 1"
+
+CRY_SFX_START EQUS "SFX_CRY_00"
+CRY_SFX_END   EQUS "SFX_CRY_25 + 3"
+
+BATTLE_SFX_START EQUS "SFX_PECK"
+BATTLE_SFX_END   EQUS "SFX_SILPH_SCOPE + 1"
 
 ; wChannelFlags1 constants
-BIT_PERFECT_PITCH         EQU 0 ; controlled by toggleperfectpitch command
-BIT_CHANNEL_CALL          EQU 1 ; if in channel call
-BIT_NOISE_OR_SFX          EQU 2 ; if channel is the music noise channel or an SFX channel
-BIT_VIBRATO_DIRECTION     EQU 3 ; if the pitch is above or below normal (cycles)
-BIT_PITCH_BEND_ON         EQU 4 ; if pitch bend is active
-BIT_PITCH_BEND_DECREASING EQU 5 ; if the pitch bend frequency is decreasing (instead of increasing)
-BIT_ROTATE_DUTY           EQU 6 ; if rotating duty
+BIT_PERFECT_PITCH          EQU 0 ; controlled by toggle_perfect_pitch command
+BIT_SOUND_CALL             EQU 1 ; if in sound call
+BIT_NOISE_OR_SFX           EQU 2 ; if channel is the music noise channel or an SFX channel
+BIT_VIBRATO_DIRECTION      EQU 3 ; if the pitch is above or below normal (cycles)
+BIT_PITCH_SLIDE_ON         EQU 4 ; if pitch slide is active
+BIT_PITCH_SLIDE_DECREASING EQU 5 ; if the pitch slide frequency is decreasing (instead of increasing)
+BIT_ROTATE_DUTY_CYCLE      EQU 6 ; if rotating duty cycle
 
 ; wChannelFlags2 constant (only has one flag)
 BIT_EXECUTE_MUSIC EQU 0 ; if in execute music
@@ -95,25 +103,25 @@ ENDM
 	music_const MUSIC_MEET_MALE_TRAINER,   Music_MeetMaleTrainer
 
 	; AUDIO_1 AUDIO_2 AUDIO_3
-	music_const SFX_SNARE_1,            SFX_Snare1_1
-	music_const SFX_SNARE_2,            SFX_Snare2_1
-	music_const SFX_SNARE_3,            SFX_Snare3_1
-	music_const SFX_SNARE_4,            SFX_Snare4_1
-	music_const SFX_SNARE_5,            SFX_Snare5_1
-	music_const SFX_TRIANGLE_1,         SFX_Triangle1_1
-	music_const SFX_TRIANGLE_2,         SFX_Triangle2_1
-	music_const SFX_SNARE_6,            SFX_Snare6_1
-	music_const SFX_SNARE_7,            SFX_Snare7_1
-	music_const SFX_SNARE_8,            SFX_Snare8_1
-	music_const SFX_SNARE_9,            SFX_Snare9_1
-	music_const SFX_CYMBAL_1,           SFX_Cymbal1_1
-	music_const SFX_CYMBAL_2,           SFX_Cymbal2_1
-	music_const SFX_CYMBAL_3,           SFX_Cymbal3_1
-	music_const SFX_MUTED_SNARE_1,      SFX_Muted_Snare1_1
-	music_const SFX_TRIANGLE_3,         SFX_Triangle3_1
-	music_const SFX_MUTED_SNARE_2,      SFX_Muted_Snare2_1
-	music_const SFX_MUTED_SNARE_3,      SFX_Muted_Snare3_1
-	music_const SFX_MUTED_SNARE_4,      SFX_Muted_Snare4_1
+	music_const SFX_NOISE_INSTRUMENT01, SFX_Noise_Instrument01_1
+	music_const SFX_NOISE_INSTRUMENT02, SFX_Noise_Instrument02_1
+	music_const SFX_NOISE_INSTRUMENT03, SFX_Noise_Instrument03_1
+	music_const SFX_NOISE_INSTRUMENT04, SFX_Noise_Instrument04_1
+	music_const SFX_NOISE_INSTRUMENT05, SFX_Noise_Instrument05_1
+	music_const SFX_NOISE_INSTRUMENT06, SFX_Noise_Instrument06_1
+	music_const SFX_NOISE_INSTRUMENT07, SFX_Noise_Instrument07_1
+	music_const SFX_NOISE_INSTRUMENT08, SFX_Noise_Instrument08_1
+	music_const SFX_NOISE_INSTRUMENT09, SFX_Noise_Instrument09_1
+	music_const SFX_NOISE_INSTRUMENT10, SFX_Noise_Instrument10_1
+	music_const SFX_NOISE_INSTRUMENT11, SFX_Noise_Instrument11_1
+	music_const SFX_NOISE_INSTRUMENT12, SFX_Noise_Instrument12_1
+	music_const SFX_NOISE_INSTRUMENT13, SFX_Noise_Instrument13_1
+	music_const SFX_NOISE_INSTRUMENT14, SFX_Noise_Instrument14_1
+	music_const SFX_NOISE_INSTRUMENT15, SFX_Noise_Instrument15_1
+	music_const SFX_NOISE_INSTRUMENT16, SFX_Noise_Instrument16_1
+	music_const SFX_NOISE_INSTRUMENT17, SFX_Noise_Instrument17_1
+	music_const SFX_NOISE_INSTRUMENT18, SFX_Noise_Instrument18_1
+	music_const SFX_NOISE_INSTRUMENT19, SFX_Noise_Instrument19_1
 	music_const SFX_CRY_00,             SFX_Cry00_1
 	music_const SFX_CRY_01,             SFX_Cry01_1
 	music_const SFX_CRY_02,             SFX_Cry02_1
@@ -194,7 +202,7 @@ ENDM
 	music_const SFX_SAVE,               SFX_Save_1
 
 	; AUDIO_1
-	music_const SFX_POKEFLUTE,           SFX_Pokeflute
+	music_const SFX_POKEFLUTE,          SFX_Pokeflute
 	music_const SFX_SAFARI_ZONE_PA,     SFX_Safari_Zone_PA
 
 	; AUDIO_2
