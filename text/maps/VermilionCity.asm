@@ -7,13 +7,13 @@ _VermilionCityText1::
 	cont "toxic sludge!"
 	done
 
-_VermilionCityText_198a7::
+_VermilionCityTextDidYouSee::
 	text "Did you see S.S."
 	line "ANNE moored in"
 	cont "the harbor?"
 	done
 
-_VermilionCityText_198ac::
+_VermilionCityTextSSAnneDeparted::
 	text "So, S.S.ANNE has"
 	line "departed!"
 
