@@ -8,14 +8,14 @@ VermilionCity_Script:
 	pop hl
 	bit 5, [hl]
 	res 5, [hl]
-	call nz, VermilionCityScript_197c0
+	call nz, .setFirstLockTrashCanIndex
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]
 	jp CallFunctionInTable
 
-VermilionCityScript_197c0:
+.setFirstLockTrashCanIndex
 	call Random
-	ld a, [$ffd4]
+	ld a, [hRandomSub]
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
