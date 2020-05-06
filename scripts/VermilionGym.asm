@@ -58,7 +58,7 @@ VermilionGymLTSurgePostBattle:
 	ld a, [wIsInBattle]
 	cp $ff ; did we lose?
 	jp z, VermilionGymResetScripts
-	ld a, $f0
+	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 
 VermilionGymReceiveTM24:
