@@ -1,4 +1,4 @@
-_VermilionGymText_5cb72::
+_LTSurgePostBattleAdviceText::
 	text "A little word of"
 	line "advice, kid!"
 
@@ -10,7 +10,7 @@ _VermilionGymText_5cb72::
 	cont "type #MON!"
 	done
 
-_VermilionGymText_5cb77::
+_LTSurgeThunderbadgeInfoText::
 	text "The THUNDERBADGE"
 	line "cranks up your"
 	cont "#MON's SPEED!"
@@ -112,7 +112,7 @@ _VermilionGymAfterBattleText3::
 	cont "next to it!"
 	done
 
-_VermilionGymText_5cbf4::
+_VermilionGymFanPreBattleText::
 	text "Yo! Champ in"
 	line "making!"
 
@@ -138,7 +138,7 @@ _VermilionGymText_5cbf4::
 	cont "get to him!"
 	done
 
-_VermilionGymText_5cbf9::
+_VermilionGymFanPostBattleText::
 	text "Whew! That match"
 	line "was electric!"
 	done
