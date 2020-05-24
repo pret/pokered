@@ -2576,7 +2576,7 @@ MoveSelectionMenu:
 	coord hl, 4, 12
 	ld b, 4
 	ld c, 14
-    di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
+	di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
 	coord hl, 4, 12

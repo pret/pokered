@@ -2427,7 +2427,7 @@ MoveSoundTable:
 	db SFX_BATTLE_2A,         $f0,$60 ; BUBBLEBEAM
 	db SFX_BATTLE_28,         $00,$80 ; AURORA_BEAM
 	db SFX_BATTLE_36,         $00,$80 ; HYPER_BEAM
-	db SFX_PECK,$01,          $a0 ; PECK
+	db SFX_PECK,              $01,$a0 ; PECK
 	db SFX_BATTLE_13,         $f0,$20 ; DRILL_PECK
 	db SFX_BATTLE_23,         $01,$c0 ; SUBMISSION
 	db SFX_BATTLE_23,         $00,$80 ; LOW_KICK
