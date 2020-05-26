@@ -33,7 +33,7 @@ _GivePokemon:
 .next
 	ld [hli], a
 	ld [hl], "@"
-	ld hl, SetToBoxText
+	ld hl, SentToBoxText
 	call PrintText
 	scf
 	ret
@@ -73,8 +73,8 @@ GotMonText:
 	TX_SFX_ITEM_1
 	db "@"
 
-SetToBoxText:
-	TX_FAR _SetToBoxText
+SentToBoxText:
+	TX_FAR _SentToBoxText
 	db "@"
 
 BoxIsFullText:
