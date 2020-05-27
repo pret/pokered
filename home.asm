@@ -3560,7 +3560,7 @@ PrintLetterDelay::
 	pop hl
 	ret
 
-; Copies [hl, bc) to [de, bc - hl).
+; Copies [hl, bc) to [de, de + bc - hl).
 ; In other words, the source data is from hl up to but not including bc,
 ; and the destination is de.
 CopyDataUntil::
