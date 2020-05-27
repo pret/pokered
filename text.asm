@@ -2730,7 +2730,7 @@ _GotMonText::
 	TX_RAM wcd6d
 	text "!@@"
 
-_SetToBoxText::
+_SentToBoxText::
 	text "There's no more"
 	line "room for #MON!"
 	cont "@"
