@@ -1046,7 +1046,7 @@ wHiddenObjectY:: ; cd40
 
 wTrainerScreenY:: ; cd40
 
-wUnusedCD40:: ; cd40
+wOptionsCancelCursorX:: ; cd40
 	ds 1
 
 wDayCarePerLevelCost:: ; cd41

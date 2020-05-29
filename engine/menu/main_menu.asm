@@ -456,7 +456,7 @@ DisplayOptionMenu:
 	ld [wLastMenuItem], a
 	inc a
 	ld [wLetterPrintingDelayFlags], a
-	ld [wUnusedCD40], a
+	ld [wOptionsCancelCursorX], a
 	ld a, 3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY], a
 	call SetCursorPositionsFromOptions
