@@ -333,10 +333,10 @@ GetCryData::
 	call BankswitchBack
 
 	; Cry headers have 3 channels,
-	; and start from index $14,
+	; and start from index CRY_SFX_START,
 	; so add 3 times the cry id.
 	ld a, b
-	ld c, $14
+	ld c, CRY_SFX_START
 	rlca ; * 2
 	add b
 	add c
