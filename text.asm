@@ -255,7 +255,7 @@ _TradeWentToText::
 	TX_RAM wcf4b
 	text " went"
 	line "to @"
-	TX_RAM wGrassRate
+	TX_RAM wLinkEnemyTrainerName
 	text "."
 	done
 
@@ -267,7 +267,7 @@ _TradeForText::
 	done
 
 _TradeSendsText::
-	TX_RAM wGrassRate
+	TX_RAM wLinkEnemyTrainerName
 	text " sends"
 	line "@"
 	TX_RAM wcd6d
@@ -275,7 +275,7 @@ _TradeSendsText::
 	done
 
 _TradeWavesFarewellText::
-	TX_RAM wGrassRate
+	TX_RAM wLinkEnemyTrainerName
 	text " waves"
 	line "farewell as"
 	done
@@ -294,7 +294,7 @@ _TradeTakeCareText::
 	done
 
 _TradeWillTradeText::
-	TX_RAM wGrassRate
+	TX_RAM wLinkEnemyTrainerName
 	text " will"
 	line "trade @"
 	TX_RAM wcd6d
