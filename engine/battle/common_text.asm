@@ -5,7 +5,7 @@ PrintBeginningBattleText:
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_3F
 	jr c, .notPokemonTower
-	cp MR_FUJIS_HOUSE
+	cp POKEMON_TOWER_7F + 1
 	jr c, .pokemonTower
 .notPokemonTower
 	ld a, [wEnemyMonSpecies2]

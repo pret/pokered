@@ -919,6 +919,7 @@ INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
 SECTION "bankF", ROMX
 
 INCLUDE "engine/battle/core.asm"
+INCLUDE "engine/battle/effects.asm"
 
 
 SECTION "bank10", ROMX
