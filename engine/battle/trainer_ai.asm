@@ -273,58 +273,9 @@ ReadMove:
 	pop hl
 	ret
 
-; move choice modification methods that are applied for each trainer class
-; 0 is sentinel value
-TrainerClassMoveChoiceModifications:
-	db 0      ; YOUNGSTER
-	db 1,0    ; BUG CATCHER
-	db 1,0    ; LASS
-	db 1,3,0  ; SAILOR
-	db 1,0    ; JR_TRAINER_M
-	db 1,0    ; JR_TRAINER_F
-	db 1,2,3,0; POKEMANIAC
-	db 1,2,0  ; SUPER_NERD
-	db 1,0    ; HIKER
-	db 1,0    ; BIKER
-	db 1,3,0  ; BURGLAR
-	db 1,0    ; ENGINEER
-	db 1,2,0  ; JUGGLER_X
-	db 1,3,0  ; FISHER
-	db 1,3,0  ; SWIMMER
-	db 0      ; CUE_BALL
-	db 1,0    ; GAMBLER
-	db 1,3,0  ; BEAUTY
-	db 1,2,0  ; PSYCHIC_TR
-	db 1,3,0  ; ROCKER
-	db 1,0    ; JUGGLER
-	db 1,0    ; TAMER
-	db 1,0    ; BIRD_KEEPER
-	db 1,0    ; BLACKBELT
-	db 1,0    ; SONY1
-	db 1,3,0  ; PROF_OAK
-	db 1,2,0  ; CHIEF
-	db 1,2,0  ; SCIENTIST
-	db 1,3,0  ; GIOVANNI
-	db 1,0    ; ROCKET
-	db 1,3,0  ; COOLTRAINER_M
-	db 1,3,0  ; COOLTRAINER_F
-	db 1,0    ; BRUNO
-	db 1,0    ; BROCK
-	db 1,3,0  ; MISTY
-	db 1,3,0  ; LT_SURGE
-	db 1,3,0  ; ERIKA
-	db 1,3,0  ; KOGA
-	db 1,3,0  ; BLAINE
-	db 1,3,0  ; SABRINA
-	db 1,2,0  ; GENTLEMAN
-	db 1,3,0  ; SONY2
-	db 1,3,0  ; SONY3
-	db 1,2,3,0; LORELEI
-	db 1,0    ; CHANNELER
-	db 1,0    ; AGATHA
-	db 1,3,0  ; LANCE
+INCLUDE "data/trainer_move_choices.asm"
 
-INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
+INCLUDE "data/trainer_pic_money_pointers.asm"
 
 INCLUDE "text/trainer_names.asm"
 
@@ -368,57 +319,7 @@ TrainerAI:
 	call Random
 	jp hl
 
-TrainerAIPointers:
-; one entry per trainer class
-; first byte, number of times (per Pokémon) it can occur
-; next two bytes, pointer to AI subroutine for trainer class
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler_x
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 2,BlackbeltAI ; blackbelt
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 1,GenericAI ; chief
-	dbw 3,GenericAI
-	dbw 1,GiovanniAI ; giovanni
-	dbw 3,GenericAI
-	dbw 2,CooltrainerMAI ; cooltrainerm
-	dbw 1,CooltrainerFAI ; cooltrainerf
-	dbw 2,BrunoAI ; bruno
-	dbw 5,BrockAI ; brock
-	dbw 1,MistyAI ; misty
-	dbw 1,LtSurgeAI ; surge
-	dbw 1,ErikaAI ; erika
-	dbw 2,KogaAI ; koga
-	dbw 2,BlaineAI ; blaine
-	dbw 1,SabrinaAI ; sabrina
-	dbw 3,GenericAI
-	dbw 1,Sony2AI ; sony2
-	dbw 1,Sony3AI ; sony3
-	dbw 2,LoreleiAI ; lorelei
-	dbw 3,GenericAI
-	dbw 2,AgathaAI ; agatha
-	dbw 1,LanceAI ; lance
+INCLUDE "data/trainer_ai_pointers.asm"
 
 JugglerAI:
 	cp 25 percent + 1

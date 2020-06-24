@@ -1,0 +1,2 @@
+GuardDrinksList:
+	db FRESH_WATER, SODA_POP, LEMONADE, $00

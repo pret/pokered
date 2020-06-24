@@ -349,7 +349,7 @@ GetPlayerTeleportAnimFrameDelay:
 
 IsPlayerStandingOnWarpPadOrHole:
 	ld b, 0
-	ld hl, .warpPadAndHoleData
+	ld hl, WarpPadAndHoleData
 	ld a, [wCurMapTileset]
 	ld c, a
 .loop
@@ -373,13 +373,7 @@ IsPlayerStandingOnWarpPadOrHole:
 	ld [wStandingOnWarpPadOrHole], a
 	ret
 
-; format: db tileset id, tile id, value to be put in [wStandingOnWarpPadOrHole]
-.warpPadAndHoleData:
-	db FACILITY, $20, 1 ; warp pad
-	db FACILITY, $11, 2 ; hole
-	db CAVERN,   $22, 2 ; hole
-	db INTERIOR, $55, 1 ; warp pad
-	db $FF
+INCLUDE "data/warp_pad_hole_tile_ids.asm"
 
 FishingAnim:
 	ld c, 10

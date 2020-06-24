@@ -2881,10 +2881,7 @@ IsNextTileShoreOrWater:
 	and a
 	ret
 
-; tilesets with water
-WaterTilesets:
-	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU
-	db $ff ; terminator
+INCLUDE "data/water_tilesets.asm"
 
 ReadSuperRodData:
 ; return e = 2 if no fish on this map

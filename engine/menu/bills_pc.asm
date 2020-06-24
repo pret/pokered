@@ -89,7 +89,7 @@ SomeonesPCText:   db "SOMEONE's PC@"
 BillsPCText:      db "BILL's PC@"
 PlayersPCText:    db "'s PC@"
 OaksPCText:       db "PROF.OAK's PC@"
-PKMNLeaguePCText: db $4a, "LEAGUE@"
+PKMNLeaguePCText: db "<pkmn>LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
 BillsPC_::
@@ -339,9 +339,9 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW ", $4a
-	next "DEPOSIT ",  $4a
-	next "RELEASE ",  $4a
+	db   "WITHDRAW <pkmn>"
+	next "DEPOSIT <pkmn>"
+	next "RELEASE <pkmn>"
 	next "CHANGE BOX"
 	next "SEE YA!"
 	db "@"
