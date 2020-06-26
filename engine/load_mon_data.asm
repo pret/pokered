@@ -1,4 +1,4 @@
-LoadMonData_:
+LoadMonData_::
 ; Load monster [wWhichPokemon] from list [wMonDataLocation]:
 ;  0: partymon
 ;  1: enemymon

@@ -1,4 +1,4 @@
-SSAnneBow_h:
+SSAnneBow_h::
 	db SHIP ; tileset
 	db SS_ANNE_BOW_HEIGHT, SS_ANNE_BOW_WIDTH ; dimensions (y, x)
 	dw SSAnneBow_Blocks ; blocks

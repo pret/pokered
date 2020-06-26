@@ -313,7 +313,7 @@ RocketHideout2Script3:
 	ld [wCurMapScript], a
 	ret
 
-LoadSpinnerArrowTiles:
+LoadSpinnerArrowTiles::
 	ld a, [wSpriteStateData1 + 2]
 	srl a
 	srl a

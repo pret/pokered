@@ -1,4 +1,4 @@
-CableClubNPC:
+CableClubNPC::
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
 	CheckEvent EVENT_GOT_POKEDEX

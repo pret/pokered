@@ -1,4 +1,4 @@
-SeafoamIslandsB2F_h:
+SeafoamIslandsB2F_h::
 	db CAVERN ; tileset
 	db SEAFOAM_ISLANDS_B2F_HEIGHT, SEAFOAM_ISLANDS_B2F_WIDTH ; dimensions (y, x)
 	dw SeafoamIslandsB2F_Blocks ; blocks

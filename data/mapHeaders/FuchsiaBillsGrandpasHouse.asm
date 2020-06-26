@@ -1,4 +1,4 @@
-FuchsiaBillsGrandpasHouse_h:
+FuchsiaBillsGrandpasHouse_h::
 	db HOUSE ; tileset
 	db FUCHSIA_BILLS_GRANDPAS_HOUSE_HEIGHT, FUCHSIA_BILLS_GRANDPAS_HOUSE_WIDTH ; dimensions (y, x)
 	dw FuchsiaBillsGrandpasHouse_Blocks ; blocks

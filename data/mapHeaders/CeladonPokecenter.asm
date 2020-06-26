@@ -1,4 +1,4 @@
-CeladonPokecenter_h:
+CeladonPokecenter_h::
 	db POKECENTER ; tileset
 	db CELADON_POKECENTER_HEIGHT, CELADON_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeladonPokecenter_Blocks ; blocks

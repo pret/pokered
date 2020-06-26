@@ -1,4 +1,4 @@
-CeruleanMart_h:
+CeruleanMart_h::
 	db MART ; tileset
 	db CERULEAN_MART_HEIGHT, CERULEAN_MART_WIDTH ; dimensions (y, x)
 	dw CeruleanMart_Blocks ; blocks

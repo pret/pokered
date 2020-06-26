@@ -1,4 +1,4 @@
-CeladonMart3F_h:
+CeladonMart3F_h::
 	db LOBBY ; tileset
 	db CELADON_MART_3F_HEIGHT, CELADON_MART_3F_WIDTH ; dimensions (y, x)
 	dw CeladonMart3F_Blocks ; blocks

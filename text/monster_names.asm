@@ -1,4 +1,4 @@
-MonsterNames:
+MonsterNames::
 	db "RHYDON@@@@"
 	db "KANGASKHAN"
 	db "NIDORAN♂@@"

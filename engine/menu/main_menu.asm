@@ -312,7 +312,7 @@ StartNewGame:
 	call DelayFrames
 
 ; enter map after using a special warp or loading the game from the main menu
-SpecialEnterMap:
+SpecialEnterMap::
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a

@@ -134,7 +134,7 @@ LoadTownMap_Nest:
 MonsNestText:
 	db "'s NEST@"
 
-LoadTownMap_Fly:
+LoadTownMap_Fly::
 	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
@@ -590,7 +590,7 @@ MonNestIcon:
 	INCBIN "gfx/mon_nest_icon.1bpp"
 MonNestIconEnd:
 
-TownMapSpriteBlinkingAnimation:
+TownMapSpriteBlinkingAnimation::
 	ld a, [wAnimCounter]
 	inc a
 	cp 25

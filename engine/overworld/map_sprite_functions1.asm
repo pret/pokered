@@ -1,4 +1,4 @@
-_UpdateSprites:
+_UpdateSprites::
 	ld h, $c1
 	inc h
 	ld a, $e    ; wSpriteStateData2 + $0e

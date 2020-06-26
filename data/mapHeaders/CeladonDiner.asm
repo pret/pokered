@@ -1,4 +1,4 @@
-CeladonDiner_h:
+CeladonDiner_h::
 	db LOBBY ; tileset
 	db CELADON_DINER_HEIGHT, CELADON_DINER_WIDTH ; dimensions (y, x)
 	dw CeladonDiner_Blocks ; blocks

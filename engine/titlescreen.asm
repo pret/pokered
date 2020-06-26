@@ -3,7 +3,7 @@ CopyFixedLengthText:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-SetDefaultNamesBeforeTitlescreen:
+SetDefaultNamesBeforeTitlescreen::
 	ld hl, NintenText
 	ld de, wPlayerName
 	call CopyFixedLengthText

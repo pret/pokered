@@ -41,7 +41,7 @@ Mansion2Script_5202f:
 	ld [wNewTileBlockID], a
 	predef_jump ReplaceTileBlock
 
-Mansion2Script_Switches:
+Mansion2Script_Switches::
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz

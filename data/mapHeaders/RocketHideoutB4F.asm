@@ -1,4 +1,4 @@
-RocketHideoutB4F_h:
+RocketHideoutB4F_h::
 	db FACILITY ; tileset
 	db ROCKET_HIDEOUT_B4F_HEIGHT, ROCKET_HIDEOUT_B4F_WIDTH ; dimensions (y, x)
 	dw RocketHideoutB4F_Blocks ; blocks

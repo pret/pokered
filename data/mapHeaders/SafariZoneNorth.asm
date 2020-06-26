@@ -1,4 +1,4 @@
-SafariZoneNorth_h:
+SafariZoneNorth_h::
 	db FOREST ; tileset
 	db SAFARI_ZONE_NORTH_HEIGHT, SAFARI_ZONE_NORTH_WIDTH ; dimensions (y, x)
 	dw SafariZoneNorth_Blocks ; blocks

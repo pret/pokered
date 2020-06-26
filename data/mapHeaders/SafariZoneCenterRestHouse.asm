@@ -1,4 +1,4 @@
-SafariZoneCenterRestHouse_h:
+SafariZoneCenterRestHouse_h::
 	db GATE ; tileset
 	db SAFARI_ZONE_CENTER_REST_HOUSE_HEIGHT, SAFARI_ZONE_CENTER_REST_HOUSE_WIDTH ; dimensions (y, x)
 	dw SafariZoneCenterRestHouse_Blocks ; blocks

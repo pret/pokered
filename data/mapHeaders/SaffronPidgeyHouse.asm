@@ -1,4 +1,4 @@
-SaffronPidgeyHouse_h:
+SaffronPidgeyHouse_h::
 	db HOUSE ; tileset
 	db SAFFRON_PIDGEY_HOUSE_HEIGHT, SAFFRON_PIDGEY_HOUSE_WIDTH ; dimensions (y, x)
 	dw SaffronPidgeyHouse_Blocks ; blocks

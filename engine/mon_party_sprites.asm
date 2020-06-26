@@ -9,7 +9,7 @@ AnimatePartyMon_ForceSpeed1:
 ; 0: green
 ; 1: yellow
 ; 2: red
-AnimatePartyMon:
+AnimatePartyMon::
 	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a

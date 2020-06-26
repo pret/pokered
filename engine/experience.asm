@@ -1,5 +1,5 @@
 ; calculates the level a mon should be based on its current exp
-CalcLevelFromExperience:
+CalcLevelFromExperience::
 	ld a, [wLoadedMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
@@ -28,7 +28,7 @@ CalcLevelFromExperience:
 	ret
 
 ; calculates the amount of experience needed for level d
-CalcExperience:
+CalcExperience::
 	ld a, [wMonHGrowthRate]
 	add a
 	add a

@@ -1,4 +1,4 @@
-LavenderMart_h:
+LavenderMart_h::
 	db MART ; tileset
 	db LAVENDER_MART_HEIGHT, LAVENDER_MART_WIDTH ; dimensions (y, x)
 	dw LavenderMart_Blocks ; blocks

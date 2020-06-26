@@ -1,4 +1,4 @@
-_DisplayPokedex:
+_DisplayPokedex::
 	ld hl, wd730
 	set 6, [hl]
 	predef ShowPokedexData

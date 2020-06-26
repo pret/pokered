@@ -1,4 +1,4 @@
-HandleLedges:
+HandleLedges::
 	ld a, [wd736]
 	bit 6, a ; already jumping down ledge
 	ret nz

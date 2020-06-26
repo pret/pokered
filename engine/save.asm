@@ -271,7 +271,7 @@ SaveSAVtoSRAM2:
 	ld [MBC1SRamEnable], a
 	ret
 
-SaveSAVtoSRAM:
+SaveSAVtoSRAM::
 	ld a, $2
 	ld [wSaveFileStatus], a
 	call SaveSAVtoSRAM0

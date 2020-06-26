@@ -1,5 +1,5 @@
 ; see also MapHeaderPointers
-MapHeaderBanks:
+MapHeaderBanks::
 	db BANK(PalletTown_h)
 	db BANK(ViridianCity_h)
 	db BANK(PewterCity_h)

@@ -1,4 +1,4 @@
-MtMoon1F_h:
+MtMoon1F_h::
 	db CAVERN ; tileset
 	db MT_MOON_1F_HEIGHT, MT_MOON_1F_WIDTH ; dimensions (y, x)
 	dw MtMoon1F_Blocks ; blocks

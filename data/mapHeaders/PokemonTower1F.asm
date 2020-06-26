@@ -1,4 +1,4 @@
-PokemonTower1F_h:
+PokemonTower1F_h::
 	db CEMETERY ; tileset
 	db POKEMON_TOWER_1F_HEIGHT, POKEMON_TOWER_1F_WIDTH ; dimensions (y, x)
 	dw PokemonTower1F_Blocks ; blocks

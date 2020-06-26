@@ -1,4 +1,4 @@
-UndergroundPathRoute7Copy_h:
+UndergroundPathRoute7Copy_h::
 	db GATE ; tileset
 	db UNDERGROUND_PATH_ROUTE_7_HEIGHT, UNDERGROUND_PATH_ROUTE_7_WIDTH ; dimensions (y, x)
 	dw UndergroundPathRoute7Copy_Blocks ; blocks

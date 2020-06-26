@@ -1,4 +1,4 @@
-BikeShop_h:
+BikeShop_h::
 	db CLUB ; tileset
 	db BIKE_SHOP_HEIGHT, BIKE_SHOP_WIDTH ; dimensions (y, x)
 	dw BikeShop_Blocks ; blocks

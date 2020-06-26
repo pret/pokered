@@ -1,4 +1,4 @@
-Route12SuperRodHouse_h:
+Route12SuperRodHouse_h::
 	db HOUSE ; tileset
 	db ROUTE_12_SUPER_ROD_HOUSE_HEIGHT, ROUTE_12_SUPER_ROD_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route12SuperRodHouse_Blocks ; blocks

@@ -1,4 +1,4 @@
-CeruleanPokecenter_h:
+CeruleanPokecenter_h::
 	db POKECENTER ; tileset
 	db CERULEAN_POKECENTER_HEIGHT, CERULEAN_POKECENTER_WIDTH ; dimensions (y, x)
 	dw CeruleanPokecenter_Blocks ; blocks

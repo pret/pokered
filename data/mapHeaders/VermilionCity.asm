@@ -1,4 +1,4 @@
-VermilionCity_h:
+VermilionCity_h::
 	db OVERWORLD ; tileset
 	db VERMILION_CITY_HEIGHT, VERMILION_CITY_WIDTH ; dimensions (y, x)
 	dw VermilionCity_Blocks ; blocks

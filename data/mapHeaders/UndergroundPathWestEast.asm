@@ -1,4 +1,4 @@
-UndergroundPathWestEast_h:
+UndergroundPathWestEast_h::
 	db UNDERGROUND ; tileset
 	db UNDERGROUND_PATH_WEST_EAST_HEIGHT, UNDERGROUND_PATH_WEST_EAST_WIDTH ; dimensions (y, x)
 	dw UndergroundPathWestEast_Blocks ; blocks

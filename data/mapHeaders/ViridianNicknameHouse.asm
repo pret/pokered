@@ -1,4 +1,4 @@
-ViridianNicknameHouse_h:
+ViridianNicknameHouse_h::
 	db HOUSE ; tileset
 	db VIRIDIAN_NICKNAME_HOUSE_HEIGHT, VIRIDIAN_NICKNAME_HOUSE_WIDTH ; dimensions (y, x)
 	dw ViridianNicknameHouse_Blocks ; blocks

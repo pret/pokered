@@ -1,4 +1,4 @@
-PlayerStepOutFromDoor:
+PlayerStepOutFromDoor::
 	ld hl, wd730
 	res 1, [hl]
 	call IsPlayerStandingOnDoorTile
@@ -27,7 +27,7 @@ PlayerStepOutFromDoor:
 	res 7, [hl]
 	ret
 
-_EndNPCMovementScript:
+_EndNPCMovementScript::
 	ld hl, wd730
 	res 7, [hl]
 	ld hl, wd72e
@@ -44,7 +44,7 @@ _EndNPCMovementScript:
 	ld [wSimulatedJoypadStatesEnd], a
 	ret
 
-PalletMovementScriptPointerTable:
+PalletMovementScriptPointerTable::
 	dw PalletMovementScript_OakMoveLeft
 	dw PalletMovementScript_PlayerMoveLeft
 	dw PalletMovementScript_WaitAndWalkToLab
@@ -157,7 +157,7 @@ PalletMovementScript_Done:
 	res 7, [hl]
 	jp EndNPCMovementScript
 
-PewterMuseumGuyMovementScriptPointerTable:
+PewterMuseumGuyMovementScriptPointerTable::
 	dw PewterMovementScript_WalkToMuseum
 	dw PewterMovementScript_Done
 
@@ -213,7 +213,7 @@ PewterMovementScript_Done:
 	res 7, [hl]
 	jp EndNPCMovementScript
 
-PewterGymGuyMovementScriptPointerTable:
+PewterGymGuyMovementScriptPointerTable::
 	dw PewterMovementScript_WalkToGym
 	dw PewterMovementScript_Done
 
@@ -266,7 +266,7 @@ RLEList_PewterGymGuy:
 	db NPC_MOVEMENT_RIGHT, $03
 	db $FF
 
-FreezeEnemyTrainerSprite:
+FreezeEnemyTrainerSprite::
 	ld a, [wCurMap]
 	cp POKEMON_TOWER_7F
 	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't freeze them

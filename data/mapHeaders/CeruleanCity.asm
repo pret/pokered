@@ -1,4 +1,4 @@
-CeruleanCity_h:
+CeruleanCity_h::
 	db OVERWORLD ; tileset
 	db CERULEAN_CITY_HEIGHT, CERULEAN_CITY_WIDTH ; dimensions (y, x)
 	dw CeruleanCity_Blocks ; blocks

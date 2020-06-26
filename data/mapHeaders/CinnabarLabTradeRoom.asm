@@ -1,4 +1,4 @@
-CinnabarLabTradeRoom_h:
+CinnabarLabTradeRoom_h::
 	db LAB ; tileset
 	db CINNABAR_LAB_TRADE_ROOM_HEIGHT, CINNABAR_LAB_TRADE_ROOM_WIDTH ; dimensions (y, x)
 	dw CinnabarLabTradeRoom_Blocks ; blocks

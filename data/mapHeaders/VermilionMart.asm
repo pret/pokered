@@ -1,4 +1,4 @@
-VermilionMart_h:
+VermilionMart_h::
 	db MART ; tileset
 	db VERMILION_MART_HEIGHT, VERMILION_MART_WIDTH ; dimensions (y, x)
 	dw VermilionMart_Blocks ; blocks

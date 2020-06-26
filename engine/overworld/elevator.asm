@@ -1,4 +1,4 @@
-ShakeElevator:
+ShakeElevator::
 	ld de, -$20
 	call ShakeElevatorRedrawRow
 	ld de, SCREEN_HEIGHT * $20

@@ -1,4 +1,4 @@
-_RemovePokemon:
+_RemovePokemon::
 	ld hl, wPartyCount
 	ld a, [wRemoveMonFromBox]
 	and a

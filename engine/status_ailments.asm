@@ -1,4 +1,4 @@
-PrintStatusAilment:
+PrintStatusAilment::
 	ld a, [de]
 	bit PSN, a
 	jr nz, .psn

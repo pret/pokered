@@ -1,4 +1,4 @@
-MrFujisHouse_h:
+MrFujisHouse_h::
 	db HOUSE ; tileset
 	db MR_FUJIS_HOUSE_HEIGHT, MR_FUJIS_HOUSE_WIDTH ; dimensions (y, x)
 	dw MrFujisHouse_Blocks ; blocks

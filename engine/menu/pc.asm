@@ -1,4 +1,4 @@
-ActivatePC:
+ActivatePC::
 	call SaveScreenTilesToBuffer2
 	ld a, SFX_TURN_ON_PC
 	call PlaySound
@@ -115,7 +115,7 @@ AccessedMyPCText:
 	db "@"
 
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
-RemoveItemByID:
+RemoveItemByID::
 	ld hl, wBagItems
 	ld a, [hItemToRemoveID]
 	ld b, a

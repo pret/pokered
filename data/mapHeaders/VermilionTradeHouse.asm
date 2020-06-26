@@ -1,4 +1,4 @@
-VermilionTradeHouse_h:
+VermilionTradeHouse_h::
 	db HOUSE ; tileset
 	db VERMILION_TRADE_HOUSE_HEIGHT, VERMILION_TRADE_HOUSE_WIDTH ; dimensions (y, x)
 	dw VermilionTradeHouse_Blocks ; blocks

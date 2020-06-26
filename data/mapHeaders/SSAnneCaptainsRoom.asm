@@ -1,4 +1,4 @@
-SSAnneCaptainsRoom_h:
+SSAnneCaptainsRoom_h::
 	db SHIP ; tileset
 	db SS_ANNE_CAPTAINS_ROOM_HEIGHT, SS_ANNE_CAPTAINS_ROOM_WIDTH ; dimensions (y, x)
 	dw SSAnneCaptainsRoom_Blocks ; blocks

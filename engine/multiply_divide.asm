@@ -1,4 +1,4 @@
-_Multiply:
+_Multiply::
 	ld a, $8
 	ld b, a
 	xor a
@@ -59,7 +59,7 @@ _Multiply:
 	ld [H_PRODUCT], a
 	ret
 
-_Divide:
+_Divide::
 	xor a
 	ld [H_DIVIDEBUFFER], a
 	ld [H_DIVIDEBUFFER+1], a

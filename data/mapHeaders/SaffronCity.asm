@@ -1,4 +1,4 @@
-SaffronCity_h:
+SaffronCity_h::
 	db OVERWORLD ; tileset
 	db SAFFRON_CITY_HEIGHT, SAFFRON_CITY_WIDTH ; dimensions (y, x)
 	dw SaffronCity_Blocks ; blocks

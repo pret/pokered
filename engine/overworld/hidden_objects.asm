@@ -1,4 +1,4 @@
-IsPlayerOnDungeonWarp:
+IsPlayerOnDungeonWarp::
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
@@ -15,7 +15,7 @@ IsPlayerOnDungeonWarp:
 	ret
 
 ; if a hidden object was found, stores $00 in [$ffee], else stores $ff
-CheckForHiddenObject:
+CheckForHiddenObject::
 	ld hl, $ffeb
 	xor a
 	ld [hli], a

@@ -1,4 +1,4 @@
-DisplayPokemonCenterDialogue_:
+DisplayPokemonCenterDialogue_::
 	call SaveScreenTilesToBuffer1 ; save screen
 	ld hl, PokemonCenterWelcomeText
 	call PrintText

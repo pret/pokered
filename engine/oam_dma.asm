@@ -1,4 +1,4 @@
-WriteDMACodeToHRAM:
+WriteDMACodeToHRAM::
 ; Since no other memory is available during OAM DMA,
 ; DMARoutine is copied to HRAM and executed there.
 	ld c, $ff80 % $100

@@ -1,4 +1,4 @@
-TryPushingBoulder:
+TryPushingBoulder::
 	ld a, [wd728]
 	bit 0, a ; using Strength?
 	ret z
@@ -82,7 +82,7 @@ PushBoulderLeftMovementData:
 PushBoulderRightMovementData:
 	db NPC_MOVEMENT_RIGHT,$FF
 
-DoBoulderDustAnimation:
+DoBoulderDustAnimation::
 	ld a, [wd730]
 	bit 0, a
 	ret nz

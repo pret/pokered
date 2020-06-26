@@ -1,4 +1,4 @@
-CeruleanCave2F_h:
+CeruleanCave2F_h::
 	db CAVERN ; tileset
 	db CERULEAN_CAVE_2F_HEIGHT, CERULEAN_CAVE_2F_WIDTH ; dimensions (y, x)
 	dw CeruleanCave2F_Blocks ; blocks

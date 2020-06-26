@@ -1,4 +1,4 @@
-PewterGym_h:
+PewterGym_h::
 	db GYM ; tileset
 	db PEWTER_GYM_HEIGHT, PEWTER_GYM_WIDTH ; dimensions (y, x)
 	dw PewterGym_Blocks ; blocks

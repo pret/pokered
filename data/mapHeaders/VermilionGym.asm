@@ -1,4 +1,4 @@
-VermilionGym_h:
+VermilionGym_h::
 	db GYM ; tileset
 	db VERMILION_GYM_HEIGHT, VERMILION_GYM_WIDTH ; dimensions (y, x)
 	dw VermilionGym_Blocks ; blocks

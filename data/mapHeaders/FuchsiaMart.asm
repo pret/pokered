@@ -1,4 +1,4 @@
-FuchsiaMart_h:
+FuchsiaMart_h::
 	db MART ; tileset
 	db FUCHSIA_MART_HEIGHT, FUCHSIA_MART_WIDTH ; dimensions (y, x)
 	dw FuchsiaMart_Blocks ; blocks

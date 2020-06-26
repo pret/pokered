@@ -20,7 +20,7 @@ HiddenItems:
 
 INCLUDE "data/hidden_item_coords.asm"
 
-FoundHiddenItemText:
+FoundHiddenItemText::
 	TX_FAR _FoundHiddenItemText
 	TX_ASM
 	ld a, [wHiddenObjectFunctionArgument] ; item ID
@@ -45,7 +45,7 @@ FoundHiddenItemText:
 	call PrintText
 	jp TextScriptEnd
 
-HiddenItemBagFullText:
+HiddenItemBagFullText::
 	TX_FAR _HiddenItemBagFullText
 	db "@"
 
@@ -120,12 +120,12 @@ HiddenCoins:
 
 INCLUDE "data/hidden_coins.asm"
 
-FoundHiddenCoinsText:
+FoundHiddenCoinsText::
 	TX_FAR _FoundHiddenCoinsText
 	TX_SFX_ITEM_2
 	db "@"
 
-DroppedHiddenCoinsText:
+DroppedHiddenCoinsText::
 	TX_FAR _FoundHiddenCoins2Text
 	TX_SFX_ITEM_2
 	TX_FAR _DroppedHiddenCoinsText

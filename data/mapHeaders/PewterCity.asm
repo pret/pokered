@@ -1,4 +1,4 @@
-PewterCity_h:
+PewterCity_h::
 	db OVERWORLD ; tileset
 	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
 	dw PewterCity_Blocks ; blocks

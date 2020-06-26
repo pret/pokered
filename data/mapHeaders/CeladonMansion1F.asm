@@ -1,4 +1,4 @@
-CeladonMansion1F_h:
+CeladonMansion1F_h::
 	db MANSION ; tileset
 	db CELADON_MANSION_1F_HEIGHT, CELADON_MANSION_1F_WIDTH ; dimensions (y, x)
 	dw CeladonMansion1F_Blocks ; blocks

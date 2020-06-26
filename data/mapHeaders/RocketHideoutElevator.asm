@@ -1,4 +1,4 @@
-RocketHideoutElevator_h:
+RocketHideoutElevator_h::
 	db LOBBY ; tileset
 	db ROCKET_HIDEOUT_ELEVATOR_HEIGHT, ROCKET_HIDEOUT_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw RocketHideoutElevator_Blocks ; blocks

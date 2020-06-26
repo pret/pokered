@@ -1,4 +1,4 @@
-FightingDojo_h:
+FightingDojo_h::
 	db DOJO ; tileset
 	db FIGHTING_DOJO_HEIGHT, FIGHTING_DOJO_WIDTH ; dimensions (y, x)
 	dw FightingDojo_Blocks ; blocks

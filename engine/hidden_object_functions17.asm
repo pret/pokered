@@ -2,7 +2,7 @@ PrintRedSNESText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomSNESText
 
-RedBedroomSNESText:
+RedBedroomSNESText::
 	TX_FAR _RedBedroomSNESText
 	db "@"
 
@@ -10,7 +10,7 @@ OpenRedsPC:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomPCText
 
-RedBedroomPCText:
+RedBedroomPCText::
 	TX_PLAYERS_PC
 
 Route15GateLeftBinoculars:
@@ -24,7 +24,7 @@ Route15GateLeftBinoculars:
 	call PlayCry
 	jp DisplayMonFrontSpriteInBox
 
-Route15UpstairsBinocularsText:
+Route15UpstairsBinocularsText::
 	TX_FAR _Route15UpstairsBinocularsText
 	db "@"
 
@@ -36,7 +36,7 @@ AerodactylFossil:
 	tx_pre AerodactylFossilText
 	ret
 
-AerodactylFossilText:
+AerodactylFossilText::
 	TX_FAR _AerodactylFossilText
 	db "@"
 
@@ -48,7 +48,7 @@ KabutopsFossil:
 	tx_pre KabutopsFossilText
 	ret
 
-KabutopsFossilText:
+KabutopsFossilText::
 	TX_FAR _KabutopsFossilText
 	db "@"
 
@@ -89,7 +89,7 @@ PrintBlackboardLinkCableText:
 	call PrintPredefTextID
 	ret
 
-LinkCableHelp:
+LinkCableHelp::
 	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
@@ -173,7 +173,7 @@ LinkCableInfoText3:
 	TX_FAR _LinkCableInfoText3
 	db "@"
 
-ViridianSchoolBlackboard:
+ViridianSchoolBlackboard::
 	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
@@ -308,7 +308,7 @@ PrintTrashText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump VermilionGymTrashText
 
-VermilionGymTrashText:
+VermilionGymTrashText::
 	TX_FAR _VermilionGymTrashText
 	db "@"
 
@@ -433,7 +433,7 @@ GymTrashCans:
 	db 3, 10, 12, 14,  0 ; 13
 	db 2, 11, 13,  0,  0 ; 14
 
-VermilionGymTrashSuccessText1:
+VermilionGymTrashSuccessText1::
 	TX_FAR _VermilionGymTrashSuccessText1
 	TX_ASM
 	call WaitForSoundToFinish
@@ -443,7 +443,7 @@ VermilionGymTrashSuccessText1:
 	jp TextScriptEnd
 
 ; unused
-VermilionGymTrashSuccessText2:
+VermilionGymTrashSuccessText2::
 	TX_FAR _VermilionGymTrashSuccessText2
 	db "@"
 
@@ -456,7 +456,7 @@ VermilionGymTrashSuccesPlaySfx:
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VermilionGymTrashSuccessText3:
+VermilionGymTrashSuccessText3::
 	TX_FAR _VermilionGymTrashSuccessText3
 	TX_ASM
 	call WaitForSoundToFinish
@@ -465,7 +465,7 @@ VermilionGymTrashSuccessText3:
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VermilionGymTrashFailText:
+VermilionGymTrashFailText::
 	TX_FAR _VermilionGymTrashFailText
 	TX_ASM
 	call WaitForSoundToFinish

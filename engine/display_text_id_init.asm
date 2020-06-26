@@ -1,5 +1,5 @@
 ; function that performs initialization for DisplayTextID
-DisplayTextIDInit:
+DisplayTextIDInit::
 	xor a
 	ld [wListMenuID], a
 	ld a, [wAutoTextBoxDrawingControl]

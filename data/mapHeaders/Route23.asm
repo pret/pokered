@@ -1,4 +1,4 @@
-Route23_h:
+Route23_h::
 	db PLATEAU ; tileset
 	db ROUTE_23_HEIGHT, ROUTE_23_WIDTH ; dimensions (y, x)
 	dw Route23_Blocks ; blocks

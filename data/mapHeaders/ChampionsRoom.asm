@@ -1,4 +1,4 @@
-ChampionsRoom_h:
+ChampionsRoom_h::
 	db GYM ; tileset
 	db CHAMPIONS_ROOM_HEIGHT, CHAMPIONS_ROOM_WIDTH ; dimensions (y, x)
 	dw ChampionsRoom_Blocks ; blocks

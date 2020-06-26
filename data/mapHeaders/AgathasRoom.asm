@@ -1,4 +1,4 @@
-AgathasRoom_h:
+AgathasRoom_h::
 	db CEMETERY ; tileset
 	db AGATHAS_ROOM_HEIGHT, AGATHAS_ROOM_WIDTH ; dimensions (y, x)
 	dw AgathasRoom_Blocks ; blocks

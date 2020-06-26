@@ -1,4 +1,4 @@
-SilphCo10F_h:
+SilphCo10F_h::
 	db FACILITY ; tileset
 	db SILPH_CO_10F_HEIGHT, SILPH_CO_10F_WIDTH ; dimensions (y, x)
 	dw SilphCo10F_Blocks ; blocks

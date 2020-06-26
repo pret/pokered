@@ -1,4 +1,4 @@
-CeruleanGym_h:
+CeruleanGym_h::
 	db GYM ; tileset
 	db CERULEAN_GYM_HEIGHT, CERULEAN_GYM_WIDTH ; dimensions (y, x)
 	dw CeruleanGym_Blocks ; blocks

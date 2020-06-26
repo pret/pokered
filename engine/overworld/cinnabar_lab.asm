@@ -1,4 +1,4 @@
-GiveFossilToCinnabarLab:
+GiveFossilToCinnabarLab::
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -112,7 +112,7 @@ PrintFossilsInBag:
 	jr .loop
 
 ; loads the names of the fossil item and the resulting mon
-LoadFossilItemAndMonName:
+LoadFossilItemAndMonName::
 	ld a, [wFossilMon]
 	ld [wd11e], a
 	call GetMonName

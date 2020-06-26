@@ -1,4 +1,4 @@
-Route2Gate_h:
+Route2Gate_h::
 	db GATE ; tileset
 	db ROUTE_2_GATE_HEIGHT, ROUTE_2_GATE_WIDTH ; dimensions (y, x)
 	dw Route2Gate_Blocks ; blocks

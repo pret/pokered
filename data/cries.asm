@@ -1,4 +1,4 @@
-CryData:
+CryData::
 	;$BaseCry, $Pitch, $Length
 	db $11, $00, $80; Rhydon
 	db $03, $00, $80; Kangaskhan

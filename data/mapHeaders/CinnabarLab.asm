@@ -1,4 +1,4 @@
-CinnabarLab_h:
+CinnabarLab_h::
 	db LAB ; tileset
 	db CINNABAR_LAB_HEIGHT, CINNABAR_LAB_WIDTH ; dimensions (y, x)
 	dw CinnabarLab_Blocks ; blocks

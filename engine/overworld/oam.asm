@@ -1,4 +1,4 @@
-PrepareOAMData:
+PrepareOAMData::
 ; Determine OAM data for currently visible
 ; sprites and write it to wOAMBuffer.
 

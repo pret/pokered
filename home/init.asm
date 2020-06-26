@@ -118,7 +118,7 @@ rLCDC_DEFAULT EQU %11100011
 
 	jp SetDefaultNamesBeforeTitlescreen
 
-ClearVram:
+ClearVram::
 	ld hl, $8000
 	ld bc, $2000
 	xor a

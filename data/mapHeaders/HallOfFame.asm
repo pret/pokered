@@ -1,4 +1,4 @@
-HallOfFame_h:
+HallOfFame_h::
 	db GYM ; tileset
 	db HALL_OF_FAME_HEIGHT, HALL_OF_FAME_WIDTH ; dimensions (y, x)
 	dw HallOfFame_Blocks ; blocks

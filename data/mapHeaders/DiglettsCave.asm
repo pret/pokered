@@ -1,4 +1,4 @@
-DiglettsCave_h:
+DiglettsCave_h::
 	db CAVERN ; tileset
 	db DIGLETTS_CAVE_HEIGHT, DIGLETTS_CAVE_WIDTH ; dimensions (y, x)
 	dw DiglettsCave_Blocks ; blocks

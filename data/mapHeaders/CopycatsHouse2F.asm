@@ -1,4 +1,4 @@
-CopycatsHouse2F_h:
+CopycatsHouse2F_h::
 	db REDS_HOUSE_2 ; tileset
 	db COPYCATS_HOUSE_2F_HEIGHT, COPYCATS_HOUSE_2F_WIDTH ; dimensions (y, x)
 	dw CopycatsHouse2F_Blocks ; blocks

@@ -1,4 +1,4 @@
-LancesRoom_h:
+LancesRoom_h::
 	db DOJO ; tileset
 	db LANCES_ROOM_HEIGHT, LANCES_ROOM_WIDTH ; dimensions (y, x)
 	dw LancesRoom_Blocks ; blocks

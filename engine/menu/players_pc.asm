@@ -1,4 +1,4 @@
-PlayerPC:
+PlayerPC::
 	ld hl, wd730
 	set 6, [hl]
 	ld a, ITEM_NAME

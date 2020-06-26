@@ -1,4 +1,4 @@
-UndergroundPathRoute6_h:
+UndergroundPathRoute6_h::
 	db GATE ; tileset
 	db UNDERGROUND_PATH_ROUTE_6_HEIGHT, UNDERGROUND_PATH_ROUTE_6_WIDTH ; dimensions (y, x)
 	dw UndergroundPathRoute6_Blocks ; blocks

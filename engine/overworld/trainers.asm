@@ -1,4 +1,4 @@
-_GetSpritePosition1:
+_GetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -17,7 +17,7 @@ _GetSpritePosition1:
 	ld [$ffee], a
 	ret
 
-_GetSpritePosition2:
+_GetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -36,7 +36,7 @@ _GetSpritePosition2:
 	ld [wSavedSpriteMapX], a
 	ret
 
-_SetSpritePosition1:
+_SetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -55,7 +55,7 @@ _SetSpritePosition1:
 	ld [hl], a
 	ret
 
-_SetSpritePosition2:
+_SetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, 4
 	ld a, [wSpriteIndex]
@@ -74,7 +74,7 @@ _SetSpritePosition2:
 	ld [hl], a ; c2x5 (map X pos)
 	ret
 
-TrainerWalkUpToPlayer:
+TrainerWalkUpToPlayer::
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wTrainerSpriteOffset], a

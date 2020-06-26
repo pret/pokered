@@ -1,4 +1,4 @@
-UndergroundPathNorthSouth_h:
+UndergroundPathNorthSouth_h::
 	db UNDERGROUND ; tileset
 	db UNDERGROUND_PATH_NORTH_SOUTH_HEIGHT, UNDERGROUND_PATH_NORTH_SOUTH_WIDTH ; dimensions (y, x)
 	dw UndergroundPathNorthSouth_Blocks ; blocks

@@ -2,7 +2,7 @@ PrintNewBikeText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump NewBicycleText
 
-NewBicycleText:
+NewBicycleText::
 	TX_FAR _NewBicycleText
 	db "@"
 
@@ -10,7 +10,7 @@ DisplayOakLabLeftPoster:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump PushStartText
 
-PushStartText:
+PushStartText::
 	TX_FAR _PushStartText
 	db "@"
 
@@ -28,15 +28,15 @@ DisplayOakLabRightPoster:
 .ownLessThanTwo
 	jp PrintPredefTextID
 
-SaveOptionText:
+SaveOptionText::
 	TX_FAR _SaveOptionText
 	db "@"
 
-StrengthsAndWeaknessesText:
+StrengthsAndWeaknessesText::
 	TX_FAR _StrengthsAndWeaknessesText
 	db "@"
 
-SafariZoneCheck:
+SafariZoneCheck::
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [wNumSafariBalls]
@@ -44,7 +44,7 @@ SafariZoneCheck:
 	jr z, SafariZoneGameOver
 	jr SafariZoneGameStillGoing
 
-SafariZoneCheckSteps:
+SafariZoneCheckSteps::
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]
@@ -90,7 +90,7 @@ SafariZoneGameOver:
 	ld [wSafariZoneGameOver], a
 	ret
 
-PrintSafariGameOverText:
+PrintSafariGameOverText::
 	xor a
 	ld [wJoyIgnore], a
 	ld hl, SafariGameOverText
@@ -123,7 +123,7 @@ PrintCinnabarQuiz:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump CinnabarGymQuiz
 
-CinnabarGymQuiz:
+CinnabarGymQuiz::
 	TX_ASM
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
@@ -258,7 +258,7 @@ CinnabarGymQuizIncorrectText:
 	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
-UpdateCinnabarGymGateTileBlocks_:
+UpdateCinnabarGymGateTileBlocks_::
 ; Update the overworld map with open floor blocks or locked gate blocks
 ; depending on event flags.
 	ld a, 6
@@ -316,7 +316,7 @@ PrintMagazinesText:
 	tx_pre MagazinesText
 	ret
 
-MagazinesText:
+MagazinesText::
 	TX_FAR _MagazinesText
 	db "@"
 
@@ -366,11 +366,11 @@ BillsHousePC:
 	tx_pre BillsHousePokemonList
 	ret
 
-BillsHouseMonitorText:
+BillsHouseMonitorText::
 	TX_FAR _BillsHouseMonitorText
 	db "@"
 
-BillsHouseInitiatedText:
+BillsHouseInitiatedText::
 	TX_FAR _BillsHouseInitiatedText
 	TX_BLINK
 	TX_ASM
@@ -386,7 +386,7 @@ BillsHouseInitiatedText:
 	call DelayFrames
 	jp TextScriptEnd
 
-BillsHousePokemonList:
+BillsHousePokemonList::
 	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
@@ -462,6 +462,6 @@ DisplayOakLabEmailText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump OakLabEmailText
 
-OakLabEmailText:
+OakLabEmailText::
 	TX_FAR _OakLabEmailText
 	db "@"

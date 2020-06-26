@@ -1,5 +1,5 @@
 ; function to draw various text boxes
-DisplayTextBoxID_:
+DisplayTextBoxID_::
 	ld a, [wTextBoxID]
 	cp TWO_OPTION_MENU
 	jp z, DisplayTwoOptionMenu

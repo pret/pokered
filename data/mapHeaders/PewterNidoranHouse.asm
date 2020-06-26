@@ -1,4 +1,4 @@
-PewterNidoranHouse_h:
+PewterNidoranHouse_h::
 	db HOUSE ; tileset
 	db PEWTER_NIDORAN_HOUSE_HEIGHT, PEWTER_NIDORAN_HOUSE_WIDTH ; dimensions (y, x)
 	dw PewterNidoranHouse_Blocks ; blocks
