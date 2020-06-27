@@ -8,7 +8,7 @@ db FIGHTING ; species type 1
 db FIGHTING ; species type 2
 db 90 ; catch rate
 db 146 ; base exp yield
-INCBIN "pic/bmon/machoke.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/machoke.pic",0,1 ; 77, sprite dimensions
 dw MachokePicFront
 dw MachokePicBack
 ; attacks known at lvl 0

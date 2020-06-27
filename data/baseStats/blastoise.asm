@@ -8,7 +8,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate
 db 210 ; base exp yield
-INCBIN "pic/bmon/blastoise.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/blastoise.pic",0,1 ; 77, sprite dimensions
 dw BlastoisePicFront
 dw BlastoisePicBack
 ; attacks known at lvl 0

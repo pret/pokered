@@ -8,7 +8,7 @@ db BUG ; species type 1
 db BUG ; species type 2
 db 120 ; catch rate
 db 72 ; base exp yield
-INCBIN "pic/bmon/metapod.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/metapod.pic",0,1 ; 55, sprite dimensions
 dw MetapodPicFront
 dw MetapodPicBack
 ; attacks known at lvl 0

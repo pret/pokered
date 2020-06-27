@@ -8,7 +8,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 190 ; catch rate
 db 80 ; base exp yield
-INCBIN "pic/bmon/psyduck.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/psyduck.pic",0,1 ; 55, sprite dimensions
 dw PsyduckPicFront
 dw PsyduckPicBack
 ; attacks known at lvl 0

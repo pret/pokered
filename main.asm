@@ -6,8 +6,8 @@ SECTION "bank1", ROMX
 INCLUDE "data/facing.asm"
 INCLUDE "engine/black_out.asm"
 
-MewPicFront:: INCBIN "pic/bmon/mew.pic"
-MewPicBack::  INCBIN "pic/monback/mewb.pic"
+MewPicFront:: INCBIN "gfx/pokemon/front/mew.pic"
+MewPicBack::  INCBIN "gfx/pokemon/back/mewb.pic"
 INCLUDE "data/baseStats/mew.asm"
 
 INCLUDE "engine/battle/safari_zone.asm"
@@ -109,9 +109,9 @@ INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
 
-RedPicFront:: INCBIN "pic/trainer/red.pic"
-ShrinkPic1::  INCBIN "pic/trainer/shrink1.pic"
-ShrinkPic2::  INCBIN "pic/trainer/shrink2.pic"
+RedPicFront:: INCBIN "gfx/player/red.pic"
+ShrinkPic1::  INCBIN "gfx/player/shrink1.pic"
+ShrinkPic2::  INCBIN "gfx/player/shrink2.pic"
 
 INCLUDE "engine/turn_sprite.asm"
 INCLUDE "engine/menu/start_sub_menus.asm"

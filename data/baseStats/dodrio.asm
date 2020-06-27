@@ -8,7 +8,7 @@ db NORMAL ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate
 db 158 ; base exp yield
-INCBIN "pic/bmon/dodrio.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/dodrio.pic",0,1 ; 77, sprite dimensions
 dw DodrioPicFront
 dw DodrioPicBack
 ; attacks known at lvl 0

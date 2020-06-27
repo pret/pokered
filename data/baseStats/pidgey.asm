@@ -8,7 +8,7 @@ db NORMAL ; species type 1
 db FLYING ; species type 2
 db 255 ; catch rate
 db 55 ; base exp yield
-INCBIN "pic/bmon/pidgey.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/pidgey.pic",0,1 ; 55, sprite dimensions
 dw PidgeyPicFront
 dw PidgeyPicBack
 ; attacks known at lvl 0

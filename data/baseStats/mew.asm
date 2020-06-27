@@ -9,7 +9,7 @@ db PSYCHIC ; species type 1
 db PSYCHIC ; species type 2
 db 45 ; catch rate
 db 64 ; base exp yield
-INCBIN "pic/bmon/mew.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/mew.pic",0,1 ; 55, sprite dimensions
 dw MewPicFront
 dw MewPicBack
 ; attacks known at lvl 0

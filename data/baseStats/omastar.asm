@@ -8,7 +8,7 @@ db ROCK ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate
 db 199 ; base exp yield
-INCBIN "pic/bmon/omastar.pic",0,1 ; 66, sprite dimensions
+INCBIN "gfx/pokemon/front/omastar.pic",0,1 ; 66, sprite dimensions
 dw OmastarPicFront
 dw OmastarPicBack
 ; attacks known at lvl 0

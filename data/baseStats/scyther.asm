@@ -8,7 +8,7 @@ db BUG ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate
 db 187 ; base exp yield
-INCBIN "pic/bmon/scyther.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/scyther.pic",0,1 ; 77, sprite dimensions
 dw ScytherPicFront
 dw ScytherPicBack
 ; attacks known at lvl 0

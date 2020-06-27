@@ -117,5 +117,5 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 
-%.pic:  %.2bpp
+%.pic: %.2bpp
 	tools/pkmncompress $< $@

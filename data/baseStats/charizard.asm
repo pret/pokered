@@ -8,7 +8,7 @@ db FIRE ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate
 db 209 ; base exp yield
-INCBIN "pic/bmon/charizard.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/charizard.pic",0,1 ; 77, sprite dimensions
 dw CharizardPicFront
 dw CharizardPicBack
 ; attacks known at lvl 0
