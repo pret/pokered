@@ -83,16 +83,21 @@ pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
 ### Misc file-specific graphics rules
 
-gfx/blue/intro_purin_1.2bpp: $(RGBGFX) += -h
-gfx/blue/intro_purin_2.2bpp: $(RGBGFX) += -h
-gfx/blue/intro_purin_3.2bpp: $(RGBGFX) += -h
-gfx/red/intro_nido_1.2bpp: $(RGBGFX) += -h
-gfx/red/intro_nido_2.2bpp: $(RGBGFX) += -h
-gfx/red/intro_nido_3.2bpp: $(RGBGFX) += -h
+gfx/battle/attack_anim_1.2bpp: tools/gfx += --trim-whitespace
+gfx/battle/attack_anim_2.2bpp: tools/gfx += --trim-whitespace
 
-gfx/game_boy.2bpp: tools/gfx += --remove-duplicates
-gfx/theend.2bpp: tools/gfx += --interleave --png=$<
+gfx/intro_credits/blue_jigglypuff_1.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/blue_jigglypuff_2.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/blue_jigglypuff_3.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/red_nidorino_1.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/red_nidorino_2.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/red_nidorino_3.2bpp: $(RGBGFX) += -h
+
+gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
+
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
+
+gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 
 
 ### Catch-all graphics rules

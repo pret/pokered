@@ -281,4 +281,4 @@ GetPartyMonSpriteID:
 INCLUDE "data/mon_party_sprites.asm"
 
 MonPartySprites:
-	INCBIN "gfx/mon_ow_sprites.2bpp"
+	INCBIN "gfx/trade/mon_ow_sprites.2bpp"

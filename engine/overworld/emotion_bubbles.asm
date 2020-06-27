@@ -62,13 +62,15 @@ EmotionBubble:
 	jp UpdateSprites
 
 EmotionBubblesPointerTable:
-	dw EmotionBubbles
-	dw EmotionBubbles + $40
-	dw EmotionBubbles + $80
+	dw ShockEmote
+	dw QuestionEmote
+	dw HappyEmote
 
 EmotionBubblesOAM:
 	db $F8,$00,$F9,$00
 	db $FA,$00,$FB,$00
 
 EmotionBubbles:
-	INCBIN "gfx/emotion_bubbles.2bpp"
+ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
+QuestionEmote: INCBIN "gfx/emotes/question.2bpp"
+HappyEmote:    INCBIN "gfx/emotes/happy.2bpp"

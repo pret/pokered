@@ -79,27 +79,27 @@ INCLUDE "engine/hidden_object_functions3.asm"
 
 SECTION "Graphics (BANK 4)", ROMX
 
-PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
-FontGraphics::                  INCBIN "gfx/font.1bpp"
+PokemonLogoGraphics:            INCBIN "gfx/title/pokemon_logo.2bpp"
+FontGraphics::                  INCBIN "gfx/font/font.1bpp"
 FontGraphicsEnd::
-ABTiles:                        INCBIN "gfx/AB.2bpp"
-HpBarAndStatusGraphics::        INCBIN "gfx/hp_bar_and_status.2bpp"
+ABTiles:                        INCBIN "gfx/font/AB.2bpp"
+HpBarAndStatusGraphics::        INCBIN "gfx/font/font_battle_extra.2bpp"
 HpBarAndStatusGraphicsEnd::
-BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1:                INCBIN "gfx/battle/battle_hud_1.1bpp"
 BattleHudTiles1End:
-BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
-BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles2:                INCBIN "gfx/battle/battle_hud_2.1bpp"
+BattleHudTiles3:                INCBIN "gfx/battle/battle_hud_3.1bpp"
 BattleHudTiles3End:
-NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
-GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+NintendoCopyrightLogoGraphics:  INCBIN "gfx/intro_credits/copyright.2bpp"
+GamefreakLogoGraphics:          INCBIN "gfx/title/gamefreak_inc.2bpp"
 GamefreakLogoGraphicsEnd:
-TextBoxGraphics::               INCBIN "gfx/text_box.2bpp"
+TextBoxGraphics::               INCBIN "gfx/font/font_extra.2bpp"
 TextBoxGraphicsEnd::
-PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+PokedexTileGraphics:            INCBIN "gfx/pokedex/pokedex.2bpp"
 PokedexTileGraphicsEnd:
-WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphics:           INCBIN "gfx/town_map/town_map.2bpp"
 WorldMapTileGraphicsEnd:
-PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+PlayerCharacterTitleGraphics:   INCBIN "gfx/title/player.2bpp"
 PlayerCharacterTitleGraphicsEnd:
 
 
@@ -176,11 +176,11 @@ SECTION "Battle (BANK B)", ROMX
 
 INCLUDE "engine/battle/display_effectiveness.asm"
 
-TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_card/trainer_info.2bpp"
 TrainerInfoTextBoxTileGraphicsEnd:
-BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
-CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
-BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
+BlankLeaderNames:                INCBIN "gfx/trainer_card/blank_leader_names.2bpp"
+CircleTile:                      INCBIN "gfx/trainer_card/circle_tile.2bpp"
+BadgeNumbersTileGraphics:        INCBIN "gfx/trainer_card/badge_numbers.2bpp"
 
 INCLUDE "engine/items/tmhm.asm"
 INCLUDE "engine/battle/scale_sprites.asm"
@@ -215,12 +215,12 @@ INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 
 TradingAnimationGraphics:
-INCBIN "gfx/game_boy.2bpp"
-INCBIN "gfx/link_cable.2bpp"
+INCBIN "gfx/trade/game_boy.2bpp"
+INCBIN "gfx/trade/link_cable.2bpp"
 TradingAnimationGraphicsEnd:
 
 ; Pokeball traveling through the link cable.
-TradingAnimationGraphics2: INCBIN "gfx/trade2.2bpp"
+TradingAnimationGraphics2: INCBIN "gfx/trade/cable_ball.2bpp"
 TradingAnimationGraphics2End:
 
 INCLUDE "engine/evos_moves.asm"
@@ -323,10 +323,10 @@ INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:
 IF DEF(_RED)
-	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
+	INCBIN "gfx/title/red_version.1bpp" ; 10 tiles
 ENDC
 IF DEF(_BLUE)
-	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
+	INCBIN "gfx/title/blue_version.1bpp" ; 8 tiles
 ENDC
 Version_GFXEnd:
 
@@ -370,10 +370,10 @@ INCLUDE "engine/battle/animations.asm"
 INCLUDE "engine/overworld/cut2.asm"
 INCLUDE "engine/overworld/ssanne.asm"
 
-RedFishingTilesFront: INCBIN "gfx/red_fishing_tile_front.2bpp"
-RedFishingTilesBack:  INCBIN "gfx/red_fishing_tile_back.2bpp"
-RedFishingTilesSide:  INCBIN "gfx/red_fishing_tile_side.2bpp"
-RedFishingRodTiles:   INCBIN "gfx/red_fishingrod_tiles.2bpp"
+RedFishingTilesFront: INCBIN "gfx/overworld/red_fish_front.2bpp"
+RedFishingTilesBack:  INCBIN "gfx/overworld/red_fish_back.2bpp"
+RedFishingTilesSide:  INCBIN "gfx/overworld/red_fish_side.2bpp"
+RedFishingRodTiles:   INCBIN "gfx/overworld/fishing_rod.2bpp"
 
 INCLUDE "data/animations.asm"
 INCLUDE "engine/evolution.asm"
