@@ -12,6 +12,7 @@
 *.gb
 
 # rgbds extras
+*.map
 *.sym
 
 # converted image data
