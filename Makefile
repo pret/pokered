@@ -95,6 +95,9 @@ gfx/intro_credits/red_nidorino_3.2bpp: $(RGBGFX) += -h
 
 gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
+gfx/slots/red_slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
+
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 
 gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
