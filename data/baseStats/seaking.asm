@@ -8,7 +8,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 60 ; catch rate
 db 170 ; base exp yield
-INCBIN "pic/bmon/seaking.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/seaking.pic",0,1 ; 77, sprite dimensions
 dw SeakingPicFront
 dw SeakingPicBack
 ; attacks known at lvl 0

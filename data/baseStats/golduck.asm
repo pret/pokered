@@ -8,7 +8,7 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 75 ; catch rate
 db 174 ; base exp yield
-INCBIN "pic/bmon/golduck.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/golduck.pic",0,1 ; 77, sprite dimensions
 dw GolduckPicFront
 dw GolduckPicBack
 ; attacks known at lvl 0

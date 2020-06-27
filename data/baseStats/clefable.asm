@@ -8,7 +8,7 @@ db NORMAL ; species type 1
 db NORMAL ; species type 2
 db 25 ; catch rate
 db 129 ; base exp yield
-INCBIN "pic/bmon/clefable.pic",0,1 ; 66, sprite dimensions
+INCBIN "gfx/pokemon/front/clefable.pic",0,1 ; 66, sprite dimensions
 dw ClefablePicFront
 dw ClefablePicBack
 ; attacks known at lvl 0

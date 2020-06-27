@@ -8,7 +8,7 @@ db GROUND ; species type 1
 db ROCK ; species type 2
 db 60 ; catch rate
 db 204 ; base exp yield
-INCBIN "pic/bmon/rhydon.pic",0,1 ; 77, sprite dimensions
+INCBIN "gfx/pokemon/front/rhydon.pic",0,1 ; 77, sprite dimensions
 dw RhydonPicFront
 dw RhydonPicBack
 ; attacks known at lvl 0

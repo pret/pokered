@@ -8,7 +8,7 @@ db ROCK ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate
 db 120 ; base exp yield
-INCBIN "pic/bmon/omanyte.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/omanyte.pic",0,1 ; 55, sprite dimensions
 dw OmanytePicFront
 dw OmanytePicBack
 ; attacks known at lvl 0

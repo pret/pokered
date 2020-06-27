@@ -8,7 +8,7 @@ db BUG ; species type 1
 db POISON ; species type 2
 db 255 ; catch rate
 db 52 ; base exp yield
-INCBIN "pic/bmon/weedle.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/weedle.pic",0,1 ; 55, sprite dimensions
 dw WeedlePicFront
 dw WeedlePicBack
 ; attacks known at lvl 0

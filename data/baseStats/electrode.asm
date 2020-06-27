@@ -8,7 +8,7 @@ db ELECTRIC ; species type 1
 db ELECTRIC ; species type 2
 db 60 ; catch rate
 db 150 ; base exp yield
-INCBIN "pic/bmon/electrode.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/electrode.pic",0,1 ; 55, sprite dimensions
 dw ElectrodePicFront
 dw ElectrodePicBack
 ; attacks known at lvl 0

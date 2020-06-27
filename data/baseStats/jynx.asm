@@ -8,7 +8,7 @@ db ICE ; species type 1
 db PSYCHIC ; species type 2
 db 45 ; catch rate
 db 137 ; base exp yield
-INCBIN "pic/bmon/jynx.pic",0,1 ; 66, sprite dimensions
+INCBIN "gfx/pokemon/front/jynx.pic",0,1 ; 66, sprite dimensions
 dw JynxPicFront
 dw JynxPicBack
 ; attacks known at lvl 0

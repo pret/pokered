@@ -8,7 +8,7 @@ db POISON ; species type 1
 db POISON ; species type 2
 db 190 ; catch rate
 db 90 ; base exp yield
-INCBIN "pic/bmon/grimer.pic",0,1 ; 55, sprite dimensions
+INCBIN "gfx/pokemon/front/grimer.pic",0,1 ; 55, sprite dimensions
 dw GrimerPicFront
 dw GrimerPicBack
 ; attacks known at lvl 0
