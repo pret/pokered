@@ -43,12 +43,12 @@ compare: $(roms)
 	@$(MD5) roms.md5
 
 clean:
-	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.sym)
+	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
 	$(MAKE) clean -C tools/
 
 tidy:
-	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.sym)
+	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
 	$(MAKE) clean -C tools/
 
 tools:
@@ -76,9 +76,8 @@ pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj)
-	$(RGBLINK) -d -n $*.sym -l layout.link -o $@ $^
+	$(RGBLINK) -d -m $*.map -n $*.sym -l layout.link -o $@ $^
 	$(RGBFIX) $($*_opt) $@
-	sort $*.sym -o $*.sym
 
 
 ### Misc file-specific graphics rules
