@@ -63,7 +63,7 @@ AnimateHealingMachine:
 	jp UpdateSprites
 
 PokeCenterFlashingMonitorAndHealBall:
-	INCBIN "gfx/pokecenter_ball.2bpp"
+	INCBIN "gfx/overworld/heal_machine.2bpp"
 
 PokeCenterOAMData:
 	db $24,$34,$7C,$10 ; heal machine monitor

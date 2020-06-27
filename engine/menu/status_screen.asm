@@ -241,8 +241,8 @@ DrawLineBox:
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
-PTile: ; This is a single 1bpp "P" tile
-	INCBIN "gfx/p_tile.1bpp"
+PTile:
+	INCBIN "gfx/font/P.1bpp"
 PTileEnd:
 
 PrintStatsBox:

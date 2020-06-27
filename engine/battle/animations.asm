@@ -361,17 +361,17 @@ AnimationTilesetPointers:
 	db $FF
 
 AnimationTileset1:
-	INCBIN "gfx/attack_anim_1.2bpp"
+	INCBIN "gfx/battle/attack_anim_1.2bpp"
 
 AnimationTileset2:
-	INCBIN "gfx/attack_anim_2.2bpp"
+	INCBIN "gfx/battle/attack_anim_2.2bpp"
 
 SlotMachineTiles2:
 IF DEF(_RED)
-	INCBIN "gfx/red/slotmachine2.2bpp"
+	INCBIN "gfx/slots/red_slots_2.2bpp"
 ENDC
 IF DEF(_BLUE)
-	INCBIN "gfx/blue/slotmachine2.2bpp"
+	INCBIN "gfx/slots/blue_slots_2.2bpp"
 ENDC
 
 MoveAnimation:
@@ -1710,7 +1710,7 @@ AnimationMinimizeMon:
 	jp AnimationShowMonPic
 
 MinimizedMonSprite:
-	INCBIN "gfx/minimized_mon_sprite.1bpp"
+	INCBIN "gfx/battle/minimize.1bpp"
 MinimizedMonSpriteEnd:
 
 AnimationSlideMonDownAndHide:

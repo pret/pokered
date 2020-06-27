@@ -106,7 +106,7 @@ DisplayTownMap:
 INCLUDE "data/town_map_order.asm"
 
 TownMapCursor:
-	INCBIN "gfx/town_map_cursor.1bpp"
+	INCBIN "gfx/town_map/town_map_cursor.1bpp"
 TownMapCursorEnd:
 
 LoadTownMap_Nest:
@@ -271,7 +271,7 @@ BuildFlyLocationsList:
 	ret
 
 TownMapUpArrow:
-	INCBIN "gfx/up_arrow.1bpp"
+	INCBIN "gfx/town_map/up_arrow.1bpp"
 TownMapUpArrowEnd:
 
 LoadTownMap:
@@ -325,8 +325,7 @@ LoadTownMap:
 	ret
 
 CompressedMap:
-; you can decompress this file with the redrle program in the extras/ dir
-	INCBIN "gfx/town_map.rle"
+	INCBIN "gfx/town_map/town_map.rle"
 
 ExitTownMap:
 ; clear town map graphics data and load usual graphics data
@@ -587,7 +586,7 @@ INCLUDE "data/town_map_entries.asm"
 INCLUDE "text/map_names.asm"
 
 MonNestIcon:
-	INCBIN "gfx/mon_nest_icon.1bpp"
+	INCBIN "gfx/pokedex/mon_nest_icon.1bpp"
 MonNestIconEnd:
 
 TownMapSpriteBlinkingAnimation::
