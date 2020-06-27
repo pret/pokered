@@ -17,14 +17,14 @@
 ; f6: health returned
 ; f7: revitalized
 ; f8: leveled up
-DrawPartyMenu_:
+DrawPartyMenu_::
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call ClearScreen
 	call UpdateSprites
 	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
-RedrawPartyMenu_:
+RedrawPartyMenu_::
 	ld a, [wPartyMenuTypeOrMessageID]
 	cp SWAP_MONS_PARTY_MENU
 	jp z, .printMessage

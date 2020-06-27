@@ -1,4 +1,4 @@
-Route16FlyHouse_h:
+Route16FlyHouse_h::
 	db HOUSE ; tileset
 	db ROUTE_16_FLY_HOUSE_HEIGHT, ROUTE_16_FLY_HOUSE_WIDTH ; dimensions (y, x)
 	dw Route16FlyHouse_Blocks ; blocks

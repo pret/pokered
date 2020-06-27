@@ -1,5 +1,5 @@
 ; prints text for bookshelves in buildings without sign events
-PrintBookshelfText:
+PrintBookshelfText::
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
@@ -38,7 +38,7 @@ PrintBookshelfText:
 
 INCLUDE "data/bookshelf_tile_ids.asm"
 
-IndigoPlateauStatues:
+IndigoPlateauStatues::
 	TX_ASM
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
@@ -63,7 +63,7 @@ IndigoPlateauStatuesText3:
 	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
-BookOrSculptureText:
+BookOrSculptureText::
 	TX_ASM
 	ld hl, PokemonBooksText
 	ld a, [wCurMapTileset]
@@ -85,11 +85,11 @@ DiglettSculptureText:
 	TX_FAR _DiglettSculptureText
 	db "@"
 
-ElevatorText:
+ElevatorText::
 	TX_FAR _ElevatorText
 	db "@"
 
-TownMapText:
+TownMapText::
 	TX_FAR _TownMapText
 	TX_BLINK
 	TX_ASM
@@ -112,6 +112,6 @@ TownMapText:
 	push af
 	jp CloseTextDisplay
 
-PokemonStuffText:
+PokemonStuffText::
 	TX_FAR _PokemonStuffText
 	db "@"

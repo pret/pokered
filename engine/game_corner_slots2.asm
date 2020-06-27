@@ -22,10 +22,10 @@ AbleToPlaySlotsCheck:
 	ld [wCanPlaySlots], a
 	ret
 
-GameCornerCoinCaseText:
+GameCornerCoinCaseText::
 	TX_FAR _GameCornerCoinCaseText
 	db "@"
 
-GameCornerNoCoinsText:
+GameCornerNoCoinsText::
 	TX_FAR _GameCornerNoCoinsText
 	db "@"

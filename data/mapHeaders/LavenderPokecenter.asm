@@ -1,4 +1,4 @@
-LavenderPokecenter_h:
+LavenderPokecenter_h::
 	db POKECENTER ; tileset
 	db LAVENDER_POKECENTER_HEIGHT, LAVENDER_POKECENTER_WIDTH ; dimensions (y, x)
 	dw LavenderPokecenter_Blocks ; blocks

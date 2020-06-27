@@ -1,4 +1,4 @@
-PowerPlant_h:
+PowerPlant_h::
 	db FACILITY ; tileset
 	db POWER_PLANT_HEIGHT, POWER_PLANT_WIDTH ; dimensions (y, x)
 	dw PowerPlant_Blocks ; blocks

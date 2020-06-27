@@ -39,11 +39,11 @@ GymStatues:
 	db VIRIDIAN_GYM, %10000000
 	db $ff
 
-GymStatueText1:
+GymStatueText1::
 	TX_FAR _GymStatueText1
 	db "@"
 
-GymStatueText2:
+GymStatueText2::
 	TX_FAR _GymStatueText2
 	db "@"
 
@@ -98,59 +98,59 @@ BenchGuyTextPointers:
 	db_tx_pre RockTunnelPokecenterBenchGuyText
 	db $FF
 
-ViridianCityPokecenterBenchGuyText:
+ViridianCityPokecenterBenchGuyText::
 	TX_FAR _ViridianCityPokecenterGuyText
 	db "@"
 
-PewterCityPokecenterBenchGuyText:
+PewterCityPokecenterBenchGuyText::
 	TX_FAR _PewterCityPokecenterGuyText
 	db "@"
 
-CeruleanCityPokecenterBenchGuyText:
+CeruleanCityPokecenterBenchGuyText::
 	TX_FAR _CeruleanPokecenterGuyText
 	db "@"
 
-LavenderCityPokecenterBenchGuyText:
+LavenderCityPokecenterBenchGuyText::
 	TX_FAR _LavenderPokecenterGuyText
 	db "@"
 
-MtMoonPokecenterBenchGuyText:
+MtMoonPokecenterBenchGuyText::
 	TX_FAR _MtMoonPokecenterBenchGuyText
 	db "@"
 
-RockTunnelPokecenterBenchGuyText:
+RockTunnelPokecenterBenchGuyText::
 	TX_FAR _RockTunnelPokecenterGuyText
 	db "@"
 
-UnusedBenchGuyText1:
+UnusedBenchGuyText1::
 	TX_FAR _UnusedBenchGuyText1
 	db "@"
 
-UnusedBenchGuyText2:
+UnusedBenchGuyText2::
 	TX_FAR _UnusedBenchGuyText2
 	db "@"
 
-UnusedBenchGuyText3:
+UnusedBenchGuyText3::
 	TX_FAR _UnusedBenchGuyText3
 	db "@"
 
-VermilionCityPokecenterBenchGuyText:
+VermilionCityPokecenterBenchGuyText::
 	TX_FAR _VermilionPokecenterGuyText
 	db "@"
 
-CeladonCityPokecenterBenchGuyText:
+CeladonCityPokecenterBenchGuyText::
 	TX_FAR _CeladonCityPokecenterGuyText
 	db "@"
 
-FuchsiaCityPokecenterBenchGuyText:
+FuchsiaCityPokecenterBenchGuyText::
 	TX_FAR _FuchsiaCityPokecenterGuyText
 	db "@"
 
-CinnabarIslandPokecenterBenchGuyText:
+CinnabarIslandPokecenterBenchGuyText::
 	TX_FAR _CinnabarPokecenterGuyText
 	db "@"
 
-SaffronCityPokecenterBenchGuyText:
+SaffronCityPokecenterBenchGuyText::
 	TX_ASM
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SaffronCityPokecenterBenchGuyText2
@@ -168,20 +168,20 @@ SaffronCityPokecenterBenchGuyText2:
 	TX_FAR _SaffronCityPokecenterGuyText2
 	db "@"
 
-CeladonCityHotelText:
+CeladonCityHotelText::
 	TX_FAR _CeladonCityHotelText
 	db "@"
 
 	ret
 
-UnusedPredefText:
+UnusedPredefText::
 	db "@"
 
 PrintBookcaseText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump BookcaseText
 
-BookcaseText:
+BookcaseText::
 	TX_FAR _BookcaseText
 	db "@"
 
@@ -194,5 +194,5 @@ OpenPokemonCenterPC:
 	ld [wAutoTextBoxDrawingControl], a
 	tx_pre_jump PokemonCenterPCText
 
-PokemonCenterPCText:
+PokemonCenterPCText::
 	TX_POKECENTER_PC

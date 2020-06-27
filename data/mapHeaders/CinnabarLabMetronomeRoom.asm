@@ -1,4 +1,4 @@
-CinnabarLabMetronomeRoom_h:
+CinnabarLabMetronomeRoom_h::
 	db LAB ; tileset
 	db CINNABAR_LAB_METRONOME_ROOM_HEIGHT, CINNABAR_LAB_METRONOME_ROOM_WIDTH ; dimensions (y, x)
 	dw CinnabarLabMetronomeRoom_Blocks ; blocks

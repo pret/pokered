@@ -1,4 +1,4 @@
-VendingMachineMenu:
+VendingMachineMenu::
 	ld hl, VendingMachineText1
 	call PrintText
 	ld a, MONEY_BOX

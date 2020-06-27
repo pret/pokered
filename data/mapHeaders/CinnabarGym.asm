@@ -1,4 +1,4 @@
-CinnabarGym_h:
+CinnabarGym_h::
 	db FACILITY ; tileset
 	db CINNABAR_GYM_HEIGHT, CINNABAR_GYM_WIDTH ; dimensions (y, x)
 	dw CinnabarGym_Blocks ; blocks

@@ -1,4 +1,4 @@
-SSAnneKitchen_h:
+SSAnneKitchen_h::
 	db SHIP ; tileset
 	db SS_ANNE_KITCHEN_HEIGHT, SS_ANNE_KITCHEN_WIDTH ; dimensions (y, x)
 	dw SSAnneKitchen_Blocks ; blocks

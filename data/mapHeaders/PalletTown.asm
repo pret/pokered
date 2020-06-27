@@ -1,4 +1,4 @@
-PalletTown_h:
+PalletTown_h::
 	db OVERWORLD ; tileset
 	db PALLET_TOWN_HEIGHT, PALLET_TOWN_WIDTH ; dimensions (y, x)
 	dw PalletTown_Blocks ; blocks

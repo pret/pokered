@@ -1,4 +1,4 @@
-RedsHouse2F_h:
+RedsHouse2F_h::
 	db REDS_HOUSE_2 ; tileset
 	db REDS_HOUSE_2F_HEIGHT, REDS_HOUSE_2F_WIDTH ; dimensions (y, x)
 	dw RedsHouse2F_Blocks ; blocks

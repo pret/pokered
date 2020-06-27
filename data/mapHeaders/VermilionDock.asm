@@ -1,4 +1,4 @@
-VermilionDock_h:
+VermilionDock_h::
 	db SHIP_PORT ; tileset
 	db VERMILION_DOCK_HEIGHT, VERMILION_DOCK_WIDTH ; dimensions (y, x)
 	dw VermilionDock_Blocks ; blocks

@@ -68,7 +68,7 @@ MoveBoulderDustFunctionPointerTable:
 	db $FF,$01
 	dw AdjustOAMBlockXPos
 
-LoadSmokeTileFourTimes:
+LoadSmokeTileFourTimes::
 	ld hl, vChars1 + $7c0
 	ld c, $4
 .loop

@@ -1,5 +1,5 @@
 ; function that displays the start menu
-DrawStartMenu:
+DrawStartMenu::
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	coord hl, 10, 0

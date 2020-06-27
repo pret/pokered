@@ -1,4 +1,4 @@
-SaveTrainerName:
+SaveTrainerName::
 	ld hl, TrainerNamePointers
 	ld a, [wTrainerClass]
 	dec a

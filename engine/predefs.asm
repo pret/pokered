@@ -1,4 +1,4 @@
-GetPredefPointer:
+GetPredefPointer::
 ; Store the contents of the register
 ; pairs (hl, de, bc) at wPredefRegisters.
 ; Then put the bank and address of predef

@@ -1,4 +1,4 @@
-FuchsiaCity_h:
+FuchsiaCity_h::
 	db OVERWORLD ; tileset
 	db FUCHSIA_CITY_HEIGHT, FUCHSIA_CITY_WIDTH ; dimensions (y, x)
 	dw FuchsiaCity_Blocks ; blocks

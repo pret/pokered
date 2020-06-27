@@ -1,4 +1,4 @@
-SpecialWarpIn:
+SpecialWarpIn::
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl, wd732

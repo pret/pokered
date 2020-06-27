@@ -1,4 +1,4 @@
-IndigoPlateauLobby_h:
+IndigoPlateauLobby_h::
 	db MART ; tileset
 	db INDIGO_PLATEAU_LOBBY_HEIGHT, INDIGO_PLATEAU_LOBBY_WIDTH ; dimensions (y, x)
 	dw IndigoPlateauLobby_Blocks ; blocks

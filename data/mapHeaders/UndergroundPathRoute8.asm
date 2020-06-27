@@ -1,4 +1,4 @@
-UndergroundPathRoute8_h:
+UndergroundPathRoute8_h::
 	db GATE ; tileset
 	db UNDERGROUND_PATH_ROUTE_8_HEIGHT, UNDERGROUND_PATH_ROUTE_8_WIDTH ; dimensions (y, x)
 	dw UndergroundPathRoute8_Blocks ; blocks

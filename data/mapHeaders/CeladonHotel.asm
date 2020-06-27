@@ -1,4 +1,4 @@
-CeladonHotel_h:
+CeladonHotel_h::
 	db POKECENTER ; tileset
 	db CELADON_HOTEL_HEIGHT, CELADON_HOTEL_WIDTH ; dimensions (y, x)
 	dw CeladonHotel_Blocks ; blocks

@@ -1,4 +1,7 @@
+BaseStats::
+MonBaseStats::
 INCLUDE "data/baseStats/bulbasaur.asm"
+MonBaseStatsEnd::
 INCLUDE "data/baseStats/ivysaur.asm"
 INCLUDE "data/baseStats/venusaur.asm"
 INCLUDE "data/baseStats/charmander.asm"

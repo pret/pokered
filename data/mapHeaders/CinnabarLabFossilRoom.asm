@@ -1,4 +1,4 @@
-CinnabarLabFossilRoom_h:
+CinnabarLabFossilRoom_h::
 	db LAB ; tileset
 	db CINNABAR_LAB_FOSSIL_ROOM_HEIGHT, CINNABAR_LAB_FOSSIL_ROOM_WIDTH ; dimensions (y, x)
 	dw CinnabarLabFossilRoom_Blocks ; blocks

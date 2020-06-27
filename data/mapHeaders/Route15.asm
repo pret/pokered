@@ -1,4 +1,4 @@
-Route15_h:
+Route15_h::
 	db OVERWORLD ; tileset
 	db ROUTE_15_HEIGHT, ROUTE_15_WIDTH ; dimensions (y, x)
 	dw Route15_Blocks ; blocks

@@ -71,13 +71,13 @@ SilphCoMapList:
 	db SILPH_CO_11F
 	db $FF
 
-CardKeySuccessText:
+CardKeySuccessText::
 	TX_FAR _CardKeySuccessText1
 	TX_SFX_ITEM_1
 	TX_FAR _CardKeySuccessText2
 	db "@"
 
-CardKeyFailText:
+CardKeyFailText::
 	TX_FAR _CardKeyFailText
 	db "@"
 

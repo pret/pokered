@@ -1,4 +1,4 @@
-CeladonMartElevator_h:
+CeladonMartElevator_h::
 	db LOBBY ; tileset
 	db CELADON_MART_ELEVATOR_HEIGHT, CELADON_MART_ELEVATOR_WIDTH ; dimensions (y, x)
 	dw CeladonMartElevator_Blocks ; blocks

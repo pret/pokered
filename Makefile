@@ -1,7 +1,18 @@
 roms := pokered.gbc pokeblue.gbc
 
-pokered_obj := audio_red.o main_red.o text_red.o wram_red.o
-pokeblue_obj := audio_blue.o main_blue.o text_blue.o wram_blue.o
+rom_obj := \
+audio.o \
+home.o \
+main.o \
+maps.o \
+pics.o \
+sprites.o \
+text.o \
+tilesets.o \
+wram.o \
+
+pokered_obj := $(rom_obj:.o=_red.o)
+pokeblue_obj := $(rom_obj:.o=_blue.o)
 
 
 ### Build tools
@@ -65,7 +76,7 @@ pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
 %.gbc: $$(%_obj)
-	$(RGBLINK) -d -n $*.sym -l pokered.link -o $@ $^
+	$(RGBLINK) -d -n $*.sym -l layout.link -o $@ $^
 	$(RGBFIX) $($*_opt) $@
 	sort $*.sym -o $*.sym
 

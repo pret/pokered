@@ -1,4 +1,4 @@
-OaksLab_h:
+OaksLab_h::
 	db DOJO ; tileset
 	db OAKS_LAB_HEIGHT, OAKS_LAB_WIDTH ; dimensions (y, x)
 	dw OaksLab_Blocks ; blocks

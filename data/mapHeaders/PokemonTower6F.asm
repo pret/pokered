@@ -1,4 +1,4 @@
-PokemonTower6F_h:
+PokemonTower6F_h::
 	db CEMETERY ; tileset
 	db POKEMON_TOWER_6F_HEIGHT, POKEMON_TOWER_6F_WIDTH ; dimensions (y, x)
 	dw PokemonTower6F_Blocks ; blocks

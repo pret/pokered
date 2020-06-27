@@ -1,4 +1,4 @@
-DiglettsCaveRoute11_h:
+DiglettsCaveRoute11_h::
 	db CAVERN ; tileset
 	db DIGLETTS_CAVE_ROUTE_11_HEIGHT, DIGLETTS_CAVE_ROUTE_11_WIDTH ; dimensions (y, x)
 	dw DiglettsCaveRoute11_Blocks ; blocks

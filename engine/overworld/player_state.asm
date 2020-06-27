@@ -1,5 +1,5 @@
 ; only used for setting bit 2 of wd736 upon entering a new map
-IsPlayerStandingOnWarp:
+IsPlayerStandingOnWarp::
 	ld a, [wNumberOfWarps]
 	and a
 	ret z
@@ -31,7 +31,7 @@ IsPlayerStandingOnWarp:
 	jr nz, .loop
 	ret
 
-CheckForceBikeOrSurf:
+CheckForceBikeOrSurf::
 	ld hl, wd732
 	bit 5, [hl]
 	ret nz
@@ -84,7 +84,7 @@ CheckForceBikeOrSurf:
 
 INCLUDE "data/force_bike_surf.asm"
 
-IsPlayerFacingEdgeOfMap:
+IsPlayerFacingEdgeOfMap::
 	push hl
 	push de
 	push bc
@@ -150,7 +150,7 @@ IsPlayerFacingEdgeOfMap:
 	scf
 	ret
 
-IsWarpTileInFrontOfPlayer:
+IsWarpTileInFrontOfPlayer::
 	push hl
 	push de
 	push bc
@@ -188,7 +188,7 @@ IsSSAnneBowWarpTileInFrontOfPlayer:
 	and a
 	jr IsWarpTileInFrontOfPlayer.done
 
-IsPlayerStandingOnDoorTileOrWarpTile:
+IsPlayerStandingOnDoorTileOrWarpTile::
 	push hl
 	push de
 	push bc
@@ -217,7 +217,7 @@ IsPlayerStandingOnDoorTileOrWarpTile:
 
 INCLUDE "data/warp_tile_ids.asm"
 
-PrintSafariZoneSteps:
+PrintSafariZoneSteps::
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	ret c

@@ -1,4 +1,4 @@
-_AddPartyMon:
+_AddPartyMon::
 ; Adds a new mon to the player's or enemy's party.
 ; [wMonDataLocation] is used in an unusual way in this function.
 ; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
@@ -277,7 +277,7 @@ AddPartyMon_WriteMovePP:
 
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
-_AddEnemyMonToPlayerParty:
+_AddEnemyMonToPlayerParty::
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
@@ -338,7 +338,7 @@ _AddEnemyMonToPlayerParty:
 	and a
 	ret                  ; return success
 
-_MoveMon:
+_MoveMon::
 	ld a, [wMoveMonType]
 	and a   ; BOX_TO_PARTY
 	jr z, .checkPartyMonSlots

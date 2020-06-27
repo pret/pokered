@@ -1,3 +1,6 @@
+INCLUDE "constants.asm"
+
+
 ; The rst vectors are unused.
 SECTION "rst 00", ROM0
 	rst $38
@@ -492,7 +495,7 @@ PrintStatusCondition::
 	and a
 	ret
 
-PrintStatusConditionNotFainted:
+PrintStatusConditionNotFainted::
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(PrintStatusAilment)

@@ -1,4 +1,4 @@
-Colosseum_h:
+Colosseum_h::
 	db CLUB ; tileset
 	db COLOSSEUM_HEIGHT, COLOSSEUM_WIDTH ; dimensions (y, x)
 	dw Colosseum_Blocks ; blocks

@@ -53,7 +53,7 @@ DoYouWantToNicknameText:
 	TX_FAR _DoYouWantToNicknameText
 	db "@"
 
-DisplayNameRaterScreen:
+DisplayNameRaterScreen::
 	ld hl, wBuffer
 	xor a
 	ld [wUpdateSpritesEnabled], a

@@ -1,4 +1,4 @@
-CeladonPrizeMenu:
+CeladonPrizeMenu::
 	ld b, COIN_CASE
 	call IsItemInBag
 	jr nz, .havingCoinCase

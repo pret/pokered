@@ -1,4 +1,4 @@
-GetTrainerName_:
+GetTrainerName_::
 	ld hl, wGrassRate
 	ld a, [wLinkState]
 	and a

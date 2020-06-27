@@ -1,4 +1,4 @@
-_GivePokemon:
+_GivePokemon::
 ; returns success in carry
 ; and whether the mon was added to the party in [wAddedToParty]
 	call EnableAutoTextBoxDrawing

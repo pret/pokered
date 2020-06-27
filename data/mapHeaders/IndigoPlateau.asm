@@ -1,4 +1,4 @@
-IndigoPlateau_h:
+IndigoPlateau_h::
 	db PLATEAU ; tileset
 	db INDIGO_PLATEAU_HEIGHT, INDIGO_PLATEAU_WIDTH ; dimensions (y, x)
 	dw IndigoPlateau_Blocks ; blocks

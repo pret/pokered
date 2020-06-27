@@ -1,4 +1,4 @@
-BluesHouse_h:
+BluesHouse_h::
 	db HOUSE ; tileset
 	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH ; dimensions (y, x)
 	dw BluesHouse_Blocks ; blocks

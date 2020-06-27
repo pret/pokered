@@ -1,4 +1,4 @@
-SaffronMart_h:
+SaffronMart_h::
 	db MART ; tileset
 	db SAFFRON_MART_HEIGHT, SAFFRON_MART_WIDTH ; dimensions (y, x)
 	dw SaffronMart_Blocks ; blocks

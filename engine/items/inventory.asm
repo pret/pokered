@@ -4,7 +4,7 @@
 ; [wcf91] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory_:
+AddItemToInventory_::
 	ld a, [wItemQuantity] ; a = item quantity
 	push af
 	push bc
@@ -97,7 +97,7 @@ AddItemToInventory_:
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
-RemoveItemFromInventory_:
+RemoveItemFromInventory_::
 	push hl
 	inc hl
 	ld a, [wWhichPokemon] ; index (within the inventory) of the item being removed

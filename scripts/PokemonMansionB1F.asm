@@ -43,7 +43,7 @@ Mansion4Script_523cf:
 	call Mansion2Script_5202f
 	ret
 
-Mansion4Script_Switches:
+Mansion4Script_Switches::
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz

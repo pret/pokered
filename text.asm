@@ -1,28 +1,12 @@
-INCLUDE "charmap.asm"
-
-INCLUDE "constants/text_constants.asm"
-
-TEXT_1  EQU $20
-TEXT_2  EQU TEXT_1 + 1
-TEXT_3  EQU TEXT_2 + 1
-TEXT_4  EQU TEXT_3 + 1
-TEXT_5  EQU TEXT_4 + 1
-TEXT_6  EQU TEXT_5 + 1
-TEXT_7  EQU TEXT_6 + 1
-TEXT_8  EQU TEXT_7 + 1
-TEXT_9  EQU TEXT_8 + 1
-TEXT_10 EQU TEXT_9 + 1
-TEXT_11 EQU TEXT_10 + 1
-
-POKEDEX_TEXT EQU TEXT_11 + 1
-MOVE_NAMES   EQU POKEDEX_TEXT + 1
-
 INCLUDE "macros.asm"
+INCLUDE "charmap.asm"
 
 INCLUDE "hram.asm"
 
+INCLUDE "constants/text_constants.asm"
 
-SECTION "Text 1", ROMX ; BANK $20
+
+SECTION "Text 1", ROMX
 
 _CardKeySuccessText1::
 	text "Bingo!@@"
@@ -195,7 +179,7 @@ INCLUDE "text/maps/SilphCo4F.asm"
 INCLUDE "text/maps/SilphCo5F.asm"
 
 
-SECTION "Text 2", ROMX ; BANK $21
+SECTION "Text 2", ROMX
 
 INCLUDE "text/maps/SilphCo5F_2.asm"
 INCLUDE "text/maps/SilphCo6F.asm"
@@ -227,7 +211,7 @@ INCLUDE "text/maps/AgathasRoom.asm"
 INCLUDE "text/maps/RockTunnelB1F.asm"
 
 
-SECTION "Text 3", ROMX ; BANK $22
+SECTION "Text 3", ROMX
 
 INCLUDE "text/maps/RockTunnelB1F_2.asm"
 INCLUDE "text/maps/SeafoamIslandsB4F.asm"
@@ -1942,7 +1926,7 @@ INCLUDE "text/maps/SaffronGates.asm"
 INCLUDE "text/maps/Daycare.asm"
 
 
-SECTION "Text 4", ROMX ; BANK $23
+SECTION "Text 4", ROMX
 
 INCLUDE "text/maps/Daycare_2.asm"
 INCLUDE "text/maps/UndergroundPathRoute6.asm"
@@ -1981,7 +1965,7 @@ INCLUDE "text/maps/Route10.asm"
 INCLUDE "text/maps/Route11.asm"
 
 
-SECTION "Text 5", ROMX ; BANK $24
+SECTION "Text 5", ROMX
 
 INCLUDE "text/maps/Route11_2.asm"
 INCLUDE "text/maps/Route12.asm"
@@ -1999,7 +1983,7 @@ INCLUDE "text/maps/Route23.asm"
 INCLUDE "text/maps/Route24.asm"
 
 
-SECTION "Text 6", ROMX ; BANK $25
+SECTION "Text 6", ROMX
 
 INCLUDE "text/maps/Route24_2.asm"
 INCLUDE "text/maps/Route25.asm"
@@ -2342,7 +2326,7 @@ INCLUDE "text/maps/Museum2F.asm"
 INCLUDE "text/maps/PewterGym.asm"
 
 
-SECTION "Text 7", ROMX ; BANK $26
+SECTION "Text 7", ROMX
 
 INCLUDE "text/maps/PewterGym_2.asm"
 INCLUDE "text/maps/PewterNidoranHouse.asm"
@@ -2374,7 +2358,7 @@ INCLUDE "text/maps/VermilionMart.asm"
 INCLUDE "text/maps/VermilionGym.asm"
 
 
-SECTION "Text 8", ROMX ; BANK $27
+SECTION "Text 8", ROMX
 
 INCLUDE "text/maps/VermilionGym_2.asm"
 INCLUDE "text/maps/VermilionPidgeyHouse.asm"
@@ -2406,7 +2390,7 @@ INCLUDE "text/maps/SafariZoneGate.asm"
 INCLUDE "text/maps/FuchsiaGym.asm"
 
 
-SECTION "Text 9", ROMX ; BANK $28
+SECTION "Text 9", ROMX
 
 INCLUDE "text/maps/FuchsiaGym_2.asm"
 INCLUDE "text/maps/FuchsiaMeetingRoom.asm"
@@ -2649,7 +2633,7 @@ _CableClubNPCLinkClosedBecauseOfInactivityText::
 	done
 
 
-SECTION "Text 10", ROMX ; BANK $29
+SECTION "Text 10", ROMX
 
 _CableClubNPCPleaseComeAgainText::
 	text "Please come again!"
@@ -2995,7 +2979,7 @@ _BoxFullCannotThrowBallText::
 	prompt
 
 
-SECTION "Text 11", ROMX ; BANK $2a
+SECTION "Text 11", ROMX
 
 _ItemUseText001::
 	text "<PLAYER> used@@"
@@ -3195,11 +3179,11 @@ _UsedCutText::
 	prompt
 
 
-SECTION "Pokedex Text", ROMX ; BANK $2b
+SECTION "Pokedex Text", ROMX
 
 INCLUDE "text/pokedex.asm"
 
 
-SECTION "Move Names", ROMX ; BANK $2c
+SECTION "Move Names", ROMX
 
 INCLUDE "text/move_names.asm"

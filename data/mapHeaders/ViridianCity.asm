@@ -1,4 +1,4 @@
-ViridianCity_h:
+ViridianCity_h::
 	db OVERWORLD ; tileset
 	db VIRIDIAN_CITY_HEIGHT, VIRIDIAN_CITY_WIDTH ; dimensions (y, x)
 	dw ViridianCity_Blocks ; blocks

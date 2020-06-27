@@ -1,4 +1,4 @@
-GameCorner_h:
+GameCorner_h::
 	db LOBBY ; tileset
 	db GAME_CORNER_HEIGHT, GAME_CORNER_WIDTH ; dimensions (y, x)
 	dw GameCorner_Blocks ; blocks

@@ -1,4 +1,4 @@
-ClearVariablesOnEnterMap:
+ClearVariablesOnEnterMap::
 	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld [rWY], a

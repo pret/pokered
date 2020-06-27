@@ -1,4 +1,4 @@
-RockTunnel1F_h:
+RockTunnel1F_h::
 	db CAVERN ; tileset
 	db ROCK_TUNNEL_1F_HEIGHT, ROCK_TUNNEL_1F_WIDTH ; dimensions (y, x)
 	dw RockTunnel1F_Blocks ; blocks

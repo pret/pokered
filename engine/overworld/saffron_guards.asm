@@ -1,4 +1,4 @@
-RemoveGuardDrink:
+RemoveGuardDrink::
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]

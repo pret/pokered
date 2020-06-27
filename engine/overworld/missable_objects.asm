@@ -1,4 +1,4 @@
-MarkTownVisitedAndLoadMissableObjects:
+MarkTownVisitedAndLoadMissableObjects::
 	ld a, [wCurMap]
 	cp ROUTE_1
 	jr nc, .notInTown

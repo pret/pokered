@@ -1,4 +1,4 @@
-DisplayPokemartDialogue_:
+DisplayPokemartDialogue_::
 	ld a, [wListScrollOffset]
 	ld [wSavedListScrollOffset], a
 	call UpdateSprites

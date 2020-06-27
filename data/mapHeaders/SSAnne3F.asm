@@ -1,4 +1,4 @@
-SSAnne3F_h:
+SSAnne3F_h::
 	db SHIP ; tileset
 	db SS_ANNE_3F_HEIGHT, SS_ANNE_3F_WIDTH ; dimensions (y, x)
 	dw SSAnne3F_Blocks ; blocks

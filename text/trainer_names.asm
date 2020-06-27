@@ -1,4 +1,4 @@
-TrainerNames:
+TrainerNames::
 	db "YOUNGSTER@"
 	db "BUG CATCHER@"
 	db "LASS@"

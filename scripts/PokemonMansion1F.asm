@@ -45,7 +45,7 @@ Mansion1ReplaceBlock:
 	predef ReplaceTileBlock
 	ret
 
-Mansion1Script_Switches:
+Mansion1Script_Switches::
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz

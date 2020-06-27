@@ -1,4 +1,4 @@
-TradeCenter_h:
+TradeCenter_h::
 	db CLUB ; tileset
 	db TRADE_CENTER_HEIGHT, TRADE_CENTER_WIDTH ; dimensions (y, x)
 	dw TradeCenter_Blocks ; blocks

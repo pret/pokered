@@ -1,4 +1,4 @@
-LavenderTown_h:
+LavenderTown_h::
 	db OVERWORLD ; tileset
 	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
 	dw LavenderTown_Blocks ; blocks

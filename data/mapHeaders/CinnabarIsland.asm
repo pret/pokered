@@ -1,4 +1,4 @@
-CinnabarIsland_h:
+CinnabarIsland_h::
 	db OVERWORLD ; tileset
 	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
 	dw CinnabarIsland_Blocks ; blocks

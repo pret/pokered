@@ -1,4 +1,4 @@
-VictoryRoad1F_h:
+VictoryRoad1F_h::
 	db CAVERN ; tileset
 	db VICTORY_ROAD_1F_HEIGHT, VICTORY_ROAD_1F_WIDTH ; dimensions (y, x)
 	dw VictoryRoad1F_Blocks ; blocks

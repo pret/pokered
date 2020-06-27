@@ -1,4 +1,4 @@
-FuchsiaPokecenter_h:
+FuchsiaPokecenter_h::
 	db POKECENTER ; tileset
 	db FUCHSIA_POKECENTER_HEIGHT, FUCHSIA_POKECENTER_WIDTH ; dimensions (y, x)
 	dw FuchsiaPokecenter_Blocks ; blocks

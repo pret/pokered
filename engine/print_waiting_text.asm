@@ -1,4 +1,4 @@
-PrintWaitingText:
+PrintWaitingText::
 	coord hl, 3, 10
 	ld b, $1
 	ld c, $b

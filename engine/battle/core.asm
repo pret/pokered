@@ -1451,7 +1451,7 @@ TrainerSentOutText:
 
 ; tests if the player has any pokemon that are not fainted
 ; sets d = 0 if all fainted, d != 0 if some mons are still alive
-AnyPartyAlive:
+AnyPartyAlive::
 	ld a, [wPartyCount]
 	ld e, a
 	xor a
@@ -1996,7 +1996,7 @@ CenterMonName:
 	pop de
 	ret
 
-DisplayBattleMenu:
+DisplayBattleMenu::
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	ld a, [wBattleType]
 	and a
@@ -6718,7 +6718,7 @@ PlayMoveAnimation:
 	call Delay3
 	predef_jump MoveAnimation
 
-InitBattle:
+InitBattle::
 	ld a, [wCurOpponent]
 	and a
 	jr z, DetermineWildOpponent
@@ -6934,7 +6934,7 @@ CopyUncompressedPicToTilemap:
 	ld a, [wPredefRegisters + 1]
 	ld l, a
 	ld a, [hStartTileID]
-CopyUncompressedPicToHL:
+CopyUncompressedPicToHL::
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
 	push af

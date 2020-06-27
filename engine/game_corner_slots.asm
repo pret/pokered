@@ -41,14 +41,14 @@ StartSlotMachine:
 	call PrintPredefTextID
 	ret
 
-GameCornerOutOfOrderText:
+GameCornerOutOfOrderText::
 	TX_FAR _GameCornerOutOfOrderText
 	db "@"
 
-GameCornerOutToLunchText:
+GameCornerOutToLunchText::
 	TX_FAR _GameCornerOutToLunchText
 	db "@"
 
-GameCornerSomeonesKeysText:
+GameCornerSomeonesKeysText::
 	TX_FAR _GameCornerSomeonesKeysText
 	db "@"

@@ -1,4 +1,4 @@
-UpdateSpriteFacingOffsetAndDelayMovement:
+UpdateSpriteFacingOffsetAndDelayMovement::
 	ld h, $c2
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $8

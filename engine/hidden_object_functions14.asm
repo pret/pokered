@@ -5,12 +5,12 @@ PrintNotebookText:
 	ld a, [wHiddenObjectFunctionArgument]
 	jp PrintPredefTextID
 
-TMNotebook:
+TMNotebook::
 	TX_FAR TMNotebookText
 	TX_WAIT
 	db "@"
 
-ViridianSchoolNotebook:
+ViridianSchoolNotebook::
 	TX_ASM
 	ld hl, ViridianSchoolNotebookText1
 	call PrintText
@@ -68,7 +68,7 @@ PrintFightingDojoText2:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump EnemiesOnEverySideText
 
-EnemiesOnEverySideText:
+EnemiesOnEverySideText::
 	TX_FAR _EnemiesOnEverySideText
 	db "@"
 
@@ -76,7 +76,7 @@ PrintFightingDojoText3:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump WhatGoesAroundComesAroundText
 
-WhatGoesAroundComesAroundText:
+WhatGoesAroundComesAroundText::
 	TX_FAR _WhatGoesAroundComesAroundText
 	db "@"
 
@@ -84,7 +84,7 @@ PrintFightingDojoText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump FightingDojoText
 
-FightingDojoText:
+FightingDojoText::
 	TX_FAR _FightingDojoText
 	db "@"
 
@@ -95,6 +95,6 @@ PrintIndigoPlateauHQText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump IndigoPlateauHQText
 
-IndigoPlateauHQText:
+IndigoPlateauHQText::
 	TX_FAR _IndigoPlateauHQText
 	db "@"

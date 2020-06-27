@@ -1,4 +1,4 @@
-NameRatersHouse_h:
+NameRatersHouse_h::
 	db HOUSE ; tileset
 	db NAME_RATERS_HOUSE_HEIGHT, NAME_RATERS_HOUSE_WIDTH ; dimensions (y, x)
 	dw NameRatersHouse_Blocks ; blocks

@@ -1,4 +1,4 @@
-CeladonChiefHouse_h:
+CeladonChiefHouse_h::
 	db MANSION ; tileset
 	db CELADON_CHIEF_HOUSE_HEIGHT, CELADON_CHIEF_HOUSE_WIDTH ; dimensions (y, x)
 	dw CeladonChiefHouse_Blocks ; blocks

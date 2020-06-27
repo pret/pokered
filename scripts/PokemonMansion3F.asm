@@ -72,7 +72,7 @@ Mansion3Script_5225b:
 	set 4, [hl]
 	ret
 
-Mansion3Script_Switches:
+Mansion3Script_Switches::
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz

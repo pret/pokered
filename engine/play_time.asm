@@ -1,4 +1,4 @@
-TrackPlayTime:
+TrackPlayTime::
 	call CountDownIgnoreInputBitReset
 	ld a, [wd732]
 	bit 0, a

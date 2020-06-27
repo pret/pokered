@@ -1,4 +1,4 @@
-Daycare_h:
+Daycare_h::
 	db HOUSE ; tileset
 	db DAYCARE_HEIGHT, DAYCARE_WIDTH ; dimensions (y, x)
 	dw Daycare_Blocks ; blocks

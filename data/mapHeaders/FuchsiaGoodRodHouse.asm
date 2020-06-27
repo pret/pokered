@@ -1,4 +1,4 @@
-FuchsiaGoodRodHouse_h:
+FuchsiaGoodRodHouse_h::
 	db SHIP ; tileset
 	db FUCHSIA_GOOD_ROD_HOUSE_HEIGHT, FUCHSIA_GOOD_ROD_HOUSE_WIDTH ; dimensions (y, x)
 	dw FuchsiaGoodRodHouse_Blocks ; blocks

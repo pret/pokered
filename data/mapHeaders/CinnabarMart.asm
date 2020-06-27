@@ -1,4 +1,4 @@
-CinnabarMart_h:
+CinnabarMart_h::
 	db MART ; tileset
 	db CINNABAR_MART_HEIGHT, CINNABAR_MART_WIDTH ; dimensions (y, x)
 	dw CinnabarMart_Blocks ; blocks

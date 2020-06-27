@@ -1,4 +1,4 @@
-EnterMapAnim:
+EnterMapAnim::
 	call InitFacingDirectionList
 	ld a, $ec
 	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
@@ -90,7 +90,7 @@ PlayerSpinWhileMovingDown:
 	ld [hl], a ; wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	jp PlayerSpinWhileMovingUpOrDown
 
-_LeaveMapAnim:
+_LeaveMapAnim::
 	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -347,7 +347,7 @@ GetPlayerTeleportAnimFrameDelay:
 	inc a
 	ret
 
-IsPlayerStandingOnWarpPadOrHole:
+IsPlayerStandingOnWarpPadOrHole::
 	ld b, 0
 	ld hl, WarpPadAndHoleData
 	ld a, [wCurMapTileset]
@@ -496,7 +496,7 @@ RedFishingTiles:
 	db 3, BANK(RedFishingRodTiles)
 	dw vNPCSprites2 + $7d0
 
-_HandleMidJump:
+_HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
 	ld c, a
 	inc a

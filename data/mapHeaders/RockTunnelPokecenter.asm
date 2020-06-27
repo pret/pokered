@@ -1,4 +1,4 @@
-RockTunnelPokecenter_h:
+RockTunnelPokecenter_h::
 	db POKECENTER ; tileset
 	db ROCK_TUNNEL_POKECENTER_HEIGHT, ROCK_TUNNEL_POKECENTER_WIDTH ; dimensions (y, x)
 	dw RockTunnelPokecenter_Blocks ; blocks
