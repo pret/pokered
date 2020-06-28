@@ -57,11 +57,11 @@ GetAnimationSpeed:
 	call AddNTimes
 	ld c, $40 ; amount to increase the tile id by
 	ld a, [hl]
-	cp $4 ; tile ID for SPRITE_BALL_M
+	cp $4 ; tile ID for ICON_BALL
 	jr z, .editCoords
-	cp $8 ; tile ID for SPRITE_HELIX
+	cp $8 ; tile ID for ICON_HELIX
 	jr nz, .editTileIDS
-; SPRITE_BALL_M and SPRITE_HELIX only shake up and down
+; ICON_BALL and ICON_HELIX only shake up and down
 .editCoords
 	dec hl
 	dec hl ; dec hl to the OAM y coord
@@ -243,7 +243,7 @@ WriteMonPartySpriteOAM:
 	add $10
 	ld b, a
 	pop af
-	cp SPRITE_HELIX << 2
+	cp ICON_HELIX << 2
 	jr z, .helix
 	call WriteSymmetricMonPartySpriteOAM
 	jr .makeCopy
@@ -280,5 +280,16 @@ GetPartyMonSpriteID:
 
 INCLUDE "data/mon_party_sprites.asm"
 
-MonPartySprites:
-	INCBIN "gfx/trade/mon_ow_sprites.2bpp"
+INC_FRAME_1 EQUS "0, $20"
+INC_FRAME_2 EQUS "$20, $20"
+
+BugIconFrame1:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_1
+PlantIconFrame1:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_1
+BugIconFrame2:       INCBIN "gfx/icons/bug.2bpp", INC_FRAME_2
+PlantIconFrame2:     INCBIN "gfx/icons/plant.2bpp", INC_FRAME_2
+SnakeIconFrame1:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_1
+QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
+SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_2
+QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
+
+TradeBubbleIconGFX:  INCBIN "gfx/icons/trade_bubble.2bpp"

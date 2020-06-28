@@ -1,16 +1,16 @@
 ; pokemon's overworld sprites
 const_value = 0
 
-	const SPRITE_MON       ; $0
-	const SPRITE_BALL_M    ; $1
-	const SPRITE_HELIX     ; $2
-	const SPRITE_FAIRY     ; $3
-	const SPRITE_BIRD_M    ; $4
-	const SPRITE_WATER     ; $5
-	const SPRITE_BUG       ; $6
-	const SPRITE_GRASS     ; $7
-	const SPRITE_SNAKE     ; $8
-	const SPRITE_QUADRUPED ; $9
+	const ICON_MON       ; $0
+	const ICON_BALL      ; $1
+	const ICON_HELIX     ; $2
+	const ICON_FAIRY     ; $3
+	const ICON_BIRD      ; $4
+	const ICON_WATER     ; $5
+	const ICON_BUG       ; $6
+	const ICON_GRASS     ; $7
+	const ICON_SNAKE     ; $8
+	const ICON_QUADRUPED ; $9
 
 ; overworld sprites
 const_value = 1
