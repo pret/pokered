@@ -586,7 +586,7 @@ INCLUDE "data/town_map_entries.asm"
 INCLUDE "text/map_names.asm"
 
 MonNestIcon:
-	INCBIN "gfx/pokedex/mon_nest_icon.1bpp"
+	INCBIN "gfx/town_map/mon_nest_icon.1bpp"
 MonNestIconEnd:
 
 TownMapSpriteBlinkingAnimation::
