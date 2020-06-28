@@ -5054,11 +5054,11 @@ BuildingRageText:
 ; copy last move for Mirror Move
 ; sets zero flag on failure and unsets zero flag on success
 MirrorMoveCopyMove:
-; Mirror Move makes use of ccf1 (wPlayerUsedMove) and ccf2 (wEnemyUsedMove) addresses,
+; Mirror Move makes use of wPlayerUsedMove and wEnemyUsedMove,
 ; which are mainly used to print the "[Pokemon] used [Move]" text.
 ; Both are set to 0 whenever a new Pokemon is sent out
-; ccf1 is also set to 0 whenever the player is fast asleep or frozen solid.
-; ccf2 is also set to 0 whenever the enemy is fast asleep or frozen solid.
+; wPlayerUsedMove is also set to 0 whenever the player is fast asleep or frozen solid.
+; wEnemyUsedMove is also set to 0 whenever the enemy is fast asleep or frozen solid.
 
 	ld a, [H_WHOSETURN]
 	and a
