@@ -24,49 +24,49 @@ MonPartySpritePointers:
 	db BANK(SeelSprite)
 	dw vSprites + $140
 
-	dw MonPartySprites + $40
+	dw BugIconFrame2
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(BugIconFrame2)
 	dw vSprites + $180
 
-	dw MonPartySprites + $50
+	dw BugIconFrame2 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(BugIconFrame2)
 	dw vSprites + $1a0
 
-	dw MonPartySprites + $60
+	dw PlantIconFrame2
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(PlantIconFrame2)
 	dw vSprites + $1c0
 
-	dw MonPartySprites + $70
+	dw PlantIconFrame2 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(PlantIconFrame2)
 	dw vSprites + $1e0
 
-	dw MonPartySprites + $80
+	dw SnakeIconFrame1
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(SnakeIconFrame1)
 	dw vSprites + $200
 
-	dw MonPartySprites + $90
+	dw SnakeIconFrame1 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(SnakeIconFrame1)
 	dw vSprites + $220
 
-	dw MonPartySprites + $A0
+	dw QuadrupedIconFrame1
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(QuadrupedIconFrame1)
 	dw vSprites + $240
 
-	dw MonPartySprites + $B0
+	dw QuadrupedIconFrame1 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(QuadrupedIconFrame1)
 	dw vSprites + $260
 
-	dw MonPartySprites + $100
+	dw TradeBubbleIconGFX
 	db $40 / $10 ; $40 bytes
-	db BANK(MonPartySprites)
+	db BANK(TradeBubbleIconGFX)
 	dw vSprites + $380
 
 	dw SlowbroSprite
@@ -94,47 +94,47 @@ MonPartySpritePointers:
 	db BANK(SeelSprite)
 	dw vSprites + $540
 
-	dw MonPartySprites
+	dw BugIconFrame1
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(BugIconFrame1)
 	dw vSprites + $580
 
-	dw MonPartySprites + $10
+	dw BugIconFrame1 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(BugIconFrame1)
 	dw vSprites + $5a0
 
-	dw MonPartySprites + $20
+	dw PlantIconFrame1
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(PlantIconFrame1)
 	dw vSprites + $5c0
 
-	dw MonPartySprites + $30
+	dw PlantIconFrame1 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(PlantIconFrame1)
 	dw vSprites + $5E0
 
-	dw MonPartySprites + $C0
+	dw SnakeIconFrame2
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(SnakeIconFrame2)
 	dw vSprites + $600
 
-	dw MonPartySprites + $D0
+	dw SnakeIconFrame2 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(SnakeIconFrame2)
 	dw vSprites + $620
 
-	dw MonPartySprites + $E0
+	dw QuadrupedIconFrame2
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(QuadrupedIconFrame2)
 	dw vSprites + $640
 
-	dw MonPartySprites + $F0
+	dw QuadrupedIconFrame2 + $10
 	db $10 / $10 ; $10 bytes
-	db BANK(MonPartySprites)
+	db BANK(QuadrupedIconFrame2)
 	dw vSprites + $660
 
-	dw MonPartySprites + $140
+	dw TradeBubbleIconGFX + $40
 	db $40 / $10 ; $40 bytes
-	db BANK(MonPartySprites)
+	db BANK(TradeBubbleIconGFX)
 	dw vSprites + $780
