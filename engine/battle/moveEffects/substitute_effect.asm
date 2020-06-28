@@ -28,7 +28,7 @@ SubstituteEffect_:
 	add hl, de ; point hl to current HP low byte
 	pop de
 	ld a, b
-	ld [de], a ; save copy of HP to subtract in ccd7/ccd8 [how much HP substitute has]
+	ld [de], a ; save copy of HP to subtract in wPlayerSubstituteHP/wEnemySubstituteHP
 	ld a, [hld]
 ; subtract [max hp / 4] to current HP
 	sub b
