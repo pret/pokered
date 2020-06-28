@@ -292,4 +292,4 @@ QuadrupedIconFrame1: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_1
 SnakeIconFrame2:     INCBIN "gfx/icons/snake.2bpp", INC_FRAME_2
 QuadrupedIconFrame2: INCBIN "gfx/icons/quadruped.2bpp", INC_FRAME_2
 
-TradeBubbleIconGFX:  INCBIN "gfx/icons/trade_bubble.2bpp"
+TradeBubbleIconGFX:  INCBIN "gfx/trade/bubble.2bpp"
