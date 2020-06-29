@@ -21,3 +21,8 @@ before_script:
 script:
   - make -j2 compare
   - check_status
+after_success:
+  - |-
+    if [ "$TRAVIS_BRANCH" = master -a "$TRAVIS_PULL_REQUEST" = false -a "$TRAVIS_OS_NAME" = linux ]; then
+      ./.travis/webhook.sh
+    fi
