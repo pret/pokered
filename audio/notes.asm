@@ -1,3 +1,5 @@
+; This file is INCLUDEd three times, once in each audio engine.
+
 	dw $F82C ; C_
 	dw $F89D ; C#
 	dw $F907 ; D_

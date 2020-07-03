@@ -376,13 +376,7 @@ KnowsHMMove::
 	and a
 	ret
 
-HMMoveArray:
-	db CUT
-	db FLY
-	db SURF
-	db STRENGTH
-	db FLASH
-	db -1
+INCLUDE "data/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
 	coord hl, 9, 10
