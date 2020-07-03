@@ -7,7 +7,7 @@ CeruleanCaveB1F_Script:
 	ld [wCeruleanCaveB1FCurScript], a
 	ret
 
-CeruleanCaveB1F_ScriptPointers
+CeruleanCaveB1F_ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle

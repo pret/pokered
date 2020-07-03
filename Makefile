@@ -5,11 +5,11 @@ audio.o \
 home.o \
 main.o \
 maps.o \
-pics.o \
-sprites.o \
 text.o \
-tilesets.o \
 wram.o \
+gfx/pics.o \
+gfx/sprites.o \
+gfx/tilesets.o
 
 pokered_obj := $(rom_obj:.o=_red.o)
 pokeblue_obj := $(rom_obj:.o=_blue.o)
@@ -35,7 +35,7 @@ RGBLINK ?= $(RGBDS)rgblink
 .PHONY: all red blue clean tidy compare tools
 
 all: $(roms)
-red: pokered.gbc
+red:  pokered.gbc
 blue: pokeblue.gbc
 
 # For contributors to make sure a change didn't affect the contents of the rom.
@@ -44,7 +44,7 @@ compare: $(roms)
 
 clean:
 	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
+	find gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -delete
 	$(MAKE) clean -C tools/
 
 tidy:
@@ -55,28 +55,43 @@ tools:
 	$(MAKE) -C tools/
 
 
+RGBASMFLAGS = -h -Weverything
+# Create a sym/map for debug purposes if `make` run with `DEBUG=1`
+ifeq ($(DEBUG),1)
+RGBASMFLAGS += -E
+endif
+
+$(pokered_obj):  RGBASMFLAGS += -D _RED
+$(pokeblue_obj): RGBASMFLAGS += -D _BLUE
+
+# The dep rules have to be explicit or else missing files won't be reported.
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way.
+define DEP
+$1: $2 $$(shell tools/scan_includes $2)
+	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
+endef
+
 # Build tools when building the rom.
 # This has to happen before the rules are processed, since that's when scan_includes is run.
 ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
+
 $(info $(shell $(MAKE) -C tools))
+
+# Dependencies for objects (drop _red and _blue from asm file basenames)
+$(foreach obj, $(pokered_obj), $(eval $(call DEP,$(obj),$(obj:_red.o=.asm))))
+$(foreach obj, $(pokeblue_obj), $(eval $(call DEP,$(obj),$(obj:_blue.o=.asm))))
+
 endif
 
 
 %.asm: ;
 
-%_red.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
-$(pokered_obj): %_red.o: %.asm $$(dep)
-	$(RGBASM) -D _RED -h -o $@ $*.asm
-
-%_blue.o: dep = $(shell tools/scan_includes $(@D)/$*.asm)
-$(pokeblue_obj): %_blue.o: %.asm $$(dep)
-	$(RGBASM) -D _BLUE -h -o $@ $*.asm
-
 pokered_opt  = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON RED"
 pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 
-%.gbc: $$(%_obj)
-	$(RGBLINK) -d -m $*.map -n $*.sym -l layout.link -o $@ $^
+%.gbc: $$(%_obj) layout.link
+	$(RGBLINK) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) $($*_opt) $@
 
 
