@@ -649,7 +649,7 @@ DoSpecialEffectByAnimationId:
 	pop hl
 	ret
 
-INCLUDE "data/move_animation_special_effects.asm"
+INCLUDE "data/moves/animation_special_effects.asm"
 
 DoBallTossSpecialEffects:
 	ld a, [wcf91]
@@ -911,7 +911,7 @@ TailWhipAnimationUnused:
 	ld c, 20
 	jp DelayFrames
 
-INCLUDE "data/move_animation_pointers.asm"
+INCLUDE "data/moves/animation_special_effect_pointers.asm"
 
 AnimationDelay10:
 	ld c, 10
@@ -2208,7 +2208,7 @@ IsCryMove:
 	scf
 	ret
 
-INCLUDE "data/move_sfx.asm"
+INCLUDE "data/moves/sfx.asm"
 
 CopyPicTiles:
 	ld a, [H_WHOSETURN]

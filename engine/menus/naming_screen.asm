@@ -365,7 +365,7 @@ PrintAlphabet:
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
-INCLUDE "text/alphabets.asm"
+INCLUDE "data/text/alphabets.asm"
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
@@ -435,7 +435,7 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-INCLUDE "text/dakutens.asm"
+INCLUDE "data/text/dakutens.asm"
 
 ; calculates the length of the string at wcf4b and stores it in c
 CalcStringLength:

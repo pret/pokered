@@ -104,7 +104,7 @@ DisplayCreditsMon:
 	ld [rBGP], a
 	ret
 
-INCLUDE "data/credit_mons.asm"
+INCLUDE "data/credits/credits_mons.asm"
 
 ScrollCreditsMonLeft:
 	ld h, b
@@ -261,9 +261,9 @@ TheEndTextString:
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
-INCLUDE "data/credits_order.asm"
+INCLUDE "data/credits/credits_order.asm"
 
-INCLUDE "text/credits_text.asm"
+INCLUDE "data/credits/credits_text.asm"
 
 TheEndGfx:
 	INCBIN "gfx/intro_credits/the_end.2bpp"

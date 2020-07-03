@@ -187,7 +187,7 @@ DisplayIntroNameTextBox:
 .namestring
 	db "NAME@"
 
-INCLUDE "text/player_names.asm"
+INCLUDE "data/player_names.asm"
 
 GetDefaultName:
 ; a = name index
@@ -213,7 +213,7 @@ GetDefaultName:
 	ld bc, $14
 	jp CopyData
 
-INCLUDE "text/player_names_list.asm"
+INCLUDE "data/player_names_list.asm"
 
 TextTerminator_6b20:
 	db "@"

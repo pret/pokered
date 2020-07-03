@@ -376,7 +376,7 @@ KnowsHMMove::
 	and a
 	ret
 
-INCLUDE "data/hm_moves.asm"
+INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
 	coord hl, 9, 10

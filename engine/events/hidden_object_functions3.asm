@@ -36,7 +36,7 @@ PrintBookshelfText::
 	ld [$ffdb], a
 	jpba PrintCardKeyText
 
-INCLUDE "data/bookshelf_tile_ids.asm"
+INCLUDE "data/tilesets/bookshelf_tile_ids.asm"
 
 IndigoPlateauStatues::
 	TX_ASM

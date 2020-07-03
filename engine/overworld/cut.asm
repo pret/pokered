@@ -248,4 +248,4 @@ ReplaceTreeTileBlock:
 	ld [hl], a
 	ret
 
-INCLUDE "data/cut_tree_blocks.asm"
+INCLUDE "data/tilesets/cut_tree_blocks.asm"

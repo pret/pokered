@@ -145,7 +145,7 @@ GetPrizeMenuId:
 	ld c, (1 << 7 | 2)
 	jp PrintBCDNumber
 
-INCLUDE "data/prizes.asm"
+INCLUDE "data/events/prizes.asm"
 
 PrintPrizePrice:
 	coord hl, 11, 0
@@ -303,4 +303,4 @@ GetPrizeMonLevel:
 	ld [wCurEnemyLVL], a
 	ret
 
-INCLUDE "data/prize_mon_levels.asm"
+INCLUDE "data/events/prize_mon_levels.asm"

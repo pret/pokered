@@ -21,7 +21,7 @@ _JumpMoveEffect:
 	ld l, a
 	jp hl ; jump to special effect handler
 
-INCLUDE "data/effects_pointers.asm"
+INCLUDE "data/moves/effects_pointers.asm"
 
 SleepEffect:
 	ld de, wEnemyMonStatus
@@ -751,7 +751,7 @@ PrintStatText:
 	ld bc, $a
 	jp CopyData
 
-INCLUDE "text/stat_names.asm"
+INCLUDE "data/battle/stat_names.asm"
 
 INCLUDE "data/battle/stat_modifiers.asm"
 

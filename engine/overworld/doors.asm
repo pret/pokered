@@ -25,4 +25,4 @@ IsPlayerStandingOnDoorTile:
 	and a
 	ret
 
-INCLUDE "data/door_tile_ids.asm"
+INCLUDE "data/tilesets/door_tile_ids.asm"

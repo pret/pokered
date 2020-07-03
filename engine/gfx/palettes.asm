@@ -632,10 +632,10 @@ CopySGBBorderTiles:
 	jr nz, .tileLoop
 	ret
 
-INCLUDE "data/sgb_packets.asm"
+INCLUDE "data/sgb/sgb_packets.asm"
 
-INCLUDE "data/mon_palettes.asm"
+INCLUDE "data/pokemon/palettes.asm"
 
-INCLUDE "data/super_palettes.asm"
+INCLUDE "data/sgb/sgb_palettes.asm"
 
-INCLUDE "data/sgb_border.asm"
+INCLUDE "data/sgb/sgb_border.asm"

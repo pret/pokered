@@ -30,4 +30,4 @@ LoadWildData::
 	ld bc, $0014
 	jp CopyData
 
-INCLUDE "data/wild_mons.asm"
+INCLUDE "data/wild/grass_water.asm"

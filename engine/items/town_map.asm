@@ -103,7 +103,7 @@ DisplayTownMap:
 	ld [wWhichTownMapLocation], a
 	jp .townMapLoop
 
-INCLUDE "data/town_map_order.asm"
+INCLUDE "data/maps/town_map_order.asm"
 
 TownMapCursor:
 	INCBIN "gfx/town_map/town_map_cursor.1bpp"
@@ -581,9 +581,9 @@ LoadTownMapEntry:
 	ld l, a
 	ret
 
-INCLUDE "data/town_map_entries.asm"
+INCLUDE "data/maps/town_map_entries.asm"
 
-INCLUDE "text/map_names.asm"
+INCLUDE "data/maps/names.asm"
 
 MonNestIcon:
 	INCBIN "gfx/town_map/mon_nest_icon.1bpp"

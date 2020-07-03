@@ -623,7 +623,7 @@ DrawTileLine:
 	pop bc
 	ret
 
-INCLUDE "data/pokedex_entries.asm"
+INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
 	; converts the Pokédex number at wd11e to an index
@@ -662,4 +662,4 @@ IndexToPokedex:
 	pop bc
 	ret
 
-INCLUDE "data/pokedex_order.asm"
+INCLUDE "data/pokemon/dex_order.asm"

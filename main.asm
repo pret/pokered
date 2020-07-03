@@ -3,19 +3,19 @@ INCLUDE "constants.asm"
 
 SECTION "bank1", ROMX
 
-INCLUDE "data/facing.asm"
+INCLUDE "data/sprite_facings.asm"
 INCLUDE "engine/events/black_out.asm"
 
 MewPicFront:: INCBIN "gfx/pokemon/front/mew.pic"
 MewPicBack::  INCBIN "gfx/pokemon/back/mewb.pic"
-INCLUDE "data/baseStats/mew.asm"
+INCLUDE "data/pokemon/base_stats/mew.asm"
 
 INCLUDE "engine/battle/safari_zone.asm"
-INCLUDE "engine/movie/titlescreen.asm"
+INCLUDE "engine/movie/title.asm"
 INCLUDE "engine/pokemon/load_mon_data.asm"
-INCLUDE "data/item_prices.asm"
-INCLUDE "text/item_names.asm"
-INCLUDE "text/unused_names.asm"
+INCLUDE "data/items/prices.asm"
+INCLUDE "data/items/names.asm"
+INCLUDE "data/text/unused_names.asm"
 INCLUDE "engine/gfx/sprite_oam.asm"
 INCLUDE "engine/gfx/oam_dma.asm"
 INCLUDE "engine/link/print_waiting_text.asm"
@@ -49,14 +49,14 @@ INCLUDE "engine/events/display_pokedex.asm"
 SECTION "bank3", ROMX
 
 INCLUDE "engine/joypad.asm"
-INCLUDE "data/map_songs.asm"
-INCLUDE "data/map_header_banks.asm"
+INCLUDE "data/maps/songs.asm"
+INCLUDE "data/maps/map_header_banks.asm"
 INCLUDE "engine/overworld/clear_variables.asm"
 INCLUDE "engine/overworld/player_state.asm"
 INCLUDE "engine/events/poison.asm"
 INCLUDE "engine/overworld/tilesets.asm"
 INCLUDE "engine/overworld/daycare_exp.asm"
-INCLUDE "data/hide_show_data.asm"
+INCLUDE "data/maps/hide_show_data.asm"
 INCLUDE "engine/overworld/field_move_messages.asm"
 INCLUDE "engine/items/inventory.asm"
 INCLUDE "engine/overworld/wild_mons.asm"
@@ -149,7 +149,7 @@ INCLUDE "engine/overworld/ledges.asm"
 
 SECTION "bank7_1", ROMX
 
-INCLUDE "text/monster_names.asm"
+INCLUDE "data/pokemon/names.asm"
 INCLUDE "engine/movie/oak_speech/clear_save.asm"
 INCLUDE "engine/events/elevator.asm"
 
@@ -201,7 +201,7 @@ INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
 
 SECTION "Battle (BANK D)", ROMX
 
-INCLUDE "engine/movie/titlescreen2.asm"
+INCLUDE "engine/movie/title2.asm"
 INCLUDE "engine/battle/link_battle_versus_text.asm"
 INCLUDE "engine/slots/slot_machine.asm"
 INCLUDE "engine/events/pewter_guys.asm"
@@ -211,9 +211,9 @@ INCLUDE "engine/slots/game_corner_slots.asm"
 
 SECTION "bankE", ROMX
 
-INCLUDE "data/moves.asm"
-INCLUDE "data/base_stats.asm"
-INCLUDE "data/cries.asm"
+INCLUDE "data/moves/moves.asm"
+INCLUDE "data/pokemon/base_stats.asm"
+INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
@@ -224,7 +224,6 @@ INCBIN "gfx/trade/game_boy.2bpp"
 INCBIN "gfx/trade/link_cable.2bpp"
 TradingAnimationGraphicsEnd:
 
-; Pokeball traveling through the link cable.
 TradingAnimationGraphics2: INCBIN "gfx/trade/cable_ball.2bpp"
 TradingAnimationGraphics2End:
 
@@ -380,7 +379,7 @@ RedFishingTilesBack:  INCBIN "gfx/overworld/red_fish_back.2bpp"
 RedFishingTilesSide:  INCBIN "gfx/overworld/red_fish_side.2bpp"
 RedFishingRodTiles:   INCBIN "gfx/overworld/fishing_rod.2bpp"
 
-INCLUDE "data/animations.asm"
+INCLUDE "data/moves/animations.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 INCLUDE "engine/items/tm_prices.asm"

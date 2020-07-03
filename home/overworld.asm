@@ -867,7 +867,7 @@ IsBikeRidingAllowed::
 	scf
 	ret
 
-INCLUDE "data/bike_riding_tilesets.asm"
+INCLUDE "data/tilesets/bike_riding_tilesets.asm"
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData::

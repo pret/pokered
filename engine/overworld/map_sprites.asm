@@ -437,4 +437,4 @@ GetSplitMapSpriteSetID:
 	ld a, $01
 	ret
 
-INCLUDE "data/sprite_sets.asm"
+INCLUDE "data/maps/sprite_sets.asm"

@@ -446,9 +446,9 @@ CannotGetOffHereText:
 	TX_FAR _CannotGetOffHereText
 	db "@"
 
-INCLUDE "data/party_items.asm"
+INCLUDE "data/items/use_party.asm"
 
-INCLUDE "data/overworld_items.asm"
+INCLUDE "data/items/use_overworld.asm"
 
 StartMenu_TrainerInfo::
 	call GBPalWhiteOut

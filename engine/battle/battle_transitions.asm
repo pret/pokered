@@ -151,7 +151,7 @@ GetBattleTransitionID_IsDungeonMap:
 	res 2, c
 	ret
 
-INCLUDE "data/dungeon_maps.asm"
+INCLUDE "data/maps/dungeon_maps.asm"
 
 LoadBattleTransitionTile:
 	ld hl, vChars1 + $7f0
