@@ -1,3 +1,5 @@
+; This file is INCLUDEd three times, once for each audio engine.
+
 	dw .wave0
 	dw .wave1
 	dw .wave2

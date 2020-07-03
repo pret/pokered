@@ -1282,7 +1282,7 @@ RepelWoreOffText::
 	TX_FAR _RepelWoreOffText
 	db "@"
 
-INCLUDE "engine/menu/start_menu.asm"
+INCLUDE "home/start_menu.asm"
 
 ; function to count how many bits are set in a string of bytes
 ; INPUT:

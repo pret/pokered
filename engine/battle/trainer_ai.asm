@@ -279,7 +279,7 @@ INCLUDE "data/trainer_pic_money_pointers.asm"
 
 INCLUDE "text/trainer_names.asm"
 
-INCLUDE "engine/battle/bank_e_misc.asm"
+INCLUDE "engine/battle/misc.asm"
 
 INCLUDE "engine/battle/read_trainer_party.asm"
 
