@@ -3,7 +3,7 @@ INCLUDE "constants.asm"
 
 SECTION "bank1", ROMX
 
-INCLUDE "data/sprite_facings.asm"
+INCLUDE "data/sprites/facings.asm"
 INCLUDE "engine/events/black_out.asm"
 
 MewPicFront:: INCBIN "gfx/pokemon/front/mew.pic"

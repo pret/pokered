@@ -438,3 +438,5 @@ GetSplitMapSpriteSetID:
 	ret
 
 INCLUDE "data/maps/sprite_sets.asm"
+
+INCLUDE "data/sprites/sprites.asm"
