@@ -84,28 +84,7 @@ INCLUDE "engine/events/hidden_objects/pokemon_stuff.asm"
 
 SECTION "Graphics (BANK 4)", ROMX
 
-PokemonLogoGraphics:            INCBIN "gfx/title/pokemon_logo.2bpp"
-FontGraphics::                  INCBIN "gfx/font/font.1bpp"
-FontGraphicsEnd::
-ABTiles:                        INCBIN "gfx/font/AB.2bpp"
-HpBarAndStatusGraphics::        INCBIN "gfx/font/font_battle_extra.2bpp"
-HpBarAndStatusGraphicsEnd::
-BattleHudTiles1:                INCBIN "gfx/battle/battle_hud_1.1bpp"
-BattleHudTiles1End:
-BattleHudTiles2:                INCBIN "gfx/battle/battle_hud_2.1bpp"
-BattleHudTiles3:                INCBIN "gfx/battle/battle_hud_3.1bpp"
-BattleHudTiles3End:
-NintendoCopyrightLogoGraphics:  INCBIN "gfx/intro_credits/copyright.2bpp"
-GamefreakLogoGraphics:          INCBIN "gfx/title/gamefreak_inc.2bpp"
-GamefreakLogoGraphicsEnd:
-TextBoxGraphics::               INCBIN "gfx/font/font_extra.2bpp"
-TextBoxGraphicsEnd::
-PokedexTileGraphics:            INCBIN "gfx/pokedex/pokedex.2bpp"
-PokedexTileGraphicsEnd:
-WorldMapTileGraphics:           INCBIN "gfx/town_map/town_map.2bpp"
-WorldMapTileGraphicsEnd:
-PlayerCharacterTitleGraphics:   INCBIN "gfx/title/player.2bpp"
-PlayerCharacterTitleGraphicsEnd:
+INCLUDE "gfx/font.asm"
 
 
 SECTION "Battle (BANK 4)", ROMX
@@ -113,11 +92,7 @@ SECTION "Battle (BANK 4)", ROMX
 INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/pokemon/status_screen.asm"
 INCLUDE "engine/menus/party_menu.asm"
-
-RedPicFront:: INCBIN "gfx/player/red.pic"
-ShrinkPic1::  INCBIN "gfx/player/shrink1.pic"
-ShrinkPic2::  INCBIN "gfx/player/shrink2.pic"
-
+INCLUDE "gfx/player.asm"
 INCLUDE "engine/overworld/turn_sprite.asm"
 INCLUDE "engine/menus/start_sub_menus.asm"
 INCLUDE "engine/items/tms.asm"
@@ -191,13 +166,7 @@ INCLUDE "engine/battle/move_effects/leech_seed.asm"
 SECTION "Battle (BANK B)", ROMX
 
 INCLUDE "engine/battle/display_effectiveness.asm"
-
-TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_card/trainer_info.2bpp"
-TrainerInfoTextBoxTileGraphicsEnd:
-BlankLeaderNames:                INCBIN "gfx/trainer_card/blank_leader_names.2bpp"
-CircleTile:                      INCBIN "gfx/trainer_card/circle_tile.2bpp"
-BadgeNumbersTileGraphics:        INCBIN "gfx/trainer_card/badge_numbers.2bpp"
-
+INCLUDE "gfx/trainer_card.asm"
 INCLUDE "engine/items/tmhm.asm"
 INCLUDE "engine/battle/scale_sprites.asm"
 INCLUDE "engine/battle/move_effects/pay_day.asm"
@@ -229,15 +198,7 @@ INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
-
-TradingAnimationGraphics:
-INCBIN "gfx/trade/game_boy.2bpp"
-INCBIN "gfx/trade/link_cable.2bpp"
-TradingAnimationGraphicsEnd:
-
-TradingAnimationGraphics2: INCBIN "gfx/trade/cable_ball.2bpp"
-TradingAnimationGraphics2End:
-
+INCLUDE "gfx/trade.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
 INCLUDE "engine/battle/move_effects/heal.asm"
 INCLUDE "engine/battle/move_effects/transform.asm"
@@ -344,15 +305,7 @@ INCLUDE "engine/events/hidden_objects/pokecenter_pc.asm"
 SECTION "bank1A", ROMX
 
 INCLUDE "engine/battle/decrement_pp.asm"
-
-Version_GFX:
-IF DEF(_RED)
-	INCBIN "gfx/title/red_version.1bpp" ; 10 tiles
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/title/blue_version.1bpp" ; 8 tiles
-ENDC
-Version_GFXEnd:
+INCLUDE "gfx/version.asm"
 
 
 SECTION "bank1C", ROMX
@@ -393,12 +346,7 @@ SECTION "bank1E", ROMX
 INCLUDE "engine/battle/animations.asm"
 INCLUDE "engine/overworld/cut2.asm"
 INCLUDE "engine/overworld/dust_smoke.asm"
-
-RedFishingTilesFront: INCBIN "gfx/overworld/red_fish_front.2bpp"
-RedFishingTilesBack:  INCBIN "gfx/overworld/red_fish_back.2bpp"
-RedFishingTilesSide:  INCBIN "gfx/overworld/red_fish_side.2bpp"
-RedFishingRodTiles:   INCBIN "gfx/overworld/fishing_rod.2bpp"
-
+INCLUDE "gfx/fishing.asm"
 INCLUDE "data/moves/animations.asm"
 INCLUDE "engine/movie/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
