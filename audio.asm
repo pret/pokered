@@ -359,10 +359,13 @@ INCLUDE "audio/engine_1.asm"
 INCLUDE "audio/alternate_tempo.asm"
 
 
-SECTION "Audio Engine 2", ROMX
+SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
 INCLUDE "audio/low_health_alarm.asm"
-INCLUDE "engine/pokemon/bills_pc.asm"
+
+
+SECTION "Audio Engine 2", ROMX
+
 INCLUDE "audio/engine_2.asm"
 INCLUDE "audio/poke_flute.asm"
 

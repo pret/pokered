@@ -160,6 +160,11 @@ INCLUDE "engine/menus/oaks_pc.asm"
 INCLUDE "engine/events/hidden_object_functions7.asm"
 
 
+SECTION "Bill's PC", ROMX
+
+INCLUDE "engine/pokemon/bills_pc.asm"
+
+
 SECTION "Battle (BANK 9)", ROMX
 
 INCLUDE "engine/battle/print_type.asm"
