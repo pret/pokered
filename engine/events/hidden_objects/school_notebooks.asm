@@ -63,38 +63,3 @@ ViridianSchoolNotebookText3:
 ViridianSchoolNotebookText4:
 	TX_FAR _ViridianSchoolNotebookText4
 	db "@"
-
-PrintFightingDojoText2:
-	call EnableAutoTextBoxDrawing
-	tx_pre_jump EnemiesOnEverySideText
-
-EnemiesOnEverySideText::
-	TX_FAR _EnemiesOnEverySideText
-	db "@"
-
-PrintFightingDojoText3:
-	call EnableAutoTextBoxDrawing
-	tx_pre_jump WhatGoesAroundComesAroundText
-
-WhatGoesAroundComesAroundText::
-	TX_FAR _WhatGoesAroundComesAroundText
-	db "@"
-
-PrintFightingDojoText:
-	call EnableAutoTextBoxDrawing
-	tx_pre_jump FightingDojoText
-
-FightingDojoText::
-	TX_FAR _FightingDojoText
-	db "@"
-
-PrintIndigoPlateauHQText:
-	ld a, [wSpriteStateData1 + 9]
-	cp SPRITE_FACING_UP
-	ret nz
-	call EnableAutoTextBoxDrawing
-	tx_pre_jump IndigoPlateauHQText
-
-IndigoPlateauHQText::
-	TX_FAR _IndigoPlateauHQText
-	db "@"
