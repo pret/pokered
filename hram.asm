@@ -26,17 +26,17 @@ hSlideAmount EQU $FF8B
 
 hRLEByteValue EQU $FF8B
 
-H_SPRITEWIDTH            EQU $FF8B ; in tiles
-H_SPRITEINTERLACECOUNTER EQU $FF8B
-H_SPRITEHEIGHT           EQU $FF8C ; in tiles
-H_SPRITEOFFSET           EQU $FF8D
+hSpriteWidth            EQU $FF8B ; in tiles
+hSpriteInterlaceCounter EQU $FF8B
+hSpriteHeight           EQU $FF8C ; in tiles
+hSpriteOffset           EQU $FF8D
 
 ; counters for blinking down arrow
-H_DOWNARROWBLINKCNT1 EQU $FF8B
-H_DOWNARROWBLINKCNT2 EQU $FF8C
+hDownArrowBlinkCount1 EQU $FF8B
+hDownArrowBlinkCount2 EQU $FF8C
 
-H_SPRITEDATAOFFSET EQU $FF8B
-H_SPRITEINDEX      EQU $FF8C
+hSpriteDataOffset EQU $FF8B
+hSpriteIndex      EQU $FF8C
 
 hMapStride EQU $FF8B
 hMapWidth  EQU $FF8C
@@ -101,24 +101,24 @@ hExperience EQU $FF96 ; 3 bytes, big endian
 ; Multiplication and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
 
-H_MULTIPLICAND EQU $FF96 ; 3 bytes
-H_MULTIPLIER   EQU $FF99 ; 1 byte
-H_PRODUCT      EQU $FF95 ; 4 bytes
+hMultiplicand EQU $FF96 ; 3 bytes
+hMultiplier   EQU $FF99 ; 1 byte
+hProduct      EQU $FF95 ; 4 bytes
 
-H_DIVIDEND     EQU $FF95 ; 4 bytes
-H_DIVISOR      EQU $FF99 ; 1 byte
-H_QUOTIENT     EQU $FF95 ; 4 bytes
-H_REMAINDER    EQU $FF99 ; 1 byte
+hDividend     EQU $FF95 ; 4 bytes
+hDivisor      EQU $FF99 ; 1 byte
+hQuotient     EQU $FF95 ; 4 bytes
+hRemainder    EQU $FF99 ; 1 byte
 
-H_DIVIDEBUFFER EQU $FF9A
+hDivideBuffer EQU $FF9A
 
-H_MULTIPLYBUFFER EQU $FF9B
+hMultiplyBuffer EQU $FF9B
 
 ; PrintNumber (big endian).
-H_PASTLEADINGZEROES EQU $FF95 ; last char printed
-H_NUMTOPRINT        EQU $FF96 ; 3 bytes
-H_POWEROFTEN        EQU $FF99 ; 3 bytes
-H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
+hPastLeadingZeros EQU $FF95 ; last char printed
+hNumToPrint       EQU $FF96 ; 3 bytes
+hPowerOf10        EQU $FF99 ; 3 bytes
+hSavedNumToPrint  EQU $FF9C ; 3 bytes
 
 ; distance in steps between NPC and player
 hNPCPlayerYDistance EQU $FF95
@@ -183,14 +183,14 @@ hJoy5        EQU $FFB5
 hJoy6        EQU $FFB6
 hJoy7        EQU $FFB7
 
-H_LOADEDROMBANK EQU $FFB8
+hLoadedROMBank EQU $FFB8
 
 hSavedROMBank EQU $FFB9
 
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
 ; if zero, no
-H_AUTOBGTRANSFERENABLED EQU $FFBA
+hAutoBGTransferEnabled EQU $FFBA
 
 TRANSFERTOP    EQU 0
 TRANSFERMIDDLE EQU 1
@@ -199,45 +199,45 @@ TRANSFERBOTTOM EQU 2
 ; 00 = top third of background
 ; 01 = middle third of background
 ; 02 = bottom third of background
-H_AUTOBGTRANSFERPORTION EQU $FFBB
+hAutoBGTransferPortion EQU $FFBB
 
 ; the destination address of the automatic background transfer
-H_AUTOBGTRANSFERDEST EQU $FFBC ; 2 bytes
+hAutoBGTransferDest EQU $FFBC ; 2 bytes
 
 ; temporary storage for stack pointer during memory transfers that use pop
 ; to increase speed
-H_SPTEMP EQU $FFBF ; 2 bytes
+hSPTemp EQU $FFBF ; 2 bytes
 
 ; source address for VBlankCopyBgMap function
 ; the first byte doubles as the byte that enabled the transfer.
 ; if it is 0, the transfer is disabled
 ; if it is not 0, the transfer is enabled
 ; this means that XX00 is not a valid source address
-H_VBCOPYBGSRC EQU $FFC1 ; 2 bytes
+hVBlankCopyBGSource EQU $FFC1 ; 2 bytes
 
 ; destination address for VBlankCopyBgMap function
-H_VBCOPYBGDEST EQU $FFC3 ; 2 bytes
+hVBlankCopyBGDest EQU $FFC3 ; 2 bytes
 
 ; number of rows for VBlankCopyBgMap to copy
-H_VBCOPYBGNUMROWS EQU $FFC5
+hVBlankCopyBGNumRows EQU $FFC5
 
 ; size of VBlankCopy transfer in 16-byte units
-H_VBCOPYSIZE EQU $FFC6
+hVBlankCopySize EQU $FFC6
 
 ; source address for VBlankCopy function
-H_VBCOPYSRC EQU $FFC7
+hVBlankCopySource EQU $FFC7
 
 ; destination address for VBlankCopy function
-H_VBCOPYDEST EQU $FFC9
+hVBlankCopyDest EQU $FFC9
 
 ; size of source data for VBlankCopyDouble in 8-byte units
-H_VBCOPYDOUBLESIZE EQU $FFCB
+hVBlankCopyDoubleSize EQU $FFCB
 
 ; source address for VBlankCopyDouble function
-H_VBCOPYDOUBLESRC EQU $FFCC
+hVBlankCopyDoubleSource EQU $FFCC
 
 ; destination address for VBlankCopyDouble function
-H_VBCOPYDOUBLEDEST EQU $FFCE
+hVBlankCopyDoubleDest EQU $FFCE
 
 ; controls whether a row or column of 2x2 tile blocks is redrawn in V-blank
 ; 00 = no redraw
@@ -253,12 +253,12 @@ hRedrawRowOrColumnDest EQU $FFD1
 hRandomAdd EQU $FFD3
 hRandomSub EQU $FFD4
 
-H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
+hFrameCounter EQU $FFD5 ; decremented every V-blank (used for delays)
 
 ; V-blank sets this to 0 each time it runs.
 ; So, by setting it to a nonzero value and waiting for it to become 0 again,
 ; you can detect that the V-blank handler has run since then.
-H_VBLANKOCCURRED EQU $FFD6
+hVBlankOccurred EQU $FFD6
 
 ; 00 = indoor
 ; 01 = cave
@@ -268,7 +268,7 @@ hTilesetType EQU $FFD7
 
 hMovingBGTilesCounter1 EQU $FFD8
 
-H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+hCurrentSpriteOffset EQU $FFDA ; multiple of $10
 
 hItemCounter EQU $FFDB
 
@@ -310,15 +310,14 @@ hCoordsInFrontOfPlayerMatch EQU $FFEA
 
 hSpriteAnimFrameCounter EQU $FFEA
 
-H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+hWhoseTurn EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced
-hFlags_0xFFF6 EQU $FFF6
+hFlagsFFF6 EQU $FFF6
 
 hFieldMoveMonMenuTopMenuItemX EQU $FFF7
 
 hDisableJoypadPolling EQU $FFF9
 
 hJoyInput EQU $FFF8
-

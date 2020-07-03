@@ -101,7 +101,7 @@ GaryScript3:
 	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, $4
 	ld [wChampionsRoomCurScript], a
@@ -113,11 +113,11 @@ GaryScript4:
 	ld [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, OakEntranceAfterVictoryMovement
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wMissableObjectIndex], a
@@ -141,12 +141,12 @@ GaryScript5:
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -159,7 +159,7 @@ GaryScript5:
 
 GaryScript6:
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -172,7 +172,7 @@ GaryScript6:
 
 GaryScript7:
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -181,7 +181,7 @@ GaryScript7:
 	call GaryScript_760c8
 	ld de, OakExitGaryRoomMovement
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $8
 	ld [wChampionsRoomCurScript], a

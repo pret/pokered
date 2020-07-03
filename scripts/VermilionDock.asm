@@ -57,10 +57,10 @@ VermilionDock_1db9b:
 	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld [wSSAnneSmokeDriftAmount], a
 	ld [rOBP1], a
 	ld a, 88

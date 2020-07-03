@@ -47,7 +47,7 @@ FadeInCreditsText:
 
 DisplayCreditsMon:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer1
 	call FillMiddleOfScreenWithWhite
 
@@ -67,7 +67,7 @@ DisplayCreditsMon:
 	ld hl, vBGMap0 + $c
 	call CreditsCopyTileMapToVRAM
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call LoadScreenTilesFromBuffer1
 	ld hl, vBGMap0
 	call CreditsCopyTileMapToVRAM
@@ -138,11 +138,11 @@ HoFGBPalettes:
 
 CreditsCopyTileMapToVRAM:
 	ld a, l
-	ld [H_AUTOBGTRANSFERDEST], a
+	ld [hAutoBGTransferDest], a
 	ld a, h
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ld [hAutoBGTransferDest + 1], a
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp Delay3
 
 ZeroMemory:

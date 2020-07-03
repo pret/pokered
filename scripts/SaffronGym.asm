@@ -171,7 +171,7 @@ SaffronGymText1:
 	ld hl, SaffronGymText_5d167
 	ld de, SaffronGymText_5d167
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

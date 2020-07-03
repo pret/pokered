@@ -170,10 +170,10 @@ PlaySound::
 .noFadeOut
 	xor a
 	ld [wNewSoundID], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [hSavedROMBank], a
 	ld a, [wAudioROMBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	cp BANK(Audio1_PlaySound)
 	jr nz, .checkForAudio2
@@ -198,7 +198,7 @@ PlaySound::
 
 .next2
 	ld a, [hSavedROMBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jr .done
 

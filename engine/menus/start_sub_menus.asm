@@ -239,21 +239,21 @@ StartMenu_Pokemon::
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hli]
-	ld [H_DIVIDEND], a
+	ld [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ld [hDividend + 1], a
 	ld a, 5
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 2 ; number of bytes
 	call Divide
 	ld bc, wPartyMon1HP - wPartyMon1MaxHP
 	add hl, bc
 	ld a, [hld]
 	ld b, a
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	sub b
 	ld b, [hl]
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	sbc b
 	jp nc, .notHealthyEnough
 	ld a, [wPartyAndBillsPCSavedMenuItem]
@@ -648,7 +648,7 @@ StartMenu_SaveReset::
 
 StartMenu_Option::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
 	callab DisplayOptionMenu

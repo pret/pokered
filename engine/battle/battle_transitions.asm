@@ -1,6 +1,6 @@
 BattleTransition:
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
 	ld [hWY], a
@@ -349,7 +349,7 @@ BattleTransition_Shrink:
 .loop
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 0, 7
 	coord de, 0, 8
 	ld bc, -SCREEN_WIDTH * 2
@@ -367,7 +367,7 @@ BattleTransition_Shrink:
 	ld bc, 2
 	call BattleTransition_CopyTiles2
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld c, 6
 	call DelayFrames
 	pop bc
@@ -381,7 +381,7 @@ BattleTransition_Shrink:
 BattleTransition_Split:
 	ld c, SCREEN_HEIGHT / 2
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	coord hl, 0, 16
@@ -496,7 +496,7 @@ BattleTransition_VerticalStripes:
 	coord hl, 0, 0
 	coord de, 1, 17
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	push hl
@@ -535,7 +535,7 @@ BattleTransition_HorizontalStripes:
 	coord hl, 0, 0
 	coord de, 19, 1
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	push hl
@@ -582,7 +582,7 @@ BattleTransition_FlashScreen:
 	ld b, $3
 	call BattleTransition_FlashScreen_
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 BattleTransition_Circle_Sub1:
@@ -601,10 +601,10 @@ BattleTransition_Circle_Sub1:
 
 BattleTransition_TransferDelay3:
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 ; used for low level wild non-dungeon battles

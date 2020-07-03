@@ -178,7 +178,7 @@ SilphCo11Script0:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_62216
 	call MoveSprite
@@ -199,7 +199,7 @@ MovementData_62216:
 SilphCo11Script_6221a:
 	ld [wPlayerMovingDirection], a
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, b
 	ld [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay
@@ -239,7 +239,7 @@ SilphCo11Script3:
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wcf0d]
 	cp $1
@@ -263,7 +263,7 @@ SilphCo11Script4:
 	ld hl, SilphCo10Text_62330
 	ld de, SilphCo10Text_62330
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

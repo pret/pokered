@@ -38,58 +38,58 @@ CalcExperience::
 	add hl, bc
 	call CalcDSquared
 	ld a, d
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [H_QUOTIENT + 1]
+	ld a, [hQuotient + 1]
 	push af
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	push af
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	push af
 	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
-	ld a, [H_PRODUCT + 1]
+	ld a, [hProduct + 1]
 	push af
-	ld a, [H_PRODUCT + 2]
+	ld a, [hProduct + 2]
 	push af
-	ld a, [H_PRODUCT + 3]
+	ld a, [hProduct + 3]
 	push af
 	ld a, [hli]
 	push af
 	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand], a
+	ld [hMultiplicand + 1], a
 	ld a, d
-	ld [H_MULTIPLICAND + 2], a
+	ld [hMultiplicand + 2], a
 	ld a, [hli]
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 	ld b, [hl]
-	ld a, [H_PRODUCT + 3]
+	ld a, [hProduct + 3]
 	sub b
-	ld [H_PRODUCT + 3], a
+	ld [hProduct + 3], a
 	ld b, $0
-	ld a, [H_PRODUCT + 2]
+	ld a, [hProduct + 2]
 	sbc b
-	ld [H_PRODUCT + 2], a
-	ld a, [H_PRODUCT + 1]
+	ld [hProduct + 2], a
+	ld a, [hProduct + 1]
 	sbc b
-	ld [H_PRODUCT + 1], a
+	ld [hProduct + 1], a
 ; The difference of the linear term and the constant term consists of 3 bytes
-; starting at H_PRODUCT + 1. Below, hExperience (an alias of that address) will
+; starting at hProduct + 1. Below, hExperience (an alias of that address) will
 ; be used instead for the further work of adding or subtracting the squared
 ; term and adding the cubed term.
 	pop af
@@ -139,11 +139,11 @@ CalcExperience::
 ; calculates d*d
 CalcDSquared:
 	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand], a
+	ld [hMultiplicand + 1], a
 	ld a, d
-	ld [H_MULTIPLICAND + 2], a
-	ld [H_MULTIPLIER], a
+	ld [hMultiplicand + 2], a
+	ld [hMultiplier], a
 	jp Multiply
 
 INCLUDE "data/growth_rates.asm"

@@ -126,13 +126,13 @@ TryingToLearn:
 	call TextBoxBorder
 	coord hl, 6, 8
 	ld de, wMovesString
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	set 2, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	call PlaceString
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	res 2, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	ld hl, wTopMenuItemY
 	ld a, 8
 	ld [hli], a ; wTopMenuItemY
@@ -146,10 +146,10 @@ TryingToLearn:
 	ld a, A_BUTTON | B_BUTTON
 	ld [hli], a ; wMenuWatchedKeys
 	ld [hl], 0 ; wLastMenuItem
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	res 1, [hl]
 	push af
 	call LoadScreenTilesFromBuffer1

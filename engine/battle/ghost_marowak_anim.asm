@@ -9,12 +9,12 @@ MarowakAnim:
 	call ClearScreenArea
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; disable BG transfer so we don't see the Marowak too soon
+	ld [hAutoBGTransferEnabled], a ; disable BG transfer so we don't see the Marowak too soon
 ; replace ghost pic with Marowak in BG
 	ld a, MAROWAK
 	ld [wChangeMonPicEnemyTurnSpecies], a
 	ld a, $1
-	ld [H_WHOSETURN], a
+	ld [hWhoseTurn], a
 	callab ChangeMonPic
  ; alternate between black and light grey 8 times.
  ; this makes the ghost's body appear to flash
@@ -44,7 +44,7 @@ MarowakAnim:
 	and a
 	jr nz, .fadeInMarowakLoop
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; enable BG transfer so the BG Marowak pic will be visible after the sprite one is cleared
+	ld [hAutoBGTransferEnabled], a ; enable BG transfer so the BG Marowak pic will be visible after the sprite one is cleared
 	call Delay3
 	jp ClearSprites
 

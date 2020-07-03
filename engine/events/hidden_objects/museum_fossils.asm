@@ -26,7 +26,7 @@ DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon internal id number
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
 	ld [hWY], a

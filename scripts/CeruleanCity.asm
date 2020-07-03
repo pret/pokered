@@ -79,9 +79,9 @@ CeruleanCityScript0:
 	cp $14
 	jr z, .asm_19535
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, $5
-	ld [H_SPRITEDATAOFFSET], a
+	ld [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData2
 	ld [hl], $19
 .asm_19535
@@ -90,7 +90,7 @@ CeruleanCityScript0:
 	predef ShowObject
 	ld de, CeruleanCityMovement1
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $1
 	ld [wCeruleanCityCurScript], a
@@ -114,7 +114,7 @@ CeruleanCityMovement1:
 
 CeruleanCityScript_1955d:
 	ld a, 1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay ; face object
@@ -176,7 +176,7 @@ CeruleanCityScript2:
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
 	cp $14
@@ -187,7 +187,7 @@ CeruleanCityScript2:
 	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $3
 	ld [wCeruleanCityCurScript], a

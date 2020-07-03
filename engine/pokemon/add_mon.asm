@@ -129,10 +129,10 @@ _AddPartyMon::
 	xor a
 	ld b, a
 	call CalcStat      ; calc HP stat (set cur Hp to max HP)
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hMultiplicand+1]
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	ld [de], a
 	inc de
 	xor a

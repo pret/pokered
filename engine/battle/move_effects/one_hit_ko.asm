@@ -7,7 +7,7 @@ OneHitKOEffect_:
 	ld [wCriticalHitOrOHKO], a
 	ld hl, wBattleMonSpeed + 1
 	ld de, wEnemyMonSpeed + 1
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .compareSpeed
 	ld hl, wEnemyMonSpeed + 1

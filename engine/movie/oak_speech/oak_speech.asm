@@ -104,12 +104,12 @@ OakSpeech:
 	ld hl, OakSpeechText3
 	call PrintText
 .next
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
 	call PlaySound
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 4
 	call DelayFrames
@@ -126,7 +126,7 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(Music_PalletTown)
 	ld [wAudioROMBank], a
@@ -137,7 +137,7 @@ OakSpeech:
 	ld [wNewSoundID], a
 	call PlaySound
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 20
 	call DelayFrames

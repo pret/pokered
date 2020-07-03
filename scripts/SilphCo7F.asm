@@ -140,7 +140,7 @@ SilphCo7Script0:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
 	ld a, [wCoordIndex]
@@ -150,7 +150,7 @@ SilphCo7Script0:
 	inc de
 .asm_51c6c
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $3
 	jp SilphCo7Text_51c10
@@ -212,7 +212,7 @@ SilphCo7Script4:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -230,7 +230,7 @@ SilphCo7Script4:
 	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $5
 	jp SilphCo7Text_51c10

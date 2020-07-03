@@ -337,7 +337,7 @@ ED_TileEnd:
 
 PrintAlphabet:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
@@ -362,7 +362,7 @@ PrintAlphabet:
 	jr nz, .outerLoop
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp Delay3
 
 INCLUDE "data/text/alphabets.asm"

@@ -1,6 +1,6 @@
 DisplayStartMenu::
 	ld a, BANK(StartMenu_Pokedex)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy], a

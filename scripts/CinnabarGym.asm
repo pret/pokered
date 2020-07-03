@@ -50,7 +50,7 @@ CinnabarGymScript0:
 	ld a, [wOpponentAfterWrongAnswer]
 	and a
 	ret z
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	cp $4
 	jr nz, .asm_757c3
 	ld a, PLAYER_DIR_DOWN

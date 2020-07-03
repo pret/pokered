@@ -61,7 +61,7 @@ PalletTownScript1:
 
 PalletTownScript2:
 	ld a, 1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
@@ -79,7 +79,7 @@ PalletTownScript2:
 	predef FindPathToPlayer ; load Oak’s movement into wNPCMovementDirections2
 	ld de, wNPCMovementDirections2
 	ld a, 1 ; oak
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $FF
 	ld [wJoyIgnore], a
@@ -111,7 +111,7 @@ PalletTownScript3:
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, 1
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 
 	; trigger the next script

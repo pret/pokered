@@ -74,5 +74,5 @@ DisplayTextIDInit::
 	ld [hWY], a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a, $01
-	ld [H_AUTOBGTRANSFERENABLED], a ; enable continuous WRAM to VRAM transfer each V-blank
+	ld [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
 	ret

@@ -10,13 +10,13 @@ TownMapText::
 	xor a
 	ld [hWY], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call LoadFontTilePatterns
 	callba DisplayTownMap
 	ld hl, wd730
 	res 6, [hl]
 	ld de, TextScriptEnd
 	push de
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	jp CloseTextDisplay

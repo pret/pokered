@@ -96,7 +96,7 @@ Route22Script0:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call Route22MoveRivalSprite
 	ld a, $1
 	ld [wRoute22CurScript], a
@@ -118,7 +118,7 @@ Route22Script1:
 .asm_50f7a
 	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteFacingDirectionAndDelay
 	xor a
 	ld [wJoyIgnore], a
@@ -159,7 +159,7 @@ Route22Script2:
 .done
 	ld [hSpriteFacingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f0
 	ld [wJoyIgnore], a
@@ -191,7 +191,7 @@ Route22Script_5100d:
 	ld de, Route22RivalExitMovementData2
 Route22MoveRival1:
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp MoveSprite
 
 Route22RivalExitMovementData1:
@@ -250,7 +250,7 @@ Route22Script_5104e:
 	call PlaySound
 	callba Music_RivalAlternateTempo
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call Route22MoveRivalSprite
 	ld a, $4
 	ld [wRoute22CurScript], a
@@ -261,7 +261,7 @@ Route22Script4:
 	bit 0, a
 	ret nz
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510a1
@@ -305,7 +305,7 @@ Route22Script5:
 	cp $ff
 	jp z, Route22Script_50ece
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_510fb
@@ -350,7 +350,7 @@ Route22Script_51142:
 	ld de, MovementData_5114d
 Route22MoveRival2:
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp MoveSprite
 
 MovementData_5114c:

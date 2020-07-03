@@ -2,7 +2,7 @@ _GetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [$ffeb], a
@@ -21,7 +21,7 @@ _GetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [wSavedSpriteScreenY], a
@@ -40,7 +40,7 @@ _SetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [$ffeb] ; c1x4 (screen Y pos)
 	ld [hli], a
@@ -59,7 +59,7 @@ _SetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, 4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [wSavedSpriteScreenY]
 	ld [hli], a ; c1x4 (screen Y pos)
@@ -144,7 +144,7 @@ TrainerWalkUpToPlayer::
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
@@ -152,7 +152,7 @@ TrainerWalkUpToPlayer::
 GetSpriteDataPointer:
 	push de
 	add hl, de
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	swap a
 	ld d, $0
 	ld e, a

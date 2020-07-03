@@ -24,7 +24,7 @@ AnimateHallOfFame:
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld hl, wNumHoFTeams
 	ld a, [hl]
 	inc a

@@ -1,7 +1,7 @@
 ConversionEffect_:
 	ld hl, wEnemyMonType1
 	ld de, wBattleMonType1
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, [wEnemyBattleStatus1]
 	jr z, .conversionEffect

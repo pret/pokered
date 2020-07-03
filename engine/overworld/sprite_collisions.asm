@@ -6,7 +6,7 @@ _UpdateSprites::
 	ld l, a
 	sub $e
 	ld c, a
-	ld [H_CURRENTSPRITEOFFSET], a
+	ld [hCurrentSpriteOffset], a
 	ld a, [hl]
 	and a
 	jr z, .skipSprite   ; tests $c2Xe
@@ -34,14 +34,14 @@ UpdateNonPlayerSprite:
 	ld [$ff93], a  ; $10 * sprite#
 	ld a, [wNPCMovementScriptSpriteOffset] ; some sprite offset?
 	ld b, a
-	ld a, [H_CURRENTSPRITEOFFSET]
+	ld a, [hCurrentSpriteOffset]
 	cp b
 	jr nz, .unequal
 	jp DoScriptedNPCMovement
 .unequal
 	jp UpdateNPCSprite
 
-; This detects if the current sprite (whose offset is at H_CURRENTSPRITEOFFSET)
+; This detects if the current sprite (whose offset is at hCurrentSpriteOffset)
 ; is going to collide with another sprite by looping over the other sprites.
 ; The current sprite's offset will be labelled with i (e.g. $c1i0).
 ; The loop sprite's offset will labelled with j (e.g. $c1j0).
@@ -54,7 +54,7 @@ DetectCollisionBetweenSprites:
 	nop
 
 	ld h, wSpriteStateData1 / $100
-	ld a, [H_CURRENTSPRITEOFFSET]
+	ld a, [hCurrentSpriteOffset]
 	add wSpriteStateData1 % $100
 	ld l, a
 
@@ -113,7 +113,7 @@ DetectCollisionBetweenSprites:
 	ld [$ff8f], a ; store loop counter
 	swap a
 	ld e, a
-	ld a, [H_CURRENTSPRITEOFFSET]
+	ld a, [hCurrentSpriteOffset]
 	cp e ; does the loop sprite match the current sprite?
 	jp z, .next ; go to the next sprite if they match
 
@@ -128,7 +128,7 @@ DetectCollisionBetweenSprites:
 	inc a
 	jp z, .next ; go the next sprite if offscreen
 
-	ld a, [H_CURRENTSPRITEOFFSET]
+	ld a, [hCurrentSpriteOffset]
 	add 10
 	ld l, a
 

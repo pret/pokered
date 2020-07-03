@@ -14,13 +14,13 @@ PlayIntro:
 	xor a
 	ld [hJoyHeld], a
 	inc a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call PlayShootingStar
 	call PlayIntroScene
 	call GBFadeOutToWhite
 	xor a
 	ld [hSCX], a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearSprites
 	call DelayFrame
 	ret

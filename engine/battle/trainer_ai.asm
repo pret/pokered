@@ -655,17 +655,17 @@ AIUseDireHit: ; unused
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ld [H_DIVIDEND], a
+	ld [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ld [hDividend + 1], a
 	ld b, 2
 	call Divide
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	ld c, a
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	ld b, a
 	ld hl, wEnemyMonHP + 1
 	ld a, [hld]

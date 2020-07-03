@@ -342,7 +342,7 @@ CableClubOptionsText:
 
 DisplayContinueGameInfo:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 4, 7
 	ld b, 8
 	ld c, 14
@@ -360,13 +360,13 @@ DisplayContinueGameInfo:
 	coord hl, 13, 15
 	call PrintPlayTime
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld c, 30
 	jp DelayFrames
 
 PrintSaveScreenText:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 4, 0
 	ld b, $8
 	ld c, $e
@@ -386,7 +386,7 @@ PrintSaveScreenText:
 	coord hl, 13, 8
 	call PrintPlayTime
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld c, 30
 	jp DelayFrames
 
@@ -463,7 +463,7 @@ DisplayOptionMenu:
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	ld [wTopMenuItemX], a
 	ld a, $01
-	ld [H_AUTOBGTRANSFERENABLED], a ; enable auto background transfer
+	ld [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
 .loop
 	call PlaceMenuCursor

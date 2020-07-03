@@ -92,7 +92,7 @@ DoBoulderDustAnimation::
 	call ResetBoulderPushFlags
 	set 7, [hl]
 	ld a, [wBoulderSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
 	ld a, SFX_CUT

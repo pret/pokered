@@ -2,7 +2,7 @@ PayDayEffect_:
 	xor a
 	ld hl, wcd6d
 	ld [hli], a
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, [wBattleMonLevel]
 	jr z, .payDayEffect
@@ -10,28 +10,28 @@ PayDayEffect_:
 .payDayEffect
 ; level * 2
 	add a
-	ld [H_DIVIDEND + 3], a
+	ld [hDividend + 3], a
 	xor a
-	ld [H_DIVIDEND], a
-	ld [H_DIVIDEND + 1], a
-	ld [H_DIVIDEND + 2], a
+	ld [hDividend], a
+	ld [hDividend + 1], a
+	ld [hDividend + 2], a
 ; convert to BCD
 	ld a, 100
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	ld [hli], a
-	ld a, [H_REMAINDER]
-	ld [H_DIVIDEND + 3], a
+	ld a, [hRemainder]
+	ld [hDividend + 3], a
 	ld a, 10
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	swap a
 	ld b, a
-	ld a, [H_REMAINDER]
+	ld a, [hRemainder]
 	add b
 	ld [hl], a
 	ld de, wTotalPayDayMoney + 2

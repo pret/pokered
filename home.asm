@@ -53,10 +53,10 @@ CheckForUserInterruption::
 ; a = ID of destination warp within destination map
 LoadDestinationWarpPosition::
 	ld b, a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wPredefParentBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, b
 	add a
@@ -68,7 +68,7 @@ LoadDestinationWarpPosition::
 	ld de, wCurrentTileBlockMapViewPointer
 	call CopyData
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -197,10 +197,10 @@ LoadFrontSpriteByMonIndex::
 	ld de, vFrontPic
 	call LoadMonFrontSprite
 	pop hl
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, Bank(CopyUncompressedPicToHL)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	xor a
 	ld [hStartTileID], a
@@ -208,7 +208,7 @@ LoadFrontSpriteByMonIndex::
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -400,15 +400,15 @@ PrintStatusCondition::
 	ret
 
 PrintStatusConditionNotFainted::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(PrintStatusAilment)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call PrintStatusAilment ; print status condition
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -457,10 +457,10 @@ GetwMoves::
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(BaseStats)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push bc
 	push de
@@ -515,7 +515,7 @@ GetMonHeader::
 	pop de
 	pop bc
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -681,7 +681,7 @@ LoadMonFrontSprite::
 LoadUncompressedSpriteData::
 	push de
 	and $f
-	ld [H_SPRITEWIDTH], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
+	ld [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
 	ld b, a
 	ld a, $7
 	sub b      ; 7-w
@@ -692,7 +692,7 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	sub b      ; 7*((8-w)/2) ; skip for horizontal center (in tiles)
-	ld [H_SPRITEOFFSET], a
+	ld [hSpriteOffset], a
 	ld a, c
 	swap a
 	and $f
@@ -700,16 +700,16 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	add a     ; 8*tiles is height in bytes
-	ld [H_SPRITEHEIGHT], a
+	ld [hSpriteHeight], a
 	ld a, $7
 	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
-	ld a, [H_SPRITEOFFSET]
+	ld a, [hSpriteOffset]
 	add b     ; 7*((8-w)/2) + 7-h ; combined overall offset (in tiles)
 	add a
 	add a
 	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
-	ld [H_SPRITEOFFSET], a
+	ld [hSpriteOffset], a
 	xor a
 	ld [$4000], a
 	ld hl, sSpriteBuffer0
@@ -728,15 +728,15 @@ LoadUncompressedSpriteData::
 ; copies and aligns the sprite data properly inside the sprite buffer
 ; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
 AlignSpriteDataCentered::
-	ld a, [H_SPRITEOFFSET]
+	ld a, [hSpriteOffset]
 	ld b, $0
 	ld c, a
 	add hl, bc
-	ld a, [H_SPRITEWIDTH]
+	ld a, [hSpriteWidth]
 .columnLoop
 	push af
 	push hl
-	ld a, [H_SPRITEHEIGHT]
+	ld a, [hSpriteHeight]
 	ld c, a
 .columnInnerLoop
 	ld a, [de]
@@ -775,7 +775,7 @@ InterlaceMergeSpriteBuffers::
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
 	ld bc, sSpriteBuffer0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
 	ld a, SPRITEBUFFERSIZE/2 ; $c4
-	ld [H_SPRITEINTERLACECOUNTER], a
+	ld [hSpriteInterlaceCounter], a
 .interlaceLoop
 	ld a, [de]
 	dec de
@@ -789,9 +789,9 @@ InterlaceMergeSpriteBuffers::
 	ld a, [bc]
 	dec bc
 	ld [hld], a   ; write byte of source 1
-	ld a, [H_SPRITEINTERLACECOUNTER]
+	ld a, [hSpriteInterlaceCounter]
 	dec a
-	ld [H_SPRITEINTERLACECOUNTER], a
+	ld [hSpriteInterlaceCounter], a
 	jr nz, .interlaceLoop
 	ld a, [wSpriteFlipped]
 	and a
@@ -809,7 +809,7 @@ InterlaceMergeSpriteBuffers::
 	pop hl
 	ld de, sSpriteBuffer1
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; $31, number of 16 byte chunks to be copied
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
 
@@ -830,14 +830,14 @@ UpdateSprites::
 	ld a, [wUpdateSpritesEnabled]
 	dec a
 	ret nz
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, Bank(_UpdateSprites)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _UpdateSprites
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -951,7 +951,7 @@ FadeOutAudio::
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	callba DisplayTextIDInit ; initialization
 	ld hl, wTextPredefFlag
@@ -962,7 +962,7 @@ DisplayTextID::
 	call SwitchToMapRomBank
 .skipSwitchToMapBank
 	ld a, 30 ; half a second
-	ld [H_FRAMECOUNTER], a ; used as joypad poll timer
+	ld [hFrameCounter], a ; used as joypad poll timer
 	ld hl, wMapTextPtr
 	ld a, [hli]
 	ld h, [hl]
@@ -1065,7 +1065,7 @@ CloseTextDisplay::
 	call DelayFrame
 	call LoadGBPal
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; disable continuous WRAM to VRAM transfer each V-blank
+	ld [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
 	ld hl, wSpriteStateData2 + $19
 	ld c, $0f
@@ -1079,7 +1079,7 @@ CloseTextDisplay::
 	dec c
 	jr nz, .restoreSpriteFacingDirectionLoop
 	ld a, BANK(InitMapSprites)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
@@ -1089,7 +1089,7 @@ CloseTextDisplay::
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp UpdateSprites
 
@@ -1102,14 +1102,14 @@ DisplayPokemartDialogue::
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, Bank(DisplayPokemartDialogue_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemartDialogue_
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 
@@ -1141,14 +1141,14 @@ DisplayPokemonCenterDialogue::
 	ld [$ff8d], a
 
 	inc hl
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, Bank(DisplayPokemonCenterDialogue_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemonCenterDialogue_
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 
@@ -1237,14 +1237,14 @@ AddAmountSoldToMoney::
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
 RemoveItemFromInventory::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(RemoveItemFromInventory_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call RemoveItemFromInventory_
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -1256,15 +1256,15 @@ RemoveItemFromInventory::
 ; sets carry flag if successful, unsets carry flag if unsuccessful
 AddItemToInventory::
 	push bc
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(AddItemToInventory_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call AddItemToInventory_
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop bc
 	ret
@@ -1274,7 +1274,7 @@ AddItemToInventory::
 ; [wListPointer] = address of the list (2 bytes)
 DisplayListMenuID::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; disable auto-transfer
+	ld [hAutoBGTransferEnabled], a ; disable auto-transfer
 	ld a, 1
 	ld [hJoy7], a ; joypad state update flag
 	ld a, [wBattleType]
@@ -1328,10 +1328,10 @@ DisplayListMenuID::
 
 DisplayListMenuIDLoop::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; disable transfer
+	ld [hAutoBGTransferEnabled], a ; disable transfer
 	call PrintListMenuEntries
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a ; enable transfer
+	ld [hAutoBGTransferEnabled], a ; enable transfer
 	call Delay3
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
@@ -1798,10 +1798,10 @@ ListMenuCancelText::
 
 GetMonName::
 	push hl
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(MonsterNames)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wd11e]
 	dec a
@@ -1817,7 +1817,7 @@ GetMonName::
 	ld [hl], "@"
 	pop de
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop hl
 	ret
@@ -1941,7 +1941,7 @@ GetMoveName::
 
 ; reloads text box tile patterns, current map view, and tileset tile patterns
 ReloadMapData::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
@@ -1951,13 +1951,13 @@ ReloadMapData::
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 ; reloads tileset tile patterns
 ReloadTilesetTilePatterns::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
@@ -1965,7 +1965,7 @@ ReloadTilesetTilePatterns::
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2002,15 +2002,15 @@ UseItem::
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(TossItem_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call TossItem_
 	pop de
 	ld a, d
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2036,15 +2036,15 @@ IsKeyItem::
 ; [wTextBoxID] = text box ID
 ; b, c = y, x cursor position (TWO_OPTION_MENU only)
 DisplayTextBoxID::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(DisplayTextBoxID_)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayTextBoxID_
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2078,15 +2078,15 @@ RunNPCMovementScript::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wNPCMovementScriptBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wNPCMovementScriptFunctionNum]
 	call CallFunctionInTable
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2407,7 +2407,7 @@ CheckForEngagingTrainers::
 ; hl = text if the player wins
 ; de = text if the player loses
 SaveEndBattleTextPointers::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wEndBattleTextRomBank], a
 	ld a, h
 	ld [wEndBattleWinTextPointer], a
@@ -2442,10 +2442,10 @@ PrintEndBattleText::
 	res 7, [hl]
 	pop hl
 	ret z
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wEndBattleTextRomBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push hl
 	callba SaveTrainerName
@@ -2453,7 +2453,7 @@ PrintEndBattleText::
 	call PrintText
 	pop hl
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	callba FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
@@ -2623,7 +2623,7 @@ SetSpriteFacingDirectionAndDelay::
 
 SetSpriteFacingDirection::
 	ld a, $9
-	ld [H_SPRITEDATAOFFSET], a
+	ld [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData1
 	ld a, [hSpriteFacingDirection]
 	ld [hl], a
@@ -2678,14 +2678,14 @@ CheckCoords::
 ; tests if a boulder's coordinates are in a specified array
 ; INPUT:
 ; hl = address of array
-; [H_SPRITEINDEX] = index of boulder sprite
+; [hSpriteIndex] = index of boulder sprite
 ; OUTPUT:
 ; [wCoordIndex] = if there is match, the matching array index
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords::
 	push hl
 	ld hl, wSpriteStateData2 + $04
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	swap a
 	ld d, $0
 	ld e, a
@@ -2707,9 +2707,9 @@ GetPointerWithinSpriteStateData2::
 	ld h, $c2
 
 _GetPointerWithinSpriteStateData:
-	ld a, [H_SPRITEDATAOFFSET]
+	ld a, [hSpriteDataOffset]
 	ld b, a
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	swap a
 	add b
 	ld l, a
@@ -2746,7 +2746,7 @@ DecodeRLEList::
 	inc a                        ; include sentinel in counting
 	ret
 
-; sets movement byte 1 for sprite [H_SPRITEINDEX] to $FE and byte 2 to [hSpriteMovementByte2]
+; sets movement byte 1 for sprite [hSpriteIndex] to $FE and byte 2 to [hSpriteMovementByte2]
 SetSpriteMovementBytesToFE::
 	push hl
 	call GetSpriteMovementByte1Pointer
@@ -2757,7 +2757,7 @@ SetSpriteMovementBytesToFE::
 	pop hl
 	ret
 
-; sets both movement bytes for sprite [H_SPRITEINDEX] to $FF
+; sets both movement bytes for sprite [hSpriteIndex] to $FF
 SetSpriteMovementBytesToFF::
 	push hl
 	call GetSpriteMovementByte1Pointer
@@ -2767,20 +2767,20 @@ SetSpriteMovementBytesToFF::
 	pop hl
 	ret
 
-; returns the sprite movement byte 1 pointer for sprite [H_SPRITEINDEX] in hl
+; returns the sprite movement byte 1 pointer for sprite [hSpriteIndex] in hl
 GetSpriteMovementByte1Pointer::
 	ld h, $C2
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	swap a
 	add 6
 	ld l, a
 	ret
 
-; returns the sprite movement byte 2 pointer for sprite [H_SPRITEINDEX] in hl
+; returns the sprite movement byte 2 pointer for sprite [hSpriteIndex] in hl
 GetSpriteMovementByte2Pointer::
 	push de
 	ld hl, wMapSpriteData
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	dec a
 	add a
 	ld d, 0
@@ -2846,27 +2846,27 @@ BankswitchHome::
 ; switches to bank # in a
 ; Only use this when in the home bank!
 	ld [wBankswitchHomeTemp], a
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	ld [wBankswitchHomeSavedROMBank], a
 	ld a, [wBankswitchHomeTemp]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 BankswitchBack::
 ; returns from BankswitchHome
 	ld a, [wBankswitchHomeSavedROMBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 Bankswitch::
 ; self-contained bankswitch, use this when not in the home bank
 ; switches to the bank in b
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld bc, .Return
 	push bc
@@ -2874,7 +2874,7 @@ Bankswitch::
 .Return
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2929,7 +2929,7 @@ CalcDifference::
 	ret
 
 MoveSprite::
-; move the sprite [H_SPRITEINDEX] with the movement pointed to by de
+; move the sprite [hSpriteIndex] with the movement pointed to by de
 ; actually only copies the movement data to wNPCMovementDirections for later
 	call SetSpriteMovementBytesToFF
 MoveSprite_::
@@ -3068,13 +3068,13 @@ SaveScreenTilesToBuffer2::
 LoadScreenTilesFromBuffer2::
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
-; loads screen tiles stored in wTileMapBackup2 but leaves H_AUTOBGTRANSFERENABLED disabled
+; loads screen tiles stored in wTileMapBackup2 but leaves hAutoBGTransferEnabled disabled
 LoadScreenTilesFromBuffer2DisableBGTransfer::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld hl, wTileMapBackup2
 	coord de, 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
@@ -3089,13 +3089,13 @@ SaveScreenTilesToBuffer1::
 
 LoadScreenTilesFromBuffer1::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld hl, wTileMapBackup
 	coord de, 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 DelayFrames::
@@ -3154,7 +3154,7 @@ GetName::
 	cp HM_01
 	jp nc, GetMachineName
 
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	push hl
 	push bc
@@ -3172,7 +3172,7 @@ GetName::
 .otherEntries
 	;2-7 = OTHER ENTRIES
 	ld a, [wPredefBank]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wNameListType]    ;VariousNames' entryID
 	dec a
@@ -3220,14 +3220,14 @@ GetName::
 	pop bc
 	pop hl
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 GetItemPrice::
 ; Stores item's price as BCD at hItemPrice (3 bytes)
 ; Input: [wcf91] = item id
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wListMenuID]
 	cp MOVESLISTMENU
@@ -3235,7 +3235,7 @@ GetItemPrice::
 	jr nz, .ok
 	ld a, $f ; hardcoded Bank
 .ok
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld hl, wItemPrices
 	ld a, [hli]
@@ -3259,13 +3259,13 @@ GetItemPrice::
 	jr .done
 .getTMPrice
 	ld a, Bank(GetMachinePrice)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call GetMachinePrice
 .done
 	ld de, hItemPrice
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -3312,10 +3312,10 @@ JoypadLowSensitivity::
 	jr z, .noNewlyPressedButtons
 .newlyPressedButtons
 	ld a, 30 ; half a second delay
-	ld [H_FRAMECOUNTER], a
+	ld [hFrameCounter], a
 	ret
 .noNewlyPressedButtons
-	ld a, [H_FRAMECOUNTER]
+	ld a, [hFrameCounter]
 	and a ; is the delay over?
 	jr z, .delayOver
 .delayNotOver
@@ -3334,18 +3334,18 @@ JoypadLowSensitivity::
 	ld [hJoy5], a
 .setShortDelay
 	ld a, 5 ; 1/12 of a second delay
-	ld [H_FRAMECOUNTER], a
+	ld [hFrameCounter], a
 	ret
 
 WaitForTextScrollButtonPress::
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hDownArrowBlinkCount1]
 	push af
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [hDownArrowBlinkCount2]
 	push af
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hDownArrowBlinkCount1], a
 	ld a, $6
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 .loop
 	push hl
 	ld a, [wTownMapSpriteBlinkingEnabled]
@@ -3362,9 +3362,9 @@ WaitForTextScrollButtonPress::
 	and A_BUTTON | B_BUTTON
 	jr z, .loop
 	pop af
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	pop af
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hDownArrowBlinkCount1], a
 	ret
 
 ; (unless in link battle) waits for A or B being pressed and outputs the scrolling sound effect
@@ -3407,14 +3407,14 @@ Divide::
 	push hl
 	push de
 	push bc
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, Bank(_Divide)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _Divide
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop bc
 	pop de
@@ -3439,11 +3439,11 @@ PrintLetterDelay::
 	jr z, .waitOneFrame
 	ld a, [wOptions]
 	and $f
-	ld [H_FRAMECOUNTER], a
+	ld [hFrameCounter], a
 	jr .checkButtons
 .waitOneFrame
 	ld a, 1
-	ld [H_FRAMECOUNTER], a
+	ld [hFrameCounter], a
 .checkButtons
 	call Joypad
 	ld a, [hJoyHeld]
@@ -3458,7 +3458,7 @@ PrintLetterDelay::
 	call DelayFrame
 	jr .done
 .buttonsNotPressed ; if neither A nor B is pressed
-	ld a, [H_FRAMECOUNTER]
+	ld a, [hFrameCounter]
 	and a
 	jr nz, .checkButtons
 .done
@@ -3505,10 +3505,10 @@ CalcStats::
 .statsLoop
 	inc c
 	call CalcStat
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hMultiplicand+1]
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	ld [de], a
 	inc de
 	ld a, c
@@ -3541,14 +3541,14 @@ CalcStat::
 	add hl, bc          ; skip to corresponding stat exp value
 .statExpLoop            ; calculates ceil(Sqrt(stat exp)) in b
 	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND+1], a
+	ld [hMultiplicand], a
+	ld [hMultiplicand+1], a
 	inc b               ; increment current stat exp bonus
 	ld a, b
 	cp $ff
 	jr z, .statExpDone
-	ld [H_MULTIPLICAND+2], a
-	ld [H_MULTIPLIER], a
+	ld [hMultiplicand+2], a
+	ld [hMultiplier], a
 	call Multiply
 	ld a, [hld]
 	ld d, a
@@ -3636,22 +3636,22 @@ CalcStat::
 	jr nc, .noCarry2
 	inc d                     ; de = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
 .noCarry2
-	ld [H_MULTIPLICAND+2], a
+	ld [hMultiplicand+2], a
 	ld a, d
-	ld [H_MULTIPLICAND+1], a
+	ld [hMultiplicand+1], a
 	xor a
-	ld [H_MULTIPLICAND], a
+	ld [hMultiplicand], a
 	ld a, [wCurEnemyLVL]
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply            ; ((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level
-	ld a, [H_MULTIPLICAND]
-	ld [H_DIVIDEND], a
-	ld a, [H_MULTIPLICAND+1]
-	ld [H_DIVIDEND+1], a
-	ld a, [H_MULTIPLICAND+2]
-	ld [H_DIVIDEND+2], a
+	ld a, [hMultiplicand]
+	ld [hDividend], a
+	ld a, [hMultiplicand+1]
+	ld [hDividend+1], a
+	ld a, [hMultiplicand+2]
+	ld [hDividend+2], a
 	ld a, $64
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld a, $3
 	ld b, a
 	call Divide             ; (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100
@@ -3661,38 +3661,38 @@ CalcStat::
 	jr nz, .notHPStat
 	ld a, [wCurEnemyLVL]
 	ld b, a
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	add b
-	ld [H_MULTIPLICAND+2], a
+	ld [hMultiplicand+2], a
 	jr nc, .noCarry3
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hMultiplicand+1]
 	inc a
-	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
+	ld [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
 .noCarry3
 	ld a, 10 ; +10 for HP stat
 .notHPStat
 	ld b, a
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	add b
-	ld [H_MULTIPLICAND+2], a
+	ld [hMultiplicand+2], a
 	jr nc, .noCarry4
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hMultiplicand+1]
 	inc a                    ; non-HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + 5
-	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
+	ld [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
-	ld a, [H_MULTIPLICAND+1] ; check for overflow (>999)
+	ld a, [hMultiplicand+1] ; check for overflow (>999)
 	cp 999 / $100 + 1
 	jr nc, .overflow
 	cp 999 / $100
 	jr c, .noOverflow
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	cp 999 % $100 + 1
 	jr c, .noOverflow
 .overflow
 	ld a, 999 / $100               ; overflow: cap at 999
-	ld [H_MULTIPLICAND+1], a
+	ld [hMultiplicand+1], a
 	ld a, 999 % $100
-	ld [H_MULTIPLICAND+2], a
+	ld [hMultiplicand+2], a
 .noOverflow
 	pop bc
 	pop de
@@ -3700,28 +3700,28 @@ CalcStat::
 	ret
 
 AddEnemyMonToPlayerParty::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_AddEnemyMonToPlayerParty)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _AddEnemyMonToPlayerParty
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 MoveMon::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_MoveMon)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _MoveMon
 	pop bc
 	ld a, b
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -3801,14 +3801,14 @@ HandleMenuInput::
 	ld [wPartyMenuAnimMonEnabled], a
 
 HandleMenuInput_::
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hDownArrowBlinkCount1]
 	push af
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [hDownArrowBlinkCount2]
 	push af ; save existing values on stack
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a ; blinking down arrow timing value 1
+	ld [hDownArrowBlinkCount1], a ; blinking down arrow timing value 1
 	ld a, 6
-	ld [H_DOWNARROWBLINKCNT2], a ; blinking down arrow timing value 2
+	ld [hDownArrowBlinkCount2], a ; blinking down arrow timing value 2
 .loop1
 	xor a
 	ld [wAnimCounter], a ; counter for pokemon shaking animation
@@ -3837,9 +3837,9 @@ HandleMenuInput_::
 .giveUpWaiting
 ; if a key wasn't pressed within the specified number of checks
 	pop af
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	pop af
-	ld [H_DOWNARROWBLINKCNT1], a ; restore previous values
+	ld [hDownArrowBlinkCount1], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
 	ret
@@ -3901,9 +3901,9 @@ HandleMenuInput_::
 	call PlaySound
 .skipPlayingSound
 	pop af
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	pop af
-	ld [H_DOWNARROWBLINKCNT1], a ; restore previous values
+	ld [hDownArrowBlinkCount1], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
 	ld a, [hJoy5]
@@ -3934,7 +3934,7 @@ PlaceMenuCursor::
 	and a ; was the previous menu id 0?
 	jr z, .checkForArrow1
 	push af
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	bit 1, a ; is the menu double spaced?
 	jr z, .doubleSpaced1
 	ld bc, 20
@@ -3960,7 +3960,7 @@ PlaceMenuCursor::
 	and a
 	jr z, .checkForArrow2
 	push af
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	bit 1, a ; is the menu double spaced?
 	jr z, .doubleSpaced2
 	ld bc, 20
@@ -4014,7 +4014,7 @@ EraseMenuCursor::
 
 ; This toggles a blinking down arrow at hl on and off after a delay has passed.
 ; This is often called even when no blinking is occurring.
-; The reason is that most functions that call this initialize H_DOWNARROWBLINKCNT1 to 0.
+; The reason is that most functions that call this initialize hDownArrowBlinkCount1 to 0.
 ; The effect is that if the tile at hl is initialized with a down arrow,
 ; this function will toggle that down arrow on and off, but if the tile isn't
 ; initialized with a down arrow, this function does nothing.
@@ -4027,36 +4027,36 @@ HandleDownArrowBlinkTiming::
 	cp b
 	jr nz, .downArrowOff
 .downArrowOn
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hDownArrowBlinkCount1]
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hDownArrowBlinkCount1], a
 	ret nz
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld a, [hDownArrowBlinkCount2]
 	dec a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	ret nz
 	ld a, " "
 	ld [hl], a
 	ld a, $ff
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hDownArrowBlinkCount1], a
 	ld a, $06
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	ret
 .downArrowOff
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hDownArrowBlinkCount1]
 	and a
 	ret z
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hDownArrowBlinkCount1], a
 	ret nz
 	dec a
-	ld [H_DOWNARROWBLINKCNT1], a
-	ld a, [H_DOWNARROWBLINKCNT2]
+	ld [hDownArrowBlinkCount1], a
+	ld a, [hDownArrowBlinkCount2]
 	dec a
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	ret nz
 	ld a, $06
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hDownArrowBlinkCount2], a
 	ld a, "▼"
 	ld [hl], a
 	ret
@@ -4100,9 +4100,9 @@ PrintNumber::
 ; in bits 7 and 6 of b respectively.
 	push bc
 	xor a
-	ld [H_PASTLEADINGZEROES], a
-	ld [H_NUMTOPRINT], a
-	ld [H_NUMTOPRINT + 1], a
+	ld [hPastLeadingZeros], a
+	ld [hNumToPrint], a
+	ld [hNumToPrint + 1], a
 	ld a, b
 	and $f
 	cp 1
@@ -4111,26 +4111,26 @@ PrintNumber::
 	jr z, .word
 .long
 	ld a, [de]
-	ld [H_NUMTOPRINT], a
+	ld [hNumToPrint], a
 	inc de
 	ld a, [de]
-	ld [H_NUMTOPRINT + 1], a
+	ld [hNumToPrint + 1], a
 	inc de
 	ld a, [de]
-	ld [H_NUMTOPRINT + 2], a
+	ld [hNumToPrint + 2], a
 	jr .start
 
 .word
 	ld a, [de]
-	ld [H_NUMTOPRINT + 1], a
+	ld [hNumToPrint + 1], a
 	inc de
 	ld a, [de]
-	ld [H_NUMTOPRINT + 2], a
+	ld [hNumToPrint + 2], a
 	jr .start
 
 .byte
 	ld a, [de]
-	ld [H_NUMTOPRINT + 2], a
+	ld [hNumToPrint + 2], a
 
 .start
 	push de
@@ -4159,16 +4159,16 @@ if (\1) / $10000
 	ld a, \1 / $10000 % $100
 else	xor a
 endc
-	ld [H_POWEROFTEN + 0], a
+	ld [hPowerOf10 + 0], a
 
 if (\1) / $100
 	ld a, \1 / $100   % $100
 else	xor a
 endc
-	ld [H_POWEROFTEN + 1], a
+	ld [hPowerOf10 + 1], a
 
 	ld a, \1 / $1     % $100
-	ld [H_POWEROFTEN + 2], a
+	ld [hPowerOf10 + 2], a
 
 	call .PrintDigit
 	call .NextDigit
@@ -4182,7 +4182,7 @@ endm
 
 .tens
 	ld c, 0
-	ld a, [H_NUMTOPRINT + 2]
+	ld a, [hNumToPrint + 2]
 .mod
 	cp 10
 	jr c, .ok
@@ -4192,9 +4192,9 @@ endm
 .ok
 
 	ld b, a
-	ld a, [H_PASTLEADINGZEROES]
+	ld a, [hPastLeadingZeros]
 	or c
-	ld [H_PASTLEADINGZEROES], a
+	ld [hPastLeadingZeros], a
 	jr nz, .past
 	call .PrintLeadingZero
 	jr .next
@@ -4219,74 +4219,74 @@ endm
 ; Print the quotient, and keep the modulus.
 	ld c, 0
 .loop
-	ld a, [H_POWEROFTEN]
+	ld a, [hPowerOf10]
 	ld b, a
-	ld a, [H_NUMTOPRINT]
-	ld [H_SAVEDNUMTOPRINT], a
+	ld a, [hNumToPrint]
+	ld [hSavedNumToPrint], a
 	cp b
 	jr c, .underflow0
 	sub b
-	ld [H_NUMTOPRINT], a
-	ld a, [H_POWEROFTEN + 1]
+	ld [hNumToPrint], a
+	ld a, [hPowerOf10 + 1]
 	ld b, a
-	ld a, [H_NUMTOPRINT + 1]
-	ld [H_SAVEDNUMTOPRINT + 1], a
+	ld a, [hNumToPrint + 1]
+	ld [hSavedNumToPrint + 1], a
 	cp b
 	jr nc, .noborrow1
 
-	ld a, [H_NUMTOPRINT]
+	ld a, [hNumToPrint]
 	or 0
 	jr z, .underflow1
 	dec a
-	ld [H_NUMTOPRINT], a
-	ld a, [H_NUMTOPRINT + 1]
+	ld [hNumToPrint], a
+	ld a, [hNumToPrint + 1]
 .noborrow1
 
 	sub b
-	ld [H_NUMTOPRINT + 1], a
-	ld a, [H_POWEROFTEN + 2]
+	ld [hNumToPrint + 1], a
+	ld a, [hPowerOf10 + 2]
 	ld b, a
-	ld a, [H_NUMTOPRINT + 2]
-	ld [H_SAVEDNUMTOPRINT + 2], a
+	ld a, [hNumToPrint + 2]
+	ld [hSavedNumToPrint + 2], a
 	cp b
 	jr nc, .noborrow2
 
-	ld a, [H_NUMTOPRINT + 1]
+	ld a, [hNumToPrint + 1]
 	and a
 	jr nz, .borrowed
 
-	ld a, [H_NUMTOPRINT]
+	ld a, [hNumToPrint]
 	and a
 	jr z, .underflow2
 	dec a
-	ld [H_NUMTOPRINT], a
+	ld [hNumToPrint], a
 	xor a
 .borrowed
 
 	dec a
-	ld [H_NUMTOPRINT + 1], a
-	ld a, [H_NUMTOPRINT + 2]
+	ld [hNumToPrint + 1], a
+	ld a, [hNumToPrint + 2]
 .noborrow2
 	sub b
-	ld [H_NUMTOPRINT + 2], a
+	ld [hNumToPrint + 2], a
 	inc c
 	jr .loop
 
 .underflow2
-	ld a, [H_SAVEDNUMTOPRINT + 1]
-	ld [H_NUMTOPRINT + 1], a
+	ld a, [hSavedNumToPrint + 1]
+	ld [hNumToPrint + 1], a
 .underflow1
-	ld a, [H_SAVEDNUMTOPRINT]
-	ld [H_NUMTOPRINT], a
+	ld a, [hSavedNumToPrint]
+	ld [hNumToPrint], a
 .underflow0
-	ld a, [H_PASTLEADINGZEROES]
+	ld a, [hPastLeadingZeros]
 	or c
 	jr z, .PrintLeadingZero
 
 	ld a, "0"
 	add c
 	ld [hl], a
-	ld [H_PASTLEADINGZEROES], a
+	ld [hPastLeadingZeros], a
 	ret
 
 .PrintLeadingZero:
@@ -4303,7 +4303,7 @@ endm
 	jr nz, .inc
 	bit BIT_LEFT_ALIGN, d
 	jr z, .inc
-	ld a, [H_PASTLEADINGZEROES]
+	ld a, [hPastLeadingZeros]
 	and a
 	ret z
 .inc
@@ -4491,7 +4491,7 @@ UpdateCinnabarGymGateTileBlocks::
 	jpba UpdateCinnabarGymGateTileBlocks_
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [hJoyHeld]
 	bit 0, a ; A button
@@ -4499,14 +4499,14 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 ; A button is pressed
 	ld a, Bank(CheckForHiddenObject)
 	ld [MBC1RomBank], a
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	call CheckForHiddenObject
 	ld a, [$ffee]
 	and a
 	jr nz, .hiddenObjectNotFound
 	ld a, [wHiddenObjectFunctionRomBank]
 	ld [MBC1RomBank], a
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld de, .returnAddress
 	push de
 	jp hl
@@ -4524,7 +4524,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ld [$ffeb], a
 	pop af
 	ld [MBC1RomBank], a
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ret
 
 PrintPredefTextID::
