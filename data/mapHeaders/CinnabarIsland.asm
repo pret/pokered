@@ -1,10 +1,5 @@
-CinnabarIsland_h::
-	db OVERWORLD ; tileset
-	db CINNABAR_ISLAND_HEIGHT, CINNABAR_ISLAND_WIDTH ; dimensions (y, x)
-	dw CinnabarIsland_Blocks ; blocks
-	dw CinnabarIsland_TextPointers ; texts
-	dw CinnabarIsland_Script ; scripts
-	db NORTH | EAST ; connections
-	NORTH_MAP_CONNECTION CINNABAR_ISLAND, ROUTE_21, 0, 0, Route21_Blocks
-	EAST_MAP_CONNECTION CINNABAR_ISLAND, ROUTE_20, 0, 0, Route20_Blocks
-	dw CinnabarIsland_Object ; objects
+
+	map_header CinnabarIsland, CINNABAR_ISLAND, OVERWORLD, NORTH | EAST
+	connection north, Route21, ROUTE_21, 0
+	connection east, Route20, ROUTE_20, 0
+	end_map_header

@@ -1,8 +1,3 @@
-RockTunnelB1F_h::
-	db CAVERN ; tileset
-	db ROCK_TUNNEL_B1F_HEIGHT, ROCK_TUNNEL_B1F_WIDTH ; dimensions (y, x)
-	dw RockTunnelB1F_Blocks ; blocks
-	dw RockTunnelB1F_TextPointers ; texts
-	dw RockTunnelB1F_Script ; scripts
-	db 0 ; connections
-	dw RockTunnelB1F_Object ; objects
+
+	map_header RockTunnelB1F, ROCK_TUNNEL_B1F, CAVERN, 0
+	end_map_header

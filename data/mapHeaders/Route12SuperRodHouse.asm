@@ -1,8 +1,3 @@
-Route12SuperRodHouse_h::
-	db HOUSE ; tileset
-	db ROUTE_12_SUPER_ROD_HOUSE_HEIGHT, ROUTE_12_SUPER_ROD_HOUSE_WIDTH ; dimensions (y, x)
-	dw Route12SuperRodHouse_Blocks ; blocks
-	dw Route12SuperRodHouse_TextPointers ; texts
-	dw Route12SuperRodHouse_Script ; scripts
-	db 0 ; connections
-	dw Route12SuperRodHouse_Object ; objects
+
+	map_header Route12SuperRodHouse, ROUTE_12_SUPER_ROD_HOUSE, HOUSE, 0
+	end_map_header

@@ -1,11 +1,6 @@
-LavenderTown_h::
-	db OVERWORLD ; tileset
-	db LAVENDER_TOWN_HEIGHT, LAVENDER_TOWN_WIDTH ; dimensions (y, x)
-	dw LavenderTown_Blocks ; blocks
-	dw LavenderTown_TextPointers ; texts
-	dw LavenderTown_Script ; scripts
-	db NORTH | SOUTH | WEST ; connections
-	NORTH_MAP_CONNECTION LAVENDER_TOWN, ROUTE_10, 0, 0, Route10_Blocks
-	SOUTH_MAP_CONNECTION LAVENDER_TOWN, ROUTE_12, 0, 0, Route12_Blocks, 1
-	WEST_MAP_CONNECTION LAVENDER_TOWN, ROUTE_8, 0, 0, Route8_Blocks
-	dw LavenderTown_Object ; objects
+
+	map_header LavenderTown, LAVENDER_TOWN, OVERWORLD, NORTH | SOUTH | WEST
+	connection north, Route10, ROUTE_10, 0
+	connection south, Route12, ROUTE_12, 0
+	connection west, Route8, ROUTE_8, 0
+	end_map_header

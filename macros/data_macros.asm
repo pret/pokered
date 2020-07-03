@@ -144,94 +144,101 @@ warp_to: MACRO
 	EVENT_DISP \3, \2, \1
 ENDM
 
-;\1 (byte) = current map id
-;\2 (byte) = connected map id
-;\3 (byte) = x movement of connection strip
-;\4 (byte) = connection strip offset
-;\5 (word) = connected map blocks pointer
-NORTH_MAP_CONNECTION: MACRO
-	db \2 ; map id
-	dw \5 + (\2_WIDTH * (\2_HEIGHT - 3)) + \4; "Connection Strip" location
-	dw wOverworldMap + 3 + \3 ; current map position
-	IF (\1_WIDTH < \2_WIDTH)
-		db \1_WIDTH - \3 + 3 ; width of connection strip
-	ELSE
-		db \2_WIDTH - \4 ; width of connection strip
-	ENDC
-	db \2_WIDTH ; map width
-	db (\2_HEIGHT * 2) - 1 ; y alignment (y coordinate of player when entering map)
-	db (\3 - \4) * -2 ; x alignment (x coordinate of player when entering map)
-	dw wOverworldMap + 1 + (\2_HEIGHT * (\2_WIDTH + 6)) ; window (position of the upper left block after entering the map)
+map_header: MACRO
+;\1: map name
+;\2: map id
+;\3: tileset
+;\4: connections: combo of NORTH, SOUTH, WEST, and/or EAST, or 0 for none
+CURRENT_MAP_WIDTH = \2_WIDTH
+CURRENT_MAP_HEIGHT = \2_HEIGHT
+CURRENT_MAP_OBJECT EQUS "\1_Object"
+\1_h::
+	db \3
+	db CURRENT_MAP_HEIGHT, CURRENT_MAP_WIDTH
+	dw \1_Blocks
+	dw \1_TextPointers
+	dw \1_Script
+	db \4
 ENDM
 
-;\1 (byte) = current map id
-;\2 (byte) = connected map id
-;\3 (byte) = x movement of connection strip
-;\4 (byte) = connection strip offset
-;\5 (word) = connected map blocks pointer
-;\6 (flag) = add 3 to width of connection strip (why?)
-SOUTH_MAP_CONNECTION: MACRO
-	db \2 ; map id
-	dw \5 + \4 ; "Connection Strip" location
-	dw wOverworldMap + 3 + (\1_HEIGHT + 3) * (\1_WIDTH + 6) + \3 ; current map position
-	IF (\1_WIDTH < \2_WIDTH)
-		IF (_NARG > 5)
-			db \1_WIDTH - \3 + 3 ; width of connection strip
-		ELSE
-			db \1_WIDTH - \3 ; width of connection strip
-		ENDC
-	ELSE
-		db \2_WIDTH - \4 ; width of connection strip
-	ENDC
-	db \2_WIDTH ; map width
-	db 0  ; y alignment (y coordinate of player when entering map)
-	db (\3 - \4) * -2 ; x alignment (x coordinate of player when entering map)
-	dw wOverworldMap + 7 + \2_WIDTH ; window (position of the upper left block after entering the map)
+end_map_header: MACRO
+	dw CURRENT_MAP_OBJECT
+PURGE CURRENT_MAP_WIDTH
+PURGE CURRENT_MAP_HEIGHT
+PURGE CURRENT_MAP_OBJECT
 ENDM
 
-;\1 (byte) = current map id
-;\2 (byte) = connected map id
-;\3 (byte) = y movement of connection strip
-;\4 (byte) = connection strip offset
-;\5 (word) = connected map blocks pointer
-WEST_MAP_CONNECTION: MACRO
-	db \2 ; map id
-	dw \5 + (\2_WIDTH * \4) + \2_WIDTH - 3 ; "Connection Strip" location
-	dw wOverworldMap + (\1_WIDTH + 6) * (\3 + 3) ; current map position
-	IF (\1_HEIGHT < \2_HEIGHT)
-		db \1_HEIGHT - \3 + 3 ; height of connection strip
-	ELSE
-		db \2_HEIGHT - \4 ; height of connection strip
-	ENDC
-	db \2_WIDTH ; map width
-	db (\3 - \4) * -2 ; y alignment
-	db (\2_WIDTH * 2) - 1 ; x alignment
-	dw wOverworldMap + 6 + (2 * \2_WIDTH) ; window (position of the upper left block after entering the map)
-ENDM
+; Connections go in order: north, south, west, east
+connection: MACRO
+;\1: direction
+;\2: map name
+;\3: map id
+;\4: offset of the target map relative to the current map
+;    (x offset for east/west, y offset for north/south)
 
-;\1 (byte) = current map id
-;\2 (byte) = connected map id
-;\3 (byte) = y movement of connection strip
-;\4 (byte) = connection strip offset
-;\5 (word) = connected map blocks pointer
-;\6 (flag) = add 3 to height of connection strip (why?)
-EAST_MAP_CONNECTION: MACRO
-	db \2 ; map id
-	dw \5 + (\2_WIDTH * \4) ; "Connection Strip" location
-	dw wOverworldMap - 3 + (\1_WIDTH + 6) * (\3 + 4) ; current map position
-	IF (\1_HEIGHT < \2_HEIGHT)
-		IF (_NARG > 5)
-			db \1_HEIGHT - \3 + 3 ; height of connection strip
-		ELSE
-			db \1_HEIGHT - \3 ; height of connection strip
-		ENDC
-	ELSE
-		db \2_HEIGHT - \4 ; height of connection strip
-	ENDC
-	db \2_WIDTH ; map width
-	db (\3 - \4) * -2 ; y alignment
-	db 0 ; x alignment
-	dw wOverworldMap + 7 + \2_WIDTH ; window (position of the upper left block after entering the map)
+; Calculate tile offsets for source (current) and target maps
+_src = 0
+_tgt = (\4) + 3
+if _tgt < 2
+_src = -_tgt
+_tgt = 0
+endc
+
+if "\1" == "north"
+_blk = \3_WIDTH * (\3_HEIGHT - 3) + _src
+_map = _tgt
+_win = (\3_WIDTH + 6) * \3_HEIGHT + 1
+_y = \3_HEIGHT * 2 - 1
+_x = (\4) * -2
+_len = CURRENT_MAP_WIDTH + 3 - (\4)
+if _len > \3_WIDTH
+_len = \3_WIDTH
+endc
+
+elif "\1" == "south"
+_blk = _src
+_map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
+_win = \3_WIDTH + 7
+_y = 0
+_x = (\4) * -2
+_len = CURRENT_MAP_WIDTH + 3 - (\4)
+if _len > \3_WIDTH
+_len = \3_WIDTH
+endc
+
+elif "\1" == "west"
+_blk = (\3_WIDTH * _src) + \3_WIDTH - 3
+_map = (CURRENT_MAP_WIDTH + 6) * _tgt
+_win = (\3_WIDTH + 6) * 2 - 6
+_y = (\4) * -2
+_x = \3_WIDTH * 2 - 1
+_len = CURRENT_MAP_HEIGHT + 3 - (\4)
+if _len > \3_HEIGHT
+_len = \3_HEIGHT
+endc
+
+elif "\1" == "east"
+_blk = (\3_WIDTH * _src)
+_map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
+_win = \3_WIDTH + 7
+_y = (\4) * -2
+_x = 0
+_len = CURRENT_MAP_HEIGHT + 3 - (\4)
+if _len > \3_HEIGHT
+_len = \3_HEIGHT
+endc
+
+else
+fail "Invalid direction for 'connection'."
+endc
+
+	db \3
+	dw \2_Blocks + _blk
+	dw wOverworldMap + _map
+	db _len - _src
+	db \3_WIDTH
+	db _y, _x
+	dw wOverworldMap + _win
 ENDM
 
 tmlearn: MACRO

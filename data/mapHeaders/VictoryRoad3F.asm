@@ -1,8 +1,3 @@
-VictoryRoad3F_h::
-	db CAVERN ; tileset
-	db VICTORY_ROAD_3F_HEIGHT, VICTORY_ROAD_3F_WIDTH ; dimensions (y, x)
-	dw VictoryRoad3F_Blocks ; blocks
-	dw VictoryRoad3F_TextPointers ; texts
-	dw VictoryRoad3F_Script ; scripts
-	db 0 ; connections
-	dw VictoryRoad3F_Object ; objects
+
+	map_header VictoryRoad3F, VICTORY_ROAD_3F, CAVERN, 0
+	end_map_header

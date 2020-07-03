@@ -1,10 +1,5 @@
-PewterCity_h::
-	db OVERWORLD ; tileset
-	db PEWTER_CITY_HEIGHT, PEWTER_CITY_WIDTH ; dimensions (y, x)
-	dw PewterCity_Blocks ; blocks
-	dw PewterCity_TextPointers ; texts
-	dw PewterCity_Script ; scripts
-	db SOUTH | EAST ; connections
-	SOUTH_MAP_CONNECTION PEWTER_CITY, ROUTE_2, 5, 0, Route2_Blocks
-	EAST_MAP_CONNECTION PEWTER_CITY, ROUTE_3, 4, 0, Route3_Blocks
-	dw PewterCity_Object ; objects
+
+	map_header PewterCity, PEWTER_CITY, OVERWORLD, SOUTH | EAST
+	connection south, Route2, ROUTE_2, 5
+	connection east, Route3, ROUTE_3, 4
+	end_map_header

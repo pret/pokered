@@ -1,8 +1,3 @@
-PokemonMansion3F_h::
-	db FACILITY ; tileset
-	db POKEMON_MANSION_3F_HEIGHT, POKEMON_MANSION_3F_WIDTH ; dimensions (y, x)
-	dw PokemonMansion3F_Blocks ; blocks
-	dw PokemonMansion3F_TextPointers ; texts
-	dw PokemonMansion3F_Script ; scripts
-	db 0 ; connections
-	dw PokemonMansion3F_Object ; objects
+
+	map_header PokemonMansion3F, POKEMON_MANSION_3F, FACILITY, 0
+	end_map_header
