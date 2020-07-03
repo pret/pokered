@@ -1,5 +1,5 @@
-const_value = 1
-
+	const_def
+	const NO_ITEM       ; $00
 	const MASTER_BALL   ; $01
 	const ULTRA_BALL    ; $02
 	const GREAT_BALL    ; $03

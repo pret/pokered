@@ -5,25 +5,27 @@
 	const DARK_GRAY
 	const BLACK
 
-SET_PAL_BATTLE_BLACK         EQU $00
-SET_PAL_BATTLE               EQU $01
-SET_PAL_TOWN_MAP             EQU $02
-SET_PAL_STATUS_SCREEN        EQU $03
-SET_PAL_POKEDEX              EQU $04
-SET_PAL_SLOTS                EQU $05
-SET_PAL_TITLE_SCREEN         EQU $06
-SET_PAL_NIDORINO_INTRO       EQU $07
-SET_PAL_GENERIC              EQU $08
-SET_PAL_OVERWORLD            EQU $09
-SET_PAL_PARTY_MENU           EQU $0A
-SET_PAL_POKEMON_WHOLE_SCREEN EQU $0B
-SET_PAL_GAME_FREAK_INTRO     EQU $0C
-SET_PAL_TRAINER_CARD         EQU $0D
-UPDATE_PARTY_MENU_BLK_PACKET EQU $FC
+; pal/blk packets
+	const_def
+	const SET_PAL_BATTLE_BLACK         ; $00
+	const SET_PAL_BATTLE               ; $01
+	const SET_PAL_TOWN_MAP             ; $02
+	const SET_PAL_STATUS_SCREEN        ; $03
+	const SET_PAL_POKEDEX              ; $04
+	const SET_PAL_SLOTS                ; $05
+	const SET_PAL_TITLE_SCREEN         ; $06
+	const SET_PAL_NIDORINO_INTRO       ; $07
+	const SET_PAL_GENERIC              ; $08
+	const SET_PAL_OVERWORLD            ; $09
+	const SET_PAL_PARTY_MENU           ; $0A
+	const SET_PAL_POKEMON_WHOLE_SCREEN ; $0B
+	const SET_PAL_GAME_FREAK_INTRO     ; $0C
+	const SET_PAL_TRAINER_CARD         ; $0D
+const_value = -4
+	const UPDATE_PARTY_MENU_BLK_PACKET ; $FC
 
-; super game boy palettes
-const_value = 0
-
+; sgb palettes
+	const_def
 	const PAL_ROUTE     ; $00
 	const PAL_PALLET    ; $01
 	const PAL_VIRIDIAN  ; $02

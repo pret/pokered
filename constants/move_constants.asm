@@ -1,5 +1,5 @@
-const_value = 1
-
+	const_def
+	const NO_MOVE      ; 00
 	const POUND        ; 01
 	const KARATE_CHOP  ; 02
 	const DOUBLESLAP   ; 03
@@ -167,7 +167,7 @@ const_value = 1
 
 NUM_ATTACKS EQU const_value + -1
 
-	const STRUGGLE
+	const STRUGGLE     ; a5
 
 	; Moves do double duty as animation identifiers.
 

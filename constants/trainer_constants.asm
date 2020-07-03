@@ -6,8 +6,8 @@ OPP_\1 EQU const_value + OPP_ID_OFFSET
 const_value = const_value + 1
 ENDM
 
-const_value = 1
-
+	const_def
+	trainer_const NOBODY        ; $00
 	trainer_const YOUNGSTER     ; $01
 	trainer_const BUG_CATCHER   ; $02
 	trainer_const LASS          ; $03

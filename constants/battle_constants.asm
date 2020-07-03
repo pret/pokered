@@ -1,3 +1,22 @@
+MAX_LEVEL EQU 100
+
+NUM_MOVES     EQU 4
+NUM_STATS     EQU 5
+NUM_STAT_MODS EQU 8
+NUM_DVS       EQU 2
+
+; D733 flags
+BIT_TEST_BATTLE EQU 0
+
+; battle type constants
+BATTLE_TYPE_NORMAL  EQU 0
+BATTLE_TYPE_OLD_MAN EQU 1
+BATTLE_TYPE_SAFARI  EQU 2
+
+; fixed damage constants
+SONICBOOM_DAMAGE   EQU 20
+DRAGON_RAGE_DAMAGE EQU 40
+
 ; non-volatile statuses
 SLP EQU %111 ; sleep counter
 PSN EQU 3

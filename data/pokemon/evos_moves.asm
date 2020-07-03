@@ -1,4 +1,4 @@
-; See constants/evolution_constants.asm
+; See constants/pokemon_data_constants.asm
 ; The max number of evolutions per monster is MAX_EVOLUTIONS
 
 EvosMovesPointerTable:

@@ -1,9 +1,4 @@
-INCLUDE "macros.asm"
-INCLUDE "charmap.asm"
-
-INCLUDE "hram.asm"
-
-INCLUDE "constants/text_constants.asm"
+INCLUDE "constants.asm"
 
 
 SECTION "Text 1", ROMX

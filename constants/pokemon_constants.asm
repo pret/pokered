@@ -1,5 +1,5 @@
-const_value = 1
-
+	const_def
+	const NO_MON       ; $00
 	const RHYDON       ; $01
 	const KANGASKHAN   ; $02
 	const NIDORAN_M    ; $03
