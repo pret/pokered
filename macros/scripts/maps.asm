@@ -1,39 +1,6 @@
-
-; Constant enumeration is useful for monsters, items, moves, etc.
-const_def: MACRO
-if _NARG >= 1
-const_value = \1
-else
-const_value = 0
-endc
-ENDM
-
-const: MACRO
-\1 EQU const_value
-const_value = const_value + 1
-ENDM
-
-; data format macros
-
-percent EQUS "* $ff / 100"
-
-bcd2: MACRO
-	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-	dn ((\1) / 10) % 10, (\1) % 10
-ENDM
-
-bcd3: MACRO
-	dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
-	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-	dn ((\1) / 10) % 10, (\1) % 10
-ENDM
-
-coins equs "bcd2"
-money equs "bcd3"
-
-;\1 = Map Width
-;\2 = Rows above (Y-blocks)
-;\3 = X movement (X-blocks)
+;\1 map width
+;\2 Rows above (Y-blocks)
+;\3 X movement (X-blocks)
 EVENT_DISP: MACRO
 	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
 	db \2,\3 ;Y,X
@@ -66,32 +33,6 @@ IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 	dn \3, \2
 	dw \4
 ENDM
-
-; tilesets' headers macro
-tileset: MACRO
-	db BANK(\2)   ; BANK(GFX)
-	dw \1, \2, \3 ; Block, GFX, Coll
-	db \4, \5, \6 ; counter tiles
-	db \7         ; grass tile
-	db \8         ; permission (indoor, cave, outdoor)
-ENDM
-
-INDOOR  EQU 0
-CAVE    EQU 1
-OUTDOOR EQU 2
-
-RGB: MACRO
-	dw (\3 << 10 | \2 << 5 | \1)
-ENDM
-
-WALK EQU $FE
-STAY EQU $FF
-
-DOWN  EQU $D0
-UP    EQU $D1
-LEFT  EQU $D2
-RIGHT EQU $D3
-NONE  EQU $FF
 
 ;\1 sprite id
 ;\2 x position
@@ -144,11 +85,11 @@ warp_to: MACRO
 	EVENT_DISP \3, \2, \1
 ENDM
 
+;\1 map name
+;\2 map id
+;\3 tileset
+;\4 connections: combo of NORTH, SOUTH, WEST, and/or EAST, or 0 for none
 map_header: MACRO
-;\1: map name
-;\2: map id
-;\3: tileset
-;\4: connections: combo of NORTH, SOUTH, WEST, and/or EAST, or 0 for none
 CURRENT_MAP_WIDTH = \2_WIDTH
 CURRENT_MAP_HEIGHT = \2_HEIGHT
 CURRENT_MAP_OBJECT EQUS "\1_Object"
@@ -161,6 +102,7 @@ CURRENT_MAP_OBJECT EQUS "\1_Object"
 	db \4
 ENDM
 
+; Comes after map_header and connection macros
 end_map_header: MACRO
 	dw CURRENT_MAP_OBJECT
 PURGE CURRENT_MAP_WIDTH
@@ -169,12 +111,12 @@ PURGE CURRENT_MAP_OBJECT
 ENDM
 
 ; Connections go in order: north, south, west, east
+;\1 direction
+;\2 map name
+;\3 map id
+;\4 offset of the target map relative to the current map
+;   (x offset for east/west, y offset for north/south)
 connection: MACRO
-;\1: direction
-;\2: map name
-;\3: map id
-;\4: offset of the target map relative to the current map
-;    (x offset for east/west, y offset for north/south)
 
 ; Calculate tile offsets for source (current) and target maps
 _src = 0
@@ -239,15 +181,4 @@ endc
 	db \3_WIDTH
 	db _y, _x
 	dw wOverworldMap + _win
-ENDM
-
-tmlearn: MACRO
-x = 0
-	REPT _NARG
-IF \1 != 0
-x = x | (1 << ((\1 - 1) % 8))
-ENDC
-	SHIFT
-	ENDR
-	db x
 ENDM

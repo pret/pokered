@@ -939,7 +939,7 @@ FadeOutAudio::
 	ld b, a
 	xor a
 	ld [wAudioFadeOutControl], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wAudioSavedROMBank]
@@ -2506,7 +2506,7 @@ PlayTrainerMusic::
 	ret nz
 	xor a
 	ld [wAudioFadeOutControl], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld a, BANK(Music_MeetEvilTrainer)
 	ld [wAudioROMBank], a

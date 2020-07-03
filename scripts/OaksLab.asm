@@ -510,7 +510,7 @@ OaksLabScript15:
 	xor a
 	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
@@ -611,7 +611,7 @@ OaksLabScript16:
 	xor a ; NPC_MOVEMENT_DOWN
 	call FillMemory
 	ld [hl], $ff
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart

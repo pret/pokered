@@ -21,7 +21,7 @@ HallOfFamePC:
 	ld a, %11000000
 	ld [rBGP], a
 	call EnableLCD
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_Credits)
 	ld a, MUSIC_CREDITS

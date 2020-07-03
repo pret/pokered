@@ -1,9 +1,3 @@
-; different kinds of people events
-ITEM    EQU $80
-TRAINER EQU $40
-
-BOULDER_MOVEMENT_BYTE_2 EQU $10
-
 ; sprite facing directions
 SPRITE_FACING_DOWN  EQU $00
 SPRITE_FACING_UP    EQU $04

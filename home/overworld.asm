@@ -772,7 +772,7 @@ HandleBlackOut::
 
 StopMusic::
 	ld [wAudioFadeOutControl], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 .wait

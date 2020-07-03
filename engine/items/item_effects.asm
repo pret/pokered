@@ -1844,8 +1844,8 @@ PlayedFluteHadEffectText:
 	and a
 	jr nz, .done
 ; play out-of-battle pokeflute music
-	ld a, $ff
-	call PlaySound ; turn off music
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
 	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic

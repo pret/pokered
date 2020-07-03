@@ -27,8 +27,8 @@ PalletTownScript0:
 	ld [hJoyHeld], a
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld a, $FF
-	call PlaySound ; stop music
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
 	ld a, BANK(Music_MeetProfOak)
 	ld c, a
 	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music

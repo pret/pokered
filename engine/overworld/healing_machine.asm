@@ -17,7 +17,7 @@ AnimateHealingMachine:
 	call CopyHealingMachineOAM
 	ld a, 4
 	ld [wAudioFadeOutControl], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 .waitLoop
@@ -38,7 +38,7 @@ AnimateHealingMachine:
 	cp BANK(Audio3_UpdateMusic)
 	ld [wAudioSavedROMBank], a
 	jr nz, .next
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, BANK(Music_PkmnHealed)

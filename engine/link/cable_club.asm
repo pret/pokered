@@ -139,7 +139,7 @@ CableClub_DoBattleOrTradeAgain:
 	call Serial_ExchangeBytes
 	ld a, (1 << SERIAL) | (1 << TIMER) | (1 << VBLANK)
 	ld [rIE], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
@@ -261,7 +261,7 @@ CableClub_DoBattleOrTradeAgain:
 	ld [wUnusedCF8D + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK

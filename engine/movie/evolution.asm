@@ -9,7 +9,7 @@ EvolveMon:
 	xor a
 	ld [wLowHealthAlarm], a
 	ld [wChannelSoundIDs + Ch5], a
-	dec a
+	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, $1
@@ -67,7 +67,7 @@ EvolveMon:
 	ld a, [wEvoNewSpecies]
 .done
 	ld [wWholeScreenPaletteMonSpecies], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wWholeScreenPaletteMonSpecies]

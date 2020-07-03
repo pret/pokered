@@ -64,7 +64,7 @@ CeruleanCityScript0:
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_19512
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 .asm_19512
@@ -171,7 +171,7 @@ CeruleanCityScript2:
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart

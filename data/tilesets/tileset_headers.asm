@@ -1,3 +1,11 @@
+tileset: MACRO
+	db BANK(\2)   ; BANK(GFX)
+	dw \1, \2, \3 ; Block, GFX, Coll
+	db \4, \5, \6 ; counter tiles
+	db \7         ; grass tile
+	db \8         ; permission (indoor, cave, outdoor)
+ENDM
+
 Tilesets:
 	tileset Overworld_Block,   Overworld_GFX,   Overworld_Coll,   $FF,$FF,$FF, $52, OUTDOOR
 	tileset RedsHouse1_Block,  RedsHouse1_GFX,  RedsHouse1_Coll,  $FF,$FF,$FF, $FF, INDOOR

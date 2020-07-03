@@ -1,5 +1,3 @@
-
-; text macros
 text   EQUS "db $00," ; Start writing text.
 next   EQUS "db $4e," ; Move a line down.
 line   EQUS "db $4f," ; Start writing at the bottom line.

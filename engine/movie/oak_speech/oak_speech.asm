@@ -32,8 +32,8 @@ SetDefaultNames:
 	jp CopyData
 
 OakSpeech:
-	ld a, $FF
-	call PlaySound ; stop music
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
 	ld a, BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -133,9 +133,9 @@ OakSpeech:
 	ld [wAudioSavedROMBank], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
-	ld a, $FF
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound ; stop music
+	call PlaySound
 	pop af
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a

@@ -1,0 +1,14 @@
+; different kinds of people events
+ITEM    EQU $80
+TRAINER EQU $40
+
+WALK EQU $FE
+STAY EQU $FF
+
+DOWN  EQU $D0
+UP    EQU $D1
+LEFT  EQU $D2
+RIGHT EQU $D3
+NONE  EQU $FF
+
+BOULDER_MOVEMENT_BYTE_2 EQU $10

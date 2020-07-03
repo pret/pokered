@@ -7,3 +7,8 @@ EAST  EQU 1
 WEST  EQU 2
 SOUTH EQU 4
 NORTH EQU 8
+
+; tileset environments
+INDOOR  EQU 0
+CAVE    EQU 1
+OUTDOOR EQU 2

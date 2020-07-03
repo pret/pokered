@@ -52,7 +52,7 @@ BillsHouseInitiatedText::
 	TX_FAR _BillsHouseInitiatedText
 	TX_BLINK
 	TX_ASM
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 16

@@ -1,18 +1,3 @@
-
-StopAllMusic: MACRO
-	ld a, $ff
-	call PlaySound
-ENDM
-
-Ch1    EQU 0
-Ch2    EQU 1
-Ch3    EQU 2
-Ch4    EQU 3
-Ch5    EQU 4
-Ch6    EQU 5
-Ch7    EQU 6
-Ch8    EQU 7
-
 audio_header: MACRO
 	db (_NARG - 2) << 6 | \2
 	dw \1_\2
@@ -72,19 +57,6 @@ noise_note: MACRO
 	ENDC
 	db \4
 ENDM
-
-C_ EQU $0
-C# EQU $1
-D_ EQU $2
-D# EQU $3
-E_ EQU $4
-F_ EQU $5
-F# EQU $6
-G_ EQU $7
-G# EQU $8
-A_ EQU $9
-A# EQU $A
-B_ EQU $B
 
 ; arguments: pitch, length [1, 16]
 note: MACRO
