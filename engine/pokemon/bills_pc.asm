@@ -376,6 +376,7 @@ KnowsHMMove::
 	and a
 	ret
 
+HMMoveArray:
 INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
