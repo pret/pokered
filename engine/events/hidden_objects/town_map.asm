@@ -1,7 +1,7 @@
 TownMapText::
-	TX_FAR _TownMapText
-	TX_BLINK
-	TX_ASM
+	text_far _TownMapText
+	text_promptbutton
+	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd730

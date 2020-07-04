@@ -89,7 +89,7 @@ SomeonesPCText:   db "SOMEONE's PC@"
 BillsPCText:      db "BILL's PC@"
 PlayersPCText:    db "'s PC@"
 OaksPCText:       db "PROF.OAK's PC@"
-PKMNLeaguePCText: db "<pkmn>LEAGUE@"
+PKMNLeaguePCText: db "<PKMN>LEAGUE@"
 LogOffPCText:     db "LOG OFF@"
 
 BillsPC_::
@@ -339,9 +339,9 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW <pkmn>"
-	next "DEPOSIT <pkmn>"
-	next "RELEASE <pkmn>"
+	db   "WITHDRAW <PKMN>"
+	next "DEPOSIT <PKMN>"
+	next "RELEASE <PKMN>"
 	next "CHANGE BOX"
 	next "SEE YA!"
 	db "@"
@@ -453,52 +453,52 @@ StatsCancelPCText:
 	next "CANCEL@"
 
 SwitchOnText:
-	TX_FAR _SwitchOnText
-	db "@"
+	text_far _SwitchOnText
+	text_end
 
 WhatText:
-	TX_FAR _WhatText
-	db "@"
+	text_far _WhatText
+	text_end
 
 DepositWhichMonText:
-	TX_FAR _DepositWhichMonText
-	db "@"
+	text_far _DepositWhichMonText
+	text_end
 
 MonWasStoredText:
-	TX_FAR _MonWasStoredText
-	db "@"
+	text_far _MonWasStoredText
+	text_end
 
 CantDepositLastMonText:
-	TX_FAR _CantDepositLastMonText
-	db "@"
+	text_far _CantDepositLastMonText
+	text_end
 
 BoxFullText:
-	TX_FAR _BoxFullText
-	db "@"
+	text_far _BoxFullText
+	text_end
 
 MonIsTakenOutText:
-	TX_FAR _MonIsTakenOutText
-	db "@"
+	text_far _MonIsTakenOutText
+	text_end
 
 NoMonText:
-	TX_FAR _NoMonText
-	db "@"
+	text_far _NoMonText
+	text_end
 
 CantTakeMonText:
-	TX_FAR _CantTakeMonText
-	db "@"
+	text_far _CantTakeMonText
+	text_end
 
 ReleaseWhichMonText:
-	TX_FAR _ReleaseWhichMonText
-	db "@"
+	text_far _ReleaseWhichMonText
+	text_end
 
 OnceReleasedText:
-	TX_FAR _OnceReleasedText
-	db "@"
+	text_far _OnceReleasedText
+	text_end
 
 MonWasReleasedText:
-	TX_FAR _MonWasReleasedText
-	db "@"
+	text_far _MonWasReleasedText
+	text_end
 
 CableClubLeftGameboy::
 	ld a, [hSerialConnectionStatus]
@@ -535,8 +535,8 @@ CableClubRightGameboy::
 	tx_pre_jump JustAMomentText
 
 JustAMomentText::
-	TX_FAR _JustAMomentText
-	db "@"
+	text_far _JustAMomentText
+	text_end
 
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
@@ -545,5 +545,5 @@ JustAMomentText::
 	tx_pre_jump OpenBillsPCText
 
 OpenBillsPCText::
-	TX_BILLS_PC
+	script_bills_pc
 

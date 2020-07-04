@@ -108,167 +108,167 @@ Route8TrainerHeader8:
 	db $ff
 
 Route8Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText1:
-	TX_FAR _Route8BattleText1
-	db "@"
+	text_far _Route8BattleText1
+	text_end
 
 Route8EndBattleText1:
-	TX_FAR _Route8EndBattleText1
-	db "@"
+	text_far _Route8EndBattleText1
+	text_end
 
 Route8AfterBattleText1:
-	TX_FAR _Route8AfterBattleText1
-	db "@"
+	text_far _Route8AfterBattleText1
+	text_end
 
 Route8Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText2:
-	TX_FAR _Route8BattleText2
-	db "@"
+	text_far _Route8BattleText2
+	text_end
 
 Route8EndBattleText2:
-	TX_FAR _Route8EndBattleText2
-	db "@"
+	text_far _Route8EndBattleText2
+	text_end
 
 Route8AfterBattleText2:
-	TX_FAR _Route8AfterBattleText2
-	db "@"
+	text_far _Route8AfterBattleText2
+	text_end
 
 Route8Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText3:
-	TX_FAR _Route8BattleText3
-	db "@"
+	text_far _Route8BattleText3
+	text_end
 
 Route8EndBattleText3:
-	TX_FAR _Route8EndBattleText3
-	db "@"
+	text_far _Route8EndBattleText3
+	text_end
 
 Route8AfterBattleText3:
-	TX_FAR _Route8AfterBattleText3
-	db "@"
+	text_far _Route8AfterBattleText3
+	text_end
 
 Route8Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText4:
-	TX_FAR _Route8BattleText4
-	db "@"
+	text_far _Route8BattleText4
+	text_end
 
 Route8EndBattleText4:
-	TX_FAR _Route8EndBattleText4
-	db "@"
+	text_far _Route8EndBattleText4
+	text_end
 
 Route8AfterBattleText4:
-	TX_FAR _Route8AfterBattleText4
-	db "@"
+	text_far _Route8AfterBattleText4
+	text_end
 
 Route8Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText5:
-	TX_FAR _Route8BattleText5
-	db "@"
+	text_far _Route8BattleText5
+	text_end
 
 Route8EndBattleText5:
-	TX_FAR _Route8EndBattleText5
-	db "@"
+	text_far _Route8EndBattleText5
+	text_end
 
 Route8AfterBattleText5:
-	TX_FAR _Route8AfterBattleText5
-	db "@"
+	text_far _Route8AfterBattleText5
+	text_end
 
 Route8Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText6:
-	TX_FAR _Route8BattleText6
-	db "@"
+	text_far _Route8BattleText6
+	text_end
 
 Route8EndBattleText6:
-	TX_FAR _Route8EndBattleText6
-	db "@"
+	text_far _Route8EndBattleText6
+	text_end
 
 Route8AfterBattleText6:
-	TX_FAR _Route8AfterBattleText6
-	db "@"
+	text_far _Route8AfterBattleText6
+	text_end
 
 Route8Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText7:
-	TX_FAR _Route8BattleText7
-	db "@"
+	text_far _Route8BattleText7
+	text_end
 
 Route8EndBattleText7:
-	TX_FAR _Route8EndBattleText7
-	db "@"
+	text_far _Route8EndBattleText7
+	text_end
 
 Route8AfterBattleText7:
-	TX_FAR _Route8AfterBattleText7
-	db "@"
+	text_far _Route8AfterBattleText7
+	text_end
 
 Route8Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText8:
-	TX_FAR _Route8BattleText8
-	db "@"
+	text_far _Route8BattleText8
+	text_end
 
 Route8EndBattleText8:
-	TX_FAR _Route8EndBattleText8
-	db "@"
+	text_far _Route8EndBattleText8
+	text_end
 
 Route8AfterBattleText8:
-	TX_FAR _Route8AfterBattleText8
-	db "@"
+	text_far _Route8AfterBattleText8
+	text_end
 
 Route8Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route8TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route8BattleText9:
-	TX_FAR _Route8BattleText9
-	db "@"
+	text_far _Route8BattleText9
+	text_end
 
 Route8EndBattleText9:
-	TX_FAR _Route8EndBattleText9
-	db "@"
+	text_far _Route8EndBattleText9
+	text_end
 
 Route8AfterBattleText9:
-	TX_FAR _Route8AfterBattleText9
-	db "@"
+	text_far _Route8AfterBattleText9
+	text_end
 
 Route8Text10:
-	TX_FAR _Route8Text10
-	db "@"
+	text_far _Route8Text10
+	text_end

@@ -39,7 +39,7 @@ Museum1F_TextPointers:
 	dw Museum1FText5
 
 Museum1FText1:
-	TX_ASM
+	text_asm
 	ld a, [wYCoord]
 	cp $4
 	jr nz, .asm_8774b
@@ -140,53 +140,53 @@ Museum1FScriptEnd:
 	jp TextScriptEnd
 
 Museum1FText_5c21a:
-	TX_FAR _Museum1FText_5c21a
-	db "@"
+	text_far _Museum1FText_5c21a
+	text_end
 
 Museum1FText_5c21f:
-	TX_FAR _Museum1FText_5c21f
-	db "@"
+	text_far _Museum1FText_5c21f
+	text_end
 
 Museum1FText_5c224:
-	TX_FAR _Museum1FText_5c224
-	db "@"
+	text_far _Museum1FText_5c224
+	text_end
 
 Museum1FText_5c229:
-	TX_FAR _Museum1FText_5c229
-	db "@"
+	text_far _Museum1FText_5c229
+	text_end
 
 Museum1FText_5c22e:
-	TX_FAR _Museum1FText_5c22e
-	db "@"
+	text_far _Museum1FText_5c22e
+	text_end
 
 Museum1FText_5c233:
-	TX_FAR _Museum1FText_5c233
-	db "@"
+	text_far _Museum1FText_5c233
+	text_end
 
 Museum1FText_5c238:
-	TX_FAR _Museum1FText_5c238
-	db "@"
+	text_far _Museum1FText_5c238
+	text_end
 
 Museum1FText_5c23d:
-	TX_FAR _Museum1FText_5c23d
-	db "@"
+	text_far _Museum1FText_5c23d
+	text_end
 
 Museum1FText_5c242:
-	TX_FAR _Museum1FText_5c242
-	db "@"
+	text_far _Museum1FText_5c242
+	text_end
 
 Museum1FText2:
-	TX_ASM
+	text_asm
 	ld hl, Museum1FText_5c251
 	call PrintText
 	jp TextScriptEnd
 
 Museum1FText_5c251:
-	TX_FAR _Museum1FText_5c251
-	db "@"
+	text_far _Museum1FText_5c251
+	text_end
 
 Museum1FText3:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_OLD_AMBER
 	jr nz, .asm_5c285
 	ld hl, Museum1FText_5c28e
@@ -210,38 +210,38 @@ Museum1FText3:
 	jp TextScriptEnd
 
 Museum1FText_5c28e:
-	TX_FAR _Museum1FText_5c28e
-	db "@"
+	text_far _Museum1FText_5c28e
+	text_end
 
 ReceivedOldAmberText:
-	TX_FAR _ReceivedOldAmberText
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedOldAmberText
+	sound_get_item_1
+	text_end
 
 Museum1FText_5c299:
-	TX_FAR _Museum1FText_5c299
-	db "@"
+	text_far _Museum1FText_5c299
+	text_end
 
 Museum1FText_5c29e:
-	TX_FAR _Museum1FText_5c29e
-	db "@"
+	text_far _Museum1FText_5c29e
+	text_end
 
 Museum1FText4:
-	TX_ASM
+	text_asm
 	ld hl, Museum1FText_5c2ad
 	call PrintText
 	jp TextScriptEnd
 
 Museum1FText_5c2ad:
-	TX_FAR _Museum1FText_5c2ad
-	db "@"
+	text_far _Museum1FText_5c2ad
+	text_end
 
 Museum1FText5:
-	TX_ASM
+	text_asm
 	ld hl, Museum1FText_5c2bc
 	call PrintText
 	jp TextScriptEnd
 
 Museum1FText_5c2bc:
-	TX_FAR _Museum1FText_5c2bc
-	db "@"
+	text_far _Museum1FText_5c2bc
+	text_end

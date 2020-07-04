@@ -158,7 +158,7 @@ PalletTown_TextPointers:
 	dw PalletTownText7
 
 PalletTownText1:
-	TX_ASM
+	text_asm
 	ld a, [wcf0d]
 	and a
 	jr nz, .next
@@ -173,8 +173,8 @@ PalletTownText1:
 	jp TextScriptEnd
 
 OakAppearsText:
-	TX_FAR _OakAppearsText
-	TX_ASM
+	text_far _OakAppearsText
+	text_asm
 	ld c, 10
 	call DelayFrames
 	xor a
@@ -186,29 +186,29 @@ OakAppearsText:
 	jp TextScriptEnd
 
 OakWalksUpText:
-	TX_FAR _OakWalksUpText
-	db "@"
+	text_far _OakWalksUpText
+	text_end
 
 PalletTownText2: ; girl
-	TX_FAR _PalletTownText2
-	db "@"
+	text_far _PalletTownText2
+	text_end
 
 PalletTownText3: ; fat man
-	TX_FAR _PalletTownText3
-	db "@"
+	text_far _PalletTownText3
+	text_end
 
 PalletTownText4: ; sign by lab
-	TX_FAR _PalletTownText4
-	db "@"
+	text_far _PalletTownText4
+	text_end
 
 PalletTownText5: ; sign by fence
-	TX_FAR _PalletTownText5
-	db "@"
+	text_far _PalletTownText5
+	text_end
 
 PalletTownText6: ; sign by Red’s house
-	TX_FAR _PalletTownText6
-	db "@"
+	text_far _PalletTownText6
+	text_end
 
 PalletTownText7: ; sign by Blue’s house
-	TX_FAR _PalletTownText7
-	db "@"
+	text_far _PalletTownText7
+	text_end

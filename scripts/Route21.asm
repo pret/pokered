@@ -107,163 +107,163 @@ Route21TrainerHeader8:
 	db $ff
 
 Route21Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route21TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route21BattleText1:
-	TX_FAR _Route21BattleText1
-	db "@"
+	text_far _Route21BattleText1
+	text_end
 
 Route21EndBattleText1:
-	TX_FAR _Route21EndBattleText1
-	db "@"
+	text_far _Route21EndBattleText1
+	text_end
 
 Route21AfterBattleText1:
-	TX_FAR _Route21AfterBattleText1
-	db "@"
+	text_far _Route21AfterBattleText1
+	text_end
 
 Route21BattleText2:
-	TX_FAR _Route21BattleText2
-	db "@"
+	text_far _Route21BattleText2
+	text_end
 
 Route21EndBattleText2:
-	TX_FAR _Route21EndBattleText2
-	db "@"
+	text_far _Route21EndBattleText2
+	text_end
 
 Route21AfterBattleText2:
-	TX_FAR _Route21AfterBattleText2
-	db "@"
+	text_far _Route21AfterBattleText2
+	text_end
 
 Route21BattleText3:
-	TX_FAR _Route21BattleText3
-	db "@"
+	text_far _Route21BattleText3
+	text_end
 
 Route21EndBattleText3:
-	TX_FAR _Route21EndBattleText3
-	db "@"
+	text_far _Route21EndBattleText3
+	text_end
 
 Route21AfterBattleText3:
-	TX_FAR _Route21AfterBattleText3
-	db "@"
+	text_far _Route21AfterBattleText3
+	text_end
 
 Route21BattleText4:
-	TX_FAR _Route21BattleText4
-	db "@"
+	text_far _Route21BattleText4
+	text_end
 
 Route21EndBattleText4:
-	TX_FAR _Route21EndBattleText4
-	db "@"
+	text_far _Route21EndBattleText4
+	text_end
 
 Route21AfterBattleText4:
-	TX_FAR _Route21AfterBattleText4
-	db "@"
+	text_far _Route21AfterBattleText4
+	text_end
 
 Route21BattleText5:
-	TX_FAR _Route21BattleText5
-	db "@"
+	text_far _Route21BattleText5
+	text_end
 
 Route21EndBattleText5:
-	TX_FAR _Route21EndBattleText5
-	db "@"
+	text_far _Route21EndBattleText5
+	text_end
 
 Route21AfterBattleText5:
-	TX_FAR _Route21AfterBattleText5
-	db "@"
+	text_far _Route21AfterBattleText5
+	text_end
 
 Route21BattleText6:
-	TX_FAR _Route21BattleText6
-	db "@"
+	text_far _Route21BattleText6
+	text_end
 
 Route21EndBattleText6:
-	TX_FAR _Route21EndBattleText6
-	db "@"
+	text_far _Route21EndBattleText6
+	text_end
 
 Route21AfterBattleText6:
-	TX_FAR _Route21AfterBattleText6
-	db "@"
+	text_far _Route21AfterBattleText6
+	text_end
 
 Route21BattleText7:
-	TX_FAR _Route21BattleText7
-	db "@"
+	text_far _Route21BattleText7
+	text_end
 
 Route21EndBattleText7:
-	TX_FAR _Route21EndBattleText7
-	db "@"
+	text_far _Route21EndBattleText7
+	text_end
 
 Route21AfterBattleText7:
-	TX_FAR _Route21AfterBattleText7
-	db "@"
+	text_far _Route21AfterBattleText7
+	text_end
 
 Route21BattleText8:
-	TX_FAR _Route21BattleText8
-	db "@"
+	text_far _Route21BattleText8
+	text_end
 
 Route21EndBattleText8:
-	TX_FAR _Route21EndBattleText8
-	db "@"
+	text_far _Route21EndBattleText8
+	text_end
 
 Route21AfterBattleText8:
-	TX_FAR _Route21AfterBattleText8
-	db "@"
+	text_far _Route21AfterBattleText8
+	text_end
 
 Route21BattleText9:
-	TX_FAR _Route21BattleText9
-	db "@"
+	text_far _Route21BattleText9
+	text_end
 
 Route21EndBattleText9:
-	TX_FAR _Route21EndBattleText9
-	db "@"
+	text_far _Route21EndBattleText9
+	text_end
 
 Route21AfterBattleText9:
-	TX_FAR _Route21AfterBattleText9
-	db "@"
+	text_far _Route21AfterBattleText9
+	text_end

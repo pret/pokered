@@ -7,7 +7,7 @@ Route1_TextPointers:
 	dw Route1Text3
 
 Route1Text1:
-	TX_ASM
+	text_asm
 	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
 	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
@@ -27,26 +27,26 @@ Route1Text1:
 	jp TextScriptEnd
 
 Route1ViridianMartSampleText:
-	TX_FAR _Route1ViridianMartSampleText
-	db "@"
+	text_far _Route1ViridianMartSampleText
+	text_end
 
 Route1Text_1cae8:
-	TX_FAR _Route1Text_1cae8
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _Route1Text_1cae8
+	sound_get_item_1
+	text_end
 
 Route1Text_1caee:
-	TX_FAR _Route1Text_1caee
-	db "@"
+	text_far _Route1Text_1caee
+	text_end
 
 Route1Text_1caf3:
-	TX_FAR _Route1Text_1caf3
-	db "@"
+	text_far _Route1Text_1caf3
+	text_end
 
 Route1Text2:
-	TX_FAR _Route1Text2
-	db "@"
+	text_far _Route1Text2
+	text_end
 
 Route1Text3:
-	TX_FAR _Route1Text3
-	db "@"
+	text_far _Route1Text3
+	text_end

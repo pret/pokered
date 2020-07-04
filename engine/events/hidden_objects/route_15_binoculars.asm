@@ -10,5 +10,5 @@ Route15GateLeftBinoculars:
 	jp DisplayMonFrontSpriteInBox
 
 Route15UpstairsBinocularsText::
-	TX_FAR _Route15UpstairsBinocularsText
-	db "@"
+	text_far _Route15UpstairsBinocularsText
+	text_end

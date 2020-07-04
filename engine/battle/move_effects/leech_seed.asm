@@ -32,9 +32,9 @@ LeechSeedEffect_:
 	jp PrintText
 
 WasSeededText:
-	TX_FAR _WasSeededText
-	db "@"
+	text_far _WasSeededText
+	text_end
 
 EvadedAttackText:
-	TX_FAR _EvadedAttackText
-	db "@"
+	text_far _EvadedAttackText
+	text_end

@@ -1,5 +1,6 @@
 _ArticunoBattleText::
-	text "Gyaoo!@@"
+	text "Gyaoo!@"
+	text_end
 
 _SeafoamIslands5Text4::
 	text "Boulders might"

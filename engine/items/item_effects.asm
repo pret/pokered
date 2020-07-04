@@ -586,47 +586,47 @@ ItemUseBall:
 ItemUseBallText00:
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
-	TX_FAR _ItemUseBallText00
-	db "@"
+	text_far _ItemUseBallText00
+	text_end
 ItemUseBallText01:
 ;"You missed the pokemon!"
-	TX_FAR _ItemUseBallText01
-	db "@"
+	text_far _ItemUseBallText01
+	text_end
 ItemUseBallText02:
 ;"Darn! The pokemon broke free!"
-	TX_FAR _ItemUseBallText02
-	db "@"
+	text_far _ItemUseBallText02
+	text_end
 ItemUseBallText03:
 ;"Aww! It appeared to be caught!"
-	TX_FAR _ItemUseBallText03
-	db "@"
+	text_far _ItemUseBallText03
+	text_end
 ItemUseBallText04:
 ;"Shoot! It was so close too!"
-	TX_FAR _ItemUseBallText04
-	db "@"
+	text_far _ItemUseBallText04
+	text_end
 ItemUseBallText05:
 ;"All right! {MonName} was caught!"
 ;play sound
-	TX_FAR _ItemUseBallText05
-	TX_SFX_CAUGHT_MON
-	TX_BLINK
-	db "@"
+	text_far _ItemUseBallText05
+	sound_caught_mon
+	text_promptbutton
+	text_end
 ItemUseBallText07:
 ;"X was transferred to Bill's PC"
-	TX_FAR _ItemUseBallText07
-	db "@"
+	text_far _ItemUseBallText07
+	text_end
 ItemUseBallText08:
 ;"X was transferred to someone's PC"
-	TX_FAR _ItemUseBallText08
-	db "@"
+	text_far _ItemUseBallText08
+	text_end
 
 ItemUseBallText06:
 ;"New DEX data will be added..."
 ;play sound
-	TX_FAR _ItemUseBallText06
-	TX_SFX_DEX_PAGE_ADDED
-	TX_BLINK
-	db "@"
+	text_far _ItemUseBallText06
+	sound_dex_page_added
+	text_promptbutton
+	text_end
 
 ItemUseTownMap:
 	ld a, [wIsInBattle]
@@ -745,12 +745,12 @@ ItemUseSurfboard:
 	ret
 
 SurfingGotOnText:
-	TX_FAR _SurfingGotOnText
-	db "@"
+	text_far _SurfingGotOnText
+	text_end
 
 SurfingNoPlaceToGetOffText:
-	TX_FAR _SurfingNoPlaceToGetOffText
-	db "@"
+	text_far _SurfingNoPlaceToGetOffText
+	text_end
 
 ItemUsePokedex:
 	predef_jump ShowPokedexMenu
@@ -1417,12 +1417,12 @@ ItemUseMedicine:
 	jp RemoveUsedItem
 
 VitaminStatRoseText:
-	TX_FAR _VitaminStatRoseText
-	db "@"
+	text_far _VitaminStatRoseText
+	text_end
 
 VitaminNoEffectText:
-	TX_FAR _VitaminNoEffectText
-	db "@"
+	text_far _VitaminNoEffectText
+	text_end
 
 VitaminText:
 	db "HEALTH@"
@@ -1479,12 +1479,12 @@ BaitRockCommon:
 	jp DelayFrames
 
 ThrewBaitText:
-	TX_FAR _ThrewBaitText
-	db "@"
+	text_far _ThrewBaitText
+	text_end
 
 ThrewRockText:
-	TX_FAR _ThrewRockText
-	db "@"
+	text_far _ThrewRockText
+	text_end
 
 ; also used for Dig out-of-battle effect
 ItemUseEscapeRope:
@@ -1829,17 +1829,17 @@ Route16SnorlaxFluteCoords:
 	db $ff ; terminator
 
 PlayedFluteNoEffectText:
-	TX_FAR _PlayedFluteNoEffectText
-	db "@"
+	text_far _PlayedFluteNoEffectText
+	text_end
 
 FluteWokeUpText:
-	TX_FAR _FluteWokeUpText
-	db "@"
+	text_far _FluteWokeUpText
+	text_end
 
 PlayedFluteHadEffectText:
-	TX_FAR _PlayedFluteHadEffectText
-	TX_BLINK
-	TX_ASM
+	text_far _PlayedFluteHadEffectText
+	text_promptbutton
+	text_asm
 	ld a, [wIsInBattle]
 	and a
 	jr nz, .done
@@ -1865,8 +1865,8 @@ ItemUseCoinCase:
 	jp PrintText
 
 CoinCaseNumCoinsText:
-	TX_FAR _CoinCaseNumCoinsText
-	db "@"
+	text_far _CoinCaseNumCoinsText
+	text_end
 
 ItemUseOldRod:
 	call FishingInit
@@ -1984,12 +1984,12 @@ ItemUseItemfinder:
 	jp PrintText
 
 ItemfinderFoundItemText:
-	TX_FAR _ItemfinderFoundItemText
-	db "@"
+	text_far _ItemfinderFoundItemText
+	text_end
 
 ItemfinderFoundNothingText:
-	TX_FAR _ItemfinderFoundNothingText
-	db "@"
+	text_far _ItemfinderFoundNothingText
+	text_end
 
 ItemUsePPUp:
 	ld a, [wIsInBattle]
@@ -2173,24 +2173,24 @@ ItemUsePPRestore:
 	ret
 
 RaisePPWhichTechniqueText:
-	TX_FAR _RaisePPWhichTechniqueText
-	db "@"
+	text_far _RaisePPWhichTechniqueText
+	text_end
 
 RestorePPWhichTechniqueText:
-	TX_FAR _RestorePPWhichTechniqueText
-	db "@"
+	text_far _RestorePPWhichTechniqueText
+	text_end
 
 PPMaxedOutText:
-	TX_FAR _PPMaxedOutText
-	db "@"
+	text_far _PPMaxedOutText
+	text_end
 
 PPIncreasedText:
-	TX_FAR _PPIncreasedText
-	db "@"
+	text_far _PPIncreasedText
+	text_end
 
 PPRestoredText:
-	TX_FAR _PPRestoredText
-	db "@"
+	text_far _PPRestoredText
+	text_end
 
 ; for items that can't be used from the Item menu
 UnusableItem:
@@ -2294,20 +2294,20 @@ ItemUseTMHM:
 	jp RemoveUsedItem
 
 BootedUpTMText:
-	TX_FAR _BootedUpTMText
-	db "@"
+	text_far _BootedUpTMText
+	text_end
 
 BootedUpHMText:
-	TX_FAR _BootedUpHMText
-	db "@"
+	text_far _BootedUpHMText
+	text_end
 
 TeachMachineMoveText:
-	TX_FAR _TeachMachineMoveText
-	db "@"
+	text_far _TeachMachineMoveText
+	text_end
 
 MonCannotLearnMachineMoveText:
-	TX_FAR _MonCannotLearnMachineMoveText
-	db "@"
+	text_far _MonCannotLearnMachineMoveText
+	text_end
 
 PrintItemUseTextAndRemoveItem:
 	ld hl, ItemUseText00
@@ -2364,54 +2364,54 @@ ItemUseFailed:
 	jp PrintText
 
 ItemUseNotTimeText:
-	TX_FAR _ItemUseNotTimeText
-	db "@"
+	text_far _ItemUseNotTimeText
+	text_end
 
 ItemUseNotYoursToUseText:
-	TX_FAR _ItemUseNotYoursToUseText
-	db "@"
+	text_far _ItemUseNotYoursToUseText
+	text_end
 
 ItemUseNoEffectText:
-	TX_FAR _ItemUseNoEffectText
-	db "@"
+	text_far _ItemUseNoEffectText
+	text_end
 
 ThrowBallAtTrainerMonText1:
-	TX_FAR _ThrowBallAtTrainerMonText1
-	db "@"
+	text_far _ThrowBallAtTrainerMonText1
+	text_end
 
 ThrowBallAtTrainerMonText2:
-	TX_FAR _ThrowBallAtTrainerMonText2
-	db "@"
+	text_far _ThrowBallAtTrainerMonText2
+	text_end
 
 NoCyclingAllowedHereText:
-	TX_FAR _NoCyclingAllowedHereText
-	db "@"
+	text_far _NoCyclingAllowedHereText
+	text_end
 
 NoSurfingHereText:
-	TX_FAR _NoSurfingHereText
-	db "@"
+	text_far _NoSurfingHereText
+	text_end
 
 BoxFullCannotThrowBallText:
-	TX_FAR _BoxFullCannotThrowBallText
-	db "@"
+	text_far _BoxFullCannotThrowBallText
+	text_end
 
 ItemUseText00:
-	TX_FAR _ItemUseText001
-	TX_LINE
-	TX_FAR _ItemUseText002
-	db "@"
+	text_far _ItemUseText001
+	text_low
+	text_far _ItemUseText002
+	text_end
 
 GotOnBicycleText:
-	TX_FAR _GotOnBicycleText1
-	TX_LINE
-	TX_FAR _GotOnBicycleText2
-	db "@"
+	text_far _GotOnBicycleText1
+	text_low
+	text_far _GotOnBicycleText2
+	text_end
 
 GotOffBicycleText:
-	TX_FAR _GotOffBicycleText1
-	TX_LINE
-	TX_FAR _GotOffBicycleText2
-	db "@"
+	text_far _GotOffBicycleText1
+	text_low
+	text_far _GotOffBicycleText2
+	text_end
 
 ; restores bonus PP (from PP Ups) when healing at a pokemon center
 ; also, when a PP Up is used, it increases the current PP by one PP Up bonus
@@ -2639,16 +2639,16 @@ TossItem_::
 	ret
 
 ThrewAwayItemText:
-	TX_FAR _ThrewAwayItemText
-	db "@"
+	text_far _ThrewAwayItemText
+	text_end
 
 IsItOKToTossItemText:
-	TX_FAR _IsItOKToTossItemText
-	db "@"
+	text_far _IsItOKToTossItemText
+	text_end
 
 TooImportantToTossText:
-	TX_FAR _TooImportantToTossText
-	db "@"
+	text_far _TooImportantToTossText
+	text_end
 
 ; checks if an item is a key item
 ; INPUT:

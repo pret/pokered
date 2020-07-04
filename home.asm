@@ -175,7 +175,7 @@ FadeOutAudio::
 	ld [wNewSoundID], a
 	jp PlaySound
 
-INCLUDE "home/predef_text.asm"
+INCLUDE "home/text_script.asm"
 INCLUDE "home/start_menu.asm"
 
 ; function to count how many bits are set in a string of bytes
@@ -456,19 +456,19 @@ DecodeArrowMovementRLE::
 	inc hl
 	jr DecodeArrowMovementRLE
 
-FuncTX_ItemStoragePC::
+TextScript_ItemStoragePC::
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(PlayerPC)
 	ld hl, PlayerPC
 	jr bankswitchAndContinue
 
-FuncTX_BillsPC::
+TextScript_BillsPC::
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(BillsPC_)
 	ld hl, BillsPC_
 	jr bankswitchAndContinue
 
-FuncTX_GameCornerPrizeMenu::
+TextScript_GameCornerPrizeMenu::
 ; XXX find a better name for this function
 ; special_F7
 	ld b, BANK(CeladonPrizeMenu)
@@ -477,7 +477,7 @@ bankswitchAndContinue::
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-FuncTX_PokemonCenterPC::
+TextScript_PokemonCenterPC::
 	ld b, BANK(ActivatePC)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue

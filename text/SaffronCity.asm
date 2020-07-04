@@ -65,7 +65,8 @@ _SaffronCityText11::
 	done
 
 _SaffronCityText12::
-	text "PIDGEOT: Bi bibii!@@"
+	text "PIDGEOT: Bi bibii!@"
+	text_end
 
 _SaffronCityText13::
 	text "I saw ROCKET"

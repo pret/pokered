@@ -12,12 +12,12 @@ RockTunnelHealNurseText:
 	db $ff
 
 RockTunnelPokecenterText2:
-	TX_FAR _RockTunnelPokecenterText2
-	db "@"
+	text_far _RockTunnelPokecenterText2
+	text_end
 
 RockTunnelPokecenterText3:
-	TX_FAR _RockTunnelPokecenterText3
-	db "@"
+	text_far _RockTunnelPokecenterText3
+	text_end
 
 RockTunnelTradeNurseText:
 	db $f6

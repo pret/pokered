@@ -762,7 +762,7 @@ OaksLab_TextPointers2:
 	dw OaksLabText11
 
 OaksLabText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	jr nz, .beforeChooseMon
 	ld hl, OaksLabGaryText1
@@ -781,19 +781,19 @@ OaksLabText1:
 	jp TextScriptEnd
 
 OaksLabGaryText1:
-	TX_FAR _OaksLabGaryText1
-	db "@"
+	text_far _OaksLabGaryText1
+	text_end
 
 OaksLabText40:
-	TX_FAR _OaksLabText40
-	db "@"
+	text_far _OaksLabText40
+	text_end
 
 OaksLabText41:
-	TX_FAR _OaksLabText41
-	db "@"
+	text_far _OaksLabText41
+	text_end
 
 OaksLabText2:
-	TX_ASM
+	text_asm
 	ld a, STARTER2
 	ld [wRivalStarterTemp], a
 	ld a, $3
@@ -803,7 +803,7 @@ OaksLabText2:
 	jr OaksLabScript_1d133
 
 OaksLabText3:
-	TX_ASM
+	text_asm
 	ld a, STARTER3
 	ld [wRivalStarterTemp], a
 	ld a, $4
@@ -813,7 +813,7 @@ OaksLabText3:
 	jr OaksLabScript_1d133
 
 OaksLabText4:
-	TX_ASM
+	text_asm
 	ld a, STARTER1
 	ld [wRivalStarterTemp], a
 	ld a, $2
@@ -835,8 +835,8 @@ OaksLabScript_1d133:
 	jp TextScriptEnd
 
 OaksLabText39:
-	TX_FAR _OaksLabText39
-	db "@"
+	text_far _OaksLabText39
+	text_end
 
 OaksLabScript_1d157:
 	ld a, $5
@@ -870,22 +870,22 @@ OaksLabLookAtCharmander:
 	ld hl, OaksLabCharmanderText
 	jr OaksLabMonChoiceMenu
 OaksLabCharmanderText:
-	TX_FAR _OaksLabCharmanderText
-	db "@"
+	text_far _OaksLabCharmanderText
+	text_end
 
 OaksLabLookAtSquirtle:
 	ld hl, OaksLabSquirtleText
 	jr OaksLabMonChoiceMenu
 OaksLabSquirtleText:
-	TX_FAR _OaksLabSquirtleText
-	db "@"
+	text_far _OaksLabSquirtleText
+	text_end
 
 OaksLabLookAtBulbasaur:
 	ld hl, OaksLabBulbasaurText
 	jr OaksLabMonChoiceMenu
 OaksLabBulbasaurText:
-	TX_FAR _OaksLabBulbasaurText
-	db "@"
+	text_far _OaksLabBulbasaurText
+	text_end
 
 OaksLabMonChoiceMenu:
 	call PrintText
@@ -937,13 +937,13 @@ OaksLabMonChoiceEnd:
 	jp TextScriptEnd
 
 OaksLabMonEnergeticText:
-	TX_FAR _OaksLabMonEnergeticText
-	db "@"
+	text_far _OaksLabMonEnergeticText
+	text_end
 
 OaksLabReceivedMonText:
-	TX_FAR _OaksLabReceivedMonText
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _OaksLabReceivedMonText
+	sound_get_key_item
+	text_end
 
 OaksLabScript_1d22d:
 	ld a, $5
@@ -957,12 +957,12 @@ OaksLabScript_1d22d:
 	jp TextScriptEnd
 
 OaksLabLastMonText:
-	TX_FAR _OaksLabLastMonText
-	db "@"
+	text_far _OaksLabLastMonText
+	text_end
 
 OaksLabText32:
 OaksLabText5:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 	jr nz, .asm_1d266
 	ld hl, wPokedexOwned
@@ -1033,201 +1033,201 @@ OaksLabText5:
 	jp TextScriptEnd
 
 OaksLabText_1d2f0:
-	TX_FAR _OaksLabText_1d2f0
-	db "@"
+	text_far _OaksLabText_1d2f0
+	text_end
 
 OaksLabText_1d2f5:
-	TX_FAR _OaksLabText_1d2f5
-	db "@"
+	text_far _OaksLabText_1d2f5
+	text_end
 
 OaksLabText_1d2fa:
-	TX_FAR _OaksLabText_1d2fa
-	db "@"
+	text_far _OaksLabText_1d2fa
+	text_end
 
 OaksLabDeliverParcelText:
-	TX_FAR _OaksLabDeliverParcelText1
-	TX_SFX_KEY_ITEM
-	TX_FAR _OaksLabDeliverParcelText2
-	db "@"
+	text_far _OaksLabDeliverParcelText1
+	sound_get_key_item
+	text_far _OaksLabDeliverParcelText2
+	text_end
 
 OaksLabAroundWorldText:
-	TX_FAR _OaksLabAroundWorldText
-	db "@"
+	text_far _OaksLabAroundWorldText
+	text_end
 
 OaksLabGivePokeballsText:
-	TX_FAR _OaksLabGivePokeballsText1
-	TX_SFX_KEY_ITEM
-	TX_FAR _OaksLabGivePokeballsText2
-	db "@"
+	text_far _OaksLabGivePokeballsText1
+	sound_get_key_item
+	text_far _OaksLabGivePokeballsText2
+	text_end
 
 OaksLabPleaseVisitText:
-	TX_FAR _OaksLabPleaseVisitText
-	db "@"
+	text_far _OaksLabPleaseVisitText
+	text_end
 
 OaksLabText_1d31d:
-	TX_FAR _OaksLabText_1d31d
-	db "@"
+	text_far _OaksLabText_1d31d
+	text_end
 
 OaksLabText7:
 OaksLabText6:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabText_1d32c
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabText_1d32c:
-	TX_FAR _OaksLabText_1d32c
-	db "@"
+	text_far _OaksLabText_1d32c
+	text_end
 
 OaksLabText8:
-	TX_FAR _OaksLabText8
-	db "@"
+	text_far _OaksLabText8
+	text_end
 
 OaksLabText9:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabText_1d340
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabText_1d340:
-	TX_FAR _OaksLabText_1d340
-	db "@"
+	text_far _OaksLabText_1d340
+	text_end
 
 OaksLabText17:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalWaitingText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalWaitingText:
-	TX_FAR _OaksLabRivalWaitingText
-	db "@"
+	text_far _OaksLabRivalWaitingText
+	text_end
 
 OaksLabText18:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabChooseMonText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabChooseMonText:
-	TX_FAR _OaksLabChooseMonText
-	db "@"
+	text_far _OaksLabChooseMonText
+	text_end
 
 OaksLabText19:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalInterjectionText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalInterjectionText:
-	TX_FAR _OaksLabRivalInterjectionText
-	db "@"
+	text_far _OaksLabRivalInterjectionText
+	text_end
 
 OaksLabText20:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabBePatientText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabBePatientText:
-	TX_FAR _OaksLabBePatientText
-	db "@"
+	text_far _OaksLabBePatientText
+	text_end
 
 OaksLabText12:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabLeavingText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabLeavingText:
-	TX_FAR _OaksLabLeavingText
-	db "@"
+	text_far _OaksLabLeavingText
+	text_end
 
 OaksLabText13:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalPickingMonText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalPickingMonText:
-	TX_FAR _OaksLabRivalPickingMonText
-	db "@"
+	text_far _OaksLabRivalPickingMonText
+	text_end
 
 OaksLabText14:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalReceivedMonText:
-	TX_FAR _OaksLabRivalReceivedMonText
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _OaksLabRivalReceivedMonText
+	sound_get_key_item
+	text_end
 
 OaksLabText15:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalChallengeText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalChallengeText:
-	TX_FAR _OaksLabRivalChallengeText
-	db "@"
+	text_far _OaksLabRivalChallengeText
+	text_end
 
 OaksLabText_1d3be:
-	TX_FAR _OaksLabText_1d3be
-	db "@"
+	text_far _OaksLabText_1d3be
+	text_end
 
 OaksLabText_1d3c3:
-	TX_FAR _OaksLabText_1d3c3
-	db "@"
+	text_far _OaksLabText_1d3c3
+	text_end
 
 OaksLabText16:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabRivalToughenUpText
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabRivalToughenUpText:
-	TX_FAR _OaksLabRivalToughenUpText
-	db "@"
+	text_far _OaksLabRivalToughenUpText
+	text_end
 
 OaksLabText21:
-	TX_FAR _OaksLabText21
-	db "@"
+	text_far _OaksLabText21
+	text_end
 
 OaksLabText22:
-	TX_FAR _OaksLabText22
-	db "@"
+	text_far _OaksLabText22
+	text_end
 
 OaksLabText23:
-	TX_FAR _OaksLabText23
-	db "@"
+	text_far _OaksLabText23
+	text_end
 
 OaksLabText24:
-	TX_FAR _OaksLabText24
-	db "@"
+	text_far _OaksLabText24
+	text_end
 
 OaksLabText25:
-	TX_FAR _OaksLabText25
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _OaksLabText25
+	sound_get_key_item
+	text_end
 
 OaksLabText26:
-	TX_FAR _OaksLabText26
-	db "@"
+	text_far _OaksLabText26
+	text_end
 
 OaksLabText27:
-	TX_FAR _OaksLabText27
-	db "@"
+	text_far _OaksLabText27
+	text_end
 
 OaksLabText11:
 OaksLabText10:
-	TX_ASM
+	text_asm
 	ld hl, OaksLabText_1d405
 	call PrintText
 	jp TextScriptEnd
 
 OaksLabText_1d405:
-	TX_FAR _OaksLabText_1d405
-	db "@"
+	text_far _OaksLabText_1d405
+	text_end

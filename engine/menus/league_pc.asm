@@ -116,5 +116,5 @@ HallOfFameNoText:
 	db "HALL OF FAME No   @"
 
 AccessedHoFPCText:
-	TX_FAR _AccessedHoFPCText
-	db "@"
+	text_far _AccessedHoFPCText
+	text_end

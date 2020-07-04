@@ -259,7 +259,7 @@ ViridianGymTrainerHeader7:
 	db $ff
 
 ViridianGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM27
@@ -301,181 +301,181 @@ ViridianGymText1:
 	jp TextScriptEnd
 
 ViridianGymText_74ace:
-	TX_FAR _ViridianGymText_74ace
-	db "@"
+	text_far _ViridianGymText_74ace
+	text_end
 
 ViridianGymText_74ad3:
-	TX_FAR _ViridianGymText_74ad3
-	TX_SFX_LEVEL_UP ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
-	db "@"
+	text_far _ViridianGymText_74ad3
+	sound_level_up ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
+	text_end
 
 ViridianGymText_74ad9:
-	TX_FAR _ViridianGymText_74ad9
-	TX_WAIT
-	db "@"
+	text_far _ViridianGymText_74ad9
+	text_linkpromptbutton
+	text_end
 
 ViridianGymText12:
-	TX_FAR _ViridianGymText12
-	db "@"
+	text_far _ViridianGymText12
+	text_end
 
 ViridianGymText13:
-	TX_FAR _ReceivedTM27Text
-	TX_SFX_ITEM_1
+	text_far _ReceivedTM27Text
+	sound_get_item_1
 
 TM27ExplanationText:
-	TX_FAR _TM27ExplanationText
-	db "@"
+	text_far _TM27ExplanationText
+	text_end
 
 ViridianGymText14:
-	TX_FAR _TM27NoRoomText
-	db "@"
+	text_far _TM27NoRoomText
+	text_end
 
 ViridianGymText2:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText1:
-	TX_FAR _ViridianGymBattleText1
-	db "@"
+	text_far _ViridianGymBattleText1
+	text_end
 
 ViridianGymEndBattleText1:
-	TX_FAR _ViridianGymEndBattleText1
-	db "@"
+	text_far _ViridianGymEndBattleText1
+	text_end
 
 ViridianGymAfterBattleText1:
-	TX_FAR _ViridianGymAfterBattleText1
-	db "@"
+	text_far _ViridianGymAfterBattleText1
+	text_end
 
 ViridianGymText3:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText2:
-	TX_FAR _ViridianGymBattleText2
-	db "@"
+	text_far _ViridianGymBattleText2
+	text_end
 
 ViridianGymEndBattleText2:
-	TX_FAR _ViridianGymEndBattleText2
-	db "@"
+	text_far _ViridianGymEndBattleText2
+	text_end
 
 ViridianGymAfterBattleText2:
-	TX_FAR _ViridianGymAfterBattleText2
-	db "@"
+	text_far _ViridianGymAfterBattleText2
+	text_end
 
 ViridianGymText4:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText3:
-	TX_FAR _ViridianGymBattleText3
-	db "@"
+	text_far _ViridianGymBattleText3
+	text_end
 
 ViridianGymEndBattleText3:
-	TX_FAR _ViridianGymEndBattleText3
-	db "@"
+	text_far _ViridianGymEndBattleText3
+	text_end
 
 ViridianGymAfterBattleText3:
-	TX_FAR _ViridianGymAfterBattleText3
-	db "@"
+	text_far _ViridianGymAfterBattleText3
+	text_end
 
 ViridianGymText5:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText4:
-	TX_FAR _ViridianGymBattleText4
-	db "@"
+	text_far _ViridianGymBattleText4
+	text_end
 
 ViridianGymEndBattleText4:
-	TX_FAR _ViridianGymEndBattleText4
-	db "@"
+	text_far _ViridianGymEndBattleText4
+	text_end
 
 ViridianGymAfterBattleText4:
-	TX_FAR _ViridianGymAfterBattleText4
-	db "@"
+	text_far _ViridianGymAfterBattleText4
+	text_end
 
 ViridianGymText6:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText5:
-	TX_FAR _ViridianGymBattleText5
-	db "@"
+	text_far _ViridianGymBattleText5
+	text_end
 
 ViridianGymEndBattleText5:
-	TX_FAR _ViridianGymEndBattleText5
-	db "@"
+	text_far _ViridianGymEndBattleText5
+	text_end
 
 ViridianGymAfterBattleText5:
-	TX_FAR _ViridianGymAfterBattleText5
-	db "@"
+	text_far _ViridianGymAfterBattleText5
+	text_end
 
 ViridianGymText7:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText6:
-	TX_FAR _ViridianGymBattleText6
-	db "@"
+	text_far _ViridianGymBattleText6
+	text_end
 
 ViridianGymEndBattleText6:
-	TX_FAR _ViridianGymEndBattleText6
-	db "@"
+	text_far _ViridianGymEndBattleText6
+	text_end
 
 ViridianGymAfterBattleText6:
-	TX_FAR _ViridianGymAfterBattleText6
-	db "@"
+	text_far _ViridianGymAfterBattleText6
+	text_end
 
 ViridianGymText8:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText7:
-	TX_FAR _ViridianGymBattleText7
-	db "@"
+	text_far _ViridianGymBattleText7
+	text_end
 
 ViridianGymEndBattleText7:
-	TX_FAR _ViridianGymEndBattleText7
-	db "@"
+	text_far _ViridianGymEndBattleText7
+	text_end
 
 ViridianGymAfterBattleText7:
-	TX_FAR _ViridianGymAfterBattleText7
-	db "@"
+	text_far _ViridianGymAfterBattleText7
+	text_end
 
 ViridianGymText9:
-	TX_ASM
+	text_asm
 	ld hl, ViridianGymTrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianGymBattleText8:
-	TX_FAR _ViridianGymBattleText8
-	db "@"
+	text_far _ViridianGymBattleText8
+	text_end
 
 ViridianGymEndBattleText8:
-	TX_FAR _ViridianGymEndBattleText8
-	db "@"
+	text_far _ViridianGymEndBattleText8
+	text_end
 
 ViridianGymAfterBattleText8:
-	TX_FAR _ViridianGymAfterBattleText8
-	db "@"
+	text_far _ViridianGymAfterBattleText8
+	text_end
 
 ViridianGymText10:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	jr nz, .asm_1abd1
 	ld hl, ViridianGymText_74bd4
@@ -488,9 +488,9 @@ ViridianGymText10:
 	jp TextScriptEnd
 
 ViridianGymText_74bd4:
-	TX_FAR _ViridianGymText_74bd4
-	db "@"
+	text_far _ViridianGymText_74bd4
+	text_end
 
 ViridianGymText_74bd9:
-	TX_FAR _ViridianGymText_74bd9
-	db "@"
+	text_far _ViridianGymText_74bd9
+	text_end

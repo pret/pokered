@@ -29,14 +29,14 @@ MewtwoTrainerHeader:
 	db $ff
 
 MewtwoText:
-	TX_ASM
+	text_asm
 	ld hl, MewtwoTrainerHeader
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MewtwoBattleText:
-	TX_FAR _MewtwoBattleText
-	TX_ASM
+	text_far _MewtwoBattleText
+	text_asm
 	ld a, MEWTWO
 	call PlayCry
 	call WaitForSoundToFinish

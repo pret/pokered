@@ -44,8 +44,9 @@ _CeladonDinerText_491a7::
 _ReceivedCoinCaseText::
 	text "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _CoinCaseNoRoomText::
 	text "Make room for"

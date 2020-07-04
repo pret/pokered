@@ -61,25 +61,25 @@ CinnabarIsland_TextPointers:
 	dw CinnabarIslandText8
 
 CinnabarIslandText8:
-	TX_FAR _CinnabarIslandText8
-	db "@"
+	text_far _CinnabarIslandText8
+	text_end
 
 CinnabarIslandText1:
-	TX_FAR _CinnabarIslandText1
-	db "@"
+	text_far _CinnabarIslandText1
+	text_end
 
 CinnabarIslandText2:
-	TX_FAR _CinnabarIslandText2
-	db "@"
+	text_far _CinnabarIslandText2
+	text_end
 
 CinnabarIslandText3:
-	TX_FAR _CinnabarIslandText3
-	db "@"
+	text_far _CinnabarIslandText3
+	text_end
 
 CinnabarIslandText6:
-	TX_FAR _CinnabarIslandText6
-	db "@"
+	text_far _CinnabarIslandText6
+	text_end
 
 CinnabarIslandText7:
-	TX_FAR _CinnabarIslandText7
-	db "@"
+	text_far _CinnabarIslandText7
+	text_end

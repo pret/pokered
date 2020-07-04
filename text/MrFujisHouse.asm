@@ -28,10 +28,12 @@ _LavenderHouse1Text_1d8f9::
 	done
 
 _LavenderHouse1Text3::
-	text "PSYDUCK: Gwappa!@@"
+	text "PSYDUCK: Gwappa!@"
+	text_end
 
 _LavenderHouse1Text4::
-	text "NIDORINO: Gaoo!@@"
+	text "NIDORINO: Gaoo!@"
+	text_end
 
 _LavenderHouse1Text_1d94c::
 	text "MR.FUJI: <PLAYER>."
@@ -48,11 +50,12 @@ _LavenderHouse1Text_1d94c::
 _ReceivedFluteText::
 	text "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _FluteExplanationText::
-	text ""
+	text_start
 
 	para "Upon hearing #"
 	line "FLUTE, sleeping"

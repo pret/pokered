@@ -67,37 +67,37 @@ VictoryRoad1TrainerHeader1:
 	db $ff
 
 VictoryRoad1Text1:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad1Text2:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad1BattleText1:
-	TX_FAR _VictoryRoad1BattleText1
-	db "@"
+	text_far _VictoryRoad1BattleText1
+	text_end
 
 VictoryRoad1EndBattleText1:
-	TX_FAR _VictoryRoad1EndBattleText1
-	db "@"
+	text_far _VictoryRoad1EndBattleText1
+	text_end
 
 VictoryRoad1AfterBattleText1:
-	TX_FAR _VictoryRoad1AfterBattleText1
-	db "@"
+	text_far _VictoryRoad1AfterBattleText1
+	text_end
 
 VictoryRoad1BattleText2:
-	TX_FAR _VictoryRoad1BattleText2
-	db "@"
+	text_far _VictoryRoad1BattleText2
+	text_end
 
 VictoryRoad1EndBattleText2:
-	TX_FAR _VictoryRoad1EndBattleText2
-	db "@"
+	text_far _VictoryRoad1EndBattleText2
+	text_end
 
 VictoryRoad1AfterBattleText2:
-	TX_FAR _VictoryRoad1AfterBattleText2
-	db "@"
+	text_far _VictoryRoad1AfterBattleText2
+	text_end

@@ -7,8 +7,8 @@ AerodactylFossil:
 	ret
 
 AerodactylFossilText::
-	TX_FAR _AerodactylFossilText
-	db "@"
+	text_far _AerodactylFossilText
+	text_end
 
 KabutopsFossil:
 	ld a, FOSSIL_KABUTOPS
@@ -19,8 +19,8 @@ KabutopsFossil:
 	ret
 
 KabutopsFossilText::
-	TX_FAR _KabutopsFossilText
-	db "@"
+	text_far _KabutopsFossilText
+	text_end
 
 DisplayMonFrontSpriteInBox:
 ; Displays a pokemon's front sprite in a pop-up window.

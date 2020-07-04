@@ -110,7 +110,7 @@ StatusScreen:
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, -6
 	add hl, de
-	ld [hl], "⠄" ; . after No ("." is a different one)
+	ld [hl], "<DOT>"
 	dec hl
 	ld [hl], "№"
 	coord hl, 19, 9
@@ -205,14 +205,17 @@ NamePointers2:
 	dw wDayCareMonName
 
 Type1Text:
-	db "TYPE1/", $4e
-
+	db   "TYPE1/"
+	next ""
+	; fallthrough
 Type2Text:
-	db "TYPE2/", $4e
-
+	db   "TYPE2/"
+	next ""
+	; fallthrough
 IDNoText:
-	db $73, "№/", $4e
-
+	db   "<ID>№/"
+	next ""
+	; fallthrough
 OTText:
 	db   "OT/"
 	next "@"
@@ -328,7 +331,7 @@ StatusScreen2:
 	ld b, a ; Number of moves ?
 	coord hl, 11, 10
 	ld de, SCREEN_WIDTH * 2
-	ld a, $72 ; special P tile id
+	ld a, "<BOLD_P>"
 	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
@@ -399,7 +402,7 @@ StatusScreen2:
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
 	coord hl, 14, 6
-	ld [hl], $70 ; 1-tile "to"
+	ld [hl], "<to>"
 	inc hl
 	inc hl
 	call PrintLevel

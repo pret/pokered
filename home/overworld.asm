@@ -75,8 +75,8 @@ OverworldLoopLessDelay::
 	bit 3, a ; start button
 	jr z, .startButtonNotPressed
 ; if START is pressed
-	xor a
-	ld [hSpriteIndexOrTextID], a ; start menu text ID
+	xor a ; TEXT_START_MENU
+	ld [hSpriteIndexOrTextID], a
 	jp .displayDialogue
 .startButtonNotPressed
 	bit 0, a ; A button

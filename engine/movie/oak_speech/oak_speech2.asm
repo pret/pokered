@@ -28,8 +28,8 @@ ChoosePlayerName:
 	jp PrintText
 
 YourNameIsText:
-	TX_FAR _YourNameIsText
-	db "@"
+	text_far _YourNameIsText
+	text_end
 
 ChooseRivalName:
 	call OakSpeechSlidePicRight
@@ -61,8 +61,8 @@ ChooseRivalName:
 	jp PrintText
 
 HisNameIsText:
-	TX_FAR _HisNameIsText
-	db "@"
+	text_far _HisNameIsText
+	text_end
 
 OakSpeechSlidePicLeft:
 	push de
@@ -215,5 +215,5 @@ GetDefaultName:
 
 INCLUDE "data/player_names_list.asm"
 
-TextTerminator_6b20:
-	db "@"
+LinkMenuEmptyText:
+	text_end

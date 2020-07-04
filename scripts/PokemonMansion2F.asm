@@ -75,34 +75,34 @@ Mansion2TrainerHeader0:
 	db $ff
 
 Mansion2Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion2BattleText1:
-	TX_FAR _Mansion2BattleText1
-	db "@"
+	text_far _Mansion2BattleText1
+	text_end
 
 Mansion2EndBattleText1:
-	TX_FAR _Mansion2EndBattleText1
-	db "@"
+	text_far _Mansion2EndBattleText1
+	text_end
 
 Mansion2AfterBattleText1:
-	TX_FAR _Mansion2AfterBattleText1
-	db "@"
+	text_far _Mansion2AfterBattleText1
+	text_end
 
 Mansion2Text3:
-	TX_FAR _Mansion2Text3
-	db "@"
+	text_far _Mansion2Text3
+	text_end
 
 Mansion2Text4:
-	TX_FAR _Mansion2Text4
-	db "@"
+	text_far _Mansion2Text4
+	text_end
 
 Mansion3Text6:
 Mansion2Text5:
-	TX_ASM
+	text_asm
 	ld hl, Mansion2Text_520c2
 	call PrintText
 	call YesNoChoice
@@ -128,13 +128,13 @@ Mansion2Text5:
 	jp TextScriptEnd
 
 Mansion2Text_520c2:
-	TX_FAR _Mansion2Text_520c2
-	db "@"
+	text_far _Mansion2Text_520c2
+	text_end
 
 Mansion2Text_520c7:
-	TX_FAR _Mansion2Text_520c7
-	db "@"
+	text_far _Mansion2Text_520c7
+	text_end
 
 Mansion2Text_520cc:
-	TX_FAR _Mansion2Text_520cc
-	db "@"
+	text_far _Mansion2Text_520cc
+	text_end

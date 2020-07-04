@@ -27,7 +27,8 @@ _SaffronGymText_5d167::
 	cont "to win!"
 
 	para "You earned the"
-	line "MARSHBADGE!@@"
+	line "MARSHBADGE!@"
+	text_end
 
 _SaffronGymText_5d16e::
 	text "Everyone has"
@@ -56,10 +57,11 @@ _SaffronGymText_5d173::
 
 ReceivedTM46Text::
 	text "<PLAYER> received"
-	line "TM46!@@"
+	line "TM46!@"
+	text_end
 
 _TM46ExplanationText::
-	text ""
+	text_start
 
 	para "TM46 is PSYWAVE!"
 	line "It uses powerful"

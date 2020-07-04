@@ -29,31 +29,32 @@ _WhenYouChangeBoxText::
 
 _ChooseABoxText::
 	text "Choose a"
-	line "<pkmn> BOX.@@"
+	line "<PKMN> BOX.@"
+	text_end
 
 _EvolvedText::
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text " evolved"
 	done
 
 _IntoText::
-	text ""
+	text_start
 	line "into @"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 	done
 
 _StoppedEvolvingText::
 	text "Huh? @"
-	TX_RAM wcf4b
-	text ""
+	text_ram wcf4b
+	text_start
 	line "stopped evolving!"
 	prompt
 
 _IsEvolvingText::
 	text "What? @"
-	TX_RAM wcf4b
-	text ""
+	text_ram wcf4b
+	text_start
 	line "is evolving!"
 	done
 
@@ -95,11 +96,13 @@ _FireDefrostedText::
 _MonsStatsRoseText::
 	text "<USER>'s"
 	line "@"
-	TX_RAM wcf4b
-	text "@@"
+	text_ram wcf4b
+	text "@"
+	text_end
 
 _GreatlyRoseText::
-	text $4c, "greatly@@"
+	text "<SCROLL>greatly@"
+	text_end
 
 _RoseText::
 	text " rose!"
@@ -108,11 +111,13 @@ _RoseText::
 _MonsStatsFellText::
 	text "<TARGET>'s"
 	line "@"
-	TX_RAM wcf4b
-	text "@@"
+	text_ram wcf4b
+	text "@"
+	text_end
 
 _GreatlyFellText::
-	text $4c, "greatly@@"
+	text "<SCROLL>greatly@"
+	text_end
 
 _FellText::
 	text " fell!"
@@ -134,35 +139,36 @@ _WasBlownAwayText::
 	prompt
 
 _ChargeMoveEffectText::
-	text "<USER>@@"
+	text "<USER>@"
+	text_end
 
 _MadeWhirlwindText::
-	text ""
+	text_start
 	line "made a whirlwind!"
 	prompt
 
 _TookInSunlightText::
-	text ""
+	text_start
 	line "took in sunlight!"
 	prompt
 
 _LoweredItsHeadText::
-	text ""
+	text_start
 	line "lowered its head!"
 	prompt
 
 _SkyAttackGlowingText::
-	text ""
+	text_start
 	line "is glowing!"
 	prompt
 
 _FlewUpHighText::
-	text ""
+	text_start
 	line "flew up high!"
 	prompt
 
 _DugAHoleText::
-	text ""
+	text_start
 	line "dug a hole!"
 	prompt
 
@@ -175,14 +181,14 @@ _MimicLearnedMoveText::
 	text "<USER>"
 	line "learned"
 	cont "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 	prompt
 
 _MoveWasDisabledText::
 	text "<TARGET>'s"
 	line "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " was"
 	cont "disabled!"
 	prompt
@@ -285,7 +291,7 @@ _TransformedText::
 	text "<USER>"
 	line "transformed into"
 	cont "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 	prompt
 

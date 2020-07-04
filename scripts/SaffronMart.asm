@@ -7,9 +7,9 @@ SaffronMart_TextPointers:
 	dw SaffronMartText3
 
 SaffronMartText2:
-	TX_FAR _SaffronMartText2
-	db "@"
+	text_far _SaffronMartText2
+	text_end
 
 SaffronMartText3:
-	TX_FAR _SaffronMartText3
-	db "@"
+	text_far _SaffronMartText3
+	text_end

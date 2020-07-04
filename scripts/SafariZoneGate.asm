@@ -139,12 +139,12 @@ SafariZoneGate_TextPointers:
 	dw .SafariZoneEntranceText6
 
 .SafariZoneEntranceText1
-	TX_FAR _SafariZoneEntranceText1
-	db "@"
+	text_far _SafariZoneEntranceText1
+	text_end
 
 .SafariZoneEntranceText4
-	TX_FAR SafariZoneEntranceText_9e6e4
-	TX_ASM
+	text_far SafariZoneEntranceText_9e6e4
+	text_asm
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -208,22 +208,22 @@ SafariZoneGate_TextPointers:
 	jp TextScriptEnd
 
 .MakePaymentText
-	TX_FAR SafariZoneEntranceText_9e747
-	TX_SFX_ITEM_1
-	TX_FAR _SafariZoneEntranceText_75360
-	db "@"
+	text_far SafariZoneEntranceText_9e747
+	sound_get_item_1
+	text_far _SafariZoneEntranceText_75360
+	text_end
 
 .PleaseComeAgainText
-	TX_FAR _SafariZoneEntranceText_75365
-	db "@"
+	text_far _SafariZoneEntranceText_75365
+	text_end
 
 .NotEnoughMoneyText
-	TX_FAR _SafariZoneEntranceText_7536a
-	db "@"
+	text_far _SafariZoneEntranceText_7536a
+	text_end
 
 .SafariZoneEntranceText5
-	TX_FAR SafariZoneEntranceText_9e814
-	TX_ASM
+	text_far SafariZoneEntranceText_9e814
+	text_asm
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
@@ -255,19 +255,19 @@ SafariZoneGate_TextPointers:
 	jp TextScriptEnd
 
 .SafariZoneEntranceText_753bb
-	TX_FAR _SafariZoneEntranceText_753bb
-	db "@"
+	text_far _SafariZoneEntranceText_753bb
+	text_end
 
 .SafariZoneEntranceText_753c0
-	TX_FAR _SafariZoneEntranceText_753c0
-	db "@"
+	text_far _SafariZoneEntranceText_753c0
+	text_end
 
 .SafariZoneEntranceText6
-	TX_FAR _SafariZoneEntranceText_753c5
-	db "@"
+	text_far _SafariZoneEntranceText_753c5
+	text_end
 
 .SafariZoneEntranceText2
-	TX_ASM
+	text_asm
 	ld hl, .FirstTimeQuestionText
 	call PrintText
 	call YesNoChoice
@@ -281,13 +281,13 @@ SafariZoneGate_TextPointers:
 	jp TextScriptEnd
 
 .FirstTimeQuestionText
-	TX_FAR _SafariZoneEntranceText_753e6
-	db "@"
+	text_far _SafariZoneEntranceText_753e6
+	text_end
 
 .ExplanationText
-	TX_FAR _SafariZoneEntranceText_753eb
-	db "@"
+	text_far _SafariZoneEntranceText_753eb
+	text_end
 
 .RegularText
-	TX_FAR _SafariZoneEntranceText_753f0
-	db "@"
+	text_far _SafariZoneEntranceText_753f0
+	text_end

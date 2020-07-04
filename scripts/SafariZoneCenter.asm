@@ -7,9 +7,9 @@ SafariZoneCenter_TextPointers:
 	dw SafariZoneCenterText3
 
 SafariZoneCenterText2:
-	TX_FAR _SafariZoneCenterText2
-	db "@"
+	text_far _SafariZoneCenterText2
+	text_end
 
 SafariZoneCenterText3:
-	TX_FAR _SafariZoneCenterText3
-	db "@"
+	text_far _SafariZoneCenterText3
+	text_end

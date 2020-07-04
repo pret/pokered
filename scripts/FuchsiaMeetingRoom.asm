@@ -8,13 +8,13 @@ FuchsiaMeetingRoom_TextPointers:
 	dw FuchsiaMeetingRoomText3
 
 FuchsiaMeetingRoomText1:
-	TX_FAR _FuchsiaMeetingRoomText1
-	db "@"
+	text_far _FuchsiaMeetingRoomText1
+	text_end
 
 FuchsiaMeetingRoomText2:
-	TX_FAR _FuchsiaMeetingRoomText2
-	db "@"
+	text_far _FuchsiaMeetingRoomText2
+	text_end
 
 FuchsiaMeetingRoomText3:
-	TX_FAR _FuchsiaMeetingRoomText3
-	db "@"
+	text_far _FuchsiaMeetingRoomText3
+	text_end

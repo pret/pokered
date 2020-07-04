@@ -9,14 +9,14 @@ PewterPokecenter_TextPointers:
 	dw PewterTradeNurseText
 
 PewterHealNurseText:
-	TX_POKECENTER_NURSE
+	script_pokecenter_nurse
 
 PewterPokecenterText2:
-	TX_FAR _PewterPokecenterText2
-	db "@"
+	text_far _PewterPokecenterText2
+	text_end
 
 PewterJigglypuffText:
-	TX_ASM
+	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, .Text
@@ -71,8 +71,8 @@ PewterJigglypuffText:
 	jp TextScriptEnd
 
 .Text
-	TX_FAR _PewterJigglypuffText
-	db "@"
+	text_far _PewterJigglypuffText
+	text_end
 
 JigglypuffFacingDirections:
 	db $30 | SPRITE_FACING_DOWN
@@ -82,4 +82,4 @@ JigglypuffFacingDirections:
 JigglypuffFacingDirectionsEnd:
 
 PewterTradeNurseText:
-	TX_CABLE_CLUB_RECEPTIONIST
+	script_cable_club_receptionist

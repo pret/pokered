@@ -7,7 +7,7 @@ Route12Gate2F_TextPointers:
 	dw Route12GateUpstairsText3
 
 Route12GateUpstairsText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM39, 1
 	jr c, .asm_0ad3c
 	ld hl, TM39PreReceiveText
@@ -30,39 +30,39 @@ Route12GateUpstairsText1:
 	jp TextScriptEnd
 
 TM39PreReceiveText:
-	TX_FAR _TM39PreReceiveText
-	db "@"
+	text_far _TM39PreReceiveText
+	text_end
 
 ReceivedTM39Text:
-	TX_FAR _ReceivedTM39Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedTM39Text
+	sound_get_item_1
+	text_end
 
 TM39ExplanationText:
-	TX_FAR _TM39ExplanationText
-	db "@"
+	text_far _TM39ExplanationText
+	text_end
 
 TM39NoRoomText:
-	TX_FAR _TM39NoRoomText
-	db "@"
+	text_far _TM39NoRoomText
+	text_end
 
 Route12GateUpstairsText2:
-	TX_ASM
+	text_asm
 	ld hl, Route12GateUpstairsText_495b8
 	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495b8:
-	TX_FAR _Route12GateUpstairsText_495b8
-	db "@"
+	text_far _Route12GateUpstairsText_495b8
+	text_end
 
 Route12GateUpstairsText3:
-	TX_ASM
+	text_asm
 	ld hl, Route12GateUpstairsText_495c4
 	jp GateUpstairsScript_PrintIfFacingUp
 
 Route12GateUpstairsText_495c4:
-	TX_FAR _Route12GateUpstairsText_495c4
-	db "@"
+	text_far _Route12GateUpstairsText_495c4
+	text_end
 
 GateUpstairsScript_PrintIfFacingUp:
 	ld a, [wSpriteStateData1 + 9]

@@ -22,8 +22,9 @@ _SilphCoPresidentText::
 _ReceivedSilphCoMasterBallText::
 	text "<PLAYER> got a"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _SilphCo10Text_6231c::
 	text "PRESIDENT: You"

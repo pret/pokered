@@ -18,7 +18,8 @@ _BlaineEndBattleText::
 	line "burnt out!"
 
 	para "You have earned"
-	line "the VOLCANOBADGE!@@"
+	line "the VOLCANOBADGE!@"
+	text_end
 
 _BlaineFireBlastText::
 	text "FIRE BLAST is the"
@@ -44,11 +45,12 @@ _BlaineBadgeText::
 _ReceivedTM38Text::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _TM38ExplanationText::
-	text ""
+	text_start
 
 	para "TM38 contains"
 	line "FIRE BLAST!"

@@ -5,7 +5,7 @@ Route12SuperRodHouse_TextPointers:
 	dw Route12HouseText1
 
 Route12HouseText1:
-	TX_ASM
+	text_asm
 	ld a, [wd728]
 	bit 5, a
 	jr nz, .asm_b4cad
@@ -35,23 +35,23 @@ Route12HouseText1:
 	jp TextScriptEnd
 
 Route12HouseText_564c0:
-	TX_FAR _Route12HouseText_564c0
-	db "@"
+	text_far _Route12HouseText_564c0
+	text_end
 
 Route12HouseText_564c5:
-	TX_FAR _Route12HouseText_564c5
-	TX_SFX_ITEM_1
-	TX_FAR _Route12HouseText_564ca
-	db "@"
+	text_far _Route12HouseText_564c5
+	sound_get_item_1
+	text_far _Route12HouseText_564ca
+	text_end
 
 Route12HouseText_564cf:
-	TX_FAR _Route12HouseText_564cf
-	db "@"
+	text_far _Route12HouseText_564cf
+	text_end
 
 Route12HouseText_564d4:
-	TX_FAR _Route12HouseText_564d4
-	db "@"
+	text_far _Route12HouseText_564d4
+	text_end
 
 Route12HouseText_564d9:
-	TX_FAR _Route12HouseText_564d9
-	db "@"
+	text_far _Route12HouseText_564d9
+	text_end

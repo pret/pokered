@@ -45,13 +45,13 @@ BillsHousePC:
 	ret
 
 BillsHouseMonitorText::
-	TX_FAR _BillsHouseMonitorText
-	db "@"
+	text_far _BillsHouseMonitorText
+	text_end
 
 BillsHouseInitiatedText::
-	TX_FAR _BillsHouseInitiatedText
-	TX_BLINK
-	TX_ASM
+	text_far _BillsHouseInitiatedText
+	text_promptbutton
+	text_asm
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
@@ -65,7 +65,7 @@ BillsHouseInitiatedText::
 	jp TextScriptEnd
 
 BillsHousePokemonList::
-	TX_ASM
+	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, BillsHousePokemonListText1
 	call PrintText
@@ -119,8 +119,8 @@ BillsHousePokemonList::
 	jp TextScriptEnd
 
 BillsHousePokemonListText1:
-	TX_FAR _BillsHousePokemonListText1
-	db "@"
+	text_far _BillsHousePokemonListText1
+	text_end
 
 BillsMonListText:
 	db   "EEVEE"
@@ -130,5 +130,5 @@ BillsMonListText:
 	next "CANCEL@"
 
 BillsHousePokemonListText2:
-	TX_FAR _BillsHousePokemonListText2
-	db "@"
+	text_far _BillsHousePokemonListText2
+	text_end

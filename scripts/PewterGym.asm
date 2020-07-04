@@ -99,7 +99,7 @@ PewterGymTrainerHeader0:
 	db $ff
 
 PewterGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_BROCK
 	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM34
@@ -135,53 +135,53 @@ PewterGymText1:
 	jp TextScriptEnd
 
 PewterGymText_5c49e:
-	TX_FAR _PewterGymText_5c49e
-	db "@"
+	text_far _PewterGymText_5c49e
+	text_end
 
 PewterGymText_5c4a3:
-	TX_FAR _PewterGymText_5c4a3
-	db "@"
+	text_far _PewterGymText_5c4a3
+	text_end
 
 PewterGymText4:
-	TX_FAR _TM34PreReceiveText
-	db "@"
+	text_far _TM34PreReceiveText
+	text_end
 
 PewterGymText5:
-	TX_FAR _ReceivedTM34Text
-	TX_SFX_ITEM_1
-	TX_FAR _TM34ExplanationText
-	db "@"
+	text_far _ReceivedTM34Text
+	sound_get_item_1
+	text_far _TM34ExplanationText
+	text_end
 
 PewterGymText6:
-	TX_FAR _TM34NoRoomText
-	db "@"
+	text_far _TM34NoRoomText
+	text_end
 
 PewterGymText_5c4bc:
-	TX_FAR _PewterGymText_5c4bc
-	TX_SFX_LEVEL_UP ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
-	TX_FAR _PewterGymText_5c4c1
-	db "@"
+	text_far _PewterGymText_5c4bc
+	sound_level_up ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
+	text_far _PewterGymText_5c4c1
+	text_end
 
 PewterGymText2:
-	TX_ASM
+	text_asm
 	ld hl, PewterGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PewterGymBattleText1:
-	TX_FAR _PewterGymBattleText1
-	db "@"
+	text_far _PewterGymBattleText1
+	text_end
 
 PewterGymEndBattleText1:
-	TX_FAR _PewterGymEndBattleText1
-	db "@"
+	text_far _PewterGymEndBattleText1
+	text_end
 
 PewterGymAfterBattleText1:
-	TX_FAR _PewterGymAfterBattleText1
-	db "@"
+	text_far _PewterGymAfterBattleText1
+	text_end
 
 PewterGymText3:
-	TX_ASM
+	text_asm
 	ld a, [wBeatGymFlags]
 	bit 0, a
 	jr nz, .asm_5c50c
@@ -208,21 +208,21 @@ PewterGymText3:
 	jp TextScriptEnd
 
 PewterGymText_5c515:
-	TX_FAR _PewterGymText_5c515
-	db "@"
+	text_far _PewterGymText_5c515
+	text_end
 
 PewterGymText_5c51a:
-	TX_FAR _PewterGymText_5c51a
-	db "@"
+	text_far _PewterGymText_5c51a
+	text_end
 
 PewterGymText_5c51f:
-	TX_FAR _PewterGymText_5c51f
-	db "@"
+	text_far _PewterGymText_5c51f
+	text_end
 
 PewterGymText_5c524:
-	TX_FAR _PewterGymText_5c524
-	db "@"
+	text_far _PewterGymText_5c524
+	text_end
 
 PewterGymText_5c529:
-	TX_FAR _PewterGymText_5c529
-	db "@"
+	text_far _PewterGymText_5c529
+	text_end

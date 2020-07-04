@@ -57,7 +57,7 @@ Route22Gate_TextPointers:
 	dw Route22GateText1
 
 Route22GateText1:
-	TX_ASM
+	text_asm
 	ld a, [wObtainedBadges]
 	bit 0, a
 	jr nz, .asm_1e6f6
@@ -75,8 +75,8 @@ Route22GateText1:
 	jp TextScriptEnd
 
 Route22GateText_1e704:
-	TX_FAR _Route22GateText_1e704
-	TX_ASM
+	text_far _Route22GateText_1e704
+	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
@@ -84,10 +84,10 @@ Route22GateText_1e704:
 	ret
 
 Route22GateText_1e715:
-	TX_FAR _Route22GateText_1e715
-	db "@"
+	text_far _Route22GateText_1e715
+	text_end
 
 Route22GateText_1e71a:
-	TX_FAR _Route22GateText_1e71a
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _Route22GateText_1e71a
+	sound_get_item_1
+	text_end

@@ -142,7 +142,7 @@ Route24TrainerHeader5:
 	db $ff
 
 Route24Text1:
-	TX_ASM
+	text_asm
 	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	CheckEvent EVENT_GOT_NUGGET
 	jr nz, .asm_514f9
@@ -183,137 +183,137 @@ Route24Text1:
 	jp TextScriptEnd
 
 Route24Text_51510:
-	TX_FAR _Route24Text_51510
-	TX_SFX_ITEM_1
-	TX_FAR _Route24Text_51515
-	db "@"
+	text_far _Route24Text_51510
+	sound_get_item_1
+	text_far _Route24Text_51515
+	text_end
 
 Route24Text_5151a:
-	TX_FAR _Route24Text_5151a
-	TX_SFX_ITEM_1
-	TX_BLINK
-	db "@"
+	text_far _Route24Text_5151a
+	sound_get_item_1
+	text_promptbutton
+	text_end
 
 Route24Text_51521:
-	TX_FAR _Route24Text_51521
-	db "@"
+	text_far _Route24Text_51521
+	text_end
 
 Route24Text_51526:
-	TX_FAR _Route24Text_51526
-	db "@"
+	text_far _Route24Text_51526
+	text_end
 
 Route24Text_5152b:
-	TX_FAR _Route24Text_5152b
-	db "@"
+	text_far _Route24Text_5152b
+	text_end
 
 Route24Text_51530:
-	TX_FAR _Route24Text_51530
-	db "@"
+	text_far _Route24Text_51530
+	text_end
 
 Route24Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route24TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route24BattleText1:
-	TX_FAR _Route24BattleText1
-	db "@"
+	text_far _Route24BattleText1
+	text_end
 
 Route24EndBattleText1:
-	TX_FAR _Route24EndBattleText1
-	db "@"
+	text_far _Route24EndBattleText1
+	text_end
 
 Route24AfterBattleText1:
-	TX_FAR _Route24AfterBattleText1
-	db "@"
+	text_far _Route24AfterBattleText1
+	text_end
 
 Route24BattleText2:
-	TX_FAR _Route24BattleText2
-	db "@"
+	text_far _Route24BattleText2
+	text_end
 
 Route24EndBattleText2:
-	TX_FAR _Route24EndBattleText2
-	db "@"
+	text_far _Route24EndBattleText2
+	text_end
 
 Route24AfterBattleText2:
-	TX_FAR _Route24AfterBattleText2
-	db "@"
+	text_far _Route24AfterBattleText2
+	text_end
 
 Route24BattleText3:
-	TX_FAR _Route24BattleText3
-	db "@"
+	text_far _Route24BattleText3
+	text_end
 
 Route24EndBattleText3:
-	TX_FAR _Route24EndBattleText3
-	db "@"
+	text_far _Route24EndBattleText3
+	text_end
 
 Route24AfterBattleText3:
-	TX_FAR _Route24AfterBattleText3
-	db "@"
+	text_far _Route24AfterBattleText3
+	text_end
 
 Route24BattleText4:
-	TX_FAR _Route24BattleText4
-	db "@"
+	text_far _Route24BattleText4
+	text_end
 
 Route24EndBattleText4:
-	TX_FAR _Route24EndBattleText4
-	db "@"
+	text_far _Route24EndBattleText4
+	text_end
 
 Route24AfterBattleText4:
-	TX_FAR _Route24AfterBattleText4
-	db "@"
+	text_far _Route24AfterBattleText4
+	text_end
 
 Route24BattleText5:
-	TX_FAR _Route24BattleText5
-	db "@"
+	text_far _Route24BattleText5
+	text_end
 
 Route24EndBattleText5:
-	TX_FAR _Route24EndBattleText5
-	db "@"
+	text_far _Route24EndBattleText5
+	text_end
 
 Route24AfterBattleText5:
-	TX_FAR _Route24AfterBattleText5
-	db "@"
+	text_far _Route24AfterBattleText5
+	text_end
 
 Route24BattleText6:
-	TX_FAR _Route24BattleText6
-	db "@"
+	text_far _Route24BattleText6
+	text_end
 
 Route24EndBattleText6:
-	TX_FAR _Route24EndBattleText6
-	db "@"
+	text_far _Route24EndBattleText6
+	text_end
 
 Route24AfterBattleText6:
-	TX_FAR _Route24AfterBattleText6
-	db "@"
+	text_far _Route24AfterBattleText6
+	text_end

@@ -211,5 +211,5 @@ VermilionDock_TextPointers:
 	dw VermilionDockText1
 
 VermilionDockText1:
-	TX_FAR _VermilionDockText1
-	db "@"
+	text_far _VermilionDockText1
+	text_end

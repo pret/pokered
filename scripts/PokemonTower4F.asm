@@ -50,55 +50,55 @@ PokemonTower4TrainerHeader2:
 	db $ff
 
 PokemonTower4Text1:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower4Text2:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower4Text3:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower4BattleText1:
-	TX_FAR _PokemonTower4BattleText1
-	db "@"
+	text_far _PokemonTower4BattleText1
+	text_end
 
 PokemonTower4EndBattleText1:
-	TX_FAR _PokemonTower4EndBattleText1
-	db "@"
+	text_far _PokemonTower4EndBattleText1
+	text_end
 
 PokemonTower4AfterBattleText1:
-	TX_FAR _PokemonTower4AfterBattleText1
-	db "@"
+	text_far _PokemonTower4AfterBattleText1
+	text_end
 
 PokemonTower4BattleText2:
-	TX_FAR _PokemonTower4BattleText2
-	db "@"
+	text_far _PokemonTower4BattleText2
+	text_end
 
 PokemonTower4EndBattleText2:
-	TX_FAR _PokemonTower4EndBattleText2
-	db "@"
+	text_far _PokemonTower4EndBattleText2
+	text_end
 
 PokemonTower4AfterBattleText2:
-	TX_FAR _PokemonTower4AfterBattleText2
-	db "@"
+	text_far _PokemonTower4AfterBattleText2
+	text_end
 
 PokemonTower4BattleText3:
-	TX_FAR _PokemonTower4BattleText3
-	db "@"
+	text_far _PokemonTower4BattleText3
+	text_end
 
 PokemonTower4EndBattleText3:
-	TX_FAR _PokemonTower4EndBattleText3
-	db "@"
+	text_far _PokemonTower4EndBattleText3
+	text_end
 
 PokemonTower4AfterBattleText3:
-	TX_FAR _PokemonTower4AfterBattleText3
-	db "@"
+	text_far _PokemonTower4AfterBattleText3
+	text_end

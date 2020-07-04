@@ -17,7 +17,8 @@ ViridianMartParcelQuestText::
 	cont "to him?"
 
 	para "<PLAYER> got"
-	line "OAK's PARCEL!@@"
+	line "OAK's PARCEL!@"
+	text_end
 
 _ViridianMartText2::
 	text "This shop sells"

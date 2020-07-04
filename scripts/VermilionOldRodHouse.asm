@@ -5,7 +5,7 @@ VermilionOldRodHouse_TextPointers:
 	dw VermilionHouse2Text1
 
 VermilionHouse2Text1:
-	TX_ASM
+	text_asm
 	ld a, [wd728]
 	bit 3, a
 	jr nz, .asm_03ef5
@@ -35,23 +35,23 @@ VermilionHouse2Text1:
 	jp TextScriptEnd
 
 VermilionHouse2Text_560b1:
-	TX_FAR _VermilionHouse2Text_560b1
-	db "@"
+	text_far _VermilionHouse2Text_560b1
+	text_end
 
 VermilionHouse2Text_560b6:
-	TX_FAR _VermilionHouse2Text_560b6
-	TX_SFX_ITEM_1
-	TX_FAR _VermilionHouse2Text_560bb
-	db "@"
+	text_far _VermilionHouse2Text_560b6
+	sound_get_item_1
+	text_far _VermilionHouse2Text_560bb
+	text_end
 
 VermilionHouse2Text_560c0:
-	TX_FAR _VermilionHouse2Text_560c0
-	db "@"
+	text_far _VermilionHouse2Text_560c0
+	text_end
 
 VermilionHouse2Text_560c5:
-	TX_FAR _VermilionHouse2Text_560c5
-	db "@"
+	text_far _VermilionHouse2Text_560c5
+	text_end
 
 VermilionHouse2Text_560ca:
-	TX_FAR _VermilionHouse2Text_560ca
-	db "@"
+	text_far _VermilionHouse2Text_560ca
+	text_end

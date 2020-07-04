@@ -205,7 +205,7 @@ MtMoon3TrainerHeader3:
 	db $ff
 
 MtMoon3Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	jr z, .asm_49e8d
 	and $c0
@@ -237,31 +237,31 @@ MtMoon3Text1:
 	jp TextScriptEnd
 
 MtMoon3Text2:
-	TX_ASM
+	text_asm
 	ld hl, MtMoon3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text3:
-	TX_ASM
+	text_asm
 	ld hl, MtMoon3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text4:
-	TX_ASM
+	text_asm
 	ld hl, MtMoon3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text5:
-	TX_ASM
+	text_asm
 	ld hl, MtMoon3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 MtMoon3Text6:
-	TX_ASM
+	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f24
@@ -285,11 +285,11 @@ MtMoon3Text6:
 	jp TextScriptEnd
 
 MtMoon3Text_49f24:
-	TX_FAR _MtMoon3Text_49f24
-	db "@"
+	text_far _MtMoon3Text_49f24
+	text_end
 
 MtMoon3Text7:
-	TX_ASM
+	text_asm
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f64
@@ -313,18 +313,18 @@ MtMoon3Text7:
 	jp TextScriptEnd
 
 MtMoon3Text_49f64:
-	TX_FAR _MtMoon3Text_49f64
-	db "@"
+	text_far _MtMoon3Text_49f64
+	text_end
 
 MtMoon3Script_49f69:
 	ld hl, MtMoon3Text_49f6f
 	jp PrintText
 
 MtMoon3Text_49f6f:
-	TX_FAR _MtMoon3Text_49f6f
-	TX_SFX_KEY_ITEM
-	TX_WAIT
-	db "@"
+	text_far _MtMoon3Text_49f6f
+	sound_get_key_item
+	text_linkpromptbutton
+	text_end
 
 MtMoon3Script_49f76:
 	ld hl, MtMoon3Text_49f7f
@@ -332,75 +332,75 @@ MtMoon3Script_49f76:
 	jp TextScriptEnd
 
 MtMoon3Text_49f7f:
-	TX_FAR _MtMoon3Text_49f7f
-	TX_WAIT
-	db "@"
+	text_far _MtMoon3Text_49f7f
+	text_linkpromptbutton
+	text_end
 
 MtMoon3Text_49f85:
-	TX_FAR _MtMoon3Text_49f85
-	db "@"
+	text_far _MtMoon3Text_49f85
+	text_end
 
 MtMoon3Text_49f8a:
-	TX_FAR _MtMoon3Text_49f8a
-	db "@"
+	text_far _MtMoon3Text_49f8a
+	text_end
 
 MtMoon3Text_49f8f:
-	TX_FAR _MtMoon3Text_49f8f
-	db "@"
+	text_far _MtMoon3Text_49f8f
+	text_end
 
 MtMoon3Text_49f94:
-	TX_FAR _MtMoon3Text_49f94
-	db "@"
+	text_far _MtMoon3Text_49f94
+	text_end
 
 MtMoon3Text_49f99:
-	TX_FAR _MtMoon3Text_49f99
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _MtMoon3Text_49f99
+	sound_get_key_item
+	text_end
 
 MtMoon3BattleText2:
-	TX_FAR _MtMoon3BattleText2
-	db "@"
+	text_far _MtMoon3BattleText2
+	text_end
 
 MtMoon3EndBattleText2:
-	TX_FAR _MtMoon3EndBattleText2
-	db "@"
+	text_far _MtMoon3EndBattleText2
+	text_end
 
 MtMoon3AfterBattleText2:
-	TX_FAR _MtMoon3AfterBattleText2
-	db "@"
+	text_far _MtMoon3AfterBattleText2
+	text_end
 
 MtMoon3BattleText3:
-	TX_FAR _MtMoon3BattleText3
-	db "@"
+	text_far _MtMoon3BattleText3
+	text_end
 
 MtMoon3EndBattleText3:
-	TX_FAR _MtMoon3EndBattleText3
-	db "@"
+	text_far _MtMoon3EndBattleText3
+	text_end
 
 MtMoon3AfterBattleText3:
-	TX_FAR _MtMoon3AfterBattleText3
-	db "@"
+	text_far _MtMoon3AfterBattleText3
+	text_end
 
 MtMoon3BattleText4:
-	TX_FAR _MtMoon3BattleText4
-	db "@"
+	text_far _MtMoon3BattleText4
+	text_end
 
 MtMoon3EndBattleText4:
-	TX_FAR _MtMoon3EndBattleText4
-	db "@"
+	text_far _MtMoon3EndBattleText4
+	text_end
 
 MtMoon3AfterBattleText4:
-	TX_FAR _MtMoon3AfterBattleText4
-	db "@"
+	text_far _MtMoon3AfterBattleText4
+	text_end
 
 MtMoon3BattleText5:
-	TX_FAR _MtMoon3BattleText5
-	db "@"
+	text_far _MtMoon3BattleText5
+	text_end
 
 MtMoon3EndBattleText5:
-	TX_FAR _MtMoon3EndBattleText5
-	db "@"
+	text_far _MtMoon3EndBattleText5
+	text_end
 
 MtMoon3AfterBattleText5:
-	TX_FAR _MtMoon3AfterBattleText5
-	db "@"
+	text_far _MtMoon3AfterBattleText5
+	text_end

@@ -68,12 +68,12 @@ SleepEffect:
 	jp PrintDidntAffectText
 
 FellAsleepText:
-	TX_FAR _FellAsleepText
-	db "@"
+	text_far _FellAsleepText
+	text_end
 
 AlreadyAsleepText:
-	TX_FAR _AlreadyAsleepText
-	db "@"
+	text_far _AlreadyAsleepText
+	text_end
 
 PoisonEffect:
 	ld hl, wEnemyMonStatus
@@ -162,12 +162,12 @@ PoisonEffect:
 	jp PrintDidntAffectText
 
 PoisonedText:
-	TX_FAR _PoisonedText
-	db "@"
+	text_far _PoisonedText
+	text_end
 
 BadlyPoisonedText:
-	TX_FAR _BadlyPoisonedText
-	db "@"
+	text_far _BadlyPoisonedText
+	text_end
 
 DrainHPEffect:
 	jpab DrainHPEffect_
@@ -297,12 +297,12 @@ opponentAttacker:
 	jp PrintText
 
 BurnedText:
-	TX_FAR _BurnedText
-	db "@"
+	text_far _BurnedText
+	text_end
 
 FrozenText:
-	TX_FAR _FrozenText
-	db "@"
+	text_far _FrozenText
+	text_end
 
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
@@ -340,8 +340,8 @@ CheckDefrost:
 	jp PrintText
 
 FireDefrostedText:
-	TX_FAR _FireDefrostedText
-	db "@"
+	text_far _FireDefrostedText
+	text_end
 
 StatModifierUpEffect:
 	ld hl, wPlayerMonStatMods
@@ -508,8 +508,8 @@ PrintNothingHappenedText:
 	jp PrintText
 
 MonsStatsRoseText:
-	TX_FAR _MonsStatsRoseText
-	TX_ASM
+	text_far _MonsStatsRoseText
+	text_asm
 	ld hl, GreatlyRoseText
 	ld a, [hWhoseTurn]
 	and a
@@ -523,12 +523,12 @@ MonsStatsRoseText:
 	ret
 
 GreatlyRoseText:
-	TX_DELAY
-	TX_FAR _GreatlyRoseText
+	text_pause
+	text_far _GreatlyRoseText
 ; fallthrough
 RoseText:
-	TX_FAR _RoseText
-	db "@"
+	text_far _RoseText
+	text_end
 
 StatModifierDownEffect:
 	ld hl, wEnemyMonStatMods
@@ -710,8 +710,8 @@ MoveMissed:
 	jp ConditionalPrintButItFailed
 
 MonsStatsFellText:
-	TX_FAR _MonsStatsFellText
-	TX_ASM
+	text_far _MonsStatsFellText
+	text_asm
 	ld hl, FellText
 	ld a, [hWhoseTurn]
 	and a
@@ -728,12 +728,12 @@ MonsStatsFellText:
 	ret
 
 GreatlyFellText:
-	TX_DELAY
-	TX_FAR _GreatlyFellText
+	text_pause
+	text_far _GreatlyFellText
 ; fallthrough
 FellText:
-	TX_FAR _FellText
-	db "@"
+	text_far _FellText
+	text_end
 
 PrintStatText:
 	ld hl, StatsTextStrings
@@ -905,16 +905,16 @@ SwitchAndTeleportEffect:
 	jp PrintText
 
 RanFromBattleText:
-	TX_FAR _RanFromBattleText
-	db "@"
+	text_far _RanFromBattleText
+	text_end
 
 RanAwayScaredText:
-	TX_FAR _RanAwayScaredText
-	db "@"
+	text_far _RanAwayScaredText
+	text_end
 
 WasBlownAwayText:
-	TX_FAR _WasBlownAwayText
-	db "@"
+	text_far _WasBlownAwayText
+	text_end
 
 TwoToFiveAttacksEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1024,8 +1024,8 @@ ChargeEffect:
 	jp PrintText
 
 ChargeMoveEffectText:
-	TX_FAR _ChargeMoveEffectText
-	TX_ASM
+	text_far _ChargeMoveEffectText
+	text_asm
 	ld a, [wChargeMoveNum]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText
@@ -1048,28 +1048,28 @@ ChargeMoveEffectText:
 	ret
 
 MadeWhirlwindText:
-	TX_FAR _MadeWhirlwindText
-	db "@"
+	text_far _MadeWhirlwindText
+	text_end
 
 TookInSunlightText:
-	TX_FAR _TookInSunlightText
-	db "@"
+	text_far _TookInSunlightText
+	text_end
 
 LoweredItsHeadText:
-	TX_FAR _LoweredItsHeadText
-	db "@"
+	text_far _LoweredItsHeadText
+	text_end
 
 SkyAttackGlowingText:
-	TX_FAR _SkyAttackGlowingText
-	db "@"
+	text_far _SkyAttackGlowingText
+	text_end
 
 FlewUpHighText:
-	TX_FAR _FlewUpHighText
-	db "@"
+	text_far _FlewUpHighText
+	text_end
 
 DugAHoleText:
-	TX_FAR _DugAHoleText
-	db "@"
+	text_far _DugAHoleText
+	text_end
 
 TrappingEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1146,8 +1146,8 @@ ConfusionSideEffectSuccess:
 	jp PrintText
 
 BecameConfusedText:
-	TX_FAR _BecameConfusedText
-	db "@"
+	text_far _BecameConfusedText
+	text_end
 
 ConfusionEffectFailed:
 	cp CONFUSION_SIDE_EFFECT
@@ -1267,8 +1267,8 @@ MimicEffect:
 	jp PrintButItFailedText_
 
 MimicLearnedMoveText:
-	TX_FAR _MimicLearnedMoveText
-	db "@"
+	text_far _MimicLearnedMoveText
+	text_end
 
 LeechSeedEffect:
 	jpab LeechSeedEffect_
@@ -1361,8 +1361,8 @@ DisableEffect:
 	jp PrintButItFailedText_
 
 MoveWasDisabledText:
-	TX_FAR _MoveWasDisabledText
-	db "@"
+	text_far _MoveWasDisabledText
+	text_end
 
 PayDayEffect:
 	jpab PayDayEffect_
@@ -1383,16 +1383,16 @@ ReflectLightScreenEffect:
 	jpab ReflectLightScreenEffect_
 
 NothingHappenedText:
-	TX_FAR _NothingHappenedText
-	db "@"
+	text_far _NothingHappenedText
+	text_end
 
 PrintNoEffectText:
 	ld hl, NoEffectText
 	jp PrintText
 
 NoEffectText:
-	TX_FAR _NoEffectText
-	db "@"
+	text_far _NoEffectText
+	text_end
 
 ConditionalPrintButItFailed:
 	ld a, [wMoveDidntMiss]
@@ -1404,28 +1404,28 @@ PrintButItFailedText_:
 	jp PrintText
 
 ButItFailedText:
-	TX_FAR _ButItFailedText
-	db "@"
+	text_far _ButItFailedText
+	text_end
 
 PrintDidntAffectText:
 	ld hl, DidntAffectText
 	jp PrintText
 
 DidntAffectText:
-	TX_FAR _DidntAffectText
-	db "@"
+	text_far _DidntAffectText
+	text_end
 
 IsUnaffectedText:
-	TX_FAR _IsUnaffectedText
-	db "@"
+	text_far _IsUnaffectedText
+	text_end
 
 PrintMayNotAttackText:
 	ld hl, ParalyzedMayNotAttackText
 	jp PrintText
 
 ParalyzedMayNotAttackText:
-	TX_FAR _ParalyzedMayNotAttackText
-	db "@"
+	text_far _ParalyzedMayNotAttackText
+	text_end
 
 CheckTargetSubstitute:
 	push hl

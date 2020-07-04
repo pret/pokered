@@ -9,12 +9,13 @@ _CableClubNPCMakingPreparationsText::
 	done
 
 _UsedStrengthText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " used"
-	line "STRENGTH.@@"
+	line "STRENGTH.@"
+	text_end
 
 _CanMoveBouldersText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " can"
 	line "move boulders."
 	prompt
@@ -40,13 +41,13 @@ _WarpToLastPokemonCenterText::
 	done
 
 _CannotUseTeleportNowText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " can't"
 	line "use TELEPORT now."
 	prompt
 
 _CannotFlyHereText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " can't"
 	line "FLY here."
 	prompt
@@ -74,18 +75,19 @@ _CannotGetOffHereText::
 _GotMonText::
 	text "<PLAYER> got"
 	line "@"
-	TX_RAM wcd6d
-	text "!@@"
+	text_ram wcd6d
+	text "!@"
+	text_end
 
 _SentToBoxText::
 	text "There's no more"
 	line "room for #MON!"
 	cont "@"
-	TX_RAM wBoxMonNicks
+	text_ram wBoxMonNicks
 	text " was"
 	cont "sent to #MON"
 	cont "BOX @"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text " on PC!"
 	done
 

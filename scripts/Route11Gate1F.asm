@@ -5,5 +5,5 @@ Route11Gate1F_TextPointers:
 	dw Route11GateText1
 
 Route11GateText1:
-	TX_FAR _Route11GateText1
-	db "@"
+	text_far _Route11GateText1
+	text_end

@@ -109,160 +109,160 @@ Route9TrainerHeader8:
 	db $ff
 
 Route9Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader0
 	jr Route9TalkToTrainer
 
 Route9Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader1
 	jr Route9TalkToTrainer
 
 Route9Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader2
 	jr Route9TalkToTrainer
 
 Route9Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader3
 	jr Route9TalkToTrainer
 
 Route9Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader4
 	jr Route9TalkToTrainer
 
 Route9Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader5
 	jr Route9TalkToTrainer
 
 Route9Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader6
 	jr Route9TalkToTrainer
 
 Route9Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader7
 	jr Route9TalkToTrainer
 
 Route9Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route9TrainerHeader8
 Route9TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route9BattleText1:
-	TX_FAR _Route9BattleText1
-	db "@"
+	text_far _Route9BattleText1
+	text_end
 
 Route9EndBattleText1:
-	TX_FAR _Route9EndBattleText1
-	db "@"
+	text_far _Route9EndBattleText1
+	text_end
 
 Route9AfterBattleText1:
-	TX_FAR _Route9AfterBattleText1
-	db "@"
+	text_far _Route9AfterBattleText1
+	text_end
 
 Route9BattleText2:
-	TX_FAR _Route9BattleText2
-	db "@"
+	text_far _Route9BattleText2
+	text_end
 
 Route9EndBattleText2:
-	TX_FAR _Route9EndBattleText2
-	db "@"
+	text_far _Route9EndBattleText2
+	text_end
 
 Route9AfterBattleText2:
-	TX_FAR _Route9AfterBattleText2
-	db "@"
+	text_far _Route9AfterBattleText2
+	text_end
 
 Route9BattleText3:
-	TX_FAR _Route9BattleText3
-	db "@"
+	text_far _Route9BattleText3
+	text_end
 
 Route9EndBattleText3:
-	TX_FAR _Route9EndBattleText3
-	db "@"
+	text_far _Route9EndBattleText3
+	text_end
 
 Route9AfterBattleText3:
-	TX_FAR _Route9AfterBattleText3
-	db "@"
+	text_far _Route9AfterBattleText3
+	text_end
 
 Route9BattleText4:
-	TX_FAR _Route9BattleText4
-	db "@"
+	text_far _Route9BattleText4
+	text_end
 
 Route9EndBattleText4:
-	TX_FAR _Route9EndBattleText4
-	db "@"
+	text_far _Route9EndBattleText4
+	text_end
 
 Route9AfterBattleText4:
-	TX_FAR _Route9AfterBattleText4
-	db "@"
+	text_far _Route9AfterBattleText4
+	text_end
 
 Route9BattleText5:
-	TX_FAR _Route9BattleText5
-	db "@"
+	text_far _Route9BattleText5
+	text_end
 
 Route9EndBattleText5:
-	TX_FAR _Route9EndBattleText5
-	db "@"
+	text_far _Route9EndBattleText5
+	text_end
 
 Route9AfterBattleText5:
-	TX_FAR _Route9AfterBattleText5
-	db "@"
+	text_far _Route9AfterBattleText5
+	text_end
 
 Route9BattleText6:
-	TX_FAR _Route9BattleText6
-	db "@"
+	text_far _Route9BattleText6
+	text_end
 
 Route9EndBattleText6:
-	TX_FAR _Route9EndBattleText6
-	db "@"
+	text_far _Route9EndBattleText6
+	text_end
 
 Route9AfterBattleText6:
-	TX_FAR _Route9AfterBattleText6
-	db "@"
+	text_far _Route9AfterBattleText6
+	text_end
 
 Route9BattleText7:
-	TX_FAR _Route9BattleText7
-	db "@"
+	text_far _Route9BattleText7
+	text_end
 
 Route9EndBattleText7:
-	TX_FAR _Route9EndBattleText7
-	db "@"
+	text_far _Route9EndBattleText7
+	text_end
 
 Route9AfterBattleText7:
-	TX_FAR _Route9AfterBattleText7
-	db "@"
+	text_far _Route9AfterBattleText7
+	text_end
 
 Route9BattleText8:
-	TX_FAR _Route9BattleText8
-	db "@"
+	text_far _Route9BattleText8
+	text_end
 
 Route9EndBattleText8:
-	TX_FAR _Route9EndBattleText8
-	db "@"
+	text_far _Route9EndBattleText8
+	text_end
 
 Route9AfterBattleText8:
-	TX_FAR _Route9AfterBattleText8
-	db "@"
+	text_far _Route9AfterBattleText8
+	text_end
 
 Route9BattleText9:
-	TX_FAR _Route9BattleText9
-	db "@"
+	text_far _Route9BattleText9
+	text_end
 
 Route9EndBattleText9:
-	TX_FAR _Route9EndBattleText9
-	db "@"
+	text_far _Route9EndBattleText9
+	text_end
 
 Route9AfterBattleText9:
-	TX_FAR _Route9AfterBattleText9
-	db "@"
+	text_far _Route9AfterBattleText9
+	text_end
 
 Route9Text11:
-	TX_FAR _Route9Text11
-	db "@"
+	text_far _Route9Text11
+	text_end

@@ -40,9 +40,9 @@ GymStatues:
 	db $ff
 
 GymStatueText1::
-	TX_FAR _GymStatueText1
-	db "@"
+	text_far _GymStatueText1
+	text_end
 
 GymStatueText2::
-	TX_FAR _GymStatueText2
-	db "@"
+	text_far _GymStatueText2
+	text_end

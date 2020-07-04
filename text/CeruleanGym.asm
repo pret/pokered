@@ -47,7 +47,8 @@ _CeruleanGymText_5c7c8::
 
 _ReceivedTM11Text::
 	text "<PLAYER> received"
-	line "TM11!@@"
+	line "TM11!@"
+	text_end
 
 _CeruleanGymText_5c7d3::
 	text "You better make"
@@ -62,7 +63,8 @@ _CeruleanGymText_5c7d8::
 
 	para "You can have the"
 	line "CASCADEBADGE to"
-	cont "show you beat me!@@"
+	cont "show you beat me!@"
+	text_end
 
 _CeruleanGymBattleText1::
 	text "I'm more than good"

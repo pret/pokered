@@ -26,11 +26,12 @@ _LTSurgeThunderbadgeInfoText::
 _ReceivedTM24Text::
 	text "<PLAYER> received "
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _TM24ExplanationText::
-	text ""
+	text_start
 
 	para "TM24 contains"
 	line "THUNDERBOLT!"

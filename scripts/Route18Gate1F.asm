@@ -87,7 +87,7 @@ Route18Gate1F_TextPointers:
 	dw Route18GateText2
 
 Route18GateText1:
-	TX_ASM
+	text_asm
 	call Route16GateScript_49755
 	jr z, .asm_3c84d
 	ld hl, Route18GateText_4992d
@@ -100,13 +100,13 @@ Route18GateText1:
 	jp TextScriptEnd
 
 Route18GateText_49928:
-	TX_FAR _Route18GateText_49928
-	db "@"
+	text_far _Route18GateText_49928
+	text_end
 
 Route18GateText_4992d:
-	TX_FAR _Route18GateText_4992d
-	db "@"
+	text_far _Route18GateText_4992d
+	text_end
 
 Route18GateText2:
-	TX_FAR _Route18GateText_49932
-	db "@"
+	text_far _Route18GateText_49932
+	text_end

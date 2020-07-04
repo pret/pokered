@@ -10,19 +10,19 @@ PewterMart_TextPointers:
 	dw PewterMartText3
 
 PewterMartText2:
-	TX_ASM
+	text_asm
 	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 .Text
-	TX_FAR _PewterMartText2
-	db "@"
+	text_far _PewterMartText2
+	text_end
 
 PewterMartText3:
-	TX_ASM
+	text_asm
 	ld hl, .Text
 	call PrintText
 	jp TextScriptEnd
 .Text
-	TX_FAR _PewterMartText3
-	db "@"
+	text_far _PewterMartText3
+	text_end

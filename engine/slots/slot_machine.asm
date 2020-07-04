@@ -53,8 +53,8 @@ PromptUserToPlaySlots:
 	jp CloseTextDisplay
 
 PlaySlotMachineText:
-	TX_FAR _PlaySlotMachineText
-	db "@"
+	text_far _PlaySlotMachineText
+	text_end
 
 MainSlotMachineLoop:
 	call SlotMachine_PrintCreditCoins
@@ -152,24 +152,24 @@ CoinMultiplierSlotMachineText:
 	next "×1@"
 
 OutOfCoinsSlotMachineText:
-	TX_FAR _OutOfCoinsSlotMachineText
-	db "@"
+	text_far _OutOfCoinsSlotMachineText
+	text_end
 
 BetHowManySlotMachineText:
-	TX_FAR _BetHowManySlotMachineText
-	db "@"
+	text_far _BetHowManySlotMachineText
+	text_end
 
 StartSlotMachineText:
-	TX_FAR _StartSlotMachineText
-	db "@"
+	text_far _StartSlotMachineText
+	text_end
 
 NotEnoughCoinsSlotMachineText:
-	TX_FAR _NotEnoughCoinsSlotMachineText
-	db "@"
+	text_far _NotEnoughCoinsSlotMachineText
+	text_end
 
 OneMoreGoSlotMachineText:
-	TX_FAR _OneMoreGoSlotMachineText
-	db "@"
+	text_far _OneMoreGoSlotMachineText
+	text_end
 
 SlotMachine_SetFlags:
 	ld hl, wSlotMachineFlags
@@ -476,7 +476,7 @@ SlotMachine_CheckForMatches:
 	jp .done
 
 SymbolLinedUpSlotMachineText:
-	TX_ASM
+	text_asm
 	push bc
 	call SlotMachine_PrintWinningSymbol
 	ld hl, LinedUpText
@@ -488,8 +488,8 @@ SymbolLinedUpSlotMachineText:
 	ret
 
 LinedUpText:
-	TX_FAR _LinedUpText
-	db "@"
+	text_far _LinedUpText
+	text_end
 
 SlotRewardPointers:
 	dw SlotReward300Func
@@ -518,8 +518,8 @@ SlotReward15Text:
 	db "15@"
 
 NotThisTimeText:
-	TX_FAR _NotThisTimeText
-	db "@"
+	text_far _NotThisTimeText
+	text_end
 
 ; compares the slot machine tiles at bc, de, and hl
 SlotMachine_CheckForMatch:
@@ -609,9 +609,9 @@ SlotReward300Func:
 	ret
 
 YeahText:
-	TX_FAR _YeahText
-	TX_DELAY
-	db "@"
+	text_far _YeahText
+	text_pause
+	text_end
 
 SlotMachine_PrintWinningSymbol:
 ; prints winning symbol and down arrow in text box

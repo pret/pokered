@@ -247,57 +247,57 @@ PlayersPCMenuEntries:
 	next "LOG OFF@"
 
 TurnedOnPC2Text:
-	TX_FAR _TurnedOnPC2Text
-	db "@"
+	text_far _TurnedOnPC2Text
+	text_end
 
 WhatDoYouWantText:
-	TX_FAR _WhatDoYouWantText
-	db "@"
+	text_far _WhatDoYouWantText
+	text_end
 
 WhatToDepositText:
-	TX_FAR _WhatToDepositText
-	db "@"
+	text_far _WhatToDepositText
+	text_end
 
 DepositHowManyText:
-	TX_FAR _DepositHowManyText
-	db "@"
+	text_far _DepositHowManyText
+	text_end
 
 ItemWasStoredText:
-	TX_FAR _ItemWasStoredText
-	db "@"
+	text_far _ItemWasStoredText
+	text_end
 
 NothingToDepositText:
-	TX_FAR _NothingToDepositText
-	db "@"
+	text_far _NothingToDepositText
+	text_end
 
 NoRoomToStoreText:
-	TX_FAR _NoRoomToStoreText
-	db "@"
+	text_far _NoRoomToStoreText
+	text_end
 
 WhatToWithdrawText:
-	TX_FAR _WhatToWithdrawText
-	db "@"
+	text_far _WhatToWithdrawText
+	text_end
 
 WithdrawHowManyText:
-	TX_FAR _WithdrawHowManyText
-	db "@"
+	text_far _WithdrawHowManyText
+	text_end
 
 WithdrewItemText:
-	TX_FAR _WithdrewItemText
-	db "@"
+	text_far _WithdrewItemText
+	text_end
 
 NothingStoredText:
-	TX_FAR _NothingStoredText
-	db "@"
+	text_far _NothingStoredText
+	text_end
 
 CantCarryMoreText:
-	TX_FAR _CantCarryMoreText
-	db "@"
+	text_far _CantCarryMoreText
+	text_end
 
 WhatToTossText:
-	TX_FAR _WhatToTossText
-	db "@"
+	text_far _WhatToTossText
+	text_end
 
 TossHowManyText:
-	TX_FAR _TossHowManyText
-	db "@"
+	text_far _TossHowManyText
+	text_end

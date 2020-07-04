@@ -9,15 +9,15 @@ VermilionPokecenter_TextPointers:
 	dw VermilionTradeNurseText
 
 VermilionHealNurseText:
-	TX_POKECENTER_NURSE
+	script_pokecenter_nurse
 
 VermilionPokecenterText2:
-	TX_FAR _VermilionPokecenterText2
-	db "@"
+	text_far _VermilionPokecenterText2
+	text_end
 
 VermilionPokecenterText3:
-	TX_FAR _VermilionPokecenterText3
-	db "@"
+	text_far _VermilionPokecenterText3
+	text_end
 
 VermilionTradeNurseText:
-	TX_CABLE_CLUB_RECEPTIONIST
+	script_cable_club_receptionist

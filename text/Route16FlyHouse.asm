@@ -10,7 +10,8 @@ _Route16HouseText3::
 
 _ReceivedHM02Text::
 	text "<PLAYER> received"
-	line "HM02!@@"
+	line "HM02!@"
+	text_end
 
 _HM02ExplanationText::
 	text "HM02 is FLY."

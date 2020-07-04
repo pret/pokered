@@ -6,11 +6,11 @@ CeruleanTradeHouse_TextPointers:
 	dw CeruleanHouse1Text2
 
 CeruleanHouse1Text1:
-	TX_FAR _CeruleanHouse1Text1
-	db "@"
+	text_far _CeruleanHouse1Text1
+	text_end
 
 CeruleanHouse1Text2:
-	TX_ASM
+	text_asm
 	ld a, $6
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

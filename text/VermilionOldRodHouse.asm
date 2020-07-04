@@ -18,11 +18,12 @@ _VermilionHouse2Text_560b6::
 
 	para "<PLAYER> received"
 	line "an @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _VermilionHouse2Text_560bb::
-	text ""
+	text_start
 
 	para "Fishing is a way"
 	line "of life!"

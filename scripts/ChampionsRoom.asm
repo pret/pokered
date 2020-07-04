@@ -247,7 +247,7 @@ ChampionsRoom_TextPointers:
 	dw GaryText5
 
 GaryText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld hl, GaryChampionIntroText
 	jr z, .printText
@@ -257,27 +257,27 @@ GaryText1:
 	jp TextScriptEnd
 
 GaryChampionIntroText:
-	TX_FAR _GaryChampionIntroText
-	db "@"
+	text_far _GaryChampionIntroText
+	text_end
 
 GaryDefeatedText:
-	TX_FAR _GaryDefeatedText
-	db "@"
+	text_far _GaryDefeatedText
+	text_end
 
 GaryVictoryText:
-	TX_FAR _GaryVictoryText
-	db "@"
+	text_far _GaryVictoryText
+	text_end
 
 GaryText_76103:
-	TX_FAR _GaryText_76103
-	db "@"
+	text_far _GaryText_76103
+	text_end
 
 GaryText2:
-	TX_FAR _GaryText2
-	db "@"
+	text_far _GaryText2
+	text_end
 
 GaryText3:
-	TX_ASM
+	text_asm
 	ld a, [wPlayerStarter]
 	ld [wd11e], a
 	call GetMonName
@@ -286,13 +286,13 @@ GaryText3:
 	jp TextScriptEnd
 
 GaryText_76120:
-	TX_FAR _GaryText_76120
-	db "@"
+	text_far _GaryText_76120
+	text_end
 
 GaryText4:
-	TX_FAR _GaryText_76125
-	db "@"
+	text_far _GaryText_76125
+	text_end
 
 GaryText5:
-	TX_FAR _GaryText_7612a
-	db "@"
+	text_far _GaryText_7612a
+	text_end

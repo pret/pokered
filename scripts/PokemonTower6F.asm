@@ -133,25 +133,25 @@ PokemonTower6TrainerHeader2:
 	db $ff
 
 PokemonTower6Text1:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text2:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower6TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text3:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower6Text7:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower2Text_60c1f
 	call PrintText
 	ld a, MAROWAK
@@ -164,49 +164,49 @@ PokemonTower6Text7:
 	jp TextScriptEnd
 
 PokemonTower2Text_60c1f:
-	TX_FAR _PokemonTower2Text_60c1f
-	db "@"
+	text_far _PokemonTower2Text_60c1f
+	text_end
 
 PokemonTower2Text_60c24:
-	TX_FAR _PokemonTower2Text_60c24
-	db "@"
+	text_far _PokemonTower2Text_60c24
+	text_end
 
 PokemonTower6BattleText1:
-	TX_FAR _PokemonTower6BattleText1
-	db "@"
+	text_far _PokemonTower6BattleText1
+	text_end
 
 PokemonTower6EndBattleText1:
-	TX_FAR _PokemonTower6EndBattleText1
-	db "@"
+	text_far _PokemonTower6EndBattleText1
+	text_end
 
 PokemonTower6AfterBattleText1:
-	TX_FAR _PokemonTower6AfterBattleText1
-	db "@"
+	text_far _PokemonTower6AfterBattleText1
+	text_end
 
 PokemonTower6BattleText2:
-	TX_FAR _PokemonTower6BattleText2
-	db "@"
+	text_far _PokemonTower6BattleText2
+	text_end
 
 PokemonTower6EndBattleText2:
-	TX_FAR _PokemonTower6EndBattleText2
-	db "@"
+	text_far _PokemonTower6EndBattleText2
+	text_end
 
 PokemonTower6AfterBattleText2:
-	TX_FAR _PokemonTower6AfterBattleText2
-	db "@"
+	text_far _PokemonTower6AfterBattleText2
+	text_end
 
 PokemonTower6BattleText3:
-	TX_FAR _PokemonTower6BattleText3
-	db "@"
+	text_far _PokemonTower6BattleText3
+	text_end
 
 PokemonTower6EndBattleText3:
-	TX_FAR _PokemonTower6EndBattleText3
-	db "@"
+	text_far _PokemonTower6EndBattleText3
+	text_end
 
 PokemonTower6AfterBattleText3:
-	TX_FAR _PokemonTower6AfterBattleText3
-	db "@"
+	text_far _PokemonTower6AfterBattleText3
+	text_end
 
 PokemonTower6Text6:
-	TX_FAR _PokemonTower6Text6
-	db "@"
+	text_far _PokemonTower6Text6
+	text_end

@@ -8,4 +8,4 @@ OpenPokemonCenterPC:
 	tx_pre_jump PokemonCenterPCText
 
 PokemonCenterPCText::
-	TX_POKECENTER_PC
+	script_pokecenter_pc

@@ -149,7 +149,7 @@ ArticunoTrainerHeader:
 	db $ff
 
 ArticunoText:
-	TX_ASM
+	text_asm
 	ld hl, ArticunoTrainerHeader
 	call TalkToTrainer
 	ld a, $4
@@ -157,17 +157,17 @@ ArticunoText:
 	jp TextScriptEnd
 
 ArticunoBattleText:
-	TX_FAR _ArticunoBattleText
-	TX_ASM
+	text_far _ArticunoBattleText
+	text_asm
 	ld a, ARTICUNO
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
 SeafoamIslands5Text4:
-	TX_FAR _SeafoamIslands5Text4
-	db "@"
+	text_far _SeafoamIslands5Text4
+	text_end
 
 SeafoamIslands5Text5:
-	TX_FAR _SeafoamIslands5Text5
-	db "@"
+	text_far _SeafoamIslands5Text5
+	text_end

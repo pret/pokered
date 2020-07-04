@@ -50,8 +50,8 @@ AskName:
 	jp CopyData
 
 DoYouWantToNicknameText:
-	TX_FAR _DoYouWantToNicknameText
-	db "@"
+	text_far _DoYouWantToNicknameText
+	text_end
 
 DisplayNameRaterScreen::
 	ld hl, wBuffer

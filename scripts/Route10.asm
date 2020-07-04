@@ -81,118 +81,118 @@ Route10TrainerHeader5:
 	db $ff
 
 Route10Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText1:
-	TX_FAR _Route10BattleText1
-	db "@"
+	text_far _Route10BattleText1
+	text_end
 
 Route10EndBattleText1:
-	TX_FAR _Route10EndBattleText1
-	db "@"
+	text_far _Route10EndBattleText1
+	text_end
 
 Route10AfterBattleText1:
-	TX_FAR _Route10AfterBattleText1
-	db "@"
+	text_far _Route10AfterBattleText1
+	text_end
 
 Route10Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText2:
-	TX_FAR _Route10BattleText2
-	db "@"
+	text_far _Route10BattleText2
+	text_end
 
 Route10EndBattleText2:
-	TX_FAR _Route10EndBattleText2
-	db "@"
+	text_far _Route10EndBattleText2
+	text_end
 
 Route10AfterBattleText2:
-	TX_FAR _Route10AfterBattleText2
-	db "@"
+	text_far _Route10AfterBattleText2
+	text_end
 
 Route10Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText3:
-	TX_FAR _Route10BattleText3
-	db "@"
+	text_far _Route10BattleText3
+	text_end
 
 Route10EndBattleText3:
-	TX_FAR _Route10EndBattleText3
-	db "@"
+	text_far _Route10EndBattleText3
+	text_end
 
 Route10AfterBattleText3:
-	TX_FAR _Route10AfterBattleText3
-	db "@"
+	text_far _Route10AfterBattleText3
+	text_end
 
 Route10Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText4:
-	TX_FAR _Route10BattleText4
-	db "@"
+	text_far _Route10BattleText4
+	text_end
 
 Route10EndBattleText4:
-	TX_FAR _Route10EndBattleText4
-	db "@"
+	text_far _Route10EndBattleText4
+	text_end
 
 Route10AfterBattleText4:
-	TX_FAR _Route10AfterBattleText4
-	db "@"
+	text_far _Route10AfterBattleText4
+	text_end
 
 Route10Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText5:
-	TX_FAR _Route10BattleText5
-	db "@"
+	text_far _Route10BattleText5
+	text_end
 
 Route10EndBattleText5:
-	TX_FAR _Route10EndBattleText5
-	db "@"
+	text_far _Route10EndBattleText5
+	text_end
 
 Route10AfterBattleText5:
-	TX_FAR _Route10AfterBattleText5
-	db "@"
+	text_far _Route10AfterBattleText5
+	text_end
 
 Route10Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route10TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route10BattleText6:
-	TX_FAR _Route10BattleText6
-	db "@"
+	text_far _Route10BattleText6
+	text_end
 
 Route10EndBattleText6:
-	TX_FAR _Route10EndBattleText6
-	db "@"
+	text_far _Route10EndBattleText6
+	text_end
 
 Route10AfterBattleText6:
-	TX_FAR _Route10AfterBattleText6
-	db "@"
+	text_far _Route10AfterBattleText6
+	text_end
 
 Route10Text9:
 Route10Text7:
-	TX_FAR _Route10Text7 ; _Route10Text9
-	db "@"
+	text_far _Route10Text7 ; _Route10Text9
+	text_end
 
 Route10Text10:
-	TX_FAR _Route10Text10
-	db "@"
+	text_far _Route10Text10
+	text_end

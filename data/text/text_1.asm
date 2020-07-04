@@ -1,8 +1,9 @@
 _CardKeySuccessText1::
-	text "Bingo!@@"
+	text "Bingo!@"
+	text_end
 
 _CardKeySuccessText2::
-	text ""
+	text_start
 	line "The CARD KEY"
 	cont "opened the door!"
 	done
@@ -13,8 +14,9 @@ _CardKeyFailText::
 	done
 
 _TrainerNameText::
-	TX_RAM wcd6d
-	text ": @@"
+	text_ram wcd6d
+	text ": @"
+	text_end
 
 _NoNibbleText::
 	text "Not even a nibble!"
@@ -58,8 +60,9 @@ _PokeCenterSignText::
 _FoundItemText::
 	text "<PLAYER> found"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _NoMoreRoomForItemText::
 	text "No more room for"
@@ -72,19 +75,19 @@ _OaksAideHiText::
 	cont "AIDE!"
 
 	para "If you caught @"
-	TX_NUM hOaksAideRequirement, 1, 3
-	text ""
+	text_decimal hOaksAideRequirement, 1, 3
+	text_start
 	line "kinds of #MON,"
 	cont "I'm supposed to"
 	cont "give you an"
 	cont "@"
-	TX_RAM wOaksAideRewardItemName
+	text_ram wOaksAideRewardItemName
 	text "!"
 
 	para "So, <PLAYER>! Have"
 	line "you caught at"
 	cont "least @"
-	TX_NUM hOaksAideRequirement, 1, 3
+	text_decimal hOaksAideRequirement, 1, 3
 	text " kinds of"
 	cont "#MON?"
 	done
@@ -93,16 +96,16 @@ _OaksAideUhOhText::
 	text "Let's see..."
 	line "Uh-oh! You have"
 	cont "caught only @"
-	TX_NUM hOaksAideNumMonsOwned, 1, 3
-	text ""
+	text_decimal hOaksAideNumMonsOwned, 1, 3
+	text_start
 	cont "kinds of #MON!"
 
 	para "You need @"
-	TX_NUM hOaksAideRequirement, 1, 3
+	text_decimal hOaksAideRequirement, 1, 3
 	text " kinds"
 	line "if you want the"
 	cont "@"
-	TX_RAM wOaksAideRewardItemName
+	text_ram wOaksAideRewardItemName
 	text "."
 	done
 
@@ -110,18 +113,18 @@ _OaksAideComeBackText::
 	text "Oh. I see."
 
 	para "When you get @"
-	TX_NUM hOaksAideRequirement, 1, 3
-	text ""
+	text_decimal hOaksAideRequirement, 1, 3
+	text_start
 	line "kinds, come back"
 	cont "for @"
-	TX_RAM wOaksAideRewardItemName
+	text_ram wOaksAideRewardItemName
 	text "."
 	done
 
 _OaksAideHereYouGoText::
 	text "Great! You have"
 	line "caught @"
-	TX_NUM hOaksAideNumMonsOwned, 1, 3
+	text_decimal hOaksAideNumMonsOwned, 1, 3
 	text " kinds "
 	cont "of #MON!"
 	cont "Congratulations!"
@@ -132,14 +135,15 @@ _OaksAideHereYouGoText::
 _OaksAideGotItemText::
 	text "<PLAYER> got the"
 	line "@"
-	TX_RAM wOaksAideRewardItemName
-	text "!@@"
+	text_ram wOaksAideRewardItemName
+	text "!@"
+	text_end
 
 _OaksAideNoRoomText::
 	text "Oh! I see you"
 	line "don't have any"
 	cont "room for the"
 	cont "@"
-	TX_RAM wOaksAideRewardItemName
+	text_ram wOaksAideRewardItemName
 	text "."
 	done

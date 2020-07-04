@@ -15,8 +15,9 @@ _Route1ViridianMartSampleText::
 _Route1Text_1cae8::
 	text "<PLAYER> got"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _Route1Text_1caee::
 	text "We also carry"

@@ -1,3 +1,3 @@
 ElevatorText::
-	TX_FAR _ElevatorText
-	db "@"
+	text_far _ElevatorText
+	text_end

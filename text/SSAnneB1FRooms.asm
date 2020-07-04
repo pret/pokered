@@ -1,6 +1,7 @@
 _SSAnne10Text8::
 	text "MACHOKE: Gwoh!"
-	line "Goggoh!@@"
+	line "Goggoh!@"
+	text_end
 
 _SSAnne10BattleText1::
 	text "You know what they"
@@ -52,7 +53,8 @@ _SSAnne10AfterBattleText3::
 
 _SSAnne10BattleText4::
 	text "I like feisty"
-	line "kids like you!@@"
+	line "kids like you!@"
+	text_end
 
 _SSAnne10EndBattleText4::
 	text "Argh!"

@@ -98,7 +98,7 @@ RocketHQName:
 SilphCoName:
 	db "SILPH CO.@"
 PokemonMansionName:
-	db "<pkmn> MANSION@"
+	db "<PKMN> MANSION@"
 SafariZoneName:
 	db "SAFARI ZONE@"
 CeruleanCaveName:

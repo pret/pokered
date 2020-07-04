@@ -162,7 +162,8 @@ _Route15EndBattleText10::
 
 _Route15AfterBattleText10::
 	text "I'll go train with"
-	line "weaker people.@@"
+	line "weaker people.@"
+	text_end
 
 _Route15Text12::
 	text "ROUTE 15"

@@ -59,7 +59,7 @@ PrintSafariGameOverText::
 	jp PrintText
 
 SafariGameOverText:
-	TX_ASM
+	text_asm
 	ld a, [wNumSafariBalls]
 	and a
 	jr z, .noMoreSafariBalls
@@ -71,9 +71,9 @@ SafariGameOverText:
 	jp TextScriptEnd
 
 TimesUpText:
-	TX_FAR _TimesUpText
-	db "@"
+	text_far _TimesUpText
+	text_end
 
 GameOverText:
-	TX_FAR _GameOverText
-	db "@"
+	text_far _GameOverText
+	text_end

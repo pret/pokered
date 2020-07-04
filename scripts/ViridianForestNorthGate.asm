@@ -6,9 +6,9 @@ ViridianForestNorthGate_TextPointers:
 	dw ViridianForestExitText2
 
 ViridianForestExitText1:
-	TX_FAR _ViridianForestExitText1
-	db "@"
+	text_far _ViridianForestExitText1
+	text_end
 
 ViridianForestExitText2:
-	TX_FAR _ViridianForestExitText2
-	db "@"
+	text_far _ViridianForestExitText2
+	text_end

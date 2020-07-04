@@ -8,7 +8,7 @@ Route11Gate2F_TextPointers:
 	dw Route11GateUpstairsText4
 
 Route11GateUpstairsText1:
-	TX_ASM
+	text_asm
 	xor a
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
@@ -16,7 +16,7 @@ Route11GateUpstairsScriptEnd:
 	jp TextScriptEnd
 
 Route11GateUpstairsText2:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
@@ -42,11 +42,11 @@ Route11GateUpstairsText2:
 	jr Route11GateUpstairsScriptEnd
 
 Route11GateUpstairsText_494a3:
-	TX_FAR _Route11GateUpstairsText_494a3
-	db "@"
+	text_far _Route11GateUpstairsText_494a3
+	text_end
 
 Route11GateUpstairsText3:
-	TX_ASM
+	text_asm
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	jp nz, GateUpstairsScript_PrintIfFacingUp
@@ -59,18 +59,18 @@ Route11GateUpstairsText3:
 	jp TextScriptEnd
 
 BinocularsSnorlaxText:
-	TX_FAR _BinocularsSnorlaxText
-	db "@"
+	text_far _BinocularsSnorlaxText
+	text_end
 
 BinocularsNoSnorlaxText:
-	TX_FAR _BinocularsNoSnorlaxText
-	db "@"
+	text_far _BinocularsNoSnorlaxText
+	text_end
 
 Route11GateUpstairsText4:
-	TX_ASM
+	text_asm
 	ld hl, Route11GateUpstairsText_494d5
 	jp GateUpstairsScript_PrintIfFacingUp
 
 Route11GateUpstairsText_494d5:
-	TX_FAR _Route11GateUpstairsText_494d5
-	db "@"
+	text_far _Route11GateUpstairsText_494d5
+	text_end

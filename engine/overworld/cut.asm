@@ -22,8 +22,8 @@ UsedCut:
 	jp PrintText
 
 .NothingToCutText
-	TX_FAR _NothingToCutText
-	db "@"
+	text_far _NothingToCutText
+	text_end
 
 .canCut
 	ld [wCutTile], a
@@ -68,8 +68,8 @@ UsedCut:
 	jp RedrawMapView
 
 UsedCutText:
-	TX_FAR _UsedCutText
-	db "@"
+	text_far _UsedCutText
+	text_end
 
 InitCutAnimOAM:
 	xor a

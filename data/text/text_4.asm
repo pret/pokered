@@ -4,8 +4,8 @@ _PokemartGreetingText::
 	done
 
 _PokemonFaintedText::
-	TX_RAM wcd6d
-	text ""
+	text_ram wcd6d
+	text_start
 	line "fainted!"
 	done
 
@@ -27,11 +27,11 @@ _PokemartBuyingGreetingText::
 	done
 
 _PokemartTellBuyPriceText::
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "?"
 	line "That will be"
 	cont "¥@"
-	TX_BCD hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
+	text_bcd hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
 	text ". OK?"
 	done
 
@@ -58,7 +58,7 @@ _PokemonSellingGreetingText::
 _PokemartTellSellPriceText::
 	text "I can pay you"
 	line "¥@"
-	TX_BCD hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
+	text_bcd hMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
 	text " for that."
 	done
 
@@ -82,11 +82,12 @@ _PokemartAnythingElseText::
 	done
 
 _LearnedMove1Text::
-	TX_RAM wLearnMoveMonName
+	text_ram wLearnMoveMonName
 	text " learned"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _WhichMoveToForgetText::
 	text "Which move should"
@@ -96,53 +97,55 @@ _WhichMoveToForgetText::
 _AbandonLearningText::
 	text "Abandon learning"
 	line "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "?"
 	done
 
 _DidNotLearnText::
-	TX_RAM wLearnMoveMonName
-	text ""
+	text_ram wLearnMoveMonName
+	text_start
 	line "did not learn"
 	cont "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "!"
 	prompt
 
 _TryingToLearnText::
-	TX_RAM wLearnMoveMonName
+	text_ram wLearnMoveMonName
 	text " is"
 	line "trying to learn"
 	cont "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "!"
 
 	para "But, @"
-	TX_RAM wLearnMoveMonName
-	text ""
+	text_ram wLearnMoveMonName
+	text_start
 	line "can't learn more"
 	cont "than 4 moves!"
 
 	para "Delete an older"
 	line "move to make room"
 	cont "for @"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "?"
 	done
 
 _OneTwoAndText::
-	text "1, 2 and...@@"
+	text "1, 2 and...@"
+	text_end
 
 _PoofText::
-	text " Poof!@@"
+	text " Poof!@"
+	text_end
 
 _ForgotAndText::
-	text ""
+	text_start
 	para "@"
-	TX_RAM wLearnMoveMonName
+	text_ram wLearnMoveMonName
 	text " forgot"
 	line "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 
 	para "And..."
@@ -204,7 +207,8 @@ _CableClubNPCPleaseApplyHereHaveToSaveText::
 	done
 
 _CableClubNPCPleaseWaitText::
-	text "Please wait.@@"
+	text "Please wait.@"
+	text_end
 
 _CableClubNPCLinkClosedBecauseOfInactivityText::
 	text "The link has been"

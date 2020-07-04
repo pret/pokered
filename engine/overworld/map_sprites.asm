@@ -133,7 +133,7 @@ LoadMapSpriteTilePatterns:
 	jr nc, .fourTileSpriteVRAMAddr
 	ld d, a
 	dec d
-; vSprites += [hVRAMSlot] * $C0 (the number of bytes in 12 tiles)
+; hl = vSprites + [hVRAMSlot] * $C0 (the number of bytes in 12 tiles)
 .calculateVRAMAddrLoop
 	add hl, bc
 	dec d

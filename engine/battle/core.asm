@@ -207,8 +207,8 @@ StartBattle:
 	jr EnemyRan ; if b was greater than the random value, the enemy runs
 
 .outOfSafariBallsText
-	TX_FAR _OutOfSafariBallsText
-	db "@"
+	text_far _OutOfSafariBallsText
+	text_end
 
 .playerSendOutFirstMon
 	xor a
@@ -270,12 +270,12 @@ EnemyRan:
 	jpab AnimationSlideEnemyMonOff
 
 WildRanText:
-	TX_FAR _WildRanText
-	db "@"
+	text_far _WildRanText
+	text_end
 
 EnemyRanText:
-	TX_FAR _EnemyRanText
-	db "@"
+	text_far _EnemyRanText
+	text_end
 
 MainInBattleLoop:
 	call ReadPlayerMonCurHPAndStatus
@@ -532,16 +532,16 @@ HandlePoisonBurnLeechSeed:
 	ret
 
 HurtByPoisonText:
-	TX_FAR _HurtByPoisonText
-	db "@"
+	text_far _HurtByPoisonText
+	text_end
 
 HurtByBurnText:
-	TX_FAR _HurtByBurnText
-	db "@"
+	text_far _HurtByBurnText
+	text_end
 
 HurtByLeechSeedText:
-	TX_FAR _HurtByLeechSeedText
-	db "@"
+	text_far _HurtByLeechSeedText
+	text_end
 
 ; decreases the mon's current HP by 1/16 of the Max HP (multiplied by number of toxic ticks if active)
 ; note that the toxic ticks are considered even if the damage is not poison (hence the Leech Seed glitch)
@@ -858,8 +858,8 @@ FaintEnemyPokemon:
 	jpab GainExperience
 
 EnemyMonFaintedText:
-	TX_FAR _EnemyMonFaintedText
-	db "@"
+	text_far _EnemyMonFaintedText
+	text_end
 
 EndLowHealthAlarm:
 ; This function is called when the player has the won the battle. It turns off
@@ -949,12 +949,12 @@ TrainerBattleVictory:
 	predef_jump AddBCDPredef
 
 MoneyForWinningText:
-	TX_FAR _MoneyForWinningText
-	db "@"
+	text_far _MoneyForWinningText
+	text_end
 
 TrainerDefeatedText:
-	TX_FAR _TrainerDefeatedText
-	db "@"
+	text_far _TrainerDefeatedText
+	text_end
 
 PlayBattleVictoryMusic:
 	push af
@@ -1044,8 +1044,8 @@ RemoveFaintedPlayerMon:
 	jp PrintText
 
 PlayerMonFaintedText:
-	TX_FAR _PlayerMonFaintedText
-	db "@"
+	text_far _PlayerMonFaintedText
+	text_end
 
 ; asks if you want to use next mon
 ; stores whether you ran in C flag
@@ -1078,8 +1078,8 @@ DoUseNextMonDialogue:
 	jp TryRunningFromBattle
 
 UseNextMonText:
-	TX_FAR _UseNextMonText
-	db "@"
+	text_far _UseNextMonText
+	text_end
 
 ; choose next player mon to send out
 ; stores whether enemy mon has no HP left in Z flag
@@ -1165,16 +1165,16 @@ HandlePlayerBlackOut:
 	ret
 
 Sony1WinText:
-	TX_FAR _Sony1WinText
-	db "@"
+	text_far _Sony1WinText
+	text_end
 
 PlayerBlackedOutText2:
-	TX_FAR _PlayerBlackedOutText2
-	db "@"
+	text_far _PlayerBlackedOutText2
+	text_end
 
 LinkBattleLostText:
-	TX_FAR _LinkBattleLostText
-	db "@"
+	text_far _LinkBattleLostText
+	text_end
 
 ; slides pic of fainted mon downwards until it disappears
 ; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
@@ -1442,12 +1442,12 @@ EnemySendOutFirstMon:
 	jp SwitchPlayerMon
 
 TrainerAboutToUseText:
-	TX_FAR _TrainerAboutToUseText
-	db "@"
+	text_far _TrainerAboutToUseText
+	text_end
 
 TrainerSentOutText:
-	TX_FAR _TrainerSentOutText
-	db "@"
+	text_far _TrainerSentOutText
+	text_end
 
 ; tests if the player has any pokemon that are not fainted
 ; sets d = 0 if all fainted, d != 0 if some mons are still alive
@@ -1487,8 +1487,8 @@ HasMonFainted:
 	ret
 
 NoWillText:
-	TX_FAR _NoWillText
-	db "@"
+	text_far _NoWillText
+	text_end
 
 ; try to run from battle (hl = player speed, de = enemy speed)
 ; stores whether the attempt was successful in carry flag
@@ -1610,16 +1610,16 @@ TryRunningFromBattle:
 	ret
 
 CantEscapeText:
-	TX_FAR _CantEscapeText
-	db "@"
+	text_far _CantEscapeText
+	text_end
 
 NoRunningText:
-	TX_FAR _NoRunningText
-	db "@"
+	text_far _NoRunningText
+	text_end
 
 GotAwayText:
-	TX_FAR _GotAwayText
-	db "@"
+	text_far _GotAwayText
+	text_end
 
 ; copies from party data to battle mon data when sending out a new player mon
 LoadBattleMonFromParty:
@@ -2289,8 +2289,8 @@ UseBagItem:
 	ret
 
 ItemsCantBeUsedHereText:
-	TX_FAR _ItemsCantBeUsedHereText
-	db "@"
+	text_far _ItemsCantBeUsedHereText
+	text_end
 
 PartyMenuOrRockOrRun:
 	dec a ; was Run selected?
@@ -2434,8 +2434,8 @@ SwitchPlayerMon:
 	ret
 
 AlreadyOutText:
-	TX_FAR _AlreadyOutText
-	db "@"
+	text_far _AlreadyOutText
+	text_end
 
 BattleMenu_RunWasSelected:
 	call LoadScreenTilesFromBuffer1
@@ -2667,12 +2667,12 @@ SelectMenuItem:
 	jp MoveSelectionMenu
 
 MoveNoPPText:
-	TX_FAR _MoveNoPPText
-	db "@"
+	text_far _MoveNoPPText
+	text_end
 
 MoveDisabledText:
-	TX_FAR _MoveDisabledText
-	db "@"
+	text_far _MoveDisabledText
+	text_end
 
 WhichTechniqueString:
 	db "WHICH TECHNIQUE?@"
@@ -2744,8 +2744,8 @@ AnyMoveToSelect:
 	ret
 
 NoMovesLeftText:
-	TX_FAR _NoMovesLeftText
-	db "@"
+	text_far _NoMovesLeftText
+	text_end
 
 SwapMovesInMenu:
 	ld a, [wMenuItemToSwap]
@@ -3239,8 +3239,8 @@ MirrorMoveCheck:
 	jp ExecutePlayerMoveDone
 
 MultiHitText:
-	TX_FAR _MultiHitText
-	db "@"
+	text_far _MultiHitText
+	text_end
 
 ExecutePlayerMoveDone:
 	xor a
@@ -3269,12 +3269,12 @@ PrintGhostText:
 	ret
 
 ScaredText:
-	TX_FAR _ScaredText
-	db "@"
+	text_far _ScaredText
+	text_end
 
 GetOutText:
-	TX_FAR _GetOutText
-	db "@"
+	text_far _GetOutText
+	text_end
 
 IsGhostBattle:
 	ld a, [wIsInBattle]
@@ -3557,64 +3557,64 @@ CheckPlayerStatusConditions:
 	ret
 
 FastAsleepText:
-	TX_FAR _FastAsleepText
-	db "@"
+	text_far _FastAsleepText
+	text_end
 
 WokeUpText:
-	TX_FAR _WokeUpText
-	db "@"
+	text_far _WokeUpText
+	text_end
 
 IsFrozenText:
-	TX_FAR _IsFrozenText
-	db "@"
+	text_far _IsFrozenText
+	text_end
 
 FullyParalyzedText:
-	TX_FAR _FullyParalyzedText
-	db "@"
+	text_far _FullyParalyzedText
+	text_end
 
 FlinchedText:
-	TX_FAR _FlinchedText
-	db "@"
+	text_far _FlinchedText
+	text_end
 
 MustRechargeText:
-	TX_FAR _MustRechargeText
-	db "@"
+	text_far _MustRechargeText
+	text_end
 
 DisabledNoMoreText:
-	TX_FAR _DisabledNoMoreText
-	db "@"
+	text_far _DisabledNoMoreText
+	text_end
 
 IsConfusedText:
-	TX_FAR _IsConfusedText
-	db "@"
+	text_far _IsConfusedText
+	text_end
 
 HurtItselfText:
-	TX_FAR _HurtItselfText
-	db "@"
+	text_far _HurtItselfText
+	text_end
 
 ConfusedNoMoreText:
-	TX_FAR _ConfusedNoMoreText
-	db "@"
+	text_far _ConfusedNoMoreText
+	text_end
 
 SavingEnergyText:
-	TX_FAR _SavingEnergyText
-	db "@"
+	text_far _SavingEnergyText
+	text_end
 
 UnleashedEnergyText:
-	TX_FAR _UnleashedEnergyText
-	db "@"
+	text_far _UnleashedEnergyText
+	text_end
 
 ThrashingAboutText:
-	TX_FAR _ThrashingAboutText
-	db "@"
+	text_far _ThrashingAboutText
+	text_end
 
 AttackContinuesText:
-	TX_FAR _AttackContinuesText
-	db "@"
+	text_far _AttackContinuesText
+	text_end
 
 CantMoveText:
-	TX_FAR _CantMoveText
-	db "@"
+	text_far _CantMoveText
+	text_end
 
 PrintMoveIsDisabledText:
 	ld hl, wPlayerSelectedMove
@@ -3635,8 +3635,8 @@ PrintMoveIsDisabledText:
 	jp PrintText
 
 MoveIsDisabledText:
-	TX_FAR _MoveIsDisabledText
-	db "@"
+	text_far _MoveIsDisabledText
+	text_end
 
 HandleSelfConfusionDamage:
 	ld hl, HurtItselfText
@@ -3692,8 +3692,8 @@ PrintMonName1Text:
 ; this likely had to do with Japanese grammar that got translated,
 ; but the functionality didn't get removed
 MonName1Text:
-	TX_FAR _MonName1Text
-	TX_ASM
+	text_far _MonName1Text
+	text_asm
 	ld a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
@@ -3717,13 +3717,13 @@ MonName1Text:
 	ret
 
 Used1Text:
-	TX_FAR _Used1Text
-	TX_ASM
+	text_far _Used1Text
+	text_asm
 	jr PrintInsteadText
 
 Used2Text:
-	TX_FAR _Used2Text
-	TX_ASM
+	text_far _Used2Text
+	text_asm
 	; fall through
 
 PrintInsteadText:
@@ -3734,8 +3734,8 @@ PrintInsteadText:
 	ret
 
 InsteadText:
-	TX_FAR _InsteadText
-	TX_ASM
+	text_far _InsteadText
+	text_asm
 	; fall through
 
 PrintMoveName:
@@ -3743,8 +3743,8 @@ PrintMoveName:
 	ret
 
 _PrintMoveName:
-	TX_FAR _CF4BText
-	TX_ASM
+	text_far _CF4BText
+	text_asm
 	ld hl, ExclamationPointPointerTable
 	ld a, [wd11e] ; exclamation point num
 	add a
@@ -3766,24 +3766,24 @@ ExclamationPointPointerTable:
 	dw ExclamationPoint5Text
 
 ExclamationPoint1Text:
-	TX_FAR _ExclamationPoint1Text
-	db "@"
+	text_far _ExclamationPoint1Text
+	text_end
 
 ExclamationPoint2Text:
-	TX_FAR _ExclamationPoint2Text
-	db "@"
+	text_far _ExclamationPoint2Text
+	text_end
 
 ExclamationPoint3Text:
-	TX_FAR _ExclamationPoint3Text
-	db "@"
+	text_far _ExclamationPoint3Text
+	text_end
 
 ExclamationPoint4Text:
-	TX_FAR _ExclamationPoint4Text
-	db "@"
+	text_far _ExclamationPoint4Text
+	text_end
 
 ExclamationPoint5Text:
-	TX_FAR _ExclamationPoint5Text
-	db "@"
+	text_far _ExclamationPoint5Text
+	text_end
 
 ; this function does nothing useful
 ; if the move being used is in set [1-4] from ExclamationPointMoveSets,
@@ -3874,24 +3874,24 @@ PrintMoveFailureText:
 	jp ApplyDamageToEnemyPokemon
 
 AttackMissedText:
-	TX_FAR _AttackMissedText
-	db "@"
+	text_far _AttackMissedText
+	text_end
 
 KeptGoingAndCrashedText:
-	TX_FAR _KeptGoingAndCrashedText
-	db "@"
+	text_far _KeptGoingAndCrashedText
+	text_end
 
 UnaffectedText:
-	TX_FAR _UnaffectedText
-	db "@"
+	text_far _UnaffectedText
+	text_end
 
 PrintDoesntAffectText:
 	ld hl, DoesntAffectMonText
 	jp PrintText
 
 DoesntAffectMonText:
-	TX_FAR _DoesntAffectMonText
-	db "@"
+	text_far _DoesntAffectMonText
+	text_end
 
 ; if there was a critical hit or an OHKO was successful, print the corresponding text
 PrintCriticalOHKOText:
@@ -3919,12 +3919,12 @@ CriticalOHKOTextPointers:
 	dw OHKOText
 
 CriticalHitText:
-	TX_FAR _CriticalHitText
-	db "@"
+	text_far _CriticalHitText
+	text_end
 
 OHKOText:
-	TX_FAR _OHKOText
-	db "@"
+	text_far _OHKOText
+	text_end
 
 ; checks if a traded mon will disobey due to lack of badges
 ; stores whether the mon will use a move in Z flag
@@ -4108,24 +4108,24 @@ CheckForDisobedience:
 	ret
 
 LoafingAroundText:
-	TX_FAR _LoafingAroundText
-	db "@"
+	text_far _LoafingAroundText
+	text_end
 
 BeganToNapText:
-	TX_FAR _BeganToNapText
-	db "@"
+	text_far _BeganToNapText
+	text_end
 
 WontObeyText:
-	TX_FAR _WontObeyText
-	db "@"
+	text_far _WontObeyText
+	text_end
 
 TurnedAwayText:
-	TX_FAR _TurnedAwayText
-	db "@"
+	text_far _TurnedAwayText
+	text_end
 
 IgnoredOrdersText:
-	TX_FAR _IgnoredOrdersText
-	db "@"
+	text_far _IgnoredOrdersText
+	text_end
 
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the player mon
 GetDamageVarsForPlayerAttack:
@@ -4997,12 +4997,12 @@ AttackSubstitute:
 	jp DrawHUDsAndHPBars
 
 SubstituteTookDamageText:
-	TX_FAR _SubstituteTookDamageText
-	db "@"
+	text_far _SubstituteTookDamageText
+	text_end
 
 SubstituteBrokeText:
-	TX_FAR _SubstituteBrokeText
-	db "@"
+	text_far _SubstituteBrokeText
+	text_end
 
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
 HandleBuildingRage:
@@ -5048,8 +5048,8 @@ HandleBuildingRage:
 	ret
 
 BuildingRageText:
-	TX_FAR _BuildingRageText
-	db "@"
+	text_far _BuildingRageText
+	text_end
 
 ; copy last move for Mirror Move
 ; sets zero flag on failure and unsets zero flag on success
@@ -5084,8 +5084,8 @@ MirrorMoveCopyMove:
 	ret
 
 MirrorMoveFailedText:
-	TX_FAR _MirrorMoveFailedText
-	db "@"
+	text_far _MirrorMoveFailedText
+	text_end
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData:
@@ -5759,8 +5759,8 @@ EnemyCheckIfMirrorMoveEffect:
 	jr ExecuteEnemyMoveDone
 
 HitXTimesText:
-	TX_FAR _HitXTimesText
-	db "@"
+	text_far _HitXTimesText
+	text_end
 
 ExecuteEnemyMoveDone:
 	ld b, $1
@@ -6626,6 +6626,7 @@ LoadHudTilePatterns:
 PrintEmptyString:
 	ld hl, .emptyString
 	jp PrintText
+
 .emptyString
 	db "@"
 

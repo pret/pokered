@@ -18,11 +18,12 @@ _Route12HouseText_564c5::
 
 	para "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _Route12HouseText_564ca::
-	text ""
+	text_start
 
 	para "Fishing is a way"
 	line "of life!"

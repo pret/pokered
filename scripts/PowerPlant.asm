@@ -118,57 +118,57 @@ InitVoltorbBattle:
 	jp TextScriptEnd
 
 Voltorb0Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb0TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb1Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb1TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb2Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb2TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb3Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb3TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb4Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb4TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb5Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb5TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb6Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb6TrainerHeader
 	jr InitVoltorbBattle
 
 Voltorb7Text:
-	TX_ASM
+	text_asm
 	ld hl, Voltorb7TrainerHeader
 	jr InitVoltorbBattle
 
 ZapdosText:
-	TX_ASM
+	text_asm
 	ld hl, ZapdosTrainerHeader
 	jr InitVoltorbBattle
 
 VoltorbBattleText:
-	TX_FAR _VoltorbBattleText
-	db "@"
+	text_far _VoltorbBattleText
+	text_end
 
 ZapdosBattleText:
-	TX_FAR _ZapdosBattleText
-	TX_ASM
+	text_far _ZapdosBattleText
+	text_asm
 	ld a, ZAPDOS
 	call PlayCry
 	call WaitForSoundToFinish

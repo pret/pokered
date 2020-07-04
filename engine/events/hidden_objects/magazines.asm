@@ -4,5 +4,5 @@ PrintMagazinesText:
 	ret
 
 MagazinesText::
-	TX_FAR _MagazinesText
-	db "@"
+	text_far _MagazinesText
+	text_end

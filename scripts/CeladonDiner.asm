@@ -10,23 +10,23 @@ CeladonDiner_TextPointers:
 	dw CeladonDinerText5
 
 CeladonDinerText1:
-	TX_FAR _CeladonDinerText1
-	db "@"
+	text_far _CeladonDinerText1
+	text_end
 
 CeladonDinerText2:
-	TX_FAR _CeladonDinerText2
-	db "@"
+	text_far _CeladonDinerText2
+	text_end
 
 CeladonDinerText3:
-	TX_FAR _CeladonDinerText3
-	db "@"
+	text_far _CeladonDinerText3
+	text_end
 
 CeladonDinerText4:
-	TX_FAR _CeladonDinerText4
-	db "@"
+	text_far _CeladonDinerText4
+	text_end
 
 CeladonDinerText5:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_COIN_CASE
 	jr nz, .asm_eb14d
 	ld hl, CeladonDinerText_491a7
@@ -49,18 +49,18 @@ CeladonDinerText5:
 	jp TextScriptEnd
 
 CeladonDinerText_491a7:
-	TX_FAR _CeladonDinerText_491a7
-	db "@"
+	text_far _CeladonDinerText_491a7
+	text_end
 
 ReceivedCoinCaseText:
-	TX_FAR _ReceivedCoinCaseText
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _ReceivedCoinCaseText
+	sound_get_key_item
+	text_end
 
 CoinCaseNoRoomText:
-	TX_FAR _CoinCaseNoRoomText
-	db "@"
+	text_far _CoinCaseNoRoomText
+	text_end
 
 CeladonDinerText_491b7:
-	TX_FAR _CeladonDinerText_491b7
-	db "@"
+	text_far _CeladonDinerText_491b7
+	text_end

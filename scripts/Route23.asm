@@ -142,43 +142,43 @@ Route23_TextPointers:
 	dw Route23Text8
 
 Route23Text1:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_EARTHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text2:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_VOLCANOBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text3:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_MARSHBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text4:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_SOULBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text5:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_RAINBOWBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text6:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_THUNDERBADGE_CHECK, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
 
 Route23Text7:
-	TX_ASM
+	text_asm
 	EventFlagBit a, EVENT_PASSED_CASCADEBADGE_CHECK
 	call Route23Script_51346
 	jp TextScriptEnd
@@ -218,19 +218,19 @@ Route23Script_51388:
 	jp PrintText
 
 VictoryRoadGuardText1:
-	TX_FAR _VictoryRoadGuardText1
-	TX_ASM
+	text_far _VictoryRoadGuardText1
+	text_asm
 	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
 VictoryRoadGuardText2:
-	TX_FAR _VictoryRoadGuardText2
-	TX_SFX_ITEM_1
-	TX_FAR _VictoryRoadGuardText_513a3
-	db "@"
+	text_far _VictoryRoadGuardText2
+	sound_get_item_1
+	text_far _VictoryRoadGuardText_513a3
+	text_end
 
 Route23Text8:
-	TX_FAR _Route23Text8
-	db "@"
+	text_far _Route23Text8
+	text_end

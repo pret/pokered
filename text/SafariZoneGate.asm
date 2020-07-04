@@ -10,7 +10,8 @@ SafariZoneEntranceText_9e6e4::
 	cont "want in the park!"
 
 	para "Would you like to"
-	line "join the hunt?@@"
+	line "join the hunt?@"
+	text_end
 
 SafariZoneEntranceText_9e747::
 	text "That'll be ¥500"
@@ -21,10 +22,11 @@ SafariZoneEntranceText_9e747::
 	cont "here."
 
 	para "<PLAYER> received"
-	line "30 SAFARI BALLs!@@"
+	line "30 SAFARI BALLs!@"
+	text_end
 
 _SafariZoneEntranceText_75360::
-	text ""
+	text_start
 
 	para "We'll call you on"
 	line "the PA when you"
@@ -43,7 +45,8 @@ _SafariZoneEntranceText_7536a::
 	done
 
 SafariZoneEntranceText_9e814::
-	text "Leaving early?@@"
+	text "Leaving early?@"
+	text_end
 
 _SafariZoneEntranceText_753bb::
 	text "Please return any"

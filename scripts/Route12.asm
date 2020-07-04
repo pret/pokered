@@ -142,147 +142,147 @@ Route12TrainerHeader6:
 	db $ff
 
 Route12Text1:
-	TX_FAR _Route12Text1
-	db "@"
+	text_far _Route12Text1
+	text_end
 
 Route12Text13:
-	TX_FAR _Route12Text13
-	db "@"
+	text_far _Route12Text13
+	text_end
 
 Route12Text14:
-	TX_FAR _Route12Text14
-	db "@"
+	text_far _Route12Text14
+	text_end
 
 Route12Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText1:
-	TX_FAR _Route12BattleText1
-	db "@"
+	text_far _Route12BattleText1
+	text_end
 
 Route12EndBattleText1:
-	TX_FAR _Route12EndBattleText1
-	db "@"
+	text_far _Route12EndBattleText1
+	text_end
 
 Route12AfterBattleText1:
-	TX_FAR _Route12AfterBattleText1
-	db "@"
+	text_far _Route12AfterBattleText1
+	text_end
 
 Route12Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText2:
-	TX_FAR _Route12BattleText2
-	db "@"
+	text_far _Route12BattleText2
+	text_end
 
 Route12EndBattleText2:
-	TX_FAR _Route12EndBattleText2
-	db "@"
+	text_far _Route12EndBattleText2
+	text_end
 
 Route12AfterBattleText2:
-	TX_FAR _Route12AfterBattleText2
-	db "@"
+	text_far _Route12AfterBattleText2
+	text_end
 
 Route12Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText3:
-	TX_FAR _Route12BattleText3
-	db "@"
+	text_far _Route12BattleText3
+	text_end
 
 Route12EndBattleText3:
-	TX_FAR _Route12EndBattleText3
-	db "@"
+	text_far _Route12EndBattleText3
+	text_end
 
 Route12AfterBattleText3:
-	TX_FAR _Route12AfterBattleText3
-	db "@"
+	text_far _Route12AfterBattleText3
+	text_end
 
 Route12Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText4:
-	TX_FAR _Route12BattleText4
-	db "@"
+	text_far _Route12BattleText4
+	text_end
 
 Route12EndBattleText4:
-	TX_FAR _Route12EndBattleText4
-	db "@"
+	text_far _Route12EndBattleText4
+	text_end
 
 Route12AfterBattleText4:
-	TX_FAR _Route12AfterBattleText4
-	db "@"
+	text_far _Route12AfterBattleText4
+	text_end
 
 Route12Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText5:
-	TX_FAR _Route12BattleText5
-	db "@"
+	text_far _Route12BattleText5
+	text_end
 
 Route12EndBattleText5:
-	TX_FAR _Route12EndBattleText5
-	db "@"
+	text_far _Route12EndBattleText5
+	text_end
 
 Route12AfterBattleText5:
-	TX_FAR _Route12AfterBattleText5
-	db "@"
+	text_far _Route12AfterBattleText5
+	text_end
 
 Route12Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText6:
-	TX_FAR _Route12BattleText6
-	db "@"
+	text_far _Route12BattleText6
+	text_end
 
 Route12EndBattleText6:
-	TX_FAR _Route12EndBattleText6
-	db "@"
+	text_far _Route12EndBattleText6
+	text_end
 
 Route12AfterBattleText6:
-	TX_FAR _Route12AfterBattleText6
-	db "@"
+	text_far _Route12AfterBattleText6
+	text_end
 
 Route12Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route12TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route12BattleText7:
-	TX_FAR _Route12BattleText7
-	db "@"
+	text_far _Route12BattleText7
+	text_end
 
 Route12EndBattleText7:
-	TX_FAR _Route12EndBattleText7
-	db "@"
+	text_far _Route12EndBattleText7
+	text_end
 
 Route12AfterBattleText7:
-	TX_FAR _Route12AfterBattleText7
-	db "@"
+	text_far _Route12AfterBattleText7
+	text_end
 
 Route12Text11:
-	TX_FAR _Route12Text11
-	db "@"
+	text_far _Route12Text11
+	text_end
 
 Route12Text12:
-	TX_FAR _Route12Text12
-	db "@"
+	text_far _Route12Text12
+	text_end

@@ -51,8 +51,9 @@ _OaksLabMonEnergeticText::
 _OaksLabReceivedMonText::
 	text "<PLAYER> received"
 	line "a @"
-	TX_RAM wcd6d
-	text "!@@"
+	text_ram wcd6d
+	text "!@"
+	text_end
 
 _OaksLabLastMonText::
 	text "That's PROF.OAK's"
@@ -96,10 +97,11 @@ _OaksLabDeliverParcelText1::
 	line "something for me?"
 
 	para "<PLAYER> delivered"
-	line "OAK's PARCEL.@@"
+	line "OAK's PARCEL.@"
+	text_end
 
 _OaksLabDeliverParcelText2::
-	text ""
+	text_start
 	para "Ah! This is the"
 	line "custom # BALL"
 	cont "I ordered!"
@@ -124,10 +126,11 @@ _OaksLabGivePokeballsText1::
 	cont "#MON."
 
 	para "<PLAYER> got 5"
-	line "# BALLs!@@"
+	line "# BALLs!@"
+	text_end
 
 _OaksLabGivePokeballsText2::
-	text ""
+	text_start
 	para "When a wild"
 	line "#MON appears,"
 	cont "it's fair game."
@@ -240,8 +243,9 @@ _OaksLabRivalPickingMonText::
 _OaksLabRivalReceivedMonText::
 	text "<RIVAL> received"
 	line "a @"
-	TX_RAM wcd6d
-	text "!@@"
+	text_ram wcd6d
+	text "!@"
+	text_end
 
 _OaksLabRivalChallengeText::
 	text "<RIVAL>: Wait"
@@ -310,7 +314,8 @@ _OaksLabText25::
 	cont "these with you!"
 
 	para "<PLAYER> got"
-	line "#DEX from OAK!@@"
+	line "#DEX from OAK!@"
+	text_end
 
 _OaksLabText26::
 	text "To make a complete"
@@ -363,10 +368,10 @@ _OaksLabText_441cc::
 	line "letion is:"
 
 	para "@"
-	TX_NUM hDexRatingNumMonsSeen, 1, 3
+	text_decimal hDexRatingNumMonsSeen, 1, 3
 	text " #MON seen"
 	line "@"
-	TX_NUM hDexRatingNumMonsOwned, 1, 3
+	text_decimal hDexRatingNumMonsOwned, 1, 3
 	text " #MON owned"
 
 	para "PROF.OAK's"

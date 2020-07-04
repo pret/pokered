@@ -122,100 +122,100 @@ SilphCo5TrainerHeader3:
 	db $ff
 
 SilphCo5Text1:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo5Text_1a010
 	ld de, SilphCo5Text_1a015
 	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 SilphCo5Text_1a010:
-	TX_FAR _SilphCo5Text_1a010
-	db "@"
+	text_far _SilphCo5Text_1a010
+	text_end
 
 SilphCo5Text_1a015:
-	TX_FAR _SilphCo5Text_1a015
-	db "@"
+	text_far _SilphCo5Text_1a015
+	text_end
 
 SilphCo5Text2:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo5BattleText2:
-	TX_FAR _SilphCo5BattleText2
-	db "@"
+	text_far _SilphCo5BattleText2
+	text_end
 
 SilphCo5EndBattleText2:
-	TX_FAR _SilphCo5EndBattleText2
-	db "@"
+	text_far _SilphCo5EndBattleText2
+	text_end
 
 SilphCo5AfterBattleText2:
-	TX_FAR _SilphCo5AfterBattleText2
-	db "@"
+	text_far _SilphCo5AfterBattleText2
+	text_end
 
 SilphCo5Text3:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo5BattleText3:
-	TX_FAR _SilphCo5BattleText3
-	db "@"
+	text_far _SilphCo5BattleText3
+	text_end
 
 SilphCo5EndBattleText3:
-	TX_FAR _SilphCo5EndBattleText3
-	db "@"
+	text_far _SilphCo5EndBattleText3
+	text_end
 
 SilphCo5AfterBattleText3:
-	TX_FAR _SilphCo5AfterBattleText3
-	db "@"
+	text_far _SilphCo5AfterBattleText3
+	text_end
 
 SilphCo5Text4:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo5TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo5BattleText4:
-	TX_FAR _SilphCo5BattleText4
-	db "@"
+	text_far _SilphCo5BattleText4
+	text_end
 
 SilphCo5EndBattleText4:
-	TX_FAR _SilphCo5EndBattleText4
-	db "@"
+	text_far _SilphCo5EndBattleText4
+	text_end
 
 SilphCo5AfterBattleText4:
-	TX_FAR _SilphCo5AfterBattleText4
-	db "@"
+	text_far _SilphCo5AfterBattleText4
+	text_end
 
 SilphCo5Text5:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo5TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo5BattleText5:
-	TX_FAR _SilphCo5BattleText5
-	db "@"
+	text_far _SilphCo5BattleText5
+	text_end
 
 SilphCo5EndBattleText5:
-	TX_FAR _SilphCo5EndBattleText5
-	db "@"
+	text_far _SilphCo5EndBattleText5
+	text_end
 
 SilphCo5AfterBattleText5:
-	TX_FAR _SilphCo5AfterBattleText5
-	db "@"
+	text_far _SilphCo5AfterBattleText5
+	text_end
 
 SilphCo5Text9:
-	TX_FAR _SilphCo5Text9
-	db "@"
+	text_far _SilphCo5Text9
+	text_end
 
 SilphCo5Text10:
-	TX_FAR _SilphCo5Text10
-	db "@"
+	text_far _SilphCo5Text10
+	text_end
 
 SilphCo5Text11:
-	TX_FAR _SilphCo5Text11
-	db "@"
+	text_far _SilphCo5Text11
+	text_end

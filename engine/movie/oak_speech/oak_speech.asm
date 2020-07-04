@@ -153,22 +153,22 @@ OakSpeech:
 	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1:
-	TX_FAR _OakSpeechText1
-	db "@"
+	text_far _OakSpeechText1
+	text_end
 OakSpeechText2:
-	TX_FAR _OakSpeechText2A
-	TX_CRY_NIDORINA
-	TX_FAR _OakSpeechText2B
-	db "@"
+	text_far _OakSpeechText2A
+	sound_cry_nidorina
+	text_far _OakSpeechText2B
+	text_end
 IntroducePlayerText:
-	TX_FAR _IntroducePlayerText
-	db "@"
+	text_far _IntroducePlayerText
+	text_end
 IntroduceRivalText:
-	TX_FAR _IntroduceRivalText
-	db "@"
+	text_far _IntroduceRivalText
+	text_end
 OakSpeechText3:
-	TX_FAR _OakSpeechText3
-	db "@"
+	text_far _OakSpeechText3
+	text_end
 
 FadeInIntroPic:
 	ld hl, IntroFadePalettes

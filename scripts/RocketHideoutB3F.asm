@@ -170,37 +170,37 @@ RocketHideout3TrainerHeader1:
 	db $ff
 
 RocketHideout3Text1:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout3BattleText2:
-	TX_FAR _RocketHideout3BattleText2
-	db "@"
+	text_far _RocketHideout3BattleText2
+	text_end
 
 RocketHideout3EndBattleText2:
-	TX_FAR _RocketHideout3EndBattleText2
-	db "@"
+	text_far _RocketHideout3EndBattleText2
+	text_end
 
 RocketHideout3AfterBattleTxt2:
-	TX_FAR _RocketHideout3AfterBattleTxt2
-	db "@"
+	text_far _RocketHideout3AfterBattleTxt2
+	text_end
 
 RocketHideout3Text2:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout3BattleTxt:
-	TX_FAR _RocketHideout3BattleTxt
-	db "@"
+	text_far _RocketHideout3BattleTxt
+	text_end
 
 RocketHideout3EndBattleText3:
-	TX_FAR _RocketHideout3EndBattleText3
-	db "@"
+	text_far _RocketHideout3EndBattleText3
+	text_end
 
 RocketHideout3AfterBattleText3:
-	TX_FAR _RocketHide3AfterBattleText3
-	db "@"
+	text_far _RocketHide3AfterBattleText3
+	text_end

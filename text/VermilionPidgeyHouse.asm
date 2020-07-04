@@ -6,7 +6,8 @@ _VermilionHouse1Text1::
 	done
 
 _VermilionHouse1Text2::
-	text "PIDGEY: Kurukkoo!@@"
+	text "PIDGEY: Kurukkoo!@"
+	text_end
 
 _VermilionHouse1Text3::
 	text "Dear PIPPI, I hope"

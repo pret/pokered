@@ -220,7 +220,9 @@ TextBoxTextAndCoordTable:
 BuySellQuitText:
 	db   "BUY"
 	next "SELL"
-	next "QUIT@@"
+	next "QUIT@"
+
+	db "@" ; unused
 
 UseTossText:
 	db   "USE"
@@ -245,7 +247,7 @@ JapaneseMainMenuText:
 	next "さいしょから@"
 
 BattleMenuText:
-	db   "FIGHT ",$E1,$E2
+	db   "FIGHT <PK><MN>"
 	next "ITEM  RUN@"
 
 SafariZoneBattleMenuText:
@@ -258,7 +260,7 @@ SwitchStatsCancelText:
 	next "CANCEL@"
 
 JapaneseAhText:
-	db "アッ!@"
+	db "アッ！@"
 
 JapanesePokedexMenu:
 	db   "データをみる"

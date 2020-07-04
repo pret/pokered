@@ -10,7 +10,8 @@ _TM39PreReceiveText::
 
 _ReceivedTM39Text::
 	text "<PLAYER> received"
-	line "TM39!@@"
+	line "TM39!@"
+	text_end
 
 _TM39ExplanationText::
 	text "TM39 is a move"

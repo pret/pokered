@@ -50,59 +50,59 @@ BenchGuyTextPointers:
 	db $FF
 
 ViridianCityPokecenterBenchGuyText::
-	TX_FAR _ViridianCityPokecenterGuyText
-	db "@"
+	text_far _ViridianCityPokecenterGuyText
+	text_end
 
 PewterCityPokecenterBenchGuyText::
-	TX_FAR _PewterCityPokecenterGuyText
-	db "@"
+	text_far _PewterCityPokecenterGuyText
+	text_end
 
 CeruleanCityPokecenterBenchGuyText::
-	TX_FAR _CeruleanPokecenterGuyText
-	db "@"
+	text_far _CeruleanPokecenterGuyText
+	text_end
 
 LavenderCityPokecenterBenchGuyText::
-	TX_FAR _LavenderPokecenterGuyText
-	db "@"
+	text_far _LavenderPokecenterGuyText
+	text_end
 
 MtMoonPokecenterBenchGuyText::
-	TX_FAR _MtMoonPokecenterBenchGuyText
-	db "@"
+	text_far _MtMoonPokecenterBenchGuyText
+	text_end
 
 RockTunnelPokecenterBenchGuyText::
-	TX_FAR _RockTunnelPokecenterGuyText
-	db "@"
+	text_far _RockTunnelPokecenterGuyText
+	text_end
 
 UnusedBenchGuyText1::
-	TX_FAR _UnusedBenchGuyText1
-	db "@"
+	text_far _UnusedBenchGuyText1
+	text_end
 
 UnusedBenchGuyText2::
-	TX_FAR _UnusedBenchGuyText2
-	db "@"
+	text_far _UnusedBenchGuyText2
+	text_end
 
 UnusedBenchGuyText3::
-	TX_FAR _UnusedBenchGuyText3
-	db "@"
+	text_far _UnusedBenchGuyText3
+	text_end
 
 VermilionCityPokecenterBenchGuyText::
-	TX_FAR _VermilionPokecenterGuyText
-	db "@"
+	text_far _VermilionPokecenterGuyText
+	text_end
 
 CeladonCityPokecenterBenchGuyText::
-	TX_FAR _CeladonCityPokecenterGuyText
-	db "@"
+	text_far _CeladonCityPokecenterGuyText
+	text_end
 
 FuchsiaCityPokecenterBenchGuyText::
-	TX_FAR _FuchsiaCityPokecenterGuyText
-	db "@"
+	text_far _FuchsiaCityPokecenterGuyText
+	text_end
 
 CinnabarIslandPokecenterBenchGuyText::
-	TX_FAR _CinnabarPokecenterGuyText
-	db "@"
+	text_far _CinnabarPokecenterGuyText
+	text_end
 
 SaffronCityPokecenterBenchGuyText::
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SaffronCityPokecenterBenchGuyText2
 	jr nz, .asm_624f2
@@ -112,13 +112,13 @@ SaffronCityPokecenterBenchGuyText::
 	jp TextScriptEnd
 
 SaffronCityPokecenterBenchGuyText1:
-	TX_FAR _SaffronCityPokecenterGuyText1
-	db "@"
+	text_far _SaffronCityPokecenterGuyText1
+	text_end
 
 SaffronCityPokecenterBenchGuyText2:
-	TX_FAR _SaffronCityPokecenterGuyText2
-	db "@"
+	text_far _SaffronCityPokecenterGuyText2
+	text_end
 
 CeladonCityHotelText::
-	TX_FAR _CeladonCityHotelText
-	db "@"
+	text_far _CeladonCityHotelText
+	text_end

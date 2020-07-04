@@ -73,22 +73,22 @@ ViridianMart_TextPointers2:
 	dw ViridianMartText3
 
 ViridianMartText1:
-	TX_FAR _ViridianMartText1
-	db "@"
+	text_far _ViridianMartText1
+	text_end
 
 ViridianMartText4:
-	TX_FAR _ViridianMartText4
-	db "@"
+	text_far _ViridianMartText4
+	text_end
 
 ViridianMartText5:
-	TX_FAR ViridianMartParcelQuestText
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far ViridianMartParcelQuestText
+	sound_get_key_item
+	text_end
 
 ViridianMartText2:
-	TX_FAR _ViridianMartText2
-	db "@"
+	text_far _ViridianMartText2
+	text_end
 
 ViridianMartText3:
-	TX_FAR _ViridianMartText3
-	db "@"
+	text_far _ViridianMartText3
+	text_end

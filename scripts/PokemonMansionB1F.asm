@@ -90,41 +90,41 @@ Mansion4TrainerHeader1:
 	db $ff
 
 Mansion4Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion4Text2:
-	TX_ASM
+	text_asm
 	ld hl, Mansion4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion4BattleText1:
-	TX_FAR _Mansion4BattleText1
-	db "@"
+	text_far _Mansion4BattleText1
+	text_end
 
 Mansion4EndBattleText1:
-	TX_FAR _Mansion4EndBattleText1
-	db "@"
+	text_far _Mansion4EndBattleText1
+	text_end
 
 Mansion4AfterBattleText1:
-	TX_FAR _Mansion4AfterBattleText1
-	db "@"
+	text_far _Mansion4AfterBattleText1
+	text_end
 
 Mansion4BattleText2:
-	TX_FAR _Mansion4BattleText2
-	db "@"
+	text_far _Mansion4BattleText2
+	text_end
 
 Mansion4EndBattleText2:
-	TX_FAR _Mansion4EndBattleText2
-	db "@"
+	text_far _Mansion4EndBattleText2
+	text_end
 
 Mansion4AfterBattleText2:
-	TX_FAR _Mansion4AfterBattleText2
-	db "@"
+	text_far _Mansion4AfterBattleText2
+	text_end
 
 Mansion4Text7:
-	TX_FAR _Mansion4Text7
-	db "@"
+	text_far _Mansion4Text7
+	text_end

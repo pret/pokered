@@ -136,7 +136,7 @@ LinkMenu:
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd72e
 	set 6, [hl]
-	ld hl, TextTerminator_6b20
+	ld hl, LinkMenuEmptyText
 	call PrintText
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
@@ -293,16 +293,16 @@ LinkMenu:
 	ret
 
 WhereWouldYouLikeText:
-	TX_FAR _WhereWouldYouLikeText
-	db "@"
+	text_far _WhereWouldYouLikeText
+	text_end
 
 PleaseWaitText:
-	TX_FAR _PleaseWaitText
-	db "@"
+	text_far _PleaseWaitText
+	text_end
 
 LinkCanceledText:
-	TX_FAR _LinkCanceledText
-	db "@"
+	text_far _LinkCanceledText
+	text_end
 
 StartNewGame:
 	ld hl, wd732
@@ -329,7 +329,9 @@ SpecialEnterMap::
 	jp EnterMap
 
 ContinueText:
-	db "CONTINUE", $4e
+	db "CONTINUE"
+	next ""
+	; fallthrough
 
 NewGameText:
 	db   "NEW GAME"

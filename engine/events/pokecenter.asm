@@ -46,23 +46,23 @@ DisplayPokemonCenterDialogue_::
 	jp UpdateSprites
 
 PokemonCenterWelcomeText:
-	TX_FAR _PokemonCenterWelcomeText
-	db "@"
+	text_far _PokemonCenterWelcomeText
+	text_end
 
 ShallWeHealYourPokemonText:
-	TX_DELAY
-	TX_FAR _ShallWeHealYourPokemonText
-	db "@"
+	text_pause
+	text_far _ShallWeHealYourPokemonText
+	text_end
 
 NeedYourPokemonText:
-	TX_FAR _NeedYourPokemonText
-	db "@"
+	text_far _NeedYourPokemonText
+	text_end
 
 PokemonFightingFitText:
-	TX_FAR _PokemonFightingFitText
-	db "@"
+	text_far _PokemonFightingFitText
+	text_end
 
 PokemonCenterFarewellText:
-	TX_DELAY
-	TX_FAR _PokemonCenterFarewellText
-	db "@"
+	text_pause
+	text_far _PokemonCenterFarewellText
+	text_end

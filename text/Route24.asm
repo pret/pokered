@@ -1,10 +1,11 @@
 _Route24Text_51510::
 	text "Congratulations!"
 	line "You beat our 5"
-	cont "contest trainers!@@"
+	cont "contest trainers!@"
+	text_end
 
 _Route24Text_51515::
-	text ""
+	text_start
 
 	para "You just earned a"
 	line "fabulous prize!"
@@ -13,8 +14,9 @@ _Route24Text_51515::
 _Route24Text_5151a::
 	text "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _Route24Text_51521::
 	text "You don't have"

@@ -6,5 +6,5 @@ PrintIndigoPlateauHQText:
 	tx_pre_jump IndigoPlateauHQText
 
 IndigoPlateauHQText::
-	TX_FAR _IndigoPlateauHQText
-	db "@"
+	text_far _IndigoPlateauHQText
+	text_end

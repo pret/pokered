@@ -319,7 +319,7 @@ SilphCo7TrainerHeader3:
 
 SilphCo7Text1:
 ; lapras guy
-	TX_ASM
+	text_asm
 	ld a, [wd72e]
 	bit 0, a ; got lapras?
 	jr z, .givelapras
@@ -350,23 +350,23 @@ SilphCo7Text1:
 	jp TextScriptEnd
 
 .MeetLaprasGuyText
-	TX_FAR _MeetLaprasGuyText
-	db "@"
+	text_far _MeetLaprasGuyText
+	text_end
 
 .HeresYourLaprasText
-	TX_FAR _HeresYourLaprasText
-	db "@"
+	text_far _HeresYourLaprasText
+	text_end
 
 .LaprasGuyText
-	TX_FAR _LaprasGuyText
-	db "@"
+	text_far _LaprasGuyText
+	text_end
 
 .LaprasGuySavedText
-	TX_FAR _LaprasGuySavedText
-	db "@"
+	text_far _LaprasGuySavedText
+	text_end
 
 SilphCo7Text2:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
@@ -379,15 +379,15 @@ SilphCo7Text2:
 	jp TextScriptEnd
 
 .rockettext
-	TX_FAR _SilphCo7Text_51e00
-	db "@"
+	text_far _SilphCo7Text_51e00
+	text_end
 
 .savedtext
-	TX_FAR _CanceledMasterBallText
-	db "@"
+	text_far _CanceledMasterBallText
+	text_end
 
 SilphCo7Text3:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
@@ -400,15 +400,15 @@ SilphCo7Text3:
 	jp TextScriptEnd
 
 .rockettext
-	TX_FAR _SilphCo7Text_51e23
-	db "@"
+	text_far _SilphCo7Text_51e23
+	text_end
 
 .savedtext
-	TX_FAR _SilphCo7Text_51e28
-	db "@"
+	text_far _SilphCo7Text_51e28
+	text_end
 
 SilphCo7Text4:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	jr nz, .savedsilph
 	ld hl, .rockettext
@@ -421,107 +421,107 @@ SilphCo7Text4:
 	jp TextScriptEnd
 
 .rockettext
-	TX_FAR _SilphCo7Text_51e46
-	db "@"
+	text_far _SilphCo7Text_51e46
+	text_end
 
 .savedtext
-	TX_FAR _SilphCo7Text_51e4b
-	db "@"
+	text_far _SilphCo7Text_51e4b
+	text_end
 
 SilphCo7Text5:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo7BattleText1:
-	TX_FAR _SilphCo7BattleText1
-	db "@"
+	text_far _SilphCo7BattleText1
+	text_end
 
 SilphCo7EndBattleText1:
-	TX_FAR _SilphCo7EndBattleText1
-	db "@"
+	text_far _SilphCo7EndBattleText1
+	text_end
 
 SilphCo7AfterBattleText1:
-	TX_FAR _SilphCo7AfterBattleText1
-	db "@"
+	text_far _SilphCo7AfterBattleText1
+	text_end
 
 SilphCo7Text6:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo7TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo7BattleText2:
-	TX_FAR _SilphCo7BattleText2
-	db "@"
+	text_far _SilphCo7BattleText2
+	text_end
 
 SilphCo7EndBattleText2:
-	TX_FAR _SilphCo7EndBattleText2
-	db "@"
+	text_far _SilphCo7EndBattleText2
+	text_end
 
 SilphCo7AfterBattleText2:
-	TX_FAR _SilphCo7AfterBattleText2
-	db "@"
+	text_far _SilphCo7AfterBattleText2
+	text_end
 
 SilphCo7Text7:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo7BattleText3:
-	TX_FAR _SilphCo7BattleText3
-	db "@"
+	text_far _SilphCo7BattleText3
+	text_end
 
 SilphCo7EndBattleText3:
-	TX_FAR _SilphCo7EndBattleText3
-	db "@"
+	text_far _SilphCo7EndBattleText3
+	text_end
 
 SilphCo7AfterBattleText3:
-	TX_FAR _SilphCo7AfterBattleText3
-	db "@"
+	text_far _SilphCo7AfterBattleText3
+	text_end
 
 SilphCo7Text8:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo7TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo7BattleText4:
-	TX_FAR _SilphCo7BattleText4
-	db "@"
+	text_far _SilphCo7BattleText4
+	text_end
 
 SilphCo7EndBattleText4:
-	TX_FAR _SilphCo7EndBattleText4
-	db "@"
+	text_far _SilphCo7EndBattleText4
+	text_end
 
 SilphCo7AfterBattleText4:
-	TX_FAR _SilphCo7AfterBattleText4
-	db "@"
+	text_far _SilphCo7AfterBattleText4
+	text_end
 
 SilphCo7Text9:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo7Text_51ebe
 	call PrintText
 	jp TextScriptEnd
 
 SilphCo7Text_51ebe:
-	TX_FAR _SilphCo7Text_51ebe
-	db "@"
+	text_far _SilphCo7Text_51ebe
+	text_end
 
 SilphCo7Text13:
-	TX_FAR _SilphCo7Text_51ec3
-	db "@"
+	text_far _SilphCo7Text_51ec3
+	text_end
 
 SilphCo7Text14:
-	TX_FAR _SilphCo7Text_51ec8
-	db "@"
+	text_far _SilphCo7Text_51ec8
+	text_end
 
 SilphCo7Text_51ecd:
-	TX_FAR _SilphCo7Text_51ecd
-	db "@"
+	text_far _SilphCo7Text_51ecd
+	text_end
 
 SilphCo7Text15:
-	TX_FAR _SilphCo7Text_51ed2
-	db "@"
+	text_far _SilphCo7Text_51ed2
+	text_end

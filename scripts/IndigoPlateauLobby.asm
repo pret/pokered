@@ -22,15 +22,15 @@ IndigoPlateauLobby_TextPointers:
 	dw IndigoTradeNurseText
 
 IndigoHealNurseText:
-	TX_POKECENTER_NURSE
+	script_pokecenter_nurse
 
 IndigoPlateauLobbyText2:
-	TX_FAR _IndigoPlateauLobbyText2
-	db "@"
+	text_far _IndigoPlateauLobbyText2
+	text_end
 
 IndigoPlateauLobbyText3:
-	TX_FAR _IndigoPlateauLobbyText3
-	db "@"
+	text_far _IndigoPlateauLobbyText3
+	text_end
 
 IndigoTradeNurseText:
-	TX_CABLE_CLUB_RECEPTIONIST
+	script_cable_club_receptionist

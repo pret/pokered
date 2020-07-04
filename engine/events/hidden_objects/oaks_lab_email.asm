@@ -6,5 +6,5 @@ DisplayOakLabEmailText:
 	tx_pre_jump OakLabEmailText
 
 OakLabEmailText::
-	TX_FAR _OakLabEmailText
-	db "@"
+	text_far _OakLabEmailText
+	text_end

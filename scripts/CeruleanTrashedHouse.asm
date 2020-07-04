@@ -8,7 +8,7 @@ CeruleanTrashedHouse_TextPointers:
 	dw CeruleanHouseTrashedText3
 
 CeruleanHouseTrashedText1:
-	TX_ASM
+	text_asm
 	ld b, $e4
 	predef GetQuantityOfItemInBag
 	and b
@@ -23,17 +23,17 @@ CeruleanHouseTrashedText1:
 	jp TextScriptEnd
 
 CeruleanHouseTrashedText_1d6ab:
-	TX_FAR _CeruleanTrashedText_1d6ab
-	db "@"
+	text_far _CeruleanTrashedText_1d6ab
+	text_end
 
 CeruleanHouseTrashedText_1d6b0:
-	TX_FAR _CeruleanTrashedText_1d6b0
-	db "@"
+	text_far _CeruleanTrashedText_1d6b0
+	text_end
 
 CeruleanHouseTrashedText2:
-	TX_FAR _CeruleanHouseTrashedText2
-	db "@"
+	text_far _CeruleanHouseTrashedText2
+	text_end
 
 CeruleanHouseTrashedText3:
-	TX_FAR _CeruleanHouseTrashedText3
-	db "@"
+	text_far _CeruleanHouseTrashedText3
+	text_end

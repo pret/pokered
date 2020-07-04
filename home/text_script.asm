@@ -20,16 +20,13 @@ DisplayTextID::
 	ld d, $00
 	ld a, [hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex], a
-	and a
-	jp z, DisplayStartMenu
-	cp TEXT_SAFARI_GAME_OVER
-	jp z, DisplaySafariGameOverText
-	cp TEXT_MON_FAINTED
-	jp z, DisplayPokemonFaintedText
-	cp TEXT_BLACKED_OUT
-	jp z, DisplayPlayerBlackedOutText
-	cp TEXT_REPEL_WORE_OFF
-	jp z, DisplayRepelWoreOffText
+
+	dict TEXT_START_MENU,       DisplayStartMenu
+	dict TEXT_SAFARI_GAME_OVER, DisplaySafariGameOverText
+	dict TEXT_MON_FAINTED,      DisplayPokemonFaintedText
+	dict TEXT_BLACKED_OUT,      DisplayPlayerBlackedOutText
+	dict TEXT_REPEL_WORE_OFF,   DisplayRepelWoreOffText
+
 	ld a, [wNumSprites]
 	ld e, a
 	ld a, [hSpriteIndexOrTextID] ; sprite ID
@@ -66,29 +63,26 @@ DisplayTextID::
 	ld h, [hl]
 	ld l, a ; hl = address of the text
 	ld a, [hl] ; a = first byte of text
+
 ; check first byte of text for special cases
-	cp $fe   ; Pokemart NPC
-	jp z, DisplayPokemartDialogue
-	cp $ff   ; Pokemon Center NPC
-	jp z, DisplayPokemonCenterDialogue
-	cp $fc   ; Item Storage PC
-	jp z, FuncTX_ItemStoragePC
-	cp $fd   ; Bill's PC
-	jp z, FuncTX_BillsPC
-	cp $f9   ; Pokemon Center PC
-	jp z, FuncTX_PokemonCenterPC
-	cp $f5   ; Vending Machine
-	jr nz, .notVendingMachine
-	callba VendingMachineMenu ; jump banks to vending machine routine
+
+dict2: MACRO
+	cp \1
+	jr nz, .not\@
+	\2
 	jr AfterDisplayingTextID
-.notVendingMachine
-	cp $f7   ; prize menu
-	jp z, FuncTX_GameCornerPrizeMenu
-	cp $f6   ; cable connection NPC in Pokemon Center
-	jr nz, .notSpecialCase
-	callab CableClubNPC
-	jr AfterDisplayingTextID
-.notSpecialCase
+.not\@
+ENDM
+
+	dict  TX_SCRIPT_MART,                    DisplayPokemartDialogue
+	dict  TX_SCRIPT_POKECENTER_NURSE,        DisplayPokemonCenterDialogue
+	dict  TX_SCRIPT_PLAYERS_PC,              TextScript_ItemStoragePC
+	dict  TX_SCRIPT_BILLS_PC,                TextScript_BillsPC
+	dict  TX_SCRIPT_POKECENTER_PC,           TextScript_PokemonCenterPC
+	dict2 TX_SCRIPT_VENDING_MACHINE,         callba VendingMachineMenu
+	dict  TX_SCRIPT_PRIZE_VENDOR,            TextScript_GameCornerPrizeMenu
+	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callab CableClubNPC
+
 	call PrintText_NoCreatingTextBox ; display the text
 	ld a, [wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
@@ -164,8 +158,8 @@ DisplayPokemartDialogue::
 	jp AfterDisplayingTextID
 
 PokemartGreetingText::
-	TX_FAR _PokemartGreetingText
-	db "@"
+	text_far _PokemartGreetingText
+	text_end
 
 LoadItemList::
 	ld a, 1
@@ -212,8 +206,8 @@ DisplayPokemonFaintedText::
 	jp AfterDisplayingTextID
 
 PokemonFaintedText::
-	TX_FAR _PokemonFaintedText
-	db "@"
+	text_far _PokemonFaintedText
+	text_end
 
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
@@ -224,8 +218,8 @@ DisplayPlayerBlackedOutText::
 	jp HoldTextDisplayOpen
 
 PlayerBlackedOutText::
-	TX_FAR _PlayerBlackedOutText
-	db "@"
+	text_far _PlayerBlackedOutText
+	text_end
 
 DisplayRepelWoreOffText::
 	ld hl, RepelWoreOffText
@@ -233,5 +227,5 @@ DisplayRepelWoreOffText::
 	jp AfterDisplayingTextID
 
 RepelWoreOffText::
-	TX_FAR _RepelWoreOffText
-	db "@"
+	text_far _RepelWoreOffText
+	text_end

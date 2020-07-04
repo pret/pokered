@@ -149,7 +149,7 @@ CeladonGymTrainerHeader6:
 	db $ff
 
 CeladonGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_ERIKA
 	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM21
@@ -183,153 +183,153 @@ CeladonGymText1:
 	jp TextScriptEnd
 
 CeladonGymText_48a5e:
-	TX_FAR _CeladonGymText_48a5e
-	db "@"
+	text_far _CeladonGymText_48a5e
+	text_end
 
 CeladonGymText_48a63:
-	TX_FAR _CeladonGymText_48a63
-	db "@"
+	text_far _CeladonGymText_48a63
+	text_end
 
 CeladonGymText_48a68:
-	TX_FAR _CeladonGymText_48a68
-	db "@"
+	text_far _CeladonGymText_48a68
+	text_end
 
 CeladonGymText9:
-	TX_FAR _CeladonGymText9
-	db "@"
+	text_far _CeladonGymText9
+	text_end
 
 TM21Text:
-	TX_FAR _ReceivedTM21Text
-	TX_SFX_ITEM_1
-	TX_FAR _TM21ExplanationText
-	db "@"
+	text_far _ReceivedTM21Text
+	sound_get_item_1
+	text_far _TM21ExplanationText
+	text_end
 
 TM21NoRoomText:
-	TX_FAR _TM21NoRoomText
-	db "@"
+	text_far _TM21NoRoomText
+	text_end
 
 CeladonGymText2:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText2:
-	TX_FAR _CeladonGymBattleText2
-	db "@"
+	text_far _CeladonGymBattleText2
+	text_end
 
 CeladonGymEndBattleText2:
-	TX_FAR _CeladonGymEndBattleText2
-	db "@"
+	text_far _CeladonGymEndBattleText2
+	text_end
 
 CeladonGymAfterBattleText2:
-	TX_FAR _CeladonGymAfterBattleText2
-	db "@"
+	text_far _CeladonGymAfterBattleText2
+	text_end
 
 CeladonGymText3:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText3:
-	TX_FAR _CeladonGymBattleText3
-	db "@"
+	text_far _CeladonGymBattleText3
+	text_end
 
 CeladonGymEndBattleText3:
-	TX_FAR _CeladonGymEndBattleText3
-	db "@"
+	text_far _CeladonGymEndBattleText3
+	text_end
 
 CeladonGymAfterBattleText3:
-	TX_FAR _CeladonGymAfterBattleText3
-	db "@"
+	text_far _CeladonGymAfterBattleText3
+	text_end
 
 CeladonGymText4:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText4:
-	TX_FAR _CeladonGymBattleText4
-	db "@"
+	text_far _CeladonGymBattleText4
+	text_end
 
 CeladonGymEndBattleText4:
-	TX_FAR _CeladonGymEndBattleText4
-	db "@"
+	text_far _CeladonGymEndBattleText4
+	text_end
 
 CeladonGymAfterBattleText4:
-	TX_FAR _CeladonGymAfterBattleText4
-	db "@"
+	text_far _CeladonGymAfterBattleText4
+	text_end
 
 CeladonGymText5:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText5:
-	TX_FAR _CeladonGymBattleText5
-	db "@"
+	text_far _CeladonGymBattleText5
+	text_end
 
 CeladonGymEndBattleText5:
-	TX_FAR _CeladonGymEndBattleText5
-	db "@"
+	text_far _CeladonGymEndBattleText5
+	text_end
 
 CeladonGymAfterBattleText5:
-	TX_FAR _CeladonGymAfterBattleText5
-	db "@"
+	text_far _CeladonGymAfterBattleText5
+	text_end
 
 CeladonGymText6:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText6:
-	TX_FAR _CeladonGymBattleText6
-	db "@"
+	text_far _CeladonGymBattleText6
+	text_end
 
 CeladonGymEndBattleText6:
-	TX_FAR _CeladonGymEndBattleText6
-	db "@"
+	text_far _CeladonGymEndBattleText6
+	text_end
 
 CeladonGymAfterBattleText6:
-	TX_FAR _CeladonGymAfterBattleText6
-	db "@"
+	text_far _CeladonGymAfterBattleText6
+	text_end
 
 CeladonGymText7:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText7:
-	TX_FAR _CeladonGymBattleText7
-	db "@"
+	text_far _CeladonGymBattleText7
+	text_end
 
 CeladonGymEndBattleText7:
-	TX_FAR _CeladonGymEndBattleText7
-	db "@"
+	text_far _CeladonGymEndBattleText7
+	text_end
 
 CeladonGymAfterBattleText7:
-	TX_FAR _CeladonGymAfterBattleText7
-	db "@"
+	text_far _CeladonGymAfterBattleText7
+	text_end
 
 CeladonGymText8:
-	TX_ASM
+	text_asm
 	ld hl, CeladonGymTrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 CeladonGymBattleText8:
-	TX_FAR _CeladonGymBattleText8
-	db "@"
+	text_far _CeladonGymBattleText8
+	text_end
 
 CeladonGymEndBattleText8:
-	TX_FAR _CeladonGymEndBattleText8
-	db "@"
+	text_far _CeladonGymEndBattleText8
+	text_end
 
 CeladonGymAfterBattleText8:
-	TX_FAR _CeladonGymAfterBattleText8
-	db "@"
+	text_far _CeladonGymAfterBattleText8
+	text_end

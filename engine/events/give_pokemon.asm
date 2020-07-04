@@ -69,14 +69,14 @@ SetPokedexOwnedFlag:
 	jp PrintText
 
 GotMonText:
-	TX_FAR _GotMonText
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _GotMonText
+	sound_get_item_1
+	text_end
 
 SentToBoxText:
-	TX_FAR _SentToBoxText
-	db "@"
+	text_far _SentToBoxText
+	text_end
 
 BoxIsFullText:
-	TX_FAR _BoxIsFullText
-	db "@"
+	text_far _BoxIsFullText
+	text_end

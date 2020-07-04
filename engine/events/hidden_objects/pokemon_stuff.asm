@@ -1,3 +1,3 @@
 PokemonStuffText::
-	TX_FAR _PokemonStuffText
-	db "@"
+	text_far _PokemonStuffText
+	text_end

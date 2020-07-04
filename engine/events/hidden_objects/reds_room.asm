@@ -3,12 +3,12 @@ PrintRedSNESText:
 	tx_pre_jump RedBedroomSNESText
 
 RedBedroomSNESText::
-	TX_FAR _RedBedroomSNESText
-	db "@"
+	text_far _RedBedroomSNESText
+	text_end
 
 OpenRedsPC:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomPCText
 
 RedBedroomPCText::
-	TX_PLAYERS_PC
+	script_players_pc

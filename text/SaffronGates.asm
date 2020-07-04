@@ -13,10 +13,11 @@ _SaffronGateText_8aaa9::
 	cont "..."
 	cont "Huh? I can have"
 	cont "this drink?"
-	cont "Gee, thanks!@@"
+	cont "Gee, thanks!@"
+	text_end
 
 _SaffronGateText_1dff1::
-	text ""
+	text_start
 
 	para "..."
 	line "Glug glug..."

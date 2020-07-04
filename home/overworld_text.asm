@@ -1,31 +1,31 @@
-TextScriptEndingChar::
-	db "@"
+TextScriptEndingText::
+	text_end
 
 TextScriptEnd::
-	ld hl, TextScriptEndingChar
+	ld hl, TextScriptEndingText
 	ret
 
 ExclamationText::
-	TX_FAR _ExclamationText
-	db "@"
+	text_far _ExclamationText
+	text_end
 
 GroundRoseText::
-	TX_FAR _GroundRoseText
-	db "@"
+	text_far _GroundRoseText
+	text_end
 
 BoulderText::
-	TX_FAR _BoulderText
-	db "@"
+	text_far _BoulderText
+	text_end
 
 MartSignText::
-	TX_FAR _MartSignText
-	db "@"
+	text_far _MartSignText
+	text_end
 
 PokeCenterSignText::
-	TX_FAR _PokeCenterSignText
-	db "@"
+	text_far _PokeCenterSignText
+	text_end
 
 PickUpItemText::
-	TX_ASM
+	text_asm
 	predef PickUpItem
 	jp TextScriptEnd

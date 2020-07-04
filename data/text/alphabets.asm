@@ -1,5 +1,15 @@
 LowerCaseAlphabet:
-	db "abcdefghijklmnopqrstuvwxyz ×():;[]",$e1,$e2,"-?!♂♀/⠄,¥UPPER CASE@"
+	db "abcdefghi"
+	db "jklmnopqr"
+	db "stuvwxyz "
+	db "×():;[]<PK><MN>"
+	db "-?!♂♀/<DOT>,<ED>"
+	db "UPPER CASE@"
 
 UpperCaseAlphabet:
-	db "ABCDEFGHIJKLMNOPQRSTUVWXYZ ×():;[]",$e1,$e2,"-?!♂♀/⠄,¥lower case@"
+	db "ABCDEFGHI"
+	db "JKLMNOPQR"
+	db "STUVWXYZ "
+	db "×():;[]<PK><MN>"
+	db "-?!♂♀/<DOT>,<ED>"
+	db "lower case@"
