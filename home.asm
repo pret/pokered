@@ -74,7 +74,7 @@ LoadDestinationWarpPosition::
 
 INCLUDE "home/pokemon.asm"
 INCLUDE "home/print_bcd.asm"
-INCLUDE "home/uncompress.asm"
+INCLUDE "home/pics.asm"
 INCLUDE "data/tilesets/collision_tile_ids.asm"
 INCLUDE "home/copy2.asm"
 INCLUDE "home/text.asm"
@@ -103,7 +103,7 @@ UpdateSprites::
 
 INCLUDE "data/items/marts.asm"
 INCLUDE "home/overworld_text.asm"
-INCLUDE "home/pic.asm"
+INCLUDE "home/uncompress.asm"
 
 ResetPlayerSpriteData::
 	ld hl, wSpriteStateData1
