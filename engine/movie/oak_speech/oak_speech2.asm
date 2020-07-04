@@ -107,7 +107,7 @@ OakSpeechSlidePicCommon:
 	ld e, l
 .loop
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [hSlideDirection]
 	and a
 	jr nz, .slideLeft
@@ -134,7 +134,7 @@ OakSpeechSlidePicCommon:
 	ld [hl], a
 .next3
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	ld a, [hSlidingRegionSize]
 	ld c, a
@@ -187,7 +187,7 @@ DisplayIntroNameTextBox:
 .namestring
 	db "NAME@"
 
-INCLUDE "text/player_names.asm"
+INCLUDE "data/player_names.asm"
 
 GetDefaultName:
 ; a = name index
@@ -213,7 +213,7 @@ GetDefaultName:
 	ld bc, $14
 	jp CopyData
 
-INCLUDE "text/player_names_list.asm"
+INCLUDE "data/player_names_list.asm"
 
 TextTerminator_6b20:
 	db "@"

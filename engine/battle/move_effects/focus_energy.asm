@@ -1,6 +1,6 @@
 FocusEnergyEffect_:
 	ld hl, wPlayerBattleStatus2
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyBattleStatus2

@@ -28,7 +28,7 @@ SilphCo6GateCoords:
 	db $FF
 
 SilphCo6Script_1a1e6:
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_6_UNLOCKED_DOOR

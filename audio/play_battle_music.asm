@@ -2,9 +2,9 @@ PlayBattleMusic::
 	xor a
 	ld [wAudioFadeOutControl], a
 	ld [wLowHealthAlarm], a
-	dec a
+	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound ; stop music
+	call PlaySound
 	call DelayFrame
 	ld c, BANK(Music_GymLeaderBattle)
 	ld a, [wGymLeaderNo]

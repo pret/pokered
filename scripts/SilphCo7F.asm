@@ -55,14 +55,14 @@ SilphCo7Text_51bc8:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	pop hl
 .asm_51bd4
 	ld a, [hli]
 	cp $ff
 	jr z, .asm_51bf0
 	push hl
-	ld hl, $ffe0
+	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
@@ -80,12 +80,12 @@ SilphCo7Text_51bc8:
 	ret
 .asm_51bf0
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	ret
 
 SilphCo7Text_51bf4:
 	EventFlagAddress hl, EVENT_SILPH_CO_7_UNLOCKED_DOOR1
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1
@@ -130,7 +130,7 @@ SilphCo7Script0:
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
@@ -140,7 +140,7 @@ SilphCo7Script0:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_51c7d
 	ld a, [wCoordIndex]
@@ -150,7 +150,7 @@ SilphCo7Script0:
 	inc de
 .asm_51c6c
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $3
 	jp SilphCo7Text_51c10
@@ -212,14 +212,14 @@ SilphCo7Script4:
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $f
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
@@ -230,7 +230,7 @@ SilphCo7Script4:
 	ld de, MovementData_51d1a
 .asm_51d0e
 	ld a, $9
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $5
 	jp SilphCo7Text_51c10

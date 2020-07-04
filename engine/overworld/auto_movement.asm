@@ -66,7 +66,7 @@ PalletMovementScript_OakMoveLeft:
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 	ld a, $1
@@ -282,7 +282,7 @@ FreezeEnemyTrainerSprite::
 	jr .loop
 .notRival
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs:

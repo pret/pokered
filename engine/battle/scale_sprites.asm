@@ -17,7 +17,7 @@ ScaleFirstThreeSpriteColumnsByTwo:
 .columnInnerLoop
 	push bc
 	ld a, [de]
-	ld bc, -(7*8)+1       ; $ffc9, scale lower nybble and seek to previous output column
+	ld bc, -(7*8)+1       ; -$37, scale lower nybble and seek to previous output column
 	call ScalePixelsByTwo
 	ld a, [de]
 	dec de
@@ -32,7 +32,7 @@ ScaleFirstThreeSpriteColumnsByTwo:
 	dec de
 	dec de
 	ld a, b
-	ld bc, -7*8 ; $ffc8, skip one output column (which has already been written along with the current one)
+	ld bc, -7*8 ; -$38, skip one output column (which has already been written along with the current one)
 	add hl, bc
 	ld b, a
 	dec b
@@ -41,16 +41,16 @@ ScaleFirstThreeSpriteColumnsByTwo:
 
 ScaleLastSpriteColumnByTwo:
 	ld a, 4*8 - 4 ; $1c, 4 tiles minus 4 unused rows
-	ld [H_SPRITEINTERLACECOUNTER], a
+	ld [hSpriteInterlaceCounter], a
 	ld bc, -1
 .columnInnerLoop
 	ld a, [de]
 	dec de
 	swap a                    ; only high nybble contains information
 	call ScalePixelsByTwo
-	ld a, [H_SPRITEINTERLACECOUNTER]
+	ld a, [hSpriteInterlaceCounter]
 	dec a
-	ld [H_SPRITEINTERLACECOUNTER], a
+	ld [hSpriteInterlaceCounter], a
 	jr nz, .columnInnerLoop
 	dec de                    ; skip last 4 rows of new column
 	dec de

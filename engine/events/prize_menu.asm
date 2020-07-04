@@ -131,10 +131,8 @@ GetPrizeMenuId:
 	coord hl, 13, 5
 ; reg. c:
 ; [low nybble] number of bytes
-; [bit 765 = %100] space-padding (not zero-padding)
+; [bits 765 = %100] space-padding (not zero-padding)
 	ld c, (1 << 7 | 2)
-; Function $15CD displays BCD value (same routine
-; used by text-command $02)
 	call PrintBCDNumber
 	ld de, wPrize2Price
 	coord hl, 13, 7
@@ -145,7 +143,7 @@ GetPrizeMenuId:
 	ld c, (1 << 7 | 2)
 	jp PrintBCDNumber
 
-INCLUDE "data/prizes.asm"
+INCLUDE "data/events/prizes.asm"
 
 PrintPrizePrice:
 	coord hl, 11, 0
@@ -303,4 +301,4 @@ GetPrizeMonLevel:
 	ld [wCurEnemyLVL], a
 	ret
 
-INCLUDE "data/prize_mon_levels.asm"
+INCLUDE "data/events/prize_mon_levels.asm"

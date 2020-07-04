@@ -1,6 +1,6 @@
 DisplayPCMainMenu::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer2
 	ld a, [wNumHoFTeams]
 	and a
@@ -82,7 +82,7 @@ DisplayPCMainMenu::
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 SomeonesPCText:   db "SOMEONE's PC@"
@@ -168,7 +168,7 @@ BillsPCMenu:
 	ld de, BoxNoPCText
 	call PlaceString
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	call HandleMenuInput
 	bit 1, a
@@ -376,7 +376,8 @@ KnowsHMMove::
 	and a
 	ret
 
-INCLUDE "data/hm_moves.asm"
+HMMoveArray:
+INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
 	coord hl, 9, 10

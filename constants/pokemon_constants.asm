@@ -1,5 +1,5 @@
-const_value = 1
-
+	const_def
+	const NO_MON       ; $00
 	const RHYDON       ; $01
 	const KANGASKHAN   ; $02
 	const NIDORAN_M    ; $03
@@ -191,4 +191,4 @@ const_value = 1
 	const WEEPINBELL   ; $BD
 	const VICTREEBEL   ; $BE
 
-NUM_POKEMON_INDEXES EQU const_value + -1
+NUM_POKEMON_INDEXES EQU const_value - 1

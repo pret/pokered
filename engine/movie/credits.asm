@@ -21,7 +21,7 @@ HallOfFamePC:
 	ld a, %11000000
 	ld [rBGP], a
 	call EnableLCD
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
 	ld c, BANK(Music_Credits)
 	ld a, MUSIC_CREDITS
@@ -47,7 +47,7 @@ FadeInCreditsText:
 
 DisplayCreditsMon:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer1
 	call FillMiddleOfScreenWithWhite
 
@@ -67,7 +67,7 @@ DisplayCreditsMon:
 	ld hl, vBGMap0 + $c
 	call CreditsCopyTileMapToVRAM
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call LoadScreenTilesFromBuffer1
 	ld hl, vBGMap0
 	call CreditsCopyTileMapToVRAM
@@ -104,7 +104,7 @@ DisplayCreditsMon:
 	ld [rBGP], a
 	ret
 
-INCLUDE "data/credit_mons.asm"
+INCLUDE "data/credits/credits_mons.asm"
 
 ScrollCreditsMonLeft:
 	ld h, b
@@ -138,11 +138,11 @@ HoFGBPalettes:
 
 CreditsCopyTileMapToVRAM:
 	ld a, l
-	ld [H_AUTOBGTRANSFERDEST], a
+	ld [hAutoBGTransferDest], a
 	ld a, h
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ld [hAutoBGTransferDest + 1], a
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp Delay3
 
 ZeroMemory:
@@ -261,9 +261,9 @@ TheEndTextString:
 	db $60," ",$62," ",$64,"  ",$64," ",$66," ",$68,"@"
 	db $61," ",$63," ",$65,"  ",$65," ",$67," ",$69,"@"
 
-INCLUDE "data/credits_order.asm"
+INCLUDE "data/credits/credits_order.asm"
 
-INCLUDE "text/credits_text.asm"
+INCLUDE "data/credits/credits_text.asm"
 
 TheEndGfx:
 	INCBIN "gfx/intro_credits/the_end.2bpp"

@@ -40,7 +40,7 @@ DrawHP_:
 	push hl
 	call DrawHPBar
 	pop hl
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	bit 0, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
@@ -254,7 +254,7 @@ PrintStatsBox:
 	ld c, 8
 	call TextBoxBorder ; Draws the box
 	coord hl, 1, 9 ; Start printing stats from here
-	ld bc, $0019 ; Number offset
+	ld bc, $19 ; Number offset
 	jr .PrintStats
 .DifferentBox
 	coord hl, 9, 2
@@ -262,7 +262,7 @@ PrintStatsBox:
 	ld c, 9
 	call TextBoxBorder
 	coord hl, 11, 3
-	ld bc, $0018
+	ld bc, $18
 .PrintStats
 	push bc
 	push hl
@@ -299,7 +299,7 @@ StatusScreen2:
 	push af
 	xor a
 	ld [hTilesetType], a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
 	call FillMemory
@@ -424,7 +424,7 @@ StatusScreen2:
 	coord hl, 9, 1
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af

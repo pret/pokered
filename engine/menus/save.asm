@@ -351,10 +351,10 @@ ChangeBox::
 	call z, EmptyAllSRAMBoxes ; if so, empty all boxes in SRAM
 	call DisplayChangeBoxMenu
 	call UpdateSprites
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	res 1, [hl]
 	bit 1, a ; pressed b
 	ret nz
@@ -420,7 +420,7 @@ CopyBoxToOrFromSRAM:
 
 DisplayChangeBoxMenu:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -445,12 +445,12 @@ DisplayChangeBoxMenu:
 	ld b, 12
 	ld c, 7
 	call TextBoxBorder
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	set 2, [hl]
 	ld de, BoxNames
 	coord hl, 13, 1
 	call PlaceString
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	res 2, [hl]
 	ld a, [wCurrentBoxNum]
 	and $7f
@@ -486,7 +486,7 @@ DisplayChangeBoxMenu:
 	dec a
 	jr nz, .loop
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 ChooseABoxText:
@@ -601,9 +601,9 @@ GetMonCountsForBoxesInBank:
 	ret
 
 SAVCheckRandomID:
-;checks if Sav file is the same by checking player's name 1st letter ($a598)
+; checks if Sav file is the same by checking player's name 1st letter
 ; and the two random numbers generated at game beginning
-;(which are stored at wPlayerID)s
+; (which are stored at wPlayerID)s
 	ld a, $0a
 	ld [MBC1SRamEnable], a
 	ld a, $01
@@ -702,7 +702,7 @@ ClearSAV:
 
 PadSRAM_FF:
 	ld [MBC1SRamBank], a
-	ld hl, $a000
-	ld bc, $2000
+	ld hl, SRAM_Begin
+	ld bc, SRAM_End - SRAM_Begin
 	ld a, $ff
 	jp FillMemory

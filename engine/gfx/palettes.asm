@@ -1,11 +1,11 @@
 _RunPaletteCommand:
 	call GetPredefRegisters
 	ld a, b
-	cp $ff
-	jr nz, .next
-	ld a, [wDefaultPaletteCommand] ; use default command if command ID is $ff
-.next
-	cp UPDATE_PARTY_MENU_BLK_PACKET
+	cp SET_PAL_DEFAULT
+	jr nz, .not_default
+	ld a, [wDefaultPaletteCommand]
+.not_default
+	cp SET_PAL_PARTY_MENU_HP_BARS
 	jp z, UpdatePartyMenuBlkPacket
 	ld l, a
 	ld h, 0
@@ -632,10 +632,10 @@ CopySGBBorderTiles:
 	jr nz, .tileLoop
 	ret
 
-INCLUDE "data/sgb_packets.asm"
+INCLUDE "data/sgb/sgb_packets.asm"
 
-INCLUDE "data/mon_palettes.asm"
+INCLUDE "data/pokemon/palettes.asm"
 
-INCLUDE "data/super_palettes.asm"
+INCLUDE "data/sgb/sgb_palettes.asm"
 
-INCLUDE "data/sgb_border.asm"
+INCLUDE "data/sgb/sgb_border.asm"

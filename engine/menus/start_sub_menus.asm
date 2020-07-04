@@ -239,21 +239,21 @@ StartMenu_Pokemon::
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hli]
-	ld [H_DIVIDEND], a
+	ld [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ld [hDividend + 1], a
 	ld a, 5
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 2 ; number of bytes
 	call Divide
 	ld bc, wPartyMon1HP - wPartyMon1MaxHP
 	add hl, bc
 	ld a, [hld]
 	ld b, a
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	sub b
 	ld b, [hl]
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	sbc b
 	jp nc, .notHealthyEnough
 	ld a, [wPartyAndBillsPCSavedMenuItem]
@@ -446,9 +446,9 @@ CannotGetOffHereText:
 	TX_FAR _CannotGetOffHereText
 	db "@"
 
-INCLUDE "data/party_items.asm"
+INCLUDE "data/items/use_party.asm"
 
-INCLUDE "data/overworld_items.asm"
+INCLUDE "data/items/use_overworld.asm"
 
 StartMenu_TrainerInfo::
 	call GBPalWhiteOut
@@ -491,12 +491,12 @@ DrawTrainerInfo:
 	call CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
 	ld de, vChars2 + $770
-	ld bc, $0080
+	ld bc, $80
 	push bc
 	call TrainerInfo_FarCopyData
 	ld hl, BlankLeaderNames
 	ld de, vChars2 + $600
-	ld bc, $0170
+	ld bc, $170
 	call TrainerInfo_FarCopyData
 	pop bc
 	ld hl, BadgeNumbersTileGraphics  ; badge number tile patterns
@@ -504,14 +504,14 @@ DrawTrainerInfo:
 	call TrainerInfo_FarCopyData
 	ld hl, GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
 	ld de, vChars2 + $200
-	ld bc, $0400
+	ld bc, $400
 	ld a, $03
 	call FarCopyData2
 	ld hl, TextBoxGraphics
-	ld de, $00d0
+	ld de, $d0
 	add hl, de ; hl = colon tile pattern
 	ld de, vChars1 + $560
-	ld bc, $0010
+	ld bc, $10
 	ld a, $04
 	push bc
 	call FarCopyData2
@@ -648,7 +648,7 @@ StartMenu_SaveReset::
 
 StartMenu_Option::
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
 	callab DisplayOptionMenu

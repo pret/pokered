@@ -2,26 +2,26 @@ _GetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, [hl] ; c2x5 (map X pos)
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	ret
 
 _GetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [wSavedSpriteScreenY], a
@@ -40,18 +40,18 @@ _SetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
-	ld a, [$ffeb] ; c1x4 (screen Y pos)
+	ld a, [hSpriteScreenYCoord] ; c1x4 (screen Y pos)
 	ld [hli], a
 	inc hl
-	ld a, [$ffec] ; c1x6 (screen X pos)
+	ld a, [hSpriteScreenXCoord] ; c1x6 (screen X pos)
 	ld [hl], a
 	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
-	ld a, [$ffed] ; c2x4 (map Y pos)
+	ld a, [hSpriteMapYCoord] ; c2x4 (map Y pos)
 	ld [hli], a
-	ld a, [$ffee] ; c2x5 (map X pos)
+	ld a, [hSpriteMapXCoord] ; c2x5 (map X pos)
 	ld [hl], a
 	ret
 
@@ -59,7 +59,7 @@ _SetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, 4
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [wSavedSpriteScreenY]
 	ld [hli], a ; c1x4 (screen Y pos)
@@ -144,7 +144,7 @@ TrainerWalkUpToPlayer::
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
 	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
@@ -152,7 +152,7 @@ TrainerWalkUpToPlayer::
 GetSpriteDataPointer:
 	push de
 	add hl, de
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	swap a
 	ld d, $0
 	ld e, a

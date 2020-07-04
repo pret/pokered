@@ -41,8 +41,8 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld sp, wStack
 
-	ld hl, $c000 ; start of WRAM
-	ld bc, $2000 ; size of WRAM
+	ld hl, WRAM0_Begin
+	ld bc, WRAM1_End - WRAM0_Begin
 .loop
 	ld [hl], 0
 	inc hl
@@ -53,14 +53,14 @@ rLCDC_DEFAULT EQU %11100011
 
 	call ClearVram
 
-	ld hl, $ff80
-	ld bc, $ffff - $ff80
+	ld hl, HRAM_Begin
+	ld bc, HRAM_End - HRAM_Begin
 	call FillMemory
 
 	call ClearSprites
 
-	ld a, Bank(WriteDMACodeToHRAM)
-	ld [H_LOADEDROMBANK], a
+	ld a, BANK(WriteDMACodeToHRAM)
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM
 
@@ -101,9 +101,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, $9c
-	ld [H_AUTOBGTRANSFERDEST + 1], a
+	ld [hAutoBGTransferDest + 1], a
 	xor a
-	ld [H_AUTOBGTRANSFERDEST], a
+	ld [hAutoBGTransferDest], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 
@@ -119,8 +119,8 @@ rLCDC_DEFAULT EQU %11100011
 	jp SetDefaultNamesBeforeTitlescreen
 
 ClearVram::
-	ld hl, $8000
-	ld bc, $2000
+	ld hl, VRAM_Begin
+	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	jp FillMemory
 

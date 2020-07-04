@@ -23,7 +23,7 @@ BillsHouseScript1:
 	ld de, MovementData_1e7a0
 .notDown
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $2
 	ld [wBillsHouseCurScript], a
@@ -66,13 +66,13 @@ BillsHouseScript3:
 	ld a, $2
 	ld [wSpriteIndex], a
 	ld a, $c
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld a, $6
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, $5
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	call SetSpritePosition1
 	ld a, HS_BILL_1
 	ld [wMissableObjectIndex], a
@@ -80,7 +80,7 @@ BillsHouseScript3:
 	ld c, 8
 	call DelayFrames
 	ld a, $2
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	ld de, MovementData_1e807
 	call MoveSprite
 	ld a, $4

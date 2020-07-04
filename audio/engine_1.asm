@@ -925,7 +925,7 @@ Audio1_ApplyWavePatternAndFrequency:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, $ff30 ; wave pattern RAM
+	ld hl, rWave_0
 	ld b, $f
 	ld a, $0 ; stop hardware channel 3
 	ld [rNR30], a

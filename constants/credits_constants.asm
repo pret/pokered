@@ -1,5 +1,4 @@
-const_value = 0
-
+	const_def
 	const CRED_VERSION        ; $00
 	const CRED_TAJIRI         ; $01
 	const CRED_TA_OOTA        ; $02
@@ -64,4 +63,3 @@ const_value = 0
 	const CRED_FUKUI          ; $3D
 	const CRED_CLUB           ; $3E
 	const CRED_PAAD           ; $3F
-

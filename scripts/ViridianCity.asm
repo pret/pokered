@@ -59,14 +59,14 @@ ViridianCityScript_1903d:
 	ret
 
 ViridianCityScript1:
-	ld a, [wSpriteStateData1 + $34]
-	ld [$ffeb], a
-	ld a, [wSpriteStateData1 + $36]
-	ld [$ffec], a
-	ld a, [wSpriteStateData2 + $34]
-	ld [$ffed], a
-	ld a, [wSpriteStateData2 + $35]
-	ld [$ffee], a
+	ld a, [wSprite03StateData1YPixels]
+	ld [hSpriteScreenYCoord], a
+	ld a, [wSprite03StateData1XPixels]
+	ld [hSpriteScreenXCoord], a
+	ld a, [wSprite03StateData2MapY]
+	ld [hSpriteMapYCoord], a
+	ld a, [wSprite03StateData2MapX]
+	ld [hSpriteMapXCoord], a
 	xor a
 	ld [wListScrollOffset], a
 
@@ -82,14 +82,14 @@ ViridianCityScript1:
 	ret
 
 ViridianCityScript2:
-	ld a, [$ffeb]
-	ld [wSpriteStateData1 + $34], a
-	ld a, [$ffec]
-	ld [wSpriteStateData1 + $36], a
-	ld a, [$ffed]
-	ld [wSpriteStateData2 + $34], a
-	ld a, [$ffee]
-	ld [wSpriteStateData2 + $35], a
+	ld a, [hSpriteScreenYCoord]
+	ld [wSprite03StateData1YPixels], a
+	ld a, [hSpriteScreenXCoord]
+	ld [wSprite03StateData1XPixels], a
+	ld a, [hSpriteMapYCoord]
+	ld [wSprite03StateData2MapY], a
+	ld a, [hSpriteMapXCoord]
+	ld [wSprite03StateData2MapX], a
 	call UpdateSprites
 	call Delay3
 	xor a

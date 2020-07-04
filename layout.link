@@ -1,59 +1,43 @@
 ROM0
 	org $0000
-	"rst 00"
-
+	"NULL"
+	org $0000
+	"rst0"
 	org $0008
-	"rst 08"
-
+	"rst8"
 	org $0010
-	"rst 10"
-
+	"rst10"
 	org $0018
-	"rst 18"
-
+	"rst18"
 	org $0020
-	"rst 20"
-
+	"rst20"
 	org $0028
-	"rst 28"
-
+	"rst28"
 	org $0030
-	"rst 30"
-
+	"rst30"
 	org $0038
-	"rst 38"
-
+	"rst38"
 	org $0040
 	"vblank"
-
 	org $0048
-	"hblank"
-
+	"lcd"
 	org $0050
 	"timer"
-
 	org $0058
 	"serial"
-
 	org $0060
 	"joypad"
 	; $0061
+	"High Home"
+	org $100
+	"Header"
+	org $150
 	"Home"
 
-	org $100
-	"Entry"
-	; $0104
-	"Header"
-
-	org $150
-	"Main"
-
 ROMX $1
-	org $4000
 	"bank1"
 
 ROMX $2
-	org $4000
 	"Sound Effect Headers 1"
 	"Music Headers 1"
 	"Sound Effects 1"
@@ -61,36 +45,30 @@ ROMX $2
 	"Music 1"
 
 ROMX $3
-	org $4000
 	"bank3"
 
 ROMX $4
-	org $4000
 	"NPC Sprites 1"
 	"Graphics (BANK 4)"
 	"Battle (BANK 4)"
 
 ROMX $5
-	org $4000
 	"NPC Sprites 2"
 	"Battle (BANK 5)"
 
 ROMX $6
-	org $4000
 	"Maps 1"
 	"bank6_1"
 	"Maps 2"
 	"bank6_2"
 
 ROMX $7
-	org $4000
 	"Maps 3"
 	"bank7_1"
 	"Maps 4"
 	"bank7_2"
 
 ROMX $8
-	org $4000
 	"Sound Effect Headers 2"
 	"Music Headers 2"
 	"Sound Effects 2"
@@ -100,113 +78,92 @@ ROMX $8
 	"Music 2"
 
 ROMX $9
-	org $4000
 	"Pics 1"
 	"Battle (BANK 9)"
 
 ROMX $A
-	org $4000
 	"Pics 2"
 	"Battle (BANK A)"
 
 ROMX $B
-	org $4000
 	"Pics 3"
 	"Battle (BANK B)"
 
 ROMX $C
-	org $4000
 	"Pics 4"
 	"Battle (BANK C)"
 
 ROMX $D
-	org $4000
 	"Pics 5"
 	"Battle (BANK D)"
 
 ROMX $E
-	org $4000
 	"bankE"
 
 ROMX $F
-	org $4000
 	"bankF"
 
 ROMX $10
-	org $4000
 	"bank10"
 
 ROMX $11
-	org $4000
 	"Maps 5"
 	"bank11_1"
 	"Maps 6"
 	"bank11_2"
 
 ROMX $12
-	org $4000
 	"Maps 7"
 	"bank12"
 	"Maps 8"
 
 ROMX $13
-	org $4000
 	"Pics 6"
 	"Maps 9"
 	"bank13"
 
 ROMX $14
-	org $4000
 	"Maps 10"
 	"bank14"
 
 ROMX $15
-	org $4000
 	"Maps 11"
 	"bank15_1"
 	"Maps 12"
 	"bank15_2"
 
 ROMX $16
-	org $4000
 	"Maps 13"
 	"bank16_1"
 	"Maps 14"
 	"bank16_2"
 
 ROMX $17
-	org $4000
 	"Maps 15"
 	"bank17_1"
 	"Maps 16"
 	"bank17_2"
 
 ROMX $18
-	org $4000
 	"Maps 17"
 	"bank18_1"
 	"Maps 18"
 	"bank18_2"
 
 ROMX $19
-	org $4000
 	"Tilesets 1"
 
 ROMX $1A
-	org $4000
 	"bank1A"
 	"Tilesets 2"
 
 ROMX $1B
-	org $4000
 	"Tilesets 3"
 
 ROMX $1C
-	org $4000
 	"bank1C"
 
 ROMX $1D
-	org $4000
 	"Maps 19"
 	"bank1D_1"
 	"Maps 20"
@@ -215,11 +172,9 @@ ROMX $1D
 	"bank1D_3"
 
 ROMX $1E
-	org $4000
 	"bank1E"
 
 ROMX $1F
-	org $4000
 	"Sound Effect Headers 3"
 	"Music Headers 3"
 	"Sound Effects 3"
@@ -227,81 +182,60 @@ ROMX $1F
 	"Music 3"
 
 ROMX $20
-	org $4000
 	"Text 1"
 
 ROMX $21
-	org $4000
 	"Text 2"
 
 ROMX $22
-	org $4000
 	"Text 3"
 
 ROMX $23
-	org $4000
 	"Text 4"
 
 ROMX $24
-	org $4000
 	"Text 5"
 
 ROMX $25
-	org $4000
 	"Text 6"
 
 ROMX $26
-	org $4000
 	"Text 7"
 
 ROMX $27
-	org $4000
 	"Text 8"
 
 ROMX $28
-	org $4000
 	"Text 9"
 
 ROMX $29
-	org $4000
 	"Text 10"
 
 ROMX $2A
-	org $4000
 	"Text 11"
 
 ROMX $2B
-	org $4000
 	"Pokedex Text"
 
 ROMX $2C
-	org $4000
 	"Move Names"
 
 WRAM0
-	org $c000
 	"WRAM Bank 0"
-
 	org $c100
 	"Sprite State Data"
 	"OAM Buffer"
-
 	org $dfff
 	"Stack"
 
-SRAM 0
-	org $a000
+SRAM $0
 	"Sprite Buffers"
 
-SRAM 1
-	org $a000
+SRAM $1
 	"Save Data"
 
-SRAM 2
-	org $a000
+SRAM $2
 	"Saved Boxes 1"
 
-SRAM 3
-	org $a000
+SRAM $3
 	"Saved Boxes 2"
-

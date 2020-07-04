@@ -162,7 +162,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	jr nz, .loop
 	jp EnableLCD
 
-INCLUDE "data/mon_party_sprite_pointers.asm"
+INCLUDE "data/icon_pointers.asm"
 
 WriteMonPartySpriteOAMByPartyIndex:
 ; Write OAM blocks for the party mon in [hPartyMonIndex].
@@ -278,7 +278,7 @@ GetPartyMonSpriteID:
 	srl a
 	ret
 
-INCLUDE "data/mon_party_sprites.asm"
+INCLUDE "data/pokemon/menu_icons.asm"
 
 INC_FRAME_1 EQUS "0, $20"
 INC_FRAME_2 EQUS "$20, $20"

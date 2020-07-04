@@ -2,142 +2,142 @@ _Multiply::
 	ld a, $8
 	ld b, a
 	xor a
-	ld [H_PRODUCT], a
-	ld [H_MULTIPLYBUFFER], a
-	ld [H_MULTIPLYBUFFER+1], a
-	ld [H_MULTIPLYBUFFER+2], a
-	ld [H_MULTIPLYBUFFER+3], a
+	ld [hProduct], a
+	ld [hMultiplyBuffer], a
+	ld [hMultiplyBuffer+1], a
+	ld [hMultiplyBuffer+2], a
+	ld [hMultiplyBuffer+3], a
 .loop
-	ld a, [H_MULTIPLIER]
+	ld a, [hMultiplier]
 	srl a
-	ld [H_MULTIPLIER], a ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld [hMultiplier], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	jr nc, .smallMultiplier
-	ld a, [H_MULTIPLYBUFFER+3]
+	ld a, [hMultiplyBuffer+3]
 	ld c, a
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	add c
-	ld [H_MULTIPLYBUFFER+3], a
-	ld a, [H_MULTIPLYBUFFER+2]
+	ld [hMultiplyBuffer+3], a
+	ld a, [hMultiplyBuffer+2]
 	ld c, a
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hMultiplicand+1]
 	adc c
-	ld [H_MULTIPLYBUFFER+2], a
-	ld a, [H_MULTIPLYBUFFER+1]
+	ld [hMultiplyBuffer+2], a
+	ld a, [hMultiplyBuffer+1]
 	ld c, a
-	ld a, [H_MULTIPLICAND] ; (aliases: H_MULTIPLICAND)
+	ld a, [hMultiplicand] ; (aliases: hMultiplicand)
 	adc c
-	ld [H_MULTIPLYBUFFER+1], a
-	ld a, [H_MULTIPLYBUFFER]
+	ld [hMultiplyBuffer+1], a
+	ld a, [hMultiplyBuffer]
 	ld c, a
-	ld a, [H_PRODUCT] ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [hProduct] ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	adc c
-	ld [H_MULTIPLYBUFFER], a
+	ld [hMultiplyBuffer], a
 .smallMultiplier
 	dec b
 	jr z, .done
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hMultiplicand+2]
 	sla a
-	ld [H_MULTIPLICAND+2], a
-	ld a, [H_MULTIPLICAND+1]
+	ld [hMultiplicand+2], a
+	ld a, [hMultiplicand+1]
 	rl a
-	ld [H_MULTIPLICAND+1], a
-	ld a, [H_MULTIPLICAND]
+	ld [hMultiplicand+1], a
+	ld a, [hMultiplicand]
 	rl a
-	ld [H_MULTIPLICAND], a
-	ld a, [H_PRODUCT]
+	ld [hMultiplicand], a
+	ld a, [hProduct]
 	rl a
-	ld [H_PRODUCT], a
+	ld [hProduct], a
 	jr .loop
 .done
-	ld a, [H_MULTIPLYBUFFER+3]
-	ld [H_PRODUCT+3], a
-	ld a, [H_MULTIPLYBUFFER+2]
-	ld [H_PRODUCT+2], a
-	ld a, [H_MULTIPLYBUFFER+1]
-	ld [H_PRODUCT+1], a
-	ld a, [H_MULTIPLYBUFFER]
-	ld [H_PRODUCT], a
+	ld a, [hMultiplyBuffer+3]
+	ld [hProduct+3], a
+	ld a, [hMultiplyBuffer+2]
+	ld [hProduct+2], a
+	ld a, [hMultiplyBuffer+1]
+	ld [hProduct+1], a
+	ld a, [hMultiplyBuffer]
+	ld [hProduct], a
 	ret
 
 _Divide::
 	xor a
-	ld [H_DIVIDEBUFFER], a
-	ld [H_DIVIDEBUFFER+1], a
-	ld [H_DIVIDEBUFFER+2], a
-	ld [H_DIVIDEBUFFER+3], a
-	ld [H_DIVIDEBUFFER+4], a
+	ld [hDivideBuffer], a
+	ld [hDivideBuffer+1], a
+	ld [hDivideBuffer+2], a
+	ld [hDivideBuffer+3], a
+	ld [hDivideBuffer+4], a
 	ld a, $9
 	ld e, a
 .asm_37db3
-	ld a, [H_DIVIDEBUFFER]
+	ld a, [hDivideBuffer]
 	ld c, a
-	ld a, [H_DIVIDEND+1] ; (aliases: H_MULTIPLICAND)
+	ld a, [hDividend+1] ; (aliases: hMultiplicand)
 	sub c
 	ld d, a
-	ld a, [H_DIVISOR] ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [hDivisor] ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	ld c, a
-	ld a, [H_DIVIDEND] ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [hDividend] ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	sbc c
 	jr c, .asm_37dce
-	ld [H_DIVIDEND], a ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld [hDividend], a ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	ld a, d
-	ld [H_DIVIDEND+1], a ; (aliases: H_MULTIPLICAND)
-	ld a, [H_DIVIDEBUFFER+4]
+	ld [hDividend+1], a ; (aliases: hMultiplicand)
+	ld a, [hDivideBuffer+4]
 	inc a
-	ld [H_DIVIDEBUFFER+4], a
+	ld [hDivideBuffer+4], a
 	jr .asm_37db3
 .asm_37dce
 	ld a, b
 	cp $1
 	jr z, .asm_37e18
-	ld a, [H_DIVIDEBUFFER+4]
+	ld a, [hDivideBuffer+4]
 	sla a
-	ld [H_DIVIDEBUFFER+4], a
-	ld a, [H_DIVIDEBUFFER+3]
+	ld [hDivideBuffer+4], a
+	ld a, [hDivideBuffer+3]
 	rl a
-	ld [H_DIVIDEBUFFER+3], a
-	ld a, [H_DIVIDEBUFFER+2]
+	ld [hDivideBuffer+3], a
+	ld a, [hDivideBuffer+2]
 	rl a
-	ld [H_DIVIDEBUFFER+2], a
-	ld a, [H_DIVIDEBUFFER+1]
+	ld [hDivideBuffer+2], a
+	ld a, [hDivideBuffer+1]
 	rl a
-	ld [H_DIVIDEBUFFER+1], a
+	ld [hDivideBuffer+1], a
 	dec e
 	jr nz, .asm_37e04
 	ld a, $8
 	ld e, a
-	ld a, [H_DIVIDEBUFFER]
-	ld [H_DIVISOR], a ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [hDivideBuffer]
+	ld [hDivisor], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	xor a
-	ld [H_DIVIDEBUFFER], a
-	ld a, [H_DIVIDEND+1] ; (aliases: H_MULTIPLICAND)
-	ld [H_DIVIDEND], a ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
-	ld a, [H_DIVIDEND+2]
-	ld [H_DIVIDEND+1], a ; (aliases: H_MULTIPLICAND)
-	ld a, [H_DIVIDEND+3]
-	ld [H_DIVIDEND+2], a
+	ld [hDivideBuffer], a
+	ld a, [hDividend+1] ; (aliases: hMultiplicand)
+	ld [hDividend], a ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
+	ld a, [hDividend+2]
+	ld [hDividend+1], a ; (aliases: hMultiplicand)
+	ld a, [hDividend+3]
+	ld [hDividend+2], a
 .asm_37e04
 	ld a, e
 	cp $1
 	jr nz, .asm_37e0a
 	dec b
 .asm_37e0a
-	ld a, [H_DIVISOR] ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
+	ld a, [hDivisor] ; (aliases: hDivisor, hMultiplier, hPowerOf10)
 	srl a
-	ld [H_DIVISOR], a ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld a, [H_DIVIDEBUFFER]
+	ld [hDivisor], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
+	ld a, [hDivideBuffer]
 	rr a
-	ld [H_DIVIDEBUFFER], a
+	ld [hDivideBuffer], a
 	jr .asm_37db3
 .asm_37e18
-	ld a, [H_DIVIDEND+1] ; (aliases: H_MULTIPLICAND)
-	ld [H_REMAINDER], a ; (aliases: H_DIVISOR, H_MULTIPLIER, H_POWEROFTEN)
-	ld a, [H_DIVIDEBUFFER+4]
-	ld [H_QUOTIENT+3], a
-	ld a, [H_DIVIDEBUFFER+3]
-	ld [H_QUOTIENT+2], a
-	ld a, [H_DIVIDEBUFFER+2]
-	ld [H_QUOTIENT+1], a ; (aliases: H_MULTIPLICAND)
-	ld a, [H_DIVIDEBUFFER+1]
-	ld [H_DIVIDEND], a ; (aliases: H_PRODUCT, H_PASTLEADINGZEROES, H_QUOTIENT)
+	ld a, [hDividend+1] ; (aliases: hMultiplicand)
+	ld [hRemainder], a ; (aliases: hDivisor, hMultiplier, hPowerOf10)
+	ld a, [hDivideBuffer+4]
+	ld [hQuotient+3], a
+	ld a, [hDivideBuffer+3]
+	ld [hQuotient+2], a
+	ld a, [hDivideBuffer+2]
+	ld [hQuotient+1], a ; (aliases: hMultiplicand)
+	ld a, [hDivideBuffer+1]
+	ld [hDividend], a ; (aliases: hProduct, hPastLeadingZeros, hQuotient)
 	ret

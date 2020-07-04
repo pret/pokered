@@ -1,3 +1,9 @@
+add_predef: MACRO
+\1Predef::
+	db BANK(\1)
+	dw \1
+ENDM
+
 PredefPointers::
 ; these are pointers to ASM routines.
 ; they appear to be used in overworld map scripts.

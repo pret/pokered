@@ -337,7 +337,7 @@ ED_TileEnd:
 
 PrintAlphabet:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
@@ -362,10 +362,10 @@ PrintAlphabet:
 	jr nz, .outerLoop
 	call PlaceString
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp Delay3
 
-INCLUDE "text/alphabets.asm"
+INCLUDE "data/text/alphabets.asm"
 
 PrintNicknameAndUnderscores:
 	call CalcStringLength
@@ -435,7 +435,7 @@ DakutensAndHandakutens:
 	ld [wNamingScreenLetter], a
 	ret
 
-INCLUDE "text/dakutens.asm"
+INCLUDE "data/text/dakutens.asm"
 
 ; calculates the length of the string at wcf4b and stores it in c
 CalcStringLength:

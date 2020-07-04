@@ -22,4 +22,4 @@ SetLastBlackoutMap:
 	pop hl
 	ret
 
-INCLUDE "data/rest_house_maps.asm"
+INCLUDE "data/maps/rest_house_maps.asm"

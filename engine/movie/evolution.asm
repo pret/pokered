@@ -9,16 +9,16 @@ EvolveMon:
 	xor a
 	ld [wLowHealthAlarm], a
 	ld [wChannelSoundIDs + Ch5], a
-	dec a
+	dec a ; SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, SFX_TINK
 	call PlaySound
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld [hTilesetType], a
 	ld a, [wEvoOldSpecies]
 	ld [wWholeScreenPaletteMonSpecies], a
@@ -37,7 +37,7 @@ EvolveMon:
 	ld [wd0b5], a
 	call Evolution_LoadPic
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wEvoOldSpecies]
 	call PlayCry
 	call WaitForSoundToFinish
@@ -67,7 +67,7 @@ EvolveMon:
 	ld a, [wEvoNewSpecies]
 .done
 	ld [wWholeScreenPaletteMonSpecies], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wWholeScreenPaletteMonSpecies]
@@ -117,7 +117,7 @@ Evolution_BackAndForthAnim:
 Evolution_ChangeMonPic:
 	push bc
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 7, 2
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH - 7
@@ -134,7 +134,7 @@ Evolution_ChangeMonPic:
 	dec b
 	jr nz, .loop
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	pop bc
 	ret

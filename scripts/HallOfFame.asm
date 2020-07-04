@@ -79,7 +79,7 @@ HallofFameRoomScript1:
 	ld a, PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, SPRITE_FACING_LEFT
 	ld [hSpriteFacingDirection], a

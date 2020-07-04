@@ -1,6 +1,6 @@
 MistEffect_:
 	ld hl, wPlayerBattleStatus2
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	jr z, .mistEffect
 	ld hl, wEnemyBattleStatus2

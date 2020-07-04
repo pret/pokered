@@ -15,7 +15,7 @@ PickUpItem:
 
 .isMissable
 	ld a, [hl]
-	ld [$ffdb], a
+	ld [hMissableObjectIndex], a
 
 	ld hl, wMapSpriteExtraData
 	ld a, [hSpriteIndexOrTextID]
@@ -30,7 +30,7 @@ PickUpItem:
 	call GiveItem
 	jr nc, .BagFull
 
-	ld a, [$ffdb]
+	ld a, [hMissableObjectIndex]
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, 1

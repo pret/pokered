@@ -139,7 +139,7 @@ CableClub_DoBattleOrTradeAgain:
 	call Serial_ExchangeBytes
 	ld a, (1 << SERIAL) | (1 << TIMER) | (1 << VBLANK)
 	ld [rIE], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
@@ -261,7 +261,7 @@ CableClub_DoBattleOrTradeAgain:
 	ld [wUnusedCF8D + 1], a
 	xor a
 	ld [wTradeCenterPointerTableIndex], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
@@ -338,10 +338,10 @@ TradeCenter_SelectMon:
 	ld a, 1
 	ld [wTopMenuItemX], a
 .enemyMonMenu_HandleInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	res 1, [hl]
 	and a
 	jp z, .getNewInput
@@ -403,10 +403,10 @@ TradeCenter_SelectMon:
 	lb bc, 6, 1
 	call ClearScreenArea
 .playerMonMenu_HandleInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	set 1, [hl]
 	call HandleMenuInput
-	ld hl, hFlags_0xFFF6
+	ld hl, hFlagsFFF6
 	res 1, [hl]
 	and a ; was anything pressed?
 	jr nz, .playerMonMenu_SomethingPressed
@@ -663,7 +663,7 @@ TradeCenter_PrintPartyListNames:
 	push de
 	push hl
 	ld a, c
-	ld [$ff95], a
+	ld [hPastLeadingZeros], a
 	call GetMonName
 	pop hl
 	call PlaceString
@@ -903,7 +903,7 @@ CableClub_Run:
 	ld [wTilesetGfxPtr + 1], a
 	ld a, l
 	ld [wTilesetGfxPtr], a
-	ld a, Bank(Club_GFX)
+	ld a, BANK(Club_GFX)
 	ld [wTilesetBank], a
 	ld hl, Club_Coll
 	ld a, h

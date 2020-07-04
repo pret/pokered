@@ -32,8 +32,8 @@ SetDefaultNames:
 	jp CopyData
 
 OakSpeech:
-	ld a, $FF
-	call PlaySound ; stop music
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
 	ld a, BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -57,7 +57,7 @@ OakSpeech:
 	bit 1, a ; possibly a debug mode bit
 	jp nz, .skipChoosingNames
 	ld de, ProfOakPic
-	lb bc, Bank(ProfOakPic), $00
+	lb bc, BANK(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, OakSpeechText1
@@ -76,7 +76,7 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
-	lb bc, Bank(RedPicFront), $00
+	lb bc, BANK(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl, IntroducePlayerText
@@ -85,7 +85,7 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, Rival1Pic
-	lb bc, Bank(Rival1Pic), $00
+	lb bc, BANK(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl, IntroduceRivalText
@@ -95,7 +95,7 @@ OakSpeech:
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de, RedPicFront
-	lb bc, Bank(RedPicFront), $00
+	lb bc, BANK(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a, [wd72d]
@@ -104,12 +104,12 @@ OakSpeech:
 	ld hl, OakSpeechText3
 	call PrintText
 .next
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
 	call PlaySound
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 4
 	call DelayFrames
@@ -126,18 +126,18 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(Music_PalletTown)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
-	ld a, $FF
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
-	call PlaySound ; stop music
+	call PlaySound
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 20
 	call DelayFrames

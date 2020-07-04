@@ -31,7 +31,7 @@ PromptUserToPlaySlots:
 	xor a
 	ld [wSlotMachineAllowMatchesCounter], a
 	ld hl, wStoppingWhichSlotMachineWheel
-	ld bc, $0014
+	ld bc, $14
 	call FillMemory
 	call MainSlotMachineLoop
 	ld hl, wd730
@@ -881,7 +881,7 @@ SlotMachineMap:
 	INCBIN "gfx/slots/slots.tilemap"
 SlotMachineMapEnd:
 
-INCLUDE "data/slot_machine_wheels.asm"
+INCLUDE "data/events/slot_machine_wheels.asm"
 
 SlotMachineTiles1:
 IF DEF(_RED)

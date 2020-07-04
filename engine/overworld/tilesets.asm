@@ -25,7 +25,7 @@ LoadTilesetHeader:
 	ld a, [hl]
 	ld [hTilesetType], a
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 	pop hl
 	ld a, [wCurMapTileset]
 	push hl
@@ -55,6 +55,6 @@ LoadTilesetHeader:
 .done
 	ret
 
-INCLUDE "data/dungeon_tilesets.asm"
+INCLUDE "data/tilesets/dungeon_tilesets.asm"
 
-INCLUDE "data/tileset_headers.asm"
+INCLUDE "data/tilesets/tileset_headers.asm"

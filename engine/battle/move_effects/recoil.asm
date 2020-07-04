@@ -1,5 +1,5 @@
 RecoilEffect_:
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
 	ld hl, wBattleMonMaxHP
@@ -54,7 +54,7 @@ RecoilEffect_:
 	ld [hl], a
 .getHPBarCoords
 	coord hl, 10, 9
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	and a
 	ld a, $1
 	jr z, .updateHPBar

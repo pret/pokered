@@ -137,10 +137,10 @@ Trade_Delay100:
 
 Trade_CopyTileMapToVRAM:
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 Trade_Delay80:
@@ -184,7 +184,7 @@ LoadTradingGFXAndMonNames:
 	ld [rOBP0], a
 	call EnableLCD
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wTradedPlayerMonSpecies]
 	ld [wd11e], a
 	call GetMonName
@@ -231,7 +231,7 @@ Trade_ShowPlayerMon:
 	ld [rWX], a
 	ld [hSCX], a
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 4, 0
 	ld b, 6
 	ld c, 10
@@ -261,7 +261,7 @@ Trade_ShowPlayerMon:
 	ld a, [wTradedPlayerMonSpecies]
 	call PlayCry
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 Trade_DrawOpenEndOfLinkCable:
@@ -336,13 +336,13 @@ Trade_AnimateBallEnteringLinkCable:
 .ballSpriteReachedEdgeOfScreen
 	call ClearSprites
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ret
 
 Trade_BallInsideLinkCableOAM:
@@ -360,13 +360,13 @@ Trade_ShowEnemyMon:
 	call Trade_PrintEnemyMonInfoText
 	call Trade_CopyTileMapToVRAM
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wTradedEnemyMonSpecies]
 	call Trade_LoadMonSprite
 	ld a, TRADE_BALL_POOF_ANIM
 	call Trade_ShowAnimation
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, [wTradedEnemyMonSpecies]
 	call PlayCry
 	call Trade_Delay100
@@ -397,7 +397,7 @@ Trade_AnimLeftToRight:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Trade_DrawCableAcrossScreen
 	ld b, $4
 	call Trade_AnimMonMoveHorizontal
@@ -405,7 +405,7 @@ Trade_AnimLeftToRight:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Trade_AnimMonMoveVertical
 	jp ClearSprites
 
@@ -430,7 +430,7 @@ Trade_AnimRightToLeft:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Trade_DrawCableAcrossScreen
 	ld b, $4
 	call Trade_AnimMonMoveHorizontal
@@ -438,16 +438,16 @@ Trade_AnimRightToLeft:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	jp ClearSprites
 
 Trade_InitGameboyTransferGfx:
 ; Initialises the graphics for showing a mon moving between gameboys.
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Trade_LoadMonPartySpriteGfx
 	call DelayFrame
 	ld a, %10101011
@@ -731,9 +731,9 @@ Trade_LoadMonSprite:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0
 	call RunPaletteCommand
-	ld a, [H_AUTOBGTRANSFERENABLED]
+	ld a, [hAutoBGTransferEnabled]
 	xor $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call GetMonHeader
 	coord hl, 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
@@ -743,7 +743,7 @@ Trade_LoadMonSprite:
 Trade_ShowClearedWindow:
 ; clears the window and covers the BG entirely with the window
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld a, %11100011
 	ld [rLCDC], a

@@ -101,4 +101,4 @@ TryDoWildEncounter:
 	xor a
 	ret
 
-INCLUDE "data/wild_probabilities.asm"
+INCLUDE "data/wild/probabilities.asm"

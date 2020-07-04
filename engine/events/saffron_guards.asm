@@ -2,7 +2,7 @@ RemoveGuardDrink::
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
-	ld [$ffdb], a
+	ld [hItemToRemoveID], a
 	and a
 	ret z
 	push hl
@@ -12,4 +12,4 @@ RemoveGuardDrink::
 	jr z, .drinkLoop
 	jpba RemoveItemByID
 
-INCLUDE "data/guard_drink_items.asm"
+INCLUDE "data/items/guard_drink_items.asm"

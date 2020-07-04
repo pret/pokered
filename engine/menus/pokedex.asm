@@ -156,7 +156,7 @@ HandlePokedexSideMenu:
 ; sets carry flag if player presses A, unsets carry flag if player presses B
 HandlePokedexListMenu:
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 ; draw the horizontal line separating the seen and owned amounts from the menu
 	coord hl, 15, 8
 	ld a, "─"
@@ -216,7 +216,7 @@ HandlePokedexListMenu:
 	ld [wDexMaxSeenMon], a
 .loop
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 4, 2
 	lb bc, 14, 10
 	call ClearScreenArea
@@ -280,7 +280,7 @@ HandlePokedexListMenu:
 	dec d
 	jr nz, .printPokemonLoop
 	ld a, 01
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	call GBPalNormal
 	call HandleMenuInput
@@ -566,11 +566,11 @@ ShowPokedexDataInternal:
 	pop hl
 	inc hl ; hl = address of pokedex description text
 	coord bc, 1, 11
-	ld a, 2
-	ld [$fff4], a
+	ld a, %10
+	ld [hClearLetterPrintingDelayFlags], a
 	call TextCommandProcessor ; print pokedex description text
 	xor a
-	ld [$fff4], a
+	ld [hClearLetterPrintingDelayFlags], a
 .waitForButtonPress
 	call JoypadLowSensitivity
 	ld a, [hJoy5]
@@ -623,7 +623,7 @@ DrawTileLine:
 	pop bc
 	ret
 
-INCLUDE "data/pokedex_entries.asm"
+INCLUDE "data/pokemon/dex_entries.asm"
 
 PokedexToIndex:
 	; converts the Pokédex number at wd11e to an index
@@ -662,4 +662,4 @@ IndexToPokedex:
 	pop bc
 	ret
 
-INCLUDE "data/pokedex_order.asm"
+INCLUDE "data/pokemon/dex_order.asm"

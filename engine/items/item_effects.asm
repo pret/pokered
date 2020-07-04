@@ -239,14 +239,14 @@ ItemUseBall:
 
 ; Calculate MaxHP * 255.
 	xor a
-	ld [H_MULTIPLICAND], a
+	ld [hMultiplicand], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand + 1], a
 	ld a, [hl]
-	ld [H_MULTIPLICAND + 2], a
+	ld [hMultiplicand + 2], a
 	ld a, 255
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 
 ; Determine BallFactor. It's 8 for Great Balls and 12 for the others.
@@ -260,7 +260,7 @@ ItemUseBall:
 ; Note that the results of all division operations are floored.
 
 ; Calculate (MaxHP * 255) / BallFactor.
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 4 ; number of bytes in dividend
 	call Divide
 
@@ -281,17 +281,17 @@ ItemUseBall:
 
 .skip2
 ; Let W = ((MaxHP * 255) / BallFactor) / max(HP / 4, 1). Calculate W.
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 4
 	call Divide
 
-; If W > 255, store 255 in [H_QUOTIENT + 3].
-; Let X = min(W, 255) = [H_QUOTIENT + 3].
-	ld a, [H_QUOTIENT + 2]
+; If W > 255, store 255 in [hQuotient + 3].
+; Let X = min(W, 255) = [hQuotient + 3].
+	ld a, [hQuotient + 2]
 	and a
 	jr z, .skip3
 	ld a, 255
-	ld [H_QUOTIENT + 3], a
+	ld [hQuotient + 3], a
 
 .skip3
 	pop bc ; b = Rand1 - Status
@@ -302,7 +302,7 @@ ItemUseBall:
 	jr c, .failedToCapture
 
 ; If W > 255, the ball captures the Pokémon.
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	and a
 	jr nz, .captured
 
@@ -310,7 +310,7 @@ ItemUseBall:
 
 ; If Rand2 > X, the ball fails to capture the Pokémon.
 	ld b, a
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	cp b
 	jr c, .failedToCapture
 
@@ -318,17 +318,17 @@ ItemUseBall:
 	jr .skipShakeCalculations
 
 .failedToCapture
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	ld [wPokeBallCaptureCalcTemp], a ; Save X.
 
 ; Calculate CatchRate * 100.
 	xor a
-	ld [H_MULTIPLICAND], a
-	ld [H_MULTIPLICAND + 1], a
+	ld [hMultiplicand], a
+	ld [hMultiplicand + 1], a
 	ld a, [wEnemyMonActualCatchRate]
-	ld [H_MULTIPLICAND + 2], a
+	ld [hMultiplicand + 2], a
 	ld a, 100
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 
 ; Determine BallFactor2.
@@ -349,26 +349,26 @@ ItemUseBall:
 .skip4
 ; Let Y = (CatchRate * 100) / BallFactor2. Calculate Y.
 	ld a, b
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 4
 	call Divide
 
 ; If Y > 255, there are 3 shakes.
 ; Note that this shouldn't be possible.
 ; The maximum value of Y is (255 * 100) / 150 = 170.
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	and a
 	ld b, $63 ; 3 shakes
 	jr nz, .setAnimData
 
 ; Calculate X * Y.
 	ld a, [wPokeBallCaptureCalcTemp]
-	ld [H_MULTIPLIER], a
+	ld [hMultiplier], a
 	call Multiply
 
 ; Calculate (X * Y) / 255.
 	ld a, 255
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 4
 	call Divide
 
@@ -386,19 +386,19 @@ ItemUseBall:
 
 .addAilmentValue
 ; If the Pokémon has a status ailment, add Status2.
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	add b
-	ld [H_QUOTIENT + 3], a
+	ld [hQuotient + 3], a
 
 .skip5
 ; Finally determine the number of shakes.
-; Let Z = ((X * Y) / 255) + Status2 = [H_QUOTIENT + 3].
+; Let Z = ((X * Y) / 255) + Status2 = [hQuotient + 3].
 ; The number of shakes depend on the range Z is in.
 ; 0  ≤ Z < 10: 0 shakes (the ball misses)
 ; 10 ≤ Z < 30: 1 shake
 ; 30 ≤ Z < 70: 2 shakes
 ; 70 ≤ Z:      3 shakes
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	cp 10
 	ld b, $20
 	jr c, .setAnimData
@@ -422,7 +422,7 @@ ItemUseBall:
 	ld a, TOSS_ANIM
 	ld [wAnimationID], a
 	xor a
-	ld [H_WHOSETURN], a
+	ld [hWhoseTurn], a
 	ld [wAnimationType], a
 	ld [wDamageMultipliers], a
 	ld a, [wWhichPokemon]
@@ -1018,18 +1018,18 @@ ItemUseMedicine:
 	call AddNTimes
 	ld a, [hli]
 	ld [wHPBarMaxHP + 1], a
-	ld [H_DIVIDEND], a
+	ld [hDividend], a
 	ld a, [hl]
 	ld [wHPBarMaxHP], a
-	ld [H_DIVIDEND + 1], a
+	ld [hDividend + 1], a
 	ld a, 5
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 2 ; number of bytes
 	call Divide ; get 1/5 of max HP of pokemon that used Softboiled
 	ld bc, (wPartyMon1HP + 1) - (wPartyMon1MaxHP + 1)
 	add hl, bc ; hl now points to LSB of current HP of pokemon that used Softboiled
 ; subtract 1/5 of max HP from current HP of pokemon that used Softboiled
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	push af
 	ld b, a
 	ld a, [hl]
@@ -1037,7 +1037,7 @@ ItemUseMedicine:
 	sub b
 	ld [hld], a
 	ld [wHPBarNewHP], a
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	ld b, a
 	ld a, [hl]
 	ld [wHPBarOldHP+1], a
@@ -1050,15 +1050,15 @@ ItemUseMedicine:
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	set 0, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	res 0, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	pop af
 	ld b, a ; store heal amount (1/5 of max HP)
 	ld hl, wHPBarOldHP + 1
@@ -1200,15 +1200,15 @@ ItemUseMedicine:
 	jr z, .playStatusAilmentCuringSound
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	set 0, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	ld a, $02
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	res 0, a
-	ld [hFlags_0xFFF6], a
+	ld [hFlagsFFF6], a
 	ld a, REVIVE_MSG
 	ld [wPartyMenuTypeOrMessageID], a
 	ld a, [wcf91]
@@ -1224,13 +1224,13 @@ ItemUseMedicine:
 	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call ClearScreen
 	dec a
 	ld [wUpdateSpritesEnabled], a
 	call RedrawPartyMenu ; redraws the party menu and displays the message
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld c, 50
 	call DelayFrames
 	call WaitForTextScrollButtonPress
@@ -1341,7 +1341,7 @@ ItemUseMedicine:
 	push hl
 	push de
 	ld d, a
-	callab CalcExperience ; calculate experience for next level and store it at $ff96
+	callab CalcExperience ; calculate experience for next level and store it at hExperience
 	pop de
 	pop hl
 	ld bc, wPartyMon1Exp - wPartyMon1Level
@@ -1459,7 +1459,7 @@ BaitRockCommon:
 	ld [wAnimationID], a
 	xor a
 	ld [wAnimationType], a
-	ld [H_WHOSETURN], a
+	ld [hWhoseTurn], a
 	ld [de], a ; zero escape factor (for bait), zero bait factor (for rock)
 .randomLoop ; loop until a random number less than 5 is generated
 	call Random
@@ -1698,7 +1698,7 @@ ItemUseXStat:
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
 	xor a
-	ld [H_WHOSETURN], a ; set turn to player's turn
+	ld [hWhoseTurn], a ; set turn to player's turn
 	callba StatModifierUpEffect ; do stat increase move
 	pop hl
 	pop af
@@ -1844,8 +1844,8 @@ PlayedFluteHadEffectText:
 	and a
 	jr nz, .done
 ; play out-of-battle pokeflute music
-	ld a, $ff
-	call PlaySound ; turn off music
+	ld a, SFX_STOP_ALL_MUSIC
+	call PlaySound
 	ld a, SFX_POKEFLUTE
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
@@ -1901,7 +1901,7 @@ ItemUseGoodRod:
 	xor 1
 	jr RodResponse
 
-INCLUDE "data/good_rod.asm"
+INCLUDE "data/wild/good_rod.asm"
 
 ItemUseSuperRod:
 	call FishingInit
@@ -2463,13 +2463,13 @@ RestoreBonusPP:
 AddBonusPP:
 	push bc
 	ld a, [de] ; normal max PP of move
-	ld [H_DIVIDEND + 3], a
+	ld [hDividend + 3], a
 	xor a
-	ld [H_DIVIDEND], a
-	ld [H_DIVIDEND + 1], a
-	ld [H_DIVIDEND + 2], a
+	ld [hDividend], a
+	ld [hDividend + 1], a
+	ld [hDividend + 2], a
 	ld a, 5
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld b, 4
 	call Divide
 	ld a, [hl] ; move PP
@@ -2480,7 +2480,7 @@ AddBonusPP:
 	srl a
 	ld c, a ; c = number of PP Ups used
 .loop
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	cp 8 ; is the amount greater than or equal to 8?
 	jr c, .addAmount
 	ld a, 7 ; cap the amount at 7
@@ -2686,7 +2686,7 @@ IsKeyItem_::
 	ld [wIsKeyItem], a
 	ret
 
-INCLUDE "data/key_items.asm"
+INCLUDE "data/items/key_items.asm"
 
 SendNewMonToBox:
 	ld de, wNumInBox
@@ -2881,7 +2881,7 @@ IsNextTileShoreOrWater:
 	and a
 	ret
 
-INCLUDE "data/water_tilesets.asm"
+INCLUDE "data/tilesets/water_tilesets.asm"
 
 ReadSuperRodData:
 ; return e = 2 if no fish on this map
@@ -2928,7 +2928,7 @@ ReadSuperRodData:
 	ld e, $1 ; $1 if there's a bite
 	ret
 
-INCLUDE "data/super_rod.asm"
+INCLUDE "data/wild/super_rod.asm"
 
 ; reloads map view and processes sprite data
 ; for items that cause the overworld to be displayed

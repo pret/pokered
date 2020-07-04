@@ -84,7 +84,7 @@ InGameTrade_GetMonName:
 	ld bc, NAME_LENGTH
 	jp CopyData
 
-INCLUDE "data/trades.asm"
+INCLUDE "data/events/trades.asm"
 
 InGameTrade_DoTrade:
 	xor a ; NORMAL_PARTY_MENU

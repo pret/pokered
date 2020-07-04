@@ -38,7 +38,7 @@ VermilionDock_Script:
 
 VermilionDock_1db9b:
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wJoyIgnore], a
 	ld [wNewSoundID], a
 	call PlaySound
@@ -57,10 +57,10 @@ VermilionDock_1db9b:
 	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld [wSSAnneSmokeDriftAmount], a
 	ld [rOBP1], a
 	ld a, 88
@@ -78,7 +78,7 @@ VermilionDock_1db9b:
 	ld d, $0
 	ld e, $8
 .asm_1dbfa
-	ld hl, $0002
+	ld hl, $2
 	add hl, bc
 	ld a, l
 	ld [wMapViewVRAMPointer], a

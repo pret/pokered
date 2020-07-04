@@ -134,7 +134,7 @@ AIMoveChoiceModification1:
 	push de
 	push bc
 	ld hl, StatusAilmentMoveEffects
-	ld de, $0001
+	ld de, 1
 	call IsInArray
 	pop bc
 	pop de
@@ -273,19 +273,19 @@ ReadMove:
 	pop hl
 	ret
 
-INCLUDE "data/trainer_move_choices.asm"
+INCLUDE "data/trainers/move_choices.asm"
 
-INCLUDE "data/trainer_pic_money_pointers.asm"
+INCLUDE "data/trainers/pic_pointers_money.asm"
 
-INCLUDE "text/trainer_names.asm"
+INCLUDE "data/trainers/names.asm"
 
 INCLUDE "engine/battle/misc.asm"
 
 INCLUDE "engine/battle/read_trainer_party.asm"
 
-INCLUDE "data/trainer_moves.asm"
+INCLUDE "data/trainers/special_moves.asm"
 
-INCLUDE "data/trainer_parties.asm"
+INCLUDE "data/trainers/parties.asm"
 
 TrainerAI:
 	and a
@@ -319,7 +319,7 @@ TrainerAI:
 	call Random
 	jp hl
 
-INCLUDE "data/trainer_ai_pointers.asm"
+INCLUDE "data/trainers/ai_pointers.asm"
 
 JugglerAI:
 	cp 25 percent + 1
@@ -655,17 +655,17 @@ AIUseDireHit: ; unused
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
-	ld [H_DIVISOR], a
+	ld [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ld [H_DIVIDEND], a
+	ld [hDividend], a
 	ld a, [hl]
-	ld [H_DIVIDEND + 1], a
+	ld [hDividend + 1], a
 	ld b, 2
 	call Divide
-	ld a, [H_QUOTIENT + 3]
+	ld a, [hQuotient + 3]
 	ld c, a
-	ld a, [H_QUOTIENT + 2]
+	ld a, [hQuotient + 2]
 	ld b, a
 	ld hl, wEnemyMonHP + 1
 	ld a, [hld]

@@ -1,12 +1,12 @@
 WriteDMACodeToHRAM::
 ; Since no other memory is available during OAM DMA,
 ; DMARoutine is copied to HRAM and executed there.
-	ld c, $ff80 % $100
+	ld c, hDMARoutine % $100
 	ld b, DMARoutineEnd - DMARoutine
 	ld hl, DMARoutine
 .copy
 	ld a, [hli]
-	ld [$ff00+c], a
+	ldh [c], a
 	inc c
 	dec b
 	jr nz, .copy

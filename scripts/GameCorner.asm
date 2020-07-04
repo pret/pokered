@@ -60,7 +60,7 @@ CeladonGameCornerScript1:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
 	ld a, [wYCoord]
@@ -75,7 +75,7 @@ CeladonGameCornerScript1:
 	ld de, MovementData_48c63
 .asm_48c4d
 	ld a, $b
-	ld [H_SPRITEINDEX], a
+	ld [hSpriteIndex], a
 	call MoveSprite
 	ld a, $2
 	ld [wGameCornerCurScript], a
@@ -418,7 +418,7 @@ CeladonGameCornerText11:
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
 	call SaveEndBattleTextPointers
-	ld a, [H_SPRITEINDEX]
+	ld a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

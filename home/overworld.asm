@@ -88,7 +88,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
-	ld a, [$ffeb]
+	ld a, [hFoundHiddenObjectOrBookshelf]
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
@@ -762,8 +762,8 @@ HandleBlackOut::
 	call StopMusic
 	ld hl, wd72e
 	res 5, [hl]
-	ld a, Bank(ResetStatusAndHalveMoneyOnBlackout) ; also Bank(SpecialWarpIn) and Bank(SpecialEnterMap)
-	ld [H_LOADEDROMBANK], a
+	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(SpecialWarpIn) and BANK(SpecialEnterMap)
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call ResetStatusAndHalveMoneyOnBlackout
 	call SpecialWarpIn
@@ -772,7 +772,7 @@ HandleBlackOut::
 
 StopMusic::
 	ld [wAudioFadeOutControl], a
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
 .wait
@@ -793,8 +793,8 @@ HandleFlyWarpOrDungeonWarp::
 	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
-	ld a, Bank(SpecialWarpIn)
-	ld [H_LOADEDROMBANK], a
+	ld a, BANK(SpecialWarpIn)
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call SpecialWarpIn
 	jp SpecialEnterMap
@@ -867,7 +867,7 @@ IsBikeRidingAllowed::
 	scf
 	ret
 
-INCLUDE "data/bike_riding_tilesets.asm"
+INCLUDE "data/tilesets/bike_riding_tilesets.asm"
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData::
@@ -1372,10 +1372,10 @@ TilePairCollisionsWater::
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character
 LoadCurrentMapView::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [wTilesetBank] ; tile data ROM bank
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a ; switch to ROM bank that contains tile data
 	ld a, [wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
 	ld e, a
@@ -1424,18 +1424,18 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop
 	ld hl, wTileMapBackup
-	ld bc, $0000
+	ld bc, $0
 .adjustForYCoordWithinTileBlock
 	ld a, [wYBlockCoord]
 	and a
 	jr z, .adjustForXCoordWithinTileBlock
-	ld bc, $0030
+	ld bc, $30
 	add hl, bc
 .adjustForXCoordWithinTileBlock
 	ld a, [wXBlockCoord]
 	and a
 	jr z, .copyToVisibleAreaBuffer
-	ld bc, $0002
+	ld bc, $2
 	add hl, bc
 .copyToVisibleAreaBuffer
 	coord de, 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
@@ -1457,7 +1457,7 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop2
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a ; restore previous ROM bank
 	ret
 
@@ -1739,7 +1739,7 @@ ScheduleSouthRowRedraw::
 	ld l, a
 	ld a, [wMapViewVRAMPointer + 1]
 	ld h, a
-	ld bc, $0200
+	ld bc, $200
 	add hl, bc
 	ld a, h
 	and $03
@@ -1835,7 +1835,7 @@ DrawTileBlock::
 	ld a, [de]
 	ld [hl], a
 	inc de
-	ld bc, $0015
+	ld bc, $15
 	add hl, bc
 	pop bc
 	dec c
@@ -2180,7 +2180,7 @@ LoadMapHeader::
 	jr nz, .zeroSpriteDataLoop
 ; initialize all C100-C1FF sprite entries to disabled (other than player's)
 	ld hl, wSpriteStateData1 + $12
-	ld de, $0010
+	ld de, $10
 	ld c, $0f
 .disableSpriteEntriesLoop
 	ld [hl], $ff
@@ -2291,10 +2291,10 @@ LoadMapHeader::
 	ld a, [wCurMap]
 	ld c, a
 	ld b, $00
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, BANK(MapSongBanks)
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld hl, MapSongBanks
 	add hl, bc
@@ -2304,7 +2304,7 @@ LoadMapHeader::
 	ld a, [hl]
 	ld [wMapMusicROMBank], a ; music 2
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2322,7 +2322,7 @@ CopyMapConnectionHeader::
 
 ; function to load map data
 LoadMapData::
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	call DisableLCD
 	ld a, $98
@@ -2377,7 +2377,7 @@ LoadMapData::
 	call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -2388,15 +2388,15 @@ SwitchToMapRomBank::
 	push bc
 	ld c, a
 	ld b, $00
-	ld a, Bank(MapHeaderBanks)
+	ld a, BANK(MapHeaderBanks)
 	call BankswitchHome ; switch to ROM bank 3
 	ld hl, MapHeaderBanks
 	add hl, bc
 	ld a, [hl]
-	ld [$ffe8], a ; save map ROM bank
+	ld [hMapROMBank], a ; save map ROM bank
 	call BankswitchBack
-	ld a, [$ffe8]
-	ld [H_LOADEDROMBANK], a
+	ld a, [hMapROMBank]
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a ; switch to map ROM bank
 	pop bc
 	pop hl

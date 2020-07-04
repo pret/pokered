@@ -9,7 +9,7 @@ DisplayDiploma::
 	call DisableLCD
 	ld hl, CircleTile
 	ld de, vChars2 + $700
-	ld bc, $0010
+	ld bc, $10
 	ld a, BANK(CircleTile)
 	call FarCopyData2
 	coord hl, 0, 0
@@ -73,7 +73,7 @@ UnusedPlayerNameLengthFunc:
 ; Unused function that does a calculation involving the length of the player's
 ; name.
 	ld hl, wPlayerName
-	ld bc, $ff00
+	lb bc, $ff, $00
 .loop
 	ld a, [hli]
 	cp "@"

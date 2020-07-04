@@ -7,7 +7,7 @@ PowerPlant_Script:
 	ld [wPowerPlantCurScript], a
 	ret
 
-PowerPlant_ScriptPointers
+PowerPlant_ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle

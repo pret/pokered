@@ -120,12 +120,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld c, 50
 	call DelayFrames
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	coord hl, 0, 0
 	lb bc, 12, 20
 	call ClearScreenArea
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a
+	ld [hAutoBGTransferEnabled], a
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
@@ -510,4 +510,4 @@ WriteMonMoves_ShiftMoveData:
 Evolution_FlagAction:
 	predef_jump FlagActionPredef
 
-INCLUDE "data/evos_moves.asm"
+INCLUDE "data/pokemon/evos_moves.asm"

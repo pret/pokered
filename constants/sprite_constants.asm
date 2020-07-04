@@ -1,20 +1,6 @@
-; pokemon's overworld sprites
-const_value = 0
-
-	const ICON_MON       ; $0
-	const ICON_BALL      ; $1
-	const ICON_HELIX     ; $2
-	const ICON_FAIRY     ; $3
-	const ICON_BIRD      ; $4
-	const ICON_WATER     ; $5
-	const ICON_BUG       ; $6
-	const ICON_GRASS     ; $7
-	const ICON_SNAKE     ; $8
-	const ICON_QUADRUPED ; $9
-
 ; overworld sprites
-const_value = 1
-
+	const_def
+	const SPRITE_NONE                      ; $00
 	const SPRITE_RED                       ; $01
 	const SPRITE_BLUE                      ; $02
 	const SPRITE_OAK                       ; $03
@@ -87,15 +73,3 @@ const_value = 1
 	const SPRITE_LYING_OLD_MAN_UNUSED_1    ; $46
 	const SPRITE_LYING_OLD_MAN_UNUSED_2    ; $47
 	const SPRITE_LYING_OLD_MAN             ; $48
-
-; different kinds of people events
-ITEM    EQU $80
-TRAINER EQU $40
-
-BOULDER_MOVEMENT_BYTE_2 EQU $10
-
-; sprite facing directions
-SPRITE_FACING_DOWN  EQU $00
-SPRITE_FACING_UP    EQU $04
-SPRITE_FACING_LEFT  EQU $08
-SPRITE_FACING_RIGHT EQU $0C

@@ -48,10 +48,10 @@ SSAnne7RubText:
 	cp BANK(Audio3_UpdateMusic)
 	ld [wAudioSavedROMBank], a
 	jr nz, .asm_61908
-	ld a, $ff
+	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, Bank(Music_PkmnHealed)
+	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED

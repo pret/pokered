@@ -62,7 +62,7 @@ Char4ETest::
 	cp $4E ; next
 	jr nz, .char4FTest
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, [hFlags_0xFFF6]
+	ld a, [hFlagsFFF6]
 	bit 2, a
 	jr z, .ok
 	ld bc, SCREEN_WIDTH
@@ -180,7 +180,7 @@ Char59::
 ; or
 ; player active monster’s name
 ; (like Char5A but flipped)
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 	xor 1
 	jr MonsterNameCharsCommon
 
@@ -189,7 +189,7 @@ Char5A::
 ; player active monster’s name
 ; or
 ; enemy active monster’s name, prefixed with “Enemy ”
-	ld a, [H_WHOSETURN]
+	ld a, [hWhoseTurn]
 MonsterNameCharsCommon::
 	push de
 	and a
@@ -365,7 +365,7 @@ TextCommandProcessor::
 	push af
 	set 1, a
 	ld e, a
-	ld a, [$fff4]
+	ld a, [hClearLetterPrintingDelayFlags]
 	xor e
 	ld [wLetterPrintingDelayFlags], a
 	ld a, c
@@ -675,14 +675,14 @@ TextCommand0D::
 ; BB = bank
 TextCommand17::
 	pop hl
-	ld a, [H_LOADEDROMBANK]
+	ld a, [hLoadedROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push hl
 	ld l, e
@@ -690,7 +690,7 @@ TextCommand17::
 	call TextCommandProcessor
 	pop hl
 	pop af
-	ld [H_LOADEDROMBANK], a
+	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp NextTextCommand
 
