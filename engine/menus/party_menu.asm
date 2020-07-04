@@ -318,7 +318,7 @@ SetPartyMenuHPBarColor:
 	ld b, 0
 	add hl, bc
 	call GetHealthBarColor
-	ld b, UPDATE_PARTY_MENU_BLK_PACKET
+	ld b, SET_PAL_PARTY_MENU_HP_BARS
 	call RunPaletteCommand
 	ld hl, wWhichPartyMenuHPBar
 	inc [hl]

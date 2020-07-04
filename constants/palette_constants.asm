@@ -22,7 +22,8 @@
 	const SET_PAL_GAME_FREAK_INTRO     ; $0C
 	const SET_PAL_TRAINER_CARD         ; $0D
 
-UPDATE_PARTY_MENU_BLK_PACKET EQU $fc
+SET_PAL_PARTY_MENU_HP_BARS EQU $fc
+SET_PAL_DEFAULT EQU $ff
 
 ; sgb palettes
 	const_def

@@ -1654,7 +1654,7 @@ GBPalWhiteOut::
 	ret
 
 RunDefaultPaletteCommand::
-	ld b, $ff
+	ld b, SET_PAL_DEFAULT
 RunPaletteCommand::
 	ld a, [wOnSGB]
 	and a
