@@ -21,8 +21,8 @@
 	const SET_PAL_POKEMON_WHOLE_SCREEN ; $0B
 	const SET_PAL_GAME_FREAK_INTRO     ; $0C
 	const SET_PAL_TRAINER_CARD         ; $0D
-const_value = -4
-	const UPDATE_PARTY_MENU_BLK_PACKET ; $FC
+
+UPDATE_PARTY_MENU_BLK_PACKET EQU $fc
 
 ; sgb palettes
 	const_def

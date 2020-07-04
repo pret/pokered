@@ -166,6 +166,7 @@ MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
 
 	; AUDIO_2
 	music_const SFX_LEVEL_UP,           SFX_Level_Up
+
 	music_const SFX_BALL_TOSS,          SFX_Ball_Toss
 	music_const SFX_BALL_POOF,          SFX_Ball_Poof
 	music_const SFX_FAINT_THUD,         SFX_Faint_Thud
