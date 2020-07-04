@@ -49,7 +49,7 @@ SilphCo5GateCoords:
 
 SilphCo5Script_19f9e:
 	EventFlagAddress hl, EVENT_SILPH_CO_5_UNLOCKED_DOOR1
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1

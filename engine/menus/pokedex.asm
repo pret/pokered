@@ -566,11 +566,11 @@ ShowPokedexDataInternal:
 	pop hl
 	inc hl ; hl = address of pokedex description text
 	coord bc, 1, 11
-	ld a, 2
-	ld [$fff4], a
+	ld a, %10
+	ld [hClearLetterPrintingDelayFlags], a
 	call TextCommandProcessor ; print pokedex description text
 	xor a
-	ld [$fff4], a
+	ld [hClearLetterPrintingDelayFlags], a
 .waitForButtonPress
 	call JoypadLowSensitivity
 	ld a, [hJoy5]

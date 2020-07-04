@@ -35,14 +35,14 @@ SilphCo8Script_56541:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	pop hl
 .asm_5654d
 	ld a, [hli]
 	cp $ff
 	jr z, .asm_56569
 	push hl
-	ld hl, $ffe0
+	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
@@ -60,11 +60,11 @@ SilphCo8Script_56541:
 	ret
 .asm_56569
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	ret
 
 SilphCo8Script_5656d:
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_8_UNLOCKED_DOOR

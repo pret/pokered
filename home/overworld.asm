@@ -88,7 +88,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
-	ld a, [$ffeb]
+	ld a, [hFoundHiddenObjectOrBookshelf]
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
@@ -762,7 +762,7 @@ HandleBlackOut::
 	call StopMusic
 	ld hl, wd72e
 	res 5, [hl]
-	ld a, Bank(ResetStatusAndHalveMoneyOnBlackout) ; also Bank(SpecialWarpIn) and Bank(SpecialEnterMap)
+	ld a, BANK(ResetStatusAndHalveMoneyOnBlackout) ; also BANK(SpecialWarpIn) and BANK(SpecialEnterMap)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call ResetStatusAndHalveMoneyOnBlackout
@@ -793,7 +793,7 @@ HandleFlyWarpOrDungeonWarp::
 	set 2, [hl] ; fly warp or dungeon warp
 	res 5, [hl] ; forced to ride bike
 	call LeaveMapAnim
-	ld a, Bank(SpecialWarpIn)
+	ld a, BANK(SpecialWarpIn)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call SpecialWarpIn
@@ -2388,14 +2388,14 @@ SwitchToMapRomBank::
 	push bc
 	ld c, a
 	ld b, $00
-	ld a, Bank(MapHeaderBanks)
+	ld a, BANK(MapHeaderBanks)
 	call BankswitchHome ; switch to ROM bank 3
 	ld hl, MapHeaderBanks
 	add hl, bc
 	ld a, [hl]
-	ld [$ffe8], a ; save map ROM bank
+	ld [hMapROMBank], a ; save map ROM bank
 	call BankswitchBack
-	ld a, [$ffe8]
+	ld a, [hMapROMBank]
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a ; switch to map ROM bank
 	pop bc

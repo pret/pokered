@@ -247,7 +247,7 @@ WildDataPointers:
 	dw NoMons
 	dw NoMons
 	dw NoMons
-	dw $FFFF
+	dw -1 ; end
 
 ; wild pokemon data is divided into two parts.
 ; first part:  pokemon found in grass

@@ -672,9 +672,9 @@ OaksLabScript_RemoveParcel:
 
 OaksLabScript_1d02b:
 	ld a, $7c
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	ld a, $8
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	ld a, [wYCoord]
 	cp $3
 	jr nz, .asm_1d045
@@ -703,9 +703,9 @@ OaksLabScript_1d02b:
 .asm_1d066
 	ld a, $20
 .asm_1d068
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld a, b
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, $1
 	ld [wSpriteIndex], a
 	call SetSpritePosition1

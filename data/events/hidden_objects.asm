@@ -224,7 +224,7 @@ OaksLabHiddenObjects:
 	db $FF
 ViridianPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -234,7 +234,7 @@ ViridianMartHiddenObjects:
 	db $FF
 ViridianSchoolHiddenObjects:
 	db $04,$03,(ViridianSchoolNotebook_id - TextPredefs) / 2 + 1
-	db Bank(PrintNotebookText)
+	db BANK(PrintNotebookText)
 	dw PrintNotebookText
 	db $00,$03,(ViridianSchoolBlackboard_id - TextPredefs) / 2 + 1
 	db BANK(PrintBlackboardLinkCableText)
@@ -262,7 +262,7 @@ PewterMartHiddenObjects:
 	db $FF
 PewterPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -270,7 +270,7 @@ PewterPokecenterHiddenObjects:
 	db $FF
 CeruleanPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -286,7 +286,7 @@ CeruleanMartHiddenObjects:
 	db $FF
 LavenderPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -297,7 +297,7 @@ VermilionPokecenterHiddenObjects:
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $04,$00,$04
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
 VermilionGymHiddenObjects:
@@ -345,7 +345,7 @@ CeladonMansion2HiddenObjects:
 	db $FF
 CeladonPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -460,7 +460,7 @@ CeladonHotelHiddenObjects:
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
 FuchsiaPokecenterHiddenObjects:
@@ -468,7 +468,7 @@ FuchsiaPokecenterHiddenObjects:
 	db BANK(OpenPokemonCenterPC)
 	dw OpenPokemonCenterPC
 	db $04,$00,$04
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $FF
 FuchsiaGymHiddenObjects:
@@ -481,27 +481,27 @@ CinnabarGymHiddenObjects:
 	db $0d,$11,$04
 	dbw BANK(GymStatues),GymStatues
 	db $07,$0f,$01
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $01,$0a,$12
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $07,$09,$13
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $0d,$09,$14
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $0d,$01,$05
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $07,$01,$16
-	db Bank(PrintCinnabarQuiz)
+	db BANK(PrintCinnabarQuiz)
 	dw PrintCinnabarQuiz
 	db $FF
 CinnabarPokecenterHiddenObjects:
 	db $04,$00,$04
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -513,7 +513,7 @@ SaffronGymHiddenObjects:
 	db $FF
 MtMoonPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -521,7 +521,7 @@ MtMoonPokecenterHiddenObjects:
 	db $FF
 RockTunnelPokecenterHiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -589,7 +589,7 @@ RocketHideout4HiddenObjects:
 	db $FF
 SaffronPokecenterHiddenObjects:
 	db $04,$00,$04
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -704,7 +704,7 @@ ViridianCityHiddenObjects:
 	db $FF
 SafariZoneRestHouse2HiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -712,7 +712,7 @@ SafariZoneRestHouse2HiddenObjects:
 	db $FF
 SafariZoneRestHouse3HiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -720,7 +720,7 @@ SafariZoneRestHouse3HiddenObjects:
 	db $FF
 SafariZoneRestHouse4HiddenObjects:
 	db $04,$00,$08
-	db Bank(PrintBenchGuyText)
+	db BANK(PrintBenchGuyText)
 	dw PrintBenchGuyText
 	db $03,$0d,$04
 	db BANK(OpenPokemonCenterPC)
@@ -750,7 +750,7 @@ CeladonMansion5HiddenObjects:
 	db BANK(PrintBlackboardLinkCableText)
 	dw PrintBlackboardLinkCableText
 	db $04,$03,(TMNotebook_id - TextPredefs) / 2 + 1
-	db Bank(PrintNotebookText)
+	db BANK(PrintNotebookText)
 	dw PrintNotebookText
 	db $FF
 FightingDojoHiddenObjects:

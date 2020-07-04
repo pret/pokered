@@ -2,7 +2,7 @@
 ; objects for each map ($00-$F8)
 
 ; Table of 2-Byte pointers, one pointer per map,
-; goes up to Map_F7, ends with $FFFF.
+; goes up to Map_F7, ends with -1.
 ; points to table listing all missable object in the area
 MapHSPointers:
 	dw MapHS00
@@ -253,7 +253,7 @@ MapHSPointers:
 	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
-	dw $FFFF
+	dw -1 ; end
 
 ; Structure:
 ; 3 bytes per object

@@ -25,7 +25,7 @@ LoadTilesetHeader:
 	ld a, [hl]
 	ld [hTilesetType], a
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 	pop hl
 	ld a, [wCurMapTileset]
 	push hl

@@ -66,13 +66,13 @@ BillsHouseScript3:
 	ld a, $2
 	ld [wSpriteIndex], a
 	ld a, $c
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld a, $6
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, $5
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	call SetSpritePosition1
 	ld a, HS_BILL_1
 	ld [wMissableObjectIndex], a

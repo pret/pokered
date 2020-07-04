@@ -1,3 +1,5 @@
+hDMARoutine EQU $FF80
+
 hSoftReset EQU $FF8A
 ; Initialized to 16.
 ; Decremented each input iteration if the player
@@ -81,6 +83,11 @@ hOAMBufferOffset EQU $FF90
 hSpriteScreenX EQU $FF91
 hSpriteScreenY EQU $FF92
 
+hFF8F EQU $FF8F
+hFF90 EQU $FF90
+hFF91 EQU $FF91
+hFF92 EQU $FF92
+
 hTilePlayerStandingOn EQU $FF93
 
 hSpritePriority EQU $FF94
@@ -90,13 +97,19 @@ hSignCoordPointer EQU $FF95
 
 hNPCMovementDirections2Index EQU $FF95
 
+hSwapItemID       EQU $FF95
+hSwapItemQuantity EQU $FF96
+
 ; CalcPositionOfPlayerRelativeToNPC
 hNPCSpriteOffset EQU $FF95
 
-; temp value used when swapping bytes
+; temp value used when swapping bytes or words
 hSwapTemp EQU $FF95
 
 hExperience EQU $FF96 ; 3 bytes, big endian
+
+hMutateWY EQU $FF96
+hMutateWX EQU $FF97
 
 ; Multiplication and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
@@ -204,6 +217,8 @@ hAutoBGTransferPortion EQU $FFBB
 ; the destination address of the automatic background transfer
 hAutoBGTransferDest EQU $FFBC ; 2 bytes
 
+hRedrawMapViewRowOffset EQU $FFBE
+
 ; temporary storage for stack pointer during memory transfers that use pop
 ; to increase speed
 hSPTemp EQU $FFBF ; 2 bytes
@@ -272,7 +287,8 @@ hCurrentSpriteOffset EQU $FFDA ; multiple of $10
 
 hItemCounter EQU $FFDB
 
-hGymGateIndex EQU $FFDB
+hGymGateIndex  EQU $FFDB
+hGymGateAnswer EQU $FFDC
 
 hGymTrashCanRandNumMask EQU $FFDB
 
@@ -285,9 +301,17 @@ hDexRatingNumMonsOwned EQU $FFDC
 ; $FF = player cancelled
 hOaksAideResult       EQU $FFDB
 
+hSavedCoordIndex      EQU $FFDB
+
 hOaksAideRequirement  EQU $FFDB ; required number of owned mons
 hOaksAideRewardItem   EQU $FFDC
 hOaksAideNumMonsOwned EQU $FFDD
+
+hPlayerFacing EQU $FFDB
+hPlayerYCoord EQU $FFDC
+hPlayerXCoord EQU $FFDD
+
+hMissableObjectIndex EQU $FFDB
 
 hItemToRemoveID    EQU $FFDB
 hItemToRemoveIndex EQU $FFDC
@@ -295,14 +319,25 @@ hItemToRemoveIndex EQU $FFDC
 hVendingMachineItem  EQU $FFDB
 hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
 
+hFFDB EQU $FFDB
+hFFDC EQU $FFDC
+
+hBackupGymGateIndex EQU $FFE0
+
+hUnlockedSilphCoDoors EQU $FFE0
+
 ; the first tile ID in a sequence of tile IDs that increase by 1 each step
 hStartTileID EQU $FFE1
 
 hNewPartyLength EQU $FFE4
 
+hIsHiddenMissableObject EQU $FFE5
+
 hDividend2 EQU $FFE5
 hDivisor2  EQU $FFE6
 hQuotient2 EQU $FFE7
+
+hMapROMBank EQU $FFE8
 
 hSpriteVRAMSlotAndFacing EQU $FFE9
 
@@ -310,7 +345,19 @@ hCoordsInFrontOfPlayerMatch EQU $FFEA
 
 hSpriteAnimFrameCounter EQU $FFEA
 
+hSpriteScreenYCoord EQU $FFEB
+hSpriteScreenXCoord EQU $FFEC
+hSpriteMapYCoord    EQU $FFED
+hSpriteMapXCoord    EQU $FFEE
+
+hFoundHiddenObjectOrBookshelf EQU $FFEB
+hFoundHiddenObject EQU $FFEE
+
+hSavedMapTextPtr EQU $FFEC
+
 hWhoseTurn EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+
+hClearLetterPrintingDelayFlags EQU $FFF4
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced

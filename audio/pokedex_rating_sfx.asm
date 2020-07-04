@@ -1,5 +1,5 @@
 PlayPokedexRatingSfx::
-	ld a, [$ffdc]
+	ld a, [hDexRatingNumMonsOwned]
 	ld c, $0
 	ld hl, OwnedMonValues
 .getSfxPointer

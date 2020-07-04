@@ -24,7 +24,7 @@ PrintBookshelfText::
 	pop af
 	call PrintPredefTextID
 	xor a
-	ld [$ffdb], a
+	ld [hFFDB], a
 	ret
 .nextBookshelfEntry1
 	inc hl
@@ -33,7 +33,7 @@ PrintBookshelfText::
 	jr .loop
 .noMatch
 	ld a, $ff
-	ld [$ffdb], a
+	ld [hFFDB], a
 	jpba PrintCardKeyText
 
 INCLUDE "data/tilesets/bookshelf_tile_ids.asm"

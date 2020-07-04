@@ -51,7 +51,7 @@ SSAnne7RubText:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, Bank(Music_PkmnHealed)
+	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .asm_61908
 	ld a, MUSIC_PKMN_HEALED

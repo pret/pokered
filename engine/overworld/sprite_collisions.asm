@@ -31,7 +31,7 @@ _UpdateSprites::
 UpdateNonPlayerSprite:
 	dec a
 	swap a
-	ld [$ff93], a  ; $10 * sprite#
+	ld [hTilePlayerStandingOn], a  ; $10 * sprite#
 	ld a, [wNPCMovementScriptSpriteOffset] ; some sprite offset?
 	ld b, a
 	ld a, [hCurrentSpriteOffset]
@@ -79,7 +79,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ld [$ff90], a ; store Y coordinate adjusted for direction of movement
+	ld [hFF90], a ; store Y coordinate adjusted for direction of movement
 
 	ld a, [hli] ; a = [$c1i5] (delta X) (-1, 0, or 1)
 	call SetSpriteCollisionValues
@@ -92,7 +92,7 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ld [$ff91], a ; store X coordinate adjusted for direction of movement
+	ld [hFF91], a ; store X coordinate adjusted for direction of movement
 
 	ld a, l
 	add 7
@@ -102,15 +102,15 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [$c1id] XXX what's [$c1id] for?
 	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
 
-	ld a, [$ff91]
+	ld a, [hFF91]
 	ld [hld], a ; [$c1ib] = adjusted X coordinate
-	ld a, [$ff90]
+	ld a, [hFF90]
 	ld [hl], a ; [$c1ia] = adjusted Y coordinate
 
 	xor a ; zero the loop counter
 
 .loop
-	ld [$ff8f], a ; store loop counter
+	ld [hFF8F], a ; store loop counter
 	swap a
 	ld e, a
 	ld a, [hCurrentSpriteOffset]
@@ -154,7 +154,7 @@ DetectCollisionBetweenSprites:
 	cpl
 	inc a
 .noCarry1
-	ld [$ff90], a ; store the distance between the two sprites' adjusted Y values
+	ld [hFF90], a ; store the distance between the two sprites' adjusted Y values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; Y coordinate is larger. This information is used later to set [$c1ic],
@@ -176,11 +176,11 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next1
-	ld a, [$ff90] ; a = distance between adjusted Y coordinates
+	ld a, [hFF90] ; a = distance between adjusted Y coordinates
 	sub b
-	ld [$ff92], a ; store distance adjusted using sprite i's direction
+	ld [hFF92], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ld [$ff90], a ; store 7 or 9 depending on sprite i's delta Y
+	ld [hFF90], a ; store 7 or 9 depending on sprite i's delta Y
 	jr c, .checkXDistance
 
 ; If sprite j's delta Y is 0, then b = 7, else b = 9.
@@ -193,7 +193,7 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next2
-	ld a, [$ff92] ; a = distance adjusted using sprite i's direction
+	ld a, [hFF92] ; a = distance adjusted using sprite i's direction
 	sub b ; adjust distance using sprite j's direction
 	jr z, .checkXDistance
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
@@ -225,7 +225,7 @@ DetectCollisionBetweenSprites:
 	cpl
 	inc a
 .noCarry2
-	ld [$ff91], a ; store the distance between the two sprites' adjusted X values
+	ld [hFF91], a ; store the distance between the two sprites' adjusted X values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
 ; X coordinate is larger. This information is used later to set [$c1ic],
@@ -247,11 +247,11 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next3
-	ld a, [$ff91] ; a = distance between adjusted X coordinates
+	ld a, [hFF91] ; a = distance between adjusted X coordinates
 	sub b
-	ld [$ff92], a ; store distance adjusted using sprite i's direction
+	ld [hFF92], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ld [$ff91], a ; store 7 or 9 depending on sprite i's delta X
+	ld [hFF91], a ; store 7 or 9 depending on sprite i's delta X
 	jr c, .collision
 
 ; If sprite j's delta X is 0, then b = 7, else b = 9.
@@ -264,15 +264,15 @@ DetectCollisionBetweenSprites:
 	ld b, 9
 
 .next4
-	ld a, [$ff92] ; a = distance adjusted using sprite i's direction
+	ld a, [hFF92] ; a = distance adjusted using sprite i's direction
 	sub b ; adjust distance using sprite j's direction
 	jr z, .collision
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
 
 .collision
-	ld a, [$ff91] ; a = 7 or 9 depending on sprite i's delta X
+	ld a, [hFF91] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
-	ld a, [$ff90] ; a = 7 or 9 depending on sprite i's delta Y
+	ld a, [hFF90] ; a = 7 or 9 depending on sprite i's delta Y
 	inc l
 
 ; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
@@ -294,7 +294,7 @@ DetectCollisionBetweenSprites:
 ; set bit in [$c1ie] or [$c1if] to indicate which sprite the collision occurred with
 	inc l
 	inc l
-	ld a, [$ff8f] ; a = loop counter
+	ld a, [hFF8F] ; a = loop counter
 	ld de, SpriteCollisionBitTable
 	add a
 	add e
@@ -311,7 +311,7 @@ DetectCollisionBetweenSprites:
 	ld [hl], a
 
 .next
-	ld a, [$ff8f] ; a = loop counter
+	ld a, [hFF8F] ; a = loop counter
 	inc a
 	cp $10
 	jp nz, .loop

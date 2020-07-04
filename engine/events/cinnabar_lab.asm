@@ -35,7 +35,7 @@ GiveFossilToCinnabarLab::
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [$ffdb], a
+	ld [hItemToRemoveID], a
 	cp DOME_FOSSIL
 	jr z, .choseDomeFossil
 	cp HELIX_FOSSIL

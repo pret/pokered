@@ -39,7 +39,7 @@ SilphCo3GateCoords:
 
 SilphCo3Script_59fad:
 	EventFlagAddress hl, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1

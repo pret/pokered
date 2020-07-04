@@ -297,7 +297,7 @@ _GetTileAndCoordsInFrontOfPlayer:
 
 GetTileTwoStepsInFrontOfPlayer:
 	xor a
-	ld [$ffdb], a
+	ld [hPlayerFacing], a
 	ld hl, wYCoord
 	ld a, [hli]
 	ld d, a
@@ -306,7 +306,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
-	ld hl, $ffdb
+	ld hl, hPlayerFacing
 	set 0, [hl]
 	aCoord 8, 13
 	inc d
@@ -315,7 +315,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	cp SPRITE_FACING_UP
 	jr nz, .notFacingUp
 ; facing up
-	ld hl, $ffdb
+	ld hl, hPlayerFacing
 	set 1, [hl]
 	aCoord 8, 5
 	dec d
@@ -324,7 +324,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	cp SPRITE_FACING_LEFT
 	jr nz, .notFacingLeft
 ; facing left
-	ld hl, $ffdb
+	ld hl, hPlayerFacing
 	set 2, [hl]
 	aCoord 4, 9
 	dec e
@@ -333,7 +333,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	cp SPRITE_FACING_RIGHT
 	jr nz, .storeTile
 ; facing right
-	ld hl, $ffdb
+	ld hl, hPlayerFacing
 	set 3, [hl]
 	aCoord 12, 9
 	inc e
@@ -378,33 +378,33 @@ CheckForBoulderCollisionWithSprites:
 	ld hl, wSpriteStateData2 + $14
 	add hl, de
 	ld a, [hli] ; map Y position
-	ld [$ffdc], a
+	ld [hPlayerYCoord], a
 	ld a, [hl] ; map X position
-	ld [$ffdd], a
+	ld [hPlayerXCoord], a
 	ld a, [wNumSprites]
 	ld c, a
 	ld de, $f
 	ld hl, wSpriteStateData2 + $14
-	ld a, [$ffdb]
+	ld a, [hPlayerFacing]
 	and $3 ; facing up or down?
 	jr z, .pushingHorizontallyLoop
 .pushingVerticallyLoop
 	inc hl
-	ld a, [$ffdd]
+	ld a, [hPlayerXCoord]
 	cp [hl]
 	jr nz, .nextSprite1 ; if X coordinates don't match
 	dec hl
 	ld a, [hli]
 	ld b, a
-	ld a, [$ffdb]
+	ld a, [hPlayerFacing]
 	rrca
 	jr c, .pushingDown
 ; pushing up
-	ld a, [$ffdc]
+	ld a, [hPlayerYCoord]
 	dec a
 	jr .compareYCoords
 .pushingDown
-	ld a, [$ffdc]
+	ld a, [hPlayerYCoord]
 	inc a
 .compareYCoords
 	cp b
@@ -417,19 +417,19 @@ CheckForBoulderCollisionWithSprites:
 .pushingHorizontallyLoop
 	ld a, [hli]
 	ld b, a
-	ld a, [$ffdc]
+	ld a, [hPlayerYCoord]
 	cp b
 	jr nz, .nextSprite2
 	ld b, [hl]
-	ld a, [$ffdb]
+	ld a, [hPlayerFacing]
 	bit 2, a
 	jr nz, .pushingLeft
 ; pushing right
-	ld a, [$ffdd]
+	ld a, [hPlayerXCoord]
 	inc a
 	jr .compareXCoords
 .pushingLeft
-	ld a, [$ffdd]
+	ld a, [hPlayerXCoord]
 	dec a
 .compareXCoords
 	cp b

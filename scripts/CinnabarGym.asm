@@ -96,7 +96,7 @@ CinnabarGymScript2:
 	cp $ff
 	jp z, CinnabarGymScript_75792
 	ld a, [wTrainerHeaderFlagBit]
-	ld [$ffdb], a
+	ld [hGymGateIndex], a
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_TEST
@@ -111,7 +111,7 @@ CinnabarGymScript2:
 	call WaitForSoundToFinish
 .asm_7581b
 	ld a, [wTrainerHeaderFlagBit]
-	ld [$ffdb], a
+	ld [hGymGateIndex], a
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_SET

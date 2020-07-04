@@ -26,7 +26,7 @@ VBlank::
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
-	call $ff80 ; hOAMDMA
+	call hDMARoutine
 	ld a, BANK(PrepareOAMData)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a

@@ -23,7 +23,7 @@ BikeShopText1:
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
-	ld [$ffdb], a
+	ld [hItemToRemoveID], a
 	callba RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824

@@ -21,7 +21,7 @@ Route6GateScript0:
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
-	ld a, [$ffdb]
+	ld a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1e080
 	ld a, $2

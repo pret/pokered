@@ -365,7 +365,7 @@ TextCommandProcessor::
 	push af
 	set 1, a
 	ld e, a
-	ld a, [$fff4]
+	ld a, [hClearLetterPrintingDelayFlags]
 	xor e
 	ld [wLetterPrintingDelayFlags], a
 	ld a, c

@@ -33,7 +33,7 @@ Route7GateScript0:
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
-	ld a, [$ffdb]
+	ld a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1e15a
 	ld a, $2

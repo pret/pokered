@@ -53,13 +53,13 @@ rLCDC_DEFAULT EQU %11100011
 
 	call ClearVram
 
-	ld hl, $ff80
-	ld bc, $ffff - $ff80
+	ld hl, $ff80 ; start of HRAM
+	ld bc, $ffff - $ff80 ; size of HRAM
 	call FillMemory
 
 	call ClearSprites
 
-	ld a, Bank(WriteDMACodeToHRAM)
+	ld a, BANK(WriteDMACodeToHRAM)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call WriteDMACodeToHRAM

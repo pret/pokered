@@ -475,7 +475,7 @@ InitializeSpriteScreenPosition:
 ; tests if sprite is off screen or otherwise unable to do anything
 CheckSpriteAvailability:
 	predef IsObjectHidden
-	ld a, [$ffe5]
+	ld a, [hIsHiddenMissableObject]
 	and a
 	jp nz, .spriteInvisible
 	ld h, wSpriteStateData2 / $100
@@ -564,7 +564,7 @@ UpdateSpriteImage:
 	ld a, [hl]         ; c1x9: facing direction
 	add b
 	ld b, a
-	ld a, [$ff93]  ; current sprite offset
+	ld a, [hTilePlayerStandingOn]
 	add b
 	ld b, a
 	ld a, [hCurrentSpriteOffset]

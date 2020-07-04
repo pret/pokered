@@ -45,14 +45,14 @@ SilphCo2Script_59d43:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	pop hl
 .asm_59d4f
 	ld a, [hli]
 	cp $ff
 	jr z, .asm_59d6b
 	push hl
-	ld hl, $ffe0
+	ld hl, hUnlockedSilphCoDoors
 	inc [hl]
 	pop hl
 	cp b
@@ -70,12 +70,12 @@ SilphCo2Script_59d43:
 	ret
 .asm_59d6b
 	xor a
-	ld [$ffe0], a
+	ld [hUnlockedSilphCoDoors], a
 	ret
 
 SilphCo2Script_59d6f:
 	EventFlagAddress hl, EVENT_SILPH_CO_2_UNLOCKED_DOOR1
-	ld a, [$ffe0]
+	ld a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1

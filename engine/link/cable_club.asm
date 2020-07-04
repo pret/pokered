@@ -663,7 +663,7 @@ TradeCenter_PrintPartyListNames:
 	push de
 	push hl
 	ld a, c
-	ld [$ff95], a
+	ld [hPastLeadingZeros], a
 	call GetMonName
 	pop hl
 	call PlaceString
@@ -903,7 +903,7 @@ CableClub_Run:
 	ld [wTilesetGfxPtr + 1], a
 	ld a, l
 	ld [wTilesetGfxPtr], a
-	ld a, Bank(Club_GFX)
+	ld a, BANK(Club_GFX)
 	ld [wTilesetBank], a
 	ld hl, Club_Coll
 	ld a, h

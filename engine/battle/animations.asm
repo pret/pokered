@@ -163,7 +163,7 @@ DrawFrameBlock:
 
 PlayAnimation:
 	xor a
-	ld [$FF8B], a ; it looks like nothing reads this
+	ld [hROMBankTemp], a ; it looks like nothing reads this
 	ld [wSubAnimTransform], a
 	ld a, [wAnimationID] ; get animation number
 	dec a

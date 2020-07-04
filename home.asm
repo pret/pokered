@@ -199,7 +199,7 @@ LoadFrontSpriteByMonIndex::
 	pop hl
 	ld a, [hLoadedROMBank]
 	push af
-	ld a, Bank(CopyUncompressedPicToHL)
+	ld a, BANK(CopyUncompressedPicToHL)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	xor a
@@ -832,7 +832,7 @@ UpdateSprites::
 	ret nz
 	ld a, [hLoadedROMBank]
 	push af
-	ld a, Bank(_UpdateSprites)
+	ld a, BANK(_UpdateSprites)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _UpdateSprites
@@ -1104,7 +1104,7 @@ DisplayPokemartDialogue::
 	ld [wListMenuID], a
 	ld a, [hLoadedROMBank]
 	push af
-	ld a, Bank(DisplayPokemartDialogue_)
+	ld a, BANK(DisplayPokemartDialogue_)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemartDialogue_
@@ -1136,14 +1136,14 @@ LoadItemList::
 DisplayPokemonCenterDialogue::
 ; zeroing these doesn't appear to serve any purpose
 	xor a
-	ld [$ff8b], a
-	ld [$ff8c], a
-	ld [$ff8d], a
+	ld [hItemPrice], a
+	ld [hItemPrice + 1], a
+	ld [hItemPrice + 2], a
 
 	inc hl
 	ld a, [hLoadedROMBank]
 	push af
-	ld a, Bank(DisplayPokemonCenterDialogue_)
+	ld a, BANK(DisplayPokemonCenterDialogue_)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemonCenterDialogue_
@@ -2794,7 +2794,7 @@ GetTrainerInformation::
 	ld a, [wLinkState]
 	and a
 	jr nz, .linkBattle
-	ld a, Bank(TrainerPicAndMoneyPointers)
+	ld a, BANK(TrainerPicAndMoneyPointers)
 	call BankswitchHome
 	ld a, [wTrainerClass]
 	dec a
@@ -3185,12 +3185,12 @@ GetName::
 	ld hl, NamePointers
 	add hl, de
 	ld a, [hli]
-	ld [$ff96], a
+	ld [hSwapTemp + 1], a
 	ld a, [hl]
-	ld [$ff95], a
-	ld a, [$ff95]
+	ld [hSwapTemp], a
+	ld a, [hSwapTemp]
 	ld h, a
-	ld a, [$ff96]
+	ld a, [hSwapTemp + 1]
 	ld l, a
 	ld a, [wd0b5]
 	ld b, a
@@ -3258,7 +3258,7 @@ GetItemPrice::
 	ld [hItemPrice], a
 	jr .done
 .getTMPrice
-	ld a, Bank(GetMachinePrice)
+	ld a, BANK(GetMachinePrice)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call GetMachinePrice
@@ -3409,7 +3409,7 @@ Divide::
 	push bc
 	ld a, [hLoadedROMBank]
 	push af
-	ld a, Bank(_Divide)
+	ld a, BANK(_Divide)
 	ld [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _Divide
@@ -3552,11 +3552,11 @@ CalcStat::
 	call Multiply
 	ld a, [hld]
 	ld d, a
-	ld a, [$ff98]
+	ld a, [hProduct + 3]
 	sub d
 	ld a, [hli]
 	ld d, a
-	ld a, [$ff97]
+	ld a, [hProduct + 2]
 	sbc d               ; test if (current stat exp bonus)^2 < stat exp
 	jr c, .statExpLoop
 .statExpDone
@@ -4497,11 +4497,11 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	bit 0, a ; A button
 	jr z, .nothingFound
 ; A button is pressed
-	ld a, Bank(CheckForHiddenObject)
+	ld a, BANK(CheckForHiddenObject)
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a
 	call CheckForHiddenObject
-	ld a, [$ffee]
+	ld a, [hFoundHiddenObject]
 	and a
 	jr nz, .hiddenObjectNotFound
 	ld a, [wHiddenObjectFunctionRomBank]
@@ -4515,13 +4515,13 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	jr .done
 .hiddenObjectNotFound
 	callba PrintBookshelfText
-	ld a, [$ffdb]
+	ld a, [hFFDB]
 	and a
 	jr z, .done
 .nothingFound
 	ld a, $ff
 .done
-	ld [$ffeb], a
+	ld [hFoundHiddenObjectOrBookshelf], a
 	pop af
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a
@@ -4537,17 +4537,17 @@ PrintPredefTextID::
 
 RestoreMapTextPointer::
 	ld hl, wMapTextPtr
-	ld a, [$ffec]
+	ld a, [hSavedMapTextPtr]
 	ld [hli], a
-	ld a, [$ffec + 1]
+	ld a, [hSavedMapTextPtr + 1]
 	ld [hl], a
 	ret
 
 SetMapTextPointer::
 	ld a, [wMapTextPtr]
-	ld [$ffec], a
+	ld [hSavedMapTextPtr], a
 	ld a, [wMapTextPtr + 1]
-	ld [$ffec + 1], a
+	ld [hSavedMapTextPtr + 1], a
 	ld a, l
 	ld [wMapTextPtr], a
 	ld a, h

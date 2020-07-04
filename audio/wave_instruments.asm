@@ -13,7 +13,7 @@
 ; these are the definitions for the channel 3 instruments
 ; each instrument definition is made up of 32 points (nibbles) that form
 ; the graph of the wave
-; the current instrument is copied to $FF30
+; the current instrument is copied to rWave_0--rWave_f
 .wave0
 	db $02,$46,$8A,$CE,$FF,$FE,$ED,$DC,$CB,$A9,$87,$65,$44,$33,$22,$11
 

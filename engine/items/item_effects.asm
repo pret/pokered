@@ -1341,7 +1341,7 @@ ItemUseMedicine:
 	push hl
 	push de
 	ld d, a
-	callab CalcExperience ; calculate experience for next level and store it at $ff96
+	callab CalcExperience ; calculate experience for next level and store it at hExperience
 	pop de
 	pop hl
 	ld bc, wPartyMon1Exp - wPartyMon1Level

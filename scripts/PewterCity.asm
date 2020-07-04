@@ -58,13 +58,13 @@ PewterCityScript1:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	ld a, $30
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld a, $c
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, $11
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
@@ -126,13 +126,13 @@ PewterCityScript4:
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [$ffeb], a
+	ld [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [$ffec], a
+	ld [hSpriteScreenXCoord], a
 	ld a, $16
-	ld [$ffed], a
+	ld [hSpriteMapYCoord], a
 	ld a, $10
-	ld [$ffee], a
+	ld [hSpriteMapXCoord], a
 	ld a, $5
 	ld [wSpriteIndex], a
 	call SetSpritePosition1

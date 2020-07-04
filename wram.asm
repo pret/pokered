@@ -1985,7 +1985,7 @@ wSpriteOutputBitOffset:: ; determines where in the output byte the two bits are 
 	ds 1
 
 wSpriteLoadFlags::
-; bit 0 determines used buffer (0 -> $a188, 1 -> $a310)
+; bit 0 determines used buffer (0 -> sSpriteBuffer1, 1 -> sSpriteBuffer2)
 ; bit 1 loading last sprite chunk? (there are at most 2 chunks per load operation)
 	ds 1
 wSpriteUnpackMode::

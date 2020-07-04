@@ -120,7 +120,7 @@ IsObjectHidden:
 .notHidden
 	xor a
 .hidden
-	ld [$ffe5], a
+	ld [hIsHiddenMissableObject], a
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map

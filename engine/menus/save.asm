@@ -601,9 +601,9 @@ GetMonCountsForBoxesInBank:
 	ret
 
 SAVCheckRandomID:
-;checks if Sav file is the same by checking player's name 1st letter ($a598)
+; checks if Sav file is the same by checking player's name 1st letter
 ; and the two random numbers generated at game beginning
-;(which are stored at wPlayerID)s
+; (which are stored at wPlayerID)s
 	ld a, $0a
 	ld [MBC1SRamEnable], a
 	ld a, $01
@@ -702,7 +702,7 @@ ClearSAV:
 
 PadSRAM_FF:
 	ld [MBC1SRamBank], a
-	ld hl, $a000
-	ld bc, $2000
+	ld hl, $a000 ; start of SRAM
+	ld bc, $2000 ; size of SRAM
 	ld a, $ff
 	jp FillMemory
