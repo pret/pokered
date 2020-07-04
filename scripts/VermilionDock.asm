@@ -78,7 +78,7 @@ VermilionDock_1db9b:
 	ld d, $0
 	ld e, $8
 .asm_1dbfa
-	ld hl, $0002
+	ld hl, $2
 	add hl, bc
 	ld a, l
 	ld [wMapViewVRAMPointer], a

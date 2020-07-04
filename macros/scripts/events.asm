@@ -183,7 +183,7 @@ ENDM
 ;\3, \4, ... = additional (optional) event indices
 SetEvents: MACRO
 	SetEvent \1
-	rept (_NARG + -1)
+	rept _NARG - 1
 	SetEventReuseHL \2
 	shift
 	endr
@@ -235,7 +235,7 @@ ENDM
 ;\3 = event index (optional)
 ResetEvents: MACRO
 	ResetEvent \1
-	rept (_NARG + -1)
+	rept _NARG - 1
 	ResetEventReuseHL \2
 	shift
 	endr
@@ -283,7 +283,7 @@ event_fill_start = event_start_byte + 1
 event_fill_count = event_end_byte - event_start_byte - 1
 
 		IF ((\1) % 8) == 0
-event_fill_start = event_fill_start + -1
+event_fill_start = event_fill_start - 1
 event_fill_count = event_fill_count + 1
 		ELSE
 			ld a, [wEventFlags + event_start_byte]
@@ -304,7 +304,7 @@ event_fill_count = event_fill_count + 1
 			ld a, $ff
 			ld hl, wEventFlags + event_fill_start
 
-			REPT event_fill_count + -1
+			REPT event_fill_count - 1
 				ld [hli], a
 			ENDR
 
@@ -345,7 +345,7 @@ event_fill_start = event_start_byte + 1
 event_fill_count = event_end_byte - event_start_byte - 1
 
 		IF ((\1) % 8) == 0
-event_fill_start = event_fill_start + -1
+event_fill_start = event_fill_start - 1
 event_fill_count = event_fill_count + 1
 		ELSE
 			ld a, [wEventFlags + event_start_byte]
@@ -370,7 +370,7 @@ event_fill_count = event_fill_count + 1
 				xor a
 			ENDC
 
-			REPT event_fill_count + -1
+			REPT event_fill_count - 1
 				ld [hli], a
 			ENDR
 

@@ -77,7 +77,7 @@ GetName::
 	ld h, d
 	ld l, e
 	ld de, wcd6d
-	ld bc, $0014
+	ld bc, $14
 	call CopyData
 .gotPtr
 	ld a, e

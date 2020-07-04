@@ -702,7 +702,7 @@ ClearSAV:
 
 PadSRAM_FF:
 	ld [MBC1SRamBank], a
-	ld hl, $a000 ; start of SRAM
-	ld bc, $2000 ; size of SRAM
+	ld hl, SRAM_Begin
+	ld bc, SRAM_End - SRAM_Begin
 	ld a, $ff
 	jp FillMemory

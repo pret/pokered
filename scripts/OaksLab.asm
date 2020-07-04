@@ -652,7 +652,7 @@ OaksLabScript18:
 
 OaksLabScript_RemoveParcel:
 	ld hl, wBagItems
-	ld bc, $0000
+	ld bc, 0
 .loop
 	ld a, [hli]
 	cp $ff

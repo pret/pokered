@@ -254,7 +254,7 @@ PrintStatsBox:
 	ld c, 8
 	call TextBoxBorder ; Draws the box
 	coord hl, 1, 9 ; Start printing stats from here
-	ld bc, $0019 ; Number offset
+	ld bc, $19 ; Number offset
 	jr .PrintStats
 .DifferentBox
 	coord hl, 9, 2
@@ -262,7 +262,7 @@ PrintStatsBox:
 	ld c, 9
 	call TextBoxBorder
 	coord hl, 11, 3
-	ld bc, $0018
+	ld bc, $18
 .PrintStats
 	push bc
 	push hl

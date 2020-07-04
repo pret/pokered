@@ -119,7 +119,7 @@ CloseTextDisplay::
 ; loop to make sprites face the directions they originally faced before the dialogue
 	ld hl, wSpriteStateData2 + $19
 	ld c, $0f
-	ld de, $0010
+	ld de, $10
 .restoreSpriteFacingDirectionLoop
 	ld a, [hl]
 	dec h

@@ -491,12 +491,12 @@ DrawTrainerInfo:
 	call CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
 	ld de, vChars2 + $770
-	ld bc, $0080
+	ld bc, $80
 	push bc
 	call TrainerInfo_FarCopyData
 	ld hl, BlankLeaderNames
 	ld de, vChars2 + $600
-	ld bc, $0170
+	ld bc, $170
 	call TrainerInfo_FarCopyData
 	pop bc
 	ld hl, BadgeNumbersTileGraphics  ; badge number tile patterns
@@ -504,14 +504,14 @@ DrawTrainerInfo:
 	call TrainerInfo_FarCopyData
 	ld hl, GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
 	ld de, vChars2 + $200
-	ld bc, $0400
+	ld bc, $400
 	ld a, $03
 	call FarCopyData2
 	ld hl, TextBoxGraphics
-	ld de, $00d0
+	ld de, $d0
 	add hl, de ; hl = colon tile pattern
 	ld de, vChars1 + $560
-	ld bc, $0010
+	ld bc, $10
 	ld a, $04
 	push bc
 	call FarCopyData2

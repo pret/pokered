@@ -454,7 +454,7 @@ PrintListMenuEntries::
 	ld [wLoadedMonLevel], a
 .skipCopyingLevel
 	pop hl
-	ld bc, $001c
+	ld bc, $1c
 	add hl, bc
 	call PrintLevel
 	pop af

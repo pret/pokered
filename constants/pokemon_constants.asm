@@ -191,4 +191,4 @@
 	const WEEPINBELL   ; $BD
 	const VICTREEBEL   ; $BE
 
-NUM_POKEMON_INDEXES EQU const_value + -1
+NUM_POKEMON_INDEXES EQU const_value - 1

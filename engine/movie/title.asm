@@ -317,7 +317,7 @@ DrawPlayerCharacter:
 	xor a
 	ld [wPlayerCharacterOAMTile], a
 	ld hl, wOAMBuffer
-	ld de, $605a
+	lb de, $60, $5a
 	ld b, 7
 .loop
 	push de

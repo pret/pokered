@@ -43,7 +43,7 @@ DisplayTextIDInit::
 ; the original direction they were facing must be restored after the dialogue is over
 	ld hl, wSpriteStateData1 + $19
 	ld c, $0f
-	ld de, $0010
+	ld de, $10
 .spriteFacingDirectionCopyLoop
 	ld a, [hl]
 	inc h
@@ -55,7 +55,7 @@ DisplayTextIDInit::
 ; loop to force all the sprites in the middle of animation to stand still
 ; (so that they don't like they're frozen mid-step during the dialogue)
 	ld hl, wSpriteStateData1 + 2
-	ld de, $0010
+	ld de, $10
 	ld c, e
 .spriteStandStillLoop
 	ld a, [hl]

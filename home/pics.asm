@@ -93,7 +93,7 @@ LoadUncompressedSpriteData::
 	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
 	ld [hSpriteOffset], a
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	ld hl, sSpriteBuffer0
 	call ZeroSpriteBuffer   ; zero buffer 0
 	ld de, sSpriteBuffer1
@@ -151,7 +151,7 @@ ZeroSpriteBuffer::
 ; de: output address
 InterlaceMergeSpriteBuffers::
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	push de
 	ld hl, sSpriteBuffer2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1

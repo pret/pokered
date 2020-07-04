@@ -9,7 +9,7 @@ DisplayDiploma::
 	call DisableLCD
 	ld hl, CircleTile
 	ld de, vChars2 + $700
-	ld bc, $0010
+	ld bc, $10
 	ld a, BANK(CircleTile)
 	call FarCopyData2
 	coord hl, 0, 0

@@ -31,7 +31,7 @@ PromptUserToPlaySlots:
 	xor a
 	ld [wSlotMachineAllowMatchesCounter], a
 	ld hl, wStoppingWhichSlotMachineWheel
-	ld bc, $0014
+	ld bc, $14
 	call FillMemory
 	call MainSlotMachineLoop
 	ld hl, wd730

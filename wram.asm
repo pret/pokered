@@ -1,63 +1,6 @@
 INCLUDE "constants.asm"
 
-flag_array: MACRO
-	ds ((\1) + 7) / 8
-ENDM
-
-box_struct_length EQU 25 + NUM_MOVES * 2
-box_struct: MACRO
-\1Species::    db
-\1HP::         dw
-\1BoxLevel::   db
-\1Status::     db
-\1Type::
-\1Type1::      db
-\1Type2::      db
-\1CatchRate::  db
-\1Moves::      ds NUM_MOVES
-\1OTID::       dw
-\1Exp::        ds 3
-\1HPExp::      dw
-\1AttackExp::  dw
-\1DefenseExp:: dw
-\1SpeedExp::   dw
-\1SpecialExp:: dw
-\1DVs::        ds 2
-\1PP::         ds NUM_MOVES
-ENDM
-
-party_struct: MACRO
-	box_struct \1
-\1Level::      db
-\1Stats::
-\1MaxHP::      dw
-\1Attack::     dw
-\1Defense::    dw
-\1Speed::      dw
-\1Special::    dw
-ENDM
-
-battle_struct: MACRO
-\1Species::    db
-\1HP::         dw
-\1PartyPos::
-\1BoxLevel::   db
-\1Status::     db
-\1Type::
-\1Type1::      db
-\1Type2::      db
-\1CatchRate::  db
-\1Moves::      ds NUM_MOVES
-\1DVs::        ds 2
-\1Level::      db
-\1Stats::
-\1MaxHP::      dw
-\1Attack::     dw
-\1Defense::    dw
-\1Speed::      dw
-\1Special::    dw
-\1PP::         ds NUM_MOVES
-ENDM
+INCLUDE "macros/wram.asm"
 
 
 SECTION "WRAM Bank 0", WRAM0
@@ -228,21 +171,6 @@ wSpriteStateData1::
 ; C1xD
 ; C1xE
 ; C1xF
-spritestatedata1: MACRO
-\1PictureID:: db
-\1MovementStatus:: db
-\1ImageIndex:: db
-\1YStepVector:: db
-\1YPixels:: db
-\1XStepVector:: db
-\1XPixels:: db
-\1IntraAnimFrameCounter:: db
-\1AnimFrameCounter:: db
-\1FacingDirection:: db
-	ds 6
-\1End::
-endm
-
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1
 wSprite01StateData1::      spritestatedata1 wSprite01StateData1
 wSprite02StateData1::      spritestatedata1 wSprite02StateData1
@@ -280,22 +208,6 @@ wSpriteStateData2::
 ; C2xD
 ; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
 ; C2xF
-spritestatedata2: MACRO
-\1WalkAnimationCounter:: db
-	ds 1
-\1YDisplacement:: db
-\1XDisplacement:: db
-\1MapY:: db
-\1MapX:: db
-\1MovementByte1:: db
-\1GrassPriority:: db
-\1MovementDelay:: db
-	ds 5
-\1ImageBaseOffset:: db
-	ds 1
-\1End::
-endm
-
 wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2
 wSprite01StateData2::      spritestatedata2 wSprite01StateData2
 wSprite02StateData2::      spritestatedata2 wSprite02StateData2
@@ -1050,7 +962,7 @@ wOptionsCancelCursorX::
 	ds 1
 
 wDayCarePerLevelCost::
-; 2-byte BCD number (always set to $0100)
+; 2-byte BCD number (always set to $100)
 
 wHoFTeamIndex2::
 
@@ -3185,7 +3097,7 @@ wBoxSpecies:: ds MONS_PER_BOX + 1
 
 wBoxMons::
 wBoxMon1:: box_struct wBoxMon1
-wBoxMon2:: ds box_struct_length * (MONS_PER_BOX + -1)
+wBoxMon2:: ds BOX_STRUCT_LENGTH * (MONS_PER_BOX - 1)
 
 wBoxMonOT::    ds NAME_LENGTH * MONS_PER_BOX
 wBoxMonNicks:: ds NAME_LENGTH * MONS_PER_BOX

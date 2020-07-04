@@ -1735,7 +1735,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld hl, wTempPic
-	ld bc, $0310
+	ld bc, $310
 	xor a
 	call FillMemory
 	jp CopyTempPicToMonPic
@@ -1896,7 +1896,7 @@ AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
 	ld hl, wTempPic
 	xor a
-	ld bc, $0310
+	ld bc, $310
 	call FillMemory
 	ld a, [hWhoseTurn]
 	and a
@@ -1932,7 +1932,7 @@ AnimationSubstitute:
 	jp AnimationShowMonPic
 
 CopySlowbroSpriteData:
-	ld bc, $0010
+	ld bc, $10
 	ld a, BANK(SlowbroSprite)
 	jp FarCopyData2
 

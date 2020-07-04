@@ -7,7 +7,7 @@ MoveEffectPointerTable:
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT1
 	dw ExplodeEffect             ; EXPLODE_EFFECT
 	dw DrainHPEffect             ; DREAM_EATER_EFFECT
-	dw $0000                     ; MIRROR_MOVE_EFFECT
+	dw NULL                      ; MIRROR_MOVE_EFFECT
 	dw StatModifierUpEffect      ; ATTACK_UP1_EFFECT
 	dw StatModifierUpEffect      ; DEFENSE_UP1_EFFECT
 	dw StatModifierUpEffect      ; SPEED_UP1_EFFECT
@@ -15,7 +15,7 @@ MoveEffectPointerTable:
 	dw StatModifierUpEffect      ; ACCURACY_UP1_EFFECT
 	dw StatModifierUpEffect      ; EVASION_UP1_EFFECT
 	dw PayDayEffect              ; PAY_DAY_EFFECT
-	dw $0000                     ; SWIFT_EFFECT
+	dw NULL                      ; SWIFT_EFFECT
 	dw StatModifierDownEffect    ; ATTACK_DOWN1_EFFECT
 	dw StatModifierDownEffect    ; DEFENSE_DOWN1_EFFECT
 	dw StatModifierDownEffect    ; SPEED_DOWN1_EFFECT
@@ -38,12 +38,12 @@ MoveEffectPointerTable:
 	dw FlinchSideEffect           ; FLINCH_SIDE_EFFECT2
 	dw OneHitKOEffect            ; OHKO_EFFECT
 	dw ChargeEffect              ; CHARGE_EFFECT
-	dw $0000                     ; SUPER_FANG_EFFECT
-	dw $0000                     ; SPECIAL_DAMAGE_EFFECT
+	dw NULL                      ; SUPER_FANG_EFFECT
+	dw NULL                      ; SPECIAL_DAMAGE_EFFECT
 	dw TrappingEffect            ; TRAPPING_EFFECT
 	dw ChargeEffect              ; FLY_EFFECT
 	dw TwoToFiveAttacksEffect    ; ATTACK_TWICE_EFFECT
-	dw $0000                     ; JUMP_KICK_EFFECT
+	dw NULL                      ; JUMP_KICK_EFFECT
 	dw MistEffect                ; MIST_EFFECT
 	dw FocusEnergyEffect         ; FOCUS_ENERGY_EFFECT
 	dw RecoilEffect              ; RECOIL_EFFECT
@@ -76,12 +76,12 @@ MoveEffectPointerTable:
 	dw StatModifierDownEffect    ; unused effect
 	dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
-	dw $0000                     ; unused effect
+	dw NULL                      ; unused effect
 	dw SubstituteEffect          ; SUBSTITUTE_EFFECT
 	dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
 	dw RageEffect                ; RAGE_EFFECT
 	dw MimicEffect               ; MIMIC_EFFECT
-	dw $0000                     ; METRONOME_EFFECT
+	dw NULL                      ; METRONOME_EFFECT
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT
 	dw SplashEffect              ; SPLASH_EFFECT
 	dw DisableEffect             ; DISABLE_EFFECT

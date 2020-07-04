@@ -1424,18 +1424,18 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop
 	ld hl, wTileMapBackup
-	ld bc, $0000
+	ld bc, $0
 .adjustForYCoordWithinTileBlock
 	ld a, [wYBlockCoord]
 	and a
 	jr z, .adjustForXCoordWithinTileBlock
-	ld bc, $0030
+	ld bc, $30
 	add hl, bc
 .adjustForXCoordWithinTileBlock
 	ld a, [wXBlockCoord]
 	and a
 	jr z, .copyToVisibleAreaBuffer
-	ld bc, $0002
+	ld bc, $2
 	add hl, bc
 .copyToVisibleAreaBuffer
 	coord de, 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
@@ -1739,7 +1739,7 @@ ScheduleSouthRowRedraw::
 	ld l, a
 	ld a, [wMapViewVRAMPointer + 1]
 	ld h, a
-	ld bc, $0200
+	ld bc, $200
 	add hl, bc
 	ld a, h
 	and $03
@@ -1835,7 +1835,7 @@ DrawTileBlock::
 	ld a, [de]
 	ld [hl], a
 	inc de
-	ld bc, $0015
+	ld bc, $15
 	add hl, bc
 	pop bc
 	dec c
@@ -2180,7 +2180,7 @@ LoadMapHeader::
 	jr nz, .zeroSpriteDataLoop
 ; initialize all C100-C1FF sprite entries to disabled (other than player's)
 	ld hl, wSpriteStateData1 + $12
-	ld de, $0010
+	ld de, $10
 	ld c, $0f
 .disableSpriteEntriesLoop
 	ld [hl], $ff

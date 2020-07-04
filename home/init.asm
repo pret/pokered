@@ -41,8 +41,8 @@ rLCDC_DEFAULT EQU %11100011
 
 	ld sp, wStack
 
-	ld hl, $c000 ; start of WRAM
-	ld bc, $2000 ; size of WRAM
+	ld hl, WRAM0_Begin
+	ld bc, WRAM1_End - WRAM0_Begin
 .loop
 	ld [hl], 0
 	inc hl
@@ -53,8 +53,8 @@ rLCDC_DEFAULT EQU %11100011
 
 	call ClearVram
 
-	ld hl, $ff80 ; start of HRAM
-	ld bc, $ffff - $ff80 ; size of HRAM
+	ld hl, HRAM_Begin
+	ld bc, HRAM_End - HRAM_Begin
 	call FillMemory
 
 	call ClearSprites
@@ -119,8 +119,8 @@ rLCDC_DEFAULT EQU %11100011
 	jp SetDefaultNamesBeforeTitlescreen
 
 ClearVram::
-	ld hl, $8000
-	ld bc, $2000
+	ld hl, VRAM_Begin
+	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	jp FillMemory
 

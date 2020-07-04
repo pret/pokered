@@ -134,7 +134,7 @@ AIMoveChoiceModification1:
 	push de
 	push bc
 	ld hl, StatusAilmentMoveEffects
-	ld de, $0001
+	ld de, 1
 	call IsInArray
 	pop bc
 	pop de

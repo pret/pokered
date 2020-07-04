@@ -131,10 +131,8 @@ GetPrizeMenuId:
 	coord hl, 13, 5
 ; reg. c:
 ; [low nybble] number of bytes
-; [bit 765 = %100] space-padding (not zero-padding)
+; [bits 765 = %100] space-padding (not zero-padding)
 	ld c, (1 << 7 | 2)
-; Function $15CD displays BCD value (same routine
-; used by text-command $02)
 	call PrintBCDNumber
 	ld de, wPrize2Price
 	coord hl, 13, 7

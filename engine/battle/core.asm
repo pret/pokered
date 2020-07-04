@@ -582,7 +582,7 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP:
 	ld a, [de]    ; increment toxic counter
 	inc a
 	ld [de], a
-	ld hl, $0000
+	ld hl, 0
 .toxicTicksLoop
 	add hl, bc
 	dec a
@@ -5345,8 +5345,8 @@ MoveHitTest:
 	ret z ; Swift never misses (interestingly, Azure Heights lists this is a myth, but it appears to be true)
 	call CheckTargetSubstitute ; substitute check (note that this overwrites a)
 	jr z, .checkForDigOrFlyStatus
-; this code is buggy. it's supposed to prevent HP draining moves from working on substitutes.
-; since $7b79 overwrites a with either $00 or $01, it never works.
+; This code is buggy. It's supposed to prevent HP draining moves from working on substitutes.
+; Since CheckTargetSubstitute overwrites a with either $00 or $01, it never works.
 	cp DRAIN_HP_EFFECT
 	jp z, .moveMissed
 	cp DREAM_EATER_EFFECT
@@ -6335,9 +6335,9 @@ LoadPlayerBackPic:
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld a, $a
-	ld [$0], a
+	ld [MBC1SRamEnable], a
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	ld hl, vSprites
 	ld de, sSpriteBuffer1
 	ld a, [hLoadedROMBank]
@@ -6345,7 +6345,7 @@ LoadPlayerBackPic:
 	ld c, 7 * 7
 	call CopyVideoData
 	xor a
-	ld [$0], a
+	ld [MBC1SRamEnable], a
 	ld a, $31
 	ld [hStartTileID], a
 	coord hl, 1, 5
