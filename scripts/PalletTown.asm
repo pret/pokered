@@ -94,7 +94,7 @@ PalletTownScript3:
 	bit 0, a
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, 1
 	ld [wcf0d], a
 	ld a, $FC

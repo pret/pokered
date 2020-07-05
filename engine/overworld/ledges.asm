@@ -6,7 +6,7 @@ HandleLedges::
 	and a ; OVERWORLD
 	ret nz
 	predef GetTileAndCoordsInFrontOfPlayer
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld b, a
 	aCoord 8, 9
 	ld c, a

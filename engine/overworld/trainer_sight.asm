@@ -1,6 +1,6 @@
 _GetSpritePosition1::
 	ld hl, wSpriteStateData1
-	ld de, $4
+	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
 	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
@@ -9,7 +9,7 @@ _GetSpritePosition1::
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
 	ld [hSpriteScreenXCoord], a
-	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
+	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
 	ld [hSpriteMapYCoord], a
@@ -19,7 +19,7 @@ _GetSpritePosition1::
 
 _GetSpritePosition2::
 	ld hl, wSpriteStateData1
-	ld de, $4
+	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
 	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
@@ -28,7 +28,7 @@ _GetSpritePosition2::
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
 	ld [wSavedSpriteScreenX], a
-	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
+	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
 	ld [wSavedSpriteMapY], a
@@ -38,7 +38,7 @@ _GetSpritePosition2::
 
 _SetSpritePosition1::
 	ld hl, wSpriteStateData1
-	ld de, $4
+	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
 	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
@@ -47,7 +47,7 @@ _SetSpritePosition1::
 	inc hl
 	ld a, [hSpriteScreenXCoord] ; c1x6 (screen X pos)
 	ld [hl], a
-	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
+	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [hSpriteMapYCoord] ; c2x4 (map Y pos)
 	ld [hli], a
@@ -57,7 +57,7 @@ _SetSpritePosition1::
 
 _SetSpritePosition2::
 	ld hl, wSpriteStateData1
-	ld de, 4
+	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
 	ld [hSpriteIndex], a
 	call GetSpriteDataPointer
@@ -66,7 +66,7 @@ _SetSpritePosition2::
 	inc hl
 	ld a, [wSavedSpriteScreenX]
 	ld [hl], a ; c1x6 (screen X pos)
-	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
+	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [wSavedSpriteMapY]
 	ld [hli], a ; c2x4 (map Y pos)
@@ -165,7 +165,7 @@ TrainerEngage:
 	push hl
 	push de
 	ld a, [wTrainerSpriteOffset]
-	add $2
+	add wSpritePlayerStateData1ImageIndex - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
@@ -176,7 +176,7 @@ TrainerEngage:
 	jp .noEngage
 .spriteOnScreen
 	ld a, [wTrainerSpriteOffset]
-	add $9
+	add wSpritePlayerStateData1FacingDirection - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
@@ -234,7 +234,7 @@ TrainerEngage:
 ; reads trainer's Y position to wTrainerScreenY and X position to wTrainerScreenX
 ReadTrainerScreenPosition:
 	ld a, [wTrainerSpriteOffset]
-	add $4
+	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
@@ -242,7 +242,7 @@ ReadTrainerScreenPosition:
 	ld a, [hl] ; c1x4 (sprite Y pos)
 	ld [wTrainerScreenY], a
 	ld a, [wTrainerSpriteOffset]
-	add $6
+	add wSpritePlayerStateData1XPixels - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
@@ -295,7 +295,7 @@ CheckPlayerIsInFrontOfSprite:
 	cp POWER_PLANT
 	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work
 	ld a, [wTrainerSpriteOffset]
-	add $4
+	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
@@ -307,7 +307,7 @@ CheckPlayerIsInFrontOfSprite:
 .notOnTopmostTile
 	ld [wTrainerScreenY], a
 	ld a, [wTrainerSpriteOffset]
-	add $6
+	add wSpritePlayerStateData1XPixels - wSpritePlayerStateData1
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1

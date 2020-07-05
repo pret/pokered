@@ -88,7 +88,7 @@ IsPlayerFacingEdgeOfMap::
 	push hl
 	push de
 	push bc
-	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	srl a
 	ld c, a
 	ld b, $0
@@ -158,7 +158,7 @@ IsWarpTileInFrontOfPlayer::
 	ld a, [wCurMap]
 	cp SS_ANNE_BOW
 	jr z, IsSSAnneBowWarpTileInFrontOfPlayer
-	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	srl a
 	ld c, a
 	ld b, 0
@@ -263,7 +263,7 @@ _GetTileAndCoordsInFrontOfPlayer:
 	ld d, a
 	ld a, [wXCoord]
 	ld e, a
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
@@ -302,7 +302,7 @@ GetTileTwoStepsInFrontOfPlayer:
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
@@ -375,7 +375,7 @@ CheckForBoulderCollisionWithSprites:
 	swap a
 	ld d, 0
 	ld e, a
-	ld hl, wSpriteStateData2 + $14
+	ld hl, wSprite01StateData2MapY
 	add hl, de
 	ld a, [hli] ; map Y position
 	ld [hPlayerYCoord], a
@@ -384,7 +384,7 @@ CheckForBoulderCollisionWithSprites:
 	ld a, [wNumSprites]
 	ld c, a
 	ld de, $f
-	ld hl, wSpriteStateData2 + $14
+	ld hl, wSprite01StateData2MapY
 	ld a, [hPlayerFacing]
 	and $3 ; facing up or down?
 	jr z, .pushingHorizontallyLoop

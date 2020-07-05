@@ -73,7 +73,7 @@ Mansion3Script_5225b:
 	ret
 
 Mansion3Script_Switches::
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a

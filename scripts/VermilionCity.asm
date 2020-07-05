@@ -38,7 +38,7 @@ VermilionCity_ScriptPointers:
 	dw VermilionCityScript4
 
 VermilionCityScript0:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	ret nz
 	ld hl, SSAnneTicketCheckCoords
@@ -157,7 +157,7 @@ VermilionCityText3:
 	text_asm
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_RIGHT
 	jr z, .greetPlayer
 	ld hl, .inFrontOfOrBehindGuardCoords

@@ -12,7 +12,7 @@ TryPushingBoulder::
 	ld [wBoulderSpriteIndex], a
 	and a
 	jp z, ResetBoulderPushFlags
-	ld hl, wSpriteStateData1 + 1
+	ld hl, wSpritePlayerStateData1MovementStatus
 	ld d, $0
 	ld a, [hSpriteIndexOrTextID]
 	swap a
@@ -36,7 +36,7 @@ TryPushingBoulder::
 	jp nz, ResetBoulderPushFlags
 	ld a, [hJoyHeld]
 	ld b, a
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr z, .pushBoulderUp
 	cp SPRITE_FACING_LEFT

@@ -50,7 +50,7 @@ CeruleanCityScript0:
 .asm_194e6
 	ld [wPlayerMovingDirection], a
 	ld a, b
-	ld [wSpriteStateData1 + 2 * $10 + $9], a
+	ld [wSprite02StateData1FacingDirection], a
 	call Delay3
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a

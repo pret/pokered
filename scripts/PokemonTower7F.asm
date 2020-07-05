@@ -70,7 +70,7 @@ PokemonTower7Script4:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, SPRITE_FACING_UP
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, MR_FUJIS_HOUSE
 	ld [hWarpDestinationMap], a
 	ld a, $1

@@ -16,7 +16,7 @@ BillsHouseScript0:
 	ret
 
 BillsHouseScript1:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	ld de, MovementData_1e79c
 	jr nz, .notDown

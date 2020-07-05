@@ -87,7 +87,7 @@ CheckForHiddenObject::
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
 ; [hCoordsInFrontOfPlayerMatch] = $00 if they match, $ff if they don't match
 CheckIfCoordsInFrontOfPlayerMatch:
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr z, .facingUp
 	cp SPRITE_FACING_LEFT

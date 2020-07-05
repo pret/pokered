@@ -127,7 +127,7 @@ CutOrBoulderDustAnimationTilesAndAttributes:
 	db $FE,$10,$FF,$10
 
 GetCutOrBoulderDustAnimationOffsets:
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [hli] ; player's sprite screen Y position
 	ld b, a
 	inc hl
@@ -187,7 +187,7 @@ ReplaceTreeTileBlock:
 	ld h, [hl]
 	ld l, a
 	add hl, bc
-	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a
 	jr z, .down
 	cp SPRITE_FACING_UP

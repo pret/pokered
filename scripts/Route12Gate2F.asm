@@ -65,7 +65,7 @@ Route12GateUpstairsText_495c4:
 	text_end
 
 GateUpstairsScript_PrintIfFacingUp:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr z, .up
 	ld a, $1

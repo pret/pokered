@@ -1,5 +1,5 @@
 AbleToPlaySlotsCheck:
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpritePlayerStateData1ImageIndex]
 	and $8
 	jr z, .done ; not able
 	ld b, COIN_CASE

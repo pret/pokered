@@ -314,7 +314,7 @@ RocketHideout2Script3:
 	ret
 
 LoadSpinnerArrowTiles::
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpritePlayerStateData1ImageIndex]
 	srl a
 	srl a
 	ld hl, SpinnerPlayerFacingDirections
@@ -322,7 +322,7 @@ LoadSpinnerArrowTiles::
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	ld a, [wCurMapTileset]
 	cp FACILITY
 	ld hl, FacilitySpinnerArrows

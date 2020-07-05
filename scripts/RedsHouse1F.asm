@@ -51,7 +51,7 @@ MomHealText2:
 
 RedsHouse1FText2: ; TV
 	text_asm
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ld hl, TVWrongSideText
 	jr nz, .notUp

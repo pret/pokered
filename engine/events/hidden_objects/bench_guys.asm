@@ -15,7 +15,7 @@ PrintBenchGuyText:
 .match
 	ld a, [hli]
 	ld b, a
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp b
 	jr nz, .loop ; player isn't facing left at the bench guy
 	ld a, [hl]

@@ -109,7 +109,7 @@ SeafoamIslands4Script2:
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
-	ld [wSpriteStateData2 + $06], a
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wd730
 	set 7, [hl]
 	ld hl, wFlags_D733

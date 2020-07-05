@@ -9,8 +9,8 @@ SetDefaultNames:
 	ld bc, wBoxDataEnd - wPlayerName
 	xor a
 	call FillMemory
-	ld hl, wSpriteStateData1
-	ld bc, $200
+	ld hl, wSpriteDataStart
+	ld bc, wSpriteDataEnd - wSpriteDataStart
 	xor a
 	call FillMemory
 	pop af

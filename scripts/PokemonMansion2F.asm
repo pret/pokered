@@ -42,7 +42,7 @@ Mansion2Script_5202f:
 	predef_jump ReplaceTileBlock
 
 Mansion2Script_Switches::
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a

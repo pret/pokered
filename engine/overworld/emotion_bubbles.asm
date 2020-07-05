@@ -38,7 +38,7 @@ EmotionBubble:
 	jr nz, .loop
 
 ; get the screen coordinates of the sprite the bubble is to be displayed above
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [wEmotionBubbleSpriteIndex]
 	swap a
 	ld c, a

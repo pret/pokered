@@ -492,17 +492,17 @@ OaksLabScript14:
 	cp $4
 	jr nz, .turnPlayerLeft
 	ld a, SPRITE_FACING_RIGHT
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	jr .done
 .turnPlayerLeft
 	ld a, SPRITE_FACING_LEFT
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	jr .done
 .turnPlayerDown
 	cp $4
 	ret nz
 	xor a ; ld a, SPRITE_FACING_DOWN
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 .done
 	ret
 

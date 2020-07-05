@@ -35,7 +35,7 @@ CinnabarIslandScript0:
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
 	xor a
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
 	ld a, $1
 	ld [wCinnabarIslandCurScript], a

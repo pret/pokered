@@ -1,7 +1,7 @@
 EnterMapAnim::
 	call InitFacingDirectionList
 	ld a, $ec
-	ld [wSpriteStateData1 + 4], a ; player's sprite Y screen position
+	ld [wSpritePlayerStateData1YPixels], a
 	call Delay3
 	push hl
 	call GBFadeInFromWhite
@@ -227,19 +227,19 @@ DoFlyAnimation:
 	ld a, [wFlyAnimBirdSpriteImageIndex]
 	xor $1 ; make the bird flap its wings
 	ld [wFlyAnimBirdSpriteImageIndex], a
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	call Delay3
 	ld a, [wFlyAnimUsingCoordList]
 	cp $ff
 	jr z, .skipCopyingCoords ; if the bird is flapping its wings in place
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [de]
 	inc de
-	ld [hli], a
+	ld [hli], a ; y
 	inc hl
 	ld a, [de]
 	inc de
-	ld [hl], a
+	ld [hl], a ; x
 .skipCopyingCoords
 	ld a, [wFlyAnimCounter]
 	dec a
@@ -258,15 +258,15 @@ LoadBirdSpriteGraphics:
 	jp CopyVideoData
 
 InitFacingDirectionList:
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld [wSavedPlayerFacingDirection], a
-	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
+	ld a, [wSpritePlayerStateData1YPixels]
 	ld [wSavedPlayerScreenY], a
 	ld hl, PlayerSpinningFacingOrder
 	ld de, wFacingDirectionList
 	ld bc, 4
 	call CopyData
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction (image index is locked to standing images)
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	ld hl, wFacingDirectionList
 ; find the place in the list that matches the current facing direction
 .loop
@@ -284,7 +284,7 @@ PlayerSpinningFacingOrder:
 SpinPlayerSprite:
 ; copy the current value from the list into the sprite data and rotate the list
 	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a ; player's sprite facing direction (image index is locked to standing images)
+	ld [wSpritePlayerStateData1ImageIndex], a ; (image index is locked to standing images)
 	push hl
 	ld hl, wFacingDirectionList
 	ld de, wFacingDirectionList - 1
@@ -320,9 +320,9 @@ PlayerSpinWhileMovingUpOrDown:
 	call SpinPlayerSprite
 	ld a, [wPlayerSpinWhileMovingUpOrDownAnimDeltaY]
 	ld c, a
-	ld a, [wSpriteStateData1 + 4] ; player's sprite Y screen position
+	ld a, [wSpritePlayerStateData1YPixels]
 	add c
-	ld [wSpriteStateData1 + 4], a
+	ld [wSpritePlayerStateData1YPixels], a
 	ld c, a
 	ld a, [wPlayerSpinWhileMovingUpOrDownAnimMaxY]
 	cp c
@@ -334,9 +334,9 @@ PlayerSpinWhileMovingUpOrDown:
 
 RestoreFacingDirectionAndYScreenPos:
 	ld a, [wSavedPlayerScreenY]
-	ld [wSpriteStateData1 + 4], a
+	ld [wSpritePlayerStateData1YPixels], a
 	ld a, [wSavedPlayerFacingDirection]
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a ; (image index is locked to standing images)
 	ret
 
 ; if SGB, 2 frames, else 3 frames
@@ -387,7 +387,7 @@ FishingAnim:
 	ld a, $4
 	ld hl, RedFishingTiles
 	call LoadAnimSpriteGfx
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpritePlayerStateData1ImageIndex]
 	ld c, a
 	ld b, $0
 	ld hl, FishingRodOAM
@@ -410,7 +410,7 @@ FishingAnim:
 ; shake the player's sprite vertically
 	ld b, 10
 .loop
-	ld hl, wSpriteStateData1 + 4 ; player's sprite Y screen position
+	ld hl, wSpritePlayerStateData1YPixels
 	call .ShakePlayerSprite
 	ld hl, wOAMBuffer + $9c
 	call .ShakePlayerSprite
@@ -420,7 +420,7 @@ FishingAnim:
 
 ; If the player is facing up, hide the fishing rod so it doesn't overlap with
 ; the exclamation bubble that will be shown next.
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
 	jr nz, .skipHidingFishingRod
 	ld a, $a0
@@ -434,7 +434,7 @@ FishingAnim:
 	predef EmotionBubble
 
 ; If the player is facing up, unhide the fishing rod.
-	ld a, [wSpriteStateData1 + 2] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1ImageIndex] ; (image index is locked to standing images)
 	cp SPRITE_FACING_UP
 	jr nz, .skipUnhidingFishingRod
 	ld a, $44
@@ -507,7 +507,7 @@ _HandleMidJump::
 	ld hl, PlayerJumpingYScreenCoords
 	add hl, bc
 	ld a, [hl]
-	ld [wSpriteStateData1 + 4], a ; player's sprite y coordinate
+	ld [wSpritePlayerStateData1YPixels], a
 	ret
 .finishedJump
 	ld a, [wWalkCounter]

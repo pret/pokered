@@ -111,9 +111,9 @@ ResetPlayerSpriteData::
 	ld hl, wSpriteStateData2
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld a, $1
-	ld [wSpriteStateData1], a
-	ld [wSpriteStateData2 + $0e], a
-	ld hl, wSpriteStateData1 + 4
+	ld [wSpritePlayerStateData1PictureID], a
+	ld [wSpritePlayerStateData2ImageBaseOffset], a
+	ld hl, wSpritePlayerStateData1YPixels
 	ld [hl], $3c     ; set Y screen pos
 	inc hl
 	inc hl
@@ -485,7 +485,7 @@ TextScript_PokemonCenterPC::
 StartSimulatingJoypadStates::
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld [wSpriteStateData2 + $06], a ; player's sprite movement byte 1
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wd730
 	set 7, [hl]
 	ret
@@ -572,7 +572,7 @@ CheckCoords::
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords::
 	push hl
-	ld hl, wSpriteStateData2 + $04
+	ld hl, wSpritePlayerStateData2MapY
 	ld a, [hSpriteIndex]
 	swap a
 	ld d, $0
