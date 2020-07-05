@@ -1,8 +1,10 @@
+# generated
+*.tx
+*.o
+
 # precompiled python
 *.pyc
-
-# compiled object file
-*.o
+*$py.class
 
 # no binaries
 *.exe
@@ -11,26 +13,30 @@
 *.gbc
 *.gb
 
+# save game files
+*.sgm
+*.sav
+*.rtc
+*.sn*
+*.sa*
+*.sg1
+
 # rgbds extras
 *.map
 *.sym
 
-# converted image data
-*.2bpp
-*.1bpp
-*.pic
-
-# swap files for vim
-.*.swp
-
-# no data from extras/
-*.json
-
-# for any of the poor souls with save game files in their working directory
-*.sgm
-*.sav
-*.sys
-
-# for vim configuration
-# url: http://www.vim.org/scripts/script.php?script_id=441
+# vim configuration
+# http://www.vim.org/scripts/script.php?script_id=441
 .lvimrc
+
+# swap files for vim and gedit
+.*.swp
+*~
+
+# macos files
+.DS_STORE
+
+# compiled graphics
+*.1bpp
+*.2bpp
+*.pic
