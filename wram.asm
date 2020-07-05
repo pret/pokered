@@ -2216,6 +2216,7 @@ wPartyMon6:: party_struct wPartyMon6
 
 wPartyMonOT::    ds NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicks:: ds NAME_LENGTH * PARTY_LENGTH
+wPartyMonNicksEnd::
 
 wPartyDataEnd::
 
