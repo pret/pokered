@@ -37,7 +37,7 @@ UsedCut:
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	call Delay3
 	call LoadGBPal
