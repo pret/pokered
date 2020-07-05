@@ -4485,37 +4485,42 @@ CalculateDamage:
 	ld b, 4
 	call Divide
 
+; Update wCurDamage. 
+; Capped at MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE: 999 - 2 = 997.
 	ld hl, wDamage
 	ld b, [hl]
 	ld a, [hQuotient + 3]
 	add b
 	ld [hQuotient + 3], a
-	jr nc, .asm_3dfd0
+	jr nc, .dont_cap_1
 
 	ld a, [hQuotient + 2]
 	inc a
 	ld [hQuotient + 2], a
 	and a
-	jr z, .asm_3e004
+	jr z, .cap
 
-.asm_3dfd0
+.dont_cap_1
 	ld a, [hQuotient]
 	ld b, a
 	ld a, [hQuotient + 1]
 	or a
-	jr nz, .asm_3e004
+	jr nz, .cap
 
 	ld a, [hQuotient + 2]
-	cp 998 / $100
-	jr c, .asm_3dfe8
-	cp 998 / $100 + 1
-	jr nc, .asm_3e004
-	ld a, [hQuotient + 3]
-	cp 998 % $100
-	jr nc, .asm_3e004
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100
+	jr c, .dont_cap_2
 
-.asm_3dfe8
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100 + 1
+	jr nc, .cap
+
+	ld a, [hQuotient + 3]
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) % $100
+	jr nc, .cap
+
+.dont_cap_2
 	inc hl
+
 	ld a, [hQuotient + 3]
 	ld b, [hl]
 	add b
@@ -4525,36 +4530,37 @@ CalculateDamage:
 	ld b, [hl]
 	adc b
 	ld [hl], a
-	jr c, .asm_3e004
+	jr c, .cap
 
 	ld a, [hl]
-	cp 998 / $100
-	jr c, .asm_3e00a
-	cp 998 / $100 + 1
-	jr nc, .asm_3e004
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100
+	jr c, .dont_cap_3
+
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100 + 1
+	jr nc, .cap
+
 	inc hl
 	ld a, [hld]
-	cp 998 % $100
-	jr c, .asm_3e00a
+	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) % $100
+	jr c, .dont_cap_3
 
-.asm_3e004
-; cap at 997
-	ld a, 997 / $100
+.cap
+	ld a, (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE) / $100
 	ld [hli], a
-	ld a, 997 % $100
+	ld a, (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE) % $100
 	ld [hld], a
 
-.asm_3e00a
-; add 2
+.dont_cap_3
+; Add back MIN_NEUTRAL_DAMAGE (capping at 999).
 	inc hl
 	ld a, [hl]
-	add 2
+	add MIN_NEUTRAL_DAMAGE
 	ld [hld], a
-	jr nc, .done
+	jr nc, .dont_floor
 	inc [hl]
+.dont_floor
 
-.done
-; minimum damage is 1
+; Returns nz and nc.
 	ld a, 1
 	and a
 	ret
