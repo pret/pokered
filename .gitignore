@@ -28,14 +28,3 @@
 *.sn*
 *.sa*
 *.sg1
-
-# vim configuration
-# http://www.vim.org/scripts/script.php?script_id=441
-.lvimrc
-
-# swap files for vim and gedit
-.*.swp
-*~
-
-# macos files
-.DS_STORE
