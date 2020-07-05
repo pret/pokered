@@ -1,17 +1,25 @@
-# generated
-*.tx
+# compiled objects
 *.o
+
+# compiled graphics
+*.1bpp
+*.2bpp
+*.pic
+
+# compiled roms
+*.gbc
+*.gb
+
+# rgbds extras
+*.map
+*.sym
+
+# tool binaries
+*.exe
 
 # precompiled python
 *.pyc
 *$py.class
-
-# no binaries
-*.exe
-
-# roms
-*.gbc
-*.gb
 
 # save game files
 *.sgm
@@ -20,10 +28,6 @@
 *.sn*
 *.sa*
 *.sg1
-
-# rgbds extras
-*.map
-*.sym
 
 # vim configuration
 # http://www.vim.org/scripts/script.php?script_id=441
@@ -35,8 +39,3 @@
 
 # macos files
 .DS_STORE
-
-# compiled graphics
-*.1bpp
-*.2bpp
-*.pic
