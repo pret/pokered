@@ -549,7 +549,7 @@ AIPrintItemUseAndUpdateHPBar:
 	jp DecrementAICount
 
 AISwitchIfEnoughMons:
-; enemy trainer switches if there are 3 or more unfainted mons in party
+; enemy trainer switches if there are 2 or more unfainted mons in party
 	ld a, [wEnemyPartyCount]
 	ld c, a
 	ld hl, wEnemyMon1HP
@@ -573,7 +573,7 @@ AISwitchIfEnoughMons:
 	jr nz, .loop
 
 	ld a, d ; how many available monsters are there?
-	cp 2 ; don't bother if only 1 or 2
+	cp 2    ; don't bother if only 1
 	jp nc, SwitchEnemyMon
 	and a
 	ret
