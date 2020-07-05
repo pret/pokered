@@ -350,8 +350,8 @@ hSpriteScreenXCoord EQU $FFEC
 hSpriteMapYCoord    EQU $FFED
 hSpriteMapXCoord    EQU $FFEE
 
-hFoundHiddenObjectOrBookshelf EQU $FFEB
-hFoundHiddenObject EQU $FFEE
+hItemAlreadyFound         EQU $FFEB
+hDidntFindAnyHiddenObject EQU $FFEE
 
 hSavedMapTextPtr EQU $FFEC
 

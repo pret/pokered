@@ -1752,7 +1752,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a
 	call CheckForHiddenObject
-	ld a, [hFoundHiddenObject]
+	ld a, [hDidntFindAnyHiddenObject]
 	and a
 	jr nz, .hiddenObjectNotFound
 	ld a, [wHiddenObjectFunctionRomBank]
@@ -1772,7 +1772,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 .nothingFound
 	ld a, $ff
 .done
-	ld [hFoundHiddenObjectOrBookshelf], a
+	ld [hItemAlreadyFound], a
 	pop af
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a

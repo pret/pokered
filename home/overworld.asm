@@ -88,7 +88,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
-	ld a, [hFoundHiddenObjectOrBookshelf]
+	ld a, [hItemAlreadyFound]
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
