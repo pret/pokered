@@ -106,12 +106,12 @@ pokeblue_opt = -jsv -k 01 -l 0x33 -m 0x13 -p 0 -r 03 -t "POKEMON BLUE"
 gfx/battle/attack_anim_1.2bpp: tools/gfx += --trim-whitespace
 gfx/battle/attack_anim_2.2bpp: tools/gfx += --trim-whitespace
 
-gfx/intro_credits/blue_jigglypuff_1.2bpp: $(RGBGFX) += -h
-gfx/intro_credits/blue_jigglypuff_2.2bpp: $(RGBGFX) += -h
-gfx/intro_credits/blue_jigglypuff_3.2bpp: $(RGBGFX) += -h
-gfx/intro_credits/red_nidorino_1.2bpp: $(RGBGFX) += -h
-gfx/intro_credits/red_nidorino_2.2bpp: $(RGBGFX) += -h
-gfx/intro_credits/red_nidorino_3.2bpp: $(RGBGFX) += -h
+gfx/intro_credits/blue_jigglypuff_1.2bpp: rgbgfx += -h
+gfx/intro_credits/blue_jigglypuff_2.2bpp: rgbgfx += -h
+gfx/intro_credits/blue_jigglypuff_3.2bpp: rgbgfx += -h
+gfx/intro_credits/red_nidorino_1.2bpp: rgbgfx += -h
+gfx/intro_credits/red_nidorino_2.2bpp: rgbgfx += -h
+gfx/intro_credits/red_nidorino_3.2bpp: rgbgfx += -h
 
 gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
@@ -134,7 +134,7 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 		tools/gfx $(tools/gfx) -o $@ $@)
 
 %.1bpp: %.png
-	$(RGBGFX) -d1 $(rgbgfx) -o $@ $<
+	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 
