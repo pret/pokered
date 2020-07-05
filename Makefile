@@ -17,7 +17,11 @@ pokeblue_obj := $(rom_obj:.o=_blue.o)
 
 ### Build tools
 
-MD5 := md5sum -c
+ifeq (,$(shell which sha1sum))
+SHA1 := shasum
+else
+SHA1 := sha1sum
+endif
 
 RGBDS ?=
 RGBASM  ?= $(RGBDS)rgbasm
@@ -47,9 +51,8 @@ tidy:
 	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
-# For contributors to make sure a change didn't affect the original contents of the ROMs.
 compare: $(roms)
-	@$(MD5) roms.md5
+	@$(SHA1) -c roms.sha1
 
 tools:
 	$(MAKE) -C tools/
