@@ -91,4 +91,4 @@ MtMoonPokecenterText5:
 	text_end
 
 MtMoonTradeNurseText:
-	db $f6
+	script_cable_club_receptionist
