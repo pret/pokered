@@ -40,49 +40,49 @@ SSAnne5TrainerHeader1:
 	db $ff
 
 SSAnne5Text1:
-	TX_FAR _SSAnne5Text1
-	db "@"
+	text_far _SSAnne5Text1
+	text_end
 
 SSAnne5Text2:
-	TX_FAR _SSAnne5Text2
-	db "@"
+	text_far _SSAnne5Text2
+	text_end
 
 SSAnne5Text3:
-	TX_FAR _SSAnne5Text3
-	db "@"
+	text_far _SSAnne5Text3
+	text_end
 
 SSAnne5Text4:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne5BattleText1:
-	TX_FAR _SSAnne5BattleText1
-	db "@"
+	text_far _SSAnne5BattleText1
+	text_end
 
 SSAnne5EndBattleText1:
-	TX_FAR _SSAnne5EndBattleText1
-	db "@"
+	text_far _SSAnne5EndBattleText1
+	text_end
 
 SSAnne5AfterBattleText1:
-	TX_FAR _SSAnne5AfterBattleText1
-	db "@"
+	text_far _SSAnne5AfterBattleText1
+	text_end
 
 SSAnne5Text5:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne5BattleText2:
-	TX_FAR _SSAnne5BattleText2
-	db "@"
+	text_far _SSAnne5BattleText2
+	text_end
 
 SSAnne5EndBattleText2:
-	TX_FAR _SSAnne5EndBattleText2
-	db "@"
+	text_far _SSAnne5EndBattleText2
+	text_end
 
 SSAnne5AfterBattleText2:
-	TX_FAR _SSAnne5AfterBattleText2
-	db "@"
+	text_far _SSAnne5AfterBattleText2
+	text_end

@@ -5,7 +5,7 @@ MrPsychicsHouse_TextPointers:
 	dw SaffronHouse2Text1
 
 SaffronHouse2Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM29
 	jr nz, .asm_9e72b
 	ld hl, TM29PreReceiveText
@@ -28,18 +28,18 @@ SaffronHouse2Text1:
 	jp TextScriptEnd
 
 TM29PreReceiveText:
-	TX_FAR _TM29PreReceiveText
-	db "@"
+	text_far _TM29PreReceiveText
+	text_end
 
 ReceivedTM29Text:
-	TX_FAR _ReceivedTM29Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedTM29Text
+	sound_get_item_1
+	text_end
 
 TM29ExplanationText:
-	TX_FAR _TM29ExplanationText
-	db "@"
+	text_far _TM29ExplanationText
+	text_end
 
 TM29NoRoomText:
-	TX_FAR _TM29NoRoomText
-	db "@"
+	text_far _TM29NoRoomText
+	text_end

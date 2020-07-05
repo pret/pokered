@@ -29,17 +29,19 @@ _TM31PreReceiveText::
 _ReceivedTM31Text::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _TM31ExplanationText1::
-	text ""
+	text_start
 
 	para "TM31 contains my"
 	line "favorite, MIMIC!"
 
 	para "Use it on a good"
-	line "#MON!@@"
+	line "#MON!@"
+	text_end
 
 _TM31ExplanationText2::
 	text "<PLAYER>: Hi!"
@@ -57,7 +59,8 @@ _TM31ExplanationText2::
 
 _TM31NoRoomText::
 	text "Don't you want"
-	line "this?@@"
+	line "this?@"
+	text_end
 
 _CopycatsHouse2FText2::
 	text "DODUO: Giiih!"

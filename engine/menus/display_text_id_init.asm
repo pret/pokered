@@ -41,7 +41,7 @@ DisplayTextIDInit::
 ; loop to copy C1X9 (direction the sprite is facing) to C2X9 for each sprite
 ; this is done because when you talk to an NPC, they turn to look your way
 ; the original direction they were facing must be restored after the dialogue is over
-	ld hl, wSpriteStateData1 + $19
+	ld hl, wSprite01StateData1FacingDirection
 	ld c, $0f
 	ld de, $10
 .spriteFacingDirectionCopyLoop
@@ -54,7 +54,7 @@ DisplayTextIDInit::
 	jr nz, .spriteFacingDirectionCopyLoop
 ; loop to force all the sprites in the middle of animation to stand still
 ; (so that they don't like they're frozen mid-step during the dialogue)
-	ld hl, wSpriteStateData1 + 2
+	ld hl, wSpritePlayerStateData1ImageIndex
 	ld de, $10
 	ld c, e
 .spriteStandStillLoop

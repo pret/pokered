@@ -42,13 +42,13 @@ StartSlotMachine:
 	ret
 
 GameCornerOutOfOrderText::
-	TX_FAR _GameCornerOutOfOrderText
-	db "@"
+	text_far _GameCornerOutOfOrderText
+	text_end
 
 GameCornerOutToLunchText::
-	TX_FAR _GameCornerOutToLunchText
-	db "@"
+	text_far _GameCornerOutToLunchText
+	text_end
 
 GameCornerSomeonesKeysText::
-	TX_FAR _GameCornerSomeonesKeysText
-	db "@"
+	text_far _GameCornerSomeonesKeysText
+	text_end

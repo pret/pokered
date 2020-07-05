@@ -15,7 +15,7 @@ SSAnneCaptainsRoom_TextPointers:
 	dw SSAnne7Text3
 
 SSAnne7Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_HM01
 	jr nz, .asm_797c4
 	ld hl, SSAnne7RubText
@@ -42,8 +42,8 @@ SSAnne7Text1:
 	jp TextScriptEnd
 
 SSAnne7RubText:
-	TX_FAR _SSAnne7RubText
-	TX_ASM
+	text_far _SSAnne7RubText
+	text_asm
 	ld a, [wAudioROMBank]
 	cp BANK(Audio3_UpdateMusic)
 	ld [wAudioSavedROMBank], a
@@ -68,26 +68,26 @@ SSAnne7RubText:
 	jp TextScriptEnd
 
 ReceivingHM01Text:
-	TX_FAR _ReceivingHM01Text
-	db "@"
+	text_far _ReceivingHM01Text
+	text_end
 
 ReceivedHM01Text:
-	TX_FAR _ReceivedHM01Text
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _ReceivedHM01Text
+	sound_get_key_item
+	text_end
 
 SSAnne7Text_61932:
-	TX_FAR _SSAnne7Text_61932
-	db "@"
+	text_far _SSAnne7Text_61932
+	text_end
 
 HM01NoRoomText:
-	TX_FAR _HM01NoRoomText
-	db "@"
+	text_far _HM01NoRoomText
+	text_end
 
 SSAnne7Text2:
-	TX_FAR _SSAnne7Text2
-	db "@"
+	text_far _SSAnne7Text2
+	text_end
 
 SSAnne7Text3:
-	TX_FAR _SSAnne7Text3
-	db "@"
+	text_far _SSAnne7Text3
+	text_end

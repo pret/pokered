@@ -3,21 +3,21 @@ PrintFightingDojoText2:
 	tx_pre_jump EnemiesOnEverySideText
 
 EnemiesOnEverySideText::
-	TX_FAR _EnemiesOnEverySideText
-	db "@"
+	text_far _EnemiesOnEverySideText
+	text_end
 
 PrintFightingDojoText3:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump WhatGoesAroundComesAroundText
 
 WhatGoesAroundComesAroundText::
-	TX_FAR _WhatGoesAroundComesAroundText
-	db "@"
+	text_far _WhatGoesAroundComesAroundText
+	text_end
 
 PrintFightingDojoText:
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump FightingDojoText
 
 FightingDojoText::
-	TX_FAR _FightingDojoText
-	db "@"
+	text_far _FightingDojoText
+	text_end

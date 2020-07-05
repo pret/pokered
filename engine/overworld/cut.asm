@@ -22,8 +22,8 @@ UsedCut:
 	jp PrintText
 
 .NothingToCutText
-	TX_FAR _NothingToCutText
-	db "@"
+	text_far _NothingToCutText
+	text_end
 
 .canCut
 	ld [wCutTile], a
@@ -37,7 +37,7 @@ UsedCut:
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	call Delay3
 	call LoadGBPal
@@ -68,8 +68,8 @@ UsedCut:
 	jp RedrawMapView
 
 UsedCutText:
-	TX_FAR _UsedCutText
-	db "@"
+	text_far _UsedCutText
+	text_end
 
 InitCutAnimOAM:
 	xor a
@@ -127,7 +127,7 @@ CutOrBoulderDustAnimationTilesAndAttributes:
 	db $FE,$10,$FF,$10
 
 GetCutOrBoulderDustAnimationOffsets:
-	ld hl, wSpriteStateData1 + 4
+	ld hl, wSpritePlayerStateData1YPixels
 	ld a, [hli] ; player's sprite screen Y position
 	ld b, a
 	inc hl
@@ -187,7 +187,7 @@ ReplaceTreeTileBlock:
 	ld h, [hl]
 	ld l, a
 	add hl, bc
-	ld a, [wSpriteStateData1 + 9] ; player sprite's facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a
 	jr z, .down
 	cp SPRITE_FACING_UP

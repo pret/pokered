@@ -1,5 +1,5 @@
 ClearVariablesOnEnterMap::
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	ld [rWY], a
 	xor a

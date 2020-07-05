@@ -6,11 +6,11 @@ CeladonMansionRoofHouse_TextPointers:
 	dw CeladonMansion5Text2
 
 CeladonMansion5Text1:
-	TX_FAR _CeladonMansion5Text1
-	db "@"
+	text_far _CeladonMansion5Text1
+	text_end
 
 CeladonMansion5Text2:
-	TX_ASM
+	text_asm
 	lb bc, EEVEE, 25
 	call GivePokemon
 	jr nc, .asm_24365

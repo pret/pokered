@@ -125,73 +125,73 @@ VictoryRoad3TrainerHeader3:
 	db $ff
 
 VictoryRoad3Text1:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text2:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text3:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad3TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3Text4:
-	TX_ASM
+	text_asm
 	ld hl, VictoryRoad3TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VictoryRoad3BattleText2:
-	TX_FAR _VictoryRoad3BattleText2
-	db "@"
+	text_far _VictoryRoad3BattleText2
+	text_end
 
 VictoryRoad3EndBattleText2:
-	TX_FAR _VictoryRoad3EndBattleText2
-	db "@"
+	text_far _VictoryRoad3EndBattleText2
+	text_end
 
 VictoryRoad3AfterBattleText2:
-	TX_FAR _VictoryRoad3AfterBattleText2
-	db "@"
+	text_far _VictoryRoad3AfterBattleText2
+	text_end
 
 VictoryRoad3BattleText3:
-	TX_FAR _VictoryRoad3BattleText3
-	db "@"
+	text_far _VictoryRoad3BattleText3
+	text_end
 
 VictoryRoad3EndBattleText3:
-	TX_FAR _VictoryRoad3EndBattleText3
-	db "@"
+	text_far _VictoryRoad3EndBattleText3
+	text_end
 
 VictoryRoad3AfterBattleText3:
-	TX_FAR _VictoryRoad3AfterBattleText3
-	db "@"
+	text_far _VictoryRoad3AfterBattleText3
+	text_end
 
 VictoryRoad3BattleText4:
-	TX_FAR _VictoryRoad3BattleText4
-	db "@"
+	text_far _VictoryRoad3BattleText4
+	text_end
 
 VictoryRoad3EndBattleText4:
-	TX_FAR _VictoryRoad3EndBattleText4
-	db "@"
+	text_far _VictoryRoad3EndBattleText4
+	text_end
 
 VictoryRoad3AfterBattleText4:
-	TX_FAR _VictoryRoad3AfterBattleText4
-	db "@"
+	text_far _VictoryRoad3AfterBattleText4
+	text_end
 
 VictoryRoad3BattleText5:
-	TX_FAR _VictoryRoad3BattleText5
-	db "@"
+	text_far _VictoryRoad3BattleText5
+	text_end
 
 VictoryRoad3EndBattleText5:
-	TX_FAR _VictoryRoad3EndBattleText5
-	db "@"
+	text_far _VictoryRoad3EndBattleText5
+	text_end
 
 VictoryRoad3AfterBattleText5:
-	TX_FAR _VictoryRoad3AfterBattleText5
-	db "@"
+	text_far _VictoryRoad3AfterBattleText5
+	text_end

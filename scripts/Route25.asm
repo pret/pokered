@@ -137,167 +137,167 @@ Route25TrainerHeader8:
 	db $ff
 
 Route25Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route25TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route25BattleText1:
-	TX_FAR _Route25BattleText1
-	db "@"
+	text_far _Route25BattleText1
+	text_end
 
 Route25EndBattleText1:
-	TX_FAR _Route25EndBattleText1
-	db "@"
+	text_far _Route25EndBattleText1
+	text_end
 
 Route25AfterBattleText1:
-	TX_FAR _Route25AfterBattleText1
-	db "@"
+	text_far _Route25AfterBattleText1
+	text_end
 
 Route25BattleText2:
-	TX_FAR _Route25BattleText2
-	db "@"
+	text_far _Route25BattleText2
+	text_end
 
 Route25EndBattleText2:
-	TX_FAR _Route25EndBattleText2
-	db "@"
+	text_far _Route25EndBattleText2
+	text_end
 
 Route25AfterBattleText2:
-	TX_FAR _Route25AfterBattleText2
-	db "@"
+	text_far _Route25AfterBattleText2
+	text_end
 
 Route25BattleText3:
-	TX_FAR _Route25BattleText3
-	db "@"
+	text_far _Route25BattleText3
+	text_end
 
 Route25EndBattleText3:
-	TX_FAR _Route25EndBattleText3
-	db "@"
+	text_far _Route25EndBattleText3
+	text_end
 
 Route25AfterBattleText3:
-	TX_FAR _Route25AfterBattleText3
-	db "@"
+	text_far _Route25AfterBattleText3
+	text_end
 
 Route25BattleText4:
-	TX_FAR _Route25BattleText4
-	db "@"
+	text_far _Route25BattleText4
+	text_end
 
 Route25EndBattleText4:
-	TX_FAR _Route25EndBattleText4
-	db "@"
+	text_far _Route25EndBattleText4
+	text_end
 
 Route25AfterBattleText4:
-	TX_FAR _Route25AfterBattleText4
-	db "@"
+	text_far _Route25AfterBattleText4
+	text_end
 
 Route25BattleText5:
-	TX_FAR _Route25BattleText5
-	db "@"
+	text_far _Route25BattleText5
+	text_end
 
 Route25EndBattleText5:
-	TX_FAR _Route25EndBattleText5
-	db "@"
+	text_far _Route25EndBattleText5
+	text_end
 
 Route25AfterBattleText5:
-	TX_FAR _Route25AfterBattleText5
-	db "@"
+	text_far _Route25AfterBattleText5
+	text_end
 
 Route25BattleText6:
-	TX_FAR _Route25BattleText6
-	db "@"
+	text_far _Route25BattleText6
+	text_end
 
 Route25EndBattleText6:
-	TX_FAR _Route25EndBattleText6
-	db "@"
+	text_far _Route25EndBattleText6
+	text_end
 
 Route25AfterBattleText6:
-	TX_FAR _Route25AfterBattleText6
-	db "@"
+	text_far _Route25AfterBattleText6
+	text_end
 
 Route25BattleText7:
-	TX_FAR _Route25BattleText7
-	db "@"
+	text_far _Route25BattleText7
+	text_end
 
 Route25EndBattleText7:
-	TX_FAR _Route25EndBattleText7
-	db "@"
+	text_far _Route25EndBattleText7
+	text_end
 
 Route25AfterBattleText7:
-	TX_FAR _Route25AfterBattleText7
-	db "@"
+	text_far _Route25AfterBattleText7
+	text_end
 
 Route25BattleText8:
-	TX_FAR _Route25BattleText8
-	db "@"
+	text_far _Route25BattleText8
+	text_end
 
 Route25EndBattleText8:
-	TX_FAR _Route25EndBattleText8
-	db "@"
+	text_far _Route25EndBattleText8
+	text_end
 
 Route25AfterBattleText8:
-	TX_FAR _Route25AfterBattleText8
-	db "@"
+	text_far _Route25AfterBattleText8
+	text_end
 
 Route25BattleText9:
-	TX_FAR _Route25BattleText9
-	db "@"
+	text_far _Route25BattleText9
+	text_end
 
 Route25EndBattleText9:
-	TX_FAR _Route25EndBattleText9
-	db "@"
+	text_far _Route25EndBattleText9
+	text_end
 
 Route25AfterBattleText9:
-	TX_FAR _Route25AfterBattleText9
-	db "@"
+	text_far _Route25AfterBattleText9
+	text_end
 
 Route25Text11:
-	TX_FAR _Route25Text11
-	db "@"
+	text_far _Route25Text11
+	text_end

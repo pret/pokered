@@ -75,8 +75,8 @@ OverworldLoopLessDelay::
 	bit 3, a ; start button
 	jr z, .startButtonNotPressed
 ; if START is pressed
-	xor a
-	ld [hSpriteIndexOrTextID], a ; start menu text ID
+	xor a ; TEXT_START_MENU
+	ld [hSpriteIndexOrTextID], a
 	jp .displayDialogue
 .startButtonNotPressed
 	bit 0, a ; A button
@@ -88,7 +88,7 @@ OverworldLoopLessDelay::
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
 	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
-	ld a, [hFoundHiddenObjectOrBookshelf]
+	ld a, [hItemAlreadyFound]
 	and a
 	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
@@ -149,7 +149,7 @@ OverworldLoopLessDelay::
 	bit 7, a ; down button
 	jr z, .checkIfUpButtonIsPressed
 	ld a, 1
-	ld [wSpriteStateData1 + 3], a ; delta Y
+	ld [wSpritePlayerStateData1YStepVector], a
 	ld a, PLAYER_DIR_DOWN
 	jr .handleDirectionButtonPress
 
@@ -157,7 +157,7 @@ OverworldLoopLessDelay::
 	bit 6, a ; up button
 	jr z, .checkIfLeftButtonIsPressed
 	ld a, -1
-	ld [wSpriteStateData1 + 3], a ; delta Y
+	ld [wSpritePlayerStateData1YStepVector], a
 	ld a, PLAYER_DIR_UP
 	jr .handleDirectionButtonPress
 
@@ -165,7 +165,7 @@ OverworldLoopLessDelay::
 	bit 5, a ; left button
 	jr z, .checkIfRightButtonIsPressed
 	ld a, -1
-	ld [wSpriteStateData1 + 5], a ; delta X
+	ld [wSpritePlayerStateData1XStepVector], a
 	ld a, PLAYER_DIR_LEFT
 	jr .handleDirectionButtonPress
 
@@ -173,7 +173,7 @@ OverworldLoopLessDelay::
 	bit 4, a ; right button
 	jr z, .noDirectionButtonsPressed
 	ld a, 1
-	ld [wSpriteStateData1 + 5], a ; delta X
+	ld [wSpritePlayerStateData1XStepVector], a
 
 
 .handleDirectionButtonPress
@@ -1133,7 +1133,7 @@ IsSpriteInFrontOfPlayer::
 	ld d, $10 ; talking range in pixels (normal range)
 IsSpriteInFrontOfPlayer2::
 	lb bc, $3c, $40 ; Y and X position of player sprite
-	ld a, [wSpriteStateData1 + 9] ; direction the player is facing
+	ld a, [wSpritePlayerStateData1FacingDirection]
 .checkIfPlayerFacingUp
 	cp SPRITE_FACING_UP
 	jr nz, .checkIfPlayerFacingDown
@@ -1176,7 +1176,7 @@ IsSpriteInFrontOfPlayer2::
 	and a
 	ret z
 ; if there are sprites
-	ld hl, wSpriteStateData1 + $10
+	ld hl, wSprite01StateData1
 	ld d, a
 	ld e, $01
 .spriteLoop
@@ -1228,7 +1228,7 @@ CollisionCheckOnLand::
 	jr nz, .noCollision ; no collisions when the player's movements are being controlled by the game
 	ld a, [wPlayerDirection] ; the direction that the player is trying to go in
 	ld d, a
-	ld a, [wSpriteStateData1 + 12] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	ld a, [wSpritePlayerStateData1CollisionData]
 	and d ; check if a sprite is in the direction the player is trying to go
 	jr nz, .collision
 	xor a
@@ -1462,9 +1462,9 @@ LoadCurrentMapView::
 	ret
 
 AdvancePlayerSprite::
-	ld a, [wSpriteStateData1 + 3] ; delta Y
+	ld a, [wSpritePlayerStateData1YStepVector]
 	ld b, a
-	ld a, [wSpriteStateData1 + 5] ; delta X
+	ld a, [wSpritePlayerStateData1XStepVector]
 	ld c, a
 	ld hl, wWalkCounter ; walking animation counter
 	dec [hl]
@@ -1596,7 +1596,7 @@ AdvancePlayerSprite::
 	call MoveTileBlockMapPointerNorth
 .updateMapView
 	call LoadCurrentMapView
-	ld a, [wSpriteStateData1 + 3] ; delta Y
+	ld a, [wSpritePlayerStateData1YStepVector]
 	cp $01
 	jr nz, .checkIfMovingNorth2
 ; if moving south
@@ -1609,7 +1609,7 @@ AdvancePlayerSprite::
 	call ScheduleNorthRowRedraw
 	jr .scrollBackgroundAndSprites
 .checkIfMovingEast2
-	ld a, [wSpriteStateData1 + 5] ; delta X
+	ld a, [wSpritePlayerStateData1XStepVector]
 	cp $01
 	jr nz, .checkIfMovingWest2
 ; if moving east
@@ -1621,9 +1621,9 @@ AdvancePlayerSprite::
 ; if moving west
 	call ScheduleWestColumnRedraw
 .scrollBackgroundAndSprites
-	ld a, [wSpriteStateData1 + 3] ; delta Y
+	ld a, [wSpritePlayerStateData1YStepVector]
 	ld b, a
-	ld a, [wSpriteStateData1 + 5] ; delta X
+	ld a, [wSpritePlayerStateData1XStepVector]
 	ld c, a
 	sla b
 	sla c
@@ -1635,7 +1635,7 @@ AdvancePlayerSprite::
 	ld [hSCX], a ; update background scroll X
 ; shift all the sprites in the direction opposite of the player's motion
 ; so that the player appears to move relative to them
-	ld hl, wSpriteStateData1 + $14
+	ld hl, wSprite01StateData1YPixels
 	ld a, [wNumSprites] ; number of sprites
 	and a ; are there any sprites?
 	jr z, .done
@@ -1845,8 +1845,8 @@ DrawTileBlock::
 ; function to update joypad state and simulate button presses
 JoypadOverworld::
 	xor a
-	ld [wSpriteStateData1 + 3], a
-	ld [wSpriteStateData1 + 5], a
+	ld [wSpritePlayerStateData1YStepVector], a
+	ld [wSpritePlayerStateData1XStepVector], a
 	call RunMapScript
 	call Joypad
 	ld a, [wFlags_D733]
@@ -1920,7 +1920,7 @@ CollisionCheckOnWater::
 	jp nz, .noCollision ; return and clear carry if button presses are being simulated
 	ld a, [wPlayerDirection] ; the direction that the player is trying to go in
 	ld d, a
-	ld a, [wSpriteStateData1 + 12] ; the player sprite's collision data (bit field) (set in the sprite movement code)
+	ld a, [wSpritePlayerStateData1CollisionData]
 	and d ; check if a sprite is in the direction the player is trying to go
 	jr nz, .checkIfNextTileIsPassable ; bug?
 	ld hl, TilePairCollisionsWater
@@ -2168,8 +2168,8 @@ LoadMapHeader::
 	ld [wNumSprites], a ; save the number of sprites
 	push hl
 ; zero C110-C1FF and C210-C2FF
-	ld hl, wSpriteStateData1 + $10
-	ld de, wSpriteStateData2 + $10
+	ld hl, wSprite01StateData1
+	ld de, wSprite01StateData2
 	xor a
 	ld b, $f0
 .zeroSpriteDataLoop
@@ -2179,7 +2179,7 @@ LoadMapHeader::
 	dec b
 	jr nz, .zeroSpriteDataLoop
 ; initialize all C100-C1FF sprite entries to disabled (other than player's)
-	ld hl, wSpriteStateData1 + $12
+	ld hl, wSprite01StateData1ImageIndex
 	ld de, $10
 	ld c, $0f
 .disableSpriteEntriesLoop
@@ -2188,7 +2188,7 @@ LoadMapHeader::
 	dec c
 	jr nz, .disableSpriteEntriesLoop
 	pop hl
-	ld de, wSpriteStateData1 + $10
+	ld de, wSprite01StateData1
 	ld a, [wNumSprites] ; number of sprites
 	and a ; are there any sprites?
 	jp z, .finishUp ; if there are no sprites, skip the rest

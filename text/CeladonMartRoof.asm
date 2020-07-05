@@ -11,24 +11,27 @@ _CeladonMartRoofText_484f3::
 	para "Thank you!"
 
 	para "You can have this"
-	line "from me!@@"
+	line "from me!@"
+	text_end
 
 _CeladonMartRoofText_484f9::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _CeladonMartRoofText_484fe::
-	text ""
+	text_start
 
 	para "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text " contains"
 	line "ICE BEAM!"
 
 	para "It can freeze the"
-	line "target sometimes!@@"
+	line "target sometimes!@"
+	text_end
 
 _CeladonMartRoofText_48504::
 	text "Yay!"
@@ -38,24 +41,27 @@ _CeladonMartRoofText_48504::
 	para "Thank you!"
 
 	para "You can have this"
-	line "from me!@@"
+	line "from me!@"
+	text_end
 
 _CeladonMartRoofText_4850a::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _CeladonMartRoofText_4850f::
-	text ""
+	text_start
 
 	para "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text " contains"
 	line "ROCK SLIDE!"
 
 	para "It can spook the"
-	line "target sometimes!@@"
+	line "target sometimes!@"
+	text_end
 
 _CeladonMartRoofText_48515::
 	text "Yay!"
@@ -65,26 +71,31 @@ _CeladonMartRoofText_48515::
 	para "Thank you!"
 
 	para "You can have this"
-	line "from me!@@"
+	line "from me!@"
+	text_end
 
 _ReceivedTM49Text::
 	text "<PLAYER> received"
-	line "TM49!@@"
+	line "TM49!@"
+	text_end
 
 _CeladonMartRoofText_48520::
-	text ""
+	text_start
 
 	para "TM49 contains"
-	line "TRI ATTACK!@@"
+	line "TRI ATTACK!@"
+	text_end
 
 _CeladonMartRoofText_48526::
 	text "You don't have"
-	line "space for this!@@"
+	line "space for this!@"
+	text_end
 
 _CeladonMartRoofText_4852c::
 	text "No thank you!"
 	line "I'm not thirsty"
-	cont "after all!@@"
+	cont "after all!@"
+	text_end
 
 _CeladonMartRoofText1::
 	text "My sister is a"
@@ -126,8 +137,8 @@ _VendingMachineText4::
 	done
 
 _VendingMachineText5::
-	TX_RAM wcf4b
-	text ""
+	text_ram wcf4b
+	text_start
 	line "popped out!"
 	done
 

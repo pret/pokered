@@ -68,10 +68,11 @@ _VermilionCityText4::
 
 _VermilionCityText5::
 	text "MACHOP: Guoh!"
-	line "Gogogoh!@@"
+	line "Gogogoh!@"
+	text_end
 
 _VermilionCityText14::
-	text ""
+	text_start
 	para "A MACHOP is"
 	line "stomping the land"
 	cont "flat."

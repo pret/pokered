@@ -16,10 +16,6 @@ ENDM
 coins equs "bcd2"
 money equs "bcd3"
 
-RGB: MACRO
-	dw (\3 << 10 | \2 << 5 | \1)
-ENDM
-
 tmlearn: MACRO
 x = 0
 	REPT _NARG

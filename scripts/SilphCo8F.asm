@@ -111,7 +111,7 @@ SilphCo8TrainerHeader2:
 	db $ff
 
 SilphCo8Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo8Text_565c3
 	jr nz, .asm_565b8
@@ -121,63 +121,63 @@ SilphCo8Text1:
 	jp TextScriptEnd
 
 SilphCo8Text_565be:
-	TX_FAR _SilphCo8Text_565be
-	db "@"
+	text_far _SilphCo8Text_565be
+	text_end
 
 SilphCo8Text_565c3:
-	TX_FAR _SilphCo8Text_565c3
-	db "@"
+	text_far _SilphCo8Text_565c3
+	text_end
 
 SilphCo8Text2:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo8Text3:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo8Text4:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo8BattleText1:
-	TX_FAR _SilphCo8BattleText1
-	db "@"
+	text_far _SilphCo8BattleText1
+	text_end
 
 SilphCo8EndBattleText1:
-	TX_FAR _SilphCo8EndBattleText1
-	db "@"
+	text_far _SilphCo8EndBattleText1
+	text_end
 
 SilphCo8AfterBattleText1:
-	TX_FAR _SilphCo8AfterBattleText1
-	db "@"
+	text_far _SilphCo8AfterBattleText1
+	text_end
 
 SilphCo8BattleText2:
-	TX_FAR _SilphCo8BattleText2
-	db "@"
+	text_far _SilphCo8BattleText2
+	text_end
 
 SilphCo8EndBattleText2:
-	TX_FAR _SilphCo8EndBattleText2
-	db "@"
+	text_far _SilphCo8EndBattleText2
+	text_end
 
 SilphCo8AfterBattleText2:
-	TX_FAR _SilphCo8AfterBattleText2
-	db "@"
+	text_far _SilphCo8AfterBattleText2
+	text_end
 
 SilphCo8BattleText3:
-	TX_FAR _SilphCo8BattleText3
-	db "@"
+	text_far _SilphCo8BattleText3
+	text_end
 
 SilphCo8EndBattleText3:
-	TX_FAR _SilphCo8EndBattleText3
-	db "@"
+	text_far _SilphCo8EndBattleText3
+	text_end
 
 SilphCo8AfterBattleText3:
-	TX_FAR _SilphCo8AfterBattleText3
-	db "@"
+	text_far _SilphCo8AfterBattleText3
+	text_end

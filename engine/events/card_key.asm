@@ -72,14 +72,14 @@ SilphCoMapList:
 	db $FF
 
 CardKeySuccessText::
-	TX_FAR _CardKeySuccessText1
-	TX_SFX_ITEM_1
-	TX_FAR _CardKeySuccessText2
-	db "@"
+	text_far _CardKeySuccessText1
+	sound_get_item_1
+	text_far _CardKeySuccessText2
+	text_end
 
 CardKeyFailText::
-	TX_FAR _CardKeyFailText
-	db "@"
+	text_far _CardKeyFailText
+	text_end
 
 ; d = Y
 ; e = X
@@ -88,7 +88,7 @@ GetCoordsInFrontOfPlayer:
 	ld d, a
 	ld a, [wXCoord]
 	ld e, a
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a
 	jr nz, .notFacingDown
 ; facing down

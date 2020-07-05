@@ -39,7 +39,8 @@ _CompletedDexText::
 	line "You completed"
 	cont "your #DEX!"
 	cont "Congratulations!"
-	cont "...@@"
+	cont "...@"
+	text_end
 
 _CeladonMansion3Text5::
 	text "It's the game"

@@ -6,5 +6,5 @@ CeladonMansion2F_TextPointers:
 	dw CeladonMansion2Text1
 
 CeladonMansion2Text1:
-	TX_FAR _CeladonMansion2Text1
-	db "@"
+	text_far _CeladonMansion2Text1
+	text_end

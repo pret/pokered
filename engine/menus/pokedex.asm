@@ -478,7 +478,7 @@ ShowPokedexDataInternal:
 	coord hl, 2, 8
 	ld a, "№"
 	ld [hli], a
-	ld a, "⠄"
+	ld a, "<DOT>"
 	ld [hli], a
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 3
@@ -518,14 +518,14 @@ ShowPokedexDataInternal:
 	coord hl, 12, 6
 	lb bc, 1, 2
 	call PrintNumber ; print feet (height)
-	ld a, $60 ; feet symbol tile (one tick)
+	ld a, "′"
 	ld [hl], a
 	inc de
 	inc de ; de = address of inches (height)
 	coord hl, 15, 6
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber ; print inches (height)
-	ld a, $61 ; inches symbol tile (two ticks)
+	ld a, "″"
 	ld [hl], a
 ; now print the weight (note that weight is stored in tenths of pounds internally)
 	inc de
@@ -558,7 +558,7 @@ ShowPokedexDataInternal:
 	inc hl
 	ld a, [hli]
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl], "⠄" ; decimal point tile
+	ld [hl], "<DOT>" ; decimal point tile
 	pop af
 	ld [hDexWeight + 1], a ; restore original value of [hDexWeight + 1]
 	pop af
@@ -590,7 +590,7 @@ ShowPokedexDataInternal:
 	ret
 
 HeightWeightText:
-	db   "HT  ?",$60,"??",$61
+	db   "HT  ?′??″"
 	next "WT   ???lb@"
 
 ; XXX does anything point to this?

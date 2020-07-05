@@ -84,7 +84,8 @@ _ViridianCityText_191ca::
 
 _ReceivedTM42Text::
 	text "<PLAYER> received"
-	line "TM42!@@"
+	line "TM42!@"
+	text_end
 
 _TM42Explanation::
 	text "TM42 contains"

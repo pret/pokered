@@ -1,13 +1,13 @@
 MAP_TILESET_SIZE EQU $60
 
 UpdatePlayerSprite:
-	ld a, [wSpriteStateData2]
+	ld a, [wSpritePlayerStateData2WalkAnimationCounter]
 	and a
 	jr z, .checkIfTextBoxInFrontOfSprite
 	cp $ff
 	jr z, .disableSprite
 	dec a
-	ld [wSpriteStateData2], a
+	ld [wSpritePlayerStateData2WalkAnimationCounter], a
 	jr .disableSprite
 ; check if a text box is in front of the sprite by checking if the lower left
 ; background tile the sprite is standing on is greater than $5F, which is
@@ -19,7 +19,7 @@ UpdatePlayerSprite:
 	jr c, .lowerLeftTileIsMapTile
 .disableSprite
 	ld a, $ff
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	ret
 .lowerLeftTileIsMapTile
 	call DetectCollisionBetweenSprites
@@ -51,11 +51,11 @@ UpdatePlayerSprite:
 .notMoving
 ; zero the animation counters
 	xor a
-	ld [wSpriteStateData1 + 7], a
-	ld [wSpriteStateData1 + 8], a
+	ld [wSpritePlayerStateData1IntraAnimFrameCounter], a
+	ld [wSpritePlayerStateData1AnimFrameCounter], a
 	jr .calcImageIndex
 .next
-	ld [wSpriteStateData1 + 9], a ; facing direction
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, [wFontLoaded]
 	bit 0, a
 	jr nz, .notMoving
@@ -79,11 +79,11 @@ UpdatePlayerSprite:
 	and $3
 	ld [hl], a
 .calcImageIndex
-	ld a, [wSpriteStateData1 + 8]
+	ld a, [wSpritePlayerStateData1AnimFrameCounter]
 	ld b, a
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	add b
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 .skipSpriteAnim
 ; If the player is standing on a grass tile, make the player's sprite have
 ; lower priority than the background so that it's partially obscured by the
@@ -97,7 +97,7 @@ UpdatePlayerSprite:
 	jr nz, .next2
 	ld a, $80
 .next2
-	ld [wSpriteStateData2 + 7], a
+	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
 
 UnusedReadSpriteDataFunction:
@@ -397,7 +397,7 @@ UpdateSpriteMovementDelay:
 notYetMoving:
 	ld h, wSpriteStateData1 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $8
+	add wSpritePlayerStateData1AnimFrameCounter - wSpritePlayerStateData1
 	ld l, a
 	ld [hl], $0             ; c1x8 = 0 (walk animation frame)
 	jp UpdateSpriteImage
@@ -452,7 +452,7 @@ InitializeSpriteStatus:
 InitializeSpriteScreenPosition:
 	ld h, wSpriteStateData2 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $4
+	add wSpritePlayerStateData2MapY - wSpritePlayerStateData2
 	ld l, a
 	ld a, [wYCoord]
 	ld b, a
@@ -480,13 +480,13 @@ CheckSpriteAvailability:
 	jp nz, .spriteInvisible
 	ld h, wSpriteStateData2 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $6
+	add wSpritePlayerStateData2MovementByte1 - wSpritePlayerStateData2
 	ld l, a
 	ld a, [hl]      ; c2x6: movement byte 1
 	cp $fe
 	jr c, .skipXVisibilityTest ; movement byte 1 < $fe (i.e. the sprite's movement is scripted)
 	ld a, [hCurrentSpriteOffset]
-	add $4
+	add wSpritePlayerStateData2MapY - wSpritePlayerStateData2
 	ld l, a
 	ld b, [hl]      ; c2x4: Y pos (+4)
 	ld a, [wYCoord]
@@ -528,7 +528,7 @@ CheckSpriteAvailability:
 .spriteInvisible
 	ld h, wSpriteStateData1 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $2
+	add wSpritePlayerStateData1ImageIndex - wSpritePlayerStateData1
 	ld l, a
 	ld [hl], $ff       ; c1x2
 	scf
@@ -582,7 +582,7 @@ UpdateSpriteImage:
 CanWalkOntoTile:
 	ld h, wSpriteStateData2 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $6
+	add wSpritePlayerStateData2MovementByte1 - wSpritePlayerStateData2
 	ld l, a
 	ld a, [hl]         ; c2x6 (movement byte 1)
 	cp $fe
@@ -610,7 +610,7 @@ CanWalkOntoTile:
 	jr z, .impassable  ; if $ff, no movement allowed (however, changing direction is)
 	ld h, wSpriteStateData1 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $4
+	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld l, a
 	ld a, [hli]        ; c1x4 (screen Y pos)
 	add $4             ; align to blocks (Y pos is always 4 pixels off)
@@ -636,7 +636,7 @@ CanWalkOntoTile:
 	jr nz, .impassable ; collision between sprites, don't go there
 	ld h, wSpriteStateData2 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $2
+	add wSpritePlayerStateData2YDisplacement - wSpritePlayerStateData2
 	ld l, a
 	ld a, [hli]        ; c2x2 (sprite Y displacement, initialized at $8, keep track of where a sprite did go)
 	bit 7, d           ; check if going upwards (d=$ff)
@@ -665,7 +665,7 @@ CanWalkOntoTile:
 	and a              ; clear carry (marking success)
 	ret
 .impassable
-	ld h, $c1
+	ld h, wSpriteStateData1 / $100
 	ld a, [hCurrentSpriteOffset]
 	inc a
 	ld l, a
@@ -693,7 +693,7 @@ CanWalkOntoTile:
 GetTileSpriteStandsOn:
 	ld h, wSpriteStateData1 / $100
 	ld a, [hCurrentSpriteOffset]
-	add $4
+	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld l, a
 	ld a, [hli]     ; c1x4: screen Y position
 	add $4          ; align to 2*2 tile blocks (Y position is always off 4 pixels to the top)
@@ -807,12 +807,12 @@ InitScriptedNPCMovement:
 	jp AnimScriptedNPCMovement
 
 GetSpriteScreenYPointer:
-	ld a, $4
+	ld a, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld b, a
 	jr GetSpriteScreenXYPointerCommon
 
 GetSpriteScreenXPointer:
-	ld a, $6
+	ld a, wSpritePlayerStateData1XPixels - wSpritePlayerStateData1
 	ld b, a
 
 GetSpriteScreenXYPointerCommon:
@@ -826,7 +826,7 @@ GetSpriteScreenXYPointerCommon:
 AnimScriptedNPCMovement:
 	ld hl, wSpriteStateData2
 	ld a, [hCurrentSpriteOffset]
-	add $e
+	add wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2
 	ld l, a
 	ld a, [hl] ; VRAM slot
 	dec a
@@ -834,7 +834,7 @@ AnimScriptedNPCMovement:
 	ld b, a
 	ld hl, wSpriteStateData1
 	ld a, [hCurrentSpriteOffset]
-	add $9
+	add wSpritePlayerStateData1FacingDirection - wSpritePlayerStateData1
 	ld l, a
 	ld a, [hl] ; facing direction
 	cp SPRITE_FACING_DOWN
@@ -853,7 +853,7 @@ AnimScriptedNPCMovement:
 	call AdvanceScriptedNPCAnimFrameCounter
 	ld hl, wSpriteStateData1
 	ld a, [hCurrentSpriteOffset]
-	add $2
+	add wSpritePlayerStateData1ImageIndex - wSpritePlayerStateData1
 	ld l, a
 	ld a, [hSpriteVRAMSlotAndFacing]
 	ld b, a

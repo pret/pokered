@@ -8,8 +8,9 @@ _TM29PreReceiveText::
 _ReceivedTM29Text::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _TM29ExplanationText::
 	text "TM29 is PSYCHIC!"

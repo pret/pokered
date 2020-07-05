@@ -1838,10 +1838,10 @@ AnimationWavyScreen:
 	call Delay3
 	xor a
 	ld [hAutoBGTransferEnabled], a
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	ld d, $80 ; terminator
-	ld e, SCREEN_HEIGHT_PIXELS - 1
+	ld e, SCREEN_HEIGHT_PX - 1
 	ld c, $ff
 	ld hl, WavyScreenLineOffsets
 .loop
@@ -2538,7 +2538,7 @@ AnimationShakeEnemyHUD:
 
 ; Now that the regular BG is showing the same thing the window was, move the
 ; window off the screen so that we can modify its contents below.
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 
 ; Copy wTileMap to VRAM such that the row below the enemy HUD (in wTileMap) is
@@ -2575,7 +2575,7 @@ AnimationShakeEnemyHUD:
 ; Restore the original graphics.
 	call AnimationShowMonPic
 	call ClearSprites
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	ld hl, vBGMap1
 	call BattleAnimCopyTileMapToVRAM

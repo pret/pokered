@@ -189,7 +189,7 @@ ENDC
 
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
-	ld a, SCREEN_HEIGHT_PIXELS
+	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	ld d, 144
 .scrollTitleScreenGameVersionLoop

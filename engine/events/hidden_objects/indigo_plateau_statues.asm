@@ -1,5 +1,5 @@
 IndigoPlateauStatues::
-	TX_ASM
+	text_asm
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
 	ld a, [wXCoord]
@@ -12,13 +12,13 @@ IndigoPlateauStatues::
 	jp TextScriptEnd
 
 IndigoPlateauStatuesText1:
-	TX_FAR _IndigoPlateauStatuesText1
-	db "@"
+	text_far _IndigoPlateauStatuesText1
+	text_end
 
 IndigoPlateauStatuesText2:
-	TX_FAR _IndigoPlateauStatuesText2
-	db "@"
+	text_far _IndigoPlateauStatuesText2
+	text_end
 
 IndigoPlateauStatuesText3:
-	TX_FAR _IndigoPlateauStatuesText3
-	db "@"
+	text_far _IndigoPlateauStatuesText3
+	text_end

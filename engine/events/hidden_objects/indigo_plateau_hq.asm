@@ -1,10 +1,10 @@
 PrintIndigoPlateauHQText:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump IndigoPlateauHQText
 
 IndigoPlateauHQText::
-	TX_FAR _IndigoPlateauHQText
-	db "@"
+	text_far _IndigoPlateauHQText
+	text_end

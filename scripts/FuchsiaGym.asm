@@ -140,7 +140,7 @@ FuchsiaGymTrainerHeader5:
 	db $ff
 
 FuchsiaGymText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_KOGA
 	jr z, .beginBattle
 	CheckEventReuseA EVENT_GOT_TM06
@@ -175,143 +175,143 @@ FuchsiaGymText1:
 	jp TextScriptEnd
 
 KogaBeforeBattleText:
-	TX_FAR _KogaBeforeBattleText
-	db "@"
+	text_far _KogaBeforeBattleText
+	text_end
 
 KogaAfterBattleText:
-	TX_FAR _KogaAfterBattleText
-	db "@"
+	text_far _KogaAfterBattleText
+	text_end
 
 KogaExplainToxicText:
-	TX_FAR _KogaExplainToxicText
-	db "@"
+	text_far _KogaExplainToxicText
+	text_end
 
 FuchsiaGymText9:
-	TX_FAR _FuchsiaGymText9
-	db "@"
+	text_far _FuchsiaGymText9
+	text_end
 
 FuchsiaGymText10:
-	TX_FAR _ReceivedTM06Text
-	TX_SFX_KEY_ITEM
+	text_far _ReceivedTM06Text
+	sound_get_key_item
 
 TM06ExplanationText:
-	TX_FAR _TM06ExplanationText
-	db "@"
+	text_far _TM06ExplanationText
+	text_end
 
 FuchsiaGymText11:
-	TX_FAR _TM06NoRoomText
-	db "@"
+	text_far _TM06NoRoomText
+	text_end
 
 FuchsiaGymText2:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText1:
-	TX_FAR _FuchsiaGymBattleText1
-	db "@"
+	text_far _FuchsiaGymBattleText1
+	text_end
 
 FuchsiaGymEndBattleText1:
-	TX_FAR _FuchsiaGymEndBattleText1
-	db "@"
+	text_far _FuchsiaGymEndBattleText1
+	text_end
 
 FuchsiaGymAfterBattleText1:
-	TX_FAR _FuchsiaGymAfterBattleText1
-	db "@"
+	text_far _FuchsiaGymAfterBattleText1
+	text_end
 
 FuchsiaGymText3:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText2:
-	TX_FAR _FuchsiaGymBattleText2
-	db "@"
+	text_far _FuchsiaGymBattleText2
+	text_end
 
 FuchsiaGymEndBattleText2:
-	TX_FAR _FuchsiaGymEndBattleText2
-	db "@"
+	text_far _FuchsiaGymEndBattleText2
+	text_end
 
 FuchsiaGymAfterBattleText2:
-	TX_FAR _FuchsiaGymAfterBattleText2
-	db "@"
+	text_far _FuchsiaGymAfterBattleText2
+	text_end
 
 FuchsiaGymText4:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText3:
-	TX_FAR _FuchsiaGymBattleText3
-	db "@"
+	text_far _FuchsiaGymBattleText3
+	text_end
 
 FuchsiaGymEndBattleText3:
-	TX_FAR _FuchsiaGymEndBattleText3
-	db "@"
+	text_far _FuchsiaGymEndBattleText3
+	text_end
 
 FuchsiaGymAfterBattleText3:
-	TX_FAR _FuchsiaGymAfterBattleText3
-	db "@"
+	text_far _FuchsiaGymAfterBattleText3
+	text_end
 
 FuchsiaGymText5:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText4:
-	TX_FAR _FuchsiaGymBattleText4
-	db "@"
+	text_far _FuchsiaGymBattleText4
+	text_end
 
 FuchsiaGymEndBattleText4:
-	TX_FAR _FuchsiaGymEndBattleText4
-	db "@"
+	text_far _FuchsiaGymEndBattleText4
+	text_end
 
 FuchsiaGymAfterBattleText4:
-	TX_FAR _FuchsiaGymAfterBattleText4
-	db "@"
+	text_far _FuchsiaGymAfterBattleText4
+	text_end
 
 FuchsiaGymText6:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText5:
-	TX_FAR _FuchsiaGymBattleText5
-	db "@"
+	text_far _FuchsiaGymBattleText5
+	text_end
 
 FuchsiaGymEndBattleText5:
-	TX_FAR _FuchsiaGymEndBattleText5
-	db "@"
+	text_far _FuchsiaGymEndBattleText5
+	text_end
 
 FuchsiaGymAfterBattleText5:
-	TX_FAR _FuchsiaGymAfterBattleText5
-	db "@"
+	text_far _FuchsiaGymAfterBattleText5
+	text_end
 
 FuchsiaGymText7:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaGymTrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FuchsiaGymBattleText6:
-	TX_FAR _FuchsiaGymBattleText6
-	db "@"
+	text_far _FuchsiaGymBattleText6
+	text_end
 
 FuchsiaGymEndBattleText6:
-	TX_FAR _FuchsiaGymEndBattleText6
-	db "@"
+	text_far _FuchsiaGymEndBattleText6
+	text_end
 
 FuchsiaGymAfterBattleText6:
-	TX_FAR _FuchsiaGymAfterBattleText6
-	db "@"
+	text_far _FuchsiaGymAfterBattleText6
+	text_end
 
 FuchsiaGymText8:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_KOGA
 	ld hl, FuchsiaGymText_75653
 	jr nz, .asm_50671
@@ -321,9 +321,9 @@ FuchsiaGymText8:
 	jp TextScriptEnd
 
 FuchsiaGymText_7564e:
-	TX_FAR _FuchsiaGymText_7564e
-	db "@"
+	text_far _FuchsiaGymText_7564e
+	text_end
 
 FuchsiaGymText_75653:
-	TX_FAR _FuchsiaGymText_75653
-	db "@"
+	text_far _FuchsiaGymText_75653
+	text_end

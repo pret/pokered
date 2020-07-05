@@ -2,4 +2,4 @@ UndergroundPathNorthSouth_Script:
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathNorthSouth_TextPointers:
-	db "@"
+	text_end

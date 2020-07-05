@@ -1,6 +1,7 @@
 _SSAnne8Text8::
 	text "WIGGLYTUFF: Puup"
-	line "pupuu!@@"
+	line "pupuu!@"
+	text_end
 
 _SSAnne8BattleText1::
 	text "I travel alone"

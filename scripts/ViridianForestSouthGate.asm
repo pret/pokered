@@ -6,9 +6,9 @@ ViridianForestSouthGate_TextPointers:
 	dw ViridianForestEntranceText2
 
 ViridianForestEntranceText1:
-	TX_FAR _ViridianForestEntranceText1
-	db "@"
+	text_far _ViridianForestEntranceText1
+	text_end
 
 ViridianForestEntranceText2:
-	TX_FAR _ViridianForestEntranceText2
-	db "@"
+	text_far _ViridianForestEntranceText2
+	text_end

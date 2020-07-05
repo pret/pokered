@@ -254,62 +254,62 @@ PartyMenuMessagePointers:
 	dw PartyMenuItemUseText
 
 PartyMenuNormalText:
-	TX_FAR _PartyMenuNormalText
-	db "@"
+	text_far _PartyMenuNormalText
+	text_end
 
 PartyMenuItemUseText:
-	TX_FAR _PartyMenuItemUseText
-	db "@"
+	text_far _PartyMenuItemUseText
+	text_end
 
 PartyMenuBattleText:
-	TX_FAR _PartyMenuBattleText
-	db "@"
+	text_far _PartyMenuBattleText
+	text_end
 
 PartyMenuUseTMText:
-	TX_FAR _PartyMenuUseTMText
-	db "@"
+	text_far _PartyMenuUseTMText
+	text_end
 
 PartyMenuSwapMonText:
-	TX_FAR _PartyMenuSwapMonText
-	db "@"
+	text_far _PartyMenuSwapMonText
+	text_end
 
 PotionText:
-	TX_FAR _PotionText
-	db "@"
+	text_far _PotionText
+	text_end
 
 AntidoteText:
-	TX_FAR _AntidoteText
-	db "@"
+	text_far _AntidoteText
+	text_end
 
 ParlyzHealText:
-	TX_FAR _ParlyzHealText
-	db "@"
+	text_far _ParlyzHealText
+	text_end
 
 BurnHealText:
-	TX_FAR _BurnHealText
-	db "@"
+	text_far _BurnHealText
+	text_end
 
 IceHealText:
-	TX_FAR _IceHealText
-	db "@"
+	text_far _IceHealText
+	text_end
 
 AwakeningText:
-	TX_FAR _AwakeningText
-	db "@"
+	text_far _AwakeningText
+	text_end
 
 FullHealText:
-	TX_FAR _FullHealText
-	db "@"
+	text_far _FullHealText
+	text_end
 
 ReviveText:
-	TX_FAR _ReviveText
-	db "@"
+	text_far _ReviveText
+	text_end
 
 RareCandyText:
-	TX_FAR _RareCandyText
-	TX_SFX_ITEM_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
-	TX_BLINK
-	db "@"
+	text_far _RareCandyText
+	sound_get_item_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
+	text_promptbutton
+	text_end
 
 SetPartyMenuHPBarColor:
 	ld hl, wPartyMenuHPBarColors

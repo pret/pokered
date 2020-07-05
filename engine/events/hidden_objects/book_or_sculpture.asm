@@ -1,5 +1,5 @@
 BookOrSculptureText::
-	TX_ASM
+	text_asm
 	ld hl, PokemonBooksText
 	ld a, [wCurMapTileset]
 	cp MANSION ; Celadon Mansion tileset
@@ -13,9 +13,9 @@ BookOrSculptureText::
 	jp TextScriptEnd
 
 PokemonBooksText:
-	TX_FAR _PokemonBooksText
-	db "@"
+	text_far _PokemonBooksText
+	text_end
 
 DiglettSculptureText:
-	TX_FAR _DiglettSculptureText
-	db "@"
+	text_far _DiglettSculptureText
+	text_end

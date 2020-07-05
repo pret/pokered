@@ -21,4 +21,4 @@ RedsHouse2FScript1:
 	ret
 
 RedsHouse2F_TextPointers:
-	db "@"
+	text_end

@@ -96,81 +96,81 @@ PokemonTower5TrainerHeader3:
 	db $ff
 
 PokemonTower5Text1:
-	TX_FAR _PokemonTower5Text1
-	db "@"
+	text_far _PokemonTower5Text1
+	text_end
 
 PokemonTower5Text2:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower5TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower5BattleText1:
-	TX_FAR _PokemonTower5BattleText1
-	db "@"
+	text_far _PokemonTower5BattleText1
+	text_end
 
 PokemonTower5EndBattleText1:
-	TX_FAR _PokemonTower5EndBattleText1
-	db "@"
+	text_far _PokemonTower5EndBattleText1
+	text_end
 
 PokemonTower5AfterBattleText1:
-	TX_FAR _PokemonTower5AfterBattleText1
-	db "@"
+	text_far _PokemonTower5AfterBattleText1
+	text_end
 
 PokemonTower5Text3:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower5TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower5BattleText2:
-	TX_FAR _PokemonTower5BattleText2
-	db "@"
+	text_far _PokemonTower5BattleText2
+	text_end
 
 PokemonTower5EndBattleText2:
-	TX_FAR _PokemonTower5EndBattleText2
-	db "@"
+	text_far _PokemonTower5EndBattleText2
+	text_end
 
 PokemonTower5AfterBattleText2:
-	TX_FAR _PokemonTower5AfterBattleText2
-	db "@"
+	text_far _PokemonTower5AfterBattleText2
+	text_end
 
 PokemonTower5Text4:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower5TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower5BattleText3:
-	TX_FAR _PokemonTower5BattleText3
-	db "@"
+	text_far _PokemonTower5BattleText3
+	text_end
 
 PokemonTower5EndBattleText3:
-	TX_FAR _PokemonTower5EndBattleText3
-	db "@"
+	text_far _PokemonTower5EndBattleText3
+	text_end
 
 PokemonTower5AfterBattleText3:
-	TX_FAR _PokemonTower5AfterBattleText3
-	db "@"
+	text_far _PokemonTower5AfterBattleText3
+	text_end
 
 PokemonTower5Text5:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower5TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower5BattleText4:
-	TX_FAR _PokemonTower5BattleText4
-	db "@"
+	text_far _PokemonTower5BattleText4
+	text_end
 
 PokemonTower5EndBattleText4:
-	TX_FAR _PokemonTower5EndBattleText4
-	db "@"
+	text_far _PokemonTower5EndBattleText4
+	text_end
 
 PokemonTower5AfterBattleText4:
-	TX_FAR _PokemonTower5AfterBattleText4
-	db "@"
+	text_far _PokemonTower5AfterBattleText4
+	text_end
 
 PokemonTower5Text7:
-	TX_FAR _PokemonTower5Text7
-	db "@"
+	text_far _PokemonTower5Text7
+	text_end

@@ -8,7 +8,8 @@ _SaffronHouse1Text1::
 	done
 
 _SaffronHouse1Text2::
-	text "PIDGEY: Kurukkoo!@@"
+	text "PIDGEY: Kurukkoo!@"
+	text_end
 
 _SaffronHouse1Text3::
 	text "The COPYCAT is"

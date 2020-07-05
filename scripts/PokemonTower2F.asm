@@ -127,7 +127,7 @@ PokemonTower2F_TextPointers:
 	dw PokemonTower2Text2
 
 PokemonTower2Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
@@ -168,21 +168,21 @@ PokemonTower2Text1:
 	jp TextScriptEnd
 
 PokemonTower2Text_6062d:
-	TX_FAR _PokemonTower2Text_6062d
-	db "@"
+	text_far _PokemonTower2Text_6062d
+	text_end
 
 PokemonTower2Text_60632:
-	TX_FAR _PokemonTower2Text_60632
-	db "@"
+	text_far _PokemonTower2Text_60632
+	text_end
 
 PokemonTower2Text_60637:
-	TX_FAR _PokemonTower2Text_60637
-	db "@"
+	text_far _PokemonTower2Text_60637
+	text_end
 
 PokemonTower2Text_6063c:
-	TX_FAR _PokemonTower2Text_6063c
-	db "@"
+	text_far _PokemonTower2Text_6063c
+	text_end
 
 PokemonTower2Text2:
-	TX_FAR _PokemonTower2Text2
-	db "@"
+	text_far _PokemonTower2Text2
+	text_end

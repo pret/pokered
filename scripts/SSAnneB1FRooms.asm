@@ -82,120 +82,120 @@ SSAnne10TrainerHeader5:
 	db $ff
 
 SSAnne10Text1:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text2:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text3:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text4:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text5:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text6:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne10TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne10Text8:
-	TX_FAR _SSAnne10Text8
-	TX_ASM
+	text_far _SSAnne10Text8
+	text_asm
 	ld a, MACHOKE
 	call PlayCry
 	jp TextScriptEnd
 
 SSAnne10BattleText1:
-	TX_FAR _SSAnne10BattleText1
-	db "@"
+	text_far _SSAnne10BattleText1
+	text_end
 
 SSAnne10EndBattleText1:
-	TX_FAR _SSAnne10EndBattleText1
-	db "@"
+	text_far _SSAnne10EndBattleText1
+	text_end
 
 SSAnne10AfterBattleText1:
-	TX_FAR _SSAnne10AfterBattleText1
-	db "@"
+	text_far _SSAnne10AfterBattleText1
+	text_end
 
 SSAnne10BattleText2:
-	TX_FAR _SSAnne10BattleText2
-	db "@"
+	text_far _SSAnne10BattleText2
+	text_end
 
 SSAnne10EndBattleText2:
-	TX_FAR _SSAnne10EndBattleText2
-	db "@"
+	text_far _SSAnne10EndBattleText2
+	text_end
 
 SSAnne10AfterBattleText2:
-	TX_FAR _SSAnne10AfterBattleText2
-	db "@"
+	text_far _SSAnne10AfterBattleText2
+	text_end
 
 SSAnne10BattleText3:
-	TX_FAR _SSAnne10BattleText3
-	db "@"
+	text_far _SSAnne10BattleText3
+	text_end
 
 SSAnne10EndBattleText3:
-	TX_FAR _SSAnne10EndBattleText3
-	db "@"
+	text_far _SSAnne10EndBattleText3
+	text_end
 
 SSAnne10AfterBattleText3:
-	TX_FAR _SSAnne10AfterBattleText3
-	db "@"
+	text_far _SSAnne10AfterBattleText3
+	text_end
 
 SSAnne10BattleText4:
-	TX_FAR _SSAnne10BattleText4
-	db "@"
+	text_far _SSAnne10BattleText4
+	text_end
 
 SSAnne10EndBattleText4:
-	TX_FAR _SSAnne10EndBattleText4
-	db "@"
+	text_far _SSAnne10EndBattleText4
+	text_end
 
 SSAnne10AfterBattleText4:
-	TX_FAR _SSAnne10AfterBattleText4
-	db "@"
+	text_far _SSAnne10AfterBattleText4
+	text_end
 
 SSAnne10BattleText5:
-	TX_FAR _SSAnne10BattleText5
-	db "@"
+	text_far _SSAnne10BattleText5
+	text_end
 
 SSAnne10EndBattleText5:
-	TX_FAR _SSAnne10EndBattleText5
-	db "@"
+	text_far _SSAnne10EndBattleText5
+	text_end
 
 SSAnne10AfterBattleText5:
-	TX_FAR _SSAnne10AfterBattleText5
-	db "@"
+	text_far _SSAnne10AfterBattleText5
+	text_end
 
 SSAnne10BattleText6:
-	TX_FAR _SSAnne10BattleText6
-	db "@"
+	text_far _SSAnne10BattleText6
+	text_end
 
 SSAnne10EndBattleText6:
-	TX_FAR _SSAnne10EndBattleText6
-	db "@"
+	text_far _SSAnne10EndBattleText6
+	text_end
 
 SSAnne10AfterBattleText6:
-	TX_FAR _SSAnne10AfterBattleText6
-	db "@"
+	text_far _SSAnne10AfterBattleText6
+	text_end
 
 SSAnne10Text7:
-	TX_FAR _SSAnne10Text7
-	db "@"
+	text_far _SSAnne10Text7
+	text_end

@@ -24,7 +24,8 @@ _ViridianGymText_74ad3::
 	cont "intense fight!"
 	cont "You have won!"
 	cont "As proof, here is"
-	cont "the EARTHBADGE!@@"
+	cont "the EARTHBADGE!@"
+	text_end
 
 _ViridianGymText_74ad9::
 	text "Having lost, I"
@@ -39,7 +40,8 @@ _ViridianGymText_74ad9::
 
 	para "Let us meet again"
 	line "some day!"
-	cont "Farewell!@@"
+	cont "Farewell!@"
+	text_end
 
 _ViridianGymText12::
 	text "The EARTHBADGE"
@@ -61,10 +63,11 @@ _ViridianGymText12::
 
 _ReceivedTM27Text::
 	text "<PLAYER> received"
-	line "TM27!@@"
+	line "TM27!@"
+	text_end
 
 _TM27ExplanationText::
-	text ""
+	text_start
 
 	para "TM27 is FISSURE!"
 	line "It will take out"

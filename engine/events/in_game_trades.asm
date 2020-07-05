@@ -230,8 +230,7 @@ InGameTrade_GetReceivedMonPointer:
 	ret
 
 InGameTrade_TrainerString:
-	; "TRAINER@@@@@@@@@@"
-	db $5d, "@@@@@@@@@@"
+	db "<TRAINER>@@@@@@@@@@"
 
 InGameTradeTextPointers:
 	dw TradeTextPointers1
@@ -260,71 +259,71 @@ TradeTextPointers3:
 	dw AfterTrade3Text
 
 ConnectCableText:
-	TX_FAR _ConnectCableText
-	db "@"
+	text_far _ConnectCableText
+	text_end
 
 TradedForText:
-	TX_FAR _TradedForText
-	TX_SFX_KEY_ITEM
-	TX_DELAY
-	db "@"
+	text_far _TradedForText
+	sound_get_key_item
+	text_pause
+	text_end
 
 WannaTrade1Text:
-	TX_FAR _WannaTrade1Text
-	db "@"
+	text_far _WannaTrade1Text
+	text_end
 
 NoTrade1Text:
-	TX_FAR _NoTrade1Text
-	db "@"
+	text_far _NoTrade1Text
+	text_end
 
 WrongMon1Text:
-	TX_FAR _WrongMon1Text
-	db "@"
+	text_far _WrongMon1Text
+	text_end
 
 Thanks1Text:
-	TX_FAR _Thanks1Text
-	db "@"
+	text_far _Thanks1Text
+	text_end
 
 AfterTrade1Text:
-	TX_FAR _AfterTrade1Text
-	db "@"
+	text_far _AfterTrade1Text
+	text_end
 
 WannaTrade2Text:
-	TX_FAR _WannaTrade2Text
-	db "@"
+	text_far _WannaTrade2Text
+	text_end
 
 NoTrade2Text:
-	TX_FAR _NoTrade2Text
-	db "@"
+	text_far _NoTrade2Text
+	text_end
 
 WrongMon2Text:
-	TX_FAR _WrongMon2Text
-	db "@"
+	text_far _WrongMon2Text
+	text_end
 
 Thanks2Text:
-	TX_FAR _Thanks2Text
-	db "@"
+	text_far _Thanks2Text
+	text_end
 
 AfterTrade2Text:
-	TX_FAR _AfterTrade2Text
-	db "@"
+	text_far _AfterTrade2Text
+	text_end
 
 WannaTrade3Text:
-	TX_FAR _WannaTrade3Text
-	db "@"
+	text_far _WannaTrade3Text
+	text_end
 
 NoTrade3Text:
-	TX_FAR _NoTrade3Text
-	db "@"
+	text_far _NoTrade3Text
+	text_end
 
 WrongMon3Text:
-	TX_FAR _WrongMon3Text
-	db "@"
+	text_far _WrongMon3Text
+	text_end
 
 Thanks3Text:
-	TX_FAR _Thanks3Text
-	db "@"
+	text_far _Thanks3Text
+	text_end
 
 AfterTrade3Text:
-	TX_FAR _AfterTrade3Text
-	db "@"
+	text_far _AfterTrade3Text
+	text_end

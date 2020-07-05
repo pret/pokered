@@ -149,7 +149,7 @@ Route22Script2:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22Script_50ece
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notDown
 	ld a, SPRITE_FACING_UP
@@ -383,7 +383,7 @@ Route22_TextPointers:
 	dw Route22FrontGateText
 
 Route22Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr z, .asm_5118b
 	ld hl, Route22RivalAfterBattleText1
@@ -396,7 +396,7 @@ Route22Text1:
 	jp TextScriptEnd
 
 Route22Text2:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
 	jr z, .asm_511a4
 	ld hl, Route22RivalAfterBattleText2
@@ -409,37 +409,37 @@ Route22Text2:
 	jp TextScriptEnd
 
 Route22RivalBeforeBattleText1:
-	TX_FAR _Route22RivalBeforeBattleText1
-	db "@"
+	text_far _Route22RivalBeforeBattleText1
+	text_end
 
 Route22RivalAfterBattleText1:
-	TX_FAR _Route22RivalAfterBattleText1
-	db "@"
+	text_far _Route22RivalAfterBattleText1
+	text_end
 
 Route22RivalDefeatedText1:
-	TX_FAR _Route22RivalDefeatedText1
-	db "@"
+	text_far _Route22RivalDefeatedText1
+	text_end
 
 Route22Text_511bc:
-	TX_FAR _Route22Text_511bc
-	db "@"
+	text_far _Route22Text_511bc
+	text_end
 
 Route22RivalBeforeBattleText2:
-	TX_FAR _Route22RivalBeforeBattleText2
-	db "@"
+	text_far _Route22RivalBeforeBattleText2
+	text_end
 
 Route22RivalAfterBattleText2:
-	TX_FAR _Route22RivalAfterBattleText2
-	db "@"
+	text_far _Route22RivalAfterBattleText2
+	text_end
 
 Route22RivalDefeatedText2:
-	TX_FAR _Route22RivalDefeatedText2
-	db "@"
+	text_far _Route22RivalDefeatedText2
+	text_end
 
 Route22Text_511d0:
-	TX_FAR _Route22Text_511d0
-	db "@"
+	text_far _Route22Text_511d0
+	text_end
 
 Route22FrontGateText:
-	TX_FAR _Route22FrontGateText
-	db "@"
+	text_far _Route22FrontGateText
+	text_end

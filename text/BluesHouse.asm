@@ -14,8 +14,9 @@ _DaisyOfferMapText::
 _GotMapText::
 	text "<PLAYER> got a"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _DaisyBagFullText::
 	text "You have too much"

@@ -228,45 +228,45 @@ DisplayPokemartDialogue_::
 	ret
 
 PokemartBuyingGreetingText:
-	TX_FAR _PokemartBuyingGreetingText
-	db "@"
+	text_far _PokemartBuyingGreetingText
+	text_end
 
 PokemartTellBuyPriceText:
-	TX_FAR _PokemartTellBuyPriceText
-	db "@"
+	text_far _PokemartTellBuyPriceText
+	text_end
 
 PokemartBoughtItemText:
-	TX_FAR _PokemartBoughtItemText
-	db "@"
+	text_far _PokemartBoughtItemText
+	text_end
 
 PokemartNotEnoughMoneyText:
-	TX_FAR _PokemartNotEnoughMoneyText
-	db "@"
+	text_far _PokemartNotEnoughMoneyText
+	text_end
 
 PokemartItemBagFullText:
-	TX_FAR _PokemartItemBagFullText
-	db "@"
+	text_far _PokemartItemBagFullText
+	text_end
 
 PokemonSellingGreetingText:
-	TX_FAR _PokemonSellingGreetingText
-	db "@"
+	text_far _PokemonSellingGreetingText
+	text_end
 
 PokemartTellSellPriceText:
-	TX_FAR _PokemartTellSellPriceText
-	db "@"
+	text_far _PokemartTellSellPriceText
+	text_end
 
 PokemartItemBagEmptyText:
-	TX_FAR _PokemartItemBagEmptyText
-	db "@"
+	text_far _PokemartItemBagEmptyText
+	text_end
 
 PokemartUnsellableItemText:
-	TX_FAR _PokemartUnsellableItemText
-	db "@"
+	text_far _PokemartUnsellableItemText
+	text_end
 
 PokemartThankYouText:
-	TX_FAR _PokemartThankYouText
-	db "@"
+	text_far _PokemartThankYouText
+	text_end
 
 PokemartAnythingElseText:
-	TX_FAR _PokemartAnythingElseText
-	db "@"
+	text_far _PokemartAnythingElseText
+	text_end

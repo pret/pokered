@@ -17,4 +17,5 @@ _CopycatsHouse1FText2::
 
 _CopycatsHouse1FText3::
 	text "CHANSEY: Chaan!"
-	line "Sii!@@"
+	line "Sii!@"
+	text_end

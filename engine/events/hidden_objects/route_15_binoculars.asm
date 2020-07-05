@@ -1,5 +1,5 @@
 Route15GateLeftBinoculars:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
@@ -10,5 +10,5 @@ Route15GateLeftBinoculars:
 	jp DisplayMonFrontSpriteInBox
 
 Route15UpstairsBinocularsText::
-	TX_FAR _Route15UpstairsBinocularsText
-	db "@"
+	text_far _Route15UpstairsBinocularsText
+	text_end

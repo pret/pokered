@@ -3,8 +3,8 @@ DisplayOakLabLeftPoster:
 	tx_pre_jump PushStartText
 
 PushStartText::
-	TX_FAR _PushStartText
-	db "@"
+	text_far _PushStartText
+	text_end
 
 DisplayOakLabRightPoster:
 	call EnableAutoTextBoxDrawing
@@ -21,9 +21,9 @@ DisplayOakLabRightPoster:
 	jp PrintPredefTextID
 
 SaveOptionText::
-	TX_FAR _SaveOptionText
-	db "@"
+	text_far _SaveOptionText
+	text_end
 
 StrengthsAndWeaknessesText::
-	TX_FAR _StrengthsAndWeaknessesText
-	db "@"
+	text_far _StrengthsAndWeaknessesText
+	text_end

@@ -71,7 +71,9 @@ spritestatedata1: MACRO
 \1IntraAnimFrameCounter:: db
 \1AnimFrameCounter:: db
 \1FacingDirection:: db
-	ds 6
+	ds 2
+\1CollisionData:: db
+	ds 3
 \1End::
 ENDM
 
@@ -85,7 +87,8 @@ spritestatedata2: MACRO
 \1MovementByte1:: db
 \1GrassPriority:: db
 \1MovementDelay:: db
-	ds 5
+	ds 4
+\1PictureID:: db
 \1ImageBaseOffset:: db
 	ds 1
 \1End::

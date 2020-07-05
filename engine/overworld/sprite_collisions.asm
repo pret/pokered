@@ -1,10 +1,10 @@
 _UpdateSprites::
 	ld h, $c1
 	inc h
-	ld a, $e    ; wSpriteStateData2 + $0e
+	ld a, wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2
 .spriteLoop
 	ld l, a
-	sub $e
+	sub wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2
 	ld c, a
 	ld [hCurrentSpriteOffset], a
 	ld a, [hl]
@@ -20,7 +20,7 @@ _UpdateSprites::
 .skipSprite
 	ld a, l
 	add $10             ; move to next sprite
-	cp $e               ; test for overflow (back at $0e)
+	cp wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2 ; test for overflow (back at beginning)
 	jr nz, .spriteLoop
 	ret
 .updateCurrentSprite

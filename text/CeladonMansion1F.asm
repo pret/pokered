@@ -1,5 +1,6 @@
 _CeladonMansion1Text1::
-	text "MEOWTH: Meow!@@"
+	text "MEOWTH: Meow!@"
+	text_end
 
 _CeladonMansion1Text2::
 	text "My dear #MON"
@@ -11,11 +12,13 @@ _CeladonMansion1Text2::
 
 _CeladonMansion1Text3::
 	text "CLEFAIRY: Pi"
-	line "pippippi!@@"
+	line "pippippi!@"
+	text_end
 
 _CeladonMansion1Text4::
 	text "NIDORAN: Kya"
-	line "kyaoo!@@"
+	line "kyaoo!@"
+	text_end
 
 _CeladonMansion1Text5::
 	text "CELADON MANSION"

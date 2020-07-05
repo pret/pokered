@@ -1,12 +1,12 @@
 PrintCinnabarQuiz:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump CinnabarGymQuiz
 
 CinnabarGymQuiz::
-	TX_ASM
+	text_asm
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
 	ld a, [wHiddenObjectFunctionArgument]
@@ -36,8 +36,8 @@ CinnabarGymQuiz::
 	jp TextScriptEnd
 
 CinnabarGymQuizIntroText:
-	TX_FAR _CinnabarGymQuizIntroText
-	db "@"
+	text_far _CinnabarGymQuizIntroText
+	text_end
 
 CinnabarQuizQuestions:
 	dw CinnabarQuizQuestionsText1
@@ -48,28 +48,28 @@ CinnabarQuizQuestions:
 	dw CinnabarQuizQuestionsText6
 
 CinnabarQuizQuestionsText1:
-	TX_FAR _CinnabarQuizQuestionsText1
-	db "@"
+	text_far _CinnabarQuizQuestionsText1
+	text_end
 
 CinnabarQuizQuestionsText2:
-	TX_FAR _CinnabarQuizQuestionsText2
-	db "@"
+	text_far _CinnabarQuizQuestionsText2
+	text_end
 
 CinnabarQuizQuestionsText3:
-	TX_FAR _CinnabarQuizQuestionsText3
-	db "@"
+	text_far _CinnabarQuizQuestionsText3
+	text_end
 
 CinnabarQuizQuestionsText4:
-	TX_FAR _CinnabarQuizQuestionsText4
-	db "@"
+	text_far _CinnabarQuizQuestionsText4
+	text_end
 
 CinnabarQuizQuestionsText5:
-	TX_FAR _CinnabarQuizQuestionsText5
-	db "@"
+	text_far _CinnabarQuizQuestionsText5
+	text_end
 
 CinnabarQuizQuestionsText6:
-	TX_FAR _CinnabarQuizQuestionsText6
-	db "@"
+	text_far _CinnabarQuizQuestionsText6
+	text_end
 
 CinnabarGymGateFlagAction:
 	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
@@ -117,10 +117,10 @@ CinnabarGymQuiz_1ea92:
 	ret
 
 CinnabarGymQuizCorrectText:
-	TX_SFX_ITEM_1
-	TX_FAR _CinnabarGymQuizCorrectText
-	TX_BLINK
-	TX_ASM
+	sound_get_item_1
+	text_far _CinnabarGymQuizCorrectText
+	text_promptbutton
+	text_asm
 
 	ld a, [hBackupGymGateIndex]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
@@ -137,8 +137,8 @@ CinnabarGymQuizCorrectText:
 	jp TextScriptEnd
 
 CinnabarGymQuizIncorrectText:
-	TX_FAR _CinnabarGymQuizIncorrectText
-	db "@"
+	text_far _CinnabarGymQuizIncorrectText
+	text_end
 
 UpdateCinnabarGymGateTileBlocks_::
 ; Update the overworld map with open floor blocks or locked gate blocks

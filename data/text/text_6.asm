@@ -29,19 +29,20 @@ _ItemUseBallText04::
 _ItemUseBallText05::
 	text "All right!"
 	line "@"
-	TX_RAM wEnemyMonNick
+	text_ram wEnemyMonNick
 	text " was"
-	cont "caught!@@"
+	cont "caught!@"
+	text_end
 
 _ItemUseBallText07::
-	TX_RAM wBoxMonNicks
+	text_ram wBoxMonNicks
 	text " was"
 	line "transferred to"
 	cont "BILL's PC!"
 	prompt
 
 _ItemUseBallText08::
-	TX_RAM wBoxMonNicks
+	text_ram wBoxMonNicks
 	text " was"
 	line "transferred to"
 	cont "someone's PC!"
@@ -51,13 +52,14 @@ _ItemUseBallText06::
 	text "New #DEX data"
 	line "will be added for"
 	cont "@"
-	TX_RAM wEnemyMonNick
-	text "!@@"
+	text_ram wEnemyMonNick
+	text "!@"
+	text_end
 
 _SurfingGotOnText::
 	text "<PLAYER> got on"
 	line "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 	prompt
 
@@ -67,10 +69,10 @@ _SurfingNoPlaceToGetOffText::
 	prompt
 
 _VitaminStatRoseText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "'s"
 	line "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text " rose."
 	prompt
 
@@ -104,12 +106,13 @@ _FluteWokeUpText::
 
 _PlayedFluteHadEffectText::
 	text "<PLAYER> played the"
-	line "# FLUTE.@@"
+	line "# FLUTE.@"
+	text_end
 
 _CoinCaseNumCoinsText::
 	text "Coins"
 	line "@"
-	TX_BCD wPlayerCoins, 2 | LEADING_ZEROES | LEFT_ALIGN
+	text_bcd wPlayerCoins, 2 | LEADING_ZEROES | LEFT_ALIGN
 	text " "
 	prompt
 
@@ -135,13 +138,13 @@ _RestorePPWhichTechniqueText::
 	done
 
 _PPMaxedOutText::
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "'s PP"
 	line "is maxed out."
 	prompt
 
 _PPIncreasedText::
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "'s PP"
 	line "increased."
 	prompt
@@ -161,26 +164,26 @@ _BootedUpHMText::
 _TeachMachineMoveText::
 	text "It contained"
 	line "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "!"
 
 	para "Teach @"
-	TX_RAM wcf4b
-	text ""
+	text_ram wcf4b
+	text_start
 	line "to a #MON?"
 	done
 
 _MonCannotLearnMachineMoveText::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " is not"
 	line "compatible with"
 	cont "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "."
 
 	para "It can't learn"
 	line "@"
-	TX_RAM wcf4b
+	text_ram wcf4b
 	text "."
 	prompt
 
@@ -217,7 +220,7 @@ _NoCyclingAllowedHereText::
 _NoSurfingHereText::
 	text "No SURFing on"
 	line "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text " here!"
 	prompt
 

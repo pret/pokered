@@ -11,7 +11,7 @@ CopycatsHouse2F_TextPointers:
 	dw CopycatsHouse2FText7
 
 CopycatsHouse2FText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM31
 	jr nz, .asm_7ccf3
 	ld a, $1
@@ -44,47 +44,47 @@ CopycatsHouse2FText1:
 	jp TextScriptEnd
 
 CopycatsHouse2FText_5ccd4:
-	TX_FAR _CopycatsHouse2FText_5ccd4
-	db "@"
+	text_far _CopycatsHouse2FText_5ccd4
+	text_end
 
 TM31PreReceiveText:
-	TX_FAR _TM31PreReceiveText
-	db "@"
+	text_far _TM31PreReceiveText
+	text_end
 
 ReceivedTM31Text:
-	TX_FAR _ReceivedTM31Text
-	TX_SFX_ITEM_1
+	text_far _ReceivedTM31Text
+	sound_get_item_1
 TM31ExplanationText1:
-	TX_FAR _TM31ExplanationText1
-	TX_WAIT
-	db "@"
+	text_far _TM31ExplanationText1
+	text_linkpromptbutton
+	text_end
 
 TM31ExplanationText2:
-	TX_FAR _TM31ExplanationText2
-	db "@"
+	text_far _TM31ExplanationText2
+	text_end
 
 TM31NoRoomText:
-	TX_FAR _TM31NoRoomText
-	TX_WAIT
-	db "@"
+	text_far _TM31NoRoomText
+	text_linkpromptbutton
+	text_end
 
 CopycatsHouse2FText2:
-	TX_FAR _CopycatsHouse2FText2
-	db "@"
+	text_far _CopycatsHouse2FText2
+	text_end
 
 CopycatsHouse2FText5:
 CopycatsHouse2FText4:
 CopycatsHouse2FText3:
-	TX_FAR _CopycatsHouse2FText3
-	db "@"
+	text_far _CopycatsHouse2FText3
+	text_end
 
 CopycatsHouse2FText6:
-	TX_FAR _CopycatsHouse2FText6
-	db "@"
+	text_far _CopycatsHouse2FText6
+	text_end
 
 CopycatsHouse2FText7:
-	TX_ASM
-	ld a, [wSpriteStateData1 + 9]
+	text_asm
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ld hl, CopycatsHouse2FText_5cd1c
 	jr nz, .notUp
@@ -94,9 +94,9 @@ CopycatsHouse2FText7:
 	jp TextScriptEnd
 
 CopycatsHouse2FText_5cd17:
-	TX_FAR _CopycatsHouse2FText_5cd17
-	db "@"
+	text_far _CopycatsHouse2FText_5cd17
+	text_end
 
 CopycatsHouse2FText_5cd1c:
-	TX_FAR _CopycatsHouse2FText_5cd1c
-	db "@"
+	text_far _CopycatsHouse2FText_5cd1c
+	text_end

@@ -15,14 +15,14 @@ OpenOaksPC:
 	jp LoadScreenTilesFromBuffer2
 
 GetDexRatedText:
-	TX_FAR _GetDexRatedText
-	db "@"
+	text_far _GetDexRatedText
+	text_end
 
 ClosedOaksPCText:
-	TX_FAR _ClosedOaksPCText
-	TX_WAIT
-	db "@"
+	text_far _ClosedOaksPCText
+	text_linkpromptbutton
+	text_end
 
 AccessedOaksPCText:
-	TX_FAR _AccessedOaksPCText
-	db "@"
+	text_far _AccessedOaksPCText
+	text_end

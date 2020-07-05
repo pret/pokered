@@ -85,11 +85,12 @@ FanClubChairStoryText::
 ReceivedBikeVoucherText::
 	text "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 ExplainBikeVoucherText::
-	text ""
+	text_start
 	para "Exchange that for"
 	line "a BICYCLE!"
 

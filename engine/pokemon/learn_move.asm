@@ -184,43 +184,43 @@ TryingToLearn:
 	ret
 
 LearnedMove1Text:
-	TX_FAR _LearnedMove1Text
-	TX_SFX_ITEM_1 ; plays SFX_GET_ITEM_1 in the party menu (rare candy) and plays SFX_LEVEL_UP in battle
-	TX_BLINK
-	db "@"
+	text_far _LearnedMove1Text
+	sound_get_item_1 ; plays SFX_GET_ITEM_1 in the party menu (rare candy) and plays SFX_LEVEL_UP in battle
+	text_promptbutton
+	text_end
 
 WhichMoveToForgetText:
-	TX_FAR _WhichMoveToForgetText
-	db "@"
+	text_far _WhichMoveToForgetText
+	text_end
 
 AbandonLearningText:
-	TX_FAR _AbandonLearningText
-	db "@"
+	text_far _AbandonLearningText
+	text_end
 
 DidNotLearnText:
-	TX_FAR _DidNotLearnText
-	db "@"
+	text_far _DidNotLearnText
+	text_end
 
 TryingToLearnText:
-	TX_FAR _TryingToLearnText
-	db "@"
+	text_far _TryingToLearnText
+	text_end
 
 OneTwoAndText:
-	TX_FAR _OneTwoAndText
-	TX_DELAY
-	TX_ASM
+	text_far _OneTwoAndText
+	text_pause
+	text_asm
 	ld a, SFX_SWAP
 	call PlaySoundWaitForCurrent
 	ld hl, PoofText
 	ret
 
 PoofText:
-	TX_FAR _PoofText
-	TX_DELAY
+	text_far _PoofText
+	text_pause
 ForgotAndText:
-	TX_FAR _ForgotAndText
-	db "@"
+	text_far _ForgotAndText
+	text_end
 
 HMCantDeleteText:
-	TX_FAR _HMCantDeleteText
-	db "@"
+	text_far _HMCantDeleteText
+	text_end

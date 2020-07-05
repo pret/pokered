@@ -120,7 +120,7 @@ ViridianCityScript_190cf:
 	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld [wJoyIgnore], a
 	ret
 
@@ -142,11 +142,11 @@ ViridianCity_TextPointers:
 	dw ViridianCityText15
 
 ViridianCityText1:
-	TX_FAR _ViridianCityText1
-	db "@"
+	text_far _ViridianCityText1
+	text_end
 
 ViridianCityText2:
-	TX_ASM
+	text_asm
 	ld a, [wObtainedBadges]
 	cp %01111111
 	ld hl, ViridianCityText_19127
@@ -159,15 +159,15 @@ ViridianCityText2:
 	jp TextScriptEnd
 
 ViridianCityText_19122:
-	TX_FAR _ViridianCityText_19122
-	db "@"
+	text_far _ViridianCityText_19122
+	text_end
 
 ViridianCityText_19127:
-	TX_FAR _ViridianCityText_19127
-	db "@"
+	text_far _ViridianCityText_19127
+	text_end
 
 ViridianCityText3:
-	TX_ASM
+	text_asm
 	ld hl, ViridianCityText_1914d
 	call PrintText
 	call YesNoChoice
@@ -184,19 +184,19 @@ ViridianCityText3:
 	jp TextScriptEnd
 
 ViridianCityText_1914d:
-	TX_FAR _ViridianCityText_1914d
-	db "@"
+	text_far _ViridianCityText_1914d
+	text_end
 
 ViridianCityText_19152:
-	TX_FAR _ViridianCityText_19152
-	db "@"
+	text_far _ViridianCityText_19152
+	text_end
 
 ViridianCityText_19157:
-	TX_FAR _ViridianCityText_19157
-	db "@"
+	text_far _ViridianCityText_19157
+	text_end
 
 ViridianCityText4:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .gotPokedex
 	ld hl, ViridianCityText_19175
@@ -209,15 +209,15 @@ ViridianCityText4:
 	jp TextScriptEnd
 
 ViridianCityText_19175:
-	TX_FAR _ViridianCityText_19175
-	db "@"
+	text_far _ViridianCityText_19175
+	text_end
 
 ViridianCityText_1917a:
-	TX_FAR _ViridianCityText_1917a
-	db "@"
+	text_far _ViridianCityText_1917a
+	text_end
 
 ViridianCityText5:
-	TX_ASM
+	text_asm
 	ld hl, ViridianCityText_19191
 	call PrintText
 	call ViridianCityScript_190cf
@@ -226,11 +226,11 @@ ViridianCityText5:
 	jp TextScriptEnd
 
 ViridianCityText_19191:
-	TX_FAR _ViridianCityText_19191
-	db "@"
+	text_far _ViridianCityText_19191
+	text_end
 
 ViridianCityText6:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_TM42
 	jr nz, .gotTm42
 	ld hl, ViridianCityText_191ca
@@ -253,24 +253,24 @@ ViridianCityText6:
 	jp TextScriptEnd
 
 ViridianCityText_191ca:
-	TX_FAR _ViridianCityText_191ca
-	db "@"
+	text_far _ViridianCityText_191ca
+	text_end
 
 ReceivedTM42Text:
-	TX_FAR _ReceivedTM42Text
-	TX_SFX_ITEM_2
-	db "@"
+	text_far _ReceivedTM42Text
+	sound_get_item_2
+	text_end
 
 TM42Explanation:
-	TX_FAR _TM42Explanation
-	db "@"
+	text_far _TM42Explanation
+	text_end
 
 TM42NoRoomText:
-	TX_FAR _TM42NoRoomText
-	db "@"
+	text_far _TM42NoRoomText
+	text_end
 
 ViridianCityText7:
-	TX_ASM
+	text_asm
 	ld hl, ViridianCityText_1920a
 	call PrintText
 	ld c, 2
@@ -291,37 +291,37 @@ ViridianCityText7:
 	jp TextScriptEnd
 
 ViridianCityText_1920a:
-	TX_FAR _ViridianCityText_1920a
-	db "@"
+	text_far _ViridianCityText_1920a
+	text_end
 
 ViridianCityText_1920f:
-	TX_FAR _ViridianCityText_1920f
-	db "@"
+	text_far _ViridianCityText_1920f
+	text_end
 
 ViridianCityText_19214:
-	TX_FAR _ViridianCityText_19214
-	db "@"
+	text_far _ViridianCityText_19214
+	text_end
 
 ViridianCityText15:
-	TX_FAR _ViridianCityText_19219
-	db "@"
+	text_far _ViridianCityText_19219
+	text_end
 
 ViridianCityText8:
-	TX_FAR _ViridianCityText8
-	db "@"
+	text_far _ViridianCityText8
+	text_end
 
 ViridianCityText9:
-	TX_FAR _ViridianCityText9
-	db "@"
+	text_far _ViridianCityText9
+	text_end
 
 ViridianCityText10:
-	TX_FAR _ViridianCityText10
-	db "@"
+	text_far _ViridianCityText10
+	text_end
 
 ViridianCityText13:
-	TX_FAR _ViridianCityText13
-	db "@"
+	text_far _ViridianCityText13
+	text_end
 
 ViridianCityText14:
-	TX_FAR _ViridianCityText14
-	db "@"
+	text_far _ViridianCityText14
+	text_end

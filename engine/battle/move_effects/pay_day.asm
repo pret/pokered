@@ -41,5 +41,5 @@ PayDayEffect_:
 	jp PrintText
 
 CoinsScatteredText:
-	TX_FAR _CoinsScatteredText
-	db "@"
+	text_far _CoinsScatteredText
+	text_end

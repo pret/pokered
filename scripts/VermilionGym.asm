@@ -129,7 +129,7 @@ VermilionGymTrainerHeader2:
 	db $ff
 
 LTSurgeText:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_BEAT_LT_SURGE
 	jr z, .beforeBeat
 	CheckEventReuseA EVENT_GOT_TM24
@@ -165,87 +165,87 @@ LTSurgeText:
 	jp TextScriptEnd
 
 LTSurgePreBattleText:
-	TX_FAR _LTSurgePreBattleText
-	db "@"
+	text_far _LTSurgePreBattleText
+	text_end
 
 LTSurgePostBattleAdviceText:
-	TX_FAR _LTSurgePostBattleAdviceText
-	db "@"
+	text_far _LTSurgePostBattleAdviceText
+	text_end
 
 LTSurgeThunderbadgeInfoText:
-	TX_FAR _LTSurgeThunderbadgeInfoText
-	db "@"
+	text_far _LTSurgeThunderbadgeInfoText
+	text_end
 
 ReceivedTM24Text:
-	TX_FAR _ReceivedTM24Text
-	TX_SFX_KEY_ITEM
-	TX_FAR _TM24ExplanationText
-	db "@"
+	text_far _ReceivedTM24Text
+	sound_get_key_item
+	text_far _TM24ExplanationText
+	text_end
 
 TM24NoRoomText:
-	TX_FAR _TM24NoRoomText
-	db "@"
+	text_far _TM24NoRoomText
+	text_end
 
 ReceivedThunderbadgeText:
-	TX_FAR _ReceivedThunderbadgeText
-	db "@"
+	text_far _ReceivedThunderbadgeText
+	text_end
 
 VermilionGymTrainerText1:
-	TX_ASM
+	text_asm
 	ld hl, VermilionGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VermilionGymBattleText1:
-	TX_FAR _VermilionGymBattleText1
-	db "@"
+	text_far _VermilionGymBattleText1
+	text_end
 
 VermilionGymEndBattleText1:
-	TX_FAR _VermilionGymEndBattleText1
-	db "@"
+	text_far _VermilionGymEndBattleText1
+	text_end
 
 VermilionGymAfterBattleText1:
-	TX_FAR _VermilionGymAfterBattleText1
-	db "@"
+	text_far _VermilionGymAfterBattleText1
+	text_end
 
 VermilionGymTrainerText2:
-	TX_ASM
+	text_asm
 	ld hl, VermilionGymTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VermilionGymBattleText2:
-	TX_FAR _VermilionGymBattleText2
-	db "@"
+	text_far _VermilionGymBattleText2
+	text_end
 
 VermilionGymEndBattleText2:
-	TX_FAR _VermilionGymEndBattleText2
-	db "@"
+	text_far _VermilionGymEndBattleText2
+	text_end
 
 VermilionGymAfterBattleText2:
-	TX_FAR _VermilionGymAfterBattleText2
-	db "@"
+	text_far _VermilionGymAfterBattleText2
+	text_end
 
 VermilionGymTrainerText3:
-	TX_ASM
+	text_asm
 	ld hl, VermilionGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 VermilionGymBattleText3:
-	TX_FAR _VermilionGymBattleText3
-	db "@"
+	text_far _VermilionGymBattleText3
+	text_end
 
 VermilionGymEndBattleText3:
-	TX_FAR _VermilionGymEndBattleText3
-	db "@"
+	text_far _VermilionGymEndBattleText3
+	text_end
 
 VermilionGymAfterBattleText3:
-	TX_FAR _VermilionGymAfterBattleText3
-	db "@"
+	text_far _VermilionGymAfterBattleText3
+	text_end
 
 VermilionGymFanText:
-	TX_ASM
+	text_asm
 	ld a, [wBeatGymFlags]
 	bit 2, a
 	jr nz, .afterBeat
@@ -259,9 +259,9 @@ VermilionGymFanText:
 	jp TextScriptEnd
 
 VermilionGymFanPreBattleText:
-	TX_FAR _VermilionGymFanPreBattleText
-	db "@"
+	text_far _VermilionGymFanPreBattleText
+	text_end
 
 VermilionGymFanPostBattleText:
-	TX_FAR _VermilionGymFanPostBattleText
-	db "@"
+	text_far _VermilionGymFanPostBattleText
+	text_end

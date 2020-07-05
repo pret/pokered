@@ -129,23 +129,23 @@ BrunoTrainerHeader0:
 	db $ff
 
 BrunoText1:
-	TX_ASM
+	text_asm
 	ld hl, BrunoTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 BrunoBeforeBattleText:
-	TX_FAR _BrunoBeforeBattleText
-	db "@"
+	text_far _BrunoBeforeBattleText
+	text_end
 
 BrunoEndBattleText:
-	TX_FAR _BrunoEndBattleText
-	db "@"
+	text_far _BrunoEndBattleText
+	text_end
 
 BrunoAfterBattleText:
-	TX_FAR _BrunoAfterBattleText
-	db "@"
+	text_far _BrunoAfterBattleText
+	text_end
 
 BrunoDontRunAwayText:
-	TX_FAR _BrunoDontRunAwayText
-	db "@"
+	text_far _BrunoDontRunAwayText
+	text_end

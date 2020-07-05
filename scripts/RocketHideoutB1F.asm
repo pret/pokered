@@ -92,98 +92,98 @@ RocketHideout1TrainerHeader4:
 	db $ff
 
 RocketHideout1Text1:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text2:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout1TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text3:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout1TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text4:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout1TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1Text5:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout1TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout1EndBattleText6:
-	TX_FAR _RocketHideout1EndBattleText6
-	TX_ASM
+	text_far _RocketHideout1EndBattleText6
+	text_asm
 	SetEvent EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
 	ld hl, RocketHideout1Text_44c9f
 	ret
 
 RocketHideout1Text_44c9f:
-	TX_BLINK
-	db "@"
+	text_promptbutton
+	text_end
 
 RocketHideout1BattleText2:
-	TX_FAR _RocketHideout1BattleText2
-	db "@"
+	text_far _RocketHideout1BattleText2
+	text_end
 
 RocketHideout1EndBattleText2:
-	TX_FAR _RocketHideout1EndBattleText2
-	db "@"
+	text_far _RocketHideout1EndBattleText2
+	text_end
 
 RocketHideout1AfterBattleTxt2:
-	TX_FAR _RocketHideout1AfterBattleTxt2
-	db "@"
+	text_far _RocketHideout1AfterBattleTxt2
+	text_end
 
 RocketHideout1BattleText3:
-	TX_FAR _RocketHideout1BattleText3
-	db "@"
+	text_far _RocketHideout1BattleText3
+	text_end
 
 RocketHideout1EndBattleText3:
-	TX_FAR _RocketHideout1EndBattleText3
-	db "@"
+	text_far _RocketHideout1EndBattleText3
+	text_end
 
 RocketHideout1AfterBattleTxt3:
-	TX_FAR _RocketHideout1AfterBattleTxt3
-	db "@"
+	text_far _RocketHideout1AfterBattleTxt3
+	text_end
 
 RocketHideout1BattleText4:
-	TX_FAR _RocketHideout1BattleText4
-	db "@"
+	text_far _RocketHideout1BattleText4
+	text_end
 
 RocketHideout1EndBattleText4:
-	TX_FAR _RocketHideout1EndBattleText4
-	db "@"
+	text_far _RocketHideout1EndBattleText4
+	text_end
 
 RocketHideout1AfterBattleTxt4:
-	TX_FAR _RocketHideout1AfterBattleTxt4
-	db "@"
+	text_far _RocketHideout1AfterBattleTxt4
+	text_end
 
 RocketHideout1BattleText5:
-	TX_FAR _RocketHideout1BattleText5
-	db "@"
+	text_far _RocketHideout1BattleText5
+	text_end
 
 RocketHideout1EndBattleText5:
-	TX_FAR _RocketHideout1EndBattleText5
-	db "@"
+	text_far _RocketHideout1EndBattleText5
+	text_end
 
 RocketHideout1AfterBattleTxt5:
-	TX_FAR _RocketHideout1AfterBattleTxt5
-	db "@"
+	text_far _RocketHideout1AfterBattleTxt5
+	text_end
 
 RocketHideout1BattleText6:
-	TX_FAR _RocketHideout1BattleText6
-	db "@"
+	text_far _RocketHideout1BattleText6
+	text_end
 
 RocketHideout1AfterBattleTxt6:
-	TX_FAR _RocketHideout1AfterBattleTxt6
-	db "@"
+	text_far _RocketHideout1AfterBattleTxt6
+	text_end

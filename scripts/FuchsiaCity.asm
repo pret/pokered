@@ -28,20 +28,20 @@ FuchsiaCity_TextPointers:
 	dw FuchsiaCityText24
 
 FuchsiaCityText1:
-	TX_FAR _FuchsiaCityText1
-	db "@"
+	text_far _FuchsiaCityText1
+	text_end
 
 FuchsiaCityText2:
-	TX_FAR _FuchsiaCityText2
-	db "@"
+	text_far _FuchsiaCityText2
+	text_end
 
 FuchsiaCityText3:
-	TX_FAR _FuchsiaCityText3
-	db "@"
+	text_far _FuchsiaCityText3
+	text_end
 
 FuchsiaCityText4:
-	TX_FAR _FuchsiaCityText4
-	db "@"
+	text_far _FuchsiaCityText4
+	text_end
 
 FuchsiaCityText5:
 FuchsiaCityText6:
@@ -49,32 +49,32 @@ FuchsiaCityText7:
 FuchsiaCityText8:
 FuchsiaCityText9:
 FuchsiaCityText10:
-	TX_FAR _FuchsiaCityText5
-	db "@"
+	text_far _FuchsiaCityText5
+	text_end
 
 FuchsiaCityText12:
 FuchsiaCityText11:
-	TX_FAR _FuchsiaCityText11
-	db "@"
+	text_far _FuchsiaCityText11
+	text_end
 
 FuchsiaCityText13:
-	TX_FAR _FuchsiaCityText13
-	db "@"
+	text_far _FuchsiaCityText13
+	text_end
 
 FuchsiaCityText16:
-	TX_FAR _FuchsiaCityText16
-	db "@"
+	text_far _FuchsiaCityText16
+	text_end
 
 FuchsiaCityText17:
-	TX_FAR _FuchsiaCityText17
-	db "@"
+	text_far _FuchsiaCityText17
+	text_end
 
 FuchsiaCityText18:
-	TX_FAR _FuchsiaCityText18
-	db "@"
+	text_far _FuchsiaCityText18
+	text_end
 
 FuchsiaCityText19:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaCityChanseyText
 	call PrintText
 	ld a, CHANSEY
@@ -82,11 +82,11 @@ FuchsiaCityText19:
 	jp TextScriptEnd
 
 FuchsiaCityChanseyText:
-	TX_FAR _FuchsiaCityChanseyText
-	db "@"
+	text_far _FuchsiaCityChanseyText
+	text_end
 
 FuchsiaCityText20:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaCityVoltorbText
 	call PrintText
 	ld a, VOLTORB
@@ -94,11 +94,11 @@ FuchsiaCityText20:
 	jp TextScriptEnd
 
 FuchsiaCityVoltorbText:
-	TX_FAR _FuchsiaCityVoltorbText
-	db "@"
+	text_far _FuchsiaCityVoltorbText
+	text_end
 
 FuchsiaCityText21:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaCityKangaskhanText
 	call PrintText
 	ld a, KANGASKHAN
@@ -106,11 +106,11 @@ FuchsiaCityText21:
 	jp TextScriptEnd
 
 FuchsiaCityKangaskhanText:
-	TX_FAR _FuchsiaCityKangaskhanText
-	db "@"
+	text_far _FuchsiaCityKangaskhanText
+	text_end
 
 FuchsiaCityText22:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaCitySlowpokeText
 	call PrintText
 	ld a, SLOWPOKE
@@ -118,11 +118,11 @@ FuchsiaCityText22:
 	jp TextScriptEnd
 
 FuchsiaCitySlowpokeText:
-	TX_FAR _FuchsiaCitySlowpokeText
-	db "@"
+	text_far _FuchsiaCitySlowpokeText
+	text_end
 
 FuchsiaCityText23:
-	TX_ASM
+	text_asm
 	ld hl, FuchsiaCityLaprasText
 	call PrintText
 	ld a, LAPRAS
@@ -130,11 +130,11 @@ FuchsiaCityText23:
 	jp TextScriptEnd
 
 FuchsiaCityLaprasText:
-	TX_FAR _FuchsiaCityLaprasText
-	db "@"
+	text_far _FuchsiaCityLaprasText
+	text_end
 
 FuchsiaCityText24:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr nz, .asm_3b4e8
 	CheckEventReuseA EVENT_GOT_HELIX_FOSSIL
@@ -157,13 +157,13 @@ FuchsiaCityText24:
 	jp TextScriptEnd
 
 FuchsiaCityOmanyteText:
-	TX_FAR _FuchsiaCityOmanyteText
-	db "@"
+	text_far _FuchsiaCityOmanyteText
+	text_end
 
 FuchsiaCityKabutoText:
-	TX_FAR _FuchsiaCityKabutoText
-	db "@"
+	text_far _FuchsiaCityKabutoText
+	text_end
 
 FuchsiaCityText_19b2a:
-	TX_FAR _FuchsiaCityText_19b2a
-	db "@"
+	text_far _FuchsiaCityText_19b2a
+	text_end

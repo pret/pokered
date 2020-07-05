@@ -7,7 +7,7 @@ PrintBlackboardLinkCableText:
 	ret
 
 LinkCableHelp::
-	TX_ASM
+	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
 	call PrintText
@@ -60,12 +60,12 @@ LinkCableHelp::
 	jp TextScriptEnd
 
 LinkCableHelpText1:
-	TX_FAR _LinkCableHelpText1
-	db "@"
+	text_far _LinkCableHelpText1
+	text_end
 
 LinkCableHelpText2:
-	TX_FAR _LinkCableHelpText2
-	db "@"
+	text_far _LinkCableHelpText2
+	text_end
 
 HowToLinkText:
 	db   "HOW TO LINK"
@@ -79,19 +79,19 @@ LinkCableInfoTexts:
 	dw LinkCableInfoText3
 
 LinkCableInfoText1:
-	TX_FAR _LinkCableInfoText1
-	db "@"
+	text_far _LinkCableInfoText1
+	text_end
 
 LinkCableInfoText2:
-	TX_FAR _LinkCableInfoText2
-	db "@"
+	text_far _LinkCableInfoText2
+	text_end
 
 LinkCableInfoText3:
-	TX_FAR _LinkCableInfoText3
-	db "@"
+	text_far _LinkCableInfoText3
+	text_end
 
 ViridianSchoolBlackboard::
-	TX_ASM
+	text_asm
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
@@ -177,12 +177,12 @@ ViridianSchoolBlackboard::
 	jp TextScriptEnd
 
 ViridianSchoolBlackboardText1:
-	TX_FAR _ViridianSchoolBlackboardText1
-	db "@"
+	text_far _ViridianSchoolBlackboardText1
+	text_end
 
 ViridianSchoolBlackboardText2:
-	TX_FAR _ViridianSchoolBlackboardText2
-	db "@"
+	text_far _ViridianSchoolBlackboardText2
+	text_end
 
 StatusAilmentText1:
 	db   " SLP"
@@ -192,7 +192,9 @@ StatusAilmentText1:
 StatusAilmentText2:
 	db   " BRN"
 	next " FRZ"
-	next " QUIT@@"
+	next " QUIT@"
+
+	db "@" ; unused
 
 ViridianBlackboardStatusPointers:
 	dw ViridianBlackboardSleepText
@@ -202,21 +204,21 @@ ViridianBlackboardStatusPointers:
 	dw ViridianBlackboardFrozenText
 
 ViridianBlackboardSleepText:
-	TX_FAR _ViridianBlackboardSleepText
-	db "@"
+	text_far _ViridianBlackboardSleepText
+	text_end
 
 ViridianBlackboardPoisonText:
-	TX_FAR _ViridianBlackboardPoisonText
-	db "@"
+	text_far _ViridianBlackboardPoisonText
+	text_end
 
 ViridianBlackboardPrlzText:
-	TX_FAR _ViridianBlackboardPrlzText
-	db "@"
+	text_far _ViridianBlackboardPrlzText
+	text_end
 
 ViridianBlackboardBurnText:
-	TX_FAR _ViridianBlackboardBurnText
-	db "@"
+	text_far _ViridianBlackboardBurnText
+	text_end
 
 ViridianBlackboardFrozenText:
-	TX_FAR _ViridianBlackboardFrozenText
-	db "@"
+	text_far _ViridianBlackboardFrozenText
+	text_end

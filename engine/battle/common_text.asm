@@ -71,28 +71,28 @@ PrintBeginningBattleText:
 	ret
 
 WildMonAppearedText:
-	TX_FAR _WildMonAppearedText
-	db "@"
+	text_far _WildMonAppearedText
+	text_end
 
 HookedMonAttackedText:
-	TX_FAR _HookedMonAttackedText
-	db "@"
+	text_far _HookedMonAttackedText
+	text_end
 
 EnemyAppearedText:
-	TX_FAR _EnemyAppearedText
-	db "@"
+	text_far _EnemyAppearedText
+	text_end
 
 TrainerWantsToFightText:
-	TX_FAR _TrainerWantsToFightText
-	db "@"
+	text_far _TrainerWantsToFightText
+	text_end
 
 UnveiledGhostText:
-	TX_FAR _UnveiledGhostText
-	db "@"
+	text_far _UnveiledGhostText
+	text_end
 
 GhostCantBeIDdText:
-	TX_FAR _GhostCantBeIDdText
-	db "@"
+	text_far _GhostCantBeIDdText
+	text_end
 
 PrintSendOutMonMessage:
 	ld hl, wEnemyMonHP
@@ -138,39 +138,39 @@ PrintSendOutMonMessage:
 	jp PrintText
 
 GoText:
-	TX_FAR _GoText
-	TX_ASM
+	text_far _GoText
+	text_asm
 	jr PrintPlayerMon1Text
 
 DoItText:
-	TX_FAR _DoItText
-	TX_ASM
+	text_far _DoItText
+	text_asm
 	jr PrintPlayerMon1Text
 
 GetmText:
-	TX_FAR _GetmText
-	TX_ASM
+	text_far _GetmText
+	text_asm
 	jr PrintPlayerMon1Text
 
 EnemysWeakText:
-	TX_FAR _EnemysWeakText
-	TX_ASM
+	text_far _EnemysWeakText
+	text_asm
 
 PrintPlayerMon1Text:
 	ld hl, PlayerMon1Text
 	ret
 
 PlayerMon1Text:
-	TX_FAR _PlayerMon1Text
-	db "@"
+	text_far _PlayerMon1Text
+	text_end
 
 RetreatMon:
 	ld hl, PlayerMon2Text
 	jp PrintText
 
 PlayerMon2Text:
-	TX_FAR _PlayerMon2Text
-	TX_ASM
+	text_far _PlayerMon2Text
+	text_asm
 	push de
 	push bc
 	ld hl, wEnemyMonHP + 1
@@ -220,18 +220,18 @@ PlayerMon2Text:
 	ret
 
 EnoughText:
-	TX_FAR _EnoughText
-	TX_ASM
+	text_far _EnoughText
+	text_asm
 	jr PrintComeBackText
 
 OKExclamationText:
-	TX_FAR _OKExclamationText
-	TX_ASM
+	text_far _OKExclamationText
+	text_asm
 	jr PrintComeBackText
 
 GoodText:
-	TX_FAR _GoodText
-	TX_ASM
+	text_far _GoodText
+	text_asm
 	jr PrintComeBackText
 
 PrintComeBackText:
@@ -239,5 +239,5 @@ PrintComeBackText:
 	ret
 
 ComeBackText:
-	TX_FAR _ComeBackText
-	db "@"
+	text_far _ComeBackText
+	text_end

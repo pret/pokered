@@ -46,26 +46,26 @@ OaksAideScript:
 	ret
 
 OaksAideHiText:
-	TX_FAR _OaksAideHiText
-	db "@"
+	text_far _OaksAideHiText
+	text_end
 
 OaksAideUhOhText:
-	TX_FAR _OaksAideUhOhText
-	db "@"
+	text_far _OaksAideUhOhText
+	text_end
 
 OaksAideComeBackText:
-	TX_FAR _OaksAideComeBackText
-	db "@"
+	text_far _OaksAideComeBackText
+	text_end
 
 OaksAideHereYouGoText:
-	TX_FAR _OaksAideHereYouGoText
-	db "@"
+	text_far _OaksAideHereYouGoText
+	text_end
 
 OaksAideGotItemText:
-	TX_FAR _OaksAideGotItemText
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _OaksAideGotItemText
+	sound_get_item_1
+	text_end
 
 OaksAideNoRoomText:
-	TX_FAR _OaksAideNoRoomText
-	db "@"
+	text_far _OaksAideNoRoomText
+	text_end

@@ -78,109 +78,109 @@ Route6TrainerHeader5:
 	db $ff
 
 Route6Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText1:
-	TX_FAR _Route6BattleText1
-	db "@"
+	text_far _Route6BattleText1
+	text_end
 
 Route6EndBattleText1:
-	TX_FAR _Route6EndBattleText1
-	db "@"
+	text_far _Route6EndBattleText1
+	text_end
 
 Route6AfterBattleText1:
-	TX_FAR _Route6AfterBattleText1
-	db "@"
+	text_far _Route6AfterBattleText1
+	text_end
 
 Route6Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText2:
-	TX_FAR _Route6BattleText2
-	db "@"
+	text_far _Route6BattleText2
+	text_end
 
 Route6EndBattleText2:
-	TX_FAR _Route6EndBattleText2
-	db "@"
+	text_far _Route6EndBattleText2
+	text_end
 
 Route6Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText3:
-	TX_FAR _Route6BattleText3
-	db "@"
+	text_far _Route6BattleText3
+	text_end
 
 Route6EndBattleText3:
-	TX_FAR _Route6EndBattleText3
-	db "@"
+	text_far _Route6EndBattleText3
+	text_end
 
 Route6AfterBattleText3:
-	TX_FAR _Route6AfterBattleText3
-	db "@"
+	text_far _Route6AfterBattleText3
+	text_end
 
 Route6Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText4:
-	TX_FAR _Route6BattleText4
-	db "@"
+	text_far _Route6BattleText4
+	text_end
 
 Route6EndBattleText4:
-	TX_FAR _Route6EndBattleText4
-	db "@"
+	text_far _Route6EndBattleText4
+	text_end
 
 Route6AfterBattleText4:
-	TX_FAR _Route6AfterBattleText4
-	db "@"
+	text_far _Route6AfterBattleText4
+	text_end
 
 Route6Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText5:
-	TX_FAR _Route6BattleText5
-	db "@"
+	text_far _Route6BattleText5
+	text_end
 
 Route6EndBattleText5:
-	TX_FAR _Route6EndBattleText5
-	db "@"
+	text_far _Route6EndBattleText5
+	text_end
 
 Route6AfterBattleText5:
-	TX_FAR _Route6AfterBattleText5
-	db "@"
+	text_far _Route6AfterBattleText5
+	text_end
 
 Route6Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route6TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route6BattleText6:
-	TX_FAR _Route6BattleText6
-	db "@"
+	text_far _Route6BattleText6
+	text_end
 
 Route6EndBattleText6:
-	TX_FAR _Route6EndBattleText6
-	db "@"
+	text_far _Route6EndBattleText6
+	text_end
 
 Route6AfterBattleText6:
-	TX_FAR _Route6AfterBattleText6
-	db "@"
+	text_far _Route6AfterBattleText6
+	text_end
 
 Route6Text7:
-	TX_FAR _Route6Text7
-	db "@"
+	text_far _Route6Text7
+	text_end

@@ -130,70 +130,70 @@ SilphCo4TrainerHeader2:
 	db $ff
 
 SilphCo4Text1:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo4Text_19de0
 	ld de, SilphCo4Text_19de5
 	call SilphCo6Script_1a22f
 	jp TextScriptEnd
 
 SilphCo4Text_19de0:
-	TX_FAR _SilphCo4Text_19de0
-	db "@"
+	text_far _SilphCo4Text_19de0
+	text_end
 
 SilphCo4Text_19de5:
-	TX_FAR _SilphCo4Text_19de5
-	db "@"
+	text_far _SilphCo4Text_19de5
+	text_end
 
 SilphCo4Text2:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo4BattleText2:
-	TX_FAR _SilphCo4BattleText2
-	db "@"
+	text_far _SilphCo4BattleText2
+	text_end
 
 SilphCo4EndBattleText2:
-	TX_FAR _SilphCo4EndBattleText2
-	db "@"
+	text_far _SilphCo4EndBattleText2
+	text_end
 
 SilphCo4AfterBattleText2:
-	TX_FAR _SilphCo4AfterBattleText2
-	db "@"
+	text_far _SilphCo4AfterBattleText2
+	text_end
 
 SilphCo4Text3:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo4TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo4BattleText3:
-	TX_FAR _SilphCo4BattleText3
-	db "@"
+	text_far _SilphCo4BattleText3
+	text_end
 
 SilphCo4EndBattleText3:
-	TX_FAR _SilphCo4EndBattleText3
-	db "@"
+	text_far _SilphCo4EndBattleText3
+	text_end
 
 SilphCo4AfterBattleText3:
-	TX_FAR _SilphCo4AfterBattleText3
-	db "@"
+	text_far _SilphCo4AfterBattleText3
+	text_end
 
 SilphCo4Text4:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo4TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo4BattleText4:
-	TX_FAR _SilphCo4BattleText4
-	db "@"
+	text_far _SilphCo4BattleText4
+	text_end
 
 SilphCo4EndBattleText4:
-	TX_FAR _SilphCo4EndBattleText4
-	db "@"
+	text_far _SilphCo4EndBattleText4
+	text_end
 
 SilphCo4AfterBattleText4:
-	TX_FAR _SilphCo4AfterBattleText4
-	db "@"
+	text_far _SilphCo4AfterBattleText4
+	text_end

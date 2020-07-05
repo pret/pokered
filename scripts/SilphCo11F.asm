@@ -301,7 +301,7 @@ SilphCo11TrainerHeader1:
 	db $ff
 
 SilphCo11Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_MASTER_BALL
 	jp nz, .asm_62308
 	ld hl, SilphCoPresidentText
@@ -324,76 +324,76 @@ SilphCo11Text1:
 	jp TextScriptEnd
 
 SilphCoPresidentText:
-	TX_FAR _SilphCoPresidentText
-	db "@"
+	text_far _SilphCoPresidentText
+	text_end
 
 ReceivedSilphCoMasterBallText:
-	TX_FAR _ReceivedSilphCoMasterBallText
-	TX_SFX_KEY_ITEM
-	db "@"
+	text_far _ReceivedSilphCoMasterBallText
+	sound_get_key_item
+	text_end
 
 SilphCo10Text_6231c:
-	TX_FAR _SilphCo10Text_6231c
-	db "@"
+	text_far _SilphCo10Text_6231c
+	text_end
 
 SilphCoMasterBallNoRoomText:
-	TX_FAR _SilphCoMasterBallNoRoomText
-	db "@"
+	text_far _SilphCoMasterBallNoRoomText
+	text_end
 
 SilphCo11Text2:
-	TX_FAR _SilphCo11Text2
-	db "@"
+	text_far _SilphCo11Text2
+	text_end
 
 SilphCo11Text3:
-	TX_FAR _SilphCo11Text3
-	db "@"
+	text_far _SilphCo11Text3
+	text_end
 
 SilphCo10Text_62330:
-	TX_FAR _SilphCo10Text_62330
-	db "@"
+	text_far _SilphCo10Text_62330
+	text_end
 
 SilphCo11Text6:
-	TX_FAR _SilphCo10Text_62335
-	db "@"
+	text_far _SilphCo10Text_62335
+	text_end
 
 SilphCo11Text4:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo11TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo11BattleText1:
-	TX_FAR _SilphCo11BattleText1
-	db "@"
+	text_far _SilphCo11BattleText1
+	text_end
 
 SilphCo11EndBattleText1:
-	TX_FAR _SilphCo11EndBattleText1
-	db "@"
+	text_far _SilphCo11EndBattleText1
+	text_end
 
 SilphCo11AfterBattleText1:
-	TX_FAR _SilphCo11AfterBattleText1
-	db "@"
+	text_far _SilphCo11AfterBattleText1
+	text_end
 
 SilphCo11Text5:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo11TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SilphCo11BattleText2:
-	TX_FAR _SilphCo11BattleText2
-	db "@"
+	text_far _SilphCo11BattleText2
+	text_end
 
 SilphCo11EndBattleText2:
-	TX_FAR _SilphCo11EndBattleText2
-	db "@"
+	text_far _SilphCo11EndBattleText2
+	text_end
 
 SilphCo11AfterBattleText2:
-	TX_FAR _SilphCo11AfterBattleText2
-	db "@"
+	text_far _SilphCo11AfterBattleText2
+	text_end
 
 SilphCo10Text_6236c:
-	TX_ASM
+	text_asm
 	ld hl, SilphCo10Text_6237b
 	call PrintText
 	ld a, PORYGON
@@ -401,5 +401,5 @@ SilphCo10Text_6236c:
 	jp TextScriptEnd
 
 SilphCo10Text_6237b:
-	TX_FAR _SilphCo10Text_6237b
-	db "@"
+	text_far _SilphCo10Text_6237b
+	text_end

@@ -73,7 +73,7 @@ Mansion3Script_5225b:
 	ret
 
 Mansion3Script_Switches::
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	xor a
@@ -111,41 +111,41 @@ Mansion3TrainerHeader1:
 	db $ff
 
 Mansion3Text1:
-	TX_ASM
+	text_asm
 	ld hl, Mansion3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion3Text2:
-	TX_ASM
+	text_asm
 	ld hl, Mansion3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Mansion3BattleText1:
-	TX_FAR _Mansion3BattleText1
-	db "@"
+	text_far _Mansion3BattleText1
+	text_end
 
 Mansion3EndBattleText1:
-	TX_FAR _Mansion3EndBattleText1
-	db "@"
+	text_far _Mansion3EndBattleText1
+	text_end
 
 Mansion3AfterBattleText1:
-	TX_FAR _Mansion3AfterBattleText1
-	db "@"
+	text_far _Mansion3AfterBattleText1
+	text_end
 
 Mansion3BattleText2:
-	TX_FAR _Mansion3BattleText2
-	db "@"
+	text_far _Mansion3BattleText2
+	text_end
 
 Mansion3EndBattleText2:
-	TX_FAR _Mansion3EndBattleText2
-	db "@"
+	text_far _Mansion3EndBattleText2
+	text_end
 
 Mansion3AfterBattleText2:
-	TX_FAR _Mansion3AfterBattleText2
-	db "@"
+	text_far _Mansion3AfterBattleText2
+	text_end
 
 Mansion3Text5:
-	TX_FAR _Mansion3Text5
-	db "@"
+	text_far _Mansion3Text5
+	text_end

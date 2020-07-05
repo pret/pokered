@@ -44,5 +44,5 @@ _MagikarpSalesmanText2::
 	done
 
 _MtMoonPokecenterText5::
-	text ""
+	text_start
 	done

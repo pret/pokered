@@ -193,15 +193,15 @@ PewterCity_TextPointers:
 	dw PewterCityText14
 
 PewterCityText1:
-	TX_FAR _PewterCityText1
-	db "@"
+	text_far _PewterCityText1
+	text_end
 
 PewterCityText2:
-	TX_FAR _PewterCityText2
-	db "@"
+	text_far _PewterCityText2
+	text_end
 
 PewterCityText3:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
@@ -231,23 +231,23 @@ PewterCityText3:
 	jp TextScriptEnd
 
 PewterCityText_193f1:
-	TX_FAR _PewterCityText_193f1
-	db "@"
+	text_far _PewterCityText_193f1
+	text_end
 
 PewterCityText_193f6:
-	TX_FAR _PewterCityText_193f6
-	db "@"
+	text_far _PewterCityText_193f6
+	text_end
 
 PewterCityText_193fb:
-	TX_FAR _PewterCityText_193fb
-	db "@"
+	text_far _PewterCityText_193fb
+	text_end
 
 PewterCityText13:
-	TX_FAR _PewterCityText13
-	db "@"
+	text_far _PewterCityText13
+	text_end
 
 PewterCityText4:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
@@ -264,19 +264,19 @@ PewterCityText4:
 	jp TextScriptEnd
 
 PewterCityText_19427:
-	TX_FAR _PewterCityText_19427
-	db "@"
+	text_far _PewterCityText_19427
+	text_end
 
 PewterCityText_1942c:
-	TX_FAR _PewterCityText_1942c
-	db "@"
+	text_far _PewterCityText_1942c
+	text_end
 
 PewterCityText_19431:
-	TX_FAR _PewterCityText_19431
-	db "@"
+	text_far _PewterCityText_19431
+	text_end
 
 PewterCityText5:
-	TX_ASM
+	text_asm
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
@@ -294,29 +294,29 @@ PewterCityText5:
 	jp TextScriptEnd
 
 PewterCityText_1945d:
-	TX_FAR _PewterCityText_1945d
-	db "@"
+	text_far _PewterCityText_1945d
+	text_end
 
 PewterCityText14:
-	TX_FAR _PewterCityText14
-	db "@"
+	text_far _PewterCityText14
+	text_end
 
 PewterCityText6:
-	TX_FAR _PewterCityText6
-	db "@"
+	text_far _PewterCityText6
+	text_end
 
 PewterCityText7:
-	TX_FAR _PewterCityText7
-	db "@"
+	text_far _PewterCityText7
+	text_end
 
 PewterCityText10:
-	TX_FAR _PewterCityText10
-	db "@"
+	text_far _PewterCityText10
+	text_end
 
 PewterCityText11:
-	TX_FAR _PewterCityText11
-	db "@"
+	text_far _PewterCityText11
+	text_end
 
 PewterCityText12:
-	TX_FAR _PewterCityText12
-	db "@"
+	text_far _PewterCityText12
+	text_end

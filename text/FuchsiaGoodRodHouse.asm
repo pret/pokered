@@ -19,8 +19,9 @@ _FuchsiaHouse3Text_561c2::
 
 	para "<PLAYER> received"
 	line "a @"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _FuchsiaHouse3Text_56212::
 	text "Oh... That's so"

@@ -77,14 +77,14 @@ FindPathToPlayer:
 CalcPositionOfPlayerRelativeToNPC:
 	xor a
 	ld [hNPCPlayerRelativePosFlags], a
-	ld a, [wSpriteStateData1 + 4] ; player's sprite screen Y position in pixels
+	ld a, [wSpritePlayerStateData1YPixels]
 	ld d, a
-	ld a, [wSpriteStateData1 + 6] ; player's sprite screen X position in pixels
+	ld a, [wSpritePlayerStateData1XPixels]
 	ld e, a
 	ld hl, wSpriteStateData1
 	ld a, [hNPCSpriteOffset]
 	add l
-	add $4
+	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld l, a
 	jr nc, .noCarry
 	inc h

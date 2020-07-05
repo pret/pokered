@@ -3,7 +3,7 @@ GymStatues:
 ; if in a gym and don’t have the corresponding badge, a = GymStatueText1_id and jp PrintPredefTextID
 ; else ret
 	call EnableAutoTextBoxDrawing
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz
 	ld hl, .BadgeFlags
@@ -40,9 +40,9 @@ GymStatues:
 	db $ff
 
 GymStatueText1::
-	TX_FAR _GymStatueText1
-	db "@"
+	text_far _GymStatueText1
+	text_end
 
 GymStatueText2::
-	TX_FAR _GymStatueText2
-	db "@"
+	text_far _GymStatueText2
+	text_end

@@ -7,9 +7,9 @@ FuchsiaMart_TextPointers:
 	dw FuchsiaMartText3
 
 FuchsiaMartText2:
-	TX_FAR _FuchsiaMartText2
-	db "@"
+	text_far _FuchsiaMartText2
+	text_end
 
 FuchsiaMartText3:
-	TX_FAR _FuchsiaMartText3
-	db "@"
+	text_far _FuchsiaMartText3
+	text_end

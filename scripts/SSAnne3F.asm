@@ -5,5 +5,5 @@ SSAnne3F_TextPointers:
 	dw SSAnne3Text1
 
 SSAnne3Text1:
-	TX_FAR _SSAnne3Text1
-	db "@"
+	text_far _SSAnne3Text1
+	text_end

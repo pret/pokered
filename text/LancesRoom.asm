@@ -60,4 +60,5 @@ _LanceAfterBattleText::
 
 	para "He is the real"
 	line "#MON LEAGUE"
-	cont "champion!@@"
+	cont "champion!@"
+	text_end

@@ -42,8 +42,9 @@ _TM41PreText::
 _ReceivedTM41Text::
 	text "<PLAYER> received"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _TM41ExplanationText::
 	text "TM41 teaches"
@@ -72,7 +73,8 @@ _CeladonCityText6::
 
 _CeladonCityText7::
 	text "POLIWRATH: Ribi"
-	line "ribit!@@"
+	line "ribit!@"
+	text_end
 
 _CeladonCityText8::
 	text "What are you"

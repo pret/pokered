@@ -65,7 +65,7 @@ RocketHideoutElevator_TextPointers:
 	dw RocketHideoutElevatorText1
 
 RocketHideoutElevatorText1:
-	TX_ASM
+	text_asm
 	ld b, LIFT_KEY
 	call IsItemInBag
 	jr z, .asm_45782
@@ -80,6 +80,6 @@ RocketHideoutElevatorText1:
 	jp TextScriptEnd
 
 RocketHideoutElevatorText_4578b:
-	TX_FAR _RocketElevatorText_4578b
-	TX_WAIT
-	db "@"
+	text_far _RocketElevatorText_4578b
+	text_linkpromptbutton
+	text_end

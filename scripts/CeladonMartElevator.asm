@@ -66,7 +66,7 @@ CeladonMartElevator_TextPointers:
 	dw CeladonMartElevatorText1
 
 CeladonMartElevatorText1:
-	TX_ASM
+	text_asm
 	call CeladonMartElevatorScript_48631
 	ld hl, CeladonMartElevatorWarpMaps
 	predef DisplayElevatorFloorMenu

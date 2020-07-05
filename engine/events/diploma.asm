@@ -1,3 +1,5 @@
+CIRCLE_TILE_ID EQU $70
+
 DisplayDiploma::
 	call SaveScreenTilesToBuffer2
 	call GBPalWhiteOutWithDelay3
@@ -8,7 +10,7 @@ DisplayDiploma::
 	set 6, [hl]
 	call DisableLCD
 	ld hl, CircleTile
-	ld de, vChars2 + $700
+	ld de, vChars2 + CIRCLE_TILE_ID * $10
 	ld bc, $10
 	ld a, BANK(CircleTile)
 	call FarCopyData2
@@ -94,7 +96,7 @@ DiplomaTextPointersAndCoords:
 	dwCoord 9, 16
 
 DiplomaText:
-	db $70,"Diploma",$70,"@"
+	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"
 
 DiplomaPlayer:
 	db "Player@"

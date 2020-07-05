@@ -12,5 +12,5 @@ SilphCo1F_TextPointers:
 	dw SilphCo1Text1
 
 SilphCo1Text1:
-	TX_FAR _SilphCo1Text1
-	db "@"
+	text_far _SilphCo1Text1
+	text_end

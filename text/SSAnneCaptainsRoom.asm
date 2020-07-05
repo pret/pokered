@@ -8,7 +8,8 @@ _SSAnne7RubText::
 	cont "back!"
 
 	para "Rub-rub..."
-	line "Rub-rub...@@"
+	line "Rub-rub...@"
+	text_end
 
 _ReceivingHM01Text::
 	text "CAPTAIN: Whew!"
@@ -33,8 +34,9 @@ _ReceivingHM01Text::
 _ReceivedHM01Text::
 	text "<PLAYER> got"
 	line "@"
-	TX_RAM wcf4b
-	text "!@@"
+	text_ram wcf4b
+	text "!@"
+	text_end
 
 _SSAnne7Text_61932::
 	text "CAPTAIN: Whew!"

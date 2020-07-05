@@ -1,6 +1,7 @@
 _OakAppearsText::
 	text "OAK: Hey! Wait!"
-	line "Don't go out!@@"
+	line "Don't go out!@"
+	text_end
 
 _OakWalksUpText::
 	text "OAK: It's unsafe!"

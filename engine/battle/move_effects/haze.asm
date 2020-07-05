@@ -77,5 +77,5 @@ ResetStats:
 	ret
 
 StatusChangesEliminatedText:
-	TX_FAR _StatusChangesEliminatedText
-	db "@"
+	text_far _StatusChangesEliminatedText
+	text_end

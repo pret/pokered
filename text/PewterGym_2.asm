@@ -19,10 +19,11 @@ _TM34PreReceiveText::
 
 _ReceivedTM34Text::
 	text "<PLAYER> received"
-	line "TM34!@@"
+	line "TM34!@"
+	text_end
 
 _TM34ExplanationText::
-	text ""
+	text_start
 
 	para "A TM contains a"
 	line "technique that"
@@ -59,10 +60,11 @@ _PewterGymText_5c4bc::
 	cont "the BOULDERBADGE!"
 
 	para "<PLAYER> received"
-	line "the BOULDERBADGE!@@"
+	line "the BOULDERBADGE!@"
+	text_end
 
 _PewterGymText_5c4c1::
-	text ""
+	text_start
 
 	para "That's an official"
 	line "#MON LEAGUE"

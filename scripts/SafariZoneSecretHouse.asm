@@ -5,7 +5,7 @@ SafariZoneSecretHouse_TextPointers:
 	dw SafariZoneSecretHouseText1
 
 SafariZoneSecretHouseText1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_HM03
 	jr nz, .asm_20a9b
 	ld hl, SafariZoneSecretHouseText_4a350
@@ -28,18 +28,18 @@ SafariZoneSecretHouseText1:
 	jp TextScriptEnd
 
 SafariZoneSecretHouseText_4a350:
-	TX_FAR _SecretHouseText_4a350
-	db "@"
+	text_far _SecretHouseText_4a350
+	text_end
 
 ReceivedHM03Text:
-	TX_FAR _ReceivedHM03Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedHM03Text
+	sound_get_item_1
+	text_end
 
 HM03ExplanationText:
-	TX_FAR _HM03ExplanationText
-	db "@"
+	text_far _HM03ExplanationText
+	text_end
 
 HM03NoRoomText:
-	TX_FAR _HM03NoRoomText
-	db "@"
+	text_far _HM03NoRoomText
+	text_end

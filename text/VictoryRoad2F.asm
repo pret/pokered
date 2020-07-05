@@ -1,5 +1,6 @@
 _MoltresBattleText::
-	text "Gyaoo!@@"
+	text "Gyaoo!@"
+	text_end
 
 _VictoryRoad2BattleText1::
 	text "VICTORY ROAD is"

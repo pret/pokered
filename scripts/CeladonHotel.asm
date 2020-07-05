@@ -7,13 +7,13 @@ CeladonHotel_TextPointers:
 	dw CeladonHotelText3
 
 CeladonHotelText1:
-	TX_FAR _CeladonHotelText1
-	db "@"
+	text_far _CeladonHotelText1
+	text_end
 
 CeladonHotelText2:
-	TX_FAR _CeladonHotelText2
-	db "@"
+	text_far _CeladonHotelText2
+	text_end
 
 CeladonHotelText3:
-	TX_FAR _CeladonHotelText3
-	db "@"
+	text_far _CeladonHotelText3
+	text_end

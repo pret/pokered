@@ -38,7 +38,7 @@ VermilionCity_ScriptPointers:
 	dw VermilionCityScript4
 
 VermilionCityScript0:
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	ret nz
 	ld hl, SSAnneTicketCheckCoords
@@ -129,11 +129,11 @@ VermilionCity_TextPointers:
 	dw VermilionCityText13
 
 VermilionCityText1:
-	TX_FAR _VermilionCityText1
-	db "@"
+	text_far _VermilionCityText1
+	text_end
 
 VermilionCityText2:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
 	ld hl, VermilionCityTextDidYouSee
@@ -146,18 +146,18 @@ VermilionCityText2:
 	jp TextScriptEnd
 
 VermilionCityTextDidYouSee:
-	TX_FAR _VermilionCityTextDidYouSee
-	db "@"
+	text_far _VermilionCityTextDidYouSee
+	text_end
 
 VermilionCityTextSSAnneDeparted:
-	TX_FAR _VermilionCityTextSSAnneDeparted
-	db "@"
+	text_far _VermilionCityTextSSAnneDeparted
+	text_end
 
 VermilionCityText3:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
-	ld a, [wSpriteStateData1 + 9]
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_RIGHT
 	jr z, .greetPlayer
 	ld hl, .inFrontOfOrBehindGuardCoords
@@ -196,32 +196,32 @@ VermilionCityText3:
 	db $ff
 
 SSAnneWelcomeText4:
-	TX_FAR _SSAnneWelcomeText4
-	db "@"
+	text_far _SSAnneWelcomeText4
+	text_end
 
 SSAnneWelcomeText9:
-	TX_FAR _SSAnneWelcomeText9
-	db "@"
+	text_far _SSAnneWelcomeText9
+	text_end
 
 SSAnneFlashedTicketText:
-	TX_FAR _SSAnneFlashedTicketText
-	db "@"
+	text_far _SSAnneFlashedTicketText
+	text_end
 
 SSAnneNoTicketText:
-	TX_FAR _SSAnneNoTicketText
-	db "@"
+	text_far _SSAnneNoTicketText
+	text_end
 
 SSAnneNotHereText:
-	TX_FAR _SSAnneNotHereText
-	db "@"
+	text_far _SSAnneNotHereText
+	text_end
 
 VermilionCityText4:
-	TX_FAR _VermilionCityText4
-	db "@"
+	text_far _VermilionCityText4
+	text_end
 
 VermilionCityText5:
-	TX_FAR _VermilionCityText5
-	TX_ASM
+	text_far _VermilionCityText5
+	text_asm
 	ld a, MACHOP
 	call PlayCry
 	call WaitForSoundToFinish
@@ -229,29 +229,29 @@ VermilionCityText5:
 	ret
 
 VermilionCityText14:
-	TX_FAR _VermilionCityText14
-	db "@"
+	text_far _VermilionCityText14
+	text_end
 
 VermilionCityText6:
-	TX_FAR _VermilionCityText6
-	db "@"
+	text_far _VermilionCityText6
+	text_end
 
 VermilionCityText7:
-	TX_FAR _VermilionCityText7
-	db "@"
+	text_far _VermilionCityText7
+	text_end
 
 VermilionCityText8:
-	TX_FAR _VermilionCityText8
-	db "@"
+	text_far _VermilionCityText8
+	text_end
 
 VermilionCityText11:
-	TX_FAR _VermilionCityText11
-	db "@"
+	text_far _VermilionCityText11
+	text_end
 
 VermilionCityText12:
-	TX_FAR _VermilionCityText12
-	db "@"
+	text_far _VermilionCityText12
+	text_end
 
 VermilionCityText13:
-	TX_FAR _VermilionCityText13
-	db "@"
+	text_far _VermilionCityText13
+	text_end

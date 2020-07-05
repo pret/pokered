@@ -111,9 +111,9 @@ ResetPlayerSpriteData::
 	ld hl, wSpriteStateData2
 	call ResetPlayerSpriteData_ClearSpriteData
 	ld a, $1
-	ld [wSpriteStateData1], a
-	ld [wSpriteStateData2 + $0e], a
-	ld hl, wSpriteStateData1 + 4
+	ld [wSpritePlayerStateData1PictureID], a
+	ld [wSpritePlayerStateData2ImageBaseOffset], a
+	ld hl, wSpritePlayerStateData1YPixels
 	ld [hl], $3c     ; set Y screen pos
 	inc hl
 	inc hl
@@ -175,7 +175,7 @@ FadeOutAudio::
 	ld [wNewSoundID], a
 	jp PlaySound
 
-INCLUDE "home/predef_text.asm"
+INCLUDE "home/text_script.asm"
 INCLUDE "home/start_menu.asm"
 
 ; function to count how many bits are set in a string of bytes
@@ -456,19 +456,19 @@ DecodeArrowMovementRLE::
 	inc hl
 	jr DecodeArrowMovementRLE
 
-FuncTX_ItemStoragePC::
+TextScript_ItemStoragePC::
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(PlayerPC)
 	ld hl, PlayerPC
 	jr bankswitchAndContinue
 
-FuncTX_BillsPC::
+TextScript_BillsPC::
 	call SaveScreenTilesToBuffer2
 	ld b, BANK(BillsPC_)
 	ld hl, BillsPC_
 	jr bankswitchAndContinue
 
-FuncTX_GameCornerPrizeMenu::
+TextScript_GameCornerPrizeMenu::
 ; XXX find a better name for this function
 ; special_F7
 	ld b, BANK(CeladonPrizeMenu)
@@ -477,7 +477,7 @@ bankswitchAndContinue::
 	call Bankswitch
 	jp HoldTextDisplayOpen        ; continue to main text-engine function
 
-FuncTX_PokemonCenterPC::
+TextScript_PokemonCenterPC::
 	ld b, BANK(ActivatePC)
 	ld hl, ActivatePC
 	jr bankswitchAndContinue
@@ -485,7 +485,7 @@ FuncTX_PokemonCenterPC::
 StartSimulatingJoypadStates::
 	xor a
 	ld [wOverrideSimulatedJoypadStatesMask], a
-	ld [wSpriteStateData2 + $06], a ; player's sprite movement byte 1
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wd730
 	set 7, [hl]
 	ret
@@ -572,7 +572,7 @@ CheckCoords::
 ; sets carry if the coordinates are in the array, clears carry if not
 CheckBoulderCoords::
 	push hl
-	ld hl, wSpriteStateData2 + $04
+	ld hl, wSpritePlayerStateData2MapY
 	ld a, [hSpriteIndex]
 	swap a
 	ld d, $0
@@ -1752,7 +1752,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a
 	call CheckForHiddenObject
-	ld a, [hFoundHiddenObject]
+	ld a, [hDidntFindAnyHiddenObject]
 	and a
 	jr nz, .hiddenObjectNotFound
 	ld a, [wHiddenObjectFunctionRomBank]
@@ -1772,7 +1772,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 .nothingFound
 	ld a, $ff
 .done
-	ld [hFoundHiddenObjectOrBookshelf], a
+	ld [hItemAlreadyFound], a
 	pop af
 	ld [MBC1RomBank], a
 	ld [hLoadedROMBank], a

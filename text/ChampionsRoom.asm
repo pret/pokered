@@ -96,7 +96,7 @@ _GaryText_76120::
 	line "much since you"
 	cont "first left with"
 	cont "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 
 	para "<PLAYER>, you have"

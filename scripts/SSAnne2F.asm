@@ -184,11 +184,11 @@ SSAnne2F_TextPointers:
 	dw SSAnne2Text3
 
 SSAnne2Text1:
-	TX_FAR _SSAnne2Text1
-	db "@"
+	text_far _SSAnne2Text1
+	text_end
 
 SSAnne2Text2:
-	TX_ASM
+	text_asm
 	ld hl, SSAnneRivalBeforeBattleText
 	call PrintText
 	ld hl, wd72d
@@ -200,17 +200,17 @@ SSAnne2Text2:
 	jp TextScriptEnd
 
 SSAnneRivalBeforeBattleText:
-	TX_FAR _SSAnneRivalBeforeBattleText
-	db "@"
+	text_far _SSAnneRivalBeforeBattleText
+	text_end
 
 SSAnneRivalDefeatedText:
-	TX_FAR _SSAnneRivalDefeatedText
-	db "@"
+	text_far _SSAnneRivalDefeatedText
+	text_end
 
 SSAnneRivalWonText:
-	TX_FAR _SSAnneRivalWonText
-	db "@"
+	text_far _SSAnneRivalWonText
+	text_end
 
 SSAnne2Text3:
-	TX_FAR _SSAnneRivalCaptainText
-	db "@"
+	text_far _SSAnneRivalCaptainText
+	text_end

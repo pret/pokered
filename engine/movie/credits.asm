@@ -180,17 +180,17 @@ Credits:
 	ld a, [de]
 	inc de
 	push de
-	cp $ff
+	cp CRED_TEXT_FADE_MON
 	jr z, .fadeInTextAndShowMon
-	cp $fe
+	cp CRED_TEXT_MON
 	jr z, .showTextAndShowMon
-	cp $fd
+	cp CRED_TEXT_FADE
 	jr z, .fadeInText
-	cp $fc
+	cp CRED_TEXT
 	jr z, .showText
-	cp $fb
+	cp CRED_COPYRIGHT
 	jr z, .showCopyrightText
-	cp $fa
+	cp CRED_THE_END
 	jr z, .showTheEnd
 	push hl
 	push hl
@@ -205,7 +205,7 @@ Credits:
 	ld a, [de]
 	inc de
 	ld c, a
-	ld b, $ff
+	ld b, -1
 	pop hl
 	add hl, bc
 	call PlaceString

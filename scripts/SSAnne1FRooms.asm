@@ -64,100 +64,100 @@ SSAnne8TrainerHeader3:
 	db $ff
 
 SSAnne8Text1:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne8TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text2:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne8TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text3:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne8TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text4:
-	TX_ASM
+	text_asm
 	ld hl, SSAnne8TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SSAnne8Text8:
-	TX_FAR _SSAnne8Text8
-	TX_ASM
+	text_far _SSAnne8Text8
+	text_asm
 	ld a, WIGGLYTUFF
 	call PlayCry
 	jp TextScriptEnd
 
 SSAnne8BattleText1:
-	TX_FAR _SSAnne8BattleText1
-	db "@"
+	text_far _SSAnne8BattleText1
+	text_end
 
 SSAnne8EndBattleText1:
-	TX_FAR _SSAnne8EndBattleText1
-	db "@"
+	text_far _SSAnne8EndBattleText1
+	text_end
 
 SSAnne8AfterBattleText1:
-	TX_FAR _SSAnne8AfterBattleText1
-	db "@"
+	text_far _SSAnne8AfterBattleText1
+	text_end
 
 SSAnne8BattleText2:
-	TX_FAR _SSAnne8BattleText2
-	db "@"
+	text_far _SSAnne8BattleText2
+	text_end
 
 SSAnne8EndBattleText2:
-	TX_FAR _SSAnne8EndBattleText2
-	db "@"
+	text_far _SSAnne8EndBattleText2
+	text_end
 
 SSAnne8AfterBattleText2:
-	TX_FAR _SSAnne8AfterBattleText2
-	db "@"
+	text_far _SSAnne8AfterBattleText2
+	text_end
 
 SSAnne8BattleText3:
-	TX_FAR _SSAnne8BattleText3
-	db "@"
+	text_far _SSAnne8BattleText3
+	text_end
 
 SSAnne8EndBattleText3:
-	TX_FAR _SSAnne8EndBattleText3
-	db "@"
+	text_far _SSAnne8EndBattleText3
+	text_end
 
 SSAnne8AfterBattleText3:
-	TX_FAR _SSAnne8AfterBattleText3
-	db "@"
+	text_far _SSAnne8AfterBattleText3
+	text_end
 
 SSAnne8BattleText4:
-	TX_FAR _SSAnne8BattleText4
-	db "@"
+	text_far _SSAnne8BattleText4
+	text_end
 
 SSAnne8EndBattleText4:
-	TX_FAR _SSAnne8EndBattleText4
-	db "@"
+	text_far _SSAnne8EndBattleText4
+	text_end
 
 SSAnne8AfterBattleText4:
-	TX_FAR _SSAnne8AfterBattleText4
-	db "@"
+	text_far _SSAnne8AfterBattleText4
+	text_end
 
 SSAnne8Text5:
-	TX_FAR _SSAnne8Text5
-	db "@"
+	text_far _SSAnne8Text5
+	text_end
 
 SSAnne8Text6:
-	TX_FAR _SSAnne8Text6
-	db "@"
+	text_far _SSAnne8Text6
+	text_end
 
 SSAnne8Text7:
-	TX_FAR _SSAnne8Text7
-	db "@"
+	text_far _SSAnne8Text7
+	text_end
 
 SSAnne8Text9:
-	TX_FAR _SSAnne8Text9
-	db "@"
+	text_far _SSAnne8Text9
+	text_end
 
 SSAnne8Text11:
-	TX_FAR _SSAnne8Text11
-	db "@"
+	text_far _SSAnne8Text11
+	text_end

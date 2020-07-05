@@ -19,7 +19,7 @@ DisplayPokemonCenterDialogue_::
 	ld hl, NeedYourPokemonText
 	call PrintText
 	ld a, $18
-	ld [wSpriteStateData1 + $12], a ; make the nurse turn to face the machine
+	ld [wSprite01StateData1ImageIndex], a ; make the nurse turn to face the machine
 	call Delay3
 	predef HealParty
 	callba AnimateHealingMachine ; do the healing machine animation
@@ -34,7 +34,7 @@ DisplayPokemonCenterDialogue_::
 	ld hl, PokemonFightingFitText
 	call PrintText
 	ld a, $14
-	ld [wSpriteStateData1 + $12], a ; make the nurse bow
+	ld [wSprite01StateData1ImageIndex], a ; make the nurse bow
 	ld c, a
 	call DelayFrames
 	jr .done
@@ -46,23 +46,23 @@ DisplayPokemonCenterDialogue_::
 	jp UpdateSprites
 
 PokemonCenterWelcomeText:
-	TX_FAR _PokemonCenterWelcomeText
-	db "@"
+	text_far _PokemonCenterWelcomeText
+	text_end
 
 ShallWeHealYourPokemonText:
-	TX_DELAY
-	TX_FAR _ShallWeHealYourPokemonText
-	db "@"
+	text_pause
+	text_far _ShallWeHealYourPokemonText
+	text_end
 
 NeedYourPokemonText:
-	TX_FAR _NeedYourPokemonText
-	db "@"
+	text_far _NeedYourPokemonText
+	text_end
 
 PokemonFightingFitText:
-	TX_FAR _PokemonFightingFitText
-	db "@"
+	text_far _PokemonFightingFitText
+	text_end
 
 PokemonCenterFarewellText:
-	TX_DELAY
-	TX_FAR _PokemonCenterFarewellText
-	db "@"
+	text_pause
+	text_far _PokemonCenterFarewellText
+	text_end

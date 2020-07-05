@@ -3,4 +3,5 @@ _VoltorbBattleText::
 	done
 
 _ZapdosBattleText::
-	text "Gyaoo!@@"
+	text "Gyaoo!@"
+	text_end

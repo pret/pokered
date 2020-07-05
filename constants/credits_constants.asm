@@ -63,3 +63,11 @@
 	const CRED_FUKUI          ; $3D
 	const CRED_CLUB           ; $3E
 	const CRED_PAAD           ; $3F
+
+const_value = $FA
+	const CRED_THE_END       ; $FA
+	const CRED_COPYRIGHT     ; $FB
+	const CRED_TEXT          ; $FC
+	const CRED_TEXT_FADE     ; $FD
+	const CRED_TEXT_MON      ; $FE
+	const CRED_TEXT_FADE_MON ; $FF

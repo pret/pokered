@@ -1,6 +1,6 @@
 OpenPokemonCenterPC:
-	ld a, [wSpriteStateData1 + 9]
-	cp SPRITE_FACING_UP ; check to see if player is facing up
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
 	ld a, $1
@@ -8,4 +8,4 @@ OpenPokemonCenterPC:
 	tx_pre_jump PokemonCenterPCText
 
 PokemonCenterPCText::
-	TX_POKECENTER_PC
+	script_pokecenter_pc

@@ -84,7 +84,7 @@ HiddenObjectMaps:
 	db VERMILION_CITY
 	db CERULEAN_CITY
 	db ROUTE_4
-	db $FF
+	db -1 ; end
 
 HiddenObjectPointers:
 ; each of these pointers is for the corresponding map in HiddenObjectMaps
@@ -174,680 +174,488 @@ HiddenObjectPointers:
 	dw CeruleanCityHiddenObjects
 	dw Route4HiddenObjects
 
-; format: y-coord, x-coord, text id/item id, object routine
+hidden_object: MACRO
+	db \2 ; y coord
+	db \1 ; x coord
+	db \3 ; item id
+	dba \4 ; object routine
+ENDM
+
+hidden_text_predef: MACRO
+	db \2 ; y coord
+	db \1 ; x coord
+	db_tx_pre \3 ; text id
+	dba \4 ; object routine
+ENDM
+
 TradeCenterHiddenObjects:
-	db $04,$05,$d0
-	db BANK(CableClubRightGameboy)
-	dw CableClubRightGameboy
-	db $04,$04,$d0
-	db BANK(CableClubLeftGameboy)
-	dw CableClubLeftGameboy
-	db $FF
+	hidden_object  5,  4, $d0, CableClubRightGameboy
+	hidden_object  4,  4, $d0, CableClubLeftGameboy
+	db -1 ; end
+
 ColosseumHiddenObjects:
-	db $04,$05,$d0
-	db BANK(CableClubRightGameboy)
-	dw CableClubRightGameboy
-	db $04,$04,$d0
-	db BANK(CableClubLeftGameboy)
-	dw CableClubLeftGameboy
-	db $FF
+	hidden_object  5,  4, $d0, CableClubRightGameboy
+	hidden_object  4,  4, $d0, CableClubLeftGameboy
+	db -1 ; end
+
 RedsHouse2FHiddenObjects:
-	db $01,$00,$04
-	dbw BANK(OpenRedsPC), OpenRedsPC
-	db $05,$03,$d0
-	dbw BANK(PrintRedSNESText), PrintRedSNESText
-	db $FF
+	hidden_object  0,  1, SPRITE_FACING_UP, OpenRedsPC
+	hidden_object  3,  5, $d0, PrintRedSNESText
+	db -1 ; end
+
 BluesHouseHiddenObjects:
-	db $01,$00,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
-	db $01,$01,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
-	db $01,$07,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
-	db $FF
+	hidden_object  0,  1, SPRITE_FACING_UP, PrintBookcaseText
+	hidden_object  1,  1, SPRITE_FACING_UP, PrintBookcaseText
+	hidden_object  7,  1, SPRITE_FACING_UP, PrintBookcaseText
+	db -1 ; end
+
 OaksLabHiddenObjects:
-	db $00,$04,$04
-	db BANK(DisplayOakLabLeftPoster)
-	dw DisplayOakLabLeftPoster
-	db $00,$05,$04
-	db BANK(DisplayOakLabRightPoster)
-	dw DisplayOakLabRightPoster
-	db $01,$00,$04
-	db BANK(DisplayOakLabEmailText)
-	dw DisplayOakLabEmailText
-	db $01,$01,$04
-	db BANK(DisplayOakLabEmailText)
-	dw DisplayOakLabEmailText
-	db $FF
+	hidden_object  4,  0, SPRITE_FACING_UP, DisplayOakLabLeftPoster
+	hidden_object  5,  0, SPRITE_FACING_UP, DisplayOakLabRightPoster
+	hidden_object  0,  1, SPRITE_FACING_UP, DisplayOakLabEmailText
+	hidden_object  1,  1, SPRITE_FACING_UP, DisplayOakLabEmailText
+	db -1 ; end
+
 ViridianPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 ViridianMartHiddenObjects:
-	db $FF
+	db -1 ; end
+
 ViridianSchoolHiddenObjects:
-	db $04,$03,(ViridianSchoolNotebook_id - TextPredefs) / 2 + 1
-	db BANK(PrintNotebookText)
-	dw PrintNotebookText
-	db $00,$03,(ViridianSchoolBlackboard_id - TextPredefs) / 2 + 1
-	db BANK(PrintBlackboardLinkCableText)
-	dw PrintBlackboardLinkCableText
-	db $FF
+	hidden_text_predef  3,  4, ViridianSchoolNotebook, PrintNotebookText
+	hidden_text_predef  3,  0, ViridianSchoolBlackboard, PrintBlackboardLinkCableText
+	db -1 ; end
+
 ViridianGymHiddenObjects:
-	db $0f,$0f,$04
-	dbw BANK(GymStatues),GymStatues
-	db $0f,$12,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object 15, 15, SPRITE_FACING_UP, GymStatues
+	hidden_object 18, 15, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 Museum1FHiddenObjects:
-	db $03,$02,$04
-	dbw BANK(AerodactylFossil), AerodactylFossil
-	db $06,$02,$04
-	dbw BANK(KabutopsFossil), KabutopsFossil
-	db $FF
+	hidden_object  2,  3, SPRITE_FACING_UP, AerodactylFossil
+	hidden_object  2,  6, SPRITE_FACING_UP, KabutopsFossil
+	db -1 ; end
+
 PewterGymHiddenObjects:
-	db $0a,$03,$04
-	dbw BANK(GymStatues),GymStatues
-	db $0a,$06,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object  3, 10, SPRITE_FACING_UP, GymStatues
+	hidden_object  6, 10, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 PewterMartHiddenObjects:
-	db $FF
+	db -1 ; end
+
 PewterPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 CeruleanPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 CeruleanGymHiddenObjects:
-	db $0b,$03,$04
-	dbw BANK(GymStatues),GymStatues
-	db $0b,$06,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object  3, 11, SPRITE_FACING_UP, GymStatues
+	hidden_object  6, 11, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 CeruleanMartHiddenObjects:
-	db $FF
+	db -1 ; end
+
 LavenderPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 VermilionPokecenterHiddenObjects:
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $04,$00,$04
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $FF
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
+	db -1 ; end
+
 VermilionGymHiddenObjects:
-	db $0e,$03,$04
-	dbw BANK(GymStatues), GymStatues
-	db $0e,$06,$04
-	dbw BANK(GymStatues), GymStatues
-	db $01,$06,$00
-	dbw BANK(PrintTrashText), PrintTrashText
-	db $07,$01,$00
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $09,$01,$01
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $0b,$01,$02
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $07,$03,$03
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $09,$03,$04
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $0b,$03,$05
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $07,$05,$06
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $09,$05,$07
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $0b,$05,$08
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $07,$07,$09
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $09,$07,$0a
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $0b,$07,$0b
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $07,$09,$0c
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $09,$09,$0d
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $0b,$09,$0e
-	dbw BANK(GymTrashScript), GymTrashScript
-	db $FF
+	hidden_object  3, 14, SPRITE_FACING_UP, GymStatues
+	hidden_object  6, 14, SPRITE_FACING_UP, GymStatues
+	hidden_object  6,  1, SPRITE_FACING_DOWN, PrintTrashText
+	hidden_object  1,  7, 0, GymTrashScript
+	hidden_object  1,  9, 1, GymTrashScript
+	hidden_object  1, 11, 2, GymTrashScript
+	hidden_object  3,  7, 3, GymTrashScript
+	hidden_object  3,  9, 4, GymTrashScript
+	hidden_object  3, 11, 5, GymTrashScript
+	hidden_object  5,  7, 6, GymTrashScript
+	hidden_object  5,  9, 7, GymTrashScript
+	hidden_object  5, 11, 8, GymTrashScript
+	hidden_object  7,  7, 9, GymTrashScript
+	hidden_object  7,  9, 10, GymTrashScript
+	hidden_object  7, 11, 11, GymTrashScript
+	hidden_object  9,  7, 12, GymTrashScript
+	hidden_object  9,  9, 13, GymTrashScript
+	hidden_object  9, 11, 14, GymTrashScript
+	db -1 ; end
+
 CeladonMansion2HiddenObjects:
-	db $05,$00,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  5, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 CeladonPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 CeladonGymHiddenObjects:
-	db $0f,$03,$04
-	dbw BANK(GymStatues),GymStatues
-	db $0f,$06,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object  3, 15, SPRITE_FACING_UP, GymStatues
+	hidden_object  6, 15, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 GameCornerHiddenObjects:
-	db $0f,$12,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$12,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$12,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$12,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$12,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$12,$ff ; "Someone's Keys"
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$0d,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$0d,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$0d,$fe ; "Out To Lunch"
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$0d,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$0d,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0f,$0d,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0f,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$0c,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0f,$07,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0f,$06,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$06,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$06,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$06,$fd ; "Out Of Order"
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$06,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$06,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0a,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0b,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0c,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0d,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0e,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $0f,$01,$d0
-	dbw BANK(StartSlotMachine), StartSlotMachine
-	db $08,$00,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $10,$01,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0b,$03,COIN+20
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0e,$03,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0c,$04,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0c,$09,COIN+20
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0f,$09,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0e,$10,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $10,$0a,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $07,$0b,COIN+40
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $08,$0f,COIN+100
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $0f,$0c,COIN+10
-	dbw BANK(HiddenCoins),HiddenCoins
-	db $FF
+	hidden_object 18, 15, $d0, StartSlotMachine
+	hidden_object 18, 14, $d0, StartSlotMachine
+	hidden_object 18, 13, $d0, StartSlotMachine
+	hidden_object 18, 12, $d0, StartSlotMachine
+	hidden_object 18, 11, $d0, StartSlotMachine
+	hidden_object 18, 10, $ff, StartSlotMachine ; "Someone's Keys"
+	hidden_object 13, 10, $d0, StartSlotMachine
+	hidden_object 13, 11, $d0, StartSlotMachine
+	hidden_object 13, 12, $fe, StartSlotMachine ; "Out To Lunch"
+	hidden_object 13, 13, $d0, StartSlotMachine
+	hidden_object 13, 14, $d0, StartSlotMachine
+	hidden_object 13, 15, $d0, StartSlotMachine
+	hidden_object 12, 15, $d0, StartSlotMachine
+	hidden_object 12, 14, $d0, StartSlotMachine
+	hidden_object 12, 13, $d0, StartSlotMachine
+	hidden_object 12, 12, $d0, StartSlotMachine
+	hidden_object 12, 11, $d0, StartSlotMachine
+	hidden_object 12, 10, $d0, StartSlotMachine
+	hidden_object  7, 10, $d0, StartSlotMachine
+	hidden_object  7, 11, $d0, StartSlotMachine
+	hidden_object  7, 12, $d0, StartSlotMachine
+	hidden_object  7, 13, $d0, StartSlotMachine
+	hidden_object  7, 14, $d0, StartSlotMachine
+	hidden_object  7, 15, $d0, StartSlotMachine
+	hidden_object  6, 15, $d0, StartSlotMachine
+	hidden_object  6, 14, $d0, StartSlotMachine
+	hidden_object  6, 13, $d0, StartSlotMachine
+	hidden_object  6, 12, $fd, StartSlotMachine ; "Out Of Order"
+	hidden_object  6, 11, $d0, StartSlotMachine
+	hidden_object  6, 10, $d0, StartSlotMachine
+	hidden_object  1, 10, $d0, StartSlotMachine
+	hidden_object  1, 11, $d0, StartSlotMachine
+	hidden_object  1, 12, $d0, StartSlotMachine
+	hidden_object  1, 13, $d0, StartSlotMachine
+	hidden_object  1, 14, $d0, StartSlotMachine
+	hidden_object  1, 15, $d0, StartSlotMachine
+	hidden_object  0,  8, COIN+10, HiddenCoins
+	hidden_object  1, 16, COIN+10, HiddenCoins
+	hidden_object  3, 11, COIN+20, HiddenCoins
+	hidden_object  3, 14, COIN+10, HiddenCoins
+	hidden_object  4, 12, COIN+10, HiddenCoins
+	hidden_object  9, 12, COIN+20, HiddenCoins
+	hidden_object  9, 15, COIN+10, HiddenCoins
+	hidden_object 16, 14, COIN+10, HiddenCoins
+	hidden_object 10, 16, COIN+10, HiddenCoins
+	hidden_object 11,  7, COIN+40, HiddenCoins
+	hidden_object 15,  8, COIN+100, HiddenCoins
+	hidden_object 12, 15, COIN+10, HiddenCoins
+	db -1 ; end
+
 CeladonHotelHiddenObjects:
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $FF
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	db -1 ; end
+
 FuchsiaPokecenterHiddenObjects:
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $04,$00,$04
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $FF
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
+	db -1 ; end
+
 FuchsiaGymHiddenObjects:
-	db $0f,$03,$04
-	dbw BANK(GymStatues),GymStatues
-	db $0f,$06,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object  3, 15, SPRITE_FACING_UP, GymStatues
+	hidden_object  6, 15, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 CinnabarGymHiddenObjects:
-	db $0d,$11,$04
-	dbw BANK(GymStatues),GymStatues
-	db $07,$0f,$01
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $01,$0a,$12
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $07,$09,$13
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $0d,$09,$14
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $0d,$01,$05
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $07,$01,$16
-	db BANK(PrintCinnabarQuiz)
-	dw PrintCinnabarQuiz
-	db $FF
+	hidden_object 17, 13, SPRITE_FACING_UP, GymStatues
+	hidden_object 15,  7, (0 << 4) | 1, PrintCinnabarQuiz
+	hidden_object 10,  1, (1 << 4) | 2, PrintCinnabarQuiz
+	hidden_object  9,  7, (1 << 4) | 3, PrintCinnabarQuiz
+	hidden_object  9, 13, (1 << 4) | 4, PrintCinnabarQuiz
+	hidden_object  1, 13, (0 << 4) | 5, PrintCinnabarQuiz
+	hidden_object  1,  7, (1 << 4) | 6, PrintCinnabarQuiz
+	db -1 ; end
+
 CinnabarPokecenterHiddenObjects:
-	db $04,$00,$04
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 SaffronGymHiddenObjects:
-	db $0f,$09,$04
-	dbw BANK(GymStatues),GymStatues
-	db $FF
+	hidden_object  9, 15, SPRITE_FACING_UP, GymStatues
+	db -1 ; end
+
 MtMoonPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 RockTunnelPokecenterHiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 ViridianForestHiddenObjects:
-	db $12,$01,POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $2a,$10,ANTIDOTE
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  1, 18, POTION, HiddenItems
+	hidden_object 16, 42, ANTIDOTE, HiddenItems
+	db -1 ; end
+
 MtMoon3HiddenObjects:
-	db $0c,$12,MOON_STONE
-	dbw BANK(HiddenItems),HiddenItems
-	db $09,$21,ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 18, 12, MOON_STONE, HiddenItems
+	hidden_object 33,  9, ETHER, HiddenItems
+	db -1 ; end
+
 IndigoPlateauHiddenObjects:
-	db $0d,$08,$ff
-	db BANK(PrintIndigoPlateauHQText)
-	dw PrintIndigoPlateauHQText
-	db $0d,$0b,$00
-	db BANK(PrintIndigoPlateauHQText)
-	dw PrintIndigoPlateauHQText
-	db $FF
+	hidden_object  8, 13, $ff, PrintIndigoPlateauHQText
+	hidden_object 11, 13, SPRITE_FACING_DOWN, PrintIndigoPlateauHQText
+	db -1 ; end
+
 Route25HiddenObjects:
-	db $03,$26,ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $01,$0a,ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 38,  3, ETHER, HiddenItems
+	hidden_object 10,  1, ELIXER, HiddenItems
+	db -1 ; end
+
 Route9HiddenObjects:
-	db $07,$0e,ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 14,  7, ETHER, HiddenItems
+	db -1 ; end
+
 SSAnne6HiddenObjects:
-	db $05,$0d,$00
-	dbw BANK(PrintTrashText), PrintTrashText
-	db $07,$0d,$00
-	dbw BANK(PrintTrashText), PrintTrashText
-	db $09,$0d,GREAT_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 13,  5, SPRITE_FACING_DOWN, PrintTrashText
+	hidden_object 13,  7, SPRITE_FACING_DOWN, PrintTrashText
+	hidden_object 13,  9, GREAT_BALL, HiddenItems
+	db -1 ; end
+
 SSAnne10HiddenObjects:
-	db $01,$03,HYPER_POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  3,  1, HYPER_POTION, HiddenItems
+	db -1 ; end
+
 Route10HiddenObjects:
-	db $11,$09,SUPER_POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $35,$10,MAX_ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  9, 17, SUPER_POTION, HiddenItems
+	hidden_object 16, 53, MAX_ETHER, HiddenItems
+	db -1 ; end
+
 RocketHideout1HiddenObjects:
-	db $0f,$15,PP_UP
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 21, 15, PP_UP, HiddenItems
+	db -1 ; end
+
 RocketHideout3HiddenObjects:
-	db $11,$1b,NUGGET
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 27, 17, NUGGET, HiddenItems
+	db -1 ; end
+
 RocketHideout4HiddenObjects:
-	db $01,$19,SUPER_POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 25,  1, SUPER_POTION, HiddenItems
+	db -1 ; end
+
 SaffronPokecenterHiddenObjects:
-	db $04,$00,$04
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 PokemonTower5HiddenObjects:
-	db $0c,$04,ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  4, 12, ELIXER, HiddenItems
+	db -1 ; end
+
 Route13HiddenObjects:
-	db $0e,$01,PP_UP
-	dbw BANK(HiddenItems),HiddenItems
-	db $0d,$10,CALCIUM
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  1, 14, PP_UP, HiddenItems
+	hidden_object 16, 13, CALCIUM, HiddenItems
+	db -1 ; end
+
 SafariZoneEntranceHiddenObjects:
-	db $01,$0a,NUGGET
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 10,  1, NUGGET, HiddenItems
+	db -1 ; end
+
 SafariZoneWestHiddenObjects:
-	db $05,$06,REVIVE
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  6,  5, REVIVE, HiddenItems
+	db -1 ; end
+
 SilphCo5FHiddenObjects:
-	db $03,$0c,ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 12,  3, ELIXER, HiddenItems
+	db -1 ; end
+
 SilphCo9FHiddenObjects:
-	db $0f,$02,MAX_POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  2, 15, MAX_POTION, HiddenItems
+	db -1 ; end
+
 CopycatsHouse2FHiddenObjects:
-	db $01,$01,NUGGET
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  1,  1, NUGGET, HiddenItems
+	db -1 ; end
+
 CeruleanCave1HiddenObjects:
-	db $0b,$0e,RARE_CANDY
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 14, 11, RARE_CANDY, HiddenItems
+	db -1 ; end
+
 CeruleanCave3HiddenObjects:
-	db $03,$1b,ULTRA_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 27,  3, ULTRA_BALL, HiddenItems
+	db -1 ; end
+
 PowerPlantHiddenObjects:
-	db $10,$11,MAX_ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $01,$0c,PP_UP
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 17, 16, MAX_ELIXER, HiddenItems
+	hidden_object 12,  1, PP_UP, HiddenItems
+	db -1 ; end
+
 SeafoamIslands3HiddenObjects:
-	db $0f,$0f,NUGGET
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 15, 15, NUGGET, HiddenItems
+	db -1 ; end
+
 SeafoamIslands5HiddenObjects:
-	db $11,$19,ULTRA_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 25, 17, ULTRA_BALL, HiddenItems
+	db -1 ; end
+
 Mansion1HiddenObjects:
-	db $10,$08,MOON_STONE
-	dbw BANK(HiddenItems),HiddenItems
-	db $05,$02,$04
-	db BANK(Mansion1Script_Switches)
-	dw Mansion1Script_Switches
-	db $FF
+	hidden_object  8, 16, MOON_STONE, HiddenItems
+	hidden_object  2,  5, SPRITE_FACING_UP, Mansion1Script_Switches
+	db -1 ; end
+
 Mansion2HiddenObjects:
-	db $0b,$02,$04
-	db BANK(Mansion2Script_Switches)
-	dw Mansion2Script_Switches
-	db $FF
+	hidden_object  2, 11, SPRITE_FACING_UP, Mansion2Script_Switches
+	db -1 ; end
+
 Mansion3HiddenObjects:
-	db $09,$01,MAX_REVIVE
-	dbw BANK(HiddenItems),HiddenItems
-	db $05,$0a,$04
-	db BANK(Mansion3Script_Switches)
-	dw Mansion3Script_Switches
-	db $FF
+	hidden_object  1,  9, MAX_REVIVE, HiddenItems
+	hidden_object 10,  5, SPRITE_FACING_UP, Mansion3Script_Switches
+	db -1 ; end
+
 Mansion4HiddenObjects:
-	db $09,$01,RARE_CANDY
-	dbw BANK(HiddenItems),HiddenItems
-	db $03,$14,$04
-	db BANK(Mansion4Script_Switches)
-	dw Mansion4Script_Switches
-	db $19,$12,$04
-	db BANK(Mansion4Script_Switches)
-	dw Mansion4Script_Switches
-	db $FF
+	hidden_object  1,  9, RARE_CANDY, HiddenItems
+	hidden_object 20,  3, SPRITE_FACING_UP, Mansion4Script_Switches
+	hidden_object 18, 25, SPRITE_FACING_UP, Mansion4Script_Switches
+	db -1 ; end
+
 Route23HiddenObjects:
-	db $2c,$09,FULL_RESTORE
-	dbw BANK(HiddenItems),HiddenItems
-	db $46,$13,ULTRA_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $5a,$08,MAX_ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  9, 44, FULL_RESTORE, HiddenItems
+	hidden_object 19, 70, ULTRA_BALL, HiddenItems
+	hidden_object  8, 90, MAX_ETHER, HiddenItems
+	db -1 ; end
+
 VictoryRoad2HiddenObjects:
-	db $02,$05,ULTRA_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $07,$1a,FULL_RESTORE
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  5,  2, ULTRA_BALL, HiddenItems
+	hidden_object 26,  7, FULL_RESTORE, HiddenItems
+	db -1 ; end
+
 Unused6FHiddenObjects:
-	db $0b,$0e,MAX_ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 14, 11, MAX_ELIXER, HiddenItems
+	db -1 ; end
+
 BillsHouseHiddenObjects:
-	db $04,$01,$04
-	dbw BANK(BillsHousePC), BillsHousePC
-	db $FF
+	hidden_object  1,  4, SPRITE_FACING_UP, BillsHousePC
+	db -1 ; end
+
 ViridianCityHiddenObjects:
-	db $04,$0e,POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 14,  4, POTION, HiddenItems
+	db -1 ; end
+
 SafariZoneRestHouse2HiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 SafariZoneRestHouse3HiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 SafariZoneRestHouse4HiddenObjects:
-	db $04,$00,$08
-	db BANK(PrintBenchGuyText)
-	dw PrintBenchGuyText
-	db $03,$0d,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
+	hidden_object 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 Route15GateUpstairsHiddenObjects:
-	db $02,$01,$04
-	db BANK(Route15GateLeftBinoculars)
-	dw Route15GateLeftBinoculars
-	db $FF
+	hidden_object  1,  2, SPRITE_FACING_UP, Route15GateLeftBinoculars
+	db -1 ; end
+
 LavenderHouse1HiddenObjects:
-	db $01,$00,$00
-	db BANK(PrintMagazinesText)
-	dw PrintMagazinesText
-	db $01,$01,$00
-	db BANK(PrintMagazinesText)
-	dw PrintMagazinesText
-	db $01,$07,$00
-	db BANK(PrintMagazinesText)
-	dw PrintMagazinesText
-	db $FF
+	hidden_object  0,  1, SPRITE_FACING_DOWN, PrintMagazinesText
+	hidden_object  1,  1, SPRITE_FACING_DOWN, PrintMagazinesText
+	hidden_object  7,  1, SPRITE_FACING_DOWN, PrintMagazinesText
+	db -1 ; end
+
 CeladonMansion5HiddenObjects:
-	db $00,$03,(LinkCableHelp_id - TextPredefs) / 2 + 1
-	db BANK(PrintBlackboardLinkCableText)
-	dw PrintBlackboardLinkCableText
-	db $00,$04,(LinkCableHelp_id - TextPredefs) / 2 + 1
-	db BANK(PrintBlackboardLinkCableText)
-	dw PrintBlackboardLinkCableText
-	db $04,$03,(TMNotebook_id - TextPredefs) / 2 + 1
-	db BANK(PrintNotebookText)
-	dw PrintNotebookText
-	db $FF
+	hidden_text_predef  3,  0, LinkCableHelp, PrintBlackboardLinkCableText
+	hidden_text_predef  4,  0, LinkCableHelp, PrintBlackboardLinkCableText
+	hidden_text_predef  3,  4, TMNotebook, PrintNotebookText
+	db -1 ; end
+
 FightingDojoHiddenObjects:
-	db $09,$03,$04
-	db BANK(PrintFightingDojoText)
-	dw PrintFightingDojoText
-	db $09,$06,$04
-	db BANK(PrintFightingDojoText)
-	dw PrintFightingDojoText
-	db $00,$04,$04
-	db BANK(PrintFightingDojoText2)
-	dw PrintFightingDojoText2
-	db $00,$05,$04
-	db BANK(PrintFightingDojoText3)
-	dw PrintFightingDojoText3
-	db $FF
+	hidden_object  3,  9, SPRITE_FACING_UP, PrintFightingDojoText
+	hidden_object  6,  9, SPRITE_FACING_UP, PrintFightingDojoText
+	hidden_object  4,  0, SPRITE_FACING_UP, PrintFightingDojoText2
+	hidden_object  5,  0, SPRITE_FACING_UP, PrintFightingDojoText3
+	db -1 ; end
+
 IndigoPlateauLobbyHiddenObjects:
-	db $07,$0f,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object 15,  7, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 CinnabarLab4HiddenObjects:
-	db $04,$00,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $04,$02,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object  0,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
+	hidden_object  2,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 BikeShopHiddenObjects:
-	db $00,$01,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $01,$02,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $02,$01,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $02,$03,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $04,$00,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $05,$01,$d0
-	dbw BANK(PrintNewBikeText), PrintNewBikeText
-	db $FF
+	hidden_object  1,  0, $d0, PrintNewBikeText
+	hidden_object  2,  1, $d0, PrintNewBikeText
+	hidden_object  1,  2, $d0, PrintNewBikeText
+	hidden_object  3,  2, $d0, PrintNewBikeText
+	hidden_object  0,  4, $d0, PrintNewBikeText
+	hidden_object  1,  5, $d0, PrintNewBikeText
+	db -1 ; end
+
 Route11HiddenObjects:
-	db $05,$30,ESCAPE_ROPE
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 48,  5, ESCAPE_ROPE, HiddenItems
+	db -1 ; end
+
 Route12HiddenObjects:
-	db $3f,$02,HYPER_POTION
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  2, 63, HYPER_POTION, HiddenItems
+	db -1 ; end
+
 SilphCo11FHiddenObjects:
-	db $0c,$0a,$04
-	db BANK(OpenPokemonCenterPC)
-	dw OpenPokemonCenterPC
-	db $FF
+	hidden_object 10, 12, SPRITE_FACING_UP, OpenPokemonCenterPC
+	db -1 ; end
+
 Route17HiddenObjects:
-	db $0e,$0f,RARE_CANDY
-	dbw BANK(HiddenItems),HiddenItems
-	db $2d,$08,FULL_RESTORE
-	dbw BANK(HiddenItems),HiddenItems
-	db $48,$11,PP_UP
-	dbw BANK(HiddenItems),HiddenItems
-	db $5b,$04,MAX_REVIVE
-	dbw BANK(HiddenItems),HiddenItems
-	db $79,$08,MAX_ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 15,  14, RARE_CANDY, HiddenItems
+	hidden_object  8,  45, FULL_RESTORE, HiddenItems
+	hidden_object 17,  72, PP_UP, HiddenItems
+	hidden_object  4,  91, MAX_REVIVE, HiddenItems
+	hidden_object  8, 121, MAX_ELIXER, HiddenItems
+	db -1 ; end
+
 UndergroundPathNsHiddenObjects:
-	db $04,$03,FULL_RESTORE
-	dbw BANK(HiddenItems),HiddenItems
-	db $22,$04,X_SPECIAL
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  3,  4, FULL_RESTORE, HiddenItems
+	hidden_object  4, 34, X_SPECIAL, HiddenItems
+	db -1 ; end
+
 UndergroundPathWeHiddenObjects:
-	db $02,$0c,NUGGET
-	dbw BANK(HiddenItems),HiddenItems
-	db $05,$15,ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 12,  2, NUGGET, HiddenItems
+	hidden_object 21,  5, ELIXER, HiddenItems
+	db -1 ; end
+
 CeladonCityHiddenObjects:
-	db $0f,$30,PP_UP
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 48, 15, PP_UP, HiddenItems
+	db -1 ; end
+
 SeafoamIslands4HiddenObjects:
-	db $10,$09,MAX_ELIXER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object  9, 16, MAX_ELIXER, HiddenItems
+	db -1 ; end
+
 VermilionCityHiddenObjects:
-	db $0b,$0e,MAX_ETHER
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 14, 11, MAX_ETHER, HiddenItems
+	db -1 ; end
+
 CeruleanCityHiddenObjects:
-	db $08,$0f,RARE_CANDY
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 15,  8, RARE_CANDY, HiddenItems
+	db -1 ; end
+
 Route4HiddenObjects:
-	db $03,$28,GREAT_BALL
-	dbw BANK(HiddenItems),HiddenItems
-	db $FF
+	hidden_object 40,  3, GREAT_BALL, HiddenItems
+	db -1 ; end

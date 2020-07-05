@@ -6,7 +6,7 @@ RedsHouse1F_TextPointers:
 	dw RedsHouse1FText2
 
 RedsHouse1FText1: ; Mom
-	TX_ASM
+	text_asm
 	ld a, [wd72e]
 	bit 3, a
 	jr nz, .heal ; if player has received a Pokémon from Oak, heal team
@@ -19,8 +19,8 @@ RedsHouse1FText1: ; Mom
 	jp TextScriptEnd
 
 MomWakeUpText:
-	TX_FAR _MomWakeUpText
-	db "@"
+	text_far _MomWakeUpText
+	text_end
 
 MomHealPokemon:
 	ld hl, MomHealText1
@@ -43,15 +43,15 @@ MomHealPokemon:
 	jp PrintText
 
 MomHealText1:
-	TX_FAR _MomHealText1
-	db "@"
+	text_far _MomHealText1
+	text_end
 MomHealText2:
-	TX_FAR _MomHealText2
-	db "@"
+	text_far _MomHealText2
+	text_end
 
 RedsHouse1FText2: ; TV
-	TX_ASM
-	ld a, [wSpriteStateData1 + 9]
+	text_asm
+	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ld hl, TVWrongSideText
 	jr nz, .notUp
@@ -61,9 +61,9 @@ RedsHouse1FText2: ; TV
 	jp TextScriptEnd
 
 StandByMeText:
-	TX_FAR _StandByMeText
-	db "@"
+	text_far _StandByMeText
+	text_end
 
 TVWrongSideText:
-	TX_FAR _TVWrongSideText
-	db "@"
+	text_far _TVWrongSideText
+	text_end

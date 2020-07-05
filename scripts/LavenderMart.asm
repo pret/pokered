@@ -7,11 +7,11 @@ LavenderMart_TextPointers:
 	dw LavenderMartText3
 
 LavenderMartText2:
-	TX_FAR _LavenderMartText2
-	db "@"
+	text_far _LavenderMartText2
+	text_end
 
 LavenderMartText3:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_RESCUED_MR_FUJI
 	jr nz, .Nugget
 	ld hl, .ReviveText
@@ -24,9 +24,9 @@ LavenderMartText3:
 	jp TextScriptEnd
 
 .ReviveText
-	TX_FAR _LavenderMartReviveText
-	db "@"
+	text_far _LavenderMartReviveText
+	text_end
 
 .NuggetText
-	TX_FAR _LavenderMartNuggetText
-	db "@"
+	text_far _LavenderMartNuggetText
+	text_end

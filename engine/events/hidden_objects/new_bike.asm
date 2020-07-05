@@ -3,5 +3,5 @@ PrintNewBikeText:
 	tx_pre_jump NewBicycleText
 
 NewBicycleText::
-	TX_FAR _NewBicycleText
-	db "@"
+	text_far _NewBicycleText
+	text_end

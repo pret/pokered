@@ -9,5 +9,5 @@ PrintBookcaseText:
 	tx_pre_jump BookcaseText
 
 BookcaseText::
-	TX_FAR _BookcaseText
-	db "@"
+	text_far _BookcaseText
+	text_end

@@ -6,12 +6,12 @@ PrintNotebookText:
 	jp PrintPredefTextID
 
 TMNotebook::
-	TX_FAR TMNotebookText
-	TX_WAIT
-	db "@"
+	text_far TMNotebookText
+	text_linkpromptbutton
+	text_end
 
 ViridianSchoolNotebook::
-	TX_ASM
+	text_asm
 	ld hl, ViridianSchoolNotebookText1
 	call PrintText
 	call TurnPageSchoolNotebook
@@ -40,26 +40,26 @@ TurnPageSchoolNotebook:
 	ret
 
 TurnPageText:
-	TX_FAR _TurnPageText
-	db "@"
+	text_far _TurnPageText
+	text_end
 
 ViridianSchoolNotebookText5:
-	TX_FAR _ViridianSchoolNotebookText5
-	TX_WAIT
-	db "@"
+	text_far _ViridianSchoolNotebookText5
+	text_linkpromptbutton
+	text_end
 
 ViridianSchoolNotebookText1:
-	TX_FAR _ViridianSchoolNotebookText1
-	db "@"
+	text_far _ViridianSchoolNotebookText1
+	text_end
 
 ViridianSchoolNotebookText2:
-	TX_FAR _ViridianSchoolNotebookText2
-	db "@"
+	text_far _ViridianSchoolNotebookText2
+	text_end
 
 ViridianSchoolNotebookText3:
-	TX_FAR _ViridianSchoolNotebookText3
-	db "@"
+	text_far _ViridianSchoolNotebookText3
+	text_end
 
 ViridianSchoolNotebookText4:
-	TX_FAR _ViridianSchoolNotebookText4
-	db "@"
+	text_far _ViridianSchoolNotebookText4
+	text_end

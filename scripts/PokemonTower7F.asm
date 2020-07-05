@@ -70,7 +70,7 @@ PokemonTower7Script4:
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, SPRITE_FACING_UP
-	ld [wSpriteStateData1 + 9], a
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, MR_FUJIS_HOUSE
 	ld [hWarpDestinationMap], a
 	ld a, $1
@@ -234,25 +234,25 @@ PokemonTower7TrainerHeader2:
 	db $ff
 
 PokemonTower7Text1:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower7TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text2:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower7TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7Text3:
-	TX_ASM
+	text_asm
 	ld hl, PokemonTower7TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 PokemonTower7FujiText:
-	TX_ASM
+	text_asm
 	ld hl, TowerRescueFujiText
 	call PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
@@ -272,41 +272,41 @@ PokemonTower7FujiText:
 	jp TextScriptEnd
 
 TowerRescueFujiText:
-	TX_FAR _TowerRescueFujiText
-	db "@"
+	text_far _TowerRescueFujiText
+	text_end
 
 PokemonTower7BattleText1:
-	TX_FAR _PokemonTower7BattleText1
-	db "@"
+	text_far _PokemonTower7BattleText1
+	text_end
 
 PokemonTower7EndBattleText1:
-	TX_FAR _PokemonTower7EndBattleText1
-	db "@"
+	text_far _PokemonTower7EndBattleText1
+	text_end
 
 PokemonTower7AfterBattleText1:
-	TX_FAR _PokemonTower7AfterBattleText1
-	db "@"
+	text_far _PokemonTower7AfterBattleText1
+	text_end
 
 PokemonTower7BattleText2:
-	TX_FAR _PokemonTower7BattleText2
-	db "@"
+	text_far _PokemonTower7BattleText2
+	text_end
 
 PokemonTower7EndBattleText2:
-	TX_FAR _PokemonTower7EndBattleText2
-	db "@"
+	text_far _PokemonTower7EndBattleText2
+	text_end
 
 PokemonTower7AfterBattleText2:
-	TX_FAR _PokemonTower7AfterBattleText2
-	db "@"
+	text_far _PokemonTower7AfterBattleText2
+	text_end
 
 PokemonTower7BattleText3:
-	TX_FAR _PokemonTower7BattleText3
-	db "@"
+	text_far _PokemonTower7BattleText3
+	text_end
 
 PokemonTower7EndBattleText3:
-	TX_FAR _PokemonTower7EndBattleText3
-	db "@"
+	text_far _PokemonTower7EndBattleText3
+	text_end
 
 PokemonTower7AfterBattleText3:
-	TX_FAR _PokemonTower7AfterBattleText3
-	db "@"
+	text_far _PokemonTower7AfterBattleText3
+	text_end

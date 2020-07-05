@@ -12,7 +12,7 @@ PlayerStepOutFromDoor::
 	ld a, D_DOWN
 	ld [wSimulatedJoypadStatesEnd], a
 	xor a
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	call StartSimulatingJoypadStates
 	ret
 .notStandingOnDoor
@@ -110,7 +110,7 @@ PalletMovementScript_WalkToLab:
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	xor a
-	ld [wSpriteStateData2 + $06], a
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEList_PlayerWalkToLab
 	call DecodeRLEList
@@ -228,7 +228,7 @@ PewterMovementScript_WalkToGym:
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
 	xor a
-	ld [wSpriteStateData2 + $06], a
+	ld [wSpritePlayerStateData2MovementByte1], a
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEList_PewterGymPlayer
 	call DecodeRLEList

@@ -257,12 +257,12 @@ HoFMoneyText:
 	db "MONEY@"
 
 DexSeenOwnedText:
-	TX_FAR _DexSeenOwnedText
-	db "@"
+	text_far _DexSeenOwnedText
+	text_end
 
 DexRatingText:
-	TX_FAR _DexRatingText
-	db "@"
+	text_far _DexRatingText
+	text_end
 
 HoFRecordMonInfo:
 	ld hl, wHallOfFame

@@ -9,7 +9,7 @@ WardensHouse_TextPointers:
 	dw FuchsiaHouse2Text5
 
 FuchsiaHouse2Text1:
-	TX_ASM
+	text_asm
 	CheckEvent EVENT_GOT_HM04
 	jr nz, .subtract
 	ld b, GOLD_TEETH
@@ -56,45 +56,45 @@ FuchsiaHouse2Text1:
 	jp TextScriptEnd
 
 WardenGibberishText1:
-	TX_FAR _WardenGibberishText1
-	db "@"
+	text_far _WardenGibberishText1
+	text_end
 
 WardenGibberishText2:
-	TX_FAR _WardenGibberishText2
-	db "@"
+	text_far _WardenGibberishText2
+	text_end
 
 WardenGibberishText3:
-	TX_FAR _WardenGibberishText3
-	db "@"
+	text_far _WardenGibberishText3
+	text_end
 
 WardenTeethText1:
-	TX_FAR _WardenTeethText1
-	TX_SFX_ITEM_1
+	text_far _WardenTeethText1
+	sound_get_item_1
 
 WardenTeethText2:
-	TX_FAR _WardenTeethText2
-	db "@"
+	text_far _WardenTeethText2
+	text_end
 
 WardenThankYouText:
-	TX_FAR _WardenThankYouText
-	db "@"
+	text_far _WardenThankYouText
+	text_end
 
 ReceivedHM04Text:
-	TX_FAR _ReceivedHM04Text
-	TX_SFX_ITEM_1
-	db "@"
+	text_far _ReceivedHM04Text
+	sound_get_item_1
+	text_end
 
 HM04ExplanationText:
-	TX_FAR _HM04ExplanationText
-	db "@"
+	text_far _HM04ExplanationText
+	text_end
 
 HM04NoRoomText:
-	TX_FAR _HM04NoRoomText
-	db "@"
+	text_far _HM04NoRoomText
+	text_end
 
 FuchsiaHouse2Text5:
 FuchsiaHouse2Text4:
-	TX_ASM
+	text_asm
 	ld a, [hSpriteIndex]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
@@ -105,9 +105,9 @@ FuchsiaHouse2Text4:
 	jp TextScriptEnd
 
 FuchsiaHouse2Text_75176:
-	TX_FAR _FuchsiaHouse2Text_75176
-	db "@"
+	text_far _FuchsiaHouse2Text_75176
+	text_end
 
 FuchsiaHouse2Text_7517b:
-	TX_FAR _FuchsiaHouse2Text_7517b
-	db "@"
+	text_far _FuchsiaHouse2Text_7517b
+	text_end

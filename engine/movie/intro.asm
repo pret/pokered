@@ -97,7 +97,7 @@ PlayIntroScene:
 ; hip
 	ld a, SFX_INTRO_HIP
 	call PlaySound
-	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / BYTES_PER_TILE
+	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
@@ -129,7 +129,7 @@ PlayIntroScene:
 	call CheckForUserInterruption
 	ret c
 
-	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / BYTES_PER_TILE
+	ld a, (FightIntroFrontMon2 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation6
 	call AnimateIntroNidorino
@@ -140,7 +140,7 @@ PlayIntroScene:
 ; lunge
 	ld a, SFX_INTRO_LUNGE
 	call PlaySound
-	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / BYTES_PER_TILE
+	ld a, (FightIntroFrontMon3 - FightIntroFrontMon) / LEN_2BPP_TILE
 	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
 	jp AnimateIntroNidorino

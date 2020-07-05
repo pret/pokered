@@ -314,7 +314,7 @@ RocketHideout2Script3:
 	ret
 
 LoadSpinnerArrowTiles::
-	ld a, [wSpriteStateData1 + 2]
+	ld a, [wSpritePlayerStateData1ImageIndex]
 	srl a
 	srl a
 	ld hl, SpinnerPlayerFacingDirections
@@ -322,7 +322,7 @@ LoadSpinnerArrowTiles::
 	ld b, $0
 	add hl, bc
 	ld a, [hl]
-	ld [wSpriteStateData1 + 2], a
+	ld [wSpritePlayerStateData1ImageIndex], a
 	ld a, [wCurMapTileset]
 	cp FACILITY
 	ld hl, FacilitySpinnerArrows
@@ -432,19 +432,19 @@ RocketHideout2TrainerHeader0:
 	db $ff
 
 RocketHideout2Text1:
-	TX_ASM
+	text_asm
 	ld hl, RocketHideout2TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 RocketHideout2BattleText2:
-	TX_FAR _RocketHideout2BattleText2
-	db "@"
+	text_far _RocketHideout2BattleText2
+	text_end
 
 RocketHideout2EndBattleText2:
-	TX_FAR _RocketHideout2EndBattleText2
-	db "@"
+	text_far _RocketHideout2EndBattleText2
+	text_end
 
 RocketHideout2AfterBattleTxt2:
-	TX_FAR _RocketHideout2AfterBattleTxt2
-	db "@"
+	text_far _RocketHideout2AfterBattleTxt2
+	text_end

@@ -25,8 +25,8 @@ ConversionEffect_:
 	jp PrintText
 
 ConvertedTypeText:
-	TX_FAR _ConvertedTypeText
-	db "@"
+	text_far _ConvertedTypeText
+	text_end
 
 PrintButItFailedText:
 	ld hl, PrintButItFailedText_

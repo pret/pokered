@@ -168,186 +168,186 @@ Route20TrainerHeader9:
 	db $ff
 
 Route20Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20Text10:
-	TX_ASM
+	text_asm
 	ld hl, Route20TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route20BattleText1:
-	TX_FAR _Route20BattleText1
-	db "@"
+	text_far _Route20BattleText1
+	text_end
 
 Route20EndBattleText1:
-	TX_FAR _Route20EndBattleText1
-	db "@"
+	text_far _Route20EndBattleText1
+	text_end
 
 Route20AfterBattleText1:
-	TX_FAR _Route20AfterBattleText1
-	db "@"
+	text_far _Route20AfterBattleText1
+	text_end
 
 Route20BattleText2:
-	TX_FAR _Route20BattleText2
-	db "@"
+	text_far _Route20BattleText2
+	text_end
 
 Route20EndBattleText2:
-	TX_FAR _Route20EndBattleText2
-	db "@"
+	text_far _Route20EndBattleText2
+	text_end
 
 Route20AfterBattleText2:
-	TX_FAR _Route20AfterBattleText2
-	db "@"
+	text_far _Route20AfterBattleText2
+	text_end
 
 Route20BattleText3:
-	TX_FAR _Route20BattleText3
-	db "@"
+	text_far _Route20BattleText3
+	text_end
 
 Route20EndBattleText3:
-	TX_FAR _Route20EndBattleText3
-	db "@"
+	text_far _Route20EndBattleText3
+	text_end
 
 Route20AfterBattleText3:
-	TX_FAR _Route20AfterBattleText3
-	db "@"
+	text_far _Route20AfterBattleText3
+	text_end
 
 Route20BattleText4:
-	TX_FAR _Route20BattleText4
-	db "@"
+	text_far _Route20BattleText4
+	text_end
 
 Route20EndBattleText4:
-	TX_FAR _Route20EndBattleText4
-	db "@"
+	text_far _Route20EndBattleText4
+	text_end
 
 Route20AfterBattleText4:
-	TX_FAR _Route20AfterBattleText4
-	db "@"
+	text_far _Route20AfterBattleText4
+	text_end
 
 Route20BattleText5:
-	TX_FAR _Route20BattleText5
-	db "@"
+	text_far _Route20BattleText5
+	text_end
 
 Route20EndBattleText5:
-	TX_FAR _Route20EndBattleText5
-	db "@"
+	text_far _Route20EndBattleText5
+	text_end
 
 Route20AfterBattleText5:
-	TX_FAR _Route20AfterBattleText5
-	db "@"
+	text_far _Route20AfterBattleText5
+	text_end
 
 Route20BattleText6:
-	TX_FAR _Route20BattleText6
-	db "@"
+	text_far _Route20BattleText6
+	text_end
 
 Route20EndBattleText6:
-	TX_FAR _Route20EndBattleText6
-	db "@"
+	text_far _Route20EndBattleText6
+	text_end
 
 Route20AfterBattleText6:
-	TX_FAR _Route20AfterBattleText6
-	db "@"
+	text_far _Route20AfterBattleText6
+	text_end
 
 Route20BattleText7:
-	TX_FAR _Route20BattleText7
-	db "@"
+	text_far _Route20BattleText7
+	text_end
 
 Route20EndBattleText7:
-	TX_FAR _Route20EndBattleText7
-	db "@"
+	text_far _Route20EndBattleText7
+	text_end
 
 Route20AfterBattleText7:
-	TX_FAR _Route20AfterBattleText7
-	db "@"
+	text_far _Route20AfterBattleText7
+	text_end
 
 Route20BattleText8:
-	TX_FAR _Route20BattleText8
-	db "@"
+	text_far _Route20BattleText8
+	text_end
 
 Route20EndBattleText8:
-	TX_FAR _Route20EndBattleText8
-	db "@"
+	text_far _Route20EndBattleText8
+	text_end
 
 Route20AfterBattleText8:
-	TX_FAR _Route20AfterBattleText8
-	db "@"
+	text_far _Route20AfterBattleText8
+	text_end
 
 Route20BattleText9:
-	TX_FAR _Route20BattleText9
-	db "@"
+	text_far _Route20BattleText9
+	text_end
 
 Route20EndBattleText9:
-	TX_FAR _Route20EndBattleText9
-	db "@"
+	text_far _Route20EndBattleText9
+	text_end
 
 Route20AfterBattleText9:
-	TX_FAR _Route20AfterBattleText9
-	db "@"
+	text_far _Route20AfterBattleText9
+	text_end
 
 Route20BattleText10:
-	TX_FAR _Route20BattleText10
-	db "@"
+	text_far _Route20BattleText10
+	text_end
 
 Route20EndBattleText10:
-	TX_FAR _Route20EndBattleText10
-	db "@"
+	text_far _Route20EndBattleText10
+	text_end
 
 Route20AfterBattleText10:
-	TX_FAR _Route20AfterBattleText10
-	db "@"
+	text_far _Route20AfterBattleText10
+	text_end
 
 Route20Text12:
 Route20Text11:
-	TX_FAR _Route20Text11
-	db "@"
+	text_far _Route20Text11
+	text_end

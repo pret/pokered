@@ -123,205 +123,205 @@ Route17TrainerHeader9:
 	db $ff
 
 Route17Text1:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText1:
-	TX_FAR _Route17BattleText1
-	db "@"
+	text_far _Route17BattleText1
+	text_end
 
 Route17EndBattleText1:
-	TX_FAR _Route17EndBattleText1
-	db "@"
+	text_far _Route17EndBattleText1
+	text_end
 
 Route17AfterBattleText1:
-	TX_FAR _Route17AfterBattleText1
-	db "@"
+	text_far _Route17AfterBattleText1
+	text_end
 
 Route17Text2:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText2:
-	TX_FAR _Route17BattleText2
-	db "@"
+	text_far _Route17BattleText2
+	text_end
 
 Route17EndBattleText2:
-	TX_FAR _Route17EndBattleText2
-	db "@"
+	text_far _Route17EndBattleText2
+	text_end
 
 Route17AfterBattleText2:
-	TX_FAR _Route17AfterBattleText2
-	db "@"
+	text_far _Route17AfterBattleText2
+	text_end
 
 Route17Text3:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText3:
-	TX_FAR _Route17BattleText3
-	db "@"
+	text_far _Route17BattleText3
+	text_end
 
 Route17EndBattleText3:
-	TX_FAR _Route17EndBattleText3
-	db "@"
+	text_far _Route17EndBattleText3
+	text_end
 
 Route17AfterBattleText3:
-	TX_FAR _Route17AfterBattleText3
-	db "@"
+	text_far _Route17AfterBattleText3
+	text_end
 
 Route17Text4:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText4:
-	TX_FAR _Route17BattleText4
-	db "@"
+	text_far _Route17BattleText4
+	text_end
 
 Route17EndBattleText4:
-	TX_FAR _Route17EndBattleText4
-	db "@"
+	text_far _Route17EndBattleText4
+	text_end
 
 Route17AfterBattleText4:
-	TX_FAR _Route17AfterBattleText4
-	db "@"
+	text_far _Route17AfterBattleText4
+	text_end
 
 Route17Text5:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText5:
-	TX_FAR _Route17BattleText5
-	db "@"
+	text_far _Route17BattleText5
+	text_end
 
 Route17EndBattleText5:
-	TX_FAR _Route17EndBattleText5
-	db "@"
+	text_far _Route17EndBattleText5
+	text_end
 
 Route17AfterBattleText5:
-	TX_FAR _Route17AfterBattleText5
-	db "@"
+	text_far _Route17AfterBattleText5
+	text_end
 
 Route17Text6:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText6:
-	TX_FAR _Route17BattleText6
-	db "@"
+	text_far _Route17BattleText6
+	text_end
 
 Route17EndBattleText6:
-	TX_FAR _Route17EndBattleText6
-	db "@"
+	text_far _Route17EndBattleText6
+	text_end
 
 Route17AfterBattleText6:
-	TX_FAR _Route17AfterBattleText6
-	db "@"
+	text_far _Route17AfterBattleText6
+	text_end
 
 Route17Text7:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText7:
-	TX_FAR _Route17BattleText7
-	db "@"
+	text_far _Route17BattleText7
+	text_end
 
 Route17EndBattleText7:
-	TX_FAR _Route17EndBattleText7
-	db "@"
+	text_far _Route17EndBattleText7
+	text_end
 
 Route17AfterBattleText7:
-	TX_FAR _Route17AfterBattleText7
-	db "@"
+	text_far _Route17AfterBattleText7
+	text_end
 
 Route17Text8:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText8:
-	TX_FAR _Route17BattleText8
-	db "@"
+	text_far _Route17BattleText8
+	text_end
 
 Route17EndBattleText8:
-	TX_FAR _Route17EndBattleText8
-	db "@"
+	text_far _Route17EndBattleText8
+	text_end
 
 Route17AfterBattleText8:
-	TX_FAR _Route17AfterBattleText8
-	db "@"
+	text_far _Route17AfterBattleText8
+	text_end
 
 Route17Text9:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText9:
-	TX_FAR _Route17BattleText9
-	db "@"
+	text_far _Route17BattleText9
+	text_end
 
 Route17EndBattleText9:
-	TX_FAR _Route17EndBattleText9
-	db "@"
+	text_far _Route17EndBattleText9
+	text_end
 
 Route17AfterBattleText9:
-	TX_FAR _Route17AfterBattleText9
-	db "@"
+	text_far _Route17AfterBattleText9
+	text_end
 
 Route17Text10:
-	TX_ASM
+	text_asm
 	ld hl, Route17TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
 Route17BattleText10:
-	TX_FAR _Route17BattleText10
-	db "@"
+	text_far _Route17BattleText10
+	text_end
 
 Route17EndBattleText10:
-	TX_FAR _Route17EndBattleText10
-	db "@"
+	text_far _Route17EndBattleText10
+	text_end
 
 Route17AfterBattleText10:
-	TX_FAR _Route17AfterBattleText10
-	db "@"
+	text_far _Route17AfterBattleText10
+	text_end
 
 Route17Text11:
-	TX_FAR _Route17Text11
-	db "@"
+	text_far _Route17Text11
+	text_end
 
 Route17Text12:
-	TX_FAR _Route17Text12
-	db "@"
+	text_far _Route17Text12
+	text_end
 
 Route17Text13:
-	TX_FAR _Route17Text13
-	db "@"
+	text_far _Route17Text13
+	text_end
 
 Route17Text14:
-	TX_FAR _Route17Text14
-	db "@"
+	text_far _Route17Text14
+	text_end
 
 Route17Text15:
-	TX_FAR _Route17Text15
-	db "@"
+	text_far _Route17Text15
+	text_end
 
 Route17Text16:
-	TX_FAR _Route17Text16
-	db "@"
+	text_far _Route17Text16
+	text_end

@@ -3,8 +3,8 @@ PrintTrashText:
 	tx_pre_jump VermilionGymTrashText
 
 VermilionGymTrashText::
-	TX_FAR _VermilionGymTrashText
-	db "@"
+	text_far _VermilionGymTrashText
+	text_end
 
 GymTrashScript:
 	call EnableAutoTextBoxDrawing
@@ -128,8 +128,8 @@ GymTrashCans:
 	db 2, 11, 13,  0,  0 ; 14
 
 VermilionGymTrashSuccessText1::
-	TX_FAR _VermilionGymTrashSuccessText1
-	TX_ASM
+	text_far _VermilionGymTrashSuccessText1
+	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
 	call PlaySound
@@ -138,12 +138,12 @@ VermilionGymTrashSuccessText1::
 
 ; unused
 VermilionGymTrashSuccessText2::
-	TX_FAR _VermilionGymTrashSuccessText2
-	db "@"
+	text_far _VermilionGymTrashSuccessText2
+	text_end
 
 ; unused
 VermilionGymTrashSuccesPlaySfx:
-	TX_ASM
+	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
 	call PlaySound
@@ -151,8 +151,8 @@ VermilionGymTrashSuccesPlaySfx:
 	jp TextScriptEnd
 
 VermilionGymTrashSuccessText3::
-	TX_FAR _VermilionGymTrashSuccessText3
-	TX_ASM
+	text_far _VermilionGymTrashSuccessText3
+	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE
 	call PlaySound
@@ -160,8 +160,8 @@ VermilionGymTrashSuccessText3::
 	jp TextScriptEnd
 
 VermilionGymTrashFailText::
-	TX_FAR _VermilionGymTrashFailText
-	TX_ASM
+	text_far _VermilionGymTrashFailText
+	text_asm
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
 	call PlaySound

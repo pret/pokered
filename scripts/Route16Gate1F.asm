@@ -92,7 +92,7 @@ Route16Gate1F_TextPointers:
 	dw Route16GateText3
 
 Route16GateText1:
-	TX_ASM
+	text_asm
 	call Route16GateScript_49755
 	jr z, .asm_0bdf3
 	ld hl, Route16GateText_4977c
@@ -105,17 +105,17 @@ Route16GateText1:
 	jp TextScriptEnd
 
 Route16GateText_49777:
-	TX_FAR _Route16GateText_49777
-	db "@"
+	text_far _Route16GateText_49777
+	text_end
 
 Route16GateText_4977c:
-	TX_FAR _Route16GateText_4977c
-	db "@"
+	text_far _Route16GateText_4977c
+	text_end
 
 Route16GateText3:
-	TX_FAR _Route16GateText_49781
-	db "@"
+	text_far _Route16GateText_49781
+	text_end
 
 Route16GateText2:
-	TX_FAR _Route16GateText2
-	db "@"
+	text_far _Route16GateText2
+	text_end

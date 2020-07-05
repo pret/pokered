@@ -14,7 +14,7 @@ _NameRaterText_1dab8::
 	prompt
 
 _NameRaterText_1dabd::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text ", is it?"
 	line "That is a decent"
 	cont "nickname!"
@@ -35,7 +35,7 @@ _NameRaterText_1dac7::
 	text "OK! This #MON"
 	line "has been renamed"
 	cont "@"
-	TX_RAM wBuffer
+	text_ram wBuffer
 	text "!"
 
 	para "That's a better"
@@ -48,13 +48,13 @@ _NameRaterText_1dacc::
 	done
 
 _NameRaterText_1dad1::
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text ", is it?"
 	line "That is a truly"
 	cont "impeccable name!"
 
 	para "Take good care of"
 	line "@"
-	TX_RAM wcd6d
+	text_ram wcd6d
 	text "!"
 	done
