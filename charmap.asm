@@ -262,7 +262,7 @@
 	charmap "イ", $81
 	charmap "ウ", $82
 	charmap "エ", $83
-	charmap "ォ", $84
+	charmap "オ", $84
 	charmap "カ", $85
 	charmap "キ", $86
 	charmap "ク", $87
