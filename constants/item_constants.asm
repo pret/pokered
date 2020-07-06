@@ -103,10 +103,27 @@ SAFARI_ROCK           EQU $16 ; overload
 const_value = $C4
 
 add_hm: MACRO
-if !DEF(HM01)
+; Defines three constants:
+; - HM_\1: the item id, starting at $C4
+; - \1_TMNUM: the learnable TM/HM flag, starting at 51
+; - HM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines HM01 as the first HM item id.
+;
+; HMs are defined before TMs, so the value of NUM_TMS is not
+; available here, and its value of 50 is hard-coded.
+IF !DEF(HM01)
 HM01 EQU const_value
 	enum_start 51 ; NUM_TMS + 1
-endc
+ENDC
+HM_VALUE EQU __enum__ - 50 ; __enum__ - NUM_TMS
+IF HM_VALUE < 10
+MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
+ELSE
+MOVE_FOR_HM EQUS "HM{d:HM_VALUE}_MOVE"
+ENDC
+MOVE_FOR_HM = \1
+PURGE MOVE_FOR_HM
+PURGE HM_VALUE
 	const HM_\1
 	enum \1_TMNUM
 ENDM
@@ -119,10 +136,22 @@ ENDM
 NUM_HMS EQU const_value - HM01
 
 add_tm: MACRO
-if !DEF(TM01)
+; Defines three constants:
+; - TM_\1: the item id, starting at $C9
+; - \1_TMNUM: the learnable TM/HM flag, starting at 1
+; - TM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines TM01 as the first TM item id.
+IF !DEF(TM01)
 TM01 EQU const_value
 	enum_start 1
-endc
+ENDC
+IF __enum__ < 10
+MOVE_FOR_TM EQUS "TM0{d:__enum__}_MOVE"
+ELSE
+MOVE_FOR_TM EQUS "TM{d:__enum__}_MOVE"
+ENDC
+MOVE_FOR_TM = \1
+PURGE MOVE_FOR_TM
 	const TM_\1
 	enum \1_TMNUM
 ENDM
@@ -179,5 +208,7 @@ ENDM
 	add_tm SUBSTITUTE   ; $FA
 NUM_TMS EQU const_value - TM01
 
+; 50 TMs + 5 HMs = 55 learnable TM/HM flags per Pokémon.
+; These fit in 7 bytes, with one unused bit left over.
 	enum_start NUM_TMS + NUM_HMS + 1
 	enum UNUSED_TMNUM
