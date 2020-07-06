@@ -30,7 +30,7 @@ GetItemName::
 	push hl
 	push bc
 	ld a, [wd11e]
-	cp HM_01 ; is this a TM/HM?
+	cp HM01 ; is this a TM/HM?
 	jr nc, .Machine
 
 	ld [wd0b5], a
@@ -56,11 +56,11 @@ GetMachineName::
 	push bc
 	ld a, [wd11e]
 	push af
-	cp TM_01 ; is this a TM? [not HM]
+	cp TM01 ; is this a TM? [not HM]
 	jr nc, .WriteTM
-; if HM, then write "HM" and add 5 to the item ID, so we can reuse the
+; if HM, then write "HM" and add NUM_HMS to the item ID, so we can reuse the
 ; TM printing code
-	add 5
+	add NUM_HMS
 	ld [wd11e], a
 	ld hl, HiddenPrefix ; points to "HM"
 	ld bc, 2
@@ -74,7 +74,7 @@ GetMachineName::
 
 ; now get the machine number and convert it to text
 	ld a, [wd11e]
-	sub TM_01 - 1
+	sub TM01 - 1
 	ld b, "0"
 .FirstDigit
 	sub 10
@@ -109,9 +109,9 @@ HiddenPrefix::
 ; sets carry if item is HM, clears carry if item is not HM
 ; Input: a = item ID
 IsItemHM::
-	cp HM_01
+	cp HM01
 	jr c, .notHM
-	cp TM_01
+	cp TM01
 	ret
 .notHM
 	and a

@@ -11,7 +11,7 @@ Route2GateText1:
 	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
 	ld [hOaksAideRequirement], a
-	ld a, HM_05 ; oak's aide reward
+	ld a, HM_FLASH ; oak's aide reward
 	ld [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName

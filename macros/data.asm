@@ -22,12 +22,16 @@ _tms1 = 0 ; TM01-TM24 (24)
 _tms2 = 0 ; TM25-TM48 (24)
 _tms3 = 0 ; TM49-TM50 + HM01-HM05 (7/24)
 rept _NARG
-	if (\1) < 24 + 1
-_tms1 = _tms1 | (1 << ((\1) - 1))
-	elif (\1) < 48 + 1
-_tms2 = _tms2 | (1 << ((\1) - 1 - 24))
+	if DEF(\1_TMNUM)
+	if \1_TMNUM < 24 + 1
+_tms1 = _tms1 | (1 << ((\1_TMNUM) - 1))
+	elif \1_TMNUM < 48 + 1
+_tms2 = _tms2 | (1 << ((\1_TMNUM) - 1 - 24))
 	else
-_tms3 = _tms3 | (1 << ((\1) - 1 - 48))
+_tms3 = _tms3 | (1 << ((\1_TMNUM) - 1 - 48))
+	endc
+	else
+		fail "\1 is not a TM or HM move"
 	endc
 	shift
 endr

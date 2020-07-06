@@ -14,7 +14,7 @@
 	db 0 ; growth rate
 
 	; tm/hm learnset
-	tmhm 4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 40, 43, 44, 49, 50, 52
+	tmhm WHIRLWIND, TOXIC, BODY_SLAM, TAKE_DOWN, DOUBLE_EDGE, RAGE, MIMIC, DOUBLE_TEAM, REFLECT, BIDE, SKULL_BASH, SKY_ATTACK, REST, TRI_ATTACK, SUBSTITUTE, FLY
 	; end
 
 	db 0 ; padding

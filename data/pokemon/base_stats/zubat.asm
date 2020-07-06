@@ -14,7 +14,7 @@
 	db 0 ; growth rate
 
 	; tm/hm learnset
-	tmhm 2, 4, 6, 9, 10, 20, 21, 31, 32, 34, 39, 44, 50
+	tmhm RAZOR_WIND, WHIRLWIND, TOXIC, TAKE_DOWN, DOUBLE_EDGE, RAGE, MEGA_DRAIN, MIMIC, DOUBLE_TEAM, BIDE, SWIFT, REST, SUBSTITUTE
 	; end
 
 	db 0 ; padding

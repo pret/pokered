@@ -235,7 +235,7 @@ ViridianCityText6:
 	jr nz, .gotTm42
 	ld hl, ViridianCityText_191ca
 	call PrintText
-	lb bc, TM_42, 1
+	lb bc, TM_DREAM_EATER, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text

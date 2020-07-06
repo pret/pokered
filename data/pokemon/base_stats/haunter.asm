@@ -14,7 +14,7 @@
 	db 3 ; growth rate
 
 	; tm/hm learnset
-	tmhm 6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50
+	tmhm TOXIC, RAGE, MEGA_DRAIN, THUNDERBOLT, THUNDER, PSYCHIC_M, MIMIC, DOUBLE_TEAM, BIDE, SELFDESTRUCT, DREAM_EATER, REST, PSYWAVE, EXPLOSION, SUBSTITUTE
 	; end
 
 	db 0 ; padding

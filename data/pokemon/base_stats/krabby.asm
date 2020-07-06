@@ -14,7 +14,7 @@
 	db 0 ; growth rate
 
 	; tm/hm learnset
-	tmhm 3, 6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 51, 53, 54
+	tmhm SWORDS_DANCE, TOXIC, BODY_SLAM, TAKE_DOWN, DOUBLE_EDGE, BUBBLEBEAM, WATER_GUN, ICE_BEAM, BLIZZARD, RAGE, MIMIC, DOUBLE_TEAM, BIDE, REST, SUBSTITUTE, CUT, SURF, STRENGTH
 	; end
 
 	db 0 ; padding

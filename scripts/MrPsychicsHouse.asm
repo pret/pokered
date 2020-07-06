@@ -10,7 +10,7 @@ SaffronHouse2Text1:
 	jr nz, .asm_9e72b
 	ld hl, TM29PreReceiveText
 	call PrintText
-	lb bc, TM_29, 1
+	lb bc, TM_PSYCHIC_M, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM29Text

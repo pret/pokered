@@ -19,7 +19,7 @@ GetName::
 
 	; TM names are separate from item names.
 	; BUG: This applies to all names instead of just items.
-	cp HM_01
+	cp HM01
 	jp nc, GetMachineName
 
 	ld a, [hLoadedROMBank]

@@ -142,7 +142,7 @@ SilphCo2Text1:
 	jr nz, .asm_59de4
 	ld hl, SilphCo2Text_59ded
 	call PrintText
-	lb bc, TM_36, 1
+	lb bc, TM_SELFDESTRUCT, 1
 	call GiveItem
 	ld hl, TM36NoRoomText
 	jr nc, .asm_59de7

@@ -60,9 +60,9 @@ ENDC
 	db "@"
 
 PrizeMenuTMsEntries:
-	db TM_23
-	db TM_15
-	db TM_50
+	db TM_DRAGON_RAGE
+	db TM_HYPER_BEAM
+	db TM_SUBSTITUTE
 	db "@"
 
 PrizeMenuTMsCost:
