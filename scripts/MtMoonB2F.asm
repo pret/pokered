@@ -323,7 +323,7 @@ MtMoon3Script_49f69:
 MtMoon3Text_49f6f:
 	text_far _MtMoon3Text_49f6f
 	sound_get_key_item
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 MtMoon3Script_49f76:
@@ -333,7 +333,7 @@ MtMoon3Script_49f76:
 
 MtMoon3Text_49f7f:
 	text_far _MtMoon3Text_49f7f
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 MtMoon3Text_49f85:

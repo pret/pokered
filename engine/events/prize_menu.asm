@@ -44,7 +44,7 @@ CeladonPrizeMenu::
 
 RequireCoinCaseTextPtr:
 	text_far _RequireCoinCaseText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 ExchangeCoinsForPrizesTextPtr:
@@ -264,7 +264,7 @@ UnknownPrizeData:
 
 HereYouGoTextPtr:
 	text_far _HereYouGoText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 SoYouWantPrizeTextPtr:
@@ -273,17 +273,17 @@ SoYouWantPrizeTextPtr:
 
 SorryNeedMoreCoinsText:
 	text_far _SorryNeedMoreCoinsText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 PrizeRoomBagIsFullTextPtr:
 	text_far _OopsYouDontHaveEnoughRoomText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 OhFineThenTextPtr:
 	text_far _OhFineThenText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 GetPrizeMonLevel:

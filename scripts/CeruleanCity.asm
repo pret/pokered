@@ -322,7 +322,7 @@ ReceivedTM28Text:
 	text_far _ReceivedTM28Text
 	sound_get_item_1
 	text_far _ReceivedTM28Text2
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 TM28NoRoomText:

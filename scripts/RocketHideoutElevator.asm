@@ -81,5 +81,5 @@ RocketHideoutElevatorText1:
 
 RocketHideoutElevatorText_4578b:
 	text_far _RocketElevatorText_4578b
-	text_linkpromptbutton
+	text_waitbutton
 	text_end

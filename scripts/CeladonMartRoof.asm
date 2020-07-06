@@ -139,48 +139,48 @@ CeladonMartRoofText_484ee:
 
 CeladonMartRoofText_484f3:
 	text_far _CeladonMartRoofText_484f3
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_484f9:
 	text_far _CeladonMartRoofText_484f9
 	sound_get_item_1
 	text_far _CeladonMartRoofText_484fe
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_48504:
 	text_far _CeladonMartRoofText_48504
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_4850a:
 	text_far _CeladonMartRoofText_4850a
 	sound_get_item_1
 	text_far _CeladonMartRoofText_4850f
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_48515:
 	text_far _CeladonMartRoofText_48515
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 ReceivedTM49Text:
 	text_far _ReceivedTM49Text
 	sound_get_item_1
 	text_far _CeladonMartRoofText_48520
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_48526:
 	text_far _CeladonMartRoofText_48526
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofText_4852c:
 	text_far _CeladonMartRoofText_4852c
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CeladonMartRoofScript_PrintDrinksInBag:
