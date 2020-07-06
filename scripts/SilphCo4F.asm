@@ -45,7 +45,7 @@ SilphCo4Script_19d5d:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [hUnlockedSilphCoDoors], a
+	ldh [hUnlockedSilphCoDoors], a
 	pop hl
 .asm_19d69
 	ld a, [hli]
@@ -70,12 +70,12 @@ SilphCo4Script_19d5d:
 	ret
 .asm_19d85
 	xor a
-	ld [hUnlockedSilphCoDoors], a
+	ldh [hUnlockedSilphCoDoors], a
 	ret
 
 SilphCo4Script_19d89:
 	EventFlagAddress hl, EVENT_SILPH_CO_4_UNLOCKED_DOOR1
-	ld a, [hUnlockedSilphCoDoors]
+	ldh a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	cp $1

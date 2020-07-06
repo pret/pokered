@@ -122,18 +122,18 @@ LoadFrontSpriteByMonIndex::
 	ld de, vFrontPic
 	call LoadMonFrontSprite
 	pop hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(CopyUncompressedPicToHL)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	xor a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -175,10 +175,10 @@ GetCryData::
 	ret
 
 DisplayPartyMenu::
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call PartyMenuInit
@@ -186,10 +186,10 @@ DisplayPartyMenu::
 	jp HandlePartyMenuInput
 
 GoBackToPartyMenu::
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call PartyMenuInit
 	call RedrawPartyMenu
 	jp HandlePartyMenuInput
@@ -251,7 +251,7 @@ HandlePartyMenuInput::
 	and a
 	jp nz, .swappingPokemon
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	bit 1, b
 	jr nz, .noPokemonChosen
 	ld a, [wPartyCount]
@@ -325,15 +325,15 @@ PrintStatusCondition::
 	ret
 
 PrintStatusConditionNotFainted::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(PrintStatusAilment)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call PrintStatusAilment ; print status condition
 	pop bc
 	ld a, b
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -382,10 +382,10 @@ GetwMoves::
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(BaseStats)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push bc
 	push de
@@ -440,7 +440,7 @@ GetMonHeader::
 	pop de
 	pop bc
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 

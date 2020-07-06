@@ -12,15 +12,15 @@ const_value = 3
 
 PlayIntro:
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call PlayShootingStar
 	call PlayIntroScene
 	call GBFadeOutToWhite
 	xor a
-	ld [hSCX], a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hSCX], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearSprites
 	call DelayFrame
 	ret
@@ -29,11 +29,11 @@ PlayIntroScene:
 	ld b, SET_PAL_NIDORINO_INTRO
 	call RunPaletteCommand
 	ldPal a, BLACK, DARK_GRAY, LIGHT_GRAY, WHITE
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	xor a
-	ld [hSCX], a
+	ldh [hSCX], a
 	ld b, GENGAR_INTRO_TILES1
 	call IntroCopyTiles
 	ld a, 0
@@ -245,7 +245,7 @@ IntroMoveMon:
 	cp MOVE_GENGAR_LEFT
 	jr z, .moveGengarLeft
 ; move Gengar right
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	dec a
 	dec a
 	jr .next
@@ -259,11 +259,11 @@ IntroMoveMon:
 	call UpdateIntroNidorinoOAM
 	pop de
 .moveGengarLeft
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	inc a
 	inc a
 .next
-	ld [hSCX], a
+	ldh [hSCX], a
 	push de
 	ld c, 2
 	call CheckForUserInterruption
@@ -313,7 +313,7 @@ PlayShootingStar:
 	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
 	ldPal a, BLACK, DARK_GRAY, LIGHT_GRAY, WHITE
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 180
 	call DelayFrames
 	call ClearScreen

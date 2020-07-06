@@ -48,10 +48,10 @@ TryDoWildEncounter:
 .CanEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	cp b
 	jr nc, .CantEncounter2
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	ld b, a
 	ld hl, WildMonEncounterSlotChances
 .determineEncounterSlot
@@ -90,7 +90,7 @@ TryDoWildEncounter:
 .lastRepelStep
 	ld [wRepelRemainingSteps], a
 	ld a, TEXT_REPEL_WORE_OFF
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
 .CantEncounter2

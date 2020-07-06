@@ -3,9 +3,9 @@
 ; [wListPointer] = address of the list (2 bytes)
 DisplayListMenuID::
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable auto-transfer
+	ldh [hAutoBGTransferEnabled], a ; disable auto-transfer
 	ld a, 1
-	ld [hJoy7], a ; joypad state update flag
+	ldh [hJoy7], a ; joypad state update flag
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
 	jr nz, .specialBattleType
@@ -57,10 +57,10 @@ DisplayListMenuID::
 
 DisplayListMenuIDLoop::
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable transfer
+	ldh [hAutoBGTransferEnabled], a ; disable transfer
 	call PrintListMenuEntries
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a ; enable transfer
+	ldh [hAutoBGTransferEnabled], a ; enable transfer
 	call Delay3
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
@@ -163,7 +163,7 @@ DisplayListMenuIDLoop::
 	ld a, [wCurrentMenuItem]
 	ld [wChosenMenuItem], a
 	xor a
-	ld [hJoy7], a ; joypad state update flag
+	ldh [hJoy7], a ; joypad state update flag
 	ld hl, wd730
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -219,7 +219,7 @@ DisplayChooseQuantityMenu::
 	jp .incrementQuantity
 .waitForKeyPressLoop
 	call JoypadLowSensitivity
-	ld a, [hJoyPressed] ; newly pressed buttons
+	ldh a, [hJoyPressed] ; newly pressed buttons
 	bit 0, a ; was the A button pressed?
 	jp nz, .buttonAPressed
 	bit 1, a ; was the B button pressed?
@@ -272,22 +272,22 @@ DisplayChooseQuantityMenu::
 	pop bc
 	dec b
 	jr nz, .addLoop
-	ld a, [hHalveItemPrices]
+	ldh a, [hHalveItemPrices]
 	and a ; should the price be halved (for selling items)?
 	jr z, .skipHalvingPrice
 	xor a
-	ld [hDivideBCDDivisor], a
-	ld [hDivideBCDDivisor + 1], a
+	ldh [hDivideBCDDivisor], a
+	ldh [hDivideBCDDivisor + 1], a
 	ld a, $02
-	ld [hDivideBCDDivisor + 2], a
+	ldh [hDivideBCDDivisor + 2], a
 	predef DivideBCDPredef3 ; halves the price
 ; store the halved price
-	ld a, [hDivideBCDQuotient]
-	ld [hMoney], a
-	ld a, [hDivideBCDQuotient + 1]
-	ld [hMoney + 1], a
-	ld a, [hDivideBCDQuotient + 2]
-	ld [hMoney + 2], a
+	ldh a, [hDivideBCDQuotient]
+	ldh [hMoney], a
+	ldh a, [hDivideBCDQuotient + 1]
+	ldh [hMoney + 1], a
+	ldh a, [hDivideBCDQuotient + 2]
+	ldh [hMoney + 2], a
 .skipHalvingPrice
 	coord hl, 12, 10
 	ld de, SpacesBetweenQuantityAndPriceText
@@ -324,7 +324,7 @@ ExitListMenu::
 	ld [wMenuExitMethod], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	xor a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld hl, wd730
 	res 6, [hl]
 	call BankswitchBack

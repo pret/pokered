@@ -4,7 +4,7 @@ JumpMoveEffect:
 	ret
 
 _JumpMoveEffect:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveEffect]
 	jr z, .next1
@@ -26,7 +26,7 @@ INCLUDE "data/moves/effects_pointers.asm"
 SleepEffect:
 	ld de, wEnemyMonStatus
 	ld bc, wEnemyBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp z, .sleepEffect
 	ld de, wBattleMonStatus
@@ -78,7 +78,7 @@ AlreadyAsleepText:
 PoisonEffect:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .poisonEffect
 	ld hl, wBattleMonStatus
@@ -121,7 +121,7 @@ PoisonEffect:
 	set 3, [hl] ; mon is now poisoned
 	push de
 	dec de
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld b, ANIM_C7
 	ld hl, wPlayerBattleStatus3
@@ -175,7 +175,7 @@ DrainHPEffect:
 ExplodeEffect:
 	ld hl, wBattleMonHP
 	ld de, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .faintUser
 	ld hl, wEnemyMonHP
@@ -196,7 +196,7 @@ FreezeBurnParalyzeEffect:
 	ld [wAnimationType], a
 	call CheckTargetSubstitute ; test bit 4 of d063/d068 flags [target has substitute flag]
 	ret nz ; return if they have a substitute, can't effect them
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp nz, opponentAttacker
 	ld a, [wEnemyMonStatus]
@@ -308,7 +308,7 @@ CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
 	and 1 << FRZ ; are they frozen?
 	ret z ; return if so
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .opponent
 	;player [attacker]
@@ -346,7 +346,7 @@ FireDefrostedText:
 StatModifierUpEffect:
 	ld hl, wPlayerMonStatMods
 	ld de, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .statModifierUpEffect
 	ld hl, wEnemyMonStatMods
@@ -382,7 +382,7 @@ StatModifierUpEffect:
 	push hl
 	ld hl, wBattleMonAttack + 1
 	ld de, wPlayerMonUnmodifiedAttack
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .pointToStats
 	ld hl, wEnemyMonAttack + 1
@@ -417,35 +417,35 @@ StatModifierUpEffect:
 	add hl, bc
 	pop bc
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, [de]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	inc de
 	ld a, [de]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [hli]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hl]
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
 	pop hl
 ; cap at 999
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	sub 999 % $100
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	sbc 999 / $100
 	jp c, UpdateStat
 	ld a, 999 / $100
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, 999 % $100
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 
 UpdateStat:
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld [hli], a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld [hl], a
 	pop hl
 UpdateStatDone:
@@ -455,7 +455,7 @@ UpdateStatDone:
 	ld hl, wPlayerBattleStatus2
 	ld de, wPlayerMoveNum
 	ld bc, wPlayerMonMinimized
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .asm_3f4e6
 	ld hl, wEnemyBattleStatus2
@@ -488,7 +488,7 @@ UpdateStatDone:
 	pop af
 	call nz, Bankswitch
 .applyBadgeBoostsAndStatusPenalties
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	call z, ApplyBadgeStatBoosts ; whenever the player uses a stat-up move, badge boosts get reapplied again to every stat,
 	                             ; even to those not affected by the stat-up move (will be boosted further)
@@ -511,7 +511,7 @@ MonsStatsRoseText:
 	text_far _MonsStatsRoseText
 	text_asm
 	ld hl, GreatlyRoseText
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveEffect]
 	jr z, .playerTurn
@@ -534,7 +534,7 @@ StatModifierDownEffect:
 	ld hl, wEnemyMonStatMods
 	ld de, wPlayerMoveEffect
 	ld bc, wEnemyBattleStatus1
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .statModifierDownEffect
 	ld hl, wPlayerMonStatMods
@@ -601,7 +601,7 @@ StatModifierDownEffect:
 	push de
 	ld hl, wEnemyMonAttack + 1
 	ld de, wEnemyMonUnmodifiedAttack
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .pointToStat
 	ld hl, wBattleMonAttack + 1
@@ -637,33 +637,33 @@ StatModifierDownEffect:
 	add hl, bc
 	pop bc
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, [de]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	inc de
 	ld a, [de]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [hli]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hl]
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
 	pop hl
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld b, a
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	or b
 	jp nz, UpdateLoweredStat
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, $1
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 
 UpdateLoweredStat:
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld [hli], a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld [hl], a
 	pop de
 	pop hl
@@ -678,7 +678,7 @@ UpdateLoweredStatDone:
 	jr nc, .ApplyBadgeBoostsAndStatusPenalties
 	call PlayCurrentMoveAnimation2
 .ApplyBadgeBoostsAndStatusPenalties
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	call nz, ApplyBadgeStatBoosts ; whenever the player uses a stat-down move, badge boosts get reapplied again to every stat,
 	                              ; even to those not affected by the stat-up move (will be boosted further)
@@ -713,7 +713,7 @@ MonsStatsFellText:
 	text_far _MonsStatsFellText
 	text_asm
 	ld hl, FellText
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveEffect]
 	jr z, .playerTurn
@@ -759,7 +759,7 @@ BideEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerBideAccumulatedDamage
 	ld bc, wPlayerNumAttacksLeft
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .bideEffect
 	ld hl, wEnemyBattleStatus1
@@ -778,14 +778,14 @@ BideEffect:
 	inc a
 	inc a
 	ld [bc], a ; set Bide counter to 2 or 3 at random
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	add XSTATITEM_ANIM
 	jp PlayBattleAnimation2
 
 ThrashPetalDanceEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .thrashPetalDanceEffect
 	ld hl, wEnemyBattleStatus1
@@ -797,12 +797,12 @@ ThrashPetalDanceEffect:
 	inc a
 	inc a
 	ld [de], a ; set thrash/petal dance counter to 2 or 3 at random
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	add ANIM_B0
 	jp PlayBattleAnimation2
 
 SwitchAndTeleportEffect:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .handleEnemy
 	ld a, [wIsInBattle]
@@ -920,7 +920,7 @@ TwoToFiveAttacksEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
 	ld bc, wPlayerNumHits
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .twoToFiveAttacksEffect
 	ld hl, wEnemyBattleStatus1
@@ -931,7 +931,7 @@ TwoToFiveAttacksEffect:
 	ret nz
 	set ATTACKING_MULTIPLE_TIMES, [hl] ; mon is now attacking multiple times
 	ld hl, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .setNumberOfHits
 	ld hl, wEnemyMoveEffect
@@ -967,7 +967,7 @@ FlinchSideEffect:
 	ret nz
 	ld hl, wEnemyBattleStatus1
 	ld de, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .flinchSideEffect
 	ld hl, wPlayerBattleStatus1
@@ -992,7 +992,7 @@ OneHitKOEffect:
 ChargeEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld b, XSTATITEM_ANIM
 	jr z, .chargeEffect
@@ -1074,7 +1074,7 @@ DugAHoleText:
 TrappingEffect:
 	ld hl, wPlayerBattleStatus1
 	ld de, wPlayerNumAttacksLeft
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .trappingEffect
 	ld hl, wEnemyBattleStatus1
@@ -1120,7 +1120,7 @@ ConfusionEffect:
 	jr nz, ConfusionEffectFailed
 
 ConfusionSideEffectSuccess:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wEnemyBattleStatus1
 	ld bc, wEnemyConfusedCounter
@@ -1164,7 +1164,7 @@ SubstituteEffect:
 
 HyperBeamEffect:
 	ld hl, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .hyperBeamEffect
 	ld hl, wEnemyBattleStatus2
@@ -1175,7 +1175,7 @@ HyperBeamEffect:
 ClearHyperBeam:
 	push hl
 	ld hl, wEnemyBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 	ld hl, wPlayerBattleStatus2
@@ -1186,7 +1186,7 @@ ClearHyperBeam:
 
 RageEffect:
 	ld hl, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .player
 	ld hl, wEnemyBattleStatus2
@@ -1201,7 +1201,7 @@ MimicEffect:
 	ld a, [wMoveMissed]
 	and a
 	jr nz, .mimicMissed
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerBattleStatus1]
@@ -1226,7 +1226,7 @@ MimicEffect:
 	and a
 	jr z, .getRandomMove
 	ld d, a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerMoveListIndex]
@@ -1284,7 +1284,7 @@ DisableEffect:
 	jr nz, .moveMissed
 	ld de, wEnemyDisabledMove
 	ld hl, wEnemyMonMoves
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .disableEffect
 	ld de, wPlayerDisabledMove
@@ -1307,7 +1307,7 @@ DisableEffect:
 	jr z, .pickMoveToDisable ; loop until a non-00 move slot is found
 	ld [wd11e], a ; store move number
 	push hl
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wBattleMonPP
 	jr nz, .enemyTurn
@@ -1345,7 +1345,7 @@ DisableEffect:
 	ld [de], a
 	call PlayCurrentMoveAnimation2
 	ld hl, wPlayerDisabledMoveNumber
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .printDisableText
 	inc hl ; wEnemyDisabledMoveNumber
@@ -1430,7 +1430,7 @@ ParalyzedMayNotAttackText:
 CheckTargetSubstitute:
 	push hl
 	ld hl, wEnemyBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next1
 	ld hl, wPlayerBattleStatus2
@@ -1442,7 +1442,7 @@ CheckTargetSubstitute:
 PlayCurrentMoveAnimation2:
 ; animation at MOVENUM will be played unless MOVENUM is 0
 ; plays wAnimationType 3 or 6
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
 	jr z, .notEnemyTurn
@@ -1454,7 +1454,7 @@ PlayCurrentMoveAnimation2:
 PlayBattleAnimation2:
 ; play animation ID at a and animation type 6 or 3
 	ld [wAnimationID], a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, $6
 	jr z, .storeAnimationType
@@ -1468,7 +1468,7 @@ PlayCurrentMoveAnimation:
 ; resets wAnimationType
 	xor a
 	ld [wAnimationType], a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
 	jr z, .notEnemyTurn

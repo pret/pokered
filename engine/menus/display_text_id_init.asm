@@ -5,7 +5,7 @@ DisplayTextIDInit::
 	ld a, [wAutoTextBoxDrawingControl]
 	bit 0, a
 	jr nz, .skipDrawingTextBoxBorder
-	ld a, [hSpriteIndexOrTextID] ; text ID (or sprite ID)
+	ldh a, [hSpriteIndexOrTextID] ; text ID (or sprite ID)
 	and a
 	jr nz, .notStartMenu
 ; if text ID is 0 (i.e. the start menu)
@@ -71,8 +71,8 @@ DisplayTextIDInit::
 	ld b, $9c ; window background address
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
-	ld [hWY], a ; put the window on the screen
+	ldh [hWY], a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a, $01
-	ld [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
+	ldh [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
 	ret

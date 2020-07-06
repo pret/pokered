@@ -37,12 +37,12 @@ SafariZoneGameOver:
 	cp SFX_SAFARI_ZONE_PA
 	jr nz, .waitForMusicToPlay
 	ld a, TEXT_SAFARI_GAME_OVER
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_GATE
-	ld [hWarpDestinationMap], a
+	ldh [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5

@@ -77,7 +77,7 @@ DisplayPokemartDialogue_::
 	jr c, .unsellableItem
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ld [hHalveItemPrices], a ; halve prices when selling
+	ldh [hHalveItemPrices], a ; halve prices when selling
 	call DisplayChooseQuantityMenu
 	inc a
 	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
@@ -152,7 +152,7 @@ DisplayPokemartDialogue_::
 	ld a, 99
 	ld [wMaxItemQuantity], a
 	xor a
-	ld [hHalveItemPrices], a ; don't halve item prices when buying
+	ldh [hHalveItemPrices], a ; don't halve item prices when buying
 	call DisplayChooseQuantityMenu
 	inc a
 	jr z, .buyMenuLoop ; if the player closed the choose quantity menu with the B button

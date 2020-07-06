@@ -25,10 +25,10 @@ CinnabarIslandScript0:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld a, $8
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, D_DOWN

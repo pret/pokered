@@ -29,7 +29,7 @@ CopycatsHouse2FText1:
 	ld hl, ReceivedTM31Text
 	call PrintText
 	ld a, POKE_DOLL
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	callba RemoveItemByID
 	SetEvent EVENT_GOT_TM31
 	jr .asm_62ecd

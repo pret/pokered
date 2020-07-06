@@ -48,25 +48,25 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	jr nz, .copyRowLoop
 	call EnableLCD
 	ld a, $90
-	ld [hWY], a
-	ld [rWY], a
+	ldh [hWY], a
+	ldh [rWY], a
 	xor a
-	ld [hTilesetType], a
-	ld [hSCY], a
+	ldh [hTilesetType], a
+	ldh [hSCY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld b, $70
 	ld c, $90
 	ld a, c
-	ld [hSCX], a
+	ldh [hSCX], a
 	call DelayFrame
 	ld a, %11100100 ; inverted palette for silhouette effect
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 .slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
 	ld h, b
 	ld l, $40
@@ -78,21 +78,21 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	call SetScrollXForSlidingPlayerBodyLeft ; end background scrolling on line $60
 	call SlidePlayerHeadLeft
 	ld a, c
-	ld [hSCX], a
+	ldh [hSCX], a
 	dec c
 	dec c
 	jr nz, .slideSilhouettesLoop
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, $31
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	coord hl, 1, 5
 	predef CopyUncompressedPicToTilemap
 	xor a
-	ld [hWY], a
-	ld [rWY], a
+	ldh [hWY], a
+	ldh [rWY], a
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
@@ -118,13 +118,13 @@ SlidePlayerHeadLeft:
 	ret
 
 SetScrollXForSlidingPlayerBodyLeft:
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, SetScrollXForSlidingPlayerBodyLeft
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 .loop
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .loop
 	ret
@@ -266,7 +266,7 @@ EnemyRan:
 	ld a, SFX_RUN
 	call PlaySoundWaitForCurrent
 	xor a
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	jpab AnimationSlideEnemyMonOff
 
 WildRanText:
@@ -398,7 +398,7 @@ MainInBattleLoop:
 	jr nc, .playerMovesFirst ; if player is faster
 	jr .enemyMovesFirst ; if enemy is faster
 .speedEqual ; 50/50 chance for both players
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr z, .invertOutcome
 	call BattleRandom
@@ -412,7 +412,7 @@ MainInBattleLoop:
 	jr .playerMovesFirst
 .enemyMovesFirst
 	ld a, $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callab TrainerAI
 	jr c, .AIActionUsedEnemyFirst
 	call ExecuteEnemyMove
@@ -450,7 +450,7 @@ MainInBattleLoop:
 	jp z, HandlePlayerMonFainted
 	call DrawHUDsAndHPBars
 	ld a, $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callab TrainerAI
 	jr c, .AIActionUsedPlayerFirst
 	call ExecuteEnemyMove
@@ -470,7 +470,7 @@ MainInBattleLoop:
 HandlePoisonBurnLeechSeed:
 	ld hl, wBattleMonHP
 	ld de, wBattleMonStatus
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playersTurn
 	ld hl, wEnemyMonHP
@@ -495,7 +495,7 @@ HandlePoisonBurnLeechSeed:
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
 .notBurnedOrPoisoned
 	ld de, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playersTurn2
 	ld de, wEnemyBattleStatus2
@@ -504,16 +504,16 @@ HandlePoisonBurnLeechSeed:
 	add a
 	jr nc, .notLeechSeeded
 	push hl
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	push af
 	xor $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	xor a
 	ld [wAnimationType], a
 	ld a, ABSORB
 	call PlayMoveAnimation ; play leech seed animation (from opposing mon)
 	pop af
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop hl
 	call HandlePoisonBurnLeechSeed_DecreaseOwnHP
 	call HandlePoisonBurnLeechSeed_IncreaseEnemyHP
@@ -571,7 +571,7 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP:
 .nonZeroDamage
 	ld hl, wPlayerBattleStatus3
 	ld de, wPlayerToxicCounter
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playersTurn
 	ld hl, wEnemyBattleStatus3
@@ -618,7 +618,7 @@ HandlePoisonBurnLeechSeed_DecreaseOwnHP:
 HandlePoisonBurnLeechSeed_IncreaseEnemyHP:
 	push hl
 	ld hl, wEnemyMonMaxHP
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playersTurn
 	ld hl, wBattleMonMaxHP
@@ -655,19 +655,19 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP:
 	ld [hl], a
 	ld [wHPBarNewHP], a
 .noOverfullHeal
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	call UpdateCurMonHPBar
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	pop hl
 	ret
 
 UpdateCurMonHPBar:
 	coord hl, 10, 9    ; tile pointer to player HP bar
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, $1
 	jr z, .playersTurn
@@ -1232,7 +1232,7 @@ SevenSpacesText:
 ; if a is 8, the slide is to the right, else it is to the left
 ; bug: when this is called, [hAutoBGTransferEnabled] is non-zero, so there is screen tearing
 SlideTrainerPicOffScreen:
-	ld [hSlideAmount], a
+	ldh [hSlideAmount], a
 	ld c, a
 .slideStepLoop ; each iteration, the trainer pic is slid one tile left/right
 	push bc
@@ -1240,10 +1240,10 @@ SlideTrainerPicOffScreen:
 	ld b, 7 ; number of rows
 .rowLoop
 	push hl
-	ld a, [hSlideAmount]
+	ldh a, [hSlideAmount]
 	ld c, a
 .columnLoop
-	ld a, [hSlideAmount]
+	ldh a, [hSlideAmount]
 	cp 8
 	jr z, .slideRight
 .slideLeft ; slide player sprite off screen
@@ -1426,7 +1426,7 @@ EnemySendOutFirstMon:
 	ld de, vFrontPic
 	call LoadMonFrontSprite
 	ld a, -$31
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	coord hl, 15, 6
 	predef AnimateSendingOutMon
 	ld a, [wEnemyMonSpecies2]
@@ -1508,14 +1508,14 @@ TryRunningFromBattle:
 	inc a
 	ld [wNumRunAttempts], a
 	ld a, [hli]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hl]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [de]
-	ld [hEnemySpeed], a
+	ldh [hEnemySpeed], a
 	inc de
 	ld a, [de]
-	ld [hEnemySpeed + 1], a
+	ldh [hEnemySpeed + 1], a
 	call LoadScreenTilesFromBuffer1
 	ld de, hMultiplicand + 1
 	ld hl, hEnemySpeed
@@ -1523,17 +1523,17 @@ TryRunningFromBattle:
 	call StringCmp
 	jr nc, .canEscape ; jump if player speed greater than enemy speed
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, 32
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply ; multiply player speed by 32
-	ld a, [hProduct + 2]
-	ld [hDividend], a
-	ld a, [hProduct + 3]
-	ld [hDividend + 1], a
-	ld a, [hEnemySpeed]
+	ldh a, [hProduct + 2]
+	ldh [hDividend], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
+	ldh a, [hEnemySpeed]
 	ld b, a
-	ld a, [hEnemySpeed + 1]
+	ldh a, [hEnemySpeed + 1]
 ; divide enemy speed by 4
 	srl b
 	rr a
@@ -1541,10 +1541,10 @@ TryRunningFromBattle:
 	rr a
 	and a
 	jr z, .canEscape ; jump if enemy speed divided by 4, mod 256 is 0
-	ld [hDivisor], a ; ((enemy speed / 4) % 256)
+	ldh [hDivisor], a ; ((enemy speed / 4) % 256)
 	ld b, $2
 	call Divide ; divide (player speed * 32) by ((enemy speed / 4) % 256)
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	and a ; is the quotient greater than 256?
 	jr nz, .canEscape ; if so, the player can escape
 	ld a, [wNumRunAttempts]
@@ -1554,15 +1554,15 @@ TryRunningFromBattle:
 	dec c
 	jr z, .compareWithRandomValue
 	ld b, 30
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	add b
-	ld [hQuotient + 3], a
+	ldh [hQuotient + 3], a
 	jr c, .canEscape
 	jr .loop
 .compareWithRandomValue
 	call BattleRandom
 	ld b, a
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	cp b
 	jr nc, .canEscape ; if the random value was less than or equal to the quotient
 	                  ; plus 30 times the number of attempts, the player can escape
@@ -1730,7 +1730,7 @@ SendOutMon:
 	call DrawPlayerHUDAndHPBar
 	predef LoadMonBackPic
 	xor a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
@@ -1754,7 +1754,7 @@ SendOutMon:
 	ld hl, wEnemyBattleStatus1
 	res USING_TRAPPING_MOVE, [hl]
 	ld a, $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	coord hl, 4, 11
@@ -1773,7 +1773,7 @@ AnimateRetreatingPlayerMon:
 	lb bc, 5, 5
 	xor a
 	ld [wDownscaledMonSize], a
-	ld [hBaseTileID], a
+	ldh [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
@@ -1783,7 +1783,7 @@ AnimateRetreatingPlayerMon:
 	ld a, 1
 	ld [wDownscaledMonSize], a
 	xor a
-	ld [hBaseTileID], a
+	ldh [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	call Delay3
 	call .clearScreenArea
@@ -1812,7 +1812,7 @@ DrawHUDsAndHPBars:
 
 DrawPlayerHUDAndHPBar:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 9, 7
 	lb bc, 5, 11
 	call ClearScreenArea
@@ -1845,7 +1845,7 @@ DrawPlayerHUDAndHPBar:
 	coord hl, 10, 9
 	predef DrawHP
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld hl, wPlayerHPBarColor
 	call GetBattleHealthBarColor
 	ld hl, wBattleMonHP
@@ -1873,7 +1873,7 @@ DrawPlayerHUDAndHPBar:
 
 DrawEnemyHUDAndHPBar:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 0, 0
 	lb bc, 4, 12
 	call ClearScreenArea
@@ -1895,9 +1895,9 @@ DrawEnemyHUDAndHPBar:
 .skipPrintLevel
 	ld hl, wEnemyMonHP
 	ld a, [hli]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hld]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	or [hl] ; is current HP zero?
 	jr nz, .hpNonzero
 ; current HP is 0
@@ -1908,45 +1908,45 @@ DrawEnemyHUDAndHPBar:
 	jp .drawHPBar
 .hpNonzero
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, 48
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply ; multiply current HP by 48
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld a, b
 	and a ; is max HP > 255?
 	jr z, .doDivide
 ; if max HP > 255, scale both (current HP * 48) and max HP by dividing by 4 so that max HP fits in one byte
 ; (it needs to be one byte so it can be used as the divisor for the Divide function)
-	ld a, [hDivisor]
+	ldh a, [hDivisor]
 	srl b
 	rr a
 	srl b
 	rr a
-	ld [hDivisor], a
-	ld a, [hProduct + 2]
+	ldh [hDivisor], a
+	ldh a, [hProduct + 2]
 	ld b, a
 	srl b
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	rr a
 	srl b
 	rr a
-	ld [hProduct + 3], a
+	ldh [hProduct + 3], a
 	ld a, b
-	ld [hProduct + 2], a
+	ldh [hProduct + 2], a
 .doDivide
-	ld a, [hProduct + 2]
-	ld [hDividend], a
-	ld a, [hProduct + 3]
-	ld [hDividend + 1], a
+	ldh a, [hProduct + 2]
+	ldh [hDividend], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 1], a
 	ld a, $2
 	ld b, a
 	call Divide ; divide (current HP * 48) by max HP
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 ; set variables for DrawHPBar
 	ld e, a
 	ld a, $6
@@ -1958,7 +1958,7 @@ DrawEnemyHUDAndHPBar:
 	coord hl, 2, 2
 	call DrawHPBar
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld hl, wEnemyHPBarColor
 
 GetBattleHealthBarColor:
@@ -2469,13 +2469,13 @@ MoveSelectionMenu:
 
 .writemoves
 	ld de, wMovesString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	set 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	call PlaceString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	res 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	ret
 
 .regularmenu
@@ -2825,7 +2825,7 @@ SwapMovesInMenu:
 
 PrintMenuItem:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 0, 8
 	ld b, 3
 	ld c, 9
@@ -2847,7 +2847,7 @@ PrintMenuItem:
 	ld hl, wCurrentMenuItem
 	dec [hl]
 	xor a
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld hl, wBattleMonMoves
 	ld a, [wCurrentMenuItem]
 	ld c, a
@@ -2891,7 +2891,7 @@ PrintMenuItem:
 	predef PrintMoveType
 .moveDisabled
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
 DisabledText:
@@ -3043,7 +3043,7 @@ LinkBattleExchangeData:
 
 ExecutePlayerMove:
 	xor a
-	ld [hWhoseTurn], a ; set player's turn
+	ldh [hWhoseTurn], a ; set player's turn
 	ld a, [wPlayerSelectedMove]
 	inc a
 	jp z, ExecutePlayerMoveDone ; for selected move = FF, skip most of player's turn
@@ -3252,7 +3252,7 @@ PrintGhostText:
 ; print the ghost battle messages
 	call IsGhostBattle
 	ret nz
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .Ghost
 	ld a, [wBattleMonStatus] ; player’s turn
@@ -3619,7 +3619,7 @@ CantMoveText:
 PrintMoveIsDisabledText:
 	ld hl, wPlayerSelectedMove
 	ld de, wPlayerBattleStatus1
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .removeChargingUp
 	inc hl
@@ -3675,11 +3675,11 @@ HandleSelfConfusionDamage:
 	xor a
 	ld [wAnimationType], a
 	inc a
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	call PlayMoveAnimation
 	call DrawPlayerHUDAndHPBar
 	xor a
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	jp ApplyDamageToPlayerPokemon
 
 PrintMonName1Text:
@@ -3694,7 +3694,7 @@ PrintMonName1Text:
 MonName1Text:
 	text_far _MonName1Text
 	text_asm
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
 	ld hl, wPlayerUsedMove
@@ -3818,7 +3818,7 @@ INCLUDE "data/moves/grammar.asm"
 
 PrintMoveFailureText:
 	ld de, wPlayerMoveEffect
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playersTurn
 	ld de, wEnemyMoveEffect
@@ -3866,7 +3866,7 @@ PrintMoveFailureText:
 	call PrintText
 	ld b, $4
 	predef PredefShakeScreenHorizontally
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
 	jp ApplyDamageToPlayerPokemon
@@ -4160,9 +4160,9 @@ GetDamageVarsForPlayerAttack:
 ; in the case of a critical hit, reset the player's attack and the enemy's defense to their base values
 	ld c, 3 ; defense stat
 	call GetEnemyMonStat
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld b, a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld c, a
 	push bc
 	ld hl, wPartyMon1Attack
@@ -4192,9 +4192,9 @@ GetDamageVarsForPlayerAttack:
 ; in the case of a critical hit, reset the player's and enemy's specials to their base values
 	ld c, 5 ; special stat
 	call GetEnemyMonStat
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld b, a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	ld c, a
 	push bc
 	ld hl, wPartyMon1Special
@@ -4371,9 +4371,9 @@ GetEnemyMonStat:
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
 	ld a, [hli]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hl]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	pop bc
 	pop de
 	ret
@@ -4404,7 +4404,7 @@ CalculateDamage:
 ;   d: base power
 ;   e: level
 
-	ld a, [hWhoseTurn] ; whose turn?
+	ldh a, [hWhoseTurn] ; whose turn?
 	and a
 	ld a, [wPlayerMoveEffect]
 	jr z, .effect
@@ -4489,44 +4489,44 @@ CalculateDamage:
 ; Capped at MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE: 999 - 2 = 997.
 	ld hl, wDamage
 	ld b, [hl]
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	add b
-	ld [hQuotient + 3], a
+	ldh [hQuotient + 3], a
 	jr nc, .dont_cap_1
 
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	inc a
-	ld [hQuotient + 2], a
+	ldh [hQuotient + 2], a
 	and a
 	jr z, .cap
 
 .dont_cap_1
-	ld a, [hQuotient]
+	ldh a, [hQuotient]
 	ld b, a
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	or a
 	jr nz, .cap
 
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100
 	jr c, .dont_cap_2
 
 	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100 + 1
 	jr nc, .cap
 
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) % $100
 	jr nc, .cap
 
 .dont_cap_2
 	inc hl
 
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	ld b, [hl]
 	add b
 	ld [hld], a
 
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	ld b, [hl]
 	adc b
 	ld [hl], a
@@ -4579,7 +4579,7 @@ INCLUDE "data/battle/unused_critical_hit_moves.asm"
 CriticalHitTest:
 	xor a
 	ld [wCriticalHitOrOHKO], a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wEnemyMonSpecies]
 	jr nz, .handleEnemy
@@ -4590,7 +4590,7 @@ CriticalHitTest:
 	ld a, [wMonHBaseSpeed]
 	ld b, a
 	srl b                        ; (effective (base speed/2))
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wPlayerMovePower
 	ld de, wPlayerBattleStatus2
@@ -4652,7 +4652,7 @@ HandleCounterMove:
 ; the outcome may be affected by the player's actions in the move selection menu prior to switching the Pokemon.
 ; This might also lead to desync glitches in link battles.
 
-	ld a, [hWhoseTurn] ; whose turn
+	ldh a, [hWhoseTurn] ; whose turn
 	and a
 ; player's turn
 	ld hl, wEnemySelectedMove
@@ -4960,7 +4960,7 @@ AttackSubstitute:
 ; values for player turn
 	ld de, wEnemySubstituteHP
 	ld bc, wEnemyBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .applyDamageToSubstitute
 ; values for enemy turn
@@ -4985,14 +4985,14 @@ AttackSubstitute:
 	ld hl, SubstituteBrokeText
 	call PrintText
 ; flip whose turn it is for the next function call
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $01
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	callab HideSubstituteShowMonAnim ; animate the substitute breaking
 ; flip the turn back to the way it was
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $01
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld hl, wPlayerMoveEffect ; value for player's turn
 	and a
 	jr z, .nullifyEffect
@@ -5016,7 +5016,7 @@ HandleBuildingRage:
 	ld hl, wEnemyBattleStatus2
 	ld de, wEnemyMonStatMods
 	ld bc, wEnemyMoveNum
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
 ; values for the enemy turn
@@ -5029,9 +5029,9 @@ HandleBuildingRage:
 	ld a, [de]
 	cp $0d ; maximum stat modifier value
 	ret z ; return if attack modifier is already maxed
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $01 ; flip turn for the stat modifier raising function
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 ; temporarily change the target pokemon's move to $00 and the effect to the one
 ; that causes the attack modifier to go up one stage
 	ld h, b
@@ -5048,9 +5048,9 @@ HandleBuildingRage:
 	ldd [hl], a ; null move effect
 	ld a, RAGE
 	ld [hl], a ; restore the target pokemon's move number to Rage
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor $01 ; flip turn back to the way it was
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ret
 
 BuildingRageText:
@@ -5066,7 +5066,7 @@ MirrorMoveCopyMove:
 ; wPlayerUsedMove is also set to 0 whenever the player is fast asleep or frozen solid.
 ; wEnemyUsedMove is also set to 0 whenever the enemy is fast asleep or frozen solid.
 
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 ; values for player turn
 	ld a, [wEnemyUsedMove]
@@ -5119,7 +5119,7 @@ MetronomePickMove:
 ; values for player turn
 	ld de, wPlayerMoveNum
 	ld hl, wPlayerSelectedMove
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .pickMoveLoop
 ; values for enemy turn
@@ -5141,7 +5141,7 @@ MetronomePickMove:
 ; it's used to prevent moves that run another move within the same turn
 ; (like Mirror Move and Metronome) from losing 2 PP
 IncrementMovePP:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 ; values for player turn
 	ld hl, wBattleMonPP
@@ -5160,7 +5160,7 @@ IncrementMovePP:
 	ld h, d
 	ld l, e
 	add hl, bc
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMonNumber] ; value for player turn
 	jr z, .updatePP
@@ -5184,7 +5184,7 @@ AdjustDamageForMoveType:
 	ld e, [hl] ; e = type 2 of defender
 	ld a, [wPlayerMoveType]
 	ld [wMoveType], a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
 ; values for enemy turn
@@ -5248,25 +5248,25 @@ AdjustDamageForMoveType:
 	and $80
 	ld b, a
 	ld a, [hl] ; a = damage multiplier
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	add b
 	ld [wDamageMultipliers], a
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld hl, wDamage
 	ld a, [hli]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hld]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	call Multiply
 	ld a, 10
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $04
 	call Divide
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	ld [hli], a
 	ld b, a
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	ld [hl], a
 	or b ; is damage 0?
 	jr nz, .skipTypeImmunity
@@ -5331,7 +5331,7 @@ MoveHitTest:
 	ld hl, wEnemyBattleStatus1
 	ld de, wPlayerMoveEffect
 	ld bc, wEnemyMonStatus
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .dreamEaterCheck
 ; enemy's turn
@@ -5360,7 +5360,7 @@ MoveHitTest:
 .checkForDigOrFlyStatus
 	bit INVULNERABLE, [hl]
 	jp nz, .moveMissed
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
 .playerTurn
@@ -5414,7 +5414,7 @@ MoveHitTest:
 	call CalcHitChance ; scale the move accuracy according to attacker's accuracy and target's evasion
 	ld a, [wPlayerMoveAccuracy]
 	ld b, a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .doAccuracyCheck
 	ld a, [wEnemyMoveAccuracy]
@@ -5433,7 +5433,7 @@ MoveHitTest:
 	ld [hl], a
 	inc a
 	ld [wMoveMissed], a
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn2
 .enemyTurn2
@@ -5448,7 +5448,7 @@ MoveHitTest:
 ; values for player turn
 CalcHitChance:
 	ld hl, wPlayerMoveAccuracy
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMonAccuracyMod]
 	ld b, a
@@ -5468,10 +5468,10 @@ CalcHitChance:
 	       ; decreases the hit chance instead of increasing the hit chance)
 ; zero the high bytes of the multiplicand
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hl]
-	ld [hMultiplicand + 2], a ; set multiplicand to move accuracy
+	ldh [hMultiplicand + 2], a ; set multiplicand to move accuracy
 	push hl
 	ld d, $02 ; loop has two iterations
 ; loop to do the calculations, the first iteration multiplies by the accuracy ratio and
@@ -5486,29 +5486,29 @@ CalcHitChance:
 	add hl, bc ; hl = address of stat modifier ratio
 	pop bc
 	ld a, [hli]
-	ld [hMultiplier], a ; set multiplier to the numerator of the ratio
+	ldh [hMultiplier], a ; set multiplier to the numerator of the ratio
 	call Multiply
 	ld a, [hl]
-	ld [hDivisor], a ; set divisor to the the denominator of the ratio
+	ldh [hDivisor], a ; set divisor to the the denominator of the ratio
 	                 ; (the dividend is the product of the previous multiplication)
 	ld b, $04 ; number of bytes in the dividend
 	call Divide
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	ld b, a
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	or b
 	jp nz, .nextCalculation
 ; make sure the result is always at least one
-	ld [hQuotient + 2], a
+	ldh [hQuotient + 2], a
 	ld a, $01
-	ld [hQuotient + 3], a
+	ldh [hQuotient + 3], a
 .nextCalculation
 	ld b, c
 	dec d
 	jr nz, .loop
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	and a ; is the calculated hit chance over 0xFF?
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	jr z, .storeAccuracy
 ; if calculated hit chance over 0xFF
 	ld a, $ff ; set the hit chance to 0xFF
@@ -5528,29 +5528,29 @@ RandomizeDamage:
 	ret c ; return if damage is equal to 0 or 1
 .DamageGreaterThanOne
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	dec hl
 	ld a, [hli]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hl]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 ; loop until a random number greater than or equal to 217 is generated
 .loop
 	call BattleRandom
 	rrca
 	cp 217
 	jr c, .loop
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply ; multiply damage by the random number, which is in the range [217, 255]
 	ld a, 255
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide ; divide the result by 255
 ; store the modified damage
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	ld hl, wDamage
 	ld [hli], a
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	ld [hl], a
 	ret
 
@@ -5906,11 +5906,11 @@ CheckEnemyStatusConditions:
 	ld [hl], a
 	xor a
 	ld [wAnimationType], a
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	ld a, POUND
 	call PlayMoveAnimation
 	ld a, $1
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	call ApplyDamageToEnemyPokemon
 	jr .monHurtItselfOrFullyParalysed
 .checkIfTriedToUseDisabledMove
@@ -6057,7 +6057,7 @@ CheckEnemyStatusConditions:
 	ret
 
 GetCurrentMove:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp z, .player
 	ld de, wEnemyMoveNum
@@ -6263,16 +6263,16 @@ DoBattleTransitionAndInitBattleVariables:
 	predef BattleTransition
 	callab LoadHudAndHpBarAndStatusTilePatterns
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
 	call ClearScreen
 	xor a
-	ld [hAutoBGTransferEnabled], a
-	ld [hWY], a
-	ld [rWY], a
-	ld [hTilesetType], a
+	ldh [hAutoBGTransferEnabled], a
+	ldh [hWY], a
+	ldh [rWY], a
+	ldh [hTilesetType], a
 	ld hl, wPlayerStatsToDouble
 	ld [hli], a
 	ld [hli], a
@@ -6309,7 +6309,7 @@ LoadPlayerBackPic:
 	predef ScaleSpriteByTwo
 	ld hl, wOAMBuffer
 	xor a
-	ld [hOAMTile], a ; initial tile number
+	ldh [hOAMTile], a ; initial tile number
 	ld b, $7 ; 7 columns
 	ld e, $a0 ; X for the left-most column
 .loop ; each loop iteration writes 3 OAM entries in a vertical column
@@ -6323,16 +6323,16 @@ LoadPlayerBackPic:
 	add d ; increase Y by height of tile
 	ld d, a
 	inc hl
-	ld a, [hOAMTile]
+	ldh a, [hOAMTile]
 	ld [hli], a ; OAM tile number
 	inc a ; increment tile number
-	ld [hOAMTile], a
+	ldh [hOAMTile], a
 	inc hl
 	dec c
 	jr nz, .innerLoop
-	ld a, [hOAMTile]
+	ldh a, [hOAMTile]
 	add $4 ; increase tile number by 4
-	ld [hOAMTile], a
+	ldh [hOAMTile], a
 	ld a, $8 ; width of tile
 	add e ; increase X by width of tile
 	ld e, a
@@ -6346,14 +6346,14 @@ LoadPlayerBackPic:
 	ld [MBC1SRamBank], a
 	ld hl, vSprites
 	ld de, sSpriteBuffer1
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld b, a
 	ld c, 7 * 7
 	call CopyVideoData
 	xor a
 	ld [MBC1SRamEnable], a
 	ld a, $31
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	coord hl, 1, 5
 	predef_jump CopyUncompressedPicToTilemap
 
@@ -6373,12 +6373,12 @@ ApplyBurnAndParalysisPenaltiesToEnemy:
 	xor a
 
 ApplyBurnAndParalysisPenalties:
-	ld [hWhoseTurn], a
+	ldh [hWhoseTurn], a
 	call QuarterSpeedDueToParalysis
 	jp HalveAttackDueToBurn
 
 QuarterSpeedDueToParalysis:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 .enemyTurn ; quarter the player's speed
@@ -6421,7 +6421,7 @@ QuarterSpeedDueToParalysis:
 	ret
 
 HalveAttackDueToBurn:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
 .enemyTurn ; halve the player's attack
@@ -6511,35 +6511,35 @@ CalculateModifiedStat:
 	ld b, 0
 	add hl, bc
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, [de]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	inc de
 	ld a, [de]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [hli]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hl]
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
 	pop hl
-	ld a, [hDividend + 3]
+	ldh a, [hDividend + 3]
 	sub 999 % $100
-	ld a, [hDividend + 2]
+	ldh a, [hDividend + 2]
 	sbc 999 / $100
 	jp c, .storeNewStatValue
 ; cap the stat at 999
 	ld a, 999 / $100
-	ld [hDividend + 2], a
+	ldh [hDividend + 2], a
 	ld a, 999 % $100
-	ld [hDividend + 3], a
+	ldh [hDividend + 3], a
 .storeNewStatValue
-	ld a, [hDividend + 2]
+	ldh a, [hDividend + 2]
 	ld [hli], a
 	ld b, a
-	ld a, [hDividend + 3]
+	ldh a, [hDividend + 3]
 	ld [hl], a
 	or b
 	jr nz, .done
@@ -6605,7 +6605,7 @@ LoadHudAndHpBarAndStatusTilePatterns:
 	call LoadHpBarAndStatusTilePatterns
 
 LoadHudTilePatterns:
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	add a ; is LCD disabled?
 	jr c, .lcdEnabled
 .lcdDisabled
@@ -6690,7 +6690,7 @@ BattleRandom:
 
 
 HandleExplodingAnimation:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wEnemyMonType1
 	ld de, wEnemyBattleStatus1
@@ -6740,7 +6740,7 @@ DetermineWildOpponent:
 	ld a, [wd732]
 	bit 1, a
 	jr z, .asm_3ef2f
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	bit 1, a ; B button pressed?
 	ret nz
 .asm_3ef2f
@@ -6767,7 +6767,7 @@ InitBattleCommon:
 	call _LoadTrainerPic
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	dec a
 	ld [wAICount], a
 	coord hl, 12, 0
@@ -6823,7 +6823,7 @@ InitWildBattle:
 .spriteLoaded
 	xor a
 	ld [wTrainerClass], a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	coord hl, 12, 0
 	predef CopyUncompressedPicToTilemap
 
@@ -6833,18 +6833,18 @@ _InitBattleCommon:
 	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld hl, .emptyString
 	call PrintText
 	call SaveScreenTilesToBuffer1
 	call ClearScreen
 	ld a, $98
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	ld a, $9c
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	call LoadScreenTilesFromBuffer1
 	coord hl, 9, 7
 	lb bc, 5, 10
@@ -6863,7 +6863,7 @@ _InitBattleCommon:
 	pop af
 	ld [wMapPalOffset], a
 	ld a, [wSavedTilesetType]
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	scf
 	ret
 .emptyString
@@ -6900,8 +6900,8 @@ AnimateSendingOutMon:
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [hStartTileID]
-	ld [hBaseTileID], a
+	ldh a, [hStartTileID]
+	ldh [hBaseTileID], a
 	ld b, $4c
 	ld a, [wIsInBattle]
 	and a
@@ -6931,7 +6931,7 @@ AnimateSendingOutMon:
 	ld bc, -(SCREEN_WIDTH * 6 + 3)
 .next
 	add hl, bc
-	ld a, [hBaseTileID]
+	ldh a, [hBaseTileID]
 	add $31
 	jr CopyUncompressedPicToHL
 
@@ -6940,7 +6940,7 @@ CopyUncompressedPicToTilemap:
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [hStartTileID]
+	ldh a, [hStartTileID]
 CopyUncompressedPicToHL::
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
@@ -7005,6 +7005,6 @@ LoadMonBackPic:
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData

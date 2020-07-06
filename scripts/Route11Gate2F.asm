@@ -20,9 +20,9 @@ Route11GateUpstairsText2:
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
 	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
-	ld [hOaksAideRequirement], a
+	ldh [hOaksAideRequirement], a
 	ld a, ITEMFINDER ; oak's aide reward
-	ld [hOaksAideRewardItem], a
+	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
 	ld h, d
@@ -31,7 +31,7 @@ Route11GateUpstairsText2:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ld a, [hOaksAideResult]
+	ldh a, [hOaksAideResult]
 	dec a
 	jr nz, .asm_494a1
 	SetEvent EVENT_GOT_ITEMFINDER

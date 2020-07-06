@@ -25,7 +25,7 @@ PromptUserToPlaySlots:
 	call RunPaletteCommand
 	call GBPalNormal
 	ld a, $e4
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -454,9 +454,9 @@ SlotMachine_CheckForMatches:
 	jp hl
 
 .flashScreenLoop
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	xor $40
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -472,7 +472,7 @@ SlotMachine_CheckForMatches:
 	call SlotMachine_PayCoinsToPlayer
 	call SlotMachine_PrintPayoutCoins
 	ld a, $e4
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	jp .done
 
 SymbolLinedUpSlotMachineText:
@@ -695,9 +695,9 @@ SlotMachine_PayCoinsToPlayer:
 	ld a, [wAnimCounter]
 	dec a
 	jr nz, .skip1
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	xor $40 ; make the slot wheel symbols flash
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, 5
 .skip1
 	ld [wAnimCounter], a
@@ -825,7 +825,7 @@ SlotMachine_AnimWheel:
 SlotMachine_HandleInputWhileWheelsSpin:
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	and A_BUTTON
 	ret z
 	ld hl, wStoppingWhichSlotMachineWheel

@@ -18,12 +18,12 @@ SafariZoneGate_ScriptPointers:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, [wCoordIndex]
@@ -52,11 +52,11 @@ SafariZoneGate_ScriptPointers:
 	ret nz
 .SafariZoneEntranceScript2
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld [wJoyIgnore], a
 	call UpdateSprites
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -81,7 +81,7 @@ SafariZoneGate_ScriptPointers:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
@@ -93,7 +93,7 @@ SafariZoneGate_ScriptPointers:
 	jr .asm_75286
 .asm_7527f
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75286
 	ret
@@ -153,11 +153,11 @@ SafariZoneGate_TextPointers:
 	and a
 	jp nz, .PleaseComeAgain
 	xor a
-	ld [hMoney], a
+	ldh [hMoney], a
 	ld a, $05
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	ld a, $00
-	ld [hMoney + 2], a
+	ldh [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .success
 	ld hl, .NotEnoughMoneyText

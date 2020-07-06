@@ -57,12 +57,12 @@ VermilionDock_1db9b:
 	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld [wSSAnneSmokeDriftAmount], a
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld a, 88
 	ld [wSSAnneSmokeX], a
 	ld hl, wMapViewVRAMPointer
@@ -104,11 +104,11 @@ VermilionDock_1db9b:
 	dec e
 	jr nz, .asm_1dbfa
 	xor a
-	ld [rWY], a
-	ld [hWY], a
+	ldh [rWY], a
+	ldh [hWY], a
 	call VermilionDock_EraseSSAnne
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	pop hl
@@ -167,13 +167,13 @@ VermilionDock_1dc7c:
 	ld h, $0
 	ld l, $80
 .asm_1dc86
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, .asm_1dc86
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 .asm_1dc8e
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .asm_1dc8e
 	ret

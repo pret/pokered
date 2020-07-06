@@ -1,6 +1,6 @@
 DisplayStartMenu::
 	ld a, BANK(StartMenu_Pokedex)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy], a
@@ -78,7 +78,7 @@ RedisplayStartMenu::
 ; EXIT falls through to here
 CloseStartMenu::
 	call Joypad
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	bit 0, a ; was A button newly pressed?
 	jr nz, CloseStartMenu
 	call LoadTextBoxTilePatterns

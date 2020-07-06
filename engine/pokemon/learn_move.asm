@@ -126,13 +126,13 @@ TryingToLearn:
 	call TextBoxBorder
 	coord hl, 6, 8
 	ld de, wMovesString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	set 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	call PlaceString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	res 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	ld hl, wTopMenuItemY
 	ld a, 8
 	ld [hli], a ; wTopMenuItemY

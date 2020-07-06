@@ -25,13 +25,13 @@ jpab: MACRO
 ENDM
 
 homecall: MACRO
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(\1)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call \1
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 ENDM

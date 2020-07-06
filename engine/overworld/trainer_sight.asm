@@ -2,26 +2,26 @@ _GetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
-	ld [hSpriteScreenYCoord], a
+	ldh [hSpriteScreenYCoord], a
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
-	ld [hSpriteScreenXCoord], a
+	ldh [hSpriteScreenXCoord], a
 	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
-	ld [hSpriteMapYCoord], a
+	ldh [hSpriteMapYCoord], a
 	ld a, [hl] ; c2x5 (map X pos)
-	ld [hSpriteMapXCoord], a
+	ldh [hSpriteMapXCoord], a
 	ret
 
 _GetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
 	ld [wSavedSpriteScreenY], a
@@ -40,18 +40,18 @@ _SetSpritePosition1::
 	ld hl, wSpriteStateData1
 	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call GetSpriteDataPointer
-	ld a, [hSpriteScreenYCoord] ; c1x4 (screen Y pos)
+	ldh a, [hSpriteScreenYCoord] ; c1x4 (screen Y pos)
 	ld [hli], a
 	inc hl
-	ld a, [hSpriteScreenXCoord] ; c1x6 (screen X pos)
+	ldh a, [hSpriteScreenXCoord] ; c1x6 (screen X pos)
 	ld [hl], a
 	ld de, wSpritePlayerStateData2MapY - wSpritePlayerStateData1XPixels
 	add hl, de
-	ld a, [hSpriteMapYCoord] ; c2x4 (map Y pos)
+	ldh a, [hSpriteMapYCoord] ; c2x4 (map Y pos)
 	ld [hli], a
-	ld a, [hSpriteMapXCoord] ; c2x5 (map X pos)
+	ldh a, [hSpriteMapXCoord] ; c2x5 (map X pos)
 	ld [hl], a
 	ret
 
@@ -59,7 +59,7 @@ _SetSpritePosition2::
 	ld hl, wSpriteStateData1
 	ld de, wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call GetSpriteDataPointer
 	ld a, [wSavedSpriteScreenY]
 	ld [hli], a ; c1x4 (screen Y pos)
@@ -144,7 +144,7 @@ TrainerWalkUpToPlayer::
 	call FillMemory     ; write the necessary steps to reach player
 	ld [hl], $ff        ; write end of list sentinel
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
@@ -152,7 +152,7 @@ TrainerWalkUpToPlayer::
 GetSpriteDataPointer:
 	push de
 	add hl, de
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	swap a
 	ld d, $0
 	ld e, a

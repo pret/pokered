@@ -79,7 +79,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	cp FRESH_WATER
 	jr z, .gaveFreshWater
 	cp SODA_POP
@@ -186,7 +186,7 @@ CeladonMartRoofText_4852c:
 CeladonMartRoofScript_PrintDrinksInBag:
 	ld hl, wFilteredBagItems
 	xor a
-	ld [hItemCounter], a
+	ldh [hItemCounter], a
 .loop
 	ld a, [hli]
 	cp $ff
@@ -195,7 +195,7 @@ CeladonMartRoofScript_PrintDrinksInBag:
 	ld [wd11e], a
 	call GetItemName
 	coord hl, 2, 2
-	ld a, [hItemCounter]
+	ldh a, [hItemCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wcd6d

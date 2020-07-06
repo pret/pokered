@@ -11,7 +11,7 @@ SetDefaultNamesBeforeTitlescreen::
 	ld de, wRivalName
 	call CopyFixedLengthText
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd732
 	ld [hli], a
@@ -24,14 +24,14 @@ SetDefaultNamesBeforeTitlescreen::
 DisplayTitleScreen:
 	call GBPalWhiteOut
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	xor a
-	ld [hTilesetType], a
-	ld [hSCX], a
+	ldh [hTilesetType], a
+	ldh [hSCX], a
 	ld a, $40
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -130,7 +130,7 @@ ENDC
 	call TitleScreenCopyTileMapToVRAM
 	call SaveScreenTilesToBuffer1
 	ld a, $40
-	ld [hWY], a
+	ldh [hWY], a
 	call LoadScreenTilesFromBuffer2
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
@@ -138,7 +138,7 @@ ENDC
 	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
-	ld [rOBP0], a
+	ldh [rOBP0], a
 
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
@@ -190,7 +190,7 @@ ENDC
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
 	ld a, SCREEN_HEIGHT_PX
-	ld [hWY], a
+	ldh [hWY], a
 	ld d, 144
 .scrollTitleScreenGameVersionLoop
 	ld h, d
@@ -237,9 +237,9 @@ ENDC
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
@@ -247,7 +247,7 @@ ENDC
 	call TitleScreenCopyTileMapToVRAM
 	call Delay3
 	call LoadGBPal
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	ld b, a
 	and D_UP | SELECT | B_BUTTON
 	cp D_UP | SELECT | B_BUTTON
@@ -280,7 +280,7 @@ TitleScreenPickNewMon:
 	call LoadTitleMonSprite
 
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld d, 1 ; scroll out
 	callba TitleScroll
 	ret
@@ -289,20 +289,20 @@ TitleScreenScrollInMon:
 	ld d, 0 ; scroll in
 	callba TitleScroll
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ret
 
 ScrollTitleScreenGameVersion:
 .wait
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 
 .wait2
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .wait2
 	ret
@@ -358,12 +358,12 @@ LoadTitleMonSprite:
 	jp LoadFrontSpriteByMonIndex
 
 TitleScreenCopyTileMapToVRAM:
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	jp Delay3
 
 LoadCopyrightAndTextBoxTiles:
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 

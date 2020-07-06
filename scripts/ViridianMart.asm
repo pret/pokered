@@ -27,7 +27,7 @@ ViridianMart_ScriptPointers:
 ViridianMartScript0:
 	call UpdateSprites
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wSimulatedJoypadStatesEnd
 	ld de, RLEMovement1d4bb
@@ -50,7 +50,7 @@ ViridianMartScript1:
 	ret nz
 	call Delay3
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	lb bc, OAKS_PARCEL, 1
 	call GiveItem

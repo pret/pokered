@@ -1,25 +1,25 @@
 DisableLCD::
 	xor a
-	ld [rIF], a
-	ld a, [rIE]
+	ldh [rIF], a
+	ldh a, [rIE]
 	ld b, a
 	res 0, a
-	ld [rIE], a
+	ldh [rIE], a
 
 .wait
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp LY_VBLANK
 	jr nz, .wait
 
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	and $ff ^ rLCDC_ENABLE_MASK
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld a, b
-	ld [rIE], a
+	ldh [rIE], a
 	ret
 
 EnableLCD::
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	set rLCDC_ENABLE, a
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ret

@@ -1,9 +1,9 @@
 GetMonName::
 	push hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(MonsterNames)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wd11e]
 	dec a
@@ -19,7 +19,7 @@ GetMonName::
 	ld [hl], "@"
 	pop de
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	pop hl
 	ret

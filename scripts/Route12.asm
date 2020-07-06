@@ -27,7 +27,7 @@ Route12Script0:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE12_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -50,7 +50,7 @@ Route12Script3:
 	cp $2
 	jr z, .asm_59664
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
 	SetEvent EVENT_BEAT_ROUTE12_SNORLAX

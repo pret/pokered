@@ -55,7 +55,7 @@ GaryScript2:
 	ld hl, wOptions
 	res 7, [hl]  ; Turn on battle animations to make the battle feel more epic.
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld hl, wd72d
@@ -84,7 +84,7 @@ GaryScript2:
 	ld [wTrainerNo], a
 
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wChampionsRoomCurScript], a
 	ret
@@ -98,10 +98,10 @@ GaryScript3:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, $4
 	ld [wChampionsRoomCurScript], a
@@ -110,14 +110,14 @@ GaryScript3:
 GaryScript4:
 	callba Music_Cities1AlternateTempo
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, OakEntranceAfterVictoryMovement
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, HS_CHAMPIONS_ROOM_OAK
 	ld [wMissableObjectIndex], a
@@ -141,17 +141,17 @@ GaryScript5:
 	ld a, PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $6
 	ld [wChampionsRoomCurScript], a
@@ -159,12 +159,12 @@ GaryScript5:
 
 GaryScript6:
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_RIGHT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld a, $7
 	ld [wChampionsRoomCurScript], a
@@ -172,16 +172,16 @@ GaryScript6:
 
 GaryScript7:
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8
 	ld de, OakExitGaryRoomMovement
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $8
 	ld [wChampionsRoomCurScript], a

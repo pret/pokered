@@ -59,12 +59,12 @@ LanceScript0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $3  ; Is player standing next to Lance's sprite?
 	jr nc, .notStandingNextToLance
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .notStandingNextToLance
 	cp $5  ; Is player standing on the entrance staircase?
@@ -91,7 +91,7 @@ LanceScript2:
 	cp $ff
 	jp z, ResetLanceScript
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 WalkToLance:

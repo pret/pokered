@@ -138,20 +138,20 @@ ViridianGymScript3:
 	ld [wJoyIgnore], a
 ViridianGymScript3_74995:
 	ld a, $c
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
 	lb bc, TM_FISSURE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM27
 	jr .gymVictory
 .BagFull
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -289,7 +289,7 @@ ViridianGymText1:
 	ld hl, ViridianGymText_74ad3
 	ld de, ViridianGymText_74ad3
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

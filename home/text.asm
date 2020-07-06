@@ -62,7 +62,7 @@ PlaceNextChar::
 	cp "<NEXT>"
 	jr nz, .NotNext
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	bit 2, a
 	jr z, .ok
 	ld bc, SCREEN_WIDTH
@@ -141,12 +141,12 @@ SixDotsChar:: print_name SixDotsCharText
 PlacePKMN::   print_name PlacePKMNText
 
 PlaceMoveTargetsName::
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	xor 1
 	jr PlaceMoveUsersName.place
 
 PlaceMoveUsersName::
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 
 .place:
 	push de
@@ -313,7 +313,7 @@ TextCommandProcessor::
 	push af
 	set 1, a
 	ld e, a
-	ld a, [hClearLetterPrintingDelayFlags]
+	ldh a, [hClearLetterPrintingDelayFlags]
 	xor e
 	ld [wLetterPrintingDelayFlags], a
 	ld a, c
@@ -489,7 +489,7 @@ TextCommand_PAUSE::
 ; wait for button press or 30 frames
 	push bc
 	call Joypad
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and A_BUTTON | B_BUTTON
 	jr nz, .done
 	ld c, 30 ; half a second
@@ -565,7 +565,7 @@ TextCommand_DOTS::
 	push de
 	call Joypad
 	pop de
-	ld a, [hJoyHeld] ; joypad state
+	ldh a, [hJoyHeld] ; joypad state
 	and A_BUTTON | B_BUTTON
 	jr nz, .next ; if so, skip the delay
 	ld c, 10
@@ -590,7 +590,7 @@ TextCommand_WAIT_BUTTON::
 TextCommand_FAR::
 ; write text from a different bank (little endian)
 	pop hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 
 	ld a, [hli]
@@ -599,7 +599,7 @@ TextCommand_FAR::
 	ld d, a
 	ld a, [hli]
 
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	push hl
@@ -609,7 +609,7 @@ TextCommand_FAR::
 	pop hl
 
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp NextTextCommand
 

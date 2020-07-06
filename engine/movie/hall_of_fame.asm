@@ -19,12 +19,12 @@ AnimateHallOfFame:
 	call FillMemory
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld [wSpriteFlipped], a
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld hl, wNumHoFTeams
 	ld a, [hl]
 	inc a
@@ -32,7 +32,7 @@ AnimateHallOfFame:
 	inc [hl]
 .skipInc
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -86,7 +86,7 @@ AnimateHallOfFame:
 	call HoFDisplayPlayerStats
 	call HoFFadeOutScreenAndMusic
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld hl, rLCDC
 	res 3, [hl]
 	ret
@@ -97,9 +97,9 @@ HallOfFameText:
 HoFShowMonOrPlayer:
 	call ClearScreen
 	ld a, $d0
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld a, $c0
-	ld [hSCX], a
+	ldh [hSCX], a
 	ld a, [wHoFMonSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
@@ -121,7 +121,7 @@ HoFShowMonOrPlayer:
 	ld c, 0
 	call RunPaletteCommand
 	ld a, %11100100
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, $a0
@@ -133,7 +133,7 @@ HoFShowMonOrPlayer:
 .next2
 	call .ScrollPic ; scroll back pic left
 	xor a
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld c, a ; front pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, 0
@@ -142,9 +142,9 @@ HoFShowMonOrPlayer:
 
 .ScrollPic
 	call DelayFrame
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	add e
-	ld [hSCX], a
+	ldh [hSCX], a
 	cp d
 	jr nz, .ScrollPic
 	ret

@@ -584,7 +584,7 @@ DisplayFieldMoveMonMenu:
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 12
-	ld [hFieldMoveMonMenuTopMenuItemX], a
+	ldh [hFieldMoveMonMenuTopMenuItemX], a
 	coord hl, 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
@@ -673,7 +673,7 @@ DisplayFieldMoveMonMenu:
 .donePrintingNames
 	pop hl
 	ld a, [wFieldMovesLeftmostXCoord]
-	ld [hFieldMoveMonMenuTopMenuItemX], a
+	ldh [hFieldMoveMonMenuTopMenuItemX], a
 	coord hl, 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a

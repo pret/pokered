@@ -40,19 +40,19 @@ ClearBgMap::
 ; However, this function is also called repeatedly to redraw the whole screen
 ; when necessary. It is also used in trade animation and elevator code.
 RedrawRowOrColumn::
-	ld a, [hRedrawRowOrColumnMode]
+	ldh a, [hRedrawRowOrColumnMode]
 	and a
 	ret z
 	ld b, a
 	xor a
-	ld [hRedrawRowOrColumnMode], a
+	ldh [hRedrawRowOrColumnMode], a
 	dec b
 	jr nz, .redrawRow
 .redrawColumn
 	ld hl, wRedrawRowOrColumnSrcTiles
-	ld a, [hRedrawRowOrColumnDest]
+	ldh a, [hRedrawRowOrColumnDest]
 	ld e, a
-	ld a, [hRedrawRowOrColumnDest + 1]
+	ldh a, [hRedrawRowOrColumnDest + 1]
 	ld d, a
 	ld c, SCREEN_HEIGHT
 .loop1
@@ -75,13 +75,13 @@ RedrawRowOrColumn::
 	dec c
 	jr nz, .loop1
 	xor a
-	ld [hRedrawRowOrColumnMode], a
+	ldh [hRedrawRowOrColumnMode], a
 	ret
 .redrawRow
 	ld hl, wRedrawRowOrColumnSrcTiles
-	ld a, [hRedrawRowOrColumnDest]
+	ldh a, [hRedrawRowOrColumnDest]
 	ld e, a
-	ld a, [hRedrawRowOrColumnDest + 1]
+	ldh a, [hRedrawRowOrColumnDest + 1]
 	ld d, a
 	push de
 	call .DrawHalf ; draw upper half
@@ -120,15 +120,15 @@ RedrawRowOrColumn::
 ; the above function, RedrawRowOrColumn, is used when walking to
 ; improve efficiency.
 AutoBgMapTransfer::
-	ld a, [hAutoBGTransferEnabled]
+	ldh a, [hAutoBGTransferEnabled]
 	and a
 	ret z
 	ld hl, sp + 0
 	ld a, h
-	ld [hSPTemp], a
+	ldh [hSPTemp], a
 	ld a, l
-	ld [hSPTemp + 1], a ; save stack pinter
-	ld a, [hAutoBGTransferPortion]
+	ldh [hSPTemp + 1], a ; save stack pinter
+	ldh a, [hAutoBGTransferPortion]
 	and a
 	jr z, .transferTopThird
 	dec a
@@ -136,9 +136,9 @@ AutoBgMapTransfer::
 .transferBottomThird
 	coord hl, 0, 12
 	ld sp, hl
-	ld a, [hAutoBGTransferDest + 1]
+	ldh a, [hAutoBGTransferDest + 1]
 	ld h, a
-	ld a, [hAutoBGTransferDest]
+	ldh a, [hAutoBGTransferDest]
 	ld l, a
 	ld de, (12 * 32)
 	add hl, de
@@ -147,24 +147,24 @@ AutoBgMapTransfer::
 .transferTopThird
 	coord hl, 0, 0
 	ld sp, hl
-	ld a, [hAutoBGTransferDest + 1]
+	ldh a, [hAutoBGTransferDest + 1]
 	ld h, a
-	ld a, [hAutoBGTransferDest]
+	ldh a, [hAutoBGTransferDest]
 	ld l, a
 	ld a, TRANSFERMIDDLE
 	jr .doTransfer
 .transferMiddleThird
 	coord hl, 0, 6
 	ld sp, hl
-	ld a, [hAutoBGTransferDest + 1]
+	ldh a, [hAutoBGTransferDest + 1]
 	ld h, a
-	ld a, [hAutoBGTransferDest]
+	ldh a, [hAutoBGTransferDest]
 	ld l, a
 	ld de, (6 * 32)
 	add hl, de
 	ld a, TRANSFERBOTTOM
 .doTransfer
-	ld [hAutoBGTransferPortion], a ; store next portion
+	ldh [hAutoBGTransferPortion], a ; store next portion
 	ld b, 6
 
 TransferBgRows::
@@ -192,9 +192,9 @@ TransferBgRows::
 	dec b
 	jr nz, TransferBgRows
 
-	ld a, [hSPTemp]
+	ldh a, [hSPTemp]
 	ld h, a
-	ld a, [hSPTemp + 1]
+	ldh a, [hSPTemp + 1]
 	ld l, a
 	ld sp, hl
 	ret
@@ -202,27 +202,27 @@ TransferBgRows::
 ; Copies [hVBlankCopyBGNumRows] rows from hVBlankCopyBGSource to hVBlankCopyBGDest.
 ; If hVBlankCopyBGSource is XX00, the transfer is disabled.
 VBlankCopyBgMap::
-	ld a, [hVBlankCopyBGSource] ; doubles as enabling byte
+	ldh a, [hVBlankCopyBGSource] ; doubles as enabling byte
 	and a
 	ret z
 	ld hl, sp + 0
 	ld a, h
-	ld [hSPTemp], a
+	ldh [hSPTemp], a
 	ld a, l
-	ld [hSPTemp + 1], a ; save stack pointer
-	ld a, [hVBlankCopyBGSource]
+	ldh [hSPTemp + 1], a ; save stack pointer
+	ldh a, [hVBlankCopyBGSource]
 	ld l, a
-	ld a, [hVBlankCopyBGSource + 1]
+	ldh a, [hVBlankCopyBGSource + 1]
 	ld h, a
 	ld sp, hl
-	ld a, [hVBlankCopyBGDest]
+	ldh a, [hVBlankCopyBGDest]
 	ld l, a
-	ld a, [hVBlankCopyBGDest + 1]
+	ldh a, [hVBlankCopyBGDest + 1]
 	ld h, a
-	ld a, [hVBlankCopyBGNumRows]
+	ldh a, [hVBlankCopyBGNumRows]
 	ld b, a
 	xor a
-	ld [hVBlankCopyBGSource], a ; disable transfer so it doesn't continue next V-blank
+	ldh [hVBlankCopyBGSource], a ; disable transfer so it doesn't continue next V-blank
 	jr TransferBgRows
 
 
@@ -234,31 +234,31 @@ VBlankCopyDouble::
 ; The process is straightforward:
 ; copy each byte twice.
 
-	ld a, [hVBlankCopyDoubleSize]
+	ldh a, [hVBlankCopyDoubleSize]
 	and a
 	ret z
 
 	ld hl, sp + 0
 	ld a, h
-	ld [hSPTemp], a
+	ldh [hSPTemp], a
 	ld a, l
-	ld [hSPTemp + 1], a
+	ldh [hSPTemp + 1], a
 
-	ld a, [hVBlankCopyDoubleSource]
+	ldh a, [hVBlankCopyDoubleSource]
 	ld l, a
-	ld a, [hVBlankCopyDoubleSource + 1]
+	ldh a, [hVBlankCopyDoubleSource + 1]
 	ld h, a
 	ld sp, hl
 
-	ld a, [hVBlankCopyDoubleDest]
+	ldh a, [hVBlankCopyDoubleDest]
 	ld l, a
-	ld a, [hVBlankCopyDoubleDest + 1]
+	ldh a, [hVBlankCopyDoubleDest + 1]
 	ld h, a
 
-	ld a, [hVBlankCopyDoubleSize]
+	ldh a, [hVBlankCopyDoubleSize]
 	ld b, a
 	xor a ; transferred
-	ld [hVBlankCopyDoubleSize], a
+	ldh [hVBlankCopyDoubleSize], a
 
 .loop
 	REPT 3
@@ -286,19 +286,19 @@ VBlankCopyDouble::
 	jr nz, .loop
 
 	ld a, l
-	ld [hVBlankCopyDoubleDest], a
+	ldh [hVBlankCopyDoubleDest], a
 	ld a, h
-	ld [hVBlankCopyDoubleDest + 1], a
+	ldh [hVBlankCopyDoubleDest + 1], a
 
 	ld hl, sp + 0
 	ld a, l
-	ld [hVBlankCopyDoubleSource], a
+	ldh [hVBlankCopyDoubleSource], a
 	ld a, h
-	ld [hVBlankCopyDoubleSource + 1], a
+	ldh [hVBlankCopyDoubleSource + 1], a
 
-	ld a, [hSPTemp]
+	ldh a, [hSPTemp]
 	ld h, a
-	ld a, [hSPTemp + 1]
+	ldh a, [hSPTemp + 1]
 	ld l, a
 	ld sp, hl
 
@@ -312,31 +312,31 @@ VBlankCopy::
 ; Source and destination addresses are updated,
 ; so transfer can continue in subsequent calls.
 
-	ld a, [hVBlankCopySize]
+	ldh a, [hVBlankCopySize]
 	and a
 	ret z
 
 	ld hl, sp + 0
 	ld a, h
-	ld [hSPTemp], a
+	ldh [hSPTemp], a
 	ld a, l
-	ld [hSPTemp + 1], a
+	ldh [hSPTemp + 1], a
 
-	ld a, [hVBlankCopySource]
+	ldh a, [hVBlankCopySource]
 	ld l, a
-	ld a, [hVBlankCopySource + 1]
+	ldh a, [hVBlankCopySource + 1]
 	ld h, a
 	ld sp, hl
 
-	ld a, [hVBlankCopyDest]
+	ldh a, [hVBlankCopyDest]
 	ld l, a
-	ld a, [hVBlankCopyDest + 1]
+	ldh a, [hVBlankCopyDest + 1]
 	ld h, a
 
-	ld a, [hVBlankCopySize]
+	ldh a, [hVBlankCopySize]
 	ld b, a
 	xor a ; transferred
-	ld [hVBlankCopySize], a
+	ldh [hVBlankCopySize], a
 
 .loop
 	REPT 7
@@ -356,19 +356,19 @@ VBlankCopy::
 	jr nz, .loop
 
 	ld a, l
-	ld [hVBlankCopyDest], a
+	ldh [hVBlankCopyDest], a
 	ld a, h
-	ld [hVBlankCopyDest + 1], a
+	ldh [hVBlankCopyDest + 1], a
 
 	ld hl, sp + 0
 	ld a, l
-	ld [hVBlankCopySource], a
+	ldh [hVBlankCopySource], a
 	ld a, h
-	ld [hVBlankCopySource + 1], a
+	ldh [hVBlankCopySource + 1], a
 
-	ld a, [hSPTemp]
+	ldh a, [hSPTemp]
 	ld h, a
-	ld a, [hSPTemp + 1]
+	ldh a, [hSPTemp + 1]
 	ld l, a
 	ld sp, hl
 
@@ -379,13 +379,13 @@ UpdateMovingBgTiles::
 ; Animate water and flower
 ; tiles in the overworld.
 
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	and a
 	ret z ; no animations if indoors (or if a menu set this to 0)
 
-	ld a, [hMovingBGTilesCounter1]
+	ldh a, [hMovingBGTilesCounter1]
 	inc a
-	ld [hMovingBGTilesCounter1], a
+	ldh [hMovingBGTilesCounter1], a
 	cp 20
 	ret c
 	cp 21
@@ -417,17 +417,17 @@ UpdateMovingBgTiles::
 	dec c
 	jr nz, .left
 .done
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	rrca
 	ret nc
 ; if in a cave, no flower animations
 	xor a
-	ld [hMovingBGTilesCounter1], a
+	ldh [hMovingBGTilesCounter1], a
 	ret
 
 .flower
 	xor a
-	ld [hMovingBGTilesCounter1], a
+	ldh [hMovingBGTilesCounter1], a
 
 	ld a, [wMovingBGTilesCounter2]
 	and 3

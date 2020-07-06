@@ -15,7 +15,7 @@ VermilionCity_Script:
 
 .setFirstLockTrashCanIndex
 	call Random
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
@@ -45,10 +45,10 @@ VermilionCityScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_SS_ANNE_LEFT
 	jr nz, .shipHasDeparted
@@ -98,7 +98,7 @@ VermilionCityScript3:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $0
 	ld [wVermilionCityCurScript], a
 	ret

@@ -19,10 +19,10 @@ Route18GateScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, [wCoordIndex]
 	cp $1
 	jr z, .asm_498c6
@@ -59,7 +59,7 @@ Route18GateScript1:
 
 Route18GateScript2:
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a

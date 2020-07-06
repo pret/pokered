@@ -44,20 +44,20 @@ FuchsiaGymScript3:
 	ld [wJoyIgnore], a
 FuchsiaGymScript3_75497:
 	ld a, $9
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_KOGA
 	lb bc, TM_TOXIC, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM06
 	jr .gymVictory
 .BagFull
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -161,14 +161,14 @@ FuchsiaGymText1:
 	ld hl, KogaAfterBattleText
 	ld de, KogaAfterBattleText
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $5
 	ld [wGymLeaderNo], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wFuchsiaGymCurScript], a
 .done

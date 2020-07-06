@@ -69,15 +69,15 @@ _TitleScroll:
 
 .ScrollBetween:
 .wait
-	ld a, [rLY] ; rLY
+	ldh a, [rLY] ; rLY
 	cp l
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 
 .wait2
-	ld a, [rLY] ; rLY
+	ldh a, [rLY] ; rLY
 	cp h
 	jr z, .wait2
 	ret

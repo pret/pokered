@@ -1,6 +1,6 @@
 DisplayPCMainMenu::
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer2
 	ld a, [wNumHoFTeams]
 	and a
@@ -82,7 +82,7 @@ DisplayPCMainMenu::
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 SomeonesPCText:   db "SOMEONE's PC@"
@@ -168,7 +168,7 @@ BillsPCMenu:
 	ld de, BoxNoPCText
 	call PlaceString
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call HandleMenuInput
 	bit 1, a
@@ -501,7 +501,7 @@ MonWasReleasedText:
 	text_end
 
 CableClubLeftGameboy::
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	ret z
 	ld a, [wSpritePlayerStateData1FacingDirection]
@@ -518,7 +518,7 @@ CableClubLeftGameboy::
 	tx_pre_jump JustAMomentText
 
 CableClubRightGameboy::
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	ret z
 	ld a, [wSpritePlayerStateData1FacingDirection]

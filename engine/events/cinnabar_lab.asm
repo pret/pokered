@@ -35,7 +35,7 @@ GiveFossilToCinnabarLab::
 	ld e, a
 	add hl, de
 	ld a, [hl]
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	cp DOME_FOSSIL
 	jr z, .choseDomeFossil
 	cp HELIX_FOSSIL
@@ -61,7 +61,7 @@ GiveFossilToCinnabarLab::
 	ld hl, LabFossil_610b3
 	call PrintText
 	ld a, [wFossilItem]
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
@@ -92,7 +92,7 @@ PrintFossilsInBag:
 ; Prints each fossil in the player's bag on a separate line in the menu.
 	ld hl, wFilteredBagItems
 	xor a
-	ld [hItemCounter], a
+	ldh [hItemCounter], a
 .loop
 	ld a, [hli]
 	cp $ff
@@ -101,7 +101,7 @@ PrintFossilsInBag:
 	ld [wd11e], a
 	call GetItemName
 	coord hl, 2, 2
-	ld a, [hItemCounter]
+	ldh a, [hItemCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld de, wcd6d

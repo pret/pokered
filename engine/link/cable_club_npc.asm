@@ -15,27 +15,27 @@ CableClubNPC::
 	ld a, 90
 	ld [wLinkTimeoutCounter], a
 .establishConnectionLoop
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr z, .establishedConnection
 	cp USING_EXTERNAL_CLOCK
 	jr z, .establishedConnection
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ld [hSerialConnectionStatus], a
+	ldh [hSerialConnectionStatus], a
 	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
-	ld [rSB], a
+	ldh [rSB], a
 	xor a
-	ld [hSerialReceiveData], a
+	ldh [hSerialReceiveData], a
 	ld a, START_TRANSFER_EXTERNAL_CLOCK
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, [wLinkTimeoutCounter]
 	dec a
 	ld [wLinkTimeoutCounter], a
 	jr z, .failedToEstablishConnection
 	ld a, ESTABLISH_CONNECTION_WITH_INTERNAL_CLOCK
-	ld [rSB], a
+	ldh [rSB], a
 	ld a, START_TRANSFER_INTERNAL_CLOCK
-	ld [rSC], a
+	ldh [rSC], a
 	call DelayFrame
 	jr .establishConnectionLoop
 .establishedConnection
@@ -65,7 +65,7 @@ CableClubNPC::
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld [hSerialReceivedNewData], a
+	ldh [hSerialReceivedNewData], a
 	ld [wSerialExchangeNybbleSendData], a
 	call Serial_SyncAndExchangeNybble
 	ld hl, wUnknownSerialCounter
@@ -141,11 +141,11 @@ CableClubNPCMakingPreparationsText:
 CloseLinkConnection:
 	call Delay3
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ld [hSerialConnectionStatus], a
+	ldh [hSerialConnectionStatus], a
 	ld a, ESTABLISH_CONNECTION_WITH_EXTERNAL_CLOCK
-	ld [rSB], a
+	ldh [rSB], a
 	xor a
-	ld [hSerialReceiveData], a
+	ldh [hSerialReceiveData], a
 	ld a, START_TRANSFER_EXTERNAL_CLOCK
-	ld [rSC], a
+	ldh [rSC], a
 	ret

@@ -62,7 +62,7 @@ DisplayDiploma::
 	call Delay3
 	call GBPalNormal
 	ld a, $90
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	call WaitForTextScrollButtonPress
 	ld hl, wd730
 	res 6, [hl]

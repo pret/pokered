@@ -94,11 +94,11 @@ MainMenu:
 	set 5, [hl]
 .inputLoop
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
+	ldh [hJoyHeld], a
 	call Joypad
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	bit 0, a
 	jr nz, .pressedA
 	bit 1, a
@@ -205,7 +205,7 @@ LinkMenu:
 	jr z, .useEnemyMenuSelection ; if the enemy pressed A or B but the player didn't, use the enemy's selection
 ; the enemy and the player both pressed A or B
 ; The gameboy that is clocking the connection wins.
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr z, .doneChoosingMenuSelection
 .useEnemyMenuSelection
@@ -214,13 +214,13 @@ LinkMenu:
 	and $3
 	ld [wCurrentMenuItem], a
 .doneChoosingMenuSelection
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	jr nz, .skipStartingTransfer
 	call DelayFrame
 	call DelayFrame
 	ld a, START_TRANSFER_INTERNAL_CLOCK
-	ld [rSC], a
+	ldh [rSC], a
 .skipStartingTransfer
 	ld b, $7f
 	ld c, $7f
@@ -314,9 +314,9 @@ StartNewGame:
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
-	ld [hJoy5], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
+	ldh [hJoy5], a
 	ld [wd72d], a
 	ld hl, wd732
 	set 0, [hl] ; count play time
@@ -344,7 +344,7 @@ CableClubOptionsText:
 
 DisplayContinueGameInfo:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 4, 7
 	ld b, 8
 	ld c, 14
@@ -362,13 +362,13 @@ DisplayContinueGameInfo:
 	coord hl, 13, 15
 	call PrintPlayTime
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld c, 30
 	jp DelayFrames
 
 PrintSaveScreenText:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 4, 0
 	ld b, $8
 	ld c, $e
@@ -388,7 +388,7 @@ PrintSaveScreenText:
 	coord hl, 13, 8
 	call PrintPlayTime
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld c, 30
 	jp DelayFrames
 
@@ -465,14 +465,14 @@ DisplayOptionMenu:
 	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
 	ld [wTopMenuItemX], a
 	ld a, $01
-	ld [hAutoBGTransferEnabled], a ; enable auto background transfer
+	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
 	call Delay3
 .loop
 	call PlaceMenuCursor
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	ld b, a
 	and A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
 	jr z, .getJoypadStateLoop

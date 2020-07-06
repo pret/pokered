@@ -10,9 +10,9 @@ Route2GateText1:
 	CheckEvent EVENT_GOT_HM05
 	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
-	ld [hOaksAideRequirement], a
+	ldh [hOaksAideRequirement], a
 	ld a, HM_FLASH ; oak's aide reward
-	ld [hOaksAideRewardItem], a
+	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
 	ld hl, wcd6d
@@ -20,7 +20,7 @@ Route2GateText1:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ld a, [hOaksAideResult]
+	ldh a, [hOaksAideResult]
 	cp $1
 	jr nz, .asm_5d613
 	SetEvent EVENT_GOT_HM05

@@ -2,7 +2,7 @@ RemoveGuardDrink::
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	and a
 	ret z
 	push hl

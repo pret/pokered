@@ -44,20 +44,20 @@ SaffronGymScript3:
 
 SaffronGymText_5d068:
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_SABRINA
 	lb bc, TM_PSYWAVE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM46
 	jr .gymVictory
 .BagFull
 	ld a, $c
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -171,7 +171,7 @@ SaffronGymText1:
 	ld hl, SaffronGymText_5d167
 	ld de, SaffronGymText_5d167
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

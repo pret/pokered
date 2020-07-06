@@ -90,13 +90,13 @@ OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
-	ld [hSlideDirection], a
+	ldh [hSlideDirection], a
 	ld a, d
-	ld [hSlideAmount], a
+	ldh [hSlideAmount], a
 	ld a, e
-	ld [hSlidingRegionSize], a
+	ldh [hSlidingRegionSize], a
 	ld c, a
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .next
 ; If sliding right, point hl to the end of the pic's tiles.
@@ -107,8 +107,8 @@ OakSpeechSlidePicCommon:
 	ld e, l
 .loop
 	xor a
-	ld [hAutoBGTransferEnabled], a
-	ld a, [hSlideDirection]
+	ldh [hAutoBGTransferEnabled], a
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .slideLeft
 ; sliding right
@@ -123,7 +123,7 @@ OakSpeechSlidePicCommon:
 .next2
 	dec c
 	jr nz, .loop
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr z, .next3
 ; If sliding left, we need to zero the last tile in the pic (there is no need
@@ -134,13 +134,13 @@ OakSpeechSlidePicCommon:
 	ld [hl], a
 .next3
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	ld a, [hSlidingRegionSize]
+	ldh a, [hSlidingRegionSize]
 	ld c, a
 	ld h, d
 	ld l, e
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .slideLeft2
 	inc hl
@@ -150,9 +150,9 @@ OakSpeechSlidePicCommon:
 .next4
 	ld d, h
 	ld e, l
-	ld a, [hSlideAmount]
+	ldh a, [hSlideAmount]
 	dec a
-	ld [hSlideAmount], a
+	ldh [hSlideAmount], a
 	jr nz, .loop
 	pop bc
 	pop de

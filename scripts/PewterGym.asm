@@ -44,20 +44,20 @@ PewterGymScript3:
 
 PewterGymScript_5c3df:
 	ld a, $4
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_BEAT_BROCK
 	lb bc, TM_BIDE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	SetEvent EVENT_GOT_TM34
 	jr .gymVictory
 .BagFull
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
@@ -120,14 +120,14 @@ PewterGymText1:
 	ld hl, PewterGymText_5c4bc
 	ld de, PewterGymText_5c4bc
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1
 	ld [wGymLeaderNo], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a

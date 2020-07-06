@@ -5,19 +5,19 @@ VBlank::
 	push de
 	push hl
 
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld [wVBlankSavedROMBank], a
 
-	ld a, [hSCX]
-	ld [rSCX], a
-	ld a, [hSCY]
-	ld [rSCY], a
+	ldh a, [hSCX]
+	ldh [rSCX], a
+	ldh a, [hSCY]
+	ldh [rSCY], a
 
 	ld a, [wDisableVBlankWYUpdate]
 	and a
 	jr nz, .ok
-	ld a, [hWY]
-	ld [rWY], a
+	ldh a, [hWY]
+	ldh [rWY], a
 .ok
 
 	call AutoBgMapTransfer
@@ -28,7 +28,7 @@ VBlank::
 	call UpdateMovingBgTiles
 	call hDMARoutine
 	ld a, BANK(PrepareOAMData)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call PrepareOAMData
 
@@ -36,24 +36,24 @@ VBlank::
 
 	call Random
 
-	ld a, [hVBlankOccurred]
+	ldh a, [hVBlankOccurred]
 	and a
 	jr z, .skipZeroing
 	xor a
-	ld [hVBlankOccurred], a
+	ldh [hVBlankOccurred], a
 
 .skipZeroing
-	ld a, [hFrameCounter]
+	ldh a, [hFrameCounter]
 	and a
 	jr z, .skipDec
 	dec a
-	ld [hFrameCounter], a
+	ldh [hFrameCounter], a
 
 .skipDec
 	call FadeOutAudio
 
 	ld a, [wAudioROMBank] ; music ROM bank
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	cp BANK(Audio1_UpdateMusic)
@@ -74,12 +74,12 @@ VBlank::
 
 	callba TrackPlayTime ; keep track of time played
 
-	ld a, [hDisableJoypadPolling]
+	ldh a, [hDisableJoypadPolling]
 	and a
 	call z, ReadJoypad
 
 	ld a, [wVBlankSavedROMBank]
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 
 	pop hl
@@ -96,10 +96,10 @@ DelayFrame::
 NOT_VBLANKED EQU 1
 
 	ld a, NOT_VBLANKED
-	ld [hVBlankOccurred], a
+	ldh [hVBlankOccurred], a
 .halt
 	halt
-	ld a, [hVBlankOccurred]
+	ldh a, [hVBlankOccurred]
 	and a
 	jr nz, .halt
 	ret

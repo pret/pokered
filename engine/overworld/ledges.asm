@@ -36,7 +36,7 @@ HandleLedges::
 	inc hl
 	jr .loop
 .foundMatch
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff

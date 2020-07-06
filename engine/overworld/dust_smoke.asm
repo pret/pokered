@@ -6,7 +6,7 @@ AnimateBoulderDust:
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	ld a, %11100100
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	call LoadSmokeTileFourTimes
 	callba WriteCutOrBoulderDustAnimationOAMBlock
 	ld c, 8 ; number of steps in animation
@@ -18,9 +18,9 @@ AnimateBoulderDust:
 	ld c, 4
 	jp hl
 .returnAddress
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor %01100100
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	call Delay3
 	pop bc
 	dec c

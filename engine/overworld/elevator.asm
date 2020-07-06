@@ -6,7 +6,7 @@ ShakeElevator::
 	call Delay3
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
-	ld a, [hSCY]
+	ldh a, [hSCY]
 	ld d, a
 	ld e, $1
 	ld b, 100
@@ -15,7 +15,7 @@ ShakeElevator::
 	xor $fe
 	ld e, a
 	add d
-	ld [hSCY], a
+	ldh [hSCY], a
 	push bc
 	ld c, BANK(SFX_Collision_1)
 	ld a, SFX_COLLISION
@@ -26,7 +26,7 @@ ShakeElevator::
 	dec b
 	jr nz, .shakeLoop
 	ld a, d
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld c, BANK(SFX_Safari_Zone_PA)

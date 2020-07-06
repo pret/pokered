@@ -11,7 +11,7 @@ TryEvolvingMon:
 ; this is only called after battle
 ; it is supposed to do level up evolutions, though there is a bug that allows item evolutions to occur
 EvolutionAfterBattle:
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
 	ld [wEvolutionOccurred], a
@@ -120,12 +120,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld c, 50
 	call DelayFrames
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 0, 0
 	lb bc, 12, 20
 	call ClearScreenArea
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
@@ -245,7 +245,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	pop bc
 	pop hl
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
 	ret z

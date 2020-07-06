@@ -20,14 +20,14 @@ ExternalClockTradeAnim:
 TradeAnimCommon:
 	ld a, [wOptions]
 	push af
-	ld a, [hSCY]
+	ldh a, [hSCY]
 	push af
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	push af
 	xor a
 	ld [wOptions], a
-	ld [hSCY], a
-	ld [hSCX], a
+	ldh [hSCY], a
+	ldh [hSCX], a
 	push de
 .loop
 	pop de
@@ -49,9 +49,9 @@ TradeAnimCommon:
 	jp hl ; call trade func, which will return to the top of the loop
 .done
 	pop af
-	ld [hSCX], a
+	ldh [hSCX], a
 	pop af
-	ld [hSCY], a
+	ldh [hSCY], a
 	pop af
 	ld [wOptions], a
 	ret
@@ -137,10 +137,10 @@ Trade_Delay100:
 
 Trade_CopyTileMapToVRAM:
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 Trade_Delay80:
@@ -181,10 +181,10 @@ LoadTradingGFXAndMonNames:
 	jr z, .next
 	ld a, $f0 ; SGB OBP0
 .next
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	call EnableLCD
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wTradedPlayerMonSpecies]
 	ld [wd11e], a
 	call GetMonName
@@ -198,7 +198,7 @@ LoadTradingGFXAndMonNames:
 
 Trade_LoadMonPartySpriteGfx:
 	ld a, %11010000
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	jpba LoadMonPartySpriteGfx
 
 Trade_SwapNames:
@@ -224,14 +224,14 @@ Trade_Cleanup:
 
 Trade_ShowPlayerMon:
 	ld a, %10101011
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld a, $50
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, $86
-	ld [rWX], a
-	ld [hSCX], a
+	ldh [rWX], a
+	ldh [hSCX], a
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 4, 0
 	ld b, 6
 	ld c, 10
@@ -247,8 +247,8 @@ Trade_ShowPlayerMon:
 	push af
 	call DelayFrame
 	pop af
-	ld [rWX], a
-	ld [hSCX], a
+	ldh [rWX], a
+	ldh [hSCX], a
 	dec a
 	dec a
 	and a
@@ -261,7 +261,7 @@ Trade_ShowPlayerMon:
 	ld a, [wTradedPlayerMonSpecies]
 	call PlayCry
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 Trade_DrawOpenEndOfLinkCable:
@@ -277,10 +277,10 @@ Trade_DrawOpenEndOfLinkCable:
 	call Trade_CopyCableTilesOffScreen
 
 	ld a, $a0
-	ld [hSCX], a
+	ldh [hSCX], a
 	call DelayFrame
 	ld a, %10001011
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	coord hl, 6, 2
 	ld b, $7 ; open end of link cable tile ID list index
 	call CopyTileIDsFromList_ZeroBaseTileID
@@ -289,9 +289,9 @@ Trade_DrawOpenEndOfLinkCable:
 	call PlaySound
 	ld c, 20
 .loop
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	add 4
-	ld [hSCX], a
+	ldh [hSCX], a
 	dec c
 	jr nz, .loop
 	ret
@@ -302,7 +302,7 @@ Trade_AnimateBallEnteringLinkCable:
 	ld c, 10
 	call DelayFrames
 	ld a, %11100100
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	xor a
 	ld [wLinkCableAnimBulgeToggle], a
 	lb bc, $20, $60
@@ -336,13 +336,13 @@ Trade_AnimateBallEnteringLinkCable:
 .ballSpriteReachedEdgeOfScreen
 	call ClearSprites
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld b, $98
 	call CopyScreenTileBufferToVRAM
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 Trade_BallInsideLinkCableOAM:
@@ -360,13 +360,13 @@ Trade_ShowEnemyMon:
 	call Trade_PrintEnemyMonInfoText
 	call Trade_CopyTileMapToVRAM
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wTradedEnemyMonSpecies]
 	call Trade_LoadMonSprite
 	ld a, TRADE_BALL_POOF_ANIM
 	call Trade_ShowAnimation
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wTradedEnemyMonSpecies]
 	call PlayCry
 	call Trade_Delay100
@@ -381,7 +381,7 @@ Trade_AnimLeftToRight:
 	ld a, $1
 	ld [wTradedMonMovingRight], a
 	ld a, %11100100
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $54
 	ld [wBaseCoordX], a
 	ld a, $1c
@@ -397,7 +397,7 @@ Trade_AnimLeftToRight:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Trade_DrawCableAcrossScreen
 	ld b, $4
 	call Trade_AnimMonMoveHorizontal
@@ -405,7 +405,7 @@ Trade_AnimLeftToRight:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Trade_AnimMonMoveVertical
 	jp ClearSprites
 
@@ -430,7 +430,7 @@ Trade_AnimRightToLeft:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Trade_DrawCableAcrossScreen
 	ld b, $4
 	call Trade_AnimMonMoveHorizontal
@@ -438,24 +438,24 @@ Trade_AnimRightToLeft:
 	ld b, $6
 	call Trade_AnimMonMoveHorizontal
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp ClearSprites
 
 Trade_InitGameboyTransferGfx:
 ; Initialises the graphics for showing a mon moving between gameboys.
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Trade_LoadMonPartySpriteGfx
 	call DelayFrame
 	ld a, %10101011
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	xor a
-	ld [hSCX], a
+	ldh [hSCX], a
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ret
 
 Trade_DrawLeftGameboy:
@@ -555,11 +555,11 @@ Trade_CopyCableTilesOffScreen:
 	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld a, h
-	ld [hRedrawRowOrColumnDest + 1], a
+	ldh [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [hRedrawRowOrColumnDest], a
+	ldh [hRedrawRowOrColumnDest], a
 	ld a, REDRAW_ROW
-	ld [hRedrawRowOrColumnMode], a
+	ldh [hRedrawRowOrColumnMode], a
 	ld c, 10
 	jp DelayFrames
 
@@ -574,14 +574,14 @@ Trade_AnimMonMoveHorizontal:
 	dec a
 	jr z, .movingRight
 ; moving left
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	sub $2
 	jr .next
 .movingRight
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	add $2
 .next
-	ld [hSCX], a
+	ldh [hSCX], a
 	call DelayFrame
 	dec d
 	jr nz, .scrollLoop
@@ -596,9 +596,9 @@ Trade_AnimCircledMon:
 	push de
 	push bc
 	push hl
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	xor $3c ; make link cable flash
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld hl, wOAMBuffer + $02
 	ld de, $4
 	ld c, $14
@@ -731,9 +731,9 @@ Trade_LoadMonSprite:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0
 	call RunPaletteCommand
-	ld a, [hAutoBGTransferEnabled]
+	ldh a, [hAutoBGTransferEnabled]
 	xor $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call GetMonHeader
 	coord hl, 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
@@ -743,16 +743,16 @@ Trade_LoadMonSprite:
 Trade_ShowClearedWindow:
 ; clears the window and covers the BG entirely with the window
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	ld a, %11100011
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld a, $7
-	ld [rWX], a
+	ldh [rWX], a
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, $90
-	ld [hSCX], a
+	ldh [hSCX], a
 	ret
 
 Trade_SlideTextBoxOffScreen:
@@ -764,17 +764,17 @@ Trade_SlideTextBoxOffScreen:
 	call DelayFrames
 .loop
 	call DelayFrame
-	ld a, [rWX]
+	ldh a, [rWX]
 	inc a
 	inc a
-	ld [rWX], a
+	ldh [rWX], a
 	cp $a1
 	jr nz, .loop
 	call Trade_ClearTileMap
 	ld c, 10
 	call DelayFrames
 	ld a, $7
-	ld [rWX], a
+	ldh [rWX], a
 	ret
 
 PrintTradeWentToText:

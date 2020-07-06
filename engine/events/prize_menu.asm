@@ -64,7 +64,7 @@ GetPrizeMenuId:
 ; display the three prizes' names
 ; (distinguishing between Pokemon names
 ; and Items (specifically TMs) names)
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	sub 3       ; prize-texts' id are 3, 4 and 5
 	ld [wWhichPrizeWindow], a    ; prize-texts' id (relative, i.e. 0, 1 or 2)
 	add a
@@ -177,11 +177,11 @@ LoadCoinsToSubtract:
 	ld hl, wPrize1Price
 	add hl, de ; get selected prize's price
 	xor a
-	ld [hUnusedCoinsByte], a
+	ldh [hUnusedCoinsByte], a
 	ld a, [hli]
-	ld [hCoins], a
+	ldh [hCoins], a
 	ld a, [hl]
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ret
 
 HandlePrizeChoice:

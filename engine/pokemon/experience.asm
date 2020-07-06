@@ -10,15 +10,15 @@ CalcLevelFromExperience::
 	push hl
 	ld hl, wLoadedMonExp + 2 ; current exp
 ; compare exp needed for level d with current exp
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	ld c, a
 	ld a, [hld]
 	sub c
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	ld c, a
 	ld a, [hld]
 	sbc c
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	ld c, a
 	ld a, [hl]
 	sbc c
@@ -38,56 +38,56 @@ CalcExperience::
 	add hl, bc
 	call CalcDSquared
 	ld a, d
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	push af
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	push af
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	push af
 	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct + 1]
+	ldh a, [hProduct + 1]
 	push af
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	push af
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	push af
 	ld a, [hli]
 	push af
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 	ld a, d
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [hli]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld b, [hl]
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	sub b
-	ld [hProduct + 3], a
+	ldh [hProduct + 3], a
 	ld b, $0
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	sbc b
-	ld [hProduct + 2], a
-	ld a, [hProduct + 1]
+	ldh [hProduct + 2], a
+	ldh a, [hProduct + 1]
 	sbc b
-	ld [hProduct + 1], a
+	ldh [hProduct + 1], a
 ; The difference of the linear term and the constant term consists of 3 bytes
 ; starting at hProduct + 1. Below, hExperience (an alias of that address) will
 ; be used instead for the further work of adding or subtracting the squared
@@ -96,54 +96,54 @@ CalcExperience::
 	and $80
 	jr nz, .subtractSquaredTerm ; check sign
 	pop bc
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	add b
-	ld [hExperience + 2], a
+	ldh [hExperience + 2], a
 	pop bc
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	adc b
-	ld [hExperience + 1], a
+	ldh [hExperience + 1], a
 	pop bc
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	adc b
-	ld [hExperience], a
+	ldh [hExperience], a
 	jr .addCubedTerm
 .subtractSquaredTerm
 	pop bc
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	sub b
-	ld [hExperience + 2], a
+	ldh [hExperience + 2], a
 	pop bc
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	sbc b
-	ld [hExperience + 1], a
+	ldh [hExperience + 1], a
 	pop bc
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	sbc b
-	ld [hExperience], a
+	ldh [hExperience], a
 .addCubedTerm
 	pop bc
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	add b
-	ld [hExperience + 2], a
+	ldh [hExperience + 2], a
 	pop bc
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	adc b
-	ld [hExperience + 1], a
+	ldh [hExperience + 1], a
 	pop bc
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	adc b
-	ld [hExperience], a
+	ldh [hExperience], a
 	ret
 
 ; calculates d*d
 CalcDSquared:
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 	ld a, d
-	ld [hMultiplicand + 2], a
-	ld [hMultiplier], a
+	ldh [hMultiplicand + 2], a
+	ldh [hMultiplier], a
 	jp Multiply
 
 INCLUDE "data/growth_rates.asm"

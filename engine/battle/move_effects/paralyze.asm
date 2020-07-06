@@ -1,7 +1,7 @@
 ParalyzeEffect_:
 	ld hl, wEnemyMonStatus
 	ld de, wPlayerMoveType
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp z, .next
 	ld hl, wBattleMonStatus

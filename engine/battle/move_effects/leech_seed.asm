@@ -5,7 +5,7 @@ LeechSeedEffect_:
 	jr nz, .moveMissed
 	ld hl, wEnemyBattleStatus2
 	ld de, wEnemyMonType1
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .leechSeedEffect
 	ld hl, wPlayerBattleStatus2

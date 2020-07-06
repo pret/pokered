@@ -31,7 +31,7 @@ PokemonTower7Script2:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call PokemonTower7Script_60db6
 	ld a, $3
@@ -72,7 +72,7 @@ PokemonTower7Script4:
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, MR_FUJIS_HOUSE
-	ld [hWarpDestinationMap], a
+	ldh [hWarpDestinationMap], a
 	ld a, $1
 	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
@@ -107,7 +107,7 @@ PokemonTower7Script_60db6:
 	ld d, [hl]
 	ld e, a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	jp MoveSprite
 .asm_60dde
 	inc hl

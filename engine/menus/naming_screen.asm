@@ -132,7 +132,7 @@ DisplayNamingScreen:
 	pop af
 	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and a
 	jr z, .inputLoop
 	ld hl, .namingScreenButtonFunctions
@@ -337,7 +337,7 @@ ED_TileEnd:
 
 PrintAlphabet:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
@@ -362,7 +362,7 @@ PrintAlphabet:
 	jr nz, .outerLoop
 	call PlaceString
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
 INCLUDE "data/text/alphabets.asm"

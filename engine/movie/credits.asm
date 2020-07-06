@@ -19,7 +19,7 @@ HallOfFamePC:
 	coord hl, 0, 14
 	call FillFourRowsWithBlack
 	ld a, %11000000
-	ld [rBGP], a
+	ldh [rBGP], a
 	call EnableLCD
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
@@ -38,7 +38,7 @@ FadeInCreditsText:
 	ld b, 4
 .loop
 	ld a, [hli]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -47,7 +47,7 @@ FadeInCreditsText:
 
 DisplayCreditsMon:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer1
 	call FillMiddleOfScreenWithWhite
 
@@ -67,17 +67,17 @@ DisplayCreditsMon:
 	ld hl, vBGMap0 + $c
 	call CreditsCopyTileMapToVRAM
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call LoadScreenTilesFromBuffer1
 	ld hl, vBGMap0
 	call CreditsCopyTileMapToVRAM
 	ld a, $A7
-	ld [rWX], a
+	ldh [rWX], a
 	ld hl, vBGMap1
 	call CreditsCopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
 	ld a, %11111100 ; make the mon a black silhouette
-	ld [rBGP], a
+	ldh [rBGP], a
 
 ; scroll the mon left by one tile 7 times
 	ld bc, 7
@@ -92,16 +92,16 @@ DisplayCreditsMon:
 	ld c, 20
 .scrollLoop2
 	call ScrollCreditsMonLeft
-	ld a, [rWX]
+	ldh a, [rWX]
 	sub 8
-	ld [rWX], a
+	ldh [rWX], a
 	dec c
 	jr nz, .scrollLoop2
 
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, %11000000
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 INCLUDE "data/credits/credits_mons.asm"
@@ -119,13 +119,13 @@ ScrollCreditsMonLeft:
 	ret
 
 ScrollCreditsMonLeft_SetSCX:
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, ScrollCreditsMonLeft_SetSCX
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 .loop
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .loop
 	ret
@@ -138,11 +138,11 @@ HoFGBPalettes:
 
 CreditsCopyTileMapToVRAM:
 	ld a, l
-	ld [hAutoBGTransferDest], a
+	ldh [hAutoBGTransferDest], a
 	ld a, h
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
 ZeroMemory:

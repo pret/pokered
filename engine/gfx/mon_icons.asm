@@ -169,7 +169,7 @@ WriteMonPartySpriteOAMByPartyIndex:
 	push hl
 	push de
 	push bc
-	ld a, [hPartyMonIndex]
+	ldh a, [hPartyMonIndex]
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
@@ -187,7 +187,7 @@ WriteMonPartySpriteOAMBySpecies:
 ; Write OAM blocks for the party sprite of the species in
 ; [wMonPartySpriteSpecies].
 	xor a
-	ld [hPartyMonIndex], a
+	ldh [hPartyMonIndex], a
 	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
@@ -237,7 +237,7 @@ WriteMonPartySpriteOAM:
 	push af
 	ld c, $10
 	ld h, wOAMBuffer / $100
-	ld a, [hPartyMonIndex]
+	ldh a, [hPartyMonIndex]
 	swap a
 	ld l, a
 	add $10

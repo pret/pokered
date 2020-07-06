@@ -73,11 +73,11 @@ DayCareMText1:
 	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld hl, wDayCareMonExp
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	ld [hli], a
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	ld [hli], a
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	ld [hl], a
 	ld d, MAX_LEVEL
 
@@ -138,11 +138,11 @@ DayCareMText1:
 	and a
 	jp nz, .leaveMonInDayCare
 	ld hl, wDayCareTotalCost
-	ld [hMoney], a
+	ldh [hMoney], a
 	ld a, [hli]
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	ld a, [hl]
-	ld [hMoney + 2], a
+	ldh [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, DayCareNotEnoughMoneyText

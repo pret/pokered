@@ -40,7 +40,7 @@ DrawHP_:
 	push hl
 	call DrawHPBar
 	pop hl
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	bit 0, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
@@ -80,7 +80,7 @@ StatusScreen:
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33
-	ld [rNR50], a ; Reduce the volume
+	ldh [rNR50], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -101,10 +101,10 @@ StatusScreen:
 	ld hl, vChars2 + $720
 	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
 	call CopyVideoDataDouble ; P (for PP), inline
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	coord hl, 19, 1
 	lb bc, 6, 10
 	call DrawLineBox ; Draws the box around name, HP and status
@@ -174,7 +174,7 @@ StatusScreen:
 	call PlayCry ; play Pokémon cry
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ret
 
 .GetStringPointer
@@ -298,11 +298,11 @@ StatsText:
 	next "SPECIAL@"
 
 StatusScreen2:
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hTilesetType], a
+	ldh [hAutoBGTransferEnabled], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
 	call FillMemory
@@ -427,15 +427,15 @@ StatusScreen2:
 	coord hl, 9, 1
 	call PlaceString
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77
-	ld [rNR50], a
+	ldh [rNR50], a
 	call GBPalWhiteOut
 	jp ClearScreen
 
@@ -447,13 +447,13 @@ CalcExpToLevelUp:
 	ld d, a
 	callab CalcExperience
 	ld hl, wLoadedMonExp + 2
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	sub [hl]
 	ld [hld], a
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	sbc [hl]
 	ld [hld], a
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	sbc [hl]
 	ld [hld], a
 	ret

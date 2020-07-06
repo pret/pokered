@@ -1,14 +1,14 @@
 ; b = new colour for BG colour 0 (usually white) for 4 frames
 ChangeBGPalColor0_4Frames:
 	call GetPredefRegisters
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	or b
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 4
 	call DelayFrames
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	and %11111100
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 PredefShakeScreenVertically:
@@ -19,7 +19,7 @@ PredefShakeScreenVertically:
 	ld [wDisableVBlankWYUpdate], a
 	xor a
 .loop
-	ld [hMutateWY], a
+	ldh [hMutateWY], a
 	call .MutateWY
 	call .MutateWY
 	dec b
@@ -30,10 +30,10 @@ PredefShakeScreenVertically:
 	ret
 
 .MutateWY
-	ld a, [hMutateWY]
+	ldh a, [hMutateWY]
 	xor b
-	ld [hMutateWY], a
-	ld [rWY], a
+	ldh [hMutateWY], a
+	ldh [rWY], a
 	ld c, 3
 	jp DelayFrames
 
@@ -43,7 +43,7 @@ PredefShakeScreenHorizontally:
 	call GetPredefRegisters
 	xor a
 .loop
-	ld [hMutateWX], a
+	ldh [hMutateWX], a
 	call .MutateWX
 	ld c, 1
 	call DelayFrames
@@ -54,18 +54,18 @@ PredefShakeScreenHorizontally:
 
 ; restore normal WX
 	ld a, 7
-	ld [rWX], a
+	ldh [rWX], a
 	ret
 
 .MutateWX
-	ld a, [hMutateWX]
+	ldh a, [hMutateWX]
 	xor b
-	ld [hMutateWX], a
+	ldh [hMutateWX], a
 	bit 7, a
 	jr z, .skipZeroing
 	xor a ; zero a if it's negative
 .skipZeroing
 	add 7
-	ld [rWX], a
+	ldh [rWX], a
 	ld c, 4
 	jp DelayFrames

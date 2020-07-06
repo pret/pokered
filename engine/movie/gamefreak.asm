@@ -1,8 +1,8 @@
 LoadShootingStarGraphics:
 	ld a, $f9
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $a4
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld de, AnimationTileset2 + $30 ; star tile (top left quadrant)
 	ld hl, vChars1 + $200
 	lb bc, BANK(AnimationTileset2), $01
@@ -201,9 +201,9 @@ MoveDownSmallStars:
 	jr nz, .innerLoop
 ; Toggle the palette so that the lower star in the small stars tile blinks in
 ; and out.
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor %10100000
-	ld [rOBP1], a
+	ldh [rOBP1], a
 
 	ld c, 3
 	call CheckForUserInterruption

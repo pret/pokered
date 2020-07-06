@@ -4,7 +4,7 @@ SubstituteEffect_:
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyMonMaxHP

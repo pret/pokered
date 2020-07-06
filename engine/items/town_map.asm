@@ -6,7 +6,7 @@ DisplayTownMap:
 	ld [hl], $ff
 	push hl
 	ld a, $1
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld a, [wCurMap]
 	push af
 	ld b, $0
@@ -65,7 +65,7 @@ DisplayTownMap:
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	ld b, a
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
 	jr z, .inputLoop
@@ -77,7 +77,7 @@ DisplayTownMap:
 	jr nz, .pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld [wAnimCounter], a
 	call ExitTownMap
 	pop hl
@@ -187,7 +187,7 @@ LoadTownMap_Fly::
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	ld b, a
 	pop hl
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN

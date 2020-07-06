@@ -31,13 +31,13 @@ Route7GateScript0:
 	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	callba RemoveGuardDrink
-	ld a, [hItemToRemoveID]
+	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1e15a
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Route7GateScript_1e111
 	ld a, $1
@@ -45,7 +45,7 @@ Route7GateScript0:
 	ret
 .asm_1e15a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]

@@ -1,7 +1,7 @@
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	callba DisplayTextIDInit ; initialization
 	ld hl, wTextPredefFlag
@@ -12,13 +12,13 @@ DisplayTextID::
 	call SwitchToMapRomBank
 .skipSwitchToMapBank
 	ld a, 30 ; half a second
-	ld [hFrameCounter], a ; used as joypad poll timer
+	ldh [hFrameCounter], a ; used as joypad poll timer
 	ld hl, wMapTextPtr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; hl = map text pointer
 	ld d, $00
-	ld a, [hSpriteIndexOrTextID] ; text ID
+	ldh a, [hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex], a
 
 	dict TEXT_START_MENU,       DisplayStartMenu
@@ -29,7 +29,7 @@ DisplayTextID::
 
 	ld a, [wNumSprites]
 	ld e, a
-	ld a, [hSpriteIndexOrTextID] ; sprite ID
+	ldh a, [hSpriteIndexOrTextID] ; sprite ID
 	cp e
 	jr z, .spriteHandling
 	jr nc, .skipSpriteHandling
@@ -42,7 +42,7 @@ DisplayTextID::
 	pop bc
 	pop de
 	ld hl, wMapSpriteData ; NPC text entries
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	dec a
 	add a
 	add l
@@ -97,7 +97,7 @@ AfterDisplayingTextID::
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen::
 	call Joypad
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	bit 0, a ; is the A button being pressed?
 	jr nz, HoldTextDisplayOpen
 
@@ -105,11 +105,11 @@ CloseTextDisplay::
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
 	ld a, $90
-	ld [hWY], a ; move the window off the screen
+	ldh [hWY], a ; move the window off the screen
 	call DelayFrame
 	call LoadGBPal
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
+	ldh [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
 	ld hl, wSprite01StateData2 + 9 ; should be wSprite01StateData1FacingDirection?
 	ld c, $0f
@@ -123,7 +123,7 @@ CloseTextDisplay::
 	dec c
 	jr nz, .restoreSpriteFacingDirectionLoop
 	ld a, BANK(InitMapSprites)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
@@ -133,7 +133,7 @@ CloseTextDisplay::
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp UpdateSprites
 
@@ -146,14 +146,14 @@ DisplayPokemartDialogue::
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(DisplayPokemartDialogue_)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemartDialogue_
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 
@@ -180,19 +180,19 @@ LoadItemList::
 DisplayPokemonCenterDialogue::
 ; zeroing these doesn't appear to serve any purpose
 	xor a
-	ld [hItemPrice], a
-	ld [hItemPrice + 1], a
-	ld [hItemPrice + 2], a
+	ldh [hItemPrice], a
+	ldh [hItemPrice + 1], a
+	ldh [hItemPrice + 2], a
 
 	inc hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(DisplayPokemonCenterDialogue_)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemonCenterDialogue_
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 

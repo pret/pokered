@@ -10,9 +10,9 @@ Route15GateUpstairsText1:
 	CheckEvent EVENT_GOT_EXP_ALL
 	jr nz, .asm_49683
 	ld a, 50 ; pokemon needed
-	ld [hOaksAideRequirement], a
+	ldh [hOaksAideRequirement], a
 	ld a, EXP_ALL ; oak's aide reward
-	ld [hOaksAideRewardItem], a
+	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
 	ld hl, wcd6d
@@ -20,7 +20,7 @@ Route15GateUpstairsText1:
 	ld bc, ITEM_NAME_LENGTH
 	call CopyData
 	predef OaksAideScript
-	ld a, [hOaksAideResult]
+	ldh a, [hOaksAideResult]
 	cp $1
 	jr nz, .asm_49689
 	SetEvent EVENT_GOT_EXP_ALL

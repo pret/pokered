@@ -13,13 +13,13 @@ PrepareOAMData::
 
 .updateEnabled
 	xor a
-	ld [hOAMBufferOffset], a
+	ldh [hOAMBufferOffset], a
 
 .spriteLoop
-	ld [hSpriteOffset2], a
+	ldh [hSpriteOffset2], a
 
 	ld d, wSpriteStateData1 / $100
-	ld a, [hSpriteOffset2]
+	ldh a, [hSpriteOffset2]
 	ld e, a
 	ld a, [de] ; c1x0
 	and a
@@ -58,7 +58,7 @@ PrepareOAMData::
 	ld e, a
 	ld a, [de] ; c2x7
 	and $80
-	ld [hSpritePriority], a ; temp store sprite priority
+	ldh [hSpritePriority], a ; temp store sprite priority
 	pop de
 
 ; read the entry from the table
@@ -77,17 +77,17 @@ PrepareOAMData::
 
 	call GetSpriteScreenXY
 
-	ld a, [hOAMBufferOffset]
+	ldh a, [hOAMBufferOffset]
 	ld e, a
 	ld d, wOAMBuffer / $100
 
 .tileLoop
-	ld a, [hSpriteScreenY]   ; temp for sprite Y position
+	ldh a, [hSpriteScreenY]   ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
 	add [hl]                 ; add Y offset from table
 	ld [de], a               ; write new sprite OAM Y position
 	inc hl
-	ld a, [hSpriteScreenX]   ; temp for sprite X position
+	ldh a, [hSpriteScreenX]   ; temp for sprite X position
 	add $8                   ; X=8 is left of screen (X=0 is invisible)
 	add [hl]                 ; add X offset from table
 	inc e
@@ -126,7 +126,7 @@ PrepareOAMData::
 	ld a, [hl]
 	bit 1, a ; is the tile allowed to set the sprite priority bit?
 	jr z, .skipPriority
-	ld a, [hSpritePriority]
+	ldh a, [hSpritePriority]
 	or [hl]
 .skipPriority
 	inc hl
@@ -136,16 +136,16 @@ PrepareOAMData::
 	jr z, .tileLoop
 
 	ld a, e
-	ld [hOAMBufferOffset], a
+	ldh [hOAMBufferOffset], a
 
 .nextSprite
-	ld a, [hSpriteOffset2]
+	ldh a, [hSpriteOffset2]
 	add $10
 	cp $100 % $100
 	jp nz, .spriteLoop
 
 	; Clear unused OAM.
-	ld a, [hOAMBufferOffset]
+	ldh a, [hOAMBufferOffset]
 	ld l, a
 	ld h, wOAMBuffer / $100
 	ld de, $4
@@ -170,20 +170,20 @@ GetSpriteScreenXY:
 	inc e
 	inc e
 	ld a, [de] ; c1x4
-	ld [hSpriteScreenY], a
+	ldh [hSpriteScreenY], a
 	inc e
 	inc e
 	ld a, [de] ; c1x6
-	ld [hSpriteScreenX], a
+	ldh [hSpriteScreenX], a
 	ld a, 4
 	add e
 	ld e, a
-	ld a, [hSpriteScreenY]
+	ldh a, [hSpriteScreenY]
 	add 4
 	and $f0
 	ld [de], a ; c1xa (y)
 	inc e
-	ld a, [hSpriteScreenX]
+	ldh a, [hSpriteScreenX]
 	and $f0
 	ld [de], a  ; c1xb (x)
 	ret

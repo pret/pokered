@@ -2,29 +2,29 @@ _Joypad::
 ; hJoyReleased: (hJoyLast ^ hJoyInput) & hJoyLast
 ; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
 
-	ld a, [hJoyInput]
+	ldh a, [hJoyInput]
 	cp A_BUTTON + B_BUTTON + SELECT + START ; soft reset
 	jp z, TrySoftReset
 
 	ld b, a
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ld [hJoyReleased], a
+	ldh [hJoyReleased], a
 	ld a, d
 	and b
-	ld [hJoyPressed], a
+	ldh [hJoyPressed], a
 	ld a, b
-	ld [hJoyLast], a
+	ldh [hJoyLast], a
 
 	ld a, [wd730]
 	bit 5, a
 	jr nz, DiscardButtonPresses
 
-	ld a, [hJoyLast]
-	ld [hJoyHeld], a
+	ldh a, [hJoyLast]
+	ldh [hJoyHeld], a
 
 	ld a, [wJoyIgnore]
 	and a
@@ -32,19 +32,19 @@ _Joypad::
 
 	cpl
 	ld b, a
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and b
-	ld [hJoyHeld], a
-	ld a, [hJoyPressed]
+	ldh [hJoyHeld], a
+	ldh a, [hJoyPressed]
 	and b
-	ld [hJoyPressed], a
+	ldh [hJoyPressed], a
 	ret
 
 DiscardButtonPresses:
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ret
 
 TrySoftReset:
@@ -52,7 +52,7 @@ TrySoftReset:
 
 	; deselect (redundant)
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 
 	ld hl, hSoftReset
 	dec [hl]

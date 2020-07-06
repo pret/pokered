@@ -28,9 +28,9 @@ Route24Script0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckAndResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	ret z
@@ -66,7 +66,7 @@ Route24Script3:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_ROUTE24_ROCKET
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -162,12 +162,12 @@ Route24Text1:
 	ld hl, Route24Text_5152b
 	ld de, Route24Text_5152b
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $3
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a

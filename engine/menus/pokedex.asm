@@ -10,7 +10,7 @@ ShowPokedexMenu:
 	ld [wLastMenuItem], a
 	inc a
 	ld [wd11e], a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 .setUpGraphics
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
@@ -35,7 +35,7 @@ ShowPokedexMenu:
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld [wWastedByteCD3A], a
 	ld [wOverrideSimulatedJoypadStatesMask], a
 	pop af
@@ -156,7 +156,7 @@ HandlePokedexSideMenu:
 ; sets carry flag if player presses A, unsets carry flag if player presses B
 HandlePokedexListMenu:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 ; draw the horizontal line separating the seen and owned amounts from the menu
 	coord hl, 15, 8
 	ld a, "─"
@@ -216,7 +216,7 @@ HandlePokedexListMenu:
 	ld [wDexMaxSeenMon], a
 .loop
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 4, 2
 	lb bc, 14, 10
 	call ClearScreenArea
@@ -280,7 +280,7 @@ HandlePokedexListMenu:
 	dec d
 	jr nz, .printPokemonLoop
 	ld a, 01
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call GBPalNormal
 	call HandleMenuInput
@@ -400,7 +400,7 @@ ShowPokedexDataInternal:
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33 ; 3/7 volume
-	ld [rNR50], a
+	ldh [rNR50], a
 	call GBPalWhiteOut ; zero all palettes
 	call ClearScreen
 	ld a, [wd11e] ; pokemon ID
@@ -410,10 +410,10 @@ ShowPokedexDataInternal:
 	call RunPaletteCommand
 	pop af
 	ld [wd11e], a
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 
 	coord hl, 0, 0
 	ld de, 1
@@ -548,9 +548,9 @@ ShowPokedexDataInternal:
 	lb bc, 2, 5 ; 2 bytes, 5 digits
 	call PrintNumber ; print weight
 	coord hl, 14, 8
-	ld a, [hDexWeight + 1]
+	ldh a, [hDexWeight + 1]
 	sub 10
-	ld a, [hDexWeight]
+	ldh a, [hDexWeight]
 	sbc 0
 	jr nc, .next
 	ld [hl], "0" ; if the weight is less than 10, put a 0 before the decimal point
@@ -560,24 +560,24 @@ ShowPokedexDataInternal:
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
 	ld [hl], "<DOT>" ; decimal point tile
 	pop af
-	ld [hDexWeight + 1], a ; restore original value of [hDexWeight + 1]
+	ldh [hDexWeight + 1], a ; restore original value of [hDexWeight + 1]
 	pop af
-	ld [hDexWeight], a ; restore original value of [hDexWeight]
+	ldh [hDexWeight], a ; restore original value of [hDexWeight]
 	pop hl
 	inc hl ; hl = address of pokedex description text
 	coord bc, 1, 11
 	ld a, %10
-	ld [hClearLetterPrintingDelayFlags], a
+	ldh [hClearLetterPrintingDelayFlags], a
 	call TextCommandProcessor ; print pokedex description text
 	xor a
-	ld [hClearLetterPrintingDelayFlags], a
+	ldh [hClearLetterPrintingDelayFlags], a
 .waitForButtonPress
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	and A_BUTTON | B_BUTTON
 	jr z, .waitForButtonPress
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call GBPalWhiteOut
 	call ClearScreen
 	call RunDefaultPaletteCommand
@@ -586,7 +586,7 @@ ShowPokedexDataInternal:
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77 ; max volume
-	ld [rNR50], a
+	ldh [rNR50], a
 	ret
 
 HeightWeightText:

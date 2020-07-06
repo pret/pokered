@@ -17,7 +17,7 @@ IsPlayerStandingOnWarp::
 	ld a, [hli] ; target warp
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
-	ld [hWarpDestinationMap], a
+	ldh [hWarpDestinationMap], a
 	ld hl, wd736
 	set 2, [hl] ; standing on warp flag
 	ret
@@ -297,7 +297,7 @@ _GetTileAndCoordsInFrontOfPlayer:
 
 GetTileTwoStepsInFrontOfPlayer:
 	xor a
-	ld [hPlayerFacing], a
+	ldh [hPlayerFacing], a
 	ld hl, wYCoord
 	ld a, [hli]
 	ld d, a
@@ -378,33 +378,33 @@ CheckForBoulderCollisionWithSprites:
 	ld hl, wSprite01StateData2MapY
 	add hl, de
 	ld a, [hli] ; map Y position
-	ld [hPlayerYCoord], a
+	ldh [hPlayerYCoord], a
 	ld a, [hl] ; map X position
-	ld [hPlayerXCoord], a
+	ldh [hPlayerXCoord], a
 	ld a, [wNumSprites]
 	ld c, a
 	ld de, $f
 	ld hl, wSprite01StateData2MapY
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	and $3 ; facing up or down?
 	jr z, .pushingHorizontallyLoop
 .pushingVerticallyLoop
 	inc hl
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	cp [hl]
 	jr nz, .nextSprite1 ; if X coordinates don't match
 	dec hl
 	ld a, [hli]
 	ld b, a
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	rrca
 	jr c, .pushingDown
 ; pushing up
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	dec a
 	jr .compareYCoords
 .pushingDown
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	inc a
 .compareYCoords
 	cp b
@@ -417,19 +417,19 @@ CheckForBoulderCollisionWithSprites:
 .pushingHorizontallyLoop
 	ld a, [hli]
 	ld b, a
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	cp b
 	jr nz, .nextSprite2
 	ld b, [hl]
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	bit 2, a
 	jr nz, .pushingLeft
 ; pushing right
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	inc a
 	jr .compareXCoords
 .pushingLeft
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	dec a
 .compareXCoords
 	cp b

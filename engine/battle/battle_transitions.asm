@@ -1,9 +1,9 @@
 BattleTransition:
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
 	call DelayFrame
@@ -11,7 +11,7 @@ BattleTransition:
 ; Determine which OAM block is being used by the enemy trainer sprite (if there
 ; is one).
 	ld hl, wSpritePlayerStateData1ImageIndex
-	ld a, [hSpriteIndexOrTextID] ; enemy trainer sprite index (0 if wild battle)
+	ldh a, [hSpriteIndexOrTextID] ; enemy trainer sprite index (0 if wild battle)
 	ld c, a
 	ld b, 0
 	ld de, $10
@@ -165,9 +165,9 @@ BattleTransitionTileEnd:
 
 BattleTransition_BlackScreen:
 	ld a, $ff
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	ret
 
 ; for non-dungeon trainer battles
@@ -330,7 +330,7 @@ BattleTransition_FlashScreen_:
 	ld a, [hli]
 	cp $1
 	jr z, .done
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 2
 	call DelayFrames
 	jr .loop
@@ -349,7 +349,7 @@ BattleTransition_Shrink:
 .loop
 	push bc
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	coord hl, 0, 7
 	coord de, 0, 8
 	ld bc, -SCREEN_WIDTH * 2
@@ -367,7 +367,7 @@ BattleTransition_Shrink:
 	ld bc, 2
 	call BattleTransition_CopyTiles2
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld c, 6
 	call DelayFrames
 	pop bc
@@ -381,7 +381,7 @@ BattleTransition_Shrink:
 BattleTransition_Split:
 	ld c, SCREEN_HEIGHT / 2
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	coord hl, 0, 16
@@ -496,7 +496,7 @@ BattleTransition_VerticalStripes:
 	coord hl, 0, 0
 	coord de, 1, 17
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	push hl
@@ -535,7 +535,7 @@ BattleTransition_HorizontalStripes:
 	coord hl, 0, 0
 	coord de, 19, 1
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 .loop
 	push bc
 	push hl
@@ -582,7 +582,7 @@ BattleTransition_FlashScreen:
 	ld b, $3
 	call BattleTransition_FlashScreen_
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 BattleTransition_Circle_Sub1:
@@ -601,10 +601,10 @@ BattleTransition_Circle_Sub1:
 
 BattleTransition_TransferDelay3:
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 ; used for low level wild non-dungeon battles

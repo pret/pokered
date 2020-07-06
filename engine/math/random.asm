@@ -1,13 +1,13 @@
 Random_::
 ; Generate a random 16-bit value.
-	ld a, [rDIV]
+	ldh a, [rDIV]
 	ld b, a
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	adc b
-	ld [hRandomAdd], a
-	ld a, [rDIV]
+	ldh [hRandomAdd], a
+	ldh a, [rDIV]
 	ld b, a
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	sbc b
-	ld [hRandomSub], a
+	ldh [hRandomSub], a
 	ret

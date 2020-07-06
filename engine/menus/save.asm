@@ -70,7 +70,7 @@ LoadSAV0:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld a, [sTilesetType]
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -217,7 +217,7 @@ SaveSAVtoSRAM0:
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	ld [sTilesetType], a
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName
@@ -420,7 +420,7 @@ CopyBoxToOrFromSRAM:
 
 DisplayChangeBoxMenu:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -486,7 +486,7 @@ DisplayChangeBoxMenu:
 	dec a
 	jr nz, .loop
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 ChooseABoxText:

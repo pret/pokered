@@ -63,7 +63,7 @@ LoadMonFrontSprite::
 LoadUncompressedSpriteData::
 	push de
 	and $f
-	ld [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
+	ldh [hSpriteWidth], a ; each byte contains 8 pixels (in 1bpp), so tiles=bytes for width
 	ld b, a
 	ld a, $7
 	sub b      ; 7-w
@@ -74,7 +74,7 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	sub b      ; 7*((8-w)/2) ; skip for horizontal center (in tiles)
-	ld [hSpriteOffset], a
+	ldh [hSpriteOffset], a
 	ld a, c
 	swap a
 	and $f
@@ -82,16 +82,16 @@ LoadUncompressedSpriteData::
 	add a
 	add a
 	add a     ; 8*tiles is height in bytes
-	ld [hSpriteHeight], a
+	ldh [hSpriteHeight], a
 	ld a, $7
 	sub b      ; 7-h         ; skip for vertical center (in tiles, relative to current column)
 	ld b, a
-	ld a, [hSpriteOffset]
+	ldh a, [hSpriteOffset]
 	add b     ; 7*((8-w)/2) + 7-h ; combined overall offset (in tiles)
 	add a
 	add a
 	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
-	ld [hSpriteOffset], a
+	ldh [hSpriteOffset], a
 	xor a
 	ld [MBC1SRamBank], a
 	ld hl, sSpriteBuffer0
@@ -110,15 +110,15 @@ LoadUncompressedSpriteData::
 ; copies and aligns the sprite data properly inside the sprite buffer
 ; sprite buffers are 7*7 tiles in size, the loaded sprite is centered within this area
 AlignSpriteDataCentered::
-	ld a, [hSpriteOffset]
+	ldh a, [hSpriteOffset]
 	ld b, $0
 	ld c, a
 	add hl, bc
-	ld a, [hSpriteWidth]
+	ldh a, [hSpriteWidth]
 .columnLoop
 	push af
 	push hl
-	ld a, [hSpriteHeight]
+	ldh a, [hSpriteHeight]
 	ld c, a
 .columnInnerLoop
 	ld a, [de]
@@ -157,7 +157,7 @@ InterlaceMergeSpriteBuffers::
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
 	ld bc, sSpriteBuffer0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
 	ld a, SPRITEBUFFERSIZE/2 ; $c4
-	ld [hSpriteInterlaceCounter], a
+	ldh [hSpriteInterlaceCounter], a
 .interlaceLoop
 	ld a, [de]
 	dec de
@@ -171,9 +171,9 @@ InterlaceMergeSpriteBuffers::
 	ld a, [bc]
 	dec bc
 	ld [hld], a   ; write byte of source 1
-	ld a, [hSpriteInterlaceCounter]
+	ldh a, [hSpriteInterlaceCounter]
 	dec a
-	ld [hSpriteInterlaceCounter], a
+	ldh [hSpriteInterlaceCounter], a
 	jr nz, .interlaceLoop
 	ld a, [wSpriteFlipped]
 	and a
@@ -191,6 +191,6 @@ InterlaceMergeSpriteBuffers::
 	pop hl
 	ld de, sSpriteBuffer1
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; $31, number of 16 byte chunks to be copied
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData

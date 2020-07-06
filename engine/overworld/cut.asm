@@ -38,14 +38,14 @@ UsedCut:
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
 	ld a, SCREEN_HEIGHT_PX
-	ld [hWY], a
+	ldh [hWY], a
 	call Delay3
 	call LoadGBPal
 	call LoadCurrentMapView
 	call SaveScreenTilesToBuffer2
 	call Delay3
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld hl, UsedCutText
 	call PrintText
 	call LoadScreenTilesFromBuffer2
@@ -63,7 +63,7 @@ UsedCut:
 	ld a, SFX_CUT
 	call PlaySound
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call UpdateSprites
 	jp RedrawMapView
 
@@ -75,7 +75,7 @@ InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a
 	ld a, %11100100
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld a, [wCutTile]
 	cp $52
 	jr z, .grass

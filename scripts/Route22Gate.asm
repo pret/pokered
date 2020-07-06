@@ -22,9 +22,9 @@ Route22GateScript0:
 	call ArePlayerCoordsInArray
 	ret nc
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 Route22GateScriptCoords:
