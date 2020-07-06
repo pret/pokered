@@ -2,58 +2,27 @@
 ; define constants for the item IDs and for the corresponding move values.
 
 TechnicalMachines:
-	db TM01_MOVE
-	db TM02_MOVE
-	db TM03_MOVE
-	db TM04_MOVE
-	db TM05_MOVE
-	db TM06_MOVE
-	db TM07_MOVE
-	db TM08_MOVE
-	db TM09_MOVE
-	db TM10_MOVE
-	db TM11_MOVE
-	db TM12_MOVE
-	db TM13_MOVE
-	db TM14_MOVE
-	db TM15_MOVE
-	db TM16_MOVE
-	db TM17_MOVE
-	db TM18_MOVE
-	db TM19_MOVE
-	db TM20_MOVE
-	db TM21_MOVE
-	db TM22_MOVE
-	db TM23_MOVE
-	db TM24_MOVE
-	db TM25_MOVE
-	db TM26_MOVE
-	db TM27_MOVE
-	db TM28_MOVE
-	db TM29_MOVE
-	db TM30_MOVE
-	db TM31_MOVE
-	db TM32_MOVE
-	db TM33_MOVE
-	db TM34_MOVE
-	db TM35_MOVE
-	db TM36_MOVE
-	db TM37_MOVE
-	db TM38_MOVE
-	db TM39_MOVE
-	db TM40_MOVE
-	db TM41_MOVE
-	db TM42_MOVE
-	db TM43_MOVE
-	db TM44_MOVE
-	db TM45_MOVE
-	db TM46_MOVE
-	db TM47_MOVE
-	db TM48_MOVE
-	db TM49_MOVE
-	db TM50_MOVE
-	db HM01_MOVE
-	db HM02_MOVE
-	db HM03_MOVE
-	db HM04_MOVE
-	db HM05_MOVE
+
+n = 1
+REPT NUM_TMS
+IF n < 10
+MOVE_FOR_TM EQUS "TM0{d:n}_MOVE"
+ELSE
+MOVE_FOR_TM EQUS "TM{d:n}_MOVE"
+ENDC
+	db MOVE_FOR_TM
+PURGE MOVE_FOR_TM
+n = n + 1
+ENDR
+
+n = 1
+REPT NUM_HMS
+IF n < 10
+MOVE_FOR_HM EQUS "HM0{d:n}_MOVE"
+ELSE
+MOVE_FOR_HM EQUS "HM{d:n}_MOVE"
+ENDC
+	db MOVE_FOR_HM
+PURGE MOVE_FOR_HM
+n = n + 1
+ENDR

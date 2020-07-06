@@ -11,10 +11,10 @@ ENDM
 ; Design patterns
 
 dict: MACRO
-if \1 == 0
+IF \1 == 0
 	and a
-else
+ELSE
 	cp \1
-endc
+ENDC
 	jp z, \2
 ENDM

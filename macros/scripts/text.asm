@@ -92,9 +92,9 @@ text_dots: MACRO
 	db \1 ; number of ellipses to draw
 ENDM
 
-	enum TX_LINK_PROMPT_BUTTON ; $0d
-text_linkpromptbutton: MACRO
-	db TX_LINK_PROMPT_BUTTON
+	enum TX_WAIT_BUTTON ; $0d
+text_waitbutton: MACRO
+	db TX_WAIT_BUTTON
 ENDM
 
 	enum TX_SOUND_POKEDEX_RATING ; $0e
@@ -198,10 +198,10 @@ ENDM
 script_mart: MACRO
 	db TX_SCRIPT_MART
 	db _NARG ; number of items
-rept _NARG
+REPT _NARG
 	db \1 ; item id
 	shift
-endr
+ENDR
 	db -1 ; end
 ENDM
 

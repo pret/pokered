@@ -20,7 +20,7 @@ GetDexRatedText:
 
 ClosedOaksPCText:
 	text_far _ClosedOaksPCText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 AccessedOaksPCText:

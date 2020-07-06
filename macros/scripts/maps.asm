@@ -121,58 +121,58 @@ connection: MACRO
 ; Calculate tile offsets for source (current) and target maps
 _src = 0
 _tgt = (\4) + 3
-if _tgt < 2
+IF _tgt < 2
 _src = -_tgt
 _tgt = 0
-endc
+ENDC
 
-if "\1" == "north"
+IF "\1" == "north"
 _blk = \3_WIDTH * (\3_HEIGHT - 3) + _src
 _map = _tgt
 _win = (\3_WIDTH + 6) * \3_HEIGHT + 1
 _y = \3_HEIGHT * 2 - 1
 _x = (\4) * -2
 _len = CURRENT_MAP_WIDTH + 3 - (\4)
-if _len > \3_WIDTH
+IF _len > \3_WIDTH
 _len = \3_WIDTH
-endc
+ENDC
 
-elif "\1" == "south"
+ELIF "\1" == "south"
 _blk = _src
 _map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
 _win = \3_WIDTH + 7
 _y = 0
 _x = (\4) * -2
 _len = CURRENT_MAP_WIDTH + 3 - (\4)
-if _len > \3_WIDTH
+IF _len > \3_WIDTH
 _len = \3_WIDTH
-endc
+ENDC
 
-elif "\1" == "west"
+ELIF "\1" == "west"
 _blk = (\3_WIDTH * _src) + \3_WIDTH - 3
 _map = (CURRENT_MAP_WIDTH + 6) * _tgt
 _win = (\3_WIDTH + 6) * 2 - 6
 _y = (\4) * -2
 _x = \3_WIDTH * 2 - 1
 _len = CURRENT_MAP_HEIGHT + 3 - (\4)
-if _len > \3_HEIGHT
+IF _len > \3_HEIGHT
 _len = \3_HEIGHT
-endc
+ENDC
 
-elif "\1" == "east"
+ELIF "\1" == "east"
 _blk = (\3_WIDTH * _src)
 _map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
 _win = \3_WIDTH + 7
 _y = (\4) * -2
 _x = 0
 _len = CURRENT_MAP_HEIGHT + 3 - (\4)
-if _len > \3_HEIGHT
+IF _len > \3_HEIGHT
 _len = \3_HEIGHT
-endc
+ENDC
 
-else
+ELSE
 fail "Invalid direction for 'connection'."
-endc
+ENDC
 
 	db \3
 	dw \2_Blocks + _blk

@@ -7,9 +7,9 @@ ReadJoypad::
 	ld c, 0
 
 	ld [rJOYP], a
-	rept 6
+	REPT 6
 	ld a, [rJOYP]
-	endr
+	ENDR
 	cpl
 	and %1111
 	swap a
@@ -17,9 +17,9 @@ ReadJoypad::
 
 	ld a, 1 << 4 ; select button keys
 	ld [rJOYP], a
-	rept 10
+	REPT 10
 	ld a, [rJOYP]
-	endr
+	ENDR
 	cpl
 	and %1111
 	or b

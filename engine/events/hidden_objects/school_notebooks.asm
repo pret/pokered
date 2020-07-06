@@ -7,7 +7,7 @@ PrintNotebookText:
 
 TMNotebook::
 	text_far TMNotebookText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 ViridianSchoolNotebook::
@@ -45,7 +45,7 @@ TurnPageText:
 
 ViridianSchoolNotebookText5:
 	text_far _ViridianSchoolNotebookText5
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 ViridianSchoolNotebookText1:

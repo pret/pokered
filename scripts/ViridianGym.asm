@@ -311,7 +311,7 @@ ViridianGymText_74ad3:
 
 ViridianGymText_74ad9:
 	text_far _ViridianGymText_74ad9
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 ViridianGymText12:

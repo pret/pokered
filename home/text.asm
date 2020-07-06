@@ -431,7 +431,7 @@ TextCommand_PROMPT_BUTTON::
 ; wait for button press; show arrow
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	jp z, TextCommand_LINK_PROMPT_BUTTON
+	jp z, TextCommand_WAIT_BUTTON
 	ld a, "▼"
 	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
@@ -579,8 +579,8 @@ TextCommand_DOTS::
 	pop hl
 	jp NextTextCommand
 
-TextCommand_LINK_PROMPT_BUTTON::
-; wait for button press; display arrow
+TextCommand_WAIT_BUTTON::
+; wait for button press; don't show arrow
 	push bc
 	call ManualTextScroll
 	pop bc
@@ -615,18 +615,18 @@ TextCommand_FAR::
 
 TextCommandJumpTable::
 ; entries correspond to TX_* constants (see macros/scripts/text.asm)
-	dw TextCommand_START              ; TX_START
-	dw TextCommand_RAM                ; TX_RAM
-	dw TextCommand_BCD                ; TX_BCD
-	dw TextCommand_MOVE               ; TX_MOVE
-	dw TextCommand_BOX                ; TX_BOX
-	dw TextCommand_LOW                ; TX_LOW
-	dw TextCommand_PROMPT_BUTTON      ; TX_PROMPT_BUTTON
-	dw TextCommand_SCROLL             ; TX_SCROLL
-	dw TextCommand_START_ASM          ; TX_START_ASM
-	dw TextCommand_NUM                ; TX_NUM
-	dw TextCommand_PAUSE              ; TX_PAUSE
-	dw TextCommand_SOUND              ; TX_SOUND_GET_ITEM_1 (also handles other TX_SOUND_* commands)
-	dw TextCommand_DOTS               ; TX_DOTS
-	dw TextCommand_LINK_PROMPT_BUTTON ; TX_LINK_PROMPT_BUTTON
+	dw TextCommand_START         ; TX_START
+	dw TextCommand_RAM           ; TX_RAM
+	dw TextCommand_BCD           ; TX_BCD
+	dw TextCommand_MOVE          ; TX_MOVE
+	dw TextCommand_BOX           ; TX_BOX
+	dw TextCommand_LOW           ; TX_LOW
+	dw TextCommand_PROMPT_BUTTON ; TX_PROMPT_BUTTON
+	dw TextCommand_SCROLL        ; TX_SCROLL
+	dw TextCommand_START_ASM     ; TX_START_ASM
+	dw TextCommand_NUM           ; TX_NUM
+	dw TextCommand_PAUSE         ; TX_PAUSE
+	dw TextCommand_SOUND         ; TX_SOUND_GET_ITEM_1 (also handles other TX_SOUND_* commands)
+	dw TextCommand_DOTS          ; TX_DOTS
+	dw TextCommand_WAIT_BUTTON   ; TX_WAIT_BUTTON
 	; greater TX_* constants are handled directly by NextTextCommand

@@ -170,13 +170,13 @@ AutoBgMapTransfer::
 TransferBgRows::
 ; unrolled loop and using pop for speed
 
-	rept 20 / 2 - 1
+	REPT 20 / 2 - 1
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-	endr
+	ENDR
 
 	pop de
 	ld [hl], e
@@ -261,7 +261,7 @@ VBlankCopyDouble::
 	ld [hVBlankCopyDoubleSize], a
 
 .loop
-	rept 3
+	REPT 3
 	pop de
 	ld [hl], e
 	inc l
@@ -271,7 +271,7 @@ VBlankCopyDouble::
 	inc l
 	ld [hl], d
 	inc l
-	endr
+	ENDR
 
 	pop de
 	ld [hl], e
@@ -339,13 +339,13 @@ VBlankCopy::
 	ld [hVBlankCopySize], a
 
 .loop
-	rept 7
+	REPT 7
 	pop de
 	ld [hl], e
 	inc l
 	ld [hl], d
 	inc l
-	endr
+	ENDR
 
 	pop de
 	ld [hl], e

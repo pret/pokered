@@ -56,7 +56,7 @@ ReceivedTM31Text:
 	sound_get_item_1
 TM31ExplanationText1:
 	text_far _TM31ExplanationText1
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 TM31ExplanationText2:
@@ -65,7 +65,7 @@ TM31ExplanationText2:
 
 TM31NoRoomText:
 	text_far _TM31NoRoomText
-	text_linkpromptbutton
+	text_waitbutton
 	text_end
 
 CopycatsHouse2FText2:
