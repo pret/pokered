@@ -1,28 +1,20 @@
-db DEX_FLAREON ; pokedex id
-db 65 ; base hp
-db 130 ; base attack
-db 60 ; base defense
-db 65 ; base speed
-db 110 ; base special
-db FIRE ; species type 1
-db FIRE ; species type 2
-db 45 ; catch rate
-db 198 ; base exp yield
-INCBIN "gfx/pokemon/front/flareon.pic",0,1 ; 66, sprite dimensions
-dw FlareonPicFront
-dw FlareonPicBack
-; attacks known at lvl 0
-db TACKLE
-db SAND_ATTACK
-db QUICK_ATTACK
-db EMBER
-db 0 ; growth rate
-; learnset
-	tmlearn 6,8
-	tmlearn 9,10,15
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44
-	tmlearn 50
-db 0 ; padding
+	db DEX_FLAREON ; pokedex id
+
+	db  65, 130,  60,  65, 110
+	;   hp  atk  def  spd  spc
+
+	db FIRE, FIRE ; type
+	db 45 ; catch rate
+	db 198 ; base exp
+
+	INCBIN "gfx/pokemon/front/flareon.pic", 0, 1 ; sprite dimensions
+	dw FlareonPicFront, FlareonPicBack
+
+	db TACKLE, SAND_ATTACK, QUICK_ATTACK, EMBER ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 40, 44, 50
+	; end
+
+	db 0 ; padding

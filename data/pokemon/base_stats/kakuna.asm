@@ -1,28 +1,20 @@
-db DEX_KAKUNA ; pokedex id
-db 45 ; base hp
-db 25 ; base attack
-db 50 ; base defense
-db 35 ; base speed
-db 25 ; base special
-db BUG ; species type 1
-db POISON ; species type 2
-db 120 ; catch rate
-db 71 ; base exp yield
-INCBIN "gfx/pokemon/front/kakuna.pic",0,1 ; 55, sprite dimensions
-dw KakunaPicFront
-dw KakunaPicBack
-; attacks known at lvl 0
-db HARDEN
-db 0
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 0
-	tmlearn 0
-	tmlearn 0
-	tmlearn 0
-	tmlearn 0
-	tmlearn 0
-	tmlearn 0
-db 0 ; padding
+	db DEX_KAKUNA ; pokedex id
+
+	db  45,  25,  50,  35,  25
+	;   hp  atk  def  spd  spc
+
+	db BUG, POISON ; type
+	db 120 ; catch rate
+	db 71 ; base exp
+
+	INCBIN "gfx/pokemon/front/kakuna.pic", 0, 1 ; sprite dimensions
+	dw KakunaPicFront, KakunaPicBack
+
+	db HARDEN, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm
+	; end
+
+	db 0 ; padding

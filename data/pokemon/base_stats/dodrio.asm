@@ -1,28 +1,20 @@
-db DEX_DODRIO ; pokedex id
-db 60 ; base hp
-db 110 ; base attack
-db 70 ; base defense
-db 100 ; base speed
-db 60 ; base special
-db NORMAL ; species type 1
-db FLYING ; species type 2
-db 45 ; catch rate
-db 158 ; base exp yield
-INCBIN "gfx/pokemon/front/dodrio.pic",0,1 ; 77, sprite dimensions
-dw DodrioPicFront
-dw DodrioPicBack
-; attacks known at lvl 0
-db PECK
-db GROWL
-db FURY_ATTACK
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 4,6,8
-	tmlearn 9,10,15
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 33,34,40
-	tmlearn 43,44
-	tmlearn 49,50,52
-db 0 ; padding
+	db DEX_DODRIO ; pokedex id
+
+	db  60, 110,  70, 100,  60
+	;   hp  atk  def  spd  spc
+
+	db NORMAL, FLYING ; type
+	db 45 ; catch rate
+	db 158 ; base exp
+
+	INCBIN "gfx/pokemon/front/dodrio.pic", 0, 1 ; sprite dimensions
+	dw DodrioPicFront, DodrioPicBack
+
+	db PECK, GROWL, FURY_ATTACK, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 40, 43, 44, 49, 50, 52
+	; end
+
+	db 0 ; padding

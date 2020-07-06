@@ -1,28 +1,20 @@
-db DEX_PARAS ; pokedex id
-db 35 ; base hp
-db 70 ; base attack
-db 55 ; base defense
-db 25 ; base speed
-db 55 ; base special
-db BUG ; species type 1
-db GRASS ; species type 2
-db 190 ; catch rate
-db 70 ; base exp yield
-INCBIN "gfx/pokemon/front/paras.pic",0,1 ; 55, sprite dimensions
-dw ParasPicFront
-dw ParasPicBack
-; attacks known at lvl 0
-db SCRATCH
-db 0
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 3,6,8
-	tmlearn 9,10
-	tmlearn 20,21,22
-	tmlearn 28,31,32
-	tmlearn 33,34,40
-	tmlearn 44
-	tmlearn 50,51
-db 0 ; padding
+	db DEX_PARAS ; pokedex id
+
+	db  35,  70,  55,  25,  55
+	;   hp  atk  def  spd  spc
+
+	db BUG, GRASS ; type
+	db 190 ; catch rate
+	db 70 ; base exp
+
+	INCBIN "gfx/pokemon/front/paras.pic", 0, 1 ; sprite dimensions
+	dw ParasPicFront, ParasPicBack
+
+	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 3, 6, 8, 9, 10, 20, 21, 22, 28, 31, 32, 33, 34, 40, 44, 50, 51
+	; end
+
+	db 0 ; padding

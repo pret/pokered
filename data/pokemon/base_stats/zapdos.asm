@@ -1,28 +1,20 @@
-db DEX_ZAPDOS ; pokedex id
-db 90 ; base hp
-db 90 ; base attack
-db 85 ; base defense
-db 100 ; base speed
-db 125 ; base special
-db ELECTRIC ; species type 1
-db FLYING ; species type 2
-db 3 ; catch rate
-db 216 ; base exp yield
-INCBIN "gfx/pokemon/front/zapdos.pic",0,1 ; 77, sprite dimensions
-dw ZapdosPicFront
-dw ZapdosPicBack
-; attacks known at lvl 0
-db THUNDERSHOCK
-db DRILL_PECK
-db 0
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 2,4,6
-	tmlearn 9,10,15
-	tmlearn 20,24
-	tmlearn 25,31,32
-	tmlearn 33,34,39
-	tmlearn 43,44,45
-	tmlearn 50,52,55
-db 0 ; padding
+	db DEX_ZAPDOS ; pokedex id
+
+	db  90,  90,  85, 100, 125
+	;   hp  atk  def  spd  spc
+
+	db ELECTRIC, FLYING ; type
+	db 3 ; catch rate
+	db 216 ; base exp
+
+	INCBIN "gfx/pokemon/front/zapdos.pic", 0, 1 ; sprite dimensions
+	dw ZapdosPicFront, ZapdosPicBack
+
+	db THUNDERSHOCK, DRILL_PECK, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm 2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 43, 44, 45, 50, 52, 55
+	; end
+
+	db 0 ; padding

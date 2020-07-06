@@ -1,28 +1,20 @@
-db DEX_KABUTO ; pokedex id
-db 30 ; base hp
-db 80 ; base attack
-db 90 ; base defense
-db 55 ; base speed
-db 45 ; base special
-db ROCK ; species type 1
-db WATER ; species type 2
-db 45 ; catch rate
-db 119 ; base exp yield
-INCBIN "gfx/pokemon/front/kabuto.pic",0,1 ; 55, sprite dimensions
-dw KabutoPicFront
-dw KabutoPicBack
-; attacks known at lvl 0
-db SCRATCH
-db HARDEN
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 6,8
-	tmlearn 9,10,11,12,13,14
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 33,34
-	tmlearn 44
-	tmlearn 50,53
-db 0 ; padding
+	db DEX_KABUTO ; pokedex id
+
+	db  30,  80,  90,  55,  45
+	;   hp  atk  def  spd  spc
+
+	db ROCK, WATER ; type
+	db 45 ; catch rate
+	db 119 ; base exp
+
+	INCBIN "gfx/pokemon/front/kabuto.pic", 0, 1 ; sprite dimensions
+	dw KabutoPicFront, KabutoPicBack
+
+	db SCRATCH, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 33, 34, 44, 50, 53
+	; end
+
+	db 0 ; padding

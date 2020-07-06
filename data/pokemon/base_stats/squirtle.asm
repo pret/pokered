@@ -1,28 +1,20 @@
-db DEX_SQUIRTLE ; pokedex id
-db 44 ; base hp
-db 48 ; base attack
-db 65 ; base defense
-db 43 ; base speed
-db 50 ; base special
-db WATER ; species type 1
-db WATER ; species type 2
-db 45 ; catch rate
-db 66 ; base exp yield
-INCBIN "gfx/pokemon/front/squirtle.pic",0,1 ; 55, sprite dimensions
-dw SquirtlePicFront
-dw SquirtlePicBack
-; attacks known at lvl 0
-db TACKLE
-db TAIL_WHIP
-db 0
-db 0
-db 3 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,11,12,13,14
-	tmlearn 17,18,19,20
-	tmlearn 28,31,32
-	tmlearn 33,34,40
-	tmlearn 44
-	tmlearn 50,53,54
-db 0 ; padding
+	db DEX_SQUIRTLE ; pokedex id
+
+	db  44,  48,  65,  43,  50
+	;   hp  atk  def  spd  spc
+
+	db WATER, WATER ; type
+	db 45 ; catch rate
+	db 66 ; base exp
+
+	INCBIN "gfx/pokemon/front/squirtle.pic", 0, 1 ; sprite dimensions
+	dw SquirtlePicFront, SquirtlePicBack
+
+	db TACKLE, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 3 ; growth rate
+
+	; tm/hm learnset
+	tmhm 1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 28, 31, 32, 33, 34, 40, 44, 50, 53, 54
+	; end
+
+	db 0 ; padding

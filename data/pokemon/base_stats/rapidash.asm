@@ -1,28 +1,20 @@
-db DEX_RAPIDASH ; pokedex id
-db 65 ; base hp
-db 100 ; base attack
-db 70 ; base defense
-db 105 ; base speed
-db 80 ; base special
-db FIRE ; species type 1
-db FIRE ; species type 2
-db 60 ; catch rate
-db 192 ; base exp yield
-INCBIN "gfx/pokemon/front/rapidash.pic",0,1 ; 77, sprite dimensions
-dw RapidashPicFront
-dw RapidashPicBack
-; attacks known at lvl 0
-db EMBER
-db TAIL_WHIP
-db STOMP
-db GROWL
-db 0 ; growth rate
-; learnset
-	tmlearn 6,7,8
-	tmlearn 9,10,15
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44
-	tmlearn 50
-db 0 ; padding
+	db DEX_RAPIDASH ; pokedex id
+
+	db  65, 100,  70, 105,  80
+	;   hp  atk  def  spd  spc
+
+	db FIRE, FIRE ; type
+	db 60 ; catch rate
+	db 192 ; base exp
+
+	INCBIN "gfx/pokemon/front/rapidash.pic", 0, 1 ; sprite dimensions
+	dw RapidashPicFront, RapidashPicBack
+
+	db EMBER, TAIL_WHIP, STOMP, GROWL ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 6, 7, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 40, 44, 50
+	; end
+
+	db 0 ; padding

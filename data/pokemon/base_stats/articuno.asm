@@ -1,28 +1,20 @@
-db DEX_ARTICUNO ; pokedex id
-db 90 ; base hp
-db 85 ; base attack
-db 100 ; base defense
-db 85 ; base speed
-db 125 ; base special
-db ICE ; species type 1
-db FLYING ; species type 2
-db 3 ; catch rate
-db 215 ; base exp yield
-INCBIN "gfx/pokemon/front/articuno.pic",0,1 ; 77, sprite dimensions
-dw ArticunoPicFront
-dw ArticunoPicBack
-; attacks known at lvl 0
-db PECK
-db ICE_BEAM
-db 0
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 2,4,6
-	tmlearn 9,10,11,12,13,14,15
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 33,34,39
-	tmlearn 43,44
-	tmlearn 50,52
-db 0 ; padding
+	db DEX_ARTICUNO ; pokedex id
+
+	db  90,  85, 100,  85, 125
+	;   hp  atk  def  spd  spc
+
+	db ICE, FLYING ; type
+	db 3 ; catch rate
+	db 215 ; base exp
+
+	INCBIN "gfx/pokemon/front/articuno.pic", 0, 1 ; sprite dimensions
+	dw ArticunoPicFront, ArticunoPicBack
+
+	db PECK, ICE_BEAM, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm 2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 43, 44, 50, 52
+	; end
+
+	db 0 ; padding

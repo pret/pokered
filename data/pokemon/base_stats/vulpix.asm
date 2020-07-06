@@ -1,28 +1,20 @@
-db DEX_VULPIX ; pokedex id
-db 38 ; base hp
-db 41 ; base attack
-db 40 ; base defense
-db 65 ; base speed
-db 65 ; base special
-db FIRE ; species type 1
-db FIRE ; species type 2
-db 190 ; catch rate
-db 63 ; base exp yield
-INCBIN "gfx/pokemon/front/vulpix.pic",0,1 ; 66, sprite dimensions
-dw VulpixPicFront
-dw VulpixPicBack
-; attacks known at lvl 0
-db EMBER
-db TAIL_WHIP
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 6,8
-	tmlearn 9,10
-	tmlearn 20
-	tmlearn 28,31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44
-	tmlearn 50
-db 0 ; padding
+	db DEX_VULPIX ; pokedex id
+
+	db  38,  41,  40,  65,  65
+	;   hp  atk  def  spd  spc
+
+	db FIRE, FIRE ; type
+	db 190 ; catch rate
+	db 63 ; base exp
+
+	INCBIN "gfx/pokemon/front/vulpix.pic", 0, 1 ; sprite dimensions
+	dw VulpixPicFront, VulpixPicBack
+
+	db EMBER, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm 6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 40, 44, 50
+	; end
+
+	db 0 ; padding
