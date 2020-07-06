@@ -14,7 +14,10 @@
 	db 0 ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC, BODY_SLAM, TAKE_DOWN, DOUBLE_EDGE, BUBBLEBEAM, WATER_GUN, BLIZZARD, RAGE, THUNDERBOLT, THUNDER, DIG, MIMIC, DOUBLE_TEAM, BIDE, SWIFT, SKULL_BASH, REST, SUBSTITUTE
+	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
+	     WATER_GUN,    BLIZZARD,     RAGE,         THUNDERBOLT,  THUNDER,      \
+	     DIG,          MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
+	     SKULL_BASH,   REST,         SUBSTITUTE
 	; end
 
 	db 0 ; padding

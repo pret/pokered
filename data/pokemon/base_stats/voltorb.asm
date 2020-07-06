@@ -14,7 +14,10 @@
 	db 0 ; growth rate
 
 	; tm/hm learnset
-	tmhm TOXIC, TAKE_DOWN, RAGE, THUNDERBOLT, THUNDER, TELEPORT, MIMIC, DOUBLE_TEAM, REFLECT, BIDE, SELFDESTRUCT, SWIFT, REST, THUNDER_WAVE, EXPLOSION, SUBSTITUTE, FLASH
+	tmhm TOXIC,        TAKE_DOWN,    RAGE,         THUNDERBOLT,  THUNDER,      \
+	     TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
+	     SELFDESTRUCT, SWIFT,        REST,         THUNDER_WAVE, EXPLOSION,    \
+	     SUBSTITUTE,   FLASH
 	; end
 
 	db 0 ; padding
