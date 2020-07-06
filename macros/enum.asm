@@ -1,16 +1,16 @@
 ; Enumerate variables
 
 enum_start: MACRO
-if _NARG >= 1
+IF _NARG >= 1
 __enum__ = \1
-else
+ELSE
 __enum__ = 0
-endc
-if _NARG >= 2
+ENDC
+IF _NARG >= 2
 __enumdir__ = \2
-else
+ELSE
 __enumdir__ = 1
-endc
+ENDC
 ENDM
 
 enum: MACRO
@@ -25,11 +25,11 @@ ENDM
 ; Enumerate constants
 
 const_def: MACRO
-if _NARG >= 1
+IF _NARG >= 1
 const_value = \1
-else
+ELSE
 const_value = 0
-endc
+ENDC
 ENDM
 
 const: MACRO

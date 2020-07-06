@@ -59,18 +59,20 @@ PrintNumber::
 	cp 6
 	jr z, .hundred_thousands
 
-print_digit: macro
+print_digit: MACRO
 
-if (\1) / $10000
+IF (\1) / $10000
 	ld a, \1 / $10000 % $100
-else	xor a
-endc
+ELSE
+	xor a
+ENDC
 	ld [hPowerOf10 + 0], a
 
-if (\1) / $100
+IF (\1) / $100
 	ld a, \1 / $100   % $100
-else	xor a
-endc
+ELSE
+	xor a
+ENDC
 	ld [hPowerOf10 + 1], a
 
 	ld a, \1 / $1     % $100
@@ -78,7 +80,7 @@ endc
 
 	call .PrintDigit
 	call .NextDigit
-endm
+ENDM
 
 .millions          print_digit 1000000
 .hundred_thousands print_digit 100000

@@ -198,10 +198,10 @@ ENDM
 script_mart: MACRO
 	db TX_SCRIPT_MART
 	db _NARG ; number of items
-rept _NARG
+REPT _NARG
 	db \1 ; item id
 	shift
-endr
+ENDR
 	db -1 ; end
 ENDM
 

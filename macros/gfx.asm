@@ -1,8 +1,8 @@
 RGB: MACRO
-rept _NARG / 3
+REPT _NARG / 3
 	dw palred (\1) + palgreen (\2) + palblue (\3)
 	shift 3
-endr
+ENDR
 ENDM
 
 palred   EQUS "(1 << 0) *"
