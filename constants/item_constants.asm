@@ -102,20 +102,22 @@ SAFARI_ROCK           EQU $16 ; overload
 
 const_value = $C4
 
+; HMs are defined before TMs, so the actual number of TM definitions
+; is not yet available. The TM quantity is hard-coded here and must
+; match the actual number below.
+NUM_TMS EQU 50
+
 add_hm: MACRO
 ; Defines three constants:
 ; - HM_\1: the item id, starting at $C4
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 51
 ; - HM##_MOVE: alias for the move id, equal to the value of \1
 ; The first usage also defines HM01 as the first HM item id.
-;
-; HMs are defined before TMs, so the value of NUM_TMS is not
-; available here, and its value of 50 is hard-coded.
 IF !DEF(HM01)
 HM01 EQU const_value
-	enum_start 51 ; NUM_TMS + 1
+	enum_start NUM_TMS + 1
 ENDC
-HM_VALUE EQU __enum__ - 50 ; __enum__ - NUM_TMS
+HM_VALUE EQU __enum__ - NUM_TMS
 IF HM_VALUE < 10
 MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
 ELSE
@@ -206,7 +208,7 @@ ENDM
 	add_tm ROCK_SLIDE   ; $F8
 	add_tm TRI_ATTACK   ; $F9
 	add_tm SUBSTITUTE   ; $FA
-NUM_TMS EQU const_value - TM01
+assert NUM_TMS == const_value - TM01, "NUM_TMS ({d:NUM_TMS}) does not match the number of add_tm definitions"
 
 ; 50 TMs + 5 HMs = 55 learnable TM/HM flags per Pokémon.
 ; These fit in 7 bytes, with one unused bit left over.
