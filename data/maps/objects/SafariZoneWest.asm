@@ -19,7 +19,7 @@ SafariZoneWest_Object:
 
 	db 4 ; objects
 	object SPRITE_BALL, 8, 20, STAY, NONE, 1, MAX_POTION
-	object SPRITE_BALL, 9, 7, STAY, NONE, 2, TM_32
+	object SPRITE_BALL, 9, 7, STAY, NONE, 2, TM_DOUBLE_TEAM
 	object SPRITE_BALL, 18, 18, STAY, NONE, 3, MAX_REVIVE
 	object SPRITE_BALL, 19, 7, STAY, NONE, 4, GOLD_TEETH
 

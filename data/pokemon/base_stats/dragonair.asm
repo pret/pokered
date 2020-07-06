@@ -1,28 +1,24 @@
-db DEX_DRAGONAIR ; pokedex id
-db 61 ; base hp
-db 84 ; base attack
-db 65 ; base defense
-db 70 ; base speed
-db 70 ; base special
-db DRAGON ; species type 1
-db DRAGON ; species type 2
-db 45 ; catch rate
-db 144 ; base exp yield
-INCBIN "gfx/pokemon/front/dragonair.pic",0,1 ; 66, sprite dimensions
-dw DragonairPicFront
-dw DragonairPicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db THUNDER_WAVE
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 6,7,8
-	tmlearn 9,10,11,12,13,14
-	tmlearn 20,23,24
-	tmlearn 25,31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44,45
-	tmlearn 50,53
-db 0 ; padding
+	db DEX_DRAGONAIR ; pokedex id
+
+	db  61,  84,  65,  70,  70
+	;   hp  atk  def  spd  spc
+
+	db DRAGON, DRAGON ; type
+	db 45 ; catch rate
+	db 144 ; base exp
+
+	INCBIN "gfx/pokemon/front/dragonair.pic", 0, 1 ; sprite dimensions
+	dw DragonairPicFront, DragonairPicBack
+
+	db WRAP, LEER, THUNDER_WAVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
+	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     RAGE,         \
+	     DRAGON_RAGE,  THUNDERBOLT,  THUNDER,      MIMIC,        DOUBLE_TEAM,  \
+	     REFLECT,      BIDE,         FIRE_BLAST,   SWIFT,        SKULL_BASH,   \
+	     REST,         THUNDER_WAVE, SUBSTITUTE,   SURF
+	; end
+
+	db 0 ; padding

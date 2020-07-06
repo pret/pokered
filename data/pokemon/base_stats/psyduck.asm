@@ -1,28 +1,24 @@
-db DEX_PSYDUCK ; pokedex id
-db 50 ; base hp
-db 52 ; base attack
-db 48 ; base defense
-db 55 ; base speed
-db 50 ; base special
-db WATER ; species type 1
-db WATER ; species type 2
-db 190 ; catch rate
-db 80 ; base exp yield
-INCBIN "gfx/pokemon/front/psyduck.pic",0,1 ; 55, sprite dimensions
-dw PsyduckPicFront
-dw PsyduckPicBack
-; attacks known at lvl 0
-db SCRATCH
-db 0
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,11,12,13,14,16
-	tmlearn 17,18,19,20
-	tmlearn 28,31,32
-	tmlearn 34,39,40
-	tmlearn 44
-	tmlearn 50,53,54
-db 0 ; padding
+	db DEX_PSYDUCK ; pokedex id
+
+	db  50,  52,  48,  55,  50
+	;   hp  atk  def  spd  spc
+
+	db WATER, WATER ; type
+	db 190 ; catch rate
+	db 80 ; base exp
+
+	INCBIN "gfx/pokemon/front/psyduck.pic", 0, 1 ; sprite dimensions
+	dw PsyduckPicFront, PsyduckPicBack
+
+	db SCRATCH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
+	     PAY_DAY,      SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
+	     DIG,          MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
+	     SKULL_BASH,   REST,         SUBSTITUTE,   SURF,         STRENGTH
+	; end
+
+	db 0 ; padding

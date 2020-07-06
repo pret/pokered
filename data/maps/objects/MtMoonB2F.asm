@@ -18,7 +18,7 @@ MtMoonB2F_Object:
 	object SPRITE_OMANYTE, 12, 6, STAY, NONE, 6 ; person
 	object SPRITE_OMANYTE, 13, 6, STAY, NONE, 7 ; person
 	object SPRITE_BALL, 25, 21, STAY, NONE, 8, HP_UP
-	object SPRITE_BALL, 29, 5, STAY, NONE, 9, TM_01
+	object SPRITE_BALL, 29, 5, STAY, NONE, 9, TM_MEGA_PUNCH
 
 	; warp-to
 	warp_to 25, 9, MT_MOON_B2F_WIDTH ; MT_MOON_B1F

@@ -23,7 +23,7 @@ CopycatsHouse2FText1:
 	jr z, .asm_62ecd
 	ld hl, TM31PreReceiveText
 	call PrintText
-	lb bc, TM_31, 1
+	lb bc, TM_MIMIC, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM31Text

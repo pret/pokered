@@ -1,28 +1,24 @@
-db DEX_MACHAMP ; pokedex id
-db 90 ; base hp
-db 130 ; base attack
-db 80 ; base defense
-db 55 ; base speed
-db 65 ; base special
-db FIGHTING ; species type 1
-db FIGHTING ; species type 2
-db 45 ; catch rate
-db 193 ; base exp yield
-INCBIN "gfx/pokemon/front/machamp.pic",0,1 ; 77, sprite dimensions
-dw MachampPicFront
-dw MachampPicBack
-; attacks known at lvl 0
-db KARATE_CHOP
-db LOW_KICK
-db LEER
-db 0
-db 3 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,15
-	tmlearn 17,18,19,20
-	tmlearn 26,27,28,31,32
-	tmlearn 34,35,38,40
-	tmlearn 44,48
-	tmlearn 50,54
-db 0 ; padding
+	db DEX_MACHAMP ; pokedex id
+
+	db  90, 130,  80,  55,  65
+	;   hp  atk  def  spd  spc
+
+	db FIGHTING, FIGHTING ; type
+	db 45 ; catch rate
+	db 193 ; base exp
+
+	INCBIN "gfx/pokemon/front/machamp.pic", 0, 1 ; sprite dimensions
+	dw MachampPicFront, MachampPicBack
+
+	db KARATE_CHOP, LOW_KICK, LEER, NO_MOVE ; level 1 learnset
+	db 3 ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, \
+	     RAGE,         EARTHQUAKE,   FISSURE,      DIG,          MIMIC,        \
+	     DOUBLE_TEAM,  BIDE,         METRONOME,    FIRE_BLAST,   SKULL_BASH,   \
+	     REST,         ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
+	; end
+
+	db 0 ; padding

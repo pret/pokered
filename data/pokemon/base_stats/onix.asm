@@ -1,28 +1,23 @@
-db DEX_ONIX ; pokedex id
-db 35 ; base hp
-db 45 ; base attack
-db 160 ; base defense
-db 70 ; base speed
-db 30 ; base special
-db ROCK ; species type 1
-db GROUND ; species type 2
-db 45 ; catch rate
-db 108 ; base exp yield
-INCBIN "gfx/pokemon/front/onix.pic",0,1 ; 77, sprite dimensions
-dw OnixPicFront
-dw OnixPicBack
-; attacks known at lvl 0
-db TACKLE
-db SCREECH
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 6,8
-	tmlearn 9,10
-	tmlearn 20
-	tmlearn 26,27,28,31,32
-	tmlearn 34,36,40
-	tmlearn 44,47,48
-	tmlearn 50,54
-db 0 ; padding
+	db DEX_ONIX ; pokedex id
+
+	db  35,  45, 160,  70,  30
+	;   hp  atk  def  spd  spc
+
+	db ROCK, GROUND ; type
+	db 45 ; catch rate
+	db 108 ; base exp
+
+	INCBIN "gfx/pokemon/front/onix.pic", 0, 1 ; sprite dimensions
+	dw OnixPicFront, OnixPicBack
+
+	db TACKLE, SCREECH, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
+	     EARTHQUAKE,   FISSURE,      DIG,          MIMIC,        DOUBLE_TEAM,  \
+	     BIDE,         SELFDESTRUCT, SKULL_BASH,   REST,         EXPLOSION,    \
+	     ROCK_SLIDE,   SUBSTITUTE,   STRENGTH
+	; end
+
+	db 0 ; padding

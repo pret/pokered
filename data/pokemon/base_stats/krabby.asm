@@ -1,28 +1,23 @@
-db DEX_KRABBY ; pokedex id
-db 30 ; base hp
-db 105 ; base attack
-db 90 ; base defense
-db 50 ; base speed
-db 25 ; base special
-db WATER ; species type 1
-db WATER ; species type 2
-db 225 ; catch rate
-db 115 ; base exp yield
-INCBIN "gfx/pokemon/front/krabby.pic",0,1 ; 55, sprite dimensions
-dw KrabbyPicFront
-dw KrabbyPicBack
-; attacks known at lvl 0
-db BUBBLE
-db LEER
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 3,6,8
-	tmlearn 9,10,11,12,13,14
-	tmlearn 20
-	tmlearn 31,32
-	tmlearn 34
-	tmlearn 44
-	tmlearn 50,51,53,54
-db 0 ; padding
+	db DEX_KRABBY ; pokedex id
+
+	db  30, 105,  90,  50,  25
+	;   hp  atk  def  spd  spc
+
+	db WATER, WATER ; type
+	db 225 ; catch rate
+	db 115 ; base exp
+
+	INCBIN "gfx/pokemon/front/krabby.pic", 0, 1 ; sprite dimensions
+	dw KrabbyPicFront, KrabbyPicBack
+
+	db BUBBLE, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
+	     BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     RAGE,         \
+	     MIMIC,        DOUBLE_TEAM,  BIDE,         REST,         SUBSTITUTE,   \
+	     CUT,          SURF,         STRENGTH
+	; end
+
+	db 0 ; padding

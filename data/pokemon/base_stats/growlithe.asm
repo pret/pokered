@@ -1,28 +1,23 @@
-db DEX_GROWLITHE ; pokedex id
-db 55 ; base hp
-db 70 ; base attack
-db 45 ; base defense
-db 60 ; base speed
-db 50 ; base special
-db FIRE ; species type 1
-db FIRE ; species type 2
-db 190 ; catch rate
-db 91 ; base exp yield
-INCBIN "gfx/pokemon/front/growlithe.pic",0,1 ; 55, sprite dimensions
-dw GrowlithePicFront
-dw GrowlithePicBack
-; attacks known at lvl 0
-db BITE
-db ROAR
-db 0
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 6,8
-	tmlearn 9,10
-	tmlearn 20,23
-	tmlearn 28,31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44
-	tmlearn 50
-db 0 ; padding
+	db DEX_GROWLITHE ; pokedex id
+
+	db  55,  70,  45,  60,  50
+	;   hp  atk  def  spd  spc
+
+	db FIRE, FIRE ; type
+	db 190 ; catch rate
+	db 91 ; base exp
+
+	INCBIN "gfx/pokemon/front/growlithe.pic", 0, 1 ; sprite dimensions
+	dw GrowlithePicFront, GrowlithePicBack
+
+	db BITE, ROAR, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \
+	     DRAGON_RAGE,  DIG,          MIMIC,        DOUBLE_TEAM,  REFLECT,      \
+	     BIDE,         FIRE_BLAST,   SWIFT,        SKULL_BASH,   REST,         \
+	     SUBSTITUTE
+	; end
+
+	db 0 ; padding

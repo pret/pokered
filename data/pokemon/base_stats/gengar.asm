@@ -1,28 +1,25 @@
-db DEX_GENGAR ; pokedex id
-db 60 ; base hp
-db 65 ; base attack
-db 60 ; base defense
-db 110 ; base speed
-db 130 ; base special
-db GHOST ; species type 1
-db POISON ; species type 2
-db 45 ; catch rate
-db 190 ; base exp yield
-INCBIN "gfx/pokemon/front/gengar.pic",0,1 ; 66, sprite dimensions
-dw GengarPicFront
-dw GengarPicBack
-; attacks known at lvl 0
-db LICK
-db CONFUSE_RAY
-db NIGHT_SHADE
-db 0
-db 3 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,15
-	tmlearn 17,18,19,20,21,24
-	tmlearn 25,29,31,32
-	tmlearn 34,35,36,40
-	tmlearn 42,44,46,47
-	tmlearn 50,54
-db 0 ; padding
+	db DEX_GENGAR ; pokedex id
+
+	db  60,  65,  60, 110, 130
+	;   hp  atk  def  spd  spc
+
+	db GHOST, POISON ; type
+	db 45 ; catch rate
+	db 190 ; base exp
+
+	INCBIN "gfx/pokemon/front/gengar.pic", 0, 1 ; sprite dimensions
+	dw GengarPicFront, GengarPicBack
+
+	db LICK, CONFUSE_RAY, NIGHT_SHADE, NO_MOVE ; level 1 learnset
+	db 3 ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, \
+	     RAGE,         MEGA_DRAIN,   THUNDERBOLT,  THUNDER,      PSYCHIC_M,    \
+	     MIMIC,        DOUBLE_TEAM,  BIDE,         METRONOME,    SELFDESTRUCT, \
+	     SKULL_BASH,   DREAM_EATER,  REST,         PSYWAVE,      EXPLOSION,    \
+	     SUBSTITUTE,   STRENGTH
+	; end
+
+	db 0 ; padding

@@ -1,28 +1,25 @@
-db DEX_MR_MIME ; pokedex id
-db 40 ; base hp
-db 45 ; base attack
-db 65 ; base defense
-db 90 ; base speed
-db 100 ; base special
-db PSYCHIC ; species type 1
-db PSYCHIC ; species type 2
-db 45 ; catch rate
-db 136 ; base exp yield
-INCBIN "gfx/pokemon/front/mr.mime.pic",0,1 ; 66, sprite dimensions
-dw MrMimePicFront
-dw MrMimePicBack
-; attacks known at lvl 0
-db CONFUSION
-db BARRIER
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,15
-	tmlearn 17,18,19,20,22,24
-	tmlearn 25,29,30,31,32
-	tmlearn 33,34,35,40
-	tmlearn 44,45,46
-	tmlearn 50,55
-db 0 ; padding
+	db DEX_MR_MIME ; pokedex id
+
+	db  40,  45,  65,  90, 100
+	;   hp  atk  def  spd  spc
+
+	db PSYCHIC, PSYCHIC ; type
+	db 45 ; catch rate
+	db 136 ; base exp
+
+	INCBIN "gfx/pokemon/front/mr.mime.pic", 0, 1 ; sprite dimensions
+	dw MrMimePicFront, MrMimePicBack
+
+	db CONFUSION, BARRIER, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, \
+	     RAGE,         SOLARBEAM,    THUNDERBOLT,  THUNDER,      PSYCHIC_M,    \
+	     TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         \
+	     METRONOME,    SKULL_BASH,   REST,         THUNDER_WAVE, PSYWAVE,      \
+	     SUBSTITUTE,   FLASH
+	; end
+
+	db 0 ; padding

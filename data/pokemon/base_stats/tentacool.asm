@@ -1,28 +1,23 @@
-db DEX_TENTACOOL ; pokedex id
-db 40 ; base hp
-db 40 ; base attack
-db 35 ; base defense
-db 70 ; base speed
-db 100 ; base special
-db WATER ; species type 1
-db POISON ; species type 2
-db 190 ; catch rate
-db 105 ; base exp yield
-INCBIN "gfx/pokemon/front/tentacool.pic",0,1 ; 55, sprite dimensions
-dw TentacoolPicFront
-dw TentacoolPicBack
-; attacks known at lvl 0
-db ACID
-db 0
-db 0
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 3,6
-	tmlearn 9,10,11,12,13,14
-	tmlearn 20,21
-	tmlearn 31,32
-	tmlearn 33,34,40
-	tmlearn 44
-	tmlearn 50,51,53
-db 0 ; padding
+	db DEX_TENTACOOL ; pokedex id
+
+	db  40,  40,  35,  70, 100
+	;   hp  atk  def  spd  spc
+
+	db WATER, POISON ; type
+	db 190 ; catch rate
+	db 105 ; base exp
+
+	INCBIN "gfx/pokemon/front/tentacool.pic", 0, 1 ; sprite dimensions
+	dw TentacoolPicFront, TentacoolPicBack
+
+	db ACID, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \
+	     WATER_GUN,    ICE_BEAM,     BLIZZARD,     RAGE,         MEGA_DRAIN,   \
+	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         SKULL_BASH,   \
+	     REST,         SUBSTITUTE,   CUT,          SURF
+	; end
+
+	db 0 ; padding

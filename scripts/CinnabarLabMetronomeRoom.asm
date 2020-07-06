@@ -14,7 +14,7 @@ Lab3Text1:
 	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
 	call PrintText
-	lb bc, TM_35, 1
+	lb bc, TM_METRONOME, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM35Text

@@ -1,28 +1,25 @@
-db DEX_DRAGONITE ; pokedex id
-db 91 ; base hp
-db 134 ; base attack
-db 95 ; base defense
-db 80 ; base speed
-db 100 ; base special
-db DRAGON ; species type 1
-db FLYING ; species type 2
-db 45 ; catch rate
-db 218 ; base exp yield
-INCBIN "gfx/pokemon/front/dragonite.pic",0,1 ; 77, sprite dimensions
-dw DragonitePicFront
-dw DragonitePicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db THUNDER_WAVE
-db AGILITY
-db 5 ; growth rate
-; learnset
-	tmlearn 2,6,7,8
-	tmlearn 9,10,11,12,13,14,15
-	tmlearn 20,23,24
-	tmlearn 25,31,32
-	tmlearn 33,34,38,39,40
-	tmlearn 44,45
-	tmlearn 50,53,54
-db 0 ; padding
+	db DEX_DRAGONITE ; pokedex id
+
+	db  91, 134,  95,  80, 100
+	;   hp  atk  def  spd  spc
+
+	db DRAGON, FLYING ; type
+	db 45 ; catch rate
+	db 218 ; base exp
+
+	INCBIN "gfx/pokemon/front/dragonite.pic", 0, 1 ; sprite dimensions
+	dw DragonitePicFront, DragonitePicBack
+
+	db WRAP, LEER, THUNDER_WAVE, AGILITY ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm RAZOR_WIND,   TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
+	     HYPER_BEAM,   RAGE,         DRAGON_RAGE,  THUNDERBOLT,  THUNDER,      \
+	     MIMIC,        DOUBLE_TEAM,  REFLECT,      BIDE,         FIRE_BLAST,   \
+	     SWIFT,        SKULL_BASH,   REST,         THUNDER_WAVE, SUBSTITUTE,   \
+	     SURF,         STRENGTH
+	; end
+
+	db 0 ; padding

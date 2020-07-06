@@ -1,28 +1,25 @@
-db DEX_JYNX ; pokedex id
-db 65 ; base hp
-db 50 ; base attack
-db 35 ; base defense
-db 95 ; base speed
-db 95 ; base special
-db ICE ; species type 1
-db PSYCHIC ; species type 2
-db 45 ; catch rate
-db 137 ; base exp yield
-INCBIN "gfx/pokemon/front/jynx.pic",0,1 ; 66, sprite dimensions
-dw JynxPicFront
-dw JynxPicBack
-; attacks known at lvl 0
-db POUND
-db LOVELY_KISS
-db 0
-db 0
-db 0 ; growth rate
-; learnset
-	tmlearn 1,5,6,8
-	tmlearn 9,10,11,12,13,14,15
-	tmlearn 17,18,19,20
-	tmlearn 29,30,31,32
-	tmlearn 33,34,35,40
-	tmlearn 44,46
-	tmlearn 50
-db 0 ; padding
+	db DEX_JYNX ; pokedex id
+
+	db  65,  50,  35,  95,  95
+	;   hp  atk  def  spd  spc
+
+	db ICE, PSYCHIC ; type
+	db 45 ; catch rate
+	db 137 ; base exp
+
+	INCBIN "gfx/pokemon/front/jynx.pic", 0, 1 ; sprite dimensions
+	dw JynxPicFront, JynxPicBack
+
+	db POUND, LOVELY_KISS, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 0 ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
+	     HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
+	     PSYCHIC_M,    TELEPORT,     MIMIC,        DOUBLE_TEAM,  REFLECT,      \
+	     BIDE,         METRONOME,    SKULL_BASH,   REST,         PSYWAVE,      \
+	     SUBSTITUTE
+	; end
+
+	db 0 ; padding

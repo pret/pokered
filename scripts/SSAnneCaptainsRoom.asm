@@ -22,7 +22,7 @@ SSAnne7Text1:
 	call PrintText
 	ld hl, ReceivingHM01Text
 	call PrintText
-	lb bc, HM_01, 1
+	lb bc, HM_CUT, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHM01Text

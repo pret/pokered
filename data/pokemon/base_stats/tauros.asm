@@ -1,28 +1,24 @@
-db DEX_TAUROS ; pokedex id
-db 75 ; base hp
-db 100 ; base attack
-db 95 ; base defense
-db 110 ; base speed
-db 70 ; base special
-db NORMAL ; species type 1
-db NORMAL ; species type 2
-db 45 ; catch rate
-db 211 ; base exp yield
-INCBIN "gfx/pokemon/front/tauros.pic",0,1 ; 77, sprite dimensions
-dw TaurosPicFront
-dw TaurosPicBack
-; attacks known at lvl 0
-db TACKLE
-db 0
-db 0
-db 0
-db 5 ; growth rate
-; learnset
-	tmlearn 6,7,8
-	tmlearn 9,10,13,14,15
-	tmlearn 20,24
-	tmlearn 25,26,27,31,32
-	tmlearn 34,38,40
-	tmlearn 44
-	tmlearn 50,54
-db 0 ; padding
+	db DEX_TAUROS ; pokedex id
+
+	db  75, 100,  95, 110,  70
+	;   hp  atk  def  spd  spc
+
+	db NORMAL, NORMAL ; type
+	db 45 ; catch rate
+	db 211 ; base exp
+
+	INCBIN "gfx/pokemon/front/tauros.pic", 0, 1 ; sprite dimensions
+	dw TaurosPicFront, TaurosPicBack
+
+	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+	db 5 ; growth rate
+
+	; tm/hm learnset
+	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
+	     ICE_BEAM,     BLIZZARD,     HYPER_BEAM,   RAGE,         THUNDERBOLT,  \
+	     THUNDER,      EARTHQUAKE,   FISSURE,      MIMIC,        DOUBLE_TEAM,  \
+	     BIDE,         FIRE_BLAST,   SKULL_BASH,   REST,         SUBSTITUTE,   \
+	     STRENGTH
+	; end
+
+	db 0 ; padding

@@ -22,7 +22,7 @@ SilphCo7F_Object:
 	object SPRITE_ROCKET, 19, 14, STAY, RIGHT, 8, OPP_ROCKET, 34
 	object SPRITE_BLUE, 3, 7, STAY, UP, 9 ; person
 	object SPRITE_BALL, 1, 9, STAY, NONE, 10, CALCIUM
-	object SPRITE_BALL, 24, 11, STAY, NONE, 11, TM_03
+	object SPRITE_BALL, 24, 11, STAY, NONE, 11, TM_SWORDS_DANCE
 
 	; warp-to
 	warp_to 16, 0, SILPH_CO_7F_WIDTH ; SILPH_CO_8F
