@@ -6,7 +6,7 @@ INCLUDE "macros/wram.asm"
 INCLUDE "vram.asm"
 
 
-SECTION "WRAM Bank 0", WRAM0
+SECTION "WRAM", WRAM0
 
 wUnusedC000::
 	ds 1

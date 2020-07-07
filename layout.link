@@ -33,41 +33,33 @@ ROM0
 	"Header"
 	org $150
 	"Home"
-
 ROMX $1
 	"bank1"
-
 ROMX $2
 	"Sound Effect Headers 1"
 	"Music Headers 1"
 	"Sound Effects 1"
 	"Audio Engine 1"
 	"Music 1"
-
 ROMX $3
 	"bank3"
-
 ROMX $4
 	"NPC Sprites 1"
-	"Graphics (BANK 4)"
-	"Battle (BANK 4)"
-
+	"Font Graphics"
+	"Battle Engine 1"
 ROMX $5
 	"NPC Sprites 2"
-	"Battle (BANK 5)"
-
+	"Battle Engine 2"
 ROMX $6
 	"Maps 1"
-	"bank6_1"
+	"Play Time"
 	"Maps 2"
-	"bank6_2"
-
+	"Doors and Ledges"
 ROMX $7
 	"Maps 3"
-	"bank7_1"
+	"Pokémon Names"
 	"Maps 4"
-	"bank7_2"
-
+	"Hidden Objects 1"
 ROMX $8
 	"Sound Effect Headers 2"
 	"Music Headers 2"
@@ -76,172 +68,131 @@ ROMX $8
 	"Bill's PC"
 	"Audio Engine 2"
 	"Music 2"
-
 ROMX $9
 	"Pics 1"
-	"Battle (BANK 9)"
-
+	"Battle Engine 3"
 ROMX $A
 	"Pics 2"
-	"Battle (BANK A)"
-
+	"Battle Engine 4"
 ROMX $B
 	"Pics 3"
-	"Battle (BANK B)"
-
+	"Battle Engine 5"
 ROMX $C
 	"Pics 4"
-	"Battle (BANK C)"
-
+	"Battle Engine 6"
 ROMX $D
 	"Pics 5"
-	"Battle (BANK D)"
-
+	"Slot Machines"
 ROMX $E
-	"bankE"
-
+	"Battle Engine 7"
 ROMX $F
-	"bankF"
-
+	"Battle Core"
 ROMX $10
 	"bank10"
-
 ROMX $11
 	"Maps 5"
-	"bank11_1"
+	"Pokédex Rating"
 	"Maps 6"
-	"bank11_2"
-
+	"Hidden Objects Core"
 ROMX $12
 	"Maps 7"
-	"bank12"
+	"Screen Effects"
 	"Maps 8"
-
 ROMX $13
 	"Pics 6"
 	"Maps 9"
-	"bank13"
-
+	"Predefs"
 ROMX $14
 	"Maps 10"
-	"bank14"
-
+	"Battle Engine 8"
+	"Hidden Objects 2"
 ROMX $15
 	"Maps 11"
-	"bank15_1"
+	"Battle Engine 9"
 	"Maps 12"
-	"bank15_2"
-
+	"Diploma"
+	"Trainer Sight"
 ROMX $16
 	"Maps 13"
-	"bank16_1"
+	"Battle Engine 10"
 	"Maps 14"
-	"bank16_2"
-
+	"Saffron Guards"
 ROMX $17
 	"Maps 15"
-	"bank17_1"
+	"Starter Dex"
 	"Maps 16"
-	"bank17_2"
-
+	"Hidden Objects 3"
 ROMX $18
 	"Maps 17"
-	"bank18_1"
+	"Cinnabar Lab Fossils"
 	"Maps 18"
-	"bank18_2"
-
+	"Hidden Objects 4"
 ROMX $19
 	"Tilesets 1"
-
 ROMX $1A
-	"bank1A"
+	"Battle Engine 11"
 	"Tilesets 2"
-
 ROMX $1B
 	"Tilesets 3"
-
 ROMX $1C
 	"bank1C"
-
 ROMX $1D
 	"Maps 19"
-	"bank1D_1"
+	"Itemfinder 1"
 	"Maps 20"
-	"bank1D_2"
+	"Vending Machine"
 	"Maps 21"
-	"bank1D_3"
-
+	"Itemfinder 2"
 ROMX $1E
 	"bank1E"
-
 ROMX $1F
 	"Sound Effect Headers 3"
 	"Music Headers 3"
 	"Sound Effects 3"
 	"Audio Engine 3"
 	"Music 3"
-
 ROMX $20
 	"Text 1"
-
 ROMX $21
 	"Text 2"
-
 ROMX $22
 	"Text 3"
-
 ROMX $23
 	"Text 4"
-
 ROMX $24
 	"Text 5"
-
 ROMX $25
 	"Text 6"
-
 ROMX $26
 	"Text 7"
-
 ROMX $27
 	"Text 8"
-
 ROMX $28
 	"Text 9"
-
 ROMX $29
 	"Text 10"
-
 ROMX $2A
 	"Text 11"
-
 ROMX $2B
-	"Pokedex Text"
-
+	"Pokédex Text"
 ROMX $2C
 	"Move Names"
-
 WRAM0
-	"WRAM Bank 0"
+	"WRAM"
 	org $c100
 	"Sprite State Data"
 	"OAM Buffer"
 	org $dfff
 	"Stack"
-
 VRAM
 	"VRAM"
-
 SRAM $0
 	"Sprite Buffers"
-
 SRAM $1
 	"Save Data"
-
 SRAM $2
 	"Saved Boxes 1"
-
 SRAM $3
 	"Saved Boxes 2"
-
 HRAM
 	"HRAM"
