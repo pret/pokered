@@ -69,14 +69,14 @@ MoveBoulderDustFunctionPointerTable:
 	dw AdjustOAMBlockXPos
 
 LoadSmokeTileFourTimes::
-	ld hl, vChars1 + $7c0
-	ld c, $4
+	ld hl, vChars1 tile $7c
+	ld c, 4
 .loop
 	push bc
 	push hl
 	call LoadSmokeTile
 	pop hl
-	ld bc, $10
+	ld bc, 1 tiles
 	add hl, bc
 	pop bc
 	dec c

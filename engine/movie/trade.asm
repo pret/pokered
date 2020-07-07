@@ -157,12 +157,12 @@ LoadTradingGFXAndMonNames:
 	call Trade_ClearTileMap
 	call DisableLCD
 	ld hl, TradingAnimationGraphics
-	ld de, vChars2 + $310
+	ld de, vChars2 tile $31
 	ld bc, TradingAnimationGraphicsEnd - TradingAnimationGraphics
 	ld a, BANK(TradingAnimationGraphics)
 	call FarCopyData2
 	ld hl, TradingAnimationGraphics2
-	ld de, vSprites + $7c0
+	ld de, vSprites tile $7c
 	ld bc, TradingAnimationGraphics2End - TradingAnimationGraphics2
 	ld a, BANK(TradingAnimationGraphics2)
 	call FarCopyData2

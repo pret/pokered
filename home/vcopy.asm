@@ -393,7 +393,7 @@ UpdateMovingBgTiles::
 
 ; water
 
-	ld hl, vTileset + $14 * $10
+	ld hl, vTileset tile $14
 	ld c, $10
 
 	ld a, [wMovingBGTilesCounter2]
@@ -438,7 +438,7 @@ UpdateMovingBgTiles::
 	jr z, .copy
 	ld hl, FlowerTile3
 .copy
-	ld de, vTileset + $3 * $10
+	ld de, vTileset tile $03
 	ld c, $10
 .loop
 	ld a, [hli]

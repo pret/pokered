@@ -154,14 +154,12 @@ GetBattleTransitionID_IsDungeonMap:
 INCLUDE "data/maps/dungeon_maps.asm"
 
 LoadBattleTransitionTile:
-	ld hl, vChars1 + $7f0
+	ld hl, vChars1 tile $7f
 	ld de, BattleTransitionTile
-	lb bc, BANK(BattleTransitionTile), (BattleTransitionTileEnd - BattleTransitionTile) / $10
+	lb bc, BANK(BattleTransitionTile), 1
 	jp CopyVideoData
 
-BattleTransitionTile:
-	INCBIN "gfx/overworld/battle_transition.2bpp"
-BattleTransitionTileEnd:
+BattleTransitionTile: INCBIN "gfx/overworld/battle_transition.2bpp"
 
 BattleTransition_BlackScreen:
 	ld a, $ff

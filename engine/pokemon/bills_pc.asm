@@ -114,9 +114,9 @@ BillsPC_::
 BillsPCMenu:
 	ld a, [wParentMenuItem]
 	ld [wCurrentMenuItem], a
-	ld hl, vChars2 + $780
+	ld hl, vChars2 tile $78
 	ld de, PokeballTileGraphics
-	lb bc, BANK(PokeballTileGraphics), $01
+	lb bc, BANK(PokeballTileGraphics), 1
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	hlcoord 0, 0

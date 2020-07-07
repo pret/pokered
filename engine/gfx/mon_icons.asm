@@ -201,11 +201,11 @@ UnusedPartyMonSpriteFunction:
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
-	ld hl, vSprites
+	ld hl, vSprites tile $00
 	call .LoadTilePatterns
 	pop af
 	add $54
-	ld hl, vSprites + $40
+	ld hl, vSprites tile $04
 	call .LoadTilePatterns
 	xor a
 	ld [wMonPartySpriteSpecies], a

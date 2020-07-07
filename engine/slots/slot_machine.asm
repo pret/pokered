@@ -850,17 +850,17 @@ LoadSlotMachineTiles:
 	call DisableLCD
 	ld hl, SlotMachineTiles2
 	ld de, vChars0
-	ld bc, $1c0
+	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineTiles1
 	ld de, vChars2
-	ld bc, $250
+	ld bc, SlotMachineTiles1End - SlotMachineTiles1
 	ld a, BANK(SlotMachineTiles1)
 	call FarCopyData2
 	ld hl, SlotMachineTiles2
-	ld de, vChars2 + $250
-	ld bc, $1c0
+	ld de, vChars2 tile $25
+	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
@@ -890,3 +890,4 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/slots/blue_slots_1.2bpp"
 ENDC
+SlotMachineTiles1End:

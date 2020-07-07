@@ -3,16 +3,16 @@ LoadShootingStarGraphics:
 	ldh [rOBP0], a
 	ld a, $a4
 	ldh [rOBP1], a
-	ld de, AnimationTileset2 + $30 ; star tile (top left quadrant)
-	ld hl, vChars1 + $200
-	lb bc, BANK(AnimationTileset2), $01
+	ld de, AnimationTileset2 tile 3 ; star tile (top left quadrant)
+	ld hl, vChars1 tile $20
+	lb bc, BANK(AnimationTileset2), 1
 	call CopyVideoData
-	ld de, AnimationTileset2 + $130 ; star tile (bottom left quadrant)
-	ld hl, vChars1 + $210
-	lb bc, BANK(AnimationTileset2), $01
+	ld de, AnimationTileset2 tile 19 ; star tile (bottom left quadrant)
+	ld hl, vChars1 tile $21
+	lb bc, BANK(AnimationTileset2), 1
 	call CopyVideoData
 	ld de, FallingStar
-	ld hl, vChars1 + $220
+	ld hl, vChars1 tile $22
 	lb bc, BANK(FallingStar), (FallingStarEnd - FallingStar) / $10
 	call CopyVideoData
 	ld hl, GameFreakLogoOAMData

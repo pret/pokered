@@ -5,14 +5,14 @@ HallOfFamePC:
 	call DelayFrames
 	call DisableLCD
 	ld hl, vFont
-	ld bc, $800 / 2
+	ld bc, ($80 tiles) / 2
 	call ZeroMemory
-	ld hl, vChars2 + $600
-	ld bc, $200 / 2
+	ld hl, vChars2 tile $60
+	ld bc, ($20 tiles) / 2
 	call ZeroMemory
-	ld hl, vChars2 + $7e0
-	ld bc, $10
-	ld a, $ff
+	ld hl, vChars2 tile $7e
+	ld bc, 1 tiles
+	ld a, $ff ; solid black
 	call FillMemory
 	hlcoord 0, 0
 	call FillFourRowsWithBlack
@@ -245,7 +245,7 @@ Credits:
 	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx
-	ld hl, vChars2 + $600
+	ld hl, vChars2 tile $60
 	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
 	call CopyVideoData
 	hlcoord 4, 8

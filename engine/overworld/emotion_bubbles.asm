@@ -8,8 +8,8 @@ EmotionBubble:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, vChars1 + $780
-	lb bc, BANK(EmotionBubbles), $04
+	ld hl, vChars1 tile $78
+	lb bc, BANK(EmotionBubbles), 4
 	call CopyVideoData
 	ld a, [wUpdateSpritesEnabled]
 	push af

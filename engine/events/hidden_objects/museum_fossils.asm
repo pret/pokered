@@ -38,7 +38,7 @@ DisplayMonFrontSpriteInBox:
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld de, vChars1 + $310
+	ld de, vChars1 tile $31
 	call LoadMonFrontSprite
 	ld a, $80
 	ldh [hStartTileID], a

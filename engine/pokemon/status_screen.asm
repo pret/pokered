@@ -86,21 +86,21 @@ StatusScreen:
 	call UpdateSprites
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; source
-	ld hl, vChars2 + $6d0 ; dest
-	lb bc, BANK(BattleHudTiles1), $03
+	ld hl, vChars2 tile $6d ; dest
+	lb bc, BANK(BattleHudTiles1), 3
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2
-	ld hl, vChars2 + $780
-	lb bc, BANK(BattleHudTiles2), $01
+	ld hl, vChars2 tile $78
+	lb bc, BANK(BattleHudTiles2), 1
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3
-	ld hl, vChars2 + $760
-	lb bc, BANK(BattleHudTiles3), $02
-	call CopyVideoDataDouble ; ─┘
+	ld hl, vChars2 tile $76
+	lb bc, BANK(BattleHudTiles3), 2
+	call CopyVideoDataDouble ; ─ ┘
 	ld de, PTile
-	ld hl, vChars2 + $720
-	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
-	call CopyVideoDataDouble ; P (for PP), inline
+	ld hl, vChars2 tile $72
+	lb bc, BANK(PTile), 1
+	call CopyVideoDataDouble ; bold P (for PP)
 	ldh a, [hTilesetType]
 	push af
 	xor a
@@ -244,9 +244,7 @@ DrawLineBox:
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
-PTile:
-	INCBIN "gfx/font/P.1bpp"
-PTileEnd:
+PTile: INCBIN "gfx/font/P.1bpp"
 
 PrintStatsBox:
 	ld a, d

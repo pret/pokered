@@ -57,7 +57,7 @@ HandleLedges::
 INCLUDE "data/tilesets/ledge_tiles.asm"
 
 LoadHoppingShadowOAM:
-	ld hl, vChars1 + $7f0
+	ld hl, vChars1 tile $7f
 	ld de, LedgeHoppingShadow
 	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
 	call CopyVideoDataDouble

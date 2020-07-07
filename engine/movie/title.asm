@@ -36,27 +36,27 @@ DisplayTitleScreen:
 	call DisableLCD
 	call LoadFontTilePatterns
 	ld hl, NintendoCopyrightLogoGraphics
-	ld de, vTitleLogo2 + $100
-	ld bc, $50
+	ld de, vTitleLogo2 tile 16
+	ld bc, 5 tiles
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics
-	ld de, vTitleLogo2 + $100 + $50
-	ld bc, $90
+	ld de, vTitleLogo2 tile (16 + 5)
+	ld bc, 9 tiles
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics
 	ld de, vTitleLogo
-	ld bc, $600
+	ld bc, $60 tiles
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; first chunk
-	ld hl, PokemonLogoGraphics+$600
+	ld hl, PokemonLogoGraphics tile $60
 	ld de, vTitleLogo2
-	ld bc, $100
+	ld bc, $10 tiles
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX
-	ld de, vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
+	ld de, vChars2 tile $60 + (10 tiles - (Version_GFXEnd - Version_GFX) * 2) / 2
 	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
@@ -369,7 +369,7 @@ LoadCopyrightAndTextBoxTiles:
 
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
-	ld hl, vChars2 + $600
+	ld hl, vChars2 tile $60
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
 	hlcoord 2, 7

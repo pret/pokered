@@ -485,39 +485,39 @@ DrawTrainerInfo:
 	call TrainerInfo_DrawVerticalLine
 	hlcoord 1, 2
 	call TrainerInfo_DrawVerticalLine
-	ld hl, vChars2 + $70
-	ld de, vChars2
-	ld bc, $70 * 4
+	ld hl, vChars2 tile $07
+	ld de, vChars2 tile $00
+	ld bc, $1c tiles
 	call CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
-	ld de, vChars2 + $770
-	ld bc, $80
+	ld de, vChars2 tile $77
+	ld bc, 8 tiles
 	push bc
 	call TrainerInfo_FarCopyData
 	ld hl, BlankLeaderNames
-	ld de, vChars2 + $600
-	ld bc, $170
+	ld de, vChars2 tile $60
+	ld bc, $17 tiles
 	call TrainerInfo_FarCopyData
 	pop bc
 	ld hl, BadgeNumbersTileGraphics  ; badge number tile patterns
-	ld de, vChars1 + $580
+	ld de, vChars1 tile $58
 	call TrainerInfo_FarCopyData
 	ld hl, GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
-	ld de, vChars2 + $200
-	ld bc, $400
-	ld a, $03
+	ld de, vChars2 tile $20
+	ld bc, 8 * 8 tiles
+	ld a, BANK(GymLeaderFaceAndBadgeTileGraphics)
 	call FarCopyData2
 	ld hl, TextBoxGraphics
-	ld de, $d0
+	ld de, 13 tiles
 	add hl, de ; hl = colon tile pattern
-	ld de, vChars1 + $560
-	ld bc, $10
-	ld a, $04
+	ld de, vChars1 tile $56
+	ld bc, 1 tiles
+	ld a, BANK(TextBoxGraphics)
 	push bc
 	call FarCopyData2
 	pop bc
-	ld hl, TrainerInfoTextBoxTileGraphics + $80  ; background tile pattern
-	ld de, vChars1 + $570
+	ld hl, TrainerInfoTextBoxTileGraphics tile 8  ; background tile pattern
+	ld de, vChars1 tile $57
 	call TrainerInfo_FarCopyData
 	call EnableLCD
 	ld hl, wTrainerInfoTextBoxWidthPlus1

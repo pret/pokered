@@ -80,23 +80,23 @@ InitCutAnimOAM:
 	cp $52
 	jr z, .grass
 ; tree
-	ld de, Overworld_GFX + $2d0 ; cuttable tree sprite top row
-	ld hl, vChars1 + $7c0
-	lb bc, BANK(Overworld_GFX), $02
+	ld de, Overworld_GFX tile $2d ; cuttable tree sprite top row
+	ld hl, vChars1 tile $7c
+	lb bc, BANK(Overworld_GFX), 2
 	call CopyVideoData
-	ld de, Overworld_GFX + $3d0 ; cuttable tree sprite bottom row
-	ld hl, vChars1 + $7e0
-	lb bc, BANK(Overworld_GFX), $02
+	ld de, Overworld_GFX tile $3d ; cuttable tree sprite bottom row
+	ld hl, vChars1 tile $7e
+	lb bc, BANK(Overworld_GFX), 2
 	call CopyVideoData
 	jr WriteCutOrBoulderDustAnimationOAMBlock
 .grass
-	ld hl, vChars1 + $7c0
+	ld hl, vChars1 tile $7c
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 + $7d0
+	ld hl, vChars1 tile $7d
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 + $7e0
+	ld hl, vChars1 tile $7e
 	call LoadCutGrassAnimationTilePattern
-	ld hl, vChars1 + $7f0
+	ld hl, vChars1 tile $7f
 	call LoadCutGrassAnimationTilePattern
 	call WriteCutOrBoulderDustAnimationOAMBlock
 	ld hl, wOAMBuffer + $93
@@ -112,8 +112,8 @@ InitCutAnimOAM:
 	ret
 
 LoadCutGrassAnimationTilePattern:
-	ld de, AnimationTileset2 + $60 ; tile depicting a leaf
-	lb bc, BANK(AnimationTileset2), $01
+	ld de, AnimationTileset2 tile 6 ; tile depicting a leaf
+	lb bc, BANK(AnimationTileset2), 1
 	jp CopyVideoData
 
 WriteCutOrBoulderDustAnimationOAMBlock:

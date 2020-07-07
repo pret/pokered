@@ -341,7 +341,7 @@ LoadAnimationTileset:
 	ld e, a
 	ld a, [hl]
 	ld d, a ; de = address of tileset
-	ld hl, vSprites + $310
+	ld hl, vSprites tile $31
 	ld b, BANK(AnimationTileset1) ; ROM bank
 	ld a, [wTempTilesetNumTiles]
 	ld c, a ; number of tiles
@@ -373,6 +373,7 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/slots/blue_slots_2.2bpp"
 ENDC
+SlotMachineTiles2End:
 
 MoveAnimation:
 	push hl

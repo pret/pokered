@@ -130,25 +130,25 @@ LoadMapSpriteTilePatterns:
 	push de
 	push bc
 	ld hl, vNPCSprites ; VRAM base address
-	ld bc, $c0 ; number of bytes per VRAM slot
+	ld bc, 12 tiles ; number of bytes per VRAM slot
 	ldh a, [hVRAMSlot]
 	cp 11 ; is it a 4-tile sprite?
 	jr nc, .fourTileSpriteVRAMAddr
 	ld d, a
 	dec d
-; hl = vSprites + [hVRAMSlot] * $C0 (the number of bytes in 12 tiles)
+; hl = vSprites + [hVRAMSlot] * 12 tiles
 .calculateVRAMAddrLoop
 	add hl, bc
 	dec d
 	jr nz, .calculateVRAMAddrLoop
 	jr .loadStillTilePattern
 .fourTileSpriteVRAMAddr
-	ld hl, vSprites + $7c0 ; address for second 4-tile sprite
+	ld hl, vSprites tile $7c ; address for second 4-tile sprite
 	ldh a, [hFourTileSpriteCount]
 	and a
 	jr nz, .loadStillTilePattern
 ; if it's the first 4-tile sprite
-	ld hl, vSprites + $780 ; address for first 4-tile sprite
+	ld hl, vSprites tile $78 ; address for first 4-tile sprite
 	inc a
 	ldh [hFourTileSpriteCount], a
 .loadStillTilePattern
