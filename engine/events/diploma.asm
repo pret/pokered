@@ -38,7 +38,7 @@ DisplayDiploma::
 	coord hl, 10, 4
 	ld de, wPlayerName
 	call PlaceString
-	callba DrawPlayerCharacter
+	farcall DrawPlayerCharacter
 
 ; Move the player 33 pixels right and set the priority bit so he appears
 ; behind the background layer.
@@ -56,7 +56,7 @@ DisplayDiploma::
 	jr nz, .adjustPlayerGfxLoop
 
 	call EnableLCD
-	callba LoadTrainerInfoTextBoxTiles
+	farcall LoadTrainerInfoTextBoxTiles
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
 	call Delay3

@@ -45,7 +45,7 @@ VermilionDock_1db9b:
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
-	callba LoadSmokeTileFourTimes
+	farcall LoadSmokeTileFourTimes
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120

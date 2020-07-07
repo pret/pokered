@@ -359,7 +359,7 @@ TradeCenter_SelectMon:
 .displayEnemyMonStats
 	ld a, INIT_ENEMYOT_LIST
 	ld [wInitListType], a
-	callab InitList ; the list isn't used
+	callfar InitList ; the list isn't used
 	ld hl, wEnemyMons
 	call TradeCenter_DisplayStats
 	jp .getNewInput
@@ -418,7 +418,7 @@ TradeCenter_SelectMon:
 ; unreachable code
 	ld a, INIT_PLAYEROT_LIST
 	ld [wInitListType], a
-	callab InitList ; the list isn't used
+	callfar InitList ; the list isn't used
 	call TradeCenter_DisplayStats
 	jp .getNewInput
 .playerMonMenu_ANotPressed
@@ -513,7 +513,7 @@ TradeCenter_SelectMon:
 	ld [wCurrentMenuItem], a
 	ld a, INIT_PLAYEROT_LIST
 	ld [wInitListType], a
-	callab InitList ; the list isn't used
+	callfar InitList ; the list isn't used
 	call TradeCenter_DisplayStats
 	call LoadScreenTilesFromBuffer1
 	jp .playerMonMenu
@@ -588,7 +588,7 @@ ReturnToCableClubRoom:
 	dec a
 	ld [wDestinationWarpID], a
 	call LoadMapData
-	callba ClearVariablesOnEnterMap
+	farcall ClearVariablesOnEnterMap
 	pop hl
 	pop af
 	ld [hl], a
@@ -845,7 +845,7 @@ TradeCenter_Trade:
 .usingExternalClock
 	predef ExternalClockTradeAnim
 .tradeCompleted
-	callab TryEvolvingMon
+	callfar TryEvolvingMon
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble

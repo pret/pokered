@@ -174,7 +174,7 @@ CeruleanCityScript2:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
@@ -310,7 +310,7 @@ CeruleanCityText2:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ReceivedTM28Text
 	call PrintText
-	callba CeruleanHideRocket
+	farcall CeruleanHideRocket
 .Done
 	jp TextScriptEnd
 

@@ -79,7 +79,7 @@ PokemonTower2Script1:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a

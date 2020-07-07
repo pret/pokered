@@ -108,7 +108,7 @@ GaryScript3:
 	ret
 
 GaryScript4:
-	callba Music_Cities1AlternateTempo
+	farcall Music_Cities1AlternateTempo
 	ld a, $2
 	ldh [hSpriteIndexOrTextID], a
 	call GaryScript_760c8

@@ -206,7 +206,7 @@ CountSetBits::
 ; subtracts the amount the player paid from their money
 ; OUTPUT: carry = 0(success) or 1(fail because there is not enough money)
 SubtractAmountPaidFromMoney::
-	jpba SubtractAmountPaidFromMoney_
+	farjp SubtractAmountPaidFromMoney_
 
 ; adds the amount the player sold to their money
 AddAmountSoldToMoney::
@@ -296,7 +296,7 @@ ReloadTilesetTilePatterns::
 ChooseFlyDestination::
 	ld hl, wd72e
 	res 4, [hl]
-	jpba LoadTownMap_Fly
+	farjp LoadTownMap_Fly
 
 ; causes the text box to close without waiting for a button press after displaying text
 DisableWaitingAfterTextDisplay::
@@ -314,7 +314,7 @@ DisableWaitingAfterTextDisplay::
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
 UseItem::
-	jpba UseItem_
+	farjp UseItem_
 
 ; confirms the item toss and then tosses the item
 ; INPUT:
@@ -348,7 +348,7 @@ IsKeyItem::
 	push hl
 	push de
 	push bc
-	callba IsKeyItem_
+	farcall IsKeyItem_
 	pop bc
 	pop de
 	pop hl
@@ -418,10 +418,10 @@ RunNPCMovementScript::
 	dw PewterMuseumGuyMovementScriptPointerTable
 	dw PewterGymGuyMovementScriptPointerTable
 .playerStepOutFromDoor
-	jpba PlayerStepOutFromDoor
+	farjp PlayerStepOutFromDoor
 
 EndNPCMovementScript::
-	jpba _EndNPCMovementScript
+	farjp _EndNPCMovementScript
 
 EmptyFunc2::
 	ret
@@ -502,7 +502,7 @@ IsItemInBag::
 
 DisplayPokedex::
 	ld [wd11e], a
-	jpba _DisplayPokedex
+	farjp _DisplayPokedex
 
 SetSpriteFacingDirectionAndDelay::
 	call SetSpriteFacingDirection
@@ -711,7 +711,7 @@ GetTrainerInformation::
 	ret
 
 GetTrainerName::
-	jpba GetTrainerName_
+	farjp GetTrainerName_
 
 HasEnoughMoney::
 ; Check if the player has at least as much
@@ -1107,7 +1107,7 @@ ManualTextScroll::
 Multiply::
 	push hl
 	push bc
-	callab _Multiply
+	callfar _Multiply
 	pop bc
 	pop hl
 	ret
@@ -1296,7 +1296,7 @@ HandleMenuInput_::
 	ld a, [wPartyMenuAnimMonEnabled]
 	and a ; is it a pokemon selection menu?
 	jr z, .getJoypadState
-	callba AnimatePartyMon ; shake mini sprite of selected pokemon
+	farcall AnimatePartyMon ; shake mini sprite of selected pokemon
 .getJoypadState
 	pop hl
 	call JoypadLowSensitivity
@@ -1687,7 +1687,7 @@ ReloadMapSpriteTilePatterns::
 	xor a
 	ld [wSpriteSetID], a
 	call DisableLCD
-	callba InitMapSprites
+	farcall InitMapSprites
 	call EnableLCD
 	pop hl
 	pop af
@@ -1721,7 +1721,7 @@ GivePokemon::
 	ld [wCurEnemyLVL], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	jpba _GivePokemon
+	farjp _GivePokemon
 
 Random::
 ; Return a random number in a.
@@ -1729,7 +1729,7 @@ Random::
 	push hl
 	push de
 	push bc
-	callba Random_
+	farcall Random_
 	ldh a, [hRandomAdd]
 	pop bc
 	pop de
@@ -1739,7 +1739,7 @@ Random::
 INCLUDE "home/predef.asm"
 
 UpdateCinnabarGymGateTileBlocks::
-	jpba UpdateCinnabarGymGateTileBlocks_
+	farjp UpdateCinnabarGymGateTileBlocks_
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ldh a, [hLoadedROMBank]
@@ -1765,7 +1765,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	xor a
 	jr .done
 .hiddenObjectNotFound
-	callba PrintBookshelfText
+	farcall PrintBookshelfText
 	ldh a, [hFFDB]
 	and a
 	jr z, .done

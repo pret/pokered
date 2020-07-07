@@ -117,7 +117,7 @@ GainExperience:
 	ld [wd0b5], a
 	call GetMonHeader
 	ld d, MAX_LEVEL
-	callab CalcExperience ; get max exp
+	callfar CalcExperience ; get max exp
 ; compare max exp with current exp
 	ldh a, [hExperience]
 	ld b, a
@@ -155,7 +155,7 @@ GainExperience:
 	ld bc, wPartyMon1Level - wPartyMon1Exp
 	add hl, bc
 	push hl
-	callba CalcLevelFromExperience
+	farcall CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
 	cp d
@@ -233,11 +233,11 @@ GainExperience:
 .recalcStatChanges
 	xor a ; battle mon
 	ld [wCalculateWhoseStats], a
-	callab CalculateModifiedStats
-	callab ApplyBurnAndParalysisPenaltiesToPlayer
-	callab ApplyBadgeStatBoosts
-	callab DrawPlayerHUDAndHPBar
-	callab PrintEmptyString
+	callfar CalculateModifiedStats
+	callfar ApplyBurnAndParalysisPenaltiesToPlayer
+	callfar ApplyBadgeStatBoosts
+	callfar DrawPlayerHUDAndHPBar
+	callfar PrintEmptyString
 	call SaveScreenTilesToBuffer1
 .printGrewLevelText
 	ld hl, GrewLevelText
@@ -246,7 +246,7 @@ GainExperience:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	ld d, $1
-	callab PrintStatsBox
+	callfar PrintStatsBox
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
 	xor a ; PLAYER_PARTY_DATA

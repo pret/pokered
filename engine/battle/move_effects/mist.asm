@@ -8,11 +8,11 @@ MistEffect_:
 	bit PROTECTED_BY_MIST, [hl] ; is mon protected by mist?
 	jr nz, .mistAlreadyInUse
 	set PROTECTED_BY_MIST, [hl] ; mon is now protected by mist
-	callab PlayCurrentMoveAnimation
+	callfar PlayCurrentMoveAnimation
 	ld hl, ShroudedInMistText
 	jp PrintText
 .mistAlreadyInUse
-	jpab PrintButItFailedText_
+	jpfar PrintButItFailedText_
 
 ShroudedInMistText:
 	text_far _ShroudedInMistText

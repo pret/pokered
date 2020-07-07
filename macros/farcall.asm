@@ -1,24 +1,22 @@
-farcall EQUS "callba"
-
-callba: MACRO
+farcall: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	call Bankswitch
 ENDM
 
-callab: MACRO
+callfar: MACRO
 	ld hl, \1
 	ld b, BANK(\1)
 	call Bankswitch
 ENDM
 
-jpba: MACRO
+farjp: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	jp Bankswitch
 ENDM
 
-jpab: MACRO
+jpfar: MACRO
 	ld hl, \1
 	ld b, BANK(\1)
 	jp Bankswitch

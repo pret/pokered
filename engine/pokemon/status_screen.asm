@@ -310,7 +310,7 @@ StatusScreen2:
 	ld de, wMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	callab FormatMovesString
+	callfar FormatMovesString
 	coord hl, 9, 2
 	lb bc, 5, 10
 	call ClearScreenArea ; Clear under name
@@ -356,7 +356,7 @@ StatusScreen2:
 	ld a, b
 	ld [hl], a
 	push hl
-	callab GetMaxPP
+	callfar GetMaxPP
 	pop hl
 	pop af
 	ld [hl], a
@@ -445,7 +445,7 @@ CalcExpToLevelUp:
 	jr z, .atMaxLevel
 	inc a
 	ld d, a
-	callab CalcExperience
+	callfar CalcExperience
 	ld hl, wLoadedMonExp + 2
 	ldh a, [hExperience + 2]
 	sub [hl]

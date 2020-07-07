@@ -222,7 +222,7 @@ SilphCo7Script4:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld de, MovementData_51d1d
 	ld a, [wcf0d]
 	cp $1

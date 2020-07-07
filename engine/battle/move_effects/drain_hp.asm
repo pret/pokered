@@ -81,7 +81,7 @@ DrainHPEffect_:
 	predef UpdateHPBar2
 	predef DrawPlayerHUDAndHPBar
 	predef DrawEnemyHUDAndHPBar
-	callab ReadPlayerMonCurHPAndStatus
+	callfar ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText
 	ldh a, [hWhoseTurn]
 	and a

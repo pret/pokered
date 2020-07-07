@@ -148,7 +148,7 @@ SSAnne2Script2:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $3
 	ld [wSSAnne2FCurScript], a
 	ret

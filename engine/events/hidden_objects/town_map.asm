@@ -12,7 +12,7 @@ TownMapText::
 	inc a
 	ldh [hAutoBGTransferEnabled], a
 	call LoadFontTilePatterns
-	callba DisplayTownMap
+	farcall DisplayTownMap
 	ld hl, wd730
 	res 6, [hl]
 	ld de, TextScriptEnd

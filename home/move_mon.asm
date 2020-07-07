@@ -3,13 +3,13 @@
 ; [wRemoveMonFromBox] == 0 specifies the party.
 ; [wRemoveMonFromBox] != 0 specifies the current box.
 RemovePokemon::
-	jpab _RemovePokemon
+	jpfar _RemovePokemon
 
 AddPartyMon::
 	push hl
 	push de
 	push bc
-	callba _AddPartyMon
+	farcall _AddPartyMon
 	pop bc
 	pop de
 	pop hl

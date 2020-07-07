@@ -311,7 +311,7 @@ LoadIntroGraphics:
 PlayShootingStar:
 	ld b, SET_PAL_GAME_FREAK_INTRO
 	call RunPaletteCommand
-	callba LoadCopyrightAndTextBoxTiles
+	farcall LoadCopyrightAndTextBoxTiles
 	ldPal a, BLACK, DARK_GRAY, LIGHT_GRAY, WHITE
 	ldh [rBGP], a
 	ld c, 180
@@ -328,7 +328,7 @@ PlayShootingStar:
 	set 3, [hl]
 	ld c, 64
 	call DelayFrames
-	callba AnimateShootingStar
+	farcall AnimateShootingStar
 	push af
 	pop af
 	jr c, .next ; skip the delay if the user interrupted the animation

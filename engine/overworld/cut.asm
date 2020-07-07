@@ -57,7 +57,7 @@ UsedCut:
 	ld de, CutTreeBlockSwaps
 	call ReplaceTreeTileBlock
 	call RedrawMapView
-	callba AnimCut
+	farcall AnimCut
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	ld a, SFX_CUT

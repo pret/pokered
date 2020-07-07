@@ -26,22 +26,22 @@ ParalyzeEffect_:
 	jr z, .doesntAffect
 .hitTest
 	push hl
-	callab MoveHitTest
+	callfar MoveHitTest
 	pop hl
 	ld a, [wMoveMissed]
 	and a
 	jr nz, .didntAffect
 	set PAR, [hl]
-	callab QuarterSpeedDueToParalysis
+	callfar QuarterSpeedDueToParalysis
 	ld c, 30
 	call DelayFrames
-	callab PlayCurrentMoveAnimation
-	jpab PrintMayNotAttackText
+	callfar PlayCurrentMoveAnimation
+	jpfar PrintMayNotAttackText
 .didntAffect
 	ld c, 50
 	call DelayFrames
-	jpab PrintDidntAffectText
+	jpfar PrintDidntAffectText
 .doesntAffect
 	ld c, 50
 	call DelayFrames
-	jpab PrintDoesntAffectText
+	jpfar PrintDoesntAffectText

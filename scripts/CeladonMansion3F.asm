@@ -49,7 +49,7 @@ DirectorText:
 	text_far _CompletedDexText
 	text_promptbutton
 	text_asm
-	callab DisplayDiploma
+	callfar DisplayDiploma
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd

@@ -42,7 +42,7 @@ DisplayPokemartDialogue_::
 	ld [wPrintItemPrices], a
 	ld a, INIT_BAG_ITEM_LIST
 	ld [wInitListType], a
-	callab InitList
+	callfar InitList
 
 	ld a, [wNumBagItems]
 	and a
@@ -126,7 +126,7 @@ DisplayPokemartDialogue_::
 	ld [wPrintItemPrices], a
 	ld a, INIT_OTHER_ITEM_LIST
 	ld [wInitListType], a
-	callab InitList
+	callfar InitList
 
 	ld hl, PokemartBuyingGreetingText
 	call PrintText

@@ -92,7 +92,7 @@ DisplayNamingScreen:
 	call RunPaletteCommand
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	callba LoadMonPartySpriteGfx
+	farcall LoadMonPartySpriteGfx
 	coord hl, 0, 4
 	ld b, 9
 	ld c, 18
@@ -128,7 +128,7 @@ DisplayNamingScreen:
 .inputLoop
 	ld a, [wCurrentMenuItem]
 	push af
-	callba AnimatePartyMon_ForceSpeed1
+	farcall AnimatePartyMon_ForceSpeed1
 	pop af
 	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
@@ -172,7 +172,7 @@ DisplayNamingScreen:
 	ld a, [wIsInBattle]
 	and a
 	jp z, LoadTextBoxTilePatterns
-	jpab LoadHudTilePatterns
+	jpfar LoadHudTilePatterns
 
 .namingScreenButtonFunctions
 	dw .dPadReturnPoint
@@ -461,7 +461,7 @@ PrintNamingText:
 	ld a, [wcf91]
 	ld [wMonPartySpriteSpecies], a
 	push af
-	callba WriteMonPartySpriteOAMBySpecies
+	farcall WriteMonPartySpriteOAMBySpecies
 	pop af
 	ld [wd11e], a
 	call GetMonName

@@ -219,7 +219,7 @@ ResetButtonPressedAndMapScript::
 
 ; calls TrainerWalkUpToPlayer
 TrainerWalkUpToPlayer_Bank0::
-	jpba TrainerWalkUpToPlayer
+	farjp TrainerWalkUpToPlayer
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters::
@@ -343,14 +343,14 @@ PrintEndBattleText::
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push hl
-	callba SaveTrainerName
+	farcall SaveTrainerName
 	ld hl, TrainerEndBattleText
 	call PrintText
 	pop hl
 	pop af
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	callba FreezeEnemyTrainerSprite
+	farcall FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
 
 GetSavedEndBattleTextPointer::

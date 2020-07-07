@@ -7,14 +7,14 @@ TryDoWildEncounter:
 	ld a, [wd736]
 	and a
 	ret nz
-	callab IsPlayerStandingOnDoorTileOrWarpTile
+	callfar IsPlayerStandingOnDoorTileOrWarpTile
 	jr nc, .notStandingOnDoorOrWarpTile
 .CantEncounter
 	ld a, $1
 	and a
 	ret
 .notStandingOnDoorOrWarpTile
-	callab IsPlayerJustOutsideMap
+	callfar IsPlayerJustOutsideMap
 	jr z, .CantEncounter
 	ld a, [wRepelRemainingSteps]
 	and a

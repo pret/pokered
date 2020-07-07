@@ -6,7 +6,7 @@ StartSlotMachine:
 	jr z, .printOutToLunch
 	cp $ff
 	jr z, .printSomeonesKeys
-	callba AbleToPlaySlotsCheck
+	farcall AbleToPlaySlotsCheck
 	ld a, [wCanPlaySlots]
 	and a
 	ret z

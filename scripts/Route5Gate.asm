@@ -26,7 +26,7 @@ Route5GateScript0:
 	ld [wPlayerMovingDirection], a
 	xor a
 	ldh [hJoyHeld], a
-	callba RemoveGuardDrink
+	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1df82
@@ -73,7 +73,7 @@ Route5GateText1:
 	ld a, [wd728]
 	bit 6, a
 	jr nz, .asm_88856
-	callba RemoveGuardDrink
+	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_768a2

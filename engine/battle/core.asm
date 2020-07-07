@@ -97,7 +97,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld b, SET_PAL_BATTLE
 	call RunPaletteCommand
 	call HideSprites
-	jpab PrintBeginningBattleText
+	jpfar PrintBeginningBattleText
 
 ; when a battle is starting, silhouettes of the player's pic and the enemy's pic are slid onto the screen
 ; the lower of the player's pic (his body) is part of the background, but his head is a sprite
@@ -178,7 +178,7 @@ StartBattle:
 	ld hl, .outOfSafariBallsText
 	jp PrintText
 .notOutOfSafariBalls
-	callab PrintSafariZoneBattleText
+	callfar PrintSafariZoneBattleText
 	ld a, [wEnemyMonSpeed + 1]
 	add a
 	ld b, a ; init b (which is later compared with random value) to (enemy speed % 256) * 2
@@ -267,7 +267,7 @@ EnemyRan:
 	call PlaySoundWaitForCurrent
 	xor a
 	ldh [hWhoseTurn], a
-	jpab AnimationSlideEnemyMonOff
+	jpfar AnimationSlideEnemyMonOff
 
 WildRanText:
 	text_far _WildRanText
@@ -365,7 +365,7 @@ MainInBattleLoop:
 	jr nz, .specialMoveNotUsed
 	ld [wPlayerSelectedMove], a
 .specialMoveNotUsed
-	callab SwitchEnemyMon
+	callfar SwitchEnemyMon
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
 	cp QUICK_ATTACK
@@ -413,7 +413,7 @@ MainInBattleLoop:
 .enemyMovesFirst
 	ld a, $1
 	ldh [hWhoseTurn], a
-	callab TrainerAI
+	callfar TrainerAI
 	jr c, .AIActionUsedEnemyFirst
 	call ExecuteEnemyMove
 	ld a, [wEscapedFromBattle]
@@ -451,7 +451,7 @@ MainInBattleLoop:
 	call DrawHUDsAndHPBars
 	ld a, $1
 	ldh [hWhoseTurn], a
-	callab TrainerAI
+	callfar TrainerAI
 	jr c, .AIActionUsedPlayerFirst
 	call ExecuteEnemyMove
 	ld a, [wEscapedFromBattle]
@@ -837,7 +837,7 @@ FaintEnemyPokemon:
 .giveExpToMonsThatFought
 	xor a
 	ld [wBoostExpByExpAll], a
-	callab GainExperience
+	callfar GainExperience
 	pop af
 	ret z ; return if no exp all
 
@@ -855,7 +855,7 @@ FaintEnemyPokemon:
 	jr nz, .gainExpFlagsLoop
 	ld a, b
 	ld [wPartyGainExpFlags], a
-	jpab GainExperience
+	jpfar GainExperience
 
 EnemyMonFaintedText:
 	text_far _EnemyMonFaintedText
@@ -893,7 +893,7 @@ ReplaceFaintedEnemyMon:
 	ld hl, wEnemyHPBarColor
 	ld e, $30
 	call GetBattleHealthBarColor
-	callab DrawEnemyPokeballs
+	callfar DrawEnemyPokeballs
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
@@ -1720,7 +1720,7 @@ LoadEnemyMonFromParty:
 	ret
 
 SendOutMon:
-	callab PrintSendOutMonMessage
+	callfar PrintSendOutMonMessage
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl] ; is enemy mon HP zero?
@@ -1816,7 +1816,7 @@ DrawPlayerHUDAndHPBar:
 	coord hl, 9, 7
 	lb bc, 5, 11
 	call ClearScreenArea
-	callab PlacePlayerHUDTiles
+	callfar PlacePlayerHUDTiles
 	coord hl, 18, 9
 	ld [hl], $73
 	ld de, wBattleMonNick
@@ -1877,7 +1877,7 @@ DrawEnemyHUDAndHPBar:
 	coord hl, 0, 0
 	lb bc, 4, 12
 	call ClearScreenArea
-	callab PlaceEnemyHUDTiles
+	callfar PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
 	coord hl, 1, 0
 	call CenterMonName
@@ -2411,7 +2411,7 @@ PartyMenuOrRockOrRun:
 ; fall through to SwitchPlayerMon
 
 SwitchPlayerMon:
-	callab RetreatMon
+	callfar RetreatMon
 	ld c, 50
 	call DelayFrames
 	call AnimateRetreatingPlayerMon
@@ -2464,7 +2464,7 @@ MoveSelectionMenu:
 	ld de, wMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	callab FormatMovesString
+	callfar FormatMovesString
 	ret
 
 .writemoves
@@ -2860,7 +2860,7 @@ PrintMenuItem:
 	ld [wWhichPokemon], a
 	ld a, BATTLE_MON_DATA
 	ld [wMonDataLocation], a
-	callab GetMaxPP
+	callfar GetMaxPP
 	ld hl, wCurrentMenuItem
 	ld c, [hl]
 	inc [hl]
@@ -2955,7 +2955,7 @@ SelectEnemyMove:
 	ld a, [wIsInBattle]
 	dec a
 	jr z, .chooseRandomMove ; wild encounter
-	callab AIEnemyTrainerChooseMoves
+	callfar AIEnemyTrainerChooseMoves
 .chooseRandomMove
 	push hl
 	call BattleRandom
@@ -3020,7 +3020,7 @@ LinkBattleExchangeData:
 	ld a, b
 .doExchange
 	ld [wSerialExchangeNybbleSendData], a
-	callab PrintWaitingText
+	callfar PrintWaitingText
 .syncLoop1
 	call Serial_ExchangeNybble
 	call DelayFrame
@@ -3196,7 +3196,7 @@ MirrorMoveCheck:
 .moveDidNotMiss
 	call ApplyAttackToEnemyPokemon
 	call PrintCriticalOHKOText
-	callab DisplayEffectiveness
+	callfar DisplayEffectiveness
 	ld a, 1
 	ld [wMoveDidntMiss], a
 .notDone
@@ -4988,7 +4988,7 @@ AttackSubstitute:
 	ldh a, [hWhoseTurn]
 	xor $01
 	ldh [hWhoseTurn], a
-	callab HideSubstituteShowMonAnim ; animate the substitute breaking
+	callfar HideSubstituteShowMonAnim ; animate the substitute breaking
 ; flip the turn back to the way it was
 	ldh a, [hWhoseTurn]
 	xor $01
@@ -5726,7 +5726,7 @@ EnemyCheckIfMirrorMoveEffect:
 .moveDidNotMiss
 	call ApplyAttackToPlayerPokemon
 	call PrintCriticalOHKOText
-	callab DisplayEffectiveness
+	callfar DisplayEffectiveness
 	ld a, 1
 	ld [wMoveDidntMiss], a
 .handleExplosionMiss
@@ -6254,14 +6254,14 @@ DoBattleTransitionAndInitBattleVariables:
 ; link battle
 	xor a
 	ld [wMenuJoypadPollCount], a
-	callab DisplayLinkBattleVersusTextBox
+	callfar DisplayLinkBattleVersusTextBox
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	call ClearScreen
 .next
 	call DelayFrame
 	predef BattleTransition
-	callab LoadHudAndHpBarAndStatusTilePatterns
+	callfar LoadHudAndHpBarAndStatusTilePatterns
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	ld a, $ff
@@ -6359,11 +6359,11 @@ LoadPlayerBackPic:
 
 ; does nothing since no stats are ever selected (barring glitches)
 DoubleOrHalveSelectedStats:
-	callab DoubleSelectedStats
-	jpab HalveSelectedStats
+	callfar DoubleSelectedStats
+	jpfar HalveSelectedStats
 
 ScrollTrainerPicAfterBattle:
-	jpab _ScrollTrainerPicAfterBattle
+	jpfar _ScrollTrainerPicAfterBattle
 
 ApplyBurnAndParalysisPenaltiesToPlayer:
 	ld a, $1
@@ -6747,7 +6747,7 @@ DetermineWildOpponent:
 	ld a, [wNumberOfNoRandomBattleStepsLeft]
 	and a
 	ret nz
-	callab TryDoWildEncounter
+	callfar TryDoWildEncounter
 	ret nz
 InitBattleCommon:
 	ld a, [wMapPalOffset]
@@ -6756,13 +6756,13 @@ InitBattleCommon:
 	ld a, [hl]
 	push af
 	res 1, [hl]
-	callab InitBattleVariables
+	callfar InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
 	sub OPP_ID_OFFSET
 	jp c, InitWildBattle
 	ld [wTrainerClass], a
 	call GetTrainerInformation
-	callab ReadTrainer
+	callfar ReadTrainer
 	call DoBattleTransitionAndInitBattleVariables
 	call _LoadTrainerPic
 	xor a
@@ -6857,7 +6857,7 @@ _InitBattleCommon:
 	dec a ; is it a wild battle?
 	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
 	call StartBattle
-	callab EndOfBattle
+	callfar EndOfBattle
 	pop af
 	ld [wLetterPrintingDelayFlags], a
 	pop af

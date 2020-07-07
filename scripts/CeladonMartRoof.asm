@@ -131,7 +131,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	jp PrintText
 
 RemoveItemByIDBank12:
-	jpba RemoveItemByID
+	farjp RemoveItemByID
 
 CeladonMartRoofText_484ee:
 	text_far _CeladonMartRoofText_484ee

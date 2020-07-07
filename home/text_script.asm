@@ -3,7 +3,7 @@
 DisplayTextID::
 	ldh a, [hLoadedROMBank]
 	push af
-	callba DisplayTextIDInit ; initialization
+	farcall DisplayTextIDInit ; initialization
 	ld hl, wTextPredefFlag
 	bit 0, [hl]
 	res 0, [hl]
@@ -38,7 +38,7 @@ DisplayTextID::
 	push hl
 	push de
 	push bc
-	callba UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
+	farcall UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
 	ld hl, wMapSpriteData ; NPC text entries
@@ -79,9 +79,9 @@ ENDM
 	dict  TX_SCRIPT_PLAYERS_PC,              TextScript_ItemStoragePC
 	dict  TX_SCRIPT_BILLS_PC,                TextScript_BillsPC
 	dict  TX_SCRIPT_POKECENTER_PC,           TextScript_PokemonCenterPC
-	dict2 TX_SCRIPT_VENDING_MACHINE,         callba VendingMachineMenu
+	dict2 TX_SCRIPT_VENDING_MACHINE,         farcall VendingMachineMenu
 	dict  TX_SCRIPT_PRIZE_VENDOR,            TextScript_GameCornerPrizeMenu
-	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callab CableClubNPC
+	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callfar CableClubNPC
 
 	call PrintText_NoCreatingTextBox ; display the text
 	ld a, [wDoNotWaitForButtonPressAfterDisplayingText]
@@ -197,7 +197,7 @@ DisplayPokemonCenterDialogue::
 	jp AfterDisplayingTextID
 
 DisplaySafariGameOverText::
-	callab PrintSafariGameOverText
+	callfar PrintSafariGameOverText
 	jp AfterDisplayingTextID
 
 DisplayPokemonFaintedText::

@@ -129,7 +129,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call ClearSprites
-	callab EvolveMon
+	callfar EvolveMon
 	jp c, CancelledEvolution
 	ld hl, EvolvedText
 	call PrintText

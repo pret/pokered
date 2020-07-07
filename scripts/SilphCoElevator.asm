@@ -74,7 +74,7 @@ SilphCoElevatorWarpMapsEnd:
 
 SilphCoElevatorScript_45827:
 	call Delay3
-	callba ShakeElevator
+	farcall ShakeElevator
 	ret
 
 SilphCoElevator_TextPointers:

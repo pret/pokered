@@ -86,7 +86,7 @@ DoBoulderDustAnimation::
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	callab AnimateBoulderDust
+	callfar AnimateBoulderDust
 	call DiscardButtonPresses
 	ld [wJoyIgnore], a
 	call ResetBoulderPushFlags

@@ -114,7 +114,7 @@ TryingToLearn:
 	ld de, wMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	callab FormatMovesString
+	callfar FormatMovesString
 	pop hl
 .loop
 	push hl

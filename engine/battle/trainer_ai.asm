@@ -204,7 +204,7 @@ AIMoveChoiceModification3:
 	push hl
 	push bc
 	push de
-	callab AIGetTypeEffectiveness
+	callfar AIGetTypeEffectiveness
 	pop de
 	pop bc
 	pop hl
@@ -599,7 +599,7 @@ SwitchEnemyMon:
 	; switching in a new mon in response to this switch.
 	ld a, 1
 	ld [wFirstMonsNotOutYet], a
-	callab EnemySendOut
+	callfar EnemySendOut
 	xor a
 	ld [wFirstMonsNotOutYet], a
 
@@ -713,7 +713,7 @@ AIIncreaseStat:
 	ld a, ANIM_AF
 	ld [hli], a
 	ld [hl], b
-	callab StatModifierUpEffect
+	callfar StatModifierUpEffect
 	pop hl
 	pop af
 	ld [hli], a

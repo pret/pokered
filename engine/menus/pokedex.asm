@@ -14,7 +14,7 @@ ShowPokedexMenu:
 .setUpGraphics
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand
-	callab LoadPokedexTilePatterns
+	callfar LoadPokedexTilePatterns
 .doPokemonListMenu
 	ld hl, wTopMenuItemY
 	ld a, 3
@@ -393,7 +393,7 @@ ShowPokedexData:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	callab LoadPokedexTilePatterns ; load pokedex tiles
+	callfar LoadPokedexTilePatterns ; load pokedex tiles
 
 ; function to display pokedex data from inside the pokedex
 ShowPokedexDataInternal:

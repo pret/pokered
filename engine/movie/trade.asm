@@ -199,7 +199,7 @@ LoadTradingGFXAndMonNames:
 Trade_LoadMonPartySpriteGfx:
 	ld a, %11010000
 	ldh [rOBP1], a
-	jpba LoadMonPartySpriteGfx
+	farjp LoadMonPartySpriteGfx
 
 Trade_SwapNames:
 	ld hl, wPlayerName
@@ -615,7 +615,7 @@ Trade_AnimCircledMon:
 	ret
 
 Trade_WriteCircledMonOAM:
-	callba WriteMonPartySpriteOAMBySpecies
+	farcall WriteMonPartySpriteOAMBySpecies
 	call Trade_WriteCircleOAM
 
 Trade_AddOffsetsToOAMCoords:

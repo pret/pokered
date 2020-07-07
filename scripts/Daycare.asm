@@ -35,7 +35,7 @@ DayCareMText1:
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab KnowsHMMove
+	callfar KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
@@ -65,13 +65,13 @@ DayCareMText1:
 	ld a, DAYCARE_DATA
 	ld [wMonDataLocation], a
 	call LoadMonData
-	callab CalcLevelFromExperience
+	callfar CalcLevelFromExperience
 	ld a, d
 	cp MAX_LEVEL
 	jr c, .skipCalcExp
 
 	ld d, MAX_LEVEL
-	callab CalcExperience
+	callfar CalcExperience
 	ld hl, wDayCareMonExp
 	ldh a, [hExperience]
 	ld [hli], a

@@ -24,7 +24,7 @@ BikeShopText1:
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
 	ldh [hItemToRemoveID], a
-	callba RemoveItemByID
+	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
 	call PrintText

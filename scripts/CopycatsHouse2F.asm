@@ -30,7 +30,7 @@ CopycatsHouse2FText1:
 	call PrintText
 	ld a, POKE_DOLL
 	ldh [hItemToRemoveID], a
-	callba RemoveItemByID
+	farcall RemoveItemByID
 	SetEvent EVENT_GOT_TM31
 	jr .asm_62ecd
 .BagFull

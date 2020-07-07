@@ -62,7 +62,7 @@ GiveFossilToCinnabarLab::
 	call PrintText
 	ld a, [wFossilItem]
 	ldh [hItemToRemoveID], a
-	callba RemoveItemByID
+	farcall RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
 	SetEvents EVENT_GAVE_FOSSIL_TO_LAB, EVENT_LAB_STILL_REVIVING_FOSSIL

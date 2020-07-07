@@ -34,6 +34,6 @@ PrintBookshelfText::
 .noMatch
 	ld a, $ff
 	ldh [hFFDB], a
-	jpba PrintCardKeyText
+	farjp PrintCardKeyText
 
 INCLUDE "data/tilesets/bookshelf_tile_ids.asm"

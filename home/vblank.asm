@@ -72,7 +72,7 @@ VBlank::
 	call Audio3_UpdateMusic
 .afterMusic
 
-	callba TrackPlayTime ; keep track of time played
+	farcall TrackPlayTime ; keep track of time played
 
 	ldh a, [hDisableJoypadPolling]
 	and a

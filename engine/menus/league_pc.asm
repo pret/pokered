@@ -29,7 +29,7 @@ PKMNLeaguePC:
 	push bc
 	ld a, [wHoFTeamIndex2]
 	ld [wHoFTeamIndex], a
-	callba LoadHallOfFameTeams
+	farcall LoadHallOfFameTeams
 	call LeaguePCShowTeam
 	pop bc
 	jr c, .doneShowingTeams
@@ -110,7 +110,7 @@ LeaguePCShowMon:
 	ld de, wHoFTeamNo
 	lb bc, 1, 3
 	call PrintNumber
-	jpba HoFDisplayMonInfo
+	farjp HoFDisplayMonInfo
 
 HallOfFameNoText:
 	db "HALL OF FAME No   @"

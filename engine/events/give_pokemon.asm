@@ -15,9 +15,9 @@ _GivePokemon::
 	ld [wEnemyBattleStatus3], a
 	ld a, [wcf91]
 	ld [wEnemyMonSpecies2], a
-	callab LoadEnemyMonData
+	callfar LoadEnemyMonData
 	call SetPokedexOwnedFlag
-	callab SendNewMonToBox
+	callfar SendNewMonToBox
 	ld hl, wcf4b
 	ld a, [wCurrentBoxNum]
 	and $7f

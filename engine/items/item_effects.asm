@@ -147,7 +147,7 @@ ItemUseBall:
 
 ; If the player is fighting an unidentified ghost, set the value that indicates
 ; the Pokémon can't be caught and skip the capture calculations.
-	callab IsGhostBattle
+	callfar IsGhostBattle
 	ld b, $10 ; can't be caught value
 	jp z, .setAnimData
 
@@ -495,7 +495,7 @@ ItemUseBall:
 	ld [wcf91], a
 	ld a, [wEnemyMonLevel]
 	ld [wCurEnemyLVL], a
-	callab LoadEnemyMonData
+	callfar LoadEnemyMonData
 	pop af
 	ld [wcf91], a
 	pop hl
@@ -632,7 +632,7 @@ ItemUseTownMap:
 	ld a, [wIsInBattle]
 	and a
 	jp nz, ItemUseNotTime
-	jpba DisplayTownMap
+	farjp DisplayTownMap
 
 ItemUseBicycle:
 	ld a, [wIsInBattle]
@@ -778,7 +778,7 @@ ItemUseEvoStone:
 	ld a, SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
-	callab TryEvolvingMon ; try to evolve pokemon
+	callfar TryEvolvingMon ; try to evolve pokemon
 	ld a, [wEvolutionOccurred]
 	and a
 	jr z, .noEffect
@@ -1341,7 +1341,7 @@ ItemUseMedicine:
 	push hl
 	push de
 	ld d, a
-	callab CalcExperience ; calculate experience for next level and store it at hExperience
+	callfar CalcExperience ; calculate experience for next level and store it at hExperience
 	pop de
 	pop hl
 	ld bc, wPartyMon1Exp - wPartyMon1Level
@@ -1400,14 +1400,14 @@ ItemUseMedicine:
 	ld [wMonDataLocation], a
 	call LoadMonData
 	ld d, $01
-	callab PrintStatsBox ; display new stats text box
+	callfar PrintStatsBox ; display new stats text box
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
 	ld [wForceEvolution], a
-	callab TryEvolvingMon ; evolve pokemon, if appropriate
+	callfar TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a, $01
 	ld [wUpdateSpritesEnabled], a
 	pop af
@@ -1699,7 +1699,7 @@ ItemUseXStat:
 	call Delay3
 	xor a
 	ldh [hWhoseTurn], a ; set turn to player's turn
-	callba StatModifierUpEffect ; do stat increase move
+	farcall StatModifierUpEffect ; do stat increase move
 	pop hl
 	pop af
 	ld [hld], a ; restore [wPlayerMoveEffect]
@@ -1775,7 +1775,7 @@ ItemUsePokeflute:
 	and $80
 	jr nz, .skipMusic
 	call WaitForSoundToFinish ; wait for sound to end
-	callba Music_PokeFluteInBattle ; play in-battle pokeflute music
+	farcall Music_PokeFluteInBattle ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
 	ld a, [wChannelSoundIDs + Ch7]
 	and a ; music off?
@@ -1927,7 +1927,7 @@ RodResponse:
 	push af
 	push hl
 	ld [hl], 0
-	callba FishingAnim
+	farcall FishingAnim
 	pop hl
 	pop af
 	ld [hl], a
@@ -1968,7 +1968,7 @@ ItemUseItemfinder:
 	and a
 	jp nz, ItemUseNotTime
 	call ItemUseReloadOverworldData
-	callba HiddenItemNear ; check for hidden items
+	farcall HiddenItemNear ; check for hidden items
 	ld hl, ItemfinderFoundNothingText
 	jr nc, .printText ; if no hidden items
 	ld c, 4
@@ -2024,7 +2024,7 @@ ItemUsePPRestore:
 	call PrintText
 	xor a
 	ld [wPlayerMoveListIndex], a
-	callab MoveSelectionMenu ; move selection menu
+	callfar MoveSelectionMenu ; move selection menu
 	ld a, 0
 	ld [wPlayerMoveListIndex], a
 	jr nz, .chooseMon
@@ -2278,7 +2278,7 @@ ItemUseTMHM:
 	call PrintText
 	jr .chooseMon
 .checkIfAlreadyLearnedMove
-	callab CheckIfMoveIsKnown ; check if the pokemon already knows the move
+	callfar CheckIfMoveIsKnown ; check if the pokemon already knows the move
 	jr c, .chooseMon
 	predef LearnMove ; teach move
 	pop af
@@ -2820,7 +2820,7 @@ SendNewMonToBox:
 	push de
 	ld a, [wCurEnemyLVL]
 	ld d, a
-	callab CalcExperience
+	callfar CalcExperience
 	pop de
 	ldh a, [hExperience]
 	ld [de], a

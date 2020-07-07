@@ -1,14 +1,14 @@
 HandleMidJump::
 ; Handle the player jumping down
 ; a ledge in the overworld.
-	jpba _HandleMidJump
+	farjp _HandleMidJump
 
 EnterMap::
 ; Load a new map.
 	ld a, $ff
 	ld [wJoyIgnore], a
 	call LoadMapData
-	callba ClearVariablesOnEnterMap
+	farcall ClearVariablesOnEnterMap
 	ld hl, wd72c
 	bit 0, [hl] ; has the player already made 3 steps since the last battle?
 	jr z, .skipGivingThreeStepsOfNoRandomBattles
@@ -25,10 +25,10 @@ EnterMap::
 	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jr z, .didNotEnterUsingFlyWarpOrDungeonWarp
 	res 3, [hl]
-	callba EnterMapAnim
+	farcall EnterMapAnim
 	call UpdateSprites
 .didNotEnterUsingFlyWarpOrDungeonWarp
-	callba CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
+	farcall CheckForceBikeOrSurf ; handle currents in SF islands and forced bike riding in cycling road
 	ld hl, wd72d
 	res 5, [hl]
 	call UpdateSprites
@@ -50,7 +50,7 @@ OverworldLoopLessDelay::
 	and a
 	jp nz, .moveAhead ; if the player sprite has not yet completed the walking animation
 	call JoypadOverworld ; get joypad state (which is possibly simulated)
-	callba SafariZoneCheck
+	farcall SafariZoneCheck
 	ld a, [wSafariZoneGameOver]
 	and a
 	jp nz, WarpFound2
@@ -269,7 +269,7 @@ OverworldLoopLessDelay::
 	ld a, [wd736]
 	bit 7, a
 	jr z, .noSpinning
-	callba LoadSpinnerArrowTiles
+	farcall LoadSpinnerArrowTiles
 .noSpinning
 	call UpdateSprites
 
@@ -306,7 +306,7 @@ OverworldLoopLessDelay::
 .doneStepCounting
 	CheckEvent EVENT_IN_SAFARI_ZONE
 	jr z, .notSafariZone
-	callba SafariZoneCheckSteps
+	farcall SafariZoneCheckSteps
 	ld a, [wSafariZoneGameOver]
 	and a
 	jp nz, WarpFound2
@@ -343,7 +343,7 @@ OverworldLoopLessDelay::
 	ld a, [wCurMap]
 	cp OAKS_LAB
 	jp z, .noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
-	callab AnyPartyAlive
+	callfar AnyPartyAlive
 	ld a, d
 	and a
 	jr z, .allPokemonFainted
@@ -368,7 +368,7 @@ NewBattle::
 	ld a, [wd72e]
 	bit 4, a
 	jr nz, .noBattle
-	jpba InitBattle
+	farjp InitBattle
 .noBattle
 	and a
 	ret
@@ -412,7 +412,7 @@ CheckWarpsNoCollisionLoop::
 	push bc
 	ld hl, wd736
 	set 2, [hl] ; standing on warp flag
-	callba IsPlayerStandingOnDoorTileOrWarpTile
+	farcall IsPlayerStandingOnDoorTileOrWarpTile
 	pop bc
 	pop hl
 	jr c, WarpFound1 ; jump if standing on door or warp
@@ -511,7 +511,7 @@ WarpFound2::
 	jr z, .goBackOutside
 ; if not going back to the previous map
 	ld [wCurMap], a
-	callba IsPlayerStandingOnWarpPadOrHole
+	farcall IsPlayerStandingOnWarpPadOrHole
 	ld a, [wStandingOnWarpPadOrHole]
 	dec a ; is the player on a warp pad?
 	jr nz, .notWarpPad
@@ -679,7 +679,7 @@ CheckMapConnections::
 	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
 ; $C2XE without loading any tile patterns.
-	callba InitMapSprites
+	farcall InitMapSprites
 	call LoadTileBlockMap
 	jp OverworldLoopLessDelay
 
@@ -747,7 +747,7 @@ ExtraWarpCheck::
 	jp Bankswitch
 
 MapEntryAfterBattle::
-	callba IsPlayerStandingOnWarp ; for enabling warp testing after collisions
+	farcall IsPlayerStandingOnWarp ; for enabling warp testing after collisions
 	ld a, [wMapPalOffset]
 	and a
 	jp z, GBFadeInFromWhite
@@ -800,7 +800,7 @@ HandleFlyWarpOrDungeonWarp::
 	jp SpecialEnterMap
 
 LeaveMapAnim::
-	jpba _LeaveMapAnim
+	farjp _LeaveMapAnim
 
 LoadPlayerSpriteGraphics::
 ; Load sprite graphics based on whether the player is standing, biking, or surfing.
@@ -1286,7 +1286,7 @@ CheckForJumpingAndTilePairCollisions::
 	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player
 	push de
 	push bc
-	callba HandleLedges ; check if the player is trying to jump a ledge
+	farcall HandleLedges ; check if the player is trying to jump a ledge
 	pop bc
 	pop de
 	pop hl
@@ -1977,11 +1977,11 @@ RunMapScript::
 	push hl
 	push de
 	push bc
-	callba TryPushingBoulder
+	farcall TryPushingBoulder
 	ld a, [wFlags_0xcd60]
 	bit 1, a ; play boulder dust animation
 	jr z, .afterBoulderEffect
-	callba DoBoulderDustAnimation
+	farcall DoBoulderDustAnimation
 .afterBoulderEffect
 	pop bc
 	pop de
@@ -2032,7 +2032,7 @@ LoadPlayerSpriteGraphicsCommon::
 
 ; function to load data from the map header
 LoadMapHeader::
-	callba MarkTownVisitedAndLoadMissableObjects
+	farcall MarkTownVisitedAndLoadMissableObjects
 	ld a, [wCurMapTileset]
 	ld [wUnusedD119], a
 	ld a, [wCurMap]
@@ -2280,7 +2280,7 @@ LoadMapHeader::
 	jp nz, .loadSpriteLoop
 .finishUp
 	predef LoadTilesetHeader
-	callab LoadWildData
+	callfar LoadWildData
 	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a, [wCurMapHeight] ; map height in 4x4 tile blocks
 	add a ; double it
@@ -2337,7 +2337,7 @@ LoadMapData::
 	ld [wSpriteSetID], a
 	call LoadTextBoxTilePatterns
 	call LoadMapHeader
-	callba InitMapSprites ; load tile pattern data for sprites
+	farcall InitMapSprites ; load tile pattern data for sprites
 	call LoadTileBlockMap
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView

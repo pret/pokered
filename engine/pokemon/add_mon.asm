@@ -201,7 +201,7 @@ _AddPartyMon::
 	push de
 	ld a, [wCurEnemyLVL]
 	ld d, a
-	callab CalcExperience
+	callfar CalcExperience
 	pop de
 	inc de
 	ldh a, [hExperience] ; write experience
@@ -498,7 +498,7 @@ _MoveMon::
 	add $2
 	ld [wMonDataLocation], a
 	call LoadMonData
-	callba CalcLevelFromExperience
+	farcall CalcLevelFromExperience
 	ld a, d
 	ld [wCurEnemyLVL], a
 	pop hl

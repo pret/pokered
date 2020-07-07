@@ -24,7 +24,7 @@ PrintBeginningBattleText:
 	ld hl, TrainerWantsToFightText
 .wildBattle
 	push hl
-	callab DrawAllPokeballs
+	callfar DrawAllPokeballs
 	pop hl
 	call PrintText
 	jr .done
@@ -38,7 +38,7 @@ PrintBeginningBattleText:
 	ld a, b
 	and a
 	jr z, .noSilphScope
-	callab LoadEnemyMonData
+	callfar LoadEnemyMonData
 	jr .notPokemonTower
 .noSilphScope
 	ld hl, EnemyAppearedText
@@ -54,8 +54,8 @@ PrintBeginningBattleText:
 	call PrintText
 	ld hl, UnveiledGhostText
 	call PrintText
-	callab LoadEnemyMonData
-	callab MarowakAnim
+	callfar LoadEnemyMonData
+	callfar MarowakAnim
 	ld hl, WildMonAppearedText
 	call PrintText
 

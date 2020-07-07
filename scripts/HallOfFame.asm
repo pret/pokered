@@ -45,7 +45,7 @@ HallofFameRoomScript2:
 	ld [wHallOfFameCurScript], a
 	ld a, PALLET_TOWN
 	ld [wLastBlackoutMap], a
-	callba SaveSAVtoSRAM
+	farcall SaveSAVtoSRAM
 	ld b, 5
 .delayLoop
 	ld c, 600 / 5

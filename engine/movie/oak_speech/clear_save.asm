@@ -15,7 +15,7 @@ DoClearSaveDialogue:
 	ld a, [wCurrentMenuItem]
 	and a
 	jp z, Init
-	callba ClearSAV
+	farcall ClearSAV
 	jp Init
 
 ClearSaveDataText:

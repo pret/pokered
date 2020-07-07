@@ -170,7 +170,7 @@ Route22Script2:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_50fff
@@ -248,7 +248,7 @@ Route22Script_5104e:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateTempo
+	farcall Music_RivalAlternateTempo
 	ld a, $2
 	ldh [hSpriteIndex], a
 	call Route22MoveRivalSprite
@@ -329,7 +329,7 @@ Route22Script5:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStartAndTempo
+	farcall Music_RivalAlternateStartAndTempo
 	ld a, [wcf0d]
 	cp $1
 	jr nz, .asm_51134

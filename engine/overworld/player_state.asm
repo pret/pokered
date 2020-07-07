@@ -192,7 +192,7 @@ IsPlayerStandingOnDoorTileOrWarpTile::
 	push hl
 	push de
 	push bc
-	callba IsPlayerStandingOnDoorTile
+	farcall IsPlayerStandingOnDoorTile
 	jr c, .done
 	ld a, [wCurMapTileset]
 	add a

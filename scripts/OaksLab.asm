@@ -441,7 +441,7 @@ OaksLabScript13:
 	ld a, $10
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a
 	ld de, .RivalExitMovement
@@ -513,7 +513,7 @@ OaksLabScript15:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $15
 	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
@@ -614,7 +614,7 @@ OaksLabScript16:
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $1
 	ldh [hSpriteIndex], a
 	ld de, wNPCMovementDirections2

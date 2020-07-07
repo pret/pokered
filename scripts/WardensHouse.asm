@@ -33,7 +33,7 @@ FuchsiaHouse2Text1:
 	call PrintText
 	ld a, GOLD_TEETH
 	ldh [hItemToRemoveID], a
-	callba RemoveItemByID
+	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
 .asm_60cba
 	ld hl, WardenThankYouText

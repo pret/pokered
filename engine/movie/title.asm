@@ -226,7 +226,7 @@ ENDC
 	ld c, 1
 	call CheckForUserInterruption
 	jr c, .finishedWaiting
-	callba TitleScreenAnimateBallIfStarterOut
+	farcall TitleScreenAnimateBallIfStarterOut
 	call TitleScreenPickNewMon
 	jr .awaitUserInterruptionLoop
 
@@ -255,7 +255,7 @@ ENDC
 	jp MainMenu
 
 .doClearSaveDialogue
-	jpba DoClearSaveDialogue
+	farjp DoClearSaveDialogue
 
 TitleScreenPickNewMon:
 	ld a, vBGMap0 / $100
@@ -282,12 +282,12 @@ TitleScreenPickNewMon:
 	ld a, $90
 	ldh [hWY], a
 	ld d, 1 ; scroll out
-	callba TitleScroll
+	farcall TitleScroll
 	ret
 
 TitleScreenScrollInMon:
 	ld d, 0 ; scroll in
-	callba TitleScroll
+	farcall TitleScroll
 	xor a
 	ldh [hWY], a
 	ret

@@ -128,7 +128,7 @@ ViridianGymScript4:
 	ld [wCurMapScript], a
 	ret
 .asm_74980
-	jpba LoadSpinnerArrowTiles
+	farjp LoadSpinnerArrowTiles
 
 ViridianGymScript3:
 	ld a, [wIsInBattle]

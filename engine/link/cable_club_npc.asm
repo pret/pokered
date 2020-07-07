@@ -54,7 +54,7 @@ CableClubNPC::
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .choseNo
-	callab SaveSAVtoSRAM
+	callfar SaveSAVtoSRAM
 	call WaitForSoundToFinish
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
@@ -107,7 +107,7 @@ CableClubNPC::
 	xor a
 	ld [hld], a
 	ld [hl], a
-	jpab LinkMenu
+	jpfar LinkMenu
 
 CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
 	text_far _CableClubNPCAreaReservedFor2FriendsLinkedByCableText

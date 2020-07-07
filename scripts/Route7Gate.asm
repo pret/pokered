@@ -32,7 +32,7 @@ Route7GateScript0:
 	ld [wPlayerMovingDirection], a
 	xor a
 	ldh [hJoyHeld], a
-	callba RemoveGuardDrink
+	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a
 	jr nz, .asm_1e15a

@@ -1,5 +1,5 @@
 HallOfFamePC:
-	callba AnimateHallOfFame
+	farcall AnimateHallOfFame
 	call ClearScreen
 	ld c, 100
 	call DelayFrames
@@ -235,7 +235,7 @@ Credits:
 	jr .nextCreditsScreen
 .showCopyrightText
 	push de
-	callba LoadCopyrightTiles
+	farcall LoadCopyrightTiles
 	pop de
 	pop de
 	jr .nextCreditsCommand

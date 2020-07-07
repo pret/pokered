@@ -366,7 +366,7 @@ DrawPlayerOrBirdSprite:
 	jp CopyData
 
 DisplayWildLocations:
-	callba FindWildLocationsOfMon
+	farcall FindWildLocationsOfMon
 	call ZeroOutDuplicatesInList
 	ld hl, wOAMBuffer
 	ld de, wTownMapCoords

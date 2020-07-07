@@ -35,4 +35,4 @@ InitBattleVariables:
 	ld a, BATTLE_TYPE_SAFARI
 	ld [wBattleType], a
 .notSafariBattle
-	jpab PlayBattleMusic
+	jpfar PlayBattleMusic

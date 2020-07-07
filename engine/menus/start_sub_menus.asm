@@ -160,7 +160,7 @@ StartMenu_Pokemon::
 .surf
 	bit 4, a ; does the player have the Soul Badge?
 	jp z, .newBadgeRequired
-	callba IsSurfingAllowed
+	farcall IsSurfingAllowed
 	ld hl, wd728
 	bit 1, [hl]
 	res 1, [hl]
@@ -651,7 +651,7 @@ StartMenu_Option::
 	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
-	callab DisplayOptionMenu
+	callfar DisplayOptionMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites

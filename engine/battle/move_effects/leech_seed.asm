@@ -1,5 +1,5 @@
 LeechSeedEffect_:
-	callab MoveHitTest
+	callfar MoveHitTest
 	ld a, [wMoveMissed]
 	and a
 	jr nz, .moveMissed
@@ -22,7 +22,7 @@ LeechSeedEffect_:
 	bit SEEDED, [hl]
 	jr nz, .moveMissed
 	set SEEDED, [hl]
-	callab PlayCurrentMoveAnimation
+	callfar PlayCurrentMoveAnimation
 	ld hl, WasSeededText
 	jp PrintText
 .moveMissed

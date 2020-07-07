@@ -10,6 +10,6 @@ RemoveGuardDrink::
 	call IsItemInBag
 	pop hl
 	jr z, .drinkLoop
-	jpba RemoveItemByID
+	farjp RemoveItemByID
 
 INCLUDE "data/items/guard_drink_items.asm"

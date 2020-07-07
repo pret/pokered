@@ -138,7 +138,7 @@ LoadSAVIgnoreBadCheckSum:
 	jp LoadSAV2
 
 SaveSAV:
-	callba PrintSaveScreenText
+	farcall PrintSaveScreenText
 	ld hl, WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|

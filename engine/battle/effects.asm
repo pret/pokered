@@ -170,7 +170,7 @@ BadlyPoisonedText:
 	text_end
 
 DrainHPEffect:
-	jpab DrainHPEffect_
+	jpfar DrainHPEffect_
 
 ExplodeEffect:
 	ld hl, wBattleMonHP
@@ -987,7 +987,7 @@ FlinchSideEffect:
 	ret
 
 OneHitKOEffect:
-	jpab OneHitKOEffect_
+	jpfar OneHitKOEffect_
 
 ChargeEffect:
 	ld hl, wPlayerBattleStatus1
@@ -1097,13 +1097,13 @@ TrappingEffect:
 	ret
 
 MistEffect:
-	jpab MistEffect_
+	jpfar MistEffect_
 
 FocusEnergyEffect:
-	jpab FocusEnergyEffect_
+	jpfar FocusEnergyEffect_
 
 RecoilEffect:
-	jpab RecoilEffect_
+	jpfar RecoilEffect_
 
 ConfusionSideEffect:
 	call BattleRandom
@@ -1157,10 +1157,10 @@ ConfusionEffectFailed:
 	jp ConditionalPrintButItFailed
 
 ParalyzeEffect:
-	jpab ParalyzeEffect_
+	jpfar ParalyzeEffect_
 
 SubstituteEffect:
-	jpab SubstituteEffect_
+	jpfar SubstituteEffect_
 
 HyperBeamEffect:
 	ld hl, wPlayerBattleStatus2
@@ -1271,7 +1271,7 @@ MimicLearnedMoveText:
 	text_end
 
 LeechSeedEffect:
-	jpab LeechSeedEffect_
+	jpfar LeechSeedEffect_
 
 SplashEffect:
 	call PlayCurrentMoveAnimation
@@ -1365,22 +1365,22 @@ MoveWasDisabledText:
 	text_end
 
 PayDayEffect:
-	jpab PayDayEffect_
+	jpfar PayDayEffect_
 
 ConversionEffect:
-	jpab ConversionEffect_
+	jpfar ConversionEffect_
 
 HazeEffect:
-	jpab HazeEffect_
+	jpfar HazeEffect_
 
 HealEffect:
-	jpab HealEffect_
+	jpfar HealEffect_
 
 TransformEffect:
-	jpab TransformEffect_
+	jpfar TransformEffect_
 
 ReflectLightScreenEffect:
-	jpab ReflectLightScreenEffect_
+	jpfar ReflectLightScreenEffect_
 
 NothingHappenedText:
 	text_far _NothingHappenedText
