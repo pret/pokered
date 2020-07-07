@@ -1,3 +1,18 @@
+; Copies [hl, bc) to [de, de + bc - hl).
+; In other words, the source data is from hl up to but not including bc,
+; and the destination is de.
+CopyDataUntil::
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, CopyDataUntil
+	ld a, l
+	cp c
+	jr nz, CopyDataUntil
+	ret
+
 ; Function to remove a pokemon from the party or the current box.
 ; wWhichPokemon determines the pokemon.
 ; [wRemoveMonFromBox] == 0 specifies the party.
