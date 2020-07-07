@@ -158,22 +158,23 @@ wSpriteStateData1::
 ; data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
 ; player sprite is always sprite 0
-; C1x0: picture ID (fixed, loaded at map init)
-; C1x1: movement status (0: uninitialized, 1: ready, 2: delayed, 3: moving)
-; C1x2: sprite image index (changed on update, $ff if off screen, includes facing direction, progress in walking animation and a sprite-specific offset)
-; C1x3: Y screen position delta (-1,0 or 1; added to c1x4 on each walking animation update)
-; C1x4: Y screen position (in pixels, always 4 pixels above grid which makes sprites appear to be in the center of a tile)
-; C1x5: X screen position delta (-1,0 or 1; added to c1x6 on each walking animation update)
-; C1x6: X screen position (in pixels, snaps to grid if not currently walking)
-; C1x7: intra-animation-frame counter (counting upwards to 4 until c1x8 is incremented)
-; C1x8: animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames)
-; C1x9: facing direction (0: down, 4: up, 8: left, $c: right)
-; C1xA
-; C1xB
-; C1xC
-; C1xD
-; C1xE
-; C1xF
+; struct fields:
+; - 0: picture ID (fixed, loaded at map init)
+; - 1: movement status (0: uninitialized, 1: ready, 2: delayed, 3: moving)
+; - 2: sprite image index (changed on update, $ff if off screen, includes facing direction, progress in walking animation and a sprite-specific offset)
+; - 3: Y screen position delta (-1,0 or 1; added to Y pixels on each walking animation update)
+; - 4: Y screen position (in pixels, always 4 pixels above grid which makes sprites appear to be in the center of a tile)
+; - 5: X screen position delta (-1,0 or 1; added to field X pixels on each walking animation update)
+; - 6: X screen position (in pixels, snaps to grid if not currently walking)
+; - 7: intra-animation-frame counter (counting upwards to 4 until animation frame counter is incremented)
+; - 8: animation frame counter (increased every 4 updates, hold four states (totalling to 16 walking frames)
+; - 9: facing direction ($0: down, $4: up, $8: left, $c: right)
+; - A: adjusted Y coordinate
+; - B: adjusted X coordinate
+; - C: direction of collision
+; - D
+; - E
+; - F
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1
 wSprite01StateData1::      spritestatedata1 wSprite01StateData1
 wSprite02StateData1::      spritestatedata1 wSprite02StateData1
@@ -195,22 +196,23 @@ wSpriteStateData2::
 ; more data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
 ; player sprite is always sprite 0
-; C2x0: walk animation counter (counting from $10 backwards when moving)
-; C2x1:
-; C2x2: Y displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
-; C2x3: X displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
-; C2x4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)
-; C2x5: X position (in 2x2 tile grid steps, leftmost 2x2 tile has value 4)
-; C2x6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
-; C2x7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
-; C2x8: delay until next movement (counted downwards, status (c1x1) is set to ready if reached 0)
-; C2x9
-; C2xA
-; C2xB
-; C2xC
-; C2xD
-; C2xE: sprite image base offset (in video ram, player always has value 1, used to compute c1x2)
-; C2xF
+; struct fields:
+; - 0: walk animation counter (counting from $10 backwards when moving)
+; - 1:
+; - 2: Y displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; - 3: X displacement (initialized at 8, supposed to keep moving sprites from moving too far, but bugged)
+; - 4: Y position (in 2x2 tile grid steps, topmost 2x2 tile has value 4)
+; - 5: X position (in 2x2 tile grid steps, leftmost 2x2 tile has value 4)
+; - 6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
+; - 7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
+; - 8: delay until next movement (counted downwards, movement status is set to ready if reached 0)
+; - 9
+; - A
+; - B
+; - C
+; - D: picture ID
+; - E: sprite image base offset (in video ram, player always has value 1, used to compute sprite image index)
+; - F
 wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2
 wSprite01StateData2::      spritestatedata2 wSprite01StateData2
 wSprite02StateData2::      spritestatedata2 wSprite02StateData2
@@ -2577,7 +2579,7 @@ wMissableObjectFlagsEnd::
 
 	ds 7
 
-wd5cd:: ds 1 ; temp copy of c1x2 (sprite facing/anim)
+wd5cd:: ds 1 ; temp copy of SPRITESTATEDATA1_IMAGEINDEX (used for sprite facing/anim)
 
 wMissableObjectList::
 ; each entry consists of 2 bytes

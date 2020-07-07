@@ -4,20 +4,21 @@
 ; This is also called after displaying text because loading
 ; text tile patterns overwrites half of the sprite tile pattern data.
 ; Note on notation:
-; $C1X* and $C2X* are used to denote wSpriteStateData1-wSpriteStateData1 + $ff and wSpriteStateData2 + $00-wSpriteStateData2 + $ff sprite slot
-; fields, respectively, within loops. The X is the loop index.
-; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
-; denote fields of the sprite slots iterated over in the inner loop.
+; x#SPRITESTATEDATA1_* and x#SPRITESTATEDATA2_* are used to denote wSpriteStateData1 and
+; wSpriteStateData2 sprite slot, respectively, within loops. The X is the loop index.
+; If there is an inner loop, Y is the inner loop index, i.e. y#SPRITESTATEDATA1_* and
+; y#SPRITESTATEDATA2_* denote fields of the sprite slots iterated over in the inner loop.
 InitMapSprites::
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
 ; if the map is an inside map (i.e. mapID >= $25)
 	ld hl, wSpritePlayerStateData1PictureID
 	ld de, wSpritePlayerStateData2PictureID
-; Loop to copy picture ID's from $C1X0 to $C2XD for LoadMapSpriteTilePatterns.
+; Loop to copy picture IDs from [x#SPRITESTATEDATA1_PICTUREID]
+; to [x#SPRITESTATEDATA2_PICTUREID] for LoadMapSpriteTilePatterns.
 .copyPictureIDLoop
-	ld a, [hl] ; $C1X0 (picture ID)
-	ld [de], a ; $C2XD
+	ld a, [hl] ; a = [x#SPRITESTATEDATA1_PICTUREID]
+	ld [de], a ; [x#SPRITESTATEDATA2_PICTUREID] = a
 	ld a, $10
 	add e
 	ld e, a
@@ -40,9 +41,11 @@ LoadMapSpriteTilePatterns:
 	ld hl, wSpritePlayerStateData2PictureID
 	xor a
 	ldh [hFourTileSpriteCount], a
-.copyPictureIDLoop ; loop to copy picture ID from $C2XD to $C2XE
-	ld a, [hli] ; $C2XD (sprite picture ID)
-	ld [hld], a ; $C2XE
+; Loop to copy picture IDs from [x#SPRITESTATEDATA2_PICTUREID]
+; to [x#SPRITESTATEDATA2_IMAGEBASEOFFSET].
+.copyPictureIDLoop
+	ld a, [hli] ; a = [x#SPRITESTATEDATA2_PICTUREID]
+	ld [hld], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET] = a
 	ld a, l
 	add $10
 	ld l, a
@@ -81,7 +84,7 @@ LoadMapSpriteTilePatterns:
 	ld a, l
 	cp e ; reached current slot?
 	jr z, .foundNextVRAMSlot
-	ld a, [de] ; $C2YE (VRAM slot)
+	ld a, [de] ; y#SPRITESTATEDATA2_IMAGEBASEOFFSET
 	cp 11 ; is it one of the first 10 slots?
 	jr nc, .findNextVRAMSlotLoop
 	cp b ; compare the slot being checked to the current max
@@ -93,7 +96,7 @@ LoadMapSpriteTilePatterns:
 	inc b ; increment previous max value to get next VRAM tile pattern slot
 	ld a, b ; a = next VRAM tile pattern slot
 	push af
-	ld a, [hl] ; $C2XE (sprite picture ID)
+	ld a, [hl] ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	ld b, a ; b = current sprite picture ID
 	cp SPRITE_BALL ; is it a 4-tile sprite?
 	jr c, .notFourTileSprite
@@ -104,7 +107,7 @@ LoadMapSpriteTilePatterns:
 .notFourTileSprite
 	pop af
 .storeVRAMSlot
-	ld [hl], a ; store VRAM slot at $C2XE
+	ld [hl], a ; store VRAM slot at [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	ldh [hVRAMSlot], a ; used to determine if it's 4-tile sprite later
 	ld a, b ; a = current sprite picture ID
 	dec a
@@ -207,8 +210,8 @@ LoadMapSpriteTilePatterns:
 	jr .nextSpriteSlot
 .alreadyLoaded ; if the current picture ID has already had its tile patterns loaded
 	inc de
-	ld a, [de] ; a = VRAM slot for the current picture ID (from $C2YE)
-	ld [hl], a ; store VRAM slot in current wSpriteStateData2 sprite slot (at $C2XE)
+	ld a, [de] ; a = [y#SPRITESTATEDATA2_IMAGEBASEOFFSET]
+	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET] = a
 .nextSpriteSlot
 	ld a, l
 	add $10
@@ -217,10 +220,11 @@ LoadMapSpriteTilePatterns:
 	jp nz, .loadTilePatternLoop
 	ld hl, wSpritePlayerStateData2PictureID
 	ld b, $10
-; the pictures ID's stored at $C2XD are no longer needed, so zero them
+; the pictures IDs stored at [x#SPRITESTATEDATA2_PICTUREID] are no longer needed,
+; so zero them
 .zeroStoredPictureIDLoop
 	xor a
-	ld [hl], a ; $C2XD
+	ld [hl], a ; [x#SPRITESTATEDATA2_PICTUREID]
 	ld a, $10
 	add l
 	ld l, a
@@ -292,15 +296,15 @@ InitOutsideMapSprites:
 	ld [hl], a
 	ld bc, wSpriteSet
 ; Load the sprite set into RAM.
-; This loop also fills $C2XD (sprite picture ID) where X is from $0 to $A
-; with picture ID's. This is done so that LoadMapSpriteTilePatterns will
+; This loop also fills [x#SPRITESTATEDATA2_PICTUREID] where X is from $0 to $A
+; with picture IDs. This is done so that LoadMapSpriteTilePatterns will
 ; load tile patterns for all sprite pictures in the sprite set.
 .loadSpriteSetLoop
 	ld a, $10
 	add l
 	ld l, a
 	ld a, [de] ; sprite picture ID from sprite set
-	ld [hl], a ; $C2XD (sprite picture ID)
+	ld [hl], a ; [x#SPRITESTATEDATA2_PICTUREID]
 	ld [bc], a
 	inc de
 	inc bc
@@ -313,7 +317,7 @@ InitOutsideMapSprites:
 	add l
 	ld l, a
 	xor a
-	ld [hl], a ; $C2XD (sprite picture ID)
+	ld [hl], a ; [x#SPRITESTATEDATA2_PICTUREID]
 	dec b
 	jr nz, .zeroRemainingSlotsLoop
 	ld a, [wNumSprites]
@@ -330,7 +334,7 @@ InitOutsideMapSprites:
 ; for the current map. So, they are not needed and are zeroed by this loop.
 .zeroVRAMSlotsLoop
 	xor a
-	ld [hl], a ; $C2XE (VRAM slot)
+	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	ld a, $10
 	add l
 	ld l, a
@@ -347,7 +351,7 @@ InitOutsideMapSprites:
 ; VRAM tile pattern slot.
 .storeVRAMSlotsLoop
 	ld c, 0
-	ld a, [hl] ; $C1X0 (picture ID) (zero if sprite slot is not used)
+	ld a, [hl] ; [x#SPRITESTATEDATA1_PICTUREID] (zero if sprite slot is not used)
 	and a ; is the sprite slot used?
 	jr z, .skipGettingPictureIndex ; if the sprite slot is not used
 	ld b, a ; b = picture ID
@@ -367,7 +371,7 @@ InitOutsideMapSprites:
 	add l
 	ld l, a
 	ld a, c ; a = VRAM slot (zero if sprite slot is not used)
-	ld [hl], a ; $C2XE (VRAM slot)
+	ld [hl], a ; [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	pop hl
 	ld a, $10
 	add l

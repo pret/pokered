@@ -678,7 +678,7 @@ CheckMapConnections::
 	ld b, SET_PAL_OVERWORLD
 	call RunPaletteCommand
 ; Since the sprite set shouldn't change, this will just update VRAM slots at
-; $C2XE without loading any tile patterns.
+; x#SPRITESTATEDATA2_IMAGEBASEOFFSET without loading any tile patterns.
 	farcall InitMapSprites
 	call LoadTileBlockMap
 	jp OverworldLoopLessDelay
@@ -1210,7 +1210,7 @@ IsSpriteInFrontOfPlayer2::
 	ld a, l
 	and $f0
 	inc a
-	ld l, a ; hl = $c1x1
+	ld l, a ; hl = x#SPRITESTATEDATA1_MOVEMENTSTATUS
 	set 7, [hl] ; set flag to make the sprite face the player
 	ld a, e
 	ldh [hSpriteIndexOrTextID], a
@@ -2167,7 +2167,7 @@ LoadMapHeader::
 	ld a, [hli]
 	ld [wNumSprites], a ; save the number of sprites
 	push hl
-; zero C110-C1FF and C210-C2FF
+; zero out sprite state data for sprites 01-15
 	ld hl, wSprite01StateData1
 	ld de, wSprite01StateData2
 	xor a
@@ -2178,7 +2178,7 @@ LoadMapHeader::
 	inc e
 	dec b
 	jr nz, .zeroSpriteDataLoop
-; initialize all C100-C1FF sprite entries to disabled (other than player's)
+; disable SPRITESTATEDATA1_IMAGEINDEX (set to $ff) for sprites 01-15
 	ld hl, wSprite01StateData1ImageIndex
 	ld de, $10
 	ld c, $0f
@@ -2196,19 +2196,19 @@ LoadMapHeader::
 	ld c, $00
 .loadSpriteLoop
 	ld a, [hli]
-	ld [de], a ; store picture ID at C1X0
+	ld [de], a ; x#SPRITESTATEDATA1_PICTUREID
 	inc d
 	ld a, $04
 	add e
 	ld e, a
 	ld a, [hli]
-	ld [de], a ; store Y position at C2X4
+	ld [de], a ; x#SPRITESTATEDATA2_MAPY
 	inc e
 	ld a, [hli]
-	ld [de], a ; store X position at C2X5
+	ld [de], a ; x#SPRITESTATEDATA2_MAPX
 	inc e
 	ld a, [hli]
-	ld [de], a ; store movement byte 1 at C2X6
+	ld [de], a ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
 	ld a, [hli]
 	ldh [hLoadSpriteTemp1], a ; save movement byte 2
 	ld a, [hli]

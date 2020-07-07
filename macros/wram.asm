@@ -71,7 +71,8 @@ spritestatedata1: MACRO
 \1IntraAnimFrameCounter:: db
 \1AnimFrameCounter:: db
 \1FacingDirection:: db
-	ds 2
+\1YAdjusted:: db
+\1XAdjusted:: db
 \1CollisionData:: db
 	ds 3
 \1End::

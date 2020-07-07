@@ -21,13 +21,13 @@ PrepareOAMData::
 	ld d, HIGH(wSpriteStateData1)
 	ldh a, [hSpriteOffset2]
 	ld e, a
-	ld a, [de] ; c1x0
+	ld a, [de] ; [x#SPRITESTATEDATA1_PICTUREID]
 	and a
 	jp z, .nextSprite
 
 	inc e
 	inc e
-	ld a, [de] ; c1x2 (facing/anim)
+	ld a, [de] ; [x#SPRITESTATEDATA1_IMAGEINDEX]
 	ld [wd5cd], a
 	cp $ff ; off-screen (don't draw)
 	jr nz, .visible
@@ -56,7 +56,7 @@ PrepareOAMData::
 	ld a, e
 	add $5
 	ld e, a
-	ld a, [de] ; c2x7
+	ld a, [de] ; [x#SPRITESTATEDATA2_GRASSPRIORITY]
 	and $80
 	ldh [hSpritePriority], a ; temp store sprite priority
 	pop de
@@ -98,7 +98,7 @@ PrepareOAMData::
 	push bc
 	ld b, a
 
-	ld a, [wd5cd]            ; temp copy of c1x2
+	ld a, [wd5cd]            ; temp copy of [x#SPRITESTATEDATA1_IMAGEINDEX]
 	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
 
@@ -169,11 +169,11 @@ PrepareOAMData::
 GetSpriteScreenXY:
 	inc e
 	inc e
-	ld a, [de] ; c1x4
+	ld a, [de] ; [x#SPRITESTATEDATA1_YPIXELS]
 	ldh [hSpriteScreenY], a
 	inc e
 	inc e
-	ld a, [de] ; c1x6
+	ld a, [de] ; [x#SPRITESTATEDATA1_XPIXELS]
 	ldh [hSpriteScreenX], a
 	ld a, 4
 	add e
@@ -181,9 +181,9 @@ GetSpriteScreenXY:
 	ldh a, [hSpriteScreenY]
 	add 4
 	and $f0
-	ld [de], a ; c1xa (y)
+	ld [de], a ; [x#SPRITESTATEDATA1_YADJUSTED]
 	inc e
 	ldh a, [hSpriteScreenX]
 	and $f0
-	ld [de], a  ; c1xb (x)
+	ld [de], a  ; [x#SPRITESTATEDATA1_XADJUSTED]
 	ret

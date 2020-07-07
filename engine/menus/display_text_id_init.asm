@@ -38,7 +38,8 @@ DisplayTextIDInit::
 	jr nz, .skipMovingSprites
 	call UpdateSprites
 .skipMovingSprites
-; loop to copy C1X9 (direction the sprite is facing) to C2X9 for each sprite
+; loop to copy [x#SPRITESTATEDATA1_FACINGDIRECTION] to [x#SPRITESTATEDATA2_09]
+; for each sprite from x=01 to x=15
 ; this is done because when you talk to an NPC, they turn to look your way
 ; the original direction they were facing must be restored after the dialogue is over
 	ld hl, wSprite01StateData1FacingDirection

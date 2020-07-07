@@ -84,7 +84,7 @@ CalcPositionOfPlayerRelativeToNPC:
 	ld hl, wSpriteStateData1
 	ldh a, [hNPCSpriteOffset]
 	add l
-	add wSpritePlayerStateData1YPixels - wSpritePlayerStateData1
+	add SPRITESTATEDATA1_YPIXELS
 	ld l, a
 	jr nc, .noCarry
 	inc h
