@@ -141,8 +141,7 @@ ENDM
 ; stored in big endian
 tempo: MACRO
 	db $ED
-	db \1 / $100
-	db \1 % $100
+	db HIGH(\1), LOW(\1)
 ENDM
 
 ; arguments: left output enable mask, right output enable mask

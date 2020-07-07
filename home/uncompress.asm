@@ -20,8 +20,8 @@ UncompressSpriteData::
 ; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop
 _UncompressSpriteData::
 	ld hl, sSpriteBuffer1
-	ld c, (2*SPRITEBUFFERSIZE) % $100
-	ld b, (2*SPRITEBUFFERSIZE) / $100
+	ld c, LOW(2 * SPRITEBUFFERSIZE)
+	ld b, HIGH(2 * SPRITEBUFFERSIZE)
 	xor a
 	call FillMemory           ; clear sprite buffer 1 and 2
 	ld a, $1

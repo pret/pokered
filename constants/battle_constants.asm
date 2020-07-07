@@ -35,6 +35,8 @@ BRN EQU 4
 FRZ EQU 5
 PAR EQU 6
 
+MAX_STAT_VALUE EQU 999
+
 ; volatile statuses 1
 STORING_ENERGY           EQU 0 ; Bide
 THRASHING_ABOUT          EQU 1 ; e.g. Thrash

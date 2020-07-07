@@ -236,7 +236,7 @@ WriteMonPartySpriteOAM:
 ; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
-	ld h, wOAMBuffer / $100
+	ld h, HIGH(wOAMBuffer)
 	ldh a, [hPartyMonIndex]
 	swap a
 	ld l, a

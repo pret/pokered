@@ -237,7 +237,7 @@ Trade_ShowPlayerMon:
 	ld c, 10
 	call TextBoxBorder
 	call Trade_PrintPlayerMonInfoText
-	ld b, vBGMap0 / $100
+	ld b, HIGH(vBGMap0)
 	call CopyScreenTileBufferToVRAM
 	call ClearScreen
 	ld a, [wTradedPlayerMonSpecies]
@@ -266,7 +266,7 @@ Trade_ShowPlayerMon:
 
 Trade_DrawOpenEndOfLinkCable:
 	call Trade_ClearTileMap
-	ld b, vBGMap0 / $100
+	ld b, HIGH(vBGMap0)
 	call CopyScreenTileBufferToVRAM
 	ld b, SET_PAL_GENERIC
 	call RunPaletteCommand

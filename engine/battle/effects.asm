@@ -399,11 +399,12 @@ StatModifierUpEffect:
 	inc d ; de = unmodified (original) stat
 .checkIf999
 	pop bc
+	; check if stat is already 999
 	ld a, [hld]
-	sub 999 % $100 ; check if stat is already 999
+	sub LOW(MAX_STAT_VALUE)
 	jr nz, .recalculateStat
 	ld a, [hl]
-	sbc 999 / $100
+	sbc HIGH(MAX_STAT_VALUE)
 	jp z, RestoreOriginalStatModifier
 .recalculateStat ; recalculate affected stat
                  ; paralysis and burn penalties, as well as badge boosts are ignored
@@ -431,15 +432,15 @@ StatModifierUpEffect:
 	ld b, $4
 	call Divide
 	pop hl
-; cap at 999
+; cap at MAX_STAT_VALUE (999)
 	ldh a, [hProduct + 3]
-	sub 999 % $100
+	sub LOW(MAX_STAT_VALUE)
 	ldh a, [hProduct + 2]
-	sbc 999 / $100
+	sbc HIGH(MAX_STAT_VALUE)
 	jp c, UpdateStat
-	ld a, 999 / $100
+	ld a, HIGH(MAX_STAT_VALUE)
 	ldh [hMultiplicand + 1], a
-	ld a, 999 % $100
+	ld a, LOW(MAX_STAT_VALUE)
 	ldh [hMultiplicand + 2], a
 
 UpdateStat:

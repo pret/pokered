@@ -56,7 +56,7 @@ ShakeElevatorRedrawRow:
 	add hl, de
 	ld a, h
 	and $3
-	or vBGMap0 / $100
+	or HIGH(vBGMap0)
 	ld d, a
 	ld a, l
 	pop hl

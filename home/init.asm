@@ -82,9 +82,9 @@ rLCDC_DEFAULT EQU %11100011
 	ld a, CONNECTION_NOT_ESTABLISHED
 	ldh [hSerialConnectionStatus], a
 
-	ld h, vBGMap0 / $100
+	ld h, HIGH(vBGMap0)
 	call ClearBgMap
-	ld h, vBGMap1 / $100
+	ld h, HIGH(vBGMap1)
 	call ClearBgMap
 
 	ld a, rLCDC_DEFAULT

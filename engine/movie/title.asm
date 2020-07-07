@@ -126,13 +126,13 @@ ENDC
 
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
-	ld a, (vBGMap0 + $300) / $100
+	ld a, HIGH(vBGMap0 + $300)
 	call TitleScreenCopyTileMapToVRAM
 	call SaveScreenTilesToBuffer1
 	ld a, $40
 	ldh [hWY], a
 	call LoadScreenTilesFromBuffer2
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 	ld b, SET_PAL_TITLE_SCREEN
 	call RunPaletteCommand
@@ -205,7 +205,7 @@ ENDC
 	and a
 	jr nz, .scrollTitleScreenGameVersionLoop
 
-	ld a, vBGMap1 / $100
+	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call LoadScreenTilesFromBuffer2
 	call PrintGameVersionOnTitleScreen
@@ -241,9 +241,9 @@ ENDC
 	inc a
 	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
-	ld a, vBGMap1 / $100
+	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call Delay3
 	call LoadGBPal
@@ -258,7 +258,7 @@ ENDC
 	farjp DoClearSaveDialogue
 
 TitleScreenPickNewMon:
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 
 .loop

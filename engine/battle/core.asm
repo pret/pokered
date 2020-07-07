@@ -4182,8 +4182,8 @@ GetDamageVarsForPlayerAttack:
 ; if the enemy has used Light Screen, double the enemy's special
 	sla c
 	rl b
-; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
-; a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
+; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
+; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
 	ld hl, wBattleMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4295,8 +4295,8 @@ GetDamageVarsForEnemyAttack:
 ; if the player has used Light Screen, double the player's special
 	sla c
 	rl b
-; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
-; a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
+; reflect and light screen boosts do not cap the stat at MAX_STAT_VALUE, so weird things will happen during stats scaling
+; if a Pokemon with 512 or more Defense has used Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
 	ld hl, wEnemyMonSpecial
 	ld a, [wCriticalHitOrOHKO]
@@ -4508,14 +4508,14 @@ CalculateDamage:
 	jr nz, .cap
 
 	ldh a, [hQuotient + 2]
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100
+	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
 	jr c, .dont_cap_2
 
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100 + 1
+	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) + 1
 	jr nc, .cap
 
 	ldh a, [hQuotient + 3]
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) % $100
+	cp LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
 	jr nc, .cap
 
 .dont_cap_2
@@ -4533,21 +4533,21 @@ CalculateDamage:
 	jr c, .cap
 
 	ld a, [hl]
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100
+	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
 	jr c, .dont_cap_3
 
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) / $100 + 1
+	cp HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) + 1
 	jr nc, .cap
 
 	inc hl
 	ld a, [hld]
-	cp (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1) % $100
+	cp LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE + 1)
 	jr c, .dont_cap_3
 
 .cap
-	ld a, (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE) / $100
+	ld a, HIGH(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE)
 	ld [hli], a
-	ld a, (MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE) % $100
+	ld a, LOW(MAX_NEUTRAL_DAMAGE - MIN_NEUTRAL_DAMAGE)
 	ld [hld], a
 
 .dont_cap_3
@@ -6526,14 +6526,14 @@ CalculateModifiedStat:
 	call Divide
 	pop hl
 	ldh a, [hDividend + 3]
-	sub 999 % $100
+	sub LOW(MAX_STAT_VALUE)
 	ldh a, [hDividend + 2]
-	sbc 999 / $100
+	sbc HIGH(MAX_STAT_VALUE)
 	jp c, .storeNewStatValue
-; cap the stat at 999
-	ld a, 999 / $100
+; cap the stat at MAX_STAT_VALUE (999)
+	ld a, HIGH(MAX_STAT_VALUE)
 	ldh [hDividend + 2], a
-	ld a, 999 % $100
+	ld a, LOW(MAX_STAT_VALUE)
 	ldh [hDividend + 3], a
 .storeNewStatValue
 	ldh a, [hDividend + 2]
@@ -6573,7 +6573,7 @@ ApplyBadgeStatBoosts:
 	ret
 
 ; multiply stat at hl by 1.125
-; cap stat at 999
+; cap stat at MAX_STAT_VALUE
 .applyBoostToStat
 	ld a, [hli]
 	ld d, a
@@ -6591,13 +6591,13 @@ ApplyBadgeStatBoosts:
 	adc d
 	ld [hli], a
 	ld a, [hld]
-	sub 999 % $100
+	sub LOW(MAX_STAT_VALUE)
 	ld a, [hl]
-	sbc 999 / $100
+	sbc HIGH(MAX_STAT_VALUE)
 	ret c
-	ld a, 999 / $100
+	ld a, HIGH(MAX_STAT_VALUE)
 	ld [hli], a
-	ld a, 999 % $100
+	ld a, LOW(MAX_STAT_VALUE)
 	ld [hld], a
 	ret
 

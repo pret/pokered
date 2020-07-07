@@ -182,9 +182,9 @@ SafariZoneGate_TextPointers:
 	call PrintText
 	ld a, 30
 	ld [wNumSafariBalls], a
-	ld a, 502 / $100
+	ld a, HIGH(502)
 	ld [wSafariSteps], a
-	ld a, 502 % $100
+	ld a, LOW(502)
 	ld [wSafariSteps + 1], a
 	ld a, D_UP
 	ld c, 3

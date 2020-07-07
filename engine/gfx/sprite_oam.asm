@@ -18,7 +18,7 @@ PrepareOAMData::
 .spriteLoop
 	ldh [hSpriteOffset2], a
 
-	ld d, wSpriteStateData1 / $100
+	ld d, HIGH(wSpriteStateData1)
 	ldh a, [hSpriteOffset2]
 	ld e, a
 	ld a, [de] ; c1x0
@@ -79,7 +79,7 @@ PrepareOAMData::
 
 	ldh a, [hOAMBufferOffset]
 	ld e, a
-	ld d, wOAMBuffer / $100
+	ld d, HIGH(wOAMBuffer)
 
 .tileLoop
 	ldh a, [hSpriteScreenY]   ; temp for sprite Y position
@@ -141,13 +141,13 @@ PrepareOAMData::
 .nextSprite
 	ldh a, [hSpriteOffset2]
 	add $10
-	cp $100 % $100
+	cp LOW($100)
 	jp nz, .spriteLoop
 
 	; Clear unused OAM.
 	ldh a, [hOAMBufferOffset]
 	ld l, a
-	ld h, wOAMBuffer / $100
+	ld h, HIGH(wOAMBuffer)
 	ld de, $4
 	ld b, $a0
 	ld a, [wd736]

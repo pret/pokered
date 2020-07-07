@@ -197,17 +197,17 @@ CalcStat::
 	ldh [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
 	ldh a, [hMultiplicand+1] ; check for overflow (>999)
-	cp 999 / $100 + 1
+	cp HIGH(MAX_STAT_VALUE) + 1
 	jr nc, .overflow
-	cp 999 / $100
+	cp HIGH(MAX_STAT_VALUE)
 	jr c, .noOverflow
 	ldh a, [hMultiplicand+2]
-	cp 999 % $100 + 1
+	cp LOW(MAX_STAT_VALUE) + 1
 	jr c, .noOverflow
 .overflow
-	ld a, 999 / $100               ; overflow: cap at 999
+	ld a, HIGH(MAX_STAT_VALUE) ; overflow: cap at 999
 	ldh [hMultiplicand+1], a
-	ld a, 999 % $100
+	ld a, LOW(MAX_STAT_VALUE)
 	ldh [hMultiplicand+2], a
 .noOverflow
 	pop bc

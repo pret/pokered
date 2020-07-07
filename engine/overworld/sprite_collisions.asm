@@ -53,9 +53,9 @@ UpdateNonPlayerSprite:
 DetectCollisionBetweenSprites:
 	nop
 
-	ld h, wSpriteStateData1 / $100
+	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
-	add wSpriteStateData1 % $100
+	add LOW(wSpriteStateData1)
 	ld l, a
 
 	ld a, [hl] ; a = [$c1i0] (picture) (0 if slot is unused)

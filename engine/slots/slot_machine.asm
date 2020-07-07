@@ -294,7 +294,7 @@ SlotMachine_StopWheel1Early:
 ; Stop early if the middle symbol is not a cherry.
 	inc hl
 	ld a, [hl]
-	cp SLOTSCHERRY >> 8
+	cp HIGH(SLOTSCHERRY)
 	jr nz, .stopWheel
 	ret
 ; It looks like this was intended to make the wheel stop when a 7 symbol was
@@ -303,7 +303,7 @@ SlotMachine_StopWheel1Early:
 	ld c, $3
 .loop
 	ld a, [hli]
-	cp SLOTS7 >> 8
+	cp HIGH(SLOTS7)
 	jr c, .stopWheel ; condition never true
 	dec c
 	jr nz, .loop
@@ -330,7 +330,7 @@ SlotMachine_StopWheel2Early:
 .sevenAndBarMode
 	call SlotMachine_FindWheel1Wheel2Matches
 	ld a, [de]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	ret nc
 .stopWheel
 	xor a
@@ -427,7 +427,7 @@ SlotMachine_CheckForMatches:
 	jr nz, .acceptMatch
 ; if 7/bar matches aren't enabled and the match was a 7/bar symbol, roll wheel
 	ld a, [hl]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	jr c, .rollWheel3DownByOneSymbol
 .acceptMatch
 	ld a, [hl]
@@ -702,7 +702,7 @@ SlotMachine_PayCoinsToPlayer:
 .skip1
 	ld [wAnimCounter], a
 	ld a, [wSlotMachineWinningSymbol]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	ld c, 8
 	jr nc, .skip2
 	srl c ; c = 4 (make the the coins transfer faster if the symbol was 7 or bar)
