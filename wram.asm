@@ -3,6 +3,9 @@ INCLUDE "constants.asm"
 INCLUDE "macros/wram.asm"
 
 
+INCLUDE "vram.asm"
+
+
 SECTION "WRAM Bank 0", WRAM0
 
 wUnusedC000::
@@ -3112,3 +3115,5 @@ wStack::
 
 
 INCLUDE "sram.asm"
+
+INCLUDE "hram.asm"

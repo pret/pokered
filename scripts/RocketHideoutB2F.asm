@@ -376,7 +376,7 @@ ENDM
 
 FacilitySpinnerArrows:
 FACILITY_SPINNER EQU $20 * $10
-vFacilitySpinner EQU vTileset + FACILITY_SPINNER
+vFacilitySpinner EQUS "vTileset + FACILITY_SPINNER"
 
 	spinner SpinnerArrowAnimTiles, $00, 1, vFacilitySpinner
 	spinner SpinnerArrowAnimTiles, $10, 1, vFacilitySpinner + $10
@@ -389,7 +389,7 @@ vFacilitySpinner EQU vTileset + FACILITY_SPINNER
 
 GymSpinnerArrows:
 GYM_SPINNER EQU $3c * $10
-vGymSpinner EQU vTileset + GYM_SPINNER
+vGymSpinner EQUS "vTileset + GYM_SPINNER"
 
 	spinner SpinnerArrowAnimTiles, $10, 1, vGymSpinner
 	spinner SpinnerArrowAnimTiles, $30, 1, vGymSpinner + $10

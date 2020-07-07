@@ -228,6 +228,9 @@ WRAM0
 	org $dfff
 	"Stack"
 
+VRAM
+	"VRAM"
+
 SRAM $0
 	"Sprite Buffers"
 
@@ -239,3 +242,6 @@ SRAM $2
 
 SRAM $3
 	"Saved Boxes 2"
+
+HRAM
+	"HRAM"
