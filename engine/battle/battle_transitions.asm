@@ -181,7 +181,7 @@ BattleTransition_Spiral:
 	call BattleTransition_InwardSpiral
 	jr .done
 .outwardSpiral
-	coord hl, 10, 10
+	hlcoord 10, 10
 	ld a, $3
 	ld [wOutwardSpiralCurrentDirection], a
 	ld a, l
@@ -210,7 +210,7 @@ BattleTransition_Spiral:
 BattleTransition_InwardSpiral:
 	ld a, 7
 	ld [wInwardSpiralUpdateScreenCounter], a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld c, SCREEN_HEIGHT - 1
 	ld de, SCREEN_WIDTH
 	call BattleTransition_InwardSpiral_
@@ -350,20 +350,20 @@ BattleTransition_Shrink:
 	push bc
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 0, 7
-	coord de, 0, 8
+	hlcoord 0, 7
+	decoord 0, 8
 	ld bc, -SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	coord hl, 0, 10
-	coord de, 0, 9
+	hlcoord 0, 10
+	decoord 0, 9
 	ld bc, SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	coord hl, 8, 0
-	coord de, 9, 0
+	hlcoord 8, 0
+	decoord 9, 0
 	ld bc, -2
 	call BattleTransition_CopyTiles2
-	coord hl, 11, 0
-	coord de, 10, 0
+	hlcoord 11, 0
+	decoord 10, 0
 	ld bc, 2
 	call BattleTransition_CopyTiles2
 	ld a, $1
@@ -384,20 +384,20 @@ BattleTransition_Split:
 	ldh [hAutoBGTransferEnabled], a
 .loop
 	push bc
-	coord hl, 0, 16
-	coord de, 0, 17
+	hlcoord 0, 16
+	decoord 0, 17
 	ld bc, -SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	coord hl, 0, 1
-	coord de, 0, 0
+	hlcoord 0, 1
+	decoord 0, 0
 	ld bc, SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	coord hl, 18, 0
-	coord de, 19, 0
+	hlcoord 18, 0
+	decoord 19, 0
 	ld bc, -2
 	call BattleTransition_CopyTiles2
-	coord hl, 1, 0
-	coord de, 0, 0
+	hlcoord 1, 0
+	decoord 0, 0
 	ld bc, 2
 	call BattleTransition_CopyTiles2
 	call BattleTransition_TransferDelay3
@@ -493,8 +493,8 @@ BattleTransition_CopyTiles2:
 ; used for high level wild dungeon battles
 BattleTransition_VerticalStripes:
 	ld c, SCREEN_HEIGHT
-	coord hl, 0, 0
-	coord de, 1, 17
+	hlcoord 0, 0
+	decoord 1, 17
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 .loop
@@ -532,8 +532,8 @@ BattleTransition_VerticalStripes_:
 ; used for low level wild dungeon battles
 BattleTransition_HorizontalStripes:
 	ld c, SCREEN_WIDTH
-	coord hl, 0, 0
-	coord de, 19, 1
+	hlcoord 0, 0
+	decoord 19, 1
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 .loop
@@ -654,84 +654,84 @@ BattleTransition_Circle_Sub2:
 BattleTransition_HalfCircle1:
 	db $01
 	dw BattleTransition_CircleData1
-	dwCoord 18, 6
+	dwcoord 18, 6
 
 	db $01
 	dw BattleTransition_CircleData2
-	dwCoord 19, 3
+	dwcoord 19, 3
 
 	db $01
 	dw BattleTransition_CircleData3
-	dwCoord 18, 0
+	dwcoord 18, 0
 
 	db $01
 	dw BattleTransition_CircleData4
-	dwCoord 14, 0
+	dwcoord 14, 0
 
 	db $01
 	dw BattleTransition_CircleData5
-	dwCoord 10, 0
+	dwcoord 10, 0
 
 	db $00
 	dw BattleTransition_CircleData5
-	dwCoord 9, 0
+	dwcoord 9, 0
 
 	db $00
 	dw BattleTransition_CircleData4
-	dwCoord 5, 0
+	dwcoord 5, 0
 
 	db $00
 	dw BattleTransition_CircleData3
-	dwCoord 1, 0
+	dwcoord 1, 0
 
 	db $00
 	dw BattleTransition_CircleData2
-	dwCoord 0, 3
+	dwcoord 0, 3
 
 	db $00
 	dw BattleTransition_CircleData1
-	dwCoord 1, 6
+	dwcoord 1, 6
 
 BattleTransition_HalfCircle2:
 	db $00
 	dw BattleTransition_CircleData1
-	dwCoord 1, 11
+	dwcoord 1, 11
 
 	db $00
 	dw BattleTransition_CircleData2
-	dwCoord 0, 14
+	dwcoord 0, 14
 
 	db $00
 	dw BattleTransition_CircleData3
-	dwCoord 1, 17
+	dwcoord 1, 17
 
 	db $00
 	dw BattleTransition_CircleData4
-	dwCoord 5, 17
+	dwcoord 5, 17
 
 	db $00
 	dw BattleTransition_CircleData5
-	dwCoord 9, 17
+	dwcoord 9, 17
 
 	db $01
 	dw BattleTransition_CircleData5
-	dwCoord 10, 17
+	dwcoord 10, 17
 
 	db $01
 	dw BattleTransition_CircleData4
-	dwCoord 14, 17
+	dwcoord 14, 17
 
 	db $01
 	dw BattleTransition_CircleData3
-	dwCoord 18, 17
+	dwcoord 18, 17
 
 	db $01
 	dw BattleTransition_CircleData2
-	dwCoord 19, 14
+	dwcoord 19, 14
 
 	db $01
 	dw BattleTransition_CircleData1
-	dwCoord 18, 11
+	dwcoord 18, 11
 
 BattleTransition_Circle_Sub3:
 	push hl

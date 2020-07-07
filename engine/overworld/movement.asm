@@ -13,7 +13,7 @@ UpdatePlayerSprite:
 ; background tile the sprite is standing on is greater than $5F, which is
 ; the maximum number for map tiles
 .checkIfTextBoxInFrontOfSprite
-	aCoord 8, 9
+	lda_coord 8, 9
 	ldh [hTilePlayerStandingOn], a
 	cp MAP_TILESET_SIZE
 	jr c, .lowerLeftTileIsMapTile
@@ -709,7 +709,7 @@ GetTileSpriteStandsOn:
 	add SCREEN_WIDTH ; screen X tile + 20
 	ld d, $0
 	ld e, a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	add hl, bc
 	add hl, bc
 	add hl, bc

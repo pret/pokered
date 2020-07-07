@@ -148,7 +148,7 @@ Trade_Delay80:
 	jp DelayFrames
 
 Trade_ClearTileMap:
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
 	jp FillMemory
@@ -232,7 +232,7 @@ Trade_ShowPlayerMon:
 	ldh [hSCX], a
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 4, 0
+	hlcoord 4, 0
 	ld b, 6
 	ld c, 10
 	call TextBoxBorder
@@ -281,7 +281,7 @@ Trade_DrawOpenEndOfLinkCable:
 	call DelayFrame
 	ld a, %10001011
 	ldh [rLCDC], a
-	coord hl, 6, 2
+	hlcoord 6, 2
 	ld b, $7 ; open end of link cable tile ID list index
 	call CopyTileIDsFromList_ZeroBaseTileID
 	call Trade_CopyTileMapToVRAM
@@ -353,7 +353,7 @@ Trade_ShowEnemyMon:
 	ld a, TRADE_BALL_TILT_ANIM
 	call Trade_ShowAnimation
 	call Trade_ShowClearedWindow
-	coord hl, 4, 10
+	hlcoord 4, 10
 	ld b, 6
 	ld c, 10
 	call TextBoxBorder
@@ -370,7 +370,7 @@ Trade_ShowEnemyMon:
 	ld a, [wTradedEnemyMonSpecies]
 	call PlayCry
 	call Trade_Delay100
-	coord hl, 4, 10
+	hlcoord 4, 10
 	lb bc, 8, 12
 	call ClearScreenArea
 	jp PrintTradeTakeCareText
@@ -462,7 +462,7 @@ Trade_DrawLeftGameboy:
 	call Trade_ClearTileMap
 
 ; draw link cable
-	coord hl, 11, 4
+	hlcoord 11, 4
 	ld a, $5d
 	ld [hli], a
 	ld a, $5e
@@ -473,16 +473,16 @@ Trade_DrawLeftGameboy:
 	jr nz, .loop
 
 ; draw gameboy pic
-	coord hl, 5, 3
+	hlcoord 5, 3
 	ld b, $6
 	call CopyTileIDsFromList_ZeroBaseTileID
 
 ; draw text box with player name below gameboy pic
-	coord hl, 4, 12
+	hlcoord 4, 12
 	ld b, 2
 	ld c, 7
 	call TextBoxBorder
-	coord hl, 5, 14
+	hlcoord 5, 14
 	ld de, wPlayerName
 	call PlaceString
 
@@ -492,7 +492,7 @@ Trade_DrawRightGameboy:
 	call Trade_ClearTileMap
 
 ; draw horizontal segment of link cable
-	coord hl, 0, 4
+	hlcoord 0, 4
 	ld a, $5e
 	ld c, $e
 .loop
@@ -520,16 +520,16 @@ Trade_DrawRightGameboy:
 	ld [hl], a
 
 ; draw gameboy pic
-	coord hl, 7, 8
+	hlcoord 7, 8
 	ld b, $6
 	call CopyTileIDsFromList_ZeroBaseTileID
 
 ; draw text box with enemy name above link cable
-	coord hl, 6, 0
+	hlcoord 6, 0
 	ld b, 2
 	ld c, 7
 	call TextBoxBorder
-	coord hl, 7, 2
+	hlcoord 7, 2
 	ld de, wLinkEnemyTrainerName
 	call PlaceString
 
@@ -538,7 +538,7 @@ Trade_DrawRightGameboy:
 Trade_DrawCableAcrossScreen:
 ; Draws the link cable across the screen.
 	call Trade_ClearTileMap
-	coord hl, 0, 4
+	hlcoord 0, 4
 	ld a, $5e
 	ld c, SCREEN_WIDTH
 .loop
@@ -551,7 +551,7 @@ Trade_CopyCableTilesOffScreen:
 ; This is used to copy the link cable tiles off screen so that the cable
 ; continues when the screen is scrolled.
 	push hl
-	coord hl, 0, 4
+	hlcoord 0, 4
 	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld a, h
@@ -735,7 +735,7 @@ Trade_LoadMonSprite:
 	xor $1
 	ldh [hAutoBGTransferEnabled], a
 	call GetMonHeader
-	coord hl, 7, 2
+	hlcoord 7, 2
 	call LoadFlippedFrontSpriteByMonIndex
 	ld c, 10
 	jp DelayFrames

@@ -10,17 +10,17 @@ DisplayPCMainMenu::
 	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .leaguePCAvailable
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 8
 	ld c, 14
 	jr .next
 .noOaksPC
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 6
 	ld c, 14
 	jr .next
 .leaguePCAvailable
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 10
 	ld c, 14
 .next
@@ -30,15 +30,15 @@ DisplayPCMainMenu::
 	ld [wMaxMenuItem], a
 	CheckEvent EVENT_MET_BILL
 	jr nz, .metBill
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, SomeonesPCText
 	jr .next2
 .metBill
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, BillsPCText
 .next2
 	call PlaceString
-	coord hl, 2, 4
+	hlcoord 2, 4
 	ld de, wPlayerName
 	call PlaceString
 	ld l, c
@@ -47,7 +47,7 @@ DisplayPCMainMenu::
 	call PlaceString
 	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .noOaksPC2
-	coord hl, 2, 6
+	hlcoord 2, 6
 	ld de, OaksPCText
 	call PlaceString
 	ld a, [wNumHoFTeams]
@@ -55,20 +55,20 @@ DisplayPCMainMenu::
 	jr z, .noLeaguePC
 	ld a, 4
 	ld [wMaxMenuItem], a
-	coord hl, 2, 8
+	hlcoord 2, 8
 	ld de, PKMNLeaguePCText
 	call PlaceString
-	coord hl, 2, 10
+	hlcoord 2, 10
 	ld de, LogOffPCText
 	jr .next3
 .noLeaguePC
-	coord hl, 2, 8
+	hlcoord 2, 8
 	ld de, LogOffPCText
 	jr .next3
 .noOaksPC2
 	ld a, $2
 	ld [wMaxMenuItem], a
-	coord hl, 2, 6
+	hlcoord 2, 6
 	ld de, LogOffPCText
 .next3
 	call PlaceString
@@ -119,11 +119,11 @@ BillsPCMenu:
 	lb bc, BANK(PokeballTileGraphics), $01
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 10
 	ld c, 12
 	call TextBoxBorder
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, BillsPCMenuText
 	call PlaceString
 	ld hl, wTopMenuItemY
@@ -146,7 +146,7 @@ BillsPCMenu:
 	ld [wPlayerMonNumber], a
 	ld hl, WhatText
 	call PrintText
-	coord hl, 9, 14
+	hlcoord 9, 14
 	ld b, 2
 	ld c, 9
 	call TextBoxBorder
@@ -156,15 +156,15 @@ BillsPCMenu:
 	jr c, .singleDigitBoxNum
 ; two digit box num
 	sub 9
-	coord hl, 17, 16
+	hlcoord 17, 16
 	ld [hl], "1"
 	add "0"
 	jr .next
 .singleDigitBoxNum
 	add "1"
 .next
-	Coorda 18, 16
-	coord hl, 10, 16
+	ldcoord_a 18, 16
+	hlcoord 10, 16
 	ld de, BoxNoPCText
 	call PlaceString
 	ld a, 1
@@ -380,7 +380,7 @@ HMMoveArray:
 INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
-	coord hl, 9, 10
+	hlcoord 9, 10
 	ld b, 6
 	ld c, 9
 	call TextBoxBorder
@@ -390,9 +390,9 @@ DisplayDepositWithdrawMenu:
 	jr nz, .next
 	ld de, WithdrawPCText
 .next
-	coord hl, 11, 12
+	hlcoord 11, 12
 	call PlaceString
-	coord hl, 11, 14
+	hlcoord 11, 14
 	ld de, StatsCancelPCText
 	call PlaceString
 	ld hl, wTopMenuItemY

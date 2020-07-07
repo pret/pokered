@@ -17,15 +17,15 @@ VendingMachineMenu::
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 3
+	hlcoord 0, 3
 	ld b, 8
 	ld c, 12
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 2, 5
+	hlcoord 2, 5
 	ld de, DrinkText
 	call PlaceString
-	coord hl, 9, 6
+	hlcoord 9, 6
 	ld de, DrinkPriceText
 	call PlaceString
 	ld hl, wd730

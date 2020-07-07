@@ -84,11 +84,11 @@ BillsHousePokemonList::
 .billsPokemonLoop
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 10
 	ld c, 9
 	call TextBoxBorder
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, BillsMonListText
 	call PlaceString
 	ld hl, BillsHousePokemonListText2

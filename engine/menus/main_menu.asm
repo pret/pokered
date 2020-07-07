@@ -33,20 +33,20 @@ MainMenu:
 	cp 1
 	jr z, .noSaveFile
 ; there's a save file
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 6
 	ld c, 13
 	call TextBoxBorder
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, ContinueText
 	call PlaceString
 	jr .next2
 .noSaveFile
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 4
 	ld c, 13
 	call TextBoxBorder
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, NewGameText
 	call PlaceString
 .next2
@@ -141,12 +141,12 @@ LinkMenu:
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
 	call PrintText
-	coord hl, 5, 5
+	hlcoord 5, 5
 	ld b, $6
 	ld c, $d
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 7, 7
+	hlcoord 7, 7
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
@@ -240,11 +240,11 @@ LinkMenu:
 	ld c, d
 .updateCursorPosition
 	ld a, b
-	Coorda 6, 7
+	ldcoord_a 6, 7
 	ld a, c
-	Coorda 6, 9
+	ldcoord_a 6, 9
 	ld a, d
-	Coorda 6, 11
+	ldcoord_a 6, 11
 	ld c, 40
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
@@ -345,21 +345,21 @@ CableClubOptionsText:
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 4, 7
+	hlcoord 4, 7
 	ld b, 8
 	ld c, 14
 	call TextBoxBorder
-	coord hl, 5, 9
+	hlcoord 5, 9
 	ld de, SaveScreenInfoText
 	call PlaceString
-	coord hl, 12, 9
+	hlcoord 12, 9
 	ld de, wPlayerName
 	call PlaceString
-	coord hl, 17, 11
+	hlcoord 17, 11
 	call PrintNumBadges
-	coord hl, 16, 13
+	hlcoord 16, 13
 	call PrintNumOwnedMons
-	coord hl, 13, 15
+	hlcoord 13, 15
 	call PrintPlayTime
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
@@ -369,23 +369,23 @@ DisplayContinueGameInfo:
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 4, 0
+	hlcoord 4, 0
 	ld b, $8
 	ld c, $e
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	coord hl, 5, 2
+	hlcoord 5, 2
 	ld de, SaveScreenInfoText
 	call PlaceString
-	coord hl, 12, 2
+	hlcoord 12, 2
 	ld de, wPlayerName
 	call PlaceString
-	coord hl, 17, 4
+	hlcoord 17, 4
 	call PrintNumBadges
-	coord hl, 16, 6
+	hlcoord 16, 6
 	call PrintNumOwnedMons
-	coord hl, 13, 8
+	hlcoord 13, 8
 	call PrintPlayTime
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
@@ -429,28 +429,28 @@ SaveScreenInfoText:
 	next "TIME@"
 
 DisplayOptionMenu:
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 3
 	ld c, 18
 	call TextBoxBorder
-	coord hl, 0, 5
+	hlcoord 0, 5
 	ld b, 3
 	ld c, 18
 	call TextBoxBorder
-	coord hl, 0, 10
+	hlcoord 0, 10
 	ld b, 3
 	ld c, 18
 	call TextBoxBorder
-	coord hl, 1, 1
+	hlcoord 1, 1
 	ld de, TextSpeedOptionText
 	call PlaceString
-	coord hl, 1, 6
+	hlcoord 1, 6
 	ld de, BattleAnimationOptionText
 	call PlaceString
-	coord hl, 1, 11
+	hlcoord 1, 11
 	ld de, BattleStyleOptionText
 	call PlaceString
-	coord hl, 2, 16
+	hlcoord 2, 16
 	ld de, OptionMenuCancelText
 	call PlaceString
 	xor a
@@ -644,7 +644,7 @@ SetCursorPositionsFromOptions:
 	dec hl
 	ld a, [hl]
 	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
-	coord hl, 0, 3
+	hlcoord 0, 3
 	call .placeUnfilledRightArrow
 	sla c
 	ld a, 1 ; On
@@ -652,7 +652,7 @@ SetCursorPositionsFromOptions:
 	ld a, 10 ; Off
 .storeBattleAnimationCursorX
 	ld [wOptionsBattleAnimCursorX], a ; battle animation cursor X coordinate
-	coord hl, 0, 8
+	hlcoord 0, 8
 	call .placeUnfilledRightArrow
 	sla c
 	ld a, 1
@@ -660,10 +660,10 @@ SetCursorPositionsFromOptions:
 	ld a, 10
 .storeBattleStyleCursorX
 	ld [wOptionsBattleStyleCursorX], a ; battle style cursor X coordinate
-	coord hl, 0, 13
+	hlcoord 0, 13
 	call .placeUnfilledRightArrow
 ; cursor in front of Cancel
-	coord hl, 0, 16
+	hlcoord 0, 16
 	ld a, 1
 .placeUnfilledRightArrow
 	ld e, a

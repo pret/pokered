@@ -9,11 +9,11 @@ CableClub_DoBattleOrTrade:
 	call LoadFontTilePatterns
 	call LoadHpBarAndStatusTilePatterns
 	call LoadTrainerInfoTextBoxTiles
-	coord hl, 3, 8
+	hlcoord 3, 8
 	ld b, 2
 	ld c, 12
 	call CableClub_TextBoxBorder
-	coord hl, 4, 10
+	hlcoord 4, 10
 	ld de, PleaseWaitString
 	call PlaceString
 	ld hl, wPlayerNumHits
@@ -399,7 +399,7 @@ TradeCenter_SelectMon:
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
-	coord hl, 1, 1
+	hlcoord 1, 1
 	lb bc, 6, 1
 	call ClearScreenArea
 .playerMonMenu_HandleInput
@@ -464,11 +464,11 @@ TradeCenter_SelectMon:
 	dec a
 .displayStatsTradeMenu
 	push af
-	coord hl, 0, 14
+	hlcoord 0, 14
 	ld b, 2
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 2, 16
+	hlcoord 2, 16
 	ld de, .statsTrade
 	call PlaceString
 	xor a
@@ -480,7 +480,7 @@ TradeCenter_SelectMon:
 	ld [wTopMenuItemY], a
 .selectStatsMenuItem
 	ld a, " "
-	Coorda 11, 16
+	ldcoord_a 11, 16
 	ld a, D_RIGHT | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 1
@@ -497,7 +497,7 @@ TradeCenter_SelectMon:
 	jp .playerMonMenu
 .selectTradeMenuItem
 	ld a, " "
-	Coorda 1, 16
+	ldcoord_a 1, 16
 	ld a, D_LEFT | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -548,7 +548,7 @@ TradeCenter_SelectMon:
 	ld [hl], a
 .cancelMenuItem_Loop
 	ld a, "▶" ; filled arrow cursor
-	Coorda 1, 16
+	ldcoord_a 1, 16
 .cancelMenuItem_JoypadLoop
 	call JoypadLowSensitivity
 	ldh a, [hJoy5]
@@ -560,14 +560,14 @@ TradeCenter_SelectMon:
 	jr z, .cancelMenuItem_JoypadLoop
 ; if Up pressed
 	ld a, " "
-	Coorda 1, 16
+	ldcoord_a 1, 16
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurrentMenuItem], a
 	jp .playerMonMenu
 .cancelMenuItem_APressed
 	ld a, "▷" ; unfilled arrow cursor
-	Coorda 1, 16
+	ldcoord_a 1, 16
 	ld a, $f
 	ld [wSerialExchangeNybbleSendData], a
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
@@ -596,15 +596,15 @@ ReturnToCableClubRoom:
 	ret
 
 TradeCenter_DrawCancelBox:
-	coord hl, 11, 15
+	hlcoord 11, 15
 	ld a, $7e
 	ld bc, 2 * SCREEN_WIDTH + 9
 	call FillMemory
-	coord hl, 0, 15
+	hlcoord 0, 15
 	ld b, 1
 	ld c, 9
 	call CableClub_TextBoxBorder
-	coord hl, 2, 16
+	hlcoord 2, 16
 	ld de, CancelTextString
 	jp PlaceString
 
@@ -613,7 +613,7 @@ CancelTextString:
 
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
-	coord hl, 1, 9
+	hlcoord 1, 9
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], "▷" ; cursor
@@ -630,24 +630,24 @@ TradeCenter_DisplayStats:
 	jp TradeCenter_DrawCancelBox
 
 TradeCenter_DrawPartyLists:
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 6
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 0, 8
+	hlcoord 0, 8
 	ld b, 6
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 5, 0
+	hlcoord 5, 0
 	ld de, wPlayerName
 	call PlaceString
-	coord hl, 5, 8
+	hlcoord 5, 8
 	ld de, wLinkEnemyTrainerName
 	call PlaceString
-	coord hl, 2, 1
+	hlcoord 2, 1
 	ld de, wPartySpecies
 	call TradeCenter_PrintPartyListNames
-	coord hl, 2, 9
+	hlcoord 2, 9
 	ld de, wEnemyPartyMons
 	; fall through
 
@@ -684,7 +684,7 @@ TradeCenter_Trade:
 	ld [wSerialExchangeNybbleReceiveData], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld [wMenuJoypadPollCount], a
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
 	call CableClub_TextBoxBorder
@@ -709,10 +709,10 @@ TradeCenter_Trade:
 	ld [wd11e], a
 	call GetMonName
 	ld hl, WillBeTradedText
-	coord bc, 1, 14
+	bccoord 1, 14
 	call TextCommandProcessor
 	call SaveScreenTilesToBuffer1
-	coord hl, 10, 7
+	hlcoord 10, 7
 	lb bc, 8, 11
 	ld a, TRADE_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
@@ -726,11 +726,11 @@ TradeCenter_Trade:
 ; if trade cancelled
 	ld a, $1
 	ld [wSerialExchangeNybbleSendData], a
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 1, 14
+	hlcoord 1, 14
 	ld de, TradeCanceled
 	call PlaceString
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
@@ -743,11 +743,11 @@ TradeCenter_Trade:
 	dec a ; did the other person cancel?
 	jr nz, .doTrade
 ; if the other person cancelled
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 1, 14
+	hlcoord 1, 14
 	ld de, TradeCanceled
 	call PlaceString
 	jp .tradeCancelled
@@ -851,11 +851,11 @@ TradeCenter_Trade:
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld c, 40
 	call DelayFrames
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
 	call CableClub_TextBoxBorder
-	coord hl, 1, 14
+	hlcoord 1, 14
 	ld de, TradeCompleted
 	call PlaceString
 	predef SaveSAVtoSRAM2

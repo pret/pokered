@@ -8,7 +8,7 @@ HandleLedges::
 	predef GetTileAndCoordsInFrontOfPlayer
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld b, a
-	aCoord 8, 9
+	lda_coord 8, 9
 	ld c, a
 	ld a, [wTileInFrontOfPlayer]
 	ld d, a

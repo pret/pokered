@@ -99,7 +99,7 @@ EvolutionSetWholeScreenPalette:
 
 Evolution_LoadPic:
 	call GetMonHeader
-	coord hl, 7, 2
+	hlcoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
 Evolution_BackAndForthAnim:
@@ -118,7 +118,7 @@ Evolution_ChangeMonPic:
 	push bc
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 7, 2
+	hlcoord 7, 2
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH - 7
 .loop

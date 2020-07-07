@@ -2,12 +2,12 @@
 DrawStartMenu::
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
-	coord hl, 10, 0
+	hlcoord 10, 0
 	ld b, $0e
 	ld c, $08
 	jr nz, .drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
-	coord hl, 10, 0
+	hlcoord 10, 0
 	ld b, $0c
 	ld c, $08
 .drawTextBoxBorder
@@ -25,7 +25,7 @@ DrawStartMenu::
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wd730
 	set 6, [hl] ; no pauses between printing each letter
-	coord hl, 12, 2
+	hlcoord 12, 2
 	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokedex
 	ld a, $06

@@ -64,7 +64,7 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	dec l
 	ld b, l
 	ld c, 12
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call TextBoxBorder
 	call UpdateSprites
 	call CeladonMartRoofScript_PrintDrinksInBag
@@ -194,7 +194,7 @@ CeladonMartRoofScript_PrintDrinksInBag:
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ldh a, [hItemCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes

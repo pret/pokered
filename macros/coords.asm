@@ -1,65 +1,79 @@
-validateCoords: MACRO
-	IF \1 >= SCREEN_WIDTH
-		fail "x coord out of range"
-	ENDC
-	IF \2 >= SCREEN_HEIGHT
-		fail "y coord out of range"
-	ENDC
-ENDM
-
-;\1 = r
-;\2 = X
-;\3 = Y
-;\4 = which tilemap (optional)
-coord: MACRO
-	validateCoords \2, \3
+validate_coords: MACRO
 	IF _NARG >= 4
-		ld \1, \4 + SCREEN_WIDTH * \3 + \2
+		IF \1 >= \3
+			fail "x coord out of range"
+		ENDC
+		IF \2 >= \4
+			fail "y coord out of range"
+		ENDC
 	ELSE
-		ld \1, wTileMap + SCREEN_WIDTH * \3 + \2
+		validate_coords \1, \2, SCREEN_WIDTH, SCREEN_HEIGHT
 	ENDC
 ENDM
 
-;\1 = X
-;\2 = Y
-;\3 = which tilemap (optional)
-aCoord: MACRO
-	validateCoords \1, \2
-	IF _NARG >= 3
-		ld a, [\3 + SCREEN_WIDTH * \2 + \1]
+hlcoord EQUS "coord hl,"
+bccoord EQUS "coord bc,"
+decoord EQUS "coord de,"
+
+coord: MACRO
+; register, x, y[, origin]
+	validate_coords \2, \3
+	IF _NARG >= 4
+		ld \1, (\3) * SCREEN_WIDTH + (\2) + \4
 	ELSE
-		ld a, [wTileMap + SCREEN_WIDTH * \2 + \1]
+		ld \1, (\3) * SCREEN_WIDTH + (\2) + wTileMap
 	ENDC
 ENDM
 
-;\1 = X
-;\2 = Y
-;\3 = which tilemap (optional)
-Coorda: MACRO
-	validateCoords \1, \2
-	IF _NARG >= 3
-		ld [\3 + SCREEN_WIDTH * \2 + \1], a
+hlbgcoord EQUS "bgcoord hl,"
+bcbgcoord EQUS "bgcoord bc,"
+debgcoord EQUS "bgcoord de,"
+
+bgcoord: MACRO
+; register, x, y[, origin]
+	validate_coords \2, \3, BG_MAP_WIDTH, BG_MAP_HEIGHT
+	IF _NARG >= 4
+		ld \1, (\3) * BG_MAP_WIDTH + (\2) + \4
 	ELSE
-		ld [wTileMap + SCREEN_WIDTH * \2 + \1], a
+		ld \1, (\3) * BG_MAP_WIDTH + (\2) + vBGMap0
 	ENDC
 ENDM
 
-;\1 = X
-;\2 = Y
-;\3 = which tilemap (optional)
-dwCoord: MACRO
-	validateCoords \1, \2
-	IF _NARG >= 3
-		dw \3 + SCREEN_WIDTH * \2 + \1
-	ELSE
-		dw wTileMap + SCREEN_WIDTH * \2 + \1
-	ENDC
-ENDM
+hlowcoord EQUS "owcoord hl,"
+bcowcoord EQUS "owcoord bc,"
+deowcoord EQUS "owcoord de,"
 
-;\1 = r
-;\2 = X
-;\3 = Y
-;\4 = map width
-overworldMapCoord: MACRO
+owcoord: MACRO
+; register, x, y, map width
 	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
+ENDM
+
+dwcoord: MACRO
+; x, y
+	validate_coords \1, \2
+	IF _NARG >= 3
+		dw (\2) * SCREEN_WIDTH + (\1) + \3
+	ELSE
+		dw (\2) * SCREEN_WIDTH + (\1) + wTileMap
+	ENDC
+ENDM
+
+ldcoord_a: MACRO
+; x, y[, origin]
+	validate_coords \1, \2
+	IF _NARG >= 3
+		ld [(\2) * SCREEN_WIDTH + (\1) + \3], a
+	ELSE
+		ld [(\2) * SCREEN_WIDTH + (\1) + wTileMap], a
+	ENDC
+ENDM
+
+lda_coord: MACRO
+; x, y[, origin]
+	validate_coords \1, \2
+	IF _NARG >= 3
+		ld a, [(\2) * SCREEN_WIDTH + (\1) + \3]
+	ELSE
+		ld a, [(\2) * SCREEN_WIDTH + (\1) + wTileMap]
+	ENDC
 ENDM

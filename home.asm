@@ -869,7 +869,7 @@ UncompressSpriteFromDE::
 	jp UncompressSpriteData
 
 SaveScreenTilesToBuffer2::
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, wTileMapBackup2
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
@@ -886,13 +886,13 @@ LoadScreenTilesFromBuffer2DisableBGTransfer::
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wTileMapBackup2
-	coord de, 0, 0
+	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ret
 
 SaveScreenTilesToBuffer1::
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, wTileMapBackup
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	jp CopyData
@@ -901,7 +901,7 @@ LoadScreenTilesFromBuffer1::
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, wTileMapBackup
-	coord de, 0, 0
+	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ld a, 1
@@ -1071,7 +1071,7 @@ WaitForTextScrollButtonPress::
 	jr z, .skipAnimation
 	call TownMapSpriteBlinkingAnimation
 .skipAnimation
-	coord hl, 18, 16
+	hlcoord 18, 16
 	call HandleDownArrowBlinkTiming
 	pop hl
 	call JoypadLowSensitivity
@@ -1304,7 +1304,7 @@ HandleMenuInput_::
 	and a ; was a key pressed?
 	jr nz, .keyPressed
 	push hl
-	coord hl, 18, 11 ; coordinates of blinking down arrow in some menus
+	hlcoord 18, 11 ; coordinates of blinking down arrow in some menus
 	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
 	ld a, [wMenuJoypadPollCount]
@@ -1395,7 +1395,7 @@ PlaceMenuCursor::
 	ld a, [wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z, .adjustForXCoord
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH
 .topMenuItemLoop
 	add hl, bc
@@ -1565,7 +1565,7 @@ PrintText::
 	call Delay3
 	pop hl
 PrintText_NoCreatingTextBox::
-	coord bc, 1, 14
+	bccoord 1, 14
 	jp TextCommandProcessor
 
 INCLUDE "home/print_num.asm"

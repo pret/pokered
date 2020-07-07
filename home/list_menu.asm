@@ -31,7 +31,7 @@ DisplayListMenuID::
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
-	coord hl, 4, 2 ; coordinates of upper left corner of menu text box
+	hlcoord 4, 2 ; coordinates of upper left corner of menu text box
 	lb de, 9, 14 ; height and width of menu text box
 	ld a, [wListMenuID]
 	and a ; is it a PC pokemon list?
@@ -67,12 +67,12 @@ DisplayListMenuIDLoop::
 	jr z, .notOldManBattle
 .oldManBattle
 	ld a, "▶"
-	Coorda 5, 4 ; place menu cursor in front of first menu entry
+	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
 	call DelayFrames
 	xor a
 	ld [wCurrentMenuItem], a
-	coord hl, 5, 4
+	hlcoord 5, 4
 	ld a, l
 	ld [wMenuCursorLocation], a
 	ld a, h
@@ -194,23 +194,23 @@ DisplayListMenuIDLoop::
 
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity
-	coord hl, 15, 9
+	hlcoord 15, 9
 	ld b, 1 ; height
 	ld c, 3 ; width
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .drawTextBox
 ; text box dimensions/coordinates for quantity and price
-	coord hl, 7, 9
+	hlcoord 7, 9
 	ld b, 1  ; height
 	ld c, 11 ; width
 .drawTextBox
 	call TextBoxBorder
-	coord hl, 16, 10
+	hlcoord 16, 10
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .printInitialQuantity
-	coord hl, 8, 10
+	hlcoord 8, 10
 .printInitialQuantity
 	ld de, InitialQuantityText
 	call PlaceString
@@ -250,7 +250,7 @@ DisplayChooseQuantityMenu::
 	ld a, [wMaxItemQuantity]
 	ld [hl], a
 .handleNewQuantity
-	coord hl, 17, 10
+	hlcoord 17, 10
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .printQuantity
@@ -289,13 +289,13 @@ DisplayChooseQuantityMenu::
 	ldh a, [hDivideBCDQuotient + 2]
 	ldh [hMoney + 2], a
 .skipHalvingPrice
-	coord hl, 12, 10
+	hlcoord 12, 10
 	ld de, SpacesBetweenQuantityAndPriceText
 	call PlaceString
 	ld de, hMoney ; total price
 	ld c, $a3
 	call PrintBCDNumber
-	coord hl, 9, 10
+	hlcoord 9, 10
 .printQuantity
 	ld de, wItemQuantity ; current quantity
 	lb bc, LEADING_ZEROES | 1, 2 ; 1 byte, 2 digits
@@ -334,7 +334,7 @@ ExitListMenu::
 	ret
 
 PrintListMenuEntries::
-	coord hl, 5, 3
+	hlcoord 5, 3
 	ld b, 9
 	ld c, 14
 	call ClearScreenArea
@@ -359,7 +359,7 @@ PrintListMenuEntries::
 	jr nc, .noCarry
 	inc d
 .noCarry
-	coord hl, 6, 4 ; coordinates of first list entry name
+	hlcoord 6, 4 ; coordinates of first list entry name
 	ld b, 4 ; print 4 names
 .loop
 	ld a, b

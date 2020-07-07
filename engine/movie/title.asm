@@ -63,7 +63,7 @@ DisplayTitleScreen:
 	call ClearBothBGMaps
 
 ; place tiles for pokemon logo (except for the last row)
-	coord hl, 2, 1
+	hlcoord 2, 1
 	ld a, $80
 	ld de, SCREEN_WIDTH
 	ld c, 6
@@ -81,7 +81,7 @@ DisplayTitleScreen:
 	jr nz, .pokemonLogoTileLoop
 
 ; place tiles for the last row of the pokemon logo
-	coord hl, 2, 7
+	hlcoord 2, 7
 	ld a, $31
 	ld b, $10
 .pokemonLogoLastTileRowLoop
@@ -98,7 +98,7 @@ DisplayTitleScreen:
 	ld [hl], a
 
 ; place tiles for title screen copyright
-	coord hl, 2, 17
+	hlcoord 2, 17
 	ld de, .tileScreenCopyrightTiles
 	ld b, $10
 .tileScreenCopyrightTilesLoop
@@ -353,7 +353,7 @@ ClearBothBGMaps:
 LoadTitleMonSprite:
 	ld [wcf91], a
 	ld [wd0b5], a
-	coord hl, 5, 10
+	hlcoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
@@ -372,7 +372,7 @@ LoadCopyrightTiles:
 	ld hl, vChars2 + $600
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
-	coord hl, 2, 7
+	hlcoord 2, 7
 	ld de, CopyrightTextString
 	jp PlaceString
 
@@ -386,7 +386,7 @@ INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
-	coord hl, 7, 8
+	hlcoord 7, 8
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

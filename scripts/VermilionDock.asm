@@ -52,7 +52,7 @@ VermilionDock_1db9b:
 	call DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
-	coord hl, 0, 10
+	hlcoord 0, 10
 	ld bc, SCREEN_WIDTH * 6
 	ld a, $14 ; water tile
 	call FillMemory
@@ -184,7 +184,7 @@ VermilionDock_EraseSSAnne:
 	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
 	ld a, $14 ; water tile
 	call FillMemory
-	ld hl, vBGMap0 + 10 * BG_MAP_WIDTH
+	hlbgcoord 0, 10
 	ld de, wVermilionDockTileMapBuffer
 	ld bc, (6 * BG_MAP_WIDTH) / 16
 	call CopyVideoData
@@ -194,7 +194,7 @@ VermilionDock_EraseSSAnne:
 ; the blocks is unnecessary because the blocks the ship occupies are south of
 ; the player and won't be redrawn when the player automatically walks north and
 ; exits the map. This code could be removed without affecting anything.
-	overworldMapCoord hl, 5, 2, VERMILION_DOCK_WIDTH
+	hlowcoord 5, 2, VERMILION_DOCK_WIDTH
 	ld a, $d ; water block
 	ld [hli], a
 	ld [hli], a

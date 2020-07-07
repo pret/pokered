@@ -76,7 +76,7 @@ PlaceNextChar::
 	cp "<LINE>"
 	jr nz, .NotLine
 	pop hl
-	coord hl, 1, 16
+	hlcoord 1, 16
 	push hl
 	jp NextChar
 
@@ -207,12 +207,12 @@ PromptText::
 	cp LINK_STATE_BATTLING
 	jp z, .ok
 	ld a, "▼"
-	Coorda 18, 16
+	ldcoord_a 18, 16
 .ok
 	call ProtectedDelay3
 	call ManualTextScroll
 	ld a, " "
-	Coorda 18, 16
+	ldcoord_a 18, 16
 
 DoneText::
 	pop hl
@@ -226,49 +226,49 @@ DoneText::
 Paragraph::
 	push de
 	ld a, "▼"
-	Coorda 18, 16
+	ldcoord_a 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	coord hl, 1, 13
+	hlcoord 1, 13
 	lb bc, 4, 18
 	call ClearScreenArea
 	ld c, 20
 	call DelayFrames
 	pop de
-	coord hl, 1, 14
+	hlcoord 1, 14
 	jp NextChar
 
 PageChar::
 	push de
 	ld a, "▼"
-	Coorda 18, 16
+	ldcoord_a 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	coord hl, 1, 10
+	hlcoord 1, 10
 	lb bc, 7, 18
 	call ClearScreenArea
 	ld c, 20
 	call DelayFrames
 	pop de
 	pop hl
-	coord hl, 1, 11
+	hlcoord 1, 11
 	push hl
 	jp NextChar
 
 _ContText::
 	ld a, "▼"
-	Coorda 18, 16
+	ldcoord_a 18, 16
 	call ProtectedDelay3
 	push de
 	call ManualTextScroll
 	pop de
 	ld a, " "
-	Coorda 18, 16
+	ldcoord_a 18, 16
 _ContTextNoPause::
 	push de
 	call ScrollTextUpOneLine
 	call ScrollTextUpOneLine
-	coord hl, 1, 16
+	hlcoord 1, 16
 	pop de
 	jp NextChar
 
@@ -277,8 +277,8 @@ _ContTextNoPause::
 ; first time, copy the two rows of text to the "in between" rows that are usually emtpy
 ; second time, copy the bottom row of text into the top row of text
 ScrollTextUpOneLine::
-	coord hl, 0, 14 ; top row of text
-	coord de, 0, 13 ; empty line above text
+	hlcoord 0, 14 ; top row of text
+	decoord 0, 13 ; empty line above text
 	ld b, SCREEN_WIDTH * 3
 .copyText
 	ld a, [hli]
@@ -286,7 +286,7 @@ ScrollTextUpOneLine::
 	inc de
 	dec b
 	jr nz, .copyText
-	coord hl, 1, 16
+	hlcoord 1, 16
 	ld a, " "
 	ld b, SCREEN_WIDTH - 2
 .clearText
@@ -424,7 +424,7 @@ TextCommand_MOVE::
 TextCommand_LOW::
 ; write text at (1,16)
 	pop hl
-	coord bc, 1, 16 ; second line of dialogue text box
+	bccoord 1, 16 ; second line of dialogue text box
 	jp NextTextCommand
 
 TextCommand_PROMPT_BUTTON::
@@ -433,12 +433,12 @@ TextCommand_PROMPT_BUTTON::
 	cp LINK_STATE_BATTLING
 	jp z, TextCommand_WAIT_BUTTON
 	ld a, "▼"
-	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
+	ldcoord_a 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
 	call ManualTextScroll ; blink arrow and wait for A or B to be pressed
 	pop bc
 	ld a, " "
-	Coorda 18, 16 ; overwrite down arrow with blank space
+	ldcoord_a 18, 16 ; overwrite down arrow with blank space
 	pop hl
 	jp NextTextCommand
 
@@ -446,11 +446,11 @@ TextCommand_SCROLL::
 ; pushes text up two lines and sets the BC cursor to the border tile
 ; below the first character column of the text box.
 	ld a, " "
-	Coorda 18, 16 ; place blank space in lower right corner of dialogue text box
+	ldcoord_a 18, 16 ; place blank space in lower right corner of dialogue text box
 	call ScrollTextUpOneLine
 	call ScrollTextUpOneLine
 	pop hl
-	coord bc, 1, 16 ; second line of dialogue text box
+	bccoord 1, 16 ; second line of dialogue text box
 	jp NextTextCommand
 
 TextCommand_START_ASM::

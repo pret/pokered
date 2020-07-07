@@ -95,18 +95,18 @@ LeaguePCShowMon:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 0
 	call RunPaletteCommand
-	coord hl, 12, 5
+	hlcoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	call GBPalNormal
-	coord hl, 0, 13
+	hlcoord 0, 13
 	ld b, 2
 	ld c, $12
 	call TextBoxBorder
-	coord hl, 1, 15
+	hlcoord 1, 15
 	ld de, HallOfFameNoText
 	call PlaceString
-	coord hl, 16, 15
+	hlcoord 16, 15
 	ld de, wHoFTeamNo
 	lb bc, 1, 3
 	call PrintNumber

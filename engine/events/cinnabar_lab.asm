@@ -20,7 +20,7 @@ GiveFossilToCinnabarLab::
 	dec l
 	ld b, l
 	ld c, $d
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call TextBoxBorder
 	call UpdateSprites
 	call PrintFossilsInBag
@@ -100,7 +100,7 @@ PrintFossilsInBag:
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ldh a, [hItemCounter]
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes

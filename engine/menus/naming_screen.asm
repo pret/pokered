@@ -4,7 +4,7 @@ AskName:
 	push hl
 	ld a, [wIsInBattle]
 	dec a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 4
 	ld c, 11
 	call z, ClearScreenArea ; only if in wild battle
@@ -13,7 +13,7 @@ AskName:
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -93,7 +93,7 @@ DisplayNamingScreen:
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	farcall LoadMonPartySpriteGfx
-	coord hl, 0, 4
+	hlcoord 0, 4
 	ld b, 9
 	ld c, 18
 	call TextBoxBorder
@@ -344,7 +344,7 @@ PrintAlphabet:
 	jr nz, .lowercase
 	ld de, UpperCaseAlphabet
 .lowercase
-	coord hl, 2, 5
+	hlcoord 2, 5
 	lb bc, 5, 9 ; 5 rows, 9 columns
 .outerLoop
 	push bc
@@ -371,13 +371,13 @@ PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
 	ld [wNamingScreenNameLength], a
-	coord hl, 10, 2
+	hlcoord 10, 2
 	lb bc, 1, 10
 	call ClearScreenArea
-	coord hl, 10, 2
+	hlcoord 10, 2
 	ld de, wcf4b
 	call PlaceString
-	coord hl, 10, 3
+	hlcoord 10, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nc, .pokemon1
@@ -416,7 +416,7 @@ PrintNicknameAndUnderscores:
 .emptySpacesRemaining
 	ld c, a
 	ld b, $0
-	coord hl, 10, 3
+	hlcoord 10, 3
 	add hl, bc
 	ld [hl], $77 ; raised underscore tile id
 	ret
@@ -450,7 +450,7 @@ CalcStringLength:
 	jr .loop
 
 PrintNamingText:
-	coord hl, 0, 1
+	hlcoord 0, 1
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
@@ -465,12 +465,12 @@ PrintNamingText:
 	pop af
 	ld [wd11e], a
 	call GetMonName
-	coord hl, 4, 1
+	hlcoord 4, 1
 	call PlaceString
 	ld hl, $1
 	add hl, bc
 	ld [hl], $c9
-	coord hl, 1, 3
+	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString
 .notNickname

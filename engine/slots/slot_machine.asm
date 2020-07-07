@@ -79,11 +79,11 @@ MainSlotMachineLoop:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	coord hl, 14, 11
+	hlcoord 14, 11
 	ld b, 5
 	ld c, 4
 	call TextBoxBorder
-	coord hl, 16, 12
+	hlcoord 16, 12
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
@@ -133,7 +133,7 @@ MainSlotMachineLoop:
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
-	coord hl, 14, 12
+	hlcoord 14, 12
 	lb bc, 13, 15
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
@@ -615,7 +615,7 @@ YeahText:
 
 SlotMachine_PrintWinningSymbol:
 ; prints winning symbol and down arrow in text box
-	coord hl, 2, 14
+	hlcoord 2, 14
 	ld a, [wSlotMachineWinningSymbol]
 	add $25
 	ld [hli], a
@@ -627,7 +627,7 @@ SlotMachine_PrintWinningSymbol:
 	ld [hli], a
 	inc a
 	ld [hl], a
-	coord hl, 18, 16
+	hlcoord 18, 16
 	ld [hl], "▼"
 	ret
 
@@ -642,13 +642,13 @@ SlotMachine_SubtractBetFromPlayerCoins:
 	predef SubBCDPredef
 
 SlotMachine_PrintCreditCoins:
-	coord hl, 5, 1
+	hlcoord 5, 1
 	ld de, wPlayerCoins
 	ld c, $2
 	jp PrintBCDNumber
 
 SlotMachine_PrintPayoutCoins:
-	coord hl, 11, 1
+	hlcoord 11, 1
 	ld de, wPayoutCoins
 	lb bc, LEADING_ZEROES | 2, 4 ; 2 bytes, 4 digits
 	jp PrintNumber
@@ -725,19 +725,19 @@ SlotMachine_LightBalls:
 	jr z, SlotMachine_UpdateTwoCoinBallTiles
 
 SlotMachine_UpdateThreeCoinBallTiles:
-	coord hl, 3, 2
+	hlcoord 3, 2
 	call SlotMachine_UpdateBallTiles
-	coord hl, 3, 10
+	hlcoord 3, 10
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateTwoCoinBallTiles:
-	coord hl, 3, 4
+	hlcoord 3, 4
 	call SlotMachine_UpdateBallTiles
-	coord hl, 3, 8
+	hlcoord 3, 8
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateOneCoinBallTiles:
-	coord hl, 3, 6
+	hlcoord 3, 6
 
 SlotMachine_UpdateBallTiles:
 	ld a, [wNewSlotMachineBallTile]
@@ -864,7 +864,7 @@ LoadSlotMachineTiles:
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
-	coord de, 0, 0
+	decoord 0, 0
 	ld bc, SlotMachineMapEnd - SlotMachineMap
 	call CopyData
 	call EnableLCD

@@ -103,7 +103,7 @@ OverworldLoopLessDelay::
 	jr nz, .checkForOpponent
 	bit 0, a
 	jr nz, .checkForOpponent
-	aCoord 8, 9
+	lda_coord 8, 9
 	ld [wTilePlayerStandingOn], a ; unused?
 	call DisplayTextID ; display either the start menu or the NPC/sign text
 	ld a, [wEnteringCableClub]
@@ -688,7 +688,7 @@ CheckMapConnections::
 
 ; function to play a sound when changing maps
 PlayMapChangeSound::
-	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
+	lda_coord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp $0b ; door tile in tileset 0
 	jr nz, .didNotGoThroughDoor
 	ld a, SFX_GO_INSIDE
@@ -1297,7 +1297,7 @@ CheckForJumpingAndTilePairCollisions::
 ; if not jumping
 
 CheckForTilePairCollisions2::
-	aCoord 8, 9 ; tile the player is on
+	lda_coord 8, 9 ; tile the player is on
 	ld [wTilePlayerStandingOn], a
 
 CheckForTilePairCollisions::
@@ -1438,7 +1438,7 @@ LoadCurrentMapView::
 	ld bc, $2
 	add hl, bc
 .copyToVisibleAreaBuffer
-	coord de, 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
+	decoord 0, 0 ; base address for the tiles that are directly transferred to VRAM during V-blank
 	ld b, SCREEN_HEIGHT
 .rowLoop2
 	ld c, SCREEN_WIDTH
@@ -1711,7 +1711,7 @@ MoveTileBlockMapPointerNorth::
 ; the portion of the map that was newly exposed due to the player's movement
 
 ScheduleNorthRowRedraw::
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call CopyToRedrawRowOrColumnSrcTiles
 	ld a, [wMapViewVRAMPointer]
 	ldh [hRedrawRowOrColumnDest], a
@@ -1733,7 +1733,7 @@ CopyToRedrawRowOrColumnSrcTiles::
 	ret
 
 ScheduleSouthRowRedraw::
-	coord hl, 0, 16
+	hlcoord 0, 16
 	call CopyToRedrawRowOrColumnSrcTiles
 	ld a, [wMapViewVRAMPointer]
 	ld l, a
@@ -1752,7 +1752,7 @@ ScheduleSouthRowRedraw::
 	ret
 
 ScheduleEastColumnRedraw::
-	coord hl, 18, 0
+	hlcoord 18, 0
 	call ScheduleColumnRedrawHelper
 	ld a, [wMapViewVRAMPointer]
 	ld c, a
@@ -1790,7 +1790,7 @@ ScheduleColumnRedrawHelper::
 	ret
 
 ScheduleWestColumnRedraw::
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call ScheduleColumnRedrawHelper
 	ld a, [wMapViewVRAMPointer]
 	ldh [hRedrawRowOrColumnDest], a
@@ -2342,7 +2342,7 @@ LoadMapData::
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, vBGMap0
 	ld b, 18
 .vramCopyLoop

@@ -14,7 +14,7 @@ DisplayDiploma::
 	ld bc, $10
 	ld a, BANK(CircleTile)
 	call FarCopyData2
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 16, 18
 	predef Diploma_TextBoxBorder
 	ld hl, DiplomaTextPointersAndCoords
@@ -35,7 +35,7 @@ DisplayDiploma::
 	pop bc
 	dec c
 	jr nz, .asm_56715
-	coord hl, 10, 4
+	hlcoord 10, 4
 	ld de, wPlayerName
 	call PlaceString
 	farcall DrawPlayerCharacter
@@ -85,15 +85,15 @@ UnusedPlayerNameLengthFunc:
 
 DiplomaTextPointersAndCoords:
 	dw DiplomaText
-	dwCoord 5, 2
+	dwcoord 5, 2
 	dw DiplomaPlayer
-	dwCoord 3, 4
+	dwcoord 3, 4
 	dw DiplomaEmptyText
-	dwCoord 15, 4
+	dwcoord 15, 4
 	dw DiplomaCongrats
-	dwCoord 2, 6
+	dwcoord 2, 6
 	dw DiplomaGameFreak
-	dwCoord 9, 16
+	dwcoord 9, 16
 
 DiplomaText:
 	db CIRCLE_TILE_ID, "Diploma", CIRCLE_TILE_ID, "@"

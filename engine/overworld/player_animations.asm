@@ -358,7 +358,7 @@ IsPlayerStandingOnWarpPadOrHole::
 	jr z, .done
 	cp c
 	jr nz, .nextEntry
-	aCoord 8, 9
+	lda_coord 8, 9
 	cp [hl]
 	jr z, .foundMatch
 .nextEntry

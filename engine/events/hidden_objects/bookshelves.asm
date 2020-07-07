@@ -6,7 +6,7 @@ PrintBookshelfText::
 ; facing up
 	ld a, [wCurMapTileset]
 	ld b, a
-	aCoord 8, 7
+	lda_coord 8, 7
 	ld c, a
 	ld hl, BookshelfTileIDs
 .loop

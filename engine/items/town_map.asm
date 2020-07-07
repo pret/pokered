@@ -11,7 +11,7 @@ DisplayTownMap:
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
-	coord hl, 1, 0
+	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer
@@ -28,7 +28,7 @@ DisplayTownMap:
 	jr .enterLoop
 
 .townMapLoop
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 1, 20
 	call ClearScreenArea
 	ld hl, TownMapOrder
@@ -55,7 +55,7 @@ DisplayTownMap:
 	inc de
 	cp $50
 	jr nz, .copyMapName
-	coord hl, 1, 0
+	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer + $10
@@ -118,7 +118,7 @@ LoadTownMap_Nest:
 	push hl
 	call DisplayWildLocations
 	call GetMonName
-	coord hl, 1, 0
+	hlcoord 1, 0
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -153,34 +153,34 @@ LoadTownMap_Fly::
 	push af
 	ld [hl], $ff
 	push hl
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, ToText
 	call PlaceString
 	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
-	coord de, 18, 0
+	decoord 18, 0
 .townMapFlyLoop
 	ld a, " "
 	ld [de], a
 	push hl
 	push hl
-	coord hl, 3, 0
+	hlcoord 3, 0
 	lb bc, 1, 15
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
 	ld b, $4
 	call DrawPlayerOrBirdSprite ; draw bird sprite
-	coord hl, 3, 0
+	hlcoord 3, 0
 	ld de, wcd6d
 	call PlaceString
 	ld c, 15
 	call DelayFrames
-	coord hl, 18, 0
+	hlcoord 18, 0
 	ld [hl], "▲"
-	coord hl, 19, 0
+	hlcoord 19, 0
 	ld [hl], "▼"
 	pop hl
 .inputLoop
@@ -219,7 +219,7 @@ LoadTownMap_Fly::
 	ld [hl], a
 	ret
 .pressedUp
-	coord de, 18, 0
+	decoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
@@ -231,7 +231,7 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList
 	jp .townMapFlyLoop
 .pressedDown
-	coord de, 19, 0
+	decoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
@@ -278,7 +278,7 @@ LoadTownMap:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, $12
 	ld c, $12
 	call TextBoxBorder
@@ -293,7 +293,7 @@ LoadTownMap:
 	ld bc, MonNestIconEnd - MonNestIcon
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, CompressedMap
 .nextTile
 	ld a, [de]
@@ -395,11 +395,11 @@ DisplayWildLocations:
 	and a ; were any OAM entries written?
 	jr nz, .drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
-	coord hl, 1, 7
+	hlcoord 1, 7
 	ld b, 2
 	ld c, 15
 	call TextBoxBorder
-	coord hl, 2, 9
+	hlcoord 2, 9
 	ld de, AreaUnknownText
 	call PlaceString
 	jr .done

@@ -11,7 +11,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	coord hl, 1, 5
+	hlcoord 1, 5
 	lb bc, 3, 7
 	call ClearScreenArea
 	call DisableLCD
@@ -27,7 +27,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	or c
 	jr nz, .clearBackgroundLoop
 ; copy the work RAM tile map to VRAM
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, vBGMap0
 	ld b, 18 ; number of rows
 .copyRowLoop
@@ -86,7 +86,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ldh [hAutoBGTransferEnabled], a
 	ld a, $31
 	ldh [hStartTileID], a
-	coord hl, 1, 5
+	hlcoord 1, 5
 	predef CopyUncompressedPicToTilemap
 	xor a
 	ldh [hWY], a
@@ -232,7 +232,7 @@ StartBattle:
 	ld [wcf91], a
 	ld [wBattleMonSpecies2], a
 	call LoadScreenTilesFromBuffer1
-	coord hl, 1, 5
+	hlcoord 1, 5
 	ld a, $9
 	call SlideTrainerPicOffScreen
 	call SaveScreenTilesToBuffer1
@@ -666,12 +666,12 @@ HandlePoisonBurnLeechSeed_IncreaseEnemyHP:
 	ret
 
 UpdateCurMonHPBar:
-	coord hl, 10, 9    ; tile pointer to player HP bar
+	hlcoord 10, 9    ; tile pointer to player HP bar
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, $1
 	jr z, .playersTurn
-	coord hl, 2, 2    ; tile pointer to enemy HP bar
+	hlcoord 2, 2    ; tile pointer to enemy HP bar
 	xor a
 .playersTurn
 	push bc
@@ -767,10 +767,10 @@ FaintEnemyPokemon:
 	ld hl, wPlayerUsedMove
 	ld [hli], a
 	ld [hl], a
-	coord hl, 12, 5
-	coord de, 12, 6
+	hlcoord 12, 5
+	decoord 12, 6
 	call SlideDownFaintedMonPic
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 4, 11
 	call ClearScreenArea
 	ld a, [wIsInBattle]
@@ -1021,11 +1021,11 @@ RemoveFaintedPlayerMon:
 	ld [hl], a
 	ld [wBattleMonStatus], a
 	call ReadPlayerMonCurHPAndStatus
-	coord hl, 9, 7
+	hlcoord 9, 7
 	lb bc, 5, 11
 	call ClearScreenArea
-	coord hl, 1, 10
-	coord de, 1, 11
+	hlcoord 1, 10
+	decoord 1, 11
 	call SlideDownFaintedMonPic
 	ld a, $1
 	ld [wBattleResult], a
@@ -1059,7 +1059,7 @@ DoUseNextMonDialogue:
 	ld hl, UseNextMonText
 	call PrintText
 .displayYesNoBox
-	coord hl, 13, 9
+	hlcoord 13, 9
 	lb bc, 10, 14
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -1136,7 +1136,7 @@ HandlePlayerBlackOut:
 	ld a, [wCurOpponent]
 	cp OPP_SONY1
 	jr nz, .notSony1Battle
-	coord hl, 0, 0  ; sony 1 battle
+	hlcoord 0, 0  ; sony 1 battle
 	lb bc, 8, 21
 	call ClearScreenArea
 	call ScrollTrainerPicAfterBattle
@@ -1306,7 +1306,7 @@ EnemySendOutFirstMon:
 	ld [wAICount], a
 	ld hl, wPlayerBattleStatus1
 	res 5, [hl]
-	coord hl, 18, 0
+	hlcoord 18, 0
 	ld a, 8
 	call SlideTrainerPicOffScreen
 	call PrintEmptyString
@@ -1376,7 +1376,7 @@ EnemySendOutFirstMon:
 	jr nz, .next4
 	ld hl, TrainerAboutToUseText
 	call PrintText
-	coord hl, 0, 7
+	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -1411,7 +1411,7 @@ EnemySendOutFirstMon:
 	call LoadScreenTilesFromBuffer1
 .next4
 	call ClearSprites
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 4, 11
 	call ClearScreenArea
 	ld b, SET_PAL_BATTLE
@@ -1427,7 +1427,7 @@ EnemySendOutFirstMon:
 	call LoadMonFrontSprite
 	ld a, -$31
 	ldh [hStartTileID], a
-	coord hl, 15, 6
+	hlcoord 15, 6
 	predef AnimateSendingOutMon
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
@@ -1757,7 +1757,7 @@ SendOutMon:
 	ldh [hWhoseTurn], a
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
-	coord hl, 4, 11
+	hlcoord 4, 11
 	predef AnimateSendingOutMon
 	ld a, [wcf91]
 	call PlayCry
@@ -1766,10 +1766,10 @@ SendOutMon:
 
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon:
-	coord hl, 1, 5
+	hlcoord 1, 5
 	lb bc, 7, 7
 	call ClearScreenArea
-	coord hl, 3, 7
+	hlcoord 3, 7
 	lb bc, 5, 5
 	xor a
 	ld [wDownscaledMonSize], a
@@ -1778,7 +1778,7 @@ AnimateRetreatingPlayerMon:
 	ld c, 4
 	call DelayFrames
 	call .clearScreenArea
-	coord hl, 4, 9
+	hlcoord 4, 9
 	lb bc, 3, 3
 	ld a, 1
 	ld [wDownscaledMonSize], a
@@ -1788,9 +1788,9 @@ AnimateRetreatingPlayerMon:
 	call Delay3
 	call .clearScreenArea
 	ld a, $4c
-	Coorda 5, 11
+	ldcoord_a 5, 11
 .clearScreenArea
-	coord hl, 1, 5
+	hlcoord 1, 5
 	lb bc, 7, 7
 	jp ClearScreenArea
 
@@ -1813,14 +1813,14 @@ DrawHUDsAndHPBars:
 DrawPlayerHUDAndHPBar:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 9, 7
+	hlcoord 9, 7
 	lb bc, 5, 11
 	call ClearScreenArea
 	callfar PlacePlayerHUDTiles
-	coord hl, 18, 9
+	hlcoord 18, 9
 	ld [hl], $73
 	ld de, wBattleMonNick
-	coord hl, 10, 7
+	hlcoord 10, 7
 	call CenterMonName
 	call PlaceString
 	ld hl, wBattleMonSpecies
@@ -1831,7 +1831,7 @@ DrawPlayerHUDAndHPBar:
 	ld de, wLoadedMonLevel
 	ld bc, wBattleMonPP - wBattleMonLevel
 	call CopyData
-	coord hl, 14, 8
+	hlcoord 14, 8
 	push hl
 	inc hl
 	ld de, wLoadedMonStatus
@@ -1842,7 +1842,7 @@ DrawPlayerHUDAndHPBar:
 .doNotPrintLevel
 	ld a, [wLoadedMonSpecies]
 	ld [wcf91], a
-	coord hl, 10, 9
+	hlcoord 10, 9
 	predef DrawHP
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
@@ -1874,15 +1874,15 @@ DrawPlayerHUDAndHPBar:
 DrawEnemyHUDAndHPBar:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 4, 12
 	call ClearScreenArea
 	callfar PlaceEnemyHUDTiles
 	ld de, wEnemyMonNick
-	coord hl, 1, 0
+	hlcoord 1, 0
 	call CenterMonName
 	call PlaceString
-	coord hl, 4, 1
+	hlcoord 4, 1
 	push hl
 	inc hl
 	ld de, wEnemyMonStatus
@@ -1955,7 +1955,7 @@ DrawEnemyHUDAndHPBar:
 .drawHPBar
 	xor a
 	ld [wHPBarType], a
-	coord hl, 2, 2
+	hlcoord 2, 2
 	call DrawHPBar
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
@@ -2030,12 +2030,12 @@ DisplayBattleMenu::
 	ld bc, NAME_LENGTH
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
-	coord hl, 9, 14
+	hlcoord 9, 14
 	ld [hl], "▶"
 	ld c, 80
 	call DelayFrames
 	ld [hl], " "
-	coord hl, 9, 16
+	hlcoord 9, 16
 	ld [hl], "▶"
 	ld c, 50
 	call DelayFrames
@@ -2060,14 +2060,14 @@ DisplayBattleMenu::
 	ld a, " "
 	jr z, .safariLeftColumn
 ; put cursor in left column for normal battle menu (i.e. when it's not a Safari battle)
-	Coorda 15, 14 ; clear upper cursor position in right column
-	Coorda 15, 16 ; clear lower cursor position in right column
+	ldcoord_a 15, 14 ; clear upper cursor position in right column
+	ldcoord_a 15, 16 ; clear lower cursor position in right column
 	ld b, $9 ; top menu item X
 	jr .leftColumn_WaitForInput
 .safariLeftColumn
-	Coorda 13, 14
-	Coorda 13, 16
-	coord hl, 7, 14
+	ldcoord_a 13, 14
+	ldcoord_a 13, 16
+	hlcoord 7, 14
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	call PrintNumber
@@ -2093,14 +2093,14 @@ DisplayBattleMenu::
 	ld a, " "
 	jr z, .safariRightColumn
 ; put cursor in right column for normal battle menu (i.e. when it's not a Safari battle)
-	Coorda 9, 14 ; clear upper cursor position in left column
-	Coorda 9, 16 ; clear lower cursor position in left column
+	ldcoord_a 9, 14 ; clear upper cursor position in left column
+	ldcoord_a 9, 16 ; clear lower cursor position in left column
 	ld b, $f ; top menu item X
 	jr .rightColumn_WaitForInput
 .safariRightColumn
-	Coorda 1, 14 ; clear upper cursor position in left column
-	Coorda 1, 16 ; clear lower cursor position in left column
-	coord hl, 7, 14
+	ldcoord_a 1, 14 ; clear upper cursor position in left column
+	ldcoord_a 1, 16 ; clear lower cursor position in left column
+	hlcoord 7, 14
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	call PrintNumber
@@ -2321,7 +2321,7 @@ PartyMenuOrRockOrRun:
 	call GBPalNormal
 	jp DisplayBattleMenu
 .partyMonDeselected
-	coord hl, 11, 11
+	hlcoord 11, 11
 	ld bc, 6 * SCREEN_WIDTH + 9
 	ld a, " "
 	call FillMemory
@@ -2483,18 +2483,18 @@ MoveSelectionMenu:
 	ret z
 	ld hl, wBattleMonMoves
 	call .loadmoves
-	coord hl, 4, 12
+	hlcoord 4, 12
 	ld b, 4
 	ld c, 14
 	di ; out of pure coincidence, it is possible for vblank to occur between the di and ei
 	   ; so it is necessary to put the di ei block to not cause tearing
 	call TextBoxBorder
-	coord hl, 4, 12
+	hlcoord 4, 12
 	ld [hl], $7a
-	coord hl, 10, 12
+	hlcoord 10, 12
 	ld [hl], $7e
 	ei
-	coord hl, 6, 13
+	hlcoord 6, 13
 	call .writemoves
 	ld b, $5
 	ld a, $c
@@ -2502,11 +2502,11 @@ MoveSelectionMenu:
 .mimicmenu
 	ld hl, wEnemyMonMoves
 	call .loadmoves
-	coord hl, 0, 7
+	hlcoord 0, 7
 	ld b, 4
 	ld c, 14
 	call TextBoxBorder
-	coord hl, 2, 8
+	hlcoord 2, 8
 	call .writemoves
 	ld b, $1
 	ld a, $7
@@ -2517,11 +2517,11 @@ MoveSelectionMenu:
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	call .loadmoves
-	coord hl, 4, 7
+	hlcoord 4, 7
 	ld b, 4
 	ld c, 14
 	call TextBoxBorder
-	coord hl, 6, 8
+	hlcoord 6, 8
 	call .writemoves
 	ld b, $5
 	ld a, $7
@@ -2577,7 +2577,7 @@ SelectMenuItem:
 	jr z, .battleselect
 	dec a
 	jr nz, .select
-	coord hl, 1, 14
+	hlcoord 1, 14
 	ld de, WhichTechniqueString
 	call PlaceString
 	jr .select
@@ -2589,7 +2589,7 @@ SelectMenuItem:
 	ld a, [wMenuItemToSwap]
 	and a
 	jr z, .select
-	coord hl, 5, 13
+	hlcoord 5, 13
 	dec a
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
@@ -2826,7 +2826,7 @@ SwapMovesInMenu:
 PrintMenuItem:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 0, 8
+	hlcoord 0, 8
 	ld b, 3
 	ld c, 9
 	call TextBoxBorder
@@ -2839,7 +2839,7 @@ PrintMenuItem:
 	ld a, [wCurrentMenuItem]
 	cp b
 	jr nz, .notDisabled
-	coord hl, 1, 10
+	hlcoord 1, 10
 	ld de, DisabledText
 	call PlaceString
 	jr .moveDisabled
@@ -2871,23 +2871,23 @@ PrintMenuItem:
 	and $3f
 	ld [wcd6d], a
 ; print TYPE/<type> and <curPP>/<maxPP>
-	coord hl, 1, 9
+	hlcoord 1, 9
 	ld de, TypeText
 	call PlaceString
-	coord hl, 7, 11
+	hlcoord 7, 11
 	ld [hl], "/"
-	coord hl, 5, 9
+	hlcoord 5, 9
 	ld [hl], "/"
-	coord hl, 5, 11
+	hlcoord 5, 11
 	ld de, wcd6d
 	lb bc, 1, 2
 	call PrintNumber
-	coord hl, 8, 11
+	hlcoord 8, 11
 	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	call GetCurrentMove
-	coord hl, 2, 10
+	hlcoord 2, 10
 	predef PrintMoveType
 .moveDisabled
 	ld a, $1
@@ -4822,7 +4822,7 @@ ApplyDamageToEnemyPokemon:
 	ld [wHPBarNewHP+1], a
 	ld a, [hl]
 	ld [wHPBarNewHP], a
-	coord hl, 2, 2
+	hlcoord 2, 2
 	xor a
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate the HP bar shortening
@@ -4940,7 +4940,7 @@ ApplyDamageToPlayerPokemon:
 	ld [wHPBarMaxHP+1], a
 	ld a, [hl]
 	ld [wHPBarMaxHP], a
-	coord hl, 10, 9
+	hlcoord 10, 9
 	ld a, $01
 	ld [wHPBarType], a
 	predef UpdateHPBar2 ; animate the HP bar shortening
@@ -6354,7 +6354,7 @@ LoadPlayerBackPic:
 	ld [MBC1SRamEnable], a
 	ld a, $31
 	ldh [hStartTileID], a
-	coord hl, 1, 5
+	hlcoord 1, 5
 	predef_jump CopyUncompressedPicToTilemap
 
 ; does nothing since no stats are ever selected (barring glitches)
@@ -6770,7 +6770,7 @@ InitBattleCommon:
 	ldh [hStartTileID], a
 	dec a
 	ld [wAICount], a
-	coord hl, 12, 0
+	hlcoord 12, 0
 	predef CopyUncompressedPicToTilemap
 	ld a, $ff
 	ld [wEnemyMonPartyPos], a
@@ -6824,7 +6824,7 @@ InitWildBattle:
 	xor a
 	ld [wTrainerClass], a
 	ldh [hStartTileID], a
-	coord hl, 12, 0
+	hlcoord 12, 0
 	predef CopyUncompressedPicToTilemap
 
 ; common code that executes after init battle code specific to trainer or wild battles
@@ -6846,10 +6846,10 @@ _InitBattleCommon:
 	ld a, $9c
 	ldh [hAutoBGTransferDest + 1], a
 	call LoadScreenTilesFromBuffer1
-	coord hl, 9, 7
+	hlcoord 9, 7
 	lb bc, 5, 10
 	call ClearScreenArea
-	coord hl, 1, 0
+	hlcoord 1, 0
 	lb bc, 4, 10
 	call ClearScreenArea
 	call ClearSprites
@@ -6993,7 +6993,7 @@ LoadMonBackPic:
 ; been loaded with GetMonHeader.
 	ld a, [wBattleMonSpecies2]
 	ld [wcf91], a
-	coord hl, 1, 5
+	hlcoord 1, 5
 	ld b, 7
 	ld c, 8
 	call ClearScreenArea

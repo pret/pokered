@@ -682,7 +682,7 @@ DoBallTossSpecialEffects:
 	cp 1
 	ret nz
 .moveGhostMarowakLeft
-	coord hl, 17, 0
+	hlcoord 17, 0
 	ld de, 20
 	lb bc, 7, 7
 .loop
@@ -781,7 +781,7 @@ DoExplodeSpecialEffects:
 	cp 1 ; is it the end of the subanimation?
 	jr nz, FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
-	coord hl, 1, 5
+	hlcoord 1, 5
 	jp AnimationHideMonPic ; make pokemon disappear
 
 ; flashes the screen when subanimation counter is 1 modulo 4
@@ -1135,12 +1135,12 @@ AnimationSlideMonUp:
 	ld c, 7
 	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 1, 6
-	coord de, 1, 5
+	hlcoord 1, 6
+	decoord 1, 5
 	ld a, $30
 	jr z, .next
-	coord hl, 12, 1
-	coord de, 12, 0
+	hlcoord 12, 1
+	decoord 12, 0
 	ld a, $ff
 .next
 	ld [wSlideMonUpBottomRowLeftTile], a
@@ -1203,9 +1203,9 @@ _AnimationSlideMonUp:
 ; Fill in the bottom row of the mon pic with the next row's tile IDs.
 	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 1, 11
+	hlcoord 1, 11
 	jr z, .next
-	coord hl, 12, 6
+	hlcoord 12, 6
 .next
 	ld a, [wSlideMonUpBottomRowLeftTile]
 	inc a
@@ -1372,11 +1372,11 @@ AnimationShakeBackAndForth:
 ; The mon's sprite disappears after this animation.
 	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 0, 5
-	coord de, 2, 5
+	hlcoord 0, 5
+	decoord 2, 5
 	jr z, .next
-	coord hl, 11, 0
-	coord de, 13, 0
+	hlcoord 11, 0
+	decoord 13, 0
 
 .next
 	xor a
@@ -1420,9 +1420,9 @@ AnimationMoveMonHorizontally:
 	call AnimationHideMonPic
 	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 2, 5
+	hlcoord 2, 5
 	jr z, .next
-	coord hl, 11, 0
+	hlcoord 11, 0
 .next
 	xor a
 	push hl
@@ -1533,12 +1533,12 @@ AnimationSquishMonPic:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	coord hl, 16, 0
-	coord de, 14, 0
+	hlcoord 16, 0
+	decoord 14, 0
 	jr .next
 .playerTurn
-	coord hl, 5, 5
-	coord de, 3, 5
+	hlcoord 5, 5
+	decoord 3, 5
 .next
 	push de
 	xor a ; left
@@ -1746,10 +1746,10 @@ _AnimationSlideMonOff:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-	coord hl, 12, 0
+	hlcoord 12, 0
 	jr .next
 .playerTurn
-	coord hl, 0, 5
+	hlcoord 0, 5
 .next
 	ld d, 8 ; d's value is unused
 .slideLoop ; iterates once for each time the pic slides by one tile
@@ -1996,7 +1996,7 @@ ChangeMonPic:
 	xor a
 	ld [wSpriteFlipped], a
 	call GetMonHeader
-	coord hl, 12, 0
+	hlcoord 12, 0
 	call LoadFrontSpriteByMonIndex
 	jr .done
 .playerTurn
@@ -2064,7 +2064,7 @@ ClearMonPicFromTileMap:
 	push bc
 	ld e, a
 	ld d, 0
-	coord hl, 0, 0
+	hlcoord 0, 0
 	add hl, de
 	lb bc, 7, 7
 	call ClearScreenArea
@@ -2086,7 +2086,7 @@ GetMonSpriteTileMapPointerFromRowCount:
 .enemyTurn
 	ld a, 12
 .next
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld e, a
 	ld d, 0
 	add hl, de

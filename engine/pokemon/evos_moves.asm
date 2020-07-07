@@ -121,7 +121,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call DelayFrames
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 12, 20
 	call ClearScreenArea
 	ld a, $1

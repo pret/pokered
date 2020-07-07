@@ -1044,7 +1044,7 @@ ItemUseMedicine:
 	sbc b
 	ld [hl], a
 	ld [wHPBarNewHP+1], a
-	coord hl, 4, 1
+	hlcoord 4, 1
 	ld a, [wWhichPokemon]
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
@@ -2221,7 +2221,7 @@ ItemUseTMHM:
 	call PrintText
 	ld hl, TeachMachineMoveText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -2607,7 +2607,7 @@ TossItem_::
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl, IsItOKToTossItemText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a

@@ -42,7 +42,7 @@ DisplayMonFrontSpriteInBox:
 	call LoadMonFrontSprite
 	ld a, $80
 	ldh [hStartTileID], a
-	coord hl, 10, 11
+	hlcoord 10, 11
 	predef AnimateSendingOutMon
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1

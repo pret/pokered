@@ -121,7 +121,7 @@ PlacePlayerHUDTiles:
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
-	coord hl, 18, 10
+	hlcoord 18, 10
 	ld de, -1
 	jr PlaceHUDTiles
 
@@ -136,7 +136,7 @@ PlaceEnemyHUDTiles:
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
-	coord hl, 1, 2
+	hlcoord 1, 2
 	ld de, $1
 	jr PlaceHUDTiles
 
