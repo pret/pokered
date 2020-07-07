@@ -2,11 +2,11 @@ InitPlayerData:
 InitPlayerData2:
 
 	call Random
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	ld [wPlayerID], a
 
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	ld [wPlayerID + 1], a
 
 	ld a, $ff
@@ -23,9 +23,9 @@ InitPlayerData2:
 
 START_MONEY EQU $3000
 	ld hl, wPlayerMoney + 1
-	ld a, START_MONEY / $100
+	ld a, HIGH(START_MONEY)
 	ld [hld], a
-	xor a
+	xor a ; LOW(START_MONEY)
 	ld [hli], a
 	inc hl
 	ld [hl], a

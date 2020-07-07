@@ -12,7 +12,7 @@ CeladonGameCornerScript_48bcf:
 	res 6, [hl]
 	ret z
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	cp $7
 	jr nc, .asm_48be2
 	ld a, $8
@@ -57,10 +57,10 @@ CeladonGameCornerScript1:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $b
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
 	ld a, [wYCoord]
@@ -75,7 +75,7 @@ CeladonGameCornerScript1:
 	ld de, MovementData_48c63
 .asm_48c4d
 	ld a, $b
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $2
 	ld [wGameCornerCurScript], a
@@ -150,29 +150,29 @@ CeladonGameCornerText2:
 	call Has9990Coins
 	jr nc, .asm_48d14
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $10
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
 	ld hl, CeladonGameCornerText_48d31
 	jr .asm_48d1c
 .asm_48cdb
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $10
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $50
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -236,10 +236,10 @@ CeladonGameCornerText5:
 	call Has9990Coins
 	jr nc, .asm_48d8e
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $10
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -316,10 +316,10 @@ CeladonGameCornerText9:
 	call Has9990Coins
 	jr nc, .asm_48e18
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $20
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -368,10 +368,10 @@ CeladonGameCornerText10:
 	call Has9990Coins
 	jr z, .asm_48e7a
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
 	ld a, $20
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1
 	ld c, $2
@@ -418,14 +418,14 @@ CeladonGameCornerText11:
 	ld hl, CeladonGameCornerText_48ed3
 	ld de, CeladonGameCornerText_48ed3
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld a, $1
 	ld [wGameCornerCurScript], a
 	jp TextScriptEnd
@@ -474,32 +474,32 @@ CeladonGameCornerText_48f19:
 CeladonGameCornerScript_48f1e:
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 11, 0
+	hlcoord 11, 0
 	ld b, $5
 	ld c, $7
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 12, 1
+	hlcoord 12, 1
 	ld b, 4
 	ld c, 7
 	call ClearScreenArea
-	coord hl, 12, 2
+	hlcoord 12, 2
 	ld de, GameCornerMoneyText
 	call PlaceString
-	coord hl, 12, 3
+	hlcoord 12, 3
 	ld de, GameCornerBlankText1
 	call PlaceString
-	coord hl, 12, 3
+	hlcoord 12, 3
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
-	coord hl, 12, 4
+	hlcoord 12, 4
 	ld de, GameCornerCoinText
 	call PlaceString
-	coord hl, 12, 5
+	hlcoord 12, 5
 	ld de, GameCornerBlankText2
 	call PlaceString
-	coord hl, 15, 5
+	hlcoord 15, 5
 	ld de, wPlayerCoins
 	ld c, $82
 	call PrintBCDNumber
@@ -521,7 +521,7 @@ GameCornerBlankText2:
 
 Has9990Coins:
 	ld a, $99
-	ld [hCoins], a
+	ldh [hCoins], a
 	ld a, $90
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	jp HasEnoughCoins

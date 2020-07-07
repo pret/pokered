@@ -1,15 +1,30 @@
+; Copies [hl, bc) to [de, de + bc - hl).
+; In other words, the source data is from hl up to but not including bc,
+; and the destination is de.
+CopyDataUntil::
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, CopyDataUntil
+	ld a, l
+	cp c
+	jr nz, CopyDataUntil
+	ret
+
 ; Function to remove a pokemon from the party or the current box.
 ; wWhichPokemon determines the pokemon.
 ; [wRemoveMonFromBox] == 0 specifies the party.
 ; [wRemoveMonFromBox] != 0 specifies the current box.
 RemovePokemon::
-	jpab _RemovePokemon
+	jpfar _RemovePokemon
 
 AddPartyMon::
 	push hl
 	push de
 	push bc
-	callba _AddPartyMon
+	farcall _AddPartyMon
 	pop bc
 	pop de
 	pop hl
@@ -21,10 +36,10 @@ CalcStats::
 .statsLoop
 	inc c
 	call CalcStat
-	ld a, [hMultiplicand+1]
+	ldh a, [hMultiplicand+1]
 	ld [de], a
 	inc de
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	ld [de], a
 	inc de
 	ld a, c
@@ -57,22 +72,22 @@ CalcStat::
 	add hl, bc          ; skip to corresponding stat exp value
 .statExpLoop            ; calculates ceil(Sqrt(stat exp)) in b
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand+1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand+1], a
 	inc b               ; increment current stat exp bonus
 	ld a, b
 	cp $ff
 	jr z, .statExpDone
-	ld [hMultiplicand+2], a
-	ld [hMultiplier], a
+	ldh [hMultiplicand+2], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hld]
 	ld d, a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	sub d
 	ld a, [hli]
 	ld d, a
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	sbc d               ; test if (current stat exp bonus)^2 < stat exp
 	jr c, .statExpLoop
 .statExpDone
@@ -152,22 +167,22 @@ CalcStat::
 	jr nc, .noCarry2
 	inc d                     ; de = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
 .noCarry2
-	ld [hMultiplicand+2], a
+	ldh [hMultiplicand+2], a
 	ld a, d
-	ld [hMultiplicand+1], a
+	ldh [hMultiplicand+1], a
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, [wCurEnemyLVL]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply            ; ((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level
-	ld a, [hMultiplicand]
-	ld [hDividend], a
-	ld a, [hMultiplicand+1]
-	ld [hDividend+1], a
-	ld a, [hMultiplicand+2]
-	ld [hDividend+2], a
+	ldh a, [hMultiplicand]
+	ldh [hDividend], a
+	ldh a, [hMultiplicand+1]
+	ldh [hDividend+1], a
+	ldh a, [hMultiplicand+2]
+	ldh [hDividend+2], a
 	ld a, $64
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld a, $3
 	ld b, a
 	call Divide             ; (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100
@@ -177,38 +192,38 @@ CalcStat::
 	jr nz, .notHPStat
 	ld a, [wCurEnemyLVL]
 	ld b, a
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	add b
-	ld [hMultiplicand+2], a
+	ldh [hMultiplicand+2], a
 	jr nc, .noCarry3
-	ld a, [hMultiplicand+1]
+	ldh a, [hMultiplicand+1]
 	inc a
-	ld [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
+	ldh [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
 .noCarry3
 	ld a, 10 ; +10 for HP stat
 .notHPStat
 	ld b, a
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	add b
-	ld [hMultiplicand+2], a
+	ldh [hMultiplicand+2], a
 	jr nc, .noCarry4
-	ld a, [hMultiplicand+1]
+	ldh a, [hMultiplicand+1]
 	inc a                    ; non-HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + 5
-	ld [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
+	ldh [hMultiplicand+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
-	ld a, [hMultiplicand+1] ; check for overflow (>999)
-	cp 999 / $100 + 1
+	ldh a, [hMultiplicand+1] ; check for overflow (>999)
+	cp HIGH(MAX_STAT_VALUE) + 1
 	jr nc, .overflow
-	cp 999 / $100
+	cp HIGH(MAX_STAT_VALUE)
 	jr c, .noOverflow
-	ld a, [hMultiplicand+2]
-	cp 999 % $100 + 1
+	ldh a, [hMultiplicand+2]
+	cp LOW(MAX_STAT_VALUE) + 1
 	jr c, .noOverflow
 .overflow
-	ld a, 999 / $100               ; overflow: cap at 999
-	ld [hMultiplicand+1], a
-	ld a, 999 % $100
-	ld [hMultiplicand+2], a
+	ld a, HIGH(MAX_STAT_VALUE) ; overflow: cap at 999
+	ldh [hMultiplicand+1], a
+	ld a, LOW(MAX_STAT_VALUE)
+	ldh [hMultiplicand+2], a
 .noOverflow
 	pop bc
 	pop de
@@ -216,27 +231,27 @@ CalcStat::
 	ret
 
 AddEnemyMonToPlayerParty::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_AddEnemyMonToPlayerParty)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _AddEnemyMonToPlayerParty
 	pop bc
 	ld a, b
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
 MoveMon::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(_MoveMon)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call _MoveMon
 	pop bc
 	ld a, b
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret

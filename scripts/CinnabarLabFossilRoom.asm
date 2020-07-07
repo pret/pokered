@@ -56,7 +56,7 @@ Lab4Text1:
 	ld a, [wFilteredBagItemsCount]
 	and a
 	jr z, .asm_75d8d
-	callba GiveFossilToCinnabarLab
+	farcall GiveFossilToCinnabarLab
 	jr .asm_75d93
 .asm_75d8d
 	ld hl, Lab4Text_75dcb
@@ -106,4 +106,4 @@ Lab4Text2:
 	jp TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D:
-	jpba LoadFossilItemAndMonName
+	farjp LoadFossilItemAndMonName

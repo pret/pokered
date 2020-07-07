@@ -250,11 +250,11 @@ DoFlyAnimation:
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
-	ld de, BirdSprite + $c0 ; moving animation sprite
+	ld de, BirdSprite tile 12 ; moving animation sprite
 	ld hl, vNPCSprites2
-	lb bc, BANK(BirdSprite), $0c
+	lb bc, BANK(BirdSprite), 12
 	jp CopyVideoData
 
 InitFacingDirectionList:
@@ -358,7 +358,7 @@ IsPlayerStandingOnWarpPadOrHole::
 	jr z, .done
 	cp c
 	jr nz, .nextEntry
-	aCoord 8, 9
+	lda_coord 8, 9
 	cp [hl]
 	jr z, .foundMatch
 .nextEntry
@@ -381,8 +381,8 @@ FishingAnim:
 	ld hl, wd736
 	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
-	ld hl, vNPCSprites
-	lb bc, BANK(RedSprite), $c
+	ld hl, vNPCSprites tile $00
+	lb bc, BANK(RedSprite), 12
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles
@@ -479,22 +479,18 @@ FishingRodOAM:
 	db $50, $40, $FE, $00 ; player facing left
 	db $50, $58, $FE, $20 ; player facing right ($20 means "horizontally flip the tile")
 
+fishing_gfx: MACRO
+	dw \1
+	db \2
+	db BANK(\1)
+	dw vNPCSprites tile \3
+ENDM
+
 RedFishingTiles:
-	dw RedFishingTilesFront
-	db 2, BANK(RedFishingTilesFront)
-	dw vNPCSprites + $20
-
-	dw RedFishingTilesBack
-	db 2, BANK(RedFishingTilesBack)
-	dw vNPCSprites + $60
-
-	dw RedFishingTilesSide
-	db 2, BANK(RedFishingTilesSide)
-	dw vNPCSprites + $a0
-
-	dw RedFishingRodTiles
-	db 3, BANK(RedFishingRodTiles)
-	dw vNPCSprites2 + $7d0
+	fishing_gfx RedFishingTilesFront, 2, $02
+	fishing_gfx RedFishingTilesBack,  2, $06
+	fishing_gfx RedFishingTilesSide,  2, $0a
+	fishing_gfx RedFishingRodTiles,   3, $fd
 
 _HandleMidJump::
 	ld a, [wPlayerJumpingYScreenCoordsIndex]
@@ -516,9 +512,9 @@ _HandleMidJump::
 	call UpdateSprites
 	call Delay3
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld [wPlayerJumpingYScreenCoordsIndex], a
 	ld hl, wd736
 	res 6, [hl] ; not jumping down a ledge any more

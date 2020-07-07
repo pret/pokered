@@ -68,7 +68,7 @@ NameRaterText1:
 	jr nz, .asm_1daae
 	ld hl, NameRaterText_1dac2
 	call PrintText
-	callba DisplayNameRaterScreen
+	farcall DisplayNameRaterScreen
 	jr c, .asm_1daae
 	ld hl, NameRaterText_1dac7
 .asm_1daa8

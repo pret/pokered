@@ -21,12 +21,21 @@ MAX_NEUTRAL_DAMAGE EQU 999
 SONICBOOM_DAMAGE   EQU 20
 DRAGON_RAGE_DAMAGE EQU 40
 
+; type effectiveness factors, scaled by 10
+SUPER_EFFECTIVE    EQU 20
+MORE_EFFECTIVE     EQU 15
+EFFECTIVE          EQU 10
+NOT_VERY_EFFECTIVE EQU 05
+NO_EFFECT          EQU 00
+
 ; non-volatile statuses
 SLP EQU %111 ; sleep counter
 PSN EQU 3
 BRN EQU 4
 FRZ EQU 5
 PAR EQU 6
+
+MAX_STAT_VALUE EQU 999
 
 ; volatile statuses 1
 STORING_ENERGY           EQU 0 ; Bide

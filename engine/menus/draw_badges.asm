@@ -43,11 +43,11 @@ DrawBadges:
 	ld [hli], a
 	ld [hl], $60 ; First name
 
-	coord hl, 2, 11
+	hlcoord 2, 11
 	ld de, wTempObtainedBadgesBooleans
 	call .DrawBadgeRow
 
-	coord hl, 2, 14
+	hlcoord 2, 14
 	ld de, wTempObtainedBadgesBooleans + 4
 ;	call .DrawBadgeRow
 ;	ret

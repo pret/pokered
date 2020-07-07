@@ -204,7 +204,7 @@ AIMoveChoiceModification3:
 	push hl
 	push bc
 	push de
-	callab AIGetTypeEffectiveness
+	callfar AIGetTypeEffectiveness
 	pop de
 	pop bc
 	pop hl
@@ -542,7 +542,7 @@ AIRecoverHP:
 
 AIPrintItemUseAndUpdateHPBar:
 	call AIPrintItemUse_
-	coord hl, 2, 2
+	hlcoord 2, 2
 	xor a
 	ld [wHPBarType], a
 	predef UpdateHPBar2
@@ -599,7 +599,7 @@ SwitchEnemyMon:
 	; switching in a new mon in response to this switch.
 	ld a, 1
 	ld [wFirstMonsNotOutYet], a
-	callab EnemySendOut
+	callfar EnemySendOut
 	xor a
 	ld [wFirstMonsNotOutYet], a
 
@@ -655,17 +655,17 @@ AIUseDireHit: ; unused
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
-	ld [hDividend], a
+	ldh [hDividend], a
 	ld a, [hl]
-	ld [hDividend + 1], a
+	ldh [hDividend + 1], a
 	ld b, 2
 	call Divide
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	ld c, a
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	ld b, a
 	ld hl, wEnemyMonHP + 1
 	ld a, [hld]
@@ -713,7 +713,7 @@ AIIncreaseStat:
 	ld a, ANIM_AF
 	ld [hli], a
 	ld [hl], b
-	callab StatModifierUpEffect
+	callfar StatModifierUpEffect
 	pop hl
 	pop af
 	ld [hli], a

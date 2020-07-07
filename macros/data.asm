@@ -33,7 +33,7 @@ _tms3 = _tms3 | (1 << ((\1_TMNUM) - 1 - 48))
 	else
 		fail "\1 is not a TM or HM move"
 	ENDC
-	shift
+	SHIFT
 ENDR
 REPT 3 ; TM01-TM24 (24/24)
 	db _tms1 & $ff

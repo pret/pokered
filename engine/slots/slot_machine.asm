@@ -25,7 +25,7 @@ PromptUserToPlaySlots:
 	call RunPaletteCommand
 	call GBPalNormal
 	ld a, $e4
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld hl, wd730
 	set 6, [hl]
 	xor a
@@ -79,11 +79,11 @@ MainSlotMachineLoop:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
-	coord hl, 14, 11
+	hlcoord 14, 11
 	ld b, 5
 	ld c, 4
 	call TextBoxBorder
-	coord hl, 16, 12
+	hlcoord 16, 12
 	ld de, CoinMultiplierSlotMachineText
 	call PlaceString
 	call HandleMenuInput
@@ -133,7 +133,7 @@ MainSlotMachineLoop:
 .skip2
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
-	coord hl, 14, 12
+	hlcoord 14, 12
 	lb bc, 13, 15
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
@@ -294,7 +294,7 @@ SlotMachine_StopWheel1Early:
 ; Stop early if the middle symbol is not a cherry.
 	inc hl
 	ld a, [hl]
-	cp SLOTSCHERRY >> 8
+	cp HIGH(SLOTSCHERRY)
 	jr nz, .stopWheel
 	ret
 ; It looks like this was intended to make the wheel stop when a 7 symbol was
@@ -303,7 +303,7 @@ SlotMachine_StopWheel1Early:
 	ld c, $3
 .loop
 	ld a, [hli]
-	cp SLOTS7 >> 8
+	cp HIGH(SLOTS7)
 	jr c, .stopWheel ; condition never true
 	dec c
 	jr nz, .loop
@@ -330,7 +330,7 @@ SlotMachine_StopWheel2Early:
 .sevenAndBarMode
 	call SlotMachine_FindWheel1Wheel2Matches
 	ld a, [de]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	ret nc
 .stopWheel
 	xor a
@@ -427,7 +427,7 @@ SlotMachine_CheckForMatches:
 	jr nz, .acceptMatch
 ; if 7/bar matches aren't enabled and the match was a 7/bar symbol, roll wheel
 	ld a, [hl]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	jr c, .rollWheel3DownByOneSymbol
 .acceptMatch
 	ld a, [hl]
@@ -454,9 +454,9 @@ SlotMachine_CheckForMatches:
 	jp hl
 
 .flashScreenLoop
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	xor $40
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -472,7 +472,7 @@ SlotMachine_CheckForMatches:
 	call SlotMachine_PayCoinsToPlayer
 	call SlotMachine_PrintPayoutCoins
 	ld a, $e4
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	jp .done
 
 SymbolLinedUpSlotMachineText:
@@ -615,7 +615,7 @@ YeahText:
 
 SlotMachine_PrintWinningSymbol:
 ; prints winning symbol and down arrow in text box
-	coord hl, 2, 14
+	hlcoord 2, 14
 	ld a, [wSlotMachineWinningSymbol]
 	add $25
 	ld [hli], a
@@ -627,7 +627,7 @@ SlotMachine_PrintWinningSymbol:
 	ld [hli], a
 	inc a
 	ld [hl], a
-	coord hl, 18, 16
+	hlcoord 18, 16
 	ld [hl], "▼"
 	ret
 
@@ -642,13 +642,13 @@ SlotMachine_SubtractBetFromPlayerCoins:
 	predef SubBCDPredef
 
 SlotMachine_PrintCreditCoins:
-	coord hl, 5, 1
+	hlcoord 5, 1
 	ld de, wPlayerCoins
 	ld c, $2
 	jp PrintBCDNumber
 
 SlotMachine_PrintPayoutCoins:
-	coord hl, 11, 1
+	hlcoord 11, 1
 	ld de, wPayoutCoins
 	lb bc, LEADING_ZEROES | 2, 4 ; 2 bytes, 4 digits
 	jp PrintNumber
@@ -695,14 +695,14 @@ SlotMachine_PayCoinsToPlayer:
 	ld a, [wAnimCounter]
 	dec a
 	jr nz, .skip1
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	xor $40 ; make the slot wheel symbols flash
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, 5
 .skip1
 	ld [wAnimCounter], a
 	ld a, [wSlotMachineWinningSymbol]
-	cp (SLOTSBAR >> 8) + 1
+	cp HIGH(SLOTSBAR) + 1
 	ld c, 8
 	jr nc, .skip2
 	srl c ; c = 4 (make the the coins transfer faster if the symbol was 7 or bar)
@@ -725,19 +725,19 @@ SlotMachine_LightBalls:
 	jr z, SlotMachine_UpdateTwoCoinBallTiles
 
 SlotMachine_UpdateThreeCoinBallTiles:
-	coord hl, 3, 2
+	hlcoord 3, 2
 	call SlotMachine_UpdateBallTiles
-	coord hl, 3, 10
+	hlcoord 3, 10
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateTwoCoinBallTiles:
-	coord hl, 3, 4
+	hlcoord 3, 4
 	call SlotMachine_UpdateBallTiles
-	coord hl, 3, 8
+	hlcoord 3, 8
 	call SlotMachine_UpdateBallTiles
 
 SlotMachine_UpdateOneCoinBallTiles:
-	coord hl, 3, 6
+	hlcoord 3, 6
 
 SlotMachine_UpdateBallTiles:
 	ld a, [wNewSlotMachineBallTile]
@@ -825,7 +825,7 @@ SlotMachine_AnimWheel:
 SlotMachine_HandleInputWhileWheelsSpin:
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	and A_BUTTON
 	ret z
 	ld hl, wStoppingWhichSlotMachineWheel
@@ -850,21 +850,21 @@ LoadSlotMachineTiles:
 	call DisableLCD
 	ld hl, SlotMachineTiles2
 	ld de, vChars0
-	ld bc, $1c0
+	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineTiles1
 	ld de, vChars2
-	ld bc, $250
+	ld bc, SlotMachineTiles1End - SlotMachineTiles1
 	ld a, BANK(SlotMachineTiles1)
 	call FarCopyData2
 	ld hl, SlotMachineTiles2
-	ld de, vChars2 + $250
-	ld bc, $1c0
+	ld de, vChars2 tile $25
+	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
 	call FarCopyData2
 	ld hl, SlotMachineMap
-	coord de, 0, 0
+	decoord 0, 0
 	ld bc, SlotMachineMapEnd - SlotMachineMap
 	call CopyData
 	call EnableLCD
@@ -890,3 +890,4 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/slots/blue_slots_1.2bpp"
 ENDC
+SlotMachineTiles1End:

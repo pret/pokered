@@ -28,9 +28,9 @@ PokemonTower6Script0:
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, MAROWAK
 	ld [wCurOpponent], a
@@ -61,7 +61,7 @@ PokemonTower6Script4:
 	jr nz, .asm_60b82
 	SetEvent EVENT_BEAT_GHOST_MAROWAK
 	ld a, $7
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a

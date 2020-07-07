@@ -9,16 +9,16 @@ OaksAideScript:
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hOaksAideNumMonsOwned], a
+	ldh [hOaksAideNumMonsOwned], a
 	ld b, a
-	ld a, [hOaksAideRequirement]
+	ldh a, [hOaksAideRequirement]
 	cp b
 	jr z, .giveItem
 	jr nc, .notEnoughOwnedMons
 .giveItem
 	ld hl, OaksAideHereYouGoText
 	call PrintText
-	ld a, [hOaksAideRewardItem]
+	ldh a, [hOaksAideRewardItem]
 	ld b, a
 	ld c, 1
 	call GiveItem
@@ -42,7 +42,7 @@ OaksAideScript:
 	call PrintText
 	ld a, $ff
 .done
-	ld [hOaksAideResult], a
+	ldh [hOaksAideResult], a
 	ret
 
 OaksAideHiText:

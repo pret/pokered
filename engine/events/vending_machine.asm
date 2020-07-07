@@ -17,15 +17,15 @@ VendingMachineMenu::
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 3
+	hlcoord 0, 3
 	ld b, 8
 	ld c, 12
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 2, 5
+	hlcoord 2, 5
 	ld de, DrinkText
 	call PlaceString
-	coord hl, 9, 6
+	hlcoord 9, 6
 	ld de, DrinkPriceText
 	call PlaceString
 	ld hl, wd730
@@ -37,17 +37,17 @@ VendingMachineMenu::
 	cp 3 ; chose Cancel?
 	jr z, .notThirsty
 	xor a
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $2
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, VendingMachineText4
 	jp PrintText
 .enoughMoney
 	call LoadVendingMachineItem
-	ld a, [hVendingMachineItem]
+	ldh a, [hVendingMachineItem]
 	ld b, a
 	ld c, 1
 	call GiveItem
@@ -121,13 +121,13 @@ LoadVendingMachineItem:
 	ld e, a
 	add hl, de
 	ld a, [hli]
-	ld [hVendingMachineItem], a
+	ldh [hVendingMachineItem], a
 	ld a, [hli]
-	ld [hVendingMachinePrice], a
+	ldh [hVendingMachinePrice], a
 	ld a, [hli]
-	ld [hVendingMachinePrice + 1], a
+	ldh [hVendingMachinePrice + 1], a
 	ld a, [hl]
-	ld [hVendingMachinePrice + 2], a
+	ldh [hVendingMachinePrice + 2], a
 	ret
 
 INCLUDE "data/items/vending_prices.asm"

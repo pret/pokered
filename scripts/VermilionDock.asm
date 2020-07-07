@@ -45,24 +45,24 @@ VermilionDock_1db9b:
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic
-	callba LoadSmokeTileFourTimes
+	farcall LoadSmokeTileFourTimes
 	xor a
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ld c, 120
 	call DelayFrames
 	ld b, $9c
 	call CopyScreenTileBufferToVRAM
-	coord hl, 0, 10
+	hlcoord 0, 10
 	ld bc, SCREEN_WIDTH * 6
 	ld a, $14 ; water tile
 	call FillMemory
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld [wSSAnneSmokeDriftAmount], a
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld a, 88
 	ld [wSSAnneSmokeX], a
 	ld hl, wMapViewVRAMPointer
@@ -104,11 +104,11 @@ VermilionDock_1db9b:
 	dec e
 	jr nz, .asm_1dbfa
 	xor a
-	ld [rWY], a
-	ld [hWY], a
+	ldh [rWY], a
+	ldh [hWY], a
 	call VermilionDock_EraseSSAnne
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
 	pop hl
@@ -167,13 +167,13 @@ VermilionDock_1dc7c:
 	ld h, $0
 	ld l, $80
 .asm_1dc86
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, .asm_1dc86
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 .asm_1dc8e
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .asm_1dc8e
 	ret
@@ -184,7 +184,7 @@ VermilionDock_EraseSSAnne:
 	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
 	ld a, $14 ; water tile
 	call FillMemory
-	ld hl, vBGMap0 + 10 * BG_MAP_WIDTH
+	hlbgcoord 0, 10
 	ld de, wVermilionDockTileMapBuffer
 	ld bc, (6 * BG_MAP_WIDTH) / 16
 	call CopyVideoData
@@ -194,7 +194,7 @@ VermilionDock_EraseSSAnne:
 ; the blocks is unnecessary because the blocks the ship occupies are south of
 ; the player and won't be redrawn when the player automatically walks north and
 ; exits the map. This code could be removed without affecting anything.
-	overworldMapCoord hl, 5, 2, VERMILION_DOCK_WIDTH
+	hlowcoord 5, 2, VERMILION_DOCK_WIDTH
 	ld a, $d ; water block
 	ld [hli], a
 	ld [hli], a

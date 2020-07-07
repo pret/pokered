@@ -4,7 +4,7 @@ BookOrSculptureText::
 	ld a, [wCurMapTileset]
 	cp MANSION ; Celadon Mansion tileset
 	jr nz, .ok
-	aCoord 8, 6
+	lda_coord 8, 6
 	cp $38
 	jr nz, .ok
 	ld hl, DiglettSculptureText

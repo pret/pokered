@@ -52,7 +52,7 @@ OakSpeech:
 	ld [wDestinationMap], a
 	call SpecialWarpIn
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld a, [wd732]
 	bit 1, a ; possibly a debug mode bit
 	jp nz, .skipChoosingNames
@@ -68,7 +68,7 @@ OakSpeech:
 	ld [wd0b5], a
 	ld [wcf91], a
 	call GetMonHeader
-	coord hl, 6, 4
+	hlcoord 6, 4
 	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl, OakSpeechText2
@@ -104,12 +104,12 @@ OakSpeech:
 	ld hl, OakSpeechText3
 	call PrintText
 .next
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, SFX_SHRINK
 	call PlaySound
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 4
 	call DelayFrames
@@ -126,7 +126,7 @@ OakSpeech:
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(Music_PalletTown)
 	ld [wAudioROMBank], a
@@ -137,11 +137,11 @@ OakSpeech:
 	ld [wNewSoundID], a
 	call PlaySound
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld c, 20
 	call DelayFrames
-	coord hl, 6, 5
+	hlcoord 6, 5
 	ld b, 7
 	ld c, 7
 	call ClearScreenArea
@@ -175,7 +175,7 @@ FadeInIntroPic:
 	ld b, 6
 .next
 	ld a, [hli]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 10
 	call DelayFrames
 	dec b
@@ -192,18 +192,18 @@ IntroFadePalettes:
 
 MovePicLeft:
 	ld a, 119
-	ld [rWX], a
+	ldh [rWX], a
 	call DelayFrame
 
 	ld a, %11100100
-	ld [rBGP], a
+	ldh [rBGP], a
 .next
 	call DelayFrame
-	ld a, [rWX]
+	ldh a, [rWX]
 	sub 8
 	cp $FF
 	ret z
-	ld [rWX], a
+	ldh [rWX], a
 	jr .next
 
 DisplayPicCenteredOrUpperRight:
@@ -224,10 +224,10 @@ IntroDisplayPicCenteredOrUpperRight:
 	pop bc
 	ld a, c
 	and a
-	coord hl, 15, 1
+	hlcoord 15, 1
 	jr nz, .next
-	coord hl, 6, 4
+	hlcoord 6, 4
 .next
 	xor a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	predef_jump CopyUncompressedPicToTilemap

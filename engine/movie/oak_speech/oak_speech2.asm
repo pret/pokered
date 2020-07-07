@@ -66,7 +66,7 @@ HisNameIsText:
 
 OakSpeechSlidePicLeft:
 	push de
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 12, 11
 	call ClearScreenArea ; clear the name list text box
 	ld c, 10
@@ -76,13 +76,13 @@ OakSpeechSlidePicLeft:
 	ld bc, NAME_LENGTH
 	call CopyData
 	call Delay3
-	coord hl, 12, 4
+	hlcoord 12, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
 OakSpeechSlidePicRight:
-	coord hl, 5, 4
+	hlcoord 5, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
@@ -90,13 +90,13 @@ OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
-	ld [hSlideDirection], a
+	ldh [hSlideDirection], a
 	ld a, d
-	ld [hSlideAmount], a
+	ldh [hSlideAmount], a
 	ld a, e
-	ld [hSlidingRegionSize], a
+	ldh [hSlidingRegionSize], a
 	ld c, a
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .next
 ; If sliding right, point hl to the end of the pic's tiles.
@@ -107,8 +107,8 @@ OakSpeechSlidePicCommon:
 	ld e, l
 .loop
 	xor a
-	ld [hAutoBGTransferEnabled], a
-	ld a, [hSlideDirection]
+	ldh [hAutoBGTransferEnabled], a
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .slideLeft
 ; sliding right
@@ -123,7 +123,7 @@ OakSpeechSlidePicCommon:
 .next2
 	dec c
 	jr nz, .loop
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr z, .next3
 ; If sliding left, we need to zero the last tile in the pic (there is no need
@@ -134,13 +134,13 @@ OakSpeechSlidePicCommon:
 	ld [hl], a
 .next3
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	ld a, [hSlidingRegionSize]
+	ldh a, [hSlidingRegionSize]
 	ld c, a
 	ld h, d
 	ld l, e
-	ld a, [hSlideDirection]
+	ldh a, [hSlideDirection]
 	and a
 	jr nz, .slideLeft2
 	inc hl
@@ -150,9 +150,9 @@ OakSpeechSlidePicCommon:
 .next4
 	ld d, h
 	ld e, l
-	ld a, [hSlideAmount]
+	ldh a, [hSlideAmount]
 	dec a
-	ld [hSlideAmount], a
+	ldh [hSlideAmount], a
 	jr nz, .loop
 	pop bc
 	pop de
@@ -161,15 +161,15 @@ OakSpeechSlidePicCommon:
 
 DisplayIntroNameTextBox:
 	push de
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder
-	coord hl, 3, 0
+	hlcoord 3, 0
 	ld de, .namestring
 	call PlaceString
 	pop de
-	coord hl, 2, 2
+	hlcoord 2, 2
 	call PlaceString
 	call UpdateSprites
 	xor a

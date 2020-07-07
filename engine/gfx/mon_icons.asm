@@ -169,7 +169,7 @@ WriteMonPartySpriteOAMByPartyIndex:
 	push hl
 	push de
 	push bc
-	ld a, [hPartyMonIndex]
+	ldh a, [hPartyMonIndex]
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
@@ -187,7 +187,7 @@ WriteMonPartySpriteOAMBySpecies:
 ; Write OAM blocks for the party sprite of the species in
 ; [wMonPartySpriteSpecies].
 	xor a
-	ld [hPartyMonIndex], a
+	ldh [hPartyMonIndex], a
 	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
@@ -201,11 +201,11 @@ UnusedPartyMonSpriteFunction:
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
-	ld hl, vSprites
+	ld hl, vSprites tile $00
 	call .LoadTilePatterns
 	pop af
 	add $54
-	ld hl, vSprites + $40
+	ld hl, vSprites tile $04
 	call .LoadTilePatterns
 	xor a
 	ld [wMonPartySpriteSpecies], a
@@ -236,8 +236,8 @@ WriteMonPartySpriteOAM:
 ; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
-	ld h, wOAMBuffer / $100
-	ld a, [hPartyMonIndex]
+	ld h, HIGH(wOAMBuffer)
+	ldh a, [hPartyMonIndex]
 	swap a
 	ld l, a
 	add $10

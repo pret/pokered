@@ -29,7 +29,7 @@ PewterCityScript_1925e:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 CoordsData_19277:
@@ -44,32 +44,32 @@ PewterCityScript1:
 	and a
 	ret nz
 	ld a, $3
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_UP
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($3 << 4) | SPRITE_FACING_UP
-	ld [hSpriteImageIndex], a
+	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $d
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [hSpriteScreenYCoord], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, $30
-	ld [hSpriteScreenXCoord], a
+	ldh [hSpriteScreenXCoord], a
 	ld a, $c
-	ld [hSpriteMapYCoord], a
+	ldh [hSpriteMapYCoord], a
 	ld a, $11
-	ld [hSpriteMapXCoord], a
+	ldh [hSpriteMapXCoord], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $3
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
@@ -112,32 +112,32 @@ PewterCityScript4:
 	and a
 	ret nz
 	ld a, $5
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($1 << 4) | SPRITE_FACING_LEFT
-	ld [hSpriteImageIndex], a
+	ldh [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
-	ld [hSpriteScreenYCoord], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, $40
-	ld [hSpriteScreenXCoord], a
+	ldh [hSpriteScreenXCoord], a
 	ld a, $16
-	ld [hSpriteMapYCoord], a
+	ldh [hSpriteMapYCoord], a
 	ld a, $10
-	ld [hSpriteMapXCoord], a
+	ldh [hSpriteMapXCoord], a
 	ld a, $5
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $5
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
@@ -215,12 +215,12 @@ PewterCityText3:
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
@@ -280,11 +280,11 @@ PewterCityText5:
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a

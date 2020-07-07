@@ -12,14 +12,14 @@ CinnabarGymQuiz::
 	ld a, [wHiddenObjectFunctionArgument]
 	push af
 	and $f
-	ld [hGymGateIndex], a
+	ldh [hGymGateIndex], a
 	pop af
 	and $f0
 	swap a
-	ld [hGymGateAnswer], a
+	ldh [hGymGateAnswer], a
 	ld hl, CinnabarGymQuizIntroText
 	call PrintText
-	ld a, [hGymGateIndex]
+	ldh a, [hGymGateIndex]
 	dec a
 	add a
 	ld d, 0
@@ -77,18 +77,18 @@ CinnabarGymGateFlagAction:
 
 CinnabarGymQuiz_1ea92:
 	call YesNoChoice
-	ld a, [hGymGateAnswer]
+	ldh a, [hGymGateAnswer]
 	ld c, a
 	ld a, [wCurrentMenuItem]
 	cp c
 	jr nz, .wrongAnswer
 	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
-	ld a, [hGymGateIndex]
-	ld [hBackupGymGateIndex], a
+	ldh a, [hGymGateIndex]
+	ldh [hBackupGymGateIndex], a
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
-	ld a, [hBackupGymGateIndex]
+	ldh a, [hBackupGymGateIndex]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_SET
@@ -101,7 +101,7 @@ CinnabarGymQuiz_1ea92:
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
 	call PrintText
-	ld a, [hGymGateIndex]
+	ldh a, [hGymGateIndex]
 	add $2
 	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
@@ -111,7 +111,7 @@ CinnabarGymQuiz_1ea92:
 	ld a, c
 	and a
 	ret nz
-	ld a, [hGymGateIndex]
+	ldh a, [hGymGateIndex]
 	add $2
 	ld [wOpponentAfterWrongAnswer], a
 	ret
@@ -122,7 +122,7 @@ CinnabarGymQuizCorrectText:
 	text_promptbutton
 	text_asm
 
-	ld a, [hBackupGymGateIndex]
+	ldh a, [hBackupGymGateIndex]
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
@@ -144,9 +144,9 @@ UpdateCinnabarGymGateTileBlocks_::
 ; Update the overworld map with open floor blocks or locked gate blocks
 ; depending on event flags.
 	ld a, 6
-	ld [hGymGateIndex], a
+	ldh [hGymGateIndex], a
 .loop
-	ld a, [hGymGateIndex]
+	ldh a, [hGymGateIndex]
 	dec a
 	add a
 	add a
@@ -161,8 +161,8 @@ UpdateCinnabarGymGateTileBlocks_::
 	ld a, [hl]
 	ld [wGymGateTileBlock], a
 	push bc
-	ld a, [hGymGateIndex]
-	ld [hBackupGymGateIndex], a
+	ldh a, [hGymGateIndex]
+	ldh [hBackupGymGateIndex], a
 	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST

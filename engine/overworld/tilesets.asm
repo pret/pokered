@@ -23,9 +23,9 @@ LoadTilesetHeader:
 	dec c
 	jr nz, .copyTilesetHeaderLoop
 	ld a, [hl]
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	xor a
-	ld [hMovingBGTilesCounter1], a
+	ldh [hMovingBGTilesCounter1], a
 	pop hl
 	ld a, [wCurMapTileset]
 	push hl
@@ -38,7 +38,7 @@ LoadTilesetHeader:
 	jr c, .asm_c797
 	ld a, [wCurMapTileset]
 	ld b, a
-	ld a, [hPreviousTileset]
+	ldh a, [hPreviousTileset]
 	cp b
 	jr z, .done
 .asm_c797

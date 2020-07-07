@@ -1,11 +1,11 @@
 LeechSeedEffect_:
-	callab MoveHitTest
+	callfar MoveHitTest
 	ld a, [wMoveMissed]
 	and a
 	jr nz, .moveMissed
 	ld hl, wEnemyBattleStatus2
 	ld de, wEnemyMonType1
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .leechSeedEffect
 	ld hl, wPlayerBattleStatus2
@@ -22,7 +22,7 @@ LeechSeedEffect_:
 	bit SEEDED, [hl]
 	jr nz, .moveMissed
 	set SEEDED, [hl]
-	callab PlayCurrentMoveAnimation
+	callfar PlayCurrentMoveAnimation
 	ld hl, WasSeededText
 	jp PrintText
 .moveMissed

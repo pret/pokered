@@ -1,5 +1,5 @@
 PrintWaitingText::
-	coord hl, 3, 10
+	hlcoord 3, 10
 	ld b, $1
 	ld c, $b
 	ld a, [wIsInBattle]
@@ -10,7 +10,7 @@ PrintWaitingText::
 .asm_4c17
 	call CableClub_TextBoxBorder
 .asm_4c1a
-	coord hl, 4, 11
+	hlcoord 4, 11
 	ld de, WaitingText
 	call PlaceString
 	ld c, 50

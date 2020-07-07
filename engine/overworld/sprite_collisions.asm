@@ -1,15 +1,15 @@
 _UpdateSprites::
 	ld h, $c1
 	inc h
-	ld a, wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2
+	ld a, SPRITESTATEDATA2_IMAGEBASEOFFSET
 .spriteLoop
 	ld l, a
-	sub wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2
+	sub SPRITESTATEDATA2_IMAGEBASEOFFSET
 	ld c, a
-	ld [hCurrentSpriteOffset], a
+	ldh [hCurrentSpriteOffset], a
 	ld a, [hl]
 	and a
-	jr z, .skipSprite   ; tests $c2Xe
+	jr z, .skipSprite   ; tests SPRITESTATEDATA2_IMAGEBASEOFFSET
 	push hl
 	push de
 	push bc
@@ -20,7 +20,7 @@ _UpdateSprites::
 .skipSprite
 	ld a, l
 	add $10             ; move to next sprite
-	cp wSpritePlayerStateData2ImageBaseOffset - wSpritePlayerStateData2 ; test for overflow (back at beginning)
+	cp SPRITESTATEDATA2_IMAGEBASEOFFSET ; test for overflow (back at beginning)
 	jr nz, .spriteLoop
 	ret
 .updateCurrentSprite
@@ -31,10 +31,10 @@ _UpdateSprites::
 UpdateNonPlayerSprite:
 	dec a
 	swap a
-	ld [hTilePlayerStandingOn], a  ; $10 * sprite#
+	ldh [hTilePlayerStandingOn], a  ; $10 * sprite#
 	ld a, [wNPCMovementScriptSpriteOffset] ; some sprite offset?
 	ld b, a
-	ld a, [hCurrentSpriteOffset]
+	ldh a, [hCurrentSpriteOffset]
 	cp b
 	jr nz, .unequal
 	jp DoScriptedNPCMovement
@@ -43,22 +43,23 @@ UpdateNonPlayerSprite:
 
 ; This detects if the current sprite (whose offset is at hCurrentSpriteOffset)
 ; is going to collide with another sprite by looping over the other sprites.
-; The current sprite's offset will be labelled with i (e.g. $c1i0).
-; The loop sprite's offset will labelled with j (e.g. $c1j0).
+; The current sprite's offset will be labelled with i (e.g. i#SPRITESTATEDATA1_PICTUREID).
+; The loop sprite's offset will labelled with j (e.g. j#SPRITESTATEDATA1_PICTUREID).
 ;
-; Note that the Y coordinate of the sprite (in [$c1k4]) is one of the following
-; 9 values when the sprite is aligned with the grid: $fc, $0c, $1c, $2c, ..., $7c.
+; Note that the Y coordinate of the sprite (in [k#SPRITESTATEDATA1_YPIXELS])
+; is one of the following 9 values when the sprite is aligned with the grid:
+; $fc, $0c, $1c, $2c, ..., $7c.
 ; The reason that 4 is added below to the coordinate is to make it align with a
 ; multiple of $10 to make comparisons easier.
 DetectCollisionBetweenSprites:
 	nop
 
-	ld h, wSpriteStateData1 / $100
-	ld a, [hCurrentSpriteOffset]
-	add wSpriteStateData1 % $100
+	ld h, HIGH(wSpriteStateData1)
+	ldh a, [hCurrentSpriteOffset]
+	add LOW(wSpriteStateData1)
 	ld l, a
 
-	ld a, [hl] ; a = [$c1i0] (picture) (0 if slot is unused)
+	ld a, [hl] ; a = [i#SPRITESTATEDATA1_PICTUREID] (0 if slot is unused)
 	and a ; is this sprite slot slot used?
 	ret z ; return if not used
 
@@ -66,10 +67,10 @@ DetectCollisionBetweenSprites:
 	add 3
 	ld l, a
 
-	ld a, [hli] ; a = [$c1i3] (delta Y) (-1, 0, or 1)
+	ld a, [hli] ; a = [i#SPRITESTATEDATA1_YSTEPVECTOR] (-1, 0, or 1)
 	call SetSpriteCollisionValues
 
-	ld a, [hli] ; a = [$C1i4] (Y screen coordinate)
+	ld a, [hli] ; a = [i#SPRITESTATEDATA1_YPIXELS]
 	add 4 ; align with multiple of $10
 
 ; The effect of the following 3 lines is to
@@ -79,11 +80,11 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ld [hFF90], a ; store Y coordinate adjusted for direction of movement
+	ldh [hFF90], a ; store Y coordinate adjusted for direction of movement
 
-	ld a, [hli] ; a = [$c1i5] (delta X) (-1, 0, or 1)
+	ld a, [hli] ; a = [i#SPRITESTATEDATA1_XSTEPVECTOR] (-1, 0, or 1)
 	call SetSpriteCollisionValues
-	ld a, [hl] ; a = [$C1i6] (X screen coordinate)
+	ld a, [hl] ; a = [i#SPRITESTATEDATA1_XPIXELS]
 
 ; The effect of the following 3 lines is to
 ; add 7 to a if moving east or
@@ -92,52 +93,52 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	ld [hFF91], a ; store X coordinate adjusted for direction of movement
+	ldh [hFF91], a ; store X coordinate adjusted for direction of movement
 
 	ld a, l
 	add 7
 	ld l, a
 
 	xor a
-	ld [hld], a ; zero [$c1id] XXX what's [$c1id] for?
-	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
+	ld [hld], a ; zero [i#SPRITESTATEDATA1_0D] XXX what's this for?
+	ld [hld], a ; zero [i#SPRITESTATEDATA1_COLLISIONDATA]
 
-	ld a, [hFF91]
-	ld [hld], a ; [$c1ib] = adjusted X coordinate
-	ld a, [hFF90]
-	ld [hl], a ; [$c1ia] = adjusted Y coordinate
+	ldh a, [hFF91]
+	ld [hld], a ; [i#SPRITESTATEDATA1_XADJUSTED]
+	ldh a, [hFF90]
+	ld [hl], a ; [i#SPRITESTATEDATA1_YADJUSTED]
 
 	xor a ; zero the loop counter
 
 .loop
-	ld [hFF8F], a ; store loop counter
+	ldh [hFF8F], a ; store loop counter
 	swap a
 	ld e, a
-	ld a, [hCurrentSpriteOffset]
+	ldh a, [hCurrentSpriteOffset]
 	cp e ; does the loop sprite match the current sprite?
 	jp z, .next ; go to the next sprite if they match
 
 	ld d, h
-	ld a, [de] ; a = [$c1j0] (picture) (0 if slot is unused)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_PICTUREID] (0 if slot is unused)
 	and a ; is this sprite slot slot used?
 	jp z, .next ; go the next sprite if not used
 
 	inc e
 	inc e
-	ld a, [de] ; a = [$c1j2] ($ff means the sprite is offscreen)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_IMAGEINDEX] ($ff means the sprite is offscreen)
 	inc a
 	jp z, .next ; go the next sprite if offscreen
 
-	ld a, [hCurrentSpriteOffset]
+	ldh a, [hCurrentSpriteOffset]
 	add 10
 	ld l, a
 
 	inc e
-	ld a, [de] ; a = [$c1j3] (delta Y)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_YSTEPVECTOR]
 	call SetSpriteCollisionValues
 
 	inc e
-	ld a, [de] ; a = [$C1j4] (Y screen coordinate)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_YPIXELS]
 	add 4 ; align with multiple of $10
 
 ; The effect of the following 3 lines is to
@@ -147,18 +148,18 @@ DetectCollisionBetweenSprites:
 	and $f0
 	or c
 
-	sub [hl] ; subtract the adjusted Y coordinate of sprite i ([$c1ia]) from that of sprite j
+	sub [hl] ; subtract [i#SPRITESTATEDATA1_YADJUSTED] from [j#SPRITESTATEDATA1_YADJUSTED]
 
 ; calculate the absolute value of the difference to get the distance
 	jr nc, .noCarry1
 	cpl
 	inc a
 .noCarry1
-	ld [hFF90], a ; store the distance between the two sprites' adjusted Y values
+	ldh [hFF90], a ; store the distance between the two sprites' adjusted Y values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
-; Y coordinate is larger. This information is used later to set [$c1ic],
-; which stores which direction the collision occurred in.
+; Y coordinate is larger. This information is used later to set
+; [i#SPRITESTATEDATA1_COLLISIONDATA].
 ; The following 5 lines set the lowest 2 bits of c, which are later shifted left by 2.
 ; If sprite i's Y is larger, set lowest 2 bits of c to 10.
 ; If sprite j's Y is larger or both are equal, set lowest 2 bits of c to 01.
@@ -170,30 +171,30 @@ DetectCollisionBetweenSprites:
 
 ; If sprite i's delta Y is 0, then b = 7, else b = 9.
 	ld b, 7
-	ld a, [hl] ; a = [$c1ia] (adjusted Y coordinate)
+	ld a, [hl] ; a = [i#SPRITESTATEDATA1_YADJUSTED]
 	and $f
 	jr z, .next1
 	ld b, 9
 
 .next1
-	ld a, [hFF90] ; a = distance between adjusted Y coordinates
+	ldh a, [hFF90] ; a = distance between adjusted Y coordinates
 	sub b
-	ld [hFF92], a ; store distance adjusted using sprite i's direction
+	ldh [hFF92], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ld [hFF90], a ; store 7 or 9 depending on sprite i's delta Y
+	ldh [hFF90], a ; store 7 or 9 depending on sprite i's delta Y
 	jr c, .checkXDistance
 
 ; If sprite j's delta Y is 0, then b = 7, else b = 9.
 	ld b, 7
 	dec e
-	ld a, [de] ; a = [$c1j3] (delta Y)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_YSTEPVECTOR]
 	inc e
 	and a
 	jr z, .next2
 	ld b, 9
 
 .next2
-	ld a, [hFF92] ; a = distance adjusted using sprite i's direction
+	ldh a, [hFF92] ; a = distance adjusted using sprite i's direction
 	sub b ; adjust distance using sprite j's direction
 	jr z, .checkXDistance
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
@@ -201,13 +202,13 @@ DetectCollisionBetweenSprites:
 .checkXDistance
 	inc e
 	inc l
-	ld a, [de] ; a = [$c1j5] (delta X)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_XSTEPVECTOR]
 
 	push bc
 
 	call SetSpriteCollisionValues
 	inc e
-	ld a, [de] ; a = [$c1j6] (X screen coordinate)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_XPIXELS]
 
 ; The effect of the following 3 lines is to
 ; add 7 to a if moving east or
@@ -218,18 +219,18 @@ DetectCollisionBetweenSprites:
 
 	pop bc
 
-	sub [hl] ; subtract the adjusted X coordinate of sprite i ([$c1ib]) from that of sprite j
+	sub [hl] ; subtract [i#SPRITESTATEDATA1_XADJUSTED] from [j#SPRITESTATEDATA1_XADJUSTED]
 
 ; calculate the absolute value of the difference to get the distance
 	jr nc, .noCarry2
 	cpl
 	inc a
 .noCarry2
-	ld [hFF91], a ; store the distance between the two sprites' adjusted X values
+	ldh [hFF91], a ; store the distance between the two sprites' adjusted X values
 
 ; Use the carry flag set by the above subtraction to determine which sprite's
-; X coordinate is larger. This information is used later to set [$c1ic],
-; which stores which direction the collision occurred in.
+; X coordinate is larger. This information is used later to set
+; [i#SPRITESTATEDATA1_COLLISIONDATA].
 ; The following 5 lines set the lowest 2 bits of c.
 ; If sprite i's X is larger, set lowest 2 bits of c to 10.
 ; If sprite j's X is larger or both are equal, set lowest 2 bits of c to 01.
@@ -241,38 +242,38 @@ DetectCollisionBetweenSprites:
 
 ; If sprite i's delta X is 0, then b = 7, else b = 9.
 	ld b, 7
-	ld a, [hl] ; a = [$c1ib] (adjusted X coordinate)
+	ld a, [hl] ; a = [i#SPRITESTATEDATA1_XADJUSTED]
 	and $f
 	jr z, .next3
 	ld b, 9
 
 .next3
-	ld a, [hFF91] ; a = distance between adjusted X coordinates
+	ldh a, [hFF91] ; a = distance between adjusted X coordinates
 	sub b
-	ld [hFF92], a ; store distance adjusted using sprite i's direction
+	ldh [hFF92], a ; store distance adjusted using sprite i's direction
 	ld a, b
-	ld [hFF91], a ; store 7 or 9 depending on sprite i's delta X
+	ldh [hFF91], a ; store 7 or 9 depending on sprite i's delta X
 	jr c, .collision
 
 ; If sprite j's delta X is 0, then b = 7, else b = 9.
 	ld b, 7
 	dec e
-	ld a, [de] ; a = [$c1j5] (delta X)
+	ld a, [de] ; a = [j#SPRITESTATEDATA1_XSTEPVECTOR]
 	inc e
 	and a
 	jr z, .next4
 	ld b, 9
 
 .next4
-	ld a, [hFF92] ; a = distance adjusted using sprite i's direction
+	ldh a, [hFF92] ; a = distance adjusted using sprite i's direction
 	sub b ; adjust distance using sprite j's direction
 	jr z, .collision
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
 
 .collision
-	ld a, [hFF91] ; a = 7 or 9 depending on sprite i's delta X
+	ldh a, [hFF91] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
-	ld a, [hFF90] ; a = 7 or 9 depending on sprite i's delta Y
+	ldh a, [hFF90] ; a = 7 or 9 depending on sprite i's delta Y
 	inc l
 
 ; If delta X isn't 0 and delta Y is 0, then b = %0011, else b = %1100.
@@ -287,14 +288,15 @@ DetectCollisionBetweenSprites:
 .next6
 	ld a, c ; c has 2 bits set (one of bits 0-1 is set for the X axis and one of bits 2-3 for the Y axis)
 	and b ; we select either the bit in bits 0-1 or bits 2-3 based on the calculation immediately above
-	or [hl] ; or with existing collision direction bits in [$c1ic]
+	or [hl] ; or with existing collision direction bits in [i#SPRITESTATEDATA1_COLLISIONDATA]
 	ld [hl], a ; store new value
 	ld a, c ; useless code because a is overwritten before being used again
 
-; set bit in [$c1ie] or [$c1if] to indicate which sprite the collision occurred with
+; set bit in [i#SPRITESTATEDATA1_0E] or [i#SPRITESTATEDATA1_0F]
+; to indicate which sprite the collision occurred with
 	inc l
 	inc l
-	ld a, [hFF8F] ; a = loop counter
+	ldh a, [hFF8F] ; a = loop counter
 	ld de, SpriteCollisionBitTable
 	add a
 	add e
@@ -311,7 +313,7 @@ DetectCollisionBetweenSprites:
 	ld [hl], a
 
 .next
-	ld a, [hFF8F] ; a = loop counter
+	ldh a, [hFF8F] ; a = loop counter
 	inc a
 	cp $10
 	jp nz, .loop

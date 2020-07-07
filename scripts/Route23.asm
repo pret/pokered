@@ -45,7 +45,7 @@ Route23Script0:
 	ret nc
 .asm_51237
 	ld a, e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	ld a, c
 	ld [wWhichBadge], a
 	ld b, FLAG_TEST
@@ -57,7 +57,7 @@ Route23Script0:
 	call Route23Script_5125d
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ret
 
 YCoordsData_51255:

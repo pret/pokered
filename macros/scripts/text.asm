@@ -200,7 +200,7 @@ script_mart: MACRO
 	db _NARG ; number of items
 REPT _NARG
 	db \1 ; item id
-	shift
+	SHIFT
 ENDR
 	db -1 ; end
 ENDM

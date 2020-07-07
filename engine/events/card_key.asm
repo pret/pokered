@@ -28,7 +28,7 @@ PrintCardKeyText:
 	call GetCoordsInFrontOfPlayer
 	push de
 	tx_pre_id CardKeySuccessText
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call PrintPredefTextID
 	pop de
 	srl d
@@ -55,7 +55,7 @@ PrintCardKeyText:
 	jp PlaySound
 .noCardKey
 	tx_pre_id CardKeyFailText
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp PrintPredefTextID
 
 SilphCoMapList:

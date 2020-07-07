@@ -15,7 +15,7 @@ _AddPartyMon::
 	ret nc ; return if the party is already full
 	ld [de], a
 	ld a, [de]
-	ld [hNewPartyLength], a
+	ldh [hNewPartyLength], a
 	add e
 	ld e, a
 	jr nc, .noCarry
@@ -32,7 +32,7 @@ _AddPartyMon::
 	jr z, .next2
 	ld hl, wEnemyMonOT
 .next2
-	ld a, [hNewPartyLength]
+	ldh a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld d, h
@@ -44,7 +44,7 @@ _AddPartyMon::
 	and a
 	jr nz, .skipNaming
 	ld hl, wPartyMonNicks
-	ld a, [hNewPartyLength]
+	ldh a, [hNewPartyLength]
 	dec a
 	call SkipFixedLengthTextEntries
 	ld a, NAME_MON_SCREEN
@@ -57,7 +57,7 @@ _AddPartyMon::
 	jr z, .next3
 	ld hl, wEnemyMons
 .next3
-	ld a, [hNewPartyLength]
+	ldh a, [hNewPartyLength]
 	dec a
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
@@ -129,10 +129,10 @@ _AddPartyMon::
 	xor a
 	ld b, a
 	call CalcStat      ; calc HP stat (set cur Hp to max HP)
-	ld a, [hMultiplicand+1]
+	ldh a, [hMultiplicand+1]
 	ld [de], a
 	inc de
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	ld [de], a
 	inc de
 	xor a
@@ -201,16 +201,16 @@ _AddPartyMon::
 	push de
 	ld a, [wCurEnemyLVL]
 	ld d, a
-	callab CalcExperience
+	callfar CalcExperience
 	pop de
 	inc de
-	ld a, [hExperience] ; write experience
+	ldh a, [hExperience] ; write experience
 	ld [de], a
 	inc de
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	ld [de], a
 	xor a
 	ld b, NUM_STATS * 2
@@ -498,7 +498,7 @@ _MoveMon::
 	add $2
 	ld [wMonDataLocation], a
 	call LoadMonData
-	callba CalcLevelFromExperience
+	farcall CalcLevelFromExperience
 	ld a, d
 	ld [wCurEnemyLVL], a
 	pop hl

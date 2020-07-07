@@ -27,7 +27,7 @@ CeruleanCityScript4:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a
@@ -53,7 +53,7 @@ CeruleanCityScript0:
 	ld [wSprite02StateData1FacingDirection], a
 	call Delay3
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_194f7
 	CheckEvent EVENT_BEAT_CERULEAN_RIVAL
@@ -72,16 +72,16 @@ CeruleanCityScript0:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, [wXCoord]
 	cp $14
 	jr z, .asm_19535
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, $5
-	ld [hSpriteDataOffset], a
+	ldh [hSpriteDataOffset], a
 	call GetPointerWithinSpriteStateData2
 	ld [hl], $19
 .asm_19535
@@ -90,7 +90,7 @@ CeruleanCityScript0:
 	predef ShowObject
 	ld de, CeruleanCityMovement1
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $1
 	ld [wCeruleanCityCurScript], a
@@ -114,9 +114,9 @@ CeruleanCityMovement1:
 
 CeruleanCityScript_1955d:
 	ld a, 1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	xor a ; SPRITE_FACING_DOWN
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1:
@@ -126,7 +126,7 @@ CeruleanCityScript1:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72d
 	set 6, [hl]
@@ -154,7 +154,7 @@ CeruleanCityScript1:
 	ld [wTrainerNo], a
 
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	call CeruleanCityScript_1955d
 	ld a, $2
 	ld [wCeruleanCityCurScript], a
@@ -169,14 +169,14 @@ CeruleanCityScript2:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_CERULEAN_RIVAL
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
 	cp $14
@@ -187,7 +187,7 @@ CeruleanCityScript2:
 	ld de, CeruleanCityMovement3
 .asm_195f3
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $3
 	ld [wCeruleanCityCurScript], a
@@ -289,7 +289,7 @@ CeruleanCityText2:
 	ld hl, CeruleanCityText_196ee
 	ld de, CeruleanCityText_196ee
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
@@ -310,7 +310,7 @@ CeruleanCityText2:
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ReceivedTM28Text
 	call PrintText
-	callba CeruleanHideRocket
+	farcall CeruleanHideRocket
 .Done
 	jp TextScriptEnd
 
@@ -356,7 +356,7 @@ CeruleanCityText6:
 
 CeruleanCityText7:
 	text_asm
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	cp 180
 	jr c, .asm_e9fc9
 	ld hl, CeruleanCityText_19730
@@ -388,7 +388,7 @@ CeruleanCityText_1973a:
 
 CeruleanCityText8:
 	text_asm
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	cp 180
 	jr c, .asm_e28da
 	ld hl, CeruleanCityText_1976f

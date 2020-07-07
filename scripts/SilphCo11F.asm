@@ -35,7 +35,7 @@ SilphCo11Script_62137:
 	ld a, [hl]
 	ld c, a
 	xor a
-	ld [hUnlockedSilphCoDoors], a
+	ldh [hUnlockedSilphCoDoors], a
 	pop hl
 .asm_62143
 	ld a, [hli]
@@ -60,11 +60,11 @@ SilphCo11Script_62137:
 	ret
 .asm_6215f
 	xor a
-	ld [hUnlockedSilphCoDoors], a
+	ldh [hUnlockedSilphCoDoors], a
 	ret
 
 SilphCo11Script_62163:
-	ld a, [hUnlockedSilphCoDoors]
+	ldh a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
@@ -171,14 +171,14 @@ SilphCo11Script0:
 	ld a, [wCoordIndex]
 	ld [wcf0d], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_62216
 	call MoveSprite
@@ -199,9 +199,9 @@ MovementData_62216:
 SilphCo11Script_6221a:
 	ld [wPlayerMovingDirection], a
 	ld a, $3
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, b
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5:
@@ -222,7 +222,7 @@ SilphCo11Script5:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
@@ -239,7 +239,7 @@ SilphCo11Script3:
 	bit 0, a
 	ret nz
 	ld a, $3
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wcf0d]
 	cp $1
@@ -263,7 +263,7 @@ SilphCo11Script4:
 	ld hl, SilphCo10Text_62330
 	ld de, SilphCo10Text_62330
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

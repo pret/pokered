@@ -6,9 +6,9 @@ PrintNumber::
 ; in bits 7 and 6 of b respectively.
 	push bc
 	xor a
-	ld [hPastLeadingZeros], a
-	ld [hNumToPrint], a
-	ld [hNumToPrint + 1], a
+	ldh [hPastLeadingZeros], a
+	ldh [hNumToPrint], a
+	ldh [hNumToPrint + 1], a
 	ld a, b
 	and $f
 	cp 1
@@ -17,26 +17,26 @@ PrintNumber::
 	jr z, .word
 .long
 	ld a, [de]
-	ld [hNumToPrint], a
+	ldh [hNumToPrint], a
 	inc de
 	ld a, [de]
-	ld [hNumToPrint + 1], a
+	ldh [hNumToPrint + 1], a
 	inc de
 	ld a, [de]
-	ld [hNumToPrint + 2], a
+	ldh [hNumToPrint + 2], a
 	jr .start
 
 .word
 	ld a, [de]
-	ld [hNumToPrint + 1], a
+	ldh [hNumToPrint + 1], a
 	inc de
 	ld a, [de]
-	ld [hNumToPrint + 2], a
+	ldh [hNumToPrint + 2], a
 	jr .start
 
 .byte
 	ld a, [de]
-	ld [hNumToPrint + 2], a
+	ldh [hNumToPrint + 2], a
 
 .start
 	push de
@@ -66,17 +66,17 @@ IF (\1) / $10000
 ELSE
 	xor a
 ENDC
-	ld [hPowerOf10 + 0], a
+	ldh [hPowerOf10 + 0], a
 
 IF (\1) / $100
 	ld a, \1 / $100   % $100
 ELSE
 	xor a
 ENDC
-	ld [hPowerOf10 + 1], a
+	ldh [hPowerOf10 + 1], a
 
 	ld a, \1 / $1     % $100
-	ld [hPowerOf10 + 2], a
+	ldh [hPowerOf10 + 2], a
 
 	call .PrintDigit
 	call .NextDigit
@@ -90,7 +90,7 @@ ENDM
 
 .tens
 	ld c, 0
-	ld a, [hNumToPrint + 2]
+	ldh a, [hNumToPrint + 2]
 .mod
 	cp 10
 	jr c, .ok
@@ -100,9 +100,9 @@ ENDM
 .ok
 
 	ld b, a
-	ld a, [hPastLeadingZeros]
+	ldh a, [hPastLeadingZeros]
 	or c
-	ld [hPastLeadingZeros], a
+	ldh [hPastLeadingZeros], a
 	jr nz, .past
 	call .PrintLeadingZero
 	jr .next
@@ -127,74 +127,74 @@ ENDM
 ; Print the quotient, and keep the modulus.
 	ld c, 0
 .loop
-	ld a, [hPowerOf10]
+	ldh a, [hPowerOf10]
 	ld b, a
-	ld a, [hNumToPrint]
-	ld [hSavedNumToPrint], a
+	ldh a, [hNumToPrint]
+	ldh [hSavedNumToPrint], a
 	cp b
 	jr c, .underflow0
 	sub b
-	ld [hNumToPrint], a
-	ld a, [hPowerOf10 + 1]
+	ldh [hNumToPrint], a
+	ldh a, [hPowerOf10 + 1]
 	ld b, a
-	ld a, [hNumToPrint + 1]
-	ld [hSavedNumToPrint + 1], a
+	ldh a, [hNumToPrint + 1]
+	ldh [hSavedNumToPrint + 1], a
 	cp b
 	jr nc, .noborrow1
 
-	ld a, [hNumToPrint]
+	ldh a, [hNumToPrint]
 	or 0
 	jr z, .underflow1
 	dec a
-	ld [hNumToPrint], a
-	ld a, [hNumToPrint + 1]
+	ldh [hNumToPrint], a
+	ldh a, [hNumToPrint + 1]
 .noborrow1
 
 	sub b
-	ld [hNumToPrint + 1], a
-	ld a, [hPowerOf10 + 2]
+	ldh [hNumToPrint + 1], a
+	ldh a, [hPowerOf10 + 2]
 	ld b, a
-	ld a, [hNumToPrint + 2]
-	ld [hSavedNumToPrint + 2], a
+	ldh a, [hNumToPrint + 2]
+	ldh [hSavedNumToPrint + 2], a
 	cp b
 	jr nc, .noborrow2
 
-	ld a, [hNumToPrint + 1]
+	ldh a, [hNumToPrint + 1]
 	and a
 	jr nz, .borrowed
 
-	ld a, [hNumToPrint]
+	ldh a, [hNumToPrint]
 	and a
 	jr z, .underflow2
 	dec a
-	ld [hNumToPrint], a
+	ldh [hNumToPrint], a
 	xor a
 .borrowed
 
 	dec a
-	ld [hNumToPrint + 1], a
-	ld a, [hNumToPrint + 2]
+	ldh [hNumToPrint + 1], a
+	ldh a, [hNumToPrint + 2]
 .noborrow2
 	sub b
-	ld [hNumToPrint + 2], a
+	ldh [hNumToPrint + 2], a
 	inc c
 	jr .loop
 
 .underflow2
-	ld a, [hSavedNumToPrint + 1]
-	ld [hNumToPrint + 1], a
+	ldh a, [hSavedNumToPrint + 1]
+	ldh [hNumToPrint + 1], a
 .underflow1
-	ld a, [hSavedNumToPrint]
-	ld [hNumToPrint], a
+	ldh a, [hSavedNumToPrint]
+	ldh [hNumToPrint], a
 .underflow0
-	ld a, [hPastLeadingZeros]
+	ldh a, [hPastLeadingZeros]
 	or c
 	jr z, .PrintLeadingZero
 
 	ld a, "0"
 	add c
 	ld [hl], a
-	ld [hPastLeadingZeros], a
+	ldh [hPastLeadingZeros], a
 	ret
 
 .PrintLeadingZero:
@@ -211,7 +211,7 @@ ENDM
 	jr nz, .inc
 	bit BIT_LEFT_ALIGN, d
 	jr z, .inc
-	ld a, [hPastLeadingZeros]
+	ldh a, [hPastLeadingZeros]
 	and a
 	ret z
 .inc

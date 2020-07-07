@@ -56,12 +56,12 @@ GymTrashScript:
 ; first lock was in trash can 1 or 3. However, due to this bug, trash can 0 can
 ; have the second lock regardless of which trash can had the first lock.
 
-	ld [hGymTrashCanRandNumMask], a
+	ldh [hGymTrashCanRandNumMask], a
 	push hl
 	call Random
 	swap a
 	ld b, a
-	ld a, [hGymTrashCanRandNumMask]
+	ldh a, [hGymTrashCanRandNumMask]
 	and b
 	dec a
 	pop hl

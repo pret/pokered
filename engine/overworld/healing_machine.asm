@@ -1,17 +1,17 @@
 AnimateHealingMachine:
 	ld de, PokeCenterFlashingMonitorAndHealBall
-	ld hl, vChars0 + $7c0
-	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03 ; loads one too many tiles
+	ld hl, vChars0 tile $7c
+	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), 3 ; should be 2
 	call CopyVideoData
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
 	push af
 	ld [hl], $ff
 	push hl
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	push af
 	ld a, $e0
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
@@ -56,7 +56,7 @@ AnimateHealingMachine:
 	ld c, 32
 	call DelayFrames
 	pop af
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	pop hl
 	pop af
 	ld [hl], a
@@ -78,9 +78,9 @@ PokeCenterOAMData:
 FlashSprite8Times:
 	ld b, 8
 .loop
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	xor d
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ld c, 10
 	call DelayFrames
 	dec b

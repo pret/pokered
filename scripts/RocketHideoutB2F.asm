@@ -367,38 +367,32 @@ LoadSpinnerArrowTiles::
 spinner: MACRO
 ; \1: source
 ; \2: offset (BANK() chokes on literals)
-; \3: length
-; \4: dest
-	dw \1 + \2
-	db \3, BANK(\1)
-	dw \4
+; \3: dest
+	dw \1 tile \2
+	db 1
+	db BANK(\1)
+	dw vTileset tile \3
 ENDM
 
 FacilitySpinnerArrows:
-FACILITY_SPINNER EQU $20 * $10
-vFacilitySpinner EQU vTileset + FACILITY_SPINNER
-
-	spinner SpinnerArrowAnimTiles, $00, 1, vFacilitySpinner
-	spinner SpinnerArrowAnimTiles, $10, 1, vFacilitySpinner + $10
-	spinner SpinnerArrowAnimTiles, $20, 1, vFacilitySpinner + $100
-	spinner SpinnerArrowAnimTiles, $30, 1, vFacilitySpinner + $110
-	spinner Facility_GFX, FACILITY_SPINNER + $000, 1, vFacilitySpinner
-	spinner Facility_GFX, FACILITY_SPINNER + $010, 1, vFacilitySpinner + $10
-	spinner Facility_GFX, FACILITY_SPINNER + $100, 1, vFacilitySpinner + $100
-	spinner Facility_GFX, FACILITY_SPINNER + $110, 1, vFacilitySpinner + $110
+	spinner SpinnerArrowAnimTiles, 0,   $20
+	spinner SpinnerArrowAnimTiles, 1,   $21
+	spinner SpinnerArrowAnimTiles, 2,   $30
+	spinner SpinnerArrowAnimTiles, 3,   $31
+	spinner Facility_GFX,          $20, $20
+	spinner Facility_GFX,          $21, $21
+	spinner Facility_GFX,          $30, $30
+	spinner Facility_GFX,          $31, $31
 
 GymSpinnerArrows:
-GYM_SPINNER EQU $3c * $10
-vGymSpinner EQU vTileset + GYM_SPINNER
-
-	spinner SpinnerArrowAnimTiles, $10, 1, vGymSpinner
-	spinner SpinnerArrowAnimTiles, $30, 1, vGymSpinner + $10
-	spinner SpinnerArrowAnimTiles, $00, 1, vGymSpinner + $100
-	spinner SpinnerArrowAnimTiles, $20, 1, vGymSpinner + $110
-	spinner Gym_GFX, GYM_SPINNER + $000, 1, vGymSpinner
-	spinner Gym_GFX, GYM_SPINNER + $010, 1, vGymSpinner + $10
-	spinner Gym_GFX, GYM_SPINNER + $100, 1, vGymSpinner + $100
-	spinner Gym_GFX, GYM_SPINNER + $110, 1, vGymSpinner + $110
+	spinner SpinnerArrowAnimTiles, 1,   $3c
+	spinner SpinnerArrowAnimTiles, 3,   $3d
+	spinner SpinnerArrowAnimTiles, 0,   $4c
+	spinner SpinnerArrowAnimTiles, 2,   $4d
+	spinner Gym_GFX,               $3c, $3c
+	spinner Gym_GFX,               $3d, $3d
+	spinner Gym_GFX,               $4c, $4c
+	spinner Gym_GFX,               $4d, $4d
 
 SpinnerPlayerFacingDirections:
 ; This isn't the order of the facing directions.  Rather, it's a list of

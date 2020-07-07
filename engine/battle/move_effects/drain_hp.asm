@@ -14,7 +14,7 @@ DrainHPEffect_:
 .getAttackerHP
 	ld hl, wBattleMonHP
 	ld de, wBattleMonMaxHP
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jp z, .addDamageToAttackerHP
 	ld hl, wEnemyMonHP
@@ -69,21 +69,21 @@ DrainHPEffect_:
 	ld [wHPBarNewHP+1], a
 	inc de
 .next
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 10, 9
+	hlcoord 10, 9
 	ld a, $1
 	jr z, .next2
-	coord hl, 2, 2
+	hlcoord 2, 2
 	xor a
 .next2
 	ld [wHPBarType], a
 	predef UpdateHPBar2
 	predef DrawPlayerHUDAndHPBar
 	predef DrawEnemyHUDAndHPBar
-	callab ReadPlayerMonCurHPAndStatus
+	callfar ReadPlayerMonCurHPAndStatus
 	ld hl, SuckedHealthText
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveEffect]
 	jr z, .next3

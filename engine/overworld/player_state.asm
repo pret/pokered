@@ -17,7 +17,7 @@ IsPlayerStandingOnWarp::
 	ld a, [hli] ; target warp
 	ld [wDestinationWarpID], a
 	ld a, [hl] ; target map
-	ld [hWarpDestinationMap], a
+	ldh [hWarpDestinationMap], a
 	ld hl, wd736
 	set 2, [hl] ; standing on warp flag
 	ret
@@ -192,7 +192,7 @@ IsPlayerStandingOnDoorTileOrWarpTile::
 	push hl
 	push de
 	push bc
-	callba IsPlayerStandingOnDoorTile
+	farcall IsPlayerStandingOnDoorTile
 	jr c, .done
 	ld a, [wCurMapTileset]
 	add a
@@ -204,7 +204,7 @@ IsPlayerStandingOnDoorTileOrWarpTile::
 	ld h, [hl]
 	ld l, a
 	ld de, $1
-	aCoord 8, 9
+	lda_coord 8, 9
 	call IsInArray
 	jr nc, .done
 	ld hl, wd736
@@ -223,28 +223,28 @@ PrintSafariZoneSteps::
 	ret c
 	cp CERULEAN_CAVE_2F
 	ret nc
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 3
 	ld c, 7
 	call TextBoxBorder
-	coord hl, 1, 1
+	hlcoord 1, 1
 	ld de, wSafariSteps
 	lb bc, 2, 3
 	call PrintNumber
-	coord hl, 4, 1
+	hlcoord 4, 1
 	ld de, SafariSteps
 	call PlaceString
-	coord hl, 1, 3
+	hlcoord 1, 3
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [wNumSafariBalls]
 	cp 10
 	jr nc, .asm_c56d
-	coord hl, 5, 3
+	hlcoord 5, 3
 	ld a, " "
 	ld [hl], a
 .asm_c56d
-	coord hl, 6, 3
+	hlcoord 6, 3
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	jp PrintNumber
@@ -267,28 +267,28 @@ _GetTileAndCoordsInFrontOfPlayer:
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
-	aCoord 8, 11
+	lda_coord 8, 11
 	inc d
 	jr .storeTile
 .notFacingDown
 	cp SPRITE_FACING_UP
 	jr nz, .notFacingUp
 ; facing up
-	aCoord 8, 7
+	lda_coord 8, 7
 	dec d
 	jr .storeTile
 .notFacingUp
 	cp SPRITE_FACING_LEFT
 	jr nz, .notFacingLeft
 ; facing left
-	aCoord 6, 9
+	lda_coord 6, 9
 	dec e
 	jr .storeTile
 .notFacingLeft
 	cp SPRITE_FACING_RIGHT
 	jr nz, .storeTile
 ; facing right
-	aCoord 10, 9
+	lda_coord 10, 9
 	inc e
 .storeTile
 	ld c, a
@@ -297,7 +297,7 @@ _GetTileAndCoordsInFrontOfPlayer:
 
 GetTileTwoStepsInFrontOfPlayer:
 	xor a
-	ld [hPlayerFacing], a
+	ldh [hPlayerFacing], a
 	ld hl, wYCoord
 	ld a, [hli]
 	ld d, a
@@ -308,7 +308,7 @@ GetTileTwoStepsInFrontOfPlayer:
 ; facing down
 	ld hl, hPlayerFacing
 	set 0, [hl]
-	aCoord 8, 13
+	lda_coord 8, 13
 	inc d
 	jr .storeTile
 .notFacingDown
@@ -317,7 +317,7 @@ GetTileTwoStepsInFrontOfPlayer:
 ; facing up
 	ld hl, hPlayerFacing
 	set 1, [hl]
-	aCoord 8, 5
+	lda_coord 8, 5
 	dec d
 	jr .storeTile
 .notFacingUp
@@ -326,7 +326,7 @@ GetTileTwoStepsInFrontOfPlayer:
 ; facing left
 	ld hl, hPlayerFacing
 	set 2, [hl]
-	aCoord 4, 9
+	lda_coord 4, 9
 	dec e
 	jr .storeTile
 .notFacingLeft
@@ -335,7 +335,7 @@ GetTileTwoStepsInFrontOfPlayer:
 ; facing right
 	ld hl, hPlayerFacing
 	set 3, [hl]
-	aCoord 12, 9
+	lda_coord 12, 9
 	inc e
 .storeTile
 	ld c, a
@@ -378,33 +378,33 @@ CheckForBoulderCollisionWithSprites:
 	ld hl, wSprite01StateData2MapY
 	add hl, de
 	ld a, [hli] ; map Y position
-	ld [hPlayerYCoord], a
+	ldh [hPlayerYCoord], a
 	ld a, [hl] ; map X position
-	ld [hPlayerXCoord], a
+	ldh [hPlayerXCoord], a
 	ld a, [wNumSprites]
 	ld c, a
 	ld de, $f
 	ld hl, wSprite01StateData2MapY
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	and $3 ; facing up or down?
 	jr z, .pushingHorizontallyLoop
 .pushingVerticallyLoop
 	inc hl
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	cp [hl]
 	jr nz, .nextSprite1 ; if X coordinates don't match
 	dec hl
 	ld a, [hli]
 	ld b, a
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	rrca
 	jr c, .pushingDown
 ; pushing up
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	dec a
 	jr .compareYCoords
 .pushingDown
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	inc a
 .compareYCoords
 	cp b
@@ -417,19 +417,19 @@ CheckForBoulderCollisionWithSprites:
 .pushingHorizontallyLoop
 	ld a, [hli]
 	ld b, a
-	ld a, [hPlayerYCoord]
+	ldh a, [hPlayerYCoord]
 	cp b
 	jr nz, .nextSprite2
 	ld b, [hl]
-	ld a, [hPlayerFacing]
+	ldh a, [hPlayerFacing]
 	bit 2, a
 	jr nz, .pushingLeft
 ; pushing right
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	inc a
 	jr .compareXCoords
 .pushingLeft
-	ld a, [hPlayerXCoord]
+	ldh a, [hPlayerXCoord]
 	dec a
 .compareXCoords
 	cp b

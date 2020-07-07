@@ -4,7 +4,7 @@ SubstituteEffect_:
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
 	ld bc, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyMonMaxHP
@@ -55,7 +55,7 @@ SubstituteEffect_:
 	call Bankswitch ; jump to routine depending on animation setting
 	ld hl, SubstituteText
 	call PrintText
-	jpab DrawHUDsAndHPBars
+	jpfar DrawHUDsAndHPBars
 .alreadyHasSubstitute
 	ld hl, HasSubstituteText
 	jr .printText

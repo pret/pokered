@@ -6,7 +6,7 @@ PrintBookshelfText::
 ; facing up
 	ld a, [wCurMapTileset]
 	ld b, a
-	aCoord 8, 7
+	lda_coord 8, 7
 	ld c, a
 	ld hl, BookshelfTileIDs
 .loop
@@ -24,7 +24,7 @@ PrintBookshelfText::
 	pop af
 	call PrintPredefTextID
 	xor a
-	ld [hFFDB], a
+	ldh [hFFDB], a
 	ret
 .nextBookshelfEntry1
 	inc hl
@@ -33,7 +33,7 @@ PrintBookshelfText::
 	jr .loop
 .noMatch
 	ld a, $ff
-	ld [hFFDB], a
-	jpba PrintCardKeyText
+	ldh [hFFDB], a
+	farjp PrintCardKeyText
 
 INCLUDE "data/tilesets/bookshelf_tile_ids.asm"

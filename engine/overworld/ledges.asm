@@ -8,7 +8,7 @@ HandleLedges::
 	predef GetTileAndCoordsInFrontOfPlayer
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	ld b, a
-	aCoord 8, 9
+	lda_coord 8, 9
 	ld c, a
 	ld a, [wTileInFrontOfPlayer]
 	ld d, a
@@ -36,7 +36,7 @@ HandleLedges::
 	inc hl
 	jr .loop
 .foundMatch
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	and e
 	ret z
 	ld a, $ff
@@ -57,7 +57,7 @@ HandleLedges::
 INCLUDE "data/tilesets/ledge_tiles.asm"
 
 LoadHoppingShadowOAM:
-	ld hl, vChars1 + $7f0
+	ld hl, vChars1 tile $7f
 	ld de, LedgeHoppingShadow
 	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
 	call CopyVideoDataDouble

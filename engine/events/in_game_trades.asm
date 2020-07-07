@@ -137,10 +137,10 @@ InGameTrade_DoTrade:
 	ld [wMonDataLocation], a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
-	callab EvolveTradeMon
+	callfar EvolveTradeMon
 	call ClearScreen
 	call InGameTrade_RestoreScreen
-	callba RedrawMapView
+	farcall RedrawMapView
 	and a
 	ld a, $3
 	jr .tradeSucceeded
@@ -159,7 +159,7 @@ InGameTrade_RestoreScreen:
 	call LoadGBPal
 	ld c, 10
 	call DelayFrames
-	jpba LoadWildData
+	farjp LoadWildData
 
 InGameTrade_PrepareTradeData:
 	ld hl, wTradedPlayerMonSpecies

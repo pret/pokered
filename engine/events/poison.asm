@@ -52,7 +52,7 @@ ApplyOutOfBattlePoisonDamage:
 	ld [wJoyIgnore], a
 	call EnableAutoTextBoxDrawing
 	ld a, TEXT_MON_FAINTED
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	pop de
 	pop hl
@@ -99,7 +99,7 @@ ApplyOutOfBattlePoisonDamage:
 	jr nz, .noBlackOut
 	call EnableAutoTextBoxDrawing
 	ld a, TEXT_BLACKED_OUT
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld hl, wd72e
 	set 5, [hl]

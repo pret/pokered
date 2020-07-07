@@ -70,7 +70,7 @@ LoadSAV0:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld a, [sTilesetType]
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -138,7 +138,7 @@ LoadSAVIgnoreBadCheckSum:
 	jp LoadSAV2
 
 SaveSAV:
-	callba PrintSaveScreenText
+	farcall PrintSaveScreenText
 	ld hl, WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
@@ -154,10 +154,10 @@ SaveSAV:
 	ret nz
 .save
 	call SaveSAVtoSRAM
-	coord hl, 1, 13
+	hlcoord 1, 13
 	lb bc, 4, 18
 	call ClearScreenArea
-	coord hl, 1, 14
+	hlcoord 1, 14
 	ld de, NowSavingString
 	call PlaceString
 	ld c, 120
@@ -175,7 +175,7 @@ NowSavingString:
 
 SaveSAVConfirm:
 	call PrintText
-	coord hl, 0, 7
+	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -217,7 +217,7 @@ SaveSAVtoSRAM0:
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	ld [sTilesetType], a
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName
@@ -420,7 +420,7 @@ CopyBoxToOrFromSRAM:
 
 DisplayChangeBoxMenu:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, 11
@@ -435,20 +435,20 @@ DisplayChangeBoxMenu:
 	and $7f
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 2
 	ld c, 9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
-	coord hl, 11, 0
+	hlcoord 11, 0
 	ld b, 12
 	ld c, 7
 	call TextBoxBorder
 	ld hl, hFlagsFFF6
 	set 2, [hl]
 	ld de, BoxNames
-	coord hl, 13, 1
+	hlcoord 13, 1
 	call PlaceString
 	ld hl, hFlagsFFF6
 	res 2, [hl]
@@ -457,19 +457,19 @@ DisplayChangeBoxMenu:
 	cp 9
 	jr c, .singleDigitBoxNum
 	sub 9
-	coord hl, 8, 2
+	hlcoord 8, 2
 	ld [hl], "1"
 	add "0"
 	jr .next
 .singleDigitBoxNum
 	add "1"
 .next
-	Coorda 9, 2
-	coord hl, 1, 2
+	ldcoord_a 9, 2
+	hlcoord 1, 2
 	ld de, BoxNoText
 	call PlaceString
 	call GetMonCountsForAllBoxes
-	coord hl, 18, 1
+	hlcoord 18, 1
 	ld de, wBoxMonCounts
 	ld bc, SCREEN_WIDTH
 	ld a, $c
@@ -486,7 +486,7 @@ DisplayChangeBoxMenu:
 	dec a
 	jr nz, .loop
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 ChooseABoxText:

@@ -31,19 +31,19 @@ SSAnne2Script0:
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
 	ld a, [wCoordIndex]
-	ld [hSavedCoordIndex], a
+	ldh [hSavedCoordIndex], a
 	ld a, HS_SS_ANNE_2F_RIVAL
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	call Delay3
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [hSavedCoordIndex]
+	ldh a, [hSavedCoordIndex]
 	cp $2
 	jr nz, .asm_61400
 	ld de, MovementData_6140c
@@ -81,9 +81,9 @@ SSAnne2Script_61416:
 .asm_61426
 	xor a ; SPRITE_FACING_DOWN
 .asm_61427
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	jp SetSpriteFacingDirectionAndDelay
 
 SSAnne2Script1:
@@ -94,7 +94,7 @@ SSAnne2Script1:
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
 	ld a, OPP_SONY2
@@ -129,10 +129,10 @@ SSAnne2Script2:
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld a, [wXCoord]
 	cp $25
@@ -143,12 +143,12 @@ SSAnne2Script2:
 	ld de, MovementData_614b7
 .asm_6149a
 	ld a, $2
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $3
 	ld [wSSAnne2FCurScript], a
 	ret

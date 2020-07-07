@@ -62,9 +62,9 @@ MtMoon3Script0:
 	cp $d
 	jp nz, MtMoon3Script_49d91
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 MtMoon3Script_49d91:
@@ -88,7 +88,7 @@ MtMoon3Script3:
 
 MtMoon3Script4:
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteMovementBytesToFF
 	ld hl, CoordsData_49dea
 	call ArePlayerCoordsInArray
@@ -102,7 +102,7 @@ MtMoon3Script4:
 	ld de, MovementData_49df8
 .asm_49dda
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, $5
 	ld [wMtMoonB2FCurScript], a
@@ -136,7 +136,7 @@ MtMoon3Script5:
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	CheckEvent EVENT_GOT_DOME_FOSSIL
 	jr z, .asm_49e1d
@@ -222,7 +222,7 @@ MtMoon3Text1:
 	ld hl, MtMoon3Text_49f8a
 	ld de, MtMoon3Text_49f8a
 	call SaveEndBattleTextPointers
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters

@@ -34,10 +34,10 @@ MagikarpSalesmanText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .choseNo
-	ld [hMoney], a
-	ld [hMoney + 2], a
+	ldh [hMoney], a
+	ldh [hMoney + 2], a
 	ld a, $5
-	ld [hMoney + 1], a
+	ldh [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, .NoMoneyText

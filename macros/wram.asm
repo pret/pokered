@@ -71,7 +71,8 @@ spritestatedata1: MACRO
 \1IntraAnimFrameCounter:: db
 \1AnimFrameCounter:: db
 \1FacingDirection:: db
-	ds 2
+\1YAdjusted:: db
+\1XAdjusted:: db
 \1CollisionData:: db
 	ds 3
 \1End::
@@ -87,7 +88,8 @@ spritestatedata2: MACRO
 \1MovementByte1:: db
 \1GrassPriority:: db
 \1MovementDelay:: db
-	ds 4
+\1OrigFacingDirection:: db
+	ds 3
 \1PictureID:: db
 \1ImageBaseOffset:: db
 	ds 1

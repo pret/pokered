@@ -77,18 +77,18 @@ HandleItemListSwapping::
 	cp b
 	jr z, .swapSameItemType
 .swapDifferentItems
-	ld [hSwapItemID], a ; save second item ID
+	ldh [hSwapItemID], a ; save second item ID
 	ld a, [hld]
-	ld [hSwapItemQuantity], a ; save second item quantity
+	ldh [hSwapItemQuantity], a ; save second item quantity
 	ld a, [de]
 	ld [hli], a ; put first item ID in second item slot
 	inc de
 	ld a, [de]
 	ld [hl], a ; put first item quantity in second item slot
-	ld a, [hSwapItemQuantity]
+	ldh a, [hSwapItemQuantity]
 	ld [de], a ; put second item quantity in first item slot
 	dec de
-	ld a, [hSwapItemID]
+	ldh a, [hSwapItemID]
 	ld [de], a ; put second item ID in first item slot
 	xor a
 	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped

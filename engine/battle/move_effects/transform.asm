@@ -3,7 +3,7 @@ TransformEffect_:
 	ld de, wEnemyMonSpecies
 	ld bc, wEnemyBattleStatus3
 	ld a, [wEnemyBattleStatus1]
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .hitTest
 	ld hl, wEnemyMonSpecies
@@ -18,7 +18,7 @@ TransformEffect_:
 	push de
 	push bc
 	ld hl, wPlayerBattleStatus2
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .transformEffect
 	ld hl, wEnemyBattleStatus2
@@ -64,7 +64,7 @@ TransformEffect_:
 	inc bc
 	inc bc
 	call CopyData
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .next
 ; save enemy mon DVs at wTransformedEnemyMonOriginalDVs
@@ -128,7 +128,7 @@ TransformEffect_:
 	jp PrintText
 
 .copyBasedOnTurn
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .gotStatsOrModsToCopy
 	push hl

@@ -24,7 +24,7 @@ PrintBeginningBattleText:
 	ld hl, TrainerWantsToFightText
 .wildBattle
 	push hl
-	callab DrawAllPokeballs
+	callfar DrawAllPokeballs
 	pop hl
 	call PrintText
 	jr .done
@@ -38,7 +38,7 @@ PrintBeginningBattleText:
 	ld a, b
 	and a
 	jr z, .noSilphScope
-	callab LoadEnemyMonData
+	callfar LoadEnemyMonData
 	jr .notPokemonTower
 .noSilphScope
 	ld hl, EnemyAppearedText
@@ -54,8 +54,8 @@ PrintBeginningBattleText:
 	call PrintText
 	ld hl, UnveiledGhostText
 	call PrintText
-	callab LoadEnemyMonData
-	callab MarowakAnim
+	callfar LoadEnemyMonData
+	callfar MarowakAnim
 	ld hl, WildMonAppearedText
 	call PrintText
 
@@ -101,16 +101,16 @@ PrintSendOutMonMessage:
 	ld hl, GoText
 	jr z, .printText
 	xor a
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	ld [wLastSwitchInEnemyMonHP], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, [hl]
 	ld [wLastSwitchInEnemyMonHP + 1], a
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, 25
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -121,9 +121,9 @@ PrintSendOutMonMessage:
 	rr b
 	ld a, b
 	ld b, 4
-	ld [hDivisor], a ; enemy mon max HP divided by 4
+	ldh [hDivisor], a ; enemy mon max HP divided by 4
 	call Divide
-	ld a, [hQuotient + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
+	ldh a, [hQuotient + 3] ; a = (enemy mon current HP * 25) / (enemy max HP / 4); this approximates the current percentage of max HP
 	ld hl, GoText ; 70% or greater
 	cp 70
 	jr nc, .printText
@@ -179,14 +179,14 @@ PlayerMon2Text:
 	dec hl
 	ld a, [de]
 	sub b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	dec de
 	ld b, [hl]
 	ld a, [de]
 	sbc b
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, 25
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
@@ -197,11 +197,11 @@ PlayerMon2Text:
 	rr b
 	ld a, b
 	ld b, 4
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	call Divide
 	pop bc
 	pop de
-	ld a, [hQuotient + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
+	ldh a, [hQuotient + 3] ; a = ((LastSwitchInEnemyMonHP - CurrentEnemyMonHP) / 25) / (EnemyMonMaxHP / 4)
 ; Assuming that the enemy mon hasn't gained HP since the last switch in,
 ; a approximates the percentage that the enemy mon's total HP has decreased
 ; since the last switch in.

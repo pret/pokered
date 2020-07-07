@@ -15,7 +15,7 @@ HazeEffect_:
 ; cure non-volatile status, but only for the target
 	ld hl, wEnemyMonStatus
 	ld de, wEnemySelectedMove
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .cureStatuses
 	ld hl, wBattleMonStatus

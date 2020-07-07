@@ -3,9 +3,9 @@
 ; [wListPointer] = address of the list (2 bytes)
 DisplayListMenuID::
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable auto-transfer
+	ldh [hAutoBGTransferEnabled], a ; disable auto-transfer
 	ld a, 1
-	ld [hJoy7], a ; joypad state update flag
+	ldh [hJoy7], a ; joypad state update flag
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
 	jr nz, .specialBattleType
@@ -31,7 +31,7 @@ DisplayListMenuID::
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
-	coord hl, 4, 2 ; coordinates of upper left corner of menu text box
+	hlcoord 4, 2 ; coordinates of upper left corner of menu text box
 	lb de, 9, 14 ; height and width of menu text box
 	ld a, [wListMenuID]
 	and a ; is it a PC pokemon list?
@@ -57,22 +57,22 @@ DisplayListMenuID::
 
 DisplayListMenuIDLoop::
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable transfer
+	ldh [hAutoBGTransferEnabled], a ; disable transfer
 	call PrintListMenuEntries
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a ; enable transfer
+	ldh [hAutoBGTransferEnabled], a ; enable transfer
 	call Delay3
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
 	jr z, .notOldManBattle
 .oldManBattle
 	ld a, "▶"
-	Coorda 5, 4 ; place menu cursor in front of first menu entry
+	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
 	call DelayFrames
 	xor a
 	ld [wCurrentMenuItem], a
-	coord hl, 5, 4
+	hlcoord 5, 4
 	ld a, l
 	ld [wMenuCursorLocation], a
 	ld a, h
@@ -163,7 +163,7 @@ DisplayListMenuIDLoop::
 	ld a, [wCurrentMenuItem]
 	ld [wChosenMenuItem], a
 	xor a
-	ld [hJoy7], a ; joypad state update flag
+	ldh [hJoy7], a ; joypad state update flag
 	ld hl, wd730
 	res 6, [hl] ; turn on letter printing delay
 	jp BankswitchBack
@@ -194,23 +194,23 @@ DisplayListMenuIDLoop::
 
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity
-	coord hl, 15, 9
+	hlcoord 15, 9
 	ld b, 1 ; height
 	ld c, 3 ; width
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .drawTextBox
 ; text box dimensions/coordinates for quantity and price
-	coord hl, 7, 9
+	hlcoord 7, 9
 	ld b, 1  ; height
 	ld c, 11 ; width
 .drawTextBox
 	call TextBoxBorder
-	coord hl, 16, 10
+	hlcoord 16, 10
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .printInitialQuantity
-	coord hl, 8, 10
+	hlcoord 8, 10
 .printInitialQuantity
 	ld de, InitialQuantityText
 	call PlaceString
@@ -219,7 +219,7 @@ DisplayChooseQuantityMenu::
 	jp .incrementQuantity
 .waitForKeyPressLoop
 	call JoypadLowSensitivity
-	ld a, [hJoyPressed] ; newly pressed buttons
+	ldh a, [hJoyPressed] ; newly pressed buttons
 	bit 0, a ; was the A button pressed?
 	jp nz, .buttonAPressed
 	bit 1, a ; was the B button pressed?
@@ -250,7 +250,7 @@ DisplayChooseQuantityMenu::
 	ld a, [wMaxItemQuantity]
 	ld [hl], a
 .handleNewQuantity
-	coord hl, 17, 10
+	hlcoord 17, 10
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .printQuantity
@@ -272,30 +272,30 @@ DisplayChooseQuantityMenu::
 	pop bc
 	dec b
 	jr nz, .addLoop
-	ld a, [hHalveItemPrices]
+	ldh a, [hHalveItemPrices]
 	and a ; should the price be halved (for selling items)?
 	jr z, .skipHalvingPrice
 	xor a
-	ld [hDivideBCDDivisor], a
-	ld [hDivideBCDDivisor + 1], a
+	ldh [hDivideBCDDivisor], a
+	ldh [hDivideBCDDivisor + 1], a
 	ld a, $02
-	ld [hDivideBCDDivisor + 2], a
+	ldh [hDivideBCDDivisor + 2], a
 	predef DivideBCDPredef3 ; halves the price
 ; store the halved price
-	ld a, [hDivideBCDQuotient]
-	ld [hMoney], a
-	ld a, [hDivideBCDQuotient + 1]
-	ld [hMoney + 1], a
-	ld a, [hDivideBCDQuotient + 2]
-	ld [hMoney + 2], a
+	ldh a, [hDivideBCDQuotient]
+	ldh [hMoney], a
+	ldh a, [hDivideBCDQuotient + 1]
+	ldh [hMoney + 1], a
+	ldh a, [hDivideBCDQuotient + 2]
+	ldh [hMoney + 2], a
 .skipHalvingPrice
-	coord hl, 12, 10
+	hlcoord 12, 10
 	ld de, SpacesBetweenQuantityAndPriceText
 	call PlaceString
 	ld de, hMoney ; total price
 	ld c, $a3
 	call PrintBCDNumber
-	coord hl, 9, 10
+	hlcoord 9, 10
 .printQuantity
 	ld de, wItemQuantity ; current quantity
 	lb bc, LEADING_ZEROES | 1, 2 ; 1 byte, 2 digits
@@ -324,7 +324,7 @@ ExitListMenu::
 	ld [wMenuExitMethod], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	xor a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld hl, wd730
 	res 6, [hl]
 	call BankswitchBack
@@ -334,7 +334,7 @@ ExitListMenu::
 	ret
 
 PrintListMenuEntries::
-	coord hl, 5, 3
+	hlcoord 5, 3
 	ld b, 9
 	ld c, 14
 	call ClearScreenArea
@@ -359,7 +359,7 @@ PrintListMenuEntries::
 	jr nc, .noCarry
 	inc d
 .noCarry
-	coord hl, 6, 4 ; coordinates of first list entry name
+	hlcoord 6, 4 ; coordinates of first list entry name
 	ld b, 4 ; print 4 names
 .loop
 	ld a, b

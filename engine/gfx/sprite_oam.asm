@@ -13,21 +13,21 @@ PrepareOAMData::
 
 .updateEnabled
 	xor a
-	ld [hOAMBufferOffset], a
+	ldh [hOAMBufferOffset], a
 
 .spriteLoop
-	ld [hSpriteOffset2], a
+	ldh [hSpriteOffset2], a
 
-	ld d, wSpriteStateData1 / $100
-	ld a, [hSpriteOffset2]
+	ld d, HIGH(wSpriteStateData1)
+	ldh a, [hSpriteOffset2]
 	ld e, a
-	ld a, [de] ; c1x0
+	ld a, [de] ; [x#SPRITESTATEDATA1_PICTUREID]
 	and a
 	jp z, .nextSprite
 
 	inc e
 	inc e
-	ld a, [de] ; c1x2 (facing/anim)
+	ld a, [de] ; [x#SPRITESTATEDATA1_IMAGEINDEX]
 	ld [wd5cd], a
 	cp $ff ; off-screen (don't draw)
 	jr nz, .visible
@@ -56,9 +56,9 @@ PrepareOAMData::
 	ld a, e
 	add $5
 	ld e, a
-	ld a, [de] ; c2x7
+	ld a, [de] ; [x#SPRITESTATEDATA2_GRASSPRIORITY]
 	and $80
-	ld [hSpritePriority], a ; temp store sprite priority
+	ldh [hSpritePriority], a ; temp store sprite priority
 	pop de
 
 ; read the entry from the table
@@ -77,17 +77,17 @@ PrepareOAMData::
 
 	call GetSpriteScreenXY
 
-	ld a, [hOAMBufferOffset]
+	ldh a, [hOAMBufferOffset]
 	ld e, a
-	ld d, wOAMBuffer / $100
+	ld d, HIGH(wOAMBuffer)
 
 .tileLoop
-	ld a, [hSpriteScreenY]   ; temp for sprite Y position
+	ldh a, [hSpriteScreenY]   ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
 	add [hl]                 ; add Y offset from table
 	ld [de], a               ; write new sprite OAM Y position
 	inc hl
-	ld a, [hSpriteScreenX]   ; temp for sprite X position
+	ldh a, [hSpriteScreenX]   ; temp for sprite X position
 	add $8                   ; X=8 is left of screen (X=0 is invisible)
 	add [hl]                 ; add X offset from table
 	inc e
@@ -98,7 +98,7 @@ PrepareOAMData::
 	push bc
 	ld b, a
 
-	ld a, [wd5cd]            ; temp copy of c1x2
+	ld a, [wd5cd]            ; temp copy of [x#SPRITESTATEDATA1_IMAGEINDEX]
 	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
 
@@ -126,7 +126,7 @@ PrepareOAMData::
 	ld a, [hl]
 	bit 1, a ; is the tile allowed to set the sprite priority bit?
 	jr z, .skipPriority
-	ld a, [hSpritePriority]
+	ldh a, [hSpritePriority]
 	or [hl]
 .skipPriority
 	inc hl
@@ -136,18 +136,18 @@ PrepareOAMData::
 	jr z, .tileLoop
 
 	ld a, e
-	ld [hOAMBufferOffset], a
+	ldh [hOAMBufferOffset], a
 
 .nextSprite
-	ld a, [hSpriteOffset2]
+	ldh a, [hSpriteOffset2]
 	add $10
-	cp $100 % $100
+	cp LOW($100)
 	jp nz, .spriteLoop
 
 	; Clear unused OAM.
-	ld a, [hOAMBufferOffset]
+	ldh a, [hOAMBufferOffset]
 	ld l, a
-	ld h, wOAMBuffer / $100
+	ld h, HIGH(wOAMBuffer)
 	ld de, $4
 	ld b, $a0
 	ld a, [wd736]
@@ -169,21 +169,21 @@ PrepareOAMData::
 GetSpriteScreenXY:
 	inc e
 	inc e
-	ld a, [de] ; c1x4
-	ld [hSpriteScreenY], a
+	ld a, [de] ; [x#SPRITESTATEDATA1_YPIXELS]
+	ldh [hSpriteScreenY], a
 	inc e
 	inc e
-	ld a, [de] ; c1x6
-	ld [hSpriteScreenX], a
+	ld a, [de] ; [x#SPRITESTATEDATA1_XPIXELS]
+	ldh [hSpriteScreenX], a
 	ld a, 4
 	add e
 	ld e, a
-	ld a, [hSpriteScreenY]
+	ldh a, [hSpriteScreenY]
 	add 4
 	and $f0
-	ld [de], a ; c1xa (y)
+	ld [de], a ; [x#SPRITESTATEDATA1_YADJUSTED]
 	inc e
-	ld a, [hSpriteScreenX]
+	ldh a, [hSpriteScreenX]
 	and $f0
-	ld [de], a  ; c1xb (x)
+	ld [de], a  ; [x#SPRITESTATEDATA1_XADJUSTED]
 	ret

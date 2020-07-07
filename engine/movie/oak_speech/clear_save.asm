@@ -5,7 +5,7 @@ DoClearSaveDialogue:
 	call LoadTextBoxTilePatterns
 	ld hl, ClearSaveDataText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, NO_YES_MENU
 	ld [wTwoOptionMenuID], a
@@ -15,7 +15,7 @@ DoClearSaveDialogue:
 	ld a, [wCurrentMenuItem]
 	and a
 	jp z, Init
-	callba ClearSAV
+	farcall ClearSAV
 	jp Init
 
 ClearSaveDataText:

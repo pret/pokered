@@ -6,39 +6,39 @@ DivideBCDPredef4::
 
 DivideBCD::
 	xor a
-	ld [hDivideBCDBuffer], a
-	ld [hDivideBCDBuffer+1], a
-	ld [hDivideBCDBuffer+2], a
+	ldh [hDivideBCDBuffer], a
+	ldh [hDivideBCDBuffer+1], a
+	ldh [hDivideBCDBuffer+2], a
 	ld d, $1
 .mulBy10Loop 
 ; multiply the divisor by 10 until the leading digit is nonzero
 ; to set up the standard long division algorithm
-	ld a, [hDivideBCDDivisor]
+	ldh a, [hDivideBCDDivisor]
 	and $f0
 	jr nz, .next
 	inc d
-	ld a, [hDivideBCDDivisor]
+	ldh a, [hDivideBCDDivisor]
 	swap a
 	and $f0
 	ld b, a
-	ld a, [hDivideBCDDivisor+1]
+	ldh a, [hDivideBCDDivisor+1]
 	swap a
-	ld [hDivideBCDDivisor+1], a
+	ldh [hDivideBCDDivisor+1], a
 	and $f
 	or b
-	ld [hDivideBCDDivisor], a
-	ld a, [hDivideBCDDivisor+1]
+	ldh [hDivideBCDDivisor], a
+	ldh a, [hDivideBCDDivisor+1]
 	and $f0
 	ld b, a
-	ld a, [hDivideBCDDivisor+2]
+	ldh a, [hDivideBCDDivisor+2]
 	swap a
-	ld [hDivideBCDDivisor+2], a
+	ldh [hDivideBCDDivisor+2], a
 	and $f
 	or b
-	ld [hDivideBCDDivisor+1], a
-	ld a, [hDivideBCDDivisor+2]
+	ldh [hDivideBCDDivisor+1], a
+	ldh a, [hDivideBCDDivisor+2]
 	and $f0
-	ld [hDivideBCDDivisor+2], a
+	ldh [hDivideBCDDivisor+2], a
 	jr .mulBy10Loop
 .next
 	push de
@@ -48,16 +48,16 @@ DivideBCD::
 	ld a, b
 	swap a
 	and $f0
-	ld [hDivideBCDBuffer], a
+	ldh [hDivideBCDBuffer], a
 	dec d
 	jr z, .next2
 	push de
 	call DivideBCD_divDivisorBy10
 	call DivideBCD_getNextDigit
 	pop de
-	ld a, [hDivideBCDBuffer]
+	ldh a, [hDivideBCDBuffer]
 	or b
-	ld [hDivideBCDBuffer], a
+	ldh [hDivideBCDBuffer], a
 	dec d
 	jr z, .next2
 	push de
@@ -67,16 +67,16 @@ DivideBCD::
 	ld a, b
 	swap a
 	and $f0
-	ld [hDivideBCDBuffer+1], a
+	ldh [hDivideBCDBuffer+1], a
 	dec d
 	jr z, .next2
 	push de
 	call DivideBCD_divDivisorBy10
 	call DivideBCD_getNextDigit
 	pop de
-	ld a, [hDivideBCDBuffer+1]
+	ldh a, [hDivideBCDBuffer+1]
 	or b
-	ld [hDivideBCDBuffer+1], a
+	ldh [hDivideBCDBuffer+1], a
 	dec d
 	jr z, .next2
 	push de
@@ -86,23 +86,23 @@ DivideBCD::
 	ld a, b
 	swap a
 	and $f0
-	ld [hDivideBCDBuffer+2], a
+	ldh [hDivideBCDBuffer+2], a
 	dec d
 	jr z, .next2
 	push de
 	call DivideBCD_divDivisorBy10
 	call DivideBCD_getNextDigit
 	pop de
-	ld a, [hDivideBCDBuffer+2]
+	ldh a, [hDivideBCDBuffer+2]
 	or b
-	ld [hDivideBCDBuffer+2], a
+	ldh [hDivideBCDBuffer+2], a
 .next2
-	ld a, [hDivideBCDBuffer]
-	ld [hDivideBCDQuotient], a ; the same memory location as hDivideBCDDivisor
-	ld a, [hDivideBCDBuffer+1]
-	ld [hDivideBCDQuotient+1], a
-	ld a, [hDivideBCDBuffer+2]
-	ld [hDivideBCDQuotient+2], a
+	ldh a, [hDivideBCDBuffer]
+	ldh [hDivideBCDQuotient], a ; the same memory location as hDivideBCDDivisor
+	ldh a, [hDivideBCDBuffer+1]
+	ldh [hDivideBCDQuotient+1], a
+	ldh a, [hDivideBCDBuffer+2]
+	ldh [hDivideBCDQuotient+2], a
 	pop de
 	ld a, $6 
 	sub d
@@ -117,28 +117,28 @@ DivideBCD::
 	ret
 
 DivideBCD_divDivisorBy10:
-	ld a, [hDivideBCDDivisor+2]
+	ldh a, [hDivideBCDDivisor+2]
 	swap a
 	and $f
 	ld b, a
-	ld a, [hDivideBCDDivisor+1]
+	ldh a, [hDivideBCDDivisor+1]
 	swap a
-	ld [hDivideBCDDivisor+1], a
+	ldh [hDivideBCDDivisor+1], a
 	and $f0
 	or b
-	ld [hDivideBCDDivisor+2], a
-	ld a, [hDivideBCDDivisor+1]
+	ldh [hDivideBCDDivisor+2], a
+	ldh a, [hDivideBCDDivisor+1]
 	and $f
 	ld b, a
-	ld a, [hDivideBCDDivisor]
+	ldh a, [hDivideBCDDivisor]
 	swap a
-	ld [hDivideBCDDivisor], a
+	ldh [hDivideBCDDivisor], a
 	and $f0
 	or b
-	ld [hDivideBCDDivisor+1], a
-	ld a, [hDivideBCDDivisor]
+	ldh [hDivideBCDDivisor+1], a
+	ldh a, [hDivideBCDDivisor]
 	and $f
-	ld [hDivideBCDDivisor], a
+	ldh [hDivideBCDDivisor], a
 	ret
 
 DivideBCD_getNextDigit:

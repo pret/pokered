@@ -1,9 +1,9 @@
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
-	callba DisplayTextIDInit ; initialization
+	farcall DisplayTextIDInit ; initialization
 	ld hl, wTextPredefFlag
 	bit 0, [hl]
 	res 0, [hl]
@@ -12,13 +12,13 @@ DisplayTextID::
 	call SwitchToMapRomBank
 .skipSwitchToMapBank
 	ld a, 30 ; half a second
-	ld [hFrameCounter], a ; used as joypad poll timer
+	ldh [hFrameCounter], a ; used as joypad poll timer
 	ld hl, wMapTextPtr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; hl = map text pointer
 	ld d, $00
-	ld a, [hSpriteIndexOrTextID] ; text ID
+	ldh a, [hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex], a
 
 	dict TEXT_START_MENU,       DisplayStartMenu
@@ -29,7 +29,7 @@ DisplayTextID::
 
 	ld a, [wNumSprites]
 	ld e, a
-	ld a, [hSpriteIndexOrTextID] ; sprite ID
+	ldh a, [hSpriteIndexOrTextID] ; sprite ID
 	cp e
 	jr z, .spriteHandling
 	jr nc, .skipSpriteHandling
@@ -38,11 +38,11 @@ DisplayTextID::
 	push hl
 	push de
 	push bc
-	callba UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
+	farcall UpdateSpriteFacingOffsetAndDelayMovement ; update the graphics of the sprite the player is talking to (to face the right direction)
 	pop bc
 	pop de
 	ld hl, wMapSpriteData ; NPC text entries
-	ld a, [hSpriteIndexOrTextID]
+	ldh a, [hSpriteIndexOrTextID]
 	dec a
 	add a
 	add l
@@ -79,9 +79,9 @@ ENDM
 	dict  TX_SCRIPT_PLAYERS_PC,              TextScript_ItemStoragePC
 	dict  TX_SCRIPT_BILLS_PC,                TextScript_BillsPC
 	dict  TX_SCRIPT_POKECENTER_PC,           TextScript_PokemonCenterPC
-	dict2 TX_SCRIPT_VENDING_MACHINE,         callba VendingMachineMenu
+	dict2 TX_SCRIPT_VENDING_MACHINE,         farcall VendingMachineMenu
 	dict  TX_SCRIPT_PRIZE_VENDOR,            TextScript_GameCornerPrizeMenu
-	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callab CableClubNPC
+	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callfar CableClubNPC
 
 	call PrintText_NoCreatingTextBox ; display the text
 	ld a, [wDoNotWaitForButtonPressAfterDisplayingText]
@@ -97,7 +97,7 @@ AfterDisplayingTextID::
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen::
 	call Joypad
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	bit 0, a ; is the A button being pressed?
 	jr nz, HoldTextDisplayOpen
 
@@ -105,25 +105,25 @@ CloseTextDisplay::
 	ld a, [wCurMap]
 	call SwitchToMapRomBank
 	ld a, $90
-	ld [hWY], a ; move the window off the screen
+	ldh [hWY], a ; move the window off the screen
 	call DelayFrame
 	call LoadGBPal
 	xor a
-	ld [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
+	ldh [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
-	ld hl, wSprite01StateData2 + 9 ; should be wSprite01StateData1FacingDirection?
+	ld hl, wSprite01StateData2OrigFacingDirection
 	ld c, $0f
 	ld de, $10
 .restoreSpriteFacingDirectionLoop
-	ld a, [hl]
+	ld a, [hl] ; x#SPRITESTATEDATA2_ORIGFACINGDIRECTION
 	dec h
-	ld [hl], a
+	ld [hl], a ; [x#SPRITESTATEDATA1_FACINGDIRECTION]
 	inc h
 	add hl, de
 	dec c
 	jr nz, .restoreSpriteFacingDirectionLoop
 	ld a, BANK(InitMapSprites)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call InitMapSprites ; reload sprite tile pattern data (since it was partially overwritten by text tile patterns)
 	ld hl, wFontLoaded
@@ -133,7 +133,7 @@ CloseTextDisplay::
 	call z, LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp UpdateSprites
 
@@ -146,14 +146,14 @@ DisplayPokemartDialogue::
 	call LoadItemList
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(DisplayPokemartDialogue_)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemartDialogue_
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 
@@ -180,24 +180,24 @@ LoadItemList::
 DisplayPokemonCenterDialogue::
 ; zeroing these doesn't appear to serve any purpose
 	xor a
-	ld [hItemPrice], a
-	ld [hItemPrice + 1], a
-	ld [hItemPrice + 2], a
+	ldh [hItemPrice], a
+	ldh [hItemPrice + 1], a
+	ldh [hItemPrice + 2], a
 
 	inc hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(DisplayPokemonCenterDialogue_)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call DisplayPokemonCenterDialogue_
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	jp AfterDisplayingTextID
 
 DisplaySafariGameOverText::
-	callab PrintSafariGameOverText
+	callfar PrintSafariGameOverText
 	jp AfterDisplayingTextID
 
 DisplayPokemonFaintedText::

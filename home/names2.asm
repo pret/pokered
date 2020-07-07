@@ -22,7 +22,7 @@ GetName::
 	cp HM01
 	jp nc, GetMachineName
 
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	push hl
 	push bc
@@ -40,7 +40,7 @@ GetName::
 .otherEntries
 	;2-7 = OTHER ENTRIES
 	ld a, [wPredefBank]
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ld a, [wNameListType]    ;VariousNames' entryID
 	dec a
@@ -53,12 +53,12 @@ GetName::
 	ld hl, NamePointers
 	add hl, de
 	ld a, [hli]
-	ld [hSwapTemp + 1], a
+	ldh [hSwapTemp + 1], a
 	ld a, [hl]
-	ld [hSwapTemp], a
-	ld a, [hSwapTemp]
+	ldh [hSwapTemp], a
+	ldh a, [hSwapTemp]
 	ld h, a
-	ld a, [hSwapTemp + 1]
+	ldh a, [hSwapTemp + 1]
 	ld l, a
 	ld a, [wd0b5]
 	ld b, a
@@ -88,6 +88,6 @@ GetName::
 	pop bc
 	pop hl
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret

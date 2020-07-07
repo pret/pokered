@@ -335,13 +335,13 @@ SendSGBPacket:
 	push bc
 ; disable ReadJoypad to prevent it from interfering with sending the packet
 	ld a, 1
-	ld [hDisableJoypadPolling], a
+	ldh [hDisableJoypadPolling], a
 ; send RESET signal (P14=LOW, P15=LOW)
 	xor a
-	ld [rJOYP], a
+	ldh [rJOYP], a
 ; set P14=HIGH, P15=HIGH
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 ;load length of packets (16 bytes)
 	ld b, $10
 .nextByte
@@ -358,10 +358,10 @@ SendSGBPacket:
 ; else (if 0th bit is zero) set P14=LOW,P15=HIGH (send bit 0)
 	ld a, $20
 .next0
-	ld [rJOYP], a
+	ldh [rJOYP], a
 ; must set P14=HIGH,P15=HIGH between each "pulse"
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 ; rotation will put next bit in 0th position (so  we can always use command
 ; "bit 0,d" to fetch the bit that has to be sent)
 	rr d
@@ -372,12 +372,12 @@ SendSGBPacket:
 	jr nz, .nextByte
 ; send bit 1 as a "stop bit" (end of parameter data)
 	ld a, $20
-	ld [rJOYP], a
+	ldh [rJOYP], a
 ; set P14=HIGH,P15=HIGH
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	xor a
-	ld [hDisableJoypadPolling], a
+	ldh [hDisableJoypadPolling], a
 ; wait for about 70000 cycles
 	call Wait7000
 ; restore (previously pushed) number of packets
@@ -457,41 +457,41 @@ CheckSGB:
 	di
 	call SendSGBPacket
 	ld a, 1
-	ld [hDisableJoypadPolling], a
+	ldh [hDisableJoypadPolling], a
 	ei
 	call Wait7000
-	ld a, [rJOYP]
+	ldh a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .isSGB
 	ld a, $20
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	call Wait7000
 	call Wait7000
 	ld a, $10
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Wait7000
 	call Wait7000
 	ld a, $30
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Wait7000
 	call Wait7000
-	ld a, [rJOYP]
+	ldh a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .isSGB
@@ -513,7 +513,7 @@ CopyGfxToSuperNintendoVRAM:
 	push de
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld de, vChars1
 	ld a, [wCopyingSGBTileData]
 	and a
@@ -539,11 +539,11 @@ CopyGfxToSuperNintendoVRAM:
 	dec c
 	jr nz, .loop
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	pop hl
 	call SendSGBPacket
 	xor a
-	ld [rBGP], a
+	ldh [rBGP], a
 	ei
 	ret
 
@@ -577,7 +577,7 @@ SendSGBPackets:
 
 InitGBCPalettes:
 	ld a, $80 ; index 0 with auto-increment
-	ld [rBGPI], a
+	ldh [rBGPI], a
 	inc hl
 	ld c, $20
 .loop
@@ -592,7 +592,7 @@ InitGBCPalettes:
 	inc d
 .noCarry
 	ld a, [de]
-	ld [rBGPD], a
+	ldh [rBGPD], a
 	dec c
 	jr nz, .loop
 	ret

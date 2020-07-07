@@ -4,7 +4,7 @@ AskName:
 	push hl
 	ld a, [wIsInBattle]
 	dec a
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 4
 	ld c, 11
 	call z, ClearScreenArea ; only if in wild battle
@@ -13,7 +13,7 @@ AskName:
 	call GetMonName
 	ld hl, DoYouWantToNicknameText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -92,8 +92,8 @@ DisplayNamingScreen:
 	call RunPaletteCommand
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
-	callba LoadMonPartySpriteGfx
-	coord hl, 0, 4
+	farcall LoadMonPartySpriteGfx
+	hlcoord 0, 4
 	ld b, 9
 	ld c, 18
 	call TextBoxBorder
@@ -128,11 +128,11 @@ DisplayNamingScreen:
 .inputLoop
 	ld a, [wCurrentMenuItem]
 	push af
-	callba AnimatePartyMon_ForceSpeed1
+	farcall AnimatePartyMon_ForceSpeed1
 	pop af
 	ld [wCurrentMenuItem], a
 	call JoypadLowSensitivity
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and a
 	jr z, .inputLoop
 	ld hl, .namingScreenButtonFunctions
@@ -172,7 +172,7 @@ DisplayNamingScreen:
 	ld a, [wIsInBattle]
 	and a
 	jp z, LoadTextBoxTilePatterns
-	jpab LoadHudTilePatterns
+	jpfar LoadHudTilePatterns
 
 .namingScreenButtonFunctions
 	dw .dPadReturnPoint
@@ -325,7 +325,7 @@ DisplayNamingScreen:
 
 LoadEDTile:
 	ld de, ED_Tile
-	ld hl, vFont + $700
+	ld hl, vFont tile $70
 	ld bc, (ED_TileEnd - ED_Tile) / $8
 	; to fix the graphical bug on poor emulators
 	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
@@ -337,14 +337,14 @@ ED_TileEnd:
 
 PrintAlphabet:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
 	jr nz, .lowercase
 	ld de, UpperCaseAlphabet
 .lowercase
-	coord hl, 2, 5
+	hlcoord 2, 5
 	lb bc, 5, 9 ; 5 rows, 9 columns
 .outerLoop
 	push bc
@@ -362,7 +362,7 @@ PrintAlphabet:
 	jr nz, .outerLoop
 	call PlaceString
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
 INCLUDE "data/text/alphabets.asm"
@@ -371,13 +371,13 @@ PrintNicknameAndUnderscores:
 	call CalcStringLength
 	ld a, c
 	ld [wNamingScreenNameLength], a
-	coord hl, 10, 2
+	hlcoord 10, 2
 	lb bc, 1, 10
 	call ClearScreenArea
-	coord hl, 10, 2
+	hlcoord 10, 2
 	ld de, wcf4b
 	call PlaceString
-	coord hl, 10, 3
+	hlcoord 10, 3
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nc, .pokemon1
@@ -416,7 +416,7 @@ PrintNicknameAndUnderscores:
 .emptySpacesRemaining
 	ld c, a
 	ld b, $0
-	coord hl, 10, 3
+	hlcoord 10, 3
 	add hl, bc
 	ld [hl], $77 ; raised underscore tile id
 	ret
@@ -450,7 +450,7 @@ CalcStringLength:
 	jr .loop
 
 PrintNamingText:
-	coord hl, 0, 1
+	hlcoord 0, 1
 	ld a, [wNamingScreenType]
 	ld de, YourTextString
 	and a
@@ -461,16 +461,16 @@ PrintNamingText:
 	ld a, [wcf91]
 	ld [wMonPartySpriteSpecies], a
 	push af
-	callba WriteMonPartySpriteOAMBySpecies
+	farcall WriteMonPartySpriteOAMBySpecies
 	pop af
 	ld [wd11e], a
 	call GetMonName
-	coord hl, 4, 1
+	hlcoord 4, 1
 	call PlaceString
 	ld hl, $1
 	add hl, bc
 	ld [hl], $c9
-	coord hl, 1, 3
+	hlcoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString
 .notNickname

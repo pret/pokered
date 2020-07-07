@@ -76,7 +76,7 @@ DontAbandonLearning:
 AbandonLearning:
 	ld hl, AbandonLearningText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -99,7 +99,7 @@ TryingToLearn:
 	push hl
 	ld hl, TryingToLearnText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -114,25 +114,25 @@ TryingToLearn:
 	ld de, wMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	callab FormatMovesString
+	callfar FormatMovesString
 	pop hl
 .loop
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
-	coord hl, 4, 7
+	hlcoord 4, 7
 	ld b, 4
 	ld c, 14
 	call TextBoxBorder
-	coord hl, 6, 8
+	hlcoord 6, 8
 	ld de, wMovesString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	set 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	call PlaceString
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	res 2, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	ld hl, wTopMenuItemY
 	ld a, 8
 	ld [hli], a ; wTopMenuItemY

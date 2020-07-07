@@ -144,7 +144,7 @@ CheckFightingMapTrainers::
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	call TrainerWalkUpToPlayer_Bank0
 	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
@@ -157,7 +157,7 @@ DisplayEnemyTrainerTextAndStartBattle::
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	; fall through
 
@@ -211,15 +211,15 @@ EndTrainerBattle::
 ResetButtonPressedAndMapScript::
 	xor a
 	ld [wJoyIgnore], a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
 	ld [wCurMapScript], a               ; reset battle status
 	ret
 
 ; calls TrainerWalkUpToPlayer
 TrainerWalkUpToPlayer_Bank0::
-	jpba TrainerWalkUpToPlayer
+	farjp TrainerWalkUpToPlayer
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters::
@@ -302,7 +302,7 @@ CheckForEngagingTrainers::
 ; hl = text if the player wins
 ; de = text if the player loses
 SaveEndBattleTextPointers::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	ld [wEndBattleTextRomBank], a
 	ld a, h
 	ld [wEndBattleWinTextPointer], a
@@ -337,20 +337,20 @@ PrintEndBattleText::
 	res 7, [hl]
 	pop hl
 	ret z
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wEndBattleTextRomBank]
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push hl
-	callba SaveTrainerName
+	farcall SaveTrainerName
 	ld hl, TrainerEndBattleText
 	call PrintText
 	pop hl
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-	callba FreezeEnemyTrainerSprite
+	farcall FreezeEnemyTrainerSprite
 	jp WaitForSoundToFinish
 
 GetSavedEndBattleTextPointer::

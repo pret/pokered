@@ -30,10 +30,10 @@ ViridianCityScript_1900b:
 	cp $20
 	ret nz
 	ld a, $e
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
@@ -49,10 +49,10 @@ ViridianCityScript_1903d:
 	cp $13
 	ret nz
 	ld a, $5
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	call ViridianCityScript_190cf
 	ld a, $3
 	ld [wViridianCityCurScript], a
@@ -60,13 +60,13 @@ ViridianCityScript_1903d:
 
 ViridianCityScript1:
 	ld a, [wSprite03StateData1YPixels]
-	ld [hSpriteScreenYCoord], a
+	ldh [hSpriteScreenYCoord], a
 	ld a, [wSprite03StateData1XPixels]
-	ld [hSpriteScreenXCoord], a
+	ldh [hSpriteScreenXCoord], a
 	ld a, [wSprite03StateData2MapY]
-	ld [hSpriteMapYCoord], a
+	ldh [hSpriteMapYCoord], a
 	ld a, [wSprite03StateData2MapX]
-	ld [hSpriteMapXCoord], a
+	ldh [hSpriteMapXCoord], a
 	xor a
 	ld [wListScrollOffset], a
 
@@ -82,20 +82,20 @@ ViridianCityScript1:
 	ret
 
 ViridianCityScript2:
-	ld a, [hSpriteScreenYCoord]
+	ldh a, [hSpriteScreenYCoord]
 	ld [wSprite03StateData1YPixels], a
-	ld a, [hSpriteScreenXCoord]
+	ldh a, [hSpriteScreenXCoord]
 	ld [wSprite03StateData1XPixels], a
-	ld a, [hSpriteMapYCoord]
+	ldh a, [hSpriteMapYCoord]
 	ld [wSprite03StateData2MapY], a
-	ld a, [hSpriteMapXCoord]
+	ldh a, [hSpriteMapXCoord]
 	ld [wSprite03StateData2MapX], a
 	call UpdateSprites
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $f
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wBattleType], a

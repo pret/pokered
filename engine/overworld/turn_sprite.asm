@@ -1,25 +1,25 @@
 UpdateSpriteFacingOffsetAndDelayMovement::
-	ld h, $c2
-	ld a, [hCurrentSpriteOffset]
+	ld h, HIGH(wSpriteStateData2)
+	ldh a, [hCurrentSpriteOffset]
 	add $8
 	ld l, a
 	ld a, $7f ; maximum movement delay
-	ld [hl], a ; c2x8 (movement delay)
-	dec h
-	ld a, [hCurrentSpriteOffset]
+	ld [hl], a ; x#SPRITESTATEDATA2_MOVEMENTDELAY
+	dec h ; HIGH(wSpriteStateData1)
+	ldh a, [hCurrentSpriteOffset]
 	add $9
 	ld l, a
-	ld a, [hld] ; c1x9 (facing direction)
+	ld a, [hld] ; x#SPRITESTATEDATA1_FACINGDIRECTION
 	ld b, a
 	xor a
 	ld [hld], a
-	ld [hl], a ; c1x8 (walk animation frame)
-	ld a, [hCurrentSpriteOffset]
-	add $2
+	ld [hl], a ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
+	ldh a, [hCurrentSpriteOffset]
+	add SPRITESTATEDATA1_IMAGEINDEX
 	ld l, a
-	ld a, [hl] ; c1x2 (facing and animation table offset)
+	ld a, [hl] ; x#SPRITESTATEDATA1_IMAGEINDEX
 	or b ; or in the facing direction
 	ld [hld], a
 	ld a, $2 ; delayed movement status
-	ld [hl], a ; c1x1 (movement status)
+	ld [hl], a ; x#SPRITESTATEDATA1_MOVEMENTSTATUS
 	ret

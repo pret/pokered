@@ -10,7 +10,7 @@ ActivatePC::
 	call LoadScreenTilesFromBuffer2
 	call Delay3
 PCMainMenu:
-	callba DisplayPCMainMenu
+	farcall DisplayPCMainMenu
 	ld hl, wFlags_0xcd60
 	set 5, [hl]
 	call HandleMenuInput
@@ -56,19 +56,19 @@ PCMainMenu:
 	call WaitForSoundToFinish
 	ld hl, AccessedMyPCText
 	call PrintText
-	callba PlayerPC
+	farcall PlayerPC
 	jr ReloadMainMenu
 OaksPC:
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
-	callba OpenOaksPC
+	farcall OpenOaksPC
 	jr ReloadMainMenu
 PKMNLeague:
 	ld a, SFX_ENTER_PC
 	call PlaySound
 	call WaitForSoundToFinish
-	callba PKMNLeaguePC
+	farcall PKMNLeaguePC
 	jr ReloadMainMenu
 BillsPC:
 	ld a, SFX_ENTER_PC
@@ -82,7 +82,7 @@ BillsPC:
 	ld hl, AccessedBillsPCText
 .printText
 	call PrintText
-	callba BillsPC_
+	farcall BillsPC_
 ReloadMainMenu:
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -117,10 +117,10 @@ AccessedMyPCText:
 ; removes one of the specified item ID [hItemToRemoveID] from bag (if existent)
 RemoveItemByID::
 	ld hl, wBagItems
-	ld a, [hItemToRemoveID]
+	ldh a, [hItemToRemoveID]
 	ld b, a
 	xor a
-	ld [hItemToRemoveIndex], a
+	ldh [hItemToRemoveIndex], a
 .loop
 	ld a, [hli]
 	cp -1 ; reached terminator?
@@ -128,14 +128,14 @@ RemoveItemByID::
 	cp b
 	jr z, .foundItem
 	inc hl
-	ld a, [hItemToRemoveIndex]
+	ldh a, [hItemToRemoveIndex]
 	inc a
-	ld [hItemToRemoveIndex], a
+	ldh [hItemToRemoveIndex], a
 	jr .loop
 .foundItem
 	ld a, $1
 	ld [wItemQuantity], a
-	ld a, [hItemToRemoveIndex]
+	ldh a, [hItemToRemoveIndex]
 	ld [wWhichPokemon], a
 	ld hl, wNumBagItems
 	jp RemoveItemFromInventory

@@ -22,10 +22,10 @@ Audio2_UpdateMusic::
 	set 7, a
 	ld [wMuteAudioAndPauseMusic], a
 	xor a ; disable all channels' output
-	ld [rNR51], a
-	ld [rNR30], a
+	ldh [rNR51], a
+	ldh [rNR30], a
 	ld a, $80
-	ld [rNR30], a
+	ldh [rNR30], a
 	jr .nextChannel
 .applyAffects
 	call Audio2_ApplyMusicAffects
@@ -194,9 +194,9 @@ Audio2_sound_ret:
 	jr nz, .skipSfxChannel3
 ; restart hardware channel 3 (wave channel) output
 	ld a, $0
-	ld [rNR30], a
+	ldh [rNR30], a
 	ld a, $80
-	ld [rNR30], a
+	ldh [rNR30], a
 .skipSfxChannel3
 	jr nz, .dontDisable
 	ld a, [wDisableChannelOutputWhenSfxEnds]
@@ -230,9 +230,9 @@ Audio2_sound_ret:
 .disableChannelOutput
 	ld hl, Audio2_HWChannelDisableMasks
 	add hl, bc
-	ld a, [rNR51]
+	ldh a, [rNR51]
 	and [hl]
-	ld [rNR51], a
+	ldh [rNR51], a
 .afterDisable
 	ld a, [wChannelSoundIDs + Ch5]
 	cp CRY_SFX_START
@@ -252,7 +252,7 @@ Audio2_sound_ret:
 	ret c
 .skipRewind
 	ld a, [wSavedVolume]
-	ld [rNR50], a
+	ldh [rNR50], a
 	xor a
 	ld [wSavedVolume], a
 .skipCry
@@ -559,7 +559,7 @@ Audio2_volume:
 	cp $f0 ; is this command a volume?
 	jr nz, Audio2_execute_music ; no
 	call Audio2_GetNextMusicByte
-	ld [rNR50], a ; store volume
+	ldh [rNR50], a ; store volume
 	jp Audio2_sound_ret
 
 Audio2_execute_music:
@@ -649,7 +649,7 @@ Audio2_pitch_sweep:
 	bit BIT_EXECUTE_MUSIC, [hl]
 	jr nz, Audio2_note ; no
 	call Audio2_GetNextMusicByte
-	ld [rNR10], a
+	ldh [rNR10], a
 	jp Audio2_sound_ret
 
 Audio2_note:
@@ -781,9 +781,9 @@ Audio2_note_pitch:
 	ld b, 0
 	ld hl, Audio2_HWChannelDisableMasks
 	add hl, bc
-	ld a, [rNR51]
+	ldh a, [rNR51]
 	and [hl]
-	ld [rNR51], a ; disable hardware channel 3's output
+	ldh [rNR51], a ; disable hardware channel 3's output
 	jr .done
 .notChannel3
 	ld b, REG_VOLUME_ENVELOPE
@@ -855,7 +855,7 @@ Audio2_EnableChannelOutput:
 	ld b, 0
 	ld hl, Audio2_HWChannelEnableMasks
 	add hl, bc
-	ld a, [rNR51]
+	ldh a, [rNR51]
 	or [hl] ; set this channel's bits
 	ld d, a
 	ld a, c
@@ -877,7 +877,7 @@ Audio2_EnableChannelOutput:
 	add hl, bc
 	and [hl]
 	ld d, a
-	ld a, [rNR51]
+	ldh a, [rNR51]
 	ld hl, Audio2_HWChannelDisableMasks
 	add hl, bc
 	and [hl] ; reset this channel's output bits
@@ -885,7 +885,7 @@ Audio2_EnableChannelOutput:
 	ld d, a
 .skip
 	ld a, d
-	ld [rNR51], a
+	ldh [rNR51], a
 	ret
 
 Audio2_ApplyDutyCycleAndSoundLength:
@@ -939,7 +939,7 @@ Audio2_ApplyWavePatternAndFrequency:
 	ld hl, rWave_0
 	ld b, $f
 	ld a, $0 ; stop hardware channel 3
-	ld [rNR30], a
+	ldh [rNR30], a
 .loop
 	ld a, [de]
 	inc de
@@ -949,7 +949,7 @@ Audio2_ApplyWavePatternAndFrequency:
 	and a
 	jr nz, .loop
 	ld a, $80 ; start hardware channel 3
-	ld [rNR30], a
+	ldh [rNR30], a
 	pop de
 .notChannel3
 	ld a, d
@@ -1462,17 +1462,17 @@ Audio2_PlaySound::
 	ld a, $ff
 	ld [wStereoPanning], a
 	xor a
-	ld [rNR50], a
+	ldh [rNR50], a
 	ld a, $8
-	ld [rNR10], a
+	ldh [rNR10], a
 	ld a, 0
-	ld [rNR51], a
+	ldh [rNR51], a
 	xor a
-	ld [rNR30], a
+	ldh [rNR30], a
 	ld a, $80
-	ld [rNR30], a
+	ldh [rNR30], a
 	ld a, $77
-	ld [rNR50], a
+	ldh [rNR50], a
 	jp .playSoundCommon
 
 .playSfx
@@ -1618,7 +1618,7 @@ Audio2_PlaySound::
 	cp Ch5
 	jr nz, .skipSweepDisable
 	ld a, $8
-	ld [rNR10], a ; sweep off
+	ldh [rNR10], a ; sweep off
 .skipSweepDisable
 	ld a, c
 	and a
@@ -1628,22 +1628,22 @@ Audio2_PlaySound::
 
 .stopAllAudio
 	ld a, $80
-	ld [rNR52], a ; sound hardware on
-	ld [rNR30], a ; wave playback on
+	ldh [rNR52], a ; sound hardware on
+	ldh [rNR30], a ; wave playback on
 	xor a
-	ld [rNR51], a ; no sound output
-	ld [rNR32], a ; mute channel 3 (wave channel)
+	ldh [rNR51], a ; no sound output
+	ldh [rNR32], a ; mute channel 3 (wave channel)
 	ld a, $8
-	ld [rNR10], a ; sweep off
-	ld [rNR12], a ; mute channel 1 (pulse channel 1)
-	ld [rNR22], a ; mute channel 2 (pulse channel 2)
-	ld [rNR42], a ; mute channel 4 (noise channel)
+	ldh [rNR10], a ; sweep off
+	ldh [rNR12], a ; mute channel 1 (pulse channel 1)
+	ldh [rNR22], a ; mute channel 2 (pulse channel 2)
+	ldh [rNR42], a ; mute channel 4 (noise channel)
 	ld a, $40
-	ld [rNR14], a ; counter mode
-	ld [rNR24], a
-	ld [rNR44], a
+	ldh [rNR14], a ; counter mode
+	ldh [rNR24], a
+	ldh [rNR44], a
 	ld a, $77
-	ld [rNR50], a ; full volume
+	ldh [rNR50], a ; full volume
 	xor a
 	ld [wUnusedC000], a
 	ld [wDisableChannelOutputWhenSfxEnds], a
@@ -1762,10 +1762,10 @@ Audio2_PlaySound::
 	ld a, [wSavedVolume]
 	and a
 	jr nz, .done
-	ld a, [rNR50]
+	ldh a, [rNR50]
 	ld [wSavedVolume], a
 	ld a, $77
-	ld [rNR50], a ; full volume
+	ldh [rNR50], a ; full volume
 .done
 	ret
 

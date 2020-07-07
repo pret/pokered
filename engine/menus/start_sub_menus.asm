@@ -50,7 +50,7 @@ StartMenu_Pokemon::
 	ld hl, wTopMenuItemY
 	ld a, c
 	ld [hli], a ; top menu item Y
-	ld a, [hFieldMoveMonMenuTopMenuItemX]
+	ldh a, [hFieldMoveMonMenuTopMenuItemX]
 	ld [hli], a ; top menu item X
 	xor a
 	ld [hli], a ; current menu item ID
@@ -160,7 +160,7 @@ StartMenu_Pokemon::
 .surf
 	bit 4, a ; does the player have the Soul Badge?
 	jp z, .newBadgeRequired
-	callba IsSurfingAllowed
+	farcall IsSurfingAllowed
 	ld hl, wd728
 	bit 1, [hl]
 	res 1, [hl]
@@ -239,21 +239,21 @@ StartMenu_Pokemon::
 	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a, [hli]
-	ld [hDividend], a
+	ldh [hDividend], a
 	ld a, [hl]
-	ld [hDividend + 1], a
+	ldh [hDividend + 1], a
 	ld a, 5
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, 2 ; number of bytes
 	call Divide
 	ld bc, wPartyMon1HP - wPartyMon1MaxHP
 	add hl, bc
 	ld a, [hld]
 	ld b, a
-	ld a, [hQuotient + 3]
+	ldh a, [hQuotient + 3]
 	sub b
 	ld b, [hl]
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	sbc b
 	jp nc, .notHealthyEnough
 	ld a, [wPartyAndBillsPCSavedMenuItem]
@@ -285,7 +285,7 @@ StartMenu_Pokemon::
 
 ; writes a blank tile to all possible menu cursor positions on the party menu
 ErasePartyMenuCursors::
-	coord hl, 0, 1
+	hlcoord 0, 1
 	ld bc, 2 * 20 ; menu cursor positions are 2 rows apart
 	ld a, 6 ; 6 menu cursor positions
 .loop
@@ -330,10 +330,10 @@ StartMenu_Item::
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)
 	ld a, " "
-	Coorda 5, 4
-	Coorda 5, 6
-	Coorda 5, 8
-	Coorda 5, 10
+	ldcoord_a 5, 4
+	ldcoord_a 5, 6
+	ldcoord_a 5, 8
+	ldcoord_a 5, 10
 	call PlaceUnfilledArrowMenuCursor
 	xor a
 	ld [wMenuItemToSwap], a
@@ -454,10 +454,10 @@ StartMenu_TrainerInfo::
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
 	ld b, SET_PAL_TRAINER_CARD
@@ -471,7 +471,7 @@ StartMenu_TrainerInfo::
 	call ReloadMapData
 	call LoadGBPal
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	jp RedisplayStartMenu
 
 ; loads tile patterns and draws everything except for gym leader faces / badges
@@ -480,44 +480,44 @@ DrawTrainerInfo:
 	lb bc, BANK(RedPicFront), $01
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
-	coord hl, 0, 2
+	hlcoord 0, 2
 	ld a, " "
 	call TrainerInfo_DrawVerticalLine
-	coord hl, 1, 2
+	hlcoord 1, 2
 	call TrainerInfo_DrawVerticalLine
-	ld hl, vChars2 + $70
-	ld de, vChars2
-	ld bc, $70 * 4
+	ld hl, vChars2 tile $07
+	ld de, vChars2 tile $00
+	ld bc, $1c tiles
 	call CopyData
 	ld hl, TrainerInfoTextBoxTileGraphics ; trainer info text box tile patterns
-	ld de, vChars2 + $770
-	ld bc, $80
+	ld de, vChars2 tile $77
+	ld bc, 8 tiles
 	push bc
 	call TrainerInfo_FarCopyData
 	ld hl, BlankLeaderNames
-	ld de, vChars2 + $600
-	ld bc, $170
+	ld de, vChars2 tile $60
+	ld bc, $17 tiles
 	call TrainerInfo_FarCopyData
 	pop bc
 	ld hl, BadgeNumbersTileGraphics  ; badge number tile patterns
-	ld de, vChars1 + $580
+	ld de, vChars1 tile $58
 	call TrainerInfo_FarCopyData
 	ld hl, GymLeaderFaceAndBadgeTileGraphics  ; gym leader face and badge tile patterns
-	ld de, vChars2 + $200
-	ld bc, $400
-	ld a, $03
+	ld de, vChars2 tile $20
+	ld bc, 8 * 8 tiles
+	ld a, BANK(GymLeaderFaceAndBadgeTileGraphics)
 	call FarCopyData2
 	ld hl, TextBoxGraphics
-	ld de, $d0
+	ld de, 13 tiles
 	add hl, de ; hl = colon tile pattern
-	ld de, vChars1 + $560
-	ld bc, $10
-	ld a, $04
+	ld de, vChars1 tile $56
+	ld bc, 1 tiles
+	ld a, BANK(TextBoxGraphics)
 	push bc
 	call FarCopyData2
 	pop bc
-	ld hl, TrainerInfoTextBoxTileGraphics + $80  ; background tile pattern
-	ld de, vChars1 + $570
+	ld hl, TrainerInfoTextBoxTileGraphics tile 8  ; background tile pattern
+	ld de, vChars1 tile $57
 	call TrainerInfo_FarCopyData
 	call EnableLCD
 	ld hl, wTrainerInfoTextBoxWidthPlus1
@@ -526,7 +526,7 @@ DrawTrainerInfo:
 	dec a
 	ld [hli], a
 	ld [hl], 1
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call TrainerInfo_DrawTextBox
 	ld hl, wTrainerInfoTextBoxWidthPlus1
 	ld a, 16 + 1
@@ -534,27 +534,27 @@ DrawTrainerInfo:
 	dec a
 	ld [hli], a
 	ld [hl], 3
-	coord hl, 1, 10
+	hlcoord 1, 10
 	call TrainerInfo_DrawTextBox
-	coord hl, 0, 10
+	hlcoord 0, 10
 	ld a, $d7
 	call TrainerInfo_DrawVerticalLine
-	coord hl, 19, 10
+	hlcoord 19, 10
 	call TrainerInfo_DrawVerticalLine
-	coord hl, 6, 9
+	hlcoord 6, 9
 	ld de, TrainerInfo_BadgesText
 	call PlaceString
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, TrainerInfo_NameMoneyTimeText
 	call PlaceString
-	coord hl, 7, 2
+	hlcoord 7, 2
 	ld de, wPlayerName
 	call PlaceString
-	coord hl, 8, 4
+	hlcoord 8, 4
 	ld de, wPlayerMoney
 	ld c, $e3
 	call PrintBCDNumber
-	coord hl, 9, 6
+	hlcoord 9, 6
 	ld de, wPlayTimeHours ; hours
 	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
@@ -648,10 +648,10 @@ StartMenu_SaveReset::
 
 StartMenu_Option::
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
-	callab DisplayOptionMenu
+	callfar DisplayOptionMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -667,7 +667,7 @@ SwitchPartyMon::
 
 SwitchPartyMon_ClearGfx:
 	push af
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld c, SCREEN_WIDTH * 2
@@ -737,10 +737,10 @@ SwitchPartyMon_InitVarOrSwapData:
 	inc d
 .noCarry2
 	ld a, [hl]
-	ld [hSwapTemp], a
+	ldh [hSwapTemp], a
 	ld a, [de]
 	ld [hl], a
-	ld a, [hSwapTemp]
+	ldh a, [hSwapTemp]
 	ld [de], a
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1

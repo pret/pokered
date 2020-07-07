@@ -39,7 +39,7 @@ SSAnne6Text7:
 	text_asm
 	ld hl, SSAnne6Text_61807
 	call PrintText
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	bit 7, a
 	jr z, .asm_93eb1
 	ld hl, SSAnne6Text_6180c

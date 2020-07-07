@@ -41,16 +41,16 @@ PokemonTower2Script0:
 .asm_60544
 	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld a, b
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
-	ld [hJoyHeld], a
-	ld [hJoyPressed], a
+	ldh [hJoyHeld], a
+	ldh [hJoyPressed], a
 	ret
 
 CoordsData_6055e:
@@ -66,7 +66,7 @@ PokemonTower2Script1:
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
 	ld a, $1
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld de, MovementData_605b2
 	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
@@ -74,12 +74,12 @@ PokemonTower2Script1:
 	ld de, MovementData_605a9
 .asm_60589
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call MoveSprite
 	ld a, SFX_STOP_ALL_MUSIC
 	ld [wNewSoundID], a
 	call PlaySound
-	callba Music_RivalAlternateStart
+	farcall Music_RivalAlternateStart
 	ld a, $2
 	ld [wPokemonTower2FCurScript], a
 	ld [wCurMapScript], a

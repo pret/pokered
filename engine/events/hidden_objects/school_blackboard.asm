@@ -26,11 +26,11 @@ LinkCableHelp::
 .linkHelpLoop
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, 8
 	ld c, 13
 	call TextBoxBorder
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, HowToLinkText
 	call PlaceString
 	ld hl, LinkCableHelpText2
@@ -110,13 +110,13 @@ ViridianSchoolBlackboard::
 .blackboardLoop
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 6, 10
 	call TextBoxBorder
-	coord hl, 1, 2
+	hlcoord 1, 2
 	ld de, StatusAilmentText1
 	call PlaceString
-	coord hl, 6, 2
+	hlcoord 6, 2
 	ld de, StatusAilmentText2
 	call PlaceString
 	ld hl, ViridianSchoolBlackboardText2

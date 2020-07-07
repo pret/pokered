@@ -21,22 +21,22 @@ GetHPBarLength:
 	rr e
 	srl d
 	rr e
-	ld a, [hMultiplicand+1]
+	ldh a, [hMultiplicand+1]
 	ld b, a
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	srl b              ; divide multiplication result as well
 	rr a
 	srl b
 	rr a
-	ld [hMultiplicand+2], a
+	ldh [hMultiplicand+2], a
 	ld a, b
-	ld [hMultiplicand+1], a
+	ldh [hMultiplicand+1], a
 .maxHPSmaller256
 	ld a, e
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [hMultiplicand+2]
+	ldh a, [hMultiplicand+2]
 	ld e, a            ; e = bc * 48 / de (num of pixels of HP bar)
 	pop hl
 	and a
@@ -213,7 +213,7 @@ UpdateHPBar_PrintHPNumber:
 	ld a, [wHPBarOldHP + 1]
 	ld [wHPBarTempHP], a
 	push hl
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	bit 0, a
 	jr z, .asm_fb15
 	ld de, $9

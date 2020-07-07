@@ -1,25 +1,25 @@
 HallOfFamePC:
-	callba AnimateHallOfFame
+	farcall AnimateHallOfFame
 	call ClearScreen
 	ld c, 100
 	call DelayFrames
 	call DisableLCD
 	ld hl, vFont
-	ld bc, $800 / 2
+	ld bc, ($80 tiles) / 2
 	call ZeroMemory
-	ld hl, vChars2 + $600
-	ld bc, $200 / 2
+	ld hl, vChars2 tile $60
+	ld bc, ($20 tiles) / 2
 	call ZeroMemory
-	ld hl, vChars2 + $7e0
-	ld bc, $10
-	ld a, $ff
+	ld hl, vChars2 tile $7e
+	ld bc, 1 tiles
+	ld a, $ff ; solid black
 	call FillMemory
-	coord hl, 0, 0
+	hlcoord 0, 0
 	call FillFourRowsWithBlack
-	coord hl, 0, 14
+	hlcoord 0, 14
 	call FillFourRowsWithBlack
 	ld a, %11000000
-	ld [rBGP], a
+	ldh [rBGP], a
 	call EnableLCD
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySoundWaitForCurrent
@@ -38,7 +38,7 @@ FadeInCreditsText:
 	ld b, 4
 .loop
 	ld a, [hli]
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -47,7 +47,7 @@ FadeInCreditsText:
 
 DisplayCreditsMon:
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call SaveScreenTilesToBuffer1
 	call FillMiddleOfScreenWithWhite
 
@@ -61,23 +61,23 @@ DisplayCreditsMon:
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wd0b5], a
-	coord hl, 8, 6
+	hlcoord 8, 6
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl, vBGMap0 + $c
 	call CreditsCopyTileMapToVRAM
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call LoadScreenTilesFromBuffer1
 	ld hl, vBGMap0
 	call CreditsCopyTileMapToVRAM
 	ld a, $A7
-	ld [rWX], a
+	ldh [rWX], a
 	ld hl, vBGMap1
 	call CreditsCopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
 	ld a, %11111100 ; make the mon a black silhouette
-	ld [rBGP], a
+	ldh [rBGP], a
 
 ; scroll the mon left by one tile 7 times
 	ld bc, 7
@@ -92,16 +92,16 @@ DisplayCreditsMon:
 	ld c, 20
 .scrollLoop2
 	call ScrollCreditsMonLeft
-	ld a, [rWX]
+	ldh a, [rWX]
 	sub 8
-	ld [rWX], a
+	ldh [rWX], a
 	dec c
 	jr nz, .scrollLoop2
 
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld a, %11000000
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 INCLUDE "data/credits/credits_mons.asm"
@@ -119,13 +119,13 @@ ScrollCreditsMonLeft:
 	ret
 
 ScrollCreditsMonLeft_SetSCX:
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, ScrollCreditsMonLeft_SetSCX
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 .loop
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .loop
 	ret
@@ -138,11 +138,11 @@ HoFGBPalettes:
 
 CreditsCopyTileMapToVRAM:
 	ld a, l
-	ld [hAutoBGTransferDest], a
+	ldh [hAutoBGTransferDest], a
 	ld a, h
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
 ZeroMemory:
@@ -162,7 +162,7 @@ FillFourRowsWithBlack:
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite:
-	coord hl, 0, 4
+	hlcoord 0, 4
 	ld bc, SCREEN_WIDTH * 10
 	ld a, " "
 	jp FillMemory
@@ -172,7 +172,7 @@ Credits:
 	push de
 .nextCreditsScreen
 	pop de
-	coord hl, 9, 6
+	hlcoord 9, 6
 	push hl
 	call FillMiddleOfScreenWithWhite
 	pop hl
@@ -235,7 +235,7 @@ Credits:
 	jr .nextCreditsScreen
 .showCopyrightText
 	push de
-	callba LoadCopyrightTiles
+	farcall LoadCopyrightTiles
 	pop de
 	pop de
 	jr .nextCreditsCommand
@@ -245,13 +245,13 @@ Credits:
 	call FillMiddleOfScreenWithWhite
 	pop de
 	ld de, TheEndGfx
-	ld hl, vChars2 + $600
+	ld hl, vChars2 tile $60
 	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
 	call CopyVideoData
-	coord hl, 4, 8
+	hlcoord 4, 8
 	ld de, TheEndTextString
 	call PlaceString
-	coord hl, 4, 9
+	hlcoord 4, 9
 	inc de
 	call PlaceString
 	jp FadeInCreditsText

@@ -111,7 +111,7 @@ GetTextBoxIDText:
 ; hl = address of upper left corner of text box
 GetAddressOfScreenCoords:
 	push bc
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld bc, 20
 .loop ; loop to add d rows to the base address
 	ld a, d
@@ -274,11 +274,11 @@ DisplayMoneyBox:
 	ld a, MONEY_BOX_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	coord hl, 13, 1
+	hlcoord 13, 1
 	ld b, 1
 	ld c, 6
 	call ClearScreenArea
-	coord hl, 12, 1
+	hlcoord 12, 1
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber
@@ -578,14 +578,14 @@ DisplayFieldMoveMonMenu:
 	jr nz, .fieldMovesExist
 
 ; no field moves
-	coord hl, 11, 11
+	hlcoord 11, 11
 	ld b, 5
 	ld c, 7
 	call TextBoxBorder
 	call UpdateSprites
 	ld a, 12
-	ld [hFieldMoveMonMenuTopMenuItemX], a
-	coord hl, 13, 12
+	ldh [hFieldMoveMonMenuTopMenuItemX], a
+	hlcoord 13, 12
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
@@ -594,7 +594,7 @@ DisplayFieldMoveMonMenu:
 
 ; Calculate the text box position and dimensions based on the leftmost X coord
 ; of the field move names before adjusting for the number of field moves.
-	coord hl, 0, 11
+	hlcoord 0, 11
 	ld a, [wFieldMovesLeftmostXCoord]
 	dec a
 	ld e, a
@@ -625,7 +625,7 @@ DisplayFieldMoveMonMenu:
 	call UpdateSprites
 
 ; Calculate the position of the first field move name to print.
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a
@@ -673,8 +673,8 @@ DisplayFieldMoveMonMenu:
 .donePrintingNames
 	pop hl
 	ld a, [wFieldMovesLeftmostXCoord]
-	ld [hFieldMoveMonMenuTopMenuItemX], a
-	coord hl, 0, 12
+	ldh [hFieldMoveMonMenuTopMenuItemX], a
+	hlcoord 0, 12
 	ld a, [wFieldMovesLeftmostXCoord]
 	inc a
 	ld e, a

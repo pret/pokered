@@ -66,7 +66,7 @@ PalletMovementScript_OakMoveLeft:
 	call FillMemory
 	ld [hl], $ff
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	ld de, wNPCMovementDirections2
 	call MoveSprite
 	ld a, $1
@@ -91,7 +91,7 @@ PalletMovementScript_PlayerMoveLeft:
 	ret nz ; return if Oak is still moving
 	ld a, [wNumStepsToTake]
 	ld [wSimulatedJoypadStatesIndex], a
-	ld [hNPCMovementDirections2Index], a
+	ldh [hNPCMovementDirections2Index], a
 	predef ConvertNPCMovementDirectionsToJoypadMasks
 	call StartSimulatingJoypadStates
 	ld a, $2
@@ -282,7 +282,7 @@ FreezeEnemyTrainerSprite::
 	jr .loop
 .notRival
 	ld a, [wSpriteIndex]
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs:

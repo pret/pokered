@@ -1,5 +1,5 @@
 HealEffect_:
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	ld de, wBattleMonHP
 	ld hl, wBattleMonMaxHP
@@ -27,7 +27,7 @@ HealEffect_:
 	ld c, 50
 	call DelayFrames
 	ld hl, wBattleMonStatus
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
 	jr z, .restEffect
 	ld hl, wEnemyMonStatus
@@ -87,12 +87,12 @@ HealEffect_:
 .playAnim
 	ld hl, PlayCurrentMoveAnimation
 	call BankswitchEtoF
-	ld a, [hWhoseTurn]
+	ldh a, [hWhoseTurn]
 	and a
-	coord hl, 10, 9
+	hlcoord 10, 9
 	ld a, $1
 	jr z, .updateHPBar
-	coord hl, 2, 2
+	hlcoord 2, 2
 	xor a
 .updateHPBar
 	ld [wHPBarType], a

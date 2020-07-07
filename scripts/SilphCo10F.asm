@@ -28,7 +28,7 @@ SilphCo10GateCoords:
 	db $FF
 
 SilphCo10Text_5a176:
-	ld a, [hUnlockedSilphCoDoors]
+	ldh a, [hUnlockedSilphCoDoors]
 	and a
 	ret z
 	SetEvent EVENT_SILPH_CO_10_UNLOCKED_DOOR

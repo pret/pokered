@@ -40,7 +40,7 @@ DrawHP_:
 	push hl
 	call DrawHPBar
 	pop hl
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	bit 0, a
 	jr z, .printFractionBelowBar
 	ld bc, $9 ; right of bar
@@ -80,32 +80,32 @@ StatusScreen:
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33
-	ld [rNR50], a ; Reduce the volume
+	ldh [rNR50], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; source
-	ld hl, vChars2 + $6d0 ; dest
-	lb bc, BANK(BattleHudTiles1), $03
+	ld hl, vChars2 tile $6d ; dest
+	lb bc, BANK(BattleHudTiles1), 3
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2
-	ld hl, vChars2 + $780
-	lb bc, BANK(BattleHudTiles2), $01
+	ld hl, vChars2 tile $78
+	lb bc, BANK(BattleHudTiles2), 1
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3
-	ld hl, vChars2 + $760
-	lb bc, BANK(BattleHudTiles3), $02
-	call CopyVideoDataDouble ; ─┘
+	ld hl, vChars2 tile $76
+	lb bc, BANK(BattleHudTiles3), 2
+	call CopyVideoDataDouble ; ─ ┘
 	ld de, PTile
-	ld hl, vChars2 + $720
-	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
-	call CopyVideoDataDouble ; P (for PP), inline
-	ld a, [hTilesetType]
+	ld hl, vChars2 tile $72
+	lb bc, BANK(PTile), 1
+	call CopyVideoDataDouble ; bold P (for PP)
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
-	coord hl, 19, 1
+	ldh [hTilesetType], a
+	hlcoord 19, 1
 	lb bc, 6, 10
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, -6
@@ -113,54 +113,54 @@ StatusScreen:
 	ld [hl], "<DOT>"
 	dec hl
 	ld [hl], "№"
-	coord hl, 19, 9
+	hlcoord 19, 9
 	lb bc, 8, 6
 	call DrawLineBox ; Draws the box around types, ID No. and OT
-	coord hl, 10, 9
+	hlcoord 10, 9
 	ld de, Type1Text
 	call PlaceString ; "TYPE1/"
-	coord hl, 11, 3
+	hlcoord 11, 3
 	predef DrawHP
 	ld hl, wStatusScreenHPBarColor
 	call GetHealthBarColor
 	ld b, SET_PAL_STATUS_SCREEN
 	call RunPaletteCommand
-	coord hl, 16, 6
+	hlcoord 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
 	jr nz, .StatusWritten
-	coord hl, 16, 6
+	hlcoord 16, 6
 	ld de, OKText
 	call PlaceString ; "OK"
 .StatusWritten
-	coord hl, 9, 6
+	hlcoord 9, 6
 	ld de, StatusText
 	call PlaceString ; "STATUS/"
-	coord hl, 14, 2
+	hlcoord 14, 2
 	call PrintLevel ; Pokémon level
 	ld a, [wMonHIndex]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
-	coord hl, 3, 7
+	hlcoord 3, 7
 	ld de, wd11e
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; Pokémon no.
-	coord hl, 11, 10
+	hlcoord 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
 	call .GetStringPointer
 	ld d, h
 	ld e, l
-	coord hl, 9, 1
+	hlcoord 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
 	call .GetStringPointer
 	ld d, h
 	ld e, l
-	coord hl, 12, 16
+	hlcoord 12, 16
 	call PlaceString ; OT
-	coord hl, 12, 14
+	hlcoord 12, 14
 	ld de, wLoadedMonOTID
 	lb bc, LEADING_ZEROES | 2, 5
 	call PrintNumber ; ID Number
@@ -168,13 +168,13 @@ StatusScreen:
 	call PrintStatsBox
 	call Delay3
 	call GBPalNormal
-	coord hl, 1, 0
+	hlcoord 1, 0
 	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
 	ld a, [wcf91]
 	call PlayCry ; play Pokémon cry
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ret
 
 .GetStringPointer
@@ -244,27 +244,25 @@ DrawLineBox:
 	ld [hl], $6f ; ← (halfarrow ending)
 	ret
 
-PTile:
-	INCBIN "gfx/font/P.1bpp"
-PTileEnd:
+PTile: INCBIN "gfx/font/P.1bpp"
 
 PrintStatsBox:
 	ld a, d
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
-	coord hl, 0, 8
+	hlcoord 0, 8
 	ld b, 8
 	ld c, 8
 	call TextBoxBorder ; Draws the box
-	coord hl, 1, 9 ; Start printing stats from here
+	hlcoord 1, 9 ; Start printing stats from here
 	ld bc, $19 ; Number offset
 	jr .PrintStats
 .DifferentBox
-	coord hl, 9, 2
+	hlcoord 9, 2
 	ld b, 8
 	ld c, 9
 	call TextBoxBorder
-	coord hl, 11, 3
+	hlcoord 11, 3
 	ld bc, $18
 .PrintStats
 	push bc
@@ -298,11 +296,11 @@ StatsText:
 	next "SPECIAL@"
 
 StatusScreen2:
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hTilesetType], a
+	ldh [hAutoBGTransferEnabled], a
 	ld bc, NUM_MOVES + 1
 	ld hl, wMoves
 	call FillMemory
@@ -310,17 +308,17 @@ StatusScreen2:
 	ld de, wMoves
 	ld bc, NUM_MOVES
 	call CopyData
-	callab FormatMovesString
-	coord hl, 9, 2
+	callfar FormatMovesString
+	hlcoord 9, 2
 	lb bc, 5, 10
 	call ClearScreenArea ; Clear under name
-	coord hl, 19, 3
+	hlcoord 19, 3
 	ld [hl], $78
-	coord hl, 0, 8
+	hlcoord 0, 8
 	ld b, 8
 	ld c, 18
 	call TextBoxBorder ; Draw move container
-	coord hl, 2, 9
+	hlcoord 2, 9
 	ld de, wMovesString
 	call PlaceString ; Print moves
 	ld a, [wNumMovesMinusOne]
@@ -329,7 +327,7 @@ StatusScreen2:
 	ld a, $4
 	sub c
 	ld b, a ; Number of moves ?
-	coord hl, 11, 10
+	hlcoord 11, 10
 	ld de, SCREEN_WIDTH * 2
 	ld a, "<BOLD_P>"
 	call StatusScreen_PrintPP ; Print "PP"
@@ -341,7 +339,7 @@ StatusScreen2:
 	call StatusScreen_PrintPP ; Fill the rest with --
 .InitPP
 	ld hl, wLoadedMonMoves
-	coord de, 14, 10
+	decoord 14, 10
 	ld b, 0
 .PrintPP
 	ld a, [hli]
@@ -356,7 +354,7 @@ StatusScreen2:
 	ld a, b
 	ld [hl], a
 	push hl
-	callab GetMaxPP
+	callfar GetMaxPP
 	pop hl
 	pop af
 	ld [hl], a
@@ -391,7 +389,7 @@ StatusScreen2:
 	cp $4
 	jr nz, .PrintPP
 .PPDone
-	coord hl, 9, 3
+	hlcoord 9, 3
 	ld de, StatusScreenExpText
 	call PlaceString
 	ld a, [wLoadedMonLevel]
@@ -401,7 +399,7 @@ StatusScreen2:
 	inc a
 	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
-	coord hl, 14, 6
+	hlcoord 14, 6
 	ld [hl], "<to>"
 	inc hl
 	inc hl
@@ -409,33 +407,33 @@ StatusScreen2:
 	pop af
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
-	coord hl, 12, 4
+	hlcoord 12, 4
 	lb bc, 3, 7
 	call PrintNumber ; exp
 	call CalcExpToLevelUp
 	ld de, wLoadedMonExp
-	coord hl, 7, 6
+	hlcoord 7, 6
 	lb bc, 3, 7
 	call PrintNumber ; exp needed to level up
-	coord hl, 9, 0
+	hlcoord 9, 0
 	call StatusScreen_ClearName
-	coord hl, 9, 1
+	hlcoord 9, 1
 	call StatusScreen_ClearName
 	ld a, [wMonHIndex]
 	ld [wd11e], a
 	call GetMonName
-	coord hl, 9, 1
+	hlcoord 9, 1
 	call PlaceString
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	call WaitForTextScrollButtonPress ; wait for button
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77
-	ld [rNR50], a
+	ldh [rNR50], a
 	call GBPalWhiteOut
 	jp ClearScreen
 
@@ -445,15 +443,15 @@ CalcExpToLevelUp:
 	jr z, .atMaxLevel
 	inc a
 	ld d, a
-	callab CalcExperience
+	callfar CalcExperience
 	ld hl, wLoadedMonExp + 2
-	ld a, [hExperience + 2]
+	ldh a, [hExperience + 2]
 	sub [hl]
 	ld [hld], a
-	ld a, [hExperience + 1]
+	ldh a, [hExperience + 1]
 	sbc [hl]
 	ld [hld], a
-	ld a, [hExperience]
+	ldh a, [hExperience]
 	sbc [hl]
 	ld [hld], a
 	ret

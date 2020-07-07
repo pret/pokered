@@ -24,7 +24,7 @@ PokemonTower5Script0:
 	CheckAndSetEvent EVENT_IN_PURIFIED_ZONE
 	ret nz
 	xor a
-	ld [hJoyHeld], a
+	ldh [hJoyHeld], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd72e
@@ -35,7 +35,7 @@ PokemonTower5Script0:
 	call Delay3
 	call GBFadeInFromWhite
 	ld a, $7
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wJoyIgnore], a

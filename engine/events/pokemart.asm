@@ -42,7 +42,7 @@ DisplayPokemartDialogue_::
 	ld [wPrintItemPrices], a
 	ld a, INIT_BAG_ITEM_LIST
 	ld [wInitListType], a
-	callab InitList
+	callfar InitList
 
 	ld a, [wNumBagItems]
 	and a
@@ -77,14 +77,14 @@ DisplayPokemartDialogue_::
 	jr c, .unsellableItem
 	ld a, PRICEDITEMLISTMENU
 	ld [wListMenuID], a
-	ld [hHalveItemPrices], a ; halve prices when selling
+	ldh [hHalveItemPrices], a ; halve prices when selling
 	call DisplayChooseQuantityMenu
 	inc a
 	jr z, .sellMenuLoop ; if the player closed the choose quantity menu with the B button
 	ld hl, PokemartTellSellPriceText
 	lb bc, 14, 1 ; location that PrintText always prints to, this is useless
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
@@ -126,7 +126,7 @@ DisplayPokemartDialogue_::
 	ld [wPrintItemPrices], a
 	ld a, INIT_OTHER_ITEM_LIST
 	ld [wInitListType], a
-	callab InitList
+	callfar InitList
 
 	ld hl, PokemartBuyingGreetingText
 	call PrintText
@@ -152,7 +152,7 @@ DisplayPokemartDialogue_::
 	ld a, 99
 	ld [wMaxItemQuantity], a
 	xor a
-	ld [hHalveItemPrices], a ; don't halve item prices when buying
+	ldh [hHalveItemPrices], a ; don't halve item prices when buying
 	call DisplayChooseQuantityMenu
 	inc a
 	jr z, .buyMenuLoop ; if the player closed the choose quantity menu with the B button
@@ -162,7 +162,7 @@ DisplayPokemartDialogue_::
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl, PokemartTellBuyPriceText
 	call PrintText
-	coord hl, 14, 7
+	hlcoord 14, 7
 	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a

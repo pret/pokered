@@ -13,13 +13,13 @@ EvolveMon:
 	ld [wNewSoundID], a
 	call PlaySound
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, SFX_TINK
 	call PlaySound
 	call Delay3
 	xor a
-	ld [hAutoBGTransferEnabled], a
-	ld [hTilesetType], a
+	ldh [hAutoBGTransferEnabled], a
+	ldh [hTilesetType], a
 	ld a, [wEvoOldSpecies]
 	ld [wWholeScreenPaletteMonSpecies], a
 	ld c, 0
@@ -37,7 +37,7 @@ EvolveMon:
 	ld [wd0b5], a
 	call Evolution_LoadPic
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld a, [wEvoOldSpecies]
 	call PlayCry
 	call WaitForSoundToFinish
@@ -99,7 +99,7 @@ EvolutionSetWholeScreenPalette:
 
 Evolution_LoadPic:
 	call GetMonHeader
-	coord hl, 7, 2
+	hlcoord 7, 2
 	jp LoadFlippedFrontSpriteByMonIndex
 
 Evolution_BackAndForthAnim:
@@ -117,8 +117,8 @@ Evolution_BackAndForthAnim:
 Evolution_ChangeMonPic:
 	push bc
 	xor a
-	ld [hAutoBGTransferEnabled], a
-	coord hl, 7, 2
+	ldh [hAutoBGTransferEnabled], a
+	hlcoord 7, 2
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH - 7
 .loop
@@ -134,7 +134,7 @@ Evolution_ChangeMonPic:
 	dec b
 	jr nz, .loop
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	pop bc
 	ret
@@ -143,7 +143,7 @@ Evolution_CheckForCancel:
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	pop bc
 	and B_BUTTON
 	jr nz, .pressedB

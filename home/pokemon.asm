@@ -81,7 +81,7 @@ DrawHPBar::
 ; wLoadedMon = base address of pokemon data
 ; wMonHeader = base address of base stats
 LoadMonData::
-	jpab LoadMonData_
+	jpfar LoadMonData_
 
 OverwritewMoves::
 ; Write c to [wMoves + b]. Unused.
@@ -122,18 +122,18 @@ LoadFrontSpriteByMonIndex::
 	ld de, vFrontPic
 	call LoadMonFrontSprite
 	pop hl
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(CopyUncompressedPicToHL)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	xor a
-	ld [hStartTileID], a
+	ldh [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -175,10 +175,10 @@ GetCryData::
 	ret
 
 DisplayPartyMenu::
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call PartyMenuInit
@@ -186,10 +186,10 @@ DisplayPartyMenu::
 	jp HandlePartyMenuInput
 
 GoBackToPartyMenu::
-	ld a, [hTilesetType]
+	ldh a, [hTilesetType]
 	push af
 	xor a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	call PartyMenuInit
 	call RedrawPartyMenu
 	jp HandlePartyMenuInput
@@ -251,7 +251,7 @@ HandlePartyMenuInput::
 	and a
 	jp nz, .swappingPokemon
 	pop af
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	bit 1, b
 	jr nz, .noPokemonChosen
 	ld a, [wPartyCount]
@@ -277,7 +277,7 @@ HandlePartyMenuInput::
 	bit 1, b ; was the B button pressed?
 	jr z, .handleSwap ; if not, handle swapping the pokemon
 .cancelSwap ; if the B button was pressed
-	callba ErasePartyMenuCursors
+	farcall ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a
@@ -286,7 +286,7 @@ HandlePartyMenuInput::
 .handleSwap
 	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
-	callba SwitchPartyMon
+	farcall SwitchPartyMon
 	jr HandlePartyMenuInput
 
 DrawPartyMenu::
@@ -325,15 +325,15 @@ PrintStatusCondition::
 	ret
 
 PrintStatusConditionNotFainted::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(PrintStatusAilment)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call PrintStatusAilment ; print status condition
 	pop bc
 	ld a, b
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 
@@ -382,10 +382,10 @@ GetwMoves::
 ; INPUT:
 ; [wd0b5] = pokemon ID
 GetMonHeader::
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(BaseStats)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	push bc
 	push de
@@ -440,7 +440,7 @@ GetMonHeader::
 	pop de
 	pop bc
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	ret
 

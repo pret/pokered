@@ -23,8 +23,8 @@ BikeShopText1:
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
-	ld [hItemToRemoveID], a
-	callba RemoveItemByID
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
 	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
 	call PrintText
@@ -49,15 +49,15 @@ BikeShopText1:
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, $4
 	ld c, $f
 	call TextBoxBorder
 	call UpdateSprites
-	coord hl, 2, 2
+	hlcoord 2, 2
 	ld de, BikeShopMenuText
 	call PlaceString
-	coord hl, 8, 3
+	hlcoord 8, 3
 	ld de, BikeShopMenuPrice
 	call PlaceString
 	ld hl, BikeShopText_1d815

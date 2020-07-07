@@ -6,19 +6,19 @@ DisplayTownMap:
 	ld [hl], $ff
 	push hl
 	ld a, $1
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld a, [wCurMap]
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
-	coord hl, 1, 0
+	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer
 	ld de, wTileMapBackup
 	ld bc, $10
 	call CopyData
-	ld hl, vSprites + $40
+	ld hl, vSprites tile $04
 	ld de, TownMapCursor
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
 	call CopyVideoDataDouble
@@ -28,7 +28,7 @@ DisplayTownMap:
 	jr .enterLoop
 
 .townMapLoop
-	coord hl, 0, 0
+	hlcoord 0, 0
 	lb bc, 1, 20
 	call ClearScreenArea
 	ld hl, TownMapOrder
@@ -55,7 +55,7 @@ DisplayTownMap:
 	inc de
 	cp $50
 	jr nz, .copyMapName
-	coord hl, 1, 0
+	hlcoord 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld hl, wOAMBuffer + $10
@@ -65,7 +65,7 @@ DisplayTownMap:
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	ld b, a
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
 	jr z, .inputLoop
@@ -77,7 +77,7 @@ DisplayTownMap:
 	jr nz, .pressedDown
 	xor a
 	ld [wTownMapSpriteBlinkingEnabled], a
-	ld [hJoy7], a
+	ldh [hJoy7], a
 	ld [wAnimCounter], a
 	call ExitTownMap
 	pop hl
@@ -118,7 +118,7 @@ LoadTownMap_Nest:
 	push hl
 	call DisplayWildLocations
 	call GetMonName
-	coord hl, 1, 0
+	hlcoord 1, 0
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -140,11 +140,11 @@ LoadTownMap_Fly::
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	ld de, BirdSprite
-	ld hl, vSprites + $40
-	lb bc, BANK(BirdSprite), $c
+	ld hl, vSprites tile $04
+	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
 	ld de, TownMapUpArrow
-	ld hl, vChars1 + $6d0
+	ld hl, vChars1 tile $6d
 	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
@@ -153,41 +153,41 @@ LoadTownMap_Fly::
 	push af
 	ld [hl], $ff
 	push hl
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, ToText
 	call PlaceString
 	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
-	coord de, 18, 0
+	decoord 18, 0
 .townMapFlyLoop
 	ld a, " "
 	ld [de], a
 	push hl
 	push hl
-	coord hl, 3, 0
+	hlcoord 3, 0
 	lb bc, 1, 15
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
 	ld b, $4
 	call DrawPlayerOrBirdSprite ; draw bird sprite
-	coord hl, 3, 0
+	hlcoord 3, 0
 	ld de, wcd6d
 	call PlaceString
 	ld c, 15
 	call DelayFrames
-	coord hl, 18, 0
+	hlcoord 18, 0
 	ld [hl], "▲"
-	coord hl, 19, 0
+	hlcoord 19, 0
 	ld [hl], "▼"
 	pop hl
 .inputLoop
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [hJoy5]
+	ldh a, [hJoy5]
 	ld b, a
 	pop hl
 	and A_BUTTON | B_BUTTON | D_UP | D_DOWN
@@ -219,7 +219,7 @@ LoadTownMap_Fly::
 	ld [hl], a
 	ret
 .pressedUp
-	coord de, 18, 0
+	decoord 18, 0
 	inc hl
 	ld a, [hl]
 	cp $ff
@@ -231,7 +231,7 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList
 	jp .townMapFlyLoop
 .pressedDown
-	coord de, 19, 0
+	decoord 19, 0
 	dec hl
 	ld a, [hl]
 	cp $ff
@@ -278,22 +278,22 @@ LoadTownMap:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld b, $12
 	ld c, $12
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
-	ld de, vChars2 + $600
+	ld de, vChars2 tile $60
 	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon
-	ld de, vSprites + $40
+	ld de, vSprites tile $04
 	ld bc, MonNestIconEnd - MonNestIcon
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
-	coord hl, 0, 0
+	hlcoord 0, 0
 	ld de, CompressedMap
 .nextTile
 	ld a, [de]
@@ -366,7 +366,7 @@ DrawPlayerOrBirdSprite:
 	jp CopyData
 
 DisplayWildLocations:
-	callba FindWildLocationsOfMon
+	farcall FindWildLocationsOfMon
 	call ZeroOutDuplicatesInList
 	ld hl, wOAMBuffer
 	ld de, wTownMapCoords
@@ -395,11 +395,11 @@ DisplayWildLocations:
 	and a ; were any OAM entries written?
 	jr nz, .drawPlayerSprite
 ; if no OAM entries were written, print area unknown text
-	coord hl, 1, 7
+	hlcoord 1, 7
 	ld b, 2
 	ld c, 15
 	call TextBoxBorder
-	coord hl, 2, 9
+	hlcoord 2, 9
 	ld de, AreaUnknownText
 	call PlaceString
 	jr .done

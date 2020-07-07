@@ -1,14 +1,14 @@
 TradeCenter_Script:
 	call EnableAutoTextBoxDrawing
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	ld a, SPRITE_FACING_LEFT
 	jr z, .next
 	ld a, SPRITE_FACING_RIGHT
 .next
-	ld [hSpriteFacingDirection], a
+	ldh [hSpriteFacingDirection], a
 	ld a, $1
-	ld [hSpriteIndex], a
+	ldh [hSpriteIndex], a
 	call SetSpriteFacingDirection
 	ld hl, wd72d
 	bit 0, [hl]
@@ -21,7 +21,7 @@ TradeCenter_Script:
 	ld [hl], a
 	ld a, SPRITE_FACING_LEFT
 	ld [wSprite01StateData1FacingDirection], a
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	ret z
 	ld a, $7

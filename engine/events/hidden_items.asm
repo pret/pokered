@@ -67,9 +67,9 @@ HiddenCoins:
 	and a
 	ret nz
 	xor a
-	ld [hUnusedCoinsByte], a
-	ld [hCoins], a
-	ld [hCoins + 1], a
+	ldh [hUnusedCoinsByte], a
+	ldh [hCoins], a
+	ldh [hCoins + 1], a
 	ld a, [wHiddenObjectFunctionArgument]
 	sub COIN
 	cp 10
@@ -81,19 +81,19 @@ HiddenCoins:
 	jr .bcd100
 .bcd10
 	ld a, $10
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	jr .bcdDone
 .bcd20
 	ld a, $20
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	jr .bcdDone
 .bcd40 ; due to a typo, this is never used
 	ld a, $40
-	ld [hCoins + 1], a
+	ldh [hCoins + 1], a
 	jr .bcdDone
 .bcd100
 	ld a, $1
-	ld [hCoins], a
+	ldh [hCoins], a
 .bcdDone
 	ld de, wPlayerCoins + 1
 	ld hl, hCoins + 1

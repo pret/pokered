@@ -27,7 +27,7 @@ Route16Script0:
 	ResetEventReuseHL EVENT_FIGHT_ROUTE16_SNORLAX
 	jp z, CheckFightingMapTrainers
 	ld a, $a
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, SNORLAX
 	ld [wCurOpponent], a
@@ -51,7 +51,7 @@ Route16Script3:
 	cp $2
 	jr z, .asm_599a8
 	ld a, $b
-	ld [hSpriteIndexOrTextID], a
+	ldh [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_599a8
 	SetEvent EVENT_BEAT_ROUTE16_SNORLAX

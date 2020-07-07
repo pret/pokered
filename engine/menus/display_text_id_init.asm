@@ -5,7 +5,7 @@ DisplayTextIDInit::
 	ld a, [wAutoTextBoxDrawingControl]
 	bit 0, a
 	jr nz, .skipDrawingTextBoxBorder
-	ld a, [hSpriteIndexOrTextID] ; text ID (or sprite ID)
+	ldh a, [hSpriteIndexOrTextID] ; text ID (or sprite ID)
 	and a
 	jr nz, .notStartMenu
 ; if text ID is 0 (i.e. the start menu)
@@ -13,18 +13,18 @@ DisplayTextIDInit::
 ; below this, so this seems unnecessary.
 	CheckEvent EVENT_GOT_POKEDEX
 ; start menu with pokedex
-	coord hl, 10, 0
+	hlcoord 10, 0
 	ld b, $0e
 	ld c, $08
 	jr nz, .drawTextBoxBorder
 ; start menu without pokedex
-	coord hl, 10, 0
+	hlcoord 10, 0
 	ld b, $0c
 	ld c, $08
 	jr .drawTextBoxBorder
 ; if text ID is not 0 (i.e. not the start menu) then do a standard dialogue text box
 .notStartMenu
-	coord hl, 0, 12
+	hlcoord 0, 12
 	ld b, $04
 	ld c, $12
 .drawTextBoxBorder
@@ -38,16 +38,17 @@ DisplayTextIDInit::
 	jr nz, .skipMovingSprites
 	call UpdateSprites
 .skipMovingSprites
-; loop to copy C1X9 (direction the sprite is facing) to C2X9 for each sprite
+; loop to copy [x#SPRITESTATEDATA1_FACINGDIRECTION] to
+; [x#SPRITESTATEDATA2_ORIGFACINGDIRECTION] for each non-player sprite
 ; this is done because when you talk to an NPC, they turn to look your way
 ; the original direction they were facing must be restored after the dialogue is over
 	ld hl, wSprite01StateData1FacingDirection
 	ld c, $0f
 	ld de, $10
 .spriteFacingDirectionCopyLoop
-	ld a, [hl]
+	ld a, [hl] ; x#SPRITESTATEDATA1_FACINGDIRECTION
 	inc h
-	ld [hl], a
+	ld [hl], a ; [x#SPRITESTATEDATA2_ORIGFACINGDIRECTION]
 	dec h
 	add hl, de
 	dec c
@@ -71,8 +72,8 @@ DisplayTextIDInit::
 	ld b, $9c ; window background address
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
-	ld [hWY], a ; put the window on the screen
+	ldh [hWY], a ; put the window on the screen
 	call LoadFontTilePatterns
 	ld a, $01
-	ld [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
+	ldh [hAutoBGTransferEnabled], a ; enable continuous WRAM to VRAM transfer each V-blank
 	ret

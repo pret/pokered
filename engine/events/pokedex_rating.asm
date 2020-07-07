@@ -3,17 +3,17 @@ DisplayDexRating:
 	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hDexRatingNumMonsSeen], a
+	ldh [hDexRatingNumMonsSeen], a
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	ld [hDexRatingNumMonsOwned], a
+	ldh [hDexRatingNumMonsOwned], a
 	ld hl, DexRatingsTable
 .findRating
 	ld a, [hli]
 	ld b, a
-	ld a, [hDexRatingNumMonsOwned]
+	ldh a, [hDexRatingNumMonsOwned]
 	cp b
 	jr c, .foundRating
 	inc hl
@@ -30,14 +30,14 @@ DisplayDexRating:
 	call PrintText
 	pop hl
 	call PrintText
-	callba PlayPokedexRatingSfx
+	farcall PlayPokedexRatingSfx
 	jp WaitForTextScrollButtonPress
 .hallOfFame
 	ld de, wDexRatingNumMonsSeen
-	ld a, [hDexRatingNumMonsSeen]
+	ldh a, [hDexRatingNumMonsSeen]
 	ld [de], a
 	inc de
-	ld a, [hDexRatingNumMonsOwned]
+	ldh a, [hDexRatingNumMonsOwned]
 	ld [de], a
 	inc de
 .copyRatingTextLoop

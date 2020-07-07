@@ -1,37 +1,35 @@
-farcall EQUS "callba"
-
-callba: MACRO
+farcall: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	call Bankswitch
 ENDM
 
-callab: MACRO
+callfar: MACRO
 	ld hl, \1
 	ld b, BANK(\1)
 	call Bankswitch
 ENDM
 
-jpba: MACRO
+farjp: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	jp Bankswitch
 ENDM
 
-jpab: MACRO
+jpfar: MACRO
 	ld hl, \1
 	ld b, BANK(\1)
 	jp Bankswitch
 ENDM
 
 homecall: MACRO
-	ld a, [hLoadedROMBank]
+	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(\1)
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 	call \1
 	pop af
-	ld [hLoadedROMBank], a
+	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
 ENDM

@@ -2,7 +2,7 @@ RemoveGuardDrink::
 	ld hl, GuardDrinksList
 .drinkLoop
 	ld a, [hli]
-	ld [hItemToRemoveID], a
+	ldh [hItemToRemoveID], a
 	and a
 	ret z
 	push hl
@@ -10,6 +10,6 @@ RemoveGuardDrink::
 	call IsItemInBag
 	pop hl
 	jr z, .drinkLoop
-	jpba RemoveItemByID
+	farjp RemoveItemByID
 
 INCLUDE "data/items/guard_drink_items.asm"

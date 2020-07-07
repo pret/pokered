@@ -12,10 +12,10 @@ AddItemToInventory_::
 	push hl
 	push hl
 	ld d, PC_ITEM_CAPACITY ; how many items the PC can hold
-	ld a, wNumBagItems & $FF
+	ld a, LOW(wNumBagItems)
 	cp l
 	jr nz, .checkIfInventoryFull
-	ld a, wNumBagItems >> 8
+	ld a, HIGH(wNumBagItems)
 	cp h
 	jr nz, .checkIfInventoryFull
 ; if the destination is the bag

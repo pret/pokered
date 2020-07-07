@@ -11,7 +11,7 @@ SetDefaultNamesBeforeTitlescreen::
 	ld de, wRivalName
 	call CopyFixedLengthText
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld [wLetterPrintingDelayFlags], a
 	ld hl, wd732
 	ld [hli], a
@@ -24,46 +24,46 @@ SetDefaultNamesBeforeTitlescreen::
 DisplayTitleScreen:
 	call GBPalWhiteOut
 	ld a, $1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	xor a
-	ld [hTilesetType], a
-	ld [hSCX], a
+	ldh [hTilesetType], a
+	ldh [hSCX], a
 	ld a, $40
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
 	ld hl, NintendoCopyrightLogoGraphics
-	ld de, vTitleLogo2 + $100
-	ld bc, $50
+	ld de, vTitleLogo2 tile 16
+	ld bc, 5 tiles
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData2
 	ld hl, GamefreakLogoGraphics
-	ld de, vTitleLogo2 + $100 + $50
-	ld bc, $90
+	ld de, vTitleLogo2 tile (16 + 5)
+	ld bc, 9 tiles
 	ld a, BANK(GamefreakLogoGraphics)
 	call FarCopyData2
 	ld hl, PokemonLogoGraphics
 	ld de, vTitleLogo
-	ld bc, $600
+	ld bc, $60 tiles
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; first chunk
-	ld hl, PokemonLogoGraphics+$600
+	ld hl, PokemonLogoGraphics tile $60
 	ld de, vTitleLogo2
-	ld bc, $100
+	ld bc, $10 tiles
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX
-	ld de, vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
+	ld de, vChars2 tile $60 + (10 tiles - (Version_GFXEnd - Version_GFX) * 2) / 2
 	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call ClearBothBGMaps
 
 ; place tiles for pokemon logo (except for the last row)
-	coord hl, 2, 1
+	hlcoord 2, 1
 	ld a, $80
 	ld de, SCREEN_WIDTH
 	ld c, 6
@@ -81,7 +81,7 @@ DisplayTitleScreen:
 	jr nz, .pokemonLogoTileLoop
 
 ; place tiles for the last row of the pokemon logo
-	coord hl, 2, 7
+	hlcoord 2, 7
 	ld a, $31
 	ld b, $10
 .pokemonLogoLastTileRowLoop
@@ -98,7 +98,7 @@ DisplayTitleScreen:
 	ld [hl], a
 
 ; place tiles for title screen copyright
-	coord hl, 2, 17
+	hlcoord 2, 17
 	ld de, .tileScreenCopyrightTiles
 	ld b, $10
 .tileScreenCopyrightTilesLoop
@@ -126,19 +126,19 @@ ENDC
 
 	ld [wTitleMonSpecies], a
 	call LoadTitleMonSprite
-	ld a, (vBGMap0 + $300) / $100
+	ld a, HIGH(vBGMap0 + $300)
 	call TitleScreenCopyTileMapToVRAM
 	call SaveScreenTilesToBuffer1
 	ld a, $40
-	ld [hWY], a
+	ldh [hWY], a
 	call LoadScreenTilesFromBuffer2
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 	ld b, SET_PAL_TITLE_SCREEN
 	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
-	ld [rOBP0], a
+	ldh [rOBP0], a
 
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
@@ -190,7 +190,7 @@ ENDC
 ; scroll game version in from the right
 	call PrintGameVersionOnTitleScreen
 	ld a, SCREEN_HEIGHT_PX
-	ld [hWY], a
+	ldh [hWY], a
 	ld d, 144
 .scrollTitleScreenGameVersionLoop
 	ld h, d
@@ -205,7 +205,7 @@ ENDC
 	and a
 	jr nz, .scrollTitleScreenGameVersionLoop
 
-	ld a, vBGMap1 / $100
+	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call LoadScreenTilesFromBuffer2
 	call PrintGameVersionOnTitleScreen
@@ -226,7 +226,7 @@ ENDC
 	ld c, 1
 	call CheckForUserInterruption
 	jr c, .finishedWaiting
-	callba TitleScreenAnimateBallIfStarterOut
+	farcall TitleScreenAnimateBallIfStarterOut
 	call TitleScreenPickNewMon
 	jr .awaitUserInterruptionLoop
 
@@ -237,17 +237,17 @@ ENDC
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
-	ld a, vBGMap1 / $100
+	ld a, HIGH(vBGMap1)
 	call TitleScreenCopyTileMapToVRAM
 	call Delay3
 	call LoadGBPal
-	ld a, [hJoyHeld]
+	ldh a, [hJoyHeld]
 	ld b, a
 	and D_UP | SELECT | B_BUTTON
 	cp D_UP | SELECT | B_BUTTON
@@ -255,10 +255,10 @@ ENDC
 	jp MainMenu
 
 .doClearSaveDialogue
-	jpba DoClearSaveDialogue
+	farjp DoClearSaveDialogue
 
 TitleScreenPickNewMon:
-	ld a, vBGMap0 / $100
+	ld a, HIGH(vBGMap0)
 	call TitleScreenCopyTileMapToVRAM
 
 .loop
@@ -280,29 +280,29 @@ TitleScreenPickNewMon:
 	call LoadTitleMonSprite
 
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld d, 1 ; scroll out
-	callba TitleScroll
+	farcall TitleScroll
 	ret
 
 TitleScreenScrollInMon:
 	ld d, 0 ; scroll in
-	callba TitleScroll
+	farcall TitleScroll
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ret
 
 ScrollTitleScreenGameVersion:
 .wait
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp l
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a
+	ldh [rSCX], a
 
 .wait2
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp h
 	jr z, .wait2
 	ret
@@ -353,26 +353,26 @@ ClearBothBGMaps:
 LoadTitleMonSprite:
 	ld [wcf91], a
 	ld [wd0b5], a
-	coord hl, 5, 10
+	hlcoord 5, 10
 	call GetMonHeader
 	jp LoadFrontSpriteByMonIndex
 
 TitleScreenCopyTileMapToVRAM:
-	ld [hAutoBGTransferDest + 1], a
+	ldh [hAutoBGTransferDest + 1], a
 	jp Delay3
 
 LoadCopyrightAndTextBoxTiles:
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
 LoadCopyrightTiles:
 	ld de, NintendoCopyrightLogoGraphics
-	ld hl, vChars2 + $600
+	ld hl, vChars2 tile $60
 	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
-	coord hl, 2, 7
+	hlcoord 2, 7
 	ld de, CopyrightTextString
 	jp PlaceString
 
@@ -386,7 +386,7 @@ INCLUDE "data/pokemon/title_mons.asm"
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen:
-	coord hl, 7, 8
+	hlcoord 7, 8
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 

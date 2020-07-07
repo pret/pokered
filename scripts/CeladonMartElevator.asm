@@ -60,7 +60,7 @@ CeladonMartElevatorWarpMaps:
 CeladonMartElevatorWarpMapsEnd:
 
 CeladonMartElevatorScript_48654:
-	jpba ShakeElevator
+	farjp ShakeElevator
 
 CeladonMartElevator_TextPointers:
 	dw CeladonMartElevatorText1

@@ -31,19 +31,19 @@ LoadMissableObjects:
 	sub d
 	ld h, a
 	ld a, h
-	ld [hDividend], a
+	ldh [hDividend], a
 	ld a, l
-	ld [hDividend+1], a
+	ldh [hDividend+1], a
 	xor a
-	ld [hDividend+2], a
-	ld [hDividend+3], a
+	ldh [hDividend+2], a
+	ldh [hDividend+3], a
 	ld a, $3
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, $2
 	call Divide                ; divide difference by 3, resulting in the global offset (number of missable items before ours)
 	ld a, [wCurMap]
 	ld b, a
-	ld a, [hDividend+3]
+	ldh a, [hDividend+3]
 	ld c, a                    ; store global offset in c
 	ld de, wMissableObjectList
 	pop hl
@@ -99,7 +99,7 @@ InitializeMissableObjectsFlags:
 
 ; tests if current sprite is a missable object that is hidden/has been removed
 IsObjectHidden:
-	ld a, [hCurrentSpriteOffset]
+	ldh a, [hCurrentSpriteOffset]
 	swap a
 	ld b, a
 	ld hl, wMissableObjectList
@@ -120,7 +120,7 @@ IsObjectHidden:
 .notHidden
 	xor a
 .hidden
-	ld [hIsHiddenMissableObject], a
+	ldh [hIsHiddenMissableObject], a
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map

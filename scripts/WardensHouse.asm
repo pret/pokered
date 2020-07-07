@@ -32,8 +32,8 @@ FuchsiaHouse2Text1:
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
-	ld [hItemToRemoveID], a
-	callba RemoveItemByID
+	ldh [hItemToRemoveID], a
+	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
 .asm_60cba
 	ld hl, WardenThankYouText
@@ -95,7 +95,7 @@ HM04NoRoomText:
 FuchsiaHouse2Text5:
 FuchsiaHouse2Text4:
 	text_asm
-	ld a, [hSpriteIndex]
+	ldh a, [hSpriteIndex]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
 	jr nz, .asm_4c9a2

@@ -270,7 +270,7 @@ SECTION "Text 11", ROMX
 INCLUDE "data/text/text_7.asm"
 
 
-SECTION "Pokedex Text", ROMX
+SECTION "Pokédex Text", ROMX
 
 INCLUDE "data/pokemon/dex_text.asm"
 

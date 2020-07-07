@@ -25,10 +25,10 @@
 	const Ch8 ; 7
 
 ; HW sound channel register base addresses
-HW_CH1_BASE EQU (rNR10 % $100)
-HW_CH2_BASE EQU ((rNR21 % $100) - 1)
-HW_CH3_BASE EQU (rNR30 % $100)
-HW_CH4_BASE EQU ((rNR41 % $100) - 1)
+HW_CH1_BASE EQU LOW(rNR10)
+HW_CH2_BASE EQU LOW(rNR21) - 1
+HW_CH3_BASE EQU LOW(rNR30)
+HW_CH4_BASE EQU LOW(rNR41) - 1
 
 ; HW sound channel enable bit masks
 HW_CH1_ENABLE_MASK EQU %00010001

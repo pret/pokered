@@ -1,7 +1,7 @@
 RGB: MACRO
 REPT _NARG / 3
 	dw palred (\1) + palgreen (\2) + palblue (\3)
-	shift 3
+	SHIFT 3
 ENDR
 ENDM
 

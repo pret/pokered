@@ -58,7 +58,7 @@ CheckForHiddenObject::
 	ld [wHiddenObjectX], a
 	ld c, a
 	call CheckIfCoordsInFrontOfPlayerMatch
-	ld a, [hCoordsInFrontOfPlayerMatch]
+	ldh a, [hCoordsInFrontOfPlayerMatch]
 	and a
 	jr z, .foundMatchingObject
 	inc hl
@@ -81,7 +81,7 @@ CheckForHiddenObject::
 	ret
 .noMatch
 	ld a, $ff
-	ld [hDidntFindAnyHiddenObject], a
+	ldh [hDidntFindAnyHiddenObject], a
 	ret
 
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
@@ -127,7 +127,7 @@ CheckIfCoordsInFrontOfPlayerMatch:
 .didNotMatch
 	ld a, $ff
 .done
-	ld [hCoordsInFrontOfPlayerMatch], a
+	ldh [hCoordsInFrontOfPlayerMatch], a
 	ret
 
 INCLUDE "data/events/hidden_objects.asm"

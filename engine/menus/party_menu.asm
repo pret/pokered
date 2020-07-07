@@ -19,22 +19,22 @@
 ; f8: leveled up
 DrawPartyMenu_::
 	xor a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call ClearScreen
 	call UpdateSprites
-	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
+	farcall LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
 RedrawPartyMenu_::
 	ld a, [wPartyMenuTypeOrMessageID]
 	cp SWAP_MONS_PARTY_MENU
 	jp z, .printMessage
 	call ErasePartyMenuCursors
-	callba InitPartyMenuBlkPacket
-	coord hl, 3, 0
+	farcall InitPartyMenuBlkPacket
+	hlcoord 3, 0
 	ld de, wPartySpecies
 	xor a
 	ld c, a
-	ld [hPartyMonIndex], a
+	ldh [hPartyMonIndex], a
 	ld [wWhichPartyMenuHPBar], a
 .loop
 	ld a, [de]
@@ -49,11 +49,11 @@ RedrawPartyMenu_::
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	callba WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
-	ld a, [hPartyMonIndex]
+	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+	ldh a, [hPartyMonIndex]
 	ld [wWhichPokemon], a
 	inc a
-	ld [hPartyMonIndex], a
+	ldh [hPartyMonIndex], a
 	call LoadMonData
 	pop hl
 	push hl
@@ -88,14 +88,14 @@ RedrawPartyMenu_::
 	pop hl
 	push hl
 	ld bc, SCREEN_WIDTH + 1 ; down 1 row and right 1 column
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	set 0, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	add hl, bc
 	predef DrawHP2 ; draw HP bar and prints current / max HP
-	ld a, [hFlagsFFF6]
+	ldh a, [hFlagsFFF6]
 	res 0, a
-	ld [hFlagsFFF6], a
+	ldh [hFlagsFFF6], a
 	call SetPartyMenuHPBarColor ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
@@ -213,7 +213,7 @@ RedrawPartyMenu_::
 	pop af
 	ld [hl], a
 	ld a, 1
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	call Delay3
 	jp GBPalNormal
 .printItemUseMessage

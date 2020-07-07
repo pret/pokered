@@ -38,7 +38,7 @@ EvolveTradeMon:
 	ld [wForceEvolution], a
 	ld a, LINK_STATE_TRADING
 	ld [wLinkState], a
-	callab TryEvolvingMon
+	callfar TryEvolvingMon
 	xor a ; LINK_STATE_NONE
 	ld [wLinkState], a
 	jp PlayDefaultMusic

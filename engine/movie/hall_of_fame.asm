@@ -19,12 +19,12 @@ AnimateHallOfFame:
 	call FillMemory
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [hTilesetType], a
+	ldh [hTilesetType], a
 	ld [wSpriteFlipped], a
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon
 	inc a
-	ld [hAutoBGTransferEnabled], a
+	ldh [hAutoBGTransferEnabled], a
 	ld hl, wNumHoFTeams
 	ld a, [hl]
 	inc a
@@ -32,7 +32,7 @@ AnimateHallOfFame:
 	inc [hl]
 .skipInc
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -57,11 +57,11 @@ AnimateHallOfFame:
 	call HoFDisplayAndRecordMonInfo
 	ld c, 80
 	call DelayFrames
-	coord hl, 2, 13
+	hlcoord 2, 13
 	ld b, 3
 	ld c, 14
 	call TextBoxBorder
-	coord hl, 4, 15
+	hlcoord 4, 15
 	ld de, HallOfFameText
 	call PlaceString
 	ld c, 180
@@ -86,7 +86,7 @@ AnimateHallOfFame:
 	call HoFDisplayPlayerStats
 	call HoFFadeOutScreenAndMusic
 	xor a
-	ld [hWY], a
+	ldh [hWY], a
 	ld hl, rLCDC
 	res 3, [hl]
 	ret
@@ -97,9 +97,9 @@ HallOfFameText:
 HoFShowMonOrPlayer:
 	call ClearScreen
 	ld a, $d0
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld a, $c0
-	ld [hSCX], a
+	ldh [hSCX], a
 	ld a, [wHoFMonSpecies]
 	ld [wcf91], a
 	ld [wd0b5], a
@@ -112,7 +112,7 @@ HoFShowMonOrPlayer:
 	call HoFLoadPlayerPics
 	jr .next1
 .showMon
-	coord hl, 12, 5
+	hlcoord 12, 5
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
@@ -121,7 +121,7 @@ HoFShowMonOrPlayer:
 	ld c, 0
 	call RunPaletteCommand
 	ld a, %11100100
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld c, $31 ; back pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, $a0
@@ -133,7 +133,7 @@ HoFShowMonOrPlayer:
 .next2
 	call .ScrollPic ; scroll back pic left
 	xor a
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld c, a ; front pic
 	call HoFLoadMonPlayerPicTileIDs
 	ld d, 0
@@ -142,9 +142,9 @@ HoFShowMonOrPlayer:
 
 .ScrollPic
 	call DelayFrame
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	add e
-	ld [hSCX], a
+	ldh [hSCX], a
 	cp d
 	jr nz, .ScrollPic
 	ret
@@ -157,22 +157,22 @@ HoFDisplayAndRecordMonInfo:
 	jp HoFRecordMonInfo
 
 HoFDisplayMonInfo:
-	coord hl, 0, 2
+	hlcoord 0, 2
 	ld b, 9
 	ld c, 10
 	call TextBoxBorder
-	coord hl, 2, 6
+	hlcoord 2, 6
 	ld de, HoFMonInfoText
 	call PlaceString
-	coord hl, 1, 4
+	hlcoord 1, 4
 	ld de, wcd6d
 	call PlaceString
 	ld a, [wHoFMonLevel]
-	coord hl, 8, 7
+	hlcoord 8, 7
 	call PrintLevelCommon
 	ld a, [wHoFMonSpecies]
 	ld [wd0b5], a
-	coord hl, 3, 9
+	hlcoord 3, 9
 	predef PrintMonType
 	ld a, [wHoFMonSpecies]
 	jp PlayCry
@@ -203,27 +203,27 @@ HoFLoadPlayerPics:
 HoFLoadMonPlayerPicTileIDs:
 ; c = base tile ID
 	ld b, 0
-	coord hl, 12, 5
+	hlcoord 12, 5
 	predef_jump CopyTileIDsFromList
 
 HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
-	coord hl, 0, 4
+	hlcoord 0, 4
 	ld b, 6
 	ld c, 10
 	call TextBoxBorder
-	coord hl, 5, 0
+	hlcoord 5, 0
 	ld b, 2
 	ld c, 9
 	call TextBoxBorder
-	coord hl, 7, 2
+	hlcoord 7, 2
 	ld de, wPlayerName
 	call PlaceString
-	coord hl, 1, 6
+	hlcoord 1, 6
 	ld de, HoFPlayTimeText
 	call PlaceString
-	coord hl, 5, 7
+	hlcoord 5, 7
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
@@ -232,10 +232,10 @@ HoFDisplayPlayerStats:
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
-	coord hl, 1, 9
+	hlcoord 1, 9
 	ld de, HoFMoneyText
 	call PlaceString
-	coord hl, 4, 10
+	hlcoord 4, 10
 	ld de, wPlayerMoney
 	ld c, $a3
 	call PrintBCDNumber

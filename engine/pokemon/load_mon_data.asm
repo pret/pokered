@@ -15,7 +15,7 @@ LoadMonData_::
 
 	ld a, [wWhichPokemon]
 	ld e, a
-	callab GetMonSpecies
+	callfar GetMonSpecies
 
 .GetMonHeader
 	ld a, [wcf91]
