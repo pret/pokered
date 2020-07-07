@@ -3255,14 +3255,14 @@ PrintGhostText:
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .Ghost
-	ld a, [wBattleMonStatus] ; player’s turn
+	ld a, [wBattleMonStatus] ; player's turn
 	and SLP | (1 << FRZ)
 	ret nz
 	ld hl, ScaredText
 	call PrintText
 	xor a
 	ret
-.Ghost ; ghost’s turn
+.Ghost ; ghost's turn
 	ld hl, GetOutText
 	call PrintText
 	xor a

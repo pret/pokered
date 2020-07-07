@@ -425,7 +425,7 @@ ShareMoveAnimations:
 	and a
 	ret z
 
-	; opponent’s turn
+	; opponent's turn
 
 	ld a, [wAnimationID]
 

@@ -31,7 +31,7 @@ PalletTownScript0:
 	call PlaySound
 	ld a, BANK(Music_MeetProfOak)
 	ld c, a
-	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
+	ld a, MUSIC_MEET_PROF_OAK ; "oak appears" music
 	call PlayMusic
 	ld a, $FC
 	ld [wJoyIgnore], a
@@ -76,7 +76,7 @@ PalletTownScript2:
 	predef CalcPositionOfPlayerRelativeToNPC
 	ld hl, hNPCPlayerYDistance
 	dec [hl]
-	predef FindPathToPlayer ; load Oak’s movement into wNPCMovementDirections2
+	predef FindPathToPlayer ; load Oak's movement into wNPCMovementDirections2
 	ld de, wNPCMovementDirections2
 	ld a, 1 ; oak
 	ldh [hSpriteIndex], a
@@ -205,10 +205,10 @@ PalletTownText5: ; sign by fence
 	text_far _PalletTownText5
 	text_end
 
-PalletTownText6: ; sign by Red’s house
+PalletTownText6: ; sign by Red's house
 	text_far _PalletTownText6
 	text_end
 
-PalletTownText7: ; sign by Blue’s house
+PalletTownText7: ; sign by Blue's house
 	text_far _PalletTownText7
 	text_end

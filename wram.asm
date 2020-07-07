@@ -2295,7 +2295,7 @@ wCurrentTileBlockMapViewPointer::
 	ds 2
 
 wYCoord::
-; player’s position on the current map
+; player's position on the current map
 	ds 1
 
 wXCoord::
