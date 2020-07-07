@@ -111,13 +111,13 @@ CloseTextDisplay::
 	xor a
 	ldh [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
-	ld hl, wSprite01StateData2 + 9 ; should be wSprite01StateData1FacingDirection?
+	ld hl, wSprite01StateData2OrigFacingDirection
 	ld c, $0f
 	ld de, $10
 .restoreSpriteFacingDirectionLoop
-	ld a, [hl]
+	ld a, [hl] ; x#SPRITESTATEDATA2_ORIGFACINGDIRECTION
 	dec h
-	ld [hl], a
+	ld [hl], a ; [x#SPRITESTATEDATA1_FACINGDIRECTION]
 	inc h
 	add hl, de
 	dec c

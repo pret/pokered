@@ -88,7 +88,8 @@ spritestatedata2: MACRO
 \1MovementByte1:: db
 \1GrassPriority:: db
 \1MovementDelay:: db
-	ds 4
+\1OrigFacingDirection:: db
+	ds 3
 \1PictureID:: db
 \1ImageBaseOffset:: db
 	ds 1

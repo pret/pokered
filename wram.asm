@@ -206,7 +206,7 @@ wSpriteStateData2::
 ; - 6: movement byte 1 (determines whether a sprite can move, $ff:not moving, $fe:random movements, others unknown)
 ; - 7: (?) (set to $80 when in grass, else $0; may be used to draw grass above the sprite)
 ; - 8: delay until next movement (counted downwards, movement status is set to ready if reached 0)
-; - 9
+; - 9: original facing direction (backed up by DisplayTextIDInit, restored by CloseTextDisplay)
 ; - A
 ; - B
 ; - C
