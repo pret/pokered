@@ -37,7 +37,7 @@ args = parser.parse_args()
 # Get list of object files
 objects = None
 if args.rootdir:
-    for line in Popen(["make", "-C", args.rootdir, "-s", "-p"],
+    for line in Popen(["make", "-C", args.rootdir, "-s", "-p", "DEBUG=1"],
             stdout=PIPE).stdout.read().decode().split("\n"):
         if line.startswith("pokered_obj := "):
             objects = line[15:].strip().split()

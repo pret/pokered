@@ -19,7 +19,7 @@ before_script:
       fi;
     }
 script:
-  - make -j2 compare
+  - make DEBUG=1 -j2 compare
   - check_status
 after_success:
   - |-
