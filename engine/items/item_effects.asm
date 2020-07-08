@@ -1525,9 +1525,7 @@ ItemUseEscapeRope:
 .notUsable
 	jp ItemUseNotTime
 
-EscapeRopeTilesets:
-	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
-	db $ff ; terminator
+INCLUDE "data/tilesets/escape_rope_tilesets.asm"
 
 ItemUseRepel:
 	ld b, 100
