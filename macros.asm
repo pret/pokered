@@ -1,4 +1,4 @@
-INCLUDE "macros/enum.asm"
+INCLUDE "macros/const.asm"
 INCLUDE "macros/predef.asm"
 INCLUDE "macros/farcall.asm"
 INCLUDE "macros/data.asm"
