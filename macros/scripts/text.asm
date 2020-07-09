@@ -149,7 +149,7 @@ text_far: MACRO
 ENDM
 
 
-	const_def $50
+	const_next $50
 
 	const TX_END ; $50
 text_end: MACRO
@@ -158,40 +158,11 @@ ENDM
 
 
 ; Text script IDs (see home/text_script.asm)
-	const_def $f5
+	const_def -1, -1
 
-	const TX_SCRIPT_VENDING_MACHINE ; $f5
-script_vending_machine: MACRO
-	db TX_SCRIPT_VENDING_MACHINE
-ENDM
-
-	const TX_SCRIPT_CABLE_CLUB_RECEPTIONIST ; $f6
-script_cable_club_receptionist: MACRO
-	db TX_SCRIPT_CABLE_CLUB_RECEPTIONIST
-ENDM
-
-	const TX_SCRIPT_PRIZE_VENDOR ; $f7
-script_prize_vendor: MACRO
-	db TX_SCRIPT_PRIZE_VENDOR
-ENDM
-
-	const_def $f9
-
-	const TX_SCRIPT_POKECENTER_PC ; $f9
-script_pokecenter_pc: MACRO
-	db TX_SCRIPT_POKECENTER_PC
-ENDM
-
-	const_def $fc
-
-	const TX_SCRIPT_PLAYERS_PC ; $fc
-script_players_pc: MACRO
-	db TX_SCRIPT_PLAYERS_PC
-ENDM
-
-	const TX_SCRIPT_BILLS_PC ; $fd
-script_bills_pc: MACRO
-	db TX_SCRIPT_BILLS_PC
+	const TX_SCRIPT_POKECENTER_NURSE ; $ff
+script_pokecenter_nurse: MACRO
+	db TX_SCRIPT_POKECENTER_NURSE
 ENDM
 
 	const TX_SCRIPT_MART ; $fe
@@ -205,7 +176,38 @@ ENDR
 	db -1 ; end
 ENDM
 
-	const TX_SCRIPT_POKECENTER_NURSE ; $ff
-script_pokecenter_nurse: MACRO
-	db TX_SCRIPT_POKECENTER_NURSE
+	const TX_SCRIPT_BILLS_PC ; $fd
+script_bills_pc: MACRO
+	db TX_SCRIPT_BILLS_PC
+ENDM
+
+	const TX_SCRIPT_PLAYERS_PC ; $fc
+script_players_pc: MACRO
+	db TX_SCRIPT_PLAYERS_PC
+ENDM
+
+	const_skip ; $fb
+
+	const_skip ; $fa
+
+	const TX_SCRIPT_POKECENTER_PC ; $f9
+script_pokecenter_pc: MACRO
+	db TX_SCRIPT_POKECENTER_PC
+ENDM
+
+	const_skip ; $f8
+
+	const TX_SCRIPT_PRIZE_VENDOR ; $f7
+script_prize_vendor: MACRO
+	db TX_SCRIPT_PRIZE_VENDOR
+ENDM
+
+	const TX_SCRIPT_CABLE_CLUB_RECEPTIONIST ; $f6
+script_cable_club_receptionist: MACRO
+	db TX_SCRIPT_CABLE_CLUB_RECEPTIONIST
+ENDM
+
+	const TX_SCRIPT_VENDING_MACHINE ; $f5
+script_vending_machine: MACRO
+	db TX_SCRIPT_VENDING_MACHINE
 ENDM

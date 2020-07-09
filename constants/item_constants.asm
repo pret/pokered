@@ -100,7 +100,7 @@ SAFARI_ROCK           EQU $16 ; overload
 	const FLOOR_11F     ; $60
 	const FLOOR_B4F     ; $61
 
-const_value = $C4
+	const_next $C4
 
 ; HMs are defined before TMs, so the actual number of TM definitions
 ; is not yet available. The TM quantity is hard-coded here and must

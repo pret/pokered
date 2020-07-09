@@ -10,19 +10,21 @@ HOF_TEAM_CAPACITY EQU 50
 
 ; mon data locations
 ; Note that some values are not supported by all functions that use these values.
-PLAYER_PARTY_DATA EQU 0
-ENEMY_PARTY_DATA  EQU 1
-BOX_DATA          EQU 2
-DAYCARE_DATA      EQU 3
-BATTLE_MON_DATA   EQU 4
+	const_def
+	const PLAYER_PARTY_DATA ; 0
+	const ENEMY_PARTY_DATA  ; 1
+	const BOX_DATA          ; 2
+	const DAYCARE_DATA      ; 3
+	const BATTLE_MON_DATA   ; 4
 
 
 ; See data/pokemon/evos_moves.asm
 
 ; Evolution types
-EV_LEVEL EQU 1
-EV_ITEM  EQU 2
-EV_TRADE EQU 3
+	const_def 1
+	const EV_LEVEL ; 1
+	const EV_ITEM  ; 2
+	const EV_TRADE ; 3
 
 MAX_EVOLUTIONS EQU 3
 EVOLUTION_SIZE EQU 4

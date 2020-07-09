@@ -1,7 +1,8 @@
 ; emotion bubbles
-EXCLAMATION_BUBBLE EQU 0
-QUESTION_BUBBLE    EQU 1
-SMILE_BUBBLE       EQU 2
+	const_def
+	const EXCLAMATION_BUBBLE ; 0
+	const QUESTION_BUBBLE    ; 1
+	const SMILE_BUBBLE       ; 2
 
 ; slot symbols
 SLOTS7      EQU $0200

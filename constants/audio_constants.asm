@@ -42,18 +42,20 @@ HW_CH2_DISABLE_MASK EQU (~HW_CH2_ENABLE_MASK & $ff)
 HW_CH3_DISABLE_MASK EQU (~HW_CH3_ENABLE_MASK & $ff)
 HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
 
-REG_DUTY_SOUND_LEN  EQU 1
-REG_VOLUME_ENVELOPE EQU 2
-REG_FREQUENCY_LO    EQU 3
+	const_def 1
+	const REG_DUTY_SOUND_LEN  ; 1
+	const REG_VOLUME_ENVELOPE ; 2
+	const REG_FREQUENCY_LO    ; 3
 
 ; wChannelFlags1 constants
-BIT_PERFECT_PITCH          EQU 0 ; controlled by toggle_perfect_pitch command
-BIT_SOUND_CALL             EQU 1 ; if in sound call
-BIT_NOISE_OR_SFX           EQU 2 ; if channel is the music noise channel or an SFX channel
-BIT_VIBRATO_DIRECTION      EQU 3 ; if the pitch is above or below normal (cycles)
-BIT_PITCH_SLIDE_ON         EQU 4 ; if pitch slide is active
-BIT_PITCH_SLIDE_DECREASING EQU 5 ; if the pitch slide frequency is decreasing (instead of increasing)
-BIT_ROTATE_DUTY_CYCLE      EQU 6 ; if rotating duty cycle
+	const_def
+	const BIT_PERFECT_PITCH          ; 0 ; controlled by toggle_perfect_pitch command
+	const BIT_SOUND_CALL             ; 1 ; if in sound call
+	const BIT_NOISE_OR_SFX           ; 2 ; if channel is the music noise channel or an SFX channel
+	const BIT_VIBRATO_DIRECTION      ; 3 ; if the pitch is above or below normal (cycles)
+	const BIT_PITCH_SLIDE_ON         ; 4 ; if pitch slide is active
+	const BIT_PITCH_SLIDE_DECREASING ; 5 ; if the pitch slide frequency is decreasing (instead of increasing)
+	const BIT_ROTATE_DUTY_CYCLE      ; 6 ; if rotating duty cycle
 
 ; wChannelFlags2 constant (only has one flag)
 BIT_EXECUTE_MUSIC EQU 0 ; if in execute music

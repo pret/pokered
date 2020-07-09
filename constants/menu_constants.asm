@@ -2,34 +2,45 @@ BAG_ITEM_CAPACITY EQU 20
 PC_ITEM_CAPACITY  EQU 50
 
 ; text box IDs
-MESSAGE_BOX                       EQU $01
-FIELD_MOVE_MON_MENU               EQU $04
-JP_MOCHIMONO_MENU_TEMPLATE        EQU $05
-USE_TOSS_MENU_TEMPLATE            EQU $06
-JP_SAVE_MESSAGE_MENU_TEMPLATE     EQU $08
-JP_SPEED_OPTIONS_MENU_TEMPLATE    EQU $09
-BATTLE_MENU_TEMPLATE              EQU $0b
-SWITCH_STATS_CANCEL_MENU_TEMPLATE EQU $0c
-LIST_MENU_BOX                     EQU $0d
-BUY_SELL_QUIT_MENU_TEMPLATE       EQU $0e
-MONEY_BOX_TEMPLATE                EQU $0f
-MON_SPRITE_POPUP                  EQU $11
-JP_AH_MENU_TEMPLATE               EQU $12
-MONEY_BOX                         EQU $13
-TWO_OPTION_MENU                   EQU $14
-BUY_SELL_QUIT_MENU                EQU $15
-JP_POKEDEX_MENU_TEMPLATE          EQU $1a
-SAFARI_BATTLE_MENU_TEMPLATE       EQU $1b
+	const_def 1
+	const MESSAGE_BOX                       ; $01
+	const_skip                              ; $02
+	const_skip                              ; $03
+	const FIELD_MOVE_MON_MENU               ; $04
+	const JP_MOCHIMONO_MENU_TEMPLATE        ; $05
+	const USE_TOSS_MENU_TEMPLATE            ; $06
+	const_skip                              ; $07
+	const JP_SAVE_MESSAGE_MENU_TEMPLATE     ; $08
+	const JP_SPEED_OPTIONS_MENU_TEMPLATE    ; $09
+	const_skip                              ; $0a
+	const BATTLE_MENU_TEMPLATE              ; $0b
+	const SWITCH_STATS_CANCEL_MENU_TEMPLATE ; $0c
+	const LIST_MENU_BOX                     ; $0d
+	const BUY_SELL_QUIT_MENU_TEMPLATE       ; $0e
+	const MONEY_BOX_TEMPLATE                ; $0f
+	const_skip                              ; $10
+	const MON_SPRITE_POPUP                  ; $11
+	const JP_AH_MENU_TEMPLATE               ; $12
+	const MONEY_BOX                         ; $13
+	const TWO_OPTION_MENU                   ; $14
+	const BUY_SELL_QUIT_MENU                ; $15
+	const_skip                              ; $16
+	const_skip                              ; $17
+	const_skip                              ; $18
+	const_skip                              ; $19
+	const JP_POKEDEX_MENU_TEMPLATE          ; $1a
+	const SAFARI_BATTLE_MENU_TEMPLATE       ; $1b
 
 ; two option menu constants
-YES_NO_MENU       EQU 0
-NORTH_WEST_MENU   EQU 1
-SOUTH_EAST_MENU   EQU 2
-WIDE_YES_NO_MENU  EQU 3
-NORTH_EAST_MENU   EQU 4
-TRADE_CANCEL_MENU EQU 5
-HEAL_CANCEL_MENU  EQU 6
-NO_YES_MENU       EQU 7
+	const_def
+	const YES_NO_MENU       ; 0
+	const NORTH_WEST_MENU   ; 1
+	const SOUTH_EAST_MENU   ; 2
+	const WIDE_YES_NO_MENU  ; 3
+	const NORTH_EAST_MENU   ; 4
+	const TRADE_CANCEL_MENU ; 5
+	const HEAL_CANCEL_MENU  ; 6
+	const NO_YES_MENU       ; 7
 
 ; menu exit method constants for list menus and the buy/sell/quit menu
 CHOSE_MENU_ITEM   EQU 1 ; pressed A
@@ -40,31 +51,35 @@ CHOSE_FIRST_ITEM  EQU 1
 CHOSE_SECOND_ITEM EQU 2
 
 ; move mon constants
-BOX_TO_PARTY     EQU 0
-PARTY_TO_BOX     EQU 1
-DAYCARE_TO_PARTY EQU 2
-PARTY_TO_DAYCARE EQU 3
+	const_def
+	const BOX_TO_PARTY     ; 0
+	const PARTY_TO_BOX     ; 1
+	const DAYCARE_TO_PARTY ; 2
+	const PARTY_TO_DAYCARE ; 3
 
 ; party menu types
-NORMAL_PARTY_MENU    EQU 0
-USE_ITEM_PARTY_MENU  EQU 1
-BATTLE_PARTY_MENU    EQU 2
-TMHM_PARTY_MENU      EQU 3
-SWAP_MONS_PARTY_MENU EQU 4
-EVO_STONE_PARTY_MENU EQU 5
+	const_def
+	const NORMAL_PARTY_MENU    ; 0
+	const USE_ITEM_PARTY_MENU  ; 1
+	const BATTLE_PARTY_MENU    ; 2
+	const TMHM_PARTY_MENU      ; 3
+	const SWAP_MONS_PARTY_MENU ; 4
+	const EVO_STONE_PARTY_MENU ; 5
 
 ; party menu message IDs
-ANTIDOTE_MSG     EQU $F0
-BURN_HEAL_MSG    EQU $F1
-ICE_HEAL_MSG     EQU $F2
-AWAKENING_MSG    EQU $F3
-PARALYZ_HEAL_MSG EQU $F4
-POTION_MSG       EQU $F5
-FULL_HEAL_MSG    EQU $F6
-REVIVE_MSG       EQU $F7
-RARE_CANDY_MSG   EQU $F8
+	const_def $F0
+	const ANTIDOTE_MSG     ; $F0
+	const BURN_HEAL_MSG    ; $F1
+	const ICE_HEAL_MSG     ; $F2
+	const AWAKENING_MSG    ; $F3
+	const PARALYZ_HEAL_MSG ; $F4
+	const POTION_MSG       ; $F5
+	const FULL_HEAL_MSG    ; $F6
+	const REVIVE_MSG       ; $F7
+	const RARE_CANDY_MSG   ; $F8
 
 ; naming screen types
-NAME_PLAYER_SCREEN EQU 0
-NAME_RIVAL_SCREEN  EQU 1
-NAME_MON_SCREEN    EQU 2
+	const_def
+	const NAME_PLAYER_SCREEN ; 0
+	const NAME_RIVAL_SCREEN  ; 1
+	const NAME_MON_SCREEN    ; 2

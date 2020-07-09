@@ -9,9 +9,10 @@ NUM_DVS       EQU 2
 BIT_TEST_BATTLE EQU 0
 
 ; battle type constants
-BATTLE_TYPE_NORMAL  EQU 0
-BATTLE_TYPE_OLD_MAN EQU 1
-BATTLE_TYPE_SAFARI  EQU 2
+	const_def
+	const BATTLE_TYPE_NORMAL  ; 0
+	const BATTLE_TYPE_OLD_MAN ; 1
+	const BATTLE_TYPE_SAFARI  ; 2
 
 ; damage limits before type effectiveness
 MIN_NEUTRAL_DAMAGE EQU 2
@@ -30,35 +31,39 @@ NO_EFFECT          EQU 00
 
 ; non-volatile statuses
 SLP EQU %111 ; sleep counter
-PSN EQU 3
-BRN EQU 4
-FRZ EQU 5
-PAR EQU 6
+	const_def 3
+	const PSN ; 3
+	const BRN ; 4
+	const FRZ ; 5
+	const PAR ; 6
 
 MAX_STAT_VALUE EQU 999
 
 ; volatile statuses 1
-STORING_ENERGY           EQU 0 ; Bide
-THRASHING_ABOUT          EQU 1 ; e.g. Thrash
-ATTACKING_MULTIPLE_TIMES EQU 2 ; e.g. Double Kick, Fury Attack
-FLINCHED                 EQU 3
-CHARGING_UP              EQU 4 ; e.g. Solar Beam, Fly
-USING_TRAPPING_MOVE      EQU 5 ; e.g. Wrap
-INVULNERABLE             EQU 6 ; charging up Fly/Dig
-CONFUSED                 EQU 7
+	const_def
+	const STORING_ENERGY           ; 0 ; Bide
+	const THRASHING_ABOUT          ; 1 ; e.g. Thrash
+	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
+	const FLINCHED                 ; 3
+	const CHARGING_UP              ; 4 ; e.g. Solar Beam, Fly
+	const USING_TRAPPING_MOVE      ; 5 ; e.g. Wrap
+	const INVULNERABLE             ; 6 ; charging up Fly/Dig
+	const CONFUSED                 ; 7
 
 ; volatile statuses 2
-USING_X_ACCURACY    EQU 0
-PROTECTED_BY_MIST   EQU 1
-GETTING_PUMPED      EQU 2 ; Focus Energy
-;                   EQU 3 ; unused
-HAS_SUBSTITUTE_UP   EQU 4
-NEEDS_TO_RECHARGE   EQU 5 ; Hyper Beam
-USING_RAGE          EQU 6
-SEEDED              EQU 7
+	const_def
+	const USING_X_ACCURACY    ; 0
+	const PROTECTED_BY_MIST   ; 1
+	const GETTING_PUMPED      ; 2 ; Focus Energy
+	const_skip                ; 3 ; unused
+	const HAS_SUBSTITUTE_UP   ; 4
+	const NEEDS_TO_RECHARGE   ; 5 ; Hyper Beam
+	const USING_RAGE          ; 6
+	const SEEDED              ; 7
 
 ; volatile statuses 3
-BADLY_POISONED      EQU 0
-HAS_LIGHT_SCREEN_UP EQU 1
-HAS_REFLECT_UP      EQU 2
-TRANSFORMED         EQU 3
+	const_def
+	const BADLY_POISONED      ; 0
+	const HAS_LIGHT_SCREEN_UP ; 1
+	const HAS_REFLECT_UP      ; 2
+	const TRANSFORMED         ; 3
