@@ -940,17 +940,14 @@ TrainerBattleVictory:
 	ld c, 40
 	call DelayFrames
 	call PrintEndBattleText
-
-; Check if the trainer has been battled at least once
-
-
 ; win money
 	ld hl, MoneyForWinningText
 	call PrintText
-	ld de, wPlayerMoney + 2
-	ld hl, wAmountMoneyWon + 2
-	ld c, $3
-	predef_jump AddBCDPredef
+	ret
+	; ld de, wPlayerMoney + 2
+	; ld hl, wAmountMoneyWon + 2
+	; ld c, $3
+	; predef_jump AddBCDPredef
 
 MoneyForWinningText:
 	text_far _MoneyForWinningText

@@ -186,6 +186,22 @@ EndTrainerBattle::
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ResetButtonPressedAndMapScript
+	; Check if we've fought before. If so, skip actually paying a second time
+	ld a, $2
+	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
+	ld b, FLAG_TEST
+	ld a, [wTrainerHeaderFlagBit]
+	ld c, a
+	call TrainerFlagAction        ; read trainer flag
+	ld a, c
+	and a ; has the trainer already been defeated?
+	jr nz, .MarkTrainerAsBattled
+	; Battle payment
+	ld de, wPlayerMoney + 2
+	ld hl, wAmountMoneyWon + 2
+	ld c, $3
+	predef AddBCDPredef
+.MarkTrainerAsBattled
 	ld a, $2
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
