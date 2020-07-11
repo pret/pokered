@@ -98,7 +98,8 @@ TalkToTrainer::
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
-	jr z, .trainerNotYetFought     ; test trainer's flag
+	;jr z, .trainerNotYetFought     ; test trainer's flag
+	jp .trainerNotYetFought ; Allow re-battling
 	ld a, $6
 	call ReadTrainerHeaderInfo     ; print after battle text
 	jp PrintText

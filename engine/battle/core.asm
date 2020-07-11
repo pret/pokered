@@ -940,6 +940,10 @@ TrainerBattleVictory:
 	ld c, 40
 	call DelayFrames
 	call PrintEndBattleText
+
+; Check if the trainer has been battled at least once
+
+
 ; win money
 	ld hl, MoneyForWinningText
 	call PrintText
