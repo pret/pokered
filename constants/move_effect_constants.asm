@@ -5,7 +5,7 @@
 
 	const_def
 	const NO_ADDITIONAL_EFFECT       ; $00
-	const UNUSED_EFFECT_01           ; $01
+	const_skip                       ; $01
 	const POISON_SIDE_EFFECT1        ; $02
 	const DRAIN_HP_EFFECT            ; $03
 	const BURN_SIDE_EFFECT1          ; $04
@@ -34,12 +34,12 @@
 	const THRASH_PETAL_DANCE_EFFECT  ; $1B
 	const SWITCH_AND_TELEPORT_EFFECT ; $1C
 	const TWO_TO_FIVE_ATTACKS_EFFECT ; $1D
-	const UNUSED_EFFECT_1E           ; $1E
+	const_skip                       ; $1E
 	const FLINCH_SIDE_EFFECT1        ; $1F
 	const SLEEP_EFFECT               ; $20
 	const POISON_SIDE_EFFECT2        ; $21
 	const BURN_SIDE_EFFECT2          ; $22
-	const UNUSED_EFFECT_23           ; $23
+	const_skip                       ; $23
 	const PARALYZE_SIDE_EFFECT2      ; $24
 	const FLINCH_SIDE_EFFECT2        ; $25
 	const OHKO_EFFECT                ; $26 moves like Horn Drill
@@ -76,13 +76,13 @@
 	const DEFENSE_DOWN_SIDE_EFFECT   ; $45
 	const SPEED_DOWN_SIDE_EFFECT     ; $46
 	const SPECIAL_DOWN_SIDE_EFFECT   ; $47
-	const UNUSED_EFFECT_48           ; $48
-	const UNUSED_EFFECT_49           ; $49
-	const UNUSED_EFFECT_4A           ; $4A
-	const UNUSED_EFFECT_4B           ; $4B
+	const_skip                       ; $48
+	const_skip                       ; $49
+	const_skip                       ; $4A
+	const_skip                       ; $4B
 	const CONFUSION_SIDE_EFFECT      ; $4C
 	const TWINEEDLE_EFFECT           ; $4D
-	const UNUSED_EFFECT_4E           ; $4E
+	const_skip                       ; $4E
 	const SUBSTITUTE_EFFECT          ; $4F
 	const HYPER_BEAM_EFFECT          ; $50
 	const RAGE_EFFECT                ; $51

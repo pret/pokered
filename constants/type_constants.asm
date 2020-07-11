@@ -11,7 +11,7 @@ PHYSICAL EQU const_value
 	const BUG          ; $07
 	const GHOST        ; $08
 
-const_value = $14
+	const_next 20
 
 SPECIAL EQU const_value
 	const FIRE         ; $14

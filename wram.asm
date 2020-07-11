@@ -3005,7 +3005,7 @@ wSecondLockTrashCanIndex::
 
 	ds 2
 wEventFlags::
-	ds 320
+	flag_array NUM_EVENTS
 
 wLinkEnemyTrainerName::
 ; linked game's trainer name

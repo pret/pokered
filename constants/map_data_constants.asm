@@ -3,12 +3,14 @@
 MAP_BORDER EQU 3
 
 ; connection directions
-EAST  EQU 1
-WEST  EQU 2
-SOUTH EQU 4
-NORTH EQU 8
+	const_def
+	shift_const EAST  ; 1
+	shift_const WEST  ; 2
+	shift_const SOUTH ; 4
+	shift_const NORTH ; 8
 
 ; tileset environments
-INDOOR  EQU 0
-CAVE    EQU 1
-OUTDOOR EQU 2
+	const_def
+	const INDOOR  ; 0
+	const CAVE    ; 1
+	const OUTDOOR ; 2

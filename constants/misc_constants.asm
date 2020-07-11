@@ -3,6 +3,7 @@ FALSE EQU 0
 TRUE  EQU 1
 
 ; flag operations
-FLAG_RESET EQU 0
-FLAG_SET   EQU 1
-FLAG_TEST  EQU 2
+	const_def
+	const FLAG_RESET ; 0
+	const FLAG_SET   ; 1
+	const FLAG_TEST  ; 2
