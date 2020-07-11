@@ -195,12 +195,12 @@ EndTrainerBattle::
 	call TrainerFlagAction        ; read trainer flag
 	ld a, c
 	and a ; has the trainer already been defeated?
-	jr nz, .MarkTrainerAsBattled
-	; Battle payment
+	jr z, .MarkTrainerAsBattled
+	; Subtract battle money since this trainer has been beat previously
 	ld de, wPlayerMoney + 2
 	ld hl, wAmountMoneyWon + 2
 	ld c, $3
-	predef AddBCDPredef
+	predef SubBCDPredef
 .MarkTrainerAsBattled
 	ld a, $2
 	call ReadTrainerHeaderInfo

@@ -943,11 +943,10 @@ TrainerBattleVictory:
 ; win money
 	ld hl, MoneyForWinningText
 	call PrintText
-	ret
-	; ld de, wPlayerMoney + 2
-	; ld hl, wAmountMoneyWon + 2
-	; ld c, $3
-	; predef_jump AddBCDPredef
+	ld de, wPlayerMoney + 2
+	ld hl, wAmountMoneyWon + 2
+	ld c, $3
+	predef_jump AddBCDPredef
 
 MoneyForWinningText:
 	text_far _MoneyForWinningText
