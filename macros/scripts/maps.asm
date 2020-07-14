@@ -109,7 +109,7 @@ _src = -_tgt
 _tgt = 0
 ENDC
 
-IF "\1" == "north"
+IF !STRCMP("\1", "north")
 _blk = \3_WIDTH * (\3_HEIGHT - 3) + _src
 _map = _tgt
 _win = (\3_WIDTH + 6) * \3_HEIGHT + 1
@@ -120,7 +120,7 @@ IF _len > \3_WIDTH
 _len = \3_WIDTH
 ENDC
 
-ELIF "\1" == "south"
+ELIF !STRCMP("\1", "south")
 _blk = _src
 _map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
 _win = \3_WIDTH + 7
@@ -131,7 +131,7 @@ IF _len > \3_WIDTH
 _len = \3_WIDTH
 ENDC
 
-ELIF "\1" == "west"
+ELIF !STRCMP("\1", "west")
 _blk = (\3_WIDTH * _src) + \3_WIDTH - 3
 _map = (CURRENT_MAP_WIDTH + 6) * _tgt
 _win = (\3_WIDTH + 6) * 2 - 6
@@ -142,7 +142,7 @@ IF _len > \3_HEIGHT
 _len = \3_HEIGHT
 ENDC
 
-ELIF "\1" == "east"
+ELIF !STRCMP("\1", "east")
 _blk = (\3_WIDTH * _src)
 _map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
 _win = \3_WIDTH + 7
