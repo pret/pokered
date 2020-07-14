@@ -1,39 +1,3 @@
-;\1 map width
-;\2 Rows above (Y-blocks)
-;\3 X movement (X-blocks)
-EVENT_DISP: MACRO
-	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\2) >> 1) + ((\3) >> 1)) ; Ev.Disp
-	db \2,\3 ;Y,X
-ENDM
-
-FLYWARP_DATA: MACRO
-	EVENT_DISP \1,\2,\3
-	db ((\2) & $01) ;sub-block Y
-	db ((\3) & $01) ;sub-block X
-ENDM
-
-; external map entry macro
-EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
-; the appearance of towns and routes in the town map, indexed by map id
-	; nybble: y-coordinate
-	; nybble: x-coordinate
-	; word  : pointer to map name
-	dn \2, \1
-	dw \3
-ENDM
-
-; internal map entry macro
-IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
-; the appearance of buildings and dungeons in the town map
-	; byte  : maximum map id subject to this rule
-	; nybble: y-coordinate
-	; nybble: x-coordinate
-	; word  : pointer to map name
-	db \1 + 1
-	dn \3, \2
-	dw \4
-ENDM
-
 ;\1 sprite id
 ;\2 x position
 ;\3 y position
@@ -49,17 +13,15 @@ object: MACRO
 	db \2 + 4
 	db \4
 	db \5
-	IF (_NARG > 7)
+	IF _NARG > 7
 		db TRAINER | \6
 		db \7
 		db \8
+	ELIF _NARG > 6
+		db ITEM | \6
+		db \7
 	ELSE
-		IF (_NARG > 6)
-			db ITEM | \6
-			db \7
-		ELSE
-			db \6
-		ENDC
+		db \6
 	ENDC
 ENDM
 
@@ -82,7 +44,7 @@ ENDM
 ;\2 y position
 ;\3 map width
 warp_to: MACRO
-	EVENT_DISP \3, \2, \1
+	event_displacement \3, \1, \2
 ENDM
 
 ;\1 map name

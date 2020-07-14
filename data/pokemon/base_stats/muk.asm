@@ -11,7 +11,7 @@
 	dw MukPicFront, MukPicBack
 
 	db POUND, DISABLE, POISON_GAS, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        BODY_SLAM,    HYPER_BEAM,   RAGE,         MEGA_DRAIN,   \

@@ -10,17 +10,9 @@ TypeNames:
 	dw .Bug
 	dw .Ghost
 
+REPT FIRE - GHOST - 1
 	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
-	dw .Normal
+ENDR
 
 	dw .Fire
 	dw .Water

@@ -61,9 +61,9 @@ SaffronGymText_5d068:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 5, [hl]
+	set BIT_MARSHBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 5, [hl]
+	set BIT_MARSHBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_SAFFRON_GYM_TRAINER_0, EVENT_BEAT_SAFFRON_GYM_TRAINER_6

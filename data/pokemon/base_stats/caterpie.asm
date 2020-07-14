@@ -11,7 +11,7 @@
 	dw CaterpiePicFront, CaterpiePicBack
 
 	db TACKLE, STRING_SHOT, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm

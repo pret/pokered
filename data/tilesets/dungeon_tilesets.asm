@@ -1,2 +1,13 @@
 DungeonTilesets:
-	db FOREST, MUSEUM, SHIP, CAVERN, LOBBY, MANSION, GATE, LAB, FACILITY, CEMETERY, GYM, $FF
+	db FOREST
+	db MUSEUM
+	db SHIP
+	db CAVERN
+	db LOBBY
+	db MANSION
+	db GATE
+	db LAB
+	db FACILITY
+	db CEMETERY
+	db GYM
+	db -1 ; end

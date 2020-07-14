@@ -11,7 +11,7 @@
 	dw WigglytuffPicFront, WigglytuffPicBack
 
 	db SING, DISABLE, DEFENSE_CURL, DOUBLESLAP ; level 1 learnset
-	db 4 ; growth rate
+	db GROWTH_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \

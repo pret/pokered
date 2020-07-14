@@ -61,9 +61,9 @@ CeruleanGymScript_5c70d:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1

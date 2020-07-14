@@ -6,4 +6,4 @@ UsableItems_CloseMenu:
 	db OLD_ROD
 	db GOOD_ROD
 	db SUPER_ROD
-	db $ff
+	db -1 ; end

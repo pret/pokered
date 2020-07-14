@@ -1,7 +1,10 @@
+vend_item: MACRO
+	db \1
+	money \2
+ENDM
+
 VendingPrices:
-	db FRESH_WATER
-	money 200
-	db SODA_POP
-	money 300
-	db LEMONADE
-	money 350
+; item id, price
+	vend_item FRESH_WATER, 200
+	vend_item SODA_POP,    300
+	vend_item LEMONADE,    350

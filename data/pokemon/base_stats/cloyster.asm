@@ -11,7 +11,7 @@
 	dw CloysterPicFront, CloysterPicBack
 
 	db WITHDRAW, SUPERSONIC, CLAMP, AURORA_BEAM ; level 1 learnset
-	db 5 ; growth rate
+	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    \

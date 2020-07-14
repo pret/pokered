@@ -1,2 +1,7 @@
 BikeRidingTilesets::
-	db OVERWORLD, FOREST, UNDERGROUND, SHIP_PORT, CAVERN, $FF
+	db OVERWORLD
+	db FOREST
+	db UNDERGROUND
+	db SHIP_PORT
+	db CAVERN
+	db -1 ; end

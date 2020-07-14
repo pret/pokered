@@ -11,7 +11,7 @@
 	dw NidorinoPicFront, NidorinoPicBack
 
 	db LEER, TACKLE, HORN_ATTACK, NO_MOVE ; level 1 learnset
-	db 3 ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \

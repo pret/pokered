@@ -11,7 +11,7 @@
 	dw VenusaurPicFront, VenusaurPicBack
 
 	db TACKLE, GROWL, LEECH_SEED, VINE_WHIP ; level 1 learnset
-	db 3 ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \

@@ -1,143 +1,55 @@
+pic_money: MACRO
+	dw \1
+	money \2
+ENDM
+
 TrainerPicAndMoneyPointers::
-; trainer pic pointers and base money.
+; pic pointer, base reward money
 ; money received after battle = base money × level of highest-level enemy mon
-	dw YoungsterPic
-	money 1500
-
-	dw BugCatcherPic
-	money 1000
-
-	dw LassPic
-	money 1500
-
-	dw SailorPic
-	money 3000
-
-	dw JrTrainerMPic
-	money 2000
-
-	dw JrTrainerFPic
-	money 2000
-
-	dw PokemaniacPic
-	money 5000
-
-	dw SuperNerdPic
-	money 2500
-
-	dw HikerPic
-	money 3500
-
-	dw BikerPic
-	money 2000
-
-	dw BurglarPic
-	money 9000
-
-	dw EngineerPic
-	money 5000
-
-	dw JugglerPic
-	money 3500
-
-	dw FisherPic
-	money 3500
-
-	dw SwimmerPic
-	money 500
-
-	dw CueBallPic
-	money 2500
-
-	dw GamblerPic
-	money 7000
-
-	dw BeautyPic
-	money 7000
-
-	dw PsychicPic
-	money 1000
-
-	dw RockerPic
-	money 2500
-
-	dw JugglerPic
-	money 3500
-
-	dw TamerPic
-	money 4000
-
-	dw BirdKeeperPic
-	money 2500
-
-	dw BlackbeltPic
-	money 2500
-
-	dw Rival1Pic
-	money 3500
-
-	dw ProfOakPic
-	money 9900
-
-	dw ChiefPic
-	money 3000
-
-	dw ScientistPic
-	money 5000
-
-	dw GiovanniPic
-	money 9900
-
-	dw RocketPic
-	money 3000
-
-	dw CooltrainerMPic
-	money 3500
-
-	dw CooltrainerFPic
-	money 3500
-
-	dw BrunoPic
-	money 9900
-
-	dw BrockPic
-	money 9900
-
-	dw MistyPic
-	money 9900
-
-	dw LtSurgePic
-	money 9900
-
-	dw ErikaPic
-	money 9900
-
-	dw KogaPic
-	money 9900
-
-	dw BlainePic
-	money 9900
-
-	dw SabrinaPic
-	money 9900
-
-	dw GentlemanPic
-	money 7000
-
-	dw Rival2Pic
-	money 6500
-
-	dw Rival3Pic
-	money 9900
-
-	dw LoreleiPic
-	money 9900
-
-	dw ChannelerPic
-	money 3000
-
-	dw AgathaPic
-	money 9900
-
-	dw LancePic
-	money 9900
+	pic_money YoungsterPic,    1500
+	pic_money BugCatcherPic,   1000
+	pic_money LassPic,         1500
+	pic_money SailorPic,       3000
+	pic_money JrTrainerMPic,   2000
+	pic_money JrTrainerFPic,   2000
+	pic_money PokemaniacPic,   5000
+	pic_money SuperNerdPic,    2500
+	pic_money HikerPic,        3500
+	pic_money BikerPic,        2000
+	pic_money BurglarPic,      9000
+	pic_money EngineerPic,     5000
+	pic_money JugglerPic,      3500
+	pic_money FisherPic,       3500
+	pic_money SwimmerPic,       500
+	pic_money CueBallPic,      2500
+	pic_money GamblerPic,      7000
+	pic_money BeautyPic,       7000
+	pic_money PsychicPic,      1000
+	pic_money RockerPic,       2500
+	pic_money JugglerPic,      3500
+	pic_money TamerPic,        4000
+	pic_money BirdKeeperPic,   2500
+	pic_money BlackbeltPic,    2500
+	pic_money Rival1Pic,       3500
+	pic_money ProfOakPic,      9900
+	pic_money ChiefPic,        3000
+	pic_money ScientistPic,    5000
+	pic_money GiovanniPic,     9900
+	pic_money RocketPic,       3000
+	pic_money CooltrainerMPic, 3500
+	pic_money CooltrainerFPic, 3500
+	pic_money BrunoPic,        9900
+	pic_money BrockPic,        9900
+	pic_money MistyPic,        9900
+	pic_money LtSurgePic,      9900
+	pic_money ErikaPic,        9900
+	pic_money KogaPic,         9900
+	pic_money BlainePic,       9900
+	pic_money SabrinaPic,      9900
+	pic_money GentlemanPic,    7000
+	pic_money Rival2Pic,       6500
+	pic_money Rival3Pic,       9900
+	pic_money LoreleiPic,      9900
+	pic_money ChannelerPic,    3000
+	pic_money AgathaPic,       9900
+	pic_money LancePic,        9900

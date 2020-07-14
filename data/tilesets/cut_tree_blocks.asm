@@ -10,4 +10,4 @@ CutTreeBlockSwaps:
 	db $3C, $35
 	db $3F, $35
 	db $3D, $36
-	db $FF ; list terminator
+	db -1 ; end

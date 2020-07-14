@@ -130,7 +130,7 @@ StartMenu_Pokemon::
 	dw .teleport
 	dw .softboiled
 .fly
-	bit 2, a ; does the player have the Thunder Badge?
+	bit BIT_THUNDERBADGE, a
 	jp z, .newBadgeRequired
 	call CheckIfInOutsideMap
 	jr z, .canFly
@@ -150,7 +150,7 @@ StartMenu_Pokemon::
 	set 1, [hl]
 	jp StartMenu_Pokemon
 .cut
-	bit 1, a ; does the player have the Cascade Badge?
+	bit BIT_CASCADEBADGE, a
 	jp z, .newBadgeRequired
 	predef UsedCut
 	ld a, [wActionResultOrTookBattleTurn]
@@ -158,7 +158,7 @@ StartMenu_Pokemon::
 	jp z, .loop
 	jp CloseTextDisplay
 .surf
-	bit 4, a ; does the player have the Soul Badge?
+	bit BIT_SOULBADGE, a
 	jp z, .newBadgeRequired
 	farcall IsSurfingAllowed
 	ld hl, wd728
@@ -175,13 +175,13 @@ StartMenu_Pokemon::
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .strength
-	bit 3, a ; does the player have the Rainbow Badge?
+	bit BIT_RAINBOWBADGE, a
 	jp z, .newBadgeRequired
 	predef PrintStrengthTxt
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .flash
-	bit 0, a ; does the player have the Boulder Badge?
+	bit BIT_BOULDERBADGE, a
 	jp z, .newBadgeRequired
 	xor a
 	ld [wMapPalOffset], a

@@ -80,9 +80,9 @@ VermilionGymReceiveTM24:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 2, [hl]
+	set BIT_THUNDERBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 2, [hl]
+	set BIT_THUNDERBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_VERMILION_GYM_TRAINER_0, EVENT_BEAT_VERMILION_GYM_TRAINER_2
@@ -247,7 +247,7 @@ VermilionGymAfterBattleText3:
 VermilionGymFanText:
 	text_asm
 	ld a, [wBeatGymFlags]
-	bit 2, a
+	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, VermilionGymFanPreBattleText
 	call PrintText

@@ -1346,12 +1346,12 @@ Audio3_PlaySound::
 	ld [wMusicTempo + 1], a
 	ld [wMusicWaveInstrument], a
 	ld [wSfxWaveInstrument], a
-	ld d, $8
+	ld d, NUM_CHANNELS
 	ld hl, wChannelReturnAddresses
 	call .FillMem
 	ld hl, wChannelCommandPointers
 	call .FillMem
-	ld d, $4
+	ld d, NUM_MUSIC_CHANS
 	ld hl, wChannelSoundIDs
 	call .FillMem
 	ld hl, wChannelFlags1

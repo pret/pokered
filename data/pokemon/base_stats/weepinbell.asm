@@ -11,7 +11,7 @@
 	dw WeepinbellPicFront, WeepinbellPicBack
 
 	db VINE_WHIP, GROWTH, WRAP, NO_MOVE ; level 1 learnset
-	db 3 ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  RAGE,         \

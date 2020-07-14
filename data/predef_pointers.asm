@@ -1,7 +1,10 @@
 add_predef: MACRO
 \1Predef::
-	db BANK(\1)
-	dw \1
+IF _NARG == 1
+	dba \1
+ELSE
+	dbw \2, \1
+ENDC
 ENDM
 
 PredefPointers::
@@ -13,7 +16,7 @@ PredefPointers::
 	add_predef ScaleSpriteByTwo
 	add_predef LoadMonBackPic
 	add_predef CopyDownscaledMonTiles
-	dbw $03,JumpMoveEffect ; wrong bank
+	add_predef JumpMoveEffect, $03 ; wrong bank
 	add_predef HealParty
 	add_predef MoveAnimation
 	add_predef DivideBCDPredef
@@ -36,8 +39,8 @@ PredefPointers::
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef GetQuantityOfItemInBag
-	dbw $03,CheckForHiddenObjectOrBookshelfOrCardKeyDoor ; home bank
-	dbw $03,GiveItem ; home bank
+	add_predef CheckForHiddenObjectOrBookshelfOrCardKeyDoor, $03 ; home bank
+	add_predef GiveItem, $03 ; home bank
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
 	add_predef PredefShakeScreenVertically
@@ -94,8 +97,8 @@ PredefPointers::
 	add_predef DoInGameTradeDialogue
 	add_predef HallOfFamePC
 	add_predef DisplayDexRating
-	dbw $1E, _LeaveMapAnim ; wrong bank
-	dbw $1E, EnterMapAnim ; wrong bank
+	add_predef _LeaveMapAnim, $1E ; wrong bank
+	add_predef EnterMapAnim, $1E ; wrong bank
 	add_predef GetTileTwoStepsInFrontOfPlayer
 	add_predef CheckForCollisionWhenPushingBoulder
 	add_predef PrintStrengthTxt

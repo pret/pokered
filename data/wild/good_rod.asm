@@ -1,3 +1,5 @@
+; random choice of 2 good rod encounters
 GoodRodMons:
-	db 10,GOLDEEN
-	db 10,POLIWAG
+; level, species
+	db 10, GOLDEEN
+	db 10, POLIWAG

@@ -11,7 +11,7 @@
 	dw WeezingPicFront, WeezingPicBack
 
 	db TACKLE, SMOG, SLUDGE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HYPER_BEAM,   RAGE,         THUNDERBOLT,  THUNDER,      \

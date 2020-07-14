@@ -61,9 +61,9 @@ PewterGymScript_5c3df:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
@@ -183,7 +183,7 @@ PewterGymAfterBattleText1:
 PewterGymText3:
 	text_asm
 	ld a, [wBeatGymFlags]
-	bit 0, a
+	bit BIT_BOULDERBADGE, a
 	jr nz, .asm_5c50c
 	ld hl, PewterGymText_5c515
 	call PrintText
