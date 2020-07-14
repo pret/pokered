@@ -24,9 +24,16 @@ WarpTileIDPointers:
 	dw .FacilityWarpTileIDs
 	dw .PlateauWarpTileIDs
 
-.OverworldWarpTileIDs:
-	db $1B, $58
+warp_tiles: MACRO
+REPT _NARG
+	db \1
+	shift
+ENDR
 	db -1 ; end
+ENDM
+
+.OverworldWarpTileIDs:
+	warp_tiles $1B, $58
 
 .ForestGateWarpTileIDs:
 .MuseumWarpTileIDs:
@@ -35,50 +42,39 @@ WarpTileIDPointers:
 	; fallthrough
 .RedsHouse1WarpTileIDs:
 .RedsHouse2WarpTileIDs:
-	db $1A, $1C
-	db -1 ; end
+	warp_tiles $1A, $1C
 
 .MartWarpTileIDs:
 .PokecenterWarpTileIDs:
-	db $5E
-	db -1 ; end
+	warp_tiles $5E
 
 .ForestWarpTileIDs:
-	db $5A, $5C, $3A
-	db -1 ; end
+	warp_tiles $5A, $5C, $3A
 
 .DojoWarpTileIDs:
 .GymWarpTileIDs:
-	db $4A
-	db -1 ; end
+	warp_tiles $4A
 
 .HouseWarpTileIDs:
-	db $54, $5C, $32
-	db -1 ; end
+	warp_tiles $54, $5C, $32
 
 .ShipWarpTileIDs:
-	db $37, $39, $1E, $4A
-	db -1 ; end
+	warp_tiles $37, $39, $1E, $4A
 
 .InteriorWarpTileIDs:
-	db $15, $55, $04
-	db -1 ; end
+	warp_tiles $15, $55, $04
 
 .CavernWarpTileIDs:
-	db $18, $1A, $22
-	db -1 ; end
+	warp_tiles $18, $1A, $22
 
 .LobbyWarpTileIDs:
-	db $1A, $1C, $38
-	db -1 ; end
+	warp_tiles $1A, $1C, $38
 
 .MansionWarpTileIDs:
-	db $1A, $1C, $53
-	db -1 ; end
+	warp_tiles $1A, $1C, $53
 
 .LabWarpTileIDs:
-	db $34
-	db -1 ; end
+	warp_tiles $34
 
 .FacilityWarpTileIDs:
 	db $43, $58, $20
@@ -87,12 +83,11 @@ WarpTileIDPointers:
 	db $1B
 	; fallthrough
 .UndergroundWarpTileIDs:
-	db $13
-	db -1 ; end
+	warp_tiles $13
 
 .PlateauWarpTileIDs:
 	db $1B, $3B
 	; fallthrough
 .ShipPortWarpTileIDs:
 .ClubWarpTileIDs:
-	db -1 ; end
+	warp_tiles ; end
