@@ -47,6 +47,27 @@ warp_to: MACRO
 	event_displacement \3, \1, \2
 ENDM
 
+
+;\1 event flag
+;\2 view range
+;\3 TextBeforeBattle
+;\4 TextAfterBattle
+;\5 TextEndBattle
+trainer: MACRO
+	IF _NARG > 5
+		dbEventFlagBit \1, \2
+		db (\3 << 4)
+		dwEventFlagAddress \1, \2
+		SHIFT
+	ELSE
+		dbEventFlagBit \1
+		db (\2 << 4)
+		dwEventFlagAddress \1
+	ENDC
+	dw \3, \5, \4, \4
+ENDM
+
+
 ;\1 map name
 ;\2 map id
 ;\3 tileset

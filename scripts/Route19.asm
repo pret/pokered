@@ -26,96 +26,26 @@ Route19_TextPointers:
 	dw Route19Text11
 
 Route19TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_0
-	dw Route19BattleText1 ; TextBeforeBattle
-	dw Route19AfterBattleText1 ; TextAfterBattle
-	dw Route19EndBattleText1 ; TextEndBattle
-	dw Route19EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, Route19BattleText1, Route19EndBattleText1, Route19AfterBattleText1
 Route19TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_1
-	dw Route19BattleText2 ; TextBeforeBattle
-	dw Route19AfterBattleText2 ; TextAfterBattle
-	dw Route19EndBattleText2 ; TextEndBattle
-	dw Route19EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, Route19BattleText2, Route19EndBattleText2, Route19AfterBattleText2
 Route19TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_2
-	dw Route19BattleText3 ; TextBeforeBattle
-	dw Route19AfterBattleText3 ; TextAfterBattle
-	dw Route19EndBattleText3 ; TextEndBattle
-	dw Route19EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Route19BattleText3, Route19EndBattleText3, Route19AfterBattleText3
 Route19TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_3
-	dw Route19BattleText4 ; TextBeforeBattle
-	dw Route19AfterBattleText4 ; TextAfterBattle
-	dw Route19EndBattleText4 ; TextEndBattle
-	dw Route19EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Route19BattleText4, Route19EndBattleText4, Route19AfterBattleText4
 Route19TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_4
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_4
-	dw Route19BattleText5 ; TextBeforeBattle
-	dw Route19AfterBattleText5 ; TextAfterBattle
-	dw Route19EndBattleText5 ; TextEndBattle
-	dw Route19EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Route19BattleText5, Route19EndBattleText5, Route19AfterBattleText5
 Route19TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_5
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_5
-	dw Route19BattleText6 ; TextBeforeBattle
-	dw Route19AfterBattleText6 ; TextAfterBattle
-	dw Route19EndBattleText6 ; TextEndBattle
-	dw Route19EndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_5, 4, Route19BattleText6, Route19EndBattleText6, Route19AfterBattleText6
 Route19TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_6
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_6
-	dw Route19BattleText7 ; TextBeforeBattle
-	dw Route19AfterBattleText7 ; TextAfterBattle
-	dw Route19EndBattleText7 ; TextEndBattle
-	dw Route19EndBattleText7 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_6, 3, Route19BattleText7, Route19EndBattleText7, Route19AfterBattleText7
 Route19TrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_7, 1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_7, 1
-	dw Route19BattleText8 ; TextBeforeBattle
-	dw Route19AfterBattleText8 ; TextAfterBattle
-	dw Route19EndBattleText8 ; TextEndBattle
-	dw Route19EndBattleText8 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_7, 1, 4, Route19BattleText8, Route19EndBattleText8, Route19AfterBattleText8
 Route19TrainerHeader8:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_8, 1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_8, 1
-	dw Route19BattleText9 ; TextBeforeBattle
-	dw Route19AfterBattleText9 ; TextAfterBattle
-	dw Route19EndBattleText9 ; TextEndBattle
-	dw Route19EndBattleText9 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_8, 1, 4, Route19BattleText9, Route19EndBattleText9, Route19AfterBattleText9
 Route19TrainerHeader9:
-	dbEventFlagBit EVENT_BEAT_ROUTE_19_TRAINER_9, 1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_19_TRAINER_9, 1
-	dw Route19BattleText10 ; TextBeforeBattle
-	dw Route19AfterBattleText10 ; TextAfterBattle
-	dw Route19EndBattleText10 ; TextEndBattle
-	dw Route19EndBattleText10 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_9, 1, 4, Route19BattleText10, Route19EndBattleText10, Route19AfterBattleText10
+	db -1 ; end
 
 Route19Text1:
 	text_asm

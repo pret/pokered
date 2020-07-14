@@ -70,24 +70,10 @@ PokemonMansionB1F_TextPointers:
 	dw Mansion3Text6
 
 Mansion4TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_0
-	dw Mansion4BattleText1 ; TextBeforeBattle
-	dw Mansion4AfterBattleText1 ; TextAfterBattle
-	dw Mansion4EndBattleText1 ; TextEndBattle
-	dw Mansion4EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_MANSION_4_TRAINER_0, 0, Mansion4BattleText1, Mansion4EndBattleText1, Mansion4AfterBattleText1
 Mansion4TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_MANSION_4_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_4_TRAINER_1
-	dw Mansion4BattleText2 ; TextBeforeBattle
-	dw Mansion4AfterBattleText2 ; TextAfterBattle
-	dw Mansion4EndBattleText2 ; TextEndBattle
-	dw Mansion4EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MANSION_4_TRAINER_1, 3, Mansion4BattleText2, Mansion4EndBattleText2, Mansion4AfterBattleText2
+	db -1 ; end
 
 Mansion4Text1:
 	text_asm

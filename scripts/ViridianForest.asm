@@ -29,33 +29,12 @@ ViridianForest_TextPointers:
 	dw ViridianForestText14
 
 ViridianForestTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0
-	dw ViridianForestBattleText1 ; TextBeforeBattle
-	dw ViridianForestAfterBattleText1 ; TextAfterBattle
-	dw ViridianForestEndBattleText1 ; TextEndBattle
-	dw ViridianForestEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0, 4, ViridianForestBattleText1, ViridianForestEndBattleText1, ViridianForestAfterBattleText1
 ViridianForestTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1
-	dw ViridianForestBattleText2 ; TextBeforeBattle
-	dw ViridianForestAfterBattleText2 ; TextAfterBattle
-	dw ViridianForestEndBattleText2 ; TextEndBattle
-	dw ViridianForestEndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1, 4, ViridianForestBattleText2, ViridianForestEndBattleText2, ViridianForestAfterBattleText2
 ViridianForestTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2
-	dw ViridianForestBattleText3 ; TextBeforeBattle
-	dw ViridianForestAfterBattleText3 ; TextAfterBattle
-	dw ViridianForestEndBattleText3 ; TextEndBattle
-	dw ViridianForestEndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2, 1, ViridianForestBattleText3, ViridianForestEndBattleText3, ViridianForestAfterBattleText3
+	db -1 ; end
 
 ViridianForestText1:
 	text_far _ViridianForestText1

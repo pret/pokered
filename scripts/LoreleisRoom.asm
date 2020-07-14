@@ -120,15 +120,8 @@ LoreleisRoom_TextPointers:
 	dw LoreleiDontRunAwayText
 
 LoreleiTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
-	dw LoreleiBeforeBattleText ; TextBeforeBattle
-	dw LoreleiAfterBattleText ; TextAfterBattle
-	dw LoreleiEndBattleText ; TextEndBattle
-	dw LoreleiEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_LORELEIS_ROOM_TRAINER_0, 0, LoreleiBeforeBattleText, LoreleiEndBattleText, LoreleiAfterBattleText
+	db -1 ; end
 
 LoreleiText1:
 	text_asm

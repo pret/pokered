@@ -48,24 +48,10 @@ SilphCo10F_TextPointers:
 	dw PickUpItemText
 
 SilphCo10TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_10F_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_10F_TRAINER_0
-	dw SilphCo10BattleText1 ; TextBeforeBattle
-	dw SilphCo10AfterBattleText1 ; TextAfterBattle
-	dw SilphCo10EndBattleText1 ; TextEndBattle
-	dw SilphCo10EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SILPH_CO_10F_TRAINER_0, 3, SilphCo10BattleText1, SilphCo10EndBattleText1, SilphCo10AfterBattleText1
 SilphCo10TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_10F_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_10F_TRAINER_1
-	dw SilphCo10BattleText2 ; TextBeforeBattle
-	dw SilphCo10AfterBattleText2 ; TextAfterBattle
-	dw SilphCo10EndBattleText2 ; TextEndBattle
-	dw SilphCo10EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SILPH_CO_10F_TRAINER_1, 4, SilphCo10BattleText2, SilphCo10EndBattleText2, SilphCo10AfterBattleText2
+	db -1 ; end
 
 SilphCo10Text1:
 	text_asm

@@ -281,24 +281,10 @@ SilphCo11F_TextPointers:
 	dw SilphCo11Text6
 
 SilphCo11TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_11F_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_11F_TRAINER_0
-	dw SilphCo11BattleText1 ; TextBeforeBattle
-	dw SilphCo11AfterBattleText1 ; TextAfterBattle
-	dw SilphCo11EndBattleText1 ; TextEndBattle
-	dw SilphCo11EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_0, 4, SilphCo11BattleText1, SilphCo11EndBattleText1, SilphCo11AfterBattleText1
 SilphCo11TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_11F_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_11F_TRAINER_1
-	dw SilphCo11BattleText2 ; TextBeforeBattle
-	dw SilphCo11AfterBattleText2 ; TextAfterBattle
-	dw SilphCo11EndBattleText2 ; TextEndBattle
-	dw SilphCo11EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SILPH_CO_11F_TRAINER_1, 3, SilphCo11BattleText2, SilphCo11EndBattleText2, SilphCo11AfterBattleText2
+	db -1 ; end
 
 SilphCo11Text1:
 	text_asm

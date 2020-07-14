@@ -20,24 +20,10 @@ SSAnneBow_TextPointers:
 	dw SSAnne5Text5
 
 SSAnne5TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SS_ANNE_5_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SS_ANNE_5_TRAINER_0
-	dw SSAnne5BattleText1 ; TextBeforeBattle
-	dw SSAnne5AfterBattleText1 ; TextAfterBattle
-	dw SSAnne5EndBattleText1 ; TextEndBattle
-	dw SSAnne5EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_0, 3, SSAnne5BattleText1, SSAnne5EndBattleText1, SSAnne5AfterBattleText1
 SSAnne5TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SS_ANNE_5_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SS_ANNE_5_TRAINER_1
-	dw SSAnne5BattleText2 ; TextBeforeBattle
-	dw SSAnne5AfterBattleText2 ; TextAfterBattle
-	dw SSAnne5EndBattleText2 ; TextEndBattle
-	dw SSAnne5EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SS_ANNE_5_TRAINER_1, 3, SSAnne5BattleText2, SSAnne5EndBattleText2, SSAnne5AfterBattleText2
+	db -1 ; end
 
 SSAnne5Text1:
 	text_far _SSAnne5Text1
