@@ -4,7 +4,7 @@ anim_special_effect: MACRO
 ENDM
 
 AnimationIdSpecialEffects:
-; animation id, effect routine address
+	; animation id, effect routine address
 	anim_special_effect MEGA_PUNCH, AnimationFlashScreen
 	anim_special_effect GUILLOTINE, AnimationFlashScreen
 	anim_special_effect MEGA_KICK, AnimationFlashScreen

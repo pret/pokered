@@ -3,7 +3,7 @@ hidden_item: MACRO
 ENDM
 
 HiddenItemCoords:
-; map id, x, y
+	; map id, x, y
 	hidden_item VIRIDIAN_FOREST,                1,  18
 	hidden_item VIRIDIAN_FOREST,               16,  42
 	hidden_item MT_MOON_B2F,                   18,  12

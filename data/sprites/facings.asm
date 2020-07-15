@@ -45,14 +45,14 @@ SpriteFacingAndAnimationTable:
 .WalkingLeft:  db $88, $89, $8a, $8b
 
 .NormalOAM:
-; y, x, attributes
+	; y, x, attributes
 	db 0, 0, $00 ; top left
 	db 0, 8, $00 ; top right
 	db 8, 0, OAMFLAG_CANBEMASKED ; bottom left
 	db 8, 8, OAMFLAG_CANBEMASKED | OAMFLAG_ENDOFDATA ; bottom right
 
 .FlippedOAM:
-; y, x, attributes
+	; y, x, attributes
 	db 0, 8, OAMFLAG_VFLIPPED ; top left
 	db 0, 0, OAMFLAG_VFLIPPED ; top right
 	db 8, 8, OAMFLAG_VFLIPPED | OAMFLAG_CANBEMASKED ; bottom left

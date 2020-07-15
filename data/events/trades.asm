@@ -1,5 +1,5 @@
 TradeMons:
-; give mon, get mon, dialog id, nickname
+	; give mon, get mon, dialog id, nickname
 	db NIDORINO,   NIDORINA,  TRADE_DIALOGSET_CASUAL, "TERRY@@@@@@"
 	db ABRA,       MR_MIME,   TRADE_DIALOGSET_CASUAL, "MARCEL@@@@@"
 	db BUTTERFREE, BEEDRILL,  TRADE_DIALOGSET_HAPPY,  "CHIKUCHIKU@"

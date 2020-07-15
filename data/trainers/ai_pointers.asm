@@ -1,8 +1,8 @@
 TrainerAIPointers:
-; one entry per trainer class
-; first byte, number of times (per Pokémon) it can occur
-; next two bytes, pointer to AI subroutine for trainer class
-; subroutines are defined in engine/battle/trainer_ai.asm
+	; one entry per trainer class
+	; first byte, number of times (per Pokémon) it can occur
+	; next two bytes, pointer to AI subroutine for trainer class
+	; subroutines are defined in engine/battle/trainer_ai.asm
 	dbw 3, GenericAI
 	dbw 3, GenericAI
 	dbw 3, GenericAI
