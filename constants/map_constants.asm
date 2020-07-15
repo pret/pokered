@@ -253,3 +253,8 @@ ENDM
 	mapconst LORELEIS_ROOM,                  6,  5 ; $F5
 	mapconst BRUNOS_ROOM,                    6,  5 ; $F6
 	mapconst AGATHAS_ROOM,                   6,  5 ; $F7
+
+
+; Indoor maps, such as houses, use this as the Map ID in their exit warps
+; This map ID takes the player back to the last outdoor map they were on, stored in wLastMap
+LAST_MAP EQU -1

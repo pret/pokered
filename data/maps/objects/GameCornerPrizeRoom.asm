@@ -2,8 +2,8 @@ GameCornerPrizeRoom_Object:
 	db $f ; border block
 
 	db 2 ; warps
-	warp 4, 7, 9, -1
-	warp 5, 7, 9, -1
+	warp 4, 7, 9, LAST_MAP
+	warp 5, 7, 9, LAST_MAP
 
 	db 3 ; signs
 	sign 2, 2, 3 ; CeladonPrizeRoomText3

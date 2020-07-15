@@ -2,8 +2,8 @@ CinnabarLab_Object:
 	db $17 ; border block
 
 	db 5 ; warps
-	warp 2, 7, 2, -1
-	warp 3, 7, 2, -1
+	warp 2, 7, 2, LAST_MAP
+	warp 3, 7, 2, LAST_MAP
 	warp 8, 4, 0, CINNABAR_LAB_TRADE_ROOM
 	warp 12, 4, 0, CINNABAR_LAB_METRONOME_ROOM
 	warp 16, 4, 0, CINNABAR_LAB_FOSSIL_ROOM

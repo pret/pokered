@@ -507,7 +507,7 @@ WarpFound2::
 ; not all these maps are necessarily indoors, though
 .indoorMaps
 	ldh a, [hWarpDestinationMap] ; destination map
-	cp $ff
+	cp LAST_MAP
 	jr z, .goBackOutside
 ; if not going back to the previous map
 	ld [wCurMap], a

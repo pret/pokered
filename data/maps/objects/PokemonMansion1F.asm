@@ -2,14 +2,14 @@ PokemonMansion1F_Object:
 	db $2e ; border block
 
 	db 8 ; warps
-	warp 4, 27, 0, -1
-	warp 5, 27, 0, -1
-	warp 6, 27, 0, -1
-	warp 7, 27, 0, -1
+	warp 4, 27, 0, LAST_MAP
+	warp 5, 27, 0, LAST_MAP
+	warp 6, 27, 0, LAST_MAP
+	warp 7, 27, 0, LAST_MAP
 	warp 5, 10, 0, POKEMON_MANSION_2F
 	warp 21, 23, 0, POKEMON_MANSION_B1F
-	warp 26, 27, 0, -1
-	warp 27, 27, 0, -1
+	warp 26, 27, 0, LAST_MAP
+	warp 27, 27, 0, LAST_MAP
 
 	db 0 ; signs
 

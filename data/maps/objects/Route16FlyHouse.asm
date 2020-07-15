@@ -2,8 +2,8 @@ Route16FlyHouse_Object:
 	db $a ; border block
 
 	db 2 ; warps
-	warp 2, 7, 8, -1
-	warp 3, 7, 8, -1
+	warp 2, 7, 8, LAST_MAP
+	warp 3, 7, 8, LAST_MAP
 
 	db 0 ; signs
 

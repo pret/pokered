@@ -2,8 +2,8 @@ CeruleanPokecenter_Object:
 	db $0 ; border block
 
 	db 2 ; warps
-	warp 3, 7, 2, -1
-	warp 4, 7, 2, -1
+	warp 3, 7, 2, LAST_MAP
+	warp 4, 7, 2, LAST_MAP
 
 	db 0 ; signs
 

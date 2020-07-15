@@ -3,8 +3,8 @@ VictoryRoad2F_Object:
 
 	db 7 ; warps
 	warp 0, 8, 2, VICTORY_ROAD_1F
-	warp 29, 7, 3, -1
-	warp 29, 8, 3, -1
+	warp 29, 7, 3, LAST_MAP
+	warp 29, 8, 3, LAST_MAP
 	warp 23, 7, 0, VICTORY_ROAD_3F
 	warp 25, 14, 2, VICTORY_ROAD_3F
 	warp 27, 7, 1, VICTORY_ROAD_3F

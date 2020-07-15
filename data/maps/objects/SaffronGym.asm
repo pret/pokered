@@ -2,8 +2,8 @@ SaffronGym_Object:
 	db $2e ; border block
 
 	db 32 ; warps
-	warp 8, 17, 2, -1
-	warp 9, 17, 2, -1
+	warp 8, 17, 2, LAST_MAP
+	warp 9, 17, 2, LAST_MAP
 	warp 1, 3, 22, SAFFRON_GYM
 	warp 5, 3, 15, SAFFRON_GYM
 	warp 1, 5, 18, SAFFRON_GYM

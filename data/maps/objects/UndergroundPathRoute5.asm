@@ -2,8 +2,8 @@ UndergroundPathRoute5_Object:
 	db $a ; border block
 
 	db 3 ; warps
-	warp 3, 7, 3, -1
-	warp 4, 7, 3, -1
+	warp 3, 7, 3, LAST_MAP
+	warp 4, 7, 3, LAST_MAP
 	warp 4, 4, 0, UNDERGROUND_PATH_NORTH_SOUTH
 
 	db 0 ; signs

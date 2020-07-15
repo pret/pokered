@@ -2,10 +2,10 @@ Route22Gate_Object:
 	db $a ; border block
 
 	db 4 ; warps
-	warp 4, 7, 0, -1
-	warp 5, 7, 0, -1
-	warp 4, 0, 0, -1
-	warp 5, 0, 1, -1
+	warp 4, 7, 0, LAST_MAP
+	warp 5, 7, 0, LAST_MAP
+	warp 4, 0, 0, LAST_MAP
+	warp 5, 0, 1, LAST_MAP
 
 	db 0 ; signs
 

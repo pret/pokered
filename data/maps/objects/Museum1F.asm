@@ -2,10 +2,10 @@ Museum1F_Object:
 	db $a ; border block
 
 	db 5 ; warps
-	warp 10, 7, 0, -1
-	warp 11, 7, 0, -1
-	warp 16, 7, 1, -1
-	warp 17, 7, 1, -1
+	warp 10, 7, 0, LAST_MAP
+	warp 11, 7, 0, LAST_MAP
+	warp 16, 7, 1, LAST_MAP
+	warp 17, 7, 1, LAST_MAP
 	warp 7, 7, 0, MUSEUM_2F
 
 	db 0 ; signs
