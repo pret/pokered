@@ -361,7 +361,7 @@ IntroDrawBlackBars:
 	ld c,  BG_MAP_WIDTH * 4
 	jp IntroPlaceBlackTiles
 
-EmptyFunc4:
+EmptyFunc2:
 	ret
 
 IntroNidorinoAnimation0:

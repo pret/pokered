@@ -87,7 +87,7 @@ PredefPointers::
 	add_predef LoadTownMap_Nest
 	add_predef PrintMonType
 	add_predef EmotionBubble
-	add_predef EmptyFunc3; return immediately
+	add_predef EmptyFunc ; return immediately
 	add_predef AskName
 	add_predef PewterGuys
 	add_predef SaveSAVtoSRAM2
