@@ -4,7 +4,7 @@ bookshelf_tile: MACRO
 ENDM
 
 BookshelfTileIDs:
-; tileset id, bookshelf tile id, text id
+	; tileset id, bookshelf tile id, text id
 	bookshelf_tile PLATEAU,      $30, IndigoPlateauStatues
 	bookshelf_tile HOUSE,        $3D, TownMapText
 	bookshelf_tile HOUSE,        $1E, BookOrSculptureText

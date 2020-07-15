@@ -6,7 +6,7 @@ mon_icon_header: MACRO
 ENDM
 
 MonPartySpritePointers:
-; gfx pointer, gfx tile offset, # tiles, vSprites tile offset
+	; gfx pointer, gfx tile offset, # tiles, vSprites tile offset
 	mon_icon_header SlowbroSprite,       12, 4, $00
 	mon_icon_header BallSprite,           0, 8, $04
 	mon_icon_header ClefairySprite,      12, 4, $0c

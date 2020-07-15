@@ -3,7 +3,7 @@ force_bike_surf: MACRO
 ENDM
 
 ForcedBikeOrSurfMaps:
-; map id, x, y
+	; map id, x, y
 	force_bike_surf ROUTE_16,            17, 10
 	force_bike_surf ROUTE_16,            17, 11
 	force_bike_surf ROUTE_18,            33,  8

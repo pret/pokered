@@ -5,7 +5,7 @@ ENDM
 
 ; the appearance of towns and routes in the town map
 ExternalMapEntries:
-; x, y, name
+	; x, y, name
 	external_map 11,  2, PalletTownName
 	external_map  8,  2, ViridianCityName
 	external_map  3,  2, PewterCityName
@@ -53,7 +53,7 @@ ENDM
 
 ; the appearance of buildings and dungeons in the town map
 InternalMapEntries:
-; maximum map id subject to this rule, x, y, name
+	; maximum map id subject to this rule, x, y, name
 	internal_map OAKS_LAB,                      11,  2, PalletTownName
 	internal_map VIRIDIAN_GYM,                   8,  2, ViridianCityName
 	internal_map VIRIDIAN_FOREST_SOUTH_GATE,     6,  2, Route2Name

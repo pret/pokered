@@ -4,7 +4,7 @@ special_effect: MACRO
 ENDM
 
 SpecialEffectPointers:
-; special effect id, effect routine address
+	; special effect id, effect routine address
 	special_effect SE_DARK_SCREEN_FLASH, AnimationFlashScreen ; $FE
 	special_effect SE_DARK_SCREEN_PALETTE, AnimationDarkScreenPalette ; $FD
 	special_effect SE_RESET_SCREEN_PALETTE, AnimationResetScreenPalette ; $FC
