@@ -1,5 +1,5 @@
 MoveEffectPointerTable:
-	dw SleepEffect               ; unused effect
+	dw SleepEffect               ; EFFECT_01
 	dw PoisonEffect              ; POISON_SIDE_EFFECT1
 	dw DrainHPEffect             ; DRAIN_HP_EFFECT
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT1
@@ -28,14 +28,14 @@ MoveEffectPointerTable:
 	dw ThrashPetalDanceEffect    ; THRASH_PETAL_DANCE_EFFECT
 	dw SwitchAndTeleportEffect   ; SWITCH_AND_TELEPORT_EFFECT
 	dw TwoToFiveAttacksEffect    ; TWO_TO_FIVE_ATTACKS_EFFECT
-	dw TwoToFiveAttacksEffect    ; unused effect
-	dw FlinchSideEffect           ; FLINCH_SIDE_EFFECT1
+	dw TwoToFiveAttacksEffect    ; EFFECT_1E
+	dw FlinchSideEffect          ; FLINCH_SIDE_EFFECT1
 	dw SleepEffect               ; SLEEP_EFFECT
 	dw PoisonEffect              ; POISON_SIDE_EFFECT2
 	dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT2
 	dw FreezeBurnParalyzeEffect  ; unused effect
 	dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT2
-	dw FlinchSideEffect           ; FLINCH_SIDE_EFFECT2
+	dw FlinchSideEffect          ; FLINCH_SIDE_EFFECT2
 	dw OneHitKOEffect            ; OHKO_EFFECT
 	dw ChargeEffect              ; CHARGE_EFFECT
 	dw NULL                      ; SUPER_FANG_EFFECT

@@ -80,9 +80,9 @@ VermilionGymReceiveTM24:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 2, [hl]
+	set BIT_THUNDERBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 2, [hl]
+	set BIT_THUNDERBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_VERMILION_GYM_TRAINER_0, EVENT_BEAT_VERMILION_GYM_TRAINER_2
@@ -100,33 +100,12 @@ VermilionGym_TextPointers:
 	dw TM24NoRoomText
 
 VermilionGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_0
-	dw VermilionGymBattleText1 ; TextBeforeBattle
-	dw VermilionGymAfterBattleText1 ; TextAfterBattle
-	dw VermilionGymEndBattleText1 ; TextEndBattle
-	dw VermilionGymEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_0, 3, VermilionGymBattleText1, VermilionGymEndBattleText1, VermilionGymAfterBattleText1
 VermilionGymTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_1
-	dw VermilionGymBattleText2 ; TextBeforeBattle
-	dw VermilionGymAfterBattleText2 ; TextAfterBattle
-	dw VermilionGymEndBattleText2 ; TextEndBattle
-	dw VermilionGymEndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_1, 2, VermilionGymBattleText2, VermilionGymEndBattleText2, VermilionGymAfterBattleText2
 VermilionGymTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_VERMILION_GYM_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VERMILION_GYM_TRAINER_2
-	dw VermilionGymBattleText3 ; TextBeforeBattle
-	dw VermilionGymAfterBattleText3 ; TextAfterBattle
-	dw VermilionGymEndBattleText3 ; TextEndBattle
-	dw VermilionGymEndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_VERMILION_GYM_TRAINER_2, 3, VermilionGymBattleText3, VermilionGymEndBattleText3, VermilionGymAfterBattleText3
+	db -1 ; end
 
 LTSurgeText:
 	text_asm
@@ -247,7 +226,7 @@ VermilionGymAfterBattleText3:
 VermilionGymFanText:
 	text_asm
 	ld a, [wBeatGymFlags]
-	bit 2, a
+	bit BIT_THUNDERBADGE, a
 	jr nz, .afterBeat
 	ld hl, VermilionGymFanPreBattleText
 	call PrintText

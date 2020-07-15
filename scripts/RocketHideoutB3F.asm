@@ -150,24 +150,10 @@ RocketHideoutB3F_TextPointers:
 	dw PickUpItemText
 
 RocketHideout3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
-	dw RocketHideout3BattleText2 ; TextBeforeBattle
-	dw RocketHideout3AfterBattleTxt2 ; TextAfterBattle
-	dw RocketHideout3EndBattleText2 ; TextEndBattle
-	dw RocketHideout3EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0, 2, RocketHideout3BattleText2, RocketHideout3EndBattleText2, RocketHideout3AfterBattleTxt2
 RocketHideout3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
-	dw RocketHideout3BattleTxt ; TextBeforeBattle
-	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
-	dw RocketHideout3EndBattleText3 ; TextEndBattle
-	dw RocketHideout3EndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1, 4, RocketHideout3BattleTxt, RocketHideout3EndBattleText3, RocketHideout3AfterBattleText3
+	db -1 ; end
 
 RocketHideout3Text1:
 	text_asm

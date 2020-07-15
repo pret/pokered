@@ -205,33 +205,12 @@ PokemonTower7F_TextPointers:
 	dw PokemonTower7FujiText
 
 PokemonTower7TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_7_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_7_TRAINER_0
-	dw PokemonTower7BattleText1 ; TextBeforeBattle
-	dw PokemonTower7AfterBattleText1 ; TextAfterBattle
-	dw PokemonTower7EndBattleText1 ; TextEndBattle
-	dw PokemonTower7EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_0, 3, PokemonTower7BattleText1, PokemonTower7EndBattleText1, PokemonTower7AfterBattleText1
 PokemonTower7TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_7_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_7_TRAINER_1
-	dw PokemonTower7BattleText2 ; TextBeforeBattle
-	dw PokemonTower7AfterBattleText2 ; TextAfterBattle
-	dw PokemonTower7EndBattleText2 ; TextEndBattle
-	dw PokemonTower7EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_1, 3, PokemonTower7BattleText2, PokemonTower7EndBattleText2, PokemonTower7AfterBattleText2
 PokemonTower7TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_POKEMONTOWER_7_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_POKEMONTOWER_7_TRAINER_2
-	dw PokemonTower7BattleText3 ; TextBeforeBattle
-	dw PokemonTower7AfterBattleText3 ; TextAfterBattle
-	dw PokemonTower7EndBattleText3 ; TextEndBattle
-	dw PokemonTower7EndBattleText3 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_POKEMONTOWER_7_TRAINER_2, 3, PokemonTower7BattleText3, PokemonTower7EndBattleText3, PokemonTower7AfterBattleText3
+	db -1 ; end
 
 PokemonTower7Text1:
 	text_asm

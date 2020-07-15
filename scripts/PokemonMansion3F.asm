@@ -91,24 +91,10 @@ PokemonMansion3F_TextPointers:
 	dw Mansion3Text6
 
 Mansion3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_0
-	dw Mansion3BattleText1 ; TextBeforeBattle
-	dw Mansion3AfterBattleText1 ; TextAfterBattle
-	dw Mansion3EndBattleText1 ; TextEndBattle
-	dw Mansion3EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_MANSION_3_TRAINER_0, 0, Mansion3BattleText1, Mansion3EndBattleText1, Mansion3AfterBattleText1
 Mansion3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_MANSION_3_TRAINER_1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MANSION_3_TRAINER_1
-	dw Mansion3BattleText2 ; TextBeforeBattle
-	dw Mansion3AfterBattleText2 ; TextAfterBattle
-	dw Mansion3EndBattleText2 ; TextEndBattle
-	dw Mansion3EndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MANSION_3_TRAINER_1, 2, Mansion3BattleText2, Mansion3EndBattleText2, Mansion3AfterBattleText2
+	db -1 ; end
 
 Mansion3Text1:
 	text_asm

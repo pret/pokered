@@ -1,57 +1,61 @@
+hidden_item: MACRO
+	db \1, \3, \2
+ENDM
+
 HiddenItemCoords:
-; map ID, then coords
-	db VIRIDIAN_FOREST,$12,$01
-	db VIRIDIAN_FOREST,$2a,$10
-	db MT_MOON_B2F,$0c,$12
-	db ROUTE_25,$03,$26
-	db ROUTE_9,$07,$0e
-	db SS_ANNE_KITCHEN,$09,$0d
-	db SS_ANNE_B1F_ROOMS,$01,$03
-	db ROUTE_10,$11,$09
-	db ROUTE_10,$35,$10
-	db ROCKET_HIDEOUT_B1F,$0f,$15
-	db ROCKET_HIDEOUT_B3F,$11,$1b
-	db ROCKET_HIDEOUT_B4F,$01,$19
-	db POKEMON_TOWER_5F,$0c,$04
-	db ROUTE_13,$0e,$01
-	db ROUTE_13,$0d,$10
-	db POKEMON_MANSION_B1F,$09,$01
-	db SAFARI_ZONE_GATE,$01,$0a
-	db SAFARI_ZONE_WEST,$05,$06
-	db SILPH_CO_5F,$03,$0c
-	db SILPH_CO_9F,$0f,$02
-	db COPYCATS_HOUSE_2F,$01,$01
-	db CERULEAN_CAVE_1F,$0b,$0e
-	db CERULEAN_CAVE_B1F,$03,$1b
-	db POWER_PLANT,$10,$11
-	db POWER_PLANT,$01,$0c
-	db SEAFOAM_ISLANDS_B2F,$0f,$0f
-	db SEAFOAM_ISLANDS_B4F,$11,$19
-	db POKEMON_MANSION_1F,$10,$08
-	db POKEMON_MANSION_3F,$09,$01
-	db ROUTE_23,$2c,$09
-	db ROUTE_23,$46,$13
-	db ROUTE_23,$5a,$08
-	db VICTORY_ROAD_2F,$02,$05
-	db VICTORY_ROAD_2F,$07,$1a
-	db UNUSED_MAP_6F,$0b,$0e
-	db VIRIDIAN_CITY,$04,$0e
-	db ROUTE_11,$05,$30
-	db ROUTE_12,$3f,$02
-	db ROUTE_17,$0e,$0f
-	db ROUTE_17,$2d,$08
-	db ROUTE_17,$48,$11
-	db ROUTE_17,$5b,$04
-	db ROUTE_17,$79,$08
-	db UNDERGROUND_PATH_NORTH_SOUTH,$04,$03
-	db UNDERGROUND_PATH_NORTH_SOUTH,$22,$04
-	db UNDERGROUND_PATH_WEST_EAST,$02,$0c
-	db UNDERGROUND_PATH_WEST_EAST,$05,$15
-	db CELADON_CITY,$0f,$30
-	db ROUTE_25,$01,$0a
-	db MT_MOON_B2F,$09,$21
-	db SEAFOAM_ISLANDS_B3F,$10,$09
-	db VERMILION_CITY,$0b,$0e
-	db CERULEAN_CITY,$08,$0f
-	db ROUTE_4,$03,$28
-	db $ff
+; map id, x, y
+	hidden_item VIRIDIAN_FOREST,                1,  18
+	hidden_item VIRIDIAN_FOREST,               16,  42
+	hidden_item MT_MOON_B2F,                   18,  12
+	hidden_item ROUTE_25,                      38,   3
+	hidden_item ROUTE_9,                       14,   7
+	hidden_item SS_ANNE_KITCHEN,               13,   9
+	hidden_item SS_ANNE_B1F_ROOMS,              3,   1
+	hidden_item ROUTE_10,                       9,  17
+	hidden_item ROUTE_10,                      16,  53
+	hidden_item ROCKET_HIDEOUT_B1F,            21,  15
+	hidden_item ROCKET_HIDEOUT_B3F,            27,  17
+	hidden_item ROCKET_HIDEOUT_B4F,            25,   1
+	hidden_item POKEMON_TOWER_5F,               4,  12
+	hidden_item ROUTE_13,                       1,  14
+	hidden_item ROUTE_13,                      16,  13
+	hidden_item POKEMON_MANSION_B1F,            1,   9
+	hidden_item SAFARI_ZONE_GATE,              10,   1 ; inaccessible
+	hidden_item SAFARI_ZONE_WEST,               6,   5
+	hidden_item SILPH_CO_5F,                   12,   3
+	hidden_item SILPH_CO_9F,                    2,  15
+	hidden_item COPYCATS_HOUSE_2F,              1,   1
+	hidden_item CERULEAN_CAVE_1F,              14,  11
+	hidden_item CERULEAN_CAVE_B1F,             27,   3
+	hidden_item POWER_PLANT,                   17,  16
+	hidden_item POWER_PLANT,                   12,   1
+	hidden_item SEAFOAM_ISLANDS_B2F,           15,  15
+	hidden_item SEAFOAM_ISLANDS_B4F,           25,  17
+	hidden_item POKEMON_MANSION_1F,             8,  16
+	hidden_item POKEMON_MANSION_3F,             1,   9
+	hidden_item ROUTE_23,                       9,  44
+	hidden_item ROUTE_23,                      19,  70
+	hidden_item ROUTE_23,                       8,  90
+	hidden_item VICTORY_ROAD_2F,                5,   2
+	hidden_item VICTORY_ROAD_2F,               26,   7
+	hidden_item UNUSED_MAP_6F,                 14,  11
+	hidden_item VIRIDIAN_CITY,                 14,   4
+	hidden_item ROUTE_11,                      48,   5
+	hidden_item ROUTE_12,                       2,  63
+	hidden_item ROUTE_17,                      15,  14
+	hidden_item ROUTE_17,                       8,  45
+	hidden_item ROUTE_17,                      17,  72
+	hidden_item ROUTE_17,                       4,  91
+	hidden_item ROUTE_17,                       8, 121
+	hidden_item UNDERGROUND_PATH_NORTH_SOUTH,   3,   4
+	hidden_item UNDERGROUND_PATH_NORTH_SOUTH,   4,  34
+	hidden_item UNDERGROUND_PATH_WEST_EAST,    12,   2
+	hidden_item UNDERGROUND_PATH_WEST_EAST,    21,   5
+	hidden_item CELADON_CITY,                  48,  15
+	hidden_item ROUTE_25,                      10,   1
+	hidden_item MT_MOON_B2F,                   33,   9
+	hidden_item SEAFOAM_ISLANDS_B3F,            9,  16
+	hidden_item VERMILION_CITY,                14,  11
+	hidden_item CERULEAN_CITY,                 15,   8
+	hidden_item ROUTE_4,                       40,   3
+	db -1 ; end

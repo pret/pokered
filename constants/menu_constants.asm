@@ -58,25 +58,27 @@ CHOSE_SECOND_ITEM EQU 2
 	const PARTY_TO_DAYCARE ; 3
 
 ; party menu types
+; PartyMenuMessagePointers indexes
 	const_def
-	const NORMAL_PARTY_MENU    ; 0
-	const USE_ITEM_PARTY_MENU  ; 1
-	const BATTLE_PARTY_MENU    ; 2
-	const TMHM_PARTY_MENU      ; 3
-	const SWAP_MONS_PARTY_MENU ; 4
-	const EVO_STONE_PARTY_MENU ; 5
-
+	const NORMAL_PARTY_MENU    ; $00
+	const USE_ITEM_PARTY_MENU  ; $01
+	const BATTLE_PARTY_MENU    ; $02
+	const TMHM_PARTY_MENU      ; $03
+	const SWAP_MONS_PARTY_MENU ; $04
+	const EVO_STONE_PARTY_MENU ; $05
 ; party menu message IDs
-	const_def $F0
-	const ANTIDOTE_MSG     ; $F0
-	const BURN_HEAL_MSG    ; $F1
-	const ICE_HEAL_MSG     ; $F2
-	const AWAKENING_MSG    ; $F3
-	const PARALYZ_HEAL_MSG ; $F4
-	const POTION_MSG       ; $F5
-	const FULL_HEAL_MSG    ; $F6
-	const REVIVE_MSG       ; $F7
-	const RARE_CANDY_MSG   ; $F8
+; PartyMenuItemUseMessagePointers indexes
+	const_next $F0
+FIRST_PARTY_MENU_TEXT_ID EQU const_value
+	const ANTIDOTE_MSG         ; $F0
+	const BURN_HEAL_MSG        ; $F1
+	const ICE_HEAL_MSG         ; $F2
+	const AWAKENING_MSG        ; $F3
+	const PARALYZ_HEAL_MSG     ; $F4
+	const POTION_MSG           ; $F5
+	const FULL_HEAL_MSG        ; $F6
+	const REVIVE_MSG           ; $F7
+	const RARE_CANDY_MSG       ; $F8
 
 ; naming screen types
 	const_def

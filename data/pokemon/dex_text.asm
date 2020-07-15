@@ -1507,4 +1507,3 @@ _VictreebelDexEntry::
 	next "has ever returned"
 	next "from there"
 	dex
-

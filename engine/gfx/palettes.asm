@@ -208,7 +208,7 @@ SetPal_TrainerCard:
 	ld de, BadgeBlkDataLengths
 	ld hl, wTrainerCardBlkPacket + 2
 	ld a, [wObtainedBadges]
-	ld c, 8
+	ld c, NUM_BADGES
 .badgeLoop
 	srl a
 	push af

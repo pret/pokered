@@ -6,7 +6,7 @@ TestBattle:
 
 	; Don't mess around
 	; with obedience.
-	ld a, %10000000 ; EARTHBADGE
+	ld a, 1 << BIT_EARTHBADGE
 	ld [wObtainedBadges], a
 
 	ld hl, wFlags_D733

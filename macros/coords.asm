@@ -48,6 +48,12 @@ owcoord: MACRO
 	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
 ENDM
 
+event_displacement: MACRO
+; map width, x blocks, y blocks
+	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\3) >> 1) + ((\2) >> 1))
+	db \3, \2
+ENDM
+
 dwcoord: MACRO
 ; x, y
 	validate_coords \1, \2

@@ -280,42 +280,14 @@ SilphCo7F_TextPointers:
 	dw SilphCo7Text15
 
 SilphCo7TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_0
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_0
-	dw SilphCo7BattleText1 ; TextBeforeBattle
-	dw SilphCo7AfterBattleText1 ; TextAfterBattle
-	dw SilphCo7EndBattleText1 ; TextEndBattle
-	dw SilphCo7EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_0, 2, SilphCo7BattleText1, SilphCo7EndBattleText1, SilphCo7AfterBattleText1
 SilphCo7TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_1
-	dw SilphCo7BattleText2 ; TextBeforeBattle
-	dw SilphCo7AfterBattleText2 ; TextAfterBattle
-	dw SilphCo7EndBattleText2 ; TextEndBattle
-	dw SilphCo7EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_1, 3, SilphCo7BattleText2, SilphCo7EndBattleText2, SilphCo7AfterBattleText2
 SilphCo7TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_2
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_2
-	dw SilphCo7BattleText3 ; TextBeforeBattle
-	dw SilphCo7AfterBattleText3 ; TextAfterBattle
-	dw SilphCo7EndBattleText3 ; TextEndBattle
-	dw SilphCo7EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_2, 3, SilphCo7BattleText3, SilphCo7EndBattleText3, SilphCo7AfterBattleText3
 SilphCo7TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 1
-	dw SilphCo7BattleText4 ; TextBeforeBattle
-	dw SilphCo7AfterBattleText4 ; TextAfterBattle
-	dw SilphCo7EndBattleText4 ; TextEndBattle
-	dw SilphCo7EndBattleText4 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_SILPH_CO_7F_TRAINER_3, 1, 4, SilphCo7BattleText4, SilphCo7EndBattleText4, SilphCo7AfterBattleText4
+	db -1 ; end
 
 SilphCo7Text1:
 ; lapras guy

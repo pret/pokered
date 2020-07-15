@@ -167,42 +167,14 @@ MtMoonB2F_TextPointers:
 	dw MtMoon3Text_49f99
 
 MtMoon3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_0
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_0
-	dw MtMoon3BattleText2 ; TextBeforeBattle
-	dw MtMoon3AfterBattleText2 ; TextAfterBattle
-	dw MtMoon3EndBattleText2 ; TextEndBattle
-	dw MtMoon3EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_0, 4, MtMoon3BattleText2, MtMoon3EndBattleText2, MtMoon3AfterBattleText2
 MtMoon3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_1
-	dw MtMoon3BattleText3 ; TextBeforeBattle
-	dw MtMoon3AfterBattleText3 ; TextAfterBattle
-	dw MtMoon3EndBattleText3 ; TextEndBattle
-	dw MtMoon3EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_1, 4, MtMoon3BattleText3, MtMoon3EndBattleText3, MtMoon3AfterBattleText3
 MtMoon3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_2
-	dw MtMoon3BattleText4 ; TextBeforeBattle
-	dw MtMoon3AfterBattleText4 ; TextAfterBattle
-	dw MtMoon3EndBattleText4 ; TextEndBattle
-	dw MtMoon3EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_2, 4, MtMoon3BattleText4, MtMoon3EndBattleText4, MtMoon3AfterBattleText4
 MtMoon3TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_3
-	dw MtMoon3BattleText5 ; TextBeforeBattle
-	dw MtMoon3AfterBattleText5 ; TextAfterBattle
-	dw MtMoon3EndBattleText5 ; TextEndBattle
-	dw MtMoon3EndBattleText5 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MT_MOON_3_TRAINER_3, 4, MtMoon3BattleText5, MtMoon3EndBattleText5, MtMoon3AfterBattleText5
+	db -1 ; end
 
 MtMoon3Text1:
 	text_asm

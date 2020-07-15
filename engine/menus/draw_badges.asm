@@ -8,12 +8,12 @@ DrawBadges:
 ; Tile ids for face/badge graphics.
 	ld de, wBadgeOrFaceTiles
 	ld hl, .FaceBadgeTiles
-	ld bc, 8
+	ld bc, NUM_BADGES
 	call CopyData
 
 ; Booleans for each badge.
 	ld hl, wTempObtainedBadgesBooleans
-	ld bc, 8
+	ld bc, NUM_BADGES
 	xor a
 	call FillMemory
 
@@ -22,7 +22,7 @@ DrawBadges:
 	ld hl, wBadgeOrFaceTiles
 	ld a, [wObtainedBadges]
 	ld b, a
-	ld c, 8
+	ld c, NUM_BADGES
 .CheckBadge
 	srl b
 	jr nc, .NextBadge
@@ -92,7 +92,7 @@ DrawBadges:
 	push bc
 	ld hl, wBadgeOrFaceTiles + 1
 	ld de, wBadgeOrFaceTiles
-	ld bc, 8
+	ld bc, NUM_BADGES
 	call CopyData
 	pop bc
 

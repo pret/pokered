@@ -11,7 +11,7 @@
 	dw GoldeenPicFront, GoldeenPicBack
 
 	db PECK, TAIL_WHIP, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \

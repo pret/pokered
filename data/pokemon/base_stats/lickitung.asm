@@ -11,7 +11,7 @@
 	dw LickitungPicFront, LickitungPicBack
 
 	db WRAP, SUPERSONIC, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \

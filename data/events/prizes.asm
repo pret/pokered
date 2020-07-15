@@ -1,12 +1,7 @@
 PrizeDifferentMenuPtrs:
-	dw PrizeMenuMon1Entries
-	dw PrizeMenuMon1Cost
-
-	dw PrizeMenuMon2Entries
-	dw PrizeMenuMon2Cost
-
-	dw PrizeMenuTMsEntries
-	dw PrizeMenuTMsCost
+	dw PrizeMenuMon1Entries, PrizeMenuMon1Cost
+	dw PrizeMenuMon2Entries, PrizeMenuMon2Cost
+	dw PrizeMenuTMsEntries,  PrizeMenuTMsCost
 
 NoThanksText:
 	db "NO THANKS@"

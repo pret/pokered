@@ -253,9 +253,9 @@ WildDataPointers:
 ; first part:  pokemon found in grass
 ; second part: pokemon found while surfing
 ; each part goes as follows:
-    ; if first byte == 00, then
+    ; if first byte == 0, then
         ; no wild pokemon on this map
-    ; if first byte != 00, then
+    ; if first byte != 0, then
         ; first byte is encounter rate
         ; followed by 20 bytes:
         ; level, species (ten times)

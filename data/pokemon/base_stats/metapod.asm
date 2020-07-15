@@ -11,7 +11,7 @@
 	dw MetapodPicFront, MetapodPicBack
 
 	db HARDEN, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm

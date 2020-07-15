@@ -118,15 +118,8 @@ BrunosRoom_TextPointers:
 	dw BrunoDontRunAwayText
 
 BrunoTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_BRUNOS_ROOM_TRAINER_0
-	dw BrunoBeforeBattleText ; TextBeforeBattle
-	dw BrunoAfterBattleText ; TextAfterBattle
-	dw BrunoEndBattleText ; TextEndBattle
-	dw BrunoEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_BRUNOS_ROOM_TRAINER_0, 0, BrunoBeforeBattleText, BrunoEndBattleText, BrunoAfterBattleText
+	db -1 ; end
 
 BrunoText1:
 	text_asm

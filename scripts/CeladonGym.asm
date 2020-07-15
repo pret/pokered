@@ -61,9 +61,9 @@ CeladonGymText_48963:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 3, [hl]
+	set BIT_RAINBOWBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 3, [hl]
+	set BIT_RAINBOWBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEventRange EVENT_BEAT_CELADON_GYM_TRAINER_0, EVENT_BEAT_CELADON_GYM_TRAINER_6
@@ -84,69 +84,20 @@ CeladonGym_TextPointers:
 	dw TM21NoRoomText
 
 CeladonGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_0
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_0
-	dw CeladonGymBattleText2 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText2 ; TextAfterBattle
-	dw CeladonGymEndBattleText2 ; TextEndBattle
-	dw CeladonGymEndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_0, 2, CeladonGymBattleText2, CeladonGymEndBattleText2, CeladonGymAfterBattleText2
 CeladonGymTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_1
-	dw CeladonGymBattleText3 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText3 ; TextAfterBattle
-	dw CeladonGymEndBattleText3 ; TextEndBattle
-	dw CeladonGymEndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_1, 2, CeladonGymBattleText3, CeladonGymEndBattleText3, CeladonGymAfterBattleText3
 CeladonGymTrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_2
-	dw CeladonGymBattleText4 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText4 ; TextAfterBattle
-	dw CeladonGymEndBattleText4 ; TextEndBattle
-	dw CeladonGymEndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_2, 4, CeladonGymBattleText4, CeladonGymEndBattleText4, CeladonGymAfterBattleText4
 CeladonGymTrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_3
-	dw CeladonGymBattleText5 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText5 ; TextAfterBattle
-	dw CeladonGymEndBattleText5 ; TextEndBattle
-	dw CeladonGymEndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_3, 4, CeladonGymBattleText5, CeladonGymEndBattleText5, CeladonGymAfterBattleText5
 CeladonGymTrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_4
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_4
-	dw CeladonGymBattleText6 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText6 ; TextAfterBattle
-	dw CeladonGymEndBattleText6 ; TextEndBattle
-	dw CeladonGymEndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_4, 2, CeladonGymBattleText6, CeladonGymEndBattleText6, CeladonGymAfterBattleText6
 CeladonGymTrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_5
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_5
-	dw CeladonGymBattleText7 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText7 ; TextAfterBattle
-	dw CeladonGymEndBattleText7 ; TextEndBattle
-	dw CeladonGymEndBattleText7 ; TextEndBattle
-
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_5, 2, CeladonGymBattleText7, CeladonGymEndBattleText7, CeladonGymAfterBattleText7
 CeladonGymTrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_CELADON_GYM_TRAINER_6, 1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CELADON_GYM_TRAINER_6, 1
-	dw CeladonGymBattleText8 ; TextBeforeBattle
-	dw CeladonGymAfterBattleText8 ; TextAfterBattle
-	dw CeladonGymEndBattleText8 ; TextEndBattle
-	dw CeladonGymEndBattleText8 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_CELADON_GYM_TRAINER_6, 1, 3, CeladonGymBattleText8, CeladonGymEndBattleText8, CeladonGymAfterBattleText8
+	db -1 ; end
 
 CeladonGymText1:
 	text_asm

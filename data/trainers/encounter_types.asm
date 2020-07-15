@@ -3,7 +3,7 @@ FemaleTrainerList::
 	db OPP_JR_TRAINER_F
 	db OPP_BEAUTY
 	db OPP_COOLTRAINER_F
-	db $FF
+	db -1 ; end
 
 EvilTrainerList::
 	db OPP_JUGGLER_X
@@ -14,4 +14,4 @@ EvilTrainerList::
 	db OPP_SCIENTIST
 	db OPP_GIOVANNI
 	db OPP_ROCKET
-	db $FF
+	db -1 ; end

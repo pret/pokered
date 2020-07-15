@@ -121,15 +121,8 @@ AgathasRoom_TextPointers:
 	dw AgathaDontRunAwayText
 
 AgathaTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
-	dw AgathaBeforeBattleText ; TextBeforeBattle
-	dw AgathaAfterBattleText ; TextAfterBattle
-	dw AgathaEndBattleText ; TextEndBattle
-	dw AgathaEndBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_AGATHAS_ROOM_TRAINER_0, 0, AgathaBeforeBattleText, AgathaEndBattleText, AgathaAfterBattleText
+	db -1 ; end
 
 AgathaText1:
 	text_asm

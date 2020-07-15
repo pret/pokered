@@ -164,4 +164,3 @@ MoveNames::
 	db "SLASH@"
 	db "SUBSTITUTE@"
 	db "STRUGGLE@"
-

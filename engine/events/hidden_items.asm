@@ -142,7 +142,7 @@ FindHiddenItemOrCoinsIndex:
 .loop
 	inc c
 	ld a, [hli]
-	cp $ff ; end of the list?
+	cp -1 ; end of the list?
 	ret z  ; if so, we're done here
 	cp b
 	jr nz, .next1

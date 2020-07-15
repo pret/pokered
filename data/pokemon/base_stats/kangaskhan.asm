@@ -11,7 +11,7 @@
 	dw KangaskhanPicFront, KangaskhanPicBack
 
 	db COMET_PUNCH, RAGE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 0 ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \

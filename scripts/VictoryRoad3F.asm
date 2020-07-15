@@ -87,42 +87,14 @@ VictoryRoad3F_TextPointers:
 	dw BoulderText
 
 VictoryRoad3TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
-	db ($1 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0
-	dw VictoryRoad3BattleText2 ; TextBeforeBattle
-	dw VictoryRoad3AfterBattleText2 ; TextAfterBattle
-	dw VictoryRoad3EndBattleText2 ; TextEndBattle
-	dw VictoryRoad3EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_0, 1, VictoryRoad3BattleText2, VictoryRoad3EndBattleText2, VictoryRoad3AfterBattleText2
 VictoryRoad3TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1
-	dw VictoryRoad3BattleText3 ; TextBeforeBattle
-	dw VictoryRoad3AfterBattleText3 ; TextAfterBattle
-	dw VictoryRoad3EndBattleText3 ; TextEndBattle
-	dw VictoryRoad3EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_1, 4, VictoryRoad3BattleText3, VictoryRoad3EndBattleText3, VictoryRoad3AfterBattleText3
 VictoryRoad3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2
-	dw VictoryRoad3BattleText4 ; TextBeforeBattle
-	dw VictoryRoad3AfterBattleText4 ; TextAfterBattle
-	dw VictoryRoad3EndBattleText4 ; TextEndBattle
-	dw VictoryRoad3EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_2, 4, VictoryRoad3BattleText4, VictoryRoad3EndBattleText4, VictoryRoad3AfterBattleText4
 VictoryRoad3TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3
-	dw VictoryRoad3BattleText5 ; TextBeforeBattle
-	dw VictoryRoad3AfterBattleText5 ; TextAfterBattle
-	dw VictoryRoad3EndBattleText5 ; TextEndBattle
-	dw VictoryRoad3EndBattleText5 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_VICTORY_ROAD_3_TRAINER_3, 4, VictoryRoad3BattleText5, VictoryRoad3EndBattleText5, VictoryRoad3AfterBattleText5
+	db -1 ; end
 
 VictoryRoad3Text1:
 	text_asm

@@ -61,9 +61,9 @@ PewterGymScript_5c3df:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 0, [hl]
+	set BIT_BOULDERBADGE, [hl]
 
 	ld a, HS_GYM_GUY
 	ld [wMissableObjectIndex], a
@@ -88,15 +88,8 @@ PewterGym_TextPointers:
 	dw PewterGymText6
 
 PewterGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_PEWTER_GYM_TRAINER_0
-	db ($5 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_PEWTER_GYM_TRAINER_0
-	dw PewterGymBattleText1 ; TextBeforeBattle
-	dw PewterGymAfterBattleText1 ; TextAfterBattle
-	dw PewterGymEndBattleText1 ; TextEndBattle
-	dw PewterGymEndBattleText1 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_PEWTER_GYM_TRAINER_0, 5, PewterGymBattleText1, PewterGymEndBattleText1, PewterGymAfterBattleText1
+	db -1 ; end
 
 PewterGymText1:
 	text_asm
@@ -183,7 +176,7 @@ PewterGymAfterBattleText1:
 PewterGymText3:
 	text_asm
 	ld a, [wBeatGymFlags]
-	bit 0, a
+	bit BIT_BOULDERBADGE, a
 	jr nz, .asm_5c50c
 	ld hl, PewterGymText_5c515
 	call PrintText

@@ -26,87 +26,24 @@ Route9_TextPointers:
 	dw Route9Text11
 
 Route9TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_0
-	dw Route9BattleText1 ; TextBeforeBattle
-	dw Route9AfterBattleText1 ; TextAfterBattle
-	dw Route9EndBattleText1 ; TextEndBattle
-	dw Route9EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_0, 3, Route9BattleText1, Route9EndBattleText1, Route9AfterBattleText1
 Route9TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_1
-	dw Route9BattleText2 ; TextBeforeBattle
-	dw Route9AfterBattleText2 ; TextAfterBattle
-	dw Route9EndBattleText2 ; TextEndBattle
-	dw Route9EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_1, 2, Route9BattleText2, Route9EndBattleText2, Route9AfterBattleText2
 Route9TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_2
-	dw Route9BattleText3 ; TextBeforeBattle
-	dw Route9AfterBattleText3 ; TextAfterBattle
-	dw Route9EndBattleText3 ; TextEndBattle
-	dw Route9EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_2, 4, Route9BattleText3, Route9EndBattleText3, Route9AfterBattleText3
 Route9TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_3
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_3
-	dw Route9BattleText4 ; TextBeforeBattle
-	dw Route9AfterBattleText4 ; TextAfterBattle
-	dw Route9EndBattleText4 ; TextEndBattle
-	dw Route9EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_3, 2, Route9BattleText4, Route9EndBattleText4, Route9AfterBattleText4
 Route9TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_4
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_4
-	dw Route9BattleText5 ; TextBeforeBattle
-	dw Route9AfterBattleText5 ; TextAfterBattle
-	dw Route9EndBattleText5 ; TextEndBattle
-	dw Route9EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_4, 2, Route9BattleText5, Route9EndBattleText5, Route9AfterBattleText5
 Route9TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_5
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_5
-	dw Route9BattleText6 ; TextBeforeBattle
-	dw Route9AfterBattleText6 ; TextAfterBattle
-	dw Route9EndBattleText6 ; TextEndBattle
-	dw Route9EndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_5, 3, Route9BattleText6, Route9EndBattleText6, Route9AfterBattleText6
 Route9TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_6
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_6
-	dw Route9BattleText7 ; TextBeforeBattle
-	dw Route9AfterBattleText7 ; TextAfterBattle
-	dw Route9EndBattleText7 ; TextEndBattle
-	dw Route9EndBattleText7 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_6, 4, Route9BattleText7, Route9EndBattleText7, Route9AfterBattleText7
 Route9TrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_7, 1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_7, 1
-	dw Route9BattleText8 ; TextBeforeBattle
-	dw Route9AfterBattleText8 ; TextAfterBattle
-	dw Route9EndBattleText8 ; TextEndBattle
-	dw Route9EndBattleText8 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_7, 1, 2, Route9BattleText8, Route9EndBattleText8, Route9AfterBattleText8
 Route9TrainerHeader8:
-	dbEventFlagBit EVENT_BEAT_ROUTE_9_TRAINER_8, 1
-	db ($2 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_9_TRAINER_8, 1
-	dw Route9BattleText9 ; TextBeforeBattle
-	dw Route9AfterBattleText9 ; TextAfterBattle
-	dw Route9EndBattleText9 ; TextEndBattle
-	dw Route9EndBattleText9 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_8, 1, 2, Route9BattleText9, Route9EndBattleText9, Route9AfterBattleText9
+	db -1 ; end
 
 Route9Text1:
 	text_asm

@@ -11,7 +11,7 @@
 	dw PinsirPicFront, PinsirPicBack
 
 	db VICEGRIP, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 5 ; growth rate
+	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \

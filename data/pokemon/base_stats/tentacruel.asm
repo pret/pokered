@@ -11,7 +11,7 @@
 	dw TentacruelPicFront, TentacruelPicBack
 
 	db ACID, SUPERSONIC, WRAP, NO_MOVE ; level 1 learnset
-	db 5 ; growth rate
+	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm SWORDS_DANCE, TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  BUBBLEBEAM,   \

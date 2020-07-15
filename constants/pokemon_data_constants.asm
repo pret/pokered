@@ -28,3 +28,14 @@ HOF_TEAM_CAPACITY EQU 50
 
 MAX_EVOLUTIONS EQU 3
 EVOLUTION_SIZE EQU 4
+
+
+; wMonHGrowthRate values
+; GrowthRateTable indexes (see data/growth_rates.asm)
+	const_def
+	const GROWTH_MEDIUM_FAST
+	const GROWTH_SLIGHTLY_FAST
+	const GROWTH_SLIGHTLY_SLOW
+	const GROWTH_MEDIUM_SLOW
+	const GROWTH_FAST
+	const GROWTH_SLOW

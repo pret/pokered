@@ -11,7 +11,7 @@
 	dw CharmanderPicFront, CharmanderPicBack
 
 	db SCRATCH, GROWL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 3 ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   SWORDS_DANCE, MEGA_KICK,    TOXIC,        BODY_SLAM,    \

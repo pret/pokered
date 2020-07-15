@@ -11,7 +11,7 @@
 	dw DragonairPicFront, DragonairPicBack
 
 	db WRAP, LEER, THUNDER_WAVE, NO_MOVE ; level 1 learnset
-	db 5 ; growth rate
+	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm TOXIC,        HORN_DRILL,   BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \

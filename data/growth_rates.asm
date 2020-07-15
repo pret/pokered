@@ -1,12 +1,19 @@
-; each entry has the following scheme:
-; %AAAABBBB %SCCCCCCC %DDDDDDDD %EEEEEEEE
-; resulting in
-;  (a*n^3)/b + sign*c*n^2 + d*n - e
-; where sign = -1 <=> S=1
+growth_rate: MACRO
+; [1]/[2]*n**3 + [3]*n**2 + [4]*n - [5]
+	dn \1, \2
+	if \3 & $80 ; signed
+		db -\3 | $80
+	else
+		db \3
+	endc
+	db \4, \5
+ENDM
+
 GrowthRateTable:
-	db $11,$00,$00,$00 ; medium fast      n^3
-	db $34,$0A,$00,$1E ; (unused?)    3/4 n^3 + 10 n^2         - 30
-	db $34,$14,$00,$46 ; (unused?)    3/4 n^3 + 20 n^2         - 70
-	db $65,$8F,$64,$8C ; medium slow: 6/5 n^3 - 15 n^2 + 100 n - 140
-	db $45,$00,$00,$00 ; fast:        4/5 n^3
-	db $54,$00,$00,$00 ; slow:        5/4 n^3
+; entries correspond to GROWTH_* (see constants/pokemon_data_constants.asm)
+	growth_rate 1, 1,   0,   0,   0 ; Medium Fast
+	growth_rate 3, 4,  10,   0,  30 ; Slightly Fast
+	growth_rate 3, 4,  20,   0,  70 ; Slightly Slow
+	growth_rate 6, 5, -15, 100, 140 ; Medium Slow
+	growth_rate 4, 5,   0,   0,   0 ; Fast
+	growth_rate 5, 4,   0,   0,   0 ; Slow

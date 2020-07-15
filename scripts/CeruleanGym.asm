@@ -61,9 +61,9 @@ CeruleanGymScript_5c70d:
 	call DisplayTextID
 .gymVictory
 	ld hl, wObtainedBadges
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 	ld hl, wBeatGymFlags
-	set 1, [hl]
+	set BIT_CASCADEBADGE, [hl]
 
 	; deactivate gym trainers
 	SetEvents EVENT_BEAT_CERULEAN_GYM_TRAINER_0, EVENT_BEAT_CERULEAN_GYM_TRAINER_1
@@ -80,24 +80,10 @@ CeruleanGym_TextPointers:
 	dw CeruleanGymText7
 
 CeruleanGymTrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_0
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_0
-	dw CeruleanGymBattleText1 ; TextBeforeBattle
-	dw CeruleanGymAfterBattleText1 ; TextAfterBattle
-	dw CeruleanGymEndBattleText1 ; TextEndBattle
-	dw CeruleanGymEndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_0, 3, CeruleanGymBattleText1, CeruleanGymEndBattleText1, CeruleanGymAfterBattleText1
 CeruleanGymTrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_1
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_CERULEAN_GYM_TRAINER_1
-	dw CeruleanGymBattleText2 ; TextBeforeBattle
-	dw CeruleanGymAfterBattleText2 ; TextAfterBattle
-	dw CeruleanGymEndBattleText2 ; TextEndBattle
-	dw CeruleanGymEndBattleText2 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_CERULEAN_GYM_TRAINER_1, 3, CeruleanGymBattleText2, CeruleanGymEndBattleText2, CeruleanGymAfterBattleText2
+	db -1 ; end
 
 CeruleanGymText1:
 	text_asm

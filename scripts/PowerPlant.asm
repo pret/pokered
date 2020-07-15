@@ -29,87 +29,24 @@ PowerPlant_TextPointers:
 	dw PickUpItemText
 
 Voltorb0TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_0
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_0
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_0, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb1TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_1
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_1
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_1, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb2TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_2
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_2
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_2, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb3TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_3
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_3
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_3, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb4TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_4
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_4
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_4, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb5TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_5
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_5
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_5, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb6TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_6
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_6
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_6, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 Voltorb7TrainerHeader:
-	dbEventFlagBit EVENT_BEAT_POWER_PLANT_VOLTORB_7, 1
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_POWER_PLANT_VOLTORB_7, 1
-	dw VoltorbBattleText ; TextBeforeBattle
-	dw VoltorbBattleText ; TextAfterBattle
-	dw VoltorbBattleText ; TextEndBattle
-	dw VoltorbBattleText ; TextEndBattle
-
+	trainer EVENT_BEAT_POWER_PLANT_VOLTORB_7, 1, 0, VoltorbBattleText, VoltorbBattleText, VoltorbBattleText
 ZapdosTrainerHeader:
-	dbEventFlagBit EVENT_BEAT_ZAPDOS, 1
-	db 0 ; view range
-	dwEventFlagAddress EVENT_BEAT_ZAPDOS, 1
-	dw ZapdosBattleText ; TextBeforeBattle
-	dw ZapdosBattleText ; TextAfterBattle
-	dw ZapdosBattleText ; TextEndBattle
-	dw ZapdosBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ZAPDOS, 1, 0, ZapdosBattleText, ZapdosBattleText, ZapdosBattleText
+	db -1 ; end
 
 InitVoltorbBattle:
 	call TalkToTrainer

@@ -1,48 +1,56 @@
 DoorTileIDPointers:
-	dbw OVERWORLD,   OverworldDoorTileIDs
-	dbw FOREST,      ForestDoorTileIDs
-	dbw MART,        MartDoorTileIDs
-	dbw HOUSE,       HouseDoorTileIDs
-	dbw FOREST_GATE, TilesetMuseumDoorTileIDs
-	dbw MUSEUM,      TilesetMuseumDoorTileIDs
-	dbw GATE,        TilesetMuseumDoorTileIDs
-	dbw SHIP,        ShipDoorTileIDs
-	dbw LOBBY,       LobbyDoorTileIDs
-	dbw MANSION,     MansionDoorTileIDs
-	dbw LAB,         LabDoorTileIDs
-	dbw FACILITY,    FacilityDoorTileIDs
-	dbw PLATEAU,     PlateauDoorTileIDs
-	db $ff
+	dbw OVERWORLD,   .OverworldDoorTileIDs
+	dbw FOREST,      .ForestDoorTileIDs
+	dbw MART,        .MartDoorTileIDs
+	dbw HOUSE,       .HouseDoorTileIDs
+	dbw FOREST_GATE, .TilesetMuseumDoorTileIDs
+	dbw MUSEUM,      .TilesetMuseumDoorTileIDs
+	dbw GATE,        .TilesetMuseumDoorTileIDs
+	dbw SHIP,        .ShipDoorTileIDs
+	dbw LOBBY,       .LobbyDoorTileIDs
+	dbw MANSION,     .MansionDoorTileIDs
+	dbw LAB,         .LabDoorTileIDs
+	dbw FACILITY,    .FacilityDoorTileIDs
+	dbw PLATEAU,     .PlateauDoorTileIDs
+	db -1 ; end
 
-OverworldDoorTileIDs:
-	db $1B,$58,$00
+door_tiles: MACRO
+REPT _NARG
+	db \1
+	shift
+ENDR
+	db 0 ; end
+ENDM
 
-ForestDoorTileIDs:
-	db $3a,$00
+.OverworldDoorTileIDs:
+	door_tiles $1B, $58
 
-MartDoorTileIDs:
-	db $5e,$00
+.ForestDoorTileIDs:
+	door_tiles $3a
 
-HouseDoorTileIDs:
-	db $54,$00
+.MartDoorTileIDs:
+	door_tiles $5e
 
-TilesetMuseumDoorTileIDs:
-	db $3b,$00
+.HouseDoorTileIDs:
+	door_tiles $54
 
-ShipDoorTileIDs:
-	db $1e,$00
+.TilesetMuseumDoorTileIDs:
+	door_tiles $3b
 
-LobbyDoorTileIDs:
-	db $1c,$38,$1a,$00
+.ShipDoorTileIDs:
+	door_tiles $1e
 
-MansionDoorTileIDs:
-	db $1a,$1c,$53,$00
+.LobbyDoorTileIDs:
+	door_tiles $1c, $38, $1a
 
-LabDoorTileIDs:
-	db $34,$00
+.MansionDoorTileIDs:
+	door_tiles $1a, $1c, $53
 
-FacilityDoorTileIDs:
-	db $43,$58,$1b,$00
+.LabDoorTileIDs:
+	door_tiles $34
 
-PlateauDoorTileIDs:
-	db $3b,$1b,$00
+.FacilityDoorTileIDs:
+	door_tiles $43, $58, $1b
+
+.PlateauDoorTileIDs:
+	door_tiles $3b, $1b

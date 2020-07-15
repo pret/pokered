@@ -3954,16 +3954,16 @@ CheckForDisobedience:
 .monIsTraded
 ; what level might disobey?
 	ld hl, wObtainedBadges
-	bit 7, [hl]
+	bit BIT_EARTHBADGE, [hl]
 	ld a, 101
 	jr nz, .next
-	bit 5, [hl]
+	bit BIT_MARSHBADGE, [hl]
 	ld a, 70
 	jr nz, .next
-	bit 3, [hl]
+	bit BIT_RAINBOWBADGE, [hl]
 	ld a, 50
 	jr nz, .next
-	bit 1, [hl]
+	bit BIT_CASCADEBADGE, [hl]
 	ld a, 30
 	jr nz, .next
 	ld a, 10

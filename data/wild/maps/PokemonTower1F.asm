@@ -1,3 +1,4 @@
 TowerMons1:
-	db $00
-	db $00
+	db 0 ; grass encounter rate
+
+	db 0 ; water encounter rate

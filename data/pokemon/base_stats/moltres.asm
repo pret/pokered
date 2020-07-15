@@ -11,7 +11,7 @@
 	dw MoltresPicFront, MoltresPicBack
 
 	db PECK, FIRE_SPIN, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 5 ; growth rate
+	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm RAZOR_WIND,   WHIRLWIND,    TOXIC,        TAKE_DOWN,    DOUBLE_EDGE,  \

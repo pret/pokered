@@ -18,15 +18,8 @@ CeruleanCaveB1F_TextPointers:
 	dw PickUpItemText
 
 MewtwoTrainerHeader:
-	dbEventFlagBit EVENT_BEAT_MEWTWO
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MEWTWO
-	dw MewtwoBattleText ; TextBeforeBattle
-	dw MewtwoBattleText ; TextAfterBattle
-	dw MewtwoBattleText ; TextEndBattle
-	dw MewtwoBattleText ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_MEWTWO, 0, MewtwoBattleText, MewtwoBattleText, MewtwoBattleText
+	db -1 ; end
 
 MewtwoText:
 	text_asm

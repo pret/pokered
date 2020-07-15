@@ -1,22 +1,3 @@
-; [wPartyMenuTypeOrMessageID] = menu type / message ID
-; if less than $F0, it is a menu type
-; menu types:
-; 00: normal pokemon menu (e.g. Start menu)
-; 01: use healing item on pokemon menu
-; 02: in-battle switch pokemon menu
-; 03: learn TM/HM menu
-; 04: swap pokemon positions menu
-; 05: use evolution stone on pokemon menu
-; otherwise, it is a message ID
-; f0: poison healed
-; f1: burn healed
-; f2: freeze healed
-; f3: sleep healed
-; f4: paralysis healed
-; f5: HP healed
-; f6: health returned
-; f7: revitalized
-; f8: leveled up
 DrawPartyMenu_::
 	xor a
 	ldh [hAutoBGTransferEnabled], a
@@ -197,7 +178,7 @@ RedrawPartyMenu_::
 	push hl
 	set 6, [hl] ; turn off letter printing delay
 	ld a, [wPartyMenuTypeOrMessageID] ; message ID
-	cp $F0
+	cp FIRST_PARTY_MENU_TEXT_ID
 	jr nc, .printItemUseMessage
 	add a
 	ld hl, PartyMenuMessagePointers

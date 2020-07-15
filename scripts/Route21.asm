@@ -24,87 +24,24 @@ Route21_TextPointers:
 	dw Route21Text9
 
 Route21TrainerHeader0:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_0
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_0
-	dw Route21BattleText1 ; TextBeforeBattle
-	dw Route21AfterBattleText1 ; TextAfterBattle
-	dw Route21EndBattleText1 ; TextEndBattle
-	dw Route21EndBattleText1 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_0, 0, Route21BattleText1, Route21EndBattleText1, Route21AfterBattleText1
 Route21TrainerHeader1:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_1
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_1
-	dw Route21BattleText2 ; TextBeforeBattle
-	dw Route21AfterBattleText2 ; TextAfterBattle
-	dw Route21EndBattleText2 ; TextEndBattle
-	dw Route21EndBattleText2 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_1, 0, Route21BattleText2, Route21EndBattleText2, Route21AfterBattleText2
 Route21TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_2
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_2
-	dw Route21BattleText3 ; TextBeforeBattle
-	dw Route21AfterBattleText3 ; TextAfterBattle
-	dw Route21EndBattleText3 ; TextEndBattle
-	dw Route21EndBattleText3 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_2, 4, Route21BattleText3, Route21EndBattleText3, Route21AfterBattleText3
 Route21TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_3
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_3
-	dw Route21BattleText4 ; TextBeforeBattle
-	dw Route21AfterBattleText4 ; TextAfterBattle
-	dw Route21EndBattleText4 ; TextEndBattle
-	dw Route21EndBattleText4 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_3, 4, Route21BattleText4, Route21EndBattleText4, Route21AfterBattleText4
 Route21TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_4
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_4
-	dw Route21BattleText5 ; TextBeforeBattle
-	dw Route21AfterBattleText5 ; TextAfterBattle
-	dw Route21EndBattleText5 ; TextEndBattle
-	dw Route21EndBattleText5 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_4, 4, Route21BattleText5, Route21EndBattleText5, Route21AfterBattleText5
 Route21TrainerHeader5:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_5
-	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_5
-	dw Route21BattleText6 ; TextBeforeBattle
-	dw Route21AfterBattleText6 ; TextAfterBattle
-	dw Route21EndBattleText6 ; TextEndBattle
-	dw Route21EndBattleText6 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_5, 4, Route21BattleText6, Route21EndBattleText6, Route21AfterBattleText6
 Route21TrainerHeader6:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_6
-	db ($3 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_6
-	dw Route21BattleText7 ; TextBeforeBattle
-	dw Route21AfterBattleText7 ; TextAfterBattle
-	dw Route21EndBattleText7 ; TextEndBattle
-	dw Route21EndBattleText7 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_6, 3, Route21BattleText7, Route21EndBattleText7, Route21AfterBattleText7
 Route21TrainerHeader7:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_7, 1
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_7, 1
-	dw Route21BattleText8 ; TextBeforeBattle
-	dw Route21AfterBattleText8 ; TextAfterBattle
-	dw Route21EndBattleText8 ; TextEndBattle
-	dw Route21EndBattleText8 ; TextEndBattle
-
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_7, 1, 0, Route21BattleText8, Route21EndBattleText8, Route21AfterBattleText8
 Route21TrainerHeader8:
-	dbEventFlagBit EVENT_BEAT_ROUTE_21_TRAINER_8, 1
-	db ($0 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_ROUTE_21_TRAINER_8, 1
-	dw Route21BattleText9 ; TextBeforeBattle
-	dw Route21AfterBattleText9 ; TextAfterBattle
-	dw Route21EndBattleText9 ; TextEndBattle
-	dw Route21EndBattleText9 ; TextEndBattle
-
-	db $ff
+	trainer EVENT_BEAT_ROUTE_21_TRAINER_8, 1, 0, Route21BattleText9, Route21EndBattleText9, Route21AfterBattleText9
+	db -1 ; end
 
 Route21Text1:
 	text_asm

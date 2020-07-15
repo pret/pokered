@@ -1,3 +1,7 @@
 EscapeRopeTilesets:
-	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
-	db $ff ; terminator
+	db FOREST
+	db CEMETERY
+	db CAVERN
+	db FACILITY
+	db INTERIOR
+	db -1 ; end

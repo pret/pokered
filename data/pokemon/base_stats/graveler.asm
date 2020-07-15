@@ -11,7 +11,7 @@
 	dw GravelerPicFront, GravelerPicBack
 
 	db TACKLE, DEFENSE_CURL, NO_MOVE, NO_MOVE ; level 1 learnset
-	db 3 ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm MEGA_PUNCH,   TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \

@@ -263,7 +263,7 @@ CheckForEngagingTrainers::
 	ld a, [de]
 	ld [wSpriteIndex], a                     ; store trainer flag's bit
 	ld [wTrainerHeaderFlagBit], a
-	cp $ff
+	cp -1
 	ret z
 	ld a, $2
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
