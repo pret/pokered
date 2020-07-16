@@ -39,6 +39,10 @@ SLP EQU %111 ; sleep counter
 
 MAX_STAT_VALUE EQU 999
 
+; trainer dvs
+ATKDEFDV_TRAINER EQU $98
+SPDSPCDV_TRAINER EQU $88
+
 ; volatile statuses 1
 	const_def
 	const STORING_ENERGY           ; 0 ; Bide
