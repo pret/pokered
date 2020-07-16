@@ -25,7 +25,7 @@ MoveSprite_::
 	ld [hli], a
 	inc de
 	inc c
-	cp $FF ; have we reached the end of the movement data?
+	cp -1 ; have we reached the end of the movement data?
 	jr nz, .loop
 
 	ld a, c

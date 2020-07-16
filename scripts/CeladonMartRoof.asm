@@ -38,7 +38,7 @@ CeladonMartRoofDrinkList:
 	db FRESH_WATER
 	db SODA_POP
 	db LEMONADE
-	db $00
+	db 0 ; end
 
 CeladonMartRoofScript_GiveDrinkToGirl:
 	ld hl, wd730

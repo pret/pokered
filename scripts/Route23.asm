@@ -32,16 +32,16 @@ Route23Script0:
 	EventFlagBit c, EVENT_PASSED_EARTHBADGE_CHECK + 1, EVENT_PASSED_CASCADEBADGE_CHECK
 .asm_51224
 	ld a, [hli]
-	cp $ff
+	cp -1
 	ret z
 	inc e
 	dec c
 	cp b
 	jr nz, .asm_51224
-	cp $23
+	cp 35
 	jr nz, .asm_51237
 	ld a, [wXCoord]
-	cp $e
+	cp 14
 	ret nc
 .asm_51237
 	ld a, e
@@ -61,8 +61,14 @@ Route23Script0:
 	ret
 
 YCoordsData_51255:
-	db $23,$38,$55,$60,$69,$77,$88
-	db $FF
+	db 35
+	db 56
+	db 85
+	db 96
+	db 105
+	db 119
+	db 136
+	db -1 ; end
 
 Route23Script_5125d:
 	ld hl, BadgeTextPointers

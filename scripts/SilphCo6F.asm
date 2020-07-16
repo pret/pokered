@@ -24,8 +24,8 @@ SilphCo6Script_1a1bf:
 	predef_jump ReplaceTileBlock
 
 SilphCo6GateCoords:
-	db $06,$02
-	db $FF
+	dbmapcoord  2,  6
+	db -1 ; end
 
 SilphCo6Script_1a1e6:
 	ldh a, [hUnlockedSilphCoDoors]

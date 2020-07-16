@@ -52,7 +52,7 @@ Route22RivalMovementData:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 Route22Script0:
 	CheckEvent EVENT_ROUTE22_RIVAL_WANTS_BATTLE
@@ -75,9 +75,9 @@ Route22Script0:
 	ret
 
 .Route22RivalBattleCoords
-	db $04, $1D
-	db $05, $1D
-	db $FF
+	dbmapcoord 29,  4
+	dbmapcoord 29,  5
+	db -1 ; end
 
 .firstRivalBattle
 	ld a, $1
@@ -141,9 +141,9 @@ Route22Script1:
 
 StarterMons_50faf:
 ; starter the rival picked, rival trainer number
-	db STARTER2,$04
-	db STARTER3,$05
-	db STARTER1,$06
+	db STARTER2, 4
+	db STARTER3, 5
+	db STARTER1, 6
 
 Route22Script2:
 	ld a, [wIsInBattle]
@@ -202,7 +202,7 @@ Route22RivalExitMovementData1:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 Route22RivalExitMovementData2:
 	db NPC_MOVEMENT_UP
@@ -215,7 +215,7 @@ Route22RivalExitMovementData2:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 Route22Script3:
 	ld a, [wd730]
@@ -296,9 +296,9 @@ Route22Script4:
 	ret
 
 StarterMons_510d9:
-	db STARTER2,$0a
-	db STARTER3,$0b
-	db STARTER1,$0c
+	db STARTER2, 10
+	db STARTER3, 11
+	db STARTER1, 12
 
 Route22Script5:
 	ld a, [wIsInBattle]
@@ -355,12 +355,11 @@ Route22MoveRival2:
 
 MovementData_5114c:
 	db NPC_MOVEMENT_LEFT
-
 MovementData_5114d:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_LEFT
-	db $FF
+	db -1 ; end
 
 Route22Script6:
 	ld a, [wd730]

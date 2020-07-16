@@ -40,9 +40,9 @@ ViridianMartScript0:
 	ret
 
 RLEMovement1d4bb:
-	db D_LEFT, $01
-	db D_UP, $02
-	db $ff
+	db D_LEFT, 1
+	db D_UP, 2
+	db -1 ; end
 
 ViridianMartScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

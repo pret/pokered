@@ -42,11 +42,11 @@ PokemonTower5Script0:
 	ret
 
 CoordsData_60992:
-	db $08,$0A
-	db $08,$0B
-	db $09,$0A
-	db $09,$0B
-	db $FF
+	dbmapcoord 10,  8
+	dbmapcoord 11,  8
+	dbmapcoord 10,  9
+	dbmapcoord 11,  9
+	db -1 ; end
 
 PokemonTower5F_TextPointers:
 	dw PokemonTower5Text1

@@ -49,84 +49,68 @@ ViridianGymScript0:
 	ld [wCurMapScript], a
 	ret
 
-;format:
-;db y,x
-;dw pointer to movement
 ViridianGymArrowTilePlayerMovement:
-	db $b,$13
-	dw ViridianGymArrowMovement1
-	db $1,$13
-	dw ViridianGymArrowMovement2
-	db $2,$12
-	dw ViridianGymArrowMovement3
-	db $2,$b
-	dw ViridianGymArrowMovement4
-	db $a,$10
-	dw ViridianGymArrowMovement5
-	db $6,$4
-	dw ViridianGymArrowMovement6
-	db $d,$5
-	dw ViridianGymArrowMovement7
-	db $e,$4
-	dw ViridianGymArrowMovement8
-	db $f,$0
-	dw ViridianGymArrowMovement9
-	db $f,$1
-	dw ViridianGymArrowMovement10
-	db $10,$d
-	dw ViridianGymArrowMovement11
-	db $11,$d
-	dw ViridianGymArrowMovement12
-	db $FF
+	map_coord_movement 19, 11, ViridianGymArrowMovement1
+	map_coord_movement 19,  1, ViridianGymArrowMovement2
+	map_coord_movement 18,  2, ViridianGymArrowMovement3
+	map_coord_movement 11,  2, ViridianGymArrowMovement4
+	map_coord_movement 16, 10, ViridianGymArrowMovement5
+	map_coord_movement  4,  6, ViridianGymArrowMovement6
+	map_coord_movement  5, 13, ViridianGymArrowMovement7
+	map_coord_movement  4, 14, ViridianGymArrowMovement8
+	map_coord_movement  0, 15, ViridianGymArrowMovement9
+	map_coord_movement  1, 15, ViridianGymArrowMovement10
+	map_coord_movement 13, 16, ViridianGymArrowMovement11
+	map_coord_movement 13, 17, ViridianGymArrowMovement12
+	db -1 ; end
 
-;format: direction, count
 ViridianGymArrowMovement1:
-	db D_UP,$09
-	db $FF
+	db D_UP, 9
+	db -1 ; end
 
 ViridianGymArrowMovement2:
-	db D_LEFT,$08
-	db $FF
+	db D_LEFT, 8
+	db -1 ; end
 
 ViridianGymArrowMovement3:
-	db D_DOWN,$09
-	db $FF
+	db D_DOWN, 9
+	db -1 ; end
 
 ViridianGymArrowMovement4:
-	db D_RIGHT,$06
-	db $FF
+	db D_RIGHT, 6
+	db -1 ; end
 
 ViridianGymArrowMovement5:
-	db D_DOWN,$02
-	db $FF
+	db D_DOWN, 2
+	db -1 ; end
 
 ViridianGymArrowMovement6:
-	db D_DOWN,$07
-	db $FF
+	db D_DOWN, 7
+	db -1 ; end
 
 ViridianGymArrowMovement7:
-	db D_RIGHT,$08
-	db $FF
+	db D_RIGHT, 8
+	db -1 ; end
 
 ViridianGymArrowMovement8:
-	db D_RIGHT,$09
-	db $FF
+	db D_RIGHT, 9
+	db -1 ; end
 
 ViridianGymArrowMovement9:
-	db D_UP,$08
-	db $FF
+	db D_UP, 8
+	db -1 ; end
 
 ViridianGymArrowMovement10:
-	db D_UP,$06
-	db $FF
+	db D_UP, 6
+	db -1 ; end
 
 ViridianGymArrowMovement11:
-	db D_LEFT,$06
-	db $FF
+	db D_LEFT, 6
+	db -1 ; end
 
 ViridianGymArrowMovement12:
-	db D_LEFT,$0C
-	db $FF
+	db D_LEFT, 12
+	db -1 ; end
 
 ViridianGymScript4:
 	ld a, [wSimulatedJoypadStatesIndex]

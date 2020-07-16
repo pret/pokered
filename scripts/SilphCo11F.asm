@@ -24,8 +24,8 @@ SilphCo11Script_62110:
 	predef_jump ReplaceTileBlock
 
 SilphCo11GateCoords:
-	db $06,$03
-	db $FF
+	dbmapcoord  3,  6
+	db -1 ; end
 
 SilphCo11Script_62137:
 	push hl
@@ -85,7 +85,7 @@ SilphCo11Script_6216d:
 	ld hl, MissableObjectIDs_62194
 .asm_62184
 	ld a, [hli]
-	cp $ff
+	cp -1
 	ret z
 	push hl
 	ld [wMissableObjectIndex], a
@@ -100,7 +100,7 @@ MissableObjectIDs_62194:
 	db HS_SAFFRON_CITY_B
 	db HS_SAFFRON_CITY_C
 	db HS_SAFFRON_CITY_D
-	db $FF
+	db -1 ; end
 
 MissableObjectIDs_6219b:
 	db HS_SAFFRON_CITY_1
@@ -143,7 +143,7 @@ MissableObjectIDs_6219b:
 	db HS_SILPH_CO_11F_1
 	db HS_SILPH_CO_11F_2
 	db HS_SILPH_CO_11F_3
-	db $FF
+	db -1 ; end
 
 SilphCo11Script_621c4:
 	xor a
@@ -186,15 +186,15 @@ SilphCo11Script0:
 	jp SilphCo11Script_621c8
 
 CoordsData_62211:
-	db $0D,$06
-	db $0C,$07
-	db $FF
+	dbmapcoord  6, 13
+	dbmapcoord  7, 12
+	db -1 ; end
 
 MovementData_62216:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 SilphCo11Script_6221a:
 	ld [wPlayerMovingDirection], a

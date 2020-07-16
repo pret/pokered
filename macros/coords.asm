@@ -83,3 +83,8 @@ lda_coord: MACRO
 		ld a, [(\2) * SCREEN_WIDTH + (\1) + wTileMap]
 	ENDC
 ENDM
+
+dbmapcoord: MACRO
+; x, y
+	db \2, \1
+ENDM

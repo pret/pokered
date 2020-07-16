@@ -33,9 +33,9 @@ SilphCo4Script_19d21:
 	predef_jump ReplaceTileBlock
 
 SilphCo4GateCoords:
-	db $06,$02
-	db $04,$06
-	db $FF
+	dbmapcoord  2,  6
+	dbmapcoord  6,  4
+	db -1 ; end
 
 SilphCo4Script_19d5d:
 	push hl

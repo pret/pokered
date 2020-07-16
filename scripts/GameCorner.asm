@@ -90,7 +90,7 @@ MovementData_48c5a:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 MovementData_48c63:
 	db NPC_MOVEMENT_RIGHT
@@ -98,7 +98,7 @@ MovementData_48c63:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 CeladonGameCornerScript2:
 	ld a, [wd730]

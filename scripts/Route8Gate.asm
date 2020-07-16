@@ -50,9 +50,9 @@ Route8GateScript0:
 	jp DisplayTextID
 
 CoordsData_1e22c:
-	db 3,2
-	db 4,2
-	db $ff
+	dbmapcoord  2,  3
+	dbmapcoord  2,  4
+	db -1 ; end
 
 Route8GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

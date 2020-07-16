@@ -101,20 +101,20 @@ ENDC
 	ret
 
 CeruleanCityCoords1:
-	db $07,$1e
-	db $09,$1e
-	db $ff
+	dbmapcoord 30,  7
+	dbmapcoord 30,  9
+	db -1 ; end
 
 CeruleanCityCoords2:
-	db $06,$14
-	db $06,$15
-	db $ff
+	dbmapcoord 20,  6
+	dbmapcoord 21,  6
+	db -1 ; end
 
 CeruleanCityMovement1:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 CeruleanCityScript_1955d:
 	ld a, 1
@@ -205,7 +205,7 @@ CeruleanCityMovement3:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 CeruleanCityMovement4:
 	db NPC_MOVEMENT_RIGHT
@@ -215,7 +215,7 @@ CeruleanCityMovement4:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 CeruleanCityScript3:
 	ld a, [wd730]

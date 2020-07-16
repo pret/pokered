@@ -43,9 +43,9 @@ SafariZoneGate_ScriptPointers:
 	ret
 
 .CoordsData_75221:
-	db $02,$03
-	db $02,$04
-	db $FF
+	dbmapcoord  3,  2
+	dbmapcoord  4,  2
+	db -1 ; end
 
 .SafariZoneEntranceScript1
 	call SafariZoneEntranceScript_752b4

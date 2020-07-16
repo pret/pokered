@@ -69,8 +69,8 @@ HallofFameRoomScript0:
 	ret
 
 RLEMovement5a528:
-	db D_UP,$5
-	db $ff
+	db D_UP, 5
+	db -1 ; end
 
 HallofFameRoomScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

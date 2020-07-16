@@ -60,7 +60,7 @@ OakEntryMovement:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 OaksLabScript2:
 	ld a, [wd730]
@@ -101,8 +101,8 @@ OaksLabScript3:
 	ret
 
 PlayerEntryMovementRLE:
-	db D_UP,$8
-	db $ff
+	db D_UP, 8
+	db -1 ; end
 
 OaksLabScript4:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -212,14 +212,14 @@ OaksLabScript8:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 .MiddleBallMovement2
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 .Squirtle
 	ld de, .RightBallMovement1
@@ -237,7 +237,7 @@ OaksLabScript8:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 .RightBallMovement2
 	db NPC_MOVEMENT_DOWN
@@ -245,7 +245,7 @@ OaksLabScript8:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 .Bulbasaur
 	ld de, .LeftBallMovement1
@@ -274,10 +274,10 @@ OaksLabScript8:
 
 .LeftBallMovement1
 	db NPC_MOVEMENT_DOWN
-	db NPC_MOVEMENT_RIGHT ; not yet terminated!
+	db NPC_MOVEMENT_RIGHT
 .LeftBallMovement2
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 .moveBlue
 	ld a, $1
@@ -462,13 +462,13 @@ OaksLabScript13:
 	ret
 
 .RivalExitMovement
-	db $E0 ; change sprite facing direction
+	db NPC_CHANGE_FACING
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 OaksLabScript14:
 	ld a, [wd730]

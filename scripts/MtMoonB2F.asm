@@ -19,23 +19,23 @@ MtMoonB2F_Script:
 	ret
 
 CoordsData_49d37:
-	db $05,$0B
-	db $05,$0C
-	db $05,$0D
-	db $05,$0E
-	db $06,$0B
-	db $06,$0C
-	db $06,$0D
-	db $06,$0E
-	db $07,$0B
-	db $07,$0C
-	db $07,$0D
-	db $07,$0E
-	db $08,$0B
-	db $08,$0C
-	db $08,$0D
-	db $08,$0E
-	db $FF
+	dbmapcoord 11,  5
+	dbmapcoord 12,  5
+	dbmapcoord 13,  5
+	dbmapcoord 14,  5
+	dbmapcoord 11,  6
+	dbmapcoord 12,  6
+	dbmapcoord 13,  6
+	dbmapcoord 14,  6
+	dbmapcoord 11,  7
+	dbmapcoord 12,  7
+	dbmapcoord 13,  7
+	dbmapcoord 14,  7
+	dbmapcoord 11,  8
+	dbmapcoord 12,  8
+	dbmapcoord 13,  8
+	dbmapcoord 14,  8
+	db -1 ; end
 
 MtMoon3Script_49d58:
 	xor a
@@ -110,22 +110,22 @@ MtMoon3Script4:
 	ret
 
 CoordsData_49dea:
-	db $07,$0C
-	db $06,$0B
-	db $05,$0C
-	db $FF
+	dbmapcoord 12,  7
+	dbmapcoord 11,  6
+	dbmapcoord 12,  5
+	db -1 ; end
 
 CoordsData_49df1:
-	db $07,$0D
-	db $06,$0E
-	db $05,$0E
-	db $FF
+	dbmapcoord 13,  7
+	dbmapcoord 14,  6
+	dbmapcoord 14,  5
+	db -1 ; end
 
 MovementData_49df8:
 	db NPC_MOVEMENT_RIGHT
 MovementData_49df9:
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 MtMoon3Script5:
 	ld a, [wd730]

@@ -78,12 +78,12 @@ LanceScript0:
 	jp LanceShowOrHideEntranceBlocks
 
 LanceTriggerMovementCoords:
-	db $01,$05
-	db $02,$06
-	db $0B,$05
-	db $0B,$06
-	db $10,$18
-	db $FF
+	dbmapcoord  5,  1
+	dbmapcoord  6,  2
+	dbmapcoord  5, 11
+	dbmapcoord  6, 11
+	dbmapcoord 24, 16
+	db -1 ; end
 
 LanceScript2:
 	call EndTrainerBattle
@@ -110,15 +110,15 @@ WalkToLance:
 	ret
 
 WalkToLance_RLEList:
-	db D_UP, $0C
-	db D_LEFT, $0C
-	db D_DOWN, $07
-	db D_LEFT, $06
-	db $FF
+	db D_UP, 12
+	db D_LEFT, 12
+	db D_DOWN, 7
+	db D_LEFT, 6
+	db -1 ; end
 
 LanceScript3:
-	ld a, [wSimulatedJoypadStatesIndex]
-	and a
+	ld  a, [wSimulatedJoypadStatesIndex]
+	and  a
 	ret nz
 	call Delay3
 	xor a

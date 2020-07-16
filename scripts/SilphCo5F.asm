@@ -42,10 +42,10 @@ SilphCo5Script_19f4d:
 	predef_jump ReplaceTileBlock
 
 SilphCo5GateCoords:
-	db $02,$03
-	db $06,$03
-	db $05,$07
-	db $FF
+	dbmapcoord  3,  2
+	dbmapcoord  3,  6
+	dbmapcoord  7,  5
+	db -1 ; end
 
 SilphCo5Script_19f9e:
 	EventFlagAddress hl, EVENT_SILPH_CO_5_UNLOCKED_DOOR1

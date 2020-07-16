@@ -11,7 +11,7 @@ MtMoonPokecenter_TextPointers:
 	dw MtMoonTradeNurseText
 
 MtMoonHealNurseText:
-	db $ff
+	script_pokecenter_nurse
 
 MtMoonPokecenterText2:
 	text_far _MtMoonPokecenterText1

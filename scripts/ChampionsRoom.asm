@@ -40,10 +40,10 @@ GaryScript1:
 	ret
 
 GaryEntrance_RLEMovement:
-	db D_UP,1
-	db D_RIGHT,1
-	db D_UP,3
-	db $ff
+	db D_UP, 1
+	db D_RIGHT, 1
+	db D_UP, 3
+	db -1 ; end
 
 GaryScript2:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -132,7 +132,7 @@ OakEntranceAfterVictoryMovement:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 GaryScript5:
 	ld a, [wd730]
@@ -190,7 +190,7 @@ GaryScript7:
 OakExitGaryRoomMovement:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 GaryScript8:
 	ld a, [wd730]
@@ -217,9 +217,9 @@ GaryScript9:
 	ret
 
 WalkToHallOfFame_RLEMovment:
-	db D_UP,4
-	db D_LEFT,1
-	db $ff
+	db D_UP, 4
+	db D_LEFT, 1
+	db -1 ; end
 
 GaryScript10:
 	ld a, [wSimulatedJoypadStatesIndex]

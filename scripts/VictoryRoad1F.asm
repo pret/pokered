@@ -35,8 +35,8 @@ VictoryRoad1Script0:
 	ret
 
 CoordsData_5da5c:
-	db $0D,$11
-	db $FF
+	dbmapcoord 17, 13
+	db -1 ; end
 
 VictoryRoad1F_TextPointers:
 	dw VictoryRoad1Text1

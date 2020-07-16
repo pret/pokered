@@ -87,11 +87,11 @@ AgathaScript0:
 	ret
 
 AgathaEntranceCoords:
-	db $0A,$04
-	db $0A,$05
-	db $0B,$04
-	db $0B,$05
-	db $FF
+	dbmapcoord  4, 10
+	dbmapcoord  5, 10
+	dbmapcoord  4, 11
+	dbmapcoord  5, 11
+	db -1 ; end
 
 AgathaScript3:
 	ld a, [wSimulatedJoypadStatesIndex]

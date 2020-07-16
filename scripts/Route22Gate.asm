@@ -28,9 +28,9 @@ Route22GateScript0:
 	jp DisplayTextID
 
 Route22GateScriptCoords:
-	db 2,4
-	db 2,5
-	db $ff
+	dbmapcoord  4,  2
+	dbmapcoord  5,  2
+	db -1 ; end
 
 Route22GateScript_1e6ba:
 	ld a, $1

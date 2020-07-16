@@ -24,8 +24,8 @@ SilphCo8Script_5651a:
 	predef_jump ReplaceTileBlock
 
 SilphCo8GateCoords:
-	db $04,$03
-	db $FF
+	dbmapcoord  3,  4
+	db -1 ; end
 
 SilphCo8Script_56541:
 	push hl

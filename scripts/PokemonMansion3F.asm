@@ -51,10 +51,10 @@ Mansion3Script0:
 	ret
 
 CoordsData_52254:
-	db $0E,$10
-	db $0E,$11
-	db $0E,$13
-	db $FF
+	dbmapcoord 16, 14
+	dbmapcoord 17, 14
+	dbmapcoord 19, 14
+	db -1 ; end
 
 Mansion3Script_5225b:
 	xor a
