@@ -194,7 +194,7 @@ PlayAnimation:
 	jr .searchSpecialEffectTableLoop
 .foundMatch
 	ld a, [hli]
-	cp $FF ; is there a sound to play?
+	cp -1 ; is there a sound to play?
 	jr z, .skipPlayingSound
 	ld [wAnimSoundID], a ; store sound
 	push hl
@@ -267,7 +267,7 @@ LoadSubanimation:
 	ld d, a ; de = address of subanimation
 	ld a, [de]
 	ld b, a
-	and 31
+	and %00011111
 	ld [wSubAnimCounter], a ; number of frame blocks
 	ld a, b
 	and %11100000
@@ -650,7 +650,7 @@ DoSpecialEffectByAnimationId:
 	pop hl
 	ret
 
-INCLUDE "data/moves/animation_special_effects.asm"
+INCLUDE "data/battle_anims/special_effects.asm"
 
 DoBallTossSpecialEffects:
 	ld a, [wcf91]
@@ -912,7 +912,7 @@ TailWhipAnimationUnused:
 	ld c, 20
 	jp DelayFrames
 
-INCLUDE "data/moves/animation_special_effect_pointers.asm"
+INCLUDE "data/battle_anims/special_effect_pointers.asm"
 
 AnimationDelay10:
 	ld c, 10
