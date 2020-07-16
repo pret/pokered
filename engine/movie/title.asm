@@ -252,6 +252,11 @@ ENDC
 	and D_UP | SELECT | B_BUTTON
 	cp D_UP | SELECT | B_BUTTON
 	jp z, .doClearSaveDialogue
+IF DEF(_DEBUG)
+	ld a, b
+	bit BIT_SELECT, a
+	jp nz, DebugMenu
+ENDC
 	jp MainMenu
 
 .doClearSaveDialogue

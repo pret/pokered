@@ -7,6 +7,10 @@ SafariZoneCheck::
 	jr SafariZoneGameStillGoing
 
 SafariZoneCheckSteps::
+IF DEF(_DEBUG)
+	call DebugPressedOrHeldB
+	ret nz
+ENDC
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]

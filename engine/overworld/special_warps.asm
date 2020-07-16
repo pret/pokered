@@ -11,7 +11,7 @@ SpecialWarpIn::
 .next
 	bit 1, [hl]
 	jr z, .next3
-	call EmptyFunc
+	call DebugStart
 .next3
 	ld a, 0
 .next2

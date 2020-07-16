@@ -622,7 +622,11 @@ TextCommandJumpTable::
 	dw TextCommand_BOX           ; TX_BOX
 	dw TextCommand_LOW           ; TX_LOW
 	dw TextCommand_PROMPT_BUTTON ; TX_PROMPT_BUTTON
+IF DEF(_DEBUG)
+	dw _ContTextNoPause          ; TX_SCROLL
+ELSE
 	dw TextCommand_SCROLL        ; TX_SCROLL
+ENDC
 	dw TextCommand_START_ASM     ; TX_START_ASM
 	dw TextCommand_NUM           ; TX_NUM
 	dw TextCommand_PAUSE         ; TX_PAUSE
