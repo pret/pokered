@@ -201,7 +201,7 @@ PlaceUnfilledArrowMenuCursor::
 	ld l, a
 	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld [hl], $ec ; outline of right arrow
+	ld [hl], "▷"
 	ld a, b
 	ret
 

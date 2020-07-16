@@ -117,8 +117,8 @@ WalkToLance_RLEList:
 	db -1 ; end
 
 LanceScript3:
-	ld  a, [wSimulatedJoypadStatesIndex]
-	and  a
+	ld a, [wSimulatedJoypadStatesIndex]
+	and a
 	ret nz
 	call Delay3
 	xor a
