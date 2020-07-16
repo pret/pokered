@@ -117,30 +117,18 @@ PokemonTower7Script_60db6:
 	jr .asm_60dcb
 
 CoordsData_60de3:
-	db $0C,$09
-	dw MovementData_60e13
-	db $0B,$0A
-	dw MovementData_60e1b
-	db $0B,$0B
-	dw MovementData_60e22
-	db $0B,$0C
-	dw MovementData_60e22
-	db $0A,$0C
-	dw MovementData_60e28
-	db $09,$0B
-	dw MovementData_60e30
-	db $09,$0A
-	dw MovementData_60e22
-	db $09,$09
-	dw MovementData_60e22
-	db $08,$09
-	dw MovementData_60e37
-	db $07,$0A
-	dw MovementData_60e22
-	db $07,$0B
-	dw MovementData_60e22
-	db $07,$0C
-	dw MovementData_60e22
+	map_coord_movement  9, 12, MovementData_60e13
+	map_coord_movement 10, 11, MovementData_60e1b
+	map_coord_movement 11, 11, MovementData_60e22
+	map_coord_movement 12, 11, MovementData_60e22
+	map_coord_movement 12, 10, MovementData_60e28
+	map_coord_movement 11,  9, MovementData_60e30
+	map_coord_movement 10,  9, MovementData_60e22
+	map_coord_movement  9,  9, MovementData_60e22
+	map_coord_movement  9,  8, MovementData_60e37
+	map_coord_movement 10,  7, MovementData_60e22
+	map_coord_movement 11,  7, MovementData_60e22
+	map_coord_movement 12,  7, MovementData_60e22
 
 MovementData_60e13:
 	db NPC_MOVEMENT_RIGHT
@@ -150,7 +138,7 @@ MovementData_60e13:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_LEFT
-	db $FF
+	db -1 ; end
 
 MovementData_60e1b:
 	db NPC_MOVEMENT_DOWN
@@ -159,7 +147,7 @@ MovementData_60e1b:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 MovementData_60e22:
 	db NPC_MOVEMENT_DOWN
@@ -167,7 +155,7 @@ MovementData_60e22:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 MovementData_60e28:
 	db NPC_MOVEMENT_LEFT
@@ -177,7 +165,7 @@ MovementData_60e28:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 MovementData_60e30:
 	db NPC_MOVEMENT_DOWN
@@ -186,7 +174,7 @@ MovementData_60e30:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 MovementData_60e37:
 	db NPC_MOVEMENT_RIGHT
@@ -196,7 +184,7 @@ MovementData_60e37:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 PokemonTower7F_TextPointers:
 	dw PokemonTower7Text1

@@ -24,8 +24,8 @@ SilphCo10Script_5a14f:
 	predef_jump ReplaceTileBlock
 
 SilphCo10GateCoords:
-	db $04,$05
-	db $FF
+	dbmapcoord  5,  4
+	db -1 ; end
 
 SilphCo10Text_5a176:
 	ldh a, [hUnlockedSilphCoDoors]

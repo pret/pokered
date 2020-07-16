@@ -64,9 +64,9 @@ VictoryRoad2Script0:
 	ret
 
 CoordsData_51816:
-	db $10,$01
-	db $10,$09
-	db $FF
+	dbmapcoord  1, 16
+	dbmapcoord  9, 16
+	db -1 ; end
 
 VictoryRoad2F_TextPointers:
 	dw VictoryRoad2Text1

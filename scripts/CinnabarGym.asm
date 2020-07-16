@@ -71,11 +71,11 @@ CinnabarGymScript0:
 MovementData_757d7:
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 MovementData_757da:
 	db NPC_MOVEMENT_LEFT
-	db $FF
+	db -1 ; end
 
 CinnabarGymScript1:
 	ld a, [wd730]

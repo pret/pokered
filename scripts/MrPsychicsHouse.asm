@@ -7,24 +7,24 @@ MrPsychicsHouse_TextPointers:
 SaffronHouse2Text1:
 	text_asm
 	CheckEvent EVENT_GOT_TM29
-	jr nz, .asm_9e72b
+	jr nz, .got_item
 	ld hl, TM29PreReceiveText
 	call PrintText
 	lb bc, TM_PSYCHIC_M, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM29Text
 	call PrintText
 	SetEvent EVENT_GOT_TM29
-	jr .asm_fe4e1
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM29NoRoomText
 	call PrintText
-	jr .asm_fe4e1
-.asm_9e72b
+	jr .done
+.got_item
 	ld hl, TM29ExplanationText
 	call PrintText
-.asm_fe4e1
+.done
 	jp TextScriptEnd
 
 TM29PreReceiveText:

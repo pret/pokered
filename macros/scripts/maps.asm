@@ -67,6 +67,14 @@ trainer: MACRO
 	dw \3, \5, \4, \4
 ENDM
 
+;\1 x position
+;\2 y position
+;\3 movement data
+map_coord_movement: MACRO
+	dbmapcoord \1, \2
+	dw \3
+ENDM
+
 
 ;\1 map name
 ;\2 map id

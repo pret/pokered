@@ -169,7 +169,7 @@ UpdateNPCSprite:
 	pop hl
 	ld de, wNPCMovementDirections
 	call LoadDEPlusA ; a = [wNPCMovementDirections + movement byte 1]
-	cp $e0
+	cp NPC_CHANGE_FACING
 	jp z, ChangeFacingDirection
 	cp STAY
 	jr nz, .next

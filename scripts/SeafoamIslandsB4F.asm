@@ -53,11 +53,11 @@ SeafoamIslands5Script0:
 	ret
 
 .Coords
-	db $11,$14
-	db $11,$15
-	db $10,$14
-	db $10,$15
-	db $FF
+	dbmapcoord 20, 17
+	dbmapcoord 21, 17
+	dbmapcoord 20, 16
+	dbmapcoord 21, 16
+	db -1 ; end
 
 SeafoamIslands5Script1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -96,21 +96,21 @@ SeafoamIslands5Script2:
 	ret
 
 .Coords
-	db $0E,$04
-	db $0E,$05
-	db $FF
+	dbmapcoord  4, 14
+	dbmapcoord  5, 14
+	db -1 ; end
 
 RLEMovementData_46852:
-	db D_UP,$03
-	db D_RIGHT,$02
-	db D_UP,$01
-	db $FF
+	db D_UP, 3
+	db D_RIGHT, 2
+	db D_UP, 1
+	db -1 ; end
 
 RLEMovementData_46859:
-	db D_UP,$03
-	db D_RIGHT,$03
-	db D_UP,$01
-	db $FF
+	db D_UP, 3
+	db D_RIGHT, 3
+	db D_UP, 1
+	db -1 ; end
 
 SeafoamIslands5Script3:
 	ld a, [wSimulatedJoypadStatesIndex]

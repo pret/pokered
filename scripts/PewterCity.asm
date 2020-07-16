@@ -37,11 +37,11 @@ ENDC
 	jp DisplayTextID
 
 CoordsData_19277:
-	db $11,$23
-	db $11,$24
-	db $12,$25
-	db $13,$25
-	db $ff
+	dbmapcoord 35, 17
+	dbmapcoord 36, 17
+	dbmapcoord 37, 18
+	dbmapcoord 37, 19
+	db -1 ; end
 
 PewterCityScript1:
 	ld a, [wNPCMovementScriptPointerTableNum]
@@ -85,7 +85,7 @@ MovementData_PewterMuseumGuyExit:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 PewterCityScript2:
 	ld a, [wd730]
@@ -154,7 +154,7 @@ MovementData_PewterGymGuyExit:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 PewterCityScript5:
 	ld a, [wd730]

@@ -39,8 +39,9 @@ Route6GateScript0:
 	jp DisplayTextID
 
 CoordsData_1e08c:
-	db $02,$03
-	db $02,$04,$FF
+	dbmapcoord  3,  2
+	dbmapcoord  4,  2
+	db -1 ; end
 
 Route6GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

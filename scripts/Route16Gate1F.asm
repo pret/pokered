@@ -44,11 +44,11 @@ Route16GateScript0:
 	ret
 
 CoordsData_49714:
-	db $07,$04
-	db $08,$04
-	db $09,$04
-	db $0A,$04
-	db $FF
+	dbmapcoord  4,  7
+	dbmapcoord  4,  8
+	dbmapcoord  4,  9
+	dbmapcoord  4, 10
+	db -1 ; end
 
 Route16GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

@@ -58,9 +58,9 @@ ENDC
 	ret
 
 CoordsData_6055e:
-	db $05,$0F
-	db $06,$0E
-	db $0F ; isn't this supposed to end in $ff?
+	dbmapcoord 15,  5
+	dbmapcoord 14,  6
+	db $0F ; end? (should be $ff?)
 
 PokemonTower2Script1:
 	ld a, [wIsInBattle]
@@ -98,7 +98,7 @@ MovementData_605a9:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 MovementData_605b2:
 	db NPC_MOVEMENT_DOWN
@@ -109,7 +109,7 @@ MovementData_605b2:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 PokemonTower2Script2:
 	ld a, [wd730]

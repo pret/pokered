@@ -21,4 +21,5 @@ RedsHouse2FScript1:
 	ret
 
 RedsHouse2F_TextPointers:
-	text_end
+
+	text_end ; unused

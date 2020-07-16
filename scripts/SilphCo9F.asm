@@ -51,11 +51,11 @@ SilphCo9Script_5d7d1:
 	predef_jump ReplaceTileBlock
 
 SilphCo9GateCoords:
-	db $04,$01
-	db $02,$09
-	db $05,$09
-	db $06,$05
-	db $FF
+	dbmapcoord  1,  4
+	dbmapcoord  9,  2
+	dbmapcoord  9,  5
+	dbmapcoord  5,  6
+	db -1 ; end
 
 SilphCo9Script_5d837:
 	push hl

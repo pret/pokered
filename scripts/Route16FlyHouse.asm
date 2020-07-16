@@ -9,18 +9,18 @@ Route16HouseText1:
 	text_asm
 	CheckEvent EVENT_GOT_HM02
 	ld hl, HM02ExplanationText
-	jr nz, .asm_13616
+	jr nz, .got_item
 	ld hl, Route16HouseText3
 	call PrintText
 	lb bc, HM_FLY, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	SetEvent EVENT_GOT_HM02
 	ld hl, ReceivedHM02Text
-	jr .asm_13616
-.BagFull
+	jr .got_item
+.bag_full
 	ld hl, HM02NoRoomText
-.asm_13616
+.got_item
 	call PrintText
 	jp TextScriptEnd
 

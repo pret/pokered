@@ -58,17 +58,16 @@ SSAnne2Script0:
 
 MovementData_6140c:
 	db NPC_MOVEMENT_DOWN
-
 MovementData_6140d:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 CoordsData_61411:
-	db $08,$24
-	db $08,$25
-	db $FF
+	dbmapcoord 36,  8
+	dbmapcoord 37,  8
+	db -1 ; end
 
 SSAnne2Script_61416:
 	ld a, [wXCoord]
@@ -156,13 +155,12 @@ SSAnne2Script2:
 MovementData_614b7:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
-
 MovementData_614b9:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 SSAnne2Script3:
 	ld a, [wd730]

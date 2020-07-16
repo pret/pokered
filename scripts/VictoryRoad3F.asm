@@ -51,9 +51,9 @@ VictoryRoad3Script0:
 	predef_jump ShowObject
 
 .coordsData_449f9:
-	db $05,$03
-	db $0F,$17
-	db $FF
+	dbmapcoord  3,  5
+	dbmapcoord 23, 15
+	db -1 ; end
 
 .asm_449fe
 	ld a, VICTORY_ROAD_2F

@@ -222,9 +222,9 @@ LinkMenu:
 	ld a, START_TRANSFER_INTERNAL_CLOCK
 	ldh [rSC], a
 .skipStartingTransfer
-	ld b, $7f
-	ld c, $7f
-	ld d, $ec
+	ld b, " "
+	ld c, " "
+	ld d, "▷"
 	ld a, [wLinkMenuSelectionSendBuffer]
 	and (B_BUTTON << 2) ; was B button pressed?
 	jr nz, .updateCursorPosition
@@ -670,7 +670,7 @@ SetCursorPositionsFromOptions:
 	ld e, a
 	ld d, 0
 	add hl, de
-	ld [hl], $ec ; unfilled right arrow menu cursor
+	ld [hl], "▷"
 	ret
 
 ; table that indicates how the 3 text speed options affect frame delays

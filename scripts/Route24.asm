@@ -45,7 +45,8 @@ Route24Script0:
 	ret
 
 CoordsData_5140e:
-	db $0F,$0A,$FF
+	dbmapcoord 10, 15
+	db -1 ; end
 
 Route24Script4:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -103,12 +104,12 @@ Route24Text1:
 	text_asm
 	ResetEvent EVENT_NUGGET_REWARD_AVAILABLE
 	CheckEvent EVENT_GOT_NUGGET
-	jr nz, .asm_514f9
+	jr nz, .got_item
 	ld hl, Route24Text_51510
 	call PrintText
 	lb bc, NUGGET, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	SetEvent EVENT_GOT_NUGGET
 	ld hl, Route24Text_5151a
 	call PrintText
@@ -130,11 +131,11 @@ Route24Text1:
 	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	jp TextScriptEnd
-.asm_514f9
+.got_item
 	ld hl, Route24Text_51530
 	call PrintText
 	jp TextScriptEnd
-.BagFull
+.bag_full
 	ld hl, Route24Text_51521
 	call PrintText
 	SetEvent EVENT_NUGGET_REWARD_AVAILABLE

@@ -46,9 +46,9 @@ Route5GateScript0:
 	ret
 
 CoordsData_1df8f:
-	db 3,3
-	db 3,4
-	db $ff
+	dbmapcoord  3,  3
+	dbmapcoord  4,  3
+	db -1 ; end
 
 Route5GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

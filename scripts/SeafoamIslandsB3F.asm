@@ -45,9 +45,9 @@ SeafoamIslandsB3F_Script:
 	jp CallFunctionInTable
 
 Seafoam4HolesCoords:
-	db $10,$03
-	db $10,$06
-	db $ff
+	dbmapcoord  3, 16
+	dbmapcoord  6, 16
+	db -1 ; end
 
 SeafoamIslandsB3F_ScriptPointers:
 	dw SeafoamIslands4Script0
@@ -77,10 +77,10 @@ SeafoamIslands4Script0:
 	ret
 
 RLEMovement46632:
-	db D_DOWN,6
-	db D_RIGHT,5
-	db D_DOWN,3
-	db $ff
+	db D_DOWN, 6
+	db D_RIGHT, 5
+	db D_DOWN, 3
+	db -1 ; end
 
 SeafoamIslands4Script1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -120,17 +120,17 @@ SeafoamIslands4Script2:
 	ret
 
 RLEData_4667f:
-	db D_DOWN,$06
-	db D_RIGHT,$02
-	db D_DOWN,$04
-	db D_LEFT,$01
-	db $FF
+	db D_DOWN, 6
+	db D_RIGHT, 2
+	db D_DOWN, 4
+	db D_LEFT, 1
+	db -1 ; end
 
 RLEData_46688:
-	db D_DOWN,$06
-	db D_RIGHT,$02
-	db D_DOWN,$04
-	db $FF
+	db D_DOWN, 6
+	db D_RIGHT, 2
+	db D_DOWN, 4
+	db -1 ; end
 
 SeafoamIslands4Script3:
 	ld a, [wSimulatedJoypadStatesIndex]

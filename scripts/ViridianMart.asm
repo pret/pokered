@@ -7,12 +7,12 @@ ViridianMart_Script:
 
 ViridianMartScript_1d47d:
 	CheckEvent EVENT_OAK_GOT_PARCEL
-	jr nz, .asm_1d489
+	jr nz, .delivered_parcel
 	ld hl, ViridianMart_TextPointers
-	jr .asm_1d48c
-.asm_1d489
+	jr .done
+.delivered_parcel
 	ld hl, ViridianMart_TextPointers2
-.asm_1d48c
+.done
 	ld a, l
 	ld [wMapTextPtr], a
 	ld a, h
@@ -40,9 +40,9 @@ ViridianMartScript0:
 	ret
 
 RLEMovement1d4bb:
-	db D_LEFT, $01
-	db D_UP, $02
-	db $ff
+	db D_LEFT, 1
+	db D_UP, 2
+	db -1 ; end
 
 ViridianMartScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -67,6 +67,7 @@ ViridianMart_TextPointers:
 	dw ViridianMartText3
 	dw ViridianMartText4
 	dw ViridianMartText5
+
 ViridianMart_TextPointers2:
 	dw ViridianCashierText
 	dw ViridianMartText2

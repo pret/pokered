@@ -18,11 +18,11 @@ ViridianCityScript_1900b:
 	CheckEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret nz
 	ld a, [wObtainedBadges]
-	cp %01111111
-	jr nz, .gymClosed
+	cp $ff ^ (1 << BIT_EARTHBADGE)
+	jr nz, .gym_closed
 	SetEvent EVENT_VIRIDIAN_GYM_OPEN
 	ret
-.gymClosed
+.gym_closed
 	ld a, [wYCoord]
 	cp $8
 	ret nz
@@ -148,13 +148,13 @@ ViridianCityText1:
 ViridianCityText2:
 	text_asm
 	ld a, [wObtainedBadges]
-	cp %01111111
+	cp $ff ^ (1 << BIT_EARTHBADGE)
 	ld hl, ViridianCityText_19127
-	jr z, .printAndDone
+	jr z, .done
 	CheckEvent EVENT_BEAT_VIRIDIAN_GYM_GIOVANNI
-	jr nz, .printAndDone
+	jr nz, .done
 	ld hl, ViridianCityText_19122
-.printAndDone
+.done
 	call PrintText
 	jp TextScriptEnd
 
@@ -232,21 +232,21 @@ ViridianCityText_19191:
 ViridianCityText6:
 	text_asm
 	CheckEvent EVENT_GOT_TM42
-	jr nz, .gotTm42
+	jr nz, .got_item
 	ld hl, ViridianCityText_191ca
 	call PrintText
 	lb bc, TM_DREAM_EATER, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM42Text
 	call PrintText
 	SetEvent EVENT_GOT_TM42
 	jr .done
-.BagFull
+.bag_full
 	ld hl, TM42NoRoomText
 	call PrintText
 	jr .done
-.gotTm42
+.got_item
 	ld hl, TM42Explanation
 	call PrintText
 .done
@@ -278,13 +278,13 @@ ViridianCityText7:
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr z, .hurry
+	jr z, .refused
 	ld hl, ViridianCityText_1920f
 	call PrintText
 	ld a, $1
 	ld [wViridianCityCurScript], a
 	jr .done
-.hurry
+.refused
 	ld hl, ViridianCityText_19214
 	call PrintText
 .done

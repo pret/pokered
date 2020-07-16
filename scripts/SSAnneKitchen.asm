@@ -41,17 +41,17 @@ SSAnne6Text7:
 	call PrintText
 	ldh a, [hRandomAdd]
 	bit 7, a
-	jr z, .asm_93eb1
+	jr z, .not_dialog_1
 	ld hl, SSAnne6Text_6180c
-	jr .asm_63292
-.asm_93eb1
+	jr .done
+.not_dialog_1
 	bit 4, a
-	jr z, .asm_7436c
+	jr z, .not_dialog_2
 	ld hl, SSAnne6Text_61811
-	jr .asm_63292
-.asm_7436c
+	jr .done
+.not_dialog_2
 	ld hl, SSAnne6Text_61816
-.asm_63292
+.done
 	call PrintText
 	jp TextScriptEnd
 

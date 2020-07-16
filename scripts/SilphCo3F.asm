@@ -33,9 +33,9 @@ SilphCo3Script_59f71:
 	predef_jump ReplaceTileBlock
 
 SilphCo3GateCoords:
-	db $04,$04
-	db $04,$08
-	db $FF
+	dbmapcoord  4,  4
+	dbmapcoord  8,  4
+	db -1 ; end
 
 SilphCo3Script_59fad:
 	EventFlagAddress hl, EVENT_SILPH_CO_3_UNLOCKED_DOOR1

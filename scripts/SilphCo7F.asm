@@ -42,10 +42,10 @@ SilphCo7Script_51b77:
 	predef_jump ReplaceTileBlock
 
 SilphCo7GateCoords:
-	db $03,$05
-	db $02,$0A
-	db $06,$0A
-	db $FF
+	dbmapcoord  5,  3
+	dbmapcoord 10,  2
+	dbmapcoord 10,  6
+	db -1 ; end
 
 SilphCo7Text_51bc8:
 	push hl
@@ -156,16 +156,16 @@ SilphCo7Script0:
 	jp SilphCo7Text_51c10
 
 CoordsData_51c78:
-	db $02,$03
-	db $03,$03
-	db $FF
+	dbmapcoord  3,  2
+	dbmapcoord  3,  3
+	db -1 ; end
 
 MovementData_51c7d:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 SilphCo7Script3:
 	ld a, [wd730]
@@ -238,7 +238,7 @@ SilphCo7Script4:
 MovementData_51d1a:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db $FF
+	db -1 ; end
 
 MovementData_51d1d:
 	db NPC_MOVEMENT_LEFT
@@ -248,7 +248,7 @@ MovementData_51d1d:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 SilphCo7Script5:
 	ld a, [wd730]

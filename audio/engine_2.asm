@@ -43,7 +43,7 @@ Audio2_ApplyMusicAffects:
 	ld hl, wChannelNoteDelayCounters ; delay until next note
 	add hl, bc
 	ld a, [hl]
-	cp $1 ; if the delay is 1, play next note
+	cp 1 ; if the delay is 1, play next note
 	jp z, Audio2_PlayNextNote
 	dec a ; otherwise, decrease the delay timer
 	ld [hl], a
@@ -174,8 +174,8 @@ Audio2_PlayNextNote:
 Audio2_sound_ret:
 	call Audio2_GetNextMusicByte
 	ld d, a
-	cp $ff ; is this command a sound_ret?
-	jp nz, Audio2_sound_call ; no
+	cp sound_ret_cmd
+	jp nz, Audio2_sound_call
 	ld b, 0
 	ld hl, wChannelFlags1
 	add hl, bc
@@ -262,8 +262,8 @@ Audio2_sound_ret:
 	ret
 
 Audio2_sound_call:
-	cp $fd ; is this command a sound_call?
-	jp nz, Audio2_sound_loop ; no
+	cp sound_call_cmd
+	jp nz, Audio2_sound_loop
 	call Audio2_GetNextMusicByte
 	push af
 	call Audio2_GetNextMusicByte
@@ -299,8 +299,8 @@ Audio2_sound_call:
 	jp Audio2_sound_ret
 
 Audio2_sound_loop:
-	cp $fe ; is this command a sound_loop?
-	jp nz, Audio2_note_type ; no
+	cp sound_loop_cmd
+	jp nz, Audio2_note_type
 	call Audio2_GetNextMusicByte
 	ld e, a
 	and a
@@ -338,8 +338,8 @@ Audio2_sound_loop:
 
 Audio2_note_type:
 	and $f0
-	cp $d0 ; is this command a note_type?
-	jp nz, Audio2_toggle_perfect_pitch ; no
+	cp note_type_cmd
+	jp nz, Audio2_toggle_perfect_pitch
 	ld a, d
 	and $f
 	ld b, $0
@@ -382,8 +382,8 @@ Audio2_note_type:
 
 Audio2_toggle_perfect_pitch:
 	ld a, d
-	cp $e8 ; is this command a toggle_perfect_pitch?
-	jr nz, Audio2_vibrato ; no
+	cp toggle_perfect_pitch_cmd
+	jr nz, Audio2_vibrato
 	ld b, 0
 	ld hl, wChannelFlags1
 	add hl, bc
@@ -393,8 +393,8 @@ Audio2_toggle_perfect_pitch:
 	jp Audio2_sound_ret
 
 Audio2_vibrato:
-	cp $ea ; is this command a vibrato?
-	jr nz, Audio2_pitch_slide ; no
+	cp vibrato_cmd
+	jr nz, Audio2_pitch_slide
 	call Audio2_GetNextMusicByte
 	ld b, 0
 	ld hl, wChannelVibratoDelayCounters
@@ -441,8 +441,8 @@ Audio2_vibrato:
 	jp Audio2_sound_ret
 
 Audio2_pitch_slide:
-	cp $eb ; is this command a pitch_slide?
-	jr nz, Audio2_duty_cycle ; no
+	cp pitch_slide_cmd
+	jr nz, Audio2_duty_cycle
 	call Audio2_GetNextMusicByte
 	ld b, 0
 	ld hl, wChannelPitchSlideLengthModifiers
@@ -472,8 +472,8 @@ Audio2_pitch_slide:
 	jp Audio2_note_length
 
 Audio2_duty_cycle:
-	cp $ec ; is this command a duty_cycle?
-	jr nz, Audio2_tempo ; no
+	cp duty_cycle_cmd
+	jr nz, Audio2_tempo
 	call Audio2_GetNextMusicByte
 	rrca
 	rrca
@@ -485,8 +485,8 @@ Audio2_duty_cycle:
 	jp Audio2_sound_ret
 
 Audio2_tempo:
-	cp $ed ; is this command a tempo?
-	jr nz, Audio2_stereo_panning ; no
+	cp tempo_cmd
+	jr nz, Audio2_stereo_panning
 	ld a, c
 	cp Ch5
 	jr nc, .sfxChannel
@@ -514,16 +514,16 @@ Audio2_tempo:
 	jp Audio2_sound_ret
 
 Audio2_stereo_panning:
-	cp $ee ; is this command a stereo_panning?
-	jr nz, Audio2_unknownmusic0xef ; no
+	cp stereo_panning_cmd
+	jr nz, Audio2_unknownmusic0xef
 	call Audio2_GetNextMusicByte
 	ld [wStereoPanning], a ; store panning
 	jp Audio2_sound_ret
 
 ; this appears to never be used
 Audio2_unknownmusic0xef:
-	cp $ef ; is this command an unknownmusic0xef?
-	jr nz, Audio2_duty_cycle_pattern ; no
+	cp unknownmusic0xef_cmd
+	jr nz, Audio2_duty_cycle_pattern
 	call Audio2_GetNextMusicByte
 	push bc
 	call Audio2_PlaySound
@@ -539,8 +539,8 @@ Audio2_unknownmusic0xef:
 	jp Audio2_sound_ret
 
 Audio2_duty_cycle_pattern:
-	cp $fc ; is this command a duty_cycle_pattern?
-	jr nz, Audio2_volume ; no
+	cp duty_cycle_pattern_cmd
+	jr nz, Audio2_volume
 	call Audio2_GetNextMusicByte
 	ld b, 0
 	ld hl, wChannelDutyCyclePatterns
@@ -556,15 +556,15 @@ Audio2_duty_cycle_pattern:
 	jp Audio2_sound_ret
 
 Audio2_volume:
-	cp $f0 ; is this command a volume?
-	jr nz, Audio2_execute_music ; no
+	cp volume_cmd
+	jr nz, Audio2_execute_music
 	call Audio2_GetNextMusicByte
 	ldh [rNR50], a ; store volume
 	jp Audio2_sound_ret
 
 Audio2_execute_music:
-	cp $f8 ; is this command an execute_music?
-	jr nz, Audio2_octave ; no
+	cp execute_music_cmd
+	jr nz, Audio2_octave
 	ld b, $0
 	ld hl, wChannelFlags2
 	add hl, bc
@@ -573,8 +573,8 @@ Audio2_execute_music:
 
 Audio2_octave:
 	and $f0
-	cp $e0 ; is this command an octave?
-	jr nz, Audio2_sfx_note ; no
+	cp octave_cmd
+	jr nz, Audio2_sfx_note
 	ld hl, wChannelOctaves
 	ld b, 0
 	add hl, bc
@@ -585,7 +585,7 @@ Audio2_octave:
 
 ; sfx_note is either square_note or noise_note depending on the channel
 Audio2_sfx_note:
-	cp $20 ; is this command a sfx_note?
+	cp sfx_note_cmd
 	jr nz, Audio2_pitch_sweep
 	ld a, c
 	cp Ch4 ; is this a noise or sfx channel?
@@ -641,8 +641,8 @@ Audio2_pitch_sweep:
 	cp Ch5
 	jr c, Audio2_note ; if not a sfx
 	ld a, d
-	cp $10 ; is this command a pitch_sweep?
-	jr nz, Audio2_note ; no
+	cp pitch_sweep_cmd
+	jr nz, Audio2_note
 	ld b, $0
 	ld hl, wChannelFlags2
 	add hl, bc
@@ -658,12 +658,12 @@ Audio2_note:
 	jr nz, Audio2_note_length ; if not noise channel
 	ld a, d
 	and $f0
-	cp $b0 ; is this command a drum_note?
+	cp drum_note_cmd
 	jr z, .drum_note
-	jr nc, Audio2_note_length ; no
+	jr nc, Audio2_note_length
 
 	; this executes when on the noise channel and
-	; the command id is less than $b0
+	; the command id is less than drum_note_cmd ($b0)
 	; in this case, the upper nybble is used as the noise instrument ($1-$a)
 	; and the lower nybble is the length minus 1 (0-15)
 	; however, this doesn't work for instrument #2 because the command id
@@ -759,7 +759,7 @@ Audio2_note_length:
 Audio2_note_pitch:
 	pop af
 	and $f0
-	cp $c0 ; compare to rest
+	cp rest_cmd
 	jr nz, .notRest
 	ld a, c
 	cp Ch5
@@ -1393,7 +1393,7 @@ Audio2_CalculateFrequency:
 
 Audio2_PlaySound::
 	ld [wSoundID], a
-	cp $ff
+	cp SFX_STOP_ALL_MUSIC
 	jp z, .stopAllAudio
 	cp MAX_SFX_ID_2
 	jp z, .playSfx

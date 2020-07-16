@@ -2,4 +2,5 @@ UndergroundPathNorthSouth_Script:
 	jp EnableAutoTextBoxDrawing
 
 UndergroundPathNorthSouth_TextPointers:
-	text_end
+
+	text_end ; unused

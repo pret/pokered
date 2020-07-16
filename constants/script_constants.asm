@@ -12,6 +12,19 @@ SLOTSFISH   EQU $0E0C
 SLOTSBIRD   EQU $1210
 SLOTSMOUSE  EQU $1614
 
+; in game trades
+	const_def
+	const TRADE_FOR_TERRY
+	const TRADE_FOR_MARCEL
+	const TRADE_FOR_CHIKUCHIKU
+	const TRADE_FOR_SAILOR
+	const TRADE_FOR_DUX
+	const TRADE_FOR_MARC
+	const TRADE_FOR_LOLA
+	const TRADE_FOR_DORIS
+	const TRADE_FOR_CRINKLES
+	const TRADE_FOR_SPOT
+
 ; in game trade dialog sets
 	const_def
 	const TRADE_DIALOGSET_CASUAL
@@ -30,3 +43,9 @@ SLOTSMOUSE  EQU $1614
 	const BIT_VOLCANOBADGE ; 6
 	const BIT_EARTHBADGE   ; 7
 NUM_BADGES EQU const_value
+
+; OaksAideScript results
+OAKS_AIDE_BAG_FULL        EQU $00
+OAKS_AIDE_GOT_ITEM        EQU $01
+OAKS_AIDE_NOT_ENOUGH_MONS EQU $80
+OAKS_AIDE_REFUSED         EQU $ff

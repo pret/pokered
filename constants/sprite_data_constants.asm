@@ -11,6 +11,8 @@
 	const NPC_MOVEMENT_LEFT  ; $80
 	const NPC_MOVEMENT_RIGHT ; $C0
 
+NPC_CHANGE_FACING EQU $E0
+
 ; player direction constants
 	const_def
 	const PLAYER_DIR_BIT_RIGHT ; 0

@@ -33,7 +33,7 @@ MovementData_1e79c:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 ; make Bill walk around the player
 MovementData_1e7a0:
@@ -42,7 +42,7 @@ MovementData_1e7a0:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_LEFT
 	db NPC_MOVEMENT_UP
-	db $FF
+	db -1 ; end
 
 BillsHouseScript2:
 	ld a, [wd730]
@@ -93,7 +93,7 @@ MovementData_1e807:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_DOWN
-	db $FF
+	db -1 ; end
 
 BillsHouseScript4:
 	ld a, [wd730]

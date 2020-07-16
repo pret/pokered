@@ -25,32 +25,30 @@ WriterText:
 
 DirectorText:
 	text_asm
-
-	; check pokédex
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
-	cp 150
-	jr nc, .CompletedDex
-	ld hl, .GameDesigner
+	cp NUM_POKEMON - 1 ; discount Mew
+	jr nc, .completed_dex
+	ld hl, .GameDesignerText
 	jr .done
-.CompletedDex
+.completed_dex
 	ld hl, .CompletedDexText
 .done
 	call PrintText
 	jp TextScriptEnd
 
-.GameDesigner
+.GameDesignerText:
 	text_far _GameDesignerText
 	text_end
 
-.CompletedDexText
+.CompletedDexText:
 	text_far _CompletedDexText
 	text_promptbutton
 	text_asm
 	callfar DisplayDiploma
-	ld a, $1
+	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd
 

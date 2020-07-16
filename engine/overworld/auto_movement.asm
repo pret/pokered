@@ -128,21 +128,21 @@ PalletMovementScript_WalkToLab:
 	ret
 
 RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, $05
-	db NPC_MOVEMENT_LEFT, $01
-	db NPC_MOVEMENT_DOWN, $05
-	db NPC_MOVEMENT_RIGHT, $03
-	db NPC_MOVEMENT_UP, $01
-	db $E0, $01 ; stand still
-	db $FF
+	db NPC_MOVEMENT_DOWN, 5
+	db NPC_MOVEMENT_LEFT, 1
+	db NPC_MOVEMENT_DOWN, 5
+	db NPC_MOVEMENT_RIGHT, 3
+	db NPC_MOVEMENT_UP, 1
+	db NPC_CHANGE_FACING, 1
+	db -1 ; end
 
 RLEList_PlayerWalkToLab:
-	db D_UP, $02
-	db D_RIGHT, $03
-	db D_DOWN, $05
-	db D_LEFT, $01
-	db D_DOWN, $06
-	db $FF
+	db D_UP, 2
+	db D_RIGHT, 3
+	db D_DOWN, 5
+	db D_LEFT, 1
+	db D_DOWN, 6
+	db -1 ; end
 
 PalletMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -190,18 +190,18 @@ PewterMovementScript_WalkToMuseum:
 	ret
 
 RLEList_PewterMuseumPlayer:
-	db 0, $01
-	db D_UP, $03
-	db D_LEFT, $0D
-	db D_UP, $06
-	db $FF
+	db NO_INPUT, 1
+	db D_UP, 3
+	db D_LEFT, 13
+	db D_UP, 6
+	db -1 ; end
 
 RLEList_PewterMuseumGuy:
-	db NPC_MOVEMENT_UP, $06
-	db NPC_MOVEMENT_LEFT, $0D
-	db NPC_MOVEMENT_UP, $03
-	db NPC_MOVEMENT_LEFT, $01
-	db $FF
+	db NPC_MOVEMENT_UP, 6
+	db NPC_MOVEMENT_LEFT, 13
+	db NPC_MOVEMENT_UP, 3
+	db NPC_MOVEMENT_LEFT, 1
+	db -1 ; end
 
 PewterMovementScript_Done:
 	ld a, [wSimulatedJoypadStatesIndex]
@@ -249,22 +249,22 @@ PewterMovementScript_WalkToGym:
 	ret
 
 RLEList_PewterGymPlayer:
-	db 0, $01
-	db D_RIGHT, $02
-	db D_DOWN, $05
-	db D_LEFT, $0B
-	db D_UP, $05
-	db D_LEFT, $0F
-	db $FF
+	db NO_INPUT, 1
+	db D_RIGHT, 2
+	db D_DOWN, 5
+	db D_LEFT, 11
+	db D_UP, 5
+	db D_LEFT, 15
+	db -1 ; end
 
 RLEList_PewterGymGuy:
-	db NPC_MOVEMENT_DOWN, $02
-	db NPC_MOVEMENT_LEFT, $0F
-	db NPC_MOVEMENT_UP, $05
-	db NPC_MOVEMENT_LEFT, $0B
-	db NPC_MOVEMENT_DOWN, $05
-	db NPC_MOVEMENT_RIGHT, $03
-	db $FF
+	db NPC_MOVEMENT_DOWN, 2
+	db NPC_MOVEMENT_LEFT, 15
+	db NPC_MOVEMENT_UP, 5
+	db NPC_MOVEMENT_LEFT, 11
+	db NPC_MOVEMENT_DOWN, 5
+	db NPC_MOVEMENT_RIGHT, 3
+	db -1 ; end
 
 FreezeEnemyTrainerSprite::
 	ld a, [wCurMap]
@@ -275,7 +275,7 @@ FreezeEnemyTrainerSprite::
 	ld b, a
 .loop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, .notRival
 	cp b
 	ret z ; the rival leaves after battling, so don't freeze him
@@ -289,4 +289,4 @@ RivalIDs:
 	db OPP_SONY1
 	db OPP_SONY2
 	db OPP_SONY3
-	db $ff
+	db -1 ; end
