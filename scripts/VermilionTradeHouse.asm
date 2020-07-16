@@ -6,7 +6,7 @@ VermilionTradeHouse_TextPointers:
 
 VermilionHouse3Text1:
 	text_asm
-	ld a, $4
+	ld a, TRADE_FOR_DUX
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd

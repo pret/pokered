@@ -11,7 +11,7 @@ UndergroundPathRoute5_TextPointers:
 
 UndergroundPathEntranceRoute5Text1:
 	text_asm
-	ld a, $9
+	ld a, TRADE_FOR_SPOT
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	ld hl, UndergroundPathEntranceRoute5_TextScriptEndingText
