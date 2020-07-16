@@ -40,7 +40,8 @@ Route6GateScript0:
 
 CoordsData_1e08c:
 	db $02,$03
-	db $02,$04,$FF
+	db $02,$04
+	db $FF
 
 Route6GateScript1:
 	ld a, [wSimulatedJoypadStatesIndex]

@@ -23,21 +23,21 @@ CeladonMart3F_TextPointers:
 CeladonMart3Text1:
 	text_asm
 	CheckEvent EVENT_GOT_TM18
-	jr nz, .asm_a5463
+	jr nz, .got_item
 	ld hl, TM18PreReceiveText
 	call PrintText
 	lb bc, TM_COUNTER, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	SetEvent EVENT_GOT_TM18
 	ld hl, ReceivedTM18Text
-	jr .asm_81359
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM18NoRoomText
-	jr .asm_81359
-.asm_a5463
+	jr .done
+.got_item
 	ld hl, TM18ExplanationText
-.asm_81359
+.done
 	call PrintText
 	jp TextScriptEnd
 

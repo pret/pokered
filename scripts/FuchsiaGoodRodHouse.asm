@@ -7,39 +7,30 @@ FuchsiaGoodRodHouse_TextPointers:
 FuchsiaHouse3Text1:
 	text_asm
 	ld a, [wd728]
-	bit 4, a
-	jr nz, .after
-
+	bit 4, a ; got good rod?
+	jr nz, .got_item
 	ld hl, FuchsiaHouse3Text_561bd
 	call PrintText
-
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .refused
-
 	lb bc, GOOD_ROD, 1
 	call GiveItem
-	jr nc, .full
-
+	jr nc, .bag_full
 	ld hl, wd728
-	set 4, [hl]
-
+	set 4, [hl] ; got good rod
 	ld hl, FuchsiaHouse3Text_561c2
-	jr .talk
-
-.full
+	jr .done
+.bag_full
 	ld hl, FuchsiaHouse3Text_5621c
-	jr .talk
-
+	jr .done
 .refused
 	ld hl, FuchsiaHouse3Text_56212
-	jr .talk
-
-.after
+	jr .done
+.got_item
 	ld hl, FuchsiaHouse3Text_56217
-
-.talk
+.done
 	call PrintText
 	jp TextScriptEnd
 

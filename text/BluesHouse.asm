@@ -29,14 +29,14 @@ _DaisyUseMapText::
 	cont "you are."
 	done
 
-_BluesHouseText2::
+_BluesHouseDaisyWalkingText::
 	text "#MON are living"
 	line "things! If they"
 	cont "get tired, give"
 	cont "them a rest!"
 	done
 
-_BluesHouseText3::
+_BluesHouseTownMapText::
 	text "It's a big map!"
 	line "This is useful!"
 	done

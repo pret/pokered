@@ -9,17 +9,17 @@ CeruleanTrashedHouse_TextPointers:
 
 CeruleanHouseTrashedText1:
 	text_asm
-	ld b, $e4
+	ld b, TM_DIG
 	predef GetQuantityOfItemInBag
 	and b
-	jr z, .asm_f8734
+	jr z, .no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6b0
 	call PrintText
-	jr .asm_8dfe9
-.asm_f8734
+	jr .done
+.no_dig_tm
 	ld hl, CeruleanHouseTrashedText_1d6ab
 	call PrintText
-.asm_8dfe9
+.done
 	jp TextScriptEnd
 
 CeruleanHouseTrashedText_1d6ab:

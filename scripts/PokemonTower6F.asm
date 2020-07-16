@@ -42,7 +42,8 @@ PokemonTower6Script0:
 	ret
 
 CoordsData_60b45:
-	db $10,$0A,$FF
+	db $10,$0A
+	db $FF
 
 PokemonTower6Script4:
 	ld a, [wIsInBattle]

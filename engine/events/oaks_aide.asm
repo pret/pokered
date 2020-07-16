@@ -25,22 +25,22 @@ OaksAideScript:
 	jr nc, .bagFull
 	ld hl, OaksAideGotItemText
 	call PrintText
-	ld a, $1
+	ld a, OAKS_AIDE_GOT_ITEM
 	jr .done
 .bagFull
 	ld hl, OaksAideNoRoomText
 	call PrintText
-	xor a
+	xor a ; OAKS_AIDE_BAG_FULL
 	jr .done
 .notEnoughOwnedMons
 	ld hl, OaksAideUhOhText
 	call PrintText
-	ld a, $80
+	ld a, OAKS_AIDE_NOT_ENOUGH_MONS
 	jr .done
 .choseNo
 	ld hl, OaksAideComeBackText
 	call PrintText
-	ld a, $ff
+	ld a, OAKS_AIDE_REFUSED
 .done
 	ldh [hOaksAideResult], a
 	ret

@@ -289,24 +289,24 @@ SilphCo11TrainerHeader1:
 SilphCo11Text1:
 	text_asm
 	CheckEvent EVENT_GOT_MASTER_BALL
-	jp nz, .asm_62308
+	jp nz, .got_item
 	ld hl, SilphCoPresidentText
 	call PrintText
 	lb bc, MASTER_BALL, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedSilphCoMasterBallText
 	call PrintText
 	SetEvent EVENT_GOT_MASTER_BALL
-	jr .asm_6230e
-.BagFull
+	jr .done
+.bag_full
 	ld hl, SilphCoMasterBallNoRoomText
 	call PrintText
-	jr .asm_6230e
-.asm_62308
+	jr .done
+.got_item
 	ld hl, SilphCo10Text_6231c
 	call PrintText
-.asm_6230e
+.done
 	jp TextScriptEnd
 
 SilphCoPresidentText:

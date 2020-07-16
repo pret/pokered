@@ -1,5 +1,5 @@
 Museum1F_Script:
-	ld a, $1
+	ld a, TRUE
 	ld [wAutoTextBoxDrawingControl], a
 	xor a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -188,24 +188,24 @@ Museum1FText_5c251:
 Museum1FText3:
 	text_asm
 	CheckEvent EVENT_GOT_OLD_AMBER
-	jr nz, .asm_5c285
+	jr nz, .got_item
 	ld hl, Museum1FText_5c28e
 	call PrintText
 	lb bc, OLD_AMBER, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	SetEvent EVENT_GOT_OLD_AMBER
 	ld a, HS_OLD_AMBER
 	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText
-	jr .asm_5c288
-.BagFull
+	jr .done
+.bag_full
 	ld hl, Museum1FText_5c29e
-	jr .asm_5c288
-.asm_5c285
+	jr .done
+.got_item
 	ld hl, Museum1FText_5c299
-.asm_5c288
+.done
 	call PrintText
 	jp TextScriptEnd
 

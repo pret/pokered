@@ -8,10 +8,10 @@ Route15Gate2F_TextPointers:
 Route15GateUpstairsText1:
 	text_asm
 	CheckEvent EVENT_GOT_EXP_ALL
-	jr nz, .asm_49683
-	ld a, 50 ; pokemon needed
+	jr nz, .got_item
+	ld a, 50
 	ldh [hOaksAideRequirement], a
-	ld a, EXP_ALL ; oak's aide reward
+	ld a, EXP_ALL
 	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
@@ -21,13 +21,13 @@ Route15GateUpstairsText1:
 	call CopyData
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
-	cp $1
-	jr nz, .asm_49689
+	cp OAKS_AIDE_GOT_ITEM
+	jr nz, .no_item
 	SetEvent EVENT_GOT_EXP_ALL
-.asm_49683
+.got_item
 	ld hl, Route15GateUpstairsText_4968c
 	call PrintText
-.asm_49689
+.no_item
 	jp TextScriptEnd
 
 Route15GateUpstairsText_4968c:

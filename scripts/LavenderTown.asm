@@ -20,9 +20,9 @@ LavenderTownText1:
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, LavenderTownText_44146
-	jr nz, .asm_40831
+	jr nz, .got_text
 	ld hl, LavenderTownText_44141
-.asm_40831
+.got_text
 	call PrintText
 	jp TextScriptEnd
 

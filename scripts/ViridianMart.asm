@@ -7,12 +7,12 @@ ViridianMart_Script:
 
 ViridianMartScript_1d47d:
 	CheckEvent EVENT_OAK_GOT_PARCEL
-	jr nz, .asm_1d489
+	jr nz, .delivered_parcel
 	ld hl, ViridianMart_TextPointers
-	jr .asm_1d48c
-.asm_1d489
+	jr .done
+.delivered_parcel
 	ld hl, ViridianMart_TextPointers2
-.asm_1d48c
+.done
 	ld a, l
 	ld [wMapTextPtr], a
 	ld a, h
@@ -67,6 +67,7 @@ ViridianMart_TextPointers:
 	dw ViridianMartText3
 	dw ViridianMartText4
 	dw ViridianMartText5
+
 ViridianMart_TextPointers2:
 	dw ViridianCashierText
 	dw ViridianMartText2

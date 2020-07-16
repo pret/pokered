@@ -1,6 +1,6 @@
 PromptUserToPlaySlots:
 	call SaveScreenTilesToBuffer2
-	ld a, BANK(DisplayTextIDInit)
+	ld a, BANK(DisplayTextIDInit) ; TRUE
 	ld [wAutoTextBoxDrawingControl], a
 	ld b, a
 	ld hl, DisplayTextIDInit

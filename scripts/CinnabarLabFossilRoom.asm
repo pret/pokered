@@ -44,7 +44,7 @@ FossilsList:
 	db DOME_FOSSIL
 	db HELIX_FOSSIL
 	db OLD_AMBER
-	db $00
+	db 0 ; end
 
 Lab4Text1:
 	text_asm

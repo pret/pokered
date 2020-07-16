@@ -81,40 +81,52 @@ ViridianGymArrowTilePlayerMovement:
 
 ;format: direction, count
 ViridianGymArrowMovement1:
-	db D_UP,$09,$FF
+	db D_UP,$09
+	db $FF
 
 ViridianGymArrowMovement2:
-	db D_LEFT,$08,$FF
+	db D_LEFT,$08
+	db $FF
 
 ViridianGymArrowMovement3:
-	db D_DOWN,$09,$FF
+	db D_DOWN,$09
+	db $FF
 
 ViridianGymArrowMovement4:
-	db D_RIGHT,$06,$FF
+	db D_RIGHT,$06
+	db $FF
 
 ViridianGymArrowMovement5:
-	db D_DOWN,$02,$FF
+	db D_DOWN,$02
+	db $FF
 
 ViridianGymArrowMovement6:
-	db D_DOWN,$07,$FF
+	db D_DOWN,$07
+	db $FF
 
 ViridianGymArrowMovement7:
-	db D_RIGHT,$08,$FF
+	db D_RIGHT,$08
+	db $FF
 
 ViridianGymArrowMovement8:
-	db D_RIGHT,$09,$FF
+	db D_RIGHT,$09
+	db $FF
 
 ViridianGymArrowMovement9:
-	db D_UP,$08,$FF
+	db D_UP,$08
+	db $FF
 
 ViridianGymArrowMovement10:
-	db D_UP,$06,$FF
+	db D_UP,$06
+	db $FF
 
 ViridianGymArrowMovement11:
-	db D_LEFT,$06,$FF
+	db D_LEFT,$06
+	db $FF
 
 ViridianGymArrowMovement12:
-	db D_LEFT,$0C,$FF
+	db D_LEFT,$0C
+	db $FF
 
 ViridianGymScript4:
 	ld a, [wSimulatedJoypadStatesIndex]

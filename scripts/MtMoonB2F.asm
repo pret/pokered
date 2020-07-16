@@ -123,9 +123,9 @@ CoordsData_49df1:
 
 MovementData_49df8:
 	db NPC_MOVEMENT_RIGHT
-
 MovementData_49df9:
-	db NPC_MOVEMENT_UP,$FF
+	db NPC_MOVEMENT_UP
+	db $FF
 
 MtMoon3Script5:
 	ld a, [wd730]

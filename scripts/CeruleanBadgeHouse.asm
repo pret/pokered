@@ -1,5 +1,5 @@
 CeruleanBadgeHouse_Script:
-	ld a, $1
+	ld a, TRUE
 	ld [wAutoTextBoxDrawingControl], a
 	dec a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -34,7 +34,7 @@ CeruleanHouse2Text1:
 	jr c, .asm_74e60
 	ld hl, TextPointers_74e86
 	ld a, [wcf91]
-	sub $15
+	sub BOULDERBADGE
 	add a
 	ld d, $0
 	ld e, a
@@ -52,7 +52,16 @@ CeruleanHouse2Text1:
 	jp TextScriptEnd
 
 BadgeItemList:
-	db $8,BOULDERBADGE,CASCADEBADGE,THUNDERBADGE,RAINBOWBADGE,SOULBADGE,MARSHBADGE,VOLCANOBADGE,EARTHBADGE,$FF
+	db 8 ; #
+	db BOULDERBADGE
+	db CASCADEBADGE
+	db THUNDERBADGE
+	db RAINBOWBADGE
+	db SOULBADGE
+	db MARSHBADGE
+	db VOLCANOBADGE
+	db EARTHBADGE
+	db -1 ; end
 
 CeruleanHouse2Text_74e77:
 	text_far _CeruleanHouse2Text_74e77

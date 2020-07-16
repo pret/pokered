@@ -18,10 +18,10 @@ Route11GateUpstairsScriptEnd:
 Route11GateUpstairsText2:
 	text_asm
 	CheckEvent EVENT_GOT_ITEMFINDER, 1
-	jr c, .asm_4949b
-	ld a, 30 ; pokemon needed
+	jr c, .got_item
+	ld a, 30
 	ldh [hOaksAideRequirement], a
-	ld a, ITEMFINDER ; oak's aide reward
+	ld a, ITEMFINDER
 	ldh [hOaksAideRewardItem], a
 	ld [wd11e], a
 	call GetItemName
@@ -32,13 +32,13 @@ Route11GateUpstairsText2:
 	call CopyData
 	predef OaksAideScript
 	ldh a, [hOaksAideResult]
-	dec a
-	jr nz, .asm_494a1
+	dec a ; OAKS_AIDE_GOT_ITEM?
+	jr nz, .no_item
 	SetEvent EVENT_GOT_ITEMFINDER
-.asm_4949b
+.got_item
 	ld hl, Route11GateUpstairsText_494a3
 	call PrintText
-.asm_494a1
+.no_item
 	jr Route11GateUpstairsScriptEnd
 
 Route11GateUpstairsText_494a3:

@@ -272,7 +272,7 @@ EnableAutoTextBoxDrawing::
 	jr AutoTextBoxDrawingCommon
 
 DisableAutoTextBoxDrawing::
-	ld a, $01
+	ld a, TRUE
 
 AutoTextBoxDrawingCommon::
 	ld [wAutoTextBoxDrawingControl], a

@@ -9,24 +9,24 @@ Route12Gate2F_TextPointers:
 Route12GateUpstairsText1:
 	text_asm
 	CheckEvent EVENT_GOT_TM39, 1
-	jr c, .asm_0ad3c
+	jr c, .got_item
 	ld hl, TM39PreReceiveText
 	call PrintText
 	lb bc, TM_SWIFT, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM39Text
 	call PrintText
 	SetEvent EVENT_GOT_TM39
-	jr .asm_4ba56
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM39NoRoomText
 	call PrintText
-	jr .asm_4ba56
-.asm_0ad3c
+	jr .done
+.got_item
 	ld hl, TM39ExplanationText
 	call PrintText
-.asm_4ba56
+.done
 	jp TextScriptEnd
 
 TM39PreReceiveText:
@@ -68,7 +68,7 @@ GateUpstairsScript_PrintIfFacingUp:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	jr z, .up
-	ld a, $1
+	ld a, TRUE
 	jr .done
 .up
 	call PrintText

@@ -11,48 +11,48 @@ WardensHouse_TextPointers:
 FuchsiaHouse2Text1:
 	text_asm
 	CheckEvent EVENT_GOT_HM04
-	jr nz, .subtract
+	jr nz, .got_item
 	ld b, GOLD_TEETH
 	call IsItemInBag
-	jr nz, .asm_3f30f
+	jr nz, .have_gold_teeth
 	CheckEvent EVENT_GAVE_GOLD_TEETH
-	jr nz, .asm_60cba
+	jr nz, .gave_gold_teeth
 	ld hl, WardenGibberishText1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, WardenGibberishText3
-	jr nz, .asm_61238
+	jr nz, .refused
 	ld hl, WardenGibberishText2
-.asm_61238
+.refused
 	call PrintText
-	jr .asm_52039
-.asm_3f30f
+	jr .done
+.have_gold_teeth
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
 	ldh [hItemToRemoveID], a
 	farcall RemoveItemByID
 	SetEvent EVENT_GAVE_GOLD_TEETH
-.asm_60cba
+.gave_gold_teeth
 	ld hl, WardenThankYouText
 	call PrintText
 	lb bc, HM_STRENGTH, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedHM04Text
 	call PrintText
 	SetEvent EVENT_GOT_HM04
-	jr .asm_52039
-.subtract
+	jr .done
+.got_item
 	ld hl, HM04ExplanationText
 	call PrintText
-	jr .asm_52039
-.BagFull
+	jr .done
+.bag_full
 	ld hl, HM04NoRoomText
 	call PrintText
-.asm_52039
+.done
 	jp TextScriptEnd
 
 WardenGibberishText1:

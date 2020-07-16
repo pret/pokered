@@ -115,12 +115,12 @@ FanClubText5:
 	call PrintText
 	lb bc, BIKE_VOUCHER, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, .receivedvouchertext
 	call PrintText
 	SetEvent EVENT_GOT_BIKE_VOUCHER
 	jr .done
-.BagFull
+.bag_full
 	ld hl, .bagfulltext
 	call PrintText
 	jr .done

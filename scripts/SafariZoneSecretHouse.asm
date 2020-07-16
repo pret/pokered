@@ -7,24 +7,24 @@ SafariZoneSecretHouse_TextPointers:
 SafariZoneSecretHouseText1:
 	text_asm
 	CheckEvent EVENT_GOT_HM03
-	jr nz, .asm_20a9b
+	jr nz, .got_item
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
 	lb bc, HM_SURF, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedHM03Text
 	call PrintText
 	SetEvent EVENT_GOT_HM03
-	jr .asm_8f1fc
-.BagFull
+	jr .done
+.bag_full
 	ld hl, HM03NoRoomText
 	call PrintText
-	jr .asm_8f1fc
-.asm_20a9b
+	jr .done
+.got_item
 	ld hl, HM03ExplanationText
 	call PrintText
-.asm_8f1fc
+.done
 	jp TextScriptEnd
 
 SafariZoneSecretHouseText_4a350:

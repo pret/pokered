@@ -10,9 +10,7 @@ BluesHouse_ScriptPointers:
 
 BluesHouseScript0:
 	SetEvent EVENT_ENTERED_BLUES_HOUSE
-
-	; trigger the next script
-	ld a, 1
+	ld a, $1
 	ld [wBluesHouseCurScript], a
 	ret
 
@@ -20,40 +18,40 @@ BluesHouseScript1:
 	ret
 
 BluesHouse_TextPointers:
-	dw BluesHouseText1
-	dw BluesHouseText2
-	dw BluesHouseText3
+	dw BluesHouseDaisySittingText
+	dw BluesHouseDaisyWalkingText
+	dw BluesHouseTownMapText
 
-BluesHouseText1:
+BluesHouseDaisySittingText:
 	text_asm
 	CheckEvent EVENT_GOT_TOWN_MAP
-	jr nz, .GotMap
+	jr nz, .got_town_map
 	CheckEvent EVENT_GOT_POKEDEX
-	jr nz, .GiveMap
+	jr nz, .give_town_map
 	ld hl, DaisyInitialText
 	call PrintText
 	jr .done
 
-.GiveMap
+.give_town_map
 	ld hl, DaisyOfferMapText
 	call PrintText
 	lb bc, TOWN_MAP, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld a, HS_TOWN_MAP
 	ld [wMissableObjectIndex], a
-	predef HideObject ; hide table map object
+	predef HideObject
 	ld hl, GotMapText
 	call PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
 	jr .done
 
-.GotMap
+.got_town_map
 	ld hl, DaisyUseMapText
 	call PrintText
 	jr .done
 
-.BagFull
+.bag_full
 	ld hl, DaisyBagFullText
 	call PrintText
 .done
@@ -80,10 +78,10 @@ DaisyUseMapText:
 	text_far _DaisyUseMapText
 	text_end
 
-BluesHouseText2: ; Daisy, walking around
-	text_far _BluesHouseText2
+BluesHouseDaisyWalkingText:
+	text_far _BluesHouseDaisyWalkingText
 	text_end
 
-BluesHouseText3: ; map on table
-	text_far _BluesHouseText3
+BluesHouseTownMapText:
+	text_far _BluesHouseTownMapText
 	text_end

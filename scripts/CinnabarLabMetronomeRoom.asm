@@ -11,24 +11,24 @@ CinnabarLabMetronomeRoom_TextPointers:
 Lab3Text1:
 	text_asm
 	CheckEvent EVENT_GOT_TM35
-	jr nz, .asm_e551a
+	jr nz, .got_item
 	ld hl, TM35PreReceiveText
 	call PrintText
 	lb bc, TM_METRONOME, 1
 	call GiveItem
-	jr nc, .BagFull
+	jr nc, .bag_full
 	ld hl, ReceivedTM35Text
 	call PrintText
 	SetEvent EVENT_GOT_TM35
-	jr .asm_eb896
-.BagFull
+	jr .done
+.bag_full
 	ld hl, TM35NoRoomText
 	call PrintText
-	jr .asm_eb896
-.asm_e551a
+	jr .done
+.got_item
 	ld hl, TM35ExplanationText
 	call PrintText
-.asm_eb896
+.done
 	jp TextScriptEnd
 
 TM35PreReceiveText:

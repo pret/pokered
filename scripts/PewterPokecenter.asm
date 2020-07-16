@@ -17,14 +17,16 @@ PewterPokecenterText2:
 
 PewterJigglypuffText:
 	text_asm
-	ld a, $1
+	ld a, TRUE
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld hl, .Text
+	ld hl, .JigglypuffText
 	call PrintText
+
 	ld a, SFX_STOP_ALL_MUSIC
 	call PlaySound
 	ld c, 32
 	call DelayFrames
+
 	ld hl, JigglypuffFacingDirections
 	ld de, wJigglypuffFacingDirections
 	ld bc, JigglypuffFacingDirectionsEnd - JigglypuffFacingDirections
@@ -37,15 +39,16 @@ PewterJigglypuffText:
 	inc hl
 	jr nz, .findMatchingFacingDirectionLoop
 	dec hl
+
 	push hl
 	ld c, BANK(Music_JigglypuffSong)
 	ld a, MUSIC_JIGGLYPUFF_SONG
 	call PlayMusic
 	pop hl
-.loop
+
+.spinMovementLoop
 	ld a, [hl]
 	ld [wSprite03StateData1ImageIndex], a
-
 ; rotate the array
 	push hl
 	ld hl, wJigglypuffFacingDirections
@@ -55,22 +58,20 @@ PewterJigglypuffText:
 	ld a, [wJigglypuffFacingDirections - 1]
 	ld [wJigglypuffFacingDirections + 3], a
 	pop hl
-
 	ld c, 24
 	call DelayFrames
-
 	ld a, [wChannelSoundIDs]
 	ld b, a
 	ld a, [wChannelSoundIDs + Ch2]
 	or b
-	jr nz, .loop
+	jr nz, .spinMovementLoop
 
 	ld c, 48
 	call DelayFrames
 	call PlayDefaultMusic
 	jp TextScriptEnd
 
-.Text
+.JigglypuffText:
 	text_far _PewterJigglypuffText
 	text_end
 

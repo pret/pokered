@@ -1,6 +1,6 @@
 PewterMart_Script:
 	call EnableAutoTextBoxDrawing
-	ld a, $1
+	ld a, TRUE
 	ld [wAutoTextBoxDrawingControl], a
 	ret
 
