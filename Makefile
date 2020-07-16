@@ -122,6 +122,8 @@ gfx/intro_credits/blue_jigglypuff_3.2bpp: rgbgfx += -h
 gfx/intro_credits/red_nidorino_1.2bpp: rgbgfx += -h
 gfx/intro_credits/red_nidorino_2.2bpp: rgbgfx += -h
 gfx/intro_credits/red_nidorino_3.2bpp: rgbgfx += -h
+gfx/intro_credits/gengar.2bpp: rgbgfx += -h
+gfx/intro_credits/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
 
 gfx/intro_credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 

@@ -445,6 +445,7 @@ GameFreakIntroEnd:
 
 FightIntroBackMon:
 	INCBIN "gfx/intro_credits/gengar.2bpp"
+	ds 16, $00 ; blank tile
 FightIntroBackMonEnd:
 
 FightIntroFrontMon:
