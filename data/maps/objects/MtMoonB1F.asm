@@ -9,7 +9,7 @@ MtMoonB1F_Object:
 	warp 21, 17, 1, MT_MOON_B2F
 	warp 13, 27, 2, MT_MOON_B2F
 	warp 23, 3, 3, MT_MOON_B2F
-	warp 27, 3, 2, -1
+	warp 27, 3, 2, LAST_MAP
 
 	db 0 ; signs
 

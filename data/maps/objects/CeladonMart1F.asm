@@ -2,10 +2,10 @@ CeladonMart1F_Object:
 	db $f ; border block
 
 	db 6 ; warps
-	warp 2, 7, 0, -1
-	warp 3, 7, 0, -1
-	warp 16, 7, 1, -1
-	warp 17, 7, 1, -1
+	warp 2, 7, 0, LAST_MAP
+	warp 3, 7, 0, LAST_MAP
+	warp 16, 7, 1, LAST_MAP
+	warp 17, 7, 1, LAST_MAP
 	warp 12, 1, 0, CELADON_MART_2F
 	warp 1, 1, 0, CELADON_MART_ELEVATOR
 

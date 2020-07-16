@@ -2,8 +2,8 @@ ViridianGym_Object:
 	db $3 ; border block
 
 	db 2 ; warps
-	warp 16, 17, 4, -1
-	warp 17, 17, 4, -1
+	warp 16, 17, 4, LAST_MAP
+	warp 17, 17, 4, LAST_MAP
 
 	db 0 ; signs
 

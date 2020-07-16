@@ -2,8 +2,8 @@ VictoryRoad1F_Object:
 	db $7d ; border block
 
 	db 3 ; warps
-	warp 8, 17, 2, -1
-	warp 9, 17, 2, -1
+	warp 8, 17, 2, LAST_MAP
+	warp 9, 17, 2, LAST_MAP
 	warp 1, 1, 0, VICTORY_ROAD_2F
 
 	db 0 ; signs

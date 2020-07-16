@@ -4,7 +4,7 @@ SilphCo11F_Object:
 	db 4 ; warps
 	warp 9, 0, 1, SILPH_CO_10F
 	warp 13, 0, 0, SILPH_CO_ELEVATOR
-	warp 5, 5, 9, -1
+	warp 5, 5, 9, LAST_MAP
 	warp 3, 2, 3, SILPH_CO_7F
 
 	db 0 ; signs

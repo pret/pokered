@@ -2,8 +2,8 @@ OaksLab_Object:
 	db $3 ; border block
 
 	db 2 ; warps
-	warp 4, 11, 2, -1
-	warp 5, 11, 2, -1
+	warp 4, 11, 2, LAST_MAP
+	warp 5, 11, 2, LAST_MAP
 
 	db 0 ; signs
 

@@ -2,8 +2,8 @@ PokemonFanClub_Object:
 	db $d ; border block
 
 	db 2 ; warps
-	warp 2, 7, 1, -1
-	warp 3, 7, 1, -1
+	warp 2, 7, 1, LAST_MAP
+	warp 3, 7, 1, LAST_MAP
 
 	db 2 ; signs
 	sign 1, 0, 7 ; FanClubText7

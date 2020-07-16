@@ -2,9 +2,9 @@ PowerPlant_Object:
 	db $2e ; border block
 
 	db 3 ; warps
-	warp 4, 35, 3, -1
-	warp 5, 35, 3, -1
-	warp 0, 11, 3, -1
+	warp 4, 35, 3, LAST_MAP
+	warp 5, 35, 3, LAST_MAP
+	warp 0, 11, 3, LAST_MAP
 
 	db 0 ; signs
 

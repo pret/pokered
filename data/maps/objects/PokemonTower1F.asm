@@ -2,8 +2,8 @@ PokemonTower1F_Object:
 	db $1 ; border block
 
 	db 3 ; warps
-	warp 10, 17, 1, -1
-	warp 11, 17, 1, -1
+	warp 10, 17, 1, LAST_MAP
+	warp 11, 17, 1, LAST_MAP
 	warp 18, 9, 1, POKEMON_TOWER_2F
 
 	db 0 ; signs

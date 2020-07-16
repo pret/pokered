@@ -2,8 +2,8 @@ MtMoon1F_Object:
 	db $3 ; border block
 
 	db 5 ; warps
-	warp 14, 35, 1, -1
-	warp 15, 35, 1, -1
+	warp 14, 35, 1, LAST_MAP
+	warp 15, 35, 1, LAST_MAP
 	warp 5, 5, 0, MT_MOON_B1F
 	warp 17, 11, 2, MT_MOON_B1F
 	warp 25, 15, 3, MT_MOON_B1F

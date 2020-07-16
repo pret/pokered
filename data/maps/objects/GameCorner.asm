@@ -2,8 +2,8 @@ GameCorner_Object:
 	db $f ; border block
 
 	db 3 ; warps
-	warp 15, 17, 7, -1
-	warp 16, 17, 7, -1
+	warp 15, 17, 7, LAST_MAP
+	warp 16, 17, 7, LAST_MAP
 	warp 17, 4, 1, ROCKET_HIDEOUT_B1F
 
 	db 1 ; signs

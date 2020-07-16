@@ -2,8 +2,8 @@ RedsHouse1F_Object:
 	db $a ; border block
 
 	db 3 ; warps
-	warp 2, 7, 0, -1 ; exit1
-	warp 3, 7, 0, -1 ; exit2
+	warp 2, 7, 0, LAST_MAP ; exit1
+	warp 3, 7, 0, LAST_MAP ; exit2
 	warp 7, 1, 0, REDS_HOUSE_2F ; staircase
 
 	db 1 ; signs

@@ -2,8 +2,8 @@ LavenderMart_Object:
 	db $0 ; border block
 
 	db 2 ; warps
-	warp 3, 7, 3, -1
-	warp 4, 7, 3, -1
+	warp 3, 7, 3, LAST_MAP
+	warp 4, 7, 3, LAST_MAP
 
 	db 0 ; signs
 

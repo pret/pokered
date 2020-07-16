@@ -4,8 +4,8 @@ ViridianForestSouthGate_Object:
 	db 4 ; warps
 	warp 4, 0, 3, VIRIDIAN_FOREST
 	warp 5, 0, 4, VIRIDIAN_FOREST
-	warp 4, 7, 5, -1
-	warp 5, 7, 5, -1
+	warp 4, 7, 5, LAST_MAP
+	warp 5, 7, 5, LAST_MAP
 
 	db 0 ; signs
 

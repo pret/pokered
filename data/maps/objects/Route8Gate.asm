@@ -2,10 +2,10 @@ Route8Gate_Object:
 	db $a ; border block
 
 	db 4 ; warps
-	warp 0, 3, 0, -1
-	warp 0, 4, 1, -1
-	warp 5, 3, 2, -1
-	warp 5, 4, 3, -1
+	warp 0, 3, 0, LAST_MAP
+	warp 0, 4, 1, LAST_MAP
+	warp 5, 3, 2, LAST_MAP
+	warp 5, 4, 3, LAST_MAP
 
 	db 0 ; signs
 

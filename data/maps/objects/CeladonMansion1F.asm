@@ -2,9 +2,9 @@ CeladonMansion1F_Object:
 	db $f ; border block
 
 	db 5 ; warps
-	warp 4, 11, 2, -1
-	warp 5, 11, 2, -1
-	warp 4, 0, 4, -1
+	warp 4, 11, 2, LAST_MAP
+	warp 5, 11, 2, LAST_MAP
+	warp 4, 0, 4, LAST_MAP
 	warp 7, 1, 1, CELADON_MANSION_2F
 	warp 2, 1, 2, CELADON_MANSION_2F
 

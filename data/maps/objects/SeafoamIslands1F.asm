@@ -2,10 +2,10 @@ SeafoamIslands1F_Object:
 	db $7d ; border block
 
 	db 7 ; warps
-	warp 4, 17, 0, -1
-	warp 5, 17, 0, -1
-	warp 26, 17, 1, -1
-	warp 27, 17, 1, -1
+	warp 4, 17, 0, LAST_MAP
+	warp 5, 17, 0, LAST_MAP
+	warp 26, 17, 1, LAST_MAP
+	warp 27, 17, 1, LAST_MAP
 	warp 7, 5, 1, SEAFOAM_ISLANDS_B1F
 	warp 25, 3, 6, SEAFOAM_ISLANDS_B1F
 	warp 23, 15, 4, SEAFOAM_ISLANDS_B1F
