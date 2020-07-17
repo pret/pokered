@@ -86,859 +86,865 @@ SubanimationPointers:
 	dw Subanimation54
 	dw Subanimation55
 
+; subanimation format:
+; db (type << 5) | count
+; REPT count
+;     db frame block id, base coordinate id, frame block mode
+; endr
+
 Subanimation04:
-	db $43
-	db $02, $1a, $00
-	db $02, $10, $00
-	db $02, $03, $00
+	db (2 << 5) | 3
+	db FRAMEBLOCK_02, $1a, $00
+	db FRAMEBLOCK_02, $10, $00
+	db FRAMEBLOCK_02, $03, $00
 
 Subanimation05:
-	db $41
-	db $02, $10, $00
+	db (2 << 5) | 1
+	db FRAMEBLOCK_02, $10, $00
 
 Subanimation08:
-	db $0b
-	db $03, $30, $00
-	db $03, $44, $00
-	db $03, $94, $00
-	db $03, $60, $00
-	db $03, $76, $00
-	db $03, $9f, $00
-	db $03, $8d, $00
-	db $03, $a0, $00
-	db $03, $1a, $00
-	db $03, $a1, $00
-	db $03, $34, $00
+	db (0 << 5) | 11
+	db FRAMEBLOCK_03, $30, $00
+	db FRAMEBLOCK_03, $44, $00
+	db FRAMEBLOCK_03, $94, $00
+	db FRAMEBLOCK_03, $60, $00
+	db FRAMEBLOCK_03, $76, $00
+	db FRAMEBLOCK_03, $9f, $00
+	db FRAMEBLOCK_03, $8d, $00
+	db FRAMEBLOCK_03, $a0, $00
+	db FRAMEBLOCK_03, $1a, $00
+	db FRAMEBLOCK_03, $a1, $00
+	db FRAMEBLOCK_03, $34, $00
 
 Subanimation07:
-	db $0b
-	db $03, $30, $00
-	db $03, $a2, $00
-	db $03, $31, $00
-	db $03, $a3, $00
-	db $03, $32, $00
-	db $03, $a4, $00
-	db $03, $92, $00
-	db $03, $a5, $00
-	db $03, $15, $00
-	db $03, $a6, $00
-	db $03, $34, $00
+	db (0 << 5) | 11
+	db FRAMEBLOCK_03, $30, $00
+	db FRAMEBLOCK_03, $a2, $00
+	db FRAMEBLOCK_03, $31, $00
+	db FRAMEBLOCK_03, $a3, $00
+	db FRAMEBLOCK_03, $32, $00
+	db FRAMEBLOCK_03, $a4, $00
+	db FRAMEBLOCK_03, $92, $00
+	db FRAMEBLOCK_03, $a5, $00
+	db FRAMEBLOCK_03, $15, $00
+	db FRAMEBLOCK_03, $a6, $00
+	db FRAMEBLOCK_03, $34, $00
 
 Subanimation06:
-	db $0b
-	db $03, $30, $00
-	db $03, $a2, $00
-	db $03, $93, $00
-	db $03, $61, $00
-	db $03, $73, $00
-	db $03, $a7, $00
-	db $03, $33, $00
-	db $03, $a8, $00
-	db $03, $0e, $00
-	db $03, $a9, $00
-	db $03, $34, $00
+	db (0 << 5) | 11
+	db FRAMEBLOCK_03, $30, $00
+	db FRAMEBLOCK_03, $a2, $00
+	db FRAMEBLOCK_03, $93, $00
+	db FRAMEBLOCK_03, $61, $00
+	db FRAMEBLOCK_03, $73, $00
+	db FRAMEBLOCK_03, $a7, $00
+	db FRAMEBLOCK_03, $33, $00
+	db FRAMEBLOCK_03, $a8, $00
+	db FRAMEBLOCK_03, $0e, $00
+	db FRAMEBLOCK_03, $a9, $00
+	db FRAMEBLOCK_03, $34, $00
 
 Subanimation09:
-	db $04
-	db $03, $21, $04
-	db $04, $21, $04
-	db $03, $21, $04
-	db $05, $21, $04
+	db (0 << 5) | 4
+	db FRAMEBLOCK_03, $21, $04
+	db FRAMEBLOCK_04, $21, $04
+	db FRAMEBLOCK_03, $21, $04
+	db FRAMEBLOCK_05, $21, $04
 
 Subanimation0a:
-	db $46
-	db $06, $1b, $00
-	db $07, $1b, $00
-	db $08, $36, $00
-	db $09, $36, $00
-	db $0a, $15, $00
-	db $0a, $15, $00
+	db (2 << 5) | 6
+	db FRAMEBLOCK_06, $1b, $00
+	db FRAMEBLOCK_07, $1b, $00
+	db FRAMEBLOCK_08, $36, $00
+	db FRAMEBLOCK_09, $36, $00
+	db FRAMEBLOCK_0A, $15, $00
+	db FRAMEBLOCK_0A, $15, $00
 
 Subanimation0b:
-	db $04
-	db $01, $2d, $00
-	db $03, $2f, $00
-	db $03, $35, $00
-	db $03, $4d, $00
+	db (0 << 5) | 4
+	db FRAMEBLOCK_01, $2d, $00
+	db FRAMEBLOCK_03, $2f, $00
+	db FRAMEBLOCK_03, $35, $00
+	db FRAMEBLOCK_03, $4d, $00
 
 Subanimation55:
-	db $41
-	db $01, $9d, $00
+	db (2 << 5) | 1
+	db FRAMEBLOCK_01, $9d, $00
 
 Subanimation11:
-	db $4c
-	db $0b, $26, $00
-	db $0c, $26, $00
-	db $0b, $26, $00
-	db $0c, $26, $00
-	db $0b, $28, $00
-	db $0c, $28, $00
-	db $0b, $28, $00
-	db $0c, $28, $00
-	db $0b, $27, $00
-	db $0c, $27, $00
-	db $0b, $27, $00
-	db $0c, $27, $00
+	db (2 << 5) | 12
+	db FRAMEBLOCK_0B, $26, $00
+	db FRAMEBLOCK_0C, $26, $00
+	db FRAMEBLOCK_0B, $26, $00
+	db FRAMEBLOCK_0C, $26, $00
+	db FRAMEBLOCK_0B, $28, $00
+	db FRAMEBLOCK_0C, $28, $00
+	db FRAMEBLOCK_0B, $28, $00
+	db FRAMEBLOCK_0C, $28, $00
+	db FRAMEBLOCK_0B, $27, $00
+	db FRAMEBLOCK_0C, $27, $00
+	db FRAMEBLOCK_0B, $27, $00
+	db FRAMEBLOCK_0C, $27, $00
 
 Subanimation2b:
-	db $4b
-	db $0d, $03, $03
-	db $0e, $03, $03
-	db $0f, $03, $00
-	db $0d, $11, $00
-	db $0d, $11, $00
-	db $0d, $37, $00
-	db $0d, $37, $00
-	db $10, $21, $00
-	db $10, $21, $00
-	db $11, $1b, $00
-	db $11, $1b, $00
+	db (2 << 5) | 11
+	db FRAMEBLOCK_0D, $03, $03
+	db FRAMEBLOCK_0E, $03, $03
+	db FRAMEBLOCK_0F, $03, $00
+	db FRAMEBLOCK_0D, $11, $00
+	db FRAMEBLOCK_0D, $11, $00
+	db FRAMEBLOCK_0D, $37, $00
+	db FRAMEBLOCK_0D, $37, $00
+	db FRAMEBLOCK_10, $21, $00
+	db FRAMEBLOCK_10, $21, $00
+	db FRAMEBLOCK_11, $1b, $00
+	db FRAMEBLOCK_11, $1b, $00
 
 Subanimation2c:
-	db $4c
-	db $12, $01, $00
-	db $12, $0f, $00
-	db $12, $1b, $00
-	db $12, $25, $00
-	db $13, $38, $00
-	db $13, $38, $02
-	db $14, $38, $00
-	db $14, $38, $02
-	db $15, $38, $00
-	db $15, $38, $00
-	db $16, $38, $00
-	db $16, $38, $00
+	db (2 << 5) | 12
+	db FRAMEBLOCK_12, $01, $00
+	db FRAMEBLOCK_12, $0f, $00
+	db FRAMEBLOCK_12, $1b, $00
+	db FRAMEBLOCK_12, $25, $00
+	db FRAMEBLOCK_13, $38, $00
+	db FRAMEBLOCK_13, $38, $02
+	db FRAMEBLOCK_14, $38, $00
+	db FRAMEBLOCK_14, $38, $02
+	db FRAMEBLOCK_15, $38, $00
+	db FRAMEBLOCK_15, $38, $00
+	db FRAMEBLOCK_16, $38, $00
+	db FRAMEBLOCK_16, $38, $00
 
 Subanimation12:
-	db $69
-	db $17, $30, $00
-	db $17, $39, $00
-	db $17, $3a, $00
-	db $17, $3b, $00
-	db $17, $3c, $00
-	db $17, $3d, $00
-	db $17, $3e, $00
-	db $17, $3f, $00
-	db $17, $1f, $00
+	db (3 << 5) | 9
+	db FRAMEBLOCK_17, $30, $00
+	db FRAMEBLOCK_17, $39, $00
+	db FRAMEBLOCK_17, $3a, $00
+	db FRAMEBLOCK_17, $3b, $00
+	db FRAMEBLOCK_17, $3c, $00
+	db FRAMEBLOCK_17, $3d, $00
+	db FRAMEBLOCK_17, $3e, $00
+	db FRAMEBLOCK_17, $3f, $00
+	db FRAMEBLOCK_17, $1f, $00
 
 Subanimation00:
-	db $41
-	db $01, $17, $00
+	db (2 << 5) | 1
+	db FRAMEBLOCK_01, $17, $00
 
 Subanimation01:
-	db $42
-	db $01, $0f, $00
-	db $01, $1d, $00
+	db (2 << 5) | 2
+	db FRAMEBLOCK_01, $0f, $00
+	db FRAMEBLOCK_01, $1d, $00
 
 Subanimation02:
-	db $43
-	db $01, $12, $00
-	db $01, $15, $00
-	db $01, $1c, $00
+	db (2 << 5) | 3
+	db FRAMEBLOCK_01, $12, $00
+	db FRAMEBLOCK_01, $15, $00
+	db FRAMEBLOCK_01, $1c, $00
 
 Subanimation03:
-	db $44
-	db $01, $0b, $00
-	db $01, $11, $00
-	db $01, $18, $00
-	db $01, $1d, $00
+	db (2 << 5) | 4
+	db FRAMEBLOCK_01, $0b, $00
+	db FRAMEBLOCK_01, $11, $00
+	db FRAMEBLOCK_01, $18, $00
+	db FRAMEBLOCK_01, $1d, $00
 
 Subanimation0c:
-	db $43
-	db $0c, $20, $00
-	db $0c, $21, $00
-	db $0c, $23, $00
+	db (2 << 5) | 3
+	db FRAMEBLOCK_0C, $20, $00
+	db FRAMEBLOCK_0C, $21, $00
+	db FRAMEBLOCK_0C, $23, $00
 
 Subanimation0d:
-	db $46
-	db $0c, $20, $02
-	db $0c, $15, $00
-	db $0c, $21, $02
-	db $0c, $17, $00
-	db $0c, $23, $02
-	db $0c, $19, $00
+	db (2 << 5) | 6
+	db FRAMEBLOCK_0C, $20, $02
+	db FRAMEBLOCK_0C, $15, $00
+	db FRAMEBLOCK_0C, $21, $02
+	db FRAMEBLOCK_0C, $17, $00
+	db FRAMEBLOCK_0C, $23, $02
+	db FRAMEBLOCK_0C, $19, $00
 
 Subanimation0e:
-	db $49
-	db $0c, $20, $02
-	db $0c, $15, $02
-	db $0c, $07, $00
-	db $0c, $21, $02
-	db $0c, $17, $02
-	db $0c, $09, $00
-	db $0c, $23, $02
-	db $0c, $19, $02
-	db $0c, $0c, $00
+	db (2 << 5) | 9
+	db FRAMEBLOCK_0C, $20, $02
+	db FRAMEBLOCK_0C, $15, $02
+	db FRAMEBLOCK_0C, $07, $00
+	db FRAMEBLOCK_0C, $21, $02
+	db FRAMEBLOCK_0C, $17, $02
+	db FRAMEBLOCK_0C, $09, $00
+	db FRAMEBLOCK_0C, $23, $02
+	db FRAMEBLOCK_0C, $19, $02
+	db FRAMEBLOCK_0C, $0c, $00
 
 Subanimation1f:
-	db $85
-	db $0c, $30, $03
-	db $0c, $40, $03
-	db $0c, $41, $03
-	db $0c, $42, $03
-	db $0c, $21, $00
+	db (4 << 5) | 5
+	db FRAMEBLOCK_0C, $30, $03
+	db FRAMEBLOCK_0C, $40, $03
+	db FRAMEBLOCK_0C, $41, $03
+	db FRAMEBLOCK_0C, $42, $03
+	db FRAMEBLOCK_0C, $21, $00
 
 Subanimation2e:
-	db $2e
-	db $18, $43, $02
-	db $75, $52, $04
-	db $19, $43, $02
-	db $75, $63, $04
-	db $1a, $43, $02
-	db $75, $4d, $04
-	db $1b, $43, $02
-	db $75, $97, $04
-	db $1c, $43, $02
-	db $75, $98, $04
-	db $1d, $43, $02
-	db $75, $58, $04
-	db $1e, $43, $02
-	db $75, $1b, $00
+	db (1 << 5) | 14
+	db FRAMEBLOCK_18, $43, $02
+	db FRAMEBLOCK_75, $52, $04
+	db FRAMEBLOCK_19, $43, $02
+	db FRAMEBLOCK_75, $63, $04
+	db FRAMEBLOCK_1A, $43, $02
+	db FRAMEBLOCK_75, $4d, $04
+	db FRAMEBLOCK_1B, $43, $02
+	db FRAMEBLOCK_75, $97, $04
+	db FRAMEBLOCK_1C, $43, $02
+	db FRAMEBLOCK_75, $98, $04
+	db FRAMEBLOCK_1D, $43, $02
+	db FRAMEBLOCK_75, $58, $04
+	db FRAMEBLOCK_1E, $43, $02
+	db FRAMEBLOCK_75, $1b, $00
 
 Subanimation2f:
-	db $44
-	db $1f, $24, $00
-	db $20, $20, $00
-	db $21, $1a, $00
-	db $22, $15, $00
+	db (2 << 5) | 4
+	db FRAMEBLOCK_1F, $24, $00
+	db FRAMEBLOCK_20, $20, $00
+	db FRAMEBLOCK_21, $1a, $00
+	db FRAMEBLOCK_22, $15, $00
 
 Subanimation30:
-	db $52
-	db $23, $00, $02
-	db $23, $02, $02
-	db $23, $04, $00
-	db $23, $07, $02
-	db $23, $02, $02
-	db $23, $04, $00
-	db $23, $0e, $02
-	db $23, $02, $02
-	db $23, $0c, $00
-	db $25, $07, $00
-	db $25, $0e, $00
-	db $25, $15, $00
-	db $24, $24, $02
-	db $23, $1c, $02
-	db $23, $23, $00
-	db $23, $21, $02
-	db $24, $28, $00
-	db $24, $28, $00
+	db (2 << 5) | 18
+	db FRAMEBLOCK_23, $00, $02
+	db FRAMEBLOCK_23, $02, $02
+	db FRAMEBLOCK_23, $04, $00
+	db FRAMEBLOCK_23, $07, $02
+	db FRAMEBLOCK_23, $02, $02
+	db FRAMEBLOCK_23, $04, $00
+	db FRAMEBLOCK_23, $0e, $02
+	db FRAMEBLOCK_23, $02, $02
+	db FRAMEBLOCK_23, $0c, $00
+	db FRAMEBLOCK_25, $07, $00
+	db FRAMEBLOCK_25, $0e, $00
+	db FRAMEBLOCK_25, $15, $00
+	db FRAMEBLOCK_24, $24, $02
+	db FRAMEBLOCK_23, $1c, $02
+	db FRAMEBLOCK_23, $23, $00
+	db FRAMEBLOCK_23, $21, $02
+	db FRAMEBLOCK_24, $28, $00
+	db FRAMEBLOCK_24, $28, $00
 
 Subanimation0f:
-	db $4c
-	db $26, $0e, $02
-	db $26, $16, $02
-	db $26, $1c, $00
-	db $27, $0e, $02
-	db $27, $16, $02
-	db $27, $1c, $00
-	db $28, $0e, $02
-	db $28, $16, $02
-	db $28, $1c, $00
-	db $29, $0e, $02
-	db $29, $16, $02
-	db $29, $1c, $00
+	db (2 << 5) | 12
+	db FRAMEBLOCK_26, $0e, $02
+	db FRAMEBLOCK_26, $16, $02
+	db FRAMEBLOCK_26, $1c, $00
+	db FRAMEBLOCK_27, $0e, $02
+	db FRAMEBLOCK_27, $16, $02
+	db FRAMEBLOCK_27, $1c, $00
+	db FRAMEBLOCK_28, $0e, $02
+	db FRAMEBLOCK_28, $16, $02
+	db FRAMEBLOCK_28, $1c, $00
+	db FRAMEBLOCK_29, $0e, $02
+	db FRAMEBLOCK_29, $16, $02
+	db FRAMEBLOCK_29, $1c, $00
 
 Subanimation16:
-	db $4c
-	db $2a, $05, $00
-	db $2b, $05, $02
-	db $2b, $0c, $02
-	db $2a, $11, $04
-	db $2b, $11, $02
-	db $2b, $17, $02
-	db $2a, $1b, $04
-	db $2b, $1b, $02
-	db $2b, $20, $02
-	db $2a, $2f, $04
-	db $2c, $00, $02
-	db $2c, $00, $00
+	db (2 << 5) | 12
+	db FRAMEBLOCK_2A, $05, $00
+	db FRAMEBLOCK_2B, $05, $02
+	db FRAMEBLOCK_2B, $0c, $02
+	db FRAMEBLOCK_2A, $11, $04
+	db FRAMEBLOCK_2B, $11, $02
+	db FRAMEBLOCK_2B, $17, $02
+	db FRAMEBLOCK_2A, $1b, $04
+	db FRAMEBLOCK_2B, $1b, $02
+	db FRAMEBLOCK_2B, $20, $02
+	db FRAMEBLOCK_2A, $2f, $04
+	db FRAMEBLOCK_2C, $00, $02
+	db FRAMEBLOCK_2C, $00, $00
 
 Subanimation10:
-	db $88
-	db $2d, $44, $00
-	db $2e, $45, $00
-	db $2d, $46, $00
-	db $2e, $47, $00
-	db $2d, $48, $00
-	db $2e, $49, $00
-	db $2d, $2f, $00
-	db $2e, $1a, $00
+	db (4 << 5) | 8
+	db FRAMEBLOCK_2D, $44, $00
+	db FRAMEBLOCK_2E, $45, $00
+	db FRAMEBLOCK_2D, $46, $00
+	db FRAMEBLOCK_2E, $47, $00
+	db FRAMEBLOCK_2D, $48, $00
+	db FRAMEBLOCK_2E, $49, $00
+	db FRAMEBLOCK_2D, $2f, $00
+	db FRAMEBLOCK_2E, $1a, $00
 
 Subanimation31:
-	db $2a
-	db $2f, $46, $00
-	db $2f, $4a, $00
-	db $2f, $4b, $00
-	db $2f, $4c, $00
-	db $2f, $4d, $00
-	db $2f, $4e, $00
-	db $2f, $4f, $00
-	db $2f, $50, $00
-	db $2f, $2e, $00
-	db $2f, $51, $00
+	db (1 << 5) | 10
+	db FRAMEBLOCK_2F, $46, $00
+	db FRAMEBLOCK_2F, $4a, $00
+	db FRAMEBLOCK_2F, $4b, $00
+	db FRAMEBLOCK_2F, $4c, $00
+	db FRAMEBLOCK_2F, $4d, $00
+	db FRAMEBLOCK_2F, $4e, $00
+	db FRAMEBLOCK_2F, $4f, $00
+	db FRAMEBLOCK_2F, $50, $00
+	db FRAMEBLOCK_2F, $2e, $00
+	db FRAMEBLOCK_2F, $51, $00
 
 Subanimation13:
-	db $86
-	db $30, $31, $00
-	db $30, $32, $00
-	db $30, $92, $00
-	db $30, $0e, $00
-	db $30, $0f, $00
-	db $30, $10, $00
+	db (4 << 5) | 6
+	db FRAMEBLOCK_30, $31, $00
+	db FRAMEBLOCK_30, $32, $00
+	db FRAMEBLOCK_30, $92, $00
+	db FRAMEBLOCK_30, $0e, $00
+	db FRAMEBLOCK_30, $0f, $00
+	db FRAMEBLOCK_30, $10, $00
 
 Subanimation14:
-	db $49
-	db $30, $10, $00
-	db $30, $10, $03
-	db $31, $1c, $04
-	db $31, $21, $04
-	db $31, $26, $00
-	db $30, $10, $02
-	db $31, $1d, $04
-	db $31, $22, $04
-	db $31, $27, $00
+	db (2 << 5) | 9
+	db FRAMEBLOCK_30, $10, $00
+	db FRAMEBLOCK_30, $10, $03
+	db FRAMEBLOCK_31, $1c, $04
+	db FRAMEBLOCK_31, $21, $04
+	db FRAMEBLOCK_31, $26, $00
+	db FRAMEBLOCK_30, $10, $02
+	db FRAMEBLOCK_31, $1d, $04
+	db FRAMEBLOCK_31, $22, $04
+	db FRAMEBLOCK_31, $27, $00
 
 Subanimation41:
-	db $85
-	db $03, $31, $00
-	db $03, $32, $00
-	db $03, $92, $00
-	db $03, $0e, $00
-	db $03, $10, $00
+	db (4 << 5) | 5
+	db FRAMEBLOCK_03, $31, $00
+	db FRAMEBLOCK_03, $32, $00
+	db FRAMEBLOCK_03, $92, $00
+	db FRAMEBLOCK_03, $0e, $00
+	db FRAMEBLOCK_03, $10, $00
 
 Subanimation42:
-	db $43
-	db $48, $08, $00
-	db $49, $08, $00
-	db $5a, $08, $00
+	db (2 << 5) | 3
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $08, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $08, $00
+	db FRAMEBLOCK_5A, $08, $00
 
 Subanimation15:
-	db $22
-	db $35, $52, $00
-	db $35, $53, $00
+	db (1 << 5) | 2
+	db FRAMEBLOCK_35, $52, $00
+	db FRAMEBLOCK_35, $53, $00
 
 Subanimation17:
-	db $44
-	db $36, $54, $00
-	db $36, $55, $00
-	db $37, $56, $00
-	db $37, $57, $00
+	db (2 << 5) | 4
+	db FRAMEBLOCK_36, $54, $00
+	db FRAMEBLOCK_36, $55, $00
+	db FRAMEBLOCK_37, $56, $00
+	db FRAMEBLOCK_37, $57, $00
 
 Subanimation18:
-	db $a4
-	db $36, $54, $00
-	db $36, $55, $00
-	db $37, $56, $00
-	db $37, $57, $00
+	db (5 << 5) | 4
+	db FRAMEBLOCK_36, $54, $00
+	db FRAMEBLOCK_36, $55, $00
+	db FRAMEBLOCK_37, $56, $00
+	db FRAMEBLOCK_37, $57, $00
 
 Subanimation40:
-	db $46
-	db $17, $54, $00
-	db $17, $55, $00
-	db $17, $0e, $00
-	db $17, $56, $00
-	db $17, $57, $00
-	db $17, $13, $00
+	db (2 << 5) | 6
+	db FRAMEBLOCK_17, $54, $00
+	db FRAMEBLOCK_17, $55, $00
+	db FRAMEBLOCK_17, $0e, $00
+	db FRAMEBLOCK_17, $56, $00
+	db FRAMEBLOCK_17, $57, $00
+	db FRAMEBLOCK_17, $13, $00
 
 Subanimation19:
-	db $8c
-	db $38, $31, $00
-	db $39, $31, $00
-	db $38, $32, $00
-	db $39, $32, $00
-	db $38, $92, $00
-	db $39, $92, $00
-	db $38, $0e, $00
-	db $39, $0e, $00
-	db $38, $0f, $00
-	db $39, $0f, $00
-	db $38, $10, $00
-	db $39, $10, $00
+	db (4 << 5) | 12
+	db FRAMEBLOCK_38, $31, $00
+	db FRAMEBLOCK_39, $31, $00
+	db FRAMEBLOCK_38, $32, $00
+	db FRAMEBLOCK_39, $32, $00
+	db FRAMEBLOCK_38, $92, $00
+	db FRAMEBLOCK_39, $92, $00
+	db FRAMEBLOCK_38, $0e, $00
+	db FRAMEBLOCK_39, $0e, $00
+	db FRAMEBLOCK_38, $0f, $00
+	db FRAMEBLOCK_39, $0f, $00
+	db FRAMEBLOCK_38, $10, $00
+	db FRAMEBLOCK_39, $10, $00
 
 Subanimation1a:
-	db $50
-	db $3a, $08, $00
-	db $3b, $08, $00
-	db $3c, $08, $00
-	db $3d, $08, $00
-	db $3e, $08, $00
-	db $3f, $08, $00
-	db $3e, $08, $00
-	db $3f, $08, $00
-	db $3a, $0b, $00
-	db $3b, $0b, $00
-	db $3c, $0b, $00
-	db $3d, $0b, $00
-	db $3e, $0b, $00
-	db $3f, $0b, $00
-	db $3e, $0b, $00
-	db $3f, $0b, $00
+	db (2 << 5) | 16
+	db FRAMEBLOCK_3A, $08, $00
+	db FRAMEBLOCK_3B, $08, $00
+	db FRAMEBLOCK_3C, $08, $00
+	db FRAMEBLOCK_3D, $08, $00
+	db FRAMEBLOCK_3E, $08, $00
+	db FRAMEBLOCK_3F, $08, $00
+	db FRAMEBLOCK_3E, $08, $00
+	db FRAMEBLOCK_3F, $08, $00
+	db FRAMEBLOCK_3A, $0b, $00
+	db FRAMEBLOCK_3B, $0b, $00
+	db FRAMEBLOCK_3C, $0b, $00
+	db FRAMEBLOCK_3D, $0b, $00
+	db FRAMEBLOCK_3E, $0b, $00
+	db FRAMEBLOCK_3F, $0b, $00
+	db FRAMEBLOCK_3E, $0b, $00
+	db FRAMEBLOCK_3F, $0b, $00
 
 Subanimation1b:
-	db $84
-	db $40, $31, $00
-	db $40, $32, $00
-	db $40, $92, $00
-	db $40, $15, $00
+	db (4 << 5) | 4
+	db FRAMEBLOCK_40, $31, $00
+	db FRAMEBLOCK_40, $32, $00
+	db FRAMEBLOCK_40, $92, $00
+	db FRAMEBLOCK_40, $15, $00
 
 Subanimation1c:
-	db $43
-	db $41, $58, $00
-	db $41, $59, $00
-	db $41, $21, $00
+	db (2 << 5) | 3
+	db FRAMEBLOCK_41, $58, $00
+	db FRAMEBLOCK_41, $59, $00
+	db FRAMEBLOCK_41, $21, $00
 
 Subanimation1d:
-	db $af
-	db $24, $9a, $00
-	db $23, $1b, $02
-	db $24, $22, $00
-	db $23, $16, $02
-	db $23, $1d, $02
-	db $24, $98, $00
-	db $25, $2c, $04
-	db $25, $2a, $04
-	db $25, $99, $04
-	db $25, $62, $04
-	db $25, $99, $04
-	db $25, $62, $04
-	db $25, $99, $04
-	db $25, $62, $04
-	db $25, $99, $03
+	db (5 << 5) | 15
+	db FRAMEBLOCK_24, $9a, $00
+	db FRAMEBLOCK_23, $1b, $02
+	db FRAMEBLOCK_24, $22, $00
+	db FRAMEBLOCK_23, $16, $02
+	db FRAMEBLOCK_23, $1d, $02
+	db FRAMEBLOCK_24, $98, $00
+	db FRAMEBLOCK_25, $2c, $04
+	db FRAMEBLOCK_25, $2a, $04
+	db FRAMEBLOCK_25, $99, $04
+	db FRAMEBLOCK_25, $62, $04
+	db FRAMEBLOCK_25, $99, $04
+	db FRAMEBLOCK_25, $62, $04
+	db FRAMEBLOCK_25, $99, $04
+	db FRAMEBLOCK_25, $62, $04
+	db FRAMEBLOCK_25, $99, $03
 
 Subanimation1e:
-	db $01
-	db $25, $75, $00
+	db (0 << 5) | 1
+	db FRAMEBLOCK_25, $75, $00
 
 Subanimation20:
-	db $42
-	db $42, $07, $00
-	db $43, $07, $00
+	db (2 << 5) | 2
+	db FRAMEBLOCK_42, $07, $00
+	db FRAMEBLOCK_43, $07, $00
 
 Subanimation21:
-	db $43
-	db $44, $00, $00
-	db $45, $08, $00
-	db $46, $10, $02
+	db (2 << 5) | 3
+	db FRAMEBLOCK_44, $00, $00
+	db FRAMEBLOCK_45, $08, $00
+	db FRAMEBLOCK_46, $10, $02
 
 Subanimation22:
-	db $8b
-	db $47, $10, $00
-	db $47, $56, $00
-	db $47, $07, $00
-	db $47, $aa, $00
-	db $47, $ab, $00
-	db $47, $ac, $00
-	db $47, $ad, $00
-	db $47, $ae, $00
-	db $47, $af, $00
-	db $47, $89, $00
-	db $47, $b0, $00
+	db (4 << 5) | 11
+	db FRAMEBLOCK_47, $10, $00
+	db FRAMEBLOCK_47, $56, $00
+	db FRAMEBLOCK_47, $07, $00
+	db FRAMEBLOCK_47, $aa, $00
+	db FRAMEBLOCK_47, $ab, $00
+	db FRAMEBLOCK_47, $ac, $00
+	db FRAMEBLOCK_47, $ad, $00
+	db FRAMEBLOCK_47, $ae, $00
+	db FRAMEBLOCK_47, $af, $00
+	db FRAMEBLOCK_47, $89, $00
+	db FRAMEBLOCK_47, $b0, $00
 
 Subanimation2d:
-	db $66
-	db $44, $64, $00
-	db $45, $65, $00
-	db $46, $66, $00
-	db $47, $66, $00
-	db $47, $66, $00
-	db $47, $66, $00
+	db (3 << 5) | 6
+	db FRAMEBLOCK_44, $64, $00
+	db FRAMEBLOCK_45, $65, $00
+	db FRAMEBLOCK_46, $66, $00
+	db FRAMEBLOCK_47, $66, $00
+	db FRAMEBLOCK_47, $66, $00
+	db FRAMEBLOCK_47, $66, $00
 
 Subanimation39:
-	db $61
-	db $47, $67, $00
+	db (3 << 5) | 1
+	db FRAMEBLOCK_47, $67, $00
 
 Subanimation4e:
-	db $41
-	db $71, $0f, $03
+	db (2 << 5) | 1
+	db FRAMEBLOCK_71, $0f, $03
 
 Subanimation4f:
-	db $47
-	db $71, $0f, $00
-	db $71, $08, $00
-	db $71, $01, $00
-	db $71, $95, $00
-	db $72, $95, $00
-	db $73, $95, $00
-	db $74, $95, $00
+	db (2 << 5) | 7
+	db FRAMEBLOCK_71, $0f, $00
+	db FRAMEBLOCK_71, $08, $00
+	db FRAMEBLOCK_71, $01, $00
+	db FRAMEBLOCK_71, $95, $00
+	db FRAMEBLOCK_72, $95, $00
+	db FRAMEBLOCK_73, $95, $00
+	db FRAMEBLOCK_74, $95, $00
 
 Subanimation50:
-	db $48
-	db $74, $95, $00
-	db $73, $95, $00
-	db $72, $95, $00
-	db $71, $95, $00
-	db $71, $01, $00
-	db $71, $08, $00
-	db $71, $0f, $00
-	db $71, $16, $00
+	db (2 << 5) | 8
+	db FRAMEBLOCK_74, $95, $00
+	db FRAMEBLOCK_73, $95, $00
+	db FRAMEBLOCK_72, $95, $00
+	db FRAMEBLOCK_71, $95, $00
+	db FRAMEBLOCK_71, $01, $00
+	db FRAMEBLOCK_71, $08, $00
+	db FRAMEBLOCK_71, $0f, $00
+	db FRAMEBLOCK_71, $16, $00
 
 Subanimation29:
-	db $5d
-	db $48, $0f, $00
-	db $4a, $68, $03
-	db $4b, $2a, $03
-	db $49, $0f, $00
-	db $4a, $68, $03
-	db $4b, $2a, $00
-	db $4c, $6a, $03
-	db $4d, $69, $03
-	db $49, $6b, $00
-	db $4c, $6a, $03
-	db $4d, $69, $00
-	db $4a, $68, $03
-	db $4b, $2a, $03
-	db $49, $6c, $00
-	db $4a, $68, $03
-	db $4b, $2a, $00
-	db $4c, $6a, $03
-	db $4d, $69, $03
-	db $49, $6d, $00
-	db $4c, $6a, $03
-	db $4d, $2a, $00
-	db $4a, $68, $03
-	db $4b, $2a, $03
-	db $49, $0f, $00
-	db $4a, $68, $03
-	db $4b, $2a, $00
-	db $4c, $6a, $03
-	db $4d, $2a, $03
-	db $49, $6b, $00
+	db (2 << 5) | 29
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $0f, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $0f, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $00
+	db FRAMEBLOCK_4C, $6a, $03
+	db FRAMEBLOCK_4D, $69, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $6b, $00
+	db FRAMEBLOCK_4C, $6a, $03
+	db FRAMEBLOCK_4D, $69, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $6c, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $00
+	db FRAMEBLOCK_4C, $6a, $03
+	db FRAMEBLOCK_4D, $69, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $6d, $00
+	db FRAMEBLOCK_4C, $6a, $03
+	db FRAMEBLOCK_4D, $2a, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $0f, $00
+	db FRAMEBLOCK_4A, $68, $03
+	db FRAMEBLOCK_4B, $2a, $00
+	db FRAMEBLOCK_4C, $6a, $03
+	db FRAMEBLOCK_4D, $2a, $03
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $6b, $00
 
 Subanimation2a:
-	db $44
-	db $4e, $2b, $00
-	db $4f, $2b, $00
-	db $50, $2b, $00
-	db $50, $2b, $00
+	db (2 << 5) | 4
+	db FRAMEBLOCK_4E, $2b, $00
+	db FRAMEBLOCK_4F, $2b, $00
+	db FRAMEBLOCK_50, $2b, $00
+	db FRAMEBLOCK_50, $2b, $00
 
 Subanimation23:
-	db $42
-	db $51, $2d, $00
-	db $51, $6e, $00
+	db (2 << 5) | 2
+	db FRAMEBLOCK_51, $2d, $00
+	db FRAMEBLOCK_51, $6e, $00
 
 Subanimation24:
-	db $a2
-	db $51, $2d, $00
-	db $51, $6e, $00
+	db (5 << 5) | 2
+	db FRAMEBLOCK_51, $2d, $00
+	db FRAMEBLOCK_51, $6e, $00
 
 Subanimation25:
-	db $62
-	db $52, $71, $00
-	db $52, $72, $00
+	db (3 << 5) | 2
+	db FRAMEBLOCK_52, $71, $00
+	db FRAMEBLOCK_52, $72, $00
 
 Subanimation26:
-	db $02
-	db $52, $01, $00
-	db $52, $2c, $00
+	db (0 << 5) | 2
+	db FRAMEBLOCK_52, $01, $00
+	db FRAMEBLOCK_52, $2c, $00
 
 Subanimation3a:
-	db $63
-	db $53, $71, $00
-	db $53, $7f, $00
-	db $53, $81, $00
+	db (3 << 5) | 3
+	db FRAMEBLOCK_53, $71, $00
+	db FRAMEBLOCK_53, $7f, $00
+	db FRAMEBLOCK_53, $81, $00
 
 Subanimation3b:
-	db $03
-	db $53, $01, $00
-	db $53, $15, $00
-	db $53, $2c, $00
+	db (0 << 5) | 3
+	db FRAMEBLOCK_53, $01, $00
+	db FRAMEBLOCK_53, $15, $00
+	db FRAMEBLOCK_53, $2c, $00
 
 Subanimation27:
-	db $a2
-	db $54, $01, $00
-	db $54, $2c, $00
+	db (5 << 5) | 2
+	db FRAMEBLOCK_54, $01, $00
+	db FRAMEBLOCK_54, $2c, $00
 
 Subanimation28:
-	db $23
-	db $55, $73, $03
-	db $56, $73, $03
-	db $57, $73, $00
+	db (1 << 5) | 3
+	db FRAMEBLOCK_55, $73, $03
+	db FRAMEBLOCK_56, $73, $03
+	db FRAMEBLOCK_57, $73, $00
 
 Subanimation32:
-	db $63
-	db $47, $74, $00
-	db $47, $43, $00
-	db $47, $75, $00
+	db (3 << 5) | 3
+	db FRAMEBLOCK_47, $74, $00
+	db FRAMEBLOCK_47, $43, $00
+	db FRAMEBLOCK_47, $75, $00
 
 Subanimation33:
-	db $26
-	db $58, $76, $00
-	db $34, $76, $00
-	db $58, $76, $00
-	db $34, $76, $00
-	db $58, $76, $00
-	db $34, $76, $00
+	db (1 << 5) | 6
+	db FRAMEBLOCK_58, $76, $00
+	db FRAMEBLOCK_34, $76, $00
+	db FRAMEBLOCK_58, $76, $00
+	db FRAMEBLOCK_34, $76, $00
+	db FRAMEBLOCK_58, $76, $00
+	db FRAMEBLOCK_34, $76, $00
 
 Subanimation3c:
-	db $67
-	db $59, $79, $03
-	db $59, $7b, $03
-	db $59, $77, $03
-	db $59, $7a, $03
-	db $59, $78, $03
-	db $59, $7c, $03
-	db $59, $76, $00
+	db (3 << 5) | 7
+	db FRAMEBLOCK_59, $79, $03
+	db FRAMEBLOCK_59, $7b, $03
+	db FRAMEBLOCK_59, $77, $03
+	db FRAMEBLOCK_59, $7a, $03
+	db FRAMEBLOCK_59, $78, $03
+	db FRAMEBLOCK_59, $7c, $03
+	db FRAMEBLOCK_59, $76, $00
 
 Subanimation3d:
-	db $08
-	db $3a, $4d, $00
-	db $3b, $4d, $00
-	db $3c, $4d, $00
-	db $3d, $4d, $00
-	db $3e, $4d, $00
-	db $3f, $4d, $00
-	db $3e, $4d, $00
-	db $3f, $4d, $00
+	db (0 << 5) | 8
+	db FRAMEBLOCK_3A, $4d, $00
+	db FRAMEBLOCK_3B, $4d, $00
+	db FRAMEBLOCK_3C, $4d, $00
+	db FRAMEBLOCK_3D, $4d, $00
+	db FRAMEBLOCK_3E, $4d, $00
+	db FRAMEBLOCK_3F, $4d, $00
+	db FRAMEBLOCK_3E, $4d, $00
+	db FRAMEBLOCK_3F, $4d, $00
 
 Subanimation34:
-	db $35
-	db $48, $7d, $00
-	db $49, $7d, $00
-	db $5a, $7d, $00
-	db $48, $30, $00
-	db $49, $30, $00
-	db $5a, $30, $00
-	db $48, $7e, $00
-	db $49, $7e, $00
-	db $5a, $7e, $00
-	db $48, $7f, $00
-	db $49, $7f, $00
-	db $5a, $7f, $00
-	db $48, $80, $00
-	db $49, $80, $00
-	db $5a, $80, $00
-	db $48, $81, $00
-	db $49, $81, $00
-	db $5a, $81, $00
-	db $48, $82, $00
-	db $49, $82, $00
-	db $5a, $82, $00
+	db (1 << 5) | 21
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $7d, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $7d, $00
+	db FRAMEBLOCK_5A, $7d, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $30, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $30, $00
+	db FRAMEBLOCK_5A, $30, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $7e, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $7e, $00
+	db FRAMEBLOCK_5A, $7e, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $7f, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $7f, $00
+	db FRAMEBLOCK_5A, $7f, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $80, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $80, $00
+	db FRAMEBLOCK_5A, $80, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $81, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $81, $00
+	db FRAMEBLOCK_5A, $81, $00
+	db FRAMEBLOCK_SMALL_BLACK_CIRCLE, $82, $00
+	db FRAMEBLOCK_LARGE_BLACK_CIRCLE, $82, $00
+	db FRAMEBLOCK_5A, $82, $00
 
 Subanimation35:
-	db $24
-	db $5b, $83, $03
-	db $5c, $84, $03
-	db $5d, $85, $03
-	db $5e, $09, $00
+	db (1 << 5) | 4
+	db FRAMEBLOCK_5B, $83, $03
+	db FRAMEBLOCK_5C, $84, $03
+	db FRAMEBLOCK_5D, $85, $03
+	db FRAMEBLOCK_5E, $09, $00
 
 Subanimation36:
-	db $48
-	db $5f, $2a, $00
-	db $5f, $00, $00
-	db $60, $2a, $00
-	db $60, $00, $00
-	db $61, $2a, $00
-	db $61, $00, $00
-	db $62, $2a, $00
-	db $62, $00, $00
+	db (2 << 5) | 8
+	db FRAMEBLOCK_5F, $2a, $00
+	db FRAMEBLOCK_5F, $00, $00
+	db FRAMEBLOCK_60, $2a, $00
+	db FRAMEBLOCK_60, $00, $00
+	db FRAMEBLOCK_61, $2a, $00
+	db FRAMEBLOCK_61, $00, $00
+	db FRAMEBLOCK_62, $2a, $00
+	db FRAMEBLOCK_62, $00, $00
 
 Subanimation37:
-	db $2a
-	db $63, $89, $00
-	db $64, $75, $00
-	db $63, $76, $00
-	db $65, $0d, $00
-	db $65, $86, $00
-	db $65, $12, $00
-	db $65, $87, $00
-	db $65, $17, $00
-	db $65, $88, $00
-	db $65, $1a, $00
+	db (1 << 5) | 10
+	db FRAMEBLOCK_63, $89, $00
+	db FRAMEBLOCK_64, $75, $00
+	db FRAMEBLOCK_63, $76, $00
+	db FRAMEBLOCK_65, $0d, $00
+	db FRAMEBLOCK_65, $86, $00
+	db FRAMEBLOCK_65, $12, $00
+	db FRAMEBLOCK_65, $87, $00
+	db FRAMEBLOCK_65, $17, $00
+	db FRAMEBLOCK_65, $88, $00
+	db FRAMEBLOCK_65, $1a, $00
 
 Subanimation38:
-	db $50
-	db $66, $8a, $00
-	db $66, $33, $00
-	db $66, $2e, $00
-	db $67, $24, $03
-	db $66, $01, $04
-	db $66, $10, $04
-	db $66, $1d, $04
-	db $67, $28, $03
-	db $66, $2a, $04
-	db $66, $0e, $04
-	db $66, $1b, $04
-	db $67, $26, $03
-	db $66, $03, $04
-	db $66, $12, $04
-	db $66, $1e, $04
-	db $67, $29, $00
+	db (2 << 5) | 16
+	db FRAMEBLOCK_66, $8a, $00
+	db FRAMEBLOCK_66, $33, $00
+	db FRAMEBLOCK_66, $2e, $00
+	db FRAMEBLOCK_67, $24, $03
+	db FRAMEBLOCK_66, $01, $04
+	db FRAMEBLOCK_66, $10, $04
+	db FRAMEBLOCK_66, $1d, $04
+	db FRAMEBLOCK_67, $28, $03
+	db FRAMEBLOCK_66, $2a, $04
+	db FRAMEBLOCK_66, $0e, $04
+	db FRAMEBLOCK_66, $1b, $04
+	db FRAMEBLOCK_67, $26, $03
+	db FRAMEBLOCK_66, $03, $04
+	db FRAMEBLOCK_66, $12, $04
+	db FRAMEBLOCK_66, $1e, $04
+	db FRAMEBLOCK_67, $29, $00
 
 Subanimation3e:
-	db $92
-	db $02, $31, $00
-	db $34, $31, $00
-	db $02, $31, $00
-	db $02, $32, $00
-	db $34, $32, $00
-	db $02, $32, $00
-	db $02, $92, $00
-	db $34, $92, $00
-	db $02, $92, $00
-	db $02, $0e, $00
-	db $34, $0e, $00
-	db $02, $0e, $00
-	db $02, $0f, $00
-	db $34, $0f, $00
-	db $02, $0f, $00
-	db $02, $10, $00
-	db $34, $10, $00
-	db $02, $10, $00
+	db (4 << 5) | 18
+	db FRAMEBLOCK_02, $31, $00
+	db FRAMEBLOCK_34, $31, $00
+	db FRAMEBLOCK_02, $31, $00
+	db FRAMEBLOCK_02, $32, $00
+	db FRAMEBLOCK_34, $32, $00
+	db FRAMEBLOCK_02, $32, $00
+	db FRAMEBLOCK_02, $92, $00
+	db FRAMEBLOCK_34, $92, $00
+	db FRAMEBLOCK_02, $92, $00
+	db FRAMEBLOCK_02, $0e, $00
+	db FRAMEBLOCK_34, $0e, $00
+	db FRAMEBLOCK_02, $0e, $00
+	db FRAMEBLOCK_02, $0f, $00
+	db FRAMEBLOCK_34, $0f, $00
+	db FRAMEBLOCK_02, $0f, $00
+	db FRAMEBLOCK_02, $10, $00
+	db FRAMEBLOCK_34, $10, $00
+	db FRAMEBLOCK_02, $10, $00
 
 Subanimation3f:
-	db $72
-	db $68, $4b, $00
-	db $68, $8c, $00
-	db $68, $20, $00
-	db $68, $1c, $00
-	db $68, $19, $00
-	db $68, $14, $00
-	db $68, $76, $00
-	db $68, $8d, $00
-	db $68, $15, $00
-	db $68, $10, $00
-	db $68, $0c, $00
-	db $68, $06, $00
-	db $68, $8e, $00
-	db $68, $8f, $00
-	db $68, $90, $00
-	db $68, $26, $00
-	db $68, $23, $00
-	db $68, $1f, $00
+	db (3 << 5) | 18
+	db FRAMEBLOCK_68, $4b, $00
+	db FRAMEBLOCK_68, $8c, $00
+	db FRAMEBLOCK_68, $20, $00
+	db FRAMEBLOCK_68, $1c, $00
+	db FRAMEBLOCK_68, $19, $00
+	db FRAMEBLOCK_68, $14, $00
+	db FRAMEBLOCK_68, $76, $00
+	db FRAMEBLOCK_68, $8d, $00
+	db FRAMEBLOCK_68, $15, $00
+	db FRAMEBLOCK_68, $10, $00
+	db FRAMEBLOCK_68, $0c, $00
+	db FRAMEBLOCK_68, $06, $00
+	db FRAMEBLOCK_68, $8e, $00
+	db FRAMEBLOCK_68, $8f, $00
+	db FRAMEBLOCK_68, $90, $00
+	db FRAMEBLOCK_68, $26, $00
+	db FRAMEBLOCK_68, $23, $00
+	db FRAMEBLOCK_68, $1f, $00
 
 Subanimation44:
-	db $2c
-	db $69, $4b, $00
-	db $69, $8c, $00
-	db $69, $20, $00
-	db $69, $1c, $00
-	db $69, $19, $00
-	db $69, $14, $00
-	db $69, $76, $00
-	db $69, $8d, $00
-	db $69, $15, $00
-	db $69, $10, $00
-	db $69, $0c, $00
-	db $69, $06, $00
+	db (1 << 5) | 12
+	db FRAMEBLOCK_69, $4b, $00
+	db FRAMEBLOCK_69, $8c, $00
+	db FRAMEBLOCK_69, $20, $00
+	db FRAMEBLOCK_69, $1c, $00
+	db FRAMEBLOCK_69, $19, $00
+	db FRAMEBLOCK_69, $14, $00
+	db FRAMEBLOCK_69, $76, $00
+	db FRAMEBLOCK_69, $8d, $00
+	db FRAMEBLOCK_69, $15, $00
+	db FRAMEBLOCK_69, $10, $00
+	db FRAMEBLOCK_69, $0c, $00
+	db FRAMEBLOCK_69, $06, $00
 
 Subanimation43:
-	db $a3
-	db $6a, $07, $00
-	db $6b, $0f, $00
-	db $6c, $17, $00
+	db (5 << 5) | 3
+	db FRAMEBLOCK_6A, $07, $00
+	db FRAMEBLOCK_6B, $0f, $00
+	db FRAMEBLOCK_6C, $17, $00
 
 Subanimation45:
-	db $24
-	db $6d, $8b, $00
-	db $6d, $84, $00
-	db $6d, $63, $00
-	db $6d, $8c, $00
+	db (1 << 5) | 4
+	db FRAMEBLOCK_6D, $8b, $00
+	db FRAMEBLOCK_6D, $84, $00
+	db FRAMEBLOCK_6D, $63, $00
+	db FRAMEBLOCK_6D, $8c, $00
 
 Subanimation46:
-	db $26
-	db $6d, $8b, $00
-	db $6d, $84, $00
-	db $6d, $63, $00
-	db $6d, $8c, $00
-	db $6d, $0a, $00
-	db $6d, $89, $00
+	db (1 << 5) | 6
+	db FRAMEBLOCK_6D, $8b, $00
+	db FRAMEBLOCK_6D, $84, $00
+	db FRAMEBLOCK_6D, $63, $00
+	db FRAMEBLOCK_6D, $8c, $00
+	db FRAMEBLOCK_6D, $0a, $00
+	db FRAMEBLOCK_6D, $89, $00
 
 Subanimation47:
-	db $23
-	db $06, $82, $00
-	db $07, $82, $00
-	db $08, $96, $00
+	db (1 << 5) | 3
+	db FRAMEBLOCK_06, $82, $00
+	db FRAMEBLOCK_07, $82, $00
+	db FRAMEBLOCK_08, $96, $00
 
 Subanimation48:
-	db $06
-	db $03, $41, $04
-	db $03, $48, $04
-	db $04, $48, $04
-	db $03, $48, $04
-	db $05, $48, $04
-	db $03, $48, $03
+	db (0 << 5) | 6
+	db FRAMEBLOCK_03, $41, $04
+	db FRAMEBLOCK_03, $48, $04
+	db FRAMEBLOCK_04, $48, $04
+	db FRAMEBLOCK_03, $48, $04
+	db FRAMEBLOCK_05, $48, $04
+	db FRAMEBLOCK_03, $48, $03
 
 Subanimation49:
-	db $04
-	db $04, $48, $04
-	db $03, $48, $04
-	db $05, $48, $04
-	db $03, $48, $03
+	db (0 << 5) | 4
+	db FRAMEBLOCK_04, $48, $04
+	db FRAMEBLOCK_03, $48, $04
+	db FRAMEBLOCK_05, $48, $04
+	db FRAMEBLOCK_03, $48, $03
 
 Subanimation4a:
-	db $01
-	db $04, $84, $03
+	db (0 << 5) | 1
+	db FRAMEBLOCK_04, $84, $03
 
 Subanimation4b:
-	db $03
-	db $06, $72, $00
-	db $07, $72, $00
-	db $08, $72, $00
+	db (0 << 5) | 3
+	db FRAMEBLOCK_06, $72, $00
+	db FRAMEBLOCK_07, $72, $00
+	db FRAMEBLOCK_08, $72, $00
 
 Subanimation4c:
-	db $68
-	db $6f, $30, $00
-	db $6e, $30, $00
-	db $70, $30, $00
-	db $6e, $30, $00
-	db $6f, $30, $00
-	db $6e, $30, $00
-	db $70, $30, $00
-	db $6e, $30, $00
+	db (3 << 5) | 8
+	db FRAMEBLOCK_6F, $30, $00
+	db FRAMEBLOCK_6E, $30, $00
+	db FRAMEBLOCK_70, $30, $00
+	db FRAMEBLOCK_6E, $30, $00
+	db FRAMEBLOCK_6F, $30, $00
+	db FRAMEBLOCK_6E, $30, $00
+	db FRAMEBLOCK_70, $30, $00
+	db FRAMEBLOCK_6E, $30, $00
 
 Subanimation4d:
-	db $26
-	db $32, $4b, $00
-	db $33, $4f, $00
-	db $32, $20, $00
-	db $33, $16, $00
-	db $32, $19, $00
-	db $33, $0d, $00
+	db (1 << 5) | 6
+	db FRAMEBLOCK_32, $4b, $00
+	db FRAMEBLOCK_33, $4f, $00
+	db FRAMEBLOCK_32, $20, $00
+	db FRAMEBLOCK_33, $16, $00
+	db FRAMEBLOCK_32, $19, $00
+	db FRAMEBLOCK_33, $0d, $00
 
 Subanimation51:
-	db $a6
-	db $76, $1b, $00
-	db $34, $1b, $00
-	db $76, $1b, $00
-	db $34, $1b, $00
-	db $76, $1b, $00
-	db $34, $1b, $00
+	db (5 << 5) | 6
+	db FRAMEBLOCK_76, $1b, $00
+	db FRAMEBLOCK_34, $1b, $00
+	db FRAMEBLOCK_76, $1b, $00
+	db FRAMEBLOCK_34, $1b, $00
+	db FRAMEBLOCK_76, $1b, $00
+	db FRAMEBLOCK_34, $1b, $00
 
 Subanimation52:
-	db $47
-	db $77, $25, $00
-	db $77, $9b, $00
-	db $77, $1a, $00
-	db $77, $9c, $00
-	db $77, $2f, $00
-	db $77, $50, $00
-	db $77, $8c, $00
+	db (2 << 5) | 7
+	db FRAMEBLOCK_77, $25, $00
+	db FRAMEBLOCK_77, $9b, $00
+	db FRAMEBLOCK_77, $1a, $00
+	db FRAMEBLOCK_77, $9c, $00
+	db FRAMEBLOCK_77, $2f, $00
+	db FRAMEBLOCK_77, $50, $00
+	db FRAMEBLOCK_77, $8c, $00
 
 Subanimation53:
-	db $0c
-	db $78, $30, $00
-	db $78, $a2, $00
-	db $78, $93, $00
-	db $78, $61, $00
-	db $78, $73, $00
-	db $78, $a7, $00
-	db $78, $33, $00
-	db $78, $a8, $00
-	db $78, $0e, $00
-	db $78, $a9, $00
-	db $78, $34, $00
-	db $01, $9e, $00
+	db (0 << 5) | 12
+	db FRAMEBLOCK_78, $30, $00
+	db FRAMEBLOCK_78, $a2, $00
+	db FRAMEBLOCK_78, $93, $00
+	db FRAMEBLOCK_78, $61, $00
+	db FRAMEBLOCK_78, $73, $00
+	db FRAMEBLOCK_78, $a7, $00
+	db FRAMEBLOCK_78, $33, $00
+	db FRAMEBLOCK_78, $a8, $00
+	db FRAMEBLOCK_78, $0e, $00
+	db FRAMEBLOCK_78, $a9, $00
+	db FRAMEBLOCK_78, $34, $00
+	db FRAMEBLOCK_01, $9e, $00
 
 Subanimation54:
-	db $0b
-	db $79, $30, $00
-	db $79, $a2, $00
-	db $79, $93, $00
-	db $79, $61, $00
-	db $79, $73, $00
-	db $79, $a7, $00
-	db $79, $33, $00
-	db $79, $a8, $00
-	db $79, $0e, $00
-	db $79, $a9, $00
-	db $79, $34, $00
+	db (0 << 5) | 11
+	db FRAMEBLOCK_79, $30, $00
+	db FRAMEBLOCK_79, $a2, $00
+	db FRAMEBLOCK_79, $93, $00
+	db FRAMEBLOCK_79, $61, $00
+	db FRAMEBLOCK_79, $73, $00
+	db FRAMEBLOCK_79, $a7, $00
+	db FRAMEBLOCK_79, $33, $00
+	db FRAMEBLOCK_79, $a8, $00
+	db FRAMEBLOCK_79, $0e, $00
+	db FRAMEBLOCK_79, $a9, $00
+	db FRAMEBLOCK_79, $34, $00

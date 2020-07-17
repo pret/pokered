@@ -72,7 +72,7 @@ FrameBlockPointers:
 	dw FrameBlock46
 	dw FrameBlock47
 	dw SmallBlackCircleFrameBlock
-	dw LargeBlockCircleFrameBlock
+	dw LargeBlackCircleFrameBlock
 	dw FrameBlock4a
 	dw FrameBlock4b
 	dw FrameBlock4c
@@ -782,7 +782,7 @@ SmallBlackCircleFrameBlock:
 	db $10, $08, $33, $40
 	db $10, $10, $33, $60
 
-LargeBlockCircleFrameBlock:
+LargeBlackCircleFrameBlock:
 	db 16 ; #
 	db $00, $00, $22, $00
 	db $00, $08, $23, $00
