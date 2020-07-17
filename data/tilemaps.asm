@@ -11,8 +11,8 @@ TileIDListPointerTable:
 	tile_ids GengarIntroTiles1,  7,  7
 	tile_ids GengarIntroTiles2,  7,  7
 	tile_ids GengarIntroTiles3,  7,  7
-	tile_ids Unknown_79c20,      6,  8
-	tile_ids Unknown_79c50,     12,  3
+	tile_ids GameBoyTiles,       6,  8
+	tile_ids LinkCableTiles,    12,  3
 
 DownscaledMonTiles_5x5:
 	db $31,$38,$46,$54,$5B
@@ -56,17 +56,8 @@ GengarIntroTiles2:
 GengarIntroTiles3:
 	INCBIN "gfx/intro_credits/gengar_3.tilemap"
 
-Unknown_79c20:
-	db $31,$32,$32,$32,$32,$33
-	db $34,$35,$36,$36,$37,$38
-	db $34,$39,$3A,$3A,$3B,$38
-	db $3C,$3D,$3E,$3E,$3F,$40
-	db $41,$42,$43,$43,$44,$45
-	db $46,$47,$43,$48,$49,$4A
-	db $41,$43,$4B,$4C,$4D,$4E
-	db $4F,$50,$50,$50,$51,$52
+GameBoyTiles:
+	INCBIN "gfx/trade/game_boy.tilemap"
 
-Unknown_79c50:
-	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53
-	db $43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54
-	db $43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
+LinkCableTiles:
+	INCBIN "gfx/trade/link_cable.tilemap"
